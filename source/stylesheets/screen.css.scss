@@ -430,11 +430,11 @@ html, body {
     }
 
     tr:nth-child(odd)>td {
-      background-color: lighten($main-bg,4.2%);
+      background-color: rgba(0,0,0,0.01);
     }
 
     tr:nth-child(even)>td {
-      background-color: lighten($main-bg,2.4%);
+      background-color: rgba(0,0,0,0.05);
     }
   }
 
@@ -601,7 +601,8 @@ html, body {
   }
 
   %left-col-aside {
-    margin-right: 1%;
+    margin-left: 2%;
+    margin-right: 2%;
   }
 
   .toc-wrapper .lang-selector {
