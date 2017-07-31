@@ -80,23 +80,23 @@ html, body {
     position: relative;
 
     input {
-      background: $nav-bg;
-      border-width: 0 0 1px 0;
-      border-color: $search-box-border-color;
-      padding: 6px 0 6px 20px;
+      background: $main-bg;
+      border-width: 0;
+      border-color: $main-bg;
+      padding: 8px 0 8px 35px;
       box-sizing: border-box;
-      margin: $nav-v-padding $nav-padding;
-      width: $nav-width - 30;
+      margin: 0;
+      width: 100%;
       outline: none;
-      color: $nav-text;
+      color: $main-text;
       border-radius: 0; /* ios has a default border radius */
     }
 
     &:before {
       position: absolute;
-      top: 17px;
+      top: 9px;
       left: $nav-padding;
-      color: $nav-text;
+      color: $main-text;
       @extend %icon-search;
     }
   }
@@ -117,7 +117,6 @@ html, body {
     background: $nav-subitem-bg;
     &.visible {
       height: 30%;
-      margin-bottom: 1em;
     }
 
     li {
@@ -199,7 +198,7 @@ html, body {
 }
 
 .toc-link, .toc-footer li {
-  padding: 0 $nav-padding 0 $nav-padding;
+  padding: 1px $nav-padding;
   display: block;
   overflow-x: hidden;
   white-space: nowrap;
@@ -346,6 +345,15 @@ html, body {
     clear:both;
   }
 
+  a {
+	color: $nav-active-bg;
+	font-weight: bold;
+
+	&:hover {
+	  color: $nav-bg;
+	}
+  }
+
   h1 {
     @extend %header-font;
     font-size: 25px;
@@ -467,6 +475,11 @@ html, body {
     margin-bottom: 1.5em;
     background: $aside-notice-bg;
     line-height: 1.6;
+	margin-right: 51%;
+	margin-left: 1%;
+	border-radius: 5px;
+
+    @extend %left-col-aside;
 
     &.warning {
       background-color: $aside-warning-bg;
@@ -585,6 +598,10 @@ html, body {
 
   %left-col {
     margin-right: 0;
+  }
+
+  %left-col-aside {
+    margin-right: 1%;
   }
 
   .toc-wrapper .lang-selector {
