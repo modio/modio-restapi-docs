@@ -1807,11 +1807,7 @@ Status|Meaning|Description
       },
       "tags": [
         {}
-      ],
-      "reviews": {
-        "reviews": 583,
-        "avgrating": 8.1
-      }
+      ]
     }
   ]
 }
@@ -2135,11 +2131,7 @@ Status|Meaning|Description
   },
   "tags": [
     {}
-  ],
-  "reviews": {
-    "reviews": 583,
-    "avgrating": 8.1
-  }
+  ]
 }
 ```
 <aside class="warning">
