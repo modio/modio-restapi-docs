@@ -1,8 +1,16 @@
 # Getting Started
 
+## mod.works API v1
+
+Welcome to the official `v1` API documentation for [mod.works](--parse_siteurl). Please ensure you read all all of the Getting Started content to ensure you can accurately and effeciently consume our REST API. 
+
+__Current version:__ `--parse_version`
+
+__Base path:__ --parse_basepath
+
 ## Overview
 
-Welcome to the official `v1` API documentation for mod.works. Please ensure you read all all of the Getting Started content to ensure you can accurately and effeciently consume our REST API. Here is a brief list of the main things to know about our API, as explained in more detail in the following sections.
+Here is a brief list of the main things to know about our API, as explained in more detail in the following sections.
 
 - All requests to the API __must__ be made over HTTPS.
 - All API responses are in `application/json` format.
@@ -12,6 +20,58 @@ Welcome to the official `v1` API documentation for mod.works. Please ensure you 
 - Non-binary `POST`, `PUT` and `DELETE` requests must use `Content-Type: application/x-www-form-urlencoded` header.
 - Non-binary data can optionally be supplied in `application/json` using the `input_json` parameter. 
 - Rate limiting is implemented with varying limits depending on the resource type.
+
+## Authentication
+
+Authentication to the mod.works API can be done via two ways:
+
+- Api keys 
+- Access Tokens (OAuth2)
+
+Which method of authentication can depend on which way you intend on consuming the mod.works API.
+
+Authentication Type | In | Methods | Abilities
+---------- | ---------- | ---------- | ---------- 
+Api Key | Query or Header | `GET` | Api keys are ideal if you only intend on making `GET` requests to read data, you cannot create new resources, modify or remove existing resources with an api key. 
+Access Token | Header | `GET`, `POST`, `PUT`, `DELETE` | Access Tokens can do everything on the API. You can create, edit, update and delete resources. Additional scopes are also available to limit the specify the privileges for a particular token.
+
+### Api Key Authentication
+
+#### Generating your Api key
+
+For game creators, you can simply create api keys for the respective game via the 'API' console on the mod.works portal via the following link:
+
+_https://your-game-here.mod.works/edit/api_
+
+#### Authenticating with your Api key
+
+```shell
+curl https://api.mod.works/v1/games?api_key=xxxxxxxxxxxxxxxx
+``` 
+
+To authenticate to the API using your key using your unique 32-character key simply append the `api_key=xxxxxxxxxxxxxxxx` parameter to the end of your request. Remember that using an api key essentially means being in read-only mode, and that if you want to create, update or delete resources then an access token is required.
+
+### OAuth 2 Authentication
+
+### Scopes
+
+TODO
+
+### Creating a client
+
+TODO
+
+### Generating an access token
+
+TODO
+
+### Revoking an access token
+
+TODO
+
+### Authenticating with your access token
+
+TODO
 
 ## Making Requests
 
@@ -37,7 +97,7 @@ If the endpoint you are making a request to expects a file it will expect the co
 
 ### JSON Request Data
 
-For `POST` & `PUT` requests that do __not submit files__ you have the option to either supply your data as usual HTTP `POST` parameters or as a single json object by supplying the parameter `input_json` which contains a url-encoded JSON object with all required data. Regardless of whether you use JSON or not the `Content-Type` of your request still needs to be `application/x-www-form-urlencoded` with the data provided in the body of the request.
+For `POST` & `PUT` requests that do __not submit files__ you have the option to either supply your data as usual HTTP `POST` parameters or as a single json object by supplying the parameter `input_json` which contains a __UTF-8 encoded__ JSON object with all required data. Regardless of whether you use JSON or not the `Content-Type` of your request still needs to be `application/x-www-form-urlencoded` with the data provided in the body of the request.
 
 #### Example submitting JSON data (Key/token ommitted for brevity)
 
