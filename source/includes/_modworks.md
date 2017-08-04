@@ -2,7 +2,7 @@
 
 ## mod.works API v1
 
-Welcome to the official `v1` API documentation for [mod.works](--parse_siteurl). Please ensure you read all all of the Getting Started content to ensure you can accurately and effeciently consume our REST API. 
+Welcome to the official `v1` API documentation for [mod.works](--parse_siteurl). Please ensure you read all of the Getting Started content as it covers most steps to ensure you can accurately and effeciently consume our REST API. 
 
 __Current version:__ `--parse_version`
 
@@ -45,8 +45,8 @@ _https://your-game-here.mod.works/edit/api_
 
 #### Authenticating with your Api key
 
-```shell
-curl https://api.mod.works/v1/games?api_key=xxxxxxxxxxxxxxxx
+```
+curl -X get https://api.mod.works/v1/games?api_key=xxxxxxxxxxxxxxxx
 ``` 
 
 To authenticate to the API using your key using your unique 32-character key simply append the `api_key=xxxxxxxxxxxxxxxx` parameter to the end of your request. Remember that using an api key essentially means being in read-only mode, and that if you want to create, update or delete resources then an access token is required.
@@ -55,7 +55,14 @@ To authenticate to the API using your key using your unique 32-character key sim
 
 ### Scopes
 
-TODO
+mod.works allows you to specify what type of permissions you want each access token to have, this is done by the use of scopes. See below for a full list of scopes available, you must include at least one scope when generating a new token.
+
+Scope | Abilities
+---------- | ----------
+`read` | When authenticated with a token that *only* contains the `read` scope you will only be able to read data via `GET` requests. 
+`write` | When authenticated with a token that contains the `write` scope you are able to add, edit and remove resources.
+
+You can combine scopes to generate a combination that suits the permissions you want to be applied to the specified token.
 
 ### Creating a client
 
@@ -75,6 +82,16 @@ TODO
 
 ## Making Requests
 
+```shell
+// Example POST request with no binary files
+
+curl -X post https://api.mod.works/v1/games/1/mods/1/tags \
+  -H 'Authorization: Bearer your-token-here' \
+  -H 'Content-Type: application/x-www-form-urlencoded' \
+  -d 'tags[]=Unity' \
+  -d 'tags[]=FPS'
+```
+
 Requests to the mod.works API __must__ be over HTTPS (Port 443), any requests made over HTTP will return a `400 Bad Request` response.
 
 ### Request Content-Type
@@ -82,6 +99,18 @@ Requests to the mod.works API __must__ be over HTTPS (Port 443), any requests ma
 For supplying data in requests, mod.works follows this rule across the API:
 
 - If you are making a request that includes a file, your request __must__ be `multipart/form-data`, otherwise your request should be `application/x-www-form-urlencoded`. 
+
+```shell
+// Example POST request with binary file
+
+curl -X post https://api.mod.works/v1/games/1/mods \
+  -H 'Authorization: Bearer your-token-here' \
+  -H 'Content-Type: multipart/form-data' \ 
+  -F 'logo=@path/to/image.jpg' \
+  -F 'name=Rogue Knight Clear Skies' \
+  -F 'homepage=http://www.clearsies-rk.com/' \
+  -F 'summary=It rains in Rogue Knight an awful lot, want sunshine all the time? Yeah you do.'
+```
 
 Body Contains | Method | Content-Type
 ---------- | ------- | -------
@@ -91,17 +120,22 @@ Nothing | `GET` | No `Content-Type` required.
 
 If the endpoint you are making a request to expects a file it will expect the correct `Content-Type` as mentioned. Supplying an incorrect `Content-Type` header will return a `406 Not Acceptable`.
 
-#### Example submitting data (Key/token ommited for brevity)
-
-`curl -XPUT -H 'Content-Type: application/x-www-form-urlencoded' https://api.mod.works/v1/games/1/mods/1 -d 'name=updated name'`
-
 ### JSON Request Data
 
+```shell
+// Example json-encoded POST request 
+
+curl -x post https://api.mod.works/v1/games/1/team \
+  -H 'Authorization: Bearer your-token-here' \
+  -H 'Content-Type: application/x-www-form-urlencoded' \  
+  -d 'input_json={
+		"member":"1",
+		"level":"8",
+		"position":"King in the North"
+	  }'
+```
+
 For `POST` & `PUT` requests that do __not submit files__ you have the option to either supply your data as usual HTTP `POST` parameters or as a single json object by supplying the parameter `input_json` which contains a __UTF-8 encoded__ JSON object with all required data. Regardless of whether you use JSON or not the `Content-Type` of your request still needs to be `application/x-www-form-urlencoded` with the data provided in the body of the request.
-
-#### Example submitting JSON data (Key/token ommitted for brevity)
-
-`curl -XPUT -H 'Content-Type: application/x-www-form-urlencoded' https://api.mod.works/v1/games/1/mods/1 -d 'input_json={"name":"updated name"}`
 
 __NOTE:__ If you supply identical key-value pairs as a request parameter and also as a parameter of your JSON object, the JSON object __will take priority__ as only one can exist.
 
@@ -145,7 +179,7 @@ Response Code | Meaning
 	"filehash": "2d4a0e2d7273db6b0a94b0740a88ad0d",
 	"filename": "rogue-knight-v1.zip",
 	"version": "1.0",
-	"virustotal": null,
+	"virustotal": "No threats detected.",
 	"changelog": "v1.0 - First release of Rogue Knight!",
 	"download": "https://cdn.mworks.com/files/1/1/2/rogue-knightv1.zip"
 }
@@ -236,11 +270,19 @@ Mod.works has powerful filtering available in requests. Every field of every req
 
 ### _fields (Fields)
 
-Specify which fields to return in a request.
+```
+--parse_version/games?_fields=id,datereg,ugcname,name
+```
 
-- `?_fields=id,name` - Get all results, but only return the `id` and `name` columns.
+Specify which columns to return in a request.
+
+- `?_fields=id,datereg,ugcname,name` - Only return the `id`, `datereg`, `ugcname` and `name` columns.
 
 ### _sort (Sort)
+
+```
+--parse_version/games?_sort=id
+```
 
 Sort by a column, and ascending or descending order.
 
@@ -250,11 +292,19 @@ Sort by a column, and ascending or descending order.
 
 ### _limit (Limit)
 
+```
+--parse_version/games?_limit=5
+```
+
 Limit the amount of results for a request.
 
  - `?_limit=5` - Limit the request to 5 individual results. 
 
 ### _offset (Offset)
+
+```
+--parse_version/games?_offset=5
+```
 
 Exclude the first n amount of records.
 
@@ -262,11 +312,19 @@ Exclude the first n amount of records.
 
 ### -lk (Like)
 
+```
+--parse_version/games?name-lk=texture
+```
+
 Where the string supplied matches the preceeding column value. This is the equivalent to SQL's `LIKE`.
 
 - `?name-lk=texture` - Get all results where _texture_ occurs in the `name` column.
 
 ### -not-lk (Not Like)
+
+```
+--parse_version/games?name-not-lk=dungeon
+```
 
 Where the string supplied does not match the preceeding column value. This is the equivalent to SQL's `NOT LIKE`.
 
@@ -274,11 +332,19 @@ Where the string supplied does not match the preceeding column value. This is th
  
 ### -in (In)
 
+```
+--parse_version/games?id-in=3,11,16,29
+```
+
 Where the supplied list of values appears in the preceeding column value. This is the equivalent to SQL's `IN`.
 
 - `?id-in=3,11,16,29` - Get all results where the `id` column value is 3, 11, 16 and 29.
 
 ### -not-in (Not In)
+
+```
+--parse_version/games?modfile-not-in=8,13,22
+```
 
 Where the supplied list of values *does not* in the preceeding column value. This is the equivalent to SQL's `NOT IN`
 
@@ -286,11 +352,19 @@ Where the supplied list of values *does not* in the preceeding column value. Thi
 
 ### -min (Min)
 
+```
+--parse_version/games?game-min=20
+```
+
 Where the preeceding column value is greater than or equal to the value specified.
 
 - `?game-min=20` - Get all results where the `game` column is greater than or equal to 20.
 
 ### -max (Max)
+
+```
+--parse_version/games?game-max=40
+```
 
 Where the preeceding column value is smaller than or equal to the value specified.
 
@@ -298,11 +372,19 @@ Where the preeceding column value is smaller than or equal to the value specifie
 
 ### -st (Smaller Than)
 
+```
+--parse_version/games?modfile-st=200
+```
+
 Where the preceeding column value is smaller than the value specified.
 
 - `?modfile-st=200` - Get all results where the `modfile` column is smaller than 200.
 
 ### -gt (Greater Than)
+
+```
+--parse_version/games?modfile-gt=600
+```
 
 Where the preceeding column value is greater than the value specified.
 
@@ -310,15 +392,31 @@ Where the preceeding column value is greater than the value specified.
 
 ### -not (Not Equal To)
 
+```
+--parse_version/games?price-not=19.99
+```
+
 Where the preceeding column value does not equal the value specified.
 
 - `?price-not=19.99` - Where the `price` column does not equal 19.99.
 
 ## Rate Limiting
 
-mod.works implements rate limiting to prevent users from abusing the service however we do offer the ability of higher rate limits as they required. Exceeding your rate limit will result in requests receiving a `429 Too Many Requests` response until your time is reset time occurs. The following limits are implemented by default:
+mod.works implements rate limiting to prevent users from abusing the service however we do offer the ability of higher rate limits as they required. Exceeding your rate limit will result in requests receiving a `429 Too Many Requests` response until your time is reset time occurs. 
+
+It is *highly recommended* that you architect your app to check for the `X-RateLimit` headers below and the `429` HTTP response code to ensure you are not making too many requests, or continuing to make requests consistently after a `429` code is repeatedly returned. Users who continue to send requests despite a `429` response could potentially have their access tokens revoked. The following limits are implemented by default:
 
 ### Api key Rate Limiting
+
+```
+Example HTTP Header Response
+---------------------
+HTTP/1.1 200 OK
+...
+...
+X-RateLimit-Limit: 60
+X-RateLimit-Remaining: 59
+```
 
 - All Api keys by default are limited to __100,000 requests per day__.
 
@@ -334,8 +432,8 @@ mod.works returns the following headers in each request to inform you of your re
  - `X-RateLimit-Limit` - Number of requests you can make from the supplied api-key/access token per hour.
  - `X-RateLimit-Remaining` - Number of minutes until your rate limit resets (see above for frequently allowed).
 
-If you want feel the above rate limit is not enough for your app, please [contact us](mailto:support@mod.works) to discuss increasing your rate limit. 
+If you want feel the above rate limit is not enough for your app, please [contact us](mailto:support@mod.works?subject=mod.works%20API%20Rate%20Limiting) to discuss your scenario and potentially increasing your rate limit. 
 
 ## Contact
 
-If you spot any errors within the mod.works documentation or need to get in touch regarding the use of our API please reach out to us at [support@mod.works](mailto:support@mod.works).
+If you spot any errors within the mod.works documentation, have feedback on how we can potentially make it easier to follow or simply want get in touch for another reason please feel free to reach out to us at [support@mod.works](mailto:support@mod.works?subject=mod.works%20API). Any important issues will be promptly addressed.
