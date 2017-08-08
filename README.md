@@ -1,5 +1,5 @@
 # mod.works API Documentation
-Documentation for [mod.works](https://mod.works) is powered by [slate](https://github.com/lord/slate) a static API generator. We use [swagger.io](https://swagger.io/) to define our API from comments in our codebase, and generate the slate markdown files from it using [widdershins](https://github.com/Mermade/widdershins).
+Documentation for [mod.works](https://mod.works) is powered by [slate](https://github.com/lord/slate), a static API generator. We use [swagger.io](https://swagger.io/) to define our API from comments in our codebase, and generate the slate markdown files from it using [widdershins](https://github.com/Mermade/widdershins).
 
 ## Output
 We recommend you don't edit source/\_modworks.md as this file is generated automatically via the above process.
