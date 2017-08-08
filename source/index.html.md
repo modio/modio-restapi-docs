@@ -23,7 +23,7 @@ Welcome to the official `v1` API documentation for [mod.works](https://mworks.co
 
 __Current version:__ `v1`
 
-__Base path:__ [https://api.mworks.com/v1](https://api.mworks.com/v1)
+__Base path:__ [https://api.mod.works/v1](https://api.mod.works/v1)
 
 ## Overview
 
@@ -198,7 +198,7 @@ Response Code | Meaning
 	"version": "1.0",
 	"virustotal": "No threats detected.",
 	"changelog": "v1.0 - First release of Rogue Knight!",
-	"download": "https://cdn.mworks.com/files/1/1/2/rogue-knightv1.zip"
+	"download": "https://mod.works/mods/file/2/c489a0354111a4d76640d47f0cdcb294"
 }
 ```
 
@@ -234,7 +234,7 @@ Browse responses a json object which contains a data array and a meta object:
 			"version": "1.0",
 			"virustotal": "",
 			"changelog": "v1.0 --- First Release --- Added main mod.",
-			"download": "https://cdn.mworks.com/files/1/1/2/rogue-knightv1.zip"
+			"download": "https://mod.works/mods/file/2/c489a0354111a4d76640d47f0cdcb294"
 		},
 		{
 			"...":"..."
@@ -248,8 +248,8 @@ Browse responses a json object which contains a data array and a meta object:
       		"current_page": 1,
       		"total_pages": 48,
       		"links": {
-        		"previous": "https://api.mworks.com/v1/games/2/?_limit=30&page=2",
-        		"next": "https://api.mworks.com/v1/games/2/?_limit=30&page=4"
+        		"previous": "https://api.mod.works/v1/games/2/?_limit=30&page=2",
+        		"next": "https://api.mod.works/v1/games/2/?_limit=30&page=4"
       		}
     	}
   	}
@@ -271,8 +271,8 @@ The meta object which contains pagination information is automatically appended 
 			"current_page": 1,
 			"total_pages": 48,
 			"links": {
-				"previous": "https://api.mworks.com/v1/games/2/?_limit=30&page=2",
-				"next": "https://api.mworks.com/v1/games/2/?_limit=30&page=4"
+				"previous": "https://api.mod.works/v1/games/2/?_limit=30&page=2",
+				"next": "https://api.mod.works/v1/games/2/?_limit=30&page=4"
 			}
 		}
 	}
@@ -606,17 +606,17 @@ Status|Meaning|Description
       "api": 3,
       "ugcname": "map",
       "icon": {
-        "full": "https://media.mworks.com/images/games/1/1/2/icon.png",
-        "thumbnail": "https://media.mworks.com/cache/images/mods/1/1/2/crop_320x180/icon.png",
+        "full": "https://media.mod.works/images/games/1/1/2/icon.png",
+        "thumbnail": "https://media.mod.works/cache/images/mods/1/1/2/crop_320x180/icon.png",
         "filename": "icon.png"
       },
       "logo": {
-        "full": "https://media.mworks.com/images/games/1/1/2/gamelogo.jpg",
-        "thumbnail": "https://media.mworks.com/cache/images/mods/1/1/2/thumb_1020x2000/gamelogo.jpg",
+        "full": "https://media.mod.works/images/games/1/1/2/gamelogo.jpg",
+        "thumbnail": "https://media.mod.works/cache/images/mods/1/1/2/thumb_1020x2000/gamelogo.jpg",
         "filename": "gamelogo.jpg"
       },
       "header": {
-        "full": "https://media.mworks.com/images/games/1/1/2/gameheader.png",
+        "full": "https://media.mod.works/images/games/1/1/2/gameheader.png",
         "filename": "gameheader.png"
       },
       "homepage": "https://www.rogue-knight-game.com/",
@@ -770,17 +770,17 @@ Status|Meaning|Description
   "api": 3,
   "ugcname": "map",
   "icon": {
-    "full": "https://media.mworks.com/images/games/1/1/2/icon.png",
-    "thumbnail": "https://media.mworks.com/cache/images/mods/1/1/2/crop_320x180/icon.png",
+    "full": "https://media.mod.works/images/games/1/1/2/icon.png",
+    "thumbnail": "https://media.mod.works/cache/images/mods/1/1/2/crop_320x180/icon.png",
     "filename": "icon.png"
   },
   "logo": {
-    "full": "https://media.mworks.com/images/games/1/1/2/gamelogo.jpg",
-    "thumbnail": "https://media.mworks.com/cache/images/mods/1/1/2/thumb_1020x2000/gamelogo.jpg",
+    "full": "https://media.mod.works/images/games/1/1/2/gamelogo.jpg",
+    "thumbnail": "https://media.mod.works/cache/images/mods/1/1/2/thumb_1020x2000/gamelogo.jpg",
     "filename": "gamelogo.jpg"
   },
   "header": {
-    "full": "https://media.mworks.com/images/games/1/1/2/gameheader.png",
+    "full": "https://media.mod.works/images/games/1/1/2/gameheader.png",
     "filename": "gameheader.png"
   },
   "homepage": "https://www.rogue-knight-game.com/",
@@ -1924,8 +1924,8 @@ Status|Meaning|Description
       "datereg": 1492564103,
       "dateup": 1499841487,
       "logo": {
-        "full": "https://media.mworks.com/images/mods/1/1/2/IMG_20170409_222419.jpg",
-        "thumbnail": "https://media.mworks.com/cache/images/mods/1/1/2/thumb_1020x2000/IMG_20170409_222419.jpg",
+        "full": "https://media.mod.works/images/mods/1/1/2/IMG_20170409_222419.jpg",
+        "thumbnail": "https://media.mod.works/cache/images/mods/1/1/2/thumb_1020x2000/IMG_20170409_222419.jpg",
         "filename": "IMG_20170409_222419.jpg"
       },
       "homepage": "https://www.rogue-hdpack.com/",
@@ -1948,7 +1948,7 @@ Status|Meaning|Description
         "version": "1.3",
         "virustotal": "No threats found.",
         "changelog": "VERSION 1.3 -- Changes -- Fixed critical castle floor bug.",
-        "download": "https://cdn.mworks.com/files/1/1/2/rogue-knight-v1.zip"
+        "download": "https://cdn.mod.works/files/1/1/2/rogue-knight-v1.zip"
       },
       "media": {
         "youtube": [
@@ -2248,8 +2248,8 @@ Status|Meaning|Description
   "datereg": 1492564103,
   "dateup": 1499841487,
   "logo": {
-    "full": "https://media.mworks.com/images/mods/1/1/2/IMG_20170409_222419.jpg",
-    "thumbnail": "https://media.mworks.com/cache/images/mods/1/1/2/thumb_1020x2000/IMG_20170409_222419.jpg",
+    "full": "https://media.mod.works/images/mods/1/1/2/IMG_20170409_222419.jpg",
+    "thumbnail": "https://media.mod.works/cache/images/mods/1/1/2/thumb_1020x2000/IMG_20170409_222419.jpg",
     "filename": "IMG_20170409_222419.jpg"
   },
   "homepage": "https://www.rogue-hdpack.com/",
@@ -2272,7 +2272,7 @@ Status|Meaning|Description
     "version": "1.3",
     "virustotal": "No threats found.",
     "changelog": "VERSION 1.3 -- Changes -- Fixed critical castle floor bug.",
-    "download": "https://cdn.mworks.com/files/1/1/2/rogue-knight-v1.zip"
+    "download": "https://cdn.mod.works/files/1/1/2/rogue-knight-v1.zip"
   },
   "media": {
     "youtube": [
@@ -3152,7 +3152,7 @@ Status|Meaning|Description
       "version": "1.3",
       "virustotal": "No threats found.",
       "changelog": "VERSION 1.3 -- Changes -- Fixed critical castle floor bug.",
-      "download": "https://cdn.mworks.com/files/1/1/2/rogue-knight-v1.zip"
+      "download": "https://mod.works/mods/file/2/c489a0354111a4d76640d47f0cdcb294"
     }
   ]
 }
@@ -3438,7 +3438,7 @@ Status|Meaning|Description
   "version": "1.3",
   "virustotal": "No threats found.",
   "changelog": "VERSION 1.3 -- Changes -- Fixed critical castle floor bug.",
-  "download": "https://cdn.mworks.com/files/1/1/2/rogue-knight-v1.zip"
+  "download": "https://mod.works/mods/file/2/c489a0354111a4d76640d47f0cdcb294"
 }
 ```
 <aside class="warning">
@@ -5090,7 +5090,7 @@ Status|Meaning|Description
       "username": "XanT",
       "permission": 1,
       "avatar": {
-        "full": "https://media.mworks.com/images/members/1/1/1/masterchief.jpg",
+        "full": "https://media.mod.works/images/members/1/1/1/masterchief.jpg",
         "filename": "masterchief.jpg"
       },
       "timezone": "Australia/Brisbane",
@@ -5224,7 +5224,7 @@ Status|Meaning|Description
   "username": "XanT",
   "permission": 1,
   "avatar": {
-    "full": "https://media.mworks.com/images/members/1/1/1/masterchief.jpg",
+    "full": "https://media.mod.works/images/members/1/1/1/masterchief.jpg",
     "filename": "masterchief.jpg"
   },
   "timezone": "Australia/Brisbane",

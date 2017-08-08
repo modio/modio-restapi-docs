@@ -181,7 +181,7 @@ Response Code | Meaning
 	"version": "1.0",
 	"virustotal": "No threats detected.",
 	"changelog": "v1.0 - First release of Rogue Knight!",
-	"download": "https://cdn.mworks.com/files/1/1/2/rogue-knightv1.zip"
+	"download": "https://mod.works/mods/file/2/c489a0354111a4d76640d47f0cdcb294"
 }
 ```
 
@@ -217,7 +217,7 @@ Browse responses a json object which contains a data array and a meta object:
 			"version": "1.0",
 			"virustotal": "",
 			"changelog": "v1.0 --- First Release --- Added main mod.",
-			"download": "https://cdn.mworks.com/files/1/1/2/rogue-knightv1.zip"
+			"download": "https://mod.works/mods/file/2/c489a0354111a4d76640d47f0cdcb294"
 		},
 		{
 			"...":"..."
@@ -231,8 +231,8 @@ Browse responses a json object which contains a data array and a meta object:
       		"current_page": 1,
       		"total_pages": 48,
       		"links": {
-        		"previous": "https://api.mworks.com/v1/games/2/?_limit=30&page=2",
-        		"next": "https://api.mworks.com/v1/games/2/?_limit=30&page=4"
+        		"previous": "https://api.mod.works/v1/games/2/?_limit=30&page=2",
+        		"next": "https://api.mod.works/v1/games/2/?_limit=30&page=4"
       		}
     	}
   	}
@@ -254,8 +254,8 @@ The meta object which contains pagination information is automatically appended 
 			"current_page": 1,
 			"total_pages": 48,
 			"links": {
-				"previous": "https://api.mworks.com/v1/games/2/?_limit=30&page=2",
-				"next": "https://api.mworks.com/v1/games/2/?_limit=30&page=4"
+				"previous": "https://api.mod.works/v1/games/2/?_limit=30&page=2",
+				"next": "https://api.mod.works/v1/games/2/?_limit=30&page=4"
 			}
 		}
 	}
