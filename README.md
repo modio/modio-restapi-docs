@@ -5,7 +5,7 @@ Documentation for [mod.works](https://mod.works) is powered by [slate](https://g
 We recommend you don't edit source/\_modworks.md as this file is generated automatically via the above process.
 
 ## Setup
-To get our slate documentation up and running on your local machine, we recommend you follow the instructions on the [official slate repository](https://github.com/lord/slate) page.
+To get our [slate documentation](https://docs.mod.works) up and running on your local machine, we recommend you follow the instructions on the [official slate repository](https://github.com/lord/slate) page.
 
 ## Contributions Welcome
 Want to correct errors in our documentation or it's layout? Submit a pull request with your recommended changes to be reviewed.
