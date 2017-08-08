@@ -624,8 +624,15 @@ Status|Meaning|Description
       "nameid": "rogue-knight",
       "summary": "Rogue Knight is a brand new 2D pixel platformer.",
       "instructions": "Instructions here on how to develop for your game.",
-      "tags": [
-        {}
+      "cats": [
+        {
+          "name": "Engines",
+          "type": "checkboxes",
+          "tags": [
+            "Unity"
+          ],
+          "adminonly": 0
+        }
       ]
     }
   ]
@@ -781,8 +788,15 @@ Status|Meaning|Description
   "nameid": "rogue-knight",
   "summary": "Rogue Knight is a brand new 2D pixel platformer.",
   "instructions": "Instructions here on how to develop for your game.",
-  "tags": [
-    {}
+  "cats": [
+    {
+      "name": "Engines",
+      "type": "checkboxes",
+      "tags": [
+        "Unity"
+      ],
+      "adminonly": 0
+    }
   ]
 }
 ```
