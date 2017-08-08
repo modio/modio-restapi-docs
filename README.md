@@ -2,7 +2,7 @@
 Documentation for [mod.works](https://mod.works) is powered by [slate](https://github.com/lord/slate), a static API generator. We use [swagger.io](https://swagger.io/) to define our API from comments in our codebase, and generate the slate markdown files from it using [widdershins](https://github.com/Mermade/widdershins).
 
 ## Output
-We recommend you don't edit source/\_modworks.md as this file is generated automatically via the above process.
+We recommend you don't edit source/index.html.md as this file is generated automatically via the above process. You can edit the presentation and source/includes/\_modworks.md as these are manually created.
 
 ## Setup
 To get our [slate documentation](https://docs.mod.works) up and running on your local machine, we recommend you follow the instructions on the [official slate repository](https://github.com/lord/slate) page.
