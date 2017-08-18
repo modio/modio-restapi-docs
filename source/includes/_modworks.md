@@ -125,7 +125,7 @@ If the endpoint you are making a request to expects a file it will expect the co
 ```shell
 // Example json-encoded POST request 
 
-curl -x post https://api.mod.works/v1/games/1/team \
+curl -X post https://api.mod.works/v1/games/1/team \
   -H 'Authorization: Bearer your-token-here' \
   -H 'Content-Type: application/x-www-form-urlencoded' \  
   -d 'input_json={
@@ -142,6 +142,37 @@ __NOTE:__ If you supply identical key-value pairs as a request parameter and als
 ### Response Content-Type
 
 Responses will __always__ be returned as `application/json`.
+
+## Errors
+
+```json
+// Error object
+
+"error": {
+	"code": 403,
+	"message": "You do not have the required permissions to access this resource."
+}
+```
+
+If an error occurs, mod.works returns an error object with the HTTP `code` and `message` to describe what error occured and generally what needs to be done to avoid the error re-occuring. It's important to note that if you encounter errors that are not server errors, that is `500+` codes - you should __not__ continue to send requests to the endpoint and instead review the error message.
+
+When it comes to validating request inputs for creating a resource or supplying a query parameter for filtering, an optional field object called `errors` can be supplied inside the `error` object which contains a list of your invalid inputs. A reminder that the nested `errors` object is only supplied with `422 Unprocessable Entity`. Be sure to review the [Response Codes](https://docs.mod.works/#response-codes) to be aware of the HTTP codes the API returns.
+
+```json
+// Error object with input errors
+
+"error": {
+	"code": 422,
+	"message": "Validation Failed. Please see below to fix invalid input.",
+	"errors": {
+		"member":"The member must be an integer.",
+		"name":"The name may not be greater than 50 characters."
+	}
+}
+
+```
+
+Remember that [Rate Limiting](https://docs.mod.works/#rate-limiting) applies whether an error is returned or not so to avoid needlessly exceeding your daily quota be sure to always investigate error messages.
 
 ## Response Codes
 
@@ -220,7 +251,7 @@ Browse responses a json object which contains a data array and a meta object:
 			"download": "https://mod.works/mods/file/2/c489a0354111a4d76640d47f0cdcb294"
 		},
 		{
-			"...":"..."
+			...
 		},
 	],
 	"meta": {
@@ -456,4 +487,4 @@ If you want feel the above rate limit is not enough for your app, please [contac
 
 ## Contact
 
-If you spot any errors within the mod.works documentation, have feedback on how we can potentially make it easier to follow or simply want get in touch for another reason please feel free to reach out to us at [support@mod.works](mailto:support@mod.works?subject=mod.works%20API). Any important issues will be promptly addressed.
+If you spot any errors within the mod.works documentation, have feedback on how we can potentially make it easier to follow or simply want get in touch for another reason please feel free to reach out to us at [support@mod.works](mailto:support@mod.works?subject=mod.works%20API). Any critical issues will be promptly addressed.
