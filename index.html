@@ -267,6 +267,9 @@
                     <a href="#making-requests" class="toc-h2 toc-link" data-title="Getting Started">Making Requests</a>
                   </li>
                   <li>
+                    <a href="#errors" class="toc-h2 toc-link" data-title="Getting Started">Errors</a>
+                  </li>
+                  <li>
                     <a href="#response-codes" class="toc-h2 toc-link" data-title="Getting Started">Response Codes</a>
                   </li>
                   <li>
@@ -587,7 +590,7 @@ curl -X post https://api.mod.works/v1/games/1/mods <span class="se">\</span>
 <p>If the endpoint you are making a request to expects a file it will expect the correct <code>Content-Type</code> as mentioned. Supplying an incorrect <code>Content-Type</code> header will return a <code>406 Not Acceptable</code>.</p>
 <h3 id='json-request-data'>JSON Request Data</h3><pre class="highlight shell tab-shell"><code>// Example json-encoded POST request 
 
-curl -x post https://api.mod.works/v1/games/1/team <span class="se">\</span>
+curl -X post https://api.mod.works/v1/games/1/team <span class="se">\</span>
   -H <span class="s1">'Authorization: Bearer your-token-here'</span> <span class="se">\</span>
   -H <span class="s1">'Content-Type: application/x-www-form-urlencoded'</span> <span class="se">\ </span> 
   -d <span class="s1">'input_json={
@@ -601,6 +604,29 @@ curl -x post https://api.mod.works/v1/games/1/team <span class="se">\</span>
 <p><strong>NOTE:</strong> If you supply identical key-value pairs as a request parameter and also as a parameter of your JSON object, the JSON object <strong>will take priority</strong> as only one can exist.</p>
 <h3 id='response-content-type'>Response Content-Type</h3>
 <p>Responses will <strong>always</strong> be returned as <code>application/json</code>.</p>
+<h2 id='errors'>Errors</h2><pre class="highlight json tab-json"><code><span class="err">//</span><span class="w"> </span><span class="err">Error</span><span class="w"> </span><span class="err">object</span><span class="w">
+
+</span><span class="s2">"error"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+    </span><span class="s2">"code"</span><span class="p">:</span><span class="w"> </span><span class="mi">403</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"message"</span><span class="p">:</span><span class="w"> </span><span class="s2">"You do not have the required permissions to access this resource."</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre>
+<p>If an error occurs, mod.works returns an error object with the HTTP <code>code</code> and <code>message</code> to describe what error occured and generally what needs to be done to avoid the error re-occuring. It&#39;s important to note that if you encounter errors that are not server errors, that is <code>500+</code> codes - you should <strong>not</strong> continue to send requests to the endpoint and instead review the error message.</p>
+
+<p>When it comes to validating request inputs for creating a resource or supplying a query parameter for filtering, an optional field object called <code>errors</code> can be supplied inside the <code>error</code> object which contains a list of your invalid inputs. A reminder that the nested <code>errors</code> object is only supplied with <code>422 Unprocessable Entity</code>. Be sure to review the <a href="https://docs.mod.works/#response-codes">Response Codes</a> to be aware of the HTTP codes the API returns.</p>
+<pre class="highlight json tab-json"><code><span class="err">//</span><span class="w"> </span><span class="err">Error</span><span class="w"> </span><span class="err">object</span><span class="w"> </span><span class="err">with</span><span class="w"> </span><span class="err">input</span><span class="w"> </span><span class="err">errors</span><span class="w">
+
+</span><span class="s2">"error"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+    </span><span class="s2">"code"</span><span class="p">:</span><span class="w"> </span><span class="mi">422</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"message"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Validation Failed. Please see below to fix invalid input."</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"errors"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+        </span><span class="s2">"member"</span><span class="p">:</span><span class="s2">"The member must be an integer."</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"name"</span><span class="p">:</span><span class="s2">"The name may not be greater than 50 characters."</span><span class="w">
+    </span><span class="p">}</span><span class="w">
+</span><span class="p">}</span><span class="w">
+
+</span></code></pre>
+<p>Remember that <a href="https://docs.mod.works/#rate-limiting">Rate Limiting</a> applies whether an error is returned or not so to avoid needlessly exceeding your daily quota be sure to always investigate error messages.</p>
 <h2 id='response-codes'>Response Codes</h2>
 <p>Here are a list of the most common HTTP response codes you will see while using the API.</p>
 
@@ -713,7 +739,7 @@ curl -x post https://api.mod.works/v1/games/1/team <span class="se">\</span>
             </span><span class="s2">"download"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://mod.works/mods/file/2/c489a0354111a4d76640d47f0cdcb294"</span><span class="w">
         </span><span class="p">},</span><span class="w">
         </span><span class="p">{</span><span class="w">
-            </span><span class="s2">"..."</span><span class="p">:</span><span class="s2">"..."</span><span class="w">
+            </span><span class="err">...</span><span class="w">
         </span><span class="p">},</span><span class="w">
     </span><span class="p">],</span><span class="w">
     </span><span class="s2">"meta"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
@@ -886,7 +912,7 @@ X-RateLimit-Remaining: 59
 
 <p>If you want feel the above rate limit is not enough for your app, please <a href="mailto:support@mod.works?subject=mod.works%20API%20Rate%20Limiting">contact us</a> to discuss your scenario and potentially increasing your rate limit. </p>
 <h2 id='contact'>Contact</h2>
-<p>If you spot any errors within the mod.works documentation, have feedback on how we can potentially make it easier to follow or simply want get in touch for another reason please feel free to reach out to us at <a href="mailto:support@mod.works?subject=mod.works%20API">support@mod.works</a>. Any important issues will be promptly addressed.</p>
+<p>If you spot any errors within the mod.works documentation, have feedback on how we can potentially make it easier to follow or simply want get in touch for another reason please feel free to reach out to us at <a href="mailto:support@mod.works?subject=mod.works%20API">support@mod.works</a>. Any critical issues will be promptly addressed.</p>
 <h1 id='games'>Games</h1><h2 id='browse-games'>Browse Games</h2>
 <blockquote>
 <p>Code samples</p>
