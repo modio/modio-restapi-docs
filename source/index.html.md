@@ -327,6 +327,16 @@ Exclude the first n amount of records.
 
 - `?_offset=5` - Exclude the first 5 results of the request.
 
+### _q (Full text search)
+
+```
+v1/games/1?_q=The Lord Of The Rings
+```
+
+Full text search is a lenient search filter that _is only available_ if the endpoint you are querying contains a `name` column.
+
+- `?_q=The Lord of the Rings` - This will return every result where the `name` column contains any of the following words: 'The', 'Lord', 'of', 'the', 'Rings'.
+
 ### -lk (Like)
 
 ```
@@ -335,7 +345,7 @@ v1/games?name-lk=texture
 
 Where the string supplied matches the preceeding column value. This is the equivalent to SQL's `LIKE`.
 
-- `?name-lk=texture` - Get all results where _texture_ occurs in the `name` column.
+- `?name-lk=texture` - Get all results where **only** _texture_ occurs in the `name` column.
 
 ### -not-lk (Not Like)
 
@@ -346,6 +356,16 @@ v1/games?name-not-lk=dungeon
 Where the string supplied does not match the preceeding column value. This is the equivalent to SQL's `NOT LIKE`.
 
 - `?name-not-lk=dungeon` - Get all results where _texture_ does not occur in the `name` column.
+
+### -lk & -not-lk Wildcards
+
+```
+v1/games?name-lk=The Witcher*
+```
+
+The above -lk examples will only return results on an exact match, which may make it hard to get results depending on the complexity of your query. In that event it's recommended you utilize the -lk wildcard value `*`. This is the equivalent to SQL's `%`.
+
+- `?name-lk=The Witcher*` - Get all results where _The Witcher_ occurs at the start of the name. This means the query would return results for 'The Witcher', 'The Witcher 2' and 'The Witcher 3'. 
  
 ### -in (In)
 
@@ -634,6 +654,9 @@ Status|Meaning|Description
           "adminonly": 0
         }
       ]
+    },
+    {
+        ...
     }
   ]
 }
@@ -1229,6 +1252,9 @@ Status|Meaning|Description
           "after": "https://rogue-knight.mod.works/rogue-hd-pack"
         }
       }
+    },
+    {
+        ...
     }
   ]
 }
@@ -1359,8 +1385,11 @@ Status|Meaning|Description
       "member": 3103,
       "username": "Megalodon",
       "level": 8,
-      "datejoined": 1492058857,
+      "date": 1492058857,
       "position": "Supreme Overlord"
+    },
+    {
+        ...
     }
   ]
 }
@@ -1489,7 +1518,7 @@ Add a member to a game team.
      Parameter|Type|Required|Description
      ---|---|---|---|
      member|integer|true|The unique id of the member you are adding to the team.
-     level|integer|true|The level of permissions you want to give to the user.<br><br>*Field Options*<br>__0__ = Guest<br>__1__ = Member<br>__2__ = Contributor<br>__4__ = Manager<br>__8__ = Leader.
+     level|integer|true|The level of permissions you want to give to the user.<br><br>*Fields Options:*<br>__1__ = Moderator (can moderate comments and content attached)<br>__4__ = Creator (can upload builds and edit all settings except supply and existing team members)<br>__8__ = Administrator (full access, including editing the supply and team)
      position|string|true|The title you wish to apply to the member within your team.
 
 ### Responses
@@ -1629,7 +1658,7 @@ Update the details of a member who is currently a part of the specified game tea
      
      Parameter|Type|Required|Description
      ---|---|---|---|
-     level|integer||The level of permissions you want to give to the user.<br><br>*Fields Options:*<br>__0__ = Guest<br>__1__ = Member<br>__2__ = Contributor<br>__4__ = Manager<br>__8__ = Leader
+     level|integer||The level of permissions you want to give to the user.<br><br>*Fields Options:*<br>__0__ = Guest<br>__1__ = Member (can moderate comments and content attached) <br>__2__ = Contributor<br>__4__ = Manager (can upload builds and edit all settings except supply)<br>__8__ = Leader (full access, including editing the supply and team)
      position|string||The title you wish to apply to the member within your team.
 
 ### Responses
@@ -1783,6 +1812,151 @@ To perform this operation, you must be authenticated by means of one of the foll
 oauth2 ( Scopes: write )
 </aside>
 
+# Reports
+
+## Submit Report
+
+> Code samples
+
+```shell
+# You can also use wget
+curl -X post https://api.mod.works/v1/report \
+  -H 'Authorization: Bearer YourAccessToken' \
+  -H 'Content-Type: application/x-www-form-urlencoded' \
+  -H 'Accept: application/json'
+
+```
+
+```http
+POST https://api.mod.works/v1/report HTTP/1.1
+Host: api.mod.works
+
+Accept: application/json
+Authorization: Bearer YourAccessToken
+Content-Type: application/x-www-form-urlencoded
+
+```
+
+```javascript
+var headers = {
+  'Authorization':'Bearer YourAccessToken',
+  'Content-Type':'application/x-www-form-urlencoded',
+  'Accept':'application/json'
+
+};
+
+$.ajax({
+  url: 'https://api.mod.works/v1/report',
+  method: 'post',
+
+  headers: headers,
+  success: function(data) {
+    console.log(JSON.stringify(data));
+  }
+})
+```
+
+```javascript--nodejs
+const request = require('node-fetch');
+
+const headers = {
+  'Authorization':'Bearer YourAccessToken',
+  'Content-Type':'application/x-www-form-urlencoded',
+  'Accept':'application/json'
+
+};
+
+fetch('https://api.mod.works/v1/report',
+{
+  method: 'POST',
+
+  headers: headers
+})
+.then(function(res) {
+    return res.json();
+}).then(function(body) {
+    console.log(body);
+});
+```
+
+```ruby
+require 'rest-client'
+require 'json'
+
+headers = {
+  'Authorization' => 'Bearer YourAccessToken',
+  'Content-Type' => 'application/x-www-form-urlencoded',
+  'Accept' => 'application/json'
+}
+
+result = RestClient.post 'https://api.mod.works/v1/report', params: {
+  }, headers: headers
+
+p JSON.parse(result)
+```
+
+```python
+import requests
+headers = {
+  'Authorization': 'Bearer YourAccessToken',
+  'Content-Type': 'application/x-www-form-urlencoded',
+  'Accept': 'application/json'
+}
+
+r = requests.post('https://api.mod.works/v1/report', params={
+
+}, headers = headers)
+
+print r.json()
+```
+
+```java
+URL obj = new URL("https://api.mod.works/v1/report");
+HttpURLConnection con = (HttpURLConnection) obj.openConnection();
+con.setRequestMethod("POST");
+int responseCode = con.getResponseCode();
+BufferedReader in = new BufferedReader(
+    new InputStreamReader(con.getInputStream()));
+String inputLine;
+StringBuffer response = new StringBuffer();
+while ((inputLine = in.readLine()) != null) {
+    response.append(inputLine);
+}
+in.close();
+System.out.println(response.toString());
+```
+
+`POST report`
+
+Submit a report for any resource on mod.works.
+     
+     Parameter|Type|Required|Description
+     ---|---|---|---|
+     resource|string|true|The name of the resource type you are submitting a report for __must__ be one of the following strings: games, mods, files, news, guides, tags, users.
+     id|integer|true|Unique Id of the resource item you are reporting.
+     dmca|boolean|true|Is this a DMCA takedown request?
+     name|string|true|Descriptive and informative title for your report.
+     summary|string|true|Detailed description of your report, be as specific as possible on the reason you are submitting the report.
+
+### Responses
+
+Status|Meaning|Description
+---|---|---|
+201|[Created](https://tools.ietf.org/html/rfc7231#section-6.3.2)|Report Created
+
+> Example responses
+
+```json
+{
+  "code": "201",
+  "message": "Your report submission has been successful and will be reviewed as soon as possible."
+}
+```
+<aside class="warning">
+To perform this operation, you must be authenticated by means of one of the following methods:
+oauth2 ( Scopes: write )
+</aside>
+
 # Mods
 
 ## Browse Mods
@@ -1921,6 +2095,7 @@ Status|Meaning|Description
       "id": 2,
       "game": 2,
       "member": 2,
+      "price": 9.99,
       "datereg": 1492564103,
       "dateup": 1499841487,
       "logo": {
@@ -1958,12 +2133,25 @@ Status|Meaning|Description
           "https://sketchfab.com/models/ef40b2d300334d009984c8865b2db1c8"
         ],
         "images": [
-          {}
+          {
+            "full": "https://media.mod.works/images/mods/1/1/2/IMG_20170409_222419.jpg",
+            "thumbnail": "https://media.mod.works/cache/images/mods/1/1/2/thumb_1020x2000/IMG_20170409_222419.jpg",
+            "filename": "IMG_20170409_222419.jpg"
+          }
         ]
       },
-      "tags": [
-        {}
-      ]
+      "tags": [],
+      "ratings": {
+        "total": 1230,
+        "positive": 1047,
+        "negative": 183,
+        "weighted": 87.38,
+        "percentage": 91,
+        "text": "Very Positive"
+      }
+    },
+    {
+        ...
     }
   ]
 }
@@ -2119,7 +2307,7 @@ Status|Header|Type|Format|Description
 ```json
 {
   "code": "201",
-  "message": "Your have successfully created your mod profile - see documentation about adding your first file."
+  "message": "You have successfully created your mod profile - see documentation about adding your first file."
 }
 ```
 <aside class="warning">
@@ -2245,6 +2433,7 @@ Status|Meaning|Description
   "id": 2,
   "game": 2,
   "member": 2,
+  "price": 9.99,
   "datereg": 1492564103,
   "dateup": 1499841487,
   "logo": {
@@ -2282,12 +2471,22 @@ Status|Meaning|Description
       "https://sketchfab.com/models/ef40b2d300334d009984c8865b2db1c8"
     ],
     "images": [
-      {}
+      {
+        "full": "https://media.mod.works/images/mods/1/1/2/IMG_20170409_222419.jpg",
+        "thumbnail": "https://media.mod.works/cache/images/mods/1/1/2/thumb_1020x2000/IMG_20170409_222419.jpg",
+        "filename": "IMG_20170409_222419.jpg"
+      }
     ]
   },
-  "tags": [
-    {}
-  ]
+  "tags": [],
+  "ratings": {
+    "total": 1230,
+    "positive": 1047,
+    "negative": 183,
+    "weighted": 87.38,
+    "percentage": 91,
+    "text": "Very Positive"
+  }
 }
 ```
 <aside class="warning">
@@ -2996,6 +3195,9 @@ Status|Meaning|Description
           "after": "https://rogue-knight.mod.works/rogue-hd-pack"
         }
       }
+    },
+    {
+        ...
     }
   ]
 }
@@ -3153,6 +3355,9 @@ Status|Meaning|Description
       "virustotal": "No threats found.",
       "changelog": "VERSION 1.3 -- Changes -- Fixed critical castle floor bug.",
       "download": "https://mod.works/mods/file/2/c489a0354111a4d76640d47f0cdcb294"
+    },
+    {
+        ...
     }
   ]
 }
@@ -3716,6 +3921,9 @@ Status|Meaning|Description
       "tag": "Unity",
       "member": 38,
       "date": 1499841487
+    },
+    {
+        ...
     }
   ]
 }
@@ -4002,6 +4210,145 @@ To perform this operation, you must be authenticated by means of one of the foll
 oauth2 ( Scopes: write )
 </aside>
 
+## Add Mod Rating
+
+> Code samples
+
+```shell
+# You can also use wget
+curl -X post https://api.mod.works/v1/games/{game-id}/mods/{mod-id}/ratings \
+  -H 'Authorization: Bearer YourAccessToken' \
+  -H 'Content-Type: application/x-www-form-urlencoded' \
+  -H 'Accept: application/json'
+
+```
+
+```http
+POST https://api.mod.works/v1/games/{game-id}/mods/{mod-id}/ratings HTTP/1.1
+Host: api.mod.works
+
+Accept: application/json
+Authorization: Bearer YourAccessToken
+Content-Type: application/x-www-form-urlencoded
+
+```
+
+```javascript
+var headers = {
+  'Authorization':'Bearer YourAccessToken',
+  'Content-Type':'application/x-www-form-urlencoded',
+  'Accept':'application/json'
+
+};
+
+$.ajax({
+  url: 'https://api.mod.works/v1/games/{game-id}/mods/{mod-id}/ratings',
+  method: 'post',
+
+  headers: headers,
+  success: function(data) {
+    console.log(JSON.stringify(data));
+  }
+})
+```
+
+```javascript--nodejs
+const request = require('node-fetch');
+
+const headers = {
+  'Authorization':'Bearer YourAccessToken',
+  'Content-Type':'application/x-www-form-urlencoded',
+  'Accept':'application/json'
+
+};
+
+fetch('https://api.mod.works/v1/games/{game-id}/mods/{mod-id}/ratings',
+{
+  method: 'POST',
+
+  headers: headers
+})
+.then(function(res) {
+    return res.json();
+}).then(function(body) {
+    console.log(body);
+});
+```
+
+```ruby
+require 'rest-client'
+require 'json'
+
+headers = {
+  'Authorization' => 'Bearer YourAccessToken',
+  'Content-Type' => 'application/x-www-form-urlencoded',
+  'Accept' => 'application/json'
+}
+
+result = RestClient.post 'https://api.mod.works/v1/games/{game-id}/mods/{mod-id}/ratings', params: {
+  }, headers: headers
+
+p JSON.parse(result)
+```
+
+```python
+import requests
+headers = {
+  'Authorization': 'Bearer YourAccessToken',
+  'Content-Type': 'application/x-www-form-urlencoded',
+  'Accept': 'application/json'
+}
+
+r = requests.post('https://api.mod.works/v1/games/{game-id}/mods/{mod-id}/ratings', params={
+
+}, headers = headers)
+
+print r.json()
+```
+
+```java
+URL obj = new URL("https://api.mod.works/v1/games/{game-id}/mods/{mod-id}/ratings");
+HttpURLConnection con = (HttpURLConnection) obj.openConnection();
+con.setRequestMethod("POST");
+int responseCode = con.getResponseCode();
+BufferedReader in = new BufferedReader(
+    new InputStreamReader(con.getInputStream()));
+String inputLine;
+StringBuffer response = new StringBuffer();
+while ((inputLine = in.readLine()) != null) {
+    response.append(inputLine);
+}
+in.close();
+System.out.println(response.toString());
+```
+
+`POST games/{game-id}/mods/{mod-id}/ratings`
+
+Submit a positive or negative rating for a mod, equivalent of thumps up and thumps down. You can only supply one rating for a mod, subsequent ratings will simply reverse your old ratings and apply your most recent rating.
+     
+     Parameter|Type|Required|Description
+     ---|---|---|---|
+     rating|integer|true|The value that determines what rating you submit for this mod.<br><br>*Field Options*<br>__1__ - Positive rating<br>__-1__ - Negative rating
+
+### Responses
+
+Status|Meaning|Description
+---|---|---|
+201|[Created](https://tools.ietf.org/html/rfc7231#section-6.3.2)|Resource created
+
+> Example responses
+
+```json
+{
+  "code": "201",
+  "message": "You have successfully submitted a rating for the specified mod profile."
+}
+```
+<aside class="warning">
+To perform this operation, you must be authenticated by means of one of the following methods:
+oauth2 ( Scopes: write )
+</aside>
+
 ## Browse Mod Comments
 
 > Code samples
@@ -4140,6 +4487,9 @@ Status|Meaning|Description
       "karma": 1,
       "karmago": 0,
       "summary": "This mod is kickass! Great work!"
+    },
+    {
+        ...
     }
   ]
 }
@@ -4533,8 +4883,11 @@ Status|Meaning|Description
       "member": 3103,
       "username": "Megalodon",
       "level": 8,
-      "datejoined": 1492058857,
+      "date": 1492058857,
       "position": "Supreme Overlord"
+    },
+    {
+        ...
     }
   ]
 }
@@ -4663,7 +5016,7 @@ Add a member to a mod team.
      Parameter|Type|Required|Description
      ---|---|---|---|
      member|integer|true|The unique id of the member you are adding to the team.
-     level|integer|true|The level of permissions you want to give to the user. 0 = Guest, 1 = Member, 2 = Contributor, 4 = Manager, 8 = Leader.
+     level|integer|true|The level of permissions you want to give to the user.<br><br>*Fields Options:*<br>__1__ = Moderator (can moderate comments and content attached)<br>__4__ = Creator (can upload builds and edit all settings except supply and existing team members)<br>__8__ = Administrator (full access, including editing the supply and team)
      position|string|true|The title you wish to apply to the member within your team.
 
 ### Responses
@@ -4803,7 +5156,7 @@ Update the details of a member who is currently a part of the specified mod team
      
      Parameter|Type|Required|Description
      ---|---|---|---|
-     level|integer||The level of permissions you want to give to the user.<br><br>*Fields Options:*<br>__0__ = Guest<br>__1__ = Member<br>__2__ = Contributor<br>__4__ = Manager<br>__8__ = Leader
+     level|integer||The level of permissions you want to give to the user.<br><br>*Fields Options:*<br>__1__ = Moderator (can moderate comments and content attached)<br>__4__ = Creator (can upload builds and edit all settings except supply and existing team members)<br>__8__ = Administrator (full access, including editing the supply and team)
      position|string||The title you wish to apply to the member within your team.
 
 ### Responses
@@ -5095,6 +5448,9 @@ Status|Meaning|Description
       },
       "timezone": "Australia/Brisbane",
       "language": "en"
+    },
+    {
+        ...
     }
   ]
 }
@@ -5519,6 +5875,661 @@ To perform this operation, you must be authenticated by means of one of the foll
 apiKey, oauth2 ( Scopes: read )
 </aside>
 
+# Me
+
+## View User Games
+
+> Code samples
+
+```shell
+# You can also use wget
+curl -X get https://api.mod.works/v1/me/games \
+  -H 'Authorization: Bearer YourAccessToken' \
+  -H 'Accept: application/json'
+
+```
+
+```http
+GET https://api.mod.works/v1/me/games HTTP/1.1
+Host: api.mod.works
+
+Accept: application/json
+Authorization: Bearer YourAccessToken
+
+```
+
+```javascript
+var headers = {
+  'Authorization':'Bearer YourAccessToken',
+  'Accept':'application/json'
+
+};
+
+$.ajax({
+  url: 'https://api.mod.works/v1/me/games',
+  method: 'get',
+
+  headers: headers,
+  success: function(data) {
+    console.log(JSON.stringify(data));
+  }
+})
+```
+
+```javascript--nodejs
+const request = require('node-fetch');
+
+const headers = {
+  'Authorization':'Bearer YourAccessToken',
+  'Accept':'application/json'
+
+};
+
+fetch('https://api.mod.works/v1/me/games',
+{
+  method: 'GET',
+
+  headers: headers
+})
+.then(function(res) {
+    return res.json();
+}).then(function(body) {
+    console.log(body);
+});
+```
+
+```ruby
+require 'rest-client'
+require 'json'
+
+headers = {
+  'Authorization' => 'Bearer YourAccessToken',
+  'Accept' => 'application/json'
+}
+
+result = RestClient.get 'https://api.mod.works/v1/me/games', params: {
+  }, headers: headers
+
+p JSON.parse(result)
+```
+
+```python
+import requests
+headers = {
+  'Authorization': 'Bearer YourAccessToken',
+  'Accept': 'application/json'
+}
+
+r = requests.get('https://api.mod.works/v1/me/games', params={
+
+}, headers = headers)
+
+print r.json()
+```
+
+```java
+URL obj = new URL("https://api.mod.works/v1/me/games");
+HttpURLConnection con = (HttpURLConnection) obj.openConnection();
+con.setRequestMethod("GET");
+int responseCode = con.getResponseCode();
+BufferedReader in = new BufferedReader(
+    new InputStreamReader(con.getInputStream()));
+String inputLine;
+StringBuffer response = new StringBuffer();
+while ((inputLine = in.readLine()) != null) {
+    response.append(inputLine);
+}
+in.close();
+System.out.println(response.toString());
+```
+
+`GET me/games`
+
+View all mod.works games that exist for the *authenticated user*.
+
+### Responses
+
+Status|Meaning|Description
+---|---|---|
+200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)|Request Successful
+
+> Example responses
+
+```json
+{
+  "data": [
+    {
+      "id": 2,
+      "member": 31342,
+      "datereg": 1493702614,
+      "dateup": 1499410290,
+      "presentation": 1,
+      "community": 3,
+      "submission": 0,
+      "curation": 0,
+      "revenue": 1500,
+      "api": 3,
+      "ugcname": "map",
+      "icon": {
+        "full": "https://media.mod.works/images/games/1/1/2/icon.png",
+        "thumbnail": "https://media.mod.works/cache/images/mods/1/1/2/crop_320x180/icon.png",
+        "filename": "icon.png"
+      },
+      "logo": {
+        "full": "https://media.mod.works/images/games/1/1/2/gamelogo.jpg",
+        "thumbnail": "https://media.mod.works/cache/images/mods/1/1/2/thumb_1020x2000/gamelogo.jpg",
+        "filename": "gamelogo.jpg"
+      },
+      "header": {
+        "full": "https://media.mod.works/images/games/1/1/2/gameheader.png",
+        "filename": "gameheader.png"
+      },
+      "homepage": "https://www.rogue-knight-game.com/",
+      "name": "Rogue Knight",
+      "nameid": "rogue-knight",
+      "summary": "Rogue Knight is a brand new 2D pixel platformer.",
+      "instructions": "Instructions here on how to develop for your game.",
+      "cats": [
+        {
+          "name": "Engines",
+          "type": "checkboxes",
+          "tags": [
+            "Unity"
+          ],
+          "adminonly": 0
+        }
+      ]
+    },
+    {
+        ...
+    }
+  ]
+}
+```
+<aside class="warning">
+To perform this operation, you must be authenticated by means of one of the following methods:
+oauth2 ( Scopes: read )
+</aside>
+
+## View User Mods
+
+> Code samples
+
+```shell
+# You can also use wget
+curl -X get https://api.mod.works/v1/me/mods \
+  -H 'Authorization: Bearer YourAccessToken' \
+  -H 'Accept: application/json'
+
+```
+
+```http
+GET https://api.mod.works/v1/me/mods HTTP/1.1
+Host: api.mod.works
+
+Accept: application/json
+Authorization: Bearer YourAccessToken
+
+```
+
+```javascript
+var headers = {
+  'Authorization':'Bearer YourAccessToken',
+  'Accept':'application/json'
+
+};
+
+$.ajax({
+  url: 'https://api.mod.works/v1/me/mods',
+  method: 'get',
+
+  headers: headers,
+  success: function(data) {
+    console.log(JSON.stringify(data));
+  }
+})
+```
+
+```javascript--nodejs
+const request = require('node-fetch');
+
+const headers = {
+  'Authorization':'Bearer YourAccessToken',
+  'Accept':'application/json'
+
+};
+
+fetch('https://api.mod.works/v1/me/mods',
+{
+  method: 'GET',
+
+  headers: headers
+})
+.then(function(res) {
+    return res.json();
+}).then(function(body) {
+    console.log(body);
+});
+```
+
+```ruby
+require 'rest-client'
+require 'json'
+
+headers = {
+  'Authorization' => 'Bearer YourAccessToken',
+  'Accept' => 'application/json'
+}
+
+result = RestClient.get 'https://api.mod.works/v1/me/mods', params: {
+  }, headers: headers
+
+p JSON.parse(result)
+```
+
+```python
+import requests
+headers = {
+  'Authorization': 'Bearer YourAccessToken',
+  'Accept': 'application/json'
+}
+
+r = requests.get('https://api.mod.works/v1/me/mods', params={
+
+}, headers = headers)
+
+print r.json()
+```
+
+```java
+URL obj = new URL("https://api.mod.works/v1/me/mods");
+HttpURLConnection con = (HttpURLConnection) obj.openConnection();
+con.setRequestMethod("GET");
+int responseCode = con.getResponseCode();
+BufferedReader in = new BufferedReader(
+    new InputStreamReader(con.getInputStream()));
+String inputLine;
+StringBuffer response = new StringBuffer();
+while ((inputLine = in.readLine()) != null) {
+    response.append(inputLine);
+}
+in.close();
+System.out.println(response.toString());
+```
+
+`GET me/mods`
+
+View all mod.works mods that exist for the *authenticated user*.
+
+### Responses
+
+Status|Meaning|Description
+---|---|---|
+200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)|Request Successful
+
+> Example responses
+
+```json
+{
+  "data": [
+    {
+      "id": 2,
+      "game": 2,
+      "member": 2,
+      "price": 9.99,
+      "datereg": 1492564103,
+      "dateup": 1499841487,
+      "logo": {
+        "full": "https://media.mod.works/images/mods/1/1/2/IMG_20170409_222419.jpg",
+        "thumbnail": "https://media.mod.works/cache/images/mods/1/1/2/thumb_1020x2000/IMG_20170409_222419.jpg",
+        "filename": "IMG_20170409_222419.jpg"
+      },
+      "homepage": "https://www.rogue-hdpack.com/",
+      "name": "Rogue Knight HD Pack",
+      "nameid": "rogue-knight-hd-pack",
+      "summary": "It's time to bask in the glory of beautiful 4k textures!",
+      "description": "<h2>About</h2><p>Rogue HD Pack does exactly what you thi...",
+      "metadata": "rogue,hd,high-res,4k,hd textures",
+      "modfile": {
+        "id": 2,
+        "mod": 2,
+        "member": 38,
+        "date": 1499841487,
+        "datevirus": 1499841487,
+        "virusstatus": 0,
+        "viruspositive": 0,
+        "filesize": 15181,
+        "filehash": "2d4a0e2d7273db6b0a94b0740a88ad0d",
+        "filename": "rogue-knight-v1.zip",
+        "version": "1.3",
+        "virustotal": "No threats found.",
+        "changelog": "VERSION 1.3 -- Changes -- Fixed critical castle floor bug.",
+        "download": "https://cdn.mod.works/files/1/1/2/rogue-knight-v1.zip"
+      },
+      "media": {
+        "youtube": [
+          "https://www.youtube.com/watch?v=dQw4w9WgXcQ"
+        ],
+        "sketchfab": [
+          "https://sketchfab.com/models/ef40b2d300334d009984c8865b2db1c8"
+        ],
+        "images": [
+          {
+            "full": "https://media.mod.works/images/mods/1/1/2/IMG_20170409_222419.jpg",
+            "thumbnail": "https://media.mod.works/cache/images/mods/1/1/2/thumb_1020x2000/IMG_20170409_222419.jpg",
+            "filename": "IMG_20170409_222419.jpg"
+          }
+        ]
+      },
+      "tags": [],
+      "ratings": {
+        "total": 1230,
+        "positive": 1047,
+        "negative": 183,
+        "weighted": 87.38,
+        "percentage": 91,
+        "text": "Very Positive"
+      }
+    },
+    {
+        ...
+    }
+  ]
+}
+```
+<aside class="warning">
+To perform this operation, you must be authenticated by means of one of the following methods:
+oauth2 ( Scopes: read )
+</aside>
+
+## View User Files
+
+> Code samples
+
+```shell
+# You can also use wget
+curl -X get https://api.mod.works/v1/me/files \
+  -H 'Authorization: Bearer YourAccessToken' \
+  -H 'Accept: application/json'
+
+```
+
+```http
+GET https://api.mod.works/v1/me/files HTTP/1.1
+Host: api.mod.works
+
+Accept: application/json
+Authorization: Bearer YourAccessToken
+
+```
+
+```javascript
+var headers = {
+  'Authorization':'Bearer YourAccessToken',
+  'Accept':'application/json'
+
+};
+
+$.ajax({
+  url: 'https://api.mod.works/v1/me/files',
+  method: 'get',
+
+  headers: headers,
+  success: function(data) {
+    console.log(JSON.stringify(data));
+  }
+})
+```
+
+```javascript--nodejs
+const request = require('node-fetch');
+
+const headers = {
+  'Authorization':'Bearer YourAccessToken',
+  'Accept':'application/json'
+
+};
+
+fetch('https://api.mod.works/v1/me/files',
+{
+  method: 'GET',
+
+  headers: headers
+})
+.then(function(res) {
+    return res.json();
+}).then(function(body) {
+    console.log(body);
+});
+```
+
+```ruby
+require 'rest-client'
+require 'json'
+
+headers = {
+  'Authorization' => 'Bearer YourAccessToken',
+  'Accept' => 'application/json'
+}
+
+result = RestClient.get 'https://api.mod.works/v1/me/files', params: {
+  }, headers: headers
+
+p JSON.parse(result)
+```
+
+```python
+import requests
+headers = {
+  'Authorization': 'Bearer YourAccessToken',
+  'Accept': 'application/json'
+}
+
+r = requests.get('https://api.mod.works/v1/me/files', params={
+
+}, headers = headers)
+
+print r.json()
+```
+
+```java
+URL obj = new URL("https://api.mod.works/v1/me/files");
+HttpURLConnection con = (HttpURLConnection) obj.openConnection();
+con.setRequestMethod("GET");
+int responseCode = con.getResponseCode();
+BufferedReader in = new BufferedReader(
+    new InputStreamReader(con.getInputStream()));
+String inputLine;
+StringBuffer response = new StringBuffer();
+while ((inputLine = in.readLine()) != null) {
+    response.append(inputLine);
+}
+in.close();
+System.out.println(response.toString());
+```
+
+`GET me/files`
+
+View all mod.works files that exist for the *authenticated user*.
+
+### Responses
+
+Status|Meaning|Description
+---|---|---|
+200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)|Request Successful
+
+> Example responses
+
+```json
+{
+  "data": [
+    {
+      "id": 2,
+      "mod": 2,
+      "member": 38,
+      "date": 1499841487,
+      "datevirus": 1499841487,
+      "virusstatus": 0,
+      "viruspositive": 0,
+      "filesize": 15181,
+      "filehash": "2d4a0e2d7273db6b0a94b0740a88ad0d",
+      "filename": "rogue-knight-v1.zip",
+      "version": "1.3",
+      "virustotal": "No threats found.",
+      "changelog": "VERSION 1.3 -- Changes -- Fixed critical castle floor bug.",
+      "download": "https://mod.works/mods/file/2/c489a0354111a4d76640d47f0cdcb294"
+    },
+    {
+        ...
+    }
+  ]
+}
+```
+<aside class="warning">
+To perform this operation, you must be authenticated by means of one of the following methods:
+oauth2 ( Scopes: read )
+</aside>
+
+## View User Updates
+
+> Code samples
+
+```shell
+# You can also use wget
+curl -X get https://api.mod.works/v1/me/updates \
+  -H 'Authorization: Bearer YourAccessToken' \
+  -H 'Accept: application/json'
+
+```
+
+```http
+GET https://api.mod.works/v1/me/updates HTTP/1.1
+Host: api.mod.works
+
+Accept: application/json
+Authorization: Bearer YourAccessToken
+
+```
+
+```javascript
+var headers = {
+  'Authorization':'Bearer YourAccessToken',
+  'Accept':'application/json'
+
+};
+
+$.ajax({
+  url: 'https://api.mod.works/v1/me/updates',
+  method: 'get',
+
+  headers: headers,
+  success: function(data) {
+    console.log(JSON.stringify(data));
+  }
+})
+```
+
+```javascript--nodejs
+const request = require('node-fetch');
+
+const headers = {
+  'Authorization':'Bearer YourAccessToken',
+  'Accept':'application/json'
+
+};
+
+fetch('https://api.mod.works/v1/me/updates',
+{
+  method: 'GET',
+
+  headers: headers
+})
+.then(function(res) {
+    return res.json();
+}).then(function(body) {
+    console.log(body);
+});
+```
+
+```ruby
+require 'rest-client'
+require 'json'
+
+headers = {
+  'Authorization' => 'Bearer YourAccessToken',
+  'Accept' => 'application/json'
+}
+
+result = RestClient.get 'https://api.mod.works/v1/me/updates', params: {
+  }, headers: headers
+
+p JSON.parse(result)
+```
+
+```python
+import requests
+headers = {
+  'Authorization': 'Bearer YourAccessToken',
+  'Accept': 'application/json'
+}
+
+r = requests.get('https://api.mod.works/v1/me/updates', params={
+
+}, headers = headers)
+
+print r.json()
+```
+
+```java
+URL obj = new URL("https://api.mod.works/v1/me/updates");
+HttpURLConnection con = (HttpURLConnection) obj.openConnection();
+con.setRequestMethod("GET");
+int responseCode = con.getResponseCode();
+BufferedReader in = new BufferedReader(
+    new InputStreamReader(con.getInputStream()));
+String inputLine;
+StringBuffer response = new StringBuffer();
+while ((inputLine = in.readLine()) != null) {
+    response.append(inputLine);
+}
+in.close();
+System.out.println(response.toString());
+```
+
+`GET me/updates`
+
+View all mod.works updates that exist for the *authenticated user*.
+
+### Responses
+
+Status|Meaning|Description
+---|---|---|
+200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)|Request Successful
+
+> Example responses
+
+```json
+{
+  "data": [
+    {
+      "id": 351,
+      "resource": "games",
+      "resourceid": 2,
+      "type": 4,
+      "date": 1492058857,
+      "mention": 0
+    },
+    {
+        ...
+    }
+  ]
+}
+```
+<aside class="warning">
+To perform this operation, you must be authenticated by means of one of the following methods:
+oauth2 ( Scopes: read )
+</aside>
+
 # Subscribe
 
 ## Subscribe To Resource
@@ -5792,151 +6803,6 @@ Status|Meaning|Description
 
 ```json
 "204 No Content"
-```
-<aside class="warning">
-To perform this operation, you must be authenticated by means of one of the following methods:
-oauth2 ( Scopes: write )
-</aside>
-
-# Reports
-
-## Submit Report
-
-> Code samples
-
-```shell
-# You can also use wget
-curl -X post https://api.mod.works/v1/report \
-  -H 'Authorization: Bearer YourAccessToken' \
-  -H 'Content-Type: application/x-www-form-urlencoded' \
-  -H 'Accept: application/json'
-
-```
-
-```http
-POST https://api.mod.works/v1/report HTTP/1.1
-Host: api.mod.works
-
-Accept: application/json
-Authorization: Bearer YourAccessToken
-Content-Type: application/x-www-form-urlencoded
-
-```
-
-```javascript
-var headers = {
-  'Authorization':'Bearer YourAccessToken',
-  'Content-Type':'application/x-www-form-urlencoded',
-  'Accept':'application/json'
-
-};
-
-$.ajax({
-  url: 'https://api.mod.works/v1/report',
-  method: 'post',
-
-  headers: headers,
-  success: function(data) {
-    console.log(JSON.stringify(data));
-  }
-})
-```
-
-```javascript--nodejs
-const request = require('node-fetch');
-
-const headers = {
-  'Authorization':'Bearer YourAccessToken',
-  'Content-Type':'application/x-www-form-urlencoded',
-  'Accept':'application/json'
-
-};
-
-fetch('https://api.mod.works/v1/report',
-{
-  method: 'POST',
-
-  headers: headers
-})
-.then(function(res) {
-    return res.json();
-}).then(function(body) {
-    console.log(body);
-});
-```
-
-```ruby
-require 'rest-client'
-require 'json'
-
-headers = {
-  'Authorization' => 'Bearer YourAccessToken',
-  'Content-Type' => 'application/x-www-form-urlencoded',
-  'Accept' => 'application/json'
-}
-
-result = RestClient.post 'https://api.mod.works/v1/report', params: {
-  }, headers: headers
-
-p JSON.parse(result)
-```
-
-```python
-import requests
-headers = {
-  'Authorization': 'Bearer YourAccessToken',
-  'Content-Type': 'application/x-www-form-urlencoded',
-  'Accept': 'application/json'
-}
-
-r = requests.post('https://api.mod.works/v1/report', params={
-
-}, headers = headers)
-
-print r.json()
-```
-
-```java
-URL obj = new URL("https://api.mod.works/v1/report");
-HttpURLConnection con = (HttpURLConnection) obj.openConnection();
-con.setRequestMethod("POST");
-int responseCode = con.getResponseCode();
-BufferedReader in = new BufferedReader(
-    new InputStreamReader(con.getInputStream()));
-String inputLine;
-StringBuffer response = new StringBuffer();
-while ((inputLine = in.readLine()) != null) {
-    response.append(inputLine);
-}
-in.close();
-System.out.println(response.toString());
-```
-
-`POST report`
-
-Submit a report for any resource on mod.works.
-     
-     Parameter|Type|Required|Description
-     ---|---|---|---|
-     resource|string|true|The name of the resource type you are submitting a report for __must__ be one of the following strings: games, mods, files, news, guides, tags, users.
-     id|integer|true|Unique Id of the resource item you are reporting.
-     dmca|boolean|true|Is this a DMCA takedown request?
-     name|string|true|Descriptive and informative title for your report.
-     summary|string|true|Detailed description of your report, be as specific as possible on the reason you are submitting the report.
-
-### Responses
-
-Status|Meaning|Description
----|---|---|
-201|[Created](https://tools.ietf.org/html/rfc7231#section-6.3.2)|Report Created
-
-> Example responses
-
-```json
-{
-  "code": "201",
-  "message": "Your report submission has been successful and will be reviewed as soon as possible."
-}
 ```
 <aside class="warning">
 To perform this operation, you must be authenticated by means of one of the following methods:

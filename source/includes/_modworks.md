@@ -310,6 +310,16 @@ Exclude the first n amount of records.
 
 - `?_offset=5` - Exclude the first 5 results of the request.
 
+### _q (Full text search)
+
+```
+--parse_version/games/1?_q=The Lord Of The Rings
+```
+
+Full text search is a lenient search filter that _is only available_ if the endpoint you are querying contains a `name` column.
+
+- `?_q=The Lord of the Rings` - This will return every result where the `name` column contains any of the following words: 'The', 'Lord', 'of', 'the', 'Rings'.
+
 ### -lk (Like)
 
 ```
@@ -318,7 +328,7 @@ Exclude the first n amount of records.
 
 Where the string supplied matches the preceeding column value. This is the equivalent to SQL's `LIKE`.
 
-- `?name-lk=texture` - Get all results where _texture_ occurs in the `name` column.
+- `?name-lk=texture` - Get all results where **only** _texture_ occurs in the `name` column.
 
 ### -not-lk (Not Like)
 
@@ -329,6 +339,16 @@ Where the string supplied matches the preceeding column value. This is the equiv
 Where the string supplied does not match the preceeding column value. This is the equivalent to SQL's `NOT LIKE`.
 
 - `?name-not-lk=dungeon` - Get all results where _texture_ does not occur in the `name` column.
+
+### -lk & -not-lk Wildcards
+
+```
+--parse_version/games?name-lk=The Witcher*
+```
+
+The above -lk examples will only return results on an exact match, which may make it hard to get results depending on the complexity of your query. In that event it's recommended you utilize the -lk wildcard value `*`. This is the equivalent to SQL's `%`.
+
+- `?name-lk=The Witcher*` - Get all results where _The Witcher_ occurs at the start of the name. This means the query would return results for 'The Witcher', 'The Witcher 2' and 'The Witcher 3'. 
  
 ### -in (In)
 
