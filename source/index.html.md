@@ -68,18 +68,85 @@ curl -X get https://api.mod.works/v1/games?api_key=xxxxxxxxxxxxxxxx
 
 To authenticate to the API using your key using your unique 32-character key simply append the `api_key=xxxxxxxxxxxxxxxx` parameter to the end of your request. Remember that using an api key essentially means being in read-only mode, and that if you want to create, update or delete resources then an access token is required.
 
-### OAuth 2 Authentication
+### Authentication Flows
 
-### Scopes
+mod.works offers two flows to authenticate to receive access tokens. The 'Email Authentication' flow as well as the more traditional OAuth 2 Client Credentials flow. 
 
-mod.works allows you to specify what type of permissions you want each access token to have, this is done by the use of scopes. See below for a full list of scopes available, you must include at least one scope when generating a new token.
+### Email Authorization Flow
 
-Scope | Abilities
----------- | ----------
-`read` | When authenticated with a token that *only* contains the `read` scope you will only be able to read data via `GET` requests. 
-`write` | When authenticated with a token that contains the `write` scope you are able to add, edit and remove resources.
+The email authorization flow allows you to securely authorize yourself, and if you are a game developer, all your players using only an e-mail address to allow gamers to effortlessly connect to mod.works as this is how authentication
+is implemented under the hood with the official mod.works SDK. 
 
-You can combine scopes to generate a combination that suits the permissions you want to be applied to the specified token.
+```shell
+// Example POST requesting security code
+
+curl -X POST https://api.mod.works/oauth/emailrequest
+  -H 'Content-Type: application/x-www-form-urlencoded'
+  -d 'api_key=0d0ba6756d032246f1299f8c01abc424'	
+  -d 'email=john.snow@westeros.com'
+```
+
+```json
+// Authentication Code Request Response
+
+{
+	"code": 200,
+	"message": "Enter the 5-digit security code sent to your e-mail address (john.snow@westeros.com)"
+}
+```
+
+### Step 1: Requesting a security code
+
+Firstly you must request a `security_code` from the authentication server by supplying your email which will then return a short-lived security code to your e-mail address. It is therefor required that to receive your `security_code` that you have access to the specified email account. 
+
+`POST /oauth/emailrequest`
+
+Parameter | Value
+---------- | ----------  
+`api_key` | Your api key generated from your games 'API' tab.
+`email` | A valid e-mail address 
+
+### Step 2: Exchanging security code for access token
+
+After successfully requesting an `security_code` with a valid e-mail address you have access to you will then receive an e-mail from mod.works containing your unique 5-character `security_code` which you then exchange in a second request for your `access_token`. There are a few important things to know when using the e-mail authentication flow:
+
+```shell
+// Example POST requesting access token
+
+curl -X POST https://api.mod.works/oauth/emailexchange
+  -H 'Content-Type: application/x-www-form-urlencoded'	
+  -d 'api_key=0d0ba6756d032246f1299f8c01abc424'
+  -d 'security_code=3EW50'
+```
+
+```json
+// Access Token Request Response (access token truncated for brevity)
+
+{
+	"code": 200,
+	"access_token": "eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiIsImp0......"
+}
+```
+
+- An `api_key` is required for both steps of the authentication process.
+- The same `api_key` must be used for both steps.
+- The generated `security_code` is short-lived and will expire after 15 minutes.
+- Once exchanged for an access token, the security code is invalid.
+
+If you do not exchange your `security_code` for an `access_token` within 15 minutes of generation, you will need to begin the flow again to receive another code.
+
+`POST /oauth/emailexchange`
+
+Parameter | Value
+---------- | ----------  
+`api_key` | Your api key generated from your games 'API' tab.
+`security_code` | Unique 5-digit code sent to e-mail from previous request. 
+
+### Step 3: Use access token to access resources.
+
+See [Making Requests](https://docs.mod.works/#making-requests) section.
+
+### Client Credentials Flow
 
 ### Creating a client
 
@@ -96,6 +163,17 @@ TODO
 ### Authenticating with your access token
 
 TODO
+
+### Scopes
+
+mod.works allows you to specify what type of permissions you want each access token to have, this is done by the use of scopes. See below for a full list of scopes available, you must include at least one scope when generating a new token.
+
+Scope | Abilities
+---------- | ----------
+`read` | When authenticated with a token that *only* contains the `read` scope you will only be able to read data via `GET` requests. 
+`write` | When authenticated with a token that contains the `write` scope you are able to add, edit and remove resources.
+
+You can combine scopes to generate a combination that suits the permissions you want to be applied to the specified token.
 
 ## Making Requests
 
