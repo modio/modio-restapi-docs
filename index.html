@@ -510,7 +510,95 @@
 <h4 id='authenticating-with-your-api-key'>Authenticating with your Api key</h4><pre class="highlight plaintext"><code>curl -X get https://api.mod.works/v1/games?api_key=xxxxxxxxxxxxxxxx
 </code></pre>
 <p>To authenticate to the API using your key using your unique 32-character key simply append the <code>api_key=xxxxxxxxxxxxxxxx</code> parameter to the end of your request. Remember that using an api key essentially means being in read-only mode, and that if you want to create, update or delete resources then an access token is required.</p>
-<h3 id='oauth-2-authentication'>OAuth 2 Authentication</h3><h3 id='scopes'>Scopes</h3>
+<h3 id='authentication-flows'>Authentication Flows</h3>
+<p>mod.works offers two flows to authenticate to receive access tokens. The &#39;Email Authentication&#39; flow as well as the more traditional OAuth 2 Client Credentials flow. </p>
+<h3 id='email-authorization-flow'>Email Authorization Flow</h3>
+<p>The email authorization flow allows you to securely authorize yourself, and if you are a game developer, all your players using only an e-mail address to allow gamers to effortlessly connect to mod.works as this is how authentication
+is implemented under the hood with the official mod.works SDK. </p>
+<pre class="highlight shell tab-shell"><code>// Example POST requesting security code
+
+curl -X POST https://api.mod.works/oauth/emailrequest
+  -H <span class="s1">'Content-Type: application/x-www-form-urlencoded'</span>
+  -d <span class="s1">'api_key=0d0ba6756d032246f1299f8c01abc424'</span> 
+  -d <span class="s1">'email=john.snow@westeros.com'</span>
+</code></pre><pre class="highlight json tab-json"><code><span class="err">//</span><span class="w"> </span><span class="err">Authentication</span><span class="w"> </span><span class="err">Code</span><span class="w"> </span><span class="err">Request</span><span class="w"> </span><span class="err">Response</span><span class="w">
+
+</span><span class="p">{</span><span class="w">
+    </span><span class="s2">"code"</span><span class="p">:</span><span class="w"> </span><span class="mi">200</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"message"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Enter the 5-digit security code sent to your e-mail address (john.snow@westeros.com)"</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre><h3 id='step-1-requesting-a-security-code'>Step 1: Requesting a security code</h3>
+<p>Firstly you must request a <code>security_code</code> from the authentication server by supplying your email which will then return a short-lived security code to your e-mail address. It is therefor required that to receive your <code>security_code</code> that you have access to the specified email account. </p>
+
+<p><code>POST /oauth/emailrequest</code></p>
+
+<table><thead>
+<tr>
+<th>Parameter</th>
+<th>Value</th>
+</tr>
+</thead><tbody>
+<tr>
+<td><code>api_key</code></td>
+<td>Your api key generated from your games &#39;API&#39; tab.</td>
+</tr>
+<tr>
+<td><code>email</code></td>
+<td>A valid e-mail address</td>
+</tr>
+</tbody></table>
+<h3 id='step-2-exchanging-security-code-for-access-token'>Step 2: Exchanging security code for access token</h3>
+<p>After successfully requesting an <code>security_code</code> with a valid e-mail address you have access to you will then receive an e-mail from mod.works containing your unique 5-character <code>security_code</code> which you then exchange in a second request for your <code>access_token</code>. There are a few important things to know when using the e-mail authentication flow:</p>
+<pre class="highlight shell tab-shell"><code>// Example POST requesting access token
+
+curl -X POST https://api.mod.works/oauth/emailexchange
+  -H <span class="s1">'Content-Type: application/x-www-form-urlencoded'</span>  
+  -d <span class="s1">'api_key=0d0ba6756d032246f1299f8c01abc424'</span>
+  -d <span class="s1">'security_code=3EW50'</span>
+</code></pre><pre class="highlight json tab-json"><code><span class="err">//</span><span class="w"> </span><span class="err">Access</span><span class="w"> </span><span class="err">Token</span><span class="w"> </span><span class="err">Request</span><span class="w"> </span><span class="err">Response</span><span class="w"> </span><span class="err">(access</span><span class="w"> </span><span class="err">token</span><span class="w"> </span><span class="err">truncated</span><span class="w"> </span><span class="err">for</span><span class="w"> </span><span class="err">brevity)</span><span class="w">
+
+</span><span class="p">{</span><span class="w">
+    </span><span class="s2">"code"</span><span class="p">:</span><span class="w"> </span><span class="mi">200</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"access_token"</span><span class="p">:</span><span class="w"> </span><span class="s2">"eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiIsImp0......"</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre>
+<ul>
+<li>An <code>api_key</code> is required for both steps of the authentication process.</li>
+<li>The same <code>api_key</code> must be used for both steps.</li>
+<li>The generated <code>security_code</code> is short-lived and will expire after 15 minutes.</li>
+<li>Once exchanged for an access token, the security code is invalid.</li>
+</ul>
+
+<p>If you do not exchange your <code>security_code</code> for an <code>access_token</code> within 15 minutes of generation, you will need to begin the flow again to receive another code.</p>
+
+<p><code>POST /oauth/emailexchange</code></p>
+
+<table><thead>
+<tr>
+<th>Parameter</th>
+<th>Value</th>
+</tr>
+</thead><tbody>
+<tr>
+<td><code>api_key</code></td>
+<td>Your api key generated from your games &#39;API&#39; tab.</td>
+</tr>
+<tr>
+<td><code>security_code</code></td>
+<td>Unique 5-digit code sent to e-mail from previous request.</td>
+</tr>
+</tbody></table>
+<h3 id='step-3-use-access-token-to-access-resources'>Step 3: Use access token to access resources.</h3>
+<p>See <a href="https://docs.mod.works/#making-requests">Making Requests</a> section.</p>
+<h3 id='client-credentials-flow'>Client Credentials Flow</h3><h3 id='creating-a-client'>Creating a client</h3>
+<p>TODO</p>
+<h3 id='generating-an-access-token'>Generating an access token</h3>
+<p>TODO</p>
+<h3 id='revoking-an-access-token'>Revoking an access token</h3>
+<p>TODO</p>
+<h3 id='authenticating-with-your-access-token'>Authenticating with your access token</h3>
+<p>TODO</p>
+<h3 id='scopes'>Scopes</h3>
 <p>mod.works allows you to specify what type of permissions you want each access token to have, this is done by the use of scopes. See below for a full list of scopes available, you must include at least one scope when generating a new token.</p>
 
 <table><thead>
@@ -530,14 +618,6 @@
 </tbody></table>
 
 <p>You can combine scopes to generate a combination that suits the permissions you want to be applied to the specified token.</p>
-<h3 id='creating-a-client'>Creating a client</h3>
-<p>TODO</p>
-<h3 id='generating-an-access-token'>Generating an access token</h3>
-<p>TODO</p>
-<h3 id='revoking-an-access-token'>Revoking an access token</h3>
-<p>TODO</p>
-<h3 id='authenticating-with-your-access-token'>Authenticating with your access token</h3>
-<p>TODO</p>
 <h2 id='making-requests'>Making Requests</h2><pre class="highlight shell tab-shell"><code>// Example POST request with no binary files
 
 curl -X post https://api.mod.works/v1/games/1/mods/1/tags <span class="se">\</span>
