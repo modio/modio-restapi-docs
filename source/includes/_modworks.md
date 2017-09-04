@@ -23,10 +23,11 @@ Here is a brief list of the main things to know about our API, as explained in m
 
 ## Authentication
 
-Authentication to the mod.works API can be done via two ways:
+Authentication to the mod.works can be done via 3 different ways:
 
-- Api keys 
-- Access Tokens (OAuth2)
+- Request an [api key (read access only)](https://mod.works/apikey/widget)
+- Manually create an [OAuth 2 access token (read + write access)](https://mod.works/oauth/widget)
+- Use the e-mail verification flow 
 
 Which method of authentication can depend on which way you intend on consuming the mod.works API.
 

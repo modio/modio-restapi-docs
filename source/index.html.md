@@ -40,10 +40,11 @@ Here is a brief list of the main things to know about our API, as explained in m
 
 ## Authentication
 
-Authentication to the mod.works API can be done via two ways:
+Authentication to the mod.works can be done via 3 different ways:
 
-- Api keys 
-- Access Tokens (OAuth2)
+- Request an [api key (read access only)](https://mod.works/apikey/widget)
+- Manually create an [OAuth 2 access token (read + write access)](https://mod.works/oauth/widget)
+- Use the e-mail verification flow 
 
 Which method of authentication can depend on which way you intend on consuming the mod.works API.
 
@@ -97,7 +98,7 @@ curl -X POST https://api.mod.works/oauth/emailrequest
 
 ### Step 1: Requesting a security code
 
-Firstly you must request a `security_code` from the authentication server by supplying your email which will then return a short-lived security code to your e-mail address. It is therefor required that to receive your `security_code` that you have access to the specified email account. 
+Firstly you must request a `security_code` from the authentication server by supplying an email which will then return a short-lived security code to the suyppliede-mail address. It is therefor required that to receive a `security_code` that you have access to the specified email account. 
 
 `POST /oauth/emailrequest`
 
@@ -2415,8 +2416,63 @@ Status|Header|Type|Format|Description
 
 ```json
 {
-  "code": "201",
-  "message": "You have successfully created your mod profile - see documentation about adding your first file."
+  "id": 2,
+  "game": 2,
+  "member": 2,
+  "price": 9.99,
+  "datereg": 1492564103,
+  "dateup": 1499841487,
+  "logo": {
+    "full": "https://media.mod.works/images/mods/1/1/2/IMG_20170409_222419.jpg",
+    "thumbnail": "https://media.mod.works/cache/images/mods/1/1/2/thumb_1020x2000/IMG_20170409_222419.jpg",
+    "filename": "IMG_20170409_222419.jpg"
+  },
+  "homepage": "https://www.rogue-hdpack.com/",
+  "name": "Rogue Knight HD Pack",
+  "nameid": "rogue-knight-hd-pack",
+  "summary": "It's time to bask in the glory of beautiful 4k textures!",
+  "description": "<h2>About</h2><p>Rogue HD Pack does exactly what you thi...",
+  "metadata": "rogue,hd,high-res,4k,hd textures",
+  "modfile": {
+    "id": 2,
+    "mod": 2,
+    "member": 38,
+    "date": 1499841487,
+    "datevirus": 1499841487,
+    "virusstatus": 0,
+    "viruspositive": 0,
+    "filesize": 15181,
+    "filehash": "2d4a0e2d7273db6b0a94b0740a88ad0d",
+    "filename": "rogue-knight-v1.zip",
+    "version": "1.3",
+    "virustotal": "No threats found.",
+    "changelog": "VERSION 1.3 -- Changes -- Fixed critical castle floor bug.",
+    "download": "https://cdn.mod.works/files/1/1/2/rogue-knight-v1.zip"
+  },
+  "media": {
+    "youtube": [
+      "https://www.youtube.com/watch?v=dQw4w9WgXcQ"
+    ],
+    "sketchfab": [
+      "https://sketchfab.com/models/ef40b2d300334d009984c8865b2db1c8"
+    ],
+    "images": [
+      {
+        "full": "https://media.mod.works/images/mods/1/1/2/IMG_20170409_222419.jpg",
+        "thumbnail": "https://media.mod.works/cache/images/mods/1/1/2/thumb_1020x2000/IMG_20170409_222419.jpg",
+        "filename": "IMG_20170409_222419.jpg"
+      }
+    ]
+  },
+  "tags": [],
+  "ratings": {
+    "total": 1230,
+    "positive": 1047,
+    "negative": 183,
+    "weighted": 87.38,
+    "percentage": 91,
+    "text": "Very Positive"
+  }
 }
 ```
 <aside class="warning">
@@ -3615,8 +3671,20 @@ Status|Header|Type|Format|Description
 
 ```json
 {
-  "code": 201,
-  "message": "You have successfully uploaded a new build to the specified repository."
+  "id": 2,
+  "mod": 2,
+  "member": 38,
+  "date": 1499841487,
+  "datevirus": 1499841487,
+  "virusstatus": 0,
+  "viruspositive": 0,
+  "filesize": 15181,
+  "filehash": "2d4a0e2d7273db6b0a94b0740a88ad0d",
+  "filename": "rogue-knight-v1.zip",
+  "version": "1.3",
+  "virustotal": "No threats found.",
+  "changelog": "VERSION 1.3 -- Changes -- Fixed critical castle floor bug.",
+  "download": "https://mod.works/mods/file/2/c489a0354111a4d76640d47f0cdcb294"
 }
 ```
 <aside class="warning">
