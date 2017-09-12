@@ -468,6 +468,16 @@ html, body {
     padding: 0;
   }
 
+  .highlight.java.tab-java + p, .highlight.json.tab-json + ul + p + p, #step-1-requesting-a-security-code + p + p {
+    code:only-child {
+      background: #44bfd4;
+      color: #fff;
+      font-size: 20px;
+      font-weight: bold;
+      padding: 5px;
+    }
+  }
+
   aside {
     padding-top: 1em;
     padding-bottom: 1em;
