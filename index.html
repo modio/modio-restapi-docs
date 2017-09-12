@@ -258,7 +258,10 @@
                     <a href="#mod-works-api-v1" class="toc-h2 toc-link" data-title="Getting Started">mod.works API v1</a>
                   </li>
                   <li>
-                    <a href="#overview" class="toc-h2 toc-link" data-title="Getting Started">Overview</a>
+                    <a href="#how-it-works" class="toc-h2 toc-link" data-title="Getting Started">How It Works</a>
+                  </li>
+                  <li>
+                    <a href="#implementation" class="toc-h2 toc-link" data-title="Getting Started">Implementation</a>
                   </li>
                   <li>
                     <a href="#authentication" class="toc-h2 toc-link" data-title="Getting Started">Authentication</a>
@@ -454,18 +457,52 @@
       <div class="dark-box"></div>
       <div class="content">
         <h1 id='getting-started'>Getting Started</h1><h2 id='mod-works-api-v1'>mod.works API v1</h2>
-<p>Welcome to the official <code>v1</code> API documentation for <a href="https://mworks.com">mod.works</a>. Please ensure you read all of the Getting Started content as it covers most steps to ensure you can accurately and effeciently consume our REST API. </p>
+<p>Welcome to the official <code>v1</code> API documentation for <a href="https://mworks.com">mod.works</a>. Please ensure you read all of the Getting Started content as it covers most steps to ensure you can accurately and efficiently consume our REST API. </p>
 
 <p><strong>Current version:</strong> <code>v1</code></p>
 
 <p><strong>Base path:</strong> <a href="https://api.mod.works/v1">https://api.mod.works/v1</a></p>
-<h2 id='overview'>Overview</h2>
+<h2 id='how-it-works'>How It Works</h2>
+<p>Compatible with all builds of your game, mod.works operates silently in the background (without requiring your users to install another client), to give you complete control over your modding ecosystem</p>
+
+<p><img src="https://static.mod.works/v1/images/home/sdk.png" alt="mod.works Overview" />.</p>
+<h2 id='implementation'>Implementation</h2>
+<p>You have 3 options to get connected to the mod.works API which you can use interchangeably depending on your needs. Here&#39;s the breakdown of each option.</p>
+
+<table><thead>
+<tr>
+<th>Option</th>
+<th>Usage</th>
+<th>Suited for</th>
+<th>Docs</th>
+</tr>
+</thead><tbody>
+<tr>
+<td><strong>API</strong></td>
+<td>For connecting directly to the mod.works REST API</td>
+<td>Web apps that need a JSON REST API, or game developers that like a challenge and want control over their implementation.</td>
+<td></td>
+</tr>
+<tr>
+<td><strong>SDK</strong></td>
+<td>Drop our <a href="https://github.com/DBolical/modworksSDK">open source C++ SDK</a> into your game to call mod.works functionality.</td>
+<td>Developers that want a SDK that abstracts the uploading, downloading and unzip flows behind easy to use function calls.</td>
+<td><a href="https://sdk.mod.works/">Here</a></td>
+</tr>
+<tr>
+<td><strong>Tools/Plugins</strong></td>
+<td>Use tools and plugins created by the community to make implemention in various engines easy.</td>
+<td>Game developers that want a pre-built modding solution for their engine of choice.</td>
+<td><a href="http://10.1.5.7:4567/#">Available per tool</a></td>
+</tr>
+</tbody></table>
+
 <p>Here is a brief list of the main things to know about our API, as explained in more detail in the following sections.</p>
 
 <ul>
 <li>All requests to the API <strong>must</strong> be made over HTTPS.</li>
 <li>All API responses are in <code>application/json</code> format.</li>
-<li>Api-keys are restricted to read-only <code>GET</code> requests.</li>
+<li>API keys are restricted to read-only <code>GET</code> requests.</li>
 <li>OAuth2 access tokens are required for <code>POST</code>, <code>PUT</code> and <code>DELETE</code> requests.</li>
 <li>Binary data <code>POST</code> requests must use <code>Content-Type: multipart/form-data</code> header.</li>
 <li>Non-binary <code>POST</code>, <code>PUT</code> and <code>DELETE</code> requests must use <code>Content-Type: application/x-www-form-urlencoded</code> header.</li>
@@ -473,11 +510,12 @@
 <li>Rate limiting is implemented with varying limits depending on the resource type.</li>
 </ul>
 <h2 id='authentication'>Authentication</h2>
-<p>Authentication to the mod.works API can be done via two ways:</p>
+<p>Authentication to the mod.works can be done via 3 different ways:</p>
 
 <ul>
-<li>Api keys </li>
-<li>Access Tokens (OAuth2)</li>
+<li>Request an <a href="https://mod.works/APIkey/widget">API key (Read access only)</a></li>
+<li>Manually create an <a href="https://mod.works/oauth/widget">OAuth 2 access token (Read + Write access)</a></li>
+<li>Use of our <a href="https://docs.mod.works/#authentication">Email Verification flow</a> </li>
 </ul>
 
 <p>Which method of authentication can depend on which way you intend on consuming the mod.works API.</p>
@@ -486,35 +524,31 @@
 <tr>
 <th>Authentication Type</th>
 <th>In</th>
-<th>Methods</th>
+<th>HTTP Methods</th>
 <th>Abilities</th>
 </tr>
 </thead><tbody>
 <tr>
-<td>Api Key</td>
-<td>Query or Header</td>
+<td>API Key</td>
+<td>Query</td>
 <td><code>GET</code></td>
-<td>Api keys are ideal if you only intend on making <code>GET</code> requests to read data, you cannot create new resources, modify or remove existing resources with an api key.</td>
+<td>Read-only.</td>
 </tr>
 <tr>
-<td>Access Token</td>
+<td>Access Token (OAuth 2)</td>
 <td>Header</td>
 <td><code>GET</code>, <code>POST</code>, <code>PUT</code>, <code>DELETE</code></td>
-<td>Access Tokens can do everything on the API. You can create, edit, update and delete resources. Additional scopes are also available to limit the specify the privileges for a particular token.</td>
+<td>Read, Create, Update, Delete.</td>
 </tr>
 </tbody></table>
-<h3 id='api-key-authentication'>Api Key Authentication</h3><h4 id='generating-your-api-key'>Generating your Api key</h4>
-<p>For game creators, you can simply create api keys for the respective game via the &#39;API&#39; console on the mod.works portal via the following link:</p>
+<h3 id='api-key-authentication'>API Key Authentication</h3><h4 id='generating-your-api-key'>Generating your API key</h4>
+<p>To access the API, authentication is required. All users and games get a <a href="https://mod.works/apikey/widget">private API key</a>. It is quick and easy to use in your apps but limited to read-only GET requests, due to the limited security it offers.</p>
 
-<p><em>https://your-game-here.mod.works/edit/api</em></p>
-<h4 id='authenticating-with-your-api-key'>Authenticating with your Api key</h4><pre class="highlight plaintext"><code>curl -X get https://api.mod.works/v1/games?api_key=xxxxxxxxxxxxxxxx
-</code></pre>
-<p>To authenticate to the API using your key using your unique 32-character key simply append the <code>api_key=xxxxxxxxxxxxxxxx</code> parameter to the end of your request. Remember that using an api key essentially means being in read-only mode, and that if you want to create, update or delete resources then an access token is required.</p>
-<h3 id='authentication-flows'>Authentication Flows</h3>
-<p>mod.works offers two flows to authenticate to receive access tokens. The &#39;Email Authentication&#39; flow as well as the more traditional OAuth 2 Client Credentials flow. </p>
-<h3 id='email-authorization-flow'>Email Authorization Flow</h3>
-<p>The email authorization flow allows you to securely authorize yourself, and if you are a game developer, all your players using only an e-mail address to allow gamers to effortlessly connect to mod.works as this is how authentication
-is implemented under the hood with the official mod.works SDK. </p>
+<p><a href="https://mod.works/apikey/widget">Generate your private API key</a></p>
+<h3 id='email-authentication-flow'>Email Authentication Flow</h3>
+<p>To perform writes, you will need to authenticate your users via OAuth 2. To make this frictionless in-game, we use an email verification system, similar to what Slack and others pioneered. It works by users supplying their email, which we send a time-limited 5 digit security code too. They exchange this code in-game, for an <a href="https://mod.works/oauth/widget">OAuth 2 access token</a> you can save to authenticate future requests. The benefit of this approach is it avoids complex website redirects and doesn&#39;t require your users to complete a slow registration flow.</p>
+
+<p><img src="https://static.mod.works/v1/images/home/email.png" alt="mod.works Email Authentication Flow" /></p>
 <pre class="highlight shell tab-shell"><code>// Example POST requesting security code
 
 curl -X POST https://api.mod.works/oauth/emailrequest
@@ -528,7 +562,7 @@ curl -X POST https://api.mod.works/oauth/emailrequest
     </span><span class="s2">"message"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Enter the 5-digit security code sent to your e-mail address (john.snow@westeros.com)"</span><span class="w">
 </span><span class="p">}</span><span class="w">
 </span></code></pre><h3 id='step-1-requesting-a-security-code'>Step 1: Requesting a security code</h3>
-<p>Firstly you must request a <code>security_code</code> from the authentication server by supplying your email which will then return a short-lived security code to your e-mail address. It is therefor required that to receive your <code>security_code</code> that you have access to the specified email account. </p>
+<p>Firstly you must request a <code>security_code</code> from the authentication server by supplying an email which will then return a short-lived security code to the supplied e-mail address. It is therefore required that to receive a <code>security_code</code> that you have access to the specified email account. </p>
 
 <p><code>POST /oauth/emailrequest</code></p>
 
@@ -540,7 +574,7 @@ curl -X POST https://api.mod.works/oauth/emailrequest
 </thead><tbody>
 <tr>
 <td><code>api_key</code></td>
-<td>Your api key generated from your games &#39;API&#39; tab.</td>
+<td>Your API key generated from your games &#39;API&#39; tab.</td>
 </tr>
 <tr>
 <td><code>email</code></td>
@@ -548,7 +582,7 @@ curl -X POST https://api.mod.works/oauth/emailrequest
 </tr>
 </tbody></table>
 <h3 id='step-2-exchanging-security-code-for-access-token'>Step 2: Exchanging security code for access token</h3>
-<p>After successfully requesting an <code>security_code</code> with a valid e-mail address you have access to you will then receive an e-mail from mod.works containing your unique 5-character <code>security_code</code> which you then exchange in a second request for your <code>access_token</code>. There are a few important things to know when using the e-mail authentication flow:</p>
+<p>After successfully requesting a <code>security_code</code> with a valid e-mail address you have access to you will then receive an e-mail from mod.works containing your unique 5-character <code>security_code</code> which you then exchange in a second request for your <code>access_token</code>. There are a few important things to know when using the e-mail authentication flow:</p>
 <pre class="highlight shell tab-shell"><code>// Example POST requesting access token
 
 curl -X POST https://api.mod.works/oauth/emailexchange
@@ -581,7 +615,7 @@ curl -X POST https://api.mod.works/oauth/emailexchange
 </thead><tbody>
 <tr>
 <td><code>api_key</code></td>
-<td>Your api key generated from your games &#39;API&#39; tab.</td>
+<td>Your API key generated from your games &#39;API&#39; tab.</td>
 </tr>
 <tr>
 <td><code>security_code</code></td>
@@ -590,15 +624,7 @@ curl -X POST https://api.mod.works/oauth/emailexchange
 </tbody></table>
 <h3 id='step-3-use-access-token-to-access-resources'>Step 3: Use access token to access resources.</h3>
 <p>See <a href="https://docs.mod.works/#making-requests">Making Requests</a> section.</p>
-<h3 id='client-credentials-flow'>Client Credentials Flow</h3><h3 id='creating-a-client'>Creating a client</h3>
-<p>TODO</p>
-<h3 id='generating-an-access-token'>Generating an access token</h3>
-<p>TODO</p>
-<h3 id='revoking-an-access-token'>Revoking an access token</h3>
-<p>TODO</p>
-<h3 id='authenticating-with-your-access-token'>Authenticating with your access token</h3>
-<p>TODO</p>
-<h3 id='scopes'>Scopes</h3>
+<h3 id='scopes-oauth-2'>Scopes (OAuth 2)</h3>
 <p>mod.works allows you to specify what type of permissions you want each access token to have, this is done by the use of scopes. See below for a full list of scopes available, you must include at least one scope when generating a new token.</p>
 
 <table><thead>
@@ -613,25 +639,30 @@ curl -X POST https://api.mod.works/oauth/emailexchange
 </tr>
 <tr>
 <td><code>write</code></td>
-<td>When authenticated with a token that contains the <code>write</code> scope you are able to add, edit and remove resources.</td>
+<td>When authenticated with a token that contains the <code>write</code> scope you are able to add, edit and remove resources. <em>Default for e-mail verification flow.</em></td>
 </tr>
 </tbody></table>
 
 <p>You can combine scopes to generate a combination that suits the permissions you want to be applied to the specified token.</p>
-<h2 id='making-requests'>Making Requests</h2><pre class="highlight shell tab-shell"><code>// Example POST request with no binary files
+<h2 id='making-requests'>Making Requests</h2>
+<p>Requests to the mod.works API <strong>must</strong> be over HTTPS (Port 443), any requests made over HTTP will return a <code>400 Bad Request</code> response.</p>
+<h3 id='using-an-api-key'>Using an API Key</h3><pre class="highlight plaintext"><code>curl -X get https://api.mod.works/v1/games?api_key=xxxxxxxxxxxxxxxx
+</code></pre>
+<p>To authenticate to the API using your key using your unique 32-character key simply append the <code>api_key=xxxxxxxxxxxxxxxx</code> parameter to the end of your request. Remember that using an API key means requests are in read-only mode, and that if you want to create, update or delete resources then authentication via OAuth 2 is required.</p>
+<h3 id='using-an-access-token'>Using an Access Token</h3>
+<p>To Authenticate to the API using an OAuth 2 access token you must include the HTTP header <code>Authorization</code> in your request with the value <code>Bearer your-token-here</code>. Verification via Access Tokens allows much greater powers in consuming the API including adding, updating and deleting resources that you have access to. </p>
+<pre class="highlight shell tab-shell"><code>// Example POST request with no binary files
 
 curl -X post https://api.mod.works/v1/games/1/mods/1/tags <span class="se">\</span>
   -H <span class="s1">'Authorization: Bearer your-token-here'</span> <span class="se">\</span>
   -H <span class="s1">'Content-Type: application/x-www-form-urlencoded'</span> <span class="se">\</span>
   -d <span class="s1">'tags[]=Unity'</span> <span class="se">\</span>
   -d <span class="s1">'tags[]=FPS'</span>
-</code></pre>
-<p>Requests to the mod.works API <strong>must</strong> be over HTTPS (Port 443), any requests made over HTTP will return a <code>400 Bad Request</code> response.</p>
-<h3 id='request-content-type'>Request Content-Type</h3>
+</code></pre><h3 id='request-content-type'>Request Content-Type</h3>
 <p>For supplying data in requests, mod.works follows this rule across the API:</p>
 
 <ul>
-<li>If you are making a request that includes a file, your request <strong>must</strong> be <code>multipart/form-data</code>, otherwise your request should be <code>application/x-www-form-urlencoded</code>. </li>
+<li>If you are making a request that includes a file, your request <strong>must</strong> be <code>multipart/form-data</code>, otherwise, your request should be <code>application/x-www-form-urlencoded</code>. </li>
 </ul>
 <pre class="highlight shell tab-shell"><code>// Example POST request with binary file
 
@@ -679,7 +710,7 @@ curl -X post https://api.mod.works/v1/games/1/team <span class="se">\</span>
         "position":"King in the North"
       }'</span>
 </code></pre>
-<p>For <code>POST</code> &amp; <code>PUT</code> requests that do <strong>not submit files</strong> you have the option to either supply your data as usual HTTP <code>POST</code> parameters or as a single json object by supplying the parameter <code>input_json</code> which contains a <strong>UTF-8 encoded</strong> JSON object with all required data. Regardless of whether you use JSON or not the <code>Content-Type</code> of your request still needs to be <code>application/x-www-form-urlencoded</code> with the data provided in the body of the request.</p>
+<p>For <code>POST</code> &amp; <code>PUT</code> requests that do <em>not submit files</em> you have the option to either supply your data as usual HTTP <code>POST</code> parameters or as a single json object by supplying the parameter <code>input_json</code> which contains a <em>UTF-8 encoded</em> JSON object with all required data. Regardless of whether you use JSON or not the <code>Content-Type</code> of your request still needs to be <code>application/x-www-form-urlencoded</code> with the data provided in the body of the request.</p>
 
 <p><strong>NOTE:</strong> If you supply identical key-value pairs as a request parameter and also as a parameter of your JSON object, the JSON object <strong>will take priority</strong> as only one can exist.</p>
 <h3 id='response-content-type'>Response Content-Type</h3>
@@ -691,7 +722,7 @@ curl -X post https://api.mod.works/v1/games/1/team <span class="se">\</span>
     </span><span class="s2">"message"</span><span class="p">:</span><span class="w"> </span><span class="s2">"You do not have the required permissions to access this resource."</span><span class="w">
 </span><span class="p">}</span><span class="w">
 </span></code></pre>
-<p>If an error occurs, mod.works returns an error object with the HTTP <code>code</code> and <code>message</code> to describe what error occured and generally what needs to be done to avoid the error re-occuring. It&#39;s important to note that if you encounter errors that are not server errors, that is <code>500+</code> codes - you should <strong>not</strong> continue to send requests to the endpoint and instead review the error message.</p>
+<p>If an error occurs, mod.works returns an error object with the HTTP <code>code</code> and <code>message</code> to describe what error occurred and generally what needs to be done to avoid the error reoccurring. It&#39;s important to note that if you encounter errors that are not server errors, that is <code>500+</code> codes - you should <strong>not</strong> continue to send requests to the endpoint and instead review the error message.</p>
 
 <p>When it comes to validating request inputs for creating a resource or supplying a query parameter for filtering, an optional field object called <code>errors</code> can be supplied inside the <code>error</code> object which contains a list of your invalid inputs. A reminder that the nested <code>errors</code> object is only supplied with <code>422 Unprocessable Entity</code>. Be sure to review the <a href="https://docs.mod.works/#response-codes">Response Codes</a> to be aware of the HTTP codes the API returns.</p>
 <pre class="highlight json tab-json"><code><span class="err">//</span><span class="w"> </span><span class="err">Error</span><span class="w"> </span><span class="err">object</span><span class="w"> </span><span class="err">with</span><span class="w"> </span><span class="err">input</span><span class="w"> </span><span class="err">errors</span><span class="w">
@@ -708,7 +739,7 @@ curl -X post https://api.mod.works/v1/games/1/team <span class="se">\</span>
 </span></code></pre>
 <p>Remember that <a href="https://docs.mod.works/#rate-limiting">Rate Limiting</a> applies whether an error is returned or not so to avoid needlessly exceeding your daily quota be sure to always investigate error messages.</p>
 <h2 id='response-codes'>Response Codes</h2>
-<p>Here are a list of the most common HTTP response codes you will see while using the API.</p>
+<p>Here is a list of the most common HTTP response codes you will see while using the API.</p>
 
 <table><thead>
 <tr>
@@ -730,11 +761,11 @@ curl -X post https://api.mod.works/v1/games/1/team <span class="se">\</span>
 </tr>
 <tr>
 <td><code>400</code></td>
-<td>Bad request -- Server cannot process request due to malformed syntax or invalid request message framing.</td>
+<td>Bad request -- Server cannot process the request due to malformed syntax or invalid request message framing.</td>
 </tr>
 <tr>
 <td><code>401</code></td>
-<td>Unauthorized -- Your api-key/access token is incorrect.</td>
+<td>Unauthorized -- Your API key/access token is incorrect.</td>
 </tr>
 <tr>
 <td><code>403</code></td>
@@ -788,7 +819,7 @@ curl -X post https://api.mod.works/v1/games/1/team <span class="se">\</span>
     </span><span class="s2">"download"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://mod.works/mods/file/2/c489a0354111a4d76640d47f0cdcb294"</span><span class="w">
 </span><span class="p">}</span><span class="w">
 </span></code></pre>
-<p>The way in which mod.works formats responses is entirely dependant on whether the request endpoint is returning a single item or a collection of items.</p>
+<p>The way in which mod.works formats responses is entirely dependant on whether the requesting endpoint is returning a single item or a collection of items.</p>
 <h3 id='single-item-responses'>Single item Responses</h3>
 <p>For single items, mod.works returns a <strong>single json object</strong> which contains the requested resource. There is no nesting for single responses.</p>
 <h3 id='browse-responses'>Browse Responses</h3>
@@ -796,7 +827,7 @@ curl -X post https://api.mod.works/v1/games/1/team <span class="se">\</span>
 
 <ul>
 <li><code>data</code> - contains all data returned from the request.</li>
-<li><code>meta</code> - contains metadata such as pagination information.</li>
+<li><code>meta</code> - contains meta data such as pagination information.</li>
 </ul>
 <pre class="highlight json tab-json"><code><span class="err">//</span><span class="w"> </span><span class="err">Browse</span><span class="w"> </span><span class="err">response</span><span class="w">
 
@@ -814,7 +845,7 @@ curl -X post https://api.mod.works/v1/games/1/team <span class="se">\</span>
             </span><span class="s2">"filehash"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2d4a0e2d7273db6b0a94b0740a88ad0d"</span><span class="p">,</span><span class="w">
             </span><span class="s2">"filename"</span><span class="p">:</span><span class="w"> </span><span class="s2">"rogue-knightv1.zip"</span><span class="p">,</span><span class="w">
             </span><span class="s2">"version"</span><span class="p">:</span><span class="w"> </span><span class="s2">"1.0"</span><span class="p">,</span><span class="w">
-            </span><span class="s2">"virustotal"</span><span class="p">:</span><span class="w"> </span><span class="s2">""</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"virustotal"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
             </span><span class="s2">"changelog"</span><span class="p">:</span><span class="w"> </span><span class="s2">"v1.0 --- First Release --- Added main mod."</span><span class="p">,</span><span class="w">
             </span><span class="s2">"download"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://mod.works/mods/file/2/c489a0354111a4d76640d47f0cdcb294"</span><span class="w">
         </span><span class="p">},</span><span class="w">
@@ -837,7 +868,7 @@ curl -X post https://api.mod.works/v1/games/1/team <span class="se">\</span>
     </span><span class="p">}</span><span class="w">
 </span><span class="p">}</span><span class="w">  
 </span></code></pre><h3 id='browse-pagination'>Browse Pagination</h3>
-<p>The meta object which contains pagination information is automatically appended on any request than contains more than one result.</p>
+<p>The meta object which contains pagination information is automatically appended to any request that contains more than one result.</p>
 <pre class="highlight json tab-json"><code><span class="err">//</span><span class="w"> </span><span class="err">Meta</span><span class="w"> </span><span class="err">object</span><span class="w"> </span><span class="err">example</span><span class="w">
 </span><span class="p">{</span><span class="w">
     </span><span class="s2">"meta"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
@@ -873,7 +904,7 @@ curl -X post https://api.mod.works/v1/games/1/team <span class="se">\</span>
 </ul>
 <h3 id='_limit-limit'>_limit (Limit)</h3><pre class="highlight plaintext"><code>v1/games?_limit=5
 </code></pre>
-<p>Limit the amount of results for a request.</p>
+<p>Limit the number of results for a request.</p>
 
 <ul>
 <li><code>?_limit=5</code> - Limit the request to 5 individual results. </li>
@@ -887,77 +918,77 @@ curl -X post https://api.mod.works/v1/games/1/team <span class="se">\</span>
 </ul>
 <h3 id='_q-full-text-search'>_q (Full text search)</h3><pre class="highlight plaintext"><code>v1/games/1?_q=The Lord Of The Rings
 </code></pre>
-<p>Full text search is a lenient search filter that <em>is only available</em> if the endpoint you are querying contains a <code>name</code> column.</p>
+<p>Full-text search is a lenient search filter that <em>is only available</em> if the endpoint you are querying contains a <code>name</code> column.</p>
 
 <ul>
 <li><code>?_q=The Lord of the Rings</code> - This will return every result where the <code>name</code> column contains any of the following words: &#39;The&#39;, &#39;Lord&#39;, &#39;of&#39;, &#39;the&#39;, &#39;Rings&#39;.</li>
 </ul>
 <h3 id='lk-like'>-lk (Like)</h3><pre class="highlight plaintext"><code>v1/games?name-lk=texture
 </code></pre>
-<p>Where the string supplied matches the preceeding column value. This is the equivalent to SQL&#39;s <code>LIKE</code>.</p>
+<p>Where the string supplied matches the preceding column value. This is the equivalent to SQL&#39;s <code>LIKE</code>.</p>
 
 <ul>
 <li><code>?name-lk=texture</code> - Get all results where <strong>only</strong> <em>texture</em> occurs in the <code>name</code> column.</li>
 </ul>
 <h3 id='not-lk-not-like'>-not-lk (Not Like)</h3><pre class="highlight plaintext"><code>v1/games?name-not-lk=dungeon
 </code></pre>
-<p>Where the string supplied does not match the preceeding column value. This is the equivalent to SQL&#39;s <code>NOT LIKE</code>.</p>
+<p>Where the string supplied does not match the preceding column value. This is the equivalent to SQL&#39;s <code>NOT LIKE</code>.</p>
 
 <ul>
 <li><code>?name-not-lk=dungeon</code> - Get all results where <em>texture</em> does not occur in the <code>name</code> column.</li>
 </ul>
 <h3 id='lk-amp-not-lk-wildcards'>-lk &amp; -not-lk Wildcards</h3><pre class="highlight plaintext"><code>v1/games?name-lk=The Witcher*
 </code></pre>
-<p>The above -lk examples will only return results on an exact match, which may make it hard to get results depending on the complexity of your query. In that event it&#39;s recommended you utilize the -lk wildcard value <code>*</code>. This is the equivalent to SQL&#39;s <code>%</code>.</p>
+<p>The above -lk examples will only return results for an exact match, which may make it hard to get results depending on the complexity of your query. In that event, it&#39;s recommended you utilize the -lk wildcard value <code>*</code>. This is the equivalent to SQL&#39;s <code>%</code>.</p>
 
 <ul>
 <li><code>?name-lk=The Witcher*</code> - Get all results where <em>The Witcher</em> occurs at the start of the name. This means the query would return results for &#39;The Witcher&#39;, &#39;The Witcher 2&#39; and &#39;The Witcher 3&#39;. </li>
 </ul>
 <h3 id='in-in'>-in (In)</h3><pre class="highlight plaintext"><code>v1/games?id-in=3,11,16,29
 </code></pre>
-<p>Where the supplied list of values appears in the preceeding column value. This is the equivalent to SQL&#39;s <code>IN</code>.</p>
+<p>Where the supplied list of values appears in the preceding column value. This is the equivalent to SQL&#39;s <code>IN</code>.</p>
 
 <ul>
 <li><code>?id-in=3,11,16,29</code> - Get all results where the <code>id</code> column value is 3, 11, 16 and 29.</li>
 </ul>
 <h3 id='not-in-not-in'>-not-in (Not In)</h3><pre class="highlight plaintext"><code>v1/games?modfile-not-in=8,13,22
 </code></pre>
-<p>Where the supplied list of values <em>does not</em> in the preceeding column value. This is the equivalent to SQL&#39;s <code>NOT IN</code></p>
+<p>Where the supplied list of values <em>does not</em> in the preceding column value. This is the equivalent to SQL&#39;s <code>NOT IN</code></p>
 
 <ul>
 <li><code>?modfile-not-in=8,13,22</code> - Get all results where <code>id</code> column <em>does not</em> equal 8, 18 and 22.</li>
 </ul>
 <h3 id='min-min'>-min (Min)</h3><pre class="highlight plaintext"><code>v1/games?game-min=20
 </code></pre>
-<p>Where the preeceding column value is greater than or equal to the value specified.</p>
+<p>Where the preceding column value is greater than or equal to the value specified.</p>
 
 <ul>
 <li><code>?game-min=20</code> - Get all results where the <code>game</code> column is greater than or equal to 20.</li>
 </ul>
 <h3 id='max-max'>-max (Max)</h3><pre class="highlight plaintext"><code>v1/games?game-max=40
 </code></pre>
-<p>Where the preeceding column value is smaller than or equal to the value specified.</p>
+<p>Where the preceding column value is smaller than or equal to the value specified.</p>
 
 <ul>
 <li><code>?game-max=40</code> - Get all results where the <code>game</code> smaller than or equal to 40.<br></li>
 </ul>
 <h3 id='st-smaller-than'>-st (Smaller Than)</h3><pre class="highlight plaintext"><code>v1/games?modfile-st=200
 </code></pre>
-<p>Where the preceeding column value is smaller than the value specified.</p>
+<p>Where the preceding column value is smaller than the value specified.</p>
 
 <ul>
 <li><code>?modfile-st=200</code> - Get all results where the <code>modfile</code> column is smaller than 200.</li>
 </ul>
 <h3 id='gt-greater-than'>-gt (Greater Than)</h3><pre class="highlight plaintext"><code>v1/games?modfile-gt=600
 </code></pre>
-<p>Where the preceeding column value is greater than the value specified.</p>
+<p>Where the preceding column value is greater than the value specified.</p>
 
 <ul>
 <li><code>?modfile-gt=600</code> - Get all results where the <code>modfile</code> column is greater than 600.</li>
 </ul>
 <h3 id='not-not-equal-to'>-not (Not Equal To)</h3><pre class="highlight plaintext"><code>v1/games?price-not=19.99
 </code></pre>
-<p>Where the preceeding column value does not equal the value specified.</p>
+<p>Where the preceding column value does not equal the value specified.</p>
 
 <ul>
 <li><code>?price-not=19.99</code> - Where the <code>price</code> column does not equal 19.99.</li>
@@ -965,8 +996,8 @@ curl -X post https://api.mod.works/v1/games/1/team <span class="se">\</span>
 <h2 id='rate-limiting'>Rate Limiting</h2>
 <p>mod.works implements rate limiting to prevent users from abusing the service however we do offer the ability of higher rate limits as they required. Exceeding your rate limit will result in requests receiving a <code>429 Too Many Requests</code> response until your time is reset time occurs. </p>
 
-<p>It is <em>highly recommended</em> that you architect your app to check for the <code>X-RateLimit</code> headers below and the <code>429</code> HTTP response code to ensure you are not making too many requests, or continuing to make requests consistently after a <code>429</code> code is repeatedly returned. Users who continue to send requests despite a <code>429</code> response could potentially have their access tokens revoked. The following limits are implemented by default:</p>
-<h3 id='api-key-rate-limiting'>Api key Rate Limiting</h3><pre class="highlight plaintext"><code>Example HTTP Header Response
+<p>It is <em>highly recommended</em> that you architect your app to check for the <code>X-RateLimit</code> headers below and the <code>429</code> HTTP response code to ensure you are not making too many requests or continuing to make requests consistently after a <code>429</code> code is repeatedly returned. Users who continue to send requests despite a <code>429</code> response could potentially have their access tokens revoked. The following limits are implemented by default:</p>
+<h3 id='api-key-rate-limiting'>API key Rate Limiting</h3><pre class="highlight plaintext"><code>Example HTTP Header Response
 ---------------------
 HTTP/1.1 200 OK
 ...
@@ -975,7 +1006,7 @@ X-RateLimit-Limit: 60
 X-RateLimit-Remaining: 59
 </code></pre>
 <ul>
-<li>All Api keys by default are limited to <strong>100,000 requests per day</strong>.</li>
+<li>All API keys by default are limited to <strong>100,000 requests per day</strong>.</li>
 </ul>
 <h3 id='oauth2-rate-limiting'>OAuth2 Rate Limiting</h3>
 <ul>
@@ -986,7 +1017,7 @@ X-RateLimit-Remaining: 59
 <p>mod.works returns the following headers in each request to inform you of your remaining requests and time until reset.</p>
 
 <ul>
-<li><code>X-RateLimit-Limit</code> - Number of requests you can make from the supplied api-key/access token per hour.</li>
+<li><code>X-RateLimit-Limit</code> - Number of requests you can make from the supplied API key/access token per hour.</li>
 <li><code>X-RateLimit-Remaining</code> - Number of minutes until your rate limit resets (see above for frequently allowed).</li>
 </ul>
 
@@ -1074,7 +1105,7 @@ Accept: application/json
 <span class="n">in</span><span class="o">.</span><span class="na">close</span><span class="o">();</span>
 <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="n">response</span><span class="o">.</span><span class="na">toString</span><span class="o">());</span>
 </code></pre>
-<p><code>GET games</code></p>
+<p><code>GET /games</code></p>
 
 <p>Browse Games. Successful request will return an <strong>array of game objects</strong>. To make your requests as specific to your needs as possible it&#39;s highly recommended reading over our <a href="https://docs.mod.works/#filtering">filtering documentation</a> if it will help you with consuming this endpoint.</p>
 
@@ -1329,7 +1360,7 @@ Accept: application/json
 <span class="n">in</span><span class="o">.</span><span class="na">close</span><span class="o">();</span>
 <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="n">response</span><span class="o">.</span><span class="na">toString</span><span class="o">());</span>
 </code></pre>
-<p><code>GET games/{game-id}</code></p>
+<p><code>GET /games/{game-id}</code></p>
 
 <p>View a single game. Successful request will return a single <strong>game object</strong>.</p>
 <h3 id='responses-2'>Responses</h3>
@@ -1489,7 +1520,7 @@ Content-Type: application/x-www-form-urlencoded
 <span class="n">in</span><span class="o">.</span><span class="na">close</span><span class="o">();</span>
 <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="n">response</span><span class="o">.</span><span class="na">toString</span><span class="o">());</span>
 </code></pre>
-<p><code>PUT games/{game-id}</code></p>
+<p><code>PUT /games/{game-id}</code></p>
 
 <p>Update details for a game. If you want to update the <code>icon</code>, <code>logo</code> or <code>header</code> fields you need to use the <a href="https://docs.mod.works/#add-game-media">Add Game Media</a> endpoint.</p>
 
@@ -1687,7 +1718,7 @@ Content-Type: multipart/form-data
 <span class="n">in</span><span class="o">.</span><span class="na">close</span><span class="o">();</span>
 <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="n">response</span><span class="o">.</span><span class="na">toString</span><span class="o">());</span>
 </code></pre>
-<p><code>POST games/{game-id}/media</code></p>
+<p><code>POST /games/{game-id}/media</code></p>
 
 <p>Upload new media to a game. Any request you make to this endpoint <em>should</em> contain a binary file for one of the following fields below.</p>
 
@@ -1826,7 +1857,7 @@ Accept: application/json
 <span class="n">in</span><span class="o">.</span><span class="na">close</span><span class="o">();</span>
 <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="n">response</span><span class="o">.</span><span class="na">toString</span><span class="o">());</span>
 </code></pre>
-<p><code>GET games/{game-id}/activity</code></p>
+<p><code>GET /games/{game-id}/activity</code></p>
 
 <p>View activity for a game, showing changes made to the resource. Successful request will return an <strong>array of activity objects</strong>. To make your requests as specific to your needs as possible it&#39;s highly recommended reading over our <a href="https://docs.mod.works/#filtering">filtering documentation</a> if it will help you with consuming this endpoint.</p>
 
@@ -1981,7 +2012,7 @@ Accept: application/json
 <span class="n">in</span><span class="o">.</span><span class="na">close</span><span class="o">();</span>
 <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="n">response</span><span class="o">.</span><span class="na">toString</span><span class="o">());</span>
 </code></pre>
-<p><code>GET games/{game-id}/team</code></p>
+<p><code>GET /games/{game-id}/team</code></p>
 
 <p>View all members that are part of a game team. Successful request will return an <strong>array of access objects</strong>.</p>
 <h3 id='responses-6'>Responses</h3>
@@ -2114,7 +2145,7 @@ Content-Type: application/x-www-form-urlencoded
 <span class="n">in</span><span class="o">.</span><span class="na">close</span><span class="o">();</span>
 <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="n">response</span><span class="o">.</span><span class="na">toString</span><span class="o">());</span>
 </code></pre>
-<p><code>POST games/{game-id}/team</code></p>
+<p><code>POST /games/{game-id}/team</code></p>
 
 <p>Add a member to a game team.</p>
 
@@ -2264,7 +2295,7 @@ Content-Type: application/x-www-form-urlencoded
 <span class="n">in</span><span class="o">.</span><span class="na">close</span><span class="o">();</span>
 <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="n">response</span><span class="o">.</span><span class="na">toString</span><span class="o">());</span>
 </code></pre>
-<p><code>PUT games/{game-id}/team/{access-id}</code></p>
+<p><code>PUT /games/{game-id}/team/{access-id}</code></p>
 
 <p>Update the details of a member who is currently a part of the specified game team.</p>
 
@@ -2408,7 +2439,7 @@ Content-Type: application/x-www-form-urlencoded
 <span class="n">in</span><span class="o">.</span><span class="na">close</span><span class="o">();</span>
 <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="n">response</span><span class="o">.</span><span class="na">toString</span><span class="o">());</span>
 </code></pre>
-<p><code>DELETE games/{game-id}/team/{access-id}</code></p>
+<p><code>DELETE /games/{game-id}/team/{access-id}</code></p>
 
 <p>Remove a member from a game team. This will revoke their access rights if they are not the original creator of the resource.</p>
 <h3 id='responses-9'>Responses</h3>
@@ -2527,7 +2558,7 @@ Content-Type: application/x-www-form-urlencoded
 <span class="n">in</span><span class="o">.</span><span class="na">close</span><span class="o">();</span>
 <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="n">response</span><span class="o">.</span><span class="na">toString</span><span class="o">());</span>
 </code></pre>
-<p><code>POST report</code></p>
+<p><code>POST /report</code></p>
 
 <p>Submit a report for any resource on mod.works.</p>
 
@@ -2678,7 +2709,7 @@ Accept: application/json
 <span class="n">in</span><span class="o">.</span><span class="na">close</span><span class="o">();</span>
 <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="n">response</span><span class="o">.</span><span class="na">toString</span><span class="o">());</span>
 </code></pre>
-<p><code>GET games/{game-id}/mods</code></p>
+<p><code>GET /games/{game-id}/mods</code></p>
 
 <p>Browse mods. Successful request will return an <strong>array of mod objects</strong>. To make your requests as specific to your needs as possible it&#39;s highly recommended reading over our <a href="https://docs.mod.works/#filtering">filtering documentation</a> if it will help you with consuming this endpoint.</p>
 
@@ -2936,7 +2967,7 @@ Content-Type: multipart/form-data
 <span class="n">in</span><span class="o">.</span><span class="na">close</span><span class="o">();</span>
 <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="n">response</span><span class="o">.</span><span class="na">toString</span><span class="o">());</span>
 </code></pre>
-<p><code>POST games/{game-id}/mods</code></p>
+<p><code>POST /games/{game-id}/mods</code></p>
 
 <p>Publish a mod on mod.works While some fields have been made optional for easier adding of mods to mod.works - please be as detailed as you can.</p>
 
@@ -3046,8 +3077,63 @@ Content-Type: multipart/form-data
 <p>Example responses</p>
 </blockquote>
 <pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
-  </span><span class="s2">"code"</span><span class="p">:</span><span class="w"> </span><span class="s2">"201"</span><span class="p">,</span><span class="w">
-  </span><span class="s2">"message"</span><span class="p">:</span><span class="w"> </span><span class="s2">"You have successfully created your mod profile - see documentation about adding your first file."</span><span class="w">
+  </span><span class="s2">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"game"</span><span class="p">:</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"member"</span><span class="p">:</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"price"</span><span class="p">:</span><span class="w"> </span><span class="mf">9.99</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"datereg"</span><span class="p">:</span><span class="w"> </span><span class="mi">1492564103</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"dateup"</span><span class="p">:</span><span class="w"> </span><span class="mi">1499841487</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"logo"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+    </span><span class="s2">"full"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://media.mod.works/images/mods/1/1/2/IMG_20170409_222419.jpg"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"thumbnail"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://media.mod.works/cache/images/mods/1/1/2/thumb_1020x2000/IMG_20170409_222419.jpg"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"filename"</span><span class="p">:</span><span class="w"> </span><span class="s2">"IMG_20170409_222419.jpg"</span><span class="w">
+  </span><span class="p">},</span><span class="w">
+  </span><span class="s2">"homepage"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://www.rogue-hdpack.com/"</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Rogue Knight HD Pack"</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"nameid"</span><span class="p">:</span><span class="w"> </span><span class="s2">"rogue-knight-hd-pack"</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"summary"</span><span class="p">:</span><span class="w"> </span><span class="s2">"It's time to bask in the glory of beautiful 4k textures!"</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"description"</span><span class="p">:</span><span class="w"> </span><span class="s2">"&lt;h2&gt;About&lt;/h2&gt;&lt;p&gt;Rogue HD Pack does exactly what you thi..."</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"metadata"</span><span class="p">:</span><span class="w"> </span><span class="s2">"rogue,hd,high-res,4k,hd textures"</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"modfile"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+    </span><span class="s2">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"mod"</span><span class="p">:</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"member"</span><span class="p">:</span><span class="w"> </span><span class="mi">38</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"date"</span><span class="p">:</span><span class="w"> </span><span class="mi">1499841487</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"datevirus"</span><span class="p">:</span><span class="w"> </span><span class="mi">1499841487</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"virusstatus"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"viruspositive"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"filesize"</span><span class="p">:</span><span class="w"> </span><span class="mi">15181</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"filehash"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2d4a0e2d7273db6b0a94b0740a88ad0d"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"filename"</span><span class="p">:</span><span class="w"> </span><span class="s2">"rogue-knight-v1.zip"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"version"</span><span class="p">:</span><span class="w"> </span><span class="s2">"1.3"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"virustotal"</span><span class="p">:</span><span class="w"> </span><span class="s2">"No threats found."</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"changelog"</span><span class="p">:</span><span class="w"> </span><span class="s2">"VERSION 1.3 -- Changes -- Fixed critical castle floor bug."</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"download"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://cdn.mod.works/files/1/1/2/rogue-knight-v1.zip"</span><span class="w">
+  </span><span class="p">},</span><span class="w">
+  </span><span class="s2">"media"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+    </span><span class="s2">"youtube"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+      </span><span class="s2">"https://www.youtube.com/watch?v=dQw4w9WgXcQ"</span><span class="w">
+    </span><span class="p">],</span><span class="w">
+    </span><span class="s2">"sketchfab"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+      </span><span class="s2">"https://sketchfab.com/models/ef40b2d300334d009984c8865b2db1c8"</span><span class="w">
+    </span><span class="p">],</span><span class="w">
+    </span><span class="s2">"images"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+      </span><span class="p">{</span><span class="w">
+        </span><span class="s2">"full"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://media.mod.works/images/mods/1/1/2/IMG_20170409_222419.jpg"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"thumbnail"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://media.mod.works/cache/images/mods/1/1/2/thumb_1020x2000/IMG_20170409_222419.jpg"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"filename"</span><span class="p">:</span><span class="w"> </span><span class="s2">"IMG_20170409_222419.jpg"</span><span class="w">
+      </span><span class="p">}</span><span class="w">
+    </span><span class="p">]</span><span class="w">
+  </span><span class="p">},</span><span class="w">
+  </span><span class="s2">"tags"</span><span class="p">:</span><span class="w"> </span><span class="p">[],</span><span class="w">
+  </span><span class="s2">"ratings"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+    </span><span class="s2">"total"</span><span class="p">:</span><span class="w"> </span><span class="mi">1230</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"positive"</span><span class="p">:</span><span class="w"> </span><span class="mi">1047</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"negative"</span><span class="p">:</span><span class="w"> </span><span class="mi">183</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"weighted"</span><span class="p">:</span><span class="w"> </span><span class="mf">87.38</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"percentage"</span><span class="p">:</span><span class="w"> </span><span class="mi">91</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"text"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Very Positive"</span><span class="w">
+  </span><span class="p">}</span><span class="w">
 </span><span class="p">}</span><span class="w">
 </span></code></pre>
 <aside class="warning">
@@ -3135,7 +3221,7 @@ Accept: application/json
 <span class="n">in</span><span class="o">.</span><span class="na">close</span><span class="o">();</span>
 <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="n">response</span><span class="o">.</span><span class="na">toString</span><span class="o">());</span>
 </code></pre>
-<p><code>GET games/{game-id}/mods/{mod-id}</code></p>
+<p><code>GET /games/{game-id}/mods/{mod-id}</code></p>
 
 <p>View a single mod. Successful request will return a single <strong>mod object</strong>.</p>
 <h3 id='responses-13'>Responses</h3>
@@ -3312,7 +3398,7 @@ Content-Type: application/x-www-form-urlencoded
 <span class="n">in</span><span class="o">.</span><span class="na">close</span><span class="o">();</span>
 <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="n">response</span><span class="o">.</span><span class="na">toString</span><span class="o">());</span>
 </code></pre>
-<p><code>PUT games/{game-id}/mods/{mod-id}</code></p>
+<p><code>PUT /games/{game-id}/mods/{mod-id}</code></p>
 
 <p>Edit details for a mod. If you wanting to update the media attached to this game, including the <code>logo</code> field - you need to use the <a href="https://docs.mod.works/#add-mod-media">Add Mod Media</a> endpoint.</p>
 
@@ -3504,7 +3590,7 @@ Content-Type: application/x-www-form-urlencoded
 <span class="n">in</span><span class="o">.</span><span class="na">close</span><span class="o">();</span>
 <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="n">response</span><span class="o">.</span><span class="na">toString</span><span class="o">());</span>
 </code></pre>
-<p><code>DELETE games/{game-id}/mods/{mod-id}</code></p>
+<p><code>DELETE /games/{game-id}/mods/{mod-id}</code></p>
 
 <p>Delete a mod profile which will if successful will return <code>204 No Content</code>. Note this will close the mod profile which means it cannot be viewed or retrieved via API requests but will still exist in-case you choose to restore it at a later date. If you believe a mod should be permanently removed please <a href="mailto:support@mod.works">contact us</a>. <br /><br />Access Token <strong>must</strong> be present in <code>Authorization</code> header.</p>
 <h3 id='responses-15'>Responses</h3>
@@ -3623,7 +3709,7 @@ Content-Type: multipart/form-data
 <span class="n">in</span><span class="o">.</span><span class="na">close</span><span class="o">();</span>
 <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="n">response</span><span class="o">.</span><span class="na">toString</span><span class="o">());</span>
 </code></pre>
-<p><code>POST games/{game-id}/mods/{mod-id}/media</code></p>
+<p><code>POST /games/{game-id}/mods/{mod-id}/media</code></p>
 
 <p>This endpoint is very flexible and will process any images posted to the endpoint regardless of their body name providing it is a valid image. The request <code>Content-Type</code> <strong>must</strong> be <code>multipart/form-data</code> to submit image files.</p>
 
@@ -3791,7 +3877,7 @@ Content-Type: application/x-www-form-urlencoded
 <span class="n">in</span><span class="o">.</span><span class="na">close</span><span class="o">();</span>
 <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="n">response</span><span class="o">.</span><span class="na">toString</span><span class="o">());</span>
 </code></pre>
-<p><code>DELETE games/{game-id}/mods/{mod-id}/media</code></p>
+<p><code>DELETE /games/{game-id}/mods/{mod-id}/media</code></p>
 
 <p>Delete images, sketchfab or youtube links from a mod profile which if successful will return <code>204 No Content</code>. This endpoint allows you to delete images as well as YouTube &amp; Sketchfab links.</p>
 
@@ -3929,7 +4015,7 @@ Accept: application/json
 <span class="n">in</span><span class="o">.</span><span class="na">close</span><span class="o">();</span>
 <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="n">response</span><span class="o">.</span><span class="na">toString</span><span class="o">());</span>
 </code></pre>
-<p><code>GET games/{game-id}/mods/{mod-id}/activity</code></p>
+<p><code>GET /games/{game-id}/mods/{mod-id}/activity</code></p>
 
 <p>View activity for a mod, showing changes made to the resource. Successful request will return an <strong>array of activity objects</strong>. To make your requests as specific to your needs as possible it&#39;s highly recommended reading over our <a href="https://docs.mod.works/#filtering">filtering documentation</a> if it will help you with consuming this endpoint.</p>
 
@@ -4085,7 +4171,7 @@ Accept: application/json
 <span class="n">in</span><span class="o">.</span><span class="na">close</span><span class="o">();</span>
 <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="n">response</span><span class="o">.</span><span class="na">toString</span><span class="o">());</span>
 </code></pre>
-<p><code>GET games/{game-id}/mods/{mod-id}/files</code></p>
+<p><code>GET /games/{game-id}/mods/{mod-id}/files</code></p>
 
 <p>Browse files that are published for the corresponding mod. Successful request will return an <strong>array of file objects</strong>. To make your requests as specific to your needs as possible it&#39;s highly recommended reading over our <a href="https://docs.mod.works/#filtering">filtering documentation</a> if it will help you with consuming this endpoint.</p>
 
@@ -4305,7 +4391,7 @@ Content-Type: multipart/form-data
 <span class="n">in</span><span class="o">.</span><span class="na">close</span><span class="o">();</span>
 <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="n">response</span><span class="o">.</span><span class="na">toString</span><span class="o">());</span>
 </code></pre>
-<p><code>POST games/{game-id}/mods/{mod-id}/files</code></p>
+<p><code>POST /games/{game-id}/mods/{mod-id}/files</code></p>
 
 <p>Upload a file to a mod. Ensure that the release you are uploading is stable and free from any critical issues. Files are scanned upon upload, any users who upload malicious files will be have their accounts closed promptly. <br><br><em>Note:</em> This endpoint does <em>not support</em> <code>input_json</code> even if you base64-encode your file method due to the already-large file sizes of some releases and base64-encoding inflating the filesize.</p>
 
@@ -4379,8 +4465,20 @@ Content-Type: multipart/form-data
 <p>Example responses</p>
 </blockquote>
 <pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
-  </span><span class="s2">"code"</span><span class="p">:</span><span class="w"> </span><span class="mi">201</span><span class="p">,</span><span class="w">
-  </span><span class="s2">"message"</span><span class="p">:</span><span class="w"> </span><span class="s2">"You have successfully uploaded a new build to the specified repository."</span><span class="w">
+  </span><span class="s2">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"mod"</span><span class="p">:</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"member"</span><span class="p">:</span><span class="w"> </span><span class="mi">38</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"date"</span><span class="p">:</span><span class="w"> </span><span class="mi">1499841487</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"datevirus"</span><span class="p">:</span><span class="w"> </span><span class="mi">1499841487</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"virusstatus"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"viruspositive"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"filesize"</span><span class="p">:</span><span class="w"> </span><span class="mi">15181</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"filehash"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2d4a0e2d7273db6b0a94b0740a88ad0d"</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"filename"</span><span class="p">:</span><span class="w"> </span><span class="s2">"rogue-knight-v1.zip"</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"version"</span><span class="p">:</span><span class="w"> </span><span class="s2">"1.3"</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"virustotal"</span><span class="p">:</span><span class="w"> </span><span class="s2">"No threats found."</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"changelog"</span><span class="p">:</span><span class="w"> </span><span class="s2">"VERSION 1.3 -- Changes -- Fixed critical castle floor bug."</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"download"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://mod.works/mods/file/2/c489a0354111a4d76640d47f0cdcb294"</span><span class="w">
 </span><span class="p">}</span><span class="w">
 </span></code></pre>
 <aside class="warning">
@@ -4468,7 +4566,7 @@ Accept: application/json
 <span class="n">in</span><span class="o">.</span><span class="na">close</span><span class="o">();</span>
 <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="n">response</span><span class="o">.</span><span class="na">toString</span><span class="o">());</span>
 </code></pre>
-<p><code>GET games/{game-id}/mods/{mod-id}/files/{file-id}</code></p>
+<p><code>GET /games/{game-id}/mods/{mod-id}/files/{file-id}</code></p>
 
 <p>Find a file for the corresponding mod. Successful request will return a <strong>file object</strong>.</p>
 <h3 id='responses-21'>Responses</h3>
@@ -4602,7 +4700,7 @@ Content-Type: application/x-www-form-urlencoded
 <span class="n">in</span><span class="o">.</span><span class="na">close</span><span class="o">();</span>
 <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="n">response</span><span class="o">.</span><span class="na">toString</span><span class="o">());</span>
 </code></pre>
-<p><code>PUT games/{game-id}/mods/{mod-id}/files/{file-id}</code></p>
+<p><code>PUT /games/{game-id}/mods/{mod-id}/files/{file-id}</code></p>
 
 <p>Update the details for a published file on mod.works. If you are wanting to update fields other than changelog, you should be creating a new file instead.</p>
 
@@ -4735,7 +4833,7 @@ Accept: application/json
 <span class="n">in</span><span class="o">.</span><span class="na">close</span><span class="o">();</span>
 <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="n">response</span><span class="o">.</span><span class="na">toString</span><span class="o">());</span>
 </code></pre>
-<p><code>GET games/{game-id}/mods/{mod-id}/tags</code></p>
+<p><code>GET /games/{game-id}/mods/{mod-id}/tags</code></p>
 
 <p>View all tags for the specified mod, successful response will return an  <strong>array of tag objects</strong>. To make your requests as specific to your needs as possible it&#39;s highly recommended reading over our <a href="https://docs.mod.works/#filtering">filtering documentation</a> if it will help you with consuming this endpoint.</p>
 
@@ -4901,7 +4999,7 @@ Content-Type: application/x-www-form-urlencoded
 <span class="n">in</span><span class="o">.</span><span class="na">close</span><span class="o">();</span>
 <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="n">response</span><span class="o">.</span><span class="na">toString</span><span class="o">());</span>
 </code></pre>
-<p><code>POST games/{game-id}/mods/{mod-id}/tags</code></p>
+<p><code>POST /games/{game-id}/mods/{mod-id}/tags</code></p>
 
 <p>Add tags to a mod&#39;s profile. Note that you can only add what tags are allowed by the parent game. To determine what game tags are allowed view the <code>cats</code> (categories) column on the parent game object.</p>
 
@@ -5041,7 +5139,7 @@ Content-Type: application/x-www-form-urlencoded
 <span class="n">in</span><span class="o">.</span><span class="na">close</span><span class="o">();</span>
 <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="n">response</span><span class="o">.</span><span class="na">toString</span><span class="o">());</span>
 </code></pre>
-<p><code>DELETE games/{game-id}/mods/{mod-id}/tags</code></p>
+<p><code>DELETE /games/{game-id}/mods/{mod-id}/tags</code></p>
 
 <p>Delete one or more tags for a mod profile. Deleting tags is identical to adding tags except the request method is <code>DELETE</code> instead of <code>POST</code>. To delete tags supply an array which contains one or more strings which are identical to the tags you want to remove.</p>
 
@@ -5176,7 +5274,7 @@ Content-Type: application/x-www-form-urlencoded
 <span class="n">in</span><span class="o">.</span><span class="na">close</span><span class="o">();</span>
 <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="n">response</span><span class="o">.</span><span class="na">toString</span><span class="o">());</span>
 </code></pre>
-<p><code>POST games/{game-id}/mods/{mod-id}/ratings</code></p>
+<p><code>POST /games/{game-id}/mods/{mod-id}/ratings</code></p>
 
 <p>Submit a positive or negative rating for a mod, equivalent of thumps up and thumps down. You can only supply one rating for a mod, subsequent ratings will simply reverse your old ratings and apply your most recent rating.</p>
 
@@ -5303,7 +5401,7 @@ Accept: application/json
 <span class="n">in</span><span class="o">.</span><span class="na">close</span><span class="o">();</span>
 <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="n">response</span><span class="o">.</span><span class="na">toString</span><span class="o">());</span>
 </code></pre>
-<p><code>GET games/{game-id}/mods/{mod-id}/comments</code></p>
+<p><code>GET /games/{game-id}/mods/{mod-id}/comments</code></p>
 
 <p>Browse all comments for a mod. Successful request will return an <strong>array of comment objects</strong>. To make your requests as specific to your needs as possible it&#39;s highly recommended reading over our <a href="https://docs.mod.works/#filtering">filtering documentation</a> if it will help you with consuming this endpoint.</p>
 
@@ -5482,7 +5580,7 @@ Accept: application/json
 <span class="n">in</span><span class="o">.</span><span class="na">close</span><span class="o">();</span>
 <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="n">response</span><span class="o">.</span><span class="na">toString</span><span class="o">());</span>
 </code></pre>
-<p><code>GET games/{game-id}/mods/{mod-id}/comments/{comment-id}</code></p>
+<p><code>GET /games/{game-id}/mods/{mod-id}/comments/{comment-id}</code></p>
 
 <p>Find a comment by it&#39;s unique ID. Successful request will return a <strong>comment object</strong>.</p>
 <h3 id='responses-28'>Responses</h3>
@@ -5611,7 +5709,7 @@ Content-Type: application/x-www-form-urlencoded
 <span class="n">in</span><span class="o">.</span><span class="na">close</span><span class="o">();</span>
 <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="n">response</span><span class="o">.</span><span class="na">toString</span><span class="o">());</span>
 </code></pre>
-<p><code>DELETE games/{game-id}/mods/{mod-id}/comments/{comment-id}</code></p>
+<p><code>DELETE /games/{game-id}/mods/{mod-id}/comments/{comment-id}</code></p>
 
 <p>Delete a comment from a mod profile.</p>
 <h3 id='responses-29'>Responses</h3>
@@ -5719,7 +5817,7 @@ Accept: application/json
 <span class="n">in</span><span class="o">.</span><span class="na">close</span><span class="o">();</span>
 <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="n">response</span><span class="o">.</span><span class="na">toString</span><span class="o">());</span>
 </code></pre>
-<p><code>GET games/{game-id}/mods/{mod-id}/team</code></p>
+<p><code>GET /games/{game-id}/mods/{mod-id}/team</code></p>
 
 <p>View all members that are part of a mod team. Successful request will return an <strong>array of access objects</strong>. To make your requests as specific to your needs as possible it&#39;s highly recommended reading over our <a href="https://docs.mod.works/#filtering">filtering documentation</a> if it will help you with consuming this endpoint.</p>
 <h3 id='responses-30'>Responses</h3>
@@ -5852,7 +5950,7 @@ Content-Type: application/x-www-form-urlencoded
 <span class="n">in</span><span class="o">.</span><span class="na">close</span><span class="o">();</span>
 <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="n">response</span><span class="o">.</span><span class="na">toString</span><span class="o">());</span>
 </code></pre>
-<p><code>POST games/{game-id}/mods/{mod-id}/team</code></p>
+<p><code>POST /games/{game-id}/mods/{mod-id}/team</code></p>
 
 <p>Add a member to a mod team.</p>
 
@@ -6002,7 +6100,7 @@ Content-Type: application/x-www-form-urlencoded
 <span class="n">in</span><span class="o">.</span><span class="na">close</span><span class="o">();</span>
 <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="n">response</span><span class="o">.</span><span class="na">toString</span><span class="o">());</span>
 </code></pre>
-<p><code>PUT games/{game-id}/mods/{mod-id}/team/{access-id}</code></p>
+<p><code>PUT /games/{game-id}/mods/{mod-id}/team/{access-id}</code></p>
 
 <p>Update the details of a member who is currently a part of the specified mod team.</p>
 
@@ -6146,7 +6244,7 @@ Content-Type: application/x-www-form-urlencoded
 <span class="n">in</span><span class="o">.</span><span class="na">close</span><span class="o">();</span>
 <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="n">response</span><span class="o">.</span><span class="na">toString</span><span class="o">());</span>
 </code></pre>
-<p><code>DELETE games/{game-id}/mods/{mod-id}/team/{access-id}</code></p>
+<p><code>DELETE /games/{game-id}/mods/{mod-id}/team/{access-id}</code></p>
 
 <p>Remove a member from a mod team. This will revoke their access rights if they are not the original creator of the resource.</p>
 <h3 id='responses-33'>Responses</h3>
@@ -6254,7 +6352,7 @@ Accept: application/json
 <span class="n">in</span><span class="o">.</span><span class="na">close</span><span class="o">();</span>
 <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="n">response</span><span class="o">.</span><span class="na">toString</span><span class="o">());</span>
 </code></pre>
-<p><code>GET users</code></p>
+<p><code>GET /users</code></p>
 
 <p>Browse users registered to mod.works. Successful request will return an <strong>array of user objects</strong>. To make your requests as specific to your needs as possible it&#39;s highly recommended reading over our <a href="https://docs.mod.works/#filtering">filtering documentation</a> if it will help you with consuming this endpoint.</p>
 
@@ -6419,7 +6517,7 @@ Accept: application/json
 <span class="n">in</span><span class="o">.</span><span class="na">close</span><span class="o">();</span>
 <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="n">response</span><span class="o">.</span><span class="na">toString</span><span class="o">());</span>
 </code></pre>
-<p><code>GET users/{user-id}</code></p>
+<p><code>GET /users/{user-id}</code></p>
 
 <p>Find a user by their unique member id. Successful request will return a single <strong>user object</strong>.</p>
 <h3 id='responses-35'>Responses</h3>
@@ -6549,7 +6647,7 @@ Content-Type: application/x-www-form-urlencoded
 <span class="n">in</span><span class="o">.</span><span class="na">close</span><span class="o">();</span>
 <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="n">response</span><span class="o">.</span><span class="na">toString</span><span class="o">());</span>
 </code></pre>
-<p><code>POST general/ownership</code></p>
+<p><code>POST /general/ownership</code></p>
 
 <p>Determine if a specified user has ownership rights to a resource.</p>
 
@@ -6700,7 +6798,7 @@ Content-Type: application/x-www-form-urlencoded
 <span class="n">in</span><span class="o">.</span><span class="na">close</span><span class="o">();</span>
 <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="n">response</span><span class="o">.</span><span class="na">toString</span><span class="o">());</span>
 </code></pre>
-<p><code>POST general/price</code></p>
+<p><code>POST /general/price</code></p>
 
 <p>View the price of a requested resource, if the requested resource is able to be sold. All prices returned are in <strong>USD</strong>.</p>
 
@@ -6839,7 +6937,7 @@ Authorization: Bearer YourAccessToken
 <span class="n">in</span><span class="o">.</span><span class="na">close</span><span class="o">();</span>
 <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="n">response</span><span class="o">.</span><span class="na">toString</span><span class="o">());</span>
 </code></pre>
-<p><code>GET me/games</code></p>
+<p><code>GET /me/games</code></p>
 
 <p>View all mod.works games that exist for the <em>authenticated user</em>.</p>
 <h3 id='responses-38'>Responses</h3>
@@ -7000,7 +7098,7 @@ Authorization: Bearer YourAccessToken
 <span class="n">in</span><span class="o">.</span><span class="na">close</span><span class="o">();</span>
 <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="n">response</span><span class="o">.</span><span class="na">toString</span><span class="o">());</span>
 </code></pre>
-<p><code>GET me/mods</code></p>
+<p><code>GET /me/mods</code></p>
 
 <p>View all mod.works mods that exist for the <em>authenticated user</em>.</p>
 <h3 id='responses-39'>Responses</h3>
@@ -7178,7 +7276,7 @@ Authorization: Bearer YourAccessToken
 <span class="n">in</span><span class="o">.</span><span class="na">close</span><span class="o">();</span>
 <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="n">response</span><span class="o">.</span><span class="na">toString</span><span class="o">());</span>
 </code></pre>
-<p><code>GET me/files</code></p>
+<p><code>GET /me/files</code></p>
 
 <p>View all mod.works files that exist for the <em>authenticated user</em>.</p>
 <h3 id='responses-40'>Responses</h3>
@@ -7313,7 +7411,7 @@ Authorization: Bearer YourAccessToken
 <span class="n">in</span><span class="o">.</span><span class="na">close</span><span class="o">();</span>
 <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="n">response</span><span class="o">.</span><span class="na">toString</span><span class="o">());</span>
 </code></pre>
-<p><code>GET me/updates</code></p>
+<p><code>GET /me/updates</code></p>
 
 <p>View all mod.works updates that exist for the <em>authenticated user</em>.</p>
 <h3 id='responses-41'>Responses</h3>
@@ -7446,7 +7544,7 @@ Content-Type: application/x-www-form-urlencoded
 <span class="n">in</span><span class="o">.</span><span class="na">close</span><span class="o">();</span>
 <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="n">response</span><span class="o">.</span><span class="na">toString</span><span class="o">());</span>
 </code></pre>
-<p><code>POST {resource}/{resource-id}/subscribe</code></p>
+<p><code>POST /{resource}/{resource-id}/subscribe</code></p>
 
 <p>Subscribe to a resource. Note for the parameter table below it is for <strong>path</strong> parameters, this endpoint does not accept any parameters in the body of the request.,</p>
 
@@ -7590,7 +7688,7 @@ Content-Type: application/x-www-form-urlencoded
 <span class="n">in</span><span class="o">.</span><span class="na">close</span><span class="o">();</span>
 <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="n">response</span><span class="o">.</span><span class="na">toString</span><span class="o">());</span>
 </code></pre>
-<p><code>DELETE {resource}/{resource-id}/subscribe</code></p>
+<p><code>DELETE /{resource}/{resource-id}/subscribe</code></p>
 
 <p>Un-Subscribe to the requested resource.Note for the parameter table below it is for <strong>path</strong> parameters, this endpoint does not accept any parameters in the body of the request.,</p>
 
