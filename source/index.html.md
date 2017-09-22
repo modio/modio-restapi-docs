@@ -56,16 +56,16 @@ Here is a brief list of the main things to know about our API, as explained in m
 
 Authentication to the mod.works can be done via 3 different ways:
 
-- Request an [API key (Read access only)](https://mod.works/APIkey/widget)
-- Manually create an [OAuth 2 access token (Read + Write access)](https://mod.works/oauth/widget)
-- Use of our [Email Verification flow](https://docs.mod.works/#authentication) 
+- Request an [API key (Read Access Only)](https://mod.works/APIkey/widget)
+- Manually create an [OAuth 2 Access Token (Read + Write Access)](https://mod.works/oauth/widget)
+- Use of our [Email Authentication Flow](https://docs.mod.works/#email-authentication-flow) 
 
 Which method of authentication can depend on which way you intend on consuming the mod.works API.
 
 Authentication Type | In | HTTP Methods | Abilities
 ---------- | ---------- | ---------- | ---------- 
 API Key | Query | `GET` | Read-only.
-Access Token (OAuth 2) | Header | `GET`, `POST`, `PUT`, `DELETE` | Read, Create, Update, Delete.
+Access Token (OAuth 2) | Header | `GET`, `POST`, `PUT`, `DELETE` | Read, create, update, delete.
 
 ### API Key Authentication
 
@@ -318,7 +318,7 @@ For single items, mod.works returns a __single json object__ which contains the 
 Browse responses a json object which contains a data array and a meta object:
 
 - `data` - contains all data returned from the request.
-- `meta` - contains meta data such as pagination information.
+- `meta` - contains meta data such as cursor information.
 
 ```json
 // Browse response
@@ -346,43 +346,87 @@ Browse responses a json object which contains a data array and a meta object:
 		},
 	],
 	"meta": {
-    	"pagination": {
-      		"total": 60,
-      		"count": 30,
-      		"per_page": 30,
-      		"current_page": 1,
-      		"total_pages": 48,
-      		"links": {
-        		"previous": "https://api.mod.works/v1/games/2/?_limit=30&page=2",
-        		"next": "https://api.mod.works/v1/games/2/?_limit=30&page=4"
-      		}
+    	"cursor": {
+      		"current": null,
+      		"prev": null,
+      		"next": 165,
+      		"count": 100,
     	}
   	}
 }  
 ```
 
-### Browse Pagination
+## Cursors and Offsets
 
-The meta object which contains pagination information is automatically appended to any request that contains more than one result.
+When requesting data from endpoints that contain more than one object, there are two parameters that you can supply that will allow you to page through results with ease, they are `_cursor` and `_offset`. There are two important differences in how each parameter works, depending on what you are aiming to retrieve you would choose to use one or the other.
+
+### Cursor
+
+```
+v1/games/2/mods/2/files?_cursor=600
+```
+
+When using a cursor, you are able to specify where you want to _start_ looking for results by the value of the `id` column. Let's assume you want to get all files on mod.works that contain an id larger than 600. You could use the following:
+
+- `?_cursor=600` - Only returns fields that have a larger `id` than 600, that is we want to start looing from the specified number onwards. 
+
+### Prev (Cursors only)
+
+When using cursors you can optionally choose to provide the `_prev` parameter which is meant to be the previous cursor you used. Let's assume you that you just used the above search filter and you wish to keep track of your previous `_cursor` value whilst using a new value which will be shown in the meta object. You would apply it like so:
+
+```
+v1/games/2/mods/2/files?_cursor=400&_prev=600
+```
+
+- `?_cursor=400&_prev=600` - Move the cursor to all records with a larger `id` than 400, but save that our previous cursor location was 400.
+
+Note that the `_prev` parameter is arbitary information for your own implementations and does not affect the outcome of the query other than the value being appended to the meta object shown below.
+
+### Offset
+
+```
+v1/games?_offset=30
+```
+
+While a cursor starts from the value of the `id` column, the `_offset` will simply skip over the specified amount of results, regardless of what data they contain. This works the same way offset in an SQL query. Let's now assume you want to get all mods from mod.works but ignore the first 30 results.
+
+- `?_offset=30` - Will retrieve all results after ignoring the first 30.
+
+As cursors and offsets are mutually exclusive, you should choose one or the other - if you do supply both the __cursor__ will take priority.
+
+### Combining a cursor/offset with a limit
+
+```
+v1/games/2/mods/2/files?_cursor=5&_prev=5&_limit=10
+```
+
+Once you are up and running using either cursors or an offset you can then combine it with other filter functions such `_limit` & `_sort` to build powerful queries to enable you to be as precise or as free as you wish. 
+
+### Cursor meta object
+
+Appended to each request with more than one result is the meta object, that will always appear regardless of you utilize a cursor/offset or not. This is what each value within the object means:
 
 ```json
 // Meta object example
 {
 	"meta": {
-		"pagination": {
-			"total": 60,
-			"count": 30,
-			"per_page": 30,
-			"current_page": 1,
-			"total_pages": 48,
-			"links": {
-				"previous": "https://api.mod.works/v1/games/2/?_limit=30&page=2",
-				"next": "https://api.mod.works/v1/games/2/?_limit=30&page=4"
-			}
-		}
+    	"cursor": {
+      		"current": null,
+      		"prev": null,
+      		"next": 165,
+      		"count": 100,
+    	}
+  	}
 	}
 }
 ```
+
+Parameter | Value
+---------- | ----------  
+`current` | The current `_cursor` value.
+`prev` | The previous `_cursor` value as manually inserted by you, _null_ by default.
+`next` | The next position to move the `_cursor` to based on the current request.
+`count` | The amount of results returned in the current request.
 
 ## Filtering
 
@@ -421,16 +465,6 @@ v1/games?_limit=5
 Limit the number of results for a request.
 
  - `?_limit=5` - Limit the request to 5 individual results. 
-
-### _offset (Offset)
-
-```
-v1/games?_offset=5
-```
-
-Exclude the first n amount of records.
-
-- `?_offset=5` - Exclude the first 5 results of the request.
 
 ### _q (Full text search)
 
@@ -2027,7 +2061,7 @@ Submit a report for any resource on mod.works.
      
      Parameter|Type|Required|Description
      ---|---|---|---|
-     resource|string|true|The name of the resource type you are submitting a report for __must__ be one of the following strings: games, mods, files, news, guides, tags, users.
+     resource|string|true|The name of the resource type you are submitting a report for __must__ be one of the following strings: games, mods, files, tags, users.
      id|integer|true|Unique Id of the resource item you are reporting.
      dmca|boolean|true|Is this a DMCA takedown request?
      name|string|true|Descriptive and informative title for your report.
@@ -5846,7 +5880,7 @@ Determine if a specified user has ownership rights to a resource.
      
      Parameter|Type|Required|Description
      ---|---|---|---|
-     resource|string|true|The name of the resource type you are checking against a member - __must__ be one of the following strings: games, mods, files, news, guides, tags, users.
+     resource|string|true|The name of the resource type you are checking against a member - __must__ be one of the following strings: games, mods, files, tags, users.
      id|integer|true|Unique Id of the resource to check access rights for.
      member|integer|true|Unique Id of the member you are determining has access to the resource id.
 
@@ -5987,7 +6021,7 @@ View the price of a requested resource, if the requested resource is able to be 
      
      Parameter|Type|Required|Description
      ---|---|---|---|
-     resource|string|true|The name of the resource type you are checking a price for - __must__ be one of the following strings: games, mods, files, news, guides, tags, users.
+     resource|string|true|The name of the resource type you are checking a price for - __must__ be one of the following strings: games, mods, files, tags, users.
      id|integer|true|Unique Id of the resource that contains the price.
 
 ### Responses
@@ -6780,7 +6814,7 @@ Subscribe to a resource. Note for the parameter table below it is for __path__ p
      
      Path Parameter|Type|Required|Description
      ---|---|---|---|
-     resource|string|true|The name of the resource you want to subscribe to - __must__ be one of the following strings: games, mods, files, news, guides, tags, users.
+     resource|string|true|The name of the resource you want to subscribe to - __must__ be one of the following strings: games, mods, files, tags, users.
      id|integer|true|Unique Id of the resource you are subscribing to.
 
 ### Responses
@@ -6919,7 +6953,7 @@ Un-Subscribe to the requested resource.Note for the parameter table below it is 
      
      Path Parameter|Type|Required|Description
      ---|---|---|---|
-     resource|string|true|The name of the resource type you are un-subscribing to - __must__ be one of the following strings: games, mods, files, news, guides, tags, users.
+     resource|string|true|The name of the resource type you are un-subscribing to - __must__ be one of the following strings: games, mods, files, tags, users.
      id|integer|true|Unique Id of the resource you want to un-subscribe to.
 
 ### Responses
