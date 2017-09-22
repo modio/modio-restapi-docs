@@ -279,6 +279,9 @@
                     <a href="#response-formats" class="toc-h2 toc-link" data-title="Getting Started">Response Formats</a>
                   </li>
                   <li>
+                    <a href="#cursors-and-offsets" class="toc-h2 toc-link" data-title="Getting Started">Cursors and Offsets</a>
+                  </li>
+                  <li>
                     <a href="#filtering" class="toc-h2 toc-link" data-title="Getting Started">Filtering</a>
                   </li>
                   <li>
@@ -513,9 +516,9 @@
 <p>Authentication to the mod.works can be done via 3 different ways:</p>
 
 <ul>
-<li>Request an <a href="https://mod.works/APIkey/widget">API key (Read access only)</a></li>
-<li>Manually create an <a href="https://mod.works/oauth/widget">OAuth 2 access token (Read + Write access)</a></li>
-<li>Use of our <a href="https://docs.mod.works/#authentication">Email Verification flow</a> </li>
+<li>Request an <a href="https://mod.works/APIkey/widget">API key (Read Access Only)</a></li>
+<li>Manually create an <a href="https://mod.works/oauth/widget">OAuth 2 Access Token (Read + Write Access)</a></li>
+<li>Use of our <a href="https://docs.mod.works/#email-authentication-flow">Email Authentication Flow</a> </li>
 </ul>
 
 <p>Which method of authentication can depend on which way you intend on consuming the mod.works API.</p>
@@ -538,7 +541,7 @@
 <td>Access Token (OAuth 2)</td>
 <td>Header</td>
 <td><code>GET</code>, <code>POST</code>, <code>PUT</code>, <code>DELETE</code></td>
-<td>Read, Create, Update, Delete.</td>
+<td>Read, create, update, delete.</td>
 </tr>
 </tbody></table>
 <h3 id='api-key-authentication'>API Key Authentication</h3><h4 id='generating-your-api-key'>Generating your API key</h4>
@@ -827,7 +830,7 @@ curl -X post https://api.mod.works/v1/games/1/team <span class="se">\</span>
 
 <ul>
 <li><code>data</code> - contains all data returned from the request.</li>
-<li><code>meta</code> - contains meta data such as pagination information.</li>
+<li><code>meta</code> - contains meta data such as cursor information.</li>
 </ul>
 <pre class="highlight json tab-json"><code><span class="err">//</span><span class="w"> </span><span class="err">Browse</span><span class="w"> </span><span class="err">response</span><span class="w">
 
@@ -854,38 +857,83 @@ curl -X post https://api.mod.works/v1/games/1/team <span class="se">\</span>
         </span><span class="p">},</span><span class="w">
     </span><span class="p">],</span><span class="w">
     </span><span class="s2">"meta"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-        </span><span class="s2">"pagination"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-            </span><span class="s2">"total"</span><span class="p">:</span><span class="w"> </span><span class="mi">60</span><span class="p">,</span><span class="w">
-            </span><span class="s2">"count"</span><span class="p">:</span><span class="w"> </span><span class="mi">30</span><span class="p">,</span><span class="w">
-            </span><span class="s2">"per_page"</span><span class="p">:</span><span class="w"> </span><span class="mi">30</span><span class="p">,</span><span class="w">
-            </span><span class="s2">"current_page"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
-            </span><span class="s2">"total_pages"</span><span class="p">:</span><span class="w"> </span><span class="mi">48</span><span class="p">,</span><span class="w">
-            </span><span class="s2">"links"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-                </span><span class="s2">"previous"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://api.mod.works/v1/games/2/?_limit=30&amp;page=2"</span><span class="p">,</span><span class="w">
-                </span><span class="s2">"next"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://api.mod.works/v1/games/2/?_limit=30&amp;page=4"</span><span class="w">
-            </span><span class="p">}</span><span class="w">
+        </span><span class="s2">"cursor"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+            </span><span class="s2">"current"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"prev"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"next"</span><span class="p">:</span><span class="w"> </span><span class="mi">165</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"count"</span><span class="p">:</span><span class="w"> </span><span class="mi">100</span><span class="p">,</span><span class="w">
         </span><span class="p">}</span><span class="w">
     </span><span class="p">}</span><span class="w">
 </span><span class="p">}</span><span class="w">  
-</span></code></pre><h3 id='browse-pagination'>Browse Pagination</h3>
-<p>The meta object which contains pagination information is automatically appended to any request that contains more than one result.</p>
+</span></code></pre><h2 id='cursors-and-offsets'>Cursors and Offsets</h2>
+<p>When requesting data from endpoints that contain more than one object, there are two parameters that you can supply that will allow you to page through results with ease, they are <code>_cursor</code> and <code>_offset</code>. There are two important differences in how each parameter works, depending on what you are aiming to retrieve you would choose to use one or the other.</p>
+<h3 id='cursor'>Cursor</h3><pre class="highlight plaintext"><code>v1/games/2/mods/2/files?_cursor=600
+</code></pre>
+<p>When using a cursor, you are able to specify where you want to <em>start</em> looking for results by the value of the <code>id</code> column. Let&#39;s assume you want to get all files on mod.works that contain an id larger than 600. You could use the following:</p>
+
+<ul>
+<li><code>?_cursor=600</code> - Only returns fields that have a larger <code>id</code> than 600, that is we want to start looing from the specified number onwards. </li>
+</ul>
+<h3 id='prev-cursors-only'>Prev (Cursors only)</h3>
+<p>When using cursors you can optionally choose to provide the <code>_prev</code> parameter which is meant to be the previous cursor you used. Let&#39;s assume you that you just used the above search filter and you wish to keep track of your previous <code>_cursor</code> value whilst using a new value which will be shown in the meta object. You would apply it like so:</p>
+<pre class="highlight plaintext"><code>v1/games/2/mods/2/files?_cursor=400&amp;_prev=600
+</code></pre>
+<ul>
+<li><code>?_cursor=400&amp;_prev=600</code> - Move the cursor to all records with a larger <code>id</code> than 400, but save that our previous cursor location was 400.</li>
+</ul>
+
+<p>Note that the <code>_prev</code> parameter is arbitary information for your own implementations and does not affect the outcome of the query other than the value being appended to the meta object shown below.</p>
+<h3 id='offset'>Offset</h3><pre class="highlight plaintext"><code>v1/games?_offset=30
+</code></pre>
+<p>While a cursor starts from the value of the <code>id</code> column, the <code>_offset</code> will simply skip over the specified amount of results, regardless of what data they contain. This works the same way offset in an SQL query. Let&#39;s now assume you want to get all mods from mod.works but ignore the first 30 results.</p>
+
+<ul>
+<li><code>?_offset=30</code> - Will retrieve all results after ignoring the first 30.</li>
+</ul>
+
+<p>As cursors and offsets are mutually exclusive, you should choose one or the other - if you do supply both the <strong>cursor</strong> will take priority.</p>
+<h3 id='combining-a-cursor-offset-with-a-limit'>Combining a cursor/offset with a limit</h3><pre class="highlight plaintext"><code>v1/games/2/mods/2/files?_cursor=5&amp;_prev=5&amp;_limit=10
+</code></pre>
+<p>Once you are up and running using either cursors or an offset you can then combine it with other filter functions such <code>_limit</code> &amp; <code>_sort</code> to build powerful queries to enable you to be as precise or as free as you wish. </p>
+<h3 id='cursor-meta-object'>Cursor meta object</h3>
+<p>Appended to each request with more than one result is the meta object, that will always appear regardless of you utilize a cursor/offset or not. This is what each value within the object means:</p>
 <pre class="highlight json tab-json"><code><span class="err">//</span><span class="w"> </span><span class="err">Meta</span><span class="w"> </span><span class="err">object</span><span class="w"> </span><span class="err">example</span><span class="w">
 </span><span class="p">{</span><span class="w">
     </span><span class="s2">"meta"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-        </span><span class="s2">"pagination"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-            </span><span class="s2">"total"</span><span class="p">:</span><span class="w"> </span><span class="mi">60</span><span class="p">,</span><span class="w">
-            </span><span class="s2">"count"</span><span class="p">:</span><span class="w"> </span><span class="mi">30</span><span class="p">,</span><span class="w">
-            </span><span class="s2">"per_page"</span><span class="p">:</span><span class="w"> </span><span class="mi">30</span><span class="p">,</span><span class="w">
-            </span><span class="s2">"current_page"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
-            </span><span class="s2">"total_pages"</span><span class="p">:</span><span class="w"> </span><span class="mi">48</span><span class="p">,</span><span class="w">
-            </span><span class="s2">"links"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-                </span><span class="s2">"previous"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://api.mod.works/v1/games/2/?_limit=30&amp;page=2"</span><span class="p">,</span><span class="w">
-                </span><span class="s2">"next"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://api.mod.works/v1/games/2/?_limit=30&amp;page=4"</span><span class="w">
-            </span><span class="p">}</span><span class="w">
+        </span><span class="s2">"cursor"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+            </span><span class="s2">"current"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"prev"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"next"</span><span class="p">:</span><span class="w"> </span><span class="mi">165</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"count"</span><span class="p">:</span><span class="w"> </span><span class="mi">100</span><span class="p">,</span><span class="w">
         </span><span class="p">}</span><span class="w">
     </span><span class="p">}</span><span class="w">
+    </span><span class="p">}</span><span class="w">
 </span><span class="p">}</span><span class="w">
-</span></code></pre><h2 id='filtering'>Filtering</h2>
+</span></code></pre>
+<table><thead>
+<tr>
+<th>Parameter</th>
+<th>Value</th>
+</tr>
+</thead><tbody>
+<tr>
+<td><code>current</code></td>
+<td>The current <code>_cursor</code> value.</td>
+</tr>
+<tr>
+<td><code>prev</code></td>
+<td>The previous <code>_cursor</code> value as manually inserted by you, <em>null</em> by default.</td>
+</tr>
+<tr>
+<td><code>next</code></td>
+<td>The next position to move the <code>_cursor</code> to based on the current request.</td>
+</tr>
+<tr>
+<td><code>count</code></td>
+<td>The amount of results returned in the current request.</td>
+</tr>
+</tbody></table>
+<h2 id='filtering'>Filtering</h2>
 <p>Mod.works has powerful filtering available in requests. Every field of every request can be used as a filter and the following functions are available when querying the API:</p>
 <h3 id='functions'>Functions</h3><h3 id='_fields-fields'>_fields (Fields)</h3><pre class="highlight plaintext"><code>v1/games?_fields=id,datereg,ugcname,name
 </code></pre>
@@ -908,13 +956,6 @@ curl -X post https://api.mod.works/v1/games/1/team <span class="se">\</span>
 
 <ul>
 <li><code>?_limit=5</code> - Limit the request to 5 individual results. </li>
-</ul>
-<h3 id='_offset-offset'>_offset (Offset)</h3><pre class="highlight plaintext"><code>v1/games?_offset=5
-</code></pre>
-<p>Exclude the first n amount of records.</p>
-
-<ul>
-<li><code>?_offset=5</code> - Exclude the first 5 results of the request.</li>
 </ul>
 <h3 id='_q-full-text-search'>_q (Full text search)</h3><pre class="highlight plaintext"><code>v1/games/1?_q=The Lord Of The Rings
 </code></pre>
@@ -2574,7 +2615,7 @@ Content-Type: application/x-www-form-urlencoded
 <td>resource</td>
 <td>string</td>
 <td>true</td>
-<td>The name of the resource type you are submitting a report for <strong>must</strong> be one of the following strings: games, mods, files, news, guides, tags, users.</td>
+<td>The name of the resource type you are submitting a report for <strong>must</strong> be one of the following strings: games, mods, files, tags, users.</td>
 </tr>
 <tr>
 <td>id</td>
@@ -6663,7 +6704,7 @@ Content-Type: application/x-www-form-urlencoded
 <td>resource</td>
 <td>string</td>
 <td>true</td>
-<td>The name of the resource type you are checking against a member - <strong>must</strong> be one of the following strings: games, mods, files, news, guides, tags, users.</td>
+<td>The name of the resource type you are checking against a member - <strong>must</strong> be one of the following strings: games, mods, files, tags, users.</td>
 </tr>
 <tr>
 <td>id</td>
@@ -6814,7 +6855,7 @@ Content-Type: application/x-www-form-urlencoded
 <td>resource</td>
 <td>string</td>
 <td>true</td>
-<td>The name of the resource type you are checking a price for - <strong>must</strong> be one of the following strings: games, mods, files, news, guides, tags, users.</td>
+<td>The name of the resource type you are checking a price for - <strong>must</strong> be one of the following strings: games, mods, files, tags, users.</td>
 </tr>
 <tr>
 <td>id</td>
@@ -7560,7 +7601,7 @@ Content-Type: application/x-www-form-urlencoded
 <td>resource</td>
 <td>string</td>
 <td>true</td>
-<td>The name of the resource you want to subscribe to - <strong>must</strong> be one of the following strings: games, mods, files, news, guides, tags, users.</td>
+<td>The name of the resource you want to subscribe to - <strong>must</strong> be one of the following strings: games, mods, files, tags, users.</td>
 </tr>
 <tr>
 <td>id</td>
@@ -7704,7 +7745,7 @@ Content-Type: application/x-www-form-urlencoded
 <td>resource</td>
 <td>string</td>
 <td>true</td>
-<td>The name of the resource type you are un-subscribing to - <strong>must</strong> be one of the following strings: games, mods, files, news, guides, tags, users.</td>
+<td>The name of the resource type you are un-subscribing to - <strong>must</strong> be one of the following strings: games, mods, files, tags, users.</td>
 </tr>
 <tr>
 <td>id</td>
