@@ -1650,7 +1650,7 @@ Add a member to a game team.
      Parameter|Type|Required|Description
      ---|---|---|---|
      member|integer|true|The unique id of the member you are adding to the team.
-     level|integer|true|The level of permissions you want to give to the user.<br><br>*Fields Options:*<br>__1__ = Moderator (can moderate comments and content attached)<br>__4__ = Creator (can upload builds and edit all settings except supply and existing team members)<br>__8__ = Administrator (full access, including editing the supply and team)
+     level|integer|true|The level of permissions you want to give to the user.<br><br>*Fields Options:*<br>__1__ = Moderator (can moderate content submitted)<br>__4__ = Financials (read only access to the control panel to view financial reports)<br>__8__ = Administrator (full access, including editing the profile and team)
      position|string|true|The title you wish to apply to the member within your team.
 
 ### Responses
@@ -1789,7 +1789,7 @@ Update the details of a member who is currently a part of the specified game tea
      
      Parameter|Type|Required|Description
      ---|---|---|---|
-     level|integer||The level of permissions you want to give to the user.<br><br>*Fields Options:*<br>__0__ = Guest<br>__1__ = Member (can moderate comments and content attached) <br>__2__ = Contributor<br>__4__ = Manager (can upload builds and edit all settings except supply)<br>__8__ = Leader (full access, including editing the supply and team)
+     level|integer||The level of permissions you want to give to the user.<br><br>*Fields Options:*<br>__1__ = Moderator (can moderate content submitted)<br>__4__ = Financials (read only access to the control panel to view financial reports)<br>__8__ = Administrator (full access, including editing the profile and team)
      position|string||The title you wish to apply to the member within your team.
 
 ### Responses
@@ -2207,6 +2207,7 @@ Browse mods. Successful request will return an __array of mod objects__. To make
      metadata|string|Comma-separated list of metadata words.
      modfile|integer|Unique id of the __file__ object marked as current release.
      price|double|Numeric representation of the price.
+     status|string| _OAuth2 only_. The status of the mod (only recognised by game admins), _default is 'auth'_.<br><br>*Fields Options:*<br>__unauth__ = Only return un-authorized mods.<br>__auth__ = Only return authorized mods _(default)_.<br>__ban__ = Only return banned mods.<br>__archive__ = Only return archived content (out of date builds).<br>__delete__ = Only return deleted mods.
 
 ### Responses
 
