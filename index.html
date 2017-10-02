@@ -2208,7 +2208,7 @@ Content-Type: application/x-www-form-urlencoded
 <td>level</td>
 <td>integer</td>
 <td>true</td>
-<td>The level of permissions you want to give to the user.<br><br><em>Fields Options:</em><br><strong>1</strong> = Moderator (can moderate comments and content attached)<br><strong>4</strong> = Creator (can upload builds and edit all settings except supply and existing team members)<br><strong>8</strong> = Administrator (full access, including editing the supply and team)</td>
+<td>The level of permissions you want to give to the user.<br><br><em>Fields Options:</em><br><strong>1</strong> = Moderator (can moderate content submitted)<br><strong>4</strong> = Financials (read only access to the control panel to view financial reports)<br><strong>8</strong> = Administrator (full access, including editing the profile and team)</td>
 </tr>
 <tr>
 <td>position</td>
@@ -2352,7 +2352,7 @@ Content-Type: application/x-www-form-urlencoded
 <td>level</td>
 <td>integer</td>
 <td></td>
-<td>The level of permissions you want to give to the user.<br><br><em>Fields Options:</em><br><strong>0</strong> = Guest<br><strong>1</strong> = Member (can moderate comments and content attached) <br><strong>2</strong> = Contributor<br><strong>4</strong> = Manager (can upload builds and edit all settings except supply)<br><strong>8</strong> = Leader (full access, including editing the supply and team)</td>
+<td>The level of permissions you want to give to the user.<br><br><em>Fields Options:</em><br><strong>1</strong> = Moderator (can moderate content submitted)<br><strong>4</strong> = Financials (read only access to the control panel to view financial reports)<br><strong>8</strong> = Administrator (full access, including editing the profile and team)</td>
 </tr>
 <tr>
 <td>position</td>
@@ -2825,6 +2825,11 @@ Accept: application/json
 <td>price</td>
 <td>double</td>
 <td>Numeric representation of the price.</td>
+</tr>
+<tr>
+<td>status</td>
+<td>string</td>
+<td><em>OAuth2 only</em>. The status of the mod (only recognised by game admins), <em>default is &#39;auth&#39;</em>.<br><br><em>Fields Options:</em><br><strong>unauth</strong> = Only return un-authorized mods.<br><strong>auth</strong> = Only return authorized mods <em>(default)</em>.<br><strong>ban</strong> = Only return banned mods.<br><strong>archive</strong> = Only return archived content (out of date builds).<br><strong>delete</strong> = Only return deleted mods.</td>
 </tr>
 </tbody></table>
 <h3 id='responses-11'>Responses</h3>
