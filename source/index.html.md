@@ -763,7 +763,8 @@ Status|Meaning|Description
           "filename": "masterchief.jpg"
         },
         "timezone": "Australia/Brisbane",
-        "language": "en"
+        "language": "en",
+        "url": "https://mod.works/members/xant"
       },
       "datereg": 1493702614,
       "dateup": 1499410290,
@@ -793,6 +794,7 @@ Status|Meaning|Description
       "nameid": "rogue-knight",
       "summary": "Rogue Knight is a brand new 2D pixel platformer.",
       "instructions": "Instructions here on how to develop for your game.",
+      "url": "https://rogue-knight.mod.works",
       "cats": [
         {
           "name": "Engines",
@@ -940,7 +942,8 @@ Status|Meaning|Description
       "filename": "masterchief.jpg"
     },
     "timezone": "Australia/Brisbane",
-    "language": "en"
+    "language": "en",
+    "url": "https://mod.works/members/xant"
   },
   "datereg": 1493702614,
   "dateup": 1499410290,
@@ -970,6 +973,7 @@ Status|Meaning|Description
   "nameid": "rogue-knight",
   "summary": "Rogue Knight is a brand new 2D pixel platformer.",
   "instructions": "Instructions here on how to develop for your game.",
+  "url": "https://rogue-knight.mod.works",
   "cats": [
     {
       "name": "Engines",
@@ -1409,7 +1413,8 @@ Status|Meaning|Description
           "filename": "masterchief.jpg"
         },
         "timezone": "Australia/Brisbane",
-        "language": "en"
+        "language": "en",
+        "url": "https://mod.works/members/xant"
       },
       "dateup": 1499846132,
       "event": "GAME_UPDATE",
@@ -1558,7 +1563,8 @@ Status|Meaning|Description
           "filename": "masterchief.jpg"
         },
         "timezone": "Australia/Brisbane",
-        "language": "en"
+        "language": "en",
+        "url": "https://mod.works/members/xant"
       },
       "username": "Megalodon",
       "level": 8,
@@ -2277,7 +2283,8 @@ Status|Meaning|Description
           "filename": "masterchief.jpg"
         },
         "timezone": "Australia/Brisbane",
-        "language": "en"
+        "language": "en",
+        "url": "https://mod.works/members/xant"
       },
       "price": 9.99,
       "datereg": 1492564103,
@@ -2293,6 +2300,7 @@ Status|Meaning|Description
       "summary": "It's time to bask in the glory of beautiful 4k textures!",
       "description": "<h2>About</h2><p>Rogue HD Pack does exactly what you thi...",
       "metadata": "rogue,hd,high-res,4k,hd textures",
+      "url": "https://rogue-knight.mod.works/rogue-knight-hd-pack",
       "modfile": {
         "id": 2,
         "mod": 2,
@@ -2306,7 +2314,8 @@ Status|Meaning|Description
             "filename": "masterchief.jpg"
           },
           "timezone": "Australia/Brisbane",
-          "language": "en"
+          "language": "en",
+          "url": "https://mod.works/members/xant"
         },
         "date": 1499841487,
         "datevirus": 1499841487,
@@ -2512,7 +2521,8 @@ Status|Header|Type|Format|Description
       "filename": "masterchief.jpg"
     },
     "timezone": "Australia/Brisbane",
-    "language": "en"
+    "language": "en",
+    "url": "https://mod.works/members/xant"
   },
   "price": 9.99,
   "datereg": 1492564103,
@@ -2528,6 +2538,7 @@ Status|Header|Type|Format|Description
   "summary": "It's time to bask in the glory of beautiful 4k textures!",
   "description": "<h2>About</h2><p>Rogue HD Pack does exactly what you thi...",
   "metadata": "rogue,hd,high-res,4k,hd textures",
+  "url": "https://rogue-knight.mod.works/rogue-knight-hd-pack",
   "modfile": {
     "id": 2,
     "mod": 2,
@@ -2541,7 +2552,8 @@ Status|Header|Type|Format|Description
         "filename": "masterchief.jpg"
       },
       "timezone": "Australia/Brisbane",
-      "language": "en"
+      "language": "en",
+      "url": "https://mod.works/members/xant"
     },
     "date": 1499841487,
     "datevirus": 1499841487,
@@ -2712,7 +2724,8 @@ Status|Meaning|Description
       "filename": "masterchief.jpg"
     },
     "timezone": "Australia/Brisbane",
-    "language": "en"
+    "language": "en",
+    "url": "https://mod.works/members/xant"
   },
   "price": 9.99,
   "datereg": 1492564103,
@@ -2728,6 +2741,7 @@ Status|Meaning|Description
   "summary": "It's time to bask in the glory of beautiful 4k textures!",
   "description": "<h2>About</h2><p>Rogue HD Pack does exactly what you thi...",
   "metadata": "rogue,hd,high-res,4k,hd textures",
+  "url": "https://rogue-knight.mod.works/rogue-knight-hd-pack",
   "modfile": {
     "id": 2,
     "mod": 2,
@@ -2741,7 +2755,8 @@ Status|Meaning|Description
         "filename": "masterchief.jpg"
       },
       "timezone": "Australia/Brisbane",
-      "language": "en"
+      "language": "en",
+      "url": "https://mod.works/members/xant"
     },
     "date": 1499841487,
     "datevirus": 1499841487,
@@ -3482,7 +3497,8 @@ Status|Meaning|Description
           "filename": "masterchief.jpg"
         },
         "timezone": "Australia/Brisbane",
-        "language": "en"
+        "language": "en",
+        "url": "https://mod.works/members/xant"
       },
       "dateup": 1499846132,
       "event": "MOD_UPDATE",
@@ -3649,7 +3665,8 @@ Status|Meaning|Description
           "filename": "masterchief.jpg"
         },
         "timezone": "Australia/Brisbane",
-        "language": "en"
+        "language": "en",
+        "url": "https://mod.works/members/xant"
       },
       "date": 1499841487,
       "datevirus": 1499841487,
@@ -3824,7 +3841,8 @@ Status|Header|Type|Format|Description
       "filename": "masterchief.jpg"
     },
     "timezone": "Australia/Brisbane",
-    "language": "en"
+    "language": "en",
+    "url": "https://mod.works/members/xant"
   },
   "date": 1499841487,
   "datevirus": 1499841487,
@@ -3970,7 +3988,8 @@ Status|Meaning|Description
       "filename": "masterchief.jpg"
     },
     "timezone": "Australia/Brisbane",
-    "language": "en"
+    "language": "en",
+    "url": "https://mod.works/members/xant"
   },
   "date": 1499841487,
   "datevirus": 1499841487,
@@ -4822,7 +4841,8 @@ Status|Meaning|Description
           "filename": "masterchief.jpg"
         },
         "timezone": "Australia/Brisbane",
-        "language": "en"
+        "language": "en",
+        "url": "https://mod.works/members/xant"
       },
       "date": 1499841487,
       "replyid": 1499841487,
@@ -4968,7 +4988,8 @@ Status|Meaning|Description
       "filename": "masterchief.jpg"
     },
     "timezone": "Australia/Brisbane",
-    "language": "en"
+    "language": "en",
+    "url": "https://mod.works/members/xant"
   },
   "date": 1499841487,
   "replyid": 1499841487,
@@ -5241,7 +5262,8 @@ Status|Meaning|Description
           "filename": "masterchief.jpg"
         },
         "timezone": "Australia/Brisbane",
-        "language": "en"
+        "language": "en",
+        "url": "https://mod.works/members/xant"
       },
       "username": "Megalodon",
       "level": 8,
@@ -5805,7 +5827,8 @@ Status|Meaning|Description
         "filename": "masterchief.jpg"
       },
       "timezone": "Australia/Brisbane",
-      "language": "en"
+      "language": "en",
+      "url": "https://mod.works/members/xant"
     },
     {
         ...
@@ -5941,7 +5964,8 @@ Status|Meaning|Description
     "filename": "masterchief.jpg"
   },
   "timezone": "Australia/Brisbane",
-  "language": "en"
+  "language": "en",
+  "url": "https://mod.works/members/xant"
 }
 ```
 <aside class="warning">
@@ -6364,7 +6388,8 @@ Status|Meaning|Description
           "filename": "masterchief.jpg"
         },
         "timezone": "Australia/Brisbane",
-        "language": "en"
+        "language": "en",
+        "url": "https://mod.works/members/xant"
       },
       "datereg": 1493702614,
       "dateup": 1499410290,
@@ -6394,6 +6419,7 @@ Status|Meaning|Description
       "nameid": "rogue-knight",
       "summary": "Rogue Knight is a brand new 2D pixel platformer.",
       "instructions": "Instructions here on how to develop for your game.",
+      "url": "https://rogue-knight.mod.works",
       "cats": [
         {
           "name": "Engines",
@@ -6549,7 +6575,8 @@ Status|Meaning|Description
           "filename": "masterchief.jpg"
         },
         "timezone": "Australia/Brisbane",
-        "language": "en"
+        "language": "en",
+        "url": "https://mod.works/members/xant"
       },
       "price": 9.99,
       "datereg": 1492564103,
@@ -6565,6 +6592,7 @@ Status|Meaning|Description
       "summary": "It's time to bask in the glory of beautiful 4k textures!",
       "description": "<h2>About</h2><p>Rogue HD Pack does exactly what you thi...",
       "metadata": "rogue,hd,high-res,4k,hd textures",
+      "url": "https://rogue-knight.mod.works/rogue-knight-hd-pack",
       "modfile": {
         "id": 2,
         "mod": 2,
@@ -6578,7 +6606,8 @@ Status|Meaning|Description
             "filename": "masterchief.jpg"
           },
           "timezone": "Australia/Brisbane",
-          "language": "en"
+          "language": "en",
+          "url": "https://mod.works/members/xant"
         },
         "date": 1499841487,
         "datevirus": 1499841487,
@@ -6761,7 +6790,8 @@ Status|Meaning|Description
           "filename": "masterchief.jpg"
         },
         "timezone": "Australia/Brisbane",
-        "language": "en"
+        "language": "en",
+        "url": "https://mod.works/members/xant"
       },
       "date": 1499841487,
       "datevirus": 1499841487,
