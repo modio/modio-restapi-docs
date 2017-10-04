@@ -753,7 +753,18 @@ Status|Meaning|Description
   "data": [
     {
       "id": 2,
-      "member": 31342,
+      "member": {
+        "id": 1,
+        "nameid": "xant",
+        "username": "XanT",
+        "permission": 1,
+        "avatar": {
+          "full": "https://media.mod.works/images/members/1/1/1/masterchief.jpg",
+          "filename": "masterchief.jpg"
+        },
+        "timezone": "Australia/Brisbane",
+        "language": "en"
+      },
       "datereg": 1493702614,
       "dateup": 1499410290,
       "presentation": 1,
@@ -919,7 +930,18 @@ Status|Meaning|Description
 ```json
 {
   "id": 2,
-  "member": 31342,
+  "member": {
+    "id": 1,
+    "nameid": "xant",
+    "username": "XanT",
+    "permission": 1,
+    "avatar": {
+      "full": "https://media.mod.works/images/members/1/1/1/masterchief.jpg",
+      "filename": "masterchief.jpg"
+    },
+    "timezone": "Australia/Brisbane",
+    "language": "en"
+  },
   "datereg": 1493702614,
   "dateup": 1499410290,
   "presentation": 1,
@@ -1377,7 +1399,18 @@ Status|Meaning|Description
   "data": [
     {
       "id": 13,
-      "username": "XanT",
+      "member": {
+        "id": 1,
+        "nameid": "xant",
+        "username": "XanT",
+        "permission": 1,
+        "avatar": {
+          "full": "https://media.mod.works/images/members/1/1/1/masterchief.jpg",
+          "filename": "masterchief.jpg"
+        },
+        "timezone": "Australia/Brisbane",
+        "language": "en"
+      },
       "dateup": 1499846132,
       "event": "GAME_UPDATE",
       "changes": {
@@ -1515,7 +1548,18 @@ Status|Meaning|Description
   "data": [
     {
       "id": 457,
-      "member": 3103,
+      "member": {
+        "id": 1,
+        "nameid": "xant",
+        "username": "XanT",
+        "permission": 1,
+        "avatar": {
+          "full": "https://media.mod.works/images/members/1/1/1/masterchief.jpg",
+          "filename": "masterchief.jpg"
+        },
+        "timezone": "Australia/Brisbane",
+        "language": "en"
+      },
       "username": "Megalodon",
       "level": 8,
       "date": 1492058857,
@@ -2207,7 +2251,7 @@ Browse mods. Successful request will return an __array of mod objects__. To make
      metadata|string|Comma-separated list of metadata words.
      modfile|integer|Unique id of the __file__ object marked as current release.
      price|double|Numeric representation of the price.
-     status|string| _OAuth2 only_. The status of the mod (only recognised by game admins), _default is 'auth'_.<br><br>*Fields Options:*<br>__unauth__ = Only return un-authorized mods.<br>__auth__ = Only return authorized mods _(default)_.<br>__ban__ = Only return banned mods.<br>__archive__ = Only return archived content (out of date builds).<br>__delete__ = Only return deleted mods.
+     status|string| _OAuth 2 only_. The status of the mod (only recognised by game admins), _default is 'auth'_.<br><br>*Fields Options:*<br>__unauth__ = Only return un-authorized mods.<br>__auth__ = Only return authorized mods _(default)_.<br>__ban__ = Only return banned mods.<br>__archive__ = Only return archived content (out of date builds).<br>__delete__ = Only return deleted mods.
 
 ### Responses
 
@@ -2223,7 +2267,18 @@ Status|Meaning|Description
     {
       "id": 2,
       "game": 2,
-      "member": 2,
+      "member": {
+        "id": 1,
+        "nameid": "xant",
+        "username": "XanT",
+        "permission": 1,
+        "avatar": {
+          "full": "https://media.mod.works/images/members/1/1/1/masterchief.jpg",
+          "filename": "masterchief.jpg"
+        },
+        "timezone": "Australia/Brisbane",
+        "language": "en"
+      },
       "price": 9.99,
       "datereg": 1492564103,
       "dateup": 1499841487,
@@ -2241,7 +2296,18 @@ Status|Meaning|Description
       "modfile": {
         "id": 2,
         "mod": 2,
-        "member": 38,
+        "member": {
+          "id": 1,
+          "nameid": "xant",
+          "username": "XanT",
+          "permission": 1,
+          "avatar": {
+            "full": "https://media.mod.works/images/members/1/1/1/masterchief.jpg",
+            "filename": "masterchief.jpg"
+          },
+          "timezone": "Australia/Brisbane",
+          "language": "en"
+        },
         "date": 1499841487,
         "datevirus": 1499841487,
         "virusstatus": 0,
@@ -2436,7 +2502,18 @@ Status|Header|Type|Format|Description
 {
   "id": 2,
   "game": 2,
-  "member": 2,
+  "member": {
+    "id": 1,
+    "nameid": "xant",
+    "username": "XanT",
+    "permission": 1,
+    "avatar": {
+      "full": "https://media.mod.works/images/members/1/1/1/masterchief.jpg",
+      "filename": "masterchief.jpg"
+    },
+    "timezone": "Australia/Brisbane",
+    "language": "en"
+  },
   "price": 9.99,
   "datereg": 1492564103,
   "dateup": 1499841487,
@@ -2454,7 +2531,18 @@ Status|Header|Type|Format|Description
   "modfile": {
     "id": 2,
     "mod": 2,
-    "member": 38,
+    "member": {
+      "id": 1,
+      "nameid": "xant",
+      "username": "XanT",
+      "permission": 1,
+      "avatar": {
+        "full": "https://media.mod.works/images/members/1/1/1/masterchief.jpg",
+        "filename": "masterchief.jpg"
+      },
+      "timezone": "Australia/Brisbane",
+      "language": "en"
+    },
     "date": 1499841487,
     "datevirus": 1499841487,
     "virusstatus": 0,
@@ -2614,7 +2702,18 @@ Status|Meaning|Description
 {
   "id": 2,
   "game": 2,
-  "member": 2,
+  "member": {
+    "id": 1,
+    "nameid": "xant",
+    "username": "XanT",
+    "permission": 1,
+    "avatar": {
+      "full": "https://media.mod.works/images/members/1/1/1/masterchief.jpg",
+      "filename": "masterchief.jpg"
+    },
+    "timezone": "Australia/Brisbane",
+    "language": "en"
+  },
   "price": 9.99,
   "datereg": 1492564103,
   "dateup": 1499841487,
@@ -2632,7 +2731,18 @@ Status|Meaning|Description
   "modfile": {
     "id": 2,
     "mod": 2,
-    "member": 38,
+    "member": {
+      "id": 1,
+      "nameid": "xant",
+      "username": "XanT",
+      "permission": 1,
+      "avatar": {
+        "full": "https://media.mod.works/images/members/1/1/1/masterchief.jpg",
+        "filename": "masterchief.jpg"
+      },
+      "timezone": "Australia/Brisbane",
+      "language": "en"
+    },
     "date": 1499841487,
     "datevirus": 1499841487,
     "virusstatus": 0,
@@ -3362,8 +3472,18 @@ Status|Meaning|Description
   "data": [
     {
       "id": 13,
-      "member": 31342,
-      "username": "XanT",
+      "member": {
+        "id": 1,
+        "nameid": "xant",
+        "username": "XanT",
+        "permission": 1,
+        "avatar": {
+          "full": "https://media.mod.works/images/members/1/1/1/masterchief.jpg",
+          "filename": "masterchief.jpg"
+        },
+        "timezone": "Australia/Brisbane",
+        "language": "en"
+      },
       "dateup": 1499846132,
       "event": "MOD_UPDATE",
       "changes": {
@@ -3519,7 +3639,18 @@ Status|Meaning|Description
     {
       "id": 2,
       "mod": 2,
-      "member": 38,
+      "member": {
+        "id": 1,
+        "nameid": "xant",
+        "username": "XanT",
+        "permission": 1,
+        "avatar": {
+          "full": "https://media.mod.works/images/members/1/1/1/masterchief.jpg",
+          "filename": "masterchief.jpg"
+        },
+        "timezone": "Australia/Brisbane",
+        "language": "en"
+      },
       "date": 1499841487,
       "datevirus": 1499841487,
       "virusstatus": 0,
@@ -3683,7 +3814,18 @@ Status|Header|Type|Format|Description
 {
   "id": 2,
   "mod": 2,
-  "member": 38,
+  "member": {
+    "id": 1,
+    "nameid": "xant",
+    "username": "XanT",
+    "permission": 1,
+    "avatar": {
+      "full": "https://media.mod.works/images/members/1/1/1/masterchief.jpg",
+      "filename": "masterchief.jpg"
+    },
+    "timezone": "Australia/Brisbane",
+    "language": "en"
+  },
   "date": 1499841487,
   "datevirus": 1499841487,
   "virusstatus": 0,
@@ -3818,7 +3960,18 @@ Status|Meaning|Description
 {
   "id": 2,
   "mod": 2,
-  "member": 38,
+  "member": {
+    "id": 1,
+    "nameid": "xant",
+    "username": "XanT",
+    "permission": 1,
+    "avatar": {
+      "full": "https://media.mod.works/images/members/1/1/1/masterchief.jpg",
+      "filename": "masterchief.jpg"
+    },
+    "timezone": "Australia/Brisbane",
+    "language": "en"
+  },
   "date": 1499841487,
   "datevirus": 1499841487,
   "virusstatus": 0,
@@ -4103,7 +4256,6 @@ Status|Meaning|Description
       "game": 2,
       "mod": 2,
       "tag": "Unity",
-      "member": 38,
       "date": 1499841487
     },
     {
@@ -4660,7 +4812,18 @@ Status|Meaning|Description
     {
       "id": 2,
       "mod": 2,
-      "member": 36,
+      "member": {
+        "id": 1,
+        "nameid": "xant",
+        "username": "XanT",
+        "permission": 1,
+        "avatar": {
+          "full": "https://media.mod.works/images/members/1/1/1/masterchief.jpg",
+          "filename": "masterchief.jpg"
+        },
+        "timezone": "Australia/Brisbane",
+        "language": "en"
+      },
       "date": 1499841487,
       "replyid": 1499841487,
       "replypos": "01",
@@ -4795,7 +4958,18 @@ Status|Meaning|Description
 {
   "id": 2,
   "mod": 2,
-  "member": 36,
+  "member": {
+    "id": 1,
+    "nameid": "xant",
+    "username": "XanT",
+    "permission": 1,
+    "avatar": {
+      "full": "https://media.mod.works/images/members/1/1/1/masterchief.jpg",
+      "filename": "masterchief.jpg"
+    },
+    "timezone": "Australia/Brisbane",
+    "language": "en"
+  },
   "date": 1499841487,
   "replyid": 1499841487,
   "replypos": "01",
@@ -5057,7 +5231,18 @@ Status|Meaning|Description
   "data": [
     {
       "id": 457,
-      "member": 3103,
+      "member": {
+        "id": 1,
+        "nameid": "xant",
+        "username": "XanT",
+        "permission": 1,
+        "avatar": {
+          "full": "https://media.mod.works/images/members/1/1/1/masterchief.jpg",
+          "filename": "masterchief.jpg"
+        },
+        "timezone": "Australia/Brisbane",
+        "language": "en"
+      },
       "username": "Megalodon",
       "level": 8,
       "date": 1492058857,
@@ -6169,7 +6354,18 @@ Status|Meaning|Description
   "data": [
     {
       "id": 2,
-      "member": 31342,
+      "member": {
+        "id": 1,
+        "nameid": "xant",
+        "username": "XanT",
+        "permission": 1,
+        "avatar": {
+          "full": "https://media.mod.works/images/members/1/1/1/masterchief.jpg",
+          "filename": "masterchief.jpg"
+        },
+        "timezone": "Australia/Brisbane",
+        "language": "en"
+      },
       "datereg": 1493702614,
       "dateup": 1499410290,
       "presentation": 1,
@@ -6343,7 +6539,18 @@ Status|Meaning|Description
     {
       "id": 2,
       "game": 2,
-      "member": 2,
+      "member": {
+        "id": 1,
+        "nameid": "xant",
+        "username": "XanT",
+        "permission": 1,
+        "avatar": {
+          "full": "https://media.mod.works/images/members/1/1/1/masterchief.jpg",
+          "filename": "masterchief.jpg"
+        },
+        "timezone": "Australia/Brisbane",
+        "language": "en"
+      },
       "price": 9.99,
       "datereg": 1492564103,
       "dateup": 1499841487,
@@ -6361,7 +6568,18 @@ Status|Meaning|Description
       "modfile": {
         "id": 2,
         "mod": 2,
-        "member": 38,
+        "member": {
+          "id": 1,
+          "nameid": "xant",
+          "username": "XanT",
+          "permission": 1,
+          "avatar": {
+            "full": "https://media.mod.works/images/members/1/1/1/masterchief.jpg",
+            "filename": "masterchief.jpg"
+          },
+          "timezone": "Australia/Brisbane",
+          "language": "en"
+        },
         "date": 1499841487,
         "datevirus": 1499841487,
         "virusstatus": 0,
@@ -6533,7 +6751,18 @@ Status|Meaning|Description
     {
       "id": 2,
       "mod": 2,
-      "member": 38,
+      "member": {
+        "id": 1,
+        "nameid": "xant",
+        "username": "XanT",
+        "permission": 1,
+        "avatar": {
+          "full": "https://media.mod.works/images/members/1/1/1/masterchief.jpg",
+          "filename": "masterchief.jpg"
+        },
+        "timezone": "Australia/Brisbane",
+        "language": "en"
+      },
       "date": 1499841487,
       "datevirus": 1499841487,
       "virusstatus": 0,
