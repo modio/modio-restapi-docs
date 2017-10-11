@@ -1,8 +1,8 @@
 # Getting Started
 
-## mod.works API v1
+## mod.io API v1
 
-Welcome to the official `v1` API documentation for [mod.works](--parse_siteurl). Please ensure you read all of the Getting Started content as it covers most steps to ensure you can accurately and efficiently consume our REST API. 
+Welcome to the official `v1` API documentation for [mod.io](--parse_siteurl). Please ensure you read all of the Getting Started content as it covers most steps to ensure you can accurately and efficiently consume our REST API. 
 
 __Current version:__ `--parse_version`
 
@@ -10,18 +10,18 @@ __Base path:__ --parse_basepath
 
 ## How It Works
 
-Compatible with all builds of your game, mod.works operates silently in the background (without requiring your users to install another client), to give you complete control over your modding ecosystem
+Compatible with all builds of your game, mod.io operates silently in the background (without requiring your users to install another client), to give you complete control over your modding ecosystem
 
-![mod.works Overview](https://static.mod.works/v1/images/home/sdk.png).
+![mod.io Overview](https://static.mod.io/v1/images/home/sdk.png).
 
 ## Implementation
 
-You have 3 options to get connected to the mod.works API which you can use interchangeably depending on your needs. Here's the breakdown of each option.
+You have 3 options to get connected to the mod.io API which you can use interchangeably depending on your needs. Here's the breakdown of each option.
 
 Option | Usage | Suited for | Docs
----------- | ---------- | ---------- | ----------
-__API__ | For connecting directly to the mod.works REST API | Web apps that need a JSON REST API, or game developers that like a challenge and want control over their implementation. | 
-__SDK__ | Drop our [open source C++ SDK](https://github.com/DBolical/modworksSDK) into your game to call mod.works functionality. | Developers that want a SDK that abstracts the uploading, downloading and unzip flows behind easy to use function calls. | [Here](https://sdk.mod.works/)
+---------- | ---------- | ---------- | ---------
+__API__ | For connecting directly to the mod.io REST API | Web apps that need a JSON REST API, or game developers that like a challenge and want control over their implementation. | 
+__SDK__ | Drop our [open source C++ SDK](https://github.com/DBolical/modioSDK) into your game to call mod.io functionality. | Developers that want a SDK that abstracts the uploading, downloading and unzip flows behind easy to use function calls. | [Here](https://sdk.mod.io/)
 __Tools/Plugins__ | Use tools and plugins created by the community to make implemention in various engines easy. | Game developers that want a pre-built modding solution for their engine of choice. | [Available per tool](http://10.1.5.7:4567/#)
 
 Here is a brief list of the main things to know about our API, as explained in more detail in the following sections.
@@ -37,13 +37,13 @@ Here is a brief list of the main things to know about our API, as explained in m
 
 ## Authentication
 
-Authentication to the mod.works can be done via 3 different ways:
+Authentication to the mod.io can be done via 3 different ways:
 
-- Request an [API key (Read Access Only)](https://mod.works/APIkey/widget)
-- Manually create an [OAuth 2 Access Token (Read + Write Access)](https://mod.works/oauth/widget)
-- Use of our [Email Authentication Flow](https://docs.mod.works/#email-authentication-flow) 
+- Request an [API key (Read Access Only)](https://mod.io/APIkey/widget)
+- Manually create an [OAuth 2 Access Token (Read + Write Access)](https://mod.io/oauth/widget)
+- Use of our [Email Authentication Flow](https://docs.mod.io/#email-authentication-flow) 
 
-Which method of authentication can depend on which way you intend on consuming the mod.works API.
+Which method of authentication can depend on which way you intend on consuming the mod.io API.
 
 Authentication Type | In | HTTP Methods | Abilities
 ---------- | ---------- | ---------- | ---------- 
@@ -54,20 +54,20 @@ Access Token (OAuth 2) | Header | `GET`, `POST`, `PUT`, `DELETE` | Read, create,
 
 #### Generating your API key
 
-To access the API, authentication is required. All users and games get a [private API key](https://mod.works/apikey/widget). It is quick and easy to use in your apps but limited to read-only GET requests, due to the limited security it offers.
+To access the API, authentication is required. All users and games get a [private API key](https://mod.io/apikey/widget). It is quick and easy to use in your apps but limited to read-only GET requests, due to the limited security it offers.
 
-[Generate your private API key](https://mod.works/apikey/widget)
+[Generate your private API key](https://mod.io/apikey/widget)
 
 ### Email Authentication Flow
 
-To perform writes, you will need to authenticate your users via OAuth 2. To make this frictionless in-game, we use an email verification system, similar to what Slack and others pioneered. It works by users supplying their email, which we send a time-limited 5 digit security code too. They exchange this code in-game, for an [OAuth 2 access token](https://mod.works/oauth/widget) you can save to authenticate future requests. The benefit of this approach is it avoids complex website redirects and doesn't require your users to complete a slow registration flow.
+To perform writes, you will need to authenticate your users via OAuth 2. To make this frictionless in-game, we use an email verification system, similar to what Slack and others pioneered. It works by users supplying their email, which we send a time-limited 5 digit security code too. They exchange this code in-game, for an [OAuth 2 access token](https://mod.io/oauth/widget) you can save to authenticate future requests. The benefit of this approach is it avoids complex website redirects and doesn't require your users to complete a slow registration flow.
 
-![mod.works Email Authentication Flow](https://static.mod.works/v1/images/home/email.png)
+![mod.io Email Authentication Flow](https://static.mod.io/v1/images/home/email.png)
 
 ```shell
 // Example POST requesting security code
 
-curl -X POST https://api.mod.works/oauth/emailrequest
+curl -X POST https://api.mod.io/oauth/emailrequest
   -H 'Content-Type: application/x-www-form-urlencoded'
   -d 'api_key=0d0ba6756d032246f1299f8c01abc424'	
   -d 'email=john.snow@westeros.com'
@@ -95,12 +95,12 @@ Parameter | Value
 
 ### Step 2: Exchanging security code for access token
 
-After successfully requesting a `security_code` with a valid e-mail address you have access to you will then receive an e-mail from mod.works containing your unique 5-character `security_code` which you then exchange in a second request for your `access_token`. There are a few important things to know when using the e-mail authentication flow:
+After successfully requesting a `security_code` with a valid e-mail address you have access to you will then receive an e-mail from mod.io containing your unique 5-character `security_code` which you then exchange in a second request for your `access_token`. There are a few important things to know when using the e-mail authentication flow:
 
 ```shell
 // Example POST requesting access token
 
-curl -X POST https://api.mod.works/oauth/emailexchange
+curl -X POST https://api.mod.io/oauth/emailexchange
   -H 'Content-Type: application/x-www-form-urlencoded'	
   -d 'api_key=0d0ba6756d032246f1299f8c01abc424'
   -d 'security_code=3EW50'
@@ -131,11 +131,11 @@ Parameter | Value
 
 ### Step 3: Use access token to access resources.
 
-See [Making Requests](https://docs.mod.works/#making-requests) section.
+See [Making Requests](https://docs.mod.io/#making-requests) section.
 
 ### Scopes (OAuth 2)
 
-mod.works allows you to specify what type of permissions you want each access token to have, this is done by the use of scopes. See below for a full list of scopes available, you must include at least one scope when generating a new token.
+mod.io allows you to specify what type of permissions you want each access token to have, this is done by the use of scopes. See below for a full list of scopes available, you must include at least one scope when generating a new token.
 
 Scope | Abilities
 ---------- | ----------
@@ -146,12 +146,12 @@ You can combine scopes to generate a combination that suits the permissions you 
 
 ## Making Requests
 
-Requests to the mod.works API __must__ be over HTTPS (Port 443), any requests made over HTTP will return a `400 Bad Request` response.
+Requests to the mod.io API __must__ be over HTTPS (Port 443), any requests made over HTTP will return a `400 Bad Request` response.
 
 ### Using an API Key
 
 ```
-curl -X get https://api.mod.works/v1/games?api_key=xxxxxxxxxxxxxxxx
+curl -X get https://api.mod.io/v1/games?api_key=xxxxxxxxxxxxxxxx
 ``` 
 
 To authenticate to the API using your key using your unique 32-character key simply append the `api_key=xxxxxxxxxxxxxxxx` parameter to the end of your request. Remember that using an API key means requests are in read-only mode, and that if you want to create, update or delete resources then authentication via OAuth 2 is required.
@@ -163,7 +163,7 @@ To Authenticate to the API using an OAuth 2 access token you must include the HT
 ```shell
 // Example POST request with no binary files
 
-curl -X post https://api.mod.works/v1/games/1/mods/1/tags \
+curl -X post https://api.mod.io/v1/games/1/mods/1/tags \
   -H 'Authorization: Bearer your-token-here' \
   -H 'Content-Type: application/x-www-form-urlencoded' \
   -d 'tags[]=Unity' \
@@ -172,14 +172,14 @@ curl -X post https://api.mod.works/v1/games/1/mods/1/tags \
 
 ### Request Content-Type
 
-For supplying data in requests, mod.works follows this rule across the API:
+For supplying data in requests, mod.io follows this rule across the API:
 
 - If you are making a request that includes a file, your request __must__ be `multipart/form-data`, otherwise, your request should be `application/x-www-form-urlencoded`. 
 
 ```shell
 // Example POST request with binary file
 
-curl -X post https://api.mod.works/v1/games/1/mods \
+curl -X post https://api.mod.io/v1/games/1/mods \
   -H 'Authorization: Bearer your-token-here' \
   -H 'Content-Type: multipart/form-data' \ 
   -F 'logo=@path/to/image.jpg' \
@@ -201,7 +201,7 @@ If the endpoint you are making a request to expects a file it will expect the co
 ```shell
 // Example json-encoded POST request 
 
-curl -X post https://api.mod.works/v1/games/1/team \
+curl -X post https://api.mod.io/v1/games/1/team \
   -H 'Authorization: Bearer your-token-here' \
   -H 'Content-Type: application/x-www-form-urlencoded' \  
   -d 'input_json={
@@ -230,9 +230,9 @@ Responses will __always__ be returned as `application/json`.
 }
 ```
 
-If an error occurs, mod.works returns an error object with the HTTP `code` and `message` to describe what error occurred and generally what needs to be done to avoid the error reoccurring. It's important to note that if you encounter errors that are not server errors, that is `500+` codes - you should __not__ continue to send requests to the endpoint and instead review the error message.
+If an error occurs, mod.io returns an error object with the HTTP `code` and `message` to describe what error occurred and generally what needs to be done to avoid the error reoccurring. It's important to note that if you encounter errors that are not server errors, that is `500+` codes - you should __not__ continue to send requests to the endpoint and instead review the error message.
 
-When it comes to validating request inputs for creating a resource or supplying a query parameter for filtering, an optional field object called `errors` can be supplied inside the `error` object which contains a list of your invalid inputs. A reminder that the nested `errors` object is only supplied with `422 Unprocessable Entity`. Be sure to review the [Response Codes](https://docs.mod.works/#response-codes) to be aware of the HTTP codes the API returns.
+When it comes to validating request inputs for creating a resource or supplying a query parameter for filtering, an optional field object called `errors` can be supplied inside the `error` object which contains a list of your invalid inputs. A reminder that the nested `errors` object is only supplied with `422 Unprocessable Entity`. Be sure to review the [Response Codes](https://docs.mod.io/#response-codes) to be aware of the HTTP codes the API returns.
 
 ```json
 // Error object with input errors
@@ -248,7 +248,7 @@ When it comes to validating request inputs for creating a resource or supplying 
 
 ```
 
-Remember that [Rate Limiting](https://docs.mod.works/#rate-limiting) applies whether an error is returned or not so to avoid needlessly exceeding your daily quota be sure to always investigate error messages.
+Remember that [Rate Limiting](https://docs.mod.io/#rate-limiting) applies whether an error is returned or not so to avoid needlessly exceeding your daily quota be sure to always investigate error messages.
 
 ## Response Codes
 
@@ -288,15 +288,15 @@ Response Code | Meaning
 	"version": "1.0",
 	"virustotal": "No threats detected.",
 	"changelog": "v1.0 - First release of Rogue Knight!",
-	"download": "https://mod.works/mods/file/2/c489a0354111a4d76640d47f0cdcb294"
+	"download": "https://mod.io/mods/file/2/c489a0354111a4d76640d47f0cdcb294"
 }
 ```
 
-The way in which mod.works formats responses is entirely dependant on whether the requesting endpoint is returning a single item or a collection of items.
+The way in which mod.io formats responses is entirely dependant on whether the requesting endpoint is returning a single item or a collection of items.
 
 ### Single item Responses
 
-For single items, mod.works returns a __single json object__ which contains the requested resource. There is no nesting for single responses.
+For single items, mod.io returns a __single json object__ which contains the requested resource. There is no nesting for single responses.
 
 ### Browse Responses
 
@@ -324,7 +324,7 @@ Browse responses a json object which contains a data array and a meta object:
 			"version": "1.0",
 			"virustotal": null,
 			"changelog": "v1.0 --- First Release --- Added main mod.",
-			"download": "https://mod.works/mods/file/2/c489a0354111a4d76640d47f0cdcb294"
+			"download": "https://mod.io/mods/file/2/c489a0354111a4d76640d47f0cdcb294"
 		},
 		{
 			...
@@ -351,7 +351,7 @@ When requesting data from endpoints that contain more than one object, there are
 --parse_version/games/2/mods/2/files?_cursor=600
 ```
 
-When using a cursor, you are able to specify where you want to _start_ looking for results by the value of the `id` column. Let's assume you want to get all files on mod.works that contain an id larger than 600. You could use the following:
+When using a cursor, you are able to specify where you want to _start_ looking for results by the value of the `id` column. Let's assume you want to get all files on mod.io that contain an id larger than 600. You could use the following:
 
 - `?_cursor=600` - Only returns fields that have a larger `id` than 600, that is we want to start looing from the specified number onwards. 
 
@@ -373,7 +373,7 @@ Note that the `_prev` parameter is arbitary information for your own implementat
 --parse_version/games?_offset=30
 ```
 
-While a cursor starts from the value of the `id` column, the `_offset` will simply skip over the specified amount of results, regardless of what data they contain. This works the same way offset in an SQL query. Let's now assume you want to get all mods from mod.works but ignore the first 30 results.
+While a cursor starts from the value of the `id` column, the `_offset` will simply skip over the specified amount of results, regardless of what data they contain. This works the same way offset in an SQL query. Let's now assume you want to get all mods from mod.io but ignore the first 30 results.
 
 - `?_offset=30` - Will retrieve all results after ignoring the first 30.
 
@@ -415,19 +415,9 @@ Parameter | Value
 
 ## Filtering
 
-Mod.works has powerful filtering available in requests. Every field of every request can be used as a filter and the following functions are available when querying the API:
+mod.io has powerful filtering available in requests. Every field of every request can be used as a filter and the following functions are available when querying the API:
 
 ### Functions
-
-### _fields (Fields)
-
-```
---parse_version/games?_fields=id,datereg,ugcname,name
-```
-
-Specify which columns to return in a request.
-
-- `?_fields=id,datereg,ugcname,name` - Only return the `id`, `datereg`, `ugcname` and `name` columns.
 
 ### _sort (Sort)
 
@@ -563,7 +553,7 @@ Where the preceding column value does not equal the value specified.
 
 ## Rate Limiting
 
-mod.works implements rate limiting to prevent users from abusing the service however we do offer the ability of higher rate limits as they required. Exceeding your rate limit will result in requests receiving a `429 Too Many Requests` response until your time is reset time occurs. 
+mod.io implements rate limiting to prevent users from abusing the service however we do offer the ability of higher rate limits as they required. Exceeding your rate limit will result in requests receiving a `429 Too Many Requests` response until your time is reset time occurs. 
 
 It is *highly recommended* that you architect your app to check for the `X-RateLimit` headers below and the `429` HTTP response code to ensure you are not making too many requests or continuing to make requests consistently after a `429` code is repeatedly returned. Users who continue to send requests despite a `429` response could potentially have their access tokens revoked. The following limits are implemented by default:
 
@@ -588,13 +578,13 @@ X-RateLimit-Remaining: 59
 
 ### Headers
 
-mod.works returns the following headers in each request to inform you of your remaining requests and time until reset.
+mod.io returns the following headers in each request to inform you of your remaining requests and time until reset.
 
  - `X-RateLimit-Limit` - Number of requests you can make from the supplied API key/access token per hour.
  - `X-RateLimit-Remaining` - Number of minutes until your rate limit resets (see above for frequently allowed).
 
-If you want feel the above rate limit is not enough for your app, please [contact us](mailto:support@mod.works?subject=mod.works%20API%20Rate%20Limiting) to discuss your scenario and potentially increasing your rate limit. 
+If you want feel the above rate limit is not enough for your app, please [contact us](mailto:support@mod.io?subject=mod.io%20API%20Rate%20Limiting) to discuss your scenario and potentially increasing your rate limit. 
 
 ## Contact
 
-If you spot any errors within the mod.works documentation, have feedback on how we can potentially make it easier to follow or simply want get in touch for another reason please feel free to reach out to us at [support@mod.works](mailto:support@mod.works?subject=mod.works%20API). Any critical issues will be promptly addressed.
+If you spot any errors within the mod.io documentation, have feedback on how we can potentially make it easier to follow or simply want get in touch for another reason please feel free to reach out to us at [support@mod.io](mailto:support@mod.io?subject=mod.io%20API). Any critical issues will be promptly addressed.

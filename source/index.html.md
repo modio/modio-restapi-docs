@@ -1,5 +1,5 @@
 ---
-title: mod.works API v1
+title: mod.io API v1
 language_tabs:
   - shell: Shell
   - http: HTTP
@@ -9,7 +9,7 @@ language_tabs:
   - ruby: Ruby
   - java: Java
 toc_footers:
-  - '<a href="https://mod.works/about">Find out more about mod.works</a>'
+  - '<a href="https://mod.io/about">Find out more about mod.io</a>'
 includes: []
 search: true
 highlight_theme: darkula
@@ -17,28 +17,28 @@ highlight_theme: darkula
 
 # Getting Started
 
-## mod.works API v1
+## mod.io API v1
 
-Welcome to the official `v1` API documentation for [mod.works](https://mworks.com). Please ensure you read all of the Getting Started content as it covers most steps to ensure you can accurately and efficiently consume our REST API. 
+Welcome to the official `v1` API documentation for [mod.io](https://m.io). Please ensure you read all of the Getting Started content as it covers most steps to ensure you can accurately and efficiently consume our REST API. 
 
 __Current version:__ `v1`
 
-__Base path:__ [https://api.mod.works/v1](https://api.mod.works/v1)
+__Base path:__ [https://api.mod.io/v1](https://api.mod.io/v1)
 
 ## How It Works
 
-Compatible with all builds of your game, mod.works operates silently in the background (without requiring your users to install another client), to give you complete control over your modding ecosystem
+Compatible with all builds of your game, mod.io operates silently in the background (without requiring your users to install another client), to give you complete control over your modding ecosystem
 
-![mod.works Overview](https://static.mod.works/v1/images/home/sdk.png).
+![mod.io Overview](https://static.mod.io/v1/images/home/sdk.png).
 
 ## Implementation
 
-You have 3 options to get connected to the mod.works API which you can use interchangeably depending on your needs. Here's the breakdown of each option.
+You have 3 options to get connected to the mod.io API which you can use interchangeably depending on your needs. Here's the breakdown of each option.
 
 Option | Usage | Suited for | Docs
----------- | ---------- | ---------- | ----------
-__API__ | For connecting directly to the mod.works REST API | Web apps that need a JSON REST API, or game developers that like a challenge and want control over their implementation. | 
-__SDK__ | Drop our [open source C++ SDK](https://github.com/DBolical/modworksSDK) into your game to call mod.works functionality. | Developers that want a SDK that abstracts the uploading, downloading and unzip flows behind easy to use function calls. | [Here](https://sdk.mod.works/)
+---------- | ---------- | ---------- | ---------
+__API__ | For connecting directly to the mod.io REST API | Web apps that need a JSON REST API, or game developers that like a challenge and want control over their implementation. | 
+__SDK__ | Drop our [open source C++ SDK](https://github.com/DBolical/modioSDK) into your game to call mod.io functionality. | Developers that want a SDK that abstracts the uploading, downloading and unzip flows behind easy to use function calls. | [Here](https://sdk.mod.io/)
 __Tools/Plugins__ | Use tools and plugins created by the community to make implemention in various engines easy. | Game developers that want a pre-built modding solution for their engine of choice. | [Available per tool](http://10.1.5.7:4567/#)
 
 Here is a brief list of the main things to know about our API, as explained in more detail in the following sections.
@@ -54,13 +54,13 @@ Here is a brief list of the main things to know about our API, as explained in m
 
 ## Authentication
 
-Authentication to the mod.works can be done via 3 different ways:
+Authentication to the mod.io can be done via 3 different ways:
 
-- Request an [API key (Read Access Only)](https://mod.works/APIkey/widget)
-- Manually create an [OAuth 2 Access Token (Read + Write Access)](https://mod.works/oauth/widget)
-- Use of our [Email Authentication Flow](https://docs.mod.works/#email-authentication-flow) 
+- Request an [API key (Read Access Only)](https://mod.io/APIkey/widget)
+- Manually create an [OAuth 2 Access Token (Read + Write Access)](https://mod.io/oauth/widget)
+- Use of our [Email Authentication Flow](https://docs.mod.io/#email-authentication-flow) 
 
-Which method of authentication can depend on which way you intend on consuming the mod.works API.
+Which method of authentication can depend on which way you intend on consuming the mod.io API.
 
 Authentication Type | In | HTTP Methods | Abilities
 ---------- | ---------- | ---------- | ---------- 
@@ -71,20 +71,20 @@ Access Token (OAuth 2) | Header | `GET`, `POST`, `PUT`, `DELETE` | Read, create,
 
 #### Generating your API key
 
-To access the API, authentication is required. All users and games get a [private API key](https://mod.works/apikey/widget). It is quick and easy to use in your apps but limited to read-only GET requests, due to the limited security it offers.
+To access the API, authentication is required. All users and games get a [private API key](https://mod.io/apikey/widget). It is quick and easy to use in your apps but limited to read-only GET requests, due to the limited security it offers.
 
-[Generate your private API key](https://mod.works/apikey/widget)
+[Generate your private API key](https://mod.io/apikey/widget)
 
 ### Email Authentication Flow
 
-To perform writes, you will need to authenticate your users via OAuth 2. To make this frictionless in-game, we use an email verification system, similar to what Slack and others pioneered. It works by users supplying their email, which we send a time-limited 5 digit security code too. They exchange this code in-game, for an [OAuth 2 access token](https://mod.works/oauth/widget) you can save to authenticate future requests. The benefit of this approach is it avoids complex website redirects and doesn't require your users to complete a slow registration flow.
+To perform writes, you will need to authenticate your users via OAuth 2. To make this frictionless in-game, we use an email verification system, similar to what Slack and others pioneered. It works by users supplying their email, which we send a time-limited 5 digit security code too. They exchange this code in-game, for an [OAuth 2 access token](https://mod.io/oauth/widget) you can save to authenticate future requests. The benefit of this approach is it avoids complex website redirects and doesn't require your users to complete a slow registration flow.
 
-![mod.works Email Authentication Flow](https://static.mod.works/v1/images/home/email.png)
+![mod.io Email Authentication Flow](https://static.mod.io/v1/images/home/email.png)
 
 ```shell
 // Example POST requesting security code
 
-curl -X POST https://api.mod.works/oauth/emailrequest
+curl -X POST https://api.mod.io/oauth/emailrequest
   -H 'Content-Type: application/x-www-form-urlencoded'
   -d 'api_key=0d0ba6756d032246f1299f8c01abc424'	
   -d 'email=john.snow@westeros.com'
@@ -111,12 +111,12 @@ Parameter | Value
 
 ### Step 2: Exchanging security code for access token
 
-After successfully requesting a `security_code` with a valid e-mail address you have access to you will then receive an e-mail from mod.works containing your unique 5-character `security_code` which you then exchange in a second request for your `access_token`. There are a few important things to know when using the e-mail authentication flow:
+After successfully requesting a `security_code` with a valid e-mail address you have access to you will then receive an e-mail from mod.io containing your unique 5-character `security_code` which you then exchange in a second request for your `access_token`. There are a few important things to know when using the e-mail authentication flow:
 
 ```shell
 // Example POST requesting access token
 
-curl -X POST https://api.mod.works/oauth/emailexchange
+curl -X POST https://api.mod.io/oauth/emailexchange
   -H 'Content-Type: application/x-www-form-urlencoded'	
   -d 'api_key=0d0ba6756d032246f1299f8c01abc424'
   -d 'security_code=3EW50'
@@ -146,11 +146,11 @@ Parameter | Value
 
 ### Step 3: Use access token to access resources.
 
-See [Making Requests](https://docs.mod.works/#making-requests) section.
+See [Making Requests](https://docs.mod.io/#making-requests) section.
 
 ### Scopes (OAuth 2)
 
-mod.works allows you to specify what type of permissions you want each access token to have, this is done by the use of scopes. See below for a full list of scopes available, you must include at least one scope when generating a new token.
+mod.io allows you to specify what type of permissions you want each access token to have, this is done by the use of scopes. See below for a full list of scopes available, you must include at least one scope when generating a new token.
 
 Scope | Abilities
 ---------- | ----------
@@ -161,12 +161,12 @@ You can combine scopes to generate a combination that suits the permissions you 
 
 ## Making Requests
 
-Requests to the mod.works API __must__ be over HTTPS (Port 443), any requests made over HTTP will return a `400 Bad Request` response.
+Requests to the mod.io API __must__ be over HTTPS (Port 443), any requests made over HTTP will return a `400 Bad Request` response.
 
 ### Using an API Key
 
 ```
-curl -X get https://api.mod.works/v1/games?api_key=xxxxxxxxxxxxxxxx
+curl -X get https://api.mod.io/v1/games?api_key=xxxxxxxxxxxxxxxx
 ``` 
 
 To authenticate to the API using your key using your unique 32-character key simply append the `api_key=xxxxxxxxxxxxxxxx` parameter to the end of your request. Remember that using an API key means requests are in read-only mode, and that if you want to create, update or delete resources then authentication via OAuth 2 is required.
@@ -178,7 +178,7 @@ To Authenticate to the API using an OAuth 2 access token you must include the HT
 ```shell
 // Example POST request with no binary files
 
-curl -X post https://api.mod.works/v1/games/1/mods/1/tags \
+curl -X post https://api.mod.io/v1/games/1/mods/1/tags \
   -H 'Authorization: Bearer your-token-here' \
   -H 'Content-Type: application/x-www-form-urlencoded' \
   -d 'tags[]=Unity' \
@@ -187,14 +187,14 @@ curl -X post https://api.mod.works/v1/games/1/mods/1/tags \
 
 ### Request Content-Type
 
-For supplying data in requests, mod.works follows this rule across the API:
+For supplying data in requests, mod.io follows this rule across the API:
 
 - If you are making a request that includes a file, your request __must__ be `multipart/form-data`, otherwise, your request should be `application/x-www-form-urlencoded`. 
 
 ```shell
 // Example POST request with binary file
 
-curl -X post https://api.mod.works/v1/games/1/mods \
+curl -X post https://api.mod.io/v1/games/1/mods \
   -H 'Authorization: Bearer your-token-here' \
   -H 'Content-Type: multipart/form-data' \ 
   -F 'logo=@path/to/image.jpg' \
@@ -216,7 +216,7 @@ If the endpoint you are making a request to expects a file it will expect the co
 ```shell
 // Example json-encoded POST request 
 
-curl -X post https://api.mod.works/v1/games/1/team \
+curl -X post https://api.mod.io/v1/games/1/team \
   -H 'Authorization: Bearer your-token-here' \
   -H 'Content-Type: application/x-www-form-urlencoded' \  
   -d 'input_json={
@@ -245,9 +245,9 @@ Responses will __always__ be returned as `application/json`.
 }
 ```
 
-If an error occurs, mod.works returns an error object with the HTTP `code` and `message` to describe what error occurred and generally what needs to be done to avoid the error reoccurring. It's important to note that if you encounter errors that are not server errors, that is `500+` codes - you should __not__ continue to send requests to the endpoint and instead review the error message.
+If an error occurs, mod.io returns an error object with the HTTP `code` and `message` to describe what error occurred and generally what needs to be done to avoid the error reoccurring. It's important to note that if you encounter errors that are not server errors, that is `500+` codes - you should __not__ continue to send requests to the endpoint and instead review the error message.
 
-When it comes to validating request inputs for creating a resource or supplying a query parameter for filtering, an optional field object called `errors` can be supplied inside the `error` object which contains a list of your invalid inputs. A reminder that the nested `errors` object is only supplied with `422 Unprocessable Entity`. Be sure to review the [Response Codes](https://docs.mod.works/#response-codes) to be aware of the HTTP codes the API returns.
+When it comes to validating request inputs for creating a resource or supplying a query parameter for filtering, an optional field object called `errors` can be supplied inside the `error` object which contains a list of your invalid inputs. A reminder that the nested `errors` object is only supplied with `422 Unprocessable Entity`. Be sure to review the [Response Codes](https://docs.mod.io/#response-codes) to be aware of the HTTP codes the API returns.
 
 ```json
 // Error object with input errors
@@ -263,7 +263,7 @@ When it comes to validating request inputs for creating a resource or supplying 
 
 ```
 
-Remember that [Rate Limiting](https://docs.mod.works/#rate-limiting) applies whether an error is returned or not so to avoid needlessly exceeding your daily quota be sure to always investigate error messages.
+Remember that [Rate Limiting](https://docs.mod.io/#rate-limiting) applies whether an error is returned or not so to avoid needlessly exceeding your daily quota be sure to always investigate error messages.
 
 ## Response Codes
 
@@ -303,15 +303,15 @@ Response Code | Meaning
 	"version": "1.0",
 	"virustotal": "No threats detected.",
 	"changelog": "v1.0 - First release of Rogue Knight!",
-	"download": "https://mod.works/mods/file/2/c489a0354111a4d76640d47f0cdcb294"
+	"download": "https://mod.io/mods/file/2/c489a0354111a4d76640d47f0cdcb294"
 }
 ```
 
-The way in which mod.works formats responses is entirely dependant on whether the requesting endpoint is returning a single item or a collection of items.
+The way in which mod.io formats responses is entirely dependant on whether the requesting endpoint is returning a single item or a collection of items.
 
 ### Single item Responses
 
-For single items, mod.works returns a __single json object__ which contains the requested resource. There is no nesting for single responses.
+For single items, mod.io returns a __single json object__ which contains the requested resource. There is no nesting for single responses.
 
 ### Browse Responses
 
@@ -339,7 +339,7 @@ Browse responses a json object which contains a data array and a meta object:
 			"version": "1.0",
 			"virustotal": null,
 			"changelog": "v1.0 --- First Release --- Added main mod.",
-			"download": "https://mod.works/mods/file/2/c489a0354111a4d76640d47f0cdcb294"
+			"download": "https://mod.io/mods/file/2/c489a0354111a4d76640d47f0cdcb294"
 		},
 		{
 			...
@@ -366,7 +366,7 @@ When requesting data from endpoints that contain more than one object, there are
 v1/games/2/mods/2/files?_cursor=600
 ```
 
-When using a cursor, you are able to specify where you want to _start_ looking for results by the value of the `id` column. Let's assume you want to get all files on mod.works that contain an id larger than 600. You could use the following:
+When using a cursor, you are able to specify where you want to _start_ looking for results by the value of the `id` column. Let's assume you want to get all files on mod.io that contain an id larger than 600. You could use the following:
 
 - `?_cursor=600` - Only returns fields that have a larger `id` than 600, that is we want to start looing from the specified number onwards. 
 
@@ -388,7 +388,7 @@ Note that the `_prev` parameter is arbitary information for your own implementat
 v1/games?_offset=30
 ```
 
-While a cursor starts from the value of the `id` column, the `_offset` will simply skip over the specified amount of results, regardless of what data they contain. This works the same way offset in an SQL query. Let's now assume you want to get all mods from mod.works but ignore the first 30 results.
+While a cursor starts from the value of the `id` column, the `_offset` will simply skip over the specified amount of results, regardless of what data they contain. This works the same way offset in an SQL query. Let's now assume you want to get all mods from mod.io but ignore the first 30 results.
 
 - `?_offset=30` - Will retrieve all results after ignoring the first 30.
 
@@ -430,19 +430,9 @@ Parameter | Value
 
 ## Filtering
 
-Mod.works has powerful filtering available in requests. Every field of every request can be used as a filter and the following functions are available when querying the API:
+mod.io has powerful filtering available in requests. Every field of every request can be used as a filter and the following functions are available when querying the API:
 
 ### Functions
-
-### _fields (Fields)
-
-```
-v1/games?_fields=id,datereg,ugcname,name
-```
-
-Specify which columns to return in a request.
-
-- `?_fields=id,datereg,ugcname,name` - Only return the `id`, `datereg`, `ugcname` and `name` columns.
 
 ### _sort (Sort)
 
@@ -578,7 +568,7 @@ Where the preceding column value does not equal the value specified.
 
 ## Rate Limiting
 
-mod.works implements rate limiting to prevent users from abusing the service however we do offer the ability of higher rate limits as they required. Exceeding your rate limit will result in requests receiving a `429 Too Many Requests` response until your time is reset time occurs. 
+mod.io implements rate limiting to prevent users from abusing the service however we do offer the ability of higher rate limits as they required. Exceeding your rate limit will result in requests receiving a `429 Too Many Requests` response until your time is reset time occurs. 
 
 It is *highly recommended* that you architect your app to check for the `X-RateLimit` headers below and the `429` HTTP response code to ensure you are not making too many requests or continuing to make requests consistently after a `429` code is repeatedly returned. Users who continue to send requests despite a `429` response could potentially have their access tokens revoked. The following limits are implemented by default:
 
@@ -603,16 +593,16 @@ X-RateLimit-Remaining: 59
 
 ### Headers
 
-mod.works returns the following headers in each request to inform you of your remaining requests and time until reset.
+mod.io returns the following headers in each request to inform you of your remaining requests and time until reset.
 
  - `X-RateLimit-Limit` - Number of requests you can make from the supplied API key/access token per hour.
  - `X-RateLimit-Remaining` - Number of minutes until your rate limit resets (see above for frequently allowed).
 
-If you want feel the above rate limit is not enough for your app, please [contact us](mailto:support@mod.works?subject=mod.works%20API%20Rate%20Limiting) to discuss your scenario and potentially increasing your rate limit. 
+If you want feel the above rate limit is not enough for your app, please [contact us](mailto:support@mod.io?subject=mod.io%20API%20Rate%20Limiting) to discuss your scenario and potentially increasing your rate limit. 
 
 ## Contact
 
-If you spot any errors within the mod.works documentation, have feedback on how we can potentially make it easier to follow or simply want get in touch for another reason please feel free to reach out to us at [support@mod.works](mailto:support@mod.works?subject=mod.works%20API). Any critical issues will be promptly addressed.
+If you spot any errors within the mod.io documentation, have feedback on how we can potentially make it easier to follow or simply want get in touch for another reason please feel free to reach out to us at [support@mod.io](mailto:support@mod.io?subject=mod.io%20API). Any critical issues will be promptly addressed.
 # Games
 
 ## Browse Games
@@ -621,14 +611,14 @@ If you spot any errors within the mod.works documentation, have feedback on how 
 
 ```shell
 # You can also use wget
-curl -X get https://api.mod.works/v1/games?api_key=YourApiKey \
+curl -X get https://api.mod.io/v1/games?api_key=YourApiKey \
   -H 'Accept: application/json'
 
 ```
 
 ```http
-GET https://api.mod.works/v1/games?api_key=YourApiKey HTTP/1.1
-Host: api.mod.works
+GET https://api.mod.io/v1/games?api_key=YourApiKey HTTP/1.1
+Host: api.mod.io
 
 Accept: application/json
 
@@ -641,7 +631,7 @@ var headers = {
 };
 
 $.ajax({
-  url: 'https://api.mod.works/v1/games',
+  url: 'https://api.mod.io/v1/games',
   method: 'get',
   data: '?api_key=YourApiKey',
   headers: headers,
@@ -659,7 +649,7 @@ const headers = {
 
 };
 
-fetch('https://api.mod.works/v1/games?api_key=YourApiKey',
+fetch('https://api.mod.io/v1/games?api_key=YourApiKey',
 {
   method: 'GET',
 
@@ -680,7 +670,7 @@ headers = {
   'Accept' => 'application/json'
 }
 
-result = RestClient.get 'https://api.mod.works/v1/games', params: {
+result = RestClient.get 'https://api.mod.io/v1/games', params: {
   'api_key' => 'string'
 }, headers: headers
 
@@ -693,7 +683,7 @@ headers = {
   'Accept': 'application/json'
 }
 
-r = requests.get('https://api.mod.works/v1/games', params={
+r = requests.get('https://api.mod.io/v1/games', params={
   'api_key': 'YourApiKey'
 }, headers = headers)
 
@@ -701,7 +691,7 @@ print r.json()
 ```
 
 ```java
-URL obj = new URL("https://api.mod.works/v1/games?api_key=YourApiKey");
+URL obj = new URL("https://api.mod.io/v1/games?api_key=YourApiKey");
 HttpURLConnection con = (HttpURLConnection) obj.openConnection();
 con.setRequestMethod("GET");
 int responseCode = con.getResponseCode();
@@ -717,7 +707,7 @@ System.out.println(response.toString());
 ```
 `GET /games`
 
-Browse Games. Successful request will return an __array of game objects__. To make your requests as specific to your needs as possible it's highly recommended reading over our [filtering documentation](https://docs.mod.works/#filtering) if it will help you with consuming this endpoint.
+Browse Games. Successful request will return an __array of game objects__. To make your requests as specific to your needs as possible it's highly recommended reading over our [filtering documentation](https://docs.mod.io/#filtering) if it will help you with consuming this endpoint.
      
      Filter|Type|Description
      ---|---|---
@@ -725,11 +715,11 @@ Browse Games. Successful request will return an __array of game objects__. To ma
      member|integer|Unique id of the member who has ownership of the game.
      datereg|integer|Unix timestamp of date registered.
      dateup|integer|Unix timestamp of date updated.
-     presentation|integer|Choose which presentation style you want to use for your game on the mod.works website <br><br>*Field options*<br>__0__ =  Grid View: Displays mods in a grid (visual but less informative, default setting) <br>__1__ = Table View: Displays mods ina  table (easier to browse)
+     presentation|integer|Choose which presentation style you want to use for your game on the mod.io website <br><br>*Field options*<br>__0__ =  Grid View: Displays mods in a grid (visual but less informative, default setting) <br>__1__ = Table View: Displays mods ina  table (easier to browse)
      community|integer|Choose what rights community members have with the game <br><br>*Field Options*<br>__0__ = Discussion board disabled, community cannot share guides and news<br>__1__ = Discussion Board enabled only<br>__2__ = Community can only share guides and news<br>__3__ = Discussion Board enabled and community can share news and guides
-     submission|integer|Choose what submission process you want modders to follow <br><br>*Field Options*<br>__0__ = Control the upload process. ou will have to build an upload system either in-game or via a standalone app, which enables developers to submit mods to the tags you have configured. Because you control the flow, you can prevalidate and compile mods, to ensure they will work in your game. In the long run this option will save you time as you can accept more submissions, but it requires more setup to get running and isn't as open as the above option. NOTE: mod profiles can still be created online, but uploads will have to occur via the tools you supply.<br><br>__1__ = Enable mod uploads from anywhere. Allow developers to upload mods via the website and API, and pick the tags their mod is built for. No validation will be done on the files submitted, it will be the responsibility of your game and apps built to process the mods installation based on the tags selected and determine if the mod is valid and works. For example a mod might be uploaded to the 'map' tag. When a user subscribes to this mod, your game will need to verify it contains a map file and install it where maps are located. If this fails, your game or the community will have to flag the mod as 'incompatible' to remove it from the listing.
+     submission|integer|Choose what submission process you want modders to follow <br><br>*Field Options*<br>__0__ = Control the upload process. ou will have to build an upload system either in-game or via a standalone app, which enables developers to submit mods to the tags you have configured. Because you control the flow, you can prevalidate and compile mods, to ensure they will work in your game. In the long run this option will save you time as you can accept more submissions, but it requires more setup to get running and isn't as open as the above option. NOTE: mod profiles can still be created online, but uploads will have to occur via the tools you supply.<br><br>__1__ = Enable mod uploads from anywhere. Allow developers to upload mods via the website and API, and pick the tags their mod is built for. No validation will be done on the files submitted, it will be the responsibility of your game and apps built to process the mods installation based on the tags selected and determine if the mod is valid and io. For example a mod might be uploaded to the 'map' tag. When a user subscribes to this mod, your game will need to verify it contains a map file and install it where maps are located. If this fails, your game or the community will have to flag the mod as 'incompatible' to remove it from the listing.
      curation|integer|Choose the curation process for the game<br><br>*Field Options*<br>__0__ = Mods are immediately available to play, without any intervention or work from your team.<br>__1__ = Screen only mods the author wants to sell, before they are available to purchase via the API.<br>__2__ = All mods must be accepted by someone on your team. This option is useful for games that have a small number of mods and want to control the experience, or you need to set the parameters attached to a mod (i.e. a weapon may require the rate of fire, power level, clip size etc). It can also be used for complex mods, which you may need to build into your game or distribute as DLC.
-     api|integer|Choose what permissions you want to enable via the mod.works API<br><br>*Field Options*<br>__0__ = Third parties cannot access your mods API and mods cannot be downloaded directly without API validation.<br>__1__ = Allow 3rd parties to access your mods API (recommended, an open API will encourage a healthy ecosystem of tools and apps) but mods cannot be downloaded directly<br>__2__ = Allow mods to be downloaded directly but 3rd parties cannot access your mods API.<br>__3__ = Allow third parties to access your mods API and allow mods to be downloaded directly without api validation.
+     api|integer|Choose what permissions you want to enable via the mod.io API<br><br>*Field Options*<br>__0__ = Third parties cannot access your mods API and mods cannot be downloaded directly without API validation.<br>__1__ = Allow 3rd parties to access your mods API (recommended, an open API will encourage a healthy ecosystem of tools and apps) but mods cannot be downloaded directly<br>__2__ = Allow mods to be downloaded directly but 3rd parties cannot access your mods API.<br>__3__ = Allow third parties to access your mods API and allow mods to be downloaded directly without api validation.
      ugcname|string|Singular word that describes the user-generated content type.
      icon|string|Filename of the icon image, extension included.
      logo|string|Filename of the logo image, extension included.
@@ -759,12 +749,12 @@ Status|Meaning|Description
         "username": "XanT",
         "permission": 1,
         "avatar": {
-          "full": "https://media.mod.works/images/members/1/1/1/masterchief.jpg",
+          "full": "https://media.mod.io/images/members/1/1/1/masterchief.jpg",
           "filename": "masterchief.jpg"
         },
         "timezone": "Australia/Brisbane",
         "language": "en",
-        "url": "https://mod.works/members/xant"
+        "url": "https://mod.io/members/xant"
       },
       "datereg": 1493702614,
       "dateup": 1499410290,
@@ -776,17 +766,17 @@ Status|Meaning|Description
       "api": 3,
       "ugcname": "map",
       "icon": {
-        "full": "https://media.mod.works/images/games/1/1/2/icon.png",
-        "thumbnail": "https://media.mod.works/cache/images/mods/1/1/2/crop_320x180/icon.png",
+        "full": "https://media.mod.io/images/games/1/1/2/icon.png",
+        "thumbnail": "https://media.mod.io/cache/images/mods/1/1/2/crop_320x180/icon.png",
         "filename": "icon.png"
       },
       "logo": {
-        "full": "https://media.mod.works/images/games/1/1/2/gamelogo.jpg",
-        "thumbnail": "https://media.mod.works/cache/images/mods/1/1/2/thumb_1020x2000/gamelogo.jpg",
+        "full": "https://media.mod.io/images/games/1/1/2/gamelogo.jpg",
+        "thumbnail": "https://media.mod.io/cache/images/mods/1/1/2/thumb_1020x2000/gamelogo.jpg",
         "filename": "gamelogo.jpg"
       },
       "header": {
-        "full": "https://media.mod.works/images/games/1/1/2/gameheader.png",
+        "full": "https://media.mod.io/images/games/1/1/2/gameheader.png",
         "filename": "gameheader.png"
       },
       "homepage": "https://www.rogue-knight-game.com/",
@@ -794,7 +784,7 @@ Status|Meaning|Description
       "nameid": "rogue-knight",
       "summary": "Rogue Knight is a brand new 2D pixel platformer.",
       "instructions": "Instructions here on how to develop for your game.",
-      "url": "https://rogue-knight.mod.works",
+      "url": "https://rogue-knight.mod.io",
       "cats": [
         {
           "name": "Engines",
@@ -823,14 +813,14 @@ apiKey, oauth2 ( Scopes: read )
 
 ```shell
 # You can also use wget
-curl -X get https://api.mod.works/v1/games/{game-id}?api_key=YourApiKey \
+curl -X get https://api.mod.io/v1/games/{game-id}?api_key=YourApiKey \
   -H 'Accept: application/json'
 
 ```
 
 ```http
-GET https://api.mod.works/v1/games/{game-id}?api_key=YourApiKey HTTP/1.1
-Host: api.mod.works
+GET https://api.mod.io/v1/games/{game-id}?api_key=YourApiKey HTTP/1.1
+Host: api.mod.io
 
 Accept: application/json
 
@@ -843,7 +833,7 @@ var headers = {
 };
 
 $.ajax({
-  url: 'https://api.mod.works/v1/games/{game-id}',
+  url: 'https://api.mod.io/v1/games/{game-id}',
   method: 'get',
   data: '?api_key=YourApiKey',
   headers: headers,
@@ -861,7 +851,7 @@ const headers = {
 
 };
 
-fetch('https://api.mod.works/v1/games/{game-id}?api_key=YourApiKey',
+fetch('https://api.mod.io/v1/games/{game-id}?api_key=YourApiKey',
 {
   method: 'GET',
 
@@ -882,7 +872,7 @@ headers = {
   'Accept' => 'application/json'
 }
 
-result = RestClient.get 'https://api.mod.works/v1/games/{game-id}', params: {
+result = RestClient.get 'https://api.mod.io/v1/games/{game-id}', params: {
   'api_key' => 'string'
 }, headers: headers
 
@@ -895,7 +885,7 @@ headers = {
   'Accept': 'application/json'
 }
 
-r = requests.get('https://api.mod.works/v1/games/{game-id}', params={
+r = requests.get('https://api.mod.io/v1/games/{game-id}', params={
   'api_key': 'YourApiKey'
 }, headers = headers)
 
@@ -903,7 +893,7 @@ print r.json()
 ```
 
 ```java
-URL obj = new URL("https://api.mod.works/v1/games/{game-id}?api_key=YourApiKey");
+URL obj = new URL("https://api.mod.io/v1/games/{game-id}?api_key=YourApiKey");
 HttpURLConnection con = (HttpURLConnection) obj.openConnection();
 con.setRequestMethod("GET");
 int responseCode = con.getResponseCode();
@@ -938,12 +928,12 @@ Status|Meaning|Description
     "username": "XanT",
     "permission": 1,
     "avatar": {
-      "full": "https://media.mod.works/images/members/1/1/1/masterchief.jpg",
+      "full": "https://media.mod.io/images/members/1/1/1/masterchief.jpg",
       "filename": "masterchief.jpg"
     },
     "timezone": "Australia/Brisbane",
     "language": "en",
-    "url": "https://mod.works/members/xant"
+    "url": "https://mod.io/members/xant"
   },
   "datereg": 1493702614,
   "dateup": 1499410290,
@@ -955,17 +945,17 @@ Status|Meaning|Description
   "api": 3,
   "ugcname": "map",
   "icon": {
-    "full": "https://media.mod.works/images/games/1/1/2/icon.png",
-    "thumbnail": "https://media.mod.works/cache/images/mods/1/1/2/crop_320x180/icon.png",
+    "full": "https://media.mod.io/images/games/1/1/2/icon.png",
+    "thumbnail": "https://media.mod.io/cache/images/mods/1/1/2/crop_320x180/icon.png",
     "filename": "icon.png"
   },
   "logo": {
-    "full": "https://media.mod.works/images/games/1/1/2/gamelogo.jpg",
-    "thumbnail": "https://media.mod.works/cache/images/mods/1/1/2/thumb_1020x2000/gamelogo.jpg",
+    "full": "https://media.mod.io/images/games/1/1/2/gamelogo.jpg",
+    "thumbnail": "https://media.mod.io/cache/images/mods/1/1/2/thumb_1020x2000/gamelogo.jpg",
     "filename": "gamelogo.jpg"
   },
   "header": {
-    "full": "https://media.mod.works/images/games/1/1/2/gameheader.png",
+    "full": "https://media.mod.io/images/games/1/1/2/gameheader.png",
     "filename": "gameheader.png"
   },
   "homepage": "https://www.rogue-knight-game.com/",
@@ -973,7 +963,7 @@ Status|Meaning|Description
   "nameid": "rogue-knight",
   "summary": "Rogue Knight is a brand new 2D pixel platformer.",
   "instructions": "Instructions here on how to develop for your game.",
-  "url": "https://rogue-knight.mod.works",
+  "url": "https://rogue-knight.mod.io",
   "cats": [
     {
       "name": "Engines",
@@ -997,7 +987,7 @@ apiKey, oauth2 ( Scopes: read )
 
 ```shell
 # You can also use wget
-curl -X put https://api.mod.works/v1/games/{game-id} \
+curl -X put https://api.mod.io/v1/games/{game-id} \
   -H 'Authorization: Bearer YourAccessToken' \
   -H 'Content-Type: application/x-www-form-urlencoded' \
   -H 'Accept: application/json'
@@ -1005,8 +995,8 @@ curl -X put https://api.mod.works/v1/games/{game-id} \
 ```
 
 ```http
-PUT https://api.mod.works/v1/games/{game-id} HTTP/1.1
-Host: api.mod.works
+PUT https://api.mod.io/v1/games/{game-id} HTTP/1.1
+Host: api.mod.io
 
 Accept: application/json
 Authorization: Bearer YourAccessToken
@@ -1023,7 +1013,7 @@ var headers = {
 };
 
 $.ajax({
-  url: 'https://api.mod.works/v1/games/{game-id}',
+  url: 'https://api.mod.io/v1/games/{game-id}',
   method: 'put',
 
   headers: headers,
@@ -1043,7 +1033,7 @@ const headers = {
 
 };
 
-fetch('https://api.mod.works/v1/games/{game-id}',
+fetch('https://api.mod.io/v1/games/{game-id}',
 {
   method: 'PUT',
 
@@ -1066,7 +1056,7 @@ headers = {
   'Accept' => 'application/json'
 }
 
-result = RestClient.put 'https://api.mod.works/v1/games/{game-id}', params: {
+result = RestClient.put 'https://api.mod.io/v1/games/{game-id}', params: {
   }, headers: headers
 
 p JSON.parse(result)
@@ -1080,7 +1070,7 @@ headers = {
   'Accept': 'application/json'
 }
 
-r = requests.put('https://api.mod.works/v1/games/{game-id}', params={
+r = requests.put('https://api.mod.io/v1/games/{game-id}', params={
 
 }, headers = headers)
 
@@ -1088,7 +1078,7 @@ print r.json()
 ```
 
 ```java
-URL obj = new URL("https://api.mod.works/v1/games/{game-id}");
+URL obj = new URL("https://api.mod.io/v1/games/{game-id}");
 HttpURLConnection con = (HttpURLConnection) obj.openConnection();
 con.setRequestMethod("PUT");
 int responseCode = con.getResponseCode();
@@ -1104,17 +1094,17 @@ System.out.println(response.toString());
 ```
 `PUT /games/{game-id}`
 
-Update details for a game. If you want to update the `icon`, `logo` or `header` fields you need to use the [Add Game Media](https://docs.mod.works/#add-game-media) endpoint.
+Update details for a game. If you want to update the `icon`, `logo` or `header` fields you need to use the [Add Game Media](https://docs.mod.io/#add-game-media) endpoint.
      
      Parameter|Type|Required|Description
      ---|---|---|---|
-     presentation|integer||Choose which presentation style you want to use for your game on the mod.works website <br><br>*Field options*<br>__0__ =  Grid View: Displays mods in a grid (visual but less informative, default setting) <br>__1__ = Table View: Displays mods ina  table (easier to browse)
+     presentation|integer||Choose which presentation style you want to use for your game on the mod.io website <br><br>*Field options*<br>__0__ =  Grid View: Displays mods in a grid (visual but less informative, default setting) <br>__1__ = Table View: Displays mods ina  table (easier to browse)
      community|integer||Choose what rights community members have with the game <br><br>*Field Options*<br>__0__ = Discussion board disabled, community cannot share guides and news<br>__1__ = Discussion Board enabled only<br>__2__ = Community can only share guides and news<br>__3__ = Discussion Board enabled and community can share news and guides
-     submission|integer||Choose what submission process you want modders to follow <br><br>*Field Options*<br>__0__ = Control the upload process. ou will have to build an upload system either in-game or via a standalone app, which enables developers to submit mods to the tags you have configured. Because you control the flow, you can prevalidate and compile mods, to ensure they will work in your game. In the long run this option will save you time as you can accept more submissions, but it requires more setup to get running and isn't as open as the above option. NOTE: mod profiles can still be created online, but uploads will have to occur via the tools you supply.<br><br>__1__ = Enable mod uploads from anywhere. Allow developers to upload mods via the website and API, and pick the tags their mod is built for. No validation will be done on the files submitted, it will be the responsibility of your game and apps built to process the mods installation based on the tags selected and determine if the mod is valid and works. For example a mod might be uploaded to the 'map' tag. When a user subscribes to this mod, your game will need to verify it contains a map file and install it where maps are located. If this fails, your game or the community will have to flag the mod as 'incompatible' to remove it from the listing.
+     submission|integer||Choose what submission process you want modders to follow <br><br>*Field Options*<br>__0__ = Control the upload process. ou will have to build an upload system either in-game or via a standalone app, which enables developers to submit mods to the tags you have configured. Because you control the flow, you can prevalidate and compile mods, to ensure they will work in your game. In the long run this option will save you time as you can accept more submissions, but it requires more setup to get running and isn't as open as the above option. NOTE: mod profiles can still be created online, but uploads will have to occur via the tools you supply.<br><br>__1__ = Enable mod uploads from anywhere. Allow developers to upload mods via the website and API, and pick the tags their mod is built for. No validation will be done on the files submitted, it will be the responsibility of your game and apps built to process the mods installation based on the tags selected and determine if the mod is valid and io. For example a mod might be uploaded to the 'map' tag. When a user subscribes to this mod, your game will need to verify it contains a map file and install it where maps are located. If this fails, your game or the community will have to flag the mod as 'incompatible' to remove it from the listing.
      curation|integer||Choose the curation process for the game<br><br>*Field Options*<br>__0__ = Mods are immediately available to play, without any intervention or work from your team.<br>__1__ = Screen only mods the author wants to sell, before they are available to purchase via the API.<br>__2__ = All mods must be accepted by someone on your team. This option is useful for games that have a small number of mods and want to control the experience, or you need to set the parameters attached to a mod (i.e. a weapon may require the rate of fire, power level, clip size etc). It can also be used for complex mods, which you may need to build into your game or distribute as DLC.
-     api|integer||Choose what permissions you want to enable via the mod.works API<br><br>*Field Options*<br>__0__ = Third parties cannot access your mods API and mods cannot be downloaded directly without API validation.<br>__1__ = Allow 3rd parties to access your mods API (recommended, an open API will encourage a healthy ecosystem of tools and apps) but mods cannot be downloaded directly<br>__2__ = Allow mods to be downloaded directly but 3rd parties cannot access your mods API.<br>__3__ = Allow third parties to access your mods API and allow mods to be downloaded directly without api validation.
+     api|integer||Choose what permissions you want to enable via the mod.io API<br><br>*Field Options*<br>__0__ = Third parties cannot access your mods API and mods cannot be downloaded directly without API validation.<br>__1__ = Allow 3rd parties to access your mods API (recommended, an open API will encourage a healthy ecosystem of tools and apps) but mods cannot be downloaded directly<br>__2__ = Allow mods to be downloaded directly but 3rd parties cannot access your mods API.<br>__3__ = Allow third parties to access your mods API and allow mods to be downloaded directly without api validation.
      ugcname|string||Singular word to best describe your games user-generated content.
-     homepage|string||Official homepage for your game, if you do not fill this out it will default to your mod.works profile. Must be a valid URL.
+     homepage|string||Official homepage for your game, if you do not fill this out it will default to your mod.io profile. Must be a valid URL.
      name|string||The name of your game. Highly recommended to not change this unless absolutely required.
      nameid|string||The unique SEO friendly URL for your game. Cannot exceed 80 characters.
      summary|string||Summary for your game, giving a brief overview of what it's about - cannot exceed 250 characters.
@@ -1145,7 +1135,7 @@ oauth2 ( Scopes: write )
 
 ```shell
 # You can also use wget
-curl -X post https://api.mod.works/v1/games/{game-id}/media \
+curl -X post https://api.mod.io/v1/games/{game-id}/media \
   -H 'Authorization: Bearer YourAccessToken' \
   -H 'Content-Type: multipart/form-data' \
   -H 'Accept: application/json'
@@ -1153,8 +1143,8 @@ curl -X post https://api.mod.works/v1/games/{game-id}/media \
 ```
 
 ```http
-POST https://api.mod.works/v1/games/{game-id}/media HTTP/1.1
-Host: api.mod.works
+POST https://api.mod.io/v1/games/{game-id}/media HTTP/1.1
+Host: api.mod.io
 
 Accept: application/json
 Authorization: Bearer YourAccessToken
@@ -1171,7 +1161,7 @@ var headers = {
 };
 
 $.ajax({
-  url: 'https://api.mod.works/v1/games/{game-id}/media',
+  url: 'https://api.mod.io/v1/games/{game-id}/media',
   method: 'post',
 
   headers: headers,
@@ -1191,7 +1181,7 @@ const headers = {
 
 };
 
-fetch('https://api.mod.works/v1/games/{game-id}/media',
+fetch('https://api.mod.io/v1/games/{game-id}/media',
 {
   method: 'POST',
 
@@ -1214,7 +1204,7 @@ headers = {
   'Accept' => 'application/json'
 }
 
-result = RestClient.post 'https://api.mod.works/v1/games/{game-id}/media', params: {
+result = RestClient.post 'https://api.mod.io/v1/games/{game-id}/media', params: {
   }, headers: headers
 
 p JSON.parse(result)
@@ -1228,7 +1218,7 @@ headers = {
   'Accept': 'application/json'
 }
 
-r = requests.post('https://api.mod.works/v1/games/{game-id}/media', params={
+r = requests.post('https://api.mod.io/v1/games/{game-id}/media', params={
 
 }, headers = headers)
 
@@ -1236,7 +1226,7 @@ print r.json()
 ```
 
 ```java
-URL obj = new URL("https://api.mod.works/v1/games/{game-id}/media");
+URL obj = new URL("https://api.mod.io/v1/games/{game-id}/media");
 HttpURLConnection con = (HttpURLConnection) obj.openConnection();
 con.setRequestMethod("POST");
 int responseCode = con.getResponseCode();
@@ -1285,14 +1275,14 @@ oauth2 ( Scopes: write )
 
 ```shell
 # You can also use wget
-curl -X get https://api.mod.works/v1/games/{game-id}/activity?api_key=YourApiKey \
+curl -X get https://api.mod.io/v1/games/{game-id}/activity?api_key=YourApiKey \
   -H 'Accept: application/json'
 
 ```
 
 ```http
-GET https://api.mod.works/v1/games/{game-id}/activity?api_key=YourApiKey HTTP/1.1
-Host: api.mod.works
+GET https://api.mod.io/v1/games/{game-id}/activity?api_key=YourApiKey HTTP/1.1
+Host: api.mod.io
 
 Accept: application/json
 
@@ -1305,7 +1295,7 @@ var headers = {
 };
 
 $.ajax({
-  url: 'https://api.mod.works/v1/games/{game-id}/activity',
+  url: 'https://api.mod.io/v1/games/{game-id}/activity',
   method: 'get',
   data: '?api_key=YourApiKey',
   headers: headers,
@@ -1323,7 +1313,7 @@ const headers = {
 
 };
 
-fetch('https://api.mod.works/v1/games/{game-id}/activity?api_key=YourApiKey',
+fetch('https://api.mod.io/v1/games/{game-id}/activity?api_key=YourApiKey',
 {
   method: 'GET',
 
@@ -1344,7 +1334,7 @@ headers = {
   'Accept' => 'application/json'
 }
 
-result = RestClient.get 'https://api.mod.works/v1/games/{game-id}/activity', params: {
+result = RestClient.get 'https://api.mod.io/v1/games/{game-id}/activity', params: {
   'api_key' => 'string'
 }, headers: headers
 
@@ -1357,7 +1347,7 @@ headers = {
   'Accept': 'application/json'
 }
 
-r = requests.get('https://api.mod.works/v1/games/{game-id}/activity', params={
+r = requests.get('https://api.mod.io/v1/games/{game-id}/activity', params={
   'api_key': 'YourApiKey'
 }, headers = headers)
 
@@ -1365,7 +1355,7 @@ print r.json()
 ```
 
 ```java
-URL obj = new URL("https://api.mod.works/v1/games/{game-id}/activity?api_key=YourApiKey");
+URL obj = new URL("https://api.mod.io/v1/games/{game-id}/activity?api_key=YourApiKey");
 HttpURLConnection con = (HttpURLConnection) obj.openConnection();
 con.setRequestMethod("GET");
 int responseCode = con.getResponseCode();
@@ -1381,7 +1371,7 @@ System.out.println(response.toString());
 ```
 `GET /games/{game-id}/activity`
 
-View activity for a game, showing changes made to the resource. Successful request will return an __array of activity objects__. To make your requests as specific to your needs as possible it's highly recommended reading over our [filtering documentation](https://docs.mod.works/#filtering) if it will help you with consuming this endpoint.
+View activity for a game, showing changes made to the resource. Successful request will return an __array of activity objects__. To make your requests as specific to your needs as possible it's highly recommended reading over our [filtering documentation](https://docs.mod.io/#filtering) if it will help you with consuming this endpoint.
      
      Filter|Type|Description
      ---|---|---
@@ -1409,19 +1399,19 @@ Status|Meaning|Description
         "username": "XanT",
         "permission": 1,
         "avatar": {
-          "full": "https://media.mod.works/images/members/1/1/1/masterchief.jpg",
+          "full": "https://media.mod.io/images/members/1/1/1/masterchief.jpg",
           "filename": "masterchief.jpg"
         },
         "timezone": "Australia/Brisbane",
         "language": "en",
-        "url": "https://mod.works/members/xant"
+        "url": "https://mod.io/members/xant"
       },
       "dateup": 1499846132,
       "event": "GAME_UPDATE",
       "changes": {
         "summary": {
           "before": "https://www.roguehdpack.com/",
-          "after": "https://rogue-knight.mod.works/rogue-hd-pack"
+          "after": "https://rogue-knight.mod.io/rogue-hd-pack"
         }
       }
     },
@@ -1442,14 +1432,14 @@ apiKey, oauth2 ( Scopes: read )
 
 ```shell
 # You can also use wget
-curl -X get https://api.mod.works/v1/games/{game-id}/team?api_key=YourApiKey \
+curl -X get https://api.mod.io/v1/games/{game-id}/team?api_key=YourApiKey \
   -H 'Accept: application/json'
 
 ```
 
 ```http
-GET https://api.mod.works/v1/games/{game-id}/team?api_key=YourApiKey HTTP/1.1
-Host: api.mod.works
+GET https://api.mod.io/v1/games/{game-id}/team?api_key=YourApiKey HTTP/1.1
+Host: api.mod.io
 
 Accept: application/json
 
@@ -1462,7 +1452,7 @@ var headers = {
 };
 
 $.ajax({
-  url: 'https://api.mod.works/v1/games/{game-id}/team',
+  url: 'https://api.mod.io/v1/games/{game-id}/team',
   method: 'get',
   data: '?api_key=YourApiKey',
   headers: headers,
@@ -1480,7 +1470,7 @@ const headers = {
 
 };
 
-fetch('https://api.mod.works/v1/games/{game-id}/team?api_key=YourApiKey',
+fetch('https://api.mod.io/v1/games/{game-id}/team?api_key=YourApiKey',
 {
   method: 'GET',
 
@@ -1501,7 +1491,7 @@ headers = {
   'Accept' => 'application/json'
 }
 
-result = RestClient.get 'https://api.mod.works/v1/games/{game-id}/team', params: {
+result = RestClient.get 'https://api.mod.io/v1/games/{game-id}/team', params: {
   'api_key' => 'string'
 }, headers: headers
 
@@ -1514,7 +1504,7 @@ headers = {
   'Accept': 'application/json'
 }
 
-r = requests.get('https://api.mod.works/v1/games/{game-id}/team', params={
+r = requests.get('https://api.mod.io/v1/games/{game-id}/team', params={
   'api_key': 'YourApiKey'
 }, headers = headers)
 
@@ -1522,7 +1512,7 @@ print r.json()
 ```
 
 ```java
-URL obj = new URL("https://api.mod.works/v1/games/{game-id}/team?api_key=YourApiKey");
+URL obj = new URL("https://api.mod.io/v1/games/{game-id}/team?api_key=YourApiKey");
 HttpURLConnection con = (HttpURLConnection) obj.openConnection();
 con.setRequestMethod("GET");
 int responseCode = con.getResponseCode();
@@ -1559,12 +1549,12 @@ Status|Meaning|Description
         "username": "XanT",
         "permission": 1,
         "avatar": {
-          "full": "https://media.mod.works/images/members/1/1/1/masterchief.jpg",
+          "full": "https://media.mod.io/images/members/1/1/1/masterchief.jpg",
           "filename": "masterchief.jpg"
         },
         "timezone": "Australia/Brisbane",
         "language": "en",
-        "url": "https://mod.works/members/xant"
+        "url": "https://mod.io/members/xant"
       },
       "username": "Megalodon",
       "level": 8,
@@ -1588,7 +1578,7 @@ apiKey, oauth2 ( Scopes: read )
 
 ```shell
 # You can also use wget
-curl -X post https://api.mod.works/v1/games/{game-id}/team \
+curl -X post https://api.mod.io/v1/games/{game-id}/team \
   -H 'Authorization: Bearer YourAccessToken' \
   -H 'Content-Type: application/x-www-form-urlencoded' \
   -H 'Accept: application/json'
@@ -1596,8 +1586,8 @@ curl -X post https://api.mod.works/v1/games/{game-id}/team \
 ```
 
 ```http
-POST https://api.mod.works/v1/games/{game-id}/team HTTP/1.1
-Host: api.mod.works
+POST https://api.mod.io/v1/games/{game-id}/team HTTP/1.1
+Host: api.mod.io
 
 Accept: application/json
 Authorization: Bearer YourAccessToken
@@ -1614,7 +1604,7 @@ var headers = {
 };
 
 $.ajax({
-  url: 'https://api.mod.works/v1/games/{game-id}/team',
+  url: 'https://api.mod.io/v1/games/{game-id}/team',
   method: 'post',
 
   headers: headers,
@@ -1634,7 +1624,7 @@ const headers = {
 
 };
 
-fetch('https://api.mod.works/v1/games/{game-id}/team',
+fetch('https://api.mod.io/v1/games/{game-id}/team',
 {
   method: 'POST',
 
@@ -1657,7 +1647,7 @@ headers = {
   'Accept' => 'application/json'
 }
 
-result = RestClient.post 'https://api.mod.works/v1/games/{game-id}/team', params: {
+result = RestClient.post 'https://api.mod.io/v1/games/{game-id}/team', params: {
   }, headers: headers
 
 p JSON.parse(result)
@@ -1671,7 +1661,7 @@ headers = {
   'Accept': 'application/json'
 }
 
-r = requests.post('https://api.mod.works/v1/games/{game-id}/team', params={
+r = requests.post('https://api.mod.io/v1/games/{game-id}/team', params={
 
 }, headers = headers)
 
@@ -1679,7 +1669,7 @@ print r.json()
 ```
 
 ```java
-URL obj = new URL("https://api.mod.works/v1/games/{game-id}/team");
+URL obj = new URL("https://api.mod.io/v1/games/{game-id}/team");
 HttpURLConnection con = (HttpURLConnection) obj.openConnection();
 con.setRequestMethod("POST");
 int responseCode = con.getResponseCode();
@@ -1728,7 +1718,7 @@ oauth2 ( Scopes: write )
 
 ```shell
 # You can also use wget
-curl -X put https://api.mod.works/v1/games/{game-id}/team/{access-id} \
+curl -X put https://api.mod.io/v1/games/{game-id}/team/{access-id} \
   -H 'Authorization: Bearer YourAccessToken' \
   -H 'Content-Type: application/x-www-form-urlencoded' \
   -H 'Accept: application/json'
@@ -1736,8 +1726,8 @@ curl -X put https://api.mod.works/v1/games/{game-id}/team/{access-id} \
 ```
 
 ```http
-PUT https://api.mod.works/v1/games/{game-id}/team/{access-id} HTTP/1.1
-Host: api.mod.works
+PUT https://api.mod.io/v1/games/{game-id}/team/{access-id} HTTP/1.1
+Host: api.mod.io
 
 Accept: application/json
 Authorization: Bearer YourAccessToken
@@ -1754,7 +1744,7 @@ var headers = {
 };
 
 $.ajax({
-  url: 'https://api.mod.works/v1/games/{game-id}/team/{access-id}',
+  url: 'https://api.mod.io/v1/games/{game-id}/team/{access-id}',
   method: 'put',
 
   headers: headers,
@@ -1774,7 +1764,7 @@ const headers = {
 
 };
 
-fetch('https://api.mod.works/v1/games/{game-id}/team/{access-id}',
+fetch('https://api.mod.io/v1/games/{game-id}/team/{access-id}',
 {
   method: 'PUT',
 
@@ -1797,7 +1787,7 @@ headers = {
   'Accept' => 'application/json'
 }
 
-result = RestClient.put 'https://api.mod.works/v1/games/{game-id}/team/{access-id}', params: {
+result = RestClient.put 'https://api.mod.io/v1/games/{game-id}/team/{access-id}', params: {
   }, headers: headers
 
 p JSON.parse(result)
@@ -1811,7 +1801,7 @@ headers = {
   'Accept': 'application/json'
 }
 
-r = requests.put('https://api.mod.works/v1/games/{game-id}/team/{access-id}', params={
+r = requests.put('https://api.mod.io/v1/games/{game-id}/team/{access-id}', params={
 
 }, headers = headers)
 
@@ -1819,7 +1809,7 @@ print r.json()
 ```
 
 ```java
-URL obj = new URL("https://api.mod.works/v1/games/{game-id}/team/{access-id}");
+URL obj = new URL("https://api.mod.io/v1/games/{game-id}/team/{access-id}");
 HttpURLConnection con = (HttpURLConnection) obj.openConnection();
 con.setRequestMethod("PUT");
 int responseCode = con.getResponseCode();
@@ -1867,7 +1857,7 @@ oauth2 ( Scopes: write )
 
 ```shell
 # You can also use wget
-curl -X delete https://api.mod.works/v1/games/{game-id}/team/{access-id} \
+curl -X delete https://api.mod.io/v1/games/{game-id}/team/{access-id} \
   -H 'Authorization: Bearer YourAccessToken' \
   -H 'Content-Type: application/x-www-form-urlencoded' \
   -H 'Accept: application/json'
@@ -1875,8 +1865,8 @@ curl -X delete https://api.mod.works/v1/games/{game-id}/team/{access-id} \
 ```
 
 ```http
-DELETE https://api.mod.works/v1/games/{game-id}/team/{access-id} HTTP/1.1
-Host: api.mod.works
+DELETE https://api.mod.io/v1/games/{game-id}/team/{access-id} HTTP/1.1
+Host: api.mod.io
 
 Accept: application/json
 Authorization: Bearer YourAccessToken
@@ -1893,7 +1883,7 @@ var headers = {
 };
 
 $.ajax({
-  url: 'https://api.mod.works/v1/games/{game-id}/team/{access-id}',
+  url: 'https://api.mod.io/v1/games/{game-id}/team/{access-id}',
   method: 'delete',
 
   headers: headers,
@@ -1913,7 +1903,7 @@ const headers = {
 
 };
 
-fetch('https://api.mod.works/v1/games/{game-id}/team/{access-id}',
+fetch('https://api.mod.io/v1/games/{game-id}/team/{access-id}',
 {
   method: 'DELETE',
 
@@ -1936,7 +1926,7 @@ headers = {
   'Accept' => 'application/json'
 }
 
-result = RestClient.delete 'https://api.mod.works/v1/games/{game-id}/team/{access-id}', params: {
+result = RestClient.delete 'https://api.mod.io/v1/games/{game-id}/team/{access-id}', params: {
   }, headers: headers
 
 p JSON.parse(result)
@@ -1950,7 +1940,7 @@ headers = {
   'Accept': 'application/json'
 }
 
-r = requests.delete('https://api.mod.works/v1/games/{game-id}/team/{access-id}', params={
+r = requests.delete('https://api.mod.io/v1/games/{game-id}/team/{access-id}', params={
 
 }, headers = headers)
 
@@ -1958,7 +1948,7 @@ print r.json()
 ```
 
 ```java
-URL obj = new URL("https://api.mod.works/v1/games/{game-id}/team/{access-id}");
+URL obj = new URL("https://api.mod.io/v1/games/{game-id}/team/{access-id}");
 HttpURLConnection con = (HttpURLConnection) obj.openConnection();
 con.setRequestMethod("DELETE");
 int responseCode = con.getResponseCode();
@@ -2000,7 +1990,7 @@ oauth2 ( Scopes: write )
 
 ```shell
 # You can also use wget
-curl -X post https://api.mod.works/v1/report \
+curl -X post https://api.mod.io/v1/report \
   -H 'Authorization: Bearer YourAccessToken' \
   -H 'Content-Type: application/x-www-form-urlencoded' \
   -H 'Accept: application/json'
@@ -2008,8 +1998,8 @@ curl -X post https://api.mod.works/v1/report \
 ```
 
 ```http
-POST https://api.mod.works/v1/report HTTP/1.1
-Host: api.mod.works
+POST https://api.mod.io/v1/report HTTP/1.1
+Host: api.mod.io
 
 Accept: application/json
 Authorization: Bearer YourAccessToken
@@ -2026,7 +2016,7 @@ var headers = {
 };
 
 $.ajax({
-  url: 'https://api.mod.works/v1/report',
+  url: 'https://api.mod.io/v1/report',
   method: 'post',
 
   headers: headers,
@@ -2046,7 +2036,7 @@ const headers = {
 
 };
 
-fetch('https://api.mod.works/v1/report',
+fetch('https://api.mod.io/v1/report',
 {
   method: 'POST',
 
@@ -2069,7 +2059,7 @@ headers = {
   'Accept' => 'application/json'
 }
 
-result = RestClient.post 'https://api.mod.works/v1/report', params: {
+result = RestClient.post 'https://api.mod.io/v1/report', params: {
   }, headers: headers
 
 p JSON.parse(result)
@@ -2083,7 +2073,7 @@ headers = {
   'Accept': 'application/json'
 }
 
-r = requests.post('https://api.mod.works/v1/report', params={
+r = requests.post('https://api.mod.io/v1/report', params={
 
 }, headers = headers)
 
@@ -2091,7 +2081,7 @@ print r.json()
 ```
 
 ```java
-URL obj = new URL("https://api.mod.works/v1/report");
+URL obj = new URL("https://api.mod.io/v1/report");
 HttpURLConnection con = (HttpURLConnection) obj.openConnection();
 con.setRequestMethod("POST");
 int responseCode = con.getResponseCode();
@@ -2107,7 +2097,7 @@ System.out.println(response.toString());
 ```
 `POST /report`
 
-Submit a report for any resource on mod.works.
+Submit a report for any resource on mod.io.
      
      Parameter|Type|Required|Description
      ---|---|---|---|
@@ -2144,14 +2134,14 @@ oauth2 ( Scopes: write )
 
 ```shell
 # You can also use wget
-curl -X get https://api.mod.works/v1/games/{game-id}/mods?api_key=YourApiKey \
+curl -X get https://api.mod.io/v1/games/{game-id}/mods?api_key=YourApiKey \
   -H 'Accept: application/json'
 
 ```
 
 ```http
-GET https://api.mod.works/v1/games/{game-id}/mods?api_key=YourApiKey HTTP/1.1
-Host: api.mod.works
+GET https://api.mod.io/v1/games/{game-id}/mods?api_key=YourApiKey HTTP/1.1
+Host: api.mod.io
 
 Accept: application/json
 
@@ -2164,7 +2154,7 @@ var headers = {
 };
 
 $.ajax({
-  url: 'https://api.mod.works/v1/games/{game-id}/mods',
+  url: 'https://api.mod.io/v1/games/{game-id}/mods',
   method: 'get',
   data: '?api_key=YourApiKey',
   headers: headers,
@@ -2182,7 +2172,7 @@ const headers = {
 
 };
 
-fetch('https://api.mod.works/v1/games/{game-id}/mods?api_key=YourApiKey',
+fetch('https://api.mod.io/v1/games/{game-id}/mods?api_key=YourApiKey',
 {
   method: 'GET',
 
@@ -2203,7 +2193,7 @@ headers = {
   'Accept' => 'application/json'
 }
 
-result = RestClient.get 'https://api.mod.works/v1/games/{game-id}/mods', params: {
+result = RestClient.get 'https://api.mod.io/v1/games/{game-id}/mods', params: {
   'api_key' => 'string'
 }, headers: headers
 
@@ -2216,7 +2206,7 @@ headers = {
   'Accept': 'application/json'
 }
 
-r = requests.get('https://api.mod.works/v1/games/{game-id}/mods', params={
+r = requests.get('https://api.mod.io/v1/games/{game-id}/mods', params={
   'api_key': 'YourApiKey'
 }, headers = headers)
 
@@ -2224,7 +2214,7 @@ print r.json()
 ```
 
 ```java
-URL obj = new URL("https://api.mod.works/v1/games/{game-id}/mods?api_key=YourApiKey");
+URL obj = new URL("https://api.mod.io/v1/games/{game-id}/mods?api_key=YourApiKey");
 HttpURLConnection con = (HttpURLConnection) obj.openConnection();
 con.setRequestMethod("GET");
 int responseCode = con.getResponseCode();
@@ -2240,7 +2230,7 @@ System.out.println(response.toString());
 ```
 `GET /games/{game-id}/mods`
 
-Browse mods. Successful request will return an __array of mod objects__. To make your requests as specific to your needs as possible it's highly recommended reading over our [filtering documentation](https://docs.mod.works/#filtering) if it will help you with consuming this endpoint.
+Browse mods. Successful request will return an __array of mod objects__. To make your requests as specific to your needs as possible it's highly recommended reading over our [filtering documentation](https://docs.mod.io/#filtering) if it will help you with consuming this endpoint.
      
      Filter|Type|Description
      ---|---|---
@@ -2279,19 +2269,19 @@ Status|Meaning|Description
         "username": "XanT",
         "permission": 1,
         "avatar": {
-          "full": "https://media.mod.works/images/members/1/1/1/masterchief.jpg",
+          "full": "https://media.mod.io/images/members/1/1/1/masterchief.jpg",
           "filename": "masterchief.jpg"
         },
         "timezone": "Australia/Brisbane",
         "language": "en",
-        "url": "https://mod.works/members/xant"
+        "url": "https://mod.io/members/xant"
       },
       "price": 9.99,
       "datereg": 1492564103,
       "dateup": 1499841487,
       "logo": {
-        "full": "https://media.mod.works/images/mods/1/1/2/IMG_20170409_222419.jpg",
-        "thumbnail": "https://media.mod.works/cache/images/mods/1/1/2/thumb_1020x2000/IMG_20170409_222419.jpg",
+        "full": "https://media.mod.io/images/mods/1/1/2/IMG_20170409_222419.jpg",
+        "thumbnail": "https://media.mod.io/cache/images/mods/1/1/2/thumb_1020x2000/IMG_20170409_222419.jpg",
         "filename": "IMG_20170409_222419.jpg"
       },
       "homepage": "https://www.rogue-hdpack.com/",
@@ -2300,7 +2290,7 @@ Status|Meaning|Description
       "summary": "It's time to bask in the glory of beautiful 4k textures!",
       "description": "<h2>About</h2><p>Rogue HD Pack does exactly what you thi...",
       "metadata": "rogue,hd,high-res,4k,hd textures",
-      "url": "https://rogue-knight.mod.works/rogue-knight-hd-pack",
+      "url": "https://rogue-knight.mod.io/rogue-knight-hd-pack",
       "modfile": {
         "id": 2,
         "mod": 2,
@@ -2310,12 +2300,12 @@ Status|Meaning|Description
           "username": "XanT",
           "permission": 1,
           "avatar": {
-            "full": "https://media.mod.works/images/members/1/1/1/masterchief.jpg",
+            "full": "https://media.mod.io/images/members/1/1/1/masterchief.jpg",
             "filename": "masterchief.jpg"
           },
           "timezone": "Australia/Brisbane",
           "language": "en",
-          "url": "https://mod.works/members/xant"
+          "url": "https://mod.io/members/xant"
         },
         "date": 1499841487,
         "datevirus": 1499841487,
@@ -2327,7 +2317,7 @@ Status|Meaning|Description
         "version": "1.3",
         "virustotal": "No threats found.",
         "changelog": "VERSION 1.3 -- Changes -- Fixed critical castle floor bug.",
-        "download": "https://cdn.mod.works/files/1/1/2/rogue-knight-v1.zip"
+        "download": "https://cdn.mod.io/files/1/1/2/rogue-knight-v1.zip"
       },
       "media": {
         "youtube": [
@@ -2338,8 +2328,8 @@ Status|Meaning|Description
         ],
         "images": [
           {
-            "full": "https://media.mod.works/images/mods/1/1/2/IMG_20170409_222419.jpg",
-            "thumbnail": "https://media.mod.works/cache/images/mods/1/1/2/thumb_1020x2000/IMG_20170409_222419.jpg",
+            "full": "https://media.mod.io/images/mods/1/1/2/IMG_20170409_222419.jpg",
+            "thumbnail": "https://media.mod.io/cache/images/mods/1/1/2/thumb_1020x2000/IMG_20170409_222419.jpg",
             "filename": "IMG_20170409_222419.jpg"
           }
         ]
@@ -2371,7 +2361,7 @@ apiKey, oauth2 ( Scopes: read )
 
 ```shell
 # You can also use wget
-curl -X post https://api.mod.works/v1/games/{game-id}/mods \
+curl -X post https://api.mod.io/v1/games/{game-id}/mods \
   -H 'Authorization: Bearer YourAccessToken' \
   -H 'Content-Type: multipart/form-data' \
   -H 'Accept: application/json'
@@ -2379,8 +2369,8 @@ curl -X post https://api.mod.works/v1/games/{game-id}/mods \
 ```
 
 ```http
-POST https://api.mod.works/v1/games/{game-id}/mods HTTP/1.1
-Host: api.mod.works
+POST https://api.mod.io/v1/games/{game-id}/mods HTTP/1.1
+Host: api.mod.io
 
 Accept: application/json
 Authorization: Bearer YourAccessToken
@@ -2397,7 +2387,7 @@ var headers = {
 };
 
 $.ajax({
-  url: 'https://api.mod.works/v1/games/{game-id}/mods',
+  url: 'https://api.mod.io/v1/games/{game-id}/mods',
   method: 'post',
 
   headers: headers,
@@ -2417,7 +2407,7 @@ const headers = {
 
 };
 
-fetch('https://api.mod.works/v1/games/{game-id}/mods',
+fetch('https://api.mod.io/v1/games/{game-id}/mods',
 {
   method: 'POST',
 
@@ -2440,7 +2430,7 @@ headers = {
   'Accept' => 'application/json'
 }
 
-result = RestClient.post 'https://api.mod.works/v1/games/{game-id}/mods', params: {
+result = RestClient.post 'https://api.mod.io/v1/games/{game-id}/mods', params: {
   }, headers: headers
 
 p JSON.parse(result)
@@ -2454,7 +2444,7 @@ headers = {
   'Accept': 'application/json'
 }
 
-r = requests.post('https://api.mod.works/v1/games/{game-id}/mods', params={
+r = requests.post('https://api.mod.io/v1/games/{game-id}/mods', params={
 
 }, headers = headers)
 
@@ -2462,7 +2452,7 @@ print r.json()
 ```
 
 ```java
-URL obj = new URL("https://api.mod.works/v1/games/{game-id}/mods");
+URL obj = new URL("https://api.mod.io/v1/games/{game-id}/mods");
 HttpURLConnection con = (HttpURLConnection) obj.openConnection();
 con.setRequestMethod("POST");
 int responseCode = con.getResponseCode();
@@ -2478,13 +2468,13 @@ System.out.println(response.toString());
 ```
 `POST /games/{game-id}/mods`
 
-Publish a mod on mod.works While some fields have been made optional for easier adding of mods to mod.works - please be as detailed as you can.
+Publish a mod on mod.io While some fields have been made optional for easier adding of mods to mod.io - please be as detailed as you can.
      
      Parameter|Type|Required|Description
      ---|---|---|---|
      logo|file|true|Image file which will represent your new mod logo. Must be gif, jpg, jpeg or png format and cannot exceed 8MB in size.Image file which will represent your new mod logo. Must be gif, jpg, jpeg or png format and cannot exceed 8MB in size.
      name|string|true|Name of your mod. Your default mod URL will contain the name so be sure to choose the most appropriate title. Example: Stellaris Shader Mod will become the URL stellaris-shader-mod.
-     homepage|string|true|Official homepage for your mod, if you do not fill this out it will default to your mod.works profile. Must be a valid URL.
+     homepage|string|true|Official homepage for your mod, if you do not fill this out it will default to your mod.io profile. Must be a valid URL.
      summary|string|true|Summary for your mod, giving a brief overview of what it's about - cannot exceed 250 characters.
      price|double||Numeric only representation of the price if you intend to charge for your mod. Example: 19.99, 10.00.
      stock|integer||Artificially limit the amount of times the mod can be purchased.
@@ -2517,19 +2507,19 @@ Status|Header|Type|Format|Description
     "username": "XanT",
     "permission": 1,
     "avatar": {
-      "full": "https://media.mod.works/images/members/1/1/1/masterchief.jpg",
+      "full": "https://media.mod.io/images/members/1/1/1/masterchief.jpg",
       "filename": "masterchief.jpg"
     },
     "timezone": "Australia/Brisbane",
     "language": "en",
-    "url": "https://mod.works/members/xant"
+    "url": "https://mod.io/members/xant"
   },
   "price": 9.99,
   "datereg": 1492564103,
   "dateup": 1499841487,
   "logo": {
-    "full": "https://media.mod.works/images/mods/1/1/2/IMG_20170409_222419.jpg",
-    "thumbnail": "https://media.mod.works/cache/images/mods/1/1/2/thumb_1020x2000/IMG_20170409_222419.jpg",
+    "full": "https://media.mod.io/images/mods/1/1/2/IMG_20170409_222419.jpg",
+    "thumbnail": "https://media.mod.io/cache/images/mods/1/1/2/thumb_1020x2000/IMG_20170409_222419.jpg",
     "filename": "IMG_20170409_222419.jpg"
   },
   "homepage": "https://www.rogue-hdpack.com/",
@@ -2538,7 +2528,7 @@ Status|Header|Type|Format|Description
   "summary": "It's time to bask in the glory of beautiful 4k textures!",
   "description": "<h2>About</h2><p>Rogue HD Pack does exactly what you thi...",
   "metadata": "rogue,hd,high-res,4k,hd textures",
-  "url": "https://rogue-knight.mod.works/rogue-knight-hd-pack",
+  "url": "https://rogue-knight.mod.io/rogue-knight-hd-pack",
   "modfile": {
     "id": 2,
     "mod": 2,
@@ -2548,12 +2538,12 @@ Status|Header|Type|Format|Description
       "username": "XanT",
       "permission": 1,
       "avatar": {
-        "full": "https://media.mod.works/images/members/1/1/1/masterchief.jpg",
+        "full": "https://media.mod.io/images/members/1/1/1/masterchief.jpg",
         "filename": "masterchief.jpg"
       },
       "timezone": "Australia/Brisbane",
       "language": "en",
-      "url": "https://mod.works/members/xant"
+      "url": "https://mod.io/members/xant"
     },
     "date": 1499841487,
     "datevirus": 1499841487,
@@ -2565,7 +2555,7 @@ Status|Header|Type|Format|Description
     "version": "1.3",
     "virustotal": "No threats found.",
     "changelog": "VERSION 1.3 -- Changes -- Fixed critical castle floor bug.",
-    "download": "https://cdn.mod.works/files/1/1/2/rogue-knight-v1.zip"
+    "download": "https://cdn.mod.io/files/1/1/2/rogue-knight-v1.zip"
   },
   "media": {
     "youtube": [
@@ -2576,8 +2566,8 @@ Status|Header|Type|Format|Description
     ],
     "images": [
       {
-        "full": "https://media.mod.works/images/mods/1/1/2/IMG_20170409_222419.jpg",
-        "thumbnail": "https://media.mod.works/cache/images/mods/1/1/2/thumb_1020x2000/IMG_20170409_222419.jpg",
+        "full": "https://media.mod.io/images/mods/1/1/2/IMG_20170409_222419.jpg",
+        "thumbnail": "https://media.mod.io/cache/images/mods/1/1/2/thumb_1020x2000/IMG_20170409_222419.jpg",
         "filename": "IMG_20170409_222419.jpg"
       }
     ]
@@ -2604,14 +2594,14 @@ oauth2 ( Scopes: write )
 
 ```shell
 # You can also use wget
-curl -X get https://api.mod.works/v1/games/{game-id}/mods/{mod-id}?api_key=YourApiKey \
+curl -X get https://api.mod.io/v1/games/{game-id}/mods/{mod-id}?api_key=YourApiKey \
   -H 'Accept: application/json'
 
 ```
 
 ```http
-GET https://api.mod.works/v1/games/{game-id}/mods/{mod-id}?api_key=YourApiKey HTTP/1.1
-Host: api.mod.works
+GET https://api.mod.io/v1/games/{game-id}/mods/{mod-id}?api_key=YourApiKey HTTP/1.1
+Host: api.mod.io
 
 Accept: application/json
 
@@ -2624,7 +2614,7 @@ var headers = {
 };
 
 $.ajax({
-  url: 'https://api.mod.works/v1/games/{game-id}/mods/{mod-id}',
+  url: 'https://api.mod.io/v1/games/{game-id}/mods/{mod-id}',
   method: 'get',
   data: '?api_key=YourApiKey',
   headers: headers,
@@ -2642,7 +2632,7 @@ const headers = {
 
 };
 
-fetch('https://api.mod.works/v1/games/{game-id}/mods/{mod-id}?api_key=YourApiKey',
+fetch('https://api.mod.io/v1/games/{game-id}/mods/{mod-id}?api_key=YourApiKey',
 {
   method: 'GET',
 
@@ -2663,7 +2653,7 @@ headers = {
   'Accept' => 'application/json'
 }
 
-result = RestClient.get 'https://api.mod.works/v1/games/{game-id}/mods/{mod-id}', params: {
+result = RestClient.get 'https://api.mod.io/v1/games/{game-id}/mods/{mod-id}', params: {
   'api_key' => 'string'
 }, headers: headers
 
@@ -2676,7 +2666,7 @@ headers = {
   'Accept': 'application/json'
 }
 
-r = requests.get('https://api.mod.works/v1/games/{game-id}/mods/{mod-id}', params={
+r = requests.get('https://api.mod.io/v1/games/{game-id}/mods/{mod-id}', params={
   'api_key': 'YourApiKey'
 }, headers = headers)
 
@@ -2684,7 +2674,7 @@ print r.json()
 ```
 
 ```java
-URL obj = new URL("https://api.mod.works/v1/games/{game-id}/mods/{mod-id}?api_key=YourApiKey");
+URL obj = new URL("https://api.mod.io/v1/games/{game-id}/mods/{mod-id}?api_key=YourApiKey");
 HttpURLConnection con = (HttpURLConnection) obj.openConnection();
 con.setRequestMethod("GET");
 int responseCode = con.getResponseCode();
@@ -2720,19 +2710,19 @@ Status|Meaning|Description
     "username": "XanT",
     "permission": 1,
     "avatar": {
-      "full": "https://media.mod.works/images/members/1/1/1/masterchief.jpg",
+      "full": "https://media.mod.io/images/members/1/1/1/masterchief.jpg",
       "filename": "masterchief.jpg"
     },
     "timezone": "Australia/Brisbane",
     "language": "en",
-    "url": "https://mod.works/members/xant"
+    "url": "https://mod.io/members/xant"
   },
   "price": 9.99,
   "datereg": 1492564103,
   "dateup": 1499841487,
   "logo": {
-    "full": "https://media.mod.works/images/mods/1/1/2/IMG_20170409_222419.jpg",
-    "thumbnail": "https://media.mod.works/cache/images/mods/1/1/2/thumb_1020x2000/IMG_20170409_222419.jpg",
+    "full": "https://media.mod.io/images/mods/1/1/2/IMG_20170409_222419.jpg",
+    "thumbnail": "https://media.mod.io/cache/images/mods/1/1/2/thumb_1020x2000/IMG_20170409_222419.jpg",
     "filename": "IMG_20170409_222419.jpg"
   },
   "homepage": "https://www.rogue-hdpack.com/",
@@ -2741,7 +2731,7 @@ Status|Meaning|Description
   "summary": "It's time to bask in the glory of beautiful 4k textures!",
   "description": "<h2>About</h2><p>Rogue HD Pack does exactly what you thi...",
   "metadata": "rogue,hd,high-res,4k,hd textures",
-  "url": "https://rogue-knight.mod.works/rogue-knight-hd-pack",
+  "url": "https://rogue-knight.mod.io/rogue-knight-hd-pack",
   "modfile": {
     "id": 2,
     "mod": 2,
@@ -2751,12 +2741,12 @@ Status|Meaning|Description
       "username": "XanT",
       "permission": 1,
       "avatar": {
-        "full": "https://media.mod.works/images/members/1/1/1/masterchief.jpg",
+        "full": "https://media.mod.io/images/members/1/1/1/masterchief.jpg",
         "filename": "masterchief.jpg"
       },
       "timezone": "Australia/Brisbane",
       "language": "en",
-      "url": "https://mod.works/members/xant"
+      "url": "https://mod.io/members/xant"
     },
     "date": 1499841487,
     "datevirus": 1499841487,
@@ -2768,7 +2758,7 @@ Status|Meaning|Description
     "version": "1.3",
     "virustotal": "No threats found.",
     "changelog": "VERSION 1.3 -- Changes -- Fixed critical castle floor bug.",
-    "download": "https://cdn.mod.works/files/1/1/2/rogue-knight-v1.zip"
+    "download": "https://cdn.mod.io/files/1/1/2/rogue-knight-v1.zip"
   },
   "media": {
     "youtube": [
@@ -2779,8 +2769,8 @@ Status|Meaning|Description
     ],
     "images": [
       {
-        "full": "https://media.mod.works/images/mods/1/1/2/IMG_20170409_222419.jpg",
-        "thumbnail": "https://media.mod.works/cache/images/mods/1/1/2/thumb_1020x2000/IMG_20170409_222419.jpg",
+        "full": "https://media.mod.io/images/mods/1/1/2/IMG_20170409_222419.jpg",
+        "thumbnail": "https://media.mod.io/cache/images/mods/1/1/2/thumb_1020x2000/IMG_20170409_222419.jpg",
         "filename": "IMG_20170409_222419.jpg"
       }
     ]
@@ -2807,7 +2797,7 @@ apiKey, oauth2 ( Scopes: read )
 
 ```shell
 # You can also use wget
-curl -X put https://api.mod.works/v1/games/{game-id}/mods/{mod-id} \
+curl -X put https://api.mod.io/v1/games/{game-id}/mods/{mod-id} \
   -H 'Authorization: Bearer YourAccessToken' \
   -H 'Content-Type: application/x-www-form-urlencoded' \
   -H 'Accept: application/json'
@@ -2815,8 +2805,8 @@ curl -X put https://api.mod.works/v1/games/{game-id}/mods/{mod-id} \
 ```
 
 ```http
-PUT https://api.mod.works/v1/games/{game-id}/mods/{mod-id} HTTP/1.1
-Host: api.mod.works
+PUT https://api.mod.io/v1/games/{game-id}/mods/{mod-id} HTTP/1.1
+Host: api.mod.io
 
 Accept: application/json
 Authorization: Bearer YourAccessToken
@@ -2833,7 +2823,7 @@ var headers = {
 };
 
 $.ajax({
-  url: 'https://api.mod.works/v1/games/{game-id}/mods/{mod-id}',
+  url: 'https://api.mod.io/v1/games/{game-id}/mods/{mod-id}',
   method: 'put',
 
   headers: headers,
@@ -2853,7 +2843,7 @@ const headers = {
 
 };
 
-fetch('https://api.mod.works/v1/games/{game-id}/mods/{mod-id}',
+fetch('https://api.mod.io/v1/games/{game-id}/mods/{mod-id}',
 {
   method: 'PUT',
 
@@ -2876,7 +2866,7 @@ headers = {
   'Accept' => 'application/json'
 }
 
-result = RestClient.put 'https://api.mod.works/v1/games/{game-id}/mods/{mod-id}', params: {
+result = RestClient.put 'https://api.mod.io/v1/games/{game-id}/mods/{mod-id}', params: {
   }, headers: headers
 
 p JSON.parse(result)
@@ -2890,7 +2880,7 @@ headers = {
   'Accept': 'application/json'
 }
 
-r = requests.put('https://api.mod.works/v1/games/{game-id}/mods/{mod-id}', params={
+r = requests.put('https://api.mod.io/v1/games/{game-id}/mods/{mod-id}', params={
 
 }, headers = headers)
 
@@ -2898,7 +2888,7 @@ print r.json()
 ```
 
 ```java
-URL obj = new URL("https://api.mod.works/v1/games/{game-id}/mods/{mod-id}");
+URL obj = new URL("https://api.mod.io/v1/games/{game-id}/mods/{mod-id}");
 HttpURLConnection con = (HttpURLConnection) obj.openConnection();
 con.setRequestMethod("PUT");
 int responseCode = con.getResponseCode();
@@ -2914,13 +2904,13 @@ System.out.println(response.toString());
 ```
 `PUT /games/{game-id}/mods/{mod-id}`
 
-Edit details for a mod. If you wanting to update the media attached to this game, including the `logo` field - you need to use the [Add Mod Media](https://docs.mod.works/#add-mod-media) endpoint.
+Edit details for a mod. If you wanting to update the media attached to this game, including the `logo` field - you need to use the [Add Mod Media](https://docs.mod.io/#add-mod-media) endpoint.
      
      Parameter|Type|Required|Description
      ---|---|---|---|
      logo|file||Image file which will represent your new mod logo. Must be gif, jpg, jpeg or png format and cannot exceed 8MB in size.Image file which will represent your new mod logo. Must be gif, jpg, jpeg or png format and cannot exceed 8MB in size.
      name|string||Name of your mod. Your default mod URL will contain the name so be sure to choose the most appropriate title. Example: Stellaris Shader Mod will become the URL stellaris-shader-mod.
-     homepage|string||Official homepage for your mod, if you do not fill this out it will default to your mod.works profile. Must be a valid URL.
+     homepage|string||Official homepage for your mod, if you do not fill this out it will default to your mod.io profile. Must be a valid URL.
      summary|string||Summary for your mod, giving a brief overview of what it's about - cannot exceed 250 characters.
      price|double||Numeric only representation of the price if you intend to charge for your mod. Example: 19.99, 10.00.
      stock|integer||Artificially limit the amount of times the mod can be purchased.
@@ -2954,7 +2944,7 @@ oauth2 ( Scopes: write )
 
 ```shell
 # You can also use wget
-curl -X delete https://api.mod.works/v1/games/{game-id}/mods/{mod-id} \
+curl -X delete https://api.mod.io/v1/games/{game-id}/mods/{mod-id} \
   -H 'Authorization: Bearer YourAccessToken' \
   -H 'Content-Type: application/x-www-form-urlencoded' \
   -H 'Accept: application/json'
@@ -2962,8 +2952,8 @@ curl -X delete https://api.mod.works/v1/games/{game-id}/mods/{mod-id} \
 ```
 
 ```http
-DELETE https://api.mod.works/v1/games/{game-id}/mods/{mod-id} HTTP/1.1
-Host: api.mod.works
+DELETE https://api.mod.io/v1/games/{game-id}/mods/{mod-id} HTTP/1.1
+Host: api.mod.io
 
 Accept: application/json
 Authorization: Bearer YourAccessToken
@@ -2980,7 +2970,7 @@ var headers = {
 };
 
 $.ajax({
-  url: 'https://api.mod.works/v1/games/{game-id}/mods/{mod-id}',
+  url: 'https://api.mod.io/v1/games/{game-id}/mods/{mod-id}',
   method: 'delete',
 
   headers: headers,
@@ -3000,7 +2990,7 @@ const headers = {
 
 };
 
-fetch('https://api.mod.works/v1/games/{game-id}/mods/{mod-id}',
+fetch('https://api.mod.io/v1/games/{game-id}/mods/{mod-id}',
 {
   method: 'DELETE',
 
@@ -3023,7 +3013,7 @@ headers = {
   'Accept' => 'application/json'
 }
 
-result = RestClient.delete 'https://api.mod.works/v1/games/{game-id}/mods/{mod-id}', params: {
+result = RestClient.delete 'https://api.mod.io/v1/games/{game-id}/mods/{mod-id}', params: {
   }, headers: headers
 
 p JSON.parse(result)
@@ -3037,7 +3027,7 @@ headers = {
   'Accept': 'application/json'
 }
 
-r = requests.delete('https://api.mod.works/v1/games/{game-id}/mods/{mod-id}', params={
+r = requests.delete('https://api.mod.io/v1/games/{game-id}/mods/{mod-id}', params={
 
 }, headers = headers)
 
@@ -3045,7 +3035,7 @@ print r.json()
 ```
 
 ```java
-URL obj = new URL("https://api.mod.works/v1/games/{game-id}/mods/{mod-id}");
+URL obj = new URL("https://api.mod.io/v1/games/{game-id}/mods/{mod-id}");
 HttpURLConnection con = (HttpURLConnection) obj.openConnection();
 con.setRequestMethod("DELETE");
 int responseCode = con.getResponseCode();
@@ -3061,7 +3051,7 @@ System.out.println(response.toString());
 ```
 `DELETE /games/{game-id}/mods/{mod-id}`
 
-Delete a mod profile which will if successful will return `204 No Content`. Note this will close the mod profile which means it cannot be viewed or retrieved via API requests but will still exist in-case you choose to restore it at a later date. If you believe a mod should be permanently removed please [contact us](mailto:support@mod.works). <br /><br />Access Token **must** be present in `Authorization` header.
+Delete a mod profile which will if successful will return `204 No Content`. Note this will close the mod profile which means it cannot be viewed or retrieved via API requests but will still exist in-case you choose to restore it at a later date. If you believe a mod should be permanently removed please [contact us](mailto:support@mod.io). <br /><br />Access Token **must** be present in `Authorization` header.
 
 ### Responses
 
@@ -3085,7 +3075,7 @@ oauth2 ( Scopes: write )
 
 ```shell
 # You can also use wget
-curl -X post https://api.mod.works/v1/games/{game-id}/mods/{mod-id}/media \
+curl -X post https://api.mod.io/v1/games/{game-id}/mods/{mod-id}/media \
   -H 'Authorization: Bearer YourAccessToken' \
   -H 'Content-Type: multipart/form-data' \
   -H 'Accept: application/json'
@@ -3093,8 +3083,8 @@ curl -X post https://api.mod.works/v1/games/{game-id}/mods/{mod-id}/media \
 ```
 
 ```http
-POST https://api.mod.works/v1/games/{game-id}/mods/{mod-id}/media HTTP/1.1
-Host: api.mod.works
+POST https://api.mod.io/v1/games/{game-id}/mods/{mod-id}/media HTTP/1.1
+Host: api.mod.io
 
 Accept: application/json
 Authorization: Bearer YourAccessToken
@@ -3111,7 +3101,7 @@ var headers = {
 };
 
 $.ajax({
-  url: 'https://api.mod.works/v1/games/{game-id}/mods/{mod-id}/media',
+  url: 'https://api.mod.io/v1/games/{game-id}/mods/{mod-id}/media',
   method: 'post',
 
   headers: headers,
@@ -3131,7 +3121,7 @@ const headers = {
 
 };
 
-fetch('https://api.mod.works/v1/games/{game-id}/mods/{mod-id}/media',
+fetch('https://api.mod.io/v1/games/{game-id}/mods/{mod-id}/media',
 {
   method: 'POST',
 
@@ -3154,7 +3144,7 @@ headers = {
   'Accept' => 'application/json'
 }
 
-result = RestClient.post 'https://api.mod.works/v1/games/{game-id}/mods/{mod-id}/media', params: {
+result = RestClient.post 'https://api.mod.io/v1/games/{game-id}/mods/{mod-id}/media', params: {
   }, headers: headers
 
 p JSON.parse(result)
@@ -3168,7 +3158,7 @@ headers = {
   'Accept': 'application/json'
 }
 
-r = requests.post('https://api.mod.works/v1/games/{game-id}/mods/{mod-id}/media', params={
+r = requests.post('https://api.mod.io/v1/games/{game-id}/mods/{mod-id}/media', params={
 
 }, headers = headers)
 
@@ -3176,7 +3166,7 @@ print r.json()
 ```
 
 ```java
-URL obj = new URL("https://api.mod.works/v1/games/{game-id}/mods/{mod-id}/media");
+URL obj = new URL("https://api.mod.io/v1/games/{game-id}/mods/{mod-id}/media");
 HttpURLConnection con = (HttpURLConnection) obj.openConnection();
 con.setRequestMethod("POST");
 int responseCode = con.getResponseCode();
@@ -3231,7 +3221,7 @@ oauth2 ( Scopes: write )
 
 ```shell
 # You can also use wget
-curl -X delete https://api.mod.works/v1/games/{game-id}/mods/{mod-id}/media \
+curl -X delete https://api.mod.io/v1/games/{game-id}/mods/{mod-id}/media \
   -H 'Authorization: Bearer YourAccessToken' \
   -H 'Content-Type: application/x-www-form-urlencoded' \
   -H 'Accept: application/json'
@@ -3239,8 +3229,8 @@ curl -X delete https://api.mod.works/v1/games/{game-id}/mods/{mod-id}/media \
 ```
 
 ```http
-DELETE https://api.mod.works/v1/games/{game-id}/mods/{mod-id}/media HTTP/1.1
-Host: api.mod.works
+DELETE https://api.mod.io/v1/games/{game-id}/mods/{mod-id}/media HTTP/1.1
+Host: api.mod.io
 
 Accept: application/json
 Authorization: Bearer YourAccessToken
@@ -3257,7 +3247,7 @@ var headers = {
 };
 
 $.ajax({
-  url: 'https://api.mod.works/v1/games/{game-id}/mods/{mod-id}/media',
+  url: 'https://api.mod.io/v1/games/{game-id}/mods/{mod-id}/media',
   method: 'delete',
 
   headers: headers,
@@ -3277,7 +3267,7 @@ const headers = {
 
 };
 
-fetch('https://api.mod.works/v1/games/{game-id}/mods/{mod-id}/media',
+fetch('https://api.mod.io/v1/games/{game-id}/mods/{mod-id}/media',
 {
   method: 'DELETE',
 
@@ -3300,7 +3290,7 @@ headers = {
   'Accept' => 'application/json'
 }
 
-result = RestClient.delete 'https://api.mod.works/v1/games/{game-id}/mods/{mod-id}/media', params: {
+result = RestClient.delete 'https://api.mod.io/v1/games/{game-id}/mods/{mod-id}/media', params: {
   }, headers: headers
 
 p JSON.parse(result)
@@ -3314,7 +3304,7 @@ headers = {
   'Accept': 'application/json'
 }
 
-r = requests.delete('https://api.mod.works/v1/games/{game-id}/mods/{mod-id}/media', params={
+r = requests.delete('https://api.mod.io/v1/games/{game-id}/mods/{mod-id}/media', params={
 
 }, headers = headers)
 
@@ -3322,7 +3312,7 @@ print r.json()
 ```
 
 ```java
-URL obj = new URL("https://api.mod.works/v1/games/{game-id}/mods/{mod-id}/media");
+URL obj = new URL("https://api.mod.io/v1/games/{game-id}/mods/{mod-id}/media");
 HttpURLConnection con = (HttpURLConnection) obj.openConnection();
 con.setRequestMethod("DELETE");
 int responseCode = con.getResponseCode();
@@ -3369,14 +3359,14 @@ oauth2 ( Scopes: write )
 
 ```shell
 # You can also use wget
-curl -X get https://api.mod.works/v1/games/{game-id}/mods/{mod-id}/activity?api_key=YourApiKey \
+curl -X get https://api.mod.io/v1/games/{game-id}/mods/{mod-id}/activity?api_key=YourApiKey \
   -H 'Accept: application/json'
 
 ```
 
 ```http
-GET https://api.mod.works/v1/games/{game-id}/mods/{mod-id}/activity?api_key=YourApiKey HTTP/1.1
-Host: api.mod.works
+GET https://api.mod.io/v1/games/{game-id}/mods/{mod-id}/activity?api_key=YourApiKey HTTP/1.1
+Host: api.mod.io
 
 Accept: application/json
 
@@ -3389,7 +3379,7 @@ var headers = {
 };
 
 $.ajax({
-  url: 'https://api.mod.works/v1/games/{game-id}/mods/{mod-id}/activity',
+  url: 'https://api.mod.io/v1/games/{game-id}/mods/{mod-id}/activity',
   method: 'get',
   data: '?api_key=YourApiKey',
   headers: headers,
@@ -3407,7 +3397,7 @@ const headers = {
 
 };
 
-fetch('https://api.mod.works/v1/games/{game-id}/mods/{mod-id}/activity?api_key=YourApiKey',
+fetch('https://api.mod.io/v1/games/{game-id}/mods/{mod-id}/activity?api_key=YourApiKey',
 {
   method: 'GET',
 
@@ -3428,7 +3418,7 @@ headers = {
   'Accept' => 'application/json'
 }
 
-result = RestClient.get 'https://api.mod.works/v1/games/{game-id}/mods/{mod-id}/activity', params: {
+result = RestClient.get 'https://api.mod.io/v1/games/{game-id}/mods/{mod-id}/activity', params: {
   'api_key' => 'string'
 }, headers: headers
 
@@ -3441,7 +3431,7 @@ headers = {
   'Accept': 'application/json'
 }
 
-r = requests.get('https://api.mod.works/v1/games/{game-id}/mods/{mod-id}/activity', params={
+r = requests.get('https://api.mod.io/v1/games/{game-id}/mods/{mod-id}/activity', params={
   'api_key': 'YourApiKey'
 }, headers = headers)
 
@@ -3449,7 +3439,7 @@ print r.json()
 ```
 
 ```java
-URL obj = new URL("https://api.mod.works/v1/games/{game-id}/mods/{mod-id}/activity?api_key=YourApiKey");
+URL obj = new URL("https://api.mod.io/v1/games/{game-id}/mods/{mod-id}/activity?api_key=YourApiKey");
 HttpURLConnection con = (HttpURLConnection) obj.openConnection();
 con.setRequestMethod("GET");
 int responseCode = con.getResponseCode();
@@ -3465,7 +3455,7 @@ System.out.println(response.toString());
 ```
 `GET /games/{game-id}/mods/{mod-id}/activity`
 
-View activity for a mod, showing changes made to the resource. Successful request will return an __array of activity objects__. To make your requests as specific to your needs as possible it's highly recommended reading over our [filtering documentation](https://docs.mod.works/#filtering) if it will help you with consuming this endpoint.
+View activity for a mod, showing changes made to the resource. Successful request will return an __array of activity objects__. To make your requests as specific to your needs as possible it's highly recommended reading over our [filtering documentation](https://docs.mod.io/#filtering) if it will help you with consuming this endpoint.
      
      Filter|Type|Description
      ---|---|---
@@ -3493,19 +3483,19 @@ Status|Meaning|Description
         "username": "XanT",
         "permission": 1,
         "avatar": {
-          "full": "https://media.mod.works/images/members/1/1/1/masterchief.jpg",
+          "full": "https://media.mod.io/images/members/1/1/1/masterchief.jpg",
           "filename": "masterchief.jpg"
         },
         "timezone": "Australia/Brisbane",
         "language": "en",
-        "url": "https://mod.works/members/xant"
+        "url": "https://mod.io/members/xant"
       },
       "dateup": 1499846132,
       "event": "MOD_UPDATE",
       "changes": {
         "summary": {
           "before": "https://www.roguehdpack.com/",
-          "after": "https://rogue-knight.mod.works/rogue-hd-pack"
+          "after": "https://rogue-knight.mod.io/rogue-hd-pack"
         }
       }
     },
@@ -3526,14 +3516,14 @@ apiKey, oauth2 ( Scopes: read )
 
 ```shell
 # You can also use wget
-curl -X get https://api.mod.works/v1/games/{game-id}/mods/{mod-id}/files?api_key=YourApiKey \
+curl -X get https://api.mod.io/v1/games/{game-id}/mods/{mod-id}/files?api_key=YourApiKey \
   -H 'Accept: application/json'
 
 ```
 
 ```http
-GET https://api.mod.works/v1/games/{game-id}/mods/{mod-id}/files?api_key=YourApiKey HTTP/1.1
-Host: api.mod.works
+GET https://api.mod.io/v1/games/{game-id}/mods/{mod-id}/files?api_key=YourApiKey HTTP/1.1
+Host: api.mod.io
 
 Accept: application/json
 
@@ -3546,7 +3536,7 @@ var headers = {
 };
 
 $.ajax({
-  url: 'https://api.mod.works/v1/games/{game-id}/mods/{mod-id}/files',
+  url: 'https://api.mod.io/v1/games/{game-id}/mods/{mod-id}/files',
   method: 'get',
   data: '?api_key=YourApiKey',
   headers: headers,
@@ -3564,7 +3554,7 @@ const headers = {
 
 };
 
-fetch('https://api.mod.works/v1/games/{game-id}/mods/{mod-id}/files?api_key=YourApiKey',
+fetch('https://api.mod.io/v1/games/{game-id}/mods/{mod-id}/files?api_key=YourApiKey',
 {
   method: 'GET',
 
@@ -3585,7 +3575,7 @@ headers = {
   'Accept' => 'application/json'
 }
 
-result = RestClient.get 'https://api.mod.works/v1/games/{game-id}/mods/{mod-id}/files', params: {
+result = RestClient.get 'https://api.mod.io/v1/games/{game-id}/mods/{mod-id}/files', params: {
   'api_key' => 'string'
 }, headers: headers
 
@@ -3598,7 +3588,7 @@ headers = {
   'Accept': 'application/json'
 }
 
-r = requests.get('https://api.mod.works/v1/games/{game-id}/mods/{mod-id}/files', params={
+r = requests.get('https://api.mod.io/v1/games/{game-id}/mods/{mod-id}/files', params={
   'api_key': 'YourApiKey'
 }, headers = headers)
 
@@ -3606,7 +3596,7 @@ print r.json()
 ```
 
 ```java
-URL obj = new URL("https://api.mod.works/v1/games/{game-id}/mods/{mod-id}/files?api_key=YourApiKey");
+URL obj = new URL("https://api.mod.io/v1/games/{game-id}/mods/{mod-id}/files?api_key=YourApiKey");
 HttpURLConnection con = (HttpURLConnection) obj.openConnection();
 con.setRequestMethod("GET");
 int responseCode = con.getResponseCode();
@@ -3622,7 +3612,7 @@ System.out.println(response.toString());
 ```
 `GET /games/{game-id}/mods/{mod-id}/files`
 
-Browse files that are published for the corresponding mod. Successful request will return an __array of file objects__. To make your requests as specific to your needs as possible it's highly recommended reading over our [filtering documentation](https://docs.mod.works/#filtering) if it will help you with consuming this endpoint.
+Browse files that are published for the corresponding mod. Successful request will return an __array of file objects__. To make your requests as specific to your needs as possible it's highly recommended reading over our [filtering documentation](https://docs.mod.io/#filtering) if it will help you with consuming this endpoint.
      
      Filter|Type|Description
      ---|---|---
@@ -3661,12 +3651,12 @@ Status|Meaning|Description
         "username": "XanT",
         "permission": 1,
         "avatar": {
-          "full": "https://media.mod.works/images/members/1/1/1/masterchief.jpg",
+          "full": "https://media.mod.io/images/members/1/1/1/masterchief.jpg",
           "filename": "masterchief.jpg"
         },
         "timezone": "Australia/Brisbane",
         "language": "en",
-        "url": "https://mod.works/members/xant"
+        "url": "https://mod.io/members/xant"
       },
       "date": 1499841487,
       "datevirus": 1499841487,
@@ -3678,7 +3668,7 @@ Status|Meaning|Description
       "version": "1.3",
       "virustotal": "No threats found.",
       "changelog": "VERSION 1.3 -- Changes -- Fixed critical castle floor bug.",
-      "download": "https://mod.works/mods/file/2/c489a0354111a4d76640d47f0cdcb294"
+      "download": "https://mod.io/mods/file/2/c489a0354111a4d76640d47f0cdcb294"
     },
     {
         ...
@@ -3697,7 +3687,7 @@ apiKey, oauth2 ( Scopes: read )
 
 ```shell
 # You can also use wget
-curl -X post https://api.mod.works/v1/games/{game-id}/mods/{mod-id}/files \
+curl -X post https://api.mod.io/v1/games/{game-id}/mods/{mod-id}/files \
   -H 'Authorization: Bearer YourAccessToken' \
   -H 'Content-Type: multipart/form-data' \
   -H 'Accept: application/json'
@@ -3705,8 +3695,8 @@ curl -X post https://api.mod.works/v1/games/{game-id}/mods/{mod-id}/files \
 ```
 
 ```http
-POST https://api.mod.works/v1/games/{game-id}/mods/{mod-id}/files HTTP/1.1
-Host: api.mod.works
+POST https://api.mod.io/v1/games/{game-id}/mods/{mod-id}/files HTTP/1.1
+Host: api.mod.io
 
 Accept: application/json
 Authorization: Bearer YourAccessToken
@@ -3723,7 +3713,7 @@ var headers = {
 };
 
 $.ajax({
-  url: 'https://api.mod.works/v1/games/{game-id}/mods/{mod-id}/files',
+  url: 'https://api.mod.io/v1/games/{game-id}/mods/{mod-id}/files',
   method: 'post',
 
   headers: headers,
@@ -3743,7 +3733,7 @@ const headers = {
 
 };
 
-fetch('https://api.mod.works/v1/games/{game-id}/mods/{mod-id}/files',
+fetch('https://api.mod.io/v1/games/{game-id}/mods/{mod-id}/files',
 {
   method: 'POST',
 
@@ -3766,7 +3756,7 @@ headers = {
   'Accept' => 'application/json'
 }
 
-result = RestClient.post 'https://api.mod.works/v1/games/{game-id}/mods/{mod-id}/files', params: {
+result = RestClient.post 'https://api.mod.io/v1/games/{game-id}/mods/{mod-id}/files', params: {
   }, headers: headers
 
 p JSON.parse(result)
@@ -3780,7 +3770,7 @@ headers = {
   'Accept': 'application/json'
 }
 
-r = requests.post('https://api.mod.works/v1/games/{game-id}/mods/{mod-id}/files', params={
+r = requests.post('https://api.mod.io/v1/games/{game-id}/mods/{mod-id}/files', params={
 
 }, headers = headers)
 
@@ -3788,7 +3778,7 @@ print r.json()
 ```
 
 ```java
-URL obj = new URL("https://api.mod.works/v1/games/{game-id}/mods/{mod-id}/files");
+URL obj = new URL("https://api.mod.io/v1/games/{game-id}/mods/{mod-id}/files");
 HttpURLConnection con = (HttpURLConnection) obj.openConnection();
 con.setRequestMethod("POST");
 int responseCode = con.getResponseCode();
@@ -3837,12 +3827,12 @@ Status|Header|Type|Format|Description
     "username": "XanT",
     "permission": 1,
     "avatar": {
-      "full": "https://media.mod.works/images/members/1/1/1/masterchief.jpg",
+      "full": "https://media.mod.io/images/members/1/1/1/masterchief.jpg",
       "filename": "masterchief.jpg"
     },
     "timezone": "Australia/Brisbane",
     "language": "en",
-    "url": "https://mod.works/members/xant"
+    "url": "https://mod.io/members/xant"
   },
   "date": 1499841487,
   "datevirus": 1499841487,
@@ -3854,7 +3844,7 @@ Status|Header|Type|Format|Description
   "version": "1.3",
   "virustotal": "No threats found.",
   "changelog": "VERSION 1.3 -- Changes -- Fixed critical castle floor bug.",
-  "download": "https://mod.works/mods/file/2/c489a0354111a4d76640d47f0cdcb294"
+  "download": "https://mod.io/mods/file/2/c489a0354111a4d76640d47f0cdcb294"
 }
 ```
 <aside class="warning">
@@ -3868,14 +3858,14 @@ oauth2 ( Scopes: write )
 
 ```shell
 # You can also use wget
-curl -X get https://api.mod.works/v1/games/{game-id}/mods/{mod-id}/files/{file-id}?api_key=YourApiKey \
+curl -X get https://api.mod.io/v1/games/{game-id}/mods/{mod-id}/files/{file-id}?api_key=YourApiKey \
   -H 'Accept: application/json'
 
 ```
 
 ```http
-GET https://api.mod.works/v1/games/{game-id}/mods/{mod-id}/files/{file-id}?api_key=YourApiKey HTTP/1.1
-Host: api.mod.works
+GET https://api.mod.io/v1/games/{game-id}/mods/{mod-id}/files/{file-id}?api_key=YourApiKey HTTP/1.1
+Host: api.mod.io
 
 Accept: application/json
 
@@ -3888,7 +3878,7 @@ var headers = {
 };
 
 $.ajax({
-  url: 'https://api.mod.works/v1/games/{game-id}/mods/{mod-id}/files/{file-id}',
+  url: 'https://api.mod.io/v1/games/{game-id}/mods/{mod-id}/files/{file-id}',
   method: 'get',
   data: '?api_key=YourApiKey',
   headers: headers,
@@ -3906,7 +3896,7 @@ const headers = {
 
 };
 
-fetch('https://api.mod.works/v1/games/{game-id}/mods/{mod-id}/files/{file-id}?api_key=YourApiKey',
+fetch('https://api.mod.io/v1/games/{game-id}/mods/{mod-id}/files/{file-id}?api_key=YourApiKey',
 {
   method: 'GET',
 
@@ -3927,7 +3917,7 @@ headers = {
   'Accept' => 'application/json'
 }
 
-result = RestClient.get 'https://api.mod.works/v1/games/{game-id}/mods/{mod-id}/files/{file-id}', params: {
+result = RestClient.get 'https://api.mod.io/v1/games/{game-id}/mods/{mod-id}/files/{file-id}', params: {
   'api_key' => 'string'
 }, headers: headers
 
@@ -3940,7 +3930,7 @@ headers = {
   'Accept': 'application/json'
 }
 
-r = requests.get('https://api.mod.works/v1/games/{game-id}/mods/{mod-id}/files/{file-id}', params={
+r = requests.get('https://api.mod.io/v1/games/{game-id}/mods/{mod-id}/files/{file-id}', params={
   'api_key': 'YourApiKey'
 }, headers = headers)
 
@@ -3948,7 +3938,7 @@ print r.json()
 ```
 
 ```java
-URL obj = new URL("https://api.mod.works/v1/games/{game-id}/mods/{mod-id}/files/{file-id}?api_key=YourApiKey");
+URL obj = new URL("https://api.mod.io/v1/games/{game-id}/mods/{mod-id}/files/{file-id}?api_key=YourApiKey");
 HttpURLConnection con = (HttpURLConnection) obj.openConnection();
 con.setRequestMethod("GET");
 int responseCode = con.getResponseCode();
@@ -3984,12 +3974,12 @@ Status|Meaning|Description
     "username": "XanT",
     "permission": 1,
     "avatar": {
-      "full": "https://media.mod.works/images/members/1/1/1/masterchief.jpg",
+      "full": "https://media.mod.io/images/members/1/1/1/masterchief.jpg",
       "filename": "masterchief.jpg"
     },
     "timezone": "Australia/Brisbane",
     "language": "en",
-    "url": "https://mod.works/members/xant"
+    "url": "https://mod.io/members/xant"
   },
   "date": 1499841487,
   "datevirus": 1499841487,
@@ -4001,7 +3991,7 @@ Status|Meaning|Description
   "version": "1.3",
   "virustotal": "No threats found.",
   "changelog": "VERSION 1.3 -- Changes -- Fixed critical castle floor bug.",
-  "download": "https://mod.works/mods/file/2/c489a0354111a4d76640d47f0cdcb294"
+  "download": "https://mod.io/mods/file/2/c489a0354111a4d76640d47f0cdcb294"
 }
 ```
 <aside class="warning">
@@ -4015,7 +4005,7 @@ apiKey, oauth2 ( Scopes: read )
 
 ```shell
 # You can also use wget
-curl -X put https://api.mod.works/v1/games/{game-id}/mods/{mod-id}/files/{file-id} \
+curl -X put https://api.mod.io/v1/games/{game-id}/mods/{mod-id}/files/{file-id} \
   -H 'Authorization: Bearer YourAccessToken' \
   -H 'Content-Type: application/x-www-form-urlencoded' \
   -H 'Accept: application/json'
@@ -4023,8 +4013,8 @@ curl -X put https://api.mod.works/v1/games/{game-id}/mods/{mod-id}/files/{file-i
 ```
 
 ```http
-PUT https://api.mod.works/v1/games/{game-id}/mods/{mod-id}/files/{file-id} HTTP/1.1
-Host: api.mod.works
+PUT https://api.mod.io/v1/games/{game-id}/mods/{mod-id}/files/{file-id} HTTP/1.1
+Host: api.mod.io
 
 Accept: application/json
 Authorization: Bearer YourAccessToken
@@ -4041,7 +4031,7 @@ var headers = {
 };
 
 $.ajax({
-  url: 'https://api.mod.works/v1/games/{game-id}/mods/{mod-id}/files/{file-id}',
+  url: 'https://api.mod.io/v1/games/{game-id}/mods/{mod-id}/files/{file-id}',
   method: 'put',
 
   headers: headers,
@@ -4061,7 +4051,7 @@ const headers = {
 
 };
 
-fetch('https://api.mod.works/v1/games/{game-id}/mods/{mod-id}/files/{file-id}',
+fetch('https://api.mod.io/v1/games/{game-id}/mods/{mod-id}/files/{file-id}',
 {
   method: 'PUT',
 
@@ -4084,7 +4074,7 @@ headers = {
   'Accept' => 'application/json'
 }
 
-result = RestClient.put 'https://api.mod.works/v1/games/{game-id}/mods/{mod-id}/files/{file-id}', params: {
+result = RestClient.put 'https://api.mod.io/v1/games/{game-id}/mods/{mod-id}/files/{file-id}', params: {
   }, headers: headers
 
 p JSON.parse(result)
@@ -4098,7 +4088,7 @@ headers = {
   'Accept': 'application/json'
 }
 
-r = requests.put('https://api.mod.works/v1/games/{game-id}/mods/{mod-id}/files/{file-id}', params={
+r = requests.put('https://api.mod.io/v1/games/{game-id}/mods/{mod-id}/files/{file-id}', params={
 
 }, headers = headers)
 
@@ -4106,7 +4096,7 @@ print r.json()
 ```
 
 ```java
-URL obj = new URL("https://api.mod.works/v1/games/{game-id}/mods/{mod-id}/files/{file-id}");
+URL obj = new URL("https://api.mod.io/v1/games/{game-id}/mods/{mod-id}/files/{file-id}");
 HttpURLConnection con = (HttpURLConnection) obj.openConnection();
 con.setRequestMethod("PUT");
 int responseCode = con.getResponseCode();
@@ -4122,7 +4112,7 @@ System.out.println(response.toString());
 ```
 `PUT /games/{game-id}/mods/{mod-id}/files/{file-id}`
 
-Update the details for a published file on mod.works. If you are wanting to update fields other than changelog, you should be creating a new file instead.
+Update the details for a published file on mod.io. If you are wanting to update fields other than changelog, you should be creating a new file instead.
      
      Parameter|Type|Required|Description
      ---|---|---|---|
@@ -4154,14 +4144,14 @@ oauth2 ( Scopes: write )
 
 ```shell
 # You can also use wget
-curl -X get https://api.mod.works/v1/games/{game-id}/mods/{mod-id}/tags?api_key=YourApiKey \
+curl -X get https://api.mod.io/v1/games/{game-id}/mods/{mod-id}/tags?api_key=YourApiKey \
   -H 'Accept: application/json'
 
 ```
 
 ```http
-GET https://api.mod.works/v1/games/{game-id}/mods/{mod-id}/tags?api_key=YourApiKey HTTP/1.1
-Host: api.mod.works
+GET https://api.mod.io/v1/games/{game-id}/mods/{mod-id}/tags?api_key=YourApiKey HTTP/1.1
+Host: api.mod.io
 
 Accept: application/json
 
@@ -4174,7 +4164,7 @@ var headers = {
 };
 
 $.ajax({
-  url: 'https://api.mod.works/v1/games/{game-id}/mods/{mod-id}/tags',
+  url: 'https://api.mod.io/v1/games/{game-id}/mods/{mod-id}/tags',
   method: 'get',
   data: '?api_key=YourApiKey',
   headers: headers,
@@ -4192,7 +4182,7 @@ const headers = {
 
 };
 
-fetch('https://api.mod.works/v1/games/{game-id}/mods/{mod-id}/tags?api_key=YourApiKey',
+fetch('https://api.mod.io/v1/games/{game-id}/mods/{mod-id}/tags?api_key=YourApiKey',
 {
   method: 'GET',
 
@@ -4213,7 +4203,7 @@ headers = {
   'Accept' => 'application/json'
 }
 
-result = RestClient.get 'https://api.mod.works/v1/games/{game-id}/mods/{mod-id}/tags', params: {
+result = RestClient.get 'https://api.mod.io/v1/games/{game-id}/mods/{mod-id}/tags', params: {
   'api_key' => 'string'
 }, headers: headers
 
@@ -4226,7 +4216,7 @@ headers = {
   'Accept': 'application/json'
 }
 
-r = requests.get('https://api.mod.works/v1/games/{game-id}/mods/{mod-id}/tags', params={
+r = requests.get('https://api.mod.io/v1/games/{game-id}/mods/{mod-id}/tags', params={
   'api_key': 'YourApiKey'
 }, headers = headers)
 
@@ -4234,7 +4224,7 @@ print r.json()
 ```
 
 ```java
-URL obj = new URL("https://api.mod.works/v1/games/{game-id}/mods/{mod-id}/tags?api_key=YourApiKey");
+URL obj = new URL("https://api.mod.io/v1/games/{game-id}/mods/{mod-id}/tags?api_key=YourApiKey");
 HttpURLConnection con = (HttpURLConnection) obj.openConnection();
 con.setRequestMethod("GET");
 int responseCode = con.getResponseCode();
@@ -4250,7 +4240,7 @@ System.out.println(response.toString());
 ```
 `GET /games/{game-id}/mods/{mod-id}/tags`
 
-View all tags for the specified mod, successful response will return an  __array of tag objects__. To make your requests as specific to your needs as possible it's highly recommended reading over our [filtering documentation](https://docs.mod.works/#filtering) if it will help you with consuming this endpoint.
+View all tags for the specified mod, successful response will return an  __array of tag objects__. To make your requests as specific to your needs as possible it's highly recommended reading over our [filtering documentation](https://docs.mod.io/#filtering) if it will help you with consuming this endpoint.
      
      Filter|Type|Description
      ---|---|---
@@ -4294,7 +4284,7 @@ apiKey, oauth2 ( Scopes: read )
 
 ```shell
 # You can also use wget
-curl -X post https://api.mod.works/v1/games/{game-id}/mods/{mod-id}/tags \
+curl -X post https://api.mod.io/v1/games/{game-id}/mods/{mod-id}/tags \
   -H 'Authorization: Bearer YourAccessToken' \
   -H 'Content-Type: application/x-www-form-urlencoded' \
   -H 'Accept: application/json'
@@ -4302,8 +4292,8 @@ curl -X post https://api.mod.works/v1/games/{game-id}/mods/{mod-id}/tags \
 ```
 
 ```http
-POST https://api.mod.works/v1/games/{game-id}/mods/{mod-id}/tags HTTP/1.1
-Host: api.mod.works
+POST https://api.mod.io/v1/games/{game-id}/mods/{mod-id}/tags HTTP/1.1
+Host: api.mod.io
 
 Accept: application/json
 Authorization: Bearer YourAccessToken
@@ -4320,7 +4310,7 @@ var headers = {
 };
 
 $.ajax({
-  url: 'https://api.mod.works/v1/games/{game-id}/mods/{mod-id}/tags',
+  url: 'https://api.mod.io/v1/games/{game-id}/mods/{mod-id}/tags',
   method: 'post',
 
   headers: headers,
@@ -4340,7 +4330,7 @@ const headers = {
 
 };
 
-fetch('https://api.mod.works/v1/games/{game-id}/mods/{mod-id}/tags',
+fetch('https://api.mod.io/v1/games/{game-id}/mods/{mod-id}/tags',
 {
   method: 'POST',
 
@@ -4363,7 +4353,7 @@ headers = {
   'Accept' => 'application/json'
 }
 
-result = RestClient.post 'https://api.mod.works/v1/games/{game-id}/mods/{mod-id}/tags', params: {
+result = RestClient.post 'https://api.mod.io/v1/games/{game-id}/mods/{mod-id}/tags', params: {
   }, headers: headers
 
 p JSON.parse(result)
@@ -4377,7 +4367,7 @@ headers = {
   'Accept': 'application/json'
 }
 
-r = requests.post('https://api.mod.works/v1/games/{game-id}/mods/{mod-id}/tags', params={
+r = requests.post('https://api.mod.io/v1/games/{game-id}/mods/{mod-id}/tags', params={
 
 }, headers = headers)
 
@@ -4385,7 +4375,7 @@ print r.json()
 ```
 
 ```java
-URL obj = new URL("https://api.mod.works/v1/games/{game-id}/mods/{mod-id}/tags");
+URL obj = new URL("https://api.mod.io/v1/games/{game-id}/mods/{mod-id}/tags");
 HttpURLConnection con = (HttpURLConnection) obj.openConnection();
 con.setRequestMethod("POST");
 int responseCode = con.getResponseCode();
@@ -4403,7 +4393,7 @@ System.out.println(response.toString());
 
 Add tags to a mod's profile. Note that you can only add what tags are allowed by the parent game. To determine what game tags are allowed view the `cats` (categories) column on the parent game object.
      
-     For example if the parent game has the 'Engine' category available with 'Easy', 'Medium' and 'Hard' being options you can simply submit 'Easy' in the `tags` array in your request. You can populate the array with tags from different categories and they will automatically be sorted by mod.works.
+     For example if the parent game has the 'Engine' category available with 'Easy', 'Medium' and 'Hard' being options you can simply submit 'Easy' in the `tags` array in your request. You can populate the array with tags from different categories and they will automatically be sorted by mod.io.
      
      Parameter|Type|Required|Description
      ---|---|---|---|
@@ -4434,7 +4424,7 @@ oauth2 ( Scopes: write )
 
 ```shell
 # You can also use wget
-curl -X delete https://api.mod.works/v1/games/{game-id}/mods/{mod-id}/tags \
+curl -X delete https://api.mod.io/v1/games/{game-id}/mods/{mod-id}/tags \
   -H 'Authorization: Bearer YourAccessToken' \
   -H 'Content-Type: application/x-www-form-urlencoded' \
   -H 'Accept: application/json'
@@ -4442,8 +4432,8 @@ curl -X delete https://api.mod.works/v1/games/{game-id}/mods/{mod-id}/tags \
 ```
 
 ```http
-DELETE https://api.mod.works/v1/games/{game-id}/mods/{mod-id}/tags HTTP/1.1
-Host: api.mod.works
+DELETE https://api.mod.io/v1/games/{game-id}/mods/{mod-id}/tags HTTP/1.1
+Host: api.mod.io
 
 Accept: application/json
 Authorization: Bearer YourAccessToken
@@ -4460,7 +4450,7 @@ var headers = {
 };
 
 $.ajax({
-  url: 'https://api.mod.works/v1/games/{game-id}/mods/{mod-id}/tags',
+  url: 'https://api.mod.io/v1/games/{game-id}/mods/{mod-id}/tags',
   method: 'delete',
 
   headers: headers,
@@ -4480,7 +4470,7 @@ const headers = {
 
 };
 
-fetch('https://api.mod.works/v1/games/{game-id}/mods/{mod-id}/tags',
+fetch('https://api.mod.io/v1/games/{game-id}/mods/{mod-id}/tags',
 {
   method: 'DELETE',
 
@@ -4503,7 +4493,7 @@ headers = {
   'Accept' => 'application/json'
 }
 
-result = RestClient.delete 'https://api.mod.works/v1/games/{game-id}/mods/{mod-id}/tags', params: {
+result = RestClient.delete 'https://api.mod.io/v1/games/{game-id}/mods/{mod-id}/tags', params: {
   }, headers: headers
 
 p JSON.parse(result)
@@ -4517,7 +4507,7 @@ headers = {
   'Accept': 'application/json'
 }
 
-r = requests.delete('https://api.mod.works/v1/games/{game-id}/mods/{mod-id}/tags', params={
+r = requests.delete('https://api.mod.io/v1/games/{game-id}/mods/{mod-id}/tags', params={
 
 }, headers = headers)
 
@@ -4525,7 +4515,7 @@ print r.json()
 ```
 
 ```java
-URL obj = new URL("https://api.mod.works/v1/games/{game-id}/mods/{mod-id}/tags");
+URL obj = new URL("https://api.mod.io/v1/games/{game-id}/mods/{mod-id}/tags");
 HttpURLConnection con = (HttpURLConnection) obj.openConnection();
 con.setRequestMethod("DELETE");
 int responseCode = con.getResponseCode();
@@ -4569,7 +4559,7 @@ oauth2 ( Scopes: write )
 
 ```shell
 # You can also use wget
-curl -X post https://api.mod.works/v1/games/{game-id}/mods/{mod-id}/ratings \
+curl -X post https://api.mod.io/v1/games/{game-id}/mods/{mod-id}/ratings \
   -H 'Authorization: Bearer YourAccessToken' \
   -H 'Content-Type: application/x-www-form-urlencoded' \
   -H 'Accept: application/json'
@@ -4577,8 +4567,8 @@ curl -X post https://api.mod.works/v1/games/{game-id}/mods/{mod-id}/ratings \
 ```
 
 ```http
-POST https://api.mod.works/v1/games/{game-id}/mods/{mod-id}/ratings HTTP/1.1
-Host: api.mod.works
+POST https://api.mod.io/v1/games/{game-id}/mods/{mod-id}/ratings HTTP/1.1
+Host: api.mod.io
 
 Accept: application/json
 Authorization: Bearer YourAccessToken
@@ -4595,7 +4585,7 @@ var headers = {
 };
 
 $.ajax({
-  url: 'https://api.mod.works/v1/games/{game-id}/mods/{mod-id}/ratings',
+  url: 'https://api.mod.io/v1/games/{game-id}/mods/{mod-id}/ratings',
   method: 'post',
 
   headers: headers,
@@ -4615,7 +4605,7 @@ const headers = {
 
 };
 
-fetch('https://api.mod.works/v1/games/{game-id}/mods/{mod-id}/ratings',
+fetch('https://api.mod.io/v1/games/{game-id}/mods/{mod-id}/ratings',
 {
   method: 'POST',
 
@@ -4638,7 +4628,7 @@ headers = {
   'Accept' => 'application/json'
 }
 
-result = RestClient.post 'https://api.mod.works/v1/games/{game-id}/mods/{mod-id}/ratings', params: {
+result = RestClient.post 'https://api.mod.io/v1/games/{game-id}/mods/{mod-id}/ratings', params: {
   }, headers: headers
 
 p JSON.parse(result)
@@ -4652,7 +4642,7 @@ headers = {
   'Accept': 'application/json'
 }
 
-r = requests.post('https://api.mod.works/v1/games/{game-id}/mods/{mod-id}/ratings', params={
+r = requests.post('https://api.mod.io/v1/games/{game-id}/mods/{mod-id}/ratings', params={
 
 }, headers = headers)
 
@@ -4660,7 +4650,7 @@ print r.json()
 ```
 
 ```java
-URL obj = new URL("https://api.mod.works/v1/games/{game-id}/mods/{mod-id}/ratings");
+URL obj = new URL("https://api.mod.io/v1/games/{game-id}/mods/{mod-id}/ratings");
 HttpURLConnection con = (HttpURLConnection) obj.openConnection();
 con.setRequestMethod("POST");
 int responseCode = con.getResponseCode();
@@ -4707,14 +4697,14 @@ oauth2 ( Scopes: write )
 
 ```shell
 # You can also use wget
-curl -X get https://api.mod.works/v1/games/{game-id}/mods/{mod-id}/comments?api_key=YourApiKey \
+curl -X get https://api.mod.io/v1/games/{game-id}/mods/{mod-id}/comments?api_key=YourApiKey \
   -H 'Accept: application/json'
 
 ```
 
 ```http
-GET https://api.mod.works/v1/games/{game-id}/mods/{mod-id}/comments?api_key=YourApiKey HTTP/1.1
-Host: api.mod.works
+GET https://api.mod.io/v1/games/{game-id}/mods/{mod-id}/comments?api_key=YourApiKey HTTP/1.1
+Host: api.mod.io
 
 Accept: application/json
 
@@ -4727,7 +4717,7 @@ var headers = {
 };
 
 $.ajax({
-  url: 'https://api.mod.works/v1/games/{game-id}/mods/{mod-id}/comments',
+  url: 'https://api.mod.io/v1/games/{game-id}/mods/{mod-id}/comments',
   method: 'get',
   data: '?api_key=YourApiKey',
   headers: headers,
@@ -4745,7 +4735,7 @@ const headers = {
 
 };
 
-fetch('https://api.mod.works/v1/games/{game-id}/mods/{mod-id}/comments?api_key=YourApiKey',
+fetch('https://api.mod.io/v1/games/{game-id}/mods/{mod-id}/comments?api_key=YourApiKey',
 {
   method: 'GET',
 
@@ -4766,7 +4756,7 @@ headers = {
   'Accept' => 'application/json'
 }
 
-result = RestClient.get 'https://api.mod.works/v1/games/{game-id}/mods/{mod-id}/comments', params: {
+result = RestClient.get 'https://api.mod.io/v1/games/{game-id}/mods/{mod-id}/comments', params: {
   'api_key' => 'string'
 }, headers: headers
 
@@ -4779,7 +4769,7 @@ headers = {
   'Accept': 'application/json'
 }
 
-r = requests.get('https://api.mod.works/v1/games/{game-id}/mods/{mod-id}/comments', params={
+r = requests.get('https://api.mod.io/v1/games/{game-id}/mods/{mod-id}/comments', params={
   'api_key': 'YourApiKey'
 }, headers = headers)
 
@@ -4787,7 +4777,7 @@ print r.json()
 ```
 
 ```java
-URL obj = new URL("https://api.mod.works/v1/games/{game-id}/mods/{mod-id}/comments?api_key=YourApiKey");
+URL obj = new URL("https://api.mod.io/v1/games/{game-id}/mods/{mod-id}/comments?api_key=YourApiKey");
 HttpURLConnection con = (HttpURLConnection) obj.openConnection();
 con.setRequestMethod("GET");
 int responseCode = con.getResponseCode();
@@ -4803,7 +4793,7 @@ System.out.println(response.toString());
 ```
 `GET /games/{game-id}/mods/{mod-id}/comments`
 
-Browse all comments for a mod. Successful request will return an __array of comment objects__. To make your requests as specific to your needs as possible it's highly recommended reading over our [filtering documentation](https://docs.mod.works/#filtering) if it will help you with consuming this endpoint.
+Browse all comments for a mod. Successful request will return an __array of comment objects__. To make your requests as specific to your needs as possible it's highly recommended reading over our [filtering documentation](https://docs.mod.io/#filtering) if it will help you with consuming this endpoint.
      
      Filter|Type|Description
      ---|---|---
@@ -4837,12 +4827,12 @@ Status|Meaning|Description
         "username": "XanT",
         "permission": 1,
         "avatar": {
-          "full": "https://media.mod.works/images/members/1/1/1/masterchief.jpg",
+          "full": "https://media.mod.io/images/members/1/1/1/masterchief.jpg",
           "filename": "masterchief.jpg"
         },
         "timezone": "Australia/Brisbane",
         "language": "en",
-        "url": "https://mod.works/members/xant"
+        "url": "https://mod.io/members/xant"
       },
       "date": 1499841487,
       "replyid": 1499841487,
@@ -4868,14 +4858,14 @@ apiKey, oauth2 ( Scopes: read )
 
 ```shell
 # You can also use wget
-curl -X get https://api.mod.works/v1/games/{game-id}/mods/{mod-id}/comments/{comment-id}?api_key=YourApiKey \
+curl -X get https://api.mod.io/v1/games/{game-id}/mods/{mod-id}/comments/{comment-id}?api_key=YourApiKey \
   -H 'Accept: application/json'
 
 ```
 
 ```http
-GET https://api.mod.works/v1/games/{game-id}/mods/{mod-id}/comments/{comment-id}?api_key=YourApiKey HTTP/1.1
-Host: api.mod.works
+GET https://api.mod.io/v1/games/{game-id}/mods/{mod-id}/comments/{comment-id}?api_key=YourApiKey HTTP/1.1
+Host: api.mod.io
 
 Accept: application/json
 
@@ -4888,7 +4878,7 @@ var headers = {
 };
 
 $.ajax({
-  url: 'https://api.mod.works/v1/games/{game-id}/mods/{mod-id}/comments/{comment-id}',
+  url: 'https://api.mod.io/v1/games/{game-id}/mods/{mod-id}/comments/{comment-id}',
   method: 'get',
   data: '?api_key=YourApiKey',
   headers: headers,
@@ -4906,7 +4896,7 @@ const headers = {
 
 };
 
-fetch('https://api.mod.works/v1/games/{game-id}/mods/{mod-id}/comments/{comment-id}?api_key=YourApiKey',
+fetch('https://api.mod.io/v1/games/{game-id}/mods/{mod-id}/comments/{comment-id}?api_key=YourApiKey',
 {
   method: 'GET',
 
@@ -4927,7 +4917,7 @@ headers = {
   'Accept' => 'application/json'
 }
 
-result = RestClient.get 'https://api.mod.works/v1/games/{game-id}/mods/{mod-id}/comments/{comment-id}', params: {
+result = RestClient.get 'https://api.mod.io/v1/games/{game-id}/mods/{mod-id}/comments/{comment-id}', params: {
   'api_key' => 'string'
 }, headers: headers
 
@@ -4940,7 +4930,7 @@ headers = {
   'Accept': 'application/json'
 }
 
-r = requests.get('https://api.mod.works/v1/games/{game-id}/mods/{mod-id}/comments/{comment-id}', params={
+r = requests.get('https://api.mod.io/v1/games/{game-id}/mods/{mod-id}/comments/{comment-id}', params={
   'api_key': 'YourApiKey'
 }, headers = headers)
 
@@ -4948,7 +4938,7 @@ print r.json()
 ```
 
 ```java
-URL obj = new URL("https://api.mod.works/v1/games/{game-id}/mods/{mod-id}/comments/{comment-id}?api_key=YourApiKey");
+URL obj = new URL("https://api.mod.io/v1/games/{game-id}/mods/{mod-id}/comments/{comment-id}?api_key=YourApiKey");
 HttpURLConnection con = (HttpURLConnection) obj.openConnection();
 con.setRequestMethod("GET");
 int responseCode = con.getResponseCode();
@@ -4984,12 +4974,12 @@ Status|Meaning|Description
     "username": "XanT",
     "permission": 1,
     "avatar": {
-      "full": "https://media.mod.works/images/members/1/1/1/masterchief.jpg",
+      "full": "https://media.mod.io/images/members/1/1/1/masterchief.jpg",
       "filename": "masterchief.jpg"
     },
     "timezone": "Australia/Brisbane",
     "language": "en",
-    "url": "https://mod.works/members/xant"
+    "url": "https://mod.io/members/xant"
   },
   "date": 1499841487,
   "replyid": 1499841487,
@@ -5010,7 +5000,7 @@ apiKey, oauth2 ( Scopes: read )
 
 ```shell
 # You can also use wget
-curl -X delete https://api.mod.works/v1/games/{game-id}/mods/{mod-id}/comments/{comment-id} \
+curl -X delete https://api.mod.io/v1/games/{game-id}/mods/{mod-id}/comments/{comment-id} \
   -H 'Authorization: Bearer YourAccessToken' \
   -H 'Content-Type: application/x-www-form-urlencoded' \
   -H 'Accept: application/json'
@@ -5018,8 +5008,8 @@ curl -X delete https://api.mod.works/v1/games/{game-id}/mods/{mod-id}/comments/{
 ```
 
 ```http
-DELETE https://api.mod.works/v1/games/{game-id}/mods/{mod-id}/comments/{comment-id} HTTP/1.1
-Host: api.mod.works
+DELETE https://api.mod.io/v1/games/{game-id}/mods/{mod-id}/comments/{comment-id} HTTP/1.1
+Host: api.mod.io
 
 Accept: application/json
 Authorization: Bearer YourAccessToken
@@ -5036,7 +5026,7 @@ var headers = {
 };
 
 $.ajax({
-  url: 'https://api.mod.works/v1/games/{game-id}/mods/{mod-id}/comments/{comment-id}',
+  url: 'https://api.mod.io/v1/games/{game-id}/mods/{mod-id}/comments/{comment-id}',
   method: 'delete',
 
   headers: headers,
@@ -5056,7 +5046,7 @@ const headers = {
 
 };
 
-fetch('https://api.mod.works/v1/games/{game-id}/mods/{mod-id}/comments/{comment-id}',
+fetch('https://api.mod.io/v1/games/{game-id}/mods/{mod-id}/comments/{comment-id}',
 {
   method: 'DELETE',
 
@@ -5079,7 +5069,7 @@ headers = {
   'Accept' => 'application/json'
 }
 
-result = RestClient.delete 'https://api.mod.works/v1/games/{game-id}/mods/{mod-id}/comments/{comment-id}', params: {
+result = RestClient.delete 'https://api.mod.io/v1/games/{game-id}/mods/{mod-id}/comments/{comment-id}', params: {
   }, headers: headers
 
 p JSON.parse(result)
@@ -5093,7 +5083,7 @@ headers = {
   'Accept': 'application/json'
 }
 
-r = requests.delete('https://api.mod.works/v1/games/{game-id}/mods/{mod-id}/comments/{comment-id}', params={
+r = requests.delete('https://api.mod.io/v1/games/{game-id}/mods/{mod-id}/comments/{comment-id}', params={
 
 }, headers = headers)
 
@@ -5101,7 +5091,7 @@ print r.json()
 ```
 
 ```java
-URL obj = new URL("https://api.mod.works/v1/games/{game-id}/mods/{mod-id}/comments/{comment-id}");
+URL obj = new URL("https://api.mod.io/v1/games/{game-id}/mods/{mod-id}/comments/{comment-id}");
 HttpURLConnection con = (HttpURLConnection) obj.openConnection();
 con.setRequestMethod("DELETE");
 int responseCode = con.getResponseCode();
@@ -5141,14 +5131,14 @@ oauth2 ( Scopes: write )
 
 ```shell
 # You can also use wget
-curl -X get https://api.mod.works/v1/games/{game-id}/mods/{mod-id}/team?api_key=YourApiKey \
+curl -X get https://api.mod.io/v1/games/{game-id}/mods/{mod-id}/team?api_key=YourApiKey \
   -H 'Accept: application/json'
 
 ```
 
 ```http
-GET https://api.mod.works/v1/games/{game-id}/mods/{mod-id}/team?api_key=YourApiKey HTTP/1.1
-Host: api.mod.works
+GET https://api.mod.io/v1/games/{game-id}/mods/{mod-id}/team?api_key=YourApiKey HTTP/1.1
+Host: api.mod.io
 
 Accept: application/json
 
@@ -5161,7 +5151,7 @@ var headers = {
 };
 
 $.ajax({
-  url: 'https://api.mod.works/v1/games/{game-id}/mods/{mod-id}/team',
+  url: 'https://api.mod.io/v1/games/{game-id}/mods/{mod-id}/team',
   method: 'get',
   data: '?api_key=YourApiKey',
   headers: headers,
@@ -5179,7 +5169,7 @@ const headers = {
 
 };
 
-fetch('https://api.mod.works/v1/games/{game-id}/mods/{mod-id}/team?api_key=YourApiKey',
+fetch('https://api.mod.io/v1/games/{game-id}/mods/{mod-id}/team?api_key=YourApiKey',
 {
   method: 'GET',
 
@@ -5200,7 +5190,7 @@ headers = {
   'Accept' => 'application/json'
 }
 
-result = RestClient.get 'https://api.mod.works/v1/games/{game-id}/mods/{mod-id}/team', params: {
+result = RestClient.get 'https://api.mod.io/v1/games/{game-id}/mods/{mod-id}/team', params: {
   'api_key' => 'string'
 }, headers: headers
 
@@ -5213,7 +5203,7 @@ headers = {
   'Accept': 'application/json'
 }
 
-r = requests.get('https://api.mod.works/v1/games/{game-id}/mods/{mod-id}/team', params={
+r = requests.get('https://api.mod.io/v1/games/{game-id}/mods/{mod-id}/team', params={
   'api_key': 'YourApiKey'
 }, headers = headers)
 
@@ -5221,7 +5211,7 @@ print r.json()
 ```
 
 ```java
-URL obj = new URL("https://api.mod.works/v1/games/{game-id}/mods/{mod-id}/team?api_key=YourApiKey");
+URL obj = new URL("https://api.mod.io/v1/games/{game-id}/mods/{mod-id}/team?api_key=YourApiKey");
 HttpURLConnection con = (HttpURLConnection) obj.openConnection();
 con.setRequestMethod("GET");
 int responseCode = con.getResponseCode();
@@ -5237,7 +5227,7 @@ System.out.println(response.toString());
 ```
 `GET /games/{game-id}/mods/{mod-id}/team`
 
-View all members that are part of a mod team. Successful request will return an __array of access objects__. To make your requests as specific to your needs as possible it's highly recommended reading over our [filtering documentation](https://docs.mod.works/#filtering) if it will help you with consuming this endpoint.
+View all members that are part of a mod team. Successful request will return an __array of access objects__. To make your requests as specific to your needs as possible it's highly recommended reading over our [filtering documentation](https://docs.mod.io/#filtering) if it will help you with consuming this endpoint.
 
 ### Responses
 
@@ -5258,12 +5248,12 @@ Status|Meaning|Description
         "username": "XanT",
         "permission": 1,
         "avatar": {
-          "full": "https://media.mod.works/images/members/1/1/1/masterchief.jpg",
+          "full": "https://media.mod.io/images/members/1/1/1/masterchief.jpg",
           "filename": "masterchief.jpg"
         },
         "timezone": "Australia/Brisbane",
         "language": "en",
-        "url": "https://mod.works/members/xant"
+        "url": "https://mod.io/members/xant"
       },
       "username": "Megalodon",
       "level": 8,
@@ -5287,7 +5277,7 @@ apiKey, oauth2 ( Scopes: read )
 
 ```shell
 # You can also use wget
-curl -X post https://api.mod.works/v1/games/{game-id}/mods/{mod-id}/team \
+curl -X post https://api.mod.io/v1/games/{game-id}/mods/{mod-id}/team \
   -H 'Authorization: Bearer YourAccessToken' \
   -H 'Content-Type: application/x-www-form-urlencoded' \
   -H 'Accept: application/json'
@@ -5295,8 +5285,8 @@ curl -X post https://api.mod.works/v1/games/{game-id}/mods/{mod-id}/team \
 ```
 
 ```http
-POST https://api.mod.works/v1/games/{game-id}/mods/{mod-id}/team HTTP/1.1
-Host: api.mod.works
+POST https://api.mod.io/v1/games/{game-id}/mods/{mod-id}/team HTTP/1.1
+Host: api.mod.io
 
 Accept: application/json
 Authorization: Bearer YourAccessToken
@@ -5313,7 +5303,7 @@ var headers = {
 };
 
 $.ajax({
-  url: 'https://api.mod.works/v1/games/{game-id}/mods/{mod-id}/team',
+  url: 'https://api.mod.io/v1/games/{game-id}/mods/{mod-id}/team',
   method: 'post',
 
   headers: headers,
@@ -5333,7 +5323,7 @@ const headers = {
 
 };
 
-fetch('https://api.mod.works/v1/games/{game-id}/mods/{mod-id}/team',
+fetch('https://api.mod.io/v1/games/{game-id}/mods/{mod-id}/team',
 {
   method: 'POST',
 
@@ -5356,7 +5346,7 @@ headers = {
   'Accept' => 'application/json'
 }
 
-result = RestClient.post 'https://api.mod.works/v1/games/{game-id}/mods/{mod-id}/team', params: {
+result = RestClient.post 'https://api.mod.io/v1/games/{game-id}/mods/{mod-id}/team', params: {
   }, headers: headers
 
 p JSON.parse(result)
@@ -5370,7 +5360,7 @@ headers = {
   'Accept': 'application/json'
 }
 
-r = requests.post('https://api.mod.works/v1/games/{game-id}/mods/{mod-id}/team', params={
+r = requests.post('https://api.mod.io/v1/games/{game-id}/mods/{mod-id}/team', params={
 
 }, headers = headers)
 
@@ -5378,7 +5368,7 @@ print r.json()
 ```
 
 ```java
-URL obj = new URL("https://api.mod.works/v1/games/{game-id}/mods/{mod-id}/team");
+URL obj = new URL("https://api.mod.io/v1/games/{game-id}/mods/{mod-id}/team");
 HttpURLConnection con = (HttpURLConnection) obj.openConnection();
 con.setRequestMethod("POST");
 int responseCode = con.getResponseCode();
@@ -5427,7 +5417,7 @@ oauth2 ( Scopes: write )
 
 ```shell
 # You can also use wget
-curl -X put https://api.mod.works/v1/games/{game-id}/mods/{mod-id}/team/{access-id} \
+curl -X put https://api.mod.io/v1/games/{game-id}/mods/{mod-id}/team/{access-id} \
   -H 'Authorization: Bearer YourAccessToken' \
   -H 'Content-Type: application/x-www-form-urlencoded' \
   -H 'Accept: application/json'
@@ -5435,8 +5425,8 @@ curl -X put https://api.mod.works/v1/games/{game-id}/mods/{mod-id}/team/{access-
 ```
 
 ```http
-PUT https://api.mod.works/v1/games/{game-id}/mods/{mod-id}/team/{access-id} HTTP/1.1
-Host: api.mod.works
+PUT https://api.mod.io/v1/games/{game-id}/mods/{mod-id}/team/{access-id} HTTP/1.1
+Host: api.mod.io
 
 Accept: application/json
 Authorization: Bearer YourAccessToken
@@ -5453,7 +5443,7 @@ var headers = {
 };
 
 $.ajax({
-  url: 'https://api.mod.works/v1/games/{game-id}/mods/{mod-id}/team/{access-id}',
+  url: 'https://api.mod.io/v1/games/{game-id}/mods/{mod-id}/team/{access-id}',
   method: 'put',
 
   headers: headers,
@@ -5473,7 +5463,7 @@ const headers = {
 
 };
 
-fetch('https://api.mod.works/v1/games/{game-id}/mods/{mod-id}/team/{access-id}',
+fetch('https://api.mod.io/v1/games/{game-id}/mods/{mod-id}/team/{access-id}',
 {
   method: 'PUT',
 
@@ -5496,7 +5486,7 @@ headers = {
   'Accept' => 'application/json'
 }
 
-result = RestClient.put 'https://api.mod.works/v1/games/{game-id}/mods/{mod-id}/team/{access-id}', params: {
+result = RestClient.put 'https://api.mod.io/v1/games/{game-id}/mods/{mod-id}/team/{access-id}', params: {
   }, headers: headers
 
 p JSON.parse(result)
@@ -5510,7 +5500,7 @@ headers = {
   'Accept': 'application/json'
 }
 
-r = requests.put('https://api.mod.works/v1/games/{game-id}/mods/{mod-id}/team/{access-id}', params={
+r = requests.put('https://api.mod.io/v1/games/{game-id}/mods/{mod-id}/team/{access-id}', params={
 
 }, headers = headers)
 
@@ -5518,7 +5508,7 @@ print r.json()
 ```
 
 ```java
-URL obj = new URL("https://api.mod.works/v1/games/{game-id}/mods/{mod-id}/team/{access-id}");
+URL obj = new URL("https://api.mod.io/v1/games/{game-id}/mods/{mod-id}/team/{access-id}");
 HttpURLConnection con = (HttpURLConnection) obj.openConnection();
 con.setRequestMethod("PUT");
 int responseCode = con.getResponseCode();
@@ -5566,7 +5556,7 @@ oauth2 ( Scopes: write )
 
 ```shell
 # You can also use wget
-curl -X delete https://api.mod.works/v1/games/{game-id}/mods/{mod-id}/team/{access-id} \
+curl -X delete https://api.mod.io/v1/games/{game-id}/mods/{mod-id}/team/{access-id} \
   -H 'Authorization: Bearer YourAccessToken' \
   -H 'Content-Type: application/x-www-form-urlencoded' \
   -H 'Accept: application/json'
@@ -5574,8 +5564,8 @@ curl -X delete https://api.mod.works/v1/games/{game-id}/mods/{mod-id}/team/{acce
 ```
 
 ```http
-DELETE https://api.mod.works/v1/games/{game-id}/mods/{mod-id}/team/{access-id} HTTP/1.1
-Host: api.mod.works
+DELETE https://api.mod.io/v1/games/{game-id}/mods/{mod-id}/team/{access-id} HTTP/1.1
+Host: api.mod.io
 
 Accept: application/json
 Authorization: Bearer YourAccessToken
@@ -5592,7 +5582,7 @@ var headers = {
 };
 
 $.ajax({
-  url: 'https://api.mod.works/v1/games/{game-id}/mods/{mod-id}/team/{access-id}',
+  url: 'https://api.mod.io/v1/games/{game-id}/mods/{mod-id}/team/{access-id}',
   method: 'delete',
 
   headers: headers,
@@ -5612,7 +5602,7 @@ const headers = {
 
 };
 
-fetch('https://api.mod.works/v1/games/{game-id}/mods/{mod-id}/team/{access-id}',
+fetch('https://api.mod.io/v1/games/{game-id}/mods/{mod-id}/team/{access-id}',
 {
   method: 'DELETE',
 
@@ -5635,7 +5625,7 @@ headers = {
   'Accept' => 'application/json'
 }
 
-result = RestClient.delete 'https://api.mod.works/v1/games/{game-id}/mods/{mod-id}/team/{access-id}', params: {
+result = RestClient.delete 'https://api.mod.io/v1/games/{game-id}/mods/{mod-id}/team/{access-id}', params: {
   }, headers: headers
 
 p JSON.parse(result)
@@ -5649,7 +5639,7 @@ headers = {
   'Accept': 'application/json'
 }
 
-r = requests.delete('https://api.mod.works/v1/games/{game-id}/mods/{mod-id}/team/{access-id}', params={
+r = requests.delete('https://api.mod.io/v1/games/{game-id}/mods/{mod-id}/team/{access-id}', params={
 
 }, headers = headers)
 
@@ -5657,7 +5647,7 @@ print r.json()
 ```
 
 ```java
-URL obj = new URL("https://api.mod.works/v1/games/{game-id}/mods/{mod-id}/team/{access-id}");
+URL obj = new URL("https://api.mod.io/v1/games/{game-id}/mods/{mod-id}/team/{access-id}");
 HttpURLConnection con = (HttpURLConnection) obj.openConnection();
 con.setRequestMethod("DELETE");
 int responseCode = con.getResponseCode();
@@ -5699,14 +5689,14 @@ oauth2 ( Scopes: write )
 
 ```shell
 # You can also use wget
-curl -X get https://api.mod.works/v1/users?api_key=YourApiKey \
+curl -X get https://api.mod.io/v1/users?api_key=YourApiKey \
   -H 'Accept: application/json'
 
 ```
 
 ```http
-GET https://api.mod.works/v1/users?api_key=YourApiKey HTTP/1.1
-Host: api.mod.works
+GET https://api.mod.io/v1/users?api_key=YourApiKey HTTP/1.1
+Host: api.mod.io
 
 Accept: application/json
 
@@ -5719,7 +5709,7 @@ var headers = {
 };
 
 $.ajax({
-  url: 'https://api.mod.works/v1/users',
+  url: 'https://api.mod.io/v1/users',
   method: 'get',
   data: '?api_key=YourApiKey',
   headers: headers,
@@ -5737,7 +5727,7 @@ const headers = {
 
 };
 
-fetch('https://api.mod.works/v1/users?api_key=YourApiKey',
+fetch('https://api.mod.io/v1/users?api_key=YourApiKey',
 {
   method: 'GET',
 
@@ -5758,7 +5748,7 @@ headers = {
   'Accept' => 'application/json'
 }
 
-result = RestClient.get 'https://api.mod.works/v1/users', params: {
+result = RestClient.get 'https://api.mod.io/v1/users', params: {
   'api_key' => 'string'
 }, headers: headers
 
@@ -5771,7 +5761,7 @@ headers = {
   'Accept': 'application/json'
 }
 
-r = requests.get('https://api.mod.works/v1/users', params={
+r = requests.get('https://api.mod.io/v1/users', params={
   'api_key': 'YourApiKey'
 }, headers = headers)
 
@@ -5779,7 +5769,7 @@ print r.json()
 ```
 
 ```java
-URL obj = new URL("https://api.mod.works/v1/users?api_key=YourApiKey");
+URL obj = new URL("https://api.mod.io/v1/users?api_key=YourApiKey");
 HttpURLConnection con = (HttpURLConnection) obj.openConnection();
 con.setRequestMethod("GET");
 int responseCode = con.getResponseCode();
@@ -5795,7 +5785,7 @@ System.out.println(response.toString());
 ```
 `GET /users`
 
-Browse users registered to mod.works. Successful request will return an __array of user objects__. To make your requests as specific to your needs as possible it's highly recommended reading over our [filtering documentation](https://docs.mod.works/#filtering) if it will help you with consuming this endpoint.
+Browse users registered to mod.io. Successful request will return an __array of user objects__. To make your requests as specific to your needs as possible it's highly recommended reading over our [filtering documentation](https://docs.mod.io/#filtering) if it will help you with consuming this endpoint.
      
      Filter|Type|Description
      ---|---|---
@@ -5823,12 +5813,12 @@ Status|Meaning|Description
       "username": "XanT",
       "permission": 1,
       "avatar": {
-        "full": "https://media.mod.works/images/members/1/1/1/masterchief.jpg",
+        "full": "https://media.mod.io/images/members/1/1/1/masterchief.jpg",
         "filename": "masterchief.jpg"
       },
       "timezone": "Australia/Brisbane",
       "language": "en",
-      "url": "https://mod.works/members/xant"
+      "url": "https://mod.io/members/xant"
     },
     {
         ...
@@ -5847,14 +5837,14 @@ apiKey, oauth2 ( Scopes: read )
 
 ```shell
 # You can also use wget
-curl -X get https://api.mod.works/v1/users/{user-id}?api_key=YourApiKey \
+curl -X get https://api.mod.io/v1/users/{user-id}?api_key=YourApiKey \
   -H 'Accept: application/json'
 
 ```
 
 ```http
-GET https://api.mod.works/v1/users/{user-id}?api_key=YourApiKey HTTP/1.1
-Host: api.mod.works
+GET https://api.mod.io/v1/users/{user-id}?api_key=YourApiKey HTTP/1.1
+Host: api.mod.io
 
 Accept: application/json
 
@@ -5867,7 +5857,7 @@ var headers = {
 };
 
 $.ajax({
-  url: 'https://api.mod.works/v1/users/{user-id}',
+  url: 'https://api.mod.io/v1/users/{user-id}',
   method: 'get',
   data: '?api_key=YourApiKey',
   headers: headers,
@@ -5885,7 +5875,7 @@ const headers = {
 
 };
 
-fetch('https://api.mod.works/v1/users/{user-id}?api_key=YourApiKey',
+fetch('https://api.mod.io/v1/users/{user-id}?api_key=YourApiKey',
 {
   method: 'GET',
 
@@ -5906,7 +5896,7 @@ headers = {
   'Accept' => 'application/json'
 }
 
-result = RestClient.get 'https://api.mod.works/v1/users/{user-id}', params: {
+result = RestClient.get 'https://api.mod.io/v1/users/{user-id}', params: {
   'api_key' => 'string'
 }, headers: headers
 
@@ -5919,7 +5909,7 @@ headers = {
   'Accept': 'application/json'
 }
 
-r = requests.get('https://api.mod.works/v1/users/{user-id}', params={
+r = requests.get('https://api.mod.io/v1/users/{user-id}', params={
   'api_key': 'YourApiKey'
 }, headers = headers)
 
@@ -5927,7 +5917,7 @@ print r.json()
 ```
 
 ```java
-URL obj = new URL("https://api.mod.works/v1/users/{user-id}?api_key=YourApiKey");
+URL obj = new URL("https://api.mod.io/v1/users/{user-id}?api_key=YourApiKey");
 HttpURLConnection con = (HttpURLConnection) obj.openConnection();
 con.setRequestMethod("GET");
 int responseCode = con.getResponseCode();
@@ -5960,12 +5950,12 @@ Status|Meaning|Description
   "username": "XanT",
   "permission": 1,
   "avatar": {
-    "full": "https://media.mod.works/images/members/1/1/1/masterchief.jpg",
+    "full": "https://media.mod.io/images/members/1/1/1/masterchief.jpg",
     "filename": "masterchief.jpg"
   },
   "timezone": "Australia/Brisbane",
   "language": "en",
-  "url": "https://mod.works/members/xant"
+  "url": "https://mod.io/members/xant"
 }
 ```
 <aside class="warning">
@@ -5979,7 +5969,7 @@ apiKey, oauth2 ( Scopes: read )
 
 ```shell
 # You can also use wget
-curl -X post https://api.mod.works/v1/general/ownership \
+curl -X post https://api.mod.io/v1/general/ownership \
   -H 'Authorization: Bearer YourAccessToken' \
   -H 'Content-Type: application/x-www-form-urlencoded' \
   -H 'Accept: application/json'
@@ -5987,8 +5977,8 @@ curl -X post https://api.mod.works/v1/general/ownership \
 ```
 
 ```http
-POST https://api.mod.works/v1/general/ownership HTTP/1.1
-Host: api.mod.works
+POST https://api.mod.io/v1/general/ownership HTTP/1.1
+Host: api.mod.io
 
 Accept: application/json
 Authorization: Bearer YourAccessToken
@@ -6005,7 +5995,7 @@ var headers = {
 };
 
 $.ajax({
-  url: 'https://api.mod.works/v1/general/ownership',
+  url: 'https://api.mod.io/v1/general/ownership',
   method: 'post',
 
   headers: headers,
@@ -6025,7 +6015,7 @@ const headers = {
 
 };
 
-fetch('https://api.mod.works/v1/general/ownership',
+fetch('https://api.mod.io/v1/general/ownership',
 {
   method: 'POST',
 
@@ -6048,7 +6038,7 @@ headers = {
   'Accept' => 'application/json'
 }
 
-result = RestClient.post 'https://api.mod.works/v1/general/ownership', params: {
+result = RestClient.post 'https://api.mod.io/v1/general/ownership', params: {
   }, headers: headers
 
 p JSON.parse(result)
@@ -6062,7 +6052,7 @@ headers = {
   'Accept': 'application/json'
 }
 
-r = requests.post('https://api.mod.works/v1/general/ownership', params={
+r = requests.post('https://api.mod.io/v1/general/ownership', params={
 
 }, headers = headers)
 
@@ -6070,7 +6060,7 @@ print r.json()
 ```
 
 ```java
-URL obj = new URL("https://api.mod.works/v1/general/ownership");
+URL obj = new URL("https://api.mod.io/v1/general/ownership");
 HttpURLConnection con = (HttpURLConnection) obj.openConnection();
 con.setRequestMethod("POST");
 int responseCode = con.getResponseCode();
@@ -6120,7 +6110,7 @@ apiKey, oauth2 ( Scopes: read )
 
 ```shell
 # You can also use wget
-curl -X post https://api.mod.works/v1/general/price \
+curl -X post https://api.mod.io/v1/general/price \
   -H 'Authorization: Bearer YourAccessToken' \
   -H 'Content-Type: application/x-www-form-urlencoded' \
   -H 'Accept: application/json'
@@ -6128,8 +6118,8 @@ curl -X post https://api.mod.works/v1/general/price \
 ```
 
 ```http
-POST https://api.mod.works/v1/general/price HTTP/1.1
-Host: api.mod.works
+POST https://api.mod.io/v1/general/price HTTP/1.1
+Host: api.mod.io
 
 Accept: application/json
 Authorization: Bearer YourAccessToken
@@ -6146,7 +6136,7 @@ var headers = {
 };
 
 $.ajax({
-  url: 'https://api.mod.works/v1/general/price',
+  url: 'https://api.mod.io/v1/general/price',
   method: 'post',
 
   headers: headers,
@@ -6166,7 +6156,7 @@ const headers = {
 
 };
 
-fetch('https://api.mod.works/v1/general/price',
+fetch('https://api.mod.io/v1/general/price',
 {
   method: 'POST',
 
@@ -6189,7 +6179,7 @@ headers = {
   'Accept' => 'application/json'
 }
 
-result = RestClient.post 'https://api.mod.works/v1/general/price', params: {
+result = RestClient.post 'https://api.mod.io/v1/general/price', params: {
   }, headers: headers
 
 p JSON.parse(result)
@@ -6203,7 +6193,7 @@ headers = {
   'Accept': 'application/json'
 }
 
-r = requests.post('https://api.mod.works/v1/general/price', params={
+r = requests.post('https://api.mod.io/v1/general/price', params={
 
 }, headers = headers)
 
@@ -6211,7 +6201,7 @@ print r.json()
 ```
 
 ```java
-URL obj = new URL("https://api.mod.works/v1/general/price");
+URL obj = new URL("https://api.mod.io/v1/general/price");
 HttpURLConnection con = (HttpURLConnection) obj.openConnection();
 con.setRequestMethod("POST");
 int responseCode = con.getResponseCode();
@@ -6262,15 +6252,15 @@ apiKey, oauth2 ( Scopes: read )
 
 ```shell
 # You can also use wget
-curl -X get https://api.mod.works/v1/me/games \
+curl -X get https://api.mod.io/v1/me/games \
   -H 'Authorization: Bearer YourAccessToken' \
   -H 'Accept: application/json'
 
 ```
 
 ```http
-GET https://api.mod.works/v1/me/games HTTP/1.1
-Host: api.mod.works
+GET https://api.mod.io/v1/me/games HTTP/1.1
+Host: api.mod.io
 
 Accept: application/json
 Authorization: Bearer YourAccessToken
@@ -6285,7 +6275,7 @@ var headers = {
 };
 
 $.ajax({
-  url: 'https://api.mod.works/v1/me/games',
+  url: 'https://api.mod.io/v1/me/games',
   method: 'get',
 
   headers: headers,
@@ -6304,7 +6294,7 @@ const headers = {
 
 };
 
-fetch('https://api.mod.works/v1/me/games',
+fetch('https://api.mod.io/v1/me/games',
 {
   method: 'GET',
 
@@ -6326,7 +6316,7 @@ headers = {
   'Accept' => 'application/json'
 }
 
-result = RestClient.get 'https://api.mod.works/v1/me/games', params: {
+result = RestClient.get 'https://api.mod.io/v1/me/games', params: {
   }, headers: headers
 
 p JSON.parse(result)
@@ -6339,7 +6329,7 @@ headers = {
   'Accept': 'application/json'
 }
 
-r = requests.get('https://api.mod.works/v1/me/games', params={
+r = requests.get('https://api.mod.io/v1/me/games', params={
 
 }, headers = headers)
 
@@ -6347,7 +6337,7 @@ print r.json()
 ```
 
 ```java
-URL obj = new URL("https://api.mod.works/v1/me/games");
+URL obj = new URL("https://api.mod.io/v1/me/games");
 HttpURLConnection con = (HttpURLConnection) obj.openConnection();
 con.setRequestMethod("GET");
 int responseCode = con.getResponseCode();
@@ -6363,7 +6353,7 @@ System.out.println(response.toString());
 ```
 `GET /me/games`
 
-View all mod.works games that exist for the *authenticated user*.
+View all mod.io games that exist for the *authenticated user*.
 
 ### Responses
 
@@ -6384,12 +6374,12 @@ Status|Meaning|Description
         "username": "XanT",
         "permission": 1,
         "avatar": {
-          "full": "https://media.mod.works/images/members/1/1/1/masterchief.jpg",
+          "full": "https://media.mod.io/images/members/1/1/1/masterchief.jpg",
           "filename": "masterchief.jpg"
         },
         "timezone": "Australia/Brisbane",
         "language": "en",
-        "url": "https://mod.works/members/xant"
+        "url": "https://mod.io/members/xant"
       },
       "datereg": 1493702614,
       "dateup": 1499410290,
@@ -6401,17 +6391,17 @@ Status|Meaning|Description
       "api": 3,
       "ugcname": "map",
       "icon": {
-        "full": "https://media.mod.works/images/games/1/1/2/icon.png",
-        "thumbnail": "https://media.mod.works/cache/images/mods/1/1/2/crop_320x180/icon.png",
+        "full": "https://media.mod.io/images/games/1/1/2/icon.png",
+        "thumbnail": "https://media.mod.io/cache/images/mods/1/1/2/crop_320x180/icon.png",
         "filename": "icon.png"
       },
       "logo": {
-        "full": "https://media.mod.works/images/games/1/1/2/gamelogo.jpg",
-        "thumbnail": "https://media.mod.works/cache/images/mods/1/1/2/thumb_1020x2000/gamelogo.jpg",
+        "full": "https://media.mod.io/images/games/1/1/2/gamelogo.jpg",
+        "thumbnail": "https://media.mod.io/cache/images/mods/1/1/2/thumb_1020x2000/gamelogo.jpg",
         "filename": "gamelogo.jpg"
       },
       "header": {
-        "full": "https://media.mod.works/images/games/1/1/2/gameheader.png",
+        "full": "https://media.mod.io/images/games/1/1/2/gameheader.png",
         "filename": "gameheader.png"
       },
       "homepage": "https://www.rogue-knight-game.com/",
@@ -6419,7 +6409,7 @@ Status|Meaning|Description
       "nameid": "rogue-knight",
       "summary": "Rogue Knight is a brand new 2D pixel platformer.",
       "instructions": "Instructions here on how to develop for your game.",
-      "url": "https://rogue-knight.mod.works",
+      "url": "https://rogue-knight.mod.io",
       "cats": [
         {
           "name": "Engines",
@@ -6448,15 +6438,15 @@ oauth2 ( Scopes: read )
 
 ```shell
 # You can also use wget
-curl -X get https://api.mod.works/v1/me/mods \
+curl -X get https://api.mod.io/v1/me/mods \
   -H 'Authorization: Bearer YourAccessToken' \
   -H 'Accept: application/json'
 
 ```
 
 ```http
-GET https://api.mod.works/v1/me/mods HTTP/1.1
-Host: api.mod.works
+GET https://api.mod.io/v1/me/mods HTTP/1.1
+Host: api.mod.io
 
 Accept: application/json
 Authorization: Bearer YourAccessToken
@@ -6471,7 +6461,7 @@ var headers = {
 };
 
 $.ajax({
-  url: 'https://api.mod.works/v1/me/mods',
+  url: 'https://api.mod.io/v1/me/mods',
   method: 'get',
 
   headers: headers,
@@ -6490,7 +6480,7 @@ const headers = {
 
 };
 
-fetch('https://api.mod.works/v1/me/mods',
+fetch('https://api.mod.io/v1/me/mods',
 {
   method: 'GET',
 
@@ -6512,7 +6502,7 @@ headers = {
   'Accept' => 'application/json'
 }
 
-result = RestClient.get 'https://api.mod.works/v1/me/mods', params: {
+result = RestClient.get 'https://api.mod.io/v1/me/mods', params: {
   }, headers: headers
 
 p JSON.parse(result)
@@ -6525,7 +6515,7 @@ headers = {
   'Accept': 'application/json'
 }
 
-r = requests.get('https://api.mod.works/v1/me/mods', params={
+r = requests.get('https://api.mod.io/v1/me/mods', params={
 
 }, headers = headers)
 
@@ -6533,7 +6523,7 @@ print r.json()
 ```
 
 ```java
-URL obj = new URL("https://api.mod.works/v1/me/mods");
+URL obj = new URL("https://api.mod.io/v1/me/mods");
 HttpURLConnection con = (HttpURLConnection) obj.openConnection();
 con.setRequestMethod("GET");
 int responseCode = con.getResponseCode();
@@ -6549,7 +6539,7 @@ System.out.println(response.toString());
 ```
 `GET /me/mods`
 
-View all mod.works mods that exist for the *authenticated user*.
+View all mod.io mods that exist for the *authenticated user*.
 
 ### Responses
 
@@ -6571,19 +6561,19 @@ Status|Meaning|Description
         "username": "XanT",
         "permission": 1,
         "avatar": {
-          "full": "https://media.mod.works/images/members/1/1/1/masterchief.jpg",
+          "full": "https://media.mod.io/images/members/1/1/1/masterchief.jpg",
           "filename": "masterchief.jpg"
         },
         "timezone": "Australia/Brisbane",
         "language": "en",
-        "url": "https://mod.works/members/xant"
+        "url": "https://mod.io/members/xant"
       },
       "price": 9.99,
       "datereg": 1492564103,
       "dateup": 1499841487,
       "logo": {
-        "full": "https://media.mod.works/images/mods/1/1/2/IMG_20170409_222419.jpg",
-        "thumbnail": "https://media.mod.works/cache/images/mods/1/1/2/thumb_1020x2000/IMG_20170409_222419.jpg",
+        "full": "https://media.mod.io/images/mods/1/1/2/IMG_20170409_222419.jpg",
+        "thumbnail": "https://media.mod.io/cache/images/mods/1/1/2/thumb_1020x2000/IMG_20170409_222419.jpg",
         "filename": "IMG_20170409_222419.jpg"
       },
       "homepage": "https://www.rogue-hdpack.com/",
@@ -6592,7 +6582,7 @@ Status|Meaning|Description
       "summary": "It's time to bask in the glory of beautiful 4k textures!",
       "description": "<h2>About</h2><p>Rogue HD Pack does exactly what you thi...",
       "metadata": "rogue,hd,high-res,4k,hd textures",
-      "url": "https://rogue-knight.mod.works/rogue-knight-hd-pack",
+      "url": "https://rogue-knight.mod.io/rogue-knight-hd-pack",
       "modfile": {
         "id": 2,
         "mod": 2,
@@ -6602,12 +6592,12 @@ Status|Meaning|Description
           "username": "XanT",
           "permission": 1,
           "avatar": {
-            "full": "https://media.mod.works/images/members/1/1/1/masterchief.jpg",
+            "full": "https://media.mod.io/images/members/1/1/1/masterchief.jpg",
             "filename": "masterchief.jpg"
           },
           "timezone": "Australia/Brisbane",
           "language": "en",
-          "url": "https://mod.works/members/xant"
+          "url": "https://mod.io/members/xant"
         },
         "date": 1499841487,
         "datevirus": 1499841487,
@@ -6619,7 +6609,7 @@ Status|Meaning|Description
         "version": "1.3",
         "virustotal": "No threats found.",
         "changelog": "VERSION 1.3 -- Changes -- Fixed critical castle floor bug.",
-        "download": "https://cdn.mod.works/files/1/1/2/rogue-knight-v1.zip"
+        "download": "https://cdn.mod.io/files/1/1/2/rogue-knight-v1.zip"
       },
       "media": {
         "youtube": [
@@ -6630,8 +6620,8 @@ Status|Meaning|Description
         ],
         "images": [
           {
-            "full": "https://media.mod.works/images/mods/1/1/2/IMG_20170409_222419.jpg",
-            "thumbnail": "https://media.mod.works/cache/images/mods/1/1/2/thumb_1020x2000/IMG_20170409_222419.jpg",
+            "full": "https://media.mod.io/images/mods/1/1/2/IMG_20170409_222419.jpg",
+            "thumbnail": "https://media.mod.io/cache/images/mods/1/1/2/thumb_1020x2000/IMG_20170409_222419.jpg",
             "filename": "IMG_20170409_222419.jpg"
           }
         ]
@@ -6663,15 +6653,15 @@ oauth2 ( Scopes: read )
 
 ```shell
 # You can also use wget
-curl -X get https://api.mod.works/v1/me/files \
+curl -X get https://api.mod.io/v1/me/files \
   -H 'Authorization: Bearer YourAccessToken' \
   -H 'Accept: application/json'
 
 ```
 
 ```http
-GET https://api.mod.works/v1/me/files HTTP/1.1
-Host: api.mod.works
+GET https://api.mod.io/v1/me/files HTTP/1.1
+Host: api.mod.io
 
 Accept: application/json
 Authorization: Bearer YourAccessToken
@@ -6686,7 +6676,7 @@ var headers = {
 };
 
 $.ajax({
-  url: 'https://api.mod.works/v1/me/files',
+  url: 'https://api.mod.io/v1/me/files',
   method: 'get',
 
   headers: headers,
@@ -6705,7 +6695,7 @@ const headers = {
 
 };
 
-fetch('https://api.mod.works/v1/me/files',
+fetch('https://api.mod.io/v1/me/files',
 {
   method: 'GET',
 
@@ -6727,7 +6717,7 @@ headers = {
   'Accept' => 'application/json'
 }
 
-result = RestClient.get 'https://api.mod.works/v1/me/files', params: {
+result = RestClient.get 'https://api.mod.io/v1/me/files', params: {
   }, headers: headers
 
 p JSON.parse(result)
@@ -6740,7 +6730,7 @@ headers = {
   'Accept': 'application/json'
 }
 
-r = requests.get('https://api.mod.works/v1/me/files', params={
+r = requests.get('https://api.mod.io/v1/me/files', params={
 
 }, headers = headers)
 
@@ -6748,7 +6738,7 @@ print r.json()
 ```
 
 ```java
-URL obj = new URL("https://api.mod.works/v1/me/files");
+URL obj = new URL("https://api.mod.io/v1/me/files");
 HttpURLConnection con = (HttpURLConnection) obj.openConnection();
 con.setRequestMethod("GET");
 int responseCode = con.getResponseCode();
@@ -6764,7 +6754,7 @@ System.out.println(response.toString());
 ```
 `GET /me/files`
 
-View all mod.works files that exist for the *authenticated user*.
+View all mod.io files that exist for the *authenticated user*.
 
 ### Responses
 
@@ -6786,12 +6776,12 @@ Status|Meaning|Description
         "username": "XanT",
         "permission": 1,
         "avatar": {
-          "full": "https://media.mod.works/images/members/1/1/1/masterchief.jpg",
+          "full": "https://media.mod.io/images/members/1/1/1/masterchief.jpg",
           "filename": "masterchief.jpg"
         },
         "timezone": "Australia/Brisbane",
         "language": "en",
-        "url": "https://mod.works/members/xant"
+        "url": "https://mod.io/members/xant"
       },
       "date": 1499841487,
       "datevirus": 1499841487,
@@ -6803,7 +6793,7 @@ Status|Meaning|Description
       "version": "1.3",
       "virustotal": "No threats found.",
       "changelog": "VERSION 1.3 -- Changes -- Fixed critical castle floor bug.",
-      "download": "https://mod.works/mods/file/2/c489a0354111a4d76640d47f0cdcb294"
+      "download": "https://mod.io/mods/file/2/c489a0354111a4d76640d47f0cdcb294"
     },
     {
         ...
@@ -6822,15 +6812,15 @@ oauth2 ( Scopes: read )
 
 ```shell
 # You can also use wget
-curl -X get https://api.mod.works/v1/me/updates \
+curl -X get https://api.mod.io/v1/me/updates \
   -H 'Authorization: Bearer YourAccessToken' \
   -H 'Accept: application/json'
 
 ```
 
 ```http
-GET https://api.mod.works/v1/me/updates HTTP/1.1
-Host: api.mod.works
+GET https://api.mod.io/v1/me/updates HTTP/1.1
+Host: api.mod.io
 
 Accept: application/json
 Authorization: Bearer YourAccessToken
@@ -6845,7 +6835,7 @@ var headers = {
 };
 
 $.ajax({
-  url: 'https://api.mod.works/v1/me/updates',
+  url: 'https://api.mod.io/v1/me/updates',
   method: 'get',
 
   headers: headers,
@@ -6864,7 +6854,7 @@ const headers = {
 
 };
 
-fetch('https://api.mod.works/v1/me/updates',
+fetch('https://api.mod.io/v1/me/updates',
 {
   method: 'GET',
 
@@ -6886,7 +6876,7 @@ headers = {
   'Accept' => 'application/json'
 }
 
-result = RestClient.get 'https://api.mod.works/v1/me/updates', params: {
+result = RestClient.get 'https://api.mod.io/v1/me/updates', params: {
   }, headers: headers
 
 p JSON.parse(result)
@@ -6899,7 +6889,7 @@ headers = {
   'Accept': 'application/json'
 }
 
-r = requests.get('https://api.mod.works/v1/me/updates', params={
+r = requests.get('https://api.mod.io/v1/me/updates', params={
 
 }, headers = headers)
 
@@ -6907,7 +6897,7 @@ print r.json()
 ```
 
 ```java
-URL obj = new URL("https://api.mod.works/v1/me/updates");
+URL obj = new URL("https://api.mod.io/v1/me/updates");
 HttpURLConnection con = (HttpURLConnection) obj.openConnection();
 con.setRequestMethod("GET");
 int responseCode = con.getResponseCode();
@@ -6923,7 +6913,7 @@ System.out.println(response.toString());
 ```
 `GET /me/updates`
 
-View all mod.works updates that exist for the *authenticated user*.
+View all mod.io updates that exist for the *authenticated user*.
 
 ### Responses
 
@@ -6963,7 +6953,7 @@ oauth2 ( Scopes: read )
 
 ```shell
 # You can also use wget
-curl -X post https://api.mod.works/v1/{resource}/{resource-id}/subscribe \
+curl -X post https://api.mod.io/v1/{resource}/{resource-id}/subscribe \
   -H 'Authorization: Bearer YourAccessToken' \
   -H 'Content-Type: application/x-www-form-urlencoded' \
   -H 'Accept: application/json'
@@ -6971,8 +6961,8 @@ curl -X post https://api.mod.works/v1/{resource}/{resource-id}/subscribe \
 ```
 
 ```http
-POST https://api.mod.works/v1/{resource}/{resource-id}/subscribe HTTP/1.1
-Host: api.mod.works
+POST https://api.mod.io/v1/{resource}/{resource-id}/subscribe HTTP/1.1
+Host: api.mod.io
 
 Accept: application/json
 Authorization: Bearer YourAccessToken
@@ -6989,7 +6979,7 @@ var headers = {
 };
 
 $.ajax({
-  url: 'https://api.mod.works/v1/{resource}/{resource-id}/subscribe',
+  url: 'https://api.mod.io/v1/{resource}/{resource-id}/subscribe',
   method: 'post',
 
   headers: headers,
@@ -7009,7 +6999,7 @@ const headers = {
 
 };
 
-fetch('https://api.mod.works/v1/{resource}/{resource-id}/subscribe',
+fetch('https://api.mod.io/v1/{resource}/{resource-id}/subscribe',
 {
   method: 'POST',
 
@@ -7032,7 +7022,7 @@ headers = {
   'Accept' => 'application/json'
 }
 
-result = RestClient.post 'https://api.mod.works/v1/{resource}/{resource-id}/subscribe', params: {
+result = RestClient.post 'https://api.mod.io/v1/{resource}/{resource-id}/subscribe', params: {
   }, headers: headers
 
 p JSON.parse(result)
@@ -7046,7 +7036,7 @@ headers = {
   'Accept': 'application/json'
 }
 
-r = requests.post('https://api.mod.works/v1/{resource}/{resource-id}/subscribe', params={
+r = requests.post('https://api.mod.io/v1/{resource}/{resource-id}/subscribe', params={
 
 }, headers = headers)
 
@@ -7054,7 +7044,7 @@ print r.json()
 ```
 
 ```java
-URL obj = new URL("https://api.mod.works/v1/{resource}/{resource-id}/subscribe");
+URL obj = new URL("https://api.mod.io/v1/{resource}/{resource-id}/subscribe");
 HttpURLConnection con = (HttpURLConnection) obj.openConnection();
 con.setRequestMethod("POST");
 int responseCode = con.getResponseCode();
@@ -7102,7 +7092,7 @@ oauth2 ( Scopes: write )
 
 ```shell
 # You can also use wget
-curl -X delete https://api.mod.works/v1/{resource}/{resource-id}/subscribe \
+curl -X delete https://api.mod.io/v1/{resource}/{resource-id}/subscribe \
   -H 'Authorization: Bearer YourAccessToken' \
   -H 'Content-Type: application/x-www-form-urlencoded' \
   -H 'Accept: application/json'
@@ -7110,8 +7100,8 @@ curl -X delete https://api.mod.works/v1/{resource}/{resource-id}/subscribe \
 ```
 
 ```http
-DELETE https://api.mod.works/v1/{resource}/{resource-id}/subscribe HTTP/1.1
-Host: api.mod.works
+DELETE https://api.mod.io/v1/{resource}/{resource-id}/subscribe HTTP/1.1
+Host: api.mod.io
 
 Accept: application/json
 Authorization: Bearer YourAccessToken
@@ -7128,7 +7118,7 @@ var headers = {
 };
 
 $.ajax({
-  url: 'https://api.mod.works/v1/{resource}/{resource-id}/subscribe',
+  url: 'https://api.mod.io/v1/{resource}/{resource-id}/subscribe',
   method: 'delete',
 
   headers: headers,
@@ -7148,7 +7138,7 @@ const headers = {
 
 };
 
-fetch('https://api.mod.works/v1/{resource}/{resource-id}/subscribe',
+fetch('https://api.mod.io/v1/{resource}/{resource-id}/subscribe',
 {
   method: 'DELETE',
 
@@ -7171,7 +7161,7 @@ headers = {
   'Accept' => 'application/json'
 }
 
-result = RestClient.delete 'https://api.mod.works/v1/{resource}/{resource-id}/subscribe', params: {
+result = RestClient.delete 'https://api.mod.io/v1/{resource}/{resource-id}/subscribe', params: {
   }, headers: headers
 
 p JSON.parse(result)
@@ -7185,7 +7175,7 @@ headers = {
   'Accept': 'application/json'
 }
 
-r = requests.delete('https://api.mod.works/v1/{resource}/{resource-id}/subscribe', params={
+r = requests.delete('https://api.mod.io/v1/{resource}/{resource-id}/subscribe', params={
 
 }, headers = headers)
 
@@ -7193,7 +7183,7 @@ print r.json()
 ```
 
 ```java
-URL obj = new URL("https://api.mod.works/v1/{resource}/{resource-id}/subscribe");
+URL obj = new URL("https://api.mod.io/v1/{resource}/{resource-id}/subscribe");
 HttpURLConnection con = (HttpURLConnection) obj.openConnection();
 con.setRequestMethod("DELETE");
 int responseCode = con.getResponseCode();
