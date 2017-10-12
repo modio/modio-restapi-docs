@@ -19,7 +19,7 @@ highlight_theme: darkula
 
 ## mod.io API v1
 
-Welcome to the official `v1` API documentation for [mod.io](https://m.io). Please ensure you read all of the Getting Started content as it covers most steps to ensure you can accurately and efficiently consume our REST API. 
+Welcome to the official `v1` API documentation for [mod.io](https://mod.io). Please ensure you read all of the Getting Started content as it covers most steps to ensure you can accurately and efficiently consume our REST API. 
 
 __Current version:__ `v1`
 
