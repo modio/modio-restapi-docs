@@ -236,7 +236,7 @@
       </span>
     </a>
     <div class="toc-wrapper">
-      <img src="images/logo.png" class="logo" alt="Logo" />
+      <img src="images/logo.svg" class="logo" alt="Logo" />
         <div class="lang-selector">
               <a href="#" data-language-name="shell">Shell</a>
               <a href="#" data-language-name="http">HTTP</a>
@@ -460,7 +460,7 @@
       <div class="dark-box"></div>
       <div class="content">
         <h1 id='getting-started'>Getting Started</h1><h2 id='mod-io-api-v1'>mod.io API v1</h2>
-<p>Welcome to the official <code>v1</code> API documentation for <a href="https://api.mod.io/">mod.io</a>. Please ensure you read all of the Getting Started content as it covers most steps to ensure you can accurately and efficiently consume our REST API. </p>
+<p>Welcome to the official <code>v1</code> API documentation for <a href="https://m.io">mod.io</a>. Please ensure you read all of the Getting Started content as it covers most steps to ensure you can accurately and efficiently consume our REST API. </p>
 
 <p><strong>Current version:</strong> <code>v1</code></p>
 
@@ -3152,6 +3152,12 @@ Content-Type: multipart/form-data
 <td>integer</td>
 <td></td>
 <td>Unique id of the <strong>file</strong> object to be labelled as the current release.</td>
+</tr>
+<tr>
+<td>tags</td>
+<td>array</td>
+<td></td>
+<td>An array of strings that represent what the mod has been tagged as, only tags that are supported by the parent game can be applied. To determine what tags are eligible, see the <strong>cats</strong> tags on the connected game.</td>
 </tr>
 </tbody></table>
 <h3 id='responses-12'>Responses</h3>
