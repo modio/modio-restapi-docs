@@ -19,7 +19,7 @@ highlight_theme: darkula
 
 ## mod.io API v1
 
-Welcome to the official `v1` API documentation for [mod.io](https://api.mod.io/). Please ensure you read all of the Getting Started content as it covers most steps to ensure you can accurately and efficiently consume our REST API. 
+Welcome to the official `v1` API documentation for [mod.io](https://m.io). Please ensure you read all of the Getting Started content as it covers most steps to ensure you can accurately and efficiently consume our REST API. 
 
 __Current version:__ `v1`
 
@@ -2482,6 +2482,7 @@ Publish a mod on mod.io While some fields have been made optional for easier add
      metadata|string||Comma-separated list of metadata strings that are relevant to your mod.
      nameid|string||The unique SEO friendly URL for your game. Cannot exceed 80 characters.
      modfile|integer||Unique id of the __file__ object to be labelled as the current release.
+     tags|array||An array of strings that represent what the mod has been tagged as, only tags that are supported by the parent game can be applied. To determine what tags are eligible, see the __cats__ tags on the connected game.
 
 ### Responses
 
