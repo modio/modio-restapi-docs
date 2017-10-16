@@ -2472,7 +2472,7 @@ Publish a mod on mod.io While some fields have been made optional for easier add
      
      Parameter|Type|Required|Description
      ---|---|---|---|
-     logo|file|true|Image file which will represent your new mod logo. Must be gif, jpg, jpeg or png format and cannot exceed 8MB in size.Image file which will represent your new mod logo. Must be gif, jpg, jpeg or png format and cannot exceed 8MB in size.
+     logo|file|true|Image file which will represent your new mod logo. Must be gif, jpg, jpeg or png format and cannot exceed 8MB in size.
      name|string|true|Name of your mod. Your default mod URL will contain the name so be sure to choose the most appropriate title. Example: Stellaris Shader Mod will become the URL stellaris-shader-mod.
      homepage|string|true|Official homepage for your mod, if you do not fill this out it will default to your mod.io profile. Must be a valid URL.
      summary|string|true|Summary for your mod, giving a brief overview of what it's about - cannot exceed 250 characters.
