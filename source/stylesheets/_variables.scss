@@ -85,6 +85,13 @@ $phone-width: $tablet-width - $nav-width !default; // min width before reverting
   line-height: 1.5;
 }
 
+////////////////////////////////////////////////////////////////////////////////
+// MOD.IO
+////////////////////////////////////////////////////////////////////////////////
+$bg-endpoint-get:  hsl(217, 71%, 53%);
+$bg-endpoint-post: hsl(141, 71%, 48%);
+$bg-endpoint-put: hsl(48, 100%, 47%);
+$bg-endpoint-delete: hsl(348, 100%, 61%);
 
 // OTHER
 ////////////////////

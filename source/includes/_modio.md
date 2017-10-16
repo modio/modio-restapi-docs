@@ -39,7 +39,7 @@ Here is a brief list of the main things to know about our API, as explained in m
 
 Authentication to the mod.io can be done via 3 different ways:
 
-- Request an [API key (Read Access Only)](https://mod.io/APIkey/widget)
+- Request an [API key (Read Access Only)](https://mod.io/apikey/widget)
 - Manually create an [OAuth 2 Access Token (Read + Write Access)](https://mod.io/oauth/widget)
 - Use of our [Email Authentication Flow](https://docs.mod.io/#email-authentication-flow) 
 

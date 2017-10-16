@@ -1,5 +1,7 @@
 //= require ../lib/_jquery
 //= require ../lib/_imagesloaded.min
+//= require ../lib/_colorbox.js
+
 ;(function () {
   'use strict';
 

@@ -468,16 +468,6 @@ html, body {
     padding: 0;
   }
 
-  .highlight.java.tab-java + p, .highlight.json.tab-json + ul + p + p, #step-1-requesting-a-security-code + p + p {
-    code:only-child {
-      background: #44bfd4;
-      color: #fff;
-      font-size: 20px;
-      font-weight: bold;
-      padding: 5px;
-    }
-  }
-
   aside {
     padding-top: 1em;
     padding-bottom: 1em;
@@ -639,4 +629,33 @@ html, body {
 
 .highlight, .highlight .w {
   background-color: $code-bg;
+}
+
+////////////////////////////////////////////////////////////////////////////////
+// MODIO CUSTOM
+////////////////////////////////////////////////////////////////////////////////
+.httpmethod {
+    border-radius: 5px;
+    color: #fff;
+    font-size: 20px;
+    font-weight: bold;
+    padding: 5px 10px;
+    &.GET {
+      background: $bg-endpoint-get;
+    }
+    &.POST {
+      background: $bg-endpoint-post;
+    }
+    &.PUT {
+      background: $bg-endpoint-put;
+    }
+    &.DELETE {
+      background: $bg-endpoint-delete;
+    }
+}
+
+.endpointheading {
+    font-size: 24px;
+    font-weight: bold;
+    padding: 5px;
 }

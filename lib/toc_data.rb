@@ -28,3 +28,20 @@ def toc_data(page_content)
   end
   headers
 end
+
+def modio_post_process(page_content)
+  html_doc = Nokogiri::HTML::DocumentFragment.parse(page_content)
+
+  # add colorbox class if the link contains widget
+  html_doc.css('a').each do |link|
+    if link.attribute('href').to_s.include? "widget"
+      link['class'] = 'colorbox'
+    end
+  end
+
+  # wrap HTTP endpoint method text with class for styling
+  # because we need to move the HTTP method text outside of
+  # the code block to wrap it we do a single regex replace.
+  html_doc = html_doc.to_s.gsub(/<code>(GET|POST|PUT|DELETE)+\s{1}(.*?)<\/code>/, '<span class="httpmethod \1">\1</span> <span class="endpointheading">\2</span>')
+  html_doc
+end
