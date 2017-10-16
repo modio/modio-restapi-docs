@@ -16,6 +16,7 @@ under the License.
 <% language_tabs = current_page.data.language_tabs || [] %>
 <% page_content = yield %>
 <% page_content = modio_post_process(page_content) %>
+
 <%
   if current_page.data.includes
     current_page.data.includes.each do |include|
@@ -69,10 +70,12 @@ under the License.
     <% else %>
       <%= javascript_include_tag  "all_nosearch" %>
     <% end %>
-
+    
+    <!-- colorbox -->
+    <link rel="stylesheet" href="/stylesheets/colorbox.css">
     <script>
       $(document).ready(function() {
-        $('a.colorbox').colorbox({iframe: true, innerWith: 800, innerHeight: 600});
+        $('a.colorbox').colorbox({iframe:true, width:"80%", height:"80%"});
       });
     </script>
   </head>
