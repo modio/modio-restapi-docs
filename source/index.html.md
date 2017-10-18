@@ -209,7 +209,7 @@ Binary Files | `POST` | `multipart/form-data`
 Non-Binary Data | `POST`, `PUT`, `DELETE` | `application/x-www-form-urlencoded`
 Nothing | `GET` | No `Content-Type` required.
 
-If the endpoint you are making a request to expects a file it will expect the correct `Content-Type` as mentioned. Supplying an incorrect `Content-Type` header will return a `406 Not Acceptable` response.
+If the endpoint you are making a request to expects a file it will expect the correct `Content-Type` as mentioned. Supplying an incorrect `Content-Type` header will return a `415 Unsupported Media Type` response.
 
 ### JSON Request Data
 
