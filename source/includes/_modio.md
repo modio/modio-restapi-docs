@@ -2,7 +2,7 @@
 
 ## mod.io API v1
 
-Welcome to the official `v1` API documentation for [mod.io](--parse_siteurl). Please ensure you read all of the Getting Started content as it covers most steps to ensure you can accurately and efficiently consume our REST API. 
+Welcome to the official `v1` API documentation for [mod.io](--parse_siteurl). Please ensure you read all of the _Getting Started_ content as it covers most steps to ensure you can accurately and efficiently consume our REST API. 
 
 __Current version:__ `--parse_version`
 
@@ -10,7 +10,7 @@ __Base path:__ --parse_basepath
 
 ## How It Works
 
-Compatible with all builds of your game, mod.io operates silently in the background (without requiring your users to install another client), to give you complete control over your modding ecosystem
+Compatible with all builds of your game, mod.io operates silently in the background (without requiring your users to install another client), to give you complete control over your modding ecosystem.
 
 ![mod.io Overview](https://static.mod.io/v1/images/home/sdk.png).
 
@@ -22,14 +22,14 @@ Option | Usage | Suited for | Docs
 ---------- | ---------- | ---------- | ---------
 __API__ | For connecting directly to the mod.io REST API | Web apps that need a JSON REST API, or game developers that like a challenge and want control over their implementation. | 
 __SDK__ | Drop our [open source C++ SDK](https://github.com/DBolical/modioSDK) into your game to call mod.io functionality. | Developers that want a SDK that abstracts the uploading, downloading and unzip flows behind easy to use function calls. | [Here](https://sdk.mod.io/)
-__Tools/Plugins__ | Use tools and plugins created by the community to make implemention in various engines easy. | Game developers that want a pre-built modding solution for their engine of choice. | [Available per tool](http://10.1.5.7:4567/#)
+__Tools/Plugins__ | Use tools and plugins created by the community to make implementation in various engines easy. | Game developers that want a pre-built modding solution for their engine of choice. | [Available per tool](http://10.1.5.7:4567/#)
 
 Here is a brief list of the main things to know about our API, as explained in more detail in the following sections.
 
-- All requests to the API __must__ be made over HTTPS.
+- All requests to the API __must__ be made over HTTPS (SSL).
 - All API responses are in `application/json` format.
 - API keys are restricted to read-only `GET` requests.
-- OAuth2 access tokens are required for `POST`, `PUT` and `DELETE` requests.
+- OAuth 2 access tokens are required for `POST`, `PUT` and `DELETE` requests.
 - Binary data `POST` requests must use `Content-Type: multipart/form-data` header.
 - Non-binary `POST`, `PUT` and `DELETE` requests must use `Content-Type: application/x-www-form-urlencoded` header.
 - Non-binary data can optionally be supplied in `application/json` using the `input_json` parameter. 
@@ -47,7 +47,7 @@ Which method of authentication can depend on which way you intend on consuming t
 
 Authentication Type | In | HTTP Methods | Abilities
 ---------- | ---------- | ---------- | ---------- 
-API Key | Query | `GET` | Read-only.
+API Key | Query | `GET` | Email authentication flow + read-only abilities via `GET` request.
 Access Token (OAuth 2) | Header | `GET`, `POST`, `PUT`, `DELETE` | Read, create, update, delete.
 
 ### API Key Authentication
@@ -67,9 +67,9 @@ To perform writes, you will need to authenticate your users via OAuth 2. To make
 ```shell
 // Example POST requesting security code
 
-curl -X POST https://api.mod.io/oauth/emailrequest
-  -H 'Content-Type: application/x-www-form-urlencoded'
-  -d 'api_key=0d0ba6756d032246f1299f8c01abc424'	
+curl -X POST https://api.mod.io/oauth/emailrequest \
+  -H 'Content-Type: application/x-www-form-urlencoded' \
+  -d 'api_key=0d0ba6756d032246f1299f8c01abc424'	\
   -d 'email=john.snow@westeros.com'
 ```
 
@@ -90,8 +90,8 @@ Firstly you must request a `security_code` from the authentication server by sup
 
 Parameter | Value
 ---------- | ----------  
-`api_key` | Your API key generated from your games 'API' tab.
-`email` | A valid e-mail address 
+`api_key` | Your API key generated from 'API' tab within your game profile.
+`email` | A valid and secure e-mail address you have access to. 
 
 ### Step 2: Exchanging security code for access token
 
@@ -100,9 +100,9 @@ After successfully requesting a `security_code` with a valid e-mail address you 
 ```shell
 // Example POST requesting access token
 
-curl -X POST https://api.mod.io/oauth/emailexchange
-  -H 'Content-Type: application/x-www-form-urlencoded'	
-  -d 'api_key=0d0ba6756d032246f1299f8c01abc424'
+curl -X POST https://api.mod.io/oauth/emailexchange \
+  -H 'Content-Type: application/x-www-form-urlencoded' \	
+  -d 'api_key=0d0ba6756d032246f1299f8c01abc424' \
   -d 'security_code=3EW50'
 ```
 
@@ -116,7 +116,7 @@ curl -X POST https://api.mod.io/oauth/emailexchange
 ```
 
 - An `api_key` is required for both steps of the authentication process.
-- The same `api_key` must be used for both steps.
+- The _same_ `api_key` must be used for both steps.
 - The generated `security_code` is short-lived and will expire after 15 minutes.
 - Once exchanged for an access token, the security code is invalid.
 
@@ -126,8 +126,8 @@ If you do not exchange your `security_code` for an `access_token` within 15 minu
 
 Parameter | Value
 ---------- | ----------  
-`api_key` | Your API key generated from your games 'API' tab.
-`security_code` | Unique 5-digit code sent to e-mail from previous request. 
+`api_key` | Your API key generated from 'API' tab within your game profile.
+`security_code` | Unique 5-digit code sent to the e-mail address supplied in the previous request. 
 
 ### Step 3: Use access token to access resources.
 
@@ -154,11 +154,11 @@ Requests to the mod.io API __must__ be over HTTPS (Port 443), any requests made 
 curl -X get https://api.mod.io/v1/games?api_key=xxxxxxxxxxxxxxxx
 ``` 
 
-To authenticate to the API using your key using your unique 32-character key simply append the `api_key=xxxxxxxxxxxxxxxx` parameter to the end of your request. Remember that using an API key means requests are in read-only mode, and that if you want to create, update or delete resources then authentication via OAuth 2 is required.
+To authenticate to the API using your key using your unique 32-character key simply append the `api_key=xxxxxxxxxxxxxxxx` parameter to the end of your request. Remember that using an API key means requests are in read-only mode, and that if you want to create, update or delete resources then authentication via OAuth 2 is required which you can (set up with your api key)[https://docs.mod.io/#authentication].
 
 ### Using an Access Token
 
-To Authenticate to the API using an OAuth 2 access token you must include the HTTP header `Authorization` in your request with the value `Bearer your-token-here`. Verification via Access Tokens allows much greater powers in consuming the API including adding, updating and deleting resources that you have access to. 
+To Authenticate to the API using an OAuth 2 access token you must include the HTTP header `Authorization` in your request with the value `Bearer your-token-here`. Verification via Access Tokens allows much greater powers in consuming the API including creating new content, as well as updating and deleting resources that you have access to. 
 
 ```shell
 // Example POST request with no binary files
@@ -174,7 +174,7 @@ curl -X post https://api.mod.io/v1/games/1/mods/1/tags \
 
 For supplying data in requests, mod.io follows this rule across the API:
 
-- If you are making a request that includes a file, your request __must__ be `multipart/form-data`, otherwise, your request should be `application/x-www-form-urlencoded`. 
+- If you are making a request that includes a file, your request `Content-Type` header __must__ be `multipart/form-data`, otherwise, it should be `application/x-www-form-urlencoded`. 
 
 ```shell
 // Example POST request with binary file
@@ -194,7 +194,7 @@ Binary Files | `POST` | `multipart/form-data`
 Non-Binary Data | `POST`, `PUT`, `DELETE` | `application/x-www-form-urlencoded`
 Nothing | `GET` | No `Content-Type` required.
 
-If the endpoint you are making a request to expects a file it will expect the correct `Content-Type` as mentioned. Supplying an incorrect `Content-Type` header will return a `406 Not Acceptable`.
+If the endpoint you are making a request to expects a file it will expect the correct `Content-Type` as mentioned. Supplying an incorrect `Content-Type` header will return a `406 Not Acceptable` response.
 
 ### JSON Request Data
 
@@ -211,7 +211,7 @@ curl -X post https://api.mod.io/v1/games/1/team \
 	  }'
 ```
 
-For `POST` & `PUT` requests that do _not submit files_ you have the option to either supply your data as usual HTTP `POST` parameters or as a single json object by supplying the parameter `input_json` which contains a _UTF-8 encoded_ JSON object with all required data. Regardless of whether you use JSON or not the `Content-Type` of your request still needs to be `application/x-www-form-urlencoded` with the data provided in the body of the request.
+For `POST` & `PUT` requests that do _not submit files_ you have the option to either supply your data as usual HTTP `POST` parameters or as a single json object by supplying the parameter `input_json` which contains a _UTF-8 encoded_ JSON object with all required data. Regardless, whether you use JSON or not the `Content-Type` of your request still needs to be `application/x-www-form-urlencoded` with the data provided in the body of the request.
 
 __NOTE:__ If you supply identical key-value pairs as a request parameter and also as a parameter of your JSON object, the JSON object __will take priority__ as only one can exist.
 
@@ -232,7 +232,7 @@ Responses will __always__ be returned as `application/json`.
 
 If an error occurs, mod.io returns an error object with the HTTP `code` and `message` to describe what error occurred and generally what needs to be done to avoid the error reoccurring. It's important to note that if you encounter errors that are not server errors, that is `500+` codes - you should __not__ continue to send requests to the endpoint and instead review the error message.
 
-When it comes to validating request inputs for creating a resource or supplying a query parameter for filtering, an optional field object called `errors` can be supplied inside the `error` object which contains a list of your invalid inputs. A reminder that the nested `errors` object is only supplied with `422 Unprocessable Entity`. Be sure to review the [Response Codes](https://docs.mod.io/#response-codes) to be aware of the HTTP codes the API returns.
+When it comes to validating request inputs for creating a resource or supplying a query parameter for filtering, an optional field object called `errors` can be supplied inside the `error` object which contains a list of your invalid inputs. A reminder that the nested `errors` object is only supplied with `422 Unprocessable Entity` responses. Be sure to review the [Response Codes](https://docs.mod.io/#response-codes) to be aware of the HTTP codes that the mod.io API returns.
 
 ```json
 // Error object with input errors
@@ -261,7 +261,7 @@ Response Code | Meaning
 `204` | No Content -- Request was successful and there was no data to be returned.
 `400` | Bad request -- Server cannot process the request due to malformed syntax or invalid request message framing.
 `401` | Unauthorized -- Your API key/access token is incorrect.
-`403` | Forbidden -- You do now have permission to perform the requested action.
+`403` | Forbidden -- You do not have permission to perform the requested action.
 `404` | Not Found -- The resource requested could not be found.
 `405` | Method Not Allowed -- The method of your request is incorrect.
 `406` | Not Acceptable -- You supplied or requested an incorrect Content-Type.
@@ -288,7 +288,7 @@ Response Code | Meaning
 	"version": "1.0",
 	"virustotal": "No threats detected.",
 	"changelog": "v1.0 - First release of Rogue Knight!",
-	"download": "https://mod.io/mods/file/2/c489a0354111a4d76640d47f0cdcb294"
+	"download": "https://mod.io/mods/file/2/c489a0354111a4dx6640d47f0cdcb294"
 }
 ```
 
@@ -300,10 +300,10 @@ For single items, mod.io returns a __single json object__ which contains the req
 
 ### Browse Responses
 
-Browse responses a json object which contains a data array and a meta object:
+Browse responses, that is, endpoints that return more than one result return a json object which contains a data array and a meta object:
 
 - `data` - contains all data returned from the request.
-- `meta` - contains meta data such as cursor information.
+- `meta` - contains metadata such as cursor information.
 
 ```json
 // Browse response
@@ -353,7 +353,7 @@ When requesting data from endpoints that contain more than one object, there are
 
 When using a cursor, you are able to specify where you want to _start_ looking for results by the value of the `id` column. Let's assume you want to get all files on mod.io that contain an id larger than 600. You could use the following:
 
-- `?_cursor=600` - Only returns fields that have a larger `id` than 600, that is we want to start looing from the specified number onwards. 
+- `?_cursor=600` - Only returns fields that have a larger `id` than 600, that is we want to start looking from the specified number onwards. 
 
 ### Prev (Cursors only)
 
@@ -365,7 +365,7 @@ When using cursors you can optionally choose to provide the `_prev` parameter wh
 
 - `?_cursor=400&_prev=600` - Move the cursor to all records with a larger `id` than 400, but save that our previous cursor location was 400.
 
-Note that the `_prev` parameter is arbitary information for your own implementations and does not affect the outcome of the query other than the value being appended to the meta object shown below.
+Note that the `_prev` parameter is arbitrary  information for your own implementations and does not affect the outcome of the query other than the value being appended to the meta object shown below.
 
 ### Offset
 
@@ -385,7 +385,7 @@ As cursors and offsets are mutually exclusive, you should choose one or the othe
 --parse_version/games/2/mods/2/files?_cursor=5&_prev=5&_limit=10
 ```
 
-Once you are up and running using either cursors or an offset you can then combine it with other filter functions such `_limit` & `_sort` to build powerful queries to enable you to be as precise or as free as you wish. 
+Once you are up and running using either cursors or an offset you can then combine it with other filter functions such `_limit` & `_sort` to build powerful queries to enable you to be as precise or lenient as you want. 
 
 ### Cursor meta object
 

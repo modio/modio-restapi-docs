@@ -19,7 +19,7 @@ highlight_theme: darkula
 
 ## mod.io API v1
 
-Welcome to the official `v1` API documentation for [mod.io](https://mod.io). Please ensure you read all of the Getting Started content as it covers most steps to ensure you can accurately and efficiently consume our REST API. 
+Welcome to the official `v1` API documentation for [mod.io](https://mod.io). Please ensure you read all of the _Getting Started_ content as it covers most steps to ensure you can accurately and efficiently consume our REST API. 
 
 __Current version:__ `v1`
 
@@ -27,7 +27,7 @@ __Base path:__ [https://api.mod.io/v1](https://api.mod.io/v1)
 
 ## How It Works
 
-Compatible with all builds of your game, mod.io operates silently in the background (without requiring your users to install another client), to give you complete control over your modding ecosystem
+Compatible with all builds of your game, mod.io operates silently in the background (without requiring your users to install another client), to give you complete control over your modding ecosystem.
 
 ![mod.io Overview](https://static.mod.io/v1/images/home/sdk.png).
 
@@ -39,14 +39,14 @@ Option | Usage | Suited for | Docs
 ---------- | ---------- | ---------- | ---------
 __API__ | For connecting directly to the mod.io REST API | Web apps that need a JSON REST API, or game developers that like a challenge and want control over their implementation. | 
 __SDK__ | Drop our [open source C++ SDK](https://github.com/DBolical/modioSDK) into your game to call mod.io functionality. | Developers that want a SDK that abstracts the uploading, downloading and unzip flows behind easy to use function calls. | [Here](https://sdk.mod.io/)
-__Tools/Plugins__ | Use tools and plugins created by the community to make implemention in various engines easy. | Game developers that want a pre-built modding solution for their engine of choice. | [Available per tool](http://10.1.5.7:4567/#)
+__Tools/Plugins__ | Use tools and plugins created by the community to make implementation in various engines easy. | Game developers that want a pre-built modding solution for their engine of choice. | [Available per tool](http://10.1.5.7:4567/#)
 
 Here is a brief list of the main things to know about our API, as explained in more detail in the following sections.
 
-- All requests to the API __must__ be made over HTTPS.
+- All requests to the API __must__ be made over HTTPS (SSL).
 - All API responses are in `application/json` format.
 - API keys are restricted to read-only `GET` requests.
-- OAuth2 access tokens are required for `POST`, `PUT` and `DELETE` requests.
+- OAuth 2 access tokens are required for `POST`, `PUT` and `DELETE` requests.
 - Binary data `POST` requests must use `Content-Type: multipart/form-data` header.
 - Non-binary `POST`, `PUT` and `DELETE` requests must use `Content-Type: application/x-www-form-urlencoded` header.
 - Non-binary data can optionally be supplied in `application/json` using the `input_json` parameter. 
@@ -64,7 +64,7 @@ Which method of authentication can depend on which way you intend on consuming t
 
 Authentication Type | In | HTTP Methods | Abilities
 ---------- | ---------- | ---------- | ---------- 
-API Key | Query | `GET` | Read-only.
+API Key | Query | `GET` | Email authentication flow + read-only abilities via `GET` request.
 Access Token (OAuth 2) | Header | `GET`, `POST`, `PUT`, `DELETE` | Read, create, update, delete.
 
 ### API Key Authentication
@@ -84,9 +84,9 @@ To perform writes, you will need to authenticate your users via OAuth 2. To make
 ```shell
 // Example POST requesting security code
 
-curl -X POST https://api.mod.io/oauth/emailrequest
-  -H 'Content-Type: application/x-www-form-urlencoded'
-  -d 'api_key=0d0ba6756d032246f1299f8c01abc424'	
+curl -X POST https://api.mod.io/oauth/emailrequest \
+  -H 'Content-Type: application/x-www-form-urlencoded' \
+  -d 'api_key=0d0ba6756d032246f1299f8c01abc424'	\
   -d 'email=john.snow@westeros.com'
 ```
 
@@ -106,8 +106,8 @@ Firstly you must request a `security_code` from the authentication server by sup
 
 Parameter | Value
 ---------- | ----------  
-`api_key` | Your API key generated from your games 'API' tab.
-`email` | A valid e-mail address 
+`api_key` | Your API key generated from 'API' tab within your game profile.
+`email` | A valid and secure e-mail address you have access to. 
 
 ### Step 2: Exchanging security code for access token
 
@@ -116,9 +116,9 @@ After successfully requesting a `security_code` with a valid e-mail address you 
 ```shell
 // Example POST requesting access token
 
-curl -X POST https://api.mod.io/oauth/emailexchange
-  -H 'Content-Type: application/x-www-form-urlencoded'	
-  -d 'api_key=0d0ba6756d032246f1299f8c01abc424'
+curl -X POST https://api.mod.io/oauth/emailexchange \
+  -H 'Content-Type: application/x-www-form-urlencoded' \	
+  -d 'api_key=0d0ba6756d032246f1299f8c01abc424' \
   -d 'security_code=3EW50'
 ```
 
@@ -132,7 +132,7 @@ curl -X POST https://api.mod.io/oauth/emailexchange
 ```
 
 - An `api_key` is required for both steps of the authentication process.
-- The same `api_key` must be used for both steps.
+- The _same_ `api_key` must be used for both steps.
 - The generated `security_code` is short-lived and will expire after 15 minutes.
 - Once exchanged for an access token, the security code is invalid.
 
@@ -141,8 +141,8 @@ If you do not exchange your `security_code` for an `access_token` within 15 minu
 
 Parameter | Value
 ---------- | ----------  
-`api_key` | Your API key generated from your games 'API' tab.
-`security_code` | Unique 5-digit code sent to e-mail from previous request. 
+`api_key` | Your API key generated from 'API' tab within your game profile.
+`security_code` | Unique 5-digit code sent to the e-mail address supplied in the previous request. 
 
 ### Step 3: Use access token to access resources.
 
@@ -169,11 +169,11 @@ Requests to the mod.io API __must__ be over HTTPS (Port 443), any requests made 
 curl -X get https://api.mod.io/v1/games?api_key=xxxxxxxxxxxxxxxx
 ``` 
 
-To authenticate to the API using your key using your unique 32-character key simply append the `api_key=xxxxxxxxxxxxxxxx` parameter to the end of your request. Remember that using an API key means requests are in read-only mode, and that if you want to create, update or delete resources then authentication via OAuth 2 is required.
+To authenticate to the API using your key using your unique 32-character key simply append the `api_key=xxxxxxxxxxxxxxxx` parameter to the end of your request. Remember that using an API key means requests are in read-only mode, and that if you want to create, update or delete resources then authentication via OAuth 2 is required which you can (set up with your api key)[https://docs.mod.io/#authentication].
 
 ### Using an Access Token
 
-To Authenticate to the API using an OAuth 2 access token you must include the HTTP header `Authorization` in your request with the value `Bearer your-token-here`. Verification via Access Tokens allows much greater powers in consuming the API including adding, updating and deleting resources that you have access to. 
+To Authenticate to the API using an OAuth 2 access token you must include the HTTP header `Authorization` in your request with the value `Bearer your-token-here`. Verification via Access Tokens allows much greater powers in consuming the API including creating new content, as well as updating and deleting resources that you have access to. 
 
 ```shell
 // Example POST request with no binary files
@@ -189,7 +189,7 @@ curl -X post https://api.mod.io/v1/games/1/mods/1/tags \
 
 For supplying data in requests, mod.io follows this rule across the API:
 
-- If you are making a request that includes a file, your request __must__ be `multipart/form-data`, otherwise, your request should be `application/x-www-form-urlencoded`. 
+- If you are making a request that includes a file, your request `Content-Type` header __must__ be `multipart/form-data`, otherwise, it should be `application/x-www-form-urlencoded`. 
 
 ```shell
 // Example POST request with binary file
@@ -209,7 +209,7 @@ Binary Files | `POST` | `multipart/form-data`
 Non-Binary Data | `POST`, `PUT`, `DELETE` | `application/x-www-form-urlencoded`
 Nothing | `GET` | No `Content-Type` required.
 
-If the endpoint you are making a request to expects a file it will expect the correct `Content-Type` as mentioned. Supplying an incorrect `Content-Type` header will return a `406 Not Acceptable`.
+If the endpoint you are making a request to expects a file it will expect the correct `Content-Type` as mentioned. Supplying an incorrect `Content-Type` header will return a `406 Not Acceptable` response.
 
 ### JSON Request Data
 
@@ -226,7 +226,7 @@ curl -X post https://api.mod.io/v1/games/1/team \
 	  }'
 ```
 
-For `POST` & `PUT` requests that do _not submit files_ you have the option to either supply your data as usual HTTP `POST` parameters or as a single json object by supplying the parameter `input_json` which contains a _UTF-8 encoded_ JSON object with all required data. Regardless of whether you use JSON or not the `Content-Type` of your request still needs to be `application/x-www-form-urlencoded` with the data provided in the body of the request.
+For `POST` & `PUT` requests that do _not submit files_ you have the option to either supply your data as usual HTTP `POST` parameters or as a single json object by supplying the parameter `input_json` which contains a _UTF-8 encoded_ JSON object with all required data. Regardless, whether you use JSON or not the `Content-Type` of your request still needs to be `application/x-www-form-urlencoded` with the data provided in the body of the request.
 
 __NOTE:__ If you supply identical key-value pairs as a request parameter and also as a parameter of your JSON object, the JSON object __will take priority__ as only one can exist.
 
@@ -247,7 +247,7 @@ Responses will __always__ be returned as `application/json`.
 
 If an error occurs, mod.io returns an error object with the HTTP `code` and `message` to describe what error occurred and generally what needs to be done to avoid the error reoccurring. It's important to note that if you encounter errors that are not server errors, that is `500+` codes - you should __not__ continue to send requests to the endpoint and instead review the error message.
 
-When it comes to validating request inputs for creating a resource or supplying a query parameter for filtering, an optional field object called `errors` can be supplied inside the `error` object which contains a list of your invalid inputs. A reminder that the nested `errors` object is only supplied with `422 Unprocessable Entity`. Be sure to review the [Response Codes](https://docs.mod.io/#response-codes) to be aware of the HTTP codes the API returns.
+When it comes to validating request inputs for creating a resource or supplying a query parameter for filtering, an optional field object called `errors` can be supplied inside the `error` object which contains a list of your invalid inputs. A reminder that the nested `errors` object is only supplied with `422 Unprocessable Entity` responses. Be sure to review the [Response Codes](https://docs.mod.io/#response-codes) to be aware of the HTTP codes that the mod.io API returns.
 
 ```json
 // Error object with input errors
@@ -276,7 +276,7 @@ Response Code | Meaning
 `204` | No Content -- Request was successful and there was no data to be returned.
 `400` | Bad request -- Server cannot process the request due to malformed syntax or invalid request message framing.
 `401` | Unauthorized -- Your API key/access token is incorrect.
-`403` | Forbidden -- You do now have permission to perform the requested action.
+`403` | Forbidden -- You do not have permission to perform the requested action.
 `404` | Not Found -- The resource requested could not be found.
 `405` | Method Not Allowed -- The method of your request is incorrect.
 `406` | Not Acceptable -- You supplied or requested an incorrect Content-Type.
@@ -303,7 +303,7 @@ Response Code | Meaning
 	"version": "1.0",
 	"virustotal": "No threats detected.",
 	"changelog": "v1.0 - First release of Rogue Knight!",
-	"download": "https://mod.io/mods/file/2/c489a0354111a4d76640d47f0cdcb294"
+	"download": "https://mod.io/mods/file/2/c489a0354111a4dx6640d47f0cdcb294"
 }
 ```
 
@@ -315,10 +315,10 @@ For single items, mod.io returns a __single json object__ which contains the req
 
 ### Browse Responses
 
-Browse responses a json object which contains a data array and a meta object:
+Browse responses, that is, endpoints that return more than one result return a json object which contains a data array and a meta object:
 
 - `data` - contains all data returned from the request.
-- `meta` - contains meta data such as cursor information.
+- `meta` - contains metadata such as cursor information.
 
 ```json
 // Browse response
@@ -368,7 +368,7 @@ v1/games/2/mods/2/files?_cursor=600
 
 When using a cursor, you are able to specify where you want to _start_ looking for results by the value of the `id` column. Let's assume you want to get all files on mod.io that contain an id larger than 600. You could use the following:
 
-- `?_cursor=600` - Only returns fields that have a larger `id` than 600, that is we want to start looing from the specified number onwards. 
+- `?_cursor=600` - Only returns fields that have a larger `id` than 600, that is we want to start looking from the specified number onwards. 
 
 ### Prev (Cursors only)
 
@@ -380,7 +380,7 @@ v1/games/2/mods/2/files?_cursor=400&_prev=600
 
 - `?_cursor=400&_prev=600` - Move the cursor to all records with a larger `id` than 400, but save that our previous cursor location was 400.
 
-Note that the `_prev` parameter is arbitary information for your own implementations and does not affect the outcome of the query other than the value being appended to the meta object shown below.
+Note that the `_prev` parameter is arbitrary  information for your own implementations and does not affect the outcome of the query other than the value being appended to the meta object shown below.
 
 ### Offset
 
@@ -400,7 +400,7 @@ As cursors and offsets are mutually exclusive, you should choose one or the othe
 v1/games/2/mods/2/files?_cursor=5&_prev=5&_limit=10
 ```
 
-Once you are up and running using either cursors or an offset you can then combine it with other filter functions such `_limit` & `_sort` to build powerful queries to enable you to be as precise or as free as you wish. 
+Once you are up and running using either cursors or an offset you can then combine it with other filter functions such `_limit` & `_sort` to build powerful queries to enable you to be as precise or lenient as you want. 
 
 ### Cursor meta object
 
@@ -717,7 +717,7 @@ Browse Games. Successful request will return an __array of game objects__. To ma
      dateup|integer|Unix timestamp of date updated.
      presentation|integer|Choose which presentation style you want to use for your game on the mod.io website <br><br>*Field options*<br>__0__ =  Grid View: Displays mods in a grid (visual but less informative, default setting) <br>__1__ = Table View: Displays mods ina  table (easier to browse)
      community|integer|Choose what rights community members have with the game <br><br>*Field Options*<br>__0__ = Discussion board disabled, community cannot share guides and news<br>__1__ = Discussion Board enabled only<br>__2__ = Community can only share guides and news<br>__3__ = Discussion Board enabled and community can share news and guides
-     submission|integer|Choose what submission process you want modders to follow <br><br>*Field Options*<br>__0__ = Control the upload process. ou will have to build an upload system either in-game or via a standalone app, which enables developers to submit mods to the tags you have configured. Because you control the flow, you can prevalidate and compile mods, to ensure they will work in your game. In the long run this option will save you time as you can accept more submissions, but it requires more setup to get running and isn't as open as the above option. NOTE: mod profiles can still be created online, but uploads will have to occur via the tools you supply.<br><br>__1__ = Enable mod uploads from anywhere. Allow developers to upload mods via the website and API, and pick the tags their mod is built for. No validation will be done on the files submitted, it will be the responsibility of your game and apps built to process the mods installation based on the tags selected and determine if the mod is valid and works. For example a mod might be uploaded to the 'map' tag. When a user subscribes to this mod, your game will need to verify it contains a map file and install it where maps are located. If this fails, your game or the community will have to flag the mod as 'incompatible' to remove it from the listing.
+     submission|integer|Choose what submission process you want modders to follow <br><br>*Field Options*<br>__0__ = Control the upload process. ou will have to build an upload system either in-game or via a standalone app, which enables developers to submit mods to the tags you have configured. Because you control the flow, you can pre-validate and compile mods, to ensure they will work in your game. In the long run this option will save you time as you can accept more submissions, but it requires more setup to get running and isn't as open as the above option. NOTE: mod profiles can still be created online, but uploads will have to occur via the tools you supply.<br><br>__1__ = Enable mod uploads from anywhere. Allow developers to upload mods via the website and API, and pick the tags their mod is built for. No validation will be done on the files submitted, it will be the responsibility of your game and apps built to process the mods installation based on the tags selected and determine if the mod is valid and works. For example a mod might be uploaded to the 'map' tag. When a user subscribes to this mod, your game will need to verify it contains a map file and install it where maps are located. If this fails, your game or the community will have to flag the mod as 'incompatible' to remove it from the listing.
      curation|integer|Choose the curation process for the game<br><br>*Field Options*<br>__0__ = Mods are immediately available to play, without any intervention or work from your team.<br>__1__ = Screen only mods the author wants to sell, before they are available to purchase via the API.<br>__2__ = All mods must be accepted by someone on your team. This option is useful for games that have a small number of mods and want to control the experience, or you need to set the parameters attached to a mod (i.e. a weapon may require the rate of fire, power level, clip size etc). It can also be used for complex mods, which you may need to build into your game or distribute as DLC.
      api|integer|Choose what permissions you want to enable via the mod.io API<br><br>*Field Options*<br>__0__ = Third parties cannot access your mods API and mods cannot be downloaded directly without API validation.<br>__1__ = Allow 3rd parties to access your mods API (recommended, an open API will encourage a healthy ecosystem of tools and apps) but mods cannot be downloaded directly<br>__2__ = Allow mods to be downloaded directly but 3rd parties cannot access your mods API.<br>__3__ = Allow third parties to access your mods API and allow mods to be downloaded directly without api validation.
      ugcname|string|Singular word that describes the user-generated content type.
@@ -1100,7 +1100,7 @@ Update details for a game. If you want to update the `icon`, `logo` or `header` 
      ---|---|---|---|
      presentation|integer||Choose which presentation style you want to use for your game on the mod.io website <br><br>*Field options*<br>__0__ =  Grid View: Displays mods in a grid (visual but less informative, default setting) <br>__1__ = Table View: Displays mods ina  table (easier to browse)
      community|integer||Choose what rights community members have with the game <br><br>*Field Options*<br>__0__ = Discussion board disabled, community cannot share guides and news<br>__1__ = Discussion Board enabled only<br>__2__ = Community can only share guides and news<br>__3__ = Discussion Board enabled and community can share news and guides
-     submission|integer||Choose what submission process you want modders to follow <br><br>*Field Options*<br>__0__ = Control the upload process. ou will have to build an upload system either in-game or via a standalone app, which enables developers to submit mods to the tags you have configured. Because you control the flow, you can prevalidate and compile mods, to ensure they will work in your game. In the long run this option will save you time as you can accept more submissions, but it requires more setup to get running and isn't as open as the above option. NOTE: mod profiles can still be created online, but uploads will have to occur via the tools you supply.<br><br>__1__ = Enable mod uploads from anywhere. Allow developers to upload mods via the website and API, and pick the tags their mod is built for. No validation will be done on the files submitted, it will be the responsibility of your game and apps built to process the mods installation based on the tags selected and determine if the mod is valid and works. For example a mod might be uploaded to the 'map' tag. When a user subscribes to this mod, your game will need to verify it contains a map file and install it where maps are located. If this fails, your game or the community will have to flag the mod as 'incompatible' to remove it from the listing.
+     submission|integer||Choose what submission process you want modders to follow <br><br>*Field Options*<br>__0__ = Control the upload process. ou will have to build an upload system either in-game or via a standalone app, which enables developers to submit mods to the tags you have configured. Because you control the flow, you can pre-validate and compile mods, to ensure they will work in your game. In the long run this option will save you time as you can accept more submissions, but it requires more setup to get running and isn't as open as the above option. NOTE: mod profiles can still be created online, but uploads will have to occur via the tools you supply.<br><br>__1__ = Enable mod uploads from anywhere. Allow developers to upload mods via the website and API, and pick the tags their mod is built for. No validation will be done on the files submitted, it will be the responsibility of your game and apps built to process the mods installation based on the tags selected and determine if the mod is valid and works. For example a mod might be uploaded to the 'map' tag. When a user subscribes to this mod, your game will need to verify it contains a map file and install it where maps are located. If this fails, your game or the community will have to flag the mod as 'incompatible' to remove it from the listing.
      curation|integer||Choose the curation process for the game<br><br>*Field Options*<br>__0__ = Mods are immediately available to play, without any intervention or work from your team.<br>__1__ = Screen only mods the author wants to sell, before they are available to purchase via the API.<br>__2__ = All mods must be accepted by someone on your team. This option is useful for games that have a small number of mods and want to control the experience, or you need to set the parameters attached to a mod (i.e. a weapon may require the rate of fire, power level, clip size etc). It can also be used for complex mods, which you may need to build into your game or distribute as DLC.
      api|integer||Choose what permissions you want to enable via the mod.io API<br><br>*Field Options*<br>__0__ = Third parties cannot access your mods API and mods cannot be downloaded directly without API validation.<br>__1__ = Allow 3rd parties to access your mods API (recommended, an open API will encourage a healthy ecosystem of tools and apps) but mods cannot be downloaded directly<br>__2__ = Allow mods to be downloaded directly but 3rd parties cannot access your mods API.<br>__3__ = Allow third parties to access your mods API and allow mods to be downloaded directly without api validation.
      ugcname|string||Singular word to best describe your games user-generated content.
@@ -1246,9 +1246,9 @@ Upload new media to a game. Any request you make to this endpoint *should* conta
      
      Parameter|Type|Required|Description
      ---|---|---|---|
-     logo|file||Binary image file which will represent your new game logo. Must be gif, jpg, jpeg or png format and cannot exceed 8MB in size.
-     icon|file||Binary image file which will represent your new game icon. Must be minimum 64x64px in size - gif, jpg, jpeg or png format and cannot exceed 1MB in size.
-     header|file||Binary image file which will represent your new game header. Must be gif, jpg, jpeg or png format and cannot exceed 256KB in size.
+     logo|file||Binary image file which will represent your new game logo. Must be gif, jpg, jpeg or png format and cannot exceed 8MB in filesize.
+     icon|file||Binary image file which will represent your new game icon. Must be minimum 64x64px dimensions and gif, jpg, jpeg or png format and cannot exceed 1MB in filesize.
+     header|file||Binary image file which will represent your new game header. Must be gif, jpg, jpeg or png format and cannot exceed 256KB in filesize.
 
 ### Responses
 
@@ -1982,150 +1982,6 @@ To perform this operation, you must be authenticated by means of one of the foll
 oauth2 ( Scopes: write )
 </aside>
 
-# Reports
-
-## Submit Report
-
-> Code samples
-
-```shell
-# You can also use wget
-curl -X post https://api.mod.io/v1/report \
-  -H 'Authorization: Bearer YourAccessToken' \
-  -H 'Content-Type: application/x-www-form-urlencoded' \
-  -H 'Accept: application/json'
-
-```
-
-```http
-POST https://api.mod.io/v1/report HTTP/1.1
-Host: api.mod.io
-
-Accept: application/json
-Authorization: Bearer YourAccessToken
-Content-Type: application/x-www-form-urlencoded
-
-```
-
-```javascript
-var headers = {
-  'Authorization':'Bearer YourAccessToken',
-  'Content-Type':'application/x-www-form-urlencoded',
-  'Accept':'application/json'
-
-};
-
-$.ajax({
-  url: 'https://api.mod.io/v1/report',
-  method: 'post',
-
-  headers: headers,
-  success: function(data) {
-    console.log(JSON.stringify(data));
-  }
-})
-```
-
-```javascript--nodejs
-const request = require('node-fetch');
-
-const headers = {
-  'Authorization':'Bearer YourAccessToken',
-  'Content-Type':'application/x-www-form-urlencoded',
-  'Accept':'application/json'
-
-};
-
-fetch('https://api.mod.io/v1/report',
-{
-  method: 'POST',
-
-  headers: headers
-})
-.then(function(res) {
-    return res.json();
-}).then(function(body) {
-    console.log(body);
-});
-```
-
-```ruby
-require 'rest-client'
-require 'json'
-
-headers = {
-  'Authorization' => 'Bearer YourAccessToken',
-  'Content-Type' => 'application/x-www-form-urlencoded',
-  'Accept' => 'application/json'
-}
-
-result = RestClient.post 'https://api.mod.io/v1/report', params: {
-  }, headers: headers
-
-p JSON.parse(result)
-```
-
-```python
-import requests
-headers = {
-  'Authorization': 'Bearer YourAccessToken',
-  'Content-Type': 'application/x-www-form-urlencoded',
-  'Accept': 'application/json'
-}
-
-r = requests.post('https://api.mod.io/v1/report', params={
-
-}, headers = headers)
-
-print r.json()
-```
-
-```java
-URL obj = new URL("https://api.mod.io/v1/report");
-HttpURLConnection con = (HttpURLConnection) obj.openConnection();
-con.setRequestMethod("POST");
-int responseCode = con.getResponseCode();
-BufferedReader in = new BufferedReader(
-    new InputStreamReader(con.getInputStream()));
-String inputLine;
-StringBuffer response = new StringBuffer();
-while ((inputLine = in.readLine()) != null) {
-    response.append(inputLine);
-}
-in.close();
-System.out.println(response.toString());
-```
-`POST /report`
-
-Submit a report for any resource on mod.io.
-     
-     Parameter|Type|Required|Description
-     ---|---|---|---|
-     resource|string|true|The name of the resource type you are submitting a report for __must__ be one of the following strings: games, mods, files, tags, users.
-     id|integer|true|Unique Id of the resource item you are reporting.
-     dmca|boolean|true|Is this a DMCA takedown request?
-     name|string|true|Descriptive and informative title for your report.
-     summary|string|true|Detailed description of your report, be as specific as possible on the reason you are submitting the report.
-
-### Responses
-
-Status|Meaning|Description
----|---|---|
-201|[Created](https://tools.ietf.org/html/rfc7231#section-6.3.2)|Report Created
-
-> Example responses
-
-```json
-{
-  "code": "201",
-  "message": "Your report submission has been successful and will be reviewed as soon as possible."
-}
-```
-<aside class="warning">
-To perform this operation, you must be authenticated by means of one of the following methods:
-oauth2 ( Scopes: write )
-</aside>
-
 # Mods
 
 ## Browse Mods
@@ -2355,240 +2211,6 @@ To perform this operation, you must be authenticated by means of one of the foll
 apiKey, oauth2 ( Scopes: read )
 </aside>
 
-## Add Mod
-
-> Code samples
-
-```shell
-# You can also use wget
-curl -X post https://api.mod.io/v1/games/{game-id}/mods \
-  -H 'Authorization: Bearer YourAccessToken' \
-  -H 'Content-Type: multipart/form-data' \
-  -H 'Accept: application/json'
-
-```
-
-```http
-POST https://api.mod.io/v1/games/{game-id}/mods HTTP/1.1
-Host: api.mod.io
-
-Accept: application/json
-Authorization: Bearer YourAccessToken
-Content-Type: multipart/form-data
-
-```
-
-```javascript
-var headers = {
-  'Authorization':'Bearer YourAccessToken',
-  'Content-Type':'multipart/form-data',
-  'Accept':'application/json'
-
-};
-
-$.ajax({
-  url: 'https://api.mod.io/v1/games/{game-id}/mods',
-  method: 'post',
-
-  headers: headers,
-  success: function(data) {
-    console.log(JSON.stringify(data));
-  }
-})
-```
-
-```javascript--nodejs
-const request = require('node-fetch');
-
-const headers = {
-  'Authorization':'Bearer YourAccessToken',
-  'Content-Type':'multipart/form-data',
-  'Accept':'application/json'
-
-};
-
-fetch('https://api.mod.io/v1/games/{game-id}/mods',
-{
-  method: 'POST',
-
-  headers: headers
-})
-.then(function(res) {
-    return res.json();
-}).then(function(body) {
-    console.log(body);
-});
-```
-
-```ruby
-require 'rest-client'
-require 'json'
-
-headers = {
-  'Authorization' => 'Bearer YourAccessToken',
-  'Content-Type' => 'multipart/form-data',
-  'Accept' => 'application/json'
-}
-
-result = RestClient.post 'https://api.mod.io/v1/games/{game-id}/mods', params: {
-  }, headers: headers
-
-p JSON.parse(result)
-```
-
-```python
-import requests
-headers = {
-  'Authorization': 'Bearer YourAccessToken',
-  'Content-Type': 'multipart/form-data',
-  'Accept': 'application/json'
-}
-
-r = requests.post('https://api.mod.io/v1/games/{game-id}/mods', params={
-
-}, headers = headers)
-
-print r.json()
-```
-
-```java
-URL obj = new URL("https://api.mod.io/v1/games/{game-id}/mods");
-HttpURLConnection con = (HttpURLConnection) obj.openConnection();
-con.setRequestMethod("POST");
-int responseCode = con.getResponseCode();
-BufferedReader in = new BufferedReader(
-    new InputStreamReader(con.getInputStream()));
-String inputLine;
-StringBuffer response = new StringBuffer();
-while ((inputLine = in.readLine()) != null) {
-    response.append(inputLine);
-}
-in.close();
-System.out.println(response.toString());
-```
-`POST /games/{game-id}/mods`
-
-Publish a mod on mod.io While some fields have been made optional for easier adding of mods to mod.io - please be as detailed as you can.
-     
-     Parameter|Type|Required|Description
-     ---|---|---|---|
-     logo|file|true|Image file which will represent your new mod logo. Must be gif, jpg, jpeg or png format and cannot exceed 8MB in size.
-     name|string|true|Name of your mod. Your default mod URL will contain the name so be sure to choose the most appropriate title. Example: Stellaris Shader Mod will become the URL stellaris-shader-mod.
-     homepage|string|true|Official homepage for your mod, if you do not fill this out it will default to your mod.io profile. Must be a valid URL.
-     summary|string|true|Summary for your mod, giving a brief overview of what it's about - cannot exceed 250 characters.
-     price|double||Numeric only representation of the price if you intend to charge for your mod. Example: 19.99, 10.00.
-     stock|integer||Artificially limit the amount of times the mod can be purchased.
-     description|string||An extension of your summary. Include all information relevant to your mod including sections such as 'About', 'Features', 'Install Instructions', 'FAQ', etc. HTML supported and encouraged.
-     metadata|string||Comma-separated list of metadata strings that are relevant to your mod.
-     nameid|string||The unique SEO friendly URL for your game. Cannot exceed 80 characters.
-     modfile|integer||Unique id of the __file__ object to be labelled as the current release.
-     tags|array||An array of strings that represent what the mod has been tagged as, only tags that are supported by the parent game can be applied. To determine what tags are eligible, see the __cats__ tags on the connected game.
-
-### Responses
-
-Status|Meaning|Description
----|---|---|
-201|[Created](https://tools.ietf.org/html/rfc7231#section-6.3.2)|Resource Created
-
-### Response Headers
-
-Status|Header|Type|Format|Description
----|---|---|---|---|
-201|Location|string||URL to newly created resource
-
-> Example responses
-
-```json
-{
-  "id": 2,
-  "game": 2,
-  "member": {
-    "id": 1,
-    "nameid": "xant",
-    "username": "XanT",
-    "permission": 1,
-    "avatar": {
-      "full": "https://media.mod.io/images/members/1/1/1/masterchief.jpg",
-      "filename": "masterchief.jpg"
-    },
-    "timezone": "Australia/Brisbane",
-    "language": "en",
-    "url": "https://mod.io/members/xant"
-  },
-  "price": 9.99,
-  "datereg": 1492564103,
-  "dateup": 1499841487,
-  "logo": {
-    "full": "https://media.mod.io/images/mods/1/1/2/IMG_20170409_222419.jpg",
-    "thumbnail": "https://media.mod.io/cache/images/mods/1/1/2/thumb_1020x2000/IMG_20170409_222419.jpg",
-    "filename": "IMG_20170409_222419.jpg"
-  },
-  "homepage": "https://www.rogue-hdpack.com/",
-  "name": "Rogue Knight HD Pack",
-  "nameid": "rogue-knight-hd-pack",
-  "summary": "It's time to bask in the glory of beautiful 4k textures!",
-  "description": "<h2>About</h2><p>Rogue HD Pack does exactly what you thi...",
-  "metadata": "rogue,hd,high-res,4k,hd textures",
-  "url": "https://rogue-knight.mod.io/rogue-knight-hd-pack",
-  "modfile": {
-    "id": 2,
-    "mod": 2,
-    "member": {
-      "id": 1,
-      "nameid": "xant",
-      "username": "XanT",
-      "permission": 1,
-      "avatar": {
-        "full": "https://media.mod.io/images/members/1/1/1/masterchief.jpg",
-        "filename": "masterchief.jpg"
-      },
-      "timezone": "Australia/Brisbane",
-      "language": "en",
-      "url": "https://mod.io/members/xant"
-    },
-    "date": 1499841487,
-    "datevirus": 1499841487,
-    "virusstatus": 0,
-    "viruspositive": 0,
-    "filesize": 15181,
-    "filehash": "2d4a0e2d7273db6b0a94b0740a88ad0d",
-    "filename": "rogue-knight-v1.zip",
-    "version": "1.3",
-    "virustotal": "No threats found.",
-    "changelog": "VERSION 1.3 -- Changes -- Fixed critical castle floor bug.",
-    "download": "https://cdn.mod.io/files/1/1/2/rogue-knight-v1.zip"
-  },
-  "media": {
-    "youtube": [
-      "https://www.youtube.com/watch?v=dQw4w9WgXcQ"
-    ],
-    "sketchfab": [
-      "https://sketchfab.com/models/ef40b2d300334d009984c8865b2db1c8"
-    ],
-    "images": [
-      {
-        "full": "https://media.mod.io/images/mods/1/1/2/IMG_20170409_222419.jpg",
-        "thumbnail": "https://media.mod.io/cache/images/mods/1/1/2/thumb_1020x2000/IMG_20170409_222419.jpg",
-        "filename": "IMG_20170409_222419.jpg"
-      }
-    ]
-  },
-  "tags": [],
-  "ratings": {
-    "total": 1230,
-    "positive": 1047,
-    "negative": 183,
-    "weighted": 87.38,
-    "percentage": 91,
-    "text": "Very Positive"
-  }
-}
-```
-<aside class="warning">
-To perform this operation, you must be authenticated by means of one of the following methods:
-oauth2 ( Scopes: write )
-</aside>
-
 ## View Mod
 
 > Code samples
@@ -2792,6 +2414,240 @@ To perform this operation, you must be authenticated by means of one of the foll
 apiKey, oauth2 ( Scopes: read )
 </aside>
 
+## Add Mod
+
+> Code samples
+
+```shell
+# You can also use wget
+curl -X post https://api.mod.io/v1/games/{game-id}/mods \
+  -H 'Authorization: Bearer YourAccessToken' \
+  -H 'Content-Type: multipart/form-data' \
+  -H 'Accept: application/json'
+
+```
+
+```http
+POST https://api.mod.io/v1/games/{game-id}/mods HTTP/1.1
+Host: api.mod.io
+
+Accept: application/json
+Authorization: Bearer YourAccessToken
+Content-Type: multipart/form-data
+
+```
+
+```javascript
+var headers = {
+  'Authorization':'Bearer YourAccessToken',
+  'Content-Type':'multipart/form-data',
+  'Accept':'application/json'
+
+};
+
+$.ajax({
+  url: 'https://api.mod.io/v1/games/{game-id}/mods',
+  method: 'post',
+
+  headers: headers,
+  success: function(data) {
+    console.log(JSON.stringify(data));
+  }
+})
+```
+
+```javascript--nodejs
+const request = require('node-fetch');
+
+const headers = {
+  'Authorization':'Bearer YourAccessToken',
+  'Content-Type':'multipart/form-data',
+  'Accept':'application/json'
+
+};
+
+fetch('https://api.mod.io/v1/games/{game-id}/mods',
+{
+  method: 'POST',
+
+  headers: headers
+})
+.then(function(res) {
+    return res.json();
+}).then(function(body) {
+    console.log(body);
+});
+```
+
+```ruby
+require 'rest-client'
+require 'json'
+
+headers = {
+  'Authorization' => 'Bearer YourAccessToken',
+  'Content-Type' => 'multipart/form-data',
+  'Accept' => 'application/json'
+}
+
+result = RestClient.post 'https://api.mod.io/v1/games/{game-id}/mods', params: {
+  }, headers: headers
+
+p JSON.parse(result)
+```
+
+```python
+import requests
+headers = {
+  'Authorization': 'Bearer YourAccessToken',
+  'Content-Type': 'multipart/form-data',
+  'Accept': 'application/json'
+}
+
+r = requests.post('https://api.mod.io/v1/games/{game-id}/mods', params={
+
+}, headers = headers)
+
+print r.json()
+```
+
+```java
+URL obj = new URL("https://api.mod.io/v1/games/{game-id}/mods");
+HttpURLConnection con = (HttpURLConnection) obj.openConnection();
+con.setRequestMethod("POST");
+int responseCode = con.getResponseCode();
+BufferedReader in = new BufferedReader(
+    new InputStreamReader(con.getInputStream()));
+String inputLine;
+StringBuffer response = new StringBuffer();
+while ((inputLine = in.readLine()) != null) {
+    response.append(inputLine);
+}
+in.close();
+System.out.println(response.toString());
+```
+`POST /games/{game-id}/mods`
+
+Publish a mod on mod.io While some fields have been made optional for easier adding of mods to mod.io - please be as detailed as you can.
+     
+     Parameter|Type|Required|Description
+     ---|---|---|---|
+     logo|file|true|Image file which will represent your new mod logo. Must be gif, jpg, jpeg or png format and cannot exceed 8MB in filesize.
+     name|string|true|Name of your mod. Your default mod URL will contain the name so be sure to choose the most appropriate title. Example: Stellaris Shader Mod will become the URL stellaris-shader-mod.
+     homepage|string|true|Official homepage for your mod, if you do not fill this out it will default to your mod.io profile. Must be a valid URL.
+     summary|string|true|Summary for your mod, giving a brief overview of what it's about - cannot exceed 250 characters.
+     price|double||Numeric only representation of the price if you intend to charge for your mod. Example: 19.99, 10.00.
+     stock|integer||Artificially limit the amount of times the mod can be purchased.
+     description|string||An extension of your summary. Include all information relevant to your mod including sections such as 'About', 'Features', 'Install Instructions', 'FAQ', etc. HTML supported and encouraged.
+     metadata|string||Comma-separated list of metadata strings that are relevant to your mod.
+     nameid|string||The unique SEO friendly URL for your game. Cannot exceed 80 characters.
+     modfile|integer||Unique id of the __file__ object to be labelled as the current release.
+     tags|array||An array of strings that represent what the mod has been tagged as, only tags that are supported by the parent game can be applied. To determine what tags are eligible, see the __cats__ tags on the connected game.
+
+### Responses
+
+Status|Meaning|Description
+---|---|---|
+201|[Created](https://tools.ietf.org/html/rfc7231#section-6.3.2)|Resource Created
+
+### Response Headers
+
+Status|Header|Type|Format|Description
+---|---|---|---|---|
+201|Location|string||URL to newly created resource
+
+> Example responses
+
+```json
+{
+  "id": 2,
+  "game": 2,
+  "member": {
+    "id": 1,
+    "nameid": "xant",
+    "username": "XanT",
+    "permission": 1,
+    "avatar": {
+      "full": "https://media.mod.io/images/members/1/1/1/masterchief.jpg",
+      "filename": "masterchief.jpg"
+    },
+    "timezone": "Australia/Brisbane",
+    "language": "en",
+    "url": "https://mod.io/members/xant"
+  },
+  "price": 9.99,
+  "datereg": 1492564103,
+  "dateup": 1499841487,
+  "logo": {
+    "full": "https://media.mod.io/images/mods/1/1/2/IMG_20170409_222419.jpg",
+    "thumbnail": "https://media.mod.io/cache/images/mods/1/1/2/thumb_1020x2000/IMG_20170409_222419.jpg",
+    "filename": "IMG_20170409_222419.jpg"
+  },
+  "homepage": "https://www.rogue-hdpack.com/",
+  "name": "Rogue Knight HD Pack",
+  "nameid": "rogue-knight-hd-pack",
+  "summary": "It's time to bask in the glory of beautiful 4k textures!",
+  "description": "<h2>About</h2><p>Rogue HD Pack does exactly what you thi...",
+  "metadata": "rogue,hd,high-res,4k,hd textures",
+  "url": "https://rogue-knight.mod.io/rogue-knight-hd-pack",
+  "modfile": {
+    "id": 2,
+    "mod": 2,
+    "member": {
+      "id": 1,
+      "nameid": "xant",
+      "username": "XanT",
+      "permission": 1,
+      "avatar": {
+        "full": "https://media.mod.io/images/members/1/1/1/masterchief.jpg",
+        "filename": "masterchief.jpg"
+      },
+      "timezone": "Australia/Brisbane",
+      "language": "en",
+      "url": "https://mod.io/members/xant"
+    },
+    "date": 1499841487,
+    "datevirus": 1499841487,
+    "virusstatus": 0,
+    "viruspositive": 0,
+    "filesize": 15181,
+    "filehash": "2d4a0e2d7273db6b0a94b0740a88ad0d",
+    "filename": "rogue-knight-v1.zip",
+    "version": "1.3",
+    "virustotal": "No threats found.",
+    "changelog": "VERSION 1.3 -- Changes -- Fixed critical castle floor bug.",
+    "download": "https://cdn.mod.io/files/1/1/2/rogue-knight-v1.zip"
+  },
+  "media": {
+    "youtube": [
+      "https://www.youtube.com/watch?v=dQw4w9WgXcQ"
+    ],
+    "sketchfab": [
+      "https://sketchfab.com/models/ef40b2d300334d009984c8865b2db1c8"
+    ],
+    "images": [
+      {
+        "full": "https://media.mod.io/images/mods/1/1/2/IMG_20170409_222419.jpg",
+        "thumbnail": "https://media.mod.io/cache/images/mods/1/1/2/thumb_1020x2000/IMG_20170409_222419.jpg",
+        "filename": "IMG_20170409_222419.jpg"
+      }
+    ]
+  },
+  "tags": [],
+  "ratings": {
+    "total": 1230,
+    "positive": 1047,
+    "negative": 183,
+    "weighted": 87.38,
+    "percentage": 91,
+    "text": "Very Positive"
+  }
+}
+```
+<aside class="warning">
+To perform this operation, you must be authenticated by means of one of the following methods:
+oauth2 ( Scopes: write )
+</aside>
+
 ## Edit Mod
 
 > Code samples
@@ -2909,7 +2765,7 @@ Edit details for a mod. If you wanting to update the media attached to this game
      
      Parameter|Type|Required|Description
      ---|---|---|---|
-     logo|file||Image file which will represent your new mod logo. Must be gif, jpg, jpeg or png format and cannot exceed 8MB in size.Image file which will represent your new mod logo. Must be gif, jpg, jpeg or png format and cannot exceed 8MB in size.
+     logo|file||Image file which will represent your new mod logo. Must be gif, jpg, jpeg or png format and cannot exceed 8MB in filesize.Image file which will represent your new mod logo. Must be gif, jpg, jpeg or png format and cannot exceed 8MB in filesize.
      name|string||Name of your mod. Your default mod URL will contain the name so be sure to choose the most appropriate title. Example: Stellaris Shader Mod will become the URL stellaris-shader-mod.
      homepage|string||Official homepage for your mod, if you do not fill this out it will default to your mod.io profile. Must be a valid URL.
      summary|string||Summary for your mod, giving a brief overview of what it's about - cannot exceed 250 characters.
@@ -3183,11 +3039,11 @@ System.out.println(response.toString());
 ```
 `POST /games/{game-id}/mods/{mod-id}/media`
 
-This endpoint is very flexible and will process any images posted to the endpoint regardless of their body name providing it is a valid image. The request `Content-Type` __must__ be `multipart/form-data` to submit image files.
+This endpoint is very flexible and will process any images posted to the endpoint regardless of their body name providing it is a valid image. The request `Content-Type` header __must__ be `multipart/form-data` to submit image files.
      
      Parameter|Type|Required|Description
      ---|---|---|---|
-     images|zip||Zip archive of images to upload. Only valid gif, jpg, jpeg or png binary images within the zip file will be processed. The filename __must be images.zip__ if you are submitting an archive of images as any other name will be ignored. Alternatively you can POST one or more binary file images to this endpoint as their original filetypes without any compression.
+     images|zip||Zip archive of images to upload. Only valid gif, jpg, jpeg or png binary images within the zip file will be processed. The filename __must be images.zip__ if you are submitting an archive of images as any other name will be ignored. Alternatively you can POST one or more binary file images to this endpoint as their original file types without any compression.
      youtube|array||Full Youtube link(s) you want to add - example 'https://www.youtube.com/watch?v=IGVZOLV9SPo'
      sketchfab|array||Full Sketchfab link(s) you want to add - example 'https://sketchfab.com/models/71f04e390ff54e5f8d9a51b4e1caab7e'
 
@@ -3333,7 +3189,7 @@ Delete images, sketchfab or youtube links from a mod profile which if successful
      
      Parameter|Type|Required|Description
      ---|---|---|---|
-     images|array||Filenames of the image(s) you want to delete - example 'gameplay2.jpg'.
+     images|array||Filename's of the image(s) you want to delete - example 'gameplay2.jpg'.
      youtube|array||Full Youtube link(s) you want to delete - example 'https://www.youtube.com/watch?v=IGVZOLV9SPo'.
      sketchfab|array||Full Sketchfab link(s) you want to delete - example 'https://sketchfab.com/models/71f04e390ff54e5f8d9a51b4e1caab7e'.
      *     
@@ -3622,7 +3478,7 @@ Browse files that are published for the corresponding mod. Successful request wi
      member|integer|Unique id of the member who published the file.
      date|integer|Unix timestamp of date added.
      datevirus|integer|Date it was last virus checked.
-     virusstatus|integer|Current filescan status of the file. For newly added files that have yet to be scanned this field could change frequently until a scan is complete.<br>*Field Options*<br><br>__0__ = Not scanned<br>__1__ = Scan complete<br>__2__ = In progress<br>__3__ = Too large to scan<br>__4__ = File not found<br>__5__ = Error Scanning
+     virusstatus|integer|Current file scan status of the file. For newly added files that have yet to be scanned this field could change frequently until a scan is complete.<br>*Field Options*<br><br>__0__ = Not scanned<br>__1__ = Scan complete<br>__2__ = In progress<br>__3__ = Too large to scan<br>__4__ = File not found<br>__5__ = Error Scanning
      viruspositive|integer|Virus status of file<br>*Field Options*<br>__0__ = No threats detected<br>__1__ = Flagged as malicious
      filesize|integer|Filesize of file in bytes.
      filehash|string|MD5 hash of file.
@@ -3799,7 +3655,7 @@ Upload a file to a mod. Ensure that the release you are uploading is stable and 
      
      Parameter|Type|Required|Description
      ---|---|---|---|
-     filedata|file|true|The binary file for the release. File must be __zipped__ and cannot exceed 10GB in size.
+     filedata|file|true|The binary file for the release. For compatibility you should ZIP the base folder of your mod, or if it is a collection of files which live in a pre-existing game folder, you should ZIP those files. Your file must meet the following conditions:<br><br>- File must be __zipped__ and cannot exceed 10GB in filesize.<br>- Mods which span multiple game directories are not supported<br>- Mods which overwrite files are not supported
      version|string|true|Version of the file release.
      changelog|string|true|The changelog field you are updating. Updates for files are deliberately limited to the changelog field only, if you need to edit any other fields you should be uploading a new file and not editing an existing file.
      active|boolean||Label this upload as the current release, this will change the *modfile* field on the parent mod to the *id* field of this file after upload.
@@ -6081,7 +5937,7 @@ Determine if a specified user has ownership rights to a resource.
      
      Parameter|Type|Required|Description
      ---|---|---|---|
-     resource|string|true|The name of the resource type you are checking against a member - __must__ be one of the following strings: games, mods, files, tags, users.
+     resource|string|true|The name of the resource type you are checking against a member - __must__ be one of the following values.<br><br>*Field options*<br>__games__<br>__mods__<br>__files__<br>__tags__<br>__users__.
      id|integer|true|Unique Id of the resource to check access rights for.
      member|integer|true|Unique Id of the member you are determining has access to the resource id.
 
@@ -6222,7 +6078,7 @@ View the price of a requested resource, if the requested resource is able to be 
      
      Parameter|Type|Required|Description
      ---|---|---|---|
-     resource|string|true|The name of the resource type you are checking a price for - __must__ be one of the following strings: games, mods, files, tags, users.
+     resource|string|true|The name of the resource type you are checking a price for - __must__ be one of the following values.<br><br>*Field options*<br>__games__<br>__mods__.
      id|integer|true|Unique Id of the resource that contains the price.
 
 ### Responses
@@ -6946,6 +6802,150 @@ To perform this operation, you must be authenticated by means of one of the foll
 oauth2 ( Scopes: read )
 </aside>
 
+# Reports
+
+## Submit Report
+
+> Code samples
+
+```shell
+# You can also use wget
+curl -X post https://api.mod.io/v1/report \
+  -H 'Authorization: Bearer YourAccessToken' \
+  -H 'Content-Type: application/x-www-form-urlencoded' \
+  -H 'Accept: application/json'
+
+```
+
+```http
+POST https://api.mod.io/v1/report HTTP/1.1
+Host: api.mod.io
+
+Accept: application/json
+Authorization: Bearer YourAccessToken
+Content-Type: application/x-www-form-urlencoded
+
+```
+
+```javascript
+var headers = {
+  'Authorization':'Bearer YourAccessToken',
+  'Content-Type':'application/x-www-form-urlencoded',
+  'Accept':'application/json'
+
+};
+
+$.ajax({
+  url: 'https://api.mod.io/v1/report',
+  method: 'post',
+
+  headers: headers,
+  success: function(data) {
+    console.log(JSON.stringify(data));
+  }
+})
+```
+
+```javascript--nodejs
+const request = require('node-fetch');
+
+const headers = {
+  'Authorization':'Bearer YourAccessToken',
+  'Content-Type':'application/x-www-form-urlencoded',
+  'Accept':'application/json'
+
+};
+
+fetch('https://api.mod.io/v1/report',
+{
+  method: 'POST',
+
+  headers: headers
+})
+.then(function(res) {
+    return res.json();
+}).then(function(body) {
+    console.log(body);
+});
+```
+
+```ruby
+require 'rest-client'
+require 'json'
+
+headers = {
+  'Authorization' => 'Bearer YourAccessToken',
+  'Content-Type' => 'application/x-www-form-urlencoded',
+  'Accept' => 'application/json'
+}
+
+result = RestClient.post 'https://api.mod.io/v1/report', params: {
+  }, headers: headers
+
+p JSON.parse(result)
+```
+
+```python
+import requests
+headers = {
+  'Authorization': 'Bearer YourAccessToken',
+  'Content-Type': 'application/x-www-form-urlencoded',
+  'Accept': 'application/json'
+}
+
+r = requests.post('https://api.mod.io/v1/report', params={
+
+}, headers = headers)
+
+print r.json()
+```
+
+```java
+URL obj = new URL("https://api.mod.io/v1/report");
+HttpURLConnection con = (HttpURLConnection) obj.openConnection();
+con.setRequestMethod("POST");
+int responseCode = con.getResponseCode();
+BufferedReader in = new BufferedReader(
+    new InputStreamReader(con.getInputStream()));
+String inputLine;
+StringBuffer response = new StringBuffer();
+while ((inputLine = in.readLine()) != null) {
+    response.append(inputLine);
+}
+in.close();
+System.out.println(response.toString());
+```
+`POST /report`
+
+Submit a report for any resource on mod.io.
+     
+     Parameter|Type|Required|Description
+     ---|---|---|---|
+     resource|string|true|The name of the resource type you are submitting a report for __must__ be one of the following values.<br><br>*Field options*<br>__games__<br>__mods__<br>__files__<br>__tags__<br>__users__.
+     id|integer|true|Unique Id of the resource item you are reporting.
+     dmca|boolean|true|Is this a DMCA takedown request?
+     name|string|true|Descriptive and informative title for your report.
+     summary|string|true|Detailed description of your report, be as specific as possible on the reason you are submitting the report.
+
+### Responses
+
+Status|Meaning|Description
+---|---|---|
+201|[Created](https://tools.ietf.org/html/rfc7231#section-6.3.2)|Report Created
+
+> Example responses
+
+```json
+{
+  "code": "201",
+  "message": "Your report submission has been successful and will be reviewed as soon as possible."
+}
+```
+<aside class="warning">
+To perform this operation, you must be authenticated by means of one of the following methods:
+oauth2 ( Scopes: write )
+</aside>
+
 # Subscribe
 
 ## Subscribe To Resource
@@ -7065,7 +7065,7 @@ Subscribe to a resource. Note for the parameter table below it is for __path__ p
      
      Path Parameter|Type|Required|Description
      ---|---|---|---|
-     resource|string|true|The name of the resource you want to subscribe to - __must__ be one of the following strings: games, mods, files, tags, users.
+     resource|string|true|The name of the resource you want to subscribe to - __must__ be one of the following values.<br><br>*Field options*<br>__games__<br>__mods__<br>__files__<br>__tags__<br>__users__
      id|integer|true|Unique Id of the resource you are subscribing to.
 
 ### Responses
@@ -7204,7 +7204,7 @@ Un-Subscribe to the requested resource.Note for the parameter table below it is 
      
      Path Parameter|Type|Required|Description
      ---|---|---|---|
-     resource|string|true|The name of the resource type you are un-subscribing to - __must__ be one of the following strings: games, mods, files, tags, users.
+     resource|string|true|The name of the resource type you are un-subscribing to - __must__ be one of the following values.<br><br>*Field options*<br>__games__<br>__mods__<br>__files__<br>__tags__<br>__users__
      id|integer|true|Unique Id of the resource you want to un-subscribe to.
 
 ### Responses
