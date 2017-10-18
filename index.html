@@ -735,7 +735,7 @@ curl -X post https://api.mod.io/v1/games/1/mods <span class="se">\</span>
 </tbody>
 </table>
 
-<p>If the endpoint you are making a request to expects a file it will expect the correct <code>Content-Type</code> as mentioned. Supplying an incorrect <code>Content-Type</code> header will return a <code>406 Not Acceptable</code> response.</p>
+<p>If the endpoint you are making a request to expects a file it will expect the correct <code>Content-Type</code> as mentioned. Supplying an incorrect <code>Content-Type</code> header will return a <code>415 Unsupported Media Type</code> response.</p>
 <h3 id="json-request-data">JSON Request Data</h3><pre class="highlight shell tab-shell"><code>// Example json-encoded POST request 
 
 curl -X post https://api.mod.io/v1/games/1/team <span class="se">\</span>
