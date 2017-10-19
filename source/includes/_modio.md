@@ -266,6 +266,7 @@ Response Code | Meaning
 `405` | Method Not Allowed -- The method of your request is incorrect.
 `406` | Not Acceptable -- You supplied or requested an incorrect Content-Type.
 `410` | Gone -- The requested resource is no longer available.
+`422` | Unprocessable Entity -- The request was well formed but unable to be followed due to semantic errors.
 `429` | Too Many Requests -- You have made too many requests, inspect headers for reset time.
 `500` | Internal Server Error -- We had a problem with our server. Try again later. (rare)
 `503` | Service Unavailable -- We're temporarily offline for maintenance. Please try again later. (rare)

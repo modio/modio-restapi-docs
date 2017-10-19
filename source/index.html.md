@@ -281,6 +281,7 @@ Response Code | Meaning
 `405` | Method Not Allowed -- The method of your request is incorrect.
 `406` | Not Acceptable -- You supplied or requested an incorrect Content-Type.
 `410` | Gone -- The requested resource is no longer available.
+`422` | Unprocessable Entity -- The request was well formed but unable to be followed due to semantic errors.
 `429` | Too Many Requests -- You have made too many requests, inspect headers for reset time.
 `500` | Internal Server Error -- We had a problem with our server. Try again later. (rare)
 `503` | Service Unavailable -- We're temporarily offline for maintenance. Please try again later. (rare)
@@ -799,7 +800,16 @@ Status|Meaning|Description
     {
         ...
     }
-  ]
+  ],
+  "meta": {
+    "cursor": {
+      "current": 60,
+      "prev": 0,
+      "next": 160,
+      "count": 100,
+      "total_pages": 48
+    }
+  }
 }
 ```
 <aside class="warning">
@@ -1414,9 +1424,6 @@ Status|Meaning|Description
           "after": "https://rogue-knight.mod.io/rogue-hd-pack"
         }
       }
-    },
-    {
-        ...
     }
   ]
 }
@@ -1564,7 +1571,16 @@ Status|Meaning|Description
     {
         ...
     }
-  ]
+  ],
+  "meta": {
+    "cursor": {
+      "current": 60,
+      "prev": 0,
+      "next": 160,
+      "count": 100,
+      "total_pages": 48
+    }
+  }
 }
 ```
 <aside class="warning">
@@ -2095,6 +2111,7 @@ Browse mods. Successful request will return an __array of mod objects__. To make
      member|integer|Unique id of the member who has ownership of the game.
      datereg|integer|Unix timestamp of date registered.
      dateup|integer|Unix timestamp of date updated.
+     logo|string|The filename of the logo.
      homepage|string|Official homepage of the mod.
      name|string|Name of the mod.
      nameid|string|The unique SEO friendly URL for your game.
@@ -2203,7 +2220,16 @@ Status|Meaning|Description
     {
         ...
     }
-  ]
+  ],
+  "meta": {
+    "cursor": {
+      "current": 60,
+      "prev": 0,
+      "next": 160,
+      "count": 100,
+      "total_pages": 48
+    }
+  }
 }
 ```
 <aside class="warning">
@@ -3355,9 +3381,6 @@ Status|Meaning|Description
           "after": "https://rogue-knight.mod.io/rogue-hd-pack"
         }
       }
-    },
-    {
-        ...
     }
   ]
 }
@@ -3530,7 +3553,16 @@ Status|Meaning|Description
     {
         ...
     }
-  ]
+  ],
+  "meta": {
+    "cursor": {
+      "current": 60,
+      "prev": 0,
+      "next": 160,
+      "count": 100,
+      "total_pages": 48
+    }
+  }
 }
 ```
 <aside class="warning">
@@ -4123,9 +4155,6 @@ Status|Meaning|Description
       "mod": 2,
       "tag": "Unity",
       "date": 1499841487
-    },
-    {
-        ...
     }
   ]
 }
@@ -4701,7 +4730,16 @@ Status|Meaning|Description
     {
         ...
     }
-  ]
+  ],
+  "meta": {
+    "cursor": {
+      "current": 60,
+      "prev": 0,
+      "next": 160,
+      "count": 100,
+      "total_pages": 48
+    }
+  }
 }
 ```
 <aside class="warning">
@@ -5120,7 +5158,16 @@ Status|Meaning|Description
     {
         ...
     }
-  ]
+  ],
+  "meta": {
+    "cursor": {
+      "current": 60,
+      "prev": 0,
+      "next": 160,
+      "count": 100,
+      "total_pages": 48
+    }
+  }
 }
 ```
 <aside class="warning">
@@ -5680,7 +5727,16 @@ Status|Meaning|Description
     {
         ...
     }
-  ]
+  ],
+  "meta": {
+    "cursor": {
+      "current": 60,
+      "prev": 0,
+      "next": 160,
+      "count": 100,
+      "total_pages": 48
+    }
+  }
 }
 ```
 <aside class="warning">
@@ -6281,7 +6337,16 @@ Status|Meaning|Description
     {
         ...
     }
-  ]
+  ],
+  "meta": {
+    "cursor": {
+      "current": 60,
+      "prev": 0,
+      "next": 160,
+      "count": 100,
+      "total_pages": 48
+    }
+  }
 }
 ```
 <aside class="warning">
@@ -6496,7 +6561,16 @@ Status|Meaning|Description
     {
         ...
     }
-  ]
+  ],
+  "meta": {
+    "cursor": {
+      "current": 60,
+      "prev": 0,
+      "next": 160,
+      "count": 100,
+      "total_pages": 48
+    }
+  }
 }
 ```
 <aside class="warning">
@@ -6655,7 +6729,16 @@ Status|Meaning|Description
     {
         ...
     }
-  ]
+  ],
+  "meta": {
+    "cursor": {
+      "current": 60,
+      "prev": 0,
+      "next": 160,
+      "count": 100,
+      "total_pages": 48
+    }
+  }
 }
 ```
 <aside class="warning">
@@ -6790,9 +6873,6 @@ Status|Meaning|Description
       "type": 4,
       "date": 1492058857,
       "mention": 0
-    },
-    {
-        ...
     }
   ]
 }
