@@ -316,10 +316,10 @@ For single items, mod.io returns a __single json object__ which contains the req
 
 ### Browse Responses
 
-Browse responses, that is, endpoints that return more than one result return a json object which contains a data array and a meta object:
+Browse responses, that is, endpoints that return more than one result return a json object which contains a data array and a metadata fields:
 
 - `data` - contains all data returned from the request.
-- `meta` - contains metadata such as cursor information.
+- metadata fields - contains all cursor metadata to help you paginate through the API.
 
 ```json
 // Browse response
@@ -346,14 +346,10 @@ Browse responses, that is, endpoints that return more than one result return a j
 			...
 		},
 	],
-	"meta": {
-    	"cursor": {
-      		"current": null,
-      		"prev": null,
-      		"next": 165,
-      		"count": 100,
-    	}
-  	}
+	"cursor_id": 30,
+    "prev_id": null,
+    "next_id": null,
+    "result_count": 100,
 }  
 ```
 
@@ -403,31 +399,24 @@ v1/games/2/mods/2/files?_cursor=5&_prev=5&_limit=10
 
 Once you are up and running using either cursors or an offset you can then combine it with other filter functions such `_limit` & `_sort` to build powerful queries to enable you to be as precise or lenient as you want. 
 
-### Cursor meta object
+### Cursor metadata
 
-Appended to each request with more than one result is the meta object, that will always appear regardless of you utilize a cursor/offset or not. This is what each value within the object means:
+Appended to each request with more than one result is the cursor metadata, that will always appear regardless of you utilize a cursor/offset or not. This is what each value means:
 
 ```json
-// Meta object example
-{
-	"meta": {
-    	"cursor": {
-      		"current": null,
-      		"prev": null,
-      		"next": 165,
-      		"count": 100,
-    	}
-  	}
-	}
-}
+// Metadata example
+"cursor_id": 50,
+"prev_id": 25,
+"next_id": 76,
+"result_count": 25,
 ```
 
 Parameter | Value
 ---------- | ----------  
-`current` | The current `_cursor` value.
-`prev` | The previous `_cursor` value as manually inserted by you, _null_ by default.
-`next` | The next position to move the `_cursor` to based on the current request.
-`count` | The amount of results returned in the current request.
+`cursor_id` | The current `_cursor` value.
+`prev_id` | The previous `_cursor` value as manually inserted by you, _null_ by default.
+`next_id` | The next position to move the `_cursor` to based on the current request.
+`count_id` | The amount of results returned in the current request.
 
 ## Filtering
 
@@ -801,15 +790,10 @@ Status|Meaning|Description
         ...
     }
   ],
-  "meta": {
-    "cursor": {
-      "current": 60,
-      "prev": 0,
-      "next": 160,
-      "count": 100,
-      "total_pages": 48
-    }
-  }
+  "cursor_id": 60,
+  "prev_id": 30,
+  "next_id": 160,
+  "result_count": 100
 }
 ```
 <aside class="warning">
@@ -1572,15 +1556,10 @@ Status|Meaning|Description
         ...
     }
   ],
-  "meta": {
-    "cursor": {
-      "current": 60,
-      "prev": 0,
-      "next": 160,
-      "count": 100,
-      "total_pages": 48
-    }
-  }
+  "cursor_id": 60,
+  "prev_id": 30,
+  "next_id": 160,
+  "result_count": 100
 }
 ```
 <aside class="warning">
@@ -1991,7 +1970,7 @@ Status|Meaning|Description
 > Example responses
 
 ```json
-"204 No Content"
+ 204 No Content 
 ```
 <aside class="warning">
 To perform this operation, you must be authenticated by means of one of the following methods:
@@ -2221,15 +2200,10 @@ Status|Meaning|Description
         ...
     }
   ],
-  "meta": {
-    "cursor": {
-      "current": 60,
-      "prev": 0,
-      "next": 160,
-      "count": 100,
-      "total_pages": 48
-    }
-  }
+  "cursor_id": 60,
+  "prev_id": 30,
+  "next_id": 160,
+  "result_count": 100
 }
 ```
 <aside class="warning">
@@ -2791,7 +2765,6 @@ Edit details for a mod. If you wanting to update the media attached to this game
      
      Parameter|Type|Required|Description
      ---|---|---|---|
-     logo|file||Image file which will represent your new mod logo. Must be gif, jpg, jpeg or png format and cannot exceed 8MB in filesize.Image file which will represent your new mod logo. Must be gif, jpg, jpeg or png format and cannot exceed 8MB in filesize.
      name|string||Name of your mod. Your default mod URL will contain the name so be sure to choose the most appropriate title. Example: Stellaris Shader Mod will become the URL stellaris-shader-mod.
      homepage|string||Official homepage for your mod, if you do not fill this out it will default to your mod.io profile. Must be a valid URL.
      summary|string||Summary for your mod, giving a brief overview of what it's about - cannot exceed 250 characters.
@@ -2945,7 +2918,7 @@ Status|Meaning|Description
 > Example responses
 
 ```json
-"204 No Content"
+ 204 No Content 
 ```
 <aside class="warning">
 To perform this operation, you must be authenticated by means of one of the following methods:
@@ -3069,6 +3042,7 @@ This endpoint is very flexible and will process any images posted to the endpoin
      
      Parameter|Type|Required|Description
      ---|---|---|---|
+     logo|file||Image file which will represent your new mod logo. Must be gif, jpg, jpeg or png format and cannot exceed 8MB in filesize.
      images|zip||Zip archive of images to upload. Only valid gif, jpg, jpeg or png binary images within the zip file will be processed. The filename __must be images.zip__ if you are submitting an archive of images as any other name will be ignored. Alternatively you can POST one or more binary file images to this endpoint as their original file types without any compression.
      youtube|array||Full Youtube link(s) you want to add - example 'https://www.youtube.com/watch?v=IGVZOLV9SPo'
      sketchfab|array||Full Sketchfab link(s) you want to add - example 'https://sketchfab.com/models/71f04e390ff54e5f8d9a51b4e1caab7e'
@@ -3229,7 +3203,7 @@ Status|Meaning|Description
 > Example responses
 
 ```json
-"204 No Content"
+ 204 No Content 
 ```
 <aside class="warning">
 To perform this operation, you must be authenticated by means of one of the following methods:
@@ -3554,15 +3528,10 @@ Status|Meaning|Description
         ...
     }
   ],
-  "meta": {
-    "cursor": {
-      "current": 60,
-      "prev": 0,
-      "next": 160,
-      "count": 100,
-      "total_pages": 48
-    }
-  }
+  "cursor_id": 60,
+  "prev_id": 30,
+  "next_id": 160,
+  "result_count": 100
 }
 ```
 <aside class="warning">
@@ -4432,7 +4401,7 @@ Status|Meaning|Description
 > Example responses
 
 ```json
-"204 No Content"
+ 204 No Content 
 ```
 <aside class="warning">
 To perform this operation, you must be authenticated by means of one of the following methods:
@@ -4731,15 +4700,10 @@ Status|Meaning|Description
         ...
     }
   ],
-  "meta": {
-    "cursor": {
-      "current": 60,
-      "prev": 0,
-      "next": 160,
-      "count": 100,
-      "total_pages": 48
-    }
-  }
+  "cursor_id": 60,
+  "prev_id": 30,
+  "next_id": 160,
+  "result_count": 100
 }
 ```
 <aside class="warning">
@@ -5013,7 +4977,7 @@ Status|Meaning|Description
 > Example responses
 
 ```json
-"204 No Content"
+ 204 No Content 
 ```
 <aside class="warning">
 To perform this operation, you must be authenticated by means of one of the following methods:
@@ -5159,15 +5123,10 @@ Status|Meaning|Description
         ...
     }
   ],
-  "meta": {
-    "cursor": {
-      "current": 60,
-      "prev": 0,
-      "next": 160,
-      "count": 100,
-      "total_pages": 48
-    }
-  }
+  "cursor_id": 60,
+  "prev_id": 30,
+  "next_id": 160,
+  "result_count": 100
 }
 ```
 <aside class="warning">
@@ -5578,7 +5537,7 @@ Status|Meaning|Description
 > Example responses
 
 ```json
-"204 No Content"
+ 204 No Content 
 ```
 <aside class="warning">
 To perform this operation, you must be authenticated by means of one of the following methods:
@@ -5728,15 +5687,10 @@ Status|Meaning|Description
         ...
     }
   ],
-  "meta": {
-    "cursor": {
-      "current": 60,
-      "prev": 0,
-      "next": 160,
-      "count": 100,
-      "total_pages": 48
-    }
-  }
+  "cursor_id": 60,
+  "prev_id": 30,
+  "next_id": 160,
+  "result_count": 100
 }
 ```
 <aside class="warning">
@@ -6338,15 +6292,10 @@ Status|Meaning|Description
         ...
     }
   ],
-  "meta": {
-    "cursor": {
-      "current": 60,
-      "prev": 0,
-      "next": 160,
-      "count": 100,
-      "total_pages": 48
-    }
-  }
+  "cursor_id": 60,
+  "prev_id": 30,
+  "next_id": 160,
+  "result_count": 100
 }
 ```
 <aside class="warning">
@@ -6562,15 +6511,10 @@ Status|Meaning|Description
         ...
     }
   ],
-  "meta": {
-    "cursor": {
-      "current": 60,
-      "prev": 0,
-      "next": 160,
-      "count": 100,
-      "total_pages": 48
-    }
-  }
+  "cursor_id": 60,
+  "prev_id": 30,
+  "next_id": 160,
+  "result_count": 100
 }
 ```
 <aside class="warning">
@@ -6730,15 +6674,10 @@ Status|Meaning|Description
         ...
     }
   ],
-  "meta": {
-    "cursor": {
-      "current": 60,
-      "prev": 0,
-      "next": 160,
-      "count": 100,
-      "total_pages": 48
-    }
-  }
+  "cursor_id": 60,
+  "prev_id": 30,
+  "next_id": 160,
+  "result_count": 100
 }
 ```
 <aside class="warning">
@@ -7296,7 +7235,7 @@ Status|Meaning|Description
 > Example responses
 
 ```json
-"204 No Content"
+ 204 No Content 
 ```
 <aside class="warning">
 To perform this operation, you must be authenticated by means of one of the following methods:

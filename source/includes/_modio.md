@@ -301,10 +301,10 @@ For single items, mod.io returns a __single json object__ which contains the req
 
 ### Browse Responses
 
-Browse responses, that is, endpoints that return more than one result return a json object which contains a data array and a meta object:
+Browse responses, that is, endpoints that return more than one result return a json object which contains a data array and a metadata fields:
 
 - `data` - contains all data returned from the request.
-- `meta` - contains metadata such as cursor information.
+- metadata fields - contains all cursor metadata to help you paginate through the API.
 
 ```json
 // Browse response
@@ -331,14 +331,10 @@ Browse responses, that is, endpoints that return more than one result return a j
 			...
 		},
 	],
-	"meta": {
-    	"cursor": {
-      		"current": null,
-      		"prev": null,
-      		"next": 165,
-      		"count": 100,
-    	}
-  	}
+	"cursor_id": 30,
+    "prev_id": null,
+    "next_id": null,
+    "result_count": 100,
 }  
 ```
 
@@ -388,31 +384,24 @@ As cursors and offsets are mutually exclusive, you should choose one or the othe
 
 Once you are up and running using either cursors or an offset you can then combine it with other filter functions such `_limit` & `_sort` to build powerful queries to enable you to be as precise or lenient as you want. 
 
-### Cursor meta object
+### Cursor metadata
 
-Appended to each request with more than one result is the meta object, that will always appear regardless of you utilize a cursor/offset or not. This is what each value within the object means:
+Appended to each request with more than one result is the cursor metadata, that will always appear regardless of you utilize a cursor/offset or not. This is what each value means:
 
 ```json
-// Meta object example
-{
-	"meta": {
-    	"cursor": {
-      		"current": null,
-      		"prev": null,
-      		"next": 165,
-      		"count": 100,
-    	}
-  	}
-	}
-}
+// Metadata example
+"cursor_id": 50,
+"prev_id": 25,
+"next_id": 76,
+"result_count": 25,
 ```
 
 Parameter | Value
 ---------- | ----------  
-`current` | The current `_cursor` value.
-`prev` | The previous `_cursor` value as manually inserted by you, _null_ by default.
-`next` | The next position to move the `_cursor` to based on the current request.
-`count` | The amount of results returned in the current request.
+`cursor_id` | The current `_cursor` value.
+`prev_id` | The previous `_cursor` value as manually inserted by you, _null_ by default.
+`next_id` | The next position to move the `_cursor` to based on the current request.
+`count_id` | The amount of results returned in the current request.
 
 ## Filtering
 
