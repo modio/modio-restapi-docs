@@ -5,14 +5,15 @@ language_tabs:
   - http: HTTP
   - javascript: JavaScript
   - javascript--nodejs: Node.JS
-  - python: Python
   - ruby: Ruby
+  - python: Python
   - java: Java
 toc_footers:
   - '<a href="https://mod.io/about">Find out more about mod.io</a>'
 includes: []
 search: true
 highlight_theme: darkula
+headingLevel: '2'
 ---
 
 # Getting Started
@@ -464,7 +465,7 @@ v1/games?name-lk=texture
 
 Where the string supplied matches the preceding column value. This is the equivalent to SQL's `LIKE`.
 
-- `?name-lk=texture` - Get all results where **only** _texture_ occurs in the `name` column.
+- `?name-lk=texture` - Get all results where _texture_ occurs in the `name` column.
 
 ### -not-lk (Not Like)
 
@@ -601,7 +602,7 @@ If you spot any errors within the mod.io documentation, have feedback on how we 
 
 ```shell
 # You can also use wget
-curl -X get https://api.mod.io/v1/games?api_key=YourApiKey \
+curl -X GET https://api.mod.io/v1/games?api_key=YourApiKey \
   -H 'Accept: application/json'
 
 ```
@@ -660,9 +661,11 @@ headers = {
   'Accept' => 'application/json'
 }
 
-result = RestClient.get 'https://api.mod.io/v1/games', params: {
+result = RestClient.get 'https://api.mod.io/v1/games',
+  params: {
   'api_key' => 'string'
 }, headers: headers
+
 
 p JSON.parse(result)
 ```
@@ -697,19 +700,20 @@ System.out.println(response.toString());
 ```
 `GET /games`
 
-Browse Games. Successful request will return an __array of game objects__. To make your requests as specific to your needs as possible it's highly recommended reading over our [filtering documentation](https://docs.mod.io/#filtering) if it will help you with consuming this endpoint.
+Browse Games on mod.io. Successful request will return an array of [Game Objects](https://docs.mod.io/#browse-games). To make your requests as specific to your needs as possible it's highly recommended reading over our [filtering documentation](https://docs.mod.io/#filtering) if it will help you with consuming this endpoint.
      
      Filter|Type|Description
      ---|---|---
-     id|integer|Unique id of the game.
-     member|integer|Unique id of the member who has ownership of the game.
-     datereg|integer|Unix timestamp of date registered.
-     dateup|integer|Unix timestamp of date updated.
-     presentation|integer|Choose which presentation style you want to use for your game on the mod.io website <br><br>*Field options*<br>__0__ =  Grid View: Displays mods in a grid (visual but less informative, default setting) <br>__1__ = Table View: Displays mods ina  table (easier to browse)
-     community|integer|Choose what rights community members have with the game <br><br>*Field Options*<br>__0__ = Discussion board disabled, community cannot share guides and news<br>__1__ = Discussion Board enabled only<br>__2__ = Community can only share guides and news<br>__3__ = Discussion Board enabled and community can share news and guides
-     submission|integer|Choose what submission process you want modders to follow <br><br>*Field Options*<br>__0__ = Control the upload process. ou will have to build an upload system either in-game or via a standalone app, which enables developers to submit mods to the tags you have configured. Because you control the flow, you can pre-validate and compile mods, to ensure they will work in your game. In the long run this option will save you time as you can accept more submissions, but it requires more setup to get running and isn't as open as the above option. NOTE: mod profiles can still be created online, but uploads will have to occur via the tools you supply.<br><br>__1__ = Enable mod uploads from anywhere. Allow developers to upload mods via the website and API, and pick the tags their mod is built for. No validation will be done on the files submitted, it will be the responsibility of your game and apps built to process the mods installation based on the tags selected and determine if the mod is valid and works. For example a mod might be uploaded to the 'map' tag. When a user subscribes to this mod, your game will need to verify it contains a map file and install it where maps are located. If this fails, your game or the community will have to flag the mod as 'incompatible' to remove it from the listing.
-     curation|integer|Choose the curation process for the game<br><br>*Field Options*<br>__0__ = Mods are immediately available to play, without any intervention or work from your team.<br>__1__ = Screen only mods the author wants to sell, before they are available to purchase via the API.<br>__2__ = All mods must be accepted by someone on your team. This option is useful for games that have a small number of mods and want to control the experience, or you need to set the parameters attached to a mod (i.e. a weapon may require the rate of fire, power level, clip size etc). It can also be used for complex mods, which you may need to build into your game or distribute as DLC.
-     api|integer|Choose what permissions you want to enable via the mod.io API<br><br>*Field Options*<br>__0__ = Third parties cannot access your mods API and mods cannot be downloaded directly without API validation.<br>__1__ = Allow 3rd parties to access your mods API (recommended, an open API will encourage a healthy ecosystem of tools and apps) but mods cannot be downloaded directly<br>__2__ = Allow mods to be downloaded directly but 3rd parties cannot access your mods API.<br>__3__ = Allow third parties to access your mods API and allow mods to be downloaded directly without api validation.
+     id|integer(int32)|Unique id of the game.
+     member|integer(int32)|Unique id of the member who has ownership of the game.
+     datereg|integer(int32)|Unix timestamp of date registered.
+     dateup|integer(int32)|Unix timestamp of date updated.
+     presentation|integer(int32)|Choose which presentation style you want to use for your game on the mod.io website <br><br>*Field options*<br>__0__ =  Grid View: Displays mods in a grid (visual but less informative, default setting) <br>__1__ = Table View: Displays mods in a table (easier to browse)
+     community|integer(int32)|Choose what rights community members have with the game <br><br>*Field Options*<br>__0__ = Discussion board disabled, community cannot share guides and news<br>__1__ = Discussion Board enabled only<br>__2__ = Community can only share guides and news<br>__3__ = Discussion Board enabled and community can share news and guides
+     submission|integer(int32)|Choose what submission process you want modders to follow <br><br>*Field Options*<br>__0__ = Control the upload process. ou will have to build an upload system either in-game or via a standalone app, which enables developers to submit mods to the tags you have configured. Because you control the flow, you can pre-validate and compile mods, to ensure they will work in your game. In the long run this option will save you time as you can accept more submissions, but it requires more setup to get running and isn't as open as the above option. NOTE: mod profiles can still be created online, but uploads will have to occur via the tools you supply.<br><br>__1__ = Enable mod uploads from anywhere. Allow developers to upload mods via the website and API, and pick the tags their mod is built for. No validation will be done on the files submitted, it will be the responsibility of your game and apps built to process the mods installation based on the tags selected and determine if the mod is valid and works. For example a mod might be uploaded to the 'map' tag. When a user subscribes to this mod, your game will need to verify it contains a map file and install it where maps are located. If this fails, your game or the community will have to flag the mod as 'incompatible' to remove it from the listing.
+     curation|integer(int32)|Choose the curation process for the game<br><br>*Field Options*<br>__0__ = Mods are immediately available to play, without any intervention or work from your team.<br>__1__ = Screen only mods the author wants to sell, before they are available to purchase via the API.<br>__2__ = All mods must be accepted by someone on your team. This option is useful for games that have a small number of mods and want to control the experience, or you need to set the parameters attached to a mod (i.e. a weapon may require the rate of fire, power level, clip size etc). It can also be used for complex mods, which you may need to build into your game or distribute as DLC.
+     revenue|integer(int32)|Choose the revenue-share mod creators receive as a percentage. ie. 20 = 20%
+     api|integer(int32)|Choose what permissions you want to enable via the mod.io API<br><br>*Field Options*<br>__0__ = Third parties cannot access your mods API and mods cannot be downloaded directly without API validation.<br>__1__ = Allow 3rd parties to access your mods API (recommended, an open API will encourage a healthy ecosystem of tools and apps) but mods cannot be downloaded directly<br>__2__ = Allow mods to be downloaded directly but 3rd parties cannot access your mods API.<br>__3__ = Allow third parties to access your mods API and allow mods to be downloaded directly without api validation.
      ugcname|string|Singular word that describes the user-generated content type.
      icon|string|Filename of the icon image, extension included.
      logo|string|Filename of the logo image, extension included.
@@ -720,11 +724,6 @@ Browse Games. Successful request will return an __array of game objects__. To ma
      summary|string|Summary for the game.
      instructions|string|Instructions on the process to upload mods.
 
-### Responses
-
-Status|Meaning|Description
----|---|---|
-200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)|OK
 
 > Example responses
 
@@ -737,10 +736,9 @@ Status|Meaning|Description
         "id": 1,
         "nameid": "xant",
         "username": "XanT",
-        "permission": 1,
         "avatar": {
-          "full": "https://media.mod.io/images/members/1/1/1/masterchief.jpg",
-          "filename": "masterchief.jpg"
+          "filename": "masterchief.jpg",
+          "full": "https://media.mod.io/images/members/1/1/1/masterchief.jpg"
         },
         "timezone": "Australia/Brisbane",
         "language": "en",
@@ -756,18 +754,20 @@ Status|Meaning|Description
       "api": 3,
       "ugcname": "map",
       "icon": {
-        "full": "https://media.mod.io/images/games/1/1/2/icon.png",
-        "thumbnail": "https://media.mod.io/cache/images/mods/1/1/2/crop_320x180/icon.png",
-        "filename": "icon.png"
+        "filename": "IMG_20170409_222419.jpg",
+        "full": "https://media.mod.io/images/mods/1/1/2/icon.png",
+        "thumb_320x180": "https://media.mod.io/cache/images/mods/1/1/2/thumb_320x180/icon.png"
       },
       "logo": {
-        "full": "https://media.mod.io/images/games/1/1/2/gamelogo.jpg",
-        "thumbnail": "https://media.mod.io/cache/images/mods/1/1/2/thumb_1020x2000/gamelogo.jpg",
-        "filename": "gamelogo.jpg"
+        "filename": "IMG_20170409_222419.jpg",
+        "full": "https://media.mod.io/images/mods/1/1/2/IMG_20170409_222419.jpg",
+        "thumb_320x180": "https://media.mod.io/cache/images/mods/1/1/2/thumb_320x180/IMG_20170409_222419.jpg",
+        "thumb_640x360": "https://media.mod.io/cache/images/mods/1/1/2/thumb_640x360/IMG_20170409_222419.jpg",
+        "thumb_1280x720": "https://media.mod.io/cache/images/mods/1/1/2/thumb_1280x720/IMG_20170409_222419.jpg"
       },
       "header": {
-        "full": "https://media.mod.io/images/games/1/1/2/gameheader.png",
-        "filename": "gameheader.png"
+        "filename": "gameheader.png",
+        "full": "https://media.mod.io/images/games/1/1/2/gameheader.png"
       },
       "homepage": "https://www.rogue-knight-game.com/",
       "name": "Rogue Knight",
@@ -796,10 +796,17 @@ Status|Meaning|Description
   "result_count": 100
 }
 ```
+<h3 id="Browse-Games-responses">Responses</h3>
+
+Status|Meaning|Description|Response Schema
+---|---|---|---|
+200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)|OK|[Browse_Games](#schemabrowse_games)
+
 <aside class="warning">
 To perform this operation, you must be authenticated by means of one of the following methods:
 apiKey, oauth2 ( Scopes: read )
 </aside>
+
 
 ## View Game
 
@@ -807,7 +814,7 @@ apiKey, oauth2 ( Scopes: read )
 
 ```shell
 # You can also use wget
-curl -X get https://api.mod.io/v1/games/{game-id}?api_key=YourApiKey \
+curl -X GET https://api.mod.io/v1/games/{game-id}?api_key=YourApiKey \
   -H 'Accept: application/json'
 
 ```
@@ -866,9 +873,11 @@ headers = {
   'Accept' => 'application/json'
 }
 
-result = RestClient.get 'https://api.mod.io/v1/games/{game-id}', params: {
+result = RestClient.get 'https://api.mod.io/v1/games/{game-id}',
+  params: {
   'api_key' => 'string'
 }, headers: headers
+
 
 p JSON.parse(result)
 ```
@@ -903,13 +912,8 @@ System.out.println(response.toString());
 ```
 `GET /games/{game-id}`
 
-View a single game. Successful request will return a single __game object__.
+View a single game on mod.io. Successful request will return a single [Game Object](https://docs.mod.io/#game-object).
 
-### Responses
-
-Status|Meaning|Description
----|---|---|
-200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)|Request successful
 
 > Example responses
 
@@ -920,10 +924,9 @@ Status|Meaning|Description
     "id": 1,
     "nameid": "xant",
     "username": "XanT",
-    "permission": 1,
     "avatar": {
-      "full": "https://media.mod.io/images/members/1/1/1/masterchief.jpg",
-      "filename": "masterchief.jpg"
+      "filename": "masterchief.jpg",
+      "full": "https://media.mod.io/images/members/1/1/1/masterchief.jpg"
     },
     "timezone": "Australia/Brisbane",
     "language": "en",
@@ -939,18 +942,20 @@ Status|Meaning|Description
   "api": 3,
   "ugcname": "map",
   "icon": {
-    "full": "https://media.mod.io/images/games/1/1/2/icon.png",
-    "thumbnail": "https://media.mod.io/cache/images/mods/1/1/2/crop_320x180/icon.png",
-    "filename": "icon.png"
+    "filename": "IMG_20170409_222419.jpg",
+    "full": "https://media.mod.io/images/mods/1/1/2/icon.png",
+    "thumb_320x180": "https://media.mod.io/cache/images/mods/1/1/2/thumb_320x180/icon.png"
   },
   "logo": {
-    "full": "https://media.mod.io/images/games/1/1/2/gamelogo.jpg",
-    "thumbnail": "https://media.mod.io/cache/images/mods/1/1/2/thumb_1020x2000/gamelogo.jpg",
-    "filename": "gamelogo.jpg"
+    "filename": "IMG_20170409_222419.jpg",
+    "full": "https://media.mod.io/images/mods/1/1/2/IMG_20170409_222419.jpg",
+    "thumb_320x180": "https://media.mod.io/cache/images/mods/1/1/2/thumb_320x180/IMG_20170409_222419.jpg",
+    "thumb_640x360": "https://media.mod.io/cache/images/mods/1/1/2/thumb_640x360/IMG_20170409_222419.jpg",
+    "thumb_1280x720": "https://media.mod.io/cache/images/mods/1/1/2/thumb_1280x720/IMG_20170409_222419.jpg"
   },
   "header": {
-    "full": "https://media.mod.io/images/games/1/1/2/gameheader.png",
-    "filename": "gameheader.png"
+    "filename": "gameheader.png",
+    "full": "https://media.mod.io/images/games/1/1/2/gameheader.png"
   },
   "homepage": "https://www.rogue-knight-game.com/",
   "name": "Rogue Knight",
@@ -970,10 +975,17 @@ Status|Meaning|Description
   ]
 }
 ```
+<h3 id="View-Game-responses">Responses</h3>
+
+Status|Meaning|Description|Response Schema
+---|---|---|---|
+200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)|Request successful|[Game_Object](#schemagame_object)
+
 <aside class="warning">
 To perform this operation, you must be authenticated by means of one of the following methods:
 apiKey, oauth2 ( Scopes: read )
 </aside>
+
 
 ## Edit Game
 
@@ -981,7 +993,7 @@ apiKey, oauth2 ( Scopes: read )
 
 ```shell
 # You can also use wget
-curl -X put https://api.mod.io/v1/games/{game-id} \
+curl -X PUT https://api.mod.io/v1/games/{game-id} \
   -H 'Authorization: Bearer YourAccessToken' \
   -H 'Content-Type: application/x-www-form-urlencoded' \
   -H 'Accept: application/json'
@@ -995,6 +1007,7 @@ Host: api.mod.io
 Accept: application/json
 Authorization: Bearer YourAccessToken
 Content-Type: application/x-www-form-urlencoded
+
 
 ```
 
@@ -1050,8 +1063,10 @@ headers = {
   'Accept' => 'application/json'
 }
 
-result = RestClient.put 'https://api.mod.io/v1/games/{game-id}', params: {
+result = RestClient.put 'https://api.mod.io/v1/games/{game-id}',
+  params: {
   }, headers: headers
+
 
 p JSON.parse(result)
 ```
@@ -1092,11 +1107,11 @@ Update details for a game. If you want to update the `icon`, `logo` or `header` 
      
      Parameter|Type|Required|Description
      ---|---|---|---|
-     presentation|integer||Choose which presentation style you want to use for your game on the mod.io website <br><br>*Field options*<br>__0__ =  Grid View: Displays mods in a grid (visual but less informative, default setting) <br>__1__ = Table View: Displays mods ina  table (easier to browse)
-     community|integer||Choose what rights community members have with the game <br><br>*Field Options*<br>__0__ = Discussion board disabled, community cannot share guides and news<br>__1__ = Discussion Board enabled only<br>__2__ = Community can only share guides and news<br>__3__ = Discussion Board enabled and community can share news and guides
-     submission|integer||Choose what submission process you want modders to follow <br><br>*Field Options*<br>__0__ = Control the upload process. ou will have to build an upload system either in-game or via a standalone app, which enables developers to submit mods to the tags you have configured. Because you control the flow, you can pre-validate and compile mods, to ensure they will work in your game. In the long run this option will save you time as you can accept more submissions, but it requires more setup to get running and isn't as open as the above option. NOTE: mod profiles can still be created online, but uploads will have to occur via the tools you supply.<br><br>__1__ = Enable mod uploads from anywhere. Allow developers to upload mods via the website and API, and pick the tags their mod is built for. No validation will be done on the files submitted, it will be the responsibility of your game and apps built to process the mods installation based on the tags selected and determine if the mod is valid and works. For example a mod might be uploaded to the 'map' tag. When a user subscribes to this mod, your game will need to verify it contains a map file and install it where maps are located. If this fails, your game or the community will have to flag the mod as 'incompatible' to remove it from the listing.
-     curation|integer||Choose the curation process for the game<br><br>*Field Options*<br>__0__ = Mods are immediately available to play, without any intervention or work from your team.<br>__1__ = Screen only mods the author wants to sell, before they are available to purchase via the API.<br>__2__ = All mods must be accepted by someone on your team. This option is useful for games that have a small number of mods and want to control the experience, or you need to set the parameters attached to a mod (i.e. a weapon may require the rate of fire, power level, clip size etc). It can also be used for complex mods, which you may need to build into your game or distribute as DLC.
-     api|integer||Choose what permissions you want to enable via the mod.io API<br><br>*Field Options*<br>__0__ = Third parties cannot access your mods API and mods cannot be downloaded directly without API validation.<br>__1__ = Allow 3rd parties to access your mods API (recommended, an open API will encourage a healthy ecosystem of tools and apps) but mods cannot be downloaded directly<br>__2__ = Allow mods to be downloaded directly but 3rd parties cannot access your mods API.<br>__3__ = Allow third parties to access your mods API and allow mods to be downloaded directly without api validation.
+     presentation|integer(int32)||Choose which presentation style you want to use for your game on the mod.io website <br><br>*Field options*<br>__0__ =  Grid View: Displays mods in a grid (visual but less informative, default setting) <br>__1__ = Table View: Displays mods ina  table (easier to browse)
+     community|integer(int32)||Choose what rights community members have with the game <br><br>*Field Options*<br>__0__ = Discussion board disabled, community cannot share guides and news<br>__1__ = Discussion Board enabled only<br>__2__ = Community can only share guides and news<br>__3__ = Discussion Board enabled and community can share news and guides
+     submission|integer(int32)||Choose what submission process you want modders to follow <br><br>*Field Options*<br>__0__ = Control the upload process. ou will have to build an upload system either in-game or via a standalone app, which enables developers to submit mods to the tags you have configured. Because you control the flow, you can pre-validate and compile mods, to ensure they will work in your game. In the long run this option will save you time as you can accept more submissions, but it requires more setup to get running and isn't as open as the above option. NOTE: mod profiles can still be created online, but uploads will have to occur via the tools you supply.<br><br>__1__ = Enable mod uploads from anywhere. Allow developers to upload mods via the website and API, and pick the tags their mod is built for. No validation will be done on the files submitted, it will be the responsibility of your game and apps built to process the mods installation based on the tags selected and determine if the mod is valid and works. For example a mod might be uploaded to the 'map' tag. When a user subscribes to this mod, your game will need to verify it contains a map file and install it where maps are located. If this fails, your game or the community will have to flag the mod as 'incompatible' to remove it from the listing.
+     curation|integer(int32)||Choose the curation process for the game<br><br>*Field Options*<br>__0__ = Mods are immediately available to play, without any intervention or work from your team.<br>__1__ = Screen only mods the author wants to sell, before they are available to purchase via the API.<br>__2__ = All mods must be accepted by someone on your team. This option is useful for games that have a small number of mods and want to control the experience, or you need to set the parameters attached to a mod (i.e. a weapon may require the rate of fire, power level, clip size etc). It can also be used for complex mods, which you may need to build into your game or distribute as DLC.
+     api|integer(int32)||Choose what permissions you want to enable via the mod.io API<br><br>*Field Options*<br>__0__ = Third parties cannot access your mods API and mods cannot be downloaded directly without API validation.<br>__1__ = Allow 3rd parties to access your mods API (recommended, an open API will encourage a healthy ecosystem of tools and apps) but mods cannot be downloaded directly<br>__2__ = Allow mods to be downloaded directly but 3rd parties cannot access your mods API.<br>__3__ = Allow third parties to access your mods API and allow mods to be downloaded directly without api validation.
      ugcname|string||Singular word to best describe your games user-generated content.
      homepage|string||Official homepage for your game, if you do not fill this out it will default to your mod.io profile. Must be a valid URL.
      name|string||The name of your game. Highly recommended to not change this unless absolutely required.
@@ -1104,11 +1119,6 @@ Update details for a game. If you want to update the `icon`, `logo` or `header` 
      summary|string||Summary for your game, giving a brief overview of what it's about - cannot exceed 250 characters.
      instructions|string||Instructions and links creators should follow to upload mods. Keep it short and explain details like are mods submitted in-game or via tools you have created.
 
-### Responses
-
-Status|Meaning|Description
----|---|---|
-200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)|Update successful
 
 > Example responses
 
@@ -1118,10 +1128,17 @@ Status|Meaning|Description
   "message": "You have successfully updated to the specified game profile."
 }
 ```
+<h3 id="Edit-Game-responses">Responses</h3>
+
+Status|Meaning|Description|Response Schema
+---|---|---|---|
+200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)|Update successful|[updateGame](#schemaupdategame)
+
 <aside class="warning">
 To perform this operation, you must be authenticated by means of one of the following methods:
 oauth2 ( Scopes: write )
 </aside>
+
 
 ## Add Game Media
 
@@ -1129,7 +1146,7 @@ oauth2 ( Scopes: write )
 
 ```shell
 # You can also use wget
-curl -X post https://api.mod.io/v1/games/{game-id}/media \
+curl -X POST https://api.mod.io/v1/games/{game-id}/media \
   -H 'Authorization: Bearer YourAccessToken' \
   -H 'Content-Type: multipart/form-data' \
   -H 'Accept: application/json'
@@ -1143,6 +1160,7 @@ Host: api.mod.io
 Accept: application/json
 Authorization: Bearer YourAccessToken
 Content-Type: multipart/form-data
+
 
 ```
 
@@ -1198,8 +1216,10 @@ headers = {
   'Accept' => 'application/json'
 }
 
-result = RestClient.post 'https://api.mod.io/v1/games/{game-id}/media', params: {
+result = RestClient.post 'https://api.mod.io/v1/games/{game-id}/media',
+  params: {
   }, headers: headers
+
 
 p JSON.parse(result)
 ```
@@ -1240,15 +1260,10 @@ Upload new media to a game. Any request you make to this endpoint *should* conta
      
      Parameter|Type|Required|Description
      ---|---|---|---|
-     logo|file||Binary image file which will represent your new game logo. Must be gif, jpg, jpeg or png format and cannot exceed 8MB in filesize.
+     logo|file||Image file which will represent your new mod logo. Must be gif, jpg, jpeg or png format and cannot exceed 8MB in filesize. Dimensions must be at least 640x360 and is highly recommended that you supply a high resolution image in 16 / 9 resolution. mod.io will use this image to make three thumbnails for the dimensions 320x180, 640x360 and 1280x720.
      icon|file||Binary image file which will represent your new game icon. Must be minimum 64x64px dimensions and gif, jpg, jpeg or png format and cannot exceed 1MB in filesize.
      header|file||Binary image file which will represent your new game header. Must be gif, jpg, jpeg or png format and cannot exceed 256KB in filesize.
 
-### Responses
-
-Status|Meaning|Description
----|---|---|
-200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)|Media Successfully uploaded
 
 > Example responses
 
@@ -1258,10 +1273,17 @@ Status|Meaning|Description
   "message": "You have successfully added new media to the specified game profile."
 }
 ```
+<h3 id="Add-Game-Media-responses">Responses</h3>
+
+Status|Meaning|Description|Response Schema
+---|---|---|---|
+200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)|Media Successfully uploaded|[updateMediaGame](#schemaupdatemediagame)
+
 <aside class="warning">
 To perform this operation, you must be authenticated by means of one of the following methods:
 oauth2 ( Scopes: write )
 </aside>
+
 
 ## Browse Game Activity
 
@@ -1269,7 +1291,7 @@ oauth2 ( Scopes: write )
 
 ```shell
 # You can also use wget
-curl -X get https://api.mod.io/v1/games/{game-id}/activity?api_key=YourApiKey \
+curl -X GET https://api.mod.io/v1/games/{game-id}/activity?api_key=YourApiKey \
   -H 'Accept: application/json'
 
 ```
@@ -1328,9 +1350,11 @@ headers = {
   'Accept' => 'application/json'
 }
 
-result = RestClient.get 'https://api.mod.io/v1/games/{game-id}/activity', params: {
+result = RestClient.get 'https://api.mod.io/v1/games/{game-id}/activity',
+  params: {
   'api_key' => 'string'
 }, headers: headers
+
 
 p JSON.parse(result)
 ```
@@ -1365,20 +1389,15 @@ System.out.println(response.toString());
 ```
 `GET /games/{game-id}/activity`
 
-View activity for a game, showing changes made to the resource. Successful request will return an __array of activity objects__. To make your requests as specific to your needs as possible it's highly recommended reading over our [filtering documentation](https://docs.mod.io/#filtering) if it will help you with consuming this endpoint.
+View activity for a game, showing changes made to the resource. Successful request will return an array of [Game activity objects](https://docs.mod.io/#game-activity-object). To make your requests as specific to your needs as possible it's highly recommended reading over our [filtering documentation](https://docs.mod.io/#filtering) if it will help you with consuming this endpoint.
      
      Filter|Type|Description
      ---|---|---
-     id|integer|Unique id of the activity object.
-     member|integer|Unique id of member who performed the action.
-     dateup|integer|Unix timestamp of date updated.
+     id|integer(int32)|Unique id of the activity object.
+     member|integer(int32)|Unique id of member who performed the action.
+     dateup|integer(int32)|Unix timestamp of date updated.
      event|string|Type of change that occurred. Note that in the event of GAME_DELETE, this endpoint will be inaccessible as the game profile would be closed, however if restored it would show the event in the activity history.<br><br>*Field Options*<br>__GAME_UPDATE__ - Update event<br>__GAME_DELETE__ - Delete event
 
-### Responses
-
-Status|Meaning|Description
----|---|---|
-200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)|Successful Response
 
 > Example responses
 
@@ -1391,10 +1410,9 @@ Status|Meaning|Description
         "id": 1,
         "nameid": "xant",
         "username": "XanT",
-        "permission": 1,
         "avatar": {
-          "full": "https://media.mod.io/images/members/1/1/1/masterchief.jpg",
-          "filename": "masterchief.jpg"
+          "filename": "masterchief.jpg",
+          "full": "https://media.mod.io/images/members/1/1/1/masterchief.jpg"
         },
         "timezone": "Australia/Brisbane",
         "language": "en",
@@ -1412,10 +1430,17 @@ Status|Meaning|Description
   ]
 }
 ```
+<h3 id="Browse-Game-Activity-responses">Responses</h3>
+
+Status|Meaning|Description|Response Schema
+---|---|---|---|
+200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)|Successful Response|[Browse_Game_Activity](#schemabrowse_game_activity)
+
 <aside class="warning">
 To perform this operation, you must be authenticated by means of one of the following methods:
 apiKey, oauth2 ( Scopes: read )
 </aside>
+
 
 ## Browse Game Team Members
 
@@ -1423,7 +1448,7 @@ apiKey, oauth2 ( Scopes: read )
 
 ```shell
 # You can also use wget
-curl -X get https://api.mod.io/v1/games/{game-id}/team?api_key=YourApiKey \
+curl -X GET https://api.mod.io/v1/games/{game-id}/team?api_key=YourApiKey \
   -H 'Accept: application/json'
 
 ```
@@ -1482,9 +1507,11 @@ headers = {
   'Accept' => 'application/json'
 }
 
-result = RestClient.get 'https://api.mod.io/v1/games/{game-id}/team', params: {
+result = RestClient.get 'https://api.mod.io/v1/games/{game-id}/team',
+  params: {
   'api_key' => 'string'
 }, headers: headers
+
 
 p JSON.parse(result)
 ```
@@ -1519,18 +1546,17 @@ System.out.println(response.toString());
 ```
 `GET /games/{game-id}/team`
 
-View all members that are part of a game team. Successful request will return an __array of access objects__.
+View all members that are part of a game team. Successful request will return an array of [Access objects](https://docs.mod.io/#browse-team).
 
-### Responses
-
-Status|Meaning|Description
----|---|---|
-200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)|Successful Request
 
 > Example responses
 
 ```json
 {
+  "cursor_id": 60,
+  "prev_id": 30,
+  "next_id": 160,
+  "result_count": 100,
   "data": [
     {
       "id": 457,
@@ -1538,10 +1564,9 @@ Status|Meaning|Description
         "id": 1,
         "nameid": "xant",
         "username": "XanT",
-        "permission": 1,
         "avatar": {
-          "full": "https://media.mod.io/images/members/1/1/1/masterchief.jpg",
-          "filename": "masterchief.jpg"
+          "filename": "masterchief.jpg",
+          "full": "https://media.mod.io/images/members/1/1/1/masterchief.jpg"
         },
         "timezone": "Australia/Brisbane",
         "language": "en",
@@ -1551,21 +1576,21 @@ Status|Meaning|Description
       "level": 8,
       "date": 1492058857,
       "position": "Supreme Overlord"
-    },
-    {
-        ...
     }
-  ],
-  "cursor_id": 60,
-  "prev_id": 30,
-  "next_id": 160,
-  "result_count": 100
+  ]
 }
 ```
+<h3 id="Browse-Game-Team-Members-responses">Responses</h3>
+
+Status|Meaning|Description|Response Schema
+---|---|---|---|
+200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)|Successful Request|[Browse_Team](#schemabrowse_team)
+
 <aside class="warning">
 To perform this operation, you must be authenticated by means of one of the following methods:
 apiKey, oauth2 ( Scopes: read )
 </aside>
+
 
 ## Add Game Team Member
 
@@ -1573,7 +1598,7 @@ apiKey, oauth2 ( Scopes: read )
 
 ```shell
 # You can also use wget
-curl -X post https://api.mod.io/v1/games/{game-id}/team \
+curl -X POST https://api.mod.io/v1/games/{game-id}/team \
   -H 'Authorization: Bearer YourAccessToken' \
   -H 'Content-Type: application/x-www-form-urlencoded' \
   -H 'Accept: application/json'
@@ -1587,6 +1612,7 @@ Host: api.mod.io
 Accept: application/json
 Authorization: Bearer YourAccessToken
 Content-Type: application/x-www-form-urlencoded
+
 
 ```
 
@@ -1642,8 +1668,10 @@ headers = {
   'Accept' => 'application/json'
 }
 
-result = RestClient.post 'https://api.mod.io/v1/games/{game-id}/team', params: {
+result = RestClient.post 'https://api.mod.io/v1/games/{game-id}/team',
+  params: {
   }, headers: headers
+
 
 p JSON.parse(result)
 ```
@@ -1688,11 +1716,6 @@ Add a member to a game team.
      level|integer|true|The level of permissions you want to give to the user.<br><br>*Fields Options:*<br>__1__ = Moderator (can moderate content submitted)<br>__4__ = Financials (read only access to the control panel to view financial reports)<br>__8__ = Administrator (full access, including editing the profile and team)
      position|string|true|The title you wish to apply to the member within your team.
 
-### Responses
-
-Status|Meaning|Description
----|---|---|
-201|[Created](https://tools.ietf.org/html/rfc7231#section-6.3.2)|Created
 
 > Example responses
 
@@ -1702,10 +1725,17 @@ Status|Meaning|Description
   "message": "You have successfully added a member to the specified team."
 }
 ```
+<h3 id="Add-Game-Team-Member-responses">Responses</h3>
+
+Status|Meaning|Description|Response Schema
+---|---|---|---|
+201|[Created](https://tools.ietf.org/html/rfc7231#section-6.3.2)|Created|[addTeam](#schemaaddteam)
+
 <aside class="warning">
 To perform this operation, you must be authenticated by means of one of the following methods:
 oauth2 ( Scopes: write )
 </aside>
+
 
 ## Update Game Team Member
 
@@ -1713,7 +1743,7 @@ oauth2 ( Scopes: write )
 
 ```shell
 # You can also use wget
-curl -X put https://api.mod.io/v1/games/{game-id}/team/{access-id} \
+curl -X PUT https://api.mod.io/v1/games/{game-id}/team/{access-id} \
   -H 'Authorization: Bearer YourAccessToken' \
   -H 'Content-Type: application/x-www-form-urlencoded' \
   -H 'Accept: application/json'
@@ -1727,6 +1757,7 @@ Host: api.mod.io
 Accept: application/json
 Authorization: Bearer YourAccessToken
 Content-Type: application/x-www-form-urlencoded
+
 
 ```
 
@@ -1782,8 +1813,10 @@ headers = {
   'Accept' => 'application/json'
 }
 
-result = RestClient.put 'https://api.mod.io/v1/games/{game-id}/team/{access-id}', params: {
+result = RestClient.put 'https://api.mod.io/v1/games/{game-id}/team/{access-id}',
+  params: {
   }, headers: headers
+
 
 p JSON.parse(result)
 ```
@@ -1827,11 +1860,6 @@ Update the details of a member who is currently a part of the specified game tea
      level|integer||The level of permissions you want to give to the user.<br><br>*Fields Options:*<br>__1__ = Moderator (can moderate content submitted)<br>__4__ = Financials (read only access to the control panel to view financial reports)<br>__8__ = Administrator (full access, including editing the profile and team)
      position|string||The title you wish to apply to the member within your team.
 
-### Responses
-
-Status|Meaning|Description
----|---|---|
-200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)|OK
 
 > Example responses
 
@@ -1841,10 +1869,17 @@ Status|Meaning|Description
   "message": "You have successfully updated the specified team members details."
 }
 ```
+<h3 id="Update-Game-Team-Member-responses">Responses</h3>
+
+Status|Meaning|Description|Response Schema
+---|---|---|---|
+200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)|OK|[updateTeam](#schemaupdateteam)
+
 <aside class="warning">
 To perform this operation, you must be authenticated by means of one of the following methods:
 oauth2 ( Scopes: write )
 </aside>
+
 
 ## Delete Game Team Member
 
@@ -1852,7 +1887,7 @@ oauth2 ( Scopes: write )
 
 ```shell
 # You can also use wget
-curl -X delete https://api.mod.io/v1/games/{game-id}/team/{access-id} \
+curl -X DELETE https://api.mod.io/v1/games/{game-id}/team/{access-id} \
   -H 'Authorization: Bearer YourAccessToken' \
   -H 'Content-Type: application/x-www-form-urlencoded' \
   -H 'Accept: application/json'
@@ -1866,6 +1901,7 @@ Host: api.mod.io
 Accept: application/json
 Authorization: Bearer YourAccessToken
 Content-Type: application/x-www-form-urlencoded
+
 
 ```
 
@@ -1921,8 +1957,10 @@ headers = {
   'Accept' => 'application/json'
 }
 
-result = RestClient.delete 'https://api.mod.io/v1/games/{game-id}/team/{access-id}', params: {
+result = RestClient.delete 'https://api.mod.io/v1/games/{game-id}/team/{access-id}',
+  params: {
   }, headers: headers
+
 
 p JSON.parse(result)
 ```
@@ -1961,21 +1999,23 @@ System.out.println(response.toString());
 
 Remove a member from a game team. This will revoke their access rights if they are not the original creator of the resource.
 
-### Responses
-
-Status|Meaning|Description
----|---|---|
-204|[No Content](https://tools.ietf.org/html/rfc7231#section-6.3.5)|No Content
 
 > Example responses
 
 ```json
- 204 No Content 
+ "204 No Content" 
 ```
+<h3 id="Delete-Game-Team-Member-responses">Responses</h3>
+
+Status|Meaning|Description|Response Schema
+---|---|---|---|
+204|[No Content](https://tools.ietf.org/html/rfc7231#section-6.3.5)|No Content|[204](#schema204)
+
 <aside class="warning">
 To perform this operation, you must be authenticated by means of one of the following methods:
 oauth2 ( Scopes: write )
 </aside>
+
 
 # Mods
 
@@ -1985,7 +2025,7 @@ oauth2 ( Scopes: write )
 
 ```shell
 # You can also use wget
-curl -X get https://api.mod.io/v1/games/{game-id}/mods?api_key=YourApiKey \
+curl -X GET https://api.mod.io/v1/games/{game-id}/mods?api_key=YourApiKey \
   -H 'Accept: application/json'
 
 ```
@@ -2044,9 +2084,11 @@ headers = {
   'Accept' => 'application/json'
 }
 
-result = RestClient.get 'https://api.mod.io/v1/games/{game-id}/mods', params: {
+result = RestClient.get 'https://api.mod.io/v1/games/{game-id}/mods',
+  params: {
   'api_key' => 'string'
 }, headers: headers
+
 
 p JSON.parse(result)
 ```
@@ -2081,15 +2123,15 @@ System.out.println(response.toString());
 ```
 `GET /games/{game-id}/mods`
 
-Browse mods. Successful request will return an __array of mod objects__. To make your requests as specific to your needs as possible it's highly recommended reading over our [filtering documentation](https://docs.mod.io/#filtering) if it will help you with consuming this endpoint.
+Browse mods on mod.io. Successful request will return an array of [Mod Objects](https://docs.mod.io/#browse-mods). To make your requests as specific to your needs as possible it's highly recommended reading over our [filtering documentation](https://docs.mod.io/#filtering) if it will help you with consuming this endpoint.
      
      Filter|Type|Description
      ---|---|---
-     id|integer|Unique id of the mod.
-     game|integer|Unique id of the parent game.
-     member|integer|Unique id of the member who has ownership of the game.
-     datereg|integer|Unix timestamp of date registered.
-     dateup|integer|Unix timestamp of date updated.
+     id|integer(int32)|Unique id of the mod.
+     game|integer(int32)|Unique id of the parent game.
+     member|integer(int32)|Unique id of the member who has ownership of the game.
+     datereg|integer(int32)|Unix timestamp of date registered.
+     dateup|integer(int32)|Unix timestamp of date updated.
      logo|string|The filename of the logo.
      homepage|string|Official homepage of the mod.
      name|string|Name of the mod.
@@ -2097,15 +2139,10 @@ Browse mods. Successful request will return an __array of mod objects__. To make
      summary|string|Summary of the mod.
      description|string|An extension of the summary. HTML Supported.
      metadata|string|Comma-separated list of metadata words.
-     modfile|integer|Unique id of the __file__ object marked as current release.
+     modfile|integer(int32)|Unique id of the [Modfile Object](https://docs.mod.io/#modfile-object) marked as current release.
      price|double|Numeric representation of the price.
      status|string| _OAuth 2 only_. The status of the mod (only recognised by game admins), _default is 'auth'_.<br><br>*Fields Options:*<br>__unauth__ = Only return un-authorized mods.<br>__auth__ = Only return authorized mods _(default)_.<br>__ban__ = Only return banned mods.<br>__archive__ = Only return archived content (out of date builds).<br>__delete__ = Only return deleted mods.
 
-### Responses
-
-Status|Meaning|Description
----|---|---|
-200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)|Successful Request
 
 > Example responses
 
@@ -2119,10 +2156,9 @@ Status|Meaning|Description
         "id": 1,
         "nameid": "xant",
         "username": "XanT",
-        "permission": 1,
         "avatar": {
-          "full": "https://media.mod.io/images/members/1/1/1/masterchief.jpg",
-          "filename": "masterchief.jpg"
+          "filename": "masterchief.jpg",
+          "full": "https://media.mod.io/images/members/1/1/1/masterchief.jpg"
         },
         "timezone": "Australia/Brisbane",
         "language": "en",
@@ -2132,9 +2168,11 @@ Status|Meaning|Description
       "datereg": 1492564103,
       "dateup": 1499841487,
       "logo": {
+        "filename": "IMG_20170409_222419.jpg",
         "full": "https://media.mod.io/images/mods/1/1/2/IMG_20170409_222419.jpg",
-        "thumbnail": "https://media.mod.io/cache/images/mods/1/1/2/thumb_1020x2000/IMG_20170409_222419.jpg",
-        "filename": "IMG_20170409_222419.jpg"
+        "thumb_320x180": "https://media.mod.io/cache/images/mods/1/1/2/thumb_320x180/IMG_20170409_222419.jpg",
+        "thumb_640x360": "https://media.mod.io/cache/images/mods/1/1/2/thumb_640x360/IMG_20170409_222419.jpg",
+        "thumb_1280x720": "https://media.mod.io/cache/images/mods/1/1/2/thumb_1280x720/IMG_20170409_222419.jpg"
       },
       "homepage": "https://www.rogue-hdpack.com/",
       "name": "Rogue Knight HD Pack",
@@ -2150,10 +2188,9 @@ Status|Meaning|Description
           "id": 1,
           "nameid": "xant",
           "username": "XanT",
-          "permission": 1,
           "avatar": {
-            "full": "https://media.mod.io/images/members/1/1/1/masterchief.jpg",
-            "filename": "masterchief.jpg"
+            "filename": "masterchief.jpg",
+            "full": "https://media.mod.io/images/members/1/1/1/masterchief.jpg"
           },
           "timezone": "Australia/Brisbane",
           "language": "en",
@@ -2169,7 +2206,7 @@ Status|Meaning|Description
         "version": "1.3",
         "virustotal": "No threats found.",
         "changelog": "VERSION 1.3 -- Changes -- Fixed critical castle floor bug.",
-        "download": "https://cdn.mod.io/files/1/1/2/rogue-knight-v1.zip"
+        "download": "https://mod.io/mods/file/2/c489a0354111a4d76640d47f0cdcb294"
       },
       "media": {
         "youtube": [
@@ -2186,7 +2223,9 @@ Status|Meaning|Description
           }
         ]
       },
-      "tags": [],
+      "tags": [
+        null
+      ],
       "ratings": {
         "total": 1230,
         "positive": 1047,
@@ -2206,10 +2245,17 @@ Status|Meaning|Description
   "result_count": 100
 }
 ```
+<h3 id="Browse-Mods-responses">Responses</h3>
+
+Status|Meaning|Description|Response Schema
+---|---|---|---|
+200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)|Successful Request|[Browse_Mods](#schemabrowse_mods)
+
 <aside class="warning">
 To perform this operation, you must be authenticated by means of one of the following methods:
 apiKey, oauth2 ( Scopes: read )
 </aside>
+
 
 ## View Mod
 
@@ -2217,7 +2263,7 @@ apiKey, oauth2 ( Scopes: read )
 
 ```shell
 # You can also use wget
-curl -X get https://api.mod.io/v1/games/{game-id}/mods/{mod-id}?api_key=YourApiKey \
+curl -X GET https://api.mod.io/v1/games/{game-id}/mods/{mod-id}?api_key=YourApiKey \
   -H 'Accept: application/json'
 
 ```
@@ -2276,9 +2322,11 @@ headers = {
   'Accept' => 'application/json'
 }
 
-result = RestClient.get 'https://api.mod.io/v1/games/{game-id}/mods/{mod-id}', params: {
+result = RestClient.get 'https://api.mod.io/v1/games/{game-id}/mods/{mod-id}',
+  params: {
   'api_key' => 'string'
 }, headers: headers
+
 
 p JSON.parse(result)
 ```
@@ -2313,13 +2361,8 @@ System.out.println(response.toString());
 ```
 `GET /games/{game-id}/mods/{mod-id}`
 
-View a single mod. Successful request will return a single __mod object__.
+View a single mod on mod.io. Successful request will return a single [Mod Object](https://docs.mod.io/#mod-object).
 
-### Responses
-
-Status|Meaning|Description
----|---|---|
-200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)|Successful Request
 
 > Example responses
 
@@ -2331,10 +2374,9 @@ Status|Meaning|Description
     "id": 1,
     "nameid": "xant",
     "username": "XanT",
-    "permission": 1,
     "avatar": {
-      "full": "https://media.mod.io/images/members/1/1/1/masterchief.jpg",
-      "filename": "masterchief.jpg"
+      "filename": "masterchief.jpg",
+      "full": "https://media.mod.io/images/members/1/1/1/masterchief.jpg"
     },
     "timezone": "Australia/Brisbane",
     "language": "en",
@@ -2344,9 +2386,11 @@ Status|Meaning|Description
   "datereg": 1492564103,
   "dateup": 1499841487,
   "logo": {
+    "filename": "IMG_20170409_222419.jpg",
     "full": "https://media.mod.io/images/mods/1/1/2/IMG_20170409_222419.jpg",
-    "thumbnail": "https://media.mod.io/cache/images/mods/1/1/2/thumb_1020x2000/IMG_20170409_222419.jpg",
-    "filename": "IMG_20170409_222419.jpg"
+    "thumb_320x180": "https://media.mod.io/cache/images/mods/1/1/2/thumb_320x180/IMG_20170409_222419.jpg",
+    "thumb_640x360": "https://media.mod.io/cache/images/mods/1/1/2/thumb_640x360/IMG_20170409_222419.jpg",
+    "thumb_1280x720": "https://media.mod.io/cache/images/mods/1/1/2/thumb_1280x720/IMG_20170409_222419.jpg"
   },
   "homepage": "https://www.rogue-hdpack.com/",
   "name": "Rogue Knight HD Pack",
@@ -2362,10 +2406,9 @@ Status|Meaning|Description
       "id": 1,
       "nameid": "xant",
       "username": "XanT",
-      "permission": 1,
       "avatar": {
-        "full": "https://media.mod.io/images/members/1/1/1/masterchief.jpg",
-        "filename": "masterchief.jpg"
+        "filename": "masterchief.jpg",
+        "full": "https://media.mod.io/images/members/1/1/1/masterchief.jpg"
       },
       "timezone": "Australia/Brisbane",
       "language": "en",
@@ -2381,7 +2424,7 @@ Status|Meaning|Description
     "version": "1.3",
     "virustotal": "No threats found.",
     "changelog": "VERSION 1.3 -- Changes -- Fixed critical castle floor bug.",
-    "download": "https://cdn.mod.io/files/1/1/2/rogue-knight-v1.zip"
+    "download": "https://mod.io/mods/file/2/c489a0354111a4d76640d47f0cdcb294"
   },
   "media": {
     "youtube": [
@@ -2398,7 +2441,9 @@ Status|Meaning|Description
       }
     ]
   },
-  "tags": [],
+  "tags": [
+    null
+  ],
   "ratings": {
     "total": 1230,
     "positive": 1047,
@@ -2409,10 +2454,17 @@ Status|Meaning|Description
   }
 }
 ```
+<h3 id="View-Mod-responses">Responses</h3>
+
+Status|Meaning|Description|Response Schema
+---|---|---|---|
+200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)|Successful Request|[Mod_Object](#schemamod_object)
+
 <aside class="warning">
 To perform this operation, you must be authenticated by means of one of the following methods:
 apiKey, oauth2 ( Scopes: read )
 </aside>
+
 
 ## Add Mod
 
@@ -2420,7 +2472,7 @@ apiKey, oauth2 ( Scopes: read )
 
 ```shell
 # You can also use wget
-curl -X post https://api.mod.io/v1/games/{game-id}/mods \
+curl -X POST https://api.mod.io/v1/games/{game-id}/mods \
   -H 'Authorization: Bearer YourAccessToken' \
   -H 'Content-Type: multipart/form-data' \
   -H 'Accept: application/json'
@@ -2434,6 +2486,7 @@ Host: api.mod.io
 Accept: application/json
 Authorization: Bearer YourAccessToken
 Content-Type: multipart/form-data
+
 
 ```
 
@@ -2489,8 +2542,10 @@ headers = {
   'Accept' => 'application/json'
 }
 
-result = RestClient.post 'https://api.mod.io/v1/games/{game-id}/mods', params: {
+result = RestClient.post 'https://api.mod.io/v1/games/{game-id}/mods',
+  params: {
   }, headers: headers
+
 
 p JSON.parse(result)
 ```
@@ -2527,33 +2582,22 @@ System.out.println(response.toString());
 ```
 `POST /games/{game-id}/mods`
 
-Publish a mod on mod.io While some fields have been made optional for easier adding of mods to mod.io - please be as detailed as you can.
+Publish a mod on mod.io. Successful request will return the newly created [Mod Object](https://docs.mod.io/#mod-object).
      
      Parameter|Type|Required|Description
      ---|---|---|---|
-     logo|file|true|Image file which will represent your new mod logo. Must be gif, jpg, jpeg or png format and cannot exceed 8MB in filesize.
+     logo|file|true|Image file which will represent your new mod logo. Must be gif, jpg, jpeg or png format and cannot exceed 8MB in filesize. Dimensions must be at least 640x360 and is highly recommended that you supply a high resolution image in 16 / 9 resolution. mod.io will use this image to make three thumbnails for the dimensions 320x180, 640x360 and 1280x720.
      name|string|true|Name of your mod. Your default mod URL will contain the name so be sure to choose the most appropriate title. Example: Stellaris Shader Mod will become the URL stellaris-shader-mod.
      homepage|string|true|Official homepage for your mod, if you do not fill this out it will default to your mod.io profile. Must be a valid URL.
      summary|string|true|Summary for your mod, giving a brief overview of what it's about - cannot exceed 250 characters.
      price|double||Numeric only representation of the price if you intend to charge for your mod. Example: 19.99, 10.00.
-     stock|integer||Artificially limit the amount of times the mod can be purchased.
+     stock|integer(int32)||Artificially limit the amount of times the mod can be purchased.
      description|string||An extension of your summary. Include all information relevant to your mod including sections such as 'About', 'Features', 'Install Instructions', 'FAQ', etc. HTML supported and encouraged.
      metadata|string||Comma-separated list of metadata strings that are relevant to your mod.
      nameid|string||The unique SEO friendly URL for your game. Cannot exceed 80 characters.
-     modfile|integer||Unique id of the __file__ object to be labelled as the current release.
+     modfile|integer(int32)||Unique id of the [Modfile Object](https://docs.mod.io/#modfile-object) to be labelled as the current release.
      tags|array||An array of strings that represent what the mod has been tagged as, only tags that are supported by the parent game can be applied. To determine what tags are eligible, see the __cats__ tags on the connected game.
 
-### Responses
-
-Status|Meaning|Description
----|---|---|
-201|[Created](https://tools.ietf.org/html/rfc7231#section-6.3.2)|Resource Created
-
-### Response Headers
-
-Status|Header|Type|Format|Description
----|---|---|---|---|
-201|Location|string||URL to newly created resource
 
 > Example responses
 
@@ -2565,10 +2609,9 @@ Status|Header|Type|Format|Description
     "id": 1,
     "nameid": "xant",
     "username": "XanT",
-    "permission": 1,
     "avatar": {
-      "full": "https://media.mod.io/images/members/1/1/1/masterchief.jpg",
-      "filename": "masterchief.jpg"
+      "filename": "masterchief.jpg",
+      "full": "https://media.mod.io/images/members/1/1/1/masterchief.jpg"
     },
     "timezone": "Australia/Brisbane",
     "language": "en",
@@ -2578,9 +2621,11 @@ Status|Header|Type|Format|Description
   "datereg": 1492564103,
   "dateup": 1499841487,
   "logo": {
+    "filename": "IMG_20170409_222419.jpg",
     "full": "https://media.mod.io/images/mods/1/1/2/IMG_20170409_222419.jpg",
-    "thumbnail": "https://media.mod.io/cache/images/mods/1/1/2/thumb_1020x2000/IMG_20170409_222419.jpg",
-    "filename": "IMG_20170409_222419.jpg"
+    "thumb_320x180": "https://media.mod.io/cache/images/mods/1/1/2/thumb_320x180/IMG_20170409_222419.jpg",
+    "thumb_640x360": "https://media.mod.io/cache/images/mods/1/1/2/thumb_640x360/IMG_20170409_222419.jpg",
+    "thumb_1280x720": "https://media.mod.io/cache/images/mods/1/1/2/thumb_1280x720/IMG_20170409_222419.jpg"
   },
   "homepage": "https://www.rogue-hdpack.com/",
   "name": "Rogue Knight HD Pack",
@@ -2596,10 +2641,9 @@ Status|Header|Type|Format|Description
       "id": 1,
       "nameid": "xant",
       "username": "XanT",
-      "permission": 1,
       "avatar": {
-        "full": "https://media.mod.io/images/members/1/1/1/masterchief.jpg",
-        "filename": "masterchief.jpg"
+        "filename": "masterchief.jpg",
+        "full": "https://media.mod.io/images/members/1/1/1/masterchief.jpg"
       },
       "timezone": "Australia/Brisbane",
       "language": "en",
@@ -2615,7 +2659,7 @@ Status|Header|Type|Format|Description
     "version": "1.3",
     "virustotal": "No threats found.",
     "changelog": "VERSION 1.3 -- Changes -- Fixed critical castle floor bug.",
-    "download": "https://cdn.mod.io/files/1/1/2/rogue-knight-v1.zip"
+    "download": "https://mod.io/mods/file/2/c489a0354111a4d76640d47f0cdcb294"
   },
   "media": {
     "youtube": [
@@ -2632,7 +2676,9 @@ Status|Header|Type|Format|Description
       }
     ]
   },
-  "tags": [],
+  "tags": [
+    null
+  ],
   "ratings": {
     "total": 1230,
     "positive": 1047,
@@ -2643,10 +2689,23 @@ Status|Header|Type|Format|Description
   }
 }
 ```
+<h3 id="Add-Mod-responses">Responses</h3>
+
+Status|Meaning|Description|Response Schema
+---|---|---|---|
+201|[Created](https://tools.ietf.org/html/rfc7231#section-6.3.2)|Resource Created|[Mod_Object](#schemamod_object)
+
+### Response Headers
+
+Status|Header|Type|Format|Description
+---|---|---|---|---|
+201|Location|string||URL to newly created resource
+
 <aside class="warning">
 To perform this operation, you must be authenticated by means of one of the following methods:
 oauth2 ( Scopes: write )
 </aside>
+
 
 ## Edit Mod
 
@@ -2654,7 +2713,7 @@ oauth2 ( Scopes: write )
 
 ```shell
 # You can also use wget
-curl -X put https://api.mod.io/v1/games/{game-id}/mods/{mod-id} \
+curl -X PUT https://api.mod.io/v1/games/{game-id}/mods/{mod-id} \
   -H 'Authorization: Bearer YourAccessToken' \
   -H 'Content-Type: application/x-www-form-urlencoded' \
   -H 'Accept: application/json'
@@ -2668,6 +2727,7 @@ Host: api.mod.io
 Accept: application/json
 Authorization: Bearer YourAccessToken
 Content-Type: application/x-www-form-urlencoded
+
 
 ```
 
@@ -2723,8 +2783,10 @@ headers = {
   'Accept' => 'application/json'
 }
 
-result = RestClient.put 'https://api.mod.io/v1/games/{game-id}/mods/{mod-id}', params: {
+result = RestClient.put 'https://api.mod.io/v1/games/{game-id}/mods/{mod-id}',
+  params: {
   }, headers: headers
+
 
 p JSON.parse(result)
 ```
@@ -2769,17 +2831,12 @@ Edit details for a mod. If you wanting to update the media attached to this game
      homepage|string||Official homepage for your mod, if you do not fill this out it will default to your mod.io profile. Must be a valid URL.
      summary|string||Summary for your mod, giving a brief overview of what it's about - cannot exceed 250 characters.
      price|double||Numeric only representation of the price if you intend to charge for your mod. Example: 19.99, 10.00.
-     stock|integer||Artificially limit the amount of times the mod can be purchased.
+     stock|integer(int32)||Artificially limit the amount of times the mod can be purchased.
      description|string||An extension of your summary. Include all information relevant to your mod including sections such as 'About', 'Features', 'Install Instructions', 'FAQ', etc. HTML supported and encouraged.
      metadata|string||Comma-separated list of metadata strings that are relevant to your mod.
      nameid|string||The unique SEO friendly URL for your game. Cannot exceed 80 characters.
-     modfile|integer||Unique id of the __file__ object to be labelled as the current release.
+     modfile|integer(int32)||Unique id of the [Modfile Object](https://docs.mod.io/#modfile-object) to be labelled as the current release.
 
-### Responses
-
-Status|Meaning|Description
----|---|---|
-200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)|Update Successful
 
 > Example responses
 
@@ -2789,10 +2846,17 @@ Status|Meaning|Description
   "message": "You have successfully updated the specified mod profile."
 }
 ```
+<h3 id="Edit-Mod-responses">Responses</h3>
+
+Status|Meaning|Description|Response Schema
+---|---|---|---|
+200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)|Update Successful|[updateMod](#schemaupdatemod)
+
 <aside class="warning">
 To perform this operation, you must be authenticated by means of one of the following methods:
 oauth2 ( Scopes: write )
 </aside>
+
 
 ## Delete Mod
 
@@ -2800,7 +2864,7 @@ oauth2 ( Scopes: write )
 
 ```shell
 # You can also use wget
-curl -X delete https://api.mod.io/v1/games/{game-id}/mods/{mod-id} \
+curl -X DELETE https://api.mod.io/v1/games/{game-id}/mods/{mod-id} \
   -H 'Authorization: Bearer YourAccessToken' \
   -H 'Content-Type: application/x-www-form-urlencoded' \
   -H 'Accept: application/json'
@@ -2814,6 +2878,7 @@ Host: api.mod.io
 Accept: application/json
 Authorization: Bearer YourAccessToken
 Content-Type: application/x-www-form-urlencoded
+
 
 ```
 
@@ -2869,8 +2934,10 @@ headers = {
   'Accept' => 'application/json'
 }
 
-result = RestClient.delete 'https://api.mod.io/v1/games/{game-id}/mods/{mod-id}', params: {
+result = RestClient.delete 'https://api.mod.io/v1/games/{game-id}/mods/{mod-id}',
+  params: {
   }, headers: headers
+
 
 p JSON.parse(result)
 ```
@@ -2907,23 +2974,25 @@ System.out.println(response.toString());
 ```
 `DELETE /games/{game-id}/mods/{mod-id}`
 
-Delete a mod profile which will if successful will return `204 No Content`. Note this will close the mod profile which means it cannot be viewed or retrieved via API requests but will still exist in-case you choose to restore it at a later date. If you believe a mod should be permanently removed please [contact us](mailto:support@mod.io). <br /><br />Access Token **must** be present in `Authorization` header.
+Delete a mod profile which will if successful will return `204 No Content`. Note this will close the mod profile which means it cannot be viewed or retrieved via API requests but will still exist in-case you choose to restore it at a later date. If you believe a mod should be permanently removed please [contact us](mailto:support@mod.io).
 
-### Responses
-
-Status|Meaning|Description
----|---|---|
-204|[No Content](https://tools.ietf.org/html/rfc7231#section-6.3.5)|No Content
 
 > Example responses
 
 ```json
- 204 No Content 
+ "204 No Content" 
 ```
+<h3 id="Delete-Mod-responses">Responses</h3>
+
+Status|Meaning|Description|Response Schema
+---|---|---|---|
+204|[No Content](https://tools.ietf.org/html/rfc7231#section-6.3.5)|No Content|[204](#schema204)
+
 <aside class="warning">
 To perform this operation, you must be authenticated by means of one of the following methods:
 oauth2 ( Scopes: write )
 </aside>
+
 
 ## Add Mod Media
 
@@ -2931,7 +3000,7 @@ oauth2 ( Scopes: write )
 
 ```shell
 # You can also use wget
-curl -X post https://api.mod.io/v1/games/{game-id}/mods/{mod-id}/media \
+curl -X POST https://api.mod.io/v1/games/{game-id}/mods/{mod-id}/media \
   -H 'Authorization: Bearer YourAccessToken' \
   -H 'Content-Type: multipart/form-data' \
   -H 'Accept: application/json'
@@ -2945,6 +3014,7 @@ Host: api.mod.io
 Accept: application/json
 Authorization: Bearer YourAccessToken
 Content-Type: multipart/form-data
+
 
 ```
 
@@ -3000,8 +3070,10 @@ headers = {
   'Accept' => 'application/json'
 }
 
-result = RestClient.post 'https://api.mod.io/v1/games/{game-id}/mods/{mod-id}/media', params: {
+result = RestClient.post 'https://api.mod.io/v1/games/{game-id}/mods/{mod-id}/media',
+  params: {
   }, headers: headers
+
 
 p JSON.parse(result)
 ```
@@ -3042,22 +3114,11 @@ This endpoint is very flexible and will process any images posted to the endpoin
      
      Parameter|Type|Required|Description
      ---|---|---|---|
-     logo|file||Image file which will represent your new mod logo. Must be gif, jpg, jpeg or png format and cannot exceed 8MB in filesize.
+     logo|file||Image file which will represent your new mod logo. Must be gif, jpg, jpeg or png format and cannot exceed 8MB in filesize. Dimensions must be at least 640x360 and is highly recommended that you supply a high resolution image in 16 / 9 resolution. mod.io will use this image to make three thumbnails for the dimensions 320x180, 640x360 and 1280x720.
      images|zip||Zip archive of images to upload. Only valid gif, jpg, jpeg or png binary images within the zip file will be processed. The filename __must be images.zip__ if you are submitting an archive of images as any other name will be ignored. Alternatively you can POST one or more binary file images to this endpoint as their original file types without any compression.
      youtube|array||Full Youtube link(s) you want to add - example 'https://www.youtube.com/watch?v=IGVZOLV9SPo'
      sketchfab|array||Full Sketchfab link(s) you want to add - example 'https://sketchfab.com/models/71f04e390ff54e5f8d9a51b4e1caab7e'
 
-### Responses
-
-Status|Meaning|Description
----|---|---|
-201|[Created](https://tools.ietf.org/html/rfc7231#section-6.3.2)|Resource Created
-
-### Response Headers
-
-Status|Header|Type|Format|Description
----|---|---|---|---|
-201|Location|string||URL to newly created resource
 
 > Example responses
 
@@ -3067,10 +3128,23 @@ Status|Header|Type|Format|Description
   "message": "You have successfully added new media to the specified mod profile."
 }
 ```
+<h3 id="Add-Mod-Media-responses">Responses</h3>
+
+Status|Meaning|Description|Response Schema
+---|---|---|---|
+201|[Created](https://tools.ietf.org/html/rfc7231#section-6.3.2)|Resource Created|[updateMediaMod](#schemaupdatemediamod)
+
+### Response Headers
+
+Status|Header|Type|Format|Description
+---|---|---|---|---|
+201|Location|string||URL to newly created resource
+
 <aside class="warning">
 To perform this operation, you must be authenticated by means of one of the following methods:
 oauth2 ( Scopes: write )
 </aside>
+
 
 ## Delete Mod Media
 
@@ -3078,7 +3152,7 @@ oauth2 ( Scopes: write )
 
 ```shell
 # You can also use wget
-curl -X delete https://api.mod.io/v1/games/{game-id}/mods/{mod-id}/media \
+curl -X DELETE https://api.mod.io/v1/games/{game-id}/mods/{mod-id}/media \
   -H 'Authorization: Bearer YourAccessToken' \
   -H 'Content-Type: application/x-www-form-urlencoded' \
   -H 'Accept: application/json'
@@ -3092,6 +3166,7 @@ Host: api.mod.io
 Accept: application/json
 Authorization: Bearer YourAccessToken
 Content-Type: application/x-www-form-urlencoded
+
 
 ```
 
@@ -3147,8 +3222,10 @@ headers = {
   'Accept' => 'application/json'
 }
 
-result = RestClient.delete 'https://api.mod.io/v1/games/{game-id}/mods/{mod-id}/media', params: {
+result = RestClient.delete 'https://api.mod.io/v1/games/{game-id}/mods/{mod-id}/media',
+  params: {
   }, headers: headers
+
 
 p JSON.parse(result)
 ```
@@ -3194,21 +3271,23 @@ Delete images, sketchfab or youtube links from a mod profile which if successful
      sketchfab|array||Full Sketchfab link(s) you want to delete - example 'https://sketchfab.com/models/71f04e390ff54e5f8d9a51b4e1caab7e'.
      *     
 
-### Responses
-
-Status|Meaning|Description
----|---|---|
-204|[No Content](https://tools.ietf.org/html/rfc7231#section-6.3.5)|No Content
 
 > Example responses
 
 ```json
- 204 No Content 
+ "204 No Content" 
 ```
+<h3 id="Delete-Mod-Media-responses">Responses</h3>
+
+Status|Meaning|Description|Response Schema
+---|---|---|---|
+204|[No Content](https://tools.ietf.org/html/rfc7231#section-6.3.5)|No Content|[204](#schema204)
+
 <aside class="warning">
 To perform this operation, you must be authenticated by means of one of the following methods:
 oauth2 ( Scopes: write )
 </aside>
+
 
 ## Browse Mod Activity
 
@@ -3216,7 +3295,7 @@ oauth2 ( Scopes: write )
 
 ```shell
 # You can also use wget
-curl -X get https://api.mod.io/v1/games/{game-id}/mods/{mod-id}/activity?api_key=YourApiKey \
+curl -X GET https://api.mod.io/v1/games/{game-id}/mods/{mod-id}/activity?api_key=YourApiKey \
   -H 'Accept: application/json'
 
 ```
@@ -3275,9 +3354,11 @@ headers = {
   'Accept' => 'application/json'
 }
 
-result = RestClient.get 'https://api.mod.io/v1/games/{game-id}/mods/{mod-id}/activity', params: {
+result = RestClient.get 'https://api.mod.io/v1/games/{game-id}/mods/{mod-id}/activity',
+  params: {
   'api_key' => 'string'
 }, headers: headers
+
 
 p JSON.parse(result)
 ```
@@ -3312,20 +3393,15 @@ System.out.println(response.toString());
 ```
 `GET /games/{game-id}/mods/{mod-id}/activity`
 
-View activity for a mod, showing changes made to the resource. Successful request will return an __array of activity objects__. To make your requests as specific to your needs as possible it's highly recommended reading over our [filtering documentation](https://docs.mod.io/#filtering) if it will help you with consuming this endpoint.
+View activity for a mod, showing changes made to the resource. Successful request will return an array of [Mod Activity Objects](https://docs.mod.io/#mod-activity-object). To make your requests as specific to your needs as possible it's highly recommended reading over our [filtering documentation](https://docs.mod.io/#filtering) if it will help you with consuming this endpoint.
      
      Filter|Type|Description
      ---|---|---
-     id|integer|Unique id of the activity object.
-     member|integer|Unique id of the member who performed the action.
-     dateup|integer|Unix timestamp of date updated.
+     id|integer(int32)|Unique id of the activity object.
+     member|integer(int32)|Unique id of the member who performed the action.
+     dateup|integer(int32)|Unix timestamp of date updated.
      event|string|Type of change that occurred. Note that in the event of MOD_DELETE, this endpoint will be inaccessible as the mod profile would be closed, however if restored it would show the event in the activity history.<br><br>*Field Options*<br>__MOD_UPDATE__ - Update event<br>__MOD_DELETE__ - Delete event
 
-### Responses
-
-Status|Meaning|Description
----|---|---|
-200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)|Successful Request
 
 > Example responses
 
@@ -3338,10 +3414,9 @@ Status|Meaning|Description
         "id": 1,
         "nameid": "xant",
         "username": "XanT",
-        "permission": 1,
         "avatar": {
-          "full": "https://media.mod.io/images/members/1/1/1/masterchief.jpg",
-          "filename": "masterchief.jpg"
+          "filename": "masterchief.jpg",
+          "full": "https://media.mod.io/images/members/1/1/1/masterchief.jpg"
         },
         "timezone": "Australia/Brisbane",
         "language": "en",
@@ -3359,10 +3434,17 @@ Status|Meaning|Description
   ]
 }
 ```
+<h3 id="Browse-Mod-Activity-responses">Responses</h3>
+
+Status|Meaning|Description|Response Schema
+---|---|---|---|
+200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)|Successful Request|[Browse_Mod_Activity](#schemabrowse_mod_activity)
+
 <aside class="warning">
 To perform this operation, you must be authenticated by means of one of the following methods:
 apiKey, oauth2 ( Scopes: read )
 </aside>
+
 
 ## Browse Mod Files
 
@@ -3370,7 +3452,7 @@ apiKey, oauth2 ( Scopes: read )
 
 ```shell
 # You can also use wget
-curl -X get https://api.mod.io/v1/games/{game-id}/mods/{mod-id}/files?api_key=YourApiKey \
+curl -X GET https://api.mod.io/v1/games/{game-id}/mods/{mod-id}/files?api_key=YourApiKey \
   -H 'Accept: application/json'
 
 ```
@@ -3429,9 +3511,11 @@ headers = {
   'Accept' => 'application/json'
 }
 
-result = RestClient.get 'https://api.mod.io/v1/games/{game-id}/mods/{mod-id}/files', params: {
+result = RestClient.get 'https://api.mod.io/v1/games/{game-id}/mods/{mod-id}/files',
+  params: {
   'api_key' => 'string'
 }, headers: headers
+
 
 p JSON.parse(result)
 ```
@@ -3466,18 +3550,18 @@ System.out.println(response.toString());
 ```
 `GET /games/{game-id}/mods/{mod-id}/files`
 
-Browse files that are published for the corresponding mod. Successful request will return an __array of file objects__. To make your requests as specific to your needs as possible it's highly recommended reading over our [filtering documentation](https://docs.mod.io/#filtering) if it will help you with consuming this endpoint.
+Browse files on mod.io that are published for the corresponding mod. Successful request will return an [array of Modfile Objects](https://docs.mod.io/#browse-files). To make your requests as specific to your needs as possible it's highly recommended reading over our [filtering documentation](https://docs.mod.io/#filtering) if it will help you with consuming this endpoint.
      
      Filter|Type|Description
      ---|---|---
-     id|integer|Unique id of the file.
-     mod|integer|Unique id of the mod.
-     member|integer|Unique id of the member who published the file.
-     date|integer|Unix timestamp of date added.
-     datevirus|integer|Date it was last virus checked.
-     virusstatus|integer|Current file scan status of the file. For newly added files that have yet to be scanned this field could change frequently until a scan is complete.<br>*Field Options*<br><br>__0__ = Not scanned<br>__1__ = Scan complete<br>__2__ = In progress<br>__3__ = Too large to scan<br>__4__ = File not found<br>__5__ = Error Scanning
-     viruspositive|integer|Virus status of file<br>*Field Options*<br>__0__ = No threats detected<br>__1__ = Flagged as malicious
-     filesize|integer|Filesize of file in bytes.
+     id|integer(int32)|Unique id of the file.
+     mod|integer(int32)|Unique id of the mod.
+     member|integer(int32)|Unique id of the member who published the file.
+     date|integer(int32)|Unix timestamp of date added.
+     datevirus|integer(int32)|Date it was last virus checked.
+     virusstatus|integer(int32)|Current file scan status of the file. For newly added files that have yet to be scanned this field could change frequently until a scan is complete.<br>*Field Options*<br><br>__0__ = Not scanned<br>__1__ = Scan complete<br>__2__ = In progress<br>__3__ = Too large to scan<br>__4__ = File not found<br>__5__ = Error Scanning
+     viruspositive|integer(int32)|Virus status of file<br>*Field Options*<br>__0__ = No threats detected<br>__1__ = Flagged as malicious
+     filesize|integer(int32)|Filesize of file in bytes.
      filehash|string|MD5 hash of file.
      filename|string|Filename including extension.
      version|string|Version of file.
@@ -3485,11 +3569,6 @@ Browse files that are published for the corresponding mod. Successful request wi
      changelog|string|The changelog for the file.
      download|string|File download URL.
 
-### Responses
-
-Status|Meaning|Description
----|---|---|
-200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)|Successful Request
 
 > Example responses
 
@@ -3503,10 +3582,9 @@ Status|Meaning|Description
         "id": 1,
         "nameid": "xant",
         "username": "XanT",
-        "permission": 1,
         "avatar": {
-          "full": "https://media.mod.io/images/members/1/1/1/masterchief.jpg",
-          "filename": "masterchief.jpg"
+          "filename": "masterchief.jpg",
+          "full": "https://media.mod.io/images/members/1/1/1/masterchief.jpg"
         },
         "timezone": "Australia/Brisbane",
         "language": "en",
@@ -3534,10 +3612,17 @@ Status|Meaning|Description
   "result_count": 100
 }
 ```
+<h3 id="Browse-Mod-Files-responses">Responses</h3>
+
+Status|Meaning|Description|Response Schema
+---|---|---|---|
+200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)|Successful Request|[Browse_Files](#schemabrowse_files)
+
 <aside class="warning">
 To perform this operation, you must be authenticated by means of one of the following methods:
 apiKey, oauth2 ( Scopes: read )
 </aside>
+
 
 ## Add Mod File
 
@@ -3545,7 +3630,7 @@ apiKey, oauth2 ( Scopes: read )
 
 ```shell
 # You can also use wget
-curl -X post https://api.mod.io/v1/games/{game-id}/mods/{mod-id}/files \
+curl -X POST https://api.mod.io/v1/games/{game-id}/mods/{mod-id}/files \
   -H 'Authorization: Bearer YourAccessToken' \
   -H 'Content-Type: multipart/form-data' \
   -H 'Accept: application/json'
@@ -3559,6 +3644,7 @@ Host: api.mod.io
 Accept: application/json
 Authorization: Bearer YourAccessToken
 Content-Type: multipart/form-data
+
 
 ```
 
@@ -3614,8 +3700,10 @@ headers = {
   'Accept' => 'application/json'
 }
 
-result = RestClient.post 'https://api.mod.io/v1/games/{game-id}/mods/{mod-id}/files', params: {
+result = RestClient.post 'https://api.mod.io/v1/games/{game-id}/mods/{mod-id}/files',
+  params: {
   }, headers: headers
+
 
 p JSON.parse(result)
 ```
@@ -3652,7 +3740,7 @@ System.out.println(response.toString());
 ```
 `POST /games/{game-id}/mods/{mod-id}/files`
 
-Upload a file to a mod. Ensure that the release you are uploading is stable and free from any critical issues. Files are scanned upon upload, any users who upload malicious files will be have their accounts closed promptly. <br><br>*Note:* This endpoint does *not support* `input_json` even if you base64-encode your file method due to the already-large file sizes of some releases and base64-encoding inflating the filesize.
+Upload a file for the corresponding mod, upon success will return the newly created [Modfile Object](https://docs.mod.io/#modfile-object). Ensure that the release you are uploading is stable and free from any critical issues. Files are scanned upon upload, any users who upload malicious files will be have their accounts closed promptly. <br><br>*Note:* This endpoint does *not support* `input_json` even if you base64-encode your file method due to the already-large file sizes of some releases and base64-encoding inflating the filesize.
      
      Parameter|Type|Required|Description
      ---|---|---|---|
@@ -3660,18 +3748,8 @@ Upload a file to a mod. Ensure that the release you are uploading is stable and 
      version|string|true|Version of the file release.
      changelog|string|true|The changelog field you are updating. Updates for files are deliberately limited to the changelog field only, if you need to edit any other fields you should be uploading a new file and not editing an existing file.
      active|boolean||Label this upload as the current release, this will change the *modfile* field on the parent mod to the *id* field of this file after upload.
+     filehash|string||MD5 of the submitted file. When supplied, MD5 will be compared against calculated MD5 of _filedata_ binary file and will return `422 Unprocessible Entity` if md5 mis-match is detected.
 
-### Responses
-
-Status|Meaning|Description
----|---|---|
-201|[Created](https://tools.ietf.org/html/rfc7231#section-6.3.2)|Resource Created
-
-### Response Headers
-
-Status|Header|Type|Format|Description
----|---|---|---|---|
-201|Location|string||URL to newly created resource
 
 > Example responses
 
@@ -3683,10 +3761,9 @@ Status|Header|Type|Format|Description
     "id": 1,
     "nameid": "xant",
     "username": "XanT",
-    "permission": 1,
     "avatar": {
-      "full": "https://media.mod.io/images/members/1/1/1/masterchief.jpg",
-      "filename": "masterchief.jpg"
+      "filename": "masterchief.jpg",
+      "full": "https://media.mod.io/images/members/1/1/1/masterchief.jpg"
     },
     "timezone": "Australia/Brisbane",
     "language": "en",
@@ -3705,10 +3782,23 @@ Status|Header|Type|Format|Description
   "download": "https://mod.io/mods/file/2/c489a0354111a4d76640d47f0cdcb294"
 }
 ```
+<h3 id="Add-Mod-File-responses">Responses</h3>
+
+Status|Meaning|Description|Response Schema
+---|---|---|---|
+201|[Created](https://tools.ietf.org/html/rfc7231#section-6.3.2)|Resource Created|[Modfile_Object](#schemamodfile_object)
+
+### Response Headers
+
+Status|Header|Type|Format|Description
+---|---|---|---|---|
+201|Location|string||URL to newly created resource
+
 <aside class="warning">
 To perform this operation, you must be authenticated by means of one of the following methods:
 oauth2 ( Scopes: write )
 </aside>
+
 
 ## View Mod File
 
@@ -3716,7 +3806,7 @@ oauth2 ( Scopes: write )
 
 ```shell
 # You can also use wget
-curl -X get https://api.mod.io/v1/games/{game-id}/mods/{mod-id}/files/{file-id}?api_key=YourApiKey \
+curl -X GET https://api.mod.io/v1/games/{game-id}/mods/{mod-id}/files/{file-id}?api_key=YourApiKey \
   -H 'Accept: application/json'
 
 ```
@@ -3775,9 +3865,11 @@ headers = {
   'Accept' => 'application/json'
 }
 
-result = RestClient.get 'https://api.mod.io/v1/games/{game-id}/mods/{mod-id}/files/{file-id}', params: {
+result = RestClient.get 'https://api.mod.io/v1/games/{game-id}/mods/{mod-id}/files/{file-id}',
+  params: {
   'api_key' => 'string'
 }, headers: headers
+
 
 p JSON.parse(result)
 ```
@@ -3812,13 +3904,8 @@ System.out.println(response.toString());
 ```
 `GET /games/{game-id}/mods/{mod-id}/files/{file-id}`
 
-Find a file for the corresponding mod. Successful request will return a __file object__.
+Find a file on mod.io for the corresponding mod. Successful request will return a [single Modfile Object](--parse-docsurl/#modfile_object).
 
-### Responses
-
-Status|Meaning|Description
----|---|---|
-200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)|Successful Request
 
 > Example responses
 
@@ -3830,10 +3917,9 @@ Status|Meaning|Description
     "id": 1,
     "nameid": "xant",
     "username": "XanT",
-    "permission": 1,
     "avatar": {
-      "full": "https://media.mod.io/images/members/1/1/1/masterchief.jpg",
-      "filename": "masterchief.jpg"
+      "filename": "masterchief.jpg",
+      "full": "https://media.mod.io/images/members/1/1/1/masterchief.jpg"
     },
     "timezone": "Australia/Brisbane",
     "language": "en",
@@ -3852,10 +3938,17 @@ Status|Meaning|Description
   "download": "https://mod.io/mods/file/2/c489a0354111a4d76640d47f0cdcb294"
 }
 ```
+<h3 id="View-Mod-File-responses">Responses</h3>
+
+Status|Meaning|Description|Response Schema
+---|---|---|---|
+200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)|Successful Request|[Modfile_Object](#schemamodfile_object)
+
 <aside class="warning">
 To perform this operation, you must be authenticated by means of one of the following methods:
 apiKey, oauth2 ( Scopes: read )
 </aside>
+
 
 ## Edit Mod File
 
@@ -3863,7 +3956,7 @@ apiKey, oauth2 ( Scopes: read )
 
 ```shell
 # You can also use wget
-curl -X put https://api.mod.io/v1/games/{game-id}/mods/{mod-id}/files/{file-id} \
+curl -X PUT https://api.mod.io/v1/games/{game-id}/mods/{mod-id}/files/{file-id} \
   -H 'Authorization: Bearer YourAccessToken' \
   -H 'Content-Type: application/x-www-form-urlencoded' \
   -H 'Accept: application/json'
@@ -3877,6 +3970,7 @@ Host: api.mod.io
 Accept: application/json
 Authorization: Bearer YourAccessToken
 Content-Type: application/x-www-form-urlencoded
+
 
 ```
 
@@ -3932,8 +4026,10 @@ headers = {
   'Accept' => 'application/json'
 }
 
-result = RestClient.put 'https://api.mod.io/v1/games/{game-id}/mods/{mod-id}/files/{file-id}', params: {
+result = RestClient.put 'https://api.mod.io/v1/games/{game-id}/mods/{mod-id}/files/{file-id}',
+  params: {
   }, headers: headers
+
 
 p JSON.parse(result)
 ```
@@ -3977,11 +4073,6 @@ Update the details for a published file on mod.io. If you are wanting to update 
      changelog|string||The changelog field you are updating. Updates for files are deliberately limited to the *changelog* field and *active* fields only, if you need to edit any other fields you should be uploading a new file and not editing an existing file.
      active|boolean||Label this upload as the current release, this will change the *modfile* field on the parent mod to the *id* field of this file after upload.
 
-### Responses
-
-Status|Meaning|Description
----|---|---|
-200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)|Update Successful
 
 > Example responses
 
@@ -3991,18 +4082,25 @@ Status|Meaning|Description
   "message": "You have successfully updated the specified file."
 }
 ```
+<h3 id="Edit-Mod-File-responses">Responses</h3>
+
+Status|Meaning|Description|Response Schema
+---|---|---|---|
+200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)|Update Successful|[updateFile](#schemaupdatefile)
+
 <aside class="warning">
 To perform this operation, you must be authenticated by means of one of the following methods:
 oauth2 ( Scopes: write )
 </aside>
 
-## View Mod Tags
+
+## Browse Mod Tags
 
 > Code samples
 
 ```shell
 # You can also use wget
-curl -X get https://api.mod.io/v1/games/{game-id}/mods/{mod-id}/tags?api_key=YourApiKey \
+curl -X GET https://api.mod.io/v1/games/{game-id}/mods/{mod-id}/tags?api_key=YourApiKey \
   -H 'Accept: application/json'
 
 ```
@@ -4061,9 +4159,11 @@ headers = {
   'Accept' => 'application/json'
 }
 
-result = RestClient.get 'https://api.mod.io/v1/games/{game-id}/mods/{mod-id}/tags', params: {
+result = RestClient.get 'https://api.mod.io/v1/games/{game-id}/mods/{mod-id}/tags',
+  params: {
   'api_key' => 'string'
 }, headers: headers
+
 
 p JSON.parse(result)
 ```
@@ -4098,21 +4198,16 @@ System.out.println(response.toString());
 ```
 `GET /games/{game-id}/mods/{mod-id}/tags`
 
-View all tags for the specified mod, successful response will return an  __array of tag objects__. To make your requests as specific to your needs as possible it's highly recommended reading over our [filtering documentation](https://docs.mod.io/#filtering) if it will help you with consuming this endpoint.
+Browse all tags for the corresponding mod, successful response will return an array of [Mod Tag Objects](https://docs.mod.io/#mod-tag-object). To make your requests as specific to your needs as possible it's highly recommended reading over our [filtering documentation](https://docs.mod.io/#filtering) if it will help you with consuming this endpoint.
      
      Filter|Type|Description
      ---|---|---
-     game|integer|Unique id of the game.
-     mod|integer|Unique id of the mod.
-     date|integer|Unix timestamp of date added.
-     member|integer|Unique id of the member who added the tag.
+     game|integer(int32)|Unique id of the game.
+     mod|integer(int32)|Unique id of the mod.
+     date|integer(int32)|Unix timestamp of date added.
+     member|integer(int32)|Unique id of the member who added the tag.
      tag|string|String representation of the tag. You can check the eligible tags on the parent game object to determine all possible values for this field.
 
-### Responses
-
-Status|Meaning|Description
----|---|---|
-200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)|Successful Request
 
 > Example responses
 
@@ -4128,10 +4223,17 @@ Status|Meaning|Description
   ]
 }
 ```
+<h3 id="Browse-Mod-Tags-responses">Responses</h3>
+
+Status|Meaning|Description|Response Schema
+---|---|---|---|
+200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)|Successful Request|[Browse_Mod_Tags](#schemabrowse_mod_tags)
+
 <aside class="warning">
 To perform this operation, you must be authenticated by means of one of the following methods:
 apiKey, oauth2 ( Scopes: read )
 </aside>
+
 
 ## Add Mod Tag
 
@@ -4139,7 +4241,7 @@ apiKey, oauth2 ( Scopes: read )
 
 ```shell
 # You can also use wget
-curl -X post https://api.mod.io/v1/games/{game-id}/mods/{mod-id}/tags \
+curl -X POST https://api.mod.io/v1/games/{game-id}/mods/{mod-id}/tags \
   -H 'Authorization: Bearer YourAccessToken' \
   -H 'Content-Type: application/x-www-form-urlencoded' \
   -H 'Accept: application/json'
@@ -4153,6 +4255,7 @@ Host: api.mod.io
 Accept: application/json
 Authorization: Bearer YourAccessToken
 Content-Type: application/x-www-form-urlencoded
+
 
 ```
 
@@ -4208,8 +4311,10 @@ headers = {
   'Accept' => 'application/json'
 }
 
-result = RestClient.post 'https://api.mod.io/v1/games/{game-id}/mods/{mod-id}/tags', params: {
+result = RestClient.post 'https://api.mod.io/v1/games/{game-id}/mods/{mod-id}/tags',
+  params: {
   }, headers: headers
+
 
 p JSON.parse(result)
 ```
@@ -4254,11 +4359,6 @@ Add tags to a mod's profile. Note that you can only add what tags are allowed by
      ---|---|---|---|
      tags|array|true|The tags array containing at least one string representing a tag.
 
-### Responses
-
-Status|Meaning|Description
----|---|---|
-201|[Created](https://tools.ietf.org/html/rfc7231#section-6.3.2)|Created
 
 > Example responses
 
@@ -4268,10 +4368,17 @@ Status|Meaning|Description
   "message": "You have successfully added tags to the specified mod profile."
 }
 ```
+<h3 id="Add-Mod-Tag-responses">Responses</h3>
+
+Status|Meaning|Description|Response Schema
+---|---|---|---|
+201|[Created](https://tools.ietf.org/html/rfc7231#section-6.3.2)|Created|[addModTag](#schemaaddmodtag)
+
 <aside class="warning">
 To perform this operation, you must be authenticated by means of one of the following methods:
 oauth2 ( Scopes: write )
 </aside>
+
 
 ## Delete Mod Tag
 
@@ -4279,7 +4386,7 @@ oauth2 ( Scopes: write )
 
 ```shell
 # You can also use wget
-curl -X delete https://api.mod.io/v1/games/{game-id}/mods/{mod-id}/tags \
+curl -X DELETE https://api.mod.io/v1/games/{game-id}/mods/{mod-id}/tags \
   -H 'Authorization: Bearer YourAccessToken' \
   -H 'Content-Type: application/x-www-form-urlencoded' \
   -H 'Accept: application/json'
@@ -4293,6 +4400,7 @@ Host: api.mod.io
 Accept: application/json
 Authorization: Bearer YourAccessToken
 Content-Type: application/x-www-form-urlencoded
+
 
 ```
 
@@ -4348,8 +4456,10 @@ headers = {
   'Accept' => 'application/json'
 }
 
-result = RestClient.delete 'https://api.mod.io/v1/games/{game-id}/mods/{mod-id}/tags', params: {
+result = RestClient.delete 'https://api.mod.io/v1/games/{game-id}/mods/{mod-id}/tags',
+  params: {
   }, headers: headers
+
 
 p JSON.parse(result)
 ```
@@ -4392,21 +4502,23 @@ Delete one or more tags for a mod profile. Deleting tags is identical to adding 
      ---|---|---|---|
      tags|array|true|The tags array containing at least one string representing a tag.
 
-### Responses
-
-Status|Meaning|Description
----|---|---|
-204|[No Content](https://tools.ietf.org/html/rfc7231#section-6.3.5)|No Content
 
 > Example responses
 
 ```json
- 204 No Content 
+ "204 No Content" 
 ```
+<h3 id="Delete-Mod-Tag-responses">Responses</h3>
+
+Status|Meaning|Description|Response Schema
+---|---|---|---|
+204|[No Content](https://tools.ietf.org/html/rfc7231#section-6.3.5)|No Content|[204](#schema204)
+
 <aside class="warning">
 To perform this operation, you must be authenticated by means of one of the following methods:
 oauth2 ( Scopes: write )
 </aside>
+
 
 ## Add Mod Rating
 
@@ -4414,7 +4526,7 @@ oauth2 ( Scopes: write )
 
 ```shell
 # You can also use wget
-curl -X post https://api.mod.io/v1/games/{game-id}/mods/{mod-id}/ratings \
+curl -X POST https://api.mod.io/v1/games/{game-id}/mods/{mod-id}/ratings \
   -H 'Authorization: Bearer YourAccessToken' \
   -H 'Content-Type: application/x-www-form-urlencoded' \
   -H 'Accept: application/json'
@@ -4428,6 +4540,7 @@ Host: api.mod.io
 Accept: application/json
 Authorization: Bearer YourAccessToken
 Content-Type: application/x-www-form-urlencoded
+
 
 ```
 
@@ -4483,8 +4596,10 @@ headers = {
   'Accept' => 'application/json'
 }
 
-result = RestClient.post 'https://api.mod.io/v1/games/{game-id}/mods/{mod-id}/ratings', params: {
+result = RestClient.post 'https://api.mod.io/v1/games/{game-id}/mods/{mod-id}/ratings',
+  params: {
   }, headers: headers
+
 
 p JSON.parse(result)
 ```
@@ -4525,13 +4640,8 @@ Submit a positive or negative rating for a mod, equivalent of thumps up and thum
      
      Parameter|Type|Required|Description
      ---|---|---|---|
-     rating|integer|true|The value that determines what rating you submit for this mod.<br><br>*Field Options*<br>__1__ - Positive rating<br>__-1__ - Negative rating
+     rating|integer(int32)|true|The value that determines what rating you submit for this mod.<br><br>*Field Options*<br>__1__ - Positive rating<br>__-1__ - Negative rating
 
-### Responses
-
-Status|Meaning|Description
----|---|---|
-201|[Created](https://tools.ietf.org/html/rfc7231#section-6.3.2)|Resource created
 
 > Example responses
 
@@ -4541,10 +4651,17 @@ Status|Meaning|Description
   "message": "You have successfully submitted a rating for the specified mod profile."
 }
 ```
+<h3 id="Add-Mod-Rating-responses">Responses</h3>
+
+Status|Meaning|Description|Response Schema
+---|---|---|---|
+201|[Created](https://tools.ietf.org/html/rfc7231#section-6.3.2)|Resource created|[addRating](#schemaaddrating)
+
 <aside class="warning">
 To perform this operation, you must be authenticated by means of one of the following methods:
 oauth2 ( Scopes: write )
 </aside>
+
 
 ## Browse Mod Comments
 
@@ -4552,7 +4669,7 @@ oauth2 ( Scopes: write )
 
 ```shell
 # You can also use wget
-curl -X get https://api.mod.io/v1/games/{game-id}/mods/{mod-id}/comments?api_key=YourApiKey \
+curl -X GET https://api.mod.io/v1/games/{game-id}/mods/{mod-id}/comments?api_key=YourApiKey \
   -H 'Accept: application/json'
 
 ```
@@ -4611,9 +4728,11 @@ headers = {
   'Accept' => 'application/json'
 }
 
-result = RestClient.get 'https://api.mod.io/v1/games/{game-id}/mods/{mod-id}/comments', params: {
+result = RestClient.get 'https://api.mod.io/v1/games/{game-id}/mods/{mod-id}/comments',
+  params: {
   'api_key' => 'string'
 }, headers: headers
+
 
 p JSON.parse(result)
 ```
@@ -4648,7 +4767,7 @@ System.out.println(response.toString());
 ```
 `GET /games/{game-id}/mods/{mod-id}/comments`
 
-Browse all comments for a mod. Successful request will return an __array of comment objects__. To make your requests as specific to your needs as possible it's highly recommended reading over our [filtering documentation](https://docs.mod.io/#filtering) if it will help you with consuming this endpoint.
+Browse all comments for a mod. Successful request will return an array of [Comment Objects](https://docs.mod.io/#browse-comments). To make your requests as specific to your needs as possible it's highly recommended reading over our [filtering documentation](https://docs.mod.io/#filtering) if it will help you with consuming this endpoint.
      
      Filter|Type|Description
      ---|---|---
@@ -4662,11 +4781,6 @@ Browse all comments for a mod. Successful request will return an __array of comm
      karmago|integer|Good karma received from comment.
      summary|string|The contents of the comment.
 
-### Responses
-
-Status|Meaning|Description
----|---|---|
-200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)|OK
 
 > Example responses
 
@@ -4680,17 +4794,16 @@ Status|Meaning|Description
         "id": 1,
         "nameid": "xant",
         "username": "XanT",
-        "permission": 1,
         "avatar": {
-          "full": "https://media.mod.io/images/members/1/1/1/masterchief.jpg",
-          "filename": "masterchief.jpg"
+          "filename": "masterchief.jpg",
+          "full": "https://media.mod.io/images/members/1/1/1/masterchief.jpg"
         },
         "timezone": "Australia/Brisbane",
         "language": "en",
         "url": "https://mod.io/members/xant"
       },
       "date": 1499841487,
-      "replyid": 1499841487,
+      "replyid": 1499,
       "replypos": "01",
       "karma": 1,
       "karmago": 0,
@@ -4706,10 +4819,17 @@ Status|Meaning|Description
   "result_count": 100
 }
 ```
+<h3 id="Browse-Mod-Comments-responses">Responses</h3>
+
+Status|Meaning|Description|Response Schema
+---|---|---|---|
+200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)|OK|[Browse_Comments](#schemabrowse_comments)
+
 <aside class="warning">
 To perform this operation, you must be authenticated by means of one of the following methods:
 apiKey, oauth2 ( Scopes: read )
 </aside>
+
 
 ## View Mod Comment
 
@@ -4717,7 +4837,7 @@ apiKey, oauth2 ( Scopes: read )
 
 ```shell
 # You can also use wget
-curl -X get https://api.mod.io/v1/games/{game-id}/mods/{mod-id}/comments/{comment-id}?api_key=YourApiKey \
+curl -X GET https://api.mod.io/v1/games/{game-id}/mods/{mod-id}/comments/{comment-id}?api_key=YourApiKey \
   -H 'Accept: application/json'
 
 ```
@@ -4776,9 +4896,11 @@ headers = {
   'Accept' => 'application/json'
 }
 
-result = RestClient.get 'https://api.mod.io/v1/games/{game-id}/mods/{mod-id}/comments/{comment-id}', params: {
+result = RestClient.get 'https://api.mod.io/v1/games/{game-id}/mods/{mod-id}/comments/{comment-id}',
+  params: {
   'api_key' => 'string'
 }, headers: headers
+
 
 p JSON.parse(result)
 ```
@@ -4813,13 +4935,8 @@ System.out.println(response.toString());
 ```
 `GET /games/{game-id}/mods/{mod-id}/comments/{comment-id}`
 
-Find a comment by it's unique ID. Successful request will return a __comment object__.
+Find a comment by it's unique ID. Successful request will return a single [Comment Object](https://docs.mod.io/#comment-object).
 
-### Responses
-
-Status|Meaning|Description
----|---|---|
-200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)|OK
 
 > Example responses
 
@@ -4831,27 +4948,33 @@ Status|Meaning|Description
     "id": 1,
     "nameid": "xant",
     "username": "XanT",
-    "permission": 1,
     "avatar": {
-      "full": "https://media.mod.io/images/members/1/1/1/masterchief.jpg",
-      "filename": "masterchief.jpg"
+      "filename": "masterchief.jpg",
+      "full": "https://media.mod.io/images/members/1/1/1/masterchief.jpg"
     },
     "timezone": "Australia/Brisbane",
     "language": "en",
     "url": "https://mod.io/members/xant"
   },
   "date": 1499841487,
-  "replyid": 1499841487,
+  "replyid": 1499,
   "replypos": "01",
   "karma": 1,
   "karmago": 0,
   "summary": "This mod is kickass! Great work!"
 }
 ```
+<h3 id="View-Mod-Comment-responses">Responses</h3>
+
+Status|Meaning|Description|Response Schema
+---|---|---|---|
+200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)|OK|[Comment_Object](#schemacomment_object)
+
 <aside class="warning">
 To perform this operation, you must be authenticated by means of one of the following methods:
 apiKey, oauth2 ( Scopes: read )
 </aside>
+
 
 ## Delete Mod Comment
 
@@ -4859,7 +4982,7 @@ apiKey, oauth2 ( Scopes: read )
 
 ```shell
 # You can also use wget
-curl -X delete https://api.mod.io/v1/games/{game-id}/mods/{mod-id}/comments/{comment-id} \
+curl -X DELETE https://api.mod.io/v1/games/{game-id}/mods/{mod-id}/comments/{comment-id} \
   -H 'Authorization: Bearer YourAccessToken' \
   -H 'Content-Type: application/x-www-form-urlencoded' \
   -H 'Accept: application/json'
@@ -4873,6 +4996,7 @@ Host: api.mod.io
 Accept: application/json
 Authorization: Bearer YourAccessToken
 Content-Type: application/x-www-form-urlencoded
+
 
 ```
 
@@ -4928,8 +5052,10 @@ headers = {
   'Accept' => 'application/json'
 }
 
-result = RestClient.delete 'https://api.mod.io/v1/games/{game-id}/mods/{mod-id}/comments/{comment-id}', params: {
+result = RestClient.delete 'https://api.mod.io/v1/games/{game-id}/mods/{mod-id}/comments/{comment-id}',
+  params: {
   }, headers: headers
+
 
 p JSON.parse(result)
 ```
@@ -4968,21 +5094,23 @@ System.out.println(response.toString());
 
 Delete a comment from a mod profile.
 
-### Responses
-
-Status|Meaning|Description
----|---|---|
-204|[No Content](https://tools.ietf.org/html/rfc7231#section-6.3.5)|No Content
 
 > Example responses
 
 ```json
- 204 No Content 
+ "204 No Content" 
 ```
+<h3 id="Delete-Mod-Comment-responses">Responses</h3>
+
+Status|Meaning|Description|Response Schema
+---|---|---|---|
+204|[No Content](https://tools.ietf.org/html/rfc7231#section-6.3.5)|No Content|[204](#schema204)
+
 <aside class="warning">
 To perform this operation, you must be authenticated by means of one of the following methods:
 oauth2 ( Scopes: write )
 </aside>
+
 
 ## Browse Mod Team Members
 
@@ -4990,7 +5118,7 @@ oauth2 ( Scopes: write )
 
 ```shell
 # You can also use wget
-curl -X get https://api.mod.io/v1/games/{game-id}/mods/{mod-id}/team?api_key=YourApiKey \
+curl -X GET https://api.mod.io/v1/games/{game-id}/mods/{mod-id}/team?api_key=YourApiKey \
   -H 'Accept: application/json'
 
 ```
@@ -5049,9 +5177,11 @@ headers = {
   'Accept' => 'application/json'
 }
 
-result = RestClient.get 'https://api.mod.io/v1/games/{game-id}/mods/{mod-id}/team', params: {
+result = RestClient.get 'https://api.mod.io/v1/games/{game-id}/mods/{mod-id}/team',
+  params: {
   'api_key' => 'string'
 }, headers: headers
+
 
 p JSON.parse(result)
 ```
@@ -5086,18 +5216,17 @@ System.out.println(response.toString());
 ```
 `GET /games/{game-id}/mods/{mod-id}/team`
 
-View all members that are part of a mod team. Successful request will return an __array of access objects__. To make your requests as specific to your needs as possible it's highly recommended reading over our [filtering documentation](https://docs.mod.io/#filtering) if it will help you with consuming this endpoint.
+View all members that are part of a mod team. Successful request will return an array of [Access Objects](https://docs.mod.io/#browse-team). To make your requests as specific to your needs as possible it's highly recommended reading over our [filtering documentation](https://docs.mod.io/#filtering) if it will help you with consuming this endpoint.
 
-### Responses
-
-Status|Meaning|Description
----|---|---|
-200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)|Successful Request
 
 > Example responses
 
 ```json
 {
+  "cursor_id": 60,
+  "prev_id": 30,
+  "next_id": 160,
+  "result_count": 100,
   "data": [
     {
       "id": 457,
@@ -5105,10 +5234,9 @@ Status|Meaning|Description
         "id": 1,
         "nameid": "xant",
         "username": "XanT",
-        "permission": 1,
         "avatar": {
-          "full": "https://media.mod.io/images/members/1/1/1/masterchief.jpg",
-          "filename": "masterchief.jpg"
+          "filename": "masterchief.jpg",
+          "full": "https://media.mod.io/images/members/1/1/1/masterchief.jpg"
         },
         "timezone": "Australia/Brisbane",
         "language": "en",
@@ -5118,21 +5246,21 @@ Status|Meaning|Description
       "level": 8,
       "date": 1492058857,
       "position": "Supreme Overlord"
-    },
-    {
-        ...
     }
-  ],
-  "cursor_id": 60,
-  "prev_id": 30,
-  "next_id": 160,
-  "result_count": 100
+  ]
 }
 ```
+<h3 id="Browse-Mod-Team-Members-responses">Responses</h3>
+
+Status|Meaning|Description|Response Schema
+---|---|---|---|
+200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)|Successful Request|[Browse_Team](#schemabrowse_team)
+
 <aside class="warning">
 To perform this operation, you must be authenticated by means of one of the following methods:
 apiKey, oauth2 ( Scopes: read )
 </aside>
+
 
 ## Add Mod Team Member
 
@@ -5140,7 +5268,7 @@ apiKey, oauth2 ( Scopes: read )
 
 ```shell
 # You can also use wget
-curl -X post https://api.mod.io/v1/games/{game-id}/mods/{mod-id}/team \
+curl -X POST https://api.mod.io/v1/games/{game-id}/mods/{mod-id}/team \
   -H 'Authorization: Bearer YourAccessToken' \
   -H 'Content-Type: application/x-www-form-urlencoded' \
   -H 'Accept: application/json'
@@ -5154,6 +5282,7 @@ Host: api.mod.io
 Accept: application/json
 Authorization: Bearer YourAccessToken
 Content-Type: application/x-www-form-urlencoded
+
 
 ```
 
@@ -5209,8 +5338,10 @@ headers = {
   'Accept' => 'application/json'
 }
 
-result = RestClient.post 'https://api.mod.io/v1/games/{game-id}/mods/{mod-id}/team', params: {
+result = RestClient.post 'https://api.mod.io/v1/games/{game-id}/mods/{mod-id}/team',
+  params: {
   }, headers: headers
+
 
 p JSON.parse(result)
 ```
@@ -5255,11 +5386,6 @@ Add a member to a mod team.
      level|integer|true|The level of permissions you want to give to the user.<br><br>*Fields Options:*<br>__1__ = Moderator (can moderate comments and content attached)<br>__4__ = Creator (can upload builds and edit all settings except supply and existing team members)<br>__8__ = Administrator (full access, including editing the supply and team)
      position|string|true|The title you wish to apply to the member within your team.
 
-### Responses
-
-Status|Meaning|Description
----|---|---|
-201|[Created](https://tools.ietf.org/html/rfc7231#section-6.3.2)|Created
 
 > Example responses
 
@@ -5269,10 +5395,17 @@ Status|Meaning|Description
   "message": "You have successfully added a member to the specified team."
 }
 ```
+<h3 id="Add-Mod-Team-Member-responses">Responses</h3>
+
+Status|Meaning|Description|Response Schema
+---|---|---|---|
+201|[Created](https://tools.ietf.org/html/rfc7231#section-6.3.2)|Created|[addTeam](#schemaaddteam)
+
 <aside class="warning">
 To perform this operation, you must be authenticated by means of one of the following methods:
 oauth2 ( Scopes: write )
 </aside>
+
 
 ## Update Mod Team Member
 
@@ -5280,7 +5413,7 @@ oauth2 ( Scopes: write )
 
 ```shell
 # You can also use wget
-curl -X put https://api.mod.io/v1/games/{game-id}/mods/{mod-id}/team/{access-id} \
+curl -X PUT https://api.mod.io/v1/games/{game-id}/mods/{mod-id}/team/{access-id} \
   -H 'Authorization: Bearer YourAccessToken' \
   -H 'Content-Type: application/x-www-form-urlencoded' \
   -H 'Accept: application/json'
@@ -5294,6 +5427,7 @@ Host: api.mod.io
 Accept: application/json
 Authorization: Bearer YourAccessToken
 Content-Type: application/x-www-form-urlencoded
+
 
 ```
 
@@ -5349,8 +5483,10 @@ headers = {
   'Accept' => 'application/json'
 }
 
-result = RestClient.put 'https://api.mod.io/v1/games/{game-id}/mods/{mod-id}/team/{access-id}', params: {
+result = RestClient.put 'https://api.mod.io/v1/games/{game-id}/mods/{mod-id}/team/{access-id}',
+  params: {
   }, headers: headers
+
 
 p JSON.parse(result)
 ```
@@ -5394,11 +5530,6 @@ Update the details of a member who is currently a part of the specified mod team
      level|integer||The level of permissions you want to give to the user.<br><br>*Fields Options:*<br>__1__ = Moderator (can moderate comments and content attached)<br>__4__ = Creator (can upload builds and edit all settings except supply and existing team members)<br>__8__ = Administrator (full access, including editing the supply and team)
      position|string||The title you wish to apply to the member within your team.
 
-### Responses
-
-Status|Meaning|Description
----|---|---|
-200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)|OK
 
 > Example responses
 
@@ -5408,10 +5539,17 @@ Status|Meaning|Description
   "message": "You have successfully updated the specified team members details."
 }
 ```
+<h3 id="Update-Mod-Team-Member-responses">Responses</h3>
+
+Status|Meaning|Description|Response Schema
+---|---|---|---|
+200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)|OK|[updateTeam](#schemaupdateteam)
+
 <aside class="warning">
 To perform this operation, you must be authenticated by means of one of the following methods:
 oauth2 ( Scopes: write )
 </aside>
+
 
 ## Delete Mod Team Member
 
@@ -5419,7 +5557,7 @@ oauth2 ( Scopes: write )
 
 ```shell
 # You can also use wget
-curl -X delete https://api.mod.io/v1/games/{game-id}/mods/{mod-id}/team/{access-id} \
+curl -X DELETE https://api.mod.io/v1/games/{game-id}/mods/{mod-id}/team/{access-id} \
   -H 'Authorization: Bearer YourAccessToken' \
   -H 'Content-Type: application/x-www-form-urlencoded' \
   -H 'Accept: application/json'
@@ -5433,6 +5571,7 @@ Host: api.mod.io
 Accept: application/json
 Authorization: Bearer YourAccessToken
 Content-Type: application/x-www-form-urlencoded
+
 
 ```
 
@@ -5488,8 +5627,10 @@ headers = {
   'Accept' => 'application/json'
 }
 
-result = RestClient.delete 'https://api.mod.io/v1/games/{game-id}/mods/{mod-id}/team/{access-id}', params: {
+result = RestClient.delete 'https://api.mod.io/v1/games/{game-id}/mods/{mod-id}/team/{access-id}',
+  params: {
   }, headers: headers
+
 
 p JSON.parse(result)
 ```
@@ -5528,21 +5669,23 @@ System.out.println(response.toString());
 
 Remove a member from a mod team. This will revoke their access rights if they are not the original creator of the resource.
 
-### Responses
-
-Status|Meaning|Description
----|---|---|
-204|[No Content](https://tools.ietf.org/html/rfc7231#section-6.3.5)|No Content
 
 > Example responses
 
 ```json
- 204 No Content 
+ "204 No Content" 
 ```
+<h3 id="Delete-Mod-Team-Member-responses">Responses</h3>
+
+Status|Meaning|Description|Response Schema
+---|---|---|---|
+204|[No Content](https://tools.ietf.org/html/rfc7231#section-6.3.5)|No Content|[204](#schema204)
+
 <aside class="warning">
 To perform this operation, you must be authenticated by means of one of the following methods:
 oauth2 ( Scopes: write )
 </aside>
+
 
 # Users
 
@@ -5552,7 +5695,7 @@ oauth2 ( Scopes: write )
 
 ```shell
 # You can also use wget
-curl -X get https://api.mod.io/v1/users?api_key=YourApiKey \
+curl -X GET https://api.mod.io/v1/users?api_key=YourApiKey \
   -H 'Accept: application/json'
 
 ```
@@ -5611,9 +5754,11 @@ headers = {
   'Accept' => 'application/json'
 }
 
-result = RestClient.get 'https://api.mod.io/v1/users', params: {
+result = RestClient.get 'https://api.mod.io/v1/users',
+  params: {
   'api_key' => 'string'
 }, headers: headers
+
 
 p JSON.parse(result)
 ```
@@ -5652,18 +5797,13 @@ Browse users registered to mod.io. Successful request will return an __array of 
      
      Filter|Type|Description
      ---|---|---
-     id|integer|Unique id of the user.
+     id|integer(int32)|Unique id of the user.
      nameid|string|SEO-friendly representation of the username. This is the same field that forms the URL link to their profile.
      username|string|Username of the member.
      permission|string|Status of the user account.<br><br>*Field Options*<br>__0__ = Unauthorized<br>__1__ = Authorized<br>__2__ = Banned<br>__3__ = Archived<br>__4__ = Deleted
      timezone|string|Timezone of the user, format is country/city.
      language|string|2-character representation of language.
 
-### Responses
-
-Status|Meaning|Description
----|---|---|
-200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)|OK
 
 > Example responses
 
@@ -5674,10 +5814,9 @@ Status|Meaning|Description
       "id": 1,
       "nameid": "xant",
       "username": "XanT",
-      "permission": 1,
       "avatar": {
-        "full": "https://media.mod.io/images/members/1/1/1/masterchief.jpg",
-        "filename": "masterchief.jpg"
+        "filename": "masterchief.jpg",
+        "full": "https://media.mod.io/images/members/1/1/1/masterchief.jpg"
       },
       "timezone": "Australia/Brisbane",
       "language": "en",
@@ -5693,10 +5832,17 @@ Status|Meaning|Description
   "result_count": 100
 }
 ```
+<h3 id="Browse-Users-responses">Responses</h3>
+
+Status|Meaning|Description|Response Schema
+---|---|---|---|
+200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)|OK|[Browse_Users](#schemabrowse_users)
+
 <aside class="warning">
 To perform this operation, you must be authenticated by means of one of the following methods:
 apiKey, oauth2 ( Scopes: read )
 </aside>
+
 
 ## View User
 
@@ -5704,7 +5850,7 @@ apiKey, oauth2 ( Scopes: read )
 
 ```shell
 # You can also use wget
-curl -X get https://api.mod.io/v1/users/{user-id}?api_key=YourApiKey \
+curl -X GET https://api.mod.io/v1/users/{user-id}?api_key=YourApiKey \
   -H 'Accept: application/json'
 
 ```
@@ -5763,9 +5909,11 @@ headers = {
   'Accept' => 'application/json'
 }
 
-result = RestClient.get 'https://api.mod.io/v1/users/{user-id}', params: {
+result = RestClient.get 'https://api.mod.io/v1/users/{user-id}',
+  params: {
   'api_key' => 'string'
 }, headers: headers
+
 
 p JSON.parse(result)
 ```
@@ -5800,13 +5948,8 @@ System.out.println(response.toString());
 ```
 `GET /users/{user-id}`
 
-Find a user by their unique member id. Successful request will return a single __user object__.
+Find a user by their unique member id. Successful request will return a single __member object__.
 
-### Responses
-
-Status|Meaning|Description
----|---|---|
-200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)|OK
 
 > Example responses
 
@@ -5815,20 +5958,26 @@ Status|Meaning|Description
   "id": 1,
   "nameid": "xant",
   "username": "XanT",
-  "permission": 1,
   "avatar": {
-    "full": "https://media.mod.io/images/members/1/1/1/masterchief.jpg",
-    "filename": "masterchief.jpg"
+    "filename": "masterchief.jpg",
+    "full": "https://media.mod.io/images/members/1/1/1/masterchief.jpg"
   },
   "timezone": "Australia/Brisbane",
   "language": "en",
   "url": "https://mod.io/members/xant"
 }
 ```
+<h3 id="View-User-responses">Responses</h3>
+
+Status|Meaning|Description|Response Schema
+---|---|---|---|
+200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)|OK|[Member_Object](#schemamember_object)
+
 <aside class="warning">
 To perform this operation, you must be authenticated by means of one of the following methods:
 apiKey, oauth2 ( Scopes: read )
 </aside>
+
 
 ## View Resource Ownership
 
@@ -5836,7 +5985,7 @@ apiKey, oauth2 ( Scopes: read )
 
 ```shell
 # You can also use wget
-curl -X post https://api.mod.io/v1/general/ownership \
+curl -X POST https://api.mod.io/v1/general/ownership \
   -H 'Authorization: Bearer YourAccessToken' \
   -H 'Content-Type: application/x-www-form-urlencoded' \
   -H 'Accept: application/json'
@@ -5850,6 +5999,7 @@ Host: api.mod.io
 Accept: application/json
 Authorization: Bearer YourAccessToken
 Content-Type: application/x-www-form-urlencoded
+
 
 ```
 
@@ -5905,8 +6055,10 @@ headers = {
   'Accept' => 'application/json'
 }
 
-result = RestClient.post 'https://api.mod.io/v1/general/ownership', params: {
+result = RestClient.post 'https://api.mod.io/v1/general/ownership',
+  params: {
   }, headers: headers
+
 
 p JSON.parse(result)
 ```
@@ -5948,14 +6100,9 @@ Determine if a specified user has ownership rights to a resource.
      Parameter|Type|Required|Description
      ---|---|---|---|
      resource|string|true|The name of the resource type you are checking against a member - __must__ be one of the following values.<br><br>*Field options*<br>__games__<br>__mods__<br>__files__<br>__tags__<br>__users__.
-     id|integer|true|Unique Id of the resource to check access rights for.
-     member|integer|true|Unique Id of the member you are determining has access to the resource id.
+     id|integer(int32)|true|Unique Id of the resource to check access rights for.
+     member|integer(int32)|true|Unique Id of the member you are determining has access to the resource id.
 
-### Responses
-
-Status|Meaning|Description
----|---|---|
-200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)|Successful Request
 
 > Example responses
 
@@ -5966,10 +6113,17 @@ Status|Meaning|Description
   "ownership": true
 }
 ```
+<h3 id="View-Resource-Ownership-responses">Responses</h3>
+
+Status|Meaning|Description|Response Schema
+---|---|---|---|
+200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)|Successful Request|[Ownership_Object](#schemaownership_object)
+
 <aside class="warning">
 To perform this operation, you must be authenticated by means of one of the following methods:
 apiKey, oauth2 ( Scopes: read )
 </aside>
+
 
 ## View Resource Price
 
@@ -5977,7 +6131,7 @@ apiKey, oauth2 ( Scopes: read )
 
 ```shell
 # You can also use wget
-curl -X post https://api.mod.io/v1/general/price \
+curl -X POST https://api.mod.io/v1/general/price \
   -H 'Authorization: Bearer YourAccessToken' \
   -H 'Content-Type: application/x-www-form-urlencoded' \
   -H 'Accept: application/json'
@@ -5991,6 +6145,7 @@ Host: api.mod.io
 Accept: application/json
 Authorization: Bearer YourAccessToken
 Content-Type: application/x-www-form-urlencoded
+
 
 ```
 
@@ -6046,8 +6201,10 @@ headers = {
   'Accept' => 'application/json'
 }
 
-result = RestClient.post 'https://api.mod.io/v1/general/price', params: {
+result = RestClient.post 'https://api.mod.io/v1/general/price',
+  params: {
   }, headers: headers
+
 
 p JSON.parse(result)
 ```
@@ -6089,13 +6246,8 @@ View the price of a requested resource, if the requested resource is able to be 
      Parameter|Type|Required|Description
      ---|---|---|---|
      resource|string|true|The name of the resource type you are checking a price for - __must__ be one of the following values.<br><br>*Field options*<br>__games__<br>__mods__.
-     id|integer|true|Unique Id of the resource that contains the price.
+     id|integer(int32)|true|Unique Id of the resource that contains the price.
 
-### Responses
-
-Status|Meaning|Description
----|---|---|
-200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)|OK
 
 > Example responses
 
@@ -6106,10 +6258,17 @@ Status|Meaning|Description
   "price": 19.99
 }
 ```
+<h3 id="View-Resource-Price-responses">Responses</h3>
+
+Status|Meaning|Description|Response Schema
+---|---|---|---|
+200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)|OK|[Price_Object](#schemaprice_object)
+
 <aside class="warning">
 To perform this operation, you must be authenticated by means of one of the following methods:
 apiKey, oauth2 ( Scopes: read )
 </aside>
+
 
 # Me
 
@@ -6119,7 +6278,7 @@ apiKey, oauth2 ( Scopes: read )
 
 ```shell
 # You can also use wget
-curl -X get https://api.mod.io/v1/me/games \
+curl -X GET https://api.mod.io/v1/me/games \
   -H 'Authorization: Bearer YourAccessToken' \
   -H 'Accept: application/json'
 
@@ -6131,6 +6290,7 @@ Host: api.mod.io
 
 Accept: application/json
 Authorization: Bearer YourAccessToken
+
 
 ```
 
@@ -6183,8 +6343,10 @@ headers = {
   'Accept' => 'application/json'
 }
 
-result = RestClient.get 'https://api.mod.io/v1/me/games', params: {
+result = RestClient.get 'https://api.mod.io/v1/me/games',
+  params: {
   }, headers: headers
+
 
 p JSON.parse(result)
 ```
@@ -6222,11 +6384,6 @@ System.out.println(response.toString());
 
 View all mod.io games that exist for the *authenticated user*.
 
-### Responses
-
-Status|Meaning|Description
----|---|---|
-200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)|Request Successful
 
 > Example responses
 
@@ -6239,10 +6396,9 @@ Status|Meaning|Description
         "id": 1,
         "nameid": "xant",
         "username": "XanT",
-        "permission": 1,
         "avatar": {
-          "full": "https://media.mod.io/images/members/1/1/1/masterchief.jpg",
-          "filename": "masterchief.jpg"
+          "filename": "masterchief.jpg",
+          "full": "https://media.mod.io/images/members/1/1/1/masterchief.jpg"
         },
         "timezone": "Australia/Brisbane",
         "language": "en",
@@ -6258,18 +6414,20 @@ Status|Meaning|Description
       "api": 3,
       "ugcname": "map",
       "icon": {
-        "full": "https://media.mod.io/images/games/1/1/2/icon.png",
-        "thumbnail": "https://media.mod.io/cache/images/mods/1/1/2/crop_320x180/icon.png",
-        "filename": "icon.png"
+        "filename": "IMG_20170409_222419.jpg",
+        "full": "https://media.mod.io/images/mods/1/1/2/icon.png",
+        "thumb_320x180": "https://media.mod.io/cache/images/mods/1/1/2/thumb_320x180/icon.png"
       },
       "logo": {
-        "full": "https://media.mod.io/images/games/1/1/2/gamelogo.jpg",
-        "thumbnail": "https://media.mod.io/cache/images/mods/1/1/2/thumb_1020x2000/gamelogo.jpg",
-        "filename": "gamelogo.jpg"
+        "filename": "IMG_20170409_222419.jpg",
+        "full": "https://media.mod.io/images/mods/1/1/2/IMG_20170409_222419.jpg",
+        "thumb_320x180": "https://media.mod.io/cache/images/mods/1/1/2/thumb_320x180/IMG_20170409_222419.jpg",
+        "thumb_640x360": "https://media.mod.io/cache/images/mods/1/1/2/thumb_640x360/IMG_20170409_222419.jpg",
+        "thumb_1280x720": "https://media.mod.io/cache/images/mods/1/1/2/thumb_1280x720/IMG_20170409_222419.jpg"
       },
       "header": {
-        "full": "https://media.mod.io/images/games/1/1/2/gameheader.png",
-        "filename": "gameheader.png"
+        "filename": "gameheader.png",
+        "full": "https://media.mod.io/images/games/1/1/2/gameheader.png"
       },
       "homepage": "https://www.rogue-knight-game.com/",
       "name": "Rogue Knight",
@@ -6298,10 +6456,17 @@ Status|Meaning|Description
   "result_count": 100
 }
 ```
+<h3 id="View-User-Games-responses">Responses</h3>
+
+Status|Meaning|Description|Response Schema
+---|---|---|---|
+200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)|Request Successful|[Browse_Games](#schemabrowse_games)
+
 <aside class="warning">
 To perform this operation, you must be authenticated by means of one of the following methods:
 oauth2 ( Scopes: read )
 </aside>
+
 
 ## View User Mods
 
@@ -6309,7 +6474,7 @@ oauth2 ( Scopes: read )
 
 ```shell
 # You can also use wget
-curl -X get https://api.mod.io/v1/me/mods \
+curl -X GET https://api.mod.io/v1/me/mods \
   -H 'Authorization: Bearer YourAccessToken' \
   -H 'Accept: application/json'
 
@@ -6321,6 +6486,7 @@ Host: api.mod.io
 
 Accept: application/json
 Authorization: Bearer YourAccessToken
+
 
 ```
 
@@ -6373,8 +6539,10 @@ headers = {
   'Accept' => 'application/json'
 }
 
-result = RestClient.get 'https://api.mod.io/v1/me/mods', params: {
+result = RestClient.get 'https://api.mod.io/v1/me/mods',
+  params: {
   }, headers: headers
+
 
 p JSON.parse(result)
 ```
@@ -6412,11 +6580,6 @@ System.out.println(response.toString());
 
 View all mod.io mods that exist for the *authenticated user*.
 
-### Responses
-
-Status|Meaning|Description
----|---|---|
-200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)|Request Successful
 
 > Example responses
 
@@ -6430,10 +6593,9 @@ Status|Meaning|Description
         "id": 1,
         "nameid": "xant",
         "username": "XanT",
-        "permission": 1,
         "avatar": {
-          "full": "https://media.mod.io/images/members/1/1/1/masterchief.jpg",
-          "filename": "masterchief.jpg"
+          "filename": "masterchief.jpg",
+          "full": "https://media.mod.io/images/members/1/1/1/masterchief.jpg"
         },
         "timezone": "Australia/Brisbane",
         "language": "en",
@@ -6443,9 +6605,11 @@ Status|Meaning|Description
       "datereg": 1492564103,
       "dateup": 1499841487,
       "logo": {
+        "filename": "IMG_20170409_222419.jpg",
         "full": "https://media.mod.io/images/mods/1/1/2/IMG_20170409_222419.jpg",
-        "thumbnail": "https://media.mod.io/cache/images/mods/1/1/2/thumb_1020x2000/IMG_20170409_222419.jpg",
-        "filename": "IMG_20170409_222419.jpg"
+        "thumb_320x180": "https://media.mod.io/cache/images/mods/1/1/2/thumb_320x180/IMG_20170409_222419.jpg",
+        "thumb_640x360": "https://media.mod.io/cache/images/mods/1/1/2/thumb_640x360/IMG_20170409_222419.jpg",
+        "thumb_1280x720": "https://media.mod.io/cache/images/mods/1/1/2/thumb_1280x720/IMG_20170409_222419.jpg"
       },
       "homepage": "https://www.rogue-hdpack.com/",
       "name": "Rogue Knight HD Pack",
@@ -6461,10 +6625,9 @@ Status|Meaning|Description
           "id": 1,
           "nameid": "xant",
           "username": "XanT",
-          "permission": 1,
           "avatar": {
-            "full": "https://media.mod.io/images/members/1/1/1/masterchief.jpg",
-            "filename": "masterchief.jpg"
+            "filename": "masterchief.jpg",
+            "full": "https://media.mod.io/images/members/1/1/1/masterchief.jpg"
           },
           "timezone": "Australia/Brisbane",
           "language": "en",
@@ -6480,7 +6643,7 @@ Status|Meaning|Description
         "version": "1.3",
         "virustotal": "No threats found.",
         "changelog": "VERSION 1.3 -- Changes -- Fixed critical castle floor bug.",
-        "download": "https://cdn.mod.io/files/1/1/2/rogue-knight-v1.zip"
+        "download": "https://mod.io/mods/file/2/c489a0354111a4d76640d47f0cdcb294"
       },
       "media": {
         "youtube": [
@@ -6497,7 +6660,9 @@ Status|Meaning|Description
           }
         ]
       },
-      "tags": [],
+      "tags": [
+        null
+      ],
       "ratings": {
         "total": 1230,
         "positive": 1047,
@@ -6517,10 +6682,17 @@ Status|Meaning|Description
   "result_count": 100
 }
 ```
+<h3 id="View-User-Mods-responses">Responses</h3>
+
+Status|Meaning|Description|Response Schema
+---|---|---|---|
+200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)|Request Successful|[Browse_Mods](#schemabrowse_mods)
+
 <aside class="warning">
 To perform this operation, you must be authenticated by means of one of the following methods:
 oauth2 ( Scopes: read )
 </aside>
+
 
 ## View User Files
 
@@ -6528,7 +6700,7 @@ oauth2 ( Scopes: read )
 
 ```shell
 # You can also use wget
-curl -X get https://api.mod.io/v1/me/files \
+curl -X GET https://api.mod.io/v1/me/files \
   -H 'Authorization: Bearer YourAccessToken' \
   -H 'Accept: application/json'
 
@@ -6540,6 +6712,7 @@ Host: api.mod.io
 
 Accept: application/json
 Authorization: Bearer YourAccessToken
+
 
 ```
 
@@ -6592,8 +6765,10 @@ headers = {
   'Accept' => 'application/json'
 }
 
-result = RestClient.get 'https://api.mod.io/v1/me/files', params: {
+result = RestClient.get 'https://api.mod.io/v1/me/files',
+  params: {
   }, headers: headers
+
 
 p JSON.parse(result)
 ```
@@ -6631,11 +6806,6 @@ System.out.println(response.toString());
 
 View all mod.io files that exist for the *authenticated user*.
 
-### Responses
-
-Status|Meaning|Description
----|---|---|
-200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)|Request Successful
 
 > Example responses
 
@@ -6649,10 +6819,9 @@ Status|Meaning|Description
         "id": 1,
         "nameid": "xant",
         "username": "XanT",
-        "permission": 1,
         "avatar": {
-          "full": "https://media.mod.io/images/members/1/1/1/masterchief.jpg",
-          "filename": "masterchief.jpg"
+          "filename": "masterchief.jpg",
+          "full": "https://media.mod.io/images/members/1/1/1/masterchief.jpg"
         },
         "timezone": "Australia/Brisbane",
         "language": "en",
@@ -6680,10 +6849,17 @@ Status|Meaning|Description
   "result_count": 100
 }
 ```
+<h3 id="View-User-Files-responses">Responses</h3>
+
+Status|Meaning|Description|Response Schema
+---|---|---|---|
+200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)|Request Successful|[Browse_Files](#schemabrowse_files)
+
 <aside class="warning">
 To perform this operation, you must be authenticated by means of one of the following methods:
 oauth2 ( Scopes: read )
 </aside>
+
 
 ## View User Updates
 
@@ -6691,7 +6867,7 @@ oauth2 ( Scopes: read )
 
 ```shell
 # You can also use wget
-curl -X get https://api.mod.io/v1/me/updates \
+curl -X GET https://api.mod.io/v1/me/updates \
   -H 'Authorization: Bearer YourAccessToken' \
   -H 'Accept: application/json'
 
@@ -6703,6 +6879,7 @@ Host: api.mod.io
 
 Accept: application/json
 Authorization: Bearer YourAccessToken
+
 
 ```
 
@@ -6755,8 +6932,10 @@ headers = {
   'Accept' => 'application/json'
 }
 
-result = RestClient.get 'https://api.mod.io/v1/me/updates', params: {
+result = RestClient.get 'https://api.mod.io/v1/me/updates',
+  params: {
   }, headers: headers
+
 
 p JSON.parse(result)
 ```
@@ -6794,11 +6973,6 @@ System.out.println(response.toString());
 
 View all mod.io updates that exist for the *authenticated user*.
 
-### Responses
-
-Status|Meaning|Description
----|---|---|
-200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)|Request Successful
 
 > Example responses
 
@@ -6816,10 +6990,17 @@ Status|Meaning|Description
   ]
 }
 ```
+<h3 id="View-User-Updates-responses">Responses</h3>
+
+Status|Meaning|Description|Response Schema
+---|---|---|---|
+200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)|Request Successful|[Browse_Updates](#schemabrowse_updates)
+
 <aside class="warning">
 To perform this operation, you must be authenticated by means of one of the following methods:
 oauth2 ( Scopes: read )
 </aside>
+
 
 # Reports
 
@@ -6829,7 +7010,7 @@ oauth2 ( Scopes: read )
 
 ```shell
 # You can also use wget
-curl -X post https://api.mod.io/v1/report \
+curl -X POST https://api.mod.io/v1/report \
   -H 'Authorization: Bearer YourAccessToken' \
   -H 'Content-Type: application/x-www-form-urlencoded' \
   -H 'Accept: application/json'
@@ -6843,6 +7024,7 @@ Host: api.mod.io
 Accept: application/json
 Authorization: Bearer YourAccessToken
 Content-Type: application/x-www-form-urlencoded
+
 
 ```
 
@@ -6898,8 +7080,10 @@ headers = {
   'Accept' => 'application/json'
 }
 
-result = RestClient.post 'https://api.mod.io/v1/report', params: {
+result = RestClient.post 'https://api.mod.io/v1/report',
+  params: {
   }, headers: headers
+
 
 p JSON.parse(result)
 ```
@@ -6941,29 +7125,31 @@ Submit a report for any resource on mod.io.
      Parameter|Type|Required|Description
      ---|---|---|---|
      resource|string|true|The name of the resource type you are submitting a report for __must__ be one of the following values.<br><br>*Field options*<br>__games__<br>__mods__<br>__files__<br>__tags__<br>__users__.
-     id|integer|true|Unique Id of the resource item you are reporting.
+     id|integer(int32)|true|Unique Id of the resource item you are reporting.
      dmca|boolean|true|Is this a DMCA takedown request?
      name|string|true|Descriptive and informative title for your report.
      summary|string|true|Detailed description of your report, be as specific as possible on the reason you are submitting the report.
 
-### Responses
-
-Status|Meaning|Description
----|---|---|
-201|[Created](https://tools.ietf.org/html/rfc7231#section-6.3.2)|Report Created
 
 > Example responses
 
 ```json
 {
   "code": "201",
-  "message": "Your report submission has been successful and will be reviewed as soon as possible."
+  "message": "You have successfully submitted a report and it will be reviewed by the mod.io team."
 }
 ```
+<h3 id="Submit-Report-responses">Responses</h3>
+
+Status|Meaning|Description|Response Schema
+---|---|---|---|
+201|[Created](https://tools.ietf.org/html/rfc7231#section-6.3.2)|Report Created|[addReport](#schemaaddreport)
+
 <aside class="warning">
 To perform this operation, you must be authenticated by means of one of the following methods:
 oauth2 ( Scopes: write )
 </aside>
+
 
 # Subscribe
 
@@ -6973,7 +7159,7 @@ oauth2 ( Scopes: write )
 
 ```shell
 # You can also use wget
-curl -X post https://api.mod.io/v1/{resource}/{resource-id}/subscribe \
+curl -X POST https://api.mod.io/v1/{resource}/{resource-id}/subscribe \
   -H 'Authorization: Bearer YourAccessToken' \
   -H 'Content-Type: application/x-www-form-urlencoded' \
   -H 'Accept: application/json'
@@ -6987,6 +7173,7 @@ Host: api.mod.io
 Accept: application/json
 Authorization: Bearer YourAccessToken
 Content-Type: application/x-www-form-urlencoded
+
 
 ```
 
@@ -7042,8 +7229,10 @@ headers = {
   'Accept' => 'application/json'
 }
 
-result = RestClient.post 'https://api.mod.io/v1/{resource}/{resource-id}/subscribe', params: {
+result = RestClient.post 'https://api.mod.io/v1/{resource}/{resource-id}/subscribe',
+  params: {
   }, headers: headers
+
 
 p JSON.parse(result)
 ```
@@ -7085,13 +7274,8 @@ Subscribe to a resource. Note for the parameter table below it is for __path__ p
      Path Parameter|Type|Required|Description
      ---|---|---|---|
      resource|string|true|The name of the resource you want to subscribe to - __must__ be one of the following values.<br><br>*Field options*<br>__games__<br>__mods__<br>__files__<br>__tags__<br>__users__
-     id|integer|true|Unique Id of the resource you are subscribing to.
+     id|integer(int32)|true|Unique Id of the resource you are subscribing to.
 
-### Responses
-
-Status|Meaning|Description
----|---|---|
-201|[Created](https://tools.ietf.org/html/rfc7231#section-6.3.2)|Created
 
 > Example responses
 
@@ -7101,10 +7285,17 @@ Status|Meaning|Description
   "message": "You have successfully subscribed to the specified resource."
 }
 ```
+<h3 id="Subscribe-To-Resource-responses">Responses</h3>
+
+Status|Meaning|Description|Response Schema
+---|---|---|---|
+201|[Created](https://tools.ietf.org/html/rfc7231#section-6.3.2)|Created|[addSubscribe](#schemaaddsubscribe)
+
 <aside class="warning">
 To perform this operation, you must be authenticated by means of one of the following methods:
 oauth2 ( Scopes: write )
 </aside>
+
 
 ## Un-Subscribe To Resource
 
@@ -7112,7 +7303,7 @@ oauth2 ( Scopes: write )
 
 ```shell
 # You can also use wget
-curl -X delete https://api.mod.io/v1/{resource}/{resource-id}/subscribe \
+curl -X DELETE https://api.mod.io/v1/{resource}/{resource-id}/subscribe \
   -H 'Authorization: Bearer YourAccessToken' \
   -H 'Content-Type: application/x-www-form-urlencoded' \
   -H 'Accept: application/json'
@@ -7126,6 +7317,7 @@ Host: api.mod.io
 Accept: application/json
 Authorization: Bearer YourAccessToken
 Content-Type: application/x-www-form-urlencoded
+
 
 ```
 
@@ -7181,8 +7373,10 @@ headers = {
   'Accept' => 'application/json'
 }
 
-result = RestClient.delete 'https://api.mod.io/v1/{resource}/{resource-id}/subscribe', params: {
+result = RestClient.delete 'https://api.mod.io/v1/{resource}/{resource-id}/subscribe',
+  params: {
   }, headers: headers
+
 
 p JSON.parse(result)
 ```
@@ -7224,23 +7418,1638 @@ Un-Subscribe to the requested resource.Note for the parameter table below it is 
      Path Parameter|Type|Required|Description
      ---|---|---|---|
      resource|string|true|The name of the resource type you are un-subscribing to - __must__ be one of the following values.<br><br>*Field options*<br>__games__<br>__mods__<br>__files__<br>__tags__<br>__users__
-     id|integer|true|Unique Id of the resource you want to un-subscribe to.
+     id|integer(int32)|true|Unique Id of the resource you want to un-subscribe to.
 
-### Responses
-
-Status|Meaning|Description
----|---|---|
-204|[No Content](https://tools.ietf.org/html/rfc7231#section-6.3.5)|No Content
 
 > Example responses
 
 ```json
- 204 No Content 
+ "204 No Content" 
 ```
+<h3 id="Un-Subscribe-To-Resource-responses">Responses</h3>
+
+Status|Meaning|Description|Response Schema
+---|---|---|---|
+204|[No Content](https://tools.ietf.org/html/rfc7231#section-6.3.5)|No Content|[204](#schema204)
+
 <aside class="warning">
 To perform this operation, you must be authenticated by means of one of the following methods:
 oauth2 ( Scopes: write )
 </aside>
+
+
+# Schemas 
+## Logo Object
+
+ <a name="schemalogo_object"></a>
+
+```json
+{
+  "filename": "IMG_20170409_222419.jpg",
+  "full": "https://media.mod.io/images/mods/1/1/2/IMG_20170409_222419.jpg",
+  "thumb_320x180": "https://media.mod.io/cache/images/mods/1/1/2/thumb_320x180/IMG_20170409_222419.jpg",
+  "thumb_640x360": "https://media.mod.io/cache/images/mods/1/1/2/thumb_640x360/IMG_20170409_222419.jpg",
+  "thumb_1280x720": "https://media.mod.io/cache/images/mods/1/1/2/thumb_1280x720/IMG_20170409_222419.jpg"
+} 
+```
+
+
+### Properties
+
+Name|Type|Description
+---|---|---|---|
+filename|string|Image filename, with file extension included.
+full|string|URL to full-sized image.
+thumb_320x180|string|URL to small thumbnail image.
+thumb_640x360|string|URL to medium thumbnail image.
+thumb_1280x720|string|URL to large thumbnail image.
+
+
+
+
+## Icon Object
+
+ <a name="schemaicon_object"></a>
+
+```json
+{
+  "filename": "IMG_20170409_222419.jpg",
+  "full": "https://media.mod.io/images/mods/1/1/2/icon.png",
+  "thumb_320x180": "https://media.mod.io/cache/images/mods/1/1/2/thumb_320x180/icon.png"
+} 
+```
+
+
+### Properties
+
+Name|Type|Description
+---|---|---|---|
+filename|string|Image filename, with file extension included.
+full|string|URL to full-sized image.
+thumb_320x180|string|URL to small thumbnail image.
+
+
+
+
+## Header Object
+
+ <a name="schemaheader_object"></a>
+
+```json
+{
+  "filename": "gameheader.png",
+  "full": "https://media.mod.io/images/games/1/1/2/gameheader.png"
+} 
+```
+
+
+### Properties
+
+Name|Type|Description
+---|---|---|---|
+filename|string|Image filename, with file extension included.
+full|string|URL to the full-sized header image.
+
+
+
+
+## Avatar Object
+
+ <a name="schemaavatar_object"></a>
+
+```json
+{
+  "filename": "masterchief.jpg",
+  "full": "https://media.mod.io/images/members/1/1/1/masterchief.jpg"
+} 
+```
+
+
+### Properties
+
+Name|Type|Description
+---|---|---|---|
+filename|string|Image filename, including file extension.
+full|string|Full URL to the image.
+
+
+
+
+## Browse Games
+
+ <a name="schemabrowse_games"></a>
+
+```json
+{
+  "data": [
+    {
+      "id": 2,
+      "member": {
+        "id": 1,
+        "nameid": "xant",
+        "username": "XanT",
+        "avatar": {
+          "filename": "masterchief.jpg",
+          "full": "https://media.mod.io/images/members/1/1/1/masterchief.jpg"
+        },
+        "timezone": "Australia/Brisbane",
+        "language": "en",
+        "url": "https://mod.io/members/xant"
+      },
+      "datereg": 1493702614,
+      "dateup": 1499410290,
+      "presentation": 1,
+      "community": 3,
+      "submission": 0,
+      "curation": 0,
+      "revenue": 1500,
+      "api": 3,
+      "ugcname": "map",
+      "icon": {
+        "filename": "IMG_20170409_222419.jpg",
+        "full": "https://media.mod.io/images/mods/1/1/2/icon.png",
+        "thumb_320x180": "https://media.mod.io/cache/images/mods/1/1/2/thumb_320x180/icon.png"
+      },
+      "logo": {
+        "filename": "IMG_20170409_222419.jpg",
+        "full": "https://media.mod.io/images/mods/1/1/2/IMG_20170409_222419.jpg",
+        "thumb_320x180": "https://media.mod.io/cache/images/mods/1/1/2/thumb_320x180/IMG_20170409_222419.jpg",
+        "thumb_640x360": "https://media.mod.io/cache/images/mods/1/1/2/thumb_640x360/IMG_20170409_222419.jpg",
+        "thumb_1280x720": "https://media.mod.io/cache/images/mods/1/1/2/thumb_1280x720/IMG_20170409_222419.jpg"
+      },
+      "header": {
+        "filename": "gameheader.png",
+        "full": "https://media.mod.io/images/games/1/1/2/gameheader.png"
+      },
+      "homepage": "https://www.rogue-knight-game.com/",
+      "name": "Rogue Knight",
+      "nameid": "rogue-knight",
+      "summary": "Rogue Knight is a brand new 2D pixel platformer.",
+      "instructions": "Instructions here on how to develop for your game.",
+      "url": "https://rogue-knight.mod.io",
+      "cats": [
+        {
+          "name": "Engines",
+          "type": "checkboxes",
+          "tags": [
+            "Unity"
+          ],
+          "adminonly": 0
+        }
+      ]
+    },
+    {
+        ...
+    }
+  ],
+  "cursor_id": 60,
+  "prev_id": 30,
+  "next_id": 160,
+  "result_count": 100
+} 
+```
+
+
+### Properties
+
+Name|Type|Description
+---|---|---|---|
+cursor_id|integer(int32)|The current _cursor value.
+prev_id|integer(int32)|The previous _cursor value as manually inserted by you, null by default.
+next_id|integer(int32)|The next position to move the _cursor to, based on the current request.
+result_count|integer(int32)|The amount of results returned in the current request.
+data|[[Game_Object](#schemagame_object)]|Array containing game objects
+» id|integer(int32)|Unique game id.
+» member|[Member_Object](#schemamember_object)|Contains member data.
+»» id|integer(int32)|Unique id of the user.
+»» nameid|string|Unique nameid of user which forms end of their profile URL.
+»» username|string|Non-unique username of the user.
+»» avatar|[Avatar_Object](#schemaavatar_object)|Contains avatar data.
+»»» filename|string|Image filename, including file extension.
+»»» full|string|Full URL to the image.
+»» timezone|string|The Timezone of the user, shown in {Country}/{City} format.
+»» language|string|The users language preference, limited to two characters.
+»» url|string|URL to the user profile.
+» datereg|integer(int32)|Unix timestamp of date registered.
+» dateup|integer(int32)|Unix timestamp of date updated.
+» presentation|integer(int32)|Determines which presentation style you want to use for your game on the mod.io website <br><br>*Field options*<br>__0__ =  Grid View: Displays mods in a grid (visual but less informative, default setting) <br>__1__ = Table View: Displays mods in a table (easier to browse).
+» community|integer(int32)|Determines the rights community members have with the game.<br><br>*Field Options*<br>__0__ = Discussion board disabled, community cannot share guides and news<br>__1__ = Discussion Board enabled only<br>__2__ = Community can only share guides and news<br>__3__ = Discussion Board enabled and community can share news and guides
+» submission|integer(int32)|Determines the submission process you want modders to follow.<br><br>*Field Options*<br>__0__ = Control the upload process. ou will have to build an upload system either in-game or via a standalone app, which enables developers to submit mods to the tags you have configured. Because you control the flow, you can pre-validate and compile mods, to ensure they will work in your game. In the long run this option will save you time as you can accept more submissions, but it requires more setup to get running and isn't as open as the above option. NOTE: mod profiles can still be created online, but uploads will have to occur via the tools you supply.<br><br>__1__ = Enable mod uploads from anywhere. Allow developers to upload mods via the website and API, and pick the tags their mod is built for. No validation will be done on the files submitted, it will be the responsibility of your game and apps built to process the mods installation based on the tags selected and determine if the mod is valid and works. For example a mod might be uploaded to the 'map' tag. When a user subscribes to this mod, your game will need to verify it contains a map file and install it where maps are located. If this fails, your game or the community will have to flag the mod as 'incompatible' to remove it from the listing.
+» curation|integer(int32)|Determines the curation process for the game.<br><br>*Field Options*<br>__0__ = Mods are immediately available to play, without any intervention or work from your team.<br>__1__ = Screen only mods the author wants to sell, before they are available to purchase via the API.<br>__2__ = All mods must be accepted by someone on your team. This option is useful for games that have a small number of mods and want to control the experience, or you need to set the parameters attached to a mod (i.e. a weapon may require the rate of fire, power level, clip size etc). It can also be used for complex mods, which you may need to build into your game or distribute as DLC.
+» revenue|integer(int32)|Determines the revenue-share mod creators receive as a percentage. ie. 20 = 20%
+» api|integer(int32)|Determines what permissions you want to enable via the mod.io API.<br><br>*Field Options*<br>__0__ = Third parties cannot access your mods API and mods cannot be downloaded directly without API validation.<br>__1__ = Allow 3rd parties to access your mods API (recommended, an open API will encourage a healthy ecosystem of tools and apps) but mods cannot be downloaded directly<br>__2__ = Allow mods to be downloaded directly but 3rd parties cannot access your mods API.<br>__3__ = Allow third parties to access your mods API and allow mods to be downloaded directly without api validation.
+» ugcname|string|Singular string that best describes the type of user-generated content.
+» icon|[Icon_Object](#schemaicon_object)|Contains icon data.
+»» filename|string|Image filename, with file extension included.
+»» full|string|URL to full-sized image.
+»» thumb_320x180|string|URL to small thumbnail image.
+» logo|[Logo_Object](#schemalogo_object)|Contains logo data.
+»» filename|string|Image filename, with file extension included.
+»» full|string|URL to full-sized image.
+»» thumb_320x180|string|URL to small thumbnail image.
+»» thumb_640x360|string|URL to medium thumbnail image.
+»» thumb_1280x720|string|URL to large thumbnail image.
+» header|[Header_Object](#schemaheader_object)|Contains header data.
+»» filename|string|Image filename, with file extension included.
+»» full|string|URL to the full-sized header image.
+» homepage|string|Official game website URL.
+» name|string|Title of the game.
+» nameid|string|The unique SEO friendly URL of the game.
+» summary|string|Brief summary of the game.
+» instructions|string|Modding instructions for developers.
+» url|string|website url for the game.
+» cats|[[catsArray](#schemacatsarray)]|Contains categories data.
+»» name|string|The name of the category.
+»» type|string|Are tags selected via checkboxes or a single dropdown.
+»» adminonly|integer(int32)|Is this an admin only tag? If so only admin's can see this category and it can be used for filtering.
+»» tags|[string]|Eligible tags for this game.
+
+
+
+
+## Browse Game Activity
+
+<a name="schemabrowse_game_activity"></a>
+
+```json
+{
+  "data": [
+    {
+      "id": 13,
+      "member": {
+        "id": 1,
+        "nameid": "xant",
+        "username": "XanT",
+        "avatar": {
+          "filename": "masterchief.jpg",
+          "full": "https://media.mod.io/images/members/1/1/1/masterchief.jpg"
+        },
+        "timezone": "Australia/Brisbane",
+        "language": "en",
+        "url": "https://mod.io/members/xant"
+      },
+      "dateup": 1499846132,
+      "event": "GAME_UPDATE",
+      "changes": {
+        "summary": {
+          "before": "https://www.roguehdpack.com/",
+          "after": "https://rogue-knight.mod.io/rogue-hd-pack"
+        }
+      }
+    }
+  ]
+} 
+```
+
+
+### Properties
+
+Name|Type|Description
+---|---|---|---|
+data|[[Game_Activity_Object](#schemagame_activity_object)]|Response array of items
+» id|integer(int32)|Unique id of activity record.
+» member|[Member_Object](#schemamember_object)|Contains member data.
+»» id|integer(int32)|Unique id of the user.
+»» nameid|string|Unique nameid of user which forms end of their profile URL.
+»» username|string|Non-unique username of the user.
+»» avatar|[Avatar_Object](#schemaavatar_object)|Contains avatar data.
+»»» filename|string|Image filename, including file extension.
+»»» full|string|Full URL to the image.
+»» timezone|string|The Timezone of the user, shown in {Country}/{City} format.
+»» language|string|The users language preference, limited to two characters.
+»» url|string|URL to the user profile.
+» dateup|string|Unix timestamp of when the record was last updated.
+» event|string|Type of event the activity was. Ie. UPDATE or DELETE.
+» changes|object|Contains changes data.
+»» summary|object|Name of the field that changed, in this example its the 'summary' field.
+»»» before|string|The value of the field before the event.
+»»» after|string|The value of the field after the event.
+
+
+
+
+## Browse Mods
+
+ <a name="schemabrowse_mods"></a>
+
+```json
+{
+  "data": [
+    {
+      "id": 2,
+      "game": 2,
+      "member": {
+        "id": 1,
+        "nameid": "xant",
+        "username": "XanT",
+        "avatar": {
+          "filename": "masterchief.jpg",
+          "full": "https://media.mod.io/images/members/1/1/1/masterchief.jpg"
+        },
+        "timezone": "Australia/Brisbane",
+        "language": "en",
+        "url": "https://mod.io/members/xant"
+      },
+      "price": 9.99,
+      "datereg": 1492564103,
+      "dateup": 1499841487,
+      "logo": {
+        "filename": "IMG_20170409_222419.jpg",
+        "full": "https://media.mod.io/images/mods/1/1/2/IMG_20170409_222419.jpg",
+        "thumb_320x180": "https://media.mod.io/cache/images/mods/1/1/2/thumb_320x180/IMG_20170409_222419.jpg",
+        "thumb_640x360": "https://media.mod.io/cache/images/mods/1/1/2/thumb_640x360/IMG_20170409_222419.jpg",
+        "thumb_1280x720": "https://media.mod.io/cache/images/mods/1/1/2/thumb_1280x720/IMG_20170409_222419.jpg"
+      },
+      "homepage": "https://www.rogue-hdpack.com/",
+      "name": "Rogue Knight HD Pack",
+      "nameid": "rogue-knight-hd-pack",
+      "summary": "It's time to bask in the glory of beautiful 4k textures!",
+      "description": "<h2>About</h2><p>Rogue HD Pack does exactly what you thi...",
+      "metadata": "rogue,hd,high-res,4k,hd textures",
+      "url": "https://rogue-knight.mod.io/rogue-knight-hd-pack",
+      "modfile": {
+        "id": 2,
+        "mod": 2,
+        "member": {
+          "id": 1,
+          "nameid": "xant",
+          "username": "XanT",
+          "avatar": {
+            "filename": "masterchief.jpg",
+            "full": "https://media.mod.io/images/members/1/1/1/masterchief.jpg"
+          },
+          "timezone": "Australia/Brisbane",
+          "language": "en",
+          "url": "https://mod.io/members/xant"
+        },
+        "date": 1499841487,
+        "datevirus": 1499841487,
+        "virusstatus": 0,
+        "viruspositive": 0,
+        "filesize": 15181,
+        "filehash": "2d4a0e2d7273db6b0a94b0740a88ad0d",
+        "filename": "rogue-knight-v1.zip",
+        "version": "1.3",
+        "virustotal": "No threats found.",
+        "changelog": "VERSION 1.3 -- Changes -- Fixed critical castle floor bug.",
+        "download": "https://mod.io/mods/file/2/c489a0354111a4d76640d47f0cdcb294"
+      },
+      "media": {
+        "youtube": [
+          "https://www.youtube.com/watch?v=dQw4w9WgXcQ"
+        ],
+        "sketchfab": [
+          "https://sketchfab.com/models/ef40b2d300334d009984c8865b2db1c8"
+        ],
+        "images": [
+          {
+            "full": "https://media.mod.io/images/mods/1/1/2/IMG_20170409_222419.jpg",
+            "thumbnail": "https://media.mod.io/cache/images/mods/1/1/2/thumb_1020x2000/IMG_20170409_222419.jpg",
+            "filename": "IMG_20170409_222419.jpg"
+          }
+        ]
+      },
+      "tags": [
+        null
+      ],
+      "ratings": {
+        "total": 1230,
+        "positive": 1047,
+        "negative": 183,
+        "weighted": 87.38,
+        "percentage": 91,
+        "text": "Very Positive"
+      }
+    },
+    {
+        ...
+    }
+  ],
+  "cursor_id": 60,
+  "prev_id": 30,
+  "next_id": 160,
+  "result_count": 100
+} 
+```
+
+
+### Properties
+
+Name|Type|Description
+---|---|---|---|
+cursor_id|integer(int32)|The current _cursor value.
+prev_id|integer(int32)|The previous _cursor value as manually inserted by you, null by default.
+next_id|integer(int32)|The next position to move the _cursor to, based on the current request.
+result_count|integer(int32)|The amount of results returned in the current request.
+data|[[Mod_Object](#schemamod_object)]|Array containing mod objects
+» id|integer(int32)|Unique mod id.
+» game|integer(int32)|Unique game id.
+» member|[Member_Object](#schemamember_object)|Contains member data.
+»» id|integer(int32)|Unique id of the user.
+»» nameid|string|Unique nameid of user which forms end of their profile URL.
+»» username|string|Non-unique username of the user.
+»» avatar|[Avatar_Object](#schemaavatar_object)|Contains avatar data.
+»»» filename|string|Image filename, including file extension.
+»»» full|string|Full URL to the image.
+»» timezone|string|The Timezone of the user, shown in {Country}/{City} format.
+»» language|string|The users language preference, limited to two characters.
+»» url|string|URL to the user profile.
+» price|float|Sale price if applicable, in USD.
+» datereg|integer(int32)|Unix timestamp of date registered.
+» dateup|integer(int32)|Unix timestamp of date last updated.
+» logo|[Logo_Object](#schemalogo_object)|Contains logo data.
+»» filename|string|Image filename, with file extension included.
+»» full|string|URL to full-sized image.
+»» thumb_320x180|string|URL to small thumbnail image.
+»» thumb_640x360|string|URL to medium thumbnail image.
+»» thumb_1280x720|string|URL to large thumbnail image.
+» homepage|string|Mod homepage URL.
+» name|string|Name of the mod.
+» nameid|string|Unique SEO-friendly mod uri.
+» summary|string|Brief summary of the mod.
+» description|string|Description of the mod.
+» metadata|string|Metadata for the mod.
+» url|string|Official website url for the mod.
+» modfile|[Modfile_Object](#schemamodfile_object)|Contains file data.
+»» id|integer(int32)|Unique file id.
+»» mod|integer(int32)|Unique mod id.
+»» member|[Member_Object](#schemamember_object)|Contains member data.
+»»» id|integer(int32)|Unique id of the user.
+»»» nameid|string|Unique nameid of user which forms end of their profile URL.
+»»» username|string|Non-unique username of the user.
+»»» avatar|[Avatar_Object](#schemaavatar_object)|Contains avatar data.
+»»»» filename|string|Image filename, including file extension.
+»»»» full|string|Full URL to the image.
+»»» timezone|string|The Timezone of the user, shown in {Country}/{City} format.
+»»» language|string|The users language preference, limited to two characters.
+»»» url|string|URL to the user profile.
+»» date|integer(int32)|Unix timestamp of file upload time.
+»» datevirus|integer(int32)|Unix timestamp of file virus scan.
+»» virusstatus|integer(int32)|The status of the virus scan for the file.
+»» viruspositive|integer(int32)|Has the file been positively flagged as a virus?
+»» filesize|integer(int32)|Size of the file in bytes.
+»» filehash|string|MD5 filehash
+»» filename|string|Name of the file including file extension.
+»» version|string|The release version this file represents.
+»» virustotal|string|Text output from virustotal scan.
+»» changelog|string|List of all changes in this file release.
+»» download|string|Link to download the file from the mod.io CDN.
+» media|object|Contains media data.
+»» youtube|[string]|Contains YouTube data.
+»» sketchfab|[string]|Contains Sketchfab data.
+»» images|[Unknown]|Contains images data.
+»»» full|string|URL to the full image.
+»»» thumbnail|string|URL to the thumbnail image.
+»»» filename|string|Image filename, with with extension included.
+» ratings|[Rating_Object](#schemarating_object)|Contains ratings data.
+»» total|integer(int32)|Total Ratings.
+»» positive|integer(int32)|Positive Ratings.
+»» negative|integer(int32)|Negative ratings.
+»» weighted|float|Weighted Rating.
+»» percentage|integer(int32)|Percentage.
+»» text|string|Text representation of the rating total.
+» tags|[Unknown]|No description
+
+
+
+
+## Browse Mod Activity
+
+<a name="schemabrowse_mod_activity"></a>
+
+```json
+{
+  "data": [
+    {
+      "id": 13,
+      "member": {
+        "id": 1,
+        "nameid": "xant",
+        "username": "XanT",
+        "avatar": {
+          "filename": "masterchief.jpg",
+          "full": "https://media.mod.io/images/members/1/1/1/masterchief.jpg"
+        },
+        "timezone": "Australia/Brisbane",
+        "language": "en",
+        "url": "https://mod.io/members/xant"
+      },
+      "dateup": 1499846132,
+      "event": "MOD_UPDATE",
+      "changes": {
+        "summary": {
+          "before": "https://www.roguehdpack.com/",
+          "after": "https://rogue-knight.mod.io/rogue-hd-pack"
+        }
+      }
+    }
+  ]
+} 
+```
+
+
+### Properties
+
+Name|Type|Description
+---|---|---|---|
+data|[[Mod_Activity_Object](#schemamod_activity_object)]|Response array of items
+» id|integer(int32)|Unique id of activity object.
+» member|[Member_Object](#schemamember_object)|Contains member data.
+»» id|integer(int32)|Unique id of the user.
+»» nameid|string|Unique nameid of user which forms end of their profile URL.
+»» username|string|Non-unique username of the user.
+»» avatar|[Avatar_Object](#schemaavatar_object)|Contains avatar data.
+»»» filename|string|Image filename, including file extension.
+»»» full|string|Full URL to the image.
+»» timezone|string|The Timezone of the user, shown in {Country}/{City} format.
+»» language|string|The users language preference, limited to two characters.
+»» url|string|URL to the user profile.
+» dateup|integer(int32)|Unix timestamp of when the update occurred.
+» event|string|The type of resource and action that occurred.
+» changes|object|No description
+»» summary|object|No description
+»»» before|string|No description
+»»» after|string|No description
+
+
+
+
+## Browse Files
+
+ <a name="schemabrowse_files"></a>
+
+```json
+{
+  "data": [
+    {
+      "id": 2,
+      "mod": 2,
+      "member": {
+        "id": 1,
+        "nameid": "xant",
+        "username": "XanT",
+        "avatar": {
+          "filename": "masterchief.jpg",
+          "full": "https://media.mod.io/images/members/1/1/1/masterchief.jpg"
+        },
+        "timezone": "Australia/Brisbane",
+        "language": "en",
+        "url": "https://mod.io/members/xant"
+      },
+      "date": 1499841487,
+      "datevirus": 1499841487,
+      "virusstatus": 0,
+      "viruspositive": 0,
+      "filesize": 15181,
+      "filehash": "2d4a0e2d7273db6b0a94b0740a88ad0d",
+      "filename": "rogue-knight-v1.zip",
+      "version": "1.3",
+      "virustotal": "No threats found.",
+      "changelog": "VERSION 1.3 -- Changes -- Fixed critical castle floor bug.",
+      "download": "https://mod.io/mods/file/2/c489a0354111a4d76640d47f0cdcb294"
+    },
+    {
+        ...
+    }
+  ],
+  "cursor_id": 60,
+  "prev_id": 30,
+  "next_id": 160,
+  "result_count": 100
+} 
+```
+
+
+### Properties
+
+Name|Type|Description
+---|---|---|---|
+cursor_id|integer(int32)|The current _cursor value.
+prev_id|integer(int32)|The previous _cursor value as manually inserted by you, null by default.
+next_id|integer(int32)|The next position to move the _cursor to, based on the current request.
+result_count|integer(int32)|The amount of results returned in the current request.
+data|[[Modfile_Object](#schemamodfile_object)]|Response array of items
+» id|integer(int32)|Unique file id.
+» mod|integer(int32)|Unique mod id.
+» member|[Member_Object](#schemamember_object)|Contains member data.
+»» id|integer(int32)|Unique id of the user.
+»» nameid|string|Unique nameid of user which forms end of their profile URL.
+»» username|string|Non-unique username of the user.
+»» avatar|[Avatar_Object](#schemaavatar_object)|Contains avatar data.
+»»» filename|string|Image filename, including file extension.
+»»» full|string|Full URL to the image.
+»» timezone|string|The Timezone of the user, shown in {Country}/{City} format.
+»» language|string|The users language preference, limited to two characters.
+»» url|string|URL to the user profile.
+» date|integer(int32)|Unix timestamp of file upload time.
+» datevirus|integer(int32)|Unix timestamp of file virus scan.
+» virusstatus|integer(int32)|The status of the virus scan for the file.
+» viruspositive|integer(int32)|Has the file been positively flagged as a virus?
+» filesize|integer(int32)|Size of the file in bytes.
+» filehash|string|MD5 filehash
+» filename|string|Name of the file including file extension.
+» version|string|The release version this file represents.
+» virustotal|string|Text output from virustotal scan.
+» changelog|string|List of all changes in this file release.
+» download|string|Link to download the file from the mod.io CDN.
+
+
+
+
+## Browse Mod Tags
+
+<a name="schemabrowse_mod_tags"></a>
+
+```json
+{
+  "data": [
+    {
+      "game": 2,
+      "mod": 2,
+      "tag": "Unity",
+      "date": 1499841487
+    }
+  ]
+} 
+```
+
+
+### Properties
+
+Name|Type|Description
+---|---|---|---|
+data|[[Mod_Tag_Object](#schemamod_tag_object)]|No description
+» game|integer(int32)|Unique game id.
+» mod|integer(int32)|Unique mod id.
+» tag|string|The contents of the tag.
+» date|integer(int32)|Unix timestamp of when tag was applied.
+
+
+
+
+## Browse Comments
+
+ <a name="schemabrowse_comments"></a>
+
+```json
+{
+  "data": [
+    {
+      "id": 2,
+      "mod": 2,
+      "member": {
+        "id": 1,
+        "nameid": "xant",
+        "username": "XanT",
+        "avatar": {
+          "filename": "masterchief.jpg",
+          "full": "https://media.mod.io/images/members/1/1/1/masterchief.jpg"
+        },
+        "timezone": "Australia/Brisbane",
+        "language": "en",
+        "url": "https://mod.io/members/xant"
+      },
+      "date": 1499841487,
+      "replyid": 1499,
+      "replypos": "01",
+      "karma": 1,
+      "karmago": 0,
+      "summary": "This mod is kickass! Great work!"
+    },
+    {
+        ...
+    }
+  ],
+  "cursor_id": 60,
+  "prev_id": 30,
+  "next_id": 160,
+  "result_count": 100
+} 
+```
+
+
+### Properties
+
+Name|Type|Description
+---|---|---|---|
+cursor_id|integer(int32)|The current _cursor value.
+prev_id|integer(int32)|The previous _cursor value as manually inserted by you, null by default.
+next_id|integer(int32)|The next position to move the _cursor to, based on the current request.
+result_count|integer(int32)|The amount of results returned in the current request.
+data|[[Comment_Object](#schemacomment_object)]|Array containing comment objects
+» id|integer(int32)|Unique id of the comment.
+» mod|integer(int32)|Unique id of the parent mod.
+» member|[Member_Object](#schemamember_object)|Contains member data.
+»» id|integer(int32)|Unique id of the user.
+»» nameid|string|Unique nameid of user which forms end of their profile URL.
+»» username|string|Non-unique username of the user.
+»» avatar|[Avatar_Object](#schemaavatar_object)|Contains avatar data.
+»»» filename|string|Image filename, including file extension.
+»»» full|string|Full URL to the image.
+»» timezone|string|The Timezone of the user, shown in {Country}/{City} format.
+»» language|string|The users language preference, limited to two characters.
+»» url|string|URL to the user profile.
+» date|integer(int32)|Unix timestamp of when the comment was published.
+» replyid|integer(int32)|Unique replyid used to submitting a nested reply to the published comment.
+» replypos|string|Nesting position of the reply.
+» karma|integer(int32)|The amount of karma the comment has received.
+» karmago|integer(int32)|The amount of good karma the comment has received.
+» summary|string|The contents of the comment.
+
+
+
+
+## Browse Team
+
+ <a name="schemabrowse_team"></a>
+
+```json
+{
+  "cursor_id": 60,
+  "prev_id": 30,
+  "next_id": 160,
+  "result_count": 100,
+  "data": [
+    {
+      "id": 457,
+      "member": {
+        "id": 1,
+        "nameid": "xant",
+        "username": "XanT",
+        "avatar": {
+          "filename": "masterchief.jpg",
+          "full": "https://media.mod.io/images/members/1/1/1/masterchief.jpg"
+        },
+        "timezone": "Australia/Brisbane",
+        "language": "en",
+        "url": "https://mod.io/members/xant"
+      },
+      "username": "Megalodon",
+      "level": 8,
+      "date": 1492058857,
+      "position": "Supreme Overlord"
+    }
+  ]
+} 
+```
+
+
+### Properties
+
+Name|Type|Description
+---|---|---|---|
+cursor_id|integer(int32)|The current _cursor value.
+prev_id|integer(int32)|The previous _cursor value as manually inserted by you, null by default.
+next_id|integer(int32)|The next position to move the _cursor to, based on the current request.
+result_count|integer(int32)|The amount of results returned in the current request.
+data|[[Access_Object](#schemaaccess_object)]|No description
+» id|integer(int32)|Unique access id.
+» member|[Member_Object](#schemamember_object)|Contains member data.
+»» id|integer(int32)|Unique id of the user.
+»» nameid|string|Unique nameid of user which forms end of their profile URL.
+»» username|string|Non-unique username of the user.
+»» avatar|[Avatar_Object](#schemaavatar_object)|Contains avatar data.
+»»» filename|string|Image filename, including file extension.
+»»» full|string|Full URL to the image.
+»» timezone|string|The Timezone of the user, shown in {Country}/{City} format.
+»» language|string|The users language preference, limited to two characters.
+»» url|string|URL to the user profile.
+» username|string|Team member username.
+» level|integer(int32)|The level of permissions the member has within the team. 0 = Guest, 1 = Member, 2 = Contributor, 4 = Manager, 8 = Leader.
+» date|integer(int32)|Unix timestamp of date the member joined the team.
+» position|string|Custom title, has no effect on any access rights.
+
+
+
+
+## Browse Users
+
+ <a name="schemabrowse_users"></a>
+
+```json
+{
+  "data": [
+    {
+      "id": 1,
+      "nameid": "xant",
+      "username": "XanT",
+      "avatar": {
+        "filename": "masterchief.jpg",
+        "full": "https://media.mod.io/images/members/1/1/1/masterchief.jpg"
+      },
+      "timezone": "Australia/Brisbane",
+      "language": "en",
+      "url": "https://mod.io/members/xant"
+    },
+    {
+        ...
+    }
+  ],
+  "cursor_id": 60,
+  "prev_id": 30,
+  "next_id": 160,
+  "result_count": 100
+} 
+```
+
+
+### Properties
+
+Name|Type|Description
+---|---|---|---|
+cursor_id|integer(int32)|The current _cursor value.
+prev_id|integer(int32)|The previous _cursor value as manually inserted by you, null by default.
+next_id|integer(int32)|The next position to move the _cursor to, based on the current request.
+result_count|integer(int32)|The amount of results returned in the current request.
+data|[[Member_Object](#schemamember_object)]|Response array of items
+» id|integer(int32)|Unique id of the user.
+» nameid|string|Unique nameid of user which forms end of their profile URL.
+» username|string|Non-unique username of the user.
+» avatar|[Avatar_Object](#schemaavatar_object)|Contains avatar data.
+»» filename|string|Image filename, including file extension.
+»» full|string|Full URL to the image.
+» timezone|string|The Timezone of the user, shown in {Country}/{City} format.
+» language|string|The users language preference, limited to two characters.
+» url|string|URL to the user profile.
+
+
+
+
+## Browse Updates
+
+ <a name="schemabrowse_updates"></a>
+
+```json
+{
+  "data": [
+    {
+      "id": 351,
+      "resource": "games",
+      "resourceid": 2,
+      "type": 4,
+      "date": 1492058857,
+      "mention": 0
+    }
+  ]
+} 
+```
+
+
+### Properties
+
+Name|Type|Description
+---|---|---|---|
+data|[[Update_Object](#schemaupdate_object)]|No description
+» id|integer(int32)|Unique update id.
+» resource|string|String representation of the update origin's resource type.
+» resourceid|integer(int32)|Unique id of corresponding resource.
+» type|integer(int32)|The type of update.<br>*Field Options*<br>__0__ = Guest<br>__1__ = Member<br>__2__ = Contributor<br>__4__ = Manager<br>__8__ = Leader
+» date|integer(int32)|Unix timestamp of date the update was created.
+» mention|integer(int32)|Is this update the result of a user @mentioning you.
+
+
+
+
+## Access Object
+
+ <a name="schemaaccess_object"></a>
+
+```json
+{
+  "id": 457,
+  "member": {
+    "id": 1,
+    "nameid": "xant",
+    "username": "XanT",
+    "avatar": {
+      "filename": "masterchief.jpg",
+      "full": "https://media.mod.io/images/members/1/1/1/masterchief.jpg"
+    },
+    "timezone": "Australia/Brisbane",
+    "language": "en",
+    "url": "https://mod.io/members/xant"
+  },
+  "username": "Megalodon",
+  "level": 8,
+  "date": 1492058857,
+  "position": "Supreme Overlord"
+} 
+```
+
+
+### Properties
+
+Name|Type|Description
+---|---|---|---|
+id|integer(int32)|Unique access id.
+member|[Member_Object](#schemamember_object)|Contains member data.
+» id|integer(int32)|Unique id of the user.
+» nameid|string|Unique nameid of user which forms end of their profile URL.
+» username|string|Non-unique username of the user.
+» avatar|[Avatar_Object](#schemaavatar_object)|Contains avatar data.
+»» filename|string|Image filename, including file extension.
+»» full|string|Full URL to the image.
+» timezone|string|The Timezone of the user, shown in {Country}/{City} format.
+» language|string|The users language preference, limited to two characters.
+» url|string|URL to the user profile.
+username|string|Team member username.
+level|integer(int32)|The level of permissions the member has within the team. 0 = Guest, 1 = Member, 2 = Contributor, 4 = Manager, 8 = Leader.
+date|integer(int32)|Unix timestamp of date the member joined the team.
+position|string|Custom title, has no effect on any access rights.
+
+
+
+
+## Game Activity Object
+
+<a name="schemagame_activity_object"></a>
+
+```json
+{
+  "id": 13,
+  "member": {
+    "id": 1,
+    "nameid": "xant",
+    "username": "XanT",
+    "avatar": {
+      "filename": "masterchief.jpg",
+      "full": "https://media.mod.io/images/members/1/1/1/masterchief.jpg"
+    },
+    "timezone": "Australia/Brisbane",
+    "language": "en",
+    "url": "https://mod.io/members/xant"
+  },
+  "dateup": 1499846132,
+  "event": "GAME_UPDATE",
+  "changes": {
+    "summary": {
+      "before": "https://www.roguehdpack.com/",
+      "after": "https://rogue-knight.mod.io/rogue-hd-pack"
+    }
+  }
+} 
+```
+
+
+### Properties
+
+Name|Type|Description
+---|---|---|---|
+id|integer(int32)|Unique id of activity record.
+member|[Member_Object](#schemamember_object)|Contains member data.
+» id|integer(int32)|Unique id of the user.
+» nameid|string|Unique nameid of user which forms end of their profile URL.
+» username|string|Non-unique username of the user.
+» avatar|[Avatar_Object](#schemaavatar_object)|Contains avatar data.
+»» filename|string|Image filename, including file extension.
+»» full|string|Full URL to the image.
+» timezone|string|The Timezone of the user, shown in {Country}/{City} format.
+» language|string|The users language preference, limited to two characters.
+» url|string|URL to the user profile.
+dateup|string|Unix timestamp of when the record was last updated.
+event|string|Type of event the activity was. Ie. UPDATE or DELETE.
+changes|object|Contains changes data.
+» summary|object|Name of the field that changed, in this example its the 'summary' field.
+»» before|string|The value of the field before the event.
+»» after|string|The value of the field after the event.
+
+
+
+
+## Mod Activity Object
+
+<a name="schemamod_activity_object"></a>
+
+```json
+{
+  "id": 13,
+  "member": {
+    "id": 1,
+    "nameid": "xant",
+    "username": "XanT",
+    "avatar": {
+      "filename": "masterchief.jpg",
+      "full": "https://media.mod.io/images/members/1/1/1/masterchief.jpg"
+    },
+    "timezone": "Australia/Brisbane",
+    "language": "en",
+    "url": "https://mod.io/members/xant"
+  },
+  "dateup": 1499846132,
+  "event": "MOD_UPDATE",
+  "changes": {
+    "summary": {
+      "before": "https://www.roguehdpack.com/",
+      "after": "https://rogue-knight.mod.io/rogue-hd-pack"
+    }
+  }
+} 
+```
+
+
+### Properties
+
+Name|Type|Description
+---|---|---|---|
+id|integer(int32)|Unique id of activity object.
+member|[Member_Object](#schemamember_object)|Contains member data.
+» id|integer(int32)|Unique id of the user.
+» nameid|string|Unique nameid of user which forms end of their profile URL.
+» username|string|Non-unique username of the user.
+» avatar|[Avatar_Object](#schemaavatar_object)|Contains avatar data.
+»» filename|string|Image filename, including file extension.
+»» full|string|Full URL to the image.
+» timezone|string|The Timezone of the user, shown in {Country}/{City} format.
+» language|string|The users language preference, limited to two characters.
+» url|string|URL to the user profile.
+dateup|integer(int32)|Unix timestamp of when the update occurred.
+event|string|The type of resource and action that occurred.
+changes|object|No description
+» summary|object|No description
+»» before|string|No description
+»» after|string|No description
+
+
+
+
+## Comment Object
+
+ <a name="schemacomment_object"></a>
+
+```json
+{
+  "id": 2,
+  "mod": 2,
+  "member": {
+    "id": 1,
+    "nameid": "xant",
+    "username": "XanT",
+    "avatar": {
+      "filename": "masterchief.jpg",
+      "full": "https://media.mod.io/images/members/1/1/1/masterchief.jpg"
+    },
+    "timezone": "Australia/Brisbane",
+    "language": "en",
+    "url": "https://mod.io/members/xant"
+  },
+  "date": 1499841487,
+  "replyid": 1499,
+  "replypos": "01",
+  "karma": 1,
+  "karmago": 0,
+  "summary": "This mod is kickass! Great work!"
+} 
+```
+
+
+### Properties
+
+Name|Type|Description
+---|---|---|---|
+id|integer(int32)|Unique id of the comment.
+mod|integer(int32)|Unique id of the parent mod.
+member|[Member_Object](#schemamember_object)|Contains member data.
+» id|integer(int32)|Unique id of the user.
+» nameid|string|Unique nameid of user which forms end of their profile URL.
+» username|string|Non-unique username of the user.
+» avatar|[Avatar_Object](#schemaavatar_object)|Contains avatar data.
+»» filename|string|Image filename, including file extension.
+»» full|string|Full URL to the image.
+» timezone|string|The Timezone of the user, shown in {Country}/{City} format.
+» language|string|The users language preference, limited to two characters.
+» url|string|URL to the user profile.
+date|integer(int32)|Unix timestamp of when the comment was published.
+replyid|integer(int32)|Unique replyid used to submitting a nested reply to the published comment.
+replypos|string|Nesting position of the reply.
+karma|integer(int32)|The amount of karma the comment has received.
+karmago|integer(int32)|The amount of good karma the comment has received.
+summary|string|The contents of the comment.
+
+
+
+
+## Ownership Object
+
+ <a name="schemaownership_object"></a>
+
+```json
+{
+  "resource": "files",
+  "id": 3,
+  "ownership": true
+} 
+```
+
+
+### Properties
+
+Name|Type|Description
+---|---|---|---|
+resource|string|String representation of the resource.
+id|integer(int32)|Unique id of resource
+ownership|boolean|Does the specified member have ownership over the resource?
+
+
+
+
+## Price Object
+
+ <a name="schemaprice_object"></a>
+
+```json
+{
+  "resource": "files",
+  "id": 3,
+  "price": 19.99
+} 
+```
+
+
+### Properties
+
+Name|Type|Description
+---|---|---|---|
+resource|string|String representation of the resource type.
+id|integer(int32)|Unique id of the resource.
+price|float|If applicable, the price of the resource displayed in USD.
+
+
+
+
+## Modfile Object
+
+ <a name="schemamodfile_object"></a>
+
+```json
+{
+  "id": 2,
+  "mod": 2,
+  "member": {
+    "id": 1,
+    "nameid": "xant",
+    "username": "XanT",
+    "avatar": {
+      "filename": "masterchief.jpg",
+      "full": "https://media.mod.io/images/members/1/1/1/masterchief.jpg"
+    },
+    "timezone": "Australia/Brisbane",
+    "language": "en",
+    "url": "https://mod.io/members/xant"
+  },
+  "date": 1499841487,
+  "datevirus": 1499841487,
+  "virusstatus": 0,
+  "viruspositive": 0,
+  "filesize": 15181,
+  "filehash": "2d4a0e2d7273db6b0a94b0740a88ad0d",
+  "filename": "rogue-knight-v1.zip",
+  "version": "1.3",
+  "virustotal": "No threats found.",
+  "changelog": "VERSION 1.3 -- Changes -- Fixed critical castle floor bug.",
+  "download": "https://mod.io/mods/file/2/c489a0354111a4d76640d47f0cdcb294"
+} 
+```
+
+
+### Properties
+
+Name|Type|Description
+---|---|---|---|
+id|integer(int32)|Unique file id.
+mod|integer(int32)|Unique mod id.
+member|[Member_Object](#schemamember_object)|Contains member data.
+» id|integer(int32)|Unique id of the user.
+» nameid|string|Unique nameid of user which forms end of their profile URL.
+» username|string|Non-unique username of the user.
+» avatar|[Avatar_Object](#schemaavatar_object)|Contains avatar data.
+»» filename|string|Image filename, including file extension.
+»» full|string|Full URL to the image.
+» timezone|string|The Timezone of the user, shown in {Country}/{City} format.
+» language|string|The users language preference, limited to two characters.
+» url|string|URL to the user profile.
+date|integer(int32)|Unix timestamp of file upload time.
+datevirus|integer(int32)|Unix timestamp of file virus scan.
+virusstatus|integer(int32)|The status of the virus scan for the file.
+viruspositive|integer(int32)|Has the file been positively flagged as a virus?
+filesize|integer(int32)|Size of the file in bytes.
+filehash|string|MD5 filehash
+filename|string|Name of the file including file extension.
+version|string|The release version this file represents.
+virustotal|string|Text output from virustotal scan.
+changelog|string|List of all changes in this file release.
+download|string|Link to download the file from the mod.io CDN.
+
+
+
+
+## Mod Object
+
+ <a name="schemamod_object"></a>
+
+```json
+{
+  "id": 2,
+  "game": 2,
+  "member": {
+    "id": 1,
+    "nameid": "xant",
+    "username": "XanT",
+    "avatar": {
+      "filename": "masterchief.jpg",
+      "full": "https://media.mod.io/images/members/1/1/1/masterchief.jpg"
+    },
+    "timezone": "Australia/Brisbane",
+    "language": "en",
+    "url": "https://mod.io/members/xant"
+  },
+  "price": 9.99,
+  "datereg": 1492564103,
+  "dateup": 1499841487,
+  "logo": {
+    "filename": "IMG_20170409_222419.jpg",
+    "full": "https://media.mod.io/images/mods/1/1/2/IMG_20170409_222419.jpg",
+    "thumb_320x180": "https://media.mod.io/cache/images/mods/1/1/2/thumb_320x180/IMG_20170409_222419.jpg",
+    "thumb_640x360": "https://media.mod.io/cache/images/mods/1/1/2/thumb_640x360/IMG_20170409_222419.jpg",
+    "thumb_1280x720": "https://media.mod.io/cache/images/mods/1/1/2/thumb_1280x720/IMG_20170409_222419.jpg"
+  },
+  "homepage": "https://www.rogue-hdpack.com/",
+  "name": "Rogue Knight HD Pack",
+  "nameid": "rogue-knight-hd-pack",
+  "summary": "It's time to bask in the glory of beautiful 4k textures!",
+  "description": "<h2>About</h2><p>Rogue HD Pack does exactly what you thi...",
+  "metadata": "rogue,hd,high-res,4k,hd textures",
+  "url": "https://rogue-knight.mod.io/rogue-knight-hd-pack",
+  "modfile": {
+    "id": 2,
+    "mod": 2,
+    "member": {
+      "id": 1,
+      "nameid": "xant",
+      "username": "XanT",
+      "avatar": {
+        "filename": "masterchief.jpg",
+        "full": "https://media.mod.io/images/members/1/1/1/masterchief.jpg"
+      },
+      "timezone": "Australia/Brisbane",
+      "language": "en",
+      "url": "https://mod.io/members/xant"
+    },
+    "date": 1499841487,
+    "datevirus": 1499841487,
+    "virusstatus": 0,
+    "viruspositive": 0,
+    "filesize": 15181,
+    "filehash": "2d4a0e2d7273db6b0a94b0740a88ad0d",
+    "filename": "rogue-knight-v1.zip",
+    "version": "1.3",
+    "virustotal": "No threats found.",
+    "changelog": "VERSION 1.3 -- Changes -- Fixed critical castle floor bug.",
+    "download": "https://mod.io/mods/file/2/c489a0354111a4d76640d47f0cdcb294"
+  },
+  "media": {
+    "youtube": [
+      "https://www.youtube.com/watch?v=dQw4w9WgXcQ"
+    ],
+    "sketchfab": [
+      "https://sketchfab.com/models/ef40b2d300334d009984c8865b2db1c8"
+    ],
+    "images": [
+      {
+        "full": "https://media.mod.io/images/mods/1/1/2/IMG_20170409_222419.jpg",
+        "thumbnail": "https://media.mod.io/cache/images/mods/1/1/2/thumb_1020x2000/IMG_20170409_222419.jpg",
+        "filename": "IMG_20170409_222419.jpg"
+      }
+    ]
+  },
+  "tags": [
+    null
+  ],
+  "ratings": {
+    "total": 1230,
+    "positive": 1047,
+    "negative": 183,
+    "weighted": 87.38,
+    "percentage": 91,
+    "text": "Very Positive"
+  }
+} 
+```
+
+
+### Properties
+
+Name|Type|Description
+---|---|---|---|
+id|integer(int32)|Unique mod id.
+game|integer(int32)|Unique game id.
+member|[Member_Object](#schemamember_object)|Contains member data.
+» id|integer(int32)|Unique id of the user.
+» nameid|string|Unique nameid of user which forms end of their profile URL.
+» username|string|Non-unique username of the user.
+» avatar|[Avatar_Object](#schemaavatar_object)|Contains avatar data.
+»» filename|string|Image filename, including file extension.
+»» full|string|Full URL to the image.
+» timezone|string|The Timezone of the user, shown in {Country}/{City} format.
+» language|string|The users language preference, limited to two characters.
+» url|string|URL to the user profile.
+price|float|Sale price if applicable, in USD.
+datereg|integer(int32)|Unix timestamp of date registered.
+dateup|integer(int32)|Unix timestamp of date last updated.
+logo|[Logo_Object](#schemalogo_object)|Contains logo data.
+» filename|string|Image filename, with file extension included.
+» full|string|URL to full-sized image.
+» thumb_320x180|string|URL to small thumbnail image.
+» thumb_640x360|string|URL to medium thumbnail image.
+» thumb_1280x720|string|URL to large thumbnail image.
+homepage|string|Mod homepage URL.
+name|string|Name of the mod.
+nameid|string|Unique SEO-friendly mod uri.
+summary|string|Brief summary of the mod.
+description|string|Description of the mod.
+metadata|string|Metadata for the mod.
+url|string|Official website url for the mod.
+modfile|[Modfile_Object](#schemamodfile_object)|Contains file data.
+» id|integer(int32)|Unique file id.
+» mod|integer(int32)|Unique mod id.
+» member|[Member_Object](#schemamember_object)|Contains member data.
+»» id|integer(int32)|Unique id of the user.
+»» nameid|string|Unique nameid of user which forms end of their profile URL.
+»» username|string|Non-unique username of the user.
+»» avatar|[Avatar_Object](#schemaavatar_object)|Contains avatar data.
+»»» filename|string|Image filename, including file extension.
+»»» full|string|Full URL to the image.
+»» timezone|string|The Timezone of the user, shown in {Country}/{City} format.
+»» language|string|The users language preference, limited to two characters.
+»» url|string|URL to the user profile.
+» date|integer(int32)|Unix timestamp of file upload time.
+» datevirus|integer(int32)|Unix timestamp of file virus scan.
+» virusstatus|integer(int32)|The status of the virus scan for the file.
+» viruspositive|integer(int32)|Has the file been positively flagged as a virus?
+» filesize|integer(int32)|Size of the file in bytes.
+» filehash|string|MD5 filehash
+» filename|string|Name of the file including file extension.
+» version|string|The release version this file represents.
+» virustotal|string|Text output from virustotal scan.
+» changelog|string|List of all changes in this file release.
+» download|string|Link to download the file from the mod.io CDN.
+media|object|Contains media data.
+» youtube|[string]|Contains YouTube data.
+» sketchfab|[string]|Contains Sketchfab data.
+» images|[Unknown]|Contains images data.
+»» full|string|URL to the full image.
+»» thumbnail|string|URL to the thumbnail image.
+»» filename|string|Image filename, with with extension included.
+ratings|[Rating_Object](#schemarating_object)|Contains ratings data.
+» total|integer(int32)|Total Ratings.
+» positive|integer(int32)|Positive Ratings.
+» negative|integer(int32)|Negative ratings.
+» weighted|float|Weighted Rating.
+» percentage|integer(int32)|Percentage.
+» text|string|Text representation of the rating total.
+tags|[Unknown]|No description
+
+
+
+
+## Mod Tag Object
+
+<a name="schemamod_tag_object"></a>
+
+```json
+{
+  "game": 2,
+  "mod": 2,
+  "tag": "Unity",
+  "date": 1499841487
+} 
+```
+
+
+### Properties
+
+Name|Type|Description
+---|---|---|---|
+game|integer(int32)|Unique game id.
+mod|integer(int32)|Unique mod id.
+tag|string|The contents of the tag.
+date|integer(int32)|Unix timestamp of when tag was applied.
+
+
+
+
+## Game Object
+
+ <a name="schemagame_object"></a>
+
+```json
+{
+  "id": 2,
+  "member": {
+    "id": 1,
+    "nameid": "xant",
+    "username": "XanT",
+    "avatar": {
+      "filename": "masterchief.jpg",
+      "full": "https://media.mod.io/images/members/1/1/1/masterchief.jpg"
+    },
+    "timezone": "Australia/Brisbane",
+    "language": "en",
+    "url": "https://mod.io/members/xant"
+  },
+  "datereg": 1493702614,
+  "dateup": 1499410290,
+  "presentation": 1,
+  "community": 3,
+  "submission": 0,
+  "curation": 0,
+  "revenue": 1500,
+  "api": 3,
+  "ugcname": "map",
+  "icon": {
+    "filename": "IMG_20170409_222419.jpg",
+    "full": "https://media.mod.io/images/mods/1/1/2/icon.png",
+    "thumb_320x180": "https://media.mod.io/cache/images/mods/1/1/2/thumb_320x180/icon.png"
+  },
+  "logo": {
+    "filename": "IMG_20170409_222419.jpg",
+    "full": "https://media.mod.io/images/mods/1/1/2/IMG_20170409_222419.jpg",
+    "thumb_320x180": "https://media.mod.io/cache/images/mods/1/1/2/thumb_320x180/IMG_20170409_222419.jpg",
+    "thumb_640x360": "https://media.mod.io/cache/images/mods/1/1/2/thumb_640x360/IMG_20170409_222419.jpg",
+    "thumb_1280x720": "https://media.mod.io/cache/images/mods/1/1/2/thumb_1280x720/IMG_20170409_222419.jpg"
+  },
+  "header": {
+    "filename": "gameheader.png",
+    "full": "https://media.mod.io/images/games/1/1/2/gameheader.png"
+  },
+  "homepage": "https://www.rogue-knight-game.com/",
+  "name": "Rogue Knight",
+  "nameid": "rogue-knight",
+  "summary": "Rogue Knight is a brand new 2D pixel platformer.",
+  "instructions": "Instructions here on how to develop for your game.",
+  "url": "https://rogue-knight.mod.io",
+  "cats": [
+    {
+      "name": "Engines",
+      "type": "checkboxes",
+      "tags": [
+        "Unity"
+      ],
+      "adminonly": 0
+    }
+  ]
+} 
+```
+
+
+### Properties
+
+Name|Type|Description
+---|---|---|---|
+id|integer(int32)|Unique game id.
+member|[Member_Object](#schemamember_object)|Contains member data.
+» id|integer(int32)|Unique id of the user.
+» nameid|string|Unique nameid of user which forms end of their profile URL.
+» username|string|Non-unique username of the user.
+» avatar|[Avatar_Object](#schemaavatar_object)|Contains avatar data.
+»» filename|string|Image filename, including file extension.
+»» full|string|Full URL to the image.
+» timezone|string|The Timezone of the user, shown in {Country}/{City} format.
+» language|string|The users language preference, limited to two characters.
+» url|string|URL to the user profile.
+datereg|integer(int32)|Unix timestamp of date registered.
+dateup|integer(int32)|Unix timestamp of date updated.
+presentation|integer(int32)|Determines which presentation style you want to use for your game on the mod.io website <br><br>*Field options*<br>__0__ =  Grid View: Displays mods in a grid (visual but less informative, default setting) <br>__1__ = Table View: Displays mods in a table (easier to browse).
+community|integer(int32)|Determines the rights community members have with the game.<br><br>*Field Options*<br>__0__ = Discussion board disabled, community cannot share guides and news<br>__1__ = Discussion Board enabled only<br>__2__ = Community can only share guides and news<br>__3__ = Discussion Board enabled and community can share news and guides
+submission|integer(int32)|Determines the submission process you want modders to follow.<br><br>*Field Options*<br>__0__ = Control the upload process. ou will have to build an upload system either in-game or via a standalone app, which enables developers to submit mods to the tags you have configured. Because you control the flow, you can pre-validate and compile mods, to ensure they will work in your game. In the long run this option will save you time as you can accept more submissions, but it requires more setup to get running and isn't as open as the above option. NOTE: mod profiles can still be created online, but uploads will have to occur via the tools you supply.<br><br>__1__ = Enable mod uploads from anywhere. Allow developers to upload mods via the website and API, and pick the tags their mod is built for. No validation will be done on the files submitted, it will be the responsibility of your game and apps built to process the mods installation based on the tags selected and determine if the mod is valid and works. For example a mod might be uploaded to the 'map' tag. When a user subscribes to this mod, your game will need to verify it contains a map file and install it where maps are located. If this fails, your game or the community will have to flag the mod as 'incompatible' to remove it from the listing.
+curation|integer(int32)|Determines the curation process for the game.<br><br>*Field Options*<br>__0__ = Mods are immediately available to play, without any intervention or work from your team.<br>__1__ = Screen only mods the author wants to sell, before they are available to purchase via the API.<br>__2__ = All mods must be accepted by someone on your team. This option is useful for games that have a small number of mods and want to control the experience, or you need to set the parameters attached to a mod (i.e. a weapon may require the rate of fire, power level, clip size etc). It can also be used for complex mods, which you may need to build into your game or distribute as DLC.
+revenue|integer(int32)|Determines the revenue-share mod creators receive as a percentage. ie. 20 = 20%
+api|integer(int32)|Determines what permissions you want to enable via the mod.io API.<br><br>*Field Options*<br>__0__ = Third parties cannot access your mods API and mods cannot be downloaded directly without API validation.<br>__1__ = Allow 3rd parties to access your mods API (recommended, an open API will encourage a healthy ecosystem of tools and apps) but mods cannot be downloaded directly<br>__2__ = Allow mods to be downloaded directly but 3rd parties cannot access your mods API.<br>__3__ = Allow third parties to access your mods API and allow mods to be downloaded directly without api validation.
+ugcname|string|Singular string that best describes the type of user-generated content.
+icon|[Icon_Object](#schemaicon_object)|Contains icon data.
+» filename|string|Image filename, with file extension included.
+» full|string|URL to full-sized image.
+» thumb_320x180|string|URL to small thumbnail image.
+logo|[Logo_Object](#schemalogo_object)|Contains logo data.
+» filename|string|Image filename, with file extension included.
+» full|string|URL to full-sized image.
+» thumb_320x180|string|URL to small thumbnail image.
+» thumb_640x360|string|URL to medium thumbnail image.
+» thumb_1280x720|string|URL to large thumbnail image.
+header|[Header_Object](#schemaheader_object)|Contains header data.
+» filename|string|Image filename, with file extension included.
+» full|string|URL to the full-sized header image.
+homepage|string|Official game website URL.
+name|string|Title of the game.
+nameid|string|The unique SEO friendly URL of the game.
+summary|string|Brief summary of the game.
+instructions|string|Modding instructions for developers.
+url|string|website url for the game.
+cats|[[catsArray](#schemacatsarray)]|Contains categories data.
+» name|string|The name of the category.
+» type|string|Are tags selected via checkboxes or a single dropdown.
+» adminonly|integer(int32)|Is this an admin only tag? If so only admin's can see this category and it can be used for filtering.
+» tags|[string]|Eligible tags for this game.
+
+
+
+
+## Rating Object
+
+ <a name="schemarating_object"></a>
+
+```json
+{
+  "total": 1230,
+  "positive": 1047,
+  "negative": 183,
+  "weighted": 87.38,
+  "percentage": 91,
+  "text": "Very Positive"
+} 
+```
+
+
+### Properties
+
+Name|Type|Description
+---|---|---|---|
+total|integer(int32)|Total Ratings.
+positive|integer(int32)|Positive Ratings.
+negative|integer(int32)|Negative ratings.
+weighted|float|Weighted Rating.
+percentage|integer(int32)|Percentage.
+text|string|Text representation of the rating total.
+
+
+
+
+## Update Object
+
+ <a name="schemaupdate_object"></a>
+
+```json
+{
+  "id": 351,
+  "resource": "games",
+  "resourceid": 2,
+  "type": 4,
+  "date": 1492058857,
+  "mention": 0
+} 
+```
+
+
+### Properties
+
+Name|Type|Description
+---|---|---|---|
+id|integer(int32)|Unique update id.
+resource|string|String representation of the update origin's resource type.
+resourceid|integer(int32)|Unique id of corresponding resource.
+type|integer(int32)|The type of update.<br>*Field Options*<br>__0__ = Guest<br>__1__ = Member<br>__2__ = Contributor<br>__4__ = Manager<br>__8__ = Leader
+date|integer(int32)|Unix timestamp of date the update was created.
+mention|integer(int32)|Is this update the result of a user @mentioning you.
+
+
+
+
+## Member Object
+
+ <a name="schemamember_object"></a>
+
+```json
+{
+  "id": 1,
+  "nameid": "xant",
+  "username": "XanT",
+  "avatar": {
+    "filename": "masterchief.jpg",
+    "full": "https://media.mod.io/images/members/1/1/1/masterchief.jpg"
+  },
+  "timezone": "Australia/Brisbane",
+  "language": "en",
+  "url": "https://mod.io/members/xant"
+} 
+```
+
+
+### Properties
+
+Name|Type|Description
+---|---|---|---|
+id|integer(int32)|Unique id of the user.
+nameid|string|Unique nameid of user which forms end of their profile URL.
+username|string|Non-unique username of the user.
+avatar|[Avatar_Object](#schemaavatar_object)|Contains avatar data.
+» filename|string|Image filename, including file extension.
+» full|string|Full URL to the image.
+timezone|string|The Timezone of the user, shown in {Country}/{City} format.
+language|string|The users language preference, limited to two characters.
+url|string|URL to the user profile.
+
+
+
+
 
 
 

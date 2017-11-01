@@ -449,7 +449,7 @@ Full-text search is a lenient search filter that _is only available_ if the endp
 
 Where the string supplied matches the preceding column value. This is the equivalent to SQL's `LIKE`.
 
-- `?name-lk=texture` - Get all results where **only** _texture_ occurs in the `name` column.
+- `?name-lk=texture` - Get all results where _texture_ occurs in the `name` column.
 
 ### -not-lk (Not Like)
 

@@ -1,6 +1,7 @@
 //= require ../lib/_jquery
 //= require ../lib/_imagesloaded.min
 //= require ../lib/_colorbox.js
+//= require ../lib/_modio.js
 
 ;(function () {
   'use strict';
