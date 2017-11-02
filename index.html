@@ -488,7 +488,7 @@
                     <a href="#browse-mod-activity-2" class="toc-h2 toc-link" data-title="Schemas">Browse Mod Activity</a>
                   </li>
                   <li>
-                    <a href="#browse-files" class="toc-h2 toc-link" data-title="Schemas">Browse Files</a>
+                    <a href="#browse-mod-files-2" class="toc-h2 toc-link" data-title="Schemas">Browse Mod Files</a>
                   </li>
                   <li>
                     <a href="#browse-mod-tags-2" class="toc-h2 toc-link" data-title="Schemas">Browse Mod Tags</a>
@@ -1057,7 +1057,7 @@ curl -X post https://api.mod.io/v1/games/1/team <span class="se">\</span>
 </tbody>
 </table>
 <h2 id="filtering">Filtering</h2>
-<p>mod.io has powerful filtering available in requests. Every field of every request can be used as a filter and the following functions are available when querying the API:</p>
+<p>mod.io has powerful filtering available to assist you in making requests to the API. Every field of the every request can be used as a filter and the following functions are available when querying the API. It is important to understand that when using filters in your request, the filters you specify will <strong>only be applied to the bottom-level columns</strong>. That is, if the response object contains a nested object with the same column name, ie. <code>id</code> - the filtering will apply to the bottom level object, and not any nested objects.</p>
 <h3 id="functions">Functions</h3><h3 id="_sort-sort">_sort (Sort)</h3><pre class="highlight plaintext"><code>v1/games?_sort=id
 </code></pre>
 <p>Sort by a column, and ascending or descending order.</p>
@@ -1083,12 +1083,14 @@ curl -X post https://api.mod.io/v1/games/1/team <span class="se">\</span>
 <code>?_q=The Lord of the Rings</code> - This will return every result where the <code>name</code> column contains any of the following words: 'The', 'Lord', 'of', 'the', 'Rings'.</li>
 </ul>
 <h3 id="lk-like">-lk (Like)</h3><pre class="highlight plaintext"><code>v1/games?name-lk=texture
+</code></pre><pre class="highlight plaintext"><code>v1/games?name-lk=*texture
+</code></pre><pre class="highlight plaintext"><code>v1/games?name-lk=texture*
 </code></pre>
-<p>Where the string supplied matches the preceding column value. This is the equivalent to SQL's <code>LIKE</code>.</p>
+<p>Where the string supplied matches the preceding column value. This is the equivalent to SQL's <code>LIKE</code>. Consider using wildcard's <code>*</code> for the best chance of results as described below.</p>
 
 <ul>
 <li>
-<code>?name-lk=texture</code> - Get all results where <em>texture</em> occurs in the <code>name</code> column.</li>
+<code>?name-lk=texture</code> - Get all results where only <em>texture</em> occurs in the <code>name</code> column.</li>
 </ul>
 <h3 id="not-lk-not-like">-not-lk (Not Like)</h3><pre class="highlight plaintext"><code>v1/games?name-not-lk=dungeon
 </code></pre>
@@ -1099,12 +1101,13 @@ curl -X post https://api.mod.io/v1/games/1/team <span class="se">\</span>
 <code>?name-not-lk=dungeon</code> - Get all results where <em>texture</em> does not occur in the <code>name</code> column.</li>
 </ul>
 <h3 id="lk-amp-not-lk-wildcards">-lk &amp; -not-lk Wildcards</h3><pre class="highlight plaintext"><code>v1/games?name-lk=The Witcher*
+</code></pre><pre class="highlight plaintext"><code>v1/games?name-lk=*Asset Pack
 </code></pre>
 <p>The above -lk examples will only return results for an exact match, which may make it hard to get results depending on the complexity of your query. In that event, it's recommended you utilize the -lk wildcard value <code>*</code>. This is the equivalent to SQL's <code>%</code>.</p>
 
 <ul>
-<li>
-<code>?name-lk=The Witcher*</code> - Get all results where <em>The Witcher</em> occurs at the start of the name. This means the query would return results for 'The Witcher', 'The Witcher 2' and 'The Witcher 3'. </li>
+<li><p><code>?name-lk=The Witcher*</code> - Get all results where <em>The Witcher</em> is succeeded by any value. This means the query would return results for 'The Witcher', 'The Witcher 2' and 'The Witcher 3'. </p></li>
+<li><p><code>?name-lk=*Asset Pack</code> - Get all results where <em>Asset Pack</em> is proceeded by any value. This means the query would return results for 'Armor Asset Pack', 'Weapon Asset Pack' and 'HD Asset Pack'. </p></li>
 </ul>
 <h3 id="in-in">-in (In)</h3><pre class="highlight plaintext"><code>v1/games?id-in=3,11,16,29
 </code></pre>
@@ -1281,7 +1284,7 @@ Accept: application/json
 </code></pre>
 <p><span class="httpmethod GET">GET</span> <span class="endpointheading">/games</span></p>
 
-<p>Browse Games on mod.io. Successful request will return an array of <a href="https://docs.mod.io/#browse-games">Game Objects</a>. To make your requests as specific to your needs as possible it's highly recommended reading over our <a href="https://docs.mod.io/#filtering">filtering documentation</a> if it will help you with consuming this endpoint.</p>
+<p>Browse Games on mod.io. Successful request will return an array of <a href="https://docs.mod.io/#browse-games-2">Game Objects</a>. To make your requests as specific to your needs as possible it's highly recommended reading over our <a href="https://docs.mod.io/#filtering">filtering documentation</a> if it will help you with consuming this endpoint.</p>
 
 <table>
 <thead>
@@ -2117,7 +2120,7 @@ Accept: application/json
 </code></pre>
 <p><span class="httpmethod GET">GET</span> <span class="endpointheading">/games/{game-id}/activity</span></p>
 
-<p>View activity for a game, showing changes made to the resource. Successful request will return an array of <a href="https://docs.mod.io/#game-activity-object">Game activity objects</a>. To make your requests as specific to your needs as possible it's highly recommended reading over our <a href="https://docs.mod.io/#filtering">filtering documentation</a> if it will help you with consuming this endpoint.</p>
+<p>View activity for a game, showing changes made to the resource. Successful request will return an array of <a href="https://docs.mod.io/#browse-game-activity-2">Game activity objects</a>. To make your requests as specific to your needs as possible it's highly recommended reading over our <a href="https://docs.mod.io/#filtering">filtering documentation</a> if it will help you with consuming this endpoint.</p>
 
 <table>
 <thead>
@@ -2884,7 +2887,7 @@ Accept: application/json
 </code></pre>
 <p><span class="httpmethod GET">GET</span> <span class="endpointheading">/games/{game-id}/mods</span></p>
 
-<p>Browse mods on mod.io. Successful request will return an array of <a href="https://docs.mod.io/#browse-mods">Mod Objects</a>. To make your requests as specific to your needs as possible it's highly recommended reading over our <a href="https://docs.mod.io/#filtering">filtering documentation</a> if it will help you with consuming this endpoint.</p>
+<p>Browse mods on mod.io. Successful request will return an array of <a href="https://docs.mod.io/#browse-mods-2">Mod Objects</a>. To make your requests as specific to your needs as possible it's highly recommended reading over our <a href="https://docs.mod.io/#filtering">filtering documentation</a> if it will help you with consuming this endpoint.</p>
 
 <table>
 <thead>
@@ -4381,7 +4384,7 @@ Accept: application/json
 </code></pre>
 <p><span class="httpmethod GET">GET</span> <span class="endpointheading">/games/{game-id}/mods/{mod-id}/activity</span></p>
 
-<p>View activity for a mod, showing changes made to the resource. Successful request will return an array of <a href="https://docs.mod.io/#mod-activity-object">Mod Activity Objects</a>. To make your requests as specific to your needs as possible it's highly recommended reading over our <a href="https://docs.mod.io/#filtering">filtering documentation</a> if it will help you with consuming this endpoint.</p>
+<p>View activity for a mod, showing changes made to the resource. Successful request will return an array of <a href="https://docs.mod.io/#browse-mod-activity-2">Mod Activity Objects</a>. To make your requests as specific to your needs as possible it's highly recommended reading over our <a href="https://docs.mod.io/#filtering">filtering documentation</a> if it will help you with consuming this endpoint.</p>
 
 <table>
 <thead>
@@ -4556,7 +4559,7 @@ Accept: application/json
 </code></pre>
 <p><span class="httpmethod GET">GET</span> <span class="endpointheading">/games/{game-id}/mods/{mod-id}/files</span></p>
 
-<p>Browse files on mod.io that are published for the corresponding mod. Successful request will return an <a href="https://docs.mod.io/#browse-files">array of Modfile Objects</a>. To make your requests as specific to your needs as possible it's highly recommended reading over our <a href="https://docs.mod.io/#filtering">filtering documentation</a> if it will help you with consuming this endpoint.</p>
+<p>Browse files on mod.io that are published for the corresponding mod. Successful request will return an <a href="https://docs.mod.io/#browse-mod-files-2">array of Modfile Objects</a>. To make your requests as specific to your needs as possible it's highly recommended reading over our <a href="https://docs.mod.io/#filtering">filtering documentation</a> if it will help you with consuming this endpoint.</p>
 
 <table>
 <thead>
@@ -4698,7 +4701,7 @@ Accept: application/json
 <td>200</td>
 <td><a href="https://tools.ietf.org/html/rfc7231#section-6.3.1">OK</a></td>
 <td>Successful Request</td>
-<td><a href="#schemabrowse_files">Browse_Files</a></td>
+<td><a href="#schemabrowse_mod_files">Browse_Mod_Files</a></td>
 </tr>
 </tbody>
 </table>
@@ -8096,7 +8099,7 @@ Authorization: Bearer YourAccessToken
 <td>200</td>
 <td><a href="https://tools.ietf.org/html/rfc7231#section-6.3.1">OK</a></td>
 <td>Request Successful</td>
-<td><a href="#schemabrowse_files">Browse_Files</a></td>
+<td><a href="#schemabrowse_mod_files">Browse_Mod_Files</a></td>
 </tr>
 </tbody>
 </table>
@@ -9922,8 +9925,8 @@ oauth2 ( Scopes: write )
 </tr>
 </tbody>
 </table>
-<h2 id="browse-files">Browse Files</h2>
-<p><a name="schemabrowse_files"></a></p>
+<h2 id="browse-mod-files-2">Browse Mod Files</h2>
+<p><a name="schemabrowse_mod_files"></a></p>
 <pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
   </span><span class="s2">"data"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
     </span><span class="p">{</span><span class="w">
