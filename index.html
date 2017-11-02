@@ -1076,7 +1076,7 @@ curl -X post https://api.mod.io/v1/games/1/team <span class="se">\</span>
 </ul>
 <h3 id="_q-full-text-search">_q (Full text search)</h3><pre class="highlight plaintext"><code>v1/games/1?_q=The Lord Of The Rings
 </code></pre>
-<p>Full-text search is a lenient search filter that <em>is only available</em> if the endpoint you are querying contains a <code>name</code> column.</p>
+<p>Full-text search is a lenient search filter that <em>is only available</em> if the endpoint you are querying contains a <code>name</code> column. Wildcards should <em>not</em> be applied to this filter as they are ignored.</p>
 
 <ul>
 <li>
@@ -2967,6 +2967,11 @@ Accept: application/json
 <td>price</td>
 <td>double</td>
 <td>Numeric representation of the price.</td>
+</tr>
+<tr>
+<td>tags</td>
+<td>string</td>
+<td>Comma-separated values representing the tags you want to filter the results by. Only tags that are supported by the parent game can be applied. To determine what tags are eligible, see the tags values within <strong>cats</strong> field on the parent <a href="https://docs.mod.io/#game-object">Game Object</a>.</td>
 </tr>
 <tr>
 <td>status</td>
