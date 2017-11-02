@@ -437,7 +437,7 @@ Limit the number of results for a request.
 --parse_version/games/1?_q=The Lord Of The Rings
 ```
 
-Full-text search is a lenient search filter that _is only available_ if the endpoint you are querying contains a `name` column.
+Full-text search is a lenient search filter that _is only available_ if the endpoint you are querying contains a `name` column. Wildcards should _not_ be applied to this filter as they are ignored.
 
 - `?_q=The Lord of the Rings` - This will return every result where the `name` column contains any of the following words: 'The', 'Lord', 'of', 'the', 'Rings'.
 

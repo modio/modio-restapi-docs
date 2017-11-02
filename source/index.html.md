@@ -453,7 +453,7 @@ Limit the number of results for a request.
 v1/games/1?_q=The Lord Of The Rings
 ```
 
-Full-text search is a lenient search filter that _is only available_ if the endpoint you are querying contains a `name` column.
+Full-text search is a lenient search filter that _is only available_ if the endpoint you are querying contains a `name` column. Wildcards should _not_ be applied to this filter as they are ignored.
 
 - `?_q=The Lord of the Rings` - This will return every result where the `name` column contains any of the following words: 'The', 'Lord', 'of', 'the', 'Rings'.
 
@@ -2155,6 +2155,7 @@ Browse mods on mod.io. Successful request will return an array of [Mod Objects](
      metadata|string|Comma-separated list of metadata words.
      modfile|integer(int32)|Unique id of the [Modfile Object](https://docs.mod.io/#modfile-object) marked as current release.
      price|double|Numeric representation of the price.
+     tags|string|Comma-separated values representing the tags you want to filter the results by. Only tags that are supported by the parent game can be applied. To determine what tags are eligible, see the tags values within __cats__ field on the parent [Game Object](https://docs.mod.io/#game-object).
      status|string| _OAuth 2 only_. The status of the mod (only recognised by game admins), _default is 'auth'_.<br><br>*Fields Options:*<br>__unauth__ = Only return un-authorized mods.<br>__auth__ = Only return authorized mods _(default)_.<br>__ban__ = Only return banned mods.<br>__archive__ = Only return archived content (out of date builds).<br>__delete__ = Only return deleted mods.
 
 
