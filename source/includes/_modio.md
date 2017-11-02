@@ -405,7 +405,7 @@ Parameter | Value
 
 ## Filtering
 
-mod.io has powerful filtering available in requests. Every field of every request can be used as a filter and the following functions are available when querying the API:
+mod.io has powerful filtering available to assist you in making requests to the API. Every field of the every request can be used as a filter and the following functions are available when querying the API. It is important to understand that when using filters in your request, the filters you specify will __only be applied to the bottom-level columns__. That is, if the response object contains a nested object with the same column name, ie. `id` - the filtering will apply to the bottom level object, and not any nested objects.
 
 ### Functions
 
@@ -447,9 +447,17 @@ Full-text search is a lenient search filter that _is only available_ if the endp
 --parse_version/games?name-lk=texture
 ```
 
-Where the string supplied matches the preceding column value. This is the equivalent to SQL's `LIKE`.
+```
+--parse_version/games?name-lk=*texture
+```
 
-- `?name-lk=texture` - Get all results where _texture_ occurs in the `name` column.
+```
+--parse_version/games?name-lk=texture*
+```
+
+Where the string supplied matches the preceding column value. This is the equivalent to SQL's `LIKE`. Consider using wildcard's `*` for the best chance of results as described below.
+
+- `?name-lk=texture` - Get all results where only _texture_ occurs in the `name` column.
 
 ### -not-lk (Not Like)
 
@@ -467,9 +475,15 @@ Where the string supplied does not match the preceding column value. This is the
 --parse_version/games?name-lk=The Witcher*
 ```
 
+```
+--parse_version/games?name-lk=*Asset Pack
+```
+
 The above -lk examples will only return results for an exact match, which may make it hard to get results depending on the complexity of your query. In that event, it's recommended you utilize the -lk wildcard value `*`. This is the equivalent to SQL's `%`.
 
-- `?name-lk=The Witcher*` - Get all results where _The Witcher_ occurs at the start of the name. This means the query would return results for 'The Witcher', 'The Witcher 2' and 'The Witcher 3'. 
+- `?name-lk=The Witcher*` - Get all results where _The Witcher_ is succeeded by any value. This means the query would return results for 'The Witcher', 'The Witcher 2' and 'The Witcher 3'. 
+
+- `?name-lk=*Asset Pack` - Get all results where _Asset Pack_ is proceeded by any value. This means the query would return results for 'Armor Asset Pack', 'Weapon Asset Pack' and 'HD Asset Pack'. 
  
 ### -in (In)
 

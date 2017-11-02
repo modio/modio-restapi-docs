@@ -421,7 +421,7 @@ Parameter | Value
 
 ## Filtering
 
-mod.io has powerful filtering available in requests. Every field of every request can be used as a filter and the following functions are available when querying the API:
+mod.io has powerful filtering available to assist you in making requests to the API. Every field of the every request can be used as a filter and the following functions are available when querying the API. It is important to understand that when using filters in your request, the filters you specify will __only be applied to the bottom-level columns__. That is, if the response object contains a nested object with the same column name, ie. `id` - the filtering will apply to the bottom level object, and not any nested objects.
 
 ### Functions
 
@@ -463,9 +463,17 @@ Full-text search is a lenient search filter that _is only available_ if the endp
 v1/games?name-lk=texture
 ```
 
-Where the string supplied matches the preceding column value. This is the equivalent to SQL's `LIKE`.
+```
+v1/games?name-lk=*texture
+```
 
-- `?name-lk=texture` - Get all results where _texture_ occurs in the `name` column.
+```
+v1/games?name-lk=texture*
+```
+
+Where the string supplied matches the preceding column value. This is the equivalent to SQL's `LIKE`. Consider using wildcard's `*` for the best chance of results as described below.
+
+- `?name-lk=texture` - Get all results where only _texture_ occurs in the `name` column.
 
 ### -not-lk (Not Like)
 
@@ -483,9 +491,15 @@ Where the string supplied does not match the preceding column value. This is the
 v1/games?name-lk=The Witcher*
 ```
 
+```
+v1/games?name-lk=*Asset Pack
+```
+
 The above -lk examples will only return results for an exact match, which may make it hard to get results depending on the complexity of your query. In that event, it's recommended you utilize the -lk wildcard value `*`. This is the equivalent to SQL's `%`.
 
-- `?name-lk=The Witcher*` - Get all results where _The Witcher_ occurs at the start of the name. This means the query would return results for 'The Witcher', 'The Witcher 2' and 'The Witcher 3'. 
+- `?name-lk=The Witcher*` - Get all results where _The Witcher_ is succeeded by any value. This means the query would return results for 'The Witcher', 'The Witcher 2' and 'The Witcher 3'. 
+
+- `?name-lk=*Asset Pack` - Get all results where _Asset Pack_ is proceeded by any value. This means the query would return results for 'Armor Asset Pack', 'Weapon Asset Pack' and 'HD Asset Pack'. 
  
 ### -in (In)
 
@@ -700,7 +714,7 @@ System.out.println(response.toString());
 ```
 `GET /games`
 
-Browse Games on mod.io. Successful request will return an array of [Game Objects](https://docs.mod.io/#browse-games). To make your requests as specific to your needs as possible it's highly recommended reading over our [filtering documentation](https://docs.mod.io/#filtering) if it will help you with consuming this endpoint.
+Browse Games on mod.io. Successful request will return an array of [Game Objects](https://docs.mod.io/#browse-games-2). To make your requests as specific to your needs as possible it's highly recommended reading over our [filtering documentation](https://docs.mod.io/#filtering) if it will help you with consuming this endpoint.
      
      Filter|Type|Description
      ---|---|---
@@ -1389,7 +1403,7 @@ System.out.println(response.toString());
 ```
 `GET /games/{game-id}/activity`
 
-View activity for a game, showing changes made to the resource. Successful request will return an array of [Game activity objects](https://docs.mod.io/#game-activity-object). To make your requests as specific to your needs as possible it's highly recommended reading over our [filtering documentation](https://docs.mod.io/#filtering) if it will help you with consuming this endpoint.
+View activity for a game, showing changes made to the resource. Successful request will return an array of [Game activity objects](https://docs.mod.io/#browse-game-activity-2). To make your requests as specific to your needs as possible it's highly recommended reading over our [filtering documentation](https://docs.mod.io/#filtering) if it will help you with consuming this endpoint.
      
      Filter|Type|Description
      ---|---|---
@@ -2123,7 +2137,7 @@ System.out.println(response.toString());
 ```
 `GET /games/{game-id}/mods`
 
-Browse mods on mod.io. Successful request will return an array of [Mod Objects](https://docs.mod.io/#browse-mods). To make your requests as specific to your needs as possible it's highly recommended reading over our [filtering documentation](https://docs.mod.io/#filtering) if it will help you with consuming this endpoint.
+Browse mods on mod.io. Successful request will return an array of [Mod Objects](https://docs.mod.io/#browse-mods-2). To make your requests as specific to your needs as possible it's highly recommended reading over our [filtering documentation](https://docs.mod.io/#filtering) if it will help you with consuming this endpoint.
      
      Filter|Type|Description
      ---|---|---
@@ -3393,7 +3407,7 @@ System.out.println(response.toString());
 ```
 `GET /games/{game-id}/mods/{mod-id}/activity`
 
-View activity for a mod, showing changes made to the resource. Successful request will return an array of [Mod Activity Objects](https://docs.mod.io/#mod-activity-object). To make your requests as specific to your needs as possible it's highly recommended reading over our [filtering documentation](https://docs.mod.io/#filtering) if it will help you with consuming this endpoint.
+View activity for a mod, showing changes made to the resource. Successful request will return an array of [Mod Activity Objects](https://docs.mod.io/#browse-mod-activity-2). To make your requests as specific to your needs as possible it's highly recommended reading over our [filtering documentation](https://docs.mod.io/#filtering) if it will help you with consuming this endpoint.
      
      Filter|Type|Description
      ---|---|---
@@ -3550,7 +3564,7 @@ System.out.println(response.toString());
 ```
 `GET /games/{game-id}/mods/{mod-id}/files`
 
-Browse files on mod.io that are published for the corresponding mod. Successful request will return an [array of Modfile Objects](https://docs.mod.io/#browse-files). To make your requests as specific to your needs as possible it's highly recommended reading over our [filtering documentation](https://docs.mod.io/#filtering) if it will help you with consuming this endpoint.
+Browse files on mod.io that are published for the corresponding mod. Successful request will return an [array of Modfile Objects](https://docs.mod.io/#browse-mod-files-2). To make your requests as specific to your needs as possible it's highly recommended reading over our [filtering documentation](https://docs.mod.io/#filtering) if it will help you with consuming this endpoint.
      
      Filter|Type|Description
      ---|---|---
@@ -3616,7 +3630,7 @@ Browse files on mod.io that are published for the corresponding mod. Successful 
 
 Status|Meaning|Description|Response Schema
 ---|---|---|---|
-200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)|Successful Request|[Browse_Files](#schemabrowse_files)
+200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)|Successful Request|[Browse_Mod_Files](#schemabrowse_mod_files)
 
 <aside class="warning">
 To perform this operation, you must be authenticated by means of one of the following methods:
@@ -6853,7 +6867,7 @@ View all mod.io files that exist for the *authenticated user*.
 
 Status|Meaning|Description|Response Schema
 ---|---|---|---|
-200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)|Request Successful|[Browse_Files](#schemabrowse_files)
+200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)|Request Successful|[Browse_Mod_Files](#schemabrowse_mod_files)
 
 <aside class="warning">
 To perform this operation, you must be authenticated by means of one of the following methods:
@@ -7974,9 +7988,9 @@ data|[[Mod_Activity_Object](#schemamod_activity_object)]|Response array of items
 
 
 
-## Browse Files
+## Browse Mod Files
 
- <a name="schemabrowse_files"></a>
+<a name="schemabrowse_mod_files"></a>
 
 ```json
 {
