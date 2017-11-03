@@ -357,10 +357,10 @@ When using a cursor, you are able to specify where you want to _start_ looking f
 When using cursors you can optionally choose to provide the `_prev` parameter which is meant to be the previous cursor you used. Let's assume you that you just used the above search filter and you wish to keep track of your previous `_cursor` value whilst using a new value which will be shown in the meta object. You would apply it like so:
 
 ```
---parse_version/games/2/mods/2/files?_cursor=400&_prev=600
+--parse_version/games/2/mods/2/files?_cursor=400&_prev=300
 ```
 
-- `?_cursor=400&_prev=600` - Move the cursor to all records with a larger `id` than 400, but save that our previous cursor location was 400.
+- `?_cursor=400&_prev=300` - Move the cursor to all records with a larger `id` than 400, but save that our previous cursor location was 400.
 
 Note that the `_prev` parameter is arbitrary  information for your own implementations and does not affect the outcome of the query other than the value being appended to the meta object shown below.
 

@@ -373,10 +373,10 @@ When using a cursor, you are able to specify where you want to _start_ looking f
 When using cursors you can optionally choose to provide the `_prev` parameter which is meant to be the previous cursor you used. Let's assume you that you just used the above search filter and you wish to keep track of your previous `_cursor` value whilst using a new value which will be shown in the meta object. You would apply it like so:
 
 ```
-v1/games/2/mods/2/files?_cursor=400&_prev=600
+v1/games/2/mods/2/files?_cursor=400&_prev=300
 ```
 
-- `?_cursor=400&_prev=600` - Move the cursor to all records with a larger `id` than 400, but save that our previous cursor location was 400.
+- `?_cursor=400&_prev=300` - Move the cursor to all records with a larger `id` than 400, but save that our previous cursor location was 400.
 
 Note that the `_prev` parameter is arbitrary  information for your own implementations and does not affect the outcome of the query other than the value being appended to the meta object shown below.
 
@@ -7633,7 +7633,7 @@ cursor_id|integer(int32)|The current _cursor value.
 prev_id|integer(int32)|The previous _cursor value as manually inserted by you, null by default.
 next_id|integer(int32)|The next position to move the _cursor to, based on the current request.
 result_count|integer(int32)|The amount of results returned in the current request.
-data|[[Game_Object](#schemagame_object)]|Array containing game objects
+data|[Game_Object](#schemagame_object)[]|Array containing game objects
 » id|integer(int32)|Unique game id.
 » member|[Member_Object](#schemamember_object)|Contains member data.
 »» id|integer(int32)|Unique id of the user.
@@ -7673,7 +7673,7 @@ data|[[Game_Object](#schemagame_object)]|Array containing game objects
 » summary|string|Brief summary of the game.
 » instructions|string|Modding instructions for developers.
 » url|string|website url for the game.
-» cats|[[catsArray](#schemacatsarray)]|Contains categories data.
+» cats|[catsArray](#schemacatsarray)[]|Contains categories data.
 »» name|string|The name of the category.
 »» type|string|Are tags selected via checkboxes or a single dropdown.
 »» adminonly|integer(int32)|Is this an admin only tag? If so only admin's can see this category and it can be used for filtering.
@@ -7721,7 +7721,7 @@ data|[[Game_Object](#schemagame_object)]|Array containing game objects
 
 Name|Type|Description
 ---|---|---|---|
-data|[[Game_Activity_Object](#schemagame_activity_object)]|Response array of items
+data|[Game_Activity_Object](#schemagame_activity_object)[]|Response array of items
 » id|integer(int32)|Unique id of activity record.
 » member|[Member_Object](#schemamember_object)|Contains member data.
 »» id|integer(int32)|Unique id of the user.
@@ -7856,7 +7856,7 @@ cursor_id|integer(int32)|The current _cursor value.
 prev_id|integer(int32)|The previous _cursor value as manually inserted by you, null by default.
 next_id|integer(int32)|The next position to move the _cursor to, based on the current request.
 result_count|integer(int32)|The amount of results returned in the current request.
-data|[[Mod_Object](#schemamod_object)]|Array containing mod objects
+data|[Mod_Object](#schemamod_object)[]|Array containing mod objects
 » id|integer(int32)|Unique mod id.
 » game|integer(int32)|Unique game id.
 » member|[Member_Object](#schemamember_object)|Contains member data.
@@ -7967,7 +7967,7 @@ data|[[Mod_Object](#schemamod_object)]|Array containing mod objects
 
 Name|Type|Description
 ---|---|---|---|
-data|[[Mod_Activity_Object](#schemamod_activity_object)]|Response array of items
+data|[Mod_Activity_Object](#schemamod_activity_object)[]|Response array of items
 » id|integer(int32)|Unique id of activity object.
 » member|[Member_Object](#schemamember_object)|Contains member data.
 »» id|integer(int32)|Unique id of the user.
@@ -8043,7 +8043,7 @@ cursor_id|integer(int32)|The current _cursor value.
 prev_id|integer(int32)|The previous _cursor value as manually inserted by you, null by default.
 next_id|integer(int32)|The next position to move the _cursor to, based on the current request.
 result_count|integer(int32)|The amount of results returned in the current request.
-data|[[Modfile_Object](#schemamodfile_object)]|Response array of items
+data|[Modfile_Object](#schemamodfile_object)[]|Response array of items
 » id|integer(int32)|Unique file id.
 » mod|integer(int32)|Unique mod id.
 » member|[Member_Object](#schemamember_object)|Contains member data.
@@ -8093,7 +8093,7 @@ data|[[Modfile_Object](#schemamodfile_object)]|Response array of items
 
 Name|Type|Description
 ---|---|---|---|
-data|[[Mod_Tag_Object](#schemamod_tag_object)]|No description
+data|[Mod_Tag_Object](#schemamod_tag_object)[]|No description
 » game|integer(int32)|Unique game id.
 » mod|integer(int32)|Unique mod id.
 » tag|string|The contents of the tag.
@@ -8151,7 +8151,7 @@ cursor_id|integer(int32)|The current _cursor value.
 prev_id|integer(int32)|The previous _cursor value as manually inserted by you, null by default.
 next_id|integer(int32)|The next position to move the _cursor to, based on the current request.
 result_count|integer(int32)|The amount of results returned in the current request.
-data|[[Comment_Object](#schemacomment_object)]|Array containing comment objects
+data|[Comment_Object](#schemacomment_object)[]|Array containing comment objects
 » id|integer(int32)|Unique id of the comment.
 » mod|integer(int32)|Unique id of the parent mod.
 » member|[Member_Object](#schemamember_object)|Contains member data.
@@ -8217,7 +8217,7 @@ cursor_id|integer(int32)|The current _cursor value.
 prev_id|integer(int32)|The previous _cursor value as manually inserted by you, null by default.
 next_id|integer(int32)|The next position to move the _cursor to, based on the current request.
 result_count|integer(int32)|The amount of results returned in the current request.
-data|[[Access_Object](#schemaaccess_object)]|No description
+data|[Access_Object](#schemaaccess_object)[]|No description
 » id|integer(int32)|Unique access id.
 » member|[Member_Object](#schemamember_object)|Contains member data.
 »» id|integer(int32)|Unique id of the user.
@@ -8276,7 +8276,7 @@ cursor_id|integer(int32)|The current _cursor value.
 prev_id|integer(int32)|The previous _cursor value as manually inserted by you, null by default.
 next_id|integer(int32)|The next position to move the _cursor to, based on the current request.
 result_count|integer(int32)|The amount of results returned in the current request.
-data|[[Member_Object](#schemamember_object)]|Response array of items
+data|[Member_Object](#schemamember_object)[]|Response array of items
 » id|integer(int32)|Unique id of the user.
 » nameid|string|Unique nameid of user which forms end of their profile URL.
 » username|string|Non-unique username of the user.
@@ -8314,7 +8314,7 @@ data|[[Member_Object](#schemamember_object)]|Response array of items
 
 Name|Type|Description
 ---|---|---|---|
-data|[[Update_Object](#schemaupdate_object)]|No description
+data|[Update_Object](#schemaupdate_object)[]|No description
 » id|integer(int32)|Unique update id.
 » resource|string|String representation of the update origin's resource type.
 » resourceid|integer(int32)|Unique id of corresponding resource.
@@ -8959,7 +8959,7 @@ nameid|string|The unique SEO friendly URL of the game.
 summary|string|Brief summary of the game.
 instructions|string|Modding instructions for developers.
 url|string|website url for the game.
-cats|[[catsArray](#schemacatsarray)]|Contains categories data.
+cats|[catsArray](#schemacatsarray)[]|Contains categories data.
 » name|string|The name of the category.
 » type|string|Are tags selected via checkboxes or a single dropdown.
 » adminonly|integer(int32)|Is this an admin only tag? If so only admin's can see this category and it can be used for filtering.
