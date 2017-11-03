@@ -1001,11 +1001,11 @@ curl -X post https://api.mod.io/v1/games/1/team <span class="se">\</span>
 </ul>
 <h3 id="prev-cursors-only">Prev (Cursors only)</h3>
 <p>When using cursors you can optionally choose to provide the <code>_prev</code> parameter which is meant to be the previous cursor you used. Let's assume you that you just used the above search filter and you wish to keep track of your previous <code>_cursor</code> value whilst using a new value which will be shown in the meta object. You would apply it like so:</p>
-<pre class="highlight plaintext"><code>v1/games/2/mods/2/files?_cursor=400&amp;_prev=600
+<pre class="highlight plaintext"><code>v1/games/2/mods/2/files?_cursor=400&amp;_prev=300
 </code></pre>
 <ul>
 <li>
-<code>?_cursor=400&amp;_prev=600</code> - Move the cursor to all records with a larger <code>id</code> than 400, but save that our previous cursor location was 400.</li>
+<code>?_cursor=400&amp;_prev=300</code> - Move the cursor to all records with a larger <code>id</code> than 400, but save that our previous cursor location was 400.</li>
 </ul>
 
 <p>Note that the <code>_prev</code> parameter is arbitrary  information for your own implementations and does not affect the outcome of the query other than the value being appended to the meta object shown below.</p>
@@ -8972,7 +8972,8 @@ oauth2 ( Scopes: write )
 </tr>
 <tr>
 <td>data</td>
-<td>[<a href="#schemagame_object">Game_Object</a>]</td>
+<td>
+<a href="#schemagame_object">Game_Object</a>[]</td>
 <td>Array containing game objects</td>
 </tr>
 <tr>
@@ -9172,7 +9173,8 @@ oauth2 ( Scopes: write )
 </tr>
 <tr>
 <td>» cats</td>
-<td>[<a href="#schemacatsarray">catsArray</a>]</td>
+<td>
+<a href="#schemacatsarray">catsArray</a>[]</td>
 <td>Contains categories data.</td>
 </tr>
 <tr>
@@ -9238,7 +9240,8 @@ oauth2 ( Scopes: write )
 <tbody>
 <tr>
 <td>data</td>
-<td>[<a href="#schemagame_activity_object">Game_Activity_Object</a>]</td>
+<td>
+<a href="#schemagame_activity_object">Game_Activity_Object</a>[]</td>
 <td>Response array of items</td>
 </tr>
 <tr>
@@ -9459,7 +9462,8 @@ oauth2 ( Scopes: write )
 </tr>
 <tr>
 <td>data</td>
-<td>[<a href="#schemamod_object">Mod_Object</a>]</td>
+<td>
+<a href="#schemamod_object">Mod_Object</a>[]</td>
 <td>Array containing mod objects</td>
 </tr>
 <tr>
@@ -9840,7 +9844,8 @@ oauth2 ( Scopes: write )
 <tbody>
 <tr>
 <td>data</td>
-<td>[<a href="#schemamod_activity_object">Mod_Activity_Object</a>]</td>
+<td>
+<a href="#schemamod_activity_object">Mod_Activity_Object</a>[]</td>
 <td>Response array of items</td>
 </tr>
 <tr>
@@ -10002,7 +10007,8 @@ oauth2 ( Scopes: write )
 </tr>
 <tr>
 <td>data</td>
-<td>[<a href="#schemamodfile_object">Modfile_Object</a>]</td>
+<td>
+<a href="#schemamodfile_object">Modfile_Object</a>[]</td>
 <td>Response array of items</td>
 </tr>
 <tr>
@@ -10146,7 +10152,8 @@ oauth2 ( Scopes: write )
 <tbody>
 <tr>
 <td>data</td>
-<td>[<a href="#schemamod_tag_object">Mod_Tag_Object</a>]</td>
+<td>
+<a href="#schemamod_tag_object">Mod_Tag_Object</a>[]</td>
 <td>No description</td>
 </tr>
 <tr>
@@ -10238,7 +10245,8 @@ oauth2 ( Scopes: write )
 </tr>
 <tr>
 <td>data</td>
-<td>[<a href="#schemacomment_object">Comment_Object</a>]</td>
+<td>
+<a href="#schemacomment_object">Comment_Object</a>[]</td>
 <td>Array containing comment objects</td>
 </tr>
 <tr>
@@ -10394,7 +10402,8 @@ oauth2 ( Scopes: write )
 </tr>
 <tr>
 <td>data</td>
-<td>[<a href="#schemaaccess_object">Access_Object</a>]</td>
+<td>
+<a href="#schemaaccess_object">Access_Object</a>[]</td>
 <td>No description</td>
 </tr>
 <tr>
@@ -10531,7 +10540,8 @@ oauth2 ( Scopes: write )
 </tr>
 <tr>
 <td>data</td>
-<td>[<a href="#schemamember_object">Member_Object</a>]</td>
+<td>
+<a href="#schemamember_object">Member_Object</a>[]</td>
 <td>Response array of items</td>
 </tr>
 <tr>
@@ -10607,7 +10617,8 @@ oauth2 ( Scopes: write )
 <tbody>
 <tr>
 <td>data</td>
-<td>[<a href="#schemaupdate_object">Update_Object</a>]</td>
+<td>
+<a href="#schemaupdate_object">Update_Object</a>[]</td>
 <td>No description</td>
 </tr>
 <tr>
@@ -12084,7 +12095,8 @@ oauth2 ( Scopes: write )
 </tr>
 <tr>
 <td>cats</td>
-<td>[<a href="#schemacatsarray">catsArray</a>]</td>
+<td>
+<a href="#schemacatsarray">catsArray</a>[]</td>
 <td>Contains categories data.</td>
 </tr>
 <tr>
