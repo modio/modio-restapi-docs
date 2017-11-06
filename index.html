@@ -1338,7 +1338,8 @@ Accept: application/json
 <tr>
 <td>revenue</td>
 <td>integer(int32)</td>
-<td>Choose the revenue-share mod creators receive as a percentage. ie. 20 = 20%</td>
+<td>
+<strong>Bitwise</strong>. Choose the revenue capabilities for user-generated content of the game. For selecting multiple options you need to submit the bitwise value. For example, if you want to allow user-generated content to be sold(1), to receive donations(2) and allow them to control their supply and scarcity(8) your revenue value would be <em>11 (8 + 2 + 1)</em>.<br><br><em>Field Options</em><br><strong>1</strong> = Allow user-generated content to be sold<br><strong>2</strong> = Allow user-generated content to receive donations<br><strong>4</strong> = Allow user-generated content to be traded (not subject to revenue share)<br><strong>8</strong> = Allow user-generated content to control supply and scarcity.</td>
 </tr>
 <tr>
 <td>api</td>
@@ -1795,10 +1796,17 @@ Content-Type: application/x-www-form-urlencoded
 <td>Choose the curation process for the game<br><br><em>Field Options</em><br><strong>0</strong> = Mods are immediately available to play, without any intervention or work from your team.<br><strong>1</strong> = Screen only mods the author wants to sell, before they are available to purchase via the API.<br><strong>2</strong> = All mods must be accepted by someone on your team. This option is useful for games that have a small number of mods and want to control the experience, or you need to set the parameters attached to a mod (i.e. a weapon may require the rate of fire, power level, clip size etc). It can also be used for complex mods, which you may need to build into your game or distribute as DLC.</td>
 </tr>
 <tr>
+<td>revenue</td>
+<td>integer(int32)</td>
+<td></td>
+<td>
+<strong>Bitwise</strong>. Choose the revenue capabilities for user-generated content of the game. For selecting multiple options you need to submit the bitwise value. For example, if you want to allow user-generated content to be sold(1), to receive donations(2) and allow them to control their supply and scarcity(8) your revenue value would be <em>11 (8 + 2 + 1)</em>.<br><br><em>Field Options</em><br><strong>1</strong> = Allow user-generated content to be sold<br><strong>2</strong> = Allow user-generated content to receive donations<br><strong>4</strong> = Allow user-generated content to be traded (not subject to revenue share)<br><strong>8</strong> = Allow user-generated content to control supply and scarcity.</td>
+</tr>
+<tr>
 <td>api</td>
 <td>integer(int32)</td>
 <td></td>
-<td>Choose what permissions you want to enable via the mod.io API<br><br><em>Field Options</em><br><strong>0</strong> = Third parties cannot access your mods API and mods cannot be downloaded directly without API validation.<br><strong>1</strong> = Allow 3rd parties to access your mods API (recommended, an open API will encourage a healthy ecosystem of tools and apps) but mods cannot be downloaded directly<br><strong>2</strong> = Allow mods to be downloaded directly but 3rd parties cannot access your mods API.<br><strong>3</strong> = Allow third parties to access your mods API and allow mods to be downloaded directly without api validation.</td>
+<td>Choose what permissions you want to enable via the mod.io API.<br><br><em>Field Options</em><br><strong>0</strong> = Third parties cannot access your mods API and mods cannot be downloaded directly without API validation.<br><strong>1</strong> = Allow 3rd parties to access your mods API (recommended, an open API will encourage a healthy ecosystem of tools and apps) but mods cannot be downloaded directly<br><strong>2</strong> = Allow mods to be downloaded directly but 3rd parties cannot access your mods API.<br><strong>3</strong> = Allow third parties to access your mods API and allow mods to be downloaded directly without api validation.</td>
 </tr>
 <tr>
 <td>ugcname</td>
@@ -2295,7 +2303,56 @@ Accept: application/json
 </code></pre>
 <p><span class="httpmethod GET">GET</span> <span class="endpointheading">/games/{game-id}/team</span></p>
 
-<p>View all members that are part of a game team. Successful request will return an array of <a href="https://docs.mod.io/#browse-team">Access objects</a>.</p>
+<p>View all members that are part of a game team. Successful request will return an array of <a href="https://docs.mod.io/#browse-team">Access objects</a>. To make your requests as specific to your needs as possible it's highly recommended reading over our <a href="https://docs.mod.io/#filtering">filtering documentation</a> if it will help you with consuming this endpoint.</p>
+
+<table>
+<thead>
+<tr>
+<th>Filter</th>
+<th>Type</th>
+<th>Required</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>id</td>
+<td>integer(int32)</td>
+<td>Unique id of the access record.</td>
+<td></td>
+</tr>
+<tr>
+<td>member</td>
+<td>integer(int32)</td>
+<td>Unique id of the member.</td>
+<td></td>
+</tr>
+<tr>
+<td>username</td>
+<td>string</td>
+<td>Username of the member.</td>
+<td></td>
+</tr>
+<tr>
+<td>level</td>
+<td>integer</td>
+<td>The level of permission the user has.<br><br><em>Fields Options:</em><br><strong>1</strong> = Moderator (can moderate content submitted)<br><strong>4</strong> = Financials (read only access to the control panel to view financial reports)<br><strong>8</strong> = Administrator (full access, including editing the profile and team)</td>
+<td></td>
+</tr>
+<tr>
+<td>date</td>
+<td>integer</td>
+<td>Unix timestamp of the date the user was added to the team.</td>
+<td></td>
+</tr>
+<tr>
+<td>position</td>
+<td>string</td>
+<td>Custom title given to the user.</td>
+<td></td>
+</tr>
+</tbody>
+</table>
 
 <blockquote>
 <p>Example responses</p>
@@ -4598,7 +4655,7 @@ Accept: application/json
 <tr>
 <td>datevirus</td>
 <td>integer(int32)</td>
-<td>Date it was last virus checked.</td>
+<td>Unix timestamp of date it was virus scanned.</td>
 </tr>
 <tr>
 <td>virusstatus</td>
@@ -6409,6 +6466,55 @@ Accept: application/json
 
 <p>View all members that are part of a mod team. Successful request will return an array of <a href="https://docs.mod.io/#browse-team">Access Objects</a>. To make your requests as specific to your needs as possible it's highly recommended reading over our <a href="https://docs.mod.io/#filtering">filtering documentation</a> if it will help you with consuming this endpoint.</p>
 
+<table>
+<thead>
+<tr>
+<th>Filter</th>
+<th>Type</th>
+<th>Required</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>id</td>
+<td>integer(int32)</td>
+<td>Unique id of the access record.</td>
+<td></td>
+</tr>
+<tr>
+<td>member</td>
+<td>integer(int32)</td>
+<td>Unique id of the member.</td>
+<td></td>
+</tr>
+<tr>
+<td>username</td>
+<td>string</td>
+<td>Username of the member.</td>
+<td></td>
+</tr>
+<tr>
+<td>level</td>
+<td>integer</td>
+<td>The level of permission the user has.<br><br><em>Fields Options:</em><br><strong>1</strong> = Moderator (can moderate content submitted)<br><strong>4</strong> = Financials (read only access to the control panel to view financial reports)<br><strong>8</strong> = Administrator (full access, including editing the profile and team)</td>
+<td></td>
+</tr>
+<tr>
+<td>date</td>
+<td>integer</td>
+<td>Unix timestamp of the date the user was added to the team.</td>
+<td></td>
+</tr>
+<tr>
+<td>position</td>
+<td>string</td>
+<td>Custom title given to the user.</td>
+<td></td>
+</tr>
+</tbody>
+</table>
+
 <blockquote>
 <p>Example responses</p>
 </blockquote>
@@ -7024,11 +7130,6 @@ Accept: application/json
 <td>username</td>
 <td>string</td>
 <td>Username of the member.</td>
-</tr>
-<tr>
-<td>permission</td>
-<td>string</td>
-<td>Status of the user account.<br><br><em>Field Options</em><br><strong>0</strong> = Unauthorized<br><strong>1</strong> = Authorized<br><strong>2</strong> = Banned<br><strong>3</strong> = Archived<br><strong>4</strong> = Deleted</td>
 </tr>
 <tr>
 <td>timezone</td>
@@ -9054,7 +9155,7 @@ oauth2 ( Scopes: write )
 <tr>
 <td>» submission</td>
 <td>integer(int32)</td>
-<td>Determines the submission process you want modders to follow.<br><br><em>Field Options</em><br><strong>0</strong> = Control the upload process. ou will have to build an upload system either in-game or via a standalone app, which enables developers to submit mods to the tags you have configured. Because you control the flow, you can pre-validate and compile mods, to ensure they will work in your game. In the long run this option will save you time as you can accept more submissions, but it requires more setup to get running and isn't as open as the above option. NOTE: mod profiles can still be created online, but uploads will have to occur via the tools you supply.<br><br><strong>1</strong> = Enable mod uploads from anywhere. Allow developers to upload mods via the website and API, and pick the tags their mod is built for. No validation will be done on the files submitted, it will be the responsibility of your game and apps built to process the mods installation based on the tags selected and determine if the mod is valid and works. For example a mod might be uploaded to the 'map' tag. When a user subscribes to this mod, your game will need to verify it contains a map file and install it where maps are located. If this fails, your game or the community will have to flag the mod as 'incompatible' to remove it from the listing.</td>
+<td>Determines the submission process you want modders to follow.<br><br><em>Field Options</em><br><strong>0</strong> = Control the upload process. You will have to build an upload system either in-game or via a standalone app, which enables developers to submit mods to the tags you have configured. Because you control the flow, you can pre-validate and compile mods, to ensure they will work in your game. In the long run this option will save you time as you can accept more submissions, but it requires more setup to get running and isn't as open as the above option. NOTE: mod profiles can still be created online, but uploads will have to occur via the tools you supply.<br><br><strong>1</strong> = Enable mod uploads from anywhere. Allow developers to upload mods via the website and API, and pick the tags their mod is built for. No validation will be done on the files submitted, it will be the responsibility of your game and apps built to process the mods installation based on the tags selected and determine if the mod is valid and works. For example a mod might be uploaded to the 'map' tag. When a user subscribes to this mod, your game will need to verify it contains a map file and install it where maps are located. If this fails, your game or the community will have to flag the mod as 'incompatible' to remove it from the listing.</td>
 </tr>
 <tr>
 <td>» curation</td>
@@ -9064,7 +9165,8 @@ oauth2 ( Scopes: write )
 <tr>
 <td>» revenue</td>
 <td>integer(int32)</td>
-<td>Determines the revenue-share mod creators receive as a percentage. ie. 20 = 20%</td>
+<td>
+<strong>Bitwise</strong>. Determines the revenue capabilities for mods of the game. For selecting multiple options you need to submit the bitwise value. i.e. If you want to allow user-generated content to be sold(1), to receive donations(2) and allow them to control their supply and scarcity(8) your would submit <em>11 (8 + 2 + 1)</em>.<br><br><em>Field Options</em><br><strong>1</strong> = Allow user-generated content to be sold<br><strong>2</strong> = Allow user-generated content to receive donations<br><strong>4</strong> = Allow user-generated content to be traded (not subject to revenue share)<br><strong>8</strong> = Allow user-generated content to control supply and scarcity.</td>
 </tr>
 <tr>
 <td>» api</td>
@@ -11976,7 +12078,7 @@ oauth2 ( Scopes: write )
 <tr>
 <td>submission</td>
 <td>integer(int32)</td>
-<td>Determines the submission process you want modders to follow.<br><br><em>Field Options</em><br><strong>0</strong> = Control the upload process. ou will have to build an upload system either in-game or via a standalone app, which enables developers to submit mods to the tags you have configured. Because you control the flow, you can pre-validate and compile mods, to ensure they will work in your game. In the long run this option will save you time as you can accept more submissions, but it requires more setup to get running and isn't as open as the above option. NOTE: mod profiles can still be created online, but uploads will have to occur via the tools you supply.<br><br><strong>1</strong> = Enable mod uploads from anywhere. Allow developers to upload mods via the website and API, and pick the tags their mod is built for. No validation will be done on the files submitted, it will be the responsibility of your game and apps built to process the mods installation based on the tags selected and determine if the mod is valid and works. For example a mod might be uploaded to the 'map' tag. When a user subscribes to this mod, your game will need to verify it contains a map file and install it where maps are located. If this fails, your game or the community will have to flag the mod as 'incompatible' to remove it from the listing.</td>
+<td>Determines the submission process you want modders to follow.<br><br><em>Field Options</em><br><strong>0</strong> = Control the upload process. You will have to build an upload system either in-game or via a standalone app, which enables developers to submit mods to the tags you have configured. Because you control the flow, you can pre-validate and compile mods, to ensure they will work in your game. In the long run this option will save you time as you can accept more submissions, but it requires more setup to get running and isn't as open as the above option. NOTE: mod profiles can still be created online, but uploads will have to occur via the tools you supply.<br><br><strong>1</strong> = Enable mod uploads from anywhere. Allow developers to upload mods via the website and API, and pick the tags their mod is built for. No validation will be done on the files submitted, it will be the responsibility of your game and apps built to process the mods installation based on the tags selected and determine if the mod is valid and works. For example a mod might be uploaded to the 'map' tag. When a user subscribes to this mod, your game will need to verify it contains a map file and install it where maps are located. If this fails, your game or the community will have to flag the mod as 'incompatible' to remove it from the listing.</td>
 </tr>
 <tr>
 <td>curation</td>
@@ -11986,7 +12088,8 @@ oauth2 ( Scopes: write )
 <tr>
 <td>revenue</td>
 <td>integer(int32)</td>
-<td>Determines the revenue-share mod creators receive as a percentage. ie. 20 = 20%</td>
+<td>
+<strong>Bitwise</strong>. Determines the revenue capabilities for mods of the game. For selecting multiple options you need to submit the bitwise value. i.e. If you want to allow user-generated content to be sold(1), to receive donations(2) and allow them to control their supply and scarcity(8) your would submit <em>11 (8 + 2 + 1)</em>.<br><br><em>Field Options</em><br><strong>1</strong> = Allow user-generated content to be sold<br><strong>2</strong> = Allow user-generated content to receive donations<br><strong>4</strong> = Allow user-generated content to be traded (not subject to revenue share)<br><strong>8</strong> = Allow user-generated content to control supply and scarcity.</td>
 </tr>
 <tr>
 <td>api</td>
