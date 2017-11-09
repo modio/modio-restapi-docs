@@ -7293,7 +7293,7 @@ oauth2 ( Scopes: write )
 </aside>
 
 
-## Get Subscriptions By Game
+## Get Subscription Updates By Game
 
 > Code samples
 
@@ -7407,11 +7407,11 @@ System.out.println(response.toString());
 the _authenticated user_ for the corresponding game.*
 
 __OAuth 2 Authentication Required__. Get all subscribed mod updates (new builds) that occurred between two timestamps for the *authenticated user* for the corresponding game. This endpoint is designed for intermittent polling by game clients to determine if notifications need to be pushed to the authenticated user. If you are consuming querying potential build updates from within a game, it is highly recommend you use this endpoint. Successful request will return an array of [Modfile Objects](https://docs.mod.io/#browse-mod-files-2) that were published between the two supplied timestamps.
-
-    Parameter|Type|Required|Description
-    ---|---|---|---|
-    start|integer(int32)|true|Unix timestamp of beginning of update check.
-    end|integer(int32)|true|Unix timestamp of end of update check.
+     
+     Parameter|Type|Required|Description
+     ---|---|---|---|
+     start|integer(int32)|true|Unix timestamp of beginning of update check.
+     end|integer(int32)|true|Unix timestamp of end of update check.
 
 
 > Example responses
@@ -7456,7 +7456,7 @@ __OAuth 2 Authentication Required__. Get all subscribed mod updates (new builds)
   "result_count": 100
 }
 ```
-<h3 id="Get-Subscriptions-By-Game-responses">Responses</h3>
+<h3 id="Get-Subscription-Updates-By-Game-responses">Responses</h3>
 
 Status|Meaning|Description|Response Schema
 ---|---|---|---|
