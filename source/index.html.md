@@ -1562,15 +1562,15 @@ System.out.println(response.toString());
 `GET /games/{game-id}/team`
 
 View all members that are part of a game team. Successful request will return an array of [Access objects](https://docs.mod.io/#browse-team). To make your requests as specific to your needs as possible it's highly recommended reading over our [filtering documentation](https://docs.mod.io/#filtering) if it will help you with consuming this endpoint.
-
-    Filter|Type|Required|Description
-    ---|---|---|---|
-    id|integer(int32)|Unique id of the access record.
-    member|integer(int32)|Unique id of the member.
-    username|string|Username of the member.
-    level|integer|The level of permission the user has.<br><br>*Fields Options:*<br>__1__ = Moderator (can moderate content submitted)<br>__4__ = Financials (read only access to the control panel to view financial reports)<br>__8__ = Administrator (full access, including editing the profile and team)
-    date|integer|Unix timestamp of the date the user was added to the team.
-    position|string|Custom title given to the user.
+     
+     Filter|Type|Required|Description
+     ---|---|---|---|
+     id|integer(int32)|Unique id of the access record.
+     member|integer(int32)|Unique id of the member.
+     username|string|Username of the member.
+     level|integer|The level of permission the user has.<br><br>*Fields Options:*<br>__1__ = Moderator (can moderate content submitted)<br>__4__ = Financials (read only access to the control panel to view financial reports)<br>__8__ = Administrator (full access, including editing the profile and team)
+     date|integer|Unix timestamp of the date the user was added to the team.
+     position|string|Custom title given to the user.
 
 
 > Example responses
@@ -4227,8 +4227,6 @@ Browse all tags for the corresponding mod, successful response will return an ar
      
      Filter|Type|Description
      ---|---|---
-     game|integer(int32)|Unique id of the game.
-     mod|integer(int32)|Unique id of the mod.
      date|integer(int32)|Unix timestamp of date added.
      member|integer(int32)|Unique id of the member who added the tag.
      tag|string|String representation of the tag. You can check the eligible tags on the parent game object to determine all possible values for this field.
@@ -4240,8 +4238,6 @@ Browse all tags for the corresponding mod, successful response will return an ar
 {
   "data": [
     {
-      "game": 2,
-      "mod": 2,
       "tag": "Unity",
       "date": 1499841487
     }
@@ -5242,15 +5238,15 @@ System.out.println(response.toString());
 `GET /games/{game-id}/mods/{mod-id}/team`
 
 View all members that are part of a mod team. Successful request will return an array of [Access Objects](https://docs.mod.io/#browse-team). To make your requests as specific to your needs as possible it's highly recommended reading over our [filtering documentation](https://docs.mod.io/#filtering) if it will help you with consuming this endpoint.
-
-    Filter|Type|Required|Description
-    ---|---|---|---|
-    id|integer(int32)|Unique id of the access record.
-    member|integer(int32)|Unique id of the member.
-    username|string|Username of the member.
-    level|integer|The level of permission the user has.<br><br>*Fields Options:*<br>__1__ = Moderator (can moderate content submitted)<br>__4__ = Financials (read only access to the control panel to view financial reports)<br>__8__ = Administrator (full access, including editing the profile and team)
-    date|integer|Unix timestamp of the date the user was added to the team.
-    position|string|Custom title given to the user.
+     
+     Filter|Type|Required|Description
+     ---|---|---|---|
+     id|integer(int32)|Unique id of the access record.
+     member|integer(int32)|Unique id of the member.
+     username|string|Username of the member.
+     level|integer|The level of permission the user has.<br><br>*Fields Options:*<br>__1__ = Moderator (can moderate content submitted)<br>__4__ = Financials (read only access to the control panel to view financial reports)<br>__8__ = Administrator (full access, including editing the profile and team)
+     date|integer|Unix timestamp of the date the user was added to the team.
+     position|string|Custom title given to the user.
 
 
 > Example responses
@@ -6305,7 +6301,7 @@ apiKey, oauth2 ( Scopes: read )
 
 # Me
 
-## View User Games
+## Get User Games
 
 > Code samples
 
@@ -6489,7 +6485,7 @@ View all mod.io games that exist for the *authenticated user*.
   "result_count": 100
 }
 ```
-<h3 id="View-User-Games-responses">Responses</h3>
+<h3 id="Get-User-Games-responses">Responses</h3>
 
 Status|Meaning|Description|Response Schema
 ---|---|---|---|
@@ -6501,7 +6497,7 @@ oauth2 ( Scopes: read )
 </aside>
 
 
-## View User Mods
+## Get User Mods
 
 > Code samples
 
@@ -6715,7 +6711,7 @@ View all mod.io mods that exist for the *authenticated user*.
   "result_count": 100
 }
 ```
-<h3 id="View-User-Mods-responses">Responses</h3>
+<h3 id="Get-User-Mods-responses">Responses</h3>
 
 Status|Meaning|Description|Response Schema
 ---|---|---|---|
@@ -6727,7 +6723,7 @@ oauth2 ( Scopes: read )
 </aside>
 
 
-## View User Files
+## Get User Files
 
 > Code samples
 
@@ -6882,7 +6878,7 @@ View all mod.io files that exist for the *authenticated user*.
   "result_count": 100
 }
 ```
-<h3 id="View-User-Files-responses">Responses</h3>
+<h3 id="Get-User-Files-responses">Responses</h3>
 
 Status|Meaning|Description|Response Schema
 ---|---|---|---|
@@ -6894,20 +6890,20 @@ oauth2 ( Scopes: read )
 </aside>
 
 
-## View User Updates
+## Get Subscriptions
 
 > Code samples
 
 ```shell
 # You can also use wget
-curl -X GET https://api.mod.io/v1/me/updates \
+curl -X GET https://api.mod.io/v1/me/subscribed \
   -H 'Authorization: Bearer YourAccessToken' \
   -H 'Accept: application/json'
 
 ```
 
 ```http
-GET https://api.mod.io/v1/me/updates HTTP/1.1
+GET https://api.mod.io/v1/me/subscribed HTTP/1.1
 Host: api.mod.io
 
 Accept: application/json
@@ -6924,7 +6920,7 @@ var headers = {
 };
 
 $.ajax({
-  url: 'https://api.mod.io/v1/me/updates',
+  url: 'https://api.mod.io/v1/me/subscribed',
   method: 'get',
 
   headers: headers,
@@ -6943,7 +6939,7 @@ const headers = {
 
 };
 
-fetch('https://api.mod.io/v1/me/updates',
+fetch('https://api.mod.io/v1/me/subscribed',
 {
   method: 'GET',
 
@@ -6965,7 +6961,7 @@ headers = {
   'Accept' => 'application/json'
 }
 
-result = RestClient.get 'https://api.mod.io/v1/me/updates',
+result = RestClient.get 'https://api.mod.io/v1/me/subscribed',
   params: {
   }, headers: headers
 
@@ -6980,7 +6976,7 @@ headers = {
   'Accept': 'application/json'
 }
 
-r = requests.get('https://api.mod.io/v1/me/updates', params={
+r = requests.get('https://api.mod.io/v1/me/subscribed', params={
 
 }, headers = headers)
 
@@ -6988,7 +6984,7 @@ print r.json()
 ```
 
 ```java
-URL obj = new URL("https://api.mod.io/v1/me/updates");
+URL obj = new URL("https://api.mod.io/v1/me/subscribed");
 HttpURLConnection con = (HttpURLConnection) obj.openConnection();
 con.setRequestMethod("GET");
 int responseCode = con.getResponseCode();
@@ -7002,9 +6998,11 @@ while ((inputLine = in.readLine()) != null) {
 in.close();
 System.out.println(response.toString());
 ```
-`GET /me/updates`
+`GET /me/subscribed`
 
-View all mod.io updates that exist for the *authenticated user*.
+*Get all subscribed mods by the user.*
+
+Get all mod's the *authenticated user* is subscribed to. Successful request will return an array of [Mod Objects](https://docs.mod.io/#browse-mods-2).
 
 
 > Example responses
@@ -7013,25 +7011,460 @@ View all mod.io updates that exist for the *authenticated user*.
 {
   "data": [
     {
-      "id": 351,
-      "resource": "games",
-      "resourceid": 2,
-      "type": 4,
-      "date": 1492058857,
-      "mention": 0
+      "id": 2,
+      "game": 2,
+      "member": {
+        "id": 1,
+        "nameid": "xant",
+        "username": "XanT",
+        "avatar": {
+          "filename": "masterchief.jpg",
+          "full": "https://media.mod.io/images/members/1/1/1/masterchief.jpg"
+        },
+        "timezone": "Australia/Brisbane",
+        "language": "en",
+        "url": "https://mod.io/members/xant"
+      },
+      "price": 9.99,
+      "datereg": 1492564103,
+      "dateup": 1499841487,
+      "logo": {
+        "filename": "IMG_20170409_222419.jpg",
+        "full": "https://media.mod.io/images/mods/1/1/2/IMG_20170409_222419.jpg",
+        "thumb_320x180": "https://media.mod.io/cache/images/mods/1/1/2/thumb_320x180/IMG_20170409_222419.jpg",
+        "thumb_640x360": "https://media.mod.io/cache/images/mods/1/1/2/thumb_640x360/IMG_20170409_222419.jpg",
+        "thumb_1280x720": "https://media.mod.io/cache/images/mods/1/1/2/thumb_1280x720/IMG_20170409_222419.jpg"
+      },
+      "homepage": "https://www.rogue-hdpack.com/",
+      "name": "Rogue Knight HD Pack",
+      "nameid": "rogue-knight-hd-pack",
+      "summary": "It's time to bask in the glory of beautiful 4k textures!",
+      "description": "<h2>About</h2><p>Rogue HD Pack does exactly what you thi...",
+      "metadata": "rogue,hd,high-res,4k,hd textures",
+      "url": "https://rogue-knight.mod.io/rogue-knight-hd-pack",
+      "modfile": {
+        "id": 2,
+        "mod": 2,
+        "member": {
+          "id": 1,
+          "nameid": "xant",
+          "username": "XanT",
+          "avatar": {
+            "filename": "masterchief.jpg",
+            "full": "https://media.mod.io/images/members/1/1/1/masterchief.jpg"
+          },
+          "timezone": "Australia/Brisbane",
+          "language": "en",
+          "url": "https://mod.io/members/xant"
+        },
+        "date": 1499841487,
+        "datevirus": 1499841487,
+        "virusstatus": 0,
+        "viruspositive": 0,
+        "filesize": 15181,
+        "filehash": "2d4a0e2d7273db6b0a94b0740a88ad0d",
+        "filename": "rogue-knight-v1.zip",
+        "version": "1.3",
+        "virustotal": "No threats found.",
+        "changelog": "VERSION 1.3 -- Changes -- Fixed critical castle floor bug.",
+        "download": "https://mod.io/mods/file/2/c489a0354111a4d76640d47f0cdcb294"
+      },
+      "media": {
+        "youtube": [
+          "https://www.youtube.com/watch?v=dQw4w9WgXcQ"
+        ],
+        "sketchfab": [
+          "https://sketchfab.com/models/ef40b2d300334d009984c8865b2db1c8"
+        ],
+        "images": [
+          {
+            "full": "https://media.mod.io/images/mods/1/1/2/IMG_20170409_222419.jpg",
+            "thumbnail": "https://media.mod.io/cache/images/mods/1/1/2/thumb_1020x2000/IMG_20170409_222419.jpg",
+            "filename": "IMG_20170409_222419.jpg"
+          }
+        ]
+      },
+      "tags": [
+        null
+      ],
+      "ratings": {
+        "total": 1230,
+        "positive": 1047,
+        "negative": 183,
+        "weighted": 87.38,
+        "percentage": 91,
+        "text": "Very Positive"
+      }
+    },
+    {
+        ...
     }
-  ]
+  ],
+  "cursor_id": 60,
+  "prev_id": 30,
+  "next_id": 160,
+  "result_count": 100
 }
 ```
-<h3 id="View-User-Updates-responses">Responses</h3>
+<h3 id="Get-Subscriptions-responses">Responses</h3>
 
 Status|Meaning|Description|Response Schema
 ---|---|---|---|
-200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)|Request Successful|[Browse_Updates](#schemabrowse_updates)
+200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)|Request Successful|[Browse_Mods](#schemabrowse_mods)
 
 <aside class="warning">
 To perform this operation, you must be authenticated by means of one of the following methods:
 oauth2 ( Scopes: read )
+</aside>
+
+
+## Get Subscription Updates
+
+> Code samples
+
+```shell
+# You can also use wget
+curl -X GET https://api.mod.io/v1/me/subscribed/updates \
+  -H 'Authorization: Bearer YourAccessToken' \
+  -H 'Accept: application/json'
+
+```
+
+```http
+GET https://api.mod.io/v1/me/subscribed/updates HTTP/1.1
+Host: api.mod.io
+
+Accept: application/json
+Authorization: Bearer YourAccessToken
+
+
+```
+
+```javascript
+var headers = {
+  'Authorization':'Bearer YourAccessToken',
+  'Accept':'application/json'
+
+};
+
+$.ajax({
+  url: 'https://api.mod.io/v1/me/subscribed/updates',
+  method: 'get',
+
+  headers: headers,
+  success: function(data) {
+    console.log(JSON.stringify(data));
+  }
+})
+```
+
+```javascript--nodejs
+const request = require('node-fetch');
+
+const headers = {
+  'Authorization':'Bearer YourAccessToken',
+  'Accept':'application/json'
+
+};
+
+fetch('https://api.mod.io/v1/me/subscribed/updates',
+{
+  method: 'GET',
+
+  headers: headers
+})
+.then(function(res) {
+    return res.json();
+}).then(function(body) {
+    console.log(body);
+});
+```
+
+```ruby
+require 'rest-client'
+require 'json'
+
+headers = {
+  'Authorization' => 'Bearer YourAccessToken',
+  'Accept' => 'application/json'
+}
+
+result = RestClient.get 'https://api.mod.io/v1/me/subscribed/updates',
+  params: {
+  }, headers: headers
+
+
+p JSON.parse(result)
+```
+
+```python
+import requests
+headers = {
+  'Authorization': 'Bearer YourAccessToken',
+  'Accept': 'application/json'
+}
+
+r = requests.get('https://api.mod.io/v1/me/subscribed/updates', params={
+
+}, headers = headers)
+
+print r.json()
+```
+
+```java
+URL obj = new URL("https://api.mod.io/v1/me/subscribed/updates");
+HttpURLConnection con = (HttpURLConnection) obj.openConnection();
+con.setRequestMethod("GET");
+int responseCode = con.getResponseCode();
+BufferedReader in = new BufferedReader(
+    new InputStreamReader(con.getInputStream()));
+String inputLine;
+StringBuffer response = new StringBuffer();
+while ((inputLine = in.readLine()) != null) {
+    response.append(inputLine);
+}
+in.close();
+System.out.println(response.toString());
+```
+`GET /me/subscribed/updates`
+
+*Get all updates that occurred between two timestamps for
+the _authenticated user_.*
+
+__OAuth 2 Authentication Required__. Get all subscribed mod updates (new builds) that occurred between two timestamps for the *authenticated user*. This endpoint is designed for intermittent polling by game clients to determine if notifications need to be pushed to the authenticated user. If you are consuming querying potential build updates from within a game, it is highly recommend you use this endpoint. Successful request will return an array of [Modfile Objects](https://docs.mod.io/#browse-mod-files-2) that were published between the two supplied timestamps.
+     
+     Parameter|Type|Required|Description
+     ---|---|---|---|
+     start|integer(int32)|true|Unix timestamp of beginning of update check.
+     end|integer(int32)|true|Unix timestamp of end of update check.
+
+
+> Example responses
+
+```json
+{
+  "data": [
+    {
+      "id": 2,
+      "mod": 2,
+      "member": {
+        "id": 1,
+        "nameid": "xant",
+        "username": "XanT",
+        "avatar": {
+          "filename": "masterchief.jpg",
+          "full": "https://media.mod.io/images/members/1/1/1/masterchief.jpg"
+        },
+        "timezone": "Australia/Brisbane",
+        "language": "en",
+        "url": "https://mod.io/members/xant"
+      },
+      "date": 1499841487,
+      "datevirus": 1499841487,
+      "virusstatus": 0,
+      "viruspositive": 0,
+      "filesize": 15181,
+      "filehash": "2d4a0e2d7273db6b0a94b0740a88ad0d",
+      "filename": "rogue-knight-v1.zip",
+      "version": "1.3",
+      "virustotal": "No threats found.",
+      "changelog": "VERSION 1.3 -- Changes -- Fixed critical castle floor bug.",
+      "download": "https://mod.io/mods/file/2/c489a0354111a4d76640d47f0cdcb294"
+    },
+    {
+        ...
+    }
+  ],
+  "cursor_id": 60,
+  "prev_id": 30,
+  "next_id": 160,
+  "result_count": 100
+}
+```
+<h3 id="Get-Subscription-Updates-responses">Responses</h3>
+
+Status|Meaning|Description|Response Schema
+---|---|---|---|
+200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)|Request Successful|[Browse_Mod_Files](#schemabrowse_mod_files)
+
+<aside class="warning">
+To perform this operation, you must be authenticated by means of one of the following methods:
+oauth2 ( Scopes: write )
+</aside>
+
+
+## Get Subscriptions By Game
+
+> Code samples
+
+```shell
+# You can also use wget
+curl -X GET https://api.mod.io/v1/games/{game-id}/mod/updates \
+  -H 'Authorization: Bearer YourAccessToken' \
+  -H 'Accept: application/json'
+
+```
+
+```http
+GET https://api.mod.io/v1/games/{game-id}/mod/updates HTTP/1.1
+Host: api.mod.io
+
+Accept: application/json
+Authorization: Bearer YourAccessToken
+
+
+```
+
+```javascript
+var headers = {
+  'Authorization':'Bearer YourAccessToken',
+  'Accept':'application/json'
+
+};
+
+$.ajax({
+  url: 'https://api.mod.io/v1/games/{game-id}/mod/updates',
+  method: 'get',
+
+  headers: headers,
+  success: function(data) {
+    console.log(JSON.stringify(data));
+  }
+})
+```
+
+```javascript--nodejs
+const request = require('node-fetch');
+
+const headers = {
+  'Authorization':'Bearer YourAccessToken',
+  'Accept':'application/json'
+
+};
+
+fetch('https://api.mod.io/v1/games/{game-id}/mod/updates',
+{
+  method: 'GET',
+
+  headers: headers
+})
+.then(function(res) {
+    return res.json();
+}).then(function(body) {
+    console.log(body);
+});
+```
+
+```ruby
+require 'rest-client'
+require 'json'
+
+headers = {
+  'Authorization' => 'Bearer YourAccessToken',
+  'Accept' => 'application/json'
+}
+
+result = RestClient.get 'https://api.mod.io/v1/games/{game-id}/mod/updates',
+  params: {
+  }, headers: headers
+
+
+p JSON.parse(result)
+```
+
+```python
+import requests
+headers = {
+  'Authorization': 'Bearer YourAccessToken',
+  'Accept': 'application/json'
+}
+
+r = requests.get('https://api.mod.io/v1/games/{game-id}/mod/updates', params={
+
+}, headers = headers)
+
+print r.json()
+```
+
+```java
+URL obj = new URL("https://api.mod.io/v1/games/{game-id}/mod/updates");
+HttpURLConnection con = (HttpURLConnection) obj.openConnection();
+con.setRequestMethod("GET");
+int responseCode = con.getResponseCode();
+BufferedReader in = new BufferedReader(
+    new InputStreamReader(con.getInputStream()));
+String inputLine;
+StringBuffer response = new StringBuffer();
+while ((inputLine = in.readLine()) != null) {
+    response.append(inputLine);
+}
+in.close();
+System.out.println(response.toString());
+```
+`GET /games/{game-id}/mod/updates`
+
+*Get all updates that occurred between two timestamps for
+the _authenticated user_ for the corresponding game.*
+
+__OAuth 2 Authentication Required__. Get all subscribed mod updates (new builds) that occurred between two timestamps for the *authenticated user* for the corresponding game. This endpoint is designed for intermittent polling by game clients to determine if notifications need to be pushed to the authenticated user. If you are consuming querying potential build updates from within a game, it is highly recommend you use this endpoint. Successful request will return an array of [Modfile Objects](https://docs.mod.io/#browse-mod-files-2) that were published between the two supplied timestamps.
+
+    Parameter|Type|Required|Description
+    ---|---|---|---|
+    start|integer(int32)|true|Unix timestamp of beginning of update check.
+    end|integer(int32)|true|Unix timestamp of end of update check.
+
+
+> Example responses
+
+```json
+{
+  "data": [
+    {
+      "id": 2,
+      "mod": 2,
+      "member": {
+        "id": 1,
+        "nameid": "xant",
+        "username": "XanT",
+        "avatar": {
+          "filename": "masterchief.jpg",
+          "full": "https://media.mod.io/images/members/1/1/1/masterchief.jpg"
+        },
+        "timezone": "Australia/Brisbane",
+        "language": "en",
+        "url": "https://mod.io/members/xant"
+      },
+      "date": 1499841487,
+      "datevirus": 1499841487,
+      "virusstatus": 0,
+      "viruspositive": 0,
+      "filesize": 15181,
+      "filehash": "2d4a0e2d7273db6b0a94b0740a88ad0d",
+      "filename": "rogue-knight-v1.zip",
+      "version": "1.3",
+      "virustotal": "No threats found.",
+      "changelog": "VERSION 1.3 -- Changes -- Fixed critical castle floor bug.",
+      "download": "https://mod.io/mods/file/2/c489a0354111a4d76640d47f0cdcb294"
+    },
+    {
+        ...
+    }
+  ],
+  "cursor_id": 60,
+  "prev_id": 30,
+  "next_id": 160,
+  "result_count": 100
+}
+```
+<h3 id="Get-Subscriptions-By-Game-responses">Responses</h3>
+
+Status|Meaning|Description|Response Schema
+---|---|---|---|
+200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)|Request Successful|[Browse_Mod_Files](#schemabrowse_mod_files)
+
+<aside class="warning">
+To perform this operation, you must be authenticated by means of one of the following methods:
+oauth2 ( Scopes: write )
 </aside>
 
 
@@ -8097,8 +8530,6 @@ data|[Modfile_Object](#schemamodfile_object)[]|Response array of items
 {
   "data": [
     {
-      "game": 2,
-      "mod": 2,
       "tag": "Unity",
       "date": 1499841487
     }
@@ -8112,8 +8543,6 @@ data|[Modfile_Object](#schemamodfile_object)[]|Response array of items
 Name|Type|Description
 ---|---|---|---|
 data|[Mod_Tag_Object](#schemamod_tag_object)[]|No description
-» game|integer(int32)|Unique game id.
-» mod|integer(int32)|Unique mod id.
 » tag|string|The contents of the tag.
 » date|integer(int32)|Unix timestamp of when tag was applied.
 
@@ -8332,7 +8761,7 @@ data|[Member_Object](#schemamember_object)[]|Response array of items
 
 Name|Type|Description
 ---|---|---|---|
-data|[Update_Object](#schemaupdate_object)[]|No description
+data|[Update_Object](#schemaupdate_object)[]|Get all updates that occurred between two timestamps for the _authenticated user_.  Endpoint: v1/me/subscribed/updates
 » id|integer(int32)|Unique update id.
 » resource|string|String representation of the update origin's resource type.
 » resourceid|integer(int32)|Unique id of corresponding resource.
@@ -8850,8 +9279,6 @@ tags|[Unknown]|No description
 
 ```json
 {
-  "game": 2,
-  "mod": 2,
   "tag": "Unity",
   "date": 1499841487
 } 
@@ -8862,8 +9289,6 @@ tags|[Unknown]|No description
 
 Name|Type|Description
 ---|---|---|---|
-game|integer(int32)|Unique game id.
-mod|integer(int32)|Unique mod id.
 tag|string|The contents of the tag.
 date|integer(int32)|Unix timestamp of when tag was applied.
 
