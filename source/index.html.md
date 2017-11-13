@@ -2259,10 +2259,12 @@ Browse mods on mod.io. Successful request will return an array of [Mod Objects](
         "stars": 4,
         "text": "Very Positive"
       },
-      "tags": {
-        "tag": "Unity",
-        "date": 1499841487
-      }
+      "tags": [
+        {
+          "tag": "Unity",
+          "date": 1499841487
+        }
+      ]
     },
     {
         ...
@@ -2468,10 +2470,12 @@ View a single mod on mod.io. Successful request will return a single [Mod Object
     "stars": 4,
     "text": "Very Positive"
   },
-  "tags": {
-    "tag": "Unity",
-    "date": 1499841487
-  }
+  "tags": [
+    {
+      "tag": "Unity",
+      "date": 1499841487
+    }
+  ]
 }
 ```
 <h3 id="View-Mod-responses">Responses</h3>
@@ -2694,10 +2698,12 @@ Publish a mod on mod.io. Successful request will return the newly created [Mod O
     "stars": 4,
     "text": "Very Positive"
   },
-  "tags": {
-    "tag": "Unity",
-    "date": 1499841487
-  }
+  "tags": [
+    {
+      "tag": "Unity",
+      "date": 1499841487
+    }
+  ]
 }
 ```
 <h3 id="Add-Mod-responses">Responses</h3>
@@ -6808,10 +6814,12 @@ View all mod.io mods that exist for the *authenticated user*.
         "stars": 4,
         "text": "Very Positive"
       },
-      "tags": {
-        "tag": "Unity",
-        "date": 1499841487
-      }
+      "tags": [
+        {
+          "tag": "Unity",
+          "date": 1499841487
+        }
+      ]
     },
     {
         ...
@@ -7182,10 +7190,12 @@ Get all mod's the *authenticated user* is subscribed to. Successful request will
         "stars": 4,
         "text": "Very Positive"
       },
-      "tags": {
-        "tag": "Unity",
-        "date": 1499841487
-      }
+      "tags": [
+        {
+          "tag": "Unity",
+          "date": 1499841487
+        }
+      ]
     },
     {
         ...
@@ -8216,10 +8226,12 @@ result_count|integer(int32)|The amount of results returned in the current reques
         "stars": 4,
         "text": "Very Positive"
       },
-      "tags": {
-        "tag": "Unity",
-        "date": 1499841487
-      }
+      "tags": [
+        {
+          "tag": "Unity",
+          "date": 1499841487
+        }
+      ]
     },
     {
         ...
@@ -8296,7 +8308,7 @@ data|[Mod Object ](#schemamod_object)[]|Array containing mod objects
 »» percentage|integer(int32)|Rating of the mod as a percentage.
 »» stars|integer(int32)|The amount of stars the mod has, between 0 and 5.
 »» text|string|Text representation of the rating total.
-» tags|[Mod Tag Object](#schemamod_tag_object)|Contains Tags data.
+» tags|[Mod Tag Object](#schemamod_tag_object)[]|Contains Mod Tag data.
 »» tag|string|The contents of the tag.
 »» date|integer(int32)|Unix timestamp of when tag was applied.
 cursor_id|integer(int32)|The current _cursor value.
@@ -9092,10 +9104,12 @@ download|string|Link to download the file from the mod.io CDN.
     "stars": 4,
     "text": "Very Positive"
   },
-  "tags": {
-    "tag": "Unity",
-    "date": 1499841487
-  }
+  "tags": [
+    {
+      "tag": "Unity",
+      "date": 1499841487
+    }
+  ]
 } 
 ```
 
@@ -9162,7 +9176,7 @@ ratings|[Rating Object ](#schemarating_object)|Contains ratings data.
 » percentage|integer(int32)|Rating of the mod as a percentage.
 » stars|integer(int32)|The amount of stars the mod has, between 0 and 5.
 » text|string|Text representation of the rating total.
-tags|[Mod Tag Object](#schemamod_tag_object)|Contains Tags data.
+tags|[Mod Tag Object](#schemamod_tag_object)[]|Contains Mod Tag data.
 » tag|string|The contents of the tag.
 » date|integer(int32)|Unix timestamp of when tag was applied.
 
