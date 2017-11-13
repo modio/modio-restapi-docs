@@ -612,7 +612,7 @@ If you want feel the above rate limit is not enough for your app, please [contac
 If you spot any errors within the mod.io documentation, have feedback on how we can potentially make it easier to follow or simply want get in touch for another reason please feel free to reach out to us at [support@mod.io](mailto:support@mod.io?subject=mod.io%20API). Any critical issues will be promptly addressed.
 # Games
 
-## Browse Games
+## Get Games
 
 > Code samples
 
@@ -716,7 +716,7 @@ System.out.println(response.toString());
 ```
 `GET /games`
 
-Browse Games on mod.io. Successful request will return an array of [Game Objects](https://docs.mod.io/#browse-games-2). To make your requests as specific to your needs as possible it's highly recommended reading over our [filtering documentation](https://docs.mod.io/#filtering) if it will help you with consuming this endpoint.
+Get Games on mod.io. Successful request will return an array of [Game Objects](https://docs.mod.io/#get-games-2). To make your requests as specific to your needs as possible it's highly recommended reading over our [filtering documentation](https://docs.mod.io/#filtering) if it will help you with consuming this endpoint.
      
      Filter|Type|Description
      ---|---|---
@@ -813,11 +813,11 @@ Browse Games on mod.io. Successful request will return an array of [Game Objects
   "result_count": 100
 }
 ```
-<h3 id="Browse-Games-responses">Responses</h3>
+<h3 id="Get-Games-responses">Responses</h3>
 
 Status|Meaning|Description|Response Schema
 ---|---|---|---|
-200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)|OK|[Browse Games ](#schemabrowse_games)
+200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)|OK|[Get Games ](#schemaget_games)
 
 <aside class="warning">
 To perform this operation, you must be authenticated by means of one of the following methods:
@@ -1304,7 +1304,7 @@ oauth2 ( Scopes: write )
 </aside>
 
 
-## Browse Game Activity
+## Get Game Activity
 
 > Code samples
 
@@ -1408,7 +1408,7 @@ System.out.println(response.toString());
 ```
 `GET /games/{game-id}/activity`
 
-View activity for a game, showing changes made to the resource. Successful request will return an array of [Game activity objects](https://docs.mod.io/#browse-game-activity-2). To make your requests as specific to your needs as possible it's highly recommended reading over our [filtering documentation](https://docs.mod.io/#filtering) if it will help you with consuming this endpoint. This endpoint by default sorts by `id` in descending order.
+View activity for a game, showing changes made to the resource. Successful request will return an array of [Game activity objects](https://docs.mod.io/#get-game-activity-2). To make your requests as specific to your needs as possible it's highly recommended reading over our [filtering documentation](https://docs.mod.io/#filtering) if it will help you with consuming this endpoint. This endpoint by default sorts by `id` in descending order.
      
      Filter|Type|Description
      ---|---|---
@@ -1457,11 +1457,11 @@ View activity for a game, showing changes made to the resource. Successful reque
   "result_count": 100
 }
 ```
-<h3 id="Browse-Game-Activity-responses">Responses</h3>
+<h3 id="Get-Game-Activity-responses">Responses</h3>
 
 Status|Meaning|Description|Response Schema
 ---|---|---|---|
-200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)|Successful Response|[Browse Game Activity](#schemabrowse_game_activity)
+200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)|Successful Response|[Get Game Activity](#schemaget_game_activity)
 
 <aside class="warning">
 To perform this operation, you must be authenticated by means of one of the following methods:
@@ -1469,7 +1469,7 @@ apiKey, oauth2 ( Scopes: read )
 </aside>
 
 
-## Browse Game Team Members
+## Get Game Team Members
 
 > Code samples
 
@@ -1573,7 +1573,7 @@ System.out.println(response.toString());
 ```
 `GET /games/{game-id}/team`
 
-View all members that are part of a game team. Successful request will return an array of [Access objects](https://docs.mod.io/#browse-team). To make your requests as specific to your needs as possible it's highly recommended reading over our [filtering documentation](https://docs.mod.io/#filtering) if it will help you with consuming this endpoint.
+View all members that are part of a game team. Successful request will return an array of [Access objects](https://docs.mod.io/#get-team). To make your requests as specific to your needs as possible it's highly recommended reading over our [filtering documentation](https://docs.mod.io/#filtering) if it will help you with consuming this endpoint.
      
      Filter|Type|Required|Description
      ---|---|---|---|
@@ -1620,11 +1620,11 @@ View all members that are part of a game team. Successful request will return an
   "result_count": 100
 }
 ```
-<h3 id="Browse-Game-Team-Members-responses">Responses</h3>
+<h3 id="Get-Game-Team-Members-responses">Responses</h3>
 
 Status|Meaning|Description|Response Schema
 ---|---|---|---|
-200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)|Successful Request|[Browse Team ](#schemabrowse_team)
+200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)|Successful Request|[Get Team ](#schemaget_team)
 
 <aside class="warning">
 To perform this operation, you must be authenticated by means of one of the following methods:
@@ -2059,7 +2059,7 @@ oauth2 ( Scopes: write )
 
 # Mods
 
-## Browse Mods
+## Get Mods
 
 > Code samples
 
@@ -2163,7 +2163,7 @@ System.out.println(response.toString());
 ```
 `GET /games/{game-id}/mods`
 
-Browse mods on mod.io. Successful request will return an array of [Mod Objects](https://docs.mod.io/#browse-mods-2). To make your requests as specific to your needs as possible it's highly recommended reading over our [filtering documentation](https://docs.mod.io/#filtering) if it will help you with consuming this endpoint.
+Get Mods on mod.io. Successful request will return an array of [Mod Objects](https://docs.mod.io/#get-mods-2). To make your requests as specific to your needs as possible it's highly recommended reading over our [filtering documentation](https://docs.mod.io/#filtering) if it will help you with consuming this endpoint.
      
      Filter|Type|Description
      ---|---|---
@@ -2279,11 +2279,11 @@ Browse mods on mod.io. Successful request will return an array of [Mod Objects](
   "result_count": 100
 }
 ```
-<h3 id="Browse-Mods-responses">Responses</h3>
+<h3 id="Get-Mods-responses">Responses</h3>
 
 Status|Meaning|Description|Response Schema
 ---|---|---|---|
-200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)|Successful Request|[Browse Mods ](#schemabrowse_mods)
+200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)|Successful Request|[Get Mods ](#schemaget_mods)
 
 <aside class="warning">
 To perform this operation, you must be authenticated by means of one of the following methods:
@@ -3309,7 +3309,7 @@ oauth2 ( Scopes: write )
 </aside>
 
 
-## Browse Mod Activity
+## Get Mod Activity
 
 > Code samples
 
@@ -3413,7 +3413,7 @@ System.out.println(response.toString());
 ```
 `GET /games/{game-id}/mods/{mod-id}/activity`
 
-View activity for a mod, showing changes made to the resource. Successful request will return an array of [Mod Activity Objects](https://docs.mod.io/#browse-mod-activity-2). To make your requests as specific to your needs as possible it's highly recommended reading over our [filtering documentation](https://docs.mod.io/#filtering) if it will help you with consuming this endpoint. This endpoint by default sorts by `id` in descending order.
+View activity for a mod, showing changes made to the resource. Successful request will return an array of [Mod Activity Objects](https://docs.mod.io/#get-mod-activity-2). To make your requests as specific to your needs as possible it's highly recommended reading over our [filtering documentation](https://docs.mod.io/#filtering) if it will help you with consuming this endpoint. This endpoint by default sorts by `id` in descending order.
      
      Filter|Type|Description
      ---|---|---
@@ -3462,11 +3462,11 @@ View activity for a mod, showing changes made to the resource. Successful reques
   "result_count": 100
 }
 ```
-<h3 id="Browse-Mod-Activity-responses">Responses</h3>
+<h3 id="Get-Mod-Activity-responses">Responses</h3>
 
 Status|Meaning|Description|Response Schema
 ---|---|---|---|
-200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)|Successful Request|[Browse Mod Activity](#schemabrowse_mod_activity)
+200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)|Successful Request|[Get Mod Activity](#schemaget_mod_activity)
 
 <aside class="warning">
 To perform this operation, you must be authenticated by means of one of the following methods:
@@ -3474,7 +3474,7 @@ apiKey, oauth2 ( Scopes: read )
 </aside>
 
 
-## Browse Mod Files
+## Get Mod Files
 
 > Code samples
 
@@ -3578,7 +3578,7 @@ System.out.println(response.toString());
 ```
 `GET /games/{game-id}/mods/{mod-id}/files`
 
-Browse files on mod.io that are published for the corresponding mod. Successful request will return an [array of Modfile Objects](https://docs.mod.io/#browse-mod-files-2). To make your requests as specific to your needs as possible it's highly recommended reading over our [filtering documentation](https://docs.mod.io/#filtering) if it will help you with consuming this endpoint.
+Browse files on mod.io that are published for the corresponding mod. Successful request will return an [array of Modfile Objects](https://docs.mod.io/#get-mod-files-2). To make your requests as specific to your needs as possible it's highly recommended reading over our [filtering documentation](https://docs.mod.io/#filtering) if it will help you with consuming this endpoint.
      
      Filter|Type|Description
      ---|---|---
@@ -3627,11 +3627,11 @@ Browse files on mod.io that are published for the corresponding mod. Successful 
   "result_count": 100
 }
 ```
-<h3 id="Browse-Mod-Files-responses">Responses</h3>
+<h3 id="Get-Mod-Files-responses">Responses</h3>
 
 Status|Meaning|Description|Response Schema
 ---|---|---|---|
-200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)|Successful Request|[Browse Mod Files](#schemabrowse_mod_files)
+200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)|Successful Request|[Get Mod Files](#schemaget_mod_files)
 
 <aside class="warning">
 To perform this operation, you must be authenticated by means of one of the following methods:
@@ -4085,7 +4085,7 @@ oauth2 ( Scopes: write )
 </aside>
 
 
-## Browse Mod Tags
+## Get Mod Tags
 
 > Code samples
 
@@ -4189,7 +4189,7 @@ System.out.println(response.toString());
 ```
 `GET /games/{game-id}/mods/{mod-id}/tags`
 
-Browse all tags for the corresponding mod, successful response will return an array of [Mod Tag Objects](https://docs.mod.io/#mod-tag-object). To make your requests as specific to your needs as possible it's highly recommended reading over our [filtering documentation](https://docs.mod.io/#filtering) if it will help you with consuming this endpoint.
+Get all tags for the corresponding mod, successful response will return an array of [Mod Tag Objects](https://docs.mod.io/#mod-tag-object). To make your requests as specific to your needs as possible it's highly recommended reading over our [filtering documentation](https://docs.mod.io/#filtering) if it will help you with consuming this endpoint.
      
      Filter|Type|Description
      ---|---|---
@@ -4209,11 +4209,11 @@ Browse all tags for the corresponding mod, successful response will return an ar
   ]
 }
 ```
-<h3 id="Browse-Mod-Tags-responses">Responses</h3>
+<h3 id="Get-Mod-Tags-responses">Responses</h3>
 
 Status|Meaning|Description|Response Schema
 ---|---|---|---|
-200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)|Successful Request|[Browse Mod Tags](#schemabrowse_mod_tags)
+200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)|Successful Request|[Get Mod Tags](#schemaget_mod_tags)
 
 <aside class="warning">
 To perform this operation, you must be authenticated by means of one of the following methods:
@@ -4649,7 +4649,7 @@ oauth2 ( Scopes: write )
 </aside>
 
 
-## Browse Mod Comments
+## Get Mod Comments
 
 > Code samples
 
@@ -4753,7 +4753,7 @@ System.out.println(response.toString());
 ```
 `GET /games/{game-id}/mods/{mod-id}/comments`
 
-Browse all comments for a mod. Successful request will return an array of [Comment Objects](https://docs.mod.io/#browse-comments). To make your requests as specific to your needs as possible it's highly recommended reading over our [filtering documentation](https://docs.mod.io/#filtering) if it will help you with consuming this endpoint.
+Browse all comments for a mod. Successful request will return an array of [Comment Objects](https://docs.mod.io/#get-comments). To make your requests as specific to your needs as possible it's highly recommended reading over our [filtering documentation](https://docs.mod.io/#filtering) if it will help you with consuming this endpoint.
      
      Filter|Type|Description
      ---|---|---
@@ -4806,11 +4806,11 @@ Browse all comments for a mod. Successful request will return an array of [Comme
   "result_count": 100
 }
 ```
-<h3 id="Browse-Mod-Comments-responses">Responses</h3>
+<h3 id="Get-Mod-Comments-responses">Responses</h3>
 
 Status|Meaning|Description|Response Schema
 ---|---|---|---|
-200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)|OK|[Browse Comments ](#schemabrowse_comments)
+200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)|OK|[Get Comments ](#schemaget_comments)
 
 <aside class="warning">
 To perform this operation, you must be authenticated by means of one of the following methods:
@@ -5100,7 +5100,7 @@ oauth2 ( Scopes: write )
 </aside>
 
 
-## Browse Mod Team Members
+## Get Mod Team Members
 
 > Code samples
 
@@ -5204,7 +5204,7 @@ System.out.println(response.toString());
 ```
 `GET /games/{game-id}/mods/{mod-id}/team`
 
-View all members that are part of a mod team. Successful request will return an array of [Access Objects](https://docs.mod.io/#browse-team). To make your requests as specific to your needs as possible it's highly recommended reading over our [filtering documentation](https://docs.mod.io/#filtering) if it will help you with consuming this endpoint.
+View all members that are part of a mod team. Successful request will return an array of [Access Objects](https://docs.mod.io/#get-team). To make your requests as specific to your needs as possible it's highly recommended reading over our [filtering documentation](https://docs.mod.io/#filtering) if it will help you with consuming this endpoint.
      
      Filter|Type|Required|Description
      ---|---|---|---|
@@ -5250,11 +5250,11 @@ View all members that are part of a mod team. Successful request will return an 
   "result_count": 100
 }
 ```
-<h3 id="Browse-Mod-Team-Members-responses">Responses</h3>
+<h3 id="Get-Mod-Team-Members-responses">Responses</h3>
 
 Status|Meaning|Description|Response Schema
 ---|---|---|---|
-200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)|Successful Request|[Browse Team ](#schemabrowse_team)
+200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)|Successful Request|[Get Team ](#schemaget_team)
 
 <aside class="warning">
 To perform this operation, you must be authenticated by means of one of the following methods:
@@ -5687,7 +5687,7 @@ oauth2 ( Scopes: write )
 </aside>
 
 
-## Browse Mod Updates By Game
+## Get Mod Updates By Game
 
 > Code samples
 
@@ -5797,7 +5797,7 @@ System.out.println(response.toString());
 ```
 `GET /games/{game-id}/mod/updates`
 
-Get all mod updates (new builds) that occurred between two timestamps for the corresponding game. This endpoint is designed for intermittent polling by game clients to determine if notifications need to be pushed to the authenticated user. If you are consuming querying potential build updates from within a game, it is highly recommend you use this endpoint. Successful request will return an array of [Modfile Objects](https://docs.mod.io/#browse-mod-files-2) that were published between the two supplied timestamps.
+Get all mod updates (new builds) that occurred between two timestamps for the corresponding game. This endpoint is designed for intermittent polling by game clients to determine if notifications need to be pushed to the authenticated user. If you are consuming querying potential build updates from within a game, it is highly recommend you use this endpoint. Successful request will return an array of [Modfile Objects](https://docs.mod.io/#get-mod-files-2) that were published between the two supplied timestamps.
      
      Parameter|Type|Required|Description
      ---|---|---|---|
@@ -5835,11 +5835,11 @@ Get all mod updates (new builds) that occurred between two timestamps for the co
   "result_count": 100
 }
 ```
-<h3 id="Browse-Mod-Updates-By-Game-responses">Responses</h3>
+<h3 id="Get-Mod-Updates-By-Game-responses">Responses</h3>
 
 Status|Meaning|Description|Response Schema
 ---|---|---|---|
-200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)|Request Successful|[Browse Mod Files](#schemabrowse_mod_files)
+200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)|Request Successful|[Get Mod Files](#schemaget_mod_files)
 
 <aside class="warning">
 To perform this operation, you must be authenticated by means of one of the following methods:
@@ -6126,7 +6126,7 @@ oauth2 ( Scopes: write )
 
 # Users
 
-## Browse Users
+## Get Users
 
 > Code samples
 
@@ -6230,7 +6230,7 @@ System.out.println(response.toString());
 ```
 `GET /users`
 
-Browse users registered to mod.io. Successful request will return an __array of user objects__. To make your requests as specific to your needs as possible it's highly recommended reading over our [filtering documentation](https://docs.mod.io/#filtering) if it will help you with consuming this endpoint.
+Get Users registered to mod.io. Successful request will return an __array of user objects__. To make your requests as specific to your needs as possible it's highly recommended reading over our [filtering documentation](https://docs.mod.io/#filtering) if it will help you with consuming this endpoint.
      
      Filter|Type|Description
      ---|---|---
@@ -6269,11 +6269,11 @@ Browse users registered to mod.io. Successful request will return an __array of 
   "result_count": 100
 }
 ```
-<h3 id="Browse-Users-responses">Responses</h3>
+<h3 id="Get-Users-responses">Responses</h3>
 
 Status|Meaning|Description|Response Schema
 ---|---|---|---|
-200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)|OK|[Browse Users ](#schemabrowse_users)
+200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)|OK|[Get Users ](#schemaget_users)
 
 <aside class="warning">
 To perform this operation, you must be authenticated by means of one of the following methods:
@@ -6899,7 +6899,7 @@ View all mod.io games that exist for the *authenticated user*.
 
 Status|Meaning|Description|Response Schema
 ---|---|---|---|
-200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)|Request Successful|[Browse Games ](#schemabrowse_games)
+200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)|Request Successful|[Get Games ](#schemaget_games)
 
 <aside class="warning">
 To perform this operation, you must be authenticated by means of one of the following methods:
@@ -7118,7 +7118,7 @@ View all mod.io mods that exist for the *authenticated user*.
 
 Status|Meaning|Description|Response Schema
 ---|---|---|---|
-200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)|Request Successful|[Browse Mods ](#schemabrowse_mods)
+200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)|Request Successful|[Get Mods ](#schemaget_mods)
 
 <aside class="warning">
 To perform this operation, you must be authenticated by means of one of the following methods:
@@ -7273,7 +7273,7 @@ View all mod.io files that exist for the *authenticated user*.
 
 Status|Meaning|Description|Response Schema
 ---|---|---|---|
-200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)|Request Successful|[Browse Mod Files](#schemabrowse_mod_files)
+200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)|Request Successful|[Get Mod Files](#schemaget_mod_files)
 
 <aside class="warning">
 To perform this operation, you must be authenticated by means of one of the following methods:
@@ -7393,7 +7393,7 @@ System.out.println(response.toString());
 
 *Get all subscribed mods by the user.*
 
-Get all mod's the *authenticated user* is subscribed to. Successful request will return an array of [Mod Objects](https://docs.mod.io/#browse-mods-2).
+Get all mod's the *authenticated user* is subscribed to. Successful request will return an array of [Mod Objects](https://docs.mod.io/#get-mods-2).
 
 
 > Example responses
@@ -7494,7 +7494,7 @@ Get all mod's the *authenticated user* is subscribed to. Successful request will
 
 Status|Meaning|Description|Response Schema
 ---|---|---|---|
-200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)|Request Successful|[Browse Mods ](#schemabrowse_mods)
+200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)|Request Successful|[Get Mods ](#schemaget_mods)
 
 <aside class="warning">
 To perform this operation, you must be authenticated by means of one of the following methods:
@@ -7615,7 +7615,7 @@ System.out.println(response.toString());
 *Get all updates that occurred between two timestamps for
 the _authenticated user_.*
 
-__OAuth 2 Authentication Required__. Get all subscribed mod updates (new builds) that occurred between two timestamps for the *authenticated user*. This endpoint is designed for intermittent polling by game clients to determine if notifications need to be pushed to the authenticated user. If you are consuming querying potential build updates from within a game, it is highly recommend you use this endpoint. Successful request will return an array of [Modfile Objects](https://docs.mod.io/#browse-mod-files-2) that were published between the two supplied timestamps.
+__OAuth 2 Authentication Required__. Get all subscribed mod updates (new builds) that occurred between two timestamps for the *authenticated user*. This endpoint is designed for intermittent polling by game clients to determine if notifications need to be pushed to the authenticated user. If you are consuming querying potential build updates from within a game, it is highly recommend you use this endpoint. Successful request will return an array of [Modfile Objects](https://docs.mod.io/#get-mod-files-2) that were published between the two supplied timestamps.
      
      Parameter|Type|Required|Description
      ---|---|---|---|
@@ -7657,7 +7657,7 @@ __OAuth 2 Authentication Required__. Get all subscribed mod updates (new builds)
 
 Status|Meaning|Description|Response Schema
 ---|---|---|---|
-200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)|Request Successful|[Browse Mod Files](#schemabrowse_mod_files)
+200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)|Request Successful|[Get Mod Files](#schemaget_mod_files)
 
 <aside class="warning">
 To perform this operation, you must be authenticated by means of one of the following methods:
@@ -7935,9 +7935,9 @@ filename|string|Image filename, with the extension included.
 
 
 
-## Browse Games
+## Get Games
 
- <a name="schemabrowse_games"></a>
+ <a name="schemaget_games"></a>
 
 ```json
 {
@@ -8069,9 +8069,9 @@ result_count|integer(int32)|The amount of results returned in the current reques
 
 
 
-## Browse Game Activity
+## Get Game Activity
 
-<a name="schemabrowse_game_activity"></a>
+<a name="schemaget_game_activity"></a>
 
 ```json
 {
@@ -8143,9 +8143,9 @@ result_count|integer(int32)|The amount of results returned in the current reques
 
 
 
-## Browse Mods
+## Get Mods
 
- <a name="schemabrowse_mods"></a>
+ <a name="schemaget_mods"></a>
 
 ```json
 {
@@ -8273,7 +8273,7 @@ data|[Mod Object ](#schemamod_object)[]|Array containing mod objects
 » nameid|string|Unique SEO-friendly mod uri.
 » summary|string|Brief summary of the mod.
 » description|string|Description of the mod.
-» metadata|string|Metadata for the mod.
+» metadata|string|Comma-separated metadata for the mod.
 » url|string|Official website url for the mod.
 » modfile|[Modfile Object ](#schemamodfile_object)|Contains file data.
 »» id|integer(int32)|Unique file id.
@@ -8290,9 +8290,9 @@ data|[Mod Object ](#schemamod_object)[]|Array containing mod objects
 »» changelog|string|List of all changes in this file release.
 »» download|string|Link to download the file from the mod.io CDN.
 » media|object|Contains media data.
-»» youtube|string[]|Contains YouTube data.
-»» sketchfab|string[]|Contains Sketchfab data.
-»» images|[Image Object ](#schemaimage_object)[]|Contains images data.
+»» youtube|string[]|Array of YouTube links.
+»» sketchfab|string[]|Array of YouTube Links.
+»» images|[Image Object ](#schemaimage_object)[]|Array of images objects.
 »»» full|string|URL to the full image.
 »»» thumbnail|string|URL to the thumbnail image.
 »»» filename|string|Image filename, with the extension included.
@@ -8305,7 +8305,7 @@ data|[Mod Object ](#schemamod_object)[]|Array containing mod objects
 »» stars|integer(int32)|The amount of stars the mod has, between 0 and 5.
 »» text|string|Text representation of the rating total.
 » tags|[Mod Tag Object](#schemamod_tag_object)[]|Contains Mod Tag data.
-»» tag|string|The contents of the tag.
+»» tag|string|The displayed tag.
 »» date|integer(int32)|Unix timestamp of when tag was applied.
 cursor_id|integer(int32)|The current _cursor value.
 prev_id|integer(int32)|The previous _cursor value as manually inserted by you, null by default.
@@ -8315,9 +8315,9 @@ result_count|integer(int32)|The amount of results returned in the current reques
 
 
 
-## Browse Mod Activity
+## Get Mod Activity
 
-<a name="schemabrowse_mod_activity"></a>
+<a name="schemaget_mod_activity"></a>
 
 ```json
 {
@@ -8389,9 +8389,9 @@ result_count|integer(int32)|The amount of results returned in the current reques
 
 
 
-## Browse Mod Files
+## Get Mod Files
 
-<a name="schemabrowse_mod_files"></a>
+<a name="schemaget_mod_files"></a>
 
 ```json
 {
@@ -8449,9 +8449,9 @@ result_count|integer(int32)|The amount of results returned in the current reques
 
 
 
-## Browse Mod Tags
+## Get Mod Tags
 
-<a name="schemabrowse_mod_tags"></a>
+<a name="schemaget_mod_tags"></a>
 
 ```json
 {
@@ -8470,15 +8470,15 @@ result_count|integer(int32)|The amount of results returned in the current reques
 Name|Type|Description
 ---|---|---|---|
 data|[Mod Tag Object](#schemamod_tag_object)[]|No description
-» tag|string|The contents of the tag.
+» tag|string|The displayed tag.
 » date|integer(int32)|Unix timestamp of when tag was applied.
 
 
 
 
-## Browse Comments
+## Get Comments
 
- <a name="schemabrowse_comments"></a>
+ <a name="schemaget_comments"></a>
 
 ```json
 {
@@ -8541,7 +8541,7 @@ data|[Comment Object ](#schemacomment_object)[]|Array containing comment objects
 » replypos|string|Nesting position of the reply.
 » karma|integer(int32)|The amount of karma the comment has received.
 » karmago|integer(int32)|The amount of good karma the comment has received.
-» summary|string|The contents of the comment.
+» summary|string|The displayed comment.
 cursor_id|integer(int32)|The current _cursor value.
 prev_id|integer(int32)|The previous _cursor value as manually inserted by you, null by default.
 next_id|integer(int32)|The next position to move the _cursor to, based on the current request.
@@ -8550,9 +8550,9 @@ result_count|integer(int32)|The amount of results returned in the current reques
 
 
 
-## Browse Team
+## Get Team
 
- <a name="schemabrowse_team"></a>
+ <a name="schemaget_team"></a>
 
 ```json
 {
@@ -8618,9 +8618,9 @@ result_count|integer(int32)|The amount of results returned in the current reques
 
 
 
-## Browse Users
+## Get Users
 
- <a name="schemabrowse_users"></a>
+ <a name="schemaget_users"></a>
 
 ```json
 {
@@ -8673,9 +8673,9 @@ result_count|integer(int32)|The amount of results returned in the current reques
 
 
 
-## Browse Updates
+## Get Updates
 
- <a name="schemabrowse_updates"></a>
+ <a name="schemaget_updates"></a>
 
 ```json
 {
@@ -8929,7 +8929,7 @@ replyid|integer(int32)|Unique replyid used to submitting a nested reply to the p
 replypos|string|Nesting position of the reply.
 karma|integer(int32)|The amount of karma the comment has received.
 karmago|integer(int32)|The amount of good karma the comment has received.
-summary|string|The contents of the comment.
+summary|string|The displayed comment.
 
 
 
@@ -9144,7 +9144,7 @@ name|string|Name of the mod.
 nameid|string|Unique SEO-friendly mod uri.
 summary|string|Brief summary of the mod.
 description|string|Description of the mod.
-metadata|string|Metadata for the mod.
+metadata|string|Comma-separated metadata for the mod.
 url|string|Official website url for the mod.
 modfile|[Modfile Object ](#schemamodfile_object)|Contains file data.
 » id|integer(int32)|Unique file id.
@@ -9161,9 +9161,9 @@ modfile|[Modfile Object ](#schemamodfile_object)|Contains file data.
 » changelog|string|List of all changes in this file release.
 » download|string|Link to download the file from the mod.io CDN.
 media|object|Contains media data.
-» youtube|string[]|Contains YouTube data.
-» sketchfab|string[]|Contains Sketchfab data.
-» images|[Image Object ](#schemaimage_object)[]|Contains images data.
+» youtube|string[]|Array of YouTube links.
+» sketchfab|string[]|Array of YouTube Links.
+» images|[Image Object ](#schemaimage_object)[]|Array of images objects.
 »» full|string|URL to the full image.
 »» thumbnail|string|URL to the thumbnail image.
 »» filename|string|Image filename, with the extension included.
@@ -9176,7 +9176,7 @@ ratings|[Rating Object ](#schemarating_object)|Contains ratings data.
 » stars|integer(int32)|The amount of stars the mod has, between 0 and 5.
 » text|string|Text representation of the rating total.
 tags|[Mod Tag Object](#schemamod_tag_object)[]|Contains Mod Tag data.
-» tag|string|The contents of the tag.
+» tag|string|The displayed tag.
 » date|integer(int32)|Unix timestamp of when tag was applied.
 
 
@@ -9198,7 +9198,7 @@ tags|[Mod Tag Object](#schemamod_tag_object)[]|Contains Mod Tag data.
 
 Name|Type|Description
 ---|---|---|---|
-tag|string|The contents of the tag.
+tag|string|The displayed tag.
 date|integer(int32)|Unix timestamp of when tag was applied.
 
 
