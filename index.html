@@ -482,6 +482,9 @@
                     <a href="#avatar-object" class="toc-h2 toc-link" data-title="Schemas">Avatar Object</a>
                   </li>
                   <li>
+                    <a href="#image-object" class="toc-h2 toc-link" data-title="Schemas">Image Object</a>
+                  </li>
+                  <li>
                     <a href="#browse-games-2" class="toc-h2 toc-link" data-title="Schemas">Browse Games</a>
                   </li>
                   <li>
@@ -1490,7 +1493,7 @@ Accept: application/json
 <td>200</td>
 <td><a href="https://tools.ietf.org/html/rfc7231#section-6.3.1">OK</a></td>
 <td>OK</td>
-<td><a href="#schemabrowse_games">Browse_Games</a></td>
+<td><a href="#schemabrowse_games">Browse Games </a></td>
 </tr>
 </tbody>
 </table>
@@ -1663,7 +1666,7 @@ Accept: application/json
 <td>200</td>
 <td><a href="https://tools.ietf.org/html/rfc7231#section-6.3.1">OK</a></td>
 <td>Request successful</td>
-<td><a href="#schemagame_object">Game_Object</a></td>
+<td><a href="#schemagame_object">Game Object </a></td>
 </tr>
 </tbody>
 </table>
@@ -2200,8 +2203,15 @@ Accept: application/json
           </span><span class="s2">"after"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://rogue-knight.mod.io/rogue-hd-pack"</span><span class="w">
         </span><span class="p">}</span><span class="w">
       </span><span class="p">}</span><span class="w">
+    </span><span class="p">},</span><span class="w">
+    </span><span class="p">{</span><span class="w">
+        </span><span class="err">...</span><span class="w">
     </span><span class="p">}</span><span class="w">
-  </span><span class="p">]</span><span class="w">
+  </span><span class="p">],</span><span class="w">
+  </span><span class="s2">"cursor_id"</span><span class="p">:</span><span class="w"> </span><span class="mi">60</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"prev_id"</span><span class="p">:</span><span class="w"> </span><span class="mi">30</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"next_id"</span><span class="p">:</span><span class="w"> </span><span class="mi">160</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"result_count"</span><span class="p">:</span><span class="w"> </span><span class="mi">100</span><span class="w">
 </span><span class="p">}</span><span class="w">
 </span></code></pre>
 <h3 id="Browse-Game-Activity-responses">Responses</h3>
@@ -2220,7 +2230,7 @@ Accept: application/json
 <td>200</td>
 <td><a href="https://tools.ietf.org/html/rfc7231#section-6.3.1">OK</a></td>
 <td>Successful Response</td>
-<td><a href="#schemabrowse_game_activity">Browse_Game_Activity</a></td>
+<td><a href="#schemabrowse_game_activity">Browse Game Activity</a></td>
 </tr>
 </tbody>
 </table>
@@ -2413,7 +2423,7 @@ Accept: application/json
 <td>200</td>
 <td><a href="https://tools.ietf.org/html/rfc7231#section-6.3.1">OK</a></td>
 <td>Successful Request</td>
-<td><a href="#schemabrowse_team">Browse_Team</a></td>
+<td><a href="#schemabrowse_team">Browse Team </a></td>
 </tr>
 </tbody>
 </table>
@@ -3159,7 +3169,7 @@ Accept: application/json
 <td>200</td>
 <td><a href="https://tools.ietf.org/html/rfc7231#section-6.3.1">OK</a></td>
 <td>Successful Request</td>
-<td><a href="#schemabrowse_mods">Browse_Mods</a></td>
+<td><a href="#schemabrowse_mods">Browse Mods </a></td>
 </tr>
 </tbody>
 </table>
@@ -3352,7 +3362,7 @@ Accept: application/json
 <td>200</td>
 <td><a href="https://tools.ietf.org/html/rfc7231#section-6.3.1">OK</a></td>
 <td>Successful Request</td>
-<td><a href="#schemamod_object">Mod_Object</a></td>
+<td><a href="#schemamod_object">Mod Object </a></td>
 </tr>
 </tbody>
 </table>
@@ -3636,7 +3646,7 @@ Content-Type: multipart/form-data
 <td>201</td>
 <td><a href="https://tools.ietf.org/html/rfc7231#section-6.3.2">Created</a></td>
 <td>Resource Created</td>
-<td><a href="#schemamod_object">Mod_Object</a></td>
+<td><a href="#schemamod_object">Mod Object </a></td>
 </tr>
 </tbody>
 </table>
@@ -4450,7 +4460,7 @@ Accept: application/json
 <tr>
 <td>user</td>
 <td>integer(int32)</td>
-<td>Unique id of the member who performed the action.</td>
+<td>Unique id of the user who triggered the action.</td>
 </tr>
 <tr>
 <td>dateup</td>
@@ -4493,8 +4503,15 @@ Accept: application/json
           </span><span class="s2">"after"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://rogue-knight.mod.io/rogue-hd-pack"</span><span class="w">
         </span><span class="p">}</span><span class="w">
       </span><span class="p">}</span><span class="w">
+    </span><span class="p">},</span><span class="w">
+    </span><span class="p">{</span><span class="w">
+        </span><span class="err">...</span><span class="w">
     </span><span class="p">}</span><span class="w">
-  </span><span class="p">]</span><span class="w">
+  </span><span class="p">],</span><span class="w">
+  </span><span class="s2">"cursor_id"</span><span class="p">:</span><span class="w"> </span><span class="mi">60</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"prev_id"</span><span class="p">:</span><span class="w"> </span><span class="mi">30</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"next_id"</span><span class="p">:</span><span class="w"> </span><span class="mi">160</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"result_count"</span><span class="p">:</span><span class="w"> </span><span class="mi">100</span><span class="w">
 </span><span class="p">}</span><span class="w">
 </span></code></pre>
 <h3 id="Browse-Mod-Activity-responses">Responses</h3>
@@ -4513,7 +4530,7 @@ Accept: application/json
 <td>200</td>
 <td><a href="https://tools.ietf.org/html/rfc7231#section-6.3.1">OK</a></td>
 <td>Successful Request</td>
-<td><a href="#schemabrowse_mod_activity">Browse_Mod_Activity</a></td>
+<td><a href="#schemabrowse_mod_activity">Browse Mod Activity</a></td>
 </tr>
 </tbody>
 </table>
@@ -4732,7 +4749,7 @@ Accept: application/json
 <td>200</td>
 <td><a href="https://tools.ietf.org/html/rfc7231#section-6.3.1">OK</a></td>
 <td>Successful Request</td>
-<td><a href="#schemabrowse_mod_files">Browse_Mod_Files</a></td>
+<td><a href="#schemabrowse_mod_files">Browse Mod Files</a></td>
 </tr>
 </tbody>
 </table>
@@ -4918,7 +4935,7 @@ Content-Type: multipart/form-data
 <td>201</td>
 <td><a href="https://tools.ietf.org/html/rfc7231#section-6.3.2">Created</a></td>
 <td>Resource Created</td>
-<td><a href="#schemamodfile_object">Modfile_Object</a></td>
+<td><a href="#schemamodfile_object">Modfile Object </a></td>
 </tr>
 </tbody>
 </table>
@@ -5070,7 +5087,7 @@ Accept: application/json
 <td>200</td>
 <td><a href="https://tools.ietf.org/html/rfc7231#section-6.3.1">OK</a></td>
 <td>Successful Request</td>
-<td><a href="#schemamodfile_object">Modfile_Object</a></td>
+<td><a href="#schemamodfile_object">Modfile Object </a></td>
 </tr>
 </tbody>
 </table>
@@ -5373,7 +5390,7 @@ Accept: application/json
 <td>200</td>
 <td><a href="https://tools.ietf.org/html/rfc7231#section-6.3.1">OK</a></td>
 <td>Successful Request</td>
-<td><a href="#schemabrowse_mod_tags">Browse_Mod_Tags</a></td>
+<td><a href="#schemabrowse_mod_tags">Browse Mod Tags</a></td>
 </tr>
 </tbody>
 </table>
@@ -6032,7 +6049,7 @@ Accept: application/json
 <td>200</td>
 <td><a href="https://tools.ietf.org/html/rfc7231#section-6.3.1">OK</a></td>
 <td>OK</td>
-<td><a href="#schemabrowse_comments">Browse_Comments</a></td>
+<td><a href="#schemabrowse_comments">Browse Comments </a></td>
 </tr>
 </tbody>
 </table>
@@ -6171,7 +6188,7 @@ Accept: application/json
 <td>200</td>
 <td><a href="https://tools.ietf.org/html/rfc7231#section-6.3.1">OK</a></td>
 <td>OK</td>
-<td><a href="#schemacomment_object">Comment_Object</a></td>
+<td><a href="#schemacomment_object">Comment Object </a></td>
 </tr>
 </tbody>
 </table>
@@ -6487,7 +6504,7 @@ Accept: application/json
 <td>200</td>
 <td><a href="https://tools.ietf.org/html/rfc7231#section-6.3.1">OK</a></td>
 <td>Successful Request</td>
-<td><a href="#schemabrowse_team">Browse_Team</a></td>
+<td><a href="#schemabrowse_team">Browse Team </a></td>
 </tr>
 </tbody>
 </table>
@@ -7109,7 +7126,7 @@ Authorization: Bearer YourAccessToken
 <td>200</td>
 <td><a href="https://tools.ietf.org/html/rfc7231#section-6.3.1">OK</a></td>
 <td>Request Successful</td>
-<td><a href="#schemabrowse_mod_files">Browse_Mod_Files</a></td>
+<td><a href="#schemabrowse_mod_files">Browse Mod Files</a></td>
 </tr>
 </tbody>
 </table>
@@ -7286,7 +7303,7 @@ Accept: application/json
 <td>200</td>
 <td><a href="https://tools.ietf.org/html/rfc7231#section-6.3.1">OK</a></td>
 <td>OK</td>
-<td><a href="#schemabrowse_users">Browse_Users</a></td>
+<td><a href="#schemabrowse_users">Browse Users </a></td>
 </tr>
 </tbody>
 </table>
@@ -7415,7 +7432,7 @@ Accept: application/json
 <td>200</td>
 <td><a href="https://tools.ietf.org/html/rfc7231#section-6.3.1">OK</a></td>
 <td>OK</td>
-<td><a href="#schemauser_object">User_Object</a></td>
+<td><a href="#schemauser_object">User Object </a></td>
 </tr>
 </tbody>
 </table>
@@ -7549,7 +7566,7 @@ Content-Type: application/x-www-form-urlencoded
 <td>user</td>
 <td>integer(int32)</td>
 <td>true</td>
-<td>Unique Id of the member you are determining has access to the resource id.</td>
+<td>Unique Id of the user you are determining has access to the resource id.</td>
 </tr>
 </tbody>
 </table>
@@ -7579,7 +7596,7 @@ Content-Type: application/x-www-form-urlencoded
 <td>200</td>
 <td><a href="https://tools.ietf.org/html/rfc7231#section-6.3.1">OK</a></td>
 <td>Successful Request</td>
-<td><a href="#schemaownership_object">Ownership_Object</a></td>
+<td><a href="#schemaownership_object">Ownership Object </a></td>
 </tr>
 </tbody>
 </table>
@@ -7737,7 +7754,7 @@ Content-Type: application/x-www-form-urlencoded
 <td>200</td>
 <td><a href="https://tools.ietf.org/html/rfc7231#section-6.3.1">OK</a></td>
 <td>OK</td>
-<td><a href="#schemaprice_object">Price_Object</a></td>
+<td><a href="#schemaprice_object">Price Object </a></td>
 </tr>
 </tbody>
 </table>
@@ -7927,7 +7944,7 @@ Authorization: Bearer YourAccessToken
 <td>200</td>
 <td><a href="https://tools.ietf.org/html/rfc7231#section-6.3.1">OK</a></td>
 <td>Request Successful</td>
-<td><a href="#schemabrowse_games">Browse_Games</a></td>
+<td><a href="#schemabrowse_games">Browse Games </a></td>
 </tr>
 </tbody>
 </table>
@@ -8137,7 +8154,7 @@ Authorization: Bearer YourAccessToken
 <td>200</td>
 <td><a href="https://tools.ietf.org/html/rfc7231#section-6.3.1">OK</a></td>
 <td>Request Successful</td>
-<td><a href="#schemabrowse_mods">Browse_Mods</a></td>
+<td><a href="#schemabrowse_mods">Browse Mods </a></td>
 </tr>
 </tbody>
 </table>
@@ -8285,7 +8302,7 @@ Authorization: Bearer YourAccessToken
 <td>200</td>
 <td><a href="https://tools.ietf.org/html/rfc7231#section-6.3.1">OK</a></td>
 <td>Request Successful</td>
-<td><a href="#schemabrowse_mod_files">Browse_Mod_Files</a></td>
+<td><a href="#schemabrowse_mod_files">Browse Mod Files</a></td>
 </tr>
 </tbody>
 </table>
@@ -8497,7 +8514,7 @@ Authorization: Bearer YourAccessToken
 <td>200</td>
 <td><a href="https://tools.ietf.org/html/rfc7231#section-6.3.1">OK</a></td>
 <td>Request Successful</td>
-<td><a href="#schemabrowse_mods">Browse_Mods</a></td>
+<td><a href="#schemabrowse_mods">Browse Mods </a></td>
 </tr>
 </tbody>
 </table>
@@ -8673,7 +8690,7 @@ the <em>authenticated user</em>.</em></p>
 <td>200</td>
 <td><a href="https://tools.ietf.org/html/rfc7231#section-6.3.1">OK</a></td>
 <td>Request Successful</td>
-<td><a href="#schemabrowse_mod_files">Browse_Mod_Files</a></td>
+<td><a href="#schemabrowse_mod_files">Browse Mod Files</a></td>
 </tr>
 </tbody>
 </table>
@@ -9306,6 +9323,40 @@ oauth2 ( Scopes: write )
 </tr>
 </tbody>
 </table>
+<h2 id="image-object">Image Object</h2>
+<p><a name="schemaimage_object"></a></p>
+<pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
+  </span><span class="s2">"full"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://media.mod.io/images/mods/1/1/2/IMG_20170409_222419.jpg"</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"thumbnail"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://media.mod.io/cache/images/mods/1/1/2/thumb_1020x2000/IMG_20170409_222419.jpg"</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"filename"</span><span class="p">:</span><span class="w"> </span><span class="s2">"IMG_20170409_222419.jpg"</span><span class="w">
+</span><span class="p">}</span><span class="w"> 
+</span></code></pre><h3 id="properties-5">Properties</h3>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>full</td>
+<td>string</td>
+<td>URL to the full image.</td>
+</tr>
+<tr>
+<td>thumbnail</td>
+<td>string</td>
+<td>URL to the thumbnail image.</td>
+</tr>
+<tr>
+<td>filename</td>
+<td>string</td>
+<td>Image filename, with the extension included.</td>
+</tr>
+</tbody>
+</table>
 <h2 id="browse-games-2">Browse Games</h2>
 <p><a name="schemabrowse_games"></a></p>
 <pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
@@ -9376,7 +9427,7 @@ oauth2 ( Scopes: write )
   </span><span class="s2">"next_id"</span><span class="p">:</span><span class="w"> </span><span class="mi">160</span><span class="p">,</span><span class="w">
   </span><span class="s2">"result_count"</span><span class="p">:</span><span class="w"> </span><span class="mi">100</span><span class="w">
 </span><span class="p">}</span><span class="w"> 
-</span></code></pre><h3 id="properties-5">Properties</h3>
+</span></code></pre><h3 id="properties-6">Properties</h3>
 <table>
 <thead>
 <tr>
@@ -9409,7 +9460,7 @@ oauth2 ( Scopes: write )
 <tr>
 <td>data</td>
 <td>
-<a href="#schemagame_object">Game_Object</a>[]</td>
+<a href="#schemagame_object">Game Object </a> []</td>
 <td>Array containing game objects</td>
 </tr>
 <tr>
@@ -9419,7 +9470,7 @@ oauth2 ( Scopes: write )
 </tr>
 <tr>
 <td>» submitted_by</td>
-<td><a href="#schemauser_object">User_Object</a></td>
+<td><a href="#schemauser_object">User Object </a></td>
 <td>Contains member data.</td>
 </tr>
 <tr>
@@ -9444,7 +9495,7 @@ oauth2 ( Scopes: write )
 </tr>
 <tr>
 <td>»» avatar</td>
-<td><a href="#schemaavatar_object">Avatar_Object</a></td>
+<td><a href="#schemaavatar_object">Avatar Object </a></td>
 <td>Contains avatar data.</td>
 </tr>
 <tr>
@@ -9520,7 +9571,7 @@ oauth2 ( Scopes: write )
 </tr>
 <tr>
 <td>» icon</td>
-<td><a href="#schemaicon_object">Icon_Object</a></td>
+<td><a href="#schemaicon_object">Icon Object </a></td>
 <td>Contains icon data.</td>
 </tr>
 <tr>
@@ -9540,7 +9591,7 @@ oauth2 ( Scopes: write )
 </tr>
 <tr>
 <td>» logo</td>
-<td><a href="#schemalogo_object">Logo_Object</a></td>
+<td><a href="#schemalogo_object">Logo Object </a></td>
 <td>Contains logo data.</td>
 </tr>
 <tr>
@@ -9570,7 +9621,7 @@ oauth2 ( Scopes: write )
 </tr>
 <tr>
 <td>» header</td>
-<td><a href="#schemaheader_object">Header_Object</a></td>
+<td><a href="#schemaheader_object">Header Object </a></td>
 <td>Contains header data.</td>
 </tr>
 <tr>
@@ -9616,7 +9667,7 @@ oauth2 ( Scopes: write )
 <tr>
 <td>» cats</td>
 <td>
-<a href="#schemacatsarray">catsArray</a>[]</td>
+<a href="#schemacatsarray">catsArray</a> []</td>
 <td>Contains categories data.</td>
 </tr>
 <tr>
@@ -9636,7 +9687,7 @@ oauth2 ( Scopes: write )
 </tr>
 <tr>
 <td>»» tags</td>
-<td>[string]</td>
+<td>string[]</td>
 <td>Eligible tags for this game.</td>
 </tr>
 </tbody>
@@ -9668,10 +9719,17 @@ oauth2 ( Scopes: write )
           </span><span class="s2">"after"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://rogue-knight.mod.io/rogue-hd-pack"</span><span class="w">
         </span><span class="p">}</span><span class="w">
       </span><span class="p">}</span><span class="w">
+    </span><span class="p">},</span><span class="w">
+    </span><span class="p">{</span><span class="w">
+        </span><span class="err">...</span><span class="w">
     </span><span class="p">}</span><span class="w">
-  </span><span class="p">]</span><span class="w">
+  </span><span class="p">],</span><span class="w">
+  </span><span class="s2">"cursor_id"</span><span class="p">:</span><span class="w"> </span><span class="mi">60</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"prev_id"</span><span class="p">:</span><span class="w"> </span><span class="mi">30</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"next_id"</span><span class="p">:</span><span class="w"> </span><span class="mi">160</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"result_count"</span><span class="p">:</span><span class="w"> </span><span class="mi">100</span><span class="w">
 </span><span class="p">}</span><span class="w"> 
-</span></code></pre><h3 id="properties-6">Properties</h3>
+</span></code></pre><h3 id="properties-7">Properties</h3>
 <table>
 <thead>
 <tr>
@@ -9682,9 +9740,29 @@ oauth2 ( Scopes: write )
 </thead>
 <tbody>
 <tr>
+<td>cursor_id</td>
+<td>integer(int32)</td>
+<td>The current _cursor value.</td>
+</tr>
+<tr>
+<td>prev_id</td>
+<td>integer(int32)</td>
+<td>The previous _cursor value as manually inserted by you, null by default.</td>
+</tr>
+<tr>
+<td>next_id</td>
+<td>integer(int32)</td>
+<td>The next position to move the _cursor to, based on the current request.</td>
+</tr>
+<tr>
+<td>result_count</td>
+<td>integer(int32)</td>
+<td>The amount of results returned in the current request.</td>
+</tr>
+<tr>
 <td>data</td>
 <td>
-<a href="#schemagame_activity_object">Game_Activity_Object</a>[]</td>
+<a href="#schemagame_activity_object">Game Activity Object</a> []</td>
 <td>Response array of items.</td>
 </tr>
 <tr>
@@ -9694,7 +9772,7 @@ oauth2 ( Scopes: write )
 </tr>
 <tr>
 <td>» user</td>
-<td><a href="#schemauser_object">User_Object</a></td>
+<td><a href="#schemauser_object">User Object </a></td>
 <td>Contains member data.</td>
 </tr>
 <tr>
@@ -9719,7 +9797,7 @@ oauth2 ( Scopes: write )
 </tr>
 <tr>
 <td>»» avatar</td>
-<td><a href="#schemaavatar_object">Avatar_Object</a></td>
+<td><a href="#schemaavatar_object">Avatar Object </a></td>
 <td>Contains avatar data.</td>
 </tr>
 <tr>
@@ -9869,7 +9947,7 @@ oauth2 ( Scopes: write )
   </span><span class="s2">"next_id"</span><span class="p">:</span><span class="w"> </span><span class="mi">160</span><span class="p">,</span><span class="w">
   </span><span class="s2">"result_count"</span><span class="p">:</span><span class="w"> </span><span class="mi">100</span><span class="w">
 </span><span class="p">}</span><span class="w"> 
-</span></code></pre><h3 id="properties-7">Properties</h3>
+</span></code></pre><h3 id="properties-8">Properties</h3>
 <table>
 <thead>
 <tr>
@@ -9902,7 +9980,7 @@ oauth2 ( Scopes: write )
 <tr>
 <td>data</td>
 <td>
-<a href="#schemamod_object">Mod_Object</a>[]</td>
+<a href="#schemamod_object">Mod Object </a> []</td>
 <td>Array containing mod objects</td>
 </tr>
 <tr>
@@ -9917,7 +9995,7 @@ oauth2 ( Scopes: write )
 </tr>
 <tr>
 <td>» submitted_by</td>
-<td><a href="#schemauser_object">User_Object</a></td>
+<td><a href="#schemauser_object">User Object </a></td>
 <td>Contains member data.</td>
 </tr>
 <tr>
@@ -9942,7 +10020,7 @@ oauth2 ( Scopes: write )
 </tr>
 <tr>
 <td>»» avatar</td>
-<td><a href="#schemaavatar_object">Avatar_Object</a></td>
+<td><a href="#schemaavatar_object">Avatar Object </a></td>
 <td>Contains avatar data.</td>
 </tr>
 <tr>
@@ -9987,7 +10065,7 @@ oauth2 ( Scopes: write )
 </tr>
 <tr>
 <td>» logo</td>
-<td><a href="#schemalogo_object">Logo_Object</a></td>
+<td><a href="#schemalogo_object">Logo Object </a></td>
 <td>Contains logo data.</td>
 </tr>
 <tr>
@@ -10052,7 +10130,7 @@ oauth2 ( Scopes: write )
 </tr>
 <tr>
 <td>» modfile</td>
-<td><a href="#schemamodfile_object">Modfile_Object</a></td>
+<td><a href="#schemamodfile_object">Modfile Object </a></td>
 <td>Contains file data.</td>
 </tr>
 <tr>
@@ -10127,17 +10205,18 @@ oauth2 ( Scopes: write )
 </tr>
 <tr>
 <td>»» youtube</td>
-<td>[string]</td>
+<td>string[]</td>
 <td>Contains YouTube data.</td>
 </tr>
 <tr>
 <td>»» sketchfab</td>
-<td>[string]</td>
+<td>string[]</td>
 <td>Contains Sketchfab data.</td>
 </tr>
 <tr>
 <td>»» images</td>
-<td>[Unknown]</td>
+<td>
+<a href="#schemaimage_object">Image Object </a> []</td>
 <td>Contains images data.</td>
 </tr>
 <tr>
@@ -10153,11 +10232,11 @@ oauth2 ( Scopes: write )
 <tr>
 <td>»»» filename</td>
 <td>string</td>
-<td>Image filename, with with extension included.</td>
+<td>Image filename, with the extension included.</td>
 </tr>
 <tr>
 <td>» ratings</td>
-<td><a href="#schemarating_object">Rating_Object</a></td>
+<td><a href="#schemarating_object">Rating Object </a></td>
 <td>Contains ratings data.</td>
 </tr>
 <tr>
@@ -10197,7 +10276,7 @@ oauth2 ( Scopes: write )
 </tr>
 <tr>
 <td>» tags</td>
-<td><a href="#schemamod_tag_object">Mod_Tag_Object</a></td>
+<td><a href="#schemamod_tag_object">Mod Tag Object</a></td>
 <td>Contains Tags data.</td>
 </tr>
 <tr>
@@ -10239,135 +10318,6 @@ oauth2 ( Scopes: write )
           </span><span class="s2">"after"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://rogue-knight.mod.io/rogue-hd-pack"</span><span class="w">
         </span><span class="p">}</span><span class="w">
       </span><span class="p">}</span><span class="w">
-    </span><span class="p">}</span><span class="w">
-  </span><span class="p">]</span><span class="w">
-</span><span class="p">}</span><span class="w"> 
-</span></code></pre><h3 id="properties-8">Properties</h3>
-<table>
-<thead>
-<tr>
-<th>Name</th>
-<th>Type</th>
-<th>Description</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>data</td>
-<td>
-<a href="#schemamod_activity_object">Mod_Activity_Object</a>[]</td>
-<td>Response array of items.</td>
-</tr>
-<tr>
-<td>» id</td>
-<td>integer(int32)</td>
-<td>Unique id of activity object.</td>
-</tr>
-<tr>
-<td>» user</td>
-<td><a href="#schemauser_object">User_Object</a></td>
-<td>Contains member data.</td>
-</tr>
-<tr>
-<td>»» id</td>
-<td>integer(int32)</td>
-<td>Unique id of the user.</td>
-</tr>
-<tr>
-<td>»» nameid</td>
-<td>string</td>
-<td>Unique nameid of user which forms end of their profile URL.</td>
-</tr>
-<tr>
-<td>»» username</td>
-<td>string</td>
-<td>Non-unique username of the user.</td>
-</tr>
-<tr>
-<td>»» online</td>
-<td>integer(int32)</td>
-<td>Unix timestamp on when the user was last online.</td>
-</tr>
-<tr>
-<td>»» avatar</td>
-<td><a href="#schemaavatar_object">Avatar_Object</a></td>
-<td>Contains avatar data.</td>
-</tr>
-<tr>
-<td>»»» filename</td>
-<td>string</td>
-<td>Image filename, including file extension.</td>
-</tr>
-<tr>
-<td>»»» full</td>
-<td>string</td>
-<td>Full URL to the image.</td>
-</tr>
-<tr>
-<td>»» timezone</td>
-<td>string</td>
-<td>The Timezone of the user, shown in {Country}/{City} format.</td>
-</tr>
-<tr>
-<td>»» language</td>
-<td>string</td>
-<td>The users language preference, limited to two characters.</td>
-</tr>
-<tr>
-<td>»» url</td>
-<td>string</td>
-<td>URL to the user profile.</td>
-</tr>
-<tr>
-<td>» dateup</td>
-<td>integer(int32)</td>
-<td>Unix timestamp of when the update occurred.</td>
-</tr>
-<tr>
-<td>» event</td>
-<td>string</td>
-<td>The type of resource and action that occurred.</td>
-</tr>
-<tr>
-<td>» changes</td>
-<td>object</td>
-<td>No description</td>
-</tr>
-<tr>
-<td>»» summary</td>
-<td>object</td>
-<td>No description</td>
-</tr>
-<tr>
-<td>»»» before</td>
-<td>string</td>
-<td>No description</td>
-</tr>
-<tr>
-<td>»»» after</td>
-<td>string</td>
-<td>No description</td>
-</tr>
-</tbody>
-</table>
-<h2 id="browse-mod-files-2">Browse Mod Files</h2>
-<p><a name="schemabrowse_mod_files"></a></p>
-<pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
-  </span><span class="s2">"data"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
-    </span><span class="p">{</span><span class="w">
-      </span><span class="s2">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span><span class="w">
-      </span><span class="s2">"mod"</span><span class="p">:</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span><span class="w">
-      </span><span class="s2">"date"</span><span class="p">:</span><span class="w"> </span><span class="mi">1499841487</span><span class="p">,</span><span class="w">
-      </span><span class="s2">"datevirus"</span><span class="p">:</span><span class="w"> </span><span class="mi">1499841487</span><span class="p">,</span><span class="w">
-      </span><span class="s2">"virusstatus"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
-      </span><span class="s2">"viruspositive"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
-      </span><span class="s2">"filesize"</span><span class="p">:</span><span class="w"> </span><span class="mi">15181</span><span class="p">,</span><span class="w">
-      </span><span class="s2">"filehash"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2d4a0e2d7273db6b0a94b0740a88ad0d"</span><span class="p">,</span><span class="w">
-      </span><span class="s2">"filename"</span><span class="p">:</span><span class="w"> </span><span class="s2">"rogue-knight-v1.zip"</span><span class="p">,</span><span class="w">
-      </span><span class="s2">"version"</span><span class="p">:</span><span class="w"> </span><span class="s2">"1.3"</span><span class="p">,</span><span class="w">
-      </span><span class="s2">"virustotal"</span><span class="p">:</span><span class="w"> </span><span class="s2">"No threats found."</span><span class="p">,</span><span class="w">
-      </span><span class="s2">"changelog"</span><span class="p">:</span><span class="w"> </span><span class="s2">"VERSION 1.3 -- Changes -- Fixed critical castle floor bug."</span><span class="p">,</span><span class="w">
-      </span><span class="s2">"download"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://mod.io/mods/file/2/c489a0354111a4d76640d47f0cdcb294"</span><span class="w">
     </span><span class="p">},</span><span class="w">
     </span><span class="p">{</span><span class="w">
         </span><span class="err">...</span><span class="w">
@@ -10411,7 +10361,163 @@ oauth2 ( Scopes: write )
 <tr>
 <td>data</td>
 <td>
-<a href="#schemamodfile_object">Modfile_Object</a>[]</td>
+<a href="#schemamod_activity_object">Mod Activity Object</a> []</td>
+<td>Response array of items.</td>
+</tr>
+<tr>
+<td>» id</td>
+<td>integer(int32)</td>
+<td>Unique id of activity object.</td>
+</tr>
+<tr>
+<td>» user</td>
+<td><a href="#schemauser_object">User Object </a></td>
+<td>Contains member data.</td>
+</tr>
+<tr>
+<td>»» id</td>
+<td>integer(int32)</td>
+<td>Unique id of the user.</td>
+</tr>
+<tr>
+<td>»» nameid</td>
+<td>string</td>
+<td>Unique nameid of user which forms end of their profile URL.</td>
+</tr>
+<tr>
+<td>»» username</td>
+<td>string</td>
+<td>Non-unique username of the user.</td>
+</tr>
+<tr>
+<td>»» online</td>
+<td>integer(int32)</td>
+<td>Unix timestamp on when the user was last online.</td>
+</tr>
+<tr>
+<td>»» avatar</td>
+<td><a href="#schemaavatar_object">Avatar Object </a></td>
+<td>Contains avatar data.</td>
+</tr>
+<tr>
+<td>»»» filename</td>
+<td>string</td>
+<td>Image filename, including file extension.</td>
+</tr>
+<tr>
+<td>»»» full</td>
+<td>string</td>
+<td>Full URL to the image.</td>
+</tr>
+<tr>
+<td>»» timezone</td>
+<td>string</td>
+<td>The Timezone of the user, shown in {Country}/{City} format.</td>
+</tr>
+<tr>
+<td>»» language</td>
+<td>string</td>
+<td>The users language preference, limited to two characters.</td>
+</tr>
+<tr>
+<td>»» url</td>
+<td>string</td>
+<td>URL to the user profile.</td>
+</tr>
+<tr>
+<td>» dateup</td>
+<td>integer(int32)</td>
+<td>Unix timestamp of when the update occurred.</td>
+</tr>
+<tr>
+<td>» event</td>
+<td>string</td>
+<td>The type of resource and action that occurred.</td>
+</tr>
+<tr>
+<td>» changes</td>
+<td>object</td>
+<td>Contains all changes fields.</td>
+</tr>
+<tr>
+<td>»» summary</td>
+<td>object</td>
+<td>Example field that changed for the corresponding object schema.</td>
+</tr>
+<tr>
+<td>»»» before</td>
+<td>string</td>
+<td>The value prior to the event.</td>
+</tr>
+<tr>
+<td>»»» after</td>
+<td>string</td>
+<td>The newly-updated value.</td>
+</tr>
+</tbody>
+</table>
+<h2 id="browse-mod-files-2">Browse Mod Files</h2>
+<p><a name="schemabrowse_mod_files"></a></p>
+<pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
+  </span><span class="s2">"data"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+    </span><span class="p">{</span><span class="w">
+      </span><span class="s2">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"mod"</span><span class="p">:</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"date"</span><span class="p">:</span><span class="w"> </span><span class="mi">1499841487</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"datevirus"</span><span class="p">:</span><span class="w"> </span><span class="mi">1499841487</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"virusstatus"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"viruspositive"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"filesize"</span><span class="p">:</span><span class="w"> </span><span class="mi">15181</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"filehash"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2d4a0e2d7273db6b0a94b0740a88ad0d"</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"filename"</span><span class="p">:</span><span class="w"> </span><span class="s2">"rogue-knight-v1.zip"</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"version"</span><span class="p">:</span><span class="w"> </span><span class="s2">"1.3"</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"virustotal"</span><span class="p">:</span><span class="w"> </span><span class="s2">"No threats found."</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"changelog"</span><span class="p">:</span><span class="w"> </span><span class="s2">"VERSION 1.3 -- Changes -- Fixed critical castle floor bug."</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"download"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://mod.io/mods/file/2/c489a0354111a4d76640d47f0cdcb294"</span><span class="w">
+    </span><span class="p">},</span><span class="w">
+    </span><span class="p">{</span><span class="w">
+        </span><span class="err">...</span><span class="w">
+    </span><span class="p">}</span><span class="w">
+  </span><span class="p">],</span><span class="w">
+  </span><span class="s2">"cursor_id"</span><span class="p">:</span><span class="w"> </span><span class="mi">60</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"prev_id"</span><span class="p">:</span><span class="w"> </span><span class="mi">30</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"next_id"</span><span class="p">:</span><span class="w"> </span><span class="mi">160</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"result_count"</span><span class="p">:</span><span class="w"> </span><span class="mi">100</span><span class="w">
+</span><span class="p">}</span><span class="w"> 
+</span></code></pre><h3 id="properties-10">Properties</h3>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>cursor_id</td>
+<td>integer(int32)</td>
+<td>The current _cursor value.</td>
+</tr>
+<tr>
+<td>prev_id</td>
+<td>integer(int32)</td>
+<td>The previous _cursor value as manually inserted by you, null by default.</td>
+</tr>
+<tr>
+<td>next_id</td>
+<td>integer(int32)</td>
+<td>The next position to move the _cursor to, based on the current request.</td>
+</tr>
+<tr>
+<td>result_count</td>
+<td>integer(int32)</td>
+<td>The amount of results returned in the current request.</td>
+</tr>
+<tr>
+<td>data</td>
+<td>
+<a href="#schemamodfile_object">Modfile Object </a> []</td>
 <td>Response array of items.</td>
 </tr>
 <tr>
@@ -10491,7 +10597,7 @@ oauth2 ( Scopes: write )
     </span><span class="p">}</span><span class="w">
   </span><span class="p">]</span><span class="w">
 </span><span class="p">}</span><span class="w"> 
-</span></code></pre><h3 id="properties-10">Properties</h3>
+</span></code></pre><h3 id="properties-11">Properties</h3>
 <table>
 <thead>
 <tr>
@@ -10504,7 +10610,7 @@ oauth2 ( Scopes: write )
 <tr>
 <td>data</td>
 <td>
-<a href="#schemamod_tag_object">Mod_Tag_Object</a>[]</td>
+<a href="#schemamod_tag_object">Mod Tag Object</a> []</td>
 <td>No description</td>
 </tr>
 <tr>
@@ -10555,7 +10661,7 @@ oauth2 ( Scopes: write )
   </span><span class="s2">"next_id"</span><span class="p">:</span><span class="w"> </span><span class="mi">160</span><span class="p">,</span><span class="w">
   </span><span class="s2">"result_count"</span><span class="p">:</span><span class="w"> </span><span class="mi">100</span><span class="w">
 </span><span class="p">}</span><span class="w"> 
-</span></code></pre><h3 id="properties-11">Properties</h3>
+</span></code></pre><h3 id="properties-12">Properties</h3>
 <table>
 <thead>
 <tr>
@@ -10588,7 +10694,7 @@ oauth2 ( Scopes: write )
 <tr>
 <td>data</td>
 <td>
-<a href="#schemacomment_object">Comment_Object</a>[]</td>
+<a href="#schemacomment_object">Comment Object </a> []</td>
 <td>Array containing comment objects</td>
 </tr>
 <tr>
@@ -10603,7 +10709,7 @@ oauth2 ( Scopes: write )
 </tr>
 <tr>
 <td>» submitted_by</td>
-<td><a href="#schemauser_object">User_Object</a></td>
+<td><a href="#schemauser_object">User Object </a></td>
 <td>Contains member data.</td>
 </tr>
 <tr>
@@ -10628,7 +10734,7 @@ oauth2 ( Scopes: write )
 </tr>
 <tr>
 <td>»» avatar</td>
-<td><a href="#schemaavatar_object">Avatar_Object</a></td>
+<td><a href="#schemaavatar_object">Avatar Object </a></td>
 <td>Contains avatar data.</td>
 </tr>
 <tr>
@@ -10718,7 +10824,7 @@ oauth2 ( Scopes: write )
     </span><span class="p">}</span><span class="w">
   </span><span class="p">]</span><span class="w">
 </span><span class="p">}</span><span class="w"> 
-</span></code></pre><h3 id="properties-12">Properties</h3>
+</span></code></pre><h3 id="properties-13">Properties</h3>
 <table>
 <thead>
 <tr>
@@ -10751,7 +10857,7 @@ oauth2 ( Scopes: write )
 <tr>
 <td>data</td>
 <td>
-<a href="#schemaaccess_object">Access_Object</a>[]</td>
+<a href="#schemaaccess_object">Access Object </a> []</td>
 <td>No description</td>
 </tr>
 <tr>
@@ -10761,7 +10867,7 @@ oauth2 ( Scopes: write )
 </tr>
 <tr>
 <td>» user</td>
-<td><a href="#schemauser_object">User_Object</a></td>
+<td><a href="#schemauser_object">User Object </a></td>
 <td>Contains member data.</td>
 </tr>
 <tr>
@@ -10786,7 +10892,7 @@ oauth2 ( Scopes: write )
 </tr>
 <tr>
 <td>»» avatar</td>
-<td><a href="#schemaavatar_object">Avatar_Object</a></td>
+<td><a href="#schemaavatar_object">Avatar Object </a></td>
 <td>Contains avatar data.</td>
 </tr>
 <tr>
@@ -10862,7 +10968,7 @@ oauth2 ( Scopes: write )
   </span><span class="s2">"next_id"</span><span class="p">:</span><span class="w"> </span><span class="mi">160</span><span class="p">,</span><span class="w">
   </span><span class="s2">"result_count"</span><span class="p">:</span><span class="w"> </span><span class="mi">100</span><span class="w">
 </span><span class="p">}</span><span class="w"> 
-</span></code></pre><h3 id="properties-13">Properties</h3>
+</span></code></pre><h3 id="properties-14">Properties</h3>
 <table>
 <thead>
 <tr>
@@ -10895,7 +11001,7 @@ oauth2 ( Scopes: write )
 <tr>
 <td>data</td>
 <td>
-<a href="#schemauser_object">User_Object</a>[]</td>
+<a href="#schemauser_object">User Object </a> []</td>
 <td>Response array of items.</td>
 </tr>
 <tr>
@@ -10920,7 +11026,7 @@ oauth2 ( Scopes: write )
 </tr>
 <tr>
 <td>» avatar</td>
-<td><a href="#schemaavatar_object">Avatar_Object</a></td>
+<td><a href="#schemaavatar_object">Avatar Object </a></td>
 <td>Contains avatar data.</td>
 </tr>
 <tr>
@@ -10964,7 +11070,7 @@ oauth2 ( Scopes: write )
     </span><span class="p">}</span><span class="w">
   </span><span class="p">]</span><span class="w">
 </span><span class="p">}</span><span class="w"> 
-</span></code></pre><h3 id="properties-14">Properties</h3>
+</span></code></pre><h3 id="properties-15">Properties</h3>
 <table>
 <thead>
 <tr>
@@ -10977,7 +11083,7 @@ oauth2 ( Scopes: write )
 <tr>
 <td>data</td>
 <td>
-<a href="#schemaupdate_object">Update_Object</a>[]</td>
+<a href="#schemaupdate_object">Update Object </a> []</td>
 <td>Get all updates that occurred between two timestamps for the <em>authenticated user</em>.  Endpoint: v1/me/subscribed/updates</td>
 </tr>
 <tr>
@@ -11034,7 +11140,7 @@ oauth2 ( Scopes: write )
   </span><span class="s2">"date"</span><span class="p">:</span><span class="w"> </span><span class="mi">1492058857</span><span class="p">,</span><span class="w">
   </span><span class="s2">"position"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Supreme Overlord"</span><span class="w">
 </span><span class="p">}</span><span class="w"> 
-</span></code></pre><h3 id="properties-15">Properties</h3>
+</span></code></pre><h3 id="properties-16">Properties</h3>
 <table>
 <thead>
 <tr>
@@ -11051,7 +11157,7 @@ oauth2 ( Scopes: write )
 </tr>
 <tr>
 <td>user</td>
-<td><a href="#schemauser_object">User_Object</a></td>
+<td><a href="#schemauser_object">User Object </a></td>
 <td>Contains member data.</td>
 </tr>
 <tr>
@@ -11076,7 +11182,7 @@ oauth2 ( Scopes: write )
 </tr>
 <tr>
 <td>» avatar</td>
-<td><a href="#schemaavatar_object">Avatar_Object</a></td>
+<td><a href="#schemaavatar_object">Avatar Object </a></td>
 <td>Contains avatar data.</td>
 </tr>
 <tr>
@@ -11152,7 +11258,7 @@ oauth2 ( Scopes: write )
     </span><span class="p">}</span><span class="w">
   </span><span class="p">}</span><span class="w">
 </span><span class="p">}</span><span class="w"> 
-</span></code></pre><h3 id="properties-16">Properties</h3>
+</span></code></pre><h3 id="properties-17">Properties</h3>
 <table>
 <thead>
 <tr>
@@ -11169,7 +11275,7 @@ oauth2 ( Scopes: write )
 </tr>
 <tr>
 <td>user</td>
-<td><a href="#schemauser_object">User_Object</a></td>
+<td><a href="#schemauser_object">User Object </a></td>
 <td>Contains member data.</td>
 </tr>
 <tr>
@@ -11194,7 +11300,7 @@ oauth2 ( Scopes: write )
 </tr>
 <tr>
 <td>» avatar</td>
-<td><a href="#schemaavatar_object">Avatar_Object</a></td>
+<td><a href="#schemaavatar_object">Avatar Object </a></td>
 <td>Contains avatar data.</td>
 </tr>
 <tr>
@@ -11280,7 +11386,7 @@ oauth2 ( Scopes: write )
     </span><span class="p">}</span><span class="w">
   </span><span class="p">}</span><span class="w">
 </span><span class="p">}</span><span class="w"> 
-</span></code></pre><h3 id="properties-17">Properties</h3>
+</span></code></pre><h3 id="properties-18">Properties</h3>
 <table>
 <thead>
 <tr>
@@ -11297,7 +11403,7 @@ oauth2 ( Scopes: write )
 </tr>
 <tr>
 <td>user</td>
-<td><a href="#schemauser_object">User_Object</a></td>
+<td><a href="#schemauser_object">User Object </a></td>
 <td>Contains member data.</td>
 </tr>
 <tr>
@@ -11322,7 +11428,7 @@ oauth2 ( Scopes: write )
 </tr>
 <tr>
 <td>» avatar</td>
-<td><a href="#schemaavatar_object">Avatar_Object</a></td>
+<td><a href="#schemaavatar_object">Avatar Object </a></td>
 <td>Contains avatar data.</td>
 </tr>
 <tr>
@@ -11363,22 +11469,22 @@ oauth2 ( Scopes: write )
 <tr>
 <td>changes</td>
 <td>object</td>
-<td>No description</td>
+<td>Contains all changes fields.</td>
 </tr>
 <tr>
 <td>» summary</td>
 <td>object</td>
-<td>No description</td>
+<td>Example field that changed for the corresponding object schema.</td>
 </tr>
 <tr>
 <td>»» before</td>
 <td>string</td>
-<td>No description</td>
+<td>The value prior to the event.</td>
 </tr>
 <tr>
 <td>»» after</td>
 <td>string</td>
-<td>No description</td>
+<td>The newly-updated value.</td>
 </tr>
 </tbody>
 </table>
@@ -11407,7 +11513,7 @@ oauth2 ( Scopes: write )
   </span><span class="s2">"karmago"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
   </span><span class="s2">"summary"</span><span class="p">:</span><span class="w"> </span><span class="s2">"This mod is kickass! Great work!"</span><span class="w">
 </span><span class="p">}</span><span class="w"> 
-</span></code></pre><h3 id="properties-18">Properties</h3>
+</span></code></pre><h3 id="properties-19">Properties</h3>
 <table>
 <thead>
 <tr>
@@ -11429,7 +11535,7 @@ oauth2 ( Scopes: write )
 </tr>
 <tr>
 <td>submitted_by</td>
-<td><a href="#schemauser_object">User_Object</a></td>
+<td><a href="#schemauser_object">User Object </a></td>
 <td>Contains member data.</td>
 </tr>
 <tr>
@@ -11454,7 +11560,7 @@ oauth2 ( Scopes: write )
 </tr>
 <tr>
 <td>» avatar</td>
-<td><a href="#schemaavatar_object">Avatar_Object</a></td>
+<td><a href="#schemaavatar_object">Avatar Object </a></td>
 <td>Contains avatar data.</td>
 </tr>
 <tr>
@@ -11521,7 +11627,7 @@ oauth2 ( Scopes: write )
   </span><span class="s2">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">3</span><span class="p">,</span><span class="w">
   </span><span class="s2">"ownership"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="w">
 </span><span class="p">}</span><span class="w"> 
-</span></code></pre><h3 id="properties-19">Properties</h3>
+</span></code></pre><h3 id="properties-20">Properties</h3>
 <table>
 <thead>
 <tr>
@@ -11555,7 +11661,7 @@ oauth2 ( Scopes: write )
   </span><span class="s2">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">3</span><span class="p">,</span><span class="w">
   </span><span class="s2">"price"</span><span class="p">:</span><span class="w"> </span><span class="mf">19.99</span><span class="w">
 </span><span class="p">}</span><span class="w"> 
-</span></code></pre><h3 id="properties-20">Properties</h3>
+</span></code></pre><h3 id="properties-21">Properties</h3>
 <table>
 <thead>
 <tr>
@@ -11599,7 +11705,7 @@ oauth2 ( Scopes: write )
   </span><span class="s2">"changelog"</span><span class="p">:</span><span class="w"> </span><span class="s2">"VERSION 1.3 -- Changes -- Fixed critical castle floor bug."</span><span class="p">,</span><span class="w">
   </span><span class="s2">"download"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://mod.io/mods/file/2/c489a0354111a4d76640d47f0cdcb294"</span><span class="w">
 </span><span class="p">}</span><span class="w"> 
-</span></code></pre><h3 id="properties-21">Properties</h3>
+</span></code></pre><h3 id="properties-22">Properties</h3>
 <table>
 <thead>
 <tr>
@@ -11755,7 +11861,7 @@ oauth2 ( Scopes: write )
     </span><span class="s2">"date"</span><span class="p">:</span><span class="w"> </span><span class="mi">1499841487</span><span class="w">
   </span><span class="p">}</span><span class="w">
 </span><span class="p">}</span><span class="w"> 
-</span></code></pre><h3 id="properties-22">Properties</h3>
+</span></code></pre><h3 id="properties-23">Properties</h3>
 <table>
 <thead>
 <tr>
@@ -11777,7 +11883,7 @@ oauth2 ( Scopes: write )
 </tr>
 <tr>
 <td>submitted_by</td>
-<td><a href="#schemauser_object">User_Object</a></td>
+<td><a href="#schemauser_object">User Object </a></td>
 <td>Contains member data.</td>
 </tr>
 <tr>
@@ -11802,7 +11908,7 @@ oauth2 ( Scopes: write )
 </tr>
 <tr>
 <td>» avatar</td>
-<td><a href="#schemaavatar_object">Avatar_Object</a></td>
+<td><a href="#schemaavatar_object">Avatar Object </a></td>
 <td>Contains avatar data.</td>
 </tr>
 <tr>
@@ -11847,7 +11953,7 @@ oauth2 ( Scopes: write )
 </tr>
 <tr>
 <td>logo</td>
-<td><a href="#schemalogo_object">Logo_Object</a></td>
+<td><a href="#schemalogo_object">Logo Object </a></td>
 <td>Contains logo data.</td>
 </tr>
 <tr>
@@ -11912,7 +12018,7 @@ oauth2 ( Scopes: write )
 </tr>
 <tr>
 <td>modfile</td>
-<td><a href="#schemamodfile_object">Modfile_Object</a></td>
+<td><a href="#schemamodfile_object">Modfile Object </a></td>
 <td>Contains file data.</td>
 </tr>
 <tr>
@@ -11987,17 +12093,18 @@ oauth2 ( Scopes: write )
 </tr>
 <tr>
 <td>» youtube</td>
-<td>[string]</td>
+<td>string[]</td>
 <td>Contains YouTube data.</td>
 </tr>
 <tr>
 <td>» sketchfab</td>
-<td>[string]</td>
+<td>string[]</td>
 <td>Contains Sketchfab data.</td>
 </tr>
 <tr>
 <td>» images</td>
-<td>[Unknown]</td>
+<td>
+<a href="#schemaimage_object">Image Object </a> []</td>
 <td>Contains images data.</td>
 </tr>
 <tr>
@@ -12013,11 +12120,11 @@ oauth2 ( Scopes: write )
 <tr>
 <td>»» filename</td>
 <td>string</td>
-<td>Image filename, with with extension included.</td>
+<td>Image filename, with the extension included.</td>
 </tr>
 <tr>
 <td>ratings</td>
-<td><a href="#schemarating_object">Rating_Object</a></td>
+<td><a href="#schemarating_object">Rating Object </a></td>
 <td>Contains ratings data.</td>
 </tr>
 <tr>
@@ -12057,7 +12164,7 @@ oauth2 ( Scopes: write )
 </tr>
 <tr>
 <td>tags</td>
-<td><a href="#schemamod_tag_object">Mod_Tag_Object</a></td>
+<td><a href="#schemamod_tag_object">Mod Tag Object</a></td>
 <td>Contains Tags data.</td>
 </tr>
 <tr>
@@ -12078,7 +12185,7 @@ oauth2 ( Scopes: write )
   </span><span class="s2">"tag"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Unity"</span><span class="p">,</span><span class="w">
   </span><span class="s2">"date"</span><span class="p">:</span><span class="w"> </span><span class="mi">1499841487</span><span class="w">
 </span><span class="p">}</span><span class="w"> 
-</span></code></pre><h3 id="properties-23">Properties</h3>
+</span></code></pre><h3 id="properties-24">Properties</h3>
 <table>
 <thead>
 <tr>
@@ -12159,7 +12266,7 @@ oauth2 ( Scopes: write )
     </span><span class="p">}</span><span class="w">
   </span><span class="p">]</span><span class="w">
 </span><span class="p">}</span><span class="w"> 
-</span></code></pre><h3 id="properties-24">Properties</h3>
+</span></code></pre><h3 id="properties-25">Properties</h3>
 <table>
 <thead>
 <tr>
@@ -12176,7 +12283,7 @@ oauth2 ( Scopes: write )
 </tr>
 <tr>
 <td>submitted_by</td>
-<td><a href="#schemauser_object">User_Object</a></td>
+<td><a href="#schemauser_object">User Object </a></td>
 <td>Contains member data.</td>
 </tr>
 <tr>
@@ -12201,7 +12308,7 @@ oauth2 ( Scopes: write )
 </tr>
 <tr>
 <td>» avatar</td>
-<td><a href="#schemaavatar_object">Avatar_Object</a></td>
+<td><a href="#schemaavatar_object">Avatar Object </a></td>
 <td>Contains avatar data.</td>
 </tr>
 <tr>
@@ -12277,7 +12384,7 @@ oauth2 ( Scopes: write )
 </tr>
 <tr>
 <td>icon</td>
-<td><a href="#schemaicon_object">Icon_Object</a></td>
+<td><a href="#schemaicon_object">Icon Object </a></td>
 <td>Contains icon data.</td>
 </tr>
 <tr>
@@ -12297,7 +12404,7 @@ oauth2 ( Scopes: write )
 </tr>
 <tr>
 <td>logo</td>
-<td><a href="#schemalogo_object">Logo_Object</a></td>
+<td><a href="#schemalogo_object">Logo Object </a></td>
 <td>Contains logo data.</td>
 </tr>
 <tr>
@@ -12327,7 +12434,7 @@ oauth2 ( Scopes: write )
 </tr>
 <tr>
 <td>header</td>
-<td><a href="#schemaheader_object">Header_Object</a></td>
+<td><a href="#schemaheader_object">Header Object </a></td>
 <td>Contains header data.</td>
 </tr>
 <tr>
@@ -12373,7 +12480,7 @@ oauth2 ( Scopes: write )
 <tr>
 <td>cats</td>
 <td>
-<a href="#schemacatsarray">catsArray</a>[]</td>
+<a href="#schemacatsarray">catsArray</a> []</td>
 <td>Contains categories data.</td>
 </tr>
 <tr>
@@ -12393,7 +12500,7 @@ oauth2 ( Scopes: write )
 </tr>
 <tr>
 <td>» tags</td>
-<td>[string]</td>
+<td>string[]</td>
 <td>Eligible tags for this game.</td>
 </tr>
 </tbody>
@@ -12409,7 +12516,7 @@ oauth2 ( Scopes: write )
   </span><span class="s2">"stars"</span><span class="p">:</span><span class="w"> </span><span class="mi">4</span><span class="p">,</span><span class="w">
   </span><span class="s2">"text"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Very Positive"</span><span class="w">
 </span><span class="p">}</span><span class="w"> 
-</span></code></pre><h3 id="properties-25">Properties</h3>
+</span></code></pre><h3 id="properties-26">Properties</h3>
 <table>
 <thead>
 <tr>
@@ -12466,7 +12573,7 @@ oauth2 ( Scopes: write )
   </span><span class="s2">"date"</span><span class="p">:</span><span class="w"> </span><span class="mi">1492058857</span><span class="p">,</span><span class="w">
   </span><span class="s2">"mention"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="w">
 </span><span class="p">}</span><span class="w"> 
-</span></code></pre><h3 id="properties-26">Properties</h3>
+</span></code></pre><h3 id="properties-27">Properties</h3>
 <table>
 <thead>
 <tr>
@@ -12523,7 +12630,7 @@ oauth2 ( Scopes: write )
   </span><span class="s2">"language"</span><span class="p">:</span><span class="w"> </span><span class="s2">"en"</span><span class="p">,</span><span class="w">
   </span><span class="s2">"url"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://mod.io/members/xant"</span><span class="w">
 </span><span class="p">}</span><span class="w"> 
-</span></code></pre><h3 id="properties-27">Properties</h3>
+</span></code></pre><h3 id="properties-28">Properties</h3>
 <table>
 <thead>
 <tr>
@@ -12555,7 +12662,7 @@ oauth2 ( Scopes: write )
 </tr>
 <tr>
 <td>avatar</td>
-<td><a href="#schemaavatar_object">Avatar_Object</a></td>
+<td><a href="#schemaavatar_object">Avatar Object </a></td>
 <td>Contains avatar data.</td>
 </tr>
 <tr>
