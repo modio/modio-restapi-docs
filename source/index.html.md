@@ -5847,6 +5847,283 @@ oauth2 ( Scopes: write )
 </aside>
 
 
+# Subscribe
+
+## Subscribe To Mod
+
+> Code samples
+
+```shell
+# You can also use wget
+curl -X POST https://api.mod.io/v1/{games}/{game-id}/{mods}/{mod-id}/subscribe \
+  -H 'Authorization: Bearer YourAccessToken' \
+  -H 'Content-Type: application/x-www-form-urlencoded' \
+  -H 'Accept: application/json'
+
+```
+
+```http
+POST https://api.mod.io/v1/{games}/{game-id}/{mods}/{mod-id}/subscribe HTTP/1.1
+Host: api.mod.io
+
+Accept: application/json
+Authorization: Bearer YourAccessToken
+Content-Type: application/x-www-form-urlencoded
+
+
+```
+
+```javascript
+var headers = {
+  'Authorization':'Bearer YourAccessToken',
+  'Content-Type':'application/x-www-form-urlencoded',
+  'Accept':'application/json'
+
+};
+
+$.ajax({
+  url: 'https://api.mod.io/v1/{games}/{game-id}/{mods}/{mod-id}/subscribe',
+  method: 'post',
+
+  headers: headers,
+  success: function(data) {
+    console.log(JSON.stringify(data));
+  }
+})
+```
+
+```javascript--nodejs
+const request = require('node-fetch');
+
+const headers = {
+  'Authorization':'Bearer YourAccessToken',
+  'Content-Type':'application/x-www-form-urlencoded',
+  'Accept':'application/json'
+
+};
+
+fetch('https://api.mod.io/v1/{games}/{game-id}/{mods}/{mod-id}/subscribe',
+{
+  method: 'POST',
+
+  headers: headers
+})
+.then(function(res) {
+    return res.json();
+}).then(function(body) {
+    console.log(body);
+});
+```
+
+```ruby
+require 'rest-client'
+require 'json'
+
+headers = {
+  'Authorization' => 'Bearer YourAccessToken',
+  'Content-Type' => 'application/x-www-form-urlencoded',
+  'Accept' => 'application/json'
+}
+
+result = RestClient.post 'https://api.mod.io/v1/{games}/{game-id}/{mods}/{mod-id}/subscribe',
+  params: {
+  }, headers: headers
+
+
+p JSON.parse(result)
+```
+
+```python
+import requests
+headers = {
+  'Authorization': 'Bearer YourAccessToken',
+  'Content-Type': 'application/x-www-form-urlencoded',
+  'Accept': 'application/json'
+}
+
+r = requests.post('https://api.mod.io/v1/{games}/{game-id}/{mods}/{mod-id}/subscribe', params={
+
+}, headers = headers)
+
+print r.json()
+```
+
+```java
+URL obj = new URL("https://api.mod.io/v1/{games}/{game-id}/{mods}/{mod-id}/subscribe");
+HttpURLConnection con = (HttpURLConnection) obj.openConnection();
+con.setRequestMethod("POST");
+int responseCode = con.getResponseCode();
+BufferedReader in = new BufferedReader(
+    new InputStreamReader(con.getInputStream()));
+String inputLine;
+StringBuffer response = new StringBuffer();
+while ((inputLine = in.readLine()) != null) {
+    response.append(inputLine);
+}
+in.close();
+System.out.println(response.toString());
+```
+`POST /{games}/{game-id}/{mods}/{mod-id}/subscribe`
+
+__OAuth 2 Required__. Subscribe the _authenticated user_ to a corresponding mod. No body parameters are required for this action.
+
+
+> Example responses
+
+```json
+{
+  "code": "201",
+  "message": "You have successfully subscribed to the specified resource."
+}
+```
+<h3 id="Subscribe-To-Mod-responses">Responses</h3>
+
+Status|Meaning|Description|Response Schema
+---|---|---|---|
+201|[Created](https://tools.ietf.org/html/rfc7231#section-6.3.2)|Created|[addSubscribe](#schemaaddsubscribe)
+
+<aside class="warning">
+To perform this operation, you must be authenticated by means of one of the following methods:
+oauth2 ( Scopes: write )
+</aside>
+
+
+## Un-Subscribe To Mod
+
+> Code samples
+
+```shell
+# You can also use wget
+curl -X DELETE https://api.mod.io/v1/{games}/{game-id}/{mods}/{mod-id}/subscribe \
+  -H 'Authorization: Bearer YourAccessToken' \
+  -H 'Content-Type: application/x-www-form-urlencoded' \
+  -H 'Accept: application/json'
+
+```
+
+```http
+DELETE https://api.mod.io/v1/{games}/{game-id}/{mods}/{mod-id}/subscribe HTTP/1.1
+Host: api.mod.io
+
+Accept: application/json
+Authorization: Bearer YourAccessToken
+Content-Type: application/x-www-form-urlencoded
+
+
+```
+
+```javascript
+var headers = {
+  'Authorization':'Bearer YourAccessToken',
+  'Content-Type':'application/x-www-form-urlencoded',
+  'Accept':'application/json'
+
+};
+
+$.ajax({
+  url: 'https://api.mod.io/v1/{games}/{game-id}/{mods}/{mod-id}/subscribe',
+  method: 'delete',
+
+  headers: headers,
+  success: function(data) {
+    console.log(JSON.stringify(data));
+  }
+})
+```
+
+```javascript--nodejs
+const request = require('node-fetch');
+
+const headers = {
+  'Authorization':'Bearer YourAccessToken',
+  'Content-Type':'application/x-www-form-urlencoded',
+  'Accept':'application/json'
+
+};
+
+fetch('https://api.mod.io/v1/{games}/{game-id}/{mods}/{mod-id}/subscribe',
+{
+  method: 'DELETE',
+
+  headers: headers
+})
+.then(function(res) {
+    return res.json();
+}).then(function(body) {
+    console.log(body);
+});
+```
+
+```ruby
+require 'rest-client'
+require 'json'
+
+headers = {
+  'Authorization' => 'Bearer YourAccessToken',
+  'Content-Type' => 'application/x-www-form-urlencoded',
+  'Accept' => 'application/json'
+}
+
+result = RestClient.delete 'https://api.mod.io/v1/{games}/{game-id}/{mods}/{mod-id}/subscribe',
+  params: {
+  }, headers: headers
+
+
+p JSON.parse(result)
+```
+
+```python
+import requests
+headers = {
+  'Authorization': 'Bearer YourAccessToken',
+  'Content-Type': 'application/x-www-form-urlencoded',
+  'Accept': 'application/json'
+}
+
+r = requests.delete('https://api.mod.io/v1/{games}/{game-id}/{mods}/{mod-id}/subscribe', params={
+
+}, headers = headers)
+
+print r.json()
+```
+
+```java
+URL obj = new URL("https://api.mod.io/v1/{games}/{game-id}/{mods}/{mod-id}/subscribe");
+HttpURLConnection con = (HttpURLConnection) obj.openConnection();
+con.setRequestMethod("DELETE");
+int responseCode = con.getResponseCode();
+BufferedReader in = new BufferedReader(
+    new InputStreamReader(con.getInputStream()));
+String inputLine;
+StringBuffer response = new StringBuffer();
+while ((inputLine = in.readLine()) != null) {
+    response.append(inputLine);
+}
+in.close();
+System.out.println(response.toString());
+```
+`DELETE /{games}/{game-id}/{mods}/{mod-id}/subscribe`
+
+__OAuth 2 Required__. Un-Subscribe the _authenticated user_ to the corresponding mod. No body parameters are required for this action.
+
+
+> Example responses
+
+```json
+ "204 No Content" 
+```
+<h3 id="Un-Subscribe-To-Mod-responses">Responses</h3>
+
+Status|Meaning|Description|Response Schema
+---|---|---|---|
+204|[No Content](https://tools.ietf.org/html/rfc7231#section-6.3.5)|No Content|[204](#schema204)
+
+<aside class="warning">
+To perform this operation, you must be authenticated by means of one of the following methods:
+oauth2 ( Scopes: write )
+</aside>
+
+
 # Users
 
 ## Browse Users
@@ -7530,293 +7807,6 @@ Submit a report for any resource on mod.io.
 Status|Meaning|Description|Response Schema
 ---|---|---|---|
 201|[Created](https://tools.ietf.org/html/rfc7231#section-6.3.2)|Report Created|[addReport](#schemaaddreport)
-
-<aside class="warning">
-To perform this operation, you must be authenticated by means of one of the following methods:
-oauth2 ( Scopes: write )
-</aside>
-
-
-# Subscribe
-
-## Subscribe To Resource
-
-> Code samples
-
-```shell
-# You can also use wget
-curl -X POST https://api.mod.io/v1/{resource}/{resource-id}/subscribe \
-  -H 'Authorization: Bearer YourAccessToken' \
-  -H 'Content-Type: application/x-www-form-urlencoded' \
-  -H 'Accept: application/json'
-
-```
-
-```http
-POST https://api.mod.io/v1/{resource}/{resource-id}/subscribe HTTP/1.1
-Host: api.mod.io
-
-Accept: application/json
-Authorization: Bearer YourAccessToken
-Content-Type: application/x-www-form-urlencoded
-
-
-```
-
-```javascript
-var headers = {
-  'Authorization':'Bearer YourAccessToken',
-  'Content-Type':'application/x-www-form-urlencoded',
-  'Accept':'application/json'
-
-};
-
-$.ajax({
-  url: 'https://api.mod.io/v1/{resource}/{resource-id}/subscribe',
-  method: 'post',
-
-  headers: headers,
-  success: function(data) {
-    console.log(JSON.stringify(data));
-  }
-})
-```
-
-```javascript--nodejs
-const request = require('node-fetch');
-
-const headers = {
-  'Authorization':'Bearer YourAccessToken',
-  'Content-Type':'application/x-www-form-urlencoded',
-  'Accept':'application/json'
-
-};
-
-fetch('https://api.mod.io/v1/{resource}/{resource-id}/subscribe',
-{
-  method: 'POST',
-
-  headers: headers
-})
-.then(function(res) {
-    return res.json();
-}).then(function(body) {
-    console.log(body);
-});
-```
-
-```ruby
-require 'rest-client'
-require 'json'
-
-headers = {
-  'Authorization' => 'Bearer YourAccessToken',
-  'Content-Type' => 'application/x-www-form-urlencoded',
-  'Accept' => 'application/json'
-}
-
-result = RestClient.post 'https://api.mod.io/v1/{resource}/{resource-id}/subscribe',
-  params: {
-  }, headers: headers
-
-
-p JSON.parse(result)
-```
-
-```python
-import requests
-headers = {
-  'Authorization': 'Bearer YourAccessToken',
-  'Content-Type': 'application/x-www-form-urlencoded',
-  'Accept': 'application/json'
-}
-
-r = requests.post('https://api.mod.io/v1/{resource}/{resource-id}/subscribe', params={
-
-}, headers = headers)
-
-print r.json()
-```
-
-```java
-URL obj = new URL("https://api.mod.io/v1/{resource}/{resource-id}/subscribe");
-HttpURLConnection con = (HttpURLConnection) obj.openConnection();
-con.setRequestMethod("POST");
-int responseCode = con.getResponseCode();
-BufferedReader in = new BufferedReader(
-    new InputStreamReader(con.getInputStream()));
-String inputLine;
-StringBuffer response = new StringBuffer();
-while ((inputLine = in.readLine()) != null) {
-    response.append(inputLine);
-}
-in.close();
-System.out.println(response.toString());
-```
-`POST /{resource}/{resource-id}/subscribe`
-
-Subscribe to a resource. Note for the parameter table below it is for __path__ parameters, this endpoint does not accept any parameters in the body of the request.,
-     
-     Path Parameter|Type|Required|Description
-     ---|---|---|---|
-     resource|string|true|The name of the resource you want to subscribe to - __must__ be one of the following values.<br><br>*Field options*<br>__games__<br>__mods__<br>__files__<br>__tags__<br>__users__
-     id|integer(int32)|true|Unique Id of the resource you are subscribing to.
-
-
-> Example responses
-
-```json
-{
-  "code": "201",
-  "message": "You have successfully subscribed to the specified resource."
-}
-```
-<h3 id="Subscribe-To-Resource-responses">Responses</h3>
-
-Status|Meaning|Description|Response Schema
----|---|---|---|
-201|[Created](https://tools.ietf.org/html/rfc7231#section-6.3.2)|Created|[addSubscribe](#schemaaddsubscribe)
-
-<aside class="warning">
-To perform this operation, you must be authenticated by means of one of the following methods:
-oauth2 ( Scopes: write )
-</aside>
-
-
-## Un-Subscribe To Resource
-
-> Code samples
-
-```shell
-# You can also use wget
-curl -X DELETE https://api.mod.io/v1/{resource}/{resource-id}/subscribe \
-  -H 'Authorization: Bearer YourAccessToken' \
-  -H 'Content-Type: application/x-www-form-urlencoded' \
-  -H 'Accept: application/json'
-
-```
-
-```http
-DELETE https://api.mod.io/v1/{resource}/{resource-id}/subscribe HTTP/1.1
-Host: api.mod.io
-
-Accept: application/json
-Authorization: Bearer YourAccessToken
-Content-Type: application/x-www-form-urlencoded
-
-
-```
-
-```javascript
-var headers = {
-  'Authorization':'Bearer YourAccessToken',
-  'Content-Type':'application/x-www-form-urlencoded',
-  'Accept':'application/json'
-
-};
-
-$.ajax({
-  url: 'https://api.mod.io/v1/{resource}/{resource-id}/subscribe',
-  method: 'delete',
-
-  headers: headers,
-  success: function(data) {
-    console.log(JSON.stringify(data));
-  }
-})
-```
-
-```javascript--nodejs
-const request = require('node-fetch');
-
-const headers = {
-  'Authorization':'Bearer YourAccessToken',
-  'Content-Type':'application/x-www-form-urlencoded',
-  'Accept':'application/json'
-
-};
-
-fetch('https://api.mod.io/v1/{resource}/{resource-id}/subscribe',
-{
-  method: 'DELETE',
-
-  headers: headers
-})
-.then(function(res) {
-    return res.json();
-}).then(function(body) {
-    console.log(body);
-});
-```
-
-```ruby
-require 'rest-client'
-require 'json'
-
-headers = {
-  'Authorization' => 'Bearer YourAccessToken',
-  'Content-Type' => 'application/x-www-form-urlencoded',
-  'Accept' => 'application/json'
-}
-
-result = RestClient.delete 'https://api.mod.io/v1/{resource}/{resource-id}/subscribe',
-  params: {
-  }, headers: headers
-
-
-p JSON.parse(result)
-```
-
-```python
-import requests
-headers = {
-  'Authorization': 'Bearer YourAccessToken',
-  'Content-Type': 'application/x-www-form-urlencoded',
-  'Accept': 'application/json'
-}
-
-r = requests.delete('https://api.mod.io/v1/{resource}/{resource-id}/subscribe', params={
-
-}, headers = headers)
-
-print r.json()
-```
-
-```java
-URL obj = new URL("https://api.mod.io/v1/{resource}/{resource-id}/subscribe");
-HttpURLConnection con = (HttpURLConnection) obj.openConnection();
-con.setRequestMethod("DELETE");
-int responseCode = con.getResponseCode();
-BufferedReader in = new BufferedReader(
-    new InputStreamReader(con.getInputStream()));
-String inputLine;
-StringBuffer response = new StringBuffer();
-while ((inputLine = in.readLine()) != null) {
-    response.append(inputLine);
-}
-in.close();
-System.out.println(response.toString());
-```
-`DELETE /{resource}/{resource-id}/subscribe`
-
-Un-Subscribe to the requested resource.Note for the parameter table below it is for __path__ parameters, this endpoint does not accept any parameters in the body of the request.,
-     
-     Path Parameter|Type|Required|Description
-     ---|---|---|---|
-     resource|string|true|The name of the resource type you are un-subscribing to - __must__ be one of the following values.<br><br>*Field options*<br>__games__<br>__mods__<br>__files__<br>__tags__<br>__users__
-     id|integer(int32)|true|Unique Id of the resource you want to un-subscribe to.
-
-
-> Example responses
-
-```json
- "204 No Content" 
-```
-<h3 id="Un-Subscribe-To-Resource-responses">Responses</h3>
-
-Status|Meaning|Description|Response Schema
----|---|---|---|
-204|[No Content](https://tools.ietf.org/html/rfc7231#section-6.3.5)|No Content|[204](#schema204)
 
 <aside class="warning">
 To perform this operation, you must be authenticated by means of one of the following methods:
