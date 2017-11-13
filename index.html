@@ -405,6 +405,9 @@
                   <li>
                     <a href="#delete-mod-team-member" class="toc-h2 toc-link" data-title="Mods">Delete Mod Team Member</a>
                   </li>
+                  <li>
+                    <a href="#browse-mod-updates-by-game" class="toc-h2 toc-link" data-title="Mods">Browse Mod Updates By Game</a>
+                  </li>
               </ul>
           </li>
           <li>
@@ -441,9 +444,6 @@
                   </li>
                   <li>
                     <a href="#get-subscription-updates" class="toc-h2 toc-link" data-title="Me">Get Subscription Updates</a>
-                  </li>
-                  <li>
-                    <a href="#get-subscription-updates-by-game" class="toc-h2 toc-link" data-title="Me">Get Subscription Updates By Game</a>
                   </li>
               </ul>
           </li>
@@ -548,7 +548,7 @@
                     <a href="#update-object" class="toc-h2 toc-link" data-title="Schemas">Update Object</a>
                   </li>
                   <li>
-                    <a href="#member-object" class="toc-h2 toc-link" data-title="Schemas">Member Object</a>
+                    <a href="#user-object" class="toc-h2 toc-link" data-title="Schemas">User Object</a>
                   </li>
               </ul>
           </li>
@@ -599,7 +599,7 @@
 <td><strong>Tools/Plugins</strong></td>
 <td>Use tools and plugins created by the community to make implementation in various engines easy.</td>
 <td>Game developers that want a pre-built modding solution for their engine of choice.</td>
-<td><a href="http://10.1.5.7:4567/#">Available per tool</a></td>
+<td><a href="https://mod.io/games/apps">Available per tool</a></td>
 </tr>
 </tbody>
 </table>
@@ -1072,6 +1072,8 @@ curl -X post https://api.mod.io/v1/games/1/team <span class="se">\</span>
 <li><p><code>?_sort=id</code> - Sort <code>id</code> in ascending order</p></li>
 <li><p><code>?_sort=-id</code> - Sort <code>id</code> in descending order</p></li>
 </ul>
+
+<p><strong>NOTE:</strong> All endpoints are automatically sorted by the <code>id</code> column in ascending order unless specifically mentioned otherwise. </p>
 <h3 id="_limit-limit">_limit (Limit)</h3><pre class="highlight plaintext"><code>v1/games?_limit=5
 </code></pre>
 <p>Limit the number of results for a request.</p>
@@ -1104,7 +1106,7 @@ curl -X post https://api.mod.io/v1/games/1/team <span class="se">\</span>
 
 <ul>
 <li>
-<code>?name-not-lk=dungeon</code> - Get all results where <em>texture</em> does not occur in the <code>name</code> column.</li>
+<code>?name-not-lk=dungeon</code> - Get all results where only <em>dungeon</em> doesn't occur in the <code>name</code> column.</li>
 </ul>
 <h3 id="lk-amp-not-lk-wildcards">-lk &amp; -not-lk Wildcards</h3><pre class="highlight plaintext"><code>v1/games?name-lk=The Witcher*
 </code></pre><pre class="highlight plaintext"><code>v1/games?name-lk=*Asset Pack
@@ -1307,9 +1309,9 @@ Accept: application/json
 <td>Unique id of the game.</td>
 </tr>
 <tr>
-<td>member</td>
+<td>submitted_by</td>
 <td>integer(int32)</td>
-<td>Unique id of the member who has ownership of the game.</td>
+<td>Unique id of the user who has ownership of the game.</td>
 </tr>
 <tr>
 <td>datereg</td>
@@ -1407,10 +1409,11 @@ Accept: application/json
   </span><span class="s2">"data"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
     </span><span class="p">{</span><span class="w">
       </span><span class="s2">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span><span class="w">
-      </span><span class="s2">"member"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+      </span><span class="s2">"submitted_by"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
         </span><span class="s2">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
         </span><span class="s2">"nameid"</span><span class="p">:</span><span class="w"> </span><span class="s2">"xant"</span><span class="p">,</span><span class="w">
         </span><span class="s2">"username"</span><span class="p">:</span><span class="w"> </span><span class="s2">"XanT"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"online"</span><span class="p">:</span><span class="w"> </span><span class="mi">1509922961</span><span class="p">,</span><span class="w">
         </span><span class="s2">"avatar"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
           </span><span class="s2">"filename"</span><span class="p">:</span><span class="w"> </span><span class="s2">"masterchief.jpg"</span><span class="p">,</span><span class="w">
           </span><span class="s2">"full"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://media.mod.io/images/members/1/1/1/masterchief.jpg"</span><span class="w">
@@ -1588,10 +1591,11 @@ Accept: application/json
 </blockquote>
 <pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
   </span><span class="s2">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span><span class="w">
-  </span><span class="s2">"member"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+  </span><span class="s2">"submitted_by"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
     </span><span class="s2">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
     </span><span class="s2">"nameid"</span><span class="p">:</span><span class="w"> </span><span class="s2">"xant"</span><span class="p">,</span><span class="w">
     </span><span class="s2">"username"</span><span class="p">:</span><span class="w"> </span><span class="s2">"XanT"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"online"</span><span class="p">:</span><span class="w"> </span><span class="mi">1509922961</span><span class="p">,</span><span class="w">
     </span><span class="s2">"avatar"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
       </span><span class="s2">"filename"</span><span class="p">:</span><span class="w"> </span><span class="s2">"masterchief.jpg"</span><span class="p">,</span><span class="w">
       </span><span class="s2">"full"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://media.mod.io/images/members/1/1/1/masterchief.jpg"</span><span class="w">
@@ -2134,7 +2138,7 @@ Accept: application/json
 </code></pre>
 <p><span class="httpmethod GET">GET</span> <span class="endpointheading">/games/{game-id}/activity</span></p>
 
-<p>View activity for a game, showing changes made to the resource. Successful request will return an array of <a href="https://docs.mod.io/#browse-game-activity-2">Game activity objects</a>. To make your requests as specific to your needs as possible it's highly recommended reading over our <a href="https://docs.mod.io/#filtering">filtering documentation</a> if it will help you with consuming this endpoint.</p>
+<p>View activity for a game, showing changes made to the resource. Successful request will return an array of <a href="https://docs.mod.io/#browse-game-activity-2">Game activity objects</a>. To make your requests as specific to your needs as possible it's highly recommended reading over our <a href="https://docs.mod.io/#filtering">filtering documentation</a> if it will help you with consuming this endpoint. This endpoint by default sorts by <code>id</code> in descending order.</p>
 
 <table>
 <thead>
@@ -2151,9 +2155,9 @@ Accept: application/json
 <td>Unique id of the activity object.</td>
 </tr>
 <tr>
-<td>member</td>
+<td>user</td>
 <td>integer(int32)</td>
-<td>Unique id of member who performed the action.</td>
+<td>Unique id of the user who performed the action.</td>
 </tr>
 <tr>
 <td>dateup</td>
@@ -2175,10 +2179,11 @@ Accept: application/json
   </span><span class="s2">"data"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
     </span><span class="p">{</span><span class="w">
       </span><span class="s2">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">13</span><span class="p">,</span><span class="w">
-      </span><span class="s2">"member"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+      </span><span class="s2">"user"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
         </span><span class="s2">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
         </span><span class="s2">"nameid"</span><span class="p">:</span><span class="w"> </span><span class="s2">"xant"</span><span class="p">,</span><span class="w">
         </span><span class="s2">"username"</span><span class="p">:</span><span class="w"> </span><span class="s2">"XanT"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"online"</span><span class="p">:</span><span class="w"> </span><span class="mi">1509922961</span><span class="p">,</span><span class="w">
         </span><span class="s2">"avatar"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
           </span><span class="s2">"filename"</span><span class="p">:</span><span class="w"> </span><span class="s2">"masterchief.jpg"</span><span class="p">,</span><span class="w">
           </span><span class="s2">"full"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://media.mod.io/images/members/1/1/1/masterchief.jpg"</span><span class="w">
@@ -2328,15 +2333,15 @@ Accept: application/json
 <td></td>
 </tr>
 <tr>
-<td>member</td>
+<td>user</td>
 <td>integer(int32)</td>
-<td>Unique id of the member.</td>
+<td>Unique id of the user.</td>
 <td></td>
 </tr>
 <tr>
 <td>username</td>
 <td>string</td>
-<td>Username of the member.</td>
+<td>Username of the user.</td>
 <td></td>
 </tr>
 <tr>
@@ -2371,10 +2376,11 @@ Accept: application/json
   </span><span class="s2">"data"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
     </span><span class="p">{</span><span class="w">
       </span><span class="s2">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">457</span><span class="p">,</span><span class="w">
-      </span><span class="s2">"member"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+      </span><span class="s2">"user"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
         </span><span class="s2">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
         </span><span class="s2">"nameid"</span><span class="p">:</span><span class="w"> </span><span class="s2">"xant"</span><span class="p">,</span><span class="w">
         </span><span class="s2">"username"</span><span class="p">:</span><span class="w"> </span><span class="s2">"XanT"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"online"</span><span class="p">:</span><span class="w"> </span><span class="mi">1509922961</span><span class="p">,</span><span class="w">
         </span><span class="s2">"avatar"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
           </span><span class="s2">"filename"</span><span class="p">:</span><span class="w"> </span><span class="s2">"masterchief.jpg"</span><span class="p">,</span><span class="w">
           </span><span class="s2">"full"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://media.mod.io/images/members/1/1/1/masterchief.jpg"</span><span class="w">
@@ -2513,7 +2519,7 @@ Content-Type: application/x-www-form-urlencoded
 </code></pre>
 <p><span class="httpmethod POST">POST</span> <span class="endpointheading">/games/{game-id}/team</span></p>
 
-<p>Add a member to a game team.</p>
+<p>Add a user to a game team.</p>
 
 <table>
 <thead>
@@ -2526,10 +2532,10 @@ Content-Type: application/x-www-form-urlencoded
 </thead>
 <tbody>
 <tr>
-<td>member</td>
+<td>user</td>
 <td>integer</td>
 <td>true</td>
-<td>The unique id of the member you are adding to the team.</td>
+<td>The unique id of the team you are adding to the team.</td>
 </tr>
 <tr>
 <td>level</td>
@@ -2676,7 +2682,7 @@ Content-Type: application/x-www-form-urlencoded
 </code></pre>
 <p><span class="httpmethod PUT">PUT</span> <span class="endpointheading">/games/{game-id}/team/{access-id}</span></p>
 
-<p>Update the details of a member who is currently a part of the specified game team.</p>
+<p>Update the details of a user who is currently a part of the specified game team.</p>
 
 <table>
 <thead>
@@ -2972,9 +2978,9 @@ Accept: application/json
 <td>Unique id of the parent game.</td>
 </tr>
 <tr>
-<td>member</td>
+<td>submitted_by</td>
 <td>integer(int32)</td>
-<td>Unique id of the member who has ownership of the game.</td>
+<td>Unique id of the user who has ownership of the game.</td>
 </tr>
 <tr>
 <td>datereg</td>
@@ -3053,10 +3059,11 @@ Accept: application/json
     </span><span class="p">{</span><span class="w">
       </span><span class="s2">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span><span class="w">
       </span><span class="s2">"game"</span><span class="p">:</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span><span class="w">
-      </span><span class="s2">"member"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+      </span><span class="s2">"submitted_by"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
         </span><span class="s2">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
         </span><span class="s2">"nameid"</span><span class="p">:</span><span class="w"> </span><span class="s2">"xant"</span><span class="p">,</span><span class="w">
         </span><span class="s2">"username"</span><span class="p">:</span><span class="w"> </span><span class="s2">"XanT"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"online"</span><span class="p">:</span><span class="w"> </span><span class="mi">1509922961</span><span class="p">,</span><span class="w">
         </span><span class="s2">"avatar"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
           </span><span class="s2">"filename"</span><span class="p">:</span><span class="w"> </span><span class="s2">"masterchief.jpg"</span><span class="p">,</span><span class="w">
           </span><span class="s2">"full"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://media.mod.io/images/members/1/1/1/masterchief.jpg"</span><span class="w">
@@ -3085,18 +3092,6 @@ Accept: application/json
       </span><span class="s2">"modfile"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
         </span><span class="s2">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span><span class="w">
         </span><span class="s2">"mod"</span><span class="p">:</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span><span class="w">
-        </span><span class="s2">"member"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-          </span><span class="s2">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
-          </span><span class="s2">"nameid"</span><span class="p">:</span><span class="w"> </span><span class="s2">"xant"</span><span class="p">,</span><span class="w">
-          </span><span class="s2">"username"</span><span class="p">:</span><span class="w"> </span><span class="s2">"XanT"</span><span class="p">,</span><span class="w">
-          </span><span class="s2">"avatar"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-            </span><span class="s2">"filename"</span><span class="p">:</span><span class="w"> </span><span class="s2">"masterchief.jpg"</span><span class="p">,</span><span class="w">
-            </span><span class="s2">"full"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://media.mod.io/images/members/1/1/1/masterchief.jpg"</span><span class="w">
-          </span><span class="p">},</span><span class="w">
-          </span><span class="s2">"timezone"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Australia/Brisbane"</span><span class="p">,</span><span class="w">
-          </span><span class="s2">"language"</span><span class="p">:</span><span class="w"> </span><span class="s2">"en"</span><span class="p">,</span><span class="w">
-          </span><span class="s2">"url"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://mod.io/members/xant"</span><span class="w">
-        </span><span class="p">},</span><span class="w">
         </span><span class="s2">"date"</span><span class="p">:</span><span class="w"> </span><span class="mi">1499841487</span><span class="p">,</span><span class="w">
         </span><span class="s2">"datevirus"</span><span class="p">:</span><span class="w"> </span><span class="mi">1499841487</span><span class="p">,</span><span class="w">
         </span><span class="s2">"virusstatus"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
@@ -3124,16 +3119,18 @@ Accept: application/json
           </span><span class="p">}</span><span class="w">
         </span><span class="p">]</span><span class="w">
       </span><span class="p">},</span><span class="w">
-      </span><span class="s2">"tags"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
-        </span><span class="kc">null</span><span class="w">
-      </span><span class="p">],</span><span class="w">
       </span><span class="s2">"ratings"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
         </span><span class="s2">"total"</span><span class="p">:</span><span class="w"> </span><span class="mi">1230</span><span class="p">,</span><span class="w">
         </span><span class="s2">"positive"</span><span class="p">:</span><span class="w"> </span><span class="mi">1047</span><span class="p">,</span><span class="w">
         </span><span class="s2">"negative"</span><span class="p">:</span><span class="w"> </span><span class="mi">183</span><span class="p">,</span><span class="w">
         </span><span class="s2">"weighted"</span><span class="p">:</span><span class="w"> </span><span class="mf">87.38</span><span class="p">,</span><span class="w">
         </span><span class="s2">"percentage"</span><span class="p">:</span><span class="w"> </span><span class="mi">91</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"stars"</span><span class="p">:</span><span class="w"> </span><span class="mi">4</span><span class="p">,</span><span class="w">
         </span><span class="s2">"text"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Very Positive"</span><span class="w">
+      </span><span class="p">},</span><span class="w">
+      </span><span class="s2">"tags"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+        </span><span class="s2">"tag"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Unity"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"date"</span><span class="p">:</span><span class="w"> </span><span class="mi">1499841487</span><span class="w">
       </span><span class="p">}</span><span class="w">
     </span><span class="p">},</span><span class="w">
     </span><span class="p">{</span><span class="w">
@@ -3264,10 +3261,11 @@ Accept: application/json
 <pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
   </span><span class="s2">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span><span class="w">
   </span><span class="s2">"game"</span><span class="p">:</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span><span class="w">
-  </span><span class="s2">"member"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+  </span><span class="s2">"submitted_by"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
     </span><span class="s2">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
     </span><span class="s2">"nameid"</span><span class="p">:</span><span class="w"> </span><span class="s2">"xant"</span><span class="p">,</span><span class="w">
     </span><span class="s2">"username"</span><span class="p">:</span><span class="w"> </span><span class="s2">"XanT"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"online"</span><span class="p">:</span><span class="w"> </span><span class="mi">1509922961</span><span class="p">,</span><span class="w">
     </span><span class="s2">"avatar"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
       </span><span class="s2">"filename"</span><span class="p">:</span><span class="w"> </span><span class="s2">"masterchief.jpg"</span><span class="p">,</span><span class="w">
       </span><span class="s2">"full"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://media.mod.io/images/members/1/1/1/masterchief.jpg"</span><span class="w">
@@ -3296,18 +3294,6 @@ Accept: application/json
   </span><span class="s2">"modfile"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
     </span><span class="s2">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span><span class="w">
     </span><span class="s2">"mod"</span><span class="p">:</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span><span class="w">
-    </span><span class="s2">"member"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-      </span><span class="s2">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
-      </span><span class="s2">"nameid"</span><span class="p">:</span><span class="w"> </span><span class="s2">"xant"</span><span class="p">,</span><span class="w">
-      </span><span class="s2">"username"</span><span class="p">:</span><span class="w"> </span><span class="s2">"XanT"</span><span class="p">,</span><span class="w">
-      </span><span class="s2">"avatar"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-        </span><span class="s2">"filename"</span><span class="p">:</span><span class="w"> </span><span class="s2">"masterchief.jpg"</span><span class="p">,</span><span class="w">
-        </span><span class="s2">"full"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://media.mod.io/images/members/1/1/1/masterchief.jpg"</span><span class="w">
-      </span><span class="p">},</span><span class="w">
-      </span><span class="s2">"timezone"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Australia/Brisbane"</span><span class="p">,</span><span class="w">
-      </span><span class="s2">"language"</span><span class="p">:</span><span class="w"> </span><span class="s2">"en"</span><span class="p">,</span><span class="w">
-      </span><span class="s2">"url"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://mod.io/members/xant"</span><span class="w">
-    </span><span class="p">},</span><span class="w">
     </span><span class="s2">"date"</span><span class="p">:</span><span class="w"> </span><span class="mi">1499841487</span><span class="p">,</span><span class="w">
     </span><span class="s2">"datevirus"</span><span class="p">:</span><span class="w"> </span><span class="mi">1499841487</span><span class="p">,</span><span class="w">
     </span><span class="s2">"virusstatus"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
@@ -3335,16 +3321,18 @@ Accept: application/json
       </span><span class="p">}</span><span class="w">
     </span><span class="p">]</span><span class="w">
   </span><span class="p">},</span><span class="w">
-  </span><span class="s2">"tags"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
-    </span><span class="kc">null</span><span class="w">
-  </span><span class="p">],</span><span class="w">
   </span><span class="s2">"ratings"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
     </span><span class="s2">"total"</span><span class="p">:</span><span class="w"> </span><span class="mi">1230</span><span class="p">,</span><span class="w">
     </span><span class="s2">"positive"</span><span class="p">:</span><span class="w"> </span><span class="mi">1047</span><span class="p">,</span><span class="w">
     </span><span class="s2">"negative"</span><span class="p">:</span><span class="w"> </span><span class="mi">183</span><span class="p">,</span><span class="w">
     </span><span class="s2">"weighted"</span><span class="p">:</span><span class="w"> </span><span class="mf">87.38</span><span class="p">,</span><span class="w">
     </span><span class="s2">"percentage"</span><span class="p">:</span><span class="w"> </span><span class="mi">91</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"stars"</span><span class="p">:</span><span class="w"> </span><span class="mi">4</span><span class="p">,</span><span class="w">
     </span><span class="s2">"text"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Very Positive"</span><span class="w">
+  </span><span class="p">},</span><span class="w">
+  </span><span class="s2">"tags"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+    </span><span class="s2">"tag"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Unity"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"date"</span><span class="p">:</span><span class="w"> </span><span class="mi">1499841487</span><span class="w">
   </span><span class="p">}</span><span class="w">
 </span><span class="p">}</span><span class="w">
 </span></code></pre>
@@ -3557,10 +3545,11 @@ Content-Type: multipart/form-data
 <pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
   </span><span class="s2">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span><span class="w">
   </span><span class="s2">"game"</span><span class="p">:</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span><span class="w">
-  </span><span class="s2">"member"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+  </span><span class="s2">"submitted_by"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
     </span><span class="s2">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
     </span><span class="s2">"nameid"</span><span class="p">:</span><span class="w"> </span><span class="s2">"xant"</span><span class="p">,</span><span class="w">
     </span><span class="s2">"username"</span><span class="p">:</span><span class="w"> </span><span class="s2">"XanT"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"online"</span><span class="p">:</span><span class="w"> </span><span class="mi">1509922961</span><span class="p">,</span><span class="w">
     </span><span class="s2">"avatar"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
       </span><span class="s2">"filename"</span><span class="p">:</span><span class="w"> </span><span class="s2">"masterchief.jpg"</span><span class="p">,</span><span class="w">
       </span><span class="s2">"full"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://media.mod.io/images/members/1/1/1/masterchief.jpg"</span><span class="w">
@@ -3589,18 +3578,6 @@ Content-Type: multipart/form-data
   </span><span class="s2">"modfile"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
     </span><span class="s2">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span><span class="w">
     </span><span class="s2">"mod"</span><span class="p">:</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span><span class="w">
-    </span><span class="s2">"member"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-      </span><span class="s2">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
-      </span><span class="s2">"nameid"</span><span class="p">:</span><span class="w"> </span><span class="s2">"xant"</span><span class="p">,</span><span class="w">
-      </span><span class="s2">"username"</span><span class="p">:</span><span class="w"> </span><span class="s2">"XanT"</span><span class="p">,</span><span class="w">
-      </span><span class="s2">"avatar"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-        </span><span class="s2">"filename"</span><span class="p">:</span><span class="w"> </span><span class="s2">"masterchief.jpg"</span><span class="p">,</span><span class="w">
-        </span><span class="s2">"full"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://media.mod.io/images/members/1/1/1/masterchief.jpg"</span><span class="w">
-      </span><span class="p">},</span><span class="w">
-      </span><span class="s2">"timezone"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Australia/Brisbane"</span><span class="p">,</span><span class="w">
-      </span><span class="s2">"language"</span><span class="p">:</span><span class="w"> </span><span class="s2">"en"</span><span class="p">,</span><span class="w">
-      </span><span class="s2">"url"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://mod.io/members/xant"</span><span class="w">
-    </span><span class="p">},</span><span class="w">
     </span><span class="s2">"date"</span><span class="p">:</span><span class="w"> </span><span class="mi">1499841487</span><span class="p">,</span><span class="w">
     </span><span class="s2">"datevirus"</span><span class="p">:</span><span class="w"> </span><span class="mi">1499841487</span><span class="p">,</span><span class="w">
     </span><span class="s2">"virusstatus"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
@@ -3628,16 +3605,18 @@ Content-Type: multipart/form-data
       </span><span class="p">}</span><span class="w">
     </span><span class="p">]</span><span class="w">
   </span><span class="p">},</span><span class="w">
-  </span><span class="s2">"tags"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
-    </span><span class="kc">null</span><span class="w">
-  </span><span class="p">],</span><span class="w">
   </span><span class="s2">"ratings"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
     </span><span class="s2">"total"</span><span class="p">:</span><span class="w"> </span><span class="mi">1230</span><span class="p">,</span><span class="w">
     </span><span class="s2">"positive"</span><span class="p">:</span><span class="w"> </span><span class="mi">1047</span><span class="p">,</span><span class="w">
     </span><span class="s2">"negative"</span><span class="p">:</span><span class="w"> </span><span class="mi">183</span><span class="p">,</span><span class="w">
     </span><span class="s2">"weighted"</span><span class="p">:</span><span class="w"> </span><span class="mf">87.38</span><span class="p">,</span><span class="w">
     </span><span class="s2">"percentage"</span><span class="p">:</span><span class="w"> </span><span class="mi">91</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"stars"</span><span class="p">:</span><span class="w"> </span><span class="mi">4</span><span class="p">,</span><span class="w">
     </span><span class="s2">"text"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Very Positive"</span><span class="w">
+  </span><span class="p">},</span><span class="w">
+  </span><span class="s2">"tags"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+    </span><span class="s2">"tag"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Unity"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"date"</span><span class="p">:</span><span class="w"> </span><span class="mi">1499841487</span><span class="w">
   </span><span class="p">}</span><span class="w">
 </span><span class="p">}</span><span class="w">
 </span></code></pre>
@@ -4452,7 +4431,7 @@ Accept: application/json
 </code></pre>
 <p><span class="httpmethod GET">GET</span> <span class="endpointheading">/games/{game-id}/mods/{mod-id}/activity</span></p>
 
-<p>View activity for a mod, showing changes made to the resource. Successful request will return an array of <a href="https://docs.mod.io/#browse-mod-activity-2">Mod Activity Objects</a>. To make your requests as specific to your needs as possible it's highly recommended reading over our <a href="https://docs.mod.io/#filtering">filtering documentation</a> if it will help you with consuming this endpoint.</p>
+<p>View activity for a mod, showing changes made to the resource. Successful request will return an array of <a href="https://docs.mod.io/#browse-mod-activity-2">Mod Activity Objects</a>. To make your requests as specific to your needs as possible it's highly recommended reading over our <a href="https://docs.mod.io/#filtering">filtering documentation</a> if it will help you with consuming this endpoint. This endpoint by default sorts by <code>id</code> in descending order.</p>
 
 <table>
 <thead>
@@ -4469,7 +4448,7 @@ Accept: application/json
 <td>Unique id of the activity object.</td>
 </tr>
 <tr>
-<td>member</td>
+<td>user</td>
 <td>integer(int32)</td>
 <td>Unique id of the member who performed the action.</td>
 </tr>
@@ -4493,10 +4472,11 @@ Accept: application/json
   </span><span class="s2">"data"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
     </span><span class="p">{</span><span class="w">
       </span><span class="s2">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">13</span><span class="p">,</span><span class="w">
-      </span><span class="s2">"member"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+      </span><span class="s2">"user"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
         </span><span class="s2">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
         </span><span class="s2">"nameid"</span><span class="p">:</span><span class="w"> </span><span class="s2">"xant"</span><span class="p">,</span><span class="w">
         </span><span class="s2">"username"</span><span class="p">:</span><span class="w"> </span><span class="s2">"XanT"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"online"</span><span class="p">:</span><span class="w"> </span><span class="mi">1509922961</span><span class="p">,</span><span class="w">
         </span><span class="s2">"avatar"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
           </span><span class="s2">"filename"</span><span class="p">:</span><span class="w"> </span><span class="s2">"masterchief.jpg"</span><span class="p">,</span><span class="w">
           </span><span class="s2">"full"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://media.mod.io/images/members/1/1/1/masterchief.jpg"</span><span class="w">
@@ -4649,11 +4629,6 @@ Accept: application/json
 <td>Unique id of the mod.</td>
 </tr>
 <tr>
-<td>member</td>
-<td>integer(int32)</td>
-<td>Unique id of the member who published the file.</td>
-</tr>
-<tr>
 <td>date</td>
 <td>integer(int32)</td>
 <td>Unix timestamp of date added.</td>
@@ -4719,18 +4694,6 @@ Accept: application/json
     </span><span class="p">{</span><span class="w">
       </span><span class="s2">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span><span class="w">
       </span><span class="s2">"mod"</span><span class="p">:</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span><span class="w">
-      </span><span class="s2">"member"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-        </span><span class="s2">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
-        </span><span class="s2">"nameid"</span><span class="p">:</span><span class="w"> </span><span class="s2">"xant"</span><span class="p">,</span><span class="w">
-        </span><span class="s2">"username"</span><span class="p">:</span><span class="w"> </span><span class="s2">"XanT"</span><span class="p">,</span><span class="w">
-        </span><span class="s2">"avatar"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-          </span><span class="s2">"filename"</span><span class="p">:</span><span class="w"> </span><span class="s2">"masterchief.jpg"</span><span class="p">,</span><span class="w">
-          </span><span class="s2">"full"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://media.mod.io/images/members/1/1/1/masterchief.jpg"</span><span class="w">
-        </span><span class="p">},</span><span class="w">
-        </span><span class="s2">"timezone"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Australia/Brisbane"</span><span class="p">,</span><span class="w">
-        </span><span class="s2">"language"</span><span class="p">:</span><span class="w"> </span><span class="s2">"en"</span><span class="p">,</span><span class="w">
-        </span><span class="s2">"url"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://mod.io/members/xant"</span><span class="w">
-      </span><span class="p">},</span><span class="w">
       </span><span class="s2">"date"</span><span class="p">:</span><span class="w"> </span><span class="mi">1499841487</span><span class="p">,</span><span class="w">
       </span><span class="s2">"datevirus"</span><span class="p">:</span><span class="w"> </span><span class="mi">1499841487</span><span class="p">,</span><span class="w">
       </span><span class="s2">"virusstatus"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
@@ -4926,18 +4889,6 @@ Content-Type: multipart/form-data
 <pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
   </span><span class="s2">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span><span class="w">
   </span><span class="s2">"mod"</span><span class="p">:</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span><span class="w">
-  </span><span class="s2">"member"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-    </span><span class="s2">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
-    </span><span class="s2">"nameid"</span><span class="p">:</span><span class="w"> </span><span class="s2">"xant"</span><span class="p">,</span><span class="w">
-    </span><span class="s2">"username"</span><span class="p">:</span><span class="w"> </span><span class="s2">"XanT"</span><span class="p">,</span><span class="w">
-    </span><span class="s2">"avatar"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-      </span><span class="s2">"filename"</span><span class="p">:</span><span class="w"> </span><span class="s2">"masterchief.jpg"</span><span class="p">,</span><span class="w">
-      </span><span class="s2">"full"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://media.mod.io/images/members/1/1/1/masterchief.jpg"</span><span class="w">
-    </span><span class="p">},</span><span class="w">
-    </span><span class="s2">"timezone"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Australia/Brisbane"</span><span class="p">,</span><span class="w">
-    </span><span class="s2">"language"</span><span class="p">:</span><span class="w"> </span><span class="s2">"en"</span><span class="p">,</span><span class="w">
-    </span><span class="s2">"url"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://mod.io/members/xant"</span><span class="w">
-  </span><span class="p">},</span><span class="w">
   </span><span class="s2">"date"</span><span class="p">:</span><span class="w"> </span><span class="mi">1499841487</span><span class="p">,</span><span class="w">
   </span><span class="s2">"datevirus"</span><span class="p">:</span><span class="w"> </span><span class="mi">1499841487</span><span class="p">,</span><span class="w">
   </span><span class="s2">"virusstatus"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
@@ -5090,18 +5041,6 @@ Accept: application/json
 <pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
   </span><span class="s2">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span><span class="w">
   </span><span class="s2">"mod"</span><span class="p">:</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span><span class="w">
-  </span><span class="s2">"member"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-    </span><span class="s2">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
-    </span><span class="s2">"nameid"</span><span class="p">:</span><span class="w"> </span><span class="s2">"xant"</span><span class="p">,</span><span class="w">
-    </span><span class="s2">"username"</span><span class="p">:</span><span class="w"> </span><span class="s2">"XanT"</span><span class="p">,</span><span class="w">
-    </span><span class="s2">"avatar"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-      </span><span class="s2">"filename"</span><span class="p">:</span><span class="w"> </span><span class="s2">"masterchief.jpg"</span><span class="p">,</span><span class="w">
-      </span><span class="s2">"full"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://media.mod.io/images/members/1/1/1/masterchief.jpg"</span><span class="w">
-    </span><span class="p">},</span><span class="w">
-    </span><span class="s2">"timezone"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Australia/Brisbane"</span><span class="p">,</span><span class="w">
-    </span><span class="s2">"language"</span><span class="p">:</span><span class="w"> </span><span class="s2">"en"</span><span class="p">,</span><span class="w">
-    </span><span class="s2">"url"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://mod.io/members/xant"</span><span class="w">
-  </span><span class="p">},</span><span class="w">
   </span><span class="s2">"date"</span><span class="p">:</span><span class="w"> </span><span class="mi">1499841487</span><span class="p">,</span><span class="w">
   </span><span class="s2">"datevirus"</span><span class="p">:</span><span class="w"> </span><span class="mi">1499841487</span><span class="p">,</span><span class="w">
   </span><span class="s2">"virusstatus"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
@@ -5397,11 +5336,6 @@ Accept: application/json
 <td>date</td>
 <td>integer(int32)</td>
 <td>Unix timestamp of date added.</td>
-</tr>
-<tr>
-<td>member</td>
-<td>integer(int32)</td>
-<td>Unique id of the member who added the tag.</td>
 </tr>
 <tr>
 <td>tag</td>
@@ -6007,9 +5941,9 @@ Accept: application/json
 <td>Unique id of the mod.</td>
 </tr>
 <tr>
-<td>member</td>
+<td>user</td>
 <td>integer</td>
-<td>Unique id of the member who published the comment.</td>
+<td>Unique id of the user who published the comment.</td>
 </tr>
 <tr>
 <td>date</td>
@@ -6052,10 +5986,11 @@ Accept: application/json
     </span><span class="p">{</span><span class="w">
       </span><span class="s2">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span><span class="w">
       </span><span class="s2">"mod"</span><span class="p">:</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span><span class="w">
-      </span><span class="s2">"member"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+      </span><span class="s2">"submitted_by"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
         </span><span class="s2">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
         </span><span class="s2">"nameid"</span><span class="p">:</span><span class="w"> </span><span class="s2">"xant"</span><span class="p">,</span><span class="w">
         </span><span class="s2">"username"</span><span class="p">:</span><span class="w"> </span><span class="s2">"XanT"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"online"</span><span class="p">:</span><span class="w"> </span><span class="mi">1509922961</span><span class="p">,</span><span class="w">
         </span><span class="s2">"avatar"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
           </span><span class="s2">"filename"</span><span class="p">:</span><span class="w"> </span><span class="s2">"masterchief.jpg"</span><span class="p">,</span><span class="w">
           </span><span class="s2">"full"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://media.mod.io/images/members/1/1/1/masterchief.jpg"</span><span class="w">
@@ -6199,10 +6134,11 @@ Accept: application/json
 <pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
   </span><span class="s2">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span><span class="w">
   </span><span class="s2">"mod"</span><span class="p">:</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span><span class="w">
-  </span><span class="s2">"member"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+  </span><span class="s2">"submitted_by"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
     </span><span class="s2">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
     </span><span class="s2">"nameid"</span><span class="p">:</span><span class="w"> </span><span class="s2">"xant"</span><span class="p">,</span><span class="w">
     </span><span class="s2">"username"</span><span class="p">:</span><span class="w"> </span><span class="s2">"XanT"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"online"</span><span class="p">:</span><span class="w"> </span><span class="mi">1509922961</span><span class="p">,</span><span class="w">
     </span><span class="s2">"avatar"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
       </span><span class="s2">"filename"</span><span class="p">:</span><span class="w"> </span><span class="s2">"masterchief.jpg"</span><span class="p">,</span><span class="w">
       </span><span class="s2">"full"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://media.mod.io/images/members/1/1/1/masterchief.jpg"</span><span class="w">
@@ -6477,15 +6413,9 @@ Accept: application/json
 <td></td>
 </tr>
 <tr>
-<td>member</td>
-<td>integer(int32)</td>
-<td>Unique id of the member.</td>
-<td></td>
-</tr>
-<tr>
 <td>username</td>
 <td>string</td>
-<td>Username of the member.</td>
+<td>Username of the user.</td>
 <td></td>
 </tr>
 <tr>
@@ -6520,10 +6450,11 @@ Accept: application/json
   </span><span class="s2">"data"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
     </span><span class="p">{</span><span class="w">
       </span><span class="s2">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">457</span><span class="p">,</span><span class="w">
-      </span><span class="s2">"member"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+      </span><span class="s2">"user"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
         </span><span class="s2">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
         </span><span class="s2">"nameid"</span><span class="p">:</span><span class="w"> </span><span class="s2">"xant"</span><span class="p">,</span><span class="w">
         </span><span class="s2">"username"</span><span class="p">:</span><span class="w"> </span><span class="s2">"XanT"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"online"</span><span class="p">:</span><span class="w"> </span><span class="mi">1509922961</span><span class="p">,</span><span class="w">
         </span><span class="s2">"avatar"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
           </span><span class="s2">"filename"</span><span class="p">:</span><span class="w"> </span><span class="s2">"masterchief.jpg"</span><span class="p">,</span><span class="w">
           </span><span class="s2">"full"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://media.mod.io/images/members/1/1/1/masterchief.jpg"</span><span class="w">
@@ -6662,7 +6593,7 @@ Content-Type: application/x-www-form-urlencoded
 </code></pre>
 <p><span class="httpmethod POST">POST</span> <span class="endpointheading">/games/{game-id}/mods/{mod-id}/team</span></p>
 
-<p>Add a member to a mod team.</p>
+<p>Add a user to a mod team.</p>
 
 <table>
 <thead>
@@ -6675,10 +6606,10 @@ Content-Type: application/x-www-form-urlencoded
 </thead>
 <tbody>
 <tr>
-<td>member</td>
+<td>user</td>
 <td>integer</td>
 <td>true</td>
-<td>The unique id of the member you are adding to the team.</td>
+<td>The unique id of the team you are adding to the team.</td>
 </tr>
 <tr>
 <td>level</td>
@@ -7014,6 +6945,179 @@ Content-Type: application/x-www-form-urlencoded
 To perform this operation, you must be authenticated by means of one of the following methods:
 oauth2 ( Scopes: write )
 </aside>
+<h2 id="browse-mod-updates-by-game">Browse Mod Updates By Game</h2>
+<blockquote>
+<p>Code samples</p>
+</blockquote>
+<pre class="highlight shell tab-shell"><code><span class="c"># You can also use wget</span>
+curl -X GET https://api.mod.io/v1/games/<span class="o">{</span>game-id<span class="o">}</span>/mod/updates <span class="se">\</span>
+  -H <span class="s1">'Authorization: Bearer YourAccessToken'</span> <span class="se">\</span>
+  -H <span class="s1">'Accept: application/json'</span>
+
+</code></pre><pre class="highlight http tab-http"><code><span class="nf">GET</span> <span class="nn">https://api.mod.io/v1/games/{game-id}/mod/updates</span> <span class="k">HTTP</span><span class="o">/</span><span class="m">1.1</span>
+<span class="na">Host</span><span class="p">:</span> <span class="s">api.mod.io</span>
+
+Accept: application/json
+Authorization: Bearer YourAccessToken
+
+
+</code></pre><pre class="highlight javascript tab-javascript"><code><span class="kd">var</span> <span class="nx">headers</span> <span class="o">=</span> <span class="p">{</span>
+  <span class="s1">'Authorization'</span><span class="p">:</span><span class="s1">'Bearer YourAccessToken'</span><span class="p">,</span>
+  <span class="s1">'Accept'</span><span class="p">:</span><span class="s1">'application/json'</span>
+
+<span class="p">};</span>
+
+<span class="nx">$</span><span class="p">.</span><span class="nx">ajax</span><span class="p">({</span>
+  <span class="na">url</span><span class="p">:</span> <span class="s1">'https://api.mod.io/v1/games/{game-id}/mod/updates'</span><span class="p">,</span>
+  <span class="na">method</span><span class="p">:</span> <span class="s1">'get'</span><span class="p">,</span>
+
+  <span class="na">headers</span><span class="p">:</span> <span class="nx">headers</span><span class="p">,</span>
+  <span class="na">success</span><span class="p">:</span> <span class="kd">function</span><span class="p">(</span><span class="nx">data</span><span class="p">)</span> <span class="p">{</span>
+    <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">JSON</span><span class="p">.</span><span class="nx">stringify</span><span class="p">(</span><span class="nx">data</span><span class="p">));</span>
+  <span class="p">}</span>
+<span class="p">})</span>
+</code></pre><pre class="highlight javascript tab-javascript--nodejs"><code><span class="kr">const</span> <span class="nx">request</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s1">'node-fetch'</span><span class="p">);</span>
+
+<span class="kr">const</span> <span class="nx">headers</span> <span class="o">=</span> <span class="p">{</span>
+  <span class="s1">'Authorization'</span><span class="p">:</span><span class="s1">'Bearer YourAccessToken'</span><span class="p">,</span>
+  <span class="s1">'Accept'</span><span class="p">:</span><span class="s1">'application/json'</span>
+
+<span class="p">};</span>
+
+<span class="nx">fetch</span><span class="p">(</span><span class="s1">'https://api.mod.io/v1/games/{game-id}/mod/updates'</span><span class="p">,</span>
+<span class="p">{</span>
+  <span class="na">method</span><span class="p">:</span> <span class="s1">'GET'</span><span class="p">,</span>
+
+  <span class="na">headers</span><span class="p">:</span> <span class="nx">headers</span>
+<span class="p">})</span>
+<span class="p">.</span><span class="nx">then</span><span class="p">(</span><span class="kd">function</span><span class="p">(</span><span class="nx">res</span><span class="p">)</span> <span class="p">{</span>
+    <span class="k">return</span> <span class="nx">res</span><span class="p">.</span><span class="nx">json</span><span class="p">();</span>
+<span class="p">}).</span><span class="nx">then</span><span class="p">(</span><span class="kd">function</span><span class="p">(</span><span class="nx">body</span><span class="p">)</span> <span class="p">{</span>
+    <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">body</span><span class="p">);</span>
+<span class="p">});</span>
+</code></pre><pre class="highlight ruby tab-ruby"><code><span class="nb">require</span> <span class="s1">'rest-client'</span>
+<span class="nb">require</span> <span class="s1">'json'</span>
+
+<span class="n">headers</span> <span class="o">=</span> <span class="p">{</span>
+  <span class="s1">'Authorization'</span> <span class="o">=&gt;</span> <span class="s1">'Bearer YourAccessToken'</span><span class="p">,</span>
+  <span class="s1">'Accept'</span> <span class="o">=&gt;</span> <span class="s1">'application/json'</span>
+<span class="p">}</span>
+
+<span class="n">result</span> <span class="o">=</span> <span class="no">RestClient</span><span class="p">.</span><span class="nf">get</span> <span class="s1">'https://api.mod.io/v1/games/{game-id}/mod/updates'</span><span class="p">,</span>
+  <span class="ss">params: </span><span class="p">{</span>
+  <span class="p">},</span> <span class="ss">headers: </span><span class="n">headers</span>
+
+
+<span class="nb">p</span> <span class="no">JSON</span><span class="p">.</span><span class="nf">parse</span><span class="p">(</span><span class="n">result</span><span class="p">)</span>
+</code></pre><pre class="highlight python tab-python"><code><span class="kn">import</span> <span class="nn">requests</span>
+<span class="n">headers</span> <span class="o">=</span> <span class="p">{</span>
+  <span class="s">'Authorization'</span><span class="p">:</span> <span class="s">'Bearer YourAccessToken'</span><span class="p">,</span>
+  <span class="s">'Accept'</span><span class="p">:</span> <span class="s">'application/json'</span>
+<span class="p">}</span>
+
+<span class="n">r</span> <span class="o">=</span> <span class="n">requests</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s">'https://api.mod.io/v1/games/{game-id}/mod/updates'</span><span class="p">,</span> <span class="n">params</span><span class="o">=</span><span class="p">{</span>
+
+<span class="p">},</span> <span class="n">headers</span> <span class="o">=</span> <span class="n">headers</span><span class="p">)</span>
+
+<span class="k">print</span> <span class="n">r</span><span class="o">.</span><span class="n">json</span><span class="p">()</span>
+</code></pre><pre class="highlight java tab-java"><code><span class="n">URL</span> <span class="n">obj</span> <span class="o">=</span> <span class="k">new</span> <span class="n">URL</span><span class="o">(</span><span class="s">"https://api.mod.io/v1/games/{game-id}/mod/updates"</span><span class="o">);</span>
+<span class="n">HttpURLConnection</span> <span class="n">con</span> <span class="o">=</span> <span class="o">(</span><span class="n">HttpURLConnection</span><span class="o">)</span> <span class="n">obj</span><span class="o">.</span><span class="na">openConnection</span><span class="o">();</span>
+<span class="n">con</span><span class="o">.</span><span class="na">setRequestMethod</span><span class="o">(</span><span class="s">"GET"</span><span class="o">);</span>
+<span class="kt">int</span> <span class="n">responseCode</span> <span class="o">=</span> <span class="n">con</span><span class="o">.</span><span class="na">getResponseCode</span><span class="o">();</span>
+<span class="n">BufferedReader</span> <span class="n">in</span> <span class="o">=</span> <span class="k">new</span> <span class="n">BufferedReader</span><span class="o">(</span>
+    <span class="k">new</span> <span class="nf">InputStreamReader</span><span class="o">(</span><span class="n">con</span><span class="o">.</span><span class="na">getInputStream</span><span class="o">()));</span>
+<span class="n">String</span> <span class="n">inputLine</span><span class="o">;</span>
+<span class="n">StringBuffer</span> <span class="n">response</span> <span class="o">=</span> <span class="k">new</span> <span class="n">StringBuffer</span><span class="o">();</span>
+<span class="k">while</span> <span class="o">((</span><span class="n">inputLine</span> <span class="o">=</span> <span class="n">in</span><span class="o">.</span><span class="na">readLine</span><span class="o">())</span> <span class="o">!=</span> <span class="kc">null</span><span class="o">)</span> <span class="o">{</span>
+    <span class="n">response</span><span class="o">.</span><span class="na">append</span><span class="o">(</span><span class="n">inputLine</span><span class="o">);</span>
+<span class="o">}</span>
+<span class="n">in</span><span class="o">.</span><span class="na">close</span><span class="o">();</span>
+<span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="n">response</span><span class="o">.</span><span class="na">toString</span><span class="o">());</span>
+</code></pre>
+<p><span class="httpmethod GET">GET</span> <span class="endpointheading">/games/{game-id}/mod/updates</span></p>
+
+<p>Get all mod updates (new builds) that occurred between two timestamps for the corresponding game. This endpoint is designed for intermittent polling by game clients to determine if notifications need to be pushed to the authenticated user. If you are consuming querying potential build updates from within a game, it is highly recommend you use this endpoint. Successful request will return an array of <a href="https://docs.mod.io/#browse-mod-files-2">Modfile Objects</a> that were published between the two supplied timestamps.</p>
+
+<table>
+<thead>
+<tr>
+<th>Parameter</th>
+<th>Type</th>
+<th>Required</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>start</td>
+<td>integer(int32)</td>
+<td>true</td>
+<td>Unix timestamp of beginning of update check.</td>
+</tr>
+<tr>
+<td>end</td>
+<td>integer(int32)</td>
+<td>true</td>
+<td>Unix timestamp of end of update check.</td>
+</tr>
+</tbody>
+</table>
+
+<blockquote>
+<p>Example responses</p>
+</blockquote>
+<pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
+  </span><span class="s2">"data"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+    </span><span class="p">{</span><span class="w">
+      </span><span class="s2">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"mod"</span><span class="p">:</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"date"</span><span class="p">:</span><span class="w"> </span><span class="mi">1499841487</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"datevirus"</span><span class="p">:</span><span class="w"> </span><span class="mi">1499841487</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"virusstatus"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"viruspositive"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"filesize"</span><span class="p">:</span><span class="w"> </span><span class="mi">15181</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"filehash"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2d4a0e2d7273db6b0a94b0740a88ad0d"</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"filename"</span><span class="p">:</span><span class="w"> </span><span class="s2">"rogue-knight-v1.zip"</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"version"</span><span class="p">:</span><span class="w"> </span><span class="s2">"1.3"</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"virustotal"</span><span class="p">:</span><span class="w"> </span><span class="s2">"No threats found."</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"changelog"</span><span class="p">:</span><span class="w"> </span><span class="s2">"VERSION 1.3 -- Changes -- Fixed critical castle floor bug."</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"download"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://mod.io/mods/file/2/c489a0354111a4d76640d47f0cdcb294"</span><span class="w">
+    </span><span class="p">},</span><span class="w">
+    </span><span class="p">{</span><span class="w">
+        </span><span class="err">...</span><span class="w">
+    </span><span class="p">}</span><span class="w">
+  </span><span class="p">],</span><span class="w">
+  </span><span class="s2">"cursor_id"</span><span class="p">:</span><span class="w"> </span><span class="mi">60</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"prev_id"</span><span class="p">:</span><span class="w"> </span><span class="mi">30</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"next_id"</span><span class="p">:</span><span class="w"> </span><span class="mi">160</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"result_count"</span><span class="p">:</span><span class="w"> </span><span class="mi">100</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre>
+<h3 id="Browse-Mod-Updates-By-Game-responses">Responses</h3>
+
+<table>
+<thead>
+<tr>
+<th>Status</th>
+<th>Meaning</th>
+<th>Description</th>
+<th>Response Schema</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>200</td>
+<td><a href="https://tools.ietf.org/html/rfc7231#section-6.3.1">OK</a></td>
+<td>Request Successful</td>
+<td><a href="#schemabrowse_mod_files">Browse_Mod_Files</a></td>
+</tr>
+</tbody>
+</table>
+
+<aside class="warning">
+To perform this operation, you must be authenticated by means of one of the following methods:
+oauth2 ( Scopes: write )
+</aside>
 <h1 id="users">Users</h1><h2 id="browse-users">Browse Users</h2>
 <blockquote>
 <p>Code samples</p>
@@ -7123,7 +7227,7 @@ Accept: application/json
 <tr>
 <td>username</td>
 <td>string</td>
-<td>Username of the member.</td>
+<td>Username of the user.</td>
 </tr>
 <tr>
 <td>timezone</td>
@@ -7147,6 +7251,7 @@ Accept: application/json
       </span><span class="s2">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
       </span><span class="s2">"nameid"</span><span class="p">:</span><span class="w"> </span><span class="s2">"xant"</span><span class="p">,</span><span class="w">
       </span><span class="s2">"username"</span><span class="p">:</span><span class="w"> </span><span class="s2">"XanT"</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"online"</span><span class="p">:</span><span class="w"> </span><span class="mi">1509922961</span><span class="p">,</span><span class="w">
       </span><span class="s2">"avatar"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
         </span><span class="s2">"filename"</span><span class="p">:</span><span class="w"> </span><span class="s2">"masterchief.jpg"</span><span class="p">,</span><span class="w">
         </span><span class="s2">"full"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://media.mod.io/images/members/1/1/1/masterchief.jpg"</span><span class="w">
@@ -7275,7 +7380,7 @@ Accept: application/json
 </code></pre>
 <p><span class="httpmethod GET">GET</span> <span class="endpointheading">/users/{user-id}</span></p>
 
-<p>Find a user by their unique member id. Successful request will return a single <strong>member object</strong>.</p>
+<p>Find a user by their unique member id. Successful request will return a single <a href="https://docs.mod.io/#user-object">User Object</a>.</p>
 
 <blockquote>
 <p>Example responses</p>
@@ -7284,6 +7389,7 @@ Accept: application/json
   </span><span class="s2">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
   </span><span class="s2">"nameid"</span><span class="p">:</span><span class="w"> </span><span class="s2">"xant"</span><span class="p">,</span><span class="w">
   </span><span class="s2">"username"</span><span class="p">:</span><span class="w"> </span><span class="s2">"XanT"</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"online"</span><span class="p">:</span><span class="w"> </span><span class="mi">1509922961</span><span class="p">,</span><span class="w">
   </span><span class="s2">"avatar"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
     </span><span class="s2">"filename"</span><span class="p">:</span><span class="w"> </span><span class="s2">"masterchief.jpg"</span><span class="p">,</span><span class="w">
     </span><span class="s2">"full"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://media.mod.io/images/members/1/1/1/masterchief.jpg"</span><span class="w">
@@ -7309,7 +7415,7 @@ Accept: application/json
 <td>200</td>
 <td><a href="https://tools.ietf.org/html/rfc7231#section-6.3.1">OK</a></td>
 <td>OK</td>
-<td><a href="#schemamember_object">Member_Object</a></td>
+<td><a href="#schemauser_object">User_Object</a></td>
 </tr>
 </tbody>
 </table>
@@ -7431,7 +7537,7 @@ Content-Type: application/x-www-form-urlencoded
 <td>resource</td>
 <td>string</td>
 <td>true</td>
-<td>The name of the resource type you are checking against a member - <strong>must</strong> be one of the following values.<br><br><em>Field options</em><br><strong>games</strong><br><strong>mods</strong><br><strong>files</strong><br><strong>tags</strong><br><strong>users</strong>.</td>
+<td>The name of the resource type you are checking against a user - <strong>must</strong> be one of the following values.<br><br><em>Field options</em><br><strong>games</strong><br><strong>mods</strong><br><strong>files</strong><br><strong>tags</strong><br><strong>users</strong>.</td>
 </tr>
 <tr>
 <td>id</td>
@@ -7440,7 +7546,7 @@ Content-Type: application/x-www-form-urlencoded
 <td>Unique Id of the resource to check access rights for.</td>
 </tr>
 <tr>
-<td>member</td>
+<td>user</td>
 <td>integer(int32)</td>
 <td>true</td>
 <td>Unique Id of the member you are determining has access to the resource id.</td>
@@ -7740,10 +7846,11 @@ Authorization: Bearer YourAccessToken
   </span><span class="s2">"data"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
     </span><span class="p">{</span><span class="w">
       </span><span class="s2">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span><span class="w">
-      </span><span class="s2">"member"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+      </span><span class="s2">"submitted_by"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
         </span><span class="s2">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
         </span><span class="s2">"nameid"</span><span class="p">:</span><span class="w"> </span><span class="s2">"xant"</span><span class="p">,</span><span class="w">
         </span><span class="s2">"username"</span><span class="p">:</span><span class="w"> </span><span class="s2">"XanT"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"online"</span><span class="p">:</span><span class="w"> </span><span class="mi">1509922961</span><span class="p">,</span><span class="w">
         </span><span class="s2">"avatar"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
           </span><span class="s2">"filename"</span><span class="p">:</span><span class="w"> </span><span class="s2">"masterchief.jpg"</span><span class="p">,</span><span class="w">
           </span><span class="s2">"full"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://media.mod.io/images/members/1/1/1/masterchief.jpg"</span><span class="w">
@@ -7930,10 +8037,11 @@ Authorization: Bearer YourAccessToken
     </span><span class="p">{</span><span class="w">
       </span><span class="s2">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span><span class="w">
       </span><span class="s2">"game"</span><span class="p">:</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span><span class="w">
-      </span><span class="s2">"member"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+      </span><span class="s2">"submitted_by"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
         </span><span class="s2">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
         </span><span class="s2">"nameid"</span><span class="p">:</span><span class="w"> </span><span class="s2">"xant"</span><span class="p">,</span><span class="w">
         </span><span class="s2">"username"</span><span class="p">:</span><span class="w"> </span><span class="s2">"XanT"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"online"</span><span class="p">:</span><span class="w"> </span><span class="mi">1509922961</span><span class="p">,</span><span class="w">
         </span><span class="s2">"avatar"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
           </span><span class="s2">"filename"</span><span class="p">:</span><span class="w"> </span><span class="s2">"masterchief.jpg"</span><span class="p">,</span><span class="w">
           </span><span class="s2">"full"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://media.mod.io/images/members/1/1/1/masterchief.jpg"</span><span class="w">
@@ -7962,18 +8070,6 @@ Authorization: Bearer YourAccessToken
       </span><span class="s2">"modfile"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
         </span><span class="s2">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span><span class="w">
         </span><span class="s2">"mod"</span><span class="p">:</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span><span class="w">
-        </span><span class="s2">"member"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-          </span><span class="s2">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
-          </span><span class="s2">"nameid"</span><span class="p">:</span><span class="w"> </span><span class="s2">"xant"</span><span class="p">,</span><span class="w">
-          </span><span class="s2">"username"</span><span class="p">:</span><span class="w"> </span><span class="s2">"XanT"</span><span class="p">,</span><span class="w">
-          </span><span class="s2">"avatar"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-            </span><span class="s2">"filename"</span><span class="p">:</span><span class="w"> </span><span class="s2">"masterchief.jpg"</span><span class="p">,</span><span class="w">
-            </span><span class="s2">"full"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://media.mod.io/images/members/1/1/1/masterchief.jpg"</span><span class="w">
-          </span><span class="p">},</span><span class="w">
-          </span><span class="s2">"timezone"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Australia/Brisbane"</span><span class="p">,</span><span class="w">
-          </span><span class="s2">"language"</span><span class="p">:</span><span class="w"> </span><span class="s2">"en"</span><span class="p">,</span><span class="w">
-          </span><span class="s2">"url"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://mod.io/members/xant"</span><span class="w">
-        </span><span class="p">},</span><span class="w">
         </span><span class="s2">"date"</span><span class="p">:</span><span class="w"> </span><span class="mi">1499841487</span><span class="p">,</span><span class="w">
         </span><span class="s2">"datevirus"</span><span class="p">:</span><span class="w"> </span><span class="mi">1499841487</span><span class="p">,</span><span class="w">
         </span><span class="s2">"virusstatus"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
@@ -8001,16 +8097,18 @@ Authorization: Bearer YourAccessToken
           </span><span class="p">}</span><span class="w">
         </span><span class="p">]</span><span class="w">
       </span><span class="p">},</span><span class="w">
-      </span><span class="s2">"tags"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
-        </span><span class="kc">null</span><span class="w">
-      </span><span class="p">],</span><span class="w">
       </span><span class="s2">"ratings"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
         </span><span class="s2">"total"</span><span class="p">:</span><span class="w"> </span><span class="mi">1230</span><span class="p">,</span><span class="w">
         </span><span class="s2">"positive"</span><span class="p">:</span><span class="w"> </span><span class="mi">1047</span><span class="p">,</span><span class="w">
         </span><span class="s2">"negative"</span><span class="p">:</span><span class="w"> </span><span class="mi">183</span><span class="p">,</span><span class="w">
         </span><span class="s2">"weighted"</span><span class="p">:</span><span class="w"> </span><span class="mf">87.38</span><span class="p">,</span><span class="w">
         </span><span class="s2">"percentage"</span><span class="p">:</span><span class="w"> </span><span class="mi">91</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"stars"</span><span class="p">:</span><span class="w"> </span><span class="mi">4</span><span class="p">,</span><span class="w">
         </span><span class="s2">"text"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Very Positive"</span><span class="w">
+      </span><span class="p">},</span><span class="w">
+      </span><span class="s2">"tags"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+        </span><span class="s2">"tag"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Unity"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"date"</span><span class="p">:</span><span class="w"> </span><span class="mi">1499841487</span><span class="w">
       </span><span class="p">}</span><span class="w">
     </span><span class="p">},</span><span class="w">
     </span><span class="p">{</span><span class="w">
@@ -8149,18 +8247,6 @@ Authorization: Bearer YourAccessToken
     </span><span class="p">{</span><span class="w">
       </span><span class="s2">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span><span class="w">
       </span><span class="s2">"mod"</span><span class="p">:</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span><span class="w">
-      </span><span class="s2">"member"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-        </span><span class="s2">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
-        </span><span class="s2">"nameid"</span><span class="p">:</span><span class="w"> </span><span class="s2">"xant"</span><span class="p">,</span><span class="w">
-        </span><span class="s2">"username"</span><span class="p">:</span><span class="w"> </span><span class="s2">"XanT"</span><span class="p">,</span><span class="w">
-        </span><span class="s2">"avatar"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-          </span><span class="s2">"filename"</span><span class="p">:</span><span class="w"> </span><span class="s2">"masterchief.jpg"</span><span class="p">,</span><span class="w">
-          </span><span class="s2">"full"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://media.mod.io/images/members/1/1/1/masterchief.jpg"</span><span class="w">
-        </span><span class="p">},</span><span class="w">
-        </span><span class="s2">"timezone"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Australia/Brisbane"</span><span class="p">,</span><span class="w">
-        </span><span class="s2">"language"</span><span class="p">:</span><span class="w"> </span><span class="s2">"en"</span><span class="p">,</span><span class="w">
-        </span><span class="s2">"url"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://mod.io/members/xant"</span><span class="w">
-      </span><span class="p">},</span><span class="w">
       </span><span class="s2">"date"</span><span class="p">:</span><span class="w"> </span><span class="mi">1499841487</span><span class="p">,</span><span class="w">
       </span><span class="s2">"datevirus"</span><span class="p">:</span><span class="w"> </span><span class="mi">1499841487</span><span class="p">,</span><span class="w">
       </span><span class="s2">"virusstatus"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
@@ -8311,10 +8397,11 @@ Authorization: Bearer YourAccessToken
     </span><span class="p">{</span><span class="w">
       </span><span class="s2">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span><span class="w">
       </span><span class="s2">"game"</span><span class="p">:</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span><span class="w">
-      </span><span class="s2">"member"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+      </span><span class="s2">"submitted_by"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
         </span><span class="s2">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
         </span><span class="s2">"nameid"</span><span class="p">:</span><span class="w"> </span><span class="s2">"xant"</span><span class="p">,</span><span class="w">
         </span><span class="s2">"username"</span><span class="p">:</span><span class="w"> </span><span class="s2">"XanT"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"online"</span><span class="p">:</span><span class="w"> </span><span class="mi">1509922961</span><span class="p">,</span><span class="w">
         </span><span class="s2">"avatar"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
           </span><span class="s2">"filename"</span><span class="p">:</span><span class="w"> </span><span class="s2">"masterchief.jpg"</span><span class="p">,</span><span class="w">
           </span><span class="s2">"full"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://media.mod.io/images/members/1/1/1/masterchief.jpg"</span><span class="w">
@@ -8343,18 +8430,6 @@ Authorization: Bearer YourAccessToken
       </span><span class="s2">"modfile"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
         </span><span class="s2">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span><span class="w">
         </span><span class="s2">"mod"</span><span class="p">:</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span><span class="w">
-        </span><span class="s2">"member"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-          </span><span class="s2">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
-          </span><span class="s2">"nameid"</span><span class="p">:</span><span class="w"> </span><span class="s2">"xant"</span><span class="p">,</span><span class="w">
-          </span><span class="s2">"username"</span><span class="p">:</span><span class="w"> </span><span class="s2">"XanT"</span><span class="p">,</span><span class="w">
-          </span><span class="s2">"avatar"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-            </span><span class="s2">"filename"</span><span class="p">:</span><span class="w"> </span><span class="s2">"masterchief.jpg"</span><span class="p">,</span><span class="w">
-            </span><span class="s2">"full"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://media.mod.io/images/members/1/1/1/masterchief.jpg"</span><span class="w">
-          </span><span class="p">},</span><span class="w">
-          </span><span class="s2">"timezone"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Australia/Brisbane"</span><span class="p">,</span><span class="w">
-          </span><span class="s2">"language"</span><span class="p">:</span><span class="w"> </span><span class="s2">"en"</span><span class="p">,</span><span class="w">
-          </span><span class="s2">"url"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://mod.io/members/xant"</span><span class="w">
-        </span><span class="p">},</span><span class="w">
         </span><span class="s2">"date"</span><span class="p">:</span><span class="w"> </span><span class="mi">1499841487</span><span class="p">,</span><span class="w">
         </span><span class="s2">"datevirus"</span><span class="p">:</span><span class="w"> </span><span class="mi">1499841487</span><span class="p">,</span><span class="w">
         </span><span class="s2">"virusstatus"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
@@ -8382,16 +8457,18 @@ Authorization: Bearer YourAccessToken
           </span><span class="p">}</span><span class="w">
         </span><span class="p">]</span><span class="w">
       </span><span class="p">},</span><span class="w">
-      </span><span class="s2">"tags"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
-        </span><span class="kc">null</span><span class="w">
-      </span><span class="p">],</span><span class="w">
       </span><span class="s2">"ratings"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
         </span><span class="s2">"total"</span><span class="p">:</span><span class="w"> </span><span class="mi">1230</span><span class="p">,</span><span class="w">
         </span><span class="s2">"positive"</span><span class="p">:</span><span class="w"> </span><span class="mi">1047</span><span class="p">,</span><span class="w">
         </span><span class="s2">"negative"</span><span class="p">:</span><span class="w"> </span><span class="mi">183</span><span class="p">,</span><span class="w">
         </span><span class="s2">"weighted"</span><span class="p">:</span><span class="w"> </span><span class="mf">87.38</span><span class="p">,</span><span class="w">
         </span><span class="s2">"percentage"</span><span class="p">:</span><span class="w"> </span><span class="mi">91</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"stars"</span><span class="p">:</span><span class="w"> </span><span class="mi">4</span><span class="p">,</span><span class="w">
         </span><span class="s2">"text"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Very Positive"</span><span class="w">
+      </span><span class="p">},</span><span class="w">
+      </span><span class="s2">"tags"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+        </span><span class="s2">"tag"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Unity"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"date"</span><span class="p">:</span><span class="w"> </span><span class="mi">1499841487</span><span class="w">
       </span><span class="p">}</span><span class="w">
     </span><span class="p">},</span><span class="w">
     </span><span class="p">{</span><span class="w">
@@ -8558,18 +8635,6 @@ the <em>authenticated user</em>.</em></p>
     </span><span class="p">{</span><span class="w">
       </span><span class="s2">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span><span class="w">
       </span><span class="s2">"mod"</span><span class="p">:</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span><span class="w">
-      </span><span class="s2">"member"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-        </span><span class="s2">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
-        </span><span class="s2">"nameid"</span><span class="p">:</span><span class="w"> </span><span class="s2">"xant"</span><span class="p">,</span><span class="w">
-        </span><span class="s2">"username"</span><span class="p">:</span><span class="w"> </span><span class="s2">"XanT"</span><span class="p">,</span><span class="w">
-        </span><span class="s2">"avatar"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-          </span><span class="s2">"filename"</span><span class="p">:</span><span class="w"> </span><span class="s2">"masterchief.jpg"</span><span class="p">,</span><span class="w">
-          </span><span class="s2">"full"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://media.mod.io/images/members/1/1/1/masterchief.jpg"</span><span class="w">
-        </span><span class="p">},</span><span class="w">
-        </span><span class="s2">"timezone"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Australia/Brisbane"</span><span class="p">,</span><span class="w">
-        </span><span class="s2">"language"</span><span class="p">:</span><span class="w"> </span><span class="s2">"en"</span><span class="p">,</span><span class="w">
-        </span><span class="s2">"url"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://mod.io/members/xant"</span><span class="w">
-      </span><span class="p">},</span><span class="w">
       </span><span class="s2">"date"</span><span class="p">:</span><span class="w"> </span><span class="mi">1499841487</span><span class="p">,</span><span class="w">
       </span><span class="s2">"datevirus"</span><span class="p">:</span><span class="w"> </span><span class="mi">1499841487</span><span class="p">,</span><span class="w">
       </span><span class="s2">"virusstatus"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
@@ -8593,194 +8658,6 @@ the <em>authenticated user</em>.</em></p>
 </span><span class="p">}</span><span class="w">
 </span></code></pre>
 <h3 id="Get-Subscription-Updates-responses">Responses</h3>
-
-<table>
-<thead>
-<tr>
-<th>Status</th>
-<th>Meaning</th>
-<th>Description</th>
-<th>Response Schema</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>200</td>
-<td><a href="https://tools.ietf.org/html/rfc7231#section-6.3.1">OK</a></td>
-<td>Request Successful</td>
-<td><a href="#schemabrowse_mod_files">Browse_Mod_Files</a></td>
-</tr>
-</tbody>
-</table>
-
-<aside class="warning">
-To perform this operation, you must be authenticated by means of one of the following methods:
-oauth2 ( Scopes: write )
-</aside>
-<h2 id="get-subscription-updates-by-game">Get Subscription Updates By Game</h2>
-<blockquote>
-<p>Code samples</p>
-</blockquote>
-<pre class="highlight shell tab-shell"><code><span class="c"># You can also use wget</span>
-curl -X GET https://api.mod.io/v1/games/<span class="o">{</span>game-id<span class="o">}</span>/mod/updates <span class="se">\</span>
-  -H <span class="s1">'Authorization: Bearer YourAccessToken'</span> <span class="se">\</span>
-  -H <span class="s1">'Accept: application/json'</span>
-
-</code></pre><pre class="highlight http tab-http"><code><span class="nf">GET</span> <span class="nn">https://api.mod.io/v1/games/{game-id}/mod/updates</span> <span class="k">HTTP</span><span class="o">/</span><span class="m">1.1</span>
-<span class="na">Host</span><span class="p">:</span> <span class="s">api.mod.io</span>
-
-Accept: application/json
-Authorization: Bearer YourAccessToken
-
-
-</code></pre><pre class="highlight javascript tab-javascript"><code><span class="kd">var</span> <span class="nx">headers</span> <span class="o">=</span> <span class="p">{</span>
-  <span class="s1">'Authorization'</span><span class="p">:</span><span class="s1">'Bearer YourAccessToken'</span><span class="p">,</span>
-  <span class="s1">'Accept'</span><span class="p">:</span><span class="s1">'application/json'</span>
-
-<span class="p">};</span>
-
-<span class="nx">$</span><span class="p">.</span><span class="nx">ajax</span><span class="p">({</span>
-  <span class="na">url</span><span class="p">:</span> <span class="s1">'https://api.mod.io/v1/games/{game-id}/mod/updates'</span><span class="p">,</span>
-  <span class="na">method</span><span class="p">:</span> <span class="s1">'get'</span><span class="p">,</span>
-
-  <span class="na">headers</span><span class="p">:</span> <span class="nx">headers</span><span class="p">,</span>
-  <span class="na">success</span><span class="p">:</span> <span class="kd">function</span><span class="p">(</span><span class="nx">data</span><span class="p">)</span> <span class="p">{</span>
-    <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">JSON</span><span class="p">.</span><span class="nx">stringify</span><span class="p">(</span><span class="nx">data</span><span class="p">));</span>
-  <span class="p">}</span>
-<span class="p">})</span>
-</code></pre><pre class="highlight javascript tab-javascript--nodejs"><code><span class="kr">const</span> <span class="nx">request</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s1">'node-fetch'</span><span class="p">);</span>
-
-<span class="kr">const</span> <span class="nx">headers</span> <span class="o">=</span> <span class="p">{</span>
-  <span class="s1">'Authorization'</span><span class="p">:</span><span class="s1">'Bearer YourAccessToken'</span><span class="p">,</span>
-  <span class="s1">'Accept'</span><span class="p">:</span><span class="s1">'application/json'</span>
-
-<span class="p">};</span>
-
-<span class="nx">fetch</span><span class="p">(</span><span class="s1">'https://api.mod.io/v1/games/{game-id}/mod/updates'</span><span class="p">,</span>
-<span class="p">{</span>
-  <span class="na">method</span><span class="p">:</span> <span class="s1">'GET'</span><span class="p">,</span>
-
-  <span class="na">headers</span><span class="p">:</span> <span class="nx">headers</span>
-<span class="p">})</span>
-<span class="p">.</span><span class="nx">then</span><span class="p">(</span><span class="kd">function</span><span class="p">(</span><span class="nx">res</span><span class="p">)</span> <span class="p">{</span>
-    <span class="k">return</span> <span class="nx">res</span><span class="p">.</span><span class="nx">json</span><span class="p">();</span>
-<span class="p">}).</span><span class="nx">then</span><span class="p">(</span><span class="kd">function</span><span class="p">(</span><span class="nx">body</span><span class="p">)</span> <span class="p">{</span>
-    <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">body</span><span class="p">);</span>
-<span class="p">});</span>
-</code></pre><pre class="highlight ruby tab-ruby"><code><span class="nb">require</span> <span class="s1">'rest-client'</span>
-<span class="nb">require</span> <span class="s1">'json'</span>
-
-<span class="n">headers</span> <span class="o">=</span> <span class="p">{</span>
-  <span class="s1">'Authorization'</span> <span class="o">=&gt;</span> <span class="s1">'Bearer YourAccessToken'</span><span class="p">,</span>
-  <span class="s1">'Accept'</span> <span class="o">=&gt;</span> <span class="s1">'application/json'</span>
-<span class="p">}</span>
-
-<span class="n">result</span> <span class="o">=</span> <span class="no">RestClient</span><span class="p">.</span><span class="nf">get</span> <span class="s1">'https://api.mod.io/v1/games/{game-id}/mod/updates'</span><span class="p">,</span>
-  <span class="ss">params: </span><span class="p">{</span>
-  <span class="p">},</span> <span class="ss">headers: </span><span class="n">headers</span>
-
-
-<span class="nb">p</span> <span class="no">JSON</span><span class="p">.</span><span class="nf">parse</span><span class="p">(</span><span class="n">result</span><span class="p">)</span>
-</code></pre><pre class="highlight python tab-python"><code><span class="kn">import</span> <span class="nn">requests</span>
-<span class="n">headers</span> <span class="o">=</span> <span class="p">{</span>
-  <span class="s">'Authorization'</span><span class="p">:</span> <span class="s">'Bearer YourAccessToken'</span><span class="p">,</span>
-  <span class="s">'Accept'</span><span class="p">:</span> <span class="s">'application/json'</span>
-<span class="p">}</span>
-
-<span class="n">r</span> <span class="o">=</span> <span class="n">requests</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s">'https://api.mod.io/v1/games/{game-id}/mod/updates'</span><span class="p">,</span> <span class="n">params</span><span class="o">=</span><span class="p">{</span>
-
-<span class="p">},</span> <span class="n">headers</span> <span class="o">=</span> <span class="n">headers</span><span class="p">)</span>
-
-<span class="k">print</span> <span class="n">r</span><span class="o">.</span><span class="n">json</span><span class="p">()</span>
-</code></pre><pre class="highlight java tab-java"><code><span class="n">URL</span> <span class="n">obj</span> <span class="o">=</span> <span class="k">new</span> <span class="n">URL</span><span class="o">(</span><span class="s">"https://api.mod.io/v1/games/{game-id}/mod/updates"</span><span class="o">);</span>
-<span class="n">HttpURLConnection</span> <span class="n">con</span> <span class="o">=</span> <span class="o">(</span><span class="n">HttpURLConnection</span><span class="o">)</span> <span class="n">obj</span><span class="o">.</span><span class="na">openConnection</span><span class="o">();</span>
-<span class="n">con</span><span class="o">.</span><span class="na">setRequestMethod</span><span class="o">(</span><span class="s">"GET"</span><span class="o">);</span>
-<span class="kt">int</span> <span class="n">responseCode</span> <span class="o">=</span> <span class="n">con</span><span class="o">.</span><span class="na">getResponseCode</span><span class="o">();</span>
-<span class="n">BufferedReader</span> <span class="n">in</span> <span class="o">=</span> <span class="k">new</span> <span class="n">BufferedReader</span><span class="o">(</span>
-    <span class="k">new</span> <span class="nf">InputStreamReader</span><span class="o">(</span><span class="n">con</span><span class="o">.</span><span class="na">getInputStream</span><span class="o">()));</span>
-<span class="n">String</span> <span class="n">inputLine</span><span class="o">;</span>
-<span class="n">StringBuffer</span> <span class="n">response</span> <span class="o">=</span> <span class="k">new</span> <span class="n">StringBuffer</span><span class="o">();</span>
-<span class="k">while</span> <span class="o">((</span><span class="n">inputLine</span> <span class="o">=</span> <span class="n">in</span><span class="o">.</span><span class="na">readLine</span><span class="o">())</span> <span class="o">!=</span> <span class="kc">null</span><span class="o">)</span> <span class="o">{</span>
-    <span class="n">response</span><span class="o">.</span><span class="na">append</span><span class="o">(</span><span class="n">inputLine</span><span class="o">);</span>
-<span class="o">}</span>
-<span class="n">in</span><span class="o">.</span><span class="na">close</span><span class="o">();</span>
-<span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="n">response</span><span class="o">.</span><span class="na">toString</span><span class="o">());</span>
-</code></pre>
-<p><span class="httpmethod GET">GET</span> <span class="endpointheading">/games/{game-id}/mod/updates</span></p>
-
-<p><em>Get all updates that occurred between two timestamps for
-the <em>authenticated user</em> for the corresponding game.</em></p>
-
-<p><strong>OAuth 2 Authentication Required</strong>. Get all subscribed mod updates (new builds) that occurred between two timestamps for the <em>authenticated user</em> for the corresponding game. This endpoint is designed for intermittent polling by game clients to determine if notifications need to be pushed to the authenticated user. If you are consuming querying potential build updates from within a game, it is highly recommend you use this endpoint. Successful request will return an array of <a href="https://docs.mod.io/#browse-mod-files-2">Modfile Objects</a> that were published between the two supplied timestamps.</p>
-
-<table>
-<thead>
-<tr>
-<th>Parameter</th>
-<th>Type</th>
-<th>Required</th>
-<th>Description</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>start</td>
-<td>integer(int32)</td>
-<td>true</td>
-<td>Unix timestamp of beginning of update check.</td>
-</tr>
-<tr>
-<td>end</td>
-<td>integer(int32)</td>
-<td>true</td>
-<td>Unix timestamp of end of update check.</td>
-</tr>
-</tbody>
-</table>
-
-<blockquote>
-<p>Example responses</p>
-</blockquote>
-<pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
-  </span><span class="s2">"data"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
-    </span><span class="p">{</span><span class="w">
-      </span><span class="s2">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span><span class="w">
-      </span><span class="s2">"mod"</span><span class="p">:</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span><span class="w">
-      </span><span class="s2">"member"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-        </span><span class="s2">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
-        </span><span class="s2">"nameid"</span><span class="p">:</span><span class="w"> </span><span class="s2">"xant"</span><span class="p">,</span><span class="w">
-        </span><span class="s2">"username"</span><span class="p">:</span><span class="w"> </span><span class="s2">"XanT"</span><span class="p">,</span><span class="w">
-        </span><span class="s2">"avatar"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-          </span><span class="s2">"filename"</span><span class="p">:</span><span class="w"> </span><span class="s2">"masterchief.jpg"</span><span class="p">,</span><span class="w">
-          </span><span class="s2">"full"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://media.mod.io/images/members/1/1/1/masterchief.jpg"</span><span class="w">
-        </span><span class="p">},</span><span class="w">
-        </span><span class="s2">"timezone"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Australia/Brisbane"</span><span class="p">,</span><span class="w">
-        </span><span class="s2">"language"</span><span class="p">:</span><span class="w"> </span><span class="s2">"en"</span><span class="p">,</span><span class="w">
-        </span><span class="s2">"url"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://mod.io/members/xant"</span><span class="w">
-      </span><span class="p">},</span><span class="w">
-      </span><span class="s2">"date"</span><span class="p">:</span><span class="w"> </span><span class="mi">1499841487</span><span class="p">,</span><span class="w">
-      </span><span class="s2">"datevirus"</span><span class="p">:</span><span class="w"> </span><span class="mi">1499841487</span><span class="p">,</span><span class="w">
-      </span><span class="s2">"virusstatus"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
-      </span><span class="s2">"viruspositive"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
-      </span><span class="s2">"filesize"</span><span class="p">:</span><span class="w"> </span><span class="mi">15181</span><span class="p">,</span><span class="w">
-      </span><span class="s2">"filehash"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2d4a0e2d7273db6b0a94b0740a88ad0d"</span><span class="p">,</span><span class="w">
-      </span><span class="s2">"filename"</span><span class="p">:</span><span class="w"> </span><span class="s2">"rogue-knight-v1.zip"</span><span class="p">,</span><span class="w">
-      </span><span class="s2">"version"</span><span class="p">:</span><span class="w"> </span><span class="s2">"1.3"</span><span class="p">,</span><span class="w">
-      </span><span class="s2">"virustotal"</span><span class="p">:</span><span class="w"> </span><span class="s2">"No threats found."</span><span class="p">,</span><span class="w">
-      </span><span class="s2">"changelog"</span><span class="p">:</span><span class="w"> </span><span class="s2">"VERSION 1.3 -- Changes -- Fixed critical castle floor bug."</span><span class="p">,</span><span class="w">
-      </span><span class="s2">"download"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://mod.io/mods/file/2/c489a0354111a4d76640d47f0cdcb294"</span><span class="w">
-    </span><span class="p">},</span><span class="w">
-    </span><span class="p">{</span><span class="w">
-        </span><span class="err">...</span><span class="w">
-    </span><span class="p">}</span><span class="w">
-  </span><span class="p">],</span><span class="w">
-  </span><span class="s2">"cursor_id"</span><span class="p">:</span><span class="w"> </span><span class="mi">60</span><span class="p">,</span><span class="w">
-  </span><span class="s2">"prev_id"</span><span class="p">:</span><span class="w"> </span><span class="mi">30</span><span class="p">,</span><span class="w">
-  </span><span class="s2">"next_id"</span><span class="p">:</span><span class="w"> </span><span class="mi">160</span><span class="p">,</span><span class="w">
-  </span><span class="s2">"result_count"</span><span class="p">:</span><span class="w"> </span><span class="mi">100</span><span class="w">
-</span><span class="p">}</span><span class="w">
-</span></code></pre>
-<h3 id="Get-Subscription-Updates-By-Game-responses">Responses</h3>
 
 <table>
 <thead>
@@ -9435,10 +9312,11 @@ oauth2 ( Scopes: write )
   </span><span class="s2">"data"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
     </span><span class="p">{</span><span class="w">
       </span><span class="s2">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span><span class="w">
-      </span><span class="s2">"member"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+      </span><span class="s2">"submitted_by"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
         </span><span class="s2">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
         </span><span class="s2">"nameid"</span><span class="p">:</span><span class="w"> </span><span class="s2">"xant"</span><span class="p">,</span><span class="w">
         </span><span class="s2">"username"</span><span class="p">:</span><span class="w"> </span><span class="s2">"XanT"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"online"</span><span class="p">:</span><span class="w"> </span><span class="mi">1509922961</span><span class="p">,</span><span class="w">
         </span><span class="s2">"avatar"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
           </span><span class="s2">"filename"</span><span class="p">:</span><span class="w"> </span><span class="s2">"masterchief.jpg"</span><span class="p">,</span><span class="w">
           </span><span class="s2">"full"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://media.mod.io/images/members/1/1/1/masterchief.jpg"</span><span class="w">
@@ -9540,8 +9418,8 @@ oauth2 ( Scopes: write )
 <td>Unique game id.</td>
 </tr>
 <tr>
-<td>» member</td>
-<td><a href="#schemamember_object">Member_Object</a></td>
+<td>» submitted_by</td>
+<td><a href="#schemauser_object">User_Object</a></td>
 <td>Contains member data.</td>
 </tr>
 <tr>
@@ -9558,6 +9436,11 @@ oauth2 ( Scopes: write )
 <td>»» username</td>
 <td>string</td>
 <td>Non-unique username of the user.</td>
+</tr>
+<tr>
+<td>»» online</td>
+<td>integer(int32)</td>
+<td>Unix timestamp on when the user was last online.</td>
 </tr>
 <tr>
 <td>»» avatar</td>
@@ -9764,10 +9647,11 @@ oauth2 ( Scopes: write )
   </span><span class="s2">"data"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
     </span><span class="p">{</span><span class="w">
       </span><span class="s2">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">13</span><span class="p">,</span><span class="w">
-      </span><span class="s2">"member"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+      </span><span class="s2">"user"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
         </span><span class="s2">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
         </span><span class="s2">"nameid"</span><span class="p">:</span><span class="w"> </span><span class="s2">"xant"</span><span class="p">,</span><span class="w">
         </span><span class="s2">"username"</span><span class="p">:</span><span class="w"> </span><span class="s2">"XanT"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"online"</span><span class="p">:</span><span class="w"> </span><span class="mi">1509922961</span><span class="p">,</span><span class="w">
         </span><span class="s2">"avatar"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
           </span><span class="s2">"filename"</span><span class="p">:</span><span class="w"> </span><span class="s2">"masterchief.jpg"</span><span class="p">,</span><span class="w">
           </span><span class="s2">"full"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://media.mod.io/images/members/1/1/1/masterchief.jpg"</span><span class="w">
@@ -9801,7 +9685,7 @@ oauth2 ( Scopes: write )
 <td>data</td>
 <td>
 <a href="#schemagame_activity_object">Game_Activity_Object</a>[]</td>
-<td>Response array of items</td>
+<td>Response array of items.</td>
 </tr>
 <tr>
 <td>» id</td>
@@ -9809,8 +9693,8 @@ oauth2 ( Scopes: write )
 <td>Unique id of activity record.</td>
 </tr>
 <tr>
-<td>» member</td>
-<td><a href="#schemamember_object">Member_Object</a></td>
+<td>» user</td>
+<td><a href="#schemauser_object">User_Object</a></td>
 <td>Contains member data.</td>
 </tr>
 <tr>
@@ -9827,6 +9711,11 @@ oauth2 ( Scopes: write )
 <td>»» username</td>
 <td>string</td>
 <td>Non-unique username of the user.</td>
+</tr>
+<tr>
+<td>»» online</td>
+<td>integer(int32)</td>
+<td>Unix timestamp on when the user was last online.</td>
 </tr>
 <tr>
 <td>»» avatar</td>
@@ -9897,10 +9786,11 @@ oauth2 ( Scopes: write )
     </span><span class="p">{</span><span class="w">
       </span><span class="s2">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span><span class="w">
       </span><span class="s2">"game"</span><span class="p">:</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span><span class="w">
-      </span><span class="s2">"member"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+      </span><span class="s2">"submitted_by"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
         </span><span class="s2">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
         </span><span class="s2">"nameid"</span><span class="p">:</span><span class="w"> </span><span class="s2">"xant"</span><span class="p">,</span><span class="w">
         </span><span class="s2">"username"</span><span class="p">:</span><span class="w"> </span><span class="s2">"XanT"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"online"</span><span class="p">:</span><span class="w"> </span><span class="mi">1509922961</span><span class="p">,</span><span class="w">
         </span><span class="s2">"avatar"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
           </span><span class="s2">"filename"</span><span class="p">:</span><span class="w"> </span><span class="s2">"masterchief.jpg"</span><span class="p">,</span><span class="w">
           </span><span class="s2">"full"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://media.mod.io/images/members/1/1/1/masterchief.jpg"</span><span class="w">
@@ -9929,18 +9819,6 @@ oauth2 ( Scopes: write )
       </span><span class="s2">"modfile"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
         </span><span class="s2">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span><span class="w">
         </span><span class="s2">"mod"</span><span class="p">:</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span><span class="w">
-        </span><span class="s2">"member"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-          </span><span class="s2">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
-          </span><span class="s2">"nameid"</span><span class="p">:</span><span class="w"> </span><span class="s2">"xant"</span><span class="p">,</span><span class="w">
-          </span><span class="s2">"username"</span><span class="p">:</span><span class="w"> </span><span class="s2">"XanT"</span><span class="p">,</span><span class="w">
-          </span><span class="s2">"avatar"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-            </span><span class="s2">"filename"</span><span class="p">:</span><span class="w"> </span><span class="s2">"masterchief.jpg"</span><span class="p">,</span><span class="w">
-            </span><span class="s2">"full"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://media.mod.io/images/members/1/1/1/masterchief.jpg"</span><span class="w">
-          </span><span class="p">},</span><span class="w">
-          </span><span class="s2">"timezone"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Australia/Brisbane"</span><span class="p">,</span><span class="w">
-          </span><span class="s2">"language"</span><span class="p">:</span><span class="w"> </span><span class="s2">"en"</span><span class="p">,</span><span class="w">
-          </span><span class="s2">"url"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://mod.io/members/xant"</span><span class="w">
-        </span><span class="p">},</span><span class="w">
         </span><span class="s2">"date"</span><span class="p">:</span><span class="w"> </span><span class="mi">1499841487</span><span class="p">,</span><span class="w">
         </span><span class="s2">"datevirus"</span><span class="p">:</span><span class="w"> </span><span class="mi">1499841487</span><span class="p">,</span><span class="w">
         </span><span class="s2">"virusstatus"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
@@ -9968,16 +9846,18 @@ oauth2 ( Scopes: write )
           </span><span class="p">}</span><span class="w">
         </span><span class="p">]</span><span class="w">
       </span><span class="p">},</span><span class="w">
-      </span><span class="s2">"tags"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
-        </span><span class="kc">null</span><span class="w">
-      </span><span class="p">],</span><span class="w">
       </span><span class="s2">"ratings"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
         </span><span class="s2">"total"</span><span class="p">:</span><span class="w"> </span><span class="mi">1230</span><span class="p">,</span><span class="w">
         </span><span class="s2">"positive"</span><span class="p">:</span><span class="w"> </span><span class="mi">1047</span><span class="p">,</span><span class="w">
         </span><span class="s2">"negative"</span><span class="p">:</span><span class="w"> </span><span class="mi">183</span><span class="p">,</span><span class="w">
         </span><span class="s2">"weighted"</span><span class="p">:</span><span class="w"> </span><span class="mf">87.38</span><span class="p">,</span><span class="w">
         </span><span class="s2">"percentage"</span><span class="p">:</span><span class="w"> </span><span class="mi">91</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"stars"</span><span class="p">:</span><span class="w"> </span><span class="mi">4</span><span class="p">,</span><span class="w">
         </span><span class="s2">"text"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Very Positive"</span><span class="w">
+      </span><span class="p">},</span><span class="w">
+      </span><span class="s2">"tags"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+        </span><span class="s2">"tag"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Unity"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"date"</span><span class="p">:</span><span class="w"> </span><span class="mi">1499841487</span><span class="w">
       </span><span class="p">}</span><span class="w">
     </span><span class="p">},</span><span class="w">
     </span><span class="p">{</span><span class="w">
@@ -10036,8 +9916,8 @@ oauth2 ( Scopes: write )
 <td>Unique game id.</td>
 </tr>
 <tr>
-<td>» member</td>
-<td><a href="#schemamember_object">Member_Object</a></td>
+<td>» submitted_by</td>
+<td><a href="#schemauser_object">User_Object</a></td>
 <td>Contains member data.</td>
 </tr>
 <tr>
@@ -10054,6 +9934,11 @@ oauth2 ( Scopes: write )
 <td>»» username</td>
 <td>string</td>
 <td>Non-unique username of the user.</td>
+</tr>
+<tr>
+<td>»» online</td>
+<td>integer(int32)</td>
+<td>Unix timestamp on when the user was last online.</td>
 </tr>
 <tr>
 <td>»» avatar</td>
@@ -10181,56 +10066,6 @@ oauth2 ( Scopes: write )
 <td>Unique mod id.</td>
 </tr>
 <tr>
-<td>»» member</td>
-<td><a href="#schemamember_object">Member_Object</a></td>
-<td>Contains member data.</td>
-</tr>
-<tr>
-<td>»»» id</td>
-<td>integer(int32)</td>
-<td>Unique id of the user.</td>
-</tr>
-<tr>
-<td>»»» nameid</td>
-<td>string</td>
-<td>Unique nameid of user which forms end of their profile URL.</td>
-</tr>
-<tr>
-<td>»»» username</td>
-<td>string</td>
-<td>Non-unique username of the user.</td>
-</tr>
-<tr>
-<td>»»» avatar</td>
-<td><a href="#schemaavatar_object">Avatar_Object</a></td>
-<td>Contains avatar data.</td>
-</tr>
-<tr>
-<td>»»»» filename</td>
-<td>string</td>
-<td>Image filename, including file extension.</td>
-</tr>
-<tr>
-<td>»»»» full</td>
-<td>string</td>
-<td>Full URL to the image.</td>
-</tr>
-<tr>
-<td>»»» timezone</td>
-<td>string</td>
-<td>The Timezone of the user, shown in {Country}/{City} format.</td>
-</tr>
-<tr>
-<td>»»» language</td>
-<td>string</td>
-<td>The users language preference, limited to two characters.</td>
-</tr>
-<tr>
-<td>»»» url</td>
-<td>string</td>
-<td>URL to the user profile.</td>
-</tr>
-<tr>
 <td>»» date</td>
 <td>integer(int32)</td>
 <td>Unix timestamp of file upload time.</td>
@@ -10258,7 +10093,7 @@ oauth2 ( Scopes: write )
 <tr>
 <td>»» filehash</td>
 <td>string</td>
-<td>MD5 filehash</td>
+<td>MD5 filehash.</td>
 </tr>
 <tr>
 <td>»» filename</td>
@@ -10328,27 +10163,32 @@ oauth2 ( Scopes: write )
 <tr>
 <td>»» total</td>
 <td>integer(int32)</td>
-<td>Total Ratings.</td>
+<td>Total ratings count.</td>
 </tr>
 <tr>
 <td>»» positive</td>
 <td>integer(int32)</td>
-<td>Positive Ratings.</td>
+<td>Positive ratings count.</td>
 </tr>
 <tr>
 <td>»» negative</td>
 <td>integer(int32)</td>
-<td>Negative ratings.</td>
+<td>Negative ratings count.</td>
 </tr>
 <tr>
 <td>»» weighted</td>
 <td>float</td>
-<td>Weighted Rating.</td>
+<td>Weighted rating taking into account positive &amp; negative ratings.</td>
 </tr>
 <tr>
 <td>»» percentage</td>
 <td>integer(int32)</td>
-<td>Percentage.</td>
+<td>Rating of the mod as a percentage.</td>
+</tr>
+<tr>
+<td>»» stars</td>
+<td>integer(int32)</td>
+<td>The amount of stars the mod has, between 0 and 5.</td>
 </tr>
 <tr>
 <td>»» text</td>
@@ -10357,8 +10197,18 @@ oauth2 ( Scopes: write )
 </tr>
 <tr>
 <td>» tags</td>
-<td>[Unknown]</td>
-<td>No description</td>
+<td><a href="#schemamod_tag_object">Mod_Tag_Object</a></td>
+<td>Contains Tags data.</td>
+</tr>
+<tr>
+<td>»» tag</td>
+<td>string</td>
+<td>The contents of the tag.</td>
+</tr>
+<tr>
+<td>»» date</td>
+<td>integer(int32)</td>
+<td>Unix timestamp of when tag was applied.</td>
 </tr>
 </tbody>
 </table>
@@ -10368,10 +10218,11 @@ oauth2 ( Scopes: write )
   </span><span class="s2">"data"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
     </span><span class="p">{</span><span class="w">
       </span><span class="s2">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">13</span><span class="p">,</span><span class="w">
-      </span><span class="s2">"member"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+      </span><span class="s2">"user"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
         </span><span class="s2">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
         </span><span class="s2">"nameid"</span><span class="p">:</span><span class="w"> </span><span class="s2">"xant"</span><span class="p">,</span><span class="w">
         </span><span class="s2">"username"</span><span class="p">:</span><span class="w"> </span><span class="s2">"XanT"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"online"</span><span class="p">:</span><span class="w"> </span><span class="mi">1509922961</span><span class="p">,</span><span class="w">
         </span><span class="s2">"avatar"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
           </span><span class="s2">"filename"</span><span class="p">:</span><span class="w"> </span><span class="s2">"masterchief.jpg"</span><span class="p">,</span><span class="w">
           </span><span class="s2">"full"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://media.mod.io/images/members/1/1/1/masterchief.jpg"</span><span class="w">
@@ -10405,7 +10256,7 @@ oauth2 ( Scopes: write )
 <td>data</td>
 <td>
 <a href="#schemamod_activity_object">Mod_Activity_Object</a>[]</td>
-<td>Response array of items</td>
+<td>Response array of items.</td>
 </tr>
 <tr>
 <td>» id</td>
@@ -10413,8 +10264,8 @@ oauth2 ( Scopes: write )
 <td>Unique id of activity object.</td>
 </tr>
 <tr>
-<td>» member</td>
-<td><a href="#schemamember_object">Member_Object</a></td>
+<td>» user</td>
+<td><a href="#schemauser_object">User_Object</a></td>
 <td>Contains member data.</td>
 </tr>
 <tr>
@@ -10431,6 +10282,11 @@ oauth2 ( Scopes: write )
 <td>»» username</td>
 <td>string</td>
 <td>Non-unique username of the user.</td>
+</tr>
+<tr>
+<td>»» online</td>
+<td>integer(int32)</td>
+<td>Unix timestamp on when the user was last online.</td>
 </tr>
 <tr>
 <td>»» avatar</td>
@@ -10501,18 +10357,6 @@ oauth2 ( Scopes: write )
     </span><span class="p">{</span><span class="w">
       </span><span class="s2">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span><span class="w">
       </span><span class="s2">"mod"</span><span class="p">:</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span><span class="w">
-      </span><span class="s2">"member"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-        </span><span class="s2">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
-        </span><span class="s2">"nameid"</span><span class="p">:</span><span class="w"> </span><span class="s2">"xant"</span><span class="p">,</span><span class="w">
-        </span><span class="s2">"username"</span><span class="p">:</span><span class="w"> </span><span class="s2">"XanT"</span><span class="p">,</span><span class="w">
-        </span><span class="s2">"avatar"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-          </span><span class="s2">"filename"</span><span class="p">:</span><span class="w"> </span><span class="s2">"masterchief.jpg"</span><span class="p">,</span><span class="w">
-          </span><span class="s2">"full"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://media.mod.io/images/members/1/1/1/masterchief.jpg"</span><span class="w">
-        </span><span class="p">},</span><span class="w">
-        </span><span class="s2">"timezone"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Australia/Brisbane"</span><span class="p">,</span><span class="w">
-        </span><span class="s2">"language"</span><span class="p">:</span><span class="w"> </span><span class="s2">"en"</span><span class="p">,</span><span class="w">
-        </span><span class="s2">"url"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://mod.io/members/xant"</span><span class="w">
-      </span><span class="p">},</span><span class="w">
       </span><span class="s2">"date"</span><span class="p">:</span><span class="w"> </span><span class="mi">1499841487</span><span class="p">,</span><span class="w">
       </span><span class="s2">"datevirus"</span><span class="p">:</span><span class="w"> </span><span class="mi">1499841487</span><span class="p">,</span><span class="w">
       </span><span class="s2">"virusstatus"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
@@ -10568,7 +10412,7 @@ oauth2 ( Scopes: write )
 <td>data</td>
 <td>
 <a href="#schemamodfile_object">Modfile_Object</a>[]</td>
-<td>Response array of items</td>
+<td>Response array of items.</td>
 </tr>
 <tr>
 <td>» id</td>
@@ -10579,56 +10423,6 @@ oauth2 ( Scopes: write )
 <td>» mod</td>
 <td>integer(int32)</td>
 <td>Unique mod id.</td>
-</tr>
-<tr>
-<td>» member</td>
-<td><a href="#schemamember_object">Member_Object</a></td>
-<td>Contains member data.</td>
-</tr>
-<tr>
-<td>»» id</td>
-<td>integer(int32)</td>
-<td>Unique id of the user.</td>
-</tr>
-<tr>
-<td>»» nameid</td>
-<td>string</td>
-<td>Unique nameid of user which forms end of their profile URL.</td>
-</tr>
-<tr>
-<td>»» username</td>
-<td>string</td>
-<td>Non-unique username of the user.</td>
-</tr>
-<tr>
-<td>»» avatar</td>
-<td><a href="#schemaavatar_object">Avatar_Object</a></td>
-<td>Contains avatar data.</td>
-</tr>
-<tr>
-<td>»»» filename</td>
-<td>string</td>
-<td>Image filename, including file extension.</td>
-</tr>
-<tr>
-<td>»»» full</td>
-<td>string</td>
-<td>Full URL to the image.</td>
-</tr>
-<tr>
-<td>»» timezone</td>
-<td>string</td>
-<td>The Timezone of the user, shown in {Country}/{City} format.</td>
-</tr>
-<tr>
-<td>»» language</td>
-<td>string</td>
-<td>The users language preference, limited to two characters.</td>
-</tr>
-<tr>
-<td>»» url</td>
-<td>string</td>
-<td>URL to the user profile.</td>
 </tr>
 <tr>
 <td>» date</td>
@@ -10658,7 +10452,7 @@ oauth2 ( Scopes: write )
 <tr>
 <td>» filehash</td>
 <td>string</td>
-<td>MD5 filehash</td>
+<td>MD5 filehash.</td>
 </tr>
 <tr>
 <td>» filename</td>
@@ -10732,10 +10526,11 @@ oauth2 ( Scopes: write )
     </span><span class="p">{</span><span class="w">
       </span><span class="s2">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span><span class="w">
       </span><span class="s2">"mod"</span><span class="p">:</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span><span class="w">
-      </span><span class="s2">"member"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+      </span><span class="s2">"submitted_by"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
         </span><span class="s2">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
         </span><span class="s2">"nameid"</span><span class="p">:</span><span class="w"> </span><span class="s2">"xant"</span><span class="p">,</span><span class="w">
         </span><span class="s2">"username"</span><span class="p">:</span><span class="w"> </span><span class="s2">"XanT"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"online"</span><span class="p">:</span><span class="w"> </span><span class="mi">1509922961</span><span class="p">,</span><span class="w">
         </span><span class="s2">"avatar"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
           </span><span class="s2">"filename"</span><span class="p">:</span><span class="w"> </span><span class="s2">"masterchief.jpg"</span><span class="p">,</span><span class="w">
           </span><span class="s2">"full"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://media.mod.io/images/members/1/1/1/masterchief.jpg"</span><span class="w">
@@ -10807,8 +10602,8 @@ oauth2 ( Scopes: write )
 <td>Unique id of the parent mod.</td>
 </tr>
 <tr>
-<td>» member</td>
-<td><a href="#schemamember_object">Member_Object</a></td>
+<td>» submitted_by</td>
+<td><a href="#schemauser_object">User_Object</a></td>
 <td>Contains member data.</td>
 </tr>
 <tr>
@@ -10825,6 +10620,11 @@ oauth2 ( Scopes: write )
 <td>»» username</td>
 <td>string</td>
 <td>Non-unique username of the user.</td>
+</tr>
+<tr>
+<td>»» online</td>
+<td>integer(int32)</td>
+<td>Unix timestamp on when the user was last online.</td>
 </tr>
 <tr>
 <td>»» avatar</td>
@@ -10898,10 +10698,11 @@ oauth2 ( Scopes: write )
   </span><span class="s2">"data"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
     </span><span class="p">{</span><span class="w">
       </span><span class="s2">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">457</span><span class="p">,</span><span class="w">
-      </span><span class="s2">"member"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+      </span><span class="s2">"user"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
         </span><span class="s2">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
         </span><span class="s2">"nameid"</span><span class="p">:</span><span class="w"> </span><span class="s2">"xant"</span><span class="p">,</span><span class="w">
         </span><span class="s2">"username"</span><span class="p">:</span><span class="w"> </span><span class="s2">"XanT"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"online"</span><span class="p">:</span><span class="w"> </span><span class="mi">1509922961</span><span class="p">,</span><span class="w">
         </span><span class="s2">"avatar"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
           </span><span class="s2">"filename"</span><span class="p">:</span><span class="w"> </span><span class="s2">"masterchief.jpg"</span><span class="p">,</span><span class="w">
           </span><span class="s2">"full"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://media.mod.io/images/members/1/1/1/masterchief.jpg"</span><span class="w">
@@ -10959,8 +10760,8 @@ oauth2 ( Scopes: write )
 <td>Unique access id.</td>
 </tr>
 <tr>
-<td>» member</td>
-<td><a href="#schemamember_object">Member_Object</a></td>
+<td>» user</td>
+<td><a href="#schemauser_object">User_Object</a></td>
 <td>Contains member data.</td>
 </tr>
 <tr>
@@ -10977,6 +10778,11 @@ oauth2 ( Scopes: write )
 <td>»» username</td>
 <td>string</td>
 <td>Non-unique username of the user.</td>
+</tr>
+<tr>
+<td>»» online</td>
+<td>integer(int32)</td>
+<td>Unix timestamp on when the user was last online.</td>
 </tr>
 <tr>
 <td>»» avatar</td>
@@ -11038,6 +10844,7 @@ oauth2 ( Scopes: write )
       </span><span class="s2">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
       </span><span class="s2">"nameid"</span><span class="p">:</span><span class="w"> </span><span class="s2">"xant"</span><span class="p">,</span><span class="w">
       </span><span class="s2">"username"</span><span class="p">:</span><span class="w"> </span><span class="s2">"XanT"</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"online"</span><span class="p">:</span><span class="w"> </span><span class="mi">1509922961</span><span class="p">,</span><span class="w">
       </span><span class="s2">"avatar"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
         </span><span class="s2">"filename"</span><span class="p">:</span><span class="w"> </span><span class="s2">"masterchief.jpg"</span><span class="p">,</span><span class="w">
         </span><span class="s2">"full"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://media.mod.io/images/members/1/1/1/masterchief.jpg"</span><span class="w">
@@ -11088,8 +10895,8 @@ oauth2 ( Scopes: write )
 <tr>
 <td>data</td>
 <td>
-<a href="#schemamember_object">Member_Object</a>[]</td>
-<td>Response array of items</td>
+<a href="#schemauser_object">User_Object</a>[]</td>
+<td>Response array of items.</td>
 </tr>
 <tr>
 <td>» id</td>
@@ -11105,6 +10912,11 @@ oauth2 ( Scopes: write )
 <td>» username</td>
 <td>string</td>
 <td>Non-unique username of the user.</td>
+</tr>
+<tr>
+<td>» online</td>
+<td>integer(int32)</td>
+<td>Unix timestamp on when the user was last online.</td>
 </tr>
 <tr>
 <td>» avatar</td>
@@ -11204,10 +11016,11 @@ oauth2 ( Scopes: write )
 <p><a name="schemaaccess_object"></a></p>
 <pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
   </span><span class="s2">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">457</span><span class="p">,</span><span class="w">
-  </span><span class="s2">"member"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+  </span><span class="s2">"user"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
     </span><span class="s2">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
     </span><span class="s2">"nameid"</span><span class="p">:</span><span class="w"> </span><span class="s2">"xant"</span><span class="p">,</span><span class="w">
     </span><span class="s2">"username"</span><span class="p">:</span><span class="w"> </span><span class="s2">"XanT"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"online"</span><span class="p">:</span><span class="w"> </span><span class="mi">1509922961</span><span class="p">,</span><span class="w">
     </span><span class="s2">"avatar"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
       </span><span class="s2">"filename"</span><span class="p">:</span><span class="w"> </span><span class="s2">"masterchief.jpg"</span><span class="p">,</span><span class="w">
       </span><span class="s2">"full"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://media.mod.io/images/members/1/1/1/masterchief.jpg"</span><span class="w">
@@ -11237,8 +11050,8 @@ oauth2 ( Scopes: write )
 <td>Unique access id.</td>
 </tr>
 <tr>
-<td>member</td>
-<td><a href="#schemamember_object">Member_Object</a></td>
+<td>user</td>
+<td><a href="#schemauser_object">User_Object</a></td>
 <td>Contains member data.</td>
 </tr>
 <tr>
@@ -11255,6 +11068,11 @@ oauth2 ( Scopes: write )
 <td>» username</td>
 <td>string</td>
 <td>Non-unique username of the user.</td>
+</tr>
+<tr>
+<td>» online</td>
+<td>integer(int32)</td>
+<td>Unix timestamp on when the user was last online.</td>
 </tr>
 <tr>
 <td>» avatar</td>
@@ -11312,10 +11130,11 @@ oauth2 ( Scopes: write )
 <p><a name="schemagame_activity_object"></a></p>
 <pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
   </span><span class="s2">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">13</span><span class="p">,</span><span class="w">
-  </span><span class="s2">"member"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+  </span><span class="s2">"user"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
     </span><span class="s2">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
     </span><span class="s2">"nameid"</span><span class="p">:</span><span class="w"> </span><span class="s2">"xant"</span><span class="p">,</span><span class="w">
     </span><span class="s2">"username"</span><span class="p">:</span><span class="w"> </span><span class="s2">"XanT"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"online"</span><span class="p">:</span><span class="w"> </span><span class="mi">1509922961</span><span class="p">,</span><span class="w">
     </span><span class="s2">"avatar"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
       </span><span class="s2">"filename"</span><span class="p">:</span><span class="w"> </span><span class="s2">"masterchief.jpg"</span><span class="p">,</span><span class="w">
       </span><span class="s2">"full"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://media.mod.io/images/members/1/1/1/masterchief.jpg"</span><span class="w">
@@ -11349,8 +11168,8 @@ oauth2 ( Scopes: write )
 <td>Unique id of activity record.</td>
 </tr>
 <tr>
-<td>member</td>
-<td><a href="#schemamember_object">Member_Object</a></td>
+<td>user</td>
+<td><a href="#schemauser_object">User_Object</a></td>
 <td>Contains member data.</td>
 </tr>
 <tr>
@@ -11367,6 +11186,11 @@ oauth2 ( Scopes: write )
 <td>» username</td>
 <td>string</td>
 <td>Non-unique username of the user.</td>
+</tr>
+<tr>
+<td>» online</td>
+<td>integer(int32)</td>
+<td>Unix timestamp on when the user was last online.</td>
 </tr>
 <tr>
 <td>» avatar</td>
@@ -11434,10 +11258,11 @@ oauth2 ( Scopes: write )
 <p><a name="schemamod_activity_object"></a></p>
 <pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
   </span><span class="s2">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">13</span><span class="p">,</span><span class="w">
-  </span><span class="s2">"member"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+  </span><span class="s2">"user"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
     </span><span class="s2">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
     </span><span class="s2">"nameid"</span><span class="p">:</span><span class="w"> </span><span class="s2">"xant"</span><span class="p">,</span><span class="w">
     </span><span class="s2">"username"</span><span class="p">:</span><span class="w"> </span><span class="s2">"XanT"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"online"</span><span class="p">:</span><span class="w"> </span><span class="mi">1509922961</span><span class="p">,</span><span class="w">
     </span><span class="s2">"avatar"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
       </span><span class="s2">"filename"</span><span class="p">:</span><span class="w"> </span><span class="s2">"masterchief.jpg"</span><span class="p">,</span><span class="w">
       </span><span class="s2">"full"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://media.mod.io/images/members/1/1/1/masterchief.jpg"</span><span class="w">
@@ -11471,8 +11296,8 @@ oauth2 ( Scopes: write )
 <td>Unique id of activity object.</td>
 </tr>
 <tr>
-<td>member</td>
-<td><a href="#schemamember_object">Member_Object</a></td>
+<td>user</td>
+<td><a href="#schemauser_object">User_Object</a></td>
 <td>Contains member data.</td>
 </tr>
 <tr>
@@ -11489,6 +11314,11 @@ oauth2 ( Scopes: write )
 <td>» username</td>
 <td>string</td>
 <td>Non-unique username of the user.</td>
+</tr>
+<tr>
+<td>» online</td>
+<td>integer(int32)</td>
+<td>Unix timestamp on when the user was last online.</td>
 </tr>
 <tr>
 <td>» avatar</td>
@@ -11557,10 +11387,11 @@ oauth2 ( Scopes: write )
 <pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
   </span><span class="s2">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span><span class="w">
   </span><span class="s2">"mod"</span><span class="p">:</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span><span class="w">
-  </span><span class="s2">"member"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+  </span><span class="s2">"submitted_by"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
     </span><span class="s2">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
     </span><span class="s2">"nameid"</span><span class="p">:</span><span class="w"> </span><span class="s2">"xant"</span><span class="p">,</span><span class="w">
     </span><span class="s2">"username"</span><span class="p">:</span><span class="w"> </span><span class="s2">"XanT"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"online"</span><span class="p">:</span><span class="w"> </span><span class="mi">1509922961</span><span class="p">,</span><span class="w">
     </span><span class="s2">"avatar"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
       </span><span class="s2">"filename"</span><span class="p">:</span><span class="w"> </span><span class="s2">"masterchief.jpg"</span><span class="p">,</span><span class="w">
       </span><span class="s2">"full"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://media.mod.io/images/members/1/1/1/masterchief.jpg"</span><span class="w">
@@ -11597,8 +11428,8 @@ oauth2 ( Scopes: write )
 <td>Unique id of the parent mod.</td>
 </tr>
 <tr>
-<td>member</td>
-<td><a href="#schemamember_object">Member_Object</a></td>
+<td>submitted_by</td>
+<td><a href="#schemauser_object">User_Object</a></td>
 <td>Contains member data.</td>
 </tr>
 <tr>
@@ -11615,6 +11446,11 @@ oauth2 ( Scopes: write )
 <td>» username</td>
 <td>string</td>
 <td>Non-unique username of the user.</td>
+</tr>
+<tr>
+<td>» online</td>
+<td>integer(int32)</td>
+<td>Unix timestamp on when the user was last online.</td>
 </tr>
 <tr>
 <td>» avatar</td>
@@ -11751,18 +11587,6 @@ oauth2 ( Scopes: write )
 <pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
   </span><span class="s2">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span><span class="w">
   </span><span class="s2">"mod"</span><span class="p">:</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span><span class="w">
-  </span><span class="s2">"member"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-    </span><span class="s2">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
-    </span><span class="s2">"nameid"</span><span class="p">:</span><span class="w"> </span><span class="s2">"xant"</span><span class="p">,</span><span class="w">
-    </span><span class="s2">"username"</span><span class="p">:</span><span class="w"> </span><span class="s2">"XanT"</span><span class="p">,</span><span class="w">
-    </span><span class="s2">"avatar"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-      </span><span class="s2">"filename"</span><span class="p">:</span><span class="w"> </span><span class="s2">"masterchief.jpg"</span><span class="p">,</span><span class="w">
-      </span><span class="s2">"full"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://media.mod.io/images/members/1/1/1/masterchief.jpg"</span><span class="w">
-    </span><span class="p">},</span><span class="w">
-    </span><span class="s2">"timezone"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Australia/Brisbane"</span><span class="p">,</span><span class="w">
-    </span><span class="s2">"language"</span><span class="p">:</span><span class="w"> </span><span class="s2">"en"</span><span class="p">,</span><span class="w">
-    </span><span class="s2">"url"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://mod.io/members/xant"</span><span class="w">
-  </span><span class="p">},</span><span class="w">
   </span><span class="s2">"date"</span><span class="p">:</span><span class="w"> </span><span class="mi">1499841487</span><span class="p">,</span><span class="w">
   </span><span class="s2">"datevirus"</span><span class="p">:</span><span class="w"> </span><span class="mi">1499841487</span><span class="p">,</span><span class="w">
   </span><span class="s2">"virusstatus"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
@@ -11796,56 +11620,6 @@ oauth2 ( Scopes: write )
 <td>Unique mod id.</td>
 </tr>
 <tr>
-<td>member</td>
-<td><a href="#schemamember_object">Member_Object</a></td>
-<td>Contains member data.</td>
-</tr>
-<tr>
-<td>» id</td>
-<td>integer(int32)</td>
-<td>Unique id of the user.</td>
-</tr>
-<tr>
-<td>» nameid</td>
-<td>string</td>
-<td>Unique nameid of user which forms end of their profile URL.</td>
-</tr>
-<tr>
-<td>» username</td>
-<td>string</td>
-<td>Non-unique username of the user.</td>
-</tr>
-<tr>
-<td>» avatar</td>
-<td><a href="#schemaavatar_object">Avatar_Object</a></td>
-<td>Contains avatar data.</td>
-</tr>
-<tr>
-<td>»» filename</td>
-<td>string</td>
-<td>Image filename, including file extension.</td>
-</tr>
-<tr>
-<td>»» full</td>
-<td>string</td>
-<td>Full URL to the image.</td>
-</tr>
-<tr>
-<td>» timezone</td>
-<td>string</td>
-<td>The Timezone of the user, shown in {Country}/{City} format.</td>
-</tr>
-<tr>
-<td>» language</td>
-<td>string</td>
-<td>The users language preference, limited to two characters.</td>
-</tr>
-<tr>
-<td>» url</td>
-<td>string</td>
-<td>URL to the user profile.</td>
-</tr>
-<tr>
 <td>date</td>
 <td>integer(int32)</td>
 <td>Unix timestamp of file upload time.</td>
@@ -11873,7 +11647,7 @@ oauth2 ( Scopes: write )
 <tr>
 <td>filehash</td>
 <td>string</td>
-<td>MD5 filehash</td>
+<td>MD5 filehash.</td>
 </tr>
 <tr>
 <td>filename</td>
@@ -11907,10 +11681,11 @@ oauth2 ( Scopes: write )
 <pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
   </span><span class="s2">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span><span class="w">
   </span><span class="s2">"game"</span><span class="p">:</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span><span class="w">
-  </span><span class="s2">"member"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+  </span><span class="s2">"submitted_by"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
     </span><span class="s2">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
     </span><span class="s2">"nameid"</span><span class="p">:</span><span class="w"> </span><span class="s2">"xant"</span><span class="p">,</span><span class="w">
     </span><span class="s2">"username"</span><span class="p">:</span><span class="w"> </span><span class="s2">"XanT"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"online"</span><span class="p">:</span><span class="w"> </span><span class="mi">1509922961</span><span class="p">,</span><span class="w">
     </span><span class="s2">"avatar"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
       </span><span class="s2">"filename"</span><span class="p">:</span><span class="w"> </span><span class="s2">"masterchief.jpg"</span><span class="p">,</span><span class="w">
       </span><span class="s2">"full"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://media.mod.io/images/members/1/1/1/masterchief.jpg"</span><span class="w">
@@ -11939,18 +11714,6 @@ oauth2 ( Scopes: write )
   </span><span class="s2">"modfile"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
     </span><span class="s2">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span><span class="w">
     </span><span class="s2">"mod"</span><span class="p">:</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span><span class="w">
-    </span><span class="s2">"member"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-      </span><span class="s2">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
-      </span><span class="s2">"nameid"</span><span class="p">:</span><span class="w"> </span><span class="s2">"xant"</span><span class="p">,</span><span class="w">
-      </span><span class="s2">"username"</span><span class="p">:</span><span class="w"> </span><span class="s2">"XanT"</span><span class="p">,</span><span class="w">
-      </span><span class="s2">"avatar"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-        </span><span class="s2">"filename"</span><span class="p">:</span><span class="w"> </span><span class="s2">"masterchief.jpg"</span><span class="p">,</span><span class="w">
-        </span><span class="s2">"full"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://media.mod.io/images/members/1/1/1/masterchief.jpg"</span><span class="w">
-      </span><span class="p">},</span><span class="w">
-      </span><span class="s2">"timezone"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Australia/Brisbane"</span><span class="p">,</span><span class="w">
-      </span><span class="s2">"language"</span><span class="p">:</span><span class="w"> </span><span class="s2">"en"</span><span class="p">,</span><span class="w">
-      </span><span class="s2">"url"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://mod.io/members/xant"</span><span class="w">
-    </span><span class="p">},</span><span class="w">
     </span><span class="s2">"date"</span><span class="p">:</span><span class="w"> </span><span class="mi">1499841487</span><span class="p">,</span><span class="w">
     </span><span class="s2">"datevirus"</span><span class="p">:</span><span class="w"> </span><span class="mi">1499841487</span><span class="p">,</span><span class="w">
     </span><span class="s2">"virusstatus"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
@@ -11978,16 +11741,18 @@ oauth2 ( Scopes: write )
       </span><span class="p">}</span><span class="w">
     </span><span class="p">]</span><span class="w">
   </span><span class="p">},</span><span class="w">
-  </span><span class="s2">"tags"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
-    </span><span class="kc">null</span><span class="w">
-  </span><span class="p">],</span><span class="w">
   </span><span class="s2">"ratings"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
     </span><span class="s2">"total"</span><span class="p">:</span><span class="w"> </span><span class="mi">1230</span><span class="p">,</span><span class="w">
     </span><span class="s2">"positive"</span><span class="p">:</span><span class="w"> </span><span class="mi">1047</span><span class="p">,</span><span class="w">
     </span><span class="s2">"negative"</span><span class="p">:</span><span class="w"> </span><span class="mi">183</span><span class="p">,</span><span class="w">
     </span><span class="s2">"weighted"</span><span class="p">:</span><span class="w"> </span><span class="mf">87.38</span><span class="p">,</span><span class="w">
     </span><span class="s2">"percentage"</span><span class="p">:</span><span class="w"> </span><span class="mi">91</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"stars"</span><span class="p">:</span><span class="w"> </span><span class="mi">4</span><span class="p">,</span><span class="w">
     </span><span class="s2">"text"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Very Positive"</span><span class="w">
+  </span><span class="p">},</span><span class="w">
+  </span><span class="s2">"tags"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+    </span><span class="s2">"tag"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Unity"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"date"</span><span class="p">:</span><span class="w"> </span><span class="mi">1499841487</span><span class="w">
   </span><span class="p">}</span><span class="w">
 </span><span class="p">}</span><span class="w"> 
 </span></code></pre><h3 id="properties-22">Properties</h3>
@@ -12011,8 +11776,8 @@ oauth2 ( Scopes: write )
 <td>Unique game id.</td>
 </tr>
 <tr>
-<td>member</td>
-<td><a href="#schemamember_object">Member_Object</a></td>
+<td>submitted_by</td>
+<td><a href="#schemauser_object">User_Object</a></td>
 <td>Contains member data.</td>
 </tr>
 <tr>
@@ -12029,6 +11794,11 @@ oauth2 ( Scopes: write )
 <td>» username</td>
 <td>string</td>
 <td>Non-unique username of the user.</td>
+</tr>
+<tr>
+<td>» online</td>
+<td>integer(int32)</td>
+<td>Unix timestamp on when the user was last online.</td>
 </tr>
 <tr>
 <td>» avatar</td>
@@ -12156,56 +11926,6 @@ oauth2 ( Scopes: write )
 <td>Unique mod id.</td>
 </tr>
 <tr>
-<td>» member</td>
-<td><a href="#schemamember_object">Member_Object</a></td>
-<td>Contains member data.</td>
-</tr>
-<tr>
-<td>»» id</td>
-<td>integer(int32)</td>
-<td>Unique id of the user.</td>
-</tr>
-<tr>
-<td>»» nameid</td>
-<td>string</td>
-<td>Unique nameid of user which forms end of their profile URL.</td>
-</tr>
-<tr>
-<td>»» username</td>
-<td>string</td>
-<td>Non-unique username of the user.</td>
-</tr>
-<tr>
-<td>»» avatar</td>
-<td><a href="#schemaavatar_object">Avatar_Object</a></td>
-<td>Contains avatar data.</td>
-</tr>
-<tr>
-<td>»»» filename</td>
-<td>string</td>
-<td>Image filename, including file extension.</td>
-</tr>
-<tr>
-<td>»»» full</td>
-<td>string</td>
-<td>Full URL to the image.</td>
-</tr>
-<tr>
-<td>»» timezone</td>
-<td>string</td>
-<td>The Timezone of the user, shown in {Country}/{City} format.</td>
-</tr>
-<tr>
-<td>»» language</td>
-<td>string</td>
-<td>The users language preference, limited to two characters.</td>
-</tr>
-<tr>
-<td>»» url</td>
-<td>string</td>
-<td>URL to the user profile.</td>
-</tr>
-<tr>
 <td>» date</td>
 <td>integer(int32)</td>
 <td>Unix timestamp of file upload time.</td>
@@ -12233,7 +11953,7 @@ oauth2 ( Scopes: write )
 <tr>
 <td>» filehash</td>
 <td>string</td>
-<td>MD5 filehash</td>
+<td>MD5 filehash.</td>
 </tr>
 <tr>
 <td>» filename</td>
@@ -12303,27 +12023,32 @@ oauth2 ( Scopes: write )
 <tr>
 <td>» total</td>
 <td>integer(int32)</td>
-<td>Total Ratings.</td>
+<td>Total ratings count.</td>
 </tr>
 <tr>
 <td>» positive</td>
 <td>integer(int32)</td>
-<td>Positive Ratings.</td>
+<td>Positive ratings count.</td>
 </tr>
 <tr>
 <td>» negative</td>
 <td>integer(int32)</td>
-<td>Negative ratings.</td>
+<td>Negative ratings count.</td>
 </tr>
 <tr>
 <td>» weighted</td>
 <td>float</td>
-<td>Weighted Rating.</td>
+<td>Weighted rating taking into account positive &amp; negative ratings.</td>
 </tr>
 <tr>
 <td>» percentage</td>
 <td>integer(int32)</td>
-<td>Percentage.</td>
+<td>Rating of the mod as a percentage.</td>
+</tr>
+<tr>
+<td>» stars</td>
+<td>integer(int32)</td>
+<td>The amount of stars the mod has, between 0 and 5.</td>
 </tr>
 <tr>
 <td>» text</td>
@@ -12332,8 +12057,18 @@ oauth2 ( Scopes: write )
 </tr>
 <tr>
 <td>tags</td>
-<td>[Unknown]</td>
-<td>No description</td>
+<td><a href="#schemamod_tag_object">Mod_Tag_Object</a></td>
+<td>Contains Tags data.</td>
+</tr>
+<tr>
+<td>» tag</td>
+<td>string</td>
+<td>The contents of the tag.</td>
+</tr>
+<tr>
+<td>» date</td>
+<td>integer(int32)</td>
+<td>Unix timestamp of when tag was applied.</td>
 </tr>
 </tbody>
 </table>
@@ -12369,10 +12104,11 @@ oauth2 ( Scopes: write )
 <p><a name="schemagame_object"></a></p>
 <pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
   </span><span class="s2">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span><span class="w">
-  </span><span class="s2">"member"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+  </span><span class="s2">"submitted_by"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
     </span><span class="s2">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
     </span><span class="s2">"nameid"</span><span class="p">:</span><span class="w"> </span><span class="s2">"xant"</span><span class="p">,</span><span class="w">
     </span><span class="s2">"username"</span><span class="p">:</span><span class="w"> </span><span class="s2">"XanT"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"online"</span><span class="p">:</span><span class="w"> </span><span class="mi">1509922961</span><span class="p">,</span><span class="w">
     </span><span class="s2">"avatar"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
       </span><span class="s2">"filename"</span><span class="p">:</span><span class="w"> </span><span class="s2">"masterchief.jpg"</span><span class="p">,</span><span class="w">
       </span><span class="s2">"full"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://media.mod.io/images/members/1/1/1/masterchief.jpg"</span><span class="w">
@@ -12439,8 +12175,8 @@ oauth2 ( Scopes: write )
 <td>Unique game id.</td>
 </tr>
 <tr>
-<td>member</td>
-<td><a href="#schemamember_object">Member_Object</a></td>
+<td>submitted_by</td>
+<td><a href="#schemauser_object">User_Object</a></td>
 <td>Contains member data.</td>
 </tr>
 <tr>
@@ -12457,6 +12193,11 @@ oauth2 ( Scopes: write )
 <td>» username</td>
 <td>string</td>
 <td>Non-unique username of the user.</td>
+</tr>
+<tr>
+<td>» online</td>
+<td>integer(int32)</td>
+<td>Unix timestamp on when the user was last online.</td>
 </tr>
 <tr>
 <td>» avatar</td>
@@ -12665,6 +12406,7 @@ oauth2 ( Scopes: write )
   </span><span class="s2">"negative"</span><span class="p">:</span><span class="w"> </span><span class="mi">183</span><span class="p">,</span><span class="w">
   </span><span class="s2">"weighted"</span><span class="p">:</span><span class="w"> </span><span class="mf">87.38</span><span class="p">,</span><span class="w">
   </span><span class="s2">"percentage"</span><span class="p">:</span><span class="w"> </span><span class="mi">91</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"stars"</span><span class="p">:</span><span class="w"> </span><span class="mi">4</span><span class="p">,</span><span class="w">
   </span><span class="s2">"text"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Very Positive"</span><span class="w">
 </span><span class="p">}</span><span class="w"> 
 </span></code></pre><h3 id="properties-25">Properties</h3>
@@ -12680,27 +12422,32 @@ oauth2 ( Scopes: write )
 <tr>
 <td>total</td>
 <td>integer(int32)</td>
-<td>Total Ratings.</td>
+<td>Total ratings count.</td>
 </tr>
 <tr>
 <td>positive</td>
 <td>integer(int32)</td>
-<td>Positive Ratings.</td>
+<td>Positive ratings count.</td>
 </tr>
 <tr>
 <td>negative</td>
 <td>integer(int32)</td>
-<td>Negative ratings.</td>
+<td>Negative ratings count.</td>
 </tr>
 <tr>
 <td>weighted</td>
 <td>float</td>
-<td>Weighted Rating.</td>
+<td>Weighted rating taking into account positive &amp; negative ratings.</td>
 </tr>
 <tr>
 <td>percentage</td>
 <td>integer(int32)</td>
-<td>Percentage.</td>
+<td>Rating of the mod as a percentage.</td>
+</tr>
+<tr>
+<td>stars</td>
+<td>integer(int32)</td>
+<td>The amount of stars the mod has, between 0 and 5.</td>
 </tr>
 <tr>
 <td>text</td>
@@ -12761,12 +12508,13 @@ oauth2 ( Scopes: write )
 </tr>
 </tbody>
 </table>
-<h2 id="member-object">Member Object</h2>
-<p><a name="schemamember_object"></a></p>
+<h2 id="user-object">User Object</h2>
+<p><a name="schemauser_object"></a></p>
 <pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
   </span><span class="s2">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
   </span><span class="s2">"nameid"</span><span class="p">:</span><span class="w"> </span><span class="s2">"xant"</span><span class="p">,</span><span class="w">
   </span><span class="s2">"username"</span><span class="p">:</span><span class="w"> </span><span class="s2">"XanT"</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"online"</span><span class="p">:</span><span class="w"> </span><span class="mi">1509922961</span><span class="p">,</span><span class="w">
   </span><span class="s2">"avatar"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
     </span><span class="s2">"filename"</span><span class="p">:</span><span class="w"> </span><span class="s2">"masterchief.jpg"</span><span class="p">,</span><span class="w">
     </span><span class="s2">"full"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://media.mod.io/images/members/1/1/1/masterchief.jpg"</span><span class="w">
@@ -12799,6 +12547,11 @@ oauth2 ( Scopes: write )
 <td>username</td>
 <td>string</td>
 <td>Non-unique username of the user.</td>
+</tr>
+<tr>
+<td>online</td>
+<td>integer(int32)</td>
+<td>Unix timestamp on when the user was last online.</td>
 </tr>
 <tr>
 <td>avatar</td>
