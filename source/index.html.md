@@ -1589,10 +1589,6 @@ View all members that are part of a game team. Successful request will return an
 
 ```json
 {
-  "cursor_id": 60,
-  "prev_id": 30,
-  "next_id": 160,
-  "result_count": 100,
   "data": [
     {
       "id": 457,
@@ -1613,8 +1609,15 @@ View all members that are part of a game team. Successful request will return an
       "level": 8,
       "date": 1492058857,
       "position": "Supreme Overlord"
+    },
+    {
+        ...
     }
-  ]
+  ],
+  "cursor_id": 60,
+  "prev_id": 30,
+  "next_id": 160,
+  "result_count": 100
 }
 ```
 <h3 id="Browse-Game-Team-Members-responses">Responses</h3>
@@ -5216,10 +5219,6 @@ View all members that are part of a mod team. Successful request will return an 
 
 ```json
 {
-  "cursor_id": 60,
-  "prev_id": 30,
-  "next_id": 160,
-  "result_count": 100,
   "data": [
     {
       "id": 457,
@@ -5240,8 +5239,15 @@ View all members that are part of a mod team. Successful request will return an 
       "level": 8,
       "date": 1492058857,
       "position": "Supreme Overlord"
+    },
+    {
+        ...
     }
-  ]
+  ],
+  "cursor_id": 60,
+  "prev_id": 30,
+  "next_id": 160,
+  "result_count": 100
 }
 ```
 <h3 id="Browse-Mod-Team-Members-responses">Responses</h3>
@@ -8560,10 +8566,6 @@ result_count|integer(int32)|The amount of results returned in the current reques
 
 ```json
 {
-  "cursor_id": 60,
-  "prev_id": 30,
-  "next_id": 160,
-  "result_count": 100,
   "data": [
     {
       "id": 457,
@@ -8584,8 +8586,15 @@ result_count|integer(int32)|The amount of results returned in the current reques
       "level": 8,
       "date": 1492058857,
       "position": "Supreme Overlord"
+    },
+    {
+        ...
     }
-  ]
+  ],
+  "cursor_id": 60,
+  "prev_id": 30,
+  "next_id": 160,
+  "result_count": 100
 } 
 ```
 
