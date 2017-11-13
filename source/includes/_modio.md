@@ -22,7 +22,7 @@ Option | Usage | Suited for | Docs
 ---------- | ---------- | ---------- | ---------
 __API__ | For connecting directly to the mod.io REST API | Web apps that need a JSON REST API, or game developers that like a challenge and want control over their implementation. | 
 __SDK__ | Drop our [open source C++ SDK](https://github.com/DBolical/modioSDK) into your game to call mod.io functionality. | Developers that want a SDK that abstracts the uploading, downloading and unzip flows behind easy to use function calls. | [Here](https://sdk.mod.io/)
-__Tools/Plugins__ | Use tools and plugins created by the community to make implementation in various engines easy. | Game developers that want a pre-built modding solution for their engine of choice. | [Available per tool](http://10.1.5.7:4567/#)
+__Tools/Plugins__ | Use tools and plugins created by the community to make implementation in various engines easy. | Game developers that want a pre-built modding solution for their engine of choice. | [Available per tool](https://mod.io/games/apps)
 
 Here is a brief list of the main things to know about our API, as explained in more detail in the following sections.
 
@@ -421,6 +421,8 @@ Sort by a column, and ascending or descending order.
 
 - `?_sort=-id` - Sort `id` in descending order
 
+__NOTE:__ All endpoints are automatically sorted by the `id` column in ascending order unless specifically mentioned otherwise. 
+
 ### _limit (Limit)
 
 ```
@@ -467,7 +469,7 @@ Where the string supplied matches the preceding column value. This is the equiva
 
 Where the string supplied does not match the preceding column value. This is the equivalent to SQL's `NOT LIKE`.
 
-- `?name-not-lk=dungeon` - Get all results where _texture_ does not occur in the `name` column.
+- `?name-not-lk=dungeon` - Get all results where only _dungeon_ doesn't occur in the `name` column.
 
 ### -lk & -not-lk Wildcards
 

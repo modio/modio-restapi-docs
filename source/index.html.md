@@ -40,7 +40,7 @@ Option | Usage | Suited for | Docs
 ---------- | ---------- | ---------- | ---------
 __API__ | For connecting directly to the mod.io REST API | Web apps that need a JSON REST API, or game developers that like a challenge and want control over their implementation. | 
 __SDK__ | Drop our [open source C++ SDK](https://github.com/DBolical/modioSDK) into your game to call mod.io functionality. | Developers that want a SDK that abstracts the uploading, downloading and unzip flows behind easy to use function calls. | [Here](https://sdk.mod.io/)
-__Tools/Plugins__ | Use tools and plugins created by the community to make implementation in various engines easy. | Game developers that want a pre-built modding solution for their engine of choice. | [Available per tool](http://10.1.5.7:4567/#)
+__Tools/Plugins__ | Use tools and plugins created by the community to make implementation in various engines easy. | Game developers that want a pre-built modding solution for their engine of choice. | [Available per tool](https://mod.io/games/apps)
 
 Here is a brief list of the main things to know about our API, as explained in more detail in the following sections.
 
@@ -437,6 +437,8 @@ Sort by a column, and ascending or descending order.
 
 - `?_sort=-id` - Sort `id` in descending order
 
+__NOTE:__ All endpoints are automatically sorted by the `id` column in ascending order unless specifically mentioned otherwise. 
+
 ### _limit (Limit)
 
 ```
@@ -483,7 +485,7 @@ v1/games?name-not-lk=dungeon
 
 Where the string supplied does not match the preceding column value. This is the equivalent to SQL's `NOT LIKE`.
 
-- `?name-not-lk=dungeon` - Get all results where _texture_ does not occur in the `name` column.
+- `?name-not-lk=dungeon` - Get all results where only _dungeon_ doesn't occur in the `name` column.
 
 ### -lk & -not-lk Wildcards
 
@@ -719,7 +721,7 @@ Browse Games on mod.io. Successful request will return an array of [Game Objects
      Filter|Type|Description
      ---|---|---
      id|integer(int32)|Unique id of the game.
-     member|integer(int32)|Unique id of the member who has ownership of the game.
+     submitted_by|integer(int32)|Unique id of the user who has ownership of the game.
      datereg|integer(int32)|Unix timestamp of date registered.
      dateup|integer(int32)|Unix timestamp of date updated.
      presentation|integer(int32)|Choose which presentation style you want to use for your game on the mod.io website <br><br>*Field options*<br>__0__ =  Grid View: Displays mods in a grid (visual but less informative, default setting) <br>__1__ = Table View: Displays mods in a table (easier to browse)
@@ -746,10 +748,11 @@ Browse Games on mod.io. Successful request will return an array of [Game Objects
   "data": [
     {
       "id": 2,
-      "member": {
+      "submitted_by": {
         "id": 1,
         "nameid": "xant",
         "username": "XanT",
+        "online": 1509922961,
         "avatar": {
           "filename": "masterchief.jpg",
           "full": "https://media.mod.io/images/members/1/1/1/masterchief.jpg"
@@ -934,10 +937,11 @@ View a single game on mod.io. Successful request will return a single [Game Obje
 ```json
 {
   "id": 2,
-  "member": {
+  "submitted_by": {
     "id": 1,
     "nameid": "xant",
     "username": "XanT",
+    "online": 1509922961,
     "avatar": {
       "filename": "masterchief.jpg",
       "full": "https://media.mod.io/images/members/1/1/1/masterchief.jpg"
@@ -1404,12 +1408,12 @@ System.out.println(response.toString());
 ```
 `GET /games/{game-id}/activity`
 
-View activity for a game, showing changes made to the resource. Successful request will return an array of [Game activity objects](https://docs.mod.io/#browse-game-activity-2). To make your requests as specific to your needs as possible it's highly recommended reading over our [filtering documentation](https://docs.mod.io/#filtering) if it will help you with consuming this endpoint.
+View activity for a game, showing changes made to the resource. Successful request will return an array of [Game activity objects](https://docs.mod.io/#browse-game-activity-2). To make your requests as specific to your needs as possible it's highly recommended reading over our [filtering documentation](https://docs.mod.io/#filtering) if it will help you with consuming this endpoint. This endpoint by default sorts by `id` in descending order.
      
      Filter|Type|Description
      ---|---|---
      id|integer(int32)|Unique id of the activity object.
-     member|integer(int32)|Unique id of member who performed the action.
+     user|integer(int32)|Unique id of the user who performed the action.
      dateup|integer(int32)|Unix timestamp of date updated.
      event|string|Type of change that occurred. Note that in the event of GAME_DELETE, this endpoint will be inaccessible as the game profile would be closed, however if restored it would show the event in the activity history.<br><br>*Field Options*<br>__GAME_UPDATE__ - Update event<br>__GAME_DELETE__ - Delete event
 
@@ -1421,10 +1425,11 @@ View activity for a game, showing changes made to the resource. Successful reque
   "data": [
     {
       "id": 13,
-      "member": {
+      "user": {
         "id": 1,
         "nameid": "xant",
         "username": "XanT",
+        "online": 1509922961,
         "avatar": {
           "filename": "masterchief.jpg",
           "full": "https://media.mod.io/images/members/1/1/1/masterchief.jpg"
@@ -1566,8 +1571,8 @@ View all members that are part of a game team. Successful request will return an
      Filter|Type|Required|Description
      ---|---|---|---|
      id|integer(int32)|Unique id of the access record.
-     member|integer(int32)|Unique id of the member.
-     username|string|Username of the member.
+     user|integer(int32)|Unique id of the user.
+     username|string|Username of the user.
      level|integer|The level of permission the user has.<br><br>*Fields Options:*<br>__1__ = Moderator (can moderate content submitted)<br>__4__ = Financials (read only access to the control panel to view financial reports)<br>__8__ = Administrator (full access, including editing the profile and team)
      date|integer|Unix timestamp of the date the user was added to the team.
      position|string|Custom title given to the user.
@@ -1584,10 +1589,11 @@ View all members that are part of a game team. Successful request will return an
   "data": [
     {
       "id": 457,
-      "member": {
+      "user": {
         "id": 1,
         "nameid": "xant",
         "username": "XanT",
+        "online": 1509922961,
         "avatar": {
           "filename": "masterchief.jpg",
           "full": "https://media.mod.io/images/members/1/1/1/masterchief.jpg"
@@ -1732,11 +1738,11 @@ System.out.println(response.toString());
 ```
 `POST /games/{game-id}/team`
 
-Add a member to a game team.
+Add a user to a game team.
      
      Parameter|Type|Required|Description
      ---|---|---|---|
-     member|integer|true|The unique id of the member you are adding to the team.
+     user|integer|true|The unique id of the team you are adding to the team.
      level|integer|true|The level of permissions you want to give to the user.<br><br>*Fields Options:*<br>__1__ = Moderator (can moderate content submitted)<br>__4__ = Financials (read only access to the control panel to view financial reports)<br>__8__ = Administrator (full access, including editing the profile and team)
      position|string|true|The title you wish to apply to the member within your team.
 
@@ -1877,7 +1883,7 @@ System.out.println(response.toString());
 ```
 `PUT /games/{game-id}/team/{access-id}`
 
-Update the details of a member who is currently a part of the specified game team.
+Update the details of a user who is currently a part of the specified game team.
      
      Parameter|Type|Required|Description
      ---|---|---|---|
@@ -2153,7 +2159,7 @@ Browse mods on mod.io. Successful request will return an array of [Mod Objects](
      ---|---|---
      id|integer(int32)|Unique id of the mod.
      game|integer(int32)|Unique id of the parent game.
-     member|integer(int32)|Unique id of the member who has ownership of the game.
+     submitted_by|integer(int32)|Unique id of the user who has ownership of the game.
      datereg|integer(int32)|Unix timestamp of date registered.
      dateup|integer(int32)|Unix timestamp of date updated.
      logo|string|The filename of the logo.
@@ -2177,10 +2183,11 @@ Browse mods on mod.io. Successful request will return an array of [Mod Objects](
     {
       "id": 2,
       "game": 2,
-      "member": {
+      "submitted_by": {
         "id": 1,
         "nameid": "xant",
         "username": "XanT",
+        "online": 1509922961,
         "avatar": {
           "filename": "masterchief.jpg",
           "full": "https://media.mod.io/images/members/1/1/1/masterchief.jpg"
@@ -2209,18 +2216,6 @@ Browse mods on mod.io. Successful request will return an array of [Mod Objects](
       "modfile": {
         "id": 2,
         "mod": 2,
-        "member": {
-          "id": 1,
-          "nameid": "xant",
-          "username": "XanT",
-          "avatar": {
-            "filename": "masterchief.jpg",
-            "full": "https://media.mod.io/images/members/1/1/1/masterchief.jpg"
-          },
-          "timezone": "Australia/Brisbane",
-          "language": "en",
-          "url": "https://mod.io/members/xant"
-        },
         "date": 1499841487,
         "datevirus": 1499841487,
         "virusstatus": 0,
@@ -2248,16 +2243,18 @@ Browse mods on mod.io. Successful request will return an array of [Mod Objects](
           }
         ]
       },
-      "tags": [
-        null
-      ],
       "ratings": {
         "total": 1230,
         "positive": 1047,
         "negative": 183,
         "weighted": 87.38,
         "percentage": 91,
+        "stars": 4,
         "text": "Very Positive"
+      },
+      "tags": {
+        "tag": "Unity",
+        "date": 1499841487
       }
     },
     {
@@ -2395,10 +2392,11 @@ View a single mod on mod.io. Successful request will return a single [Mod Object
 {
   "id": 2,
   "game": 2,
-  "member": {
+  "submitted_by": {
     "id": 1,
     "nameid": "xant",
     "username": "XanT",
+    "online": 1509922961,
     "avatar": {
       "filename": "masterchief.jpg",
       "full": "https://media.mod.io/images/members/1/1/1/masterchief.jpg"
@@ -2427,18 +2425,6 @@ View a single mod on mod.io. Successful request will return a single [Mod Object
   "modfile": {
     "id": 2,
     "mod": 2,
-    "member": {
-      "id": 1,
-      "nameid": "xant",
-      "username": "XanT",
-      "avatar": {
-        "filename": "masterchief.jpg",
-        "full": "https://media.mod.io/images/members/1/1/1/masterchief.jpg"
-      },
-      "timezone": "Australia/Brisbane",
-      "language": "en",
-      "url": "https://mod.io/members/xant"
-    },
     "date": 1499841487,
     "datevirus": 1499841487,
     "virusstatus": 0,
@@ -2466,16 +2452,18 @@ View a single mod on mod.io. Successful request will return a single [Mod Object
       }
     ]
   },
-  "tags": [
-    null
-  ],
   "ratings": {
     "total": 1230,
     "positive": 1047,
     "negative": 183,
     "weighted": 87.38,
     "percentage": 91,
+    "stars": 4,
     "text": "Very Positive"
+  },
+  "tags": {
+    "tag": "Unity",
+    "date": 1499841487
   }
 }
 ```
@@ -2630,10 +2618,11 @@ Publish a mod on mod.io. Successful request will return the newly created [Mod O
 {
   "id": 2,
   "game": 2,
-  "member": {
+  "submitted_by": {
     "id": 1,
     "nameid": "xant",
     "username": "XanT",
+    "online": 1509922961,
     "avatar": {
       "filename": "masterchief.jpg",
       "full": "https://media.mod.io/images/members/1/1/1/masterchief.jpg"
@@ -2662,18 +2651,6 @@ Publish a mod on mod.io. Successful request will return the newly created [Mod O
   "modfile": {
     "id": 2,
     "mod": 2,
-    "member": {
-      "id": 1,
-      "nameid": "xant",
-      "username": "XanT",
-      "avatar": {
-        "filename": "masterchief.jpg",
-        "full": "https://media.mod.io/images/members/1/1/1/masterchief.jpg"
-      },
-      "timezone": "Australia/Brisbane",
-      "language": "en",
-      "url": "https://mod.io/members/xant"
-    },
     "date": 1499841487,
     "datevirus": 1499841487,
     "virusstatus": 0,
@@ -2701,16 +2678,18 @@ Publish a mod on mod.io. Successful request will return the newly created [Mod O
       }
     ]
   },
-  "tags": [
-    null
-  ],
   "ratings": {
     "total": 1230,
     "positive": 1047,
     "negative": 183,
     "weighted": 87.38,
     "percentage": 91,
+    "stars": 4,
     "text": "Very Positive"
+  },
+  "tags": {
+    "tag": "Unity",
+    "date": 1499841487
   }
 }
 ```
@@ -3418,12 +3397,12 @@ System.out.println(response.toString());
 ```
 `GET /games/{game-id}/mods/{mod-id}/activity`
 
-View activity for a mod, showing changes made to the resource. Successful request will return an array of [Mod Activity Objects](https://docs.mod.io/#browse-mod-activity-2). To make your requests as specific to your needs as possible it's highly recommended reading over our [filtering documentation](https://docs.mod.io/#filtering) if it will help you with consuming this endpoint.
+View activity for a mod, showing changes made to the resource. Successful request will return an array of [Mod Activity Objects](https://docs.mod.io/#browse-mod-activity-2). To make your requests as specific to your needs as possible it's highly recommended reading over our [filtering documentation](https://docs.mod.io/#filtering) if it will help you with consuming this endpoint. This endpoint by default sorts by `id` in descending order.
      
      Filter|Type|Description
      ---|---|---
      id|integer(int32)|Unique id of the activity object.
-     member|integer(int32)|Unique id of the member who performed the action.
+     user|integer(int32)|Unique id of the member who performed the action.
      dateup|integer(int32)|Unix timestamp of date updated.
      event|string|Type of change that occurred. Note that in the event of MOD_DELETE, this endpoint will be inaccessible as the mod profile would be closed, however if restored it would show the event in the activity history.<br><br>*Field Options*<br>__MOD_UPDATE__ - Update event<br>__MOD_DELETE__ - Delete event
 
@@ -3435,10 +3414,11 @@ View activity for a mod, showing changes made to the resource. Successful reques
   "data": [
     {
       "id": 13,
-      "member": {
+      "user": {
         "id": 1,
         "nameid": "xant",
         "username": "XanT",
+        "online": 1509922961,
         "avatar": {
           "filename": "masterchief.jpg",
           "full": "https://media.mod.io/images/members/1/1/1/masterchief.jpg"
@@ -3581,7 +3561,6 @@ Browse files on mod.io that are published for the corresponding mod. Successful 
      ---|---|---
      id|integer(int32)|Unique id of the file.
      mod|integer(int32)|Unique id of the mod.
-     member|integer(int32)|Unique id of the member who published the file.
      date|integer(int32)|Unix timestamp of date added.
      datevirus|integer(int32)|Unix timestamp of date it was virus scanned.
      virusstatus|integer(int32)|Current file scan status of the file. For newly added files that have yet to be scanned this field could change frequently until a scan is complete.<br>*Field Options*<br><br>__0__ = Not scanned<br>__1__ = Scan complete<br>__2__ = In progress<br>__3__ = Too large to scan<br>__4__ = File not found<br>__5__ = Error Scanning
@@ -3603,18 +3582,6 @@ Browse files on mod.io that are published for the corresponding mod. Successful 
     {
       "id": 2,
       "mod": 2,
-      "member": {
-        "id": 1,
-        "nameid": "xant",
-        "username": "XanT",
-        "avatar": {
-          "filename": "masterchief.jpg",
-          "full": "https://media.mod.io/images/members/1/1/1/masterchief.jpg"
-        },
-        "timezone": "Australia/Brisbane",
-        "language": "en",
-        "url": "https://mod.io/members/xant"
-      },
       "date": 1499841487,
       "datevirus": 1499841487,
       "virusstatus": 0,
@@ -3782,18 +3749,6 @@ Upload a file for the corresponding mod, upon success will return the newly crea
 {
   "id": 2,
   "mod": 2,
-  "member": {
-    "id": 1,
-    "nameid": "xant",
-    "username": "XanT",
-    "avatar": {
-      "filename": "masterchief.jpg",
-      "full": "https://media.mod.io/images/members/1/1/1/masterchief.jpg"
-    },
-    "timezone": "Australia/Brisbane",
-    "language": "en",
-    "url": "https://mod.io/members/xant"
-  },
   "date": 1499841487,
   "datevirus": 1499841487,
   "virusstatus": 0,
@@ -3938,18 +3893,6 @@ Find a file on mod.io for the corresponding mod. Successful request will return 
 {
   "id": 2,
   "mod": 2,
-  "member": {
-    "id": 1,
-    "nameid": "xant",
-    "username": "XanT",
-    "avatar": {
-      "filename": "masterchief.jpg",
-      "full": "https://media.mod.io/images/members/1/1/1/masterchief.jpg"
-    },
-    "timezone": "Australia/Brisbane",
-    "language": "en",
-    "url": "https://mod.io/members/xant"
-  },
   "date": 1499841487,
   "datevirus": 1499841487,
   "virusstatus": 0,
@@ -4228,7 +4171,6 @@ Browse all tags for the corresponding mod, successful response will return an ar
      Filter|Type|Description
      ---|---|---
      date|integer(int32)|Unix timestamp of date added.
-     member|integer(int32)|Unique id of the member who added the tag.
      tag|string|String representation of the tag. You can check the eligible tags on the parent game object to determine all possible values for this field.
 
 
@@ -4794,7 +4736,7 @@ Browse all comments for a mod. Successful request will return an array of [Comme
      ---|---|---
      id|integer|Unique id of the comment.
      mod|integer|Unique id of the mod.
-     member|integer|Unique id of the member who published the comment.
+     user|integer|Unique id of the user who published the comment.
      date|integer|Unix timestamp of date added.
      replyid|integer|Id of the parent comment this comment is replying to.
      replypos|string|Levels of nesting in comment chain.
@@ -4811,10 +4753,11 @@ Browse all comments for a mod. Successful request will return an array of [Comme
     {
       "id": 2,
       "mod": 2,
-      "member": {
+      "submitted_by": {
         "id": 1,
         "nameid": "xant",
         "username": "XanT",
+        "online": 1509922961,
         "avatar": {
           "filename": "masterchief.jpg",
           "full": "https://media.mod.io/images/members/1/1/1/masterchief.jpg"
@@ -4965,10 +4908,11 @@ Find a comment by it's unique ID. Successful request will return a single [Comme
 {
   "id": 2,
   "mod": 2,
-  "member": {
+  "submitted_by": {
     "id": 1,
     "nameid": "xant",
     "username": "XanT",
+    "online": 1509922961,
     "avatar": {
       "filename": "masterchief.jpg",
       "full": "https://media.mod.io/images/members/1/1/1/masterchief.jpg"
@@ -5242,8 +5186,7 @@ View all members that are part of a mod team. Successful request will return an 
      Filter|Type|Required|Description
      ---|---|---|---|
      id|integer(int32)|Unique id of the access record.
-     member|integer(int32)|Unique id of the member.
-     username|string|Username of the member.
+     username|string|Username of the user.
      level|integer|The level of permission the user has.<br><br>*Fields Options:*<br>__1__ = Moderator (can moderate content submitted)<br>__4__ = Financials (read only access to the control panel to view financial reports)<br>__8__ = Administrator (full access, including editing the profile and team)
      date|integer|Unix timestamp of the date the user was added to the team.
      position|string|Custom title given to the user.
@@ -5260,10 +5203,11 @@ View all members that are part of a mod team. Successful request will return an 
   "data": [
     {
       "id": 457,
-      "member": {
+      "user": {
         "id": 1,
         "nameid": "xant",
         "username": "XanT",
+        "online": 1509922961,
         "avatar": {
           "filename": "masterchief.jpg",
           "full": "https://media.mod.io/images/members/1/1/1/masterchief.jpg"
@@ -5408,11 +5352,11 @@ System.out.println(response.toString());
 ```
 `POST /games/{game-id}/mods/{mod-id}/team`
 
-Add a member to a mod team.
+Add a user to a mod team.
      
      Parameter|Type|Required|Description
      ---|---|---|---|
-     member|integer|true|The unique id of the member you are adding to the team.
+     user|integer|true|The unique id of the team you are adding to the team.
      level|integer|true|The level of permissions you want to give to the user.<br><br>*Fields Options:*<br>__1__ = Moderator (can moderate comments and content attached)<br>__4__ = Creator (can upload builds and edit all settings except supply and existing team members)<br>__8__ = Administrator (full access, including editing the supply and team)
      position|string|true|The title you wish to apply to the member within your team.
 
@@ -5717,6 +5661,166 @@ oauth2 ( Scopes: write )
 </aside>
 
 
+## Browse Mod Updates By Game
+
+> Code samples
+
+```shell
+# You can also use wget
+curl -X GET https://api.mod.io/v1/games/{game-id}/mod/updates \
+  -H 'Authorization: Bearer YourAccessToken' \
+  -H 'Accept: application/json'
+
+```
+
+```http
+GET https://api.mod.io/v1/games/{game-id}/mod/updates HTTP/1.1
+Host: api.mod.io
+
+Accept: application/json
+Authorization: Bearer YourAccessToken
+
+
+```
+
+```javascript
+var headers = {
+  'Authorization':'Bearer YourAccessToken',
+  'Accept':'application/json'
+
+};
+
+$.ajax({
+  url: 'https://api.mod.io/v1/games/{game-id}/mod/updates',
+  method: 'get',
+
+  headers: headers,
+  success: function(data) {
+    console.log(JSON.stringify(data));
+  }
+})
+```
+
+```javascript--nodejs
+const request = require('node-fetch');
+
+const headers = {
+  'Authorization':'Bearer YourAccessToken',
+  'Accept':'application/json'
+
+};
+
+fetch('https://api.mod.io/v1/games/{game-id}/mod/updates',
+{
+  method: 'GET',
+
+  headers: headers
+})
+.then(function(res) {
+    return res.json();
+}).then(function(body) {
+    console.log(body);
+});
+```
+
+```ruby
+require 'rest-client'
+require 'json'
+
+headers = {
+  'Authorization' => 'Bearer YourAccessToken',
+  'Accept' => 'application/json'
+}
+
+result = RestClient.get 'https://api.mod.io/v1/games/{game-id}/mod/updates',
+  params: {
+  }, headers: headers
+
+
+p JSON.parse(result)
+```
+
+```python
+import requests
+headers = {
+  'Authorization': 'Bearer YourAccessToken',
+  'Accept': 'application/json'
+}
+
+r = requests.get('https://api.mod.io/v1/games/{game-id}/mod/updates', params={
+
+}, headers = headers)
+
+print r.json()
+```
+
+```java
+URL obj = new URL("https://api.mod.io/v1/games/{game-id}/mod/updates");
+HttpURLConnection con = (HttpURLConnection) obj.openConnection();
+con.setRequestMethod("GET");
+int responseCode = con.getResponseCode();
+BufferedReader in = new BufferedReader(
+    new InputStreamReader(con.getInputStream()));
+String inputLine;
+StringBuffer response = new StringBuffer();
+while ((inputLine = in.readLine()) != null) {
+    response.append(inputLine);
+}
+in.close();
+System.out.println(response.toString());
+```
+`GET /games/{game-id}/mod/updates`
+
+Get all mod updates (new builds) that occurred between two timestamps for the corresponding game. This endpoint is designed for intermittent polling by game clients to determine if notifications need to be pushed to the authenticated user. If you are consuming querying potential build updates from within a game, it is highly recommend you use this endpoint. Successful request will return an array of [Modfile Objects](https://docs.mod.io/#browse-mod-files-2) that were published between the two supplied timestamps.
+     
+     Parameter|Type|Required|Description
+     ---|---|---|---|
+     start|integer(int32)|true|Unix timestamp of beginning of update check.
+     end|integer(int32)|true|Unix timestamp of end of update check.
+
+
+> Example responses
+
+```json
+{
+  "data": [
+    {
+      "id": 2,
+      "mod": 2,
+      "date": 1499841487,
+      "datevirus": 1499841487,
+      "virusstatus": 0,
+      "viruspositive": 0,
+      "filesize": 15181,
+      "filehash": "2d4a0e2d7273db6b0a94b0740a88ad0d",
+      "filename": "rogue-knight-v1.zip",
+      "version": "1.3",
+      "virustotal": "No threats found.",
+      "changelog": "VERSION 1.3 -- Changes -- Fixed critical castle floor bug.",
+      "download": "https://mod.io/mods/file/2/c489a0354111a4d76640d47f0cdcb294"
+    },
+    {
+        ...
+    }
+  ],
+  "cursor_id": 60,
+  "prev_id": 30,
+  "next_id": 160,
+  "result_count": 100
+}
+```
+<h3 id="Browse-Mod-Updates-By-Game-responses">Responses</h3>
+
+Status|Meaning|Description|Response Schema
+---|---|---|---|
+200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)|Request Successful|[Browse_Mod_Files](#schemabrowse_mod_files)
+
+<aside class="warning">
+To perform this operation, you must be authenticated by means of one of the following methods:
+oauth2 ( Scopes: write )
+</aside>
+
+
 # Users
 
 ## Browse Users
@@ -5829,7 +5933,7 @@ Browse users registered to mod.io. Successful request will return an __array of 
      ---|---|---
      id|integer(int32)|Unique id of the user.
      nameid|string|SEO-friendly representation of the username. This is the same field that forms the URL link to their profile.
-     username|string|Username of the member.
+     username|string|Username of the user.
      timezone|string|Timezone of the user, format is country/city.
      language|string|2-character representation of language.
 
@@ -5843,6 +5947,7 @@ Browse users registered to mod.io. Successful request will return an __array of 
       "id": 1,
       "nameid": "xant",
       "username": "XanT",
+      "online": 1509922961,
       "avatar": {
         "filename": "masterchief.jpg",
         "full": "https://media.mod.io/images/members/1/1/1/masterchief.jpg"
@@ -5977,7 +6082,7 @@ System.out.println(response.toString());
 ```
 `GET /users/{user-id}`
 
-Find a user by their unique member id. Successful request will return a single __member object__.
+Find a user by their unique member id. Successful request will return a single [User Object](https://docs.mod.io/#user-object).
 
 
 > Example responses
@@ -5987,6 +6092,7 @@ Find a user by their unique member id. Successful request will return a single _
   "id": 1,
   "nameid": "xant",
   "username": "XanT",
+  "online": 1509922961,
   "avatar": {
     "filename": "masterchief.jpg",
     "full": "https://media.mod.io/images/members/1/1/1/masterchief.jpg"
@@ -6000,7 +6106,7 @@ Find a user by their unique member id. Successful request will return a single _
 
 Status|Meaning|Description|Response Schema
 ---|---|---|---|
-200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)|OK|[Member_Object](#schemamember_object)
+200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)|OK|[User_Object](#schemauser_object)
 
 <aside class="warning">
 To perform this operation, you must be authenticated by means of one of the following methods:
@@ -6128,9 +6234,9 @@ Determine if a specified user has ownership rights to a resource.
      
      Parameter|Type|Required|Description
      ---|---|---|---|
-     resource|string|true|The name of the resource type you are checking against a member - __must__ be one of the following values.<br><br>*Field options*<br>__games__<br>__mods__<br>__files__<br>__tags__<br>__users__.
+     resource|string|true|The name of the resource type you are checking against a user - __must__ be one of the following values.<br><br>*Field options*<br>__games__<br>__mods__<br>__files__<br>__tags__<br>__users__.
      id|integer(int32)|true|Unique Id of the resource to check access rights for.
-     member|integer(int32)|true|Unique Id of the member you are determining has access to the resource id.
+     user|integer(int32)|true|Unique Id of the member you are determining has access to the resource id.
 
 
 > Example responses
@@ -6421,10 +6527,11 @@ View all mod.io games that exist for the *authenticated user*.
   "data": [
     {
       "id": 2,
-      "member": {
+      "submitted_by": {
         "id": 1,
         "nameid": "xant",
         "username": "XanT",
+        "online": 1509922961,
         "avatar": {
           "filename": "masterchief.jpg",
           "full": "https://media.mod.io/images/members/1/1/1/masterchief.jpg"
@@ -6618,10 +6725,11 @@ View all mod.io mods that exist for the *authenticated user*.
     {
       "id": 2,
       "game": 2,
-      "member": {
+      "submitted_by": {
         "id": 1,
         "nameid": "xant",
         "username": "XanT",
+        "online": 1509922961,
         "avatar": {
           "filename": "masterchief.jpg",
           "full": "https://media.mod.io/images/members/1/1/1/masterchief.jpg"
@@ -6650,18 +6758,6 @@ View all mod.io mods that exist for the *authenticated user*.
       "modfile": {
         "id": 2,
         "mod": 2,
-        "member": {
-          "id": 1,
-          "nameid": "xant",
-          "username": "XanT",
-          "avatar": {
-            "filename": "masterchief.jpg",
-            "full": "https://media.mod.io/images/members/1/1/1/masterchief.jpg"
-          },
-          "timezone": "Australia/Brisbane",
-          "language": "en",
-          "url": "https://mod.io/members/xant"
-        },
         "date": 1499841487,
         "datevirus": 1499841487,
         "virusstatus": 0,
@@ -6689,16 +6785,18 @@ View all mod.io mods that exist for the *authenticated user*.
           }
         ]
       },
-      "tags": [
-        null
-      ],
       "ratings": {
         "total": 1230,
         "positive": 1047,
         "negative": 183,
         "weighted": 87.38,
         "percentage": 91,
+        "stars": 4,
         "text": "Very Positive"
+      },
+      "tags": {
+        "tag": "Unity",
+        "date": 1499841487
       }
     },
     {
@@ -6844,18 +6942,6 @@ View all mod.io files that exist for the *authenticated user*.
     {
       "id": 2,
       "mod": 2,
-      "member": {
-        "id": 1,
-        "nameid": "xant",
-        "username": "XanT",
-        "avatar": {
-          "filename": "masterchief.jpg",
-          "full": "https://media.mod.io/images/members/1/1/1/masterchief.jpg"
-        },
-        "timezone": "Australia/Brisbane",
-        "language": "en",
-        "url": "https://mod.io/members/xant"
-      },
       "date": 1499841487,
       "datevirus": 1499841487,
       "virusstatus": 0,
@@ -7013,10 +7099,11 @@ Get all mod's the *authenticated user* is subscribed to. Successful request will
     {
       "id": 2,
       "game": 2,
-      "member": {
+      "submitted_by": {
         "id": 1,
         "nameid": "xant",
         "username": "XanT",
+        "online": 1509922961,
         "avatar": {
           "filename": "masterchief.jpg",
           "full": "https://media.mod.io/images/members/1/1/1/masterchief.jpg"
@@ -7045,18 +7132,6 @@ Get all mod's the *authenticated user* is subscribed to. Successful request will
       "modfile": {
         "id": 2,
         "mod": 2,
-        "member": {
-          "id": 1,
-          "nameid": "xant",
-          "username": "XanT",
-          "avatar": {
-            "filename": "masterchief.jpg",
-            "full": "https://media.mod.io/images/members/1/1/1/masterchief.jpg"
-          },
-          "timezone": "Australia/Brisbane",
-          "language": "en",
-          "url": "https://mod.io/members/xant"
-        },
         "date": 1499841487,
         "datevirus": 1499841487,
         "virusstatus": 0,
@@ -7084,16 +7159,18 @@ Get all mod's the *authenticated user* is subscribed to. Successful request will
           }
         ]
       },
-      "tags": [
-        null
-      ],
       "ratings": {
         "total": 1230,
         "positive": 1047,
         "negative": 183,
         "weighted": 87.38,
         "percentage": 91,
+        "stars": 4,
         "text": "Very Positive"
+      },
+      "tags": {
+        "tag": "Unity",
+        "date": 1499841487
       }
     },
     {
@@ -7247,18 +7324,6 @@ __OAuth 2 Authentication Required__. Get all subscribed mod updates (new builds)
     {
       "id": 2,
       "mod": 2,
-      "member": {
-        "id": 1,
-        "nameid": "xant",
-        "username": "XanT",
-        "avatar": {
-          "filename": "masterchief.jpg",
-          "full": "https://media.mod.io/images/members/1/1/1/masterchief.jpg"
-        },
-        "timezone": "Australia/Brisbane",
-        "language": "en",
-        "url": "https://mod.io/members/xant"
-      },
       "date": 1499841487,
       "datevirus": 1499841487,
       "virusstatus": 0,
@@ -7282,181 +7347,6 @@ __OAuth 2 Authentication Required__. Get all subscribed mod updates (new builds)
 }
 ```
 <h3 id="Get-Subscription-Updates-responses">Responses</h3>
-
-Status|Meaning|Description|Response Schema
----|---|---|---|
-200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)|Request Successful|[Browse_Mod_Files](#schemabrowse_mod_files)
-
-<aside class="warning">
-To perform this operation, you must be authenticated by means of one of the following methods:
-oauth2 ( Scopes: write )
-</aside>
-
-
-## Get Subscription Updates By Game
-
-> Code samples
-
-```shell
-# You can also use wget
-curl -X GET https://api.mod.io/v1/games/{game-id}/mod/updates \
-  -H 'Authorization: Bearer YourAccessToken' \
-  -H 'Accept: application/json'
-
-```
-
-```http
-GET https://api.mod.io/v1/games/{game-id}/mod/updates HTTP/1.1
-Host: api.mod.io
-
-Accept: application/json
-Authorization: Bearer YourAccessToken
-
-
-```
-
-```javascript
-var headers = {
-  'Authorization':'Bearer YourAccessToken',
-  'Accept':'application/json'
-
-};
-
-$.ajax({
-  url: 'https://api.mod.io/v1/games/{game-id}/mod/updates',
-  method: 'get',
-
-  headers: headers,
-  success: function(data) {
-    console.log(JSON.stringify(data));
-  }
-})
-```
-
-```javascript--nodejs
-const request = require('node-fetch');
-
-const headers = {
-  'Authorization':'Bearer YourAccessToken',
-  'Accept':'application/json'
-
-};
-
-fetch('https://api.mod.io/v1/games/{game-id}/mod/updates',
-{
-  method: 'GET',
-
-  headers: headers
-})
-.then(function(res) {
-    return res.json();
-}).then(function(body) {
-    console.log(body);
-});
-```
-
-```ruby
-require 'rest-client'
-require 'json'
-
-headers = {
-  'Authorization' => 'Bearer YourAccessToken',
-  'Accept' => 'application/json'
-}
-
-result = RestClient.get 'https://api.mod.io/v1/games/{game-id}/mod/updates',
-  params: {
-  }, headers: headers
-
-
-p JSON.parse(result)
-```
-
-```python
-import requests
-headers = {
-  'Authorization': 'Bearer YourAccessToken',
-  'Accept': 'application/json'
-}
-
-r = requests.get('https://api.mod.io/v1/games/{game-id}/mod/updates', params={
-
-}, headers = headers)
-
-print r.json()
-```
-
-```java
-URL obj = new URL("https://api.mod.io/v1/games/{game-id}/mod/updates");
-HttpURLConnection con = (HttpURLConnection) obj.openConnection();
-con.setRequestMethod("GET");
-int responseCode = con.getResponseCode();
-BufferedReader in = new BufferedReader(
-    new InputStreamReader(con.getInputStream()));
-String inputLine;
-StringBuffer response = new StringBuffer();
-while ((inputLine = in.readLine()) != null) {
-    response.append(inputLine);
-}
-in.close();
-System.out.println(response.toString());
-```
-`GET /games/{game-id}/mod/updates`
-
-*Get all updates that occurred between two timestamps for
-the _authenticated user_ for the corresponding game.*
-
-__OAuth 2 Authentication Required__. Get all subscribed mod updates (new builds) that occurred between two timestamps for the *authenticated user* for the corresponding game. This endpoint is designed for intermittent polling by game clients to determine if notifications need to be pushed to the authenticated user. If you are consuming querying potential build updates from within a game, it is highly recommend you use this endpoint. Successful request will return an array of [Modfile Objects](https://docs.mod.io/#browse-mod-files-2) that were published between the two supplied timestamps.
-     
-     Parameter|Type|Required|Description
-     ---|---|---|---|
-     start|integer(int32)|true|Unix timestamp of beginning of update check.
-     end|integer(int32)|true|Unix timestamp of end of update check.
-
-
-> Example responses
-
-```json
-{
-  "data": [
-    {
-      "id": 2,
-      "mod": 2,
-      "member": {
-        "id": 1,
-        "nameid": "xant",
-        "username": "XanT",
-        "avatar": {
-          "filename": "masterchief.jpg",
-          "full": "https://media.mod.io/images/members/1/1/1/masterchief.jpg"
-        },
-        "timezone": "Australia/Brisbane",
-        "language": "en",
-        "url": "https://mod.io/members/xant"
-      },
-      "date": 1499841487,
-      "datevirus": 1499841487,
-      "virusstatus": 0,
-      "viruspositive": 0,
-      "filesize": 15181,
-      "filehash": "2d4a0e2d7273db6b0a94b0740a88ad0d",
-      "filename": "rogue-knight-v1.zip",
-      "version": "1.3",
-      "virustotal": "No threats found.",
-      "changelog": "VERSION 1.3 -- Changes -- Fixed critical castle floor bug.",
-      "download": "https://mod.io/mods/file/2/c489a0354111a4d76640d47f0cdcb294"
-    },
-    {
-        ...
-    }
-  ],
-  "cursor_id": 60,
-  "prev_id": 30,
-  "next_id": 160,
-  "result_count": 100
-}
-```
-<h3 id="Get-Subscription-Updates-By-Game-responses">Responses</h3>
 
 Status|Meaning|Description|Response Schema
 ---|---|---|---|
@@ -8010,10 +7900,11 @@ full|string|Full URL to the image.
   "data": [
     {
       "id": 2,
-      "member": {
+      "submitted_by": {
         "id": 1,
         "nameid": "xant",
         "username": "XanT",
+        "online": 1509922961,
         "avatar": {
           "filename": "masterchief.jpg",
           "full": "https://media.mod.io/images/members/1/1/1/masterchief.jpg"
@@ -8086,10 +7977,11 @@ next_id|integer(int32)|The next position to move the _cursor to, based on the cu
 result_count|integer(int32)|The amount of results returned in the current request.
 data|[Game_Object](#schemagame_object)[]|Array containing game objects
 » id|integer(int32)|Unique game id.
-» member|[Member_Object](#schemamember_object)|Contains member data.
+» submitted_by|[User_Object](#schemauser_object)|Contains member data.
 »» id|integer(int32)|Unique id of the user.
 »» nameid|string|Unique nameid of user which forms end of their profile URL.
 »» username|string|Non-unique username of the user.
+»» online|integer(int32)|Unix timestamp on when the user was last online.
 »» avatar|[Avatar_Object](#schemaavatar_object)|Contains avatar data.
 »»» filename|string|Image filename, including file extension.
 »»» full|string|Full URL to the image.
@@ -8142,10 +8034,11 @@ data|[Game_Object](#schemagame_object)[]|Array containing game objects
   "data": [
     {
       "id": 13,
-      "member": {
+      "user": {
         "id": 1,
         "nameid": "xant",
         "username": "XanT",
+        "online": 1509922961,
         "avatar": {
           "filename": "masterchief.jpg",
           "full": "https://media.mod.io/images/members/1/1/1/masterchief.jpg"
@@ -8172,12 +8065,13 @@ data|[Game_Object](#schemagame_object)[]|Array containing game objects
 
 Name|Type|Description
 ---|---|---|---|
-data|[Game_Activity_Object](#schemagame_activity_object)[]|Response array of items
+data|[Game_Activity_Object](#schemagame_activity_object)[]|Response array of items.
 » id|integer(int32)|Unique id of activity record.
-» member|[Member_Object](#schemamember_object)|Contains member data.
+» user|[User_Object](#schemauser_object)|Contains member data.
 »» id|integer(int32)|Unique id of the user.
 »» nameid|string|Unique nameid of user which forms end of their profile URL.
 »» username|string|Non-unique username of the user.
+»» online|integer(int32)|Unix timestamp on when the user was last online.
 »» avatar|[Avatar_Object](#schemaavatar_object)|Contains avatar data.
 »»» filename|string|Image filename, including file extension.
 »»» full|string|Full URL to the image.
@@ -8204,10 +8098,11 @@ data|[Game_Activity_Object](#schemagame_activity_object)[]|Response array of ite
     {
       "id": 2,
       "game": 2,
-      "member": {
+      "submitted_by": {
         "id": 1,
         "nameid": "xant",
         "username": "XanT",
+        "online": 1509922961,
         "avatar": {
           "filename": "masterchief.jpg",
           "full": "https://media.mod.io/images/members/1/1/1/masterchief.jpg"
@@ -8236,18 +8131,6 @@ data|[Game_Activity_Object](#schemagame_activity_object)[]|Response array of ite
       "modfile": {
         "id": 2,
         "mod": 2,
-        "member": {
-          "id": 1,
-          "nameid": "xant",
-          "username": "XanT",
-          "avatar": {
-            "filename": "masterchief.jpg",
-            "full": "https://media.mod.io/images/members/1/1/1/masterchief.jpg"
-          },
-          "timezone": "Australia/Brisbane",
-          "language": "en",
-          "url": "https://mod.io/members/xant"
-        },
         "date": 1499841487,
         "datevirus": 1499841487,
         "virusstatus": 0,
@@ -8275,16 +8158,18 @@ data|[Game_Activity_Object](#schemagame_activity_object)[]|Response array of ite
           }
         ]
       },
-      "tags": [
-        null
-      ],
       "ratings": {
         "total": 1230,
         "positive": 1047,
         "negative": 183,
         "weighted": 87.38,
         "percentage": 91,
+        "stars": 4,
         "text": "Very Positive"
+      },
+      "tags": {
+        "tag": "Unity",
+        "date": 1499841487
       }
     },
     {
@@ -8310,10 +8195,11 @@ result_count|integer(int32)|The amount of results returned in the current reques
 data|[Mod_Object](#schemamod_object)[]|Array containing mod objects
 » id|integer(int32)|Unique mod id.
 » game|integer(int32)|Unique game id.
-» member|[Member_Object](#schemamember_object)|Contains member data.
+» submitted_by|[User_Object](#schemauser_object)|Contains member data.
 »» id|integer(int32)|Unique id of the user.
 »» nameid|string|Unique nameid of user which forms end of their profile URL.
 »» username|string|Non-unique username of the user.
+»» online|integer(int32)|Unix timestamp on when the user was last online.
 »» avatar|[Avatar_Object](#schemaavatar_object)|Contains avatar data.
 »»» filename|string|Image filename, including file extension.
 »»» full|string|Full URL to the image.
@@ -8339,22 +8225,12 @@ data|[Mod_Object](#schemamod_object)[]|Array containing mod objects
 » modfile|[Modfile_Object](#schemamodfile_object)|Contains file data.
 »» id|integer(int32)|Unique file id.
 »» mod|integer(int32)|Unique mod id.
-»» member|[Member_Object](#schemamember_object)|Contains member data.
-»»» id|integer(int32)|Unique id of the user.
-»»» nameid|string|Unique nameid of user which forms end of their profile URL.
-»»» username|string|Non-unique username of the user.
-»»» avatar|[Avatar_Object](#schemaavatar_object)|Contains avatar data.
-»»»» filename|string|Image filename, including file extension.
-»»»» full|string|Full URL to the image.
-»»» timezone|string|The Timezone of the user, shown in {Country}/{City} format.
-»»» language|string|The users language preference, limited to two characters.
-»»» url|string|URL to the user profile.
 »» date|integer(int32)|Unix timestamp of file upload time.
 »» datevirus|integer(int32)|Unix timestamp of file virus scan.
 »» virusstatus|integer(int32)|The status of the virus scan for the file.
 »» viruspositive|integer(int32)|Has the file been positively flagged as a virus?
 »» filesize|integer(int32)|Size of the file in bytes.
-»» filehash|string|MD5 filehash
+»» filehash|string|MD5 filehash.
 »» filename|string|Name of the file including file extension.
 »» version|string|The release version this file represents.
 »» virustotal|string|Text output from virustotal scan.
@@ -8368,13 +8244,16 @@ data|[Mod_Object](#schemamod_object)[]|Array containing mod objects
 »»» thumbnail|string|URL to the thumbnail image.
 »»» filename|string|Image filename, with with extension included.
 » ratings|[Rating_Object](#schemarating_object)|Contains ratings data.
-»» total|integer(int32)|Total Ratings.
-»» positive|integer(int32)|Positive Ratings.
-»» negative|integer(int32)|Negative ratings.
-»» weighted|float|Weighted Rating.
-»» percentage|integer(int32)|Percentage.
+»» total|integer(int32)|Total ratings count.
+»» positive|integer(int32)|Positive ratings count.
+»» negative|integer(int32)|Negative ratings count.
+»» weighted|float|Weighted rating taking into account positive & negative ratings.
+»» percentage|integer(int32)|Rating of the mod as a percentage.
+»» stars|integer(int32)|The amount of stars the mod has, between 0 and 5.
 »» text|string|Text representation of the rating total.
-» tags|[Unknown]|No description
+» tags|[Mod_Tag_Object](#schemamod_tag_object)|Contains Tags data.
+»» tag|string|The contents of the tag.
+»» date|integer(int32)|Unix timestamp of when tag was applied.
 
 
 
@@ -8388,10 +8267,11 @@ data|[Mod_Object](#schemamod_object)[]|Array containing mod objects
   "data": [
     {
       "id": 13,
-      "member": {
+      "user": {
         "id": 1,
         "nameid": "xant",
         "username": "XanT",
+        "online": 1509922961,
         "avatar": {
           "filename": "masterchief.jpg",
           "full": "https://media.mod.io/images/members/1/1/1/masterchief.jpg"
@@ -8418,12 +8298,13 @@ data|[Mod_Object](#schemamod_object)[]|Array containing mod objects
 
 Name|Type|Description
 ---|---|---|---|
-data|[Mod_Activity_Object](#schemamod_activity_object)[]|Response array of items
+data|[Mod_Activity_Object](#schemamod_activity_object)[]|Response array of items.
 » id|integer(int32)|Unique id of activity object.
-» member|[Member_Object](#schemamember_object)|Contains member data.
+» user|[User_Object](#schemauser_object)|Contains member data.
 »» id|integer(int32)|Unique id of the user.
 »» nameid|string|Unique nameid of user which forms end of their profile URL.
 »» username|string|Non-unique username of the user.
+»» online|integer(int32)|Unix timestamp on when the user was last online.
 »» avatar|[Avatar_Object](#schemaavatar_object)|Contains avatar data.
 »»» filename|string|Image filename, including file extension.
 »»» full|string|Full URL to the image.
@@ -8450,18 +8331,6 @@ data|[Mod_Activity_Object](#schemamod_activity_object)[]|Response array of items
     {
       "id": 2,
       "mod": 2,
-      "member": {
-        "id": 1,
-        "nameid": "xant",
-        "username": "XanT",
-        "avatar": {
-          "filename": "masterchief.jpg",
-          "full": "https://media.mod.io/images/members/1/1/1/masterchief.jpg"
-        },
-        "timezone": "Australia/Brisbane",
-        "language": "en",
-        "url": "https://mod.io/members/xant"
-      },
       "date": 1499841487,
       "datevirus": 1499841487,
       "virusstatus": 0,
@@ -8494,25 +8363,15 @@ cursor_id|integer(int32)|The current _cursor value.
 prev_id|integer(int32)|The previous _cursor value as manually inserted by you, null by default.
 next_id|integer(int32)|The next position to move the _cursor to, based on the current request.
 result_count|integer(int32)|The amount of results returned in the current request.
-data|[Modfile_Object](#schemamodfile_object)[]|Response array of items
+data|[Modfile_Object](#schemamodfile_object)[]|Response array of items.
 » id|integer(int32)|Unique file id.
 » mod|integer(int32)|Unique mod id.
-» member|[Member_Object](#schemamember_object)|Contains member data.
-»» id|integer(int32)|Unique id of the user.
-»» nameid|string|Unique nameid of user which forms end of their profile URL.
-»» username|string|Non-unique username of the user.
-»» avatar|[Avatar_Object](#schemaavatar_object)|Contains avatar data.
-»»» filename|string|Image filename, including file extension.
-»»» full|string|Full URL to the image.
-»» timezone|string|The Timezone of the user, shown in {Country}/{City} format.
-»» language|string|The users language preference, limited to two characters.
-»» url|string|URL to the user profile.
 » date|integer(int32)|Unix timestamp of file upload time.
 » datevirus|integer(int32)|Unix timestamp of file virus scan.
 » virusstatus|integer(int32)|The status of the virus scan for the file.
 » viruspositive|integer(int32)|Has the file been positively flagged as a virus?
 » filesize|integer(int32)|Size of the file in bytes.
-» filehash|string|MD5 filehash
+» filehash|string|MD5 filehash.
 » filename|string|Name of the file including file extension.
 » version|string|The release version this file represents.
 » virustotal|string|Text output from virustotal scan.
@@ -8559,10 +8418,11 @@ data|[Mod_Tag_Object](#schemamod_tag_object)[]|No description
     {
       "id": 2,
       "mod": 2,
-      "member": {
+      "submitted_by": {
         "id": 1,
         "nameid": "xant",
         "username": "XanT",
+        "online": 1509922961,
         "avatar": {
           "filename": "masterchief.jpg",
           "full": "https://media.mod.io/images/members/1/1/1/masterchief.jpg"
@@ -8601,10 +8461,11 @@ result_count|integer(int32)|The amount of results returned in the current reques
 data|[Comment_Object](#schemacomment_object)[]|Array containing comment objects
 » id|integer(int32)|Unique id of the comment.
 » mod|integer(int32)|Unique id of the parent mod.
-» member|[Member_Object](#schemamember_object)|Contains member data.
+» submitted_by|[User_Object](#schemauser_object)|Contains member data.
 »» id|integer(int32)|Unique id of the user.
 »» nameid|string|Unique nameid of user which forms end of their profile URL.
 »» username|string|Non-unique username of the user.
+»» online|integer(int32)|Unix timestamp on when the user was last online.
 »» avatar|[Avatar_Object](#schemaavatar_object)|Contains avatar data.
 »»» filename|string|Image filename, including file extension.
 »»» full|string|Full URL to the image.
@@ -8634,10 +8495,11 @@ data|[Comment_Object](#schemacomment_object)[]|Array containing comment objects
   "data": [
     {
       "id": 457,
-      "member": {
+      "user": {
         "id": 1,
         "nameid": "xant",
         "username": "XanT",
+        "online": 1509922961,
         "avatar": {
           "filename": "masterchief.jpg",
           "full": "https://media.mod.io/images/members/1/1/1/masterchief.jpg"
@@ -8666,10 +8528,11 @@ next_id|integer(int32)|The next position to move the _cursor to, based on the cu
 result_count|integer(int32)|The amount of results returned in the current request.
 data|[Access_Object](#schemaaccess_object)[]|No description
 » id|integer(int32)|Unique access id.
-» member|[Member_Object](#schemamember_object)|Contains member data.
+» user|[User_Object](#schemauser_object)|Contains member data.
 »» id|integer(int32)|Unique id of the user.
 »» nameid|string|Unique nameid of user which forms end of their profile URL.
 »» username|string|Non-unique username of the user.
+»» online|integer(int32)|Unix timestamp on when the user was last online.
 »» avatar|[Avatar_Object](#schemaavatar_object)|Contains avatar data.
 »»» filename|string|Image filename, including file extension.
 »»» full|string|Full URL to the image.
@@ -8695,6 +8558,7 @@ data|[Access_Object](#schemaaccess_object)[]|No description
       "id": 1,
       "nameid": "xant",
       "username": "XanT",
+      "online": 1509922961,
       "avatar": {
         "filename": "masterchief.jpg",
         "full": "https://media.mod.io/images/members/1/1/1/masterchief.jpg"
@@ -8723,10 +8587,11 @@ cursor_id|integer(int32)|The current _cursor value.
 prev_id|integer(int32)|The previous _cursor value as manually inserted by you, null by default.
 next_id|integer(int32)|The next position to move the _cursor to, based on the current request.
 result_count|integer(int32)|The amount of results returned in the current request.
-data|[Member_Object](#schemamember_object)[]|Response array of items
+data|[User_Object](#schemauser_object)[]|Response array of items.
 » id|integer(int32)|Unique id of the user.
 » nameid|string|Unique nameid of user which forms end of their profile URL.
 » username|string|Non-unique username of the user.
+» online|integer(int32)|Unix timestamp on when the user was last online.
 » avatar|[Avatar_Object](#schemaavatar_object)|Contains avatar data.
 »» filename|string|Image filename, including file extension.
 »» full|string|Full URL to the image.
@@ -8779,10 +8644,11 @@ data|[Update_Object](#schemaupdate_object)[]|Get all updates that occurred betwe
 ```json
 {
   "id": 457,
-  "member": {
+  "user": {
     "id": 1,
     "nameid": "xant",
     "username": "XanT",
+    "online": 1509922961,
     "avatar": {
       "filename": "masterchief.jpg",
       "full": "https://media.mod.io/images/members/1/1/1/masterchief.jpg"
@@ -8804,10 +8670,11 @@ data|[Update_Object](#schemaupdate_object)[]|Get all updates that occurred betwe
 Name|Type|Description
 ---|---|---|---|
 id|integer(int32)|Unique access id.
-member|[Member_Object](#schemamember_object)|Contains member data.
+user|[User_Object](#schemauser_object)|Contains member data.
 » id|integer(int32)|Unique id of the user.
 » nameid|string|Unique nameid of user which forms end of their profile URL.
 » username|string|Non-unique username of the user.
+» online|integer(int32)|Unix timestamp on when the user was last online.
 » avatar|[Avatar_Object](#schemaavatar_object)|Contains avatar data.
 »» filename|string|Image filename, including file extension.
 »» full|string|Full URL to the image.
@@ -8829,10 +8696,11 @@ position|string|Custom title, has no effect on any access rights.
 ```json
 {
   "id": 13,
-  "member": {
+  "user": {
     "id": 1,
     "nameid": "xant",
     "username": "XanT",
+    "online": 1509922961,
     "avatar": {
       "filename": "masterchief.jpg",
       "full": "https://media.mod.io/images/members/1/1/1/masterchief.jpg"
@@ -8858,10 +8726,11 @@ position|string|Custom title, has no effect on any access rights.
 Name|Type|Description
 ---|---|---|---|
 id|integer(int32)|Unique id of activity record.
-member|[Member_Object](#schemamember_object)|Contains member data.
+user|[User_Object](#schemauser_object)|Contains member data.
 » id|integer(int32)|Unique id of the user.
 » nameid|string|Unique nameid of user which forms end of their profile URL.
 » username|string|Non-unique username of the user.
+» online|integer(int32)|Unix timestamp on when the user was last online.
 » avatar|[Avatar_Object](#schemaavatar_object)|Contains avatar data.
 »» filename|string|Image filename, including file extension.
 »» full|string|Full URL to the image.
@@ -8885,10 +8754,11 @@ changes|object|Contains changes data.
 ```json
 {
   "id": 13,
-  "member": {
+  "user": {
     "id": 1,
     "nameid": "xant",
     "username": "XanT",
+    "online": 1509922961,
     "avatar": {
       "filename": "masterchief.jpg",
       "full": "https://media.mod.io/images/members/1/1/1/masterchief.jpg"
@@ -8914,10 +8784,11 @@ changes|object|Contains changes data.
 Name|Type|Description
 ---|---|---|---|
 id|integer(int32)|Unique id of activity object.
-member|[Member_Object](#schemamember_object)|Contains member data.
+user|[User_Object](#schemauser_object)|Contains member data.
 » id|integer(int32)|Unique id of the user.
 » nameid|string|Unique nameid of user which forms end of their profile URL.
 » username|string|Non-unique username of the user.
+» online|integer(int32)|Unix timestamp on when the user was last online.
 » avatar|[Avatar_Object](#schemaavatar_object)|Contains avatar data.
 »» filename|string|Image filename, including file extension.
 »» full|string|Full URL to the image.
@@ -8942,10 +8813,11 @@ changes|object|No description
 {
   "id": 2,
   "mod": 2,
-  "member": {
+  "submitted_by": {
     "id": 1,
     "nameid": "xant",
     "username": "XanT",
+    "online": 1509922961,
     "avatar": {
       "filename": "masterchief.jpg",
       "full": "https://media.mod.io/images/members/1/1/1/masterchief.jpg"
@@ -8970,10 +8842,11 @@ Name|Type|Description
 ---|---|---|---|
 id|integer(int32)|Unique id of the comment.
 mod|integer(int32)|Unique id of the parent mod.
-member|[Member_Object](#schemamember_object)|Contains member data.
+submitted_by|[User_Object](#schemauser_object)|Contains member data.
 » id|integer(int32)|Unique id of the user.
 » nameid|string|Unique nameid of user which forms end of their profile URL.
 » username|string|Non-unique username of the user.
+» online|integer(int32)|Unix timestamp on when the user was last online.
 » avatar|[Avatar_Object](#schemaavatar_object)|Contains avatar data.
 »» filename|string|Image filename, including file extension.
 »» full|string|Full URL to the image.
@@ -9046,18 +8919,6 @@ price|float|If applicable, the price of the resource displayed in USD.
 {
   "id": 2,
   "mod": 2,
-  "member": {
-    "id": 1,
-    "nameid": "xant",
-    "username": "XanT",
-    "avatar": {
-      "filename": "masterchief.jpg",
-      "full": "https://media.mod.io/images/members/1/1/1/masterchief.jpg"
-    },
-    "timezone": "Australia/Brisbane",
-    "language": "en",
-    "url": "https://mod.io/members/xant"
-  },
   "date": 1499841487,
   "datevirus": 1499841487,
   "virusstatus": 0,
@@ -9079,22 +8940,12 @@ Name|Type|Description
 ---|---|---|---|
 id|integer(int32)|Unique file id.
 mod|integer(int32)|Unique mod id.
-member|[Member_Object](#schemamember_object)|Contains member data.
-» id|integer(int32)|Unique id of the user.
-» nameid|string|Unique nameid of user which forms end of their profile URL.
-» username|string|Non-unique username of the user.
-» avatar|[Avatar_Object](#schemaavatar_object)|Contains avatar data.
-»» filename|string|Image filename, including file extension.
-»» full|string|Full URL to the image.
-» timezone|string|The Timezone of the user, shown in {Country}/{City} format.
-» language|string|The users language preference, limited to two characters.
-» url|string|URL to the user profile.
 date|integer(int32)|Unix timestamp of file upload time.
 datevirus|integer(int32)|Unix timestamp of file virus scan.
 virusstatus|integer(int32)|The status of the virus scan for the file.
 viruspositive|integer(int32)|Has the file been positively flagged as a virus?
 filesize|integer(int32)|Size of the file in bytes.
-filehash|string|MD5 filehash
+filehash|string|MD5 filehash.
 filename|string|Name of the file including file extension.
 version|string|The release version this file represents.
 virustotal|string|Text output from virustotal scan.
@@ -9112,10 +8963,11 @@ download|string|Link to download the file from the mod.io CDN.
 {
   "id": 2,
   "game": 2,
-  "member": {
+  "submitted_by": {
     "id": 1,
     "nameid": "xant",
     "username": "XanT",
+    "online": 1509922961,
     "avatar": {
       "filename": "masterchief.jpg",
       "full": "https://media.mod.io/images/members/1/1/1/masterchief.jpg"
@@ -9144,18 +8996,6 @@ download|string|Link to download the file from the mod.io CDN.
   "modfile": {
     "id": 2,
     "mod": 2,
-    "member": {
-      "id": 1,
-      "nameid": "xant",
-      "username": "XanT",
-      "avatar": {
-        "filename": "masterchief.jpg",
-        "full": "https://media.mod.io/images/members/1/1/1/masterchief.jpg"
-      },
-      "timezone": "Australia/Brisbane",
-      "language": "en",
-      "url": "https://mod.io/members/xant"
-    },
     "date": 1499841487,
     "datevirus": 1499841487,
     "virusstatus": 0,
@@ -9183,16 +9023,18 @@ download|string|Link to download the file from the mod.io CDN.
       }
     ]
   },
-  "tags": [
-    null
-  ],
   "ratings": {
     "total": 1230,
     "positive": 1047,
     "negative": 183,
     "weighted": 87.38,
     "percentage": 91,
+    "stars": 4,
     "text": "Very Positive"
+  },
+  "tags": {
+    "tag": "Unity",
+    "date": 1499841487
   }
 } 
 ```
@@ -9204,10 +9046,11 @@ Name|Type|Description
 ---|---|---|---|
 id|integer(int32)|Unique mod id.
 game|integer(int32)|Unique game id.
-member|[Member_Object](#schemamember_object)|Contains member data.
+submitted_by|[User_Object](#schemauser_object)|Contains member data.
 » id|integer(int32)|Unique id of the user.
 » nameid|string|Unique nameid of user which forms end of their profile URL.
 » username|string|Non-unique username of the user.
+» online|integer(int32)|Unix timestamp on when the user was last online.
 » avatar|[Avatar_Object](#schemaavatar_object)|Contains avatar data.
 »» filename|string|Image filename, including file extension.
 »» full|string|Full URL to the image.
@@ -9233,22 +9076,12 @@ url|string|Official website url for the mod.
 modfile|[Modfile_Object](#schemamodfile_object)|Contains file data.
 » id|integer(int32)|Unique file id.
 » mod|integer(int32)|Unique mod id.
-» member|[Member_Object](#schemamember_object)|Contains member data.
-»» id|integer(int32)|Unique id of the user.
-»» nameid|string|Unique nameid of user which forms end of their profile URL.
-»» username|string|Non-unique username of the user.
-»» avatar|[Avatar_Object](#schemaavatar_object)|Contains avatar data.
-»»» filename|string|Image filename, including file extension.
-»»» full|string|Full URL to the image.
-»» timezone|string|The Timezone of the user, shown in {Country}/{City} format.
-»» language|string|The users language preference, limited to two characters.
-»» url|string|URL to the user profile.
 » date|integer(int32)|Unix timestamp of file upload time.
 » datevirus|integer(int32)|Unix timestamp of file virus scan.
 » virusstatus|integer(int32)|The status of the virus scan for the file.
 » viruspositive|integer(int32)|Has the file been positively flagged as a virus?
 » filesize|integer(int32)|Size of the file in bytes.
-» filehash|string|MD5 filehash
+» filehash|string|MD5 filehash.
 » filename|string|Name of the file including file extension.
 » version|string|The release version this file represents.
 » virustotal|string|Text output from virustotal scan.
@@ -9262,13 +9095,16 @@ media|object|Contains media data.
 »» thumbnail|string|URL to the thumbnail image.
 »» filename|string|Image filename, with with extension included.
 ratings|[Rating_Object](#schemarating_object)|Contains ratings data.
-» total|integer(int32)|Total Ratings.
-» positive|integer(int32)|Positive Ratings.
-» negative|integer(int32)|Negative ratings.
-» weighted|float|Weighted Rating.
-» percentage|integer(int32)|Percentage.
+» total|integer(int32)|Total ratings count.
+» positive|integer(int32)|Positive ratings count.
+» negative|integer(int32)|Negative ratings count.
+» weighted|float|Weighted rating taking into account positive & negative ratings.
+» percentage|integer(int32)|Rating of the mod as a percentage.
+» stars|integer(int32)|The amount of stars the mod has, between 0 and 5.
 » text|string|Text representation of the rating total.
-tags|[Unknown]|No description
+tags|[Mod_Tag_Object](#schemamod_tag_object)|Contains Tags data.
+» tag|string|The contents of the tag.
+» date|integer(int32)|Unix timestamp of when tag was applied.
 
 
 
@@ -9302,10 +9138,11 @@ date|integer(int32)|Unix timestamp of when tag was applied.
 ```json
 {
   "id": 2,
-  "member": {
+  "submitted_by": {
     "id": 1,
     "nameid": "xant",
     "username": "XanT",
+    "online": 1509922961,
     "avatar": {
       "filename": "masterchief.jpg",
       "full": "https://media.mod.io/images/members/1/1/1/masterchief.jpg"
@@ -9364,10 +9201,11 @@ date|integer(int32)|Unix timestamp of when tag was applied.
 Name|Type|Description
 ---|---|---|---|
 id|integer(int32)|Unique game id.
-member|[Member_Object](#schemamember_object)|Contains member data.
+submitted_by|[User_Object](#schemauser_object)|Contains member data.
 » id|integer(int32)|Unique id of the user.
 » nameid|string|Unique nameid of user which forms end of their profile URL.
 » username|string|Non-unique username of the user.
+» online|integer(int32)|Unix timestamp on when the user was last online.
 » avatar|[Avatar_Object](#schemaavatar_object)|Contains avatar data.
 »» filename|string|Image filename, including file extension.
 »» full|string|Full URL to the image.
@@ -9422,6 +9260,7 @@ cats|[catsArray](#schemacatsarray)[]|Contains categories data.
   "negative": 183,
   "weighted": 87.38,
   "percentage": 91,
+  "stars": 4,
   "text": "Very Positive"
 } 
 ```
@@ -9431,11 +9270,12 @@ cats|[catsArray](#schemacatsarray)[]|Contains categories data.
 
 Name|Type|Description
 ---|---|---|---|
-total|integer(int32)|Total Ratings.
-positive|integer(int32)|Positive Ratings.
-negative|integer(int32)|Negative ratings.
-weighted|float|Weighted Rating.
-percentage|integer(int32)|Percentage.
+total|integer(int32)|Total ratings count.
+positive|integer(int32)|Positive ratings count.
+negative|integer(int32)|Negative ratings count.
+weighted|float|Weighted rating taking into account positive & negative ratings.
+percentage|integer(int32)|Rating of the mod as a percentage.
+stars|integer(int32)|The amount of stars the mod has, between 0 and 5.
 text|string|Text representation of the rating total.
 
 
@@ -9471,15 +9311,16 @@ mention|integer(int32)|Is this update the result of a user @mentioning you.
 
 
 
-## Member Object
+## User Object
 
- <a name="schemamember_object"></a>
+ <a name="schemauser_object"></a>
 
 ```json
 {
   "id": 1,
   "nameid": "xant",
   "username": "XanT",
+  "online": 1509922961,
   "avatar": {
     "filename": "masterchief.jpg",
     "full": "https://media.mod.io/images/members/1/1/1/masterchief.jpg"
@@ -9498,6 +9339,7 @@ Name|Type|Description
 id|integer(int32)|Unique id of the user.
 nameid|string|Unique nameid of user which forms end of their profile URL.
 username|string|Non-unique username of the user.
+online|integer(int32)|Unix timestamp on when the user was last online.
 avatar|[Avatar_Object](#schemaavatar_object)|Contains avatar data.
 » filename|string|Image filename, including file extension.
 » full|string|Full URL to the image.
