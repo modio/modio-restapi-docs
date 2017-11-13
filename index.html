@@ -9438,29 +9438,9 @@ oauth2 ( Scopes: write )
 </thead>
 <tbody>
 <tr>
-<td>cursor_id</td>
-<td>integer(int32)</td>
-<td>The current _cursor value.</td>
-</tr>
-<tr>
-<td>prev_id</td>
-<td>integer(int32)</td>
-<td>The previous _cursor value as manually inserted by you, null by default.</td>
-</tr>
-<tr>
-<td>next_id</td>
-<td>integer(int32)</td>
-<td>The next position to move the _cursor to, based on the current request.</td>
-</tr>
-<tr>
-<td>result_count</td>
-<td>integer(int32)</td>
-<td>The amount of results returned in the current request.</td>
-</tr>
-<tr>
 <td>data</td>
 <td>
-<a href="#schemagame_object">Game Object </a> []</td>
+<a href="#schemagame_object">Game Object </a>[]</td>
 <td>Array containing game objects</td>
 </tr>
 <tr>
@@ -9667,7 +9647,7 @@ oauth2 ( Scopes: write )
 <tr>
 <td>» cats</td>
 <td>
-<a href="#schemacatsarray">catsArray</a> []</td>
+<a href="#schemacatsarray">catsArray</a>[]</td>
 <td>Contains categories data.</td>
 </tr>
 <tr>
@@ -9689,6 +9669,26 @@ oauth2 ( Scopes: write )
 <td>»» tags</td>
 <td>string[]</td>
 <td>Eligible tags for this game.</td>
+</tr>
+<tr>
+<td>cursor_id</td>
+<td>integer(int32)</td>
+<td>The current _cursor value.</td>
+</tr>
+<tr>
+<td>prev_id</td>
+<td>integer(int32)</td>
+<td>The previous _cursor value as manually inserted by you, null by default.</td>
+</tr>
+<tr>
+<td>next_id</td>
+<td>integer(int32)</td>
+<td>The next position to move the _cursor to, based on the current request.</td>
+</tr>
+<tr>
+<td>result_count</td>
+<td>integer(int32)</td>
+<td>The amount of results returned in the current request.</td>
 </tr>
 </tbody>
 </table>
@@ -9740,29 +9740,9 @@ oauth2 ( Scopes: write )
 </thead>
 <tbody>
 <tr>
-<td>cursor_id</td>
-<td>integer(int32)</td>
-<td>The current _cursor value.</td>
-</tr>
-<tr>
-<td>prev_id</td>
-<td>integer(int32)</td>
-<td>The previous _cursor value as manually inserted by you, null by default.</td>
-</tr>
-<tr>
-<td>next_id</td>
-<td>integer(int32)</td>
-<td>The next position to move the _cursor to, based on the current request.</td>
-</tr>
-<tr>
-<td>result_count</td>
-<td>integer(int32)</td>
-<td>The amount of results returned in the current request.</td>
-</tr>
-<tr>
 <td>data</td>
 <td>
-<a href="#schemagame_activity_object">Game Activity Object</a> []</td>
+<a href="#schemagame_activity_object">Game Activity Object</a>[]</td>
 <td>Response array of items.</td>
 </tr>
 <tr>
@@ -9854,6 +9834,26 @@ oauth2 ( Scopes: write )
 <td>»»» after</td>
 <td>string</td>
 <td>The value of the field after the event.</td>
+</tr>
+<tr>
+<td>cursor_id</td>
+<td>integer(int32)</td>
+<td>The current _cursor value.</td>
+</tr>
+<tr>
+<td>prev_id</td>
+<td>integer(int32)</td>
+<td>The previous _cursor value as manually inserted by you, null by default.</td>
+</tr>
+<tr>
+<td>next_id</td>
+<td>integer(int32)</td>
+<td>The next position to move the _cursor to, based on the current request.</td>
+</tr>
+<tr>
+<td>result_count</td>
+<td>integer(int32)</td>
+<td>The amount of results returned in the current request.</td>
 </tr>
 </tbody>
 </table>
@@ -9958,29 +9958,9 @@ oauth2 ( Scopes: write )
 </thead>
 <tbody>
 <tr>
-<td>cursor_id</td>
-<td>integer(int32)</td>
-<td>The current _cursor value.</td>
-</tr>
-<tr>
-<td>prev_id</td>
-<td>integer(int32)</td>
-<td>The previous _cursor value as manually inserted by you, null by default.</td>
-</tr>
-<tr>
-<td>next_id</td>
-<td>integer(int32)</td>
-<td>The next position to move the _cursor to, based on the current request.</td>
-</tr>
-<tr>
-<td>result_count</td>
-<td>integer(int32)</td>
-<td>The amount of results returned in the current request.</td>
-</tr>
-<tr>
 <td>data</td>
 <td>
-<a href="#schemamod_object">Mod Object </a> []</td>
+<a href="#schemamod_object">Mod Object </a>[]</td>
 <td>Array containing mod objects</td>
 </tr>
 <tr>
@@ -10216,7 +10196,7 @@ oauth2 ( Scopes: write )
 <tr>
 <td>»» images</td>
 <td>
-<a href="#schemaimage_object">Image Object </a> []</td>
+<a href="#schemaimage_object">Image Object </a>[]</td>
 <td>Contains images data.</td>
 </tr>
 <tr>
@@ -10289,6 +10269,26 @@ oauth2 ( Scopes: write )
 <td>integer(int32)</td>
 <td>Unix timestamp of when tag was applied.</td>
 </tr>
+<tr>
+<td>cursor_id</td>
+<td>integer(int32)</td>
+<td>The current _cursor value.</td>
+</tr>
+<tr>
+<td>prev_id</td>
+<td>integer(int32)</td>
+<td>The previous _cursor value as manually inserted by you, null by default.</td>
+</tr>
+<tr>
+<td>next_id</td>
+<td>integer(int32)</td>
+<td>The next position to move the _cursor to, based on the current request.</td>
+</tr>
+<tr>
+<td>result_count</td>
+<td>integer(int32)</td>
+<td>The amount of results returned in the current request.</td>
+</tr>
 </tbody>
 </table>
 <h2 id="browse-mod-activity-2">Browse Mod Activity</h2>
@@ -10339,29 +10339,9 @@ oauth2 ( Scopes: write )
 </thead>
 <tbody>
 <tr>
-<td>cursor_id</td>
-<td>integer(int32)</td>
-<td>The current _cursor value.</td>
-</tr>
-<tr>
-<td>prev_id</td>
-<td>integer(int32)</td>
-<td>The previous _cursor value as manually inserted by you, null by default.</td>
-</tr>
-<tr>
-<td>next_id</td>
-<td>integer(int32)</td>
-<td>The next position to move the _cursor to, based on the current request.</td>
-</tr>
-<tr>
-<td>result_count</td>
-<td>integer(int32)</td>
-<td>The amount of results returned in the current request.</td>
-</tr>
-<tr>
 <td>data</td>
 <td>
-<a href="#schemamod_activity_object">Mod Activity Object</a> []</td>
+<a href="#schemamod_activity_object">Mod Activity Object</a>[]</td>
 <td>Response array of items.</td>
 </tr>
 <tr>
@@ -10454,6 +10434,26 @@ oauth2 ( Scopes: write )
 <td>string</td>
 <td>The newly-updated value.</td>
 </tr>
+<tr>
+<td>cursor_id</td>
+<td>integer(int32)</td>
+<td>The current _cursor value.</td>
+</tr>
+<tr>
+<td>prev_id</td>
+<td>integer(int32)</td>
+<td>The previous _cursor value as manually inserted by you, null by default.</td>
+</tr>
+<tr>
+<td>next_id</td>
+<td>integer(int32)</td>
+<td>The next position to move the _cursor to, based on the current request.</td>
+</tr>
+<tr>
+<td>result_count</td>
+<td>integer(int32)</td>
+<td>The amount of results returned in the current request.</td>
+</tr>
 </tbody>
 </table>
 <h2 id="browse-mod-files-2">Browse Mod Files</h2>
@@ -10495,29 +10495,9 @@ oauth2 ( Scopes: write )
 </thead>
 <tbody>
 <tr>
-<td>cursor_id</td>
-<td>integer(int32)</td>
-<td>The current _cursor value.</td>
-</tr>
-<tr>
-<td>prev_id</td>
-<td>integer(int32)</td>
-<td>The previous _cursor value as manually inserted by you, null by default.</td>
-</tr>
-<tr>
-<td>next_id</td>
-<td>integer(int32)</td>
-<td>The next position to move the _cursor to, based on the current request.</td>
-</tr>
-<tr>
-<td>result_count</td>
-<td>integer(int32)</td>
-<td>The amount of results returned in the current request.</td>
-</tr>
-<tr>
 <td>data</td>
 <td>
-<a href="#schemamodfile_object">Modfile Object </a> []</td>
+<a href="#schemamodfile_object">Modfile Object </a>[]</td>
 <td>Response array of items.</td>
 </tr>
 <tr>
@@ -10585,6 +10565,26 @@ oauth2 ( Scopes: write )
 <td>string</td>
 <td>Link to download the file from the mod.io CDN.</td>
 </tr>
+<tr>
+<td>cursor_id</td>
+<td>integer(int32)</td>
+<td>The current _cursor value.</td>
+</tr>
+<tr>
+<td>prev_id</td>
+<td>integer(int32)</td>
+<td>The previous _cursor value as manually inserted by you, null by default.</td>
+</tr>
+<tr>
+<td>next_id</td>
+<td>integer(int32)</td>
+<td>The next position to move the _cursor to, based on the current request.</td>
+</tr>
+<tr>
+<td>result_count</td>
+<td>integer(int32)</td>
+<td>The amount of results returned in the current request.</td>
+</tr>
 </tbody>
 </table>
 <h2 id="browse-mod-tags-2">Browse Mod Tags</h2>
@@ -10610,7 +10610,7 @@ oauth2 ( Scopes: write )
 <tr>
 <td>data</td>
 <td>
-<a href="#schemamod_tag_object">Mod Tag Object</a> []</td>
+<a href="#schemamod_tag_object">Mod Tag Object</a>[]</td>
 <td>No description</td>
 </tr>
 <tr>
@@ -10672,29 +10672,9 @@ oauth2 ( Scopes: write )
 </thead>
 <tbody>
 <tr>
-<td>cursor_id</td>
-<td>integer(int32)</td>
-<td>The current _cursor value.</td>
-</tr>
-<tr>
-<td>prev_id</td>
-<td>integer(int32)</td>
-<td>The previous _cursor value as manually inserted by you, null by default.</td>
-</tr>
-<tr>
-<td>next_id</td>
-<td>integer(int32)</td>
-<td>The next position to move the _cursor to, based on the current request.</td>
-</tr>
-<tr>
-<td>result_count</td>
-<td>integer(int32)</td>
-<td>The amount of results returned in the current request.</td>
-</tr>
-<tr>
 <td>data</td>
 <td>
-<a href="#schemacomment_object">Comment Object </a> []</td>
+<a href="#schemacomment_object">Comment Object </a>[]</td>
 <td>Array containing comment objects</td>
 </tr>
 <tr>
@@ -10792,6 +10772,26 @@ oauth2 ( Scopes: write )
 <td>string</td>
 <td>The contents of the comment.</td>
 </tr>
+<tr>
+<td>cursor_id</td>
+<td>integer(int32)</td>
+<td>The current _cursor value.</td>
+</tr>
+<tr>
+<td>prev_id</td>
+<td>integer(int32)</td>
+<td>The previous _cursor value as manually inserted by you, null by default.</td>
+</tr>
+<tr>
+<td>next_id</td>
+<td>integer(int32)</td>
+<td>The next position to move the _cursor to, based on the current request.</td>
+</tr>
+<tr>
+<td>result_count</td>
+<td>integer(int32)</td>
+<td>The amount of results returned in the current request.</td>
+</tr>
 </tbody>
 </table>
 <h2 id="browse-team">Browse Team</h2>
@@ -10835,29 +10835,9 @@ oauth2 ( Scopes: write )
 </thead>
 <tbody>
 <tr>
-<td>cursor_id</td>
-<td>integer(int32)</td>
-<td>The current _cursor value.</td>
-</tr>
-<tr>
-<td>prev_id</td>
-<td>integer(int32)</td>
-<td>The previous _cursor value as manually inserted by you, null by default.</td>
-</tr>
-<tr>
-<td>next_id</td>
-<td>integer(int32)</td>
-<td>The next position to move the _cursor to, based on the current request.</td>
-</tr>
-<tr>
-<td>result_count</td>
-<td>integer(int32)</td>
-<td>The amount of results returned in the current request.</td>
-</tr>
-<tr>
 <td>data</td>
 <td>
-<a href="#schemaaccess_object">Access Object </a> []</td>
+<a href="#schemaaccess_object">Access Object </a>[]</td>
 <td>No description</td>
 </tr>
 <tr>
@@ -10940,6 +10920,26 @@ oauth2 ( Scopes: write )
 <td>string</td>
 <td>Custom title, has no effect on any access rights.</td>
 </tr>
+<tr>
+<td>cursor_id</td>
+<td>integer(int32)</td>
+<td>The current _cursor value.</td>
+</tr>
+<tr>
+<td>prev_id</td>
+<td>integer(int32)</td>
+<td>The previous _cursor value as manually inserted by you, null by default.</td>
+</tr>
+<tr>
+<td>next_id</td>
+<td>integer(int32)</td>
+<td>The next position to move the _cursor to, based on the current request.</td>
+</tr>
+<tr>
+<td>result_count</td>
+<td>integer(int32)</td>
+<td>The amount of results returned in the current request.</td>
+</tr>
 </tbody>
 </table>
 <h2 id="browse-users-2">Browse Users</h2>
@@ -10979,29 +10979,9 @@ oauth2 ( Scopes: write )
 </thead>
 <tbody>
 <tr>
-<td>cursor_id</td>
-<td>integer(int32)</td>
-<td>The current _cursor value.</td>
-</tr>
-<tr>
-<td>prev_id</td>
-<td>integer(int32)</td>
-<td>The previous _cursor value as manually inserted by you, null by default.</td>
-</tr>
-<tr>
-<td>next_id</td>
-<td>integer(int32)</td>
-<td>The next position to move the _cursor to, based on the current request.</td>
-</tr>
-<tr>
-<td>result_count</td>
-<td>integer(int32)</td>
-<td>The amount of results returned in the current request.</td>
-</tr>
-<tr>
 <td>data</td>
 <td>
-<a href="#schemauser_object">User Object </a> []</td>
+<a href="#schemauser_object">User Object </a>[]</td>
 <td>Response array of items.</td>
 </tr>
 <tr>
@@ -11054,6 +11034,26 @@ oauth2 ( Scopes: write )
 <td>string</td>
 <td>URL to the user profile.</td>
 </tr>
+<tr>
+<td>cursor_id</td>
+<td>integer(int32)</td>
+<td>The current _cursor value.</td>
+</tr>
+<tr>
+<td>prev_id</td>
+<td>integer(int32)</td>
+<td>The previous _cursor value as manually inserted by you, null by default.</td>
+</tr>
+<tr>
+<td>next_id</td>
+<td>integer(int32)</td>
+<td>The next position to move the _cursor to, based on the current request.</td>
+</tr>
+<tr>
+<td>result_count</td>
+<td>integer(int32)</td>
+<td>The amount of results returned in the current request.</td>
+</tr>
 </tbody>
 </table>
 <h2 id="browse-updates">Browse Updates</h2>
@@ -11083,7 +11083,7 @@ oauth2 ( Scopes: write )
 <tr>
 <td>data</td>
 <td>
-<a href="#schemaupdate_object">Update Object </a> []</td>
+<a href="#schemaupdate_object">Update Object </a>[]</td>
 <td>Get all updates that occurred between two timestamps for the <em>authenticated user</em>.  Endpoint: v1/me/subscribed/updates</td>
 </tr>
 <tr>
@@ -12104,7 +12104,7 @@ oauth2 ( Scopes: write )
 <tr>
 <td>» images</td>
 <td>
-<a href="#schemaimage_object">Image Object </a> []</td>
+<a href="#schemaimage_object">Image Object </a>[]</td>
 <td>Contains images data.</td>
 </tr>
 <tr>
@@ -12480,7 +12480,7 @@ oauth2 ( Scopes: write )
 <tr>
 <td>cats</td>
 <td>
-<a href="#schemacatsarray">catsArray</a> []</td>
+<a href="#schemacatsarray">catsArray</a>[]</td>
 <td>Contains categories data.</td>
 </tr>
 <tr>
