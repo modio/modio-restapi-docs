@@ -347,7 +347,8 @@ html, body {
 
   a {
 	color: $nav-active-bg;
-	font-weight: bold;
+    text-decoration: none;
+    font-weight: bold;
 
 	&:hover {
 	  color: $nav-bg;

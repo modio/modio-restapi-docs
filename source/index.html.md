@@ -817,7 +817,7 @@ Browse Games on mod.io. Successful request will return an array of [Game Objects
 
 Status|Meaning|Description|Response Schema
 ---|---|---|---|
-200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)|OK|[Browse_Games](#schemabrowse_games)
+200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)|OK|[Browse Games ](#schemabrowse_games)
 
 <aside class="warning">
 To perform this operation, you must be authenticated by means of one of the following methods:
@@ -997,7 +997,7 @@ View a single game on mod.io. Successful request will return a single [Game Obje
 
 Status|Meaning|Description|Response Schema
 ---|---|---|---|
-200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)|Request successful|[Game_Object](#schemagame_object)
+200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)|Request successful|[Game Object ](#schemagame_object)
 
 <aside class="warning">
 To perform this operation, you must be authenticated by means of one of the following methods:
@@ -1446,15 +1446,22 @@ View activity for a game, showing changes made to the resource. Successful reque
           "after": "https://rogue-knight.mod.io/rogue-hd-pack"
         }
       }
+    },
+    {
+        ...
     }
-  ]
+  ],
+  "cursor_id": 60,
+  "prev_id": 30,
+  "next_id": 160,
+  "result_count": 100
 }
 ```
 <h3 id="Browse-Game-Activity-responses">Responses</h3>
 
 Status|Meaning|Description|Response Schema
 ---|---|---|---|
-200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)|Successful Response|[Browse_Game_Activity](#schemabrowse_game_activity)
+200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)|Successful Response|[Browse Game Activity](#schemabrowse_game_activity)
 
 <aside class="warning">
 To perform this operation, you must be authenticated by means of one of the following methods:
@@ -1614,7 +1621,7 @@ View all members that are part of a game team. Successful request will return an
 
 Status|Meaning|Description|Response Schema
 ---|---|---|---|
-200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)|Successful Request|[Browse_Team](#schemabrowse_team)
+200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)|Successful Request|[Browse Team ](#schemabrowse_team)
 
 <aside class="warning">
 To perform this operation, you must be authenticated by means of one of the following methods:
@@ -2271,7 +2278,7 @@ Browse mods on mod.io. Successful request will return an array of [Mod Objects](
 
 Status|Meaning|Description|Response Schema
 ---|---|---|---|
-200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)|Successful Request|[Browse_Mods](#schemabrowse_mods)
+200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)|Successful Request|[Browse Mods ](#schemabrowse_mods)
 
 <aside class="warning">
 To perform this operation, you must be authenticated by means of one of the following methods:
@@ -2471,7 +2478,7 @@ View a single mod on mod.io. Successful request will return a single [Mod Object
 
 Status|Meaning|Description|Response Schema
 ---|---|---|---|
-200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)|Successful Request|[Mod_Object](#schemamod_object)
+200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)|Successful Request|[Mod Object ](#schemamod_object)
 
 <aside class="warning">
 To perform this operation, you must be authenticated by means of one of the following methods:
@@ -2697,7 +2704,7 @@ Publish a mod on mod.io. Successful request will return the newly created [Mod O
 
 Status|Meaning|Description|Response Schema
 ---|---|---|---|
-201|[Created](https://tools.ietf.org/html/rfc7231#section-6.3.2)|Resource Created|[Mod_Object](#schemamod_object)
+201|[Created](https://tools.ietf.org/html/rfc7231#section-6.3.2)|Resource Created|[Mod Object ](#schemamod_object)
 
 ### Response Headers
 
@@ -3402,7 +3409,7 @@ View activity for a mod, showing changes made to the resource. Successful reques
      Filter|Type|Description
      ---|---|---
      id|integer(int32)|Unique id of the activity object.
-     user|integer(int32)|Unique id of the member who performed the action.
+     user|integer(int32)|Unique id of the user who triggered the action.
      dateup|integer(int32)|Unix timestamp of date updated.
      event|string|Type of change that occurred. Note that in the event of MOD_DELETE, this endpoint will be inaccessible as the mod profile would be closed, however if restored it would show the event in the activity history.<br><br>*Field Options*<br>__MOD_UPDATE__ - Update event<br>__MOD_DELETE__ - Delete event
 
@@ -3435,15 +3442,22 @@ View activity for a mod, showing changes made to the resource. Successful reques
           "after": "https://rogue-knight.mod.io/rogue-hd-pack"
         }
       }
+    },
+    {
+        ...
     }
-  ]
+  ],
+  "cursor_id": 60,
+  "prev_id": 30,
+  "next_id": 160,
+  "result_count": 100
 }
 ```
 <h3 id="Browse-Mod-Activity-responses">Responses</h3>
 
 Status|Meaning|Description|Response Schema
 ---|---|---|---|
-200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)|Successful Request|[Browse_Mod_Activity](#schemabrowse_mod_activity)
+200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)|Successful Request|[Browse Mod Activity](#schemabrowse_mod_activity)
 
 <aside class="warning">
 To perform this operation, you must be authenticated by means of one of the following methods:
@@ -3608,7 +3622,7 @@ Browse files on mod.io that are published for the corresponding mod. Successful 
 
 Status|Meaning|Description|Response Schema
 ---|---|---|---|
-200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)|Successful Request|[Browse_Mod_Files](#schemabrowse_mod_files)
+200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)|Successful Request|[Browse Mod Files](#schemabrowse_mod_files)
 
 <aside class="warning">
 To perform this operation, you must be authenticated by means of one of the following methods:
@@ -3766,7 +3780,7 @@ Upload a file for the corresponding mod, upon success will return the newly crea
 
 Status|Meaning|Description|Response Schema
 ---|---|---|---|
-201|[Created](https://tools.ietf.org/html/rfc7231#section-6.3.2)|Resource Created|[Modfile_Object](#schemamodfile_object)
+201|[Created](https://tools.ietf.org/html/rfc7231#section-6.3.2)|Resource Created|[Modfile Object ](#schemamodfile_object)
 
 ### Response Headers
 
@@ -3910,7 +3924,7 @@ Find a file on mod.io for the corresponding mod. Successful request will return 
 
 Status|Meaning|Description|Response Schema
 ---|---|---|---|
-200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)|Successful Request|[Modfile_Object](#schemamodfile_object)
+200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)|Successful Request|[Modfile Object ](#schemamodfile_object)
 
 <aside class="warning">
 To perform this operation, you must be authenticated by means of one of the following methods:
@@ -4190,7 +4204,7 @@ Browse all tags for the corresponding mod, successful response will return an ar
 
 Status|Meaning|Description|Response Schema
 ---|---|---|---|
-200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)|Successful Request|[Browse_Mod_Tags](#schemabrowse_mod_tags)
+200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)|Successful Request|[Browse Mod Tags](#schemabrowse_mod_tags)
 
 <aside class="warning">
 To perform this operation, you must be authenticated by means of one of the following methods:
@@ -4787,7 +4801,7 @@ Browse all comments for a mod. Successful request will return an array of [Comme
 
 Status|Meaning|Description|Response Schema
 ---|---|---|---|
-200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)|OK|[Browse_Comments](#schemabrowse_comments)
+200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)|OK|[Browse Comments ](#schemabrowse_comments)
 
 <aside class="warning">
 To perform this operation, you must be authenticated by means of one of the following methods:
@@ -4933,7 +4947,7 @@ Find a comment by it's unique ID. Successful request will return a single [Comme
 
 Status|Meaning|Description|Response Schema
 ---|---|---|---|
-200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)|OK|[Comment_Object](#schemacomment_object)
+200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)|OK|[Comment Object ](#schemacomment_object)
 
 <aside class="warning">
 To perform this operation, you must be authenticated by means of one of the following methods:
@@ -5228,7 +5242,7 @@ View all members that are part of a mod team. Successful request will return an 
 
 Status|Meaning|Description|Response Schema
 ---|---|---|---|
-200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)|Successful Request|[Browse_Team](#schemabrowse_team)
+200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)|Successful Request|[Browse Team ](#schemabrowse_team)
 
 <aside class="warning">
 To perform this operation, you must be authenticated by means of one of the following methods:
@@ -5813,7 +5827,7 @@ Get all mod updates (new builds) that occurred between two timestamps for the co
 
 Status|Meaning|Description|Response Schema
 ---|---|---|---|
-200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)|Request Successful|[Browse_Mod_Files](#schemabrowse_mod_files)
+200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)|Request Successful|[Browse Mod Files](#schemabrowse_mod_files)
 
 <aside class="warning">
 To perform this operation, you must be authenticated by means of one of the following methods:
@@ -5970,7 +5984,7 @@ Browse users registered to mod.io. Successful request will return an __array of 
 
 Status|Meaning|Description|Response Schema
 ---|---|---|---|
-200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)|OK|[Browse_Users](#schemabrowse_users)
+200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)|OK|[Browse Users ](#schemabrowse_users)
 
 <aside class="warning">
 To perform this operation, you must be authenticated by means of one of the following methods:
@@ -6106,7 +6120,7 @@ Find a user by their unique member id. Successful request will return a single [
 
 Status|Meaning|Description|Response Schema
 ---|---|---|---|
-200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)|OK|[User_Object](#schemauser_object)
+200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)|OK|[User Object ](#schemauser_object)
 
 <aside class="warning">
 To perform this operation, you must be authenticated by means of one of the following methods:
@@ -6236,7 +6250,7 @@ Determine if a specified user has ownership rights to a resource.
      ---|---|---|---|
      resource|string|true|The name of the resource type you are checking against a user - __must__ be one of the following values.<br><br>*Field options*<br>__games__<br>__mods__<br>__files__<br>__tags__<br>__users__.
      id|integer(int32)|true|Unique Id of the resource to check access rights for.
-     user|integer(int32)|true|Unique Id of the member you are determining has access to the resource id.
+     user|integer(int32)|true|Unique Id of the user you are determining has access to the resource id.
 
 
 > Example responses
@@ -6252,7 +6266,7 @@ Determine if a specified user has ownership rights to a resource.
 
 Status|Meaning|Description|Response Schema
 ---|---|---|---|
-200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)|Successful Request|[Ownership_Object](#schemaownership_object)
+200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)|Successful Request|[Ownership Object ](#schemaownership_object)
 
 <aside class="warning">
 To perform this operation, you must be authenticated by means of one of the following methods:
@@ -6397,7 +6411,7 @@ View the price of a requested resource, if the requested resource is able to be 
 
 Status|Meaning|Description|Response Schema
 ---|---|---|---|
-200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)|OK|[Price_Object](#schemaprice_object)
+200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)|OK|[Price Object ](#schemaprice_object)
 
 <aside class="warning">
 To perform this operation, you must be authenticated by means of one of the following methods:
@@ -6596,7 +6610,7 @@ View all mod.io games that exist for the *authenticated user*.
 
 Status|Meaning|Description|Response Schema
 ---|---|---|---|
-200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)|Request Successful|[Browse_Games](#schemabrowse_games)
+200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)|Request Successful|[Browse Games ](#schemabrowse_games)
 
 <aside class="warning">
 To perform this operation, you must be authenticated by means of one of the following methods:
@@ -6813,7 +6827,7 @@ View all mod.io mods that exist for the *authenticated user*.
 
 Status|Meaning|Description|Response Schema
 ---|---|---|---|
-200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)|Request Successful|[Browse_Mods](#schemabrowse_mods)
+200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)|Request Successful|[Browse Mods ](#schemabrowse_mods)
 
 <aside class="warning">
 To perform this operation, you must be authenticated by means of one of the following methods:
@@ -6968,7 +6982,7 @@ View all mod.io files that exist for the *authenticated user*.
 
 Status|Meaning|Description|Response Schema
 ---|---|---|---|
-200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)|Request Successful|[Browse_Mod_Files](#schemabrowse_mod_files)
+200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)|Request Successful|[Browse Mod Files](#schemabrowse_mod_files)
 
 <aside class="warning">
 To perform this operation, you must be authenticated by means of one of the following methods:
@@ -7187,7 +7201,7 @@ Get all mod's the *authenticated user* is subscribed to. Successful request will
 
 Status|Meaning|Description|Response Schema
 ---|---|---|---|
-200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)|Request Successful|[Browse_Mods](#schemabrowse_mods)
+200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)|Request Successful|[Browse Mods ](#schemabrowse_mods)
 
 <aside class="warning">
 To perform this operation, you must be authenticated by means of one of the following methods:
@@ -7350,7 +7364,7 @@ __OAuth 2 Authentication Required__. Get all subscribed mod updates (new builds)
 
 Status|Meaning|Description|Response Schema
 ---|---|---|---|
-200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)|Request Successful|[Browse_Mod_Files](#schemabrowse_mod_files)
+200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)|Request Successful|[Browse Mod Files](#schemabrowse_mod_files)
 
 <aside class="warning">
 To perform this operation, you must be authenticated by means of one of the following methods:
@@ -7891,6 +7905,30 @@ full|string|Full URL to the image.
 
 
 
+## Image Object
+
+ <a name="schemaimage_object"></a>
+
+```json
+{
+  "full": "https://media.mod.io/images/mods/1/1/2/IMG_20170409_222419.jpg",
+  "thumbnail": "https://media.mod.io/cache/images/mods/1/1/2/thumb_1020x2000/IMG_20170409_222419.jpg",
+  "filename": "IMG_20170409_222419.jpg"
+} 
+```
+
+
+### Properties
+
+Name|Type|Description
+---|---|---|---|
+full|string|URL to the full image.
+thumbnail|string|URL to the thumbnail image.
+filename|string|Image filename, with the extension included.
+
+
+
+
 ## Browse Games
 
  <a name="schemabrowse_games"></a>
@@ -7975,14 +8013,14 @@ cursor_id|integer(int32)|The current _cursor value.
 prev_id|integer(int32)|The previous _cursor value as manually inserted by you, null by default.
 next_id|integer(int32)|The next position to move the _cursor to, based on the current request.
 result_count|integer(int32)|The amount of results returned in the current request.
-data|[Game_Object](#schemagame_object)[]|Array containing game objects
+data|[Game Object ](#schemagame_object) []|Array containing game objects
 » id|integer(int32)|Unique game id.
-» submitted_by|[User_Object](#schemauser_object)|Contains member data.
+» submitted_by|[User Object ](#schemauser_object)|Contains member data.
 »» id|integer(int32)|Unique id of the user.
 »» nameid|string|Unique nameid of user which forms end of their profile URL.
 »» username|string|Non-unique username of the user.
 »» online|integer(int32)|Unix timestamp on when the user was last online.
-»» avatar|[Avatar_Object](#schemaavatar_object)|Contains avatar data.
+»» avatar|[Avatar Object ](#schemaavatar_object)|Contains avatar data.
 »»» filename|string|Image filename, including file extension.
 »»» full|string|Full URL to the image.
 »» timezone|string|The Timezone of the user, shown in {Country}/{City} format.
@@ -7997,17 +8035,17 @@ data|[Game_Object](#schemagame_object)[]|Array containing game objects
 » revenue|integer(int32)|__Bitwise__. Determines the revenue capabilities for mods of the game. For selecting multiple options you need to submit the bitwise value. i.e. If you want to allow user-generated content to be sold(1), to receive donations(2) and allow them to control their supply and scarcity(8) your would submit _11 (8 + 2 + 1)_.<br><br>*Field Options*<br>__1__ = Allow user-generated content to be sold<br>__2__ = Allow user-generated content to receive donations<br>__4__ = Allow user-generated content to be traded (not subject to revenue share)<br>__8__ = Allow user-generated content to control supply and scarcity.
 » api|integer(int32)|Determines what permissions you want to enable via the mod.io API.<br><br>*Field Options*<br>__0__ = Third parties cannot access your mods API and mods cannot be downloaded directly without API validation.<br>__1__ = Allow 3rd parties to access your mods API (recommended, an open API will encourage a healthy ecosystem of tools and apps) but mods cannot be downloaded directly<br>__2__ = Allow mods to be downloaded directly but 3rd parties cannot access your mods API.<br>__3__ = Allow third parties to access your mods API and allow mods to be downloaded directly without api validation.
 » ugcname|string|Singular string that best describes the type of user-generated content.
-» icon|[Icon_Object](#schemaicon_object)|Contains icon data.
+» icon|[Icon Object ](#schemaicon_object)|Contains icon data.
 »» filename|string|Image filename, with file extension included.
 »» full|string|URL to full-sized image.
 »» thumb_320x180|string|URL to small thumbnail image.
-» logo|[Logo_Object](#schemalogo_object)|Contains logo data.
+» logo|[Logo Object ](#schemalogo_object)|Contains logo data.
 »» filename|string|Image filename, with file extension included.
 »» full|string|URL to full-sized image.
 »» thumb_320x180|string|URL to small thumbnail image.
 »» thumb_640x360|string|URL to medium thumbnail image.
 »» thumb_1280x720|string|URL to large thumbnail image.
-» header|[Header_Object](#schemaheader_object)|Contains header data.
+» header|[Header Object ](#schemaheader_object)|Contains header data.
 »» filename|string|Image filename, with file extension included.
 »» full|string|URL to the full-sized header image.
 » homepage|string|Official game website URL.
@@ -8016,11 +8054,11 @@ data|[Game_Object](#schemagame_object)[]|Array containing game objects
 » summary|string|Brief summary of the game.
 » instructions|string|Modding instructions for developers.
 » url|string|website url for the game.
-» cats|[catsArray](#schemacatsarray)[]|Contains categories data.
+» cats|[catsArray](#schemacatsarray) []|Contains categories data.
 »» name|string|The name of the category.
 »» type|string|Are tags selected via checkboxes or a single dropdown.
 »» adminonly|integer(int32)|Is this an admin only tag? If so only admin's can see this category and it can be used for filtering.
-»» tags|[string]|Eligible tags for this game.
+»» tags|string[]|Eligible tags for this game.
 
 
 
@@ -8055,8 +8093,15 @@ data|[Game_Object](#schemagame_object)[]|Array containing game objects
           "after": "https://rogue-knight.mod.io/rogue-hd-pack"
         }
       }
+    },
+    {
+        ...
     }
-  ]
+  ],
+  "cursor_id": 60,
+  "prev_id": 30,
+  "next_id": 160,
+  "result_count": 100
 } 
 ```
 
@@ -8065,14 +8110,18 @@ data|[Game_Object](#schemagame_object)[]|Array containing game objects
 
 Name|Type|Description
 ---|---|---|---|
-data|[Game_Activity_Object](#schemagame_activity_object)[]|Response array of items.
+cursor_id|integer(int32)|The current _cursor value.
+prev_id|integer(int32)|The previous _cursor value as manually inserted by you, null by default.
+next_id|integer(int32)|The next position to move the _cursor to, based on the current request.
+result_count|integer(int32)|The amount of results returned in the current request.
+data|[Game Activity Object](#schemagame_activity_object) []|Response array of items.
 » id|integer(int32)|Unique id of activity record.
-» user|[User_Object](#schemauser_object)|Contains member data.
+» user|[User Object ](#schemauser_object)|Contains member data.
 »» id|integer(int32)|Unique id of the user.
 »» nameid|string|Unique nameid of user which forms end of their profile URL.
 »» username|string|Non-unique username of the user.
 »» online|integer(int32)|Unix timestamp on when the user was last online.
-»» avatar|[Avatar_Object](#schemaavatar_object)|Contains avatar data.
+»» avatar|[Avatar Object ](#schemaavatar_object)|Contains avatar data.
 »»» filename|string|Image filename, including file extension.
 »»» full|string|Full URL to the image.
 »» timezone|string|The Timezone of the user, shown in {Country}/{City} format.
@@ -8192,15 +8241,15 @@ cursor_id|integer(int32)|The current _cursor value.
 prev_id|integer(int32)|The previous _cursor value as manually inserted by you, null by default.
 next_id|integer(int32)|The next position to move the _cursor to, based on the current request.
 result_count|integer(int32)|The amount of results returned in the current request.
-data|[Mod_Object](#schemamod_object)[]|Array containing mod objects
+data|[Mod Object ](#schemamod_object) []|Array containing mod objects
 » id|integer(int32)|Unique mod id.
 » game|integer(int32)|Unique game id.
-» submitted_by|[User_Object](#schemauser_object)|Contains member data.
+» submitted_by|[User Object ](#schemauser_object)|Contains member data.
 »» id|integer(int32)|Unique id of the user.
 »» nameid|string|Unique nameid of user which forms end of their profile URL.
 »» username|string|Non-unique username of the user.
 »» online|integer(int32)|Unix timestamp on when the user was last online.
-»» avatar|[Avatar_Object](#schemaavatar_object)|Contains avatar data.
+»» avatar|[Avatar Object ](#schemaavatar_object)|Contains avatar data.
 »»» filename|string|Image filename, including file extension.
 »»» full|string|Full URL to the image.
 »» timezone|string|The Timezone of the user, shown in {Country}/{City} format.
@@ -8209,7 +8258,7 @@ data|[Mod_Object](#schemamod_object)[]|Array containing mod objects
 » price|float|Sale price if applicable, in USD.
 » datereg|integer(int32)|Unix timestamp of date registered.
 » dateup|integer(int32)|Unix timestamp of date last updated.
-» logo|[Logo_Object](#schemalogo_object)|Contains logo data.
+» logo|[Logo Object ](#schemalogo_object)|Contains logo data.
 »» filename|string|Image filename, with file extension included.
 »» full|string|URL to full-sized image.
 »» thumb_320x180|string|URL to small thumbnail image.
@@ -8222,7 +8271,7 @@ data|[Mod_Object](#schemamod_object)[]|Array containing mod objects
 » description|string|Description of the mod.
 » metadata|string|Metadata for the mod.
 » url|string|Official website url for the mod.
-» modfile|[Modfile_Object](#schemamodfile_object)|Contains file data.
+» modfile|[Modfile Object ](#schemamodfile_object)|Contains file data.
 »» id|integer(int32)|Unique file id.
 »» mod|integer(int32)|Unique mod id.
 »» date|integer(int32)|Unix timestamp of file upload time.
@@ -8237,13 +8286,13 @@ data|[Mod_Object](#schemamod_object)[]|Array containing mod objects
 »» changelog|string|List of all changes in this file release.
 »» download|string|Link to download the file from the mod.io CDN.
 » media|object|Contains media data.
-»» youtube|[string]|Contains YouTube data.
-»» sketchfab|[string]|Contains Sketchfab data.
-»» images|[Unknown]|Contains images data.
+»» youtube|string[]|Contains YouTube data.
+»» sketchfab|string[]|Contains Sketchfab data.
+»» images|[Image Object ](#schemaimage_object) []|Contains images data.
 »»» full|string|URL to the full image.
 »»» thumbnail|string|URL to the thumbnail image.
-»»» filename|string|Image filename, with with extension included.
-» ratings|[Rating_Object](#schemarating_object)|Contains ratings data.
+»»» filename|string|Image filename, with the extension included.
+» ratings|[Rating Object ](#schemarating_object)|Contains ratings data.
 »» total|integer(int32)|Total ratings count.
 »» positive|integer(int32)|Positive ratings count.
 »» negative|integer(int32)|Negative ratings count.
@@ -8251,7 +8300,7 @@ data|[Mod_Object](#schemamod_object)[]|Array containing mod objects
 »» percentage|integer(int32)|Rating of the mod as a percentage.
 »» stars|integer(int32)|The amount of stars the mod has, between 0 and 5.
 »» text|string|Text representation of the rating total.
-» tags|[Mod_Tag_Object](#schemamod_tag_object)|Contains Tags data.
+» tags|[Mod Tag Object](#schemamod_tag_object)|Contains Tags data.
 »» tag|string|The contents of the tag.
 »» date|integer(int32)|Unix timestamp of when tag was applied.
 
@@ -8288,8 +8337,15 @@ data|[Mod_Object](#schemamod_object)[]|Array containing mod objects
           "after": "https://rogue-knight.mod.io/rogue-hd-pack"
         }
       }
+    },
+    {
+        ...
     }
-  ]
+  ],
+  "cursor_id": 60,
+  "prev_id": 30,
+  "next_id": 160,
+  "result_count": 100
 } 
 ```
 
@@ -8298,14 +8354,18 @@ data|[Mod_Object](#schemamod_object)[]|Array containing mod objects
 
 Name|Type|Description
 ---|---|---|---|
-data|[Mod_Activity_Object](#schemamod_activity_object)[]|Response array of items.
+cursor_id|integer(int32)|The current _cursor value.
+prev_id|integer(int32)|The previous _cursor value as manually inserted by you, null by default.
+next_id|integer(int32)|The next position to move the _cursor to, based on the current request.
+result_count|integer(int32)|The amount of results returned in the current request.
+data|[Mod Activity Object](#schemamod_activity_object) []|Response array of items.
 » id|integer(int32)|Unique id of activity object.
-» user|[User_Object](#schemauser_object)|Contains member data.
+» user|[User Object ](#schemauser_object)|Contains member data.
 »» id|integer(int32)|Unique id of the user.
 »» nameid|string|Unique nameid of user which forms end of their profile URL.
 »» username|string|Non-unique username of the user.
 »» online|integer(int32)|Unix timestamp on when the user was last online.
-»» avatar|[Avatar_Object](#schemaavatar_object)|Contains avatar data.
+»» avatar|[Avatar Object ](#schemaavatar_object)|Contains avatar data.
 »»» filename|string|Image filename, including file extension.
 »»» full|string|Full URL to the image.
 »» timezone|string|The Timezone of the user, shown in {Country}/{City} format.
@@ -8313,10 +8373,10 @@ data|[Mod_Activity_Object](#schemamod_activity_object)[]|Response array of items
 »» url|string|URL to the user profile.
 » dateup|integer(int32)|Unix timestamp of when the update occurred.
 » event|string|The type of resource and action that occurred.
-» changes|object|No description
-»» summary|object|No description
-»»» before|string|No description
-»»» after|string|No description
+» changes|object|Contains all changes fields.
+»» summary|object|Example field that changed for the corresponding object schema.
+»»» before|string|The value prior to the event.
+»»» after|string|The newly-updated value.
 
 
 
@@ -8363,7 +8423,7 @@ cursor_id|integer(int32)|The current _cursor value.
 prev_id|integer(int32)|The previous _cursor value as manually inserted by you, null by default.
 next_id|integer(int32)|The next position to move the _cursor to, based on the current request.
 result_count|integer(int32)|The amount of results returned in the current request.
-data|[Modfile_Object](#schemamodfile_object)[]|Response array of items.
+data|[Modfile Object ](#schemamodfile_object) []|Response array of items.
 » id|integer(int32)|Unique file id.
 » mod|integer(int32)|Unique mod id.
 » date|integer(int32)|Unix timestamp of file upload time.
@@ -8401,7 +8461,7 @@ data|[Modfile_Object](#schemamodfile_object)[]|Response array of items.
 
 Name|Type|Description
 ---|---|---|---|
-data|[Mod_Tag_Object](#schemamod_tag_object)[]|No description
+data|[Mod Tag Object](#schemamod_tag_object) []|No description
 » tag|string|The contents of the tag.
 » date|integer(int32)|Unix timestamp of when tag was applied.
 
@@ -8458,15 +8518,15 @@ cursor_id|integer(int32)|The current _cursor value.
 prev_id|integer(int32)|The previous _cursor value as manually inserted by you, null by default.
 next_id|integer(int32)|The next position to move the _cursor to, based on the current request.
 result_count|integer(int32)|The amount of results returned in the current request.
-data|[Comment_Object](#schemacomment_object)[]|Array containing comment objects
+data|[Comment Object ](#schemacomment_object) []|Array containing comment objects
 » id|integer(int32)|Unique id of the comment.
 » mod|integer(int32)|Unique id of the parent mod.
-» submitted_by|[User_Object](#schemauser_object)|Contains member data.
+» submitted_by|[User Object ](#schemauser_object)|Contains member data.
 »» id|integer(int32)|Unique id of the user.
 »» nameid|string|Unique nameid of user which forms end of their profile URL.
 »» username|string|Non-unique username of the user.
 »» online|integer(int32)|Unix timestamp on when the user was last online.
-»» avatar|[Avatar_Object](#schemaavatar_object)|Contains avatar data.
+»» avatar|[Avatar Object ](#schemaavatar_object)|Contains avatar data.
 »»» filename|string|Image filename, including file extension.
 »»» full|string|Full URL to the image.
 »» timezone|string|The Timezone of the user, shown in {Country}/{City} format.
@@ -8526,14 +8586,14 @@ cursor_id|integer(int32)|The current _cursor value.
 prev_id|integer(int32)|The previous _cursor value as manually inserted by you, null by default.
 next_id|integer(int32)|The next position to move the _cursor to, based on the current request.
 result_count|integer(int32)|The amount of results returned in the current request.
-data|[Access_Object](#schemaaccess_object)[]|No description
+data|[Access Object ](#schemaaccess_object) []|No description
 » id|integer(int32)|Unique access id.
-» user|[User_Object](#schemauser_object)|Contains member data.
+» user|[User Object ](#schemauser_object)|Contains member data.
 »» id|integer(int32)|Unique id of the user.
 »» nameid|string|Unique nameid of user which forms end of their profile URL.
 »» username|string|Non-unique username of the user.
 »» online|integer(int32)|Unix timestamp on when the user was last online.
-»» avatar|[Avatar_Object](#schemaavatar_object)|Contains avatar data.
+»» avatar|[Avatar Object ](#schemaavatar_object)|Contains avatar data.
 »»» filename|string|Image filename, including file extension.
 »»» full|string|Full URL to the image.
 »» timezone|string|The Timezone of the user, shown in {Country}/{City} format.
@@ -8587,12 +8647,12 @@ cursor_id|integer(int32)|The current _cursor value.
 prev_id|integer(int32)|The previous _cursor value as manually inserted by you, null by default.
 next_id|integer(int32)|The next position to move the _cursor to, based on the current request.
 result_count|integer(int32)|The amount of results returned in the current request.
-data|[User_Object](#schemauser_object)[]|Response array of items.
+data|[User Object ](#schemauser_object) []|Response array of items.
 » id|integer(int32)|Unique id of the user.
 » nameid|string|Unique nameid of user which forms end of their profile URL.
 » username|string|Non-unique username of the user.
 » online|integer(int32)|Unix timestamp on when the user was last online.
-» avatar|[Avatar_Object](#schemaavatar_object)|Contains avatar data.
+» avatar|[Avatar Object ](#schemaavatar_object)|Contains avatar data.
 »» filename|string|Image filename, including file extension.
 »» full|string|Full URL to the image.
 » timezone|string|The Timezone of the user, shown in {Country}/{City} format.
@@ -8626,7 +8686,7 @@ data|[User_Object](#schemauser_object)[]|Response array of items.
 
 Name|Type|Description
 ---|---|---|---|
-data|[Update_Object](#schemaupdate_object)[]|Get all updates that occurred between two timestamps for the _authenticated user_.  Endpoint: v1/me/subscribed/updates
+data|[Update Object ](#schemaupdate_object) []|Get all updates that occurred between two timestamps for the _authenticated user_.  Endpoint: v1/me/subscribed/updates
 » id|integer(int32)|Unique update id.
 » resource|string|String representation of the update origin's resource type.
 » resourceid|integer(int32)|Unique id of corresponding resource.
@@ -8670,12 +8730,12 @@ data|[Update_Object](#schemaupdate_object)[]|Get all updates that occurred betwe
 Name|Type|Description
 ---|---|---|---|
 id|integer(int32)|Unique access id.
-user|[User_Object](#schemauser_object)|Contains member data.
+user|[User Object ](#schemauser_object)|Contains member data.
 » id|integer(int32)|Unique id of the user.
 » nameid|string|Unique nameid of user which forms end of their profile URL.
 » username|string|Non-unique username of the user.
 » online|integer(int32)|Unix timestamp on when the user was last online.
-» avatar|[Avatar_Object](#schemaavatar_object)|Contains avatar data.
+» avatar|[Avatar Object ](#schemaavatar_object)|Contains avatar data.
 »» filename|string|Image filename, including file extension.
 »» full|string|Full URL to the image.
 » timezone|string|The Timezone of the user, shown in {Country}/{City} format.
@@ -8726,12 +8786,12 @@ position|string|Custom title, has no effect on any access rights.
 Name|Type|Description
 ---|---|---|---|
 id|integer(int32)|Unique id of activity record.
-user|[User_Object](#schemauser_object)|Contains member data.
+user|[User Object ](#schemauser_object)|Contains member data.
 » id|integer(int32)|Unique id of the user.
 » nameid|string|Unique nameid of user which forms end of their profile URL.
 » username|string|Non-unique username of the user.
 » online|integer(int32)|Unix timestamp on when the user was last online.
-» avatar|[Avatar_Object](#schemaavatar_object)|Contains avatar data.
+» avatar|[Avatar Object ](#schemaavatar_object)|Contains avatar data.
 »» filename|string|Image filename, including file extension.
 »» full|string|Full URL to the image.
 » timezone|string|The Timezone of the user, shown in {Country}/{City} format.
@@ -8784,12 +8844,12 @@ changes|object|Contains changes data.
 Name|Type|Description
 ---|---|---|---|
 id|integer(int32)|Unique id of activity object.
-user|[User_Object](#schemauser_object)|Contains member data.
+user|[User Object ](#schemauser_object)|Contains member data.
 » id|integer(int32)|Unique id of the user.
 » nameid|string|Unique nameid of user which forms end of their profile URL.
 » username|string|Non-unique username of the user.
 » online|integer(int32)|Unix timestamp on when the user was last online.
-» avatar|[Avatar_Object](#schemaavatar_object)|Contains avatar data.
+» avatar|[Avatar Object ](#schemaavatar_object)|Contains avatar data.
 »» filename|string|Image filename, including file extension.
 »» full|string|Full URL to the image.
 » timezone|string|The Timezone of the user, shown in {Country}/{City} format.
@@ -8797,10 +8857,10 @@ user|[User_Object](#schemauser_object)|Contains member data.
 » url|string|URL to the user profile.
 dateup|integer(int32)|Unix timestamp of when the update occurred.
 event|string|The type of resource and action that occurred.
-changes|object|No description
-» summary|object|No description
-»» before|string|No description
-»» after|string|No description
+changes|object|Contains all changes fields.
+» summary|object|Example field that changed for the corresponding object schema.
+»» before|string|The value prior to the event.
+»» after|string|The newly-updated value.
 
 
 
@@ -8842,12 +8902,12 @@ Name|Type|Description
 ---|---|---|---|
 id|integer(int32)|Unique id of the comment.
 mod|integer(int32)|Unique id of the parent mod.
-submitted_by|[User_Object](#schemauser_object)|Contains member data.
+submitted_by|[User Object ](#schemauser_object)|Contains member data.
 » id|integer(int32)|Unique id of the user.
 » nameid|string|Unique nameid of user which forms end of their profile URL.
 » username|string|Non-unique username of the user.
 » online|integer(int32)|Unix timestamp on when the user was last online.
-» avatar|[Avatar_Object](#schemaavatar_object)|Contains avatar data.
+» avatar|[Avatar Object ](#schemaavatar_object)|Contains avatar data.
 »» filename|string|Image filename, including file extension.
 »» full|string|Full URL to the image.
 » timezone|string|The Timezone of the user, shown in {Country}/{City} format.
@@ -9046,12 +9106,12 @@ Name|Type|Description
 ---|---|---|---|
 id|integer(int32)|Unique mod id.
 game|integer(int32)|Unique game id.
-submitted_by|[User_Object](#schemauser_object)|Contains member data.
+submitted_by|[User Object ](#schemauser_object)|Contains member data.
 » id|integer(int32)|Unique id of the user.
 » nameid|string|Unique nameid of user which forms end of their profile URL.
 » username|string|Non-unique username of the user.
 » online|integer(int32)|Unix timestamp on when the user was last online.
-» avatar|[Avatar_Object](#schemaavatar_object)|Contains avatar data.
+» avatar|[Avatar Object ](#schemaavatar_object)|Contains avatar data.
 »» filename|string|Image filename, including file extension.
 »» full|string|Full URL to the image.
 » timezone|string|The Timezone of the user, shown in {Country}/{City} format.
@@ -9060,7 +9120,7 @@ submitted_by|[User_Object](#schemauser_object)|Contains member data.
 price|float|Sale price if applicable, in USD.
 datereg|integer(int32)|Unix timestamp of date registered.
 dateup|integer(int32)|Unix timestamp of date last updated.
-logo|[Logo_Object](#schemalogo_object)|Contains logo data.
+logo|[Logo Object ](#schemalogo_object)|Contains logo data.
 » filename|string|Image filename, with file extension included.
 » full|string|URL to full-sized image.
 » thumb_320x180|string|URL to small thumbnail image.
@@ -9073,7 +9133,7 @@ summary|string|Brief summary of the mod.
 description|string|Description of the mod.
 metadata|string|Metadata for the mod.
 url|string|Official website url for the mod.
-modfile|[Modfile_Object](#schemamodfile_object)|Contains file data.
+modfile|[Modfile Object ](#schemamodfile_object)|Contains file data.
 » id|integer(int32)|Unique file id.
 » mod|integer(int32)|Unique mod id.
 » date|integer(int32)|Unix timestamp of file upload time.
@@ -9088,13 +9148,13 @@ modfile|[Modfile_Object](#schemamodfile_object)|Contains file data.
 » changelog|string|List of all changes in this file release.
 » download|string|Link to download the file from the mod.io CDN.
 media|object|Contains media data.
-» youtube|[string]|Contains YouTube data.
-» sketchfab|[string]|Contains Sketchfab data.
-» images|[Unknown]|Contains images data.
+» youtube|string[]|Contains YouTube data.
+» sketchfab|string[]|Contains Sketchfab data.
+» images|[Image Object ](#schemaimage_object) []|Contains images data.
 »» full|string|URL to the full image.
 »» thumbnail|string|URL to the thumbnail image.
-»» filename|string|Image filename, with with extension included.
-ratings|[Rating_Object](#schemarating_object)|Contains ratings data.
+»» filename|string|Image filename, with the extension included.
+ratings|[Rating Object ](#schemarating_object)|Contains ratings data.
 » total|integer(int32)|Total ratings count.
 » positive|integer(int32)|Positive ratings count.
 » negative|integer(int32)|Negative ratings count.
@@ -9102,7 +9162,7 @@ ratings|[Rating_Object](#schemarating_object)|Contains ratings data.
 » percentage|integer(int32)|Rating of the mod as a percentage.
 » stars|integer(int32)|The amount of stars the mod has, between 0 and 5.
 » text|string|Text representation of the rating total.
-tags|[Mod_Tag_Object](#schemamod_tag_object)|Contains Tags data.
+tags|[Mod Tag Object](#schemamod_tag_object)|Contains Tags data.
 » tag|string|The contents of the tag.
 » date|integer(int32)|Unix timestamp of when tag was applied.
 
@@ -9201,12 +9261,12 @@ date|integer(int32)|Unix timestamp of when tag was applied.
 Name|Type|Description
 ---|---|---|---|
 id|integer(int32)|Unique game id.
-submitted_by|[User_Object](#schemauser_object)|Contains member data.
+submitted_by|[User Object ](#schemauser_object)|Contains member data.
 » id|integer(int32)|Unique id of the user.
 » nameid|string|Unique nameid of user which forms end of their profile URL.
 » username|string|Non-unique username of the user.
 » online|integer(int32)|Unix timestamp on when the user was last online.
-» avatar|[Avatar_Object](#schemaavatar_object)|Contains avatar data.
+» avatar|[Avatar Object ](#schemaavatar_object)|Contains avatar data.
 »» filename|string|Image filename, including file extension.
 »» full|string|Full URL to the image.
 » timezone|string|The Timezone of the user, shown in {Country}/{City} format.
@@ -9221,17 +9281,17 @@ curation|integer(int32)|Determines the curation process for the game.<br><br>*Fi
 revenue|integer(int32)|__Bitwise__. Determines the revenue capabilities for mods of the game. For selecting multiple options you need to submit the bitwise value. i.e. If you want to allow user-generated content to be sold(1), to receive donations(2) and allow them to control their supply and scarcity(8) your would submit _11 (8 + 2 + 1)_.<br><br>*Field Options*<br>__1__ = Allow user-generated content to be sold<br>__2__ = Allow user-generated content to receive donations<br>__4__ = Allow user-generated content to be traded (not subject to revenue share)<br>__8__ = Allow user-generated content to control supply and scarcity.
 api|integer(int32)|Determines what permissions you want to enable via the mod.io API.<br><br>*Field Options*<br>__0__ = Third parties cannot access your mods API and mods cannot be downloaded directly without API validation.<br>__1__ = Allow 3rd parties to access your mods API (recommended, an open API will encourage a healthy ecosystem of tools and apps) but mods cannot be downloaded directly<br>__2__ = Allow mods to be downloaded directly but 3rd parties cannot access your mods API.<br>__3__ = Allow third parties to access your mods API and allow mods to be downloaded directly without api validation.
 ugcname|string|Singular string that best describes the type of user-generated content.
-icon|[Icon_Object](#schemaicon_object)|Contains icon data.
+icon|[Icon Object ](#schemaicon_object)|Contains icon data.
 » filename|string|Image filename, with file extension included.
 » full|string|URL to full-sized image.
 » thumb_320x180|string|URL to small thumbnail image.
-logo|[Logo_Object](#schemalogo_object)|Contains logo data.
+logo|[Logo Object ](#schemalogo_object)|Contains logo data.
 » filename|string|Image filename, with file extension included.
 » full|string|URL to full-sized image.
 » thumb_320x180|string|URL to small thumbnail image.
 » thumb_640x360|string|URL to medium thumbnail image.
 » thumb_1280x720|string|URL to large thumbnail image.
-header|[Header_Object](#schemaheader_object)|Contains header data.
+header|[Header Object ](#schemaheader_object)|Contains header data.
 » filename|string|Image filename, with file extension included.
 » full|string|URL to the full-sized header image.
 homepage|string|Official game website URL.
@@ -9240,11 +9300,11 @@ nameid|string|The unique SEO friendly URL of the game.
 summary|string|Brief summary of the game.
 instructions|string|Modding instructions for developers.
 url|string|website url for the game.
-cats|[catsArray](#schemacatsarray)[]|Contains categories data.
+cats|[catsArray](#schemacatsarray) []|Contains categories data.
 » name|string|The name of the category.
 » type|string|Are tags selected via checkboxes or a single dropdown.
 » adminonly|integer(int32)|Is this an admin only tag? If so only admin's can see this category and it can be used for filtering.
-» tags|[string]|Eligible tags for this game.
+» tags|string[]|Eligible tags for this game.
 
 
 
@@ -9340,7 +9400,7 @@ id|integer(int32)|Unique id of the user.
 nameid|string|Unique nameid of user which forms end of their profile URL.
 username|string|Non-unique username of the user.
 online|integer(int32)|Unix timestamp on when the user was last online.
-avatar|[Avatar_Object](#schemaavatar_object)|Contains avatar data.
+avatar|[Avatar Object ](#schemaavatar_object)|Contains avatar data.
 » filename|string|Image filename, including file extension.
 » full|string|Full URL to the image.
 timezone|string|The Timezone of the user, shown in {Country}/{City} format.
