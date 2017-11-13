@@ -8009,11 +8009,7 @@ filename|string|Image filename, with the extension included.
 
 Name|Type|Description
 ---|---|---|---|
-cursor_id|integer(int32)|The current _cursor value.
-prev_id|integer(int32)|The previous _cursor value as manually inserted by you, null by default.
-next_id|integer(int32)|The next position to move the _cursor to, based on the current request.
-result_count|integer(int32)|The amount of results returned in the current request.
-data|[Game Object ](#schemagame_object) []|Array containing game objects
+data|[Game Object ](#schemagame_object)[]|Array containing game objects
 » id|integer(int32)|Unique game id.
 » submitted_by|[User Object ](#schemauser_object)|Contains member data.
 »» id|integer(int32)|Unique id of the user.
@@ -8054,11 +8050,15 @@ data|[Game Object ](#schemagame_object) []|Array containing game objects
 » summary|string|Brief summary of the game.
 » instructions|string|Modding instructions for developers.
 » url|string|website url for the game.
-» cats|[catsArray](#schemacatsarray) []|Contains categories data.
+» cats|[catsArray](#schemacatsarray)[]|Contains categories data.
 »» name|string|The name of the category.
 »» type|string|Are tags selected via checkboxes or a single dropdown.
 »» adminonly|integer(int32)|Is this an admin only tag? If so only admin's can see this category and it can be used for filtering.
 »» tags|string[]|Eligible tags for this game.
+cursor_id|integer(int32)|The current _cursor value.
+prev_id|integer(int32)|The previous _cursor value as manually inserted by you, null by default.
+next_id|integer(int32)|The next position to move the _cursor to, based on the current request.
+result_count|integer(int32)|The amount of results returned in the current request.
 
 
 
@@ -8110,11 +8110,7 @@ data|[Game Object ](#schemagame_object) []|Array containing game objects
 
 Name|Type|Description
 ---|---|---|---|
-cursor_id|integer(int32)|The current _cursor value.
-prev_id|integer(int32)|The previous _cursor value as manually inserted by you, null by default.
-next_id|integer(int32)|The next position to move the _cursor to, based on the current request.
-result_count|integer(int32)|The amount of results returned in the current request.
-data|[Game Activity Object](#schemagame_activity_object) []|Response array of items.
+data|[Game Activity Object](#schemagame_activity_object)[]|Response array of items.
 » id|integer(int32)|Unique id of activity record.
 » user|[User Object ](#schemauser_object)|Contains member data.
 »» id|integer(int32)|Unique id of the user.
@@ -8133,6 +8129,10 @@ data|[Game Activity Object](#schemagame_activity_object) []|Response array of it
 »» summary|object|Name of the field that changed, in this example its the 'summary' field.
 »»» before|string|The value of the field before the event.
 »»» after|string|The value of the field after the event.
+cursor_id|integer(int32)|The current _cursor value.
+prev_id|integer(int32)|The previous _cursor value as manually inserted by you, null by default.
+next_id|integer(int32)|The next position to move the _cursor to, based on the current request.
+result_count|integer(int32)|The amount of results returned in the current request.
 
 
 
@@ -8237,11 +8237,7 @@ data|[Game Activity Object](#schemagame_activity_object) []|Response array of it
 
 Name|Type|Description
 ---|---|---|---|
-cursor_id|integer(int32)|The current _cursor value.
-prev_id|integer(int32)|The previous _cursor value as manually inserted by you, null by default.
-next_id|integer(int32)|The next position to move the _cursor to, based on the current request.
-result_count|integer(int32)|The amount of results returned in the current request.
-data|[Mod Object ](#schemamod_object) []|Array containing mod objects
+data|[Mod Object ](#schemamod_object)[]|Array containing mod objects
 » id|integer(int32)|Unique mod id.
 » game|integer(int32)|Unique game id.
 » submitted_by|[User Object ](#schemauser_object)|Contains member data.
@@ -8288,7 +8284,7 @@ data|[Mod Object ](#schemamod_object) []|Array containing mod objects
 » media|object|Contains media data.
 »» youtube|string[]|Contains YouTube data.
 »» sketchfab|string[]|Contains Sketchfab data.
-»» images|[Image Object ](#schemaimage_object) []|Contains images data.
+»» images|[Image Object ](#schemaimage_object)[]|Contains images data.
 »»» full|string|URL to the full image.
 »»» thumbnail|string|URL to the thumbnail image.
 »»» filename|string|Image filename, with the extension included.
@@ -8303,6 +8299,10 @@ data|[Mod Object ](#schemamod_object) []|Array containing mod objects
 » tags|[Mod Tag Object](#schemamod_tag_object)|Contains Tags data.
 »» tag|string|The contents of the tag.
 »» date|integer(int32)|Unix timestamp of when tag was applied.
+cursor_id|integer(int32)|The current _cursor value.
+prev_id|integer(int32)|The previous _cursor value as manually inserted by you, null by default.
+next_id|integer(int32)|The next position to move the _cursor to, based on the current request.
+result_count|integer(int32)|The amount of results returned in the current request.
 
 
 
@@ -8354,11 +8354,7 @@ data|[Mod Object ](#schemamod_object) []|Array containing mod objects
 
 Name|Type|Description
 ---|---|---|---|
-cursor_id|integer(int32)|The current _cursor value.
-prev_id|integer(int32)|The previous _cursor value as manually inserted by you, null by default.
-next_id|integer(int32)|The next position to move the _cursor to, based on the current request.
-result_count|integer(int32)|The amount of results returned in the current request.
-data|[Mod Activity Object](#schemamod_activity_object) []|Response array of items.
+data|[Mod Activity Object](#schemamod_activity_object)[]|Response array of items.
 » id|integer(int32)|Unique id of activity object.
 » user|[User Object ](#schemauser_object)|Contains member data.
 »» id|integer(int32)|Unique id of the user.
@@ -8377,6 +8373,10 @@ data|[Mod Activity Object](#schemamod_activity_object) []|Response array of item
 »» summary|object|Example field that changed for the corresponding object schema.
 »»» before|string|The value prior to the event.
 »»» after|string|The newly-updated value.
+cursor_id|integer(int32)|The current _cursor value.
+prev_id|integer(int32)|The previous _cursor value as manually inserted by you, null by default.
+next_id|integer(int32)|The next position to move the _cursor to, based on the current request.
+result_count|integer(int32)|The amount of results returned in the current request.
 
 
 
@@ -8419,11 +8419,7 @@ data|[Mod Activity Object](#schemamod_activity_object) []|Response array of item
 
 Name|Type|Description
 ---|---|---|---|
-cursor_id|integer(int32)|The current _cursor value.
-prev_id|integer(int32)|The previous _cursor value as manually inserted by you, null by default.
-next_id|integer(int32)|The next position to move the _cursor to, based on the current request.
-result_count|integer(int32)|The amount of results returned in the current request.
-data|[Modfile Object ](#schemamodfile_object) []|Response array of items.
+data|[Modfile Object ](#schemamodfile_object)[]|Response array of items.
 » id|integer(int32)|Unique file id.
 » mod|integer(int32)|Unique mod id.
 » date|integer(int32)|Unix timestamp of file upload time.
@@ -8437,6 +8433,10 @@ data|[Modfile Object ](#schemamodfile_object) []|Response array of items.
 » virustotal|string|Text output from virustotal scan.
 » changelog|string|List of all changes in this file release.
 » download|string|Link to download the file from the mod.io CDN.
+cursor_id|integer(int32)|The current _cursor value.
+prev_id|integer(int32)|The previous _cursor value as manually inserted by you, null by default.
+next_id|integer(int32)|The next position to move the _cursor to, based on the current request.
+result_count|integer(int32)|The amount of results returned in the current request.
 
 
 
@@ -8461,7 +8461,7 @@ data|[Modfile Object ](#schemamodfile_object) []|Response array of items.
 
 Name|Type|Description
 ---|---|---|---|
-data|[Mod Tag Object](#schemamod_tag_object) []|No description
+data|[Mod Tag Object](#schemamod_tag_object)[]|No description
 » tag|string|The contents of the tag.
 » date|integer(int32)|Unix timestamp of when tag was applied.
 
@@ -8514,11 +8514,7 @@ data|[Mod Tag Object](#schemamod_tag_object) []|No description
 
 Name|Type|Description
 ---|---|---|---|
-cursor_id|integer(int32)|The current _cursor value.
-prev_id|integer(int32)|The previous _cursor value as manually inserted by you, null by default.
-next_id|integer(int32)|The next position to move the _cursor to, based on the current request.
-result_count|integer(int32)|The amount of results returned in the current request.
-data|[Comment Object ](#schemacomment_object) []|Array containing comment objects
+data|[Comment Object ](#schemacomment_object)[]|Array containing comment objects
 » id|integer(int32)|Unique id of the comment.
 » mod|integer(int32)|Unique id of the parent mod.
 » submitted_by|[User Object ](#schemauser_object)|Contains member data.
@@ -8538,6 +8534,10 @@ data|[Comment Object ](#schemacomment_object) []|Array containing comment object
 » karma|integer(int32)|The amount of karma the comment has received.
 » karmago|integer(int32)|The amount of good karma the comment has received.
 » summary|string|The contents of the comment.
+cursor_id|integer(int32)|The current _cursor value.
+prev_id|integer(int32)|The previous _cursor value as manually inserted by you, null by default.
+next_id|integer(int32)|The next position to move the _cursor to, based on the current request.
+result_count|integer(int32)|The amount of results returned in the current request.
 
 
 
@@ -8582,11 +8582,7 @@ data|[Comment Object ](#schemacomment_object) []|Array containing comment object
 
 Name|Type|Description
 ---|---|---|---|
-cursor_id|integer(int32)|The current _cursor value.
-prev_id|integer(int32)|The previous _cursor value as manually inserted by you, null by default.
-next_id|integer(int32)|The next position to move the _cursor to, based on the current request.
-result_count|integer(int32)|The amount of results returned in the current request.
-data|[Access Object ](#schemaaccess_object) []|No description
+data|[Access Object ](#schemaaccess_object)[]|No description
 » id|integer(int32)|Unique access id.
 » user|[User Object ](#schemauser_object)|Contains member data.
 »» id|integer(int32)|Unique id of the user.
@@ -8603,6 +8599,10 @@ data|[Access Object ](#schemaaccess_object) []|No description
 » level|integer(int32)|The level of permissions the member has within the team. 0 = Guest, 1 = Member, 2 = Contributor, 4 = Manager, 8 = Leader.
 » date|integer(int32)|Unix timestamp of date the member joined the team.
 » position|string|Custom title, has no effect on any access rights.
+cursor_id|integer(int32)|The current _cursor value.
+prev_id|integer(int32)|The previous _cursor value as manually inserted by you, null by default.
+next_id|integer(int32)|The next position to move the _cursor to, based on the current request.
+result_count|integer(int32)|The amount of results returned in the current request.
 
 
 
@@ -8643,11 +8643,7 @@ data|[Access Object ](#schemaaccess_object) []|No description
 
 Name|Type|Description
 ---|---|---|---|
-cursor_id|integer(int32)|The current _cursor value.
-prev_id|integer(int32)|The previous _cursor value as manually inserted by you, null by default.
-next_id|integer(int32)|The next position to move the _cursor to, based on the current request.
-result_count|integer(int32)|The amount of results returned in the current request.
-data|[User Object ](#schemauser_object) []|Response array of items.
+data|[User Object ](#schemauser_object)[]|Response array of items.
 » id|integer(int32)|Unique id of the user.
 » nameid|string|Unique nameid of user which forms end of their profile URL.
 » username|string|Non-unique username of the user.
@@ -8658,6 +8654,10 @@ data|[User Object ](#schemauser_object) []|Response array of items.
 » timezone|string|The Timezone of the user, shown in {Country}/{City} format.
 » language|string|The users language preference, limited to two characters.
 » url|string|URL to the user profile.
+cursor_id|integer(int32)|The current _cursor value.
+prev_id|integer(int32)|The previous _cursor value as manually inserted by you, null by default.
+next_id|integer(int32)|The next position to move the _cursor to, based on the current request.
+result_count|integer(int32)|The amount of results returned in the current request.
 
 
 
@@ -8686,7 +8686,7 @@ data|[User Object ](#schemauser_object) []|Response array of items.
 
 Name|Type|Description
 ---|---|---|---|
-data|[Update Object ](#schemaupdate_object) []|Get all updates that occurred between two timestamps for the _authenticated user_.  Endpoint: v1/me/subscribed/updates
+data|[Update Object ](#schemaupdate_object)[]|Get all updates that occurred between two timestamps for the _authenticated user_.  Endpoint: v1/me/subscribed/updates
 » id|integer(int32)|Unique update id.
 » resource|string|String representation of the update origin's resource type.
 » resourceid|integer(int32)|Unique id of corresponding resource.
@@ -9150,7 +9150,7 @@ modfile|[Modfile Object ](#schemamodfile_object)|Contains file data.
 media|object|Contains media data.
 » youtube|string[]|Contains YouTube data.
 » sketchfab|string[]|Contains Sketchfab data.
-» images|[Image Object ](#schemaimage_object) []|Contains images data.
+» images|[Image Object ](#schemaimage_object)[]|Contains images data.
 »» full|string|URL to the full image.
 »» thumbnail|string|URL to the thumbnail image.
 »» filename|string|Image filename, with the extension included.
@@ -9300,7 +9300,7 @@ nameid|string|The unique SEO friendly URL of the game.
 summary|string|Brief summary of the game.
 instructions|string|Modding instructions for developers.
 url|string|website url for the game.
-cats|[catsArray](#schemacatsarray) []|Contains categories data.
+cats|[catsArray](#schemacatsarray)[]|Contains categories data.
 » name|string|The name of the category.
 » type|string|Are tags selected via checkboxes or a single dropdown.
 » adminonly|integer(int32)|Is this an admin only tag? If so only admin's can see this category and it can be used for filtering.
