@@ -4205,8 +4205,15 @@ Get all tags for the corresponding mod, successful response will return an array
     {
       "tag": "Unity",
       "date": 1499841487
+    },
+    {
+        ...
     }
-  ]
+  ],
+  "cursor_id": 60,
+  "prev_id": 30,
+  "next_id": 160,
+  "result_count": 100
 }
 ```
 <h3 id="Get-All-Mod-Tags-responses">Responses</h3>
@@ -8506,8 +8513,15 @@ result_count|integer(int32)|The amount of results returned in the current reques
     {
       "tag": "Unity",
       "date": 1499841487
+    },
+    {
+        ...
     }
-  ]
+  ],
+  "cursor_id": 60,
+  "prev_id": 30,
+  "next_id": 160,
+  "result_count": 100
 } 
 ```
 
@@ -8519,6 +8533,10 @@ Name|Type|Description
 data|[Mod Tag Object ](#schemamod_tag_object)[]|No description
 » tag|string|The displayed tag.
 » date|integer(int32)|Unix timestamp of when tag was applied.
+cursor_id|integer(int32)|The current _cursor value.
+prev_id|integer(int32)|The previous _cursor value as manually inserted by you, null by default.
+next_id|integer(int32)|The next position to move the _cursor to, based on the current request.
+result_count|integer(int32)|The amount of results returned in the current request.
 
 
 
