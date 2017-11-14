@@ -1151,7 +1151,7 @@ Update details for a game. If you want to update the `icon`, `logo` or `header` 
 
 Status|Meaning|Description|Response Schema
 ---|---|---|---|
-200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)|Update successful|[updateGame](#schemaupdategame)
+200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)|Update successful|[Message Object](#message-object)
 
 <aside class="warning">
 To perform this operation, you must be authenticated by means of one of the following methods:
@@ -1296,7 +1296,7 @@ Upload new media to a game. Any request you make to this endpoint *should* conta
 
 Status|Meaning|Description|Response Schema
 ---|---|---|---|
-200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)|Media Successfully uploaded|[updateMediaGame](#schemaupdatemediagame)
+200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)|Media Successfully uploaded|[Message Object](#message-object)
 
 <aside class="warning">
 To perform this operation, you must be authenticated by means of one of the following methods:
@@ -1408,7 +1408,7 @@ System.out.println(response.toString());
 ```
 `GET /games/{game-id}/activity`
 
-View activity for a game, showing changes made to the resource. Successful request will return an array of [Game activity objects](https://docs.mod.io/#get-game-activity-2). To make your requests as specific to your needs as possible it's highly recommended reading over our [filtering documentation](https://docs.mod.io/#filtering) if it will help you with consuming this endpoint. This endpoint by default sorts by `id` in descending order.
+Retrieve activity log for a game, showing changes made to the resource. Successful request will return an array of [Game activity objects](https://docs.mod.io/#get-game-activity-2). To make your requests as specific to your needs as possible it's highly recommended reading over our [filtering documentation](https://docs.mod.io/#filtering) if it will help you with consuming this endpoint. This endpoint by default sorts by `id` in descending order.
      
      Filter|Type|Description
      ---|---|---
@@ -1573,7 +1573,7 @@ System.out.println(response.toString());
 ```
 `GET /games/{game-id}/team`
 
-View all members that are part of a game team. Successful request will return an array of [Access objects](https://docs.mod.io/#get-team). To make your requests as specific to your needs as possible it's highly recommended reading over our [filtering documentation](https://docs.mod.io/#filtering) if it will help you with consuming this endpoint.
+Retrieve all members that are part of a game team. Successful request will return an array of [Access objects](https://docs.mod.io/#get-team). To make your requests as specific to your needs as possible it's highly recommended reading over our [filtering documentation](https://docs.mod.io/#filtering) if it will help you with consuming this endpoint.
      
      Filter|Type|Required|Description
      ---|---|---|---|
@@ -1769,7 +1769,7 @@ Add a user to a game team.
 
 Status|Meaning|Description|Response Schema
 ---|---|---|---|
-201|[Created](https://tools.ietf.org/html/rfc7231#section-6.3.2)|Created|[addTeam](#schemaaddteam)
+201|[Created](https://tools.ietf.org/html/rfc7231#section-6.3.2)|Created|[Message Object](#message-object)
 
 <aside class="warning">
 To perform this operation, you must be authenticated by means of one of the following methods:
@@ -1913,7 +1913,7 @@ Update the details of a user who is currently a part of the specified game team.
 
 Status|Meaning|Description|Response Schema
 ---|---|---|---|
-200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)|OK|[updateTeam](#schemaupdateteam)
+200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)|OK|[Message Object](#message-object)
 
 <aside class="warning">
 To perform this operation, you must be authenticated by means of one of the following methods:
@@ -2049,7 +2049,7 @@ Remove a member from a game team. This will revoke their access rights if they a
 
 Status|Meaning|Description|Response Schema
 ---|---|---|---|
-204|[No Content](https://tools.ietf.org/html/rfc7231#section-6.3.5)|No Content|[204](#schema204)
+204|[No Content](https://tools.ietf.org/html/rfc7231#section-6.3.5)|No Content|None
 
 <aside class="warning">
 To perform this operation, you must be authenticated by means of one of the following methods:
@@ -2291,6 +2291,208 @@ apiKey, oauth2 ( Scopes: read )
 </aside>
 
 
+## Get Mod
+
+> Code samples
+
+```shell
+# You can also use wget
+curl -X GET https://api.mod.io/v1/games/{game-id}/mods/{mod-id}?api_key=YourApiKey \
+  -H 'Accept: application/json'
+
+```
+
+```http
+GET https://api.mod.io/v1/games/{game-id}/mods/{mod-id}?api_key=YourApiKey HTTP/1.1
+Host: api.mod.io
+
+Accept: application/json
+
+```
+
+```javascript
+var headers = {
+  'Accept':'application/json'
+
+};
+
+$.ajax({
+  url: 'https://api.mod.io/v1/games/{game-id}/mods/{mod-id}',
+  method: 'get',
+  data: '?api_key=YourApiKey',
+  headers: headers,
+  success: function(data) {
+    console.log(JSON.stringify(data));
+  }
+})
+```
+
+```javascript--nodejs
+const request = require('node-fetch');
+
+const headers = {
+  'Accept':'application/json'
+
+};
+
+fetch('https://api.mod.io/v1/games/{game-id}/mods/{mod-id}?api_key=YourApiKey',
+{
+  method: 'GET',
+
+  headers: headers
+})
+.then(function(res) {
+    return res.json();
+}).then(function(body) {
+    console.log(body);
+});
+```
+
+```ruby
+require 'rest-client'
+require 'json'
+
+headers = {
+  'Accept' => 'application/json'
+}
+
+result = RestClient.get 'https://api.mod.io/v1/games/{game-id}/mods/{mod-id}',
+  params: {
+  'api_key' => 'string'
+}, headers: headers
+
+
+p JSON.parse(result)
+```
+
+```python
+import requests
+headers = {
+  'Accept': 'application/json'
+}
+
+r = requests.get('https://api.mod.io/v1/games/{game-id}/mods/{mod-id}', params={
+  'api_key': 'YourApiKey'
+}, headers = headers)
+
+print r.json()
+```
+
+```java
+URL obj = new URL("https://api.mod.io/v1/games/{game-id}/mods/{mod-id}?api_key=YourApiKey");
+HttpURLConnection con = (HttpURLConnection) obj.openConnection();
+con.setRequestMethod("GET");
+int responseCode = con.getResponseCode();
+BufferedReader in = new BufferedReader(
+    new InputStreamReader(con.getInputStream()));
+String inputLine;
+StringBuffer response = new StringBuffer();
+while ((inputLine = in.readLine()) != null) {
+    response.append(inputLine);
+}
+in.close();
+System.out.println(response.toString());
+```
+`GET /games/{game-id}/mods/{mod-id}`
+
+Retrieve a single mod on mod.io. Successful request will return a single [Mod Object](https://docs.mod.io/#mod-object).
+
+
+> Example responses
+
+```json
+{
+  "id": 2,
+  "game": 2,
+  "submitted_by": {
+    "id": 1,
+    "nameid": "xant",
+    "username": "XanT",
+    "online": 1509922961,
+    "avatar": {
+      "filename": "masterchief.jpg",
+      "full": "https://media.mod.io/images/members/1/1/1/masterchief.jpg"
+    },
+    "timezone": "Australia/Brisbane",
+    "language": "en",
+    "url": "https://mod.io/members/xant"
+  },
+  "price": 9.99,
+  "datereg": 1492564103,
+  "dateup": 1499841487,
+  "logo": {
+    "filename": "IMG_20170409_222419.jpg",
+    "full": "https://media.mod.io/images/mods/1/1/2/IMG_20170409_222419.jpg",
+    "thumb_320x180": "https://media.mod.io/cache/images/mods/1/1/2/thumb_320x180/IMG_20170409_222419.jpg",
+    "thumb_640x360": "https://media.mod.io/cache/images/mods/1/1/2/thumb_640x360/IMG_20170409_222419.jpg",
+    "thumb_1280x720": "https://media.mod.io/cache/images/mods/1/1/2/thumb_1280x720/IMG_20170409_222419.jpg"
+  },
+  "homepage": "https://www.rogue-hdpack.com/",
+  "name": "Rogue Knight HD Pack",
+  "nameid": "rogue-knight-hd-pack",
+  "summary": "It's time to bask in the glory of beautiful 4k textures!",
+  "description": "<h2>About</h2><p>Rogue HD Pack does exactly what you thi...",
+  "metadata": "rogue,hd,high-res,4k,hd textures",
+  "url": "https://rogue-knight.mod.io/rogue-knight-hd-pack",
+  "modfile": {
+    "id": 2,
+    "mod": 2,
+    "date": 1499841487,
+    "datevirus": 1499841487,
+    "virusstatus": 0,
+    "viruspositive": 0,
+    "filesize": 15181,
+    "filehash": "2d4a0e2d7273db6b0a94b0740a88ad0d",
+    "filename": "rogue-knight-v1.zip",
+    "version": "1.3",
+    "virustotal": "No threats found.",
+    "changelog": "VERSION 1.3 -- Changes -- Fixed critical castle floor bug.",
+    "download": "https://mod.io/mods/file/2/c489a0354111a4d76640d47f0cdcb294"
+  },
+  "media": {
+    "youtube": [
+      "https://www.youtube.com/watch?v=dQw4w9WgXcQ"
+    ],
+    "sketchfab": [
+      "https://sketchfab.com/models/ef40b2d300334d009984c8865b2db1c8"
+    ],
+    "images": [
+      {
+        "full": "https://media.mod.io/images/mods/1/1/2/IMG_20170409_222419.jpg",
+        "thumbnail": "https://media.mod.io/cache/images/mods/1/1/2/thumb_1020x2000/IMG_20170409_222419.jpg",
+        "filename": "IMG_20170409_222419.jpg"
+      }
+    ]
+  },
+  "ratings": {
+    "total": 1230,
+    "positive": 1047,
+    "negative": 183,
+    "weighted": 87.38,
+    "percentage": 91,
+    "stars": 4,
+    "text": "Very Positive"
+  },
+  "tags": [
+    {
+      "tag": "Unity",
+      "date": 1499841487
+    }
+  ]
+}
+```
+<h3 id="Get-Mod-responses">Responses</h3>
+
+Status|Meaning|Description|Response Schema
+---|---|---|---|
+200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)|Successful Request|[Mod Object  ](#schemamod_object)
+
+<aside class="warning">
+To perform this operation, you must be authenticated by means of one of the following methods:
+apiKey, oauth2 ( Scopes: read )
+</aside>
+
+
 ## Add Mod
 
 > Code samples
@@ -2525,208 +2727,6 @@ oauth2 ( Scopes: write )
 </aside>
 
 
-## Get Mod
-
-> Code samples
-
-```shell
-# You can also use wget
-curl -X GET https://api.mod.io/v1/games/{game-id}/mods/{mod-id}?api_key=YourApiKey \
-  -H 'Accept: application/json'
-
-```
-
-```http
-GET https://api.mod.io/v1/games/{game-id}/mods/{mod-id}?api_key=YourApiKey HTTP/1.1
-Host: api.mod.io
-
-Accept: application/json
-
-```
-
-```javascript
-var headers = {
-  'Accept':'application/json'
-
-};
-
-$.ajax({
-  url: 'https://api.mod.io/v1/games/{game-id}/mods/{mod-id}',
-  method: 'get',
-  data: '?api_key=YourApiKey',
-  headers: headers,
-  success: function(data) {
-    console.log(JSON.stringify(data));
-  }
-})
-```
-
-```javascript--nodejs
-const request = require('node-fetch');
-
-const headers = {
-  'Accept':'application/json'
-
-};
-
-fetch('https://api.mod.io/v1/games/{game-id}/mods/{mod-id}?api_key=YourApiKey',
-{
-  method: 'GET',
-
-  headers: headers
-})
-.then(function(res) {
-    return res.json();
-}).then(function(body) {
-    console.log(body);
-});
-```
-
-```ruby
-require 'rest-client'
-require 'json'
-
-headers = {
-  'Accept' => 'application/json'
-}
-
-result = RestClient.get 'https://api.mod.io/v1/games/{game-id}/mods/{mod-id}',
-  params: {
-  'api_key' => 'string'
-}, headers: headers
-
-
-p JSON.parse(result)
-```
-
-```python
-import requests
-headers = {
-  'Accept': 'application/json'
-}
-
-r = requests.get('https://api.mod.io/v1/games/{game-id}/mods/{mod-id}', params={
-  'api_key': 'YourApiKey'
-}, headers = headers)
-
-print r.json()
-```
-
-```java
-URL obj = new URL("https://api.mod.io/v1/games/{game-id}/mods/{mod-id}?api_key=YourApiKey");
-HttpURLConnection con = (HttpURLConnection) obj.openConnection();
-con.setRequestMethod("GET");
-int responseCode = con.getResponseCode();
-BufferedReader in = new BufferedReader(
-    new InputStreamReader(con.getInputStream()));
-String inputLine;
-StringBuffer response = new StringBuffer();
-while ((inputLine = in.readLine()) != null) {
-    response.append(inputLine);
-}
-in.close();
-System.out.println(response.toString());
-```
-`GET /games/{game-id}/mods/{mod-id}`
-
-Retrieve a single mod on mod.io. Successful request will return a single [Mod Object](https://docs.mod.io/#mod-object).
-
-
-> Example responses
-
-```json
-{
-  "id": 2,
-  "game": 2,
-  "submitted_by": {
-    "id": 1,
-    "nameid": "xant",
-    "username": "XanT",
-    "online": 1509922961,
-    "avatar": {
-      "filename": "masterchief.jpg",
-      "full": "https://media.mod.io/images/members/1/1/1/masterchief.jpg"
-    },
-    "timezone": "Australia/Brisbane",
-    "language": "en",
-    "url": "https://mod.io/members/xant"
-  },
-  "price": 9.99,
-  "datereg": 1492564103,
-  "dateup": 1499841487,
-  "logo": {
-    "filename": "IMG_20170409_222419.jpg",
-    "full": "https://media.mod.io/images/mods/1/1/2/IMG_20170409_222419.jpg",
-    "thumb_320x180": "https://media.mod.io/cache/images/mods/1/1/2/thumb_320x180/IMG_20170409_222419.jpg",
-    "thumb_640x360": "https://media.mod.io/cache/images/mods/1/1/2/thumb_640x360/IMG_20170409_222419.jpg",
-    "thumb_1280x720": "https://media.mod.io/cache/images/mods/1/1/2/thumb_1280x720/IMG_20170409_222419.jpg"
-  },
-  "homepage": "https://www.rogue-hdpack.com/",
-  "name": "Rogue Knight HD Pack",
-  "nameid": "rogue-knight-hd-pack",
-  "summary": "It's time to bask in the glory of beautiful 4k textures!",
-  "description": "<h2>About</h2><p>Rogue HD Pack does exactly what you thi...",
-  "metadata": "rogue,hd,high-res,4k,hd textures",
-  "url": "https://rogue-knight.mod.io/rogue-knight-hd-pack",
-  "modfile": {
-    "id": 2,
-    "mod": 2,
-    "date": 1499841487,
-    "datevirus": 1499841487,
-    "virusstatus": 0,
-    "viruspositive": 0,
-    "filesize": 15181,
-    "filehash": "2d4a0e2d7273db6b0a94b0740a88ad0d",
-    "filename": "rogue-knight-v1.zip",
-    "version": "1.3",
-    "virustotal": "No threats found.",
-    "changelog": "VERSION 1.3 -- Changes -- Fixed critical castle floor bug.",
-    "download": "https://mod.io/mods/file/2/c489a0354111a4d76640d47f0cdcb294"
-  },
-  "media": {
-    "youtube": [
-      "https://www.youtube.com/watch?v=dQw4w9WgXcQ"
-    ],
-    "sketchfab": [
-      "https://sketchfab.com/models/ef40b2d300334d009984c8865b2db1c8"
-    ],
-    "images": [
-      {
-        "full": "https://media.mod.io/images/mods/1/1/2/IMG_20170409_222419.jpg",
-        "thumbnail": "https://media.mod.io/cache/images/mods/1/1/2/thumb_1020x2000/IMG_20170409_222419.jpg",
-        "filename": "IMG_20170409_222419.jpg"
-      }
-    ]
-  },
-  "ratings": {
-    "total": 1230,
-    "positive": 1047,
-    "negative": 183,
-    "weighted": 87.38,
-    "percentage": 91,
-    "stars": 4,
-    "text": "Very Positive"
-  },
-  "tags": [
-    {
-      "tag": "Unity",
-      "date": 1499841487
-    }
-  ]
-}
-```
-<h3 id="Get-Mod-responses">Responses</h3>
-
-Status|Meaning|Description|Response Schema
----|---|---|---|
-200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)|Successful Request|[Mod Object  ](#schemamod_object)
-
-<aside class="warning">
-To perform this operation, you must be authenticated by means of one of the following methods:
-apiKey, oauth2 ( Scopes: read )
-</aside>
-
-
 ## Edit Mod
 
 > Code samples
@@ -2870,7 +2870,7 @@ Edit details for a mod. If you wanting to update the media attached to this game
 
 Status|Meaning|Description|Response Schema
 ---|---|---|---|
-200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)|Update Successful|[updateMod](#schemaupdatemod)
+200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)|Update Successful|[Message Object](#message-object)
 
 <aside class="warning">
 To perform this operation, you must be authenticated by means of one of the following methods:
@@ -3006,7 +3006,7 @@ Delete a mod profile which will if successful will return `204 No Content`. Note
 
 Status|Meaning|Description|Response Schema
 ---|---|---|---|
-204|[No Content](https://tools.ietf.org/html/rfc7231#section-6.3.5)|No Content|[204](#schema204)
+204|[No Content](https://tools.ietf.org/html/rfc7231#section-6.3.5)|No Content|None
 
 <aside class="warning">
 To perform this operation, you must be authenticated by means of one of the following methods:
@@ -3152,7 +3152,7 @@ This endpoint is very flexible and will process any images posted to the endpoin
 
 Status|Meaning|Description|Response Schema
 ---|---|---|---|
-201|[Created](https://tools.ietf.org/html/rfc7231#section-6.3.2)|Resource Created|[updateMediaMod](#schemaupdatemediamod)
+201|[Created](https://tools.ietf.org/html/rfc7231#section-6.3.2)|Resource Created|[Message Object](#message-object)
 
 ### Response Headers
 
@@ -3301,7 +3301,7 @@ Delete images, sketchfab or youtube links from a mod profile which if successful
 
 Status|Meaning|Description|Response Schema
 ---|---|---|---|
-204|[No Content](https://tools.ietf.org/html/rfc7231#section-6.3.5)|No Content|[204](#schema204)
+204|[No Content](https://tools.ietf.org/html/rfc7231#section-6.3.5)|No Content|None
 
 <aside class="warning">
 To perform this operation, you must be authenticated by means of one of the following methods:
@@ -3413,7 +3413,7 @@ System.out.println(response.toString());
 ```
 `GET /games/{game-id}/mods/{mod-id}/activity`
 
-View activity for a mod, showing changes made to the resource. Successful request will return an array of [Mod Activity Objects](https://docs.mod.io/#get-mod-activity-2). To make your requests as specific to your needs as possible it's highly recommended reading over our [filtering documentation](https://docs.mod.io/#filtering) if it will help you with consuming this endpoint. This endpoint by default sorts by `id` in descending order.
+Retrieve activity log for a mod, showing changes made to the resource. Successful request will return an array of [Mod Activity Objects](https://docs.mod.io/#get-mod-activity-2). To make your requests as specific to your needs as possible it's highly recommended reading over our [filtering documentation](https://docs.mod.io/#filtering) if it will help you with consuming this endpoint. This endpoint by default sorts by `id` in descending order.
      
      Filter|Type|Description
      ---|---|---
@@ -4077,7 +4077,7 @@ Update the details for a published file on mod.io. If you are wanting to update 
 
 Status|Meaning|Description|Response Schema
 ---|---|---|---|
-200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)|Update Successful|[updateFile](#schemaupdatefile)
+200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)|Update Successful|[Message Object](#message-object)
 
 <aside class="warning">
 To perform this operation, you must be authenticated by means of one of the following methods:
@@ -4358,7 +4358,7 @@ Add tags to a mod's profile. Note that you can only add what tags are allowed by
 
 Status|Meaning|Description|Response Schema
 ---|---|---|---|
-201|[Created](https://tools.ietf.org/html/rfc7231#section-6.3.2)|Created|[addModTag](#schemaaddmodtag)
+201|[Created](https://tools.ietf.org/html/rfc7231#section-6.3.2)|Created|[Message Object](#message-object)
 
 <aside class="warning">
 To perform this operation, you must be authenticated by means of one of the following methods:
@@ -4498,7 +4498,7 @@ Delete one or more tags for a mod profile. Deleting tags is identical to adding 
 
 Status|Meaning|Description|Response Schema
 ---|---|---|---|
-204|[No Content](https://tools.ietf.org/html/rfc7231#section-6.3.5)|No Content|[204](#schema204)
+204|[No Content](https://tools.ietf.org/html/rfc7231#section-6.3.5)|No Content|None
 
 <aside class="warning">
 To perform this operation, you must be authenticated by means of one of the following methods:
@@ -4641,7 +4641,7 @@ Submit a positive or negative rating for a mod, equivalent of thumps up and thum
 
 Status|Meaning|Description|Response Schema
 ---|---|---|---|
-201|[Created](https://tools.ietf.org/html/rfc7231#section-6.3.2)|Resource created|[addRating](#schemaaddrating)
+201|[Created](https://tools.ietf.org/html/rfc7231#section-6.3.2)|Resource created|[Message Object](#message-object)
 
 <aside class="warning">
 To perform this operation, you must be authenticated by means of one of the following methods:
@@ -4818,7 +4818,7 @@ apiKey, oauth2 ( Scopes: read )
 </aside>
 
 
-## View Mod Comment
+## Get Mod Comment
 
 > Code samples
 
@@ -4922,7 +4922,7 @@ System.out.println(response.toString());
 ```
 `GET /games/{game-id}/mods/{mod-id}/comments/{comment-id}`
 
-Find a comment by it's unique ID. Successful request will return a single [Comment Object](https://docs.mod.io/#comment-object).
+Retrieve a comment by it's unique ID. Successful request will return a single [Comment Object](https://docs.mod.io/#comment-object).
 
 
 > Example responses
@@ -4952,7 +4952,7 @@ Find a comment by it's unique ID. Successful request will return a single [Comme
   "summary": "This mod is kickass! Great work!"
 }
 ```
-<h3 id="View-Mod-Comment-responses">Responses</h3>
+<h3 id="Get-Mod-Comment-responses">Responses</h3>
 
 Status|Meaning|Description|Response Schema
 ---|---|---|---|
@@ -5092,7 +5092,7 @@ Delete a comment from a mod profile.
 
 Status|Meaning|Description|Response Schema
 ---|---|---|---|
-204|[No Content](https://tools.ietf.org/html/rfc7231#section-6.3.5)|No Content|[204](#schema204)
+204|[No Content](https://tools.ietf.org/html/rfc7231#section-6.3.5)|No Content|None
 
 <aside class="warning">
 To perform this operation, you must be authenticated by means of one of the following methods:
@@ -5204,7 +5204,7 @@ System.out.println(response.toString());
 ```
 `GET /games/{game-id}/mods/{mod-id}/team`
 
-View all members that are part of a mod team. Successful request will return an array of [Access Objects](https://docs.mod.io/#get-team). To make your requests as specific to your needs as possible it's highly recommended reading over our [filtering documentation](https://docs.mod.io/#filtering) if it will help you with consuming this endpoint.
+Retrieve all members that are part of a mod team. Successful request will return an array of [Access Objects](https://docs.mod.io/#get-team). To make your requests as specific to your needs as possible it's highly recommended reading over our [filtering documentation](https://docs.mod.io/#filtering) if it will help you with consuming this endpoint.
      
      Filter|Type|Required|Description
      ---|---|---|---|
@@ -5399,7 +5399,7 @@ Add a user to a mod team.
 
 Status|Meaning|Description|Response Schema
 ---|---|---|---|
-201|[Created](https://tools.ietf.org/html/rfc7231#section-6.3.2)|Created|[addTeam](#schemaaddteam)
+201|[Created](https://tools.ietf.org/html/rfc7231#section-6.3.2)|Created|[Message Object](#message-object)
 
 <aside class="warning">
 To perform this operation, you must be authenticated by means of one of the following methods:
@@ -5543,7 +5543,7 @@ Update the details of a member who is currently a part of the specified mod team
 
 Status|Meaning|Description|Response Schema
 ---|---|---|---|
-200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)|OK|[updateTeam](#schemaupdateteam)
+200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)|OK|[Message Object](#message-object)
 
 <aside class="warning">
 To perform this operation, you must be authenticated by means of one of the following methods:
@@ -5679,7 +5679,7 @@ Remove a member from a mod team. This will revoke their access rights if they ar
 
 Status|Meaning|Description|Response Schema
 ---|---|---|---|
-204|[No Content](https://tools.ietf.org/html/rfc7231#section-6.3.5)|No Content|[204](#schema204)
+204|[No Content](https://tools.ietf.org/html/rfc7231#section-6.3.5)|No Content|None
 
 <aside class="warning">
 To perform this operation, you must be authenticated by means of one of the following methods:
@@ -5980,7 +5980,7 @@ __OAuth 2 Required__. Subscribe the _authenticated user_ to a corresponding mod.
 
 Status|Meaning|Description|Response Schema
 ---|---|---|---|
-201|[Created](https://tools.ietf.org/html/rfc7231#section-6.3.2)|Created|[addSubscribe](#schemaaddsubscribe)
+201|[Created](https://tools.ietf.org/html/rfc7231#section-6.3.2)|Created|[Message Object](#message-object)
 
 <aside class="warning">
 To perform this operation, you must be authenticated by means of one of the following methods:
@@ -6116,7 +6116,7 @@ __OAuth 2 Required__. Un-Subscribe the _authenticated user_ to the corresponding
 
 Status|Meaning|Description|Response Schema
 ---|---|---|---|
-204|[No Content](https://tools.ietf.org/html/rfc7231#section-6.3.5)|No Content|[204](#schema204)
+204|[No Content](https://tools.ietf.org/html/rfc7231#section-6.3.5)|No Content|None
 
 <aside class="warning">
 To perform this operation, you must be authenticated by means of one of the following methods:
@@ -7806,7 +7806,7 @@ Submit a report for any resource on mod.io.
 
 Status|Meaning|Description|Response Schema
 ---|---|---|---|
-201|[Created](https://tools.ietf.org/html/rfc7231#section-6.3.2)|Report Created|[addReport](#schemaaddreport)
+201|[Created](https://tools.ietf.org/html/rfc7231#section-6.3.2)|Report Created|[Message Object](#message-object)
 
 <aside class="warning">
 To perform this operation, you must be authenticated by means of one of the following methods:
@@ -7815,6 +7815,53 @@ oauth2 ( Scopes: write )
 
 
 # Schemas 
+## Message Object
+
+  <a name="schemamessage_object"></a>
+
+```json
+{
+  "code": 200,
+  "message": "Your request was successful."
+} 
+```
+
+
+### Properties
+
+Name|Type|Description
+---|---|---|---|
+code|integer(int32)|HTTP status code of response.
+message|string|The server response to your request. Responses will vary from endpoint but object structure will persist.
+
+
+
+
+## Error Object
+
+  <a name="schemaerror_object"></a>
+
+```json
+{
+  "error": {
+    "code": 403,
+    "message": "You do not have the required permissions to access this resource."
+  }
+} 
+```
+
+
+### Properties
+
+Name|Type|Description
+---|---|---|---|
+error|object|No description
+» code|integer(int32)|HTTP code of the error.
+» message|string|The server response to your request. Responses will vary from endpoint but object structure will persist.
+
+
+
+
 ## Logo Object
 
   <a name="schemalogo_object"></a>
@@ -8056,7 +8103,7 @@ data|[Game Object  ](#schemagame_object)[]|Array containing game objects
 » summary|string|Brief summary of the game.
 » instructions|string|Modding instructions for developers.
 » url|string|website url for the game.
-» cats|[catsArray](#schemacatsarray)[]|Contains categories data.
+» cats|[Game Tags Object ](#schemagame_tags_object)[]|Contains categories data.
 »» name|string|The name of the category.
 »» type|string|Are tags selected via checkboxes or a single dropdown.
 »» adminonly|integer(int32)|Is this an admin only tag? If so only admin's can see this category and it can be used for filtering.
@@ -9313,11 +9360,39 @@ nameid|string|The unique SEO friendly URL of the game.
 summary|string|Brief summary of the game.
 instructions|string|Modding instructions for developers.
 url|string|website url for the game.
-cats|[catsArray](#schemacatsarray)[]|Contains categories data.
+cats|[Game Tags Object ](#schemagame_tags_object)[]|Contains categories data.
 » name|string|The name of the category.
 » type|string|Are tags selected via checkboxes or a single dropdown.
 » adminonly|integer(int32)|Is this an admin only tag? If so only admin's can see this category and it can be used for filtering.
 » tags|string[]|Eligible tags for this game.
+
+
+
+
+## Game Tags Object 
+
+<a name="schemagame_tags_object"></a>
+
+```json
+{
+  "name": "Engines",
+  "type": "checkboxes",
+  "tags": [
+    "Unity"
+  ],
+  "adminonly": 0
+} 
+```
+
+
+### Properties
+
+Name|Type|Description
+---|---|---|---|
+name|string|The name of the category.
+type|string|Are tags selected via checkboxes or a single dropdown.
+adminonly|integer(int32)|Is this an admin only tag? If so only admin's can see this category and it can be used for filtering.
+tags|string[]|Eligible tags for this game.
 
 
 
