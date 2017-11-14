@@ -5388,8 +5388,15 @@ Accept: application/json
     </span><span class="p">{</span><span class="w">
       </span><span class="s2">"tag"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Unity"</span><span class="p">,</span><span class="w">
       </span><span class="s2">"date"</span><span class="p">:</span><span class="w"> </span><span class="mi">1499841487</span><span class="w">
+    </span><span class="p">},</span><span class="w">
+    </span><span class="p">{</span><span class="w">
+        </span><span class="err">...</span><span class="w">
     </span><span class="p">}</span><span class="w">
-  </span><span class="p">]</span><span class="w">
+  </span><span class="p">],</span><span class="w">
+  </span><span class="s2">"cursor_id"</span><span class="p">:</span><span class="w"> </span><span class="mi">60</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"prev_id"</span><span class="p">:</span><span class="w"> </span><span class="mi">30</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"next_id"</span><span class="p">:</span><span class="w"> </span><span class="mi">160</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"result_count"</span><span class="p">:</span><span class="w"> </span><span class="mi">100</span><span class="w">
 </span><span class="p">}</span><span class="w">
 </span></code></pre>
 <h3 id="Get-All-Mod-Tags-responses">Responses</h3>
@@ -10633,8 +10640,15 @@ oauth2 ( Scopes: write )
     </span><span class="p">{</span><span class="w">
       </span><span class="s2">"tag"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Unity"</span><span class="p">,</span><span class="w">
       </span><span class="s2">"date"</span><span class="p">:</span><span class="w"> </span><span class="mi">1499841487</span><span class="w">
+    </span><span class="p">},</span><span class="w">
+    </span><span class="p">{</span><span class="w">
+        </span><span class="err">...</span><span class="w">
     </span><span class="p">}</span><span class="w">
-  </span><span class="p">]</span><span class="w">
+  </span><span class="p">],</span><span class="w">
+  </span><span class="s2">"cursor_id"</span><span class="p">:</span><span class="w"> </span><span class="mi">60</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"prev_id"</span><span class="p">:</span><span class="w"> </span><span class="mi">30</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"next_id"</span><span class="p">:</span><span class="w"> </span><span class="mi">160</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"result_count"</span><span class="p">:</span><span class="w"> </span><span class="mi">100</span><span class="w">
 </span><span class="p">}</span><span class="w"> 
 </span></code></pre><h3 id="properties-13">Properties</h3>
 <table>
@@ -10661,6 +10675,26 @@ oauth2 ( Scopes: write )
 <td>» date</td>
 <td>integer(int32)</td>
 <td>Unix timestamp of when tag was applied.</td>
+</tr>
+<tr>
+<td>cursor_id</td>
+<td>integer(int32)</td>
+<td>The current _cursor value.</td>
+</tr>
+<tr>
+<td>prev_id</td>
+<td>integer(int32)</td>
+<td>The previous _cursor value as manually inserted by you, null by default.</td>
+</tr>
+<tr>
+<td>next_id</td>
+<td>integer(int32)</td>
+<td>The next position to move the _cursor to, based on the current request.</td>
+</tr>
+<tr>
+<td>result_count</td>
+<td>integer(int32)</td>
+<td>The amount of results returned in the current request.</td>
 </tr>
 </tbody>
 </table>
