@@ -299,15 +299,15 @@ The way in which mod.io formats responses is entirely dependant on whether the r
 
 For single items, mod.io returns a __single json object__ which contains the requested resource. There is no nesting for single responses.
 
-### Browse Responses
+### Multiple item Responses
 
-Browse responses, that is, endpoints that return more than one result return a json object which contains a data array and a metadata fields:
+'Get' responses, that is, endpoints that return more than one result return a json object which contains a data array and a metadata fields:
 
 - `data` - contains all data returned from the request.
 - metadata fields - contains all cursor metadata to help you paginate through the API.
 
 ```json
-// Browse response
+// Get response
 
 {
 	"data": [

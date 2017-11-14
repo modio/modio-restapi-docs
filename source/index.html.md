@@ -315,15 +315,15 @@ The way in which mod.io formats responses is entirely dependant on whether the r
 
 For single items, mod.io returns a __single json object__ which contains the requested resource. There is no nesting for single responses.
 
-### Browse Responses
+### Multiple item Responses
 
-Browse responses, that is, endpoints that return more than one result return a json object which contains a data array and a metadata fields:
+'Get' responses, that is, endpoints that return more than one result return a json object which contains a data array and a metadata fields:
 
 - `data` - contains all data returned from the request.
 - metadata fields - contains all cursor metadata to help you paginate through the API.
 
 ```json
-// Browse response
+// Get response
 
 {
 	"data": [
@@ -612,7 +612,7 @@ If you want feel the above rate limit is not enough for your app, please [contac
 If you spot any errors within the mod.io documentation, have feedback on how we can potentially make it easier to follow or simply want get in touch for another reason please feel free to reach out to us at [support@mod.io](mailto:support@mod.io?subject=mod.io%20API). Any critical issues will be promptly addressed.
 # Games
 
-## Get Games
+## Get All Games
 
 > Code samples
 
@@ -716,7 +716,7 @@ System.out.println(response.toString());
 ```
 `GET /games`
 
-Get Games on mod.io. Successful request will return an array of [Game Objects](https://docs.mod.io/#get-games-2). To make your requests as specific to your needs as possible it's highly recommended reading over our [filtering documentation](https://docs.mod.io/#filtering) if it will help you with consuming this endpoint.
+Retrieve all games on mod.io. Successful request will return an array of [Game Objects](https://docs.mod.io/#get-all-games-2). To make your requests as specific to your needs as possible it's highly recommended reading over our [filtering documentation](https://docs.mod.io/#filtering) if it will help you with consuming this endpoint.
      
      Filter|Type|Description
      ---|---|---
@@ -813,11 +813,11 @@ Get Games on mod.io. Successful request will return an array of [Game Objects](h
   "result_count": 100
 }
 ```
-<h3 id="Get-Games-responses">Responses</h3>
+<h3 id="Get-All-Games-responses">Responses</h3>
 
 Status|Meaning|Description|Response Schema
 ---|---|---|---|
-200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)|OK|[Get Games ](#schemaget_games)
+200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)|OK|[Get All Games](#schemaget_all_games)
 
 <aside class="warning">
 To perform this operation, you must be authenticated by means of one of the following methods:
@@ -825,7 +825,7 @@ apiKey, oauth2 ( Scopes: read )
 </aside>
 
 
-## View Game
+## Get Game
 
 > Code samples
 
@@ -993,7 +993,7 @@ View a single game on mod.io. Successful request will return a single [Game Obje
   ]
 }
 ```
-<h3 id="View-Game-responses">Responses</h3>
+<h3 id="Get-Game-responses">Responses</h3>
 
 Status|Meaning|Description|Response Schema
 ---|---|---|---|
@@ -1469,7 +1469,7 @@ apiKey, oauth2 ( Scopes: read )
 </aside>
 
 
-## Get Game Team Members
+## Get All Game Team Members
 
 > Code samples
 
@@ -1620,7 +1620,7 @@ View all members that are part of a game team. Successful request will return an
   "result_count": 100
 }
 ```
-<h3 id="Get-Game-Team-Members-responses">Responses</h3>
+<h3 id="Get-All-Game-Team-Members-responses">Responses</h3>
 
 Status|Meaning|Description|Response Schema
 ---|---|---|---|
@@ -2059,7 +2059,7 @@ oauth2 ( Scopes: write )
 
 # Mods
 
-## Get Mods
+## Get All Mods
 
 > Code samples
 
@@ -2163,7 +2163,7 @@ System.out.println(response.toString());
 ```
 `GET /games/{game-id}/mods`
 
-Get Mods on mod.io. Successful request will return an array of [Mod Objects](https://docs.mod.io/#get-mods-2). To make your requests as specific to your needs as possible it's highly recommended reading over our [filtering documentation](https://docs.mod.io/#filtering) if it will help you with consuming this endpoint.
+Retrieve all Mods on mod.io for the corresponding game. Successful request will return an array of [Mod Objects](https://docs.mod.io/#get-all-mods-2). To make your requests as specific to your needs as possible it's highly recommended reading over our [filtering documentation](https://docs.mod.io/#filtering) if it will help you with consuming this endpoint.
      
      Filter|Type|Description
      ---|---|---
@@ -2279,213 +2279,11 @@ Get Mods on mod.io. Successful request will return an array of [Mod Objects](htt
   "result_count": 100
 }
 ```
-<h3 id="Get-Mods-responses">Responses</h3>
+<h3 id="Get-All-Mods-responses">Responses</h3>
 
 Status|Meaning|Description|Response Schema
 ---|---|---|---|
-200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)|Successful Request|[Get Mods ](#schemaget_mods)
-
-<aside class="warning">
-To perform this operation, you must be authenticated by means of one of the following methods:
-apiKey, oauth2 ( Scopes: read )
-</aside>
-
-
-## View Mod
-
-> Code samples
-
-```shell
-# You can also use wget
-curl -X GET https://api.mod.io/v1/games/{game-id}/mods/{mod-id}?api_key=YourApiKey \
-  -H 'Accept: application/json'
-
-```
-
-```http
-GET https://api.mod.io/v1/games/{game-id}/mods/{mod-id}?api_key=YourApiKey HTTP/1.1
-Host: api.mod.io
-
-Accept: application/json
-
-```
-
-```javascript
-var headers = {
-  'Accept':'application/json'
-
-};
-
-$.ajax({
-  url: 'https://api.mod.io/v1/games/{game-id}/mods/{mod-id}',
-  method: 'get',
-  data: '?api_key=YourApiKey',
-  headers: headers,
-  success: function(data) {
-    console.log(JSON.stringify(data));
-  }
-})
-```
-
-```javascript--nodejs
-const request = require('node-fetch');
-
-const headers = {
-  'Accept':'application/json'
-
-};
-
-fetch('https://api.mod.io/v1/games/{game-id}/mods/{mod-id}?api_key=YourApiKey',
-{
-  method: 'GET',
-
-  headers: headers
-})
-.then(function(res) {
-    return res.json();
-}).then(function(body) {
-    console.log(body);
-});
-```
-
-```ruby
-require 'rest-client'
-require 'json'
-
-headers = {
-  'Accept' => 'application/json'
-}
-
-result = RestClient.get 'https://api.mod.io/v1/games/{game-id}/mods/{mod-id}',
-  params: {
-  'api_key' => 'string'
-}, headers: headers
-
-
-p JSON.parse(result)
-```
-
-```python
-import requests
-headers = {
-  'Accept': 'application/json'
-}
-
-r = requests.get('https://api.mod.io/v1/games/{game-id}/mods/{mod-id}', params={
-  'api_key': 'YourApiKey'
-}, headers = headers)
-
-print r.json()
-```
-
-```java
-URL obj = new URL("https://api.mod.io/v1/games/{game-id}/mods/{mod-id}?api_key=YourApiKey");
-HttpURLConnection con = (HttpURLConnection) obj.openConnection();
-con.setRequestMethod("GET");
-int responseCode = con.getResponseCode();
-BufferedReader in = new BufferedReader(
-    new InputStreamReader(con.getInputStream()));
-String inputLine;
-StringBuffer response = new StringBuffer();
-while ((inputLine = in.readLine()) != null) {
-    response.append(inputLine);
-}
-in.close();
-System.out.println(response.toString());
-```
-`GET /games/{game-id}/mods/{mod-id}`
-
-View a single mod on mod.io. Successful request will return a single [Mod Object](https://docs.mod.io/#mod-object).
-
-
-> Example responses
-
-```json
-{
-  "id": 2,
-  "game": 2,
-  "submitted_by": {
-    "id": 1,
-    "nameid": "xant",
-    "username": "XanT",
-    "online": 1509922961,
-    "avatar": {
-      "filename": "masterchief.jpg",
-      "full": "https://media.mod.io/images/members/1/1/1/masterchief.jpg"
-    },
-    "timezone": "Australia/Brisbane",
-    "language": "en",
-    "url": "https://mod.io/members/xant"
-  },
-  "price": 9.99,
-  "datereg": 1492564103,
-  "dateup": 1499841487,
-  "logo": {
-    "filename": "IMG_20170409_222419.jpg",
-    "full": "https://media.mod.io/images/mods/1/1/2/IMG_20170409_222419.jpg",
-    "thumb_320x180": "https://media.mod.io/cache/images/mods/1/1/2/thumb_320x180/IMG_20170409_222419.jpg",
-    "thumb_640x360": "https://media.mod.io/cache/images/mods/1/1/2/thumb_640x360/IMG_20170409_222419.jpg",
-    "thumb_1280x720": "https://media.mod.io/cache/images/mods/1/1/2/thumb_1280x720/IMG_20170409_222419.jpg"
-  },
-  "homepage": "https://www.rogue-hdpack.com/",
-  "name": "Rogue Knight HD Pack",
-  "nameid": "rogue-knight-hd-pack",
-  "summary": "It's time to bask in the glory of beautiful 4k textures!",
-  "description": "<h2>About</h2><p>Rogue HD Pack does exactly what you thi...",
-  "metadata": "rogue,hd,high-res,4k,hd textures",
-  "url": "https://rogue-knight.mod.io/rogue-knight-hd-pack",
-  "modfile": {
-    "id": 2,
-    "mod": 2,
-    "date": 1499841487,
-    "datevirus": 1499841487,
-    "virusstatus": 0,
-    "viruspositive": 0,
-    "filesize": 15181,
-    "filehash": "2d4a0e2d7273db6b0a94b0740a88ad0d",
-    "filename": "rogue-knight-v1.zip",
-    "version": "1.3",
-    "virustotal": "No threats found.",
-    "changelog": "VERSION 1.3 -- Changes -- Fixed critical castle floor bug.",
-    "download": "https://mod.io/mods/file/2/c489a0354111a4d76640d47f0cdcb294"
-  },
-  "media": {
-    "youtube": [
-      "https://www.youtube.com/watch?v=dQw4w9WgXcQ"
-    ],
-    "sketchfab": [
-      "https://sketchfab.com/models/ef40b2d300334d009984c8865b2db1c8"
-    ],
-    "images": [
-      {
-        "full": "https://media.mod.io/images/mods/1/1/2/IMG_20170409_222419.jpg",
-        "thumbnail": "https://media.mod.io/cache/images/mods/1/1/2/thumb_1020x2000/IMG_20170409_222419.jpg",
-        "filename": "IMG_20170409_222419.jpg"
-      }
-    ]
-  },
-  "ratings": {
-    "total": 1230,
-    "positive": 1047,
-    "negative": 183,
-    "weighted": 87.38,
-    "percentage": 91,
-    "stars": 4,
-    "text": "Very Positive"
-  },
-  "tags": [
-    {
-      "tag": "Unity",
-      "date": 1499841487
-    }
-  ]
-}
-```
-<h3 id="View-Mod-responses">Responses</h3>
-
-Status|Meaning|Description|Response Schema
----|---|---|---|
-200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)|Successful Request|[Mod Object ](#schemamod_object)
+200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)|Successful Request|[Get All Mods](#schemaget_all_mods)
 
 <aside class="warning">
 To perform this operation, you must be authenticated by means of one of the following methods:
@@ -2724,6 +2522,208 @@ Status|Header|Type|Format|Description
 <aside class="warning">
 To perform this operation, you must be authenticated by means of one of the following methods:
 oauth2 ( Scopes: write )
+</aside>
+
+
+## Get Mod
+
+> Code samples
+
+```shell
+# You can also use wget
+curl -X GET https://api.mod.io/v1/games/{game-id}/mods/{mod-id}?api_key=YourApiKey \
+  -H 'Accept: application/json'
+
+```
+
+```http
+GET https://api.mod.io/v1/games/{game-id}/mods/{mod-id}?api_key=YourApiKey HTTP/1.1
+Host: api.mod.io
+
+Accept: application/json
+
+```
+
+```javascript
+var headers = {
+  'Accept':'application/json'
+
+};
+
+$.ajax({
+  url: 'https://api.mod.io/v1/games/{game-id}/mods/{mod-id}',
+  method: 'get',
+  data: '?api_key=YourApiKey',
+  headers: headers,
+  success: function(data) {
+    console.log(JSON.stringify(data));
+  }
+})
+```
+
+```javascript--nodejs
+const request = require('node-fetch');
+
+const headers = {
+  'Accept':'application/json'
+
+};
+
+fetch('https://api.mod.io/v1/games/{game-id}/mods/{mod-id}?api_key=YourApiKey',
+{
+  method: 'GET',
+
+  headers: headers
+})
+.then(function(res) {
+    return res.json();
+}).then(function(body) {
+    console.log(body);
+});
+```
+
+```ruby
+require 'rest-client'
+require 'json'
+
+headers = {
+  'Accept' => 'application/json'
+}
+
+result = RestClient.get 'https://api.mod.io/v1/games/{game-id}/mods/{mod-id}',
+  params: {
+  'api_key' => 'string'
+}, headers: headers
+
+
+p JSON.parse(result)
+```
+
+```python
+import requests
+headers = {
+  'Accept': 'application/json'
+}
+
+r = requests.get('https://api.mod.io/v1/games/{game-id}/mods/{mod-id}', params={
+  'api_key': 'YourApiKey'
+}, headers = headers)
+
+print r.json()
+```
+
+```java
+URL obj = new URL("https://api.mod.io/v1/games/{game-id}/mods/{mod-id}?api_key=YourApiKey");
+HttpURLConnection con = (HttpURLConnection) obj.openConnection();
+con.setRequestMethod("GET");
+int responseCode = con.getResponseCode();
+BufferedReader in = new BufferedReader(
+    new InputStreamReader(con.getInputStream()));
+String inputLine;
+StringBuffer response = new StringBuffer();
+while ((inputLine = in.readLine()) != null) {
+    response.append(inputLine);
+}
+in.close();
+System.out.println(response.toString());
+```
+`GET /games/{game-id}/mods/{mod-id}`
+
+Retrieve a single mod on mod.io. Successful request will return a single [Mod Object](https://docs.mod.io/#mod-object).
+
+
+> Example responses
+
+```json
+{
+  "id": 2,
+  "game": 2,
+  "submitted_by": {
+    "id": 1,
+    "nameid": "xant",
+    "username": "XanT",
+    "online": 1509922961,
+    "avatar": {
+      "filename": "masterchief.jpg",
+      "full": "https://media.mod.io/images/members/1/1/1/masterchief.jpg"
+    },
+    "timezone": "Australia/Brisbane",
+    "language": "en",
+    "url": "https://mod.io/members/xant"
+  },
+  "price": 9.99,
+  "datereg": 1492564103,
+  "dateup": 1499841487,
+  "logo": {
+    "filename": "IMG_20170409_222419.jpg",
+    "full": "https://media.mod.io/images/mods/1/1/2/IMG_20170409_222419.jpg",
+    "thumb_320x180": "https://media.mod.io/cache/images/mods/1/1/2/thumb_320x180/IMG_20170409_222419.jpg",
+    "thumb_640x360": "https://media.mod.io/cache/images/mods/1/1/2/thumb_640x360/IMG_20170409_222419.jpg",
+    "thumb_1280x720": "https://media.mod.io/cache/images/mods/1/1/2/thumb_1280x720/IMG_20170409_222419.jpg"
+  },
+  "homepage": "https://www.rogue-hdpack.com/",
+  "name": "Rogue Knight HD Pack",
+  "nameid": "rogue-knight-hd-pack",
+  "summary": "It's time to bask in the glory of beautiful 4k textures!",
+  "description": "<h2>About</h2><p>Rogue HD Pack does exactly what you thi...",
+  "metadata": "rogue,hd,high-res,4k,hd textures",
+  "url": "https://rogue-knight.mod.io/rogue-knight-hd-pack",
+  "modfile": {
+    "id": 2,
+    "mod": 2,
+    "date": 1499841487,
+    "datevirus": 1499841487,
+    "virusstatus": 0,
+    "viruspositive": 0,
+    "filesize": 15181,
+    "filehash": "2d4a0e2d7273db6b0a94b0740a88ad0d",
+    "filename": "rogue-knight-v1.zip",
+    "version": "1.3",
+    "virustotal": "No threats found.",
+    "changelog": "VERSION 1.3 -- Changes -- Fixed critical castle floor bug.",
+    "download": "https://mod.io/mods/file/2/c489a0354111a4d76640d47f0cdcb294"
+  },
+  "media": {
+    "youtube": [
+      "https://www.youtube.com/watch?v=dQw4w9WgXcQ"
+    ],
+    "sketchfab": [
+      "https://sketchfab.com/models/ef40b2d300334d009984c8865b2db1c8"
+    ],
+    "images": [
+      {
+        "full": "https://media.mod.io/images/mods/1/1/2/IMG_20170409_222419.jpg",
+        "thumbnail": "https://media.mod.io/cache/images/mods/1/1/2/thumb_1020x2000/IMG_20170409_222419.jpg",
+        "filename": "IMG_20170409_222419.jpg"
+      }
+    ]
+  },
+  "ratings": {
+    "total": 1230,
+    "positive": 1047,
+    "negative": 183,
+    "weighted": 87.38,
+    "percentage": 91,
+    "stars": 4,
+    "text": "Very Positive"
+  },
+  "tags": [
+    {
+      "tag": "Unity",
+      "date": 1499841487
+    }
+  ]
+}
+```
+<h3 id="Get-Mod-responses">Responses</h3>
+
+Status|Meaning|Description|Response Schema
+---|---|---|---|
+200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)|Successful Request|[Mod Object ](#schemamod_object)
+
+<aside class="warning">
+To perform this operation, you must be authenticated by means of one of the following methods:
+apiKey, oauth2 ( Scopes: read )
 </aside>
 
 
@@ -3474,7 +3474,7 @@ apiKey, oauth2 ( Scopes: read )
 </aside>
 
 
-## Get Mod Files
+## Get All Mod Files
 
 > Code samples
 
@@ -3578,7 +3578,7 @@ System.out.println(response.toString());
 ```
 `GET /games/{game-id}/mods/{mod-id}/files`
 
-Browse files on mod.io that are published for the corresponding mod. Successful request will return an [array of Modfile Objects](https://docs.mod.io/#get-mod-files-2). To make your requests as specific to your needs as possible it's highly recommended reading over our [filtering documentation](https://docs.mod.io/#filtering) if it will help you with consuming this endpoint.
+Browse files on mod.io that are published for the corresponding mod. Successful request will return an [array of Modfile Objects](https://docs.mod.io/#get-all-mod-files-2). To make your requests as specific to your needs as possible it's highly recommended reading over our [filtering documentation](https://docs.mod.io/#filtering) if it will help you with consuming this endpoint.
      
      Filter|Type|Description
      ---|---|---
@@ -3627,11 +3627,11 @@ Browse files on mod.io that are published for the corresponding mod. Successful 
   "result_count": 100
 }
 ```
-<h3 id="Get-Mod-Files-responses">Responses</h3>
+<h3 id="Get-All-Mod-Files-responses">Responses</h3>
 
 Status|Meaning|Description|Response Schema
 ---|---|---|---|
-200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)|Successful Request|[Get Mod Files](#schemaget_mod_files)
+200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)|Successful Request|[Get_All Mod Files](#schemaget_all_mod_files)
 
 <aside class="warning">
 To perform this operation, you must be authenticated by means of one of the following methods:
@@ -3803,7 +3803,7 @@ oauth2 ( Scopes: write )
 </aside>
 
 
-## View Mod File
+## Get Mod File
 
 > Code samples
 
@@ -3907,7 +3907,7 @@ System.out.println(response.toString());
 ```
 `GET /games/{game-id}/mods/{mod-id}/files/{file-id}`
 
-Find a file on mod.io for the corresponding mod. Successful request will return a [single Modfile Object](--parse-docsurl/#modfile_object).
+Retrieve a file on mod.io with the corresponding id. Successful request will return a [single Modfile Object](--parse-docsurl/#modfile_object).
 
 
 > Example responses
@@ -3929,7 +3929,7 @@ Find a file on mod.io for the corresponding mod. Successful request will return 
   "download": "https://mod.io/mods/file/2/c489a0354111a4d76640d47f0cdcb294"
 }
 ```
-<h3 id="View-Mod-File-responses">Responses</h3>
+<h3 id="Get-Mod-File-responses">Responses</h3>
 
 Status|Meaning|Description|Response Schema
 ---|---|---|---|
@@ -4085,7 +4085,7 @@ oauth2 ( Scopes: write )
 </aside>
 
 
-## Get Mod Tags
+## Get All Mod Tags
 
 > Code samples
 
@@ -4209,11 +4209,11 @@ Get all tags for the corresponding mod, successful response will return an array
   ]
 }
 ```
-<h3 id="Get-Mod-Tags-responses">Responses</h3>
+<h3 id="Get-All-Mod-Tags-responses">Responses</h3>
 
 Status|Meaning|Description|Response Schema
 ---|---|---|---|
-200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)|Successful Request|[Get Mod Tags](#schemaget_mod_tags)
+200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)|Successful Request|[Get_All Mod Tags](#schemaget_all_mod_tags)
 
 <aside class="warning">
 To perform this operation, you must be authenticated by means of one of the following methods:
@@ -4649,7 +4649,7 @@ oauth2 ( Scopes: write )
 </aside>
 
 
-## Get Mod Comments
+## Get All Mod Comments
 
 > Code samples
 
@@ -4753,7 +4753,7 @@ System.out.println(response.toString());
 ```
 `GET /games/{game-id}/mods/{mod-id}/comments`
 
-Browse all comments for a mod. Successful request will return an array of [Comment Objects](https://docs.mod.io/#get-comments). To make your requests as specific to your needs as possible it's highly recommended reading over our [filtering documentation](https://docs.mod.io/#filtering) if it will help you with consuming this endpoint.
+Retrieve all comments for the corresponding mod. Successful request will return an array of [Comment Objects](https://docs.mod.io/#get-comments). To make your requests as specific to your needs as possible it's highly recommended reading over our [filtering documentation](https://docs.mod.io/#filtering) if it will help you with consuming this endpoint.
      
      Filter|Type|Description
      ---|---|---
@@ -4806,11 +4806,11 @@ Browse all comments for a mod. Successful request will return an array of [Comme
   "result_count": 100
 }
 ```
-<h3 id="Get-Mod-Comments-responses">Responses</h3>
+<h3 id="Get-All-Mod-Comments-responses">Responses</h3>
 
 Status|Meaning|Description|Response Schema
 ---|---|---|---|
-200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)|OK|[Get Comments ](#schemaget_comments)
+200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)|OK|[Get_All Mod Comments](#schemaget_all_mod_comments)
 
 <aside class="warning">
 To perform this operation, you must be authenticated by means of one of the following methods:
@@ -5100,7 +5100,7 @@ oauth2 ( Scopes: write )
 </aside>
 
 
-## Get Mod Team Members
+## Get All Mod Team Members
 
 > Code samples
 
@@ -5250,7 +5250,7 @@ View all members that are part of a mod team. Successful request will return an 
   "result_count": 100
 }
 ```
-<h3 id="Get-Mod-Team-Members-responses">Responses</h3>
+<h3 id="Get-All-Mod-Team-Members-responses">Responses</h3>
 
 Status|Meaning|Description|Response Schema
 ---|---|---|---|
@@ -5687,7 +5687,7 @@ oauth2 ( Scopes: write )
 </aside>
 
 
-## Get Mod Updates By Game
+## Get All Mod Updates By Game
 
 > Code samples
 
@@ -5797,7 +5797,7 @@ System.out.println(response.toString());
 ```
 `GET /games/{game-id}/mod/updates`
 
-Get all mod updates (new builds) that occurred between two timestamps for the corresponding game. This endpoint is designed for intermittent polling by game clients to determine if notifications need to be pushed to the authenticated user. If you are consuming querying potential build updates from within a game, it is highly recommend you use this endpoint. Successful request will return an array of [Modfile Objects](https://docs.mod.io/#get-mod-files-2) that were published between the two supplied timestamps.
+Get all mod updates (new builds) that occurred between two timestamps for the corresponding game. This endpoint is designed for intermittent polling by game clients to determine if notifications need to be pushed to the authenticated user. If you are consuming querying potential build updates from within a game, it is highly recommend you use this endpoint. Successful request will return an array of [Modfile Objects](https://docs.mod.io/#get-all-mod-files-2) that were published between the two supplied timestamps.
      
      Parameter|Type|Required|Description
      ---|---|---|---|
@@ -5835,11 +5835,11 @@ Get all mod updates (new builds) that occurred between two timestamps for the co
   "result_count": 100
 }
 ```
-<h3 id="Get-Mod-Updates-By-Game-responses">Responses</h3>
+<h3 id="Get-All-Mod-Updates-By-Game-responses">Responses</h3>
 
 Status|Meaning|Description|Response Schema
 ---|---|---|---|
-200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)|Request Successful|[Get Mod Files](#schemaget_mod_files)
+200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)|Request Successful|[Get_All Mod Files](#schemaget_all_mod_files)
 
 <aside class="warning">
 To perform this operation, you must be authenticated by means of one of the following methods:
@@ -6126,7 +6126,7 @@ oauth2 ( Scopes: write )
 
 # Users
 
-## Get Users
+## Get All Users
 
 > Code samples
 
@@ -6230,7 +6230,7 @@ System.out.println(response.toString());
 ```
 `GET /users`
 
-Get Users registered to mod.io. Successful request will return an __array of user objects__. To make your requests as specific to your needs as possible it's highly recommended reading over our [filtering documentation](https://docs.mod.io/#filtering) if it will help you with consuming this endpoint.
+Retrieve all users registered to mod.io. Successful request will return an __array of user objects__. To make your requests as specific to your needs as possible it's highly recommended reading over our [filtering documentation](https://docs.mod.io/#filtering) if it will help you with consuming this endpoint.
      
      Filter|Type|Description
      ---|---|---
@@ -6269,11 +6269,11 @@ Get Users registered to mod.io. Successful request will return an __array of use
   "result_count": 100
 }
 ```
-<h3 id="Get-Users-responses">Responses</h3>
+<h3 id="Get-All-Users-responses">Responses</h3>
 
 Status|Meaning|Description|Response Schema
 ---|---|---|---|
-200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)|OK|[Get Users ](#schemaget_users)
+200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)|OK|[Get All Users](#schemaget_all_users)
 
 <aside class="warning">
 To perform this operation, you must be authenticated by means of one of the following methods:
@@ -6899,7 +6899,7 @@ View all mod.io games that exist for the *authenticated user*.
 
 Status|Meaning|Description|Response Schema
 ---|---|---|---|
-200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)|Request Successful|[Get Games ](#schemaget_games)
+200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)|Request Successful|[Get All Games](#schemaget_all_games)
 
 <aside class="warning">
 To perform this operation, you must be authenticated by means of one of the following methods:
@@ -7118,7 +7118,7 @@ View all mod.io mods that exist for the *authenticated user*.
 
 Status|Meaning|Description|Response Schema
 ---|---|---|---|
-200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)|Request Successful|[Get Mods ](#schemaget_mods)
+200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)|Request Successful|[Get All Mods](#schemaget_all_mods)
 
 <aside class="warning">
 To perform this operation, you must be authenticated by means of one of the following methods:
@@ -7273,7 +7273,7 @@ View all mod.io files that exist for the *authenticated user*.
 
 Status|Meaning|Description|Response Schema
 ---|---|---|---|
-200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)|Request Successful|[Get Mod Files](#schemaget_mod_files)
+200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)|Request Successful|[Get_All Mod Files](#schemaget_all_mod_files)
 
 <aside class="warning">
 To perform this operation, you must be authenticated by means of one of the following methods:
@@ -7494,7 +7494,7 @@ Get all mod's the *authenticated user* is subscribed to. Successful request will
 
 Status|Meaning|Description|Response Schema
 ---|---|---|---|
-200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)|Request Successful|[Get Mods ](#schemaget_mods)
+200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)|Request Successful|[Get All Mods](#schemaget_all_mods)
 
 <aside class="warning">
 To perform this operation, you must be authenticated by means of one of the following methods:
@@ -7615,7 +7615,7 @@ System.out.println(response.toString());
 *Get all updates that occurred between two timestamps for
 the _authenticated user_.*
 
-__OAuth 2 Authentication Required__. Get all subscribed mod updates (new builds) that occurred between two timestamps for the *authenticated user*. This endpoint is designed for intermittent polling by game clients to determine if notifications need to be pushed to the authenticated user. If you are consuming querying potential build updates from within a game, it is highly recommend you use this endpoint. Successful request will return an array of [Modfile Objects](https://docs.mod.io/#get-mod-files-2) that were published between the two supplied timestamps.
+__OAuth 2 Authentication Required__. Get all subscribed mod updates (new builds) that occurred between two timestamps for the *authenticated user*. This endpoint is designed for intermittent polling by game clients to determine if notifications need to be pushed to the authenticated user. If you are consuming querying potential build updates from within a game, it is highly recommend you use this endpoint. Successful request will return an array of [Modfile Objects](https://docs.mod.io/#get-all-mod-files-2) that were published between the two supplied timestamps.
      
      Parameter|Type|Required|Description
      ---|---|---|---|
@@ -7657,7 +7657,7 @@ __OAuth 2 Authentication Required__. Get all subscribed mod updates (new builds)
 
 Status|Meaning|Description|Response Schema
 ---|---|---|---|
-200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)|Request Successful|[Get Mod Files](#schemaget_mod_files)
+200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)|Request Successful|[Get_All Mod Files](#schemaget_all_mod_files)
 
 <aside class="warning">
 To perform this operation, you must be authenticated by means of one of the following methods:
@@ -7817,7 +7817,7 @@ oauth2 ( Scopes: write )
 # Schemas 
 ## Logo Object
 
- <a name="schemalogo_object"></a>
+  <a name="schemalogo_object"></a>
 
 ```json
 {
@@ -7845,7 +7845,7 @@ thumb_1280x720|string|URL to large thumbnail image.
 
 ## Icon Object
 
- <a name="schemaicon_object"></a>
+  <a name="schemaicon_object"></a>
 
 ```json
 {
@@ -7869,7 +7869,7 @@ thumb_320x180|string|URL to small thumbnail image.
 
 ## Header Object
 
- <a name="schemaheader_object"></a>
+  <a name="schemaheader_object"></a>
 
 ```json
 {
@@ -7891,7 +7891,7 @@ full|string|URL to the full-sized header image.
 
 ## Avatar Object
 
- <a name="schemaavatar_object"></a>
+  <a name="schemaavatar_object"></a>
 
 ```json
 {
@@ -7913,7 +7913,7 @@ full|string|Full URL to the image.
 
 ## Image Object
 
- <a name="schemaimage_object"></a>
+  <a name="schemaimage_object"></a>
 
 ```json
 {
@@ -7935,9 +7935,9 @@ filename|string|Image filename, with the extension included.
 
 
 
-## Get Games
+## Get All Games 
 
- <a name="schemaget_games"></a>
+<a name="schemaget_all_games"></a>
 
 ```json
 {
@@ -8069,7 +8069,7 @@ result_count|integer(int32)|The amount of results returned in the current reques
 
 
 
-## Get Game Activity
+## Get Game Activity 
 
 <a name="schemaget_game_activity"></a>
 
@@ -8143,9 +8143,9 @@ result_count|integer(int32)|The amount of results returned in the current reques
 
 
 
-## Get Mods
+## Get All Mods 
 
- <a name="schemaget_mods"></a>
+<a name="schemaget_all_mods"></a>
 
 ```json
 {
@@ -8315,7 +8315,7 @@ result_count|integer(int32)|The amount of results returned in the current reques
 
 
 
-## Get Mod Activity
+## Get Mod Activity 
 
 <a name="schemaget_mod_activity"></a>
 
@@ -8389,9 +8389,9 @@ result_count|integer(int32)|The amount of results returned in the current reques
 
 
 
-## Get Mod Files
+## Get All Mod Files
 
-<a name="schemaget_mod_files"></a>
+<a name="schemaget_all_mod_files"></a>
 
 ```json
 {
@@ -8449,9 +8449,9 @@ result_count|integer(int32)|The amount of results returned in the current reques
 
 
 
-## Get Mod Tags
+## Get All Mod Tags
 
-<a name="schemaget_mod_tags"></a>
+<a name="schemaget_all_mod_tags"></a>
 
 ```json
 {
@@ -8476,9 +8476,9 @@ data|[Mod Tag Object](#schemamod_tag_object)[]|No description
 
 
 
-## Get Comments
+## Get All Mod Comments
 
- <a name="schemaget_comments"></a>
+<a name="schemaget_all_mod_comments"></a>
 
 ```json
 {
@@ -8552,7 +8552,7 @@ result_count|integer(int32)|The amount of results returned in the current reques
 
 ## Get Team
 
- <a name="schemaget_team"></a>
+  <a name="schemaget_team"></a>
 
 ```json
 {
@@ -8618,9 +8618,9 @@ result_count|integer(int32)|The amount of results returned in the current reques
 
 
 
-## Get Users
+## Get All Users 
 
- <a name="schemaget_users"></a>
+<a name="schemaget_all_users"></a>
 
 ```json
 {
@@ -8675,7 +8675,7 @@ result_count|integer(int32)|The amount of results returned in the current reques
 
 ## Get Updates
 
- <a name="schemaget_updates"></a>
+  <a name="schemaget_updates"></a>
 
 ```json
 {
@@ -8710,7 +8710,7 @@ data|[Update Object ](#schemaupdate_object)[]|Get all updates that occurred betw
 
 ## Access Object
 
- <a name="schemaaccess_object"></a>
+  <a name="schemaaccess_object"></a>
 
 ```json
 {
@@ -8760,7 +8760,7 @@ position|string|Custom title, has no effect on any access rights.
 
 
 
-## Game Activity Object
+## Game Activity Object 
 
 <a name="schemagame_activity_object"></a>
 
@@ -8818,7 +8818,7 @@ changes|object|Contains changes data.
 
 
 
-## Mod Activity Object
+## Mod Activity Object 
 
 <a name="schemamod_activity_object"></a>
 
@@ -8878,7 +8878,7 @@ changes|object|Contains all changes fields.
 
 ## Comment Object
 
- <a name="schemacomment_object"></a>
+  <a name="schemacomment_object"></a>
 
 ```json
 {
@@ -8936,7 +8936,7 @@ summary|string|The displayed comment.
 
 ## Ownership Object
 
- <a name="schemaownership_object"></a>
+  <a name="schemaownership_object"></a>
 
 ```json
 {
@@ -8960,7 +8960,7 @@ ownership|boolean|Does the specified member have ownership over the resource?
 
 ## Price Object
 
- <a name="schemaprice_object"></a>
+  <a name="schemaprice_object"></a>
 
 ```json
 {
@@ -8984,7 +8984,7 @@ price|float|If applicable, the price of the resource displayed in USD.
 
 ## Modfile Object
 
- <a name="schemamodfile_object"></a>
+  <a name="schemamodfile_object"></a>
 
 ```json
 {
@@ -9028,7 +9028,7 @@ download|string|Link to download the file from the mod.io CDN.
 
 ## Mod Object
 
- <a name="schemamod_object"></a>
+  <a name="schemamod_object"></a>
 
 ```json
 {
@@ -9182,7 +9182,7 @@ tags|[Mod Tag Object](#schemamod_tag_object)[]|Contains Mod Tag data.
 
 
 
-## Mod Tag Object
+## Mod Tag Object 
 
 <a name="schemamod_tag_object"></a>
 
@@ -9206,7 +9206,7 @@ date|integer(int32)|Unix timestamp of when tag was applied.
 
 ## Game Object
 
- <a name="schemagame_object"></a>
+  <a name="schemagame_object"></a>
 
 ```json
 {
@@ -9324,7 +9324,7 @@ cats|[catsArray](#schemacatsarray)[]|Contains categories data.
 
 ## Rating Object
 
- <a name="schemarating_object"></a>
+  <a name="schemarating_object"></a>
 
 ```json
 {
@@ -9356,7 +9356,7 @@ text|string|Text representation of the rating total.
 
 ## Update Object
 
- <a name="schemaupdate_object"></a>
+  <a name="schemaupdate_object"></a>
 
 ```json
 {
@@ -9386,7 +9386,7 @@ mention|integer(int32)|Is this update the result of a user @mentioning you.
 
 ## User Object
 
- <a name="schemauser_object"></a>
+  <a name="schemauser_object"></a>
 
 ```json
 {
