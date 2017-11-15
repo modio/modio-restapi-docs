@@ -67,7 +67,7 @@ To perform writes, you will need to authenticate your users via OAuth 2. To make
 ```shell
 // Example POST requesting security code
 
-curl -X POST https://api.mod.io/oauth/emailrequest \
+curl -X POST https://api.mod.io/v1/oauth/emailrequest \
   -H 'Content-Type: application/x-www-form-urlencoded' \
   -d 'api_key=0d0ba6756d032246f1299f8c01abc424'	\
   -d 'email=john.snow@westeros.com'
@@ -86,7 +86,7 @@ curl -X POST https://api.mod.io/oauth/emailrequest \
 
 Firstly you must request a `security_code` from the authentication server by supplying an email which will then return a short-lived security code to the supplied e-mail address. It is therefore required that to receive a `security_code` that you have access to the specified email account. 
 
-`POST oauth/emailrequest`
+`POST /oauth/emailrequest`
 
 Parameter | Value
 ---------- | ----------  
@@ -100,7 +100,7 @@ After successfully requesting a `security_code` with a valid e-mail address you 
 ```shell
 // Example POST requesting access token
 
-curl -X POST https://api.mod.io/oauth/emailexchange \
+curl -X POST https://api.mod.io/v1/oauth/emailexchange \
   -H 'Content-Type: application/x-www-form-urlencoded' \	
   -d 'api_key=0d0ba6756d032246f1299f8c01abc424' \
   -d 'security_code=3EW50'
@@ -122,7 +122,7 @@ curl -X POST https://api.mod.io/oauth/emailexchange \
 
 If you do not exchange your `security_code` for an `access_token` within 15 minutes of generation, you will need to begin the flow again to receive another code.
 
-`POST oauth/emailexchange`
+`POST /oauth/emailexchange`
 
 Parameter | Value
 ---------- | ----------  

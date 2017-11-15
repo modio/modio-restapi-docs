@@ -2221,7 +2221,7 @@ Retrieve all Mods on mod.io for the corresponding game. Successful request will 
       "nameid": "rogue-knight-hd-pack",
       "summary": "It's time to bask in the glory of beautiful 4k textures!",
       "description": "<h2>About</h2><p>Rogue HD Pack does exactly what you thi...",
-      "metadata": "rogue,hd,high-res,4k,hd textures",
+      "metadatablob": "rogue,hd,high-res,4k,hd textures",
       "url": "https://rogue-knight.mod.io/rogue-knight-hd-pack",
       "modfile": {
         "id": 2,
@@ -2432,7 +2432,7 @@ Retrieve a single mod on mod.io. Successful request will return a single [Mod Ob
   "nameid": "rogue-knight-hd-pack",
   "summary": "It's time to bask in the glory of beautiful 4k textures!",
   "description": "<h2>About</h2><p>Rogue HD Pack does exactly what you thi...",
-  "metadata": "rogue,hd,high-res,4k,hd textures",
+  "metadatablob": "rogue,hd,high-res,4k,hd textures",
   "url": "https://rogue-knight.mod.io/rogue-knight-hd-pack",
   "modfile": {
     "id": 2,
@@ -2660,7 +2660,7 @@ Publish a mod on mod.io. Successful request will return the newly created [Mod O
   "nameid": "rogue-knight-hd-pack",
   "summary": "It's time to bask in the glory of beautiful 4k textures!",
   "description": "<h2>About</h2><p>Rogue HD Pack does exactly what you thi...",
-  "metadata": "rogue,hd,high-res,4k,hd textures",
+  "metadatablob": "rogue,hd,high-res,4k,hd textures",
   "url": "https://rogue-knight.mod.io/rogue-knight-hd-pack",
   "modfile": {
     "id": 2,
@@ -2863,7 +2863,7 @@ Edit details for a mod. If you wanting to update the media attached to this game
 ```json
 {
   "code": "200",
-  "message": "You have successfully updated the specified mod profile."
+  "message": "You have successfully updated the specified mod."
 }
 ```
 <h3 id="Edit-Mod-responses">Responses</h3>
@@ -3145,7 +3145,7 @@ This endpoint is very flexible and will process any images posted to the endpoin
 ```json
 {
   "code": "201",
-  "message": "You have successfully added new media to the specified mod profile."
+  "message": "You have successfully added new media to the specified."
 }
 ```
 <h3 id="Add-Mod-Media-responses">Responses</h3>
@@ -4358,7 +4358,7 @@ Add tags to a mod's profile. Note that you can only add what tags are allowed by
 ```json
 {
   "code": "201",
-  "message": "You have successfully added tags to the specified mod profile."
+  "message": "You have successfully added tags to the specified mod."
 }
 ```
 <h3 id="Add-Mod-Tag-responses">Responses</h3>
@@ -4641,7 +4641,7 @@ Submit a positive or negative rating for a mod, equivalent of thumps up and thum
 ```json
 {
   "code": "201",
-  "message": "You have successfully submitted a rating for the specified mod profile."
+  "message": "You have successfully submitted a rating for the specified mod."
 }
 ```
 <h3 id="Add-Mod-Rating-responses">Responses</h3>
@@ -5854,6 +5854,289 @@ oauth2 ( Scopes: write )
 </aside>
 
 
+## Add Mod Metadata
+
+> Code samples
+
+```shell
+# You can also use wget
+curl -X POST https://api.mod.io/v1/games/{game-id}/mods/{mod-id}/metadatakvp \
+  -H 'Authorization: Bearer YourAccessToken' \
+  -H 'Content-Type: application/x-www-form-urlencoded' \
+  -H 'Accept: application/json'
+
+```
+
+```http
+POST https://api.mod.io/v1/games/{game-id}/mods/{mod-id}/metadatakvp HTTP/1.1
+Host: api.mod.io
+
+Accept: application/json
+Authorization: Bearer YourAccessToken
+Content-Type: application/x-www-form-urlencoded
+
+
+```
+
+```javascript
+var headers = {
+  'Authorization':'Bearer YourAccessToken',
+  'Content-Type':'application/x-www-form-urlencoded',
+  'Accept':'application/json'
+
+};
+
+$.ajax({
+  url: 'https://api.mod.io/v1/games/{game-id}/mods/{mod-id}/metadatakvp',
+  method: 'post',
+
+  headers: headers,
+  success: function(data) {
+    console.log(JSON.stringify(data));
+  }
+})
+```
+
+```javascript--nodejs
+const request = require('node-fetch');
+
+const headers = {
+  'Authorization':'Bearer YourAccessToken',
+  'Content-Type':'application/x-www-form-urlencoded',
+  'Accept':'application/json'
+
+};
+
+fetch('https://api.mod.io/v1/games/{game-id}/mods/{mod-id}/metadatakvp',
+{
+  method: 'POST',
+
+  headers: headers
+})
+.then(function(res) {
+    return res.json();
+}).then(function(body) {
+    console.log(body);
+});
+```
+
+```ruby
+require 'rest-client'
+require 'json'
+
+headers = {
+  'Authorization' => 'Bearer YourAccessToken',
+  'Content-Type' => 'application/x-www-form-urlencoded',
+  'Accept' => 'application/json'
+}
+
+result = RestClient.post 'https://api.mod.io/v1/games/{game-id}/mods/{mod-id}/metadatakvp',
+  params: {
+  }, headers: headers
+
+
+p JSON.parse(result)
+```
+
+```python
+import requests
+headers = {
+  'Authorization': 'Bearer YourAccessToken',
+  'Content-Type': 'application/x-www-form-urlencoded',
+  'Accept': 'application/json'
+}
+
+r = requests.post('https://api.mod.io/v1/games/{game-id}/mods/{mod-id}/metadatakvp', params={
+
+}, headers = headers)
+
+print r.json()
+```
+
+```java
+URL obj = new URL("https://api.mod.io/v1/games/{game-id}/mods/{mod-id}/metadatakvp");
+HttpURLConnection con = (HttpURLConnection) obj.openConnection();
+con.setRequestMethod("POST");
+int responseCode = con.getResponseCode();
+BufferedReader in = new BufferedReader(
+    new InputStreamReader(con.getInputStream()));
+String inputLine;
+StringBuffer response = new StringBuffer();
+while ((inputLine = in.readLine()) != null) {
+    response.append(inputLine);
+}
+in.close();
+System.out.println(response.toString());
+```
+`POST /games/{game-id}/mods/{mod-id}/metadatakvp`
+
+Add searchable key-value metadata for the corresponding mod. Metadata may include properties as to how the item works, or other information you need to display. You must have administrator privileges to add metadata to a mod.
+
+    Parameter|Type|Required|Description
+    ---|---|---|---|
+    metadata|array|true|Array containing one or more key value pairs where the the key & value are separated by a colon ':'. A single key can map to multiple values (1-to-many relationship), key-value pairs are searchable by exact matches only and neither the key or value can exceed 255 characters in length.
+
+
+> Example responses
+
+```json
+{
+  "code": "201",
+  "message": "You have successfully added new key-value metadata to the specified mod."
+}
+```
+<h3 id="Add-Mod-Metadata-responses">Responses</h3>
+
+Status|Meaning|Description|Response Schema
+---|---|---|---|
+201|[Created](https://tools.ietf.org/html/rfc7231#section-6.3.2)|Created|[Message Object](#message-object)
+
+<aside class="warning">
+To perform this operation, you must be authenticated by means of one of the following methods:
+oauth2 ( Scopes: write )
+</aside>
+
+
+## Delete Mod Metadata
+
+> Code samples
+
+```shell
+# You can also use wget
+curl -X DELETE https://api.mod.io/v1/games/{game-id}/mods/{mod-id}/metadatakvp \
+  -H 'Authorization: Bearer YourAccessToken' \
+  -H 'Content-Type: application/x-www-form-urlencoded' \
+  -H 'Accept: application/json'
+
+```
+
+```http
+DELETE https://api.mod.io/v1/games/{game-id}/mods/{mod-id}/metadatakvp HTTP/1.1
+Host: api.mod.io
+
+Accept: application/json
+Authorization: Bearer YourAccessToken
+Content-Type: application/x-www-form-urlencoded
+
+
+```
+
+```javascript
+var headers = {
+  'Authorization':'Bearer YourAccessToken',
+  'Content-Type':'application/x-www-form-urlencoded',
+  'Accept':'application/json'
+
+};
+
+$.ajax({
+  url: 'https://api.mod.io/v1/games/{game-id}/mods/{mod-id}/metadatakvp',
+  method: 'delete',
+
+  headers: headers,
+  success: function(data) {
+    console.log(JSON.stringify(data));
+  }
+})
+```
+
+```javascript--nodejs
+const request = require('node-fetch');
+
+const headers = {
+  'Authorization':'Bearer YourAccessToken',
+  'Content-Type':'application/x-www-form-urlencoded',
+  'Accept':'application/json'
+
+};
+
+fetch('https://api.mod.io/v1/games/{game-id}/mods/{mod-id}/metadatakvp',
+{
+  method: 'DELETE',
+
+  headers: headers
+})
+.then(function(res) {
+    return res.json();
+}).then(function(body) {
+    console.log(body);
+});
+```
+
+```ruby
+require 'rest-client'
+require 'json'
+
+headers = {
+  'Authorization' => 'Bearer YourAccessToken',
+  'Content-Type' => 'application/x-www-form-urlencoded',
+  'Accept' => 'application/json'
+}
+
+result = RestClient.delete 'https://api.mod.io/v1/games/{game-id}/mods/{mod-id}/metadatakvp',
+  params: {
+  }, headers: headers
+
+
+p JSON.parse(result)
+```
+
+```python
+import requests
+headers = {
+  'Authorization': 'Bearer YourAccessToken',
+  'Content-Type': 'application/x-www-form-urlencoded',
+  'Accept': 'application/json'
+}
+
+r = requests.delete('https://api.mod.io/v1/games/{game-id}/mods/{mod-id}/metadatakvp', params={
+
+}, headers = headers)
+
+print r.json()
+```
+
+```java
+URL obj = new URL("https://api.mod.io/v1/games/{game-id}/mods/{mod-id}/metadatakvp");
+HttpURLConnection con = (HttpURLConnection) obj.openConnection();
+con.setRequestMethod("DELETE");
+int responseCode = con.getResponseCode();
+BufferedReader in = new BufferedReader(
+    new InputStreamReader(con.getInputStream()));
+String inputLine;
+StringBuffer response = new StringBuffer();
+while ((inputLine = in.readLine()) != null) {
+    response.append(inputLine);
+}
+in.close();
+System.out.println(response.toString());
+```
+`DELETE /games/{game-id}/mods/{mod-id}/metadatakvp`
+
+Delete key-value pair metadata from the corresponding mod. __Note:__ Due to a key being able to relate to multiple values, if you supply a key only it will delete _all_ key-value pairs containing that key but if you supply both key & value only an exact key-value match will be removed.
+
+    Parameter|Type|Required|Description
+    ---|---|---|---|
+    metadata|array|true|Array containing one or more key value pairs where the the key & value are separated by a colon ':'. A single key can map to multiple values (1-to-many relationship), key-value pairs are searchable by exact matches only and neither the key or value can exceed 255 characters in length.
+
+
+> Example responses
+
+```json
+ "204 No Content" 
+```
+<h3 id="Delete-Mod-Metadata-responses">Responses</h3>
+
+Status|Meaning|Description|Response Schema
+---|---|---|---|
+204|[No Content](https://tools.ietf.org/html/rfc7231#section-6.3.5)|No Content|None
+
+<aside class="warning">
+To perform this operation, you must be authenticated by means of one of the following methods:
+oauth2 ( Scopes: write )
+</aside>
+
+
 # Subscribe
 
 ## Subscribe To Mod
@@ -5980,7 +6263,7 @@ __OAuth 2 Required__. Subscribe the _authenticated user_ to a corresponding mod.
 ```json
 {
   "code": "201",
-  "message": "You have successfully subscribed to the specified resource."
+  "message": "You have successfully subscribed to the specified mod."
 }
 ```
 <h3 id="Subscribe-To-Mod-responses">Responses</h3>
@@ -7063,7 +7346,7 @@ View all mod.io mods that exist for the *authenticated user*.
       "nameid": "rogue-knight-hd-pack",
       "summary": "It's time to bask in the glory of beautiful 4k textures!",
       "description": "<h2>About</h2><p>Rogue HD Pack does exactly what you thi...",
-      "metadata": "rogue,hd,high-res,4k,hd textures",
+      "metadatablob": "rogue,hd,high-res,4k,hd textures",
       "url": "https://rogue-knight.mod.io/rogue-knight-hd-pack",
       "modfile": {
         "id": 2,
@@ -7439,7 +7722,7 @@ Get all mod's the *authenticated user* is subscribed to. Successful request will
       "nameid": "rogue-knight-hd-pack",
       "summary": "It's time to bask in the glory of beautiful 4k textures!",
       "description": "<h2>About</h2><p>Rogue HD Pack does exactly what you thi...",
-      "metadata": "rogue,hd,high-res,4k,hd textures",
+      "metadatablob": "rogue,hd,high-res,4k,hd textures",
       "url": "https://rogue-knight.mod.io/rogue-knight-hd-pack",
       "modfile": {
         "id": 2,
@@ -7794,7 +8077,7 @@ Submit a report for any resource on mod.io.
      
      Parameter|Type|Required|Description
      ---|---|---|---|
-     resource|string|true|The name of the resource type you are submitting a report for __must__ be one of the following values.<br><br>*Field options*<br>__games__<br>__mods__<br>__files__<br>__tags__<br>__users__.
+     resource|integer(int32)|true|The name of the resource type you are submitting a report for __must__ be one of the following values.<br><br>*Field options*<br>__1__ = Game<br>__2__ = Mod<br>__3__ = Mod File<br>__4__ = Mod Tag<br>__5__ = User
      id|integer(int32)|true|Unique Id of the resource item you are reporting.
      dmca|boolean|true|Is this a DMCA takedown request?
      name|string|true|Descriptive and informative title for your report.
@@ -8235,7 +8518,7 @@ result_count|integer(int32)|The amount of results returned in the current reques
       "nameid": "rogue-knight-hd-pack",
       "summary": "It's time to bask in the glory of beautiful 4k textures!",
       "description": "<h2>About</h2><p>Rogue HD Pack does exactly what you thi...",
-      "metadata": "rogue,hd,high-res,4k,hd textures",
+      "metadatablob": "rogue,hd,high-res,4k,hd textures",
       "url": "https://rogue-knight.mod.io/rogue-knight-hd-pack",
       "modfile": {
         "id": 2,
@@ -8327,7 +8610,7 @@ data|[Mod Object  ](#schemamod_object)[]|Array containing mod objects
 » nameid|string|Unique SEO-friendly mod uri.
 » summary|string|Brief summary of the mod.
 » description|string|Description of the mod.
-» metadata|string|Comma-separated metadata for the mod.
+» metadatablob|string|Comma-separated metadata for the mod.
 » url|string|Official website url for the mod.
 » modfile|[Modfile Object  ](#schemamodfile_object)|Contains file data.
 »» id|integer(int32)|Unique file id.
@@ -9127,7 +9410,7 @@ download|string|Link to download the file from the mod.io CDN.
   "nameid": "rogue-knight-hd-pack",
   "summary": "It's time to bask in the glory of beautiful 4k textures!",
   "description": "<h2>About</h2><p>Rogue HD Pack does exactly what you thi...",
-  "metadata": "rogue,hd,high-res,4k,hd textures",
+  "metadatablob": "rogue,hd,high-res,4k,hd textures",
   "url": "https://rogue-knight.mod.io/rogue-knight-hd-pack",
   "modfile": {
     "id": 2,
@@ -9209,7 +9492,7 @@ name|string|Name of the mod.
 nameid|string|Unique SEO-friendly mod uri.
 summary|string|Brief summary of the mod.
 description|string|Description of the mod.
-metadata|string|Comma-separated metadata for the mod.
+metadatablob|string|Comma-separated metadata for the mod.
 url|string|Official website url for the mod.
 modfile|[Modfile Object  ](#schemamodfile_object)|Contains file data.
 » id|integer(int32)|Unique file id.
