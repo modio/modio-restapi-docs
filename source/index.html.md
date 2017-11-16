@@ -85,7 +85,7 @@ To perform writes, you will need to authenticate your users via OAuth 2. To make
 ```shell
 // Example POST requesting security code
 
-curl -X POST https://api.mod.io/oauth/emailrequest \
+curl -X POST https://api.mod.io/v1/oauth/emailrequest \
   -H 'Content-Type: application/x-www-form-urlencoded' \
   -d 'api_key=0d0ba6756d032246f1299f8c01abc424'	\
   -d 'email=john.snow@westeros.com'
@@ -103,7 +103,7 @@ curl -X POST https://api.mod.io/oauth/emailrequest \
 ### Step 1: Requesting a security code
 
 Firstly you must request a `security_code` from the authentication server by supplying an email which will then return a short-lived security code to the supplied e-mail address. It is therefore required that to receive a `security_code` that you have access to the specified email account. 
-`POST /oauth/emailrequest`
+`POST //oauth/emailrequest`
 
 Parameter | Value
 ---------- | ----------  
@@ -117,7 +117,7 @@ After successfully requesting a `security_code` with a valid e-mail address you 
 ```shell
 // Example POST requesting access token
 
-curl -X POST https://api.mod.io/oauth/emailexchange \
+curl -X POST https://api.mod.io/v1/oauth/emailexchange \
   -H 'Content-Type: application/x-www-form-urlencoded' \	
   -d 'api_key=0d0ba6756d032246f1299f8c01abc424' \
   -d 'security_code=3EW50'
@@ -138,7 +138,7 @@ curl -X POST https://api.mod.io/oauth/emailexchange \
 - Once exchanged for an access token, the security code is invalid.
 
 If you do not exchange your `security_code` for an `access_token` within 15 minutes of generation, you will need to begin the flow again to receive another code.
-`POST /oauth/emailexchange`
+`POST //oauth/emailexchange`
 
 Parameter | Value
 ---------- | ----------  
@@ -5854,7 +5854,145 @@ oauth2 ( Scopes: write )
 </aside>
 
 
-## Add Mod Metadata
+## Get All Mod KVP Metadata
+
+> Code samples
+
+```shell
+# You can also use wget
+curl -X GET https://api.mod.io/v1/games/{game-id}/mods/{mod-id}/metadatakvp?api_key=YourApiKey \
+  -H 'Accept: application/json'
+
+```
+
+```http
+GET https://api.mod.io/v1/games/{game-id}/mods/{mod-id}/metadatakvp?api_key=YourApiKey HTTP/1.1
+Host: api.mod.io
+
+Accept: application/json
+
+```
+
+```javascript
+var headers = {
+  'Accept':'application/json'
+
+};
+
+$.ajax({
+  url: 'https://api.mod.io/v1/games/{game-id}/mods/{mod-id}/metadatakvp',
+  method: 'get',
+  data: '?api_key=YourApiKey',
+  headers: headers,
+  success: function(data) {
+    console.log(JSON.stringify(data));
+  }
+})
+```
+
+```javascript--nodejs
+const request = require('node-fetch');
+
+const headers = {
+  'Accept':'application/json'
+
+};
+
+fetch('https://api.mod.io/v1/games/{game-id}/mods/{mod-id}/metadatakvp?api_key=YourApiKey',
+{
+  method: 'GET',
+
+  headers: headers
+})
+.then(function(res) {
+    return res.json();
+}).then(function(body) {
+    console.log(body);
+});
+```
+
+```ruby
+require 'rest-client'
+require 'json'
+
+headers = {
+  'Accept' => 'application/json'
+}
+
+result = RestClient.get 'https://api.mod.io/v1/games/{game-id}/mods/{mod-id}/metadatakvp',
+  params: {
+  'api_key' => 'string'
+}, headers: headers
+
+
+p JSON.parse(result)
+```
+
+```python
+import requests
+headers = {
+  'Accept': 'application/json'
+}
+
+r = requests.get('https://api.mod.io/v1/games/{game-id}/mods/{mod-id}/metadatakvp', params={
+  'api_key': 'YourApiKey'
+}, headers = headers)
+
+print r.json()
+```
+
+```java
+URL obj = new URL("https://api.mod.io/v1/games/{game-id}/mods/{mod-id}/metadatakvp?api_key=YourApiKey");
+HttpURLConnection con = (HttpURLConnection) obj.openConnection();
+con.setRequestMethod("GET");
+int responseCode = con.getResponseCode();
+BufferedReader in = new BufferedReader(
+    new InputStreamReader(con.getInputStream()));
+String inputLine;
+StringBuffer response = new StringBuffer();
+while ((inputLine = in.readLine()) != null) {
+    response.append(inputLine);
+}
+in.close();
+System.out.println(response.toString());
+```
+`GET /games/{game-id}/mods/{mod-id}/metadatakvp`
+
+Get all key-value metadata pairs for the corresponding mod, successful response will return an array of objects contains only the key-value pairs. Only mod administrators are able to view these values.
+
+
+> Example responses
+
+```json
+{
+  "data": [
+    {
+      "key": "pistol-dmg",
+      "value": 800
+    },
+    {
+        ...
+    }
+  ],
+  "cursor_id": 60,
+  "prev_id": 30,
+  "next_id": 160,
+  "result_count": 100
+}
+```
+<h3 id="Get-All-Mod-KVP-Metadata-responses">Responses</h3>
+
+Status|Meaning|Description|Response Schema
+---|---|---|---|
+200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)|Successful Request|[Get All Mod KVP](#schemaget_all_mod_kvp_metadata)
+
+<aside class="warning">
+To perform this operation, you must be authenticated by means of one of the following methods:
+apiKey, oauth2 ( Scopes: read )
+</aside>
+
+
+## Add Mod KVP Metadata
 
 > Code samples
 
@@ -5985,7 +6123,7 @@ Add searchable key-value metadata for the corresponding mod. Metadata may includ
   "message": "You have successfully added new key-value metadata to the specified mod."
 }
 ```
-<h3 id="Add-Mod-Metadata-responses">Responses</h3>
+<h3 id="Add-Mod-KVP-Metadata-responses">Responses</h3>
 
 Status|Meaning|Description|Response Schema
 ---|---|---|---|
@@ -5997,7 +6135,7 @@ oauth2 ( Scopes: write )
 </aside>
 
 
-## Delete Mod Metadata
+## Delete Mod KVP Metadata
 
 > Code samples
 
@@ -6113,7 +6251,7 @@ System.out.println(response.toString());
 ```
 `DELETE /games/{game-id}/mods/{mod-id}/metadatakvp`
 
-Delete key-value pair metadata from the corresponding mod. __Note:__ Due to a key being able to relate to multiple values, if you supply a key only it will delete _all_ key-value pairs containing that key but if you supply both key & value only an exact key-value match will be removed.
+Delete key-value pair metadata from the corresponding mod. <br><br>__Note:__ Due to a key being able to relate to multiple values, if you supply a key only it will delete _all_ key-value pairs containing that key but if you supply both key & value only an exact key-value match will be removed.
 
     Parameter|Type|Required|Description
     ---|---|---|---|
@@ -6125,7 +6263,7 @@ Delete key-value pair metadata from the corresponding mod. __Note:__ Due to a ke
 ```json
  "204 No Content" 
 ```
-<h3 id="Delete-Mod-Metadata-responses">Responses</h3>
+<h3 id="Delete-Mod-KVP-Metadata-responses">Responses</h3>
 
 Status|Meaning|Description|Response Schema
 ---|---|---|---|
@@ -8077,7 +8215,7 @@ Submit a report for any resource on mod.io.
      
      Parameter|Type|Required|Description
      ---|---|---|---|
-     resource|integer(int32)|true|The name of the resource type you are submitting a report for __must__ be one of the following values.<br><br>*Field options*<br>__1__ = Game<br>__2__ = Mod<br>__3__ = Mod File<br>__4__ = Mod Tag<br>__5__ = User
+     resource|string|true|The name of the resource type you are submitting a report for __must__ be one of the following values.<br><br>*Field options*<br>__games__<br>__mods__<br>__files__<br>__tags__<br>__users__.
      id|integer(int32)|true|Unique Id of the resource item you are reporting.
      dmca|boolean|true|Is this a DMCA takedown request?
      name|string|true|Descriptive and informative title for your report.
@@ -9056,6 +9194,44 @@ data|[Update Object  ](#schemaupdate_object)[]|Get all updates that occurred bet
 
 
 
+## Get All Mod KVP
+
+<a name="schemaget_all_mod_kvp_metadata"></a>
+
+```json
+{
+  "data": [
+    {
+      "key": "pistol-dmg",
+      "value": 800
+    },
+    {
+        ...
+    }
+  ],
+  "cursor_id": 60,
+  "prev_id": 30,
+  "next_id": 160,
+  "result_count": 100
+} 
+```
+
+
+### Properties
+
+Name|Type|Description
+---|---|---|---|
+data|[Metadata KVP Object ](#schemametadata_kvp_object)[]|No description
+» key|string|The key of the key-value pair.
+» value|string|The value of the key-value pair.
+cursor_id|integer(int32)|The current _cursor value.
+prev_id|integer(int32)|The previous _cursor value as manually inserted by you, null by default.
+next_id|integer(int32)|The next position to move the _cursor to, based on the current request.
+result_count|integer(int32)|The amount of results returned in the current request.
+
+
+
+
 ## Access Object
 
   <a name="schemaaccess_object"></a>
@@ -9694,6 +9870,28 @@ name|string|The name of the category.
 type|string|Are tags selected via checkboxes or a single dropdown.
 adminonly|integer(int32)|Is this an admin only tag? If so only admin's can see this category and it can be used for filtering.
 tags|string[]|Eligible tags for this game.
+
+
+
+
+## Metadata KVP Object 
+
+<a name="schemametadata_kvp_object"></a>
+
+```json
+{
+  "key": "pistol-dmg",
+  "value": 800
+} 
+```
+
+
+### Properties
+
+Name|Type|Description
+---|---|---|---|
+key|string|The key of the key-value pair.
+value|string|The value of the key-value pair.
 
 
 
