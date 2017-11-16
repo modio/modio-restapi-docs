@@ -409,10 +409,13 @@
                     <a href="#get-all-mod-updates-by-game" class="toc-h2 toc-link" data-title="Mods">Get All Mod Updates By Game</a>
                   </li>
                   <li>
-                    <a href="#add-mod-metadata" class="toc-h2 toc-link" data-title="Mods">Add Mod Metadata</a>
+                    <a href="#get-all-mod-kvp-metadata" class="toc-h2 toc-link" data-title="Mods">Get All Mod KVP Metadata</a>
                   </li>
                   <li>
-                    <a href="#delete-mod-metadata" class="toc-h2 toc-link" data-title="Mods">Delete Mod Metadata</a>
+                    <a href="#add-mod-kvp-metadata" class="toc-h2 toc-link" data-title="Mods">Add Mod KVP Metadata</a>
+                  </li>
+                  <li>
+                    <a href="#delete-mod-kvp-metadata" class="toc-h2 toc-link" data-title="Mods">Delete Mod KVP Metadata</a>
                   </li>
               </ul>
           </li>
@@ -527,6 +530,9 @@
                     <a href="#get-updates" class="toc-h2 toc-link" data-title="Schemas">Get Updates</a>
                   </li>
                   <li>
+                    <a href="#get-all-mod-kvp" class="toc-h2 toc-link" data-title="Schemas">Get All Mod KVP</a>
+                  </li>
+                  <li>
                     <a href="#access-object" class="toc-h2 toc-link" data-title="Schemas">Access Object</a>
                   </li>
                   <li>
@@ -558,6 +564,9 @@
                   </li>
                   <li>
                     <a href="#game-tags-object" class="toc-h2 toc-link" data-title="Schemas">Game Tags Object</a>
+                  </li>
+                  <li>
+                    <a href="#metadata-kvp-object" class="toc-h2 toc-link" data-title="Schemas">Metadata KVP Object</a>
                   </li>
                   <li>
                     <a href="#rating-object" class="toc-h2 toc-link" data-title="Schemas">Rating Object</a>
@@ -683,7 +692,7 @@
 <p><img src="https://static.mod.io/v1/images/home/email.png" alt="mod.io Email Authentication Flow"></p>
 <pre class="highlight shell tab-shell"><code>// Example POST requesting security code
 
-curl -X POST https://api.mod.io/oauth/emailrequest <span class="se">\</span>
+curl -X POST https://api.mod.io/v1/oauth/emailrequest <span class="se">\</span>
   -H <span class="s1">'Content-Type: application/x-www-form-urlencoded'</span> <span class="se">\</span>
   -d <span class="s1">'api_key=0d0ba6756d032246f1299f8c01abc424'</span> <span class="se">\</span>
   -d <span class="s1">'email=john.snow@westeros.com'</span>
@@ -696,7 +705,7 @@ curl -X POST https://api.mod.io/oauth/emailrequest <span class="se">\</span>
 </span></code></pre><h3 id="step-1-requesting-a-security-code">Step 1: Requesting a security code</h3>
 <p>Firstly you must request a <code>security_code</code> from the authentication server by supplying an email which will then return a short-lived security code to the supplied e-mail address. It is therefore required that to receive a <code>security_code</code> that you have access to the specified email account. </p>
 
-<p><span class="httpmethod POST">POST</span> <span class="endpointheading">/oauth/emailrequest</span></p>
+<p><span class="httpmethod POST">POST</span> <span class="endpointheading">//oauth/emailrequest</span></p>
 
 <table>
 <thead>
@@ -720,7 +729,7 @@ curl -X POST https://api.mod.io/oauth/emailrequest <span class="se">\</span>
 <p>After successfully requesting a <code>security_code</code> with a valid e-mail address you have access to you will then receive an e-mail from mod.io containing your unique 5-character <code>security_code</code> which you then exchange in a second request for your <code>access_token</code>. There are a few important things to know when using the e-mail authentication flow:</p>
 <pre class="highlight shell tab-shell"><code>// Example POST requesting access token
 
-curl -X POST https://api.mod.io/oauth/emailexchange <span class="se">\</span>
+curl -X POST https://api.mod.io/v1/oauth/emailexchange <span class="se">\</span>
   -H <span class="s1">'Content-Type: application/x-www-form-urlencoded'</span> <span class="se">\ </span>   
   -d <span class="s1">'api_key=0d0ba6756d032246f1299f8c01abc424'</span> <span class="se">\</span>
   -d <span class="s1">'security_code=3EW50'</span>
@@ -740,7 +749,7 @@ curl -X POST https://api.mod.io/oauth/emailexchange <span class="se">\</span>
 
 <p>If you do not exchange your <code>security_code</code> for an <code>access_token</code> within 15 minutes of generation, you will need to begin the flow again to receive another code.</p>
 
-<p><span class="httpmethod POST">POST</span> <span class="endpointheading">/oauth/emailexchange</span></p>
+<p><span class="httpmethod POST">POST</span> <span class="endpointheading">//oauth/emailexchange</span></p>
 
 <table>
 <thead>
@@ -7169,7 +7178,138 @@ Authorization: Bearer YourAccessToken
 To perform this operation, you must be authenticated by means of one of the following methods:
 oauth2 ( Scopes: write )
 </aside>
-<h2 id="add-mod-metadata">Add Mod Metadata</h2>
+<h2 id="get-all-mod-kvp-metadata">Get All Mod KVP Metadata</h2>
+<blockquote>
+<p>Code samples</p>
+</blockquote>
+<pre class="highlight shell tab-shell"><code><span class="c"># You can also use wget</span>
+curl -X GET https://api.mod.io/v1/games/<span class="o">{</span>game-id<span class="o">}</span>/mods/<span class="o">{</span>mod-id<span class="o">}</span>/metadatakvp?api_key<span class="o">=</span>YourApiKey <span class="se">\</span>
+  -H <span class="s1">'Accept: application/json'</span>
+
+</code></pre><pre class="highlight http tab-http"><code><span class="nf">GET</span> <span class="nn">https://api.mod.io/v1/games/{game-id}/mods/{mod-id}/metadatakvp?api_key=YourApiKey</span> <span class="k">HTTP</span><span class="o">/</span><span class="m">1.1</span>
+<span class="na">Host</span><span class="p">:</span> <span class="s">api.mod.io</span>
+
+Accept: application/json
+
+</code></pre><pre class="highlight javascript tab-javascript"><code><span class="kd">var</span> <span class="nx">headers</span> <span class="o">=</span> <span class="p">{</span>
+  <span class="s1">'Accept'</span><span class="p">:</span><span class="s1">'application/json'</span>
+
+<span class="p">};</span>
+
+<span class="nx">$</span><span class="p">.</span><span class="nx">ajax</span><span class="p">({</span>
+  <span class="na">url</span><span class="p">:</span> <span class="s1">'https://api.mod.io/v1/games/{game-id}/mods/{mod-id}/metadatakvp'</span><span class="p">,</span>
+  <span class="na">method</span><span class="p">:</span> <span class="s1">'get'</span><span class="p">,</span>
+  <span class="na">data</span><span class="p">:</span> <span class="s1">'?api_key=YourApiKey'</span><span class="p">,</span>
+  <span class="na">headers</span><span class="p">:</span> <span class="nx">headers</span><span class="p">,</span>
+  <span class="na">success</span><span class="p">:</span> <span class="kd">function</span><span class="p">(</span><span class="nx">data</span><span class="p">)</span> <span class="p">{</span>
+    <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">JSON</span><span class="p">.</span><span class="nx">stringify</span><span class="p">(</span><span class="nx">data</span><span class="p">));</span>
+  <span class="p">}</span>
+<span class="p">})</span>
+</code></pre><pre class="highlight javascript tab-javascript--nodejs"><code><span class="kr">const</span> <span class="nx">request</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s1">'node-fetch'</span><span class="p">);</span>
+
+<span class="kr">const</span> <span class="nx">headers</span> <span class="o">=</span> <span class="p">{</span>
+  <span class="s1">'Accept'</span><span class="p">:</span><span class="s1">'application/json'</span>
+
+<span class="p">};</span>
+
+<span class="nx">fetch</span><span class="p">(</span><span class="s1">'https://api.mod.io/v1/games/{game-id}/mods/{mod-id}/metadatakvp?api_key=YourApiKey'</span><span class="p">,</span>
+<span class="p">{</span>
+  <span class="na">method</span><span class="p">:</span> <span class="s1">'GET'</span><span class="p">,</span>
+
+  <span class="na">headers</span><span class="p">:</span> <span class="nx">headers</span>
+<span class="p">})</span>
+<span class="p">.</span><span class="nx">then</span><span class="p">(</span><span class="kd">function</span><span class="p">(</span><span class="nx">res</span><span class="p">)</span> <span class="p">{</span>
+    <span class="k">return</span> <span class="nx">res</span><span class="p">.</span><span class="nx">json</span><span class="p">();</span>
+<span class="p">}).</span><span class="nx">then</span><span class="p">(</span><span class="kd">function</span><span class="p">(</span><span class="nx">body</span><span class="p">)</span> <span class="p">{</span>
+    <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">body</span><span class="p">);</span>
+<span class="p">});</span>
+</code></pre><pre class="highlight ruby tab-ruby"><code><span class="nb">require</span> <span class="s1">'rest-client'</span>
+<span class="nb">require</span> <span class="s1">'json'</span>
+
+<span class="n">headers</span> <span class="o">=</span> <span class="p">{</span>
+  <span class="s1">'Accept'</span> <span class="o">=&gt;</span> <span class="s1">'application/json'</span>
+<span class="p">}</span>
+
+<span class="n">result</span> <span class="o">=</span> <span class="no">RestClient</span><span class="p">.</span><span class="nf">get</span> <span class="s1">'https://api.mod.io/v1/games/{game-id}/mods/{mod-id}/metadatakvp'</span><span class="p">,</span>
+  <span class="ss">params: </span><span class="p">{</span>
+  <span class="s1">'api_key'</span> <span class="o">=&gt;</span> <span class="s1">'string'</span>
+<span class="p">},</span> <span class="ss">headers: </span><span class="n">headers</span>
+
+
+<span class="nb">p</span> <span class="no">JSON</span><span class="p">.</span><span class="nf">parse</span><span class="p">(</span><span class="n">result</span><span class="p">)</span>
+</code></pre><pre class="highlight python tab-python"><code><span class="kn">import</span> <span class="nn">requests</span>
+<span class="n">headers</span> <span class="o">=</span> <span class="p">{</span>
+  <span class="s">'Accept'</span><span class="p">:</span> <span class="s">'application/json'</span>
+<span class="p">}</span>
+
+<span class="n">r</span> <span class="o">=</span> <span class="n">requests</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s">'https://api.mod.io/v1/games/{game-id}/mods/{mod-id}/metadatakvp'</span><span class="p">,</span> <span class="n">params</span><span class="o">=</span><span class="p">{</span>
+  <span class="s">'api_key'</span><span class="p">:</span> <span class="s">'YourApiKey'</span>
+<span class="p">},</span> <span class="n">headers</span> <span class="o">=</span> <span class="n">headers</span><span class="p">)</span>
+
+<span class="k">print</span> <span class="n">r</span><span class="o">.</span><span class="n">json</span><span class="p">()</span>
+</code></pre><pre class="highlight java tab-java"><code><span class="n">URL</span> <span class="n">obj</span> <span class="o">=</span> <span class="k">new</span> <span class="n">URL</span><span class="o">(</span><span class="s">"https://api.mod.io/v1/games/{game-id}/mods/{mod-id}/metadatakvp?api_key=YourApiKey"</span><span class="o">);</span>
+<span class="n">HttpURLConnection</span> <span class="n">con</span> <span class="o">=</span> <span class="o">(</span><span class="n">HttpURLConnection</span><span class="o">)</span> <span class="n">obj</span><span class="o">.</span><span class="na">openConnection</span><span class="o">();</span>
+<span class="n">con</span><span class="o">.</span><span class="na">setRequestMethod</span><span class="o">(</span><span class="s">"GET"</span><span class="o">);</span>
+<span class="kt">int</span> <span class="n">responseCode</span> <span class="o">=</span> <span class="n">con</span><span class="o">.</span><span class="na">getResponseCode</span><span class="o">();</span>
+<span class="n">BufferedReader</span> <span class="n">in</span> <span class="o">=</span> <span class="k">new</span> <span class="n">BufferedReader</span><span class="o">(</span>
+    <span class="k">new</span> <span class="nf">InputStreamReader</span><span class="o">(</span><span class="n">con</span><span class="o">.</span><span class="na">getInputStream</span><span class="o">()));</span>
+<span class="n">String</span> <span class="n">inputLine</span><span class="o">;</span>
+<span class="n">StringBuffer</span> <span class="n">response</span> <span class="o">=</span> <span class="k">new</span> <span class="n">StringBuffer</span><span class="o">();</span>
+<span class="k">while</span> <span class="o">((</span><span class="n">inputLine</span> <span class="o">=</span> <span class="n">in</span><span class="o">.</span><span class="na">readLine</span><span class="o">())</span> <span class="o">!=</span> <span class="kc">null</span><span class="o">)</span> <span class="o">{</span>
+    <span class="n">response</span><span class="o">.</span><span class="na">append</span><span class="o">(</span><span class="n">inputLine</span><span class="o">);</span>
+<span class="o">}</span>
+<span class="n">in</span><span class="o">.</span><span class="na">close</span><span class="o">();</span>
+<span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="n">response</span><span class="o">.</span><span class="na">toString</span><span class="o">());</span>
+</code></pre>
+<p><span class="httpmethod GET">GET</span> <span class="endpointheading">/games/{game-id}/mods/{mod-id}/metadatakvp</span></p>
+
+<p>Get all key-value metadata pairs for the corresponding mod, successful response will return an array of objects contains only the key-value pairs. Only mod administrators are able to view these values.</p>
+
+<blockquote>
+<p>Example responses</p>
+</blockquote>
+<pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
+  </span><span class="s2">"data"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+    </span><span class="p">{</span><span class="w">
+      </span><span class="s2">"key"</span><span class="p">:</span><span class="w"> </span><span class="s2">"pistol-dmg"</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"value"</span><span class="p">:</span><span class="w"> </span><span class="mi">800</span><span class="w">
+    </span><span class="p">},</span><span class="w">
+    </span><span class="p">{</span><span class="w">
+        </span><span class="err">...</span><span class="w">
+    </span><span class="p">}</span><span class="w">
+  </span><span class="p">],</span><span class="w">
+  </span><span class="s2">"cursor_id"</span><span class="p">:</span><span class="w"> </span><span class="mi">60</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"prev_id"</span><span class="p">:</span><span class="w"> </span><span class="mi">30</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"next_id"</span><span class="p">:</span><span class="w"> </span><span class="mi">160</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"result_count"</span><span class="p">:</span><span class="w"> </span><span class="mi">100</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre>
+<h3 id="Get-All-Mod-KVP-Metadata-responses">Responses</h3>
+
+<table>
+<thead>
+<tr>
+<th>Status</th>
+<th>Meaning</th>
+<th>Description</th>
+<th>Response Schema</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>200</td>
+<td><a href="https://tools.ietf.org/html/rfc7231#section-6.3.1">OK</a></td>
+<td>Successful Request</td>
+<td><a href="#schemaget_all_mod_kvp_metadata">Get All Mod KVP</a></td>
+</tr>
+</tbody>
+</table>
+
+<aside class="warning">
+To perform this operation, you must be authenticated by means of one of the following methods:
+apiKey, oauth2 ( Scopes: read )
+</aside>
+<h2 id="add-mod-kvp-metadata">Add Mod KVP Metadata</h2>
 <blockquote>
 <p>Code samples</p>
 </blockquote>
@@ -7295,7 +7435,7 @@ Content-Type: application/x-www-form-urlencoded
   </span><span class="s2">"message"</span><span class="p">:</span><span class="w"> </span><span class="s2">"You have successfully added new key-value metadata to the specified mod."</span><span class="w">
 </span><span class="p">}</span><span class="w">
 </span></code></pre>
-<h3 id="Add-Mod-Metadata-responses">Responses</h3>
+<h3 id="Add-Mod-KVP-Metadata-responses">Responses</h3>
 
 <table>
 <thead>
@@ -7320,7 +7460,7 @@ Content-Type: application/x-www-form-urlencoded
 To perform this operation, you must be authenticated by means of one of the following methods:
 oauth2 ( Scopes: write )
 </aside>
-<h2 id="delete-mod-metadata">Delete Mod Metadata</h2>
+<h2 id="delete-mod-kvp-metadata">Delete Mod KVP Metadata</h2>
 <blockquote>
 <p>Code samples</p>
 </blockquote>
@@ -7417,7 +7557,7 @@ Content-Type: application/x-www-form-urlencoded
 </code></pre>
 <p><span class="httpmethod DELETE">DELETE</span> <span class="endpointheading">/games/{game-id}/mods/{mod-id}/metadatakvp</span></p>
 
-<p>Delete key-value pair metadata from the corresponding mod. <strong>Note:</strong> Due to a key being able to relate to multiple values, if you supply a key only it will delete <em>all</em> key-value pairs containing that key but if you supply both key &amp; value only an exact key-value match will be removed.</p>
+<p>Delete key-value pair metadata from the corresponding mod. <br><br><strong>Note:</strong> Due to a key being able to relate to multiple values, if you supply a key only it will delete <em>all</em> key-value pairs containing that key but if you supply both key &amp; value only an exact key-value match will be removed.</p>
 
 <table>
 <thead>
@@ -7443,7 +7583,7 @@ Content-Type: application/x-www-form-urlencoded
 </blockquote>
 <pre class="highlight json tab-json"><code><span class="w"> </span><span class="s2">"204 No Content"</span><span class="w"> 
 </span></code></pre>
-<h3 id="Delete-Mod-Metadata-responses">Responses</h3>
+<h3 id="Delete-Mod-KVP-Metadata-responses">Responses</h3>
 
 <table>
 <thead>
@@ -9408,9 +9548,9 @@ Content-Type: application/x-www-form-urlencoded
 <tbody>
 <tr>
 <td>resource</td>
-<td>integer(int32)</td>
+<td>string</td>
 <td>true</td>
-<td>The name of the resource type you are submitting a report for <strong>must</strong> be one of the following values.<br><br><em>Field options</em><br><strong>1</strong> = Game<br><strong>2</strong> = Mod<br><strong>3</strong> = Mod File<br><strong>4</strong> = Mod Tag<br><strong>5</strong> = User</td>
+<td>The name of the resource type you are submitting a report for <strong>must</strong> be one of the following values.<br><br><em>Field options</em><br><strong>games</strong><br><strong>mods</strong><br><strong>files</strong><br><strong>tags</strong><br><strong>users</strong>.</td>
 </tr>
 <tr>
 <td>id</td>
@@ -11499,6 +11639,71 @@ oauth2 ( Scopes: write )
 </tr>
 </tbody>
 </table>
+<h2 id="get-all-mod-kvp">Get All Mod KVP</h2>
+<p><a name="schemaget_all_mod_kvp_metadata"></a></p>
+<pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
+  </span><span class="s2">"data"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+    </span><span class="p">{</span><span class="w">
+      </span><span class="s2">"key"</span><span class="p">:</span><span class="w"> </span><span class="s2">"pistol-dmg"</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"value"</span><span class="p">:</span><span class="w"> </span><span class="mi">800</span><span class="w">
+    </span><span class="p">},</span><span class="w">
+    </span><span class="p">{</span><span class="w">
+        </span><span class="err">...</span><span class="w">
+    </span><span class="p">}</span><span class="w">
+  </span><span class="p">],</span><span class="w">
+  </span><span class="s2">"cursor_id"</span><span class="p">:</span><span class="w"> </span><span class="mi">60</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"prev_id"</span><span class="p">:</span><span class="w"> </span><span class="mi">30</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"next_id"</span><span class="p">:</span><span class="w"> </span><span class="mi">160</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"result_count"</span><span class="p">:</span><span class="w"> </span><span class="mi">100</span><span class="w">
+</span><span class="p">}</span><span class="w"> 
+</span></code></pre><h3 id="properties-18">Properties</h3>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>data</td>
+<td>
+<a href="#schemametadata_kvp_object">Metadata KVP Object </a>[]</td>
+<td>No description</td>
+</tr>
+<tr>
+<td>» key</td>
+<td>string</td>
+<td>The key of the key-value pair.</td>
+</tr>
+<tr>
+<td>» value</td>
+<td>string</td>
+<td>The value of the key-value pair.</td>
+</tr>
+<tr>
+<td>cursor_id</td>
+<td>integer(int32)</td>
+<td>The current _cursor value.</td>
+</tr>
+<tr>
+<td>prev_id</td>
+<td>integer(int32)</td>
+<td>The previous _cursor value as manually inserted by you, null by default.</td>
+</tr>
+<tr>
+<td>next_id</td>
+<td>integer(int32)</td>
+<td>The next position to move the _cursor to, based on the current request.</td>
+</tr>
+<tr>
+<td>result_count</td>
+<td>integer(int32)</td>
+<td>The amount of results returned in the current request.</td>
+</tr>
+</tbody>
+</table>
 <h2 id="access-object">Access Object</h2>
 <p><a name="schemaaccess_object"></a></p>
 <pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
@@ -11521,7 +11726,7 @@ oauth2 ( Scopes: write )
   </span><span class="s2">"date"</span><span class="p">:</span><span class="w"> </span><span class="mi">1492058857</span><span class="p">,</span><span class="w">
   </span><span class="s2">"position"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Supreme Overlord"</span><span class="w">
 </span><span class="p">}</span><span class="w"> 
-</span></code></pre><h3 id="properties-18">Properties</h3>
+</span></code></pre><h3 id="properties-19">Properties</h3>
 <table>
 <thead>
 <tr>
@@ -11639,7 +11844,7 @@ oauth2 ( Scopes: write )
     </span><span class="p">}</span><span class="w">
   </span><span class="p">}</span><span class="w">
 </span><span class="p">}</span><span class="w"> 
-</span></code></pre><h3 id="properties-19">Properties</h3>
+</span></code></pre><h3 id="properties-20">Properties</h3>
 <table>
 <thead>
 <tr>
@@ -11767,7 +11972,7 @@ oauth2 ( Scopes: write )
     </span><span class="p">}</span><span class="w">
   </span><span class="p">}</span><span class="w">
 </span><span class="p">}</span><span class="w"> 
-</span></code></pre><h3 id="properties-20">Properties</h3>
+</span></code></pre><h3 id="properties-21">Properties</h3>
 <table>
 <thead>
 <tr>
@@ -11894,7 +12099,7 @@ oauth2 ( Scopes: write )
   </span><span class="s2">"karmago"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
   </span><span class="s2">"summary"</span><span class="p">:</span><span class="w"> </span><span class="s2">"This mod is kickass! Great work!"</span><span class="w">
 </span><span class="p">}</span><span class="w"> 
-</span></code></pre><h3 id="properties-21">Properties</h3>
+</span></code></pre><h3 id="properties-22">Properties</h3>
 <table>
 <thead>
 <tr>
@@ -12008,7 +12213,7 @@ oauth2 ( Scopes: write )
   </span><span class="s2">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">3</span><span class="p">,</span><span class="w">
   </span><span class="s2">"ownership"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="w">
 </span><span class="p">}</span><span class="w"> 
-</span></code></pre><h3 id="properties-22">Properties</h3>
+</span></code></pre><h3 id="properties-23">Properties</h3>
 <table>
 <thead>
 <tr>
@@ -12042,7 +12247,7 @@ oauth2 ( Scopes: write )
   </span><span class="s2">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">3</span><span class="p">,</span><span class="w">
   </span><span class="s2">"price"</span><span class="p">:</span><span class="w"> </span><span class="mf">19.99</span><span class="w">
 </span><span class="p">}</span><span class="w"> 
-</span></code></pre><h3 id="properties-23">Properties</h3>
+</span></code></pre><h3 id="properties-24">Properties</h3>
 <table>
 <thead>
 <tr>
@@ -12086,7 +12291,7 @@ oauth2 ( Scopes: write )
   </span><span class="s2">"changelog"</span><span class="p">:</span><span class="w"> </span><span class="s2">"VERSION 1.3 -- Changes -- Fixed critical castle floor bug."</span><span class="p">,</span><span class="w">
   </span><span class="s2">"download"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://mod.io/mods/file/2/c489a0354111a4d76640d47f0cdcb294"</span><span class="w">
 </span><span class="p">}</span><span class="w"> 
-</span></code></pre><h3 id="properties-24">Properties</h3>
+</span></code></pre><h3 id="properties-25">Properties</h3>
 <table>
 <thead>
 <tr>
@@ -12244,7 +12449,7 @@ oauth2 ( Scopes: write )
     </span><span class="p">}</span><span class="w">
   </span><span class="p">]</span><span class="w">
 </span><span class="p">}</span><span class="w"> 
-</span></code></pre><h3 id="properties-25">Properties</h3>
+</span></code></pre><h3 id="properties-26">Properties</h3>
 <table>
 <thead>
 <tr>
@@ -12569,7 +12774,7 @@ oauth2 ( Scopes: write )
   </span><span class="s2">"tag"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Unity"</span><span class="p">,</span><span class="w">
   </span><span class="s2">"date"</span><span class="p">:</span><span class="w"> </span><span class="mi">1499841487</span><span class="w">
 </span><span class="p">}</span><span class="w"> 
-</span></code></pre><h3 id="properties-26">Properties</h3>
+</span></code></pre><h3 id="properties-27">Properties</h3>
 <table>
 <thead>
 <tr>
@@ -12650,7 +12855,7 @@ oauth2 ( Scopes: write )
     </span><span class="p">}</span><span class="w">
   </span><span class="p">]</span><span class="w">
 </span><span class="p">}</span><span class="w"> 
-</span></code></pre><h3 id="properties-27">Properties</h3>
+</span></code></pre><h3 id="properties-28">Properties</h3>
 <table>
 <thead>
 <tr>
@@ -12899,7 +13104,7 @@ oauth2 ( Scopes: write )
   </span><span class="p">],</span><span class="w">
   </span><span class="s2">"adminonly"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="w">
 </span><span class="p">}</span><span class="w"> 
-</span></code></pre><h3 id="properties-28">Properties</h3>
+</span></code></pre><h3 id="properties-29">Properties</h3>
 <table>
 <thead>
 <tr>
@@ -12931,6 +13136,34 @@ oauth2 ( Scopes: write )
 </tr>
 </tbody>
 </table>
+<h2 id="metadata-kvp-object">Metadata KVP Object</h2>
+<p><a name="schemametadata_kvp_object"></a></p>
+<pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
+  </span><span class="s2">"key"</span><span class="p">:</span><span class="w"> </span><span class="s2">"pistol-dmg"</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"value"</span><span class="p">:</span><span class="w"> </span><span class="mi">800</span><span class="w">
+</span><span class="p">}</span><span class="w"> 
+</span></code></pre><h3 id="properties-30">Properties</h3>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>key</td>
+<td>string</td>
+<td>The key of the key-value pair.</td>
+</tr>
+<tr>
+<td>value</td>
+<td>string</td>
+<td>The value of the key-value pair.</td>
+</tr>
+</tbody>
+</table>
 <h2 id="rating-object">Rating Object</h2>
 <p><a name="schemarating_object"></a></p>
 <pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
@@ -12942,7 +13175,7 @@ oauth2 ( Scopes: write )
   </span><span class="s2">"stars"</span><span class="p">:</span><span class="w"> </span><span class="mi">4</span><span class="p">,</span><span class="w">
   </span><span class="s2">"text"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Very Positive"</span><span class="w">
 </span><span class="p">}</span><span class="w"> 
-</span></code></pre><h3 id="properties-29">Properties</h3>
+</span></code></pre><h3 id="properties-31">Properties</h3>
 <table>
 <thead>
 <tr>
@@ -12999,7 +13232,7 @@ oauth2 ( Scopes: write )
   </span><span class="s2">"date"</span><span class="p">:</span><span class="w"> </span><span class="mi">1492058857</span><span class="p">,</span><span class="w">
   </span><span class="s2">"mention"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="w">
 </span><span class="p">}</span><span class="w"> 
-</span></code></pre><h3 id="properties-30">Properties</h3>
+</span></code></pre><h3 id="properties-32">Properties</h3>
 <table>
 <thead>
 <tr>
@@ -13056,7 +13289,7 @@ oauth2 ( Scopes: write )
   </span><span class="s2">"language"</span><span class="p">:</span><span class="w"> </span><span class="s2">"en"</span><span class="p">,</span><span class="w">
   </span><span class="s2">"url"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://mod.io/members/xant"</span><span class="w">
 </span><span class="p">}</span><span class="w"> 
-</span></code></pre><h3 id="properties-31">Properties</h3>
+</span></code></pre><h3 id="properties-33">Properties</h3>
 <table>
 <thead>
 <tr>
