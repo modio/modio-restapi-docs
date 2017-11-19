@@ -86,7 +86,7 @@ curl -X POST https://api.mod.io/v1/oauth/emailrequest \
 
 Firstly you must request a `security_code` from the authentication server by supplying an email which will then return a short-lived security code to the supplied e-mail address. It is therefore required that to receive a `security_code` that you have access to the specified email account. 
 
-`POST /oauth/emailrequest`
+`POST oauth/emailrequest`
 
 Parameter | Value
 ---------- | ----------  
@@ -122,7 +122,7 @@ curl -X POST https://api.mod.io/v1/oauth/emailexchange \
 
 If you do not exchange your `security_code` for an `access_token` within 15 minutes of generation, you will need to begin the flow again to receive another code.
 
-`POST /oauth/emailexchange`
+`POST oauth/emailexchange`
 
 Parameter | Value
 ---------- | ----------  

@@ -103,7 +103,7 @@ curl -X POST https://api.mod.io/v1/oauth/emailrequest \
 ### Step 1: Requesting a security code
 
 Firstly you must request a `security_code` from the authentication server by supplying an email which will then return a short-lived security code to the supplied e-mail address. It is therefore required that to receive a `security_code` that you have access to the specified email account. 
-`POST //oauth/emailrequest`
+`POST /oauth/emailrequest`
 
 Parameter | Value
 ---------- | ----------  
@@ -138,7 +138,7 @@ curl -X POST https://api.mod.io/v1/oauth/emailexchange \
 - Once exchanged for an access token, the security code is invalid.
 
 If you do not exchange your `security_code` for an `access_token` within 15 minutes of generation, you will need to begin the flow again to receive another code.
-`POST //oauth/emailexchange`
+`POST /oauth/emailexchange`
 
 Parameter | Value
 ---------- | ----------  
@@ -1121,7 +1121,7 @@ System.out.println(response.toString());
 ```
 `PUT /games/{game-id}`
 
-Update details for a game. If you want to update the `icon`, `logo` or `header` fields you need to use the [Add Game Media](https://docs.mod.io/#add-game-media) endpoint.
+Update details for a game. If you want to update the `icon`, `logo` or `header` fields you need to use the [Add Game Media](https://docs.mod.io/#add-game-media) endpoint. Successful request will return updated [Game Object](https://docs.mod.io/#game-object).
      
      Parameter|Type|Required|Description
      ---|---|---|---|
@@ -1143,15 +1143,68 @@ Update details for a game. If you want to update the `icon`, `logo` or `header` 
 
 ```json
 {
-  "code": "200",
-  "message": "You have successfully updated to the specified game profile."
+  "id": 2,
+  "submitted_by": {
+    "id": 1,
+    "nameid": "xant",
+    "username": "XanT",
+    "online": 1509922961,
+    "avatar": {
+      "filename": "masterchief.jpg",
+      "full": "https://media.mod.io/images/members/1/1/1/masterchief.jpg"
+    },
+    "timezone": "Australia/Brisbane",
+    "language": "en",
+    "url": "https://mod.io/members/xant"
+  },
+  "datereg": 1493702614,
+  "dateup": 1499410290,
+  "presentation": 1,
+  "community": 3,
+  "submission": 0,
+  "curation": 0,
+  "revenue": 1500,
+  "api": 3,
+  "ugcname": "map",
+  "icon": {
+    "filename": "IMG_20170409_222419.jpg",
+    "full": "https://media.mod.io/images/mods/1/1/2/icon.png",
+    "thumb_320x180": "https://media.mod.io/cache/images/mods/1/1/2/thumb_320x180/icon.png"
+  },
+  "logo": {
+    "filename": "IMG_20170409_222419.jpg",
+    "full": "https://media.mod.io/images/mods/1/1/2/IMG_20170409_222419.jpg",
+    "thumb_320x180": "https://media.mod.io/cache/images/mods/1/1/2/thumb_320x180/IMG_20170409_222419.jpg",
+    "thumb_640x360": "https://media.mod.io/cache/images/mods/1/1/2/thumb_640x360/IMG_20170409_222419.jpg",
+    "thumb_1280x720": "https://media.mod.io/cache/images/mods/1/1/2/thumb_1280x720/IMG_20170409_222419.jpg"
+  },
+  "header": {
+    "filename": "gameheader.png",
+    "full": "https://media.mod.io/images/games/1/1/2/gameheader.png"
+  },
+  "homepage": "https://www.rogue-knight-game.com/",
+  "name": "Rogue Knight",
+  "nameid": "rogue-knight",
+  "summary": "Rogue Knight is a brand new 2D pixel platformer.",
+  "instructions": "Instructions here on how to develop for your game.",
+  "url": "https://rogue-knight.mod.io",
+  "cats": [
+    {
+      "name": "Engines",
+      "type": "checkboxes",
+      "tags": [
+        "Unity"
+      ],
+      "adminonly": 0
+    }
+  ]
 }
 ```
 <h3 id="Edit-Game-responses">Responses</h3>
 
 Status|Meaning|Description|Response Schema
 ---|---|---|---|
-200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)|Update successful|[Message Object](#message-object)
+200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)|Update successful|[Game Object  ](#schemagame_object)
 
 <aside class="warning">
 To perform this operation, you must be authenticated by means of one of the following methods:
@@ -1413,9 +1466,10 @@ Retrieve activity log for a game, showing changes made to the resource. Successf
      Filter|Type|Description
      ---|---|---
      id|integer(int32)|Unique id of the activity object.
+     game|integer(int32)|Unique id of the parent game.
      user|integer(int32)|Unique id of the user who performed the action.
      dateup|integer(int32)|Unix timestamp of date updated.
-     event|string|Type of change that occurred. Note that in the event of GAME_DELETE, this endpoint will be inaccessible as the game profile would be closed, however if restored it would show the event in the activity history.<br><br>*Field Options*<br>__GAME_UPDATE__ - Update event<br>__GAME_DELETE__ - Delete event
+     event|string|Type of change that occurred. <br><br>*Field Options*<br>__GAME_UPDATE__ - Update event<br>__GAME_VISIBILITY_CHANGE__ = Game has been set to live, or hidden
 
 
 > Example responses
@@ -1424,28 +1478,18 @@ Retrieve activity log for a game, showing changes made to the resource. Successf
 {
   "data": [
     {
-      "id": 13,
-      "user": {
-        "id": 1,
-        "nameid": "xant",
-        "username": "XanT",
-        "online": 1509922961,
-        "avatar": {
-          "filename": "masterchief.jpg",
-          "full": "https://media.mod.io/images/members/1/1/1/masterchief.jpg"
-        },
-        "timezone": "Australia/Brisbane",
-        "language": "en",
-        "url": "https://mod.io/members/xant"
-      },
+      "id": 53,
+      "game": 17,
+      "user": 95,
       "dateup": 1499846132,
       "event": "GAME_UPDATE",
-      "changes": {
-        "summary": {
+      "changes": [
+        {
+          "field": "homepage",
           "before": "https://www.roguehdpack.com/",
           "after": "https://rogue-knight.mod.io/rogue-hd-pack"
         }
-      }
+      ]
     },
     {
         ...
@@ -2183,6 +2227,10 @@ Retrieve all Mods on mod.io for the corresponding game. Successful request will 
      price|double|Numeric representation of the price.
      tags|string|Comma-separated values representing the tags you want to filter the results by. Only tags that are supported by the parent game can be applied. To determine what tags are eligible, see the tags values within __cats__ field on the parent [Game Object](https://docs.mod.io/#game-object).
      status|string| _OAuth 2 only_. The status of the mod (only recognised by game admins), _default is 'auth'_.<br><br>*Fields Options:*<br>__unauth__ = Only return un-authorized mods.<br>__auth__ = Only return authorized mods _(default)_.<br>__ban__ = Only return banned mods.<br>__archive__ = Only return archived content (out of date builds).<br>__delete__ = Only return deleted mods.
+     downloads|string|Sort results by most downloads using [_sort filter](https://docs.mod.io/#filtering) parameter, value should be `downloads` for descending or `-downloads` for ascending results.
+     popular|string|Sort results by popularity using [_sort filter](https://docs.mod.io/#filtering), value should be `popular` for descending or `-popular` for ascending results.
+     ratings|string|Sort results by highest weighted rating using [_sort filter](https://docs.mod.io/#filtering), value should be `ratings` for descending or `-ratings` for ascending results.
+     subscribers|string|Sort results by most subscribers using [_sort filter](https://docs.mod.io/#filtering), value should be `subscribers` for descending or `-subscribers` for ascending results.
 
 
 > Example responses
@@ -2843,7 +2891,7 @@ System.out.println(response.toString());
 ```
 `PUT /games/{game-id}/mods/{mod-id}`
 
-Edit details for a mod. If you wanting to update the media attached to this game, including the `logo` field - you need to use the [Add Mod Media](https://docs.mod.io/#add-mod-media) endpoint.
+Edit details for a mod. If you wanting to update the media attached to this game, including the `logo` field - you need to use the [Add Mod Media](https://docs.mod.io/#add-mod-media) endpoint. Successful request will return the updated [Mod Object](https://docs.mod.io/#mod-object). If `modfile` parameter is successfully changed, a __MODFILE_UPDATE__ event will be fired.
      
      Parameter|Type|Required|Description
      ---|---|---|---|
@@ -2853,7 +2901,7 @@ Edit details for a mod. If you wanting to update the media attached to this game
      price|double||Numeric only representation of the price if you intend to charge for your mod. Example: 19.99, 10.00.
      stock|integer(int32)||Artificially limit the amount of times the mod can be purchased.
      description|string||An extension of your summary. Include all information relevant to your mod including sections such as 'About', 'Features', 'Install Instructions', 'FAQ', etc. HTML supported and encouraged.
-     metadata|string||Comma-separated list of metadata strings that are relevant to your mod.
+     metadatablob|string||Comma-separated list of metadata strings that are relevant to your mod.
      nameid|string||The unique SEO friendly URL for your game. Cannot exceed 80 characters.
      modfile|integer(int32)||Unique id of the [Modfile Object](https://docs.mod.io/#modfile-object) to be labelled as the current release.
 
@@ -2862,15 +2910,90 @@ Edit details for a mod. If you wanting to update the media attached to this game
 
 ```json
 {
-  "code": "200",
-  "message": "You have successfully updated the specified mod."
+  "id": 2,
+  "game": 2,
+  "submitted_by": {
+    "id": 1,
+    "nameid": "xant",
+    "username": "XanT",
+    "online": 1509922961,
+    "avatar": {
+      "filename": "masterchief.jpg",
+      "full": "https://media.mod.io/images/members/1/1/1/masterchief.jpg"
+    },
+    "timezone": "Australia/Brisbane",
+    "language": "en",
+    "url": "https://mod.io/members/xant"
+  },
+  "price": 9.99,
+  "datereg": 1492564103,
+  "dateup": 1499841487,
+  "logo": {
+    "filename": "IMG_20170409_222419.jpg",
+    "full": "https://media.mod.io/images/mods/1/1/2/IMG_20170409_222419.jpg",
+    "thumb_320x180": "https://media.mod.io/cache/images/mods/1/1/2/thumb_320x180/IMG_20170409_222419.jpg",
+    "thumb_640x360": "https://media.mod.io/cache/images/mods/1/1/2/thumb_640x360/IMG_20170409_222419.jpg",
+    "thumb_1280x720": "https://media.mod.io/cache/images/mods/1/1/2/thumb_1280x720/IMG_20170409_222419.jpg"
+  },
+  "homepage": "https://www.rogue-hdpack.com/",
+  "name": "Rogue Knight HD Pack",
+  "nameid": "rogue-knight-hd-pack",
+  "summary": "It's time to bask in the glory of beautiful 4k textures!",
+  "description": "<h2>About</h2><p>Rogue HD Pack does exactly what you thi...",
+  "metadatablob": "rogue,hd,high-res,4k,hd textures",
+  "url": "https://rogue-knight.mod.io/rogue-knight-hd-pack",
+  "modfile": {
+    "id": 2,
+    "mod": 2,
+    "date": 1499841487,
+    "datevirus": 1499841487,
+    "virusstatus": 0,
+    "viruspositive": 0,
+    "filesize": 15181,
+    "filehash": "2d4a0e2d7273db6b0a94b0740a88ad0d",
+    "filename": "rogue-knight-v1.zip",
+    "version": "1.3",
+    "virustotal": "No threats found.",
+    "changelog": "VERSION 1.3 -- Changes -- Fixed critical castle floor bug.",
+    "download": "https://mod.io/mods/file/2/c489a0354111a4d76640d47f0cdcb294"
+  },
+  "media": {
+    "youtube": [
+      "https://www.youtube.com/watch?v=dQw4w9WgXcQ"
+    ],
+    "sketchfab": [
+      "https://sketchfab.com/models/ef40b2d300334d009984c8865b2db1c8"
+    ],
+    "images": [
+      {
+        "full": "https://media.mod.io/images/mods/1/1/2/IMG_20170409_222419.jpg",
+        "thumbnail": "https://media.mod.io/cache/images/mods/1/1/2/thumb_1020x2000/IMG_20170409_222419.jpg",
+        "filename": "IMG_20170409_222419.jpg"
+      }
+    ]
+  },
+  "ratings": {
+    "total": 1230,
+    "positive": 1047,
+    "negative": 183,
+    "weighted": 87.38,
+    "percentage": 91,
+    "stars": 4,
+    "text": "Very Positive"
+  },
+  "tags": [
+    {
+      "tag": "Unity",
+      "date": 1499841487
+    }
+  ]
 }
 ```
 <h3 id="Edit-Mod-responses">Responses</h3>
 
 Status|Meaning|Description|Response Schema
 ---|---|---|---|
-200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)|Update Successful|[Message Object](#message-object)
+200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)|Update Successful|[Mod Object  ](#schemamod_object)
 
 <aside class="warning">
 To perform this operation, you must be authenticated by means of one of the following methods:
@@ -2994,7 +3117,7 @@ System.out.println(response.toString());
 ```
 `DELETE /games/{game-id}/mods/{mod-id}`
 
-Delete a mod profile which will if successful will return `204 No Content`. Note this will close the mod profile which means it cannot be viewed or retrieved via API requests but will still exist in-case you choose to restore it at a later date. If you believe a mod should be permanently removed please [contact us](mailto:support@mod.io).
+Delete a mod profile. Successful request will return `204 No Content` as well as fire a __MOD_VISIBILITY_CHANGE event. Note this will close the mod profile which means it cannot be viewed or retrieved via API requests but will still exist in-case you choose to restore it at a later date. If you believe a mod should be permanently removed please [contact us](mailto:support@mod.io).
 
 
 > Example responses
@@ -3418,9 +3541,12 @@ Retrieve activity log for a mod, showing changes made to the resource. Successfu
      Filter|Type|Description
      ---|---|---
      id|integer(int32)|Unique id of the activity object.
+     mod|integer(int32)|Unique id of the parent mod.
      user|integer(int32)|Unique id of the user who triggered the action.
      dateup|integer(int32)|Unix timestamp of date updated.
-     event|string|Type of change that occurred. Note that in the event of MOD_DELETE, this endpoint will be inaccessible as the mod profile would be closed, however if restored it would show the event in the activity history.<br><br>*Field Options*<br>__MOD_UPDATE__ - Update event<br>__MOD_DELETE__ - Delete event
+     event|string|Type of change that occurred.<br><br>*Field Options*<br>__MOD_UPDATE__ - Update event<br>__MODFILE_UPDATE__ = Primary file changed<br>__MOD_VISIBILITY_CHANGE__ = Mod has been set to live, or hidden.
+     latest|boolean|_Default value is true_. Returns only the latest unique events for each mod.
+     subscribed|boolean|__OAuth 2 Required__. Default value is _false_. Returns only the events the _authenticated user_ is subscribed to.
 
 
 > Example responses
@@ -3430,27 +3556,17 @@ Retrieve activity log for a mod, showing changes made to the resource. Successfu
   "data": [
     {
       "id": 13,
-      "user": {
-        "id": 1,
-        "nameid": "xant",
-        "username": "XanT",
-        "online": 1509922961,
-        "avatar": {
-          "filename": "masterchief.jpg",
-          "full": "https://media.mod.io/images/members/1/1/1/masterchief.jpg"
-        },
-        "timezone": "Australia/Brisbane",
-        "language": "en",
-        "url": "https://mod.io/members/xant"
-      },
+      "mod": 13,
+      "user": 13,
       "dateup": 1499846132,
       "event": "MOD_UPDATE",
-      "changes": {
-        "summary": {
+      "changes": [
+        {
+          "field": "homepage",
           "before": "https://www.roguehdpack.com/",
           "after": "https://rogue-knight.mod.io/rogue-hd-pack"
         }
-      }
+      ]
     },
     {
         ...
@@ -3463,6 +3579,164 @@ Retrieve activity log for a mod, showing changes made to the resource. Successfu
 }
 ```
 <h3 id="Get-Mod-Activity-responses">Responses</h3>
+
+Status|Meaning|Description|Response Schema
+---|---|---|---|
+200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)|Successful Request|[Get Mod Activity ](#schemaget_mod_activity)
+
+<aside class="warning">
+To perform this operation, you must be authenticated by means of one of the following methods:
+apiKey, oauth2 ( Scopes: read )
+</aside>
+
+
+## Get All Mod Activity By Game
+
+> Code samples
+
+```shell
+# You can also use wget
+curl -X GET https://api.mod.io/v1/games/{game-id}/mods/activity?api_key=YourApiKey \
+  -H 'Accept: application/json'
+
+```
+
+```http
+GET https://api.mod.io/v1/games/{game-id}/mods/activity?api_key=YourApiKey HTTP/1.1
+Host: api.mod.io
+
+Accept: application/json
+
+```
+
+```javascript
+var headers = {
+  'Accept':'application/json'
+
+};
+
+$.ajax({
+  url: 'https://api.mod.io/v1/games/{game-id}/mods/activity',
+  method: 'get',
+  data: '?api_key=YourApiKey',
+  headers: headers,
+  success: function(data) {
+    console.log(JSON.stringify(data));
+  }
+})
+```
+
+```javascript--nodejs
+const request = require('node-fetch');
+
+const headers = {
+  'Accept':'application/json'
+
+};
+
+fetch('https://api.mod.io/v1/games/{game-id}/mods/activity?api_key=YourApiKey',
+{
+  method: 'GET',
+
+  headers: headers
+})
+.then(function(res) {
+    return res.json();
+}).then(function(body) {
+    console.log(body);
+});
+```
+
+```ruby
+require 'rest-client'
+require 'json'
+
+headers = {
+  'Accept' => 'application/json'
+}
+
+result = RestClient.get 'https://api.mod.io/v1/games/{game-id}/mods/activity',
+  params: {
+  'api_key' => 'string'
+}, headers: headers
+
+
+p JSON.parse(result)
+```
+
+```python
+import requests
+headers = {
+  'Accept': 'application/json'
+}
+
+r = requests.get('https://api.mod.io/v1/games/{game-id}/mods/activity', params={
+  'api_key': 'YourApiKey'
+}, headers = headers)
+
+print r.json()
+```
+
+```java
+URL obj = new URL("https://api.mod.io/v1/games/{game-id}/mods/activity?api_key=YourApiKey");
+HttpURLConnection con = (HttpURLConnection) obj.openConnection();
+con.setRequestMethod("GET");
+int responseCode = con.getResponseCode();
+BufferedReader in = new BufferedReader(
+    new InputStreamReader(con.getInputStream()));
+String inputLine;
+StringBuffer response = new StringBuffer();
+while ((inputLine = in.readLine()) != null) {
+    response.append(inputLine);
+}
+in.close();
+System.out.println(response.toString());
+```
+`GET /games/{game-id}/mods/activity`
+
+Retrieve all mod activity for the corresponding game. Successful request will return an array of [Mod Activity Objects](https://docs.mod.io/#get-mod-activity-2). To make your requests as specific to your needs as possible it's highly recommended reading over our [filtering documentation](https://docs.mod.io/#filtering) if it will help you with consuming this endpoint. This endpoint by default sorts by `id` in descending order.
+     
+     Filter|Type|Description
+     ---|---|---
+     id|integer(int32)|Unique id of the activity object.
+     mod|integer(int32)|Unique id of the parent mod.
+     user|integer(int32)|Unique id of the user who triggered the action.
+     dateup|integer(int32)|Unix timestamp of date updated.
+     event|string|Type of change that occurred. <br><br>*Field Options*<br>__MOD_UPDATE__ - Update event<br>__MODFILE_UPDATE__ = Primary file changed<br>__MOD_VISIBILITY_CHANGE__ = Mod has been set to live, or hidden.
+     latest|boolean|_Default value is true_. Returns only the latest unique events for each mod.
+     subscribed|boolean|__OAuth 2 Required__. Default value is _false_. Returns only the events the _authenticated user_ is subscribed to.
+
+
+> Example responses
+
+```json
+{
+  "data": [
+    {
+      "id": 13,
+      "mod": 13,
+      "user": 13,
+      "dateup": 1499846132,
+      "event": "MOD_UPDATE",
+      "changes": [
+        {
+          "field": "homepage",
+          "before": "https://www.roguehdpack.com/",
+          "after": "https://rogue-knight.mod.io/rogue-hd-pack"
+        }
+      ]
+    },
+    {
+        ...
+    }
+  ],
+  "cursor_id": 60,
+  "prev_id": 30,
+  "next_id": 160,
+  "result_count": 100
+}
+```
+<h3 id="Get-All-Mod-Activity-By-Game-responses">Responses</h3>
 
 Status|Meaning|Description|Response Schema
 ---|---|---|---|
@@ -4057,7 +4331,7 @@ System.out.println(response.toString());
 ```
 `PUT /games/{game-id}/mods/{mod-id}/files/{file-id}`
 
-Update the details for a published file on mod.io. If you are wanting to update fields other than changelog, you should be creating a new file instead.
+Update the details for a published file on mod.io. If you are wanting to update fields other than changelog, you should be creating a new file instead. Successful request will return updated [Modfile Object](https://docs.mod.io/#modfile-object). Unless you specify the modfile to not be the active release with the `active` parameter set to false, a __MODFILE_UPDATE__ event will be fired.
      
      Parameter|Type|Required|Description
      ---|---|---|---|
@@ -4069,15 +4343,26 @@ Update the details for a published file on mod.io. If you are wanting to update 
 
 ```json
 {
-  "code": "200",
-  "message": "You have successfully updated the specified file."
+  "id": 2,
+  "mod": 2,
+  "date": 1499841487,
+  "datevirus": 1499841487,
+  "virusstatus": 0,
+  "viruspositive": 0,
+  "filesize": 15181,
+  "filehash": "2d4a0e2d7273db6b0a94b0740a88ad0d",
+  "filename": "rogue-knight-v1.zip",
+  "version": "1.3",
+  "virustotal": "No threats found.",
+  "changelog": "VERSION 1.3 -- Changes -- Fixed critical castle floor bug.",
+  "download": "https://mod.io/mods/file/2/c489a0354111a4d76640d47f0cdcb294"
 }
 ```
 <h3 id="Edit-Mod-File-responses">Responses</h3>
 
 Status|Meaning|Description|Response Schema
 ---|---|---|---|
-200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)|Update Successful|[Message Object](#message-object)
+200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)|Update Successful|[Modfile Object  ](#schemamodfile_object)
 
 <aside class="warning">
 To perform this operation, you must be authenticated by means of one of the following methods:
@@ -5694,166 +5979,6 @@ oauth2 ( Scopes: write )
 </aside>
 
 
-## Get All Mod Updates By Game
-
-> Code samples
-
-```shell
-# You can also use wget
-curl -X GET https://api.mod.io/v1/games/{game-id}/mod/updates \
-  -H 'Authorization: Bearer YourAccessToken' \
-  -H 'Accept: application/json'
-
-```
-
-```http
-GET https://api.mod.io/v1/games/{game-id}/mod/updates HTTP/1.1
-Host: api.mod.io
-
-Accept: application/json
-Authorization: Bearer YourAccessToken
-
-
-```
-
-```javascript
-var headers = {
-  'Authorization':'Bearer YourAccessToken',
-  'Accept':'application/json'
-
-};
-
-$.ajax({
-  url: 'https://api.mod.io/v1/games/{game-id}/mod/updates',
-  method: 'get',
-
-  headers: headers,
-  success: function(data) {
-    console.log(JSON.stringify(data));
-  }
-})
-```
-
-```javascript--nodejs
-const request = require('node-fetch');
-
-const headers = {
-  'Authorization':'Bearer YourAccessToken',
-  'Accept':'application/json'
-
-};
-
-fetch('https://api.mod.io/v1/games/{game-id}/mod/updates',
-{
-  method: 'GET',
-
-  headers: headers
-})
-.then(function(res) {
-    return res.json();
-}).then(function(body) {
-    console.log(body);
-});
-```
-
-```ruby
-require 'rest-client'
-require 'json'
-
-headers = {
-  'Authorization' => 'Bearer YourAccessToken',
-  'Accept' => 'application/json'
-}
-
-result = RestClient.get 'https://api.mod.io/v1/games/{game-id}/mod/updates',
-  params: {
-  }, headers: headers
-
-
-p JSON.parse(result)
-```
-
-```python
-import requests
-headers = {
-  'Authorization': 'Bearer YourAccessToken',
-  'Accept': 'application/json'
-}
-
-r = requests.get('https://api.mod.io/v1/games/{game-id}/mod/updates', params={
-
-}, headers = headers)
-
-print r.json()
-```
-
-```java
-URL obj = new URL("https://api.mod.io/v1/games/{game-id}/mod/updates");
-HttpURLConnection con = (HttpURLConnection) obj.openConnection();
-con.setRequestMethod("GET");
-int responseCode = con.getResponseCode();
-BufferedReader in = new BufferedReader(
-    new InputStreamReader(con.getInputStream()));
-String inputLine;
-StringBuffer response = new StringBuffer();
-while ((inputLine = in.readLine()) != null) {
-    response.append(inputLine);
-}
-in.close();
-System.out.println(response.toString());
-```
-`GET /games/{game-id}/mod/updates`
-
-Get all mod updates (new builds) that occurred between two timestamps for the corresponding game. This endpoint is designed for intermittent polling by game clients to determine if notifications need to be pushed to the authenticated user. If you are consuming querying potential build updates from within a game, it is highly recommend you use this endpoint. Successful request will return an array of [Modfile Objects](https://docs.mod.io/#get-all-mod-files-2) that were published between the two supplied timestamps.
-     
-     Parameter|Type|Required|Description
-     ---|---|---|---|
-     start|integer(int32)|true|Unix timestamp of beginning of update check.
-     end|integer(int32)|true|Unix timestamp of end of update check.
-
-
-> Example responses
-
-```json
-{
-  "data": [
-    {
-      "id": 2,
-      "mod": 2,
-      "date": 1499841487,
-      "datevirus": 1499841487,
-      "virusstatus": 0,
-      "viruspositive": 0,
-      "filesize": 15181,
-      "filehash": "2d4a0e2d7273db6b0a94b0740a88ad0d",
-      "filename": "rogue-knight-v1.zip",
-      "version": "1.3",
-      "virustotal": "No threats found.",
-      "changelog": "VERSION 1.3 -- Changes -- Fixed critical castle floor bug.",
-      "download": "https://mod.io/mods/file/2/c489a0354111a4d76640d47f0cdcb294"
-    },
-    {
-        ...
-    }
-  ],
-  "cursor_id": 60,
-  "prev_id": 30,
-  "next_id": 160,
-  "result_count": 100
-}
-```
-<h3 id="Get-All-Mod-Updates-By-Game-responses">Responses</h3>
-
-Status|Meaning|Description|Response Schema
----|---|---|---|
-200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)|Request Successful|[Get All Mod Files](#schemaget_all_mod_files)
-
-<aside class="warning">
-To perform this operation, you must be authenticated by means of one of the following methods:
-oauth2 ( Scopes: write )
-</aside>
-
-
 ## Get All Mod KVP Metadata
 
 > Code samples
@@ -6109,10 +6234,10 @@ System.out.println(response.toString());
 `POST /games/{game-id}/mods/{mod-id}/metadatakvp`
 
 Add searchable key-value metadata for the corresponding mod. Metadata may include properties as to how the item works, or other information you need to display. You must have administrator privileges to add metadata to a mod.
-
-    Parameter|Type|Required|Description
-    ---|---|---|---|
-    metadata|array|true|Array containing one or more key value pairs where the the key & value are separated by a colon ':'. A single key can map to multiple values (1-to-many relationship), key-value pairs are searchable by exact matches only and neither the key or value can exceed 255 characters in length.
+     
+     Parameter|Type|Required|Description
+     ---|---|---|---|
+     metadata|array|true|Array containing one or more key value pairs where the the key & value are separated by a colon ':'. A single key can map to multiple values (1-to-many relationship), key-value pairs are searchable by exact matches only and neither the key or value can exceed 255 characters in length.
 
 
 > Example responses
@@ -6252,10 +6377,10 @@ System.out.println(response.toString());
 `DELETE /games/{game-id}/mods/{mod-id}/metadatakvp`
 
 Delete key-value pair metadata from the corresponding mod. <br><br>__Note:__ Due to a key being able to relate to multiple values, if you supply a key only it will delete _all_ key-value pairs containing that key but if you supply both key & value only an exact key-value match will be removed.
-
-    Parameter|Type|Required|Description
-    ---|---|---|---|
-    metadata|array|true|Array containing one or more key value pairs where the the key & value are separated by a colon ':'. A single key can map to multiple values (1-to-many relationship), key-value pairs are searchable by exact matches only and neither the key or value can exceed 255 characters in length.
+     
+     Parameter|Type|Required|Description
+     ---|---|---|---|
+     metadata|array|true|Array containing one or more key value pairs where the the key & value are separated by a colon ':'. A single key can map to multiple values (1-to-many relationship), key-value pairs are searchable by exact matches only and neither the key or value can exceed 255 characters in length.
 
 
 > Example responses
@@ -6658,7 +6783,7 @@ System.out.println(response.toString());
 ```
 `GET /users`
 
-Retrieve all users registered to mod.io. Successful request will return an __array of user objects__. To make your requests as specific to your needs as possible it's highly recommended reading over our [filtering documentation](https://docs.mod.io/#filtering) if it will help you with consuming this endpoint.
+Retrieve all users registered to mod.io. Successful request will return an Successful request will return [an array of User Objects](https://docs.mod.io/#get-all-users-2). To make your requests as specific to your needs as possible it's highly recommended reading over our [filtering documentation](https://docs.mod.io/#filtering) if it will help you with consuming this endpoint.
      
      Filter|Type|Description
      ---|---|---
@@ -7137,6 +7262,367 @@ apiKey, oauth2 ( Scopes: read )
 
 
 # Me
+
+## Get Authenticated User
+
+> Code samples
+
+```shell
+# You can also use wget
+curl -X GET https://api.mod.io/v1/me \
+  -H 'Authorization: Bearer YourAccessToken' \
+  -H 'Accept: application/json'
+
+```
+
+```http
+GET https://api.mod.io/v1/me HTTP/1.1
+Host: api.mod.io
+
+Accept: application/json
+Authorization: Bearer YourAccessToken
+
+
+```
+
+```javascript
+var headers = {
+  'Authorization':'Bearer YourAccessToken',
+  'Accept':'application/json'
+
+};
+
+$.ajax({
+  url: 'https://api.mod.io/v1/me',
+  method: 'get',
+
+  headers: headers,
+  success: function(data) {
+    console.log(JSON.stringify(data));
+  }
+})
+```
+
+```javascript--nodejs
+const request = require('node-fetch');
+
+const headers = {
+  'Authorization':'Bearer YourAccessToken',
+  'Accept':'application/json'
+
+};
+
+fetch('https://api.mod.io/v1/me',
+{
+  method: 'GET',
+
+  headers: headers
+})
+.then(function(res) {
+    return res.json();
+}).then(function(body) {
+    console.log(body);
+});
+```
+
+```ruby
+require 'rest-client'
+require 'json'
+
+headers = {
+  'Authorization' => 'Bearer YourAccessToken',
+  'Accept' => 'application/json'
+}
+
+result = RestClient.get 'https://api.mod.io/v1/me',
+  params: {
+  }, headers: headers
+
+
+p JSON.parse(result)
+```
+
+```python
+import requests
+headers = {
+  'Authorization': 'Bearer YourAccessToken',
+  'Accept': 'application/json'
+}
+
+r = requests.get('https://api.mod.io/v1/me', params={
+
+}, headers = headers)
+
+print r.json()
+```
+
+```java
+URL obj = new URL("https://api.mod.io/v1/me");
+HttpURLConnection con = (HttpURLConnection) obj.openConnection();
+con.setRequestMethod("GET");
+int responseCode = con.getResponseCode();
+BufferedReader in = new BufferedReader(
+    new InputStreamReader(con.getInputStream()));
+String inputLine;
+StringBuffer response = new StringBuffer();
+while ((inputLine = in.readLine()) != null) {
+    response.append(inputLine);
+}
+in.close();
+System.out.println(response.toString());
+```
+`GET /me`
+
+Retrieve the *authenticated user*. Successful request will return a [User Object](https://docs.mod.io/#user-object).
+
+
+> Example responses
+
+```json
+{
+  "id": 1,
+  "nameid": "xant",
+  "username": "XanT",
+  "online": 1509922961,
+  "avatar": {
+    "filename": "masterchief.jpg",
+    "full": "https://media.mod.io/images/members/1/1/1/masterchief.jpg"
+  },
+  "timezone": "Australia/Brisbane",
+  "language": "en",
+  "url": "https://mod.io/members/xant"
+}
+```
+<h3 id="Get-Authenticated-User-responses">Responses</h3>
+
+Status|Meaning|Description|Response Schema
+---|---|---|---|
+200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)|Request Successful|[User Object  ](#schemauser_object)
+
+<aside class="warning">
+To perform this operation, you must be authenticated by means of one of the following methods:
+oauth2 ( Scopes: read )
+</aside>
+
+
+## Get User Subscriptions
+
+> Code samples
+
+```shell
+# You can also use wget
+curl -X GET https://api.mod.io/v1/me/subscribed \
+  -H 'Authorization: Bearer YourAccessToken' \
+  -H 'Accept: application/json'
+
+```
+
+```http
+GET https://api.mod.io/v1/me/subscribed HTTP/1.1
+Host: api.mod.io
+
+Accept: application/json
+Authorization: Bearer YourAccessToken
+
+
+```
+
+```javascript
+var headers = {
+  'Authorization':'Bearer YourAccessToken',
+  'Accept':'application/json'
+
+};
+
+$.ajax({
+  url: 'https://api.mod.io/v1/me/subscribed',
+  method: 'get',
+
+  headers: headers,
+  success: function(data) {
+    console.log(JSON.stringify(data));
+  }
+})
+```
+
+```javascript--nodejs
+const request = require('node-fetch');
+
+const headers = {
+  'Authorization':'Bearer YourAccessToken',
+  'Accept':'application/json'
+
+};
+
+fetch('https://api.mod.io/v1/me/subscribed',
+{
+  method: 'GET',
+
+  headers: headers
+})
+.then(function(res) {
+    return res.json();
+}).then(function(body) {
+    console.log(body);
+});
+```
+
+```ruby
+require 'rest-client'
+require 'json'
+
+headers = {
+  'Authorization' => 'Bearer YourAccessToken',
+  'Accept' => 'application/json'
+}
+
+result = RestClient.get 'https://api.mod.io/v1/me/subscribed',
+  params: {
+  }, headers: headers
+
+
+p JSON.parse(result)
+```
+
+```python
+import requests
+headers = {
+  'Authorization': 'Bearer YourAccessToken',
+  'Accept': 'application/json'
+}
+
+r = requests.get('https://api.mod.io/v1/me/subscribed', params={
+
+}, headers = headers)
+
+print r.json()
+```
+
+```java
+URL obj = new URL("https://api.mod.io/v1/me/subscribed");
+HttpURLConnection con = (HttpURLConnection) obj.openConnection();
+con.setRequestMethod("GET");
+int responseCode = con.getResponseCode();
+BufferedReader in = new BufferedReader(
+    new InputStreamReader(con.getInputStream()));
+String inputLine;
+StringBuffer response = new StringBuffer();
+while ((inputLine = in.readLine()) != null) {
+    response.append(inputLine);
+}
+in.close();
+System.out.println(response.toString());
+```
+`GET /me/subscribed`
+
+Get all mod's the *authenticated user* is subscribed to. Successful request will return an array of [Mod Objects](https://docs.mod.io/#get-mods-2).
+
+
+> Example responses
+
+```json
+{
+  "data": [
+    {
+      "id": 2,
+      "game": 2,
+      "submitted_by": {
+        "id": 1,
+        "nameid": "xant",
+        "username": "XanT",
+        "online": 1509922961,
+        "avatar": {
+          "filename": "masterchief.jpg",
+          "full": "https://media.mod.io/images/members/1/1/1/masterchief.jpg"
+        },
+        "timezone": "Australia/Brisbane",
+        "language": "en",
+        "url": "https://mod.io/members/xant"
+      },
+      "price": 9.99,
+      "datereg": 1492564103,
+      "dateup": 1499841487,
+      "logo": {
+        "filename": "IMG_20170409_222419.jpg",
+        "full": "https://media.mod.io/images/mods/1/1/2/IMG_20170409_222419.jpg",
+        "thumb_320x180": "https://media.mod.io/cache/images/mods/1/1/2/thumb_320x180/IMG_20170409_222419.jpg",
+        "thumb_640x360": "https://media.mod.io/cache/images/mods/1/1/2/thumb_640x360/IMG_20170409_222419.jpg",
+        "thumb_1280x720": "https://media.mod.io/cache/images/mods/1/1/2/thumb_1280x720/IMG_20170409_222419.jpg"
+      },
+      "homepage": "https://www.rogue-hdpack.com/",
+      "name": "Rogue Knight HD Pack",
+      "nameid": "rogue-knight-hd-pack",
+      "summary": "It's time to bask in the glory of beautiful 4k textures!",
+      "description": "<h2>About</h2><p>Rogue HD Pack does exactly what you thi...",
+      "metadatablob": "rogue,hd,high-res,4k,hd textures",
+      "url": "https://rogue-knight.mod.io/rogue-knight-hd-pack",
+      "modfile": {
+        "id": 2,
+        "mod": 2,
+        "date": 1499841487,
+        "datevirus": 1499841487,
+        "virusstatus": 0,
+        "viruspositive": 0,
+        "filesize": 15181,
+        "filehash": "2d4a0e2d7273db6b0a94b0740a88ad0d",
+        "filename": "rogue-knight-v1.zip",
+        "version": "1.3",
+        "virustotal": "No threats found.",
+        "changelog": "VERSION 1.3 -- Changes -- Fixed critical castle floor bug.",
+        "download": "https://mod.io/mods/file/2/c489a0354111a4d76640d47f0cdcb294"
+      },
+      "media": {
+        "youtube": [
+          "https://www.youtube.com/watch?v=dQw4w9WgXcQ"
+        ],
+        "sketchfab": [
+          "https://sketchfab.com/models/ef40b2d300334d009984c8865b2db1c8"
+        ],
+        "images": [
+          {
+            "full": "https://media.mod.io/images/mods/1/1/2/IMG_20170409_222419.jpg",
+            "thumbnail": "https://media.mod.io/cache/images/mods/1/1/2/thumb_1020x2000/IMG_20170409_222419.jpg",
+            "filename": "IMG_20170409_222419.jpg"
+          }
+        ]
+      },
+      "ratings": {
+        "total": 1230,
+        "positive": 1047,
+        "negative": 183,
+        "weighted": 87.38,
+        "percentage": 91,
+        "stars": 4,
+        "text": "Very Positive"
+      },
+      "tags": [
+        {
+          "tag": "Unity",
+          "date": 1499841487
+        }
+      ]
+    },
+    {
+        ...
+    }
+  ],
+  "cursor_id": 60,
+  "prev_id": 30,
+  "next_id": 160,
+  "result_count": 100
+}
+```
+<h3 id="Get-User-Subscriptions-responses">Responses</h3>
+
+Status|Meaning|Description|Response Schema
+---|---|---|---|
+200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)|Request Successful|[Get All Mods ](#schemaget_all_mods)
+
+<aside class="warning">
+To perform this operation, you must be authenticated by means of one of the following methods:
+oauth2 ( Scopes: read )
+</aside>
+
 
 ## Get User Games
 
@@ -7709,390 +8195,6 @@ oauth2 ( Scopes: read )
 </aside>
 
 
-## Get Subscriptions
-
-> Code samples
-
-```shell
-# You can also use wget
-curl -X GET https://api.mod.io/v1/me/subscribed \
-  -H 'Authorization: Bearer YourAccessToken' \
-  -H 'Accept: application/json'
-
-```
-
-```http
-GET https://api.mod.io/v1/me/subscribed HTTP/1.1
-Host: api.mod.io
-
-Accept: application/json
-Authorization: Bearer YourAccessToken
-
-
-```
-
-```javascript
-var headers = {
-  'Authorization':'Bearer YourAccessToken',
-  'Accept':'application/json'
-
-};
-
-$.ajax({
-  url: 'https://api.mod.io/v1/me/subscribed',
-  method: 'get',
-
-  headers: headers,
-  success: function(data) {
-    console.log(JSON.stringify(data));
-  }
-})
-```
-
-```javascript--nodejs
-const request = require('node-fetch');
-
-const headers = {
-  'Authorization':'Bearer YourAccessToken',
-  'Accept':'application/json'
-
-};
-
-fetch('https://api.mod.io/v1/me/subscribed',
-{
-  method: 'GET',
-
-  headers: headers
-})
-.then(function(res) {
-    return res.json();
-}).then(function(body) {
-    console.log(body);
-});
-```
-
-```ruby
-require 'rest-client'
-require 'json'
-
-headers = {
-  'Authorization' => 'Bearer YourAccessToken',
-  'Accept' => 'application/json'
-}
-
-result = RestClient.get 'https://api.mod.io/v1/me/subscribed',
-  params: {
-  }, headers: headers
-
-
-p JSON.parse(result)
-```
-
-```python
-import requests
-headers = {
-  'Authorization': 'Bearer YourAccessToken',
-  'Accept': 'application/json'
-}
-
-r = requests.get('https://api.mod.io/v1/me/subscribed', params={
-
-}, headers = headers)
-
-print r.json()
-```
-
-```java
-URL obj = new URL("https://api.mod.io/v1/me/subscribed");
-HttpURLConnection con = (HttpURLConnection) obj.openConnection();
-con.setRequestMethod("GET");
-int responseCode = con.getResponseCode();
-BufferedReader in = new BufferedReader(
-    new InputStreamReader(con.getInputStream()));
-String inputLine;
-StringBuffer response = new StringBuffer();
-while ((inputLine = in.readLine()) != null) {
-    response.append(inputLine);
-}
-in.close();
-System.out.println(response.toString());
-```
-`GET /me/subscribed`
-
-*Get all subscribed mods by the user.*
-
-Get all mod's the *authenticated user* is subscribed to. Successful request will return an array of [Mod Objects](https://docs.mod.io/#get-mods-2).
-
-
-> Example responses
-
-```json
-{
-  "data": [
-    {
-      "id": 2,
-      "game": 2,
-      "submitted_by": {
-        "id": 1,
-        "nameid": "xant",
-        "username": "XanT",
-        "online": 1509922961,
-        "avatar": {
-          "filename": "masterchief.jpg",
-          "full": "https://media.mod.io/images/members/1/1/1/masterchief.jpg"
-        },
-        "timezone": "Australia/Brisbane",
-        "language": "en",
-        "url": "https://mod.io/members/xant"
-      },
-      "price": 9.99,
-      "datereg": 1492564103,
-      "dateup": 1499841487,
-      "logo": {
-        "filename": "IMG_20170409_222419.jpg",
-        "full": "https://media.mod.io/images/mods/1/1/2/IMG_20170409_222419.jpg",
-        "thumb_320x180": "https://media.mod.io/cache/images/mods/1/1/2/thumb_320x180/IMG_20170409_222419.jpg",
-        "thumb_640x360": "https://media.mod.io/cache/images/mods/1/1/2/thumb_640x360/IMG_20170409_222419.jpg",
-        "thumb_1280x720": "https://media.mod.io/cache/images/mods/1/1/2/thumb_1280x720/IMG_20170409_222419.jpg"
-      },
-      "homepage": "https://www.rogue-hdpack.com/",
-      "name": "Rogue Knight HD Pack",
-      "nameid": "rogue-knight-hd-pack",
-      "summary": "It's time to bask in the glory of beautiful 4k textures!",
-      "description": "<h2>About</h2><p>Rogue HD Pack does exactly what you thi...",
-      "metadatablob": "rogue,hd,high-res,4k,hd textures",
-      "url": "https://rogue-knight.mod.io/rogue-knight-hd-pack",
-      "modfile": {
-        "id": 2,
-        "mod": 2,
-        "date": 1499841487,
-        "datevirus": 1499841487,
-        "virusstatus": 0,
-        "viruspositive": 0,
-        "filesize": 15181,
-        "filehash": "2d4a0e2d7273db6b0a94b0740a88ad0d",
-        "filename": "rogue-knight-v1.zip",
-        "version": "1.3",
-        "virustotal": "No threats found.",
-        "changelog": "VERSION 1.3 -- Changes -- Fixed critical castle floor bug.",
-        "download": "https://mod.io/mods/file/2/c489a0354111a4d76640d47f0cdcb294"
-      },
-      "media": {
-        "youtube": [
-          "https://www.youtube.com/watch?v=dQw4w9WgXcQ"
-        ],
-        "sketchfab": [
-          "https://sketchfab.com/models/ef40b2d300334d009984c8865b2db1c8"
-        ],
-        "images": [
-          {
-            "full": "https://media.mod.io/images/mods/1/1/2/IMG_20170409_222419.jpg",
-            "thumbnail": "https://media.mod.io/cache/images/mods/1/1/2/thumb_1020x2000/IMG_20170409_222419.jpg",
-            "filename": "IMG_20170409_222419.jpg"
-          }
-        ]
-      },
-      "ratings": {
-        "total": 1230,
-        "positive": 1047,
-        "negative": 183,
-        "weighted": 87.38,
-        "percentage": 91,
-        "stars": 4,
-        "text": "Very Positive"
-      },
-      "tags": [
-        {
-          "tag": "Unity",
-          "date": 1499841487
-        }
-      ]
-    },
-    {
-        ...
-    }
-  ],
-  "cursor_id": 60,
-  "prev_id": 30,
-  "next_id": 160,
-  "result_count": 100
-}
-```
-<h3 id="Get-Subscriptions-responses">Responses</h3>
-
-Status|Meaning|Description|Response Schema
----|---|---|---|
-200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)|Request Successful|[Get All Mods ](#schemaget_all_mods)
-
-<aside class="warning">
-To perform this operation, you must be authenticated by means of one of the following methods:
-oauth2 ( Scopes: read )
-</aside>
-
-
-## Get Subscription Updates
-
-> Code samples
-
-```shell
-# You can also use wget
-curl -X GET https://api.mod.io/v1/me/subscribed/updates \
-  -H 'Authorization: Bearer YourAccessToken' \
-  -H 'Accept: application/json'
-
-```
-
-```http
-GET https://api.mod.io/v1/me/subscribed/updates HTTP/1.1
-Host: api.mod.io
-
-Accept: application/json
-Authorization: Bearer YourAccessToken
-
-
-```
-
-```javascript
-var headers = {
-  'Authorization':'Bearer YourAccessToken',
-  'Accept':'application/json'
-
-};
-
-$.ajax({
-  url: 'https://api.mod.io/v1/me/subscribed/updates',
-  method: 'get',
-
-  headers: headers,
-  success: function(data) {
-    console.log(JSON.stringify(data));
-  }
-})
-```
-
-```javascript--nodejs
-const request = require('node-fetch');
-
-const headers = {
-  'Authorization':'Bearer YourAccessToken',
-  'Accept':'application/json'
-
-};
-
-fetch('https://api.mod.io/v1/me/subscribed/updates',
-{
-  method: 'GET',
-
-  headers: headers
-})
-.then(function(res) {
-    return res.json();
-}).then(function(body) {
-    console.log(body);
-});
-```
-
-```ruby
-require 'rest-client'
-require 'json'
-
-headers = {
-  'Authorization' => 'Bearer YourAccessToken',
-  'Accept' => 'application/json'
-}
-
-result = RestClient.get 'https://api.mod.io/v1/me/subscribed/updates',
-  params: {
-  }, headers: headers
-
-
-p JSON.parse(result)
-```
-
-```python
-import requests
-headers = {
-  'Authorization': 'Bearer YourAccessToken',
-  'Accept': 'application/json'
-}
-
-r = requests.get('https://api.mod.io/v1/me/subscribed/updates', params={
-
-}, headers = headers)
-
-print r.json()
-```
-
-```java
-URL obj = new URL("https://api.mod.io/v1/me/subscribed/updates");
-HttpURLConnection con = (HttpURLConnection) obj.openConnection();
-con.setRequestMethod("GET");
-int responseCode = con.getResponseCode();
-BufferedReader in = new BufferedReader(
-    new InputStreamReader(con.getInputStream()));
-String inputLine;
-StringBuffer response = new StringBuffer();
-while ((inputLine = in.readLine()) != null) {
-    response.append(inputLine);
-}
-in.close();
-System.out.println(response.toString());
-```
-`GET /me/subscribed/updates`
-
-*Get all updates that occurred between two timestamps for
-the _authenticated user_.*
-
-__OAuth 2 Authentication Required__. Get all subscribed mod updates (new builds) that occurred between two timestamps for the *authenticated user*. This endpoint is designed for intermittent polling by game clients to determine if notifications need to be pushed to the authenticated user. If you are consuming querying potential build updates from within a game, it is highly recommend you use this endpoint. Successful request will return an array of [Modfile Objects](https://docs.mod.io/#get-all-mod-files-2) that were published between the two supplied timestamps.
-     
-     Parameter|Type|Required|Description
-     ---|---|---|---|
-     start|integer(int32)|true|Unix timestamp of beginning of update check.
-     end|integer(int32)|true|Unix timestamp of end of update check.
-
-
-> Example responses
-
-```json
-{
-  "data": [
-    {
-      "id": 2,
-      "mod": 2,
-      "date": 1499841487,
-      "datevirus": 1499841487,
-      "virusstatus": 0,
-      "viruspositive": 0,
-      "filesize": 15181,
-      "filehash": "2d4a0e2d7273db6b0a94b0740a88ad0d",
-      "filename": "rogue-knight-v1.zip",
-      "version": "1.3",
-      "virustotal": "No threats found.",
-      "changelog": "VERSION 1.3 -- Changes -- Fixed critical castle floor bug.",
-      "download": "https://mod.io/mods/file/2/c489a0354111a4d76640d47f0cdcb294"
-    },
-    {
-        ...
-    }
-  ],
-  "cursor_id": 60,
-  "prev_id": 30,
-  "next_id": 160,
-  "result_count": 100
-}
-```
-<h3 id="Get-Subscription-Updates-responses">Responses</h3>
-
-Status|Meaning|Description|Response Schema
----|---|---|---|
-200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)|Request Successful|[Get All Mod Files](#schemaget_all_mod_files)
-
-<aside class="warning">
-To perform this operation, you must be authenticated by means of one of the following methods:
-oauth2 ( Scopes: write )
-</aside>
-
-
 # Reports
 
 ## Submit Report
@@ -8492,7 +8594,7 @@ Name|Type|Description
 ---|---|---|---|
 data|[Game Object  ](#schemagame_object)[]|Array containing game objects
 » id|integer(int32)|Unique game id.
-» submitted_by|[User Object  ](#schemauser_object)|Contains member data.
+» submitted_by|[User Object  ](#schemauser_object)|Contains user data.
 »» id|integer(int32)|Unique id of the user.
 »» nameid|string|Unique nameid of user which forms end of their profile URL.
 »» username|string|Non-unique username of the user.
@@ -8552,28 +8654,18 @@ result_count|integer(int32)|The amount of results returned in the current reques
 {
   "data": [
     {
-      "id": 13,
-      "user": {
-        "id": 1,
-        "nameid": "xant",
-        "username": "XanT",
-        "online": 1509922961,
-        "avatar": {
-          "filename": "masterchief.jpg",
-          "full": "https://media.mod.io/images/members/1/1/1/masterchief.jpg"
-        },
-        "timezone": "Australia/Brisbane",
-        "language": "en",
-        "url": "https://mod.io/members/xant"
-      },
+      "id": 53,
+      "game": 17,
+      "user": 95,
       "dateup": 1499846132,
       "event": "GAME_UPDATE",
-      "changes": {
-        "summary": {
+      "changes": [
+        {
+          "field": "homepage",
           "before": "https://www.roguehdpack.com/",
           "after": "https://rogue-knight.mod.io/rogue-hd-pack"
         }
-      }
+      ]
     },
     {
         ...
@@ -8593,23 +8685,14 @@ Name|Type|Description
 ---|---|---|---|
 data|[Game Activity Object ](#schemagame_activity_object)[]|Response array of items.
 » id|integer(int32)|Unique id of activity record.
-» user|[User Object  ](#schemauser_object)|Contains member data.
-»» id|integer(int32)|Unique id of the user.
-»» nameid|string|Unique nameid of user which forms end of their profile URL.
-»» username|string|Non-unique username of the user.
-»» online|integer(int32)|Unix timestamp on when the user was last online.
-»» avatar|[Avatar Object  ](#schemaavatar_object)|Contains avatar data.
-»»» filename|string|Image filename, including file extension.
-»»» full|string|Full URL to the image.
-»» timezone|string|The Timezone of the user, shown in {Country}/{City} format.
-»» language|string|The users language preference, limited to two characters.
-»» url|string|URL to the user profile.
+» game|integer(int32)|Unique id of the parent mod.
+» user|integer(int32)|Unique id of the user who triggered the action.
 » dateup|string|Unix timestamp of when the record was last updated.
 » event|string|Type of event the activity was. Ie. UPDATE or DELETE.
-» changes|object|Contains changes data.
-»» summary|object|Name of the field that changed, in this example its the 'summary' field.
-»»» before|string|The value of the field before the event.
-»»» after|string|The value of the field after the event.
+» changes|[Activity Changes Object ](#schemaactivity_changes_object)[]|Contains all changes for the event.
+»» field|string|The field of the changed value
+»» before|string|The value prior to the event.
+»» after|string|The newly-updated value.
 cursor_id|integer(int32)|The current _cursor value.
 prev_id|integer(int32)|The previous _cursor value as manually inserted by you, null by default.
 next_id|integer(int32)|The next position to move the _cursor to, based on the current request.
@@ -8723,7 +8806,7 @@ Name|Type|Description
 data|[Mod Object  ](#schemamod_object)[]|Array containing mod objects
 » id|integer(int32)|Unique mod id.
 » game|integer(int32)|Unique game id.
-» submitted_by|[User Object  ](#schemauser_object)|Contains member data.
+» submitted_by|[User Object  ](#schemauser_object)|Contains user data.
 »» id|integer(int32)|Unique id of the user.
 »» nameid|string|Unique nameid of user which forms end of their profile URL.
 »» username|string|Non-unique username of the user.
@@ -8799,27 +8882,17 @@ result_count|integer(int32)|The amount of results returned in the current reques
   "data": [
     {
       "id": 13,
-      "user": {
-        "id": 1,
-        "nameid": "xant",
-        "username": "XanT",
-        "online": 1509922961,
-        "avatar": {
-          "filename": "masterchief.jpg",
-          "full": "https://media.mod.io/images/members/1/1/1/masterchief.jpg"
-        },
-        "timezone": "Australia/Brisbane",
-        "language": "en",
-        "url": "https://mod.io/members/xant"
-      },
+      "mod": 13,
+      "user": 13,
       "dateup": 1499846132,
       "event": "MOD_UPDATE",
-      "changes": {
-        "summary": {
+      "changes": [
+        {
+          "field": "homepage",
           "before": "https://www.roguehdpack.com/",
           "after": "https://rogue-knight.mod.io/rogue-hd-pack"
         }
-      }
+      ]
     },
     {
         ...
@@ -8839,23 +8912,14 @@ Name|Type|Description
 ---|---|---|---|
 data|[Mod Activity Object ](#schemamod_activity_object)[]|Response array of items.
 » id|integer(int32)|Unique id of activity object.
-» user|[User Object  ](#schemauser_object)|Contains member data.
-»» id|integer(int32)|Unique id of the user.
-»» nameid|string|Unique nameid of user which forms end of their profile URL.
-»» username|string|Non-unique username of the user.
-»» online|integer(int32)|Unix timestamp on when the user was last online.
-»» avatar|[Avatar Object  ](#schemaavatar_object)|Contains avatar data.
-»»» filename|string|Image filename, including file extension.
-»»» full|string|Full URL to the image.
-»» timezone|string|The Timezone of the user, shown in {Country}/{City} format.
-»» language|string|The users language preference, limited to two characters.
-»» url|string|URL to the user profile.
+» mod|integer(int32)|Unique id of the parent mod.
+» user|integer(int32)|Unique id of the user who triggered the action.
 » dateup|integer(int32)|Unix timestamp of when the update occurred.
 » event|string|The type of resource and action that occurred.
-» changes|object|Contains all changes fields.
-»» summary|object|Example field that changed for the corresponding object schema.
-»»» before|string|The value prior to the event.
-»»» after|string|The newly-updated value.
+» changes|[Activity Changes Object ](#schemaactivity_changes_object)[]|Contains all changes for the event.
+»» field|string|The field of the changed value
+»» before|string|The value prior to the event.
+»» after|string|The newly-updated value.
 cursor_id|integer(int32)|The current _cursor value.
 prev_id|integer(int32)|The previous _cursor value as manually inserted by you, null by default.
 next_id|integer(int32)|The next position to move the _cursor to, based on the current request.
@@ -9011,7 +9075,7 @@ Name|Type|Description
 data|[Comment Object  ](#schemacomment_object)[]|Array containing comment objects
 » id|integer(int32)|Unique id of the comment.
 » mod|integer(int32)|Unique id of the parent mod.
-» submitted_by|[User Object  ](#schemauser_object)|Contains member data.
+» submitted_by|[User Object  ](#schemauser_object)|Contains user data.
 »» id|integer(int32)|Unique id of the user.
 »» nameid|string|Unique nameid of user which forms end of their profile URL.
 »» username|string|Non-unique username of the user.
@@ -9081,7 +9145,7 @@ Name|Type|Description
 ---|---|---|---|
 data|[Access Object  ](#schemaaccess_object)[]|No description
 » id|integer(int32)|Unique access id.
-» user|[User Object  ](#schemauser_object)|Contains member data.
+» user|[User Object  ](#schemauser_object)|Contains user data.
 »» id|integer(int32)|Unique id of the user.
 »» nameid|string|Unique nameid of user which forms end of their profile URL.
 »» username|string|Non-unique username of the user.
@@ -9159,41 +9223,6 @@ result_count|integer(int32)|The amount of results returned in the current reques
 
 
 
-## Get Updates
-
-  <a name="schemaget_updates"></a>
-
-```json
-{
-  "data": [
-    {
-      "id": 351,
-      "resource": "games",
-      "resourceid": 2,
-      "type": 4,
-      "date": 1492058857,
-      "mention": 0
-    }
-  ]
-} 
-```
-
-
-### Properties
-
-Name|Type|Description
----|---|---|---|
-data|[Update Object  ](#schemaupdate_object)[]|Get all updates that occurred between two timestamps for the _authenticated user_.  Endpoint: v1/me/subscribed/updates
-» id|integer(int32)|Unique update id.
-» resource|string|String representation of the update origin's resource type.
-» resourceid|integer(int32)|Unique id of corresponding resource.
-» type|integer(int32)|The type of update.<br>*Field Options*<br>__0__ = Guest<br>__1__ = Member<br>__2__ = Contributor<br>__4__ = Manager<br>__8__ = Leader
-» date|integer(int32)|Unix timestamp of date the update was created.
-» mention|integer(int32)|Is this update the result of a user @mentioning you.
-
-
-
-
 ## Get All Mod KVP
 
 <a name="schemaget_all_mod_kvp_metadata"></a>
@@ -9265,7 +9294,7 @@ result_count|integer(int32)|The amount of results returned in the current reques
 Name|Type|Description
 ---|---|---|---|
 id|integer(int32)|Unique access id.
-user|[User Object  ](#schemauser_object)|Contains member data.
+user|[User Object  ](#schemauser_object)|Contains user data.
 » id|integer(int32)|Unique id of the user.
 » nameid|string|Unique nameid of user which forms end of their profile URL.
 » username|string|Non-unique username of the user.
@@ -9290,28 +9319,18 @@ position|string|Custom title, has no effect on any access rights.
 
 ```json
 {
-  "id": 13,
-  "user": {
-    "id": 1,
-    "nameid": "xant",
-    "username": "XanT",
-    "online": 1509922961,
-    "avatar": {
-      "filename": "masterchief.jpg",
-      "full": "https://media.mod.io/images/members/1/1/1/masterchief.jpg"
-    },
-    "timezone": "Australia/Brisbane",
-    "language": "en",
-    "url": "https://mod.io/members/xant"
-  },
+  "id": 53,
+  "game": 17,
+  "user": 95,
   "dateup": 1499846132,
   "event": "GAME_UPDATE",
-  "changes": {
-    "summary": {
+  "changes": [
+    {
+      "field": "homepage",
       "before": "https://www.roguehdpack.com/",
       "after": "https://rogue-knight.mod.io/rogue-hd-pack"
     }
-  }
+  ]
 } 
 ```
 
@@ -9321,23 +9340,14 @@ position|string|Custom title, has no effect on any access rights.
 Name|Type|Description
 ---|---|---|---|
 id|integer(int32)|Unique id of activity record.
-user|[User Object  ](#schemauser_object)|Contains member data.
-» id|integer(int32)|Unique id of the user.
-» nameid|string|Unique nameid of user which forms end of their profile URL.
-» username|string|Non-unique username of the user.
-» online|integer(int32)|Unix timestamp on when the user was last online.
-» avatar|[Avatar Object  ](#schemaavatar_object)|Contains avatar data.
-»» filename|string|Image filename, including file extension.
-»» full|string|Full URL to the image.
-» timezone|string|The Timezone of the user, shown in {Country}/{City} format.
-» language|string|The users language preference, limited to two characters.
-» url|string|URL to the user profile.
+game|integer(int32)|Unique id of the parent mod.
+user|integer(int32)|Unique id of the user who triggered the action.
 dateup|string|Unix timestamp of when the record was last updated.
 event|string|Type of event the activity was. Ie. UPDATE or DELETE.
-changes|object|Contains changes data.
-» summary|object|Name of the field that changed, in this example its the 'summary' field.
-»» before|string|The value of the field before the event.
-»» after|string|The value of the field after the event.
+changes|[Activity Changes Object ](#schemaactivity_changes_object)[]|Contains all changes for the event.
+» field|string|The field of the changed value
+» before|string|The value prior to the event.
+» after|string|The newly-updated value.
 
 
 
@@ -9349,27 +9359,17 @@ changes|object|Contains changes data.
 ```json
 {
   "id": 13,
-  "user": {
-    "id": 1,
-    "nameid": "xant",
-    "username": "XanT",
-    "online": 1509922961,
-    "avatar": {
-      "filename": "masterchief.jpg",
-      "full": "https://media.mod.io/images/members/1/1/1/masterchief.jpg"
-    },
-    "timezone": "Australia/Brisbane",
-    "language": "en",
-    "url": "https://mod.io/members/xant"
-  },
+  "mod": 13,
+  "user": 13,
   "dateup": 1499846132,
   "event": "MOD_UPDATE",
-  "changes": {
-    "summary": {
+  "changes": [
+    {
+      "field": "homepage",
       "before": "https://www.roguehdpack.com/",
       "after": "https://rogue-knight.mod.io/rogue-hd-pack"
     }
-  }
+  ]
 } 
 ```
 
@@ -9379,23 +9379,38 @@ changes|object|Contains changes data.
 Name|Type|Description
 ---|---|---|---|
 id|integer(int32)|Unique id of activity object.
-user|[User Object  ](#schemauser_object)|Contains member data.
-» id|integer(int32)|Unique id of the user.
-» nameid|string|Unique nameid of user which forms end of their profile URL.
-» username|string|Non-unique username of the user.
-» online|integer(int32)|Unix timestamp on when the user was last online.
-» avatar|[Avatar Object  ](#schemaavatar_object)|Contains avatar data.
-»» filename|string|Image filename, including file extension.
-»» full|string|Full URL to the image.
-» timezone|string|The Timezone of the user, shown in {Country}/{City} format.
-» language|string|The users language preference, limited to two characters.
-» url|string|URL to the user profile.
+mod|integer(int32)|Unique id of the parent mod.
+user|integer(int32)|Unique id of the user who triggered the action.
 dateup|integer(int32)|Unix timestamp of when the update occurred.
 event|string|The type of resource and action that occurred.
-changes|object|Contains all changes fields.
-» summary|object|Example field that changed for the corresponding object schema.
-»» before|string|The value prior to the event.
-»» after|string|The newly-updated value.
+changes|[Activity Changes Object ](#schemaactivity_changes_object)[]|Contains all changes for the event.
+» field|string|The field of the changed value
+» before|string|The value prior to the event.
+» after|string|The newly-updated value.
+
+
+
+
+## Activity Changes Object 
+
+<a name="schemaactivity_changes_object"></a>
+
+```json
+{
+  "field": "homepage",
+  "before": "https://www.roguehdpack.com/",
+  "after": "https://rogue-knight.mod.io/rogue-hd-pack"
+} 
+```
+
+
+### Properties
+
+Name|Type|Description
+---|---|---|---|
+field|string|The field of the changed value
+before|string|The value prior to the event.
+after|string|The newly-updated value.
 
 
 
@@ -9437,7 +9452,7 @@ Name|Type|Description
 ---|---|---|---|
 id|integer(int32)|Unique id of the comment.
 mod|integer(int32)|Unique id of the parent mod.
-submitted_by|[User Object  ](#schemauser_object)|Contains member data.
+submitted_by|[User Object  ](#schemauser_object)|Contains user data.
 » id|integer(int32)|Unique id of the user.
 » nameid|string|Unique nameid of user which forms end of their profile URL.
 » username|string|Non-unique username of the user.
@@ -9643,7 +9658,7 @@ Name|Type|Description
 ---|---|---|---|
 id|integer(int32)|Unique mod id.
 game|integer(int32)|Unique game id.
-submitted_by|[User Object  ](#schemauser_object)|Contains member data.
+submitted_by|[User Object  ](#schemauser_object)|Contains user data.
 » id|integer(int32)|Unique id of the user.
 » nameid|string|Unique nameid of user which forms end of their profile URL.
 » username|string|Non-unique username of the user.
@@ -9798,7 +9813,7 @@ date|integer(int32)|Unix timestamp of when tag was applied.
 Name|Type|Description
 ---|---|---|---|
 id|integer(int32)|Unique game id.
-submitted_by|[User Object  ](#schemauser_object)|Contains member data.
+submitted_by|[User Object  ](#schemauser_object)|Contains user data.
 » id|integer(int32)|Unique id of the user.
 » nameid|string|Unique nameid of user which forms end of their profile URL.
 » username|string|Non-unique username of the user.
