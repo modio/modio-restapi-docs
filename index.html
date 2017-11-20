@@ -448,10 +448,10 @@
                     <a href="#get-all-game-team-members" class="toc-h2 toc-link" data-title="Teams">Get All Game Team Members</a>
                   </li>
                   <li>
-                    <a href="#add-game-team-member" class="toc-h2 toc-link" data-title="Teams">Add Game Team Member</a>
+                    <a href="#get-all-mod-team-members" class="toc-h2 toc-link" data-title="Teams">Get All Mod Team Members</a>
                   </li>
                   <li>
-                    <a href="#get-all-mod-team-members" class="toc-h2 toc-link" data-title="Teams">Get All Mod Team Members</a>
+                    <a href="#add-game-team-member" class="toc-h2 toc-link" data-title="Teams">Add Game Team Member</a>
                   </li>
                   <li>
                     <a href="#add-mod-team-member" class="toc-h2 toc-link" data-title="Teams">Add Mod Team Member</a>
@@ -460,10 +460,10 @@
                     <a href="#update-game-team-member" class="toc-h2 toc-link" data-title="Teams">Update Game Team Member</a>
                   </li>
                   <li>
-                    <a href="#delete-game-team-member" class="toc-h2 toc-link" data-title="Teams">Delete Game Team Member</a>
+                    <a href="#update-mod-team-member" class="toc-h2 toc-link" data-title="Teams">Update Mod Team Member</a>
                   </li>
                   <li>
-                    <a href="#update-mod-team-member" class="toc-h2 toc-link" data-title="Teams">Update Mod Team Member</a>
+                    <a href="#delete-game-team-member" class="toc-h2 toc-link" data-title="Teams">Delete Game Team Member</a>
                   </li>
                   <li>
                     <a href="#delete-mod-team-member" class="toc-h2 toc-link" data-title="Teams">Delete Mod Team Member</a>
@@ -6974,169 +6974,6 @@ Accept: application/json
 To perform this operation, you must be authenticated by means of one of the following methods:
 apiKey, oauth2 ( Scopes: read )
 </aside>
-<h2 id="add-game-team-member">Add Game Team Member</h2>
-<blockquote>
-<p>Code samples</p>
-</blockquote>
-<pre class="highlight shell tab-shell"><code><span class="c"># You can also use wget</span>
-curl -X POST https://api.mod.io/v1/games/<span class="o">{</span>game-id<span class="o">}</span>/team <span class="se">\</span>
-  -H <span class="s1">'Authorization: Bearer YourAccessToken'</span> <span class="se">\</span>
-  -H <span class="s1">'Content-Type: application/x-www-form-urlencoded'</span> <span class="se">\</span>
-  -H <span class="s1">'Accept: application/json'</span>
-
-</code></pre><pre class="highlight http tab-http"><code><span class="nf">POST</span> <span class="nn">https://api.mod.io/v1/games/{game-id}/team</span> <span class="k">HTTP</span><span class="o">/</span><span class="m">1.1</span>
-<span class="na">Host</span><span class="p">:</span> <span class="s">api.mod.io</span>
-
-Accept: application/json
-Authorization: Bearer YourAccessToken
-Content-Type: application/x-www-form-urlencoded
-
-
-</code></pre><pre class="highlight javascript tab-javascript"><code><span class="kd">var</span> <span class="nx">headers</span> <span class="o">=</span> <span class="p">{</span>
-  <span class="s1">'Authorization'</span><span class="p">:</span><span class="s1">'Bearer YourAccessToken'</span><span class="p">,</span>
-  <span class="s1">'Content-Type'</span><span class="p">:</span><span class="s1">'application/x-www-form-urlencoded'</span><span class="p">,</span>
-  <span class="s1">'Accept'</span><span class="p">:</span><span class="s1">'application/json'</span>
-
-<span class="p">};</span>
-
-<span class="nx">$</span><span class="p">.</span><span class="nx">ajax</span><span class="p">({</span>
-  <span class="na">url</span><span class="p">:</span> <span class="s1">'https://api.mod.io/v1/games/{game-id}/team'</span><span class="p">,</span>
-  <span class="na">method</span><span class="p">:</span> <span class="s1">'post'</span><span class="p">,</span>
-
-  <span class="na">headers</span><span class="p">:</span> <span class="nx">headers</span><span class="p">,</span>
-  <span class="na">success</span><span class="p">:</span> <span class="kd">function</span><span class="p">(</span><span class="nx">data</span><span class="p">)</span> <span class="p">{</span>
-    <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">JSON</span><span class="p">.</span><span class="nx">stringify</span><span class="p">(</span><span class="nx">data</span><span class="p">));</span>
-  <span class="p">}</span>
-<span class="p">})</span>
-</code></pre><pre class="highlight javascript tab-javascript--nodejs"><code><span class="kr">const</span> <span class="nx">request</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s1">'node-fetch'</span><span class="p">);</span>
-
-<span class="kr">const</span> <span class="nx">headers</span> <span class="o">=</span> <span class="p">{</span>
-  <span class="s1">'Authorization'</span><span class="p">:</span><span class="s1">'Bearer YourAccessToken'</span><span class="p">,</span>
-  <span class="s1">'Content-Type'</span><span class="p">:</span><span class="s1">'application/x-www-form-urlencoded'</span><span class="p">,</span>
-  <span class="s1">'Accept'</span><span class="p">:</span><span class="s1">'application/json'</span>
-
-<span class="p">};</span>
-
-<span class="nx">fetch</span><span class="p">(</span><span class="s1">'https://api.mod.io/v1/games/{game-id}/team'</span><span class="p">,</span>
-<span class="p">{</span>
-  <span class="na">method</span><span class="p">:</span> <span class="s1">'POST'</span><span class="p">,</span>
-
-  <span class="na">headers</span><span class="p">:</span> <span class="nx">headers</span>
-<span class="p">})</span>
-<span class="p">.</span><span class="nx">then</span><span class="p">(</span><span class="kd">function</span><span class="p">(</span><span class="nx">res</span><span class="p">)</span> <span class="p">{</span>
-    <span class="k">return</span> <span class="nx">res</span><span class="p">.</span><span class="nx">json</span><span class="p">();</span>
-<span class="p">}).</span><span class="nx">then</span><span class="p">(</span><span class="kd">function</span><span class="p">(</span><span class="nx">body</span><span class="p">)</span> <span class="p">{</span>
-    <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">body</span><span class="p">);</span>
-<span class="p">});</span>
-</code></pre><pre class="highlight ruby tab-ruby"><code><span class="nb">require</span> <span class="s1">'rest-client'</span>
-<span class="nb">require</span> <span class="s1">'json'</span>
-
-<span class="n">headers</span> <span class="o">=</span> <span class="p">{</span>
-  <span class="s1">'Authorization'</span> <span class="o">=&gt;</span> <span class="s1">'Bearer YourAccessToken'</span><span class="p">,</span>
-  <span class="s1">'Content-Type'</span> <span class="o">=&gt;</span> <span class="s1">'application/x-www-form-urlencoded'</span><span class="p">,</span>
-  <span class="s1">'Accept'</span> <span class="o">=&gt;</span> <span class="s1">'application/json'</span>
-<span class="p">}</span>
-
-<span class="n">result</span> <span class="o">=</span> <span class="no">RestClient</span><span class="p">.</span><span class="nf">post</span> <span class="s1">'https://api.mod.io/v1/games/{game-id}/team'</span><span class="p">,</span>
-  <span class="ss">params: </span><span class="p">{</span>
-  <span class="p">},</span> <span class="ss">headers: </span><span class="n">headers</span>
-
-
-<span class="nb">p</span> <span class="no">JSON</span><span class="p">.</span><span class="nf">parse</span><span class="p">(</span><span class="n">result</span><span class="p">)</span>
-</code></pre><pre class="highlight python tab-python"><code><span class="kn">import</span> <span class="nn">requests</span>
-<span class="n">headers</span> <span class="o">=</span> <span class="p">{</span>
-  <span class="s">'Authorization'</span><span class="p">:</span> <span class="s">'Bearer YourAccessToken'</span><span class="p">,</span>
-  <span class="s">'Content-Type'</span><span class="p">:</span> <span class="s">'application/x-www-form-urlencoded'</span><span class="p">,</span>
-  <span class="s">'Accept'</span><span class="p">:</span> <span class="s">'application/json'</span>
-<span class="p">}</span>
-
-<span class="n">r</span> <span class="o">=</span> <span class="n">requests</span><span class="o">.</span><span class="n">post</span><span class="p">(</span><span class="s">'https://api.mod.io/v1/games/{game-id}/team'</span><span class="p">,</span> <span class="n">params</span><span class="o">=</span><span class="p">{</span>
-
-<span class="p">},</span> <span class="n">headers</span> <span class="o">=</span> <span class="n">headers</span><span class="p">)</span>
-
-<span class="k">print</span> <span class="n">r</span><span class="o">.</span><span class="n">json</span><span class="p">()</span>
-</code></pre><pre class="highlight java tab-java"><code><span class="n">URL</span> <span class="n">obj</span> <span class="o">=</span> <span class="k">new</span> <span class="n">URL</span><span class="o">(</span><span class="s">"https://api.mod.io/v1/games/{game-id}/team"</span><span class="o">);</span>
-<span class="n">HttpURLConnection</span> <span class="n">con</span> <span class="o">=</span> <span class="o">(</span><span class="n">HttpURLConnection</span><span class="o">)</span> <span class="n">obj</span><span class="o">.</span><span class="na">openConnection</span><span class="o">();</span>
-<span class="n">con</span><span class="o">.</span><span class="na">setRequestMethod</span><span class="o">(</span><span class="s">"POST"</span><span class="o">);</span>
-<span class="kt">int</span> <span class="n">responseCode</span> <span class="o">=</span> <span class="n">con</span><span class="o">.</span><span class="na">getResponseCode</span><span class="o">();</span>
-<span class="n">BufferedReader</span> <span class="n">in</span> <span class="o">=</span> <span class="k">new</span> <span class="n">BufferedReader</span><span class="o">(</span>
-    <span class="k">new</span> <span class="nf">InputStreamReader</span><span class="o">(</span><span class="n">con</span><span class="o">.</span><span class="na">getInputStream</span><span class="o">()));</span>
-<span class="n">String</span> <span class="n">inputLine</span><span class="o">;</span>
-<span class="n">StringBuffer</span> <span class="n">response</span> <span class="o">=</span> <span class="k">new</span> <span class="n">StringBuffer</span><span class="o">();</span>
-<span class="k">while</span> <span class="o">((</span><span class="n">inputLine</span> <span class="o">=</span> <span class="n">in</span><span class="o">.</span><span class="na">readLine</span><span class="o">())</span> <span class="o">!=</span> <span class="kc">null</span><span class="o">)</span> <span class="o">{</span>
-    <span class="n">response</span><span class="o">.</span><span class="na">append</span><span class="o">(</span><span class="n">inputLine</span><span class="o">);</span>
-<span class="o">}</span>
-<span class="n">in</span><span class="o">.</span><span class="na">close</span><span class="o">();</span>
-<span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="n">response</span><span class="o">.</span><span class="na">toString</span><span class="o">());</span>
-</code></pre>
-<p><span class="httpmethod POST">POST</span> <span class="endpointheading">/games/{game-id}/team</span></p>
-
-<p>Add a user to a game team.</p>
-
-<table>
-<thead>
-<tr>
-<th>Parameter</th>
-<th>Type</th>
-<th>Required</th>
-<th>Description</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>user</td>
-<td>integer</td>
-<td>true</td>
-<td>The unique id of the team you are adding to the team.</td>
-</tr>
-<tr>
-<td>level</td>
-<td>integer</td>
-<td>true</td>
-<td>The level of permissions you want to give to the user.<br><br><em>Fields Options:</em><br><strong>1</strong> = Moderator (can moderate content submitted)<br><strong>4</strong> = Financials (read only access to the control panel to view financial reports)<br><strong>8</strong> = Administrator (full access, including editing the profile and team)</td>
-</tr>
-<tr>
-<td>position</td>
-<td>string</td>
-<td>true</td>
-<td>The title you wish to apply to the member within your team.</td>
-</tr>
-</tbody>
-</table>
-
-<blockquote>
-<p>Example responses</p>
-</blockquote>
-<pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
-  </span><span class="s2">"code"</span><span class="p">:</span><span class="w"> </span><span class="s2">"201"</span><span class="p">,</span><span class="w">
-  </span><span class="s2">"message"</span><span class="p">:</span><span class="w"> </span><span class="s2">"You have successfully added a member to the specified team."</span><span class="w">
-</span><span class="p">}</span><span class="w">
-</span></code></pre>
-<h3 id="Add-Game-Team-Member-responses">Responses</h3>
-
-<table>
-<thead>
-<tr>
-<th>Status</th>
-<th>Meaning</th>
-<th>Description</th>
-<th>Response Schema</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>201</td>
-<td><a href="https://tools.ietf.org/html/rfc7231#section-6.3.2">Created</a></td>
-<td>Created</td>
-<td><a href="#message-object">Message Object</a></td>
-</tr>
-</tbody>
-</table>
-
-<aside class="warning">
-To perform this operation, you must be authenticated by means of one of the following methods:
-oauth2 ( Scopes: write )
-</aside>
 <h2 id="get-all-mod-team-members">Get All Mod Team Members</h2>
 <blockquote>
 <p>Code samples</p>
@@ -7326,6 +7163,169 @@ Accept: application/json
 <aside class="warning">
 To perform this operation, you must be authenticated by means of one of the following methods:
 apiKey, oauth2 ( Scopes: read )
+</aside>
+<h2 id="add-game-team-member">Add Game Team Member</h2>
+<blockquote>
+<p>Code samples</p>
+</blockquote>
+<pre class="highlight shell tab-shell"><code><span class="c"># You can also use wget</span>
+curl -X POST https://api.mod.io/v1/games/<span class="o">{</span>game-id<span class="o">}</span>/team <span class="se">\</span>
+  -H <span class="s1">'Authorization: Bearer YourAccessToken'</span> <span class="se">\</span>
+  -H <span class="s1">'Content-Type: application/x-www-form-urlencoded'</span> <span class="se">\</span>
+  -H <span class="s1">'Accept: application/json'</span>
+
+</code></pre><pre class="highlight http tab-http"><code><span class="nf">POST</span> <span class="nn">https://api.mod.io/v1/games/{game-id}/team</span> <span class="k">HTTP</span><span class="o">/</span><span class="m">1.1</span>
+<span class="na">Host</span><span class="p">:</span> <span class="s">api.mod.io</span>
+
+Accept: application/json
+Authorization: Bearer YourAccessToken
+Content-Type: application/x-www-form-urlencoded
+
+
+</code></pre><pre class="highlight javascript tab-javascript"><code><span class="kd">var</span> <span class="nx">headers</span> <span class="o">=</span> <span class="p">{</span>
+  <span class="s1">'Authorization'</span><span class="p">:</span><span class="s1">'Bearer YourAccessToken'</span><span class="p">,</span>
+  <span class="s1">'Content-Type'</span><span class="p">:</span><span class="s1">'application/x-www-form-urlencoded'</span><span class="p">,</span>
+  <span class="s1">'Accept'</span><span class="p">:</span><span class="s1">'application/json'</span>
+
+<span class="p">};</span>
+
+<span class="nx">$</span><span class="p">.</span><span class="nx">ajax</span><span class="p">({</span>
+  <span class="na">url</span><span class="p">:</span> <span class="s1">'https://api.mod.io/v1/games/{game-id}/team'</span><span class="p">,</span>
+  <span class="na">method</span><span class="p">:</span> <span class="s1">'post'</span><span class="p">,</span>
+
+  <span class="na">headers</span><span class="p">:</span> <span class="nx">headers</span><span class="p">,</span>
+  <span class="na">success</span><span class="p">:</span> <span class="kd">function</span><span class="p">(</span><span class="nx">data</span><span class="p">)</span> <span class="p">{</span>
+    <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">JSON</span><span class="p">.</span><span class="nx">stringify</span><span class="p">(</span><span class="nx">data</span><span class="p">));</span>
+  <span class="p">}</span>
+<span class="p">})</span>
+</code></pre><pre class="highlight javascript tab-javascript--nodejs"><code><span class="kr">const</span> <span class="nx">request</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s1">'node-fetch'</span><span class="p">);</span>
+
+<span class="kr">const</span> <span class="nx">headers</span> <span class="o">=</span> <span class="p">{</span>
+  <span class="s1">'Authorization'</span><span class="p">:</span><span class="s1">'Bearer YourAccessToken'</span><span class="p">,</span>
+  <span class="s1">'Content-Type'</span><span class="p">:</span><span class="s1">'application/x-www-form-urlencoded'</span><span class="p">,</span>
+  <span class="s1">'Accept'</span><span class="p">:</span><span class="s1">'application/json'</span>
+
+<span class="p">};</span>
+
+<span class="nx">fetch</span><span class="p">(</span><span class="s1">'https://api.mod.io/v1/games/{game-id}/team'</span><span class="p">,</span>
+<span class="p">{</span>
+  <span class="na">method</span><span class="p">:</span> <span class="s1">'POST'</span><span class="p">,</span>
+
+  <span class="na">headers</span><span class="p">:</span> <span class="nx">headers</span>
+<span class="p">})</span>
+<span class="p">.</span><span class="nx">then</span><span class="p">(</span><span class="kd">function</span><span class="p">(</span><span class="nx">res</span><span class="p">)</span> <span class="p">{</span>
+    <span class="k">return</span> <span class="nx">res</span><span class="p">.</span><span class="nx">json</span><span class="p">();</span>
+<span class="p">}).</span><span class="nx">then</span><span class="p">(</span><span class="kd">function</span><span class="p">(</span><span class="nx">body</span><span class="p">)</span> <span class="p">{</span>
+    <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">body</span><span class="p">);</span>
+<span class="p">});</span>
+</code></pre><pre class="highlight ruby tab-ruby"><code><span class="nb">require</span> <span class="s1">'rest-client'</span>
+<span class="nb">require</span> <span class="s1">'json'</span>
+
+<span class="n">headers</span> <span class="o">=</span> <span class="p">{</span>
+  <span class="s1">'Authorization'</span> <span class="o">=&gt;</span> <span class="s1">'Bearer YourAccessToken'</span><span class="p">,</span>
+  <span class="s1">'Content-Type'</span> <span class="o">=&gt;</span> <span class="s1">'application/x-www-form-urlencoded'</span><span class="p">,</span>
+  <span class="s1">'Accept'</span> <span class="o">=&gt;</span> <span class="s1">'application/json'</span>
+<span class="p">}</span>
+
+<span class="n">result</span> <span class="o">=</span> <span class="no">RestClient</span><span class="p">.</span><span class="nf">post</span> <span class="s1">'https://api.mod.io/v1/games/{game-id}/team'</span><span class="p">,</span>
+  <span class="ss">params: </span><span class="p">{</span>
+  <span class="p">},</span> <span class="ss">headers: </span><span class="n">headers</span>
+
+
+<span class="nb">p</span> <span class="no">JSON</span><span class="p">.</span><span class="nf">parse</span><span class="p">(</span><span class="n">result</span><span class="p">)</span>
+</code></pre><pre class="highlight python tab-python"><code><span class="kn">import</span> <span class="nn">requests</span>
+<span class="n">headers</span> <span class="o">=</span> <span class="p">{</span>
+  <span class="s">'Authorization'</span><span class="p">:</span> <span class="s">'Bearer YourAccessToken'</span><span class="p">,</span>
+  <span class="s">'Content-Type'</span><span class="p">:</span> <span class="s">'application/x-www-form-urlencoded'</span><span class="p">,</span>
+  <span class="s">'Accept'</span><span class="p">:</span> <span class="s">'application/json'</span>
+<span class="p">}</span>
+
+<span class="n">r</span> <span class="o">=</span> <span class="n">requests</span><span class="o">.</span><span class="n">post</span><span class="p">(</span><span class="s">'https://api.mod.io/v1/games/{game-id}/team'</span><span class="p">,</span> <span class="n">params</span><span class="o">=</span><span class="p">{</span>
+
+<span class="p">},</span> <span class="n">headers</span> <span class="o">=</span> <span class="n">headers</span><span class="p">)</span>
+
+<span class="k">print</span> <span class="n">r</span><span class="o">.</span><span class="n">json</span><span class="p">()</span>
+</code></pre><pre class="highlight java tab-java"><code><span class="n">URL</span> <span class="n">obj</span> <span class="o">=</span> <span class="k">new</span> <span class="n">URL</span><span class="o">(</span><span class="s">"https://api.mod.io/v1/games/{game-id}/team"</span><span class="o">);</span>
+<span class="n">HttpURLConnection</span> <span class="n">con</span> <span class="o">=</span> <span class="o">(</span><span class="n">HttpURLConnection</span><span class="o">)</span> <span class="n">obj</span><span class="o">.</span><span class="na">openConnection</span><span class="o">();</span>
+<span class="n">con</span><span class="o">.</span><span class="na">setRequestMethod</span><span class="o">(</span><span class="s">"POST"</span><span class="o">);</span>
+<span class="kt">int</span> <span class="n">responseCode</span> <span class="o">=</span> <span class="n">con</span><span class="o">.</span><span class="na">getResponseCode</span><span class="o">();</span>
+<span class="n">BufferedReader</span> <span class="n">in</span> <span class="o">=</span> <span class="k">new</span> <span class="n">BufferedReader</span><span class="o">(</span>
+    <span class="k">new</span> <span class="nf">InputStreamReader</span><span class="o">(</span><span class="n">con</span><span class="o">.</span><span class="na">getInputStream</span><span class="o">()));</span>
+<span class="n">String</span> <span class="n">inputLine</span><span class="o">;</span>
+<span class="n">StringBuffer</span> <span class="n">response</span> <span class="o">=</span> <span class="k">new</span> <span class="n">StringBuffer</span><span class="o">();</span>
+<span class="k">while</span> <span class="o">((</span><span class="n">inputLine</span> <span class="o">=</span> <span class="n">in</span><span class="o">.</span><span class="na">readLine</span><span class="o">())</span> <span class="o">!=</span> <span class="kc">null</span><span class="o">)</span> <span class="o">{</span>
+    <span class="n">response</span><span class="o">.</span><span class="na">append</span><span class="o">(</span><span class="n">inputLine</span><span class="o">);</span>
+<span class="o">}</span>
+<span class="n">in</span><span class="o">.</span><span class="na">close</span><span class="o">();</span>
+<span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="n">response</span><span class="o">.</span><span class="na">toString</span><span class="o">());</span>
+</code></pre>
+<p><span class="httpmethod POST">POST</span> <span class="endpointheading">/games/{game-id}/team</span></p>
+
+<p>Add a user to a game team.</p>
+
+<table>
+<thead>
+<tr>
+<th>Parameter</th>
+<th>Type</th>
+<th>Required</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>user</td>
+<td>integer</td>
+<td>true</td>
+<td>The unique id of the team you are adding to the team.</td>
+</tr>
+<tr>
+<td>level</td>
+<td>integer</td>
+<td>true</td>
+<td>The level of permissions you want to give to the user.<br><br><em>Fields Options:</em><br><strong>1</strong> = Moderator (can moderate content submitted)<br><strong>4</strong> = Financials (read only access to the control panel to view financial reports)<br><strong>8</strong> = Administrator (full access, including editing the profile and team)</td>
+</tr>
+<tr>
+<td>position</td>
+<td>string</td>
+<td>true</td>
+<td>The title you wish to apply to the member within your team.</td>
+</tr>
+</tbody>
+</table>
+
+<blockquote>
+<p>Example responses</p>
+</blockquote>
+<pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
+  </span><span class="s2">"code"</span><span class="p">:</span><span class="w"> </span><span class="s2">"201"</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"message"</span><span class="p">:</span><span class="w"> </span><span class="s2">"You have successfully added a member to the specified team."</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre>
+<h3 id="Add-Game-Team-Member-responses">Responses</h3>
+
+<table>
+<thead>
+<tr>
+<th>Status</th>
+<th>Meaning</th>
+<th>Description</th>
+<th>Response Schema</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>201</td>
+<td><a href="https://tools.ietf.org/html/rfc7231#section-6.3.2">Created</a></td>
+<td>Created</td>
+<td><a href="#message-object">Message Object</a></td>
+</tr>
+</tbody>
+</table>
+
+<aside class="warning">
+To perform this operation, you must be authenticated by means of one of the following methods:
+oauth2 ( Scopes: write )
 </aside>
 <h2 id="add-mod-team-member">Add Mod Team Member</h2>
 <blockquote>
@@ -7647,135 +7647,6 @@ Content-Type: application/x-www-form-urlencoded
 To perform this operation, you must be authenticated by means of one of the following methods:
 oauth2 ( Scopes: write )
 </aside>
-<h2 id="delete-game-team-member">Delete Game Team Member</h2>
-<blockquote>
-<p>Code samples</p>
-</blockquote>
-<pre class="highlight shell tab-shell"><code><span class="c"># You can also use wget</span>
-curl -X DELETE https://api.mod.io/v1/games/<span class="o">{</span>game-id<span class="o">}</span>/team/<span class="o">{</span>access-id<span class="o">}</span> <span class="se">\</span>
-  -H <span class="s1">'Authorization: Bearer YourAccessToken'</span> <span class="se">\</span>
-  -H <span class="s1">'Content-Type: application/x-www-form-urlencoded'</span> <span class="se">\</span>
-  -H <span class="s1">'Accept: application/json'</span>
-
-</code></pre><pre class="highlight http tab-http"><code><span class="nf">DELETE</span> <span class="nn">https://api.mod.io/v1/games/{game-id}/team/{access-id}</span> <span class="k">HTTP</span><span class="o">/</span><span class="m">1.1</span>
-<span class="na">Host</span><span class="p">:</span> <span class="s">api.mod.io</span>
-
-Accept: application/json
-Authorization: Bearer YourAccessToken
-Content-Type: application/x-www-form-urlencoded
-
-
-</code></pre><pre class="highlight javascript tab-javascript"><code><span class="kd">var</span> <span class="nx">headers</span> <span class="o">=</span> <span class="p">{</span>
-  <span class="s1">'Authorization'</span><span class="p">:</span><span class="s1">'Bearer YourAccessToken'</span><span class="p">,</span>
-  <span class="s1">'Content-Type'</span><span class="p">:</span><span class="s1">'application/x-www-form-urlencoded'</span><span class="p">,</span>
-  <span class="s1">'Accept'</span><span class="p">:</span><span class="s1">'application/json'</span>
-
-<span class="p">};</span>
-
-<span class="nx">$</span><span class="p">.</span><span class="nx">ajax</span><span class="p">({</span>
-  <span class="na">url</span><span class="p">:</span> <span class="s1">'https://api.mod.io/v1/games/{game-id}/team/{access-id}'</span><span class="p">,</span>
-  <span class="na">method</span><span class="p">:</span> <span class="s1">'delete'</span><span class="p">,</span>
-
-  <span class="na">headers</span><span class="p">:</span> <span class="nx">headers</span><span class="p">,</span>
-  <span class="na">success</span><span class="p">:</span> <span class="kd">function</span><span class="p">(</span><span class="nx">data</span><span class="p">)</span> <span class="p">{</span>
-    <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">JSON</span><span class="p">.</span><span class="nx">stringify</span><span class="p">(</span><span class="nx">data</span><span class="p">));</span>
-  <span class="p">}</span>
-<span class="p">})</span>
-</code></pre><pre class="highlight javascript tab-javascript--nodejs"><code><span class="kr">const</span> <span class="nx">request</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s1">'node-fetch'</span><span class="p">);</span>
-
-<span class="kr">const</span> <span class="nx">headers</span> <span class="o">=</span> <span class="p">{</span>
-  <span class="s1">'Authorization'</span><span class="p">:</span><span class="s1">'Bearer YourAccessToken'</span><span class="p">,</span>
-  <span class="s1">'Content-Type'</span><span class="p">:</span><span class="s1">'application/x-www-form-urlencoded'</span><span class="p">,</span>
-  <span class="s1">'Accept'</span><span class="p">:</span><span class="s1">'application/json'</span>
-
-<span class="p">};</span>
-
-<span class="nx">fetch</span><span class="p">(</span><span class="s1">'https://api.mod.io/v1/games/{game-id}/team/{access-id}'</span><span class="p">,</span>
-<span class="p">{</span>
-  <span class="na">method</span><span class="p">:</span> <span class="s1">'DELETE'</span><span class="p">,</span>
-
-  <span class="na">headers</span><span class="p">:</span> <span class="nx">headers</span>
-<span class="p">})</span>
-<span class="p">.</span><span class="nx">then</span><span class="p">(</span><span class="kd">function</span><span class="p">(</span><span class="nx">res</span><span class="p">)</span> <span class="p">{</span>
-    <span class="k">return</span> <span class="nx">res</span><span class="p">.</span><span class="nx">json</span><span class="p">();</span>
-<span class="p">}).</span><span class="nx">then</span><span class="p">(</span><span class="kd">function</span><span class="p">(</span><span class="nx">body</span><span class="p">)</span> <span class="p">{</span>
-    <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">body</span><span class="p">);</span>
-<span class="p">});</span>
-</code></pre><pre class="highlight ruby tab-ruby"><code><span class="nb">require</span> <span class="s1">'rest-client'</span>
-<span class="nb">require</span> <span class="s1">'json'</span>
-
-<span class="n">headers</span> <span class="o">=</span> <span class="p">{</span>
-  <span class="s1">'Authorization'</span> <span class="o">=&gt;</span> <span class="s1">'Bearer YourAccessToken'</span><span class="p">,</span>
-  <span class="s1">'Content-Type'</span> <span class="o">=&gt;</span> <span class="s1">'application/x-www-form-urlencoded'</span><span class="p">,</span>
-  <span class="s1">'Accept'</span> <span class="o">=&gt;</span> <span class="s1">'application/json'</span>
-<span class="p">}</span>
-
-<span class="n">result</span> <span class="o">=</span> <span class="no">RestClient</span><span class="p">.</span><span class="nf">delete</span> <span class="s1">'https://api.mod.io/v1/games/{game-id}/team/{access-id}'</span><span class="p">,</span>
-  <span class="ss">params: </span><span class="p">{</span>
-  <span class="p">},</span> <span class="ss">headers: </span><span class="n">headers</span>
-
-
-<span class="nb">p</span> <span class="no">JSON</span><span class="p">.</span><span class="nf">parse</span><span class="p">(</span><span class="n">result</span><span class="p">)</span>
-</code></pre><pre class="highlight python tab-python"><code><span class="kn">import</span> <span class="nn">requests</span>
-<span class="n">headers</span> <span class="o">=</span> <span class="p">{</span>
-  <span class="s">'Authorization'</span><span class="p">:</span> <span class="s">'Bearer YourAccessToken'</span><span class="p">,</span>
-  <span class="s">'Content-Type'</span><span class="p">:</span> <span class="s">'application/x-www-form-urlencoded'</span><span class="p">,</span>
-  <span class="s">'Accept'</span><span class="p">:</span> <span class="s">'application/json'</span>
-<span class="p">}</span>
-
-<span class="n">r</span> <span class="o">=</span> <span class="n">requests</span><span class="o">.</span><span class="n">delete</span><span class="p">(</span><span class="s">'https://api.mod.io/v1/games/{game-id}/team/{access-id}'</span><span class="p">,</span> <span class="n">params</span><span class="o">=</span><span class="p">{</span>
-
-<span class="p">},</span> <span class="n">headers</span> <span class="o">=</span> <span class="n">headers</span><span class="p">)</span>
-
-<span class="k">print</span> <span class="n">r</span><span class="o">.</span><span class="n">json</span><span class="p">()</span>
-</code></pre><pre class="highlight java tab-java"><code><span class="n">URL</span> <span class="n">obj</span> <span class="o">=</span> <span class="k">new</span> <span class="n">URL</span><span class="o">(</span><span class="s">"https://api.mod.io/v1/games/{game-id}/team/{access-id}"</span><span class="o">);</span>
-<span class="n">HttpURLConnection</span> <span class="n">con</span> <span class="o">=</span> <span class="o">(</span><span class="n">HttpURLConnection</span><span class="o">)</span> <span class="n">obj</span><span class="o">.</span><span class="na">openConnection</span><span class="o">();</span>
-<span class="n">con</span><span class="o">.</span><span class="na">setRequestMethod</span><span class="o">(</span><span class="s">"DELETE"</span><span class="o">);</span>
-<span class="kt">int</span> <span class="n">responseCode</span> <span class="o">=</span> <span class="n">con</span><span class="o">.</span><span class="na">getResponseCode</span><span class="o">();</span>
-<span class="n">BufferedReader</span> <span class="n">in</span> <span class="o">=</span> <span class="k">new</span> <span class="n">BufferedReader</span><span class="o">(</span>
-    <span class="k">new</span> <span class="nf">InputStreamReader</span><span class="o">(</span><span class="n">con</span><span class="o">.</span><span class="na">getInputStream</span><span class="o">()));</span>
-<span class="n">String</span> <span class="n">inputLine</span><span class="o">;</span>
-<span class="n">StringBuffer</span> <span class="n">response</span> <span class="o">=</span> <span class="k">new</span> <span class="n">StringBuffer</span><span class="o">();</span>
-<span class="k">while</span> <span class="o">((</span><span class="n">inputLine</span> <span class="o">=</span> <span class="n">in</span><span class="o">.</span><span class="na">readLine</span><span class="o">())</span> <span class="o">!=</span> <span class="kc">null</span><span class="o">)</span> <span class="o">{</span>
-    <span class="n">response</span><span class="o">.</span><span class="na">append</span><span class="o">(</span><span class="n">inputLine</span><span class="o">);</span>
-<span class="o">}</span>
-<span class="n">in</span><span class="o">.</span><span class="na">close</span><span class="o">();</span>
-<span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="n">response</span><span class="o">.</span><span class="na">toString</span><span class="o">());</span>
-</code></pre>
-<p><span class="httpmethod DELETE">DELETE</span> <span class="endpointheading">/games/{game-id}/team/{access-id}</span></p>
-
-<p>Remove a member from a game team. This will revoke their access rights if they are not the original creator of the resource.</p>
-
-<blockquote>
-<p>Example responses</p>
-</blockquote>
-<pre class="highlight json tab-json"><code><span class="w"> </span><span class="s2">"204 No Content"</span><span class="w"> 
-</span></code></pre>
-<h3 id="Delete-Game-Team-Member-responses">Responses</h3>
-
-<table>
-<thead>
-<tr>
-<th>Status</th>
-<th>Meaning</th>
-<th>Description</th>
-<th>Response Schema</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>204</td>
-<td><a href="https://tools.ietf.org/html/rfc7231#section-6.3.5">No Content</a></td>
-<td>No Content</td>
-<td>None</td>
-</tr>
-</tbody>
-</table>
-
-<aside class="warning">
-To perform this operation, you must be authenticated by means of one of the following methods:
-oauth2 ( Scopes: write )
-</aside>
 <h2 id="update-mod-team-member">Update Mod Team Member</h2>
 <blockquote>
 <p>Code samples</p>
@@ -7925,6 +7796,135 @@ Content-Type: application/x-www-form-urlencoded
 <td><a href="https://tools.ietf.org/html/rfc7231#section-6.3.1">OK</a></td>
 <td>OK</td>
 <td><a href="#message-object">Message Object</a></td>
+</tr>
+</tbody>
+</table>
+
+<aside class="warning">
+To perform this operation, you must be authenticated by means of one of the following methods:
+oauth2 ( Scopes: write )
+</aside>
+<h2 id="delete-game-team-member">Delete Game Team Member</h2>
+<blockquote>
+<p>Code samples</p>
+</blockquote>
+<pre class="highlight shell tab-shell"><code><span class="c"># You can also use wget</span>
+curl -X DELETE https://api.mod.io/v1/games/<span class="o">{</span>game-id<span class="o">}</span>/team/<span class="o">{</span>access-id<span class="o">}</span> <span class="se">\</span>
+  -H <span class="s1">'Authorization: Bearer YourAccessToken'</span> <span class="se">\</span>
+  -H <span class="s1">'Content-Type: application/x-www-form-urlencoded'</span> <span class="se">\</span>
+  -H <span class="s1">'Accept: application/json'</span>
+
+</code></pre><pre class="highlight http tab-http"><code><span class="nf">DELETE</span> <span class="nn">https://api.mod.io/v1/games/{game-id}/team/{access-id}</span> <span class="k">HTTP</span><span class="o">/</span><span class="m">1.1</span>
+<span class="na">Host</span><span class="p">:</span> <span class="s">api.mod.io</span>
+
+Accept: application/json
+Authorization: Bearer YourAccessToken
+Content-Type: application/x-www-form-urlencoded
+
+
+</code></pre><pre class="highlight javascript tab-javascript"><code><span class="kd">var</span> <span class="nx">headers</span> <span class="o">=</span> <span class="p">{</span>
+  <span class="s1">'Authorization'</span><span class="p">:</span><span class="s1">'Bearer YourAccessToken'</span><span class="p">,</span>
+  <span class="s1">'Content-Type'</span><span class="p">:</span><span class="s1">'application/x-www-form-urlencoded'</span><span class="p">,</span>
+  <span class="s1">'Accept'</span><span class="p">:</span><span class="s1">'application/json'</span>
+
+<span class="p">};</span>
+
+<span class="nx">$</span><span class="p">.</span><span class="nx">ajax</span><span class="p">({</span>
+  <span class="na">url</span><span class="p">:</span> <span class="s1">'https://api.mod.io/v1/games/{game-id}/team/{access-id}'</span><span class="p">,</span>
+  <span class="na">method</span><span class="p">:</span> <span class="s1">'delete'</span><span class="p">,</span>
+
+  <span class="na">headers</span><span class="p">:</span> <span class="nx">headers</span><span class="p">,</span>
+  <span class="na">success</span><span class="p">:</span> <span class="kd">function</span><span class="p">(</span><span class="nx">data</span><span class="p">)</span> <span class="p">{</span>
+    <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">JSON</span><span class="p">.</span><span class="nx">stringify</span><span class="p">(</span><span class="nx">data</span><span class="p">));</span>
+  <span class="p">}</span>
+<span class="p">})</span>
+</code></pre><pre class="highlight javascript tab-javascript--nodejs"><code><span class="kr">const</span> <span class="nx">request</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s1">'node-fetch'</span><span class="p">);</span>
+
+<span class="kr">const</span> <span class="nx">headers</span> <span class="o">=</span> <span class="p">{</span>
+  <span class="s1">'Authorization'</span><span class="p">:</span><span class="s1">'Bearer YourAccessToken'</span><span class="p">,</span>
+  <span class="s1">'Content-Type'</span><span class="p">:</span><span class="s1">'application/x-www-form-urlencoded'</span><span class="p">,</span>
+  <span class="s1">'Accept'</span><span class="p">:</span><span class="s1">'application/json'</span>
+
+<span class="p">};</span>
+
+<span class="nx">fetch</span><span class="p">(</span><span class="s1">'https://api.mod.io/v1/games/{game-id}/team/{access-id}'</span><span class="p">,</span>
+<span class="p">{</span>
+  <span class="na">method</span><span class="p">:</span> <span class="s1">'DELETE'</span><span class="p">,</span>
+
+  <span class="na">headers</span><span class="p">:</span> <span class="nx">headers</span>
+<span class="p">})</span>
+<span class="p">.</span><span class="nx">then</span><span class="p">(</span><span class="kd">function</span><span class="p">(</span><span class="nx">res</span><span class="p">)</span> <span class="p">{</span>
+    <span class="k">return</span> <span class="nx">res</span><span class="p">.</span><span class="nx">json</span><span class="p">();</span>
+<span class="p">}).</span><span class="nx">then</span><span class="p">(</span><span class="kd">function</span><span class="p">(</span><span class="nx">body</span><span class="p">)</span> <span class="p">{</span>
+    <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">body</span><span class="p">);</span>
+<span class="p">});</span>
+</code></pre><pre class="highlight ruby tab-ruby"><code><span class="nb">require</span> <span class="s1">'rest-client'</span>
+<span class="nb">require</span> <span class="s1">'json'</span>
+
+<span class="n">headers</span> <span class="o">=</span> <span class="p">{</span>
+  <span class="s1">'Authorization'</span> <span class="o">=&gt;</span> <span class="s1">'Bearer YourAccessToken'</span><span class="p">,</span>
+  <span class="s1">'Content-Type'</span> <span class="o">=&gt;</span> <span class="s1">'application/x-www-form-urlencoded'</span><span class="p">,</span>
+  <span class="s1">'Accept'</span> <span class="o">=&gt;</span> <span class="s1">'application/json'</span>
+<span class="p">}</span>
+
+<span class="n">result</span> <span class="o">=</span> <span class="no">RestClient</span><span class="p">.</span><span class="nf">delete</span> <span class="s1">'https://api.mod.io/v1/games/{game-id}/team/{access-id}'</span><span class="p">,</span>
+  <span class="ss">params: </span><span class="p">{</span>
+  <span class="p">},</span> <span class="ss">headers: </span><span class="n">headers</span>
+
+
+<span class="nb">p</span> <span class="no">JSON</span><span class="p">.</span><span class="nf">parse</span><span class="p">(</span><span class="n">result</span><span class="p">)</span>
+</code></pre><pre class="highlight python tab-python"><code><span class="kn">import</span> <span class="nn">requests</span>
+<span class="n">headers</span> <span class="o">=</span> <span class="p">{</span>
+  <span class="s">'Authorization'</span><span class="p">:</span> <span class="s">'Bearer YourAccessToken'</span><span class="p">,</span>
+  <span class="s">'Content-Type'</span><span class="p">:</span> <span class="s">'application/x-www-form-urlencoded'</span><span class="p">,</span>
+  <span class="s">'Accept'</span><span class="p">:</span> <span class="s">'application/json'</span>
+<span class="p">}</span>
+
+<span class="n">r</span> <span class="o">=</span> <span class="n">requests</span><span class="o">.</span><span class="n">delete</span><span class="p">(</span><span class="s">'https://api.mod.io/v1/games/{game-id}/team/{access-id}'</span><span class="p">,</span> <span class="n">params</span><span class="o">=</span><span class="p">{</span>
+
+<span class="p">},</span> <span class="n">headers</span> <span class="o">=</span> <span class="n">headers</span><span class="p">)</span>
+
+<span class="k">print</span> <span class="n">r</span><span class="o">.</span><span class="n">json</span><span class="p">()</span>
+</code></pre><pre class="highlight java tab-java"><code><span class="n">URL</span> <span class="n">obj</span> <span class="o">=</span> <span class="k">new</span> <span class="n">URL</span><span class="o">(</span><span class="s">"https://api.mod.io/v1/games/{game-id}/team/{access-id}"</span><span class="o">);</span>
+<span class="n">HttpURLConnection</span> <span class="n">con</span> <span class="o">=</span> <span class="o">(</span><span class="n">HttpURLConnection</span><span class="o">)</span> <span class="n">obj</span><span class="o">.</span><span class="na">openConnection</span><span class="o">();</span>
+<span class="n">con</span><span class="o">.</span><span class="na">setRequestMethod</span><span class="o">(</span><span class="s">"DELETE"</span><span class="o">);</span>
+<span class="kt">int</span> <span class="n">responseCode</span> <span class="o">=</span> <span class="n">con</span><span class="o">.</span><span class="na">getResponseCode</span><span class="o">();</span>
+<span class="n">BufferedReader</span> <span class="n">in</span> <span class="o">=</span> <span class="k">new</span> <span class="n">BufferedReader</span><span class="o">(</span>
+    <span class="k">new</span> <span class="nf">InputStreamReader</span><span class="o">(</span><span class="n">con</span><span class="o">.</span><span class="na">getInputStream</span><span class="o">()));</span>
+<span class="n">String</span> <span class="n">inputLine</span><span class="o">;</span>
+<span class="n">StringBuffer</span> <span class="n">response</span> <span class="o">=</span> <span class="k">new</span> <span class="n">StringBuffer</span><span class="o">();</span>
+<span class="k">while</span> <span class="o">((</span><span class="n">inputLine</span> <span class="o">=</span> <span class="n">in</span><span class="o">.</span><span class="na">readLine</span><span class="o">())</span> <span class="o">!=</span> <span class="kc">null</span><span class="o">)</span> <span class="o">{</span>
+    <span class="n">response</span><span class="o">.</span><span class="na">append</span><span class="o">(</span><span class="n">inputLine</span><span class="o">);</span>
+<span class="o">}</span>
+<span class="n">in</span><span class="o">.</span><span class="na">close</span><span class="o">();</span>
+<span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="n">response</span><span class="o">.</span><span class="na">toString</span><span class="o">());</span>
+</code></pre>
+<p><span class="httpmethod DELETE">DELETE</span> <span class="endpointheading">/games/{game-id}/team/{access-id}</span></p>
+
+<p>Remove a member from a game team. This will revoke their access rights if they are not the original creator of the resource.</p>
+
+<blockquote>
+<p>Example responses</p>
+</blockquote>
+<pre class="highlight json tab-json"><code><span class="w"> </span><span class="s2">"204 No Content"</span><span class="w"> 
+</span></code></pre>
+<h3 id="Delete-Game-Team-Member-responses">Responses</h3>
+
+<table>
+<thead>
+<tr>
+<th>Status</th>
+<th>Meaning</th>
+<th>Description</th>
+<th>Response Schema</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>204</td>
+<td><a href="https://tools.ietf.org/html/rfc7231#section-6.3.5">No Content</a></td>
+<td>No Content</td>
+<td>None</td>
 </tr>
 </tbody>
 </table>
