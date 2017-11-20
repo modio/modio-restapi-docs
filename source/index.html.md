@@ -5979,6 +5979,427 @@ oauth2 ( Scopes: write )
 </aside>
 
 
+## Get All Mod Dependencies
+
+> Code samples
+
+```shell
+# You can also use wget
+curl -X GET https://api.mod.io/v1/games/{game-id}/mods/{mod-id}/dependencies?api_key=YourApiKey \
+  -H 'Accept: application/json'
+
+```
+
+```http
+GET https://api.mod.io/v1/games/{game-id}/mods/{mod-id}/dependencies?api_key=YourApiKey HTTP/1.1
+Host: api.mod.io
+
+Accept: application/json
+
+```
+
+```javascript
+var headers = {
+  'Accept':'application/json'
+
+};
+
+$.ajax({
+  url: 'https://api.mod.io/v1/games/{game-id}/mods/{mod-id}/dependencies',
+  method: 'get',
+  data: '?api_key=YourApiKey',
+  headers: headers,
+  success: function(data) {
+    console.log(JSON.stringify(data));
+  }
+})
+```
+
+```javascript--nodejs
+const request = require('node-fetch');
+
+const headers = {
+  'Accept':'application/json'
+
+};
+
+fetch('https://api.mod.io/v1/games/{game-id}/mods/{mod-id}/dependencies?api_key=YourApiKey',
+{
+  method: 'GET',
+
+  headers: headers
+})
+.then(function(res) {
+    return res.json();
+}).then(function(body) {
+    console.log(body);
+});
+```
+
+```ruby
+require 'rest-client'
+require 'json'
+
+headers = {
+  'Accept' => 'application/json'
+}
+
+result = RestClient.get 'https://api.mod.io/v1/games/{game-id}/mods/{mod-id}/dependencies',
+  params: {
+  'api_key' => 'string'
+}, headers: headers
+
+
+p JSON.parse(result)
+```
+
+```python
+import requests
+headers = {
+  'Accept': 'application/json'
+}
+
+r = requests.get('https://api.mod.io/v1/games/{game-id}/mods/{mod-id}/dependencies', params={
+  'api_key': 'YourApiKey'
+}, headers = headers)
+
+print r.json()
+```
+
+```java
+URL obj = new URL("https://api.mod.io/v1/games/{game-id}/mods/{mod-id}/dependencies?api_key=YourApiKey");
+HttpURLConnection con = (HttpURLConnection) obj.openConnection();
+con.setRequestMethod("GET");
+int responseCode = con.getResponseCode();
+BufferedReader in = new BufferedReader(
+    new InputStreamReader(con.getInputStream()));
+String inputLine;
+StringBuffer response = new StringBuffer();
+while ((inputLine = in.readLine()) != null) {
+    response.append(inputLine);
+}
+in.close();
+System.out.println(response.toString());
+```
+`GET /games/{game-id}/mods/{mod-id}/dependencies`
+
+Get all listed dependencies for the corresponding mod, successful response will return an array of [Mod Dependencies Objects](--parse-docsurl/#mod-dependencies-object).
+
+
+> Example responses
+
+```json
+{
+  "data": [
+    {
+      "mod": 231,
+      "date": 1499841487
+    },
+    {
+        ...
+    }
+  ],
+  "cursor_id": 60,
+  "prev_id": 30,
+  "next_id": 160,
+  "result_count": 100
+}
+```
+<h3 id="Get-All-Mod-Dependencies-responses">Responses</h3>
+
+Status|Meaning|Description|Response Schema
+---|---|---|---|
+200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)|Successful Request|[Get All Mod Dependencies](#schemaget_all_mod_dependencies)
+
+<aside class="warning">
+To perform this operation, you must be authenticated by means of one of the following methods:
+apiKey, oauth2 ( Scopes: read )
+</aside>
+
+
+## Add Mod Dependencies
+
+> Code samples
+
+```shell
+# You can also use wget
+curl -X POST https://api.mod.io/v1/games/{game-id}/mods/{mod-id}/dependencies \
+  -H 'Authorization: Bearer YourAccessToken' \
+  -H 'Content-Type: application/x-www-form-urlencoded' \
+  -H 'Accept: application/json'
+
+```
+
+```http
+POST https://api.mod.io/v1/games/{game-id}/mods/{mod-id}/dependencies HTTP/1.1
+Host: api.mod.io
+
+Accept: application/json
+Authorization: Bearer YourAccessToken
+Content-Type: application/x-www-form-urlencoded
+
+
+```
+
+```javascript
+var headers = {
+  'Authorization':'Bearer YourAccessToken',
+  'Content-Type':'application/x-www-form-urlencoded',
+  'Accept':'application/json'
+
+};
+
+$.ajax({
+  url: 'https://api.mod.io/v1/games/{game-id}/mods/{mod-id}/dependencies',
+  method: 'post',
+
+  headers: headers,
+  success: function(data) {
+    console.log(JSON.stringify(data));
+  }
+})
+```
+
+```javascript--nodejs
+const request = require('node-fetch');
+
+const headers = {
+  'Authorization':'Bearer YourAccessToken',
+  'Content-Type':'application/x-www-form-urlencoded',
+  'Accept':'application/json'
+
+};
+
+fetch('https://api.mod.io/v1/games/{game-id}/mods/{mod-id}/dependencies',
+{
+  method: 'POST',
+
+  headers: headers
+})
+.then(function(res) {
+    return res.json();
+}).then(function(body) {
+    console.log(body);
+});
+```
+
+```ruby
+require 'rest-client'
+require 'json'
+
+headers = {
+  'Authorization' => 'Bearer YourAccessToken',
+  'Content-Type' => 'application/x-www-form-urlencoded',
+  'Accept' => 'application/json'
+}
+
+result = RestClient.post 'https://api.mod.io/v1/games/{game-id}/mods/{mod-id}/dependencies',
+  params: {
+  }, headers: headers
+
+
+p JSON.parse(result)
+```
+
+```python
+import requests
+headers = {
+  'Authorization': 'Bearer YourAccessToken',
+  'Content-Type': 'application/x-www-form-urlencoded',
+  'Accept': 'application/json'
+}
+
+r = requests.post('https://api.mod.io/v1/games/{game-id}/mods/{mod-id}/dependencies', params={
+
+}, headers = headers)
+
+print r.json()
+```
+
+```java
+URL obj = new URL("https://api.mod.io/v1/games/{game-id}/mods/{mod-id}/dependencies");
+HttpURLConnection con = (HttpURLConnection) obj.openConnection();
+con.setRequestMethod("POST");
+int responseCode = con.getResponseCode();
+BufferedReader in = new BufferedReader(
+    new InputStreamReader(con.getInputStream()));
+String inputLine;
+StringBuffer response = new StringBuffer();
+while ((inputLine = in.readLine()) != null) {
+    response.append(inputLine);
+}
+in.close();
+System.out.println(response.toString());
+```
+`POST /games/{game-id}/mods/{mod-id}/dependencies`
+
+Add dependencies that are required for the corresponding mod. Dependencies should be the unique id of the mod that this mod is to be dependant on. For example: If you submit the values 28 & 42, you are listing this mod as being dependant on the mods that hold those values as their unique id.
+
+    Parameter|Type|Required|Description
+    ---|---|---|---|
+    dependencies|array|true|Array containing one or more mod id's that will represent the mods this mod is dependent on. Max of 5 dependencies per request.
+
+
+> Example responses
+
+```json
+{
+  "code": "201",
+  "message": "You have successfully added new dependencies to the specified mod."
+}
+```
+<h3 id="Add-Mod-Dependencies-responses">Responses</h3>
+
+Status|Meaning|Description|Response Schema
+---|---|---|---|
+201|[Created](https://tools.ietf.org/html/rfc7231#section-6.3.2)|Created|[Message Object](#message-object)
+
+<aside class="warning">
+To perform this operation, you must be authenticated by means of one of the following methods:
+oauth2 ( Scopes: write )
+</aside>
+
+
+## Delete Mod Dependencies
+
+> Code samples
+
+```shell
+# You can also use wget
+curl -X DELETE https://api.mod.io/v1/games/{game-id}/mods/{mod-id}/dependencies \
+  -H 'Authorization: Bearer YourAccessToken' \
+  -H 'Content-Type: application/x-www-form-urlencoded' \
+  -H 'Accept: application/json'
+
+```
+
+```http
+DELETE https://api.mod.io/v1/games/{game-id}/mods/{mod-id}/dependencies HTTP/1.1
+Host: api.mod.io
+
+Accept: application/json
+Authorization: Bearer YourAccessToken
+Content-Type: application/x-www-form-urlencoded
+
+
+```
+
+```javascript
+var headers = {
+  'Authorization':'Bearer YourAccessToken',
+  'Content-Type':'application/x-www-form-urlencoded',
+  'Accept':'application/json'
+
+};
+
+$.ajax({
+  url: 'https://api.mod.io/v1/games/{game-id}/mods/{mod-id}/dependencies',
+  method: 'delete',
+
+  headers: headers,
+  success: function(data) {
+    console.log(JSON.stringify(data));
+  }
+})
+```
+
+```javascript--nodejs
+const request = require('node-fetch');
+
+const headers = {
+  'Authorization':'Bearer YourAccessToken',
+  'Content-Type':'application/x-www-form-urlencoded',
+  'Accept':'application/json'
+
+};
+
+fetch('https://api.mod.io/v1/games/{game-id}/mods/{mod-id}/dependencies',
+{
+  method: 'DELETE',
+
+  headers: headers
+})
+.then(function(res) {
+    return res.json();
+}).then(function(body) {
+    console.log(body);
+});
+```
+
+```ruby
+require 'rest-client'
+require 'json'
+
+headers = {
+  'Authorization' => 'Bearer YourAccessToken',
+  'Content-Type' => 'application/x-www-form-urlencoded',
+  'Accept' => 'application/json'
+}
+
+result = RestClient.delete 'https://api.mod.io/v1/games/{game-id}/mods/{mod-id}/dependencies',
+  params: {
+  }, headers: headers
+
+
+p JSON.parse(result)
+```
+
+```python
+import requests
+headers = {
+  'Authorization': 'Bearer YourAccessToken',
+  'Content-Type': 'application/x-www-form-urlencoded',
+  'Accept': 'application/json'
+}
+
+r = requests.delete('https://api.mod.io/v1/games/{game-id}/mods/{mod-id}/dependencies', params={
+
+}, headers = headers)
+
+print r.json()
+```
+
+```java
+URL obj = new URL("https://api.mod.io/v1/games/{game-id}/mods/{mod-id}/dependencies");
+HttpURLConnection con = (HttpURLConnection) obj.openConnection();
+con.setRequestMethod("DELETE");
+int responseCode = con.getResponseCode();
+BufferedReader in = new BufferedReader(
+    new InputStreamReader(con.getInputStream()));
+String inputLine;
+StringBuffer response = new StringBuffer();
+while ((inputLine = in.readLine()) != null) {
+    response.append(inputLine);
+}
+in.close();
+System.out.println(response.toString());
+```
+`DELETE /games/{game-id}/mods/{mod-id}/dependencies`
+
+Delete dependencies currently listed as required for the corresponding mod. Dependencies should be the unique id of the mod that this mod is dependant on. For example: If you submit the values 28 & 42, you are requesting that the mods with the unique id's 28 & 42 no longer be listed as a dependency for the corresponding mod. Successful request will return `204 No Content`.
+
+    Parameter|Type|Required|Description
+    ---|---|---|---|
+    dependencies|array|true|Array containing one or more mod id's that will represent the unique id's of the mods to delete as dependencies. Max of 5 dependencies per request.
+
+
+> Example responses
+
+```json
+ "204 No Content" 
+```
+<h3 id="Delete-Mod-Dependencies-responses">Responses</h3>
+
+Status|Meaning|Description|Response Schema
+---|---|---|---|
+204|[No Content](https://tools.ietf.org/html/rfc7231#section-6.3.5)|No Content|None
+
+<aside class="warning">
+To perform this operation, you must be authenticated by means of one of the following methods:
+oauth2 ( Scopes: write )
+</aside>
+
+
 ## Get All Mod KVP Metadata
 
 > Code samples
@@ -9223,6 +9644,44 @@ result_count|integer(int32)|The amount of results returned in the current reques
 
 
 
+## Get All Mod Dependencies
+
+<a name="schemaget_all_mod_dependencies"></a>
+
+```json
+{
+  "data": [
+    {
+      "mod": 231,
+      "date": 1499841487
+    },
+    {
+        ...
+    }
+  ],
+  "cursor_id": 60,
+  "prev_id": 30,
+  "next_id": 160,
+  "result_count": 100
+} 
+```
+
+
+### Properties
+
+Name|Type|Description
+---|---|---|---|
+data|[Mod Dependencies Object ](#schemamod_dependencies_object)[]|No description
+» mod|integer(int32)|Unique id of the mod that is the dependency.
+» date|integer(int32)|Unix timestamp of when the dependency was listed.
+cursor_id|integer(int32)|The current _cursor value.
+prev_id|integer(int32)|The previous _cursor value as manually inserted by you, null by default.
+next_id|integer(int32)|The next position to move the _cursor to, based on the current request.
+result_count|integer(int32)|The amount of results returned in the current request.
+
+
+
+
 ## Get All Mod KVP
 
 <a name="schemaget_all_mod_kvp_metadata"></a>
@@ -9469,6 +9928,28 @@ replypos|string|Nesting position of the reply.
 karma|integer(int32)|The amount of karma the comment has received.
 karmago|integer(int32)|The amount of good karma the comment has received.
 summary|string|The displayed comment.
+
+
+
+
+## Mod Dependencies Object 
+
+<a name="schemamod_dependencies_object"></a>
+
+```json
+{
+  "mod": 231,
+  "date": 1499841487
+} 
+```
+
+
+### Properties
+
+Name|Type|Description
+---|---|---|---|
+mod|integer(int32)|Unique id of the mod that is the dependency.
+date|integer(int32)|Unix timestamp of when the dependency was listed.
 
 
 
