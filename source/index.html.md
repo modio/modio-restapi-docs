@@ -1212,895 +1212,6 @@ oauth2 ( Scopes: write )
 </aside>
 
 
-## Add Game Media
-
-> Code samples
-
-```shell
-# You can also use wget
-curl -X POST https://api.mod.io/v1/games/{game-id}/media \
-  -H 'Authorization: Bearer YourAccessToken' \
-  -H 'Content-Type: multipart/form-data' \
-  -H 'Accept: application/json'
-
-```
-
-```http
-POST https://api.mod.io/v1/games/{game-id}/media HTTP/1.1
-Host: api.mod.io
-
-Accept: application/json
-Authorization: Bearer YourAccessToken
-Content-Type: multipart/form-data
-
-
-```
-
-```javascript
-var headers = {
-  'Authorization':'Bearer YourAccessToken',
-  'Content-Type':'multipart/form-data',
-  'Accept':'application/json'
-
-};
-
-$.ajax({
-  url: 'https://api.mod.io/v1/games/{game-id}/media',
-  method: 'post',
-
-  headers: headers,
-  success: function(data) {
-    console.log(JSON.stringify(data));
-  }
-})
-```
-
-```javascript--nodejs
-const request = require('node-fetch');
-
-const headers = {
-  'Authorization':'Bearer YourAccessToken',
-  'Content-Type':'multipart/form-data',
-  'Accept':'application/json'
-
-};
-
-fetch('https://api.mod.io/v1/games/{game-id}/media',
-{
-  method: 'POST',
-
-  headers: headers
-})
-.then(function(res) {
-    return res.json();
-}).then(function(body) {
-    console.log(body);
-});
-```
-
-```ruby
-require 'rest-client'
-require 'json'
-
-headers = {
-  'Authorization' => 'Bearer YourAccessToken',
-  'Content-Type' => 'multipart/form-data',
-  'Accept' => 'application/json'
-}
-
-result = RestClient.post 'https://api.mod.io/v1/games/{game-id}/media',
-  params: {
-  }, headers: headers
-
-
-p JSON.parse(result)
-```
-
-```python
-import requests
-headers = {
-  'Authorization': 'Bearer YourAccessToken',
-  'Content-Type': 'multipart/form-data',
-  'Accept': 'application/json'
-}
-
-r = requests.post('https://api.mod.io/v1/games/{game-id}/media', params={
-
-}, headers = headers)
-
-print r.json()
-```
-
-```java
-URL obj = new URL("https://api.mod.io/v1/games/{game-id}/media");
-HttpURLConnection con = (HttpURLConnection) obj.openConnection();
-con.setRequestMethod("POST");
-int responseCode = con.getResponseCode();
-BufferedReader in = new BufferedReader(
-    new InputStreamReader(con.getInputStream()));
-String inputLine;
-StringBuffer response = new StringBuffer();
-while ((inputLine = in.readLine()) != null) {
-    response.append(inputLine);
-}
-in.close();
-System.out.println(response.toString());
-```
-`POST /games/{game-id}/media`
-
-Upload new media to a game. Any request you make to this endpoint *should* contain a binary file for one of the following fields below.
-     
-     Parameter|Type|Required|Description
-     ---|---|---|---|
-     logo|file||Image file which will represent your new mod logo. Must be gif, jpg, jpeg or png format and cannot exceed 8MB in filesize. Dimensions must be at least 640x360 and is highly recommended that you supply a high resolution image in 16 / 9 resolution. mod.io will use this image to make three thumbnails for the dimensions 320x180, 640x360 and 1280x720.
-     icon|file||Binary image file which will represent your new game icon. Must be minimum 64x64px dimensions and gif, jpg, jpeg or png format and cannot exceed 1MB in filesize.
-     header|file||Binary image file which will represent your new game header. Must be gif, jpg, jpeg or png format and cannot exceed 256KB in filesize.
-
-
-> Example responses
-
-```json
-{
-  "code": "200",
-  "message": "You have successfully added new media to the specified game profile."
-}
-```
-<h3 id="Add-Game-Media-responses">Responses</h3>
-
-Status|Meaning|Description|Response Schema
----|---|---|---|
-200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)|Media Successfully uploaded|[Message Object](#message-object)
-
-<aside class="warning">
-To perform this operation, you must be authenticated by means of one of the following methods:
-oauth2 ( Scopes: write )
-</aside>
-
-
-## Get Game Activity
-
-> Code samples
-
-```shell
-# You can also use wget
-curl -X GET https://api.mod.io/v1/games/{game-id}/activity?api_key=YourApiKey \
-  -H 'Accept: application/json'
-
-```
-
-```http
-GET https://api.mod.io/v1/games/{game-id}/activity?api_key=YourApiKey HTTP/1.1
-Host: api.mod.io
-
-Accept: application/json
-
-```
-
-```javascript
-var headers = {
-  'Accept':'application/json'
-
-};
-
-$.ajax({
-  url: 'https://api.mod.io/v1/games/{game-id}/activity',
-  method: 'get',
-  data: '?api_key=YourApiKey',
-  headers: headers,
-  success: function(data) {
-    console.log(JSON.stringify(data));
-  }
-})
-```
-
-```javascript--nodejs
-const request = require('node-fetch');
-
-const headers = {
-  'Accept':'application/json'
-
-};
-
-fetch('https://api.mod.io/v1/games/{game-id}/activity?api_key=YourApiKey',
-{
-  method: 'GET',
-
-  headers: headers
-})
-.then(function(res) {
-    return res.json();
-}).then(function(body) {
-    console.log(body);
-});
-```
-
-```ruby
-require 'rest-client'
-require 'json'
-
-headers = {
-  'Accept' => 'application/json'
-}
-
-result = RestClient.get 'https://api.mod.io/v1/games/{game-id}/activity',
-  params: {
-  'api_key' => 'string'
-}, headers: headers
-
-
-p JSON.parse(result)
-```
-
-```python
-import requests
-headers = {
-  'Accept': 'application/json'
-}
-
-r = requests.get('https://api.mod.io/v1/games/{game-id}/activity', params={
-  'api_key': 'YourApiKey'
-}, headers = headers)
-
-print r.json()
-```
-
-```java
-URL obj = new URL("https://api.mod.io/v1/games/{game-id}/activity?api_key=YourApiKey");
-HttpURLConnection con = (HttpURLConnection) obj.openConnection();
-con.setRequestMethod("GET");
-int responseCode = con.getResponseCode();
-BufferedReader in = new BufferedReader(
-    new InputStreamReader(con.getInputStream()));
-String inputLine;
-StringBuffer response = new StringBuffer();
-while ((inputLine = in.readLine()) != null) {
-    response.append(inputLine);
-}
-in.close();
-System.out.println(response.toString());
-```
-`GET /games/{game-id}/activity`
-
-Retrieve activity log for a game, showing changes made to the resource. Successful request will return an array of [Game activity objects](https://docs.mod.io/#get-game-activity-2). To make your requests as specific to your needs as possible it's highly recommended reading over our [filtering documentation](https://docs.mod.io/#filtering) if it will help you with consuming this endpoint. This endpoint by default sorts by `id` in descending order.
-     
-     Filter|Type|Description
-     ---|---|---
-     id|integer(int32)|Unique id of the activity object.
-     game|integer(int32)|Unique id of the parent game.
-     user|integer(int32)|Unique id of the user who performed the action.
-     dateup|integer(int32)|Unix timestamp of date updated.
-     event|string|Type of change that occurred. <br><br>*Field Options*<br>__GAME_UPDATE__ - Update event<br>__GAME_VISIBILITY_CHANGE__ = Game has been set to live, or hidden
-
-
-> Example responses
-
-```json
-{
-  "data": [
-    {
-      "id": 53,
-      "game": 17,
-      "user": 95,
-      "dateup": 1499846132,
-      "event": "GAME_UPDATE",
-      "changes": [
-        {
-          "field": "homepage",
-          "before": "https://www.roguehdpack.com/",
-          "after": "https://rogue-knight.mod.io/rogue-hd-pack"
-        }
-      ]
-    },
-    {
-        ...
-    }
-  ],
-  "cursor_id": 60,
-  "prev_id": 30,
-  "next_id": 160,
-  "result_count": 100
-}
-```
-<h3 id="Get-Game-Activity-responses">Responses</h3>
-
-Status|Meaning|Description|Response Schema
----|---|---|---|
-200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)|Successful Response|[Get Game Activity ](#schemaget_game_activity)
-
-<aside class="warning">
-To perform this operation, you must be authenticated by means of one of the following methods:
-apiKey, oauth2 ( Scopes: read )
-</aside>
-
-
-## Get All Game Team Members
-
-> Code samples
-
-```shell
-# You can also use wget
-curl -X GET https://api.mod.io/v1/games/{game-id}/team?api_key=YourApiKey \
-  -H 'Accept: application/json'
-
-```
-
-```http
-GET https://api.mod.io/v1/games/{game-id}/team?api_key=YourApiKey HTTP/1.1
-Host: api.mod.io
-
-Accept: application/json
-
-```
-
-```javascript
-var headers = {
-  'Accept':'application/json'
-
-};
-
-$.ajax({
-  url: 'https://api.mod.io/v1/games/{game-id}/team',
-  method: 'get',
-  data: '?api_key=YourApiKey',
-  headers: headers,
-  success: function(data) {
-    console.log(JSON.stringify(data));
-  }
-})
-```
-
-```javascript--nodejs
-const request = require('node-fetch');
-
-const headers = {
-  'Accept':'application/json'
-
-};
-
-fetch('https://api.mod.io/v1/games/{game-id}/team?api_key=YourApiKey',
-{
-  method: 'GET',
-
-  headers: headers
-})
-.then(function(res) {
-    return res.json();
-}).then(function(body) {
-    console.log(body);
-});
-```
-
-```ruby
-require 'rest-client'
-require 'json'
-
-headers = {
-  'Accept' => 'application/json'
-}
-
-result = RestClient.get 'https://api.mod.io/v1/games/{game-id}/team',
-  params: {
-  'api_key' => 'string'
-}, headers: headers
-
-
-p JSON.parse(result)
-```
-
-```python
-import requests
-headers = {
-  'Accept': 'application/json'
-}
-
-r = requests.get('https://api.mod.io/v1/games/{game-id}/team', params={
-  'api_key': 'YourApiKey'
-}, headers = headers)
-
-print r.json()
-```
-
-```java
-URL obj = new URL("https://api.mod.io/v1/games/{game-id}/team?api_key=YourApiKey");
-HttpURLConnection con = (HttpURLConnection) obj.openConnection();
-con.setRequestMethod("GET");
-int responseCode = con.getResponseCode();
-BufferedReader in = new BufferedReader(
-    new InputStreamReader(con.getInputStream()));
-String inputLine;
-StringBuffer response = new StringBuffer();
-while ((inputLine = in.readLine()) != null) {
-    response.append(inputLine);
-}
-in.close();
-System.out.println(response.toString());
-```
-`GET /games/{game-id}/team`
-
-Retrieve all members that are part of a game team. Successful request will return an array of [Access objects](https://docs.mod.io/#get-team). To make your requests as specific to your needs as possible it's highly recommended reading over our [filtering documentation](https://docs.mod.io/#filtering) if it will help you with consuming this endpoint.
-     
-     Filter|Type|Required|Description
-     ---|---|---|---|
-     id|integer(int32)|Unique id of the access record.
-     user|integer(int32)|Unique id of the user.
-     username|string|Username of the user.
-     level|integer|The level of permission the user has.<br><br>*Fields Options:*<br>__1__ = Moderator (can moderate content submitted)<br>__4__ = Financials (read only access to the control panel to view financial reports)<br>__8__ = Administrator (full access, including editing the profile and team)
-     date|integer|Unix timestamp of the date the user was added to the team.
-     position|string|Custom title given to the user.
-
-
-> Example responses
-
-```json
-{
-  "data": [
-    {
-      "id": 457,
-      "user": {
-        "id": 1,
-        "nameid": "xant",
-        "username": "XanT",
-        "online": 1509922961,
-        "avatar": {
-          "filename": "masterchief.jpg",
-          "full": "https://media.mod.io/images/members/1/1/1/masterchief.jpg"
-        },
-        "timezone": "Australia/Brisbane",
-        "language": "en",
-        "url": "https://mod.io/members/xant"
-      },
-      "username": "Megalodon",
-      "level": 8,
-      "date": 1492058857,
-      "position": "Supreme Overlord"
-    },
-    {
-        ...
-    }
-  ],
-  "cursor_id": 60,
-  "prev_id": 30,
-  "next_id": 160,
-  "result_count": 100
-}
-```
-<h3 id="Get-All-Game-Team-Members-responses">Responses</h3>
-
-Status|Meaning|Description|Response Schema
----|---|---|---|
-200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)|Successful Request|[Get Team  ](#schemaget_team)
-
-<aside class="warning">
-To perform this operation, you must be authenticated by means of one of the following methods:
-apiKey, oauth2 ( Scopes: read )
-</aside>
-
-
-## Add Game Team Member
-
-> Code samples
-
-```shell
-# You can also use wget
-curl -X POST https://api.mod.io/v1/games/{game-id}/team \
-  -H 'Authorization: Bearer YourAccessToken' \
-  -H 'Content-Type: application/x-www-form-urlencoded' \
-  -H 'Accept: application/json'
-
-```
-
-```http
-POST https://api.mod.io/v1/games/{game-id}/team HTTP/1.1
-Host: api.mod.io
-
-Accept: application/json
-Authorization: Bearer YourAccessToken
-Content-Type: application/x-www-form-urlencoded
-
-
-```
-
-```javascript
-var headers = {
-  'Authorization':'Bearer YourAccessToken',
-  'Content-Type':'application/x-www-form-urlencoded',
-  'Accept':'application/json'
-
-};
-
-$.ajax({
-  url: 'https://api.mod.io/v1/games/{game-id}/team',
-  method: 'post',
-
-  headers: headers,
-  success: function(data) {
-    console.log(JSON.stringify(data));
-  }
-})
-```
-
-```javascript--nodejs
-const request = require('node-fetch');
-
-const headers = {
-  'Authorization':'Bearer YourAccessToken',
-  'Content-Type':'application/x-www-form-urlencoded',
-  'Accept':'application/json'
-
-};
-
-fetch('https://api.mod.io/v1/games/{game-id}/team',
-{
-  method: 'POST',
-
-  headers: headers
-})
-.then(function(res) {
-    return res.json();
-}).then(function(body) {
-    console.log(body);
-});
-```
-
-```ruby
-require 'rest-client'
-require 'json'
-
-headers = {
-  'Authorization' => 'Bearer YourAccessToken',
-  'Content-Type' => 'application/x-www-form-urlencoded',
-  'Accept' => 'application/json'
-}
-
-result = RestClient.post 'https://api.mod.io/v1/games/{game-id}/team',
-  params: {
-  }, headers: headers
-
-
-p JSON.parse(result)
-```
-
-```python
-import requests
-headers = {
-  'Authorization': 'Bearer YourAccessToken',
-  'Content-Type': 'application/x-www-form-urlencoded',
-  'Accept': 'application/json'
-}
-
-r = requests.post('https://api.mod.io/v1/games/{game-id}/team', params={
-
-}, headers = headers)
-
-print r.json()
-```
-
-```java
-URL obj = new URL("https://api.mod.io/v1/games/{game-id}/team");
-HttpURLConnection con = (HttpURLConnection) obj.openConnection();
-con.setRequestMethod("POST");
-int responseCode = con.getResponseCode();
-BufferedReader in = new BufferedReader(
-    new InputStreamReader(con.getInputStream()));
-String inputLine;
-StringBuffer response = new StringBuffer();
-while ((inputLine = in.readLine()) != null) {
-    response.append(inputLine);
-}
-in.close();
-System.out.println(response.toString());
-```
-`POST /games/{game-id}/team`
-
-Add a user to a game team.
-     
-     Parameter|Type|Required|Description
-     ---|---|---|---|
-     user|integer|true|The unique id of the team you are adding to the team.
-     level|integer|true|The level of permissions you want to give to the user.<br><br>*Fields Options:*<br>__1__ = Moderator (can moderate content submitted)<br>__4__ = Financials (read only access to the control panel to view financial reports)<br>__8__ = Administrator (full access, including editing the profile and team)
-     position|string|true|The title you wish to apply to the member within your team.
-
-
-> Example responses
-
-```json
-{
-  "code": "201",
-  "message": "You have successfully added a member to the specified team."
-}
-```
-<h3 id="Add-Game-Team-Member-responses">Responses</h3>
-
-Status|Meaning|Description|Response Schema
----|---|---|---|
-201|[Created](https://tools.ietf.org/html/rfc7231#section-6.3.2)|Created|[Message Object](#message-object)
-
-<aside class="warning">
-To perform this operation, you must be authenticated by means of one of the following methods:
-oauth2 ( Scopes: write )
-</aside>
-
-
-## Update Game Team Member
-
-> Code samples
-
-```shell
-# You can also use wget
-curl -X PUT https://api.mod.io/v1/games/{game-id}/team/{access-id} \
-  -H 'Authorization: Bearer YourAccessToken' \
-  -H 'Content-Type: application/x-www-form-urlencoded' \
-  -H 'Accept: application/json'
-
-```
-
-```http
-PUT https://api.mod.io/v1/games/{game-id}/team/{access-id} HTTP/1.1
-Host: api.mod.io
-
-Accept: application/json
-Authorization: Bearer YourAccessToken
-Content-Type: application/x-www-form-urlencoded
-
-
-```
-
-```javascript
-var headers = {
-  'Authorization':'Bearer YourAccessToken',
-  'Content-Type':'application/x-www-form-urlencoded',
-  'Accept':'application/json'
-
-};
-
-$.ajax({
-  url: 'https://api.mod.io/v1/games/{game-id}/team/{access-id}',
-  method: 'put',
-
-  headers: headers,
-  success: function(data) {
-    console.log(JSON.stringify(data));
-  }
-})
-```
-
-```javascript--nodejs
-const request = require('node-fetch');
-
-const headers = {
-  'Authorization':'Bearer YourAccessToken',
-  'Content-Type':'application/x-www-form-urlencoded',
-  'Accept':'application/json'
-
-};
-
-fetch('https://api.mod.io/v1/games/{game-id}/team/{access-id}',
-{
-  method: 'PUT',
-
-  headers: headers
-})
-.then(function(res) {
-    return res.json();
-}).then(function(body) {
-    console.log(body);
-});
-```
-
-```ruby
-require 'rest-client'
-require 'json'
-
-headers = {
-  'Authorization' => 'Bearer YourAccessToken',
-  'Content-Type' => 'application/x-www-form-urlencoded',
-  'Accept' => 'application/json'
-}
-
-result = RestClient.put 'https://api.mod.io/v1/games/{game-id}/team/{access-id}',
-  params: {
-  }, headers: headers
-
-
-p JSON.parse(result)
-```
-
-```python
-import requests
-headers = {
-  'Authorization': 'Bearer YourAccessToken',
-  'Content-Type': 'application/x-www-form-urlencoded',
-  'Accept': 'application/json'
-}
-
-r = requests.put('https://api.mod.io/v1/games/{game-id}/team/{access-id}', params={
-
-}, headers = headers)
-
-print r.json()
-```
-
-```java
-URL obj = new URL("https://api.mod.io/v1/games/{game-id}/team/{access-id}");
-HttpURLConnection con = (HttpURLConnection) obj.openConnection();
-con.setRequestMethod("PUT");
-int responseCode = con.getResponseCode();
-BufferedReader in = new BufferedReader(
-    new InputStreamReader(con.getInputStream()));
-String inputLine;
-StringBuffer response = new StringBuffer();
-while ((inputLine = in.readLine()) != null) {
-    response.append(inputLine);
-}
-in.close();
-System.out.println(response.toString());
-```
-`PUT /games/{game-id}/team/{access-id}`
-
-Update the details of a user who is currently a part of the specified game team.
-     
-     Parameter|Type|Required|Description
-     ---|---|---|---|
-     level|integer||The level of permissions you want to give to the user.<br><br>*Fields Options:*<br>__1__ = Moderator (can moderate content submitted)<br>__4__ = Financials (read only access to the control panel to view financial reports)<br>__8__ = Administrator (full access, including editing the profile and team)
-     position|string||The title you wish to apply to the member within your team.
-
-
-> Example responses
-
-```json
-{
-  "code": "201",
-  "message": "You have successfully updated the specified team members details."
-}
-```
-<h3 id="Update-Game-Team-Member-responses">Responses</h3>
-
-Status|Meaning|Description|Response Schema
----|---|---|---|
-200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)|OK|[Message Object](#message-object)
-
-<aside class="warning">
-To perform this operation, you must be authenticated by means of one of the following methods:
-oauth2 ( Scopes: write )
-</aside>
-
-
-## Delete Game Team Member
-
-> Code samples
-
-```shell
-# You can also use wget
-curl -X DELETE https://api.mod.io/v1/games/{game-id}/team/{access-id} \
-  -H 'Authorization: Bearer YourAccessToken' \
-  -H 'Content-Type: application/x-www-form-urlencoded' \
-  -H 'Accept: application/json'
-
-```
-
-```http
-DELETE https://api.mod.io/v1/games/{game-id}/team/{access-id} HTTP/1.1
-Host: api.mod.io
-
-Accept: application/json
-Authorization: Bearer YourAccessToken
-Content-Type: application/x-www-form-urlencoded
-
-
-```
-
-```javascript
-var headers = {
-  'Authorization':'Bearer YourAccessToken',
-  'Content-Type':'application/x-www-form-urlencoded',
-  'Accept':'application/json'
-
-};
-
-$.ajax({
-  url: 'https://api.mod.io/v1/games/{game-id}/team/{access-id}',
-  method: 'delete',
-
-  headers: headers,
-  success: function(data) {
-    console.log(JSON.stringify(data));
-  }
-})
-```
-
-```javascript--nodejs
-const request = require('node-fetch');
-
-const headers = {
-  'Authorization':'Bearer YourAccessToken',
-  'Content-Type':'application/x-www-form-urlencoded',
-  'Accept':'application/json'
-
-};
-
-fetch('https://api.mod.io/v1/games/{game-id}/team/{access-id}',
-{
-  method: 'DELETE',
-
-  headers: headers
-})
-.then(function(res) {
-    return res.json();
-}).then(function(body) {
-    console.log(body);
-});
-```
-
-```ruby
-require 'rest-client'
-require 'json'
-
-headers = {
-  'Authorization' => 'Bearer YourAccessToken',
-  'Content-Type' => 'application/x-www-form-urlencoded',
-  'Accept' => 'application/json'
-}
-
-result = RestClient.delete 'https://api.mod.io/v1/games/{game-id}/team/{access-id}',
-  params: {
-  }, headers: headers
-
-
-p JSON.parse(result)
-```
-
-```python
-import requests
-headers = {
-  'Authorization': 'Bearer YourAccessToken',
-  'Content-Type': 'application/x-www-form-urlencoded',
-  'Accept': 'application/json'
-}
-
-r = requests.delete('https://api.mod.io/v1/games/{game-id}/team/{access-id}', params={
-
-}, headers = headers)
-
-print r.json()
-```
-
-```java
-URL obj = new URL("https://api.mod.io/v1/games/{game-id}/team/{access-id}");
-HttpURLConnection con = (HttpURLConnection) obj.openConnection();
-con.setRequestMethod("DELETE");
-int responseCode = con.getResponseCode();
-BufferedReader in = new BufferedReader(
-    new InputStreamReader(con.getInputStream()));
-String inputLine;
-StringBuffer response = new StringBuffer();
-while ((inputLine = in.readLine()) != null) {
-    response.append(inputLine);
-}
-in.close();
-System.out.println(response.toString());
-```
-`DELETE /games/{game-id}/team/{access-id}`
-
-Remove a member from a game team. This will revoke their access rights if they are not the original creator of the resource.
-
-
-> Example responses
-
-```json
- "204 No Content" 
-```
-<h3 id="Delete-Game-Team-Member-responses">Responses</h3>
-
-Status|Meaning|Description|Response Schema
----|---|---|---|
-204|[No Content](https://tools.ietf.org/html/rfc7231#section-6.3.5)|No Content|None
-
-<aside class="warning">
-To perform this operation, you must be authenticated by means of one of the following methods:
-oauth2 ( Scopes: write )
-</aside>
-
-
 # Mods
 
 ## Get All Mods
@@ -3137,616 +2248,7 @@ oauth2 ( Scopes: write )
 </aside>
 
 
-## Add Mod Media
-
-> Code samples
-
-```shell
-# You can also use wget
-curl -X POST https://api.mod.io/v1/games/{game-id}/mods/{mod-id}/media \
-  -H 'Authorization: Bearer YourAccessToken' \
-  -H 'Content-Type: multipart/form-data' \
-  -H 'Accept: application/json'
-
-```
-
-```http
-POST https://api.mod.io/v1/games/{game-id}/mods/{mod-id}/media HTTP/1.1
-Host: api.mod.io
-
-Accept: application/json
-Authorization: Bearer YourAccessToken
-Content-Type: multipart/form-data
-
-
-```
-
-```javascript
-var headers = {
-  'Authorization':'Bearer YourAccessToken',
-  'Content-Type':'multipart/form-data',
-  'Accept':'application/json'
-
-};
-
-$.ajax({
-  url: 'https://api.mod.io/v1/games/{game-id}/mods/{mod-id}/media',
-  method: 'post',
-
-  headers: headers,
-  success: function(data) {
-    console.log(JSON.stringify(data));
-  }
-})
-```
-
-```javascript--nodejs
-const request = require('node-fetch');
-
-const headers = {
-  'Authorization':'Bearer YourAccessToken',
-  'Content-Type':'multipart/form-data',
-  'Accept':'application/json'
-
-};
-
-fetch('https://api.mod.io/v1/games/{game-id}/mods/{mod-id}/media',
-{
-  method: 'POST',
-
-  headers: headers
-})
-.then(function(res) {
-    return res.json();
-}).then(function(body) {
-    console.log(body);
-});
-```
-
-```ruby
-require 'rest-client'
-require 'json'
-
-headers = {
-  'Authorization' => 'Bearer YourAccessToken',
-  'Content-Type' => 'multipart/form-data',
-  'Accept' => 'application/json'
-}
-
-result = RestClient.post 'https://api.mod.io/v1/games/{game-id}/mods/{mod-id}/media',
-  params: {
-  }, headers: headers
-
-
-p JSON.parse(result)
-```
-
-```python
-import requests
-headers = {
-  'Authorization': 'Bearer YourAccessToken',
-  'Content-Type': 'multipart/form-data',
-  'Accept': 'application/json'
-}
-
-r = requests.post('https://api.mod.io/v1/games/{game-id}/mods/{mod-id}/media', params={
-
-}, headers = headers)
-
-print r.json()
-```
-
-```java
-URL obj = new URL("https://api.mod.io/v1/games/{game-id}/mods/{mod-id}/media");
-HttpURLConnection con = (HttpURLConnection) obj.openConnection();
-con.setRequestMethod("POST");
-int responseCode = con.getResponseCode();
-BufferedReader in = new BufferedReader(
-    new InputStreamReader(con.getInputStream()));
-String inputLine;
-StringBuffer response = new StringBuffer();
-while ((inputLine = in.readLine()) != null) {
-    response.append(inputLine);
-}
-in.close();
-System.out.println(response.toString());
-```
-`POST /games/{game-id}/mods/{mod-id}/media`
-
-This endpoint is very flexible and will process any images posted to the endpoint regardless of their body name providing it is a valid image. The request `Content-Type` header __must__ be `multipart/form-data` to submit image files.
-     
-     Parameter|Type|Required|Description
-     ---|---|---|---|
-     logo|file||Image file which will represent your new mod logo. Must be gif, jpg, jpeg or png format and cannot exceed 8MB in filesize. Dimensions must be at least 640x360 and is highly recommended that you supply a high resolution image in 16 / 9 resolution. mod.io will use this image to make three thumbnails for the dimensions 320x180, 640x360 and 1280x720.
-     images|zip||Zip archive of images to upload. Only valid gif, jpg, jpeg or png binary images within the zip file will be processed. The filename __must be images.zip__ if you are submitting an archive of images as any other name will be ignored. Alternatively you can POST one or more binary file images to this endpoint as their original file types without any compression.
-     youtube|array||Full Youtube link(s) you want to add - example 'https://www.youtube.com/watch?v=IGVZOLV9SPo'
-     sketchfab|array||Full Sketchfab link(s) you want to add - example 'https://sketchfab.com/models/71f04e390ff54e5f8d9a51b4e1caab7e'
-
-
-> Example responses
-
-```json
-{
-  "code": "201",
-  "message": "You have successfully added new media to the specified."
-}
-```
-<h3 id="Add-Mod-Media-responses">Responses</h3>
-
-Status|Meaning|Description|Response Schema
----|---|---|---|
-201|[Created](https://tools.ietf.org/html/rfc7231#section-6.3.2)|Resource Created|[Message Object](#message-object)
-
-### Response Headers
-
-Status|Header|Type|Format|Description
----|---|---|---|---|
-201|Location|string||URL to newly created resource
-
-<aside class="warning">
-To perform this operation, you must be authenticated by means of one of the following methods:
-oauth2 ( Scopes: write )
-</aside>
-
-
-## Delete Mod Media
-
-> Code samples
-
-```shell
-# You can also use wget
-curl -X DELETE https://api.mod.io/v1/games/{game-id}/mods/{mod-id}/media \
-  -H 'Authorization: Bearer YourAccessToken' \
-  -H 'Content-Type: application/x-www-form-urlencoded' \
-  -H 'Accept: application/json'
-
-```
-
-```http
-DELETE https://api.mod.io/v1/games/{game-id}/mods/{mod-id}/media HTTP/1.1
-Host: api.mod.io
-
-Accept: application/json
-Authorization: Bearer YourAccessToken
-Content-Type: application/x-www-form-urlencoded
-
-
-```
-
-```javascript
-var headers = {
-  'Authorization':'Bearer YourAccessToken',
-  'Content-Type':'application/x-www-form-urlencoded',
-  'Accept':'application/json'
-
-};
-
-$.ajax({
-  url: 'https://api.mod.io/v1/games/{game-id}/mods/{mod-id}/media',
-  method: 'delete',
-
-  headers: headers,
-  success: function(data) {
-    console.log(JSON.stringify(data));
-  }
-})
-```
-
-```javascript--nodejs
-const request = require('node-fetch');
-
-const headers = {
-  'Authorization':'Bearer YourAccessToken',
-  'Content-Type':'application/x-www-form-urlencoded',
-  'Accept':'application/json'
-
-};
-
-fetch('https://api.mod.io/v1/games/{game-id}/mods/{mod-id}/media',
-{
-  method: 'DELETE',
-
-  headers: headers
-})
-.then(function(res) {
-    return res.json();
-}).then(function(body) {
-    console.log(body);
-});
-```
-
-```ruby
-require 'rest-client'
-require 'json'
-
-headers = {
-  'Authorization' => 'Bearer YourAccessToken',
-  'Content-Type' => 'application/x-www-form-urlencoded',
-  'Accept' => 'application/json'
-}
-
-result = RestClient.delete 'https://api.mod.io/v1/games/{game-id}/mods/{mod-id}/media',
-  params: {
-  }, headers: headers
-
-
-p JSON.parse(result)
-```
-
-```python
-import requests
-headers = {
-  'Authorization': 'Bearer YourAccessToken',
-  'Content-Type': 'application/x-www-form-urlencoded',
-  'Accept': 'application/json'
-}
-
-r = requests.delete('https://api.mod.io/v1/games/{game-id}/mods/{mod-id}/media', params={
-
-}, headers = headers)
-
-print r.json()
-```
-
-```java
-URL obj = new URL("https://api.mod.io/v1/games/{game-id}/mods/{mod-id}/media");
-HttpURLConnection con = (HttpURLConnection) obj.openConnection();
-con.setRequestMethod("DELETE");
-int responseCode = con.getResponseCode();
-BufferedReader in = new BufferedReader(
-    new InputStreamReader(con.getInputStream()));
-String inputLine;
-StringBuffer response = new StringBuffer();
-while ((inputLine = in.readLine()) != null) {
-    response.append(inputLine);
-}
-in.close();
-System.out.println(response.toString());
-```
-`DELETE /games/{game-id}/mods/{mod-id}/media`
-
-Delete images, sketchfab or youtube links from a mod profile which if successful will return `204 No Content`. This endpoint allows you to delete images as well as YouTube & Sketchfab links.
-     
-     Parameter|Type|Required|Description
-     ---|---|---|---|
-     images|array||Filename's of the image(s) you want to delete - example 'gameplay2.jpg'.
-     youtube|array||Full Youtube link(s) you want to delete - example 'https://www.youtube.com/watch?v=IGVZOLV9SPo'.
-     sketchfab|array||Full Sketchfab link(s) you want to delete - example 'https://sketchfab.com/models/71f04e390ff54e5f8d9a51b4e1caab7e'.
-     *     
-
-
-> Example responses
-
-```json
- "204 No Content" 
-```
-<h3 id="Delete-Mod-Media-responses">Responses</h3>
-
-Status|Meaning|Description|Response Schema
----|---|---|---|
-204|[No Content](https://tools.ietf.org/html/rfc7231#section-6.3.5)|No Content|None
-
-<aside class="warning">
-To perform this operation, you must be authenticated by means of one of the following methods:
-oauth2 ( Scopes: write )
-</aside>
-
-
-## Get Mod Activity
-
-> Code samples
-
-```shell
-# You can also use wget
-curl -X GET https://api.mod.io/v1/games/{game-id}/mods/{mod-id}/activity?api_key=YourApiKey \
-  -H 'Accept: application/json'
-
-```
-
-```http
-GET https://api.mod.io/v1/games/{game-id}/mods/{mod-id}/activity?api_key=YourApiKey HTTP/1.1
-Host: api.mod.io
-
-Accept: application/json
-
-```
-
-```javascript
-var headers = {
-  'Accept':'application/json'
-
-};
-
-$.ajax({
-  url: 'https://api.mod.io/v1/games/{game-id}/mods/{mod-id}/activity',
-  method: 'get',
-  data: '?api_key=YourApiKey',
-  headers: headers,
-  success: function(data) {
-    console.log(JSON.stringify(data));
-  }
-})
-```
-
-```javascript--nodejs
-const request = require('node-fetch');
-
-const headers = {
-  'Accept':'application/json'
-
-};
-
-fetch('https://api.mod.io/v1/games/{game-id}/mods/{mod-id}/activity?api_key=YourApiKey',
-{
-  method: 'GET',
-
-  headers: headers
-})
-.then(function(res) {
-    return res.json();
-}).then(function(body) {
-    console.log(body);
-});
-```
-
-```ruby
-require 'rest-client'
-require 'json'
-
-headers = {
-  'Accept' => 'application/json'
-}
-
-result = RestClient.get 'https://api.mod.io/v1/games/{game-id}/mods/{mod-id}/activity',
-  params: {
-  'api_key' => 'string'
-}, headers: headers
-
-
-p JSON.parse(result)
-```
-
-```python
-import requests
-headers = {
-  'Accept': 'application/json'
-}
-
-r = requests.get('https://api.mod.io/v1/games/{game-id}/mods/{mod-id}/activity', params={
-  'api_key': 'YourApiKey'
-}, headers = headers)
-
-print r.json()
-```
-
-```java
-URL obj = new URL("https://api.mod.io/v1/games/{game-id}/mods/{mod-id}/activity?api_key=YourApiKey");
-HttpURLConnection con = (HttpURLConnection) obj.openConnection();
-con.setRequestMethod("GET");
-int responseCode = con.getResponseCode();
-BufferedReader in = new BufferedReader(
-    new InputStreamReader(con.getInputStream()));
-String inputLine;
-StringBuffer response = new StringBuffer();
-while ((inputLine = in.readLine()) != null) {
-    response.append(inputLine);
-}
-in.close();
-System.out.println(response.toString());
-```
-`GET /games/{game-id}/mods/{mod-id}/activity`
-
-Retrieve activity log for a mod, showing changes made to the resource. Successful request will return an array of [Mod Activity Objects](https://docs.mod.io/#get-mod-activity-2). To make your requests as specific to your needs as possible it's highly recommended reading over our [filtering documentation](https://docs.mod.io/#filtering) if it will help you with consuming this endpoint. This endpoint by default sorts by `id` in descending order.
-     
-     Filter|Type|Description
-     ---|---|---
-     id|integer(int32)|Unique id of the activity object.
-     mod|integer(int32)|Unique id of the parent mod.
-     user|integer(int32)|Unique id of the user who triggered the action.
-     dateup|integer(int32)|Unix timestamp of date updated.
-     event|string|Type of change that occurred.<br><br>*Field Options*<br>__MOD_UPDATE__ - Update event<br>__MODFILE_UPDATE__ = Primary file changed<br>__MOD_VISIBILITY_CHANGE__ = Mod has been set to live, or hidden.
-     latest|boolean|_Default value is true_. Returns only the latest unique events for each mod.
-     subscribed|boolean|__OAuth 2 Required__. Default value is _false_. Returns only the events the _authenticated user_ is subscribed to.
-
-
-> Example responses
-
-```json
-{
-  "data": [
-    {
-      "id": 13,
-      "mod": 13,
-      "user": 13,
-      "dateup": 1499846132,
-      "event": "MOD_UPDATE",
-      "changes": [
-        {
-          "field": "homepage",
-          "before": "https://www.roguehdpack.com/",
-          "after": "https://rogue-knight.mod.io/rogue-hd-pack"
-        }
-      ]
-    },
-    {
-        ...
-    }
-  ],
-  "cursor_id": 60,
-  "prev_id": 30,
-  "next_id": 160,
-  "result_count": 100
-}
-```
-<h3 id="Get-Mod-Activity-responses">Responses</h3>
-
-Status|Meaning|Description|Response Schema
----|---|---|---|
-200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)|Successful Request|[Get Mod Activity ](#schemaget_mod_activity)
-
-<aside class="warning">
-To perform this operation, you must be authenticated by means of one of the following methods:
-apiKey, oauth2 ( Scopes: read )
-</aside>
-
-
-## Get All Mod Activity By Game
-
-> Code samples
-
-```shell
-# You can also use wget
-curl -X GET https://api.mod.io/v1/games/{game-id}/mods/activity?api_key=YourApiKey \
-  -H 'Accept: application/json'
-
-```
-
-```http
-GET https://api.mod.io/v1/games/{game-id}/mods/activity?api_key=YourApiKey HTTP/1.1
-Host: api.mod.io
-
-Accept: application/json
-
-```
-
-```javascript
-var headers = {
-  'Accept':'application/json'
-
-};
-
-$.ajax({
-  url: 'https://api.mod.io/v1/games/{game-id}/mods/activity',
-  method: 'get',
-  data: '?api_key=YourApiKey',
-  headers: headers,
-  success: function(data) {
-    console.log(JSON.stringify(data));
-  }
-})
-```
-
-```javascript--nodejs
-const request = require('node-fetch');
-
-const headers = {
-  'Accept':'application/json'
-
-};
-
-fetch('https://api.mod.io/v1/games/{game-id}/mods/activity?api_key=YourApiKey',
-{
-  method: 'GET',
-
-  headers: headers
-})
-.then(function(res) {
-    return res.json();
-}).then(function(body) {
-    console.log(body);
-});
-```
-
-```ruby
-require 'rest-client'
-require 'json'
-
-headers = {
-  'Accept' => 'application/json'
-}
-
-result = RestClient.get 'https://api.mod.io/v1/games/{game-id}/mods/activity',
-  params: {
-  'api_key' => 'string'
-}, headers: headers
-
-
-p JSON.parse(result)
-```
-
-```python
-import requests
-headers = {
-  'Accept': 'application/json'
-}
-
-r = requests.get('https://api.mod.io/v1/games/{game-id}/mods/activity', params={
-  'api_key': 'YourApiKey'
-}, headers = headers)
-
-print r.json()
-```
-
-```java
-URL obj = new URL("https://api.mod.io/v1/games/{game-id}/mods/activity?api_key=YourApiKey");
-HttpURLConnection con = (HttpURLConnection) obj.openConnection();
-con.setRequestMethod("GET");
-int responseCode = con.getResponseCode();
-BufferedReader in = new BufferedReader(
-    new InputStreamReader(con.getInputStream()));
-String inputLine;
-StringBuffer response = new StringBuffer();
-while ((inputLine = in.readLine()) != null) {
-    response.append(inputLine);
-}
-in.close();
-System.out.println(response.toString());
-```
-`GET /games/{game-id}/mods/activity`
-
-Retrieve all mod activity for the corresponding game. Successful request will return an array of [Mod Activity Objects](https://docs.mod.io/#get-mod-activity-2). To make your requests as specific to your needs as possible it's highly recommended reading over our [filtering documentation](https://docs.mod.io/#filtering) if it will help you with consuming this endpoint. This endpoint by default sorts by `id` in descending order.
-     
-     Filter|Type|Description
-     ---|---|---
-     id|integer(int32)|Unique id of the activity object.
-     mod|integer(int32)|Unique id of the parent mod.
-     user|integer(int32)|Unique id of the user who triggered the action.
-     dateup|integer(int32)|Unix timestamp of date updated.
-     event|string|Type of change that occurred. <br><br>*Field Options*<br>__MOD_UPDATE__ - Update event<br>__MODFILE_UPDATE__ = Primary file changed<br>__MOD_VISIBILITY_CHANGE__ = Mod has been set to live, or hidden.
-     latest|boolean|_Default value is true_. Returns only the latest unique events for each mod.
-     subscribed|boolean|__OAuth 2 Required__. Default value is _false_. Returns only the events the _authenticated user_ is subscribed to.
-
-
-> Example responses
-
-```json
-{
-  "data": [
-    {
-      "id": 13,
-      "mod": 13,
-      "user": 13,
-      "dateup": 1499846132,
-      "event": "MOD_UPDATE",
-      "changes": [
-        {
-          "field": "homepage",
-          "before": "https://www.roguehdpack.com/",
-          "after": "https://rogue-knight.mod.io/rogue-hd-pack"
-        }
-      ]
-    },
-    {
-        ...
-    }
-  ],
-  "cursor_id": 60,
-  "prev_id": 30,
-  "next_id": 160,
-  "result_count": 100
-}
-```
-<h3 id="Get-All-Mod-Activity-By-Game-responses">Responses</h3>
-
-Status|Meaning|Description|Response Schema
----|---|---|---|
-200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)|Successful Request|[Get Mod Activity ](#schemaget_mod_activity)
-
-<aside class="warning">
-To perform this operation, you must be authenticated by means of one of the following methods:
-apiKey, oauth2 ( Scopes: read )
-</aside>
-
+# Files
 
 ## Get All Mod Files
 
@@ -4370,6 +2872,1201 @@ oauth2 ( Scopes: write )
 </aside>
 
 
+# Media
+
+## Add Game Media
+
+> Code samples
+
+```shell
+# You can also use wget
+curl -X POST https://api.mod.io/v1/games/{game-id}/media \
+  -H 'Authorization: Bearer YourAccessToken' \
+  -H 'Content-Type: multipart/form-data' \
+  -H 'Accept: application/json'
+
+```
+
+```http
+POST https://api.mod.io/v1/games/{game-id}/media HTTP/1.1
+Host: api.mod.io
+
+Accept: application/json
+Authorization: Bearer YourAccessToken
+Content-Type: multipart/form-data
+
+
+```
+
+```javascript
+var headers = {
+  'Authorization':'Bearer YourAccessToken',
+  'Content-Type':'multipart/form-data',
+  'Accept':'application/json'
+
+};
+
+$.ajax({
+  url: 'https://api.mod.io/v1/games/{game-id}/media',
+  method: 'post',
+
+  headers: headers,
+  success: function(data) {
+    console.log(JSON.stringify(data));
+  }
+})
+```
+
+```javascript--nodejs
+const request = require('node-fetch');
+
+const headers = {
+  'Authorization':'Bearer YourAccessToken',
+  'Content-Type':'multipart/form-data',
+  'Accept':'application/json'
+
+};
+
+fetch('https://api.mod.io/v1/games/{game-id}/media',
+{
+  method: 'POST',
+
+  headers: headers
+})
+.then(function(res) {
+    return res.json();
+}).then(function(body) {
+    console.log(body);
+});
+```
+
+```ruby
+require 'rest-client'
+require 'json'
+
+headers = {
+  'Authorization' => 'Bearer YourAccessToken',
+  'Content-Type' => 'multipart/form-data',
+  'Accept' => 'application/json'
+}
+
+result = RestClient.post 'https://api.mod.io/v1/games/{game-id}/media',
+  params: {
+  }, headers: headers
+
+
+p JSON.parse(result)
+```
+
+```python
+import requests
+headers = {
+  'Authorization': 'Bearer YourAccessToken',
+  'Content-Type': 'multipart/form-data',
+  'Accept': 'application/json'
+}
+
+r = requests.post('https://api.mod.io/v1/games/{game-id}/media', params={
+
+}, headers = headers)
+
+print r.json()
+```
+
+```java
+URL obj = new URL("https://api.mod.io/v1/games/{game-id}/media");
+HttpURLConnection con = (HttpURLConnection) obj.openConnection();
+con.setRequestMethod("POST");
+int responseCode = con.getResponseCode();
+BufferedReader in = new BufferedReader(
+    new InputStreamReader(con.getInputStream()));
+String inputLine;
+StringBuffer response = new StringBuffer();
+while ((inputLine = in.readLine()) != null) {
+    response.append(inputLine);
+}
+in.close();
+System.out.println(response.toString());
+```
+`POST /games/{game-id}/media`
+
+Upload new media to a game. Any request you make to this endpoint *should* contain a binary file for one of the following fields below.
+     
+     Parameter|Type|Required|Description
+     ---|---|---|---|
+     logo|file||Image file which will represent your new mod logo. Must be gif, jpg, jpeg or png format and cannot exceed 8MB in filesize. Dimensions must be at least 640x360 and is highly recommended that you supply a high resolution image in 16 / 9 resolution. mod.io will use this image to make three thumbnails for the dimensions 320x180, 640x360 and 1280x720.
+     icon|file||Binary image file which will represent your new game icon. Must be minimum 64x64px dimensions and gif, jpg, jpeg or png format and cannot exceed 1MB in filesize.
+     header|file||Binary image file which will represent your new game header. Must be gif, jpg, jpeg or png format and cannot exceed 256KB in filesize.
+
+
+> Example responses
+
+```json
+{
+  "code": "200",
+  "message": "You have successfully added new media to the specified game profile."
+}
+```
+<h3 id="Add-Game-Media-responses">Responses</h3>
+
+Status|Meaning|Description|Response Schema
+---|---|---|---|
+200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)|Media Successfully uploaded|[Message Object](#message-object)
+
+<aside class="warning">
+To perform this operation, you must be authenticated by means of one of the following methods:
+oauth2 ( Scopes: write )
+</aside>
+
+
+## Add Mod Media
+
+> Code samples
+
+```shell
+# You can also use wget
+curl -X POST https://api.mod.io/v1/games/{game-id}/mods/{mod-id}/media \
+  -H 'Authorization: Bearer YourAccessToken' \
+  -H 'Content-Type: multipart/form-data' \
+  -H 'Accept: application/json'
+
+```
+
+```http
+POST https://api.mod.io/v1/games/{game-id}/mods/{mod-id}/media HTTP/1.1
+Host: api.mod.io
+
+Accept: application/json
+Authorization: Bearer YourAccessToken
+Content-Type: multipart/form-data
+
+
+```
+
+```javascript
+var headers = {
+  'Authorization':'Bearer YourAccessToken',
+  'Content-Type':'multipart/form-data',
+  'Accept':'application/json'
+
+};
+
+$.ajax({
+  url: 'https://api.mod.io/v1/games/{game-id}/mods/{mod-id}/media',
+  method: 'post',
+
+  headers: headers,
+  success: function(data) {
+    console.log(JSON.stringify(data));
+  }
+})
+```
+
+```javascript--nodejs
+const request = require('node-fetch');
+
+const headers = {
+  'Authorization':'Bearer YourAccessToken',
+  'Content-Type':'multipart/form-data',
+  'Accept':'application/json'
+
+};
+
+fetch('https://api.mod.io/v1/games/{game-id}/mods/{mod-id}/media',
+{
+  method: 'POST',
+
+  headers: headers
+})
+.then(function(res) {
+    return res.json();
+}).then(function(body) {
+    console.log(body);
+});
+```
+
+```ruby
+require 'rest-client'
+require 'json'
+
+headers = {
+  'Authorization' => 'Bearer YourAccessToken',
+  'Content-Type' => 'multipart/form-data',
+  'Accept' => 'application/json'
+}
+
+result = RestClient.post 'https://api.mod.io/v1/games/{game-id}/mods/{mod-id}/media',
+  params: {
+  }, headers: headers
+
+
+p JSON.parse(result)
+```
+
+```python
+import requests
+headers = {
+  'Authorization': 'Bearer YourAccessToken',
+  'Content-Type': 'multipart/form-data',
+  'Accept': 'application/json'
+}
+
+r = requests.post('https://api.mod.io/v1/games/{game-id}/mods/{mod-id}/media', params={
+
+}, headers = headers)
+
+print r.json()
+```
+
+```java
+URL obj = new URL("https://api.mod.io/v1/games/{game-id}/mods/{mod-id}/media");
+HttpURLConnection con = (HttpURLConnection) obj.openConnection();
+con.setRequestMethod("POST");
+int responseCode = con.getResponseCode();
+BufferedReader in = new BufferedReader(
+    new InputStreamReader(con.getInputStream()));
+String inputLine;
+StringBuffer response = new StringBuffer();
+while ((inputLine = in.readLine()) != null) {
+    response.append(inputLine);
+}
+in.close();
+System.out.println(response.toString());
+```
+`POST /games/{game-id}/mods/{mod-id}/media`
+
+This endpoint is very flexible and will process any images posted to the endpoint regardless of their body name providing it is a valid image. The request `Content-Type` header __must__ be `multipart/form-data` to submit image files.
+     
+     Parameter|Type|Required|Description
+     ---|---|---|---|
+     logo|file||Image file which will represent your new mod logo. Must be gif, jpg, jpeg or png format and cannot exceed 8MB in filesize. Dimensions must be at least 640x360 and is highly recommended that you supply a high resolution image in 16 / 9 resolution. mod.io will use this image to make three thumbnails for the dimensions 320x180, 640x360 and 1280x720.
+     images|zip||Zip archive of images to upload. Only valid gif, jpg, jpeg or png binary images within the zip file will be processed. The filename __must be images.zip__ if you are submitting an archive of images as any other name will be ignored. Alternatively you can POST one or more binary file images to this endpoint as their original file types without any compression.
+     youtube|array||Full Youtube link(s) you want to add - example 'https://www.youtube.com/watch?v=IGVZOLV9SPo'
+     sketchfab|array||Full Sketchfab link(s) you want to add - example 'https://sketchfab.com/models/71f04e390ff54e5f8d9a51b4e1caab7e'
+
+
+> Example responses
+
+```json
+{
+  "code": "201",
+  "message": "You have successfully added new media to the specified."
+}
+```
+<h3 id="Add-Mod-Media-responses">Responses</h3>
+
+Status|Meaning|Description|Response Schema
+---|---|---|---|
+201|[Created](https://tools.ietf.org/html/rfc7231#section-6.3.2)|Resource Created|[Message Object](#message-object)
+
+### Response Headers
+
+Status|Header|Type|Format|Description
+---|---|---|---|---|
+201|Location|string||URL to newly created resource
+
+<aside class="warning">
+To perform this operation, you must be authenticated by means of one of the following methods:
+oauth2 ( Scopes: write )
+</aside>
+
+
+## Delete Mod Media
+
+> Code samples
+
+```shell
+# You can also use wget
+curl -X DELETE https://api.mod.io/v1/games/{game-id}/mods/{mod-id}/media \
+  -H 'Authorization: Bearer YourAccessToken' \
+  -H 'Content-Type: application/x-www-form-urlencoded' \
+  -H 'Accept: application/json'
+
+```
+
+```http
+DELETE https://api.mod.io/v1/games/{game-id}/mods/{mod-id}/media HTTP/1.1
+Host: api.mod.io
+
+Accept: application/json
+Authorization: Bearer YourAccessToken
+Content-Type: application/x-www-form-urlencoded
+
+
+```
+
+```javascript
+var headers = {
+  'Authorization':'Bearer YourAccessToken',
+  'Content-Type':'application/x-www-form-urlencoded',
+  'Accept':'application/json'
+
+};
+
+$.ajax({
+  url: 'https://api.mod.io/v1/games/{game-id}/mods/{mod-id}/media',
+  method: 'delete',
+
+  headers: headers,
+  success: function(data) {
+    console.log(JSON.stringify(data));
+  }
+})
+```
+
+```javascript--nodejs
+const request = require('node-fetch');
+
+const headers = {
+  'Authorization':'Bearer YourAccessToken',
+  'Content-Type':'application/x-www-form-urlencoded',
+  'Accept':'application/json'
+
+};
+
+fetch('https://api.mod.io/v1/games/{game-id}/mods/{mod-id}/media',
+{
+  method: 'DELETE',
+
+  headers: headers
+})
+.then(function(res) {
+    return res.json();
+}).then(function(body) {
+    console.log(body);
+});
+```
+
+```ruby
+require 'rest-client'
+require 'json'
+
+headers = {
+  'Authorization' => 'Bearer YourAccessToken',
+  'Content-Type' => 'application/x-www-form-urlencoded',
+  'Accept' => 'application/json'
+}
+
+result = RestClient.delete 'https://api.mod.io/v1/games/{game-id}/mods/{mod-id}/media',
+  params: {
+  }, headers: headers
+
+
+p JSON.parse(result)
+```
+
+```python
+import requests
+headers = {
+  'Authorization': 'Bearer YourAccessToken',
+  'Content-Type': 'application/x-www-form-urlencoded',
+  'Accept': 'application/json'
+}
+
+r = requests.delete('https://api.mod.io/v1/games/{game-id}/mods/{mod-id}/media', params={
+
+}, headers = headers)
+
+print r.json()
+```
+
+```java
+URL obj = new URL("https://api.mod.io/v1/games/{game-id}/mods/{mod-id}/media");
+HttpURLConnection con = (HttpURLConnection) obj.openConnection();
+con.setRequestMethod("DELETE");
+int responseCode = con.getResponseCode();
+BufferedReader in = new BufferedReader(
+    new InputStreamReader(con.getInputStream()));
+String inputLine;
+StringBuffer response = new StringBuffer();
+while ((inputLine = in.readLine()) != null) {
+    response.append(inputLine);
+}
+in.close();
+System.out.println(response.toString());
+```
+`DELETE /games/{game-id}/mods/{mod-id}/media`
+
+Delete images, sketchfab or youtube links from a mod profile which if successful will return `204 No Content`. This endpoint allows you to delete images as well as YouTube & Sketchfab links.
+     
+     Parameter|Type|Required|Description
+     ---|---|---|---|
+     images|array||Filename's of the image(s) you want to delete - example 'gameplay2.jpg'.
+     youtube|array||Full Youtube link(s) you want to delete - example 'https://www.youtube.com/watch?v=IGVZOLV9SPo'.
+     sketchfab|array||Full Sketchfab link(s) you want to delete - example 'https://sketchfab.com/models/71f04e390ff54e5f8d9a51b4e1caab7e'.
+     *     
+
+
+> Example responses
+
+```json
+ "204 No Content" 
+```
+<h3 id="Delete-Mod-Media-responses">Responses</h3>
+
+Status|Meaning|Description|Response Schema
+---|---|---|---|
+204|[No Content](https://tools.ietf.org/html/rfc7231#section-6.3.5)|No Content|None
+
+<aside class="warning">
+To perform this operation, you must be authenticated by means of one of the following methods:
+oauth2 ( Scopes: write )
+</aside>
+
+
+# Subscribe
+
+## Subscribe To Mod
+
+> Code samples
+
+```shell
+# You can also use wget
+curl -X POST https://api.mod.io/v1/games/{game-id}/mods/{mod-id}/subscribe \
+  -H 'Authorization: Bearer YourAccessToken' \
+  -H 'Content-Type: application/x-www-form-urlencoded' \
+  -H 'Accept: application/json'
+
+```
+
+```http
+POST https://api.mod.io/v1/games/{game-id}/mods/{mod-id}/subscribe HTTP/1.1
+Host: api.mod.io
+
+Accept: application/json
+Authorization: Bearer YourAccessToken
+Content-Type: application/x-www-form-urlencoded
+
+
+```
+
+```javascript
+var headers = {
+  'Authorization':'Bearer YourAccessToken',
+  'Content-Type':'application/x-www-form-urlencoded',
+  'Accept':'application/json'
+
+};
+
+$.ajax({
+  url: 'https://api.mod.io/v1/games/{game-id}/mods/{mod-id}/subscribe',
+  method: 'post',
+
+  headers: headers,
+  success: function(data) {
+    console.log(JSON.stringify(data));
+  }
+})
+```
+
+```javascript--nodejs
+const request = require('node-fetch');
+
+const headers = {
+  'Authorization':'Bearer YourAccessToken',
+  'Content-Type':'application/x-www-form-urlencoded',
+  'Accept':'application/json'
+
+};
+
+fetch('https://api.mod.io/v1/games/{game-id}/mods/{mod-id}/subscribe',
+{
+  method: 'POST',
+
+  headers: headers
+})
+.then(function(res) {
+    return res.json();
+}).then(function(body) {
+    console.log(body);
+});
+```
+
+```ruby
+require 'rest-client'
+require 'json'
+
+headers = {
+  'Authorization' => 'Bearer YourAccessToken',
+  'Content-Type' => 'application/x-www-form-urlencoded',
+  'Accept' => 'application/json'
+}
+
+result = RestClient.post 'https://api.mod.io/v1/games/{game-id}/mods/{mod-id}/subscribe',
+  params: {
+  }, headers: headers
+
+
+p JSON.parse(result)
+```
+
+```python
+import requests
+headers = {
+  'Authorization': 'Bearer YourAccessToken',
+  'Content-Type': 'application/x-www-form-urlencoded',
+  'Accept': 'application/json'
+}
+
+r = requests.post('https://api.mod.io/v1/games/{game-id}/mods/{mod-id}/subscribe', params={
+
+}, headers = headers)
+
+print r.json()
+```
+
+```java
+URL obj = new URL("https://api.mod.io/v1/games/{game-id}/mods/{mod-id}/subscribe");
+HttpURLConnection con = (HttpURLConnection) obj.openConnection();
+con.setRequestMethod("POST");
+int responseCode = con.getResponseCode();
+BufferedReader in = new BufferedReader(
+    new InputStreamReader(con.getInputStream()));
+String inputLine;
+StringBuffer response = new StringBuffer();
+while ((inputLine = in.readLine()) != null) {
+    response.append(inputLine);
+}
+in.close();
+System.out.println(response.toString());
+```
+`POST /games/{game-id}/mods/{mod-id}/subscribe`
+
+__OAuth 2 Required__. Subscribe the _authenticated user_ to a corresponding mod. No body parameters are required for this action.
+
+
+> Example responses
+
+```json
+{
+  "code": "201",
+  "message": "You have successfully subscribed to the specified mod."
+}
+```
+<h3 id="Subscribe-To-Mod-responses">Responses</h3>
+
+Status|Meaning|Description|Response Schema
+---|---|---|---|
+201|[Created](https://tools.ietf.org/html/rfc7231#section-6.3.2)|Created|[Message Object](#message-object)
+
+<aside class="warning">
+To perform this operation, you must be authenticated by means of one of the following methods:
+oauth2 ( Scopes: write )
+</aside>
+
+
+## Unsubscribe To Mod
+
+> Code samples
+
+```shell
+# You can also use wget
+curl -X DELETE https://api.mod.io/v1/games/{game-id}/mods/{mod-id}/subscribe \
+  -H 'Authorization: Bearer YourAccessToken' \
+  -H 'Content-Type: application/x-www-form-urlencoded' \
+  -H 'Accept: application/json'
+
+```
+
+```http
+DELETE https://api.mod.io/v1/games/{game-id}/mods/{mod-id}/subscribe HTTP/1.1
+Host: api.mod.io
+
+Accept: application/json
+Authorization: Bearer YourAccessToken
+Content-Type: application/x-www-form-urlencoded
+
+
+```
+
+```javascript
+var headers = {
+  'Authorization':'Bearer YourAccessToken',
+  'Content-Type':'application/x-www-form-urlencoded',
+  'Accept':'application/json'
+
+};
+
+$.ajax({
+  url: 'https://api.mod.io/v1/games/{game-id}/mods/{mod-id}/subscribe',
+  method: 'delete',
+
+  headers: headers,
+  success: function(data) {
+    console.log(JSON.stringify(data));
+  }
+})
+```
+
+```javascript--nodejs
+const request = require('node-fetch');
+
+const headers = {
+  'Authorization':'Bearer YourAccessToken',
+  'Content-Type':'application/x-www-form-urlencoded',
+  'Accept':'application/json'
+
+};
+
+fetch('https://api.mod.io/v1/games/{game-id}/mods/{mod-id}/subscribe',
+{
+  method: 'DELETE',
+
+  headers: headers
+})
+.then(function(res) {
+    return res.json();
+}).then(function(body) {
+    console.log(body);
+});
+```
+
+```ruby
+require 'rest-client'
+require 'json'
+
+headers = {
+  'Authorization' => 'Bearer YourAccessToken',
+  'Content-Type' => 'application/x-www-form-urlencoded',
+  'Accept' => 'application/json'
+}
+
+result = RestClient.delete 'https://api.mod.io/v1/games/{game-id}/mods/{mod-id}/subscribe',
+  params: {
+  }, headers: headers
+
+
+p JSON.parse(result)
+```
+
+```python
+import requests
+headers = {
+  'Authorization': 'Bearer YourAccessToken',
+  'Content-Type': 'application/x-www-form-urlencoded',
+  'Accept': 'application/json'
+}
+
+r = requests.delete('https://api.mod.io/v1/games/{game-id}/mods/{mod-id}/subscribe', params={
+
+}, headers = headers)
+
+print r.json()
+```
+
+```java
+URL obj = new URL("https://api.mod.io/v1/games/{game-id}/mods/{mod-id}/subscribe");
+HttpURLConnection con = (HttpURLConnection) obj.openConnection();
+con.setRequestMethod("DELETE");
+int responseCode = con.getResponseCode();
+BufferedReader in = new BufferedReader(
+    new InputStreamReader(con.getInputStream()));
+String inputLine;
+StringBuffer response = new StringBuffer();
+while ((inputLine = in.readLine()) != null) {
+    response.append(inputLine);
+}
+in.close();
+System.out.println(response.toString());
+```
+`DELETE /games/{game-id}/mods/{mod-id}/subscribe`
+
+__OAuth 2 Required__. Un-Subscribe the _authenticated user_ to the corresponding mod. No body parameters are required for this action.
+
+
+> Example responses
+
+```json
+ "204 No Content" 
+```
+<h3 id="Unsubscribe-To-Mod-responses">Responses</h3>
+
+Status|Meaning|Description|Response Schema
+---|---|---|---|
+204|[No Content](https://tools.ietf.org/html/rfc7231#section-6.3.5)|No Content|None
+
+<aside class="warning">
+To perform this operation, you must be authenticated by means of one of the following methods:
+oauth2 ( Scopes: write )
+</aside>
+
+
+# Events
+
+## Get Game Activity
+
+> Code samples
+
+```shell
+# You can also use wget
+curl -X GET https://api.mod.io/v1/games/{game-id}/activity?api_key=YourApiKey \
+  -H 'Accept: application/json'
+
+```
+
+```http
+GET https://api.mod.io/v1/games/{game-id}/activity?api_key=YourApiKey HTTP/1.1
+Host: api.mod.io
+
+Accept: application/json
+
+```
+
+```javascript
+var headers = {
+  'Accept':'application/json'
+
+};
+
+$.ajax({
+  url: 'https://api.mod.io/v1/games/{game-id}/activity',
+  method: 'get',
+  data: '?api_key=YourApiKey',
+  headers: headers,
+  success: function(data) {
+    console.log(JSON.stringify(data));
+  }
+})
+```
+
+```javascript--nodejs
+const request = require('node-fetch');
+
+const headers = {
+  'Accept':'application/json'
+
+};
+
+fetch('https://api.mod.io/v1/games/{game-id}/activity?api_key=YourApiKey',
+{
+  method: 'GET',
+
+  headers: headers
+})
+.then(function(res) {
+    return res.json();
+}).then(function(body) {
+    console.log(body);
+});
+```
+
+```ruby
+require 'rest-client'
+require 'json'
+
+headers = {
+  'Accept' => 'application/json'
+}
+
+result = RestClient.get 'https://api.mod.io/v1/games/{game-id}/activity',
+  params: {
+  'api_key' => 'string'
+}, headers: headers
+
+
+p JSON.parse(result)
+```
+
+```python
+import requests
+headers = {
+  'Accept': 'application/json'
+}
+
+r = requests.get('https://api.mod.io/v1/games/{game-id}/activity', params={
+  'api_key': 'YourApiKey'
+}, headers = headers)
+
+print r.json()
+```
+
+```java
+URL obj = new URL("https://api.mod.io/v1/games/{game-id}/activity?api_key=YourApiKey");
+HttpURLConnection con = (HttpURLConnection) obj.openConnection();
+con.setRequestMethod("GET");
+int responseCode = con.getResponseCode();
+BufferedReader in = new BufferedReader(
+    new InputStreamReader(con.getInputStream()));
+String inputLine;
+StringBuffer response = new StringBuffer();
+while ((inputLine = in.readLine()) != null) {
+    response.append(inputLine);
+}
+in.close();
+System.out.println(response.toString());
+```
+`GET /games/{game-id}/activity`
+
+Retrieve activity log for a game, showing changes made to the resource. Successful request will return an array of [Game activity objects](https://docs.mod.io/#get-game-activity-2). To make your requests as specific to your needs as possible it's highly recommended reading over our [filtering documentation](https://docs.mod.io/#filtering) if it will help you with consuming this endpoint. This endpoint by default sorts by `id` in descending order.
+     
+     Filter|Type|Description
+     ---|---|---
+     id|integer(int32)|Unique id of the activity object.
+     game|integer(int32)|Unique id of the parent game.
+     user|integer(int32)|Unique id of the user who performed the action.
+     dateup|integer(int32)|Unix timestamp of date updated.
+     event|string|Type of change that occurred. <br><br>*Field Options*<br>__GAME_UPDATE__ - Update event<br>__GAME_VISIBILITY_CHANGE__ = Game has been set to live, or hidden
+
+
+> Example responses
+
+```json
+{
+  "data": [
+    {
+      "id": 53,
+      "game": 17,
+      "user": 95,
+      "dateup": 1499846132,
+      "event": "GAME_UPDATE",
+      "changes": [
+        {
+          "field": "homepage",
+          "before": "https://www.roguehdpack.com/",
+          "after": "https://rogue-knight.mod.io/rogue-hd-pack"
+        }
+      ]
+    },
+    {
+        ...
+    }
+  ],
+  "cursor_id": 60,
+  "prev_id": 30,
+  "next_id": 160,
+  "result_count": 100
+}
+```
+<h3 id="Get-Game-Activity-responses">Responses</h3>
+
+Status|Meaning|Description|Response Schema
+---|---|---|---|
+200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)|Successful Response|[Get Game Activity ](#schemaget_game_activity)
+
+<aside class="warning">
+To perform this operation, you must be authenticated by means of one of the following methods:
+apiKey, oauth2 ( Scopes: read )
+</aside>
+
+
+## Get Mod Activity
+
+> Code samples
+
+```shell
+# You can also use wget
+curl -X GET https://api.mod.io/v1/games/{game-id}/mods/{mod-id}/activity?api_key=YourApiKey \
+  -H 'Accept: application/json'
+
+```
+
+```http
+GET https://api.mod.io/v1/games/{game-id}/mods/{mod-id}/activity?api_key=YourApiKey HTTP/1.1
+Host: api.mod.io
+
+Accept: application/json
+
+```
+
+```javascript
+var headers = {
+  'Accept':'application/json'
+
+};
+
+$.ajax({
+  url: 'https://api.mod.io/v1/games/{game-id}/mods/{mod-id}/activity',
+  method: 'get',
+  data: '?api_key=YourApiKey',
+  headers: headers,
+  success: function(data) {
+    console.log(JSON.stringify(data));
+  }
+})
+```
+
+```javascript--nodejs
+const request = require('node-fetch');
+
+const headers = {
+  'Accept':'application/json'
+
+};
+
+fetch('https://api.mod.io/v1/games/{game-id}/mods/{mod-id}/activity?api_key=YourApiKey',
+{
+  method: 'GET',
+
+  headers: headers
+})
+.then(function(res) {
+    return res.json();
+}).then(function(body) {
+    console.log(body);
+});
+```
+
+```ruby
+require 'rest-client'
+require 'json'
+
+headers = {
+  'Accept' => 'application/json'
+}
+
+result = RestClient.get 'https://api.mod.io/v1/games/{game-id}/mods/{mod-id}/activity',
+  params: {
+  'api_key' => 'string'
+}, headers: headers
+
+
+p JSON.parse(result)
+```
+
+```python
+import requests
+headers = {
+  'Accept': 'application/json'
+}
+
+r = requests.get('https://api.mod.io/v1/games/{game-id}/mods/{mod-id}/activity', params={
+  'api_key': 'YourApiKey'
+}, headers = headers)
+
+print r.json()
+```
+
+```java
+URL obj = new URL("https://api.mod.io/v1/games/{game-id}/mods/{mod-id}/activity?api_key=YourApiKey");
+HttpURLConnection con = (HttpURLConnection) obj.openConnection();
+con.setRequestMethod("GET");
+int responseCode = con.getResponseCode();
+BufferedReader in = new BufferedReader(
+    new InputStreamReader(con.getInputStream()));
+String inputLine;
+StringBuffer response = new StringBuffer();
+while ((inputLine = in.readLine()) != null) {
+    response.append(inputLine);
+}
+in.close();
+System.out.println(response.toString());
+```
+`GET /games/{game-id}/mods/{mod-id}/activity`
+
+Retrieve activity log for a mod, showing changes made to the resource. Successful request will return an array of [Mod Activity Objects](https://docs.mod.io/#get-mod-activity-2). To make your requests as specific to your needs as possible it's highly recommended reading over our [filtering documentation](https://docs.mod.io/#filtering) if it will help you with consuming this endpoint. This endpoint by default sorts by `id` in descending order.
+     
+     Filter|Type|Description
+     ---|---|---
+     id|integer(int32)|Unique id of the activity object.
+     mod|integer(int32)|Unique id of the parent mod.
+     user|integer(int32)|Unique id of the user who triggered the action.
+     dateup|integer(int32)|Unix timestamp of date updated.
+     event|string|Type of change that occurred.<br><br>*Field Options*<br>__MOD_UPDATE__ - Update event<br>__MODFILE_UPDATE__ = Primary file changed<br>__MOD_VISIBILITY_CHANGE__ = Mod has been set to live, or hidden.
+     latest|boolean|_Default value is true_. Returns only the latest unique events for each mod.
+     subscribed|boolean|__OAuth 2 Required__. Default value is _false_. Returns only the events the _authenticated user_ is subscribed to.
+
+
+> Example responses
+
+```json
+{
+  "data": [
+    {
+      "id": 13,
+      "mod": 13,
+      "user": 13,
+      "dateup": 1499846132,
+      "event": "MOD_UPDATE",
+      "changes": [
+        {
+          "field": "homepage",
+          "before": "https://www.roguehdpack.com/",
+          "after": "https://rogue-knight.mod.io/rogue-hd-pack"
+        }
+      ]
+    },
+    {
+        ...
+    }
+  ],
+  "cursor_id": 60,
+  "prev_id": 30,
+  "next_id": 160,
+  "result_count": 100
+}
+```
+<h3 id="Get-Mod-Activity-responses">Responses</h3>
+
+Status|Meaning|Description|Response Schema
+---|---|---|---|
+200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)|Successful Request|[Get Mod Activity ](#schemaget_mod_activity)
+
+<aside class="warning">
+To perform this operation, you must be authenticated by means of one of the following methods:
+apiKey, oauth2 ( Scopes: read )
+</aside>
+
+
+## Get All Mod Activity By Game
+
+> Code samples
+
+```shell
+# You can also use wget
+curl -X GET https://api.mod.io/v1/games/{game-id}/mods/activity?api_key=YourApiKey \
+  -H 'Accept: application/json'
+
+```
+
+```http
+GET https://api.mod.io/v1/games/{game-id}/mods/activity?api_key=YourApiKey HTTP/1.1
+Host: api.mod.io
+
+Accept: application/json
+
+```
+
+```javascript
+var headers = {
+  'Accept':'application/json'
+
+};
+
+$.ajax({
+  url: 'https://api.mod.io/v1/games/{game-id}/mods/activity',
+  method: 'get',
+  data: '?api_key=YourApiKey',
+  headers: headers,
+  success: function(data) {
+    console.log(JSON.stringify(data));
+  }
+})
+```
+
+```javascript--nodejs
+const request = require('node-fetch');
+
+const headers = {
+  'Accept':'application/json'
+
+};
+
+fetch('https://api.mod.io/v1/games/{game-id}/mods/activity?api_key=YourApiKey',
+{
+  method: 'GET',
+
+  headers: headers
+})
+.then(function(res) {
+    return res.json();
+}).then(function(body) {
+    console.log(body);
+});
+```
+
+```ruby
+require 'rest-client'
+require 'json'
+
+headers = {
+  'Accept' => 'application/json'
+}
+
+result = RestClient.get 'https://api.mod.io/v1/games/{game-id}/mods/activity',
+  params: {
+  'api_key' => 'string'
+}, headers: headers
+
+
+p JSON.parse(result)
+```
+
+```python
+import requests
+headers = {
+  'Accept': 'application/json'
+}
+
+r = requests.get('https://api.mod.io/v1/games/{game-id}/mods/activity', params={
+  'api_key': 'YourApiKey'
+}, headers = headers)
+
+print r.json()
+```
+
+```java
+URL obj = new URL("https://api.mod.io/v1/games/{game-id}/mods/activity?api_key=YourApiKey");
+HttpURLConnection con = (HttpURLConnection) obj.openConnection();
+con.setRequestMethod("GET");
+int responseCode = con.getResponseCode();
+BufferedReader in = new BufferedReader(
+    new InputStreamReader(con.getInputStream()));
+String inputLine;
+StringBuffer response = new StringBuffer();
+while ((inputLine = in.readLine()) != null) {
+    response.append(inputLine);
+}
+in.close();
+System.out.println(response.toString());
+```
+`GET /games/{game-id}/mods/activity`
+
+Retrieve all mod activity for the corresponding game. Successful request will return an array of [Mod Activity Objects](https://docs.mod.io/#get-mod-activity-2). To make your requests as specific to your needs as possible it's highly recommended reading over our [filtering documentation](https://docs.mod.io/#filtering) if it will help you with consuming this endpoint. This endpoint by default sorts by `id` in descending order.
+     
+     Filter|Type|Description
+     ---|---|---
+     id|integer(int32)|Unique id of the activity object.
+     mod|integer(int32)|Unique id of the parent mod.
+     user|integer(int32)|Unique id of the user who triggered the action.
+     dateup|integer(int32)|Unix timestamp of date updated.
+     event|string|Type of change that occurred. <br><br>*Field Options*<br>__MOD_UPDATE__ - Update event<br>__MODFILE_UPDATE__ = Primary file changed<br>__MOD_VISIBILITY_CHANGE__ = Mod has been set to live, or hidden.
+     latest|boolean|_Default value is true_. Returns only the latest unique events for each mod.
+     subscribed|boolean|__OAuth 2 Required__. Default value is _false_. Returns only the events the _authenticated user_ is subscribed to.
+
+
+> Example responses
+
+```json
+{
+  "data": [
+    {
+      "id": 13,
+      "mod": 13,
+      "user": 13,
+      "dateup": 1499846132,
+      "event": "MOD_UPDATE",
+      "changes": [
+        {
+          "field": "homepage",
+          "before": "https://www.roguehdpack.com/",
+          "after": "https://rogue-knight.mod.io/rogue-hd-pack"
+        }
+      ]
+    },
+    {
+        ...
+    }
+  ],
+  "cursor_id": 60,
+  "prev_id": 30,
+  "next_id": 160,
+  "result_count": 100
+}
+```
+<h3 id="Get-All-Mod-Activity-By-Game-responses">Responses</h3>
+
+Status|Meaning|Description|Response Schema
+---|---|---|---|
+200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)|Successful Request|[Get Mod Activity ](#schemaget_mod_activity)
+
+<aside class="warning">
+To perform this operation, you must be authenticated by means of one of the following methods:
+apiKey, oauth2 ( Scopes: read )
+</aside>
+
+
+# Tags
+
 ## Get All Mod Tags
 
 > Code samples
@@ -4798,6 +4495,8 @@ oauth2 ( Scopes: write )
 </aside>
 
 
+# Ratings
+
 ## Add Mod Rating
 
 > Code samples
@@ -4940,6 +4639,2031 @@ To perform this operation, you must be authenticated by means of one of the foll
 oauth2 ( Scopes: write )
 </aside>
 
+
+# Metadata
+
+## Get All Mod KVP Metadata
+
+> Code samples
+
+```shell
+# You can also use wget
+curl -X GET https://api.mod.io/v1/games/{game-id}/mods/{mod-id}/metadatakvp?api_key=YourApiKey \
+  -H 'Accept: application/json'
+
+```
+
+```http
+GET https://api.mod.io/v1/games/{game-id}/mods/{mod-id}/metadatakvp?api_key=YourApiKey HTTP/1.1
+Host: api.mod.io
+
+Accept: application/json
+
+```
+
+```javascript
+var headers = {
+  'Accept':'application/json'
+
+};
+
+$.ajax({
+  url: 'https://api.mod.io/v1/games/{game-id}/mods/{mod-id}/metadatakvp',
+  method: 'get',
+  data: '?api_key=YourApiKey',
+  headers: headers,
+  success: function(data) {
+    console.log(JSON.stringify(data));
+  }
+})
+```
+
+```javascript--nodejs
+const request = require('node-fetch');
+
+const headers = {
+  'Accept':'application/json'
+
+};
+
+fetch('https://api.mod.io/v1/games/{game-id}/mods/{mod-id}/metadatakvp?api_key=YourApiKey',
+{
+  method: 'GET',
+
+  headers: headers
+})
+.then(function(res) {
+    return res.json();
+}).then(function(body) {
+    console.log(body);
+});
+```
+
+```ruby
+require 'rest-client'
+require 'json'
+
+headers = {
+  'Accept' => 'application/json'
+}
+
+result = RestClient.get 'https://api.mod.io/v1/games/{game-id}/mods/{mod-id}/metadatakvp',
+  params: {
+  'api_key' => 'string'
+}, headers: headers
+
+
+p JSON.parse(result)
+```
+
+```python
+import requests
+headers = {
+  'Accept': 'application/json'
+}
+
+r = requests.get('https://api.mod.io/v1/games/{game-id}/mods/{mod-id}/metadatakvp', params={
+  'api_key': 'YourApiKey'
+}, headers = headers)
+
+print r.json()
+```
+
+```java
+URL obj = new URL("https://api.mod.io/v1/games/{game-id}/mods/{mod-id}/metadatakvp?api_key=YourApiKey");
+HttpURLConnection con = (HttpURLConnection) obj.openConnection();
+con.setRequestMethod("GET");
+int responseCode = con.getResponseCode();
+BufferedReader in = new BufferedReader(
+    new InputStreamReader(con.getInputStream()));
+String inputLine;
+StringBuffer response = new StringBuffer();
+while ((inputLine = in.readLine()) != null) {
+    response.append(inputLine);
+}
+in.close();
+System.out.println(response.toString());
+```
+`GET /games/{game-id}/mods/{mod-id}/metadatakvp`
+
+Get all key-value metadata pairs for the corresponding mod, successful response will return an array of objects contains only the key-value pairs. Only mod administrators are able to view these values.
+
+
+> Example responses
+
+```json
+{
+  "data": [
+    {
+      "key": "pistol-dmg",
+      "value": 800
+    },
+    {
+        ...
+    }
+  ],
+  "cursor_id": 60,
+  "prev_id": 30,
+  "next_id": 160,
+  "result_count": 100
+}
+```
+<h3 id="Get-All-Mod-KVP-Metadata-responses">Responses</h3>
+
+Status|Meaning|Description|Response Schema
+---|---|---|---|
+200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)|Successful Request|[Get All Mod KVP](#schemaget_all_mod_kvp_metadata)
+
+<aside class="warning">
+To perform this operation, you must be authenticated by means of one of the following methods:
+apiKey, oauth2 ( Scopes: read )
+</aside>
+
+
+## Add Mod KVP Metadata
+
+> Code samples
+
+```shell
+# You can also use wget
+curl -X POST https://api.mod.io/v1/games/{game-id}/mods/{mod-id}/metadatakvp \
+  -H 'Authorization: Bearer YourAccessToken' \
+  -H 'Content-Type: application/x-www-form-urlencoded' \
+  -H 'Accept: application/json'
+
+```
+
+```http
+POST https://api.mod.io/v1/games/{game-id}/mods/{mod-id}/metadatakvp HTTP/1.1
+Host: api.mod.io
+
+Accept: application/json
+Authorization: Bearer YourAccessToken
+Content-Type: application/x-www-form-urlencoded
+
+
+```
+
+```javascript
+var headers = {
+  'Authorization':'Bearer YourAccessToken',
+  'Content-Type':'application/x-www-form-urlencoded',
+  'Accept':'application/json'
+
+};
+
+$.ajax({
+  url: 'https://api.mod.io/v1/games/{game-id}/mods/{mod-id}/metadatakvp',
+  method: 'post',
+
+  headers: headers,
+  success: function(data) {
+    console.log(JSON.stringify(data));
+  }
+})
+```
+
+```javascript--nodejs
+const request = require('node-fetch');
+
+const headers = {
+  'Authorization':'Bearer YourAccessToken',
+  'Content-Type':'application/x-www-form-urlencoded',
+  'Accept':'application/json'
+
+};
+
+fetch('https://api.mod.io/v1/games/{game-id}/mods/{mod-id}/metadatakvp',
+{
+  method: 'POST',
+
+  headers: headers
+})
+.then(function(res) {
+    return res.json();
+}).then(function(body) {
+    console.log(body);
+});
+```
+
+```ruby
+require 'rest-client'
+require 'json'
+
+headers = {
+  'Authorization' => 'Bearer YourAccessToken',
+  'Content-Type' => 'application/x-www-form-urlencoded',
+  'Accept' => 'application/json'
+}
+
+result = RestClient.post 'https://api.mod.io/v1/games/{game-id}/mods/{mod-id}/metadatakvp',
+  params: {
+  }, headers: headers
+
+
+p JSON.parse(result)
+```
+
+```python
+import requests
+headers = {
+  'Authorization': 'Bearer YourAccessToken',
+  'Content-Type': 'application/x-www-form-urlencoded',
+  'Accept': 'application/json'
+}
+
+r = requests.post('https://api.mod.io/v1/games/{game-id}/mods/{mod-id}/metadatakvp', params={
+
+}, headers = headers)
+
+print r.json()
+```
+
+```java
+URL obj = new URL("https://api.mod.io/v1/games/{game-id}/mods/{mod-id}/metadatakvp");
+HttpURLConnection con = (HttpURLConnection) obj.openConnection();
+con.setRequestMethod("POST");
+int responseCode = con.getResponseCode();
+BufferedReader in = new BufferedReader(
+    new InputStreamReader(con.getInputStream()));
+String inputLine;
+StringBuffer response = new StringBuffer();
+while ((inputLine = in.readLine()) != null) {
+    response.append(inputLine);
+}
+in.close();
+System.out.println(response.toString());
+```
+`POST /games/{game-id}/mods/{mod-id}/metadatakvp`
+
+Add searchable key-value metadata for the corresponding mod. Metadata may include properties as to how the item works, or other information you need to display. You must have administrator privileges to add metadata to a mod.
+     
+     Parameter|Type|Required|Description
+     ---|---|---|---|
+     metadata|array|true|Array containing one or more key value pairs where the the key & value are separated by a colon ':'. A single key can map to multiple values (1-to-many relationship), key-value pairs are searchable by exact matches only and neither the key or value can exceed 255 characters in length.
+
+
+> Example responses
+
+```json
+{
+  "code": "201",
+  "message": "You have successfully added new key-value metadata to the specified mod."
+}
+```
+<h3 id="Add-Mod-KVP-Metadata-responses">Responses</h3>
+
+Status|Meaning|Description|Response Schema
+---|---|---|---|
+201|[Created](https://tools.ietf.org/html/rfc7231#section-6.3.2)|Created|[Message Object](#message-object)
+
+<aside class="warning">
+To perform this operation, you must be authenticated by means of one of the following methods:
+oauth2 ( Scopes: write )
+</aside>
+
+
+## Delete Mod KVP Metadata
+
+> Code samples
+
+```shell
+# You can also use wget
+curl -X DELETE https://api.mod.io/v1/games/{game-id}/mods/{mod-id}/metadatakvp \
+  -H 'Authorization: Bearer YourAccessToken' \
+  -H 'Content-Type: application/x-www-form-urlencoded' \
+  -H 'Accept: application/json'
+
+```
+
+```http
+DELETE https://api.mod.io/v1/games/{game-id}/mods/{mod-id}/metadatakvp HTTP/1.1
+Host: api.mod.io
+
+Accept: application/json
+Authorization: Bearer YourAccessToken
+Content-Type: application/x-www-form-urlencoded
+
+
+```
+
+```javascript
+var headers = {
+  'Authorization':'Bearer YourAccessToken',
+  'Content-Type':'application/x-www-form-urlencoded',
+  'Accept':'application/json'
+
+};
+
+$.ajax({
+  url: 'https://api.mod.io/v1/games/{game-id}/mods/{mod-id}/metadatakvp',
+  method: 'delete',
+
+  headers: headers,
+  success: function(data) {
+    console.log(JSON.stringify(data));
+  }
+})
+```
+
+```javascript--nodejs
+const request = require('node-fetch');
+
+const headers = {
+  'Authorization':'Bearer YourAccessToken',
+  'Content-Type':'application/x-www-form-urlencoded',
+  'Accept':'application/json'
+
+};
+
+fetch('https://api.mod.io/v1/games/{game-id}/mods/{mod-id}/metadatakvp',
+{
+  method: 'DELETE',
+
+  headers: headers
+})
+.then(function(res) {
+    return res.json();
+}).then(function(body) {
+    console.log(body);
+});
+```
+
+```ruby
+require 'rest-client'
+require 'json'
+
+headers = {
+  'Authorization' => 'Bearer YourAccessToken',
+  'Content-Type' => 'application/x-www-form-urlencoded',
+  'Accept' => 'application/json'
+}
+
+result = RestClient.delete 'https://api.mod.io/v1/games/{game-id}/mods/{mod-id}/metadatakvp',
+  params: {
+  }, headers: headers
+
+
+p JSON.parse(result)
+```
+
+```python
+import requests
+headers = {
+  'Authorization': 'Bearer YourAccessToken',
+  'Content-Type': 'application/x-www-form-urlencoded',
+  'Accept': 'application/json'
+}
+
+r = requests.delete('https://api.mod.io/v1/games/{game-id}/mods/{mod-id}/metadatakvp', params={
+
+}, headers = headers)
+
+print r.json()
+```
+
+```java
+URL obj = new URL("https://api.mod.io/v1/games/{game-id}/mods/{mod-id}/metadatakvp");
+HttpURLConnection con = (HttpURLConnection) obj.openConnection();
+con.setRequestMethod("DELETE");
+int responseCode = con.getResponseCode();
+BufferedReader in = new BufferedReader(
+    new InputStreamReader(con.getInputStream()));
+String inputLine;
+StringBuffer response = new StringBuffer();
+while ((inputLine = in.readLine()) != null) {
+    response.append(inputLine);
+}
+in.close();
+System.out.println(response.toString());
+```
+`DELETE /games/{game-id}/mods/{mod-id}/metadatakvp`
+
+Delete key-value pair metadata from the corresponding mod. <br><br>__Note:__ Due to a key being able to relate to multiple values, if you supply a key only it will delete _all_ key-value pairs containing that key but if you supply both key & value only an exact key-value match will be removed.
+     
+     Parameter|Type|Required|Description
+     ---|---|---|---|
+     metadata|array|true|Array containing one or more key value pairs where the the key & value are separated by a colon ':'. A single key can map to multiple values (1-to-many relationship), key-value pairs are searchable by exact matches only and neither the key or value can exceed 255 characters in length.
+
+
+> Example responses
+
+```json
+ "204 No Content" 
+```
+<h3 id="Delete-Mod-KVP-Metadata-responses">Responses</h3>
+
+Status|Meaning|Description|Response Schema
+---|---|---|---|
+204|[No Content](https://tools.ietf.org/html/rfc7231#section-6.3.5)|No Content|None
+
+<aside class="warning">
+To perform this operation, you must be authenticated by means of one of the following methods:
+oauth2 ( Scopes: write )
+</aside>
+
+
+# Dependencies
+
+## Get All Mod Dependencies
+
+> Code samples
+
+```shell
+# You can also use wget
+curl -X GET https://api.mod.io/v1/games/{game-id}/mods/{mod-id}/dependencies?api_key=YourApiKey \
+  -H 'Accept: application/json'
+
+```
+
+```http
+GET https://api.mod.io/v1/games/{game-id}/mods/{mod-id}/dependencies?api_key=YourApiKey HTTP/1.1
+Host: api.mod.io
+
+Accept: application/json
+
+```
+
+```javascript
+var headers = {
+  'Accept':'application/json'
+
+};
+
+$.ajax({
+  url: 'https://api.mod.io/v1/games/{game-id}/mods/{mod-id}/dependencies',
+  method: 'get',
+  data: '?api_key=YourApiKey',
+  headers: headers,
+  success: function(data) {
+    console.log(JSON.stringify(data));
+  }
+})
+```
+
+```javascript--nodejs
+const request = require('node-fetch');
+
+const headers = {
+  'Accept':'application/json'
+
+};
+
+fetch('https://api.mod.io/v1/games/{game-id}/mods/{mod-id}/dependencies?api_key=YourApiKey',
+{
+  method: 'GET',
+
+  headers: headers
+})
+.then(function(res) {
+    return res.json();
+}).then(function(body) {
+    console.log(body);
+});
+```
+
+```ruby
+require 'rest-client'
+require 'json'
+
+headers = {
+  'Accept' => 'application/json'
+}
+
+result = RestClient.get 'https://api.mod.io/v1/games/{game-id}/mods/{mod-id}/dependencies',
+  params: {
+  'api_key' => 'string'
+}, headers: headers
+
+
+p JSON.parse(result)
+```
+
+```python
+import requests
+headers = {
+  'Accept': 'application/json'
+}
+
+r = requests.get('https://api.mod.io/v1/games/{game-id}/mods/{mod-id}/dependencies', params={
+  'api_key': 'YourApiKey'
+}, headers = headers)
+
+print r.json()
+```
+
+```java
+URL obj = new URL("https://api.mod.io/v1/games/{game-id}/mods/{mod-id}/dependencies?api_key=YourApiKey");
+HttpURLConnection con = (HttpURLConnection) obj.openConnection();
+con.setRequestMethod("GET");
+int responseCode = con.getResponseCode();
+BufferedReader in = new BufferedReader(
+    new InputStreamReader(con.getInputStream()));
+String inputLine;
+StringBuffer response = new StringBuffer();
+while ((inputLine = in.readLine()) != null) {
+    response.append(inputLine);
+}
+in.close();
+System.out.println(response.toString());
+```
+`GET /games/{game-id}/mods/{mod-id}/dependencies`
+
+Get all listed dependencies for the corresponding mod, successful response will return an array of [Mod Dependencies Objects](--parse-docsurl/#mod-dependencies-object).
+
+
+> Example responses
+
+```json
+{
+  "data": [
+    {
+      "mod": 231,
+      "date": 1499841487
+    },
+    {
+        ...
+    }
+  ],
+  "cursor_id": 60,
+  "prev_id": 30,
+  "next_id": 160,
+  "result_count": 100
+}
+```
+<h3 id="Get-All-Mod-Dependencies-responses">Responses</h3>
+
+Status|Meaning|Description|Response Schema
+---|---|---|---|
+200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)|Successful Request|[Get All Mod Dependencies](#schemaget_all_mod_dependencies)
+
+<aside class="warning">
+To perform this operation, you must be authenticated by means of one of the following methods:
+apiKey, oauth2 ( Scopes: read )
+</aside>
+
+
+## Add Mod Dependencies
+
+> Code samples
+
+```shell
+# You can also use wget
+curl -X POST https://api.mod.io/v1/games/{game-id}/mods/{mod-id}/dependencies \
+  -H 'Authorization: Bearer YourAccessToken' \
+  -H 'Content-Type: application/x-www-form-urlencoded' \
+  -H 'Accept: application/json'
+
+```
+
+```http
+POST https://api.mod.io/v1/games/{game-id}/mods/{mod-id}/dependencies HTTP/1.1
+Host: api.mod.io
+
+Accept: application/json
+Authorization: Bearer YourAccessToken
+Content-Type: application/x-www-form-urlencoded
+
+
+```
+
+```javascript
+var headers = {
+  'Authorization':'Bearer YourAccessToken',
+  'Content-Type':'application/x-www-form-urlencoded',
+  'Accept':'application/json'
+
+};
+
+$.ajax({
+  url: 'https://api.mod.io/v1/games/{game-id}/mods/{mod-id}/dependencies',
+  method: 'post',
+
+  headers: headers,
+  success: function(data) {
+    console.log(JSON.stringify(data));
+  }
+})
+```
+
+```javascript--nodejs
+const request = require('node-fetch');
+
+const headers = {
+  'Authorization':'Bearer YourAccessToken',
+  'Content-Type':'application/x-www-form-urlencoded',
+  'Accept':'application/json'
+
+};
+
+fetch('https://api.mod.io/v1/games/{game-id}/mods/{mod-id}/dependencies',
+{
+  method: 'POST',
+
+  headers: headers
+})
+.then(function(res) {
+    return res.json();
+}).then(function(body) {
+    console.log(body);
+});
+```
+
+```ruby
+require 'rest-client'
+require 'json'
+
+headers = {
+  'Authorization' => 'Bearer YourAccessToken',
+  'Content-Type' => 'application/x-www-form-urlencoded',
+  'Accept' => 'application/json'
+}
+
+result = RestClient.post 'https://api.mod.io/v1/games/{game-id}/mods/{mod-id}/dependencies',
+  params: {
+  }, headers: headers
+
+
+p JSON.parse(result)
+```
+
+```python
+import requests
+headers = {
+  'Authorization': 'Bearer YourAccessToken',
+  'Content-Type': 'application/x-www-form-urlencoded',
+  'Accept': 'application/json'
+}
+
+r = requests.post('https://api.mod.io/v1/games/{game-id}/mods/{mod-id}/dependencies', params={
+
+}, headers = headers)
+
+print r.json()
+```
+
+```java
+URL obj = new URL("https://api.mod.io/v1/games/{game-id}/mods/{mod-id}/dependencies");
+HttpURLConnection con = (HttpURLConnection) obj.openConnection();
+con.setRequestMethod("POST");
+int responseCode = con.getResponseCode();
+BufferedReader in = new BufferedReader(
+    new InputStreamReader(con.getInputStream()));
+String inputLine;
+StringBuffer response = new StringBuffer();
+while ((inputLine = in.readLine()) != null) {
+    response.append(inputLine);
+}
+in.close();
+System.out.println(response.toString());
+```
+`POST /games/{game-id}/mods/{mod-id}/dependencies`
+
+Add dependencies that are required for the corresponding mod. Dependencies should be the unique id of the mod that this mod is to be dependant on. For example: If you submit the values 28 & 42, you are listing this mod as being dependant on the mods that hold those values as their unique id.
+     
+     Parameter|Type|Required|Description
+     ---|---|---|---|
+     dependencies|array|true|Array containing one or more mod id's that will represent the mods this mod is dependent on. Max of 5 dependencies per request.
+
+
+> Example responses
+
+```json
+{
+  "code": "201",
+  "message": "You have successfully added new dependencies to the specified mod."
+}
+```
+<h3 id="Add-Mod-Dependencies-responses">Responses</h3>
+
+Status|Meaning|Description|Response Schema
+---|---|---|---|
+201|[Created](https://tools.ietf.org/html/rfc7231#section-6.3.2)|Created|[Message Object](#message-object)
+
+<aside class="warning">
+To perform this operation, you must be authenticated by means of one of the following methods:
+oauth2 ( Scopes: write )
+</aside>
+
+
+## Delete Mod Dependencies
+
+> Code samples
+
+```shell
+# You can also use wget
+curl -X DELETE https://api.mod.io/v1/games/{game-id}/mods/{mod-id}/dependencies \
+  -H 'Authorization: Bearer YourAccessToken' \
+  -H 'Content-Type: application/x-www-form-urlencoded' \
+  -H 'Accept: application/json'
+
+```
+
+```http
+DELETE https://api.mod.io/v1/games/{game-id}/mods/{mod-id}/dependencies HTTP/1.1
+Host: api.mod.io
+
+Accept: application/json
+Authorization: Bearer YourAccessToken
+Content-Type: application/x-www-form-urlencoded
+
+
+```
+
+```javascript
+var headers = {
+  'Authorization':'Bearer YourAccessToken',
+  'Content-Type':'application/x-www-form-urlencoded',
+  'Accept':'application/json'
+
+};
+
+$.ajax({
+  url: 'https://api.mod.io/v1/games/{game-id}/mods/{mod-id}/dependencies',
+  method: 'delete',
+
+  headers: headers,
+  success: function(data) {
+    console.log(JSON.stringify(data));
+  }
+})
+```
+
+```javascript--nodejs
+const request = require('node-fetch');
+
+const headers = {
+  'Authorization':'Bearer YourAccessToken',
+  'Content-Type':'application/x-www-form-urlencoded',
+  'Accept':'application/json'
+
+};
+
+fetch('https://api.mod.io/v1/games/{game-id}/mods/{mod-id}/dependencies',
+{
+  method: 'DELETE',
+
+  headers: headers
+})
+.then(function(res) {
+    return res.json();
+}).then(function(body) {
+    console.log(body);
+});
+```
+
+```ruby
+require 'rest-client'
+require 'json'
+
+headers = {
+  'Authorization' => 'Bearer YourAccessToken',
+  'Content-Type' => 'application/x-www-form-urlencoded',
+  'Accept' => 'application/json'
+}
+
+result = RestClient.delete 'https://api.mod.io/v1/games/{game-id}/mods/{mod-id}/dependencies',
+  params: {
+  }, headers: headers
+
+
+p JSON.parse(result)
+```
+
+```python
+import requests
+headers = {
+  'Authorization': 'Bearer YourAccessToken',
+  'Content-Type': 'application/x-www-form-urlencoded',
+  'Accept': 'application/json'
+}
+
+r = requests.delete('https://api.mod.io/v1/games/{game-id}/mods/{mod-id}/dependencies', params={
+
+}, headers = headers)
+
+print r.json()
+```
+
+```java
+URL obj = new URL("https://api.mod.io/v1/games/{game-id}/mods/{mod-id}/dependencies");
+HttpURLConnection con = (HttpURLConnection) obj.openConnection();
+con.setRequestMethod("DELETE");
+int responseCode = con.getResponseCode();
+BufferedReader in = new BufferedReader(
+    new InputStreamReader(con.getInputStream()));
+String inputLine;
+StringBuffer response = new StringBuffer();
+while ((inputLine = in.readLine()) != null) {
+    response.append(inputLine);
+}
+in.close();
+System.out.println(response.toString());
+```
+`DELETE /games/{game-id}/mods/{mod-id}/dependencies`
+
+Delete dependencies currently listed as required for the corresponding mod. Dependencies should be the unique id of the mod that this mod is dependant on. For example: If you submit the values 28 & 42, you are requesting that the mods with the unique id's 28 & 42 no longer be listed as a dependency for the corresponding mod. Successful request will return `204 No Content`.
+     
+     Parameter|Type|Required|Description
+     ---|---|---|---|
+     dependencies|array|true|Array containing one or more mod id's that will represent the unique id's of the mods to delete as dependencies. Max of 5 dependencies per request.
+
+
+> Example responses
+
+```json
+ "204 No Content" 
+```
+<h3 id="Delete-Mod-Dependencies-responses">Responses</h3>
+
+Status|Meaning|Description|Response Schema
+---|---|---|---|
+204|[No Content](https://tools.ietf.org/html/rfc7231#section-6.3.5)|No Content|None
+
+<aside class="warning">
+To perform this operation, you must be authenticated by means of one of the following methods:
+oauth2 ( Scopes: write )
+</aside>
+
+
+# Teams
+
+## Get All Game Team Members
+
+> Code samples
+
+```shell
+# You can also use wget
+curl -X GET https://api.mod.io/v1/games/{game-id}/team?api_key=YourApiKey \
+  -H 'Accept: application/json'
+
+```
+
+```http
+GET https://api.mod.io/v1/games/{game-id}/team?api_key=YourApiKey HTTP/1.1
+Host: api.mod.io
+
+Accept: application/json
+
+```
+
+```javascript
+var headers = {
+  'Accept':'application/json'
+
+};
+
+$.ajax({
+  url: 'https://api.mod.io/v1/games/{game-id}/team',
+  method: 'get',
+  data: '?api_key=YourApiKey',
+  headers: headers,
+  success: function(data) {
+    console.log(JSON.stringify(data));
+  }
+})
+```
+
+```javascript--nodejs
+const request = require('node-fetch');
+
+const headers = {
+  'Accept':'application/json'
+
+};
+
+fetch('https://api.mod.io/v1/games/{game-id}/team?api_key=YourApiKey',
+{
+  method: 'GET',
+
+  headers: headers
+})
+.then(function(res) {
+    return res.json();
+}).then(function(body) {
+    console.log(body);
+});
+```
+
+```ruby
+require 'rest-client'
+require 'json'
+
+headers = {
+  'Accept' => 'application/json'
+}
+
+result = RestClient.get 'https://api.mod.io/v1/games/{game-id}/team',
+  params: {
+  'api_key' => 'string'
+}, headers: headers
+
+
+p JSON.parse(result)
+```
+
+```python
+import requests
+headers = {
+  'Accept': 'application/json'
+}
+
+r = requests.get('https://api.mod.io/v1/games/{game-id}/team', params={
+  'api_key': 'YourApiKey'
+}, headers = headers)
+
+print r.json()
+```
+
+```java
+URL obj = new URL("https://api.mod.io/v1/games/{game-id}/team?api_key=YourApiKey");
+HttpURLConnection con = (HttpURLConnection) obj.openConnection();
+con.setRequestMethod("GET");
+int responseCode = con.getResponseCode();
+BufferedReader in = new BufferedReader(
+    new InputStreamReader(con.getInputStream()));
+String inputLine;
+StringBuffer response = new StringBuffer();
+while ((inputLine = in.readLine()) != null) {
+    response.append(inputLine);
+}
+in.close();
+System.out.println(response.toString());
+```
+`GET /games/{game-id}/team`
+
+Retrieve all members that are part of a game team. Successful request will return an array of [Access objects](https://docs.mod.io/#get-team). To make your requests as specific to your needs as possible it's highly recommended reading over our [filtering documentation](https://docs.mod.io/#filtering) if it will help you with consuming this endpoint.
+     
+     Filter|Type|Required|Description
+     ---|---|---|---|
+     id|integer(int32)|Unique id of the access record.
+     user|integer(int32)|Unique id of the user.
+     username|string|Username of the user.
+     level|integer|The level of permission the user has.<br><br>*Fields Options:*<br>__1__ = Moderator (can moderate content submitted)<br>__4__ = Financials (read only access to the control panel to view financial reports)<br>__8__ = Administrator (full access, including editing the profile and team)
+     date|integer|Unix timestamp of the date the user was added to the team.
+     position|string|Custom title given to the user.
+
+
+> Example responses
+
+```json
+{
+  "data": [
+    {
+      "id": 457,
+      "user": {
+        "id": 1,
+        "nameid": "xant",
+        "username": "XanT",
+        "online": 1509922961,
+        "avatar": {
+          "filename": "masterchief.jpg",
+          "full": "https://media.mod.io/images/members/1/1/1/masterchief.jpg"
+        },
+        "timezone": "Australia/Brisbane",
+        "language": "en",
+        "url": "https://mod.io/members/xant"
+      },
+      "username": "Megalodon",
+      "level": 8,
+      "date": 1492058857,
+      "position": "Supreme Overlord"
+    },
+    {
+        ...
+    }
+  ],
+  "cursor_id": 60,
+  "prev_id": 30,
+  "next_id": 160,
+  "result_count": 100
+}
+```
+<h3 id="Get-All-Game-Team-Members-responses">Responses</h3>
+
+Status|Meaning|Description|Response Schema
+---|---|---|---|
+200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)|Successful Request|[Get Team  ](#schemaget_team)
+
+<aside class="warning">
+To perform this operation, you must be authenticated by means of one of the following methods:
+apiKey, oauth2 ( Scopes: read )
+</aside>
+
+
+## Add Game Team Member
+
+> Code samples
+
+```shell
+# You can also use wget
+curl -X POST https://api.mod.io/v1/games/{game-id}/team \
+  -H 'Authorization: Bearer YourAccessToken' \
+  -H 'Content-Type: application/x-www-form-urlencoded' \
+  -H 'Accept: application/json'
+
+```
+
+```http
+POST https://api.mod.io/v1/games/{game-id}/team HTTP/1.1
+Host: api.mod.io
+
+Accept: application/json
+Authorization: Bearer YourAccessToken
+Content-Type: application/x-www-form-urlencoded
+
+
+```
+
+```javascript
+var headers = {
+  'Authorization':'Bearer YourAccessToken',
+  'Content-Type':'application/x-www-form-urlencoded',
+  'Accept':'application/json'
+
+};
+
+$.ajax({
+  url: 'https://api.mod.io/v1/games/{game-id}/team',
+  method: 'post',
+
+  headers: headers,
+  success: function(data) {
+    console.log(JSON.stringify(data));
+  }
+})
+```
+
+```javascript--nodejs
+const request = require('node-fetch');
+
+const headers = {
+  'Authorization':'Bearer YourAccessToken',
+  'Content-Type':'application/x-www-form-urlencoded',
+  'Accept':'application/json'
+
+};
+
+fetch('https://api.mod.io/v1/games/{game-id}/team',
+{
+  method: 'POST',
+
+  headers: headers
+})
+.then(function(res) {
+    return res.json();
+}).then(function(body) {
+    console.log(body);
+});
+```
+
+```ruby
+require 'rest-client'
+require 'json'
+
+headers = {
+  'Authorization' => 'Bearer YourAccessToken',
+  'Content-Type' => 'application/x-www-form-urlencoded',
+  'Accept' => 'application/json'
+}
+
+result = RestClient.post 'https://api.mod.io/v1/games/{game-id}/team',
+  params: {
+  }, headers: headers
+
+
+p JSON.parse(result)
+```
+
+```python
+import requests
+headers = {
+  'Authorization': 'Bearer YourAccessToken',
+  'Content-Type': 'application/x-www-form-urlencoded',
+  'Accept': 'application/json'
+}
+
+r = requests.post('https://api.mod.io/v1/games/{game-id}/team', params={
+
+}, headers = headers)
+
+print r.json()
+```
+
+```java
+URL obj = new URL("https://api.mod.io/v1/games/{game-id}/team");
+HttpURLConnection con = (HttpURLConnection) obj.openConnection();
+con.setRequestMethod("POST");
+int responseCode = con.getResponseCode();
+BufferedReader in = new BufferedReader(
+    new InputStreamReader(con.getInputStream()));
+String inputLine;
+StringBuffer response = new StringBuffer();
+while ((inputLine = in.readLine()) != null) {
+    response.append(inputLine);
+}
+in.close();
+System.out.println(response.toString());
+```
+`POST /games/{game-id}/team`
+
+Add a user to a game team.
+     
+     Parameter|Type|Required|Description
+     ---|---|---|---|
+     user|integer|true|The unique id of the team you are adding to the team.
+     level|integer|true|The level of permissions you want to give to the user.<br><br>*Fields Options:*<br>__1__ = Moderator (can moderate content submitted)<br>__4__ = Financials (read only access to the control panel to view financial reports)<br>__8__ = Administrator (full access, including editing the profile and team)
+     position|string|true|The title you wish to apply to the member within your team.
+
+
+> Example responses
+
+```json
+{
+  "code": "201",
+  "message": "You have successfully added a member to the specified team."
+}
+```
+<h3 id="Add-Game-Team-Member-responses">Responses</h3>
+
+Status|Meaning|Description|Response Schema
+---|---|---|---|
+201|[Created](https://tools.ietf.org/html/rfc7231#section-6.3.2)|Created|[Message Object](#message-object)
+
+<aside class="warning">
+To perform this operation, you must be authenticated by means of one of the following methods:
+oauth2 ( Scopes: write )
+</aside>
+
+
+## Get All Mod Team Members
+
+> Code samples
+
+```shell
+# You can also use wget
+curl -X GET https://api.mod.io/v1/games/{game-id}/mods/{mod-id}/team?api_key=YourApiKey \
+  -H 'Accept: application/json'
+
+```
+
+```http
+GET https://api.mod.io/v1/games/{game-id}/mods/{mod-id}/team?api_key=YourApiKey HTTP/1.1
+Host: api.mod.io
+
+Accept: application/json
+
+```
+
+```javascript
+var headers = {
+  'Accept':'application/json'
+
+};
+
+$.ajax({
+  url: 'https://api.mod.io/v1/games/{game-id}/mods/{mod-id}/team',
+  method: 'get',
+  data: '?api_key=YourApiKey',
+  headers: headers,
+  success: function(data) {
+    console.log(JSON.stringify(data));
+  }
+})
+```
+
+```javascript--nodejs
+const request = require('node-fetch');
+
+const headers = {
+  'Accept':'application/json'
+
+};
+
+fetch('https://api.mod.io/v1/games/{game-id}/mods/{mod-id}/team?api_key=YourApiKey',
+{
+  method: 'GET',
+
+  headers: headers
+})
+.then(function(res) {
+    return res.json();
+}).then(function(body) {
+    console.log(body);
+});
+```
+
+```ruby
+require 'rest-client'
+require 'json'
+
+headers = {
+  'Accept' => 'application/json'
+}
+
+result = RestClient.get 'https://api.mod.io/v1/games/{game-id}/mods/{mod-id}/team',
+  params: {
+  'api_key' => 'string'
+}, headers: headers
+
+
+p JSON.parse(result)
+```
+
+```python
+import requests
+headers = {
+  'Accept': 'application/json'
+}
+
+r = requests.get('https://api.mod.io/v1/games/{game-id}/mods/{mod-id}/team', params={
+  'api_key': 'YourApiKey'
+}, headers = headers)
+
+print r.json()
+```
+
+```java
+URL obj = new URL("https://api.mod.io/v1/games/{game-id}/mods/{mod-id}/team?api_key=YourApiKey");
+HttpURLConnection con = (HttpURLConnection) obj.openConnection();
+con.setRequestMethod("GET");
+int responseCode = con.getResponseCode();
+BufferedReader in = new BufferedReader(
+    new InputStreamReader(con.getInputStream()));
+String inputLine;
+StringBuffer response = new StringBuffer();
+while ((inputLine = in.readLine()) != null) {
+    response.append(inputLine);
+}
+in.close();
+System.out.println(response.toString());
+```
+`GET /games/{game-id}/mods/{mod-id}/team`
+
+Retrieve all members that are part of a mod team. Successful request will return an array of [Access Objects](https://docs.mod.io/#get-team). To make your requests as specific to your needs as possible it's highly recommended reading over our [filtering documentation](https://docs.mod.io/#filtering) if it will help you with consuming this endpoint.
+     
+     Filter|Type|Required|Description
+     ---|---|---|---|
+     id|integer(int32)|Unique id of the access record.
+     username|string|Username of the user.
+     level|integer|The level of permission the user has.<br><br>*Fields Options:*<br>__1__ = Moderator (can moderate content submitted)<br>__4__ = Financials (read only access to the control panel to view financial reports)<br>__8__ = Administrator (full access, including editing the profile and team)
+     date|integer|Unix timestamp of the date the user was added to the team.
+     position|string|Custom title given to the user.
+
+
+> Example responses
+
+```json
+{
+  "data": [
+    {
+      "id": 457,
+      "user": {
+        "id": 1,
+        "nameid": "xant",
+        "username": "XanT",
+        "online": 1509922961,
+        "avatar": {
+          "filename": "masterchief.jpg",
+          "full": "https://media.mod.io/images/members/1/1/1/masterchief.jpg"
+        },
+        "timezone": "Australia/Brisbane",
+        "language": "en",
+        "url": "https://mod.io/members/xant"
+      },
+      "username": "Megalodon",
+      "level": 8,
+      "date": 1492058857,
+      "position": "Supreme Overlord"
+    },
+    {
+        ...
+    }
+  ],
+  "cursor_id": 60,
+  "prev_id": 30,
+  "next_id": 160,
+  "result_count": 100
+}
+```
+<h3 id="Get-All-Mod-Team-Members-responses">Responses</h3>
+
+Status|Meaning|Description|Response Schema
+---|---|---|---|
+200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)|Successful Request|[Get Team  ](#schemaget_team)
+
+<aside class="warning">
+To perform this operation, you must be authenticated by means of one of the following methods:
+apiKey, oauth2 ( Scopes: read )
+</aside>
+
+
+## Add Mod Team Member
+
+> Code samples
+
+```shell
+# You can also use wget
+curl -X POST https://api.mod.io/v1/games/{game-id}/mods/{mod-id}/team \
+  -H 'Authorization: Bearer YourAccessToken' \
+  -H 'Content-Type: application/x-www-form-urlencoded' \
+  -H 'Accept: application/json'
+
+```
+
+```http
+POST https://api.mod.io/v1/games/{game-id}/mods/{mod-id}/team HTTP/1.1
+Host: api.mod.io
+
+Accept: application/json
+Authorization: Bearer YourAccessToken
+Content-Type: application/x-www-form-urlencoded
+
+
+```
+
+```javascript
+var headers = {
+  'Authorization':'Bearer YourAccessToken',
+  'Content-Type':'application/x-www-form-urlencoded',
+  'Accept':'application/json'
+
+};
+
+$.ajax({
+  url: 'https://api.mod.io/v1/games/{game-id}/mods/{mod-id}/team',
+  method: 'post',
+
+  headers: headers,
+  success: function(data) {
+    console.log(JSON.stringify(data));
+  }
+})
+```
+
+```javascript--nodejs
+const request = require('node-fetch');
+
+const headers = {
+  'Authorization':'Bearer YourAccessToken',
+  'Content-Type':'application/x-www-form-urlencoded',
+  'Accept':'application/json'
+
+};
+
+fetch('https://api.mod.io/v1/games/{game-id}/mods/{mod-id}/team',
+{
+  method: 'POST',
+
+  headers: headers
+})
+.then(function(res) {
+    return res.json();
+}).then(function(body) {
+    console.log(body);
+});
+```
+
+```ruby
+require 'rest-client'
+require 'json'
+
+headers = {
+  'Authorization' => 'Bearer YourAccessToken',
+  'Content-Type' => 'application/x-www-form-urlencoded',
+  'Accept' => 'application/json'
+}
+
+result = RestClient.post 'https://api.mod.io/v1/games/{game-id}/mods/{mod-id}/team',
+  params: {
+  }, headers: headers
+
+
+p JSON.parse(result)
+```
+
+```python
+import requests
+headers = {
+  'Authorization': 'Bearer YourAccessToken',
+  'Content-Type': 'application/x-www-form-urlencoded',
+  'Accept': 'application/json'
+}
+
+r = requests.post('https://api.mod.io/v1/games/{game-id}/mods/{mod-id}/team', params={
+
+}, headers = headers)
+
+print r.json()
+```
+
+```java
+URL obj = new URL("https://api.mod.io/v1/games/{game-id}/mods/{mod-id}/team");
+HttpURLConnection con = (HttpURLConnection) obj.openConnection();
+con.setRequestMethod("POST");
+int responseCode = con.getResponseCode();
+BufferedReader in = new BufferedReader(
+    new InputStreamReader(con.getInputStream()));
+String inputLine;
+StringBuffer response = new StringBuffer();
+while ((inputLine = in.readLine()) != null) {
+    response.append(inputLine);
+}
+in.close();
+System.out.println(response.toString());
+```
+`POST /games/{game-id}/mods/{mod-id}/team`
+
+Add a user to a mod team.
+     
+     Parameter|Type|Required|Description
+     ---|---|---|---|
+     user|integer|true|The unique id of the team you are adding to the team.
+     level|integer|true|The level of permissions you want to give to the user.<br><br>*Fields Options:*<br>__1__ = Moderator (can moderate comments and content attached)<br>__4__ = Creator (can upload builds and edit all settings except supply and existing team members)<br>__8__ = Administrator (full access, including editing the supply and team)
+     position|string|true|The title you wish to apply to the member within your team.
+
+
+> Example responses
+
+```json
+{
+  "code": "201",
+  "message": "You have successfully added a member to the specified team."
+}
+```
+<h3 id="Add-Mod-Team-Member-responses">Responses</h3>
+
+Status|Meaning|Description|Response Schema
+---|---|---|---|
+201|[Created](https://tools.ietf.org/html/rfc7231#section-6.3.2)|Created|[Message Object](#message-object)
+
+<aside class="warning">
+To perform this operation, you must be authenticated by means of one of the following methods:
+oauth2 ( Scopes: write )
+</aside>
+
+
+## Update Game Team Member
+
+> Code samples
+
+```shell
+# You can also use wget
+curl -X PUT https://api.mod.io/v1/games/{game-id}/team/{access-id} \
+  -H 'Authorization: Bearer YourAccessToken' \
+  -H 'Content-Type: application/x-www-form-urlencoded' \
+  -H 'Accept: application/json'
+
+```
+
+```http
+PUT https://api.mod.io/v1/games/{game-id}/team/{access-id} HTTP/1.1
+Host: api.mod.io
+
+Accept: application/json
+Authorization: Bearer YourAccessToken
+Content-Type: application/x-www-form-urlencoded
+
+
+```
+
+```javascript
+var headers = {
+  'Authorization':'Bearer YourAccessToken',
+  'Content-Type':'application/x-www-form-urlencoded',
+  'Accept':'application/json'
+
+};
+
+$.ajax({
+  url: 'https://api.mod.io/v1/games/{game-id}/team/{access-id}',
+  method: 'put',
+
+  headers: headers,
+  success: function(data) {
+    console.log(JSON.stringify(data));
+  }
+})
+```
+
+```javascript--nodejs
+const request = require('node-fetch');
+
+const headers = {
+  'Authorization':'Bearer YourAccessToken',
+  'Content-Type':'application/x-www-form-urlencoded',
+  'Accept':'application/json'
+
+};
+
+fetch('https://api.mod.io/v1/games/{game-id}/team/{access-id}',
+{
+  method: 'PUT',
+
+  headers: headers
+})
+.then(function(res) {
+    return res.json();
+}).then(function(body) {
+    console.log(body);
+});
+```
+
+```ruby
+require 'rest-client'
+require 'json'
+
+headers = {
+  'Authorization' => 'Bearer YourAccessToken',
+  'Content-Type' => 'application/x-www-form-urlencoded',
+  'Accept' => 'application/json'
+}
+
+result = RestClient.put 'https://api.mod.io/v1/games/{game-id}/team/{access-id}',
+  params: {
+  }, headers: headers
+
+
+p JSON.parse(result)
+```
+
+```python
+import requests
+headers = {
+  'Authorization': 'Bearer YourAccessToken',
+  'Content-Type': 'application/x-www-form-urlencoded',
+  'Accept': 'application/json'
+}
+
+r = requests.put('https://api.mod.io/v1/games/{game-id}/team/{access-id}', params={
+
+}, headers = headers)
+
+print r.json()
+```
+
+```java
+URL obj = new URL("https://api.mod.io/v1/games/{game-id}/team/{access-id}");
+HttpURLConnection con = (HttpURLConnection) obj.openConnection();
+con.setRequestMethod("PUT");
+int responseCode = con.getResponseCode();
+BufferedReader in = new BufferedReader(
+    new InputStreamReader(con.getInputStream()));
+String inputLine;
+StringBuffer response = new StringBuffer();
+while ((inputLine = in.readLine()) != null) {
+    response.append(inputLine);
+}
+in.close();
+System.out.println(response.toString());
+```
+`PUT /games/{game-id}/team/{access-id}`
+
+Update the details of a user who is currently a part of the specified game team.
+     
+     Parameter|Type|Required|Description
+     ---|---|---|---|
+     level|integer||The level of permissions you want to give to the user.<br><br>*Fields Options:*<br>__1__ = Moderator (can moderate content submitted)<br>__4__ = Financials (read only access to the control panel to view financial reports)<br>__8__ = Administrator (full access, including editing the profile and team)
+     position|string||The title you wish to apply to the member within your team.
+
+
+> Example responses
+
+```json
+{
+  "code": "201",
+  "message": "You have successfully updated the specified team members details."
+}
+```
+<h3 id="Update-Game-Team-Member-responses">Responses</h3>
+
+Status|Meaning|Description|Response Schema
+---|---|---|---|
+200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)|OK|[Message Object](#message-object)
+
+<aside class="warning">
+To perform this operation, you must be authenticated by means of one of the following methods:
+oauth2 ( Scopes: write )
+</aside>
+
+
+## Delete Game Team Member
+
+> Code samples
+
+```shell
+# You can also use wget
+curl -X DELETE https://api.mod.io/v1/games/{game-id}/team/{access-id} \
+  -H 'Authorization: Bearer YourAccessToken' \
+  -H 'Content-Type: application/x-www-form-urlencoded' \
+  -H 'Accept: application/json'
+
+```
+
+```http
+DELETE https://api.mod.io/v1/games/{game-id}/team/{access-id} HTTP/1.1
+Host: api.mod.io
+
+Accept: application/json
+Authorization: Bearer YourAccessToken
+Content-Type: application/x-www-form-urlencoded
+
+
+```
+
+```javascript
+var headers = {
+  'Authorization':'Bearer YourAccessToken',
+  'Content-Type':'application/x-www-form-urlencoded',
+  'Accept':'application/json'
+
+};
+
+$.ajax({
+  url: 'https://api.mod.io/v1/games/{game-id}/team/{access-id}',
+  method: 'delete',
+
+  headers: headers,
+  success: function(data) {
+    console.log(JSON.stringify(data));
+  }
+})
+```
+
+```javascript--nodejs
+const request = require('node-fetch');
+
+const headers = {
+  'Authorization':'Bearer YourAccessToken',
+  'Content-Type':'application/x-www-form-urlencoded',
+  'Accept':'application/json'
+
+};
+
+fetch('https://api.mod.io/v1/games/{game-id}/team/{access-id}',
+{
+  method: 'DELETE',
+
+  headers: headers
+})
+.then(function(res) {
+    return res.json();
+}).then(function(body) {
+    console.log(body);
+});
+```
+
+```ruby
+require 'rest-client'
+require 'json'
+
+headers = {
+  'Authorization' => 'Bearer YourAccessToken',
+  'Content-Type' => 'application/x-www-form-urlencoded',
+  'Accept' => 'application/json'
+}
+
+result = RestClient.delete 'https://api.mod.io/v1/games/{game-id}/team/{access-id}',
+  params: {
+  }, headers: headers
+
+
+p JSON.parse(result)
+```
+
+```python
+import requests
+headers = {
+  'Authorization': 'Bearer YourAccessToken',
+  'Content-Type': 'application/x-www-form-urlencoded',
+  'Accept': 'application/json'
+}
+
+r = requests.delete('https://api.mod.io/v1/games/{game-id}/team/{access-id}', params={
+
+}, headers = headers)
+
+print r.json()
+```
+
+```java
+URL obj = new URL("https://api.mod.io/v1/games/{game-id}/team/{access-id}");
+HttpURLConnection con = (HttpURLConnection) obj.openConnection();
+con.setRequestMethod("DELETE");
+int responseCode = con.getResponseCode();
+BufferedReader in = new BufferedReader(
+    new InputStreamReader(con.getInputStream()));
+String inputLine;
+StringBuffer response = new StringBuffer();
+while ((inputLine = in.readLine()) != null) {
+    response.append(inputLine);
+}
+in.close();
+System.out.println(response.toString());
+```
+`DELETE /games/{game-id}/team/{access-id}`
+
+Remove a member from a game team. This will revoke their access rights if they are not the original creator of the resource.
+
+
+> Example responses
+
+```json
+ "204 No Content" 
+```
+<h3 id="Delete-Game-Team-Member-responses">Responses</h3>
+
+Status|Meaning|Description|Response Schema
+---|---|---|---|
+204|[No Content](https://tools.ietf.org/html/rfc7231#section-6.3.5)|No Content|None
+
+<aside class="warning">
+To perform this operation, you must be authenticated by means of one of the following methods:
+oauth2 ( Scopes: write )
+</aside>
+
+
+## Update Mod Team Member
+
+> Code samples
+
+```shell
+# You can also use wget
+curl -X PUT https://api.mod.io/v1/games/{game-id}/mods/{mod-id}/team/{access-id} \
+  -H 'Authorization: Bearer YourAccessToken' \
+  -H 'Content-Type: application/x-www-form-urlencoded' \
+  -H 'Accept: application/json'
+
+```
+
+```http
+PUT https://api.mod.io/v1/games/{game-id}/mods/{mod-id}/team/{access-id} HTTP/1.1
+Host: api.mod.io
+
+Accept: application/json
+Authorization: Bearer YourAccessToken
+Content-Type: application/x-www-form-urlencoded
+
+
+```
+
+```javascript
+var headers = {
+  'Authorization':'Bearer YourAccessToken',
+  'Content-Type':'application/x-www-form-urlencoded',
+  'Accept':'application/json'
+
+};
+
+$.ajax({
+  url: 'https://api.mod.io/v1/games/{game-id}/mods/{mod-id}/team/{access-id}',
+  method: 'put',
+
+  headers: headers,
+  success: function(data) {
+    console.log(JSON.stringify(data));
+  }
+})
+```
+
+```javascript--nodejs
+const request = require('node-fetch');
+
+const headers = {
+  'Authorization':'Bearer YourAccessToken',
+  'Content-Type':'application/x-www-form-urlencoded',
+  'Accept':'application/json'
+
+};
+
+fetch('https://api.mod.io/v1/games/{game-id}/mods/{mod-id}/team/{access-id}',
+{
+  method: 'PUT',
+
+  headers: headers
+})
+.then(function(res) {
+    return res.json();
+}).then(function(body) {
+    console.log(body);
+});
+```
+
+```ruby
+require 'rest-client'
+require 'json'
+
+headers = {
+  'Authorization' => 'Bearer YourAccessToken',
+  'Content-Type' => 'application/x-www-form-urlencoded',
+  'Accept' => 'application/json'
+}
+
+result = RestClient.put 'https://api.mod.io/v1/games/{game-id}/mods/{mod-id}/team/{access-id}',
+  params: {
+  }, headers: headers
+
+
+p JSON.parse(result)
+```
+
+```python
+import requests
+headers = {
+  'Authorization': 'Bearer YourAccessToken',
+  'Content-Type': 'application/x-www-form-urlencoded',
+  'Accept': 'application/json'
+}
+
+r = requests.put('https://api.mod.io/v1/games/{game-id}/mods/{mod-id}/team/{access-id}', params={
+
+}, headers = headers)
+
+print r.json()
+```
+
+```java
+URL obj = new URL("https://api.mod.io/v1/games/{game-id}/mods/{mod-id}/team/{access-id}");
+HttpURLConnection con = (HttpURLConnection) obj.openConnection();
+con.setRequestMethod("PUT");
+int responseCode = con.getResponseCode();
+BufferedReader in = new BufferedReader(
+    new InputStreamReader(con.getInputStream()));
+String inputLine;
+StringBuffer response = new StringBuffer();
+while ((inputLine = in.readLine()) != null) {
+    response.append(inputLine);
+}
+in.close();
+System.out.println(response.toString());
+```
+`PUT /games/{game-id}/mods/{mod-id}/team/{access-id}`
+
+Update the details of a member who is currently a part of the specified mod team.
+     
+     Parameter|Type|Required|Description
+     ---|---|---|---|
+     level|integer||The level of permissions you want to give to the user.<br><br>*Fields Options:*<br>__1__ = Moderator (can moderate comments and content attached)<br>__4__ = Creator (can upload builds and edit all settings except supply and existing team members)<br>__8__ = Administrator (full access, including editing the supply and team)
+     position|string||The title you wish to apply to the member within your team.
+
+
+> Example responses
+
+```json
+{
+  "code": "201",
+  "message": "You have successfully updated the specified team members details."
+}
+```
+<h3 id="Update-Mod-Team-Member-responses">Responses</h3>
+
+Status|Meaning|Description|Response Schema
+---|---|---|---|
+200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)|OK|[Message Object](#message-object)
+
+<aside class="warning">
+To perform this operation, you must be authenticated by means of one of the following methods:
+oauth2 ( Scopes: write )
+</aside>
+
+
+## Delete Mod Team Member
+
+> Code samples
+
+```shell
+# You can also use wget
+curl -X DELETE https://api.mod.io/v1/games/{game-id}/mods/{mod-id}/team/{access-id} \
+  -H 'Authorization: Bearer YourAccessToken' \
+  -H 'Content-Type: application/x-www-form-urlencoded' \
+  -H 'Accept: application/json'
+
+```
+
+```http
+DELETE https://api.mod.io/v1/games/{game-id}/mods/{mod-id}/team/{access-id} HTTP/1.1
+Host: api.mod.io
+
+Accept: application/json
+Authorization: Bearer YourAccessToken
+Content-Type: application/x-www-form-urlencoded
+
+
+```
+
+```javascript
+var headers = {
+  'Authorization':'Bearer YourAccessToken',
+  'Content-Type':'application/x-www-form-urlencoded',
+  'Accept':'application/json'
+
+};
+
+$.ajax({
+  url: 'https://api.mod.io/v1/games/{game-id}/mods/{mod-id}/team/{access-id}',
+  method: 'delete',
+
+  headers: headers,
+  success: function(data) {
+    console.log(JSON.stringify(data));
+  }
+})
+```
+
+```javascript--nodejs
+const request = require('node-fetch');
+
+const headers = {
+  'Authorization':'Bearer YourAccessToken',
+  'Content-Type':'application/x-www-form-urlencoded',
+  'Accept':'application/json'
+
+};
+
+fetch('https://api.mod.io/v1/games/{game-id}/mods/{mod-id}/team/{access-id}',
+{
+  method: 'DELETE',
+
+  headers: headers
+})
+.then(function(res) {
+    return res.json();
+}).then(function(body) {
+    console.log(body);
+});
+```
+
+```ruby
+require 'rest-client'
+require 'json'
+
+headers = {
+  'Authorization' => 'Bearer YourAccessToken',
+  'Content-Type' => 'application/x-www-form-urlencoded',
+  'Accept' => 'application/json'
+}
+
+result = RestClient.delete 'https://api.mod.io/v1/games/{game-id}/mods/{mod-id}/team/{access-id}',
+  params: {
+  }, headers: headers
+
+
+p JSON.parse(result)
+```
+
+```python
+import requests
+headers = {
+  'Authorization': 'Bearer YourAccessToken',
+  'Content-Type': 'application/x-www-form-urlencoded',
+  'Accept': 'application/json'
+}
+
+r = requests.delete('https://api.mod.io/v1/games/{game-id}/mods/{mod-id}/team/{access-id}', params={
+
+}, headers = headers)
+
+print r.json()
+```
+
+```java
+URL obj = new URL("https://api.mod.io/v1/games/{game-id}/mods/{mod-id}/team/{access-id}");
+HttpURLConnection con = (HttpURLConnection) obj.openConnection();
+con.setRequestMethod("DELETE");
+int responseCode = con.getResponseCode();
+BufferedReader in = new BufferedReader(
+    new InputStreamReader(con.getInputStream()));
+String inputLine;
+StringBuffer response = new StringBuffer();
+while ((inputLine = in.readLine()) != null) {
+    response.append(inputLine);
+}
+in.close();
+System.out.println(response.toString());
+```
+`DELETE /games/{game-id}/mods/{mod-id}/team/{access-id}`
+
+Remove a member from a mod team. This will revoke their access rights if they are not the original creator of the resource.
+
+
+> Example responses
+
+```json
+ "204 No Content" 
+```
+<h3 id="Delete-Mod-Team-Member-responses">Responses</h3>
+
+Status|Meaning|Description|Response Schema
+---|---|---|---|
+204|[No Content](https://tools.ietf.org/html/rfc7231#section-6.3.5)|No Content|None
+
+<aside class="warning">
+To perform this operation, you must be authenticated by means of one of the following methods:
+oauth2 ( Scopes: write )
+</aside>
+
+
+# Comments
 
 ## Get All Mod Comments
 
@@ -5392,1713 +7116,298 @@ oauth2 ( Scopes: write )
 </aside>
 
 
-## Get All Mod Team Members
-
-> Code samples
-
-```shell
-# You can also use wget
-curl -X GET https://api.mod.io/v1/games/{game-id}/mods/{mod-id}/team?api_key=YourApiKey \
-  -H 'Accept: application/json'
-
-```
-
-```http
-GET https://api.mod.io/v1/games/{game-id}/mods/{mod-id}/team?api_key=YourApiKey HTTP/1.1
-Host: api.mod.io
-
-Accept: application/json
-
-```
-
-```javascript
-var headers = {
-  'Accept':'application/json'
-
-};
-
-$.ajax({
-  url: 'https://api.mod.io/v1/games/{game-id}/mods/{mod-id}/team',
-  method: 'get',
-  data: '?api_key=YourApiKey',
-  headers: headers,
-  success: function(data) {
-    console.log(JSON.stringify(data));
-  }
-})
-```
-
-```javascript--nodejs
-const request = require('node-fetch');
-
-const headers = {
-  'Accept':'application/json'
-
-};
-
-fetch('https://api.mod.io/v1/games/{game-id}/mods/{mod-id}/team?api_key=YourApiKey',
-{
-  method: 'GET',
-
-  headers: headers
-})
-.then(function(res) {
-    return res.json();
-}).then(function(body) {
-    console.log(body);
-});
-```
-
-```ruby
-require 'rest-client'
-require 'json'
-
-headers = {
-  'Accept' => 'application/json'
-}
-
-result = RestClient.get 'https://api.mod.io/v1/games/{game-id}/mods/{mod-id}/team',
-  params: {
-  'api_key' => 'string'
-}, headers: headers
-
-
-p JSON.parse(result)
-```
-
-```python
-import requests
-headers = {
-  'Accept': 'application/json'
-}
-
-r = requests.get('https://api.mod.io/v1/games/{game-id}/mods/{mod-id}/team', params={
-  'api_key': 'YourApiKey'
-}, headers = headers)
-
-print r.json()
-```
-
-```java
-URL obj = new URL("https://api.mod.io/v1/games/{game-id}/mods/{mod-id}/team?api_key=YourApiKey");
-HttpURLConnection con = (HttpURLConnection) obj.openConnection();
-con.setRequestMethod("GET");
-int responseCode = con.getResponseCode();
-BufferedReader in = new BufferedReader(
-    new InputStreamReader(con.getInputStream()));
-String inputLine;
-StringBuffer response = new StringBuffer();
-while ((inputLine = in.readLine()) != null) {
-    response.append(inputLine);
-}
-in.close();
-System.out.println(response.toString());
-```
-`GET /games/{game-id}/mods/{mod-id}/team`
-
-Retrieve all members that are part of a mod team. Successful request will return an array of [Access Objects](https://docs.mod.io/#get-team). To make your requests as specific to your needs as possible it's highly recommended reading over our [filtering documentation](https://docs.mod.io/#filtering) if it will help you with consuming this endpoint.
-     
-     Filter|Type|Required|Description
-     ---|---|---|---|
-     id|integer(int32)|Unique id of the access record.
-     username|string|Username of the user.
-     level|integer|The level of permission the user has.<br><br>*Fields Options:*<br>__1__ = Moderator (can moderate content submitted)<br>__4__ = Financials (read only access to the control panel to view financial reports)<br>__8__ = Administrator (full access, including editing the profile and team)
-     date|integer|Unix timestamp of the date the user was added to the team.
-     position|string|Custom title given to the user.
-
-
-> Example responses
-
-```json
-{
-  "data": [
-    {
-      "id": 457,
-      "user": {
-        "id": 1,
-        "nameid": "xant",
-        "username": "XanT",
-        "online": 1509922961,
-        "avatar": {
-          "filename": "masterchief.jpg",
-          "full": "https://media.mod.io/images/members/1/1/1/masterchief.jpg"
-        },
-        "timezone": "Australia/Brisbane",
-        "language": "en",
-        "url": "https://mod.io/members/xant"
-      },
-      "username": "Megalodon",
-      "level": 8,
-      "date": 1492058857,
-      "position": "Supreme Overlord"
-    },
-    {
-        ...
-    }
-  ],
-  "cursor_id": 60,
-  "prev_id": 30,
-  "next_id": 160,
-  "result_count": 100
-}
-```
-<h3 id="Get-All-Mod-Team-Members-responses">Responses</h3>
-
-Status|Meaning|Description|Response Schema
----|---|---|---|
-200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)|Successful Request|[Get Team  ](#schemaget_team)
-
-<aside class="warning">
-To perform this operation, you must be authenticated by means of one of the following methods:
-apiKey, oauth2 ( Scopes: read )
-</aside>
-
-
-## Add Mod Team Member
-
-> Code samples
-
-```shell
-# You can also use wget
-curl -X POST https://api.mod.io/v1/games/{game-id}/mods/{mod-id}/team \
-  -H 'Authorization: Bearer YourAccessToken' \
-  -H 'Content-Type: application/x-www-form-urlencoded' \
-  -H 'Accept: application/json'
-
-```
-
-```http
-POST https://api.mod.io/v1/games/{game-id}/mods/{mod-id}/team HTTP/1.1
-Host: api.mod.io
-
-Accept: application/json
-Authorization: Bearer YourAccessToken
-Content-Type: application/x-www-form-urlencoded
-
-
-```
-
-```javascript
-var headers = {
-  'Authorization':'Bearer YourAccessToken',
-  'Content-Type':'application/x-www-form-urlencoded',
-  'Accept':'application/json'
-
-};
-
-$.ajax({
-  url: 'https://api.mod.io/v1/games/{game-id}/mods/{mod-id}/team',
-  method: 'post',
-
-  headers: headers,
-  success: function(data) {
-    console.log(JSON.stringify(data));
-  }
-})
-```
-
-```javascript--nodejs
-const request = require('node-fetch');
-
-const headers = {
-  'Authorization':'Bearer YourAccessToken',
-  'Content-Type':'application/x-www-form-urlencoded',
-  'Accept':'application/json'
-
-};
-
-fetch('https://api.mod.io/v1/games/{game-id}/mods/{mod-id}/team',
-{
-  method: 'POST',
-
-  headers: headers
-})
-.then(function(res) {
-    return res.json();
-}).then(function(body) {
-    console.log(body);
-});
-```
-
-```ruby
-require 'rest-client'
-require 'json'
-
-headers = {
-  'Authorization' => 'Bearer YourAccessToken',
-  'Content-Type' => 'application/x-www-form-urlencoded',
-  'Accept' => 'application/json'
-}
-
-result = RestClient.post 'https://api.mod.io/v1/games/{game-id}/mods/{mod-id}/team',
-  params: {
-  }, headers: headers
-
-
-p JSON.parse(result)
-```
-
-```python
-import requests
-headers = {
-  'Authorization': 'Bearer YourAccessToken',
-  'Content-Type': 'application/x-www-form-urlencoded',
-  'Accept': 'application/json'
-}
-
-r = requests.post('https://api.mod.io/v1/games/{game-id}/mods/{mod-id}/team', params={
-
-}, headers = headers)
-
-print r.json()
-```
-
-```java
-URL obj = new URL("https://api.mod.io/v1/games/{game-id}/mods/{mod-id}/team");
-HttpURLConnection con = (HttpURLConnection) obj.openConnection();
-con.setRequestMethod("POST");
-int responseCode = con.getResponseCode();
-BufferedReader in = new BufferedReader(
-    new InputStreamReader(con.getInputStream()));
-String inputLine;
-StringBuffer response = new StringBuffer();
-while ((inputLine = in.readLine()) != null) {
-    response.append(inputLine);
-}
-in.close();
-System.out.println(response.toString());
-```
-`POST /games/{game-id}/mods/{mod-id}/team`
-
-Add a user to a mod team.
-     
-     Parameter|Type|Required|Description
-     ---|---|---|---|
-     user|integer|true|The unique id of the team you are adding to the team.
-     level|integer|true|The level of permissions you want to give to the user.<br><br>*Fields Options:*<br>__1__ = Moderator (can moderate comments and content attached)<br>__4__ = Creator (can upload builds and edit all settings except supply and existing team members)<br>__8__ = Administrator (full access, including editing the supply and team)
-     position|string|true|The title you wish to apply to the member within your team.
-
-
-> Example responses
-
-```json
-{
-  "code": "201",
-  "message": "You have successfully added a member to the specified team."
-}
-```
-<h3 id="Add-Mod-Team-Member-responses">Responses</h3>
-
-Status|Meaning|Description|Response Schema
----|---|---|---|
-201|[Created](https://tools.ietf.org/html/rfc7231#section-6.3.2)|Created|[Message Object](#message-object)
-
-<aside class="warning">
-To perform this operation, you must be authenticated by means of one of the following methods:
-oauth2 ( Scopes: write )
-</aside>
-
-
-## Update Mod Team Member
-
-> Code samples
-
-```shell
-# You can also use wget
-curl -X PUT https://api.mod.io/v1/games/{game-id}/mods/{mod-id}/team/{access-id} \
-  -H 'Authorization: Bearer YourAccessToken' \
-  -H 'Content-Type: application/x-www-form-urlencoded' \
-  -H 'Accept: application/json'
-
-```
-
-```http
-PUT https://api.mod.io/v1/games/{game-id}/mods/{mod-id}/team/{access-id} HTTP/1.1
-Host: api.mod.io
-
-Accept: application/json
-Authorization: Bearer YourAccessToken
-Content-Type: application/x-www-form-urlencoded
-
-
-```
-
-```javascript
-var headers = {
-  'Authorization':'Bearer YourAccessToken',
-  'Content-Type':'application/x-www-form-urlencoded',
-  'Accept':'application/json'
-
-};
-
-$.ajax({
-  url: 'https://api.mod.io/v1/games/{game-id}/mods/{mod-id}/team/{access-id}',
-  method: 'put',
-
-  headers: headers,
-  success: function(data) {
-    console.log(JSON.stringify(data));
-  }
-})
-```
-
-```javascript--nodejs
-const request = require('node-fetch');
-
-const headers = {
-  'Authorization':'Bearer YourAccessToken',
-  'Content-Type':'application/x-www-form-urlencoded',
-  'Accept':'application/json'
-
-};
-
-fetch('https://api.mod.io/v1/games/{game-id}/mods/{mod-id}/team/{access-id}',
-{
-  method: 'PUT',
-
-  headers: headers
-})
-.then(function(res) {
-    return res.json();
-}).then(function(body) {
-    console.log(body);
-});
-```
-
-```ruby
-require 'rest-client'
-require 'json'
-
-headers = {
-  'Authorization' => 'Bearer YourAccessToken',
-  'Content-Type' => 'application/x-www-form-urlencoded',
-  'Accept' => 'application/json'
-}
-
-result = RestClient.put 'https://api.mod.io/v1/games/{game-id}/mods/{mod-id}/team/{access-id}',
-  params: {
-  }, headers: headers
-
-
-p JSON.parse(result)
-```
-
-```python
-import requests
-headers = {
-  'Authorization': 'Bearer YourAccessToken',
-  'Content-Type': 'application/x-www-form-urlencoded',
-  'Accept': 'application/json'
-}
-
-r = requests.put('https://api.mod.io/v1/games/{game-id}/mods/{mod-id}/team/{access-id}', params={
-
-}, headers = headers)
-
-print r.json()
-```
-
-```java
-URL obj = new URL("https://api.mod.io/v1/games/{game-id}/mods/{mod-id}/team/{access-id}");
-HttpURLConnection con = (HttpURLConnection) obj.openConnection();
-con.setRequestMethod("PUT");
-int responseCode = con.getResponseCode();
-BufferedReader in = new BufferedReader(
-    new InputStreamReader(con.getInputStream()));
-String inputLine;
-StringBuffer response = new StringBuffer();
-while ((inputLine = in.readLine()) != null) {
-    response.append(inputLine);
-}
-in.close();
-System.out.println(response.toString());
-```
-`PUT /games/{game-id}/mods/{mod-id}/team/{access-id}`
-
-Update the details of a member who is currently a part of the specified mod team.
-     
-     Parameter|Type|Required|Description
-     ---|---|---|---|
-     level|integer||The level of permissions you want to give to the user.<br><br>*Fields Options:*<br>__1__ = Moderator (can moderate comments and content attached)<br>__4__ = Creator (can upload builds and edit all settings except supply and existing team members)<br>__8__ = Administrator (full access, including editing the supply and team)
-     position|string||The title you wish to apply to the member within your team.
-
-
-> Example responses
-
-```json
-{
-  "code": "201",
-  "message": "You have successfully updated the specified team members details."
-}
-```
-<h3 id="Update-Mod-Team-Member-responses">Responses</h3>
-
-Status|Meaning|Description|Response Schema
----|---|---|---|
-200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)|OK|[Message Object](#message-object)
-
-<aside class="warning">
-To perform this operation, you must be authenticated by means of one of the following methods:
-oauth2 ( Scopes: write )
-</aside>
-
-
-## Delete Mod Team Member
-
-> Code samples
-
-```shell
-# You can also use wget
-curl -X DELETE https://api.mod.io/v1/games/{game-id}/mods/{mod-id}/team/{access-id} \
-  -H 'Authorization: Bearer YourAccessToken' \
-  -H 'Content-Type: application/x-www-form-urlencoded' \
-  -H 'Accept: application/json'
-
-```
-
-```http
-DELETE https://api.mod.io/v1/games/{game-id}/mods/{mod-id}/team/{access-id} HTTP/1.1
-Host: api.mod.io
-
-Accept: application/json
-Authorization: Bearer YourAccessToken
-Content-Type: application/x-www-form-urlencoded
-
-
-```
-
-```javascript
-var headers = {
-  'Authorization':'Bearer YourAccessToken',
-  'Content-Type':'application/x-www-form-urlencoded',
-  'Accept':'application/json'
-
-};
-
-$.ajax({
-  url: 'https://api.mod.io/v1/games/{game-id}/mods/{mod-id}/team/{access-id}',
-  method: 'delete',
-
-  headers: headers,
-  success: function(data) {
-    console.log(JSON.stringify(data));
-  }
-})
-```
-
-```javascript--nodejs
-const request = require('node-fetch');
-
-const headers = {
-  'Authorization':'Bearer YourAccessToken',
-  'Content-Type':'application/x-www-form-urlencoded',
-  'Accept':'application/json'
-
-};
-
-fetch('https://api.mod.io/v1/games/{game-id}/mods/{mod-id}/team/{access-id}',
-{
-  method: 'DELETE',
-
-  headers: headers
-})
-.then(function(res) {
-    return res.json();
-}).then(function(body) {
-    console.log(body);
-});
-```
-
-```ruby
-require 'rest-client'
-require 'json'
-
-headers = {
-  'Authorization' => 'Bearer YourAccessToken',
-  'Content-Type' => 'application/x-www-form-urlencoded',
-  'Accept' => 'application/json'
-}
-
-result = RestClient.delete 'https://api.mod.io/v1/games/{game-id}/mods/{mod-id}/team/{access-id}',
-  params: {
-  }, headers: headers
-
-
-p JSON.parse(result)
-```
-
-```python
-import requests
-headers = {
-  'Authorization': 'Bearer YourAccessToken',
-  'Content-Type': 'application/x-www-form-urlencoded',
-  'Accept': 'application/json'
-}
-
-r = requests.delete('https://api.mod.io/v1/games/{game-id}/mods/{mod-id}/team/{access-id}', params={
-
-}, headers = headers)
-
-print r.json()
-```
-
-```java
-URL obj = new URL("https://api.mod.io/v1/games/{game-id}/mods/{mod-id}/team/{access-id}");
-HttpURLConnection con = (HttpURLConnection) obj.openConnection();
-con.setRequestMethod("DELETE");
-int responseCode = con.getResponseCode();
-BufferedReader in = new BufferedReader(
-    new InputStreamReader(con.getInputStream()));
-String inputLine;
-StringBuffer response = new StringBuffer();
-while ((inputLine = in.readLine()) != null) {
-    response.append(inputLine);
-}
-in.close();
-System.out.println(response.toString());
-```
-`DELETE /games/{game-id}/mods/{mod-id}/team/{access-id}`
-
-Remove a member from a mod team. This will revoke their access rights if they are not the original creator of the resource.
-
-
-> Example responses
-
-```json
- "204 No Content" 
-```
-<h3 id="Delete-Mod-Team-Member-responses">Responses</h3>
-
-Status|Meaning|Description|Response Schema
----|---|---|---|
-204|[No Content](https://tools.ietf.org/html/rfc7231#section-6.3.5)|No Content|None
-
-<aside class="warning">
-To perform this operation, you must be authenticated by means of one of the following methods:
-oauth2 ( Scopes: write )
-</aside>
-
-
-## Get All Mod Dependencies
-
-> Code samples
-
-```shell
-# You can also use wget
-curl -X GET https://api.mod.io/v1/games/{game-id}/mods/{mod-id}/dependencies?api_key=YourApiKey \
-  -H 'Accept: application/json'
-
-```
-
-```http
-GET https://api.mod.io/v1/games/{game-id}/mods/{mod-id}/dependencies?api_key=YourApiKey HTTP/1.1
-Host: api.mod.io
-
-Accept: application/json
-
-```
-
-```javascript
-var headers = {
-  'Accept':'application/json'
-
-};
-
-$.ajax({
-  url: 'https://api.mod.io/v1/games/{game-id}/mods/{mod-id}/dependencies',
-  method: 'get',
-  data: '?api_key=YourApiKey',
-  headers: headers,
-  success: function(data) {
-    console.log(JSON.stringify(data));
-  }
-})
-```
-
-```javascript--nodejs
-const request = require('node-fetch');
-
-const headers = {
-  'Accept':'application/json'
-
-};
-
-fetch('https://api.mod.io/v1/games/{game-id}/mods/{mod-id}/dependencies?api_key=YourApiKey',
-{
-  method: 'GET',
-
-  headers: headers
-})
-.then(function(res) {
-    return res.json();
-}).then(function(body) {
-    console.log(body);
-});
-```
-
-```ruby
-require 'rest-client'
-require 'json'
-
-headers = {
-  'Accept' => 'application/json'
-}
-
-result = RestClient.get 'https://api.mod.io/v1/games/{game-id}/mods/{mod-id}/dependencies',
-  params: {
-  'api_key' => 'string'
-}, headers: headers
-
-
-p JSON.parse(result)
-```
-
-```python
-import requests
-headers = {
-  'Accept': 'application/json'
-}
-
-r = requests.get('https://api.mod.io/v1/games/{game-id}/mods/{mod-id}/dependencies', params={
-  'api_key': 'YourApiKey'
-}, headers = headers)
-
-print r.json()
-```
-
-```java
-URL obj = new URL("https://api.mod.io/v1/games/{game-id}/mods/{mod-id}/dependencies?api_key=YourApiKey");
-HttpURLConnection con = (HttpURLConnection) obj.openConnection();
-con.setRequestMethod("GET");
-int responseCode = con.getResponseCode();
-BufferedReader in = new BufferedReader(
-    new InputStreamReader(con.getInputStream()));
-String inputLine;
-StringBuffer response = new StringBuffer();
-while ((inputLine = in.readLine()) != null) {
-    response.append(inputLine);
-}
-in.close();
-System.out.println(response.toString());
-```
-`GET /games/{game-id}/mods/{mod-id}/dependencies`
-
-Get all listed dependencies for the corresponding mod, successful response will return an array of [Mod Dependencies Objects](--parse-docsurl/#mod-dependencies-object).
-
-
-> Example responses
-
-```json
-{
-  "data": [
-    {
-      "mod": 231,
-      "date": 1499841487
-    },
-    {
-        ...
-    }
-  ],
-  "cursor_id": 60,
-  "prev_id": 30,
-  "next_id": 160,
-  "result_count": 100
-}
-```
-<h3 id="Get-All-Mod-Dependencies-responses">Responses</h3>
-
-Status|Meaning|Description|Response Schema
----|---|---|---|
-200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)|Successful Request|[Get All Mod Dependencies](#schemaget_all_mod_dependencies)
-
-<aside class="warning">
-To perform this operation, you must be authenticated by means of one of the following methods:
-apiKey, oauth2 ( Scopes: read )
-</aside>
-
-
-## Add Mod Dependencies
-
-> Code samples
-
-```shell
-# You can also use wget
-curl -X POST https://api.mod.io/v1/games/{game-id}/mods/{mod-id}/dependencies \
-  -H 'Authorization: Bearer YourAccessToken' \
-  -H 'Content-Type: application/x-www-form-urlencoded' \
-  -H 'Accept: application/json'
-
-```
-
-```http
-POST https://api.mod.io/v1/games/{game-id}/mods/{mod-id}/dependencies HTTP/1.1
-Host: api.mod.io
-
-Accept: application/json
-Authorization: Bearer YourAccessToken
-Content-Type: application/x-www-form-urlencoded
-
-
-```
-
-```javascript
-var headers = {
-  'Authorization':'Bearer YourAccessToken',
-  'Content-Type':'application/x-www-form-urlencoded',
-  'Accept':'application/json'
-
-};
-
-$.ajax({
-  url: 'https://api.mod.io/v1/games/{game-id}/mods/{mod-id}/dependencies',
-  method: 'post',
-
-  headers: headers,
-  success: function(data) {
-    console.log(JSON.stringify(data));
-  }
-})
-```
-
-```javascript--nodejs
-const request = require('node-fetch');
-
-const headers = {
-  'Authorization':'Bearer YourAccessToken',
-  'Content-Type':'application/x-www-form-urlencoded',
-  'Accept':'application/json'
-
-};
-
-fetch('https://api.mod.io/v1/games/{game-id}/mods/{mod-id}/dependencies',
-{
-  method: 'POST',
-
-  headers: headers
-})
-.then(function(res) {
-    return res.json();
-}).then(function(body) {
-    console.log(body);
-});
-```
-
-```ruby
-require 'rest-client'
-require 'json'
-
-headers = {
-  'Authorization' => 'Bearer YourAccessToken',
-  'Content-Type' => 'application/x-www-form-urlencoded',
-  'Accept' => 'application/json'
-}
-
-result = RestClient.post 'https://api.mod.io/v1/games/{game-id}/mods/{mod-id}/dependencies',
-  params: {
-  }, headers: headers
-
-
-p JSON.parse(result)
-```
-
-```python
-import requests
-headers = {
-  'Authorization': 'Bearer YourAccessToken',
-  'Content-Type': 'application/x-www-form-urlencoded',
-  'Accept': 'application/json'
-}
-
-r = requests.post('https://api.mod.io/v1/games/{game-id}/mods/{mod-id}/dependencies', params={
-
-}, headers = headers)
-
-print r.json()
-```
-
-```java
-URL obj = new URL("https://api.mod.io/v1/games/{game-id}/mods/{mod-id}/dependencies");
-HttpURLConnection con = (HttpURLConnection) obj.openConnection();
-con.setRequestMethod("POST");
-int responseCode = con.getResponseCode();
-BufferedReader in = new BufferedReader(
-    new InputStreamReader(con.getInputStream()));
-String inputLine;
-StringBuffer response = new StringBuffer();
-while ((inputLine = in.readLine()) != null) {
-    response.append(inputLine);
-}
-in.close();
-System.out.println(response.toString());
-```
-`POST /games/{game-id}/mods/{mod-id}/dependencies`
-
-Add dependencies that are required for the corresponding mod. Dependencies should be the unique id of the mod that this mod is to be dependant on. For example: If you submit the values 28 & 42, you are listing this mod as being dependant on the mods that hold those values as their unique id.
-
-    Parameter|Type|Required|Description
-    ---|---|---|---|
-    dependencies|array|true|Array containing one or more mod id's that will represent the mods this mod is dependent on. Max of 5 dependencies per request.
-
-
-> Example responses
-
-```json
-{
-  "code": "201",
-  "message": "You have successfully added new dependencies to the specified mod."
-}
-```
-<h3 id="Add-Mod-Dependencies-responses">Responses</h3>
-
-Status|Meaning|Description|Response Schema
----|---|---|---|
-201|[Created](https://tools.ietf.org/html/rfc7231#section-6.3.2)|Created|[Message Object](#message-object)
-
-<aside class="warning">
-To perform this operation, you must be authenticated by means of one of the following methods:
-oauth2 ( Scopes: write )
-</aside>
-
-
-## Delete Mod Dependencies
-
-> Code samples
-
-```shell
-# You can also use wget
-curl -X DELETE https://api.mod.io/v1/games/{game-id}/mods/{mod-id}/dependencies \
-  -H 'Authorization: Bearer YourAccessToken' \
-  -H 'Content-Type: application/x-www-form-urlencoded' \
-  -H 'Accept: application/json'
-
-```
-
-```http
-DELETE https://api.mod.io/v1/games/{game-id}/mods/{mod-id}/dependencies HTTP/1.1
-Host: api.mod.io
-
-Accept: application/json
-Authorization: Bearer YourAccessToken
-Content-Type: application/x-www-form-urlencoded
-
-
-```
-
-```javascript
-var headers = {
-  'Authorization':'Bearer YourAccessToken',
-  'Content-Type':'application/x-www-form-urlencoded',
-  'Accept':'application/json'
-
-};
-
-$.ajax({
-  url: 'https://api.mod.io/v1/games/{game-id}/mods/{mod-id}/dependencies',
-  method: 'delete',
-
-  headers: headers,
-  success: function(data) {
-    console.log(JSON.stringify(data));
-  }
-})
-```
-
-```javascript--nodejs
-const request = require('node-fetch');
-
-const headers = {
-  'Authorization':'Bearer YourAccessToken',
-  'Content-Type':'application/x-www-form-urlencoded',
-  'Accept':'application/json'
-
-};
-
-fetch('https://api.mod.io/v1/games/{game-id}/mods/{mod-id}/dependencies',
-{
-  method: 'DELETE',
-
-  headers: headers
-})
-.then(function(res) {
-    return res.json();
-}).then(function(body) {
-    console.log(body);
-});
-```
-
-```ruby
-require 'rest-client'
-require 'json'
-
-headers = {
-  'Authorization' => 'Bearer YourAccessToken',
-  'Content-Type' => 'application/x-www-form-urlencoded',
-  'Accept' => 'application/json'
-}
-
-result = RestClient.delete 'https://api.mod.io/v1/games/{game-id}/mods/{mod-id}/dependencies',
-  params: {
-  }, headers: headers
-
-
-p JSON.parse(result)
-```
-
-```python
-import requests
-headers = {
-  'Authorization': 'Bearer YourAccessToken',
-  'Content-Type': 'application/x-www-form-urlencoded',
-  'Accept': 'application/json'
-}
-
-r = requests.delete('https://api.mod.io/v1/games/{game-id}/mods/{mod-id}/dependencies', params={
-
-}, headers = headers)
-
-print r.json()
-```
-
-```java
-URL obj = new URL("https://api.mod.io/v1/games/{game-id}/mods/{mod-id}/dependencies");
-HttpURLConnection con = (HttpURLConnection) obj.openConnection();
-con.setRequestMethod("DELETE");
-int responseCode = con.getResponseCode();
-BufferedReader in = new BufferedReader(
-    new InputStreamReader(con.getInputStream()));
-String inputLine;
-StringBuffer response = new StringBuffer();
-while ((inputLine = in.readLine()) != null) {
-    response.append(inputLine);
-}
-in.close();
-System.out.println(response.toString());
-```
-`DELETE /games/{game-id}/mods/{mod-id}/dependencies`
-
-Delete dependencies currently listed as required for the corresponding mod. Dependencies should be the unique id of the mod that this mod is dependant on. For example: If you submit the values 28 & 42, you are requesting that the mods with the unique id's 28 & 42 no longer be listed as a dependency for the corresponding mod. Successful request will return `204 No Content`.
-
-    Parameter|Type|Required|Description
-    ---|---|---|---|
-    dependencies|array|true|Array containing one or more mod id's that will represent the unique id's of the mods to delete as dependencies. Max of 5 dependencies per request.
-
-
-> Example responses
-
-```json
- "204 No Content" 
-```
-<h3 id="Delete-Mod-Dependencies-responses">Responses</h3>
-
-Status|Meaning|Description|Response Schema
----|---|---|---|
-204|[No Content](https://tools.ietf.org/html/rfc7231#section-6.3.5)|No Content|None
-
-<aside class="warning">
-To perform this operation, you must be authenticated by means of one of the following methods:
-oauth2 ( Scopes: write )
-</aside>
-
-
-## Get All Mod KVP Metadata
-
-> Code samples
-
-```shell
-# You can also use wget
-curl -X GET https://api.mod.io/v1/games/{game-id}/mods/{mod-id}/metadatakvp?api_key=YourApiKey \
-  -H 'Accept: application/json'
-
-```
-
-```http
-GET https://api.mod.io/v1/games/{game-id}/mods/{mod-id}/metadatakvp?api_key=YourApiKey HTTP/1.1
-Host: api.mod.io
-
-Accept: application/json
-
-```
-
-```javascript
-var headers = {
-  'Accept':'application/json'
-
-};
-
-$.ajax({
-  url: 'https://api.mod.io/v1/games/{game-id}/mods/{mod-id}/metadatakvp',
-  method: 'get',
-  data: '?api_key=YourApiKey',
-  headers: headers,
-  success: function(data) {
-    console.log(JSON.stringify(data));
-  }
-})
-```
-
-```javascript--nodejs
-const request = require('node-fetch');
-
-const headers = {
-  'Accept':'application/json'
-
-};
-
-fetch('https://api.mod.io/v1/games/{game-id}/mods/{mod-id}/metadatakvp?api_key=YourApiKey',
-{
-  method: 'GET',
-
-  headers: headers
-})
-.then(function(res) {
-    return res.json();
-}).then(function(body) {
-    console.log(body);
-});
-```
-
-```ruby
-require 'rest-client'
-require 'json'
-
-headers = {
-  'Accept' => 'application/json'
-}
-
-result = RestClient.get 'https://api.mod.io/v1/games/{game-id}/mods/{mod-id}/metadatakvp',
-  params: {
-  'api_key' => 'string'
-}, headers: headers
-
-
-p JSON.parse(result)
-```
-
-```python
-import requests
-headers = {
-  'Accept': 'application/json'
-}
-
-r = requests.get('https://api.mod.io/v1/games/{game-id}/mods/{mod-id}/metadatakvp', params={
-  'api_key': 'YourApiKey'
-}, headers = headers)
-
-print r.json()
-```
-
-```java
-URL obj = new URL("https://api.mod.io/v1/games/{game-id}/mods/{mod-id}/metadatakvp?api_key=YourApiKey");
-HttpURLConnection con = (HttpURLConnection) obj.openConnection();
-con.setRequestMethod("GET");
-int responseCode = con.getResponseCode();
-BufferedReader in = new BufferedReader(
-    new InputStreamReader(con.getInputStream()));
-String inputLine;
-StringBuffer response = new StringBuffer();
-while ((inputLine = in.readLine()) != null) {
-    response.append(inputLine);
-}
-in.close();
-System.out.println(response.toString());
-```
-`GET /games/{game-id}/mods/{mod-id}/metadatakvp`
-
-Get all key-value metadata pairs for the corresponding mod, successful response will return an array of objects contains only the key-value pairs. Only mod administrators are able to view these values.
-
-
-> Example responses
-
-```json
-{
-  "data": [
-    {
-      "key": "pistol-dmg",
-      "value": 800
-    },
-    {
-        ...
-    }
-  ],
-  "cursor_id": 60,
-  "prev_id": 30,
-  "next_id": 160,
-  "result_count": 100
-}
-```
-<h3 id="Get-All-Mod-KVP-Metadata-responses">Responses</h3>
-
-Status|Meaning|Description|Response Schema
----|---|---|---|
-200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)|Successful Request|[Get All Mod KVP](#schemaget_all_mod_kvp_metadata)
-
-<aside class="warning">
-To perform this operation, you must be authenticated by means of one of the following methods:
-apiKey, oauth2 ( Scopes: read )
-</aside>
-
-
-## Add Mod KVP Metadata
-
-> Code samples
-
-```shell
-# You can also use wget
-curl -X POST https://api.mod.io/v1/games/{game-id}/mods/{mod-id}/metadatakvp \
-  -H 'Authorization: Bearer YourAccessToken' \
-  -H 'Content-Type: application/x-www-form-urlencoded' \
-  -H 'Accept: application/json'
-
-```
-
-```http
-POST https://api.mod.io/v1/games/{game-id}/mods/{mod-id}/metadatakvp HTTP/1.1
-Host: api.mod.io
-
-Accept: application/json
-Authorization: Bearer YourAccessToken
-Content-Type: application/x-www-form-urlencoded
-
-
-```
-
-```javascript
-var headers = {
-  'Authorization':'Bearer YourAccessToken',
-  'Content-Type':'application/x-www-form-urlencoded',
-  'Accept':'application/json'
-
-};
-
-$.ajax({
-  url: 'https://api.mod.io/v1/games/{game-id}/mods/{mod-id}/metadatakvp',
-  method: 'post',
-
-  headers: headers,
-  success: function(data) {
-    console.log(JSON.stringify(data));
-  }
-})
-```
-
-```javascript--nodejs
-const request = require('node-fetch');
-
-const headers = {
-  'Authorization':'Bearer YourAccessToken',
-  'Content-Type':'application/x-www-form-urlencoded',
-  'Accept':'application/json'
-
-};
-
-fetch('https://api.mod.io/v1/games/{game-id}/mods/{mod-id}/metadatakvp',
-{
-  method: 'POST',
-
-  headers: headers
-})
-.then(function(res) {
-    return res.json();
-}).then(function(body) {
-    console.log(body);
-});
-```
-
-```ruby
-require 'rest-client'
-require 'json'
-
-headers = {
-  'Authorization' => 'Bearer YourAccessToken',
-  'Content-Type' => 'application/x-www-form-urlencoded',
-  'Accept' => 'application/json'
-}
-
-result = RestClient.post 'https://api.mod.io/v1/games/{game-id}/mods/{mod-id}/metadatakvp',
-  params: {
-  }, headers: headers
-
-
-p JSON.parse(result)
-```
-
-```python
-import requests
-headers = {
-  'Authorization': 'Bearer YourAccessToken',
-  'Content-Type': 'application/x-www-form-urlencoded',
-  'Accept': 'application/json'
-}
-
-r = requests.post('https://api.mod.io/v1/games/{game-id}/mods/{mod-id}/metadatakvp', params={
-
-}, headers = headers)
-
-print r.json()
-```
-
-```java
-URL obj = new URL("https://api.mod.io/v1/games/{game-id}/mods/{mod-id}/metadatakvp");
-HttpURLConnection con = (HttpURLConnection) obj.openConnection();
-con.setRequestMethod("POST");
-int responseCode = con.getResponseCode();
-BufferedReader in = new BufferedReader(
-    new InputStreamReader(con.getInputStream()));
-String inputLine;
-StringBuffer response = new StringBuffer();
-while ((inputLine = in.readLine()) != null) {
-    response.append(inputLine);
-}
-in.close();
-System.out.println(response.toString());
-```
-`POST /games/{game-id}/mods/{mod-id}/metadatakvp`
-
-Add searchable key-value metadata for the corresponding mod. Metadata may include properties as to how the item works, or other information you need to display. You must have administrator privileges to add metadata to a mod.
-     
-     Parameter|Type|Required|Description
-     ---|---|---|---|
-     metadata|array|true|Array containing one or more key value pairs where the the key & value are separated by a colon ':'. A single key can map to multiple values (1-to-many relationship), key-value pairs are searchable by exact matches only and neither the key or value can exceed 255 characters in length.
-
-
-> Example responses
-
-```json
-{
-  "code": "201",
-  "message": "You have successfully added new key-value metadata to the specified mod."
-}
-```
-<h3 id="Add-Mod-KVP-Metadata-responses">Responses</h3>
-
-Status|Meaning|Description|Response Schema
----|---|---|---|
-201|[Created](https://tools.ietf.org/html/rfc7231#section-6.3.2)|Created|[Message Object](#message-object)
-
-<aside class="warning">
-To perform this operation, you must be authenticated by means of one of the following methods:
-oauth2 ( Scopes: write )
-</aside>
-
-
-## Delete Mod KVP Metadata
-
-> Code samples
-
-```shell
-# You can also use wget
-curl -X DELETE https://api.mod.io/v1/games/{game-id}/mods/{mod-id}/metadatakvp \
-  -H 'Authorization: Bearer YourAccessToken' \
-  -H 'Content-Type: application/x-www-form-urlencoded' \
-  -H 'Accept: application/json'
-
-```
-
-```http
-DELETE https://api.mod.io/v1/games/{game-id}/mods/{mod-id}/metadatakvp HTTP/1.1
-Host: api.mod.io
-
-Accept: application/json
-Authorization: Bearer YourAccessToken
-Content-Type: application/x-www-form-urlencoded
-
-
-```
-
-```javascript
-var headers = {
-  'Authorization':'Bearer YourAccessToken',
-  'Content-Type':'application/x-www-form-urlencoded',
-  'Accept':'application/json'
-
-};
-
-$.ajax({
-  url: 'https://api.mod.io/v1/games/{game-id}/mods/{mod-id}/metadatakvp',
-  method: 'delete',
-
-  headers: headers,
-  success: function(data) {
-    console.log(JSON.stringify(data));
-  }
-})
-```
-
-```javascript--nodejs
-const request = require('node-fetch');
-
-const headers = {
-  'Authorization':'Bearer YourAccessToken',
-  'Content-Type':'application/x-www-form-urlencoded',
-  'Accept':'application/json'
-
-};
-
-fetch('https://api.mod.io/v1/games/{game-id}/mods/{mod-id}/metadatakvp',
-{
-  method: 'DELETE',
-
-  headers: headers
-})
-.then(function(res) {
-    return res.json();
-}).then(function(body) {
-    console.log(body);
-});
-```
-
-```ruby
-require 'rest-client'
-require 'json'
-
-headers = {
-  'Authorization' => 'Bearer YourAccessToken',
-  'Content-Type' => 'application/x-www-form-urlencoded',
-  'Accept' => 'application/json'
-}
-
-result = RestClient.delete 'https://api.mod.io/v1/games/{game-id}/mods/{mod-id}/metadatakvp',
-  params: {
-  }, headers: headers
-
-
-p JSON.parse(result)
-```
-
-```python
-import requests
-headers = {
-  'Authorization': 'Bearer YourAccessToken',
-  'Content-Type': 'application/x-www-form-urlencoded',
-  'Accept': 'application/json'
-}
-
-r = requests.delete('https://api.mod.io/v1/games/{game-id}/mods/{mod-id}/metadatakvp', params={
-
-}, headers = headers)
-
-print r.json()
-```
-
-```java
-URL obj = new URL("https://api.mod.io/v1/games/{game-id}/mods/{mod-id}/metadatakvp");
-HttpURLConnection con = (HttpURLConnection) obj.openConnection();
-con.setRequestMethod("DELETE");
-int responseCode = con.getResponseCode();
-BufferedReader in = new BufferedReader(
-    new InputStreamReader(con.getInputStream()));
-String inputLine;
-StringBuffer response = new StringBuffer();
-while ((inputLine = in.readLine()) != null) {
-    response.append(inputLine);
-}
-in.close();
-System.out.println(response.toString());
-```
-`DELETE /games/{game-id}/mods/{mod-id}/metadatakvp`
-
-Delete key-value pair metadata from the corresponding mod. <br><br>__Note:__ Due to a key being able to relate to multiple values, if you supply a key only it will delete _all_ key-value pairs containing that key but if you supply both key & value only an exact key-value match will be removed.
-     
-     Parameter|Type|Required|Description
-     ---|---|---|---|
-     metadata|array|true|Array containing one or more key value pairs where the the key & value are separated by a colon ':'. A single key can map to multiple values (1-to-many relationship), key-value pairs are searchable by exact matches only and neither the key or value can exceed 255 characters in length.
-
-
-> Example responses
-
-```json
- "204 No Content" 
-```
-<h3 id="Delete-Mod-KVP-Metadata-responses">Responses</h3>
-
-Status|Meaning|Description|Response Schema
----|---|---|---|
-204|[No Content](https://tools.ietf.org/html/rfc7231#section-6.3.5)|No Content|None
-
-<aside class="warning">
-To perform this operation, you must be authenticated by means of one of the following methods:
-oauth2 ( Scopes: write )
-</aside>
-
-
-# Subscribe
-
-## Subscribe To Mod
-
-> Code samples
-
-```shell
-# You can also use wget
-curl -X POST https://api.mod.io/v1/games/{game-id}/mods/{mod-id}/subscribe \
-  -H 'Authorization: Bearer YourAccessToken' \
-  -H 'Content-Type: application/x-www-form-urlencoded' \
-  -H 'Accept: application/json'
-
-```
-
-```http
-POST https://api.mod.io/v1/games/{game-id}/mods/{mod-id}/subscribe HTTP/1.1
-Host: api.mod.io
-
-Accept: application/json
-Authorization: Bearer YourAccessToken
-Content-Type: application/x-www-form-urlencoded
-
-
-```
-
-```javascript
-var headers = {
-  'Authorization':'Bearer YourAccessToken',
-  'Content-Type':'application/x-www-form-urlencoded',
-  'Accept':'application/json'
-
-};
-
-$.ajax({
-  url: 'https://api.mod.io/v1/games/{game-id}/mods/{mod-id}/subscribe',
-  method: 'post',
-
-  headers: headers,
-  success: function(data) {
-    console.log(JSON.stringify(data));
-  }
-})
-```
-
-```javascript--nodejs
-const request = require('node-fetch');
-
-const headers = {
-  'Authorization':'Bearer YourAccessToken',
-  'Content-Type':'application/x-www-form-urlencoded',
-  'Accept':'application/json'
-
-};
-
-fetch('https://api.mod.io/v1/games/{game-id}/mods/{mod-id}/subscribe',
-{
-  method: 'POST',
-
-  headers: headers
-})
-.then(function(res) {
-    return res.json();
-}).then(function(body) {
-    console.log(body);
-});
-```
-
-```ruby
-require 'rest-client'
-require 'json'
-
-headers = {
-  'Authorization' => 'Bearer YourAccessToken',
-  'Content-Type' => 'application/x-www-form-urlencoded',
-  'Accept' => 'application/json'
-}
-
-result = RestClient.post 'https://api.mod.io/v1/games/{game-id}/mods/{mod-id}/subscribe',
-  params: {
-  }, headers: headers
-
-
-p JSON.parse(result)
-```
-
-```python
-import requests
-headers = {
-  'Authorization': 'Bearer YourAccessToken',
-  'Content-Type': 'application/x-www-form-urlencoded',
-  'Accept': 'application/json'
-}
-
-r = requests.post('https://api.mod.io/v1/games/{game-id}/mods/{mod-id}/subscribe', params={
-
-}, headers = headers)
-
-print r.json()
-```
-
-```java
-URL obj = new URL("https://api.mod.io/v1/games/{game-id}/mods/{mod-id}/subscribe");
-HttpURLConnection con = (HttpURLConnection) obj.openConnection();
-con.setRequestMethod("POST");
-int responseCode = con.getResponseCode();
-BufferedReader in = new BufferedReader(
-    new InputStreamReader(con.getInputStream()));
-String inputLine;
-StringBuffer response = new StringBuffer();
-while ((inputLine = in.readLine()) != null) {
-    response.append(inputLine);
-}
-in.close();
-System.out.println(response.toString());
-```
-`POST /games/{game-id}/mods/{mod-id}/subscribe`
-
-__OAuth 2 Required__. Subscribe the _authenticated user_ to a corresponding mod. No body parameters are required for this action.
-
-
-> Example responses
-
-```json
-{
-  "code": "201",
-  "message": "You have successfully subscribed to the specified mod."
-}
-```
-<h3 id="Subscribe-To-Mod-responses">Responses</h3>
-
-Status|Meaning|Description|Response Schema
----|---|---|---|
-201|[Created](https://tools.ietf.org/html/rfc7231#section-6.3.2)|Created|[Message Object](#message-object)
-
-<aside class="warning">
-To perform this operation, you must be authenticated by means of one of the following methods:
-oauth2 ( Scopes: write )
-</aside>
-
-
-## Unsubscribe To Mod
-
-> Code samples
-
-```shell
-# You can also use wget
-curl -X DELETE https://api.mod.io/v1/games/{game-id}/mods/{mod-id}/subscribe \
-  -H 'Authorization: Bearer YourAccessToken' \
-  -H 'Content-Type: application/x-www-form-urlencoded' \
-  -H 'Accept: application/json'
-
-```
-
-```http
-DELETE https://api.mod.io/v1/games/{game-id}/mods/{mod-id}/subscribe HTTP/1.1
-Host: api.mod.io
-
-Accept: application/json
-Authorization: Bearer YourAccessToken
-Content-Type: application/x-www-form-urlencoded
-
-
-```
-
-```javascript
-var headers = {
-  'Authorization':'Bearer YourAccessToken',
-  'Content-Type':'application/x-www-form-urlencoded',
-  'Accept':'application/json'
-
-};
-
-$.ajax({
-  url: 'https://api.mod.io/v1/games/{game-id}/mods/{mod-id}/subscribe',
-  method: 'delete',
-
-  headers: headers,
-  success: function(data) {
-    console.log(JSON.stringify(data));
-  }
-})
-```
-
-```javascript--nodejs
-const request = require('node-fetch');
-
-const headers = {
-  'Authorization':'Bearer YourAccessToken',
-  'Content-Type':'application/x-www-form-urlencoded',
-  'Accept':'application/json'
-
-};
-
-fetch('https://api.mod.io/v1/games/{game-id}/mods/{mod-id}/subscribe',
-{
-  method: 'DELETE',
-
-  headers: headers
-})
-.then(function(res) {
-    return res.json();
-}).then(function(body) {
-    console.log(body);
-});
-```
-
-```ruby
-require 'rest-client'
-require 'json'
-
-headers = {
-  'Authorization' => 'Bearer YourAccessToken',
-  'Content-Type' => 'application/x-www-form-urlencoded',
-  'Accept' => 'application/json'
-}
-
-result = RestClient.delete 'https://api.mod.io/v1/games/{game-id}/mods/{mod-id}/subscribe',
-  params: {
-  }, headers: headers
-
-
-p JSON.parse(result)
-```
-
-```python
-import requests
-headers = {
-  'Authorization': 'Bearer YourAccessToken',
-  'Content-Type': 'application/x-www-form-urlencoded',
-  'Accept': 'application/json'
-}
-
-r = requests.delete('https://api.mod.io/v1/games/{game-id}/mods/{mod-id}/subscribe', params={
-
-}, headers = headers)
-
-print r.json()
-```
-
-```java
-URL obj = new URL("https://api.mod.io/v1/games/{game-id}/mods/{mod-id}/subscribe");
-HttpURLConnection con = (HttpURLConnection) obj.openConnection();
-con.setRequestMethod("DELETE");
-int responseCode = con.getResponseCode();
-BufferedReader in = new BufferedReader(
-    new InputStreamReader(con.getInputStream()));
-String inputLine;
-StringBuffer response = new StringBuffer();
-while ((inputLine = in.readLine()) != null) {
-    response.append(inputLine);
-}
-in.close();
-System.out.println(response.toString());
-```
-`DELETE /games/{game-id}/mods/{mod-id}/subscribe`
-
-__OAuth 2 Required__. Un-Subscribe the _authenticated user_ to the corresponding mod. No body parameters are required for this action.
-
-
-> Example responses
-
-```json
- "204 No Content" 
-```
-<h3 id="Unsubscribe-To-Mod-responses">Responses</h3>
-
-Status|Meaning|Description|Response Schema
----|---|---|---|
-204|[No Content](https://tools.ietf.org/html/rfc7231#section-6.3.5)|No Content|None
-
-<aside class="warning">
-To perform this operation, you must be authenticated by means of one of the following methods:
-oauth2 ( Scopes: write )
-</aside>
-
-
 # Users
+
+## Get Resource Ownership
+
+> Code samples
+
+```shell
+# You can also use wget
+curl -X POST https://api.mod.io/v1/general/ownership \
+  -H 'Authorization: Bearer YourAccessToken' \
+  -H 'Content-Type: application/x-www-form-urlencoded' \
+  -H 'Accept: application/json'
+
+```
+
+```http
+POST https://api.mod.io/v1/general/ownership HTTP/1.1
+Host: api.mod.io
+
+Accept: application/json
+Authorization: Bearer YourAccessToken
+Content-Type: application/x-www-form-urlencoded
+
+
+```
+
+```javascript
+var headers = {
+  'Authorization':'Bearer YourAccessToken',
+  'Content-Type':'application/x-www-form-urlencoded',
+  'Accept':'application/json'
+
+};
+
+$.ajax({
+  url: 'https://api.mod.io/v1/general/ownership',
+  method: 'post',
+
+  headers: headers,
+  success: function(data) {
+    console.log(JSON.stringify(data));
+  }
+})
+```
+
+```javascript--nodejs
+const request = require('node-fetch');
+
+const headers = {
+  'Authorization':'Bearer YourAccessToken',
+  'Content-Type':'application/x-www-form-urlencoded',
+  'Accept':'application/json'
+
+};
+
+fetch('https://api.mod.io/v1/general/ownership',
+{
+  method: 'POST',
+
+  headers: headers
+})
+.then(function(res) {
+    return res.json();
+}).then(function(body) {
+    console.log(body);
+});
+```
+
+```ruby
+require 'rest-client'
+require 'json'
+
+headers = {
+  'Authorization' => 'Bearer YourAccessToken',
+  'Content-Type' => 'application/x-www-form-urlencoded',
+  'Accept' => 'application/json'
+}
+
+result = RestClient.post 'https://api.mod.io/v1/general/ownership',
+  params: {
+  }, headers: headers
+
+
+p JSON.parse(result)
+```
+
+```python
+import requests
+headers = {
+  'Authorization': 'Bearer YourAccessToken',
+  'Content-Type': 'application/x-www-form-urlencoded',
+  'Accept': 'application/json'
+}
+
+r = requests.post('https://api.mod.io/v1/general/ownership', params={
+
+}, headers = headers)
+
+print r.json()
+```
+
+```java
+URL obj = new URL("https://api.mod.io/v1/general/ownership");
+HttpURLConnection con = (HttpURLConnection) obj.openConnection();
+con.setRequestMethod("POST");
+int responseCode = con.getResponseCode();
+BufferedReader in = new BufferedReader(
+    new InputStreamReader(con.getInputStream()));
+String inputLine;
+StringBuffer response = new StringBuffer();
+while ((inputLine = in.readLine()) != null) {
+    response.append(inputLine);
+}
+in.close();
+System.out.println(response.toString());
+```
+`POST /general/ownership`
+
+Determine if a specified user has ownership rights to a resource.
+     
+     Parameter|Type|Required|Description
+     ---|---|---|---|
+     resource|string|true|The name of the resource type you are checking against a user - __must__ be one of the following values.<br><br>*Field options*<br>__games__<br>__mods__<br>__files__<br>__tags__<br>__users__.
+     id|integer(int32)|true|Unique Id of the resource to check access rights for.
+     user|integer(int32)|true|Unique Id of the user you are determining has access to the resource id.
+
+
+> Example responses
+
+```json
+{
+  "resource": "files",
+  "id": 3,
+  "ownership": true
+}
+```
+<h3 id="Get-Resource-Ownership-responses">Responses</h3>
+
+Status|Meaning|Description|Response Schema
+---|---|---|---|
+200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)|Successful Request|[Ownership Object  ](#schemaownership_object)
+
+<aside class="warning">
+To perform this operation, you must be authenticated by means of one of the following methods:
+apiKey, oauth2 ( Scopes: read )
+</aside>
+
+
+## Get Resource Price
+
+> Code samples
+
+```shell
+# You can also use wget
+curl -X POST https://api.mod.io/v1/general/price \
+  -H 'Authorization: Bearer YourAccessToken' \
+  -H 'Content-Type: application/x-www-form-urlencoded' \
+  -H 'Accept: application/json'
+
+```
+
+```http
+POST https://api.mod.io/v1/general/price HTTP/1.1
+Host: api.mod.io
+
+Accept: application/json
+Authorization: Bearer YourAccessToken
+Content-Type: application/x-www-form-urlencoded
+
+
+```
+
+```javascript
+var headers = {
+  'Authorization':'Bearer YourAccessToken',
+  'Content-Type':'application/x-www-form-urlencoded',
+  'Accept':'application/json'
+
+};
+
+$.ajax({
+  url: 'https://api.mod.io/v1/general/price',
+  method: 'post',
+
+  headers: headers,
+  success: function(data) {
+    console.log(JSON.stringify(data));
+  }
+})
+```
+
+```javascript--nodejs
+const request = require('node-fetch');
+
+const headers = {
+  'Authorization':'Bearer YourAccessToken',
+  'Content-Type':'application/x-www-form-urlencoded',
+  'Accept':'application/json'
+
+};
+
+fetch('https://api.mod.io/v1/general/price',
+{
+  method: 'POST',
+
+  headers: headers
+})
+.then(function(res) {
+    return res.json();
+}).then(function(body) {
+    console.log(body);
+});
+```
+
+```ruby
+require 'rest-client'
+require 'json'
+
+headers = {
+  'Authorization' => 'Bearer YourAccessToken',
+  'Content-Type' => 'application/x-www-form-urlencoded',
+  'Accept' => 'application/json'
+}
+
+result = RestClient.post 'https://api.mod.io/v1/general/price',
+  params: {
+  }, headers: headers
+
+
+p JSON.parse(result)
+```
+
+```python
+import requests
+headers = {
+  'Authorization': 'Bearer YourAccessToken',
+  'Content-Type': 'application/x-www-form-urlencoded',
+  'Accept': 'application/json'
+}
+
+r = requests.post('https://api.mod.io/v1/general/price', params={
+
+}, headers = headers)
+
+print r.json()
+```
+
+```java
+URL obj = new URL("https://api.mod.io/v1/general/price");
+HttpURLConnection con = (HttpURLConnection) obj.openConnection();
+con.setRequestMethod("POST");
+int responseCode = con.getResponseCode();
+BufferedReader in = new BufferedReader(
+    new InputStreamReader(con.getInputStream()));
+String inputLine;
+StringBuffer response = new StringBuffer();
+while ((inputLine = in.readLine()) != null) {
+    response.append(inputLine);
+}
+in.close();
+System.out.println(response.toString());
+```
+`POST /general/price`
+
+View the price of a requested resource, if the requested resource is able to be sold. All prices returned are in __USD__.
+     
+     Parameter|Type|Required|Description
+     ---|---|---|---|
+     resource|string|true|The name of the resource type you are checking a price for - __must__ be one of the following values.<br><br>*Field options*<br>__games__<br>__mods__.
+     id|integer(int32)|true|Unique Id of the resource that contains the price.
+
+
+> Example responses
+
+```json
+{
+  "resource": "files",
+  "id": 3,
+  "price": 19.99
+}
+```
+<h3 id="Get-Resource-Price-responses">Responses</h3>
+
+Status|Meaning|Description|Response Schema
+---|---|---|---|
+200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)|OK|[Price Object  ](#schemaprice_object)
+
+<aside class="warning">
+To perform this operation, you must be authenticated by means of one of the following methods:
+apiKey, oauth2 ( Scopes: read )
+</aside>
+
 
 ## Get All Users
 
@@ -7391,13 +7700,15 @@ apiKey, oauth2 ( Scopes: read )
 </aside>
 
 
-## Get Resource Ownership
+# Reports
+
+## Submit Report
 
 > Code samples
 
 ```shell
 # You can also use wget
-curl -X POST https://api.mod.io/v1/general/ownership \
+curl -X POST https://api.mod.io/v1/report \
   -H 'Authorization: Bearer YourAccessToken' \
   -H 'Content-Type: application/x-www-form-urlencoded' \
   -H 'Accept: application/json'
@@ -7405,7 +7716,7 @@ curl -X POST https://api.mod.io/v1/general/ownership \
 ```
 
 ```http
-POST https://api.mod.io/v1/general/ownership HTTP/1.1
+POST https://api.mod.io/v1/report HTTP/1.1
 Host: api.mod.io
 
 Accept: application/json
@@ -7424,7 +7735,7 @@ var headers = {
 };
 
 $.ajax({
-  url: 'https://api.mod.io/v1/general/ownership',
+  url: 'https://api.mod.io/v1/report',
   method: 'post',
 
   headers: headers,
@@ -7444,7 +7755,7 @@ const headers = {
 
 };
 
-fetch('https://api.mod.io/v1/general/ownership',
+fetch('https://api.mod.io/v1/report',
 {
   method: 'POST',
 
@@ -7467,7 +7778,7 @@ headers = {
   'Accept' => 'application/json'
 }
 
-result = RestClient.post 'https://api.mod.io/v1/general/ownership',
+result = RestClient.post 'https://api.mod.io/v1/report',
   params: {
   }, headers: headers
 
@@ -7483,7 +7794,7 @@ headers = {
   'Accept': 'application/json'
 }
 
-r = requests.post('https://api.mod.io/v1/general/ownership', params={
+r = requests.post('https://api.mod.io/v1/report', params={
 
 }, headers = headers)
 
@@ -7491,7 +7802,7 @@ print r.json()
 ```
 
 ```java
-URL obj = new URL("https://api.mod.io/v1/general/ownership");
+URL obj = new URL("https://api.mod.io/v1/report");
 HttpURLConnection con = (HttpURLConnection) obj.openConnection();
 con.setRequestMethod("POST");
 int responseCode = con.getResponseCode();
@@ -7505,180 +7816,36 @@ while ((inputLine = in.readLine()) != null) {
 in.close();
 System.out.println(response.toString());
 ```
-`POST /general/ownership`
+`POST /report`
 
-Determine if a specified user has ownership rights to a resource.
+Submit a report for any resource on mod.io.
      
      Parameter|Type|Required|Description
      ---|---|---|---|
-     resource|string|true|The name of the resource type you are checking against a user - __must__ be one of the following values.<br><br>*Field options*<br>__games__<br>__mods__<br>__files__<br>__tags__<br>__users__.
-     id|integer(int32)|true|Unique Id of the resource to check access rights for.
-     user|integer(int32)|true|Unique Id of the user you are determining has access to the resource id.
+     resource|string|true|The name of the resource type you are submitting a report for __must__ be one of the following values.<br><br>*Field options*<br>__games__<br>__mods__<br>__files__<br>__tags__<br>__users__.
+     id|integer(int32)|true|Unique Id of the resource item you are reporting.
+     dmca|boolean|true|Is this a DMCA takedown request?
+     name|string|true|Descriptive and informative title for your report.
+     summary|string|true|Detailed description of your report, be as specific as possible on the reason you are submitting the report.
 
 
 > Example responses
 
 ```json
 {
-  "resource": "files",
-  "id": 3,
-  "ownership": true
+  "code": "201",
+  "message": "You have successfully submitted a report and it will be reviewed by the mod.io team."
 }
 ```
-<h3 id="Get-Resource-Ownership-responses">Responses</h3>
+<h3 id="Submit-Report-responses">Responses</h3>
 
 Status|Meaning|Description|Response Schema
 ---|---|---|---|
-200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)|Successful Request|[Ownership Object  ](#schemaownership_object)
+201|[Created](https://tools.ietf.org/html/rfc7231#section-6.3.2)|Report Created|[Message Object](#message-object)
 
 <aside class="warning">
 To perform this operation, you must be authenticated by means of one of the following methods:
-apiKey, oauth2 ( Scopes: read )
-</aside>
-
-
-## Get Resource Price
-
-> Code samples
-
-```shell
-# You can also use wget
-curl -X POST https://api.mod.io/v1/general/price \
-  -H 'Authorization: Bearer YourAccessToken' \
-  -H 'Content-Type: application/x-www-form-urlencoded' \
-  -H 'Accept: application/json'
-
-```
-
-```http
-POST https://api.mod.io/v1/general/price HTTP/1.1
-Host: api.mod.io
-
-Accept: application/json
-Authorization: Bearer YourAccessToken
-Content-Type: application/x-www-form-urlencoded
-
-
-```
-
-```javascript
-var headers = {
-  'Authorization':'Bearer YourAccessToken',
-  'Content-Type':'application/x-www-form-urlencoded',
-  'Accept':'application/json'
-
-};
-
-$.ajax({
-  url: 'https://api.mod.io/v1/general/price',
-  method: 'post',
-
-  headers: headers,
-  success: function(data) {
-    console.log(JSON.stringify(data));
-  }
-})
-```
-
-```javascript--nodejs
-const request = require('node-fetch');
-
-const headers = {
-  'Authorization':'Bearer YourAccessToken',
-  'Content-Type':'application/x-www-form-urlencoded',
-  'Accept':'application/json'
-
-};
-
-fetch('https://api.mod.io/v1/general/price',
-{
-  method: 'POST',
-
-  headers: headers
-})
-.then(function(res) {
-    return res.json();
-}).then(function(body) {
-    console.log(body);
-});
-```
-
-```ruby
-require 'rest-client'
-require 'json'
-
-headers = {
-  'Authorization' => 'Bearer YourAccessToken',
-  'Content-Type' => 'application/x-www-form-urlencoded',
-  'Accept' => 'application/json'
-}
-
-result = RestClient.post 'https://api.mod.io/v1/general/price',
-  params: {
-  }, headers: headers
-
-
-p JSON.parse(result)
-```
-
-```python
-import requests
-headers = {
-  'Authorization': 'Bearer YourAccessToken',
-  'Content-Type': 'application/x-www-form-urlencoded',
-  'Accept': 'application/json'
-}
-
-r = requests.post('https://api.mod.io/v1/general/price', params={
-
-}, headers = headers)
-
-print r.json()
-```
-
-```java
-URL obj = new URL("https://api.mod.io/v1/general/price");
-HttpURLConnection con = (HttpURLConnection) obj.openConnection();
-con.setRequestMethod("POST");
-int responseCode = con.getResponseCode();
-BufferedReader in = new BufferedReader(
-    new InputStreamReader(con.getInputStream()));
-String inputLine;
-StringBuffer response = new StringBuffer();
-while ((inputLine = in.readLine()) != null) {
-    response.append(inputLine);
-}
-in.close();
-System.out.println(response.toString());
-```
-`POST /general/price`
-
-View the price of a requested resource, if the requested resource is able to be sold. All prices returned are in __USD__.
-     
-     Parameter|Type|Required|Description
-     ---|---|---|---|
-     resource|string|true|The name of the resource type you are checking a price for - __must__ be one of the following values.<br><br>*Field options*<br>__games__<br>__mods__.
-     id|integer(int32)|true|Unique Id of the resource that contains the price.
-
-
-> Example responses
-
-```json
-{
-  "resource": "files",
-  "id": 3,
-  "price": 19.99
-}
-```
-<h3 id="Get-Resource-Price-responses">Responses</h3>
-
-Status|Meaning|Description|Response Schema
----|---|---|---|
-200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)|OK|[Price Object  ](#schemaprice_object)
-
-<aside class="warning">
-To perform this operation, you must be authenticated by means of one of the following methods:
-apiKey, oauth2 ( Scopes: read )
+oauth2 ( Scopes: write )
 </aside>
 
 
@@ -8616,156 +8783,7 @@ oauth2 ( Scopes: read )
 </aside>
 
 
-# Reports
-
-## Submit Report
-
-> Code samples
-
-```shell
-# You can also use wget
-curl -X POST https://api.mod.io/v1/report \
-  -H 'Authorization: Bearer YourAccessToken' \
-  -H 'Content-Type: application/x-www-form-urlencoded' \
-  -H 'Accept: application/json'
-
-```
-
-```http
-POST https://api.mod.io/v1/report HTTP/1.1
-Host: api.mod.io
-
-Accept: application/json
-Authorization: Bearer YourAccessToken
-Content-Type: application/x-www-form-urlencoded
-
-
-```
-
-```javascript
-var headers = {
-  'Authorization':'Bearer YourAccessToken',
-  'Content-Type':'application/x-www-form-urlencoded',
-  'Accept':'application/json'
-
-};
-
-$.ajax({
-  url: 'https://api.mod.io/v1/report',
-  method: 'post',
-
-  headers: headers,
-  success: function(data) {
-    console.log(JSON.stringify(data));
-  }
-})
-```
-
-```javascript--nodejs
-const request = require('node-fetch');
-
-const headers = {
-  'Authorization':'Bearer YourAccessToken',
-  'Content-Type':'application/x-www-form-urlencoded',
-  'Accept':'application/json'
-
-};
-
-fetch('https://api.mod.io/v1/report',
-{
-  method: 'POST',
-
-  headers: headers
-})
-.then(function(res) {
-    return res.json();
-}).then(function(body) {
-    console.log(body);
-});
-```
-
-```ruby
-require 'rest-client'
-require 'json'
-
-headers = {
-  'Authorization' => 'Bearer YourAccessToken',
-  'Content-Type' => 'application/x-www-form-urlencoded',
-  'Accept' => 'application/json'
-}
-
-result = RestClient.post 'https://api.mod.io/v1/report',
-  params: {
-  }, headers: headers
-
-
-p JSON.parse(result)
-```
-
-```python
-import requests
-headers = {
-  'Authorization': 'Bearer YourAccessToken',
-  'Content-Type': 'application/x-www-form-urlencoded',
-  'Accept': 'application/json'
-}
-
-r = requests.post('https://api.mod.io/v1/report', params={
-
-}, headers = headers)
-
-print r.json()
-```
-
-```java
-URL obj = new URL("https://api.mod.io/v1/report");
-HttpURLConnection con = (HttpURLConnection) obj.openConnection();
-con.setRequestMethod("POST");
-int responseCode = con.getResponseCode();
-BufferedReader in = new BufferedReader(
-    new InputStreamReader(con.getInputStream()));
-String inputLine;
-StringBuffer response = new StringBuffer();
-while ((inputLine = in.readLine()) != null) {
-    response.append(inputLine);
-}
-in.close();
-System.out.println(response.toString());
-```
-`POST /report`
-
-Submit a report for any resource on mod.io.
-     
-     Parameter|Type|Required|Description
-     ---|---|---|---|
-     resource|string|true|The name of the resource type you are submitting a report for __must__ be one of the following values.<br><br>*Field options*<br>__games__<br>__mods__<br>__files__<br>__tags__<br>__users__.
-     id|integer(int32)|true|Unique Id of the resource item you are reporting.
-     dmca|boolean|true|Is this a DMCA takedown request?
-     name|string|true|Descriptive and informative title for your report.
-     summary|string|true|Detailed description of your report, be as specific as possible on the reason you are submitting the report.
-
-
-> Example responses
-
-```json
-{
-  "code": "201",
-  "message": "You have successfully submitted a report and it will be reviewed by the mod.io team."
-}
-```
-<h3 id="Submit-Report-responses">Responses</h3>
-
-Status|Meaning|Description|Response Schema
----|---|---|---|
-201|[Created](https://tools.ietf.org/html/rfc7231#section-6.3.2)|Report Created|[Message Object](#message-object)
-
-<aside class="warning">
-To perform this operation, you must be authenticated by means of one of the following methods:
-oauth2 ( Scopes: write )
-</aside>
-
-
-# Schemas 
+# Response Schemas 
 ## Message Object
 
   <a name="schemamessage_object"></a>
@@ -8929,6 +8947,178 @@ Name|Type|Description
 full|string|URL to the full image.
 thumbnail|string|URL to the thumbnail image.
 filename|string|Image filename, with the extension included.
+
+
+
+
+## Get All Mod Comments
+
+<a name="schemaget_all_mod_comments"></a>
+
+```json
+{
+  "data": [
+    {
+      "id": 2,
+      "mod": 2,
+      "submitted_by": {
+        "id": 1,
+        "nameid": "xant",
+        "username": "XanT",
+        "online": 1509922961,
+        "avatar": {
+          "filename": "masterchief.jpg",
+          "full": "https://media.mod.io/images/members/1/1/1/masterchief.jpg"
+        },
+        "timezone": "Australia/Brisbane",
+        "language": "en",
+        "url": "https://mod.io/members/xant"
+      },
+      "date": 1499841487,
+      "replyid": 1499,
+      "replypos": "01",
+      "karma": 1,
+      "karmago": 0,
+      "summary": "This mod is kickass! Great work!"
+    },
+    {
+        ...
+    }
+  ],
+  "cursor_id": 60,
+  "prev_id": 30,
+  "next_id": 160,
+  "result_count": 100
+} 
+```
+
+
+### Properties
+
+Name|Type|Description
+---|---|---|---|
+data|[Comment Object  ](#schemacomment_object)[]|Array containing comment objects
+» id|integer(int32)|Unique id of the comment.
+» mod|integer(int32)|Unique id of the parent mod.
+» submitted_by|[User Object  ](#schemauser_object)|Contains user data.
+»» id|integer(int32)|Unique id of the user.
+»» nameid|string|Unique nameid of user which forms end of their profile URL.
+»» username|string|Non-unique username of the user.
+»» online|integer(int32)|Unix timestamp on when the user was last online.
+»» avatar|[Avatar Object  ](#schemaavatar_object)|Contains avatar data.
+»»» filename|string|Image filename, including file extension.
+»»» full|string|Full URL to the image.
+»» timezone|string|The Timezone of the user, shown in {Country}/{City} format.
+»» language|string|The users language preference, limited to two characters.
+»» url|string|URL to the user profile.
+» date|integer(int32)|Unix timestamp of when the comment was published.
+» replyid|integer(int32)|Unique replyid used to submitting a nested reply to the published comment.
+» replypos|string|Nesting position of the reply.
+» karma|integer(int32)|The amount of karma the comment has received.
+» karmago|integer(int32)|The amount of good karma the comment has received.
+» summary|string|The displayed comment.
+cursor_id|integer(int32)|The current _cursor value.
+prev_id|integer(int32)|The previous _cursor value as manually inserted by you, null by default.
+next_id|integer(int32)|The next position to move the _cursor to, based on the current request.
+result_count|integer(int32)|The amount of results returned in the current request.
+
+
+
+
+## Get All Mod Dependencies
+
+<a name="schemaget_all_mod_dependencies"></a>
+
+```json
+{
+  "data": [
+    {
+      "mod": 231,
+      "date": 1499841487
+    },
+    {
+        ...
+    }
+  ],
+  "cursor_id": 60,
+  "prev_id": 30,
+  "next_id": 160,
+  "result_count": 100
+} 
+```
+
+
+### Properties
+
+Name|Type|Description
+---|---|---|---|
+data|[Mod Dependencies Object ](#schemamod_dependencies_object)[]|No description
+» mod|integer(int32)|Unique id of the mod that is the dependency.
+» date|integer(int32)|Unix timestamp of when the dependency was listed.
+cursor_id|integer(int32)|The current _cursor value.
+prev_id|integer(int32)|The previous _cursor value as manually inserted by you, null by default.
+next_id|integer(int32)|The next position to move the _cursor to, based on the current request.
+result_count|integer(int32)|The amount of results returned in the current request.
+
+
+
+
+## Get All Mod Files
+
+<a name="schemaget_all_mod_files"></a>
+
+```json
+{
+  "data": [
+    {
+      "id": 2,
+      "mod": 2,
+      "date": 1499841487,
+      "datevirus": 1499841487,
+      "virusstatus": 0,
+      "viruspositive": 0,
+      "filesize": 15181,
+      "filehash": "2d4a0e2d7273db6b0a94b0740a88ad0d",
+      "filename": "rogue-knight-v1.zip",
+      "version": "1.3",
+      "virustotal": "No threats found.",
+      "changelog": "VERSION 1.3 -- Changes -- Fixed critical castle floor bug.",
+      "download": "https://mod.io/mods/file/2/c489a0354111a4d76640d47f0cdcb294"
+    },
+    {
+        ...
+    }
+  ],
+  "cursor_id": 60,
+  "prev_id": 30,
+  "next_id": 160,
+  "result_count": 100
+} 
+```
+
+
+### Properties
+
+Name|Type|Description
+---|---|---|---|
+data|[Modfile Object  ](#schemamodfile_object)[]|Response array of items.
+» id|integer(int32)|Unique file id.
+» mod|integer(int32)|Unique mod id.
+» date|integer(int32)|Unix timestamp of file upload time.
+» datevirus|integer(int32)|Unix timestamp of file virus scan.
+» virusstatus|integer(int32)|The status of the virus scan for the file.
+» viruspositive|integer(int32)|Has the file been positively flagged as a virus?
+» filesize|integer(int32)|Size of the file in bytes.
+» filehash|string|MD5 filehash.
+» filename|string|Name of the file including file extension.
+» version|string|The release version this file represents.
+» virustotal|string|Text output from virustotal scan.
+» changelog|string|List of all changes in this file release.
+» download|string|Link to download the file from the mod.io CDN.
+cursor_id|integer(int32)|The current _cursor value.
+prev_id|integer(int32)|The previous _cursor value as manually inserted by you, null by default.
+next_id|integer(int32)|The next position to move the _cursor to, based on the current request.
+result_count|integer(int32)|The amount of results returned in the current request.
 
 
 
@@ -9114,6 +9304,44 @@ data|[Game Activity Object ](#schemagame_activity_object)[]|Response array of it
 »» field|string|The field of the changed value
 »» before|string|The value prior to the event.
 »» after|string|The newly-updated value.
+cursor_id|integer(int32)|The current _cursor value.
+prev_id|integer(int32)|The previous _cursor value as manually inserted by you, null by default.
+next_id|integer(int32)|The next position to move the _cursor to, based on the current request.
+result_count|integer(int32)|The amount of results returned in the current request.
+
+
+
+
+## Get All Mod KVP
+
+<a name="schemaget_all_mod_kvp_metadata"></a>
+
+```json
+{
+  "data": [
+    {
+      "key": "pistol-dmg",
+      "value": 800
+    },
+    {
+        ...
+    }
+  ],
+  "cursor_id": 60,
+  "prev_id": 30,
+  "next_id": 160,
+  "result_count": 100
+} 
+```
+
+
+### Properties
+
+Name|Type|Description
+---|---|---|---|
+data|[Metadata KVP Object ](#schemametadata_kvp_object)[]|No description
+» key|string|The key of the key-value pair.
+» value|string|The value of the key-value pair.
 cursor_id|integer(int32)|The current _cursor value.
 prev_id|integer(int32)|The previous _cursor value as manually inserted by you, null by default.
 next_id|integer(int32)|The next position to move the _cursor to, based on the current request.
@@ -9349,66 +9577,6 @@ result_count|integer(int32)|The amount of results returned in the current reques
 
 
 
-## Get All Mod Files
-
-<a name="schemaget_all_mod_files"></a>
-
-```json
-{
-  "data": [
-    {
-      "id": 2,
-      "mod": 2,
-      "date": 1499841487,
-      "datevirus": 1499841487,
-      "virusstatus": 0,
-      "viruspositive": 0,
-      "filesize": 15181,
-      "filehash": "2d4a0e2d7273db6b0a94b0740a88ad0d",
-      "filename": "rogue-knight-v1.zip",
-      "version": "1.3",
-      "virustotal": "No threats found.",
-      "changelog": "VERSION 1.3 -- Changes -- Fixed critical castle floor bug.",
-      "download": "https://mod.io/mods/file/2/c489a0354111a4d76640d47f0cdcb294"
-    },
-    {
-        ...
-    }
-  ],
-  "cursor_id": 60,
-  "prev_id": 30,
-  "next_id": 160,
-  "result_count": 100
-} 
-```
-
-
-### Properties
-
-Name|Type|Description
----|---|---|---|
-data|[Modfile Object  ](#schemamodfile_object)[]|Response array of items.
-» id|integer(int32)|Unique file id.
-» mod|integer(int32)|Unique mod id.
-» date|integer(int32)|Unix timestamp of file upload time.
-» datevirus|integer(int32)|Unix timestamp of file virus scan.
-» virusstatus|integer(int32)|The status of the virus scan for the file.
-» viruspositive|integer(int32)|Has the file been positively flagged as a virus?
-» filesize|integer(int32)|Size of the file in bytes.
-» filehash|string|MD5 filehash.
-» filename|string|Name of the file including file extension.
-» version|string|The release version this file represents.
-» virustotal|string|Text output from virustotal scan.
-» changelog|string|List of all changes in this file release.
-» download|string|Link to download the file from the mod.io CDN.
-cursor_id|integer(int32)|The current _cursor value.
-prev_id|integer(int32)|The previous _cursor value as manually inserted by you, null by default.
-next_id|integer(int32)|The next position to move the _cursor to, based on the current request.
-result_count|integer(int32)|The amount of results returned in the current request.
-
-
-
-
 ## Get All Mod Tags
 
 <a name="schemaget_all_mod_tags"></a>
@@ -9439,80 +9607,6 @@ Name|Type|Description
 data|[Mod Tag Object ](#schemamod_tag_object)[]|No description
 » tag|string|The displayed tag.
 » date|integer(int32)|Unix timestamp of when tag was applied.
-cursor_id|integer(int32)|The current _cursor value.
-prev_id|integer(int32)|The previous _cursor value as manually inserted by you, null by default.
-next_id|integer(int32)|The next position to move the _cursor to, based on the current request.
-result_count|integer(int32)|The amount of results returned in the current request.
-
-
-
-
-## Get All Mod Comments
-
-<a name="schemaget_all_mod_comments"></a>
-
-```json
-{
-  "data": [
-    {
-      "id": 2,
-      "mod": 2,
-      "submitted_by": {
-        "id": 1,
-        "nameid": "xant",
-        "username": "XanT",
-        "online": 1509922961,
-        "avatar": {
-          "filename": "masterchief.jpg",
-          "full": "https://media.mod.io/images/members/1/1/1/masterchief.jpg"
-        },
-        "timezone": "Australia/Brisbane",
-        "language": "en",
-        "url": "https://mod.io/members/xant"
-      },
-      "date": 1499841487,
-      "replyid": 1499,
-      "replypos": "01",
-      "karma": 1,
-      "karmago": 0,
-      "summary": "This mod is kickass! Great work!"
-    },
-    {
-        ...
-    }
-  ],
-  "cursor_id": 60,
-  "prev_id": 30,
-  "next_id": 160,
-  "result_count": 100
-} 
-```
-
-
-### Properties
-
-Name|Type|Description
----|---|---|---|
-data|[Comment Object  ](#schemacomment_object)[]|Array containing comment objects
-» id|integer(int32)|Unique id of the comment.
-» mod|integer(int32)|Unique id of the parent mod.
-» submitted_by|[User Object  ](#schemauser_object)|Contains user data.
-»» id|integer(int32)|Unique id of the user.
-»» nameid|string|Unique nameid of user which forms end of their profile URL.
-»» username|string|Non-unique username of the user.
-»» online|integer(int32)|Unix timestamp on when the user was last online.
-»» avatar|[Avatar Object  ](#schemaavatar_object)|Contains avatar data.
-»»» filename|string|Image filename, including file extension.
-»»» full|string|Full URL to the image.
-»» timezone|string|The Timezone of the user, shown in {Country}/{City} format.
-»» language|string|The users language preference, limited to two characters.
-»» url|string|URL to the user profile.
-» date|integer(int32)|Unix timestamp of when the comment was published.
-» replyid|integer(int32)|Unique replyid used to submitting a nested reply to the published comment.
-» replypos|string|Nesting position of the reply.
-» karma|integer(int32)|The amount of karma the comment has received.
-» karmago|integer(int32)|The amount of good karma the comment has received.
-» summary|string|The displayed comment.
 cursor_id|integer(int32)|The current _cursor value.
 prev_id|integer(int32)|The previous _cursor value as manually inserted by you, null by default.
 next_id|integer(int32)|The next position to move the _cursor to, based on the current request.
@@ -9636,82 +9730,6 @@ data|[User Object  ](#schemauser_object)[]|Response array of items.
 » timezone|string|The Timezone of the user, shown in {Country}/{City} format.
 » language|string|The users language preference, limited to two characters.
 » url|string|URL to the user profile.
-cursor_id|integer(int32)|The current _cursor value.
-prev_id|integer(int32)|The previous _cursor value as manually inserted by you, null by default.
-next_id|integer(int32)|The next position to move the _cursor to, based on the current request.
-result_count|integer(int32)|The amount of results returned in the current request.
-
-
-
-
-## Get All Mod Dependencies
-
-<a name="schemaget_all_mod_dependencies"></a>
-
-```json
-{
-  "data": [
-    {
-      "mod": 231,
-      "date": 1499841487
-    },
-    {
-        ...
-    }
-  ],
-  "cursor_id": 60,
-  "prev_id": 30,
-  "next_id": 160,
-  "result_count": 100
-} 
-```
-
-
-### Properties
-
-Name|Type|Description
----|---|---|---|
-data|[Mod Dependencies Object ](#schemamod_dependencies_object)[]|No description
-» mod|integer(int32)|Unique id of the mod that is the dependency.
-» date|integer(int32)|Unix timestamp of when the dependency was listed.
-cursor_id|integer(int32)|The current _cursor value.
-prev_id|integer(int32)|The previous _cursor value as manually inserted by you, null by default.
-next_id|integer(int32)|The next position to move the _cursor to, based on the current request.
-result_count|integer(int32)|The amount of results returned in the current request.
-
-
-
-
-## Get All Mod KVP
-
-<a name="schemaget_all_mod_kvp_metadata"></a>
-
-```json
-{
-  "data": [
-    {
-      "key": "pistol-dmg",
-      "value": 800
-    },
-    {
-        ...
-    }
-  ],
-  "cursor_id": 60,
-  "prev_id": 30,
-  "next_id": 160,
-  "result_count": 100
-} 
-```
-
-
-### Properties
-
-Name|Type|Description
----|---|---|---|
-data|[Metadata KVP Object ](#schemametadata_kvp_object)[]|No description
-» key|string|The key of the key-value pair.
-» value|string|The value of the key-value pair.
 cursor_id|integer(int32)|The current _cursor value.
 prev_id|integer(int32)|The previous _cursor value as manually inserted by you, null by default.
 next_id|integer(int32)|The next position to move the _cursor to, based on the current request.
