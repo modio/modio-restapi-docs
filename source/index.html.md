@@ -722,21 +722,22 @@ Retrieve all games on mod.io. Successful request will return an array of [Game O
      ---|---|---
      id|integer(int32)|Unique id of the game.
      submitted_by|integer(int32)|Unique id of the user who has ownership of the game.
-     datereg|integer(int32)|Unix timestamp of date registered.
-     dateup|integer(int32)|Unix timestamp of date updated.
+     date_added|integer(int32)|Unix timestamp of date registered.
+     date_updated|integer(int32)|Unix timestamp of date updated.
+     date_live|integer(int32)|Unix timestamp of date game was set live.
      presentation|integer(int32)|Choose which presentation style you want to use for your game on the mod.io website <br><br>*Field options*<br>__0__ =  Grid View: Displays mods in a grid (visual but less informative, default setting) <br>__1__ = Table View: Displays mods in a table (easier to browse)
      community|integer(int32)|Choose what rights community members have with the game <br><br>*Field Options*<br>__0__ = Discussion board disabled, community cannot share guides and news<br>__1__ = Discussion Board enabled only<br>__2__ = Community can only share guides and news<br>__3__ = Discussion Board enabled and community can share news and guides
      submission|integer(int32)|Choose what submission process you want modders to follow <br><br>*Field Options*<br>__0__ = Control the upload process. ou will have to build an upload system either in-game or via a standalone app, which enables developers to submit mods to the tags you have configured. Because you control the flow, you can pre-validate and compile mods, to ensure they will work in your game. In the long run this option will save you time as you can accept more submissions, but it requires more setup to get running and isn't as open as the above option. NOTE: mod profiles can still be created online, but uploads will have to occur via the tools you supply.<br><br>__1__ = Enable mod uploads from anywhere. Allow developers to upload mods via the website and API, and pick the tags their mod is built for. No validation will be done on the files submitted, it will be the responsibility of your game and apps built to process the mods installation based on the tags selected and determine if the mod is valid and works. For example a mod might be uploaded to the 'map' tag. When a user subscribes to this mod, your game will need to verify it contains a map file and install it where maps are located. If this fails, your game or the community will have to flag the mod as 'incompatible' to remove it from the listing.
      curation|integer(int32)|Choose the curation process for the game<br><br>*Field Options*<br>__0__ = Mods are immediately available to play, without any intervention or work from your team.<br>__1__ = Screen only mods the author wants to sell, before they are available to purchase via the API.<br>__2__ = All mods must be accepted by someone on your team. This option is useful for games that have a small number of mods and want to control the experience, or you need to set the parameters attached to a mod (i.e. a weapon may require the rate of fire, power level, clip size etc). It can also be used for complex mods, which you may need to build into your game or distribute as DLC.
      revenue|integer(int32)|__Bitwise__. Choose the revenue capabilities for user-generated content of the game. For selecting multiple options you need to submit the bitwise value. For example, if you want to allow user-generated content to be sold(1), to receive donations(2) and allow them to control their supply and scarcity(8) your revenue value would be _11 (8 + 2 + 1)_.<br><br>*Field Options*<br>__1__ = Allow user-generated content to be sold<br>__2__ = Allow user-generated content to receive donations<br>__4__ = Allow user-generated content to be traded (not subject to revenue share)<br>__8__ = Allow user-generated content to control supply and scarcity.
      api|integer(int32)|Choose what permissions you want to enable via the mod.io API<br><br>*Field Options*<br>__0__ = Third parties cannot access your mods API and mods cannot be downloaded directly without API validation.<br>__1__ = Allow 3rd parties to access your mods API (recommended, an open API will encourage a healthy ecosystem of tools and apps) but mods cannot be downloaded directly<br>__2__ = Allow mods to be downloaded directly but 3rd parties cannot access your mods API.<br>__3__ = Allow third parties to access your mods API and allow mods to be downloaded directly without api validation.
-     ugcname|string|Singular word that describes the user-generated content type.
+     ugc_name|string|Singular word that describes the user-generated content type.
      icon|string|Filename of the icon image, extension included.
      logo|string|Filename of the logo image, extension included.
      header|string|Filename of the header image, extension included.
      homepage|string|Official homepage of the game.
      name|string|The name of the game.
-     nameid|string|The unique SEO friendly URL for the game.
+     name_id|string|The unique SEO friendly URL for the game.
      summary|string|Summary for the game.
      instructions|string|Instructions on the process to upload mods.
 
@@ -750,9 +751,9 @@ Retrieve all games on mod.io. Successful request will return an array of [Game O
       "id": 2,
       "submitted_by": {
         "id": 1,
-        "nameid": "xant",
+        "name_id": "xant",
         "username": "XanT",
-        "online": 1509922961,
+        "date_online": 1509922961,
         "avatar": {
           "filename": "masterchief.jpg",
           "full": "https://media.mod.io/images/members/1/1/1/masterchief.jpg"
@@ -761,15 +762,16 @@ Retrieve all games on mod.io. Successful request will return an array of [Game O
         "language": "en",
         "url": "https://mod.io/members/xant"
       },
-      "datereg": 1493702614,
-      "dateup": 1499410290,
+      "date_added": 1493702614,
+      "date_updated": 1499410290,
+      "date_live": 1499841403,
       "presentation": 1,
       "community": 3,
       "submission": 0,
       "curation": 0,
       "revenue": 1500,
       "api": 3,
-      "ugcname": "map",
+      "ugc_name": "map",
       "icon": {
         "filename": "IMG_20170409_222419.jpg",
         "full": "https://media.mod.io/images/mods/1/1/2/icon.png",
@@ -788,18 +790,18 @@ Retrieve all games on mod.io. Successful request will return an array of [Game O
       },
       "homepage": "https://www.rogue-knight-game.com/",
       "name": "Rogue Knight",
-      "nameid": "rogue-knight",
+      "name_id": "rogue-knight",
       "summary": "Rogue Knight is a brand new 2D pixel platformer.",
       "instructions": "Instructions here on how to develop for your game.",
       "url": "https://rogue-knight.mod.io",
-      "cats": [
+      "tag_options": [
         {
           "name": "Engines",
           "type": "checkboxes",
           "tags": [
             "Unity"
           ],
-          "adminonly": 0
+          "admin_only": 0
         }
       ]
     },
@@ -939,9 +941,9 @@ View a single game on mod.io. Successful request will return a single [Game Obje
   "id": 2,
   "submitted_by": {
     "id": 1,
-    "nameid": "xant",
+    "name_id": "xant",
     "username": "XanT",
-    "online": 1509922961,
+    "date_online": 1509922961,
     "avatar": {
       "filename": "masterchief.jpg",
       "full": "https://media.mod.io/images/members/1/1/1/masterchief.jpg"
@@ -950,15 +952,16 @@ View a single game on mod.io. Successful request will return a single [Game Obje
     "language": "en",
     "url": "https://mod.io/members/xant"
   },
-  "datereg": 1493702614,
-  "dateup": 1499410290,
+  "date_added": 1493702614,
+  "date_updated": 1499410290,
+  "date_live": 1499841403,
   "presentation": 1,
   "community": 3,
   "submission": 0,
   "curation": 0,
   "revenue": 1500,
   "api": 3,
-  "ugcname": "map",
+  "ugc_name": "map",
   "icon": {
     "filename": "IMG_20170409_222419.jpg",
     "full": "https://media.mod.io/images/mods/1/1/2/icon.png",
@@ -977,18 +980,18 @@ View a single game on mod.io. Successful request will return a single [Game Obje
   },
   "homepage": "https://www.rogue-knight-game.com/",
   "name": "Rogue Knight",
-  "nameid": "rogue-knight",
+  "name_id": "rogue-knight",
   "summary": "Rogue Knight is a brand new 2D pixel platformer.",
   "instructions": "Instructions here on how to develop for your game.",
   "url": "https://rogue-knight.mod.io",
-  "cats": [
+  "tag_options": [
     {
       "name": "Engines",
       "type": "checkboxes",
       "tags": [
         "Unity"
       ],
-      "adminonly": 0
+      "admin_only": 0
     }
   ]
 }
@@ -1131,10 +1134,10 @@ Update details for a game. If you want to update the `icon`, `logo` or `header` 
      curation|integer(int32)||Choose the curation process for the game<br><br>*Field Options*<br>__0__ = Mods are immediately available to play, without any intervention or work from your team.<br>__1__ = Screen only mods the author wants to sell, before they are available to purchase via the API.<br>__2__ = All mods must be accepted by someone on your team. This option is useful for games that have a small number of mods and want to control the experience, or you need to set the parameters attached to a mod (i.e. a weapon may require the rate of fire, power level, clip size etc). It can also be used for complex mods, which you may need to build into your game or distribute as DLC.
      revenue|integer(int32)||__Bitwise__. Choose the revenue capabilities for user-generated content of the game. For selecting multiple options you need to submit the bitwise value. For example, if you want to allow user-generated content to be sold(1), to receive donations(2) and allow them to control their supply and scarcity(8) your revenue value would be _11 (8 + 2 + 1)_.<br><br>*Field Options*<br>__1__ = Allow user-generated content to be sold<br>__2__ = Allow user-generated content to receive donations<br>__4__ = Allow user-generated content to be traded (not subject to revenue share)<br>__8__ = Allow user-generated content to control supply and scarcity.
      api|integer(int32)||Choose what permissions you want to enable via the mod.io API.<br><br>*Field Options*<br>__0__ = Third parties cannot access your mods API and mods cannot be downloaded directly without API validation.<br>__1__ = Allow 3rd parties to access your mods API (recommended, an open API will encourage a healthy ecosystem of tools and apps) but mods cannot be downloaded directly<br>__2__ = Allow mods to be downloaded directly but 3rd parties cannot access your mods API.<br>__3__ = Allow third parties to access your mods API and allow mods to be downloaded directly without api validation.
-     ugcname|string||Singular word to best describe your games user-generated content.
+     ugc_name|string||Singular word to best describe your games user-generated content.
      homepage|string||Official homepage for your game, if you do not fill this out it will default to your mod.io profile. Must be a valid URL.
      name|string||The name of your game. Highly recommended to not change this unless absolutely required.
-     nameid|string||The unique SEO friendly URL for your game. Cannot exceed 80 characters.
+     name_id|string||The unique SEO friendly URL for your game. Cannot exceed 80 characters.
      summary|string||Summary for your game, giving a brief overview of what it's about - cannot exceed 250 characters.
      instructions|string||Instructions and links creators should follow to upload mods. Keep it short and explain details like are mods submitted in-game or via tools you have created.
 
@@ -1146,9 +1149,9 @@ Update details for a game. If you want to update the `icon`, `logo` or `header` 
   "id": 2,
   "submitted_by": {
     "id": 1,
-    "nameid": "xant",
+    "name_id": "xant",
     "username": "XanT",
-    "online": 1509922961,
+    "date_online": 1509922961,
     "avatar": {
       "filename": "masterchief.jpg",
       "full": "https://media.mod.io/images/members/1/1/1/masterchief.jpg"
@@ -1157,15 +1160,16 @@ Update details for a game. If you want to update the `icon`, `logo` or `header` 
     "language": "en",
     "url": "https://mod.io/members/xant"
   },
-  "datereg": 1493702614,
-  "dateup": 1499410290,
+  "date_added": 1493702614,
+  "date_updated": 1499410290,
+  "date_live": 1499841403,
   "presentation": 1,
   "community": 3,
   "submission": 0,
   "curation": 0,
   "revenue": 1500,
   "api": 3,
-  "ugcname": "map",
+  "ugc_name": "map",
   "icon": {
     "filename": "IMG_20170409_222419.jpg",
     "full": "https://media.mod.io/images/mods/1/1/2/icon.png",
@@ -1184,18 +1188,18 @@ Update details for a game. If you want to update the `icon`, `logo` or `header` 
   },
   "homepage": "https://www.rogue-knight-game.com/",
   "name": "Rogue Knight",
-  "nameid": "rogue-knight",
+  "name_id": "rogue-knight",
   "summary": "Rogue Knight is a brand new 2D pixel platformer.",
   "instructions": "Instructions here on how to develop for your game.",
   "url": "https://rogue-knight.mod.io",
-  "cats": [
+  "tag_options": [
     {
       "name": "Engines",
       "type": "checkboxes",
       "tags": [
         "Unity"
       ],
-      "adminonly": 0
+      "admin_only": 0
     }
   ]
 }
@@ -1323,24 +1327,25 @@ Retrieve all Mods on mod.io for the corresponding game. Successful request will 
      Filter|Type|Description
      ---|---|---
      id|integer(int32)|Unique id of the mod.
-     game|integer(int32)|Unique id of the parent game.
+     game_id|integer(int32)|Unique id of the parent game.
      submitted_by|integer(int32)|Unique id of the user who has ownership of the game.
-     datereg|integer(int32)|Unix timestamp of date registered.
-     dateup|integer(int32)|Unix timestamp of date updated.
+     date_added|integer(int32)|Unix timestamp of date registered.
+     date_updated|integer(int32)|Unix timestamp of date updated.
+     date_live|integer(int32)|Unix timestamp of date mod was set live.
      logo|string|The filename of the logo.
      homepage|string|Official homepage of the mod.
      name|string|Name of the mod.
-     nameid|string|The unique SEO friendly URL for your game.
+     name_id|string|The unique SEO friendly URL for your game.
      summary|string|Summary of the mod.
      description|string|An extension of the summary. HTML Supported.
-     metadata|string|Comma-separated list of metadata words.
+     metadata_blob|string|Comma-separated list of metadata words.
      modfile|integer(int32)|Unique id of the [Modfile Object](https://docs.mod.io/#modfile-object) marked as current release.
      price|double|Numeric representation of the price.
-     tags|string|Comma-separated values representing the tags you want to filter the results by. Only tags that are supported by the parent game can be applied. To determine what tags are eligible, see the tags values within __cats__ field on the parent [Game Object](https://docs.mod.io/#game-object).
+     tags|string|Comma-separated values representing the tags you want to filter the results by. Only tags that are supported by the parent game can be applied. To determine what tags are eligible, see the tags values within 'Tag Options' column on the parent [Game Object](https://docs.mod.io/#game-object).
      status|string| _OAuth 2 only_. The status of the mod (only recognised by game admins), _default is 'auth'_.<br><br>*Fields Options:*<br>__unauth__ = Only return un-authorized mods.<br>__auth__ = Only return authorized mods _(default)_.<br>__ban__ = Only return banned mods.<br>__archive__ = Only return archived content (out of date builds).<br>__delete__ = Only return deleted mods.
      downloads|string|Sort results by most downloads using [_sort filter](https://docs.mod.io/#filtering) parameter, value should be `downloads` for descending or `-downloads` for ascending results.
      popular|string|Sort results by popularity using [_sort filter](https://docs.mod.io/#filtering), value should be `popular` for descending or `-popular` for ascending results.
-     ratings|string|Sort results by highest weighted rating using [_sort filter](https://docs.mod.io/#filtering), value should be `ratings` for descending or `-ratings` for ascending results.
+     ratings|string|Sort results by weighted rating using [_sort filter](https://docs.mod.io/#filtering), value should be `ratings` for descending or `-ratings` for ascending results.
      subscribers|string|Sort results by most subscribers using [_sort filter](https://docs.mod.io/#filtering), value should be `subscribers` for descending or `-subscribers` for ascending results.
 
 
@@ -1351,12 +1356,12 @@ Retrieve all Mods on mod.io for the corresponding game. Successful request will 
   "data": [
     {
       "id": 2,
-      "game": 2,
+      "game_id": 2,
       "submitted_by": {
         "id": 1,
-        "nameid": "xant",
+        "name_id": "xant",
         "username": "XanT",
-        "online": 1509922961,
+        "date_online": 1509922961,
         "avatar": {
           "filename": "masterchief.jpg",
           "full": "https://media.mod.io/images/members/1/1/1/masterchief.jpg"
@@ -1366,8 +1371,9 @@ Retrieve all Mods on mod.io for the corresponding game. Successful request will 
         "url": "https://mod.io/members/xant"
       },
       "price": 9.99,
-      "datereg": 1492564103,
-      "dateup": 1499841487,
+      "date_added": 1492564103,
+      "date_updated": 1499841487,
+      "date_live": 1499841403,
       "logo": {
         "filename": "IMG_20170409_222419.jpg",
         "full": "https://media.mod.io/images/mods/1/1/2/IMG_20170409_222419.jpg",
@@ -1377,20 +1383,22 @@ Retrieve all Mods on mod.io for the corresponding game. Successful request will 
       },
       "homepage": "https://www.rogue-hdpack.com/",
       "name": "Rogue Knight HD Pack",
-      "nameid": "rogue-knight-hd-pack",
+      "name_id": "rogue-knight-hd-pack",
       "summary": "It's time to bask in the glory of beautiful 4k textures!",
       "description": "<h2>About</h2><p>Rogue HD Pack does exactly what you thi...",
-      "metadatablob": "rogue,hd,high-res,4k,hd textures",
+      "metadata_blob": "rogue,hd,high-res,4k,hd textures",
       "url": "https://rogue-knight.mod.io/rogue-knight-hd-pack",
       "modfile": {
         "id": 2,
-        "mod": 2,
-        "date": 1499841487,
-        "datevirus": 1499841487,
-        "virusstatus": 0,
-        "viruspositive": 0,
+        "mod_id": 2,
+        "date_added": 1499841487,
+        "date_scanned": 1499841487,
+        "virus_status": 0,
+        "virus_positive": 0,
         "filesize": 15181,
-        "filehash": "2d4a0e2d7273db6b0a94b0740a88ad0d",
+        "filehash": {
+          "md5": "2d4a0e2d7273db6b0a94b0740a88ad0d"
+        },
         "filename": "rogue-knight-v1.zip",
         "version": "1.3",
         "virustotal": "No threats found.",
@@ -1424,7 +1432,7 @@ Retrieve all Mods on mod.io for the corresponding game. Successful request will 
       "tags": [
         {
           "tag": "Unity",
-          "date": 1499841487
+          "date_added": 1499841487
         }
       ]
     },
@@ -1562,12 +1570,12 @@ Retrieve a single mod on mod.io. Successful request will return a single [Mod Ob
 ```json
 {
   "id": 2,
-  "game": 2,
+  "game_id": 2,
   "submitted_by": {
     "id": 1,
-    "nameid": "xant",
+    "name_id": "xant",
     "username": "XanT",
-    "online": 1509922961,
+    "date_online": 1509922961,
     "avatar": {
       "filename": "masterchief.jpg",
       "full": "https://media.mod.io/images/members/1/1/1/masterchief.jpg"
@@ -1577,8 +1585,9 @@ Retrieve a single mod on mod.io. Successful request will return a single [Mod Ob
     "url": "https://mod.io/members/xant"
   },
   "price": 9.99,
-  "datereg": 1492564103,
-  "dateup": 1499841487,
+  "date_added": 1492564103,
+  "date_updated": 1499841487,
+  "date_live": 1499841403,
   "logo": {
     "filename": "IMG_20170409_222419.jpg",
     "full": "https://media.mod.io/images/mods/1/1/2/IMG_20170409_222419.jpg",
@@ -1588,20 +1597,22 @@ Retrieve a single mod on mod.io. Successful request will return a single [Mod Ob
   },
   "homepage": "https://www.rogue-hdpack.com/",
   "name": "Rogue Knight HD Pack",
-  "nameid": "rogue-knight-hd-pack",
+  "name_id": "rogue-knight-hd-pack",
   "summary": "It's time to bask in the glory of beautiful 4k textures!",
   "description": "<h2>About</h2><p>Rogue HD Pack does exactly what you thi...",
-  "metadatablob": "rogue,hd,high-res,4k,hd textures",
+  "metadata_blob": "rogue,hd,high-res,4k,hd textures",
   "url": "https://rogue-knight.mod.io/rogue-knight-hd-pack",
   "modfile": {
     "id": 2,
-    "mod": 2,
-    "date": 1499841487,
-    "datevirus": 1499841487,
-    "virusstatus": 0,
-    "viruspositive": 0,
+    "mod_id": 2,
+    "date_added": 1499841487,
+    "date_scanned": 1499841487,
+    "virus_status": 0,
+    "virus_positive": 0,
     "filesize": 15181,
-    "filehash": "2d4a0e2d7273db6b0a94b0740a88ad0d",
+    "filehash": {
+      "md5": "2d4a0e2d7273db6b0a94b0740a88ad0d"
+    },
     "filename": "rogue-knight-v1.zip",
     "version": "1.3",
     "virustotal": "No threats found.",
@@ -1635,7 +1646,7 @@ Retrieve a single mod on mod.io. Successful request will return a single [Mod Ob
   "tags": [
     {
       "tag": "Unity",
-      "date": 1499841487
+      "date_added": 1499841487
     }
   ]
 }
@@ -1779,10 +1790,10 @@ Publish a mod on mod.io. Successful request will return the newly created [Mod O
      price|double||Numeric only representation of the price if you intend to charge for your mod. Example: 19.99, 10.00.
      stock|integer(int32)||Artificially limit the amount of times the mod can be purchased.
      description|string||An extension of your summary. Include all information relevant to your mod including sections such as 'About', 'Features', 'Install Instructions', 'FAQ', etc. HTML supported and encouraged.
-     metadata|string||Comma-separated list of metadata strings that are relevant to your mod.
-     nameid|string||The unique SEO friendly URL for your game. Cannot exceed 80 characters.
+     metadata_blob|string||Comma-separated list of metadata strings that are relevant to your mod.
+     name_id|string||The unique SEO friendly URL for your game. Cannot exceed 80 characters.
      modfile|integer(int32)||Unique id of the [Modfile Object](https://docs.mod.io/#modfile-object) to be labelled as the current release.
-     tags|array||An array of strings that represent what the mod has been tagged as, only tags that are supported by the parent game can be applied. To determine what tags are eligible, see the __cats__ tags on the connected game.
+     tags|array||An array of strings that represent what the mod has been tagged as, only tags that are supported by the parent game can be applied. To determine what tags are eligible, see the 'Tag Options' column on the connected game.
 
 
 > Example responses
@@ -1790,12 +1801,12 @@ Publish a mod on mod.io. Successful request will return the newly created [Mod O
 ```json
 {
   "id": 2,
-  "game": 2,
+  "game_id": 2,
   "submitted_by": {
     "id": 1,
-    "nameid": "xant",
+    "name_id": "xant",
     "username": "XanT",
-    "online": 1509922961,
+    "date_online": 1509922961,
     "avatar": {
       "filename": "masterchief.jpg",
       "full": "https://media.mod.io/images/members/1/1/1/masterchief.jpg"
@@ -1805,8 +1816,9 @@ Publish a mod on mod.io. Successful request will return the newly created [Mod O
     "url": "https://mod.io/members/xant"
   },
   "price": 9.99,
-  "datereg": 1492564103,
-  "dateup": 1499841487,
+  "date_added": 1492564103,
+  "date_updated": 1499841487,
+  "date_live": 1499841403,
   "logo": {
     "filename": "IMG_20170409_222419.jpg",
     "full": "https://media.mod.io/images/mods/1/1/2/IMG_20170409_222419.jpg",
@@ -1816,20 +1828,22 @@ Publish a mod on mod.io. Successful request will return the newly created [Mod O
   },
   "homepage": "https://www.rogue-hdpack.com/",
   "name": "Rogue Knight HD Pack",
-  "nameid": "rogue-knight-hd-pack",
+  "name_id": "rogue-knight-hd-pack",
   "summary": "It's time to bask in the glory of beautiful 4k textures!",
   "description": "<h2>About</h2><p>Rogue HD Pack does exactly what you thi...",
-  "metadatablob": "rogue,hd,high-res,4k,hd textures",
+  "metadata_blob": "rogue,hd,high-res,4k,hd textures",
   "url": "https://rogue-knight.mod.io/rogue-knight-hd-pack",
   "modfile": {
     "id": 2,
-    "mod": 2,
-    "date": 1499841487,
-    "datevirus": 1499841487,
-    "virusstatus": 0,
-    "viruspositive": 0,
+    "mod_id": 2,
+    "date_added": 1499841487,
+    "date_scanned": 1499841487,
+    "virus_status": 0,
+    "virus_positive": 0,
     "filesize": 15181,
-    "filehash": "2d4a0e2d7273db6b0a94b0740a88ad0d",
+    "filehash": {
+      "md5": "2d4a0e2d7273db6b0a94b0740a88ad0d"
+    },
     "filename": "rogue-knight-v1.zip",
     "version": "1.3",
     "virustotal": "No threats found.",
@@ -1863,7 +1877,7 @@ Publish a mod on mod.io. Successful request will return the newly created [Mod O
   "tags": [
     {
       "tag": "Unity",
-      "date": 1499841487
+      "date_added": 1499841487
     }
   ]
 }
@@ -2012,9 +2026,10 @@ Edit details for a mod. If you wanting to update the media attached to this game
      price|double||Numeric only representation of the price if you intend to charge for your mod. Example: 19.99, 10.00.
      stock|integer(int32)||Artificially limit the amount of times the mod can be purchased.
      description|string||An extension of your summary. Include all information relevant to your mod including sections such as 'About', 'Features', 'Install Instructions', 'FAQ', etc. HTML supported and encouraged.
-     metadatablob|string||Comma-separated list of metadata strings that are relevant to your mod.
-     nameid|string||The unique SEO friendly URL for your game. Cannot exceed 80 characters.
+     metadata_blob|string||Comma-separated list of metadata strings that are relevant to your mod.
+     name_id|string||The unique SEO friendly URL for your game. Cannot exceed 80 characters.
      modfile|integer(int32)||Unique id of the [Modfile Object](https://docs.mod.io/#modfile-object) to be labelled as the current release.
+     status|string||__Game Administrators Only__. Activate an un-authorized/deleted mod. The Mod must have at least one uploaded build to be activated. Ideal for restoring mods that have been soft-deleted. For mod deletion, use the [Delete Mod](https://docs.mod.io/#delete-mod) endpoint. Using either of the fields supplied below will allow the mod to be returned in requests.<br><br>*Fields Options:*<br>__auth__ = Authorize the mod.<br>__archive__ = Label as out of date/potentially not compatible.
 
 
 > Example responses
@@ -2022,12 +2037,12 @@ Edit details for a mod. If you wanting to update the media attached to this game
 ```json
 {
   "id": 2,
-  "game": 2,
+  "game_id": 2,
   "submitted_by": {
     "id": 1,
-    "nameid": "xant",
+    "name_id": "xant",
     "username": "XanT",
-    "online": 1509922961,
+    "date_online": 1509922961,
     "avatar": {
       "filename": "masterchief.jpg",
       "full": "https://media.mod.io/images/members/1/1/1/masterchief.jpg"
@@ -2037,8 +2052,9 @@ Edit details for a mod. If you wanting to update the media attached to this game
     "url": "https://mod.io/members/xant"
   },
   "price": 9.99,
-  "datereg": 1492564103,
-  "dateup": 1499841487,
+  "date_added": 1492564103,
+  "date_updated": 1499841487,
+  "date_live": 1499841403,
   "logo": {
     "filename": "IMG_20170409_222419.jpg",
     "full": "https://media.mod.io/images/mods/1/1/2/IMG_20170409_222419.jpg",
@@ -2048,20 +2064,22 @@ Edit details for a mod. If you wanting to update the media attached to this game
   },
   "homepage": "https://www.rogue-hdpack.com/",
   "name": "Rogue Knight HD Pack",
-  "nameid": "rogue-knight-hd-pack",
+  "name_id": "rogue-knight-hd-pack",
   "summary": "It's time to bask in the glory of beautiful 4k textures!",
   "description": "<h2>About</h2><p>Rogue HD Pack does exactly what you thi...",
-  "metadatablob": "rogue,hd,high-res,4k,hd textures",
+  "metadata_blob": "rogue,hd,high-res,4k,hd textures",
   "url": "https://rogue-knight.mod.io/rogue-knight-hd-pack",
   "modfile": {
     "id": 2,
-    "mod": 2,
-    "date": 1499841487,
-    "datevirus": 1499841487,
-    "virusstatus": 0,
-    "viruspositive": 0,
+    "mod_id": 2,
+    "date_added": 1499841487,
+    "date_scanned": 1499841487,
+    "virus_status": 0,
+    "virus_positive": 0,
     "filesize": 15181,
-    "filehash": "2d4a0e2d7273db6b0a94b0740a88ad0d",
+    "filehash": {
+      "md5": "2d4a0e2d7273db6b0a94b0740a88ad0d"
+    },
     "filename": "rogue-knight-v1.zip",
     "version": "1.3",
     "virustotal": "No threats found.",
@@ -2095,7 +2113,7 @@ Edit details for a mod. If you wanting to update the media attached to this game
   "tags": [
     {
       "tag": "Unity",
-      "date": 1499841487
+      "date_added": 1499841487
     }
   ]
 }
@@ -2228,13 +2246,13 @@ System.out.println(response.toString());
 ```
 `DELETE /games/{game-id}/mods/{mod-id}`
 
-Delete a mod profile. Successful request will return `204 No Content` as well as fire a __MOD_VISIBILITY_CHANGE event. Note this will close the mod profile which means it cannot be viewed or retrieved via API requests but will still exist in-case you choose to restore it at a later date. If you believe a mod should be permanently removed please [contact us](mailto:support@mod.io).
+Delete a mod profile. Successful request will return `204 No Content` as well as fire a __MOD_VISIBILITY_CHANGE__ event. Note this will close the mod profile which means it cannot be viewed or retrieved via API requests but will still exist in-case you choose to restore it at a later date. If you believe a mod should be permanently removed please [contact us](mailto:support@mod.io).
 
 
 > Example responses
 
 ```json
- "204 No Content" 
+ 204 No Content 
 ```
 <h3 id="Delete-Mod-responses">Responses</h3>
 
@@ -2359,11 +2377,11 @@ Browse files on mod.io that are published for the corresponding mod. Successful 
      Filter|Type|Description
      ---|---|---
      id|integer(int32)|Unique id of the file.
-     mod|integer(int32)|Unique id of the mod.
-     date|integer(int32)|Unix timestamp of date added.
-     datevirus|integer(int32)|Unix timestamp of date it was virus scanned.
-     virusstatus|integer(int32)|Current file scan status of the file. For newly added files that have yet to be scanned this field could change frequently until a scan is complete.<br>*Field Options*<br><br>__0__ = Not scanned<br>__1__ = Scan complete<br>__2__ = In progress<br>__3__ = Too large to scan<br>__4__ = File not found<br>__5__ = Error Scanning
-     viruspositive|integer(int32)|Virus status of file<br>*Field Options*<br>__0__ = No threats detected<br>__1__ = Flagged as malicious
+     mod_id|integer(int32)|Unique id of the mod.
+     date_added|integer(int32)|Unix timestamp of date added.
+     date_scanned|integer(int32)|Unix timestamp of date it was virus scanned.
+     virus_status|integer(int32)|Current file scan status of the file. For newly added files that have yet to be scanned this field could change frequently until a scan is complete.<br>*Field Options*<br><br>__0__ = Not scanned<br>__1__ = Scan complete<br>__2__ = In progress<br>__3__ = Too large to scan<br>__4__ = File not found<br>__5__ = Error Scanning
+     virus_positive|integer(int32)|Virus status of file<br>*Field Options*<br>__0__ = No threats detected<br>__1__ = Flagged as malicious
      filesize|integer(int32)|Filesize of file in bytes.
      filehash|string|MD5 hash of file.
      filename|string|Filename including extension.
@@ -2380,13 +2398,15 @@ Browse files on mod.io that are published for the corresponding mod. Successful 
   "data": [
     {
       "id": 2,
-      "mod": 2,
-      "date": 1499841487,
-      "datevirus": 1499841487,
-      "virusstatus": 0,
-      "viruspositive": 0,
+      "mod_id": 2,
+      "date_added": 1499841487,
+      "date_scanned": 1499841487,
+      "virus_status": 0,
+      "virus_positive": 0,
       "filesize": 15181,
-      "filehash": "2d4a0e2d7273db6b0a94b0740a88ad0d",
+      "filehash": {
+        "md5": "2d4a0e2d7273db6b0a94b0740a88ad0d"
+      },
       "filename": "rogue-knight-v1.zip",
       "version": "1.3",
       "virustotal": "No threats found.",
@@ -2547,13 +2567,15 @@ Upload a file for the corresponding mod, upon success will return the newly crea
 ```json
 {
   "id": 2,
-  "mod": 2,
-  "date": 1499841487,
-  "datevirus": 1499841487,
-  "virusstatus": 0,
-  "viruspositive": 0,
+  "mod_id": 2,
+  "date_added": 1499841487,
+  "date_scanned": 1499841487,
+  "virus_status": 0,
+  "virus_positive": 0,
   "filesize": 15181,
-  "filehash": "2d4a0e2d7273db6b0a94b0740a88ad0d",
+  "filehash": {
+    "md5": "2d4a0e2d7273db6b0a94b0740a88ad0d"
+  },
   "filename": "rogue-knight-v1.zip",
   "version": "1.3",
   "virustotal": "No threats found.",
@@ -2691,13 +2713,15 @@ Retrieve a file on mod.io with the corresponding id. Successful request will ret
 ```json
 {
   "id": 2,
-  "mod": 2,
-  "date": 1499841487,
-  "datevirus": 1499841487,
-  "virusstatus": 0,
-  "viruspositive": 0,
+  "mod_id": 2,
+  "date_added": 1499841487,
+  "date_scanned": 1499841487,
+  "virus_status": 0,
+  "virus_positive": 0,
   "filesize": 15181,
-  "filehash": "2d4a0e2d7273db6b0a94b0740a88ad0d",
+  "filehash": {
+    "md5": "2d4a0e2d7273db6b0a94b0740a88ad0d"
+  },
   "filename": "rogue-knight-v1.zip",
   "version": "1.3",
   "virustotal": "No threats found.",
@@ -2846,13 +2870,15 @@ Update the details for a published file on mod.io. If you are wanting to update 
 ```json
 {
   "id": 2,
-  "mod": 2,
-  "date": 1499841487,
-  "datevirus": 1499841487,
-  "virusstatus": 0,
-  "viruspositive": 0,
+  "mod_id": 2,
+  "date_added": 1499841487,
+  "date_scanned": 1499841487,
+  "virus_status": 0,
+  "virus_positive": 0,
   "filesize": 15181,
-  "filehash": "2d4a0e2d7273db6b0a94b0740a88ad0d",
+  "filehash": {
+    "md5": "2d4a0e2d7273db6b0a94b0740a88ad0d"
+  },
   "filename": "rogue-knight-v1.zip",
   "version": "1.3",
   "virustotal": "No threats found.",
@@ -3300,7 +3326,7 @@ Delete images, sketchfab or youtube links from a mod profile which if successful
 > Example responses
 
 ```json
- "204 No Content" 
+ 204 No Content 
 ```
 <h3 id="Delete-Mod-Media-responses">Responses</h3>
 
@@ -3432,22 +3458,100 @@ System.out.println(response.toString());
 ```
 `POST /games/{game-id}/mods/{mod-id}/subscribe`
 
-__OAuth 2 Required__. Subscribe the _authenticated user_ to a corresponding mod. No body parameters are required for this action.
+Subscribe the _authenticated user_ to a corresponding mod. No body parameters are required for this action. Successful request will return the [Mod Object](https://docs.mod.io/#mod-object) of the newly subscribed mod.
 
 
 > Example responses
 
 ```json
 {
-  "code": "201",
-  "message": "You have successfully subscribed to the specified mod."
+  "id": 2,
+  "game_id": 2,
+  "submitted_by": {
+    "id": 1,
+    "name_id": "xant",
+    "username": "XanT",
+    "date_online": 1509922961,
+    "avatar": {
+      "filename": "masterchief.jpg",
+      "full": "https://media.mod.io/images/members/1/1/1/masterchief.jpg"
+    },
+    "timezone": "Australia/Brisbane",
+    "language": "en",
+    "url": "https://mod.io/members/xant"
+  },
+  "price": 9.99,
+  "date_added": 1492564103,
+  "date_updated": 1499841487,
+  "date_live": 1499841403,
+  "logo": {
+    "filename": "IMG_20170409_222419.jpg",
+    "full": "https://media.mod.io/images/mods/1/1/2/IMG_20170409_222419.jpg",
+    "thumb_320x180": "https://media.mod.io/cache/images/mods/1/1/2/thumb_320x180/IMG_20170409_222419.jpg",
+    "thumb_640x360": "https://media.mod.io/cache/images/mods/1/1/2/thumb_640x360/IMG_20170409_222419.jpg",
+    "thumb_1280x720": "https://media.mod.io/cache/images/mods/1/1/2/thumb_1280x720/IMG_20170409_222419.jpg"
+  },
+  "homepage": "https://www.rogue-hdpack.com/",
+  "name": "Rogue Knight HD Pack",
+  "name_id": "rogue-knight-hd-pack",
+  "summary": "It's time to bask in the glory of beautiful 4k textures!",
+  "description": "<h2>About</h2><p>Rogue HD Pack does exactly what you thi...",
+  "metadata_blob": "rogue,hd,high-res,4k,hd textures",
+  "url": "https://rogue-knight.mod.io/rogue-knight-hd-pack",
+  "modfile": {
+    "id": 2,
+    "mod_id": 2,
+    "date_added": 1499841487,
+    "date_scanned": 1499841487,
+    "virus_status": 0,
+    "virus_positive": 0,
+    "filesize": 15181,
+    "filehash": {
+      "md5": "2d4a0e2d7273db6b0a94b0740a88ad0d"
+    },
+    "filename": "rogue-knight-v1.zip",
+    "version": "1.3",
+    "virustotal": "No threats found.",
+    "changelog": "VERSION 1.3 -- Changes -- Fixed critical castle floor bug.",
+    "download": "https://mod.io/mods/file/2/c489a0354111a4d76640d47f0cdcb294"
+  },
+  "media": {
+    "youtube": [
+      "https://www.youtube.com/watch?v=dQw4w9WgXcQ"
+    ],
+    "sketchfab": [
+      "https://sketchfab.com/models/ef40b2d300334d009984c8865b2db1c8"
+    ],
+    "images": [
+      {
+        "full": "https://media.mod.io/images/mods/1/1/2/IMG_20170409_222419.jpg",
+        "thumbnail": "https://media.mod.io/cache/images/mods/1/1/2/thumb_1020x2000/IMG_20170409_222419.jpg",
+        "filename": "IMG_20170409_222419.jpg"
+      }
+    ]
+  },
+  "ratings": {
+    "total": 1230,
+    "positive": 1047,
+    "negative": 183,
+    "weighted": 87.38,
+    "percentage": 91,
+    "stars": 4,
+    "text": "Very Positive"
+  },
+  "tags": [
+    {
+      "tag": "Unity",
+      "date_added": 1499841487
+    }
+  ]
 }
 ```
 <h3 id="Subscribe-To-Mod-responses">Responses</h3>
 
 Status|Meaning|Description|Response Schema
 ---|---|---|---|
-201|[Created](https://tools.ietf.org/html/rfc7231#section-6.3.2)|Created|[Message Object](#message-object)
+201|[Created](https://tools.ietf.org/html/rfc7231#section-6.3.2)|Subscription Successful|[Mod Object  ](#schemamod_object)
 
 <aside class="warning">
 To perform this operation, you must be authenticated by means of one of the following methods:
@@ -3577,7 +3681,7 @@ __OAuth 2 Required__. Un-Subscribe the _authenticated user_ to the corresponding
 > Example responses
 
 ```json
- "204 No Content" 
+ 204 No Content 
 ```
 <h3 id="Unsubscribe-To-Mod-responses">Responses</h3>
 
@@ -3702,9 +3806,9 @@ Retrieve activity log for a game, showing changes made to the resource. Successf
      Filter|Type|Description
      ---|---|---
      id|integer(int32)|Unique id of the activity object.
-     game|integer(int32)|Unique id of the parent game.
-     user|integer(int32)|Unique id of the user who performed the action.
-     dateup|integer(int32)|Unix timestamp of date updated.
+     game_id|integer(int32)|Unique id of the parent game.
+     user_id|integer(int32)|Unique id of the user who performed the action.
+     date_updated|integer(int32)|Unix timestamp of date updated.
      event|string|Type of change that occurred. <br><br>*Field Options*<br>__GAME_UPDATE__ - Update event<br>__GAME_VISIBILITY_CHANGE__ = Game has been set to live, or hidden
 
 
@@ -3715,9 +3819,9 @@ Retrieve activity log for a game, showing changes made to the resource. Successf
   "data": [
     {
       "id": 53,
-      "game": 17,
-      "user": 95,
-      "dateup": 1499846132,
+      "game_id": 17,
+      "user_id": 95,
+      "date_added": 1499846132,
       "event": "GAME_UPDATE",
       "changes": [
         {
@@ -3858,10 +3962,10 @@ Retrieve activity log for a mod, showing changes made to the resource. Successfu
      Filter|Type|Description
      ---|---|---
      id|integer(int32)|Unique id of the activity object.
-     mod|integer(int32)|Unique id of the parent mod.
-     user|integer(int32)|Unique id of the user who triggered the action.
-     dateup|integer(int32)|Unix timestamp of date updated.
-     event|string|Type of change that occurred.<br><br>*Field Options*<br>__MOD_UPDATE__ - Update event<br>__MODFILE_UPDATE__ = Primary file changed<br>__MOD_VISIBILITY_CHANGE__ = Mod has been set to live, or hidden.
+     mod_id|integer(int32)|Unique id of the parent mod.
+     user_id|integer(int32)|Unique id of the user who triggered the action.
+     date_updated|integer(int32)|Unix timestamp of date updated.
+     event|string|Type of change that occurred.<br><br>*Field Options*<br>__MOD_UPDATE__ - Update event<br>__MODFILE_UPDATE__ = Primary file changed<br>__MOD_VISIBILITY_CHANGE__ = Mod has been set to live, or hidden.<br>__MOD_LIVE__ = When the mod went public for the first time.
      latest|boolean|_Default value is true_. Returns only the latest unique events for each mod.
      subscribed|boolean|__OAuth 2 Required__. Default value is _false_. Returns only the events the _authenticated user_ is subscribed to.
 
@@ -3873,9 +3977,9 @@ Retrieve activity log for a mod, showing changes made to the resource. Successfu
   "data": [
     {
       "id": 13,
-      "mod": 13,
-      "user": 13,
-      "dateup": 1499846132,
+      "mod_id": 13,
+      "user_id": 13,
+      "date_added": 1499846132,
       "event": "MOD_UPDATE",
       "changes": [
         {
@@ -4016,10 +4120,10 @@ Retrieve all mod activity for the corresponding game. Successful request will re
      Filter|Type|Description
      ---|---|---
      id|integer(int32)|Unique id of the activity object.
-     mod|integer(int32)|Unique id of the parent mod.
-     user|integer(int32)|Unique id of the user who triggered the action.
-     dateup|integer(int32)|Unix timestamp of date updated.
-     event|string|Type of change that occurred. <br><br>*Field Options*<br>__MOD_UPDATE__ - Update event<br>__MODFILE_UPDATE__ = Primary file changed<br>__MOD_VISIBILITY_CHANGE__ = Mod has been set to live, or hidden.
+     mod_id|integer(int32)|Unique id of the parent mod.
+     user_id|integer(int32)|Unique id of the user who triggered the action.
+     date_updated|integer(int32)|Unix timestamp of date updated.
+     event|string|Type of change that occurred. <br><br>*Field Options*<br>__MOD_UPDATE__ - Update event<br>__MODFILE_UPDATE__ = Primary file changed<br>__MOD_VISIBILITY_CHANGE__ = Mod has been set to live, or hidden.<br>__MOD_LIVE__ = When the mod went public for the first time.
      latest|boolean|_Default value is true_. Returns only the latest unique events for each mod.
      subscribed|boolean|__OAuth 2 Required__. Default value is _false_. Returns only the events the _authenticated user_ is subscribed to.
 
@@ -4031,9 +4135,9 @@ Retrieve all mod activity for the corresponding game. Successful request will re
   "data": [
     {
       "id": 13,
-      "mod": 13,
-      "user": 13,
-      "dateup": 1499846132,
+      "mod_id": 13,
+      "user_id": 13,
+      "date_added": 1499846132,
       "event": "MOD_UPDATE",
       "changes": [
         {
@@ -4175,7 +4279,7 @@ Get all tags for the corresponding mod, successful response will return an array
      
      Filter|Type|Description
      ---|---|---
-     date|integer(int32)|Unix timestamp of date added.
+     date_added|integer(int32)|Unix timestamp of date added.
      tag|string|String representation of the tag. You can check the eligible tags on the parent game object to determine all possible values for this field.
 
 
@@ -4186,7 +4290,7 @@ Get all tags for the corresponding mod, successful response will return an array
   "data": [
     {
       "tag": "Unity",
-      "date": 1499841487
+      "date_added": 1499841487
     },
     {
         ...
@@ -4326,7 +4430,7 @@ System.out.println(response.toString());
 ```
 `POST /games/{game-id}/mods/{mod-id}/tags`
 
-Add tags to a mod's profile. Note that you can only add what tags are allowed by the parent game. To determine what game tags are allowed view the `cats` (categories) column on the parent game object.
+Add tags to a mod's profile. Note that you can only add what tags are allowed by the parent game. To determine what game tags are allowed view the `Tag Options` column on the parent game object.
      
      For example if the parent game has the 'Engine' category available with 'Easy', 'Medium' and 'Hard' being options you can simply submit 'Easy' in the `tags` array in your request. You can populate the array with tags from different categories and they will automatically be sorted by mod.io.
      
@@ -4481,7 +4585,7 @@ Delete one or more tags for a mod profile. Deleting tags is identical to adding 
 > Example responses
 
 ```json
- "204 No Content" 
+ 204 No Content 
 ```
 <h3 id="Delete-Mod-Tag-responses">Responses</h3>
 
@@ -4746,7 +4850,7 @@ System.out.println(response.toString());
 ```
 `GET /games/{game-id}/mods/{mod-id}/metadatakvp`
 
-Get all key-value metadata pairs for the corresponding mod, successful response will return an array of objects contains only the key-value pairs. Only mod administrators are able to view these values.
+Get all key-value metadata pairs for the corresponding mod, successful response will return an array of objects contains only the key-value pairs. Only mod administrators are able to add/delete these values.
 
 
 > Example responses
@@ -4900,7 +5004,7 @@ Add searchable key-value metadata for the corresponding mod. Metadata may includ
      
      Parameter|Type|Required|Description
      ---|---|---|---|
-     metadata|array|true|Array containing one or more key value pairs where the the key & value are separated by a colon ':'. A single key can map to multiple values (1-to-many relationship), key-value pairs are searchable by exact matches only and neither the key or value can exceed 255 characters in length.
+     metadata_blob|array|true|Array containing one or more key value pairs where the the key & value are separated by a colon ':'. A single key can map to multiple values (1-to-many relationship), key-value pairs are searchable by exact matches only and neither the key or value can exceed 255 characters in length.
 
 
 > Example responses
@@ -5043,13 +5147,13 @@ Delete key-value pair metadata from the corresponding mod. <br><br>__Note:__ Due
      
      Parameter|Type|Required|Description
      ---|---|---|---|
-     metadata|array|true|Array containing one or more key value pairs where the the key & value are separated by a colon ':'. A single key can map to multiple values (1-to-many relationship), key-value pairs are searchable by exact matches only and neither the key or value can exceed 255 characters in length.
+     metadata_blob|array|true|Array containing one or more key value pairs where the the key & value are separated by a colon ':'. A single key can map to multiple values (1-to-many relationship), key-value pairs are searchable by exact matches only and neither the key or value can exceed 255 characters in length.
 
 
 > Example responses
 
 ```json
- "204 No Content" 
+ 204 No Content 
 ```
 <h3 id="Delete-Mod-KVP-Metadata-responses">Responses</h3>
 
@@ -5178,8 +5282,8 @@ Get all listed dependencies for the corresponding mod, successful response will 
 {
   "data": [
     {
-      "mod": 231,
-      "date": 1499841487
+      "mod_id": 231,
+      "date_added": 1499841487
     },
     {
         ...
@@ -5472,7 +5576,7 @@ Delete dependencies currently listed as required for the corresponding mod. Depe
 > Example responses
 
 ```json
- "204 No Content" 
+ 204 No Content 
 ```
 <h3 id="Delete-Mod-Dependencies-responses">Responses</h3>
 
@@ -5600,7 +5704,7 @@ Retrieve all members that are part of a game team. Successful request will retur
      user|integer(int32)|Unique id of the user.
      username|string|Username of the user.
      level|integer|The level of permission the user has.<br><br>*Fields Options:*<br>__1__ = Moderator (can moderate content submitted)<br>__4__ = Financials (read only access to the control panel to view financial reports)<br>__8__ = Administrator (full access, including editing the profile and team)
-     date|integer|Unix timestamp of the date the user was added to the team.
+     date_added|integer|Unix timestamp of the date the user was added to the team.
      position|string|Custom title given to the user.
 
 
@@ -5613,9 +5717,9 @@ Retrieve all members that are part of a game team. Successful request will retur
       "id": 457,
       "user": {
         "id": 1,
-        "nameid": "xant",
+        "name_id": "xant",
         "username": "XanT",
-        "online": 1509922961,
+        "date_online": 1509922961,
         "avatar": {
           "filename": "masterchief.jpg",
           "full": "https://media.mod.io/images/members/1/1/1/masterchief.jpg"
@@ -5626,7 +5730,7 @@ Retrieve all members that are part of a game team. Successful request will retur
       },
       "username": "Megalodon",
       "level": 8,
-      "date": 1492058857,
+      "date_added": 1492058857,
       "position": "Supreme Overlord"
     },
     {
@@ -5762,7 +5866,7 @@ Retrieve all members that are part of a mod team. Successful request will return
      id|integer(int32)|Unique id of the access record.
      username|string|Username of the user.
      level|integer|The level of permission the user has.<br><br>*Fields Options:*<br>__1__ = Moderator (can moderate content submitted)<br>__4__ = Financials (read only access to the control panel to view financial reports)<br>__8__ = Administrator (full access, including editing the profile and team)
-     date|integer|Unix timestamp of the date the user was added to the team.
+     date_added|integer|Unix timestamp of the date the user was added to the team.
      position|string|Custom title given to the user.
 
 
@@ -5775,9 +5879,9 @@ Retrieve all members that are part of a mod team. Successful request will return
       "id": 457,
       "user": {
         "id": 1,
-        "nameid": "xant",
+        "name_id": "xant",
         "username": "XanT",
-        "online": 1509922961,
+        "date_online": 1509922961,
         "avatar": {
           "filename": "masterchief.jpg",
           "full": "https://media.mod.io/images/members/1/1/1/masterchief.jpg"
@@ -5788,7 +5892,7 @@ Retrieve all members that are part of a mod team. Successful request will return
       },
       "username": "Megalodon",
       "level": 8,
-      "date": 1492058857,
+      "date_added": 1492058857,
       "position": "Supreme Overlord"
     },
     {
@@ -5933,7 +6037,7 @@ Add a user to a game team.
      
      Parameter|Type|Required|Description
      ---|---|---|---|
-     user|integer|true|The unique id of the team you are adding to the team.
+     user_id|integer|true|The unique id of the team you are adding to the team.
      level|integer|true|The level of permissions you want to give to the user.<br><br>*Fields Options:*<br>__1__ = Moderator (can moderate content submitted)<br>__4__ = Financials (read only access to the control panel to view financial reports)<br>__8__ = Administrator (full access, including editing the profile and team)
      position|string|true|The title you wish to apply to the member within your team.
 
@@ -6078,7 +6182,7 @@ Add a user to a mod team.
      
      Parameter|Type|Required|Description
      ---|---|---|---|
-     user|integer|true|The unique id of the team you are adding to the team.
+     user_id|integer|true|The unique id of the team you are adding to the team.
      level|integer|true|The level of permissions you want to give to the user.<br><br>*Fields Options:*<br>__1__ = Moderator (can moderate comments and content attached)<br>__4__ = Creator (can upload builds and edit all settings except supply and existing team members)<br>__8__ = Administrator (full access, including editing the supply and team)
      position|string|true|The title you wish to apply to the member within your team.
 
@@ -6513,7 +6617,7 @@ Remove a member from a game team. This will revoke their access rights if they a
 > Example responses
 
 ```json
- "204 No Content" 
+ 204 No Content 
 ```
 <h3 id="Delete-Game-Team-Member-responses">Responses</h3>
 
@@ -6649,7 +6753,7 @@ Remove a member from a mod team. This will revoke their access rights if they ar
 > Example responses
 
 ```json
- "204 No Content" 
+ 204 No Content 
 ```
 <h3 id="Delete-Mod-Team-Member-responses">Responses</h3>
 
@@ -6774,13 +6878,13 @@ Retrieve all comments for the corresponding mod. Successful request will return 
      Filter|Type|Description
      ---|---|---
      id|integer|Unique id of the comment.
-     mod|integer|Unique id of the mod.
+     mod_id|integer|Unique id of the mod.
      user|integer|Unique id of the user who published the comment.
-     date|integer|Unix timestamp of date added.
-     replyid|integer|Id of the parent comment this comment is replying to.
-     replypos|string|Levels of nesting in comment chain.
+     date_added|integer|Unix timestamp of date added.
+     reply_id|integer|Id of the parent comment this comment is replying to.
+     reply_position|string|Levels of nesting in comment chain.
      karma|integer|Karma received from comment.
-     karmago|integer|Good karma received from comment.
+     karma_guest|integer|The amount of karma received by guests.
      summary|string|The contents of the comment.
 
 
@@ -6791,12 +6895,12 @@ Retrieve all comments for the corresponding mod. Successful request will return 
   "data": [
     {
       "id": 2,
-      "mod": 2,
+      "mod_id": 2,
       "submitted_by": {
         "id": 1,
-        "nameid": "xant",
+        "name_id": "xant",
         "username": "XanT",
-        "online": 1509922961,
+        "date_online": 1509922961,
         "avatar": {
           "filename": "masterchief.jpg",
           "full": "https://media.mod.io/images/members/1/1/1/masterchief.jpg"
@@ -6805,11 +6909,11 @@ Retrieve all comments for the corresponding mod. Successful request will return 
         "language": "en",
         "url": "https://mod.io/members/xant"
       },
-      "date": 1499841487,
-      "replyid": 1499,
-      "replypos": "01",
+      "date_added": 1499841487,
+      "reply_id": 1499,
+      "reply_position": "01",
       "karma": 1,
-      "karmago": 0,
+      "karma_guest": 0,
       "summary": "This mod is kickass! Great work!"
     },
     {
@@ -6946,12 +7050,12 @@ Retrieve a comment by it's unique ID. Successful request will return a single [C
 ```json
 {
   "id": 2,
-  "mod": 2,
+  "mod_id": 2,
   "submitted_by": {
     "id": 1,
-    "nameid": "xant",
+    "name_id": "xant",
     "username": "XanT",
-    "online": 1509922961,
+    "date_online": 1509922961,
     "avatar": {
       "filename": "masterchief.jpg",
       "full": "https://media.mod.io/images/members/1/1/1/masterchief.jpg"
@@ -6960,11 +7064,11 @@ Retrieve a comment by it's unique ID. Successful request will return a single [C
     "language": "en",
     "url": "https://mod.io/members/xant"
   },
-  "date": 1499841487,
-  "replyid": 1499,
-  "replypos": "01",
+  "date_added": 1499841487,
+  "reply_id": 1499,
+  "reply_position": "01",
   "karma": 1,
-  "karmago": 0,
+  "karma_guest": 0,
   "summary": "This mod is kickass! Great work!"
 }
 ```
@@ -7102,7 +7206,7 @@ Delete a comment from a mod profile.
 > Example responses
 
 ```json
- "204 No Content" 
+ 204 No Content 
 ```
 <h3 id="Delete-Mod-Comment-responses">Responses</h3>
 
@@ -7240,7 +7344,7 @@ Determine if a specified user has ownership rights to a resource.
      ---|---|---|---|
      resource|string|true|The name of the resource type you are checking against a user - __must__ be one of the following values.<br><br>*Field options*<br>__games__<br>__mods__<br>__files__<br>__tags__<br>__users__.
      id|integer(int32)|true|Unique Id of the resource to check access rights for.
-     user|integer(int32)|true|Unique Id of the user you are determining has access to the resource id.
+     user_id|integer(int32)|true|Unique Id of the user you are determining has access to the resource id.
 
 
 > Example responses
@@ -7518,7 +7622,8 @@ Retrieve all users registered to mod.io. Successful request will return an Succe
      Filter|Type|Description
      ---|---|---
      id|integer(int32)|Unique id of the user.
-     nameid|string|SEO-friendly representation of the username. This is the same field that forms the URL link to their profile.
+     name_id|string|SEO-friendly representation of the username. This is the same field that forms the URL link to their profile.
+     date_online|integer(int32)|Unix timestamp of when the user was last online.
      username|string|Username of the user.
      timezone|string|Timezone of the user, format is country/city.
      language|string|2-character representation of language.
@@ -7531,9 +7636,9 @@ Retrieve all users registered to mod.io. Successful request will return an Succe
   "data": [
     {
       "id": 1,
-      "nameid": "xant",
+      "name_id": "xant",
       "username": "XanT",
-      "online": 1509922961,
+      "date_online": 1509922961,
       "avatar": {
         "filename": "masterchief.jpg",
         "full": "https://media.mod.io/images/members/1/1/1/masterchief.jpg"
@@ -7676,9 +7781,9 @@ Find a user by their unique member id. Successful request will return a single [
 ```json
 {
   "id": 1,
-  "nameid": "xant",
+  "name_id": "xant",
   "username": "XanT",
-  "online": 1509922961,
+  "date_online": 1509922961,
   "avatar": {
     "filename": "masterchief.jpg",
     "full": "https://media.mod.io/images/members/1/1/1/masterchief.jpg"
@@ -7969,9 +8074,9 @@ Retrieve the *authenticated user*. Successful request will return a [User Object
 ```json
 {
   "id": 1,
-  "nameid": "xant",
+  "name_id": "xant",
   "username": "XanT",
-  "online": 1509922961,
+  "date_online": 1509922961,
   "avatar": {
     "filename": "masterchief.jpg",
     "full": "https://media.mod.io/images/members/1/1/1/masterchief.jpg"
@@ -8113,12 +8218,12 @@ Get all mod's the *authenticated user* is subscribed to. Successful request will
   "data": [
     {
       "id": 2,
-      "game": 2,
+      "game_id": 2,
       "submitted_by": {
         "id": 1,
-        "nameid": "xant",
+        "name_id": "xant",
         "username": "XanT",
-        "online": 1509922961,
+        "date_online": 1509922961,
         "avatar": {
           "filename": "masterchief.jpg",
           "full": "https://media.mod.io/images/members/1/1/1/masterchief.jpg"
@@ -8128,8 +8233,9 @@ Get all mod's the *authenticated user* is subscribed to. Successful request will
         "url": "https://mod.io/members/xant"
       },
       "price": 9.99,
-      "datereg": 1492564103,
-      "dateup": 1499841487,
+      "date_added": 1492564103,
+      "date_updated": 1499841487,
+      "date_live": 1499841403,
       "logo": {
         "filename": "IMG_20170409_222419.jpg",
         "full": "https://media.mod.io/images/mods/1/1/2/IMG_20170409_222419.jpg",
@@ -8139,20 +8245,22 @@ Get all mod's the *authenticated user* is subscribed to. Successful request will
       },
       "homepage": "https://www.rogue-hdpack.com/",
       "name": "Rogue Knight HD Pack",
-      "nameid": "rogue-knight-hd-pack",
+      "name_id": "rogue-knight-hd-pack",
       "summary": "It's time to bask in the glory of beautiful 4k textures!",
       "description": "<h2>About</h2><p>Rogue HD Pack does exactly what you thi...",
-      "metadatablob": "rogue,hd,high-res,4k,hd textures",
+      "metadata_blob": "rogue,hd,high-res,4k,hd textures",
       "url": "https://rogue-knight.mod.io/rogue-knight-hd-pack",
       "modfile": {
         "id": 2,
-        "mod": 2,
-        "date": 1499841487,
-        "datevirus": 1499841487,
-        "virusstatus": 0,
-        "viruspositive": 0,
+        "mod_id": 2,
+        "date_added": 1499841487,
+        "date_scanned": 1499841487,
+        "virus_status": 0,
+        "virus_positive": 0,
         "filesize": 15181,
-        "filehash": "2d4a0e2d7273db6b0a94b0740a88ad0d",
+        "filehash": {
+          "md5": "2d4a0e2d7273db6b0a94b0740a88ad0d"
+        },
         "filename": "rogue-knight-v1.zip",
         "version": "1.3",
         "virustotal": "No threats found.",
@@ -8186,7 +8294,7 @@ Get all mod's the *authenticated user* is subscribed to. Successful request will
       "tags": [
         {
           "tag": "Unity",
-          "date": 1499841487
+          "date_added": 1499841487
         }
       ]
     },
@@ -8334,9 +8442,9 @@ View all mod.io games that exist for the *authenticated user*.
       "id": 2,
       "submitted_by": {
         "id": 1,
-        "nameid": "xant",
+        "name_id": "xant",
         "username": "XanT",
-        "online": 1509922961,
+        "date_online": 1509922961,
         "avatar": {
           "filename": "masterchief.jpg",
           "full": "https://media.mod.io/images/members/1/1/1/masterchief.jpg"
@@ -8345,15 +8453,16 @@ View all mod.io games that exist for the *authenticated user*.
         "language": "en",
         "url": "https://mod.io/members/xant"
       },
-      "datereg": 1493702614,
-      "dateup": 1499410290,
+      "date_added": 1493702614,
+      "date_updated": 1499410290,
+      "date_live": 1499841403,
       "presentation": 1,
       "community": 3,
       "submission": 0,
       "curation": 0,
       "revenue": 1500,
       "api": 3,
-      "ugcname": "map",
+      "ugc_name": "map",
       "icon": {
         "filename": "IMG_20170409_222419.jpg",
         "full": "https://media.mod.io/images/mods/1/1/2/icon.png",
@@ -8372,18 +8481,18 @@ View all mod.io games that exist for the *authenticated user*.
       },
       "homepage": "https://www.rogue-knight-game.com/",
       "name": "Rogue Knight",
-      "nameid": "rogue-knight",
+      "name_id": "rogue-knight",
       "summary": "Rogue Knight is a brand new 2D pixel platformer.",
       "instructions": "Instructions here on how to develop for your game.",
       "url": "https://rogue-knight.mod.io",
-      "cats": [
+      "tag_options": [
         {
           "name": "Engines",
           "type": "checkboxes",
           "tags": [
             "Unity"
           ],
-          "adminonly": 0
+          "admin_only": 0
         }
       ]
     },
@@ -8529,12 +8638,12 @@ View all mod.io mods that exist for the *authenticated user*.
   "data": [
     {
       "id": 2,
-      "game": 2,
+      "game_id": 2,
       "submitted_by": {
         "id": 1,
-        "nameid": "xant",
+        "name_id": "xant",
         "username": "XanT",
-        "online": 1509922961,
+        "date_online": 1509922961,
         "avatar": {
           "filename": "masterchief.jpg",
           "full": "https://media.mod.io/images/members/1/1/1/masterchief.jpg"
@@ -8544,8 +8653,9 @@ View all mod.io mods that exist for the *authenticated user*.
         "url": "https://mod.io/members/xant"
       },
       "price": 9.99,
-      "datereg": 1492564103,
-      "dateup": 1499841487,
+      "date_added": 1492564103,
+      "date_updated": 1499841487,
+      "date_live": 1499841403,
       "logo": {
         "filename": "IMG_20170409_222419.jpg",
         "full": "https://media.mod.io/images/mods/1/1/2/IMG_20170409_222419.jpg",
@@ -8555,20 +8665,22 @@ View all mod.io mods that exist for the *authenticated user*.
       },
       "homepage": "https://www.rogue-hdpack.com/",
       "name": "Rogue Knight HD Pack",
-      "nameid": "rogue-knight-hd-pack",
+      "name_id": "rogue-knight-hd-pack",
       "summary": "It's time to bask in the glory of beautiful 4k textures!",
       "description": "<h2>About</h2><p>Rogue HD Pack does exactly what you thi...",
-      "metadatablob": "rogue,hd,high-res,4k,hd textures",
+      "metadata_blob": "rogue,hd,high-res,4k,hd textures",
       "url": "https://rogue-knight.mod.io/rogue-knight-hd-pack",
       "modfile": {
         "id": 2,
-        "mod": 2,
-        "date": 1499841487,
-        "datevirus": 1499841487,
-        "virusstatus": 0,
-        "viruspositive": 0,
+        "mod_id": 2,
+        "date_added": 1499841487,
+        "date_scanned": 1499841487,
+        "virus_status": 0,
+        "virus_positive": 0,
         "filesize": 15181,
-        "filehash": "2d4a0e2d7273db6b0a94b0740a88ad0d",
+        "filehash": {
+          "md5": "2d4a0e2d7273db6b0a94b0740a88ad0d"
+        },
         "filename": "rogue-knight-v1.zip",
         "version": "1.3",
         "virustotal": "No threats found.",
@@ -8602,7 +8714,7 @@ View all mod.io mods that exist for the *authenticated user*.
       "tags": [
         {
           "tag": "Unity",
-          "date": 1499841487
+          "date_added": 1499841487
         }
       ]
     },
@@ -8748,13 +8860,15 @@ View all mod.io files that exist for the *authenticated user*.
   "data": [
     {
       "id": 2,
-      "mod": 2,
-      "date": 1499841487,
-      "datevirus": 1499841487,
-      "virusstatus": 0,
-      "viruspositive": 0,
+      "mod_id": 2,
+      "date_added": 1499841487,
+      "date_scanned": 1499841487,
+      "virus_status": 0,
+      "virus_positive": 0,
       "filesize": 15181,
-      "filehash": "2d4a0e2d7273db6b0a94b0740a88ad0d",
+      "filehash": {
+        "md5": "2d4a0e2d7273db6b0a94b0740a88ad0d"
+      },
       "filename": "rogue-knight-v1.zip",
       "version": "1.3",
       "virustotal": "No threats found.",
@@ -8824,7 +8938,7 @@ message|string|The server response to your request. Responses will vary from end
 
 Name|Type|Description
 ---|---|---|---|
-error|object|No description
+error|object|Contains error data.
 » code|integer(int32)|HTTP code of the error.
 » message|string|The server response to your request. Responses will vary from endpoint but object structure will persist.
 
@@ -8960,12 +9074,12 @@ filename|string|Image filename, with the extension included.
   "data": [
     {
       "id": 2,
-      "mod": 2,
+      "mod_id": 2,
       "submitted_by": {
         "id": 1,
-        "nameid": "xant",
+        "name_id": "xant",
         "username": "XanT",
-        "online": 1509922961,
+        "date_online": 1509922961,
         "avatar": {
           "filename": "masterchief.jpg",
           "full": "https://media.mod.io/images/members/1/1/1/masterchief.jpg"
@@ -8974,11 +9088,11 @@ filename|string|Image filename, with the extension included.
         "language": "en",
         "url": "https://mod.io/members/xant"
       },
-      "date": 1499841487,
-      "replyid": 1499,
-      "replypos": "01",
+      "date_added": 1499841487,
+      "reply_id": 1499,
+      "reply_position": "01",
       "karma": 1,
-      "karmago": 0,
+      "karma_guest": 0,
       "summary": "This mod is kickass! Great work!"
     },
     {
@@ -8999,23 +9113,23 @@ Name|Type|Description
 ---|---|---|---|
 data|[Comment Object  ](#schemacomment_object)[]|Array containing comment objects
 » id|integer(int32)|Unique id of the comment.
-» mod|integer(int32)|Unique id of the parent mod.
+» mod_id|integer(int32)|Unique id of the parent mod.
 » submitted_by|[User Object  ](#schemauser_object)|Contains user data.
 »» id|integer(int32)|Unique id of the user.
-»» nameid|string|Unique nameid of user which forms end of their profile URL.
+»» name_id|string|Unique nameid of user which forms end of their profile URL.
 »» username|string|Non-unique username of the user.
-»» online|integer(int32)|Unix timestamp on when the user was last online.
+»» date_online|integer(int32)|Unix timestamp of when the user was last online.
 »» avatar|[Avatar Object  ](#schemaavatar_object)|Contains avatar data.
 »»» filename|string|Image filename, including file extension.
 »»» full|string|Full URL to the image.
 »» timezone|string|The Timezone of the user, shown in {Country}/{City} format.
 »» language|string|The users language preference, limited to two characters.
 »» url|string|URL to the user profile.
-» date|integer(int32)|Unix timestamp of when the comment was published.
-» replyid|integer(int32)|Unique replyid used to submitting a nested reply to the published comment.
-» replypos|string|Nesting position of the reply.
+» date_added|integer(int32)|Unix timestamp of when the comment was published.
+» reply_id|integer(int32)|Unique id of the reply used to submitting a nested reply to the published comment.
+» reply_position|string|Nesting position of the reply.
 » karma|integer(int32)|The amount of karma the comment has received.
-» karmago|integer(int32)|The amount of good karma the comment has received.
+» karma_guest|integer(int32)|The amount of karma received by guests.
 » summary|string|The displayed comment.
 cursor_id|integer(int32)|The current _cursor value.
 prev_id|integer(int32)|The previous _cursor value as manually inserted by you, null by default.
@@ -9033,8 +9147,8 @@ result_count|integer(int32)|The amount of results returned in the current reques
 {
   "data": [
     {
-      "mod": 231,
-      "date": 1499841487
+      "mod_id": 231,
+      "date_added": 1499841487
     },
     {
         ...
@@ -9052,9 +9166,9 @@ result_count|integer(int32)|The amount of results returned in the current reques
 
 Name|Type|Description
 ---|---|---|---|
-data|[Mod Dependencies Object ](#schemamod_dependencies_object)[]|No description
-» mod|integer(int32)|Unique id of the mod that is the dependency.
-» date|integer(int32)|Unix timestamp of when the dependency was listed.
+data|[Mod Dependencies Object ](#schemamod_dependencies_object)[]|Array containing mod dependencies objects.
+» mod_id|integer(int32)|Unique id of the mod that is the dependency.
+» date_added|integer(int32)|Unix timestamp of when the dependency was added.
 cursor_id|integer(int32)|The current _cursor value.
 prev_id|integer(int32)|The previous _cursor value as manually inserted by you, null by default.
 next_id|integer(int32)|The next position to move the _cursor to, based on the current request.
@@ -9072,13 +9186,15 @@ result_count|integer(int32)|The amount of results returned in the current reques
   "data": [
     {
       "id": 2,
-      "mod": 2,
-      "date": 1499841487,
-      "datevirus": 1499841487,
-      "virusstatus": 0,
-      "viruspositive": 0,
+      "mod_id": 2,
+      "date_added": 1499841487,
+      "date_scanned": 1499841487,
+      "virus_status": 0,
+      "virus_positive": 0,
       "filesize": 15181,
-      "filehash": "2d4a0e2d7273db6b0a94b0740a88ad0d",
+      "filehash": {
+        "md5": "2d4a0e2d7273db6b0a94b0740a88ad0d"
+      },
       "filename": "rogue-knight-v1.zip",
       "version": "1.3",
       "virustotal": "No threats found.",
@@ -9103,13 +9219,14 @@ Name|Type|Description
 ---|---|---|---|
 data|[Modfile Object  ](#schemamodfile_object)[]|Response array of items.
 » id|integer(int32)|Unique file id.
-» mod|integer(int32)|Unique mod id.
-» date|integer(int32)|Unix timestamp of file upload time.
-» datevirus|integer(int32)|Unix timestamp of file virus scan.
-» virusstatus|integer(int32)|The status of the virus scan for the file.
-» viruspositive|integer(int32)|Has the file been positively flagged as a virus?
+» mod_id|integer(int32)|Unique mod id.
+» date_added|integer(int32)|Unix timestamp of file upload time.
+» date_scanned|integer(int32)|Unix timestamp of file virus scan.
+» virus_status|integer(int32)|The status of the virus scan for the file.
+» virus_positive|integer(int32)|Has the file been positively flagged as a virus?
 » filesize|integer(int32)|Size of the file in bytes.
-» filehash|string|MD5 filehash.
+» filehash|object|Contains filehashes for file.
+»» md5|string|MD5 filehash.
 » filename|string|Name of the file including file extension.
 » version|string|The release version this file represents.
 » virustotal|string|Text output from virustotal scan.
@@ -9134,9 +9251,9 @@ result_count|integer(int32)|The amount of results returned in the current reques
       "id": 2,
       "submitted_by": {
         "id": 1,
-        "nameid": "xant",
+        "name_id": "xant",
         "username": "XanT",
-        "online": 1509922961,
+        "date_online": 1509922961,
         "avatar": {
           "filename": "masterchief.jpg",
           "full": "https://media.mod.io/images/members/1/1/1/masterchief.jpg"
@@ -9145,15 +9262,16 @@ result_count|integer(int32)|The amount of results returned in the current reques
         "language": "en",
         "url": "https://mod.io/members/xant"
       },
-      "datereg": 1493702614,
-      "dateup": 1499410290,
+      "date_added": 1493702614,
+      "date_updated": 1499410290,
+      "date_live": 1499841403,
       "presentation": 1,
       "community": 3,
       "submission": 0,
       "curation": 0,
       "revenue": 1500,
       "api": 3,
-      "ugcname": "map",
+      "ugc_name": "map",
       "icon": {
         "filename": "IMG_20170409_222419.jpg",
         "full": "https://media.mod.io/images/mods/1/1/2/icon.png",
@@ -9172,18 +9290,18 @@ result_count|integer(int32)|The amount of results returned in the current reques
       },
       "homepage": "https://www.rogue-knight-game.com/",
       "name": "Rogue Knight",
-      "nameid": "rogue-knight",
+      "name_id": "rogue-knight",
       "summary": "Rogue Knight is a brand new 2D pixel platformer.",
       "instructions": "Instructions here on how to develop for your game.",
       "url": "https://rogue-knight.mod.io",
-      "cats": [
+      "tag_options": [
         {
           "name": "Engines",
           "type": "checkboxes",
           "tags": [
             "Unity"
           ],
-          "adminonly": 0
+          "admin_only": 0
         }
       ]
     },
@@ -9207,24 +9325,25 @@ data|[Game Object  ](#schemagame_object)[]|Array containing game objects
 » id|integer(int32)|Unique game id.
 » submitted_by|[User Object  ](#schemauser_object)|Contains user data.
 »» id|integer(int32)|Unique id of the user.
-»» nameid|string|Unique nameid of user which forms end of their profile URL.
+»» name_id|string|Unique nameid of user which forms end of their profile URL.
 »» username|string|Non-unique username of the user.
-»» online|integer(int32)|Unix timestamp on when the user was last online.
+»» date_online|integer(int32)|Unix timestamp of when the user was last online.
 »» avatar|[Avatar Object  ](#schemaavatar_object)|Contains avatar data.
 »»» filename|string|Image filename, including file extension.
 »»» full|string|Full URL to the image.
 »» timezone|string|The Timezone of the user, shown in {Country}/{City} format.
 »» language|string|The users language preference, limited to two characters.
 »» url|string|URL to the user profile.
-» datereg|integer(int32)|Unix timestamp of date registered.
-» dateup|integer(int32)|Unix timestamp of date updated.
+» date_added|integer(int32)|Unix timestamp of date registered.
+» date_updated|integer(int32)|Unix timestamp of date updated.
+» date_live|integer(int32)|Unix timestamp of when game was set live.
 » presentation|integer(int32)|Determines which presentation style you want to use for your game on the mod.io website <br><br>*Field options*<br>__0__ =  Grid View: Displays mods in a grid (visual but less informative, default setting) <br>__1__ = Table View: Displays mods in a table (easier to browse).
 » community|integer(int32)|Determines the rights community members have with the game.<br><br>*Field Options*<br>__0__ = Discussion board disabled, community cannot share guides and news<br>__1__ = Discussion Board enabled only<br>__2__ = Community can only share guides and news<br>__3__ = Discussion Board enabled and community can share news and guides
 » submission|integer(int32)|Determines the submission process you want modders to follow.<br><br>*Field Options*<br>__0__ = Control the upload process. You will have to build an upload system either in-game or via a standalone app, which enables developers to submit mods to the tags you have configured. Because you control the flow, you can pre-validate and compile mods, to ensure they will work in your game. In the long run this option will save you time as you can accept more submissions, but it requires more setup to get running and isn't as open as the above option. NOTE: mod profiles can still be created online, but uploads will have to occur via the tools you supply.<br><br>__1__ = Enable mod uploads from anywhere. Allow developers to upload mods via the website and API, and pick the tags their mod is built for. No validation will be done on the files submitted, it will be the responsibility of your game and apps built to process the mods installation based on the tags selected and determine if the mod is valid and works. For example a mod might be uploaded to the 'map' tag. When a user subscribes to this mod, your game will need to verify it contains a map file and install it where maps are located. If this fails, your game or the community will have to flag the mod as 'incompatible' to remove it from the listing.
 » curation|integer(int32)|Determines the curation process for the game.<br><br>*Field Options*<br>__0__ = Mods are immediately available to play, without any intervention or work from your team.<br>__1__ = Screen only mods the author wants to sell, before they are available to purchase via the API.<br>__2__ = All mods must be accepted by someone on your team. This option is useful for games that have a small number of mods and want to control the experience, or you need to set the parameters attached to a mod (i.e. a weapon may require the rate of fire, power level, clip size etc). It can also be used for complex mods, which you may need to build into your game or distribute as DLC.
 » revenue|integer(int32)|__Bitwise__. Determines the revenue capabilities for mods of the game. For selecting multiple options you need to submit the bitwise value. i.e. If you want to allow user-generated content to be sold(1), to receive donations(2) and allow them to control their supply and scarcity(8) your would submit _11 (8 + 2 + 1)_.<br><br>*Field Options*<br>__1__ = Allow user-generated content to be sold<br>__2__ = Allow user-generated content to receive donations<br>__4__ = Allow user-generated content to be traded (not subject to revenue share)<br>__8__ = Allow user-generated content to control supply and scarcity.
 » api|integer(int32)|Determines what permissions you want to enable via the mod.io API.<br><br>*Field Options*<br>__0__ = Third parties cannot access your mods API and mods cannot be downloaded directly without API validation.<br>__1__ = Allow 3rd parties to access your mods API (recommended, an open API will encourage a healthy ecosystem of tools and apps) but mods cannot be downloaded directly<br>__2__ = Allow mods to be downloaded directly but 3rd parties cannot access your mods API.<br>__3__ = Allow third parties to access your mods API and allow mods to be downloaded directly without api validation.
-» ugcname|string|Singular string that best describes the type of user-generated content.
+» ugc_name|string|Singular string that best describes the type of user-generated content.
 » icon|[Icon Object  ](#schemaicon_object)|Contains icon data.
 »» filename|string|Image filename, with file extension included.
 »» full|string|URL to full-sized image.
@@ -9240,14 +9359,14 @@ data|[Game Object  ](#schemagame_object)[]|Array containing game objects
 »» full|string|URL to the full-sized header image.
 » homepage|string|Official game website URL.
 » name|string|Title of the game.
-» nameid|string|The unique SEO friendly URL of the game.
+» name_id|string|The unique SEO friendly URL of the game.
 » summary|string|Brief summary of the game.
 » instructions|string|Modding instructions for developers.
 » url|string|website url for the game.
-» cats|[Game Tags Object ](#schemagame_tags_object)[]|Contains categories data.
+» tag_options|[Game Tag Options Object](#schemagame_tag_options_object)[]|Contains categories data.
 »» name|string|The name of the category.
 »» type|string|Are tags selected via checkboxes or a single dropdown.
-»» adminonly|integer(int32)|Is this an admin only tag? If so only admin's can see this category and it can be used for filtering.
+»» admin_only|integer(int32)|Is this an admin only tag? If so only admin's can see this category and it can be used for filtering.
 »» tags|string[]|Eligible tags for this game.
 cursor_id|integer(int32)|The current _cursor value.
 prev_id|integer(int32)|The previous _cursor value as manually inserted by you, null by default.
@@ -9266,9 +9385,9 @@ result_count|integer(int32)|The amount of results returned in the current reques
   "data": [
     {
       "id": 53,
-      "game": 17,
-      "user": 95,
-      "dateup": 1499846132,
+      "game_id": 17,
+      "user_id": 95,
+      "date_added": 1499846132,
       "event": "GAME_UPDATE",
       "changes": [
         {
@@ -9296,12 +9415,12 @@ Name|Type|Description
 ---|---|---|---|
 data|[Game Activity Object ](#schemagame_activity_object)[]|Response array of items.
 » id|integer(int32)|Unique id of activity record.
-» game|integer(int32)|Unique id of the parent mod.
-» user|integer(int32)|Unique id of the user who triggered the action.
-» dateup|string|Unix timestamp of when the record was last updated.
-» event|string|Type of event the activity was. Ie. UPDATE or DELETE.
+» game_id|integer(int32)|Unique id of the parent game.
+» user_id|integer(int32)|Unique id of the user who triggered the action.
+» date_added|string|Unix timestamp of when the event occured.
+» event|string|Type of event the activity was. ie. GAME_UPDATE or GAME_VISIBILITY_CHANGE.
 » changes|[Activity Changes Object ](#schemaactivity_changes_object)[]|Contains all changes for the event.
-»» field|string|The field of the changed value
+»» field|string|The field of the changed value.
 »» before|string|The value prior to the event.
 »» after|string|The newly-updated value.
 cursor_id|integer(int32)|The current _cursor value.
@@ -9339,7 +9458,7 @@ result_count|integer(int32)|The amount of results returned in the current reques
 
 Name|Type|Description
 ---|---|---|---|
-data|[Metadata KVP Object ](#schemametadata_kvp_object)[]|No description
+data|[Metadata KVP Object ](#schemametadata_kvp_object)[]|Array containing metadata kvp objects.
 » key|string|The key of the key-value pair.
 » value|string|The value of the key-value pair.
 cursor_id|integer(int32)|The current _cursor value.
@@ -9359,12 +9478,12 @@ result_count|integer(int32)|The amount of results returned in the current reques
   "data": [
     {
       "id": 2,
-      "game": 2,
+      "game_id": 2,
       "submitted_by": {
         "id": 1,
-        "nameid": "xant",
+        "name_id": "xant",
         "username": "XanT",
-        "online": 1509922961,
+        "date_online": 1509922961,
         "avatar": {
           "filename": "masterchief.jpg",
           "full": "https://media.mod.io/images/members/1/1/1/masterchief.jpg"
@@ -9374,8 +9493,9 @@ result_count|integer(int32)|The amount of results returned in the current reques
         "url": "https://mod.io/members/xant"
       },
       "price": 9.99,
-      "datereg": 1492564103,
-      "dateup": 1499841487,
+      "date_added": 1492564103,
+      "date_updated": 1499841487,
+      "date_live": 1499841403,
       "logo": {
         "filename": "IMG_20170409_222419.jpg",
         "full": "https://media.mod.io/images/mods/1/1/2/IMG_20170409_222419.jpg",
@@ -9385,20 +9505,22 @@ result_count|integer(int32)|The amount of results returned in the current reques
       },
       "homepage": "https://www.rogue-hdpack.com/",
       "name": "Rogue Knight HD Pack",
-      "nameid": "rogue-knight-hd-pack",
+      "name_id": "rogue-knight-hd-pack",
       "summary": "It's time to bask in the glory of beautiful 4k textures!",
       "description": "<h2>About</h2><p>Rogue HD Pack does exactly what you thi...",
-      "metadatablob": "rogue,hd,high-res,4k,hd textures",
+      "metadata_blob": "rogue,hd,high-res,4k,hd textures",
       "url": "https://rogue-knight.mod.io/rogue-knight-hd-pack",
       "modfile": {
         "id": 2,
-        "mod": 2,
-        "date": 1499841487,
-        "datevirus": 1499841487,
-        "virusstatus": 0,
-        "viruspositive": 0,
+        "mod_id": 2,
+        "date_added": 1499841487,
+        "date_scanned": 1499841487,
+        "virus_status": 0,
+        "virus_positive": 0,
         "filesize": 15181,
-        "filehash": "2d4a0e2d7273db6b0a94b0740a88ad0d",
+        "filehash": {
+          "md5": "2d4a0e2d7273db6b0a94b0740a88ad0d"
+        },
         "filename": "rogue-knight-v1.zip",
         "version": "1.3",
         "virustotal": "No threats found.",
@@ -9432,7 +9554,7 @@ result_count|integer(int32)|The amount of results returned in the current reques
       "tags": [
         {
           "tag": "Unity",
-          "date": 1499841487
+          "date_added": 1499841487
         }
       ]
     },
@@ -9454,12 +9576,12 @@ Name|Type|Description
 ---|---|---|---|
 data|[Mod Object  ](#schemamod_object)[]|Array containing mod objects
 » id|integer(int32)|Unique mod id.
-» game|integer(int32)|Unique game id.
+» game_id|integer(int32)|Unique game id.
 » submitted_by|[User Object  ](#schemauser_object)|Contains user data.
 »» id|integer(int32)|Unique id of the user.
-»» nameid|string|Unique nameid of user which forms end of their profile URL.
+»» name_id|string|Unique nameid of user which forms end of their profile URL.
 »» username|string|Non-unique username of the user.
-»» online|integer(int32)|Unix timestamp on when the user was last online.
+»» date_online|integer(int32)|Unix timestamp of when the user was last online.
 »» avatar|[Avatar Object  ](#schemaavatar_object)|Contains avatar data.
 »»» filename|string|Image filename, including file extension.
 »»» full|string|Full URL to the image.
@@ -9467,8 +9589,9 @@ data|[Mod Object  ](#schemamod_object)[]|Array containing mod objects
 »» language|string|The users language preference, limited to two characters.
 »» url|string|URL to the user profile.
 » price|float|Sale price if applicable, in USD.
-» datereg|integer(int32)|Unix timestamp of date registered.
-» dateup|integer(int32)|Unix timestamp of date last updated.
+» date_added|integer(int32)|Unix timestamp of date registered.
+» date_updated|integer(int32)|Unix timestamp of date last updated.
+» date_live|integer(int32)|Unix timestamp of date mod was set live.
 » logo|[Logo Object  ](#schemalogo_object)|Contains logo data.
 »» filename|string|Image filename, with file extension included.
 »» full|string|URL to full-sized image.
@@ -9477,20 +9600,21 @@ data|[Mod Object  ](#schemamod_object)[]|Array containing mod objects
 »» thumb_1280x720|string|URL to large thumbnail image.
 » homepage|string|Mod homepage URL.
 » name|string|Name of the mod.
-» nameid|string|Unique SEO-friendly mod uri.
+» name_id|string|Unique SEO-friendly mod uri.
 » summary|string|Brief summary of the mod.
 » description|string|Description of the mod.
-» metadatablob|string|Comma-separated metadata for the mod.
+» metadata_blob|string|Comma-separated metadata for the mod.
 » url|string|Official website url for the mod.
 » modfile|[Modfile Object  ](#schemamodfile_object)|Contains file data.
 »» id|integer(int32)|Unique file id.
-»» mod|integer(int32)|Unique mod id.
-»» date|integer(int32)|Unix timestamp of file upload time.
-»» datevirus|integer(int32)|Unix timestamp of file virus scan.
-»» virusstatus|integer(int32)|The status of the virus scan for the file.
-»» viruspositive|integer(int32)|Has the file been positively flagged as a virus?
+»» mod_id|integer(int32)|Unique mod id.
+»» date_added|integer(int32)|Unix timestamp of file upload time.
+»» date_scanned|integer(int32)|Unix timestamp of file virus scan.
+»» virus_status|integer(int32)|The status of the virus scan for the file.
+»» virus_positive|integer(int32)|Has the file been positively flagged as a virus?
 »» filesize|integer(int32)|Size of the file in bytes.
-»» filehash|string|MD5 filehash.
+»» filehash|object|Contains filehashes for file.
+»»» md5|string|MD5 filehash.
 »» filename|string|Name of the file including file extension.
 »» version|string|The release version this file represents.
 »» virustotal|string|Text output from virustotal scan.
@@ -9513,7 +9637,7 @@ data|[Mod Object  ](#schemamod_object)[]|Array containing mod objects
 »» text|string|Text representation of the rating total.
 » tags|[Mod Tag Object ](#schemamod_tag_object)[]|Contains Mod Tag data.
 »» tag|string|The displayed tag.
-»» date|integer(int32)|Unix timestamp of when tag was applied.
+»» date_added|integer(int32)|Unix timestamp of when tag was applied.
 cursor_id|integer(int32)|The current _cursor value.
 prev_id|integer(int32)|The previous _cursor value as manually inserted by you, null by default.
 next_id|integer(int32)|The next position to move the _cursor to, based on the current request.
@@ -9531,9 +9655,9 @@ result_count|integer(int32)|The amount of results returned in the current reques
   "data": [
     {
       "id": 13,
-      "mod": 13,
-      "user": 13,
-      "dateup": 1499846132,
+      "mod_id": 13,
+      "user_id": 13,
+      "date_added": 1499846132,
       "event": "MOD_UPDATE",
       "changes": [
         {
@@ -9561,12 +9685,12 @@ Name|Type|Description
 ---|---|---|---|
 data|[Mod Activity Object ](#schemamod_activity_object)[]|Response array of items.
 » id|integer(int32)|Unique id of activity object.
-» mod|integer(int32)|Unique id of the parent mod.
-» user|integer(int32)|Unique id of the user who triggered the action.
-» dateup|integer(int32)|Unix timestamp of when the update occurred.
-» event|string|The type of resource and action that occurred.
+» mod_id|integer(int32)|Unique id of the parent mod.
+» user_id|integer(int32)|Unique id of the user who triggered the action.
+» date_added|integer(int32)|Unix timestamp of when the event occured.
+» event|string|Type of event the activity was. ie. MOD_UPDATE or MOD_VISIBILITY_CHANGE.
 » changes|[Activity Changes Object ](#schemaactivity_changes_object)[]|Contains all changes for the event.
-»» field|string|The field of the changed value
+»» field|string|The field of the changed value.
 »» before|string|The value prior to the event.
 »» after|string|The newly-updated value.
 cursor_id|integer(int32)|The current _cursor value.
@@ -9586,7 +9710,7 @@ result_count|integer(int32)|The amount of results returned in the current reques
   "data": [
     {
       "tag": "Unity",
-      "date": 1499841487
+      "date_added": 1499841487
     },
     {
         ...
@@ -9604,9 +9728,9 @@ result_count|integer(int32)|The amount of results returned in the current reques
 
 Name|Type|Description
 ---|---|---|---|
-data|[Mod Tag Object ](#schemamod_tag_object)[]|No description
+data|[Mod Tag Object ](#schemamod_tag_object)[]|Array containing mod tag objects.
 » tag|string|The displayed tag.
-» date|integer(int32)|Unix timestamp of when tag was applied.
+» date_added|integer(int32)|Unix timestamp of when tag was applied.
 cursor_id|integer(int32)|The current _cursor value.
 prev_id|integer(int32)|The previous _cursor value as manually inserted by you, null by default.
 next_id|integer(int32)|The next position to move the _cursor to, based on the current request.
@@ -9626,9 +9750,9 @@ result_count|integer(int32)|The amount of results returned in the current reques
       "id": 457,
       "user": {
         "id": 1,
-        "nameid": "xant",
+        "name_id": "xant",
         "username": "XanT",
-        "online": 1509922961,
+        "date_online": 1509922961,
         "avatar": {
           "filename": "masterchief.jpg",
           "full": "https://media.mod.io/images/members/1/1/1/masterchief.jpg"
@@ -9639,7 +9763,7 @@ result_count|integer(int32)|The amount of results returned in the current reques
       },
       "username": "Megalodon",
       "level": 8,
-      "date": 1492058857,
+      "date_added": 1492058857,
       "position": "Supreme Overlord"
     },
     {
@@ -9658,13 +9782,13 @@ result_count|integer(int32)|The amount of results returned in the current reques
 
 Name|Type|Description
 ---|---|---|---|
-data|[Access Object  ](#schemaaccess_object)[]|No description
+data|[Access Object  ](#schemaaccess_object)[]|Array containing access objects.
 » id|integer(int32)|Unique access id.
 » user|[User Object  ](#schemauser_object)|Contains user data.
 »» id|integer(int32)|Unique id of the user.
-»» nameid|string|Unique nameid of user which forms end of their profile URL.
+»» name_id|string|Unique nameid of user which forms end of their profile URL.
 »» username|string|Non-unique username of the user.
-»» online|integer(int32)|Unix timestamp on when the user was last online.
+»» date_online|integer(int32)|Unix timestamp of when the user was last online.
 »» avatar|[Avatar Object  ](#schemaavatar_object)|Contains avatar data.
 »»» filename|string|Image filename, including file extension.
 »»» full|string|Full URL to the image.
@@ -9673,7 +9797,7 @@ data|[Access Object  ](#schemaaccess_object)[]|No description
 »» url|string|URL to the user profile.
 » username|string|Team member username.
 » level|integer(int32)|The level of permissions the member has within the team. 0 = Guest, 1 = Member, 2 = Contributor, 4 = Manager, 8 = Leader.
-» date|integer(int32)|Unix timestamp of date the member joined the team.
+» date_added|integer(int32)|Unix timestamp of date the member joined the team.
 » position|string|Custom title, has no effect on any access rights.
 cursor_id|integer(int32)|The current _cursor value.
 prev_id|integer(int32)|The previous _cursor value as manually inserted by you, null by default.
@@ -9692,9 +9816,9 @@ result_count|integer(int32)|The amount of results returned in the current reques
   "data": [
     {
       "id": 1,
-      "nameid": "xant",
+      "name_id": "xant",
       "username": "XanT",
-      "online": 1509922961,
+      "date_online": 1509922961,
       "avatar": {
         "filename": "masterchief.jpg",
         "full": "https://media.mod.io/images/members/1/1/1/masterchief.jpg"
@@ -9721,9 +9845,9 @@ Name|Type|Description
 ---|---|---|---|
 data|[User Object  ](#schemauser_object)[]|Response array of items.
 » id|integer(int32)|Unique id of the user.
-» nameid|string|Unique nameid of user which forms end of their profile URL.
+» name_id|string|Unique nameid of user which forms end of their profile URL.
 » username|string|Non-unique username of the user.
-» online|integer(int32)|Unix timestamp on when the user was last online.
+» date_online|integer(int32)|Unix timestamp of when the user was last online.
 » avatar|[Avatar Object  ](#schemaavatar_object)|Contains avatar data.
 »» filename|string|Image filename, including file extension.
 »» full|string|Full URL to the image.
@@ -9747,9 +9871,9 @@ result_count|integer(int32)|The amount of results returned in the current reques
   "id": 457,
   "user": {
     "id": 1,
-    "nameid": "xant",
+    "name_id": "xant",
     "username": "XanT",
-    "online": 1509922961,
+    "date_online": 1509922961,
     "avatar": {
       "filename": "masterchief.jpg",
       "full": "https://media.mod.io/images/members/1/1/1/masterchief.jpg"
@@ -9760,7 +9884,7 @@ result_count|integer(int32)|The amount of results returned in the current reques
   },
   "username": "Megalodon",
   "level": 8,
-  "date": 1492058857,
+  "date_added": 1492058857,
   "position": "Supreme Overlord"
 } 
 ```
@@ -9773,9 +9897,9 @@ Name|Type|Description
 id|integer(int32)|Unique access id.
 user|[User Object  ](#schemauser_object)|Contains user data.
 » id|integer(int32)|Unique id of the user.
-» nameid|string|Unique nameid of user which forms end of their profile URL.
+» name_id|string|Unique nameid of user which forms end of their profile URL.
 » username|string|Non-unique username of the user.
-» online|integer(int32)|Unix timestamp on when the user was last online.
+» date_online|integer(int32)|Unix timestamp of when the user was last online.
 » avatar|[Avatar Object  ](#schemaavatar_object)|Contains avatar data.
 »» filename|string|Image filename, including file extension.
 »» full|string|Full URL to the image.
@@ -9784,7 +9908,7 @@ user|[User Object  ](#schemauser_object)|Contains user data.
 » url|string|URL to the user profile.
 username|string|Team member username.
 level|integer(int32)|The level of permissions the member has within the team. 0 = Guest, 1 = Member, 2 = Contributor, 4 = Manager, 8 = Leader.
-date|integer(int32)|Unix timestamp of date the member joined the team.
+date_added|integer(int32)|Unix timestamp of date the member joined the team.
 position|string|Custom title, has no effect on any access rights.
 
 
@@ -9797,9 +9921,9 @@ position|string|Custom title, has no effect on any access rights.
 ```json
 {
   "id": 53,
-  "game": 17,
-  "user": 95,
-  "dateup": 1499846132,
+  "game_id": 17,
+  "user_id": 95,
+  "date_added": 1499846132,
   "event": "GAME_UPDATE",
   "changes": [
     {
@@ -9817,12 +9941,12 @@ position|string|Custom title, has no effect on any access rights.
 Name|Type|Description
 ---|---|---|---|
 id|integer(int32)|Unique id of activity record.
-game|integer(int32)|Unique id of the parent mod.
-user|integer(int32)|Unique id of the user who triggered the action.
-dateup|string|Unix timestamp of when the record was last updated.
-event|string|Type of event the activity was. Ie. UPDATE or DELETE.
+game_id|integer(int32)|Unique id of the parent game.
+user_id|integer(int32)|Unique id of the user who triggered the action.
+date_added|string|Unix timestamp of when the event occured.
+event|string|Type of event the activity was. ie. GAME_UPDATE or GAME_VISIBILITY_CHANGE.
 changes|[Activity Changes Object ](#schemaactivity_changes_object)[]|Contains all changes for the event.
-» field|string|The field of the changed value
+» field|string|The field of the changed value.
 » before|string|The value prior to the event.
 » after|string|The newly-updated value.
 
@@ -9836,9 +9960,9 @@ changes|[Activity Changes Object ](#schemaactivity_changes_object)[]|Contains al
 ```json
 {
   "id": 13,
-  "mod": 13,
-  "user": 13,
-  "dateup": 1499846132,
+  "mod_id": 13,
+  "user_id": 13,
+  "date_added": 1499846132,
   "event": "MOD_UPDATE",
   "changes": [
     {
@@ -9856,12 +9980,12 @@ changes|[Activity Changes Object ](#schemaactivity_changes_object)[]|Contains al
 Name|Type|Description
 ---|---|---|---|
 id|integer(int32)|Unique id of activity object.
-mod|integer(int32)|Unique id of the parent mod.
-user|integer(int32)|Unique id of the user who triggered the action.
-dateup|integer(int32)|Unix timestamp of when the update occurred.
-event|string|The type of resource and action that occurred.
+mod_id|integer(int32)|Unique id of the parent mod.
+user_id|integer(int32)|Unique id of the user who triggered the action.
+date_added|integer(int32)|Unix timestamp of when the event occured.
+event|string|Type of event the activity was. ie. MOD_UPDATE or MOD_VISIBILITY_CHANGE.
 changes|[Activity Changes Object ](#schemaactivity_changes_object)[]|Contains all changes for the event.
-» field|string|The field of the changed value
+» field|string|The field of the changed value.
 » before|string|The value prior to the event.
 » after|string|The newly-updated value.
 
@@ -9885,7 +10009,7 @@ changes|[Activity Changes Object ](#schemaactivity_changes_object)[]|Contains al
 
 Name|Type|Description
 ---|---|---|---|
-field|string|The field of the changed value
+field|string|The field of the changed value.
 before|string|The value prior to the event.
 after|string|The newly-updated value.
 
@@ -9899,12 +10023,12 @@ after|string|The newly-updated value.
 ```json
 {
   "id": 2,
-  "mod": 2,
+  "mod_id": 2,
   "submitted_by": {
     "id": 1,
-    "nameid": "xant",
+    "name_id": "xant",
     "username": "XanT",
-    "online": 1509922961,
+    "date_online": 1509922961,
     "avatar": {
       "filename": "masterchief.jpg",
       "full": "https://media.mod.io/images/members/1/1/1/masterchief.jpg"
@@ -9913,11 +10037,11 @@ after|string|The newly-updated value.
     "language": "en",
     "url": "https://mod.io/members/xant"
   },
-  "date": 1499841487,
-  "replyid": 1499,
-  "replypos": "01",
+  "date_added": 1499841487,
+  "reply_id": 1499,
+  "reply_position": "01",
   "karma": 1,
-  "karmago": 0,
+  "karma_guest": 0,
   "summary": "This mod is kickass! Great work!"
 } 
 ```
@@ -9928,23 +10052,23 @@ after|string|The newly-updated value.
 Name|Type|Description
 ---|---|---|---|
 id|integer(int32)|Unique id of the comment.
-mod|integer(int32)|Unique id of the parent mod.
+mod_id|integer(int32)|Unique id of the parent mod.
 submitted_by|[User Object  ](#schemauser_object)|Contains user data.
 » id|integer(int32)|Unique id of the user.
-» nameid|string|Unique nameid of user which forms end of their profile URL.
+» name_id|string|Unique nameid of user which forms end of their profile URL.
 » username|string|Non-unique username of the user.
-» online|integer(int32)|Unix timestamp on when the user was last online.
+» date_online|integer(int32)|Unix timestamp of when the user was last online.
 » avatar|[Avatar Object  ](#schemaavatar_object)|Contains avatar data.
 »» filename|string|Image filename, including file extension.
 »» full|string|Full URL to the image.
 » timezone|string|The Timezone of the user, shown in {Country}/{City} format.
 » language|string|The users language preference, limited to two characters.
 » url|string|URL to the user profile.
-date|integer(int32)|Unix timestamp of when the comment was published.
-replyid|integer(int32)|Unique replyid used to submitting a nested reply to the published comment.
-replypos|string|Nesting position of the reply.
+date_added|integer(int32)|Unix timestamp of when the comment was published.
+reply_id|integer(int32)|Unique id of the reply used to submitting a nested reply to the published comment.
+reply_position|string|Nesting position of the reply.
 karma|integer(int32)|The amount of karma the comment has received.
-karmago|integer(int32)|The amount of good karma the comment has received.
+karma_guest|integer(int32)|The amount of karma received by guests.
 summary|string|The displayed comment.
 
 
@@ -9956,8 +10080,8 @@ summary|string|The displayed comment.
 
 ```json
 {
-  "mod": 231,
-  "date": 1499841487
+  "mod_id": 231,
+  "date_added": 1499841487
 } 
 ```
 
@@ -9966,8 +10090,8 @@ summary|string|The displayed comment.
 
 Name|Type|Description
 ---|---|---|---|
-mod|integer(int32)|Unique id of the mod that is the dependency.
-date|integer(int32)|Unix timestamp of when the dependency was listed.
+mod_id|integer(int32)|Unique id of the mod that is the dependency.
+date_added|integer(int32)|Unix timestamp of when the dependency was added.
 
 
 
@@ -10027,13 +10151,15 @@ price|float|If applicable, the price of the resource displayed in USD.
 ```json
 {
   "id": 2,
-  "mod": 2,
-  "date": 1499841487,
-  "datevirus": 1499841487,
-  "virusstatus": 0,
-  "viruspositive": 0,
+  "mod_id": 2,
+  "date_added": 1499841487,
+  "date_scanned": 1499841487,
+  "virus_status": 0,
+  "virus_positive": 0,
   "filesize": 15181,
-  "filehash": "2d4a0e2d7273db6b0a94b0740a88ad0d",
+  "filehash": {
+    "md5": "2d4a0e2d7273db6b0a94b0740a88ad0d"
+  },
   "filename": "rogue-knight-v1.zip",
   "version": "1.3",
   "virustotal": "No threats found.",
@@ -10048,13 +10174,14 @@ price|float|If applicable, the price of the resource displayed in USD.
 Name|Type|Description
 ---|---|---|---|
 id|integer(int32)|Unique file id.
-mod|integer(int32)|Unique mod id.
-date|integer(int32)|Unix timestamp of file upload time.
-datevirus|integer(int32)|Unix timestamp of file virus scan.
-virusstatus|integer(int32)|The status of the virus scan for the file.
-viruspositive|integer(int32)|Has the file been positively flagged as a virus?
+mod_id|integer(int32)|Unique mod id.
+date_added|integer(int32)|Unix timestamp of file upload time.
+date_scanned|integer(int32)|Unix timestamp of file virus scan.
+virus_status|integer(int32)|The status of the virus scan for the file.
+virus_positive|integer(int32)|Has the file been positively flagged as a virus?
 filesize|integer(int32)|Size of the file in bytes.
-filehash|string|MD5 filehash.
+filehash|object|Contains filehashes for file.
+» md5|string|MD5 filehash.
 filename|string|Name of the file including file extension.
 version|string|The release version this file represents.
 virustotal|string|Text output from virustotal scan.
@@ -10071,12 +10198,12 @@ download|string|Link to download the file from the mod.io CDN.
 ```json
 {
   "id": 2,
-  "game": 2,
+  "game_id": 2,
   "submitted_by": {
     "id": 1,
-    "nameid": "xant",
+    "name_id": "xant",
     "username": "XanT",
-    "online": 1509922961,
+    "date_online": 1509922961,
     "avatar": {
       "filename": "masterchief.jpg",
       "full": "https://media.mod.io/images/members/1/1/1/masterchief.jpg"
@@ -10086,8 +10213,9 @@ download|string|Link to download the file from the mod.io CDN.
     "url": "https://mod.io/members/xant"
   },
   "price": 9.99,
-  "datereg": 1492564103,
-  "dateup": 1499841487,
+  "date_added": 1492564103,
+  "date_updated": 1499841487,
+  "date_live": 1499841403,
   "logo": {
     "filename": "IMG_20170409_222419.jpg",
     "full": "https://media.mod.io/images/mods/1/1/2/IMG_20170409_222419.jpg",
@@ -10097,20 +10225,22 @@ download|string|Link to download the file from the mod.io CDN.
   },
   "homepage": "https://www.rogue-hdpack.com/",
   "name": "Rogue Knight HD Pack",
-  "nameid": "rogue-knight-hd-pack",
+  "name_id": "rogue-knight-hd-pack",
   "summary": "It's time to bask in the glory of beautiful 4k textures!",
   "description": "<h2>About</h2><p>Rogue HD Pack does exactly what you thi...",
-  "metadatablob": "rogue,hd,high-res,4k,hd textures",
+  "metadata_blob": "rogue,hd,high-res,4k,hd textures",
   "url": "https://rogue-knight.mod.io/rogue-knight-hd-pack",
   "modfile": {
     "id": 2,
-    "mod": 2,
-    "date": 1499841487,
-    "datevirus": 1499841487,
-    "virusstatus": 0,
-    "viruspositive": 0,
+    "mod_id": 2,
+    "date_added": 1499841487,
+    "date_scanned": 1499841487,
+    "virus_status": 0,
+    "virus_positive": 0,
     "filesize": 15181,
-    "filehash": "2d4a0e2d7273db6b0a94b0740a88ad0d",
+    "filehash": {
+      "md5": "2d4a0e2d7273db6b0a94b0740a88ad0d"
+    },
     "filename": "rogue-knight-v1.zip",
     "version": "1.3",
     "virustotal": "No threats found.",
@@ -10144,7 +10274,7 @@ download|string|Link to download the file from the mod.io CDN.
   "tags": [
     {
       "tag": "Unity",
-      "date": 1499841487
+      "date_added": 1499841487
     }
   ]
 } 
@@ -10156,12 +10286,12 @@ download|string|Link to download the file from the mod.io CDN.
 Name|Type|Description
 ---|---|---|---|
 id|integer(int32)|Unique mod id.
-game|integer(int32)|Unique game id.
+game_id|integer(int32)|Unique game id.
 submitted_by|[User Object  ](#schemauser_object)|Contains user data.
 » id|integer(int32)|Unique id of the user.
-» nameid|string|Unique nameid of user which forms end of their profile URL.
+» name_id|string|Unique nameid of user which forms end of their profile URL.
 » username|string|Non-unique username of the user.
-» online|integer(int32)|Unix timestamp on when the user was last online.
+» date_online|integer(int32)|Unix timestamp of when the user was last online.
 » avatar|[Avatar Object  ](#schemaavatar_object)|Contains avatar data.
 »» filename|string|Image filename, including file extension.
 »» full|string|Full URL to the image.
@@ -10169,8 +10299,9 @@ submitted_by|[User Object  ](#schemauser_object)|Contains user data.
 » language|string|The users language preference, limited to two characters.
 » url|string|URL to the user profile.
 price|float|Sale price if applicable, in USD.
-datereg|integer(int32)|Unix timestamp of date registered.
-dateup|integer(int32)|Unix timestamp of date last updated.
+date_added|integer(int32)|Unix timestamp of date registered.
+date_updated|integer(int32)|Unix timestamp of date last updated.
+date_live|integer(int32)|Unix timestamp of date mod was set live.
 logo|[Logo Object  ](#schemalogo_object)|Contains logo data.
 » filename|string|Image filename, with file extension included.
 » full|string|URL to full-sized image.
@@ -10179,20 +10310,21 @@ logo|[Logo Object  ](#schemalogo_object)|Contains logo data.
 » thumb_1280x720|string|URL to large thumbnail image.
 homepage|string|Mod homepage URL.
 name|string|Name of the mod.
-nameid|string|Unique SEO-friendly mod uri.
+name_id|string|Unique SEO-friendly mod uri.
 summary|string|Brief summary of the mod.
 description|string|Description of the mod.
-metadatablob|string|Comma-separated metadata for the mod.
+metadata_blob|string|Comma-separated metadata for the mod.
 url|string|Official website url for the mod.
 modfile|[Modfile Object  ](#schemamodfile_object)|Contains file data.
 » id|integer(int32)|Unique file id.
-» mod|integer(int32)|Unique mod id.
-» date|integer(int32)|Unix timestamp of file upload time.
-» datevirus|integer(int32)|Unix timestamp of file virus scan.
-» virusstatus|integer(int32)|The status of the virus scan for the file.
-» viruspositive|integer(int32)|Has the file been positively flagged as a virus?
+» mod_id|integer(int32)|Unique mod id.
+» date_added|integer(int32)|Unix timestamp of file upload time.
+» date_scanned|integer(int32)|Unix timestamp of file virus scan.
+» virus_status|integer(int32)|The status of the virus scan for the file.
+» virus_positive|integer(int32)|Has the file been positively flagged as a virus?
 » filesize|integer(int32)|Size of the file in bytes.
-» filehash|string|MD5 filehash.
+» filehash|object|Contains filehashes for file.
+»» md5|string|MD5 filehash.
 » filename|string|Name of the file including file extension.
 » version|string|The release version this file represents.
 » virustotal|string|Text output from virustotal scan.
@@ -10215,7 +10347,7 @@ ratings|[Rating Object  ](#schemarating_object)|Contains ratings data.
 » text|string|Text representation of the rating total.
 tags|[Mod Tag Object ](#schemamod_tag_object)[]|Contains Mod Tag data.
 » tag|string|The displayed tag.
-» date|integer(int32)|Unix timestamp of when tag was applied.
+» date_added|integer(int32)|Unix timestamp of when tag was applied.
 
 
 
@@ -10227,7 +10359,7 @@ tags|[Mod Tag Object ](#schemamod_tag_object)[]|Contains Mod Tag data.
 ```json
 {
   "tag": "Unity",
-  "date": 1499841487
+  "date_added": 1499841487
 } 
 ```
 
@@ -10237,7 +10369,7 @@ tags|[Mod Tag Object ](#schemamod_tag_object)[]|Contains Mod Tag data.
 Name|Type|Description
 ---|---|---|---|
 tag|string|The displayed tag.
-date|integer(int32)|Unix timestamp of when tag was applied.
+date_added|integer(int32)|Unix timestamp of when tag was applied.
 
 
 
@@ -10251,9 +10383,9 @@ date|integer(int32)|Unix timestamp of when tag was applied.
   "id": 2,
   "submitted_by": {
     "id": 1,
-    "nameid": "xant",
+    "name_id": "xant",
     "username": "XanT",
-    "online": 1509922961,
+    "date_online": 1509922961,
     "avatar": {
       "filename": "masterchief.jpg",
       "full": "https://media.mod.io/images/members/1/1/1/masterchief.jpg"
@@ -10262,15 +10394,16 @@ date|integer(int32)|Unix timestamp of when tag was applied.
     "language": "en",
     "url": "https://mod.io/members/xant"
   },
-  "datereg": 1493702614,
-  "dateup": 1499410290,
+  "date_added": 1493702614,
+  "date_updated": 1499410290,
+  "date_live": 1499841403,
   "presentation": 1,
   "community": 3,
   "submission": 0,
   "curation": 0,
   "revenue": 1500,
   "api": 3,
-  "ugcname": "map",
+  "ugc_name": "map",
   "icon": {
     "filename": "IMG_20170409_222419.jpg",
     "full": "https://media.mod.io/images/mods/1/1/2/icon.png",
@@ -10289,18 +10422,18 @@ date|integer(int32)|Unix timestamp of when tag was applied.
   },
   "homepage": "https://www.rogue-knight-game.com/",
   "name": "Rogue Knight",
-  "nameid": "rogue-knight",
+  "name_id": "rogue-knight",
   "summary": "Rogue Knight is a brand new 2D pixel platformer.",
   "instructions": "Instructions here on how to develop for your game.",
   "url": "https://rogue-knight.mod.io",
-  "cats": [
+  "tag_options": [
     {
       "name": "Engines",
       "type": "checkboxes",
       "tags": [
         "Unity"
       ],
-      "adminonly": 0
+      "admin_only": 0
     }
   ]
 } 
@@ -10314,24 +10447,25 @@ Name|Type|Description
 id|integer(int32)|Unique game id.
 submitted_by|[User Object  ](#schemauser_object)|Contains user data.
 » id|integer(int32)|Unique id of the user.
-» nameid|string|Unique nameid of user which forms end of their profile URL.
+» name_id|string|Unique nameid of user which forms end of their profile URL.
 » username|string|Non-unique username of the user.
-» online|integer(int32)|Unix timestamp on when the user was last online.
+» date_online|integer(int32)|Unix timestamp of when the user was last online.
 » avatar|[Avatar Object  ](#schemaavatar_object)|Contains avatar data.
 »» filename|string|Image filename, including file extension.
 »» full|string|Full URL to the image.
 » timezone|string|The Timezone of the user, shown in {Country}/{City} format.
 » language|string|The users language preference, limited to two characters.
 » url|string|URL to the user profile.
-datereg|integer(int32)|Unix timestamp of date registered.
-dateup|integer(int32)|Unix timestamp of date updated.
+date_added|integer(int32)|Unix timestamp of date registered.
+date_updated|integer(int32)|Unix timestamp of date updated.
+date_live|integer(int32)|Unix timestamp of when game was set live.
 presentation|integer(int32)|Determines which presentation style you want to use for your game on the mod.io website <br><br>*Field options*<br>__0__ =  Grid View: Displays mods in a grid (visual but less informative, default setting) <br>__1__ = Table View: Displays mods in a table (easier to browse).
 community|integer(int32)|Determines the rights community members have with the game.<br><br>*Field Options*<br>__0__ = Discussion board disabled, community cannot share guides and news<br>__1__ = Discussion Board enabled only<br>__2__ = Community can only share guides and news<br>__3__ = Discussion Board enabled and community can share news and guides
 submission|integer(int32)|Determines the submission process you want modders to follow.<br><br>*Field Options*<br>__0__ = Control the upload process. You will have to build an upload system either in-game or via a standalone app, which enables developers to submit mods to the tags you have configured. Because you control the flow, you can pre-validate and compile mods, to ensure they will work in your game. In the long run this option will save you time as you can accept more submissions, but it requires more setup to get running and isn't as open as the above option. NOTE: mod profiles can still be created online, but uploads will have to occur via the tools you supply.<br><br>__1__ = Enable mod uploads from anywhere. Allow developers to upload mods via the website and API, and pick the tags their mod is built for. No validation will be done on the files submitted, it will be the responsibility of your game and apps built to process the mods installation based on the tags selected and determine if the mod is valid and works. For example a mod might be uploaded to the 'map' tag. When a user subscribes to this mod, your game will need to verify it contains a map file and install it where maps are located. If this fails, your game or the community will have to flag the mod as 'incompatible' to remove it from the listing.
 curation|integer(int32)|Determines the curation process for the game.<br><br>*Field Options*<br>__0__ = Mods are immediately available to play, without any intervention or work from your team.<br>__1__ = Screen only mods the author wants to sell, before they are available to purchase via the API.<br>__2__ = All mods must be accepted by someone on your team. This option is useful for games that have a small number of mods and want to control the experience, or you need to set the parameters attached to a mod (i.e. a weapon may require the rate of fire, power level, clip size etc). It can also be used for complex mods, which you may need to build into your game or distribute as DLC.
 revenue|integer(int32)|__Bitwise__. Determines the revenue capabilities for mods of the game. For selecting multiple options you need to submit the bitwise value. i.e. If you want to allow user-generated content to be sold(1), to receive donations(2) and allow them to control their supply and scarcity(8) your would submit _11 (8 + 2 + 1)_.<br><br>*Field Options*<br>__1__ = Allow user-generated content to be sold<br>__2__ = Allow user-generated content to receive donations<br>__4__ = Allow user-generated content to be traded (not subject to revenue share)<br>__8__ = Allow user-generated content to control supply and scarcity.
 api|integer(int32)|Determines what permissions you want to enable via the mod.io API.<br><br>*Field Options*<br>__0__ = Third parties cannot access your mods API and mods cannot be downloaded directly without API validation.<br>__1__ = Allow 3rd parties to access your mods API (recommended, an open API will encourage a healthy ecosystem of tools and apps) but mods cannot be downloaded directly<br>__2__ = Allow mods to be downloaded directly but 3rd parties cannot access your mods API.<br>__3__ = Allow third parties to access your mods API and allow mods to be downloaded directly without api validation.
-ugcname|string|Singular string that best describes the type of user-generated content.
+ugc_name|string|Singular string that best describes the type of user-generated content.
 icon|[Icon Object  ](#schemaicon_object)|Contains icon data.
 » filename|string|Image filename, with file extension included.
 » full|string|URL to full-sized image.
@@ -10347,22 +10481,22 @@ header|[Header Object  ](#schemaheader_object)|Contains header data.
 » full|string|URL to the full-sized header image.
 homepage|string|Official game website URL.
 name|string|Title of the game.
-nameid|string|The unique SEO friendly URL of the game.
+name_id|string|The unique SEO friendly URL of the game.
 summary|string|Brief summary of the game.
 instructions|string|Modding instructions for developers.
 url|string|website url for the game.
-cats|[Game Tags Object ](#schemagame_tags_object)[]|Contains categories data.
+tag_options|[Game Tag Options Object](#schemagame_tag_options_object)[]|Contains categories data.
 » name|string|The name of the category.
 » type|string|Are tags selected via checkboxes or a single dropdown.
-» adminonly|integer(int32)|Is this an admin only tag? If so only admin's can see this category and it can be used for filtering.
+» admin_only|integer(int32)|Is this an admin only tag? If so only admin's can see this category and it can be used for filtering.
 » tags|string[]|Eligible tags for this game.
 
 
 
 
-## Game Tags Object 
+## Game Tag Options Object
 
-<a name="schemagame_tags_object"></a>
+<a name="schemagame_tag_options_object"></a>
 
 ```json
 {
@@ -10371,7 +10505,7 @@ cats|[Game Tags Object ](#schemagame_tags_object)[]|Contains categories data.
   "tags": [
     "Unity"
   ],
-  "adminonly": 0
+  "admin_only": 0
 } 
 ```
 
@@ -10382,7 +10516,7 @@ Name|Type|Description
 ---|---|---|---|
 name|string|The name of the category.
 type|string|Are tags selected via checkboxes or a single dropdown.
-adminonly|integer(int32)|Is this an admin only tag? If so only admin's can see this category and it can be used for filtering.
+admin_only|integer(int32)|Is this an admin only tag? If so only admin's can see this category and it can be used for filtering.
 tags|string[]|Eligible tags for this game.
 
 
@@ -10452,7 +10586,7 @@ text|string|Text representation of the rating total.
   "resource": "games",
   "resourceid": 2,
   "type": 4,
-  "date": 1492058857,
+  "dateadded": 1492058857,
   "mention": 0
 } 
 ```
@@ -10466,7 +10600,7 @@ id|integer(int32)|Unique update id.
 resource|string|String representation of the update origin's resource type.
 resourceid|integer(int32)|Unique id of corresponding resource.
 type|integer(int32)|The type of update.<br>*Field Options*<br>__0__ = Guest<br>__1__ = Member<br>__2__ = Contributor<br>__4__ = Manager<br>__8__ = Leader
-date|integer(int32)|Unix timestamp of date the update was created.
+dateadded|integer(int32)|Unix timestamp of date the update was created.
 mention|integer(int32)|Is this update the result of a user @mentioning you.
 
 
@@ -10479,9 +10613,9 @@ mention|integer(int32)|Is this update the result of a user @mentioning you.
 ```json
 {
   "id": 1,
-  "nameid": "xant",
+  "name_id": "xant",
   "username": "XanT",
-  "online": 1509922961,
+  "date_online": 1509922961,
   "avatar": {
     "filename": "masterchief.jpg",
     "full": "https://media.mod.io/images/members/1/1/1/masterchief.jpg"
@@ -10498,9 +10632,9 @@ mention|integer(int32)|Is this update the result of a user @mentioning you.
 Name|Type|Description
 ---|---|---|---|
 id|integer(int32)|Unique id of the user.
-nameid|string|Unique nameid of user which forms end of their profile URL.
+name_id|string|Unique nameid of user which forms end of their profile URL.
 username|string|Non-unique username of the user.
-online|integer(int32)|Unix timestamp on when the user was last online.
+date_online|integer(int32)|Unix timestamp of when the user was last online.
 avatar|[Avatar Object  ](#schemaavatar_object)|Contains avatar data.
 » filename|string|Image filename, including file extension.
 » full|string|Full URL to the image.
