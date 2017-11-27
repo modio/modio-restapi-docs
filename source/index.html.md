@@ -756,11 +756,11 @@ Retrieve all games on mod.io. Successful request will return an array of [Game O
         "date_online": 1509922961,
         "avatar": {
           "filename": "masterchief.jpg",
-          "full": "https://media.mod.io/images/members/1/1/1/masterchief.jpg"
+          "original": "https://media.mod.io/images/members/1/1/1/masterchief.jpg"
         },
         "timezone": "Australia/Brisbane",
         "language": "en",
-        "url": "https://mod.io/members/xant"
+        "profile_url": "https://mod.io/members/xant"
       },
       "date_added": 1493702614,
       "date_updated": 1499410290,
@@ -774,26 +774,26 @@ Retrieve all games on mod.io. Successful request will return an array of [Game O
       "ugc_name": "map",
       "icon": {
         "filename": "IMG_20170409_222419.jpg",
-        "full": "https://media.mod.io/images/mods/1/1/2/icon.png",
+        "original": "https://media.mod.io/images/mods/1/1/2/icon.png",
         "thumb_320x180": "https://media.mod.io/cache/images/mods/1/1/2/thumb_320x180/icon.png"
       },
       "logo": {
         "filename": "IMG_20170409_222419.jpg",
-        "full": "https://media.mod.io/images/mods/1/1/2/IMG_20170409_222419.jpg",
+        "original": "https://media.mod.io/images/mods/1/1/2/IMG_20170409_222419.jpg",
         "thumb_320x180": "https://media.mod.io/cache/images/mods/1/1/2/thumb_320x180/IMG_20170409_222419.jpg",
         "thumb_640x360": "https://media.mod.io/cache/images/mods/1/1/2/thumb_640x360/IMG_20170409_222419.jpg",
         "thumb_1280x720": "https://media.mod.io/cache/images/mods/1/1/2/thumb_1280x720/IMG_20170409_222419.jpg"
       },
       "header": {
         "filename": "gameheader.png",
-        "full": "https://media.mod.io/images/games/1/1/2/gameheader.png"
+        "original": "https://media.mod.io/images/games/1/1/2/gameheader.png"
       },
       "homepage": "https://www.rogue-knight-game.com/",
       "name": "Rogue Knight",
       "name_id": "rogue-knight",
       "summary": "Rogue Knight is a brand new 2D pixel platformer.",
       "instructions": "Instructions here on how to develop for your game.",
-      "url": "https://rogue-knight.mod.io",
+      "profile_url": "https://rogue-knight.mod.io",
       "tag_options": [
         {
           "name": "Engines",
@@ -946,11 +946,11 @@ View a single game on mod.io. Successful request will return a single [Game Obje
     "date_online": 1509922961,
     "avatar": {
       "filename": "masterchief.jpg",
-      "full": "https://media.mod.io/images/members/1/1/1/masterchief.jpg"
+      "original": "https://media.mod.io/images/members/1/1/1/masterchief.jpg"
     },
     "timezone": "Australia/Brisbane",
     "language": "en",
-    "url": "https://mod.io/members/xant"
+    "profile_url": "https://mod.io/members/xant"
   },
   "date_added": 1493702614,
   "date_updated": 1499410290,
@@ -964,26 +964,26 @@ View a single game on mod.io. Successful request will return a single [Game Obje
   "ugc_name": "map",
   "icon": {
     "filename": "IMG_20170409_222419.jpg",
-    "full": "https://media.mod.io/images/mods/1/1/2/icon.png",
+    "original": "https://media.mod.io/images/mods/1/1/2/icon.png",
     "thumb_320x180": "https://media.mod.io/cache/images/mods/1/1/2/thumb_320x180/icon.png"
   },
   "logo": {
     "filename": "IMG_20170409_222419.jpg",
-    "full": "https://media.mod.io/images/mods/1/1/2/IMG_20170409_222419.jpg",
+    "original": "https://media.mod.io/images/mods/1/1/2/IMG_20170409_222419.jpg",
     "thumb_320x180": "https://media.mod.io/cache/images/mods/1/1/2/thumb_320x180/IMG_20170409_222419.jpg",
     "thumb_640x360": "https://media.mod.io/cache/images/mods/1/1/2/thumb_640x360/IMG_20170409_222419.jpg",
     "thumb_1280x720": "https://media.mod.io/cache/images/mods/1/1/2/thumb_1280x720/IMG_20170409_222419.jpg"
   },
   "header": {
     "filename": "gameheader.png",
-    "full": "https://media.mod.io/images/games/1/1/2/gameheader.png"
+    "original": "https://media.mod.io/images/games/1/1/2/gameheader.png"
   },
   "homepage": "https://www.rogue-knight-game.com/",
   "name": "Rogue Knight",
   "name_id": "rogue-knight",
   "summary": "Rogue Knight is a brand new 2D pixel platformer.",
   "instructions": "Instructions here on how to develop for your game.",
-  "url": "https://rogue-knight.mod.io",
+  "profile_url": "https://rogue-knight.mod.io",
   "tag_options": [
     {
       "name": "Engines",
@@ -1154,11 +1154,11 @@ Update details for a game. If you want to update the `icon`, `logo` or `header` 
     "date_online": 1509922961,
     "avatar": {
       "filename": "masterchief.jpg",
-      "full": "https://media.mod.io/images/members/1/1/1/masterchief.jpg"
+      "original": "https://media.mod.io/images/members/1/1/1/masterchief.jpg"
     },
     "timezone": "Australia/Brisbane",
     "language": "en",
-    "url": "https://mod.io/members/xant"
+    "profile_url": "https://mod.io/members/xant"
   },
   "date_added": 1493702614,
   "date_updated": 1499410290,
@@ -1172,26 +1172,26 @@ Update details for a game. If you want to update the `icon`, `logo` or `header` 
   "ugc_name": "map",
   "icon": {
     "filename": "IMG_20170409_222419.jpg",
-    "full": "https://media.mod.io/images/mods/1/1/2/icon.png",
+    "original": "https://media.mod.io/images/mods/1/1/2/icon.png",
     "thumb_320x180": "https://media.mod.io/cache/images/mods/1/1/2/thumb_320x180/icon.png"
   },
   "logo": {
     "filename": "IMG_20170409_222419.jpg",
-    "full": "https://media.mod.io/images/mods/1/1/2/IMG_20170409_222419.jpg",
+    "original": "https://media.mod.io/images/mods/1/1/2/IMG_20170409_222419.jpg",
     "thumb_320x180": "https://media.mod.io/cache/images/mods/1/1/2/thumb_320x180/IMG_20170409_222419.jpg",
     "thumb_640x360": "https://media.mod.io/cache/images/mods/1/1/2/thumb_640x360/IMG_20170409_222419.jpg",
     "thumb_1280x720": "https://media.mod.io/cache/images/mods/1/1/2/thumb_1280x720/IMG_20170409_222419.jpg"
   },
   "header": {
     "filename": "gameheader.png",
-    "full": "https://media.mod.io/images/games/1/1/2/gameheader.png"
+    "original": "https://media.mod.io/images/games/1/1/2/gameheader.png"
   },
   "homepage": "https://www.rogue-knight-game.com/",
   "name": "Rogue Knight",
   "name_id": "rogue-knight",
   "summary": "Rogue Knight is a brand new 2D pixel platformer.",
   "instructions": "Instructions here on how to develop for your game.",
-  "url": "https://rogue-knight.mod.io",
+  "profile_url": "https://rogue-knight.mod.io",
   "tag_options": [
     {
       "name": "Engines",
@@ -1340,8 +1340,7 @@ Retrieve all Mods on mod.io for the corresponding game. Successful request will 
      description|string|An extension of the summary. HTML Supported.
      metadata_blob|string|Comma-separated list of metadata words.
      modfile|integer(int32)|Unique id of the [Modfile Object](https://docs.mod.io/#modfile-object) marked as current release.
-     price|double|Numeric representation of the price.
-     tags|string|Comma-separated values representing the tags you want to filter the results by. Only tags that are supported by the parent game can be applied. To determine what tags are eligible, see the tags values within 'Tag Options' column on the parent [Game Object](https://docs.mod.io/#game-object).
+     tags|string|Comma-separated values representing the tags you want to filter the results by. Only tags that are supported by the parent game can be applied. To determine what tags are eligible, see the tags values within 'Tag Option' column on the parent [Game Object](https://docs.mod.io/#game-object).
      status|string| _OAuth 2 only_. The status of the mod (only recognised by game admins), _default is 'auth'_.<br><br>*Fields Options:*<br>__unauth__ = Only return un-authorized mods.<br>__auth__ = Only return authorized mods _(default)_.<br>__ban__ = Only return banned mods.<br>__archive__ = Only return archived content (out of date builds).<br>__delete__ = Only return deleted mods.
      downloads|string|Sort results by most downloads using [_sort filter](https://docs.mod.io/#filtering) parameter, value should be `downloads` for descending or `-downloads` for ascending results.
      popular|string|Sort results by popularity using [_sort filter](https://docs.mod.io/#filtering), value should be `popular` for descending or `-popular` for ascending results.
@@ -1364,19 +1363,18 @@ Retrieve all Mods on mod.io for the corresponding game. Successful request will 
         "date_online": 1509922961,
         "avatar": {
           "filename": "masterchief.jpg",
-          "full": "https://media.mod.io/images/members/1/1/1/masterchief.jpg"
+          "original": "https://media.mod.io/images/members/1/1/1/masterchief.jpg"
         },
         "timezone": "Australia/Brisbane",
         "language": "en",
-        "url": "https://mod.io/members/xant"
+        "profile_url": "https://mod.io/members/xant"
       },
-      "price": 9.99,
       "date_added": 1492564103,
       "date_updated": 1499841487,
       "date_live": 1499841403,
       "logo": {
         "filename": "IMG_20170409_222419.jpg",
-        "full": "https://media.mod.io/images/mods/1/1/2/IMG_20170409_222419.jpg",
+        "original": "https://media.mod.io/images/mods/1/1/2/IMG_20170409_222419.jpg",
         "thumb_320x180": "https://media.mod.io/cache/images/mods/1/1/2/thumb_320x180/IMG_20170409_222419.jpg",
         "thumb_640x360": "https://media.mod.io/cache/images/mods/1/1/2/thumb_640x360/IMG_20170409_222419.jpg",
         "thumb_1280x720": "https://media.mod.io/cache/images/mods/1/1/2/thumb_1280x720/IMG_20170409_222419.jpg"
@@ -1387,7 +1385,7 @@ Retrieve all Mods on mod.io for the corresponding game. Successful request will 
       "summary": "It's time to bask in the glory of beautiful 4k textures!",
       "description": "<h2>About</h2><p>Rogue HD Pack does exactly what you thi...",
       "metadata_blob": "rogue,hd,high-res,4k,hd textures",
-      "url": "https://rogue-knight.mod.io/rogue-knight-hd-pack",
+      "profile_url": "https://rogue-knight.mod.io/rogue-knight-hd-pack",
       "modfile": {
         "id": 2,
         "mod_id": 2,
@@ -1395,15 +1393,15 @@ Retrieve all Mods on mod.io for the corresponding game. Successful request will 
         "date_scanned": 1499841487,
         "virus_status": 0,
         "virus_positive": 0,
+        "virustotal_hash": "f9a7bf4a95ce20787337b685a79677cae2281b83c63ab0a25f091407741692af-1508147401",
         "filesize": 15181,
         "filehash": {
           "md5": "2d4a0e2d7273db6b0a94b0740a88ad0d"
         },
         "filename": "rogue-knight-v1.zip",
         "version": "1.3",
-        "virustotal": "No threats found.",
         "changelog": "VERSION 1.3 -- Changes -- Fixed critical castle floor bug.",
-        "download": "https://mod.io/mods/file/2/c489a0354111a4d76640d47f0cdcb294"
+        "download_url": "https://mod.io/mods/file/2/c489a0354111a4d76640d47f0cdcb294"
       },
       "media": {
         "youtube": [
@@ -1414,24 +1412,23 @@ Retrieve all Mods on mod.io for the corresponding game. Successful request will 
         ],
         "images": [
           {
-            "full": "https://media.mod.io/images/mods/1/1/2/IMG_20170409_222419.jpg",
-            "thumbnail": "https://media.mod.io/cache/images/mods/1/1/2/thumb_1020x2000/IMG_20170409_222419.jpg",
+            "original": "https://media.mod.io/images/mods/1/1/2/IMG_20170409_222419.jpg",
+            "thumb_320x180": "https://media.mod.io/cache/images/mods/1/1/2/thumb_1020x2000/IMG_20170409_222419.jpg",
             "filename": "IMG_20170409_222419.jpg"
           }
         ]
       },
       "ratings": {
-        "total": 1230,
-        "positive": 1047,
-        "negative": 183,
-        "weighted": 87.38,
-        "percentage": 91,
-        "stars": 4,
-        "text": "Very Positive"
+        "total_ratings": 1230,
+        "positive_ratings": 1047,
+        "negative_ratings": 183,
+        "percentage_positive": 91,
+        "weighted_aggregate": 87.38,
+        "display_text": "Very Positive"
       },
       "tags": [
         {
-          "tag": "Unity",
+          "name": "Unity",
           "date_added": 1499841487
         }
       ]
@@ -1578,19 +1575,18 @@ Retrieve a single mod on mod.io. Successful request will return a single [Mod Ob
     "date_online": 1509922961,
     "avatar": {
       "filename": "masterchief.jpg",
-      "full": "https://media.mod.io/images/members/1/1/1/masterchief.jpg"
+      "original": "https://media.mod.io/images/members/1/1/1/masterchief.jpg"
     },
     "timezone": "Australia/Brisbane",
     "language": "en",
-    "url": "https://mod.io/members/xant"
+    "profile_url": "https://mod.io/members/xant"
   },
-  "price": 9.99,
   "date_added": 1492564103,
   "date_updated": 1499841487,
   "date_live": 1499841403,
   "logo": {
     "filename": "IMG_20170409_222419.jpg",
-    "full": "https://media.mod.io/images/mods/1/1/2/IMG_20170409_222419.jpg",
+    "original": "https://media.mod.io/images/mods/1/1/2/IMG_20170409_222419.jpg",
     "thumb_320x180": "https://media.mod.io/cache/images/mods/1/1/2/thumb_320x180/IMG_20170409_222419.jpg",
     "thumb_640x360": "https://media.mod.io/cache/images/mods/1/1/2/thumb_640x360/IMG_20170409_222419.jpg",
     "thumb_1280x720": "https://media.mod.io/cache/images/mods/1/1/2/thumb_1280x720/IMG_20170409_222419.jpg"
@@ -1601,7 +1597,7 @@ Retrieve a single mod on mod.io. Successful request will return a single [Mod Ob
   "summary": "It's time to bask in the glory of beautiful 4k textures!",
   "description": "<h2>About</h2><p>Rogue HD Pack does exactly what you thi...",
   "metadata_blob": "rogue,hd,high-res,4k,hd textures",
-  "url": "https://rogue-knight.mod.io/rogue-knight-hd-pack",
+  "profile_url": "https://rogue-knight.mod.io/rogue-knight-hd-pack",
   "modfile": {
     "id": 2,
     "mod_id": 2,
@@ -1609,15 +1605,15 @@ Retrieve a single mod on mod.io. Successful request will return a single [Mod Ob
     "date_scanned": 1499841487,
     "virus_status": 0,
     "virus_positive": 0,
+    "virustotal_hash": "f9a7bf4a95ce20787337b685a79677cae2281b83c63ab0a25f091407741692af-1508147401",
     "filesize": 15181,
     "filehash": {
       "md5": "2d4a0e2d7273db6b0a94b0740a88ad0d"
     },
     "filename": "rogue-knight-v1.zip",
     "version": "1.3",
-    "virustotal": "No threats found.",
     "changelog": "VERSION 1.3 -- Changes -- Fixed critical castle floor bug.",
-    "download": "https://mod.io/mods/file/2/c489a0354111a4d76640d47f0cdcb294"
+    "download_url": "https://mod.io/mods/file/2/c489a0354111a4d76640d47f0cdcb294"
   },
   "media": {
     "youtube": [
@@ -1628,24 +1624,23 @@ Retrieve a single mod on mod.io. Successful request will return a single [Mod Ob
     ],
     "images": [
       {
-        "full": "https://media.mod.io/images/mods/1/1/2/IMG_20170409_222419.jpg",
-        "thumbnail": "https://media.mod.io/cache/images/mods/1/1/2/thumb_1020x2000/IMG_20170409_222419.jpg",
+        "original": "https://media.mod.io/images/mods/1/1/2/IMG_20170409_222419.jpg",
+        "thumb_320x180": "https://media.mod.io/cache/images/mods/1/1/2/thumb_1020x2000/IMG_20170409_222419.jpg",
         "filename": "IMG_20170409_222419.jpg"
       }
     ]
   },
   "ratings": {
-    "total": 1230,
-    "positive": 1047,
-    "negative": 183,
-    "weighted": 87.38,
-    "percentage": 91,
-    "stars": 4,
-    "text": "Very Positive"
+    "total_ratings": 1230,
+    "positive_ratings": 1047,
+    "negative_ratings": 183,
+    "percentage_positive": 91,
+    "weighted_aggregate": 87.38,
+    "display_text": "Very Positive"
   },
   "tags": [
     {
-      "tag": "Unity",
+      "name": "Unity",
       "date_added": 1499841487
     }
   ]
@@ -1787,13 +1782,12 @@ Publish a mod on mod.io. Successful request will return the newly created [Mod O
      name|string|true|Name of your mod. Your default mod URL will contain the name so be sure to choose the most appropriate title. Example: Stellaris Shader Mod will become the URL stellaris-shader-mod.
      homepage|string|true|Official homepage for your mod, if you do not fill this out it will default to your mod.io profile. Must be a valid URL.
      summary|string|true|Summary for your mod, giving a brief overview of what it's about - cannot exceed 250 characters.
-     price|double||Numeric only representation of the price if you intend to charge for your mod. Example: 19.99, 10.00.
      stock|integer(int32)||Artificially limit the amount of times the mod can be purchased.
      description|string||An extension of your summary. Include all information relevant to your mod including sections such as 'About', 'Features', 'Install Instructions', 'FAQ', etc. HTML supported and encouraged.
      metadata_blob|string||Comma-separated list of metadata strings that are relevant to your mod.
      name_id|string||The unique SEO friendly URL for your game. Cannot exceed 80 characters.
      modfile|integer(int32)||Unique id of the [Modfile Object](https://docs.mod.io/#modfile-object) to be labelled as the current release.
-     tags|array||An array of strings that represent what the mod has been tagged as, only tags that are supported by the parent game can be applied. To determine what tags are eligible, see the 'Tag Options' column on the connected game.
+     tags|array||An array of strings that represent what the mod has been tagged as, only tags that are supported by the parent game can be applied. To determine what tags are eligible, see the 'Tag Option' column on the connected game.
 
 
 > Example responses
@@ -1809,19 +1803,18 @@ Publish a mod on mod.io. Successful request will return the newly created [Mod O
     "date_online": 1509922961,
     "avatar": {
       "filename": "masterchief.jpg",
-      "full": "https://media.mod.io/images/members/1/1/1/masterchief.jpg"
+      "original": "https://media.mod.io/images/members/1/1/1/masterchief.jpg"
     },
     "timezone": "Australia/Brisbane",
     "language": "en",
-    "url": "https://mod.io/members/xant"
+    "profile_url": "https://mod.io/members/xant"
   },
-  "price": 9.99,
   "date_added": 1492564103,
   "date_updated": 1499841487,
   "date_live": 1499841403,
   "logo": {
     "filename": "IMG_20170409_222419.jpg",
-    "full": "https://media.mod.io/images/mods/1/1/2/IMG_20170409_222419.jpg",
+    "original": "https://media.mod.io/images/mods/1/1/2/IMG_20170409_222419.jpg",
     "thumb_320x180": "https://media.mod.io/cache/images/mods/1/1/2/thumb_320x180/IMG_20170409_222419.jpg",
     "thumb_640x360": "https://media.mod.io/cache/images/mods/1/1/2/thumb_640x360/IMG_20170409_222419.jpg",
     "thumb_1280x720": "https://media.mod.io/cache/images/mods/1/1/2/thumb_1280x720/IMG_20170409_222419.jpg"
@@ -1832,7 +1825,7 @@ Publish a mod on mod.io. Successful request will return the newly created [Mod O
   "summary": "It's time to bask in the glory of beautiful 4k textures!",
   "description": "<h2>About</h2><p>Rogue HD Pack does exactly what you thi...",
   "metadata_blob": "rogue,hd,high-res,4k,hd textures",
-  "url": "https://rogue-knight.mod.io/rogue-knight-hd-pack",
+  "profile_url": "https://rogue-knight.mod.io/rogue-knight-hd-pack",
   "modfile": {
     "id": 2,
     "mod_id": 2,
@@ -1840,15 +1833,15 @@ Publish a mod on mod.io. Successful request will return the newly created [Mod O
     "date_scanned": 1499841487,
     "virus_status": 0,
     "virus_positive": 0,
+    "virustotal_hash": "f9a7bf4a95ce20787337b685a79677cae2281b83c63ab0a25f091407741692af-1508147401",
     "filesize": 15181,
     "filehash": {
       "md5": "2d4a0e2d7273db6b0a94b0740a88ad0d"
     },
     "filename": "rogue-knight-v1.zip",
     "version": "1.3",
-    "virustotal": "No threats found.",
     "changelog": "VERSION 1.3 -- Changes -- Fixed critical castle floor bug.",
-    "download": "https://mod.io/mods/file/2/c489a0354111a4d76640d47f0cdcb294"
+    "download_url": "https://mod.io/mods/file/2/c489a0354111a4d76640d47f0cdcb294"
   },
   "media": {
     "youtube": [
@@ -1859,24 +1852,23 @@ Publish a mod on mod.io. Successful request will return the newly created [Mod O
     ],
     "images": [
       {
-        "full": "https://media.mod.io/images/mods/1/1/2/IMG_20170409_222419.jpg",
-        "thumbnail": "https://media.mod.io/cache/images/mods/1/1/2/thumb_1020x2000/IMG_20170409_222419.jpg",
+        "original": "https://media.mod.io/images/mods/1/1/2/IMG_20170409_222419.jpg",
+        "thumb_320x180": "https://media.mod.io/cache/images/mods/1/1/2/thumb_1020x2000/IMG_20170409_222419.jpg",
         "filename": "IMG_20170409_222419.jpg"
       }
     ]
   },
   "ratings": {
-    "total": 1230,
-    "positive": 1047,
-    "negative": 183,
-    "weighted": 87.38,
-    "percentage": 91,
-    "stars": 4,
-    "text": "Very Positive"
+    "total_ratings": 1230,
+    "positive_ratings": 1047,
+    "negative_ratings": 183,
+    "percentage_positive": 91,
+    "weighted_aggregate": 87.38,
+    "display_text": "Very Positive"
   },
   "tags": [
     {
-      "tag": "Unity",
+      "name": "Unity",
       "date_added": 1499841487
     }
   ]
@@ -2023,7 +2015,6 @@ Edit details for a mod. If you wanting to update the media attached to this game
      name|string||Name of your mod. Your default mod URL will contain the name so be sure to choose the most appropriate title. Example: Stellaris Shader Mod will become the URL stellaris-shader-mod.
      homepage|string||Official homepage for your mod, if you do not fill this out it will default to your mod.io profile. Must be a valid URL.
      summary|string||Summary for your mod, giving a brief overview of what it's about - cannot exceed 250 characters.
-     price|double||Numeric only representation of the price if you intend to charge for your mod. Example: 19.99, 10.00.
      stock|integer(int32)||Artificially limit the amount of times the mod can be purchased.
      description|string||An extension of your summary. Include all information relevant to your mod including sections such as 'About', 'Features', 'Install Instructions', 'FAQ', etc. HTML supported and encouraged.
      metadata_blob|string||Comma-separated list of metadata strings that are relevant to your mod.
@@ -2045,19 +2036,18 @@ Edit details for a mod. If you wanting to update the media attached to this game
     "date_online": 1509922961,
     "avatar": {
       "filename": "masterchief.jpg",
-      "full": "https://media.mod.io/images/members/1/1/1/masterchief.jpg"
+      "original": "https://media.mod.io/images/members/1/1/1/masterchief.jpg"
     },
     "timezone": "Australia/Brisbane",
     "language": "en",
-    "url": "https://mod.io/members/xant"
+    "profile_url": "https://mod.io/members/xant"
   },
-  "price": 9.99,
   "date_added": 1492564103,
   "date_updated": 1499841487,
   "date_live": 1499841403,
   "logo": {
     "filename": "IMG_20170409_222419.jpg",
-    "full": "https://media.mod.io/images/mods/1/1/2/IMG_20170409_222419.jpg",
+    "original": "https://media.mod.io/images/mods/1/1/2/IMG_20170409_222419.jpg",
     "thumb_320x180": "https://media.mod.io/cache/images/mods/1/1/2/thumb_320x180/IMG_20170409_222419.jpg",
     "thumb_640x360": "https://media.mod.io/cache/images/mods/1/1/2/thumb_640x360/IMG_20170409_222419.jpg",
     "thumb_1280x720": "https://media.mod.io/cache/images/mods/1/1/2/thumb_1280x720/IMG_20170409_222419.jpg"
@@ -2068,7 +2058,7 @@ Edit details for a mod. If you wanting to update the media attached to this game
   "summary": "It's time to bask in the glory of beautiful 4k textures!",
   "description": "<h2>About</h2><p>Rogue HD Pack does exactly what you thi...",
   "metadata_blob": "rogue,hd,high-res,4k,hd textures",
-  "url": "https://rogue-knight.mod.io/rogue-knight-hd-pack",
+  "profile_url": "https://rogue-knight.mod.io/rogue-knight-hd-pack",
   "modfile": {
     "id": 2,
     "mod_id": 2,
@@ -2076,15 +2066,15 @@ Edit details for a mod. If you wanting to update the media attached to this game
     "date_scanned": 1499841487,
     "virus_status": 0,
     "virus_positive": 0,
+    "virustotal_hash": "f9a7bf4a95ce20787337b685a79677cae2281b83c63ab0a25f091407741692af-1508147401",
     "filesize": 15181,
     "filehash": {
       "md5": "2d4a0e2d7273db6b0a94b0740a88ad0d"
     },
     "filename": "rogue-knight-v1.zip",
     "version": "1.3",
-    "virustotal": "No threats found.",
     "changelog": "VERSION 1.3 -- Changes -- Fixed critical castle floor bug.",
-    "download": "https://mod.io/mods/file/2/c489a0354111a4d76640d47f0cdcb294"
+    "download_url": "https://mod.io/mods/file/2/c489a0354111a4d76640d47f0cdcb294"
   },
   "media": {
     "youtube": [
@@ -2095,24 +2085,23 @@ Edit details for a mod. If you wanting to update the media attached to this game
     ],
     "images": [
       {
-        "full": "https://media.mod.io/images/mods/1/1/2/IMG_20170409_222419.jpg",
-        "thumbnail": "https://media.mod.io/cache/images/mods/1/1/2/thumb_1020x2000/IMG_20170409_222419.jpg",
+        "original": "https://media.mod.io/images/mods/1/1/2/IMG_20170409_222419.jpg",
+        "thumb_320x180": "https://media.mod.io/cache/images/mods/1/1/2/thumb_1020x2000/IMG_20170409_222419.jpg",
         "filename": "IMG_20170409_222419.jpg"
       }
     ]
   },
   "ratings": {
-    "total": 1230,
-    "positive": 1047,
-    "negative": 183,
-    "weighted": 87.38,
-    "percentage": 91,
-    "stars": 4,
-    "text": "Very Positive"
+    "total_ratings": 1230,
+    "positive_ratings": 1047,
+    "negative_ratings": 183,
+    "percentage_positive": 91,
+    "weighted_aggregate": 87.38,
+    "display_text": "Very Positive"
   },
   "tags": [
     {
-      "tag": "Unity",
+      "name": "Unity",
       "date_added": 1499841487
     }
   ]
@@ -2268,7 +2257,7 @@ oauth2 ( Scopes: write )
 
 # Files
 
-## Get All Mod Files
+## Get All Modfiles
 
 > Code samples
 
@@ -2403,15 +2392,15 @@ Browse files on mod.io that are published for the corresponding mod. Successful 
       "date_scanned": 1499841487,
       "virus_status": 0,
       "virus_positive": 0,
+      "virustotal_hash": "f9a7bf4a95ce20787337b685a79677cae2281b83c63ab0a25f091407741692af-1508147401",
       "filesize": 15181,
       "filehash": {
         "md5": "2d4a0e2d7273db6b0a94b0740a88ad0d"
       },
       "filename": "rogue-knight-v1.zip",
       "version": "1.3",
-      "virustotal": "No threats found.",
       "changelog": "VERSION 1.3 -- Changes -- Fixed critical castle floor bug.",
-      "download": "https://mod.io/mods/file/2/c489a0354111a4d76640d47f0cdcb294"
+      "download_url": "https://mod.io/mods/file/2/c489a0354111a4d76640d47f0cdcb294"
     },
     {
         ...
@@ -2423,11 +2412,11 @@ Browse files on mod.io that are published for the corresponding mod. Successful 
   "result_count": 100
 }
 ```
-<h3 id="Get-All-Mod-Files-responses">Responses</h3>
+<h3 id="Get-All-Modfiles-responses">Responses</h3>
 
 Status|Meaning|Description|Response Schema
 ---|---|---|---|
-200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)|Successful Request|[Get All Mod Files](#schemaget_all_mod_files)
+200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)|Successful Request|[Get All Modfiles ](#schemaget_all_modfiles)
 
 <aside class="warning">
 To perform this operation, you must be authenticated by means of one of the following methods:
@@ -2435,7 +2424,147 @@ apiKey, oauth2 ( Scopes: read )
 </aside>
 
 
-## Add Mod File
+## Get Modfile
+
+> Code samples
+
+```shell
+# You can also use wget
+curl -X GET https://api.mod.io/v1/games/{game-id}/mods/{mod-id}/files/{file-id}?api_key=YourApiKey \
+  -H 'Accept: application/json'
+
+```
+
+```http
+GET https://api.mod.io/v1/games/{game-id}/mods/{mod-id}/files/{file-id}?api_key=YourApiKey HTTP/1.1
+Host: api.mod.io
+
+Accept: application/json
+
+```
+
+```javascript
+var headers = {
+  'Accept':'application/json'
+
+};
+
+$.ajax({
+  url: 'https://api.mod.io/v1/games/{game-id}/mods/{mod-id}/files/{file-id}',
+  method: 'get',
+  data: '?api_key=YourApiKey',
+  headers: headers,
+  success: function(data) {
+    console.log(JSON.stringify(data));
+  }
+})
+```
+
+```javascript--nodejs
+const request = require('node-fetch');
+
+const headers = {
+  'Accept':'application/json'
+
+};
+
+fetch('https://api.mod.io/v1/games/{game-id}/mods/{mod-id}/files/{file-id}?api_key=YourApiKey',
+{
+  method: 'GET',
+
+  headers: headers
+})
+.then(function(res) {
+    return res.json();
+}).then(function(body) {
+    console.log(body);
+});
+```
+
+```ruby
+require 'rest-client'
+require 'json'
+
+headers = {
+  'Accept' => 'application/json'
+}
+
+result = RestClient.get 'https://api.mod.io/v1/games/{game-id}/mods/{mod-id}/files/{file-id}',
+  params: {
+  'api_key' => 'string'
+}, headers: headers
+
+
+p JSON.parse(result)
+```
+
+```python
+import requests
+headers = {
+  'Accept': 'application/json'
+}
+
+r = requests.get('https://api.mod.io/v1/games/{game-id}/mods/{mod-id}/files/{file-id}', params={
+  'api_key': 'YourApiKey'
+}, headers = headers)
+
+print r.json()
+```
+
+```java
+URL obj = new URL("https://api.mod.io/v1/games/{game-id}/mods/{mod-id}/files/{file-id}?api_key=YourApiKey");
+HttpURLConnection con = (HttpURLConnection) obj.openConnection();
+con.setRequestMethod("GET");
+int responseCode = con.getResponseCode();
+BufferedReader in = new BufferedReader(
+    new InputStreamReader(con.getInputStream()));
+String inputLine;
+StringBuffer response = new StringBuffer();
+while ((inputLine = in.readLine()) != null) {
+    response.append(inputLine);
+}
+in.close();
+System.out.println(response.toString());
+```
+`GET /games/{game-id}/mods/{mod-id}/files/{file-id}`
+
+Retrieve a file on mod.io with the corresponding id. Successful request will return a [single Modfile Object](--parse-docsurl/#modfile_object).
+
+
+> Example responses
+
+```json
+{
+  "id": 2,
+  "mod_id": 2,
+  "date_added": 1499841487,
+  "date_scanned": 1499841487,
+  "virus_status": 0,
+  "virus_positive": 0,
+  "virustotal_hash": "f9a7bf4a95ce20787337b685a79677cae2281b83c63ab0a25f091407741692af-1508147401",
+  "filesize": 15181,
+  "filehash": {
+    "md5": "2d4a0e2d7273db6b0a94b0740a88ad0d"
+  },
+  "filename": "rogue-knight-v1.zip",
+  "version": "1.3",
+  "changelog": "VERSION 1.3 -- Changes -- Fixed critical castle floor bug.",
+  "download_url": "https://mod.io/mods/file/2/c489a0354111a4d76640d47f0cdcb294"
+}
+```
+<h3 id="Get-Modfile-responses">Responses</h3>
+
+Status|Meaning|Description|Response Schema
+---|---|---|---|
+200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)|Successful Request|[Modfile Object  ](#schemamodfile_object)
+
+<aside class="warning">
+To perform this operation, you must be authenticated by means of one of the following methods:
+apiKey, oauth2 ( Scopes: read )
+</aside>
+
+
+## Add Modfile
 
 > Code samples
 
@@ -2572,18 +2701,18 @@ Upload a file for the corresponding mod, upon success will return the newly crea
   "date_scanned": 1499841487,
   "virus_status": 0,
   "virus_positive": 0,
+  "virustotal_hash": "f9a7bf4a95ce20787337b685a79677cae2281b83c63ab0a25f091407741692af-1508147401",
   "filesize": 15181,
   "filehash": {
     "md5": "2d4a0e2d7273db6b0a94b0740a88ad0d"
   },
   "filename": "rogue-knight-v1.zip",
   "version": "1.3",
-  "virustotal": "No threats found.",
   "changelog": "VERSION 1.3 -- Changes -- Fixed critical castle floor bug.",
-  "download": "https://mod.io/mods/file/2/c489a0354111a4d76640d47f0cdcb294"
+  "download_url": "https://mod.io/mods/file/2/c489a0354111a4d76640d47f0cdcb294"
 }
 ```
-<h3 id="Add-Mod-File-responses">Responses</h3>
+<h3 id="Add-Modfile-responses">Responses</h3>
 
 Status|Meaning|Description|Response Schema
 ---|---|---|---|
@@ -2601,147 +2730,7 @@ oauth2 ( Scopes: write )
 </aside>
 
 
-## Get Mod File
-
-> Code samples
-
-```shell
-# You can also use wget
-curl -X GET https://api.mod.io/v1/games/{game-id}/mods/{mod-id}/files/{file-id}?api_key=YourApiKey \
-  -H 'Accept: application/json'
-
-```
-
-```http
-GET https://api.mod.io/v1/games/{game-id}/mods/{mod-id}/files/{file-id}?api_key=YourApiKey HTTP/1.1
-Host: api.mod.io
-
-Accept: application/json
-
-```
-
-```javascript
-var headers = {
-  'Accept':'application/json'
-
-};
-
-$.ajax({
-  url: 'https://api.mod.io/v1/games/{game-id}/mods/{mod-id}/files/{file-id}',
-  method: 'get',
-  data: '?api_key=YourApiKey',
-  headers: headers,
-  success: function(data) {
-    console.log(JSON.stringify(data));
-  }
-})
-```
-
-```javascript--nodejs
-const request = require('node-fetch');
-
-const headers = {
-  'Accept':'application/json'
-
-};
-
-fetch('https://api.mod.io/v1/games/{game-id}/mods/{mod-id}/files/{file-id}?api_key=YourApiKey',
-{
-  method: 'GET',
-
-  headers: headers
-})
-.then(function(res) {
-    return res.json();
-}).then(function(body) {
-    console.log(body);
-});
-```
-
-```ruby
-require 'rest-client'
-require 'json'
-
-headers = {
-  'Accept' => 'application/json'
-}
-
-result = RestClient.get 'https://api.mod.io/v1/games/{game-id}/mods/{mod-id}/files/{file-id}',
-  params: {
-  'api_key' => 'string'
-}, headers: headers
-
-
-p JSON.parse(result)
-```
-
-```python
-import requests
-headers = {
-  'Accept': 'application/json'
-}
-
-r = requests.get('https://api.mod.io/v1/games/{game-id}/mods/{mod-id}/files/{file-id}', params={
-  'api_key': 'YourApiKey'
-}, headers = headers)
-
-print r.json()
-```
-
-```java
-URL obj = new URL("https://api.mod.io/v1/games/{game-id}/mods/{mod-id}/files/{file-id}?api_key=YourApiKey");
-HttpURLConnection con = (HttpURLConnection) obj.openConnection();
-con.setRequestMethod("GET");
-int responseCode = con.getResponseCode();
-BufferedReader in = new BufferedReader(
-    new InputStreamReader(con.getInputStream()));
-String inputLine;
-StringBuffer response = new StringBuffer();
-while ((inputLine = in.readLine()) != null) {
-    response.append(inputLine);
-}
-in.close();
-System.out.println(response.toString());
-```
-`GET /games/{game-id}/mods/{mod-id}/files/{file-id}`
-
-Retrieve a file on mod.io with the corresponding id. Successful request will return a [single Modfile Object](--parse-docsurl/#modfile_object).
-
-
-> Example responses
-
-```json
-{
-  "id": 2,
-  "mod_id": 2,
-  "date_added": 1499841487,
-  "date_scanned": 1499841487,
-  "virus_status": 0,
-  "virus_positive": 0,
-  "filesize": 15181,
-  "filehash": {
-    "md5": "2d4a0e2d7273db6b0a94b0740a88ad0d"
-  },
-  "filename": "rogue-knight-v1.zip",
-  "version": "1.3",
-  "virustotal": "No threats found.",
-  "changelog": "VERSION 1.3 -- Changes -- Fixed critical castle floor bug.",
-  "download": "https://mod.io/mods/file/2/c489a0354111a4d76640d47f0cdcb294"
-}
-```
-<h3 id="Get-Mod-File-responses">Responses</h3>
-
-Status|Meaning|Description|Response Schema
----|---|---|---|
-200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)|Successful Request|[Modfile Object  ](#schemamodfile_object)
-
-<aside class="warning">
-To perform this operation, you must be authenticated by means of one of the following methods:
-apiKey, oauth2 ( Scopes: read )
-</aside>
-
-
-## Edit Mod File
+## Edit Modfile
 
 > Code samples
 
@@ -2875,18 +2864,18 @@ Update the details for a published file on mod.io. If you are wanting to update 
   "date_scanned": 1499841487,
   "virus_status": 0,
   "virus_positive": 0,
+  "virustotal_hash": "f9a7bf4a95ce20787337b685a79677cae2281b83c63ab0a25f091407741692af-1508147401",
   "filesize": 15181,
   "filehash": {
     "md5": "2d4a0e2d7273db6b0a94b0740a88ad0d"
   },
   "filename": "rogue-knight-v1.zip",
   "version": "1.3",
-  "virustotal": "No threats found.",
   "changelog": "VERSION 1.3 -- Changes -- Fixed critical castle floor bug.",
-  "download": "https://mod.io/mods/file/2/c489a0354111a4d76640d47f0cdcb294"
+  "download_url": "https://mod.io/mods/file/2/c489a0354111a4d76640d47f0cdcb294"
 }
 ```
-<h3 id="Edit-Mod-File-responses">Responses</h3>
+<h3 id="Edit-Modfile-responses">Responses</h3>
 
 Status|Meaning|Description|Response Schema
 ---|---|---|---|
@@ -3474,19 +3463,18 @@ Subscribe the _authenticated user_ to a corresponding mod. No body parameters ar
     "date_online": 1509922961,
     "avatar": {
       "filename": "masterchief.jpg",
-      "full": "https://media.mod.io/images/members/1/1/1/masterchief.jpg"
+      "original": "https://media.mod.io/images/members/1/1/1/masterchief.jpg"
     },
     "timezone": "Australia/Brisbane",
     "language": "en",
-    "url": "https://mod.io/members/xant"
+    "profile_url": "https://mod.io/members/xant"
   },
-  "price": 9.99,
   "date_added": 1492564103,
   "date_updated": 1499841487,
   "date_live": 1499841403,
   "logo": {
     "filename": "IMG_20170409_222419.jpg",
-    "full": "https://media.mod.io/images/mods/1/1/2/IMG_20170409_222419.jpg",
+    "original": "https://media.mod.io/images/mods/1/1/2/IMG_20170409_222419.jpg",
     "thumb_320x180": "https://media.mod.io/cache/images/mods/1/1/2/thumb_320x180/IMG_20170409_222419.jpg",
     "thumb_640x360": "https://media.mod.io/cache/images/mods/1/1/2/thumb_640x360/IMG_20170409_222419.jpg",
     "thumb_1280x720": "https://media.mod.io/cache/images/mods/1/1/2/thumb_1280x720/IMG_20170409_222419.jpg"
@@ -3497,7 +3485,7 @@ Subscribe the _authenticated user_ to a corresponding mod. No body parameters ar
   "summary": "It's time to bask in the glory of beautiful 4k textures!",
   "description": "<h2>About</h2><p>Rogue HD Pack does exactly what you thi...",
   "metadata_blob": "rogue,hd,high-res,4k,hd textures",
-  "url": "https://rogue-knight.mod.io/rogue-knight-hd-pack",
+  "profile_url": "https://rogue-knight.mod.io/rogue-knight-hd-pack",
   "modfile": {
     "id": 2,
     "mod_id": 2,
@@ -3505,15 +3493,15 @@ Subscribe the _authenticated user_ to a corresponding mod. No body parameters ar
     "date_scanned": 1499841487,
     "virus_status": 0,
     "virus_positive": 0,
+    "virustotal_hash": "f9a7bf4a95ce20787337b685a79677cae2281b83c63ab0a25f091407741692af-1508147401",
     "filesize": 15181,
     "filehash": {
       "md5": "2d4a0e2d7273db6b0a94b0740a88ad0d"
     },
     "filename": "rogue-knight-v1.zip",
     "version": "1.3",
-    "virustotal": "No threats found.",
     "changelog": "VERSION 1.3 -- Changes -- Fixed critical castle floor bug.",
-    "download": "https://mod.io/mods/file/2/c489a0354111a4d76640d47f0cdcb294"
+    "download_url": "https://mod.io/mods/file/2/c489a0354111a4d76640d47f0cdcb294"
   },
   "media": {
     "youtube": [
@@ -3524,24 +3512,23 @@ Subscribe the _authenticated user_ to a corresponding mod. No body parameters ar
     ],
     "images": [
       {
-        "full": "https://media.mod.io/images/mods/1/1/2/IMG_20170409_222419.jpg",
-        "thumbnail": "https://media.mod.io/cache/images/mods/1/1/2/thumb_1020x2000/IMG_20170409_222419.jpg",
+        "original": "https://media.mod.io/images/mods/1/1/2/IMG_20170409_222419.jpg",
+        "thumb_320x180": "https://media.mod.io/cache/images/mods/1/1/2/thumb_1020x2000/IMG_20170409_222419.jpg",
         "filename": "IMG_20170409_222419.jpg"
       }
     ]
   },
   "ratings": {
-    "total": 1230,
-    "positive": 1047,
-    "negative": 183,
-    "weighted": 87.38,
-    "percentage": 91,
-    "stars": 4,
-    "text": "Very Positive"
+    "total_ratings": 1230,
+    "positive_ratings": 1047,
+    "negative_ratings": 183,
+    "percentage_positive": 91,
+    "weighted_aggregate": 87.38,
+    "display_text": "Very Positive"
   },
   "tags": [
     {
-      "tag": "Unity",
+      "name": "Unity",
       "date_added": 1499841487
     }
   ]
@@ -4289,7 +4276,7 @@ Get all tags for the corresponding mod, successful response will return an array
 {
   "data": [
     {
-      "tag": "Unity",
+      "name": "Unity",
       "date_added": 1499841487
     },
     {
@@ -4430,7 +4417,7 @@ System.out.println(response.toString());
 ```
 `POST /games/{game-id}/mods/{mod-id}/tags`
 
-Add tags to a mod's profile. Note that you can only add what tags are allowed by the parent game. To determine what game tags are allowed view the `Tag Options` column on the parent game object.
+Add tags to a mod's profile. Note that you can only add what tags are allowed by the parent game. To determine what game tags are allowed view the `Tag Option` column on the parent game object.
      
      For example if the parent game has the 'Engine' category available with 'Easy', 'Medium' and 'Hard' being options you can simply submit 'Easy' in the `tags` array in your request. You can populate the array with tags from different categories and they will automatically be sorted by mod.io.
      
@@ -5696,7 +5683,7 @@ System.out.println(response.toString());
 ```
 `GET /games/{game-id}/team`
 
-Retrieve all members that are part of a game team. Successful request will return an array of [Access objects](https://docs.mod.io/#get-team). To make your requests as specific to your needs as possible it's highly recommended reading over our [filtering documentation](https://docs.mod.io/#filtering) if it will help you with consuming this endpoint.
+Retrieve all members that are part of a game team. Successful request will return an array of [Team Member Objects](https://docs.mod.io/#get-team). To make your requests as specific to your needs as possible it's highly recommended reading over our [filtering documentation](https://docs.mod.io/#filtering) if it will help you with consuming this endpoint.
      
      Filter|Type|Required|Description
      ---|---|---|---|
@@ -5722,13 +5709,12 @@ Retrieve all members that are part of a game team. Successful request will retur
         "date_online": 1509922961,
         "avatar": {
           "filename": "masterchief.jpg",
-          "full": "https://media.mod.io/images/members/1/1/1/masterchief.jpg"
+          "original": "https://media.mod.io/images/members/1/1/1/masterchief.jpg"
         },
         "timezone": "Australia/Brisbane",
         "language": "en",
-        "url": "https://mod.io/members/xant"
+        "profile_url": "https://mod.io/members/xant"
       },
-      "username": "Megalodon",
       "level": 8,
       "date_added": 1492058857,
       "position": "Supreme Overlord"
@@ -5859,7 +5845,7 @@ System.out.println(response.toString());
 ```
 `GET /games/{game-id}/mods/{mod-id}/team`
 
-Retrieve all members that are part of a mod team. Successful request will return an array of [Access Objects](https://docs.mod.io/#get-team). To make your requests as specific to your needs as possible it's highly recommended reading over our [filtering documentation](https://docs.mod.io/#filtering) if it will help you with consuming this endpoint.
+Retrieve all members that are part of a mod team. Successful request will return an array of [Team Member Objects](https://docs.mod.io/#get-team). To make your requests as specific to your needs as possible it's highly recommended reading over our [filtering documentation](https://docs.mod.io/#filtering) if it will help you with consuming this endpoint.
      
      Filter|Type|Required|Description
      ---|---|---|---|
@@ -5884,13 +5870,12 @@ Retrieve all members that are part of a mod team. Successful request will return
         "date_online": 1509922961,
         "avatar": {
           "filename": "masterchief.jpg",
-          "full": "https://media.mod.io/images/members/1/1/1/masterchief.jpg"
+          "original": "https://media.mod.io/images/members/1/1/1/masterchief.jpg"
         },
         "timezone": "Australia/Brisbane",
         "language": "en",
-        "url": "https://mod.io/members/xant"
+        "profile_url": "https://mod.io/members/xant"
       },
-      "username": "Megalodon",
       "level": 8,
       "date_added": 1492058857,
       "position": "Supreme Overlord"
@@ -6903,18 +6888,18 @@ Retrieve all comments for the corresponding mod. Successful request will return 
         "date_online": 1509922961,
         "avatar": {
           "filename": "masterchief.jpg",
-          "full": "https://media.mod.io/images/members/1/1/1/masterchief.jpg"
+          "original": "https://media.mod.io/images/members/1/1/1/masterchief.jpg"
         },
         "timezone": "Australia/Brisbane",
         "language": "en",
-        "url": "https://mod.io/members/xant"
+        "profile_url": "https://mod.io/members/xant"
       },
       "date_added": 1499841487,
       "reply_id": 1499,
       "reply_position": "01",
       "karma": 1,
       "karma_guest": 0,
-      "summary": "This mod is kickass! Great work!"
+      "content": "This mod is kickass! Great work!"
     },
     {
         ...
@@ -7058,18 +7043,18 @@ Retrieve a comment by it's unique ID. Successful request will return a single [C
     "date_online": 1509922961,
     "avatar": {
       "filename": "masterchief.jpg",
-      "full": "https://media.mod.io/images/members/1/1/1/masterchief.jpg"
+      "original": "https://media.mod.io/images/members/1/1/1/masterchief.jpg"
     },
     "timezone": "Australia/Brisbane",
     "language": "en",
-    "url": "https://mod.io/members/xant"
+    "profile_url": "https://mod.io/members/xant"
   },
   "date_added": 1499841487,
   "reply_id": 1499,
   "reply_position": "01",
   "karma": 1,
   "karma_guest": 0,
-  "summary": "This mod is kickass! Great work!"
+  "content": "This mod is kickass! Great work!"
 }
 ```
 <h3 id="Get-Mod-Comment-responses">Responses</h3>
@@ -7222,7 +7207,7 @@ oauth2 ( Scopes: write )
 
 # Users
 
-## Get Resource Ownership
+## Get Resource Owner
 
 > Code samples
 
@@ -7338,174 +7323,36 @@ System.out.println(response.toString());
 ```
 `POST /general/ownership`
 
-Determine if a specified user has ownership rights to a resource.
+Returns the [User Object](https://docs.mod.io/#user-object) of the user that is the resource _creator_ of the corresponding resource.
      
      Parameter|Type|Required|Description
      ---|---|---|---|
-     resource|string|true|The name of the resource type you are checking against a user - __must__ be one of the following values.<br><br>*Field options*<br>__games__<br>__mods__<br>__files__<br>__tags__<br>__users__.
-     id|integer(int32)|true|Unique Id of the resource to check access rights for.
-     user_id|integer(int32)|true|Unique Id of the user you are determining has access to the resource id.
+     resource_type|string|true|The name of the resource type you are checking against a user - __must__ be one of the following values.<br><br>*Field options*<br>__games__<br>__mods__<br>__files__<br>__tags__
+     resource_id|integer(int32)|true|Unique Id of the resource to check access rights for.
 
 
 > Example responses
 
 ```json
 {
-  "resource": "files",
-  "id": 3,
-  "ownership": true
+  "id": 1,
+  "name_id": "xant",
+  "username": "XanT",
+  "date_online": 1509922961,
+  "avatar": {
+    "filename": "masterchief.jpg",
+    "original": "https://media.mod.io/images/members/1/1/1/masterchief.jpg"
+  },
+  "timezone": "Australia/Brisbane",
+  "language": "en",
+  "profile_url": "https://mod.io/members/xant"
 }
 ```
-<h3 id="Get-Resource-Ownership-responses">Responses</h3>
+<h3 id="Get-Resource-Owner-responses">Responses</h3>
 
 Status|Meaning|Description|Response Schema
 ---|---|---|---|
-200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)|Successful Request|[Ownership Object  ](#schemaownership_object)
-
-<aside class="warning">
-To perform this operation, you must be authenticated by means of one of the following methods:
-apiKey, oauth2 ( Scopes: read )
-</aside>
-
-
-## Get Resource Price
-
-> Code samples
-
-```shell
-# You can also use wget
-curl -X POST https://api.mod.io/v1/general/price \
-  -H 'Authorization: Bearer YourAccessToken' \
-  -H 'Content-Type: application/x-www-form-urlencoded' \
-  -H 'Accept: application/json'
-
-```
-
-```http
-POST https://api.mod.io/v1/general/price HTTP/1.1
-Host: api.mod.io
-
-Accept: application/json
-Authorization: Bearer YourAccessToken
-Content-Type: application/x-www-form-urlencoded
-
-
-```
-
-```javascript
-var headers = {
-  'Authorization':'Bearer YourAccessToken',
-  'Content-Type':'application/x-www-form-urlencoded',
-  'Accept':'application/json'
-
-};
-
-$.ajax({
-  url: 'https://api.mod.io/v1/general/price',
-  method: 'post',
-
-  headers: headers,
-  success: function(data) {
-    console.log(JSON.stringify(data));
-  }
-})
-```
-
-```javascript--nodejs
-const request = require('node-fetch');
-
-const headers = {
-  'Authorization':'Bearer YourAccessToken',
-  'Content-Type':'application/x-www-form-urlencoded',
-  'Accept':'application/json'
-
-};
-
-fetch('https://api.mod.io/v1/general/price',
-{
-  method: 'POST',
-
-  headers: headers
-})
-.then(function(res) {
-    return res.json();
-}).then(function(body) {
-    console.log(body);
-});
-```
-
-```ruby
-require 'rest-client'
-require 'json'
-
-headers = {
-  'Authorization' => 'Bearer YourAccessToken',
-  'Content-Type' => 'application/x-www-form-urlencoded',
-  'Accept' => 'application/json'
-}
-
-result = RestClient.post 'https://api.mod.io/v1/general/price',
-  params: {
-  }, headers: headers
-
-
-p JSON.parse(result)
-```
-
-```python
-import requests
-headers = {
-  'Authorization': 'Bearer YourAccessToken',
-  'Content-Type': 'application/x-www-form-urlencoded',
-  'Accept': 'application/json'
-}
-
-r = requests.post('https://api.mod.io/v1/general/price', params={
-
-}, headers = headers)
-
-print r.json()
-```
-
-```java
-URL obj = new URL("https://api.mod.io/v1/general/price");
-HttpURLConnection con = (HttpURLConnection) obj.openConnection();
-con.setRequestMethod("POST");
-int responseCode = con.getResponseCode();
-BufferedReader in = new BufferedReader(
-    new InputStreamReader(con.getInputStream()));
-String inputLine;
-StringBuffer response = new StringBuffer();
-while ((inputLine = in.readLine()) != null) {
-    response.append(inputLine);
-}
-in.close();
-System.out.println(response.toString());
-```
-`POST /general/price`
-
-View the price of a requested resource, if the requested resource is able to be sold. All prices returned are in __USD__.
-     
-     Parameter|Type|Required|Description
-     ---|---|---|---|
-     resource|string|true|The name of the resource type you are checking a price for - __must__ be one of the following values.<br><br>*Field options*<br>__games__<br>__mods__.
-     id|integer(int32)|true|Unique Id of the resource that contains the price.
-
-
-> Example responses
-
-```json
-{
-  "resource": "files",
-  "id": 3,
-  "price": 19.99
-}
-```
-<h3 id="Get-Resource-Price-responses">Responses</h3>
-
-Status|Meaning|Description|Response Schema
----|---|---|---|
-200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)|OK|[Price Object  ](#schemaprice_object)
+200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)|Successful Request|[User Object  ](#schemauser_object)
 
 <aside class="warning">
 To perform this operation, you must be authenticated by means of one of the following methods:
@@ -7641,11 +7488,11 @@ Retrieve all users registered to mod.io. Successful request will return an Succe
       "date_online": 1509922961,
       "avatar": {
         "filename": "masterchief.jpg",
-        "full": "https://media.mod.io/images/members/1/1/1/masterchief.jpg"
+        "original": "https://media.mod.io/images/members/1/1/1/masterchief.jpg"
       },
       "timezone": "Australia/Brisbane",
       "language": "en",
-      "url": "https://mod.io/members/xant"
+      "profile_url": "https://mod.io/members/xant"
     },
     {
         ...
@@ -7786,11 +7633,11 @@ Find a user by their unique member id. Successful request will return a single [
   "date_online": 1509922961,
   "avatar": {
     "filename": "masterchief.jpg",
-    "full": "https://media.mod.io/images/members/1/1/1/masterchief.jpg"
+    "original": "https://media.mod.io/images/members/1/1/1/masterchief.jpg"
   },
   "timezone": "Australia/Brisbane",
   "language": "en",
-  "url": "https://mod.io/members/xant"
+  "profile_url": "https://mod.io/members/xant"
 }
 ```
 <h3 id="Get-User-responses">Responses</h3>
@@ -7927,7 +7774,7 @@ Submit a report for any resource on mod.io.
      
      Parameter|Type|Required|Description
      ---|---|---|---|
-     resource|string|true|The name of the resource type you are submitting a report for __must__ be one of the following values.<br><br>*Field options*<br>__games__<br>__mods__<br>__files__<br>__tags__<br>__users__.
+     resource|string|true|The name of the resource type you are submitting a report for __must__ be one of the following values.<br><br>*Field options*<br>__games__<br>__mods__<br>__files__<br>__tags__<br>__users__
      id|integer(int32)|true|Unique Id of the resource item you are reporting.
      dmca|boolean|true|Is this a DMCA takedown request?
      name|string|true|Descriptive and informative title for your report.
@@ -8079,11 +7926,11 @@ Retrieve the *authenticated user*. Successful request will return a [User Object
   "date_online": 1509922961,
   "avatar": {
     "filename": "masterchief.jpg",
-    "full": "https://media.mod.io/images/members/1/1/1/masterchief.jpg"
+    "original": "https://media.mod.io/images/members/1/1/1/masterchief.jpg"
   },
   "timezone": "Australia/Brisbane",
   "language": "en",
-  "url": "https://mod.io/members/xant"
+  "profile_url": "https://mod.io/members/xant"
 }
 ```
 <h3 id="Get-Authenticated-User-responses">Responses</h3>
@@ -8226,19 +8073,18 @@ Get all mod's the *authenticated user* is subscribed to. Successful request will
         "date_online": 1509922961,
         "avatar": {
           "filename": "masterchief.jpg",
-          "full": "https://media.mod.io/images/members/1/1/1/masterchief.jpg"
+          "original": "https://media.mod.io/images/members/1/1/1/masterchief.jpg"
         },
         "timezone": "Australia/Brisbane",
         "language": "en",
-        "url": "https://mod.io/members/xant"
+        "profile_url": "https://mod.io/members/xant"
       },
-      "price": 9.99,
       "date_added": 1492564103,
       "date_updated": 1499841487,
       "date_live": 1499841403,
       "logo": {
         "filename": "IMG_20170409_222419.jpg",
-        "full": "https://media.mod.io/images/mods/1/1/2/IMG_20170409_222419.jpg",
+        "original": "https://media.mod.io/images/mods/1/1/2/IMG_20170409_222419.jpg",
         "thumb_320x180": "https://media.mod.io/cache/images/mods/1/1/2/thumb_320x180/IMG_20170409_222419.jpg",
         "thumb_640x360": "https://media.mod.io/cache/images/mods/1/1/2/thumb_640x360/IMG_20170409_222419.jpg",
         "thumb_1280x720": "https://media.mod.io/cache/images/mods/1/1/2/thumb_1280x720/IMG_20170409_222419.jpg"
@@ -8249,7 +8095,7 @@ Get all mod's the *authenticated user* is subscribed to. Successful request will
       "summary": "It's time to bask in the glory of beautiful 4k textures!",
       "description": "<h2>About</h2><p>Rogue HD Pack does exactly what you thi...",
       "metadata_blob": "rogue,hd,high-res,4k,hd textures",
-      "url": "https://rogue-knight.mod.io/rogue-knight-hd-pack",
+      "profile_url": "https://rogue-knight.mod.io/rogue-knight-hd-pack",
       "modfile": {
         "id": 2,
         "mod_id": 2,
@@ -8257,15 +8103,15 @@ Get all mod's the *authenticated user* is subscribed to. Successful request will
         "date_scanned": 1499841487,
         "virus_status": 0,
         "virus_positive": 0,
+        "virustotal_hash": "f9a7bf4a95ce20787337b685a79677cae2281b83c63ab0a25f091407741692af-1508147401",
         "filesize": 15181,
         "filehash": {
           "md5": "2d4a0e2d7273db6b0a94b0740a88ad0d"
         },
         "filename": "rogue-knight-v1.zip",
         "version": "1.3",
-        "virustotal": "No threats found.",
         "changelog": "VERSION 1.3 -- Changes -- Fixed critical castle floor bug.",
-        "download": "https://mod.io/mods/file/2/c489a0354111a4d76640d47f0cdcb294"
+        "download_url": "https://mod.io/mods/file/2/c489a0354111a4d76640d47f0cdcb294"
       },
       "media": {
         "youtube": [
@@ -8276,24 +8122,23 @@ Get all mod's the *authenticated user* is subscribed to. Successful request will
         ],
         "images": [
           {
-            "full": "https://media.mod.io/images/mods/1/1/2/IMG_20170409_222419.jpg",
-            "thumbnail": "https://media.mod.io/cache/images/mods/1/1/2/thumb_1020x2000/IMG_20170409_222419.jpg",
+            "original": "https://media.mod.io/images/mods/1/1/2/IMG_20170409_222419.jpg",
+            "thumb_320x180": "https://media.mod.io/cache/images/mods/1/1/2/thumb_1020x2000/IMG_20170409_222419.jpg",
             "filename": "IMG_20170409_222419.jpg"
           }
         ]
       },
       "ratings": {
-        "total": 1230,
-        "positive": 1047,
-        "negative": 183,
-        "weighted": 87.38,
-        "percentage": 91,
-        "stars": 4,
-        "text": "Very Positive"
+        "total_ratings": 1230,
+        "positive_ratings": 1047,
+        "negative_ratings": 183,
+        "percentage_positive": 91,
+        "weighted_aggregate": 87.38,
+        "display_text": "Very Positive"
       },
       "tags": [
         {
-          "tag": "Unity",
+          "name": "Unity",
           "date_added": 1499841487
         }
       ]
@@ -8447,11 +8292,11 @@ View all mod.io games that exist for the *authenticated user*.
         "date_online": 1509922961,
         "avatar": {
           "filename": "masterchief.jpg",
-          "full": "https://media.mod.io/images/members/1/1/1/masterchief.jpg"
+          "original": "https://media.mod.io/images/members/1/1/1/masterchief.jpg"
         },
         "timezone": "Australia/Brisbane",
         "language": "en",
-        "url": "https://mod.io/members/xant"
+        "profile_url": "https://mod.io/members/xant"
       },
       "date_added": 1493702614,
       "date_updated": 1499410290,
@@ -8465,26 +8310,26 @@ View all mod.io games that exist for the *authenticated user*.
       "ugc_name": "map",
       "icon": {
         "filename": "IMG_20170409_222419.jpg",
-        "full": "https://media.mod.io/images/mods/1/1/2/icon.png",
+        "original": "https://media.mod.io/images/mods/1/1/2/icon.png",
         "thumb_320x180": "https://media.mod.io/cache/images/mods/1/1/2/thumb_320x180/icon.png"
       },
       "logo": {
         "filename": "IMG_20170409_222419.jpg",
-        "full": "https://media.mod.io/images/mods/1/1/2/IMG_20170409_222419.jpg",
+        "original": "https://media.mod.io/images/mods/1/1/2/IMG_20170409_222419.jpg",
         "thumb_320x180": "https://media.mod.io/cache/images/mods/1/1/2/thumb_320x180/IMG_20170409_222419.jpg",
         "thumb_640x360": "https://media.mod.io/cache/images/mods/1/1/2/thumb_640x360/IMG_20170409_222419.jpg",
         "thumb_1280x720": "https://media.mod.io/cache/images/mods/1/1/2/thumb_1280x720/IMG_20170409_222419.jpg"
       },
       "header": {
         "filename": "gameheader.png",
-        "full": "https://media.mod.io/images/games/1/1/2/gameheader.png"
+        "original": "https://media.mod.io/images/games/1/1/2/gameheader.png"
       },
       "homepage": "https://www.rogue-knight-game.com/",
       "name": "Rogue Knight",
       "name_id": "rogue-knight",
       "summary": "Rogue Knight is a brand new 2D pixel platformer.",
       "instructions": "Instructions here on how to develop for your game.",
-      "url": "https://rogue-knight.mod.io",
+      "profile_url": "https://rogue-knight.mod.io",
       "tag_options": [
         {
           "name": "Engines",
@@ -8646,19 +8491,18 @@ View all mod.io mods that exist for the *authenticated user*.
         "date_online": 1509922961,
         "avatar": {
           "filename": "masterchief.jpg",
-          "full": "https://media.mod.io/images/members/1/1/1/masterchief.jpg"
+          "original": "https://media.mod.io/images/members/1/1/1/masterchief.jpg"
         },
         "timezone": "Australia/Brisbane",
         "language": "en",
-        "url": "https://mod.io/members/xant"
+        "profile_url": "https://mod.io/members/xant"
       },
-      "price": 9.99,
       "date_added": 1492564103,
       "date_updated": 1499841487,
       "date_live": 1499841403,
       "logo": {
         "filename": "IMG_20170409_222419.jpg",
-        "full": "https://media.mod.io/images/mods/1/1/2/IMG_20170409_222419.jpg",
+        "original": "https://media.mod.io/images/mods/1/1/2/IMG_20170409_222419.jpg",
         "thumb_320x180": "https://media.mod.io/cache/images/mods/1/1/2/thumb_320x180/IMG_20170409_222419.jpg",
         "thumb_640x360": "https://media.mod.io/cache/images/mods/1/1/2/thumb_640x360/IMG_20170409_222419.jpg",
         "thumb_1280x720": "https://media.mod.io/cache/images/mods/1/1/2/thumb_1280x720/IMG_20170409_222419.jpg"
@@ -8669,7 +8513,7 @@ View all mod.io mods that exist for the *authenticated user*.
       "summary": "It's time to bask in the glory of beautiful 4k textures!",
       "description": "<h2>About</h2><p>Rogue HD Pack does exactly what you thi...",
       "metadata_blob": "rogue,hd,high-res,4k,hd textures",
-      "url": "https://rogue-knight.mod.io/rogue-knight-hd-pack",
+      "profile_url": "https://rogue-knight.mod.io/rogue-knight-hd-pack",
       "modfile": {
         "id": 2,
         "mod_id": 2,
@@ -8677,15 +8521,15 @@ View all mod.io mods that exist for the *authenticated user*.
         "date_scanned": 1499841487,
         "virus_status": 0,
         "virus_positive": 0,
+        "virustotal_hash": "f9a7bf4a95ce20787337b685a79677cae2281b83c63ab0a25f091407741692af-1508147401",
         "filesize": 15181,
         "filehash": {
           "md5": "2d4a0e2d7273db6b0a94b0740a88ad0d"
         },
         "filename": "rogue-knight-v1.zip",
         "version": "1.3",
-        "virustotal": "No threats found.",
         "changelog": "VERSION 1.3 -- Changes -- Fixed critical castle floor bug.",
-        "download": "https://mod.io/mods/file/2/c489a0354111a4d76640d47f0cdcb294"
+        "download_url": "https://mod.io/mods/file/2/c489a0354111a4d76640d47f0cdcb294"
       },
       "media": {
         "youtube": [
@@ -8696,24 +8540,23 @@ View all mod.io mods that exist for the *authenticated user*.
         ],
         "images": [
           {
-            "full": "https://media.mod.io/images/mods/1/1/2/IMG_20170409_222419.jpg",
-            "thumbnail": "https://media.mod.io/cache/images/mods/1/1/2/thumb_1020x2000/IMG_20170409_222419.jpg",
+            "original": "https://media.mod.io/images/mods/1/1/2/IMG_20170409_222419.jpg",
+            "thumb_320x180": "https://media.mod.io/cache/images/mods/1/1/2/thumb_1020x2000/IMG_20170409_222419.jpg",
             "filename": "IMG_20170409_222419.jpg"
           }
         ]
       },
       "ratings": {
-        "total": 1230,
-        "positive": 1047,
-        "negative": 183,
-        "weighted": 87.38,
-        "percentage": 91,
-        "stars": 4,
-        "text": "Very Positive"
+        "total_ratings": 1230,
+        "positive_ratings": 1047,
+        "negative_ratings": 183,
+        "percentage_positive": 91,
+        "weighted_aggregate": 87.38,
+        "display_text": "Very Positive"
       },
       "tags": [
         {
-          "tag": "Unity",
+          "name": "Unity",
           "date_added": 1499841487
         }
       ]
@@ -8865,15 +8708,15 @@ View all mod.io files that exist for the *authenticated user*.
       "date_scanned": 1499841487,
       "virus_status": 0,
       "virus_positive": 0,
+      "virustotal_hash": "f9a7bf4a95ce20787337b685a79677cae2281b83c63ab0a25f091407741692af-1508147401",
       "filesize": 15181,
       "filehash": {
         "md5": "2d4a0e2d7273db6b0a94b0740a88ad0d"
       },
       "filename": "rogue-knight-v1.zip",
       "version": "1.3",
-      "virustotal": "No threats found.",
       "changelog": "VERSION 1.3 -- Changes -- Fixed critical castle floor bug.",
-      "download": "https://mod.io/mods/file/2/c489a0354111a4d76640d47f0cdcb294"
+      "download_url": "https://mod.io/mods/file/2/c489a0354111a4d76640d47f0cdcb294"
     },
     {
         ...
@@ -8889,7 +8732,7 @@ View all mod.io files that exist for the *authenticated user*.
 
 Status|Meaning|Description|Response Schema
 ---|---|---|---|
-200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)|Request Successful|[Get All Mod Files](#schemaget_all_mod_files)
+200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)|Request Successful|[Get All Modfiles ](#schemaget_all_modfiles)
 
 <aside class="warning">
 To perform this operation, you must be authenticated by means of one of the following methods:
@@ -8928,7 +8771,8 @@ message|string|The server response to your request. Responses will vary from end
 {
   "error": {
     "code": 403,
-    "message": "You do not have the required permissions to access this resource."
+    "message": "You do not have the required permissions to access this resource.",
+    "errors": {}
   }
 } 
 ```
@@ -8941,6 +8785,7 @@ Name|Type|Description
 error|object|Contains error data.
 » code|integer(int32)|HTTP code of the error.
 » message|string|The server response to your request. Responses will vary from endpoint but object structure will persist.
+» errors|object|Optional Validation errors object. This field is only supplied if the response is a validation error (`422 Unprocessible Entity`).
 
 
 
@@ -8952,7 +8797,7 @@ error|object|Contains error data.
 ```json
 {
   "filename": "IMG_20170409_222419.jpg",
-  "full": "https://media.mod.io/images/mods/1/1/2/IMG_20170409_222419.jpg",
+  "original": "https://media.mod.io/images/mods/1/1/2/IMG_20170409_222419.jpg",
   "thumb_320x180": "https://media.mod.io/cache/images/mods/1/1/2/thumb_320x180/IMG_20170409_222419.jpg",
   "thumb_640x360": "https://media.mod.io/cache/images/mods/1/1/2/thumb_640x360/IMG_20170409_222419.jpg",
   "thumb_1280x720": "https://media.mod.io/cache/images/mods/1/1/2/thumb_1280x720/IMG_20170409_222419.jpg"
@@ -8965,7 +8810,7 @@ error|object|Contains error data.
 Name|Type|Description
 ---|---|---|---|
 filename|string|Image filename, with file extension included.
-full|string|URL to full-sized image.
+original|string|URL to full-sized image.
 thumb_320x180|string|URL to small thumbnail image.
 thumb_640x360|string|URL to medium thumbnail image.
 thumb_1280x720|string|URL to large thumbnail image.
@@ -8980,7 +8825,7 @@ thumb_1280x720|string|URL to large thumbnail image.
 ```json
 {
   "filename": "IMG_20170409_222419.jpg",
-  "full": "https://media.mod.io/images/mods/1/1/2/icon.png",
+  "original": "https://media.mod.io/images/mods/1/1/2/icon.png",
   "thumb_320x180": "https://media.mod.io/cache/images/mods/1/1/2/thumb_320x180/icon.png"
 } 
 ```
@@ -8991,7 +8836,7 @@ thumb_1280x720|string|URL to large thumbnail image.
 Name|Type|Description
 ---|---|---|---|
 filename|string|Image filename, with file extension included.
-full|string|URL to full-sized image.
+original|string|URL to full-sized image.
 thumb_320x180|string|URL to small thumbnail image.
 
 
@@ -9004,7 +8849,7 @@ thumb_320x180|string|URL to small thumbnail image.
 ```json
 {
   "filename": "gameheader.png",
-  "full": "https://media.mod.io/images/games/1/1/2/gameheader.png"
+  "original": "https://media.mod.io/images/games/1/1/2/gameheader.png"
 } 
 ```
 
@@ -9014,7 +8859,7 @@ thumb_320x180|string|URL to small thumbnail image.
 Name|Type|Description
 ---|---|---|---|
 filename|string|Image filename, with file extension included.
-full|string|URL to the full-sized header image.
+original|string|URL to the full-sized header image.
 
 
 
@@ -9026,7 +8871,7 @@ full|string|URL to the full-sized header image.
 ```json
 {
   "filename": "masterchief.jpg",
-  "full": "https://media.mod.io/images/members/1/1/1/masterchief.jpg"
+  "original": "https://media.mod.io/images/members/1/1/1/masterchief.jpg"
 } 
 ```
 
@@ -9036,7 +8881,7 @@ full|string|URL to the full-sized header image.
 Name|Type|Description
 ---|---|---|---|
 filename|string|Image filename, including file extension.
-full|string|Full URL to the image.
+original|string|Full URL to the image.
 
 
 
@@ -9047,8 +8892,8 @@ full|string|Full URL to the image.
 
 ```json
 {
-  "full": "https://media.mod.io/images/mods/1/1/2/IMG_20170409_222419.jpg",
-  "thumbnail": "https://media.mod.io/cache/images/mods/1/1/2/thumb_1020x2000/IMG_20170409_222419.jpg",
+  "original": "https://media.mod.io/images/mods/1/1/2/IMG_20170409_222419.jpg",
+  "thumb_320x180": "https://media.mod.io/cache/images/mods/1/1/2/thumb_1020x2000/IMG_20170409_222419.jpg",
   "filename": "IMG_20170409_222419.jpg"
 } 
 ```
@@ -9058,8 +8903,8 @@ full|string|Full URL to the image.
 
 Name|Type|Description
 ---|---|---|---|
-full|string|URL to the full image.
-thumbnail|string|URL to the thumbnail image.
+original|string|URL to the full image.
+thumb_320x180|string|URL to the thumbnail image.
 filename|string|Image filename, with the extension included.
 
 
@@ -9082,18 +8927,18 @@ filename|string|Image filename, with the extension included.
         "date_online": 1509922961,
         "avatar": {
           "filename": "masterchief.jpg",
-          "full": "https://media.mod.io/images/members/1/1/1/masterchief.jpg"
+          "original": "https://media.mod.io/images/members/1/1/1/masterchief.jpg"
         },
         "timezone": "Australia/Brisbane",
         "language": "en",
-        "url": "https://mod.io/members/xant"
+        "profile_url": "https://mod.io/members/xant"
       },
       "date_added": 1499841487,
       "reply_id": 1499,
       "reply_position": "01",
       "karma": 1,
       "karma_guest": 0,
-      "summary": "This mod is kickass! Great work!"
+      "content": "This mod is kickass! Great work!"
     },
     {
         ...
@@ -9121,16 +8966,16 @@ data|[Comment Object  ](#schemacomment_object)[]|Array containing comment object
 »» date_online|integer(int32)|Unix timestamp of when the user was last online.
 »» avatar|[Avatar Object  ](#schemaavatar_object)|Contains avatar data.
 »»» filename|string|Image filename, including file extension.
-»»» full|string|Full URL to the image.
+»»» original|string|Full URL to the image.
 »» timezone|string|The Timezone of the user, shown in {Country}/{City} format.
 »» language|string|The users language preference, limited to two characters.
-»» url|string|URL to the user profile.
+»» profile_url|string|URL to the user's mod.io profile page.
 » date_added|integer(int32)|Unix timestamp of when the comment was published.
 » reply_id|integer(int32)|Unique id of the reply used to submitting a nested reply to the published comment.
 » reply_position|string|Nesting position of the reply.
 » karma|integer(int32)|The amount of karma the comment has received.
 » karma_guest|integer(int32)|The amount of karma received by guests.
-» summary|string|The displayed comment.
+» content|string|The displayed comment.
 cursor_id|integer(int32)|The current _cursor value.
 prev_id|integer(int32)|The previous _cursor value as manually inserted by you, null by default.
 next_id|integer(int32)|The next position to move the _cursor to, based on the current request.
@@ -9177,9 +9022,9 @@ result_count|integer(int32)|The amount of results returned in the current reques
 
 
 
-## Get All Mod Files
+## Get All Modfiles 
 
-<a name="schemaget_all_mod_files"></a>
+<a name="schemaget_all_modfiles"></a>
 
 ```json
 {
@@ -9191,15 +9036,15 @@ result_count|integer(int32)|The amount of results returned in the current reques
       "date_scanned": 1499841487,
       "virus_status": 0,
       "virus_positive": 0,
+      "virustotal_hash": "f9a7bf4a95ce20787337b685a79677cae2281b83c63ab0a25f091407741692af-1508147401",
       "filesize": 15181,
       "filehash": {
         "md5": "2d4a0e2d7273db6b0a94b0740a88ad0d"
       },
       "filename": "rogue-knight-v1.zip",
       "version": "1.3",
-      "virustotal": "No threats found.",
       "changelog": "VERSION 1.3 -- Changes -- Fixed critical castle floor bug.",
-      "download": "https://mod.io/mods/file/2/c489a0354111a4d76640d47f0cdcb294"
+      "download_url": "https://mod.io/mods/file/2/c489a0354111a4d76640d47f0cdcb294"
     },
     {
         ...
@@ -9224,14 +9069,14 @@ data|[Modfile Object  ](#schemamodfile_object)[]|Response array of items.
 » date_scanned|integer(int32)|Unix timestamp of file virus scan.
 » virus_status|integer(int32)|The status of the virus scan for the file.
 » virus_positive|integer(int32)|Has the file been positively flagged as a virus?
+» virustotal_hash|string|VirusTotal proprietary hash.
 » filesize|integer(int32)|Size of the file in bytes.
-» filehash|object|Contains filehashes for file.
-»» md5|string|MD5 filehash.
+» filehash|[Filehash Object  ](#schemafilehash_object)|Contains filehash data.
+»» md5|string|MD5 filehash of the parent file.
 » filename|string|Name of the file including file extension.
 » version|string|The release version this file represents.
-» virustotal|string|Text output from virustotal scan.
 » changelog|string|List of all changes in this file release.
-» download|string|Link to download the file from the mod.io CDN.
+» download_url|string|Link to download the file from the mod.io CDN.
 cursor_id|integer(int32)|The current _cursor value.
 prev_id|integer(int32)|The previous _cursor value as manually inserted by you, null by default.
 next_id|integer(int32)|The next position to move the _cursor to, based on the current request.
@@ -9256,11 +9101,11 @@ result_count|integer(int32)|The amount of results returned in the current reques
         "date_online": 1509922961,
         "avatar": {
           "filename": "masterchief.jpg",
-          "full": "https://media.mod.io/images/members/1/1/1/masterchief.jpg"
+          "original": "https://media.mod.io/images/members/1/1/1/masterchief.jpg"
         },
         "timezone": "Australia/Brisbane",
         "language": "en",
-        "url": "https://mod.io/members/xant"
+        "profile_url": "https://mod.io/members/xant"
       },
       "date_added": 1493702614,
       "date_updated": 1499410290,
@@ -9274,26 +9119,26 @@ result_count|integer(int32)|The amount of results returned in the current reques
       "ugc_name": "map",
       "icon": {
         "filename": "IMG_20170409_222419.jpg",
-        "full": "https://media.mod.io/images/mods/1/1/2/icon.png",
+        "original": "https://media.mod.io/images/mods/1/1/2/icon.png",
         "thumb_320x180": "https://media.mod.io/cache/images/mods/1/1/2/thumb_320x180/icon.png"
       },
       "logo": {
         "filename": "IMG_20170409_222419.jpg",
-        "full": "https://media.mod.io/images/mods/1/1/2/IMG_20170409_222419.jpg",
+        "original": "https://media.mod.io/images/mods/1/1/2/IMG_20170409_222419.jpg",
         "thumb_320x180": "https://media.mod.io/cache/images/mods/1/1/2/thumb_320x180/IMG_20170409_222419.jpg",
         "thumb_640x360": "https://media.mod.io/cache/images/mods/1/1/2/thumb_640x360/IMG_20170409_222419.jpg",
         "thumb_1280x720": "https://media.mod.io/cache/images/mods/1/1/2/thumb_1280x720/IMG_20170409_222419.jpg"
       },
       "header": {
         "filename": "gameheader.png",
-        "full": "https://media.mod.io/images/games/1/1/2/gameheader.png"
+        "original": "https://media.mod.io/images/games/1/1/2/gameheader.png"
       },
       "homepage": "https://www.rogue-knight-game.com/",
       "name": "Rogue Knight",
       "name_id": "rogue-knight",
       "summary": "Rogue Knight is a brand new 2D pixel platformer.",
       "instructions": "Instructions here on how to develop for your game.",
-      "url": "https://rogue-knight.mod.io",
+      "profile_url": "https://rogue-knight.mod.io",
       "tag_options": [
         {
           "name": "Engines",
@@ -9330,10 +9175,10 @@ data|[Game Object  ](#schemagame_object)[]|Array containing game objects
 »» date_online|integer(int32)|Unix timestamp of when the user was last online.
 »» avatar|[Avatar Object  ](#schemaavatar_object)|Contains avatar data.
 »»» filename|string|Image filename, including file extension.
-»»» full|string|Full URL to the image.
+»»» original|string|Full URL to the image.
 »» timezone|string|The Timezone of the user, shown in {Country}/{City} format.
 »» language|string|The users language preference, limited to two characters.
-»» url|string|URL to the user profile.
+»» profile_url|string|URL to the user's mod.io profile page.
 » date_added|integer(int32)|Unix timestamp of date registered.
 » date_updated|integer(int32)|Unix timestamp of date updated.
 » date_live|integer(int32)|Unix timestamp of when game was set live.
@@ -9346,24 +9191,24 @@ data|[Game Object  ](#schemagame_object)[]|Array containing game objects
 » ugc_name|string|Singular string that best describes the type of user-generated content.
 » icon|[Icon Object  ](#schemaicon_object)|Contains icon data.
 »» filename|string|Image filename, with file extension included.
-»» full|string|URL to full-sized image.
+»» original|string|URL to full-sized image.
 »» thumb_320x180|string|URL to small thumbnail image.
 » logo|[Logo Object  ](#schemalogo_object)|Contains logo data.
 »» filename|string|Image filename, with file extension included.
-»» full|string|URL to full-sized image.
+»» original|string|URL to full-sized image.
 »» thumb_320x180|string|URL to small thumbnail image.
 »» thumb_640x360|string|URL to medium thumbnail image.
 »» thumb_1280x720|string|URL to large thumbnail image.
 » header|[Header Object  ](#schemaheader_object)|Contains header data.
 »» filename|string|Image filename, with file extension included.
-»» full|string|URL to the full-sized header image.
+»» original|string|URL to the full-sized header image.
 » homepage|string|Official game website URL.
 » name|string|Title of the game.
 » name_id|string|The unique SEO friendly URL of the game.
 » summary|string|Brief summary of the game.
 » instructions|string|Modding instructions for developers.
-» url|string|website url for the game.
-» tag_options|[Game Tag Options Object](#schemagame_tag_options_object)[]|Contains categories data.
+» profile_url|string|URL to the mod.io page.
+» tag_options|[Game Tag Option Object](#schemagame_tag_option_object)[]|Contains categories data.
 »» name|string|The name of the category.
 »» type|string|Are tags selected via checkboxes or a single dropdown.
 »» admin_only|integer(int32)|Is this an admin only tag? If so only admin's can see this category and it can be used for filtering.
@@ -9419,7 +9264,7 @@ data|[Game Activity Object ](#schemagame_activity_object)[]|Response array of it
 » user_id|integer(int32)|Unique id of the user who triggered the action.
 » date_added|string|Unix timestamp of when the event occured.
 » event|string|Type of event the activity was. ie. GAME_UPDATE or GAME_VISIBILITY_CHANGE.
-» changes|[Activity Changes Object ](#schemaactivity_changes_object)[]|Contains all changes for the event.
+» changes|[Field Change Object ](#schemafield_change_object)[]|Contains all changes for the event.
 »» field|string|The field of the changed value.
 »» before|string|The value prior to the event.
 »» after|string|The newly-updated value.
@@ -9486,19 +9331,18 @@ result_count|integer(int32)|The amount of results returned in the current reques
         "date_online": 1509922961,
         "avatar": {
           "filename": "masterchief.jpg",
-          "full": "https://media.mod.io/images/members/1/1/1/masterchief.jpg"
+          "original": "https://media.mod.io/images/members/1/1/1/masterchief.jpg"
         },
         "timezone": "Australia/Brisbane",
         "language": "en",
-        "url": "https://mod.io/members/xant"
+        "profile_url": "https://mod.io/members/xant"
       },
-      "price": 9.99,
       "date_added": 1492564103,
       "date_updated": 1499841487,
       "date_live": 1499841403,
       "logo": {
         "filename": "IMG_20170409_222419.jpg",
-        "full": "https://media.mod.io/images/mods/1/1/2/IMG_20170409_222419.jpg",
+        "original": "https://media.mod.io/images/mods/1/1/2/IMG_20170409_222419.jpg",
         "thumb_320x180": "https://media.mod.io/cache/images/mods/1/1/2/thumb_320x180/IMG_20170409_222419.jpg",
         "thumb_640x360": "https://media.mod.io/cache/images/mods/1/1/2/thumb_640x360/IMG_20170409_222419.jpg",
         "thumb_1280x720": "https://media.mod.io/cache/images/mods/1/1/2/thumb_1280x720/IMG_20170409_222419.jpg"
@@ -9509,7 +9353,7 @@ result_count|integer(int32)|The amount of results returned in the current reques
       "summary": "It's time to bask in the glory of beautiful 4k textures!",
       "description": "<h2>About</h2><p>Rogue HD Pack does exactly what you thi...",
       "metadata_blob": "rogue,hd,high-res,4k,hd textures",
-      "url": "https://rogue-knight.mod.io/rogue-knight-hd-pack",
+      "profile_url": "https://rogue-knight.mod.io/rogue-knight-hd-pack",
       "modfile": {
         "id": 2,
         "mod_id": 2,
@@ -9517,15 +9361,15 @@ result_count|integer(int32)|The amount of results returned in the current reques
         "date_scanned": 1499841487,
         "virus_status": 0,
         "virus_positive": 0,
+        "virustotal_hash": "f9a7bf4a95ce20787337b685a79677cae2281b83c63ab0a25f091407741692af-1508147401",
         "filesize": 15181,
         "filehash": {
           "md5": "2d4a0e2d7273db6b0a94b0740a88ad0d"
         },
         "filename": "rogue-knight-v1.zip",
         "version": "1.3",
-        "virustotal": "No threats found.",
         "changelog": "VERSION 1.3 -- Changes -- Fixed critical castle floor bug.",
-        "download": "https://mod.io/mods/file/2/c489a0354111a4d76640d47f0cdcb294"
+        "download_url": "https://mod.io/mods/file/2/c489a0354111a4d76640d47f0cdcb294"
       },
       "media": {
         "youtube": [
@@ -9536,24 +9380,23 @@ result_count|integer(int32)|The amount of results returned in the current reques
         ],
         "images": [
           {
-            "full": "https://media.mod.io/images/mods/1/1/2/IMG_20170409_222419.jpg",
-            "thumbnail": "https://media.mod.io/cache/images/mods/1/1/2/thumb_1020x2000/IMG_20170409_222419.jpg",
+            "original": "https://media.mod.io/images/mods/1/1/2/IMG_20170409_222419.jpg",
+            "thumb_320x180": "https://media.mod.io/cache/images/mods/1/1/2/thumb_1020x2000/IMG_20170409_222419.jpg",
             "filename": "IMG_20170409_222419.jpg"
           }
         ]
       },
       "ratings": {
-        "total": 1230,
-        "positive": 1047,
-        "negative": 183,
-        "weighted": 87.38,
-        "percentage": 91,
-        "stars": 4,
-        "text": "Very Positive"
+        "total_ratings": 1230,
+        "positive_ratings": 1047,
+        "negative_ratings": 183,
+        "percentage_positive": 91,
+        "weighted_aggregate": 87.38,
+        "display_text": "Very Positive"
       },
       "tags": [
         {
-          "tag": "Unity",
+          "name": "Unity",
           "date_added": 1499841487
         }
       ]
@@ -9584,17 +9427,16 @@ data|[Mod Object  ](#schemamod_object)[]|Array containing mod objects
 »» date_online|integer(int32)|Unix timestamp of when the user was last online.
 »» avatar|[Avatar Object  ](#schemaavatar_object)|Contains avatar data.
 »»» filename|string|Image filename, including file extension.
-»»» full|string|Full URL to the image.
+»»» original|string|Full URL to the image.
 »» timezone|string|The Timezone of the user, shown in {Country}/{City} format.
 »» language|string|The users language preference, limited to two characters.
-»» url|string|URL to the user profile.
-» price|float|Sale price if applicable, in USD.
+»» profile_url|string|URL to the user's mod.io profile page.
 » date_added|integer(int32)|Unix timestamp of date registered.
 » date_updated|integer(int32)|Unix timestamp of date last updated.
 » date_live|integer(int32)|Unix timestamp of date mod was set live.
 » logo|[Logo Object  ](#schemalogo_object)|Contains logo data.
 »» filename|string|Image filename, with file extension included.
-»» full|string|URL to full-sized image.
+»» original|string|URL to full-sized image.
 »» thumb_320x180|string|URL to small thumbnail image.
 »» thumb_640x360|string|URL to medium thumbnail image.
 »» thumb_1280x720|string|URL to large thumbnail image.
@@ -9604,7 +9446,7 @@ data|[Mod Object  ](#schemamod_object)[]|Array containing mod objects
 » summary|string|Brief summary of the mod.
 » description|string|Description of the mod.
 » metadata_blob|string|Comma-separated metadata for the mod.
-» url|string|Official website url for the mod.
+» profile_url|string|URL to mod.io page.
 » modfile|[Modfile Object  ](#schemamodfile_object)|Contains file data.
 »» id|integer(int32)|Unique file id.
 »» mod_id|integer(int32)|Unique mod id.
@@ -9612,31 +9454,30 @@ data|[Mod Object  ](#schemamod_object)[]|Array containing mod objects
 »» date_scanned|integer(int32)|Unix timestamp of file virus scan.
 »» virus_status|integer(int32)|The status of the virus scan for the file.
 »» virus_positive|integer(int32)|Has the file been positively flagged as a virus?
+»» virustotal_hash|string|VirusTotal proprietary hash.
 »» filesize|integer(int32)|Size of the file in bytes.
-»» filehash|object|Contains filehashes for file.
-»»» md5|string|MD5 filehash.
+»» filehash|[Filehash Object  ](#schemafilehash_object)|Contains filehash data.
+»»» md5|string|MD5 filehash of the parent file.
 »» filename|string|Name of the file including file extension.
 »» version|string|The release version this file represents.
-»» virustotal|string|Text output from virustotal scan.
 »» changelog|string|List of all changes in this file release.
-»» download|string|Link to download the file from the mod.io CDN.
-» media|object|Contains media data.
+»» download_url|string|Link to download the file from the mod.io CDN.
+» media|[Mod Media Object ](#schemamod_media_object)|Contains Mod media data.
 »» youtube|string[]|Array of YouTube links.
 »» sketchfab|string[]|Array of YouTube Links.
 »» images|[Image Object  ](#schemaimage_object)[]|Array of images objects.
-»»» full|string|URL to the full image.
-»»» thumbnail|string|URL to the thumbnail image.
+»»» original|string|URL to the full image.
+»»» thumb_320x180|string|URL to the thumbnail image.
 »»» filename|string|Image filename, with the extension included.
-» ratings|[Rating Object  ](#schemarating_object)|Contains ratings data.
-»» total|integer(int32)|Total ratings count.
-»» positive|integer(int32)|Positive ratings count.
-»» negative|integer(int32)|Negative ratings count.
-»» weighted|float|Weighted rating taking into account positive & negative ratings.
-»» percentage|integer(int32)|Rating of the mod as a percentage.
-»» stars|integer(int32)|The amount of stars the mod has, between 0 and 5.
-»» text|string|Text representation of the rating total.
+» ratings|[Rating Summary Object ](#schemarating_summary_object)|Contains ratings data.
+»» total_ratings|integer(int32)|Number of times this item has been rated.
+»» positive_ratings|integer(int32)|Number of positive ratings.
+»» negative_ratings|integer(int32)|Number of negative ratings.
+»» percentage_positive|integer(int32)|Number of positive ratings, divided by the total ratings to determine it’s percentage score.
+»» weighted_aggregate|float|The overall rating of this item calculated using the 'Wilson score confidence interval' as documented here http://www.evanmiller.org/how-not-to-sort-by-average-rating.html. This column is good to sort on, as it will order items based on number of ratings and will place items with lots of positive ratings above those with a higher score but much fewer ratings.
+»» display_text|string|Textual representation of the rating in format 'Overwhelmingly Positive', 'Very Positive', 'Positive', 'Mostly Positive', 'Mixed', 'Negative', 'Mostly Negative', 'Very Negative' and 'Overwhelmingly Negative'.
 » tags|[Mod Tag Object ](#schemamod_tag_object)[]|Contains Mod Tag data.
-»» tag|string|The displayed tag.
+»» name|string|The displayed tag.
 »» date_added|integer(int32)|Unix timestamp of when tag was applied.
 cursor_id|integer(int32)|The current _cursor value.
 prev_id|integer(int32)|The previous _cursor value as manually inserted by you, null by default.
@@ -9689,7 +9530,7 @@ data|[Mod Activity Object ](#schemamod_activity_object)[]|Response array of item
 » user_id|integer(int32)|Unique id of the user who triggered the action.
 » date_added|integer(int32)|Unix timestamp of when the event occured.
 » event|string|Type of event the activity was. ie. MOD_UPDATE or MOD_VISIBILITY_CHANGE.
-» changes|[Activity Changes Object ](#schemaactivity_changes_object)[]|Contains all changes for the event.
+» changes|[Field Change Object ](#schemafield_change_object)[]|Contains all changes for the event.
 »» field|string|The field of the changed value.
 »» before|string|The value prior to the event.
 »» after|string|The newly-updated value.
@@ -9709,7 +9550,7 @@ result_count|integer(int32)|The amount of results returned in the current reques
 {
   "data": [
     {
-      "tag": "Unity",
+      "name": "Unity",
       "date_added": 1499841487
     },
     {
@@ -9729,7 +9570,7 @@ result_count|integer(int32)|The amount of results returned in the current reques
 Name|Type|Description
 ---|---|---|---|
 data|[Mod Tag Object ](#schemamod_tag_object)[]|Array containing mod tag objects.
-» tag|string|The displayed tag.
+» name|string|The displayed tag.
 » date_added|integer(int32)|Unix timestamp of when tag was applied.
 cursor_id|integer(int32)|The current _cursor value.
 prev_id|integer(int32)|The previous _cursor value as manually inserted by you, null by default.
@@ -9755,13 +9596,12 @@ result_count|integer(int32)|The amount of results returned in the current reques
         "date_online": 1509922961,
         "avatar": {
           "filename": "masterchief.jpg",
-          "full": "https://media.mod.io/images/members/1/1/1/masterchief.jpg"
+          "original": "https://media.mod.io/images/members/1/1/1/masterchief.jpg"
         },
         "timezone": "Australia/Brisbane",
         "language": "en",
-        "url": "https://mod.io/members/xant"
+        "profile_url": "https://mod.io/members/xant"
       },
-      "username": "Megalodon",
       "level": 8,
       "date_added": 1492058857,
       "position": "Supreme Overlord"
@@ -9782,7 +9622,7 @@ result_count|integer(int32)|The amount of results returned in the current reques
 
 Name|Type|Description
 ---|---|---|---|
-data|[Access Object  ](#schemaaccess_object)[]|Array containing access objects.
+data|[Team Member Object ](#schemateam_member_object)[]|Array containing Team Member objects.
 » id|integer(int32)|Unique access id.
 » user|[User Object  ](#schemauser_object)|Contains user data.
 »» id|integer(int32)|Unique id of the user.
@@ -9791,11 +9631,10 @@ data|[Access Object  ](#schemaaccess_object)[]|Array containing access objects.
 »» date_online|integer(int32)|Unix timestamp of when the user was last online.
 »» avatar|[Avatar Object  ](#schemaavatar_object)|Contains avatar data.
 »»» filename|string|Image filename, including file extension.
-»»» full|string|Full URL to the image.
+»»» original|string|Full URL to the image.
 »» timezone|string|The Timezone of the user, shown in {Country}/{City} format.
 »» language|string|The users language preference, limited to two characters.
-»» url|string|URL to the user profile.
-» username|string|Team member username.
+»» profile_url|string|URL to the user's mod.io profile page.
 » level|integer(int32)|The level of permissions the member has within the team. 0 = Guest, 1 = Member, 2 = Contributor, 4 = Manager, 8 = Leader.
 » date_added|integer(int32)|Unix timestamp of date the member joined the team.
 » position|string|Custom title, has no effect on any access rights.
@@ -9821,11 +9660,11 @@ result_count|integer(int32)|The amount of results returned in the current reques
       "date_online": 1509922961,
       "avatar": {
         "filename": "masterchief.jpg",
-        "full": "https://media.mod.io/images/members/1/1/1/masterchief.jpg"
+        "original": "https://media.mod.io/images/members/1/1/1/masterchief.jpg"
       },
       "timezone": "Australia/Brisbane",
       "language": "en",
-      "url": "https://mod.io/members/xant"
+      "profile_url": "https://mod.io/members/xant"
     },
     {
         ...
@@ -9850,66 +9689,14 @@ data|[User Object  ](#schemauser_object)[]|Response array of items.
 » date_online|integer(int32)|Unix timestamp of when the user was last online.
 » avatar|[Avatar Object  ](#schemaavatar_object)|Contains avatar data.
 »» filename|string|Image filename, including file extension.
-»» full|string|Full URL to the image.
+»» original|string|Full URL to the image.
 » timezone|string|The Timezone of the user, shown in {Country}/{City} format.
 » language|string|The users language preference, limited to two characters.
-» url|string|URL to the user profile.
+» profile_url|string|URL to the user's mod.io profile page.
 cursor_id|integer(int32)|The current _cursor value.
 prev_id|integer(int32)|The previous _cursor value as manually inserted by you, null by default.
 next_id|integer(int32)|The next position to move the _cursor to, based on the current request.
 result_count|integer(int32)|The amount of results returned in the current request.
-
-
-
-
-## Access Object
-
-  <a name="schemaaccess_object"></a>
-
-```json
-{
-  "id": 457,
-  "user": {
-    "id": 1,
-    "name_id": "xant",
-    "username": "XanT",
-    "date_online": 1509922961,
-    "avatar": {
-      "filename": "masterchief.jpg",
-      "full": "https://media.mod.io/images/members/1/1/1/masterchief.jpg"
-    },
-    "timezone": "Australia/Brisbane",
-    "language": "en",
-    "url": "https://mod.io/members/xant"
-  },
-  "username": "Megalodon",
-  "level": 8,
-  "date_added": 1492058857,
-  "position": "Supreme Overlord"
-} 
-```
-
-
-### Properties
-
-Name|Type|Description
----|---|---|---|
-id|integer(int32)|Unique access id.
-user|[User Object  ](#schemauser_object)|Contains user data.
-» id|integer(int32)|Unique id of the user.
-» name_id|string|Unique nameid of user which forms end of their profile URL.
-» username|string|Non-unique username of the user.
-» date_online|integer(int32)|Unix timestamp of when the user was last online.
-» avatar|[Avatar Object  ](#schemaavatar_object)|Contains avatar data.
-»» filename|string|Image filename, including file extension.
-»» full|string|Full URL to the image.
-» timezone|string|The Timezone of the user, shown in {Country}/{City} format.
-» language|string|The users language preference, limited to two characters.
-» url|string|URL to the user profile.
-username|string|Team member username.
-level|integer(int32)|The level of permissions the member has within the team. 0 = Guest, 1 = Member, 2 = Contributor, 4 = Manager, 8 = Leader.
-date_added|integer(int32)|Unix timestamp of date the member joined the team.
-position|string|Custom title, has no effect on any access rights.
 
 
 
@@ -9945,7 +9732,7 @@ game_id|integer(int32)|Unique id of the parent game.
 user_id|integer(int32)|Unique id of the user who triggered the action.
 date_added|string|Unix timestamp of when the event occured.
 event|string|Type of event the activity was. ie. GAME_UPDATE or GAME_VISIBILITY_CHANGE.
-changes|[Activity Changes Object ](#schemaactivity_changes_object)[]|Contains all changes for the event.
+changes|[Field Change Object ](#schemafield_change_object)[]|Contains all changes for the event.
 » field|string|The field of the changed value.
 » before|string|The value prior to the event.
 » after|string|The newly-updated value.
@@ -9984,7 +9771,7 @@ mod_id|integer(int32)|Unique id of the parent mod.
 user_id|integer(int32)|Unique id of the user who triggered the action.
 date_added|integer(int32)|Unix timestamp of when the event occured.
 event|string|Type of event the activity was. ie. MOD_UPDATE or MOD_VISIBILITY_CHANGE.
-changes|[Activity Changes Object ](#schemaactivity_changes_object)[]|Contains all changes for the event.
+changes|[Field Change Object ](#schemafield_change_object)[]|Contains all changes for the event.
 » field|string|The field of the changed value.
 » before|string|The value prior to the event.
 » after|string|The newly-updated value.
@@ -9992,9 +9779,9 @@ changes|[Activity Changes Object ](#schemaactivity_changes_object)[]|Contains al
 
 
 
-## Activity Changes Object 
+## Field Change Object 
 
-<a name="schemaactivity_changes_object"></a>
+<a name="schemafield_change_object"></a>
 
 ```json
 {
@@ -10031,18 +9818,18 @@ after|string|The newly-updated value.
     "date_online": 1509922961,
     "avatar": {
       "filename": "masterchief.jpg",
-      "full": "https://media.mod.io/images/members/1/1/1/masterchief.jpg"
+      "original": "https://media.mod.io/images/members/1/1/1/masterchief.jpg"
     },
     "timezone": "Australia/Brisbane",
     "language": "en",
-    "url": "https://mod.io/members/xant"
+    "profile_url": "https://mod.io/members/xant"
   },
   "date_added": 1499841487,
   "reply_id": 1499,
   "reply_position": "01",
   "karma": 1,
   "karma_guest": 0,
-  "summary": "This mod is kickass! Great work!"
+  "content": "This mod is kickass! Great work!"
 } 
 ```
 
@@ -10060,16 +9847,16 @@ submitted_by|[User Object  ](#schemauser_object)|Contains user data.
 » date_online|integer(int32)|Unix timestamp of when the user was last online.
 » avatar|[Avatar Object  ](#schemaavatar_object)|Contains avatar data.
 »» filename|string|Image filename, including file extension.
-»» full|string|Full URL to the image.
+»» original|string|Full URL to the image.
 » timezone|string|The Timezone of the user, shown in {Country}/{City} format.
 » language|string|The users language preference, limited to two characters.
-» url|string|URL to the user profile.
+» profile_url|string|URL to the user's mod.io profile page.
 date_added|integer(int32)|Unix timestamp of when the comment was published.
 reply_id|integer(int32)|Unique id of the reply used to submitting a nested reply to the published comment.
 reply_position|string|Nesting position of the reply.
 karma|integer(int32)|The amount of karma the comment has received.
 karma_guest|integer(int32)|The amount of karma received by guests.
-summary|string|The displayed comment.
+content|string|The displayed comment.
 
 
 
@@ -10096,54 +9883,6 @@ date_added|integer(int32)|Unix timestamp of when the dependency was added.
 
 
 
-## Ownership Object
-
-  <a name="schemaownership_object"></a>
-
-```json
-{
-  "resource": "files",
-  "id": 3,
-  "ownership": true
-} 
-```
-
-
-### Properties
-
-Name|Type|Description
----|---|---|---|
-resource|string|String representation of the resource.
-id|integer(int32)|Unique id of resource
-ownership|boolean|Does the specified member have ownership over the resource?
-
-
-
-
-## Price Object
-
-  <a name="schemaprice_object"></a>
-
-```json
-{
-  "resource": "files",
-  "id": 3,
-  "price": 19.99
-} 
-```
-
-
-### Properties
-
-Name|Type|Description
----|---|---|---|
-resource|string|String representation of the resource type.
-id|integer(int32)|Unique id of the resource.
-price|float|If applicable, the price of the resource displayed in USD.
-
-
-
-
 ## Modfile Object
 
   <a name="schemamodfile_object"></a>
@@ -10156,15 +9895,15 @@ price|float|If applicable, the price of the resource displayed in USD.
   "date_scanned": 1499841487,
   "virus_status": 0,
   "virus_positive": 0,
+  "virustotal_hash": "f9a7bf4a95ce20787337b685a79677cae2281b83c63ab0a25f091407741692af-1508147401",
   "filesize": 15181,
   "filehash": {
     "md5": "2d4a0e2d7273db6b0a94b0740a88ad0d"
   },
   "filename": "rogue-knight-v1.zip",
   "version": "1.3",
-  "virustotal": "No threats found.",
   "changelog": "VERSION 1.3 -- Changes -- Fixed critical castle floor bug.",
-  "download": "https://mod.io/mods/file/2/c489a0354111a4d76640d47f0cdcb294"
+  "download_url": "https://mod.io/mods/file/2/c489a0354111a4d76640d47f0cdcb294"
 } 
 ```
 
@@ -10179,14 +9918,34 @@ date_added|integer(int32)|Unix timestamp of file upload time.
 date_scanned|integer(int32)|Unix timestamp of file virus scan.
 virus_status|integer(int32)|The status of the virus scan for the file.
 virus_positive|integer(int32)|Has the file been positively flagged as a virus?
+virustotal_hash|string|VirusTotal proprietary hash.
 filesize|integer(int32)|Size of the file in bytes.
-filehash|object|Contains filehashes for file.
-» md5|string|MD5 filehash.
+filehash|[Filehash Object  ](#schemafilehash_object)|Contains filehash data.
+» md5|string|MD5 filehash of the parent file.
 filename|string|Name of the file including file extension.
 version|string|The release version this file represents.
-virustotal|string|Text output from virustotal scan.
 changelog|string|List of all changes in this file release.
-download|string|Link to download the file from the mod.io CDN.
+download_url|string|Link to download the file from the mod.io CDN.
+
+
+
+
+## Filehash Object
+
+  <a name="schemafilehash_object"></a>
+
+```json
+{
+  "md5": "2d4a0e2d7273db6b0a94b0740a88ad0d"
+} 
+```
+
+
+### Properties
+
+Name|Type|Description
+---|---|---|---|
+md5|string|MD5 filehash of the parent file.
 
 
 
@@ -10206,19 +9965,18 @@ download|string|Link to download the file from the mod.io CDN.
     "date_online": 1509922961,
     "avatar": {
       "filename": "masterchief.jpg",
-      "full": "https://media.mod.io/images/members/1/1/1/masterchief.jpg"
+      "original": "https://media.mod.io/images/members/1/1/1/masterchief.jpg"
     },
     "timezone": "Australia/Brisbane",
     "language": "en",
-    "url": "https://mod.io/members/xant"
+    "profile_url": "https://mod.io/members/xant"
   },
-  "price": 9.99,
   "date_added": 1492564103,
   "date_updated": 1499841487,
   "date_live": 1499841403,
   "logo": {
     "filename": "IMG_20170409_222419.jpg",
-    "full": "https://media.mod.io/images/mods/1/1/2/IMG_20170409_222419.jpg",
+    "original": "https://media.mod.io/images/mods/1/1/2/IMG_20170409_222419.jpg",
     "thumb_320x180": "https://media.mod.io/cache/images/mods/1/1/2/thumb_320x180/IMG_20170409_222419.jpg",
     "thumb_640x360": "https://media.mod.io/cache/images/mods/1/1/2/thumb_640x360/IMG_20170409_222419.jpg",
     "thumb_1280x720": "https://media.mod.io/cache/images/mods/1/1/2/thumb_1280x720/IMG_20170409_222419.jpg"
@@ -10229,7 +9987,7 @@ download|string|Link to download the file from the mod.io CDN.
   "summary": "It's time to bask in the glory of beautiful 4k textures!",
   "description": "<h2>About</h2><p>Rogue HD Pack does exactly what you thi...",
   "metadata_blob": "rogue,hd,high-res,4k,hd textures",
-  "url": "https://rogue-knight.mod.io/rogue-knight-hd-pack",
+  "profile_url": "https://rogue-knight.mod.io/rogue-knight-hd-pack",
   "modfile": {
     "id": 2,
     "mod_id": 2,
@@ -10237,15 +9995,15 @@ download|string|Link to download the file from the mod.io CDN.
     "date_scanned": 1499841487,
     "virus_status": 0,
     "virus_positive": 0,
+    "virustotal_hash": "f9a7bf4a95ce20787337b685a79677cae2281b83c63ab0a25f091407741692af-1508147401",
     "filesize": 15181,
     "filehash": {
       "md5": "2d4a0e2d7273db6b0a94b0740a88ad0d"
     },
     "filename": "rogue-knight-v1.zip",
     "version": "1.3",
-    "virustotal": "No threats found.",
     "changelog": "VERSION 1.3 -- Changes -- Fixed critical castle floor bug.",
-    "download": "https://mod.io/mods/file/2/c489a0354111a4d76640d47f0cdcb294"
+    "download_url": "https://mod.io/mods/file/2/c489a0354111a4d76640d47f0cdcb294"
   },
   "media": {
     "youtube": [
@@ -10256,24 +10014,23 @@ download|string|Link to download the file from the mod.io CDN.
     ],
     "images": [
       {
-        "full": "https://media.mod.io/images/mods/1/1/2/IMG_20170409_222419.jpg",
-        "thumbnail": "https://media.mod.io/cache/images/mods/1/1/2/thumb_1020x2000/IMG_20170409_222419.jpg",
+        "original": "https://media.mod.io/images/mods/1/1/2/IMG_20170409_222419.jpg",
+        "thumb_320x180": "https://media.mod.io/cache/images/mods/1/1/2/thumb_1020x2000/IMG_20170409_222419.jpg",
         "filename": "IMG_20170409_222419.jpg"
       }
     ]
   },
   "ratings": {
-    "total": 1230,
-    "positive": 1047,
-    "negative": 183,
-    "weighted": 87.38,
-    "percentage": 91,
-    "stars": 4,
-    "text": "Very Positive"
+    "total_ratings": 1230,
+    "positive_ratings": 1047,
+    "negative_ratings": 183,
+    "percentage_positive": 91,
+    "weighted_aggregate": 87.38,
+    "display_text": "Very Positive"
   },
   "tags": [
     {
-      "tag": "Unity",
+      "name": "Unity",
       "date_added": 1499841487
     }
   ]
@@ -10294,17 +10051,16 @@ submitted_by|[User Object  ](#schemauser_object)|Contains user data.
 » date_online|integer(int32)|Unix timestamp of when the user was last online.
 » avatar|[Avatar Object  ](#schemaavatar_object)|Contains avatar data.
 »» filename|string|Image filename, including file extension.
-»» full|string|Full URL to the image.
+»» original|string|Full URL to the image.
 » timezone|string|The Timezone of the user, shown in {Country}/{City} format.
 » language|string|The users language preference, limited to two characters.
-» url|string|URL to the user profile.
-price|float|Sale price if applicable, in USD.
+» profile_url|string|URL to the user's mod.io profile page.
 date_added|integer(int32)|Unix timestamp of date registered.
 date_updated|integer(int32)|Unix timestamp of date last updated.
 date_live|integer(int32)|Unix timestamp of date mod was set live.
 logo|[Logo Object  ](#schemalogo_object)|Contains logo data.
 » filename|string|Image filename, with file extension included.
-» full|string|URL to full-sized image.
+» original|string|URL to full-sized image.
 » thumb_320x180|string|URL to small thumbnail image.
 » thumb_640x360|string|URL to medium thumbnail image.
 » thumb_1280x720|string|URL to large thumbnail image.
@@ -10314,7 +10070,7 @@ name_id|string|Unique SEO-friendly mod uri.
 summary|string|Brief summary of the mod.
 description|string|Description of the mod.
 metadata_blob|string|Comma-separated metadata for the mod.
-url|string|Official website url for the mod.
+profile_url|string|URL to mod.io page.
 modfile|[Modfile Object  ](#schemamodfile_object)|Contains file data.
 » id|integer(int32)|Unique file id.
 » mod_id|integer(int32)|Unique mod id.
@@ -10322,32 +10078,68 @@ modfile|[Modfile Object  ](#schemamodfile_object)|Contains file data.
 » date_scanned|integer(int32)|Unix timestamp of file virus scan.
 » virus_status|integer(int32)|The status of the virus scan for the file.
 » virus_positive|integer(int32)|Has the file been positively flagged as a virus?
+» virustotal_hash|string|VirusTotal proprietary hash.
 » filesize|integer(int32)|Size of the file in bytes.
-» filehash|object|Contains filehashes for file.
-»» md5|string|MD5 filehash.
+» filehash|[Filehash Object  ](#schemafilehash_object)|Contains filehash data.
+»» md5|string|MD5 filehash of the parent file.
 » filename|string|Name of the file including file extension.
 » version|string|The release version this file represents.
-» virustotal|string|Text output from virustotal scan.
 » changelog|string|List of all changes in this file release.
-» download|string|Link to download the file from the mod.io CDN.
-media|object|Contains media data.
+» download_url|string|Link to download the file from the mod.io CDN.
+media|[Mod Media Object ](#schemamod_media_object)|Contains Mod media data.
 » youtube|string[]|Array of YouTube links.
 » sketchfab|string[]|Array of YouTube Links.
 » images|[Image Object  ](#schemaimage_object)[]|Array of images objects.
-»» full|string|URL to the full image.
-»» thumbnail|string|URL to the thumbnail image.
+»» original|string|URL to the full image.
+»» thumb_320x180|string|URL to the thumbnail image.
 »» filename|string|Image filename, with the extension included.
-ratings|[Rating Object  ](#schemarating_object)|Contains ratings data.
-» total|integer(int32)|Total ratings count.
-» positive|integer(int32)|Positive ratings count.
-» negative|integer(int32)|Negative ratings count.
-» weighted|float|Weighted rating taking into account positive & negative ratings.
-» percentage|integer(int32)|Rating of the mod as a percentage.
-» stars|integer(int32)|The amount of stars the mod has, between 0 and 5.
-» text|string|Text representation of the rating total.
+ratings|[Rating Summary Object ](#schemarating_summary_object)|Contains ratings data.
+» total_ratings|integer(int32)|Number of times this item has been rated.
+» positive_ratings|integer(int32)|Number of positive ratings.
+» negative_ratings|integer(int32)|Number of negative ratings.
+» percentage_positive|integer(int32)|Number of positive ratings, divided by the total ratings to determine it’s percentage score.
+» weighted_aggregate|float|The overall rating of this item calculated using the 'Wilson score confidence interval' as documented here http://www.evanmiller.org/how-not-to-sort-by-average-rating.html. This column is good to sort on, as it will order items based on number of ratings and will place items with lots of positive ratings above those with a higher score but much fewer ratings.
+» display_text|string|Textual representation of the rating in format 'Overwhelmingly Positive', 'Very Positive', 'Positive', 'Mostly Positive', 'Mixed', 'Negative', 'Mostly Negative', 'Very Negative' and 'Overwhelmingly Negative'.
 tags|[Mod Tag Object ](#schemamod_tag_object)[]|Contains Mod Tag data.
-» tag|string|The displayed tag.
+» name|string|The displayed tag.
 » date_added|integer(int32)|Unix timestamp of when tag was applied.
+
+
+
+
+## Mod Media Object 
+
+<a name="schemamod_media_object"></a>
+
+```json
+{
+  "youtube": [
+    "https://www.youtube.com/watch?v=dQw4w9WgXcQ"
+  ],
+  "sketchfab": [
+    "https://sketchfab.com/models/ef40b2d300334d009984c8865b2db1c8"
+  ],
+  "images": [
+    {
+      "original": "https://media.mod.io/images/mods/1/1/2/IMG_20170409_222419.jpg",
+      "thumb_320x180": "https://media.mod.io/cache/images/mods/1/1/2/thumb_1020x2000/IMG_20170409_222419.jpg",
+      "filename": "IMG_20170409_222419.jpg"
+    }
+  ]
+} 
+```
+
+
+### Properties
+
+Name|Type|Description
+---|---|---|---|
+youtube|string[]|Array of YouTube links.
+sketchfab|string[]|Array of YouTube Links.
+images|[Image Object  ](#schemaimage_object)[]|Array of images objects.
+» original|string|URL to the full image.
+» thumb_320x180|string|URL to the thumbnail image.
+» filename|string|Image filename, with the extension included.
 
 
 
@@ -10358,7 +10150,7 @@ tags|[Mod Tag Object ](#schemamod_tag_object)[]|Contains Mod Tag data.
 
 ```json
 {
-  "tag": "Unity",
+  "name": "Unity",
   "date_added": 1499841487
 } 
 ```
@@ -10368,7 +10160,7 @@ tags|[Mod Tag Object ](#schemamod_tag_object)[]|Contains Mod Tag data.
 
 Name|Type|Description
 ---|---|---|---|
-tag|string|The displayed tag.
+name|string|The displayed tag.
 date_added|integer(int32)|Unix timestamp of when tag was applied.
 
 
@@ -10388,11 +10180,11 @@ date_added|integer(int32)|Unix timestamp of when tag was applied.
     "date_online": 1509922961,
     "avatar": {
       "filename": "masterchief.jpg",
-      "full": "https://media.mod.io/images/members/1/1/1/masterchief.jpg"
+      "original": "https://media.mod.io/images/members/1/1/1/masterchief.jpg"
     },
     "timezone": "Australia/Brisbane",
     "language": "en",
-    "url": "https://mod.io/members/xant"
+    "profile_url": "https://mod.io/members/xant"
   },
   "date_added": 1493702614,
   "date_updated": 1499410290,
@@ -10406,26 +10198,26 @@ date_added|integer(int32)|Unix timestamp of when tag was applied.
   "ugc_name": "map",
   "icon": {
     "filename": "IMG_20170409_222419.jpg",
-    "full": "https://media.mod.io/images/mods/1/1/2/icon.png",
+    "original": "https://media.mod.io/images/mods/1/1/2/icon.png",
     "thumb_320x180": "https://media.mod.io/cache/images/mods/1/1/2/thumb_320x180/icon.png"
   },
   "logo": {
     "filename": "IMG_20170409_222419.jpg",
-    "full": "https://media.mod.io/images/mods/1/1/2/IMG_20170409_222419.jpg",
+    "original": "https://media.mod.io/images/mods/1/1/2/IMG_20170409_222419.jpg",
     "thumb_320x180": "https://media.mod.io/cache/images/mods/1/1/2/thumb_320x180/IMG_20170409_222419.jpg",
     "thumb_640x360": "https://media.mod.io/cache/images/mods/1/1/2/thumb_640x360/IMG_20170409_222419.jpg",
     "thumb_1280x720": "https://media.mod.io/cache/images/mods/1/1/2/thumb_1280x720/IMG_20170409_222419.jpg"
   },
   "header": {
     "filename": "gameheader.png",
-    "full": "https://media.mod.io/images/games/1/1/2/gameheader.png"
+    "original": "https://media.mod.io/images/games/1/1/2/gameheader.png"
   },
   "homepage": "https://www.rogue-knight-game.com/",
   "name": "Rogue Knight",
   "name_id": "rogue-knight",
   "summary": "Rogue Knight is a brand new 2D pixel platformer.",
   "instructions": "Instructions here on how to develop for your game.",
-  "url": "https://rogue-knight.mod.io",
+  "profile_url": "https://rogue-knight.mod.io",
   "tag_options": [
     {
       "name": "Engines",
@@ -10452,10 +10244,10 @@ submitted_by|[User Object  ](#schemauser_object)|Contains user data.
 » date_online|integer(int32)|Unix timestamp of when the user was last online.
 » avatar|[Avatar Object  ](#schemaavatar_object)|Contains avatar data.
 »» filename|string|Image filename, including file extension.
-»» full|string|Full URL to the image.
+»» original|string|Full URL to the image.
 » timezone|string|The Timezone of the user, shown in {Country}/{City} format.
 » language|string|The users language preference, limited to two characters.
-» url|string|URL to the user profile.
+» profile_url|string|URL to the user's mod.io profile page.
 date_added|integer(int32)|Unix timestamp of date registered.
 date_updated|integer(int32)|Unix timestamp of date updated.
 date_live|integer(int32)|Unix timestamp of when game was set live.
@@ -10468,24 +10260,24 @@ api|integer(int32)|Determines what permissions you want to enable via the mod.io
 ugc_name|string|Singular string that best describes the type of user-generated content.
 icon|[Icon Object  ](#schemaicon_object)|Contains icon data.
 » filename|string|Image filename, with file extension included.
-» full|string|URL to full-sized image.
+» original|string|URL to full-sized image.
 » thumb_320x180|string|URL to small thumbnail image.
 logo|[Logo Object  ](#schemalogo_object)|Contains logo data.
 » filename|string|Image filename, with file extension included.
-» full|string|URL to full-sized image.
+» original|string|URL to full-sized image.
 » thumb_320x180|string|URL to small thumbnail image.
 » thumb_640x360|string|URL to medium thumbnail image.
 » thumb_1280x720|string|URL to large thumbnail image.
 header|[Header Object  ](#schemaheader_object)|Contains header data.
 » filename|string|Image filename, with file extension included.
-» full|string|URL to the full-sized header image.
+» original|string|URL to the full-sized header image.
 homepage|string|Official game website URL.
 name|string|Title of the game.
 name_id|string|The unique SEO friendly URL of the game.
 summary|string|Brief summary of the game.
 instructions|string|Modding instructions for developers.
-url|string|website url for the game.
-tag_options|[Game Tag Options Object](#schemagame_tag_options_object)[]|Contains categories data.
+profile_url|string|URL to the mod.io page.
+tag_options|[Game Tag Option Object](#schemagame_tag_option_object)[]|Contains categories data.
 » name|string|The name of the category.
 » type|string|Are tags selected via checkboxes or a single dropdown.
 » admin_only|integer(int32)|Is this an admin only tag? If so only admin's can see this category and it can be used for filtering.
@@ -10494,9 +10286,9 @@ tag_options|[Game Tag Options Object](#schemagame_tag_options_object)[]|Contains
 
 
 
-## Game Tag Options Object
+## Game Tag Option Object
 
-<a name="schemagame_tag_options_object"></a>
+<a name="schemagame_tag_option_object"></a>
 
 ```json
 {
@@ -10544,19 +10336,18 @@ value|string|The value of the key-value pair.
 
 
 
-## Rating Object
+## Rating Summary Object 
 
-  <a name="schemarating_object"></a>
+<a name="schemarating_summary_object"></a>
 
 ```json
 {
-  "total": 1230,
-  "positive": 1047,
-  "negative": 183,
-  "weighted": 87.38,
-  "percentage": 91,
-  "stars": 4,
-  "text": "Very Positive"
+  "total_ratings": 1230,
+  "positive_ratings": 1047,
+  "negative_ratings": 183,
+  "percentage_positive": 91,
+  "weighted_aggregate": 87.38,
+  "display_text": "Very Positive"
 } 
 ```
 
@@ -10565,29 +10356,39 @@ value|string|The value of the key-value pair.
 
 Name|Type|Description
 ---|---|---|---|
-total|integer(int32)|Total ratings count.
-positive|integer(int32)|Positive ratings count.
-negative|integer(int32)|Negative ratings count.
-weighted|float|Weighted rating taking into account positive & negative ratings.
-percentage|integer(int32)|Rating of the mod as a percentage.
-stars|integer(int32)|The amount of stars the mod has, between 0 and 5.
-text|string|Text representation of the rating total.
+total_ratings|integer(int32)|Number of times this item has been rated.
+positive_ratings|integer(int32)|Number of positive ratings.
+negative_ratings|integer(int32)|Number of negative ratings.
+percentage_positive|integer(int32)|Number of positive ratings, divided by the total ratings to determine it’s percentage score.
+weighted_aggregate|float|The overall rating of this item calculated using the 'Wilson score confidence interval' as documented here http://www.evanmiller.org/how-not-to-sort-by-average-rating.html. This column is good to sort on, as it will order items based on number of ratings and will place items with lots of positive ratings above those with a higher score but much fewer ratings.
+display_text|string|Textual representation of the rating in format 'Overwhelmingly Positive', 'Very Positive', 'Positive', 'Mostly Positive', 'Mixed', 'Negative', 'Mostly Negative', 'Very Negative' and 'Overwhelmingly Negative'.
 
 
 
 
-## Update Object
+## Team Member Object 
 
-  <a name="schemaupdate_object"></a>
+<a name="schemateam_member_object"></a>
 
 ```json
 {
-  "id": 351,
-  "resource": "games",
-  "resourceid": 2,
-  "type": 4,
-  "dateadded": 1492058857,
-  "mention": 0
+  "id": 457,
+  "user": {
+    "id": 1,
+    "name_id": "xant",
+    "username": "XanT",
+    "date_online": 1509922961,
+    "avatar": {
+      "filename": "masterchief.jpg",
+      "original": "https://media.mod.io/images/members/1/1/1/masterchief.jpg"
+    },
+    "timezone": "Australia/Brisbane",
+    "language": "en",
+    "profile_url": "https://mod.io/members/xant"
+  },
+  "level": 8,
+  "date_added": 1492058857,
+  "position": "Supreme Overlord"
 } 
 ```
 
@@ -10596,12 +10397,21 @@ text|string|Text representation of the rating total.
 
 Name|Type|Description
 ---|---|---|---|
-id|integer(int32)|Unique update id.
-resource|string|String representation of the update origin's resource type.
-resourceid|integer(int32)|Unique id of corresponding resource.
-type|integer(int32)|The type of update.<br>*Field Options*<br>__0__ = Guest<br>__1__ = Member<br>__2__ = Contributor<br>__4__ = Manager<br>__8__ = Leader
-dateadded|integer(int32)|Unix timestamp of date the update was created.
-mention|integer(int32)|Is this update the result of a user @mentioning you.
+id|integer(int32)|Unique access id.
+user|[User Object  ](#schemauser_object)|Contains user data.
+» id|integer(int32)|Unique id of the user.
+» name_id|string|Unique nameid of user which forms end of their profile URL.
+» username|string|Non-unique username of the user.
+» date_online|integer(int32)|Unix timestamp of when the user was last online.
+» avatar|[Avatar Object  ](#schemaavatar_object)|Contains avatar data.
+»» filename|string|Image filename, including file extension.
+»» original|string|Full URL to the image.
+» timezone|string|The Timezone of the user, shown in {Country}/{City} format.
+» language|string|The users language preference, limited to two characters.
+» profile_url|string|URL to the user's mod.io profile page.
+level|integer(int32)|The level of permissions the member has within the team. 0 = Guest, 1 = Member, 2 = Contributor, 4 = Manager, 8 = Leader.
+date_added|integer(int32)|Unix timestamp of date the member joined the team.
+position|string|Custom title, has no effect on any access rights.
 
 
 
@@ -10618,11 +10428,11 @@ mention|integer(int32)|Is this update the result of a user @mentioning you.
   "date_online": 1509922961,
   "avatar": {
     "filename": "masterchief.jpg",
-    "full": "https://media.mod.io/images/members/1/1/1/masterchief.jpg"
+    "original": "https://media.mod.io/images/members/1/1/1/masterchief.jpg"
   },
   "timezone": "Australia/Brisbane",
   "language": "en",
-  "url": "https://mod.io/members/xant"
+  "profile_url": "https://mod.io/members/xant"
 } 
 ```
 
@@ -10637,10 +10447,10 @@ username|string|Non-unique username of the user.
 date_online|integer(int32)|Unix timestamp of when the user was last online.
 avatar|[Avatar Object  ](#schemaavatar_object)|Contains avatar data.
 » filename|string|Image filename, including file extension.
-» full|string|Full URL to the image.
+» original|string|Full URL to the image.
 timezone|string|The Timezone of the user, shown in {Country}/{City} format.
 language|string|The users language preference, limited to two characters.
-url|string|URL to the user profile.
+profile_url|string|URL to the user's mod.io profile page.
 
 
 
