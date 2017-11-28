@@ -1418,7 +1418,7 @@ Retrieve all Mods on mod.io for the corresponding game. Successful request will 
           }
         ]
       },
-      "ratings": {
+      "rating_summary": {
         "total_ratings": 1230,
         "positive_ratings": 1047,
         "negative_ratings": 183,
@@ -1630,7 +1630,7 @@ Retrieve a single mod on mod.io. Successful request will return a single [Mod Ob
       }
     ]
   },
-  "ratings": {
+  "rating_summary": {
     "total_ratings": 1230,
     "positive_ratings": 1047,
     "negative_ratings": 183,
@@ -1858,7 +1858,7 @@ Publish a mod on mod.io. Successful request will return the newly created [Mod O
       }
     ]
   },
-  "ratings": {
+  "rating_summary": {
     "total_ratings": 1230,
     "positive_ratings": 1047,
     "negative_ratings": 183,
@@ -2091,7 +2091,7 @@ Edit details for a mod. If you wanting to update the media attached to this game
       }
     ]
   },
-  "ratings": {
+  "rating_summary": {
     "total_ratings": 1230,
     "positive_ratings": 1047,
     "negative_ratings": 183,
@@ -3518,7 +3518,7 @@ Subscribe the _authenticated user_ to a corresponding mod. No body parameters ar
       }
     ]
   },
-  "ratings": {
+  "rating_summary": {
     "total_ratings": 1230,
     "positive_ratings": 1047,
     "negative_ratings": 183,
@@ -3998,7 +3998,7 @@ apiKey, oauth2 ( Scopes: read )
 </aside>
 
 
-## Get All Mod Activity By Game
+## Get All Mod Activity
 
 > Code samples
 
@@ -4144,7 +4144,7 @@ Retrieve all mod activity for the corresponding game. Successful request will re
   "result_count": 100
 }
 ```
-<h3 id="Get-All-Mod-Activity-By-Game-responses">Responses</h3>
+<h3 id="Get-All-Mod-Activity-responses">Responses</h3>
 
 Status|Meaning|Description|Response Schema
 ---|---|---|---|
@@ -4991,7 +4991,7 @@ Add searchable key-value metadata for the corresponding mod. Metadata may includ
      
      Parameter|Type|Required|Description
      ---|---|---|---|
-     metadata_blob|array|true|Array containing one or more key value pairs where the the key & value are separated by a colon ':'. A single key can map to multiple values (1-to-many relationship), key-value pairs are searchable by exact matches only and neither the key or value can exceed 255 characters in length.
+     metadata|array|true|Array containing one or more key value pairs where the the key & value are separated by a colon ':'. A single key can map to multiple values (1-to-many relationship), key-value pairs are searchable by exact matches only and neither the key or value can exceed 255 characters in length.
 
 
 > Example responses
@@ -5134,7 +5134,7 @@ Delete key-value pair metadata from the corresponding mod. <br><br>__Note:__ Due
      
      Parameter|Type|Required|Description
      ---|---|---|---|
-     metadata_blob|array|true|Array containing one or more key value pairs where the the key & value are separated by a colon ':'. A single key can map to multiple values (1-to-many relationship), key-value pairs are searchable by exact matches only and neither the key or value can exceed 255 characters in length.
+     metadata|array|true|Array containing one or more key value pairs where the the key & value are separated by a colon ':'. A single key can map to multiple values (1-to-many relationship), key-value pairs are searchable by exact matches only and neither the key or value can exceed 255 characters in length.
 
 
 > Example responses
@@ -8056,6 +8056,29 @@ System.out.println(response.toString());
 `GET /me/subscribed`
 
 Get all mod's the *authenticated user* is subscribed to. Successful request will return an array of [Mod Objects](https://docs.mod.io/#get-mods-2).
+     
+     Filter|Type|Description
+     ---|---|---
+     id|integer(int32)|Unique id of the mod.
+     game_id|integer(int32)|Unique id of the parent game.
+     submitted_by|integer(int32)|Unique id of the user who has ownership of the game.
+     date_added|integer(int32)|Unix timestamp of date registered.
+     date_updated|integer(int32)|Unix timestamp of date updated.
+     date_live|integer(int32)|Unix timestamp of date mod was set live.
+     logo|string|The filename of the logo.
+     homepage|string|Official homepage of the mod.
+     name|string|Name of the mod.
+     name_id|string|The unique SEO friendly URL for your game.
+     summary|string|Summary of the mod.
+     description|string|An extension of the summary. HTML Supported.
+     metadata_blob|string|Comma-separated list of metadata words.
+     modfile|integer(int32)|Unique id of the [Modfile Object](https://docs.mod.io/#modfile-object) marked as current release.
+     tags|string|Comma-separated values representing the tags you want to filter the results by. Only tags that are supported by the parent game can be applied. To determine what tags are eligible, see the tags values within 'Tag Option' column on the parent [Game Object](https://docs.mod.io/#game-object).
+     status|string| _OAuth 2 only_. The status of the mod (only recognised by game admins), _default is 'auth'_.<br><br>*Fields Options:*<br>__unauth__ = Only return un-authorized mods.<br>__auth__ = Only return authorized mods _(default)_.<br>__ban__ = Only return banned mods.<br>__archive__ = Only return archived content (out of date builds).<br>__delete__ = Only return deleted mods.
+     downloads|string|Sort results by most downloads using [_sort filter](https://docs.mod.io/#filtering) parameter, value should be `downloads` for descending or `-downloads` for ascending results.
+     popular|string|Sort results by popularity using [_sort filter](https://docs.mod.io/#filtering), value should be `popular` for descending or `-popular` for ascending results.
+     ratings|string|Sort results by weighted rating using [_sort filter](https://docs.mod.io/#filtering), value should be `ratings` for descending or `-ratings` for ascending results.
+     subscribers|string|Sort results by most subscribers using [_sort filter](https://docs.mod.io/#filtering), value should be `subscribers` for descending or `-subscribers` for ascending results.
 
 
 > Example responses
@@ -8128,7 +8151,7 @@ Get all mod's the *authenticated user* is subscribed to. Successful request will
           }
         ]
       },
-      "ratings": {
+      "rating_summary": {
         "total_ratings": 1230,
         "positive_ratings": 1047,
         "negative_ratings": 183,
@@ -8275,7 +8298,7 @@ System.out.println(response.toString());
 ```
 `GET /me/games`
 
-View all mod.io games that exist for the *authenticated user*.
+Get all games the *authenticated user* published or is a team member of. Successful request will return an array of [Game Objects](https://docs.mod.io/#get-games-2).
 
 
 > Example responses
@@ -8473,7 +8496,7 @@ System.out.println(response.toString());
 ```
 `GET /me/mods`
 
-View all mod.io mods that exist for the *authenticated user*.
+Get all mods the *authenticated user* published or is a team member of. Successful request will return an array of [Mod Objects](https://docs.mod.io/#get-all-mods-2).
 
 
 > Example responses
@@ -8546,7 +8569,7 @@ View all mod.io mods that exist for the *authenticated user*.
           }
         ]
       },
-      "ratings": {
+      "rating_summary": {
         "total_ratings": 1230,
         "positive_ratings": 1047,
         "negative_ratings": 183,
@@ -8583,7 +8606,7 @@ oauth2 ( Scopes: read )
 </aside>
 
 
-## Get User Files
+## Get User Modfiles
 
 > Code samples
 
@@ -8693,7 +8716,7 @@ System.out.println(response.toString());
 ```
 `GET /me/files`
 
-View all mod.io files that exist for the *authenticated user*.
+Get all Modfiles the *authenticated user* published or is a team member of. Successful request will return an array of [Modfile Objects](https://docs.mod.io/#get-all-mod-files-2).
 
 
 > Example responses
@@ -8728,7 +8751,7 @@ View all mod.io files that exist for the *authenticated user*.
   "result_count": 100
 }
 ```
-<h3 id="Get-User-Files-responses">Responses</h3>
+<h3 id="Get-User-Modfiles-responses">Responses</h3>
 
 Status|Meaning|Description|Response Schema
 ---|---|---|---|
@@ -9386,7 +9409,7 @@ result_count|integer(int32)|The amount of results returned in the current reques
           }
         ]
       },
-      "ratings": {
+      "rating_summary": {
         "total_ratings": 1230,
         "positive_ratings": 1047,
         "negative_ratings": 183,
@@ -9469,7 +9492,7 @@ data|[Mod Object  ](#schemamod_object)[]|Array containing mod objects
 »»» original|string|URL to the full image.
 »»» thumb_320x180|string|URL to the thumbnail image.
 »»» filename|string|Image filename, with the extension included.
-» ratings|[Rating Summary Object ](#schemarating_summary_object)|Contains ratings data.
+» rating_summary|[Rating Summary Object ](#schemarating_summary_object)|Contains ratings data.
 »» total_ratings|integer(int32)|Number of times this item has been rated.
 »» positive_ratings|integer(int32)|Number of positive ratings.
 »» negative_ratings|integer(int32)|Number of negative ratings.
@@ -10020,7 +10043,7 @@ md5|string|MD5 filehash of the parent file.
       }
     ]
   },
-  "ratings": {
+  "rating_summary": {
     "total_ratings": 1230,
     "positive_ratings": 1047,
     "negative_ratings": 183,
@@ -10093,7 +10116,7 @@ media|[Mod Media Object ](#schemamod_media_object)|Contains Mod media data.
 »» original|string|URL to the full image.
 »» thumb_320x180|string|URL to the thumbnail image.
 »» filename|string|Image filename, with the extension included.
-ratings|[Rating Summary Object ](#schemarating_summary_object)|Contains ratings data.
+rating_summary|[Rating Summary Object ](#schemarating_summary_object)|Contains ratings data.
 » total_ratings|integer(int32)|Number of times this item has been rated.
 » positive_ratings|integer(int32)|Number of positive ratings.
 » negative_ratings|integer(int32)|Number of negative ratings.

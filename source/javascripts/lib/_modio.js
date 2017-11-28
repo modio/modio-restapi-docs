@@ -10,14 +10,13 @@ $(document).ready(function() {
 			$(this).css({'cursor':'pointer'});
 			var attribute = $(this).find('td:first-child').text();
 
-			if (attribute == "200") {
+			if (attribute == '200') {
 				// Means we are in the "Response Schema" section under
 				// an endpoint and we don't need to do highlighing
 				return false;
 			}
 
 			var codeblock = $(this).parent().parent().prev().prev().children().first().children();
-			var nesting_levels = 0;
 
 			$(codeblock).each(function(i, obj) {
 				if ($(obj).first().hasClass('s2')) {
