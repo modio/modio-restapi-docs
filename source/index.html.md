@@ -6870,7 +6870,7 @@ Retrieve all comments for the corresponding mod. Successful request will return 
      reply_position|string|Levels of nesting in comment chain.
      karma|integer|Karma received from comment.
      karma_guest|integer|The amount of karma received by guests.
-     summary|string|The contents of the comment.
+     content|string|The contents of the comment.
 
 
 > Example responses
