@@ -604,9 +604,9 @@ mod.io returns the following headers in each request to inform you of your remai
  - `X-RateLimit-Limit` - Number of requests you can make from the supplied API key/access token per hour.
  - `X-RateLimit-Remaining` - Number of minutes until your rate limit resets.
 
-### Optimize your calls
+### Optimize your requests
 
-You should always plan to optimize your app to cache API responses and minimize requests. It will make the experience feel fluid and fast for your users. If usage is excessive we shall reach out to discuss ways of optimizing, but our aim is to never restrict legitimate use of the API, and have set limits that should cover 99% of use-cases.
+You should always plan to minimize requests and cache API responses. It will make your app feel fluid and fast for your users. If your usage is excessive we shall reach out to discuss ways of optimizing, but our aim is to never restrict legitimate use of the API. We have set high limits that should cover 99% of use-cases, and are happy to [discuss your scenario](mailto:developers@mod.io?subject=mod.io%20API%20usage) if you require more.
 
 ## Contact
 
