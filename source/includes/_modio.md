@@ -2,7 +2,7 @@
 
 ## mod.io API v1
 
-Welcome to the official `v1` API documentation for [mod.io](--parse_siteurl). Please ensure you read all of the _Getting Started_ content as it covers most steps to ensure you can accurately and efficiently consume our REST API. 
+Welcome to the official documentation for [mod.io](--parse_siteurl), an API which makes it a joy to search, sort and share mods in-game. We recommend you read _Getting Started_ to accurately and efficiently consume our REST API. 
 
 __Current version:__ `--parse_version`
 
@@ -20,9 +20,9 @@ You have 3 options to get connected to the mod.io API which you can use intercha
 
 Option | Usage | Suited for | Docs
 ---------- | ---------- | ---------- | ---------
-__API__ | For connecting directly to the mod.io REST API | Web apps that need a JSON REST API, or game developers that like a challenge and want control over their implementation. | 
-__SDK__ | Drop our [open source C++ SDK](https://github.com/DBolical/modioSDK) into your game to call mod.io functionality. | Developers that want a SDK that abstracts the uploading, downloading and unzip flows behind easy to use function calls. | [Here](https://sdk.mod.io/)
-__Tools/Plugins__ | Use tools and plugins created by the community to make implementation in various engines easy. | Game developers that want a pre-built modding solution for their engine of choice. | [Available per tool](https://mod.io/games/apps)
+__API__ | For connecting directly to the mod.io REST API | Web apps that need a JSON REST API, or game developers that like a challenge and want control over their implementation. | You are reading them
+__SDK__ | Drop our [open source C/C++ SDK](https://sdk.mod.io) into your game to call mod.io functionality. | Developers that want a SDK that abstracts the uploading, downloading and unzip flows behind easy to use function calls. | [Here](https://sdk.mod.io)
+__Tools/Plugins__ | Use tools and plugins created by the community to make implementation in various engines easy. | Game developers that want a pre-built modding solution for their engine (Unity, Unreal) of choice. | [Available per tool](https://apps.mod.io)
 
 Here is a brief list of the main things to know about our API, as explained in more detail in the following sections.
 
@@ -33,30 +33,28 @@ Here is a brief list of the main things to know about our API, as explained in m
 - Binary data `POST` requests must use `Content-Type: multipart/form-data` header.
 - Non-binary `POST`, `PUT` and `DELETE` requests must use `Content-Type: application/x-www-form-urlencoded` header.
 - Non-binary data can optionally be supplied in `application/json` using the `input_json` parameter. 
-- Rate limiting is implemented with varying limits depending on the resource type.
+- Rate limiting can be implemented for excess usage to deter abuse and spam.
 
 ## Authentication
 
-Authentication to the mod.io can be done via 3 different ways:
+Authentication with the mod.io API can be done via 3 ways:
 
 - Request an [API key (Read Access Only)](https://mod.io/apikey/widget)
 - Manually create an [OAuth 2 Access Token (Read + Write Access)](https://mod.io/oauth/widget)
-- Use of our [Email Authentication Flow](https://docs.mod.io/#email-authentication-flow) 
+- Use our [Email Authentication Flow](https://docs.mod.io/#email-authentication-flow) (to create an OAuth 2 Access Token with Read + Write Access) 
 
-Which method of authentication can depend on which way you intend on consuming the mod.io API.
+You can use these methods of authentication interchangably, depending on the level of access you require to the mod.io API.
 
-Authentication Type | In | HTTP Methods | Abilities
----------- | ---------- | ---------- | ---------- 
-API Key | Query | `GET` | Email authentication flow + read-only abilities via `GET` request.
-Access Token (OAuth 2) | Header | `GET`, `POST`, `PUT`, `DELETE` | Read, create, update, delete.
+Authentication Type | In | HTTP Methods | Abilities | Purpose
+---------- | ---------- | ---------- | ---------- | ---------- 
+API Key | Query | `GET` | Read-only `GET` requests and email authentication flow. | Browsing and downloading content.
+Access Token (OAuth 2) | Header | `GET`, `POST`, `PUT`, `DELETE` | Read, create, update, delete. | View, add, edit and delete content the authenticated user has subscribed to or has permission to change.
 
 ### API Key Authentication
 
-#### Generating your API key
+To access the API authentication is required. All users and games get a [private API key](https://mod.io/apikey/widget). It is quick and easy to use in your apps but limited to read-only GET requests, due to the limited security it offers.
 
-To access the API, authentication is required. All users and games get a [private API key](https://mod.io/apikey/widget). It is quick and easy to use in your apps but limited to read-only GET requests, due to the limited security it offers.
-
-[Generate your private API key](https://mod.io/apikey/widget)
+[Get your private API key](https://mod.io/apikey/widget)
 
 ### Email Authentication Flow
 
@@ -65,7 +63,7 @@ To perform writes, you will need to authenticate your users via OAuth 2. To make
 ![mod.io Email Authentication Flow](https://static.mod.io/v1/images/home/email.png)
 
 ```shell
-// Example POST requesting security code
+// Example POST requesting security code be sent to supplied email
 
 curl -X POST https://api.mod.io/v1/oauth/emailrequest \
   -H 'Content-Type: application/x-www-form-urlencoded' \
@@ -73,29 +71,30 @@ curl -X POST https://api.mod.io/v1/oauth/emailrequest \
   -d 'email=john.snow@westeros.com'
 ```
 
-```json
+```JSON
 // Authentication Code Request Response
 
 {
 	"code": 200,
-	"message": "Enter the 5-digit security code sent to your e-mail address (john.snow@westeros.com)"
+	"message": "Enter the 5-digit security code sent to your email address (john.snow@westeros.com)"
 }
 ```
 
 ### Step 1: Requesting a security code
 
-Firstly you must request a `security_code` from the authentication server by supplying an email which will then return a short-lived security code to the supplied e-mail address. It is therefore required that to receive a `security_code` that you have access to the specified email account. 
+Request a `security_code` be sent to the email address of the user you wish to authenticate: 
+
 
 `POST oauth/emailrequest`
 
 Parameter | Value
 ---------- | ----------  
 `api_key` | Your API key generated from 'API' tab within your game profile.
-`email` | A valid and secure e-mail address you have access to. 
+`email` | A valid and secure email address your user has access to. 
 
 ### Step 2: Exchanging security code for access token
 
-After successfully requesting a `security_code` with a valid e-mail address you have access to you will then receive an e-mail from mod.io containing your unique 5-character `security_code` which you then exchange in a second request for your `access_token`. There are a few important things to know when using the e-mail authentication flow:
+After retrieving the 5-digit `security_code` sent to the email specified, you exchange it for an OAuth 2 `access_token`:
 
 ```shell
 // Example POST requesting access token
@@ -106,7 +105,7 @@ curl -X POST https://api.mod.io/v1/oauth/emailexchange \
   -d 'security_code=3EW50'
 ```
 
-```json
+```JSON
 // Access Token Request Response (access token truncated for brevity)
 
 {
@@ -115,19 +114,22 @@ curl -X POST https://api.mod.io/v1/oauth/emailexchange \
 }
 ```
 
-- An `api_key` is required for both steps of the authentication process.
-- The _same_ `api_key` must be used for both steps.
-- The generated `security_code` is short-lived and will expire after 15 minutes.
-- Once exchanged for an access token, the security code is invalid.
-
-If you do not exchange your `security_code` for an `access_token` within 15 minutes of generation, you will need to begin the flow again to receive another code.
 
 `POST oauth/emailexchange`
 
 Parameter | Value
 ---------- | ----------  
 `api_key` | Your API key generated from 'API' tab within your game profile.
-`security_code` | Unique 5-digit code sent to the e-mail address supplied in the previous request. 
+`security_code` | Unique 5-digit code sent to the email address supplied in the previous request. 
+
+There are a few important things to know when using the email authentication flow:
+ 
+- An `api_key` is required for both steps of the authentication process.
+- The _same_ `api_key` must be used for both steps.
+- The generated `security_code` is short-lived and will expire after 15 minutes.
+- Once exchanged for an `access_token`, the `security_code` is invalid.
+
+If you do not exchange your `security_code` for an `access_token` within 15 minutes of generation, you will need to begin the flow again to receive another code.
 
 ### Step 3: Use access token to access resources.
 
@@ -135,14 +137,13 @@ See [Making Requests](https://docs.mod.io/#making-requests) section.
 
 ### Scopes (OAuth 2)
 
-mod.io allows you to specify what type of permissions you want each access token to have, this is done by the use of scopes. See below for a full list of scopes available, you must include at least one scope when generating a new token.
+mod.io allows you to specify the permission each access token has (default is read+write), this is done by the use of scopes. See below for a full list of scopes available, you must include at least one scope when generating a new token.
 
 Scope | Abilities
 ---------- | ----------
 `read` | When authenticated with a token that *only* contains the `read` scope you will only be able to read data via `GET` requests. 
-`write` | When authenticated with a token that contains the `write` scope you are able to add, edit and remove resources. _Default for e-mail verification flow._
-
-You can combine scopes to generate a combination that suits the permissions you want to be applied to the specified token.
+`write` | When authenticated with a token that contains the `write` scope you are able to add, edit and remove resources.
+`read+write` | The above scopes combined. _Default for email verification flow._
 
 ## Making Requests
 
@@ -154,11 +155,11 @@ Requests to the mod.io API __must__ be over HTTPS (Port 443), any requests made 
 curl -X get https://api.mod.io/v1/games?api_key=xxxxxxxxxxxxxxxx
 ``` 
 
-To authenticate to the API using your key using your unique 32-character key simply append the `api_key=xxxxxxxxxxxxxxxx` parameter to the end of your request. Remember that using an API key means requests are in read-only mode, and that if you want to create, update or delete resources then authentication via OAuth 2 is required which you can (set up with your api key)[https://docs.mod.io/#authentication].
+To authenticate using your unique 32-character API key simply append the `api_key=xxxxxxxxxxxxxxxx` parameter to the end of your request. Remember that using an API key means requests are in read-only mode, and that if you want to create, update or delete resources - authentication via OAuth 2 is required which you can [set up with your api key](https://docs.mod.io/#authentication).
 
 ### Using an Access Token
 
-To Authenticate to the API using an OAuth 2 access token you must include the HTTP header `Authorization` in your request with the value `Bearer your-token-here`. Verification via Access Tokens allows much greater powers in consuming the API including creating new content, as well as updating and deleting resources that you have access to. 
+To authenticate using an OAuth 2 access token you must include the HTTP header `Authorization` in your request with the value `Bearer your-token-here`. Verification via Access Tokens allow much greater power including creating, updating and deleting resources that you have access to. Also because OAuth 2 access tokens are tied to a user account, you can personalize the output by viewing content they are subscribed and connected to.
 
 ```shell
 // Example POST request with no binary files
@@ -172,9 +173,7 @@ curl -X post https://api.mod.io/v1/games/1/mods/1/tags \
 
 ### Request Content-Type
 
-For supplying data in requests, mod.io follows this rule across the API:
-
-- If you are making a request that includes a file, your request `Content-Type` header __must__ be `multipart/form-data`, otherwise, it should be `application/x-www-form-urlencoded`. 
+If you are making a request that includes a file, your request `Content-Type` header __must__ be `multipart/form-data`, otherwise if the request contains data (but no files) it should be `application/x-www-form-urlencoded`. 
 
 ```shell
 // Example POST request with binary file
@@ -211,7 +210,7 @@ curl -X post https://api.mod.io/v1/games/1/team \
 	  }'
 ```
 
-For `POST` & `PUT` requests that do _not submit files_ you have the option to either supply your data as usual HTTP `POST` parameters or as a single json object by supplying the parameter `input_json` which contains a _UTF-8 encoded_ JSON object with all required data. Regardless, whether you use JSON or not the `Content-Type` of your request still needs to be `application/x-www-form-urlencoded` with the data provided in the body of the request.
+For `POST` & `PUT` requests that do _not submit files_ you have the option to supply your data as HTTP `POST` parameters, or as a _UTF-8 encoded_ JSON object inside the parameter `input_json` which contains all required data. Regardless, whether you use JSON or not the `Content-Type` of your request still needs to be `application/x-www-form-urlencoded` with the data provided in the body of the request.
 
 __NOTE:__ If you supply identical key-value pairs as a request parameter and also as a parameter of your JSON object, the JSON object __will take priority__ as only one can exist.
 
@@ -221,7 +220,7 @@ Responses will __always__ be returned as `application/json`.
 
 ## Errors
 
-```json
+```JSON
 // Error object
 
 "error": {
@@ -230,11 +229,11 @@ Responses will __always__ be returned as `application/json`.
 }
 ```
 
-If an error occurs, mod.io returns an error object with the HTTP `code` and `message` to describe what error occurred and generally what needs to be done to avoid the error reoccurring. It's important to note that if you encounter errors that are not server errors, that is `500+` codes - you should __not__ continue to send requests to the endpoint and instead review the error message.
+If an error occurs, mod.io returns an error object with the HTTP `code` and `message` to describe what happened and when possible how to avoid repeating the error. It's important to note that if you encounter errors that are not server errors (`500+` codes) - you should review the error message before continuing to send requests to the endpoint.
 
-When it comes to validating request inputs for creating a resource or supplying a query parameter for filtering, an optional field object called `errors` can be supplied inside the `error` object which contains a list of your invalid inputs. A reminder that the nested `errors` object is only supplied with `422 Unprocessable Entity` responses. Be sure to review the [Response Codes](https://docs.mod.io/#response-codes) to be aware of the HTTP codes that the mod.io API returns.
+When requests contain invalid input data or query parameters (for filtering), an optional field object called `errors` can be supplied inside the `error` object, which contains a list of the invalid inputs. The nested `errors` object is only supplied with `422 Unprocessable Entity` responses. Be sure to review the [Response Codes](https://docs.mod.io/#response-codes) to be aware of the HTTP codes that the mod.io API returns.
 
-```json
+```JSON
 // Error object with input errors
 
 "error": {
@@ -248,7 +247,7 @@ When it comes to validating request inputs for creating a resource or supplying 
 
 ```
 
-Remember that [Rate Limiting](https://docs.mod.io/#rate-limiting) applies whether an error is returned or not so to avoid needlessly exceeding your daily quota be sure to always investigate error messages.
+Remember that [Rate Limiting](https://docs.mod.io/#rate-limiting) applies whether an error is returned or not, so to avoid exceeding your daily quota be sure to always investigate error messages - instead of continually retrying.
 
 ## Response Codes
 
@@ -272,7 +271,7 @@ Response Code | Meaning
 `503` | Service Unavailable -- We're temporarily offline for maintenance. Please try again later. (rare)
 
 ## Response Formats
-```json
+```JSON
 // Single 'view' response
 
 {
@@ -297,16 +296,16 @@ The way in which mod.io formats responses is entirely dependant on whether the r
 
 ### Single item Responses
 
-For single items, mod.io returns a __single json object__ which contains the requested resource. There is no nesting for single responses.
+For single items, mod.io returns a __single JSON object__ which contains the requested resource. There is no nesting for single responses.
 
 ### Multiple item Responses
 
-'Get' responses, that is, endpoints that return more than one result return a json object which contains a data array and a metadata fields:
+Endpoints that return more than one result, return a JSON object which contains a data array and metadata fields:
 
 - `data` - contains all data returned from the request.
 - metadata fields - contains all cursor metadata to help you paginate through the API.
 
-```json
+```JSON
 // Get response
 
 {
@@ -340,29 +339,29 @@ For single items, mod.io returns a __single json object__ which contains the req
 
 ## Cursors and Offsets
 
-When requesting data from endpoints that contain more than one object, there are two parameters that you can supply that will allow you to page through results with ease, they are `_cursor` and `_offset`. There are two important differences in how each parameter works, depending on what you are aiming to retrieve you would choose to use one or the other.
+When requesting data from endpoints that contain more than one object, there are two parameters you can supply to paginate through the results with ease, they are `_cursor` and `_offset`. They work slightly differently, so pick the one which suits your use case best.
 
 ### Cursor
 
 ```
---parse_version/games/2/mods/2/files?_cursor=600
+--parse_version/games/2/mods/2/files?_cursor=300
 ```
 
-When using a cursor, you are able to specify where you want to _start_ looking for results by the value of the `id` column. Let's assume you want to get all files on mod.io that contain an id larger than 600. You could use the following:
+When using a cursor, you are able to specify where you want to _start_ looking for results by the value of the `id` column. Let's assume you want to get all files on mod.io that contain an id larger than 300. You could use the following:
 
-- `?_cursor=600` - Only returns fields that have a larger `id` than 600, that is we want to start looking from the specified number onwards. 
+- `?_cursor=300` - Only return fields that have an `id` larger than 300. 
 
-### Prev (Cursors only)
-
-When using cursors you can optionally choose to provide the `_prev` parameter which is meant to be the previous cursor you used. Let's assume you that you just used the above search filter and you wish to keep track of your previous `_cursor` value whilst using a new value which will be shown in the meta object. You would apply it like so:
+When using cursors you can optionally provide a `_prev` parameter, which is the previous cursor used. Let's assume you just used the above search filter and wish to keep track of your previous `_cursor` value. You would apply it like so:
 
 ```
 --parse_version/games/2/mods/2/files?_cursor=400&_prev=300
 ```
 
-- `?_cursor=400&_prev=300` - Move the cursor to all records with a larger `id` than 400, but save that our previous cursor location was 400.
+- `?_cursor=400&_prev=300` - Move the cursor to all records with an `id` larger than 400, but remember our previous cursor location was 300.
 
-Note that the `_prev` parameter is arbitrary  information for your own implementations and does not affect the outcome of the query other than the value being appended to the meta object shown below.
+__NOTE:__ The `_prev` parameter is arbitrary information and does not affect the outcome of the query, other than the value being appended to the metadata fields returned.
+
+Cursors are the quickest and __recommended__ way to paginate, because they tell the database exactly where to start looking.
 
 ### Offset
 
@@ -370,11 +369,11 @@ Note that the `_prev` parameter is arbitrary  information for your own implement
 --parse_version/games?_offset=30
 ```
 
-While a cursor starts from the value of the `id` column, the `_offset` will simply skip over the specified amount of results, regardless of what data they contain. This works the same way offset in an SQL query. Let's now assume you want to get all mods from mod.io but ignore the first 30 results.
+While a cursor starts from the value of the `id` column, the `_offset` will simply skip over the specified number of results, regardless of what data they contain. This works the same way offset does in a SQL query. Let's assume you want to get all mods from mod.io but ignore the first 30 results.
 
 - `?_offset=30` - Will retrieve all results after ignoring the first 30.
 
-As cursors and offsets are mutually exclusive, you should choose one or the other - if you do supply both the __cursor__ will take priority.
+As cursors and offsets are mutually exclusive, you should choose one or the other - if you supply both, the __cursor__ will take priority.
 
 ### Combining a cursor/offset with a limit
 
@@ -382,13 +381,13 @@ As cursors and offsets are mutually exclusive, you should choose one or the othe
 --parse_version/games/2/mods/2/files?_cursor=5&_prev=5&_limit=10
 ```
 
-Once you are up and running using either cursors or an offset you can then combine it with other filter functions such `_limit` & `_sort` to build powerful queries to enable you to be as precise or lenient as you want. 
+You can combine cursors and offsets with other filter functions such `_limit` & `_sort` to build powerful queries that enable you to be as precise or lenient as you want. 
 
 ### Cursor metadata
 
-Appended to each request with more than one result is the cursor metadata, that will always appear regardless of you utilize a cursor/offset or not. This is what each value means:
+Appended to each request with more than one result is the cursor metadata, this will always appear regardless of if you utilize a cursor/offset or not. This is what each value means:
 
-```json
+```JSON
 // Metadata example
 "cursor_id": 50,
 "prev_id": 25,
@@ -401,11 +400,11 @@ Parameter | Value
 `cursor_id` | The current `_cursor` value.
 `prev_id` | The previous `_cursor` value as manually inserted by you, _null_ by default.
 `next_id` | The next position to move the `_cursor` to based on the current request.
-`count_id` | The amount of results returned in the current request.
+`result_count` | The amount of results returned in the current request.
 
 ## Filtering
 
-mod.io has powerful filtering available to assist you in making requests to the API. Every field of the every request can be used as a filter and the following functions are available when querying the API. It is important to understand that when using filters in your request, the filters you specify will __only be applied to the bottom-level columns__. That is, if the response object contains a nested object with the same column name, ie. `id` - the filtering will apply to the bottom level object, and not any nested objects.
+mod.io has powerful filtering available to assist you when making requests to the API. Every field of every request can be used as a filter and the following functions are available when querying the API. It is important to understand that when using filters in your request, the filters you specify will __only be applied to the bottom-level columns__. That is, if the response object contains a nested object with the same column name, ie. `id` - filtering will apply only to the bottom level object, and not any nested objects.
 
 ### Functions
 
@@ -415,7 +414,7 @@ mod.io has powerful filtering available to assist you in making requests to the 
 --parse_version/games?_sort=id
 ```
 
-Sort by a column, and ascending or descending order.
+Sort by a column, in ascending or descending order.
 
 - `?_sort=id` - Sort `id` in ascending order
 
@@ -436,12 +435,12 @@ Limit the number of results for a request.
 ### _q (Full text search)
 
 ```
---parse_version/games/1?_q=The Lord Of The Rings
+--parse_version/games?_q=The Lord Of The Rings
 ```
 
 Full-text search is a lenient search filter that _is only available_ if the endpoint you are querying contains a `name` column. Wildcards should _not_ be applied to this filter as they are ignored.
 
-- `?_q=The Lord of the Rings` - This will return every result where the `name` column contains any of the following words: 'The', 'Lord', 'of', 'the', 'Rings'.
+- `?_q=The Lord of the Rings` - This will return every result where the `name` column contains any of the following words: 'The', 'Lord', 'of', 'the', 'Rings'. 
 
 ### -lk (Like)
 
@@ -503,9 +502,9 @@ Where the supplied list of values appears in the preceding column value. This is
 --parse_version/games?modfile-not-in=8,13,22
 ```
 
-Where the supplied list of values *does not* in the preceding column value. This is the equivalent to SQL's `NOT IN`
+Where the supplied list of values *does not* equal the preceding column value. This is the equivalent to SQL's `NOT IN`
 
-- `?modfile-not-in=8,13,22` - Get all results where `id` column *does not* equal 8, 18 and 22.
+- `?modfile-not-in=8,13,22` - Get all results where `id` column *does not* equal 8, 13 and 22.
 
 ### -min (Min)
 
@@ -559,9 +558,9 @@ Where the preceding column value does not equal the value specified.
 
 ## Rate Limiting
 
-mod.io implements rate limiting to prevent users from abusing the service however we do offer the ability of higher rate limits as they required. Exceeding your rate limit will result in requests receiving a `429 Too Many Requests` response until your time is reset time occurs. 
+mod.io implements rate limiting to stop users abusing the service. Exceeding your rate limit will result in requests receiving a `429 Too Many Requests` response until your reset time is reached. 
 
-It is *highly recommended* that you architect your app to check for the `X-RateLimit` headers below and the `429` HTTP response code to ensure you are not making too many requests or continuing to make requests consistently after a `429` code is repeatedly returned. Users who continue to send requests despite a `429` response could potentially have their access tokens revoked. The following limits are implemented by default:
+It is *highly recommended* you architect your app to check for the `X-RateLimit` headers below and the `429` HTTP response code to ensure you are not making too many requests or continuing to make requests after a `429` code is repeatedly returned. Users who continue to send requests despite a `429` response could potentially have their access tokens revoked. The following limits are implemented by default:
 
 ### API key Rate Limiting
 
@@ -575,22 +574,24 @@ X-RateLimit-Limit: 60
 X-RateLimit-Remaining: 59
 ```
 
-- All API keys by default are limited to __100,000 requests per day__.
+- API keys linked to a member are limited to __100,000 requests per day__.
+- API keys linked to a game have __unlimited requests__.
 
 ### OAuth2 Rate Limiting
 
-- Tokens linked to a game - __1,000,000 requests per day__.
-- Tokens linked to a mod - __150,000 requests per day__. 
+- Users tokens are limited to __100,000 requests per day__. 
 
 ### Headers
 
 mod.io returns the following headers in each request to inform you of your remaining requests and time until reset.
 
  - `X-RateLimit-Limit` - Number of requests you can make from the supplied API key/access token per hour.
- - `X-RateLimit-Remaining` - Number of minutes until your rate limit resets (see above for frequently allowed).
+ - `X-RateLimit-Remaining` - Number of minutes until your rate limit resets.
 
-If you want feel the above rate limit is not enough for your app, please [contact us](mailto:support@mod.io?subject=mod.io%20API%20Rate%20Limiting) to discuss your scenario and potentially increasing your rate limit. 
+### Optimize your calls
+
+You should always plan to optimize your app to cache API responses and minimize requests. It will make the experience feel fluid and fast for your users. If usage is excessive we shall reach out to discuss ways of optimizing, but our aim is to never restrict legitimate use of the API, and have set high limits that should cover 99% of use-cases.
 
 ## Contact
 
-If you spot any errors within the mod.io documentation, have feedback on how we can potentially make it easier to follow or simply want get in touch for another reason please feel free to reach out to us at [support@mod.io](mailto:support@mod.io?subject=mod.io%20API). Any critical issues will be promptly addressed.
+If you spot any errors within the mod.io documentation, have feedback on how we can make it easier to follow or simply want to discuss how awesome mods are, feel free to reach out anytime [developers@mod.io](mailto:developers@mod.io?subject=mod.io%20API). We are here to help you grow and maximise the potential of mods in your game.

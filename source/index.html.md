@@ -20,7 +20,7 @@ headingLevel: '2'
 
 ## mod.io API v1
 
-Welcome to the official `v1` API documentation for [mod.io](https://mod.io). Please ensure you read all of the _Getting Started_ content as it covers most steps to ensure you can accurately and efficiently consume our REST API. 
+Welcome to the official documentation for [mod.io](https://mod.io), an API which makes it a joy to search, sort and share mods in-game. We recommend you read _Getting Started_ to accurately and efficiently consume our REST API. 
 
 __Current version:__ `v1`
 
@@ -38,9 +38,9 @@ You have 3 options to get connected to the mod.io API which you can use intercha
 
 Option | Usage | Suited for | Docs
 ---------- | ---------- | ---------- | ---------
-__API__ | For connecting directly to the mod.io REST API | Web apps that need a JSON REST API, or game developers that like a challenge and want control over their implementation. | 
-__SDK__ | Drop our [open source C++ SDK](https://github.com/DBolical/modioSDK) into your game to call mod.io functionality. | Developers that want a SDK that abstracts the uploading, downloading and unzip flows behind easy to use function calls. | [Here](https://sdk.mod.io/)
-__Tools/Plugins__ | Use tools and plugins created by the community to make implementation in various engines easy. | Game developers that want a pre-built modding solution for their engine of choice. | [Available per tool](https://mod.io/games/apps)
+__API__ | For connecting directly to the mod.io REST API | Web apps that need a JSON REST API, or game developers that like a challenge and want control over their implementation. | You are reading them
+__SDK__ | Drop our [open source C/C++ SDK](https://sdk.mod.io) into your game to call mod.io functionality. | Developers that want a SDK that abstracts the uploading, downloading and unzip flows behind easy to use function calls. | [Here](https://sdk.mod.io)
+__Tools/Plugins__ | Use tools and plugins created by the community to make implementation in various engines easy. | Game developers that want a pre-built modding solution for their engine (Unity, Unreal) of choice. | [Available per tool](https://apps.mod.io)
 
 Here is a brief list of the main things to know about our API, as explained in more detail in the following sections.
 
@@ -51,30 +51,28 @@ Here is a brief list of the main things to know about our API, as explained in m
 - Binary data `POST` requests must use `Content-Type: multipart/form-data` header.
 - Non-binary `POST`, `PUT` and `DELETE` requests must use `Content-Type: application/x-www-form-urlencoded` header.
 - Non-binary data can optionally be supplied in `application/json` using the `input_json` parameter. 
-- Rate limiting is implemented with varying limits depending on the resource type.
+- Rate limiting can be implemented for excess usage to deter abuse and spam.
 
 ## Authentication
 
-Authentication to the mod.io can be done via 3 different ways:
+Authentication with the mod.io API can be done via 3 ways:
 
 - Request an [API key (Read Access Only)](https://mod.io/apikey/widget)
 - Manually create an [OAuth 2 Access Token (Read + Write Access)](https://mod.io/oauth/widget)
-- Use of our [Email Authentication Flow](https://docs.mod.io/#email-authentication-flow) 
+- Use our [Email Authentication Flow](https://docs.mod.io/#email-authentication-flow) (to create an OAuth 2 Access Token with Read + Write Access) 
 
-Which method of authentication can depend on which way you intend on consuming the mod.io API.
+You can use these methods of authentication interchangably, depending on the level of access you require to the mod.io API.
 
-Authentication Type | In | HTTP Methods | Abilities
----------- | ---------- | ---------- | ---------- 
-API Key | Query | `GET` | Email authentication flow + read-only abilities via `GET` request.
-Access Token (OAuth 2) | Header | `GET`, `POST`, `PUT`, `DELETE` | Read, create, update, delete.
+Authentication Type | In | HTTP Methods | Abilities | Purpose
+---------- | ---------- | ---------- | ---------- | ---------- 
+API Key | Query | `GET` | Read-only `GET` requests and email authentication flow. | Browsing and downloading content.
+Access Token (OAuth 2) | Header | `GET`, `POST`, `PUT`, `DELETE` | Read, create, update, delete. | View, add, edit and delete content the authenticated user has subscribed to or has permission to change.
 
 ### API Key Authentication
 
-#### Generating your API key
+To access the API authentication is required. All users and games get a [private API key](https://mod.io/apikey/widget). It is quick and easy to use in your apps but limited to read-only GET requests, due to the limited security it offers.
 
-To access the API, authentication is required. All users and games get a [private API key](https://mod.io/apikey/widget). It is quick and easy to use in your apps but limited to read-only GET requests, due to the limited security it offers.
-
-[Generate your private API key](https://mod.io/apikey/widget)
+[Get your private API key](https://mod.io/apikey/widget)
 
 ### Email Authentication Flow
 
@@ -83,7 +81,7 @@ To perform writes, you will need to authenticate your users via OAuth 2. To make
 ![mod.io Email Authentication Flow](https://static.mod.io/v1/images/home/email.png)
 
 ```shell
-// Example POST requesting security code
+// Example POST requesting security code be sent to supplied email
 
 curl -X POST https://api.mod.io/v1/oauth/emailrequest \
   -H 'Content-Type: application/x-www-form-urlencoded' \
@@ -91,28 +89,29 @@ curl -X POST https://api.mod.io/v1/oauth/emailrequest \
   -d 'email=john.snow@westeros.com'
 ```
 
-```json
+```JSON
 // Authentication Code Request Response
 
 {
 	"code": 200,
-	"message": "Enter the 5-digit security code sent to your e-mail address (john.snow@westeros.com)"
+	"message": "Enter the 5-digit security code sent to your email address (john.snow@westeros.com)"
 }
 ```
 
 ### Step 1: Requesting a security code
 
-Firstly you must request a `security_code` from the authentication server by supplying an email which will then return a short-lived security code to the supplied e-mail address. It is therefore required that to receive a `security_code` that you have access to the specified email account. 
-`POST /oauth/emailrequest`
+Request a `security_code` be sent to the email address of the user you wish to authenticate: 
+
+`POST /oauth/emailrequest`
 
 Parameter | Value
 ---------- | ----------  
 `api_key` | Your API key generated from 'API' tab within your game profile.
-`email` | A valid and secure e-mail address you have access to. 
+`email` | A valid and secure email address your user has access to. 
 
 ### Step 2: Exchanging security code for access token
 
-After successfully requesting a `security_code` with a valid e-mail address you have access to you will then receive an e-mail from mod.io containing your unique 5-character `security_code` which you then exchange in a second request for your `access_token`. There are a few important things to know when using the e-mail authentication flow:
+After retrieving the 5-digit `security_code` sent to the email specified, you exchange it for an OAuth 2 `access_token`:
 
 ```shell
 // Example POST requesting access token
@@ -123,7 +122,7 @@ curl -X POST https://api.mod.io/v1/oauth/emailexchange \
   -d 'security_code=3EW50'
 ```
 
-```json
+```JSON
 // Access Token Request Response (access token truncated for brevity)
 
 {
@@ -132,18 +131,21 @@ curl -X POST https://api.mod.io/v1/oauth/emailexchange \
 }
 ```
 
-- An `api_key` is required for both steps of the authentication process.
-- The _same_ `api_key` must be used for both steps.
-- The generated `security_code` is short-lived and will expire after 15 minutes.
-- Once exchanged for an access token, the security code is invalid.
-
-If you do not exchange your `security_code` for an `access_token` within 15 minutes of generation, you will need to begin the flow again to receive another code.
-`POST /oauth/emailexchange`
+`POST /oauth/emailexchange`
 
 Parameter | Value
 ---------- | ----------  
 `api_key` | Your API key generated from 'API' tab within your game profile.
-`security_code` | Unique 5-digit code sent to the e-mail address supplied in the previous request. 
+`security_code` | Unique 5-digit code sent to the email address supplied in the previous request. 
+
+There are a few important things to know when using the email authentication flow:
+ 
+- An `api_key` is required for both steps of the authentication process.
+- The _same_ `api_key` must be used for both steps.
+- The generated `security_code` is short-lived and will expire after 15 minutes.
+- Once exchanged for an `access_token`, the `security_code` is invalid.
+
+If you do not exchange your `security_code` for an `access_token` within 15 minutes of generation, you will need to begin the flow again to receive another code.
 
 ### Step 3: Use access token to access resources.
 
@@ -151,14 +153,13 @@ See [Making Requests](https://docs.mod.io/#making-requests) section.
 
 ### Scopes (OAuth 2)
 
-mod.io allows you to specify what type of permissions you want each access token to have, this is done by the use of scopes. See below for a full list of scopes available, you must include at least one scope when generating a new token.
+mod.io allows you to specify the permission each access token has (default is read+write), this is done by the use of scopes. See below for a full list of scopes available, you must include at least one scope when generating a new token.
 
 Scope | Abilities
 ---------- | ----------
 `read` | When authenticated with a token that *only* contains the `read` scope you will only be able to read data via `GET` requests. 
-`write` | When authenticated with a token that contains the `write` scope you are able to add, edit and remove resources. _Default for e-mail verification flow._
-
-You can combine scopes to generate a combination that suits the permissions you want to be applied to the specified token.
+`write` | When authenticated with a token that contains the `write` scope you are able to add, edit and remove resources.
+`read+write` | The above scopes combined. _Default for email verification flow._
 
 ## Making Requests
 
@@ -170,11 +171,11 @@ Requests to the mod.io API __must__ be over HTTPS (Port 443), any requests made 
 curl -X get https://api.mod.io/v1/games?api_key=xxxxxxxxxxxxxxxx
 ``` 
 
-To authenticate to the API using your key using your unique 32-character key simply append the `api_key=xxxxxxxxxxxxxxxx` parameter to the end of your request. Remember that using an API key means requests are in read-only mode, and that if you want to create, update or delete resources then authentication via OAuth 2 is required which you can (set up with your api key)[https://docs.mod.io/#authentication].
+To authenticate using your unique 32-character API key simply append the `api_key=xxxxxxxxxxxxxxxx` parameter to the end of your request. Remember that using an API key means requests are in read-only mode, and that if you want to create, update or delete resources - authentication via OAuth 2 is required which you can [set up with your api key](https://docs.mod.io/#authentication).
 
 ### Using an Access Token
 
-To Authenticate to the API using an OAuth 2 access token you must include the HTTP header `Authorization` in your request with the value `Bearer your-token-here`. Verification via Access Tokens allows much greater powers in consuming the API including creating new content, as well as updating and deleting resources that you have access to. 
+To authenticate using an OAuth 2 access token you must include the HTTP header `Authorization` in your request with the value `Bearer your-token-here`. Verification via Access Tokens allow much greater power including creating, updating and deleting resources that you have access to. Also because OAuth 2 access tokens are tied to a user account, you can personalize the output by viewing content they are subscribed and connected to.
 
 ```shell
 // Example POST request with no binary files
@@ -188,9 +189,7 @@ curl -X post https://api.mod.io/v1/games/1/mods/1/tags \
 
 ### Request Content-Type
 
-For supplying data in requests, mod.io follows this rule across the API:
-
-- If you are making a request that includes a file, your request `Content-Type` header __must__ be `multipart/form-data`, otherwise, it should be `application/x-www-form-urlencoded`. 
+If you are making a request that includes a file, your request `Content-Type` header __must__ be `multipart/form-data`, otherwise if the request contains data (but no files) it should be `application/x-www-form-urlencoded`. 
 
 ```shell
 // Example POST request with binary file
@@ -227,7 +226,7 @@ curl -X post https://api.mod.io/v1/games/1/team \
 	  }'
 ```
 
-For `POST` & `PUT` requests that do _not submit files_ you have the option to either supply your data as usual HTTP `POST` parameters or as a single json object by supplying the parameter `input_json` which contains a _UTF-8 encoded_ JSON object with all required data. Regardless, whether you use JSON or not the `Content-Type` of your request still needs to be `application/x-www-form-urlencoded` with the data provided in the body of the request.
+For `POST` & `PUT` requests that do _not submit files_ you have the option to supply your data as HTTP `POST` parameters, or as a _UTF-8 encoded_ JSON object inside the parameter `input_json` which contains all required data. Regardless, whether you use JSON or not the `Content-Type` of your request still needs to be `application/x-www-form-urlencoded` with the data provided in the body of the request.
 
 __NOTE:__ If you supply identical key-value pairs as a request parameter and also as a parameter of your JSON object, the JSON object __will take priority__ as only one can exist.
 
@@ -237,7 +236,7 @@ Responses will __always__ be returned as `application/json`.
 
 ## Errors
 
-```json
+```JSON
 // Error object
 
 "error": {
@@ -246,11 +245,11 @@ Responses will __always__ be returned as `application/json`.
 }
 ```
 
-If an error occurs, mod.io returns an error object with the HTTP `code` and `message` to describe what error occurred and generally what needs to be done to avoid the error reoccurring. It's important to note that if you encounter errors that are not server errors, that is `500+` codes - you should __not__ continue to send requests to the endpoint and instead review the error message.
+If an error occurs, mod.io returns an error object with the HTTP `code` and `message` to describe what happened and when possible how to avoid repeating the error. It's important to note that if you encounter errors that are not server errors (`500+` codes) - you should review the error message before continuing to send requests to the endpoint.
 
-When it comes to validating request inputs for creating a resource or supplying a query parameter for filtering, an optional field object called `errors` can be supplied inside the `error` object which contains a list of your invalid inputs. A reminder that the nested `errors` object is only supplied with `422 Unprocessable Entity` responses. Be sure to review the [Response Codes](https://docs.mod.io/#response-codes) to be aware of the HTTP codes that the mod.io API returns.
+When requests contain invalid input data or query parameters (for filtering), an optional field object called `errors` can be supplied inside the `error` object, which contains a list of the invalid inputs. The nested `errors` object is only supplied with `422 Unprocessable Entity` responses. Be sure to review the [Response Codes](https://docs.mod.io/#response-codes) to be aware of the HTTP codes that the mod.io API returns.
 
-```json
+```JSON
 // Error object with input errors
 
 "error": {
@@ -264,7 +263,7 @@ When it comes to validating request inputs for creating a resource or supplying 
 
 ```
 
-Remember that [Rate Limiting](https://docs.mod.io/#rate-limiting) applies whether an error is returned or not so to avoid needlessly exceeding your daily quota be sure to always investigate error messages.
+Remember that [Rate Limiting](https://docs.mod.io/#rate-limiting) applies whether an error is returned or not, so to avoid exceeding your daily quota be sure to always investigate error messages - instead of continually retrying.
 
 ## Response Codes
 
@@ -288,7 +287,7 @@ Response Code | Meaning
 `503` | Service Unavailable -- We're temporarily offline for maintenance. Please try again later. (rare)
 
 ## Response Formats
-```json
+```JSON
 // Single 'view' response
 
 {
@@ -313,16 +312,16 @@ The way in which mod.io formats responses is entirely dependant on whether the r
 
 ### Single item Responses
 
-For single items, mod.io returns a __single json object__ which contains the requested resource. There is no nesting for single responses.
+For single items, mod.io returns a __single JSON object__ which contains the requested resource. There is no nesting for single responses.
 
 ### Multiple item Responses
 
-'Get' responses, that is, endpoints that return more than one result return a json object which contains a data array and a metadata fields:
+Endpoints that return more than one result, return a JSON object which contains a data array and metadata fields:
 
 - `data` - contains all data returned from the request.
 - metadata fields - contains all cursor metadata to help you paginate through the API.
 
-```json
+```JSON
 // Get response
 
 {
@@ -356,29 +355,29 @@ For single items, mod.io returns a __single json object__ which contains the req
 
 ## Cursors and Offsets
 
-When requesting data from endpoints that contain more than one object, there are two parameters that you can supply that will allow you to page through results with ease, they are `_cursor` and `_offset`. There are two important differences in how each parameter works, depending on what you are aiming to retrieve you would choose to use one or the other.
+When requesting data from endpoints that contain more than one object, there are two parameters you can supply to paginate through the results with ease, they are `_cursor` and `_offset`. They work slightly differently, so pick the one which suits your use case best.
 
 ### Cursor
 
 ```
-v1/games/2/mods/2/files?_cursor=600
+v1/games/2/mods/2/files?_cursor=300
 ```
 
-When using a cursor, you are able to specify where you want to _start_ looking for results by the value of the `id` column. Let's assume you want to get all files on mod.io that contain an id larger than 600. You could use the following:
+When using a cursor, you are able to specify where you want to _start_ looking for results by the value of the `id` column. Let's assume you want to get all files on mod.io that contain an id larger than 300. You could use the following:
 
-- `?_cursor=600` - Only returns fields that have a larger `id` than 600, that is we want to start looking from the specified number onwards. 
+- `?_cursor=300` - Only return fields that have an `id` larger than 300. 
 
-### Prev (Cursors only)
-
-When using cursors you can optionally choose to provide the `_prev` parameter which is meant to be the previous cursor you used. Let's assume you that you just used the above search filter and you wish to keep track of your previous `_cursor` value whilst using a new value which will be shown in the meta object. You would apply it like so:
+When using cursors you can optionally provide a `_prev` parameter, which is the previous cursor used. Let's assume you just used the above search filter and wish to keep track of your previous `_cursor` value. You would apply it like so:
 
 ```
 v1/games/2/mods/2/files?_cursor=400&_prev=300
 ```
 
-- `?_cursor=400&_prev=300` - Move the cursor to all records with a larger `id` than 400, but save that our previous cursor location was 400.
+- `?_cursor=400&_prev=300` - Move the cursor to all records with an `id` larger than 400, but remember our previous cursor location was 300.
 
-Note that the `_prev` parameter is arbitrary  information for your own implementations and does not affect the outcome of the query other than the value being appended to the meta object shown below.
+__NOTE:__ The `_prev` parameter is arbitrary information and does not affect the outcome of the query, other than the value being appended to the metadata fields returned.
+
+Cursors are the quickest and __recommended__ way to paginate, because they tell the database exactly where to start looking.
 
 ### Offset
 
@@ -386,11 +385,11 @@ Note that the `_prev` parameter is arbitrary  information for your own implement
 v1/games?_offset=30
 ```
 
-While a cursor starts from the value of the `id` column, the `_offset` will simply skip over the specified amount of results, regardless of what data they contain. This works the same way offset in an SQL query. Let's now assume you want to get all mods from mod.io but ignore the first 30 results.
+While a cursor starts from the value of the `id` column, the `_offset` will simply skip over the specified number of results, regardless of what data they contain. This works the same way offset does in a SQL query. Let's assume you want to get all mods from mod.io but ignore the first 30 results.
 
 - `?_offset=30` - Will retrieve all results after ignoring the first 30.
 
-As cursors and offsets are mutually exclusive, you should choose one or the other - if you do supply both the __cursor__ will take priority.
+As cursors and offsets are mutually exclusive, you should choose one or the other - if you supply both, the __cursor__ will take priority.
 
 ### Combining a cursor/offset with a limit
 
@@ -398,13 +397,13 @@ As cursors and offsets are mutually exclusive, you should choose one or the othe
 v1/games/2/mods/2/files?_cursor=5&_prev=5&_limit=10
 ```
 
-Once you are up and running using either cursors or an offset you can then combine it with other filter functions such `_limit` & `_sort` to build powerful queries to enable you to be as precise or lenient as you want. 
+You can combine cursors and offsets with other filter functions such `_limit` & `_sort` to build powerful queries that enable you to be as precise or lenient as you want. 
 
 ### Cursor metadata
 
-Appended to each request with more than one result is the cursor metadata, that will always appear regardless of you utilize a cursor/offset or not. This is what each value means:
+Appended to each request with more than one result is the cursor metadata, this will always appear regardless of if you utilize a cursor/offset or not. This is what each value means:
 
-```json
+```JSON
 // Metadata example
 "cursor_id": 50,
 "prev_id": 25,
@@ -417,11 +416,11 @@ Parameter | Value
 `cursor_id` | The current `_cursor` value.
 `prev_id` | The previous `_cursor` value as manually inserted by you, _null_ by default.
 `next_id` | The next position to move the `_cursor` to based on the current request.
-`count_id` | The amount of results returned in the current request.
+`result_count` | The amount of results returned in the current request.
 
 ## Filtering
 
-mod.io has powerful filtering available to assist you in making requests to the API. Every field of the every request can be used as a filter and the following functions are available when querying the API. It is important to understand that when using filters in your request, the filters you specify will __only be applied to the bottom-level columns__. That is, if the response object contains a nested object with the same column name, ie. `id` - the filtering will apply to the bottom level object, and not any nested objects.
+mod.io has powerful filtering available to assist you when making requests to the API. Every field of every request can be used as a filter and the following functions are available when querying the API. It is important to understand that when using filters in your request, the filters you specify will __only be applied to the bottom-level columns__. That is, if the response object contains a nested object with the same column name, ie. `id` - filtering will apply only to the bottom level object, and not any nested objects.
 
 ### Functions
 
@@ -431,7 +430,7 @@ mod.io has powerful filtering available to assist you in making requests to the 
 v1/games?_sort=id
 ```
 
-Sort by a column, and ascending or descending order.
+Sort by a column, in ascending or descending order.
 
 - `?_sort=id` - Sort `id` in ascending order
 
@@ -452,12 +451,12 @@ Limit the number of results for a request.
 ### _q (Full text search)
 
 ```
-v1/games/1?_q=The Lord Of The Rings
+v1/games?_q=The Lord Of The Rings
 ```
 
 Full-text search is a lenient search filter that _is only available_ if the endpoint you are querying contains a `name` column. Wildcards should _not_ be applied to this filter as they are ignored.
 
-- `?_q=The Lord of the Rings` - This will return every result where the `name` column contains any of the following words: 'The', 'Lord', 'of', 'the', 'Rings'.
+- `?_q=The Lord of the Rings` - This will return every result where the `name` column contains any of the following words: 'The', 'Lord', 'of', 'the', 'Rings'. 
 
 ### -lk (Like)
 
@@ -519,9 +518,9 @@ Where the supplied list of values appears in the preceding column value. This is
 v1/games?modfile-not-in=8,13,22
 ```
 
-Where the supplied list of values *does not* in the preceding column value. This is the equivalent to SQL's `NOT IN`
+Where the supplied list of values *does not* equal the preceding column value. This is the equivalent to SQL's `NOT IN`
 
-- `?modfile-not-in=8,13,22` - Get all results where `id` column *does not* equal 8, 18 and 22.
+- `?modfile-not-in=8,13,22` - Get all results where `id` column *does not* equal 8, 13 and 22.
 
 ### -min (Min)
 
@@ -575,9 +574,9 @@ Where the preceding column value does not equal the value specified.
 
 ## Rate Limiting
 
-mod.io implements rate limiting to prevent users from abusing the service however we do offer the ability of higher rate limits as they required. Exceeding your rate limit will result in requests receiving a `429 Too Many Requests` response until your time is reset time occurs. 
+mod.io implements rate limiting to stop users abusing the service. Exceeding your rate limit will result in requests receiving a `429 Too Many Requests` response until your reset time is reached. 
 
-It is *highly recommended* that you architect your app to check for the `X-RateLimit` headers below and the `429` HTTP response code to ensure you are not making too many requests or continuing to make requests consistently after a `429` code is repeatedly returned. Users who continue to send requests despite a `429` response could potentially have their access tokens revoked. The following limits are implemented by default:
+It is *highly recommended* you architect your app to check for the `X-RateLimit` headers below and the `429` HTTP response code to ensure you are not making too many requests or continuing to make requests after a `429` code is repeatedly returned. Users who continue to send requests despite a `429` response could potentially have their access tokens revoked. The following limits are implemented by default:
 
 ### API key Rate Limiting
 
@@ -591,25 +590,27 @@ X-RateLimit-Limit: 60
 X-RateLimit-Remaining: 59
 ```
 
-- All API keys by default are limited to __100,000 requests per day__.
+- API keys linked to a member are limited to __100,000 requests per day__.
+- API keys linked to a game have __unlimited requests__.
 
 ### OAuth2 Rate Limiting
 
-- Tokens linked to a game - __1,000,000 requests per day__.
-- Tokens linked to a mod - __150,000 requests per day__. 
+- Users tokens are limited to __100,000 requests per day__. 
 
 ### Headers
 
 mod.io returns the following headers in each request to inform you of your remaining requests and time until reset.
 
  - `X-RateLimit-Limit` - Number of requests you can make from the supplied API key/access token per hour.
- - `X-RateLimit-Remaining` - Number of minutes until your rate limit resets (see above for frequently allowed).
+ - `X-RateLimit-Remaining` - Number of minutes until your rate limit resets.
 
-If you want feel the above rate limit is not enough for your app, please [contact us](mailto:support@mod.io?subject=mod.io%20API%20Rate%20Limiting) to discuss your scenario and potentially increasing your rate limit. 
+### Optimize your calls
+
+You should always plan to optimize your app to cache API responses and minimize requests. It will make the experience feel fluid and fast for your users. If usage is excessive we shall reach out to discuss ways of optimizing, but our aim is to never restrict legitimate use of the API, and have set limits that should cover 99% of use-cases.
 
 ## Contact
 
-If you spot any errors within the mod.io documentation, have feedback on how we can potentially make it easier to follow or simply want get in touch for another reason please feel free to reach out to us at [support@mod.io](mailto:support@mod.io?subject=mod.io%20API). Any critical issues will be promptly addressed.
+If you spot any errors within the mod.io documentation, have feedback on how we can make it easier to follow or simply want to discuss how awesome mods are, feel free to reach out anytime [developers@mod.io](mailto:developers@mod.io?subject=mod.io%20API). We are here to help you grow and maximise the potential of mods in your game.
 # Games
 
 ## Get All Games
@@ -682,7 +683,6 @@ result = RestClient.get 'https://api.mod.io/v1/games',
   'api_key' => 'string'
 }, headers: headers
 
-
 p JSON.parse(result)
 ```
 
@@ -740,7 +740,6 @@ Retrieve all games on mod.io. Successful request will return an array of [Game O
      name_id|string|The unique SEO friendly URL for the game.
      summary|string|Summary for the game.
      instructions|string|Instructions on the process to upload mods.
-
 
 > Example responses
 
@@ -826,7 +825,6 @@ To perform this operation, you must be authenticated by means of one of the foll
 apiKey, oauth2 ( Scopes: read )
 </aside>
 
-
 ## Get Game
 
 > Code samples
@@ -897,7 +895,6 @@ result = RestClient.get 'https://api.mod.io/v1/games/{game-id}',
   'api_key' => 'string'
 }, headers: headers
 
-
 p JSON.parse(result)
 ```
 
@@ -932,7 +929,6 @@ System.out.println(response.toString());
 `GET /games/{game-id}`
 
 View a single game on mod.io. Successful request will return a single [Game Object](https://docs.mod.io/#game-object).
-
 
 > Example responses
 
@@ -1007,7 +1003,6 @@ To perform this operation, you must be authenticated by means of one of the foll
 apiKey, oauth2 ( Scopes: read )
 </aside>
 
-
 ## Edit Game
 
 > Code samples
@@ -1028,7 +1023,6 @@ Host: api.mod.io
 Accept: application/json
 Authorization: Bearer YourAccessToken
 Content-Type: application/x-www-form-urlencoded
-
 
 ```
 
@@ -1088,7 +1082,6 @@ result = RestClient.put 'https://api.mod.io/v1/games/{game-id}',
   params: {
   }, headers: headers
 
-
 p JSON.parse(result)
 ```
 
@@ -1140,7 +1133,6 @@ Update details for a game. If you want to update the `icon`, `logo` or `header` 
      name_id|string||The unique SEO friendly URL for your game. Cannot exceed 80 characters.
      summary|string||Summary for your game, giving a brief overview of what it's about - cannot exceed 250 characters.
      instructions|string||Instructions and links creators should follow to upload mods. Keep it short and explain details like are mods submitted in-game or via tools you have created.
-
 
 > Example responses
 
@@ -1215,7 +1207,6 @@ To perform this operation, you must be authenticated by means of one of the foll
 oauth2 ( Scopes: write )
 </aside>
 
-
 # Mods
 
 ## Get All Mods
@@ -1288,7 +1279,6 @@ result = RestClient.get 'https://api.mod.io/v1/games/{game-id}/mods',
   'api_key' => 'string'
 }, headers: headers
 
-
 p JSON.parse(result)
 ```
 
@@ -1346,7 +1336,6 @@ Retrieve all Mods on mod.io for the corresponding game. Successful request will 
      popular|string|Sort results by popularity using [_sort filter](https://docs.mod.io/#filtering), value should be `popular` for descending or `-popular` for ascending results.
      ratings|string|Sort results by weighted rating using [_sort filter](https://docs.mod.io/#filtering), value should be `ratings` for descending or `-ratings` for ascending results.
      subscribers|string|Sort results by most subscribers using [_sort filter](https://docs.mod.io/#filtering), value should be `subscribers` for descending or `-subscribers` for ascending results.
-
 
 > Example responses
 
@@ -1454,7 +1443,6 @@ To perform this operation, you must be authenticated by means of one of the foll
 apiKey, oauth2 ( Scopes: read )
 </aside>
 
-
 ## Get Mod
 
 > Code samples
@@ -1525,7 +1513,6 @@ result = RestClient.get 'https://api.mod.io/v1/games/{game-id}/mods/{mod-id}',
   'api_key' => 'string'
 }, headers: headers
 
-
 p JSON.parse(result)
 ```
 
@@ -1560,7 +1547,6 @@ System.out.println(response.toString());
 `GET /games/{game-id}/mods/{mod-id}`
 
 Retrieve a single mod on mod.io. Successful request will return a single [Mod Object](https://docs.mod.io/#mod-object).
-
 
 > Example responses
 
@@ -1657,7 +1643,6 @@ To perform this operation, you must be authenticated by means of one of the foll
 apiKey, oauth2 ( Scopes: read )
 </aside>
 
-
 ## Add Mod
 
 > Code samples
@@ -1678,7 +1663,6 @@ Host: api.mod.io
 Accept: application/json
 Authorization: Bearer YourAccessToken
 Content-Type: multipart/form-data
-
 
 ```
 
@@ -1738,7 +1722,6 @@ result = RestClient.post 'https://api.mod.io/v1/games/{game-id}/mods',
   params: {
   }, headers: headers
 
-
 p JSON.parse(result)
 ```
 
@@ -1788,7 +1771,6 @@ Publish a mod on mod.io. Successful request will return the newly created [Mod O
      name_id|string||The unique SEO friendly URL for your game. Cannot exceed 80 characters.
      modfile|integer(int32)||Unique id of the [Modfile Object](https://docs.mod.io/#modfile-object) to be labelled as the current release.
      tags|array||An array of strings that represent what the mod has been tagged as, only tags that are supported by the parent game can be applied. To determine what tags are eligible, see the 'Tag Option' column on the connected game.
-
 
 > Example responses
 
@@ -1891,7 +1873,6 @@ To perform this operation, you must be authenticated by means of one of the foll
 oauth2 ( Scopes: write )
 </aside>
 
-
 ## Edit Mod
 
 > Code samples
@@ -1912,7 +1893,6 @@ Host: api.mod.io
 Accept: application/json
 Authorization: Bearer YourAccessToken
 Content-Type: application/x-www-form-urlencoded
-
 
 ```
 
@@ -1972,7 +1952,6 @@ result = RestClient.put 'https://api.mod.io/v1/games/{game-id}/mods/{mod-id}',
   params: {
   }, headers: headers
 
-
 p JSON.parse(result)
 ```
 
@@ -2021,7 +2000,6 @@ Edit details for a mod. If you wanting to update the media attached to this game
      name_id|string||The unique SEO friendly URL for your game. Cannot exceed 80 characters.
      modfile|integer(int32)||Unique id of the [Modfile Object](https://docs.mod.io/#modfile-object) to be labelled as the current release.
      status|string||__Game Administrators Only__. Activate an un-authorized/deleted mod. The Mod must have at least one uploaded build to be activated. Ideal for restoring mods that have been soft-deleted. For mod deletion, use the [Delete Mod](https://docs.mod.io/#delete-mod) endpoint. Using either of the fields supplied below will allow the mod to be returned in requests.<br><br>*Fields Options:*<br>__auth__ = Authorize the mod.<br>__archive__ = Label as out of date/potentially not compatible.
-
 
 > Example responses
 
@@ -2118,7 +2096,6 @@ To perform this operation, you must be authenticated by means of one of the foll
 oauth2 ( Scopes: write )
 </aside>
 
-
 ## Delete Mod
 
 > Code samples
@@ -2139,7 +2116,6 @@ Host: api.mod.io
 Accept: application/json
 Authorization: Bearer YourAccessToken
 Content-Type: application/x-www-form-urlencoded
-
 
 ```
 
@@ -2199,7 +2175,6 @@ result = RestClient.delete 'https://api.mod.io/v1/games/{game-id}/mods/{mod-id}'
   params: {
   }, headers: headers
 
-
 p JSON.parse(result)
 ```
 
@@ -2237,7 +2212,6 @@ System.out.println(response.toString());
 
 Delete a mod profile. Successful request will return `204 No Content` as well as fire a __MOD_VISIBILITY_CHANGE__ event. Note this will close the mod profile which means it cannot be viewed or retrieved via API requests but will still exist in-case you choose to restore it at a later date. If you believe a mod should be permanently removed please [contact us](mailto:support@mod.io).
 
-
 > Example responses
 
 ```json
@@ -2253,7 +2227,6 @@ Status|Meaning|Description|Response Schema
 To perform this operation, you must be authenticated by means of one of the following methods:
 oauth2 ( Scopes: write )
 </aside>
-
 
 # Files
 
@@ -2327,7 +2300,6 @@ result = RestClient.get 'https://api.mod.io/v1/games/{game-id}/mods/{mod-id}/fil
   'api_key' => 'string'
 }, headers: headers
 
-
 p JSON.parse(result)
 ```
 
@@ -2379,7 +2351,6 @@ Browse files on mod.io that are published for the corresponding mod. Successful 
      changelog|string|The changelog for the file.
      download|string|File download URL.
 
-
 > Example responses
 
 ```json
@@ -2422,7 +2393,6 @@ Status|Meaning|Description|Response Schema
 To perform this operation, you must be authenticated by means of one of the following methods:
 apiKey, oauth2 ( Scopes: read )
 </aside>
-
 
 ## Get Modfile
 
@@ -2494,7 +2464,6 @@ result = RestClient.get 'https://api.mod.io/v1/games/{game-id}/mods/{mod-id}/fil
   'api_key' => 'string'
 }, headers: headers
 
-
 p JSON.parse(result)
 ```
 
@@ -2530,7 +2499,6 @@ System.out.println(response.toString());
 
 Retrieve a file on mod.io with the corresponding id. Successful request will return a [single Modfile Object](--parse-docsurl/#modfile_object).
 
-
 > Example responses
 
 ```json
@@ -2563,7 +2531,6 @@ To perform this operation, you must be authenticated by means of one of the foll
 apiKey, oauth2 ( Scopes: read )
 </aside>
 
-
 ## Add Modfile
 
 > Code samples
@@ -2584,7 +2551,6 @@ Host: api.mod.io
 Accept: application/json
 Authorization: Bearer YourAccessToken
 Content-Type: multipart/form-data
-
 
 ```
 
@@ -2644,7 +2610,6 @@ result = RestClient.post 'https://api.mod.io/v1/games/{game-id}/mods/{mod-id}/fi
   params: {
   }, headers: headers
 
-
 p JSON.parse(result)
 ```
 
@@ -2690,7 +2655,6 @@ Upload a file for the corresponding mod, upon success will return the newly crea
      active|boolean||Label this upload as the current release, this will change the *modfile* field on the parent mod to the *id* field of this file after upload.
      filehash|string||MD5 of the submitted file. When supplied, MD5 will be compared against calculated MD5 of _filedata_ binary file and will return `422 Unprocessible Entity` if md5 mis-match is detected.
 
-
 > Example responses
 
 ```json
@@ -2729,7 +2693,6 @@ To perform this operation, you must be authenticated by means of one of the foll
 oauth2 ( Scopes: write )
 </aside>
 
-
 ## Edit Modfile
 
 > Code samples
@@ -2750,7 +2713,6 @@ Host: api.mod.io
 Accept: application/json
 Authorization: Bearer YourAccessToken
 Content-Type: application/x-www-form-urlencoded
-
 
 ```
 
@@ -2810,7 +2772,6 @@ result = RestClient.put 'https://api.mod.io/v1/games/{game-id}/mods/{mod-id}/fil
   params: {
   }, headers: headers
 
-
 p JSON.parse(result)
 ```
 
@@ -2853,7 +2814,6 @@ Update the details for a published file on mod.io. If you are wanting to update 
      changelog|string||The changelog field you are updating. Updates for files are deliberately limited to the *changelog* field and *active* fields only, if you need to edit any other fields you should be uploading a new file and not editing an existing file.
      active|boolean||Label this upload as the current release, this will change the *modfile* field on the parent mod to the *id* field of this file after upload.
 
-
 > Example responses
 
 ```json
@@ -2886,7 +2846,6 @@ To perform this operation, you must be authenticated by means of one of the foll
 oauth2 ( Scopes: write )
 </aside>
 
-
 # Media
 
 ## Add Game Media
@@ -2909,7 +2868,6 @@ Host: api.mod.io
 Accept: application/json
 Authorization: Bearer YourAccessToken
 Content-Type: multipart/form-data
-
 
 ```
 
@@ -2969,7 +2927,6 @@ result = RestClient.post 'https://api.mod.io/v1/games/{game-id}/media',
   params: {
   }, headers: headers
 
-
 p JSON.parse(result)
 ```
 
@@ -3013,7 +2970,6 @@ Upload new media to a game. Any request you make to this endpoint *should* conta
      icon|file||Binary image file which will represent your new game icon. Must be minimum 64x64px dimensions and gif, jpg, jpeg or png format and cannot exceed 1MB in filesize.
      header|file||Binary image file which will represent your new game header. Must be gif, jpg, jpeg or png format and cannot exceed 256KB in filesize.
 
-
 > Example responses
 
 ```json
@@ -3032,7 +2988,6 @@ Status|Meaning|Description|Response Schema
 To perform this operation, you must be authenticated by means of one of the following methods:
 oauth2 ( Scopes: write )
 </aside>
-
 
 ## Add Mod Media
 
@@ -3054,7 +3009,6 @@ Host: api.mod.io
 Accept: application/json
 Authorization: Bearer YourAccessToken
 Content-Type: multipart/form-data
-
 
 ```
 
@@ -3114,7 +3068,6 @@ result = RestClient.post 'https://api.mod.io/v1/games/{game-id}/mods/{mod-id}/me
   params: {
   }, headers: headers
 
-
 p JSON.parse(result)
 ```
 
@@ -3159,7 +3112,6 @@ This endpoint is very flexible and will process any images posted to the endpoin
      youtube|array||Full Youtube link(s) you want to add - example 'https://www.youtube.com/watch?v=IGVZOLV9SPo'
      sketchfab|array||Full Sketchfab link(s) you want to add - example 'https://sketchfab.com/models/71f04e390ff54e5f8d9a51b4e1caab7e'
 
-
 > Example responses
 
 ```json
@@ -3185,7 +3137,6 @@ To perform this operation, you must be authenticated by means of one of the foll
 oauth2 ( Scopes: write )
 </aside>
 
-
 ## Delete Mod Media
 
 > Code samples
@@ -3206,7 +3157,6 @@ Host: api.mod.io
 Accept: application/json
 Authorization: Bearer YourAccessToken
 Content-Type: application/x-www-form-urlencoded
-
 
 ```
 
@@ -3266,7 +3216,6 @@ result = RestClient.delete 'https://api.mod.io/v1/games/{game-id}/mods/{mod-id}/
   params: {
   }, headers: headers
 
-
 p JSON.parse(result)
 ```
 
@@ -3311,7 +3260,6 @@ Delete images, sketchfab or youtube links from a mod profile which if successful
      sketchfab|array||Full Sketchfab link(s) you want to delete - example 'https://sketchfab.com/models/71f04e390ff54e5f8d9a51b4e1caab7e'.
      *     
 
-
 > Example responses
 
 ```json
@@ -3327,7 +3275,6 @@ Status|Meaning|Description|Response Schema
 To perform this operation, you must be authenticated by means of one of the following methods:
 oauth2 ( Scopes: write )
 </aside>
-
 
 # Subscribe
 
@@ -3351,7 +3298,6 @@ Host: api.mod.io
 Accept: application/json
 Authorization: Bearer YourAccessToken
 Content-Type: application/x-www-form-urlencoded
-
 
 ```
 
@@ -3411,7 +3357,6 @@ result = RestClient.post 'https://api.mod.io/v1/games/{game-id}/mods/{mod-id}/su
   params: {
   }, headers: headers
 
-
 p JSON.parse(result)
 ```
 
@@ -3448,7 +3393,6 @@ System.out.println(response.toString());
 `POST /games/{game-id}/mods/{mod-id}/subscribe`
 
 Subscribe the _authenticated user_ to a corresponding mod. No body parameters are required for this action. Successful request will return the [Mod Object](https://docs.mod.io/#mod-object) of the newly subscribed mod.
-
 
 > Example responses
 
@@ -3545,7 +3489,6 @@ To perform this operation, you must be authenticated by means of one of the foll
 oauth2 ( Scopes: write )
 </aside>
 
-
 ## Unsubscribe To Mod
 
 > Code samples
@@ -3566,7 +3509,6 @@ Host: api.mod.io
 Accept: application/json
 Authorization: Bearer YourAccessToken
 Content-Type: application/x-www-form-urlencoded
-
 
 ```
 
@@ -3626,7 +3568,6 @@ result = RestClient.delete 'https://api.mod.io/v1/games/{game-id}/mods/{mod-id}/
   params: {
   }, headers: headers
 
-
 p JSON.parse(result)
 ```
 
@@ -3664,7 +3605,6 @@ System.out.println(response.toString());
 
 __OAuth 2 Required__. Un-Subscribe the _authenticated user_ to the corresponding mod. No body parameters are required for this action.
 
-
 > Example responses
 
 ```json
@@ -3680,7 +3620,6 @@ Status|Meaning|Description|Response Schema
 To perform this operation, you must be authenticated by means of one of the following methods:
 oauth2 ( Scopes: write )
 </aside>
-
 
 # Events
 
@@ -3754,7 +3693,6 @@ result = RestClient.get 'https://api.mod.io/v1/games/{game-id}/activity',
   'api_key' => 'string'
 }, headers: headers
 
-
 p JSON.parse(result)
 ```
 
@@ -3798,7 +3736,6 @@ Retrieve activity log for a game, showing changes made to the resource. Successf
      date_updated|integer(int32)|Unix timestamp of date updated.
      event|string|Type of change that occurred. <br><br>*Field Options*<br>__GAME_UPDATE__ - Update event<br>__GAME_VISIBILITY_CHANGE__ = Game has been set to live, or hidden
 
-
 > Example responses
 
 ```json
@@ -3838,7 +3775,6 @@ Status|Meaning|Description|Response Schema
 To perform this operation, you must be authenticated by means of one of the following methods:
 apiKey, oauth2 ( Scopes: read )
 </aside>
-
 
 ## Get Mod Activity
 
@@ -3910,7 +3846,6 @@ result = RestClient.get 'https://api.mod.io/v1/games/{game-id}/mods/{mod-id}/act
   'api_key' => 'string'
 }, headers: headers
 
-
 p JSON.parse(result)
 ```
 
@@ -3956,7 +3891,6 @@ Retrieve activity log for a mod, showing changes made to the resource. Successfu
      latest|boolean|_Default value is true_. Returns only the latest unique events for each mod.
      subscribed|boolean|__OAuth 2 Required__. Default value is _false_. Returns only the events the _authenticated user_ is subscribed to.
 
-
 > Example responses
 
 ```json
@@ -3996,7 +3930,6 @@ Status|Meaning|Description|Response Schema
 To perform this operation, you must be authenticated by means of one of the following methods:
 apiKey, oauth2 ( Scopes: read )
 </aside>
-
 
 ## Get All Mod Activity
 
@@ -4068,7 +4001,6 @@ result = RestClient.get 'https://api.mod.io/v1/games/{game-id}/mods/activity',
   'api_key' => 'string'
 }, headers: headers
 
-
 p JSON.parse(result)
 ```
 
@@ -4114,7 +4046,6 @@ Retrieve all mod activity for the corresponding game. Successful request will re
      latest|boolean|_Default value is true_. Returns only the latest unique events for each mod.
      subscribed|boolean|__OAuth 2 Required__. Default value is _false_. Returns only the events the _authenticated user_ is subscribed to.
 
-
 > Example responses
 
 ```json
@@ -4155,8 +4086,421 @@ To perform this operation, you must be authenticated by means of one of the foll
 apiKey, oauth2 ( Scopes: read )
 </aside>
 
-
 # Tags
+
+## Get All Game Tag Options
+
+> Code samples
+
+```shell
+# You can also use wget
+curl -X GET https://api.mod.io/v1/games/{game-id}/tags?api_key=YourApiKey \
+  -H 'Accept: application/json'
+
+```
+
+```http
+GET https://api.mod.io/v1/games/{game-id}/tags?api_key=YourApiKey HTTP/1.1
+Host: api.mod.io
+
+Accept: application/json
+
+```
+
+```javascript
+var headers = {
+  'Accept':'application/json'
+
+};
+
+$.ajax({
+  url: 'https://api.mod.io/v1/games/{game-id}/tags',
+  method: 'get',
+  data: '?api_key=YourApiKey',
+  headers: headers,
+  success: function(data) {
+    console.log(JSON.stringify(data));
+  }
+})
+```
+
+```javascript--nodejs
+const request = require('node-fetch');
+
+const headers = {
+  'Accept':'application/json'
+
+};
+
+fetch('https://api.mod.io/v1/games/{game-id}/tags?api_key=YourApiKey',
+{
+  method: 'GET',
+
+  headers: headers
+})
+.then(function(res) {
+    return res.json();
+}).then(function(body) {
+    console.log(body);
+});
+```
+
+```ruby
+require 'rest-client'
+require 'json'
+
+headers = {
+  'Accept' => 'application/json'
+}
+
+result = RestClient.get 'https://api.mod.io/v1/games/{game-id}/tags',
+  params: {
+  'api_key' => 'string'
+}, headers: headers
+
+p JSON.parse(result)
+```
+
+```python
+import requests
+headers = {
+  'Accept': 'application/json'
+}
+
+r = requests.get('https://api.mod.io/v1/games/{game-id}/tags', params={
+  'api_key': 'YourApiKey'
+}, headers = headers)
+
+print r.json()
+```
+
+```java
+URL obj = new URL("https://api.mod.io/v1/games/{game-id}/tags?api_key=YourApiKey");
+HttpURLConnection con = (HttpURLConnection) obj.openConnection();
+con.setRequestMethod("GET");
+int responseCode = con.getResponseCode();
+BufferedReader in = new BufferedReader(
+    new InputStreamReader(con.getInputStream()));
+String inputLine;
+StringBuffer response = new StringBuffer();
+while ((inputLine = in.readLine()) != null) {
+    response.append(inputLine);
+}
+in.close();
+System.out.println(response.toString());
+```
+`GET /games/{game-id}/tags`
+
+Get all tags options for the corresponding game that can be applied to any of it's mods, successful response will return an array of [Game Tag Option Objects](https://docs.mod.io/#game-tag-option-object).
+
+> Example responses
+
+```json
+{
+  "data": [
+    {
+      "name": "Engines",
+      "type": "checkboxes",
+      "tags": [
+        "Unity"
+      ],
+      "admin_only": 0
+    },
+    {
+        ...
+    }
+  ],
+  "cursor_id": 60,
+  "prev_id": 30,
+  "next_id": 160,
+  "result_count": 100
+}
+```
+<h3 id="Get-All-Game-Tag-Options-responses">Responses</h3>
+
+Status|Meaning|Description|Response Schema
+---|---|---|---|
+200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)|Successful Request|[Get All Game Tag](#schemaget_all_game_tag_options)
+
+<aside class="warning">
+To perform this operation, you must be authenticated by means of one of the following methods:
+apiKey, oauth2 ( Scopes: read )
+</aside>
+
+## Add Game Tag Option
+
+> Code samples
+
+```shell
+# You can also use wget
+curl -X POST https://api.mod.io/v1/games/{game-id}/tags \
+  -H 'Authorization: Bearer YourAccessToken' \
+  -H 'Content-Type: application/x-www-form-urlencoded' \
+  -H 'Accept: application/json'
+
+```
+
+```http
+POST https://api.mod.io/v1/games/{game-id}/tags HTTP/1.1
+Host: api.mod.io
+
+Accept: application/json
+Authorization: Bearer YourAccessToken
+Content-Type: application/x-www-form-urlencoded
+
+```
+
+```javascript
+var headers = {
+  'Authorization':'Bearer YourAccessToken',
+  'Content-Type':'application/x-www-form-urlencoded',
+  'Accept':'application/json'
+
+};
+
+$.ajax({
+  url: 'https://api.mod.io/v1/games/{game-id}/tags',
+  method: 'post',
+
+  headers: headers,
+  success: function(data) {
+    console.log(JSON.stringify(data));
+  }
+})
+```
+
+```javascript--nodejs
+const request = require('node-fetch');
+
+const headers = {
+  'Authorization':'Bearer YourAccessToken',
+  'Content-Type':'application/x-www-form-urlencoded',
+  'Accept':'application/json'
+
+};
+
+fetch('https://api.mod.io/v1/games/{game-id}/tags',
+{
+  method: 'POST',
+
+  headers: headers
+})
+.then(function(res) {
+    return res.json();
+}).then(function(body) {
+    console.log(body);
+});
+```
+
+```ruby
+require 'rest-client'
+require 'json'
+
+headers = {
+  'Authorization' => 'Bearer YourAccessToken',
+  'Content-Type' => 'application/x-www-form-urlencoded',
+  'Accept' => 'application/json'
+}
+
+result = RestClient.post 'https://api.mod.io/v1/games/{game-id}/tags',
+  params: {
+  }, headers: headers
+
+p JSON.parse(result)
+```
+
+```python
+import requests
+headers = {
+  'Authorization': 'Bearer YourAccessToken',
+  'Content-Type': 'application/x-www-form-urlencoded',
+  'Accept': 'application/json'
+}
+
+r = requests.post('https://api.mod.io/v1/games/{game-id}/tags', params={
+
+}, headers = headers)
+
+print r.json()
+```
+
+```java
+URL obj = new URL("https://api.mod.io/v1/games/{game-id}/tags");
+HttpURLConnection con = (HttpURLConnection) obj.openConnection();
+con.setRequestMethod("POST");
+int responseCode = con.getResponseCode();
+BufferedReader in = new BufferedReader(
+    new InputStreamReader(con.getInputStream()));
+String inputLine;
+StringBuffer response = new StringBuffer();
+while ((inputLine = in.readLine()) != null) {
+    response.append(inputLine);
+}
+in.close();
+System.out.println(response.toString());
+```
+`POST /games/{game-id}/tags`
+
+Add a category and the optional tags in which mods can apply to their profiles. For example, you may want to add a difficulty category with the tags 'Easy', 'Medium' or 'Hard' as options to select from. If you were to apply the previous example your request would supply an array titled 'Difficulty' with 3 values. A Reminder that this endpoint does not need to be supplied with a specified parameter name, whichever name you supply as the parameter will be labelled as the category.<br><br>The * denotes that the parameter name is determined by the user.
+     
+     Parameter|Type|Required|Description
+     ---|---|---|---|
+     categoryname*|array|true|Array of strings where the name of your parameter containing the array _will be the name of the category_ and the strings inside the array representing the tag options.
+
+> Example responses
+
+```json
+{
+  "code": "201",
+  "message": "You have successfully added categories/tags to the specified game."
+}
+```
+<h3 id="Add-Game-Tag-Option-responses">Responses</h3>
+
+Status|Meaning|Description|Response Schema
+---|---|---|---|
+201|[Created](https://tools.ietf.org/html/rfc7231#section-6.3.2)|Created|[Message Object](#message-object)
+
+<aside class="warning">
+To perform this operation, you must be authenticated by means of one of the following methods:
+oauth2 ( Scopes: write )
+</aside>
+
+## Delete Game Tag Option
+
+> Code samples
+
+```shell
+# You can also use wget
+curl -X DELETE https://api.mod.io/v1/games/{game-id}/tags \
+  -H 'Authorization: Bearer YourAccessToken' \
+  -H 'Content-Type: application/x-www-form-urlencoded' \
+  -H 'Accept: application/json'
+
+```
+
+```http
+DELETE https://api.mod.io/v1/games/{game-id}/tags HTTP/1.1
+Host: api.mod.io
+
+Accept: application/json
+Authorization: Bearer YourAccessToken
+Content-Type: application/x-www-form-urlencoded
+
+```
+
+```javascript
+var headers = {
+  'Authorization':'Bearer YourAccessToken',
+  'Content-Type':'application/x-www-form-urlencoded',
+  'Accept':'application/json'
+
+};
+
+$.ajax({
+  url: 'https://api.mod.io/v1/games/{game-id}/tags',
+  method: 'delete',
+
+  headers: headers,
+  success: function(data) {
+    console.log(JSON.stringify(data));
+  }
+})
+```
+
+```javascript--nodejs
+const request = require('node-fetch');
+
+const headers = {
+  'Authorization':'Bearer YourAccessToken',
+  'Content-Type':'application/x-www-form-urlencoded',
+  'Accept':'application/json'
+
+};
+
+fetch('https://api.mod.io/v1/games/{game-id}/tags',
+{
+  method: 'DELETE',
+
+  headers: headers
+})
+.then(function(res) {
+    return res.json();
+}).then(function(body) {
+    console.log(body);
+});
+```
+
+```ruby
+require 'rest-client'
+require 'json'
+
+headers = {
+  'Authorization' => 'Bearer YourAccessToken',
+  'Content-Type' => 'application/x-www-form-urlencoded',
+  'Accept' => 'application/json'
+}
+
+result = RestClient.delete 'https://api.mod.io/v1/games/{game-id}/tags',
+  params: {
+  }, headers: headers
+
+p JSON.parse(result)
+```
+
+```python
+import requests
+headers = {
+  'Authorization': 'Bearer YourAccessToken',
+  'Content-Type': 'application/x-www-form-urlencoded',
+  'Accept': 'application/json'
+}
+
+r = requests.delete('https://api.mod.io/v1/games/{game-id}/tags', params={
+
+}, headers = headers)
+
+print r.json()
+```
+
+```java
+URL obj = new URL("https://api.mod.io/v1/games/{game-id}/tags");
+HttpURLConnection con = (HttpURLConnection) obj.openConnection();
+con.setRequestMethod("DELETE");
+int responseCode = con.getResponseCode();
+BufferedReader in = new BufferedReader(
+    new InputStreamReader(con.getInputStream()));
+String inputLine;
+StringBuffer response = new StringBuffer();
+while ((inputLine = in.readLine()) != null) {
+    response.append(inputLine);
+}
+in.close();
+System.out.println(response.toString());
+```
+`DELETE /games/{game-id}/tags`
+
+Delete a game tag option category or tag options from within a category. For example, assume you have a category titled 'Difficulty' but you want to remove the tag option 'Hard' from it, your request would contain a parameter called 'Difficulty' which is an array that contained _only_ the value 'Hard'. If you want to delete an entire category, you only need to supply an empty array where the name of the parameter is the name of the category in which you want to remove.<br><br>The * denotes that the parameter name is determined by the user.
+     
+     Parameter|Type|Required|Description
+     ---|---|---|---|
+     categoryname*|array|true|Array of strings where the name of your parameter containing the array _will be the name of the category_ and the strings inside the array representing the tag options you want to remove.
+
+> Example responses
+
+```json
+ 204 No Content 
+```
+<h3 id="Delete-Game-Tag-Option-responses">Responses</h3>
+
+Status|Meaning|Description|Response Schema
+---|---|---|---|
+204|[No Content](https://tools.ietf.org/html/rfc7231#section-6.3.5)|No Content|None
+
+<aside class="warning">
+To perform this operation, you must be authenticated by means of one of the following methods:
+oauth2 ( Scopes: write )
+</aside>
 
 ## Get All Mod Tags
 
@@ -4228,7 +4572,6 @@ result = RestClient.get 'https://api.mod.io/v1/games/{game-id}/mods/{mod-id}/tag
   'api_key' => 'string'
 }, headers: headers
 
-
 p JSON.parse(result)
 ```
 
@@ -4269,7 +4612,6 @@ Get all tags for the corresponding mod, successful response will return an array
      date_added|integer(int32)|Unix timestamp of date added.
      tag|string|String representation of the tag. You can check the eligible tags on the parent game object to determine all possible values for this field.
 
-
 > Example responses
 
 ```json
@@ -4300,7 +4642,6 @@ To perform this operation, you must be authenticated by means of one of the foll
 apiKey, oauth2 ( Scopes: read )
 </aside>
 
-
 ## Add Mod Tag
 
 > Code samples
@@ -4321,7 +4662,6 @@ Host: api.mod.io
 Accept: application/json
 Authorization: Bearer YourAccessToken
 Content-Type: application/x-www-form-urlencoded
-
 
 ```
 
@@ -4381,7 +4721,6 @@ result = RestClient.post 'https://api.mod.io/v1/games/{game-id}/mods/{mod-id}/ta
   params: {
   }, headers: headers
 
-
 p JSON.parse(result)
 ```
 
@@ -4425,7 +4764,6 @@ Add tags to a mod's profile. Note that you can only add what tags are allowed by
      ---|---|---|---|
      tags|array|true|The tags array containing at least one string representing a tag.
 
-
 > Example responses
 
 ```json
@@ -4444,7 +4782,6 @@ Status|Meaning|Description|Response Schema
 To perform this operation, you must be authenticated by means of one of the following methods:
 oauth2 ( Scopes: write )
 </aside>
-
 
 ## Delete Mod Tag
 
@@ -4466,7 +4803,6 @@ Host: api.mod.io
 Accept: application/json
 Authorization: Bearer YourAccessToken
 Content-Type: application/x-www-form-urlencoded
-
 
 ```
 
@@ -4526,7 +4862,6 @@ result = RestClient.delete 'https://api.mod.io/v1/games/{game-id}/mods/{mod-id}/
   params: {
   }, headers: headers
 
-
 p JSON.parse(result)
 ```
 
@@ -4568,7 +4903,6 @@ Delete one or more tags for a mod profile. Deleting tags is identical to adding 
      ---|---|---|---|
      tags|array|true|The tags array containing at least one string representing a tag.
 
-
 > Example responses
 
 ```json
@@ -4584,7 +4918,6 @@ Status|Meaning|Description|Response Schema
 To perform this operation, you must be authenticated by means of one of the following methods:
 oauth2 ( Scopes: write )
 </aside>
-
 
 # Ratings
 
@@ -4608,7 +4941,6 @@ Host: api.mod.io
 Accept: application/json
 Authorization: Bearer YourAccessToken
 Content-Type: application/x-www-form-urlencoded
-
 
 ```
 
@@ -4668,7 +5000,6 @@ result = RestClient.post 'https://api.mod.io/v1/games/{game-id}/mods/{mod-id}/ra
   params: {
   }, headers: headers
 
-
 p JSON.parse(result)
 ```
 
@@ -4710,7 +5041,6 @@ Submit a positive or negative rating for a mod, equivalent of thumps up and thum
      ---|---|---|---|
      rating|integer(int32)|true|The value that determines what rating you submit for this mod.<br><br>*Field Options*<br>__1__ - Positive rating<br>__-1__ - Negative rating
 
-
 > Example responses
 
 ```json
@@ -4729,7 +5059,6 @@ Status|Meaning|Description|Response Schema
 To perform this operation, you must be authenticated by means of one of the following methods:
 oauth2 ( Scopes: write )
 </aside>
-
 
 # Metadata
 
@@ -4803,7 +5132,6 @@ result = RestClient.get 'https://api.mod.io/v1/games/{game-id}/mods/{mod-id}/met
   'api_key' => 'string'
 }, headers: headers
 
-
 p JSON.parse(result)
 ```
 
@@ -4839,7 +5167,6 @@ System.out.println(response.toString());
 
 Get all key-value metadata pairs for the corresponding mod, successful response will return an array of objects contains only the key-value pairs. Only mod administrators are able to add/delete these values.
 
-
 > Example responses
 
 ```json
@@ -4870,7 +5197,6 @@ To perform this operation, you must be authenticated by means of one of the foll
 apiKey, oauth2 ( Scopes: read )
 </aside>
 
-
 ## Add Mod KVP Metadata
 
 > Code samples
@@ -4891,7 +5217,6 @@ Host: api.mod.io
 Accept: application/json
 Authorization: Bearer YourAccessToken
 Content-Type: application/x-www-form-urlencoded
-
 
 ```
 
@@ -4951,7 +5276,6 @@ result = RestClient.post 'https://api.mod.io/v1/games/{game-id}/mods/{mod-id}/me
   params: {
   }, headers: headers
 
-
 p JSON.parse(result)
 ```
 
@@ -4993,7 +5317,6 @@ Add searchable key-value metadata for the corresponding mod. Metadata may includ
      ---|---|---|---|
      metadata|array|true|Array containing one or more key value pairs where the the key & value are separated by a colon ':'. A single key can map to multiple values (1-to-many relationship), key-value pairs are searchable by exact matches only and neither the key or value can exceed 255 characters in length.
 
-
 > Example responses
 
 ```json
@@ -5012,7 +5335,6 @@ Status|Meaning|Description|Response Schema
 To perform this operation, you must be authenticated by means of one of the following methods:
 oauth2 ( Scopes: write )
 </aside>
-
 
 ## Delete Mod KVP Metadata
 
@@ -5034,7 +5356,6 @@ Host: api.mod.io
 Accept: application/json
 Authorization: Bearer YourAccessToken
 Content-Type: application/x-www-form-urlencoded
-
 
 ```
 
@@ -5094,7 +5415,6 @@ result = RestClient.delete 'https://api.mod.io/v1/games/{game-id}/mods/{mod-id}/
   params: {
   }, headers: headers
 
-
 p JSON.parse(result)
 ```
 
@@ -5136,7 +5456,6 @@ Delete key-value pair metadata from the corresponding mod. <br><br>__Note:__ Due
      ---|---|---|---|
      metadata|array|true|Array containing one or more key value pairs where the the key & value are separated by a colon ':'. A single key can map to multiple values (1-to-many relationship), key-value pairs are searchable by exact matches only and neither the key or value can exceed 255 characters in length.
 
-
 > Example responses
 
 ```json
@@ -5152,7 +5471,6 @@ Status|Meaning|Description|Response Schema
 To perform this operation, you must be authenticated by means of one of the following methods:
 oauth2 ( Scopes: write )
 </aside>
-
 
 # Dependencies
 
@@ -5226,7 +5544,6 @@ result = RestClient.get 'https://api.mod.io/v1/games/{game-id}/mods/{mod-id}/dep
   'api_key' => 'string'
 }, headers: headers
 
-
 p JSON.parse(result)
 ```
 
@@ -5262,7 +5579,6 @@ System.out.println(response.toString());
 
 Get all listed dependencies for the corresponding mod, successful response will return an array of [Mod Dependencies Objects](--parse-docsurl/#mod-dependencies-object).
 
-
 > Example responses
 
 ```json
@@ -5293,7 +5609,6 @@ To perform this operation, you must be authenticated by means of one of the foll
 apiKey, oauth2 ( Scopes: read )
 </aside>
 
-
 ## Add Mod Dependencies
 
 > Code samples
@@ -5314,7 +5629,6 @@ Host: api.mod.io
 Accept: application/json
 Authorization: Bearer YourAccessToken
 Content-Type: application/x-www-form-urlencoded
-
 
 ```
 
@@ -5374,7 +5688,6 @@ result = RestClient.post 'https://api.mod.io/v1/games/{game-id}/mods/{mod-id}/de
   params: {
   }, headers: headers
 
-
 p JSON.parse(result)
 ```
 
@@ -5416,7 +5729,6 @@ Add dependencies that are required for the corresponding mod. Dependencies shoul
      ---|---|---|---|
      dependencies|array|true|Array containing one or more mod id's that will represent the mods this mod is dependent on. Max of 5 dependencies per request.
 
-
 > Example responses
 
 ```json
@@ -5435,7 +5747,6 @@ Status|Meaning|Description|Response Schema
 To perform this operation, you must be authenticated by means of one of the following methods:
 oauth2 ( Scopes: write )
 </aside>
-
 
 ## Delete Mod Dependencies
 
@@ -5457,7 +5768,6 @@ Host: api.mod.io
 Accept: application/json
 Authorization: Bearer YourAccessToken
 Content-Type: application/x-www-form-urlencoded
-
 
 ```
 
@@ -5517,7 +5827,6 @@ result = RestClient.delete 'https://api.mod.io/v1/games/{game-id}/mods/{mod-id}/
   params: {
   }, headers: headers
 
-
 p JSON.parse(result)
 ```
 
@@ -5559,7 +5868,6 @@ Delete dependencies currently listed as required for the corresponding mod. Depe
      ---|---|---|---|
      dependencies|array|true|Array containing one or more mod id's that will represent the unique id's of the mods to delete as dependencies. Max of 5 dependencies per request.
 
-
 > Example responses
 
 ```json
@@ -5575,7 +5883,6 @@ Status|Meaning|Description|Response Schema
 To perform this operation, you must be authenticated by means of one of the following methods:
 oauth2 ( Scopes: write )
 </aside>
-
 
 # Teams
 
@@ -5649,7 +5956,6 @@ result = RestClient.get 'https://api.mod.io/v1/games/{game-id}/team',
   'api_key' => 'string'
 }, headers: headers
 
-
 p JSON.parse(result)
 ```
 
@@ -5693,7 +5999,6 @@ Retrieve all members that are part of a game team. Successful request will retur
      level|integer|The level of permission the user has.<br><br>*Fields Options:*<br>__1__ = Moderator (can moderate content submitted)<br>__4__ = Financials (read only access to the control panel to view financial reports)<br>__8__ = Administrator (full access, including editing the profile and team)
      date_added|integer|Unix timestamp of the date the user was added to the team.
      position|string|Custom title given to the user.
-
 
 > Example responses
 
@@ -5739,7 +6044,6 @@ Status|Meaning|Description|Response Schema
 To perform this operation, you must be authenticated by means of one of the following methods:
 apiKey, oauth2 ( Scopes: read )
 </aside>
-
 
 ## Get All Mod Team Members
 
@@ -5811,7 +6115,6 @@ result = RestClient.get 'https://api.mod.io/v1/games/{game-id}/mods/{mod-id}/tea
   'api_key' => 'string'
 }, headers: headers
 
-
 p JSON.parse(result)
 ```
 
@@ -5854,7 +6157,6 @@ Retrieve all members that are part of a mod team. Successful request will return
      level|integer|The level of permission the user has.<br><br>*Fields Options:*<br>__1__ = Moderator (can moderate content submitted)<br>__4__ = Financials (read only access to the control panel to view financial reports)<br>__8__ = Administrator (full access, including editing the profile and team)
      date_added|integer|Unix timestamp of the date the user was added to the team.
      position|string|Custom title given to the user.
-
 
 > Example responses
 
@@ -5901,7 +6203,6 @@ To perform this operation, you must be authenticated by means of one of the foll
 apiKey, oauth2 ( Scopes: read )
 </aside>
 
-
 ## Add Game Team Member
 
 > Code samples
@@ -5922,7 +6223,6 @@ Host: api.mod.io
 Accept: application/json
 Authorization: Bearer YourAccessToken
 Content-Type: application/x-www-form-urlencoded
-
 
 ```
 
@@ -5982,7 +6282,6 @@ result = RestClient.post 'https://api.mod.io/v1/games/{game-id}/team',
   params: {
   }, headers: headers
 
-
 p JSON.parse(result)
 ```
 
@@ -6026,7 +6325,6 @@ Add a user to a game team.
      level|integer|true|The level of permissions you want to give to the user.<br><br>*Fields Options:*<br>__1__ = Moderator (can moderate content submitted)<br>__4__ = Financials (read only access to the control panel to view financial reports)<br>__8__ = Administrator (full access, including editing the profile and team)
      position|string|true|The title you wish to apply to the member within your team.
 
-
 > Example responses
 
 ```json
@@ -6045,7 +6343,6 @@ Status|Meaning|Description|Response Schema
 To perform this operation, you must be authenticated by means of one of the following methods:
 oauth2 ( Scopes: write )
 </aside>
-
 
 ## Add Mod Team Member
 
@@ -6067,7 +6364,6 @@ Host: api.mod.io
 Accept: application/json
 Authorization: Bearer YourAccessToken
 Content-Type: application/x-www-form-urlencoded
-
 
 ```
 
@@ -6127,7 +6423,6 @@ result = RestClient.post 'https://api.mod.io/v1/games/{game-id}/mods/{mod-id}/te
   params: {
   }, headers: headers
 
-
 p JSON.parse(result)
 ```
 
@@ -6171,7 +6466,6 @@ Add a user to a mod team.
      level|integer|true|The level of permissions you want to give to the user.<br><br>*Fields Options:*<br>__1__ = Moderator (can moderate comments and content attached)<br>__4__ = Creator (can upload builds and edit all settings except supply and existing team members)<br>__8__ = Administrator (full access, including editing the supply and team)
      position|string|true|The title you wish to apply to the member within your team.
 
-
 > Example responses
 
 ```json
@@ -6190,7 +6484,6 @@ Status|Meaning|Description|Response Schema
 To perform this operation, you must be authenticated by means of one of the following methods:
 oauth2 ( Scopes: write )
 </aside>
-
 
 ## Update Game Team Member
 
@@ -6212,7 +6505,6 @@ Host: api.mod.io
 Accept: application/json
 Authorization: Bearer YourAccessToken
 Content-Type: application/x-www-form-urlencoded
-
 
 ```
 
@@ -6272,7 +6564,6 @@ result = RestClient.put 'https://api.mod.io/v1/games/{game-id}/team/{access-id}'
   params: {
   }, headers: headers
 
-
 p JSON.parse(result)
 ```
 
@@ -6315,7 +6606,6 @@ Update the details of a user who is currently a part of the specified game team.
      level|integer||The level of permissions you want to give to the user.<br><br>*Fields Options:*<br>__1__ = Moderator (can moderate content submitted)<br>__4__ = Financials (read only access to the control panel to view financial reports)<br>__8__ = Administrator (full access, including editing the profile and team)
      position|string||The title you wish to apply to the member within your team.
 
-
 > Example responses
 
 ```json
@@ -6334,7 +6624,6 @@ Status|Meaning|Description|Response Schema
 To perform this operation, you must be authenticated by means of one of the following methods:
 oauth2 ( Scopes: write )
 </aside>
-
 
 ## Update Mod Team Member
 
@@ -6356,7 +6645,6 @@ Host: api.mod.io
 Accept: application/json
 Authorization: Bearer YourAccessToken
 Content-Type: application/x-www-form-urlencoded
-
 
 ```
 
@@ -6416,7 +6704,6 @@ result = RestClient.put 'https://api.mod.io/v1/games/{game-id}/mods/{mod-id}/tea
   params: {
   }, headers: headers
 
-
 p JSON.parse(result)
 ```
 
@@ -6459,7 +6746,6 @@ Update the details of a member who is currently a part of the specified mod team
      level|integer||The level of permissions you want to give to the user.<br><br>*Fields Options:*<br>__1__ = Moderator (can moderate comments and content attached)<br>__4__ = Creator (can upload builds and edit all settings except supply and existing team members)<br>__8__ = Administrator (full access, including editing the supply and team)
      position|string||The title you wish to apply to the member within your team.
 
-
 > Example responses
 
 ```json
@@ -6478,7 +6764,6 @@ Status|Meaning|Description|Response Schema
 To perform this operation, you must be authenticated by means of one of the following methods:
 oauth2 ( Scopes: write )
 </aside>
-
 
 ## Delete Game Team Member
 
@@ -6500,7 +6785,6 @@ Host: api.mod.io
 Accept: application/json
 Authorization: Bearer YourAccessToken
 Content-Type: application/x-www-form-urlencoded
-
 
 ```
 
@@ -6560,7 +6844,6 @@ result = RestClient.delete 'https://api.mod.io/v1/games/{game-id}/team/{access-i
   params: {
   }, headers: headers
 
-
 p JSON.parse(result)
 ```
 
@@ -6598,7 +6881,6 @@ System.out.println(response.toString());
 
 Remove a member from a game team. This will revoke their access rights if they are not the original creator of the resource.
 
-
 > Example responses
 
 ```json
@@ -6614,7 +6896,6 @@ Status|Meaning|Description|Response Schema
 To perform this operation, you must be authenticated by means of one of the following methods:
 oauth2 ( Scopes: write )
 </aside>
-
 
 ## Delete Mod Team Member
 
@@ -6636,7 +6917,6 @@ Host: api.mod.io
 Accept: application/json
 Authorization: Bearer YourAccessToken
 Content-Type: application/x-www-form-urlencoded
-
 
 ```
 
@@ -6696,7 +6976,6 @@ result = RestClient.delete 'https://api.mod.io/v1/games/{game-id}/mods/{mod-id}/
   params: {
   }, headers: headers
 
-
 p JSON.parse(result)
 ```
 
@@ -6734,7 +7013,6 @@ System.out.println(response.toString());
 
 Remove a member from a mod team. This will revoke their access rights if they are not the original creator of the resource.
 
-
 > Example responses
 
 ```json
@@ -6750,7 +7028,6 @@ Status|Meaning|Description|Response Schema
 To perform this operation, you must be authenticated by means of one of the following methods:
 oauth2 ( Scopes: write )
 </aside>
-
 
 # Comments
 
@@ -6824,7 +7101,6 @@ result = RestClient.get 'https://api.mod.io/v1/games/{game-id}/mods/{mod-id}/com
   'api_key' => 'string'
 }, headers: headers
 
-
 p JSON.parse(result)
 ```
 
@@ -6870,8 +7146,7 @@ Retrieve all comments for the corresponding mod. Successful request will return 
      reply_position|string|Levels of nesting in comment chain.
      karma|integer|Karma received from comment.
      karma_guest|integer|The amount of karma received by guests.
-     content|string|The contents of the comment.
-
+     summary|string|The contents of the comment.
 
 > Example responses
 
@@ -6921,7 +7196,6 @@ Status|Meaning|Description|Response Schema
 To perform this operation, you must be authenticated by means of one of the following methods:
 apiKey, oauth2 ( Scopes: read )
 </aside>
-
 
 ## Get Mod Comment
 
@@ -6993,7 +7267,6 @@ result = RestClient.get 'https://api.mod.io/v1/games/{game-id}/mods/{mod-id}/com
   'api_key' => 'string'
 }, headers: headers
 
-
 p JSON.parse(result)
 ```
 
@@ -7028,7 +7301,6 @@ System.out.println(response.toString());
 `GET /games/{game-id}/mods/{mod-id}/comments/{comment-id}`
 
 Retrieve a comment by it's unique ID. Successful request will return a single [Comment Object](https://docs.mod.io/#comment-object).
-
 
 > Example responses
 
@@ -7068,7 +7340,6 @@ To perform this operation, you must be authenticated by means of one of the foll
 apiKey, oauth2 ( Scopes: read )
 </aside>
 
-
 ## Delete Mod Comment
 
 > Code samples
@@ -7089,7 +7360,6 @@ Host: api.mod.io
 Accept: application/json
 Authorization: Bearer YourAccessToken
 Content-Type: application/x-www-form-urlencoded
-
 
 ```
 
@@ -7149,7 +7419,6 @@ result = RestClient.delete 'https://api.mod.io/v1/games/{game-id}/mods/{mod-id}/
   params: {
   }, headers: headers
 
-
 p JSON.parse(result)
 ```
 
@@ -7187,7 +7456,6 @@ System.out.println(response.toString());
 
 Delete a comment from a mod profile.
 
-
 > Example responses
 
 ```json
@@ -7203,7 +7471,6 @@ Status|Meaning|Description|Response Schema
 To perform this operation, you must be authenticated by means of one of the following methods:
 oauth2 ( Scopes: write )
 </aside>
-
 
 # Users
 
@@ -7227,7 +7494,6 @@ Host: api.mod.io
 Accept: application/json
 Authorization: Bearer YourAccessToken
 Content-Type: application/x-www-form-urlencoded
-
 
 ```
 
@@ -7287,7 +7553,6 @@ result = RestClient.post 'https://api.mod.io/v1/general/ownership',
   params: {
   }, headers: headers
 
-
 p JSON.parse(result)
 ```
 
@@ -7330,7 +7595,6 @@ Returns the [User Object](https://docs.mod.io/#user-object) of the user that is 
      resource_type|string|true|The name of the resource type you are checking against a user - __must__ be one of the following values.<br><br>*Field options*<br>__games__<br>__mods__<br>__files__<br>__tags__
      resource_id|integer(int32)|true|Unique Id of the resource to check access rights for.
 
-
 > Example responses
 
 ```json
@@ -7358,7 +7622,6 @@ Status|Meaning|Description|Response Schema
 To perform this operation, you must be authenticated by means of one of the following methods:
 apiKey, oauth2 ( Scopes: read )
 </aside>
-
 
 ## Get All Users
 
@@ -7430,7 +7693,6 @@ result = RestClient.get 'https://api.mod.io/v1/users',
   'api_key' => 'string'
 }, headers: headers
 
-
 p JSON.parse(result)
 ```
 
@@ -7475,7 +7737,6 @@ Retrieve all users registered to mod.io. Successful request will return an Succe
      timezone|string|Timezone of the user, format is country/city.
      language|string|2-character representation of language.
 
-
 > Example responses
 
 ```json
@@ -7514,7 +7775,6 @@ Status|Meaning|Description|Response Schema
 To perform this operation, you must be authenticated by means of one of the following methods:
 apiKey, oauth2 ( Scopes: read )
 </aside>
-
 
 ## Get User
 
@@ -7586,7 +7846,6 @@ result = RestClient.get 'https://api.mod.io/v1/users/{user-id}',
   'api_key' => 'string'
 }, headers: headers
 
-
 p JSON.parse(result)
 ```
 
@@ -7622,7 +7881,6 @@ System.out.println(response.toString());
 
 Find a user by their unique member id. Successful request will return a single [User Object](https://docs.mod.io/#user-object).
 
-
 > Example responses
 
 ```json
@@ -7651,7 +7909,6 @@ To perform this operation, you must be authenticated by means of one of the foll
 apiKey, oauth2 ( Scopes: read )
 </aside>
 
-
 # Reports
 
 ## Submit Report
@@ -7674,7 +7931,6 @@ Host: api.mod.io
 Accept: application/json
 Authorization: Bearer YourAccessToken
 Content-Type: application/x-www-form-urlencoded
-
 
 ```
 
@@ -7734,7 +7990,6 @@ result = RestClient.post 'https://api.mod.io/v1/report',
   params: {
   }, headers: headers
 
-
 p JSON.parse(result)
 ```
 
@@ -7780,7 +8035,6 @@ Submit a report for any resource on mod.io.
      name|string|true|Descriptive and informative title for your report.
      summary|string|true|Detailed description of your report, be as specific as possible on the reason you are submitting the report.
 
-
 > Example responses
 
 ```json
@@ -7799,7 +8053,6 @@ Status|Meaning|Description|Response Schema
 To perform this operation, you must be authenticated by means of one of the following methods:
 oauth2 ( Scopes: write )
 </aside>
-
 
 # Me
 
@@ -7821,7 +8074,6 @@ Host: api.mod.io
 
 Accept: application/json
 Authorization: Bearer YourAccessToken
-
 
 ```
 
@@ -7878,7 +8130,6 @@ result = RestClient.get 'https://api.mod.io/v1/me',
   params: {
   }, headers: headers
 
-
 p JSON.parse(result)
 ```
 
@@ -7915,7 +8166,6 @@ System.out.println(response.toString());
 
 Retrieve the *authenticated user*. Successful request will return a [User Object](https://docs.mod.io/#user-object).
 
-
 > Example responses
 
 ```json
@@ -7944,7 +8194,6 @@ To perform this operation, you must be authenticated by means of one of the foll
 oauth2 ( Scopes: read )
 </aside>
 
-
 ## Get User Subscriptions
 
 > Code samples
@@ -7963,7 +8212,6 @@ Host: api.mod.io
 
 Accept: application/json
 Authorization: Bearer YourAccessToken
-
 
 ```
 
@@ -8019,7 +8267,6 @@ headers = {
 result = RestClient.get 'https://api.mod.io/v1/me/subscribed',
   params: {
   }, headers: headers
-
 
 p JSON.parse(result)
 ```
@@ -8079,7 +8326,6 @@ Get all mod's the *authenticated user* is subscribed to. Successful request will
      popular|string|Sort results by popularity using [_sort filter](https://docs.mod.io/#filtering), value should be `popular` for descending or `-popular` for ascending results.
      ratings|string|Sort results by weighted rating using [_sort filter](https://docs.mod.io/#filtering), value should be `ratings` for descending or `-ratings` for ascending results.
      subscribers|string|Sort results by most subscribers using [_sort filter](https://docs.mod.io/#filtering), value should be `subscribers` for descending or `-subscribers` for ascending results.
-
 
 > Example responses
 
@@ -8187,7 +8433,6 @@ To perform this operation, you must be authenticated by means of one of the foll
 oauth2 ( Scopes: read )
 </aside>
 
-
 ## Get User Games
 
 > Code samples
@@ -8206,7 +8451,6 @@ Host: api.mod.io
 
 Accept: application/json
 Authorization: Bearer YourAccessToken
-
 
 ```
 
@@ -8263,7 +8507,6 @@ result = RestClient.get 'https://api.mod.io/v1/me/games',
   params: {
   }, headers: headers
 
-
 p JSON.parse(result)
 ```
 
@@ -8299,7 +8542,6 @@ System.out.println(response.toString());
 `GET /me/games`
 
 Get all games the *authenticated user* published or is a team member of. Successful request will return an array of [Game Objects](https://docs.mod.io/#get-games-2).
-
 
 > Example responses
 
@@ -8385,7 +8627,6 @@ To perform this operation, you must be authenticated by means of one of the foll
 oauth2 ( Scopes: read )
 </aside>
 
-
 ## Get User Mods
 
 > Code samples
@@ -8404,7 +8645,6 @@ Host: api.mod.io
 
 Accept: application/json
 Authorization: Bearer YourAccessToken
-
 
 ```
 
@@ -8461,7 +8701,6 @@ result = RestClient.get 'https://api.mod.io/v1/me/mods',
   params: {
   }, headers: headers
 
-
 p JSON.parse(result)
 ```
 
@@ -8497,7 +8736,6 @@ System.out.println(response.toString());
 `GET /me/mods`
 
 Get all mods the *authenticated user* published or is a team member of. Successful request will return an array of [Mod Objects](https://docs.mod.io/#get-all-mods-2).
-
 
 > Example responses
 
@@ -8605,7 +8843,6 @@ To perform this operation, you must be authenticated by means of one of the foll
 oauth2 ( Scopes: read )
 </aside>
 
-
 ## Get User Modfiles
 
 > Code samples
@@ -8624,7 +8861,6 @@ Host: api.mod.io
 
 Accept: application/json
 Authorization: Bearer YourAccessToken
-
 
 ```
 
@@ -8681,7 +8917,6 @@ result = RestClient.get 'https://api.mod.io/v1/me/files',
   params: {
   }, headers: headers
 
-
 p JSON.parse(result)
 ```
 
@@ -8717,7 +8952,6 @@ System.out.println(response.toString());
 `GET /me/files`
 
 Get all Modfiles the *authenticated user* published or is a team member of. Successful request will return an array of [Modfile Objects](https://docs.mod.io/#get-all-mod-files-2).
-
 
 > Example responses
 
@@ -8762,7 +8996,6 @@ To perform this operation, you must be authenticated by means of one of the foll
 oauth2 ( Scopes: read )
 </aside>
 
-
 # Response Schemas 
 ## Message Object
 
@@ -8775,14 +9008,12 @@ oauth2 ( Scopes: read )
 } 
 ```
 
-
 ### Properties
 
 Name|Type|Description
 ---|---|---|---|
 code|integer(int32)|HTTP status code of response.
 message|string|The server response to your request. Responses will vary from endpoint but object structure will persist.
-
 
 
 
@@ -8800,7 +9031,6 @@ message|string|The server response to your request. Responses will vary from end
 } 
 ```
 
-
 ### Properties
 
 Name|Type|Description
@@ -8809,7 +9039,6 @@ error|object|Contains error data.
 » code|integer(int32)|HTTP code of the error.
 » message|string|The server response to your request. Responses will vary from endpoint but object structure will persist.
 » errors|object|Optional Validation errors object. This field is only supplied if the response is a validation error (`422 Unprocessible Entity`).
-
 
 
 
@@ -8827,7 +9056,6 @@ error|object|Contains error data.
 } 
 ```
 
-
 ### Properties
 
 Name|Type|Description
@@ -8837,7 +9065,6 @@ original|string|URL to full-sized image.
 thumb_320x180|string|URL to small thumbnail image.
 thumb_640x360|string|URL to medium thumbnail image.
 thumb_1280x720|string|URL to large thumbnail image.
-
 
 
 
@@ -8853,7 +9080,6 @@ thumb_1280x720|string|URL to large thumbnail image.
 } 
 ```
 
-
 ### Properties
 
 Name|Type|Description
@@ -8861,7 +9087,6 @@ Name|Type|Description
 filename|string|Image filename, with file extension included.
 original|string|URL to full-sized image.
 thumb_320x180|string|URL to small thumbnail image.
-
 
 
 
@@ -8876,14 +9101,12 @@ thumb_320x180|string|URL to small thumbnail image.
 } 
 ```
 
-
 ### Properties
 
 Name|Type|Description
 ---|---|---|---|
 filename|string|Image filename, with file extension included.
 original|string|URL to the full-sized header image.
-
 
 
 
@@ -8898,14 +9121,12 @@ original|string|URL to the full-sized header image.
 } 
 ```
 
-
 ### Properties
 
 Name|Type|Description
 ---|---|---|---|
 filename|string|Image filename, including file extension.
 original|string|Full URL to the image.
-
 
 
 
@@ -8921,7 +9142,6 @@ original|string|Full URL to the image.
 } 
 ```
 
-
 ### Properties
 
 Name|Type|Description
@@ -8929,7 +9149,6 @@ Name|Type|Description
 original|string|URL to the full image.
 thumb_320x180|string|URL to the thumbnail image.
 filename|string|Image filename, with the extension included.
-
 
 
 
@@ -8974,11 +9193,14 @@ filename|string|Image filename, with the extension included.
 } 
 ```
 
-
 ### Properties
 
 Name|Type|Description
 ---|---|---|---|
+cursor_id|integer(int32)|The current _cursor value.
+prev_id|integer(int32)|The previous _cursor value as manually inserted by you, null by default.
+next_id|integer(int32)|The next position to move the _cursor to, based on the current request.
+result_count|integer(int32)|The amount of results returned in the current request.
 data|[Comment Object  ](#schemacomment_object)[]|Array containing comment objects
 » id|integer(int32)|Unique id of the comment.
 » mod_id|integer(int32)|Unique id of the parent mod.
@@ -8999,11 +9221,6 @@ data|[Comment Object  ](#schemacomment_object)[]|Array containing comment object
 » karma|integer(int32)|The amount of karma the comment has received.
 » karma_guest|integer(int32)|The amount of karma received by guests.
 » content|string|The displayed comment.
-cursor_id|integer(int32)|The current _cursor value.
-prev_id|integer(int32)|The previous _cursor value as manually inserted by you, null by default.
-next_id|integer(int32)|The next position to move the _cursor to, based on the current request.
-result_count|integer(int32)|The amount of results returned in the current request.
-
 
 
 
@@ -9029,19 +9246,17 @@ result_count|integer(int32)|The amount of results returned in the current reques
 } 
 ```
 
-
 ### Properties
 
 Name|Type|Description
 ---|---|---|---|
-data|[Mod Dependencies Object ](#schemamod_dependencies_object)[]|Array containing mod dependencies objects.
-» mod_id|integer(int32)|Unique id of the mod that is the dependency.
-» date_added|integer(int32)|Unix timestamp of when the dependency was added.
 cursor_id|integer(int32)|The current _cursor value.
 prev_id|integer(int32)|The previous _cursor value as manually inserted by you, null by default.
 next_id|integer(int32)|The next position to move the _cursor to, based on the current request.
 result_count|integer(int32)|The amount of results returned in the current request.
-
+data|[Mod Dependencies Object ](#schemamod_dependencies_object)[]|Array containing mod dependencies objects.
+» mod_id|integer(int32)|Unique id of the mod that is the dependency.
+» date_added|integer(int32)|Unix timestamp of when the dependency was added.
 
 
 
@@ -9080,11 +9295,14 @@ result_count|integer(int32)|The amount of results returned in the current reques
 } 
 ```
 
-
 ### Properties
 
 Name|Type|Description
 ---|---|---|---|
+cursor_id|integer(int32)|The current _cursor value.
+prev_id|integer(int32)|The previous _cursor value as manually inserted by you, null by default.
+next_id|integer(int32)|The next position to move the _cursor to, based on the current request.
+result_count|integer(int32)|The amount of results returned in the current request.
 data|[Modfile Object  ](#schemamodfile_object)[]|Response array of items.
 » id|integer(int32)|Unique file id.
 » mod_id|integer(int32)|Unique mod id.
@@ -9100,11 +9318,6 @@ data|[Modfile Object  ](#schemamodfile_object)[]|Response array of items.
 » version|string|The release version this file represents.
 » changelog|string|List of all changes in this file release.
 » download_url|string|Link to download the file from the mod.io CDN.
-cursor_id|integer(int32)|The current _cursor value.
-prev_id|integer(int32)|The previous _cursor value as manually inserted by you, null by default.
-next_id|integer(int32)|The next position to move the _cursor to, based on the current request.
-result_count|integer(int32)|The amount of results returned in the current request.
-
 
 
 
@@ -9184,11 +9397,14 @@ result_count|integer(int32)|The amount of results returned in the current reques
 } 
 ```
 
-
 ### Properties
 
 Name|Type|Description
 ---|---|---|---|
+cursor_id|integer(int32)|The current _cursor value.
+prev_id|integer(int32)|The previous _cursor value as manually inserted by you, null by default.
+next_id|integer(int32)|The next position to move the _cursor to, based on the current request.
+result_count|integer(int32)|The amount of results returned in the current request.
 data|[Game Object  ](#schemagame_object)[]|Array containing game objects
 » id|integer(int32)|Unique game id.
 » submitted_by|[User Object  ](#schemauser_object)|Contains user data.
@@ -9236,11 +9452,6 @@ data|[Game Object  ](#schemagame_object)[]|Array containing game objects
 »» type|string|Are tags selected via checkboxes or a single dropdown.
 »» admin_only|integer(int32)|Is this an admin only tag? If so only admin's can see this category and it can be used for filtering.
 »» tags|string[]|Eligible tags for this game.
-cursor_id|integer(int32)|The current _cursor value.
-prev_id|integer(int32)|The previous _cursor value as manually inserted by you, null by default.
-next_id|integer(int32)|The next position to move the _cursor to, based on the current request.
-result_count|integer(int32)|The amount of results returned in the current request.
-
 
 
 
@@ -9276,11 +9487,14 @@ result_count|integer(int32)|The amount of results returned in the current reques
 } 
 ```
 
-
 ### Properties
 
 Name|Type|Description
 ---|---|---|---|
+cursor_id|integer(int32)|The current _cursor value.
+prev_id|integer(int32)|The previous _cursor value as manually inserted by you, null by default.
+next_id|integer(int32)|The next position to move the _cursor to, based on the current request.
+result_count|integer(int32)|The amount of results returned in the current request.
 data|[Game Activity Object ](#schemagame_activity_object)[]|Response array of items.
 » id|integer(int32)|Unique id of activity record.
 » game_id|integer(int32)|Unique id of the parent game.
@@ -9291,11 +9505,6 @@ data|[Game Activity Object ](#schemagame_activity_object)[]|Response array of it
 »» field|string|The field of the changed value.
 »» before|string|The value prior to the event.
 »» after|string|The newly-updated value.
-cursor_id|integer(int32)|The current _cursor value.
-prev_id|integer(int32)|The previous _cursor value as manually inserted by you, null by default.
-next_id|integer(int32)|The next position to move the _cursor to, based on the current request.
-result_count|integer(int32)|The amount of results returned in the current request.
-
 
 
 
@@ -9321,19 +9530,17 @@ result_count|integer(int32)|The amount of results returned in the current reques
 } 
 ```
 
-
 ### Properties
 
 Name|Type|Description
 ---|---|---|---|
-data|[Metadata KVP Object ](#schemametadata_kvp_object)[]|Array containing metadata kvp objects.
-» key|string|The key of the key-value pair.
-» value|string|The value of the key-value pair.
 cursor_id|integer(int32)|The current _cursor value.
 prev_id|integer(int32)|The previous _cursor value as manually inserted by you, null by default.
 next_id|integer(int32)|The next position to move the _cursor to, based on the current request.
 result_count|integer(int32)|The amount of results returned in the current request.
-
+data|[Metadata KVP Object ](#schemametadata_kvp_object)[]|Array containing metadata kvp objects.
+» key|string|The key of the key-value pair.
+» value|string|The value of the key-value pair.
 
 
 
@@ -9435,11 +9642,14 @@ result_count|integer(int32)|The amount of results returned in the current reques
 } 
 ```
 
-
 ### Properties
 
 Name|Type|Description
 ---|---|---|---|
+cursor_id|integer(int32)|The current _cursor value.
+prev_id|integer(int32)|The previous _cursor value as manually inserted by you, null by default.
+next_id|integer(int32)|The next position to move the _cursor to, based on the current request.
+result_count|integer(int32)|The amount of results returned in the current request.
 data|[Mod Object  ](#schemamod_object)[]|Array containing mod objects
 » id|integer(int32)|Unique mod id.
 » game_id|integer(int32)|Unique game id.
@@ -9502,11 +9712,6 @@ data|[Mod Object  ](#schemamod_object)[]|Array containing mod objects
 » tags|[Mod Tag Object ](#schemamod_tag_object)[]|Contains Mod Tag data.
 »» name|string|The displayed tag.
 »» date_added|integer(int32)|Unix timestamp of when tag was applied.
-cursor_id|integer(int32)|The current _cursor value.
-prev_id|integer(int32)|The previous _cursor value as manually inserted by you, null by default.
-next_id|integer(int32)|The next position to move the _cursor to, based on the current request.
-result_count|integer(int32)|The amount of results returned in the current request.
-
 
 
 
@@ -9542,11 +9747,14 @@ result_count|integer(int32)|The amount of results returned in the current reques
 } 
 ```
 
-
 ### Properties
 
 Name|Type|Description
 ---|---|---|---|
+cursor_id|integer(int32)|The current _cursor value.
+prev_id|integer(int32)|The previous _cursor value as manually inserted by you, null by default.
+next_id|integer(int32)|The next position to move the _cursor to, based on the current request.
+result_count|integer(int32)|The amount of results returned in the current request.
 data|[Mod Activity Object ](#schemamod_activity_object)[]|Response array of items.
 » id|integer(int32)|Unique id of activity object.
 » mod_id|integer(int32)|Unique id of the parent mod.
@@ -9557,11 +9765,48 @@ data|[Mod Activity Object ](#schemamod_activity_object)[]|Response array of item
 »» field|string|The field of the changed value.
 »» before|string|The value prior to the event.
 »» after|string|The newly-updated value.
+
+
+
+## Get All Game Tag
+
+<a name="schemaget_all_game_tag_options"></a>
+
+```json
+{
+  "data": [
+    {
+      "name": "Engines",
+      "type": "checkboxes",
+      "tags": [
+        "Unity"
+      ],
+      "admin_only": 0
+    },
+    {
+        ...
+    }
+  ],
+  "cursor_id": 60,
+  "prev_id": 30,
+  "next_id": 160,
+  "result_count": 100
+} 
+```
+
+### Properties
+
+Name|Type|Description
+---|---|---|---|
 cursor_id|integer(int32)|The current _cursor value.
 prev_id|integer(int32)|The previous _cursor value as manually inserted by you, null by default.
 next_id|integer(int32)|The next position to move the _cursor to, based on the current request.
 result_count|integer(int32)|The amount of results returned in the current request.
-
+data|[Game Tag Option Object](#schemagame_tag_option_object)[]|Array containing mod tag objects.
+» name|string|The name of the category.
+» type|string|Are tags selected via checkboxes or a single dropdown.
+» admin_only|integer(int32)|Is this an admin only tag? If so only admin's can see this category and it can be used for filtering.
+» tags|string[]|Eligible tags for this game.
 
 
 
@@ -9587,19 +9832,17 @@ result_count|integer(int32)|The amount of results returned in the current reques
 } 
 ```
 
-
 ### Properties
 
 Name|Type|Description
 ---|---|---|---|
-data|[Mod Tag Object ](#schemamod_tag_object)[]|Array containing mod tag objects.
-» name|string|The displayed tag.
-» date_added|integer(int32)|Unix timestamp of when tag was applied.
 cursor_id|integer(int32)|The current _cursor value.
 prev_id|integer(int32)|The previous _cursor value as manually inserted by you, null by default.
 next_id|integer(int32)|The next position to move the _cursor to, based on the current request.
 result_count|integer(int32)|The amount of results returned in the current request.
-
+data|[Mod Tag Object ](#schemamod_tag_object)[]|Array containing mod tag objects.
+» name|string|The displayed tag.
+» date_added|integer(int32)|Unix timestamp of when tag was applied.
 
 
 
@@ -9640,11 +9883,14 @@ result_count|integer(int32)|The amount of results returned in the current reques
 } 
 ```
 
-
 ### Properties
 
 Name|Type|Description
 ---|---|---|---|
+cursor_id|integer(int32)|The current _cursor value.
+prev_id|integer(int32)|The previous _cursor value as manually inserted by you, null by default.
+next_id|integer(int32)|The next position to move the _cursor to, based on the current request.
+result_count|integer(int32)|The amount of results returned in the current request.
 data|[Team Member Object ](#schemateam_member_object)[]|Array containing Team Member objects.
 » id|integer(int32)|Unique access id.
 » user|[User Object  ](#schemauser_object)|Contains user data.
@@ -9661,11 +9907,6 @@ data|[Team Member Object ](#schemateam_member_object)[]|Array containing Team Me
 » level|integer(int32)|The level of permissions the member has within the team. 0 = Guest, 1 = Member, 2 = Contributor, 4 = Manager, 8 = Leader.
 » date_added|integer(int32)|Unix timestamp of date the member joined the team.
 » position|string|Custom title, has no effect on any access rights.
-cursor_id|integer(int32)|The current _cursor value.
-prev_id|integer(int32)|The previous _cursor value as manually inserted by you, null by default.
-next_id|integer(int32)|The next position to move the _cursor to, based on the current request.
-result_count|integer(int32)|The amount of results returned in the current request.
-
 
 
 
@@ -9700,11 +9941,14 @@ result_count|integer(int32)|The amount of results returned in the current reques
 } 
 ```
 
-
 ### Properties
 
 Name|Type|Description
 ---|---|---|---|
+cursor_id|integer(int32)|The current _cursor value.
+prev_id|integer(int32)|The previous _cursor value as manually inserted by you, null by default.
+next_id|integer(int32)|The next position to move the _cursor to, based on the current request.
+result_count|integer(int32)|The amount of results returned in the current request.
 data|[User Object  ](#schemauser_object)[]|Response array of items.
 » id|integer(int32)|Unique id of the user.
 » name_id|string|Unique nameid of user which forms end of their profile URL.
@@ -9716,11 +9960,6 @@ data|[User Object  ](#schemauser_object)[]|Response array of items.
 » timezone|string|The Timezone of the user, shown in {Country}/{City} format.
 » language|string|The users language preference, limited to two characters.
 » profile_url|string|URL to the user's mod.io profile page.
-cursor_id|integer(int32)|The current _cursor value.
-prev_id|integer(int32)|The previous _cursor value as manually inserted by you, null by default.
-next_id|integer(int32)|The next position to move the _cursor to, based on the current request.
-result_count|integer(int32)|The amount of results returned in the current request.
-
 
 
 
@@ -9745,7 +9984,6 @@ result_count|integer(int32)|The amount of results returned in the current reques
 } 
 ```
 
-
 ### Properties
 
 Name|Type|Description
@@ -9759,7 +9997,6 @@ changes|[Field Change Object ](#schemafield_change_object)[]|Contains all change
 » field|string|The field of the changed value.
 » before|string|The value prior to the event.
 » after|string|The newly-updated value.
-
 
 
 
@@ -9784,7 +10021,6 @@ changes|[Field Change Object ](#schemafield_change_object)[]|Contains all change
 } 
 ```
 
-
 ### Properties
 
 Name|Type|Description
@@ -9801,7 +10037,6 @@ changes|[Field Change Object ](#schemafield_change_object)[]|Contains all change
 
 
 
-
 ## Field Change Object 
 
 <a name="schemafield_change_object"></a>
@@ -9814,7 +10049,6 @@ changes|[Field Change Object ](#schemafield_change_object)[]|Contains all change
 } 
 ```
 
-
 ### Properties
 
 Name|Type|Description
@@ -9822,7 +10056,6 @@ Name|Type|Description
 field|string|The field of the changed value.
 before|string|The value prior to the event.
 after|string|The newly-updated value.
-
 
 
 
@@ -9856,7 +10089,6 @@ after|string|The newly-updated value.
 } 
 ```
 
-
 ### Properties
 
 Name|Type|Description
@@ -9883,7 +10115,6 @@ content|string|The displayed comment.
 
 
 
-
 ## Mod Dependencies Object 
 
 <a name="schemamod_dependencies_object"></a>
@@ -9895,14 +10126,12 @@ content|string|The displayed comment.
 } 
 ```
 
-
 ### Properties
 
 Name|Type|Description
 ---|---|---|---|
 mod_id|integer(int32)|Unique id of the mod that is the dependency.
 date_added|integer(int32)|Unix timestamp of when the dependency was added.
-
 
 
 
@@ -9930,7 +10159,6 @@ date_added|integer(int32)|Unix timestamp of when the dependency was added.
 } 
 ```
 
-
 ### Properties
 
 Name|Type|Description
@@ -9952,7 +10180,6 @@ download_url|string|Link to download the file from the mod.io CDN.
 
 
 
-
 ## Filehash Object
 
   <a name="schemafilehash_object"></a>
@@ -9963,13 +10190,11 @@ download_url|string|Link to download the file from the mod.io CDN.
 } 
 ```
 
-
 ### Properties
 
 Name|Type|Description
 ---|---|---|---|
 md5|string|MD5 filehash of the parent file.
-
 
 
 
@@ -10060,7 +10285,6 @@ md5|string|MD5 filehash of the parent file.
 } 
 ```
 
-
 ### Properties
 
 Name|Type|Description
@@ -10129,7 +10353,6 @@ tags|[Mod Tag Object ](#schemamod_tag_object)[]|Contains Mod Tag data.
 
 
 
-
 ## Mod Media Object 
 
 <a name="schemamod_media_object"></a>
@@ -10152,7 +10375,6 @@ tags|[Mod Tag Object ](#schemamod_tag_object)[]|Contains Mod Tag data.
 } 
 ```
 
-
 ### Properties
 
 Name|Type|Description
@@ -10163,7 +10385,6 @@ images|[Image Object  ](#schemaimage_object)[]|Array of images objects.
 » original|string|URL to the full image.
 » thumb_320x180|string|URL to the thumbnail image.
 » filename|string|Image filename, with the extension included.
-
 
 
 
@@ -10178,14 +10399,12 @@ images|[Image Object  ](#schemaimage_object)[]|Array of images objects.
 } 
 ```
 
-
 ### Properties
 
 Name|Type|Description
 ---|---|---|---|
 name|string|The displayed tag.
 date_added|integer(int32)|Unix timestamp of when tag was applied.
-
 
 
 
@@ -10254,7 +10473,6 @@ date_added|integer(int32)|Unix timestamp of when tag was applied.
 } 
 ```
 
-
 ### Properties
 
 Name|Type|Description
@@ -10308,7 +10526,6 @@ tag_options|[Game Tag Option Object](#schemagame_tag_option_object)[]|Contains c
 
 
 
-
 ## Game Tag Option Object
 
 <a name="schemagame_tag_option_object"></a>
@@ -10324,7 +10541,6 @@ tag_options|[Game Tag Option Object](#schemagame_tag_option_object)[]|Contains c
 } 
 ```
 
-
 ### Properties
 
 Name|Type|Description
@@ -10333,7 +10549,6 @@ name|string|The name of the category.
 type|string|Are tags selected via checkboxes or a single dropdown.
 admin_only|integer(int32)|Is this an admin only tag? If so only admin's can see this category and it can be used for filtering.
 tags|string[]|Eligible tags for this game.
-
 
 
 
@@ -10348,14 +10563,12 @@ tags|string[]|Eligible tags for this game.
 } 
 ```
 
-
 ### Properties
 
 Name|Type|Description
 ---|---|---|---|
 key|string|The key of the key-value pair.
 value|string|The value of the key-value pair.
-
 
 
 
@@ -10374,7 +10587,6 @@ value|string|The value of the key-value pair.
 } 
 ```
 
-
 ### Properties
 
 Name|Type|Description
@@ -10385,7 +10597,6 @@ negative_ratings|integer(int32)|Number of negative ratings.
 percentage_positive|integer(int32)|Number of positive ratings, divided by the total ratings to determine it’s percentage score.
 weighted_aggregate|float|The overall rating of this item calculated using the 'Wilson score confidence interval' as documented here http://www.evanmiller.org/how-not-to-sort-by-average-rating.html. This column is good to sort on, as it will order items based on number of ratings and will place items with lots of positive ratings above those with a higher score but much fewer ratings.
 display_text|string|Textual representation of the rating in format 'Overwhelmingly Positive', 'Very Positive', 'Positive', 'Mostly Positive', 'Mixed', 'Negative', 'Mostly Negative', 'Very Negative' and 'Overwhelmingly Negative'.
-
 
 
 
@@ -10415,7 +10626,6 @@ display_text|string|Textual representation of the rating in format 'Overwhelming
 } 
 ```
 
-
 ### Properties
 
 Name|Type|Description
@@ -10435,7 +10645,6 @@ user|[User Object  ](#schemauser_object)|Contains user data.
 level|integer(int32)|The level of permissions the member has within the team. 0 = Guest, 1 = Member, 2 = Contributor, 4 = Manager, 8 = Leader.
 date_added|integer(int32)|Unix timestamp of date the member joined the team.
 position|string|Custom title, has no effect on any access rights.
-
 
 
 
@@ -10459,7 +10668,6 @@ position|string|Custom title, has no effect on any access rights.
 } 
 ```
 
-
 ### Properties
 
 Name|Type|Description
@@ -10474,8 +10682,6 @@ avatar|[Avatar Object  ](#schemaavatar_object)|Contains avatar data.
 timezone|string|The Timezone of the user, shown in {Country}/{City} format.
 language|string|The users language preference, limited to two characters.
 profile_url|string|URL to the user's mod.io profile page.
-
-
 
 
 
