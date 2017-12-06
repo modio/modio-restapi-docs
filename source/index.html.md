@@ -1,5 +1,5 @@
 ---
-title: mod.io API v1
+title: 'mod.io API v1'
 language_tabs:
   - shell: Shell
   - http: HTTP
@@ -59,7 +59,7 @@ Authentication with the mod.io API can be done via 3 ways:
 
 - Request an [API key (Read Access Only)](https://mod.io/apikey/widget)
 - Manually create an [OAuth 2 Access Token (Read + Write Access)](https://mod.io/oauth/widget)
-- Use our [Email Authentication Flow](https://docs.mod.io/#email-authentication-flow) (to create an OAuth 2 Access Token with Read + Write Access) 
+- Use our [Email Authentication Flow](#email-authentication-flow) (to create an OAuth 2 Access Token with Read + Write Access) 
 
 You can use these methods of authentication interchangably, depending on the level of access you require to the mod.io API.
 
@@ -149,7 +149,7 @@ If you do not exchange your `security_code` for an `access_token` within 15 minu
 
 ### Step 3: Use access token to access resources.
 
-See [Making Requests](https://docs.mod.io/#making-requests) section.
+See [Making Requests](#making-requests) section.
 
 ### Scopes (OAuth 2)
 
@@ -171,7 +171,7 @@ Requests to the mod.io API __must__ be over HTTPS (Port 443), any requests made 
 curl -X get https://api.mod.io/v1/games?api_key=xxxxxxxxxxxxxxxx
 ``` 
 
-To authenticate using your unique 32-character API key simply append the `api_key=xxxxxxxxxxxxxxxx` parameter to the end of your request. Remember that using an API key means requests are in read-only mode, and that if you want to create, update or delete resources - authentication via OAuth 2 is required which you can [set up with your api key](https://docs.mod.io/#authentication).
+To authenticate using your unique 32-character API key simply append the `api_key=xxxxxxxxxxxxxxxx` parameter to the end of your request. Remember that using an API key means requests are in read-only mode, and that if you want to create, update or delete resources - authentication via OAuth 2 is required which you can [set up with your api key](#authentication).
 
 ### Using an Access Token
 
@@ -247,7 +247,7 @@ Responses will __always__ be returned as `application/json`.
 
 If an error occurs, mod.io returns an error object with the HTTP `code` and `message` to describe what happened and when possible how to avoid repeating the error. It's important to note that if you encounter errors that are not server errors (`500+` codes) - you should review the error message before continuing to send requests to the endpoint.
 
-When requests contain invalid input data or query parameters (for filtering), an optional field object called `errors` can be supplied inside the `error` object, which contains a list of the invalid inputs. The nested `errors` object is only supplied with `422 Unprocessable Entity` responses. Be sure to review the [Response Codes](https://docs.mod.io/#response-codes) to be aware of the HTTP codes that the mod.io API returns.
+When requests contain invalid input data or query parameters (for filtering), an optional field object called `errors` can be supplied inside the `error` object, which contains a list of the invalid inputs. The nested `errors` object is only supplied with `422 Unprocessable Entity` responses. Be sure to review the [Response Codes](#response-codes) to be aware of the HTTP codes that the mod.io API returns.
 
 ```JSON
 // Error object with input errors
@@ -263,7 +263,7 @@ When requests contain invalid input data or query parameters (for filtering), an
 
 ```
 
-Remember that [Rate Limiting](https://docs.mod.io/#rate-limiting) applies whether an error is returned or not, so to avoid exceeding your daily quota be sure to always investigate error messages - instead of continually retrying.
+Remember that [Rate Limiting](#rate-limiting) applies whether an error is returned or not, so to avoid exceeding your daily quota be sure to always investigate error messages - instead of continually retrying.
 
 ## Response Codes
 
@@ -458,6 +458,16 @@ Full-text search is a lenient search filter that _is only available_ if the endp
 
 - `?_q=The Lord of the Rings` - This will return every result where the `name` column contains any of the following words: 'The', 'Lord', 'of', 'the', 'Rings'. 
 
+### = (Equals)
+
+```
+v1/games?id=10
+```
+
+The simpliest filter you can apply is _columnname_ equals. This will return all rows which contain a column matching the value provided. 
+
+- `?id=10` - Get all results where the `id` column value is _10_.
+
 ### -lk (Like)
 
 ```
@@ -572,6 +582,25 @@ Where the preceding column value does not equal the value specified.
 
 - `?price-not=19.99` - Where the `price` column does not equal 19.99.
 
+### -bitwise-and (Bitwise AND)
+
+```
+v1/games?api-bitwise-and=5
+```
+
+Some columns are stored as bits within an integer. Their value depends on the bits selected. For example, suppose a column has 4 options:
+
+- 1 = Option A
+- 2 = Option B
+- 4 = Option C
+- 8 = Option D
+
+You can combine any of these options by adding them together which means there are (2 ^ 4 = 16 possible combinations). For example Option A (1) and Option C (4) would be (1 + 4 = 5), Option A (1), Option C (4) and Option D (8) would be (1 + 4 + 8 = 13), all Options together would be (1 + 2 + 4 + 8 = 15).
+
+The number of combinations makes using _equals_, _in_ and other filters a little complex. To solve this we support Bitwise AND (&) which makes it easy to match a column which contains any of the Options you want.
+
+- `?api-bitwise-and=5` - Where the `api` column value is 1, 3, 4, 5, 6, 7, 9, 11, 12, 13, 14, 15.
+
 ## Rate Limiting
 
 mod.io implements rate limiting to stop users abusing the service. Exceeding your rate limit will result in requests receiving a `429 Too Many Requests` response until your reset time is reached. 
@@ -606,11 +635,11 @@ mod.io returns the following headers in each request to inform you of your remai
 
 ### Optimize your requests
 
-You should always plan to minimize requests and cache API responses. It will make your app feel fluid and fast for your users. If your usage is excessive we shall reach out to discuss ways of optimizing, but our aim is to never restrict legitimate use of the API. We have set high limits that should cover 99% of use-cases, and are happy to [discuss your scenario](mailto:developers@mod.io?subject=mod.io%20API%20usage) if you require more.
+You should always plan to minimize requests and cache API responses. It will make your app feel fluid and fast for your users. If your usage is excessive we shall reach out to discuss ways of optimizing, but our aim is to never restrict legitimate use of the API. We have set high limits that should cover 99% of use-cases, and are happy to [discuss your scenario](mailto:developers@mod.io?subject=API%20usage) if you require more.
 
 ## Contact
 
-If you spot any errors within the mod.io documentation, have feedback on how we can make it easier to follow or simply want to discuss how awesome mods are, feel free to reach out anytime [developers@mod.io](mailto:developers@mod.io?subject=mod.io%20API). We are here to help you grow and maximise the potential of mods in your game.
+If you spot any errors within the mod.io documentation, have feedback on how we can make it easier to follow or simply want to discuss how awesome mods are, feel free to reach out anytime [developers@mod.io](mailto:developers@mod.io?subject=API). We are here to help you grow and maximise the potential of mods in your game.
 # Games
 
 ## Get All Games
@@ -716,7 +745,7 @@ System.out.println(response.toString());
 ```
 `GET /games`
 
-Retrieve all games on mod.io. Successful request will return an array of [Game Objects](https://docs.mod.io/#get-all-games-2). To make your requests as specific to your needs as possible it's highly recommended reading over our [filtering documentation](https://docs.mod.io/#filtering) if it will help you with consuming this endpoint.
+Get all games. Successful request will return an array of [Game Objects](#get-all-games-2). We recommended reading the [filtering documentation](#filtering) to return only the records you want.
      
      Filter|Type|Description
      ---|---|---
@@ -725,21 +754,21 @@ Retrieve all games on mod.io. Successful request will return an array of [Game O
      date_added|integer(int32)|Unix timestamp of date registered.
      date_updated|integer(int32)|Unix timestamp of date updated.
      date_live|integer(int32)|Unix timestamp of date game was set live.
-     presentation|integer(int32)|Choose which presentation style you want to use for your game on the mod.io website <br><br>*Field options*<br>__0__ =  Grid View: Displays mods in a grid (visual but less informative, default setting) <br>__1__ = Table View: Displays mods in a table (easier to browse)
-     community|integer(int32)|Choose what rights community members have with the game <br><br>*Field Options*<br>__0__ = Discussion board disabled, community cannot share guides and news<br>__1__ = Discussion Board enabled only<br>__2__ = Community can only share guides and news<br>__3__ = Discussion Board enabled and community can share news and guides
-     submission|integer(int32)|Choose what submission process you want modders to follow <br><br>*Field Options*<br>__0__ = Control the upload process. ou will have to build an upload system either in-game or via a standalone app, which enables developers to submit mods to the tags you have configured. Because you control the flow, you can pre-validate and compile mods, to ensure they will work in your game. In the long run this option will save you time as you can accept more submissions, but it requires more setup to get running and isn't as open as the above option. NOTE: mod profiles can still be created online, but uploads will have to occur via the tools you supply.<br><br>__1__ = Enable mod uploads from anywhere. Allow developers to upload mods via the website and API, and pick the tags their mod is built for. No validation will be done on the files submitted, it will be the responsibility of your game and apps built to process the mods installation based on the tags selected and determine if the mod is valid and works. For example a mod might be uploaded to the 'map' tag. When a user subscribes to this mod, your game will need to verify it contains a map file and install it where maps are located. If this fails, your game or the community will have to flag the mod as 'incompatible' to remove it from the listing.
-     curation|integer(int32)|Choose the curation process for the game<br><br>*Field Options*<br>__0__ = Mods are immediately available to play, without any intervention or work from your team.<br>__1__ = Screen only mods the author wants to sell, before they are available to purchase via the API.<br>__2__ = All mods must be accepted by someone on your team. This option is useful for games that have a small number of mods and want to control the experience, or you need to set the parameters attached to a mod (i.e. a weapon may require the rate of fire, power level, clip size etc). It can also be used for complex mods, which you may need to build into your game or distribute as DLC.
-     revenue|integer(int32)|__Bitwise__. Choose the revenue capabilities for user-generated content of the game. For selecting multiple options you need to submit the bitwise value. For example, if you want to allow user-generated content to be sold(1), to receive donations(2) and allow them to control their supply and scarcity(8) your revenue value would be _11 (8 + 2 + 1)_.<br><br>*Field Options*<br>__1__ = Allow user-generated content to be sold<br>__2__ = Allow user-generated content to receive donations<br>__4__ = Allow user-generated content to be traded (not subject to revenue share)<br>__8__ = Allow user-generated content to control supply and scarcity.
-     api|integer(int32)|Choose what permissions you want to enable via the mod.io API<br><br>*Field Options*<br>__0__ = Third parties cannot access your mods API and mods cannot be downloaded directly without API validation.<br>__1__ = Allow 3rd parties to access your mods API (recommended, an open API will encourage a healthy ecosystem of tools and apps) but mods cannot be downloaded directly<br>__2__ = Allow mods to be downloaded directly but 3rd parties cannot access your mods API.<br>__3__ = Allow third parties to access your mods API and allow mods to be downloaded directly without api validation.
-     ugc_name|string|Singular word that describes the user-generated content type.
+     presentation|integer(int32)|Presentation style used on the mod.io website:<br><br>__0__ =  Grid View: Displays mods in a grid<br>__1__ = Table View: Displays mods in a table
+     submission|integer(int32)|Submission process modders must follow:<br><br>__0__ = Mod uploads must occur via a tool created by the game developers<br>__1__ = Mod uploads can occur from anywhere, including the website and API
+     curation|integer(int32)|Curation process used to approve mods:<br><br>__0__ = No curation: Mods are immediately available to play<br>__1__ = Paid curation: Only mods which accept donations must be accepted<br>__2__ = Full curation: All mods must be accepted by someone to be listed
+     community|integer(int32)|Community features enabled on the mod.io website:<br><br>__0__ = All of the options below are disabled<br>__1__ = Discussion board enabled<br>__2__ = Guides and news enabled<br>__?__ = Combine to find games with multiple options enabled (see [BITWISE filtering](#bitwise-and-bitwise-and))
+     revenue|integer(int32)|Revenue capabilities mods can enable:<br><br>__0__ = All of the options below are disabled<br>__1__ = Allow mods to be sold<br>__2__ = Allow mods to receive donations<br>__4__ = Allow mods to be traded<br>__8__ = Allow mods to control supply and scarcity<br>__?__ = Combine to find games with multiple options enabled (see [BITWISE filtering](#bitwise-and-bitwise-and))
+     api|integer(int32)|Level of API access allowed by this game:<br><br>__0__ = All of the options below are disabled<br>__1__ = This game allows 3rd parties to access the mods API<br>__2__ = This game allows mods to be downloaded directly without API validation<br>__?__ = Combine to find games with multiple options enabled (see [BITWISE filtering](#bitwise-and-bitwise-and))
+     ugc_name|string|Word used to describe user-generated content (mods, items, addons etc).
      icon|string|Filename of the icon image, extension included.
      logo|string|Filename of the logo image, extension included.
      header|string|Filename of the header image, extension included.
      homepage|string|Official homepage of the game.
-     name|string|The name of the game.
-     name_id|string|The unique SEO friendly URL for the game.
-     summary|string|Summary for the game.
-     instructions|string|Instructions on the process to upload mods.
+     name|string|Name of the game.
+     name_id|string|Subdomain for the game on mod.io.
+     summary|string|Summary of the game.
+     instructions|string|A guide about creating and uploading mods for this game to mod.io (applicable if submission = 0).
 
 > Example responses
 
@@ -754,10 +783,10 @@ Retrieve all games on mod.io. Successful request will return an array of [Game O
         "username": "XanT",
         "date_online": 1509922961,
         "avatar": {
-          "filename": "masterchief.jpg",
-          "original": "https://media.mod.io/images/members/1/1/1/masterchief.jpg"
+          "filename": "modio-dark.png",
+          "original": "https://media.mod.io/images/global/modio-dark.png"
         },
-        "timezone": "Australia/Brisbane",
+        "timezone": "America/Los_Angeles",
         "language": "en",
         "profile_url": "https://mod.io/members/xant"
       },
@@ -765,40 +794,40 @@ Retrieve all games on mod.io. Successful request will return an array of [Game O
       "date_updated": 1499410290,
       "date_live": 1499841403,
       "presentation": 1,
-      "community": 3,
       "submission": 0,
       "curation": 0,
+      "community": 3,
       "revenue": 1500,
       "api": 3,
       "ugc_name": "map",
       "icon": {
-        "filename": "IMG_20170409_222419.jpg",
-        "original": "https://media.mod.io/images/mods/1/1/2/icon.png",
-        "thumb_320x180": "https://media.mod.io/cache/images/mods/1/1/2/thumb_320x180/icon.png"
+        "filename": "modio-dark.png",
+        "original": "https://media.mod.io/images/global/modio-dark.png",
+        "thumb_320x180": "https://media.mod.io/images/global/modio-dark.png"
       },
       "logo": {
-        "filename": "IMG_20170409_222419.jpg",
-        "original": "https://media.mod.io/images/mods/1/1/2/IMG_20170409_222419.jpg",
-        "thumb_320x180": "https://media.mod.io/cache/images/mods/1/1/2/thumb_320x180/IMG_20170409_222419.jpg",
-        "thumb_640x360": "https://media.mod.io/cache/images/mods/1/1/2/thumb_640x360/IMG_20170409_222419.jpg",
-        "thumb_1280x720": "https://media.mod.io/cache/images/mods/1/1/2/thumb_1280x720/IMG_20170409_222419.jpg"
+        "filename": "modio-dark.png",
+        "original": "https://media.mod.io/images/global/modio-dark.png",
+        "thumb_320x180": "https://media.mod.io/images/global/modio-dark.png",
+        "thumb_640x360": "https://media.mod.io/images/global/modio-dark.png",
+        "thumb_1280x720": "https://media.mod.io/images/global/modio-dark.png"
       },
       "header": {
-        "filename": "gameheader.png",
-        "original": "https://media.mod.io/images/games/1/1/2/gameheader.png"
+        "filename": "demo.png",
+        "original": "https://media.mod.io/images/global/modio-dark.png"
       },
       "homepage": "https://www.rogue-knight-game.com/",
       "name": "Rogue Knight",
       "name_id": "rogue-knight",
       "summary": "Rogue Knight is a brand new 2D pixel platformer.",
-      "instructions": "Instructions here on how to develop for your game.",
+      "instructions": "Instructions on the process to upload mods.",
       "profile_url": "https://rogue-knight.mod.io",
       "tag_options": [
         {
-          "name": "Engines",
+          "name": "Theme",
           "type": "checkboxes",
           "tags": [
-            "Unity"
+            "Horror"
           ],
           "admin_only": 0
         }
@@ -928,7 +957,7 @@ System.out.println(response.toString());
 ```
 `GET /games/{game-id}`
 
-View a single game on mod.io. Successful request will return a single [Game Object](https://docs.mod.io/#game-object).
+Get a game. Successful request will return a single [Game Object](#game-object).
 
 > Example responses
 
@@ -941,10 +970,10 @@ View a single game on mod.io. Successful request will return a single [Game Obje
     "username": "XanT",
     "date_online": 1509922961,
     "avatar": {
-      "filename": "masterchief.jpg",
-      "original": "https://media.mod.io/images/members/1/1/1/masterchief.jpg"
+      "filename": "modio-dark.png",
+      "original": "https://media.mod.io/images/global/modio-dark.png"
     },
-    "timezone": "Australia/Brisbane",
+    "timezone": "America/Los_Angeles",
     "language": "en",
     "profile_url": "https://mod.io/members/xant"
   },
@@ -952,40 +981,40 @@ View a single game on mod.io. Successful request will return a single [Game Obje
   "date_updated": 1499410290,
   "date_live": 1499841403,
   "presentation": 1,
-  "community": 3,
   "submission": 0,
   "curation": 0,
+  "community": 3,
   "revenue": 1500,
   "api": 3,
   "ugc_name": "map",
   "icon": {
-    "filename": "IMG_20170409_222419.jpg",
-    "original": "https://media.mod.io/images/mods/1/1/2/icon.png",
-    "thumb_320x180": "https://media.mod.io/cache/images/mods/1/1/2/thumb_320x180/icon.png"
+    "filename": "modio-dark.png",
+    "original": "https://media.mod.io/images/global/modio-dark.png",
+    "thumb_320x180": "https://media.mod.io/images/global/modio-dark.png"
   },
   "logo": {
-    "filename": "IMG_20170409_222419.jpg",
-    "original": "https://media.mod.io/images/mods/1/1/2/IMG_20170409_222419.jpg",
-    "thumb_320x180": "https://media.mod.io/cache/images/mods/1/1/2/thumb_320x180/IMG_20170409_222419.jpg",
-    "thumb_640x360": "https://media.mod.io/cache/images/mods/1/1/2/thumb_640x360/IMG_20170409_222419.jpg",
-    "thumb_1280x720": "https://media.mod.io/cache/images/mods/1/1/2/thumb_1280x720/IMG_20170409_222419.jpg"
+    "filename": "modio-dark.png",
+    "original": "https://media.mod.io/images/global/modio-dark.png",
+    "thumb_320x180": "https://media.mod.io/images/global/modio-dark.png",
+    "thumb_640x360": "https://media.mod.io/images/global/modio-dark.png",
+    "thumb_1280x720": "https://media.mod.io/images/global/modio-dark.png"
   },
   "header": {
-    "filename": "gameheader.png",
-    "original": "https://media.mod.io/images/games/1/1/2/gameheader.png"
+    "filename": "demo.png",
+    "original": "https://media.mod.io/images/global/modio-dark.png"
   },
   "homepage": "https://www.rogue-knight-game.com/",
   "name": "Rogue Knight",
   "name_id": "rogue-knight",
   "summary": "Rogue Knight is a brand new 2D pixel platformer.",
-  "instructions": "Instructions here on how to develop for your game.",
+  "instructions": "Instructions on the process to upload mods.",
   "profile_url": "https://rogue-knight.mod.io",
   "tag_options": [
     {
-      "name": "Engines",
+      "name": "Theme",
       "type": "checkboxes",
       "tags": [
-        "Unity"
+        "Horror"
       ],
       "admin_only": 0
     }
@@ -1117,21 +1146,21 @@ System.out.println(response.toString());
 ```
 `PUT /games/{game-id}`
 
-Update details for a game. If you want to update the `icon`, `logo` or `header` fields you need to use the [Add Game Media](https://docs.mod.io/#add-game-media) endpoint. Successful request will return updated [Game Object](https://docs.mod.io/#game-object).
+Update details for a game. If you want to update the `icon`, `logo` or `header` fields you need to use the [Add Game Media](#add-game-media) endpoint. Successful request will return updated [Game Object](#game-object).
      
      Parameter|Type|Required|Description
      ---|---|---|---|
-     presentation|integer(int32)||Choose which presentation style you want to use for your game on the mod.io website <br><br>*Field options*<br>__0__ =  Grid View: Displays mods in a grid (visual but less informative, default setting) <br>__1__ = Table View: Displays mods ina  table (easier to browse)
-     community|integer(int32)||Choose what rights community members have with the game <br><br>*Field Options*<br>__0__ = Discussion board disabled, community cannot share guides and news<br>__1__ = Discussion Board enabled only<br>__2__ = Community can only share guides and news<br>__3__ = Discussion Board enabled and community can share news and guides
-     submission|integer(int32)||Choose what submission process you want modders to follow <br><br>*Field Options*<br>__0__ = Control the upload process. ou will have to build an upload system either in-game or via a standalone app, which enables developers to submit mods to the tags you have configured. Because you control the flow, you can pre-validate and compile mods, to ensure they will work in your game. In the long run this option will save you time as you can accept more submissions, but it requires more setup to get running and isn't as open as the above option. NOTE: mod profiles can still be created online, but uploads will have to occur via the tools you supply.<br><br>__1__ = Enable mod uploads from anywhere. Allow developers to upload mods via the website and API, and pick the tags their mod is built for. No validation will be done on the files submitted, it will be the responsibility of your game and apps built to process the mods installation based on the tags selected and determine if the mod is valid and works. For example a mod might be uploaded to the 'map' tag. When a user subscribes to this mod, your game will need to verify it contains a map file and install it where maps are located. If this fails, your game or the community will have to flag the mod as 'incompatible' to remove it from the listing.
-     curation|integer(int32)||Choose the curation process for the game<br><br>*Field Options*<br>__0__ = Mods are immediately available to play, without any intervention or work from your team.<br>__1__ = Screen only mods the author wants to sell, before they are available to purchase via the API.<br>__2__ = All mods must be accepted by someone on your team. This option is useful for games that have a small number of mods and want to control the experience, or you need to set the parameters attached to a mod (i.e. a weapon may require the rate of fire, power level, clip size etc). It can also be used for complex mods, which you may need to build into your game or distribute as DLC.
-     revenue|integer(int32)||__Bitwise__. Choose the revenue capabilities for user-generated content of the game. For selecting multiple options you need to submit the bitwise value. For example, if you want to allow user-generated content to be sold(1), to receive donations(2) and allow them to control their supply and scarcity(8) your revenue value would be _11 (8 + 2 + 1)_.<br><br>*Field Options*<br>__1__ = Allow user-generated content to be sold<br>__2__ = Allow user-generated content to receive donations<br>__4__ = Allow user-generated content to be traded (not subject to revenue share)<br>__8__ = Allow user-generated content to control supply and scarcity.
-     api|integer(int32)||Choose what permissions you want to enable via the mod.io API.<br><br>*Field Options*<br>__0__ = Third parties cannot access your mods API and mods cannot be downloaded directly without API validation.<br>__1__ = Allow 3rd parties to access your mods API (recommended, an open API will encourage a healthy ecosystem of tools and apps) but mods cannot be downloaded directly<br>__2__ = Allow mods to be downloaded directly but 3rd parties cannot access your mods API.<br>__3__ = Allow third parties to access your mods API and allow mods to be downloaded directly without api validation.
-     ugc_name|string||Singular word to best describe your games user-generated content.
-     homepage|string||Official homepage for your game, if you do not fill this out it will default to your mod.io profile. Must be a valid URL.
-     name|string||The name of your game. Highly recommended to not change this unless absolutely required.
-     name_id|string||The unique SEO friendly URL for your game. Cannot exceed 80 characters.
-     summary|string||Summary for your game, giving a brief overview of what it's about - cannot exceed 250 characters.
+     presentation|integer(int32)||Choose the presentation style you want on the mod.io website:<br><br>__0__ =  Grid View: Displays mods in a grid (visual but less informative, default setting) <br>__1__ = Table View: Displays mods in a table (easier to browse)
+     submission|integer(int32)||Choose the submission process you want modders to follow:<br><br>__0__ = Control the mod upload process (recommended): You will have to build an upload system either in-game or via a standalone tool, which enables creators to submit mods to the tags you have configured. Because you control the flow you can prevalidate and compile mods, to ensure they will work in your game and attach metadata about what settings the mod can change. In the long run this option will save you time as you can accept more submissions, but it requires more setup to get running and isn't as open as the above option. *NOTE:* mod profiles can still be created online, but uploads will have to occur via the tools you supply.<br><br>__1__ = Enable mod uploads from anywhere: Allow developers to upload mods via the website and API, and pick the tags their mod is built for. No validation will be done on the files submitted, it will be the responsibility of your game and apps to process the mods installation based on the tags selected and determine if the mod is valid and works. For example an mod might be uploaded with the 'map' tag. When a user subscribes to this mod, your game will need to verify it contains a map file and install it where maps are located. If this fails, your game or the community will have to flag the mod as 'incompatible' to remove it from the listing.
+     curation|integer(int32)||Choose the curation process your team follows to approve mods:<br><br>__0__ = No curation (recommended): Mods are immediately available to play, without any intervention or work from your team.<br><br>__1__ = Paid curation: Screen only mods the creator wants to sell, before they are available to purchase via the API.<br><br>__2__ = Full curation: All mods must be accepted by someone on your team. This option is useful for games that have a small number of mods and want to control the experience, or you need to set the parameters attached to a mod (i.e. a weapon may require the rate of fire, power level, clip size etc). It can also be used for complex mods, which you may need to build into your game or distribute as DLC.
+     community|integer(int32)||Choose the community features enabled on the mod.io website:<br><br>__0__ = All of the options below are disabled<br>__1__ = Discussion board enabled<br>__2__ = Guides and news enabled<br>__?__ = Add the options you want together, to enable multiple features
+     revenue|integer(int32)||Choose the revenue capabilities mods can enable:<br><br>__0__ = All of the options below are disabled<br>__1__ = Allow mods to be sold<br>__2__ = Allow mods to receive donations<br>__4__ = Allow mods to be traded (not subject to revenue share)<br>__8__ = Allow mods to control supply and scarcity<br>__?__ = Add the options you want together, to enable multiple features
+     api|integer(int32)||Choose the level of API access your game allows:<br><br>__0__ = All of the options below are disabled<br>__1__ = Allow 3rd parties to access your mods API (recommended, an open API will encourage a healthy ecosystem of tools and apps)<br>__2__ = Allow mods to be downloaded directly, without requiring API validation (useful for anonymous game servers and services)<br>__?__ = Add the options you want together, to enable multiple features
+     ugc_name|string||Word used to describe user-generated content (mods, items, addons etc).
+     homepage|string||Official homepage for your game. Must be a valid URL.
+     name|string||Name of your game. Cannot exceed 80 characters.
+     name_id|string||Subdomain for the game on mod.io. Highly recommended to not change this unless absolutely required. Cannot exceed 20 characters.
+     summary|string||Explain your games mod support in 1 paragraph. Cannot exceed 250 characters.
      instructions|string||Instructions and links creators should follow to upload mods. Keep it short and explain details like are mods submitted in-game or via tools you have created.
 
 > Example responses
@@ -1145,10 +1174,10 @@ Update details for a game. If you want to update the `icon`, `logo` or `header` 
     "username": "XanT",
     "date_online": 1509922961,
     "avatar": {
-      "filename": "masterchief.jpg",
-      "original": "https://media.mod.io/images/members/1/1/1/masterchief.jpg"
+      "filename": "modio-dark.png",
+      "original": "https://media.mod.io/images/global/modio-dark.png"
     },
-    "timezone": "Australia/Brisbane",
+    "timezone": "America/Los_Angeles",
     "language": "en",
     "profile_url": "https://mod.io/members/xant"
   },
@@ -1156,40 +1185,40 @@ Update details for a game. If you want to update the `icon`, `logo` or `header` 
   "date_updated": 1499410290,
   "date_live": 1499841403,
   "presentation": 1,
-  "community": 3,
   "submission": 0,
   "curation": 0,
+  "community": 3,
   "revenue": 1500,
   "api": 3,
   "ugc_name": "map",
   "icon": {
-    "filename": "IMG_20170409_222419.jpg",
-    "original": "https://media.mod.io/images/mods/1/1/2/icon.png",
-    "thumb_320x180": "https://media.mod.io/cache/images/mods/1/1/2/thumb_320x180/icon.png"
+    "filename": "modio-dark.png",
+    "original": "https://media.mod.io/images/global/modio-dark.png",
+    "thumb_320x180": "https://media.mod.io/images/global/modio-dark.png"
   },
   "logo": {
-    "filename": "IMG_20170409_222419.jpg",
-    "original": "https://media.mod.io/images/mods/1/1/2/IMG_20170409_222419.jpg",
-    "thumb_320x180": "https://media.mod.io/cache/images/mods/1/1/2/thumb_320x180/IMG_20170409_222419.jpg",
-    "thumb_640x360": "https://media.mod.io/cache/images/mods/1/1/2/thumb_640x360/IMG_20170409_222419.jpg",
-    "thumb_1280x720": "https://media.mod.io/cache/images/mods/1/1/2/thumb_1280x720/IMG_20170409_222419.jpg"
+    "filename": "modio-dark.png",
+    "original": "https://media.mod.io/images/global/modio-dark.png",
+    "thumb_320x180": "https://media.mod.io/images/global/modio-dark.png",
+    "thumb_640x360": "https://media.mod.io/images/global/modio-dark.png",
+    "thumb_1280x720": "https://media.mod.io/images/global/modio-dark.png"
   },
   "header": {
-    "filename": "gameheader.png",
-    "original": "https://media.mod.io/images/games/1/1/2/gameheader.png"
+    "filename": "demo.png",
+    "original": "https://media.mod.io/images/global/modio-dark.png"
   },
   "homepage": "https://www.rogue-knight-game.com/",
   "name": "Rogue Knight",
   "name_id": "rogue-knight",
   "summary": "Rogue Knight is a brand new 2D pixel platformer.",
-  "instructions": "Instructions here on how to develop for your game.",
+  "instructions": "Instructions on the process to upload mods.",
   "profile_url": "https://rogue-knight.mod.io",
   "tag_options": [
     {
-      "name": "Engines",
+      "name": "Theme",
       "type": "checkboxes",
       "tags": [
-        "Unity"
+        "Horror"
       ],
       "admin_only": 0
     }
@@ -1312,30 +1341,30 @@ System.out.println(response.toString());
 ```
 `GET /games/{game-id}/mods`
 
-Retrieve all Mods on mod.io for the corresponding game. Successful request will return an array of [Mod Objects](https://docs.mod.io/#get-all-mods-2). To make your requests as specific to your needs as possible it's highly recommended reading over our [filtering documentation](https://docs.mod.io/#filtering) if it will help you with consuming this endpoint.
+Get all mods for the corresponding game. Successful request will return an array of [Mod Objects](#get-all-mods-2). We recommended reading the [filtering documentation](#filtering) to return only the records you want.
      
      Filter|Type|Description
      ---|---|---
      id|integer(int32)|Unique id of the mod.
      game_id|integer(int32)|Unique id of the parent game.
-     submitted_by|integer(int32)|Unique id of the user who has ownership of the game.
+     submitted_by|integer(int32)|Unique id of the user who has ownership of the mod.
      date_added|integer(int32)|Unix timestamp of date registered.
      date_updated|integer(int32)|Unix timestamp of date updated.
      date_live|integer(int32)|Unix timestamp of date mod was set live.
-     logo|string|The filename of the logo.
+     logo|string|Filename of the logo image, extension included.
      homepage|string|Official homepage of the mod.
      name|string|Name of the mod.
-     name_id|string|The unique SEO friendly URL for your game.
+     name_id|string|URL path for the mod on mod.io.
      summary|string|Summary of the mod.
-     description|string|An extension of the summary. HTML Supported.
-     metadata_blob|string|Comma-separated list of metadata words.
-     modfile|integer(int32)|Unique id of the [Modfile Object](https://docs.mod.io/#modfile-object) marked as current release.
-     tags|string|Comma-separated values representing the tags you want to filter the results by. Only tags that are supported by the parent game can be applied. To determine what tags are eligible, see the tags values within 'Tag Option' column on the parent [Game Object](https://docs.mod.io/#game-object).
-     status|string| _OAuth 2 only_. The status of the mod (only recognised by game admins), _default is 'auth'_.<br><br>*Fields Options:*<br>__unauth__ = Only return un-authorized mods.<br>__auth__ = Only return authorized mods _(default)_.<br>__ban__ = Only return banned mods.<br>__archive__ = Only return archived content (out of date builds).<br>__delete__ = Only return deleted mods.
-     downloads|string|Sort results by most downloads using [_sort filter](https://docs.mod.io/#filtering) parameter, value should be `downloads` for descending or `-downloads` for ascending results.
-     popular|string|Sort results by popularity using [_sort filter](https://docs.mod.io/#filtering), value should be `popular` for descending or `-popular` for ascending results.
-     ratings|string|Sort results by weighted rating using [_sort filter](https://docs.mod.io/#filtering), value should be `ratings` for descending or `-ratings` for ascending results.
-     subscribers|string|Sort results by most subscribers using [_sort filter](https://docs.mod.io/#filtering), value should be `subscribers` for descending or `-subscribers` for ascending results.
+     description|string|Detailed description of the mod which allows HTML.
+     metadata_blob|string|Metadata stored by the game developer.
+     modfile|integer(int32)|Unique id of the [Modfile Object](#modfile-object) marked as current release.
+     tags|string|Comma-separated values representing the tags you want to filter the results by. Only tags that are supported by the parent game can be applied. To determine what tags are eligible, see the tags values within 'Tag Option' column on the parent [Game Object](#game-object).
+     status|string| Status of the mod (only recognised by game admins authenticated via _OAuth 2_):<br><br>__unauth__ = Only return un-authorized mods.<br>__auth__ = Only return authorized mods _(default)_.<br>__ban__ = Only return banned mods.<br>__archive__ = Only return archived mods (out of date / incompatible).<br>__delete__ = Only return deleted mods.
+     downloads|string|Sort results by most downloads using [_sort filter](#filtering) parameter, value should be `downloads` for descending or `-downloads` for ascending results.
+     popular|string|Sort results by popularity using [_sort filter](#filtering), value should be `popular` for descending or `-popular` for ascending results.
+     ratings|string|Sort results by weighted rating using [_sort filter](#filtering), value should be `ratings` for descending or `-ratings` for ascending results.
+     subscribers|string|Sort results by most subscribers using [_sort filter](#filtering), value should be `subscribers` for descending or `-subscribers` for ascending results.
 
 > Example responses
 
@@ -1351,10 +1380,10 @@ Retrieve all Mods on mod.io for the corresponding game. Successful request will 
         "username": "XanT",
         "date_online": 1509922961,
         "avatar": {
-          "filename": "masterchief.jpg",
-          "original": "https://media.mod.io/images/members/1/1/1/masterchief.jpg"
+          "filename": "modio-dark.png",
+          "original": "https://media.mod.io/images/global/modio-dark.png"
         },
-        "timezone": "Australia/Brisbane",
+        "timezone": "America/Los_Angeles",
         "language": "en",
         "profile_url": "https://mod.io/members/xant"
       },
@@ -1362,11 +1391,11 @@ Retrieve all Mods on mod.io for the corresponding game. Successful request will 
       "date_updated": 1499841487,
       "date_live": 1499841403,
       "logo": {
-        "filename": "IMG_20170409_222419.jpg",
-        "original": "https://media.mod.io/images/mods/1/1/2/IMG_20170409_222419.jpg",
-        "thumb_320x180": "https://media.mod.io/cache/images/mods/1/1/2/thumb_320x180/IMG_20170409_222419.jpg",
-        "thumb_640x360": "https://media.mod.io/cache/images/mods/1/1/2/thumb_640x360/IMG_20170409_222419.jpg",
-        "thumb_1280x720": "https://media.mod.io/cache/images/mods/1/1/2/thumb_1280x720/IMG_20170409_222419.jpg"
+        "filename": "modio-dark.png",
+        "original": "https://media.mod.io/images/global/modio-dark.png",
+        "thumb_320x180": "https://media.mod.io/images/global/modio-dark.png",
+        "thumb_640x360": "https://media.mod.io/images/global/modio-dark.png",
+        "thumb_1280x720": "https://media.mod.io/images/global/modio-dark.png"
       },
       "homepage": "https://www.rogue-hdpack.com/",
       "name": "Rogue Knight HD Pack",
@@ -1390,7 +1419,7 @@ Retrieve all Mods on mod.io for the corresponding game. Successful request will 
         "filename": "rogue-knight-v1.zip",
         "version": "1.3",
         "changelog": "VERSION 1.3 -- Changes -- Fixed critical castle floor bug.",
-        "download_url": "https://mod.io/mods/file/2/c489a0354111a4d76640d47f0cdcb294"
+        "download_url": "https://mod.io/mods/file/1/c489a0354111a4d76640d47f0cdcb294"
       },
       "media": {
         "youtube": [
@@ -1401,9 +1430,9 @@ Retrieve all Mods on mod.io for the corresponding game. Successful request will 
         ],
         "images": [
           {
-            "original": "https://media.mod.io/images/mods/1/1/2/IMG_20170409_222419.jpg",
-            "thumb_320x180": "https://media.mod.io/cache/images/mods/1/1/2/thumb_1020x2000/IMG_20170409_222419.jpg",
-            "filename": "IMG_20170409_222419.jpg"
+            "filename": "modio-dark.png",
+            "original": "https://media.mod.io/images/global/modio-dark.png",
+            "thumb_320x180": "https://media.mod.io/images/global/modio-dark.png"
           }
         ]
       },
@@ -1546,7 +1575,7 @@ System.out.println(response.toString());
 ```
 `GET /games/{game-id}/mods/{mod-id}`
 
-Retrieve a single mod on mod.io. Successful request will return a single [Mod Object](https://docs.mod.io/#mod-object).
+Get a mod. Successful request will return a single [Mod Object](#mod-object).
 
 > Example responses
 
@@ -1560,10 +1589,10 @@ Retrieve a single mod on mod.io. Successful request will return a single [Mod Ob
     "username": "XanT",
     "date_online": 1509922961,
     "avatar": {
-      "filename": "masterchief.jpg",
-      "original": "https://media.mod.io/images/members/1/1/1/masterchief.jpg"
+      "filename": "modio-dark.png",
+      "original": "https://media.mod.io/images/global/modio-dark.png"
     },
-    "timezone": "Australia/Brisbane",
+    "timezone": "America/Los_Angeles",
     "language": "en",
     "profile_url": "https://mod.io/members/xant"
   },
@@ -1571,11 +1600,11 @@ Retrieve a single mod on mod.io. Successful request will return a single [Mod Ob
   "date_updated": 1499841487,
   "date_live": 1499841403,
   "logo": {
-    "filename": "IMG_20170409_222419.jpg",
-    "original": "https://media.mod.io/images/mods/1/1/2/IMG_20170409_222419.jpg",
-    "thumb_320x180": "https://media.mod.io/cache/images/mods/1/1/2/thumb_320x180/IMG_20170409_222419.jpg",
-    "thumb_640x360": "https://media.mod.io/cache/images/mods/1/1/2/thumb_640x360/IMG_20170409_222419.jpg",
-    "thumb_1280x720": "https://media.mod.io/cache/images/mods/1/1/2/thumb_1280x720/IMG_20170409_222419.jpg"
+    "filename": "modio-dark.png",
+    "original": "https://media.mod.io/images/global/modio-dark.png",
+    "thumb_320x180": "https://media.mod.io/images/global/modio-dark.png",
+    "thumb_640x360": "https://media.mod.io/images/global/modio-dark.png",
+    "thumb_1280x720": "https://media.mod.io/images/global/modio-dark.png"
   },
   "homepage": "https://www.rogue-hdpack.com/",
   "name": "Rogue Knight HD Pack",
@@ -1599,7 +1628,7 @@ Retrieve a single mod on mod.io. Successful request will return a single [Mod Ob
     "filename": "rogue-knight-v1.zip",
     "version": "1.3",
     "changelog": "VERSION 1.3 -- Changes -- Fixed critical castle floor bug.",
-    "download_url": "https://mod.io/mods/file/2/c489a0354111a4d76640d47f0cdcb294"
+    "download_url": "https://mod.io/mods/file/1/c489a0354111a4d76640d47f0cdcb294"
   },
   "media": {
     "youtube": [
@@ -1610,9 +1639,9 @@ Retrieve a single mod on mod.io. Successful request will return a single [Mod Ob
     ],
     "images": [
       {
-        "original": "https://media.mod.io/images/mods/1/1/2/IMG_20170409_222419.jpg",
-        "thumb_320x180": "https://media.mod.io/cache/images/mods/1/1/2/thumb_1020x2000/IMG_20170409_222419.jpg",
-        "filename": "IMG_20170409_222419.jpg"
+        "filename": "modio-dark.png",
+        "original": "https://media.mod.io/images/global/modio-dark.png",
+        "thumb_320x180": "https://media.mod.io/images/global/modio-dark.png"
       }
     ]
   },
@@ -1757,20 +1786,20 @@ System.out.println(response.toString());
 ```
 `POST /games/{game-id}/mods`
 
-Publish a mod on mod.io. Successful request will return the newly created [Mod Object](https://docs.mod.io/#mod-object).
+Add a mod. Successful request will return the newly created [Mod Object](#mod-object).
      
      Parameter|Type|Required|Description
      ---|---|---|---|
-     logo|file|true|Image file which will represent your new mod logo. Must be gif, jpg, jpeg or png format and cannot exceed 8MB in filesize. Dimensions must be at least 640x360 and is highly recommended that you supply a high resolution image in 16 / 9 resolution. mod.io will use this image to make three thumbnails for the dimensions 320x180, 640x360 and 1280x720.
-     name|string|true|Name of your mod. Your default mod URL will contain the name so be sure to choose the most appropriate title. Example: Stellaris Shader Mod will become the URL stellaris-shader-mod.
-     homepage|string|true|Official homepage for your mod, if you do not fill this out it will default to your mod.io profile. Must be a valid URL.
-     summary|string|true|Summary for your mod, giving a brief overview of what it's about - cannot exceed 250 characters.
-     stock|integer(int32)||Artificially limit the amount of times the mod can be purchased.
-     description|string||An extension of your summary. Include all information relevant to your mod including sections such as 'About', 'Features', 'Install Instructions', 'FAQ', etc. HTML supported and encouraged.
-     metadata_blob|string||Comma-separated list of metadata strings that are relevant to your mod.
-     name_id|string||The unique SEO friendly URL for your game. Cannot exceed 80 characters.
-     modfile|integer(int32)||Unique id of the [Modfile Object](https://docs.mod.io/#modfile-object) to be labelled as the current release.
-     tags|array||An array of strings that represent what the mod has been tagged as, only tags that are supported by the parent game can be applied. To determine what tags are eligible, see the 'Tag Option' column on the connected game.
+     logo|file|true|Image file which will represent your mods logo. Must be gif, jpg or png format and cannot exceed 8MB in filesize. Dimensions must be at least 640x360 and we recommended you supply a high resolution image with a 16 / 9 ratio. mod.io will use this image to make three thumbnails for the dimensions 320x180, 640x360 and 1280x720.
+     name|string|true|Name of your mod. Your default mod URL will contain the name so be sure to choose the most appropriate title. For example: _'Stellaris Shader Mod'_ will become the URL _stellaris-shader-mod_.
+     homepage|string|true|Official homepage for your mod. Must be a valid URL.
+     summary|string|true|Summary for your mod, giving a brief overview of what it's about. Cannot exceed 250 characters.
+     stock|integer(int32)||Artificially limit the amount of times the mod can be subscribed too.
+     description|string||Detailed description for your mod, which can include details such as 'About', 'Features', 'Install Instructions', 'FAQ', etc. HTML supported and encouraged.
+     metadata_blob|string||Metadata stored by the game developer. Metadata can also be stored as searchable [key value pairs](#metadata).
+     name_id|string||URL path for the mod on mod.io. Cannot exceed 80 characters.
+     modfile|integer(int32)||Unique id of the [Modfile Object](#modfile-object) to be labelled as the current release.
+     tags|array||An array of strings that represent what the mod has been tagged as. Only tags that are supported by the parent game can be applied. To determine what tags are eligible, see the tags values within 'Tag Option' column on the parent [Game Object](#game-object).
 
 > Example responses
 
@@ -1784,10 +1813,10 @@ Publish a mod on mod.io. Successful request will return the newly created [Mod O
     "username": "XanT",
     "date_online": 1509922961,
     "avatar": {
-      "filename": "masterchief.jpg",
-      "original": "https://media.mod.io/images/members/1/1/1/masterchief.jpg"
+      "filename": "modio-dark.png",
+      "original": "https://media.mod.io/images/global/modio-dark.png"
     },
-    "timezone": "Australia/Brisbane",
+    "timezone": "America/Los_Angeles",
     "language": "en",
     "profile_url": "https://mod.io/members/xant"
   },
@@ -1795,11 +1824,11 @@ Publish a mod on mod.io. Successful request will return the newly created [Mod O
   "date_updated": 1499841487,
   "date_live": 1499841403,
   "logo": {
-    "filename": "IMG_20170409_222419.jpg",
-    "original": "https://media.mod.io/images/mods/1/1/2/IMG_20170409_222419.jpg",
-    "thumb_320x180": "https://media.mod.io/cache/images/mods/1/1/2/thumb_320x180/IMG_20170409_222419.jpg",
-    "thumb_640x360": "https://media.mod.io/cache/images/mods/1/1/2/thumb_640x360/IMG_20170409_222419.jpg",
-    "thumb_1280x720": "https://media.mod.io/cache/images/mods/1/1/2/thumb_1280x720/IMG_20170409_222419.jpg"
+    "filename": "modio-dark.png",
+    "original": "https://media.mod.io/images/global/modio-dark.png",
+    "thumb_320x180": "https://media.mod.io/images/global/modio-dark.png",
+    "thumb_640x360": "https://media.mod.io/images/global/modio-dark.png",
+    "thumb_1280x720": "https://media.mod.io/images/global/modio-dark.png"
   },
   "homepage": "https://www.rogue-hdpack.com/",
   "name": "Rogue Knight HD Pack",
@@ -1823,7 +1852,7 @@ Publish a mod on mod.io. Successful request will return the newly created [Mod O
     "filename": "rogue-knight-v1.zip",
     "version": "1.3",
     "changelog": "VERSION 1.3 -- Changes -- Fixed critical castle floor bug.",
-    "download_url": "https://mod.io/mods/file/2/c489a0354111a4d76640d47f0cdcb294"
+    "download_url": "https://mod.io/mods/file/1/c489a0354111a4d76640d47f0cdcb294"
   },
   "media": {
     "youtube": [
@@ -1834,9 +1863,9 @@ Publish a mod on mod.io. Successful request will return the newly created [Mod O
     ],
     "images": [
       {
-        "original": "https://media.mod.io/images/mods/1/1/2/IMG_20170409_222419.jpg",
-        "thumb_320x180": "https://media.mod.io/cache/images/mods/1/1/2/thumb_1020x2000/IMG_20170409_222419.jpg",
-        "filename": "IMG_20170409_222419.jpg"
+        "filename": "modio-dark.png",
+        "original": "https://media.mod.io/images/global/modio-dark.png",
+        "thumb_320x180": "https://media.mod.io/images/global/modio-dark.png"
       }
     ]
   },
@@ -1987,19 +2016,19 @@ System.out.println(response.toString());
 ```
 `PUT /games/{game-id}/mods/{mod-id}`
 
-Edit details for a mod. If you wanting to update the media attached to this game, including the `logo` field - you need to use the [Add Mod Media](https://docs.mod.io/#add-mod-media) endpoint. Successful request will return the updated [Mod Object](https://docs.mod.io/#mod-object). If `modfile` parameter is successfully changed, a __MODFILE_UPDATE__ event will be fired.
+Edit details for a mod. If you wanting to update the media attached to this game, including the `logo` field - you need to use the [Add Mod Media](#add-mod-media) endpoint. Successful request will return the updated [Mod Object](#mod-object). If `modfile` parameter is successfully changed, a __MODFILE_UPDATE__ event will be fired.
      
      Parameter|Type|Required|Description
      ---|---|---|---|
-     name|string||Name of your mod. Your default mod URL will contain the name so be sure to choose the most appropriate title. Example: Stellaris Shader Mod will become the URL stellaris-shader-mod.
-     homepage|string||Official homepage for your mod, if you do not fill this out it will default to your mod.io profile. Must be a valid URL.
-     summary|string||Summary for your mod, giving a brief overview of what it's about - cannot exceed 250 characters.
-     stock|integer(int32)||Artificially limit the amount of times the mod can be purchased.
-     description|string||An extension of your summary. Include all information relevant to your mod including sections such as 'About', 'Features', 'Install Instructions', 'FAQ', etc. HTML supported and encouraged.
-     metadata_blob|string||Comma-separated list of metadata strings that are relevant to your mod.
-     name_id|string||The unique SEO friendly URL for your game. Cannot exceed 80 characters.
-     modfile|integer(int32)||Unique id of the [Modfile Object](https://docs.mod.io/#modfile-object) to be labelled as the current release.
-     status|string||__Game Administrators Only__. Activate an un-authorized/deleted mod. The Mod must have at least one uploaded build to be activated. Ideal for restoring mods that have been soft-deleted. For mod deletion, use the [Delete Mod](https://docs.mod.io/#delete-mod) endpoint. Using either of the fields supplied below will allow the mod to be returned in requests.<br><br>*Fields Options:*<br>__auth__ = Authorize the mod.<br>__archive__ = Label as out of date/potentially not compatible.
+     name|string||Name of your mod. Your default mod URL will contain the name so be sure to choose the most appropriate title. For example: _'Stellaris Shader Mod'_ will become the URL _stellaris-shader-mod_.
+     homepage|string||Official homepage for your mod. Must be a valid URL.
+     summary|string||Summary for your mod, giving a brief overview of what it's about. Cannot exceed 250 characters.
+     stock|integer(int32)||Artificially limit the amount of times the mod can be subscribed too.
+     description|string||Detailed description for your mod, which can include details such as 'About', 'Features', 'Install Instructions', 'FAQ', etc. HTML supported and encouraged.
+     metadata_blob|string||Metadata stored by the game developer. Metadata can also be stored as searchable [key value pairs](#metadata).
+     name_id|string||URL path for the mod on mod.io. Cannot exceed 80 characters.
+     modfile|integer(int32)||Unique id of the [Modfile Object](#modfile-object) to be labelled as the current release.
+     status|string||__Game Administrators Only__. Activate an un-authorized or deleted mod. The mod must have at least one uploaded build to be activated. Ideal for restoring mods that have been soft-deleted. For mod deletion, use the [Delete Mod](#delete-mod) endpoint. Using either of the fields supplied below will allow the mod to be returned in requests.<br><br>__auth__ = Authorize the mod<br>__archive__ = Label as out of date/not compatible
 
 > Example responses
 
@@ -2013,10 +2042,10 @@ Edit details for a mod. If you wanting to update the media attached to this game
     "username": "XanT",
     "date_online": 1509922961,
     "avatar": {
-      "filename": "masterchief.jpg",
-      "original": "https://media.mod.io/images/members/1/1/1/masterchief.jpg"
+      "filename": "modio-dark.png",
+      "original": "https://media.mod.io/images/global/modio-dark.png"
     },
-    "timezone": "Australia/Brisbane",
+    "timezone": "America/Los_Angeles",
     "language": "en",
     "profile_url": "https://mod.io/members/xant"
   },
@@ -2024,11 +2053,11 @@ Edit details for a mod. If you wanting to update the media attached to this game
   "date_updated": 1499841487,
   "date_live": 1499841403,
   "logo": {
-    "filename": "IMG_20170409_222419.jpg",
-    "original": "https://media.mod.io/images/mods/1/1/2/IMG_20170409_222419.jpg",
-    "thumb_320x180": "https://media.mod.io/cache/images/mods/1/1/2/thumb_320x180/IMG_20170409_222419.jpg",
-    "thumb_640x360": "https://media.mod.io/cache/images/mods/1/1/2/thumb_640x360/IMG_20170409_222419.jpg",
-    "thumb_1280x720": "https://media.mod.io/cache/images/mods/1/1/2/thumb_1280x720/IMG_20170409_222419.jpg"
+    "filename": "modio-dark.png",
+    "original": "https://media.mod.io/images/global/modio-dark.png",
+    "thumb_320x180": "https://media.mod.io/images/global/modio-dark.png",
+    "thumb_640x360": "https://media.mod.io/images/global/modio-dark.png",
+    "thumb_1280x720": "https://media.mod.io/images/global/modio-dark.png"
   },
   "homepage": "https://www.rogue-hdpack.com/",
   "name": "Rogue Knight HD Pack",
@@ -2052,7 +2081,7 @@ Edit details for a mod. If you wanting to update the media attached to this game
     "filename": "rogue-knight-v1.zip",
     "version": "1.3",
     "changelog": "VERSION 1.3 -- Changes -- Fixed critical castle floor bug.",
-    "download_url": "https://mod.io/mods/file/2/c489a0354111a4d76640d47f0cdcb294"
+    "download_url": "https://mod.io/mods/file/1/c489a0354111a4d76640d47f0cdcb294"
   },
   "media": {
     "youtube": [
@@ -2063,9 +2092,9 @@ Edit details for a mod. If you wanting to update the media attached to this game
     ],
     "images": [
       {
-        "original": "https://media.mod.io/images/mods/1/1/2/IMG_20170409_222419.jpg",
-        "thumb_320x180": "https://media.mod.io/cache/images/mods/1/1/2/thumb_1020x2000/IMG_20170409_222419.jpg",
-        "filename": "IMG_20170409_222419.jpg"
+        "filename": "modio-dark.png",
+        "original": "https://media.mod.io/images/global/modio-dark.png",
+        "thumb_320x180": "https://media.mod.io/images/global/modio-dark.png"
       }
     ]
   },
@@ -2333,23 +2362,22 @@ System.out.println(response.toString());
 ```
 `GET /games/{game-id}/mods/{mod-id}/files`
 
-Browse files on mod.io that are published for the corresponding mod. Successful request will return an [array of Modfile Objects](https://docs.mod.io/#get-all-mod-files-2). To make your requests as specific to your needs as possible it's highly recommended reading over our [filtering documentation](https://docs.mod.io/#filtering) if it will help you with consuming this endpoint.
+Get all files that are published for the corresponding mod. Successful request will return an [array of Modfile Objects](#get-all-mod-files-2). We recommended reading the [filtering documentation](#filtering) to return only the records you want.
      
      Filter|Type|Description
      ---|---|---
      id|integer(int32)|Unique id of the file.
      mod_id|integer(int32)|Unique id of the mod.
      date_added|integer(int32)|Unix timestamp of date added.
-     date_scanned|integer(int32)|Unix timestamp of date it was virus scanned.
-     virus_status|integer(int32)|Current file scan status of the file. For newly added files that have yet to be scanned this field could change frequently until a scan is complete.<br>*Field Options*<br><br>__0__ = Not scanned<br>__1__ = Scan complete<br>__2__ = In progress<br>__3__ = Too large to scan<br>__4__ = File not found<br>__5__ = Error Scanning
-     virus_positive|integer(int32)|Virus status of file<br>*Field Options*<br>__0__ = No threats detected<br>__1__ = Flagged as malicious
-     filesize|integer(int32)|Filesize of file in bytes.
-     filehash|string|MD5 hash of file.
+     date_scanned|integer(int32)|Unix timestamp of date file was virus scanned.
+     virus_status|integer(int32)|Current virus scan status of the file. For newly added files that have yet to be scanned this field will change frequently until a scan is complete:<br><br>__0__ = Not scanned<br>__1__ = Scan complete<br>__2__ = In progress<br>__3__ = Too large to scan<br>__4__ = File not found<br>__5__ = Error Scanning
+     virus_positive|integer(int32)|Was a virus detected:<br><br>__0__ = No threats detected<br>__1__ = Flagged as malicious
+     filesize|integer(int32)|Size of the file in bytes.
+     filehash|string|MD5 hash of the file.
      filename|string|Filename including extension.
-     version|string|Version of file.
-     virustotal|string|Virustotal report.
-     changelog|string|The changelog for the file.
-     download|string|File download URL.
+     version|string|Release version this file represents.
+     virustotal_hash|string|VirusTotal proprietary hash.
+     changelog|string|Changelog for the file.
 
 > Example responses
 
@@ -2371,7 +2399,7 @@ Browse files on mod.io that are published for the corresponding mod. Successful 
       "filename": "rogue-knight-v1.zip",
       "version": "1.3",
       "changelog": "VERSION 1.3 -- Changes -- Fixed critical castle floor bug.",
-      "download_url": "https://mod.io/mods/file/2/c489a0354111a4d76640d47f0cdcb294"
+      "download_url": "https://mod.io/mods/file/1/c489a0354111a4d76640d47f0cdcb294"
     },
     {
         ...
@@ -2497,7 +2525,7 @@ System.out.println(response.toString());
 ```
 `GET /games/{game-id}/mods/{mod-id}/files/{file-id}`
 
-Retrieve a file on mod.io with the corresponding id. Successful request will return a [single Modfile Object](--parse-docsurl/#modfile_object).
+Get a file. Successful request will return a [single Modfile Object](--parse-docsurl/#modfile_object).
 
 > Example responses
 
@@ -2517,7 +2545,7 @@ Retrieve a file on mod.io with the corresponding id. Successful request will ret
   "filename": "rogue-knight-v1.zip",
   "version": "1.3",
   "changelog": "VERSION 1.3 -- Changes -- Fixed critical castle floor bug.",
-  "download_url": "https://mod.io/mods/file/2/c489a0354111a4d76640d47f0cdcb294"
+  "download_url": "https://mod.io/mods/file/1/c489a0354111a4d76640d47f0cdcb294"
 }
 ```
 <h3 id="Get-Modfile-responses">Responses</h3>
@@ -2645,15 +2673,15 @@ System.out.println(response.toString());
 ```
 `POST /games/{game-id}/mods/{mod-id}/files`
 
-Upload a file for the corresponding mod, upon success will return the newly created [Modfile Object](https://docs.mod.io/#modfile-object). Ensure that the release you are uploading is stable and free from any critical issues. Files are scanned upon upload, any users who upload malicious files will be have their accounts closed promptly. <br><br>*Note:* This endpoint does *not support* `input_json` even if you base64-encode your file method due to the already-large file sizes of some releases and base64-encoding inflating the filesize.
+Upload a file for the corresponding mod, upon success will return the newly created [Modfile Object](#modfile-object). Ensure that the release you are uploading is stable and free from any critical issues. Files are scanned upon upload, any users who upload malicious files will be have their accounts closed promptly. <br><br>__NOTE:__ This endpoint does *not support* `input_json` even if you base64-encode your file method due to the already-large file sizes of some releases and base64-encoding inflating the filesize.
      
      Parameter|Type|Required|Description
      ---|---|---|---|
-     filedata|file|true|The binary file for the release. For compatibility you should ZIP the base folder of your mod, or if it is a collection of files which live in a pre-existing game folder, you should ZIP those files. Your file must meet the following conditions:<br><br>- File must be __zipped__ and cannot exceed 10GB in filesize.<br>- Mods which span multiple game directories are not supported<br>- Mods which overwrite files are not supported
+     filedata|file|true|The binary file for the release. For compatibility you should ZIP the base folder of your mod, or if it is a collection of files which live in a pre-existing game folder, you should ZIP those files. Your file must meet the following conditions:<br><br>- File must be __zipped__ and cannot exceed 10GB in filesize<br>- Mods which span multiple game directories are not supported unless the game manages this<br>- Mods which overwrite files are not supported unless the game manages this
      version|string|true|Version of the file release.
-     changelog|string|true|The changelog field you are updating. Updates for files are deliberately limited to the changelog field only, if you need to edit any other fields you should be uploading a new file and not editing an existing file.
+     changelog|string|true|Changelog of this release.
      active|boolean||Label this upload as the current release, this will change the *modfile* field on the parent mod to the *id* field of this file after upload.
-     filehash|string||MD5 of the submitted file. When supplied, MD5 will be compared against calculated MD5 of _filedata_ binary file and will return `422 Unprocessible Entity` if md5 mis-match is detected.
+     filehash|string||MD5 of the submitted file. When supplied, MD5 will be compared against calculated MD5 of _filedata_ binary file and will return `422 Unprocessible Entity` if the MD5s don't match.
 
 > Example responses
 
@@ -2673,7 +2701,7 @@ Upload a file for the corresponding mod, upon success will return the newly crea
   "filename": "rogue-knight-v1.zip",
   "version": "1.3",
   "changelog": "VERSION 1.3 -- Changes -- Fixed critical castle floor bug.",
-  "download_url": "https://mod.io/mods/file/2/c489a0354111a4d76640d47f0cdcb294"
+  "download_url": "https://mod.io/mods/file/1/c489a0354111a4d76640d47f0cdcb294"
 }
 ```
 <h3 id="Add-Modfile-responses">Responses</h3>
@@ -2807,11 +2835,11 @@ System.out.println(response.toString());
 ```
 `PUT /games/{game-id}/mods/{mod-id}/files/{file-id}`
 
-Update the details for a published file on mod.io. If you are wanting to update fields other than changelog, you should be creating a new file instead. Successful request will return updated [Modfile Object](https://docs.mod.io/#modfile-object). Unless you specify the modfile to not be the active release with the `active` parameter set to false, a __MODFILE_UPDATE__ event will be fired.
+Edit the details of a published file. If you want to update fields other than the changelog and active status, you should add a new file instead. Successful request will return updated [Modfile Object](#modfile-object).
      
      Parameter|Type|Required|Description
      ---|---|---|---|
-     changelog|string||The changelog field you are updating. Updates for files are deliberately limited to the *changelog* field and *active* fields only, if you need to edit any other fields you should be uploading a new file and not editing an existing file.
+     changelog|string||Changelog of this release.
      active|boolean||Label this upload as the current release, this will change the *modfile* field on the parent mod to the *id* field of this file after upload.
 
 > Example responses
@@ -2832,7 +2860,7 @@ Update the details for a published file on mod.io. If you are wanting to update 
   "filename": "rogue-knight-v1.zip",
   "version": "1.3",
   "changelog": "VERSION 1.3 -- Changes -- Fixed critical castle floor bug.",
-  "download_url": "https://mod.io/mods/file/2/c489a0354111a4d76640d47f0cdcb294"
+  "download_url": "https://mod.io/mods/file/1/c489a0354111a4d76640d47f0cdcb294"
 }
 ```
 <h3 id="Edit-Modfile-responses">Responses</h3>
@@ -2962,13 +2990,13 @@ System.out.println(response.toString());
 ```
 `POST /games/{game-id}/media`
 
-Upload new media to a game. Any request you make to this endpoint *should* contain a binary file for one of the following fields below.
+Upload new media to a game. Any request you make to this endpoint *should* contain a binary file for each of the fields you want to update below.
      
      Parameter|Type|Required|Description
      ---|---|---|---|
-     logo|file||Image file which will represent your new mod logo. Must be gif, jpg, jpeg or png format and cannot exceed 8MB in filesize. Dimensions must be at least 640x360 and is highly recommended that you supply a high resolution image in 16 / 9 resolution. mod.io will use this image to make three thumbnails for the dimensions 320x180, 640x360 and 1280x720.
-     icon|file||Binary image file which will represent your new game icon. Must be minimum 64x64px dimensions and gif, jpg, jpeg or png format and cannot exceed 1MB in filesize.
-     header|file||Binary image file which will represent your new game header. Must be gif, jpg, jpeg or png format and cannot exceed 256KB in filesize.
+     logo|file||Image file which will represent your games logo. Must be gif, jpg or png format and cannot exceed 8MB in filesize. Dimensions must be at least 640x360 and we recommended you supply a high resolution image with a 16 / 9 ratio. mod.io will use this image to make three thumbnails for the dimensions 320x180, 640x360 and 1280x720.
+     icon|file||Image file which will represent your games icon. Must be gif, jpg or png format and cannot exceed 1MB in filesize. Dimensions must be at least 64x64 and a transparent png that works on a colorful background is recommended.
+     header|file||Image file which will represent your games header. Must be gif, jpg or png format and cannot exceed 256KB in filesize. Dimensions of 400x100 and a light transparent png that works on a dark background is recommended.
 
 > Example responses
 
@@ -3103,12 +3131,12 @@ System.out.println(response.toString());
 ```
 `POST /games/{game-id}/mods/{mod-id}/media`
 
-This endpoint is very flexible and will process any images posted to the endpoint regardless of their body name providing it is a valid image. The request `Content-Type` header __must__ be `multipart/form-data` to submit image files.
+This endpoint is very flexible and will add any images posted to the mods gallery regardless of their body name providing they are a valid image. The request `Content-Type` header __must__ be `multipart/form-data` to submit image files.
      
      Parameter|Type|Required|Description
      ---|---|---|---|
-     logo|file||Image file which will represent your new mod logo. Must be gif, jpg, jpeg or png format and cannot exceed 8MB in filesize. Dimensions must be at least 640x360 and is highly recommended that you supply a high resolution image in 16 / 9 resolution. mod.io will use this image to make three thumbnails for the dimensions 320x180, 640x360 and 1280x720.
-     images|zip||Zip archive of images to upload. Only valid gif, jpg, jpeg or png binary images within the zip file will be processed. The filename __must be images.zip__ if you are submitting an archive of images as any other name will be ignored. Alternatively you can POST one or more binary file images to this endpoint as their original file types without any compression.
+     logo|file||Image file which will represent your mod logo. Must be gif, jpg or png format and cannot exceed 8MB in filesize. Dimensions must be at least 640x360 and we recommended you supply a high resolution image with a 16 / 9 ratio. mod.io will use this image to make three thumbnails for the dimensions 320x180, 640x360 and 1280x720.
+     images|zip||Zip archive of images to upload. Only valid gif, jpg or png images in the zip file will be processed. The filename __must be images.zip__ all other zips will be ignored. Alternatively you can POST one or more images to this endpoint and they will be detected and added to the mods gallery.
      youtube|array||Full Youtube link(s) you want to add - example 'https://www.youtube.com/watch?v=IGVZOLV9SPo'
      sketchfab|array||Full Sketchfab link(s) you want to add - example 'https://sketchfab.com/models/71f04e390ff54e5f8d9a51b4e1caab7e'
 
@@ -3117,7 +3145,7 @@ This endpoint is very flexible and will process any images posted to the endpoin
 ```json
 {
   "code": "201",
-  "message": "You have successfully added new media to the specified."
+  "message": "You have successfully added new media to the specified mod."
 }
 ```
 <h3 id="Add-Mod-Media-responses">Responses</h3>
@@ -3392,7 +3420,7 @@ System.out.println(response.toString());
 ```
 `POST /games/{game-id}/mods/{mod-id}/subscribe`
 
-Subscribe the _authenticated user_ to a corresponding mod. No body parameters are required for this action. Successful request will return the [Mod Object](https://docs.mod.io/#mod-object) of the newly subscribed mod.
+Subscribe the _authenticated user_ to a corresponding mod. No body parameters are required for this action. Successful request will return the [Mod Object](#mod-object) of the newly subscribed mod.
 
 > Example responses
 
@@ -3406,10 +3434,10 @@ Subscribe the _authenticated user_ to a corresponding mod. No body parameters ar
     "username": "XanT",
     "date_online": 1509922961,
     "avatar": {
-      "filename": "masterchief.jpg",
-      "original": "https://media.mod.io/images/members/1/1/1/masterchief.jpg"
+      "filename": "modio-dark.png",
+      "original": "https://media.mod.io/images/global/modio-dark.png"
     },
-    "timezone": "Australia/Brisbane",
+    "timezone": "America/Los_Angeles",
     "language": "en",
     "profile_url": "https://mod.io/members/xant"
   },
@@ -3417,11 +3445,11 @@ Subscribe the _authenticated user_ to a corresponding mod. No body parameters ar
   "date_updated": 1499841487,
   "date_live": 1499841403,
   "logo": {
-    "filename": "IMG_20170409_222419.jpg",
-    "original": "https://media.mod.io/images/mods/1/1/2/IMG_20170409_222419.jpg",
-    "thumb_320x180": "https://media.mod.io/cache/images/mods/1/1/2/thumb_320x180/IMG_20170409_222419.jpg",
-    "thumb_640x360": "https://media.mod.io/cache/images/mods/1/1/2/thumb_640x360/IMG_20170409_222419.jpg",
-    "thumb_1280x720": "https://media.mod.io/cache/images/mods/1/1/2/thumb_1280x720/IMG_20170409_222419.jpg"
+    "filename": "modio-dark.png",
+    "original": "https://media.mod.io/images/global/modio-dark.png",
+    "thumb_320x180": "https://media.mod.io/images/global/modio-dark.png",
+    "thumb_640x360": "https://media.mod.io/images/global/modio-dark.png",
+    "thumb_1280x720": "https://media.mod.io/images/global/modio-dark.png"
   },
   "homepage": "https://www.rogue-hdpack.com/",
   "name": "Rogue Knight HD Pack",
@@ -3445,7 +3473,7 @@ Subscribe the _authenticated user_ to a corresponding mod. No body parameters ar
     "filename": "rogue-knight-v1.zip",
     "version": "1.3",
     "changelog": "VERSION 1.3 -- Changes -- Fixed critical castle floor bug.",
-    "download_url": "https://mod.io/mods/file/2/c489a0354111a4d76640d47f0cdcb294"
+    "download_url": "https://mod.io/mods/file/1/c489a0354111a4d76640d47f0cdcb294"
   },
   "media": {
     "youtube": [
@@ -3456,9 +3484,9 @@ Subscribe the _authenticated user_ to a corresponding mod. No body parameters ar
     ],
     "images": [
       {
-        "original": "https://media.mod.io/images/mods/1/1/2/IMG_20170409_222419.jpg",
-        "thumb_320x180": "https://media.mod.io/cache/images/mods/1/1/2/thumb_1020x2000/IMG_20170409_222419.jpg",
-        "filename": "IMG_20170409_222419.jpg"
+        "filename": "modio-dark.png",
+        "original": "https://media.mod.io/images/global/modio-dark.png",
+        "thumb_320x180": "https://media.mod.io/images/global/modio-dark.png"
       }
     ]
   },
@@ -3603,7 +3631,7 @@ System.out.println(response.toString());
 ```
 `DELETE /games/{game-id}/mods/{mod-id}/subscribe`
 
-__OAuth 2 Required__. Un-Subscribe the _authenticated user_ to the corresponding mod. No body parameters are required for this action.
+Unsubscribe the _authenticated user_ from the corresponding mod. No body parameters are required for this action. Successful request will return `204 No Content`.
 
 > Example responses
 
@@ -3726,7 +3754,7 @@ System.out.println(response.toString());
 ```
 `GET /games/{game-id}/activity`
 
-Retrieve activity log for a game, showing changes made to the resource. Successful request will return an array of [Game activity objects](https://docs.mod.io/#get-game-activity-2). To make your requests as specific to your needs as possible it's highly recommended reading over our [filtering documentation](https://docs.mod.io/#filtering) if it will help you with consuming this endpoint. This endpoint by default sorts by `id` in descending order.
+Get activity log for a game, showing changes made to the resource. Successful request will return an array of [Game activity objects](#get-game-activity-2). We recommended reading the [filtering documentation](#filtering) to return only the records you want. This endpoint will return the latest activity first by default.
      
      Filter|Type|Description
      ---|---|---
@@ -3734,7 +3762,7 @@ Retrieve activity log for a game, showing changes made to the resource. Successf
      game_id|integer(int32)|Unique id of the parent game.
      user_id|integer(int32)|Unique id of the user who performed the action.
      date_updated|integer(int32)|Unix timestamp of date updated.
-     event|string|Type of change that occurred. <br><br>*Field Options*<br>__GAME_UPDATE__ - Update event<br>__GAME_VISIBILITY_CHANGE__ = Game has been set to live, or hidden
+     event|string|Type of change that occurred:<br><br>__GAME_UPDATE__ = Update event<br>__GAME_VISIBILITY_CHANGE__ = Game has been set to live, or hidden
 
 > Example responses
 
@@ -3879,17 +3907,17 @@ System.out.println(response.toString());
 ```
 `GET /games/{game-id}/mods/{mod-id}/activity`
 
-Retrieve activity log for a mod, showing changes made to the resource. Successful request will return an array of [Mod Activity Objects](https://docs.mod.io/#get-mod-activity-2). To make your requests as specific to your needs as possible it's highly recommended reading over our [filtering documentation](https://docs.mod.io/#filtering) if it will help you with consuming this endpoint. This endpoint by default sorts by `id` in descending order.
+Get activity log for a mod, showing changes made to the resource. Successful request will return an array of [Mod Activity Objects](#get-mod-activity-2). We recommended reading the [filtering documentation](#filtering) to return only the records you want. This endpoint will return the latest activity first by default.
      
      Filter|Type|Description
      ---|---|---
      id|integer(int32)|Unique id of the activity object.
      mod_id|integer(int32)|Unique id of the parent mod.
-     user_id|integer(int32)|Unique id of the user who triggered the action.
+     user_id|integer(int32)|Unique id of the user who performed the action.
      date_updated|integer(int32)|Unix timestamp of date updated.
-     event|string|Type of change that occurred.<br><br>*Field Options*<br>__MOD_UPDATE__ - Update event<br>__MODFILE_UPDATE__ = Primary file changed<br>__MOD_VISIBILITY_CHANGE__ = Mod has been set to live, or hidden.<br>__MOD_LIVE__ = When the mod went public for the first time.
-     latest|boolean|_Default value is true_. Returns only the latest unique events for each mod.
-     subscribed|boolean|__OAuth 2 Required__. Default value is _false_. Returns only the events the _authenticated user_ is subscribed to.
+     event|string|Type of change that occurred:<br><br>__MOD_UPDATE__ = Update event<br>__MODFILE_UPDATE__ = Primary file changed<br>__MOD_VISIBILITY_CHANGE__ = Mod has been set to live, or hidden<br>__MOD_LIVE__ = When the mod went public for the first time
+     latest|boolean|_Default value is true_. Returns only the latest unique events for the mod, which is useful for checking if the primary `modfile` has changed.
+     subscribed|boolean|_Default value is false_. Returns only the events connected to mod the __authenticated user__ is subscribed to, which is useful for keeping the users mods updated.
 
 > Example responses
 
@@ -4034,17 +4062,17 @@ System.out.println(response.toString());
 ```
 `GET /games/{game-id}/mods/activity`
 
-Retrieve all mod activity for the corresponding game. Successful request will return an array of [Mod Activity Objects](https://docs.mod.io/#get-mod-activity-2). To make your requests as specific to your needs as possible it's highly recommended reading over our [filtering documentation](https://docs.mod.io/#filtering) if it will help you with consuming this endpoint. This endpoint by default sorts by `id` in descending order.
+Get all mod activity for the corresponding game. Successful request will return an array of [Mod Activity Objects](#get-mod-activity-2). This endpoint will return the latest activity first by default. We recommend you poll this endpoint to keep mods up-to-date. If polling this endpoint for updates you should store the `id` or `date_updated` of the latest activity, and on subsequest requests use that information [in the filter](#filtering), to return only new activity to process.
      
      Filter|Type|Description
      ---|---|---
      id|integer(int32)|Unique id of the activity object.
      mod_id|integer(int32)|Unique id of the parent mod.
-     user_id|integer(int32)|Unique id of the user who triggered the action.
+     user_id|integer(int32)|Unique id of the user who performed the action.
      date_updated|integer(int32)|Unix timestamp of date updated.
-     event|string|Type of change that occurred. <br><br>*Field Options*<br>__MOD_UPDATE__ - Update event<br>__MODFILE_UPDATE__ = Primary file changed<br>__MOD_VISIBILITY_CHANGE__ = Mod has been set to live, or hidden.<br>__MOD_LIVE__ = When the mod went public for the first time.
-     latest|boolean|_Default value is true_. Returns only the latest unique events for each mod.
-     subscribed|boolean|__OAuth 2 Required__. Default value is _false_. Returns only the events the _authenticated user_ is subscribed to.
+     event|string|Type of change that occurred:<br><br>__MOD_UPDATE__ = Update event<br>__MODFILE_UPDATE__ = Primary file changed<br>__MOD_VISIBILITY_CHANGE__ = Mod has been set to live, or hidden<br>__MOD_LIVE__ = When the mod went public for the first time
+     latest|boolean|_Default value is true_. Returns only the latest unique events, which is useful for checking if the primary `modfile` has changed.
+     subscribed|boolean|_Default value is false_. Returns only events connected to mods the __authenticated user__ is subscribed to, which is useful for keeping the users mods up-to-date.
 
 > Example responses
 
@@ -4191,7 +4219,7 @@ System.out.println(response.toString());
 ```
 `GET /games/{game-id}/tags`
 
-Get all tags options for the corresponding game that can be applied to any of it's mods, successful response will return an array of [Game Tag Option Objects](https://docs.mod.io/#game-tag-option-object).
+Get all tags for the corresponding game, that can be applied to any of its mods. Successful request will return an array of [Game Tag Option Objects](#game-tag-option-object).
 
 > Example responses
 
@@ -4199,10 +4227,10 @@ Get all tags options for the corresponding game that can be applied to any of it
 {
   "data": [
     {
-      "name": "Engines",
+      "name": "Theme",
       "type": "checkboxes",
       "tags": [
-        "Unity"
+        "Horror"
       ],
       "admin_only": 0
     },
@@ -4341,11 +4369,11 @@ System.out.println(response.toString());
 ```
 `POST /games/{game-id}/tags`
 
-Add a category and the optional tags in which mods can apply to their profiles. For example, you may want to add a difficulty category with the tags 'Easy', 'Medium' or 'Hard' as options to select from. If you were to apply the previous example your request would supply an array titled 'Difficulty' with 3 values. A Reminder that this endpoint does not need to be supplied with a specified parameter name, whichever name you supply as the parameter will be labelled as the category.<br><br>The * denotes that the parameter name is determined by the user.
+Add tags which mods can apply to their profiles. For example: You may want to add a 'Difficulty' group with the tags 'Easy', 'Medium' or 'Hard' as the options to select from. To add this, your request would supply an parameter titled 'Difficulty' which is an array containing 3 values.
      
      Parameter|Type|Required|Description
      ---|---|---|---|
-     categoryname*|array|true|Array of strings where the name of your parameter containing the array _will be the name of the category_ and the strings inside the array representing the tag options.
+     categoryname*|array|true|Array of strings representing the tag options. The parameter name will be the _name of the tag group_, allowing you to add multiple groups each request.
 
 > Example responses
 
@@ -4480,11 +4508,11 @@ System.out.println(response.toString());
 ```
 `DELETE /games/{game-id}/tags`
 
-Delete a game tag option category or tag options from within a category. For example, assume you have a category titled 'Difficulty' but you want to remove the tag option 'Hard' from it, your request would contain a parameter called 'Difficulty' which is an array that contained _only_ the value 'Hard'. If you want to delete an entire category, you only need to supply an empty array where the name of the parameter is the name of the category in which you want to remove.<br><br>The * denotes that the parameter name is determined by the user.
+Delete an entire group of tags or individual tags. For example: Assume you have a group of tags titled 'Difficulty' and you want to remove the tag option 'Hard' from it, your request would contain a parameter called 'Difficulty' which is an array that contained _only_ the value 'Hard'. If you want to delete an entire group, you would supply an empty array.<br><br>The * denotes that the parameter name is determined by the user.
      
      Parameter|Type|Required|Description
      ---|---|---|---|
-     categoryname*|array|true|Array of strings where the name of your parameter containing the array _will be the name of the category_ and the strings inside the array representing the tag options you want to remove.
+     categoryname*|array|true|Array of strings representing the tag options to delete. An empty array will delete the entire group. The parameter name is the name of the category you are deleting tag options from.
 
 > Example responses
 
@@ -4605,7 +4633,7 @@ System.out.println(response.toString());
 ```
 `GET /games/{game-id}/mods/{mod-id}/tags`
 
-Get all tags for the corresponding mod, successful response will return an array of [Mod Tag Objects](https://docs.mod.io/#mod-tag-object). To make your requests as specific to your needs as possible it's highly recommended reading over our [filtering documentation](https://docs.mod.io/#filtering) if it will help you with consuming this endpoint.
+Get all tags for the corresponding mod. Successful request will return an array of [Mod Tag Objects](#mod-tag-object). We recommended reading the [filtering documentation](#filtering) to return only the records you want.
      
      Filter|Type|Description
      ---|---|---
@@ -4756,13 +4784,11 @@ System.out.println(response.toString());
 ```
 `POST /games/{game-id}/mods/{mod-id}/tags`
 
-Add tags to a mod's profile. Note that you can only add what tags are allowed by the parent game. To determine what game tags are allowed view the `Tag Option` column on the parent game object.
-     
-     For example if the parent game has the 'Engine' category available with 'Easy', 'Medium' and 'Hard' being options you can simply submit 'Easy' in the `tags` array in your request. You can populate the array with tags from different categories and they will automatically be sorted by mod.io.
+Add tags to a mod's profile. You can only add tags allowed by the parent game, which are listed in the `Tag Option` column in the parent game's object.
      
      Parameter|Type|Required|Description
      ---|---|---|---|
-     tags|array|true|The tags array containing at least one string representing a tag.
+     tags|array|true|An array of tags to add. For example: If the parent game has a 'Theme' tag group with 'Fantasy', 'Sci-fi', 'Western' and 'Realistic' as the options, you could add 'Fantasy' and 'Sci-fi' to the `tags` array in your request. Provided the tags are valid you can add any number.
 
 > Example responses
 
@@ -4897,11 +4923,11 @@ System.out.println(response.toString());
 ```
 `DELETE /games/{game-id}/mods/{mod-id}/tags`
 
-Delete one or more tags for a mod profile. Deleting tags is identical to adding tags except the request method is `DELETE` instead of `POST`. To delete tags supply an array which contains one or more strings which are identical to the tags you want to remove.
+Delete tags from a mod's profile. Deleting tags is identical to adding tags except the request method is `DELETE` instead of `POST`. To delete tags supply an array of strings which are identical to the tags you want to remove.
      
      Parameter|Type|Required|Description
      ---|---|---|---|
-     tags|array|true|The tags array containing at least one string representing a tag.
+     tags|array|true|An array of tags to delete.
 
 > Example responses
 
@@ -5035,11 +5061,13 @@ System.out.println(response.toString());
 ```
 `POST /games/{game-id}/mods/{mod-id}/ratings`
 
-Submit a positive or negative rating for a mod, equivalent of thumps up and thumps down. You can only supply one rating for a mod, subsequent ratings will simply reverse your old ratings and apply your most recent rating.
+Submit a positive or negative rating for a mod. Each user can supply only one rating for a mod, subsequent ratings will override the old value.
+
+     __NOTE:__ You can order mods by their rating, and view their rating in the [Mod Object](#mod-object).
      
      Parameter|Type|Required|Description
      ---|---|---|---|
-     rating|integer(int32)|true|The value that determines what rating you submit for this mod.<br><br>*Field Options*<br>__1__ - Positive rating<br>__-1__ - Negative rating
+     rating|integer(int32)|true|The __authenticated users__ mod rating:<br><br>__1__ = Positive rating (thumbs up)<br>__-1__ = Negative rating (thumbs down)
 
 > Example responses
 
@@ -5165,7 +5193,7 @@ System.out.println(response.toString());
 ```
 `GET /games/{game-id}/mods/{mod-id}/metadatakvp`
 
-Get all key-value metadata pairs for the corresponding mod, successful response will return an array of objects contains only the key-value pairs. Only mod administrators are able to add/delete these values.
+Get all metadata stored by the game developer for this mod as searchable key value pairs. Successful request will return an array of [Metadata KVP Objects](#get-all-mod-kvp). Metadata is useful to define how the mod works, or other information you need to display. For example: A mod might change gravity and the rate of fire of weapons, you could define these properties as key value pairs. Metadata can also be stored as `metadata_blob` in the [Mod Object](#mod-object).
 
 > Example responses
 
@@ -5311,11 +5339,11 @@ System.out.println(response.toString());
 ```
 `POST /games/{game-id}/mods/{mod-id}/metadatakvp`
 
-Add searchable key-value metadata for the corresponding mod. Metadata may include properties as to how the item works, or other information you need to display. You must have administrator privileges to add metadata to a mod.
-     
+Add metadata for this mod as searchable key value pairs. Metadata is useful to define how the mod works, or other information you need to display. For example: A mod might change gravity and the rate of fire of weapons, you could define these properties as key value pairs. We recommend the mod upload tool you create defines and submits metadata behind the scenes, because if these settings affect gameplay, invalid information may cause problems in your game. Metadata can also be stored as `metadata_blob` in the [Mod Object](#mod-object).
+
      Parameter|Type|Required|Description
      ---|---|---|---|
-     metadata|array|true|Array containing one or more key value pairs where the the key & value are separated by a colon ':'. A single key can map to multiple values (1-to-many relationship), key-value pairs are searchable by exact matches only and neither the key or value can exceed 255 characters in length.
+     metadata|array|true|Array containing one or more key value pairs where the the key and value are separated by a colon ':' (if the string contains multiple colons the split will occur on the first matched, i.e. pistol-dmg:800:400 will become key: pistol-dmg, value: 800:400). __NOTE:__<br><br>- Keys support alphanumeric, '_' and '-' characters only.<br>- Keys can map to multiple values (1-to-many relationship).<br>- Keys and values cannot exceed 255 characters in length.<br>- Key value pairs are searchable by exact match only.
 
 > Example responses
 
@@ -5450,11 +5478,11 @@ System.out.println(response.toString());
 ```
 `DELETE /games/{game-id}/mods/{mod-id}/metadatakvp`
 
-Delete key-value pair metadata from the corresponding mod. <br><br>__Note:__ Due to a key being able to relate to multiple values, if you supply a key only it will delete _all_ key-value pairs containing that key but if you supply both key & value only an exact key-value match will be removed.
+Delete key value pairs metadata defined for this mod.
      
      Parameter|Type|Required|Description
      ---|---|---|---|
-     metadata|array|true|Array containing one or more key value pairs where the the key & value are separated by a colon ':'. A single key can map to multiple values (1-to-many relationship), key-value pairs are searchable by exact matches only and neither the key or value can exceed 255 characters in length.
+     metadata|array|true|Array containing one or more key value pairs to delete where the the key and value are separated by a colon ':'. __NOTE:__ If an array value contains only the key and no colon ':', _all_ metadata with that key will be removed.
 
 > Example responses
 
@@ -5577,7 +5605,9 @@ System.out.println(response.toString());
 ```
 `GET /games/{game-id}/mods/{mod-id}/dependencies`
 
-Get all listed dependencies for the corresponding mod, successful response will return an array of [Mod Dependencies Objects](--parse-docsurl/#mod-dependencies-object).
+Get all dependencies the chosen mod has selected. This is useful if a mod requires other mods be installed for it to run. Successful request will return an array of [Mod Dependencies Objects](--parse-docsurl/#mod-dependencies-object).
+
+     __NOTE:__ Some developers might select _soft_ dependencies to promote or credit other mods. We advise against this but it is possible to do.
 
 > Example responses
 
@@ -5723,11 +5753,13 @@ System.out.println(response.toString());
 ```
 `POST /games/{game-id}/mods/{mod-id}/dependencies`
 
-Add dependencies that are required for the corresponding mod. Dependencies should be the unique id of the mod that this mod is to be dependant on. For example: If you submit the values 28 & 42, you are listing this mod as being dependant on the mods that hold those values as their unique id.
+Add mod dependencies required by the corresponding mod. A dependency is a mod that must be installed for this mod to run.
+     
+     __NOTE:__ Some developers might select _soft_ dependencies to promote or credit other mods. We advise against this but it is possible to do.
      
      Parameter|Type|Required|Description
      ---|---|---|---|
-     dependencies|array|true|Array containing one or more mod id's that will represent the mods this mod is dependent on. Max of 5 dependencies per request.
+     dependencies|array|true|Array containing one or more mod id's that this mod is dependent on. Max of 5 dependencies per request.
 
 > Example responses
 
@@ -5862,11 +5894,11 @@ System.out.println(response.toString());
 ```
 `DELETE /games/{game-id}/mods/{mod-id}/dependencies`
 
-Delete dependencies currently listed as required for the corresponding mod. Dependencies should be the unique id of the mod that this mod is dependant on. For example: If you submit the values 28 & 42, you are requesting that the mods with the unique id's 28 & 42 no longer be listed as a dependency for the corresponding mod. Successful request will return `204 No Content`.
+Delete mod dependencies the corresponding mod has selected. Successful request will return `204 No Content`.
      
      Parameter|Type|Required|Description
      ---|---|---|---|
-     dependencies|array|true|Array containing one or more mod id's that will represent the unique id's of the mods to delete as dependencies. Max of 5 dependencies per request.
+     dependencies|array|true|Array containing one or more mod id's that can be deleted as dependencies.
 
 > Example responses
 
@@ -5989,16 +6021,16 @@ System.out.println(response.toString());
 ```
 `GET /games/{game-id}/team`
 
-Retrieve all members that are part of a game team. Successful request will return an array of [Team Member Objects](https://docs.mod.io/#get-team). To make your requests as specific to your needs as possible it's highly recommended reading over our [filtering documentation](https://docs.mod.io/#filtering) if it will help you with consuming this endpoint.
+Get all users that are part of a game team. Successful request will return an array of [Team Member Objects](#get-team). We recommended reading the [filtering documentation](#filtering) to return only the records you want.
      
      Filter|Type|Required|Description
      ---|---|---|---|
-     id|integer(int32)|Unique id of the access record.
-     user|integer(int32)|Unique id of the user.
+     id|integer(int32)|Unique id of the team member record.
+     user_id|integer(int32)|Unique id of the user.
      username|string|Username of the user.
-     level|integer|The level of permission the user has.<br><br>*Fields Options:*<br>__1__ = Moderator (can moderate content submitted)<br>__4__ = Financials (read only access to the control panel to view financial reports)<br>__8__ = Administrator (full access, including editing the profile and team)
-     date_added|integer|Unix timestamp of the date the user was added to the team.
-     position|string|Custom title given to the user.
+     level|integer(int32)|Level of permission the user has:<br><br>__1__ = Moderator (can moderate content submitted)<br>__4__ = Statistics (moderator access, including read only access to view reports)<br>__8__ = Administrator (full access, including editing the profile and team)
+     date_added|integer(int32)|Unix timestamp of the date the user was added to the team.
+     position|string|Custom title given to the user in this team.
 
 > Example responses
 
@@ -6013,10 +6045,10 @@ Retrieve all members that are part of a game team. Successful request will retur
         "username": "XanT",
         "date_online": 1509922961,
         "avatar": {
-          "filename": "masterchief.jpg",
-          "original": "https://media.mod.io/images/members/1/1/1/masterchief.jpg"
+          "filename": "modio-dark.png",
+          "original": "https://media.mod.io/images/global/modio-dark.png"
         },
-        "timezone": "Australia/Brisbane",
+        "timezone": "America/Los_Angeles",
         "language": "en",
         "profile_url": "https://mod.io/members/xant"
       },
@@ -6148,15 +6180,16 @@ System.out.println(response.toString());
 ```
 `GET /games/{game-id}/mods/{mod-id}/team`
 
-Retrieve all members that are part of a mod team. Successful request will return an array of [Team Member Objects](https://docs.mod.io/#get-team). To make your requests as specific to your needs as possible it's highly recommended reading over our [filtering documentation](https://docs.mod.io/#filtering) if it will help you with consuming this endpoint.
+Get all users that are part of a mod team. Successful request will return an array of [Team Member Objects](#get-team). We recommended reading the [filtering documentation](#filtering) to return only the records you want.
      
      Filter|Type|Required|Description
      ---|---|---|---|
-     id|integer(int32)|Unique id of the access record.
+     id|integer(int32)|Unique id of the team member record.
+     user_id|integer(int32)|Unique id of the user.
      username|string|Username of the user.
-     level|integer|The level of permission the user has.<br><br>*Fields Options:*<br>__1__ = Moderator (can moderate content submitted)<br>__4__ = Financials (read only access to the control panel to view financial reports)<br>__8__ = Administrator (full access, including editing the profile and team)
-     date_added|integer|Unix timestamp of the date the user was added to the team.
-     position|string|Custom title given to the user.
+     level|integer(int32)|Level of permission the user has:<br><br>__1__ = Moderator (can moderate comments and content attached)<br>__4__ = Creator (moderator access, including uploading builds and edit all settings except supply and team members)<br>__8__ = Administrator (full access, including editing the supply and team)
+     date_added|integer(int32)|Unix timestamp of the date the user was added to the team.
+     position|string|Custom title given to the user in this team.
 
 > Example responses
 
@@ -6171,10 +6204,10 @@ Retrieve all members that are part of a mod team. Successful request will return
         "username": "XanT",
         "date_online": 1509922961,
         "avatar": {
-          "filename": "masterchief.jpg",
-          "original": "https://media.mod.io/images/members/1/1/1/masterchief.jpg"
+          "filename": "modio-dark.png",
+          "original": "https://media.mod.io/images/global/modio-dark.png"
         },
-        "timezone": "Australia/Brisbane",
+        "timezone": "America/Los_Angeles",
         "language": "en",
         "profile_url": "https://mod.io/members/xant"
       },
@@ -6321,9 +6354,9 @@ Add a user to a game team.
      
      Parameter|Type|Required|Description
      ---|---|---|---|
-     user_id|integer|true|The unique id of the team you are adding to the team.
-     level|integer|true|The level of permissions you want to give to the user.<br><br>*Fields Options:*<br>__1__ = Moderator (can moderate content submitted)<br>__4__ = Financials (read only access to the control panel to view financial reports)<br>__8__ = Administrator (full access, including editing the profile and team)
-     position|string|true|The title you wish to apply to the member within your team.
+     user_id|integer(int32)|true|Unique id of the user you are adding to the team.
+     level|integer(int32)|true|Level of permission the user will get:<br><br>__1__ = Moderator (can moderate content submitted)<br>__4__ = Statistics (moderator access, including read only access to view reports)<br>__8__ = Administrator (full access, including editing the profile and team)
+     position|string|true|Title of the users position. For example: Team Leader, Artist.
 
 > Example responses
 
@@ -6462,9 +6495,9 @@ Add a user to a mod team.
      
      Parameter|Type|Required|Description
      ---|---|---|---|
-     user_id|integer|true|The unique id of the team you are adding to the team.
-     level|integer|true|The level of permissions you want to give to the user.<br><br>*Fields Options:*<br>__1__ = Moderator (can moderate comments and content attached)<br>__4__ = Creator (can upload builds and edit all settings except supply and existing team members)<br>__8__ = Administrator (full access, including editing the supply and team)
-     position|string|true|The title you wish to apply to the member within your team.
+     user_id|integer(int32)|true|Unique id of the user you are adding to the team.
+     level|integer(int32)|true|Level of permission the user will get:<br><br>__1__ = Moderator (can moderate comments and content attached)<br>__4__ = Creator (moderator access, including uploading builds and edit all settings except supply and team members)<br>__8__ = Administrator (full access, including editing the supply and team)
+     position|string|true|Title of the users position. For example: Team Leader, Artist.
 
 > Example responses
 
@@ -6491,7 +6524,7 @@ oauth2 ( Scopes: write )
 
 ```shell
 # You can also use wget
-curl -X PUT https://api.mod.io/v1/games/{game-id}/team/{access-id} \
+curl -X PUT https://api.mod.io/v1/games/{game-id}/team/{team-member-id} \
   -H 'Authorization: Bearer YourAccessToken' \
   -H 'Content-Type: application/x-www-form-urlencoded' \
   -H 'Accept: application/json'
@@ -6499,7 +6532,7 @@ curl -X PUT https://api.mod.io/v1/games/{game-id}/team/{access-id} \
 ```
 
 ```http
-PUT https://api.mod.io/v1/games/{game-id}/team/{access-id} HTTP/1.1
+PUT https://api.mod.io/v1/games/{game-id}/team/{team-member-id} HTTP/1.1
 Host: api.mod.io
 
 Accept: application/json
@@ -6517,7 +6550,7 @@ var headers = {
 };
 
 $.ajax({
-  url: 'https://api.mod.io/v1/games/{game-id}/team/{access-id}',
+  url: 'https://api.mod.io/v1/games/{game-id}/team/{team-member-id}',
   method: 'put',
 
   headers: headers,
@@ -6537,7 +6570,7 @@ const headers = {
 
 };
 
-fetch('https://api.mod.io/v1/games/{game-id}/team/{access-id}',
+fetch('https://api.mod.io/v1/games/{game-id}/team/{team-member-id}',
 {
   method: 'PUT',
 
@@ -6560,7 +6593,7 @@ headers = {
   'Accept' => 'application/json'
 }
 
-result = RestClient.put 'https://api.mod.io/v1/games/{game-id}/team/{access-id}',
+result = RestClient.put 'https://api.mod.io/v1/games/{game-id}/team/{team-member-id}',
   params: {
   }, headers: headers
 
@@ -6575,7 +6608,7 @@ headers = {
   'Accept': 'application/json'
 }
 
-r = requests.put('https://api.mod.io/v1/games/{game-id}/team/{access-id}', params={
+r = requests.put('https://api.mod.io/v1/games/{game-id}/team/{team-member-id}', params={
 
 }, headers = headers)
 
@@ -6583,7 +6616,7 @@ print r.json()
 ```
 
 ```java
-URL obj = new URL("https://api.mod.io/v1/games/{game-id}/team/{access-id}");
+URL obj = new URL("https://api.mod.io/v1/games/{game-id}/team/{team-member-id}");
 HttpURLConnection con = (HttpURLConnection) obj.openConnection();
 con.setRequestMethod("PUT");
 int responseCode = con.getResponseCode();
@@ -6597,14 +6630,14 @@ while ((inputLine = in.readLine()) != null) {
 in.close();
 System.out.println(response.toString());
 ```
-`PUT /games/{game-id}/team/{access-id}`
+`PUT /games/{game-id}/team/{team-member-id}`
 
-Update the details of a user who is currently a part of the specified game team.
+Update a game team members details.
      
      Parameter|Type|Required|Description
      ---|---|---|---|
-     level|integer||The level of permissions you want to give to the user.<br><br>*Fields Options:*<br>__1__ = Moderator (can moderate content submitted)<br>__4__ = Financials (read only access to the control panel to view financial reports)<br>__8__ = Administrator (full access, including editing the profile and team)
-     position|string||The title you wish to apply to the member within your team.
+     level|integer(int32)||Level of permission the user should have:<br><br>__1__ = Moderator (can moderate content submitted)<br>__4__ = Statistics (moderator access, including read only access to view reports)<br>__8__ = Administrator (full access, including editing the profile and team)
+     position|string||Title of the users position. For example: Team Leader, Artist.
 
 > Example responses
 
@@ -6631,7 +6664,7 @@ oauth2 ( Scopes: write )
 
 ```shell
 # You can also use wget
-curl -X PUT https://api.mod.io/v1/games/{game-id}/mods/{mod-id}/team/{access-id} \
+curl -X PUT https://api.mod.io/v1/games/{game-id}/mods/{mod-id}/team/{team-member-id} \
   -H 'Authorization: Bearer YourAccessToken' \
   -H 'Content-Type: application/x-www-form-urlencoded' \
   -H 'Accept: application/json'
@@ -6639,7 +6672,7 @@ curl -X PUT https://api.mod.io/v1/games/{game-id}/mods/{mod-id}/team/{access-id}
 ```
 
 ```http
-PUT https://api.mod.io/v1/games/{game-id}/mods/{mod-id}/team/{access-id} HTTP/1.1
+PUT https://api.mod.io/v1/games/{game-id}/mods/{mod-id}/team/{team-member-id} HTTP/1.1
 Host: api.mod.io
 
 Accept: application/json
@@ -6657,7 +6690,7 @@ var headers = {
 };
 
 $.ajax({
-  url: 'https://api.mod.io/v1/games/{game-id}/mods/{mod-id}/team/{access-id}',
+  url: 'https://api.mod.io/v1/games/{game-id}/mods/{mod-id}/team/{team-member-id}',
   method: 'put',
 
   headers: headers,
@@ -6677,7 +6710,7 @@ const headers = {
 
 };
 
-fetch('https://api.mod.io/v1/games/{game-id}/mods/{mod-id}/team/{access-id}',
+fetch('https://api.mod.io/v1/games/{game-id}/mods/{mod-id}/team/{team-member-id}',
 {
   method: 'PUT',
 
@@ -6700,7 +6733,7 @@ headers = {
   'Accept' => 'application/json'
 }
 
-result = RestClient.put 'https://api.mod.io/v1/games/{game-id}/mods/{mod-id}/team/{access-id}',
+result = RestClient.put 'https://api.mod.io/v1/games/{game-id}/mods/{mod-id}/team/{team-member-id}',
   params: {
   }, headers: headers
 
@@ -6715,7 +6748,7 @@ headers = {
   'Accept': 'application/json'
 }
 
-r = requests.put('https://api.mod.io/v1/games/{game-id}/mods/{mod-id}/team/{access-id}', params={
+r = requests.put('https://api.mod.io/v1/games/{game-id}/mods/{mod-id}/team/{team-member-id}', params={
 
 }, headers = headers)
 
@@ -6723,7 +6756,7 @@ print r.json()
 ```
 
 ```java
-URL obj = new URL("https://api.mod.io/v1/games/{game-id}/mods/{mod-id}/team/{access-id}");
+URL obj = new URL("https://api.mod.io/v1/games/{game-id}/mods/{mod-id}/team/{team-member-id}");
 HttpURLConnection con = (HttpURLConnection) obj.openConnection();
 con.setRequestMethod("PUT");
 int responseCode = con.getResponseCode();
@@ -6737,14 +6770,14 @@ while ((inputLine = in.readLine()) != null) {
 in.close();
 System.out.println(response.toString());
 ```
-`PUT /games/{game-id}/mods/{mod-id}/team/{access-id}`
+`PUT /games/{game-id}/mods/{mod-id}/team/{team-member-id}`
 
-Update the details of a member who is currently a part of the specified mod team.
+Update a mod team members details.
      
      Parameter|Type|Required|Description
      ---|---|---|---|
-     level|integer||The level of permissions you want to give to the user.<br><br>*Fields Options:*<br>__1__ = Moderator (can moderate comments and content attached)<br>__4__ = Creator (can upload builds and edit all settings except supply and existing team members)<br>__8__ = Administrator (full access, including editing the supply and team)
-     position|string||The title you wish to apply to the member within your team.
+     level|integer(int32)||Level of permission the user should have:<br><br>__1__ = Moderator (can moderate comments and content attached)<br>__4__ = Creator (moderator access, including uploading builds and edit all settings except supply and team members)<br>__8__ = Administrator (full access, including editing the supply and team)
+     position|string||Title of the users position. For example: Team Leader, Artist.
 
 > Example responses
 
@@ -6771,7 +6804,7 @@ oauth2 ( Scopes: write )
 
 ```shell
 # You can also use wget
-curl -X DELETE https://api.mod.io/v1/games/{game-id}/team/{access-id} \
+curl -X DELETE https://api.mod.io/v1/games/{game-id}/team/{team-member-id} \
   -H 'Authorization: Bearer YourAccessToken' \
   -H 'Content-Type: application/x-www-form-urlencoded' \
   -H 'Accept: application/json'
@@ -6779,7 +6812,7 @@ curl -X DELETE https://api.mod.io/v1/games/{game-id}/team/{access-id} \
 ```
 
 ```http
-DELETE https://api.mod.io/v1/games/{game-id}/team/{access-id} HTTP/1.1
+DELETE https://api.mod.io/v1/games/{game-id}/team/{team-member-id} HTTP/1.1
 Host: api.mod.io
 
 Accept: application/json
@@ -6797,7 +6830,7 @@ var headers = {
 };
 
 $.ajax({
-  url: 'https://api.mod.io/v1/games/{game-id}/team/{access-id}',
+  url: 'https://api.mod.io/v1/games/{game-id}/team/{team-member-id}',
   method: 'delete',
 
   headers: headers,
@@ -6817,7 +6850,7 @@ const headers = {
 
 };
 
-fetch('https://api.mod.io/v1/games/{game-id}/team/{access-id}',
+fetch('https://api.mod.io/v1/games/{game-id}/team/{team-member-id}',
 {
   method: 'DELETE',
 
@@ -6840,7 +6873,7 @@ headers = {
   'Accept' => 'application/json'
 }
 
-result = RestClient.delete 'https://api.mod.io/v1/games/{game-id}/team/{access-id}',
+result = RestClient.delete 'https://api.mod.io/v1/games/{game-id}/team/{team-member-id}',
   params: {
   }, headers: headers
 
@@ -6855,7 +6888,7 @@ headers = {
   'Accept': 'application/json'
 }
 
-r = requests.delete('https://api.mod.io/v1/games/{game-id}/team/{access-id}', params={
+r = requests.delete('https://api.mod.io/v1/games/{game-id}/team/{team-member-id}', params={
 
 }, headers = headers)
 
@@ -6863,7 +6896,7 @@ print r.json()
 ```
 
 ```java
-URL obj = new URL("https://api.mod.io/v1/games/{game-id}/team/{access-id}");
+URL obj = new URL("https://api.mod.io/v1/games/{game-id}/team/{team-member-id}");
 HttpURLConnection con = (HttpURLConnection) obj.openConnection();
 con.setRequestMethod("DELETE");
 int responseCode = con.getResponseCode();
@@ -6877,9 +6910,9 @@ while ((inputLine = in.readLine()) != null) {
 in.close();
 System.out.println(response.toString());
 ```
-`DELETE /games/{game-id}/team/{access-id}`
+`DELETE /games/{game-id}/team/{team-member-id}`
 
-Remove a member from a game team. This will revoke their access rights if they are not the original creator of the resource.
+Delete a user from a game team. This will revoke their access rights if they are not the original creator of the resource.
 
 > Example responses
 
@@ -6903,7 +6936,7 @@ oauth2 ( Scopes: write )
 
 ```shell
 # You can also use wget
-curl -X DELETE https://api.mod.io/v1/games/{game-id}/mods/{mod-id}/team/{access-id} \
+curl -X DELETE https://api.mod.io/v1/games/{game-id}/mods/{mod-id}/team/{team-member-id} \
   -H 'Authorization: Bearer YourAccessToken' \
   -H 'Content-Type: application/x-www-form-urlencoded' \
   -H 'Accept: application/json'
@@ -6911,7 +6944,7 @@ curl -X DELETE https://api.mod.io/v1/games/{game-id}/mods/{mod-id}/team/{access-
 ```
 
 ```http
-DELETE https://api.mod.io/v1/games/{game-id}/mods/{mod-id}/team/{access-id} HTTP/1.1
+DELETE https://api.mod.io/v1/games/{game-id}/mods/{mod-id}/team/{team-member-id} HTTP/1.1
 Host: api.mod.io
 
 Accept: application/json
@@ -6929,7 +6962,7 @@ var headers = {
 };
 
 $.ajax({
-  url: 'https://api.mod.io/v1/games/{game-id}/mods/{mod-id}/team/{access-id}',
+  url: 'https://api.mod.io/v1/games/{game-id}/mods/{mod-id}/team/{team-member-id}',
   method: 'delete',
 
   headers: headers,
@@ -6949,7 +6982,7 @@ const headers = {
 
 };
 
-fetch('https://api.mod.io/v1/games/{game-id}/mods/{mod-id}/team/{access-id}',
+fetch('https://api.mod.io/v1/games/{game-id}/mods/{mod-id}/team/{team-member-id}',
 {
   method: 'DELETE',
 
@@ -6972,7 +7005,7 @@ headers = {
   'Accept' => 'application/json'
 }
 
-result = RestClient.delete 'https://api.mod.io/v1/games/{game-id}/mods/{mod-id}/team/{access-id}',
+result = RestClient.delete 'https://api.mod.io/v1/games/{game-id}/mods/{mod-id}/team/{team-member-id}',
   params: {
   }, headers: headers
 
@@ -6987,7 +7020,7 @@ headers = {
   'Accept': 'application/json'
 }
 
-r = requests.delete('https://api.mod.io/v1/games/{game-id}/mods/{mod-id}/team/{access-id}', params={
+r = requests.delete('https://api.mod.io/v1/games/{game-id}/mods/{mod-id}/team/{team-member-id}', params={
 
 }, headers = headers)
 
@@ -6995,7 +7028,7 @@ print r.json()
 ```
 
 ```java
-URL obj = new URL("https://api.mod.io/v1/games/{game-id}/mods/{mod-id}/team/{access-id}");
+URL obj = new URL("https://api.mod.io/v1/games/{game-id}/mods/{mod-id}/team/{team-member-id}");
 HttpURLConnection con = (HttpURLConnection) obj.openConnection();
 con.setRequestMethod("DELETE");
 int responseCode = con.getResponseCode();
@@ -7009,9 +7042,9 @@ while ((inputLine = in.readLine()) != null) {
 in.close();
 System.out.println(response.toString());
 ```
-`DELETE /games/{game-id}/mods/{mod-id}/team/{access-id}`
+`DELETE /games/{game-id}/mods/{mod-id}/team/{team-member-id}`
 
-Remove a member from a mod team. This will revoke their access rights if they are not the original creator of the resource.
+Delete a user from a mod team. This will revoke their access rights if they are not the original creator of the resource.
 
 > Example responses
 
@@ -7134,19 +7167,19 @@ System.out.println(response.toString());
 ```
 `GET /games/{game-id}/mods/{mod-id}/comments`
 
-Retrieve all comments for the corresponding mod. Successful request will return an array of [Comment Objects](https://docs.mod.io/#get-comments). To make your requests as specific to your needs as possible it's highly recommended reading over our [filtering documentation](https://docs.mod.io/#filtering) if it will help you with consuming this endpoint.
+Get all comments posted in the mods profile. Successful request will return an array of [Comment Objects](#get-comments). We recommended reading the [filtering documentation](#filtering) to return only the records you want.
      
      Filter|Type|Description
      ---|---|---
-     id|integer|Unique id of the comment.
-     mod_id|integer|Unique id of the mod.
-     user|integer|Unique id of the user who published the comment.
-     date_added|integer|Unix timestamp of date added.
-     reply_id|integer|Id of the parent comment this comment is replying to.
-     reply_position|string|Levels of nesting in comment chain.
-     karma|integer|Karma received from comment.
-     karma_guest|integer|The amount of karma received by guests.
-     summary|string|The contents of the comment.
+     id|integer(int32)|Unique id of the comment.
+     mod_id|integer(int32)|Unique id of the mod.
+     submitted_by|integer(int32)|Unique id of the user who posted the comment.
+     date_added|integer(int32)|Unix timestamp of date added.
+     reply_id|integer(int32)|Id of the parent comment this comment is replying to (can be 0 if the comment is not a reply).
+     reply_position|string|Levels of nesting in a comment thread. You should order by this field, to maintain comment grouping. How it works:<br><br>- The first comment will have the position '01'.<br>- The second comment will have the position '02'.<br>- If someone responds to the second comment the position will be '02.01'.<br>- A maximum of 3 levels is supported.  
+     karma|integer(int32)|Karma received for the comment (can be postive or negative).
+     karma_guest|integer(int32)|Karma received for guest comments (can be postive or negative).
+     summary|string|Contents of the comment.
 
 > Example responses
 
@@ -7162,10 +7195,10 @@ Retrieve all comments for the corresponding mod. Successful request will return 
         "username": "XanT",
         "date_online": 1509922961,
         "avatar": {
-          "filename": "masterchief.jpg",
-          "original": "https://media.mod.io/images/members/1/1/1/masterchief.jpg"
+          "filename": "modio-dark.png",
+          "original": "https://media.mod.io/images/global/modio-dark.png"
         },
-        "timezone": "Australia/Brisbane",
+        "timezone": "America/Los_Angeles",
         "language": "en",
         "profile_url": "https://mod.io/members/xant"
       },
@@ -7191,149 +7224,6 @@ Retrieve all comments for the corresponding mod. Successful request will return 
 Status|Meaning|Description|Response Schema
 ---|---|---|---|
 200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)|OK|[Get All Mod Comments](#schemaget_all_mod_comments)
-
-<aside class="warning">
-To perform this operation, you must be authenticated by means of one of the following methods:
-apiKey, oauth2 ( Scopes: read )
-</aside>
-
-## Get Mod Comment
-
-> Code samples
-
-```shell
-# You can also use wget
-curl -X GET https://api.mod.io/v1/games/{game-id}/mods/{mod-id}/comments/{comment-id}?api_key=YourApiKey \
-  -H 'Accept: application/json'
-
-```
-
-```http
-GET https://api.mod.io/v1/games/{game-id}/mods/{mod-id}/comments/{comment-id}?api_key=YourApiKey HTTP/1.1
-Host: api.mod.io
-
-Accept: application/json
-
-```
-
-```javascript
-var headers = {
-  'Accept':'application/json'
-
-};
-
-$.ajax({
-  url: 'https://api.mod.io/v1/games/{game-id}/mods/{mod-id}/comments/{comment-id}',
-  method: 'get',
-  data: '?api_key=YourApiKey',
-  headers: headers,
-  success: function(data) {
-    console.log(JSON.stringify(data));
-  }
-})
-```
-
-```javascript--nodejs
-const request = require('node-fetch');
-
-const headers = {
-  'Accept':'application/json'
-
-};
-
-fetch('https://api.mod.io/v1/games/{game-id}/mods/{mod-id}/comments/{comment-id}?api_key=YourApiKey',
-{
-  method: 'GET',
-
-  headers: headers
-})
-.then(function(res) {
-    return res.json();
-}).then(function(body) {
-    console.log(body);
-});
-```
-
-```ruby
-require 'rest-client'
-require 'json'
-
-headers = {
-  'Accept' => 'application/json'
-}
-
-result = RestClient.get 'https://api.mod.io/v1/games/{game-id}/mods/{mod-id}/comments/{comment-id}',
-  params: {
-  'api_key' => 'string'
-}, headers: headers
-
-p JSON.parse(result)
-```
-
-```python
-import requests
-headers = {
-  'Accept': 'application/json'
-}
-
-r = requests.get('https://api.mod.io/v1/games/{game-id}/mods/{mod-id}/comments/{comment-id}', params={
-  'api_key': 'YourApiKey'
-}, headers = headers)
-
-print r.json()
-```
-
-```java
-URL obj = new URL("https://api.mod.io/v1/games/{game-id}/mods/{mod-id}/comments/{comment-id}?api_key=YourApiKey");
-HttpURLConnection con = (HttpURLConnection) obj.openConnection();
-con.setRequestMethod("GET");
-int responseCode = con.getResponseCode();
-BufferedReader in = new BufferedReader(
-    new InputStreamReader(con.getInputStream()));
-String inputLine;
-StringBuffer response = new StringBuffer();
-while ((inputLine = in.readLine()) != null) {
-    response.append(inputLine);
-}
-in.close();
-System.out.println(response.toString());
-```
-`GET /games/{game-id}/mods/{mod-id}/comments/{comment-id}`
-
-Retrieve a comment by it's unique ID. Successful request will return a single [Comment Object](https://docs.mod.io/#comment-object).
-
-> Example responses
-
-```json
-{
-  "id": 2,
-  "mod_id": 2,
-  "submitted_by": {
-    "id": 1,
-    "name_id": "xant",
-    "username": "XanT",
-    "date_online": 1509922961,
-    "avatar": {
-      "filename": "masterchief.jpg",
-      "original": "https://media.mod.io/images/members/1/1/1/masterchief.jpg"
-    },
-    "timezone": "Australia/Brisbane",
-    "language": "en",
-    "profile_url": "https://mod.io/members/xant"
-  },
-  "date_added": 1499841487,
-  "reply_id": 1499,
-  "reply_position": "01",
-  "karma": 1,
-  "karma_guest": 0,
-  "content": "This mod is kickass! Great work!"
-}
-```
-<h3 id="Get-Mod-Comment-responses">Responses</h3>
-
-Status|Meaning|Description|Response Schema
----|---|---|---|
-200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)|OK|[Comment Object  ](#schemacomment_object)
 
 <aside class="warning">
 To perform this operation, you must be authenticated by means of one of the following methods:
@@ -7588,12 +7478,14 @@ System.out.println(response.toString());
 ```
 `POST /general/ownership`
 
-Returns the [User Object](https://docs.mod.io/#user-object) of the user that is the resource _creator_ of the corresponding resource.
+Returns the [User Object](#user-object) of the user that is the original _submitter_ of the corresponding resource.
+     
+     __NOTE:__ Mods and games can be managed by teams of users, for the most accurate information you should use the [Team endpoints](#teams).
      
      Parameter|Type|Required|Description
      ---|---|---|---|
-     resource_type|string|true|The name of the resource type you are checking against a user - __must__ be one of the following values.<br><br>*Field options*<br>__games__<br>__mods__<br>__files__<br>__tags__
-     resource_id|integer(int32)|true|Unique Id of the resource to check access rights for.
+     resource_type|string|true|Type of resource you are checking the ownership of. __Must__ be one of the following values:<br><br>__games__<br>__mods__<br>__files__<br>__tags__
+     resource_id|integer(int32)|true|Unique id of the resource you are checking the ownership of.
 
 > Example responses
 
@@ -7604,10 +7496,10 @@ Returns the [User Object](https://docs.mod.io/#user-object) of the user that is 
   "username": "XanT",
   "date_online": 1509922961,
   "avatar": {
-    "filename": "masterchief.jpg",
-    "original": "https://media.mod.io/images/members/1/1/1/masterchief.jpg"
+    "filename": "modio-dark.png",
+    "original": "https://media.mod.io/images/global/modio-dark.png"
   },
-  "timezone": "Australia/Brisbane",
+  "timezone": "America/Los_Angeles",
   "language": "en",
   "profile_url": "https://mod.io/members/xant"
 }
@@ -7726,13 +7618,13 @@ System.out.println(response.toString());
 ```
 `GET /users`
 
-Retrieve all users registered to mod.io. Successful request will return an Successful request will return [an array of User Objects](https://docs.mod.io/#get-all-users-2). To make your requests as specific to your needs as possible it's highly recommended reading over our [filtering documentation](https://docs.mod.io/#filtering) if it will help you with consuming this endpoint.
+Get all users registered on mod.io. Successful request will return an array of [User Objects](#get-all-users-2). We recommended reading the [filtering documentation](#filtering) to return only the records you want.
      
      Filter|Type|Description
      ---|---|---
      id|integer(int32)|Unique id of the user.
-     name_id|string|SEO-friendly representation of the username. This is the same field that forms the URL link to their profile.
-     date_online|integer(int32)|Unix timestamp of when the user was last online.
+     name_id|string|URL path for the user on mod.io. Usually a simplified version of their username.
+     date_online|integer(int32)|Unix timestamp of date the user was last online.
      username|string|Username of the user.
      timezone|string|Timezone of the user, format is country/city.
      language|string|2-character representation of language.
@@ -7748,10 +7640,10 @@ Retrieve all users registered to mod.io. Successful request will return an Succe
       "username": "XanT",
       "date_online": 1509922961,
       "avatar": {
-        "filename": "masterchief.jpg",
-        "original": "https://media.mod.io/images/members/1/1/1/masterchief.jpg"
+        "filename": "modio-dark.png",
+        "original": "https://media.mod.io/images/global/modio-dark.png"
       },
-      "timezone": "Australia/Brisbane",
+      "timezone": "America/Los_Angeles",
       "language": "en",
       "profile_url": "https://mod.io/members/xant"
     },
@@ -7879,7 +7771,7 @@ System.out.println(response.toString());
 ```
 `GET /users/{user-id}`
 
-Find a user by their unique member id. Successful request will return a single [User Object](https://docs.mod.io/#user-object).
+Get a user. Successful request will return a single [User Object](#user-object).
 
 > Example responses
 
@@ -7890,10 +7782,10 @@ Find a user by their unique member id. Successful request will return a single [
   "username": "XanT",
   "date_online": 1509922961,
   "avatar": {
-    "filename": "masterchief.jpg",
-    "original": "https://media.mod.io/images/members/1/1/1/masterchief.jpg"
+    "filename": "modio-dark.png",
+    "original": "https://media.mod.io/images/global/modio-dark.png"
   },
-  "timezone": "Australia/Brisbane",
+  "timezone": "America/Los_Angeles",
   "language": "en",
   "profile_url": "https://mod.io/members/xant"
 }
@@ -8025,15 +7917,15 @@ System.out.println(response.toString());
 ```
 `POST /report`
 
-Submit a report for any resource on mod.io.
+Submit a report for any resource on mod.io. You can also [submit a report online](https://mod.io/report/widget) and read our [terms of use](https://mod.io/terms/widget) for information about what is/isn't acceptable.
      
      Parameter|Type|Required|Description
      ---|---|---|---|
-     resource|string|true|The name of the resource type you are submitting a report for __must__ be one of the following values.<br><br>*Field options*<br>__games__<br>__mods__<br>__files__<br>__tags__<br>__users__
-     id|integer(int32)|true|Unique Id of the resource item you are reporting.
+     resource|string|true|Type of resource you are reporting. Must be one of the following values:<br><br>__games__<br>__mods__<br>__files__<br>__tags__<br>__users__
+     id|integer(int32)|true|Unique id of the resource you are reporting.
      dmca|boolean|true|Is this a DMCA takedown request?
-     name|string|true|Descriptive and informative title for your report.
-     summary|string|true|Detailed description of your report, be as specific as possible on the reason you are submitting the report.
+     name|string|true|Informative title for your report.
+     summary|string|true|Detailed description of your report. Make sure you include all relevant information and links to help moderators investigate and respond appropiately.
 
 > Example responses
 
@@ -8164,7 +8056,7 @@ System.out.println(response.toString());
 ```
 `GET /me`
 
-Retrieve the *authenticated user*. Successful request will return a [User Object](https://docs.mod.io/#user-object).
+Get the *authenticated user* details. Successful request will return a [User Object](#user-object).
 
 > Example responses
 
@@ -8175,10 +8067,10 @@ Retrieve the *authenticated user*. Successful request will return a [User Object
   "username": "XanT",
   "date_online": 1509922961,
   "avatar": {
-    "filename": "masterchief.jpg",
-    "original": "https://media.mod.io/images/members/1/1/1/masterchief.jpg"
+    "filename": "modio-dark.png",
+    "original": "https://media.mod.io/images/global/modio-dark.png"
   },
-  "timezone": "Australia/Brisbane",
+  "timezone": "America/Los_Angeles",
   "language": "en",
   "profile_url": "https://mod.io/members/xant"
 }
@@ -8302,30 +8194,30 @@ System.out.println(response.toString());
 ```
 `GET /me/subscribed`
 
-Get all mod's the *authenticated user* is subscribed to. Successful request will return an array of [Mod Objects](https://docs.mod.io/#get-mods-2).
+Get all mod's the *authenticated user* is subscribed to. Successful request will return an array of [Mod Objects](#get-mods-2).
      
      Filter|Type|Description
      ---|---|---
      id|integer(int32)|Unique id of the mod.
      game_id|integer(int32)|Unique id of the parent game.
-     submitted_by|integer(int32)|Unique id of the user who has ownership of the game.
-     date_added|integer(int32)|Unix timestamp of date registered.
-     date_updated|integer(int32)|Unix timestamp of date updated.
+     submitted_by|integer(int32)|Unique id of the user who has ownership of the mod.
+     date_added|integer(int32)|Unix timestamp of date mod was registered.
+     date_updated|integer(int32)|Unix timestamp of date mod was updated.
      date_live|integer(int32)|Unix timestamp of date mod was set live.
-     logo|string|The filename of the logo.
+     logo|string|Filename of the mods logo image, extension included.
      homepage|string|Official homepage of the mod.
      name|string|Name of the mod.
-     name_id|string|The unique SEO friendly URL for your game.
+     name_id|string|URL path for the mod on mod.io.
      summary|string|Summary of the mod.
-     description|string|An extension of the summary. HTML Supported.
-     metadata_blob|string|Comma-separated list of metadata words.
-     modfile|integer(int32)|Unique id of the [Modfile Object](https://docs.mod.io/#modfile-object) marked as current release.
-     tags|string|Comma-separated values representing the tags you want to filter the results by. Only tags that are supported by the parent game can be applied. To determine what tags are eligible, see the tags values within 'Tag Option' column on the parent [Game Object](https://docs.mod.io/#game-object).
-     status|string| _OAuth 2 only_. The status of the mod (only recognised by game admins), _default is 'auth'_.<br><br>*Fields Options:*<br>__unauth__ = Only return un-authorized mods.<br>__auth__ = Only return authorized mods _(default)_.<br>__ban__ = Only return banned mods.<br>__archive__ = Only return archived content (out of date builds).<br>__delete__ = Only return deleted mods.
-     downloads|string|Sort results by most downloads using [_sort filter](https://docs.mod.io/#filtering) parameter, value should be `downloads` for descending or `-downloads` for ascending results.
-     popular|string|Sort results by popularity using [_sort filter](https://docs.mod.io/#filtering), value should be `popular` for descending or `-popular` for ascending results.
-     ratings|string|Sort results by weighted rating using [_sort filter](https://docs.mod.io/#filtering), value should be `ratings` for descending or `-ratings` for ascending results.
-     subscribers|string|Sort results by most subscribers using [_sort filter](https://docs.mod.io/#filtering), value should be `subscribers` for descending or `-subscribers` for ascending results.
+     description|string|Detailed description of the mod which allows HTML.
+     metadata_blob|string|Metadata stored by the game developer.
+     modfile|integer(int32)|Unique id of the [Modfile Object](#modfile-object) marked as current release.
+     tags|string|Comma-separated values representing the tags you want to filter the results by. Only tags that are supported by the parent game can be applied. To determine what tags are eligible, see the tags values within 'Tag Option' column on the parent [Game Object](#game-object).
+     status|string| Status of the mod (only recognised by game admins authenticated via _OAuth 2_):<br><br>__unauth__ = Only return un-authorized mods.<br>__auth__ = Only return authorized mods _(default)_.<br>__ban__ = Only return banned mods.<br>__archive__ = Only return archived mods (out of date / incompatible).<br>__delete__ = Only return deleted mods.
+     downloads|string|Sort results by most downloads using [_sort filter](#filtering) parameter, value should be `downloads` for descending or `-downloads` for ascending results.
+     popular|string|Sort results by popularity using [_sort filter](#filtering), value should be `popular` for descending or `-popular` for ascending results.
+     ratings|string|Sort results by weighted rating using [_sort filter](#filtering), value should be `ratings` for descending or `-ratings` for ascending results.
+     subscribers|string|Sort results by most subscribers using [_sort filter](#filtering), value should be `subscribers` for descending or `-subscribers` for ascending results.
 
 > Example responses
 
@@ -8341,10 +8233,10 @@ Get all mod's the *authenticated user* is subscribed to. Successful request will
         "username": "XanT",
         "date_online": 1509922961,
         "avatar": {
-          "filename": "masterchief.jpg",
-          "original": "https://media.mod.io/images/members/1/1/1/masterchief.jpg"
+          "filename": "modio-dark.png",
+          "original": "https://media.mod.io/images/global/modio-dark.png"
         },
-        "timezone": "Australia/Brisbane",
+        "timezone": "America/Los_Angeles",
         "language": "en",
         "profile_url": "https://mod.io/members/xant"
       },
@@ -8352,11 +8244,11 @@ Get all mod's the *authenticated user* is subscribed to. Successful request will
       "date_updated": 1499841487,
       "date_live": 1499841403,
       "logo": {
-        "filename": "IMG_20170409_222419.jpg",
-        "original": "https://media.mod.io/images/mods/1/1/2/IMG_20170409_222419.jpg",
-        "thumb_320x180": "https://media.mod.io/cache/images/mods/1/1/2/thumb_320x180/IMG_20170409_222419.jpg",
-        "thumb_640x360": "https://media.mod.io/cache/images/mods/1/1/2/thumb_640x360/IMG_20170409_222419.jpg",
-        "thumb_1280x720": "https://media.mod.io/cache/images/mods/1/1/2/thumb_1280x720/IMG_20170409_222419.jpg"
+        "filename": "modio-dark.png",
+        "original": "https://media.mod.io/images/global/modio-dark.png",
+        "thumb_320x180": "https://media.mod.io/images/global/modio-dark.png",
+        "thumb_640x360": "https://media.mod.io/images/global/modio-dark.png",
+        "thumb_1280x720": "https://media.mod.io/images/global/modio-dark.png"
       },
       "homepage": "https://www.rogue-hdpack.com/",
       "name": "Rogue Knight HD Pack",
@@ -8380,7 +8272,7 @@ Get all mod's the *authenticated user* is subscribed to. Successful request will
         "filename": "rogue-knight-v1.zip",
         "version": "1.3",
         "changelog": "VERSION 1.3 -- Changes -- Fixed critical castle floor bug.",
-        "download_url": "https://mod.io/mods/file/2/c489a0354111a4d76640d47f0cdcb294"
+        "download_url": "https://mod.io/mods/file/1/c489a0354111a4d76640d47f0cdcb294"
       },
       "media": {
         "youtube": [
@@ -8391,9 +8283,9 @@ Get all mod's the *authenticated user* is subscribed to. Successful request will
         ],
         "images": [
           {
-            "original": "https://media.mod.io/images/mods/1/1/2/IMG_20170409_222419.jpg",
-            "thumb_320x180": "https://media.mod.io/cache/images/mods/1/1/2/thumb_1020x2000/IMG_20170409_222419.jpg",
-            "filename": "IMG_20170409_222419.jpg"
+            "filename": "modio-dark.png",
+            "original": "https://media.mod.io/images/global/modio-dark.png",
+            "thumb_320x180": "https://media.mod.io/images/global/modio-dark.png"
           }
         ]
       },
@@ -8541,7 +8433,7 @@ System.out.println(response.toString());
 ```
 `GET /me/games`
 
-Get all games the *authenticated user* published or is a team member of. Successful request will return an array of [Game Objects](https://docs.mod.io/#get-games-2).
+Get all games the *authenticated user* added or is a team member of. Successful request will return an array of [Game Objects](#get-games-2).
 
 > Example responses
 
@@ -8556,10 +8448,10 @@ Get all games the *authenticated user* published or is a team member of. Success
         "username": "XanT",
         "date_online": 1509922961,
         "avatar": {
-          "filename": "masterchief.jpg",
-          "original": "https://media.mod.io/images/members/1/1/1/masterchief.jpg"
+          "filename": "modio-dark.png",
+          "original": "https://media.mod.io/images/global/modio-dark.png"
         },
-        "timezone": "Australia/Brisbane",
+        "timezone": "America/Los_Angeles",
         "language": "en",
         "profile_url": "https://mod.io/members/xant"
       },
@@ -8567,40 +8459,40 @@ Get all games the *authenticated user* published or is a team member of. Success
       "date_updated": 1499410290,
       "date_live": 1499841403,
       "presentation": 1,
-      "community": 3,
       "submission": 0,
       "curation": 0,
+      "community": 3,
       "revenue": 1500,
       "api": 3,
       "ugc_name": "map",
       "icon": {
-        "filename": "IMG_20170409_222419.jpg",
-        "original": "https://media.mod.io/images/mods/1/1/2/icon.png",
-        "thumb_320x180": "https://media.mod.io/cache/images/mods/1/1/2/thumb_320x180/icon.png"
+        "filename": "modio-dark.png",
+        "original": "https://media.mod.io/images/global/modio-dark.png",
+        "thumb_320x180": "https://media.mod.io/images/global/modio-dark.png"
       },
       "logo": {
-        "filename": "IMG_20170409_222419.jpg",
-        "original": "https://media.mod.io/images/mods/1/1/2/IMG_20170409_222419.jpg",
-        "thumb_320x180": "https://media.mod.io/cache/images/mods/1/1/2/thumb_320x180/IMG_20170409_222419.jpg",
-        "thumb_640x360": "https://media.mod.io/cache/images/mods/1/1/2/thumb_640x360/IMG_20170409_222419.jpg",
-        "thumb_1280x720": "https://media.mod.io/cache/images/mods/1/1/2/thumb_1280x720/IMG_20170409_222419.jpg"
+        "filename": "modio-dark.png",
+        "original": "https://media.mod.io/images/global/modio-dark.png",
+        "thumb_320x180": "https://media.mod.io/images/global/modio-dark.png",
+        "thumb_640x360": "https://media.mod.io/images/global/modio-dark.png",
+        "thumb_1280x720": "https://media.mod.io/images/global/modio-dark.png"
       },
       "header": {
-        "filename": "gameheader.png",
-        "original": "https://media.mod.io/images/games/1/1/2/gameheader.png"
+        "filename": "demo.png",
+        "original": "https://media.mod.io/images/global/modio-dark.png"
       },
       "homepage": "https://www.rogue-knight-game.com/",
       "name": "Rogue Knight",
       "name_id": "rogue-knight",
       "summary": "Rogue Knight is a brand new 2D pixel platformer.",
-      "instructions": "Instructions here on how to develop for your game.",
+      "instructions": "Instructions on the process to upload mods.",
       "profile_url": "https://rogue-knight.mod.io",
       "tag_options": [
         {
-          "name": "Engines",
+          "name": "Theme",
           "type": "checkboxes",
           "tags": [
-            "Unity"
+            "Horror"
           ],
           "admin_only": 0
         }
@@ -8735,7 +8627,7 @@ System.out.println(response.toString());
 ```
 `GET /me/mods`
 
-Get all mods the *authenticated user* published or is a team member of. Successful request will return an array of [Mod Objects](https://docs.mod.io/#get-all-mods-2).
+Get all mods the *authenticated user* added or is a team member of. Successful request will return an array of [Mod Objects](#get-all-mods-2).
 
 > Example responses
 
@@ -8751,10 +8643,10 @@ Get all mods the *authenticated user* published or is a team member of. Successf
         "username": "XanT",
         "date_online": 1509922961,
         "avatar": {
-          "filename": "masterchief.jpg",
-          "original": "https://media.mod.io/images/members/1/1/1/masterchief.jpg"
+          "filename": "modio-dark.png",
+          "original": "https://media.mod.io/images/global/modio-dark.png"
         },
-        "timezone": "Australia/Brisbane",
+        "timezone": "America/Los_Angeles",
         "language": "en",
         "profile_url": "https://mod.io/members/xant"
       },
@@ -8762,11 +8654,11 @@ Get all mods the *authenticated user* published or is a team member of. Successf
       "date_updated": 1499841487,
       "date_live": 1499841403,
       "logo": {
-        "filename": "IMG_20170409_222419.jpg",
-        "original": "https://media.mod.io/images/mods/1/1/2/IMG_20170409_222419.jpg",
-        "thumb_320x180": "https://media.mod.io/cache/images/mods/1/1/2/thumb_320x180/IMG_20170409_222419.jpg",
-        "thumb_640x360": "https://media.mod.io/cache/images/mods/1/1/2/thumb_640x360/IMG_20170409_222419.jpg",
-        "thumb_1280x720": "https://media.mod.io/cache/images/mods/1/1/2/thumb_1280x720/IMG_20170409_222419.jpg"
+        "filename": "modio-dark.png",
+        "original": "https://media.mod.io/images/global/modio-dark.png",
+        "thumb_320x180": "https://media.mod.io/images/global/modio-dark.png",
+        "thumb_640x360": "https://media.mod.io/images/global/modio-dark.png",
+        "thumb_1280x720": "https://media.mod.io/images/global/modio-dark.png"
       },
       "homepage": "https://www.rogue-hdpack.com/",
       "name": "Rogue Knight HD Pack",
@@ -8790,7 +8682,7 @@ Get all mods the *authenticated user* published or is a team member of. Successf
         "filename": "rogue-knight-v1.zip",
         "version": "1.3",
         "changelog": "VERSION 1.3 -- Changes -- Fixed critical castle floor bug.",
-        "download_url": "https://mod.io/mods/file/2/c489a0354111a4d76640d47f0cdcb294"
+        "download_url": "https://mod.io/mods/file/1/c489a0354111a4d76640d47f0cdcb294"
       },
       "media": {
         "youtube": [
@@ -8801,9 +8693,9 @@ Get all mods the *authenticated user* published or is a team member of. Successf
         ],
         "images": [
           {
-            "original": "https://media.mod.io/images/mods/1/1/2/IMG_20170409_222419.jpg",
-            "thumb_320x180": "https://media.mod.io/cache/images/mods/1/1/2/thumb_1020x2000/IMG_20170409_222419.jpg",
-            "filename": "IMG_20170409_222419.jpg"
+            "filename": "modio-dark.png",
+            "original": "https://media.mod.io/images/global/modio-dark.png",
+            "thumb_320x180": "https://media.mod.io/images/global/modio-dark.png"
           }
         ]
       },
@@ -8951,7 +8843,7 @@ System.out.println(response.toString());
 ```
 `GET /me/files`
 
-Get all Modfiles the *authenticated user* published or is a team member of. Successful request will return an array of [Modfile Objects](https://docs.mod.io/#get-all-mod-files-2).
+Get all Modfiles the *authenticated user* uploaded. Successful request will return an array of [Modfile Objects](#get-all-mod-files-2).
 
 > Example responses
 
@@ -8973,7 +8865,7 @@ Get all Modfiles the *authenticated user* published or is a team member of. Succ
       "filename": "rogue-knight-v1.zip",
       "version": "1.3",
       "changelog": "VERSION 1.3 -- Changes -- Fixed critical castle floor bug.",
-      "download_url": "https://mod.io/mods/file/2/c489a0354111a4d76640d47f0cdcb294"
+      "download_url": "https://mod.io/mods/file/1/c489a0354111a4d76640d47f0cdcb294"
     },
     {
         ...
@@ -9012,8 +8904,8 @@ oauth2 ( Scopes: read )
 
 Name|Type|Description
 ---|---|---|---|
-code|integer(int32)|HTTP status code of response.
-message|string|The server response to your request. Responses will vary from endpoint but object structure will persist.
+code|integer(int32)|[HTTP status code](#response-codes) of response.
+message|string|The server response to your request. Responses will vary depending on the endpoint, but the object structure will persist.
 
 
 
@@ -9036,9 +8928,9 @@ message|string|The server response to your request. Responses will vary from end
 Name|Type|Description
 ---|---|---|---|
 error|object|Contains error data.
-» code|integer(int32)|HTTP code of the error.
-» message|string|The server response to your request. Responses will vary from endpoint but object structure will persist.
-» errors|object|Optional Validation errors object. This field is only supplied if the response is a validation error (`422 Unprocessible Entity`).
+» code|integer(int32)|[HTTP code](#response-codes) of the error.
+» message|string|The server response to your request. Responses will vary depending on the endpoint, but the object structure will persist.
+» errors|object|Optional Validation errors object. This field is only supplied if the response is a validation error (`422 Unprocessible Entity`). See [errors documentation](#errors) for more information.
 
 
 
@@ -9048,11 +8940,11 @@ error|object|Contains error data.
 
 ```json
 {
-  "filename": "IMG_20170409_222419.jpg",
-  "original": "https://media.mod.io/images/mods/1/1/2/IMG_20170409_222419.jpg",
-  "thumb_320x180": "https://media.mod.io/cache/images/mods/1/1/2/thumb_320x180/IMG_20170409_222419.jpg",
-  "thumb_640x360": "https://media.mod.io/cache/images/mods/1/1/2/thumb_640x360/IMG_20170409_222419.jpg",
-  "thumb_1280x720": "https://media.mod.io/cache/images/mods/1/1/2/thumb_1280x720/IMG_20170409_222419.jpg"
+  "filename": "modio-dark.png",
+  "original": "https://media.mod.io/images/global/modio-dark.png",
+  "thumb_320x180": "https://media.mod.io/images/global/modio-dark.png",
+  "thumb_640x360": "https://media.mod.io/images/global/modio-dark.png",
+  "thumb_1280x720": "https://media.mod.io/images/global/modio-dark.png"
 } 
 ```
 
@@ -9060,11 +8952,11 @@ error|object|Contains error data.
 
 Name|Type|Description
 ---|---|---|---|
-filename|string|Image filename, with file extension included.
-original|string|URL to full-sized image.
-thumb_320x180|string|URL to small thumbnail image.
-thumb_640x360|string|URL to medium thumbnail image.
-thumb_1280x720|string|URL to large thumbnail image.
+filename|string|Logo filename including extension.
+original|string|URL to the full-sized logo.
+thumb_320x180|string|URL to the small logo thumbnail.
+thumb_640x360|string|URL to the medium logo thumbnail.
+thumb_1280x720|string|URL to the large logo thumbnail.
 
 
 
@@ -9074,9 +8966,9 @@ thumb_1280x720|string|URL to large thumbnail image.
 
 ```json
 {
-  "filename": "IMG_20170409_222419.jpg",
-  "original": "https://media.mod.io/images/mods/1/1/2/icon.png",
-  "thumb_320x180": "https://media.mod.io/cache/images/mods/1/1/2/thumb_320x180/icon.png"
+  "filename": "modio-dark.png",
+  "original": "https://media.mod.io/images/global/modio-dark.png",
+  "thumb_320x180": "https://media.mod.io/images/global/modio-dark.png"
 } 
 ```
 
@@ -9084,9 +8976,9 @@ thumb_1280x720|string|URL to large thumbnail image.
 
 Name|Type|Description
 ---|---|---|---|
-filename|string|Image filename, with file extension included.
-original|string|URL to full-sized image.
-thumb_320x180|string|URL to small thumbnail image.
+filename|string|Icon filename including extension.
+original|string|URL to the full-sized icon.
+thumb_320x180|string|URL to the icon thumbnail.
 
 
 
@@ -9096,8 +8988,8 @@ thumb_320x180|string|URL to small thumbnail image.
 
 ```json
 {
-  "filename": "gameheader.png",
-  "original": "https://media.mod.io/images/games/1/1/2/gameheader.png"
+  "filename": "demo.png",
+  "original": "https://media.mod.io/images/global/modio-dark.png"
 } 
 ```
 
@@ -9105,7 +8997,7 @@ thumb_320x180|string|URL to small thumbnail image.
 
 Name|Type|Description
 ---|---|---|---|
-filename|string|Image filename, with file extension included.
+filename|string|Header image filename including extension.
 original|string|URL to the full-sized header image.
 
 
@@ -9116,8 +9008,8 @@ original|string|URL to the full-sized header image.
 
 ```json
 {
-  "filename": "masterchief.jpg",
-  "original": "https://media.mod.io/images/members/1/1/1/masterchief.jpg"
+  "filename": "modio-dark.png",
+  "original": "https://media.mod.io/images/global/modio-dark.png"
 } 
 ```
 
@@ -9125,8 +9017,8 @@ original|string|URL to the full-sized header image.
 
 Name|Type|Description
 ---|---|---|---|
-filename|string|Image filename, including file extension.
-original|string|Full URL to the image.
+filename|string|Avatar filename including extension.
+original|string|URL to the full-sized avatar.
 
 
 
@@ -9136,9 +9028,9 @@ original|string|Full URL to the image.
 
 ```json
 {
-  "original": "https://media.mod.io/images/mods/1/1/2/IMG_20170409_222419.jpg",
-  "thumb_320x180": "https://media.mod.io/cache/images/mods/1/1/2/thumb_1020x2000/IMG_20170409_222419.jpg",
-  "filename": "IMG_20170409_222419.jpg"
+  "filename": "modio-dark.png",
+  "original": "https://media.mod.io/images/global/modio-dark.png",
+  "thumb_320x180": "https://media.mod.io/images/global/modio-dark.png"
 } 
 ```
 
@@ -9146,9 +9038,9 @@ original|string|Full URL to the image.
 
 Name|Type|Description
 ---|---|---|---|
-original|string|URL to the full image.
-thumb_320x180|string|URL to the thumbnail image.
-filename|string|Image filename, with the extension included.
+filename|string|Image filename including extension.
+original|string|URL to the full-sized image.
+thumb_320x180|string|URL to the image thumbnail.
 
 
 
@@ -9168,10 +9060,10 @@ filename|string|Image filename, with the extension included.
         "username": "XanT",
         "date_online": 1509922961,
         "avatar": {
-          "filename": "masterchief.jpg",
-          "original": "https://media.mod.io/images/members/1/1/1/masterchief.jpg"
+          "filename": "modio-dark.png",
+          "original": "https://media.mod.io/images/global/modio-dark.png"
         },
-        "timezone": "Australia/Brisbane",
+        "timezone": "America/Los_Angeles",
         "language": "en",
         "profile_url": "https://mod.io/members/xant"
       },
@@ -9197,30 +9089,30 @@ filename|string|Image filename, with the extension included.
 
 Name|Type|Description
 ---|---|---|---|
-cursor_id|integer(int32)|The current _cursor value.
-prev_id|integer(int32)|The previous _cursor value as manually inserted by you, null by default.
-next_id|integer(int32)|The next position to move the _cursor to, based on the current request.
-result_count|integer(int32)|The amount of results returned in the current request.
-data|[Comment Object  ](#schemacomment_object)[]|Array containing comment objects
+cursor_id|integer(int32)|Current _cursor value. See [Cursors and Offsets](#cursors-and-offsets) for help understanding how to paginate through results.
+prev_id|integer(int32)|Previous _cursor value as manually inserted by you, null by default.
+next_id|integer(int32)|Next position to move the _cursor to, based on the current request.
+result_count|integer(int32)|Amount of results returned in the current request.
+data|[Comment Object  ](#schemacomment_object)[]|Array containing comment objects.
 » id|integer(int32)|Unique id of the comment.
 » mod_id|integer(int32)|Unique id of the parent mod.
 » submitted_by|[User Object  ](#schemauser_object)|Contains user data.
 »» id|integer(int32)|Unique id of the user.
-»» name_id|string|Unique nameid of user which forms end of their profile URL.
-»» username|string|Non-unique username of the user.
-»» date_online|integer(int32)|Unix timestamp of when the user was last online.
+»» name_id|string|URL path for the user on mod.io. Usually a simplified version of their username.
+»» username|string|Username of the user.
+»» date_online|integer(int32)|Unix timestamp of date the user was last online.
 »» avatar|[Avatar Object  ](#schemaavatar_object)|Contains avatar data.
-»»» filename|string|Image filename, including file extension.
-»»» original|string|Full URL to the image.
-»» timezone|string|The Timezone of the user, shown in {Country}/{City} format.
-»» language|string|The users language preference, limited to two characters.
-»» profile_url|string|URL to the user's mod.io profile page.
-» date_added|integer(int32)|Unix timestamp of when the comment was published.
-» reply_id|integer(int32)|Unique id of the reply used to submitting a nested reply to the published comment.
-» reply_position|string|Nesting position of the reply.
-» karma|integer(int32)|The amount of karma the comment has received.
-» karma_guest|integer(int32)|The amount of karma received by guests.
-» content|string|The displayed comment.
+»»» filename|string|Avatar filename including extension.
+»»» original|string|URL to the full-sized avatar.
+»» timezone|string|Timezone of the user, format is country/city.
+»» language|string|2-character representation of users language preference.
+»» profile_url|string|URL to the user's mod.io profile.
+» date_added|integer(int32)|Unix timestamp of date the comment was posted.
+» reply_id|integer(int32)|Id of the parent comment this comment is replying to (can be 0 if the comment is not a reply).
+» reply_position|string|Levels of nesting in a comment thread. How it works:<br><br>- The first comment will have the position '01'.<br>- The second comment will have the position '02'.<br>- If someone responds to the second comment the position will be '02.01'.<br>- A maximum of 3 levels is supported.
+» karma|integer(int32)|Karma received for the comment (can be postive or negative).
+» karma_guest|integer(int32)|Karma received for guest comments (can be postive or negative).
+» content|string|Contents of the comment.
 
 
 
@@ -9250,13 +9142,13 @@ data|[Comment Object  ](#schemacomment_object)[]|Array containing comment object
 
 Name|Type|Description
 ---|---|---|---|
-cursor_id|integer(int32)|The current _cursor value.
-prev_id|integer(int32)|The previous _cursor value as manually inserted by you, null by default.
-next_id|integer(int32)|The next position to move the _cursor to, based on the current request.
-result_count|integer(int32)|The amount of results returned in the current request.
+cursor_id|integer(int32)|Current _cursor value. See [Cursors and Offsets](#cursors-and-offsets) for help understanding how to paginate through results.
+prev_id|integer(int32)|Previous _cursor value as manually inserted by you, null by default.
+next_id|integer(int32)|Next position to move the _cursor to, based on the current request.
+result_count|integer(int32)|Amount of results returned in the current request.
 data|[Mod Dependencies Object ](#schemamod_dependencies_object)[]|Array containing mod dependencies objects.
 » mod_id|integer(int32)|Unique id of the mod that is the dependency.
-» date_added|integer(int32)|Unix timestamp of when the dependency was added.
+» date_added|integer(int32)|Unix timestamp of date the dependency was added.
 
 
 
@@ -9282,7 +9174,7 @@ data|[Mod Dependencies Object ](#schemamod_dependencies_object)[]|Array containi
       "filename": "rogue-knight-v1.zip",
       "version": "1.3",
       "changelog": "VERSION 1.3 -- Changes -- Fixed critical castle floor bug.",
-      "download_url": "https://mod.io/mods/file/2/c489a0354111a4d76640d47f0cdcb294"
+      "download_url": "https://mod.io/mods/file/1/c489a0354111a4d76640d47f0cdcb294"
     },
     {
         ...
@@ -9299,25 +9191,25 @@ data|[Mod Dependencies Object ](#schemamod_dependencies_object)[]|Array containi
 
 Name|Type|Description
 ---|---|---|---|
-cursor_id|integer(int32)|The current _cursor value.
-prev_id|integer(int32)|The previous _cursor value as manually inserted by you, null by default.
-next_id|integer(int32)|The next position to move the _cursor to, based on the current request.
-result_count|integer(int32)|The amount of results returned in the current request.
-data|[Modfile Object  ](#schemamodfile_object)[]|Response array of items.
-» id|integer(int32)|Unique file id.
+cursor_id|integer(int32)|Current _cursor value. See [Cursors and Offsets](#cursors-and-offsets) for help understanding how to paginate through results.
+prev_id|integer(int32)|Previous _cursor value as manually inserted by you, null by default.
+next_id|integer(int32)|Next position to move the _cursor to, based on the current request.
+result_count|integer(int32)|Amount of results returned in the current request.
+data|[Modfile Object  ](#schemamodfile_object)[]|Array containing modfile objects.
+» id|integer(int32)|Unique modfile id.
 » mod_id|integer(int32)|Unique mod id.
-» date_added|integer(int32)|Unix timestamp of file upload time.
-» date_scanned|integer(int32)|Unix timestamp of file virus scan.
-» virus_status|integer(int32)|The status of the virus scan for the file.
-» virus_positive|integer(int32)|Has the file been positively flagged as a virus?
-» virustotal_hash|string|VirusTotal proprietary hash.
+» date_added|integer(int32)|Unix timestamp of date added.
+» date_scanned|integer(int32)|Unix timestamp of date file was virus scanned.
+» virus_status|integer(int32)|Current virus scan status of the file. For newly added files that have yet to be scanned this field will change frequently until a scan is complete:<br><br>__0__ = Not scanned<br>__1__ = Scan complete<br>__2__ = In progress<br>__3__ = Too large to scan<br>__4__ = File not found<br>__5__ = Error Scanning
+» virus_positive|integer(int32)|Was a virus detected:<br><br>__0__ = No threats detected<br>__1__ = Flagged as malicious
+» virustotal_hash|string|VirusTotal proprietary hash to view the [scan results](https://www.virustotal.com).
 » filesize|integer(int32)|Size of the file in bytes.
 » filehash|[Filehash Object  ](#schemafilehash_object)|Contains filehash data.
-»» md5|string|MD5 filehash of the parent file.
-» filename|string|Name of the file including file extension.
-» version|string|The release version this file represents.
-» changelog|string|List of all changes in this file release.
-» download_url|string|Link to download the file from the mod.io CDN.
+»» md5|string|MD5 hash of the file.
+» filename|string|Filename including extension.
+» version|string|Release version this file represents.
+» changelog|string|Changelog for the file.
+» download_url|string|URL to download the file from the mod.io CDN.
 
 
 
@@ -9336,10 +9228,10 @@ data|[Modfile Object  ](#schemamodfile_object)[]|Response array of items.
         "username": "XanT",
         "date_online": 1509922961,
         "avatar": {
-          "filename": "masterchief.jpg",
-          "original": "https://media.mod.io/images/members/1/1/1/masterchief.jpg"
+          "filename": "modio-dark.png",
+          "original": "https://media.mod.io/images/global/modio-dark.png"
         },
-        "timezone": "Australia/Brisbane",
+        "timezone": "America/Los_Angeles",
         "language": "en",
         "profile_url": "https://mod.io/members/xant"
       },
@@ -9347,40 +9239,40 @@ data|[Modfile Object  ](#schemamodfile_object)[]|Response array of items.
       "date_updated": 1499410290,
       "date_live": 1499841403,
       "presentation": 1,
-      "community": 3,
       "submission": 0,
       "curation": 0,
+      "community": 3,
       "revenue": 1500,
       "api": 3,
       "ugc_name": "map",
       "icon": {
-        "filename": "IMG_20170409_222419.jpg",
-        "original": "https://media.mod.io/images/mods/1/1/2/icon.png",
-        "thumb_320x180": "https://media.mod.io/cache/images/mods/1/1/2/thumb_320x180/icon.png"
+        "filename": "modio-dark.png",
+        "original": "https://media.mod.io/images/global/modio-dark.png",
+        "thumb_320x180": "https://media.mod.io/images/global/modio-dark.png"
       },
       "logo": {
-        "filename": "IMG_20170409_222419.jpg",
-        "original": "https://media.mod.io/images/mods/1/1/2/IMG_20170409_222419.jpg",
-        "thumb_320x180": "https://media.mod.io/cache/images/mods/1/1/2/thumb_320x180/IMG_20170409_222419.jpg",
-        "thumb_640x360": "https://media.mod.io/cache/images/mods/1/1/2/thumb_640x360/IMG_20170409_222419.jpg",
-        "thumb_1280x720": "https://media.mod.io/cache/images/mods/1/1/2/thumb_1280x720/IMG_20170409_222419.jpg"
+        "filename": "modio-dark.png",
+        "original": "https://media.mod.io/images/global/modio-dark.png",
+        "thumb_320x180": "https://media.mod.io/images/global/modio-dark.png",
+        "thumb_640x360": "https://media.mod.io/images/global/modio-dark.png",
+        "thumb_1280x720": "https://media.mod.io/images/global/modio-dark.png"
       },
       "header": {
-        "filename": "gameheader.png",
-        "original": "https://media.mod.io/images/games/1/1/2/gameheader.png"
+        "filename": "demo.png",
+        "original": "https://media.mod.io/images/global/modio-dark.png"
       },
       "homepage": "https://www.rogue-knight-game.com/",
       "name": "Rogue Knight",
       "name_id": "rogue-knight",
       "summary": "Rogue Knight is a brand new 2D pixel platformer.",
-      "instructions": "Instructions here on how to develop for your game.",
+      "instructions": "Instructions on the process to upload mods.",
       "profile_url": "https://rogue-knight.mod.io",
       "tag_options": [
         {
-          "name": "Engines",
+          "name": "Theme",
           "type": "checkboxes",
           "tags": [
-            "Unity"
+            "Horror"
           ],
           "admin_only": 0
         }
@@ -9401,57 +9293,57 @@ data|[Modfile Object  ](#schemamodfile_object)[]|Response array of items.
 
 Name|Type|Description
 ---|---|---|---|
-cursor_id|integer(int32)|The current _cursor value.
-prev_id|integer(int32)|The previous _cursor value as manually inserted by you, null by default.
-next_id|integer(int32)|The next position to move the _cursor to, based on the current request.
-result_count|integer(int32)|The amount of results returned in the current request.
-data|[Game Object  ](#schemagame_object)[]|Array containing game objects
+cursor_id|integer(int32)|Current _cursor value. See [Cursors and Offsets](#cursors-and-offsets) for help understanding how to paginate through results.
+prev_id|integer(int32)|Previous _cursor value as manually inserted by you, null by default.
+next_id|integer(int32)|Next position to move the _cursor to, based on the current request.
+result_count|integer(int32)|Amount of results returned in the current request.
+data|[Game Object  ](#schemagame_object)[]|Array containing game objects.
 » id|integer(int32)|Unique game id.
 » submitted_by|[User Object  ](#schemauser_object)|Contains user data.
 »» id|integer(int32)|Unique id of the user.
-»» name_id|string|Unique nameid of user which forms end of their profile URL.
-»» username|string|Non-unique username of the user.
-»» date_online|integer(int32)|Unix timestamp of when the user was last online.
+»» name_id|string|URL path for the user on mod.io. Usually a simplified version of their username.
+»» username|string|Username of the user.
+»» date_online|integer(int32)|Unix timestamp of date the user was last online.
 »» avatar|[Avatar Object  ](#schemaavatar_object)|Contains avatar data.
-»»» filename|string|Image filename, including file extension.
-»»» original|string|Full URL to the image.
-»» timezone|string|The Timezone of the user, shown in {Country}/{City} format.
-»» language|string|The users language preference, limited to two characters.
-»» profile_url|string|URL to the user's mod.io profile page.
+»»» filename|string|Avatar filename including extension.
+»»» original|string|URL to the full-sized avatar.
+»» timezone|string|Timezone of the user, format is country/city.
+»» language|string|2-character representation of users language preference.
+»» profile_url|string|URL to the user's mod.io profile.
 » date_added|integer(int32)|Unix timestamp of date registered.
 » date_updated|integer(int32)|Unix timestamp of date updated.
-» date_live|integer(int32)|Unix timestamp of when game was set live.
-» presentation|integer(int32)|Determines which presentation style you want to use for your game on the mod.io website <br><br>*Field options*<br>__0__ =  Grid View: Displays mods in a grid (visual but less informative, default setting) <br>__1__ = Table View: Displays mods in a table (easier to browse).
-» community|integer(int32)|Determines the rights community members have with the game.<br><br>*Field Options*<br>__0__ = Discussion board disabled, community cannot share guides and news<br>__1__ = Discussion Board enabled only<br>__2__ = Community can only share guides and news<br>__3__ = Discussion Board enabled and community can share news and guides
-» submission|integer(int32)|Determines the submission process you want modders to follow.<br><br>*Field Options*<br>__0__ = Control the upload process. You will have to build an upload system either in-game or via a standalone app, which enables developers to submit mods to the tags you have configured. Because you control the flow, you can pre-validate and compile mods, to ensure they will work in your game. In the long run this option will save you time as you can accept more submissions, but it requires more setup to get running and isn't as open as the above option. NOTE: mod profiles can still be created online, but uploads will have to occur via the tools you supply.<br><br>__1__ = Enable mod uploads from anywhere. Allow developers to upload mods via the website and API, and pick the tags their mod is built for. No validation will be done on the files submitted, it will be the responsibility of your game and apps built to process the mods installation based on the tags selected and determine if the mod is valid and works. For example a mod might be uploaded to the 'map' tag. When a user subscribes to this mod, your game will need to verify it contains a map file and install it where maps are located. If this fails, your game or the community will have to flag the mod as 'incompatible' to remove it from the listing.
-» curation|integer(int32)|Determines the curation process for the game.<br><br>*Field Options*<br>__0__ = Mods are immediately available to play, without any intervention or work from your team.<br>__1__ = Screen only mods the author wants to sell, before they are available to purchase via the API.<br>__2__ = All mods must be accepted by someone on your team. This option is useful for games that have a small number of mods and want to control the experience, or you need to set the parameters attached to a mod (i.e. a weapon may require the rate of fire, power level, clip size etc). It can also be used for complex mods, which you may need to build into your game or distribute as DLC.
-» revenue|integer(int32)|__Bitwise__. Determines the revenue capabilities for mods of the game. For selecting multiple options you need to submit the bitwise value. i.e. If you want to allow user-generated content to be sold(1), to receive donations(2) and allow them to control their supply and scarcity(8) your would submit _11 (8 + 2 + 1)_.<br><br>*Field Options*<br>__1__ = Allow user-generated content to be sold<br>__2__ = Allow user-generated content to receive donations<br>__4__ = Allow user-generated content to be traded (not subject to revenue share)<br>__8__ = Allow user-generated content to control supply and scarcity.
-» api|integer(int32)|Determines what permissions you want to enable via the mod.io API.<br><br>*Field Options*<br>__0__ = Third parties cannot access your mods API and mods cannot be downloaded directly without API validation.<br>__1__ = Allow 3rd parties to access your mods API (recommended, an open API will encourage a healthy ecosystem of tools and apps) but mods cannot be downloaded directly<br>__2__ = Allow mods to be downloaded directly but 3rd parties cannot access your mods API.<br>__3__ = Allow third parties to access your mods API and allow mods to be downloaded directly without api validation.
-» ugc_name|string|Singular string that best describes the type of user-generated content.
+» date_live|integer(int32)|Unix timestamp of date game was set live.
+» presentation|integer(int32)|Presentation style used on the mod.io website:<br><br>__0__ =  Grid View: Displays mods in a grid<br>__1__ = Table View: Displays mods in a table
+» submission|integer(int32)|Submission process modders must follow:<br><br>__0__ = Mod uploads must occur via a tool created by the game developers<br>__1__ = Mod uploads can occur from anywhere, including the website and API
+» curation|integer(int32)|Curation process used to approve mods:<br><br>__0__ = No curation: Mods are immediately available to play<br>__1__ = Paid curation: Only mods which accept donations must be accepted<br>__2__ = Full curation: All mods must be accepted by someone to be listed
+» community|integer(int32)|Community features enabled on the mod.io website:<br><br>__0__ = All of the options below are disabled<br>__1__ = Discussion board enabled<br>__2__ = Guides and news enabled<br>__?__ = Combine to find games with multiple options enabled (see [BITWISE filtering](#bitwise-and-bitwise-and))
+» revenue|integer(int32)|Revenue capabilities mods can enable:<br><br>__0__ = All of the options below are disabled<br>__1__ = Allow mods to be sold<br>__2__ = Allow mods to receive donations<br>__4__ = Allow mods to be traded<br>__8__ = Allow mods to control supply and scarcity<br>__?__ = Combine to find games with multiple options enabled (see [BITWISE filtering](#bitwise-and-bitwise-and))
+» api|integer(int32)|Level of API access allowed by this game:<br><br>__0__ = All of the options below are disabled<br>__1__ = This game allows 3rd parties to access the mods API<br>__2__ = This game allows mods to be downloaded directly without API validation<br>__?__ = Combine to find games with multiple options enabled (see [BITWISE filtering](#bitwise-and-bitwise-and))
+» ugc_name|string|Word used to describe user-generated content (mods, items, addons etc).
 » icon|[Icon Object  ](#schemaicon_object)|Contains icon data.
-»» filename|string|Image filename, with file extension included.
-»» original|string|URL to full-sized image.
-»» thumb_320x180|string|URL to small thumbnail image.
+»» filename|string|Icon filename including extension.
+»» original|string|URL to the full-sized icon.
+»» thumb_320x180|string|URL to the icon thumbnail.
 » logo|[Logo Object  ](#schemalogo_object)|Contains logo data.
-»» filename|string|Image filename, with file extension included.
-»» original|string|URL to full-sized image.
-»» thumb_320x180|string|URL to small thumbnail image.
-»» thumb_640x360|string|URL to medium thumbnail image.
-»» thumb_1280x720|string|URL to large thumbnail image.
+»» filename|string|Logo filename including extension.
+»» original|string|URL to the full-sized logo.
+»» thumb_320x180|string|URL to the small logo thumbnail.
+»» thumb_640x360|string|URL to the medium logo thumbnail.
+»» thumb_1280x720|string|URL to the large logo thumbnail.
 » header|[Header Object  ](#schemaheader_object)|Contains header data.
-»» filename|string|Image filename, with file extension included.
+»» filename|string|Header image filename including extension.
 »» original|string|URL to the full-sized header image.
-» homepage|string|Official game website URL.
-» name|string|Title of the game.
-» name_id|string|The unique SEO friendly URL of the game.
-» summary|string|Brief summary of the game.
-» instructions|string|Modding instructions for developers.
-» profile_url|string|URL to the mod.io page.
-» tag_options|[Game Tag Option Object](#schemagame_tag_option_object)[]|Contains categories data.
-»» name|string|The name of the category.
-»» type|string|Are tags selected via checkboxes or a single dropdown.
-»» admin_only|integer(int32)|Is this an admin only tag? If so only admin's can see this category and it can be used for filtering.
-»» tags|string[]|Eligible tags for this game.
+» homepage|string|Official homepage of the game.
+» name|string|Name of the game.
+» name_id|string|Subdomain for the game on mod.io.
+» summary|string|Summary of the game.
+» instructions|string|A guide about creating and uploading mods for this game to mod.io (applicable if submission = 0).
+» profile_url|string|URL to the game's mod.io page.
+» tag_options|[Game Tag Option Object](#schemagame_tag_option_object)[]|Groups of tags configured by the game developer, that mods can select.
+»» name|string|Name of the tag group.
+»» type|string|Can multiple tags be selected via 'checkboxes' or should only a single tag be selected via a 'dropdown'.
+»» admin_only|integer(int32)|Groups of tags flagged as 'admin only' should only be used for filtering, and should not be displayed to users.
+»» tags|string[]|Array of tags in this group.
 
 
 
@@ -9491,20 +9383,20 @@ data|[Game Object  ](#schemagame_object)[]|Array containing game objects
 
 Name|Type|Description
 ---|---|---|---|
-cursor_id|integer(int32)|The current _cursor value.
-prev_id|integer(int32)|The previous _cursor value as manually inserted by you, null by default.
-next_id|integer(int32)|The next position to move the _cursor to, based on the current request.
-result_count|integer(int32)|The amount of results returned in the current request.
-data|[Game Activity Object ](#schemagame_activity_object)[]|Response array of items.
-» id|integer(int32)|Unique id of activity record.
+cursor_id|integer(int32)|Current _cursor value. See [Cursors and Offsets](#cursors-and-offsets) for help understanding how to paginate through results.
+prev_id|integer(int32)|Previous _cursor value as manually inserted by you, null by default.
+next_id|integer(int32)|Next position to move the _cursor to, based on the current request.
+result_count|integer(int32)|Amount of results returned in the current request.
+data|[Game Activity Object ](#schemagame_activity_object)[]|Array containing game activity objects.
+» id|integer(int32)|Unique id of the activity record.
 » game_id|integer(int32)|Unique id of the parent game.
-» user_id|integer(int32)|Unique id of the user who triggered the action.
-» date_added|string|Unix timestamp of when the event occured.
-» event|string|Type of event the activity was. ie. GAME_UPDATE or GAME_VISIBILITY_CHANGE.
-» changes|[Field Change Object ](#schemafield_change_object)[]|Contains all changes for the event.
-»» field|string|The field of the changed value.
-»» before|string|The value prior to the event.
-»» after|string|The newly-updated value.
+» user_id|integer(int32)|Unique id of the user who performed the action.
+» date_added|string|Unix timestamp of date the event occured.
+» event|string|Type of [event the activity](#get-game-activity) was 'GAME_UPDATE' or 'GAME_VISIBILITY_CHANGE'.
+» changes|[Field Change Object ](#schemafield_change_object)[]|Contains an array of 'before and after' values of fields changed by the event.
+»» field|string|Name of field that was changed.
+»» before|string|Value of the field before the event.
+»» after|string|Value of the field after the event.
 
 
 
@@ -9534,10 +9426,10 @@ data|[Game Activity Object ](#schemagame_activity_object)[]|Response array of it
 
 Name|Type|Description
 ---|---|---|---|
-cursor_id|integer(int32)|The current _cursor value.
-prev_id|integer(int32)|The previous _cursor value as manually inserted by you, null by default.
-next_id|integer(int32)|The next position to move the _cursor to, based on the current request.
-result_count|integer(int32)|The amount of results returned in the current request.
+cursor_id|integer(int32)|Current _cursor value. See [Cursors and Offsets](#cursors-and-offsets) for help understanding how to paginate through results.
+prev_id|integer(int32)|Previous _cursor value as manually inserted by you, null by default.
+next_id|integer(int32)|Next position to move the _cursor to, based on the current request.
+result_count|integer(int32)|Amount of results returned in the current request.
 data|[Metadata KVP Object ](#schemametadata_kvp_object)[]|Array containing metadata kvp objects.
 » key|string|The key of the key-value pair.
 » value|string|The value of the key-value pair.
@@ -9560,10 +9452,10 @@ data|[Metadata KVP Object ](#schemametadata_kvp_object)[]|Array containing metad
         "username": "XanT",
         "date_online": 1509922961,
         "avatar": {
-          "filename": "masterchief.jpg",
-          "original": "https://media.mod.io/images/members/1/1/1/masterchief.jpg"
+          "filename": "modio-dark.png",
+          "original": "https://media.mod.io/images/global/modio-dark.png"
         },
-        "timezone": "Australia/Brisbane",
+        "timezone": "America/Los_Angeles",
         "language": "en",
         "profile_url": "https://mod.io/members/xant"
       },
@@ -9571,11 +9463,11 @@ data|[Metadata KVP Object ](#schemametadata_kvp_object)[]|Array containing metad
       "date_updated": 1499841487,
       "date_live": 1499841403,
       "logo": {
-        "filename": "IMG_20170409_222419.jpg",
-        "original": "https://media.mod.io/images/mods/1/1/2/IMG_20170409_222419.jpg",
-        "thumb_320x180": "https://media.mod.io/cache/images/mods/1/1/2/thumb_320x180/IMG_20170409_222419.jpg",
-        "thumb_640x360": "https://media.mod.io/cache/images/mods/1/1/2/thumb_640x360/IMG_20170409_222419.jpg",
-        "thumb_1280x720": "https://media.mod.io/cache/images/mods/1/1/2/thumb_1280x720/IMG_20170409_222419.jpg"
+        "filename": "modio-dark.png",
+        "original": "https://media.mod.io/images/global/modio-dark.png",
+        "thumb_320x180": "https://media.mod.io/images/global/modio-dark.png",
+        "thumb_640x360": "https://media.mod.io/images/global/modio-dark.png",
+        "thumb_1280x720": "https://media.mod.io/images/global/modio-dark.png"
       },
       "homepage": "https://www.rogue-hdpack.com/",
       "name": "Rogue Knight HD Pack",
@@ -9599,7 +9491,7 @@ data|[Metadata KVP Object ](#schemametadata_kvp_object)[]|Array containing metad
         "filename": "rogue-knight-v1.zip",
         "version": "1.3",
         "changelog": "VERSION 1.3 -- Changes -- Fixed critical castle floor bug.",
-        "download_url": "https://mod.io/mods/file/2/c489a0354111a4d76640d47f0cdcb294"
+        "download_url": "https://mod.io/mods/file/1/c489a0354111a4d76640d47f0cdcb294"
       },
       "media": {
         "youtube": [
@@ -9610,9 +9502,9 @@ data|[Metadata KVP Object ](#schemametadata_kvp_object)[]|Array containing metad
         ],
         "images": [
           {
-            "original": "https://media.mod.io/images/mods/1/1/2/IMG_20170409_222419.jpg",
-            "thumb_320x180": "https://media.mod.io/cache/images/mods/1/1/2/thumb_1020x2000/IMG_20170409_222419.jpg",
-            "filename": "IMG_20170409_222419.jpg"
+            "filename": "modio-dark.png",
+            "original": "https://media.mod.io/images/global/modio-dark.png",
+            "thumb_320x180": "https://media.mod.io/images/global/modio-dark.png"
           }
         ]
       },
@@ -9646,72 +9538,72 @@ data|[Metadata KVP Object ](#schemametadata_kvp_object)[]|Array containing metad
 
 Name|Type|Description
 ---|---|---|---|
-cursor_id|integer(int32)|The current _cursor value.
-prev_id|integer(int32)|The previous _cursor value as manually inserted by you, null by default.
-next_id|integer(int32)|The next position to move the _cursor to, based on the current request.
-result_count|integer(int32)|The amount of results returned in the current request.
-data|[Mod Object  ](#schemamod_object)[]|Array containing mod objects
+cursor_id|integer(int32)|Current _cursor value. See [Cursors and Offsets](#cursors-and-offsets) for help understanding how to paginate through results.
+prev_id|integer(int32)|Previous _cursor value as manually inserted by you, null by default.
+next_id|integer(int32)|Next position to move the _cursor to, based on the current request.
+result_count|integer(int32)|Amount of results returned in the current request.
+data|[Mod Object  ](#schemamod_object)[]|Array containing mod objects.
 » id|integer(int32)|Unique mod id.
 » game_id|integer(int32)|Unique game id.
 » submitted_by|[User Object  ](#schemauser_object)|Contains user data.
 »» id|integer(int32)|Unique id of the user.
-»» name_id|string|Unique nameid of user which forms end of their profile URL.
-»» username|string|Non-unique username of the user.
-»» date_online|integer(int32)|Unix timestamp of when the user was last online.
+»» name_id|string|URL path for the user on mod.io. Usually a simplified version of their username.
+»» username|string|Username of the user.
+»» date_online|integer(int32)|Unix timestamp of date the user was last online.
 »» avatar|[Avatar Object  ](#schemaavatar_object)|Contains avatar data.
-»»» filename|string|Image filename, including file extension.
-»»» original|string|Full URL to the image.
-»» timezone|string|The Timezone of the user, shown in {Country}/{City} format.
-»» language|string|The users language preference, limited to two characters.
-»» profile_url|string|URL to the user's mod.io profile page.
+»»» filename|string|Avatar filename including extension.
+»»» original|string|URL to the full-sized avatar.
+»» timezone|string|Timezone of the user, format is country/city.
+»» language|string|2-character representation of users language preference.
+»» profile_url|string|URL to the user's mod.io profile.
 » date_added|integer(int32)|Unix timestamp of date registered.
 » date_updated|integer(int32)|Unix timestamp of date last updated.
 » date_live|integer(int32)|Unix timestamp of date mod was set live.
 » logo|[Logo Object  ](#schemalogo_object)|Contains logo data.
-»» filename|string|Image filename, with file extension included.
-»» original|string|URL to full-sized image.
-»» thumb_320x180|string|URL to small thumbnail image.
-»» thumb_640x360|string|URL to medium thumbnail image.
-»» thumb_1280x720|string|URL to large thumbnail image.
-» homepage|string|Mod homepage URL.
+»» filename|string|Logo filename including extension.
+»» original|string|URL to the full-sized logo.
+»» thumb_320x180|string|URL to the small logo thumbnail.
+»» thumb_640x360|string|URL to the medium logo thumbnail.
+»» thumb_1280x720|string|URL to the large logo thumbnail.
+» homepage|string|Official homepage of the mod.
 » name|string|Name of the mod.
-» name_id|string|Unique SEO-friendly mod uri.
-» summary|string|Brief summary of the mod.
-» description|string|Description of the mod.
-» metadata_blob|string|Comma-separated metadata for the mod.
-» profile_url|string|URL to mod.io page.
-» modfile|[Modfile Object  ](#schemamodfile_object)|Contains file data.
-»» id|integer(int32)|Unique file id.
+» name_id|string|URL path for the mod on mod.io.
+» summary|string|Summary of the mod.
+» description|string|Detailed description of the mod which allows HTML.
+» metadata_blob|string|Metadata stored by the game developer. Metadata can also be stored as searchable [key value pairs](#metadata).
+» profile_url|string|URL to the mod's mod.io profile.
+» modfile|[Modfile Object  ](#schemamodfile_object)|Contains modfile data.
+»» id|integer(int32)|Unique modfile id.
 »» mod_id|integer(int32)|Unique mod id.
-»» date_added|integer(int32)|Unix timestamp of file upload time.
-»» date_scanned|integer(int32)|Unix timestamp of file virus scan.
-»» virus_status|integer(int32)|The status of the virus scan for the file.
-»» virus_positive|integer(int32)|Has the file been positively flagged as a virus?
-»» virustotal_hash|string|VirusTotal proprietary hash.
+»» date_added|integer(int32)|Unix timestamp of date added.
+»» date_scanned|integer(int32)|Unix timestamp of date file was virus scanned.
+»» virus_status|integer(int32)|Current virus scan status of the file. For newly added files that have yet to be scanned this field will change frequently until a scan is complete:<br><br>__0__ = Not scanned<br>__1__ = Scan complete<br>__2__ = In progress<br>__3__ = Too large to scan<br>__4__ = File not found<br>__5__ = Error Scanning
+»» virus_positive|integer(int32)|Was a virus detected:<br><br>__0__ = No threats detected<br>__1__ = Flagged as malicious
+»» virustotal_hash|string|VirusTotal proprietary hash to view the [scan results](https://www.virustotal.com).
 »» filesize|integer(int32)|Size of the file in bytes.
 »» filehash|[Filehash Object  ](#schemafilehash_object)|Contains filehash data.
-»»» md5|string|MD5 filehash of the parent file.
-»» filename|string|Name of the file including file extension.
-»» version|string|The release version this file represents.
-»» changelog|string|List of all changes in this file release.
-»» download_url|string|Link to download the file from the mod.io CDN.
-» media|[Mod Media Object ](#schemamod_media_object)|Contains Mod media data.
+»»» md5|string|MD5 hash of the file.
+»» filename|string|Filename including extension.
+»» version|string|Release version this file represents.
+»» changelog|string|Changelog for the file.
+»» download_url|string|URL to download the file from the mod.io CDN.
+» media|[Mod Media Object ](#schemamod_media_object)|Contains mod media data.
 »» youtube|string[]|Array of YouTube links.
-»» sketchfab|string[]|Array of YouTube Links.
-»» images|[Image Object  ](#schemaimage_object)[]|Array of images objects.
-»»» original|string|URL to the full image.
-»»» thumb_320x180|string|URL to the thumbnail image.
-»»» filename|string|Image filename, with the extension included.
-» rating_summary|[Rating Summary Object ](#schemarating_summary_object)|Contains ratings data.
+»» sketchfab|string[]|Array of SketchFab links.
+»» images|[Image Object  ](#schemaimage_object)[]|Array of image objects (a gallery).
+»»» filename|string|Image filename including extension.
+»»» original|string|URL to the full-sized image.
+»»» thumb_320x180|string|URL to the image thumbnail.
+» rating_summary|[Rating Summary Object ](#schemarating_summary_object)|Contains ratings summary.
 »» total_ratings|integer(int32)|Number of times this item has been rated.
 »» positive_ratings|integer(int32)|Number of positive ratings.
 »» negative_ratings|integer(int32)|Number of negative ratings.
 »» percentage_positive|integer(int32)|Number of positive ratings, divided by the total ratings to determine it’s percentage score.
-»» weighted_aggregate|float|The overall rating of this item calculated using the 'Wilson score confidence interval' as documented here http://www.evanmiller.org/how-not-to-sort-by-average-rating.html. This column is good to sort on, as it will order items based on number of ratings and will place items with lots of positive ratings above those with a higher score but much fewer ratings.
-»» display_text|string|Textual representation of the rating in format 'Overwhelmingly Positive', 'Very Positive', 'Positive', 'Mostly Positive', 'Mixed', 'Negative', 'Mostly Negative', 'Very Negative' and 'Overwhelmingly Negative'.
-» tags|[Mod Tag Object ](#schemamod_tag_object)[]|Contains Mod Tag data.
-»» name|string|The displayed tag.
-»» date_added|integer(int32)|Unix timestamp of when tag was applied.
+»» weighted_aggregate|float|Overall rating of this item calculated using the [Wilson score confidence interval](http://www.evanmiller.org/how-not-to-sort-by-average-rating.html). This column is good to sort on, as it will order items based on number of ratings and will place items with many positive ratings above those with a higher score but fewer ratings.
+»» display_text|string|Textual representation of the rating in format:<br><br>- Overwhelmingly Positive<br>- Very Positive<br>- Positive<br>- Mostly Positive<br>- Mixed<br>- Negative<br>- Mostly Negative<br>- Very Negative<br>- Overwhelmingly Negative
+» tags|[Mod Tag Object ](#schemamod_tag_object)[]|Contains mod tag data.
+»» name|string|Tag name.
+»» date_added|integer(int32)|Unix timestamp of date tag was applied.
 
 
 
@@ -9751,20 +9643,20 @@ data|[Mod Object  ](#schemamod_object)[]|Array containing mod objects
 
 Name|Type|Description
 ---|---|---|---|
-cursor_id|integer(int32)|The current _cursor value.
-prev_id|integer(int32)|The previous _cursor value as manually inserted by you, null by default.
-next_id|integer(int32)|The next position to move the _cursor to, based on the current request.
-result_count|integer(int32)|The amount of results returned in the current request.
-data|[Mod Activity Object ](#schemamod_activity_object)[]|Response array of items.
-» id|integer(int32)|Unique id of activity object.
+cursor_id|integer(int32)|Current _cursor value. See [Cursors and Offsets](#cursors-and-offsets) for help understanding how to paginate through results.
+prev_id|integer(int32)|Previous _cursor value as manually inserted by you, null by default.
+next_id|integer(int32)|Next position to move the _cursor to, based on the current request.
+result_count|integer(int32)|Amount of results returned in the current request.
+data|[Mod Activity Object ](#schemamod_activity_object)[]|Array containing mod activity objects.
+» id|integer(int32)|Unique id of the activity object.
 » mod_id|integer(int32)|Unique id of the parent mod.
-» user_id|integer(int32)|Unique id of the user who triggered the action.
-» date_added|integer(int32)|Unix timestamp of when the event occured.
-» event|string|Type of event the activity was. ie. MOD_UPDATE or MOD_VISIBILITY_CHANGE.
-» changes|[Field Change Object ](#schemafield_change_object)[]|Contains all changes for the event.
-»» field|string|The field of the changed value.
-»» before|string|The value prior to the event.
-»» after|string|The newly-updated value.
+» user_id|integer(int32)|Unique id of the user who performed the action.
+» date_added|integer(int32)|Unix timestamp of date the event occured.
+» event|string|Type of [event the activity](#get-mod-activity) was 'MOD_UPDATE', 'MODFILE_UPDATE', 'MOD_VISIBILITY_CHANGE' or 'MOD_LIVE'.
+» changes|[Field Change Object ](#schemafield_change_object)[]|Contains an array of 'before and after' values of fields changed by the event.
+»» field|string|Name of field that was changed.
+»» before|string|Value of the field before the event.
+»» after|string|Value of the field after the event.
 
 
 
@@ -9776,10 +9668,10 @@ data|[Mod Activity Object ](#schemamod_activity_object)[]|Response array of item
 {
   "data": [
     {
-      "name": "Engines",
+      "name": "Theme",
       "type": "checkboxes",
       "tags": [
-        "Unity"
+        "Horror"
       ],
       "admin_only": 0
     },
@@ -9798,15 +9690,15 @@ data|[Mod Activity Object ](#schemamod_activity_object)[]|Response array of item
 
 Name|Type|Description
 ---|---|---|---|
-cursor_id|integer(int32)|The current _cursor value.
-prev_id|integer(int32)|The previous _cursor value as manually inserted by you, null by default.
-next_id|integer(int32)|The next position to move the _cursor to, based on the current request.
-result_count|integer(int32)|The amount of results returned in the current request.
-data|[Game Tag Option Object](#schemagame_tag_option_object)[]|Array containing mod tag objects.
-» name|string|The name of the category.
-» type|string|Are tags selected via checkboxes or a single dropdown.
-» admin_only|integer(int32)|Is this an admin only tag? If so only admin's can see this category and it can be used for filtering.
-» tags|string[]|Eligible tags for this game.
+cursor_id|integer(int32)|Current _cursor value. See [Cursors and Offsets](#cursors-and-offsets) for help understanding how to paginate through results.
+prev_id|integer(int32)|Previous _cursor value as manually inserted by you, null by default.
+next_id|integer(int32)|Next position to move the _cursor to, based on the current request.
+result_count|integer(int32)|Amount of results returned in the current request.
+data|[Game Tag Option Object](#schemagame_tag_option_object)[]|Array containing game tag objects.
+» name|string|Name of the tag group.
+» type|string|Can multiple tags be selected via 'checkboxes' or should only a single tag be selected via a 'dropdown'.
+» admin_only|integer(int32)|Groups of tags flagged as 'admin only' should only be used for filtering, and should not be displayed to users.
+» tags|string[]|Array of tags in this group.
 
 
 
@@ -9836,13 +9728,13 @@ data|[Game Tag Option Object](#schemagame_tag_option_object)[]|Array containing 
 
 Name|Type|Description
 ---|---|---|---|
-cursor_id|integer(int32)|The current _cursor value.
-prev_id|integer(int32)|The previous _cursor value as manually inserted by you, null by default.
-next_id|integer(int32)|The next position to move the _cursor to, based on the current request.
-result_count|integer(int32)|The amount of results returned in the current request.
+cursor_id|integer(int32)|Current _cursor value. See [Cursors and Offsets](#cursors-and-offsets) for help understanding how to paginate through results.
+prev_id|integer(int32)|Previous _cursor value as manually inserted by you, null by default.
+next_id|integer(int32)|Next position to move the _cursor to, based on the current request.
+result_count|integer(int32)|Amount of results returned in the current request.
 data|[Mod Tag Object ](#schemamod_tag_object)[]|Array containing mod tag objects.
-» name|string|The displayed tag.
-» date_added|integer(int32)|Unix timestamp of when tag was applied.
+» name|string|Tag name.
+» date_added|integer(int32)|Unix timestamp of date tag was applied.
 
 
 
@@ -9861,10 +9753,10 @@ data|[Mod Tag Object ](#schemamod_tag_object)[]|Array containing mod tag objects
         "username": "XanT",
         "date_online": 1509922961,
         "avatar": {
-          "filename": "masterchief.jpg",
-          "original": "https://media.mod.io/images/members/1/1/1/masterchief.jpg"
+          "filename": "modio-dark.png",
+          "original": "https://media.mod.io/images/global/modio-dark.png"
         },
-        "timezone": "Australia/Brisbane",
+        "timezone": "America/Los_Angeles",
         "language": "en",
         "profile_url": "https://mod.io/members/xant"
       },
@@ -9887,26 +9779,26 @@ data|[Mod Tag Object ](#schemamod_tag_object)[]|Array containing mod tag objects
 
 Name|Type|Description
 ---|---|---|---|
-cursor_id|integer(int32)|The current _cursor value.
-prev_id|integer(int32)|The previous _cursor value as manually inserted by you, null by default.
-next_id|integer(int32)|The next position to move the _cursor to, based on the current request.
-result_count|integer(int32)|The amount of results returned in the current request.
-data|[Team Member Object ](#schemateam_member_object)[]|Array containing Team Member objects.
-» id|integer(int32)|Unique access id.
+cursor_id|integer(int32)|Current _cursor value. See [Cursors and Offsets](#cursors-and-offsets) for help understanding how to paginate through results.
+prev_id|integer(int32)|Previous _cursor value as manually inserted by you, null by default.
+next_id|integer(int32)|Next position to move the _cursor to, based on the current request.
+result_count|integer(int32)|Amount of results returned in the current request.
+data|[Team Member Object ](#schemateam_member_object)[]|Array containing team member objects.
+» id|integer(int32)|Unique team member id.
 » user|[User Object  ](#schemauser_object)|Contains user data.
 »» id|integer(int32)|Unique id of the user.
-»» name_id|string|Unique nameid of user which forms end of their profile URL.
-»» username|string|Non-unique username of the user.
-»» date_online|integer(int32)|Unix timestamp of when the user was last online.
+»» name_id|string|URL path for the user on mod.io. Usually a simplified version of their username.
+»» username|string|Username of the user.
+»» date_online|integer(int32)|Unix timestamp of date the user was last online.
 »» avatar|[Avatar Object  ](#schemaavatar_object)|Contains avatar data.
-»»» filename|string|Image filename, including file extension.
-»»» original|string|Full URL to the image.
-»» timezone|string|The Timezone of the user, shown in {Country}/{City} format.
-»» language|string|The users language preference, limited to two characters.
-»» profile_url|string|URL to the user's mod.io profile page.
-» level|integer(int32)|The level of permissions the member has within the team. 0 = Guest, 1 = Member, 2 = Contributor, 4 = Manager, 8 = Leader.
-» date_added|integer(int32)|Unix timestamp of date the member joined the team.
-» position|string|Custom title, has no effect on any access rights.
+»»» filename|string|Avatar filename including extension.
+»»» original|string|URL to the full-sized avatar.
+»» timezone|string|Timezone of the user, format is country/city.
+»» language|string|2-character representation of users language preference.
+»» profile_url|string|URL to the user's mod.io profile.
+» level|integer(int32)|Level of permission the user has:<br><br>__0__ = Guest<br>__1__ = Member<br>__2__ = Contributor<br>__4__ = Manager<br>__8__ = Leader
+» date_added|integer(int32)|Unix timestamp of the date the user was added to the team.
+» position|string|Custom title given to the user in this team.
 
 
 
@@ -9923,10 +9815,10 @@ data|[Team Member Object ](#schemateam_member_object)[]|Array containing Team Me
       "username": "XanT",
       "date_online": 1509922961,
       "avatar": {
-        "filename": "masterchief.jpg",
-        "original": "https://media.mod.io/images/members/1/1/1/masterchief.jpg"
+        "filename": "modio-dark.png",
+        "original": "https://media.mod.io/images/global/modio-dark.png"
       },
-      "timezone": "Australia/Brisbane",
+      "timezone": "America/Los_Angeles",
       "language": "en",
       "profile_url": "https://mod.io/members/xant"
     },
@@ -9945,21 +9837,21 @@ data|[Team Member Object ](#schemateam_member_object)[]|Array containing Team Me
 
 Name|Type|Description
 ---|---|---|---|
-cursor_id|integer(int32)|The current _cursor value.
-prev_id|integer(int32)|The previous _cursor value as manually inserted by you, null by default.
-next_id|integer(int32)|The next position to move the _cursor to, based on the current request.
-result_count|integer(int32)|The amount of results returned in the current request.
-data|[User Object  ](#schemauser_object)[]|Response array of items.
+cursor_id|integer(int32)|Current _cursor value. See [Cursors and Offsets](#cursors-and-offsets) for help understanding how to paginate through results.
+prev_id|integer(int32)|Previous _cursor value as manually inserted by you, null by default.
+next_id|integer(int32)|Next position to move the _cursor to, based on the current request.
+result_count|integer(int32)|Amount of results returned in the current request.
+data|[User Object  ](#schemauser_object)[]|Array containing user objects.
 » id|integer(int32)|Unique id of the user.
-» name_id|string|Unique nameid of user which forms end of their profile URL.
-» username|string|Non-unique username of the user.
-» date_online|integer(int32)|Unix timestamp of when the user was last online.
+» name_id|string|URL path for the user on mod.io. Usually a simplified version of their username.
+» username|string|Username of the user.
+» date_online|integer(int32)|Unix timestamp of date the user was last online.
 » avatar|[Avatar Object  ](#schemaavatar_object)|Contains avatar data.
-»» filename|string|Image filename, including file extension.
-»» original|string|Full URL to the image.
-» timezone|string|The Timezone of the user, shown in {Country}/{City} format.
-» language|string|The users language preference, limited to two characters.
-» profile_url|string|URL to the user's mod.io profile page.
+»» filename|string|Avatar filename including extension.
+»» original|string|URL to the full-sized avatar.
+» timezone|string|Timezone of the user, format is country/city.
+» language|string|2-character representation of users language preference.
+» profile_url|string|URL to the user's mod.io profile.
 
 
 
@@ -9988,15 +9880,15 @@ data|[User Object  ](#schemauser_object)[]|Response array of items.
 
 Name|Type|Description
 ---|---|---|---|
-id|integer(int32)|Unique id of activity record.
+id|integer(int32)|Unique id of the activity record.
 game_id|integer(int32)|Unique id of the parent game.
-user_id|integer(int32)|Unique id of the user who triggered the action.
-date_added|string|Unix timestamp of when the event occured.
-event|string|Type of event the activity was. ie. GAME_UPDATE or GAME_VISIBILITY_CHANGE.
-changes|[Field Change Object ](#schemafield_change_object)[]|Contains all changes for the event.
-» field|string|The field of the changed value.
-» before|string|The value prior to the event.
-» after|string|The newly-updated value.
+user_id|integer(int32)|Unique id of the user who performed the action.
+date_added|string|Unix timestamp of date the event occured.
+event|string|Type of [event the activity](#get-game-activity) was 'GAME_UPDATE' or 'GAME_VISIBILITY_CHANGE'.
+changes|[Field Change Object ](#schemafield_change_object)[]|Contains an array of 'before and after' values of fields changed by the event.
+» field|string|Name of field that was changed.
+» before|string|Value of the field before the event.
+» after|string|Value of the field after the event.
 
 
 
@@ -10025,15 +9917,15 @@ changes|[Field Change Object ](#schemafield_change_object)[]|Contains all change
 
 Name|Type|Description
 ---|---|---|---|
-id|integer(int32)|Unique id of activity object.
+id|integer(int32)|Unique id of the activity object.
 mod_id|integer(int32)|Unique id of the parent mod.
-user_id|integer(int32)|Unique id of the user who triggered the action.
-date_added|integer(int32)|Unix timestamp of when the event occured.
-event|string|Type of event the activity was. ie. MOD_UPDATE or MOD_VISIBILITY_CHANGE.
-changes|[Field Change Object ](#schemafield_change_object)[]|Contains all changes for the event.
-» field|string|The field of the changed value.
-» before|string|The value prior to the event.
-» after|string|The newly-updated value.
+user_id|integer(int32)|Unique id of the user who performed the action.
+date_added|integer(int32)|Unix timestamp of date the event occured.
+event|string|Type of [event the activity](#get-mod-activity) was 'MOD_UPDATE', 'MODFILE_UPDATE', 'MOD_VISIBILITY_CHANGE' or 'MOD_LIVE'.
+changes|[Field Change Object ](#schemafield_change_object)[]|Contains an array of 'before and after' values of fields changed by the event.
+» field|string|Name of field that was changed.
+» before|string|Value of the field before the event.
+» after|string|Value of the field after the event.
 
 
 
@@ -10053,9 +9945,9 @@ changes|[Field Change Object ](#schemafield_change_object)[]|Contains all change
 
 Name|Type|Description
 ---|---|---|---|
-field|string|The field of the changed value.
-before|string|The value prior to the event.
-after|string|The newly-updated value.
+field|string|Name of field that was changed.
+before|string|Value of the field before the event.
+after|string|Value of the field after the event.
 
 
 
@@ -10073,10 +9965,10 @@ after|string|The newly-updated value.
     "username": "XanT",
     "date_online": 1509922961,
     "avatar": {
-      "filename": "masterchief.jpg",
-      "original": "https://media.mod.io/images/members/1/1/1/masterchief.jpg"
+      "filename": "modio-dark.png",
+      "original": "https://media.mod.io/images/global/modio-dark.png"
     },
-    "timezone": "Australia/Brisbane",
+    "timezone": "America/Los_Angeles",
     "language": "en",
     "profile_url": "https://mod.io/members/xant"
   },
@@ -10097,21 +9989,21 @@ id|integer(int32)|Unique id of the comment.
 mod_id|integer(int32)|Unique id of the parent mod.
 submitted_by|[User Object  ](#schemauser_object)|Contains user data.
 » id|integer(int32)|Unique id of the user.
-» name_id|string|Unique nameid of user which forms end of their profile URL.
-» username|string|Non-unique username of the user.
-» date_online|integer(int32)|Unix timestamp of when the user was last online.
+» name_id|string|URL path for the user on mod.io. Usually a simplified version of their username.
+» username|string|Username of the user.
+» date_online|integer(int32)|Unix timestamp of date the user was last online.
 » avatar|[Avatar Object  ](#schemaavatar_object)|Contains avatar data.
-»» filename|string|Image filename, including file extension.
-»» original|string|Full URL to the image.
-» timezone|string|The Timezone of the user, shown in {Country}/{City} format.
-» language|string|The users language preference, limited to two characters.
-» profile_url|string|URL to the user's mod.io profile page.
-date_added|integer(int32)|Unix timestamp of when the comment was published.
-reply_id|integer(int32)|Unique id of the reply used to submitting a nested reply to the published comment.
-reply_position|string|Nesting position of the reply.
-karma|integer(int32)|The amount of karma the comment has received.
-karma_guest|integer(int32)|The amount of karma received by guests.
-content|string|The displayed comment.
+»» filename|string|Avatar filename including extension.
+»» original|string|URL to the full-sized avatar.
+» timezone|string|Timezone of the user, format is country/city.
+» language|string|2-character representation of users language preference.
+» profile_url|string|URL to the user's mod.io profile.
+date_added|integer(int32)|Unix timestamp of date the comment was posted.
+reply_id|integer(int32)|Id of the parent comment this comment is replying to (can be 0 if the comment is not a reply).
+reply_position|string|Levels of nesting in a comment thread. How it works:<br><br>- The first comment will have the position '01'.<br>- The second comment will have the position '02'.<br>- If someone responds to the second comment the position will be '02.01'.<br>- A maximum of 3 levels is supported.
+karma|integer(int32)|Karma received for the comment (can be postive or negative).
+karma_guest|integer(int32)|Karma received for guest comments (can be postive or negative).
+content|string|Contents of the comment.
 
 
 
@@ -10131,7 +10023,7 @@ content|string|The displayed comment.
 Name|Type|Description
 ---|---|---|---|
 mod_id|integer(int32)|Unique id of the mod that is the dependency.
-date_added|integer(int32)|Unix timestamp of when the dependency was added.
+date_added|integer(int32)|Unix timestamp of date the dependency was added.
 
 
 
@@ -10155,7 +10047,7 @@ date_added|integer(int32)|Unix timestamp of when the dependency was added.
   "filename": "rogue-knight-v1.zip",
   "version": "1.3",
   "changelog": "VERSION 1.3 -- Changes -- Fixed critical castle floor bug.",
-  "download_url": "https://mod.io/mods/file/2/c489a0354111a4d76640d47f0cdcb294"
+  "download_url": "https://mod.io/mods/file/1/c489a0354111a4d76640d47f0cdcb294"
 } 
 ```
 
@@ -10163,20 +10055,20 @@ date_added|integer(int32)|Unix timestamp of when the dependency was added.
 
 Name|Type|Description
 ---|---|---|---|
-id|integer(int32)|Unique file id.
+id|integer(int32)|Unique modfile id.
 mod_id|integer(int32)|Unique mod id.
-date_added|integer(int32)|Unix timestamp of file upload time.
-date_scanned|integer(int32)|Unix timestamp of file virus scan.
-virus_status|integer(int32)|The status of the virus scan for the file.
-virus_positive|integer(int32)|Has the file been positively flagged as a virus?
-virustotal_hash|string|VirusTotal proprietary hash.
+date_added|integer(int32)|Unix timestamp of date added.
+date_scanned|integer(int32)|Unix timestamp of date file was virus scanned.
+virus_status|integer(int32)|Current virus scan status of the file. For newly added files that have yet to be scanned this field will change frequently until a scan is complete:<br><br>__0__ = Not scanned<br>__1__ = Scan complete<br>__2__ = In progress<br>__3__ = Too large to scan<br>__4__ = File not found<br>__5__ = Error Scanning
+virus_positive|integer(int32)|Was a virus detected:<br><br>__0__ = No threats detected<br>__1__ = Flagged as malicious
+virustotal_hash|string|VirusTotal proprietary hash to view the [scan results](https://www.virustotal.com).
 filesize|integer(int32)|Size of the file in bytes.
 filehash|[Filehash Object  ](#schemafilehash_object)|Contains filehash data.
-» md5|string|MD5 filehash of the parent file.
-filename|string|Name of the file including file extension.
-version|string|The release version this file represents.
-changelog|string|List of all changes in this file release.
-download_url|string|Link to download the file from the mod.io CDN.
+» md5|string|MD5 hash of the file.
+filename|string|Filename including extension.
+version|string|Release version this file represents.
+changelog|string|Changelog for the file.
+download_url|string|URL to download the file from the mod.io CDN.
 
 
 
@@ -10194,7 +10086,7 @@ download_url|string|Link to download the file from the mod.io CDN.
 
 Name|Type|Description
 ---|---|---|---|
-md5|string|MD5 filehash of the parent file.
+md5|string|MD5 hash of the file.
 
 
 
@@ -10212,10 +10104,10 @@ md5|string|MD5 filehash of the parent file.
     "username": "XanT",
     "date_online": 1509922961,
     "avatar": {
-      "filename": "masterchief.jpg",
-      "original": "https://media.mod.io/images/members/1/1/1/masterchief.jpg"
+      "filename": "modio-dark.png",
+      "original": "https://media.mod.io/images/global/modio-dark.png"
     },
-    "timezone": "Australia/Brisbane",
+    "timezone": "America/Los_Angeles",
     "language": "en",
     "profile_url": "https://mod.io/members/xant"
   },
@@ -10223,11 +10115,11 @@ md5|string|MD5 filehash of the parent file.
   "date_updated": 1499841487,
   "date_live": 1499841403,
   "logo": {
-    "filename": "IMG_20170409_222419.jpg",
-    "original": "https://media.mod.io/images/mods/1/1/2/IMG_20170409_222419.jpg",
-    "thumb_320x180": "https://media.mod.io/cache/images/mods/1/1/2/thumb_320x180/IMG_20170409_222419.jpg",
-    "thumb_640x360": "https://media.mod.io/cache/images/mods/1/1/2/thumb_640x360/IMG_20170409_222419.jpg",
-    "thumb_1280x720": "https://media.mod.io/cache/images/mods/1/1/2/thumb_1280x720/IMG_20170409_222419.jpg"
+    "filename": "modio-dark.png",
+    "original": "https://media.mod.io/images/global/modio-dark.png",
+    "thumb_320x180": "https://media.mod.io/images/global/modio-dark.png",
+    "thumb_640x360": "https://media.mod.io/images/global/modio-dark.png",
+    "thumb_1280x720": "https://media.mod.io/images/global/modio-dark.png"
   },
   "homepage": "https://www.rogue-hdpack.com/",
   "name": "Rogue Knight HD Pack",
@@ -10251,7 +10143,7 @@ md5|string|MD5 filehash of the parent file.
     "filename": "rogue-knight-v1.zip",
     "version": "1.3",
     "changelog": "VERSION 1.3 -- Changes -- Fixed critical castle floor bug.",
-    "download_url": "https://mod.io/mods/file/2/c489a0354111a4d76640d47f0cdcb294"
+    "download_url": "https://mod.io/mods/file/1/c489a0354111a4d76640d47f0cdcb294"
   },
   "media": {
     "youtube": [
@@ -10262,9 +10154,9 @@ md5|string|MD5 filehash of the parent file.
     ],
     "images": [
       {
-        "original": "https://media.mod.io/images/mods/1/1/2/IMG_20170409_222419.jpg",
-        "thumb_320x180": "https://media.mod.io/cache/images/mods/1/1/2/thumb_1020x2000/IMG_20170409_222419.jpg",
-        "filename": "IMG_20170409_222419.jpg"
+        "filename": "modio-dark.png",
+        "original": "https://media.mod.io/images/global/modio-dark.png",
+        "thumb_320x180": "https://media.mod.io/images/global/modio-dark.png"
       }
     ]
   },
@@ -10293,63 +10185,63 @@ id|integer(int32)|Unique mod id.
 game_id|integer(int32)|Unique game id.
 submitted_by|[User Object  ](#schemauser_object)|Contains user data.
 » id|integer(int32)|Unique id of the user.
-» name_id|string|Unique nameid of user which forms end of their profile URL.
-» username|string|Non-unique username of the user.
-» date_online|integer(int32)|Unix timestamp of when the user was last online.
+» name_id|string|URL path for the user on mod.io. Usually a simplified version of their username.
+» username|string|Username of the user.
+» date_online|integer(int32)|Unix timestamp of date the user was last online.
 » avatar|[Avatar Object  ](#schemaavatar_object)|Contains avatar data.
-»» filename|string|Image filename, including file extension.
-»» original|string|Full URL to the image.
-» timezone|string|The Timezone of the user, shown in {Country}/{City} format.
-» language|string|The users language preference, limited to two characters.
-» profile_url|string|URL to the user's mod.io profile page.
+»» filename|string|Avatar filename including extension.
+»» original|string|URL to the full-sized avatar.
+» timezone|string|Timezone of the user, format is country/city.
+» language|string|2-character representation of users language preference.
+» profile_url|string|URL to the user's mod.io profile.
 date_added|integer(int32)|Unix timestamp of date registered.
 date_updated|integer(int32)|Unix timestamp of date last updated.
 date_live|integer(int32)|Unix timestamp of date mod was set live.
 logo|[Logo Object  ](#schemalogo_object)|Contains logo data.
-» filename|string|Image filename, with file extension included.
-» original|string|URL to full-sized image.
-» thumb_320x180|string|URL to small thumbnail image.
-» thumb_640x360|string|URL to medium thumbnail image.
-» thumb_1280x720|string|URL to large thumbnail image.
-homepage|string|Mod homepage URL.
+» filename|string|Logo filename including extension.
+» original|string|URL to the full-sized logo.
+» thumb_320x180|string|URL to the small logo thumbnail.
+» thumb_640x360|string|URL to the medium logo thumbnail.
+» thumb_1280x720|string|URL to the large logo thumbnail.
+homepage|string|Official homepage of the mod.
 name|string|Name of the mod.
-name_id|string|Unique SEO-friendly mod uri.
-summary|string|Brief summary of the mod.
-description|string|Description of the mod.
-metadata_blob|string|Comma-separated metadata for the mod.
-profile_url|string|URL to mod.io page.
-modfile|[Modfile Object  ](#schemamodfile_object)|Contains file data.
-» id|integer(int32)|Unique file id.
+name_id|string|URL path for the mod on mod.io.
+summary|string|Summary of the mod.
+description|string|Detailed description of the mod which allows HTML.
+metadata_blob|string|Metadata stored by the game developer. Metadata can also be stored as searchable [key value pairs](#metadata).
+profile_url|string|URL to the mod's mod.io profile.
+modfile|[Modfile Object  ](#schemamodfile_object)|Contains modfile data.
+» id|integer(int32)|Unique modfile id.
 » mod_id|integer(int32)|Unique mod id.
-» date_added|integer(int32)|Unix timestamp of file upload time.
-» date_scanned|integer(int32)|Unix timestamp of file virus scan.
-» virus_status|integer(int32)|The status of the virus scan for the file.
-» virus_positive|integer(int32)|Has the file been positively flagged as a virus?
-» virustotal_hash|string|VirusTotal proprietary hash.
+» date_added|integer(int32)|Unix timestamp of date added.
+» date_scanned|integer(int32)|Unix timestamp of date file was virus scanned.
+» virus_status|integer(int32)|Current virus scan status of the file. For newly added files that have yet to be scanned this field will change frequently until a scan is complete:<br><br>__0__ = Not scanned<br>__1__ = Scan complete<br>__2__ = In progress<br>__3__ = Too large to scan<br>__4__ = File not found<br>__5__ = Error Scanning
+» virus_positive|integer(int32)|Was a virus detected:<br><br>__0__ = No threats detected<br>__1__ = Flagged as malicious
+» virustotal_hash|string|VirusTotal proprietary hash to view the [scan results](https://www.virustotal.com).
 » filesize|integer(int32)|Size of the file in bytes.
 » filehash|[Filehash Object  ](#schemafilehash_object)|Contains filehash data.
-»» md5|string|MD5 filehash of the parent file.
-» filename|string|Name of the file including file extension.
-» version|string|The release version this file represents.
-» changelog|string|List of all changes in this file release.
-» download_url|string|Link to download the file from the mod.io CDN.
-media|[Mod Media Object ](#schemamod_media_object)|Contains Mod media data.
+»» md5|string|MD5 hash of the file.
+» filename|string|Filename including extension.
+» version|string|Release version this file represents.
+» changelog|string|Changelog for the file.
+» download_url|string|URL to download the file from the mod.io CDN.
+media|[Mod Media Object ](#schemamod_media_object)|Contains mod media data.
 » youtube|string[]|Array of YouTube links.
-» sketchfab|string[]|Array of YouTube Links.
-» images|[Image Object  ](#schemaimage_object)[]|Array of images objects.
-»» original|string|URL to the full image.
-»» thumb_320x180|string|URL to the thumbnail image.
-»» filename|string|Image filename, with the extension included.
-rating_summary|[Rating Summary Object ](#schemarating_summary_object)|Contains ratings data.
+» sketchfab|string[]|Array of SketchFab links.
+» images|[Image Object  ](#schemaimage_object)[]|Array of image objects (a gallery).
+»» filename|string|Image filename including extension.
+»» original|string|URL to the full-sized image.
+»» thumb_320x180|string|URL to the image thumbnail.
+rating_summary|[Rating Summary Object ](#schemarating_summary_object)|Contains ratings summary.
 » total_ratings|integer(int32)|Number of times this item has been rated.
 » positive_ratings|integer(int32)|Number of positive ratings.
 » negative_ratings|integer(int32)|Number of negative ratings.
 » percentage_positive|integer(int32)|Number of positive ratings, divided by the total ratings to determine it’s percentage score.
-» weighted_aggregate|float|The overall rating of this item calculated using the 'Wilson score confidence interval' as documented here http://www.evanmiller.org/how-not-to-sort-by-average-rating.html. This column is good to sort on, as it will order items based on number of ratings and will place items with lots of positive ratings above those with a higher score but much fewer ratings.
-» display_text|string|Textual representation of the rating in format 'Overwhelmingly Positive', 'Very Positive', 'Positive', 'Mostly Positive', 'Mixed', 'Negative', 'Mostly Negative', 'Very Negative' and 'Overwhelmingly Negative'.
-tags|[Mod Tag Object ](#schemamod_tag_object)[]|Contains Mod Tag data.
-» name|string|The displayed tag.
-» date_added|integer(int32)|Unix timestamp of when tag was applied.
+» weighted_aggregate|float|Overall rating of this item calculated using the [Wilson score confidence interval](http://www.evanmiller.org/how-not-to-sort-by-average-rating.html). This column is good to sort on, as it will order items based on number of ratings and will place items with many positive ratings above those with a higher score but fewer ratings.
+» display_text|string|Textual representation of the rating in format:<br><br>- Overwhelmingly Positive<br>- Very Positive<br>- Positive<br>- Mostly Positive<br>- Mixed<br>- Negative<br>- Mostly Negative<br>- Very Negative<br>- Overwhelmingly Negative
+tags|[Mod Tag Object ](#schemamod_tag_object)[]|Contains mod tag data.
+» name|string|Tag name.
+» date_added|integer(int32)|Unix timestamp of date tag was applied.
 
 
 
@@ -10367,9 +10259,9 @@ tags|[Mod Tag Object ](#schemamod_tag_object)[]|Contains Mod Tag data.
   ],
   "images": [
     {
-      "original": "https://media.mod.io/images/mods/1/1/2/IMG_20170409_222419.jpg",
-      "thumb_320x180": "https://media.mod.io/cache/images/mods/1/1/2/thumb_1020x2000/IMG_20170409_222419.jpg",
-      "filename": "IMG_20170409_222419.jpg"
+      "filename": "modio-dark.png",
+      "original": "https://media.mod.io/images/global/modio-dark.png",
+      "thumb_320x180": "https://media.mod.io/images/global/modio-dark.png"
     }
   ]
 } 
@@ -10380,11 +10272,11 @@ tags|[Mod Tag Object ](#schemamod_tag_object)[]|Contains Mod Tag data.
 Name|Type|Description
 ---|---|---|---|
 youtube|string[]|Array of YouTube links.
-sketchfab|string[]|Array of YouTube Links.
-images|[Image Object  ](#schemaimage_object)[]|Array of images objects.
-» original|string|URL to the full image.
-» thumb_320x180|string|URL to the thumbnail image.
-» filename|string|Image filename, with the extension included.
+sketchfab|string[]|Array of SketchFab links.
+images|[Image Object  ](#schemaimage_object)[]|Array of image objects (a gallery).
+» filename|string|Image filename including extension.
+» original|string|URL to the full-sized image.
+» thumb_320x180|string|URL to the image thumbnail.
 
 
 
@@ -10403,8 +10295,8 @@ images|[Image Object  ](#schemaimage_object)[]|Array of images objects.
 
 Name|Type|Description
 ---|---|---|---|
-name|string|The displayed tag.
-date_added|integer(int32)|Unix timestamp of when tag was applied.
+name|string|Tag name.
+date_added|integer(int32)|Unix timestamp of date tag was applied.
 
 
 
@@ -10421,10 +10313,10 @@ date_added|integer(int32)|Unix timestamp of when tag was applied.
     "username": "XanT",
     "date_online": 1509922961,
     "avatar": {
-      "filename": "masterchief.jpg",
-      "original": "https://media.mod.io/images/members/1/1/1/masterchief.jpg"
+      "filename": "modio-dark.png",
+      "original": "https://media.mod.io/images/global/modio-dark.png"
     },
-    "timezone": "Australia/Brisbane",
+    "timezone": "America/Los_Angeles",
     "language": "en",
     "profile_url": "https://mod.io/members/xant"
   },
@@ -10432,40 +10324,40 @@ date_added|integer(int32)|Unix timestamp of when tag was applied.
   "date_updated": 1499410290,
   "date_live": 1499841403,
   "presentation": 1,
-  "community": 3,
   "submission": 0,
   "curation": 0,
+  "community": 3,
   "revenue": 1500,
   "api": 3,
   "ugc_name": "map",
   "icon": {
-    "filename": "IMG_20170409_222419.jpg",
-    "original": "https://media.mod.io/images/mods/1/1/2/icon.png",
-    "thumb_320x180": "https://media.mod.io/cache/images/mods/1/1/2/thumb_320x180/icon.png"
+    "filename": "modio-dark.png",
+    "original": "https://media.mod.io/images/global/modio-dark.png",
+    "thumb_320x180": "https://media.mod.io/images/global/modio-dark.png"
   },
   "logo": {
-    "filename": "IMG_20170409_222419.jpg",
-    "original": "https://media.mod.io/images/mods/1/1/2/IMG_20170409_222419.jpg",
-    "thumb_320x180": "https://media.mod.io/cache/images/mods/1/1/2/thumb_320x180/IMG_20170409_222419.jpg",
-    "thumb_640x360": "https://media.mod.io/cache/images/mods/1/1/2/thumb_640x360/IMG_20170409_222419.jpg",
-    "thumb_1280x720": "https://media.mod.io/cache/images/mods/1/1/2/thumb_1280x720/IMG_20170409_222419.jpg"
+    "filename": "modio-dark.png",
+    "original": "https://media.mod.io/images/global/modio-dark.png",
+    "thumb_320x180": "https://media.mod.io/images/global/modio-dark.png",
+    "thumb_640x360": "https://media.mod.io/images/global/modio-dark.png",
+    "thumb_1280x720": "https://media.mod.io/images/global/modio-dark.png"
   },
   "header": {
-    "filename": "gameheader.png",
-    "original": "https://media.mod.io/images/games/1/1/2/gameheader.png"
+    "filename": "demo.png",
+    "original": "https://media.mod.io/images/global/modio-dark.png"
   },
   "homepage": "https://www.rogue-knight-game.com/",
   "name": "Rogue Knight",
   "name_id": "rogue-knight",
   "summary": "Rogue Knight is a brand new 2D pixel platformer.",
-  "instructions": "Instructions here on how to develop for your game.",
+  "instructions": "Instructions on the process to upload mods.",
   "profile_url": "https://rogue-knight.mod.io",
   "tag_options": [
     {
-      "name": "Engines",
+      "name": "Theme",
       "type": "checkboxes",
       "tags": [
-        "Unity"
+        "Horror"
       ],
       "admin_only": 0
     }
@@ -10480,49 +10372,49 @@ Name|Type|Description
 id|integer(int32)|Unique game id.
 submitted_by|[User Object  ](#schemauser_object)|Contains user data.
 » id|integer(int32)|Unique id of the user.
-» name_id|string|Unique nameid of user which forms end of their profile URL.
-» username|string|Non-unique username of the user.
-» date_online|integer(int32)|Unix timestamp of when the user was last online.
+» name_id|string|URL path for the user on mod.io. Usually a simplified version of their username.
+» username|string|Username of the user.
+» date_online|integer(int32)|Unix timestamp of date the user was last online.
 » avatar|[Avatar Object  ](#schemaavatar_object)|Contains avatar data.
-»» filename|string|Image filename, including file extension.
-»» original|string|Full URL to the image.
-» timezone|string|The Timezone of the user, shown in {Country}/{City} format.
-» language|string|The users language preference, limited to two characters.
-» profile_url|string|URL to the user's mod.io profile page.
+»» filename|string|Avatar filename including extension.
+»» original|string|URL to the full-sized avatar.
+» timezone|string|Timezone of the user, format is country/city.
+» language|string|2-character representation of users language preference.
+» profile_url|string|URL to the user's mod.io profile.
 date_added|integer(int32)|Unix timestamp of date registered.
 date_updated|integer(int32)|Unix timestamp of date updated.
-date_live|integer(int32)|Unix timestamp of when game was set live.
-presentation|integer(int32)|Determines which presentation style you want to use for your game on the mod.io website <br><br>*Field options*<br>__0__ =  Grid View: Displays mods in a grid (visual but less informative, default setting) <br>__1__ = Table View: Displays mods in a table (easier to browse).
-community|integer(int32)|Determines the rights community members have with the game.<br><br>*Field Options*<br>__0__ = Discussion board disabled, community cannot share guides and news<br>__1__ = Discussion Board enabled only<br>__2__ = Community can only share guides and news<br>__3__ = Discussion Board enabled and community can share news and guides
-submission|integer(int32)|Determines the submission process you want modders to follow.<br><br>*Field Options*<br>__0__ = Control the upload process. You will have to build an upload system either in-game or via a standalone app, which enables developers to submit mods to the tags you have configured. Because you control the flow, you can pre-validate and compile mods, to ensure they will work in your game. In the long run this option will save you time as you can accept more submissions, but it requires more setup to get running and isn't as open as the above option. NOTE: mod profiles can still be created online, but uploads will have to occur via the tools you supply.<br><br>__1__ = Enable mod uploads from anywhere. Allow developers to upload mods via the website and API, and pick the tags their mod is built for. No validation will be done on the files submitted, it will be the responsibility of your game and apps built to process the mods installation based on the tags selected and determine if the mod is valid and works. For example a mod might be uploaded to the 'map' tag. When a user subscribes to this mod, your game will need to verify it contains a map file and install it where maps are located. If this fails, your game or the community will have to flag the mod as 'incompatible' to remove it from the listing.
-curation|integer(int32)|Determines the curation process for the game.<br><br>*Field Options*<br>__0__ = Mods are immediately available to play, without any intervention or work from your team.<br>__1__ = Screen only mods the author wants to sell, before they are available to purchase via the API.<br>__2__ = All mods must be accepted by someone on your team. This option is useful for games that have a small number of mods and want to control the experience, or you need to set the parameters attached to a mod (i.e. a weapon may require the rate of fire, power level, clip size etc). It can also be used for complex mods, which you may need to build into your game or distribute as DLC.
-revenue|integer(int32)|__Bitwise__. Determines the revenue capabilities for mods of the game. For selecting multiple options you need to submit the bitwise value. i.e. If you want to allow user-generated content to be sold(1), to receive donations(2) and allow them to control their supply and scarcity(8) your would submit _11 (8 + 2 + 1)_.<br><br>*Field Options*<br>__1__ = Allow user-generated content to be sold<br>__2__ = Allow user-generated content to receive donations<br>__4__ = Allow user-generated content to be traded (not subject to revenue share)<br>__8__ = Allow user-generated content to control supply and scarcity.
-api|integer(int32)|Determines what permissions you want to enable via the mod.io API.<br><br>*Field Options*<br>__0__ = Third parties cannot access your mods API and mods cannot be downloaded directly without API validation.<br>__1__ = Allow 3rd parties to access your mods API (recommended, an open API will encourage a healthy ecosystem of tools and apps) but mods cannot be downloaded directly<br>__2__ = Allow mods to be downloaded directly but 3rd parties cannot access your mods API.<br>__3__ = Allow third parties to access your mods API and allow mods to be downloaded directly without api validation.
-ugc_name|string|Singular string that best describes the type of user-generated content.
+date_live|integer(int32)|Unix timestamp of date game was set live.
+presentation|integer(int32)|Presentation style used on the mod.io website:<br><br>__0__ =  Grid View: Displays mods in a grid<br>__1__ = Table View: Displays mods in a table
+submission|integer(int32)|Submission process modders must follow:<br><br>__0__ = Mod uploads must occur via a tool created by the game developers<br>__1__ = Mod uploads can occur from anywhere, including the website and API
+curation|integer(int32)|Curation process used to approve mods:<br><br>__0__ = No curation: Mods are immediately available to play<br>__1__ = Paid curation: Only mods which accept donations must be accepted<br>__2__ = Full curation: All mods must be accepted by someone to be listed
+community|integer(int32)|Community features enabled on the mod.io website:<br><br>__0__ = All of the options below are disabled<br>__1__ = Discussion board enabled<br>__2__ = Guides and news enabled<br>__?__ = Combine to find games with multiple options enabled (see [BITWISE filtering](#bitwise-and-bitwise-and))
+revenue|integer(int32)|Revenue capabilities mods can enable:<br><br>__0__ = All of the options below are disabled<br>__1__ = Allow mods to be sold<br>__2__ = Allow mods to receive donations<br>__4__ = Allow mods to be traded<br>__8__ = Allow mods to control supply and scarcity<br>__?__ = Combine to find games with multiple options enabled (see [BITWISE filtering](#bitwise-and-bitwise-and))
+api|integer(int32)|Level of API access allowed by this game:<br><br>__0__ = All of the options below are disabled<br>__1__ = This game allows 3rd parties to access the mods API<br>__2__ = This game allows mods to be downloaded directly without API validation<br>__?__ = Combine to find games with multiple options enabled (see [BITWISE filtering](#bitwise-and-bitwise-and))
+ugc_name|string|Word used to describe user-generated content (mods, items, addons etc).
 icon|[Icon Object  ](#schemaicon_object)|Contains icon data.
-» filename|string|Image filename, with file extension included.
-» original|string|URL to full-sized image.
-» thumb_320x180|string|URL to small thumbnail image.
+» filename|string|Icon filename including extension.
+» original|string|URL to the full-sized icon.
+» thumb_320x180|string|URL to the icon thumbnail.
 logo|[Logo Object  ](#schemalogo_object)|Contains logo data.
-» filename|string|Image filename, with file extension included.
-» original|string|URL to full-sized image.
-» thumb_320x180|string|URL to small thumbnail image.
-» thumb_640x360|string|URL to medium thumbnail image.
-» thumb_1280x720|string|URL to large thumbnail image.
+» filename|string|Logo filename including extension.
+» original|string|URL to the full-sized logo.
+» thumb_320x180|string|URL to the small logo thumbnail.
+» thumb_640x360|string|URL to the medium logo thumbnail.
+» thumb_1280x720|string|URL to the large logo thumbnail.
 header|[Header Object  ](#schemaheader_object)|Contains header data.
-» filename|string|Image filename, with file extension included.
+» filename|string|Header image filename including extension.
 » original|string|URL to the full-sized header image.
-homepage|string|Official game website URL.
-name|string|Title of the game.
-name_id|string|The unique SEO friendly URL of the game.
-summary|string|Brief summary of the game.
-instructions|string|Modding instructions for developers.
-profile_url|string|URL to the mod.io page.
-tag_options|[Game Tag Option Object](#schemagame_tag_option_object)[]|Contains categories data.
-» name|string|The name of the category.
-» type|string|Are tags selected via checkboxes or a single dropdown.
-» admin_only|integer(int32)|Is this an admin only tag? If so only admin's can see this category and it can be used for filtering.
-» tags|string[]|Eligible tags for this game.
+homepage|string|Official homepage of the game.
+name|string|Name of the game.
+name_id|string|Subdomain for the game on mod.io.
+summary|string|Summary of the game.
+instructions|string|A guide about creating and uploading mods for this game to mod.io (applicable if submission = 0).
+profile_url|string|URL to the game's mod.io page.
+tag_options|[Game Tag Option Object](#schemagame_tag_option_object)[]|Groups of tags configured by the game developer, that mods can select.
+» name|string|Name of the tag group.
+» type|string|Can multiple tags be selected via 'checkboxes' or should only a single tag be selected via a 'dropdown'.
+» admin_only|integer(int32)|Groups of tags flagged as 'admin only' should only be used for filtering, and should not be displayed to users.
+» tags|string[]|Array of tags in this group.
 
 
 
@@ -10532,10 +10424,10 @@ tag_options|[Game Tag Option Object](#schemagame_tag_option_object)[]|Contains c
 
 ```json
 {
-  "name": "Engines",
+  "name": "Theme",
   "type": "checkboxes",
   "tags": [
-    "Unity"
+    "Horror"
   ],
   "admin_only": 0
 } 
@@ -10545,10 +10437,10 @@ tag_options|[Game Tag Option Object](#schemagame_tag_option_object)[]|Contains c
 
 Name|Type|Description
 ---|---|---|---|
-name|string|The name of the category.
-type|string|Are tags selected via checkboxes or a single dropdown.
-admin_only|integer(int32)|Is this an admin only tag? If so only admin's can see this category and it can be used for filtering.
-tags|string[]|Eligible tags for this game.
+name|string|Name of the tag group.
+type|string|Can multiple tags be selected via 'checkboxes' or should only a single tag be selected via a 'dropdown'.
+admin_only|integer(int32)|Groups of tags flagged as 'admin only' should only be used for filtering, and should not be displayed to users.
+tags|string[]|Array of tags in this group.
 
 
 
@@ -10595,8 +10487,8 @@ total_ratings|integer(int32)|Number of times this item has been rated.
 positive_ratings|integer(int32)|Number of positive ratings.
 negative_ratings|integer(int32)|Number of negative ratings.
 percentage_positive|integer(int32)|Number of positive ratings, divided by the total ratings to determine it’s percentage score.
-weighted_aggregate|float|The overall rating of this item calculated using the 'Wilson score confidence interval' as documented here http://www.evanmiller.org/how-not-to-sort-by-average-rating.html. This column is good to sort on, as it will order items based on number of ratings and will place items with lots of positive ratings above those with a higher score but much fewer ratings.
-display_text|string|Textual representation of the rating in format 'Overwhelmingly Positive', 'Very Positive', 'Positive', 'Mostly Positive', 'Mixed', 'Negative', 'Mostly Negative', 'Very Negative' and 'Overwhelmingly Negative'.
+weighted_aggregate|float|Overall rating of this item calculated using the [Wilson score confidence interval](http://www.evanmiller.org/how-not-to-sort-by-average-rating.html). This column is good to sort on, as it will order items based on number of ratings and will place items with many positive ratings above those with a higher score but fewer ratings.
+display_text|string|Textual representation of the rating in format:<br><br>- Overwhelmingly Positive<br>- Very Positive<br>- Positive<br>- Mostly Positive<br>- Mixed<br>- Negative<br>- Mostly Negative<br>- Very Negative<br>- Overwhelmingly Negative
 
 
 
@@ -10613,10 +10505,10 @@ display_text|string|Textual representation of the rating in format 'Overwhelming
     "username": "XanT",
     "date_online": 1509922961,
     "avatar": {
-      "filename": "masterchief.jpg",
-      "original": "https://media.mod.io/images/members/1/1/1/masterchief.jpg"
+      "filename": "modio-dark.png",
+      "original": "https://media.mod.io/images/global/modio-dark.png"
     },
-    "timezone": "Australia/Brisbane",
+    "timezone": "America/Los_Angeles",
     "language": "en",
     "profile_url": "https://mod.io/members/xant"
   },
@@ -10630,21 +10522,21 @@ display_text|string|Textual representation of the rating in format 'Overwhelming
 
 Name|Type|Description
 ---|---|---|---|
-id|integer(int32)|Unique access id.
+id|integer(int32)|Unique team member id.
 user|[User Object  ](#schemauser_object)|Contains user data.
 » id|integer(int32)|Unique id of the user.
-» name_id|string|Unique nameid of user which forms end of their profile URL.
-» username|string|Non-unique username of the user.
-» date_online|integer(int32)|Unix timestamp of when the user was last online.
+» name_id|string|URL path for the user on mod.io. Usually a simplified version of their username.
+» username|string|Username of the user.
+» date_online|integer(int32)|Unix timestamp of date the user was last online.
 » avatar|[Avatar Object  ](#schemaavatar_object)|Contains avatar data.
-»» filename|string|Image filename, including file extension.
-»» original|string|Full URL to the image.
-» timezone|string|The Timezone of the user, shown in {Country}/{City} format.
-» language|string|The users language preference, limited to two characters.
-» profile_url|string|URL to the user's mod.io profile page.
-level|integer(int32)|The level of permissions the member has within the team. 0 = Guest, 1 = Member, 2 = Contributor, 4 = Manager, 8 = Leader.
-date_added|integer(int32)|Unix timestamp of date the member joined the team.
-position|string|Custom title, has no effect on any access rights.
+»» filename|string|Avatar filename including extension.
+»» original|string|URL to the full-sized avatar.
+» timezone|string|Timezone of the user, format is country/city.
+» language|string|2-character representation of users language preference.
+» profile_url|string|URL to the user's mod.io profile.
+level|integer(int32)|Level of permission the user has:<br><br>__0__ = Guest<br>__1__ = Member<br>__2__ = Contributor<br>__4__ = Manager<br>__8__ = Leader
+date_added|integer(int32)|Unix timestamp of the date the user was added to the team.
+position|string|Custom title given to the user in this team.
 
 
 
@@ -10659,10 +10551,10 @@ position|string|Custom title, has no effect on any access rights.
   "username": "XanT",
   "date_online": 1509922961,
   "avatar": {
-    "filename": "masterchief.jpg",
-    "original": "https://media.mod.io/images/members/1/1/1/masterchief.jpg"
+    "filename": "modio-dark.png",
+    "original": "https://media.mod.io/images/global/modio-dark.png"
   },
-  "timezone": "Australia/Brisbane",
+  "timezone": "America/Los_Angeles",
   "language": "en",
   "profile_url": "https://mod.io/members/xant"
 } 
@@ -10673,15 +10565,15 @@ position|string|Custom title, has no effect on any access rights.
 Name|Type|Description
 ---|---|---|---|
 id|integer(int32)|Unique id of the user.
-name_id|string|Unique nameid of user which forms end of their profile URL.
-username|string|Non-unique username of the user.
-date_online|integer(int32)|Unix timestamp of when the user was last online.
+name_id|string|URL path for the user on mod.io. Usually a simplified version of their username.
+username|string|Username of the user.
+date_online|integer(int32)|Unix timestamp of date the user was last online.
 avatar|[Avatar Object  ](#schemaavatar_object)|Contains avatar data.
-» filename|string|Image filename, including file extension.
-» original|string|Full URL to the image.
-timezone|string|The Timezone of the user, shown in {Country}/{City} format.
-language|string|The users language preference, limited to two characters.
-profile_url|string|URL to the user's mod.io profile page.
+» filename|string|Avatar filename including extension.
+» original|string|URL to the full-sized avatar.
+timezone|string|Timezone of the user, format is country/city.
+language|string|2-character representation of users language preference.
+profile_url|string|URL to the user's mod.io profile.
 
 
 

@@ -1,6 +1,6 @@
 $(document).ready(function() {
 	/**
-	 Custom mod.io highlighting
+	 Custom highlighting
 	 */
 	var target;
 
