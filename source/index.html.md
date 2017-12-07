@@ -20,7 +20,7 @@ headingLevel: '2'
 
 ## mod.io API v1
 
-Welcome to the official documentation for [mod.io](https://mod.io), an API which makes it a joy to search, sort and share mods in-game. We recommend you read _Getting Started_ to accurately and efficiently consume our REST API. 
+Welcome to the official documentation for [mod.io](https://mod.io), an API which makes it a joy to search, sort and share mods in-game. We recommend you read our _Getting Started_ guide to accurately and efficiently consume our REST API. 
 
 __Current version:__ `v1`
 
@@ -40,9 +40,9 @@ Option | Usage | Suited for | Docs
 ---------- | ---------- | ---------- | ---------
 __API__ | For connecting directly to the mod.io REST API | Web apps that need a JSON REST API, or game developers that like a challenge and want control over their implementation. | You are reading them
 __SDK__ | Drop our [open source C/C++ SDK](https://sdk.mod.io) into your game to call mod.io functionality. | Developers that want a SDK that abstracts the uploading, downloading and unzip flows behind easy to use function calls. | [Here](https://sdk.mod.io)
-__Tools/Plugins__ | Use tools and plugins created by the community to make implementation in various engines easy. | Game developers that want a pre-built modding solution for their engine (Unity, Unreal) of choice. | [Available per tool](https://apps.mod.io)
+__Tools/Plugins__ | Use tools and plugins created by the community to make implementation in various engines easy. | Game developers that want a pre-built modding solution for their engine (Unity, Unreal) of choice. | [Available per tool](https://sdk.mod.io)
 
-Here is a brief list of the main things to know about our API, as explained in more detail in the following sections.
+Here is a brief list of the things to know about our API, as explained in more detail in the following sections.
 
 - All requests to the API __must__ be made over HTTPS (SSL).
 - All API responses are in `application/json` format.
@@ -55,13 +55,13 @@ Here is a brief list of the main things to know about our API, as explained in m
 
 ## Authentication
 
-Authentication with the mod.io API can be done via 3 ways:
+Authentication can be done via 3 ways:
 
-- Request an [API key (Read Access Only)](https://mod.io/apikey/widget)
+- Request an [API key (Read Only Access)](https://mod.io/apikey/widget)
 - Manually create an [OAuth 2 Access Token (Read + Write Access)](https://mod.io/oauth/widget)
 - Use our [Email Authentication Flow](#email-authentication-flow) (to create an OAuth 2 Access Token with Read + Write Access) 
 
-You can use these methods of authentication interchangably, depending on the level of access you require to the mod.io API.
+You can use these methods of authentication interchangably, depending on the level of access you require.
 
 Authentication Type | In | HTTP Methods | Abilities | Purpose
 ---------- | ---------- | ---------- | ---------- | ---------- 
@@ -70,9 +70,7 @@ Access Token (OAuth 2) | Header | `GET`, `POST`, `PUT`, `DELETE` | Read, create,
 
 ### API Key Authentication
 
-To access the API authentication is required. All users and games get a [private API key](https://mod.io/apikey/widget). It is quick and easy to use in your apps but limited to read-only GET requests, due to the limited security it offers.
-
-[Get your private API key](https://mod.io/apikey/widget)
+To access the API authentication is required. All users and games get a [private API key](https://mod.io/apikey/widget). It is quick and easy to use in your apps but limited to read-only GET requests, due to the limited security it offers. View your [private API key(s)](https://mod.io/apikey/widget).
 
 ### Email Authentication Flow
 
@@ -157,8 +155,8 @@ mod.io allows you to specify the permission each access token has (default is re
 
 Scope | Abilities
 ---------- | ----------
-`read` | When authenticated with a token that *only* contains the `read` scope you will only be able to read data via `GET` requests. 
-`write` | When authenticated with a token that contains the `write` scope you are able to add, edit and remove resources.
+`read` | When authenticated with a token that *only* contains the `read` scope, you will only be able to read data via `GET` requests. 
+`write` | When authenticated with a token that contains the `write` scope, you are able to add, edit and remove resources.
 `read+write` | The above scopes combined. _Default for email verification flow._
 
 ## Making Requests
@@ -171,11 +169,11 @@ Requests to the mod.io API __must__ be over HTTPS (Port 443), any requests made 
 curl -X get https://api.mod.io/v1/games?api_key=xxxxxxxxxxxxxxxx
 ``` 
 
-To authenticate using your unique 32-character API key simply append the `api_key=xxxxxxxxxxxxxxxx` parameter to the end of your request. Remember that using an API key means requests are in read-only mode, and that if you want to create, update or delete resources - authentication via OAuth 2 is required which you can [set up with your api key](#authentication).
+To authenticate using your unique 32-character API key, append the `api_key=xxxxxxxxxxxxxxxx` parameter to the end of your request. Remember that using an API key means requests are read-only, if you want to create, update or delete resources - authentication via OAuth 2 is required which you can [set up with your api key](#authentication).
 
 ### Using an Access Token
 
-To authenticate using an OAuth 2 access token you must include the HTTP header `Authorization` in your request with the value `Bearer your-token-here`. Verification via Access Tokens allow much greater power including creating, updating and deleting resources that you have access to. Also because OAuth 2 access tokens are tied to a user account, you can personalize the output by viewing content they are subscribed and connected to.
+To authenticate using an OAuth 2 access token you must include the HTTP header `Authorization` in your request with the value `Bearer your-token-here`. Verification via Access Token allows much greater power including creating, updating and deleting resources that you have access to. Also because OAuth 2 access tokens are tied to a user account, you can personalize the output by viewing content they are subscribed and connected to via the [me endpoint](#me) and by using relevant filters.
 
 ```shell
 // Example POST request with no binary files
@@ -226,9 +224,9 @@ curl -X post https://api.mod.io/v1/games/1/team \
 	  }'
 ```
 
-For `POST` & `PUT` requests that do _not submit files_ you have the option to supply your data as HTTP `POST` parameters, or as a _UTF-8 encoded_ JSON object inside the parameter `input_json` which contains all required data. Regardless, whether you use JSON or not the `Content-Type` of your request still needs to be `application/x-www-form-urlencoded` with the data provided in the body of the request.
+For `POST` & `PUT` requests that do _not submit files_ you have the option to supply your data as HTTP `POST` parameters, or as an _UTF-8 encoded_ JSON object inside the parameter `input_json` which contains all required data. Regardless, whether you use JSON or not the `Content-Type` of your request still needs to be `application/x-www-form-urlencoded` with the data provided in the body of the request.
 
-__NOTE:__ If you supply identical key-value pairs as a request parameter and also as a parameter of your JSON object, the JSON object __will take priority__ as only one can exist.
+__NOTE:__ If you supply identical key-value pairs as a request parameter and also as a parameter in your JSON object, the JSON object __will take priority__ as only one can exist.
 
 ### Response Content-Type
 
@@ -245,7 +243,7 @@ Responses will __always__ be returned as `application/json`.
 }
 ```
 
-If an error occurs, mod.io returns an error object with the HTTP `code` and `message` to describe what happened and when possible how to avoid repeating the error. It's important to note that if you encounter errors that are not server errors (`500+` codes) - you should review the error message before continuing to send requests to the endpoint.
+If an error occurs, mod.io returns an error object with the HTTP `code` and `message` to describe what happened and when possible how to avoid repeating the error. It's important to know that if you encounter errors that are not server errors (`500+` codes) - you should review the error message before continuing to send requests to the endpoint.
 
 When requests contain invalid input data or query parameters (for filtering), an optional field object called `errors` can be supplied inside the `error` object, which contains a list of the invalid inputs. The nested `errors` object is only supplied with `422 Unprocessable Entity` responses. Be sure to review the [Response Codes](#response-codes) to be aware of the HTTP codes that the mod.io API returns.
 
@@ -282,7 +280,7 @@ Response Code | Meaning
 `406` | Not Acceptable -- You supplied or requested an incorrect Content-Type.
 `410` | Gone -- The requested resource is no longer available.
 `422` | Unprocessable Entity -- The request was well formed but unable to be followed due to semantic errors.
-`429` | Too Many Requests -- You have made too many requests, inspect headers for reset time.
+`429` | Too Many Requests -- You have made too [many requests](#rate-limiting), inspect headers for reset time.
 `500` | Internal Server Error -- We had a problem with our server. Try again later. (rare)
 `503` | Service Unavailable -- We're temporarily offline for maintenance. Please try again later. (rare)
 
@@ -316,10 +314,10 @@ For single items, mod.io returns a __single JSON object__ which contains the req
 
 ### Multiple item Responses
 
-Endpoints that return more than one result, return a JSON object which contains a data array and metadata fields:
+Endpoints that return more than one result, return a __JSON object__ which contains a data array and metadata fields:
 
 - `data` - contains all data returned from the request.
-- metadata fields - contains all cursor metadata to help you paginate through the API.
+- metadata fields - contains [cursor metadata](#cursors-and-offsets) to help you paginate through the API.
 
 ```JSON
 // Get response
@@ -363,21 +361,24 @@ When requesting data from endpoints that contain more than one object, there are
 v1/games/2/mods/2/files?_cursor=300
 ```
 
-When using a cursor, you are able to specify where you want to _start_ looking for results by the value of the `id` column. Let's assume you want to get all files on mod.io that contain an id larger than 300. You could use the following:
+When using a cursor, you are able to specify where you want to _start_ looking for results by the value of the `id` column. Cursors are the quickest and __recommended__ way to paginate because they tell the database exactly where to start looking, but they are also a little more complex to understand. Let's assume you have made a request to the [Get All Mods](#get-all-mods) endpoint. Appended to the response will be the cursor metadata:
 
-- `?_cursor=300` - Only return fields that have an `id` larger than 300. 
-
-When using cursors you can optionally provide a `_prev` parameter, which is the previous cursor used. Let's assume you just used the above search filter and wish to keep track of your previous `_cursor` value. You would apply it like so:
-
+```JSON
+// Metadata example
+"cursor_id": -1,
+"prev_id": -1,
+"next_id": 72,
+"result_count": 50,
 ```
-v1/games/2/mods/2/files?_cursor=400&_prev=300
-```
 
-- `?_cursor=400&_prev=300` - Move the cursor to all records with an `id` larger than 400, but remember our previous cursor location was 300.
+Parameter | Value
+---------- | ----------  
+`cursor_id` | The current `_cursor` value. _-1_ by default if none specified.
+`prev_id` | The previous `_cursor` value as manually inserted by you, _-1_ by default if none specified.
+`next_id` | The next position to move the `_cursor` to based on the current request. _-1_ by default if no more results.
+`result_count` | The amount of results returned in the current request. _0_ by default.
 
-__NOTE:__ The `_prev` parameter is arbitrary information and does not affect the outcome of the query, other than the value being appended to the metadata fields returned.
-
-Cursors are the quickest and __recommended__ way to paginate, because they tell the database exactly where to start looking.
+Based on the cursor metadata returned, you know that the `next_id` is 72. We can make a new request with `?_cursor=72` to only return fields that have an `id` larger than 72. In your next request you should provide a `_prev` parameter, so you can paginate forward and backwards through the results.
 
 ### Offset
 
@@ -397,26 +398,17 @@ As cursors and offsets are mutually exclusive, you should choose one or the othe
 v1/games/2/mods/2/files?_cursor=5&_prev=5&_limit=10
 ```
 
-You can combine cursors and offsets with other filter functions such `_limit` & `_sort` to build powerful queries that enable you to be as precise or lenient as you want. 
+You can combine cursors and offsets with other filter functions such `_limit` & `_sort` to build powerful queries that enable you to be as precise or lenient as you want.
 
-### Cursor metadata
+### _limit (Limit)
 
-Appended to each request with more than one result is the cursor metadata, this will always appear regardless of if you utilize a cursor/offset or not. This is what each value means:
-
-```JSON
-// Metadata example
-"cursor_id": 50,
-"prev_id": 25,
-"next_id": 76,
-"result_count": 25,
+```
+v1/games?_limit=5
 ```
 
-Parameter | Value
----------- | ----------  
-`cursor_id` | The current `_cursor` value.
-`prev_id` | The previous `_cursor` value as manually inserted by you, _null_ by default.
-`next_id` | The next position to move the `_cursor` to based on the current request.
-`result_count` | The amount of results returned in the current request.
+Limit the number of results for a request.
+
+ - `?_limit=5` - Limit the request to 5 individual results. 
 
 ## Filtering
 
@@ -438,16 +430,6 @@ Sort by a column, in ascending or descending order.
 
 __NOTE:__ All endpoints are automatically sorted by the `id` column in ascending order unless specifically mentioned otherwise. 
 
-### _limit (Limit)
-
-```
-v1/games?_limit=5
-```
-
-Limit the number of results for a request.
-
- - `?_limit=5` - Limit the request to 5 individual results. 
-
 ### _q (Full text search)
 
 ```
@@ -468,6 +450,16 @@ The simpliest filter you can apply is _columnname_ equals. This will return all 
 
 - `?id=10` - Get all results where the `id` column value is _10_.
 
+### -not (Not Equal To)
+
+```
+v1/games?price-not=19.99
+```
+
+Where the preceding column value does not equal the value specified.
+
+- `?price-not=19.99` - Where the `price` column does not equal 19.99.
+
 ### -lk (Like)
 
 ```
@@ -482,9 +474,9 @@ v1/games?name-lk=*texture
 v1/games?name-lk=texture*
 ```
 
-Where the string supplied matches the preceding column value. This is the equivalent to SQL's `LIKE`. Consider using wildcard's `*` for the best chance of results as described below.
+Where the string supplied matches the preceding column value. This is equivalent to SQL's `LIKE`. Consider using wildcard's `*` for the best chance of results as described below.
 
-- `?name-lk=texture` - Get all results where only _texture_ occurs in the `name` column.
+- `?name-lk=texture` - Get all results where the `name` column value is 'texture'.
 
 ### -not-lk (Not Like)
 
@@ -492,9 +484,9 @@ Where the string supplied matches the preceding column value. This is the equiva
 v1/games?name-not-lk=dungeon
 ```
 
-Where the string supplied does not match the preceding column value. This is the equivalent to SQL's `NOT LIKE`.
+Where the string supplied does not match the preceding column value. This is equivalent to SQL's `NOT LIKE`.
 
-- `?name-not-lk=dungeon` - Get all results where only _dungeon_ doesn't occur in the `name` column.
+- `?name-not-lk=dungeon` - Get all results where the `name` column value is not 'dungeon'.
 
 ### -lk & -not-lk Wildcards
 
@@ -506,7 +498,7 @@ v1/games?name-lk=The Witcher*
 v1/games?name-lk=*Asset Pack
 ```
 
-The above -lk examples will only return results for an exact match, which may make it hard to get results depending on the complexity of your query. In that event, it's recommended you utilize the -lk wildcard value `*`. This is the equivalent to SQL's `%`.
+You can utilize the -lk wildcard value `*` to match more records. This is equivalent to SQL's `%`.
 
 - `?name-lk=The Witcher*` - Get all results where _The Witcher_ is succeeded by any value. This means the query would return results for 'The Witcher', 'The Witcher 2' and 'The Witcher 3'. 
 
@@ -518,7 +510,7 @@ The above -lk examples will only return results for an exact match, which may ma
 v1/games?id-in=3,11,16,29
 ```
 
-Where the supplied list of values appears in the preceding column value. This is the equivalent to SQL's `IN`.
+Where the supplied list of values appears in the preceding column value. This is equivalent to SQL's `IN`.
 
 - `?id-in=3,11,16,29` - Get all results where the `id` column value is 3, 11, 16 and 29.
 
@@ -528,7 +520,7 @@ Where the supplied list of values appears in the preceding column value. This is
 v1/games?modfile-not-in=8,13,22
 ```
 
-Where the supplied list of values *does not* equal the preceding column value. This is the equivalent to SQL's `NOT IN`
+Where the supplied list of values *does not* equal the preceding column value. This is equivalent to SQL's `NOT IN`
 
 - `?modfile-not-in=8,13,22` - Get all results where `id` column *does not* equal 8, 13 and 22.
 
@@ -572,16 +564,6 @@ Where the preceding column value is greater than the value specified.
 
 - `?modfile-gt=600` - Get all results where the `modfile` column is greater than 600.
 
-### -not (Not Equal To)
-
-```
-v1/games?price-not=19.99
-```
-
-Where the preceding column value does not equal the value specified.
-
-- `?price-not=19.99` - Where the `price` column does not equal 19.99.
-
 ### -bitwise-and (Bitwise AND)
 
 ```
@@ -599,13 +581,13 @@ You can combine any of these options by adding them together which means there a
 
 The number of combinations makes using _equals_, _in_ and other filters a little complex. To solve this we support Bitwise AND (&) which makes it easy to match a column which contains any of the Options you want.
 
-- `?api-bitwise-and=5` - Where the `api` column value is 1, 3, 4, 5, 6, 7, 9, 11, 12, 13, 14, 15.
+- `?api-bitwise-and=5` - Where the `api` column value is 1, 3, 4, 5, 6, 7, 9, 11, 12, 13, 14, 15 (since these values contain the bits 1, 4 or both).
 
 ## Rate Limiting
 
 mod.io implements rate limiting to stop users abusing the service. Exceeding your rate limit will result in requests receiving a `429 Too Many Requests` response until your reset time is reached. 
 
-It is *highly recommended* you architect your app to check for the `X-RateLimit` headers below and the `429` HTTP response code to ensure you are not making too many requests or continuing to make requests after a `429` code is repeatedly returned. Users who continue to send requests despite a `429` response could potentially have their access tokens revoked. The following limits are implemented by default:
+It is _highly recommended_ you architect your app to check for the `X-RateLimit` headers below and the `429` HTTP response code to ensure you are not making too many requests, or continuing to make requests after a `429` code is repeatedly returned. Users who continue to send requests despite a `429` response could potentially have their access tokens revoked. The following limits are implemented by default:
 
 ### API key Rate Limiting
 
@@ -619,12 +601,12 @@ X-RateLimit-Limit: 60
 X-RateLimit-Remaining: 59
 ```
 
-- API keys linked to a member are limited to __100,000 requests per day__.
+- API keys linked to a member have __unlimited requests__.
 - API keys linked to a game have __unlimited requests__.
 
 ### OAuth2 Rate Limiting
 
-- Users tokens are limited to __100,000 requests per day__. 
+- Users tokens are limited to __60 requests per minute__. 
 
 ### Headers
 
@@ -639,7 +621,7 @@ You should always plan to minimize requests and cache API responses. It will mak
 
 ## Contact
 
-If you spot any errors within the mod.io documentation, have feedback on how we can make it easier to follow or simply want to discuss how awesome mods are, feel free to reach out anytime [developers@mod.io](mailto:developers@mod.io?subject=API). We are here to help you grow and maximise the potential of mods in your game.
+If you spot any errors within the mod.io documentation, have feedback on how we can make it easier to follow or simply want to discuss how awesome mods are, feel free to reach out anytime to [developers@mod.io](mailto:developers@mod.io?subject=API). We are here to help you grow and maximise the potential of mods in your game.
 # Games
 
 ## Get All Games
@@ -5062,7 +5044,7 @@ System.out.println(response.toString());
 `POST /games/{game-id}/mods/{mod-id}/ratings`
 
 Submit a positive or negative rating for a mod. Each user can supply only one rating for a mod, subsequent ratings will override the old value.
-
+     
      __NOTE:__ You can order mods by their rating, and view their rating in the [Mod Object](#mod-object).
      
      Parameter|Type|Required|Description
@@ -5340,7 +5322,7 @@ System.out.println(response.toString());
 `POST /games/{game-id}/mods/{mod-id}/metadatakvp`
 
 Add metadata for this mod as searchable key value pairs. Metadata is useful to define how the mod works, or other information you need to display. For example: A mod might change gravity and the rate of fire of weapons, you could define these properties as key value pairs. We recommend the mod upload tool you create defines and submits metadata behind the scenes, because if these settings affect gameplay, invalid information may cause problems in your game. Metadata can also be stored as `metadata_blob` in the [Mod Object](#mod-object).
-
+     
      Parameter|Type|Required|Description
      ---|---|---|---|
      metadata|array|true|Array containing one or more key value pairs where the the key and value are separated by a colon ':' (if the string contains multiple colons the split will occur on the first matched, i.e. pistol-dmg:800:400 will become key: pistol-dmg, value: 800:400). __NOTE:__<br><br>- Keys support alphanumeric, '_' and '-' characters only.<br>- Keys can map to multiple values (1-to-many relationship).<br>- Keys and values cannot exceed 255 characters in length.<br>- Key value pairs are searchable by exact match only.
@@ -5606,7 +5588,7 @@ System.out.println(response.toString());
 `GET /games/{game-id}/mods/{mod-id}/dependencies`
 
 Get all dependencies the chosen mod has selected. This is useful if a mod requires other mods be installed for it to run. Successful request will return an array of [Mod Dependencies Objects](--parse-docsurl/#mod-dependencies-object).
-
+     
      __NOTE:__ Some developers might select _soft_ dependencies to promote or credit other mods. We advise against this but it is possible to do.
 
 > Example responses
