@@ -317,7 +317,7 @@ For single items, mod.io returns a __single JSON object__ which contains the req
 Endpoints that return more than one result, return a __JSON object__ which contains a data array and metadata fields:
 
 - `data` - contains all data returned from the request.
-- metadata fields - contains [cursor metadata](#cursors-and-offsets) to help you paginate through the API.
+- metadata fields - contains [pagination metadata](#pagination) to help you paginate through the API.
 
 ```JSON
 // Get response
@@ -344,61 +344,22 @@ Endpoints that return more than one result, return a __JSON object__ which conta
 			...
 		},
 	],
-	"cursor_id": 30,
-    "prev_id": null,
-    "next_id": null,
     "result_count": 100,
 }  
 ```
 
-## Cursors and Offsets
+## Pagination
 
-When requesting data from endpoints that contain more than one object, there are two parameters you can supply to paginate through the results with ease, they are `_cursor` and `_offset`. They work slightly differently, so pick the one which suits your use case best.
-
-### Cursor
-
-```
-v1/games/2/mods/2/files?_cursor=300
-```
-
-When using a cursor, you are able to specify where you want to _start_ looking for results by the value of the `id` column. Cursors are the quickest and __recommended__ way to paginate because they tell the database exactly where to start looking, but they are also a little more complex to understand. Let's assume you have made a request to the [Get All Mods](#get-all-mods) endpoint. Appended to the response will be the cursor metadata:
+When requesting data from endpoints that contain more than one object, you can supply an `_offset` and `_limit` to paginate through the results with ease. Think of it as a page 1, 2, 3... system but you are in control of the number of results returned per page, and the page to start from. Appended to each response will be the pagination metadata:
 
 ```JSON
 // Metadata example
-"cursor_id": -1,
-"prev_id": -1,
-"next_id": 72,
-"result_count": 50,
+"result_count": 50
 ```
 
 Parameter | Value
 ---------- | ----------  
-`cursor_id` | The current `_cursor` value. _-1_ by default if none specified.
-`prev_id` | The previous `_cursor` value as manually inserted by you, _-1_ by default if none specified.
-`next_id` | The next position to move the `_cursor` to based on the current request. _-1_ by default if no more results.
 `result_count` | The amount of results returned in the current request. _0_ by default.
-
-Based on the cursor metadata returned, you know that the `next_id` is 72. We can make a new request with `?_cursor=72` to only return fields that have an `id` larger than 72. In your next request you should provide a `_prev` parameter, so you can paginate forward and backwards through the results.
-
-### Offset
-
-```
-v1/games?_offset=30
-```
-
-While a cursor starts from the value of the `id` column, the `_offset` will simply skip over the specified number of results, regardless of what data they contain. This works the same way offset does in a SQL query. Let's assume you want to get all mods from mod.io but ignore the first 30 results.
-
-- `?_offset=30` - Will retrieve all results after ignoring the first 30.
-
-As cursors and offsets are mutually exclusive, you should choose one or the other - if you supply both, the __cursor__ will take priority.
-
-### Combining a cursor/offset with a limit
-
-```
-v1/games/2/mods/2/files?_cursor=5&_prev=5&_limit=10
-```
-
-You can combine cursors and offsets with other filter functions such `_limit` & `_sort` to build powerful queries that enable you to be as precise or lenient as you want.
 
 ### _limit (Limit)
 
@@ -406,9 +367,33 @@ You can combine cursors and offsets with other filter functions such `_limit` & 
 v1/games?_limit=5
 ```
 
-Limit the number of results for a request.
+Limit the number of results for a request. By default _100_ results are returned per request:
 
  - `?_limit=5` - Limit the request to 5 individual results. 
+
+### _offset (Offset)
+
+```
+v1/games?_offset=30
+```
+
+Use `_offset` to skip over the specified number of results, regardless of what data they contain. This works the same way offset does in a SQL query:
+
+- `?_offset=30` - Will retrieve 100 results after ignoring the first 30.
+
+### Combining offset with a limit
+
+```
+v1/games?_offset=30&_limit=5
+```
+
+You can combine offset with a limit to build queries that return exactly the number of results you want:
+
+- `?_offset=30&_limit=5` - Will retrieve 5 results after ignoring the first 30.
+
+If the `result_count` matches the limit (5 in this case), that means there are probably more results to get, so our next query might be:
+
+ - `?_offset=35&_limit=5` - Will retrieve the next 5 results after ignoring the first 35.
 
 ## Filtering
 
