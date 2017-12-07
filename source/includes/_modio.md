@@ -334,16 +334,20 @@ Endpoints that return more than one result, return a __JSON object__ which conta
 
 ## Pagination
 
-When requesting data from endpoints that contain more than one object, you can supply an `_offset` and `_limit` to paginate through the results with ease. Think of it as a page 1, 2, 3... system but you are in control of the number of results returned per page, and the page to start from. Appended to each response will be the pagination metadata:
+When requesting data from endpoints that contain more than one object, you can supply an `_offset` and `_limit` to paginate through the results with ease. Think of it as a page 1, 2, 3... system but you control the number of results per page, and the page to start from. Appended to each response will be the pagination metadata:
 
 ```JSON
 // Metadata example
-"result_count": 50
+"result_count": 100,
+"result_limit": 100,
+"result_offset": 0
 ```
 
 Parameter | Value
 ---------- | ----------  
-`result_count` | The amount of results returned in the current request. _0_ by default.
+`result_count` | Number of results returned in the current request.
+`result_limit` | Maximum number of results returned. Defaults to _100_ unless overridden by `_limit`.
+`result_offset` | Number of results skipped over. Defaults to _1_ unless overridden by `_offset`.
 
 ### _limit (Limit)
 
@@ -363,7 +367,7 @@ Limit the number of results for a request. By default _100_ results are returned
 
 Use `_offset` to skip over the specified number of results, regardless of what data they contain. This works the same way offset does in a SQL query:
 
-- `?_offset=30` - Will retrieve 100 results after ignoring the first 30.
+- `?_offset=30` - Will retrieve 100 results after ignoring the first 30 (31 - 130).
 
 ### Combining offset with a limit
 
@@ -373,31 +377,31 @@ Use `_offset` to skip over the specified number of results, regardless of what d
 
 You can combine offset with a limit to build queries that return exactly the number of results you want:
 
-- `?_offset=30&_limit=5` - Will retrieve 5 results after ignoring the first 30.
+- `?_offset=30&_limit=5` - Will retrieve 5 results after ignoring the first 30 (31 - 35).
 
-If the `result_count` matches the limit (5 in this case), that means there are probably more results to get, so our next query might be:
+If the `result_count` matches the `result_limit` (5 in this case), that means there are probably more results to get, so our next query might be:
 
- - `?_offset=35&_limit=5` - Will retrieve the next 5 results after ignoring the first 35.
+ - `?_offset=35&_limit=5` - Will retrieve the next 5 results after ignoring the first 35 (36 - 40).
 
-## Filtering
+## Sorting
 
---parse_sitename has powerful filtering available to assist you when making requests to the API. Every field of every request can be used as a filter and the following functions are available when querying the API. It is important to understand that when using filters in your request, the filters you specify will __only be applied to the bottom-level columns__. That is, if the response object contains a nested object with the same column name, ie. `id` - filtering will apply only to the bottom level object, and not any nested objects.
-
-### Functions
+All endpoints are sorted by the `id` column in ascending order by default. You can override this by including a `_sort` with the column you want to sort by in the request. You can sort on all __bottom-level columns__ only. You cannot sort on columns in nested objects, so if a game contains a user object with a username inside it, you cannot sort on the username column. Some endpoints like [get all mods](#get-all-mods) have special sort columns like `popular`, `downloads`, `rating` and `subscribers` which are documented alongside the filters.
 
 ### _sort (Sort)
 
 ```
---parse_version/games?_sort=id
+--parse_version/games?_sort=name
 ```
 
 Sort by a column, in ascending or descending order.
 
-- `?_sort=id` - Sort `id` in ascending order
+- `?_sort=name` - Sort `name` in ascending order
 
-- `?_sort=-id` - Sort `id` in descending order
+- `?_sort=-name` - Sort `name` in descending order
 
-__NOTE:__ All endpoints are automatically sorted by the `id` column in ascending order unless specifically mentioned otherwise. 
+## Filtering
+
+--parse_sitename has powerful filtering available to assist you when making requests to the API. You can filter on all __bottom-level columns__ only. You cannot apply filters to columns in nested objects, so if a game contains a user object with a username inside it, you cannot filter by the username column.
 
 ### _q (Full text search)
 

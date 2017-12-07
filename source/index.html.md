@@ -350,16 +350,20 @@ Endpoints that return more than one result, return a __JSON object__ which conta
 
 ## Pagination
 
-When requesting data from endpoints that contain more than one object, you can supply an `_offset` and `_limit` to paginate through the results with ease. Think of it as a page 1, 2, 3... system but you are in control of the number of results returned per page, and the page to start from. Appended to each response will be the pagination metadata:
+When requesting data from endpoints that contain more than one object, you can supply an `_offset` and `_limit` to paginate through the results with ease. Think of it as a page 1, 2, 3... system but you control the number of results per page, and the page to start from. Appended to each response will be the pagination metadata:
 
 ```JSON
 // Metadata example
-"result_count": 50
+"result_count": 100,
+"result_limit": 100,
+"result_offset": 0
 ```
 
 Parameter | Value
 ---------- | ----------  
-`result_count` | The amount of results returned in the current request. _0_ by default.
+`result_count` | Number of results returned in the current request.
+`result_limit` | Maximum number of results returned. Defaults to _100_ unless overridden by `_limit`.
+`result_offset` | Number of results skipped over. Defaults to _1_ unless overridden by `_offset`.
 
 ### _limit (Limit)
 
@@ -379,7 +383,7 @@ v1/games?_offset=30
 
 Use `_offset` to skip over the specified number of results, regardless of what data they contain. This works the same way offset does in a SQL query:
 
-- `?_offset=30` - Will retrieve 100 results after ignoring the first 30.
+- `?_offset=30` - Will retrieve 100 results after ignoring the first 30 (31 - 130).
 
 ### Combining offset with a limit
 
@@ -389,31 +393,31 @@ v1/games?_offset=30&_limit=5
 
 You can combine offset with a limit to build queries that return exactly the number of results you want:
 
-- `?_offset=30&_limit=5` - Will retrieve 5 results after ignoring the first 30.
+- `?_offset=30&_limit=5` - Will retrieve 5 results after ignoring the first 30 (31 - 35).
 
-If the `result_count` matches the limit (5 in this case), that means there are probably more results to get, so our next query might be:
+If the `result_count` matches the `result_limit` (5 in this case), that means there are probably more results to get, so our next query might be:
 
- - `?_offset=35&_limit=5` - Will retrieve the next 5 results after ignoring the first 35.
+ - `?_offset=35&_limit=5` - Will retrieve the next 5 results after ignoring the first 35 (36 - 40).
 
-## Filtering
+## Sorting
 
-mod.io has powerful filtering available to assist you when making requests to the API. Every field of every request can be used as a filter and the following functions are available when querying the API. It is important to understand that when using filters in your request, the filters you specify will __only be applied to the bottom-level columns__. That is, if the response object contains a nested object with the same column name, ie. `id` - filtering will apply only to the bottom level object, and not any nested objects.
-
-### Functions
+All endpoints are sorted by the `id` column in ascending order by default. You can override this by including a `_sort` with the column you want to sort by in the request. You can sort on all __bottom-level columns__ only. You cannot sort on columns in nested objects, so if a game contains a user object with a username inside it, you cannot sort on the username column. Some endpoints like [get all mods](#get-all-mods) have special sort columns like `popular`, `downloads`, `rating` and `subscribers` which are documented alongside the filters.
 
 ### _sort (Sort)
 
 ```
-v1/games?_sort=id
+v1/games?_sort=name
 ```
 
 Sort by a column, in ascending or descending order.
 
-- `?_sort=id` - Sort `id` in ascending order
+- `?_sort=name` - Sort `name` in ascending order
 
-- `?_sort=-id` - Sort `id` in descending order
+- `?_sort=-name` - Sort `name` in descending order
 
-__NOTE:__ All endpoints are automatically sorted by the `id` column in ascending order unless specifically mentioned otherwise. 
+## Filtering
+
+mod.io has powerful filtering available to assist you when making requests to the API. You can filter on all __bottom-level columns__ only. You cannot apply filters to columns in nested objects, so if a game contains a user object with a username inside it, you cannot filter by the username column.
 
 ### _q (Full text search)
 
@@ -804,10 +808,9 @@ Get all games. Successful request will return an array of [Game Objects](#get-al
         ...
     }
   ],
-  "cursor_id": 60,
-  "prev_id": 30,
-  "next_id": 160,
-  "result_count": 100
+  "result_count": 100,
+  "result_limit": 100,
+  "result_offset": 0
 }
 ```
 <h3 id="Get-All-Games-responses">Responses</h3>
@@ -1422,10 +1425,9 @@ Get all mods for the corresponding game. Successful request will return an array
         ...
     }
   ],
-  "cursor_id": 60,
-  "prev_id": 30,
-  "next_id": 160,
-  "result_count": 100
+  "result_count": 100,
+  "result_limit": 100,
+  "result_offset": 0
 }
 ```
 <h3 id="Get-All-Mods-responses">Responses</h3>
@@ -2372,10 +2374,9 @@ Get all files that are published for the corresponding mod. Successful request w
         ...
     }
   ],
-  "cursor_id": 60,
-  "prev_id": 30,
-  "next_id": 160,
-  "result_count": 100
+  "result_count": 100,
+  "result_limit": 100,
+  "result_offset": 0
 }
 ```
 <h3 id="Get-All-Modfiles-responses">Responses</h3>
@@ -3754,10 +3755,9 @@ Get activity log for a game, showing changes made to the resource. Successful re
         ...
     }
   ],
-  "cursor_id": 60,
-  "prev_id": 30,
-  "next_id": 160,
-  "result_count": 100
+  "result_count": 100,
+  "result_limit": 100,
+  "result_offset": 0
 }
 ```
 <h3 id="Get-Game-Activity-responses">Responses</h3>
@@ -3909,10 +3909,9 @@ Get activity log for a mod, showing changes made to the resource. Successful req
         ...
     }
   ],
-  "cursor_id": 60,
-  "prev_id": 30,
-  "next_id": 160,
-  "result_count": 100
+  "result_count": 100,
+  "result_limit": 100,
+  "result_offset": 0
 }
 ```
 <h3 id="Get-Mod-Activity-responses">Responses</h3>
@@ -4064,10 +4063,9 @@ Get all mod activity for the corresponding game. Successful request will return 
         ...
     }
   ],
-  "cursor_id": 60,
-  "prev_id": 30,
-  "next_id": 160,
-  "result_count": 100
+  "result_count": 100,
+  "result_limit": 100,
+  "result_offset": 0
 }
 ```
 <h3 id="Get-All-Mod-Activity-responses">Responses</h3>
@@ -4205,10 +4203,9 @@ Get all tags for the corresponding game, that can be applied to any of its mods.
         ...
     }
   ],
-  "cursor_id": 60,
-  "prev_id": 30,
-  "next_id": 160,
-  "result_count": 100
+  "result_count": 100,
+  "result_limit": 100,
+  "result_offset": 0
 }
 ```
 <h3 id="Get-All-Game-Tag-Options-responses">Responses</h3>
@@ -4620,10 +4617,9 @@ Get all tags for the corresponding mod. Successful request will return an array 
         ...
     }
   ],
-  "cursor_id": 60,
-  "prev_id": 30,
-  "next_id": 160,
-  "result_count": 100
+  "result_count": 100,
+  "result_limit": 100,
+  "result_offset": 0
 }
 ```
 <h3 id="Get-All-Mod-Tags-responses">Responses</h3>
@@ -5175,10 +5171,9 @@ Get all metadata stored by the game developer for this mod as searchable key val
         ...
     }
   ],
-  "cursor_id": 60,
-  "prev_id": 30,
-  "next_id": 160,
-  "result_count": 100
+  "result_count": 100,
+  "result_limit": 100,
+  "result_offset": 0
 }
 ```
 <h3 id="Get-All-Mod-KVP-Metadata-responses">Responses</h3>
@@ -5589,10 +5584,9 @@ Get all dependencies the chosen mod has selected. This is useful if a mod requir
         ...
     }
   ],
-  "cursor_id": 60,
-  "prev_id": 30,
-  "next_id": 160,
-  "result_count": 100
+  "result_count": 100,
+  "result_limit": 100,
+  "result_offset": 0
 }
 ```
 <h3 id="Get-All-Mod-Dependencies-responses">Responses</h3>
@@ -6027,10 +6021,9 @@ Get all users that are part of a game team. Successful request will return an ar
         ...
     }
   ],
-  "cursor_id": 60,
-  "prev_id": 30,
-  "next_id": 160,
-  "result_count": 100
+  "result_count": 100,
+  "result_limit": 100,
+  "result_offset": 0
 }
 ```
 <h3 id="Get-All-Game-Team-Members-responses">Responses</h3>
@@ -6186,10 +6179,9 @@ Get all users that are part of a mod team. Successful request will return an arr
         ...
     }
   ],
-  "cursor_id": 60,
-  "prev_id": 30,
-  "next_id": 160,
-  "result_count": 100
+  "result_count": 100,
+  "result_limit": 100,
+  "result_offset": 0
 }
 ```
 <h3 id="Get-All-Mod-Team-Members-responses">Responses</h3>
@@ -7180,10 +7172,9 @@ Get all comments posted in the mods profile. Successful request will return an a
         ...
     }
   ],
-  "cursor_id": 60,
-  "prev_id": 30,
-  "next_id": 160,
-  "result_count": 100
+  "result_count": 100,
+  "result_limit": 100,
+  "result_offset": 0
 }
 ```
 <h3 id="Get-All-Mod-Comments-responses">Responses</h3>
@@ -7618,10 +7609,9 @@ Get all users registered on mod.io. Successful request will return an array of [
         ...
     }
   ],
-  "cursor_id": 60,
-  "prev_id": 30,
-  "next_id": 160,
-  "result_count": 100
+  "result_count": 100,
+  "result_limit": 100,
+  "result_offset": 0
 }
 ```
 <h3 id="Get-All-Users-responses">Responses</h3>
@@ -8275,10 +8265,9 @@ Get all mod's the *authenticated user* is subscribed to. Successful request will
         ...
     }
   ],
-  "cursor_id": 60,
-  "prev_id": 30,
-  "next_id": 160,
-  "result_count": 100
+  "result_count": 100,
+  "result_limit": 100,
+  "result_offset": 0
 }
 ```
 <h3 id="Get-User-Subscriptions-responses">Responses</h3>
@@ -8469,10 +8458,9 @@ Get all games the *authenticated user* added or is a team member of. Successful 
         ...
     }
   ],
-  "cursor_id": 60,
-  "prev_id": 30,
-  "next_id": 160,
-  "result_count": 100
+  "result_count": 100,
+  "result_limit": 100,
+  "result_offset": 0
 }
 ```
 <h3 id="Get-User-Games-responses">Responses</h3>
@@ -8685,10 +8673,9 @@ Get all mods the *authenticated user* added or is a team member of. Successful r
         ...
     }
   ],
-  "cursor_id": 60,
-  "prev_id": 30,
-  "next_id": 160,
-  "result_count": 100
+  "result_count": 100,
+  "result_limit": 100,
+  "result_offset": 0
 }
 ```
 <h3 id="Get-User-Mods-responses">Responses</h3>
@@ -8838,10 +8825,9 @@ Get all Modfiles the *authenticated user* uploaded. Successful request will retu
         ...
     }
   ],
-  "cursor_id": 60,
-  "prev_id": 30,
-  "next_id": 160,
-  "result_count": 100
+  "result_count": 100,
+  "result_limit": 100,
+  "result_offset": 0
 }
 ```
 <h3 id="Get-User-Modfiles-responses">Responses</h3>
@@ -9045,10 +9031,9 @@ thumb_320x180|string|URL to the image thumbnail.
         ...
     }
   ],
-  "cursor_id": 60,
-  "prev_id": 30,
-  "next_id": 160,
-  "result_count": 100
+  "result_count": 100,
+  "result_limit": 100,
+  "result_offset": 0
 } 
 ```
 
@@ -9056,10 +9041,9 @@ thumb_320x180|string|URL to the image thumbnail.
 
 Name|Type|Description
 ---|---|---|---|
-cursor_id|integer(int32)|Current _cursor value. See [Cursors and Offsets](#cursors-and-offsets) for help understanding how to paginate through results.
-prev_id|integer(int32)|Previous _cursor value as manually inserted by you, null by default.
-next_id|integer(int32)|Next position to move the _cursor to, based on the current request.
-result_count|integer(int32)|Amount of results returned in the current request.
+result_count|integer(int32)|Number of results returned in the data array.
+result_limit|integer(int32)|Maximum number of results returned.
+result_offset|integer(int32)|Number of results skipped over.
 data|[Comment Object  ](#schemacomment_object)[]|Array containing comment objects.
 » id|integer(int32)|Unique id of the comment.
 » mod_id|integer(int32)|Unique id of the parent mod.
@@ -9098,10 +9082,9 @@ data|[Comment Object  ](#schemacomment_object)[]|Array containing comment object
         ...
     }
   ],
-  "cursor_id": 60,
-  "prev_id": 30,
-  "next_id": 160,
-  "result_count": 100
+  "result_count": 100,
+  "result_limit": 100,
+  "result_offset": 0
 } 
 ```
 
@@ -9109,10 +9092,9 @@ data|[Comment Object  ](#schemacomment_object)[]|Array containing comment object
 
 Name|Type|Description
 ---|---|---|---|
-cursor_id|integer(int32)|Current _cursor value. See [Cursors and Offsets](#cursors-and-offsets) for help understanding how to paginate through results.
-prev_id|integer(int32)|Previous _cursor value as manually inserted by you, null by default.
-next_id|integer(int32)|Next position to move the _cursor to, based on the current request.
-result_count|integer(int32)|Amount of results returned in the current request.
+result_count|integer(int32)|Number of results returned in the data array.
+result_limit|integer(int32)|Maximum number of results returned.
+result_offset|integer(int32)|Number of results skipped over.
 data|[Mod Dependencies Object ](#schemamod_dependencies_object)[]|Array containing mod dependencies objects.
 » mod_id|integer(int32)|Unique id of the mod that is the dependency.
 » date_added|integer(int32)|Unix timestamp of date the dependency was added.
@@ -9147,10 +9129,9 @@ data|[Mod Dependencies Object ](#schemamod_dependencies_object)[]|Array containi
         ...
     }
   ],
-  "cursor_id": 60,
-  "prev_id": 30,
-  "next_id": 160,
-  "result_count": 100
+  "result_count": 100,
+  "result_limit": 100,
+  "result_offset": 0
 } 
 ```
 
@@ -9158,10 +9139,9 @@ data|[Mod Dependencies Object ](#schemamod_dependencies_object)[]|Array containi
 
 Name|Type|Description
 ---|---|---|---|
-cursor_id|integer(int32)|Current _cursor value. See [Cursors and Offsets](#cursors-and-offsets) for help understanding how to paginate through results.
-prev_id|integer(int32)|Previous _cursor value as manually inserted by you, null by default.
-next_id|integer(int32)|Next position to move the _cursor to, based on the current request.
-result_count|integer(int32)|Amount of results returned in the current request.
+result_count|integer(int32)|Number of results returned in the data array.
+result_limit|integer(int32)|Maximum number of results returned.
+result_offset|integer(int32)|Number of results skipped over.
 data|[Modfile Object  ](#schemamodfile_object)[]|Array containing modfile objects.
 » id|integer(int32)|Unique modfile id.
 » mod_id|integer(int32)|Unique mod id.
@@ -9249,10 +9229,9 @@ data|[Modfile Object  ](#schemamodfile_object)[]|Array containing modfile object
         ...
     }
   ],
-  "cursor_id": 60,
-  "prev_id": 30,
-  "next_id": 160,
-  "result_count": 100
+  "result_count": 100,
+  "result_limit": 100,
+  "result_offset": 0
 } 
 ```
 
@@ -9260,10 +9239,9 @@ data|[Modfile Object  ](#schemamodfile_object)[]|Array containing modfile object
 
 Name|Type|Description
 ---|---|---|---|
-cursor_id|integer(int32)|Current _cursor value. See [Cursors and Offsets](#cursors-and-offsets) for help understanding how to paginate through results.
-prev_id|integer(int32)|Previous _cursor value as manually inserted by you, null by default.
-next_id|integer(int32)|Next position to move the _cursor to, based on the current request.
-result_count|integer(int32)|Amount of results returned in the current request.
+result_count|integer(int32)|Number of results returned in the data array.
+result_limit|integer(int32)|Maximum number of results returned.
+result_offset|integer(int32)|Number of results skipped over.
 data|[Game Object  ](#schemagame_object)[]|Array containing game objects.
 » id|integer(int32)|Unique game id.
 » submitted_by|[User Object  ](#schemauser_object)|Contains user data.
@@ -9339,10 +9317,9 @@ data|[Game Object  ](#schemagame_object)[]|Array containing game objects.
         ...
     }
   ],
-  "cursor_id": 60,
-  "prev_id": 30,
-  "next_id": 160,
-  "result_count": 100
+  "result_count": 100,
+  "result_limit": 100,
+  "result_offset": 0
 } 
 ```
 
@@ -9350,10 +9327,9 @@ data|[Game Object  ](#schemagame_object)[]|Array containing game objects.
 
 Name|Type|Description
 ---|---|---|---|
-cursor_id|integer(int32)|Current _cursor value. See [Cursors and Offsets](#cursors-and-offsets) for help understanding how to paginate through results.
-prev_id|integer(int32)|Previous _cursor value as manually inserted by you, null by default.
-next_id|integer(int32)|Next position to move the _cursor to, based on the current request.
-result_count|integer(int32)|Amount of results returned in the current request.
+result_count|integer(int32)|Number of results returned in the data array.
+result_limit|integer(int32)|Maximum number of results returned.
+result_offset|integer(int32)|Number of results skipped over.
 data|[Game Activity Object ](#schemagame_activity_object)[]|Array containing game activity objects.
 » id|integer(int32)|Unique id of the activity record.
 » game_id|integer(int32)|Unique id of the parent game.
@@ -9382,10 +9358,9 @@ data|[Game Activity Object ](#schemagame_activity_object)[]|Array containing gam
         ...
     }
   ],
-  "cursor_id": 60,
-  "prev_id": 30,
-  "next_id": 160,
-  "result_count": 100
+  "result_count": 100,
+  "result_limit": 100,
+  "result_offset": 0
 } 
 ```
 
@@ -9393,10 +9368,9 @@ data|[Game Activity Object ](#schemagame_activity_object)[]|Array containing gam
 
 Name|Type|Description
 ---|---|---|---|
-cursor_id|integer(int32)|Current _cursor value. See [Cursors and Offsets](#cursors-and-offsets) for help understanding how to paginate through results.
-prev_id|integer(int32)|Previous _cursor value as manually inserted by you, null by default.
-next_id|integer(int32)|Next position to move the _cursor to, based on the current request.
-result_count|integer(int32)|Amount of results returned in the current request.
+result_count|integer(int32)|Number of results returned in the data array.
+result_limit|integer(int32)|Maximum number of results returned.
+result_offset|integer(int32)|Number of results skipped over.
 data|[Metadata KVP Object ](#schemametadata_kvp_object)[]|Array containing metadata kvp objects.
 » key|string|The key of the key-value pair.
 » value|string|The value of the key-value pair.
@@ -9494,10 +9468,9 @@ data|[Metadata KVP Object ](#schemametadata_kvp_object)[]|Array containing metad
         ...
     }
   ],
-  "cursor_id": 60,
-  "prev_id": 30,
-  "next_id": 160,
-  "result_count": 100
+  "result_count": 100,
+  "result_limit": 100,
+  "result_offset": 0
 } 
 ```
 
@@ -9505,10 +9478,9 @@ data|[Metadata KVP Object ](#schemametadata_kvp_object)[]|Array containing metad
 
 Name|Type|Description
 ---|---|---|---|
-cursor_id|integer(int32)|Current _cursor value. See [Cursors and Offsets](#cursors-and-offsets) for help understanding how to paginate through results.
-prev_id|integer(int32)|Previous _cursor value as manually inserted by you, null by default.
-next_id|integer(int32)|Next position to move the _cursor to, based on the current request.
-result_count|integer(int32)|Amount of results returned in the current request.
+result_count|integer(int32)|Number of results returned in the data array.
+result_limit|integer(int32)|Maximum number of results returned.
+result_offset|integer(int32)|Number of results skipped over.
 data|[Mod Object  ](#schemamod_object)[]|Array containing mod objects.
 » id|integer(int32)|Unique mod id.
 » game_id|integer(int32)|Unique game id.
@@ -9599,10 +9571,9 @@ data|[Mod Object  ](#schemamod_object)[]|Array containing mod objects.
         ...
     }
   ],
-  "cursor_id": 60,
-  "prev_id": 30,
-  "next_id": 160,
-  "result_count": 100
+  "result_count": 100,
+  "result_limit": 100,
+  "result_offset": 0
 } 
 ```
 
@@ -9610,10 +9581,9 @@ data|[Mod Object  ](#schemamod_object)[]|Array containing mod objects.
 
 Name|Type|Description
 ---|---|---|---|
-cursor_id|integer(int32)|Current _cursor value. See [Cursors and Offsets](#cursors-and-offsets) for help understanding how to paginate through results.
-prev_id|integer(int32)|Previous _cursor value as manually inserted by you, null by default.
-next_id|integer(int32)|Next position to move the _cursor to, based on the current request.
-result_count|integer(int32)|Amount of results returned in the current request.
+result_count|integer(int32)|Number of results returned in the data array.
+result_limit|integer(int32)|Maximum number of results returned.
+result_offset|integer(int32)|Number of results skipped over.
 data|[Mod Activity Object ](#schemamod_activity_object)[]|Array containing mod activity objects.
 » id|integer(int32)|Unique id of the activity object.
 » mod_id|integer(int32)|Unique id of the parent mod.
@@ -9646,10 +9616,9 @@ data|[Mod Activity Object ](#schemamod_activity_object)[]|Array containing mod a
         ...
     }
   ],
-  "cursor_id": 60,
-  "prev_id": 30,
-  "next_id": 160,
-  "result_count": 100
+  "result_count": 100,
+  "result_limit": 100,
+  "result_offset": 0
 } 
 ```
 
@@ -9657,10 +9626,9 @@ data|[Mod Activity Object ](#schemamod_activity_object)[]|Array containing mod a
 
 Name|Type|Description
 ---|---|---|---|
-cursor_id|integer(int32)|Current _cursor value. See [Cursors and Offsets](#cursors-and-offsets) for help understanding how to paginate through results.
-prev_id|integer(int32)|Previous _cursor value as manually inserted by you, null by default.
-next_id|integer(int32)|Next position to move the _cursor to, based on the current request.
-result_count|integer(int32)|Amount of results returned in the current request.
+result_count|integer(int32)|Number of results returned in the data array.
+result_limit|integer(int32)|Maximum number of results returned.
+result_offset|integer(int32)|Number of results skipped over.
 data|[Game Tag Option Object](#schemagame_tag_option_object)[]|Array containing game tag objects.
 » name|string|Name of the tag group.
 » type|string|Can multiple tags be selected via 'checkboxes' or should only a single tag be selected via a 'dropdown'.
@@ -9684,10 +9652,9 @@ data|[Game Tag Option Object](#schemagame_tag_option_object)[]|Array containing 
         ...
     }
   ],
-  "cursor_id": 60,
-  "prev_id": 30,
-  "next_id": 160,
-  "result_count": 100
+  "result_count": 100,
+  "result_limit": 100,
+  "result_offset": 0
 } 
 ```
 
@@ -9695,10 +9662,9 @@ data|[Game Tag Option Object](#schemagame_tag_option_object)[]|Array containing 
 
 Name|Type|Description
 ---|---|---|---|
-cursor_id|integer(int32)|Current _cursor value. See [Cursors and Offsets](#cursors-and-offsets) for help understanding how to paginate through results.
-prev_id|integer(int32)|Previous _cursor value as manually inserted by you, null by default.
-next_id|integer(int32)|Next position to move the _cursor to, based on the current request.
-result_count|integer(int32)|Amount of results returned in the current request.
+result_count|integer(int32)|Number of results returned in the data array.
+result_limit|integer(int32)|Maximum number of results returned.
+result_offset|integer(int32)|Number of results skipped over.
 data|[Mod Tag Object ](#schemamod_tag_object)[]|Array containing mod tag objects.
 » name|string|Tag name.
 » date_added|integer(int32)|Unix timestamp of date tag was applied.
@@ -9735,10 +9701,9 @@ data|[Mod Tag Object ](#schemamod_tag_object)[]|Array containing mod tag objects
         ...
     }
   ],
-  "cursor_id": 60,
-  "prev_id": 30,
-  "next_id": 160,
-  "result_count": 100
+  "result_count": 100,
+  "result_limit": 100,
+  "result_offset": 0
 } 
 ```
 
@@ -9746,10 +9711,9 @@ data|[Mod Tag Object ](#schemamod_tag_object)[]|Array containing mod tag objects
 
 Name|Type|Description
 ---|---|---|---|
-cursor_id|integer(int32)|Current _cursor value. See [Cursors and Offsets](#cursors-and-offsets) for help understanding how to paginate through results.
-prev_id|integer(int32)|Previous _cursor value as manually inserted by you, null by default.
-next_id|integer(int32)|Next position to move the _cursor to, based on the current request.
-result_count|integer(int32)|Amount of results returned in the current request.
+result_count|integer(int32)|Number of results returned in the data array.
+result_limit|integer(int32)|Maximum number of results returned.
+result_offset|integer(int32)|Number of results skipped over.
 data|[Team Member Object ](#schemateam_member_object)[]|Array containing team member objects.
 » id|integer(int32)|Unique team member id.
 » user|[User Object  ](#schemauser_object)|Contains user data.
@@ -9793,10 +9757,9 @@ data|[Team Member Object ](#schemateam_member_object)[]|Array containing team me
         ...
     }
   ],
-  "cursor_id": 60,
-  "prev_id": 30,
-  "next_id": 160,
-  "result_count": 100
+  "result_count": 100,
+  "result_limit": 100,
+  "result_offset": 0
 } 
 ```
 
@@ -9804,10 +9767,9 @@ data|[Team Member Object ](#schemateam_member_object)[]|Array containing team me
 
 Name|Type|Description
 ---|---|---|---|
-cursor_id|integer(int32)|Current _cursor value. See [Cursors and Offsets](#cursors-and-offsets) for help understanding how to paginate through results.
-prev_id|integer(int32)|Previous _cursor value as manually inserted by you, null by default.
-next_id|integer(int32)|Next position to move the _cursor to, based on the current request.
-result_count|integer(int32)|Amount of results returned in the current request.
+result_count|integer(int32)|Number of results returned in the data array.
+result_limit|integer(int32)|Maximum number of results returned.
+result_offset|integer(int32)|Number of results skipped over.
 data|[User Object  ](#schemauser_object)[]|Array containing user objects.
 » id|integer(int32)|Unique id of the user.
 » name_id|string|URL path for the user on mod.io. Usually a simplified version of their username.
