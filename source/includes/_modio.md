@@ -385,7 +385,9 @@ If the `result_count` matches the `result_limit` (5 in this case), that means th
 
 ## Sorting
 
-All endpoints are sorted by the `id` column in ascending order by default. You can override this by including a `_sort` with the column you want to sort by in the request. You can sort on all __bottom-level columns__ only. You cannot sort on columns in nested objects, so if a game contains a user object with a username inside it, you cannot sort on the username column. Some endpoints like [get all mods](#get-all-mods) have special sort columns like `popular`, `downloads`, `rating` and `subscribers` which are documented alongside the filters.
+All endpoints are sorted by the `id` column in ascending order by default. You can override this by including a `_sort` with the column you want to sort by in the request. You can sort on all columns __in the parent object only__. You cannot sort on columns in nested objects, so if a game contains a user you cannot sort on the `username` column, but you can sort by the games `name` since the column resides in the parent object.
+
+__NOTE:__ Some endpoints like [get all mods](#get-all-mods) have special sort columns like `popular`, `downloads`, `rating` and `subscribers` which are documented alongside the filters.
 
 ### _sort (Sort)
 
@@ -401,7 +403,7 @@ Sort by a column, in ascending or descending order.
 
 ## Filtering
 
---parse_sitename has powerful filtering available to assist you when making requests to the API. You can filter on all __bottom-level columns__ only. You cannot apply filters to columns in nested objects, so if a game contains a user object with a username inside it, you cannot filter by the username column.
+--parse_sitename has powerful filtering available to assist you when making requests to the API. You can filter on all columns __in the parent object only__. You cannot apply filters to columns in nested objects, so if a game contains a user object you cannot filter by the `username` column, but you can filter by the games `name` since the column resides in the parent object.
 
 ### _q (Full text search)
 
@@ -437,14 +439,6 @@ Where the preceding column value does not equal the value specified.
 
 ```
 --parse_version/games?name-lk=texture
-```
-
-```
---parse_version/games?name-lk=*texture
-```
-
-```
---parse_version/games?name-lk=texture*
 ```
 
 Where the string supplied matches the preceding column value. This is equivalent to SQL's `LIKE`. Consider using wildcard's `*` for the best chance of results as described below.
