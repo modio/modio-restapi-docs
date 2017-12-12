@@ -636,6 +636,10 @@ html, body {
 // MODIO CUSTOM
 ////////////////////////////////////////////////////////////////////////////////
 
+table tbody tr td:first-child {
+  white-space: nowrap;
+}
+
 img.menu-reference-icon {
   max-height: 12px;
   max-width: 12px;

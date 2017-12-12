@@ -40,4 +40,26 @@ $(document).ready(function() {
 		$(this).removeClass('shadow-drop-lr');
 		$(target).css({'color':'#e6db74', 'font-weight':'normal', 'border-bottom':'none'});
 	});
+	
+	$('table tbody tr').each(function() {
+		if($('td:first-child', this).not('.collapsed').text()[0] == '»') {
+			$(this).hide();
+			
+			if($(this).prev().find('td:first-child').text()[0] != '»') {
+				$(this).prev().find('td:first-child').append('<a href="#" class="togglecollapse" style="background: rgba(0,0,0,.05); border-radius: 3px; display: inline-block; font-size: 10px; margin-left: 4px; padding: 2px 5px;">expand</a>');
+			}
+		} else {
+			$(this).addClass('notcollapsed');
+		}
+	});
+	
+	$('.togglecollapse').click(function() {
+		$(this).closest('tr').nextUntil('.notcollapsed', 'tr').toggle();
+		if($(this).closest('tr').next('tr').is(':visible')) {
+			$(this).text('collapse');
+		} else {
+			$(this).text('expand');
+		}
+		return false;
+	});
 });

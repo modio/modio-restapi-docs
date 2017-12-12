@@ -135,7 +135,7 @@ See [Making Requests](#making-requests) section.
 
 ### Scopes (OAuth 2)
 
---parse_sitename allows you to specify the permission each access token has (default is read+write), this is done by the use of scopes. See below for a full list of scopes available, you must include at least one scope when generating a new token.
+--parse_sitename allows you to specify the permission each access token has (default is _read+write_), this is done by the use of scopes. See below for a full list of scopes available, you must include at least one scope when generating a new token.
 
 Scope | Abilities
 ---------- | ----------
@@ -157,7 +157,7 @@ To authenticate using your unique 32-character API key, append the `api_key=xxxx
 
 ### Using an Access Token
 
-To authenticate using an OAuth 2 access token you must include the HTTP header `Authorization` in your request with the value `Bearer your-token-here`. Verification via Access Token allows much greater power including creating, updating and deleting resources that you have access to. Also because OAuth 2 access tokens are tied to a user account, you can personalize the output by viewing content they are subscribed and connected to via the [me endpoint](#me) and by using relevant filters.
+To authenticate using an OAuth 2 access token, you must include the HTTP header `Authorization` in your request with the value `Bearer your-token-here`. Verification via Access Token allows much greater power including creating, updating and deleting resources that you have access to. Also because OAuth 2 access tokens are tied to a user account, you can personalize the output by viewing content they are subscribed and connected to via the [me endpoint](#me) and by using relevant filters.
 
 ```shell
 // Example POST request with no binary files
@@ -208,7 +208,7 @@ curl -X post --parse_apiurl/games/1/team \
 	  }'
 ```
 
-For `POST` & `PUT` requests that do _not submit files_ you have the option to supply your data as HTTP `POST` parameters, or as an _UTF-8 encoded_ JSON object inside the parameter `input_json` which contains all required data. Regardless, whether you use JSON or not the `Content-Type` of your request still needs to be `application/x-www-form-urlencoded` with the data provided in the body of the request.
+For `POST` & `PUT` requests that do _not submit files_ you have the option to supply your data as HTTP `POST` parameters, or as a _UTF-8 encoded_ JSON object inside the parameter `input_json` which contains all required data. Regardless, whether you use JSON or not the `Content-Type` of your request still needs to be `application/x-www-form-urlencoded` with the data provided in the body of the request.
 
 __NOTE:__ If you supply identical key-value pairs as a request parameter and also as a parameter in your JSON object, the JSON object __will take priority__ as only one can exist.
 
@@ -334,7 +334,7 @@ Endpoints that return more than one result, return a __JSON object__ which conta
 
 ## Pagination
 
-When requesting data from endpoints that contain more than one object, you can supply an `_offset` and `_limit` to paginate through the results with ease. Think of it as a page 1, 2, 3... system but you control the number of results per page, and the page to start from. Appended to each response will be the pagination metadata:
+When requesting data from endpoints that contain more than one object, you can supply an `_offset` and `_limit` to paginate through the results. Think of it as a page 1, 2, 3... system but you control the number of results per page, and the page to start from. Appended to each response will be the pagination metadata:
 
 ```JSON
 // Metadata example
@@ -365,7 +365,7 @@ Limit the number of results for a request. By default _100_ results are returned
 --parse_version/games?_offset=30
 ```
 
-Use `_offset` to skip over the specified number of results, regardless of what data they contain. This works the same way offset does in a SQL query:
+Use `_offset` to skip over the specified number of results, regardless of the data they contain. This works the same way offset does in a SQL query:
 
 - `?_offset=30` - Will retrieve 100 results after ignoring the first 30 (31 - 130).
 
@@ -379,7 +379,7 @@ You can combine offset with a limit to build queries that return exactly the num
 
 - `?_offset=30&_limit=5` - Will retrieve 5 results after ignoring the first 30 (31 - 35).
 
-If the `result_count` matches the `result_limit` (5 in this case), that means there are probably more results to get, so our next query might be:
+If the `result_count` parameter matches the `result_limit` parameter (5 in this case) in the response, that means there are probably more results to get, so our next query might be:
 
  - `?_offset=35&_limit=5` - Will retrieve the next 5 results after ignoring the first 35 (36 - 40).
 
@@ -399,7 +399,7 @@ Sort by a column, in ascending or descending order.
 
 - `?_sort=name` - Sort `name` in ascending order
 
-- `?_sort=-name` - Sort `name` in descending order
+- `?_sort=-name` - Sort `name` in descending order (by prepending a `-`)
 
 ## Filtering
 
@@ -421,7 +421,7 @@ Full-text search is a lenient search filter that _is only available_ if the endp
 --parse_version/games?id=10
 ```
 
-The simpliest filter you can apply is _columnname_ equals. This will return all rows which contain a column matching the value provided. 
+The simpliest filter you can apply is `columnname` equals. This will return all rows which contain a column matching the value provided. 
 
 - `?id=10` - Get all results where the `id` column value is _10_.
 
@@ -491,17 +491,7 @@ Where the supplied list of values *does not* equal the preceding column value. T
 
 - `?modfile-not-in=8,13,22` - Get all results where `id` column *does not* equal 8, 13 and 22.
 
-### -min (Min)
-
-```
---parse_version/games?game-min=20
-```
-
-Where the preceding column value is greater than or equal to the value specified.
-
-- `?game-min=20` - Get all results where the `game` column is greater than or equal to 20.
-
-### -max (Max)
+### -max (Smaller Than or Equal To)
 
 ```
 --parse_version/games?game-max=40
@@ -510,6 +500,16 @@ Where the preceding column value is greater than or equal to the value specified
 Where the preceding column value is smaller than or equal to the value specified.
 
 - `?game-max=40` - Get all results where the `game` smaller than or equal to 40.  
+
+### -min (Greater Than or Equal To)
+
+```
+--parse_version/games?game-min=20
+```
+
+Where the preceding column value is greater than or equal to the value specified.
+
+- `?game-min=20` - Get all results where the `game` column is greater than or equal to 20.
 
 ### -st (Smaller Than)
 
@@ -548,7 +548,7 @@ You can combine any of these options by adding them together which means there a
 
 The number of combinations makes using _equals_, _in_ and other filters a little complex. To solve this we support Bitwise AND (&) which makes it easy to match a column which contains any of the Options you want.
 
-- `?api-bitwise-and=5` - Where the `api` column value is 1, 3, 4, 5, 6, 7, 9, 11, 12, 13, 14, 15 (since these values contain the bits 1, 4 or both).
+- `?api-bitwise-and=5` - Will match the `api` column values 1, 3, 4, 5, 6, 7, 9, 11, 12, 13, 14, 15 (since these values contain the bits 1, 4 or both).
 
 ## Rate Limiting
 

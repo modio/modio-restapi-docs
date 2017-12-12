@@ -5,7 +5,6 @@ language_tabs:
   - http: HTTP
   - javascript: JavaScript
   - javascript--nodejs: Node.JS
-  - ruby: Ruby
   - python: Python
   - java: Java
 toc_footers:
@@ -153,7 +152,7 @@ See [Making Requests](#making-requests) section.
 
 ### Scopes (OAuth 2)
 
-mod.io allows you to specify the permission each access token has (default is read+write), this is done by the use of scopes. See below for a full list of scopes available, you must include at least one scope when generating a new token.
+mod.io allows you to specify the permission each access token has (default is _read+write_), this is done by the use of scopes. See below for a full list of scopes available, you must include at least one scope when generating a new token.
 
 Scope | Abilities
 ---------- | ----------
@@ -175,7 +174,7 @@ To authenticate using your unique 32-character API key, append the `api_key=xxxx
 
 ### Using an Access Token
 
-To authenticate using an OAuth 2 access token you must include the HTTP header `Authorization` in your request with the value `Bearer your-token-here`. Verification via Access Token allows much greater power including creating, updating and deleting resources that you have access to. Also because OAuth 2 access tokens are tied to a user account, you can personalize the output by viewing content they are subscribed and connected to via the [me endpoint](#me) and by using relevant filters.
+To authenticate using an OAuth 2 access token, you must include the HTTP header `Authorization` in your request with the value `Bearer your-token-here`. Verification via Access Token allows much greater power including creating, updating and deleting resources that you have access to. Also because OAuth 2 access tokens are tied to a user account, you can personalize the output by viewing content they are subscribed and connected to via the [me endpoint](#me) and by using relevant filters.
 
 ```shell
 // Example POST request with no binary files
@@ -226,7 +225,7 @@ curl -X post https://api.mod.io/v1/games/1/team \
 	  }'
 ```
 
-For `POST` & `PUT` requests that do _not submit files_ you have the option to supply your data as HTTP `POST` parameters, or as an _UTF-8 encoded_ JSON object inside the parameter `input_json` which contains all required data. Regardless, whether you use JSON or not the `Content-Type` of your request still needs to be `application/x-www-form-urlencoded` with the data provided in the body of the request.
+For `POST` & `PUT` requests that do _not submit files_ you have the option to supply your data as HTTP `POST` parameters, or as a _UTF-8 encoded_ JSON object inside the parameter `input_json` which contains all required data. Regardless, whether you use JSON or not the `Content-Type` of your request still needs to be `application/x-www-form-urlencoded` with the data provided in the body of the request.
 
 __NOTE:__ If you supply identical key-value pairs as a request parameter and also as a parameter in your JSON object, the JSON object __will take priority__ as only one can exist.
 
@@ -352,7 +351,7 @@ Endpoints that return more than one result, return a __JSON object__ which conta
 
 ## Pagination
 
-When requesting data from endpoints that contain more than one object, you can supply an `_offset` and `_limit` to paginate through the results with ease. Think of it as a page 1, 2, 3... system but you control the number of results per page, and the page to start from. Appended to each response will be the pagination metadata:
+When requesting data from endpoints that contain more than one object, you can supply an `_offset` and `_limit` to paginate through the results. Think of it as a page 1, 2, 3... system but you control the number of results per page, and the page to start from. Appended to each response will be the pagination metadata:
 
 ```JSON
 // Metadata example
@@ -383,7 +382,7 @@ Limit the number of results for a request. By default _100_ results are returned
 v1/games?_offset=30
 ```
 
-Use `_offset` to skip over the specified number of results, regardless of what data they contain. This works the same way offset does in a SQL query:
+Use `_offset` to skip over the specified number of results, regardless of the data they contain. This works the same way offset does in a SQL query:
 
 - `?_offset=30` - Will retrieve 100 results after ignoring the first 30 (31 - 130).
 
@@ -397,7 +396,7 @@ You can combine offset with a limit to build queries that return exactly the num
 
 - `?_offset=30&_limit=5` - Will retrieve 5 results after ignoring the first 30 (31 - 35).
 
-If the `result_count` matches the `result_limit` (5 in this case), that means there are probably more results to get, so our next query might be:
+If the `result_count` parameter matches the `result_limit` parameter (5 in this case) in the response, that means there are probably more results to get, so our next query might be:
 
  - `?_offset=35&_limit=5` - Will retrieve the next 5 results after ignoring the first 35 (36 - 40).
 
@@ -417,7 +416,7 @@ Sort by a column, in ascending or descending order.
 
 - `?_sort=name` - Sort `name` in ascending order
 
-- `?_sort=-name` - Sort `name` in descending order
+- `?_sort=-name` - Sort `name` in descending order (by prepending a `-`)
 
 ## Filtering
 
@@ -439,7 +438,7 @@ Full-text search is a lenient search filter that _is only available_ if the endp
 v1/games?id=10
 ```
 
-The simpliest filter you can apply is _columnname_ equals. This will return all rows which contain a column matching the value provided. 
+The simpliest filter you can apply is `columnname` equals. This will return all rows which contain a column matching the value provided. 
 
 - `?id=10` - Get all results where the `id` column value is _10_.
 
@@ -509,17 +508,7 @@ Where the supplied list of values *does not* equal the preceding column value. T
 
 - `?modfile-not-in=8,13,22` - Get all results where `id` column *does not* equal 8, 13 and 22.
 
-### -min (Min)
-
-```
-v1/games?game-min=20
-```
-
-Where the preceding column value is greater than or equal to the value specified.
-
-- `?game-min=20` - Get all results where the `game` column is greater than or equal to 20.
-
-### -max (Max)
+### -max (Smaller Than or Equal To)
 
 ```
 v1/games?game-max=40
@@ -528,6 +517,16 @@ v1/games?game-max=40
 Where the preceding column value is smaller than or equal to the value specified.
 
 - `?game-max=40` - Get all results where the `game` smaller than or equal to 40.  
+
+### -min (Greater Than or Equal To)
+
+```
+v1/games?game-min=20
+```
+
+Where the preceding column value is greater than or equal to the value specified.
+
+- `?game-min=20` - Get all results where the `game` column is greater than or equal to 20.
 
 ### -st (Smaller Than)
 
@@ -566,7 +565,7 @@ You can combine any of these options by adding them together which means there a
 
 The number of combinations makes using _equals_, _in_ and other filters a little complex. To solve this we support Bitwise AND (&) which makes it easy to match a column which contains any of the Options you want.
 
-- `?api-bitwise-and=5` - Where the `api` column value is 1, 3, 4, 5, 6, 7, 9, 11, 12, 13, 14, 15 (since these values contain the bits 1, 4 or both).
+- `?api-bitwise-and=5` - Will match the `api` column values 1, 3, 4, 5, 6, 7, 9, 11, 12, 13, 14, 15 (since these values contain the bits 1, 4 or both).
 
 ## Rate Limiting
 
@@ -611,7 +610,7 @@ If you spot any errors within the mod.io documentation, have feedback on how we 
 
 ## Get All Games
 
-> Code samples
+> Example request
 
 ```shell
 # You can also use wget
@@ -666,22 +665,6 @@ fetch('https://api.mod.io/v1/games?api_key=YourApiKey',
 });
 ```
 
-```ruby
-require 'rest-client'
-require 'json'
-
-headers = {
-  'Accept' => 'application/json'
-}
-
-result = RestClient.get 'https://api.mod.io/v1/games',
-  params: {
-  'api_key' => 'string'
-}, headers: headers
-
-p JSON.parse(result)
-```
-
 ```python
 import requests
 headers = {
@@ -733,7 +716,7 @@ Get all games. Successful request will return an array of [Game Objects](#get-al
      revenue|integer|Revenue capabilities mods can enable:<br><br>__0__ = All of the options below are disabled<br>__1__ = Allow mods to be sold<br>__2__ = Allow mods to receive donations<br>__4__ = Allow mods to be traded<br>__8__ = Allow mods to control supply and scarcity<br>__?__ = Combine to find games with multiple options enabled (see [BITWISE filtering](#bitwise-and-bitwise-and))
      api|integer|Level of API access allowed by this game:<br><br>__0__ = All of the options below are disabled<br>__1__ = This game allows 3rd parties to access the mods API<br>__2__ = This game allows mods to be downloaded directly without API validation<br>__?__ = Combine to find games with multiple options enabled (see [BITWISE filtering](#bitwise-and-bitwise-and))
 
-> Example responses
+> Example response
 
 ```json
 {
@@ -792,7 +775,7 @@ Get all games. Successful request will return an array of [Game Objects](#get-al
           "tags": [
             "Horror"
           ],
-          "admin_only": 0
+          "hidden": 0
         }
       ]
     },
@@ -818,7 +801,7 @@ apiKey, oauth2 ( Scopes: read )
 
 ## Get Game
 
-> Code samples
+> Example request
 
 ```shell
 # You can also use wget
@@ -873,22 +856,6 @@ fetch('https://api.mod.io/v1/games/{game-id}?api_key=YourApiKey',
 });
 ```
 
-```ruby
-require 'rest-client'
-require 'json'
-
-headers = {
-  'Accept' => 'application/json'
-}
-
-result = RestClient.get 'https://api.mod.io/v1/games/{game-id}',
-  params: {
-  'api_key' => 'string'
-}, headers: headers
-
-p JSON.parse(result)
-```
-
 ```python
 import requests
 headers = {
@@ -921,7 +888,7 @@ System.out.println(response.toString());
 
 Get a game. Successful request will return a single [Game Object](#game-object).
 
-> Example responses
+> Example response
 
 ```json
 {
@@ -978,7 +945,7 @@ Get a game. Successful request will return a single [Game Object](#game-object).
       "tags": [
         "Horror"
       ],
-      "admin_only": 0
+      "hidden": 0
     }
   ]
 }
@@ -996,7 +963,7 @@ apiKey, oauth2 ( Scopes: read )
 
 ## Edit Game
 
-> Code samples
+> Example request
 
 ```shell
 # You can also use wget
@@ -1059,23 +1026,6 @@ fetch('https://api.mod.io/v1/games/{game-id}',
 });
 ```
 
-```ruby
-require 'rest-client'
-require 'json'
-
-headers = {
-  'Authorization' => 'Bearer YourAccessToken',
-  'Content-Type' => 'application/x-www-form-urlencoded',
-  'Accept' => 'application/json'
-}
-
-result = RestClient.put 'https://api.mod.io/v1/games/{game-id}',
-  params: {
-  }, headers: headers
-
-p JSON.parse(result)
-```
-
 ```python
 import requests
 headers = {
@@ -1119,13 +1069,13 @@ Update details for a game. If you want to update the `icon`, `logo` or `header` 
      homepage|string||Official homepage for your game. Must be a valid URL.
      ugc_name|string||Word used to describe user-generated content (mods, items, addons etc).
      presentation|integer||Choose the presentation style you want on the mod.io website:<br><br>__0__ =  Grid View: Displays mods in a grid (visual but less informative, default setting) <br>__1__ = Table View: Displays mods in a table (easier to browse)
-     submission|integer||Choose the submission process you want modders to follow:<br><br>__0__ = Control the mod upload process (recommended): You will have to build an upload system either in-game or via a standalone tool, which enables creators to submit mods to the tags you have configured. Because you control the flow you can prevalidate and compile mods, to ensure they will work in your game and attach metadata about what settings the mod can change. In the long run this option will save you time as you can accept more submissions, but it requires more setup to get running and isn't as open as the above option. __NOTE:__ mod profiles can still be [created online](https://mod.io/mods/add), but uploads will have to occur via the API using tools you create.<br><br>__1__ = Enable mod uploads from anywhere: Allow developers to upload mods via the website and API, and pick the tags their mod is built for. No validation will be done on the files submitted, it will be the responsibility of your game and apps to process the mods installation based on the tags selected and determine if the mod is valid and works. For example an mod might be uploaded with the 'map' tag. When a user subscribes to this mod, your game will need to verify it contains a map file and install it where maps are located. If this fails, your game or the community will have to flag the mod as 'incompatible' to remove it from the listing.
+     submission|integer||Choose the submission process you want modders to follow:<br><br>__0__ = Control the mod upload process (recommended): You will have to build an upload system either in-game or via a standalone tool, which enables creators to submit mods to the tags you have configured. Because you control the flow you can prevalidate and compile mods, to ensure they will work in your game and attach metadata about what settings the mod can change. In the long run this option will save you time as you can accept more submissions, but it requires more setup to get running and isn't as open as the above option. __NOTE:__ mod profiles can still be [created online](https://mod.io/mods/add), but uploads will have to occur via the API using tools you create.<br><br>__1__ = Enable mod uploads from anywhere: Allow developers to upload mods via the website and API, and pick the tags their mod is built for. No validation will be done on the files submitted, it will be the responsibility of your game and apps to process the mods installation based on the tags selected and determine if the mod is valid and works. For example a mod might be uploaded with the 'map' tag. When a user subscribes to this mod, your game will need to verify it contains a map file and install it where maps are located. If this fails, your game or the community will have to flag the mod as 'incompatible' to remove it from the listing.
      curation|integer||Choose the curation process your team follows to approve mods:<br><br>__0__ = No curation (recommended): Mods are immediately available to play, without any intervention or work from your team.<br><br>__1__ = Paid curation: Screen only mods the creator wants to sell, before they are available to purchase via the API.<br><br>__2__ = Full curation: All mods must be accepted by someone on your team. This option is useful for games that have a small number of mods and want to control the experience, or you need to set the parameters attached to a mod (i.e. a weapon may require the rate of fire, power level, clip size etc). It can also be used for complex mods, which you may need to build into your game or distribute as DLC.
      community|integer||Choose the community features enabled on the mod.io website:<br><br>__0__ = All of the options below are disabled<br>__1__ = Discussion board enabled<br>__2__ = Guides and news enabled<br>__?__ = Add the options you want together, to enable multiple features
      revenue|integer||Choose the revenue capabilities mods can enable:<br><br>__0__ = All of the options below are disabled<br>__1__ = Allow mods to be sold<br>__2__ = Allow mods to receive donations<br>__4__ = Allow mods to be traded (not subject to revenue share)<br>__8__ = Allow mods to control supply and scarcity<br>__?__ = Add the options you want together, to enable multiple features
      api|integer||Choose the level of API access your game allows:<br><br>__0__ = All of the options below are disabled<br>__1__ = Allow 3rd parties to access your mods API (recommended, an open API will encourage a healthy ecosystem of tools and apps)<br>__2__ = Allow mods to be downloaded directly, without requiring API validation (useful for anonymous game servers and services)<br>__?__ = Add the options you want together, to enable multiple features
 
-> Example responses
+> Example response
 
 ```json
 {
@@ -1182,7 +1132,7 @@ Update details for a game. If you want to update the `icon`, `logo` or `header` 
       "tags": [
         "Horror"
       ],
-      "admin_only": 0
+      "hidden": 0
     }
   ]
 }
@@ -1202,7 +1152,7 @@ oauth2 ( Scopes: write )
 
 ## Get All Mods
 
-> Code samples
+> Example request
 
 ```shell
 # You can also use wget
@@ -1257,22 +1207,6 @@ fetch('https://api.mod.io/v1/games/{game-id}/mods?api_key=YourApiKey',
 });
 ```
 
-```ruby
-require 'rest-client'
-require 'json'
-
-headers = {
-  'Accept' => 'application/json'
-}
-
-result = RestClient.get 'https://api.mod.io/v1/games/{game-id}/mods',
-  params: {
-  'api_key' => 'string'
-}, headers: headers
-
-p JSON.parse(result)
-```
-
 ```python
 import requests
 headers = {
@@ -1319,7 +1253,6 @@ Get all mods for the corresponding game. Successful request will return an array
      description|string|Detailed description of the mod which allows HTML.
      homepage|string|Official homepage of the mod.
      metadata_blob|string|Metadata stored by the game developer.
-     modfile|integer|Unique id of the [Modfile Object](#modfile-object) marked as current release.
      tags|string|Comma-separated values representing the tags you want to filter the results by. Only tags that are supported by the parent game can be applied. To determine what tags are eligible, see the tags values within 'Tag Option' column on the parent [Game Object](#game-object).
      status|string| Status of the mod (only recognised by game admins authenticated via _OAuth 2_):<br><br>__unauth__ = Only return un-authorized mods.<br>__auth__ = Only return authorized mods _(default)_.<br>__ban__ = Only return banned mods.<br>__archive__ = Only return archived mods (out of date / incompatible).<br>__delete__ = Only return deleted mods.
      downloads|string|Sort results by most downloads using [_sort filter](#filtering) parameter, value should be `downloads` for descending or `-downloads` for ascending results.
@@ -1327,7 +1260,7 @@ Get all mods for the corresponding game. Successful request will return an array
      rating|string|Sort results by weighted rating using [_sort filter](#filtering), value should be `ratings` for descending or `-ratings` for ascending results.
      subscribers|string|Sort results by most subscribers using [_sort filter](#filtering), value should be `subscribers` for descending or `-subscribers` for ascending results.
 
-> Example responses
+> Example response
 
 ```json
 {
@@ -1434,7 +1367,7 @@ apiKey, oauth2 ( Scopes: read )
 
 ## Get Mod
 
-> Code samples
+> Example request
 
 ```shell
 # You can also use wget
@@ -1489,22 +1422,6 @@ fetch('https://api.mod.io/v1/games/{game-id}/mods/{mod-id}?api_key=YourApiKey',
 });
 ```
 
-```ruby
-require 'rest-client'
-require 'json'
-
-headers = {
-  'Accept' => 'application/json'
-}
-
-result = RestClient.get 'https://api.mod.io/v1/games/{game-id}/mods/{mod-id}',
-  params: {
-  'api_key' => 'string'
-}, headers: headers
-
-p JSON.parse(result)
-```
-
 ```python
 import requests
 headers = {
@@ -1537,7 +1454,7 @@ System.out.println(response.toString());
 
 Get a mod. Successful request will return a single [Mod Object](#mod-object).
 
-> Example responses
+> Example response
 
 ```json
 {
@@ -1634,7 +1551,7 @@ apiKey, oauth2 ( Scopes: read )
 
 ## Add Mod
 
-> Code samples
+> Example request
 
 ```shell
 # You can also use wget
@@ -1697,23 +1614,6 @@ fetch('https://api.mod.io/v1/games/{game-id}/mods',
 });
 ```
 
-```ruby
-require 'rest-client'
-require 'json'
-
-headers = {
-  'Authorization' => 'Bearer YourAccessToken',
-  'Content-Type' => 'multipart/form-data',
-  'Accept' => 'application/json'
-}
-
-result = RestClient.post 'https://api.mod.io/v1/games/{game-id}/mods',
-  params: {
-  }, headers: headers
-
-p JSON.parse(result)
-```
-
 ```python
 import requests
 headers = {
@@ -1755,13 +1655,13 @@ Add a mod. Successful request will return the newly created [Mod Object](#mod-ob
      name_id|string||URL path for the mod on mod.io.  If no `name_id` is specified the `name` will be used. For example: _'Stellaris Shader Mod'_ will become _'stellaris-shader-mod'_. Cannot exceed 80 characters.
      summary|string|true|Summary for your mod, giving a brief overview of what it's about. Cannot exceed 250 characters.
      description|string||Detailed description for your mod, which can include details such as 'About', 'Features', 'Install Instructions', 'FAQ', etc. HTML supported and encouraged.
-     homepage|string|true|Official homepage for your mod. Must be a valid URL.
+     homepage|string||Official homepage for your mod. Must be a valid URL.
      stock|integer||Artificially limit the amount of times the mod can be subscribed too.
      modfile|integer||Unique id of the [Modfile Object](#modfile-object) to be labelled as the current release.
      metadata_blob|string||Metadata stored by the game developer. Metadata can also be stored as searchable [key value pairs](#metadata).
      tags|string[]||An array of strings that represent what the mod has been tagged as. Only tags that are supported by the parent game can be applied. To determine what tags are eligible, see the tags values within 'Tag Option' column on the parent [Game Object](#game-object).
 
-> Example responses
+> Example response
 
 ```json
 {
@@ -1864,7 +1764,7 @@ oauth2 ( Scopes: write )
 
 ## Edit Mod
 
-> Code samples
+> Example request
 
 ```shell
 # You can also use wget
@@ -1927,23 +1827,6 @@ fetch('https://api.mod.io/v1/games/{game-id}/mods/{mod-id}',
 });
 ```
 
-```ruby
-require 'rest-client'
-require 'json'
-
-headers = {
-  'Authorization' => 'Bearer YourAccessToken',
-  'Content-Type' => 'application/x-www-form-urlencoded',
-  'Accept' => 'application/json'
-}
-
-result = RestClient.put 'https://api.mod.io/v1/games/{game-id}/mods/{mod-id}',
-  params: {
-  }, headers: headers
-
-p JSON.parse(result)
-```
-
 ```python
 import requests
 headers = {
@@ -1976,7 +1859,7 @@ System.out.println(response.toString());
 ```
 `PUT /games/{game-id}/mods/{mod-id}`
 
-Edit details for a mod. If you want to update the `logo` or media associated with this mod, you need to use the [Add Mod Media](#add-mod-media) endpoint. The same applies to [Mod Files](#add-modfile), [Metadata Key Value Pairs](#add-mod-kvp-metadata) and [Dependencies](#add-mod-dependencies) which are all managed via other endpoints. Successful request will return the updated [Mod Object](#mod-object).<br><br>__NOTE:__ If the `modfile` parameter is successfully changed, a __MODFILE_UPDATE__ event will be fired.
+Edit details for a mod. If you want to update the `logo` or media associated with this mod, you need to use the [Add Mod Media](#add-mod-media) endpoint. The same applies to [Mod Files](#add-modfile), [Metadata Key Value Pairs](#add-mod-kvp-metadata) and [Dependencies](#add-mod-dependencies) which are all managed via other endpoints. Successful request will return the updated [Mod Object](#mod-object).<br><br>__NOTE:__ If the `modfile` parameter is successfully changed, a [__MODFILE_UPDATE__ event](#get-all-mod-activity) will be fired, so game clients know there is an update available for this mod.
      
      Parameter|Type|Required|Description
      ---|---|---|---|
@@ -1990,7 +1873,7 @@ Edit details for a mod. If you want to update the `logo` or media associated wit
      metadata_blob|string||Metadata stored by the game developer. Metadata can also be stored as searchable [key value pairs](#metadata).
      status|string||__Game Administrators Only__. Activate an un-authorized or deleted mod. The mod must have at least one uploaded `modfile` to be activated. Ideal for restoring mods that have been soft-deleted. For mod deletion, use the [Delete Mod](#delete-mod) endpoint. Using either of the fields supplied below will allow the mod to be returned in requests.<br><br>__auth__ = Authorize the mod<br>__archive__ = Label as out of date/not compatible
 
-> Example responses
+> Example response
 
 ```json
 {
@@ -2087,7 +1970,7 @@ oauth2 ( Scopes: write )
 
 ## Delete Mod
 
-> Code samples
+> Example request
 
 ```shell
 # You can also use wget
@@ -2150,23 +2033,6 @@ fetch('https://api.mod.io/v1/games/{game-id}/mods/{mod-id}',
 });
 ```
 
-```ruby
-require 'rest-client'
-require 'json'
-
-headers = {
-  'Authorization' => 'Bearer YourAccessToken',
-  'Content-Type' => 'application/x-www-form-urlencoded',
-  'Accept' => 'application/json'
-}
-
-result = RestClient.delete 'https://api.mod.io/v1/games/{game-id}/mods/{mod-id}',
-  params: {
-  }, headers: headers
-
-p JSON.parse(result)
-```
-
 ```python
 import requests
 headers = {
@@ -2201,7 +2067,7 @@ System.out.println(response.toString());
 
 Delete a mod profile. Successful request will return `204 No Content` and fire a __MOD_VISIBILITY_CHANGE__ event.<br><br>__NOTE:__ This will close the mod profile which means it cannot be viewed or retrieved via API requests but will still exist in-case you choose to restore it at a later date. If you believe a mod should be permanently removed please [contact us](mailto:support@mod.io).
 
-> Example responses
+> Example response
 
 ```json
  204 No Content 
@@ -2221,7 +2087,7 @@ oauth2 ( Scopes: write )
 
 ## Get All Modfiles
 
-> Code samples
+> Example request
 
 ```shell
 # You can also use wget
@@ -2276,22 +2142,6 @@ fetch('https://api.mod.io/v1/games/{game-id}/mods/{mod-id}/files?api_key=YourApi
 });
 ```
 
-```ruby
-require 'rest-client'
-require 'json'
-
-headers = {
-  'Accept' => 'application/json'
-}
-
-result = RestClient.get 'https://api.mod.io/v1/games/{game-id}/mods/{mod-id}/files',
-  params: {
-  'api_key' => 'string'
-}, headers: headers
-
-p JSON.parse(result)
-```
-
 ```python
 import requests
 headers = {
@@ -2338,7 +2188,7 @@ Get all files that are published for the corresponding mod. Successful request w
      version|string|Release version this file represents.
      changelog|string|Changelog for the file.
 
-> Example responses
+> Example response
 
 ```json
 {
@@ -2382,7 +2232,7 @@ apiKey, oauth2 ( Scopes: read )
 
 ## Get Modfile
 
-> Code samples
+> Example request
 
 ```shell
 # You can also use wget
@@ -2437,22 +2287,6 @@ fetch('https://api.mod.io/v1/games/{game-id}/mods/{mod-id}/files/{file-id}?api_k
 });
 ```
 
-```ruby
-require 'rest-client'
-require 'json'
-
-headers = {
-  'Accept' => 'application/json'
-}
-
-result = RestClient.get 'https://api.mod.io/v1/games/{game-id}/mods/{mod-id}/files/{file-id}',
-  params: {
-  'api_key' => 'string'
-}, headers: headers
-
-p JSON.parse(result)
-```
-
 ```python
 import requests
 headers = {
@@ -2485,7 +2319,7 @@ System.out.println(response.toString());
 
 Get a file. Successful request will return a single [Modfile Object](#modfile_object).<br><br>__NOTE:__ For security the `download_url` field includes a verification hash. This URL will automatically expire after a certain period of time, so if resuming a download you may need to request a new URL.
 
-> Example responses
+> Example response
 
 ```json
 {
@@ -2519,7 +2353,7 @@ apiKey, oauth2 ( Scopes: read )
 
 ## Add Modfile
 
-> Code samples
+> Example request
 
 ```shell
 # You can also use wget
@@ -2582,23 +2416,6 @@ fetch('https://api.mod.io/v1/games/{game-id}/mods/{mod-id}/files',
 });
 ```
 
-```ruby
-require 'rest-client'
-require 'json'
-
-headers = {
-  'Authorization' => 'Bearer YourAccessToken',
-  'Content-Type' => 'multipart/form-data',
-  'Accept' => 'application/json'
-}
-
-result = RestClient.post 'https://api.mod.io/v1/games/{game-id}/mods/{mod-id}/files',
-  params: {
-  }, headers: headers
-
-p JSON.parse(result)
-```
-
 ```python
 import requests
 headers = {
@@ -2638,10 +2455,10 @@ Upload a file for the corresponding mod. Successful request will return the newl
      filedata|file|true|The binary file for the release. For compatibility you should ZIP the base folder of your mod, or if it is a collection of files which live in a pre-existing game folder, you should ZIP those files. Your file must meet the following conditions:<br><br>- File must be __zipped__ and cannot exceed 10GB in filesize<br>- Mods which span multiple game directories are not supported unless the game manages this<br>- Mods which overwrite files are not supported unless the game manages this
      version|string||Version of the file release.
      changelog|string||Changelog of this release.
-     active|boolean||Label this upload as the current release, this will change the *modfile* field on the parent mod to the *id* field of this file after upload.
+     active|boolean||_Default value is true._ Label this upload as the current release, this will change the _modfile_ field on the parent mod to the _id_ of this file after upload.<br><br>__NOTE:__ If the _active_ parameter is _true_, a [__MODFILE_UPDATE__ event](#get-all-mod-activity) will be fired, so game clients know there is an update available for this mod.
      filehash|string||MD5 of the submitted file. When supplied the MD5 will be compared against the uploaded files MD5. If they don't match a `422 Unprocessible Entity` error will be returned.
 
-> Example responses
+> Example response
 
 ```json
 {
@@ -2681,7 +2498,7 @@ oauth2 ( Scopes: write )
 
 ## Edit Modfile
 
-> Code samples
+> Example request
 
 ```shell
 # You can also use wget
@@ -2744,23 +2561,6 @@ fetch('https://api.mod.io/v1/games/{game-id}/mods/{mod-id}/files/{file-id}',
 });
 ```
 
-```ruby
-require 'rest-client'
-require 'json'
-
-headers = {
-  'Authorization' => 'Bearer YourAccessToken',
-  'Content-Type' => 'application/x-www-form-urlencoded',
-  'Accept' => 'application/json'
-}
-
-result = RestClient.put 'https://api.mod.io/v1/games/{game-id}/mods/{mod-id}/files/{file-id}',
-  params: {
-  }, headers: headers
-
-p JSON.parse(result)
-```
-
 ```python
 import requests
 headers = {
@@ -2799,9 +2599,9 @@ Edit the details of a published file. If you want to update fields other than th
      ---|---|---|---|
      version|string||Version of the file release.
      changelog|string||Changelog of this release.
-     active|boolean||Label this upload as the current release, this will change the *modfile* field on the parent mod to the *id* field of this file after upload.
+     active|boolean||_Default value is true._ Label this upload as the current release, this will change the _modfile_ field on the parent mod to the _id_ of this file after upload.<br><br>__NOTE:__ If the _active_ parameter causes the parent mods _modfile_ parameter to change, a [__MODFILE_UPDATE__ event](#get-all-mod-activity) will be fired, so game clients know there is an update available for this mod.
 
-> Example responses
+> Example response
 
 ```json
 {
@@ -2837,7 +2637,7 @@ oauth2 ( Scopes: write )
 
 ## Add Game Media
 
-> Code samples
+> Example request
 
 ```shell
 # You can also use wget
@@ -2900,23 +2700,6 @@ fetch('https://api.mod.io/v1/games/{game-id}/media',
 });
 ```
 
-```ruby
-require 'rest-client'
-require 'json'
-
-headers = {
-  'Authorization' => 'Bearer YourAccessToken',
-  'Content-Type' => 'multipart/form-data',
-  'Accept' => 'application/json'
-}
-
-result = RestClient.post 'https://api.mod.io/v1/games/{game-id}/media',
-  params: {
-  }, headers: headers
-
-p JSON.parse(result)
-```
-
 ```python
 import requests
 headers = {
@@ -2957,7 +2740,7 @@ Upload new media to a game. Any request you make to this endpoint *should* conta
      icon|file||Image file which will represent your games icon. Must be gif, jpg or png format and cannot exceed 1MB in filesize. Dimensions must be at least 64x64 and a transparent png that works on a colorful background is recommended. mod.io will use this icon to create three thumbnails with the dimensions of 64x64, 128x128 and 256x256.
      header|file||Image file which will represent your games header. Must be gif, jpg or png format and cannot exceed 256KB in filesize. Dimensions of 400x100 and a light transparent png that works on a dark background is recommended.
 
-> Example responses
+> Example response
 
 ```json
 {
@@ -2978,7 +2761,7 @@ oauth2 ( Scopes: write )
 
 ## Add Mod Media
 
-> Code samples
+> Example request
 
 ```shell
 # You can also use wget
@@ -3041,23 +2824,6 @@ fetch('https://api.mod.io/v1/games/{game-id}/mods/{mod-id}/media',
 });
 ```
 
-```ruby
-require 'rest-client'
-require 'json'
-
-headers = {
-  'Authorization' => 'Bearer YourAccessToken',
-  'Content-Type' => 'multipart/form-data',
-  'Accept' => 'application/json'
-}
-
-result = RestClient.post 'https://api.mod.io/v1/games/{game-id}/mods/{mod-id}/media',
-  params: {
-  }, headers: headers
-
-p JSON.parse(result)
-```
-
 ```python
 import requests
 headers = {
@@ -3099,7 +2865,7 @@ This endpoint is very flexible and will add any images posted to the mods galler
      youtube|string[]||Full Youtube link(s) you want to add - example 'https://www.youtube.com/watch?v=IGVZOLV9SPo'
      sketchfab|string[]||Full Sketchfab link(s) you want to add - example 'https://sketchfab.com/models/71f04e390ff54e5f8d9a51b4e1caab7e'
 
-> Example responses
+> Example response
 
 ```json
 {
@@ -3126,7 +2892,7 @@ oauth2 ( Scopes: write )
 
 ## Delete Mod Media
 
-> Code samples
+> Example request
 
 ```shell
 # You can also use wget
@@ -3189,23 +2955,6 @@ fetch('https://api.mod.io/v1/games/{game-id}/mods/{mod-id}/media',
 });
 ```
 
-```ruby
-require 'rest-client'
-require 'json'
-
-headers = {
-  'Authorization' => 'Bearer YourAccessToken',
-  'Content-Type' => 'application/x-www-form-urlencoded',
-  'Accept' => 'application/json'
-}
-
-result = RestClient.delete 'https://api.mod.io/v1/games/{game-id}/mods/{mod-id}/media',
-  params: {
-  }, headers: headers
-
-p JSON.parse(result)
-```
-
 ```python
 import requests
 headers = {
@@ -3246,7 +2995,7 @@ Delete images, sketchfab or youtube links from a mod profile. Successful request
      youtube|string[]||Full Youtube link(s) you want to delete - example 'https://www.youtube.com/watch?v=IGVZOLV9SPo'.
      sketchfab|string[]||Full Sketchfab link(s) you want to delete - example 'https://sketchfab.com/models/71f04e390ff54e5f8d9a51b4e1caab7e'.
 
-> Example responses
+> Example response
 
 ```json
  204 No Content 
@@ -3266,7 +3015,7 @@ oauth2 ( Scopes: write )
 
 ## Subscribe To Mod
 
-> Code samples
+> Example request
 
 ```shell
 # You can also use wget
@@ -3329,23 +3078,6 @@ fetch('https://api.mod.io/v1/games/{game-id}/mods/{mod-id}/subscribe',
 });
 ```
 
-```ruby
-require 'rest-client'
-require 'json'
-
-headers = {
-  'Authorization' => 'Bearer YourAccessToken',
-  'Content-Type' => 'application/x-www-form-urlencoded',
-  'Accept' => 'application/json'
-}
-
-result = RestClient.post 'https://api.mod.io/v1/games/{game-id}/mods/{mod-id}/subscribe',
-  params: {
-  }, headers: headers
-
-p JSON.parse(result)
-```
-
 ```python
 import requests
 headers = {
@@ -3380,7 +3112,7 @@ System.out.println(response.toString());
 
 Subscribe the _authenticated user_ to a corresponding mod. No body parameters are required for this action. Successful request will return the [Mod Object](#mod-object) of the newly subscribed mod.<br><br>__NOTE:__ Users can subscribe to mods via mod.io, we recommend you poll the [Get All Mod Activity](#get-all-mod-activity) endpoint to keep a users mods collection up to date.
 
-> Example responses
+> Example response
 
 ```json
 {
@@ -3477,7 +3209,7 @@ oauth2 ( Scopes: write )
 
 ## Unsubscribe To Mod
 
-> Code samples
+> Example request
 
 ```shell
 # You can also use wget
@@ -3540,23 +3272,6 @@ fetch('https://api.mod.io/v1/games/{game-id}/mods/{mod-id}/subscribe',
 });
 ```
 
-```ruby
-require 'rest-client'
-require 'json'
-
-headers = {
-  'Authorization' => 'Bearer YourAccessToken',
-  'Content-Type' => 'application/x-www-form-urlencoded',
-  'Accept' => 'application/json'
-}
-
-result = RestClient.delete 'https://api.mod.io/v1/games/{game-id}/mods/{mod-id}/subscribe',
-  params: {
-  }, headers: headers
-
-p JSON.parse(result)
-```
-
 ```python
 import requests
 headers = {
@@ -3591,7 +3306,7 @@ System.out.println(response.toString());
 
 Unsubscribe the _authenticated user_ from the corresponding mod. No body parameters are required for this action. Successful request will return `204 No Content`.<br><br>__NOTE:__ Users can unsubscribe from mods via mod.io, we recommend you poll the [Get All Mod Activity](#get-all-mod-activity) endpoint to keep a users mods collection up to date.
 
-> Example responses
+> Example response
 
 ```json
  204 No Content 
@@ -3611,7 +3326,7 @@ oauth2 ( Scopes: write )
 
 ## Get Game Activity
 
-> Code samples
+> Example request
 
 ```shell
 # You can also use wget
@@ -3666,22 +3381,6 @@ fetch('https://api.mod.io/v1/games/{game-id}/activity?api_key=YourApiKey',
 });
 ```
 
-```ruby
-require 'rest-client'
-require 'json'
-
-headers = {
-  'Accept' => 'application/json'
-}
-
-result = RestClient.get 'https://api.mod.io/v1/games/{game-id}/activity',
-  params: {
-  'api_key' => 'string'
-}, headers: headers
-
-p JSON.parse(result)
-```
-
 ```python
 import requests
 headers = {
@@ -3722,7 +3421,7 @@ Get the activity log for a game, showing changes made sorted by latest activity 
      date_updated|integer|Unix timestamp of date game was updated.
      event|string|Type of change that occurred:<br><br>__GAME_UPDATE__ = Update event<br>__GAME_VISIBILITY_CHANGE__ = Game has been set to live, or hidden
 
-> Example responses
+> Example response
 
 ```json
 {
@@ -3763,7 +3462,7 @@ apiKey, oauth2 ( Scopes: read )
 
 ## Get Mod Activity
 
-> Code samples
+> Example request
 
 ```shell
 # You can also use wget
@@ -3818,22 +3517,6 @@ fetch('https://api.mod.io/v1/games/{game-id}/mods/{mod-id}/activity?api_key=Your
 });
 ```
 
-```ruby
-require 'rest-client'
-require 'json'
-
-headers = {
-  'Accept' => 'application/json'
-}
-
-result = RestClient.get 'https://api.mod.io/v1/games/{game-id}/mods/{mod-id}/activity',
-  params: {
-  'api_key' => 'string'
-}, headers: headers
-
-p JSON.parse(result)
-```
-
 ```python
 import requests
 headers = {
@@ -3874,7 +3557,7 @@ Get the activity log for a mod, showing changes made sorted by latest activity f
      date_updated|integer|Unix timestamp of date mod was updated.
      event|string|Type of change that occurred:<br><br>__MOD_UPDATE__ = Update event<br>__MODFILE_UPDATE__ = Primary file changed<br>__MOD_VISIBILITY_CHANGE__ = Mod has been set to live, or hidden<br>__MOD_LIVE__ = When the mod went public for the first time
 
-> Example responses
+> Example response
 
 ```json
 {
@@ -3915,7 +3598,7 @@ apiKey, oauth2 ( Scopes: read )
 
 ## Get All Mod Activity
 
-> Code samples
+> Example request
 
 ```shell
 # You can also use wget
@@ -3970,22 +3653,6 @@ fetch('https://api.mod.io/v1/games/{game-id}/mods/activity?api_key=YourApiKey',
 });
 ```
 
-```ruby
-require 'rest-client'
-require 'json'
-
-headers = {
-  'Accept' => 'application/json'
-}
-
-result = RestClient.get 'https://api.mod.io/v1/games/{game-id}/mods/activity',
-  params: {
-  'api_key' => 'string'
-}, headers: headers
-
-p JSON.parse(result)
-```
-
 ```python
 import requests
 headers = {
@@ -4028,7 +3695,7 @@ Get all mods activity for the corresponding game sorted by latest activity first
      latest|boolean|_Default value is true_. Returns only the latest unique events, which is useful for checking if the primary `modfile` has changed.
      subscribed|boolean|_Default value is false_. Returns only events connected to mods the __authenticated user__ is subscribed to, which is useful for keeping the users mods up-to-date.
 
-> Example responses
+> Example response
 
 ```json
 {
@@ -4071,7 +3738,7 @@ apiKey, oauth2 ( Scopes: read )
 
 ## Get All Game Tag Options
 
-> Code samples
+> Example request
 
 ```shell
 # You can also use wget
@@ -4126,22 +3793,6 @@ fetch('https://api.mod.io/v1/games/{game-id}/tags?api_key=YourApiKey',
 });
 ```
 
-```ruby
-require 'rest-client'
-require 'json'
-
-headers = {
-  'Accept' => 'application/json'
-}
-
-result = RestClient.get 'https://api.mod.io/v1/games/{game-id}/tags',
-  params: {
-  'api_key' => 'string'
-}, headers: headers
-
-p JSON.parse(result)
-```
-
 ```python
 import requests
 headers = {
@@ -4174,7 +3825,7 @@ System.out.println(response.toString());
 
 Get all tags for the corresponding game, that can be applied to any of its mods. Successful request will return an array of [Game Tag Option Objects](#game-tag-option-object).
 
-> Example responses
+> Example response
 
 ```json
 {
@@ -4185,7 +3836,7 @@ Get all tags for the corresponding game, that can be applied to any of its mods.
       "tags": [
         "Horror"
       ],
-      "admin_only": 0
+      "hidden": 0
     },
     {
         ...
@@ -4209,7 +3860,7 @@ apiKey, oauth2 ( Scopes: read )
 
 ## Add Game Tag Option
 
-> Code samples
+> Example request
 
 ```shell
 # You can also use wget
@@ -4272,23 +3923,6 @@ fetch('https://api.mod.io/v1/games/{game-id}/tags',
 });
 ```
 
-```ruby
-require 'rest-client'
-require 'json'
-
-headers = {
-  'Authorization' => 'Bearer YourAccessToken',
-  'Content-Type' => 'application/x-www-form-urlencoded',
-  'Accept' => 'application/json'
-}
-
-result = RestClient.post 'https://api.mod.io/v1/games/{game-id}/tags',
-  params: {
-  }, headers: headers
-
-p JSON.parse(result)
-```
-
 ```python
 import requests
 headers = {
@@ -4325,13 +3959,16 @@ Add tags which mods can apply to their profiles. Successful request will return 
      
      Tagging is a critical feature that powers the searching and filtering of mods for your game, as well as allowing you to control how mods are installed and played. For example you might enforce mods to be a particular type (map, model, script, save, effects, blueprint), which dictates how you install it. You may use tags to specify what the mod replaces (building, prop, car, boat, character). Or perhaps the tags describe the theme of the mod (fun, scenic, realism). The implementation is up to you, but the more detail you support the better filtering and searching becomes. If you need to store more advanced information, you can also use [Metadata Key Value Pairs](#metadata).
      
-     __NOTE:__ You can also manage tags by editing your games profile on the mod.io website. This is the recommended approach.
+     __NOTE:__ You can also manage tags by editing [your games profile](https://mod.io/games) on the mod.io website. This is the recommended approach.
      
      Parameter|Type|Required|Description
      ---|---|---|---|
-     categoryname*|string[]|true|Array of strings representing the tag options. The parameter name will be the _name of the tag group_, allowing you to add multiple groups each request. For example:<br><br>You may want to add a 'Difficulty' group with the tags 'Easy', 'Medium' and 'Hard' as the options to select from. To add this, your request would supply a parameter titled 'Difficulty' which is an array containing 3 values.
+     name|string|true|Name of the tag group, for example you may want to have 'Difficulty' as the name with 'Easy', 'Medium' and 'Hard' as the tag values.<br><br>__NOTE:__ If the tag name already exists, its parameters will be overwritten and new tags will be added to the group. There is no tag edit option, only delete.
+     type|string|true|Determines whether you allow users to only select one tag (dropdown) or multiple tags (checkbox)<br><br>__dropdown__ = Mods can select only one tag from this group, dropdown menu shown on site profile.<br>__checkboxes__ = Mods can select multiple tags from this group, checkboxes shown on site profile.
+     hidden|bool||This group of tags should be hidden from users and mod developers. Useful for games to tag special functionality, to filter on and use behind the scenes. You can also use [Metadata Key Value Pairs](#metadata) for more arbitary data.
+     tags|array|true|Array of tags mod creators can choose to apply to their profiles.
 
-> Example responses
+> Example response
 
 ```json
 {
@@ -4352,7 +3989,7 @@ oauth2 ( Scopes: write )
 
 ## Delete Game Tag Option
 
-> Code samples
+> Example request
 
 ```shell
 # You can also use wget
@@ -4415,23 +4052,6 @@ fetch('https://api.mod.io/v1/games/{game-id}/tags',
 });
 ```
 
-```ruby
-require 'rest-client'
-require 'json'
-
-headers = {
-  'Authorization' => 'Bearer YourAccessToken',
-  'Content-Type' => 'application/x-www-form-urlencoded',
-  'Accept' => 'application/json'
-}
-
-result = RestClient.delete 'https://api.mod.io/v1/games/{game-id}/tags',
-  params: {
-  }, headers: headers
-
-p JSON.parse(result)
-```
-
 ```python
 import requests
 headers = {
@@ -4472,7 +4092,7 @@ Delete an entire group of tags or individual tags. Successful request will retur
      ---|---|---|---|
      categoryname*|string[]|true|Array of strings representing the tag options to delete. An empty array will delete the entire group. The parameter name is the name of the group you are deleting tag options from. For example:<br><br>Assume you have a group of tags titled 'Difficulty' and you want to remove the tag option 'Hard' from it, your request would contain a parameter called 'Difficulty' which is an array that contains _only_ the value 'Hard'. If you want to delete an entire group, you would supply an empty array.
 
-> Example responses
+> Example response
 
 ```json
  204 No Content 
@@ -4490,7 +4110,7 @@ oauth2 ( Scopes: write )
 
 ## Get All Mod Tags
 
-> Code samples
+> Example request
 
 ```shell
 # You can also use wget
@@ -4545,22 +4165,6 @@ fetch('https://api.mod.io/v1/games/{game-id}/mods/{mod-id}/tags?api_key=YourApiK
 });
 ```
 
-```ruby
-require 'rest-client'
-require 'json'
-
-headers = {
-  'Accept' => 'application/json'
-}
-
-result = RestClient.get 'https://api.mod.io/v1/games/{game-id}/mods/{mod-id}/tags',
-  params: {
-  'api_key' => 'string'
-}, headers: headers
-
-p JSON.parse(result)
-```
-
 ```python
 import requests
 headers = {
@@ -4598,7 +4202,7 @@ Get all tags for the corresponding mod. Successful request will return an array 
      date_added|integer|Unix timestamp of date tag was added.
      tag|string|String representation of the tag. You can check the eligible tags on the parent game object to determine all possible values for this field.
 
-> Example responses
+> Example response
 
 ```json
 {
@@ -4629,7 +4233,7 @@ apiKey, oauth2 ( Scopes: read )
 
 ## Add Mod Tag
 
-> Code samples
+> Example request
 
 ```shell
 # You can also use wget
@@ -4692,23 +4296,6 @@ fetch('https://api.mod.io/v1/games/{game-id}/mods/{mod-id}/tags',
 });
 ```
 
-```ruby
-require 'rest-client'
-require 'json'
-
-headers = {
-  'Authorization' => 'Bearer YourAccessToken',
-  'Content-Type' => 'application/x-www-form-urlencoded',
-  'Accept' => 'application/json'
-}
-
-result = RestClient.post 'https://api.mod.io/v1/games/{game-id}/mods/{mod-id}/tags',
-  params: {
-  }, headers: headers
-
-p JSON.parse(result)
-```
-
 ```python
 import requests
 headers = {
@@ -4741,13 +4328,13 @@ System.out.println(response.toString());
 ```
 `POST /games/{game-id}/mods/{mod-id}/tags`
 
-Add tags to a mod's profile. You can only add tags allowed by the parent game, which are listed in the `tag_option` column in the parent game's object. Successful request will return [Message Object](#message-object).
+Add tags to a mod's profile. You can only add tags allowed by the parent game, which are listed in the `tag_option` column in the [Game's Object](#game-object). Successful request will return [Message Object](#message-object).
      
      Parameter|Type|Required|Description
      ---|---|---|---|
      tags|string[]|true|An array of tags to add. For example: If the parent game has a 'Theme' tag group with 'Fantasy', 'Sci-fi', 'Western' and 'Realistic' as the options, you could add 'Fantasy' and 'Sci-fi' to the `tags` array in your request. Provided the tags are valid you can add any number.
 
-> Example responses
+> Example response
 
 ```json
 {
@@ -4768,7 +4355,7 @@ oauth2 ( Scopes: write )
 
 ## Delete Mod Tag
 
-> Code samples
+> Example request
 
 ```shell
 # You can also use wget
@@ -4831,23 +4418,6 @@ fetch('https://api.mod.io/v1/games/{game-id}/mods/{mod-id}/tags',
 });
 ```
 
-```ruby
-require 'rest-client'
-require 'json'
-
-headers = {
-  'Authorization' => 'Bearer YourAccessToken',
-  'Content-Type' => 'application/x-www-form-urlencoded',
-  'Accept' => 'application/json'
-}
-
-result = RestClient.delete 'https://api.mod.io/v1/games/{game-id}/mods/{mod-id}/tags',
-  params: {
-  }, headers: headers
-
-p JSON.parse(result)
-```
-
 ```python
 import requests
 headers = {
@@ -4886,7 +4456,7 @@ Delete tags from a mod's profile. Deleting tags is identical to adding tags exce
      ---|---|---|---|
      tags|string[]|true|An array of tags to delete.
 
-> Example responses
+> Example response
 
 ```json
  204 No Content 
@@ -4906,7 +4476,7 @@ oauth2 ( Scopes: write )
 
 ## Add Mod Rating
 
-> Code samples
+> Example request
 
 ```shell
 # You can also use wget
@@ -4969,23 +4539,6 @@ fetch('https://api.mod.io/v1/games/{game-id}/mods/{mod-id}/ratings',
 });
 ```
 
-```ruby
-require 'rest-client'
-require 'json'
-
-headers = {
-  'Authorization' => 'Bearer YourAccessToken',
-  'Content-Type' => 'application/x-www-form-urlencoded',
-  'Accept' => 'application/json'
-}
-
-result = RestClient.post 'https://api.mod.io/v1/games/{game-id}/mods/{mod-id}/ratings',
-  params: {
-  }, headers: headers
-
-p JSON.parse(result)
-```
-
 ```python
 import requests
 headers = {
@@ -5026,7 +4579,7 @@ Submit a positive or negative rating for a mod. Each user can supply only one ra
      ---|---|---|---|
      rating|integer|true|The _authenticated users_ mod rating:<br><br>__1__ = Positive rating (thumbs up)<br>__-1__ = Negative rating (thumbs down)
 
-> Example responses
+> Example response
 
 ```json
 {
@@ -5049,7 +4602,7 @@ oauth2 ( Scopes: write )
 
 ## Get All Mod KVP Metadata
 
-> Code samples
+> Example request
 
 ```shell
 # You can also use wget
@@ -5104,22 +4657,6 @@ fetch('https://api.mod.io/v1/games/{game-id}/mods/{mod-id}/metadatakvp?api_key=Y
 });
 ```
 
-```ruby
-require 'rest-client'
-require 'json'
-
-headers = {
-  'Accept' => 'application/json'
-}
-
-result = RestClient.get 'https://api.mod.io/v1/games/{game-id}/mods/{mod-id}/metadatakvp',
-  params: {
-  'api_key' => 'string'
-}, headers: headers
-
-p JSON.parse(result)
-```
-
 ```python
 import requests
 headers = {
@@ -5152,7 +4689,7 @@ System.out.println(response.toString());
 
 Get all metadata stored by the game developer for this mod as searchable key value pairs. Successful request will return an array of [Metadata KVP Objects](#get-all-mod-kvp).<br><br>__NOTE:__ Metadata can also be stored as `metadata_blob` in the [Mod Object](#mod-object).
 
-> Example responses
+> Example response
 
 ```json
 {
@@ -5183,7 +4720,7 @@ apiKey, oauth2 ( Scopes: read )
 
 ## Add Mod KVP Metadata
 
-> Code samples
+> Example request
 
 ```shell
 # You can also use wget
@@ -5246,23 +4783,6 @@ fetch('https://api.mod.io/v1/games/{game-id}/mods/{mod-id}/metadatakvp',
 });
 ```
 
-```ruby
-require 'rest-client'
-require 'json'
-
-headers = {
-  'Authorization' => 'Bearer YourAccessToken',
-  'Content-Type' => 'application/x-www-form-urlencoded',
-  'Accept' => 'application/json'
-}
-
-result = RestClient.post 'https://api.mod.io/v1/games/{game-id}/mods/{mod-id}/metadatakvp',
-  params: {
-  }, headers: headers
-
-p JSON.parse(result)
-```
-
 ```python
 import requests
 headers = {
@@ -5301,7 +4821,7 @@ Add metadata for this mod as searchable key value pairs. Metadata is useful to d
      ---|---|---|---|
      metadata|string[]|true|Array containing one or more key value pairs where the the key and value are separated by a colon ':' (if the string contains multiple colons the split will occur on the first matched, i.e. pistol-dmg:800:400 will become key: pistol-dmg, value: 800:400). __NOTE:__<br><br>- Keys support alphanumeric, '_' and '-' characters only.<br>- Keys can map to multiple values (1-to-many relationship).<br>- Keys and values cannot exceed 255 characters in length.<br>- Key value pairs are searchable by exact match only.
 
-> Example responses
+> Example response
 
 ```json
 {
@@ -5322,7 +4842,7 @@ oauth2 ( Scopes: write )
 
 ## Delete Mod KVP Metadata
 
-> Code samples
+> Example request
 
 ```shell
 # You can also use wget
@@ -5385,23 +4905,6 @@ fetch('https://api.mod.io/v1/games/{game-id}/mods/{mod-id}/metadatakvp',
 });
 ```
 
-```ruby
-require 'rest-client'
-require 'json'
-
-headers = {
-  'Authorization' => 'Bearer YourAccessToken',
-  'Content-Type' => 'application/x-www-form-urlencoded',
-  'Accept' => 'application/json'
-}
-
-result = RestClient.delete 'https://api.mod.io/v1/games/{game-id}/mods/{mod-id}/metadatakvp',
-  params: {
-  }, headers: headers
-
-p JSON.parse(result)
-```
-
 ```python
 import requests
 headers = {
@@ -5440,7 +4943,7 @@ Delete key value pairs metadata defined for this mod. Successful request will re
      ---|---|---|---|
      metadata|string[]|true|Array containing one or more key value pairs to delete where the the key and value are separated by a colon ':'. __NOTE:__ If an array value contains only the key and no colon ':', _all_ metadata with that key will be removed.
 
-> Example responses
+> Example response
 
 ```json
  204 No Content 
@@ -5460,7 +4963,7 @@ oauth2 ( Scopes: write )
 
 ## Get All Mod Dependencies
 
-> Code samples
+> Example request
 
 ```shell
 # You can also use wget
@@ -5515,22 +5018,6 @@ fetch('https://api.mod.io/v1/games/{game-id}/mods/{mod-id}/dependencies?api_key=
 });
 ```
 
-```ruby
-require 'rest-client'
-require 'json'
-
-headers = {
-  'Accept' => 'application/json'
-}
-
-result = RestClient.get 'https://api.mod.io/v1/games/{game-id}/mods/{mod-id}/dependencies',
-  params: {
-  'api_key' => 'string'
-}, headers: headers
-
-p JSON.parse(result)
-```
-
 ```python
 import requests
 headers = {
@@ -5565,7 +5052,7 @@ Get all dependencies the chosen mod has selected. This is useful if a mod requir
      
      __NOTE:__ Some developers might select _soft_ dependencies to promote or credit other mods. We advise against this but it is possible to do.
 
-> Example responses
+> Example response
 
 ```json
 {
@@ -5596,7 +5083,7 @@ apiKey, oauth2 ( Scopes: read )
 
 ## Add Mod Dependencies
 
-> Code samples
+> Example request
 
 ```shell
 # You can also use wget
@@ -5659,23 +5146,6 @@ fetch('https://api.mod.io/v1/games/{game-id}/mods/{mod-id}/dependencies',
 });
 ```
 
-```ruby
-require 'rest-client'
-require 'json'
-
-headers = {
-  'Authorization' => 'Bearer YourAccessToken',
-  'Content-Type' => 'application/x-www-form-urlencoded',
-  'Accept' => 'application/json'
-}
-
-result = RestClient.post 'https://api.mod.io/v1/games/{game-id}/mods/{mod-id}/dependencies',
-  params: {
-  }, headers: headers
-
-p JSON.parse(result)
-```
-
 ```python
 import requests
 headers = {
@@ -5716,7 +5186,7 @@ Add mod dependencies required by the corresponding mod. A dependency is a mod th
      ---|---|---|---|
      dependencies|integer[]|true|Array containing one or more mod id's that this mod is dependent on. Max of 5 dependencies per request.
 
-> Example responses
+> Example response
 
 ```json
 {
@@ -5737,7 +5207,7 @@ oauth2 ( Scopes: write )
 
 ## Delete Mod Dependencies
 
-> Code samples
+> Example request
 
 ```shell
 # You can also use wget
@@ -5800,23 +5270,6 @@ fetch('https://api.mod.io/v1/games/{game-id}/mods/{mod-id}/dependencies',
 });
 ```
 
-```ruby
-require 'rest-client'
-require 'json'
-
-headers = {
-  'Authorization' => 'Bearer YourAccessToken',
-  'Content-Type' => 'application/x-www-form-urlencoded',
-  'Accept' => 'application/json'
-}
-
-result = RestClient.delete 'https://api.mod.io/v1/games/{game-id}/mods/{mod-id}/dependencies',
-  params: {
-  }, headers: headers
-
-p JSON.parse(result)
-```
-
 ```python
 import requests
 headers = {
@@ -5855,7 +5308,7 @@ Delete mod dependencies the corresponding mod has selected. Successful request w
      ---|---|---|---|
      dependencies|integer[]|true|Array containing one or more mod id's that can be deleted as dependencies.
 
-> Example responses
+> Example response
 
 ```json
  204 No Content 
@@ -5875,7 +5328,7 @@ oauth2 ( Scopes: write )
 
 ## Get All Game Team Members
 
-> Code samples
+> Example request
 
 ```shell
 # You can also use wget
@@ -5930,22 +5383,6 @@ fetch('https://api.mod.io/v1/games/{game-id}/team?api_key=YourApiKey',
 });
 ```
 
-```ruby
-require 'rest-client'
-require 'json'
-
-headers = {
-  'Accept' => 'application/json'
-}
-
-result = RestClient.get 'https://api.mod.io/v1/games/{game-id}/team',
-  params: {
-  'api_key' => 'string'
-}, headers: headers
-
-p JSON.parse(result)
-```
-
 ```python
 import requests
 headers = {
@@ -5987,7 +5424,7 @@ Get all users that are part of a game team. Successful request will return an ar
      date_added|integer|Unix timestamp of the date the user was added to the team.
      position|string|Custom title given to the user in this team.
 
-> Example responses
+> Example response
 
 ```json
 {
@@ -6033,7 +5470,7 @@ apiKey, oauth2 ( Scopes: read )
 
 ## Get All Mod Team Members
 
-> Code samples
+> Example request
 
 ```shell
 # You can also use wget
@@ -6088,22 +5525,6 @@ fetch('https://api.mod.io/v1/games/{game-id}/mods/{mod-id}/team?api_key=YourApiK
 });
 ```
 
-```ruby
-require 'rest-client'
-require 'json'
-
-headers = {
-  'Accept' => 'application/json'
-}
-
-result = RestClient.get 'https://api.mod.io/v1/games/{game-id}/mods/{mod-id}/team',
-  params: {
-  'api_key' => 'string'
-}, headers: headers
-
-p JSON.parse(result)
-```
-
 ```python
 import requests
 headers = {
@@ -6145,7 +5566,7 @@ Get all users that are part of a mod team. Successful request will return an arr
      date_added|integer|Unix timestamp of the date the user was added to the team.
      position|string|Custom title given to the user in this team.
 
-> Example responses
+> Example response
 
 ```json
 {
@@ -6191,7 +5612,7 @@ apiKey, oauth2 ( Scopes: read )
 
 ## Add Game Team Member
 
-> Code samples
+> Example request
 
 ```shell
 # You can also use wget
@@ -6254,23 +5675,6 @@ fetch('https://api.mod.io/v1/games/{game-id}/team',
 });
 ```
 
-```ruby
-require 'rest-client'
-require 'json'
-
-headers = {
-  'Authorization' => 'Bearer YourAccessToken',
-  'Content-Type' => 'application/x-www-form-urlencoded',
-  'Accept' => 'application/json'
-}
-
-result = RestClient.post 'https://api.mod.io/v1/games/{game-id}/team',
-  params: {
-  }, headers: headers
-
-p JSON.parse(result)
-```
-
 ```python
 import requests
 headers = {
@@ -6309,9 +5713,9 @@ Add a user to a game team. Successful request will return [Message Object](#mess
      ---|---|---|---|
      user_id|integer|true|Unique id of the user you are adding to the team.
      level|integer|true|Level of permission the user will get:<br><br>__1__ = Moderator (can moderate content submitted)<br>__4__ = Statistics (moderator access, including read only access to view reports)<br>__8__ = Administrator (full access, including editing the profile and team)
-     position|string|true|Title of the users position. For example: 'Team Leader', 'Artist'.
+     position|string||Title of the users position. For example: 'Team Leader', 'Artist'.
 
-> Example responses
+> Example response
 
 ```json
 {
@@ -6332,7 +5736,7 @@ oauth2 ( Scopes: write )
 
 ## Add Mod Team Member
 
-> Code samples
+> Example request
 
 ```shell
 # You can also use wget
@@ -6395,23 +5799,6 @@ fetch('https://api.mod.io/v1/games/{game-id}/mods/{mod-id}/team',
 });
 ```
 
-```ruby
-require 'rest-client'
-require 'json'
-
-headers = {
-  'Authorization' => 'Bearer YourAccessToken',
-  'Content-Type' => 'application/x-www-form-urlencoded',
-  'Accept' => 'application/json'
-}
-
-result = RestClient.post 'https://api.mod.io/v1/games/{game-id}/mods/{mod-id}/team',
-  params: {
-  }, headers: headers
-
-p JSON.parse(result)
-```
-
 ```python
 import requests
 headers = {
@@ -6450,9 +5837,9 @@ Add a user to a mod team. Successful request will return [Message Object](#messa
      ---|---|---|---|
      user_id|integer|true|Unique id of the user you are adding to the team.
      level|integer|true|Level of permission the user will get:<br><br>__1__ = Moderator (can moderate comments and content attached)<br>__4__ = Creator (moderator access, including uploading builds and edit all settings except supply and team members)<br>__8__ = Administrator (full access, including editing the supply and team)
-     position|string|true|Title of the users position. For example: 'Team Leader', 'Artist'.
+     position|string||Title of the users position. For example: 'Team Leader', 'Artist'.
 
-> Example responses
+> Example response
 
 ```json
 {
@@ -6473,7 +5860,7 @@ oauth2 ( Scopes: write )
 
 ## Update Game Team Member
 
-> Code samples
+> Example request
 
 ```shell
 # You can also use wget
@@ -6536,23 +5923,6 @@ fetch('https://api.mod.io/v1/games/{game-id}/team/{team-member-id}',
 });
 ```
 
-```ruby
-require 'rest-client'
-require 'json'
-
-headers = {
-  'Authorization' => 'Bearer YourAccessToken',
-  'Content-Type' => 'application/x-www-form-urlencoded',
-  'Accept' => 'application/json'
-}
-
-result = RestClient.put 'https://api.mod.io/v1/games/{game-id}/team/{team-member-id}',
-  params: {
-  }, headers: headers
-
-p JSON.parse(result)
-```
-
 ```python
 import requests
 headers = {
@@ -6592,7 +5962,7 @@ Update a game team members details. Successful request will return [Message Obje
      level|integer||Level of permission the user should have:<br><br>__1__ = Moderator (can moderate content submitted)<br>__4__ = Statistics (moderator access, including read only access to view reports)<br>__8__ = Administrator (full access, including editing the profile and team)
      position|string||Title of the users position. For example: 'Team Leader', 'Artist'.
 
-> Example responses
+> Example response
 
 ```json
 {
@@ -6613,7 +5983,7 @@ oauth2 ( Scopes: write )
 
 ## Update Mod Team Member
 
-> Code samples
+> Example request
 
 ```shell
 # You can also use wget
@@ -6676,23 +6046,6 @@ fetch('https://api.mod.io/v1/games/{game-id}/mods/{mod-id}/team/{team-member-id}
 });
 ```
 
-```ruby
-require 'rest-client'
-require 'json'
-
-headers = {
-  'Authorization' => 'Bearer YourAccessToken',
-  'Content-Type' => 'application/x-www-form-urlencoded',
-  'Accept' => 'application/json'
-}
-
-result = RestClient.put 'https://api.mod.io/v1/games/{game-id}/mods/{mod-id}/team/{team-member-id}',
-  params: {
-  }, headers: headers
-
-p JSON.parse(result)
-```
-
 ```python
 import requests
 headers = {
@@ -6732,7 +6085,7 @@ Update a mod team members details. Successful request will return [Message Objec
      level|integer||Level of permission the user should have:<br><br>__1__ = Moderator (can moderate comments and content attached)<br>__4__ = Creator (moderator access, including uploading builds and edit all settings except supply and team members)<br>__8__ = Administrator (full access, including editing the supply and team)
      position|string||Title of the users position. For example: 'Team Leader', 'Artist'.
 
-> Example responses
+> Example response
 
 ```json
 {
@@ -6753,7 +6106,7 @@ oauth2 ( Scopes: write )
 
 ## Delete Game Team Member
 
-> Code samples
+> Example request
 
 ```shell
 # You can also use wget
@@ -6816,23 +6169,6 @@ fetch('https://api.mod.io/v1/games/{game-id}/team/{team-member-id}',
 });
 ```
 
-```ruby
-require 'rest-client'
-require 'json'
-
-headers = {
-  'Authorization' => 'Bearer YourAccessToken',
-  'Content-Type' => 'application/x-www-form-urlencoded',
-  'Accept' => 'application/json'
-}
-
-result = RestClient.delete 'https://api.mod.io/v1/games/{game-id}/team/{team-member-id}',
-  params: {
-  }, headers: headers
-
-p JSON.parse(result)
-```
-
 ```python
 import requests
 headers = {
@@ -6867,7 +6203,7 @@ System.out.println(response.toString());
 
 Delete a user from a game team. This will revoke their access rights if they are not the original creator of the resource. Successful request will return `204 No Content`.
 
-> Example responses
+> Example response
 
 ```json
  204 No Content 
@@ -6885,7 +6221,7 @@ oauth2 ( Scopes: write )
 
 ## Delete Mod Team Member
 
-> Code samples
+> Example request
 
 ```shell
 # You can also use wget
@@ -6948,23 +6284,6 @@ fetch('https://api.mod.io/v1/games/{game-id}/mods/{mod-id}/team/{team-member-id}
 });
 ```
 
-```ruby
-require 'rest-client'
-require 'json'
-
-headers = {
-  'Authorization' => 'Bearer YourAccessToken',
-  'Content-Type' => 'application/x-www-form-urlencoded',
-  'Accept' => 'application/json'
-}
-
-result = RestClient.delete 'https://api.mod.io/v1/games/{game-id}/mods/{mod-id}/team/{team-member-id}',
-  params: {
-  }, headers: headers
-
-p JSON.parse(result)
-```
-
 ```python
 import requests
 headers = {
@@ -6999,7 +6318,7 @@ System.out.println(response.toString());
 
 Delete a user from a mod team. This will revoke their access rights if they are not the original creator of the resource. Successful request will return `204 No Content`.
 
-> Example responses
+> Example response
 
 ```json
  204 No Content 
@@ -7019,7 +6338,7 @@ oauth2 ( Scopes: write )
 
 ## Get All Mod Comments
 
-> Code samples
+> Example request
 
 ```shell
 # You can also use wget
@@ -7074,22 +6393,6 @@ fetch('https://api.mod.io/v1/games/{game-id}/mods/{mod-id}/comments?api_key=Your
 });
 ```
 
-```ruby
-require 'rest-client'
-require 'json'
-
-headers = {
-  'Accept' => 'application/json'
-}
-
-result = RestClient.get 'https://api.mod.io/v1/games/{game-id}/mods/{mod-id}/comments',
-  params: {
-  'api_key' => 'string'
-}, headers: headers
-
-p JSON.parse(result)
-```
-
 ```python
 import requests
 headers = {
@@ -7131,10 +6434,9 @@ Get all comments posted in the mods profile. Successful request will return an a
      reply_id|integer|Id of the parent comment this comment is replying to (can be 0 if the comment is not a reply).
      reply_position|string|Levels of nesting in a comment thread. You should order by this field, to maintain comment grouping. How it works:<br><br>- The first comment will have the position '01'.<br>- The second comment will have the position '02'.<br>- If someone responds to the second comment the position will be '02.01'.<br>- A maximum of 3 levels is supported.  
      karma|integer|Karma received for the comment (can be postive or negative).
-     karma_guest|integer|Karma received for guest comments (can be postive or negative).
      summary|string|Contents of the comment.
 
-> Example responses
+> Example response
 
 ```json
 {
@@ -7184,7 +6486,7 @@ apiKey, oauth2 ( Scopes: read )
 
 ## Delete Mod Comment
 
-> Code samples
+> Example request
 
 ```shell
 # You can also use wget
@@ -7247,23 +6549,6 @@ fetch('https://api.mod.io/v1/games/{game-id}/mods/{mod-id}/comments/{comment-id}
 });
 ```
 
-```ruby
-require 'rest-client'
-require 'json'
-
-headers = {
-  'Authorization' => 'Bearer YourAccessToken',
-  'Content-Type' => 'application/x-www-form-urlencoded',
-  'Accept' => 'application/json'
-}
-
-result = RestClient.delete 'https://api.mod.io/v1/games/{game-id}/mods/{mod-id}/comments/{comment-id}',
-  params: {
-  }, headers: headers
-
-p JSON.parse(result)
-```
-
 ```python
 import requests
 headers = {
@@ -7298,7 +6583,7 @@ System.out.println(response.toString());
 
 Delete a comment from a mod profile. Successful request will return `204 No Content`.
 
-> Example responses
+> Example response
 
 ```json
  204 No Content 
@@ -7318,7 +6603,7 @@ oauth2 ( Scopes: write )
 
 ## Get Resource Owner
 
-> Code samples
+> Example request
 
 ```shell
 # You can also use wget
@@ -7381,23 +6666,6 @@ fetch('https://api.mod.io/v1/general/ownership',
 });
 ```
 
-```ruby
-require 'rest-client'
-require 'json'
-
-headers = {
-  'Authorization' => 'Bearer YourAccessToken',
-  'Content-Type' => 'application/x-www-form-urlencoded',
-  'Accept' => 'application/json'
-}
-
-result = RestClient.post 'https://api.mod.io/v1/general/ownership',
-  params: {
-  }, headers: headers
-
-p JSON.parse(result)
-```
-
 ```python
 import requests
 headers = {
@@ -7439,7 +6707,7 @@ Get the user that is the original _submitter_ of a resource. Successful request 
      resource_type|string|true|Type of resource you are checking the ownership of. __Must__ be one of the following values:<br><br>__games__<br>__mods__<br>__files__<br>__tags__
      resource_id|integer|true|Unique id of the resource you are checking the ownership of.
 
-> Example responses
+> Example response
 
 ```json
 {
@@ -7469,7 +6737,7 @@ apiKey, oauth2 ( Scopes: read )
 
 ## Get All Users
 
-> Code samples
+> Example request
 
 ```shell
 # You can also use wget
@@ -7524,22 +6792,6 @@ fetch('https://api.mod.io/v1/users?api_key=YourApiKey',
 });
 ```
 
-```ruby
-require 'rest-client'
-require 'json'
-
-headers = {
-  'Accept' => 'application/json'
-}
-
-result = RestClient.get 'https://api.mod.io/v1/users',
-  params: {
-  'api_key' => 'string'
-}, headers: headers
-
-p JSON.parse(result)
-```
-
 ```python
 import requests
 headers = {
@@ -7581,7 +6833,7 @@ Get all users registered on mod.io. Successful request will return an array of [
      timezone|string|Timezone of the user, format is country/city.
      language|string|2-character representation of language.
 
-> Example responses
+> Example response
 
 ```json
 {
@@ -7621,7 +6873,7 @@ apiKey, oauth2 ( Scopes: read )
 
 ## Get User
 
-> Code samples
+> Example request
 
 ```shell
 # You can also use wget
@@ -7676,22 +6928,6 @@ fetch('https://api.mod.io/v1/users/{user-id}?api_key=YourApiKey',
 });
 ```
 
-```ruby
-require 'rest-client'
-require 'json'
-
-headers = {
-  'Accept' => 'application/json'
-}
-
-result = RestClient.get 'https://api.mod.io/v1/users/{user-id}',
-  params: {
-  'api_key' => 'string'
-}, headers: headers
-
-p JSON.parse(result)
-```
-
 ```python
 import requests
 headers = {
@@ -7724,7 +6960,7 @@ System.out.println(response.toString());
 
 Get a user. Successful request will return a single [User Object](#user-object).
 
-> Example responses
+> Example response
 
 ```json
 {
@@ -7756,7 +6992,7 @@ apiKey, oauth2 ( Scopes: read )
 
 ## Submit Report
 
-> Code samples
+> Example request
 
 ```shell
 # You can also use wget
@@ -7819,23 +7055,6 @@ fetch('https://api.mod.io/v1/report',
 });
 ```
 
-```ruby
-require 'rest-client'
-require 'json'
-
-headers = {
-  'Authorization' => 'Bearer YourAccessToken',
-  'Content-Type' => 'application/x-www-form-urlencoded',
-  'Accept' => 'application/json'
-}
-
-result = RestClient.post 'https://api.mod.io/v1/report',
-  params: {
-  }, headers: headers
-
-p JSON.parse(result)
-```
-
 ```python
 import requests
 headers = {
@@ -7872,13 +7091,13 @@ Submit a report for any resource on mod.io. Successful request will return [Mess
      
      Parameter|Type|Required|Description
      ---|---|---|---|
-     resource|string|true|Type of resource you are reporting. Must be one of the following values:<br><br>__games__<br>__mods__<br>__files__<br>__tags__<br>__users__
+     resource|string|true|Type of resource you are reporting. Must be one of the following values:<br><br>__games__<br>__mods__<br>__files__<br>__users__
      id|integer|true|Unique id of the resource you are reporting.
      dmca|boolean|true|Is this a DMCA takedown request?
      name|string|true|Informative title for your report.
      summary|string|true|Detailed description of your report. Make sure you include all relevant information and links to help moderators investigate and respond appropiately.
 
-> Example responses
+> Example response
 
 ```json
 {
@@ -7901,7 +7120,7 @@ oauth2 ( Scopes: write )
 
 ## Get Authenticated User
 
-> Code samples
+> Example request
 
 ```shell
 # You can also use wget
@@ -7960,22 +7179,6 @@ fetch('https://api.mod.io/v1/me',
 });
 ```
 
-```ruby
-require 'rest-client'
-require 'json'
-
-headers = {
-  'Authorization' => 'Bearer YourAccessToken',
-  'Accept' => 'application/json'
-}
-
-result = RestClient.get 'https://api.mod.io/v1/me',
-  params: {
-  }, headers: headers
-
-p JSON.parse(result)
-```
-
 ```python
 import requests
 headers = {
@@ -8009,7 +7212,7 @@ System.out.println(response.toString());
 
 Get the _authenticated user_ details. Successful request will return a single [User Object](#user-object).
 
-> Example responses
+> Example response
 
 ```json
 {
@@ -8039,7 +7242,7 @@ oauth2 ( Scopes: read )
 
 ## Get User Subscriptions
 
-> Code samples
+> Example request
 
 ```shell
 # You can also use wget
@@ -8098,22 +7301,6 @@ fetch('https://api.mod.io/v1/me/subscribed',
 });
 ```
 
-```ruby
-require 'rest-client'
-require 'json'
-
-headers = {
-  'Authorization' => 'Bearer YourAccessToken',
-  'Accept' => 'application/json'
-}
-
-result = RestClient.get 'https://api.mod.io/v1/me/subscribed',
-  params: {
-  }, headers: headers
-
-p JSON.parse(result)
-```
-
 ```python
 import requests
 headers = {
@@ -8161,7 +7348,6 @@ Get all mod's the _authenticated user_ is subscribed to. Successful request will
      description|string|Detailed description of the mod which allows HTML.
      homepage|string|Official homepage of the mod.
      metadata_blob|string|Metadata stored by the game developer.
-     modfile|integer|Unique id of the [Modfile Object](#modfile-object) marked as current release.
      tags|string|Comma-separated values representing the tags you want to filter the results by. Only tags that are supported by the parent game can be applied. To determine what tags are eligible, see the tags values within 'Tag Option' column on the parent [Game Object](#game-object).
      status|string| Status of the mod (only recognised by game admins authenticated via _OAuth 2_):<br><br>__unauth__ = Only return un-authorized mods.<br>__auth__ = Only return authorized mods _(default)_.<br>__ban__ = Only return banned mods.<br>__archive__ = Only return archived mods (out of date / incompatible).<br>__delete__ = Only return deleted mods.
      downloads|string|Sort results by most downloads using [_sort filter](#filtering) parameter, value should be `downloads` for descending or `-downloads` for ascending results.
@@ -8169,7 +7355,7 @@ Get all mod's the _authenticated user_ is subscribed to. Successful request will
      ratings|string|Sort results by weighted rating using [_sort filter](#filtering), value should be `ratings` for descending or `-ratings` for ascending results.
      subscribers|string|Sort results by most subscribers using [_sort filter](#filtering), value should be `subscribers` for descending or `-subscribers` for ascending results.
 
-> Example responses
+> Example response
 
 ```json
 {
@@ -8276,7 +7462,7 @@ oauth2 ( Scopes: read )
 
 ## Get User Games
 
-> Code samples
+> Example request
 
 ```shell
 # You can also use wget
@@ -8335,22 +7521,6 @@ fetch('https://api.mod.io/v1/me/games',
 });
 ```
 
-```ruby
-require 'rest-client'
-require 'json'
-
-headers = {
-  'Authorization' => 'Bearer YourAccessToken',
-  'Accept' => 'application/json'
-}
-
-result = RestClient.get 'https://api.mod.io/v1/me/games',
-  params: {
-  }, headers: headers
-
-p JSON.parse(result)
-```
-
 ```python
 import requests
 headers = {
@@ -8384,7 +7554,7 @@ System.out.println(response.toString());
 
 Get all games the _authenticated user_ added or is a team member of. Successful request will return an array of [Game Objects](#get-games-2).
 
-> Example responses
+> Example response
 
 ```json
 {
@@ -8443,7 +7613,7 @@ Get all games the _authenticated user_ added or is a team member of. Successful 
           "tags": [
             "Horror"
           ],
-          "admin_only": 0
+          "hidden": 0
         }
       ]
     },
@@ -8469,7 +7639,7 @@ oauth2 ( Scopes: read )
 
 ## Get User Mods
 
-> Code samples
+> Example request
 
 ```shell
 # You can also use wget
@@ -8528,22 +7698,6 @@ fetch('https://api.mod.io/v1/me/mods',
 });
 ```
 
-```ruby
-require 'rest-client'
-require 'json'
-
-headers = {
-  'Authorization' => 'Bearer YourAccessToken',
-  'Accept' => 'application/json'
-}
-
-result = RestClient.get 'https://api.mod.io/v1/me/mods',
-  params: {
-  }, headers: headers
-
-p JSON.parse(result)
-```
-
 ```python
 import requests
 headers = {
@@ -8577,7 +7731,7 @@ System.out.println(response.toString());
 
 Get all mods the _authenticated user_ added or is a team member of. Successful request will return an array of [Mod Objects](#get-all-mods-2).
 
-> Example responses
+> Example response
 
 ```json
 {
@@ -8684,7 +7838,7 @@ oauth2 ( Scopes: read )
 
 ## Get User Modfiles
 
-> Code samples
+> Example request
 
 ```shell
 # You can also use wget
@@ -8743,22 +7897,6 @@ fetch('https://api.mod.io/v1/me/files',
 });
 ```
 
-```ruby
-require 'rest-client'
-require 'json'
-
-headers = {
-  'Authorization' => 'Bearer YourAccessToken',
-  'Accept' => 'application/json'
-}
-
-result = RestClient.get 'https://api.mod.io/v1/me/files',
-  params: {
-  }, headers: headers
-
-p JSON.parse(result)
-```
-
 ```python
 import requests
 headers = {
@@ -8792,7 +7930,7 @@ System.out.println(response.toString());
 
 Get all modfiles the _authenticated user_ uploaded. Successful request will return an array of [Modfile Objects](#get-all-mod-files-2).
 
-> Example responses
+> Example response
 
 ```json
 {
@@ -9034,9 +8172,6 @@ thumb_320x180|string|URL to the image thumbnail.
 
 Name|Type|Description
 ---|---|---|---|
-result_count|integer|Number of results returned in the data array.
-result_limit|integer|Maximum number of results returned.
-result_offset|integer|Number of results skipped over.
 data|[Comment Object   ](#schemacomment_object)[]|Array containing comment objects.
 » id|integer|Unique id of the comment.
 » mod_id|integer|Unique id of the parent mod.
@@ -9057,6 +8192,9 @@ data|[Comment Object   ](#schemacomment_object)[]|Array containing comment objec
 » karma|integer|Karma received for the comment (can be postive or negative).
 » karma_guest|integer|Karma received for guest comments (can be postive or negative).
 » content|string|Contents of the comment.
+result_count|integer|Number of results returned in the data array.
+result_limit|integer|Maximum number of results returned.
+result_offset|integer|Number of results skipped over.
 
 
 
@@ -9085,12 +8223,12 @@ data|[Comment Object   ](#schemacomment_object)[]|Array containing comment objec
 
 Name|Type|Description
 ---|---|---|---|
-result_count|integer|Number of results returned in the data array.
-result_limit|integer|Maximum number of results returned.
-result_offset|integer|Number of results skipped over.
 data|[Mod Dependencies Object  ](#schemamod_dependencies_object)[]|Array containing mod dependencies objects.
 » mod_id|integer|Unique id of the mod that is the dependency.
 » date_added|integer|Unix timestamp of date the dependency was added.
+result_count|integer|Number of results returned in the data array.
+result_limit|integer|Maximum number of results returned.
+result_offset|integer|Number of results skipped over.
 
 
 
@@ -9132,9 +8270,6 @@ data|[Mod Dependencies Object  ](#schemamod_dependencies_object)[]|Array contain
 
 Name|Type|Description
 ---|---|---|---|
-result_count|integer|Number of results returned in the data array.
-result_limit|integer|Maximum number of results returned.
-result_offset|integer|Number of results skipped over.
 data|[Modfile Object   ](#schemamodfile_object)[]|Array containing modfile objects.
 » id|integer|Unique modfile id.
 » mod_id|integer|Unique mod id.
@@ -9150,6 +8285,9 @@ data|[Modfile Object   ](#schemamodfile_object)[]|Array containing modfile objec
 » version|string|Release version this file represents.
 » changelog|string|Changelog for the file.
 » download_url|string|URL to download the file from the mod.io CDN.
+result_count|integer|Number of results returned in the data array.
+result_limit|integer|Maximum number of results returned.
+result_offset|integer|Number of results skipped over.
 
 
 
@@ -9214,7 +8352,7 @@ data|[Modfile Object   ](#schemamodfile_object)[]|Array containing modfile objec
           "tags": [
             "Horror"
           ],
-          "admin_only": 0
+          "hidden": 0
         }
       ]
     },
@@ -9232,9 +8370,6 @@ data|[Modfile Object   ](#schemamodfile_object)[]|Array containing modfile objec
 
 Name|Type|Description
 ---|---|---|---|
-result_count|integer|Number of results returned in the data array.
-result_limit|integer|Maximum number of results returned.
-result_offset|integer|Number of results skipped over.
 data|[Game Object   ](#schemagame_object)[]|Array containing game objects.
 » id|integer|Unique game id.
 » submitted_by|[User Object   ](#schemauser_object)|Contains user data.
@@ -9280,8 +8415,11 @@ data|[Game Object   ](#schemagame_object)[]|Array containing game objects.
 » tag_options|[Game Tag Option Object ](#schemagame_tag_option_object)[]|Groups of tags configured by the game developer, that mods can select.
 »» name|string|Name of the tag group.
 »» type|string|Can multiple tags be selected via 'checkboxes' or should only a single tag be selected via a 'dropdown'.
-»» admin_only|integer|Groups of tags flagged as 'admin only' should only be used for filtering, and should not be displayed to users.
+»» hidden|integer|Groups of tags flagged as 'admin only' should only be used for filtering, and should not be displayed to users.
 »» tags|string[]|Array of tags in this group.
+result_count|integer|Number of results returned in the data array.
+result_limit|integer|Maximum number of results returned.
+result_offset|integer|Number of results skipped over.
 
 
 
@@ -9320,9 +8458,6 @@ data|[Game Object   ](#schemagame_object)[]|Array containing game objects.
 
 Name|Type|Description
 ---|---|---|---|
-result_count|integer|Number of results returned in the data array.
-result_limit|integer|Maximum number of results returned.
-result_offset|integer|Number of results skipped over.
 data|[Game Activity Object  ](#schemagame_activity_object)[]|Array containing game activity objects.
 » id|integer|Unique id of the activity record.
 » game_id|integer|Unique id of the parent game.
@@ -9333,6 +8468,9 @@ data|[Game Activity Object  ](#schemagame_activity_object)[]|Array containing ga
 »» field|string|Name of the field that was changed.
 »» before|string|Value of the field before the event.
 »» after|string|Value of the field after the event.
+result_count|integer|Number of results returned in the data array.
+result_limit|integer|Maximum number of results returned.
+result_offset|integer|Number of results skipped over.
 
 
 
@@ -9361,12 +8499,12 @@ data|[Game Activity Object  ](#schemagame_activity_object)[]|Array containing ga
 
 Name|Type|Description
 ---|---|---|---|
-result_count|integer|Number of results returned in the data array.
-result_limit|integer|Maximum number of results returned.
-result_offset|integer|Number of results skipped over.
 data|[Metadata KVP Object  ](#schemametadata_kvp_object)[]|Array containing metadata kvp objects.
 » key|string|The key of the key-value pair.
 » value|string|The value of the key-value pair.
+result_count|integer|Number of results returned in the data array.
+result_limit|integer|Maximum number of results returned.
+result_offset|integer|Number of results skipped over.
 
 
 
@@ -9471,9 +8609,6 @@ data|[Metadata KVP Object  ](#schemametadata_kvp_object)[]|Array containing meta
 
 Name|Type|Description
 ---|---|---|---|
-result_count|integer|Number of results returned in the data array.
-result_limit|integer|Maximum number of results returned.
-result_offset|integer|Number of results skipped over.
 data|[Mod Object   ](#schemamod_object)[]|Array containing mod objects.
 » id|integer|Unique mod id.
 » game_id|integer|Unique game id.
@@ -9536,6 +8671,9 @@ data|[Mod Object   ](#schemamod_object)[]|Array containing mod objects.
 » tags|[Mod Tag Object  ](#schemamod_tag_object)[]|Contains mod tag data.
 »» name|string|Tag name.
 »» date_added|integer|Unix timestamp of date tag was applied.
+result_count|integer|Number of results returned in the data array.
+result_limit|integer|Maximum number of results returned.
+result_offset|integer|Number of results skipped over.
 
 
 
@@ -9574,9 +8712,6 @@ data|[Mod Object   ](#schemamod_object)[]|Array containing mod objects.
 
 Name|Type|Description
 ---|---|---|---|
-result_count|integer|Number of results returned in the data array.
-result_limit|integer|Maximum number of results returned.
-result_offset|integer|Number of results skipped over.
 data|[Mod Activity Object  ](#schemamod_activity_object)[]|Array containing mod activity objects.
 » id|integer|Unique id of the activity object.
 » mod_id|integer|Unique id of the parent mod.
@@ -9587,6 +8722,9 @@ data|[Mod Activity Object  ](#schemamod_activity_object)[]|Array containing mod 
 »» field|string|Name of the field that was changed.
 »» before|string|Value of the field before the event.
 »» after|string|Value of the field after the event.
+result_count|integer|Number of results returned in the data array.
+result_limit|integer|Maximum number of results returned.
+result_offset|integer|Number of results skipped over.
 
 
 
@@ -9603,7 +8741,7 @@ data|[Mod Activity Object  ](#schemamod_activity_object)[]|Array containing mod 
       "tags": [
         "Horror"
       ],
-      "admin_only": 0
+      "hidden": 0
     },
     {
         ...
@@ -9619,14 +8757,14 @@ data|[Mod Activity Object  ](#schemamod_activity_object)[]|Array containing mod 
 
 Name|Type|Description
 ---|---|---|---|
-result_count|integer|Number of results returned in the data array.
-result_limit|integer|Maximum number of results returned.
-result_offset|integer|Number of results skipped over.
 data|[Game Tag Option Object ](#schemagame_tag_option_object)[]|Array containing game tag objects.
 » name|string|Name of the tag group.
 » type|string|Can multiple tags be selected via 'checkboxes' or should only a single tag be selected via a 'dropdown'.
-» admin_only|integer|Groups of tags flagged as 'admin only' should only be used for filtering, and should not be displayed to users.
+» hidden|integer|Groups of tags flagged as 'admin only' should only be used for filtering, and should not be displayed to users.
 » tags|string[]|Array of tags in this group.
+result_count|integer|Number of results returned in the data array.
+result_limit|integer|Maximum number of results returned.
+result_offset|integer|Number of results skipped over.
 
 
 
@@ -9655,12 +8793,12 @@ data|[Game Tag Option Object ](#schemagame_tag_option_object)[]|Array containing
 
 Name|Type|Description
 ---|---|---|---|
-result_count|integer|Number of results returned in the data array.
-result_limit|integer|Maximum number of results returned.
-result_offset|integer|Number of results skipped over.
 data|[Mod Tag Object  ](#schemamod_tag_object)[]|Array containing mod tag objects.
 » name|string|Tag name.
 » date_added|integer|Unix timestamp of date tag was applied.
+result_count|integer|Number of results returned in the data array.
+result_limit|integer|Maximum number of results returned.
+result_offset|integer|Number of results skipped over.
 
 
 
@@ -9704,9 +8842,6 @@ data|[Mod Tag Object  ](#schemamod_tag_object)[]|Array containing mod tag object
 
 Name|Type|Description
 ---|---|---|---|
-result_count|integer|Number of results returned in the data array.
-result_limit|integer|Maximum number of results returned.
-result_offset|integer|Number of results skipped over.
 data|[Team Member Object  ](#schemateam_member_object)[]|Array containing team member objects.
 » id|integer|Unique team member id.
 » user|[User Object   ](#schemauser_object)|Contains user data.
@@ -9723,6 +8858,9 @@ data|[Team Member Object  ](#schemateam_member_object)[]|Array containing team m
 » level|integer|Level of permission the user has:<br><br>__0__ = Guest<br>__1__ = Member<br>__2__ = Contributor<br>__4__ = Manager<br>__8__ = Leader
 » date_added|integer|Unix timestamp of the date the user was added to the team.
 » position|string|Custom title given to the user in this team.
+result_count|integer|Number of results returned in the data array.
+result_limit|integer|Maximum number of results returned.
+result_offset|integer|Number of results skipped over.
 
 
 
@@ -9760,9 +8898,6 @@ data|[Team Member Object  ](#schemateam_member_object)[]|Array containing team m
 
 Name|Type|Description
 ---|---|---|---|
-result_count|integer|Number of results returned in the data array.
-result_limit|integer|Maximum number of results returned.
-result_offset|integer|Number of results skipped over.
 data|[User Object   ](#schemauser_object)[]|Array containing user objects.
 » id|integer|Unique id of the user.
 » name_id|string|URL path for the user on mod.io. Usually a simplified version of their username.
@@ -9774,6 +8909,9 @@ data|[User Object   ](#schemauser_object)[]|Array containing user objects.
 » timezone|string|Timezone of the user, format is country/city.
 » language|string|2-character representation of users language preference.
 » profile_url|string|URL to the user's mod.io profile.
+result_count|integer|Number of results returned in the data array.
+result_limit|integer|Maximum number of results returned.
+result_offset|integer|Number of results skipped over.
 
 
 
@@ -10281,7 +9419,7 @@ date_added|integer|Unix timestamp of date tag was applied.
       "tags": [
         "Horror"
       ],
-      "admin_only": 0
+      "hidden": 0
     }
   ]
 } 
@@ -10335,7 +9473,7 @@ profile_url|string|URL to the game's mod.io page.
 tag_options|[Game Tag Option Object ](#schemagame_tag_option_object)[]|Groups of tags configured by the game developer, that mods can select.
 » name|string|Name of the tag group.
 » type|string|Can multiple tags be selected via 'checkboxes' or should only a single tag be selected via a 'dropdown'.
-» admin_only|integer|Groups of tags flagged as 'admin only' should only be used for filtering, and should not be displayed to users.
+» hidden|integer|Groups of tags flagged as 'admin only' should only be used for filtering, and should not be displayed to users.
 » tags|string[]|Array of tags in this group.
 
 
@@ -10351,7 +9489,7 @@ tag_options|[Game Tag Option Object ](#schemagame_tag_option_object)[]|Groups of
   "tags": [
     "Horror"
   ],
-  "admin_only": 0
+  "hidden": 0
 } 
 ```
 
@@ -10361,7 +9499,7 @@ Name|Type|Description
 ---|---|---|---|
 name|string|Name of the tag group.
 type|string|Can multiple tags be selected via 'checkboxes' or should only a single tag be selected via a 'dropdown'.
-admin_only|integer|Groups of tags flagged as 'admin only' should only be used for filtering, and should not be displayed to users.
+hidden|integer|Groups of tags flagged as 'admin only' should only be used for filtering, and should not be displayed to users.
 tags|string[]|Array of tags in this group.
 
 
