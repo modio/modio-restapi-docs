@@ -640,6 +640,10 @@ table tbody tr td:first-child {
   white-space: nowrap;
 }
 
+table tbody tr.iscollapsed td:first-child {
+  border-left: 3px solid #666;
+}
+
 img.menu-reference-icon {
   max-height: 12px;
   max-width: 12px;

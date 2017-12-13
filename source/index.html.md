@@ -1060,6 +1060,8 @@ System.out.println(response.toString());
 
 Update details for a game. If you want to update the `icon`, `logo` or `header` fields you need to use the [Add Game Media](#add-game-media) endpoint. Successful request will return updated [Game Object](#game-object).
      
+     __NOTE:__ You can also edit [your games profile](https://mod.io/games) on the mod.io website. This is the recommended approach.
+     
      Parameter|Type|Required|Description
      ---|---|---|---|
      name|string||Name of your game. Cannot exceed 80 characters.
@@ -1248,16 +1250,16 @@ Get all mods for the corresponding game. Successful request will return an array
      date_updated|integer|Unix timestamp of date mod was updated.
      date_live|integer|Unix timestamp of date mod was set live.
      name|string|Name of the mod.
-     name_id|string|URL path for the mod on mod.io.
+     name_id|string|Path for the mod on mod.io. For example: https://gamename.mod.io/__mod-name-id-here__
      summary|string|Summary of the mod.
      description|string|Detailed description of the mod which allows HTML.
      homepage|string|Official homepage of the mod.
      metadata_blob|string|Metadata stored by the game developer.
-     tags|string|Comma-separated values representing the tags you want to filter the results by. Only tags that are supported by the parent game can be applied. To determine what tags are eligible, see the tags values within 'Tag Option' column on the parent [Game Object](#game-object).
+     tags|string|Comma-separated values representing the tags you want to filter the results by. Only tags that are supported by the parent game can be applied. To determine what tags are eligible, see the tags values within `tag_options` column on the parent [Game Object](#game-object).
      status|string| Status of the mod (only recognised by game admins authenticated via _OAuth 2_):<br><br>__unauth__ = Only return un-authorized mods.<br>__auth__ = Only return authorized mods _(default)_.<br>__ban__ = Only return banned mods.<br>__archive__ = Only return archived mods (out of date / incompatible).<br>__delete__ = Only return deleted mods.
      downloads|string|Sort results by most downloads using [_sort filter](#filtering) parameter, value should be `downloads` for descending or `-downloads` for ascending results.
      popular|string|Sort results by popularity using [_sort filter](#filtering), value should be `popular` for descending or `-popular` for ascending results.
-     rating|string|Sort results by weighted rating using [_sort filter](#filtering), value should be `ratings` for descending or `-ratings` for ascending results.
+     rating|string|Sort results by weighted rating using [_sort filter](#filtering), value should be `rating` for descending or `-rating` for ascending results.
      subscribers|string|Sort results by most subscribers using [_sort filter](#filtering), value should be `subscribers` for descending or `-subscribers` for ascending results.
 
 > Example response
@@ -1652,14 +1654,14 @@ Add a mod. Successful request will return the newly created [Mod Object](#mod-ob
      ---|---|---|---|
      logo|file|true|Image file which will represent your mods logo. Must be gif, jpg or png format and cannot exceed 8MB in filesize. Dimensions must be at least 640x360 and we recommended you supply a high resolution image with a 16 / 9 ratio. mod.io will use this image to make three thumbnails for the dimensions 320x180, 640x360 and 1280x720.
      name|string|true|Name of your mod. 
-     name_id|string||URL path for the mod on mod.io.  If no `name_id` is specified the `name` will be used. For example: _'Stellaris Shader Mod'_ will become _'stellaris-shader-mod'_. Cannot exceed 80 characters.
+     name_id|string||Path for the mod on mod.io. For example: https://gamename.mod.io/__mod-name-id-here__. If no `name_id` is specified the `name` will be used. For example: _'Stellaris Shader Mod'_ will become _'stellaris-shader-mod'_. Cannot exceed 80 characters.
      summary|string|true|Summary for your mod, giving a brief overview of what it's about. Cannot exceed 250 characters.
      description|string||Detailed description for your mod, which can include details such as 'About', 'Features', 'Install Instructions', 'FAQ', etc. HTML supported and encouraged.
      homepage|string||Official homepage for your mod. Must be a valid URL.
      stock|integer||Artificially limit the amount of times the mod can be subscribed too.
      modfile|integer||Unique id of the [Modfile Object](#modfile-object) to be labelled as the current release.
      metadata_blob|string||Metadata stored by the game developer. Metadata can also be stored as searchable [key value pairs](#metadata).
-     tags|string[]||An array of strings that represent what the mod has been tagged as. Only tags that are supported by the parent game can be applied. To determine what tags are eligible, see the tags values within 'Tag Option' column on the parent [Game Object](#game-object).
+     tags|string[]||An array of strings that represent what the mod has been tagged as. Only tags that are supported by the parent game can be applied. To determine what tags are eligible, see the tags values within `tag_options` column on the parent [Game Object](#game-object).
 
 > Example response
 
@@ -1859,17 +1861,17 @@ System.out.println(response.toString());
 ```
 `PUT /games/{game-id}/mods/{mod-id}`
 
-Edit details for a mod. If you want to update the `logo` or media associated with this mod, you need to use the [Add Mod Media](#add-mod-media) endpoint. The same applies to [Mod Files](#add-modfile), [Metadata Key Value Pairs](#add-mod-kvp-metadata) and [Dependencies](#add-mod-dependencies) which are all managed via other endpoints. Successful request will return the updated [Mod Object](#mod-object).<br><br>__NOTE:__ If the `modfile` parameter is successfully changed, a [__MODFILE_UPDATE__ event](#get-all-mod-activity) will be fired, so game clients know there is an update available for this mod.
+Edit details for a mod. If you want to update the `logo` or media associated with this mod, you need to use the [Add Mod Media](#add-mod-media) endpoint. The same applies to [Mod Files](#add-modfile), [Metadata Key Value Pairs](#add-mod-kvp-metadata) and [Dependencies](#add-mod-dependencies) which are all managed via other endpoints. Successful request will return the updated [Mod Object](#mod-object).
      
      Parameter|Type|Required|Description
      ---|---|---|---|
      name|string||Name of your mod. Cannot exceed 80 characters.
-     name_id|string||URL path for the mod on mod.io. Cannot exceed 80 characters.
+     name_id|string||Path for the mod on mod.io. For example: https://gamename.mod.io/__mod-name-id-here__. Cannot exceed 80 characters.
      summary|string||Summary for your mod, giving a brief overview of what it's about. Cannot exceed 250 characters.
      description|string||Detailed description for your mod, which can include details such as 'About', 'Features', 'Install Instructions', 'FAQ', etc. HTML supported and encouraged.
      homepage|string||Official homepage for your mod. Must be a valid URL.
      stock|integer||Artificially limit the amount of times the mod can be subscribed too.
-     modfile|integer||Unique id of the [Modfile Object](#modfile-object) to be labelled as the current release.
+     modfile|integer||Unique id of the [Modfile Object](#modfile-object) to be labelled as the current release.<br><br>__NOTE:__ If the `modfile` parameter is successfully changed, a [__MODFILE_UPDATE__ event](#get-all-mod-activity) will be fired, so game clients know there is an update available for this mod.
      metadata_blob|string||Metadata stored by the game developer. Metadata can also be stored as searchable [key value pairs](#metadata).
      status|string||__Game Administrators Only__. Activate an un-authorized or deleted mod. The mod must have at least one uploaded `modfile` to be activated. Ideal for restoring mods that have been soft-deleted. For mod deletion, use the [Delete Mod](#delete-mod) endpoint. Using either of the fields supplied below will allow the mod to be returned in requests.<br><br>__auth__ = Authorize the mod<br>__archive__ = Label as out of date/not compatible
 
@@ -2455,7 +2457,7 @@ Upload a file for the corresponding mod. Successful request will return the newl
      filedata|file|true|The binary file for the release. For compatibility you should ZIP the base folder of your mod, or if it is a collection of files which live in a pre-existing game folder, you should ZIP those files. Your file must meet the following conditions:<br><br>- File must be __zipped__ and cannot exceed 10GB in filesize<br>- Mods which span multiple game directories are not supported unless the game manages this<br>- Mods which overwrite files are not supported unless the game manages this
      version|string||Version of the file release.
      changelog|string||Changelog of this release.
-     active|boolean||_Default value is true._ Label this upload as the current release, this will change the _modfile_ field on the parent mod to the _id_ of this file after upload.<br><br>__NOTE:__ If the _active_ parameter is _true_, a [__MODFILE_UPDATE__ event](#get-all-mod-activity) will be fired, so game clients know there is an update available for this mod.
+     active|boolean||_Default value is true._ Label this upload as the current release, this will change the `modfile` field on the parent mod to the `id` of this file after upload.<br><br>__NOTE:__ If the _active_ parameter is _true_, a [__MODFILE_UPDATE__ event](#get-all-mod-activity) will be fired, so game clients know there is an update available for this mod.
      filehash|string||MD5 of the submitted file. When supplied the MD5 will be compared against the uploaded files MD5. If they don't match a `422 Unprocessible Entity` error will be returned.
 
 > Example response
@@ -2593,13 +2595,13 @@ System.out.println(response.toString());
 ```
 `PUT /games/{game-id}/mods/{mod-id}/files/{file-id}`
 
-Edit the details of a published file. If you want to update fields other than the changelog, version and active status, you should add a new file instead. Successful request will return updated [Modfile Object](#modfile-object).
+Edit the details of a published file. If you want to update fields other than the `changelog`, `version` and `active` status, you should add a new file instead. Successful request will return updated [Modfile Object](#modfile-object).
      
      Parameter|Type|Required|Description
      ---|---|---|---|
      version|string||Version of the file release.
      changelog|string||Changelog of this release.
-     active|boolean||_Default value is true._ Label this upload as the current release, this will change the _modfile_ field on the parent mod to the _id_ of this file after upload.<br><br>__NOTE:__ If the _active_ parameter causes the parent mods _modfile_ parameter to change, a [__MODFILE_UPDATE__ event](#get-all-mod-activity) will be fired, so game clients know there is an update available for this mod.
+     active|boolean||_Default value is true._ Label this upload as the current release, this will change the `modfile` field on the parent mod to the `id` of this file after upload.<br><br>__NOTE:__ If the _active_ parameter causes the parent mods `modfile` parameter to change, a [__MODFILE_UPDATE__ event](#get-all-mod-activity) will be fired, so game clients know there is an update available for this mod.
 
 > Example response
 
@@ -2734,6 +2736,8 @@ System.out.println(response.toString());
 
 Upload new media to a game. Any request you make to this endpoint *should* contain a binary file for each of the fields you want to update below. Successful request will return [Message Object](#message-object).
      
+     __NOTE:__ You can also add media to [your games profile](https://mod.io/games) on the mod.io website. This is the recommended approach.
+     
      Parameter|Type|Required|Description
      ---|---|---|---|
      logo|file||Image file which will represent your games logo. Must be gif, jpg or png format and cannot exceed 8MB in filesize. Dimensions must be at least 640x360 and we recommended you supply a high resolution image with a 16 / 9 ratio. mod.io will use this logo to create three thumbnails with the dimensions of 320x180, 640x360 and 1280x720.
@@ -2858,9 +2862,11 @@ System.out.println(response.toString());
 
 This endpoint is very flexible and will add any images posted to the mods gallery regardless of their body name providing they are a valid image. The request `Content-Type` header __must__ be `multipart/form-data` to submit image files. Successful request will return [Message Object](#message-object).
      
+     __NOTE:__ You can also add media to [your mods profile](https://mod.io/mods) on the mod.io website. This is the easiest way.
+     
      Parameter|Type|Required|Description
      ---|---|---|---|
-     logo|file||Image file which will represent your mod logo. Must be gif, jpg or png format and cannot exceed 8MB in filesize. Dimensions must be at least 640x360 and we recommended you supply a high resolution image with a 16 / 9 ratio. mod.io will use this logo to create three thumbnails with the dimensions of 320x180, 640x360 and 1280x720.
+     logo|file||Image file which will represent your mods logo. Must be gif, jpg or png format and cannot exceed 8MB in filesize. Dimensions must be at least 640x360 and we recommended you supply a high resolution image with a 16 / 9 ratio. mod.io will use this logo to create three thumbnails with the dimensions of 320x180, 640x360 and 1280x720.
      images|zip||Zip archive of images to upload. Only valid gif, jpg and png images in the zip file will be processed. The filename __must be images.zip__ all other zips will be ignored. Alternatively you can POST one or more images to this endpoint and they will be detected and added to the mods gallery.
      youtube|string[]||Full Youtube link(s) you want to add - example 'https://www.youtube.com/watch?v=IGVZOLV9SPo'
      sketchfab|string[]||Full Sketchfab link(s) you want to add - example 'https://sketchfab.com/models/71f04e390ff54e5f8d9a51b4e1caab7e'
@@ -2988,6 +2994,8 @@ System.out.println(response.toString());
 `DELETE /games/{game-id}/mods/{mod-id}/media`
 
 Delete images, sketchfab or youtube links from a mod profile. Successful request will return `204 No Content`.
+     
+     __NOTE:__ You can also delete media from [your mods profile](https://mod.io/mods) on the mod.io website. This is the easiest way.
      
      Parameter|Type|Required|Description
      ---|---|---|---|
@@ -3963,8 +3971,8 @@ Add tags which mods can apply to their profiles. Successful request will return 
      
      Parameter|Type|Required|Description
      ---|---|---|---|
-     name|string|true|Name of the tag group, for example you may want to have 'Difficulty' as the name with 'Easy', 'Medium' and 'Hard' as the tag values.<br><br>__NOTE:__ If the tag name already exists, its parameters will be overwritten and new tags will be added to the group. There is no tag edit option, only delete.
-     type|string|true|Determines whether you allow users to only select one tag (dropdown) or multiple tags (checkbox)<br><br>__dropdown__ = Mods can select only one tag from this group, dropdown menu shown on site profile.<br>__checkboxes__ = Mods can select multiple tags from this group, checkboxes shown on site profile.
+     name|string|true|Name of the tag group, for example you may want to have 'Difficulty' as the name with 'Easy', 'Medium' and 'Hard' as the tag values.<br><br>__NOTE:__ If the tag name already exists, its parameters will be overwritten and new tags will be added to the group (an edit). There is a separate endpoint to [delete tags](#delete-game-tag-option).
+     type|string|true|Determines whether you allow users to only select one tag (dropdown) or multiple tags (checkbox):<br><br>__dropdown__ = Mods can select only one tag from this group, dropdown menu shown on site profile.<br>__checkboxes__ = Mods can select multiple tags from this group, checkboxes shown on site profile.
      hidden|bool||This group of tags should be hidden from users and mod developers. Useful for games to tag special functionality, to filter on and use behind the scenes. You can also use [Metadata Key Value Pairs](#metadata) for more arbitary data.
      tags|array|true|Array of tags mod creators can choose to apply to their profiles.
 
@@ -4086,7 +4094,7 @@ System.out.println(response.toString());
 
 Delete an entire group of tags or individual tags. Successful request will return `204 No Content`.
      
-     __NOTE:__ You can also manage tags by editing your games profile on the mod.io website. This is the recommended approach.
+     __NOTE:__ You can also manage tags by editing [your games profile](https://mod.io/games) on the mod.io website. This is the recommended approach.
      
      Parameter|Type|Required|Description
      ---|---|---|---|
@@ -5709,6 +5717,8 @@ System.out.println(response.toString());
 
 Add a user to a game team. Successful request will return [Message Object](#message-object).
      
+     __NOTE:__ You can also add users to [your games team](https://mod.io/games) on the mod.io website. This is the recommended way.
+     
      Parameter|Type|Required|Description
      ---|---|---|---|
      user_id|integer|true|Unique id of the user you are adding to the team.
@@ -5832,6 +5842,8 @@ System.out.println(response.toString());
 `POST /games/{game-id}/mods/{mod-id}/team`
 
 Add a user to a mod team. Successful request will return [Message Object](#message-object).
+     
+     __NOTE:__ You can also add users to [your mods team](https://mod.io/mods) on the mod.io website. This is the recommended way.
      
      Parameter|Type|Required|Description
      ---|---|---|---|
@@ -5957,6 +5969,8 @@ System.out.println(response.toString());
 
 Update a game team members details. Successful request will return [Message Object](#message-object).
      
+     __NOTE:__ You can also update [your games team](https://mod.io/games) users on the mod.io website. This is the recommended way.
+     
      Parameter|Type|Required|Description
      ---|---|---|---|
      level|integer||Level of permission the user should have:<br><br>__1__ = Moderator (can moderate content submitted)<br>__4__ = Statistics (moderator access, including read only access to view reports)<br>__8__ = Administrator (full access, including editing the profile and team)
@@ -6079,6 +6093,8 @@ System.out.println(response.toString());
 `PUT /games/{game-id}/mods/{mod-id}/team/{team-member-id}`
 
 Update a mod team members details. Successful request will return [Message Object](#message-object).
+     
+     __NOTE:__ You can also update [your mods team](https://mod.io/mods) users on the mod.io website. This is the recommended way.
      
      Parameter|Type|Required|Description
      ---|---|---|---|
@@ -6827,7 +6843,7 @@ Get all users registered on mod.io. Successful request will return an array of [
      Filter|Type|Description
      ---|---|---
      id|integer|Unique id of the user.
-     name_id|string|URL path for the user on mod.io. Usually a simplified version of their username.
+     name_id|string|Path for the user on mod.io. For example: https://mod.io/members/__username-id-here__ Usually a simplified version of their username.
      date_online|integer|Unix timestamp of date the user was last online.
      username|string|Username of the user.
      timezone|string|Timezone of the user, format is country/city.
@@ -7343,16 +7359,16 @@ Get all mod's the _authenticated user_ is subscribed to. Successful request will
      date_updated|integer|Unix timestamp of date mod was updated.
      date_live|integer|Unix timestamp of date mod was set live.
      name|string|Name of the mod.
-     name_id|string|URL path for the mod on mod.io.
+     name_id|string|Path for the mod on mod.io. For example: https://gamename.mod.io/__mod-name-id-here__
      summary|string|Summary of the mod.
      description|string|Detailed description of the mod which allows HTML.
      homepage|string|Official homepage of the mod.
      metadata_blob|string|Metadata stored by the game developer.
-     tags|string|Comma-separated values representing the tags you want to filter the results by. Only tags that are supported by the parent game can be applied. To determine what tags are eligible, see the tags values within 'Tag Option' column on the parent [Game Object](#game-object).
+     tags|string|Comma-separated values representing the tags you want to filter the results by. Only tags that are supported by the parent game can be applied. To determine what tags are eligible, see the tags values within `tag_options` column on the parent [Game Object](#game-object).
      status|string| Status of the mod (only recognised by game admins authenticated via _OAuth 2_):<br><br>__unauth__ = Only return un-authorized mods.<br>__auth__ = Only return authorized mods _(default)_.<br>__ban__ = Only return banned mods.<br>__archive__ = Only return archived mods (out of date / incompatible).<br>__delete__ = Only return deleted mods.
      downloads|string|Sort results by most downloads using [_sort filter](#filtering) parameter, value should be `downloads` for descending or `-downloads` for ascending results.
      popular|string|Sort results by popularity using [_sort filter](#filtering), value should be `popular` for descending or `-popular` for ascending results.
-     ratings|string|Sort results by weighted rating using [_sort filter](#filtering), value should be `ratings` for descending or `-ratings` for ascending results.
+     rating|string|Sort results by weighted rating using [_sort filter](#filtering), value should be `rating` for descending or `-rating` for ascending results.
      subscribers|string|Sort results by most subscribers using [_sort filter](#filtering), value should be `subscribers` for descending or `-subscribers` for ascending results.
 
 > Example response
@@ -8177,7 +8193,7 @@ data|[Comment Object   ](#schemacomment_object)[]|Array containing comment objec
 » mod_id|integer|Unique id of the parent mod.
 » submitted_by|[User Object   ](#schemauser_object)|Contains user data.
 »» id|integer|Unique id of the user.
-»» name_id|string|URL path for the user on mod.io. Usually a simplified version of their username.
+»» name_id|string|Path for the user on mod.io. For example: https://mod.io/members/__username-id-here__ Usually a simplified version of their username.
 »» username|string|Username of the user.
 »» date_online|integer|Unix timestamp of date the user was last online.
 »» avatar|[Avatar Object   ](#schemaavatar_object)|Contains avatar data.
@@ -8374,7 +8390,7 @@ data|[Game Object   ](#schemagame_object)[]|Array containing game objects.
 » id|integer|Unique game id.
 » submitted_by|[User Object   ](#schemauser_object)|Contains user data.
 »» id|integer|Unique id of the user.
-»» name_id|string|URL path for the user on mod.io. Usually a simplified version of their username.
+»» name_id|string|Path for the user on mod.io. For example: https://mod.io/members/__username-id-here__ Usually a simplified version of their username.
 »» username|string|Username of the user.
 »» date_online|integer|Unix timestamp of date the user was last online.
 »» avatar|[Avatar Object   ](#schemaavatar_object)|Contains avatar data.
@@ -8614,7 +8630,7 @@ data|[Mod Object   ](#schemamod_object)[]|Array containing mod objects.
 » game_id|integer|Unique game id.
 » submitted_by|[User Object   ](#schemauser_object)|Contains user data.
 »» id|integer|Unique id of the user.
-»» name_id|string|URL path for the user on mod.io. Usually a simplified version of their username.
+»» name_id|string|Path for the user on mod.io. For example: https://mod.io/members/__username-id-here__ Usually a simplified version of their username.
 »» username|string|Username of the user.
 »» date_online|integer|Unix timestamp of date the user was last online.
 »» avatar|[Avatar Object   ](#schemaavatar_object)|Contains avatar data.
@@ -8634,7 +8650,7 @@ data|[Mod Object   ](#schemamod_object)[]|Array containing mod objects.
 »» thumb_1280x720|string|URL to the large logo thumbnail.
 » homepage|string|Official homepage of the mod.
 » name|string|Name of the mod.
-» name_id|string|URL path for the mod on mod.io.
+» name_id|string|Path for the mod on mod.io. For example: https://gamename.mod.io/__mod-name-id-here__
 » summary|string|Summary of the mod.
 » description|string|Detailed description of the mod which allows HTML.
 » metadata_blob|string|Metadata stored by the game developer. Metadata can also be stored as searchable [key value pairs](#metadata).
@@ -8846,7 +8862,7 @@ data|[Team Member Object  ](#schemateam_member_object)[]|Array containing team m
 » id|integer|Unique team member id.
 » user|[User Object   ](#schemauser_object)|Contains user data.
 »» id|integer|Unique id of the user.
-»» name_id|string|URL path for the user on mod.io. Usually a simplified version of their username.
+»» name_id|string|Path for the user on mod.io. For example: https://mod.io/members/__username-id-here__ Usually a simplified version of their username.
 »» username|string|Username of the user.
 »» date_online|integer|Unix timestamp of date the user was last online.
 »» avatar|[Avatar Object   ](#schemaavatar_object)|Contains avatar data.
@@ -8900,7 +8916,7 @@ Name|Type|Description
 ---|---|---|---|
 data|[User Object   ](#schemauser_object)[]|Array containing user objects.
 » id|integer|Unique id of the user.
-» name_id|string|URL path for the user on mod.io. Usually a simplified version of their username.
+» name_id|string|Path for the user on mod.io. For example: https://mod.io/members/__username-id-here__ Usually a simplified version of their username.
 » username|string|Username of the user.
 » date_online|integer|Unix timestamp of date the user was last online.
 » avatar|[Avatar Object   ](#schemaavatar_object)|Contains avatar data.
@@ -9049,7 +9065,7 @@ id|integer|Unique id of the comment.
 mod_id|integer|Unique id of the parent mod.
 submitted_by|[User Object   ](#schemauser_object)|Contains user data.
 » id|integer|Unique id of the user.
-» name_id|string|URL path for the user on mod.io. Usually a simplified version of their username.
+» name_id|string|Path for the user on mod.io. For example: https://mod.io/members/__username-id-here__ Usually a simplified version of their username.
 » username|string|Username of the user.
 » date_online|integer|Unix timestamp of date the user was last online.
 » avatar|[Avatar Object   ](#schemaavatar_object)|Contains avatar data.
@@ -9245,7 +9261,7 @@ id|integer|Unique mod id.
 game_id|integer|Unique game id.
 submitted_by|[User Object   ](#schemauser_object)|Contains user data.
 » id|integer|Unique id of the user.
-» name_id|string|URL path for the user on mod.io. Usually a simplified version of their username.
+» name_id|string|Path for the user on mod.io. For example: https://mod.io/members/__username-id-here__ Usually a simplified version of their username.
 » username|string|Username of the user.
 » date_online|integer|Unix timestamp of date the user was last online.
 » avatar|[Avatar Object   ](#schemaavatar_object)|Contains avatar data.
@@ -9265,7 +9281,7 @@ logo|[Logo Object   ](#schemalogo_object)|Contains logo data.
 » thumb_1280x720|string|URL to the large logo thumbnail.
 homepage|string|Official homepage of the mod.
 name|string|Name of the mod.
-name_id|string|URL path for the mod on mod.io.
+name_id|string|Path for the mod on mod.io. For example: https://gamename.mod.io/__mod-name-id-here__
 summary|string|Summary of the mod.
 description|string|Detailed description of the mod which allows HTML.
 metadata_blob|string|Metadata stored by the game developer. Metadata can also be stored as searchable [key value pairs](#metadata).
@@ -9432,7 +9448,7 @@ Name|Type|Description
 id|integer|Unique game id.
 submitted_by|[User Object   ](#schemauser_object)|Contains user data.
 » id|integer|Unique id of the user.
-» name_id|string|URL path for the user on mod.io. Usually a simplified version of their username.
+» name_id|string|Path for the user on mod.io. For example: https://mod.io/members/__username-id-here__ Usually a simplified version of their username.
 » username|string|Username of the user.
 » date_online|integer|Unix timestamp of date the user was last online.
 » avatar|[Avatar Object   ](#schemaavatar_object)|Contains avatar data.
@@ -9585,7 +9601,7 @@ Name|Type|Description
 id|integer|Unique team member id.
 user|[User Object   ](#schemauser_object)|Contains user data.
 » id|integer|Unique id of the user.
-» name_id|string|URL path for the user on mod.io. Usually a simplified version of their username.
+» name_id|string|Path for the user on mod.io. For example: https://mod.io/members/__username-id-here__ Usually a simplified version of their username.
 » username|string|Username of the user.
 » date_online|integer|Unix timestamp of date the user was last online.
 » avatar|[Avatar Object   ](#schemaavatar_object)|Contains avatar data.
@@ -9625,7 +9641,7 @@ position|string|Custom title given to the user in this team.
 Name|Type|Description
 ---|---|---|---|
 id|integer|Unique id of the user.
-name_id|string|URL path for the user on mod.io. Usually a simplified version of their username.
+name_id|string|Path for the user on mod.io. For example: https://mod.io/members/__username-id-here__ Usually a simplified version of their username.
 username|string|Username of the user.
 date_online|integer|Unix timestamp of date the user was last online.
 avatar|[Avatar Object   ](#schemaavatar_object)|Contains avatar data.
