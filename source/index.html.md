@@ -733,8 +733,7 @@ Get all games. Successful request will return an array of [Game Objects](#get-al
           "filename": "modio-dark.png",
           "original": "https://media.mod.io/images/global/ao_modio-dark.png",
           "thumb_50x50": "https://media.mod.io/images/global/modio-dark.png",
-          "thumb_100x100": "https://media.mod.io/images/global/am_modio-dark.png",
-          "thumb_256x256": "https://media.mod.io/images/global/al_modio-dark.png"
+          "thumb_100x100": "https://media.mod.io/images/global/am_modio-dark.png"
         },
         "timezone": "America/Los_Angeles",
         "language": "en",
@@ -910,8 +909,7 @@ Get a game. Successful request will return a single [Game Object](#game-object).
       "filename": "modio-dark.png",
       "original": "https://media.mod.io/images/global/ao_modio-dark.png",
       "thumb_50x50": "https://media.mod.io/images/global/modio-dark.png",
-      "thumb_100x100": "https://media.mod.io/images/global/am_modio-dark.png",
-      "thumb_256x256": "https://media.mod.io/images/global/al_modio-dark.png"
+      "thumb_100x100": "https://media.mod.io/images/global/am_modio-dark.png"
     },
     "timezone": "America/Los_Angeles",
     "language": "en",
@@ -1107,8 +1105,7 @@ Update details for a game. If you want to update the `icon`, `logo` or `header` 
       "filename": "modio-dark.png",
       "original": "https://media.mod.io/images/global/ao_modio-dark.png",
       "thumb_50x50": "https://media.mod.io/images/global/modio-dark.png",
-      "thumb_100x100": "https://media.mod.io/images/global/am_modio-dark.png",
-      "thumb_256x256": "https://media.mod.io/images/global/al_modio-dark.png"
+      "thumb_100x100": "https://media.mod.io/images/global/am_modio-dark.png"
     },
     "timezone": "America/Los_Angeles",
     "language": "en",
@@ -1277,6 +1274,7 @@ Get all mods for the corresponding game. Successful request will return an array
      description|string|Detailed description of the mod which allows HTML.
      homepage|string|Official homepage of the mod.
      metadata_blob|string|Metadata stored by the game developer.
+     metadata_kvp|string|Colon-separated values representing the key-value pairs you want to filter the results by. If you supply more than one key-pair, separate the pairs by a comma. Will only filter by an exact key-pair match.
      tags|string|Comma-separated values representing the tags you want to filter the results by. Only tags that are supported by the parent game can be applied. To determine what tags are eligible, see the tags values within `tag_options` column on the parent [Game Object](#game-object).
      status|string| Status of the mod (only recognised by game admins authenticated via _OAuth 2_):<br><br>__unauth__ = Only return un-authorized mods.<br>__auth__ = Only return authorized mods _(default)_.<br>__ban__ = Only return banned mods.<br>__archive__ = Only return archived mods (out of date / incompatible).<br>__delete__ = Only return deleted mods.
      downloads|string|Sort results by most downloads using [_sort filter](#filtering) parameter, value should be `downloads` for descending or `-downloads` for ascending results.
@@ -1302,8 +1300,7 @@ Get all mods for the corresponding game. Successful request will return an array
           "filename": "modio-dark.png",
           "original": "https://media.mod.io/images/global/ao_modio-dark.png",
           "thumb_50x50": "https://media.mod.io/images/global/modio-dark.png",
-          "thumb_100x100": "https://media.mod.io/images/global/am_modio-dark.png",
-          "thumb_256x256": "https://media.mod.io/images/global/al_modio-dark.png"
+          "thumb_100x100": "https://media.mod.io/images/global/am_modio-dark.png"
         },
         "timezone": "America/Los_Angeles",
         "language": "en",
@@ -1499,8 +1496,7 @@ Get a mod. Successful request will return a single [Mod Object](#mod-object).
       "filename": "modio-dark.png",
       "original": "https://media.mod.io/images/global/ao_modio-dark.png",
       "thumb_50x50": "https://media.mod.io/images/global/modio-dark.png",
-      "thumb_100x100": "https://media.mod.io/images/global/am_modio-dark.png",
-      "thumb_256x256": "https://media.mod.io/images/global/al_modio-dark.png"
+      "thumb_100x100": "https://media.mod.io/images/global/am_modio-dark.png"
     },
     "timezone": "America/Los_Angeles",
     "language": "en",
@@ -1711,8 +1707,7 @@ Add a mod. Successful request will return the newly created [Mod Object](#mod-ob
       "filename": "modio-dark.png",
       "original": "https://media.mod.io/images/global/ao_modio-dark.png",
       "thumb_50x50": "https://media.mod.io/images/global/modio-dark.png",
-      "thumb_100x100": "https://media.mod.io/images/global/am_modio-dark.png",
-      "thumb_256x256": "https://media.mod.io/images/global/al_modio-dark.png"
+      "thumb_100x100": "https://media.mod.io/images/global/am_modio-dark.png"
     },
     "timezone": "America/Los_Angeles",
     "language": "en",
@@ -1929,8 +1924,7 @@ Edit details for a mod. If you want to update the `logo` or media associated wit
       "filename": "modio-dark.png",
       "original": "https://media.mod.io/images/global/ao_modio-dark.png",
       "thumb_50x50": "https://media.mod.io/images/global/modio-dark.png",
-      "thumb_100x100": "https://media.mod.io/images/global/am_modio-dark.png",
-      "thumb_256x256": "https://media.mod.io/images/global/al_modio-dark.png"
+      "thumb_100x100": "https://media.mod.io/images/global/am_modio-dark.png"
     },
     "timezone": "America/Los_Angeles",
     "language": "en",
@@ -3202,8 +3196,7 @@ Subscribe the _authenticated user_ to a corresponding mod. No body parameters ar
       "filename": "modio-dark.png",
       "original": "https://media.mod.io/images/global/ao_modio-dark.png",
       "thumb_50x50": "https://media.mod.io/images/global/modio-dark.png",
-      "thumb_100x100": "https://media.mod.io/images/global/am_modio-dark.png",
-      "thumb_256x256": "https://media.mod.io/images/global/al_modio-dark.png"
+      "thumb_100x100": "https://media.mod.io/images/global/am_modio-dark.png"
     },
     "timezone": "America/Los_Angeles",
     "language": "en",
@@ -4184,8 +4177,8 @@ Delete an entire group of tags or individual tags. Successful request will retur
      
      Parameter|Type|Required|Description
      ---|---|---|---|
-     name|string|true|Name of the option group that you want to delete tags from, or completely.
-     tags|string[]|true|Array of strings representing the tag options to delete. An empty array will delete the entire group. The parameter name is the name of the group you are deleting tag options from. For example:<br><br>Assume you have a group of tags titled 'Difficulty' and you want to remove the tag option 'Hard' from it, the name parameter would have the value 'Difficulty' as well as the parameter tags which is an array that contains _only_ the value 'Hard'. If you want to delete an entire group, you would supply an empty array.
+     name|string|true|Name of the tag group that you want to delete tags from.
+     tags|string[]|true|Array of strings representing the tag options to delete. An empty array will delete the entire group. For example:<br><br>Assume you have a group of tags titled 'Difficulty' and you want to remove the tag option 'Hard' from it. The `name` parameter would have the value 'Difficulty', and the `tags` array would have one value 'Hard'.
 
 
 > Example response
@@ -5565,8 +5558,7 @@ Get all users that are part of a game team. Successful request will return an ar
           "filename": "modio-dark.png",
           "original": "https://media.mod.io/images/global/ao_modio-dark.png",
           "thumb_50x50": "https://media.mod.io/images/global/modio-dark.png",
-          "thumb_100x100": "https://media.mod.io/images/global/am_modio-dark.png",
-          "thumb_256x256": "https://media.mod.io/images/global/al_modio-dark.png"
+          "thumb_100x100": "https://media.mod.io/images/global/am_modio-dark.png"
         },
         "timezone": "America/Los_Angeles",
         "language": "en",
@@ -5589,7 +5581,7 @@ Get all users that are part of a game team. Successful request will return an ar
 
 Status|Meaning|Description|Response Schema
 ---|---|---|---|
-200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)|Successful Request|[Get Team   ](#schemaget_team)
+200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)|Successful Request|[Get All Team Members ](#schemaget_all_team_members)
 
 <aside class="warning">
 To perform this operation, you must be authenticated by means of one of the following methods:
@@ -5712,8 +5704,7 @@ Get all users that are part of a mod team. Successful request will return an arr
           "filename": "modio-dark.png",
           "original": "https://media.mod.io/images/global/ao_modio-dark.png",
           "thumb_50x50": "https://media.mod.io/images/global/modio-dark.png",
-          "thumb_100x100": "https://media.mod.io/images/global/am_modio-dark.png",
-          "thumb_256x256": "https://media.mod.io/images/global/al_modio-dark.png"
+          "thumb_100x100": "https://media.mod.io/images/global/am_modio-dark.png"
         },
         "timezone": "America/Los_Angeles",
         "language": "en",
@@ -5736,7 +5727,7 @@ Get all users that are part of a mod team. Successful request will return an arr
 
 Status|Meaning|Description|Response Schema
 ---|---|---|---|
-200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)|Successful Request|[Get Team   ](#schemaget_team)
+200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)|Successful Request|[Get All Team Members ](#schemaget_all_team_members)
 
 <aside class="warning">
 To perform this operation, you must be authenticated by means of one of the following methods:
@@ -6614,8 +6605,7 @@ Get all comments posted in the mods profile. Successful request will return an a
           "filename": "modio-dark.png",
           "original": "https://media.mod.io/images/global/ao_modio-dark.png",
           "thumb_50x50": "https://media.mod.io/images/global/modio-dark.png",
-          "thumb_100x100": "https://media.mod.io/images/global/am_modio-dark.png",
-          "thumb_256x256": "https://media.mod.io/images/global/al_modio-dark.png"
+          "thumb_100x100": "https://media.mod.io/images/global/am_modio-dark.png"
         },
         "timezone": "America/Los_Angeles",
         "language": "en",
@@ -6889,8 +6879,7 @@ Get the user that is the original _submitter_ of a resource. Successful request 
     "filename": "modio-dark.png",
     "original": "https://media.mod.io/images/global/ao_modio-dark.png",
     "thumb_50x50": "https://media.mod.io/images/global/modio-dark.png",
-    "thumb_100x100": "https://media.mod.io/images/global/am_modio-dark.png",
-    "thumb_256x256": "https://media.mod.io/images/global/al_modio-dark.png"
+    "thumb_100x100": "https://media.mod.io/images/global/am_modio-dark.png"
   },
   "timezone": "America/Los_Angeles",
   "language": "en",
@@ -7022,8 +7011,7 @@ Get all users registered on mod.io. Successful request will return an array of [
         "filename": "modio-dark.png",
         "original": "https://media.mod.io/images/global/ao_modio-dark.png",
         "thumb_50x50": "https://media.mod.io/images/global/modio-dark.png",
-        "thumb_100x100": "https://media.mod.io/images/global/am_modio-dark.png",
-        "thumb_256x256": "https://media.mod.io/images/global/al_modio-dark.png"
+        "thumb_100x100": "https://media.mod.io/images/global/am_modio-dark.png"
       },
       "timezone": "America/Los_Angeles",
       "language": "en",
@@ -7152,8 +7140,7 @@ Get a user. Successful request will return a single [User Object](#user-object).
     "filename": "modio-dark.png",
     "original": "https://media.mod.io/images/global/ao_modio-dark.png",
     "thumb_50x50": "https://media.mod.io/images/global/modio-dark.png",
-    "thumb_100x100": "https://media.mod.io/images/global/am_modio-dark.png",
-    "thumb_256x256": "https://media.mod.io/images/global/al_modio-dark.png"
+    "thumb_100x100": "https://media.mod.io/images/global/am_modio-dark.png"
   },
   "timezone": "America/Los_Angeles",
   "language": "en",
@@ -7413,8 +7400,7 @@ Get the _authenticated user_ details. Successful request will return a single [U
     "filename": "modio-dark.png",
     "original": "https://media.mod.io/images/global/ao_modio-dark.png",
     "thumb_50x50": "https://media.mod.io/images/global/modio-dark.png",
-    "thumb_100x100": "https://media.mod.io/images/global/am_modio-dark.png",
-    "thumb_256x256": "https://media.mod.io/images/global/al_modio-dark.png"
+    "thumb_100x100": "https://media.mod.io/images/global/am_modio-dark.png"
   },
   "timezone": "America/Los_Angeles",
   "language": "en",
@@ -7567,8 +7553,7 @@ Get all mod's the _authenticated user_ is subscribed to. Successful request will
           "filename": "modio-dark.png",
           "original": "https://media.mod.io/images/global/ao_modio-dark.png",
           "thumb_50x50": "https://media.mod.io/images/global/modio-dark.png",
-          "thumb_100x100": "https://media.mod.io/images/global/am_modio-dark.png",
-          "thumb_256x256": "https://media.mod.io/images/global/al_modio-dark.png"
+          "thumb_100x100": "https://media.mod.io/images/global/am_modio-dark.png"
         },
         "timezone": "America/Los_Angeles",
         "language": "en",
@@ -7771,8 +7756,7 @@ Get all games the _authenticated user_ added or is a team member of. Successful 
           "filename": "modio-dark.png",
           "original": "https://media.mod.io/images/global/ao_modio-dark.png",
           "thumb_50x50": "https://media.mod.io/images/global/modio-dark.png",
-          "thumb_100x100": "https://media.mod.io/images/global/am_modio-dark.png",
-          "thumb_256x256": "https://media.mod.io/images/global/al_modio-dark.png"
+          "thumb_100x100": "https://media.mod.io/images/global/am_modio-dark.png"
         },
         "timezone": "America/Los_Angeles",
         "language": "en",
@@ -7957,8 +7941,7 @@ Get all mods the _authenticated user_ added or is a team member of. Successful r
           "filename": "modio-dark.png",
           "original": "https://media.mod.io/images/global/ao_modio-dark.png",
           "thumb_50x50": "https://media.mod.io/images/global/modio-dark.png",
-          "thumb_100x100": "https://media.mod.io/images/global/am_modio-dark.png",
-          "thumb_256x256": "https://media.mod.io/images/global/al_modio-dark.png"
+          "thumb_100x100": "https://media.mod.io/images/global/am_modio-dark.png"
         },
         "timezone": "America/Los_Angeles",
         "language": "en",
@@ -8325,8 +8308,7 @@ original|string|URL to the full-sized header image.
   "filename": "modio-dark.png",
   "original": "https://media.mod.io/images/global/ao_modio-dark.png",
   "thumb_50x50": "https://media.mod.io/images/global/modio-dark.png",
-  "thumb_100x100": "https://media.mod.io/images/global/am_modio-dark.png",
-  "thumb_256x256": "https://media.mod.io/images/global/al_modio-dark.png"
+  "thumb_100x100": "https://media.mod.io/images/global/am_modio-dark.png"
 } 
 ```
 
@@ -8339,7 +8321,6 @@ filename|string|Avatar filename including extension.
 original|string|URL to the full-sized avatar.
 thumb_50x50|string|URL to the small thumbnail image.
 thumb_100x100|string|URL to the medium thumbnail image.
-thumb_256x256|string|URL to the large thumbnail image.
 
 
 
@@ -8368,7 +8349,790 @@ thumb_320x180|string|URL to the image thumbnail.
 
 
 
-## Get All Mod Comments 
+
+
+## Game Activity Object  
+
+<a name="schemagame_activity_object"></a>
+
+```json
+{
+  "id": 53,
+  "game_id": 17,
+  "user_id": 95,
+  "date_added": 1499846132,
+  "event": "GAME_UPDATE",
+  "changes": [
+    {
+      "field": "homepage",
+      "before": "https://www.roguehdpack.com/",
+      "after": "https://rogue-knight.mod.io/rogue-hd-pack"
+    }
+  ]
+} 
+```
+
+
+### Properties
+
+Name|Type|Description
+---|---|---|---|
+id|integer|Unique id of the activity record.
+game_id|integer|Unique id of the parent game.
+user_id|integer|Unique id of the user who performed the action.
+date_added|string|Unix timestamp of date the event occured.
+event|string|Type of [event the activity](#get-game-activity) was 'GAME_UPDATE' or 'GAME_VISIBILITY_CHANGE'.
+changes|[Field Change Object  ](#schemafield_change_object)[]|Contains an array of 'before and after' values of fields changed by the event.
+» field|string|Name of the field that was changed.
+» before|string|Value of the field before the event.
+» after|string|Value of the field after the event.
+
+
+
+
+## Mod Activity Object  
+
+<a name="schemamod_activity_object"></a>
+
+```json
+{
+  "id": 13,
+  "mod_id": 13,
+  "user_id": 13,
+  "date_added": 1499846132,
+  "event": "MOD_UPDATE",
+  "changes": [
+    {
+      "field": "homepage",
+      "before": "https://www.roguehdpack.com/",
+      "after": "https://rogue-knight.mod.io/rogue-hd-pack"
+    }
+  ]
+} 
+```
+
+
+### Properties
+
+Name|Type|Description
+---|---|---|---|
+id|integer|Unique id of the activity object.
+mod_id|integer|Unique id of the parent mod.
+user_id|integer|Unique id of the user who performed the action.
+date_added|integer|Unix timestamp of date the event occured.
+event|string|Type of [event the activity](#get-mod-activity) was 'MOD_UPDATE', 'MODFILE_UPDATE', 'MOD_VISIBILITY_CHANGE' or 'MOD_LIVE'.
+changes|[Field Change Object  ](#schemafield_change_object)[]|Contains an array of 'before and after' values of fields changed by the event.
+» field|string|Name of the field that was changed.
+» before|string|Value of the field before the event.
+» after|string|Value of the field after the event.
+
+
+
+
+## Field Change Object  
+
+<a name="schemafield_change_object"></a>
+
+```json
+{
+  "field": "homepage",
+  "before": "https://www.roguehdpack.com/",
+  "after": "https://rogue-knight.mod.io/rogue-hd-pack"
+} 
+```
+
+
+### Properties
+
+Name|Type|Description
+---|---|---|---|
+field|string|Name of the field that was changed.
+before|string|Value of the field before the event.
+after|string|Value of the field after the event.
+
+
+
+
+## Comment Object
+
+   <a name="schemacomment_object"></a>
+
+```json
+{
+  "id": 2,
+  "mod_id": 2,
+  "submitted_by": {
+    "id": 1,
+    "name_id": "xant",
+    "username": "XanT",
+    "date_online": 1509922961,
+    "avatar": {
+      "filename": "modio-dark.png",
+      "original": "https://media.mod.io/images/global/ao_modio-dark.png",
+      "thumb_50x50": "https://media.mod.io/images/global/modio-dark.png",
+      "thumb_100x100": "https://media.mod.io/images/global/am_modio-dark.png"
+    },
+    "timezone": "America/Los_Angeles",
+    "language": "en",
+    "profile_url": "https://mod.io/members/xant"
+  },
+  "date_added": 1499841487,
+  "reply_id": 1499,
+  "reply_position": "01",
+  "karma": 1,
+  "karma_guest": 0,
+  "content": "This mod is kickass! Great work!"
+} 
+```
+
+
+### Properties
+
+Name|Type|Description
+---|---|---|---|
+id|integer|Unique id of the comment.
+mod_id|integer|Unique id of the parent mod.
+submitted_by|[User Object   ](#schemauser_object)|Contains user data.
+» id|integer|Unique id of the user.
+» name_id|string|Path for the user on mod.io. For example: https://mod.io/members/__username-id-here__ Usually a simplified version of their username.
+» username|string|Username of the user.
+» date_online|integer|Unix timestamp of date the user was last online.
+» avatar|[Avatar Object   ](#schemaavatar_object)|Contains avatar data.
+»» filename|string|Avatar filename including extension.
+»» original|string|URL to the full-sized avatar.
+»» thumb_50x50|string|URL to the small thumbnail image.
+»» thumb_100x100|string|URL to the medium thumbnail image.
+» timezone|string|Timezone of the user, format is country/city.
+» language|string|2-character representation of users language preference.
+» profile_url|string|URL to the user's mod.io profile.
+date_added|integer|Unix timestamp of date the comment was posted.
+reply_id|integer|Id of the parent comment this comment is replying to (can be 0 if the comment is not a reply).
+reply_position|string|Levels of nesting in a comment thread. How it works:<br><br>- The first comment will have the position '01'.<br>- The second comment will have the position '02'.<br>- If someone responds to the second comment the position will be '02.01'.<br>- A maximum of 3 levels is supported.
+karma|integer|Karma received for the comment (can be postive or negative).
+karma_guest|integer|Karma received for guest comments (can be postive or negative).
+content|string|Contents of the comment.
+
+
+
+
+## Mod Dependencies Object  
+
+<a name="schemamod_dependencies_object"></a>
+
+```json
+{
+  "mod_id": 231,
+  "date_added": 1499841487
+} 
+```
+
+
+### Properties
+
+Name|Type|Description
+---|---|---|---|
+mod_id|integer|Unique id of the mod that is the dependency.
+date_added|integer|Unix timestamp of date the dependency was added.
+
+
+
+
+## Modfile Object
+
+   <a name="schemamodfile_object"></a>
+
+```json
+{
+  "id": 2,
+  "mod_id": 2,
+  "date_added": 1499841487,
+  "date_scanned": 1499841487,
+  "virus_status": 0,
+  "virus_positive": 0,
+  "virustotal_hash": "f9a7bf4a95ce20787337b685a79677cae2281b83c63ab0a25f091407741692af-1508147401",
+  "filesize": 15181,
+  "filehash": {
+    "md5": "2d4a0e2d7273db6b0a94b0740a88ad0d"
+  },
+  "filename": "rogue-knight-v1.zip",
+  "version": "1.3",
+  "changelog": "VERSION 1.3 -- Changes -- Fixed critical castle floor bug.",
+  "download_url": "https://mod.io/mods/file/1/c489a0354111a4d76640d47f0cdcb294"
+} 
+```
+
+
+### Properties
+
+Name|Type|Description
+---|---|---|---|
+id|integer|Unique modfile id.
+mod_id|integer|Unique mod id.
+date_added|integer|Unix timestamp of date file was added.
+date_scanned|integer|Unix timestamp of date file was virus scanned.
+virus_status|integer|Current virus scan status of the file. For newly added files that have yet to be scanned this field will change frequently until a scan is complete:<br><br>__0__ = Not scanned<br>__1__ = Scan complete<br>__2__ = In progress<br>__3__ = Too large to scan<br>__4__ = File not found<br>__5__ = Error Scanning
+virus_positive|integer|Was a virus detected:<br><br>__0__ = No threats detected<br>__1__ = Flagged as malicious
+virustotal_hash|string|VirusTotal proprietary hash to view the [scan results](https://www.virustotal.com).
+filesize|integer|Size of the file in bytes.
+filehash|[Filehash Object   ](#schemafilehash_object)|Contains filehash data.
+» md5|string|MD5 hash of the file.
+filename|string|Filename including extension.
+version|string|Release version this file represents.
+changelog|string|Changelog for the file.
+download_url|string|URL to download the file from the mod.io CDN.
+
+
+
+
+## Filehash Object
+
+   <a name="schemafilehash_object"></a>
+
+```json
+{
+  "md5": "2d4a0e2d7273db6b0a94b0740a88ad0d"
+} 
+```
+
+
+### Properties
+
+Name|Type|Description
+---|---|---|---|
+md5|string|MD5 hash of the file.
+
+
+
+
+## Mod Object
+
+   <a name="schemamod_object"></a>
+
+```json
+{
+  "id": 2,
+  "game_id": 2,
+  "submitted_by": {
+    "id": 1,
+    "name_id": "xant",
+    "username": "XanT",
+    "date_online": 1509922961,
+    "avatar": {
+      "filename": "modio-dark.png",
+      "original": "https://media.mod.io/images/global/ao_modio-dark.png",
+      "thumb_50x50": "https://media.mod.io/images/global/modio-dark.png",
+      "thumb_100x100": "https://media.mod.io/images/global/am_modio-dark.png"
+    },
+    "timezone": "America/Los_Angeles",
+    "language": "en",
+    "profile_url": "https://mod.io/members/xant"
+  },
+  "date_added": 1492564103,
+  "date_updated": 1499841487,
+  "date_live": 1499841403,
+  "logo": {
+    "filename": "modio-dark.png",
+    "original": "https://media.mod.io/images/global/modio-dark.png",
+    "thumb_320x180": "https://media.mod.io/images/global/modio-dark.png",
+    "thumb_640x360": "https://media.mod.io/images/global/modio-dark.png",
+    "thumb_1280x720": "https://media.mod.io/images/global/modio-dark.png"
+  },
+  "homepage": "https://www.rogue-hdpack.com/",
+  "name": "Rogue Knight HD Pack",
+  "name_id": "rogue-knight-hd-pack",
+  "summary": "It's time to bask in the glory of beautiful 4k textures!",
+  "description": "<h2>About</h2><p>Rogue HD Pack does exactly what you thi...",
+  "metadata_blob": "rogue,hd,high-res,4k,hd textures",
+  "profile_url": "https://rogue-knight.mod.io/rogue-knight-hd-pack",
+  "modfile": {
+    "id": 2,
+    "mod_id": 2,
+    "date_added": 1499841487,
+    "date_scanned": 1499841487,
+    "virus_status": 0,
+    "virus_positive": 0,
+    "virustotal_hash": "f9a7bf4a95ce20787337b685a79677cae2281b83c63ab0a25f091407741692af-1508147401",
+    "filesize": 15181,
+    "filehash": {
+      "md5": "2d4a0e2d7273db6b0a94b0740a88ad0d"
+    },
+    "filename": "rogue-knight-v1.zip",
+    "version": "1.3",
+    "changelog": "VERSION 1.3 -- Changes -- Fixed critical castle floor bug.",
+    "download_url": "https://mod.io/mods/file/1/c489a0354111a4d76640d47f0cdcb294"
+  },
+  "media": {
+    "youtube": [
+      "https://www.youtube.com/watch?v=dQw4w9WgXcQ"
+    ],
+    "sketchfab": [
+      "https://sketchfab.com/models/ef40b2d300334d009984c8865b2db1c8"
+    ],
+    "images": [
+      {
+        "filename": "modio-dark.png",
+        "original": "https://media.mod.io/images/global/modio-dark.png",
+        "thumb_320x180": "https://media.mod.io/images/global/modio-dark.png"
+      }
+    ]
+  },
+  "rating_summary": {
+    "total_ratings": 1230,
+    "positive_ratings": 1047,
+    "negative_ratings": 183,
+    "percentage_positive": 91,
+    "weighted_aggregate": 87.38,
+    "display_text": "Very Positive"
+  },
+  "tags": [
+    {
+      "name": "Unity",
+      "date_added": 1499841487
+    }
+  ]
+} 
+```
+
+
+### Properties
+
+Name|Type|Description
+---|---|---|---|
+id|integer|Unique mod id.
+game_id|integer|Unique game id.
+submitted_by|[User Object   ](#schemauser_object)|Contains user data.
+» id|integer|Unique id of the user.
+» name_id|string|Path for the user on mod.io. For example: https://mod.io/members/__username-id-here__ Usually a simplified version of their username.
+» username|string|Username of the user.
+» date_online|integer|Unix timestamp of date the user was last online.
+» avatar|[Avatar Object   ](#schemaavatar_object)|Contains avatar data.
+»» filename|string|Avatar filename including extension.
+»» original|string|URL to the full-sized avatar.
+»» thumb_50x50|string|URL to the small thumbnail image.
+»» thumb_100x100|string|URL to the medium thumbnail image.
+» timezone|string|Timezone of the user, format is country/city.
+» language|string|2-character representation of users language preference.
+» profile_url|string|URL to the user's mod.io profile.
+date_added|integer|Unix timestamp of date mod was registered.
+date_updated|integer|Unix timestamp of date mod was updated.
+date_live|integer|Unix timestamp of date mod was set live.
+logo|[Logo Object   ](#schemalogo_object)|Contains logo data.
+» filename|string|Logo filename including extension.
+» original|string|URL to the full-sized logo.
+» thumb_320x180|string|URL to the small logo thumbnail.
+» thumb_640x360|string|URL to the medium logo thumbnail.
+» thumb_1280x720|string|URL to the large logo thumbnail.
+homepage|string|Official homepage of the mod.
+name|string|Name of the mod.
+name_id|string|Path for the mod on mod.io. For example: https://gamename.mod.io/__mod-name-id-here__
+summary|string|Summary of the mod.
+description|string|Detailed description of the mod which allows HTML.
+metadata_blob|string|Metadata stored by the game developer. Metadata can also be stored as searchable [key value pairs](#metadata).
+profile_url|string|URL to the mod's mod.io profile.
+modfile|[Modfile Object   ](#schemamodfile_object)|Contains modfile data.
+» id|integer|Unique modfile id.
+» mod_id|integer|Unique mod id.
+» date_added|integer|Unix timestamp of date file was added.
+» date_scanned|integer|Unix timestamp of date file was virus scanned.
+» virus_status|integer|Current virus scan status of the file. For newly added files that have yet to be scanned this field will change frequently until a scan is complete:<br><br>__0__ = Not scanned<br>__1__ = Scan complete<br>__2__ = In progress<br>__3__ = Too large to scan<br>__4__ = File not found<br>__5__ = Error Scanning
+» virus_positive|integer|Was a virus detected:<br><br>__0__ = No threats detected<br>__1__ = Flagged as malicious
+» virustotal_hash|string|VirusTotal proprietary hash to view the [scan results](https://www.virustotal.com).
+» filesize|integer|Size of the file in bytes.
+» filehash|[Filehash Object   ](#schemafilehash_object)|Contains filehash data.
+»» md5|string|MD5 hash of the file.
+» filename|string|Filename including extension.
+» version|string|Release version this file represents.
+» changelog|string|Changelog for the file.
+» download_url|string|URL to download the file from the mod.io CDN.
+media|[Mod Media Object  ](#schemamod_media_object)|Contains mod media data.
+» youtube|string[]|Array of YouTube links.
+» sketchfab|string[]|Array of SketchFab links.
+» images|[Image Object   ](#schemaimage_object)[]|Array of image objects (a gallery).
+»» filename|string|Image filename including extension.
+»» original|string|URL to the full-sized image.
+»» thumb_320x180|string|URL to the image thumbnail.
+rating_summary|[Rating Summary Object  ](#schemarating_summary_object)|Contains ratings summary.
+» total_ratings|integer|Number of times this item has been rated.
+» positive_ratings|integer|Number of positive ratings.
+» negative_ratings|integer|Number of negative ratings.
+» percentage_positive|integer|Number of positive ratings, divided by the total ratings to determine it’s percentage score.
+» weighted_aggregate|float|Overall rating of this item calculated using the [Wilson score confidence interval](http://www.evanmiller.org/how-not-to-sort-by-average-rating.html). This column is good to sort on, as it will order items based on number of ratings and will place items with many positive ratings above those with a higher score but fewer ratings.
+» display_text|string|Textual representation of the rating in format:<br><br>- Overwhelmingly Positive<br>- Very Positive<br>- Positive<br>- Mostly Positive<br>- Mixed<br>- Negative<br>- Mostly Negative<br>- Very Negative<br>- Overwhelmingly Negative
+tags|[Mod Tag Object  ](#schemamod_tag_object)[]|Contains mod tag data.
+» name|string|Tag name.
+» date_added|integer|Unix timestamp of date tag was applied.
+
+
+
+
+## Mod Media Object  
+
+<a name="schemamod_media_object"></a>
+
+```json
+{
+  "youtube": [
+    "https://www.youtube.com/watch?v=dQw4w9WgXcQ"
+  ],
+  "sketchfab": [
+    "https://sketchfab.com/models/ef40b2d300334d009984c8865b2db1c8"
+  ],
+  "images": [
+    {
+      "filename": "modio-dark.png",
+      "original": "https://media.mod.io/images/global/modio-dark.png",
+      "thumb_320x180": "https://media.mod.io/images/global/modio-dark.png"
+    }
+  ]
+} 
+```
+
+
+### Properties
+
+Name|Type|Description
+---|---|---|---|
+youtube|string[]|Array of YouTube links.
+sketchfab|string[]|Array of SketchFab links.
+images|[Image Object   ](#schemaimage_object)[]|Array of image objects (a gallery).
+» filename|string|Image filename including extension.
+» original|string|URL to the full-sized image.
+» thumb_320x180|string|URL to the image thumbnail.
+
+
+
+
+## Mod Tag Object  
+
+<a name="schemamod_tag_object"></a>
+
+```json
+{
+  "name": "Unity",
+  "date_added": 1499841487
+} 
+```
+
+
+### Properties
+
+Name|Type|Description
+---|---|---|---|
+name|string|Tag name.
+date_added|integer|Unix timestamp of date tag was applied.
+
+
+
+
+## Game Object
+
+   <a name="schemagame_object"></a>
+
+```json
+{
+  "id": 2,
+  "submitted_by": {
+    "id": 1,
+    "name_id": "xant",
+    "username": "XanT",
+    "date_online": 1509922961,
+    "avatar": {
+      "filename": "modio-dark.png",
+      "original": "https://media.mod.io/images/global/ao_modio-dark.png",
+      "thumb_50x50": "https://media.mod.io/images/global/modio-dark.png",
+      "thumb_100x100": "https://media.mod.io/images/global/am_modio-dark.png"
+    },
+    "timezone": "America/Los_Angeles",
+    "language": "en",
+    "profile_url": "https://mod.io/members/xant"
+  },
+  "date_added": 1493702614,
+  "date_updated": 1499410290,
+  "date_live": 1499841403,
+  "presentation": 1,
+  "submission": 0,
+  "curation": 0,
+  "community": 3,
+  "revenue": 1500,
+  "api": 3,
+  "ugc_name": "map",
+  "icon": {
+    "filename": "modio-dark.png",
+    "original": "https://media.mod.io/images/global/ao_modio-dark.png",
+    "thumb_64x64": "https://media.mod.io/images/global/modio-dark.png",
+    "thumb_128x128": "https://media.mod.io/images/global/am_modio-dark.png",
+    "thumb_256x256": "https://media.mod.io/images/global/al_modio-dark.png"
+  },
+  "logo": {
+    "filename": "modio-dark.png",
+    "original": "https://media.mod.io/images/global/modio-dark.png",
+    "thumb_320x180": "https://media.mod.io/images/global/modio-dark.png",
+    "thumb_640x360": "https://media.mod.io/images/global/modio-dark.png",
+    "thumb_1280x720": "https://media.mod.io/images/global/modio-dark.png"
+  },
+  "header": {
+    "filename": "demo.png",
+    "original": "https://media.mod.io/images/global/modio-dark.png"
+  },
+  "homepage": "https://www.rogue-knight-game.com/",
+  "name": "Rogue Knight",
+  "name_id": "rogue-knight",
+  "summary": "Rogue Knight is a brand new 2D pixel platformer.",
+  "instructions": "Instructions on the process to upload mods.",
+  "profile_url": "https://rogue-knight.mod.io",
+  "tag_options": [
+    {
+      "name": "Theme",
+      "type": "checkboxes",
+      "tags": [
+        "Horror"
+      ],
+      "hidden": 0
+    }
+  ]
+} 
+```
+
+
+### Properties
+
+Name|Type|Description
+---|---|---|---|
+id|integer|Unique game id.
+submitted_by|[User Object   ](#schemauser_object)|Contains user data.
+» id|integer|Unique id of the user.
+» name_id|string|Path for the user on mod.io. For example: https://mod.io/members/__username-id-here__ Usually a simplified version of their username.
+» username|string|Username of the user.
+» date_online|integer|Unix timestamp of date the user was last online.
+» avatar|[Avatar Object   ](#schemaavatar_object)|Contains avatar data.
+»» filename|string|Avatar filename including extension.
+»» original|string|URL to the full-sized avatar.
+»» thumb_50x50|string|URL to the small thumbnail image.
+»» thumb_100x100|string|URL to the medium thumbnail image.
+» timezone|string|Timezone of the user, format is country/city.
+» language|string|2-character representation of users language preference.
+» profile_url|string|URL to the user's mod.io profile.
+date_added|integer|Unix timestamp of date game was registered.
+date_updated|integer|Unix timestamp of date game was updated.
+date_live|integer|Unix timestamp of date game was set live.
+presentation|integer|Presentation style used on the mod.io website:<br><br>__0__ =  Grid View: Displays mods in a grid<br>__1__ = Table View: Displays mods in a table
+submission|integer|Submission process modders must follow:<br><br>__0__ = Mod uploads must occur via a tool created by the game developers<br>__1__ = Mod uploads can occur from anywhere, including the website and API
+curation|integer|Curation process used to approve mods:<br><br>__0__ = No curation: Mods are immediately available to play<br>__1__ = Paid curation: Only mods which accept donations must be accepted<br>__2__ = Full curation: All mods must be accepted by someone to be listed
+community|integer|Community features enabled on the mod.io website:<br><br>__0__ = All of the options below are disabled<br>__1__ = Discussion board enabled<br>__2__ = Guides and news enabled<br>__?__ = Combine to find games with multiple options enabled (see [BITWISE filtering](#bitwise-and-bitwise-and))
+revenue|integer|Revenue capabilities mods can enable:<br><br>__0__ = All of the options below are disabled<br>__1__ = Allow mods to be sold<br>__2__ = Allow mods to receive donations<br>__4__ = Allow mods to be traded<br>__8__ = Allow mods to control supply and scarcity<br>__?__ = Combine to find games with multiple options enabled (see [BITWISE filtering](#bitwise-and-bitwise-and))
+api|integer|Level of API access allowed by this game:<br><br>__0__ = All of the options below are disabled<br>__1__ = This game allows 3rd parties to access the mods API<br>__2__ = This game allows mods to be downloaded directly without API validation<br>__?__ = Combine to find games with multiple options enabled (see [BITWISE filtering](#bitwise-and-bitwise-and))
+ugc_name|string|Word used to describe user-generated content (mods, items, addons etc).
+icon|[Icon Object   ](#schemaicon_object)|Contains icon data.
+» filename|string|Icon filename including extension.
+» original|string|URL to the full-sized icon.
+» thumb_64x64|string|URL to the small thumbnail image.
+» thumb_128x128|string|URL to the medium thumbnail image.
+» thumb_256x256|string|URL to the large thumbnail image.
+logo|[Logo Object   ](#schemalogo_object)|Contains logo data.
+» filename|string|Logo filename including extension.
+» original|string|URL to the full-sized logo.
+» thumb_320x180|string|URL to the small logo thumbnail.
+» thumb_640x360|string|URL to the medium logo thumbnail.
+» thumb_1280x720|string|URL to the large logo thumbnail.
+header|[Header Object   ](#schemaheader_object)|Contains header data.
+» filename|string|Header image filename including extension.
+» original|string|URL to the full-sized header image.
+homepage|string|Official homepage of the game.
+name|string|Name of the game.
+name_id|string|Subdomain for the game on mod.io.
+summary|string|Summary of the game.
+instructions|string|A guide about creating and uploading mods for this game to mod.io (applicable if submission = 0).
+profile_url|string|URL to the game's mod.io page.
+tag_options|[Game Tag Option Object ](#schemagame_tag_option_object)[]|Groups of tags configured by the game developer, that mods can select.
+» name|string|Name of the tag group.
+» type|string|Can multiple tags be selected via 'checkboxes' or should only a single tag be selected via a 'dropdown'.
+» hidden|integer|Groups of tags flagged as 'admin only' should only be used for filtering, and should not be displayed to users.
+» tags|string[]|Array of tags in this group.
+
+
+
+
+## Game Tag Option Object 
+
+<a name="schemagame_tag_option_object"></a>
+
+```json
+{
+  "name": "Theme",
+  "type": "checkboxes",
+  "tags": [
+    "Horror"
+  ],
+  "hidden": 0
+} 
+```
+
+
+### Properties
+
+Name|Type|Description
+---|---|---|---|
+name|string|Name of the tag group.
+type|string|Can multiple tags be selected via 'checkboxes' or should only a single tag be selected via a 'dropdown'.
+hidden|integer|Groups of tags flagged as 'admin only' should only be used for filtering, and should not be displayed to users.
+tags|string[]|Array of tags in this group.
+
+
+
+
+## Metadata KVP Object  
+
+<a name="schemametadata_kvp_object"></a>
+
+```json
+{
+  "key": "pistol-dmg",
+  "value": 800
+} 
+```
+
+
+### Properties
+
+Name|Type|Description
+---|---|---|---|
+key|string|The key of the key-value pair.
+value|string|The value of the key-value pair.
+
+
+
+
+## Rating Summary Object  
+
+<a name="schemarating_summary_object"></a>
+
+```json
+{
+  "total_ratings": 1230,
+  "positive_ratings": 1047,
+  "negative_ratings": 183,
+  "percentage_positive": 91,
+  "weighted_aggregate": 87.38,
+  "display_text": "Very Positive"
+} 
+```
+
+
+### Properties
+
+Name|Type|Description
+---|---|---|---|
+total_ratings|integer|Number of times this item has been rated.
+positive_ratings|integer|Number of positive ratings.
+negative_ratings|integer|Number of negative ratings.
+percentage_positive|integer|Number of positive ratings, divided by the total ratings to determine it’s percentage score.
+weighted_aggregate|float|Overall rating of this item calculated using the [Wilson score confidence interval](http://www.evanmiller.org/how-not-to-sort-by-average-rating.html). This column is good to sort on, as it will order items based on number of ratings and will place items with many positive ratings above those with a higher score but fewer ratings.
+display_text|string|Textual representation of the rating in format:<br><br>- Overwhelmingly Positive<br>- Very Positive<br>- Positive<br>- Mostly Positive<br>- Mixed<br>- Negative<br>- Mostly Negative<br>- Very Negative<br>- Overwhelmingly Negative
+
+
+
+
+## Team Member Object  
+
+<a name="schemateam_member_object"></a>
+
+```json
+{
+  "id": 457,
+  "user": {
+    "id": 1,
+    "name_id": "xant",
+    "username": "XanT",
+    "date_online": 1509922961,
+    "avatar": {
+      "filename": "modio-dark.png",
+      "original": "https://media.mod.io/images/global/ao_modio-dark.png",
+      "thumb_50x50": "https://media.mod.io/images/global/modio-dark.png",
+      "thumb_100x100": "https://media.mod.io/images/global/am_modio-dark.png"
+    },
+    "timezone": "America/Los_Angeles",
+    "language": "en",
+    "profile_url": "https://mod.io/members/xant"
+  },
+  "level": 8,
+  "date_added": 1492058857,
+  "position": "Supreme Overlord"
+} 
+```
+
+
+### Properties
+
+Name|Type|Description
+---|---|---|---|
+id|integer|Unique team member id.
+user|[User Object   ](#schemauser_object)|Contains user data.
+» id|integer|Unique id of the user.
+» name_id|string|Path for the user on mod.io. For example: https://mod.io/members/__username-id-here__ Usually a simplified version of their username.
+» username|string|Username of the user.
+» date_online|integer|Unix timestamp of date the user was last online.
+» avatar|[Avatar Object   ](#schemaavatar_object)|Contains avatar data.
+»» filename|string|Avatar filename including extension.
+»» original|string|URL to the full-sized avatar.
+»» thumb_50x50|string|URL to the small thumbnail image.
+»» thumb_100x100|string|URL to the medium thumbnail image.
+» timezone|string|Timezone of the user, format is country/city.
+» language|string|2-character representation of users language preference.
+» profile_url|string|URL to the user's mod.io profile.
+level|integer|Level of permission the user has:<br><br>__0__ = Guest<br>__1__ = Member<br>__2__ = Contributor<br>__4__ = Manager<br>__8__ = Leader
+date_added|integer|Unix timestamp of the date the user was added to the team.
+position|string|Custom title given to the user in this team.
+
+
+
+
+## User Object
+
+   <a name="schemauser_object"></a>
+
+```json
+{
+  "id": 1,
+  "name_id": "xant",
+  "username": "XanT",
+  "date_online": 1509922961,
+  "avatar": {
+    "filename": "modio-dark.png",
+    "original": "https://media.mod.io/images/global/ao_modio-dark.png",
+    "thumb_50x50": "https://media.mod.io/images/global/modio-dark.png",
+    "thumb_100x100": "https://media.mod.io/images/global/am_modio-dark.png"
+  },
+  "timezone": "America/Los_Angeles",
+  "language": "en",
+  "profile_url": "https://mod.io/members/xant"
+} 
+```
+
+
+### Properties
+
+Name|Type|Description
+---|---|---|---|
+id|integer|Unique id of the user.
+name_id|string|Path for the user on mod.io. For example: https://mod.io/members/__username-id-here__ Usually a simplified version of their username.
+username|string|Username of the user.
+date_online|integer|Unix timestamp of date the user was last online.
+avatar|[Avatar Object   ](#schemaavatar_object)|Contains avatar data.
+» filename|string|Avatar filename including extension.
+» original|string|URL to the full-sized avatar.
+» thumb_50x50|string|URL to the small thumbnail image.
+» thumb_100x100|string|URL to the medium thumbnail image.
+timezone|string|Timezone of the user, format is country/city.
+language|string|2-character representation of users language preference.
+profile_url|string|URL to the user's mod.io profile.
+
+
+
+
+
+
+
+ ## Get All Mod Comments 
 
 <a name="schemaget_all_mod_comments"></a>
 
@@ -8387,8 +9151,7 @@ thumb_320x180|string|URL to the image thumbnail.
           "filename": "modio-dark.png",
           "original": "https://media.mod.io/images/global/ao_modio-dark.png",
           "thumb_50x50": "https://media.mod.io/images/global/modio-dark.png",
-          "thumb_100x100": "https://media.mod.io/images/global/am_modio-dark.png",
-          "thumb_256x256": "https://media.mod.io/images/global/al_modio-dark.png"
+          "thumb_100x100": "https://media.mod.io/images/global/am_modio-dark.png"
         },
         "timezone": "America/Los_Angeles",
         "language": "en",
@@ -8429,7 +9192,6 @@ data|[Comment Object   ](#schemacomment_object)[]|Array containing comment objec
 »»» original|string|URL to the full-sized avatar.
 »»» thumb_50x50|string|URL to the small thumbnail image.
 »»» thumb_100x100|string|URL to the medium thumbnail image.
-»»» thumb_256x256|string|URL to the large thumbnail image.
 »» timezone|string|Timezone of the user, format is country/city.
 »» language|string|2-character representation of users language preference.
 »» profile_url|string|URL to the user's mod.io profile.
@@ -8561,8 +9323,7 @@ result_offset|integer|Number of results skipped over.
           "filename": "modio-dark.png",
           "original": "https://media.mod.io/images/global/ao_modio-dark.png",
           "thumb_50x50": "https://media.mod.io/images/global/modio-dark.png",
-          "thumb_100x100": "https://media.mod.io/images/global/am_modio-dark.png",
-          "thumb_256x256": "https://media.mod.io/images/global/al_modio-dark.png"
+          "thumb_100x100": "https://media.mod.io/images/global/am_modio-dark.png"
         },
         "timezone": "America/Los_Angeles",
         "language": "en",
@@ -8640,7 +9401,6 @@ data|[Game Object   ](#schemagame_object)[]|Array containing game objects.
 »»» original|string|URL to the full-sized avatar.
 »»» thumb_50x50|string|URL to the small thumbnail image.
 »»» thumb_100x100|string|URL to the medium thumbnail image.
-»»» thumb_256x256|string|URL to the large thumbnail image.
 »» timezone|string|Timezone of the user, format is country/city.
 »» language|string|2-character representation of users language preference.
 »» profile_url|string|URL to the user's mod.io profile.
@@ -8795,8 +9555,7 @@ result_offset|integer|Number of results skipped over.
           "filename": "modio-dark.png",
           "original": "https://media.mod.io/images/global/ao_modio-dark.png",
           "thumb_50x50": "https://media.mod.io/images/global/modio-dark.png",
-          "thumb_100x100": "https://media.mod.io/images/global/am_modio-dark.png",
-          "thumb_256x256": "https://media.mod.io/images/global/al_modio-dark.png"
+          "thumb_100x100": "https://media.mod.io/images/global/am_modio-dark.png"
         },
         "timezone": "America/Los_Angeles",
         "language": "en",
@@ -8894,7 +9653,6 @@ data|[Mod Object   ](#schemamod_object)[]|Array containing mod objects.
 »»» original|string|URL to the full-sized avatar.
 »»» thumb_50x50|string|URL to the small thumbnail image.
 »»» thumb_100x100|string|URL to the medium thumbnail image.
-»»» thumb_256x256|string|URL to the large thumbnail image.
 »» timezone|string|Timezone of the user, format is country/city.
 »» language|string|2-character representation of users language preference.
 »» profile_url|string|URL to the user's mod.io profile.
@@ -9084,9 +9842,9 @@ result_offset|integer|Number of results skipped over.
 
 
 
-## Get Team
+## Get All Team Members 
 
-   <a name="schemaget_team"></a>
+<a name="schemaget_all_team_members"></a>
 
 ```json
 {
@@ -9102,8 +9860,7 @@ result_offset|integer|Number of results skipped over.
           "filename": "modio-dark.png",
           "original": "https://media.mod.io/images/global/ao_modio-dark.png",
           "thumb_50x50": "https://media.mod.io/images/global/modio-dark.png",
-          "thumb_100x100": "https://media.mod.io/images/global/am_modio-dark.png",
-          "thumb_256x256": "https://media.mod.io/images/global/al_modio-dark.png"
+          "thumb_100x100": "https://media.mod.io/images/global/am_modio-dark.png"
         },
         "timezone": "America/Los_Angeles",
         "language": "en",
@@ -9140,7 +9897,6 @@ data|[Team Member Object  ](#schemateam_member_object)[]|Array containing team m
 »»» original|string|URL to the full-sized avatar.
 »»» thumb_50x50|string|URL to the small thumbnail image.
 »»» thumb_100x100|string|URL to the medium thumbnail image.
-»»» thumb_256x256|string|URL to the large thumbnail image.
 »» timezone|string|Timezone of the user, format is country/city.
 »» language|string|2-character representation of users language preference.
 »» profile_url|string|URL to the user's mod.io profile.
@@ -9170,8 +9926,7 @@ result_offset|integer|Number of results skipped over.
         "filename": "modio-dark.png",
         "original": "https://media.mod.io/images/global/ao_modio-dark.png",
         "thumb_50x50": "https://media.mod.io/images/global/modio-dark.png",
-        "thumb_100x100": "https://media.mod.io/images/global/am_modio-dark.png",
-        "thumb_256x256": "https://media.mod.io/images/global/al_modio-dark.png"
+        "thumb_100x100": "https://media.mod.io/images/global/am_modio-dark.png"
       },
       "timezone": "America/Los_Angeles",
       "language": "en",
@@ -9202,7 +9957,6 @@ data|[User Object   ](#schemauser_object)[]|Array containing user objects.
 »» original|string|URL to the full-sized avatar.
 »» thumb_50x50|string|URL to the small thumbnail image.
 »» thumb_100x100|string|URL to the medium thumbnail image.
-»» thumb_256x256|string|URL to the large thumbnail image.
 » timezone|string|Timezone of the user, format is country/city.
 » language|string|2-character representation of users language preference.
 » profile_url|string|URL to the user's mod.io profile.
@@ -9211,796 +9965,4 @@ result_limit|integer|Maximum number of results returned.
 result_offset|integer|Number of results skipped over.
 
 
-
-
-## Game Activity Object  
-
-<a name="schemagame_activity_object"></a>
-
-```json
-{
-  "id": 53,
-  "game_id": 17,
-  "user_id": 95,
-  "date_added": 1499846132,
-  "event": "GAME_UPDATE",
-  "changes": [
-    {
-      "field": "homepage",
-      "before": "https://www.roguehdpack.com/",
-      "after": "https://rogue-knight.mod.io/rogue-hd-pack"
-    }
-  ]
-} 
-```
-
-
-### Properties
-
-Name|Type|Description
----|---|---|---|
-id|integer|Unique id of the activity record.
-game_id|integer|Unique id of the parent game.
-user_id|integer|Unique id of the user who performed the action.
-date_added|string|Unix timestamp of date the event occured.
-event|string|Type of [event the activity](#get-game-activity) was 'GAME_UPDATE' or 'GAME_VISIBILITY_CHANGE'.
-changes|[Field Change Object  ](#schemafield_change_object)[]|Contains an array of 'before and after' values of fields changed by the event.
-» field|string|Name of the field that was changed.
-» before|string|Value of the field before the event.
-» after|string|Value of the field after the event.
-
-
-
-
-## Mod Activity Object  
-
-<a name="schemamod_activity_object"></a>
-
-```json
-{
-  "id": 13,
-  "mod_id": 13,
-  "user_id": 13,
-  "date_added": 1499846132,
-  "event": "MOD_UPDATE",
-  "changes": [
-    {
-      "field": "homepage",
-      "before": "https://www.roguehdpack.com/",
-      "after": "https://rogue-knight.mod.io/rogue-hd-pack"
-    }
-  ]
-} 
-```
-
-
-### Properties
-
-Name|Type|Description
----|---|---|---|
-id|integer|Unique id of the activity object.
-mod_id|integer|Unique id of the parent mod.
-user_id|integer|Unique id of the user who performed the action.
-date_added|integer|Unix timestamp of date the event occured.
-event|string|Type of [event the activity](#get-mod-activity) was 'MOD_UPDATE', 'MODFILE_UPDATE', 'MOD_VISIBILITY_CHANGE' or 'MOD_LIVE'.
-changes|[Field Change Object  ](#schemafield_change_object)[]|Contains an array of 'before and after' values of fields changed by the event.
-» field|string|Name of the field that was changed.
-» before|string|Value of the field before the event.
-» after|string|Value of the field after the event.
-
-
-
-
-## Field Change Object  
-
-<a name="schemafield_change_object"></a>
-
-```json
-{
-  "field": "homepage",
-  "before": "https://www.roguehdpack.com/",
-  "after": "https://rogue-knight.mod.io/rogue-hd-pack"
-} 
-```
-
-
-### Properties
-
-Name|Type|Description
----|---|---|---|
-field|string|Name of the field that was changed.
-before|string|Value of the field before the event.
-after|string|Value of the field after the event.
-
-
-
-
-## Comment Object
-
-   <a name="schemacomment_object"></a>
-
-```json
-{
-  "id": 2,
-  "mod_id": 2,
-  "submitted_by": {
-    "id": 1,
-    "name_id": "xant",
-    "username": "XanT",
-    "date_online": 1509922961,
-    "avatar": {
-      "filename": "modio-dark.png",
-      "original": "https://media.mod.io/images/global/ao_modio-dark.png",
-      "thumb_50x50": "https://media.mod.io/images/global/modio-dark.png",
-      "thumb_100x100": "https://media.mod.io/images/global/am_modio-dark.png",
-      "thumb_256x256": "https://media.mod.io/images/global/al_modio-dark.png"
-    },
-    "timezone": "America/Los_Angeles",
-    "language": "en",
-    "profile_url": "https://mod.io/members/xant"
-  },
-  "date_added": 1499841487,
-  "reply_id": 1499,
-  "reply_position": "01",
-  "karma": 1,
-  "karma_guest": 0,
-  "content": "This mod is kickass! Great work!"
-} 
-```
-
-
-### Properties
-
-Name|Type|Description
----|---|---|---|
-id|integer|Unique id of the comment.
-mod_id|integer|Unique id of the parent mod.
-submitted_by|[User Object   ](#schemauser_object)|Contains user data.
-» id|integer|Unique id of the user.
-» name_id|string|Path for the user on mod.io. For example: https://mod.io/members/__username-id-here__ Usually a simplified version of their username.
-» username|string|Username of the user.
-» date_online|integer|Unix timestamp of date the user was last online.
-» avatar|[Avatar Object   ](#schemaavatar_object)|Contains avatar data.
-»» filename|string|Avatar filename including extension.
-»» original|string|URL to the full-sized avatar.
-»» thumb_50x50|string|URL to the small thumbnail image.
-»» thumb_100x100|string|URL to the medium thumbnail image.
-»» thumb_256x256|string|URL to the large thumbnail image.
-» timezone|string|Timezone of the user, format is country/city.
-» language|string|2-character representation of users language preference.
-» profile_url|string|URL to the user's mod.io profile.
-date_added|integer|Unix timestamp of date the comment was posted.
-reply_id|integer|Id of the parent comment this comment is replying to (can be 0 if the comment is not a reply).
-reply_position|string|Levels of nesting in a comment thread. How it works:<br><br>- The first comment will have the position '01'.<br>- The second comment will have the position '02'.<br>- If someone responds to the second comment the position will be '02.01'.<br>- A maximum of 3 levels is supported.
-karma|integer|Karma received for the comment (can be postive or negative).
-karma_guest|integer|Karma received for guest comments (can be postive or negative).
-content|string|Contents of the comment.
-
-
-
-
-## Mod Dependencies Object  
-
-<a name="schemamod_dependencies_object"></a>
-
-```json
-{
-  "mod_id": 231,
-  "date_added": 1499841487
-} 
-```
-
-
-### Properties
-
-Name|Type|Description
----|---|---|---|
-mod_id|integer|Unique id of the mod that is the dependency.
-date_added|integer|Unix timestamp of date the dependency was added.
-
-
-
-
-## Modfile Object
-
-   <a name="schemamodfile_object"></a>
-
-```json
-{
-  "id": 2,
-  "mod_id": 2,
-  "date_added": 1499841487,
-  "date_scanned": 1499841487,
-  "virus_status": 0,
-  "virus_positive": 0,
-  "virustotal_hash": "f9a7bf4a95ce20787337b685a79677cae2281b83c63ab0a25f091407741692af-1508147401",
-  "filesize": 15181,
-  "filehash": {
-    "md5": "2d4a0e2d7273db6b0a94b0740a88ad0d"
-  },
-  "filename": "rogue-knight-v1.zip",
-  "version": "1.3",
-  "changelog": "VERSION 1.3 -- Changes -- Fixed critical castle floor bug.",
-  "download_url": "https://mod.io/mods/file/1/c489a0354111a4d76640d47f0cdcb294"
-} 
-```
-
-
-### Properties
-
-Name|Type|Description
----|---|---|---|
-id|integer|Unique modfile id.
-mod_id|integer|Unique mod id.
-date_added|integer|Unix timestamp of date file was added.
-date_scanned|integer|Unix timestamp of date file was virus scanned.
-virus_status|integer|Current virus scan status of the file. For newly added files that have yet to be scanned this field will change frequently until a scan is complete:<br><br>__0__ = Not scanned<br>__1__ = Scan complete<br>__2__ = In progress<br>__3__ = Too large to scan<br>__4__ = File not found<br>__5__ = Error Scanning
-virus_positive|integer|Was a virus detected:<br><br>__0__ = No threats detected<br>__1__ = Flagged as malicious
-virustotal_hash|string|VirusTotal proprietary hash to view the [scan results](https://www.virustotal.com).
-filesize|integer|Size of the file in bytes.
-filehash|[Filehash Object   ](#schemafilehash_object)|Contains filehash data.
-» md5|string|MD5 hash of the file.
-filename|string|Filename including extension.
-version|string|Release version this file represents.
-changelog|string|Changelog for the file.
-download_url|string|URL to download the file from the mod.io CDN.
-
-
-
-
-## Filehash Object
-
-   <a name="schemafilehash_object"></a>
-
-```json
-{
-  "md5": "2d4a0e2d7273db6b0a94b0740a88ad0d"
-} 
-```
-
-
-### Properties
-
-Name|Type|Description
----|---|---|---|
-md5|string|MD5 hash of the file.
-
-
-
-
-## Mod Object
-
-   <a name="schemamod_object"></a>
-
-```json
-{
-  "id": 2,
-  "game_id": 2,
-  "submitted_by": {
-    "id": 1,
-    "name_id": "xant",
-    "username": "XanT",
-    "date_online": 1509922961,
-    "avatar": {
-      "filename": "modio-dark.png",
-      "original": "https://media.mod.io/images/global/ao_modio-dark.png",
-      "thumb_50x50": "https://media.mod.io/images/global/modio-dark.png",
-      "thumb_100x100": "https://media.mod.io/images/global/am_modio-dark.png",
-      "thumb_256x256": "https://media.mod.io/images/global/al_modio-dark.png"
-    },
-    "timezone": "America/Los_Angeles",
-    "language": "en",
-    "profile_url": "https://mod.io/members/xant"
-  },
-  "date_added": 1492564103,
-  "date_updated": 1499841487,
-  "date_live": 1499841403,
-  "logo": {
-    "filename": "modio-dark.png",
-    "original": "https://media.mod.io/images/global/modio-dark.png",
-    "thumb_320x180": "https://media.mod.io/images/global/modio-dark.png",
-    "thumb_640x360": "https://media.mod.io/images/global/modio-dark.png",
-    "thumb_1280x720": "https://media.mod.io/images/global/modio-dark.png"
-  },
-  "homepage": "https://www.rogue-hdpack.com/",
-  "name": "Rogue Knight HD Pack",
-  "name_id": "rogue-knight-hd-pack",
-  "summary": "It's time to bask in the glory of beautiful 4k textures!",
-  "description": "<h2>About</h2><p>Rogue HD Pack does exactly what you thi...",
-  "metadata_blob": "rogue,hd,high-res,4k,hd textures",
-  "profile_url": "https://rogue-knight.mod.io/rogue-knight-hd-pack",
-  "modfile": {
-    "id": 2,
-    "mod_id": 2,
-    "date_added": 1499841487,
-    "date_scanned": 1499841487,
-    "virus_status": 0,
-    "virus_positive": 0,
-    "virustotal_hash": "f9a7bf4a95ce20787337b685a79677cae2281b83c63ab0a25f091407741692af-1508147401",
-    "filesize": 15181,
-    "filehash": {
-      "md5": "2d4a0e2d7273db6b0a94b0740a88ad0d"
-    },
-    "filename": "rogue-knight-v1.zip",
-    "version": "1.3",
-    "changelog": "VERSION 1.3 -- Changes -- Fixed critical castle floor bug.",
-    "download_url": "https://mod.io/mods/file/1/c489a0354111a4d76640d47f0cdcb294"
-  },
-  "media": {
-    "youtube": [
-      "https://www.youtube.com/watch?v=dQw4w9WgXcQ"
-    ],
-    "sketchfab": [
-      "https://sketchfab.com/models/ef40b2d300334d009984c8865b2db1c8"
-    ],
-    "images": [
-      {
-        "filename": "modio-dark.png",
-        "original": "https://media.mod.io/images/global/modio-dark.png",
-        "thumb_320x180": "https://media.mod.io/images/global/modio-dark.png"
-      }
-    ]
-  },
-  "rating_summary": {
-    "total_ratings": 1230,
-    "positive_ratings": 1047,
-    "negative_ratings": 183,
-    "percentage_positive": 91,
-    "weighted_aggregate": 87.38,
-    "display_text": "Very Positive"
-  },
-  "tags": [
-    {
-      "name": "Unity",
-      "date_added": 1499841487
-    }
-  ]
-} 
-```
-
-
-### Properties
-
-Name|Type|Description
----|---|---|---|
-id|integer|Unique mod id.
-game_id|integer|Unique game id.
-submitted_by|[User Object   ](#schemauser_object)|Contains user data.
-» id|integer|Unique id of the user.
-» name_id|string|Path for the user on mod.io. For example: https://mod.io/members/__username-id-here__ Usually a simplified version of their username.
-» username|string|Username of the user.
-» date_online|integer|Unix timestamp of date the user was last online.
-» avatar|[Avatar Object   ](#schemaavatar_object)|Contains avatar data.
-»» filename|string|Avatar filename including extension.
-»» original|string|URL to the full-sized avatar.
-»» thumb_50x50|string|URL to the small thumbnail image.
-»» thumb_100x100|string|URL to the medium thumbnail image.
-»» thumb_256x256|string|URL to the large thumbnail image.
-» timezone|string|Timezone of the user, format is country/city.
-» language|string|2-character representation of users language preference.
-» profile_url|string|URL to the user's mod.io profile.
-date_added|integer|Unix timestamp of date mod was registered.
-date_updated|integer|Unix timestamp of date mod was updated.
-date_live|integer|Unix timestamp of date mod was set live.
-logo|[Logo Object   ](#schemalogo_object)|Contains logo data.
-» filename|string|Logo filename including extension.
-» original|string|URL to the full-sized logo.
-» thumb_320x180|string|URL to the small logo thumbnail.
-» thumb_640x360|string|URL to the medium logo thumbnail.
-» thumb_1280x720|string|URL to the large logo thumbnail.
-homepage|string|Official homepage of the mod.
-name|string|Name of the mod.
-name_id|string|Path for the mod on mod.io. For example: https://gamename.mod.io/__mod-name-id-here__
-summary|string|Summary of the mod.
-description|string|Detailed description of the mod which allows HTML.
-metadata_blob|string|Metadata stored by the game developer. Metadata can also be stored as searchable [key value pairs](#metadata).
-profile_url|string|URL to the mod's mod.io profile.
-modfile|[Modfile Object   ](#schemamodfile_object)|Contains modfile data.
-» id|integer|Unique modfile id.
-» mod_id|integer|Unique mod id.
-» date_added|integer|Unix timestamp of date file was added.
-» date_scanned|integer|Unix timestamp of date file was virus scanned.
-» virus_status|integer|Current virus scan status of the file. For newly added files that have yet to be scanned this field will change frequently until a scan is complete:<br><br>__0__ = Not scanned<br>__1__ = Scan complete<br>__2__ = In progress<br>__3__ = Too large to scan<br>__4__ = File not found<br>__5__ = Error Scanning
-» virus_positive|integer|Was a virus detected:<br><br>__0__ = No threats detected<br>__1__ = Flagged as malicious
-» virustotal_hash|string|VirusTotal proprietary hash to view the [scan results](https://www.virustotal.com).
-» filesize|integer|Size of the file in bytes.
-» filehash|[Filehash Object   ](#schemafilehash_object)|Contains filehash data.
-»» md5|string|MD5 hash of the file.
-» filename|string|Filename including extension.
-» version|string|Release version this file represents.
-» changelog|string|Changelog for the file.
-» download_url|string|URL to download the file from the mod.io CDN.
-media|[Mod Media Object  ](#schemamod_media_object)|Contains mod media data.
-» youtube|string[]|Array of YouTube links.
-» sketchfab|string[]|Array of SketchFab links.
-» images|[Image Object   ](#schemaimage_object)[]|Array of image objects (a gallery).
-»» filename|string|Image filename including extension.
-»» original|string|URL to the full-sized image.
-»» thumb_320x180|string|URL to the image thumbnail.
-rating_summary|[Rating Summary Object  ](#schemarating_summary_object)|Contains ratings summary.
-» total_ratings|integer|Number of times this item has been rated.
-» positive_ratings|integer|Number of positive ratings.
-» negative_ratings|integer|Number of negative ratings.
-» percentage_positive|integer|Number of positive ratings, divided by the total ratings to determine it’s percentage score.
-» weighted_aggregate|float|Overall rating of this item calculated using the [Wilson score confidence interval](http://www.evanmiller.org/how-not-to-sort-by-average-rating.html). This column is good to sort on, as it will order items based on number of ratings and will place items with many positive ratings above those with a higher score but fewer ratings.
-» display_text|string|Textual representation of the rating in format:<br><br>- Overwhelmingly Positive<br>- Very Positive<br>- Positive<br>- Mostly Positive<br>- Mixed<br>- Negative<br>- Mostly Negative<br>- Very Negative<br>- Overwhelmingly Negative
-tags|[Mod Tag Object  ](#schemamod_tag_object)[]|Contains mod tag data.
-» name|string|Tag name.
-» date_added|integer|Unix timestamp of date tag was applied.
-
-
-
-
-## Mod Media Object  
-
-<a name="schemamod_media_object"></a>
-
-```json
-{
-  "youtube": [
-    "https://www.youtube.com/watch?v=dQw4w9WgXcQ"
-  ],
-  "sketchfab": [
-    "https://sketchfab.com/models/ef40b2d300334d009984c8865b2db1c8"
-  ],
-  "images": [
-    {
-      "filename": "modio-dark.png",
-      "original": "https://media.mod.io/images/global/modio-dark.png",
-      "thumb_320x180": "https://media.mod.io/images/global/modio-dark.png"
-    }
-  ]
-} 
-```
-
-
-### Properties
-
-Name|Type|Description
----|---|---|---|
-youtube|string[]|Array of YouTube links.
-sketchfab|string[]|Array of SketchFab links.
-images|[Image Object   ](#schemaimage_object)[]|Array of image objects (a gallery).
-» filename|string|Image filename including extension.
-» original|string|URL to the full-sized image.
-» thumb_320x180|string|URL to the image thumbnail.
-
-
-
-
-## Mod Tag Object  
-
-<a name="schemamod_tag_object"></a>
-
-```json
-{
-  "name": "Unity",
-  "date_added": 1499841487
-} 
-```
-
-
-### Properties
-
-Name|Type|Description
----|---|---|---|
-name|string|Tag name.
-date_added|integer|Unix timestamp of date tag was applied.
-
-
-
-
-## Game Object
-
-   <a name="schemagame_object"></a>
-
-```json
-{
-  "id": 2,
-  "submitted_by": {
-    "id": 1,
-    "name_id": "xant",
-    "username": "XanT",
-    "date_online": 1509922961,
-    "avatar": {
-      "filename": "modio-dark.png",
-      "original": "https://media.mod.io/images/global/ao_modio-dark.png",
-      "thumb_50x50": "https://media.mod.io/images/global/modio-dark.png",
-      "thumb_100x100": "https://media.mod.io/images/global/am_modio-dark.png",
-      "thumb_256x256": "https://media.mod.io/images/global/al_modio-dark.png"
-    },
-    "timezone": "America/Los_Angeles",
-    "language": "en",
-    "profile_url": "https://mod.io/members/xant"
-  },
-  "date_added": 1493702614,
-  "date_updated": 1499410290,
-  "date_live": 1499841403,
-  "presentation": 1,
-  "submission": 0,
-  "curation": 0,
-  "community": 3,
-  "revenue": 1500,
-  "api": 3,
-  "ugc_name": "map",
-  "icon": {
-    "filename": "modio-dark.png",
-    "original": "https://media.mod.io/images/global/ao_modio-dark.png",
-    "thumb_64x64": "https://media.mod.io/images/global/modio-dark.png",
-    "thumb_128x128": "https://media.mod.io/images/global/am_modio-dark.png",
-    "thumb_256x256": "https://media.mod.io/images/global/al_modio-dark.png"
-  },
-  "logo": {
-    "filename": "modio-dark.png",
-    "original": "https://media.mod.io/images/global/modio-dark.png",
-    "thumb_320x180": "https://media.mod.io/images/global/modio-dark.png",
-    "thumb_640x360": "https://media.mod.io/images/global/modio-dark.png",
-    "thumb_1280x720": "https://media.mod.io/images/global/modio-dark.png"
-  },
-  "header": {
-    "filename": "demo.png",
-    "original": "https://media.mod.io/images/global/modio-dark.png"
-  },
-  "homepage": "https://www.rogue-knight-game.com/",
-  "name": "Rogue Knight",
-  "name_id": "rogue-knight",
-  "summary": "Rogue Knight is a brand new 2D pixel platformer.",
-  "instructions": "Instructions on the process to upload mods.",
-  "profile_url": "https://rogue-knight.mod.io",
-  "tag_options": [
-    {
-      "name": "Theme",
-      "type": "checkboxes",
-      "tags": [
-        "Horror"
-      ],
-      "hidden": 0
-    }
-  ]
-} 
-```
-
-
-### Properties
-
-Name|Type|Description
----|---|---|---|
-id|integer|Unique game id.
-submitted_by|[User Object   ](#schemauser_object)|Contains user data.
-» id|integer|Unique id of the user.
-» name_id|string|Path for the user on mod.io. For example: https://mod.io/members/__username-id-here__ Usually a simplified version of their username.
-» username|string|Username of the user.
-» date_online|integer|Unix timestamp of date the user was last online.
-» avatar|[Avatar Object   ](#schemaavatar_object)|Contains avatar data.
-»» filename|string|Avatar filename including extension.
-»» original|string|URL to the full-sized avatar.
-»» thumb_50x50|string|URL to the small thumbnail image.
-»» thumb_100x100|string|URL to the medium thumbnail image.
-»» thumb_256x256|string|URL to the large thumbnail image.
-» timezone|string|Timezone of the user, format is country/city.
-» language|string|2-character representation of users language preference.
-» profile_url|string|URL to the user's mod.io profile.
-date_added|integer|Unix timestamp of date game was registered.
-date_updated|integer|Unix timestamp of date game was updated.
-date_live|integer|Unix timestamp of date game was set live.
-presentation|integer|Presentation style used on the mod.io website:<br><br>__0__ =  Grid View: Displays mods in a grid<br>__1__ = Table View: Displays mods in a table
-submission|integer|Submission process modders must follow:<br><br>__0__ = Mod uploads must occur via a tool created by the game developers<br>__1__ = Mod uploads can occur from anywhere, including the website and API
-curation|integer|Curation process used to approve mods:<br><br>__0__ = No curation: Mods are immediately available to play<br>__1__ = Paid curation: Only mods which accept donations must be accepted<br>__2__ = Full curation: All mods must be accepted by someone to be listed
-community|integer|Community features enabled on the mod.io website:<br><br>__0__ = All of the options below are disabled<br>__1__ = Discussion board enabled<br>__2__ = Guides and news enabled<br>__?__ = Combine to find games with multiple options enabled (see [BITWISE filtering](#bitwise-and-bitwise-and))
-revenue|integer|Revenue capabilities mods can enable:<br><br>__0__ = All of the options below are disabled<br>__1__ = Allow mods to be sold<br>__2__ = Allow mods to receive donations<br>__4__ = Allow mods to be traded<br>__8__ = Allow mods to control supply and scarcity<br>__?__ = Combine to find games with multiple options enabled (see [BITWISE filtering](#bitwise-and-bitwise-and))
-api|integer|Level of API access allowed by this game:<br><br>__0__ = All of the options below are disabled<br>__1__ = This game allows 3rd parties to access the mods API<br>__2__ = This game allows mods to be downloaded directly without API validation<br>__?__ = Combine to find games with multiple options enabled (see [BITWISE filtering](#bitwise-and-bitwise-and))
-ugc_name|string|Word used to describe user-generated content (mods, items, addons etc).
-icon|[Icon Object   ](#schemaicon_object)|Contains icon data.
-» filename|string|Icon filename including extension.
-» original|string|URL to the full-sized icon.
-» thumb_64x64|string|URL to the small thumbnail image.
-» thumb_128x128|string|URL to the medium thumbnail image.
-» thumb_256x256|string|URL to the large thumbnail image.
-logo|[Logo Object   ](#schemalogo_object)|Contains logo data.
-» filename|string|Logo filename including extension.
-» original|string|URL to the full-sized logo.
-» thumb_320x180|string|URL to the small logo thumbnail.
-» thumb_640x360|string|URL to the medium logo thumbnail.
-» thumb_1280x720|string|URL to the large logo thumbnail.
-header|[Header Object   ](#schemaheader_object)|Contains header data.
-» filename|string|Header image filename including extension.
-» original|string|URL to the full-sized header image.
-homepage|string|Official homepage of the game.
-name|string|Name of the game.
-name_id|string|Subdomain for the game on mod.io.
-summary|string|Summary of the game.
-instructions|string|A guide about creating and uploading mods for this game to mod.io (applicable if submission = 0).
-profile_url|string|URL to the game's mod.io page.
-tag_options|[Game Tag Option Object ](#schemagame_tag_option_object)[]|Groups of tags configured by the game developer, that mods can select.
-» name|string|Name of the tag group.
-» type|string|Can multiple tags be selected via 'checkboxes' or should only a single tag be selected via a 'dropdown'.
-» hidden|integer|Groups of tags flagged as 'admin only' should only be used for filtering, and should not be displayed to users.
-» tags|string[]|Array of tags in this group.
-
-
-
-
-## Game Tag Option Object 
-
-<a name="schemagame_tag_option_object"></a>
-
-```json
-{
-  "name": "Theme",
-  "type": "checkboxes",
-  "tags": [
-    "Horror"
-  ],
-  "hidden": 0
-} 
-```
-
-
-### Properties
-
-Name|Type|Description
----|---|---|---|
-name|string|Name of the tag group.
-type|string|Can multiple tags be selected via 'checkboxes' or should only a single tag be selected via a 'dropdown'.
-hidden|integer|Groups of tags flagged as 'admin only' should only be used for filtering, and should not be displayed to users.
-tags|string[]|Array of tags in this group.
-
-
-
-
-## Metadata KVP Object  
-
-<a name="schemametadata_kvp_object"></a>
-
-```json
-{
-  "key": "pistol-dmg",
-  "value": 800
-} 
-```
-
-
-### Properties
-
-Name|Type|Description
----|---|---|---|
-key|string|The key of the key-value pair.
-value|string|The value of the key-value pair.
-
-
-
-
-## Rating Summary Object  
-
-<a name="schemarating_summary_object"></a>
-
-```json
-{
-  "total_ratings": 1230,
-  "positive_ratings": 1047,
-  "negative_ratings": 183,
-  "percentage_positive": 91,
-  "weighted_aggregate": 87.38,
-  "display_text": "Very Positive"
-} 
-```
-
-
-### Properties
-
-Name|Type|Description
----|---|---|---|
-total_ratings|integer|Number of times this item has been rated.
-positive_ratings|integer|Number of positive ratings.
-negative_ratings|integer|Number of negative ratings.
-percentage_positive|integer|Number of positive ratings, divided by the total ratings to determine it’s percentage score.
-weighted_aggregate|float|Overall rating of this item calculated using the [Wilson score confidence interval](http://www.evanmiller.org/how-not-to-sort-by-average-rating.html). This column is good to sort on, as it will order items based on number of ratings and will place items with many positive ratings above those with a higher score but fewer ratings.
-display_text|string|Textual representation of the rating in format:<br><br>- Overwhelmingly Positive<br>- Very Positive<br>- Positive<br>- Mostly Positive<br>- Mixed<br>- Negative<br>- Mostly Negative<br>- Very Negative<br>- Overwhelmingly Negative
-
-
-
-
-## Team Member Object  
-
-<a name="schemateam_member_object"></a>
-
-```json
-{
-  "id": 457,
-  "user": {
-    "id": 1,
-    "name_id": "xant",
-    "username": "XanT",
-    "date_online": 1509922961,
-    "avatar": {
-      "filename": "modio-dark.png",
-      "original": "https://media.mod.io/images/global/ao_modio-dark.png",
-      "thumb_50x50": "https://media.mod.io/images/global/modio-dark.png",
-      "thumb_100x100": "https://media.mod.io/images/global/am_modio-dark.png",
-      "thumb_256x256": "https://media.mod.io/images/global/al_modio-dark.png"
-    },
-    "timezone": "America/Los_Angeles",
-    "language": "en",
-    "profile_url": "https://mod.io/members/xant"
-  },
-  "level": 8,
-  "date_added": 1492058857,
-  "position": "Supreme Overlord"
-} 
-```
-
-
-### Properties
-
-Name|Type|Description
----|---|---|---|
-id|integer|Unique team member id.
-user|[User Object   ](#schemauser_object)|Contains user data.
-» id|integer|Unique id of the user.
-» name_id|string|Path for the user on mod.io. For example: https://mod.io/members/__username-id-here__ Usually a simplified version of their username.
-» username|string|Username of the user.
-» date_online|integer|Unix timestamp of date the user was last online.
-» avatar|[Avatar Object   ](#schemaavatar_object)|Contains avatar data.
-»» filename|string|Avatar filename including extension.
-»» original|string|URL to the full-sized avatar.
-»» thumb_50x50|string|URL to the small thumbnail image.
-»» thumb_100x100|string|URL to the medium thumbnail image.
-»» thumb_256x256|string|URL to the large thumbnail image.
-» timezone|string|Timezone of the user, format is country/city.
-» language|string|2-character representation of users language preference.
-» profile_url|string|URL to the user's mod.io profile.
-level|integer|Level of permission the user has:<br><br>__0__ = Guest<br>__1__ = Member<br>__2__ = Contributor<br>__4__ = Manager<br>__8__ = Leader
-date_added|integer|Unix timestamp of the date the user was added to the team.
-position|string|Custom title given to the user in this team.
-
-
-
-
-## User Object
-
-   <a name="schemauser_object"></a>
-
-```json
-{
-  "id": 1,
-  "name_id": "xant",
-  "username": "XanT",
-  "date_online": 1509922961,
-  "avatar": {
-    "filename": "modio-dark.png",
-    "original": "https://media.mod.io/images/global/ao_modio-dark.png",
-    "thumb_50x50": "https://media.mod.io/images/global/modio-dark.png",
-    "thumb_100x100": "https://media.mod.io/images/global/am_modio-dark.png",
-    "thumb_256x256": "https://media.mod.io/images/global/al_modio-dark.png"
-  },
-  "timezone": "America/Los_Angeles",
-  "language": "en",
-  "profile_url": "https://mod.io/members/xant"
-} 
-```
-
-
-### Properties
-
-Name|Type|Description
----|---|---|---|
-id|integer|Unique id of the user.
-name_id|string|Path for the user on mod.io. For example: https://mod.io/members/__username-id-here__ Usually a simplified version of their username.
-username|string|Username of the user.
-date_online|integer|Unix timestamp of date the user was last online.
-avatar|[Avatar Object   ](#schemaavatar_object)|Contains avatar data.
-» filename|string|Avatar filename including extension.
-» original|string|URL to the full-sized avatar.
-» thumb_50x50|string|URL to the small thumbnail image.
-» thumb_100x100|string|URL to the medium thumbnail image.
-» thumb_256x256|string|URL to the large thumbnail image.
-timezone|string|Timezone of the user, format is country/city.
-language|string|2-character representation of users language preference.
-profile_url|string|URL to the user's mod.io profile.
-
-
-
-
-
-
-
+
