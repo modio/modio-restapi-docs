@@ -101,7 +101,7 @@ curl -X POST https://api.mod.io/v1/oauth/emailrequest \
 
 Request a `security_code` be sent to the email address of the user you wish to authenticate: 
 
-`POST /oauth/emailrequest`
+`POST /oauth/emailrequest`
 
 Parameter | Value
 ---------- | ----------  
@@ -130,8 +130,7 @@ curl -X POST https://api.mod.io/v1/oauth/emailexchange \
 }
 ```
 
-
-`POST /oauth/emailexchange`
+`POST /oauth/emailexchange`
 
 Parameter | Value
 ---------- | ----------  
@@ -1910,7 +1909,7 @@ Edit details for a mod. If you want to update the `logo` or media associated wit
 
      Parameter|Type|Required|Description
      ---|---|---|---|
-     status|integer||Change the status of a mod. The mod must have at least one uploaded `modfile` to be 'accepted'. Ideal for restoring mods that have been soft-deleted. For mod deletion, use the [Delete Mod](#delete-mod) endpoint. Using either of the fields supplied below will allow the mod to be returned in requests.<br><br>__0__ = Set mod to Unaccepted<br>__1__ = Set mod to Accepted (Game admins only)<br>__2__ = Set mod as out of date/not compatible (Game admins only)
+     status|integer||Status of a mod. The mod must have at least one uploaded `modfile` to be 'accepted'. Ideal for restoring mods that have been soft-deleted. For mod deletion, use the [Delete Mod](#delete-mod) endpoint. Using either of the fields supplied below will allow the mod to be returned in requests.<br><br>__0__ = Set mod to Unaccepted<br>__1__ = Set mod to Accepted (Game admins only)<br>__2__ = Set mod as out of date/not compatible (Game admins only)
      visible|integer||Visibility of the mod, can be modified by both game admins and mod admins.<br><br>__0__ = Hidden (Will only be shown on [/me](#me) endpoints only<br>__1__ = Public (Will be shown on [Get All Mods](#get-all-mods) and [/me](#me) endpoints)
      name|string||Name of your mod. Cannot exceed 80 characters.
      name_id|string||Path for the mod on mod.io. For example: https://gamename.mod.io/__mod-name-id-here__. Cannot exceed 80 characters.
@@ -8547,7 +8546,7 @@ Name|Type|Description
 ---|---|---|---|
 id|integer|Unique mod id.
 game_id|integer|Unique game id.
-status|integer|Status of the mod.<br><br>__0__ = Not Accepted<br>__1__ = Accepted<br>__3__ = Accepted, potentially out of date or incompatible<br>__4__ = Deleted
+status|integer|Status of the mod.<br><br>__0__ = Not Accepted<br>__1__ = Accepted<br>__2__ = Archived, potentially out of date or incompatible<br>__3__ = Deleted
 visible|integer|Visibility of the mod.<br><br>__0__ = Hidden<br>__1__ = Public
 submitted_by|[User Object   ](#schemauser_object)|Contains user data.
 » id|integer|Unique id of the user.
@@ -8749,7 +8748,7 @@ date_added|integer|Unix timestamp of date tag was applied.
 Name|Type|Description
 ---|---|---|---|
 id|integer|Unique game id.
-status|integer|Status of the game.<br><br>__0__ = Not Accepted<br>__1__ = Accepted<br>__3__ = Accepted, potentially out of date or incompatible<br>__4__ = Deleted
+status|integer|Status of the game.<br><br>__0__ = Not Accepted<br>__1__ = Accepted<br>__2__ = Archived, potentially out of date or incompatible<br>__3__ = Deleted
 submitted_by|[User Object   ](#schemauser_object)|Contains user data.
 » id|integer|Unique id of the user.
 » name_id|string|Path for the user on mod.io. For example: https://mod.io/members/__username-id-here__ Usually a simplified version of their username.
@@ -9243,7 +9242,7 @@ Name|Type|Description
 ---|---|---|---|
 data|[Game Object   ](#schemagame_object)[]|Array containing game objects.
 » id|integer|Unique game id.
-» status|integer|Status of the game.<br><br>__0__ = Not Accepted<br>__1__ = Accepted<br>__3__ = Accepted, potentially out of date or incompatible<br>__4__ = Deleted
+» status|integer|Status of the game.<br><br>__0__ = Not Accepted<br>__1__ = Accepted<br>__2__ = Archived, potentially out of date or incompatible<br>__3__ = Deleted
 » submitted_by|[User Object   ](#schemauser_object)|Contains user data.
 »» id|integer|Unique id of the user.
 »» name_id|string|Path for the user on mod.io. For example: https://mod.io/members/__username-id-here__ Usually a simplified version of their username.
@@ -9445,7 +9444,7 @@ Name|Type|Description
 data|[Mod Object   ](#schemamod_object)[]|Array containing mod objects.
 » id|integer|Unique mod id.
 » game_id|integer|Unique game id.
-» status|integer|Status of the mod.<br><br>__0__ = Not Accepted<br>__1__ = Accepted<br>__3__ = Accepted, potentially out of date or incompatible<br>__4__ = Deleted
+» status|integer|Status of the mod.<br><br>__0__ = Not Accepted<br>__1__ = Accepted<br>__2__ = Archived, potentially out of date or incompatible<br>__3__ = Deleted
 » visible|integer|Visibility of the mod.<br><br>__0__ = Hidden<br>__1__ = Public
 » submitted_by|[User Object   ](#schemauser_object)|Contains user data.
 »» id|integer|Unique id of the user.
@@ -9769,4 +9768,4 @@ result_limit|integer|Maximum number of results returned.
 result_offset|integer|Number of results skipped over.
 
 
-
+
