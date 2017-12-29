@@ -332,6 +332,34 @@ Endpoints that return more than one result, return a __JSON object__ which conta
 }  
 ```
 
+## Status & Visibility
+
+To control & identify the status of games & mods via the API we use the fields `status` & `visible`. The values of these fields will determine what is returned in API requests so it is important to understand what is authorized to view what content.
+
+### Game owner privileges
+
+As a game owner, you can modify & filter every value of both `status` & `visible`. When you hide our game from public viewing you can still view it via the [Get User Games endpoint](#get-user-games) which retrieves all games associated with the authenticated user regardless of the `status` of a game. 
+
+### Mod owner privileges
+
+As a mod owner, you can modify `visible` to either show or hide your mod from API requests. You _cannot_ modify the status of your mod. When you hide your mod you can still view it via the [Get User Mods endpoint](#get-user-mods) which retrieves all mods associated with the authenticated user regardless of the value of `status` & `visible`.
+
+### Visible attribute states & privileges
+
+Meaning | Value | Description | Modify Authorization | Filter Authorization
+---------- | ------- | ---------- | ------- | ----------
+Hidden | --parse_value_hidden | Resource is hidden and only returned via the [/me](#me) endpoints for the authenticated user. | Game & Mod Admins | Game & Mod Admins
+Public | --parse_value_public | Resource is visible and is returned everywhere as well as the [/me](#me) endpoints. _Default value_ once you add a mod. | Game & Mod Admins | Everyone
+
+### Status attribute states & privileges
+
+Meaning | Value | Description | Modify Authorization | Filter Authorization
+---------- | ------- | ------- | ------- | ----------
+Not Accepted | --parse_value_notaccepted | Resource will not be shown via API requests. | Game Admins Only | Game Admins Only
+Accepted | --parse_value_accepted | Resource is approved and will be shown _if_ the mod is not hidden. | Game Admins Only | Everyone
+Archived | --parse_value_archived | Resource is approved but labelled as out of date/incompatible. Will be shown _if_ the mod is not hidden. | Game Admins Only | Everyone
+Deleted | --parse_value_deleted | Resource has been deleted. Will not be shown via API requests. | Game Admins Only | Game Admins Only
+
 ## Pagination
 
 When requesting data from endpoints that contain more than one object, you can supply an `_offset` and `_limit` to paginate through the results. Think of it as a page 1, 2, 3... system but you control the number of results per page, and the page to start from. Appended to each response will be the pagination metadata:
