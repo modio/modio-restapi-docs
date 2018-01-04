@@ -462,12 +462,12 @@ The simpliest filter you can apply is `columnname` equals. This will return all 
 ### -not (Not Equal To)
 
 ```
---parse_version/games?price-not=19.99
+--parse_version/games?curation-not=1
 ```
 
 Where the preceding column value does not equal the value specified.
 
-- `?price-not=19.99` - Where the `price` column does not equal 19.99.
+- `?curation-not=1` - Where the `curation` column does not equal 1.
 
 ### -lk (Like)
 
