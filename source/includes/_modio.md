@@ -334,31 +334,37 @@ Endpoints that return more than one result, return a __JSON object__ which conta
 
 ## Status & Visibility
 
-To control & identify the status of games & mods via the API we use the fields `status` & `visible`. The values of these fields will determine what is returned in API requests so it is important to understand what is authorized to view what content.
-
-### Game owner privileges
-
-As a game owner, you can modify & filter every value of both `status` & `visible`. When you hide our game from public viewing you can still view it via the [Get User Games endpoint](#get-user-games) which retrieves all games associated with the authenticated user regardless of the `status` of a game. 
-
-### Mod owner privileges
-
-As a mod owner, you can modify `visible` to either show or hide your mod from API requests. You _cannot_ modify the status of your mod. When you hide your mod you can still view it via the [Get User Mods endpoint](#get-user-mods) which retrieves all mods associated with the authenticated user regardless of the value of `status` & `visible`.
+To manage games and mods via the API we use the fields `status` and `visible`. The values of these fields determines what is returned in API requests, so it is important to understand who is authorized to view what content.
 
 ### Visible attribute states & privileges
+
+Only mods use the `visible` attribute allowing mod admins to control their availability. Public is the _default value_:
 
 Meaning | Value | Description | Modify Authorization | Filter Authorization
 ---------- | ------- | ---------- | ------- | ----------
 Hidden | --parse_value_hidden | Resource is hidden and only returned via the [/me](#me) endpoints for the authenticated user. | Game & Mod Admins | Game & Mod Admins
-Public | --parse_value_public | Resource is visible and is returned everywhere as well as the [/me](#me) endpoints. _Default value_ once you add a mod. | Game & Mod Admins | Everyone
+Public | --parse_value_public | Resource is visible and returned via all endpoints. | Game & Mod Admins | Everyone
 
 ### Status attribute states & privileges
 
+Games and mods use the `status` attribute allowing game admins to control their availability. For mods this is important because it allows game admins to control which mods are available without changing the `visible` value set by the mod admin. Not accepted is the _default value_ until changed by a game admin, or a file is added to a mods profile and it is moved to an accepted state:
+
 Meaning | Value | Description | Modify Authorization | Filter Authorization
 ---------- | ------- | ------- | ------- | ----------
-Not Accepted | --parse_value_notaccepted | Resource will not be shown via API requests. | Game Admins Only | Game Admins Only
-Accepted | --parse_value_accepted | Resource is approved and will be shown _if_ the mod is not hidden. | Game Admins Only | Everyone
-Archived | --parse_value_archived | Resource is approved but labelled as out of date/incompatible. Will be shown _if_ the mod is not hidden. | Game Admins Only | Everyone
-Deleted | --parse_value_deleted | Resource has been deleted. Will not be shown via API requests. | Game Admins Only | Game Admins Only
+Not Accepted | --parse_value_notaccepted | Resource is not accepted and only returned via the [/me](#me) endpoints for the authenticated user. | Game Admins Only | Game Admins Only
+Accepted | --parse_value_accepted | Resource is accepted and returned via all endpoints. | Game Admins Only | Everyone
+Archived | --parse_value_archived | Resource is accepted (but flagged as out of date/incompatible) and returned via all endpoints. | Game Admins Only | Everyone
+Deleted | --parse_value_deleted | Resource is deleted and only returned via the [/me](#me) endpoints for the authenticated user. | Game Admins Only | Game Admins Only
+
+### Game admin privileges
+
+As a game admin, you can modify your games `status` to show or hide it from API requests. When your game is not accepted _you_ can still view it via the [Get User Games endpoint](#get-user-games) which retrieves all games associated with the authenticated user regardless of their `status`.
+
+By default mods connected to your game will not be returned if they are hidden or not accepted. As a game admin, you can modify a mods `status` and `visible` fields and filter by these values (to view content normal users cannot see). __We recommend__ you only change the `status` and let mod admins control the `visible` field.
+
+### Mod admin privileges
+
+As a mod admin, you can modify `visible` to show or hide your mod from API requests. You _cannot_ modify the `status` of your mod. When your mod is hidden _you_ can still view it via the [Get User Mods endpoint](#get-user-mods) which retrieves all mods associated with the authenticated user regardless of their `status` and `visible`.
 
 ## Pagination
 
