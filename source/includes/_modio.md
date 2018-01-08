@@ -342,16 +342,16 @@ Only mods use the `visible` attribute allowing mod admins to control their avail
 
 Meaning | Value | Description | Modify Authorization | Filter Authorization
 ---------- | ------- | ---------- | ------- | ----------
-Hidden | --parse_value_hidden | Resource is hidden and not returned when browsing. It will be returned if requested directly provided the user is an admin or subscribed to the content. All resources are always returned via the [/me](#me) endpoints. | Game & Mod Admins | Game & Mod Admins
+Hidden | --parse_value_hidden | Resource is hidden and not returned when browsing.<br><br>If requested directly it will be returned provided the user is an admin or subscribed to the content. All resources are always returned via the [/me](#me) endpoints. | Game & Mod Admins | Game & Mod Admins
 Public | --parse_value_public | Resource is visible and returned via all endpoints. | Game & Mod Admins | Everyone
 
 ### Status attribute states & privileges
 
-Games and mods use the `status` attribute allowing game admins to control their availability. For mods this is important because it allows game admins to control which mods are available without changing the `visible` value set by the mod admin. Not accepted is the _default value_ until changed by a game admin, or if a file is added to a mods profile it will be moved to an accepted state (provided the game developer has chosen a "no curation" option for new mods):
+Games and mods use the `status` attribute allowing game admins to control their availability. For mods this is important because it allows game admins to control which mods are available without changing the `visible` value set by the mod admin. Not accepted is the _default value_ until changed by a game admin, or if a file is added to a mods profile it will be moved to an accepted state (provided the game developer has elected _"not to curate"_ new mods):
 
 Meaning | Value | Description | Modify Authorization | Filter Authorization
 ---------- | ------- | ------- | ------- | ----------
-Not Accepted | --parse_value_notaccepted | Resource is not accepted and not returned when browsing. Games will be returned if requested directly provided the user is an admin or the `apikey` used belongs to the game. Mods will be returned if requested directly provided the user is an admin or subscribed to the content. All resources are always returned via the [/me](#me) endpoints. | Game Admins Only | Game Admins Only
+Not Accepted | --parse_value_notaccepted | Resource is not accepted and not returned when browsing.<br><br>Games will be returned if requested directly provided the user is an admin or the `apikey` used belongs to the game.<br><br>Mods will be returned if requested directly provided the user is an admin or subscribed to the content. All resources are always returned via the [/me](#me) endpoints. | Game Admins Only | Game Admins Only
 Accepted | --parse_value_accepted | Resource is accepted and returned via all endpoints. | Game Admins Only | Everyone
 Archived | --parse_value_archived | Resource is accepted and returned via all endpoints (but flagged as out of date/incompatible). | Game Admins Only | Everyone
 Deleted | --parse_value_deleted | Resource is deleted and only returned via the [/me](#me) endpoints. | Game Admins Only | Game Admins Only
