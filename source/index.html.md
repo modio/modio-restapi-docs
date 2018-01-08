@@ -746,7 +746,7 @@ Get all games. Successful request will return an array of [Game Objects](#get-al
      ugc_name|string|Word used to describe user-generated content (mods, items, addons etc).
      presentation_options|integer|Presentation style used on the mod.io website:<br><br>__0__ =  Grid View: Displays mods in a grid<br>__1__ = Table View: Displays mods in a table
      submission_options|integer|Submission process modders must follow:<br><br>__0__ = Mod uploads must occur via a tool created by the game developers<br>__1__ = Mod uploads can occur from anywhere, including the website and API
-     curation_options|integer|Curation process used to approve mods:<br><br>__0__ = No curation: Mods are immediately available to play<br>__1__ = Paid curation: Only mods which accept donations must be accepted<br>__2__ = Full curation: All mods must be accepted by someone to be listed
+     curation_options|integer|Curation process used to approve mods:<br><br>__0__ = No curation: Mods are immediately available to play<br>__1__ = Paid curation: Mods are immediately available to play unless they choose to receive donations. These mods must be accepted to be listed<br>__2__ = Full curation: All mods must be accepted by someone to be listed
      community_options|integer|Community features enabled on the mod.io website:<br><br>__0__ = All of the options below are disabled<br>__1__ = Discussion board enabled<br>__2__ = Guides and news enabled<br>__?__ = Combine to find games with multiple options enabled (see [BITWISE filtering](#bitwise-and-bitwise-and))
      revenue_options|integer|Revenue capabilities mods can enable:<br><br>__0__ = All of the options below are disabled<br>__1__ = Allow mods to be sold<br>__2__ = Allow mods to receive donations<br>__4__ = Allow mods to be traded<br>__8__ = Allow mods to control supply and scarcity<br>__?__ = Combine to find games with multiple options enabled (see [BITWISE filtering](#bitwise-and-bitwise-and))
      api_access_options|integer|Level of API access allowed by this game:<br><br>__0__ = All of the options below are disabled<br>__1__ = This game allows 3rd parties to access the mods API<br>__2__ = This game allows mods to be downloaded directly without API validation<br>__?__ = Combine to find games with multiple options enabled (see [BITWISE filtering](#bitwise-and-bitwise-and))
@@ -1123,7 +1123,7 @@ Update details for a game. If you want to update the `icon`, `logo` or `header` 
      ugc_name|string||Word used to describe user-generated content (mods, items, addons etc).
      presentation_options|integer||Choose the presentation style you want on the mod.io website:<br><br>__0__ =  Grid View: Displays mods in a grid (visual but less informative, default setting) <br>__1__ = Table View: Displays mods in a table (easier to browse)
      submission_options|integer||Choose the submission process you want modders to follow:<br><br>__0__ = Control the mod upload process (recommended): You will have to build an upload system either in-game or via a standalone tool, which enables creators to submit mods to the tags you have configured. Because you control the flow you can prevalidate and compile mods, to ensure they will work in your game and attach metadata about what settings the mod can change. In the long run this option will save you time as you can accept more submissions, but it requires more setup to get running and isn't as open as the above option. __NOTE:__ mod profiles can still be [created online](https://mod.io/mods/add), but uploads will have to occur via the API using tools you create.<br><br>__1__ = Enable mod uploads from anywhere: Allow developers to upload mods via the website and API, and pick the tags their mod is built for. No validation will be done on the files submitted, it will be the responsibility of your game and apps to process the mods installation based on the tags selected and determine if the mod is valid and works. For example a mod might be uploaded with the 'map' tag. When a user subscribes to this mod, your game will need to verify it contains a map file and install it where maps are located. If this fails, your game or the community will have to flag the mod as 'incompatible' to remove it from the listing.
-     curation_options|integer||Choose the curation process your team follows to approve mods:<br><br>__0__ = No curation (recommended): Mods are immediately available to play, without any intervention or work from your team.<br><br>__1__ = Paid curation: Screen only mods the creator wants to sell, before they are available to purchase via the API.<br><br>__2__ = Full curation: All mods must be accepted by someone on your team. This option is useful for games that have a small number of mods and want to control the experience, or you need to set the parameters attached to a mod (i.e. a weapon may require the rate of fire, power level, clip size etc). It can also be used for complex mods, which you may need to build into your game or distribute as DLC.
+     curation_options|integer||Choose the curation process your team follows to approve mods:<br><br>__0__ = No curation (recommended): Mods are immediately available to play, without any intervention or work from your team.<br><br>__1__ = Paid curation: Screen only mods the creator wants to sell, before they are available to receive donations or be purchased via the API.<br><br>__2__ = Full curation: All mods must be accepted by someone on your team. This option is useful for games that have a small number of mods and want to control the experience, or you need to set the parameters attached to a mod (i.e. a weapon may require the rate of fire, power level, clip size etc). It can also be used for complex mods, which you may need to build into your game or distribute as DLC.
      community_options|integer||Choose the community features enabled on the mod.io website:<br><br>__0__ = All of the options below are disabled<br>__1__ = Discussion board enabled<br>__2__ = Guides and news enabled<br>__?__ = Add the options you want together, to enable multiple features
      revenue_options|integer||Choose the revenue capabilities mods can enable:<br><br>__0__ = All of the options below are disabled<br>__1__ = Allow mods to be sold<br>__2__ = Allow mods to receive donations<br>__4__ = Allow mods to be traded (not subject to revenue share)<br>__8__ = Allow mods to control supply and scarcity<br>__?__ = Add the options you want together, to enable multiple features
      api_access_options|integer||Choose the level of API access your game allows:<br><br>__0__ = All of the options below are disabled<br>__1__ = Allow 3rd parties to access your mods API (recommended, an open API will encourage a healthy ecosystem of tools and apps)<br>__2__ = Allow mods to be downloaded directly, without requiring API validation (useful for anonymous game servers and services)<br>__?__ = Add the options you want together, to enable multiple features
@@ -1315,7 +1315,7 @@ Get all mods for the corresponding game. Successful request will return an array
     description|string|Detailed description of the mod which allows HTML.
     homepage|string|Official homepage of the mod.
     modfile|integer|Unique id of the file that is the current active release.
-    metadata_blob|string|Metadata stored by the mod developer.
+    metadata_blob|string|Metadata stored by the game developer.
     metadata_kvp|string|Colon-separated values representing the key-value pairs you want to filter the results by. If you supply more than one key-pair, separate the pairs by a comma. Will only filter by an exact key-pair match.
     tags|string|Comma-separated values representing the tags you want to filter the results by. Only tags that are supported by the parent game can be applied. To determine what tags are eligible, see the tags values within `tag_options` column on the parent [Game Object](#game-object).
     downloads|string|Sort results by most downloads using [_sort filter](#filtering) parameter, value should be `downloads` for descending or `-downloads` for ascending results.
@@ -1736,7 +1736,7 @@ Add a mod. Successful request will return the newly created [Mod Object](#mod-ob
      description|string||Detailed description for your mod, which can include details such as 'About', 'Features', 'Install Instructions', 'FAQ', etc. HTML supported and encouraged.
      homepage|string||Official homepage for your mod. Must be a valid URL.
      stock|integer||Artificially limit the amount of times the mod can be subscribed too.
-     metadata_blob|string||Metadata stored by the game developer. Metadata can also be stored as searchable [key value pairs](#metadata).
+     metadata_blob|string||Metadata stored by the game developer which may include properties as to how the item works, or other information you need to display. Metadata can also be stored as searchable [key value pairs](#metadata), and to individual [mod files](#get-all-modfiles).
      tags|string[]||An array of strings that represent what the mod has been tagged as. Only tags that are supported by the parent game can be applied. To determine what tags are eligible, see the tags values within `tag_options` column on the parent [Game Object](#game-object).
 
 
@@ -1958,7 +1958,7 @@ Edit details for a mod. If you want to update the `logo` or media associated wit
      homepage|string||Official homepage for your mod. Must be a valid URL.
      stock|integer||Artificially limit the amount of times the mod can be subscribed too.
      modfile|integer||Unique id of the [Modfile Object](#modfile-object) to be labelled as the current release.<br><br>__NOTE:__ If the `modfile` parameter is successfully changed, a [__MODFILE_UPDATE__ event](#get-all-mod-events) will be fired, so game clients know there is an update available for this mod.
-     metadata_blob|string||Metadata stored by the game developer. Metadata can also be stored as searchable [key value pairs](#metadata).
+     metadata_blob|string||Metadata stored by the game developer which may include properties as to how the item works, or other information you need to display. Metadata can also be stored as searchable [key value pairs](#metadata), and to individual [mod files](#get-all-modfiles).
 
 
 > Example response
@@ -2284,7 +2284,7 @@ Get all files that are published for the corresponding mod. Successful request w
      filename|string|Filename including extension.
      version|string|Release version this file represents.
      changelog|string|Changelog for the file.
-     metadata_blob|string|Metadata stored by the mod developer.
+     metadata_blob|string|Metadata stored by the game developer for this file.
 
 
 > Example response
@@ -2562,6 +2562,7 @@ Upload a file for the corresponding mod. Successful request will return the newl
      changelog|string||Changelog of this release.
      active|boolean||_Default value is true._ Label this upload as the current release, this will change the `modfile` field on the parent mod to the `id` of this file after upload.<br><br>__NOTE:__ If the _active_ parameter is _true_, a [__MODFILE_UPDATE__ event](#get-all-mod-events) will be fired, so game clients know there is an update available for this mod.
      filehash|string||MD5 of the submitted file. When supplied the MD5 will be compared against the uploaded files MD5. If they don't match a `422 Unprocessible Entity` error will be returned.
+     metadata_blob|string||Metadata stored by the game developer which may include properties such as what version of the game this file is compatible with. Metadata can also be stored as searchable [key value pairs](#metadata), and to the [mod object](#edit-mod).
 
 
 > Example response
@@ -2709,6 +2710,7 @@ Edit the details of a published file. If you want to update fields other than th
      version|string||Version of the file release.
      changelog|string||Changelog of this release.
      active|boolean||_Default value is true._ Label this upload as the current release, this will change the `modfile` field on the parent mod to the `id` of this file after upload.<br><br>__NOTE:__ If the _active_ parameter causes the parent mods `modfile` parameter to change, a [__MODFILE_UPDATE__ event](#get-all-mod-events) will be fired, so game clients know there is an update available for this mod.
+     metadata_blob|string||Metadata stored by the game developer which may include properties such as what version of the game this file is compatible with. Metadata can also be stored as searchable [key value pairs](#metadata), and to the [mod object](#edit-mod).
 
 
 > Example response
@@ -4722,8 +4724,8 @@ Get all metadata stored by the game developer for this mod as searchable key val
 {
   "data": [
     {
-      "key": "pistol-dmg",
-      "value": 800
+      "metakey": "pistol-dmg",
+      "metavalue": 800
     },
     {
         ...
@@ -8473,7 +8475,7 @@ filehash|[Filehash Object   ](#schemafilehash_object)|Contains filehash data.
 filename|string|Filename including extension.
 version|string|Release version this file represents.
 changelog|string|Changelog for the file.
-metadata_blob|string|Metadata stored by the file author. Metadata can also be stored as searchable [key value pairs](#metadata).
+metadata_blob|string|Metadata stored by the game developer for this file.
 download_url|string|URL to download the file from the mod.io CDN.
 
 
@@ -8627,7 +8629,7 @@ name|string|Name of the mod.
 name_id|string|Path for the mod on mod.io. For example: https://gamename.mod.io/__mod-name-id-here__
 summary|string|Summary of the mod.
 description|string|Detailed description of the mod which allows HTML.
-metadata_blob|string|Metadata stored by the mod developer. Metadata can also be stored as searchable [key value pairs](#metadata).
+metadata_blob|string|Metadata stored by the game developer. Metadata can also be stored as searchable [key value pairs](#metadata), and to individual [mod files](#get-all-modfiles).
 profile_url|string|URL to the mod's mod.io profile.
 modfile|[Modfile Object   ](#schemamodfile_object)|Contains modfile data.
 » id|integer|Unique modfile id.
@@ -8643,7 +8645,7 @@ modfile|[Modfile Object   ](#schemamodfile_object)|Contains modfile data.
 » filename|string|Filename including extension.
 » version|string|Release version this file represents.
 » changelog|string|Changelog for the file.
-» metadata_blob|string|Metadata stored by the file author. Metadata can also be stored as searchable [key value pairs](#metadata).
+» metadata_blob|string|Metadata stored by the game developer for this file.
 » download_url|string|URL to download the file from the mod.io CDN.
 media|[Mod Media Object  ](#schemamod_media_object)|Contains mod media data.
 » youtube|string[]|Array of YouTube links.
@@ -8820,7 +8822,7 @@ date_updated|integer|Unix timestamp of date game was updated.
 date_live|integer|Unix timestamp of date game was set live.
 presentation_options|integer|Presentation style used on the mod.io website:<br><br>__0__ =  Grid View: Displays mods in a grid<br>__1__ = Table View: Displays mods in a table
 submission_options|integer|Submission process modders must follow:<br><br>__0__ = Mod uploads must occur via a tool created by the game developers<br>__1__ = Mod uploads can occur from anywhere, including the website and API
-curation_options|integer|Curation process used to approve mods:<br><br>__0__ = No curation: Mods are immediately available to play<br>__1__ = Paid curation: Only mods which accept donations must be accepted<br>__2__ = Full curation: All mods must be accepted by someone to be listed
+curation_options|integer|Curation process used to approve mods:<br><br>__0__ = No curation: Mods are immediately available to play<br>__1__ = Paid curation: Mods are immediately available to play unless they choose to receive donations. These mods must be accepted to be listed<br>__2__ = Full curation: All mods must be accepted by someone to be listed
 community_options|integer|Community features enabled on the mod.io website:<br><br>__0__ = All of the options below are disabled<br>__1__ = Discussion board enabled<br>__2__ = Guides and news enabled<br>__?__ = Combine to find games with multiple options enabled (see [BITWISE filtering](#bitwise-and-bitwise-and))
 revenue_options|integer|Revenue capabilities mods can enable:<br><br>__0__ = All of the options below are disabled<br>__1__ = Allow mods to be sold<br>__2__ = Allow mods to receive donations<br>__4__ = Allow mods to be traded<br>__8__ = Allow mods to control supply and scarcity<br>__?__ = Combine to find games with multiple options enabled (see [BITWISE filtering](#bitwise-and-bitwise-and))
 api_options|integer|Level of API access allowed by this game:<br><br>__0__ = All of the options below are disabled<br>__1__ = This game allows 3rd parties to access the mods API<br>__2__ = This game allows mods to be downloaded directly without API validation<br>__?__ = Combine to find games with multiple options enabled (see [BITWISE filtering](#bitwise-and-bitwise-and))
@@ -8889,8 +8891,8 @@ tags|string[]|Array of tags in this group.
 
 ```json
 {
-  "key": "pistol-dmg",
-  "value": 800
+  "metakey": "pistol-dmg",
+  "metavalue": 800
 } 
 ```
 
@@ -8899,8 +8901,8 @@ tags|string[]|Array of tags in this group.
 
 Name|Type|Description
 ---|---|---|---|
-key|string|The key of the key-value pair.
-value|string|The value of the key-value pair.
+metakey|string|The key of the key-value pair.
+metavalue|string|The value of the key-value pair.
 
 
 
@@ -9201,7 +9203,7 @@ data|[Modfile Object   ](#schemamodfile_object)[]|Array containing modfile objec
 » filename|string|Filename including extension.
 » version|string|Release version this file represents.
 » changelog|string|Changelog for the file.
-» metadata_blob|string|Metadata stored by the file author. Metadata can also be stored as searchable [key value pairs](#metadata).
+» metadata_blob|string|Metadata stored by the game developer for this file.
 » download_url|string|URL to download the file from the mod.io CDN.
 result_count|integer|Number of results returned in the data array.
 result_limit|integer|Maximum number of results returned.
@@ -9316,7 +9318,7 @@ data|[Game Object   ](#schemagame_object)[]|Array containing game objects.
 » date_live|integer|Unix timestamp of date game was set live.
 » presentation_options|integer|Presentation style used on the mod.io website:<br><br>__0__ =  Grid View: Displays mods in a grid<br>__1__ = Table View: Displays mods in a table
 » submission_options|integer|Submission process modders must follow:<br><br>__0__ = Mod uploads must occur via a tool created by the game developers<br>__1__ = Mod uploads can occur from anywhere, including the website and API
-» curation_options|integer|Curation process used to approve mods:<br><br>__0__ = No curation: Mods are immediately available to play<br>__1__ = Paid curation: Only mods which accept donations must be accepted<br>__2__ = Full curation: All mods must be accepted by someone to be listed
+» curation_options|integer|Curation process used to approve mods:<br><br>__0__ = No curation: Mods are immediately available to play<br>__1__ = Paid curation: Mods are immediately available to play unless they choose to receive donations. These mods must be accepted to be listed<br>__2__ = Full curation: All mods must be accepted by someone to be listed
 » community_options|integer|Community features enabled on the mod.io website:<br><br>__0__ = All of the options below are disabled<br>__1__ = Discussion board enabled<br>__2__ = Guides and news enabled<br>__?__ = Combine to find games with multiple options enabled (see [BITWISE filtering](#bitwise-and-bitwise-and))
 » revenue_options|integer|Revenue capabilities mods can enable:<br><br>__0__ = All of the options below are disabled<br>__1__ = Allow mods to be sold<br>__2__ = Allow mods to receive donations<br>__4__ = Allow mods to be traded<br>__8__ = Allow mods to control supply and scarcity<br>__?__ = Combine to find games with multiple options enabled (see [BITWISE filtering](#bitwise-and-bitwise-and))
 » api_options|integer|Level of API access allowed by this game:<br><br>__0__ = All of the options below are disabled<br>__1__ = This game allows 3rd parties to access the mods API<br>__2__ = This game allows mods to be downloaded directly without API validation<br>__?__ = Combine to find games with multiple options enabled (see [BITWISE filtering](#bitwise-and-bitwise-and))
@@ -9362,8 +9364,8 @@ result_offset|integer|Number of results skipped over.
 {
   "data": [
     {
-      "key": "pistol-dmg",
-      "value": 800
+      "metakey": "pistol-dmg",
+      "metavalue": 800
     },
     {
         ...
@@ -9381,8 +9383,8 @@ result_offset|integer|Number of results skipped over.
 Name|Type|Description
 ---|---|---|---|
 data|[Metadata KVP Object  ](#schemametadata_kvp_object)[]|Array containing metadata kvp objects.
-» key|string|The key of the key-value pair.
-» value|string|The value of the key-value pair.
+» metakey|string|The key of the key-value pair.
+» metavalue|string|The value of the key-value pair.
 result_count|integer|Number of results returned in the data array.
 result_limit|integer|Maximum number of results returned.
 result_offset|integer|Number of results skipped over.
@@ -9529,7 +9531,7 @@ data|[Mod Object   ](#schemamod_object)[]|Array containing mod objects.
 » name_id|string|Path for the mod on mod.io. For example: https://gamename.mod.io/__mod-name-id-here__
 » summary|string|Summary of the mod.
 » description|string|Detailed description of the mod which allows HTML.
-» metadata_blob|string|Metadata stored by the mod developer. Metadata can also be stored as searchable [key value pairs](#metadata).
+» metadata_blob|string|Metadata stored by the game developer. Metadata can also be stored as searchable [key value pairs](#metadata), and to individual [mod files](#get-all-modfiles).
 » profile_url|string|URL to the mod's mod.io profile.
 » modfile|[Modfile Object   ](#schemamodfile_object)|Contains modfile data.
 »» id|integer|Unique modfile id.
@@ -9545,7 +9547,7 @@ data|[Mod Object   ](#schemamod_object)[]|Array containing mod objects.
 »» filename|string|Filename including extension.
 »» version|string|Release version this file represents.
 »» changelog|string|Changelog for the file.
-»» metadata_blob|string|Metadata stored by the file author. Metadata can also be stored as searchable [key value pairs](#metadata).
+»» metadata_blob|string|Metadata stored by the game developer for this file.
 »» download_url|string|URL to download the file from the mod.io CDN.
 » media|[Mod Media Object  ](#schemamod_media_object)|Contains mod media data.
 »» youtube|string[]|Array of YouTube links.
