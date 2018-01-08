@@ -351,7 +351,7 @@ Games and mods use the `status` attribute allowing game admins to control their 
 
 Meaning | Value | Description | Modify Authorization | Filter Authorization
 ---------- | ------- | ------- | ------- | ----------
-Not Accepted | --parse_value_notaccepted | Resource is not accepted and not returned when browsing.<br><br>Games will be returned if requested directly provided the user is an admin or the `apikey` used belongs to the game.<br><br>Mods will be returned if requested directly provided the user is an admin or subscribed to the content. All resources are always returned via the [/me](#me) endpoints. | Game Admins Only | Game Admins Only
+Not Accepted | --parse_value_notaccepted | Resource is not accepted and not returned when browsing.<br><br>Games will be returned if requested [directly](#get-game) provided the user is an admin or the `apikey` used belongs to the game.<br><br>Mods will be returned if requested [directly](#get-mod) provided the user is an admin or subscribed to the content. All resources are always returned via the [/me](#me) endpoints. | Game Admins Only | Game Admins Only
 Accepted | --parse_value_accepted | Resource is accepted and returned via all endpoints. | Game Admins Only | Everyone
 Archived | --parse_value_archived | Resource is accepted and returned via all endpoints (but flagged as out of date/incompatible). | Game Admins Only | Everyone
 Deleted | --parse_value_deleted | Resource is deleted and only returned via the [/me](#me) endpoints. | Game Admins Only | Game Admins Only
