@@ -1957,7 +1957,7 @@ Edit details for a mod. If you want to update the `logo` or media associated wit
      description|string||Detailed description for your mod, which can include details such as 'About', 'Features', 'Install Instructions', 'FAQ', etc. HTML supported and encouraged.
      homepage|string||Official homepage for your mod. Must be a valid URL.
      stock|integer||Artificially limit the amount of times the mod can be subscribed too.
-     modfile|integer||Unique id of the [Modfile Object](#modfile-object) to be labelled as the current release.<br><br>__NOTE:__ If the `modfile` parameter is successfully changed, a [__MODFILE_UPDATE__ event](#get-all-mod-events) will be fired, so game clients know there is an update available for this mod.
+     modfile|integer||Unique id of the [Modfile Object](#modfile-object) to be labelled as the current release.<br><br>__NOTE:__ If the `modfile` parameter is successfully changed, a [__MODFILE_CHANGE__ event](#get-all-mod-events) will be fired, so game clients know there is an update available for this mod.
      metadata_blob|string||Metadata stored by the game developer which may include properties as to how the item works, or other information you need to display. Metadata can also be stored as searchable [key value pairs](#metadata), and to individual [mod files](#get-all-modfiles).
 
 
@@ -2560,7 +2560,7 @@ Upload a file for the corresponding mod. Successful request will return the newl
      filedata|file|true|The binary file for the release. For compatibility you should ZIP the base folder of your mod, or if it is a collection of files which live in a pre-existing game folder, you should ZIP those files. Your file must meet the following conditions:<br><br>- File must be __zipped__ and cannot exceed 10GB in filesize<br>- Mods which span multiple game directories are not supported unless the game manages this<br>- Mods which overwrite files are not supported unless the game manages this
      version|string||Version of the file release.
      changelog|string||Changelog of this release.
-     active|boolean||_Default value is true._ Label this upload as the current release, this will change the `modfile` field on the parent mod to the `id` of this file after upload.<br><br>__NOTE:__ If the _active_ parameter is _true_, a [__MODFILE_UPDATE__ event](#get-all-mod-events) will be fired, so game clients know there is an update available for this mod.
+     active|boolean||_Default value is true._ Label this upload as the current release, this will change the `modfile` field on the parent mod to the `id` of this file after upload.<br><br>__NOTE:__ If the _active_ parameter is _true_, a [__MODFILE_CHANGE__ event](#get-all-mod-events) will be fired, so game clients know there is an update available for this mod.
      filehash|string||MD5 of the submitted file. When supplied the MD5 will be compared against the uploaded files MD5. If they don't match a `422 Unprocessible Entity` error will be returned.
      metadata_blob|string||Metadata stored by the game developer which may include properties such as what version of the game this file is compatible with. Metadata can also be stored as searchable [key value pairs](#metadata), and to the [mod object](#edit-mod).
 
@@ -2709,7 +2709,7 @@ Edit the details of a published file. If you want to update fields other than th
      ---|---|---|---|
      version|string||Version of the file release.
      changelog|string||Changelog of this release.
-     active|boolean||_Default value is true._ Label this upload as the current release, this will change the `modfile` field on the parent mod to the `id` of this file after upload.<br><br>__NOTE:__ If the _active_ parameter causes the parent mods `modfile` parameter to change, a [__MODFILE_UPDATE__ event](#get-all-mod-events) will be fired, so game clients know there is an update available for this mod.
+     active|boolean||_Default value is true._ Label this upload as the current release, this will change the `modfile` field on the parent mod to the `id` of this file after upload.<br><br>__NOTE:__ If the _active_ parameter causes the parent mods `modfile` parameter to change, a [__MODFILE_CHANGE__ event](#get-all-mod-events) will be fired, so game clients know there is an update available for this mod.
      metadata_blob|string||Metadata stored by the game developer which may include properties such as what version of the game this file is compatible with. Metadata can also be stored as searchable [key value pairs](#metadata), and to the [mod object](#edit-mod).
 
 
@@ -3559,7 +3559,7 @@ Get the event log for a mod, showing changes made sorted by latest event first. 
      mod_id|integer|Unique id of the parent mod.
      user_id|integer|Unique id of the user who performed the action.
      date_added|integer|Unix timestamp of date mod was updated.
-     event_type|string|Type of change that occurred:<br><br>__MODFILE_UPDATE__ = Primary file changed<br>__MOD_VISIBILITY_CHANGE__ = Mod has been set to live, or hidden<br>__MOD_LIVE__ = When the mod went public for the first time
+     event_type|string|Type of change that occurred:<br><br>__MODFILE_CHANGE__ = Primary file changed<br>__MOD_VISIBILITY_CHANGE__ = Mod has been set to live, or hidden<br>__MOD_LIVE__ = When the mod went public for the first time
 
 
 > Example response
@@ -3572,7 +3572,7 @@ Get the event log for a mod, showing changes made sorted by latest event first. 
       "mod_id": 13,
       "user_id": 13,
       "date_added": 1499846132,
-      "event_type": "MODFILE_UPDATE",
+      "event_type": "MODFILE_CHANGE",
       "changes": [
         {
           "field": "modfile",
@@ -3697,7 +3697,7 @@ Get all mods events for the corresponding game sorted by latest event first. Suc
      mod_id|integer|Unique id of the parent mod.
      user_id|integer|Unique id of the user who performed the action.
      date_added|integer|Unix timestamp of date mod was added.
-     event_type|string|Type of change that occurred:<br><br>__MODFILE_UPDATE__ = Primary file changed<br>__MOD_VISIBILITY_CHANGE__ = Mod has been set to live, or hidden<br>__MOD_LIVE__ = When the mod went public for the first time
+     event_type|string|Type of change that occurred:<br><br>__MODFILE_CHANGE__ = Primary file changed<br>__MOD_VISIBILITY_CHANGE__ = Mod has been set to live, or hidden<br>__MOD_LIVE__ = When the mod went public for the first time
      latest|boolean|_Default value is true_. Returns only the latest unique events, which is useful for checking if the primary `modfile` has changed.
      subscribed|boolean|_Default value is false_. Returns only events connected to mods the __authenticated user__ is subscribed to, which is useful for keeping the users mods up-to-date.
 
@@ -3712,7 +3712,7 @@ Get all mods events for the corresponding game sorted by latest event first. Suc
       "mod_id": 13,
       "user_id": 13,
       "date_added": 1499846132,
-      "event_type": "MODFILE_UPDATE",
+      "event_type": "MODFILE_CHANGE",
       "changes": [
         {
           "field": "modfile",
@@ -5457,7 +5457,7 @@ System.out.println(response.toString());
 ```
 `GET /games/{game-id}/mods/{mod-id}/team`
 
-Get all users that are part of a mod team. Successful request will return an array of [Team Member Objects](#get-team). We recommended reading the [filtering documentation](#filtering) to return only the records you want.
+Get all users that are part of a mod team. Successful request will return an array of [Team Member Objects](#team-member-object). We recommended reading the [filtering documentation](#filtering) to return only the records you want.
 
      Filter|Type|Required|Description
      ---|---|---|---|
@@ -6920,25 +6920,25 @@ System.out.println(response.toString());
 
 Get all mod's the _authenticated user_ is subscribed to. Successful request will return an array of [Mod Objects](#get-mods-2). We recommended reading the [filtering documentation](#filtering) to return only the records you want.
 
-     Filter|Type|Description
-     ---|---|---
-     id|integer|Unique id of the mod.
-     game_id|integer|Unique id of the parent game.
-     submitted_by|integer|Unique id of the user who has ownership of the mod.
-     date_added|integer|Unix timestamp of date mod was registered.
-     date_updated|integer|Unix timestamp of date mod was updated.
-     date_live|integer|Unix timestamp of date mod was set live.
-     name|string|Name of the mod.
-     name_id|string|Path for the mod on mod.io. For example: https://gamename.mod.io/__mod-name-id-here__
-     summary|string|Summary of the mod.
-     description|string|Detailed description of the mod which allows HTML.
-     homepage|string|Official homepage of the mod.
-     metadata_blob|string|Metadata stored by the game developer.
-     tags|string|Comma-separated values representing the tags you want to filter the results by. Only tags that are supported by the parent game can be applied. To determine what tags are eligible, see the tags values within `tag_options` column on the parent [Game Object](#game-object).
-     downloads|string|Sort results by most downloads using [_sort filter](#filtering) parameter, value should be `downloads` for descending or `-downloads` for ascending results.
-     popular|string|Sort results by popularity using [_sort filter](#filtering), value should be `popular` for descending or `-popular` for ascending results.
-     rating|string|Sort results by weighted rating using [_sort filter](#filtering), value should be `rating` for descending or `-rating` for ascending results.
-     subscribers|string|Sort results by most subscribers using [_sort filter](#filtering), value should be `subscribers` for descending or `-subscribers` for ascending results.
+    Filter|Type|Description
+    ---|---|---
+    id|integer|Unique id of the mod.
+    game_id|integer|Unique id of the parent game.
+    submitted_by|integer|Unique id of the user who has ownership of the mod.
+    date_added|integer|Unix timestamp of date mod was registered.
+    date_updated|integer|Unix timestamp of date mod was updated.
+    date_live|integer|Unix timestamp of date mod was set live.
+    name|string|Name of the mod.
+    name_id|string|Path for the mod on mod.io. For example: https://gamename.mod.io/__mod-name-id-here__
+    summary|string|Summary of the mod.
+    description|string|Detailed description of the mod which allows HTML.
+    homepage|string|Official homepage of the mod.
+    metadata_blob|string|Metadata stored by the game developer.
+    tags|string|Comma-separated values representing the tags you want to filter the results by. Only tags that are supported by the parent game can be applied. To determine what tags are eligible, see the tags values within `tag_options` column on the parent [Game Object](#game-object).
+    downloads|string|Sort results by most downloads using [_sort filter](#filtering) parameter, value should be `downloads` for descending or `-downloads` for ascending results.
+    popular|string|Sort results by popularity using [_sort filter](#filtering), value should be `popular` for descending or `-popular` for ascending results.
+    rating|string|Sort results by weighted rating using [_sort filter](#filtering), value should be `rating` for descending or `-rating` for ascending results.
+    subscribers|string|Sort results by most subscribers using [_sort filter](#filtering), value should be `subscribers` for descending or `-subscribers` for ascending results.
 
 
 > Example response
@@ -7774,7 +7774,7 @@ thumb_320x180|string|URL to the image thumbnail.
   "mod_id": 13,
   "user_id": 13,
   "date_added": 1499846132,
-  "event_type": "MODFILE_UPDATE",
+  "event_type": "MODFILE_CHANGE",
   "changes": [
     {
       "field": "modfile",
@@ -7794,7 +7794,7 @@ id|integer|Unique id of the event object.
 mod_id|integer|Unique id of the parent mod.
 user_id|integer|Unique id of the user who performed the action.
 date_added|integer|Unix timestamp of date the event occurred.
-event_type|string|Type of [event](#get-mod-event) was 'MODFILE_UPDATE', 'MOD_VISIBILITY_CHANGE' or 'MOD_LIVE'.
+event_type|string|Type of [event](#get-mod-events-2) was 'MODFILE_CHANGE', 'MOD_VISIBILITY_CHANGE' or 'MOD_LIVE'.
 changes|[Field Change Object  ](#schemafield_change_object)[]|Contains an array of 'before and after' values of fields changed by the event.
 » field|string|Name of the field that was changed.
 » before|integer|Value of the field before the event.
@@ -9064,7 +9064,7 @@ result_offset|integer|Number of results skipped over.
       "mod_id": 13,
       "user_id": 13,
       "date_added": 1499846132,
-      "event_type": "MODFILE_UPDATE",
+      "event_type": "MODFILE_CHANGE",
       "changes": [
         {
           "field": "modfile",
@@ -9093,7 +9093,7 @@ data|[Mod Event Object  ](#schemamod_event_object)[]|Array containing mod event 
 » mod_id|integer|Unique id of the parent mod.
 » user_id|integer|Unique id of the user who performed the action.
 » date_added|integer|Unix timestamp of date the event occurred.
-» event_type|string|Type of [event](#get-mod-event) was 'MODFILE_UPDATE', 'MOD_VISIBILITY_CHANGE' or 'MOD_LIVE'.
+» event_type|string|Type of [event](#get-mod-events-2) was 'MODFILE_CHANGE', 'MOD_VISIBILITY_CHANGE' or 'MOD_LIVE'.
 » changes|[Field Change Object  ](#schemafield_change_object)[]|Contains an array of 'before and after' values of fields changed by the event.
 »» field|string|Name of the field that was changed.
 »» before|integer|Value of the field before the event.
