@@ -783,7 +783,7 @@ Get all games. Successful request will return an array of [Game Objects](#get-al
       "curation_options": 0,
       "community_options": 3,
       "revenue_options": 1500,
-      "api_options": 3,
+      "api_access_options": 3,
       "ugc_name": "map",
       "icon": {
         "filename": "modio-dark.png",
@@ -960,7 +960,7 @@ Get a game. Successful request will return a single [Game Object](#game-object).
   "curation_options": 0,
   "community_options": 3,
   "revenue_options": 1500,
-  "api_options": 3,
+  "api_access_options": 3,
   "ugc_name": "map",
   "icon": {
     "filename": "modio-dark.png",
@@ -1158,7 +1158,7 @@ Update details for a game. If you want to update the `icon`, `logo` or `header` 
   "curation_options": 0,
   "community_options": 3,
   "revenue_options": 1500,
-  "api_options": 3,
+  "api_access_options": 3,
   "ugc_name": "map",
   "icon": {
     "filename": "modio-dark.png",
@@ -7179,7 +7179,7 @@ Get all games the _authenticated user_ added or is a team member of. Successful 
       "curation_options": 0,
       "community_options": 3,
       "revenue_options": 1500,
-      "api_options": 3,
+      "api_access_options": 3,
       "ugc_name": "map",
       "icon": {
         "filename": "modio-dark.png",
@@ -8237,7 +8237,7 @@ date_added|integer|Unix timestamp of date tag was applied.
   "curation_options": 0,
   "community_options": 3,
   "revenue_options": 1500,
-  "api_options": 3,
+  "api_access_options": 3,
   "ugc_name": "map",
   "icon": {
     "filename": "modio-dark.png",
@@ -8304,7 +8304,7 @@ submission_options|integer|Submission process modders must follow:<br><br>__0__ 
 curation_options|integer|Curation process used to approve mods:<br><br>__0__ = No curation: Mods are immediately available to play<br>__1__ = Paid curation: Mods are immediately available to play unless they choose to receive donations. These mods must be accepted to be listed<br>__2__ = Full curation: All mods must be accepted by someone to be listed
 community_options|integer|Community features enabled on the mod.io website:<br><br>__0__ = All of the options below are disabled<br>__1__ = Discussion board enabled<br>__2__ = Guides and news enabled<br>__?__ = Combine to find games with multiple options enabled (see [BITWISE filtering](#bitwise-and-bitwise-and))
 revenue_options|integer|Revenue capabilities mods can enable:<br><br>__0__ = All of the options below are disabled<br>__1__ = Allow mods to be sold<br>__2__ = Allow mods to receive donations<br>__4__ = Allow mods to be traded<br>__8__ = Allow mods to control supply and scarcity<br>__?__ = Combine to find games with multiple options enabled (see [BITWISE filtering](#bitwise-and-bitwise-and))
-api_options|integer|Level of API access allowed by this game:<br><br>__0__ = All of the options below are disabled<br>__1__ = This game allows 3rd parties to access the mods API<br>__2__ = This game allows mods to be downloaded directly without API validation<br>__?__ = Combine to find games with multiple options enabled (see [BITWISE filtering](#bitwise-and-bitwise-and))
+api_access_options|integer|Level of API access allowed by this game:<br><br>__0__ = All of the options below are disabled<br>__1__ = This game allows 3rd parties to access the mods API<br>__2__ = This game allows mods to be downloaded directly without API validation<br>__?__ = Combine to find games with multiple options enabled (see [BITWISE filtering](#bitwise-and-bitwise-and))
 ugc_name|string|Word used to describe user-generated content (mods, items, addons etc).
 icon|[Icon Object   ](#schemaicon_object)|Contains icon data.
 » filename|string|Icon filename including extension.
@@ -8724,7 +8724,7 @@ result_offset|integer|Number of results skipped over.
       "curation_options": 0,
       "community_options": 3,
       "revenue_options": 1500,
-      "api_options": 3,
+      "api_access_options": 3,
       "ugc_name": "map",
       "icon": {
         "filename": "modio-dark.png",
@@ -8800,7 +8800,7 @@ data|[Game Object   ](#schemagame_object)[]|Array containing game objects.
 » curation_options|integer|Curation process used to approve mods:<br><br>__0__ = No curation: Mods are immediately available to play<br>__1__ = Paid curation: Mods are immediately available to play unless they choose to receive donations. These mods must be accepted to be listed<br>__2__ = Full curation: All mods must be accepted by someone to be listed
 » community_options|integer|Community features enabled on the mod.io website:<br><br>__0__ = All of the options below are disabled<br>__1__ = Discussion board enabled<br>__2__ = Guides and news enabled<br>__?__ = Combine to find games with multiple options enabled (see [BITWISE filtering](#bitwise-and-bitwise-and))
 » revenue_options|integer|Revenue capabilities mods can enable:<br><br>__0__ = All of the options below are disabled<br>__1__ = Allow mods to be sold<br>__2__ = Allow mods to receive donations<br>__4__ = Allow mods to be traded<br>__8__ = Allow mods to control supply and scarcity<br>__?__ = Combine to find games with multiple options enabled (see [BITWISE filtering](#bitwise-and-bitwise-and))
-» api_options|integer|Level of API access allowed by this game:<br><br>__0__ = All of the options below are disabled<br>__1__ = This game allows 3rd parties to access the mods API<br>__2__ = This game allows mods to be downloaded directly without API validation<br>__?__ = Combine to find games with multiple options enabled (see [BITWISE filtering](#bitwise-and-bitwise-and))
+» api_access_options|integer|Level of API access allowed by this game:<br><br>__0__ = All of the options below are disabled<br>__1__ = This game allows 3rd parties to access the mods API<br>__2__ = This game allows mods to be downloaded directly without API validation<br>__?__ = Combine to find games with multiple options enabled (see [BITWISE filtering](#bitwise-and-bitwise-and))
 » ugc_name|string|Word used to describe user-generated content (mods, items, addons etc).
 » icon|[Icon Object   ](#schemaicon_object)|Contains icon data.
 »» filename|string|Icon filename including extension.
