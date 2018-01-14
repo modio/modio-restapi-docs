@@ -3017,7 +3017,7 @@ Content-Type: application/x-www-form-urlencoded
 <td>modfile</td>
 <td>integer</td>
 <td></td>
-<td>Unique id of the <a href="#modfile-object">Modfile Object</a> to be labelled as the current release.<br><br><strong>NOTE:</strong> If the <code>modfile</code> parameter is successfully changed, a <a href="#get-all-mod-events"><strong>MODFILE_UPDATE</strong> event</a> will be fired, so game clients know there is an update available for this mod.</td>
+<td>Unique id of the <a href="#modfile-object">Modfile Object</a> to be labelled as the current release.<br><br><strong>NOTE:</strong> If the <code>modfile</code> parameter is successfully changed, a <a href="#get-all-mod-events"><strong>MODFILE_CHANGE</strong> event</a> will be fired, so game clients know there is an update available for this mod.</td>
 </tr>
 <tr>
 <td>metadata_blob</td>
@@ -3695,7 +3695,7 @@ Content-Type: multipart/form-data
 <td>boolean</td>
 <td></td>
 <td>
-<em>Default value is true.</em> Label this upload as the current release, this will change the <code>modfile</code> field on the parent mod to the <code>id</code> of this file after upload.<br><br><strong>NOTE:</strong> If the <em>active</em> parameter is <em>true</em>, a <a href="#get-all-mod-events"><strong>MODFILE_UPDATE</strong> event</a> will be fired, so game clients know there is an update available for this mod.</td>
+<em>Default value is true.</em> Label this upload as the current release, this will change the <code>modfile</code> field on the parent mod to the <code>id</code> of this file after upload.<br><br><strong>NOTE:</strong> If the <em>active</em> parameter is <em>true</em>, a <a href="#get-all-mod-events"><strong>MODFILE_CHANGE</strong> event</a> will be fired, so game clients know there is an update available for this mod.</td>
 </tr>
 <tr>
 <td>filehash</td>
@@ -3891,7 +3891,7 @@ Content-Type: application/x-www-form-urlencoded
 <td>boolean</td>
 <td></td>
 <td>
-<em>Default value is true.</em> Label this upload as the current release, this will change the <code>modfile</code> field on the parent mod to the <code>id</code> of this file after upload.<br><br><strong>NOTE:</strong> If the <em>active</em> parameter causes the parent mods <code>modfile</code> parameter to change, a <a href="#get-all-mod-events"><strong>MODFILE_UPDATE</strong> event</a> will be fired, so game clients know there is an update available for this mod.</td>
+<em>Default value is true.</em> Label this upload as the current release, this will change the <code>modfile</code> field on the parent mod to the <code>id</code> of this file after upload.<br><br><strong>NOTE:</strong> If the <em>active</em> parameter causes the parent mods <code>modfile</code> parameter to change, a <a href="#get-all-mod-events"><strong>MODFILE_CHANGE</strong> event</a> will be fired, so game clients know there is an update available for this mod.</td>
 </tr>
 <tr>
 <td>metadata_blob</td>
@@ -4840,7 +4840,7 @@ Accept: application/json
 <tr>
 <td>event_type</td>
 <td>string</td>
-<td>Type of change that occurred:<br><br><strong>MODFILE_UPDATE</strong> = Primary file changed<br><strong>MOD_VISIBILITY_CHANGE</strong> = Mod has been set to live, or hidden<br><strong>MOD_LIVE</strong> = When the mod went public for the first time</td>
+<td>Type of change that occurred:<br><br><strong>MODFILE_CHANGE</strong> = Primary file changed<br><strong>MOD_VISIBILITY_CHANGE</strong> = Mod has been set to live, or hidden<br><strong>MOD_LIVE</strong> = When the mod went public for the first time</td>
 </tr>
 </tbody>
 </table>
@@ -4855,7 +4855,7 @@ Accept: application/json
       </span><span class="s2">"mod_id"</span><span class="p">:</span><span class="w"> </span><span class="mi">13</span><span class="p">,</span><span class="w">
       </span><span class="s2">"user_id"</span><span class="p">:</span><span class="w"> </span><span class="mi">13</span><span class="p">,</span><span class="w">
       </span><span class="s2">"date_added"</span><span class="p">:</span><span class="w"> </span><span class="mi">1499846132</span><span class="p">,</span><span class="w">
-      </span><span class="s2">"event_type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"MODFILE_UPDATE"</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"event_type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"MODFILE_CHANGE"</span><span class="p">,</span><span class="w">
       </span><span class="s2">"changes"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
         </span><span class="p">{</span><span class="w">
           </span><span class="s2">"field"</span><span class="p">:</span><span class="w"> </span><span class="s2">"modfile"</span><span class="p">,</span><span class="w">
@@ -5003,7 +5003,7 @@ Accept: application/json
 <tr>
 <td>event_type</td>
 <td>string</td>
-<td>Type of change that occurred:<br><br><strong>MODFILE_UPDATE</strong> = Primary file changed<br><strong>MOD_VISIBILITY_CHANGE</strong> = Mod has been set to live, or hidden<br><strong>MOD_LIVE</strong> = When the mod went public for the first time</td>
+<td>Type of change that occurred:<br><br><strong>MODFILE_CHANGE</strong> = Primary file changed<br><strong>MOD_VISIBILITY_CHANGE</strong> = Mod has been set to live, or hidden<br><strong>MOD_LIVE</strong> = When the mod went public for the first time</td>
 </tr>
 <tr>
 <td>latest</td>
@@ -5030,7 +5030,7 @@ Accept: application/json
       </span><span class="s2">"mod_id"</span><span class="p">:</span><span class="w"> </span><span class="mi">13</span><span class="p">,</span><span class="w">
       </span><span class="s2">"user_id"</span><span class="p">:</span><span class="w"> </span><span class="mi">13</span><span class="p">,</span><span class="w">
       </span><span class="s2">"date_added"</span><span class="p">:</span><span class="w"> </span><span class="mi">1499846132</span><span class="p">,</span><span class="w">
-      </span><span class="s2">"event_type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"MODFILE_UPDATE"</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"event_type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"MODFILE_CHANGE"</span><span class="p">,</span><span class="w">
       </span><span class="s2">"changes"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
         </span><span class="p">{</span><span class="w">
           </span><span class="s2">"field"</span><span class="p">:</span><span class="w"> </span><span class="s2">"modfile"</span><span class="p">,</span><span class="w">
@@ -6882,7 +6882,7 @@ Accept: application/json
 </code></pre>
 <p><span class="httpmethod GET">GET</span> <span class="endpointheading">/games/{game-id}/mods/{mod-id}/team</span></p>
 
-<p>Get all users that are part of a mod team. Successful request will return an array of <a href="#get-team">Team Member Objects</a>. We recommended reading the <a href="#filtering">filtering documentation</a> to return only the records you want.</p>
+<p>Get all users that are part of a mod team. Successful request will return an array of <a href="#team-member-object">Team Member Objects</a>. We recommended reading the <a href="#filtering">filtering documentation</a> to return only the records you want.</p>
 
 <table>
 <thead>
@@ -9523,7 +9523,7 @@ oauth2 ( Scopes: read )
   </span><span class="s2">"mod_id"</span><span class="p">:</span><span class="w"> </span><span class="mi">13</span><span class="p">,</span><span class="w">
   </span><span class="s2">"user_id"</span><span class="p">:</span><span class="w"> </span><span class="mi">13</span><span class="p">,</span><span class="w">
   </span><span class="s2">"date_added"</span><span class="p">:</span><span class="w"> </span><span class="mi">1499846132</span><span class="p">,</span><span class="w">
-  </span><span class="s2">"event_type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"MODFILE_UPDATE"</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"event_type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"MODFILE_CHANGE"</span><span class="p">,</span><span class="w">
   </span><span class="s2">"changes"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
     </span><span class="p">{</span><span class="w">
       </span><span class="s2">"field"</span><span class="p">:</span><span class="w"> </span><span class="s2">"modfile"</span><span class="p">,</span><span class="w">
@@ -9565,7 +9565,7 @@ oauth2 ( Scopes: read )
 <tr>
 <td>event_type</td>
 <td>string</td>
-<td>Type of <a href="#get-mod-event">event</a> was 'MODFILE_UPDATE', 'MOD_VISIBILITY_CHANGE' or 'MOD_LIVE'.</td>
+<td>Type of <a href="#get-mod-events-2">event</a> was 'MODFILE_CHANGE', 'MOD_VISIBILITY_CHANGE' or 'MOD_LIVE'.</td>
 </tr>
 <tr>
 <td>changes</td>
@@ -12378,7 +12378,7 @@ oauth2 ( Scopes: read )
       </span><span class="s2">"mod_id"</span><span class="p">:</span><span class="w"> </span><span class="mi">13</span><span class="p">,</span><span class="w">
       </span><span class="s2">"user_id"</span><span class="p">:</span><span class="w"> </span><span class="mi">13</span><span class="p">,</span><span class="w">
       </span><span class="s2">"date_added"</span><span class="p">:</span><span class="w"> </span><span class="mi">1499846132</span><span class="p">,</span><span class="w">
-      </span><span class="s2">"event_type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"MODFILE_UPDATE"</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"event_type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"MODFILE_CHANGE"</span><span class="p">,</span><span class="w">
       </span><span class="s2">"changes"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
         </span><span class="p">{</span><span class="w">
           </span><span class="s2">"field"</span><span class="p">:</span><span class="w"> </span><span class="s2">"modfile"</span><span class="p">,</span><span class="w">
@@ -12434,7 +12434,7 @@ oauth2 ( Scopes: read )
 <tr>
 <td>» event_type</td>
 <td>string</td>
-<td>Type of <a href="#get-mod-event">event</a> was 'MODFILE_UPDATE', 'MOD_VISIBILITY_CHANGE' or 'MOD_LIVE'.</td>
+<td>Type of <a href="#get-mod-events-2">event</a> was 'MODFILE_CHANGE', 'MOD_VISIBILITY_CHANGE' or 'MOD_LIVE'.</td>
 </tr>
 <tr>
 <td>» changes</td>
