@@ -637,6 +637,20 @@ mod.io returns the following headers in each request to inform you of your remai
 
 You should always plan to minimize requests and cache API responses. It will make your app feel fluid and fast for your users. If your usage is excessive we shall reach out to discuss ways of optimizing, but our aim is to never restrict legitimate use of the API. We have set high limits that should cover 99% of use-cases, and are happy to [discuss your scenario](mailto:developers@mod.io?subject=API%20usage) if you require more.
 
+## Testing
+
+To help familiarize yourself with the mod.io API and to ensure your implementation is battle-hardened and operating as intended, we have setup a test sandbox for you to construct your application which is identical to the production mod.io service. The testing environment is where you should test and make requests to the API whilst your integration is a work in progress and the submitted data is not important - then when you are ready to go live it's as easy as substituting the API test URL for the production URL. 
+
+You will need to [register a test account](https://test.mod.io/members/register) and then [add your game](https://test.mod.io/games/add) to begin using it and you will see only games you are a team member of and there is no connection between the data added to the test environment and production. We highly recommend you use the test environment when integrating as it allows you to keep your development private and you can submit as much dummy data as you need to try the functionality required, without having to clean it up at the end.
+
+__Test version:__ `v1`
+
+__Test site:__ [https://test.mod.io](https://test.mod.io)
+
+__Test path:__ [https://api.test.mod.io/v1](https://api.test.mod.io/v1)
+
+__NOTE__: We periodically reset the test environment to default - with the exception of user accounts so please do not rely on it to store important information. Any data you intend on mod.io peristing should not be submitted in the test environment.
+
 ## Contact
 
 If you spot any errors within the mod.io documentation, have feedback on how we can make it easier to follow or simply want to discuss how awesome mods are, feel free to reach out anytime to [developers@mod.io](mailto:developers@mod.io?subject=API). We are here to help you grow and maximise the potential of mods in your game.
@@ -1126,7 +1140,7 @@ Update details for a game. If you want to update the `icon`, `logo` or `header` 
      curation_options|integer||Choose the curation process your team follows to approve mods:<br><br>__0__ = No curation (recommended): Mods are immediately available to play, without any intervention or work from your team.<br><br>__1__ = Paid curation: Screen only mods the creator wants to sell, before they are available to receive donations or be purchased via the API.<br><br>__2__ = Full curation: All mods must be accepted by someone on your team. This option is useful for games that have a small number of mods and want to control the experience, or you need to set the parameters attached to a mod (i.e. a weapon may require the rate of fire, power level, clip size etc). It can also be used for complex mods, which you may need to build into your game or distribute as DLC.
      community_options|integer||Choose the community features enabled on the mod.io website:<br><br>__0__ = All of the options below are disabled<br>__1__ = Discussion board enabled<br>__2__ = Guides and news enabled<br>__?__ = Add the options you want together, to enable multiple features
      revenue_options|integer||Choose the revenue capabilities mods can enable:<br><br>__0__ = All of the options below are disabled<br>__1__ = Allow mods to be sold<br>__2__ = Allow mods to receive donations<br>__4__ = Allow mods to be traded (not subject to revenue share)<br>__8__ = Allow mods to control supply and scarcity<br>__?__ = Add the options you want together, to enable multiple features
-     api_access_options|integer||Choose the level of API access your game allows:<br><br>__0__ = All of the options below are disabled<br>__1__ = Allow 3rd parties to access your mods API (recommended, an open API will encourage a healthy ecosystem of tools and apps)<br>__2__ = Allow mods to be downloaded directly, without requiring API validation (useful for anonymous game servers and services)<br>__?__ = Add the options you want together, to enable multiple features
+     api_access_options|integer||Choose the level of API access your game allows:<br><br>__0__ = All of the options below are disabled<br>__1__ = Allow 3rd parties to access your mods API (recommended, an open API will encourage a healthy ecosystem of tools and apps)<br>__2__ = Allow mods to be downloaded directly without requiring API validation, to get a file URL with a valid hash (useful for anonymous game servers and services)<br>__?__ = Add the options you want together, to enable multiple features
 
 
 > Example response

@@ -622,17 +622,17 @@ You should always plan to minimize requests and cache API responses. It will mak
 
 ## Testing
 
-To launch your game with an amazing mod service, we run a test environment which is a copy of production to make development easy for your team. The test environment is available via [--parse_sitetestname](--parse_sitetesturl), you will need to register an account and add your game to begin using it. Functionally the test environment is identical to production, except you see only games you are a team member of and there is no connection between the data added to the test environment and production.
+To help familiarize yourself with the --parse_sitename API and to ensure your implementation is battle-hardened and operating as intended, we have setup a test sandbox for you to construct your application which is identical to the production --parse_sitename service. The testing environment is where you should test and make requests to the API whilst your integration is a work in progress and the submitted data is not important - then when you are ready to go live it's as easy as substituting the API test URL for the production URL. 
 
-We recommend you use the test environment when integrating --parse_sitename, because it allows you to keep your development private and you can submit as much dummy data as you need to try the functionality required, without having to clean it up at the end.
-
-__NOTE__: We periodically reset the test environment to default - so don't rely on it to store important information.
+You will need to [register a test account](--parse_sitetesturl/members/register) and then [add your game](--parse_sitetesturl/games/add) to begin using it and you will see only games you are a team member of and there is no connection between the data added to the test environment and production. We highly recommend you use the test environment when integrating as it allows you to keep your development private and you can submit as much dummy data as you need to try the functionality required, without having to clean it up at the end.
 
 __Test version:__ `--parse_version`
 
 __Test site:__ [--parse_sitetesturl](--parse_sitetesturl)
 
 __Test path:__ [--parse_apitesturl](--parse_apitesturl)
+
+__NOTE__: We periodically reset the test environment to default - with the exception of user accounts so please do not rely on it to store important information. Any data you intend on --parse_sitename peristing should not be submitted in the test environment.
 
 ## Contact
 
