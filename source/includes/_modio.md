@@ -620,6 +620,20 @@ X-RateLimit-Remaining: 59
 
 You should always plan to minimize requests and cache API responses. It will make your app feel fluid and fast for your users. If your usage is excessive we shall reach out to discuss ways of optimizing, but our aim is to never restrict legitimate use of the API. We have set high limits that should cover 99% of use-cases, and are happy to [discuss your scenario](mailto:--parse_email?subject=API%20usage) if you require more.
 
+## Testing
+
+To launch your game with an amazing mod service, we run a test environment which is a copy of production to make development easy for your team. The test environment is available via [--parse_sitetestname](--parse_sitetesturl), you will need to register an account and add your game to begin using it. Functionally the test environment is identical to production, except you see only games you are a team member of and there is no connection between the data added to the test environment and production.
+
+We recommend you use the test environment when integrating --parse_sitename, because it allows you to keep your development private and you can submit as much dummy data as you need to try the functionality required, without having to clean it up at the end.
+
+__NOTE__: We periodically reset the test environment to default - so don't rely on it to store important information.
+
+__Test version:__ `--parse_version`
+
+__Test site:__ [--parse_sitetesturl](--parse_sitetesturl)
+
+__Test path:__ [--parse_apitesturl](--parse_apitesturl)
+
 ## Contact
 
 If you spot any errors within the --parse_sitename documentation, have feedback on how we can make it easier to follow or simply want to discuss how awesome mods are, feel free to reach out anytime to [--parse_email](mailto:--parse_email?subject=API). We are here to help you grow and maximise the potential of mods in your game.
