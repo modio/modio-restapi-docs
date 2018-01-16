@@ -1971,7 +1971,7 @@ Edit details for a mod. If you want to update the `logo` or media associated wit
      description|string||Detailed description for your mod, which can include details such as 'About', 'Features', 'Install Instructions', 'FAQ', etc. HTML supported and encouraged.
      homepage|string||Official homepage for your mod. Must be a valid URL.
      stock|integer||Artificially limit the amount of times the mod can be subscribed too.
-     modfile|integer||Unique id of the [Modfile Object](#modfile-object) to be labelled as the current release.<br><br>__NOTE:__ If the `modfile` parameter is successfully changed, a [__MODFILE_CHANGE__ event](#get-all-mod-events) will be fired, so game clients know there is an update available for this mod.
+     modfile|integer||Unique id of the [Modfile Object](#modfile-object) to be labelled as the current release.<br><br>__NOTE:__ If the `modfile` parameter is successfully changed, a [__MODFILE_CHANGED__ event](#get-all-mod-events) will be fired, so game clients know there is an update available for this mod.
      metadata_blob|string||Metadata stored by the game developer which may include properties as to how the item works, or other information you need to display. Metadata can also be stored as searchable [key value pairs](#metadata), and to individual [mod files](#get-all-modfiles).
 
 
@@ -2174,7 +2174,7 @@ System.out.println(response.toString());
 ```
 `DELETE /games/{game-id}/mods/{mod-id}`
 
-Delete a mod profile. Successful request will return `204 No Content` and fire a __MOD_VISIBILITY_CHANGE__ event.<br><br>__NOTE:__ This will close the mod profile which means it cannot be viewed or retrieved via API requests but will still exist in-case you choose to restore it at a later date. If you believe a mod should be permanently removed please [contact us](mailto:support@mod.io).
+Delete a mod profile. Successful request will return `204 No Content` and fire a __MOD_UNAVAILABLE__ event.<br><br>__NOTE:__ This will close the mod profile which means it cannot be viewed or retrieved via API requests but will still exist in-case you choose to restore it at a later date. If you believe a mod should be permanently removed please [contact us](mailto:support@mod.io).
 
 
 > Example response
@@ -2574,7 +2574,7 @@ Upload a file for the corresponding mod. Successful request will return the newl
      filedata|file|true|The binary file for the release. For compatibility you should ZIP the base folder of your mod, or if it is a collection of files which live in a pre-existing game folder, you should ZIP those files. Your file must meet the following conditions:<br><br>- File must be __zipped__ and cannot exceed 10GB in filesize<br>- Mods which span multiple game directories are not supported unless the game manages this<br>- Mods which overwrite files are not supported unless the game manages this
      version|string||Version of the file release.
      changelog|string||Changelog of this release.
-     active|boolean||_Default value is true._ Label this upload as the current release, this will change the `modfile` field on the parent mod to the `id` of this file after upload.<br><br>__NOTE:__ If the _active_ parameter is _true_, a [__MODFILE_CHANGE__ event](#get-all-mod-events) will be fired, so game clients know there is an update available for this mod.
+     active|boolean||_Default value is true._ Label this upload as the current release, this will change the `modfile` field on the parent mod to the `id` of this file after upload.<br><br>__NOTE:__ If the _active_ parameter is _true_, a [__MODFILE_CHANGED__ event](#get-all-mod-events) will be fired, so game clients know there is an update available for this mod.
      filehash|string||MD5 of the submitted file. When supplied the MD5 will be compared against the uploaded files MD5. If they don't match a `422 Unprocessible Entity` error will be returned.
      metadata_blob|string||Metadata stored by the game developer which may include properties such as what version of the game this file is compatible with. Metadata can also be stored as searchable [key value pairs](#metadata), and to the [mod object](#edit-mod).
 
@@ -2723,7 +2723,7 @@ Edit the details of a published file. If you want to update fields other than th
      ---|---|---|---|
      version|string||Version of the file release.
      changelog|string||Changelog of this release.
-     active|boolean||_Default value is true._ Label this upload as the current release, this will change the `modfile` field on the parent mod to the `id` of this file after upload.<br><br>__NOTE:__ If the _active_ parameter causes the parent mods `modfile` parameter to change, a [__MODFILE_CHANGE__ event](#get-all-mod-events) will be fired, so game clients know there is an update available for this mod.
+     active|boolean||_Default value is true._ Label this upload as the current release, this will change the `modfile` field on the parent mod to the `id` of this file after upload.<br><br>__NOTE:__ If the _active_ parameter causes the parent mods `modfile` parameter to change, a [__MODFILE_CHANGED__ event](#get-all-mod-events) will be fired, so game clients know there is an update available for this mod.
      metadata_blob|string||Metadata stored by the game developer which may include properties such as what version of the game this file is compatible with. Metadata can also be stored as searchable [key value pairs](#metadata), and to the [mod object](#edit-mod).
 
 
@@ -3573,7 +3573,7 @@ Get the event log for a mod, showing changes made sorted by latest event first. 
      mod_id|integer|Unique id of the parent mod.
      user_id|integer|Unique id of the user who performed the action.
      date_added|integer|Unix timestamp of date mod was updated.
-     event_type|string|Type of change that occurred:<br><br>__MODFILE_CHANGE__ = Primary file changed<br>__MOD_VISIBILITY_CHANGE__ = Mod has been set to live, or hidden<br>__MOD_LIVE__ = When the mod went public for the first time
+     event_type|string|Type of change that occurred:<br><br>__MODFILE_CHANGED__ = Primary file changed<br>__MOD_AVAILABLE__ = Mod is marked as accepted and public<br>__MOD_UNAVAILABLE__ = Mod is marked as not accepted, hidden or deleted<br>__MOD_EDITED__ = The mod was updated (triggered when any column value changes)
 
 
 > Example response
@@ -3586,14 +3586,7 @@ Get the event log for a mod, showing changes made sorted by latest event first. 
       "mod_id": 13,
       "user_id": 13,
       "date_added": 1499846132,
-      "event_type": "MODFILE_CHANGE",
-      "changes": [
-        {
-          "field": "modfile",
-          "before": 13,
-          "after": 183
-        }
-      ]
+      "event_type": "MODFILE_CHANGED"
     },
     {
         ...
@@ -3711,7 +3704,7 @@ Get all mods events for the corresponding game sorted by latest event first. Suc
      mod_id|integer|Unique id of the parent mod.
      user_id|integer|Unique id of the user who performed the action.
      date_added|integer|Unix timestamp of date mod was added.
-     event_type|string|Type of change that occurred:<br><br>__MODFILE_CHANGE__ = Primary file changed<br>__MOD_VISIBILITY_CHANGE__ = Mod has been set to live, or hidden<br>__MOD_LIVE__ = When the mod went public for the first time
+     event_type|string|Type of change that occurred:<br><br>__MODFILE_CHANGED__ = Primary file changed<br>__MOD_AVAILABLE__ = Mod is marked as accepted and public<br>__MOD_UNAVAILABLE__ = Mod is marked as not accepted, hidden or deleted<br>__MOD_EDITED__ = The mod was updated (triggered when any column value changes)
      latest|boolean|_Default value is true_. Returns only the latest unique events, which is useful for checking if the primary `modfile` has changed.
      subscribed|boolean|_Default value is false_. Returns only events connected to mods the __authenticated user__ is subscribed to, which is useful for keeping the users mods up-to-date.
 
@@ -3726,14 +3719,7 @@ Get all mods events for the corresponding game sorted by latest event first. Suc
       "mod_id": 13,
       "user_id": 13,
       "date_added": 1499846132,
-      "event_type": "MODFILE_CHANGE",
-      "changes": [
-        {
-          "field": "modfile",
-          "before": 13,
-          "after": 183
-        }
-      ]
+      "event_type": "MODFILE_CHANGED"
     },
     {
         ...
@@ -7788,14 +7774,7 @@ thumb_320x180|string|URL to the image thumbnail.
   "mod_id": 13,
   "user_id": 13,
   "date_added": 1499846132,
-  "event_type": "MODFILE_CHANGE",
-  "changes": [
-    {
-      "field": "modfile",
-      "before": 13,
-      "after": 183
-    }
-  ]
+  "event_type": "MODFILE_CHANGED"
 } 
 ```
 
@@ -7808,35 +7787,7 @@ id|integer|Unique id of the event object.
 mod_id|integer|Unique id of the parent mod.
 user_id|integer|Unique id of the user who performed the action.
 date_added|integer|Unix timestamp of date the event occurred.
-event_type|string|Type of [event](#get-mod-events-2) was 'MODFILE_CHANGE', 'MOD_VISIBILITY_CHANGE' or 'MOD_LIVE'.
-changes|[Field Change Object  ](#schemafield_change_object)[]|Contains an array of 'before and after' values of fields changed by the event.
-» field|string|Name of the field that was changed.
-» before|integer|Value of the field before the event.
-» after|integer|Value of the field after the event.
-
-
-
-
-## Field Change Object  
-
-<a name="schemafield_change_object"></a>
-
-```json
-{
-  "field": "modfile",
-  "before": 13,
-  "after": 183
-} 
-```
-
-
-### Properties
-
-Name|Type|Description
----|---|---|---|
-field|string|Name of the field that was changed.
-before|integer|Value of the field before the event.
-after|integer|Value of the field after the event.
+event_type|string|Type of [event](#get-mod-events-2) was 'MODFILE_CHANGED', 'MOD_AVAILABLE', 'MOD_UNAVAILABLE', 'MOD_EDITED'.
 
 
 
@@ -9078,14 +9029,7 @@ result_offset|integer|Number of results skipped over.
       "mod_id": 13,
       "user_id": 13,
       "date_added": 1499846132,
-      "event_type": "MODFILE_CHANGE",
-      "changes": [
-        {
-          "field": "modfile",
-          "before": 13,
-          "after": 183
-        }
-      ]
+      "event_type": "MODFILE_CHANGED"
     },
     {
         ...
@@ -9107,11 +9051,7 @@ data|[Mod Event Object  ](#schemamod_event_object)[]|Array containing mod event 
 » mod_id|integer|Unique id of the parent mod.
 » user_id|integer|Unique id of the user who performed the action.
 » date_added|integer|Unix timestamp of date the event occurred.
-» event_type|string|Type of [event](#get-mod-events-2) was 'MODFILE_CHANGE', 'MOD_VISIBILITY_CHANGE' or 'MOD_LIVE'.
-» changes|[Field Change Object  ](#schemafield_change_object)[]|Contains an array of 'before and after' values of fields changed by the event.
-»» field|string|Name of the field that was changed.
-»» before|integer|Value of the field before the event.
-»» after|integer|Value of the field after the event.
+» event_type|string|Type of [event](#get-mod-events-2) was 'MODFILE_CHANGED', 'MOD_AVAILABLE', 'MOD_UNAVAILABLE', 'MOD_EDITED'.
 result_count|integer|Number of results returned in the data array.
 result_limit|integer|Maximum number of results returned.
 result_offset|integer|Number of results skipped over.
