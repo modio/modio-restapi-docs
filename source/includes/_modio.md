@@ -6,7 +6,7 @@ Welcome to the official documentation for [--parse_sitename](--parse_siteurl), a
 
 __Current version:__ `--parse_version`
 
-__Base path:__ [--parse_apiurl](--parse_apiurl)
+__API path:__ [--parse_apiurl](--parse_apiurl)
 
 ## How It Works
 
@@ -622,17 +622,17 @@ You should always plan to minimize requests and cache API responses. It will mak
 
 ## Testing
 
-To help familiarize yourself with the --parse_sitename API and to ensure your implementation is battle-hardened and operating as intended, we have setup a test sandbox for you to construct your application which is identical to the production --parse_sitename service. The testing environment is where you should test and make requests to the API whilst your integration is a work in progress and the submitted data is not important - then when you are ready to go live it's as easy as substituting the API test URL for the production URL. 
+To help familiarize yourself with the --parse_sitename API and to ensure your implementation is battle-hardened and operating as intended, we have setup a test sandbox which is identical to the production environment. The test sandbox allows you to make requests to the API whilst your integration is a work in progress and the submitted data is not important. When you are ready to go live it's as easy as making sure your game's production profile and `apikey` is correct, and substituting the API test URL for the production URL. 
 
-You will need to [register a test account](--parse_sitetesturl/members/register) and then [add your game](--parse_sitetesturl/games/add) to begin using it and you will see only games you are a team member of and there is no connection between the data added to the test environment and production. We highly recommend you use the test environment when integrating as it allows you to keep your development private and you can submit as much dummy data as you need to try the functionality required, without having to clean it up at the end.
+To begin using the test sandbox you will need to [register a test account](--parse_sitetesturl/members/register) and [add your game](--parse_sitetesturl/games/add). You will see only games you are a team member of and there is no connection between the data added to the test environment and production. We highly recommend you use the test environment when integrating as it allows you to keep your development private, and you can submit as much dummy data as you need to try the functionality required, without having to clean it up at the end.
 
 __Test version:__ `--parse_version`
 
 __Test site:__ [--parse_sitetesturl](--parse_sitetesturl)
 
-__Test path:__ [--parse_apitesturl](--parse_apitesturl)
+__Test API path:__ [--parse_apitesturl](--parse_apitesturl)
 
-__NOTE__: We periodically reset the test environment to default - with the exception of user accounts so please do not rely on it to store important information. Any data you intend on --parse_sitename peristing should not be submitted in the test environment.
+__NOTE__: We periodically reset the test environment to default - with the exception of user accounts so please do not rely on it to store important information. Any data you intend on peristing should be submitted to the production environment.
 
 ## Contact
 
