@@ -758,12 +758,12 @@ Get all games. Successful request will return an array of [Game Objects](#get-al
      summary|string|Summary of the game.
      homepage|string|Official homepage of the game.
      ugc_name|string|Word used to describe user-generated content (mods, items, addons etc).
-     presentation_options|integer|Presentation style used on the mod.io website:<br><br>__0__ =  Grid View: Displays mods in a grid<br>__1__ = Table View: Displays mods in a table
-     submission_options|integer|Submission process modders must follow:<br><br>__0__ = Mod uploads must occur via a tool created by the game developers<br>__1__ = Mod uploads can occur from anywhere, including the website and API
-     curation_options|integer|Curation process used to approve mods:<br><br>__0__ = No curation: Mods are immediately available to play<br>__1__ = Paid curation: Mods are immediately available to play unless they choose to receive donations. These mods must be accepted to be listed<br>__2__ = Full curation: All mods must be accepted by someone to be listed
-     community_options|integer|Community features enabled on the mod.io website:<br><br>__0__ = All of the options below are disabled<br>__1__ = Discussion board enabled<br>__2__ = Guides and news enabled<br>__?__ = Combine to find games with multiple options enabled (see [BITWISE filtering](#bitwise-and-bitwise-and))
-     revenue_options|integer|Revenue capabilities mods can enable:<br><br>__0__ = All of the options below are disabled<br>__1__ = Allow mods to be sold<br>__2__ = Allow mods to receive donations<br>__4__ = Allow mods to be traded<br>__8__ = Allow mods to control supply and scarcity<br>__?__ = Combine to find games with multiple options enabled (see [BITWISE filtering](#bitwise-and-bitwise-and))
-     api_access_options|integer|Level of API access allowed by this game:<br><br>__0__ = All of the options below are disabled<br>__1__ = This game allows 3rd parties to access the mods API<br>__2__ = This game allows mods to be downloaded directly without API validation to get a valid `download_url`<br>__?__ = Combine to find games with multiple options enabled (see [BITWISE filtering](#bitwise-and-bitwise-and))
+     presentation_option|integer|Presentation style used on the mod.io website:<br><br>__0__ =  Grid View: Displays mods in a grid<br>__1__ = Table View: Displays mods in a table
+     submission_option|integer|Submission process modders must follow:<br><br>__0__ = Mod uploads must occur via a tool created by the game developers<br>__1__ = Mod uploads can occur from anywhere, including the website and API
+     curation_option|integer|Curation process used to approve mods:<br><br>__0__ = No curation: Mods are immediately available to play<br>__1__ = Paid curation: Mods are immediately available to play unless they choose to receive donations. These mods must be accepted to be listed<br>__2__ = Full curation: All mods must be accepted by someone to be listed
+     community_options|integer|Community features enabled on the mod.io website:<br><br>__0__ = All of the options below are disabled<br>__1__ = Discussion board enabled<br>__2__ = Guides and news enabled<br>__?__ = Combine to find games with multiple options enabled (see [BITWISE fields](#bitwise-and-bitwise-and))
+     revenue_options|integer|Revenue capabilities mods can enable:<br><br>__0__ = All of the options below are disabled<br>__1__ = Allow mods to be sold<br>__2__ = Allow mods to receive donations<br>__4__ = Allow mods to be traded<br>__8__ = Allow mods to control supply and scarcity<br>__?__ = Combine to find games with multiple options enabled (see [BITWISE fields](#bitwise-and-bitwise-and))
+     api_access_options|integer|Level of API access allowed by this game:<br><br>__0__ = All of the options below are disabled<br>__1__ = Allow 3rd parties to access this games API endpoints<br>__2__ = Allow mods to be downloaded directly (if disabled all download URLs will contain a frequently changing verification hash to stop unauthorized use)<br>__?__ = Combine to find games with multiple options enabled (see [BITWISE fields](#bitwise-and-bitwise-and))
 
 > Example response
 
@@ -791,9 +791,9 @@ Get all games. Successful request will return an array of [Game Objects](#get-al
       "date_added": 1493702614,
       "date_updated": 1499410290,
       "date_live": 1499841403,
-      "presentation_options": 1,
-      "submission_options": 0,
-      "curation_options": 0,
+      "presentation_option": 1,
+      "submission_option": 0,
+      "curation_option": 0,
       "community_options": 3,
       "revenue_options": 1500,
       "api_access_options": 3,
@@ -966,9 +966,9 @@ Get a game. Successful request will return a single [Game Object](#game-object).
   "date_added": 1493702614,
   "date_updated": 1499410290,
   "date_live": 1499841403,
-  "presentation_options": 1,
-  "submission_options": 0,
-  "curation_options": 0,
+  "presentation_option": 1,
+  "submission_option": 0,
+  "curation_option": 0,
   "community_options": 3,
   "revenue_options": 1500,
   "api_access_options": 3,
@@ -1130,12 +1130,12 @@ Update details for a game. If you want to update the `icon`, `logo` or `header` 
      instructions|string||Instructions and links creators should follow to upload mods. Keep it short and explain details like are mods submitted in-game or via tools you have created.
      homepage|string||Official homepage for your game. Must be a valid URL.
      ugc_name|string||Word used to describe user-generated content (mods, items, addons etc).
-     presentation_options|integer||Choose the presentation style you want on the mod.io website:<br><br>__0__ =  Grid View: Displays mods in a grid (visual but less informative, default setting) <br>__1__ = Table View: Displays mods in a table (easier to browse)
-     submission_options|integer||Choose the submission process you want modders to follow:<br><br>__0__ = Control the mod upload process (recommended): You will have to build an upload system either in-game or via a standalone tool, which enables creators to submit mods to the tags you have configured. Because you control the flow you can prevalidate and compile mods, to ensure they will work in your game and attach metadata about what settings the mod can change. In the long run this option will save you time as you can accept more submissions, but it requires more setup to get running and isn't as open as the above option. __NOTE:__ mod profiles can still be [created online](https://mod.io/mods/add), but uploads will have to occur via the API using tools you create.<br><br>__1__ = Enable mod uploads from anywhere: Allow developers to upload mods via the website and API, and pick the tags their mod is built for. No validation will be done on the files submitted, it will be the responsibility of your game and apps to process the mods installation based on the tags selected and determine if the mod is valid and works. For example a mod might be uploaded with the 'map' tag. When a user subscribes to this mod, your game will need to verify it contains a map file and install it where maps are located. If this fails, your game or the community will have to flag the mod as 'incompatible' to remove it from the listing.
-     curation_options|integer||Choose the curation process your team follows to approve mods:<br><br>__0__ = No curation (recommended): Mods are immediately available to play, without any intervention or work from your team.<br><br>__1__ = Paid curation: Screen only mods the creator wants to sell, before they are available to receive donations or be purchased via the API.<br><br>__2__ = Full curation: All mods must be accepted by someone on your team. This option is useful for games that have a small number of mods and want to control the experience, or you need to set the parameters attached to a mod (i.e. a weapon may require the rate of fire, power level, clip size etc). It can also be used for complex mods, which you may need to build into your game or distribute as DLC.
-     community_options|integer||Choose the community features enabled on the mod.io website:<br><br>__0__ = All of the options below are disabled<br>__1__ = Discussion board enabled<br>__2__ = Guides and news enabled<br>__?__ = Add the options you want together, to enable multiple features
-     revenue_options|integer||Choose the revenue capabilities mods can enable:<br><br>__0__ = All of the options below are disabled<br>__1__ = Allow mods to be sold<br>__2__ = Allow mods to receive donations<br>__4__ = Allow mods to be traded (not subject to revenue share)<br>__8__ = Allow mods to control supply and scarcity<br>__?__ = Add the options you want together, to enable multiple features
-     api_access_options|integer||Choose the level of API access your game allows:<br><br>__0__ = All of the options below are disabled<br><br>__1__ = Allow 3rd parties to access your mods API. We recommend you enable this feature, an open API will encourage a healthy ecosystem of tools and apps. If you do not enable this feature, your `/games/{games-id}` endpoints will return `403 Forbidden` unless you are a member of the games team or using the games `apikey`<br><br>__2__ = Allow mods to be downloaded directly without requiring API validation. If you enable this your mod download URLs will never expire, making implementation easier for anonymous game servers and services because you can save and reuse URLs. Disabling this feature will require you to request a new `download_url` each use, adding a small amount of protection for your mod creators<br><br>__?__ = Add the options you want together, to enable multiple features
+     presentation_option|integer||Choose the presentation style you want on the mod.io website:<br><br>__0__ =  Grid View: Displays mods in a grid (visual but less informative, default setting) <br>__1__ = Table View: Displays mods in a table (easier to browse)
+     submission_option|integer||Choose the submission process you want modders to follow:<br><br>__0__ = Control the mod upload process (recommended): You will have to build an upload system either in-game or via a standalone tool, which enables creators to submit mods to the tags you have configured. Because you control the flow you can prevalidate and compile mods, to ensure they will work in your game and attach metadata about what settings the mod can change. In the long run this option will save you time as you can accept more submissions, but it requires more setup to get running and isn't as open as the above option. __NOTE:__ mod profiles can still be [created online](https://mod.io/mods/add), but uploads will have to occur via the API using tools you create.<br><br>__1__ = Enable mod uploads from anywhere: Allow developers to upload mods via the website and API, and pick the tags their mod is built for. No validation will be done on the files submitted, it will be the responsibility of your game and apps to process the mods installation based on the tags selected and determine if the mod is valid and works. For example a mod might be uploaded with the 'map' tag. When a user subscribes to this mod, your game will need to verify it contains a map file and install it where maps are located. If this fails, your game or the community will have to flag the mod as 'incompatible' to remove it from the listing.
+     curation_option|integer||Choose the curation process your team follows to approve mods:<br><br>__0__ = No curation (recommended): Mods are immediately available to play, without any intervention or work from your team.<br><br>__1__ = Paid curation: Screen only mods the creator wants to sell, before they are available to receive donations or be purchased via the API.<br><br>__2__ = Full curation: All mods must be accepted by someone on your team. This option is useful for games that have a small number of mods and want to control the experience, or you need to set the parameters attached to a mod (i.e. a weapon may require the rate of fire, power level, clip size etc). It can also be used for complex mods, which you may need to build into your game or distribute as DLC.
+     community_options|integer||Choose the community features enabled on the mod.io website:<br><br>__0__ = All of the options below are disabled<br>__1__ = Discussion board enabled<br>__2__ = Guides and news enabled<br>__?__ = Add the options you want together, to enable multiple features (see [BITWISE fields](#bitwise-and-bitwise-and))
+     revenue_options|integer||Choose the revenue capabilities mods can enable:<br><br>__0__ = All of the options below are disabled<br>__1__ = Allow mods to be sold<br>__2__ = Allow mods to receive donations<br>__4__ = Allow mods to be traded (not subject to revenue share)<br>__8__ = Allow mods to control supply and scarcity<br>__?__ = Add the options you want together, to enable multiple features (see [BITWISE fields](#bitwise-and-bitwise-and))
+     api_access_options|integer||Choose the level of API access your game allows:<br><br>__0__ = All of the options below are disabled<br><br>__1__ = Allow 3rd parties to access this games API endpoints. We recommend you enable this feature, an open API will encourage a healthy ecosystem of tools and apps. If you do not enable this feature, your `/games/{games-id}` endpoints will return `403 Forbidden` unless you are a member of the games team or using the games `apikey`<br><br>__2__ = Allow mods to be downloaded directly (makes implementation easier for you, game servers and services because you can save, share and reuse download URLs). If disabled all download URLs will contain a frequently changing verification hash to stop unauthorized use<br><br>__?__ = Add the options you want together, to enable multiple features (see [BITWISE fields](#bitwise-and-bitwise-and))
 
 > Example response
 
@@ -1161,9 +1161,9 @@ Update details for a game. If you want to update the `icon`, `logo` or `header` 
   "date_added": 1493702614,
   "date_updated": 1499410290,
   "date_live": 1499841403,
-  "presentation_options": 1,
-  "submission_options": 0,
-  "curation_options": 0,
+  "presentation_option": 1,
+  "submission_option": 0,
+  "curation_option": 0,
   "community_options": 3,
   "revenue_options": 1500,
   "api_access_options": 3,
@@ -1388,7 +1388,10 @@ Get all mods for the corresponding game. Successful request will return an array
         "version": "1.3",
         "changelog": "VERSION 1.3 -- Changes -- Fixed critical castle floor bug.",
         "metadata_blob": "rogue,hd,high-res,4k,hd textures",
-        "download_url": "https://mod.io/mods/file/1/c489a0354111a4d76640d47f0cdcb294"
+        "download": {
+          "binary_url": "https://mod.io/mods/file/1/c489a0354111a4d76640d47f0cdcb294",
+          "date_expires": 1579316848
+        }
       },
       "media": {
         "youtube": [
@@ -1585,7 +1588,10 @@ Get a mod. Successful request will return a single [Mod Object](#mod-object).
     "version": "1.3",
     "changelog": "VERSION 1.3 -- Changes -- Fixed critical castle floor bug.",
     "metadata_blob": "rogue,hd,high-res,4k,hd textures",
-    "download_url": "https://mod.io/mods/file/1/c489a0354111a4d76640d47f0cdcb294"
+    "download": {
+      "binary_url": "https://mod.io/mods/file/1/c489a0354111a4d76640d47f0cdcb294",
+      "date_expires": 1579316848
+    }
   },
   "media": {
     "youtube": [
@@ -1797,7 +1803,10 @@ Add a mod. Successful request will return the newly created [Mod Object](#mod-ob
     "version": "1.3",
     "changelog": "VERSION 1.3 -- Changes -- Fixed critical castle floor bug.",
     "metadata_blob": "rogue,hd,high-res,4k,hd textures",
-    "download_url": "https://mod.io/mods/file/1/c489a0354111a4d76640d47f0cdcb294"
+    "download": {
+      "binary_url": "https://mod.io/mods/file/1/c489a0354111a4d76640d47f0cdcb294",
+      "date_expires": 1579316848
+    }
   },
   "media": {
     "youtube": [
@@ -2015,7 +2024,10 @@ Edit details for a mod. If you want to update the `logo` or media associated wit
     "version": "1.3",
     "changelog": "VERSION 1.3 -- Changes -- Fixed critical castle floor bug.",
     "metadata_blob": "rogue,hd,high-res,4k,hd textures",
-    "download_url": "https://mod.io/mods/file/1/c489a0354111a4d76640d47f0cdcb294"
+    "download": {
+      "binary_url": "https://mod.io/mods/file/1/c489a0354111a4d76640d47f0cdcb294",
+      "date_expires": 1579316848
+    }
   },
   "media": {
     "youtube": [
@@ -2263,7 +2275,7 @@ System.out.println(response.toString());
 ```
 `GET /games/{game-id}/mods/{mod-id}/files`
 
-Get all files that are published for the corresponding mod. Successful request will return an array of [Modfile Objects](#get-all-modfiles-2). We recommended reading the [filtering documentation](#filtering) to return only the records you want.<br><br>__NOTE:__ If the [game](#edit-game) requires mod downloads to initiated via the API, the `download_url` returned will contain a verification hash. This hash must be supplied to get the modfile, and will expire after a certain period of time. Saving and reusing the `download_url` won't work in this situation given it's dynamic nature.
+Get all files that are published for the corresponding mod. Successful request will return an array of [Modfile Objects](#get-all-modfiles-2). We recommended reading the [filtering documentation](#filtering) to return only the records you want.<br><br>__NOTE:__ If the [game](#edit-game) requires mod downloads to be initiated via the API, the `binary_url` returned will contain a verification hash. This hash must be supplied to get the modfile, and will expire after a certain period of time. Saving and reusing the `binary_url` won't work in this situation given it's dynamic nature.
 
      Filter|Type|Description
      ---|---|---
@@ -2301,7 +2313,10 @@ Get all files that are published for the corresponding mod. Successful request w
       "version": "1.3",
       "changelog": "VERSION 1.3 -- Changes -- Fixed critical castle floor bug.",
       "metadata_blob": "rogue,hd,high-res,4k,hd textures",
-      "download_url": "https://mod.io/mods/file/1/c489a0354111a4d76640d47f0cdcb294"
+      "download": {
+        "binary_url": "https://mod.io/mods/file/1/c489a0354111a4d76640d47f0cdcb294",
+        "date_expires": 1579316848
+      }
     },
     {
         ...
@@ -2410,7 +2425,7 @@ System.out.println(response.toString());
 ```
 `GET /games/{game-id}/mods/{mod-id}/files/{file-id}`
 
-Get a file. Successful request will return a single [Modfile Object](#modfile_object).<br><br>__NOTE:__ If the [game](#edit-game) requires mod downloads to initiated via the API, the `download_url` returned will contain a verification hash. This hash must be supplied to get the modfile, and will expire after a certain period of time. Saving and reusing the `download_url` won't work in this situation given it's dynamic nature.
+Get a file. Successful request will return a single [Modfile Object](#modfile_object).<br><br>__NOTE:__ If the [game](#edit-game) requires mod downloads to be initiated via the API, the `binary_url` returned will contain a verification hash. This hash must be supplied to get the modfile, and will expire after a certain period of time. Saving and reusing the `binary_url` won't work in this situation given it's dynamic nature.
 
 > Example response
 
@@ -2431,7 +2446,10 @@ Get a file. Successful request will return a single [Modfile Object](#modfile_ob
   "version": "1.3",
   "changelog": "VERSION 1.3 -- Changes -- Fixed critical castle floor bug.",
   "metadata_blob": "rogue,hd,high-res,4k,hd textures",
-  "download_url": "https://mod.io/mods/file/1/c489a0354111a4d76640d47f0cdcb294"
+  "download": {
+    "binary_url": "https://mod.io/mods/file/1/c489a0354111a4d76640d47f0cdcb294",
+    "date_expires": 1579316848
+  }
 }
 ```
 <h3 id="Get-Modfile-responses">Responses</h3>
@@ -2572,7 +2590,10 @@ Upload a file for the corresponding mod. Successful request will return the newl
   "version": "1.3",
   "changelog": "VERSION 1.3 -- Changes -- Fixed critical castle floor bug.",
   "metadata_blob": "rogue,hd,high-res,4k,hd textures",
-  "download_url": "https://mod.io/mods/file/1/c489a0354111a4d76640d47f0cdcb294"
+  "download": {
+    "binary_url": "https://mod.io/mods/file/1/c489a0354111a4d76640d47f0cdcb294",
+    "date_expires": 1579316848
+  }
 }
 ```
 <h3 id="Add-Modfile-responses">Responses</h3>
@@ -2717,7 +2738,10 @@ Edit the details of a published file. If you want to update fields other than th
   "version": "1.3",
   "changelog": "VERSION 1.3 -- Changes -- Fixed critical castle floor bug.",
   "metadata_blob": "rogue,hd,high-res,4k,hd textures",
-  "download_url": "https://mod.io/mods/file/1/c489a0354111a4d76640d47f0cdcb294"
+  "download": {
+    "binary_url": "https://mod.io/mods/file/1/c489a0354111a4d76640d47f0cdcb294",
+    "date_expires": 1579316848
+  }
 }
 ```
 <h3 id="Edit-Modfile-responses">Responses</h3>
@@ -3272,7 +3296,10 @@ Subscribe the _authenticated user_ to a corresponding mod. No body parameters ar
     "version": "1.3",
     "changelog": "VERSION 1.3 -- Changes -- Fixed critical castle floor bug.",
     "metadata_blob": "rogue,hd,high-res,4k,hd textures",
-    "download_url": "https://mod.io/mods/file/1/c489a0354111a4d76640d47f0cdcb294"
+    "download": {
+      "binary_url": "https://mod.io/mods/file/1/c489a0354111a4d76640d47f0cdcb294",
+      "date_expires": 1579316848
+    }
   },
   "media": {
     "youtube": [
@@ -6884,7 +6911,10 @@ Get all mod's the _authenticated user_ is subscribed to. Successful request will
         "version": "1.3",
         "changelog": "VERSION 1.3 -- Changes -- Fixed critical castle floor bug.",
         "metadata_blob": "rogue,hd,high-res,4k,hd textures",
-        "download_url": "https://mod.io/mods/file/1/c489a0354111a4d76640d47f0cdcb294"
+        "download": {
+          "binary_url": "https://mod.io/mods/file/1/c489a0354111a4d76640d47f0cdcb294",
+          "date_expires": 1579316848
+        }
       },
       "media": {
         "youtube": [
@@ -7056,9 +7086,9 @@ Get all games the _authenticated user_ added or is a team member of. Successful 
       "date_added": 1493702614,
       "date_updated": 1499410290,
       "date_live": 1499841403,
-      "presentation_options": 1,
-      "submission_options": 0,
-      "curation_options": 0,
+      "presentation_option": 1,
+      "submission_option": 0,
+      "curation_option": 0,
       "community_options": 3,
       "revenue_options": 1500,
       "api_access_options": 3,
@@ -7270,7 +7300,10 @@ Get all mods the _authenticated user_ added or is a team member of. Successful r
         "version": "1.3",
         "changelog": "VERSION 1.3 -- Changes -- Fixed critical castle floor bug.",
         "metadata_blob": "rogue,hd,high-res,4k,hd textures",
-        "download_url": "https://mod.io/mods/file/1/c489a0354111a4d76640d47f0cdcb294"
+        "download": {
+          "binary_url": "https://mod.io/mods/file/1/c489a0354111a4d76640d47f0cdcb294",
+          "date_expires": 1579316848
+        }
       },
       "media": {
         "youtube": [
@@ -7437,7 +7470,10 @@ Get all modfiles the _authenticated user_ uploaded. Successful request will retu
       "version": "1.3",
       "changelog": "VERSION 1.3 -- Changes -- Fixed critical castle floor bug.",
       "metadata_blob": "rogue,hd,high-res,4k,hd textures",
-      "download_url": "https://mod.io/mods/file/1/c489a0354111a4d76640d47f0cdcb294"
+      "download": {
+        "binary_url": "https://mod.io/mods/file/1/c489a0354111a4d76640d47f0cdcb294",
+        "date_expires": 1579316848
+      }
     },
     {
         ...
@@ -7752,7 +7788,10 @@ date_added|integer|Unix timestamp of date the dependency was added.
   "version": "1.3",
   "changelog": "VERSION 1.3 -- Changes -- Fixed critical castle floor bug.",
   "metadata_blob": "rogue,hd,high-res,4k,hd textures",
-  "download_url": "https://mod.io/mods/file/1/c489a0354111a4d76640d47f0cdcb294"
+  "download": {
+    "binary_url": "https://mod.io/mods/file/1/c489a0354111a4d76640d47f0cdcb294",
+    "date_expires": 1579316848
+  }
 } 
 ```
 
@@ -7774,7 +7813,9 @@ filename|string|Filename including extension.
 version|string|Release version this file represents.
 changelog|string|Changelog for the file.
 metadata_blob|string|Metadata stored by the game developer for this file.
-download_url|string|URL to download the file from the mod.io CDN.<br><br>__NOTE:__ If the [game](#edit-game) requires mod downloads to initiated via the API, the `download_url` returned will contain a verification hash. This hash must be supplied to get the modfile, and will expire after a certain period of time. Saving and reusing the `download_url` won't work in this situation given it's dynamic nature.
+download|[Download Object   ](#schemadownload_object)|Contains download data.
+» binary_url|string|URL to download the file from the mod.io CDN.<br><br>__NOTE:__ If the [game](#edit-game) requires mod downloads to be initiated via the API, the `binary_url` returned will contain a verification hash. This hash must be supplied to get the modfile, and will expire after a certain period of time. Saving and reusing the `binary_url` won't work in this situation given it's dynamic nature.
+» date_expires|integer|Unix timestamp of when the `binary_url` will expire.
 
 
 
@@ -7793,6 +7834,26 @@ download_url|string|URL to download the file from the mod.io CDN.<br><br>__NOTE:
 Name|Type|Description
 ---|---|---|---|
 md5|string|MD5 hash of the file.
+
+
+
+## Download Object
+
+   <a name="schemadownload_object"></a>
+
+```json
+{
+  "binary_url": "https://mod.io/mods/file/1/c489a0354111a4d76640d47f0cdcb294",
+  "date_expires": 1579316848
+} 
+```
+
+### Properties
+
+Name|Type|Description
+---|---|---|---|
+binary_url|string|URL to download the file from the mod.io CDN.<br><br>__NOTE:__ If the [game](#edit-game) requires mod downloads to be initiated via the API, the `binary_url` returned will contain a verification hash. This hash must be supplied to get the modfile, and will expire after a certain period of time. Saving and reusing the `binary_url` won't work in this situation given it's dynamic nature.
+date_expires|integer|Unix timestamp of when the `binary_url` will expire.
 
 
 
@@ -7854,7 +7915,10 @@ md5|string|MD5 hash of the file.
     "version": "1.3",
     "changelog": "VERSION 1.3 -- Changes -- Fixed critical castle floor bug.",
     "metadata_blob": "rogue,hd,high-res,4k,hd textures",
-    "download_url": "https://mod.io/mods/file/1/c489a0354111a4d76640d47f0cdcb294"
+    "download": {
+      "binary_url": "https://mod.io/mods/file/1/c489a0354111a4d76640d47f0cdcb294",
+      "date_expires": 1579316848
+    }
   },
   "media": {
     "youtube": [
@@ -7940,7 +8004,9 @@ modfile|[Modfile Object   ](#schemamodfile_object)|Contains modfile data.
 » version|string|Release version this file represents.
 » changelog|string|Changelog for the file.
 » metadata_blob|string|Metadata stored by the game developer for this file.
-» download_url|string|URL to download the file from the mod.io CDN.<br><br>__NOTE:__ If the [game](#edit-game) requires mod downloads to initiated via the API, the `download_url` returned will contain a verification hash. This hash must be supplied to get the modfile, and will expire after a certain period of time. Saving and reusing the `download_url` won't work in this situation given it's dynamic nature.
+» download|[Download Object   ](#schemadownload_object)|Contains download data.
+»» binary_url|string|URL to download the file from the mod.io CDN.<br><br>__NOTE:__ If the [game](#edit-game) requires mod downloads to be initiated via the API, the `binary_url` returned will contain a verification hash. This hash must be supplied to get the modfile, and will expire after a certain period of time. Saving and reusing the `binary_url` won't work in this situation given it's dynamic nature.
+»» date_expires|integer|Unix timestamp of when the `binary_url` will expire.
 media|[Mod Media Object  ](#schemamod_media_object)|Contains mod media data.
 » youtube|string[]|Array of YouTube links.
 » sketchfab|string[]|Array of SketchFab links.
@@ -8042,9 +8108,9 @@ date_added|integer|Unix timestamp of date tag was applied.
   "date_added": 1493702614,
   "date_updated": 1499410290,
   "date_live": 1499841403,
-  "presentation_options": 1,
-  "submission_options": 0,
-  "curation_options": 0,
+  "presentation_option": 1,
+  "submission_option": 0,
+  "curation_option": 0,
   "community_options": 3,
   "revenue_options": 1500,
   "api_access_options": 3,
@@ -8108,12 +8174,12 @@ submitted_by|[User Object   ](#schemauser_object)|Contains user data.
 date_added|integer|Unix timestamp of date game was registered.
 date_updated|integer|Unix timestamp of date game was updated.
 date_live|integer|Unix timestamp of date game was set live.
-presentation_options|integer|Presentation style used on the mod.io website:<br><br>__0__ =  Grid View: Displays mods in a grid<br>__1__ = Table View: Displays mods in a table
-submission_options|integer|Submission process modders must follow:<br><br>__0__ = Mod uploads must occur via a tool created by the game developers<br>__1__ = Mod uploads can occur from anywhere, including the website and API
-curation_options|integer|Curation process used to approve mods:<br><br>__0__ = No curation: Mods are immediately available to play<br>__1__ = Paid curation: Mods are immediately available to play unless they choose to receive donations. These mods must be accepted to be listed<br>__2__ = Full curation: All mods must be accepted by someone to be listed
-community_options|integer|Community features enabled on the mod.io website:<br><br>__0__ = All of the options below are disabled<br>__1__ = Discussion board enabled<br>__2__ = Guides and news enabled<br>__?__ = Combine to find games with multiple options enabled (see [BITWISE filtering](#bitwise-and-bitwise-and))
-revenue_options|integer|Revenue capabilities mods can enable:<br><br>__0__ = All of the options below are disabled<br>__1__ = Allow mods to be sold<br>__2__ = Allow mods to receive donations<br>__4__ = Allow mods to be traded<br>__8__ = Allow mods to control supply and scarcity<br>__?__ = Combine to find games with multiple options enabled (see [BITWISE filtering](#bitwise-and-bitwise-and))
-api_access_options|integer|Level of API access allowed by this game:<br><br>__0__ = All of the options below are disabled<br>__1__ = This game allows 3rd parties to access the mods API<br>__2__ = This game allows mods to be downloaded directly without API validation to get a valid `download_url`<br>__?__ = Combine to find games with multiple options enabled (see [BITWISE filtering](#bitwise-and-bitwise-and))
+presentation_option|integer|Presentation style used on the mod.io website:<br><br>__0__ =  Grid View: Displays mods in a grid<br>__1__ = Table View: Displays mods in a table
+submission_option|integer|Submission process modders must follow:<br><br>__0__ = Mod uploads must occur via a tool created by the game developers<br>__1__ = Mod uploads can occur from anywhere, including the website and API
+curation_option|integer|Curation process used to approve mods:<br><br>__0__ = No curation: Mods are immediately available to play<br>__1__ = Paid curation: Mods are immediately available to play unless they choose to receive donations. These mods must be accepted to be listed<br>__2__ = Full curation: All mods must be accepted by someone to be listed
+community_options|integer|Community features enabled on the mod.io website:<br><br>__0__ = All of the options below are disabled<br>__1__ = Discussion board enabled<br>__2__ = Guides and news enabled<br>__?__ = Add the options you want together, to enable multiple features (see [BITWISE fields](#bitwise-and-bitwise-and))
+revenue_options|integer|Revenue capabilities mods can enable:<br><br>__0__ = All of the options below are disabled<br>__1__ = Allow mods to be sold<br>__2__ = Allow mods to receive donations<br>__4__ = Allow mods to be traded<br>__8__ = Allow mods to control supply and scarcity<br>__?__ = Add the options you want together, to enable multiple features (see [BITWISE fields](#bitwise-and-bitwise-and))
+api_access_options|integer|Level of API access allowed by this game:<br><br>__0__ = All of the options below are disabled<br>__1__ = Allow 3rd parties to access this games API endpoints<br>__2__ = Allow mods to be downloaded directly (if disabled all download URLs will contain a frequently changing verification hash to stop unauthorized use)<br>__?__ = Add the options you want together, to enable multiple features (see [BITWISE fields](#bitwise-and-bitwise-and))
 ugc_name|string|Word used to describe user-generated content (mods, items, addons etc).
 icon|[Icon Object   ](#schemaicon_object)|Contains icon data.
 » filename|string|Icon filename including extension.
@@ -8134,7 +8200,7 @@ homepage|string|Official homepage of the game.
 name|string|Name of the game.
 name_id|string|Subdomain for the game on mod.io.
 summary|string|Summary of the game.
-instructions|string|A guide about creating and uploading mods for this game to mod.io (applicable if submission_options = 0).
+instructions|string|A guide about creating and uploading mods for this game to mod.io (applicable if submission_option = 0).
 profile_url|string|URL to the game's mod.io page.
 tag_options|[Game Tag Option Object ](#schemagame_tag_option_object)[]|Groups of tags configured by the game developer, that mods can select.
 » name|string|Name of the tag group.
@@ -8444,7 +8510,10 @@ result_offset|integer|Number of results skipped over.
       "version": "1.3",
       "changelog": "VERSION 1.3 -- Changes -- Fixed critical castle floor bug.",
       "metadata_blob": "rogue,hd,high-res,4k,hd textures",
-      "download_url": "https://mod.io/mods/file/1/c489a0354111a4d76640d47f0cdcb294"
+      "download": {
+        "binary_url": "https://mod.io/mods/file/1/c489a0354111a4d76640d47f0cdcb294",
+        "date_expires": 1579316848
+      }
     },
     {
         ...
@@ -8475,7 +8544,9 @@ data|[Modfile Object   ](#schemamodfile_object)[]|Array containing modfile objec
 » version|string|Release version this file represents.
 » changelog|string|Changelog for the file.
 » metadata_blob|string|Metadata stored by the game developer for this file.
-» download_url|string|URL to download the file from the mod.io CDN.<br><br>__NOTE:__ If the [game](#edit-game) requires mod downloads to initiated via the API, the `download_url` returned will contain a verification hash. This hash must be supplied to get the modfile, and will expire after a certain period of time. Saving and reusing the `download_url` won't work in this situation given it's dynamic nature.
+» download|[Download Object   ](#schemadownload_object)|Contains download data.
+»» binary_url|string|URL to download the file from the mod.io CDN.<br><br>__NOTE:__ If the [game](#edit-game) requires mod downloads to be initiated via the API, the `binary_url` returned will contain a verification hash. This hash must be supplied to get the modfile, and will expire after a certain period of time. Saving and reusing the `binary_url` won't work in this situation given it's dynamic nature.
+»» date_expires|integer|Unix timestamp of when the `binary_url` will expire.
 result_count|integer|Number of results returned in the data array.
 result_limit|integer|Maximum number of results returned.
 result_offset|integer|Number of results skipped over.
@@ -8510,9 +8581,9 @@ result_offset|integer|Number of results skipped over.
       "date_added": 1493702614,
       "date_updated": 1499410290,
       "date_live": 1499841403,
-      "presentation_options": 1,
-      "submission_options": 0,
-      "curation_options": 0,
+      "presentation_option": 1,
+      "submission_option": 0,
+      "curation_option": 0,
       "community_options": 3,
       "revenue_options": 1500,
       "api_access_options": 3,
@@ -8585,12 +8656,12 @@ data|[Game Object   ](#schemagame_object)[]|Array containing game objects.
 » date_added|integer|Unix timestamp of date game was registered.
 » date_updated|integer|Unix timestamp of date game was updated.
 » date_live|integer|Unix timestamp of date game was set live.
-» presentation_options|integer|Presentation style used on the mod.io website:<br><br>__0__ =  Grid View: Displays mods in a grid<br>__1__ = Table View: Displays mods in a table
-» submission_options|integer|Submission process modders must follow:<br><br>__0__ = Mod uploads must occur via a tool created by the game developers<br>__1__ = Mod uploads can occur from anywhere, including the website and API
-» curation_options|integer|Curation process used to approve mods:<br><br>__0__ = No curation: Mods are immediately available to play<br>__1__ = Paid curation: Mods are immediately available to play unless they choose to receive donations. These mods must be accepted to be listed<br>__2__ = Full curation: All mods must be accepted by someone to be listed
-» community_options|integer|Community features enabled on the mod.io website:<br><br>__0__ = All of the options below are disabled<br>__1__ = Discussion board enabled<br>__2__ = Guides and news enabled<br>__?__ = Combine to find games with multiple options enabled (see [BITWISE filtering](#bitwise-and-bitwise-and))
-» revenue_options|integer|Revenue capabilities mods can enable:<br><br>__0__ = All of the options below are disabled<br>__1__ = Allow mods to be sold<br>__2__ = Allow mods to receive donations<br>__4__ = Allow mods to be traded<br>__8__ = Allow mods to control supply and scarcity<br>__?__ = Combine to find games with multiple options enabled (see [BITWISE filtering](#bitwise-and-bitwise-and))
-» api_access_options|integer|Level of API access allowed by this game:<br><br>__0__ = All of the options below are disabled<br>__1__ = This game allows 3rd parties to access the mods API<br>__2__ = This game allows mods to be downloaded directly without API validation to get a valid `download_url`<br>__?__ = Combine to find games with multiple options enabled (see [BITWISE filtering](#bitwise-and-bitwise-and))
+» presentation_option|integer|Presentation style used on the mod.io website:<br><br>__0__ =  Grid View: Displays mods in a grid<br>__1__ = Table View: Displays mods in a table
+» submission_option|integer|Submission process modders must follow:<br><br>__0__ = Mod uploads must occur via a tool created by the game developers<br>__1__ = Mod uploads can occur from anywhere, including the website and API
+» curation_option|integer|Curation process used to approve mods:<br><br>__0__ = No curation: Mods are immediately available to play<br>__1__ = Paid curation: Mods are immediately available to play unless they choose to receive donations. These mods must be accepted to be listed<br>__2__ = Full curation: All mods must be accepted by someone to be listed
+» community_options|integer|Community features enabled on the mod.io website:<br><br>__0__ = All of the options below are disabled<br>__1__ = Discussion board enabled<br>__2__ = Guides and news enabled<br>__?__ = Add the options you want together, to enable multiple features (see [BITWISE fields](#bitwise-and-bitwise-and))
+» revenue_options|integer|Revenue capabilities mods can enable:<br><br>__0__ = All of the options below are disabled<br>__1__ = Allow mods to be sold<br>__2__ = Allow mods to receive donations<br>__4__ = Allow mods to be traded<br>__8__ = Allow mods to control supply and scarcity<br>__?__ = Add the options you want together, to enable multiple features (see [BITWISE fields](#bitwise-and-bitwise-and))
+» api_access_options|integer|Level of API access allowed by this game:<br><br>__0__ = All of the options below are disabled<br>__1__ = Allow 3rd parties to access this games API endpoints<br>__2__ = Allow mods to be downloaded directly (if disabled all download URLs will contain a frequently changing verification hash to stop unauthorized use)<br>__?__ = Add the options you want together, to enable multiple features (see [BITWISE fields](#bitwise-and-bitwise-and))
 » ugc_name|string|Word used to describe user-generated content (mods, items, addons etc).
 » icon|[Icon Object   ](#schemaicon_object)|Contains icon data.
 »» filename|string|Icon filename including extension.
@@ -8611,7 +8682,7 @@ data|[Game Object   ](#schemagame_object)[]|Array containing game objects.
 » name|string|Name of the game.
 » name_id|string|Subdomain for the game on mod.io.
 » summary|string|Summary of the game.
-» instructions|string|A guide about creating and uploading mods for this game to mod.io (applicable if submission_options = 0).
+» instructions|string|A guide about creating and uploading mods for this game to mod.io (applicable if submission_option = 0).
 » profile_url|string|URL to the game's mod.io page.
 » tag_options|[Game Tag Option Object ](#schemagame_tag_option_object)[]|Groups of tags configured by the game developer, that mods can select.
 »» name|string|Name of the tag group.
@@ -8718,7 +8789,10 @@ result_offset|integer|Number of results skipped over.
         "version": "1.3",
         "changelog": "VERSION 1.3 -- Changes -- Fixed critical castle floor bug.",
         "metadata_blob": "rogue,hd,high-res,4k,hd textures",
-        "download_url": "https://mod.io/mods/file/1/c489a0354111a4d76640d47f0cdcb294"
+        "download": {
+          "binary_url": "https://mod.io/mods/file/1/c489a0354111a4d76640d47f0cdcb294",
+          "date_expires": 1579316848
+        }
       },
       "media": {
         "youtube": [
@@ -8813,7 +8887,9 @@ data|[Mod Object   ](#schemamod_object)[]|Array containing mod objects.
 »» version|string|Release version this file represents.
 »» changelog|string|Changelog for the file.
 »» metadata_blob|string|Metadata stored by the game developer for this file.
-»» download_url|string|URL to download the file from the mod.io CDN.<br><br>__NOTE:__ If the [game](#edit-game) requires mod downloads to initiated via the API, the `download_url` returned will contain a verification hash. This hash must be supplied to get the modfile, and will expire after a certain period of time. Saving and reusing the `download_url` won't work in this situation given it's dynamic nature.
+»» download|[Download Object   ](#schemadownload_object)|Contains download data.
+»»» binary_url|string|URL to download the file from the mod.io CDN.<br><br>__NOTE:__ If the [game](#edit-game) requires mod downloads to be initiated via the API, the `binary_url` returned will contain a verification hash. This hash must be supplied to get the modfile, and will expire after a certain period of time. Saving and reusing the `binary_url` won't work in this situation given it's dynamic nature.
+»»» date_expires|integer|Unix timestamp of when the `binary_url` will expire.
 » media|[Mod Media Object  ](#schemamod_media_object)|Contains mod media data.
 »» youtube|string[]|Array of YouTube links.
 »» sketchfab|string[]|Array of SketchFab links.
