@@ -302,6 +302,9 @@
                     <a href="#rate-limiting" class="toc-h2 toc-link" data-title="Getting Started">Rate Limiting</a>
                   </li>
                   <li>
+                    <a href="#testing" class="toc-h2 toc-link" data-title="Getting Started">Testing</a>
+                  </li>
+                  <li>
                     <a href="#contact" class="toc-h2 toc-link" data-title="Getting Started">Contact</a>
                   </li>
               </ul>
@@ -550,9 +553,6 @@
                     <a href="#mod-event-object" class="toc-h2 toc-link" data-title="Response Schemas">Mod Event Object</a>
                   </li>
                   <li>
-                    <a href="#field-change-object" class="toc-h2 toc-link" data-title="Response Schemas">Field Change Object</a>
-                  </li>
-                  <li>
                     <a href="#comment-object" class="toc-h2 toc-link" data-title="Response Schemas">Comment Object</a>
                   </li>
                   <li>
@@ -563,6 +563,9 @@
                   </li>
                   <li>
                     <a href="#filehash-object" class="toc-h2 toc-link" data-title="Response Schemas">Filehash Object</a>
+                  </li>
+                  <li>
+                    <a href="#download-object" class="toc-h2 toc-link" data-title="Response Schemas">Download Object</a>
                   </li>
                   <li>
                     <a href="#mod-object" class="toc-h2 toc-link" data-title="Response Schemas">Mod Object</a>
@@ -636,7 +639,7 @@
 
 <p><strong>Current version:</strong> <code>v1</code></p>
 
-<p><strong>Base path:</strong> <a href="https://api.mod.io/v1">https://api.mod.io/v1</a></p>
+<p><strong>API path:</strong> <a href="https://api.mod.io/v1">https://api.mod.io/v1</a></p>
 <h2 id="how-it-works">How It Works</h2>
 <p>Compatible with all builds of your game, mod.io operates silently in the background (without requiring your users to install another client), to give you complete control over your modding ecosystem.</p>
 
@@ -1368,6 +1371,18 @@ X-RateLimit-Remaining: 59
 </ul>
 <h3 id="optimize-your-requests">Optimize your requests</h3>
 <p>You should always plan to minimize requests and cache API responses. It will make your app feel fluid and fast for your users. If your usage is excessive we shall reach out to discuss ways of optimizing, but our aim is to never restrict legitimate use of the API. We have set high limits that should cover 99% of use-cases, and are happy to <a href="mailto:developers@mod.io?subject=API%20usage">discuss your scenario</a> if you require more.</p>
+<h2 id="testing">Testing</h2>
+<p>To help familiarize yourself with the mod.io API and to ensure your implementation is battle-hardened and operating as intended, we have setup a test sandbox which is identical to the production environment. The test sandbox allows you to make requests to the API whilst your integration is a work in progress and the submitted data is not important. When you are ready to go live it's as easy as making sure your game's production profile and <code>apikey</code> is correct, and substituting the API test URL for the production URL. </p>
+
+<p>To begin using the test sandbox you will need to <a href="https://test.mod.io/members/register">register a test account</a> and <a href="https://test.mod.io/games/add">add your game</a>. You will see only games you are a team member of and there is no connection between the data added to the test environment and production. We highly recommend you use the test environment when integrating as it allows you to keep your development private, and you can submit as much dummy data as you need to try the functionality required, without having to clean it up at the end.</p>
+
+<p><strong>Test version:</strong> <code>v1</code></p>
+
+<p><strong>Test site:</strong> <a href="https://test.mod.io">https://test.mod.io</a></p>
+
+<p><strong>Test API path:</strong> <a href="https://api.test.mod.io/v1">https://api.test.mod.io/v1</a></p>
+
+<p><strong>NOTE</strong>: We periodically reset the test environment to default - with the exception of user accounts so please do not rely on it to store important information. Any data you intend on peristing should be submitted to the production environment.</p>
 <h2 id="contact">Contact</h2>
 <p>If you spot any errors within the mod.io documentation, have feedback on how we can make it easier to follow or simply want to discuss how awesome mods are, feel free to reach out anytime to <a href="mailto:developers@mod.io?subject=API">developers@mod.io</a>. We are here to help you grow and maximise the potential of mods in your game.</p>
 <h1 id="games">Games</h1><h2 id="get-all-games">Get All Games</h2>
@@ -1508,34 +1523,34 @@ Accept: application/json
 <td>Word used to describe user-generated content (mods, items, addons etc).</td>
 </tr>
 <tr>
-<td>presentation_options</td>
+<td>presentation_option</td>
 <td>integer</td>
 <td>Presentation style used on the mod.io website:<br><br><strong>0</strong> =  Grid View: Displays mods in a grid<br><strong>1</strong> = Table View: Displays mods in a table</td>
 </tr>
 <tr>
-<td>submission_options</td>
+<td>submission_option</td>
 <td>integer</td>
 <td>Submission process modders must follow:<br><br><strong>0</strong> = Mod uploads must occur via a tool created by the game developers<br><strong>1</strong> = Mod uploads can occur from anywhere, including the website and API</td>
 </tr>
 <tr>
-<td>curation_options</td>
+<td>curation_option</td>
 <td>integer</td>
 <td>Curation process used to approve mods:<br><br><strong>0</strong> = No curation: Mods are immediately available to play<br><strong>1</strong> = Paid curation: Mods are immediately available to play unless they choose to receive donations. These mods must be accepted to be listed<br><strong>2</strong> = Full curation: All mods must be accepted by someone to be listed</td>
 </tr>
 <tr>
 <td>community_options</td>
 <td>integer</td>
-<td>Community features enabled on the mod.io website:<br><br><strong>0</strong> = All of the options below are disabled<br><strong>1</strong> = Discussion board enabled<br><strong>2</strong> = Guides and news enabled<br><strong>?</strong> = Combine to find games with multiple options enabled (see <a href="#bitwise-and-bitwise-and">BITWISE filtering</a>)</td>
+<td>Community features enabled on the mod.io website:<br><br><strong>0</strong> = All of the options below are disabled<br><strong>1</strong> = Discussion board enabled<br><strong>2</strong> = Guides and news enabled<br><strong>?</strong> = Combine to find games with multiple options enabled (see <a href="#bitwise-and-bitwise-and">BITWISE fields</a>)</td>
 </tr>
 <tr>
 <td>revenue_options</td>
 <td>integer</td>
-<td>Revenue capabilities mods can enable:<br><br><strong>0</strong> = All of the options below are disabled<br><strong>1</strong> = Allow mods to be sold<br><strong>2</strong> = Allow mods to receive donations<br><strong>4</strong> = Allow mods to be traded<br><strong>8</strong> = Allow mods to control supply and scarcity<br><strong>?</strong> = Combine to find games with multiple options enabled (see <a href="#bitwise-and-bitwise-and">BITWISE filtering</a>)</td>
+<td>Revenue capabilities mods can enable:<br><br><strong>0</strong> = All of the options below are disabled<br><strong>1</strong> = Allow mods to be sold<br><strong>2</strong> = Allow mods to receive donations<br><strong>4</strong> = Allow mods to be traded<br><strong>8</strong> = Allow mods to control supply and scarcity<br><strong>?</strong> = Combine to find games with multiple options enabled (see <a href="#bitwise-and-bitwise-and">BITWISE fields</a>)</td>
 </tr>
 <tr>
 <td>api_access_options</td>
 <td>integer</td>
-<td>Level of API access allowed by this game:<br><br><strong>0</strong> = All of the options below are disabled<br><strong>1</strong> = This game allows 3rd parties to access the mods API<br><strong>2</strong> = This game allows mods to be downloaded directly without API validation<br><strong>?</strong> = Combine to find games with multiple options enabled (see <a href="#bitwise-and-bitwise-and">BITWISE filtering</a>)</td>
+<td>Level of API access allowed by this game:<br><br><strong>0</strong> = All of the options below are disabled<br><strong>1</strong> = Allow 3rd parties to access this games API endpoints<br><strong>2</strong> = Allow mods to be downloaded directly (if disabled all download URLs will contain a frequently changing verification hash to stop unauthorized use)<br><strong>?</strong> = Combine to find games with multiple options enabled (see <a href="#bitwise-and-bitwise-and">BITWISE fields</a>)</td>
 </tr>
 </tbody>
 </table>
@@ -1566,9 +1581,9 @@ Accept: application/json
       </span><span class="s2">"date_added"</span><span class="p">:</span><span class="w"> </span><span class="mi">1493702614</span><span class="p">,</span><span class="w">
       </span><span class="s2">"date_updated"</span><span class="p">:</span><span class="w"> </span><span class="mi">1499410290</span><span class="p">,</span><span class="w">
       </span><span class="s2">"date_live"</span><span class="p">:</span><span class="w"> </span><span class="mi">1499841403</span><span class="p">,</span><span class="w">
-      </span><span class="s2">"presentation_options"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
-      </span><span class="s2">"submission_options"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
-      </span><span class="s2">"curation_options"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"presentation_option"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"submission_option"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"curation_option"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
       </span><span class="s2">"community_options"</span><span class="p">:</span><span class="w"> </span><span class="mi">3</span><span class="p">,</span><span class="w">
       </span><span class="s2">"revenue_options"</span><span class="p">:</span><span class="w"> </span><span class="mi">1500</span><span class="p">,</span><span class="w">
       </span><span class="s2">"api_access_options"</span><span class="p">:</span><span class="w"> </span><span class="mi">3</span><span class="p">,</span><span class="w">
@@ -1739,9 +1754,9 @@ Accept: application/json
   </span><span class="s2">"date_added"</span><span class="p">:</span><span class="w"> </span><span class="mi">1493702614</span><span class="p">,</span><span class="w">
   </span><span class="s2">"date_updated"</span><span class="p">:</span><span class="w"> </span><span class="mi">1499410290</span><span class="p">,</span><span class="w">
   </span><span class="s2">"date_live"</span><span class="p">:</span><span class="w"> </span><span class="mi">1499841403</span><span class="p">,</span><span class="w">
-  </span><span class="s2">"presentation_options"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
-  </span><span class="s2">"submission_options"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
-  </span><span class="s2">"curation_options"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"presentation_option"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"submission_option"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"curation_option"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
   </span><span class="s2">"community_options"</span><span class="p">:</span><span class="w"> </span><span class="mi">3</span><span class="p">,</span><span class="w">
   </span><span class="s2">"revenue_options"</span><span class="p">:</span><span class="w"> </span><span class="mi">1500</span><span class="p">,</span><span class="w">
   </span><span class="s2">"api_access_options"</span><span class="p">:</span><span class="w"> </span><span class="mi">3</span><span class="p">,</span><span class="w">
@@ -1823,7 +1838,6 @@ curl -X PUT https://api.mod.io/v1/games/<span class="o">{</span>game-id<span cla
 Accept: application/json
 Authorization: Bearer YourAccessToken
 Content-Type: application/x-www-form-urlencoded
-
 
 </code></pre><pre class="highlight javascript tab-javascript"><code><span class="kd">var</span> <span class="nx">headers</span> <span class="o">=</span> <span class="p">{</span>
   <span class="s1">'Authorization'</span><span class="p">:</span><span class="s1">'Bearer YourAccessToken'</span><span class="p">,</span>
@@ -1946,19 +1960,19 @@ Content-Type: application/x-www-form-urlencoded
 <td>Word used to describe user-generated content (mods, items, addons etc).</td>
 </tr>
 <tr>
-<td>presentation_options</td>
+<td>presentation_option</td>
 <td>integer</td>
 <td></td>
 <td>Choose the presentation style you want on the mod.io website:<br><br><strong>0</strong> =  Grid View: Displays mods in a grid (visual but less informative, default setting) <br><strong>1</strong> = Table View: Displays mods in a table (easier to browse)</td>
 </tr>
 <tr>
-<td>submission_options</td>
+<td>submission_option</td>
 <td>integer</td>
 <td></td>
 <td>Choose the submission process you want modders to follow:<br><br><strong>0</strong> = Control the mod upload process (recommended): You will have to build an upload system either in-game or via a standalone tool, which enables creators to submit mods to the tags you have configured. Because you control the flow you can prevalidate and compile mods, to ensure they will work in your game and attach metadata about what settings the mod can change. In the long run this option will save you time as you can accept more submissions, but it requires more setup to get running and isn't as open as the above option. <strong>NOTE:</strong> mod profiles can still be <a href="https://mod.io/mods/add">created online</a>, but uploads will have to occur via the API using tools you create.<br><br><strong>1</strong> = Enable mod uploads from anywhere: Allow developers to upload mods via the website and API, and pick the tags their mod is built for. No validation will be done on the files submitted, it will be the responsibility of your game and apps to process the mods installation based on the tags selected and determine if the mod is valid and works. For example a mod might be uploaded with the 'map' tag. When a user subscribes to this mod, your game will need to verify it contains a map file and install it where maps are located. If this fails, your game or the community will have to flag the mod as 'incompatible' to remove it from the listing.</td>
 </tr>
 <tr>
-<td>curation_options</td>
+<td>curation_option</td>
 <td>integer</td>
 <td></td>
 <td>Choose the curation process your team follows to approve mods:<br><br><strong>0</strong> = No curation (recommended): Mods are immediately available to play, without any intervention or work from your team.<br><br><strong>1</strong> = Paid curation: Screen only mods the creator wants to sell, before they are available to receive donations or be purchased via the API.<br><br><strong>2</strong> = Full curation: All mods must be accepted by someone on your team. This option is useful for games that have a small number of mods and want to control the experience, or you need to set the parameters attached to a mod (i.e. a weapon may require the rate of fire, power level, clip size etc). It can also be used for complex mods, which you may need to build into your game or distribute as DLC.</td>
@@ -1967,19 +1981,19 @@ Content-Type: application/x-www-form-urlencoded
 <td>community_options</td>
 <td>integer</td>
 <td></td>
-<td>Choose the community features enabled on the mod.io website:<br><br><strong>0</strong> = All of the options below are disabled<br><strong>1</strong> = Discussion board enabled<br><strong>2</strong> = Guides and news enabled<br><strong>?</strong> = Add the options you want together, to enable multiple features</td>
+<td>Choose the community features enabled on the mod.io website:<br><br><strong>0</strong> = All of the options below are disabled<br><strong>1</strong> = Discussion board enabled<br><strong>2</strong> = Guides and news enabled<br><strong>?</strong> = Add the options you want together, to enable multiple features (see <a href="#bitwise-and-bitwise-and">BITWISE fields</a>)</td>
 </tr>
 <tr>
 <td>revenue_options</td>
 <td>integer</td>
 <td></td>
-<td>Choose the revenue capabilities mods can enable:<br><br><strong>0</strong> = All of the options below are disabled<br><strong>1</strong> = Allow mods to be sold<br><strong>2</strong> = Allow mods to receive donations<br><strong>4</strong> = Allow mods to be traded (not subject to revenue share)<br><strong>8</strong> = Allow mods to control supply and scarcity<br><strong>?</strong> = Add the options you want together, to enable multiple features</td>
+<td>Choose the revenue capabilities mods can enable:<br><br><strong>0</strong> = All of the options below are disabled<br><strong>1</strong> = Allow mods to be sold<br><strong>2</strong> = Allow mods to receive donations<br><strong>4</strong> = Allow mods to be traded (not subject to revenue share)<br><strong>8</strong> = Allow mods to control supply and scarcity<br><strong>?</strong> = Add the options you want together, to enable multiple features (see <a href="#bitwise-and-bitwise-and">BITWISE fields</a>)</td>
 </tr>
 <tr>
 <td>api_access_options</td>
 <td>integer</td>
 <td></td>
-<td>Choose the level of API access your game allows:<br><br><strong>0</strong> = All of the options below are disabled<br><strong>1</strong> = Allow 3rd parties to access your mods API (recommended, an open API will encourage a healthy ecosystem of tools and apps)<br><strong>2</strong> = Allow mods to be downloaded directly, without requiring API validation (useful for anonymous game servers and services)<br><strong>?</strong> = Add the options you want together, to enable multiple features</td>
+<td>Choose the level of API access your game allows:<br><br><strong>0</strong> = All of the options below are disabled<br><br><strong>1</strong> = Allow 3rd parties to access this games API endpoints. We recommend you enable this feature, an open API will encourage a healthy ecosystem of tools and apps. If you do not enable this feature, your <code>/games/{games-id}</code> endpoints will return <code>403 Forbidden</code> unless you are a member of the games team or using the games <code>apikey</code><br><br><strong>2</strong> = Allow mods to be downloaded directly (makes implementation easier for you, game servers and services because you can save, share and reuse download URLs). If disabled all download URLs will contain a frequently changing verification hash to stop unauthorized use<br><br><strong>?</strong> = Add the options you want together, to enable multiple features (see <a href="#bitwise-and-bitwise-and">BITWISE fields</a>)</td>
 </tr>
 </tbody>
 </table>
@@ -2008,9 +2022,9 @@ Content-Type: application/x-www-form-urlencoded
   </span><span class="s2">"date_added"</span><span class="p">:</span><span class="w"> </span><span class="mi">1493702614</span><span class="p">,</span><span class="w">
   </span><span class="s2">"date_updated"</span><span class="p">:</span><span class="w"> </span><span class="mi">1499410290</span><span class="p">,</span><span class="w">
   </span><span class="s2">"date_live"</span><span class="p">:</span><span class="w"> </span><span class="mi">1499841403</span><span class="p">,</span><span class="w">
-  </span><span class="s2">"presentation_options"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
-  </span><span class="s2">"submission_options"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
-  </span><span class="s2">"curation_options"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"presentation_option"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"submission_option"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"curation_option"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
   </span><span class="s2">"community_options"</span><span class="p">:</span><span class="w"> </span><span class="mi">3</span><span class="p">,</span><span class="w">
   </span><span class="s2">"revenue_options"</span><span class="p">:</span><span class="w"> </span><span class="mi">1500</span><span class="p">,</span><span class="w">
   </span><span class="s2">"api_access_options"</span><span class="p">:</span><span class="w"> </span><span class="mi">3</span><span class="p">,</span><span class="w">
@@ -2325,7 +2339,10 @@ Accept: application/json
         </span><span class="s2">"version"</span><span class="p">:</span><span class="w"> </span><span class="s2">"1.3"</span><span class="p">,</span><span class="w">
         </span><span class="s2">"changelog"</span><span class="p">:</span><span class="w"> </span><span class="s2">"VERSION 1.3 -- Changes -- Fixed critical castle floor bug."</span><span class="p">,</span><span class="w">
         </span><span class="s2">"metadata_blob"</span><span class="p">:</span><span class="w"> </span><span class="s2">"rogue,hd,high-res,4k,hd textures"</span><span class="p">,</span><span class="w">
-        </span><span class="s2">"download_url"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://mod.io/mods/file/1/c489a0354111a4d76640d47f0cdcb294"</span><span class="w">
+        </span><span class="s2">"download"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+          </span><span class="s2">"binary_url"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://mod.io/mods/file/1/c489a0354111a4d76640d47f0cdcb294"</span><span class="p">,</span><span class="w">
+          </span><span class="s2">"date_expires"</span><span class="p">:</span><span class="w"> </span><span class="mi">1579316848</span><span class="w">
+        </span><span class="p">}</span><span class="w">
       </span><span class="p">},</span><span class="w">
       </span><span class="s2">"media"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
         </span><span class="s2">"youtube"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
@@ -2520,7 +2537,10 @@ Accept: application/json
     </span><span class="s2">"version"</span><span class="p">:</span><span class="w"> </span><span class="s2">"1.3"</span><span class="p">,</span><span class="w">
     </span><span class="s2">"changelog"</span><span class="p">:</span><span class="w"> </span><span class="s2">"VERSION 1.3 -- Changes -- Fixed critical castle floor bug."</span><span class="p">,</span><span class="w">
     </span><span class="s2">"metadata_blob"</span><span class="p">:</span><span class="w"> </span><span class="s2">"rogue,hd,high-res,4k,hd textures"</span><span class="p">,</span><span class="w">
-    </span><span class="s2">"download_url"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://mod.io/mods/file/1/c489a0354111a4d76640d47f0cdcb294"</span><span class="w">
+    </span><span class="s2">"download"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+      </span><span class="s2">"binary_url"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://mod.io/mods/file/1/c489a0354111a4d76640d47f0cdcb294"</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"date_expires"</span><span class="p">:</span><span class="w"> </span><span class="mi">1579316848</span><span class="w">
+    </span><span class="p">}</span><span class="w">
   </span><span class="p">},</span><span class="w">
   </span><span class="s2">"media"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
     </span><span class="s2">"youtube"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
@@ -2594,7 +2614,6 @@ curl -X POST https://api.mod.io/v1/games/<span class="o">{</span>game-id<span cl
 Accept: application/json
 Authorization: Bearer YourAccessToken
 Content-Type: multipart/form-data
-
 
 </code></pre><pre class="highlight javascript tab-javascript"><code><span class="kd">var</span> <span class="nx">headers</span> <span class="o">=</span> <span class="p">{</span>
   <span class="s1">'Authorization'</span><span class="p">:</span><span class="s1">'Bearer YourAccessToken'</span><span class="p">,</span>
@@ -2792,7 +2811,10 @@ Content-Type: multipart/form-data
     </span><span class="s2">"version"</span><span class="p">:</span><span class="w"> </span><span class="s2">"1.3"</span><span class="p">,</span><span class="w">
     </span><span class="s2">"changelog"</span><span class="p">:</span><span class="w"> </span><span class="s2">"VERSION 1.3 -- Changes -- Fixed critical castle floor bug."</span><span class="p">,</span><span class="w">
     </span><span class="s2">"metadata_blob"</span><span class="p">:</span><span class="w"> </span><span class="s2">"rogue,hd,high-res,4k,hd textures"</span><span class="p">,</span><span class="w">
-    </span><span class="s2">"download_url"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://mod.io/mods/file/1/c489a0354111a4d76640d47f0cdcb294"</span><span class="w">
+    </span><span class="s2">"download"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+      </span><span class="s2">"binary_url"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://mod.io/mods/file/1/c489a0354111a4d76640d47f0cdcb294"</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"date_expires"</span><span class="p">:</span><span class="w"> </span><span class="mi">1579316848</span><span class="w">
+    </span><span class="p">}</span><span class="w">
   </span><span class="p">},</span><span class="w">
   </span><span class="s2">"media"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
     </span><span class="s2">"youtube"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
@@ -2887,7 +2909,6 @@ curl -X PUT https://api.mod.io/v1/games/<span class="o">{</span>game-id<span cla
 Accept: application/json
 Authorization: Bearer YourAccessToken
 Content-Type: application/x-www-form-urlencoded
-
 
 </code></pre><pre class="highlight javascript tab-javascript"><code><span class="kd">var</span> <span class="nx">headers</span> <span class="o">=</span> <span class="p">{</span>
   <span class="s1">'Authorization'</span><span class="p">:</span><span class="s1">'Bearer YourAccessToken'</span><span class="p">,</span>
@@ -3017,7 +3038,7 @@ Content-Type: application/x-www-form-urlencoded
 <td>modfile</td>
 <td>integer</td>
 <td></td>
-<td>Unique id of the <a href="#modfile-object">Modfile Object</a> to be labelled as the current release.<br><br><strong>NOTE:</strong> If the <code>modfile</code> parameter is successfully changed, a <a href="#get-all-mod-events"><strong>MODFILE_CHANGE</strong> event</a> will be fired, so game clients know there is an update available for this mod.</td>
+<td>Unique id of the <a href="#modfile-object">Modfile Object</a> to be labelled as the current release.<br><br><strong>NOTE:</strong> If the <code>modfile</code> parameter is successfully changed, a <a href="#get-all-mod-events"><strong>MODFILE_CHANGED</strong> event</a> will be fired, so game clients know there is an update available for this mod.</td>
 </tr>
 <tr>
 <td>metadata_blob</td>
@@ -3084,7 +3105,10 @@ Content-Type: application/x-www-form-urlencoded
     </span><span class="s2">"version"</span><span class="p">:</span><span class="w"> </span><span class="s2">"1.3"</span><span class="p">,</span><span class="w">
     </span><span class="s2">"changelog"</span><span class="p">:</span><span class="w"> </span><span class="s2">"VERSION 1.3 -- Changes -- Fixed critical castle floor bug."</span><span class="p">,</span><span class="w">
     </span><span class="s2">"metadata_blob"</span><span class="p">:</span><span class="w"> </span><span class="s2">"rogue,hd,high-res,4k,hd textures"</span><span class="p">,</span><span class="w">
-    </span><span class="s2">"download_url"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://mod.io/mods/file/1/c489a0354111a4d76640d47f0cdcb294"</span><span class="w">
+    </span><span class="s2">"download"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+      </span><span class="s2">"binary_url"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://mod.io/mods/file/1/c489a0354111a4d76640d47f0cdcb294"</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"date_expires"</span><span class="p">:</span><span class="w"> </span><span class="mi">1579316848</span><span class="w">
+    </span><span class="p">}</span><span class="w">
   </span><span class="p">},</span><span class="w">
   </span><span class="s2">"media"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
     </span><span class="s2">"youtube"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
@@ -3159,7 +3183,6 @@ Accept: application/json
 Authorization: Bearer YourAccessToken
 Content-Type: application/x-www-form-urlencoded
 
-
 </code></pre><pre class="highlight javascript tab-javascript"><code><span class="kd">var</span> <span class="nx">headers</span> <span class="o">=</span> <span class="p">{</span>
   <span class="s1">'Authorization'</span><span class="p">:</span><span class="s1">'Bearer YourAccessToken'</span><span class="p">,</span>
   <span class="s1">'Content-Type'</span><span class="p">:</span><span class="s1">'application/x-www-form-urlencoded'</span><span class="p">,</span>
@@ -3224,7 +3247,7 @@ Content-Type: application/x-www-form-urlencoded
 </code></pre>
 <p><span class="httpmethod DELETE">DELETE</span> <span class="endpointheading">/games/{game-id}/mods/{mod-id}</span></p>
 
-<p>Delete a mod profile. Successful request will return <code>204 No Content</code> and fire a <strong>MOD_VISIBILITY_CHANGE</strong> event.<br><br><strong>NOTE:</strong> This will close the mod profile which means it cannot be viewed or retrieved via API requests but will still exist in-case you choose to restore it at a later date. If you believe a mod should be permanently removed please <a href="mailto:support@mod.io">contact us</a>.</p>
+<p>Delete a mod profile. Successful request will return <code>204 No Content</code> and fire a <strong>MOD_UNAVAILABLE</strong> event.<br><br><strong>NOTE:</strong> This will close the mod profile which means it cannot be viewed or retrieved via API requests but will still exist in-case you choose to restore it at a later date. If you believe a mod should be permanently removed please <a href="mailto:support@mod.io">contact us</a>.</p>
 
 <blockquote>
 <p>Example response</p>
@@ -3327,7 +3350,7 @@ Accept: application/json
 </code></pre>
 <p><span class="httpmethod GET">GET</span> <span class="endpointheading">/games/{game-id}/mods/{mod-id}/files</span></p>
 
-<p>Get all files that are published for the corresponding mod. Successful request will return an array of <a href="#get-all-modfiles-2">Modfile Objects</a>. We recommended reading the <a href="#filtering">filtering documentation</a> to return only the records you want.</p>
+<p>Get all files that are published for the corresponding mod. Successful request will return an array of <a href="#get-all-modfiles-2">Modfile Objects</a>. We recommended reading the <a href="#filtering">filtering documentation</a> to return only the records you want.<br><br><strong>NOTE:</strong> If the <a href="#edit-game">game</a> requires mod downloads to be initiated via the API, the <code>binary_url</code> returned will contain a verification hash. This hash must be supplied to get the modfile, and will expire after a certain period of time. Saving and reusing the <code>binary_url</code> won't work in this situation given it's dynamic nature.</p>
 
 <table>
 <thead>
@@ -3422,7 +3445,10 @@ Accept: application/json
       </span><span class="s2">"version"</span><span class="p">:</span><span class="w"> </span><span class="s2">"1.3"</span><span class="p">,</span><span class="w">
       </span><span class="s2">"changelog"</span><span class="p">:</span><span class="w"> </span><span class="s2">"VERSION 1.3 -- Changes -- Fixed critical castle floor bug."</span><span class="p">,</span><span class="w">
       </span><span class="s2">"metadata_blob"</span><span class="p">:</span><span class="w"> </span><span class="s2">"rogue,hd,high-res,4k,hd textures"</span><span class="p">,</span><span class="w">
-      </span><span class="s2">"download_url"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://mod.io/mods/file/1/c489a0354111a4d76640d47f0cdcb294"</span><span class="w">
+      </span><span class="s2">"download"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+        </span><span class="s2">"binary_url"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://mod.io/mods/file/1/c489a0354111a4d76640d47f0cdcb294"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"date_expires"</span><span class="p">:</span><span class="w"> </span><span class="mi">1579316848</span><span class="w">
+      </span><span class="p">}</span><span class="w">
     </span><span class="p">},</span><span class="w">
     </span><span class="p">{</span><span class="w">
         </span><span class="err">...</span><span class="w">
@@ -3529,7 +3555,7 @@ Accept: application/json
 </code></pre>
 <p><span class="httpmethod GET">GET</span> <span class="endpointheading">/games/{game-id}/mods/{mod-id}/files/{file-id}</span></p>
 
-<p>Get a file. Successful request will return a single <a href="#modfile_object">Modfile Object</a>.<br><br><strong>NOTE:</strong> For security the <code>download_url</code> field includes a verification hash. This URL will automatically expire after a certain period of time, so if resuming a download you may need to request a new URL.</p>
+<p>Get a file. Successful request will return a single <a href="#modfile_object">Modfile Object</a>.<br><br><strong>NOTE:</strong> If the <a href="#edit-game">game</a> requires mod downloads to be initiated via the API, the <code>binary_url</code> returned will contain a verification hash. This hash must be supplied to get the modfile, and will expire after a certain period of time. Saving and reusing the <code>binary_url</code> won't work in this situation given it's dynamic nature.</p>
 
 <blockquote>
 <p>Example response</p>
@@ -3550,7 +3576,10 @@ Accept: application/json
   </span><span class="s2">"version"</span><span class="p">:</span><span class="w"> </span><span class="s2">"1.3"</span><span class="p">,</span><span class="w">
   </span><span class="s2">"changelog"</span><span class="p">:</span><span class="w"> </span><span class="s2">"VERSION 1.3 -- Changes -- Fixed critical castle floor bug."</span><span class="p">,</span><span class="w">
   </span><span class="s2">"metadata_blob"</span><span class="p">:</span><span class="w"> </span><span class="s2">"rogue,hd,high-res,4k,hd textures"</span><span class="p">,</span><span class="w">
-  </span><span class="s2">"download_url"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://mod.io/mods/file/1/c489a0354111a4d76640d47f0cdcb294"</span><span class="w">
+  </span><span class="s2">"download"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+    </span><span class="s2">"binary_url"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://mod.io/mods/file/1/c489a0354111a4d76640d47f0cdcb294"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"date_expires"</span><span class="p">:</span><span class="w"> </span><span class="mi">1579316848</span><span class="w">
+  </span><span class="p">}</span><span class="w">
 </span><span class="p">}</span><span class="w">
 </span></code></pre>
 <h3 id="Get-Modfile-responses">Responses</h3>
@@ -3594,7 +3623,6 @@ curl -X POST https://api.mod.io/v1/games/<span class="o">{</span>game-id<span cl
 Accept: application/json
 Authorization: Bearer YourAccessToken
 Content-Type: multipart/form-data
-
 
 </code></pre><pre class="highlight javascript tab-javascript"><code><span class="kd">var</span> <span class="nx">headers</span> <span class="o">=</span> <span class="p">{</span>
   <span class="s1">'Authorization'</span><span class="p">:</span><span class="s1">'Bearer YourAccessToken'</span><span class="p">,</span>
@@ -3695,7 +3723,7 @@ Content-Type: multipart/form-data
 <td>boolean</td>
 <td></td>
 <td>
-<em>Default value is true.</em> Label this upload as the current release, this will change the <code>modfile</code> field on the parent mod to the <code>id</code> of this file after upload.<br><br><strong>NOTE:</strong> If the <em>active</em> parameter is <em>true</em>, a <a href="#get-all-mod-events"><strong>MODFILE_CHANGE</strong> event</a> will be fired, so game clients know there is an update available for this mod.</td>
+<em>Default value is true.</em> Label this upload as the current release, this will change the <code>modfile</code> field on the parent mod to the <code>id</code> of this file after upload.<br><br><strong>NOTE:</strong> If the <em>active</em> parameter is <em>true</em>, a <a href="#get-all-mod-events"><strong>MODFILE_CHANGED</strong> event</a> will be fired, so game clients know there is an update available for this mod.</td>
 </tr>
 <tr>
 <td>filehash</td>
@@ -3731,7 +3759,10 @@ Content-Type: multipart/form-data
   </span><span class="s2">"version"</span><span class="p">:</span><span class="w"> </span><span class="s2">"1.3"</span><span class="p">,</span><span class="w">
   </span><span class="s2">"changelog"</span><span class="p">:</span><span class="w"> </span><span class="s2">"VERSION 1.3 -- Changes -- Fixed critical castle floor bug."</span><span class="p">,</span><span class="w">
   </span><span class="s2">"metadata_blob"</span><span class="p">:</span><span class="w"> </span><span class="s2">"rogue,hd,high-res,4k,hd textures"</span><span class="p">,</span><span class="w">
-  </span><span class="s2">"download_url"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://mod.io/mods/file/1/c489a0354111a4d76640d47f0cdcb294"</span><span class="w">
+  </span><span class="s2">"download"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+    </span><span class="s2">"binary_url"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://mod.io/mods/file/1/c489a0354111a4d76640d47f0cdcb294"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"date_expires"</span><span class="p">:</span><span class="w"> </span><span class="mi">1579316848</span><span class="w">
+  </span><span class="p">}</span><span class="w">
 </span><span class="p">}</span><span class="w">
 </span></code></pre>
 <h3 id="Add-Modfile-responses">Responses</h3>
@@ -3796,7 +3827,6 @@ curl -X PUT https://api.mod.io/v1/games/<span class="o">{</span>game-id<span cla
 Accept: application/json
 Authorization: Bearer YourAccessToken
 Content-Type: application/x-www-form-urlencoded
-
 
 </code></pre><pre class="highlight javascript tab-javascript"><code><span class="kd">var</span> <span class="nx">headers</span> <span class="o">=</span> <span class="p">{</span>
   <span class="s1">'Authorization'</span><span class="p">:</span><span class="s1">'Bearer YourAccessToken'</span><span class="p">,</span>
@@ -3891,7 +3921,7 @@ Content-Type: application/x-www-form-urlencoded
 <td>boolean</td>
 <td></td>
 <td>
-<em>Default value is true.</em> Label this upload as the current release, this will change the <code>modfile</code> field on the parent mod to the <code>id</code> of this file after upload.<br><br><strong>NOTE:</strong> If the <em>active</em> parameter causes the parent mods <code>modfile</code> parameter to change, a <a href="#get-all-mod-events"><strong>MODFILE_CHANGE</strong> event</a> will be fired, so game clients know there is an update available for this mod.</td>
+<em>Default value is true.</em> Label this upload as the current release, this will change the <code>modfile</code> field on the parent mod to the <code>id</code> of this file after upload.<br><br><strong>NOTE:</strong> If the <em>active</em> parameter causes the parent mods <code>modfile</code> parameter to change, a <a href="#get-all-mod-events"><strong>MODFILE_CHANGED</strong> event</a> will be fired, so game clients know there is an update available for this mod.</td>
 </tr>
 <tr>
 <td>metadata_blob</td>
@@ -3921,7 +3951,10 @@ Content-Type: application/x-www-form-urlencoded
   </span><span class="s2">"version"</span><span class="p">:</span><span class="w"> </span><span class="s2">"1.3"</span><span class="p">,</span><span class="w">
   </span><span class="s2">"changelog"</span><span class="p">:</span><span class="w"> </span><span class="s2">"VERSION 1.3 -- Changes -- Fixed critical castle floor bug."</span><span class="p">,</span><span class="w">
   </span><span class="s2">"metadata_blob"</span><span class="p">:</span><span class="w"> </span><span class="s2">"rogue,hd,high-res,4k,hd textures"</span><span class="p">,</span><span class="w">
-  </span><span class="s2">"download_url"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://mod.io/mods/file/1/c489a0354111a4d76640d47f0cdcb294"</span><span class="w">
+  </span><span class="s2">"download"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+    </span><span class="s2">"binary_url"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://mod.io/mods/file/1/c489a0354111a4d76640d47f0cdcb294"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"date_expires"</span><span class="p">:</span><span class="w"> </span><span class="mi">1579316848</span><span class="w">
+  </span><span class="p">}</span><span class="w">
 </span><span class="p">}</span><span class="w">
 </span></code></pre>
 <h3 id="Edit-Modfile-responses">Responses</h3>
@@ -3965,7 +3998,6 @@ curl -X POST https://api.mod.io/v1/games/<span class="o">{</span>game-id<span cl
 Accept: application/json
 Authorization: Bearer YourAccessToken
 Content-Type: multipart/form-data
-
 
 </code></pre><pre class="highlight javascript tab-javascript"><code><span class="kd">var</span> <span class="nx">headers</span> <span class="o">=</span> <span class="p">{</span>
   <span class="s1">'Authorization'</span><span class="p">:</span><span class="s1">'Bearer YourAccessToken'</span><span class="p">,</span>
@@ -4115,7 +4147,6 @@ curl -X POST https://api.mod.io/v1/games/<span class="o">{</span>game-id<span cl
 Accept: application/json
 Authorization: Bearer YourAccessToken
 Content-Type: multipart/form-data
-
 
 </code></pre><pre class="highlight javascript tab-javascript"><code><span class="kd">var</span> <span class="nx">headers</span> <span class="o">=</span> <span class="p">{</span>
   <span class="s1">'Authorization'</span><span class="p">:</span><span class="s1">'Bearer YourAccessToken'</span><span class="p">,</span>
@@ -4293,7 +4324,6 @@ Accept: application/json
 Authorization: Bearer YourAccessToken
 Content-Type: application/x-www-form-urlencoded
 
-
 </code></pre><pre class="highlight javascript tab-javascript"><code><span class="kd">var</span> <span class="nx">headers</span> <span class="o">=</span> <span class="p">{</span>
   <span class="s1">'Authorization'</span><span class="p">:</span><span class="s1">'Bearer YourAccessToken'</span><span class="p">,</span>
   <span class="s1">'Content-Type'</span><span class="p">:</span><span class="s1">'application/x-www-form-urlencoded'</span><span class="p">,</span>
@@ -4440,7 +4470,6 @@ Accept: application/json
 Authorization: Bearer YourAccessToken
 Content-Type: application/x-www-form-urlencoded
 
-
 </code></pre><pre class="highlight javascript tab-javascript"><code><span class="kd">var</span> <span class="nx">headers</span> <span class="o">=</span> <span class="p">{</span>
   <span class="s1">'Authorization'</span><span class="p">:</span><span class="s1">'Bearer YourAccessToken'</span><span class="p">,</span>
   <span class="s1">'Content-Type'</span><span class="p">:</span><span class="s1">'application/x-www-form-urlencoded'</span><span class="p">,</span>
@@ -4563,7 +4592,10 @@ Content-Type: application/x-www-form-urlencoded
     </span><span class="s2">"version"</span><span class="p">:</span><span class="w"> </span><span class="s2">"1.3"</span><span class="p">,</span><span class="w">
     </span><span class="s2">"changelog"</span><span class="p">:</span><span class="w"> </span><span class="s2">"VERSION 1.3 -- Changes -- Fixed critical castle floor bug."</span><span class="p">,</span><span class="w">
     </span><span class="s2">"metadata_blob"</span><span class="p">:</span><span class="w"> </span><span class="s2">"rogue,hd,high-res,4k,hd textures"</span><span class="p">,</span><span class="w">
-    </span><span class="s2">"download_url"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://mod.io/mods/file/1/c489a0354111a4d76640d47f0cdcb294"</span><span class="w">
+    </span><span class="s2">"download"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+      </span><span class="s2">"binary_url"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://mod.io/mods/file/1/c489a0354111a4d76640d47f0cdcb294"</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"date_expires"</span><span class="p">:</span><span class="w"> </span><span class="mi">1579316848</span><span class="w">
+    </span><span class="p">}</span><span class="w">
   </span><span class="p">},</span><span class="w">
   </span><span class="s2">"media"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
     </span><span class="s2">"youtube"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
@@ -4637,7 +4669,6 @@ curl -X DELETE https://api.mod.io/v1/games/<span class="o">{</span>game-id<span 
 Accept: application/json
 Authorization: Bearer YourAccessToken
 Content-Type: application/x-www-form-urlencoded
-
 
 </code></pre><pre class="highlight javascript tab-javascript"><code><span class="kd">var</span> <span class="nx">headers</span> <span class="o">=</span> <span class="p">{</span>
   <span class="s1">'Authorization'</span><span class="p">:</span><span class="s1">'Bearer YourAccessToken'</span><span class="p">,</span>
@@ -4840,7 +4871,7 @@ Accept: application/json
 <tr>
 <td>event_type</td>
 <td>string</td>
-<td>Type of change that occurred:<br><br><strong>MODFILE_CHANGE</strong> = Primary file changed<br><strong>MOD_VISIBILITY_CHANGE</strong> = Mod has been set to live, or hidden<br><strong>MOD_LIVE</strong> = When the mod went public for the first time</td>
+<td>Type of change that occurred:<br><br><strong>MODFILE_CHANGED</strong> = Primary file changed, the mod should be updated<br><strong>MOD_AVAILABLE</strong> = Mod is marked as accepted and public<br><strong>MOD_UNAVAILABLE</strong> = Mod is marked as not accepted, deleted or hidden<br><strong>MOD_EDITED</strong> = The mod was updated (triggered when any column value changes)</td>
 </tr>
 </tbody>
 </table>
@@ -4855,14 +4886,7 @@ Accept: application/json
       </span><span class="s2">"mod_id"</span><span class="p">:</span><span class="w"> </span><span class="mi">13</span><span class="p">,</span><span class="w">
       </span><span class="s2">"user_id"</span><span class="p">:</span><span class="w"> </span><span class="mi">13</span><span class="p">,</span><span class="w">
       </span><span class="s2">"date_added"</span><span class="p">:</span><span class="w"> </span><span class="mi">1499846132</span><span class="p">,</span><span class="w">
-      </span><span class="s2">"event_type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"MODFILE_CHANGE"</span><span class="p">,</span><span class="w">
-      </span><span class="s2">"changes"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
-        </span><span class="p">{</span><span class="w">
-          </span><span class="s2">"field"</span><span class="p">:</span><span class="w"> </span><span class="s2">"modfile"</span><span class="p">,</span><span class="w">
-          </span><span class="s2">"before"</span><span class="p">:</span><span class="w"> </span><span class="mi">13</span><span class="p">,</span><span class="w">
-          </span><span class="s2">"after"</span><span class="p">:</span><span class="w"> </span><span class="mi">183</span><span class="w">
-        </span><span class="p">}</span><span class="w">
-      </span><span class="p">]</span><span class="w">
+      </span><span class="s2">"event_type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"MODFILE_CHANGED"</span><span class="w">
     </span><span class="p">},</span><span class="w">
     </span><span class="p">{</span><span class="w">
         </span><span class="err">...</span><span class="w">
@@ -5003,7 +5027,7 @@ Accept: application/json
 <tr>
 <td>event_type</td>
 <td>string</td>
-<td>Type of change that occurred:<br><br><strong>MODFILE_CHANGE</strong> = Primary file changed<br><strong>MOD_VISIBILITY_CHANGE</strong> = Mod has been set to live, or hidden<br><strong>MOD_LIVE</strong> = When the mod went public for the first time</td>
+<td>Type of change that occurred:<br><br><strong>MODFILE_CHANGED</strong> = Primary file changed<br><strong>MOD_AVAILABLE</strong> = Mod is marked as accepted and public<br><strong>MOD_UNAVAILABLE</strong> = Mod is marked as not accepted, deleted or hidden<br><strong>MOD_EDITED</strong> = The mod was updated (triggered when any column value changes)</td>
 </tr>
 <tr>
 <td>latest</td>
@@ -5030,14 +5054,7 @@ Accept: application/json
       </span><span class="s2">"mod_id"</span><span class="p">:</span><span class="w"> </span><span class="mi">13</span><span class="p">,</span><span class="w">
       </span><span class="s2">"user_id"</span><span class="p">:</span><span class="w"> </span><span class="mi">13</span><span class="p">,</span><span class="w">
       </span><span class="s2">"date_added"</span><span class="p">:</span><span class="w"> </span><span class="mi">1499846132</span><span class="p">,</span><span class="w">
-      </span><span class="s2">"event_type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"MODFILE_CHANGE"</span><span class="p">,</span><span class="w">
-      </span><span class="s2">"changes"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
-        </span><span class="p">{</span><span class="w">
-          </span><span class="s2">"field"</span><span class="p">:</span><span class="w"> </span><span class="s2">"modfile"</span><span class="p">,</span><span class="w">
-          </span><span class="s2">"before"</span><span class="p">:</span><span class="w"> </span><span class="mi">13</span><span class="p">,</span><span class="w">
-          </span><span class="s2">"after"</span><span class="p">:</span><span class="w"> </span><span class="mi">183</span><span class="w">
-        </span><span class="p">}</span><span class="w">
-      </span><span class="p">]</span><span class="w">
+      </span><span class="s2">"event_type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"MODFILE_CHANGED"</span><span class="w">
     </span><span class="p">},</span><span class="w">
     </span><span class="p">{</span><span class="w">
         </span><span class="err">...</span><span class="w">
@@ -5210,7 +5227,6 @@ Accept: application/json
 Authorization: Bearer YourAccessToken
 Content-Type: application/x-www-form-urlencoded
 
-
 </code></pre><pre class="highlight javascript tab-javascript"><code><span class="kd">var</span> <span class="nx">headers</span> <span class="o">=</span> <span class="p">{</span>
   <span class="s1">'Authorization'</span><span class="p">:</span><span class="s1">'Bearer YourAccessToken'</span><span class="p">,</span>
   <span class="s1">'Content-Type'</span><span class="p">:</span><span class="s1">'application/x-www-form-urlencoded'</span><span class="p">,</span>
@@ -5367,7 +5383,6 @@ curl -X DELETE https://api.mod.io/v1/games/<span class="o">{</span>game-id<span 
 Accept: application/json
 Authorization: Bearer YourAccessToken
 Content-Type: application/x-www-form-urlencoded
-
 
 </code></pre><pre class="highlight javascript tab-javascript"><code><span class="kd">var</span> <span class="nx">headers</span> <span class="o">=</span> <span class="p">{</span>
   <span class="s1">'Authorization'</span><span class="p">:</span><span class="s1">'Bearer YourAccessToken'</span><span class="p">,</span>
@@ -5647,7 +5662,6 @@ Accept: application/json
 Authorization: Bearer YourAccessToken
 Content-Type: application/x-www-form-urlencoded
 
-
 </code></pre><pre class="highlight javascript tab-javascript"><code><span class="kd">var</span> <span class="nx">headers</span> <span class="o">=</span> <span class="p">{</span>
   <span class="s1">'Authorization'</span><span class="p">:</span><span class="s1">'Bearer YourAccessToken'</span><span class="p">,</span>
   <span class="s1">'Content-Type'</span><span class="p">:</span><span class="s1">'application/x-www-form-urlencoded'</span><span class="p">,</span>
@@ -5783,7 +5797,6 @@ Accept: application/json
 Authorization: Bearer YourAccessToken
 Content-Type: application/x-www-form-urlencoded
 
-
 </code></pre><pre class="highlight javascript tab-javascript"><code><span class="kd">var</span> <span class="nx">headers</span> <span class="o">=</span> <span class="p">{</span>
   <span class="s1">'Authorization'</span><span class="p">:</span><span class="s1">'Bearer YourAccessToken'</span><span class="p">,</span>
   <span class="s1">'Content-Type'</span><span class="p">:</span><span class="s1">'application/x-www-form-urlencoded'</span><span class="p">,</span>
@@ -5915,7 +5928,6 @@ curl -X POST https://api.mod.io/v1/games/<span class="o">{</span>game-id<span cl
 Accept: application/json
 Authorization: Bearer YourAccessToken
 Content-Type: application/x-www-form-urlencoded
-
 
 </code></pre><pre class="highlight javascript tab-javascript"><code><span class="kd">var</span> <span class="nx">headers</span> <span class="o">=</span> <span class="p">{</span>
   <span class="s1">'Authorization'</span><span class="p">:</span><span class="s1">'Bearer YourAccessToken'</span><span class="p">,</span>
@@ -6170,7 +6182,6 @@ Accept: application/json
 Authorization: Bearer YourAccessToken
 Content-Type: application/x-www-form-urlencoded
 
-
 </code></pre><pre class="highlight javascript tab-javascript"><code><span class="kd">var</span> <span class="nx">headers</span> <span class="o">=</span> <span class="p">{</span>
   <span class="s1">'Authorization'</span><span class="p">:</span><span class="s1">'Bearer YourAccessToken'</span><span class="p">,</span>
   <span class="s1">'Content-Type'</span><span class="p">:</span><span class="s1">'application/x-www-form-urlencoded'</span><span class="p">,</span>
@@ -6305,7 +6316,6 @@ curl -X DELETE https://api.mod.io/v1/games/<span class="o">{</span>game-id<span 
 Accept: application/json
 Authorization: Bearer YourAccessToken
 Content-Type: application/x-www-form-urlencoded
-
 
 </code></pre><pre class="highlight javascript tab-javascript"><code><span class="kd">var</span> <span class="nx">headers</span> <span class="o">=</span> <span class="p">{</span>
   <span class="s1">'Authorization'</span><span class="p">:</span><span class="s1">'Bearer YourAccessToken'</span><span class="p">,</span>
@@ -6557,7 +6567,6 @@ Accept: application/json
 Authorization: Bearer YourAccessToken
 Content-Type: application/x-www-form-urlencoded
 
-
 </code></pre><pre class="highlight javascript tab-javascript"><code><span class="kd">var</span> <span class="nx">headers</span> <span class="o">=</span> <span class="p">{</span>
   <span class="s1">'Authorization'</span><span class="p">:</span><span class="s1">'Bearer YourAccessToken'</span><span class="p">,</span>
   <span class="s1">'Content-Type'</span><span class="p">:</span><span class="s1">'application/x-www-form-urlencoded'</span><span class="p">,</span>
@@ -6694,7 +6703,6 @@ curl -X DELETE https://api.mod.io/v1/games/<span class="o">{</span>game-id<span 
 Accept: application/json
 Authorization: Bearer YourAccessToken
 Content-Type: application/x-www-form-urlencoded
-
 
 </code></pre><pre class="highlight javascript tab-javascript"><code><span class="kd">var</span> <span class="nx">headers</span> <span class="o">=</span> <span class="p">{</span>
   <span class="s1">'Authorization'</span><span class="p">:</span><span class="s1">'Bearer YourAccessToken'</span><span class="p">,</span>
@@ -7010,7 +7018,6 @@ Accept: application/json
 Authorization: Bearer YourAccessToken
 Content-Type: application/x-www-form-urlencoded
 
-
 </code></pre><pre class="highlight javascript tab-javascript"><code><span class="kd">var</span> <span class="nx">headers</span> <span class="o">=</span> <span class="p">{</span>
   <span class="s1">'Authorization'</span><span class="p">:</span><span class="s1">'Bearer YourAccessToken'</span><span class="p">,</span>
   <span class="s1">'Content-Type'</span><span class="p">:</span><span class="s1">'application/x-www-form-urlencoded'</span><span class="p">,</span>
@@ -7160,7 +7167,6 @@ Accept: application/json
 Authorization: Bearer YourAccessToken
 Content-Type: application/x-www-form-urlencoded
 
-
 </code></pre><pre class="highlight javascript tab-javascript"><code><span class="kd">var</span> <span class="nx">headers</span> <span class="o">=</span> <span class="p">{</span>
   <span class="s1">'Authorization'</span><span class="p">:</span><span class="s1">'Bearer YourAccessToken'</span><span class="p">,</span>
   <span class="s1">'Content-Type'</span><span class="p">:</span><span class="s1">'application/x-www-form-urlencoded'</span><span class="p">,</span>
@@ -7303,7 +7309,6 @@ curl -X DELETE https://api.mod.io/v1/games/<span class="o">{</span>game-id<span 
 Accept: application/json
 Authorization: Bearer YourAccessToken
 Content-Type: application/x-www-form-urlencoded
-
 
 </code></pre><pre class="highlight javascript tab-javascript"><code><span class="kd">var</span> <span class="nx">headers</span> <span class="o">=</span> <span class="p">{</span>
   <span class="s1">'Authorization'</span><span class="p">:</span><span class="s1">'Bearer YourAccessToken'</span><span class="p">,</span>
@@ -7607,7 +7612,6 @@ Accept: application/json
 Authorization: Bearer YourAccessToken
 Content-Type: application/x-www-form-urlencoded
 
-
 </code></pre><pre class="highlight javascript tab-javascript"><code><span class="kd">var</span> <span class="nx">headers</span> <span class="o">=</span> <span class="p">{</span>
   <span class="s1">'Authorization'</span><span class="p">:</span><span class="s1">'Bearer YourAccessToken'</span><span class="p">,</span>
   <span class="s1">'Content-Type'</span><span class="p">:</span><span class="s1">'application/x-www-form-urlencoded'</span><span class="p">,</span>
@@ -7720,7 +7724,6 @@ curl -X POST https://api.mod.io/v1/general/ownership <span class="se">\</span>
 Accept: application/json
 Authorization: Bearer YourAccessToken
 Content-Type: application/x-www-form-urlencoded
-
 
 </code></pre><pre class="highlight javascript tab-javascript"><code><span class="kd">var</span> <span class="nx">headers</span> <span class="o">=</span> <span class="p">{</span>
   <span class="s1">'Authorization'</span><span class="p">:</span><span class="s1">'Bearer YourAccessToken'</span><span class="p">,</span>
@@ -8163,7 +8166,6 @@ Accept: application/json
 Authorization: Bearer YourAccessToken
 Content-Type: application/x-www-form-urlencoded
 
-
 </code></pre><pre class="highlight javascript tab-javascript"><code><span class="kd">var</span> <span class="nx">headers</span> <span class="o">=</span> <span class="p">{</span>
   <span class="s1">'Authorization'</span><span class="p">:</span><span class="s1">'Bearer YourAccessToken'</span><span class="p">,</span>
   <span class="s1">'Content-Type'</span><span class="p">:</span><span class="s1">'application/x-www-form-urlencoded'</span><span class="p">,</span>
@@ -8322,7 +8324,6 @@ curl -X GET https://api.mod.io/v1/me <span class="se">\</span>
 Accept: application/json
 Authorization: Bearer YourAccessToken
 
-
 </code></pre><pre class="highlight javascript tab-javascript"><code><span class="kd">var</span> <span class="nx">headers</span> <span class="o">=</span> <span class="p">{</span>
   <span class="s1">'Authorization'</span><span class="p">:</span><span class="s1">'Bearer YourAccessToken'</span><span class="p">,</span>
   <span class="s1">'Accept'</span><span class="p">:</span><span class="s1">'application/json'</span>
@@ -8444,7 +8445,6 @@ curl -X GET https://api.mod.io/v1/me/subscribed <span class="se">\</span>
 
 Accept: application/json
 Authorization: Bearer YourAccessToken
-
 
 </code></pre><pre class="highlight javascript tab-javascript"><code><span class="kd">var</span> <span class="nx">headers</span> <span class="o">=</span> <span class="p">{</span>
   <span class="s1">'Authorization'</span><span class="p">:</span><span class="s1">'Bearer YourAccessToken'</span><span class="p">,</span>
@@ -8665,7 +8665,10 @@ Authorization: Bearer YourAccessToken
         </span><span class="s2">"version"</span><span class="p">:</span><span class="w"> </span><span class="s2">"1.3"</span><span class="p">,</span><span class="w">
         </span><span class="s2">"changelog"</span><span class="p">:</span><span class="w"> </span><span class="s2">"VERSION 1.3 -- Changes -- Fixed critical castle floor bug."</span><span class="p">,</span><span class="w">
         </span><span class="s2">"metadata_blob"</span><span class="p">:</span><span class="w"> </span><span class="s2">"rogue,hd,high-res,4k,hd textures"</span><span class="p">,</span><span class="w">
-        </span><span class="s2">"download_url"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://mod.io/mods/file/1/c489a0354111a4d76640d47f0cdcb294"</span><span class="w">
+        </span><span class="s2">"download"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+          </span><span class="s2">"binary_url"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://mod.io/mods/file/1/c489a0354111a4d76640d47f0cdcb294"</span><span class="p">,</span><span class="w">
+          </span><span class="s2">"date_expires"</span><span class="p">:</span><span class="w"> </span><span class="mi">1579316848</span><span class="w">
+        </span><span class="p">}</span><span class="w">
       </span><span class="p">},</span><span class="w">
       </span><span class="s2">"media"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
         </span><span class="s2">"youtube"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
@@ -8745,7 +8748,6 @@ curl -X GET https://api.mod.io/v1/me/games <span class="se">\</span>
 
 Accept: application/json
 Authorization: Bearer YourAccessToken
-
 
 </code></pre><pre class="highlight javascript tab-javascript"><code><span class="kd">var</span> <span class="nx">headers</span> <span class="o">=</span> <span class="p">{</span>
   <span class="s1">'Authorization'</span><span class="p">:</span><span class="s1">'Bearer YourAccessToken'</span><span class="p">,</span>
@@ -8836,9 +8838,9 @@ Authorization: Bearer YourAccessToken
       </span><span class="s2">"date_added"</span><span class="p">:</span><span class="w"> </span><span class="mi">1493702614</span><span class="p">,</span><span class="w">
       </span><span class="s2">"date_updated"</span><span class="p">:</span><span class="w"> </span><span class="mi">1499410290</span><span class="p">,</span><span class="w">
       </span><span class="s2">"date_live"</span><span class="p">:</span><span class="w"> </span><span class="mi">1499841403</span><span class="p">,</span><span class="w">
-      </span><span class="s2">"presentation_options"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
-      </span><span class="s2">"submission_options"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
-      </span><span class="s2">"curation_options"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"presentation_option"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"submission_option"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"curation_option"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
       </span><span class="s2">"community_options"</span><span class="p">:</span><span class="w"> </span><span class="mi">3</span><span class="p">,</span><span class="w">
       </span><span class="s2">"revenue_options"</span><span class="p">:</span><span class="w"> </span><span class="mi">1500</span><span class="p">,</span><span class="w">
       </span><span class="s2">"api_access_options"</span><span class="p">:</span><span class="w"> </span><span class="mi">3</span><span class="p">,</span><span class="w">
@@ -8926,7 +8928,6 @@ curl -X GET https://api.mod.io/v1/me/mods <span class="se">\</span>
 
 Accept: application/json
 Authorization: Bearer YourAccessToken
-
 
 </code></pre><pre class="highlight javascript tab-javascript"><code><span class="kd">var</span> <span class="nx">headers</span> <span class="o">=</span> <span class="p">{</span>
   <span class="s1">'Authorization'</span><span class="p">:</span><span class="s1">'Bearer YourAccessToken'</span><span class="p">,</span>
@@ -9049,7 +9050,10 @@ Authorization: Bearer YourAccessToken
         </span><span class="s2">"version"</span><span class="p">:</span><span class="w"> </span><span class="s2">"1.3"</span><span class="p">,</span><span class="w">
         </span><span class="s2">"changelog"</span><span class="p">:</span><span class="w"> </span><span class="s2">"VERSION 1.3 -- Changes -- Fixed critical castle floor bug."</span><span class="p">,</span><span class="w">
         </span><span class="s2">"metadata_blob"</span><span class="p">:</span><span class="w"> </span><span class="s2">"rogue,hd,high-res,4k,hd textures"</span><span class="p">,</span><span class="w">
-        </span><span class="s2">"download_url"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://mod.io/mods/file/1/c489a0354111a4d76640d47f0cdcb294"</span><span class="w">
+        </span><span class="s2">"download"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+          </span><span class="s2">"binary_url"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://mod.io/mods/file/1/c489a0354111a4d76640d47f0cdcb294"</span><span class="p">,</span><span class="w">
+          </span><span class="s2">"date_expires"</span><span class="p">:</span><span class="w"> </span><span class="mi">1579316848</span><span class="w">
+        </span><span class="p">}</span><span class="w">
       </span><span class="p">},</span><span class="w">
       </span><span class="s2">"media"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
         </span><span class="s2">"youtube"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
@@ -9129,7 +9133,6 @@ curl -X GET https://api.mod.io/v1/me/files <span class="se">\</span>
 
 Accept: application/json
 Authorization: Bearer YourAccessToken
-
 
 </code></pre><pre class="highlight javascript tab-javascript"><code><span class="kd">var</span> <span class="nx">headers</span> <span class="o">=</span> <span class="p">{</span>
   <span class="s1">'Authorization'</span><span class="p">:</span><span class="s1">'Bearer YourAccessToken'</span><span class="p">,</span>
@@ -9215,7 +9218,10 @@ Authorization: Bearer YourAccessToken
       </span><span class="s2">"version"</span><span class="p">:</span><span class="w"> </span><span class="s2">"1.3"</span><span class="p">,</span><span class="w">
       </span><span class="s2">"changelog"</span><span class="p">:</span><span class="w"> </span><span class="s2">"VERSION 1.3 -- Changes -- Fixed critical castle floor bug."</span><span class="p">,</span><span class="w">
       </span><span class="s2">"metadata_blob"</span><span class="p">:</span><span class="w"> </span><span class="s2">"rogue,hd,high-res,4k,hd textures"</span><span class="p">,</span><span class="w">
-      </span><span class="s2">"download_url"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://mod.io/mods/file/1/c489a0354111a4d76640d47f0cdcb294"</span><span class="w">
+      </span><span class="s2">"download"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+        </span><span class="s2">"binary_url"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://mod.io/mods/file/1/c489a0354111a4d76640d47f0cdcb294"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"date_expires"</span><span class="p">:</span><span class="w"> </span><span class="mi">1579316848</span><span class="w">
+      </span><span class="p">}</span><span class="w">
     </span><span class="p">},</span><span class="w">
     </span><span class="p">{</span><span class="w">
         </span><span class="err">...</span><span class="w">
@@ -9523,14 +9529,7 @@ oauth2 ( Scopes: read )
   </span><span class="s2">"mod_id"</span><span class="p">:</span><span class="w"> </span><span class="mi">13</span><span class="p">,</span><span class="w">
   </span><span class="s2">"user_id"</span><span class="p">:</span><span class="w"> </span><span class="mi">13</span><span class="p">,</span><span class="w">
   </span><span class="s2">"date_added"</span><span class="p">:</span><span class="w"> </span><span class="mi">1499846132</span><span class="p">,</span><span class="w">
-  </span><span class="s2">"event_type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"MODFILE_CHANGE"</span><span class="p">,</span><span class="w">
-  </span><span class="s2">"changes"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
-    </span><span class="p">{</span><span class="w">
-      </span><span class="s2">"field"</span><span class="p">:</span><span class="w"> </span><span class="s2">"modfile"</span><span class="p">,</span><span class="w">
-      </span><span class="s2">"before"</span><span class="p">:</span><span class="w"> </span><span class="mi">13</span><span class="p">,</span><span class="w">
-      </span><span class="s2">"after"</span><span class="p">:</span><span class="w"> </span><span class="mi">183</span><span class="w">
-    </span><span class="p">}</span><span class="w">
-  </span><span class="p">]</span><span class="w">
+  </span><span class="s2">"event_type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"MODFILE_CHANGED"</span><span class="w">
 </span><span class="p">}</span><span class="w"> 
 </span></code></pre><h3 id="properties-8">Properties</h3>
 <table>
@@ -9565,62 +9564,7 @@ oauth2 ( Scopes: read )
 <tr>
 <td>event_type</td>
 <td>string</td>
-<td>Type of <a href="#get-mod-events-2">event</a> was 'MODFILE_CHANGE', 'MOD_VISIBILITY_CHANGE' or 'MOD_LIVE'.</td>
-</tr>
-<tr>
-<td>changes</td>
-<td>
-<a href="#schemafield_change_object">Field Change Object  </a>[]</td>
-<td>Contains an array of 'before and after' values of fields changed by the event.</td>
-</tr>
-<tr>
-<td>» field</td>
-<td>string</td>
-<td>Name of the field that was changed.</td>
-</tr>
-<tr>
-<td>» before</td>
-<td>integer</td>
-<td>Value of the field before the event.</td>
-</tr>
-<tr>
-<td>» after</td>
-<td>integer</td>
-<td>Value of the field after the event.</td>
-</tr>
-</tbody>
-</table>
-<h2 id="field-change-object">Field Change Object</h2>
-<p><a name="schemafield_change_object"></a></p>
-<pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
-  </span><span class="s2">"field"</span><span class="p">:</span><span class="w"> </span><span class="s2">"modfile"</span><span class="p">,</span><span class="w">
-  </span><span class="s2">"before"</span><span class="p">:</span><span class="w"> </span><span class="mi">13</span><span class="p">,</span><span class="w">
-  </span><span class="s2">"after"</span><span class="p">:</span><span class="w"> </span><span class="mi">183</span><span class="w">
-</span><span class="p">}</span><span class="w"> 
-</span></code></pre><h3 id="properties-9">Properties</h3>
-<table>
-<thead>
-<tr>
-<th>Name</th>
-<th>Type</th>
-<th>Description</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>field</td>
-<td>string</td>
-<td>Name of the field that was changed.</td>
-</tr>
-<tr>
-<td>before</td>
-<td>integer</td>
-<td>Value of the field before the event.</td>
-</tr>
-<tr>
-<td>after</td>
-<td>integer</td>
-<td>Value of the field after the event.</td>
+<td>Type of <a href="#get-mod-events-2">event</a> was 'MODFILE_CHANGED', 'MOD_AVAILABLE', 'MOD_UNAVAILABLE', 'MOD_EDITED'.</td>
 </tr>
 </tbody>
 </table>
@@ -9651,7 +9595,7 @@ oauth2 ( Scopes: read )
   </span><span class="s2">"karma_guest"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
   </span><span class="s2">"content"</span><span class="p">:</span><span class="w"> </span><span class="s2">"This mod is kickass! Great work!"</span><span class="w">
 </span><span class="p">}</span><span class="w"> 
-</span></code></pre><h3 id="properties-10">Properties</h3>
+</span></code></pre><h3 id="properties-9">Properties</h3>
 <table>
 <thead>
 <tr>
@@ -9774,7 +9718,7 @@ oauth2 ( Scopes: read )
   </span><span class="s2">"mod_id"</span><span class="p">:</span><span class="w"> </span><span class="mi">231</span><span class="p">,</span><span class="w">
   </span><span class="s2">"date_added"</span><span class="p">:</span><span class="w"> </span><span class="mi">1499841487</span><span class="w">
 </span><span class="p">}</span><span class="w"> 
-</span></code></pre><h3 id="properties-11">Properties</h3>
+</span></code></pre><h3 id="properties-10">Properties</h3>
 <table>
 <thead>
 <tr>
@@ -9814,9 +9758,12 @@ oauth2 ( Scopes: read )
   </span><span class="s2">"version"</span><span class="p">:</span><span class="w"> </span><span class="s2">"1.3"</span><span class="p">,</span><span class="w">
   </span><span class="s2">"changelog"</span><span class="p">:</span><span class="w"> </span><span class="s2">"VERSION 1.3 -- Changes -- Fixed critical castle floor bug."</span><span class="p">,</span><span class="w">
   </span><span class="s2">"metadata_blob"</span><span class="p">:</span><span class="w"> </span><span class="s2">"rogue,hd,high-res,4k,hd textures"</span><span class="p">,</span><span class="w">
-  </span><span class="s2">"download_url"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://mod.io/mods/file/1/c489a0354111a4d76640d47f0cdcb294"</span><span class="w">
+  </span><span class="s2">"download"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+    </span><span class="s2">"binary_url"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://mod.io/mods/file/1/c489a0354111a4d76640d47f0cdcb294"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"date_expires"</span><span class="p">:</span><span class="w"> </span><span class="mi">1579316848</span><span class="w">
+  </span><span class="p">}</span><span class="w">
 </span><span class="p">}</span><span class="w"> 
-</span></code></pre><h3 id="properties-12">Properties</h3>
+</span></code></pre><h3 id="properties-11">Properties</h3>
 <table>
 <thead>
 <tr>
@@ -9897,9 +9844,19 @@ oauth2 ( Scopes: read )
 <td>Metadata stored by the game developer for this file.</td>
 </tr>
 <tr>
-<td>download_url</td>
+<td>download</td>
+<td><a href="#schemadownload_object">Download Object   </a></td>
+<td>Contains download data.</td>
+</tr>
+<tr>
+<td>» binary_url</td>
 <td>string</td>
-<td>URL to download the file from the mod.io CDN.</td>
+<td>URL to download the file from the mod.io CDN.<br><br><strong>NOTE:</strong> If the <a href="#edit-game">game</a> requires mod downloads to be initiated via the API, the <code>binary_url</code> returned will contain a verification hash. This hash must be supplied to get the modfile, and will expire after a certain period of time. Saving and reusing the <code>binary_url</code> won't work in this situation given it's dynamic nature.</td>
+</tr>
+<tr>
+<td>» date_expires</td>
+<td>integer</td>
+<td>Unix timestamp of when the <code>binary_url</code> will expire.</td>
 </tr>
 </tbody>
 </table>
@@ -9908,7 +9865,7 @@ oauth2 ( Scopes: read )
 <pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
   </span><span class="s2">"md5"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2d4a0e2d7273db6b0a94b0740a88ad0d"</span><span class="w">
 </span><span class="p">}</span><span class="w"> 
-</span></code></pre><h3 id="properties-13">Properties</h3>
+</span></code></pre><h3 id="properties-12">Properties</h3>
 <table>
 <thead>
 <tr>
@@ -9922,6 +9879,34 @@ oauth2 ( Scopes: read )
 <td>md5</td>
 <td>string</td>
 <td>MD5 hash of the file.</td>
+</tr>
+</tbody>
+</table>
+<h2 id="download-object">Download Object</h2>
+<p><a name="schemadownload_object"></a></p>
+<pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
+  </span><span class="s2">"binary_url"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://mod.io/mods/file/1/c489a0354111a4d76640d47f0cdcb294"</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"date_expires"</span><span class="p">:</span><span class="w"> </span><span class="mi">1579316848</span><span class="w">
+</span><span class="p">}</span><span class="w"> 
+</span></code></pre><h3 id="properties-13">Properties</h3>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>binary_url</td>
+<td>string</td>
+<td>URL to download the file from the mod.io CDN.<br><br><strong>NOTE:</strong> If the <a href="#edit-game">game</a> requires mod downloads to be initiated via the API, the <code>binary_url</code> returned will contain a verification hash. This hash must be supplied to get the modfile, and will expire after a certain period of time. Saving and reusing the <code>binary_url</code> won't work in this situation given it's dynamic nature.</td>
+</tr>
+<tr>
+<td>date_expires</td>
+<td>integer</td>
+<td>Unix timestamp of when the <code>binary_url</code> will expire.</td>
 </tr>
 </tbody>
 </table>
@@ -9980,7 +9965,10 @@ oauth2 ( Scopes: read )
     </span><span class="s2">"version"</span><span class="p">:</span><span class="w"> </span><span class="s2">"1.3"</span><span class="p">,</span><span class="w">
     </span><span class="s2">"changelog"</span><span class="p">:</span><span class="w"> </span><span class="s2">"VERSION 1.3 -- Changes -- Fixed critical castle floor bug."</span><span class="p">,</span><span class="w">
     </span><span class="s2">"metadata_blob"</span><span class="p">:</span><span class="w"> </span><span class="s2">"rogue,hd,high-res,4k,hd textures"</span><span class="p">,</span><span class="w">
-    </span><span class="s2">"download_url"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://mod.io/mods/file/1/c489a0354111a4d76640d47f0cdcb294"</span><span class="w">
+    </span><span class="s2">"download"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+      </span><span class="s2">"binary_url"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://mod.io/mods/file/1/c489a0354111a4d76640d47f0cdcb294"</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"date_expires"</span><span class="p">:</span><span class="w"> </span><span class="mi">1579316848</span><span class="w">
+    </span><span class="p">}</span><span class="w">
   </span><span class="p">},</span><span class="w">
   </span><span class="s2">"media"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
     </span><span class="s2">"youtube"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
@@ -10264,9 +10252,19 @@ oauth2 ( Scopes: read )
 <td>Metadata stored by the game developer for this file.</td>
 </tr>
 <tr>
-<td>» download_url</td>
+<td>» download</td>
+<td><a href="#schemadownload_object">Download Object   </a></td>
+<td>Contains download data.</td>
+</tr>
+<tr>
+<td>»» binary_url</td>
 <td>string</td>
-<td>URL to download the file from the mod.io CDN.</td>
+<td>URL to download the file from the mod.io CDN.<br><br><strong>NOTE:</strong> If the <a href="#edit-game">game</a> requires mod downloads to be initiated via the API, the <code>binary_url</code> returned will contain a verification hash. This hash must be supplied to get the modfile, and will expire after a certain period of time. Saving and reusing the <code>binary_url</code> won't work in this situation given it's dynamic nature.</td>
+</tr>
+<tr>
+<td>»» date_expires</td>
+<td>integer</td>
+<td>Unix timestamp of when the <code>binary_url</code> will expire.</td>
 </tr>
 <tr>
 <td>media</td>
@@ -10468,9 +10466,9 @@ oauth2 ( Scopes: read )
   </span><span class="s2">"date_added"</span><span class="p">:</span><span class="w"> </span><span class="mi">1493702614</span><span class="p">,</span><span class="w">
   </span><span class="s2">"date_updated"</span><span class="p">:</span><span class="w"> </span><span class="mi">1499410290</span><span class="p">,</span><span class="w">
   </span><span class="s2">"date_live"</span><span class="p">:</span><span class="w"> </span><span class="mi">1499841403</span><span class="p">,</span><span class="w">
-  </span><span class="s2">"presentation_options"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
-  </span><span class="s2">"submission_options"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
-  </span><span class="s2">"curation_options"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"presentation_option"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"submission_option"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"curation_option"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
   </span><span class="s2">"community_options"</span><span class="p">:</span><span class="w"> </span><span class="mi">3</span><span class="p">,</span><span class="w">
   </span><span class="s2">"revenue_options"</span><span class="p">:</span><span class="w"> </span><span class="mi">1500</span><span class="p">,</span><span class="w">
   </span><span class="s2">"api_access_options"</span><span class="p">:</span><span class="w"> </span><span class="mi">3</span><span class="p">,</span><span class="w">
@@ -10611,34 +10609,34 @@ oauth2 ( Scopes: read )
 <td>Unix timestamp of date game was set live.</td>
 </tr>
 <tr>
-<td>presentation_options</td>
+<td>presentation_option</td>
 <td>integer</td>
 <td>Presentation style used on the mod.io website:<br><br><strong>0</strong> =  Grid View: Displays mods in a grid<br><strong>1</strong> = Table View: Displays mods in a table</td>
 </tr>
 <tr>
-<td>submission_options</td>
+<td>submission_option</td>
 <td>integer</td>
 <td>Submission process modders must follow:<br><br><strong>0</strong> = Mod uploads must occur via a tool created by the game developers<br><strong>1</strong> = Mod uploads can occur from anywhere, including the website and API</td>
 </tr>
 <tr>
-<td>curation_options</td>
+<td>curation_option</td>
 <td>integer</td>
 <td>Curation process used to approve mods:<br><br><strong>0</strong> = No curation: Mods are immediately available to play<br><strong>1</strong> = Paid curation: Mods are immediately available to play unless they choose to receive donations. These mods must be accepted to be listed<br><strong>2</strong> = Full curation: All mods must be accepted by someone to be listed</td>
 </tr>
 <tr>
 <td>community_options</td>
 <td>integer</td>
-<td>Community features enabled on the mod.io website:<br><br><strong>0</strong> = All of the options below are disabled<br><strong>1</strong> = Discussion board enabled<br><strong>2</strong> = Guides and news enabled<br><strong>?</strong> = Combine to find games with multiple options enabled (see <a href="#bitwise-and-bitwise-and">BITWISE filtering</a>)</td>
+<td>Community features enabled on the mod.io website:<br><br><strong>0</strong> = All of the options below are disabled<br><strong>1</strong> = Discussion board enabled<br><strong>2</strong> = Guides and news enabled<br><strong>?</strong> = Add the options you want together, to enable multiple features (see <a href="#bitwise-and-bitwise-and">BITWISE fields</a>)</td>
 </tr>
 <tr>
 <td>revenue_options</td>
 <td>integer</td>
-<td>Revenue capabilities mods can enable:<br><br><strong>0</strong> = All of the options below are disabled<br><strong>1</strong> = Allow mods to be sold<br><strong>2</strong> = Allow mods to receive donations<br><strong>4</strong> = Allow mods to be traded<br><strong>8</strong> = Allow mods to control supply and scarcity<br><strong>?</strong> = Combine to find games with multiple options enabled (see <a href="#bitwise-and-bitwise-and">BITWISE filtering</a>)</td>
+<td>Revenue capabilities mods can enable:<br><br><strong>0</strong> = All of the options below are disabled<br><strong>1</strong> = Allow mods to be sold<br><strong>2</strong> = Allow mods to receive donations<br><strong>4</strong> = Allow mods to be traded<br><strong>8</strong> = Allow mods to control supply and scarcity<br><strong>?</strong> = Add the options you want together, to enable multiple features (see <a href="#bitwise-and-bitwise-and">BITWISE fields</a>)</td>
 </tr>
 <tr>
 <td>api_access_options</td>
 <td>integer</td>
-<td>Level of API access allowed by this game:<br><br><strong>0</strong> = All of the options below are disabled<br><strong>1</strong> = This game allows 3rd parties to access the mods API<br><strong>2</strong> = This game allows mods to be downloaded directly without API validation<br><strong>?</strong> = Combine to find games with multiple options enabled (see <a href="#bitwise-and-bitwise-and">BITWISE filtering</a>)</td>
+<td>Level of API access allowed by this game:<br><br><strong>0</strong> = All of the options below are disabled<br><strong>1</strong> = Allow 3rd parties to access this games API endpoints<br><strong>2</strong> = Allow mods to be downloaded directly (if disabled all download URLs will contain a frequently changing verification hash to stop unauthorized use)<br><strong>?</strong> = Add the options you want together, to enable multiple features (see <a href="#bitwise-and-bitwise-and">BITWISE fields</a>)</td>
 </tr>
 <tr>
 <td>ugc_name</td>
@@ -10743,7 +10741,7 @@ oauth2 ( Scopes: read )
 <tr>
 <td>instructions</td>
 <td>string</td>
-<td>A guide about creating and uploading mods for this game to mod.io (applicable if submission_options = 0).</td>
+<td>A guide about creating and uploading mods for this game to mod.io (applicable if submission_option = 0).</td>
 </tr>
 <tr>
 <td>profile_url</td>
@@ -11365,7 +11363,10 @@ oauth2 ( Scopes: read )
       </span><span class="s2">"version"</span><span class="p">:</span><span class="w"> </span><span class="s2">"1.3"</span><span class="p">,</span><span class="w">
       </span><span class="s2">"changelog"</span><span class="p">:</span><span class="w"> </span><span class="s2">"VERSION 1.3 -- Changes -- Fixed critical castle floor bug."</span><span class="p">,</span><span class="w">
       </span><span class="s2">"metadata_blob"</span><span class="p">:</span><span class="w"> </span><span class="s2">"rogue,hd,high-res,4k,hd textures"</span><span class="p">,</span><span class="w">
-      </span><span class="s2">"download_url"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://mod.io/mods/file/1/c489a0354111a4d76640d47f0cdcb294"</span><span class="w">
+      </span><span class="s2">"download"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+        </span><span class="s2">"binary_url"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://mod.io/mods/file/1/c489a0354111a4d76640d47f0cdcb294"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"date_expires"</span><span class="p">:</span><span class="w"> </span><span class="mi">1579316848</span><span class="w">
+      </span><span class="p">}</span><span class="w">
     </span><span class="p">},</span><span class="w">
     </span><span class="p">{</span><span class="w">
         </span><span class="err">...</span><span class="w">
@@ -11462,9 +11463,19 @@ oauth2 ( Scopes: read )
 <td>Metadata stored by the game developer for this file.</td>
 </tr>
 <tr>
-<td>» download_url</td>
+<td>» download</td>
+<td><a href="#schemadownload_object">Download Object   </a></td>
+<td>Contains download data.</td>
+</tr>
+<tr>
+<td>»» binary_url</td>
 <td>string</td>
-<td>URL to download the file from the mod.io CDN.</td>
+<td>URL to download the file from the mod.io CDN.<br><br><strong>NOTE:</strong> If the <a href="#edit-game">game</a> requires mod downloads to be initiated via the API, the <code>binary_url</code> returned will contain a verification hash. This hash must be supplied to get the modfile, and will expire after a certain period of time. Saving and reusing the <code>binary_url</code> won't work in this situation given it's dynamic nature.</td>
+</tr>
+<tr>
+<td>»» date_expires</td>
+<td>integer</td>
+<td>Unix timestamp of when the <code>binary_url</code> will expire.</td>
 </tr>
 <tr>
 <td>result_count</td>
@@ -11508,9 +11519,9 @@ oauth2 ( Scopes: read )
       </span><span class="s2">"date_added"</span><span class="p">:</span><span class="w"> </span><span class="mi">1493702614</span><span class="p">,</span><span class="w">
       </span><span class="s2">"date_updated"</span><span class="p">:</span><span class="w"> </span><span class="mi">1499410290</span><span class="p">,</span><span class="w">
       </span><span class="s2">"date_live"</span><span class="p">:</span><span class="w"> </span><span class="mi">1499841403</span><span class="p">,</span><span class="w">
-      </span><span class="s2">"presentation_options"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
-      </span><span class="s2">"submission_options"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
-      </span><span class="s2">"curation_options"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"presentation_option"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"submission_option"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"curation_option"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
       </span><span class="s2">"community_options"</span><span class="p">:</span><span class="w"> </span><span class="mi">3</span><span class="p">,</span><span class="w">
       </span><span class="s2">"revenue_options"</span><span class="p">:</span><span class="w"> </span><span class="mi">1500</span><span class="p">,</span><span class="w">
       </span><span class="s2">"api_access_options"</span><span class="p">:</span><span class="w"> </span><span class="mi">3</span><span class="p">,</span><span class="w">
@@ -11665,34 +11676,34 @@ oauth2 ( Scopes: read )
 <td>Unix timestamp of date game was set live.</td>
 </tr>
 <tr>
-<td>» presentation_options</td>
+<td>» presentation_option</td>
 <td>integer</td>
 <td>Presentation style used on the mod.io website:<br><br><strong>0</strong> =  Grid View: Displays mods in a grid<br><strong>1</strong> = Table View: Displays mods in a table</td>
 </tr>
 <tr>
-<td>» submission_options</td>
+<td>» submission_option</td>
 <td>integer</td>
 <td>Submission process modders must follow:<br><br><strong>0</strong> = Mod uploads must occur via a tool created by the game developers<br><strong>1</strong> = Mod uploads can occur from anywhere, including the website and API</td>
 </tr>
 <tr>
-<td>» curation_options</td>
+<td>» curation_option</td>
 <td>integer</td>
 <td>Curation process used to approve mods:<br><br><strong>0</strong> = No curation: Mods are immediately available to play<br><strong>1</strong> = Paid curation: Mods are immediately available to play unless they choose to receive donations. These mods must be accepted to be listed<br><strong>2</strong> = Full curation: All mods must be accepted by someone to be listed</td>
 </tr>
 <tr>
 <td>» community_options</td>
 <td>integer</td>
-<td>Community features enabled on the mod.io website:<br><br><strong>0</strong> = All of the options below are disabled<br><strong>1</strong> = Discussion board enabled<br><strong>2</strong> = Guides and news enabled<br><strong>?</strong> = Combine to find games with multiple options enabled (see <a href="#bitwise-and-bitwise-and">BITWISE filtering</a>)</td>
+<td>Community features enabled on the mod.io website:<br><br><strong>0</strong> = All of the options below are disabled<br><strong>1</strong> = Discussion board enabled<br><strong>2</strong> = Guides and news enabled<br><strong>?</strong> = Add the options you want together, to enable multiple features (see <a href="#bitwise-and-bitwise-and">BITWISE fields</a>)</td>
 </tr>
 <tr>
 <td>» revenue_options</td>
 <td>integer</td>
-<td>Revenue capabilities mods can enable:<br><br><strong>0</strong> = All of the options below are disabled<br><strong>1</strong> = Allow mods to be sold<br><strong>2</strong> = Allow mods to receive donations<br><strong>4</strong> = Allow mods to be traded<br><strong>8</strong> = Allow mods to control supply and scarcity<br><strong>?</strong> = Combine to find games with multiple options enabled (see <a href="#bitwise-and-bitwise-and">BITWISE filtering</a>)</td>
+<td>Revenue capabilities mods can enable:<br><br><strong>0</strong> = All of the options below are disabled<br><strong>1</strong> = Allow mods to be sold<br><strong>2</strong> = Allow mods to receive donations<br><strong>4</strong> = Allow mods to be traded<br><strong>8</strong> = Allow mods to control supply and scarcity<br><strong>?</strong> = Add the options you want together, to enable multiple features (see <a href="#bitwise-and-bitwise-and">BITWISE fields</a>)</td>
 </tr>
 <tr>
 <td>» api_access_options</td>
 <td>integer</td>
-<td>Level of API access allowed by this game:<br><br><strong>0</strong> = All of the options below are disabled<br><strong>1</strong> = This game allows 3rd parties to access the mods API<br><strong>2</strong> = This game allows mods to be downloaded directly without API validation<br><strong>?</strong> = Combine to find games with multiple options enabled (see <a href="#bitwise-and-bitwise-and">BITWISE filtering</a>)</td>
+<td>Level of API access allowed by this game:<br><br><strong>0</strong> = All of the options below are disabled<br><strong>1</strong> = Allow 3rd parties to access this games API endpoints<br><strong>2</strong> = Allow mods to be downloaded directly (if disabled all download URLs will contain a frequently changing verification hash to stop unauthorized use)<br><strong>?</strong> = Add the options you want together, to enable multiple features (see <a href="#bitwise-and-bitwise-and">BITWISE fields</a>)</td>
 </tr>
 <tr>
 <td>» ugc_name</td>
@@ -11797,7 +11808,7 @@ oauth2 ( Scopes: read )
 <tr>
 <td>» instructions</td>
 <td>string</td>
-<td>A guide about creating and uploading mods for this game to mod.io (applicable if submission_options = 0).</td>
+<td>A guide about creating and uploading mods for this game to mod.io (applicable if submission_option = 0).</td>
 </tr>
 <tr>
 <td>» profile_url</td>
@@ -11963,7 +11974,10 @@ oauth2 ( Scopes: read )
         </span><span class="s2">"version"</span><span class="p">:</span><span class="w"> </span><span class="s2">"1.3"</span><span class="p">,</span><span class="w">
         </span><span class="s2">"changelog"</span><span class="p">:</span><span class="w"> </span><span class="s2">"VERSION 1.3 -- Changes -- Fixed critical castle floor bug."</span><span class="p">,</span><span class="w">
         </span><span class="s2">"metadata_blob"</span><span class="p">:</span><span class="w"> </span><span class="s2">"rogue,hd,high-res,4k,hd textures"</span><span class="p">,</span><span class="w">
-        </span><span class="s2">"download_url"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://mod.io/mods/file/1/c489a0354111a4d76640d47f0cdcb294"</span><span class="w">
+        </span><span class="s2">"download"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+          </span><span class="s2">"binary_url"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://mod.io/mods/file/1/c489a0354111a4d76640d47f0cdcb294"</span><span class="p">,</span><span class="w">
+          </span><span class="s2">"date_expires"</span><span class="p">:</span><span class="w"> </span><span class="mi">1579316848</span><span class="w">
+        </span><span class="p">}</span><span class="w">
       </span><span class="p">},</span><span class="w">
       </span><span class="s2">"media"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
         </span><span class="s2">"youtube"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
@@ -12261,9 +12275,19 @@ oauth2 ( Scopes: read )
 <td>Metadata stored by the game developer for this file.</td>
 </tr>
 <tr>
-<td>»» download_url</td>
+<td>»» download</td>
+<td><a href="#schemadownload_object">Download Object   </a></td>
+<td>Contains download data.</td>
+</tr>
+<tr>
+<td>»»» binary_url</td>
 <td>string</td>
-<td>URL to download the file from the mod.io CDN.</td>
+<td>URL to download the file from the mod.io CDN.<br><br><strong>NOTE:</strong> If the <a href="#edit-game">game</a> requires mod downloads to be initiated via the API, the <code>binary_url</code> returned will contain a verification hash. This hash must be supplied to get the modfile, and will expire after a certain period of time. Saving and reusing the <code>binary_url</code> won't work in this situation given it's dynamic nature.</td>
+</tr>
+<tr>
+<td>»»» date_expires</td>
+<td>integer</td>
+<td>Unix timestamp of when the <code>binary_url</code> will expire.</td>
 </tr>
 <tr>
 <td>» media</td>
@@ -12378,14 +12402,7 @@ oauth2 ( Scopes: read )
       </span><span class="s2">"mod_id"</span><span class="p">:</span><span class="w"> </span><span class="mi">13</span><span class="p">,</span><span class="w">
       </span><span class="s2">"user_id"</span><span class="p">:</span><span class="w"> </span><span class="mi">13</span><span class="p">,</span><span class="w">
       </span><span class="s2">"date_added"</span><span class="p">:</span><span class="w"> </span><span class="mi">1499846132</span><span class="p">,</span><span class="w">
-      </span><span class="s2">"event_type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"MODFILE_CHANGE"</span><span class="p">,</span><span class="w">
-      </span><span class="s2">"changes"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
-        </span><span class="p">{</span><span class="w">
-          </span><span class="s2">"field"</span><span class="p">:</span><span class="w"> </span><span class="s2">"modfile"</span><span class="p">,</span><span class="w">
-          </span><span class="s2">"before"</span><span class="p">:</span><span class="w"> </span><span class="mi">13</span><span class="p">,</span><span class="w">
-          </span><span class="s2">"after"</span><span class="p">:</span><span class="w"> </span><span class="mi">183</span><span class="w">
-        </span><span class="p">}</span><span class="w">
-      </span><span class="p">]</span><span class="w">
+      </span><span class="s2">"event_type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"MODFILE_CHANGED"</span><span class="w">
     </span><span class="p">},</span><span class="w">
     </span><span class="p">{</span><span class="w">
         </span><span class="err">...</span><span class="w">
@@ -12434,28 +12451,7 @@ oauth2 ( Scopes: read )
 <tr>
 <td>» event_type</td>
 <td>string</td>
-<td>Type of <a href="#get-mod-events-2">event</a> was 'MODFILE_CHANGE', 'MOD_VISIBILITY_CHANGE' or 'MOD_LIVE'.</td>
-</tr>
-<tr>
-<td>» changes</td>
-<td>
-<a href="#schemafield_change_object">Field Change Object  </a>[]</td>
-<td>Contains an array of 'before and after' values of fields changed by the event.</td>
-</tr>
-<tr>
-<td>»» field</td>
-<td>string</td>
-<td>Name of the field that was changed.</td>
-</tr>
-<tr>
-<td>»» before</td>
-<td>integer</td>
-<td>Value of the field before the event.</td>
-</tr>
-<tr>
-<td>»» after</td>
-<td>integer</td>
-<td>Value of the field after the event.</td>
+<td>Type of <a href="#get-mod-events-2">event</a> was 'MODFILE_CHANGED', 'MOD_AVAILABLE', 'MOD_UNAVAILABLE', 'MOD_EDITED'.</td>
 </tr>
 <tr>
 <td>result_count</td>
