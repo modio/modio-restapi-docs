@@ -24,7 +24,6 @@ $(document).ready(function() {
 				if ($(obj).first().hasClass('s2')) {
 					var col = $(obj).first();
 					attribute = attribute.replace(' ', '');
-					attribute = attribute.replace('»', '');
 
 					if ($(col).text() == '"'+attribute+'"') {
 						target = $(col);
@@ -44,11 +43,15 @@ $(document).ready(function() {
 	});
 	
 	$('table tbody tr').each(function() {
-		if($('td:first-child', this).not('.collapsed').text()[0] == '»') {
-			$(this).addClass('iscollapsed').hide();
+		td = $('td:first-child', this).not('.collapsed');
+		
+		if(td.text()[0] == '»') {
+			level = (td.text().match(/»/g)||[]).length;
+			$(this).addClass('iscollapsed').addClass('level').addClass('level'+level).hide();
+			td.html(td.html().replace(/»/g, ''));
 			
-			if($(this).prev().find('td:first-child').text()[0] != '»') {
-				$(this).prev().find('td:first-child').append('<a href="#" class="togglecollapse" style="background: rgba(0,0,0,.05); border-radius: 3px; display: inline-block; font-size: 10px; margin-left: 4px; padding: 2px 5px;">expand</a>');
+			if(!$(this).prev().hasClass('level') || $(this).prev().hasClass('level'+(level-1))) {
+				$(this).prev().find('td:first-child').append('<a href="#" class="togglecollapse" data-level="'+level+'" style="background: rgba(0,0,0,.05); border-radius: 3px; display: inline-block; font-size: 10px; margin-left: 4px; padding: 2px 5px;">expand</a>');
 			}
 		} else {
 			$(this).addClass('notcollapsed');
@@ -56,11 +59,15 @@ $(document).ready(function() {
 	});
 	
 	$('.togglecollapse').click(function() {
-		$(this).closest('tr').nextUntil('.notcollapsed', 'tr').toggle();
 		if($(this).closest('tr').next('tr').is(':visible')) {
-			$(this).text('collapse');
-		} else {
+			$(this).closest('tr').nextUntil('.notcollapsed,.level'+($(this).data('level')-1), 'tr.level'+$(this).data('level')).each(function(){
+				$(this).hide();
+				$('.togglecollapse', this).text('expand');
+			});
 			$(this).text('expand');
+		} else {
+			$(this).closest('tr').nextUntil('.notcollapsed,.level'+($(this).data('level')-1), 'tr.level'+$(this).data('level')).show();
+			$(this).text('collapse');
 		}
 		return false;
 	});

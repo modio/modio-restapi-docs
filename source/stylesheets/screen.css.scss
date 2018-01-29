@@ -644,6 +644,14 @@ table tbody tr.iscollapsed td:first-child {
   border-left: 3px solid #666;
 }
 
+table tbody tr.iscollapsed.level2 td:first-child {
+  border-left-width: 6px;
+}
+
+table tbody tr.iscollapsed.level3 td:first-child {
+  border-left-width: 9px;
+}
+
 img.menu-reference-icon {
   max-height: 12px;
   max-width: 12px;

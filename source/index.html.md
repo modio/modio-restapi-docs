@@ -25,7 +25,7 @@ Welcome to the official documentation for [mod.io](https://mod.io), an API which
 
 __Current version:__ `v1`
 
-__Base path:__ [https://api.mod.io/v1](https://api.mod.io/v1)
+__API path:__ [https://api.mod.io/v1](https://api.mod.io/v1)
 
 ## How It Works
 
@@ -101,7 +101,7 @@ curl -X POST https://api.mod.io/v1/oauth/emailrequest \
 
 Request a `security_code` be sent to the email address of the user you wish to authenticate: 
 
-`POST /oauth/emailrequest`
+`POST /oauth/emailrequest`
 
 Parameter | Value
 ---------- | ----------  
@@ -130,7 +130,7 @@ curl -X POST https://api.mod.io/v1/oauth/emailexchange \
 }
 ```
 
-`POST /oauth/emailexchange`
+`POST /oauth/emailexchange`
 
 Parameter | Value
 ---------- | ----------  
@@ -639,17 +639,17 @@ You should always plan to minimize requests and cache API responses. It will mak
 
 ## Testing
 
-To help familiarize yourself with the mod.io API and to ensure your implementation is battle-hardened and operating as intended, we have setup a test sandbox for you to construct your application which is identical to the production mod.io service. The testing environment is where you should test and make requests to the API whilst your integration is a work in progress and the submitted data is not important - then when you are ready to go live it's as easy as substituting the API test URL for the production URL. 
+To help familiarize yourself with the mod.io API and to ensure your implementation is battle-hardened and operating as intended, we have setup a test sandbox which is identical to the production environment. The test sandbox allows you to make requests to the API whilst your integration is a work in progress and the submitted data is not important. When you are ready to go live it's as easy as making sure your game's production profile and `apikey` is correct, and substituting the API test URL for the production URL. 
 
-You will need to [register a test account](https://test.mod.io/members/register) and then [add your game](https://test.mod.io/games/add) to begin using it and you will see only games you are a team member of and there is no connection between the data added to the test environment and production. We highly recommend you use the test environment when integrating as it allows you to keep your development private and you can submit as much dummy data as you need to try the functionality required, without having to clean it up at the end.
+To begin using the test sandbox you will need to [register a test account](https://test.mod.io/members/register) and [add your game](https://test.mod.io/games/add). You will see only games you are a team member of and there is no connection between the data added to the test environment and production. We highly recommend you use the test environment when integrating as it allows you to keep your development private, and you can submit as much dummy data as you need to try the functionality required, without having to clean it up at the end.
 
 __Test version:__ `v1`
 
 __Test site:__ [https://test.mod.io](https://test.mod.io)
 
-__Test path:__ [https://api.test.mod.io/v1](https://api.test.mod.io/v1)
+__Test API path:__ [https://api.test.mod.io/v1](https://api.test.mod.io/v1)
 
-__NOTE__: We periodically reset the test environment to default - with the exception of user accounts so please do not rely on it to store important information. Any data you intend on mod.io peristing should not be submitted in the test environment.
+__NOTE__: We periodically reset the test environment to default - with the exception of user accounts so please do not rely on it to store important information. Any data you intend on peristing should be submitted to the production environment.
 
 ## Contact
 
@@ -765,7 +765,10 @@ Get all games. Successful request will return an array of [Game Objects](#get-al
      revenue_options|integer|Revenue capabilities mods can enable:<br><br>__0__ = All of the options below are disabled<br>__1__ = Allow mods to be sold<br>__2__ = Allow mods to receive donations<br>__4__ = Allow mods to be traded<br>__8__ = Allow mods to control supply and scarcity<br>__?__ = Combine to find games with multiple options enabled (see [BITWISE fields](#bitwise-and-bitwise-and))
      api_access_options|integer|Level of API access allowed by this game:<br><br>__0__ = All of the options below are disabled<br>__1__ = Allow 3rd parties to access this games API endpoints<br>__2__ = Allow mods to be downloaded directly (if disabled all download URLs will contain a frequently changing verification hash to stop unauthorized use)<br>__?__ = Combine to find games with multiple options enabled (see [BITWISE fields](#bitwise-and-bitwise-and))
 
+<<<<<<< HEAD
 
+=======
+>>>>>>> 16f6eeabe425523e93202fac5c1ecc70002f2b49
 > Example response
 
 ```json
@@ -853,7 +856,6 @@ Status|Meaning|Description|Response Schema
 To perform this operation, you must be authenticated by means of one of the following methods:
 apiKey, oauth2 ( Scopes: read )
 </aside>
-
 
 ## Get Game
 
@@ -944,7 +946,6 @@ System.out.println(response.toString());
 
 Get a game. Successful request will return a single [Game Object](#game-object).
 
-
 > Example response
 
 ```json
@@ -1023,7 +1024,6 @@ To perform this operation, you must be authenticated by means of one of the foll
 apiKey, oauth2 ( Scopes: read )
 </aside>
 
-
 ## Edit Game
 
 > Example request
@@ -1044,7 +1044,6 @@ Host: api.mod.io
 Accept: application/json
 Authorization: Bearer YourAccessToken
 Content-Type: application/x-www-form-urlencoded
-
 
 ```
 
@@ -1142,7 +1141,10 @@ Update details for a game. If you want to update the `icon`, `logo` or `header` 
      revenue_options|integer||Choose the revenue capabilities mods can enable:<br><br>__0__ = All of the options below are disabled<br>__1__ = Allow mods to be sold<br>__2__ = Allow mods to receive donations<br>__4__ = Allow mods to be traded (not subject to revenue share)<br>__8__ = Allow mods to control supply and scarcity<br>__?__ = Add the options you want together, to enable multiple features (see [BITWISE fields](#bitwise-and-bitwise-and))
      api_access_options|integer||Choose the level of API access your game allows:<br><br>__0__ = All of the options below are disabled<br><br>__1__ = Allow 3rd parties to access this games API endpoints. We recommend you enable this feature, an open API will encourage a healthy ecosystem of tools and apps. If you do not enable this feature, your `/games/{games-id}` endpoints will return `403 Forbidden` unless you are a member of the games team or using the games `apikey`<br><br>__2__ = Allow mods to be downloaded directly (makes implementation easier for you, game servers and services because you can save, share and reuse download URLs). If disabled all download URLs will contain a frequently changing verification hash to stop unauthorized use<br><br>__?__ = Add the options you want together, to enable multiple features (see [BITWISE fields](#bitwise-and-bitwise-and))
 
+<<<<<<< HEAD
 
+=======
+>>>>>>> 16f6eeabe425523e93202fac5c1ecc70002f2b49
 > Example response
 
 ```json
@@ -1220,7 +1222,6 @@ Status|Meaning|Description|Response Schema
 To perform this operation, you must be authenticated by means of one of the following methods:
 oauth2 ( Scopes: write )
 </aside>
-
 
 # Mods
 
@@ -1337,7 +1338,6 @@ Get all mods for the corresponding game. Successful request will return an array
     rating|string|Sort results by weighted rating using [_sort filter](#filtering), value should be `rating` for descending or `-rating` for ascending results.
     subscribers|string|Sort results by most subscribers using [_sort filter](#filtering), value should be `subscribers` for descending or `-subscribers` for ascending results.
 
-
 > Example response
 
 ```json
@@ -1451,7 +1451,6 @@ To perform this operation, you must be authenticated by means of one of the foll
 apiKey, oauth2 ( Scopes: read )
 </aside>
 
-
 ## Get Mod
 
 > Example request
@@ -1540,7 +1539,6 @@ System.out.println(response.toString());
 `GET /games/{game-id}/mods/{mod-id}`
 
 Get a mod. Successful request will return a single [Mod Object](#mod-object).
-
 
 > Example response
 
@@ -1645,7 +1643,6 @@ To perform this operation, you must be authenticated by means of one of the foll
 apiKey, oauth2 ( Scopes: read )
 </aside>
 
-
 ## Add Mod
 
 > Example request
@@ -1666,7 +1663,6 @@ Host: api.mod.io
 Accept: application/json
 Authorization: Bearer YourAccessToken
 Content-Type: multipart/form-data
-
 
 ```
 
@@ -1758,7 +1754,6 @@ Add a mod. Successful request will return the newly created [Mod Object](#mod-ob
      stock|integer||Artificially limit the amount of times the mod can be subscribed too.
      metadata_blob|string||Metadata stored by the game developer which may include properties as to how the item works, or other information you need to display. Metadata can also be stored as searchable [key value pairs](#metadata), and to individual [mod files](#get-all-modfiles).
      tags|string[]||An array of strings that represent what the mod has been tagged as. Only tags that are supported by the parent game can be applied. To determine what tags are eligible, see the tags values within `tag_options` column on the parent [Game Object](#game-object).
-
 
 > Example response
 
@@ -1869,7 +1864,6 @@ To perform this operation, you must be authenticated by means of one of the foll
 oauth2 ( Scopes: write )
 </aside>
 
-
 ## Edit Mod
 
 > Example request
@@ -1890,7 +1884,6 @@ Host: api.mod.io
 Accept: application/json
 Authorization: Bearer YourAccessToken
 Content-Type: application/x-www-form-urlencoded
-
 
 ```
 
@@ -1982,7 +1975,6 @@ Edit details for a mod. If you want to update the `logo` or media associated wit
      stock|integer||Artificially limit the amount of times the mod can be subscribed too.
      modfile|integer||Unique id of the [Modfile Object](#modfile-object) to be labelled as the current release.<br><br>__NOTE:__ If the `modfile` parameter is successfully changed, a [__MODFILE_CHANGED__ event](#get-all-mod-events) will be fired, so game clients know there is an update available for this mod.
      metadata_blob|string||Metadata stored by the game developer which may include properties as to how the item works, or other information you need to display. Metadata can also be stored as searchable [key value pairs](#metadata), and to individual [mod files](#get-all-modfiles).
-
 
 > Example response
 
@@ -2087,7 +2079,6 @@ To perform this operation, you must be authenticated by means of one of the foll
 oauth2 ( Scopes: write )
 </aside>
 
-
 ## Delete Mod
 
 > Example request
@@ -2108,7 +2099,6 @@ Host: api.mod.io
 Accept: application/json
 Authorization: Bearer YourAccessToken
 Content-Type: application/x-www-form-urlencoded
-
 
 ```
 
@@ -2188,7 +2178,6 @@ System.out.println(response.toString());
 
 Delete a mod profile. Successful request will return `204 No Content` and fire a __MOD_UNAVAILABLE__ event.<br><br>__NOTE:__ This will close the mod profile which means it cannot be viewed or retrieved via API requests but will still exist in-case you choose to restore it at a later date. If you believe a mod should be permanently removed please [contact us](mailto:support@mod.io).
 
-
 > Example response
 
 ```json
@@ -2204,7 +2193,6 @@ Status|Meaning|Description|Response Schema
 To perform this operation, you must be authenticated by means of one of the following methods:
 oauth2 ( Scopes: write )
 </aside>
-
 
 # Files
 
@@ -2312,7 +2300,6 @@ Get all files that are published for the corresponding mod. Successful request w
      changelog|string|Changelog for the file.
      metadata_blob|string|Metadata stored by the game developer for this file.
 
-
 > Example response
 
 ```json
@@ -2358,7 +2345,6 @@ Status|Meaning|Description|Response Schema
 To perform this operation, you must be authenticated by means of one of the following methods:
 apiKey, oauth2 ( Scopes: read )
 </aside>
-
 
 ## Get Modfile
 
@@ -2449,7 +2435,6 @@ System.out.println(response.toString());
 
 Get a file. Successful request will return a single [Modfile Object](#modfile_object).<br><br>__NOTE:__ If the [game](#edit-game) requires mod downloads to be initiated via the API, the `binary_url` returned will contain a verification hash. This hash must be supplied to get the modfile, and will expire after a certain period of time. Saving and reusing the `binary_url` won't work in this situation given it's dynamic nature.
 
-
 > Example response
 
 ```json
@@ -2486,7 +2471,6 @@ To perform this operation, you must be authenticated by means of one of the foll
 apiKey, oauth2 ( Scopes: read )
 </aside>
 
-
 ## Add Modfile
 
 > Example request
@@ -2507,7 +2491,6 @@ Host: api.mod.io
 Accept: application/json
 Authorization: Bearer YourAccessToken
 Content-Type: multipart/form-data
-
 
 ```
 
@@ -2596,7 +2579,6 @@ Upload a file for the corresponding mod. Successful request will return the newl
      filehash|string||MD5 of the submitted file. When supplied the MD5 will be compared against the uploaded files MD5. If they don't match a `422 Unprocessible Entity` error will be returned.
      metadata_blob|string||Metadata stored by the game developer which may include properties such as what version of the game this file is compatible with. Metadata can also be stored as searchable [key value pairs](#metadata), and to the [mod object](#edit-mod).
 
-
 > Example response
 
 ```json
@@ -2622,6 +2604,7 @@ Upload a file for the corresponding mod. Successful request will return the newl
   }
 }
 ```
+
 <h3 id="Add-Modfile-responses">Responses</h3>
 
 Status|Meaning|Description|Response Schema
@@ -2638,7 +2621,6 @@ Status|Header|Type|Format|Description
 To perform this operation, you must be authenticated by means of one of the following methods:
 oauth2 ( Scopes: write )
 </aside>
-
 
 ## Edit Modfile
 
@@ -2660,7 +2642,6 @@ Host: api.mod.io
 Accept: application/json
 Authorization: Bearer YourAccessToken
 Content-Type: application/x-www-form-urlencoded
-
 
 ```
 
@@ -2747,7 +2728,6 @@ Edit the details of a published file. If you want to update fields other than th
      active|boolean||_Default value is true._ Label this upload as the current release, this will change the `modfile` field on the parent mod to the `id` of this file after upload.<br><br>__NOTE:__ If the _active_ parameter causes the parent mods `modfile` parameter to change, a [__MODFILE_CHANGED__ event](#get-all-mod-events) will be fired, so game clients know there is an update available for this mod.
      metadata_blob|string||Metadata stored by the game developer which may include properties such as what version of the game this file is compatible with. Metadata can also be stored as searchable [key value pairs](#metadata), and to the [mod object](#edit-mod).
 
-
 > Example response
 
 ```json
@@ -2784,7 +2764,6 @@ To perform this operation, you must be authenticated by means of one of the foll
 oauth2 ( Scopes: write )
 </aside>
 
-
 # Media
 
 ## Add Game Media
@@ -2807,7 +2786,6 @@ Host: api.mod.io
 Accept: application/json
 Authorization: Bearer YourAccessToken
 Content-Type: multipart/form-data
-
 
 ```
 
@@ -2895,7 +2873,6 @@ Upload new media to a game. Any request you make to this endpoint *should* conta
      icon|file||Image file which will represent your games icon. Must be gif, jpg or png format and cannot exceed 1MB in filesize. Dimensions must be at least 64x64 and a transparent png that works on a colorful background is recommended. mod.io will use this icon to create three thumbnails with the dimensions of 64x64, 128x128 and 256x256.
      header|file||Image file which will represent your games header. Must be gif, jpg or png format and cannot exceed 256KB in filesize. Dimensions of 400x100 and a light transparent png that works on a dark background is recommended.
 
-
 > Example response
 
 ```json
@@ -2914,7 +2891,6 @@ Status|Meaning|Description|Response Schema
 To perform this operation, you must be authenticated by means of one of the following methods:
 oauth2 ( Scopes: write )
 </aside>
-
 
 ## Add Mod Media
 
@@ -2936,7 +2912,6 @@ Host: api.mod.io
 Accept: application/json
 Authorization: Bearer YourAccessToken
 Content-Type: multipart/form-data
-
 
 ```
 
@@ -3025,7 +3000,6 @@ This endpoint is very flexible and will add any images posted to the mods galler
      youtube|string[]||Full Youtube link(s) you want to add - example 'https://www.youtube.com/watch?v=IGVZOLV9SPo'
      sketchfab|string[]||Full Sketchfab link(s) you want to add - example 'https://sketchfab.com/models/71f04e390ff54e5f8d9a51b4e1caab7e'
 
-
 > Example response
 
 ```json
@@ -3051,7 +3025,6 @@ To perform this operation, you must be authenticated by means of one of the foll
 oauth2 ( Scopes: write )
 </aside>
 
-
 ## Delete Mod Media
 
 > Example request
@@ -3072,7 +3045,6 @@ Host: api.mod.io
 Accept: application/json
 Authorization: Bearer YourAccessToken
 Content-Type: application/x-www-form-urlencoded
-
 
 ```
 
@@ -3160,7 +3132,6 @@ Delete images, sketchfab or youtube links from a mod profile. Successful request
      youtube|string[]||Full Youtube link(s) you want to delete - example 'https://www.youtube.com/watch?v=IGVZOLV9SPo'.
      sketchfab|string[]||Full Sketchfab link(s) you want to delete - example 'https://sketchfab.com/models/71f04e390ff54e5f8d9a51b4e1caab7e'.
 
-
 > Example response
 
 ```json
@@ -3176,7 +3147,6 @@ Status|Meaning|Description|Response Schema
 To perform this operation, you must be authenticated by means of one of the following methods:
 oauth2 ( Scopes: write )
 </aside>
-
 
 # Subscribe
 
@@ -3200,7 +3170,6 @@ Host: api.mod.io
 Accept: application/json
 Authorization: Bearer YourAccessToken
 Content-Type: application/x-www-form-urlencoded
-
 
 ```
 
@@ -3279,7 +3248,6 @@ System.out.println(response.toString());
 `POST /games/{game-id}/mods/{mod-id}/subscribe`
 
 Subscribe the _authenticated user_ to a corresponding mod. No body parameters are required for this action. Successful request will return the [Mod Object](#mod-object) of the newly subscribed mod.<br><br>__NOTE:__ Users can subscribe to mods via mod.io, we recommend you poll the [Get All Mod Events](#get-all-mod-events) endpoint to keep a users mods collection up to date.
-
 
 > Example response
 
@@ -3384,7 +3352,6 @@ To perform this operation, you must be authenticated by means of one of the foll
 oauth2 ( Scopes: write )
 </aside>
 
-
 ## Unsubscribe To Mod
 
 > Example request
@@ -3405,7 +3372,6 @@ Host: api.mod.io
 Accept: application/json
 Authorization: Bearer YourAccessToken
 Content-Type: application/x-www-form-urlencoded
-
 
 ```
 
@@ -3485,7 +3451,6 @@ System.out.println(response.toString());
 
 Unsubscribe the _authenticated user_ from the corresponding mod. No body parameters are required for this action. Successful request will return `204 No Content`.<br><br>__NOTE:__ Users can unsubscribe from mods via mod.io, we recommend you poll the [Get All Mod Events](#get-all-mod-events) endpoint to keep a users mods collection up to date.
 
-
 > Example response
 
 ```json
@@ -3501,7 +3466,6 @@ Status|Meaning|Description|Response Schema
 To perform this operation, you must be authenticated by means of one of the following methods:
 oauth2 ( Scopes: write )
 </aside>
-
 
 # Events
 
@@ -3602,7 +3566,6 @@ Get the event log for a mod, showing changes made sorted by latest event first. 
      date_added|integer|Unix timestamp of date mod was updated.
      event_type|string|Type of change that occurred:<br><br>__MODFILE_CHANGED__ = Primary file changed, the mod should be updated<br>__MOD_AVAILABLE__ = Mod is marked as accepted and public<br>__MOD_UNAVAILABLE__ = Mod is marked as not accepted, deleted or hidden<br>__MOD_EDITED__ = The mod was updated (triggered when any column value changes)
 
-
 > Example response
 
 ```json
@@ -3634,7 +3597,6 @@ Status|Meaning|Description|Response Schema
 To perform this operation, you must be authenticated by means of one of the following methods:
 apiKey, oauth2 ( Scopes: read )
 </aside>
-
 
 ## Get All Mod Events
 
@@ -3735,7 +3697,6 @@ Get all mods events for the corresponding game sorted by latest event first. Suc
      latest|boolean|_Default value is true_. Returns only the latest unique events, which is useful for checking if the primary `modfile` has changed.
      subscribed|boolean|_Default value is false_. Returns only events connected to mods the __authenticated user__ is subscribed to, which is useful for keeping the users mods up-to-date.
 
-
 > Example response
 
 ```json
@@ -3767,7 +3728,6 @@ Status|Meaning|Description|Response Schema
 To perform this operation, you must be authenticated by means of one of the following methods:
 apiKey, oauth2 ( Scopes: read )
 </aside>
-
 
 # Tags
 
@@ -3860,7 +3820,6 @@ System.out.println(response.toString());
 
 Get all tags for the corresponding game, that can be applied to any of its mods. Successful request will return an array of [Game Tag Option Objects](#game-tag-option-object).
 
-
 > Example response
 
 ```json
@@ -3894,7 +3853,6 @@ To perform this operation, you must be authenticated by means of one of the foll
 apiKey, oauth2 ( Scopes: read )
 </aside>
 
-
 ## Add Game Tag Option
 
 > Example request
@@ -3915,7 +3873,6 @@ Host: api.mod.io
 Accept: application/json
 Authorization: Bearer YourAccessToken
 Content-Type: application/x-www-form-urlencoded
-
 
 ```
 
@@ -4006,7 +3963,6 @@ Add tags which mods can apply to their profiles. Successful request will return 
      hidden|bool||This group of tags should be hidden from users and mod developers. Useful for games to tag special functionality, to filter on and use behind the scenes. You can also use [Metadata Key Value Pairs](#metadata) for more arbitary data.
      tags|array|true|Array of tags mod creators can choose to apply to their profiles.
 
-
 > Example response
 
 ```json
@@ -4025,7 +3981,6 @@ Status|Meaning|Description|Response Schema
 To perform this operation, you must be authenticated by means of one of the following methods:
 oauth2 ( Scopes: write )
 </aside>
-
 
 ## Delete Game Tag Option
 
@@ -4047,7 +4002,6 @@ Host: api.mod.io
 Accept: application/json
 Authorization: Bearer YourAccessToken
 Content-Type: application/x-www-form-urlencoded
-
 
 ```
 
@@ -4134,7 +4088,6 @@ Delete an entire group of tags or individual tags. Successful request will retur
      name|string|true|Name of the tag group that you want to delete tags from.
      tags|string[]|true|Array of strings representing the tag options to delete. An empty array will delete the entire group. For example:<br><br>Assume you have a group of tags titled 'Difficulty' and you want to remove the tag option 'Hard' from it. The `name` parameter would have the value 'Difficulty', and the `tags` array would have one value 'Hard'.
 
-
 > Example response
 
 ```json
@@ -4150,7 +4103,6 @@ Status|Meaning|Description|Response Schema
 To perform this operation, you must be authenticated by means of one of the following methods:
 oauth2 ( Scopes: write )
 </aside>
-
 
 ## Get All Mod Tags
 
@@ -4246,7 +4198,6 @@ Get all tags for the corresponding mod. Successful request will return an array 
      date_added|integer|Unix timestamp of date tag was added.
      tag|string|String representation of the tag. You can check the eligible tags on the parent game object to determine all possible values for this field.
 
-
 > Example response
 
 ```json
@@ -4276,7 +4227,6 @@ To perform this operation, you must be authenticated by means of one of the foll
 apiKey, oauth2 ( Scopes: read )
 </aside>
 
-
 ## Add Mod Tag
 
 > Example request
@@ -4297,7 +4247,6 @@ Host: api.mod.io
 Accept: application/json
 Authorization: Bearer YourAccessToken
 Content-Type: application/x-www-form-urlencoded
-
 
 ```
 
@@ -4381,7 +4330,6 @@ Add tags to a mod's profile. You can only add tags allowed by the parent game, w
      ---|---|---|---|
      tags|string[]|true|An array of tags to add. For example: If the parent game has a 'Theme' tag group with 'Fantasy', 'Sci-fi', 'Western' and 'Realistic' as the options, you could add 'Fantasy' and 'Sci-fi' to the `tags` array in your request. Provided the tags are valid you can add any number.
 
-
 > Example response
 
 ```json
@@ -4400,7 +4348,6 @@ Status|Meaning|Description|Response Schema
 To perform this operation, you must be authenticated by means of one of the following methods:
 oauth2 ( Scopes: write )
 </aside>
-
 
 ## Delete Mod Tag
 
@@ -4422,7 +4369,6 @@ Host: api.mod.io
 Accept: application/json
 Authorization: Bearer YourAccessToken
 Content-Type: application/x-www-form-urlencoded
-
 
 ```
 
@@ -4506,7 +4452,6 @@ Delete tags from a mod's profile. Deleting tags is identical to adding tags exce
      ---|---|---|---|
      tags|string[]|true|An array of tags to delete.
 
-
 > Example response
 
 ```json
@@ -4522,7 +4467,6 @@ Status|Meaning|Description|Response Schema
 To perform this operation, you must be authenticated by means of one of the following methods:
 oauth2 ( Scopes: write )
 </aside>
-
 
 # Ratings
 
@@ -4546,7 +4490,6 @@ Host: api.mod.io
 Accept: application/json
 Authorization: Bearer YourAccessToken
 Content-Type: application/x-www-form-urlencoded
-
 
 ```
 
@@ -4632,7 +4575,6 @@ Submit a positive or negative rating for a mod. Each user can supply only one ra
      ---|---|---|---|
      rating|integer|true|The _authenticated users_ mod rating:<br><br>__1__ = Positive rating (thumbs up)<br>__-1__ = Negative rating (thumbs down)
 
-
 > Example response
 
 ```json
@@ -4651,7 +4593,6 @@ Status|Meaning|Description|Response Schema
 To perform this operation, you must be authenticated by means of one of the following methods:
 oauth2 ( Scopes: write )
 </aside>
-
 
 # Metadata
 
@@ -4744,7 +4685,6 @@ System.out.println(response.toString());
 
 Get all metadata stored by the game developer for this mod as searchable key value pairs. Successful request will return an array of [Metadata KVP Objects](#get-all-mod-kvp).<br><br>__NOTE:__ Metadata can also be stored as `metadata_blob` in the [Mod Object](#mod-object).
 
-
 > Example response
 
 ```json
@@ -4774,7 +4714,6 @@ To perform this operation, you must be authenticated by means of one of the foll
 apiKey, oauth2 ( Scopes: read )
 </aside>
 
-
 ## Add Mod KVP Metadata
 
 > Example request
@@ -4795,7 +4734,6 @@ Host: api.mod.io
 Accept: application/json
 Authorization: Bearer YourAccessToken
 Content-Type: application/x-www-form-urlencoded
-
 
 ```
 
@@ -4879,7 +4817,6 @@ Add metadata for this mod as searchable key value pairs. Metadata is useful to d
      ---|---|---|---|
      metadata|string[]|true|Array containing one or more key value pairs where the the key and value are separated by a colon ':' (if the string contains multiple colons the split will occur on the first matched, i.e. pistol-dmg:800:400 will become key: pistol-dmg, value: 800:400). __NOTE:__<br><br>- Keys support alphanumeric, '_' and '-' characters only.<br>- Keys can map to multiple values (1-to-many relationship).<br>- Keys and values cannot exceed 255 characters in length.<br>- Key value pairs are searchable by exact match only.
 
-
 > Example response
 
 ```json
@@ -4898,7 +4835,6 @@ Status|Meaning|Description|Response Schema
 To perform this operation, you must be authenticated by means of one of the following methods:
 oauth2 ( Scopes: write )
 </aside>
-
 
 ## Delete Mod KVP Metadata
 
@@ -4920,7 +4856,6 @@ Host: api.mod.io
 Accept: application/json
 Authorization: Bearer YourAccessToken
 Content-Type: application/x-www-form-urlencoded
-
 
 ```
 
@@ -5004,7 +4939,6 @@ Delete key value pairs metadata defined for this mod. Successful request will re
      ---|---|---|---|
      metadata|string[]|true|Array containing one or more key value pairs to delete where the the key and value are separated by a colon ':'. __NOTE:__ If an array value contains only the key and no colon ':', _all_ metadata with that key will be removed.
 
-
 > Example response
 
 ```json
@@ -5020,7 +4954,6 @@ Status|Meaning|Description|Response Schema
 To perform this operation, you must be authenticated by means of one of the following methods:
 oauth2 ( Scopes: write )
 </aside>
-
 
 # Dependencies
 
@@ -5115,7 +5048,6 @@ Get all dependencies the chosen mod has selected. This is useful if a mod requir
 
      __NOTE:__ Some developers might select _soft_ dependencies to promote or credit other mods. We advise against this but it is possible to do.
 
-
 > Example response
 
 ```json
@@ -5145,7 +5077,6 @@ To perform this operation, you must be authenticated by means of one of the foll
 apiKey, oauth2 ( Scopes: read )
 </aside>
 
-
 ## Add Mod Dependencies
 
 > Example request
@@ -5166,7 +5097,6 @@ Host: api.mod.io
 Accept: application/json
 Authorization: Bearer YourAccessToken
 Content-Type: application/x-www-form-urlencoded
-
 
 ```
 
@@ -5252,7 +5182,6 @@ Add mod dependencies required by the corresponding mod. A dependency is a mod th
      ---|---|---|---|
      dependencies|integer[]|true|Array containing one or more mod id's that this mod is dependent on. Max of 5 dependencies per request.
 
-
 > Example response
 
 ```json
@@ -5271,7 +5200,6 @@ Status|Meaning|Description|Response Schema
 To perform this operation, you must be authenticated by means of one of the following methods:
 oauth2 ( Scopes: write )
 </aside>
-
 
 ## Delete Mod Dependencies
 
@@ -5293,7 +5221,6 @@ Host: api.mod.io
 Accept: application/json
 Authorization: Bearer YourAccessToken
 Content-Type: application/x-www-form-urlencoded
-
 
 ```
 
@@ -5377,7 +5304,6 @@ Delete mod dependencies the corresponding mod has selected. Successful request w
      ---|---|---|---|
      dependencies|integer[]|true|Array containing one or more mod id's that can be deleted as dependencies.
 
-
 > Example response
 
 ```json
@@ -5393,7 +5319,6 @@ Status|Meaning|Description|Response Schema
 To perform this operation, you must be authenticated by means of one of the following methods:
 oauth2 ( Scopes: write )
 </aside>
-
 
 # Teams
 
@@ -5495,7 +5420,6 @@ Get all users that are part of a mod team. Successful request will return an arr
      date_added|integer|Unix timestamp of the date the user was added to the team.
      position|string|Custom title given to the user in this team.
 
-
 > Example response
 
 ```json
@@ -5542,7 +5466,6 @@ To perform this operation, you must be authenticated by means of one of the foll
 apiKey, oauth2 ( Scopes: read )
 </aside>
 
-
 ## Add Mod Team Member
 
 > Example request
@@ -5563,7 +5486,6 @@ Host: api.mod.io
 Accept: application/json
 Authorization: Bearer YourAccessToken
 Content-Type: application/x-www-form-urlencoded
-
 
 ```
 
@@ -5651,7 +5573,6 @@ Add a user to a mod team. Successful request will return [Message Object](#messa
      level|integer|true|Level of permission the user will get:<br><br>__1__ = Moderator (can moderate comments and content attached)<br>__4__ = Creator (moderator access, including uploading builds and edit all settings except supply and team members)<br>__8__ = Administrator (full access, including editing the supply and team)
      position|string||Title of the users position. For example: 'Team Leader', 'Artist'.
 
-
 > Example response
 
 ```json
@@ -5670,7 +5591,6 @@ Status|Meaning|Description|Response Schema
 To perform this operation, you must be authenticated by means of one of the following methods:
 oauth2 ( Scopes: write )
 </aside>
-
 
 ## Update Mod Team Member
 
@@ -5692,7 +5612,6 @@ Host: api.mod.io
 Accept: application/json
 Authorization: Bearer YourAccessToken
 Content-Type: application/x-www-form-urlencoded
-
 
 ```
 
@@ -5779,7 +5698,6 @@ Update a mod team members details. Successful request will return [Message Objec
      level|integer||Level of permission the user should have:<br><br>__1__ = Moderator (can moderate comments and content attached)<br>__4__ = Creator (moderator access, including uploading builds and edit all settings except supply and team members)<br>__8__ = Administrator (full access, including editing the supply and team)
      position|string||Title of the users position. For example: 'Team Leader', 'Artist'.
 
-
 > Example response
 
 ```json
@@ -5798,7 +5716,6 @@ Status|Meaning|Description|Response Schema
 To perform this operation, you must be authenticated by means of one of the following methods:
 oauth2 ( Scopes: write )
 </aside>
-
 
 ## Delete Mod Team Member
 
@@ -5820,7 +5737,6 @@ Host: api.mod.io
 Accept: application/json
 Authorization: Bearer YourAccessToken
 Content-Type: application/x-www-form-urlencoded
-
 
 ```
 
@@ -5900,7 +5816,6 @@ System.out.println(response.toString());
 
 Delete a user from a mod team. This will revoke their access rights if they are not the original creator of the resource. Successful request will return `204 No Content`.
 
-
 > Example response
 
 ```json
@@ -5916,7 +5831,6 @@ Status|Meaning|Description|Response Schema
 To perform this operation, you must be authenticated by means of one of the following methods:
 oauth2 ( Scopes: write )
 </aside>
-
 
 # Comments
 
@@ -6020,7 +5934,6 @@ Get all comments posted in the mods profile. Successful request will return an a
      karma|integer|Karma received for the comment (can be postive or negative).
      summary|string|Contents of the comment.
 
-
 > Example response
 
 ```json
@@ -6071,7 +5984,6 @@ To perform this operation, you must be authenticated by means of one of the foll
 apiKey, oauth2 ( Scopes: read )
 </aside>
 
-
 ## Delete Mod Comment
 
 > Example request
@@ -6092,7 +6004,6 @@ Host: api.mod.io
 Accept: application/json
 Authorization: Bearer YourAccessToken
 Content-Type: application/x-www-form-urlencoded
-
 
 ```
 
@@ -6172,7 +6083,6 @@ System.out.println(response.toString());
 
 Delete a comment from a mod profile. Successful request will return `204 No Content`.
 
-
 > Example response
 
 ```json
@@ -6188,7 +6098,6 @@ Status|Meaning|Description|Response Schema
 To perform this operation, you must be authenticated by means of one of the following methods:
 oauth2 ( Scopes: write )
 </aside>
-
 
 # Users
 
@@ -6212,7 +6121,6 @@ Host: api.mod.io
 Accept: application/json
 Authorization: Bearer YourAccessToken
 Content-Type: application/x-www-form-urlencoded
-
 
 ```
 
@@ -6299,7 +6207,6 @@ Get the user that is the original _submitter_ of a resource. Successful request 
      resource_type|string|true|Type of resource you are checking the ownership of. __Must__ be one of the following values:<br><br>__games__<br>__mods__<br>__files__
      resource_id|integer|true|Unique id of the resource you are checking the ownership of.
 
-
 > Example response
 
 ```json
@@ -6329,7 +6236,6 @@ Status|Meaning|Description|Response Schema
 To perform this operation, you must be authenticated by means of one of the following methods:
 apiKey, oauth2 ( Scopes: read )
 </aside>
-
 
 ## Get All Users
 
@@ -6429,7 +6335,6 @@ Get all users registered on mod.io. Successful request will return an array of [
      timezone|string|Timezone of the user, format is country/city.
      language|string|2-character representation of language.
 
-
 > Example response
 
 ```json
@@ -6469,7 +6374,6 @@ Status|Meaning|Description|Response Schema
 To perform this operation, you must be authenticated by means of one of the following methods:
 apiKey, oauth2 ( Scopes: read )
 </aside>
-
 
 ## Get User
 
@@ -6560,7 +6464,6 @@ System.out.println(response.toString());
 
 Get a user. Successful request will return a single [User Object](#user-object).
 
-
 > Example response
 
 ```json
@@ -6591,7 +6494,6 @@ To perform this operation, you must be authenticated by means of one of the foll
 apiKey, oauth2 ( Scopes: read )
 </aside>
 
-
 # Reports
 
 ## Submit Report
@@ -6614,7 +6516,6 @@ Host: api.mod.io
 Accept: application/json
 Authorization: Bearer YourAccessToken
 Content-Type: application/x-www-form-urlencoded
-
 
 ```
 
@@ -6702,7 +6603,6 @@ Submit a report for any resource on mod.io. Successful request will return [Mess
      name|string|true|Informative title for your report.
      summary|string|true|Detailed description of your report. Make sure you include all relevant information and links to help moderators investigate and respond appropiately.
 
-
 > Example response
 
 ```json
@@ -6721,7 +6621,6 @@ Status|Meaning|Description|Response Schema
 To perform this operation, you must be authenticated by means of one of the following methods:
 oauth2 ( Scopes: write )
 </aside>
-
 
 # Me
 
@@ -6743,7 +6642,6 @@ Host: api.mod.io
 
 Accept: application/json
 Authorization: Bearer YourAccessToken
-
 
 ```
 
@@ -6820,7 +6718,6 @@ System.out.println(response.toString());
 
 Get the _authenticated user_ details. Successful request will return a single [User Object](#user-object).
 
-
 > Example response
 
 ```json
@@ -6851,7 +6748,6 @@ To perform this operation, you must be authenticated by means of one of the foll
 oauth2 ( Scopes: read )
 </aside>
 
-
 ## Get User Subscriptions
 
 > Example request
@@ -6870,7 +6766,6 @@ Host: api.mod.io
 
 Accept: application/json
 Authorization: Bearer YourAccessToken
-
 
 ```
 
@@ -6966,7 +6861,6 @@ Get all mod's the _authenticated user_ is subscribed to. Successful request will
     popular|string|Sort results by popularity using [_sort filter](#filtering), value should be `popular` for descending or `-popular` for ascending results.
     rating|string|Sort results by weighted rating using [_sort filter](#filtering), value should be `rating` for descending or `-rating` for ascending results.
     subscribers|string|Sort results by most subscribers using [_sort filter](#filtering), value should be `subscribers` for descending or `-subscribers` for ascending results.
-
 
 > Example response
 
@@ -7081,7 +6975,6 @@ To perform this operation, you must be authenticated by means of one of the foll
 oauth2 ( Scopes: read )
 </aside>
 
-
 ## Get User Games
 
 > Example request
@@ -7100,7 +6993,6 @@ Host: api.mod.io
 
 Accept: application/json
 Authorization: Bearer YourAccessToken
-
 
 ```
 
@@ -7176,7 +7068,6 @@ System.out.println(response.toString());
 `GET /me/games`
 
 Get all games the _authenticated user_ added or is a team member of. Successful request will return an array of [Game Objects](#get-games-2).
-
 
 > Example response
 
@@ -7266,7 +7157,6 @@ To perform this operation, you must be authenticated by means of one of the foll
 oauth2 ( Scopes: read )
 </aside>
 
-
 ## Get User Mods
 
 > Example request
@@ -7285,7 +7175,6 @@ Host: api.mod.io
 
 Accept: application/json
 Authorization: Bearer YourAccessToken
-
 
 ```
 
@@ -7361,7 +7250,6 @@ System.out.println(response.toString());
 `GET /me/mods`
 
 Get all mods the _authenticated user_ added or is a team member of. Successful request will return an array of [Mod Objects](#get-all-mods-2).
-
 
 > Example response
 
@@ -7476,7 +7364,6 @@ To perform this operation, you must be authenticated by means of one of the foll
 oauth2 ( Scopes: read )
 </aside>
 
-
 ## Get User Modfiles
 
 > Example request
@@ -7495,7 +7382,6 @@ Host: api.mod.io
 
 Accept: application/json
 Authorization: Bearer YourAccessToken
-
 
 ```
 
@@ -7572,7 +7458,6 @@ System.out.println(response.toString());
 
 Get all modfiles the _authenticated user_ uploaded. Successful request will return an array of [Modfile Objects](#get-all-modfiles-2).
 
-
 > Example response
 
 ```json
@@ -7619,7 +7504,6 @@ To perform this operation, you must be authenticated by means of one of the foll
 oauth2 ( Scopes: read )
 </aside>
 
-
 # Response Schemas 
 ## Message Object
 
@@ -7632,14 +7516,12 @@ oauth2 ( Scopes: read )
 } 
 ```
 
-
 ### Properties
 
 Name|Type|Description
 ---|---|---|---|
 code|integer|[HTTP status code](#response-codes) of response.
 message|string|The server response to your request. Responses will vary depending on the endpoint, but the object structure will persist.
-
 
 
 
@@ -7657,7 +7539,6 @@ message|string|The server response to your request. Responses will vary dependin
 } 
 ```
 
-
 ### Properties
 
 Name|Type|Description
@@ -7666,7 +7547,6 @@ error|object|Contains error data.
 » code|integer|[HTTP code](#response-codes) of the error.
 » message|string|The server response to your request. Responses will vary depending on the endpoint, but the object structure will persist.
 » errors|object|Optional Validation errors object. This field is only supplied if the response is a validation error `422 Unprocessible Entity`. See [errors documentation](#errors) for more information.
-
 
 
 
@@ -7684,7 +7564,6 @@ error|object|Contains error data.
 } 
 ```
 
-
 ### Properties
 
 Name|Type|Description
@@ -7694,7 +7573,6 @@ original|string|URL to the full-sized logo.
 thumb_320x180|string|URL to the small logo thumbnail.
 thumb_640x360|string|URL to the medium logo thumbnail.
 thumb_1280x720|string|URL to the large logo thumbnail.
-
 
 
 
@@ -7712,7 +7590,6 @@ thumb_1280x720|string|URL to the large logo thumbnail.
 } 
 ```
 
-
 ### Properties
 
 Name|Type|Description
@@ -7722,7 +7599,6 @@ original|string|URL to the full-sized icon.
 thumb_64x64|string|URL to the small thumbnail image.
 thumb_128x128|string|URL to the medium thumbnail image.
 thumb_256x256|string|URL to the large thumbnail image.
-
 
 
 
@@ -7737,14 +7613,12 @@ thumb_256x256|string|URL to the large thumbnail image.
 } 
 ```
 
-
 ### Properties
 
 Name|Type|Description
 ---|---|---|---|
 filename|string|Header image filename including extension.
 original|string|URL to the full-sized header image.
-
 
 
 
@@ -7761,7 +7635,6 @@ original|string|URL to the full-sized header image.
 } 
 ```
 
-
 ### Properties
 
 Name|Type|Description
@@ -7770,7 +7643,6 @@ filename|string|Avatar filename including extension.
 original|string|URL to the full-sized avatar.
 thumb_50x50|string|URL to the small thumbnail image.
 thumb_100x100|string|URL to the medium thumbnail image.
-
 
 
 
@@ -7786,7 +7658,6 @@ thumb_100x100|string|URL to the medium thumbnail image.
 } 
 ```
 
-
 ### Properties
 
 Name|Type|Description
@@ -7794,7 +7665,6 @@ Name|Type|Description
 filename|string|Image filename including extension.
 original|string|URL to the full-sized image.
 thumb_320x180|string|URL to the image thumbnail.
-
 
 
 
@@ -7814,7 +7684,6 @@ thumb_320x180|string|URL to the image thumbnail.
 } 
 ```
 
-
 ### Properties
 
 Name|Type|Description
@@ -7824,7 +7693,6 @@ mod_id|integer|Unique id of the parent mod.
 user_id|integer|Unique id of the user who performed the action.
 date_added|integer|Unix timestamp of date the event occurred.
 event_type|string|Type of [event](#get-mod-events-2) was 'MODFILE_CHANGED', 'MOD_AVAILABLE', 'MOD_UNAVAILABLE', 'MOD_EDITED'.
-
 
 
 
@@ -7860,7 +7728,6 @@ event_type|string|Type of [event](#get-mod-events-2) was 'MODFILE_CHANGED', 'MOD
 } 
 ```
 
-
 ### Properties
 
 Name|Type|Description
@@ -7889,7 +7756,6 @@ content|string|Contents of the comment.
 
 
 
-
 ## Mod Dependencies Object  
 
 <a name="schemamod_dependencies_object"></a>
@@ -7901,14 +7767,12 @@ content|string|Contents of the comment.
 } 
 ```
 
-
 ### Properties
 
 Name|Type|Description
 ---|---|---|---|
 mod_id|integer|Unique id of the mod that is the dependency.
 date_added|integer|Unix timestamp of date the dependency was added.
-
 
 
 
@@ -7937,6 +7801,7 @@ date_added|integer|Unix timestamp of date the dependency was added.
     "binary_url": "https://mod.io/mods/file/1/c489a0354111a4d76640d47f0cdcb294",
     "date_expires": 1579316848
   }
+<<<<<<< HEAD
 } 
 ```
 
@@ -7965,6 +7830,34 @@ download|[Download Object   ](#schemadownload_object)|Contains download data.
 
 
 
+=======
+} 
+```
+
+### Properties
+
+Name|Type|Description
+---|---|---|---|
+id|integer|Unique modfile id.
+mod_id|integer|Unique mod id.
+date_added|integer|Unix timestamp of date file was added.
+date_scanned|integer|Unix timestamp of date file was virus scanned.
+virus_status|integer|Current virus scan status of the file. For newly added files that have yet to be scanned this field will change frequently until a scan is complete:<br><br>__0__ = Not scanned<br>__1__ = Scan complete<br>__2__ = In progress<br>__3__ = Too large to scan<br>__4__ = File not found<br>__5__ = Error Scanning
+virus_positive|integer|Was a virus detected:<br><br>__0__ = No threats detected<br>__1__ = Flagged as malicious
+virustotal_hash|string|VirusTotal proprietary hash to view the [scan results](https://www.virustotal.com).
+filesize|integer|Size of the file in bytes.
+filehash|[Filehash Object   ](#schemafilehash_object)|Contains filehash data.
+» md5|string|MD5 hash of the file.
+filename|string|Filename including extension.
+version|string|Release version this file represents.
+changelog|string|Changelog for the file.
+metadata_blob|string|Metadata stored by the game developer for this file.
+download|[Download Object   ](#schemadownload_object)|Contains download data.
+» binary_url|string|URL to download the file from the mod.io CDN.<br><br>__NOTE:__ If the [game](#edit-game) requires mod downloads to be initiated via the API, the `binary_url` returned will contain a verification hash. This hash must be supplied to get the modfile, and will expire after a certain period of time. Saving and reusing the `binary_url` won't work in this situation given it's dynamic nature.
+» date_expires|integer|Unix timestamp of when the `binary_url` will expire.
+
+
+>>>>>>> 16f6eeabe425523e93202fac5c1ecc70002f2b49
 
 ## Filehash Object
 
@@ -7976,13 +7869,31 @@ download|[Download Object   ](#schemadownload_object)|Contains download data.
 } 
 ```
 
-
 ### Properties
 
 Name|Type|Description
 ---|---|---|---|
 md5|string|MD5 hash of the file.
 
+
+
+## Download Object
+
+   <a name="schemadownload_object"></a>
+
+```json
+{
+  "binary_url": "https://mod.io/mods/file/1/c489a0354111a4d76640d47f0cdcb294",
+  "date_expires": 1579316848
+} 
+```
+
+### Properties
+
+Name|Type|Description
+---|---|---|---|
+binary_url|string|URL to download the file from the mod.io CDN.<br><br>__NOTE:__ If the [game](#edit-game) requires mod downloads to be initiated via the API, the `binary_url` returned will contain a verification hash. This hash must be supplied to get the modfile, and will expire after a certain period of time. Saving and reusing the `binary_url` won't work in this situation given it's dynamic nature.
+date_expires|integer|Unix timestamp of when the `binary_url` will expire.
 
 
 
@@ -8100,6 +8011,7 @@ date_expires|integer|Unix timestamp of when the `binary_url` will expire.
       "date_added": 1499841487
     }
   ]
+<<<<<<< HEAD
 } 
 ```
 
@@ -8179,6 +8091,85 @@ tags|[Mod Tag Object  ](#schemamod_tag_object)[]|Contains mod tag data.
 
 
 
+=======
+} 
+```
+
+### Properties
+
+Name|Type|Description
+---|---|---|---|
+id|integer|Unique mod id.
+game_id|integer|Unique game id.
+status|integer|Status of the mod (see [status and visibility](#status-amp-visibility) for details):<br><br>__0__ = Not Accepted<br>__1__ = Accepted<br>__2__ = Archived (potentially out of date or incompatible)<br>__3__ = Deleted
+visible|integer|Visibility of the mod (see [status and visibility](#status-amp-visibility) for details):<br><br>__0__ = Hidden<br>__1__ = Public
+submitted_by|[User Object   ](#schemauser_object)|Contains user data.
+» id|integer|Unique id of the user.
+» name_id|string|Path for the user on mod.io. For example: https://mod.io/members/__username-id-here__ Usually a simplified version of their username.
+» username|string|Username of the user.
+» date_online|integer|Unix timestamp of date the user was last online.
+» avatar|[Avatar Object   ](#schemaavatar_object)|Contains avatar data.
+»» filename|string|Avatar filename including extension.
+»» original|string|URL to the full-sized avatar.
+»» thumb_50x50|string|URL to the small thumbnail image.
+»» thumb_100x100|string|URL to the medium thumbnail image.
+» timezone|string|Timezone of the user, format is country/city.
+» language|string|2-character representation of users language preference.
+» profile_url|string|URL to the user's mod.io profile.
+date_added|integer|Unix timestamp of date mod was registered.
+date_updated|integer|Unix timestamp of date mod was updated.
+date_live|integer|Unix timestamp of date mod was set live.
+logo|[Logo Object   ](#schemalogo_object)|Contains logo data.
+» filename|string|Logo filename including extension.
+» original|string|URL to the full-sized logo.
+» thumb_320x180|string|URL to the small logo thumbnail.
+» thumb_640x360|string|URL to the medium logo thumbnail.
+» thumb_1280x720|string|URL to the large logo thumbnail.
+homepage|string|Official homepage of the mod.
+name|string|Name of the mod.
+name_id|string|Path for the mod on mod.io. For example: https://gamename.mod.io/__mod-name-id-here__
+summary|string|Summary of the mod.
+description|string|Detailed description of the mod which allows HTML.
+metadata_blob|string|Metadata stored by the game developer. Metadata can also be stored as searchable [key value pairs](#metadata), and to individual [mod files](#get-all-modfiles).
+profile_url|string|URL to the mod's mod.io profile.
+modfile|[Modfile Object   ](#schemamodfile_object)|Contains modfile data.
+» id|integer|Unique modfile id.
+» mod_id|integer|Unique mod id.
+» date_added|integer|Unix timestamp of date file was added.
+» date_scanned|integer|Unix timestamp of date file was virus scanned.
+» virus_status|integer|Current virus scan status of the file. For newly added files that have yet to be scanned this field will change frequently until a scan is complete:<br><br>__0__ = Not scanned<br>__1__ = Scan complete<br>__2__ = In progress<br>__3__ = Too large to scan<br>__4__ = File not found<br>__5__ = Error Scanning
+» virus_positive|integer|Was a virus detected:<br><br>__0__ = No threats detected<br>__1__ = Flagged as malicious
+» virustotal_hash|string|VirusTotal proprietary hash to view the [scan results](https://www.virustotal.com).
+» filesize|integer|Size of the file in bytes.
+» filehash|[Filehash Object   ](#schemafilehash_object)|Contains filehash data.
+»» md5|string|MD5 hash of the file.
+» filename|string|Filename including extension.
+» version|string|Release version this file represents.
+» changelog|string|Changelog for the file.
+» metadata_blob|string|Metadata stored by the game developer for this file.
+» download|[Download Object   ](#schemadownload_object)|Contains download data.
+»» binary_url|string|URL to download the file from the mod.io CDN.<br><br>__NOTE:__ If the [game](#edit-game) requires mod downloads to be initiated via the API, the `binary_url` returned will contain a verification hash. This hash must be supplied to get the modfile, and will expire after a certain period of time. Saving and reusing the `binary_url` won't work in this situation given it's dynamic nature.
+»» date_expires|integer|Unix timestamp of when the `binary_url` will expire.
+media|[Mod Media Object  ](#schemamod_media_object)|Contains mod media data.
+» youtube|string[]|Array of YouTube links.
+» sketchfab|string[]|Array of SketchFab links.
+» images|[Image Object   ](#schemaimage_object)[]|Array of image objects (a gallery).
+»» filename|string|Image filename including extension.
+»» original|string|URL to the full-sized image.
+»» thumb_320x180|string|URL to the image thumbnail.
+rating_summary|[Rating Summary Object  ](#schemarating_summary_object)|Contains ratings summary.
+» total_ratings|integer|Number of times this item has been rated.
+» positive_ratings|integer|Number of positive ratings.
+» negative_ratings|integer|Number of negative ratings.
+» percentage_positive|integer|Number of positive ratings, divided by the total ratings to determine it’s percentage score.
+» weighted_aggregate|float|Overall rating of this item calculated using the [Wilson score confidence interval](http://www.evanmiller.org/how-not-to-sort-by-average-rating.html). This column is good to sort on, as it will order items based on number of ratings and will place items with many positive ratings above those with a higher score but fewer ratings.
+» display_text|string|Textual representation of the rating in format:<br><br>- Overwhelmingly Positive<br>- Very Positive<br>- Positive<br>- Mostly Positive<br>- Mixed<br>- Negative<br>- Mostly Negative<br>- Very Negative<br>- Overwhelmingly Negative
+tags|[Mod Tag Object  ](#schemamod_tag_object)[]|Contains mod tag data.
+» name|string|Tag name.
+» date_added|integer|Unix timestamp of date tag was applied.
+
+
+>>>>>>> 16f6eeabe425523e93202fac5c1ecc70002f2b49
 
 ## Mod Media Object  
 
@@ -8202,7 +8193,6 @@ tags|[Mod Tag Object  ](#schemamod_tag_object)[]|Contains mod tag data.
 } 
 ```
 
-
 ### Properties
 
 Name|Type|Description
@@ -8213,7 +8203,6 @@ images|[Image Object   ](#schemaimage_object)[]|Array of image objects (a galler
 » filename|string|Image filename including extension.
 » original|string|URL to the full-sized image.
 » thumb_320x180|string|URL to the image thumbnail.
-
 
 
 
@@ -8228,14 +8217,12 @@ images|[Image Object   ](#schemaimage_object)[]|Array of image objects (a galler
 } 
 ```
 
-
 ### Properties
 
 Name|Type|Description
 ---|---|---|---|
 name|string|Tag name.
 date_added|integer|Unix timestamp of date tag was applied.
-
 
 
 
@@ -8306,6 +8293,7 @@ date_added|integer|Unix timestamp of date tag was applied.
       "hidden": 0
     }
   ]
+<<<<<<< HEAD
 } 
 ```
 
@@ -8368,6 +8356,68 @@ tag_options|[Game Tag Option Object ](#schemagame_tag_option_object)[]|Groups of
 
 
 
+=======
+} 
+```
+
+### Properties
+
+Name|Type|Description
+---|---|---|---|
+id|integer|Unique game id.
+status|integer|Status of the game (see [status and visibility](#status-amp-visibility) for details):<br><br>__0__ = Not Accepted<br>__1__ = Accepted<br>__2__ = Archived (potentially out of date or incompatible)<br>__3__ = Deleted
+submitted_by|[User Object   ](#schemauser_object)|Contains user data.
+» id|integer|Unique id of the user.
+» name_id|string|Path for the user on mod.io. For example: https://mod.io/members/__username-id-here__ Usually a simplified version of their username.
+» username|string|Username of the user.
+» date_online|integer|Unix timestamp of date the user was last online.
+» avatar|[Avatar Object   ](#schemaavatar_object)|Contains avatar data.
+»» filename|string|Avatar filename including extension.
+»» original|string|URL to the full-sized avatar.
+»» thumb_50x50|string|URL to the small thumbnail image.
+»» thumb_100x100|string|URL to the medium thumbnail image.
+» timezone|string|Timezone of the user, format is country/city.
+» language|string|2-character representation of users language preference.
+» profile_url|string|URL to the user's mod.io profile.
+date_added|integer|Unix timestamp of date game was registered.
+date_updated|integer|Unix timestamp of date game was updated.
+date_live|integer|Unix timestamp of date game was set live.
+presentation_option|integer|Presentation style used on the mod.io website:<br><br>__0__ =  Grid View: Displays mods in a grid<br>__1__ = Table View: Displays mods in a table
+submission_option|integer|Submission process modders must follow:<br><br>__0__ = Mod uploads must occur via a tool created by the game developers<br>__1__ = Mod uploads can occur from anywhere, including the website and API
+curation_option|integer|Curation process used to approve mods:<br><br>__0__ = No curation: Mods are immediately available to play<br>__1__ = Paid curation: Mods are immediately available to play unless they choose to receive donations. These mods must be accepted to be listed<br>__2__ = Full curation: All mods must be accepted by someone to be listed
+community_options|integer|Community features enabled on the mod.io website:<br><br>__0__ = All of the options below are disabled<br>__1__ = Discussion board enabled<br>__2__ = Guides and news enabled<br>__?__ = Add the options you want together, to enable multiple features (see [BITWISE fields](#bitwise-and-bitwise-and))
+revenue_options|integer|Revenue capabilities mods can enable:<br><br>__0__ = All of the options below are disabled<br>__1__ = Allow mods to be sold<br>__2__ = Allow mods to receive donations<br>__4__ = Allow mods to be traded<br>__8__ = Allow mods to control supply and scarcity<br>__?__ = Add the options you want together, to enable multiple features (see [BITWISE fields](#bitwise-and-bitwise-and))
+api_access_options|integer|Level of API access allowed by this game:<br><br>__0__ = All of the options below are disabled<br>__1__ = Allow 3rd parties to access this games API endpoints<br>__2__ = Allow mods to be downloaded directly (if disabled all download URLs will contain a frequently changing verification hash to stop unauthorized use)<br>__?__ = Add the options you want together, to enable multiple features (see [BITWISE fields](#bitwise-and-bitwise-and))
+ugc_name|string|Word used to describe user-generated content (mods, items, addons etc).
+icon|[Icon Object   ](#schemaicon_object)|Contains icon data.
+» filename|string|Icon filename including extension.
+» original|string|URL to the full-sized icon.
+» thumb_64x64|string|URL to the small thumbnail image.
+» thumb_128x128|string|URL to the medium thumbnail image.
+» thumb_256x256|string|URL to the large thumbnail image.
+logo|[Logo Object   ](#schemalogo_object)|Contains logo data.
+» filename|string|Logo filename including extension.
+» original|string|URL to the full-sized logo.
+» thumb_320x180|string|URL to the small logo thumbnail.
+» thumb_640x360|string|URL to the medium logo thumbnail.
+» thumb_1280x720|string|URL to the large logo thumbnail.
+header|[Header Object   ](#schemaheader_object)|Contains header data.
+» filename|string|Header image filename including extension.
+» original|string|URL to the full-sized header image.
+homepage|string|Official homepage of the game.
+name|string|Name of the game.
+name_id|string|Subdomain for the game on mod.io.
+summary|string|Summary of the game.
+instructions|string|A guide about creating and uploading mods for this game to mod.io (applicable if submission_option = 0).
+profile_url|string|URL to the game's mod.io page.
+tag_options|[Game Tag Option Object ](#schemagame_tag_option_object)[]|Groups of tags configured by the game developer, that mods can select.
+» name|string|Name of the tag group.
+» type|string|Can multiple tags be selected via 'checkboxes' or should only a single tag be selected via a 'dropdown'.
+» hidden|integer|Groups of tags flagged as 'admin only' should only be used for filtering, and should not be displayed to users.
+» tags|string[]|Array of tags in this group.
+
+
+>>>>>>> 16f6eeabe425523e93202fac5c1ecc70002f2b49
 
 ## Game Tag Option Object 
 
@@ -8384,7 +8434,6 @@ tag_options|[Game Tag Option Object ](#schemagame_tag_option_object)[]|Groups of
 } 
 ```
 
-
 ### Properties
 
 Name|Type|Description
@@ -8393,7 +8442,6 @@ name|string|Name of the tag group.
 type|string|Can multiple tags be selected via 'checkboxes' or should only a single tag be selected via a 'dropdown'.
 hidden|integer|Groups of tags flagged as 'admin only' should only be used for filtering, and should not be displayed to users.
 tags|string[]|Array of tags in this group.
-
 
 
 
@@ -8408,14 +8456,12 @@ tags|string[]|Array of tags in this group.
 } 
 ```
 
-
 ### Properties
 
 Name|Type|Description
 ---|---|---|---|
 metakey|string|The key of the key-value pair.
 metavalue|string|The value of the key-value pair.
-
 
 
 
@@ -8434,7 +8480,6 @@ metavalue|string|The value of the key-value pair.
 } 
 ```
 
-
 ### Properties
 
 Name|Type|Description
@@ -8445,7 +8490,6 @@ negative_ratings|integer|Number of negative ratings.
 percentage_positive|integer|Number of positive ratings, divided by the total ratings to determine it’s percentage score.
 weighted_aggregate|float|Overall rating of this item calculated using the [Wilson score confidence interval](http://www.evanmiller.org/how-not-to-sort-by-average-rating.html). This column is good to sort on, as it will order items based on number of ratings and will place items with many positive ratings above those with a higher score but fewer ratings.
 display_text|string|Textual representation of the rating in format:<br><br>- Overwhelmingly Positive<br>- Very Positive<br>- Positive<br>- Mostly Positive<br>- Mixed<br>- Negative<br>- Mostly Negative<br>- Very Negative<br>- Overwhelmingly Negative
-
 
 
 
@@ -8477,7 +8521,6 @@ display_text|string|Textual representation of the rating in format:<br><br>- Ove
 } 
 ```
 
-
 ### Properties
 
 Name|Type|Description
@@ -8499,7 +8542,6 @@ user|[User Object   ](#schemauser_object)|Contains user data.
 level|integer|Level of permission the user has:<br><br>__0__ = Guest<br>__1__ = Member<br>__2__ = Contributor<br>__4__ = Manager<br>__8__ = Leader
 date_added|integer|Unix timestamp of the date the user was added to the team.
 position|string|Custom title given to the user in this team.
-
 
 
 
@@ -8525,7 +8567,6 @@ position|string|Custom title given to the user in this team.
 } 
 ```
 
-
 ### Properties
 
 Name|Type|Description
@@ -8542,8 +8583,6 @@ avatar|[Avatar Object   ](#schemaavatar_object)|Contains avatar data.
 timezone|string|Timezone of the user, format is country/city.
 language|string|2-character representation of users language preference.
 profile_url|string|URL to the user's mod.io profile.
-
-
 
 
 
@@ -8591,7 +8630,6 @@ profile_url|string|URL to the user's mod.io profile.
 } 
 ```
 
-
 ### Properties
 
 Name|Type|Description
@@ -8624,7 +8662,6 @@ result_offset|integer|Number of results skipped over.
 
 
 
-
 ## Get All Mod Dependencies 
 
 <a name="schemaget_all_mod_dependencies"></a>
@@ -8646,7 +8683,6 @@ result_offset|integer|Number of results skipped over.
 } 
 ```
 
-
 ### Properties
 
 Name|Type|Description
@@ -8657,7 +8693,6 @@ data|[Mod Dependencies Object  ](#schemamod_dependencies_object)[]|Array contain
 result_count|integer|Number of results returned in the data array.
 result_limit|integer|Maximum number of results returned.
 result_offset|integer|Number of results skipped over.
-
 
 
 
@@ -8696,6 +8731,7 @@ result_offset|integer|Number of results skipped over.
   "result_count": 100,
   "result_limit": 100,
   "result_offset": 0
+<<<<<<< HEAD
 } 
 ```
 
@@ -8728,6 +8764,38 @@ result_offset|integer|Number of results skipped over.
 
 
 
+=======
+} 
+```
+
+### Properties
+
+Name|Type|Description
+---|---|---|---|
+data|[Modfile Object   ](#schemamodfile_object)[]|Array containing modfile objects.
+» id|integer|Unique modfile id.
+» mod_id|integer|Unique mod id.
+» date_added|integer|Unix timestamp of date file was added.
+» date_scanned|integer|Unix timestamp of date file was virus scanned.
+» virus_status|integer|Current virus scan status of the file. For newly added files that have yet to be scanned this field will change frequently until a scan is complete:<br><br>__0__ = Not scanned<br>__1__ = Scan complete<br>__2__ = In progress<br>__3__ = Too large to scan<br>__4__ = File not found<br>__5__ = Error Scanning
+» virus_positive|integer|Was a virus detected:<br><br>__0__ = No threats detected<br>__1__ = Flagged as malicious
+» virustotal_hash|string|VirusTotal proprietary hash to view the [scan results](https://www.virustotal.com).
+» filesize|integer|Size of the file in bytes.
+» filehash|[Filehash Object   ](#schemafilehash_object)|Contains filehash data.
+»» md5|string|MD5 hash of the file.
+» filename|string|Filename including extension.
+» version|string|Release version this file represents.
+» changelog|string|Changelog for the file.
+» metadata_blob|string|Metadata stored by the game developer for this file.
+» download|[Download Object   ](#schemadownload_object)|Contains download data.
+»» binary_url|string|URL to download the file from the mod.io CDN.<br><br>__NOTE:__ If the [game](#edit-game) requires mod downloads to be initiated via the API, the `binary_url` returned will contain a verification hash. This hash must be supplied to get the modfile, and will expire after a certain period of time. Saving and reusing the `binary_url` won't work in this situation given it's dynamic nature.
+»» date_expires|integer|Unix timestamp of when the `binary_url` will expire.
+result_count|integer|Number of results returned in the data array.
+result_limit|integer|Maximum number of results returned.
+result_offset|integer|Number of results skipped over.
+
+
+>>>>>>> 16f6eeabe425523e93202fac5c1ecc70002f2b49
 
 ## Get All Games  
 
@@ -8806,6 +8874,7 @@ result_offset|integer|Number of results skipped over.
   "result_count": 100,
   "result_limit": 100,
   "result_offset": 0
+<<<<<<< HEAD
 } 
 ```
 
@@ -8872,6 +8941,72 @@ result_offset|integer|Number of results skipped over.
 
 
 
+=======
+} 
+```
+
+### Properties
+
+Name|Type|Description
+---|---|---|---|
+data|[Game Object   ](#schemagame_object)[]|Array containing game objects.
+» id|integer|Unique game id.
+» status|integer|Status of the game (see [status and visibility](#status-amp-visibility) for details):<br><br>__0__ = Not Accepted<br>__1__ = Accepted<br>__2__ = Archived (potentially out of date or incompatible)<br>__3__ = Deleted
+» submitted_by|[User Object   ](#schemauser_object)|Contains user data.
+»» id|integer|Unique id of the user.
+»» name_id|string|Path for the user on mod.io. For example: https://mod.io/members/__username-id-here__ Usually a simplified version of their username.
+»» username|string|Username of the user.
+»» date_online|integer|Unix timestamp of date the user was last online.
+»» avatar|[Avatar Object   ](#schemaavatar_object)|Contains avatar data.
+»»» filename|string|Avatar filename including extension.
+»»» original|string|URL to the full-sized avatar.
+»»» thumb_50x50|string|URL to the small thumbnail image.
+»»» thumb_100x100|string|URL to the medium thumbnail image.
+»» timezone|string|Timezone of the user, format is country/city.
+»» language|string|2-character representation of users language preference.
+»» profile_url|string|URL to the user's mod.io profile.
+» date_added|integer|Unix timestamp of date game was registered.
+» date_updated|integer|Unix timestamp of date game was updated.
+» date_live|integer|Unix timestamp of date game was set live.
+» presentation_option|integer|Presentation style used on the mod.io website:<br><br>__0__ =  Grid View: Displays mods in a grid<br>__1__ = Table View: Displays mods in a table
+» submission_option|integer|Submission process modders must follow:<br><br>__0__ = Mod uploads must occur via a tool created by the game developers<br>__1__ = Mod uploads can occur from anywhere, including the website and API
+» curation_option|integer|Curation process used to approve mods:<br><br>__0__ = No curation: Mods are immediately available to play<br>__1__ = Paid curation: Mods are immediately available to play unless they choose to receive donations. These mods must be accepted to be listed<br>__2__ = Full curation: All mods must be accepted by someone to be listed
+» community_options|integer|Community features enabled on the mod.io website:<br><br>__0__ = All of the options below are disabled<br>__1__ = Discussion board enabled<br>__2__ = Guides and news enabled<br>__?__ = Add the options you want together, to enable multiple features (see [BITWISE fields](#bitwise-and-bitwise-and))
+» revenue_options|integer|Revenue capabilities mods can enable:<br><br>__0__ = All of the options below are disabled<br>__1__ = Allow mods to be sold<br>__2__ = Allow mods to receive donations<br>__4__ = Allow mods to be traded<br>__8__ = Allow mods to control supply and scarcity<br>__?__ = Add the options you want together, to enable multiple features (see [BITWISE fields](#bitwise-and-bitwise-and))
+» api_access_options|integer|Level of API access allowed by this game:<br><br>__0__ = All of the options below are disabled<br>__1__ = Allow 3rd parties to access this games API endpoints<br>__2__ = Allow mods to be downloaded directly (if disabled all download URLs will contain a frequently changing verification hash to stop unauthorized use)<br>__?__ = Add the options you want together, to enable multiple features (see [BITWISE fields](#bitwise-and-bitwise-and))
+» ugc_name|string|Word used to describe user-generated content (mods, items, addons etc).
+» icon|[Icon Object   ](#schemaicon_object)|Contains icon data.
+»» filename|string|Icon filename including extension.
+»» original|string|URL to the full-sized icon.
+»» thumb_64x64|string|URL to the small thumbnail image.
+»» thumb_128x128|string|URL to the medium thumbnail image.
+»» thumb_256x256|string|URL to the large thumbnail image.
+» logo|[Logo Object   ](#schemalogo_object)|Contains logo data.
+»» filename|string|Logo filename including extension.
+»» original|string|URL to the full-sized logo.
+»» thumb_320x180|string|URL to the small logo thumbnail.
+»» thumb_640x360|string|URL to the medium logo thumbnail.
+»» thumb_1280x720|string|URL to the large logo thumbnail.
+» header|[Header Object   ](#schemaheader_object)|Contains header data.
+»» filename|string|Header image filename including extension.
+»» original|string|URL to the full-sized header image.
+» homepage|string|Official homepage of the game.
+» name|string|Name of the game.
+» name_id|string|Subdomain for the game on mod.io.
+» summary|string|Summary of the game.
+» instructions|string|A guide about creating and uploading mods for this game to mod.io (applicable if submission_option = 0).
+» profile_url|string|URL to the game's mod.io page.
+» tag_options|[Game Tag Option Object ](#schemagame_tag_option_object)[]|Groups of tags configured by the game developer, that mods can select.
+»» name|string|Name of the tag group.
+»» type|string|Can multiple tags be selected via 'checkboxes' or should only a single tag be selected via a 'dropdown'.
+»» hidden|integer|Groups of tags flagged as 'admin only' should only be used for filtering, and should not be displayed to users.
+»» tags|string[]|Array of tags in this group.
+result_count|integer|Number of results returned in the data array.
+result_limit|integer|Maximum number of results returned.
+result_offset|integer|Number of results skipped over.
+
+
+>>>>>>> 16f6eeabe425523e93202fac5c1ecc70002f2b49
 
 ## Get All Mod KVP Metadata
 
@@ -8894,7 +9029,6 @@ result_offset|integer|Number of results skipped over.
 } 
 ```
 
-
 ### Properties
 
 Name|Type|Description
@@ -8905,7 +9039,6 @@ data|[Metadata KVP Object  ](#schemametadata_kvp_object)[]|Array containing meta
 result_count|integer|Number of results returned in the data array.
 result_limit|integer|Maximum number of results returned.
 result_offset|integer|Number of results skipped over.
-
 
 
 
@@ -9011,6 +9144,7 @@ result_offset|integer|Number of results skipped over.
   "result_count": 100,
   "result_limit": 100,
   "result_offset": 0
+<<<<<<< HEAD
 } 
 ```
 
@@ -9094,6 +9228,89 @@ result_offset|integer|Number of results skipped over.
 
 
 
+=======
+} 
+```
+
+### Properties
+
+Name|Type|Description
+---|---|---|---|
+data|[Mod Object   ](#schemamod_object)[]|Array containing mod objects.
+» id|integer|Unique mod id.
+» game_id|integer|Unique game id.
+» status|integer|Status of the mod (see [status and visibility](#status-amp-visibility) for details):<br><br>__0__ = Not Accepted<br>__1__ = Accepted<br>__2__ = Archived (potentially out of date or incompatible)<br>__3__ = Deleted
+» visible|integer|Visibility of the mod (see [status and visibility](#status-amp-visibility) for details):<br><br>__0__ = Hidden<br>__1__ = Public
+» submitted_by|[User Object   ](#schemauser_object)|Contains user data.
+»» id|integer|Unique id of the user.
+»» name_id|string|Path for the user on mod.io. For example: https://mod.io/members/__username-id-here__ Usually a simplified version of their username.
+»» username|string|Username of the user.
+»» date_online|integer|Unix timestamp of date the user was last online.
+»» avatar|[Avatar Object   ](#schemaavatar_object)|Contains avatar data.
+»»» filename|string|Avatar filename including extension.
+»»» original|string|URL to the full-sized avatar.
+»»» thumb_50x50|string|URL to the small thumbnail image.
+»»» thumb_100x100|string|URL to the medium thumbnail image.
+»» timezone|string|Timezone of the user, format is country/city.
+»» language|string|2-character representation of users language preference.
+»» profile_url|string|URL to the user's mod.io profile.
+» date_added|integer|Unix timestamp of date mod was registered.
+» date_updated|integer|Unix timestamp of date mod was updated.
+» date_live|integer|Unix timestamp of date mod was set live.
+» logo|[Logo Object   ](#schemalogo_object)|Contains logo data.
+»» filename|string|Logo filename including extension.
+»» original|string|URL to the full-sized logo.
+»» thumb_320x180|string|URL to the small logo thumbnail.
+»» thumb_640x360|string|URL to the medium logo thumbnail.
+»» thumb_1280x720|string|URL to the large logo thumbnail.
+» homepage|string|Official homepage of the mod.
+» name|string|Name of the mod.
+» name_id|string|Path for the mod on mod.io. For example: https://gamename.mod.io/__mod-name-id-here__
+» summary|string|Summary of the mod.
+» description|string|Detailed description of the mod which allows HTML.
+» metadata_blob|string|Metadata stored by the game developer. Metadata can also be stored as searchable [key value pairs](#metadata), and to individual [mod files](#get-all-modfiles).
+» profile_url|string|URL to the mod's mod.io profile.
+» modfile|[Modfile Object   ](#schemamodfile_object)|Contains modfile data.
+»» id|integer|Unique modfile id.
+»» mod_id|integer|Unique mod id.
+»» date_added|integer|Unix timestamp of date file was added.
+»» date_scanned|integer|Unix timestamp of date file was virus scanned.
+»» virus_status|integer|Current virus scan status of the file. For newly added files that have yet to be scanned this field will change frequently until a scan is complete:<br><br>__0__ = Not scanned<br>__1__ = Scan complete<br>__2__ = In progress<br>__3__ = Too large to scan<br>__4__ = File not found<br>__5__ = Error Scanning
+»» virus_positive|integer|Was a virus detected:<br><br>__0__ = No threats detected<br>__1__ = Flagged as malicious
+»» virustotal_hash|string|VirusTotal proprietary hash to view the [scan results](https://www.virustotal.com).
+»» filesize|integer|Size of the file in bytes.
+»» filehash|[Filehash Object   ](#schemafilehash_object)|Contains filehash data.
+»»» md5|string|MD5 hash of the file.
+»» filename|string|Filename including extension.
+»» version|string|Release version this file represents.
+»» changelog|string|Changelog for the file.
+»» metadata_blob|string|Metadata stored by the game developer for this file.
+»» download|[Download Object   ](#schemadownload_object)|Contains download data.
+»»» binary_url|string|URL to download the file from the mod.io CDN.<br><br>__NOTE:__ If the [game](#edit-game) requires mod downloads to be initiated via the API, the `binary_url` returned will contain a verification hash. This hash must be supplied to get the modfile, and will expire after a certain period of time. Saving and reusing the `binary_url` won't work in this situation given it's dynamic nature.
+»»» date_expires|integer|Unix timestamp of when the `binary_url` will expire.
+» media|[Mod Media Object  ](#schemamod_media_object)|Contains mod media data.
+»» youtube|string[]|Array of YouTube links.
+»» sketchfab|string[]|Array of SketchFab links.
+»» images|[Image Object   ](#schemaimage_object)[]|Array of image objects (a gallery).
+»»» filename|string|Image filename including extension.
+»»» original|string|URL to the full-sized image.
+»»» thumb_320x180|string|URL to the image thumbnail.
+» rating_summary|[Rating Summary Object  ](#schemarating_summary_object)|Contains ratings summary.
+»» total_ratings|integer|Number of times this item has been rated.
+»» positive_ratings|integer|Number of positive ratings.
+»» negative_ratings|integer|Number of negative ratings.
+»» percentage_positive|integer|Number of positive ratings, divided by the total ratings to determine it’s percentage score.
+»» weighted_aggregate|float|Overall rating of this item calculated using the [Wilson score confidence interval](http://www.evanmiller.org/how-not-to-sort-by-average-rating.html). This column is good to sort on, as it will order items based on number of ratings and will place items with many positive ratings above those with a higher score but fewer ratings.
+»» display_text|string|Textual representation of the rating in format:<br><br>- Overwhelmingly Positive<br>- Very Positive<br>- Positive<br>- Mostly Positive<br>- Mixed<br>- Negative<br>- Mostly Negative<br>- Very Negative<br>- Overwhelmingly Negative
+» tags|[Mod Tag Object  ](#schemamod_tag_object)[]|Contains mod tag data.
+»» name|string|Tag name.
+»» date_added|integer|Unix timestamp of date tag was applied.
+result_count|integer|Number of results returned in the data array.
+result_limit|integer|Maximum number of results returned.
+result_offset|integer|Number of results skipped over.
+
+
+>>>>>>> 16f6eeabe425523e93202fac5c1ecc70002f2b49
 
 ## Get Mod Events  
 
@@ -9119,7 +9336,6 @@ result_offset|integer|Number of results skipped over.
 } 
 ```
 
-
 ### Properties
 
 Name|Type|Description
@@ -9133,7 +9349,6 @@ data|[Mod Event Object  ](#schemamod_event_object)[]|Array containing mod event 
 result_count|integer|Number of results returned in the data array.
 result_limit|integer|Maximum number of results returned.
 result_offset|integer|Number of results skipped over.
-
 
 
 
@@ -9162,7 +9377,6 @@ result_offset|integer|Number of results skipped over.
 } 
 ```
 
-
 ### Properties
 
 Name|Type|Description
@@ -9175,7 +9389,6 @@ data|[Game Tag Option Object ](#schemagame_tag_option_object)[]|Array containing
 result_count|integer|Number of results returned in the data array.
 result_limit|integer|Maximum number of results returned.
 result_offset|integer|Number of results skipped over.
-
 
 
 
@@ -9200,7 +9413,6 @@ result_offset|integer|Number of results skipped over.
 } 
 ```
 
-
 ### Properties
 
 Name|Type|Description
@@ -9211,7 +9423,6 @@ data|[Mod Tag Object  ](#schemamod_tag_object)[]|Array containing mod tag object
 result_count|integer|Number of results returned in the data array.
 result_limit|integer|Maximum number of results returned.
 result_offset|integer|Number of results skipped over.
-
 
 
 
@@ -9253,7 +9464,6 @@ result_offset|integer|Number of results skipped over.
 } 
 ```
 
-
 ### Properties
 
 Name|Type|Description
@@ -9279,7 +9489,6 @@ data|[Team Member Object  ](#schemateam_member_object)[]|Array containing team m
 result_count|integer|Number of results returned in the data array.
 result_limit|integer|Maximum number of results returned.
 result_offset|integer|Number of results skipped over.
-
 
 
 
@@ -9315,7 +9524,6 @@ result_offset|integer|Number of results skipped over.
 } 
 ```
 
-
 ### Properties
 
 Name|Type|Description
@@ -9337,5 +9545,3 @@ result_count|integer|Number of results returned in the data array.
 result_limit|integer|Maximum number of results returned.
 result_offset|integer|Number of results skipped over.
 
-
-
