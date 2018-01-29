@@ -5646,7 +5646,7 @@ Add a user to a mod team. Successful request will return [Message Object](#messa
 
      Parameter|Type|Required|Description
      ---|---|---|---|
-     email|integer|true|Email of the mod.io user you want to add to your team.
+     email|string|true|Email of the mod.io user you want to add to your team.
      level|integer|true|Level of permission the user will get:<br><br>__1__ = Moderator (can moderate comments and content attached)<br>__4__ = Creator (moderator access, including uploading builds and edit all settings except supply and team members)<br>__8__ = Administrator (full access, including editing the supply and team)
      position|string||Title of the users position. For example: 'Team Leader', 'Artist'.
 
