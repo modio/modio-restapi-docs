@@ -1839,6 +1839,7 @@ Accept: application/json
 Authorization: Bearer YourAccessToken
 Content-Type: application/x-www-form-urlencoded
 
+
 </code></pre><pre class="highlight javascript tab-javascript"><code><span class="kd">var</span> <span class="nx">headers</span> <span class="o">=</span> <span class="p">{</span>
   <span class="s1">'Authorization'</span><span class="p">:</span><span class="s1">'Bearer YourAccessToken'</span><span class="p">,</span>
   <span class="s1">'Content-Type'</span><span class="p">:</span><span class="s1">'application/x-www-form-urlencoded'</span><span class="p">,</span>
@@ -2615,6 +2616,7 @@ Accept: application/json
 Authorization: Bearer YourAccessToken
 Content-Type: multipart/form-data
 
+
 </code></pre><pre class="highlight javascript tab-javascript"><code><span class="kd">var</span> <span class="nx">headers</span> <span class="o">=</span> <span class="p">{</span>
   <span class="s1">'Authorization'</span><span class="p">:</span><span class="s1">'Bearer YourAccessToken'</span><span class="p">,</span>
   <span class="s1">'Content-Type'</span><span class="p">:</span><span class="s1">'multipart/form-data'</span><span class="p">,</span>
@@ -2910,6 +2912,7 @@ Accept: application/json
 Authorization: Bearer YourAccessToken
 Content-Type: application/x-www-form-urlencoded
 
+
 </code></pre><pre class="highlight javascript tab-javascript"><code><span class="kd">var</span> <span class="nx">headers</span> <span class="o">=</span> <span class="p">{</span>
   <span class="s1">'Authorization'</span><span class="p">:</span><span class="s1">'Bearer YourAccessToken'</span><span class="p">,</span>
   <span class="s1">'Content-Type'</span><span class="p">:</span><span class="s1">'application/x-www-form-urlencoded'</span><span class="p">,</span>
@@ -3033,12 +3036,6 @@ Content-Type: application/x-www-form-urlencoded
 <td>integer</td>
 <td></td>
 <td>Artificially limit the amount of times the mod can be subscribed too.</td>
-</tr>
-<tr>
-<td>modfile</td>
-<td>integer</td>
-<td></td>
-<td>Unique id of the <a href="#modfile-object">Modfile Object</a> to be labelled as the current release.<br><br><strong>NOTE:</strong> If the <code>modfile</code> parameter is successfully changed, a <a href="#get-all-mod-events"><strong>MODFILE_CHANGED</strong> event</a> will be fired, so game clients know there is an update available for this mod.</td>
 </tr>
 <tr>
 <td>metadata_blob</td>
@@ -3182,6 +3179,7 @@ curl -X DELETE https://api.mod.io/v1/games/<span class="o">{</span>game-id<span 
 Accept: application/json
 Authorization: Bearer YourAccessToken
 Content-Type: application/x-www-form-urlencoded
+
 
 </code></pre><pre class="highlight javascript tab-javascript"><code><span class="kd">var</span> <span class="nx">headers</span> <span class="o">=</span> <span class="p">{</span>
   <span class="s1">'Authorization'</span><span class="p">:</span><span class="s1">'Bearer YourAccessToken'</span><span class="p">,</span>
@@ -3624,6 +3622,7 @@ Accept: application/json
 Authorization: Bearer YourAccessToken
 Content-Type: multipart/form-data
 
+
 </code></pre><pre class="highlight javascript tab-javascript"><code><span class="kd">var</span> <span class="nx">headers</span> <span class="o">=</span> <span class="p">{</span>
   <span class="s1">'Authorization'</span><span class="p">:</span><span class="s1">'Bearer YourAccessToken'</span><span class="p">,</span>
   <span class="s1">'Content-Type'</span><span class="p">:</span><span class="s1">'multipart/form-data'</span><span class="p">,</span>
@@ -3828,6 +3827,7 @@ Accept: application/json
 Authorization: Bearer YourAccessToken
 Content-Type: application/x-www-form-urlencoded
 
+
 </code></pre><pre class="highlight javascript tab-javascript"><code><span class="kd">var</span> <span class="nx">headers</span> <span class="o">=</span> <span class="p">{</span>
   <span class="s1">'Authorization'</span><span class="p">:</span><span class="s1">'Bearer YourAccessToken'</span><span class="p">,</span>
   <span class="s1">'Content-Type'</span><span class="p">:</span><span class="s1">'application/x-www-form-urlencoded'</span><span class="p">,</span>
@@ -3999,6 +3999,7 @@ Accept: application/json
 Authorization: Bearer YourAccessToken
 Content-Type: multipart/form-data
 
+
 </code></pre><pre class="highlight javascript tab-javascript"><code><span class="kd">var</span> <span class="nx">headers</span> <span class="o">=</span> <span class="p">{</span>
   <span class="s1">'Authorization'</span><span class="p">:</span><span class="s1">'Bearer YourAccessToken'</span><span class="p">,</span>
   <span class="s1">'Content-Type'</span><span class="p">:</span><span class="s1">'multipart/form-data'</span><span class="p">,</span>
@@ -4147,6 +4148,7 @@ curl -X POST https://api.mod.io/v1/games/<span class="o">{</span>game-id<span cl
 Accept: application/json
 Authorization: Bearer YourAccessToken
 Content-Type: multipart/form-data
+
 
 </code></pre><pre class="highlight javascript tab-javascript"><code><span class="kd">var</span> <span class="nx">headers</span> <span class="o">=</span> <span class="p">{</span>
   <span class="s1">'Authorization'</span><span class="p">:</span><span class="s1">'Bearer YourAccessToken'</span><span class="p">,</span>
@@ -4324,6 +4326,7 @@ Accept: application/json
 Authorization: Bearer YourAccessToken
 Content-Type: application/x-www-form-urlencoded
 
+
 </code></pre><pre class="highlight javascript tab-javascript"><code><span class="kd">var</span> <span class="nx">headers</span> <span class="o">=</span> <span class="p">{</span>
   <span class="s1">'Authorization'</span><span class="p">:</span><span class="s1">'Bearer YourAccessToken'</span><span class="p">,</span>
   <span class="s1">'Content-Type'</span><span class="p">:</span><span class="s1">'application/x-www-form-urlencoded'</span><span class="p">,</span>
@@ -4469,6 +4472,7 @@ curl -X POST https://api.mod.io/v1/games/<span class="o">{</span>game-id<span cl
 Accept: application/json
 Authorization: Bearer YourAccessToken
 Content-Type: application/x-www-form-urlencoded
+
 
 </code></pre><pre class="highlight javascript tab-javascript"><code><span class="kd">var</span> <span class="nx">headers</span> <span class="o">=</span> <span class="p">{</span>
   <span class="s1">'Authorization'</span><span class="p">:</span><span class="s1">'Bearer YourAccessToken'</span><span class="p">,</span>
@@ -4669,6 +4673,7 @@ curl -X DELETE https://api.mod.io/v1/games/<span class="o">{</span>game-id<span 
 Accept: application/json
 Authorization: Bearer YourAccessToken
 Content-Type: application/x-www-form-urlencoded
+
 
 </code></pre><pre class="highlight javascript tab-javascript"><code><span class="kd">var</span> <span class="nx">headers</span> <span class="o">=</span> <span class="p">{</span>
   <span class="s1">'Authorization'</span><span class="p">:</span><span class="s1">'Bearer YourAccessToken'</span><span class="p">,</span>
@@ -5227,6 +5232,7 @@ Accept: application/json
 Authorization: Bearer YourAccessToken
 Content-Type: application/x-www-form-urlencoded
 
+
 </code></pre><pre class="highlight javascript tab-javascript"><code><span class="kd">var</span> <span class="nx">headers</span> <span class="o">=</span> <span class="p">{</span>
   <span class="s1">'Authorization'</span><span class="p">:</span><span class="s1">'Bearer YourAccessToken'</span><span class="p">,</span>
   <span class="s1">'Content-Type'</span><span class="p">:</span><span class="s1">'application/x-www-form-urlencoded'</span><span class="p">,</span>
@@ -5383,6 +5389,7 @@ curl -X DELETE https://api.mod.io/v1/games/<span class="o">{</span>game-id<span 
 Accept: application/json
 Authorization: Bearer YourAccessToken
 Content-Type: application/x-www-form-urlencoded
+
 
 </code></pre><pre class="highlight javascript tab-javascript"><code><span class="kd">var</span> <span class="nx">headers</span> <span class="o">=</span> <span class="p">{</span>
   <span class="s1">'Authorization'</span><span class="p">:</span><span class="s1">'Bearer YourAccessToken'</span><span class="p">,</span>
@@ -5662,6 +5669,7 @@ Accept: application/json
 Authorization: Bearer YourAccessToken
 Content-Type: application/x-www-form-urlencoded
 
+
 </code></pre><pre class="highlight javascript tab-javascript"><code><span class="kd">var</span> <span class="nx">headers</span> <span class="o">=</span> <span class="p">{</span>
   <span class="s1">'Authorization'</span><span class="p">:</span><span class="s1">'Bearer YourAccessToken'</span><span class="p">,</span>
   <span class="s1">'Content-Type'</span><span class="p">:</span><span class="s1">'application/x-www-form-urlencoded'</span><span class="p">,</span>
@@ -5797,6 +5805,7 @@ Accept: application/json
 Authorization: Bearer YourAccessToken
 Content-Type: application/x-www-form-urlencoded
 
+
 </code></pre><pre class="highlight javascript tab-javascript"><code><span class="kd">var</span> <span class="nx">headers</span> <span class="o">=</span> <span class="p">{</span>
   <span class="s1">'Authorization'</span><span class="p">:</span><span class="s1">'Bearer YourAccessToken'</span><span class="p">,</span>
   <span class="s1">'Content-Type'</span><span class="p">:</span><span class="s1">'application/x-www-form-urlencoded'</span><span class="p">,</span>
@@ -5928,6 +5937,7 @@ curl -X POST https://api.mod.io/v1/games/<span class="o">{</span>game-id<span cl
 Accept: application/json
 Authorization: Bearer YourAccessToken
 Content-Type: application/x-www-form-urlencoded
+
 
 </code></pre><pre class="highlight javascript tab-javascript"><code><span class="kd">var</span> <span class="nx">headers</span> <span class="o">=</span> <span class="p">{</span>
   <span class="s1">'Authorization'</span><span class="p">:</span><span class="s1">'Bearer YourAccessToken'</span><span class="p">,</span>
@@ -6182,6 +6192,7 @@ Accept: application/json
 Authorization: Bearer YourAccessToken
 Content-Type: application/x-www-form-urlencoded
 
+
 </code></pre><pre class="highlight javascript tab-javascript"><code><span class="kd">var</span> <span class="nx">headers</span> <span class="o">=</span> <span class="p">{</span>
   <span class="s1">'Authorization'</span><span class="p">:</span><span class="s1">'Bearer YourAccessToken'</span><span class="p">,</span>
   <span class="s1">'Content-Type'</span><span class="p">:</span><span class="s1">'application/x-www-form-urlencoded'</span><span class="p">,</span>
@@ -6316,6 +6327,7 @@ curl -X DELETE https://api.mod.io/v1/games/<span class="o">{</span>game-id<span 
 Accept: application/json
 Authorization: Bearer YourAccessToken
 Content-Type: application/x-www-form-urlencoded
+
 
 </code></pre><pre class="highlight javascript tab-javascript"><code><span class="kd">var</span> <span class="nx">headers</span> <span class="o">=</span> <span class="p">{</span>
   <span class="s1">'Authorization'</span><span class="p">:</span><span class="s1">'Bearer YourAccessToken'</span><span class="p">,</span>
@@ -6567,6 +6579,7 @@ Accept: application/json
 Authorization: Bearer YourAccessToken
 Content-Type: application/x-www-form-urlencoded
 
+
 </code></pre><pre class="highlight javascript tab-javascript"><code><span class="kd">var</span> <span class="nx">headers</span> <span class="o">=</span> <span class="p">{</span>
   <span class="s1">'Authorization'</span><span class="p">:</span><span class="s1">'Bearer YourAccessToken'</span><span class="p">,</span>
   <span class="s1">'Content-Type'</span><span class="p">:</span><span class="s1">'application/x-www-form-urlencoded'</span><span class="p">,</span>
@@ -6703,6 +6716,7 @@ curl -X DELETE https://api.mod.io/v1/games/<span class="o">{</span>game-id<span 
 Accept: application/json
 Authorization: Bearer YourAccessToken
 Content-Type: application/x-www-form-urlencoded
+
 
 </code></pre><pre class="highlight javascript tab-javascript"><code><span class="kd">var</span> <span class="nx">headers</span> <span class="o">=</span> <span class="p">{</span>
   <span class="s1">'Authorization'</span><span class="p">:</span><span class="s1">'Bearer YourAccessToken'</span><span class="p">,</span>
@@ -7018,6 +7032,7 @@ Accept: application/json
 Authorization: Bearer YourAccessToken
 Content-Type: application/x-www-form-urlencoded
 
+
 </code></pre><pre class="highlight javascript tab-javascript"><code><span class="kd">var</span> <span class="nx">headers</span> <span class="o">=</span> <span class="p">{</span>
   <span class="s1">'Authorization'</span><span class="p">:</span><span class="s1">'Bearer YourAccessToken'</span><span class="p">,</span>
   <span class="s1">'Content-Type'</span><span class="p">:</span><span class="s1">'application/x-www-form-urlencoded'</span><span class="p">,</span>
@@ -7167,6 +7182,7 @@ Accept: application/json
 Authorization: Bearer YourAccessToken
 Content-Type: application/x-www-form-urlencoded
 
+
 </code></pre><pre class="highlight javascript tab-javascript"><code><span class="kd">var</span> <span class="nx">headers</span> <span class="o">=</span> <span class="p">{</span>
   <span class="s1">'Authorization'</span><span class="p">:</span><span class="s1">'Bearer YourAccessToken'</span><span class="p">,</span>
   <span class="s1">'Content-Type'</span><span class="p">:</span><span class="s1">'application/x-www-form-urlencoded'</span><span class="p">,</span>
@@ -7309,6 +7325,7 @@ curl -X DELETE https://api.mod.io/v1/games/<span class="o">{</span>game-id<span 
 Accept: application/json
 Authorization: Bearer YourAccessToken
 Content-Type: application/x-www-form-urlencoded
+
 
 </code></pre><pre class="highlight javascript tab-javascript"><code><span class="kd">var</span> <span class="nx">headers</span> <span class="o">=</span> <span class="p">{</span>
   <span class="s1">'Authorization'</span><span class="p">:</span><span class="s1">'Bearer YourAccessToken'</span><span class="p">,</span>
@@ -7612,6 +7629,7 @@ Accept: application/json
 Authorization: Bearer YourAccessToken
 Content-Type: application/x-www-form-urlencoded
 
+
 </code></pre><pre class="highlight javascript tab-javascript"><code><span class="kd">var</span> <span class="nx">headers</span> <span class="o">=</span> <span class="p">{</span>
   <span class="s1">'Authorization'</span><span class="p">:</span><span class="s1">'Bearer YourAccessToken'</span><span class="p">,</span>
   <span class="s1">'Content-Type'</span><span class="p">:</span><span class="s1">'application/x-www-form-urlencoded'</span><span class="p">,</span>
@@ -7724,6 +7742,7 @@ curl -X POST https://api.mod.io/v1/general/ownership <span class="se">\</span>
 Accept: application/json
 Authorization: Bearer YourAccessToken
 Content-Type: application/x-www-form-urlencoded
+
 
 </code></pre><pre class="highlight javascript tab-javascript"><code><span class="kd">var</span> <span class="nx">headers</span> <span class="o">=</span> <span class="p">{</span>
   <span class="s1">'Authorization'</span><span class="p">:</span><span class="s1">'Bearer YourAccessToken'</span><span class="p">,</span>
@@ -8166,6 +8185,7 @@ Accept: application/json
 Authorization: Bearer YourAccessToken
 Content-Type: application/x-www-form-urlencoded
 
+
 </code></pre><pre class="highlight javascript tab-javascript"><code><span class="kd">var</span> <span class="nx">headers</span> <span class="o">=</span> <span class="p">{</span>
   <span class="s1">'Authorization'</span><span class="p">:</span><span class="s1">'Bearer YourAccessToken'</span><span class="p">,</span>
   <span class="s1">'Content-Type'</span><span class="p">:</span><span class="s1">'application/x-www-form-urlencoded'</span><span class="p">,</span>
@@ -8324,6 +8344,7 @@ curl -X GET https://api.mod.io/v1/me <span class="se">\</span>
 Accept: application/json
 Authorization: Bearer YourAccessToken
 
+
 </code></pre><pre class="highlight javascript tab-javascript"><code><span class="kd">var</span> <span class="nx">headers</span> <span class="o">=</span> <span class="p">{</span>
   <span class="s1">'Authorization'</span><span class="p">:</span><span class="s1">'Bearer YourAccessToken'</span><span class="p">,</span>
   <span class="s1">'Accept'</span><span class="p">:</span><span class="s1">'application/json'</span>
@@ -8445,6 +8466,7 @@ curl -X GET https://api.mod.io/v1/me/subscribed <span class="se">\</span>
 
 Accept: application/json
 Authorization: Bearer YourAccessToken
+
 
 </code></pre><pre class="highlight javascript tab-javascript"><code><span class="kd">var</span> <span class="nx">headers</span> <span class="o">=</span> <span class="p">{</span>
   <span class="s1">'Authorization'</span><span class="p">:</span><span class="s1">'Bearer YourAccessToken'</span><span class="p">,</span>
@@ -8749,6 +8771,7 @@ curl -X GET https://api.mod.io/v1/me/games <span class="se">\</span>
 Accept: application/json
 Authorization: Bearer YourAccessToken
 
+
 </code></pre><pre class="highlight javascript tab-javascript"><code><span class="kd">var</span> <span class="nx">headers</span> <span class="o">=</span> <span class="p">{</span>
   <span class="s1">'Authorization'</span><span class="p">:</span><span class="s1">'Bearer YourAccessToken'</span><span class="p">,</span>
   <span class="s1">'Accept'</span><span class="p">:</span><span class="s1">'application/json'</span>
@@ -8928,6 +8951,7 @@ curl -X GET https://api.mod.io/v1/me/mods <span class="se">\</span>
 
 Accept: application/json
 Authorization: Bearer YourAccessToken
+
 
 </code></pre><pre class="highlight javascript tab-javascript"><code><span class="kd">var</span> <span class="nx">headers</span> <span class="o">=</span> <span class="p">{</span>
   <span class="s1">'Authorization'</span><span class="p">:</span><span class="s1">'Bearer YourAccessToken'</span><span class="p">,</span>
@@ -9133,6 +9157,7 @@ curl -X GET https://api.mod.io/v1/me/files <span class="se">\</span>
 
 Accept: application/json
 Authorization: Bearer YourAccessToken
+
 
 </code></pre><pre class="highlight javascript tab-javascript"><code><span class="kd">var</span> <span class="nx">headers</span> <span class="o">=</span> <span class="p">{</span>
   <span class="s1">'Authorization'</span><span class="p">:</span><span class="s1">'Bearer YourAccessToken'</span><span class="p">,</span>
