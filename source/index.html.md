@@ -5110,7 +5110,7 @@ System.out.println(response.toString());
 ```
 `GET /games/{game-id}/mods/{mod-id}/dependencies`
 
-Get all dependencies the chosen mod has selected. This is useful if a mod requires other mods be installed for it to run. Successful request will return an array of [Mod Dependencies Objects](#mod-dependencies-object).
+Get all dependencies the chosen mod has selected. This is useful if a mod requires other mods be installed for it to run. Successful request will return an array of [Mod Dependencies Objects](--parse-docsurl/#mod-dependencies-object).
 
      __NOTE:__ Some developers might select _soft_ dependencies to promote or credit other mods. We advise against this but it is possible to do.
 
@@ -5646,7 +5646,7 @@ Add a user to a mod team. Successful request will return [Message Object](#messa
 
      Parameter|Type|Required|Description
      ---|---|---|---|
-     email|string|true|Email of the mod.io user you want to add to your team.
+     email|integer|true|Email of the mod.io user you want to add to your team.
      level|integer|true|Level of permission the user will get:<br><br>__1__ = Moderator (can moderate comments and content attached)<br>__4__ = Creator (moderator access, including uploading builds and edit all settings except supply and team members)<br>__8__ = Administrator (full access, including editing the supply and team)
      position|string||Title of the users position. For example: 'Team Leader', 'Artist'.
 
@@ -8495,7 +8495,7 @@ user|[User Object   ](#schemauser_object)|Contains user data.
 » timezone|string|Timezone of the user, format is country/city.
 » language|string|2-character representation of users language preference.
 » profile_url|string|URL to the user's mod.io profile.
-level|integer|Level of permission the user has:<br><br>__0__ = Guest<br>__1__ = Member<br>__2__ = Contributor<br>__4__ = Manager<br>__8__ = Leader
+level|integer|Level of permission the user has:<br><br>__1__ = Member<br>__4__ = Manager<br>__8__ = Leader
 date_added|integer|Unix timestamp of the date the user was added to the team.
 position|string|Custom title given to the user in this team.
 
@@ -9272,7 +9272,7 @@ data|[Team Member Object  ](#schemateam_member_object)[]|Array containing team m
 »» timezone|string|Timezone of the user, format is country/city.
 »» language|string|2-character representation of users language preference.
 »» profile_url|string|URL to the user's mod.io profile.
-» level|integer|Level of permission the user has:<br><br>__0__ = Guest<br>__1__ = Member<br>__2__ = Contributor<br>__4__ = Manager<br>__8__ = Leader
+» level|integer|Level of permission the user has:<br><br>__1__ = Member<br>__4__ = Manager<br>__8__ = Leader
 » date_added|integer|Unix timestamp of the date the user was added to the team.
 » position|string|Custom title given to the user in this team.
 result_count|integer|Number of results returned in the data array.
