@@ -6515,7 +6515,7 @@ Accept: application/json
 </code></pre>
 <p><span class="httpmethod GET">GET</span> <span class="endpointheading">/games/{game-id}/mods/{mod-id}/dependencies</span></p>
 
-<p>Get all dependencies the chosen mod has selected. This is useful if a mod requires other mods be installed for it to run. Successful request will return an array of <a href="#mod-dependencies-object">Mod Dependencies Objects</a>.</p>
+<p>Get all dependencies the chosen mod has selected. This is useful if a mod requires other mods be installed for it to run. Successful request will return an array of <a href="--parse-docsurl/#mod-dependencies-object">Mod Dependencies Objects</a>.</p>
 
 <p><strong>NOTE:</strong> Some developers might select <em>soft</em> dependencies to promote or credit other mods. We advise against this but it is possible to do.</p>
 
@@ -7113,7 +7113,7 @@ Content-Type: application/x-www-form-urlencoded
 <tbody>
 <tr>
 <td>email</td>
-<td>string</td>
+<td>integer</td>
 <td>true</td>
 <td>Email of the mod.io user you want to add to your team.</td>
 </tr>
@@ -11029,7 +11029,7 @@ oauth2 ( Scopes: read )
 <tr>
 <td>level</td>
 <td>integer</td>
-<td>Level of permission the user has:<br><br><strong>0</strong> = Guest<br><strong>1</strong> = Member<br><strong>2</strong> = Contributor<br><strong>4</strong> = Manager<br><strong>8</strong> = Leader</td>
+<td>Level of permission the user has:<br><br><strong>1</strong> = Member<br><strong>4</strong> = Manager<br><strong>8</strong> = Leader</td>
 </tr>
 <tr>
 <td>date_added</td>
@@ -12749,7 +12749,7 @@ oauth2 ( Scopes: read )
 <tr>
 <td>» level</td>
 <td>integer</td>
-<td>Level of permission the user has:<br><br><strong>0</strong> = Guest<br><strong>1</strong> = Member<br><strong>2</strong> = Contributor<br><strong>4</strong> = Manager<br><strong>8</strong> = Leader</td>
+<td>Level of permission the user has:<br><br><strong>1</strong> = Member<br><strong>4</strong> = Manager<br><strong>8</strong> = Leader</td>
 </tr>
 <tr>
 <td>» date_added</td>
