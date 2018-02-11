@@ -744,13 +744,13 @@ curl -X POST https://api.mod.io/v1/oauth/emailrequest <span class="se">\</span>
   -H <span class="s1">'Content-Type: application/x-www-form-urlencoded'</span> <span class="se">\</span>
   -d <span class="s1">'api_key=0d0ba6756d032246f1299f8c01abc424'</span> <span class="se">\</span>
   -d <span class="s1">'email=john.snow@westeros.com'</span>
-</code></pre><pre class="highlight plaintext"><code>// Authentication Code Request Response
+</code></pre><pre class="highlight json tab-json"><code><span class="err">//</span><span class="w"> </span><span class="err">Authentication</span><span class="w"> </span><span class="err">Code</span><span class="w"> </span><span class="err">Request</span><span class="w"> </span><span class="err">Response</span><span class="w">
 
-{
-    "code": 200,
-    "message": "Enter the 5-digit security code sent to your email address (john.snow@westeros.com)"
-}
-</code></pre><h3 id="step-1-requesting-a-security-code">Step 1: Requesting a security code</h3>
+</span><span class="p">{</span><span class="w">
+    </span><span class="s2">"code"</span><span class="p">:</span><span class="w"> </span><span class="mi">200</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"message"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Enter the 5-digit security code sent to your email address (john.snow@westeros.com)"</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre><h3 id="step-1-requesting-a-security-code">Step 1: Requesting a security code</h3>
 <p>Request a <code>security_code</code> be sent to the email address of the user you wish to authenticate: </p>
 
 <p><span class="httpmethod POST">POST</span> <span class="endpointheading">/oauth/emailrequest</span></p>
@@ -781,13 +781,13 @@ curl -X POST https://api.mod.io/v1/oauth/emailexchange <span class="se">\</span>
   -H <span class="s1">'Content-Type: application/x-www-form-urlencoded'</span> <span class="se">\ </span>   
   -d <span class="s1">'api_key=0d0ba6756d032246f1299f8c01abc424'</span> <span class="se">\</span>
   -d <span class="s1">'security_code=3EW50'</span>
-</code></pre><pre class="highlight plaintext"><code>// Access Token Request Response (access token truncated for brevity)
+</code></pre><pre class="highlight json tab-json"><code><span class="err">//</span><span class="w"> </span><span class="err">Access</span><span class="w"> </span><span class="err">Token</span><span class="w"> </span><span class="err">Request</span><span class="w"> </span><span class="err">Response</span><span class="w"> </span><span class="err">(access</span><span class="w"> </span><span class="err">token</span><span class="w"> </span><span class="err">truncated</span><span class="w"> </span><span class="err">for</span><span class="w"> </span><span class="err">brevity)</span><span class="w">
 
-{
-    "code": 200,
-    "access_token": "eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiIsImp0......"
-}
-</code></pre>
+</span><span class="p">{</span><span class="w">
+    </span><span class="s2">"code"</span><span class="p">:</span><span class="w"> </span><span class="mi">200</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"access_token"</span><span class="p">:</span><span class="w"> </span><span class="s2">"eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiIsImp0......"</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre>
 <p><span class="httpmethod POST">POST</span> <span class="endpointheading">/oauth/emailexchange</span></p>
 
 <table>
@@ -919,28 +919,28 @@ curl -X post https://api.mod.io/v1/games/1/team <span class="se">\</span>
 <p><strong>NOTE:</strong> If you supply identical key-value pairs as a request parameter and also as a parameter in your JSON object, the JSON object <strong>will take priority</strong> as only one can exist.</p>
 <h3 id="response-content-type">Response Content-Type</h3>
 <p>Responses will <strong>always</strong> be returned as <code>application/json</code>.</p>
-<h2 id="errors">Errors</h2><pre class="highlight plaintext"><code>// Error object
+<h2 id="errors">Errors</h2><pre class="highlight json tab-json"><code><span class="err">//</span><span class="w"> </span><span class="err">Error</span><span class="w"> </span><span class="err">object</span><span class="w">
 
-"error": {
-    "code": 403,
-    "message": "You do not have the required permissions to access this resource."
-}
-</code></pre>
+</span><span class="s2">"error"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+    </span><span class="s2">"code"</span><span class="p">:</span><span class="w"> </span><span class="mi">403</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"message"</span><span class="p">:</span><span class="w"> </span><span class="s2">"You do not have the required permissions to access this resource."</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre>
 <p>If an error occurs, mod.io returns an error object with the HTTP <code>code</code> and <code>message</code> to describe what happened and when possible how to avoid repeating the error. It's important to know that if you encounter errors that are not server errors (<code>500+</code> codes) - you should review the error message before continuing to send requests to the endpoint.</p>
 
 <p>When requests contain invalid input data or query parameters (for filtering), an optional field object called <code>errors</code> can be supplied inside the <code>error</code> object, which contains a list of the invalid inputs. The nested <code>errors</code> object is only supplied with <code>422 Unprocessable Entity</code> responses. Be sure to review the <a href="#response-codes">Response Codes</a> to be aware of the HTTP codes that the mod.io API returns.</p>
-<pre class="highlight plaintext"><code>// Error object with input errors
+<pre class="highlight json tab-json"><code><span class="err">//</span><span class="w"> </span><span class="err">Error</span><span class="w"> </span><span class="err">object</span><span class="w"> </span><span class="err">with</span><span class="w"> </span><span class="err">input</span><span class="w"> </span><span class="err">errors</span><span class="w">
 
-"error": {
-    "code": 422,
-    "message": "Validation Failed. Please see below to fix invalid input.",
-    "errors": {
-        "member":"The member must be an integer.",
-        "name":"The name may not be greater than 50 characters."
-    }
-}
+</span><span class="s2">"error"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+    </span><span class="s2">"code"</span><span class="p">:</span><span class="w"> </span><span class="mi">422</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"message"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Validation Failed. Please see below to fix invalid input."</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"errors"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+        </span><span class="s2">"member"</span><span class="p">:</span><span class="s2">"The member must be an integer."</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"name"</span><span class="p">:</span><span class="s2">"The name may not be greater than 50 characters."</span><span class="w">
+    </span><span class="p">}</span><span class="w">
+</span><span class="p">}</span><span class="w">
 
-</code></pre>
+</span></code></pre>
 <p>Remember that <a href="#rate-limiting">Rate Limiting</a> applies whether an error is returned or not, so to avoid exceeding your daily quota be sure to always investigate error messages - instead of continually retrying.</p>
 <h2 id="response-codes">Response Codes</h2>
 <p>Here is a list of the most common HTTP response codes you will see while using the API.</p>
@@ -1011,25 +1011,25 @@ curl -X post https://api.mod.io/v1/games/1/team <span class="se">\</span>
 </tr>
 </tbody>
 </table>
-<h2 id="response-formats">Response Formats</h2><pre class="highlight plaintext"><code>// Single 'view' response
+<h2 id="response-formats">Response Formats</h2><pre class="highlight json tab-json"><code><span class="err">//</span><span class="w"> </span><span class="err">Single</span><span class="w"> </span><span class="err">'view'</span><span class="w"> </span><span class="err">response</span><span class="w">
 
-{
-    "id": 2,
-    "mod": 0,
-    "member": 31342,
-    "date": 1492570177,
-    "datevirus": 0,
-    "virusstatus": 0,
-    "viruspositive": 0,
-    "filesize": 15181,
-    "filehash": "2d4a0e2d7273db6b0a94b0740a88ad0d",
-    "filename": "rogue-knight-v1.zip",
-    "version": "1.0",
-    "virustotal": "No threats detected.",
-    "changelog": "v1.0 - First release of Rogue Knight!",
-    "download": "https://mod.io/mods/file/2/c489a0354111a4dx6640d47f0cdcb294"
-}
-</code></pre>
+</span><span class="p">{</span><span class="w">
+    </span><span class="s2">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"mod"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"member"</span><span class="p">:</span><span class="w"> </span><span class="mi">31342</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"date"</span><span class="p">:</span><span class="w"> </span><span class="mi">1492570177</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"datevirus"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"virusstatus"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"viruspositive"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"filesize"</span><span class="p">:</span><span class="w"> </span><span class="mi">15181</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"filehash"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2d4a0e2d7273db6b0a94b0740a88ad0d"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"filename"</span><span class="p">:</span><span class="w"> </span><span class="s2">"rogue-knight-v1.zip"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"version"</span><span class="p">:</span><span class="w"> </span><span class="s2">"1.0"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"virustotal"</span><span class="p">:</span><span class="w"> </span><span class="s2">"No threats detected."</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"changelog"</span><span class="p">:</span><span class="w"> </span><span class="s2">"v1.0 - First release of Rogue Knight!"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"download"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://mod.io/mods/file/2/c489a0354111a4dx6640d47f0cdcb294"</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre>
 <p>The way in which mod.io formats responses is entirely dependant on whether the requesting endpoint is returning a single item or a collection of items.</p>
 <h3 id="single-item-responses">Single item Responses</h3>
 <p>For single items, mod.io returns a <strong>single JSON object</strong> which contains the requested resource. There is no nesting for single responses.</p>
@@ -1041,33 +1041,33 @@ curl -X post https://api.mod.io/v1/games/1/team <span class="se">\</span>
 <code>data</code> - contains all data returned from the request.</li>
 <li>metadata fields - contains <a href="#pagination">pagination metadata</a> to help you paginate through the API.</li>
 </ul>
-<pre class="highlight plaintext"><code>// Get response
+<pre class="highlight json tab-json"><code><span class="err">//</span><span class="w"> </span><span class="err">Get</span><span class="w"> </span><span class="err">response</span><span class="w">
 
-{
-    "data": [
-        {
-            "id": 2,
-            "mod": 2,
-            "member": 31342,
-            "date": 1492570177,
-            "datevirus": 1492570177,
-            "virusstatus": 0,
-            "viruspositive": 0,
-            "filesize": 15181,
-            "filehash": "2d4a0e2d7273db6b0a94b0740a88ad0d",
-            "filename": "rogue-knightv1.zip",
-            "version": "1.0",
-            "virustotal": null,
-            "changelog": "v1.0 --- First Release --- Added main mod.",
-            "download": "https://mod.io/mods/file/2/c489a0354111a4d76640d47f0cdcb294"
-        },
-        {
-            ...
-        },
-    ],
-    "result_count": 100,
-}  
-</code></pre><h2 id="status-amp-visibility">Status &amp; Visibility</h2>
+</span><span class="p">{</span><span class="w">
+    </span><span class="s2">"data"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+        </span><span class="p">{</span><span class="w">
+            </span><span class="s2">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"mod"</span><span class="p">:</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"member"</span><span class="p">:</span><span class="w"> </span><span class="mi">31342</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"date"</span><span class="p">:</span><span class="w"> </span><span class="mi">1492570177</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"datevirus"</span><span class="p">:</span><span class="w"> </span><span class="mi">1492570177</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"virusstatus"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"viruspositive"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"filesize"</span><span class="p">:</span><span class="w"> </span><span class="mi">15181</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"filehash"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2d4a0e2d7273db6b0a94b0740a88ad0d"</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"filename"</span><span class="p">:</span><span class="w"> </span><span class="s2">"rogue-knightv1.zip"</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"version"</span><span class="p">:</span><span class="w"> </span><span class="s2">"1.0"</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"virustotal"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"changelog"</span><span class="p">:</span><span class="w"> </span><span class="s2">"v1.0 --- First Release --- Added main mod."</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"download"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://mod.io/mods/file/2/c489a0354111a4d76640d47f0cdcb294"</span><span class="w">
+        </span><span class="p">},</span><span class="w">
+        </span><span class="p">{</span><span class="w">
+            </span><span class="err">...</span><span class="w">
+        </span><span class="p">},</span><span class="w">
+    </span><span class="p">],</span><span class="w">
+    </span><span class="s2">"result_count"</span><span class="p">:</span><span class="w"> </span><span class="mi">100</span><span class="p">,</span><span class="w">
+</span><span class="p">}</span><span class="w">  
+</span></code></pre><h2 id="status-amp-visibility">Status &amp; Visibility</h2>
 <p>To manage games and mods via the API we use the fields <code>status</code> and <code>visible</code>. The values of these fields determines what is returned in API requests, so it is important to understand who is authorized to view what content.</p>
 <h3 id="visible-attribute-states-amp-privileges">Visible attribute states &amp; privileges</h3>
 <p>Only mods use the <code>visible</code> attribute allowing mod admins to control their availability. Public is the <em>default value</em>:</p>
@@ -1151,11 +1151,11 @@ curl -X post https://api.mod.io/v1/games/1/team <span class="se">\</span>
 <p>As a mod admin, you can modify <code>visible</code> to show or hide your mod from API requests. You <em>cannot</em> modify the <code>status</code> of your mod. When a mod is hidden <em>you</em> can still view it provided you are the mods admin or subscribed to the mod. You can call <a href="#get-user-mods">Get User Mods endpoint</a> to retrieve all mods associated with the authenticated user regardless of their <code>status</code> and <code>visible</code>.</p>
 <h2 id="pagination">Pagination</h2>
 <p>When requesting data from endpoints that contain more than one object, you can supply an <code>_offset</code> and <code>_limit</code> to paginate through the results. Think of it as a page 1, 2, 3... system but you control the number of results per page, and the page to start from. Appended to each response will be the pagination metadata:</p>
-<pre class="highlight plaintext"><code>// Metadata example
-"result_count": 100,
-"result_limit": 100,
-"result_offset": 0
-</code></pre>
+<pre class="highlight json tab-json"><code><span class="err">//</span><span class="w"> </span><span class="err">Metadata</span><span class="w"> </span><span class="err">example</span><span class="w">
+</span><span class="s2">"result_count"</span><span class="p">:</span><span class="w"> </span><span class="mi">100</span><span class="p">,</span><span class="w">
+</span><span class="s2">"result_limit"</span><span class="p">:</span><span class="w"> </span><span class="mi">100</span><span class="p">,</span><span class="w">
+</span><span class="s2">"result_offset"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="w">
+</span></code></pre>
 <table>
 <thead>
 <tr>
@@ -1344,13 +1344,13 @@ curl -X post https://api.mod.io/v1/games/1/team <span class="se">\</span>
 <p>mod.io implements rate limiting to stop users abusing the service. Exceeding your rate limit will result in requests receiving a <code>429 Too Many Requests</code> response until your reset time is reached. </p>
 
 <p>It is <em>highly recommended</em> you architect your app to check for the <code>X-RateLimit</code> headers below and the <code>429</code> HTTP response code to ensure you are not making too many requests, or continuing to make requests after a <code>429</code> code is repeatedly returned. Users who continue to send requests despite a <code>429</code> response could potentially have their access tokens revoked. The following limits are implemented by default:</p>
-<h3 id="api-key-rate-limiting">API key Rate Limiting</h3><pre class="highlight plaintext"><code>Example HTTP Header Response
+<h3 id="api-key-rate-limiting">API key Rate Limiting</h3><pre class="highlight http tab-http"><code><span class="err">Example HTTP Header Response
 ---------------------
-HTTP/1.1 200 OK
-...
-...
-X-RateLimit-Limit: 60
-X-RateLimit-Remaining: 59
+</span><span class="k">HTTP</span><span class="o">/</span><span class="m">1.1</span> <span class="m">200</span> <span class="ne">OK</span>
+<span class="s">...</span>
+<span class="s">...</span>
+<span class="na">X-RateLimit-Limit</span><span class="p">:</span> <span class="s">60</span>
+<span class="na">X-RateLimit-Remaining</span><span class="p">:</span> <span class="s">59</span>
 </code></pre>
 <ul>
 <li>API keys linked to a member have <strong>unlimited requests</strong>.</li>
@@ -1361,13 +1361,15 @@ X-RateLimit-Remaining: 59
 <li>Users tokens are limited to <strong>60 requests per minute</strong>. </li>
 </ul>
 <h3 id="headers">Headers</h3>
-<p>mod.io returns the following headers in each request to inform you of your remaining requests and time until reset.</p>
+<p>mod.io returns the following headers in each request to inform you of your limit &amp; remaining requests until reset.</p>
 
 <ul>
 <li>
 <code>X-RateLimit-Limit</code> - Number of requests you can make from the supplied API key/access token per hour.</li>
 <li>
-<code>X-RateLimit-Remaining</code> - Number of minutes until your rate limit resets.</li>
+<code>X-RateLimit-Remaining</code> - Number of requests remaining until requests are rejected.</li>
+<li>
+<code>X-Ratelimit-RetryAfter</code> - Amount of minutes until reset once you have been throttled (Only returned once rate limit exceeded).</li>
 </ul>
 <h3 id="optimize-your-requests">Optimize your requests</h3>
 <p>You should always plan to minimize requests and cache API responses. It will make your app feel fluid and fast for your users. If your usage is excessive we shall reach out to discuss ways of optimizing, but our aim is to never restrict legitimate use of the API. We have set high limits that should cover 99% of use-cases, and are happy to <a href="mailto:developers@mod.io?subject=API%20usage">discuss your scenario</a> if you require more.</p>
@@ -6515,7 +6517,7 @@ Accept: application/json
 </code></pre>
 <p><span class="httpmethod GET">GET</span> <span class="endpointheading">/games/{game-id}/mods/{mod-id}/dependencies</span></p>
 
-<p>Get all dependencies the chosen mod has selected. This is useful if a mod requires other mods be installed for it to run. Successful request will return an array of <a href="--parse-docsurl/#mod-dependencies-object">Mod Dependencies Objects</a>.</p>
+<p>Get all dependencies the chosen mod has selected. This is useful if a mod requires other mods be installed for it to run. Successful request will return an array of <a href="#mod-dependencies-object">Mod Dependencies Objects</a>.</p>
 
 <p><strong>NOTE:</strong> Some developers might select <em>soft</em> dependencies to promote or credit other mods. We advise against this but it is possible to do.</p>
 
@@ -7113,7 +7115,7 @@ Content-Type: application/x-www-form-urlencoded
 <tbody>
 <tr>
 <td>email</td>
-<td>integer</td>
+<td>string</td>
 <td>true</td>
 <td>Email of the mod.io user you want to add to your team.</td>
 </tr>
