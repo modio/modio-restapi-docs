@@ -69,7 +69,7 @@ curl -X POST --parse_apiurl/oauth/emailrequest \
   -d 'email=john.snow@westeros.com'
 ```
 
-```JSON
+```json
 // Authentication Code Request Response
 
 {
@@ -103,7 +103,7 @@ curl -X POST --parse_apiurl/oauth/emailexchange \
   -d 'security_code=3EW50'
 ```
 
-```JSON
+```json
 // Access Token Request Response (access token truncated for brevity)
 
 {
@@ -218,7 +218,7 @@ Responses will __always__ be returned as `application/json`.
 
 ## Errors
 
-```JSON
+```json
 // Error object
 
 "error": {
@@ -231,7 +231,7 @@ If an error occurs, --parse_sitename returns an error object with the HTTP `code
 
 When requests contain invalid input data or query parameters (for filtering), an optional field object called `errors` can be supplied inside the `error` object, which contains a list of the invalid inputs. The nested `errors` object is only supplied with `422 Unprocessable Entity` responses. Be sure to review the [Response Codes](#response-codes) to be aware of the HTTP codes that the --parse_sitename API returns.
 
-```JSON
+```json
 // Error object with input errors
 
 "error": {
@@ -269,7 +269,7 @@ Response Code | Meaning
 `503` | Service Unavailable -- We're temporarily offline for maintenance. Please try again later. (rare)
 
 ## Response Formats
-```JSON
+```json
 // Single 'view' response
 
 {
@@ -303,7 +303,7 @@ Endpoints that return more than one result, return a __JSON object__ which conta
 - `data` - contains all data returned from the request.
 - metadata fields - contains [pagination metadata](#pagination) to help you paginate through the API.
 
-```JSON
+```json
 // Get response
 
 {
@@ -370,7 +370,7 @@ As a mod admin, you can modify `visible` to show or hide your mod from API reque
 
 When requesting data from endpoints that contain more than one object, you can supply an `_offset` and `_limit` to paginate through the results. Think of it as a page 1, 2, 3... system but you control the number of results per page, and the page to start from. Appended to each response will be the pagination metadata:
 
-```JSON
+```json
 // Metadata example
 "result_count": 100,
 "result_limit": 100,
@@ -592,7 +592,7 @@ It is _highly recommended_ you architect your app to check for the `X-RateLimit`
 
 ### API key Rate Limiting
 
-```
+```http
 Example HTTP Header Response
 ---------------------
 HTTP/1.1 200 OK
@@ -611,10 +611,11 @@ X-RateLimit-Remaining: 59
 
 ### Headers
 
---parse_sitename returns the following headers in each request to inform you of your remaining requests and time until reset.
+--parse_sitename returns the following headers in each request to inform you of your limit & remaining requests until reset.
 
  - `X-RateLimit-Limit` - Number of requests you can make from the supplied API key/access token per hour.
- - `X-RateLimit-Remaining` - Number of minutes until your rate limit resets.
+ - `X-RateLimit-Remaining` - Number of requests remaining until requests are rejected.
+ - `X-Ratelimit-RetryAfter` - Amount of minutes until reset once you have been throttled (Only returned once rate limit exceeded).
 
 ### Optimize your requests
 

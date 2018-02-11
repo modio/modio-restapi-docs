@@ -88,7 +88,7 @@ curl -X POST https://api.mod.io/v1/oauth/emailrequest \
   -d 'email=john.snow@westeros.com'
 ```
 
-```JSON
+```json
 // Authentication Code Request Response
 
 {
@@ -121,7 +121,7 @@ curl -X POST https://api.mod.io/v1/oauth/emailexchange \
   -d 'security_code=3EW50'
 ```
 
-```JSON
+```json
 // Access Token Request Response (access token truncated for brevity)
 
 {
@@ -235,7 +235,7 @@ Responses will __always__ be returned as `application/json`.
 
 ## Errors
 
-```JSON
+```json
 // Error object
 
 "error": {
@@ -248,7 +248,7 @@ If an error occurs, mod.io returns an error object with the HTTP `code` and `mes
 
 When requests contain invalid input data or query parameters (for filtering), an optional field object called `errors` can be supplied inside the `error` object, which contains a list of the invalid inputs. The nested `errors` object is only supplied with `422 Unprocessable Entity` responses. Be sure to review the [Response Codes](#response-codes) to be aware of the HTTP codes that the mod.io API returns.
 
-```JSON
+```json
 // Error object with input errors
 
 "error": {
@@ -286,7 +286,7 @@ Response Code | Meaning
 `503` | Service Unavailable -- We're temporarily offline for maintenance. Please try again later. (rare)
 
 ## Response Formats
-```JSON
+```json
 // Single 'view' response
 
 {
@@ -320,7 +320,7 @@ Endpoints that return more than one result, return a __JSON object__ which conta
 - `data` - contains all data returned from the request.
 - metadata fields - contains [pagination metadata](#pagination) to help you paginate through the API.
 
-```JSON
+```json
 // Get response
 
 {
@@ -387,7 +387,7 @@ As a mod admin, you can modify `visible` to show or hide your mod from API reque
 
 When requesting data from endpoints that contain more than one object, you can supply an `_offset` and `_limit` to paginate through the results. Think of it as a page 1, 2, 3... system but you control the number of results per page, and the page to start from. Appended to each response will be the pagination metadata:
 
-```JSON
+```json
 // Metadata example
 "result_count": 100,
 "result_limit": 100,
@@ -609,7 +609,7 @@ It is _highly recommended_ you architect your app to check for the `X-RateLimit`
 
 ### API key Rate Limiting
 
-```
+```http
 Example HTTP Header Response
 ---------------------
 HTTP/1.1 200 OK
@@ -628,10 +628,11 @@ X-RateLimit-Remaining: 59
 
 ### Headers
 
-mod.io returns the following headers in each request to inform you of your remaining requests and time until reset.
+mod.io returns the following headers in each request to inform you of your limit & remaining requests until reset.
 
  - `X-RateLimit-Limit` - Number of requests you can make from the supplied API key/access token per hour.
- - `X-RateLimit-Remaining` - Number of minutes until your rate limit resets.
+ - `X-RateLimit-Remaining` - Number of requests remaining until requests are rejected.
+ - `X-Ratelimit-RetryAfter` - Amount of minutes until reset once you have been throttled (Only returned once rate limit exceeded).
 
 ### Optimize your requests
 
@@ -5110,7 +5111,7 @@ System.out.println(response.toString());
 ```
 `GET /games/{game-id}/mods/{mod-id}/dependencies`
 
-Get all dependencies the chosen mod has selected. This is useful if a mod requires other mods be installed for it to run. Successful request will return an array of [Mod Dependencies Objects](--parse-docsurl/#mod-dependencies-object).
+Get all dependencies the chosen mod has selected. This is useful if a mod requires other mods be installed for it to run. Successful request will return an array of [Mod Dependencies Objects](#mod-dependencies-object).
 
      __NOTE:__ Some developers might select _soft_ dependencies to promote or credit other mods. We advise against this but it is possible to do.
 
@@ -5646,7 +5647,7 @@ Add a user to a mod team. Successful request will return [Message Object](#messa
 
      Parameter|Type|Required|Description
      ---|---|---|---|
-     email|integer|true|Email of the mod.io user you want to add to your team.
+     email|string|true|Email of the mod.io user you want to add to your team.
      level|integer|true|Level of permission the user will get:<br><br>__1__ = Moderator (can moderate comments and content attached)<br>__4__ = Creator (moderator access, including uploading builds and edit all settings except supply and team members)<br>__8__ = Administrator (full access, including editing the supply and team)
      position|string||Title of the users position. For example: 'Team Leader', 'Artist'.
 
