@@ -782,9 +782,9 @@ Get all games. Successful request will return an array of [Game Objects](#get-al
         "date_online": 1509922961,
         "avatar": {
           "filename": "modio-dark.png",
-          "original": "https://media.mod.io/images/global/ao_modio-dark.png",
-          "thumb_50x50": "https://media.mod.io/images/global/modio-dark.png",
-          "thumb_100x100": "https://media.mod.io/images/global/am_modio-dark.png"
+          "original": "https://static.mod.io/v1/images/global/ao_modio-dark.png",
+          "thumb_50x50": "https://static.mod.io/v1/images/global/modio-dark.png",
+          "thumb_100x100": "https://static.mod.io/v1/images/global/am_modio-dark.png"
         },
         "timezone": "America/Los_Angeles",
         "language": "en",
@@ -802,21 +802,21 @@ Get all games. Successful request will return an array of [Game Objects](#get-al
       "ugc_name": "map",
       "icon": {
         "filename": "modio-dark.png",
-        "original": "https://media.mod.io/images/global/ao_modio-dark.png",
-        "thumb_64x64": "https://media.mod.io/images/global/modio-dark.png",
-        "thumb_128x128": "https://media.mod.io/images/global/am_modio-dark.png",
-        "thumb_256x256": "https://media.mod.io/images/global/al_modio-dark.png"
+        "original": "https://static.mod.io/v1/images/global/ao_modio-dark.png",
+        "thumb_64x64": "https://static.mod.io/v1/images/global/modio-dark.png",
+        "thumb_128x128": "https://static.mod.io/v1/images/global/am_modio-dark.png",
+        "thumb_256x256": "https://static.mod.io/v1/images/global/al_modio-dark.png"
       },
       "logo": {
         "filename": "modio-dark.png",
-        "original": "https://media.mod.io/images/global/modio-dark.png",
-        "thumb_320x180": "https://media.mod.io/images/global/modio-dark.png",
-        "thumb_640x360": "https://media.mod.io/images/global/modio-dark.png",
-        "thumb_1280x720": "https://media.mod.io/images/global/modio-dark.png"
+        "original": "https://static.mod.io/v1/images/global/modio-dark.png",
+        "thumb_320x180": "https://static.mod.io/v1/images/global/modio-dark.png",
+        "thumb_640x360": "https://static.mod.io/v1/images/global/modio-dark.png",
+        "thumb_1280x720": "https://static.mod.io/v1/images/global/modio-dark.png"
       },
       "header": {
         "filename": "demo.png",
-        "original": "https://media.mod.io/images/global/modio-dark.png"
+        "original": "https://static.mod.io/v1/images/global/modio-dark.png"
       },
       "homepage": "https://www.rogue-knight-game.com/",
       "name": "Rogue Knight",
@@ -959,9 +959,9 @@ Get a game. Successful request will return a single [Game Object](#game-object).
     "date_online": 1509922961,
     "avatar": {
       "filename": "modio-dark.png",
-      "original": "https://media.mod.io/images/global/ao_modio-dark.png",
-      "thumb_50x50": "https://media.mod.io/images/global/modio-dark.png",
-      "thumb_100x100": "https://media.mod.io/images/global/am_modio-dark.png"
+      "original": "https://static.mod.io/v1/images/global/ao_modio-dark.png",
+      "thumb_50x50": "https://static.mod.io/v1/images/global/modio-dark.png",
+      "thumb_100x100": "https://static.mod.io/v1/images/global/am_modio-dark.png"
     },
     "timezone": "America/Los_Angeles",
     "language": "en",
@@ -979,21 +979,21 @@ Get a game. Successful request will return a single [Game Object](#game-object).
   "ugc_name": "map",
   "icon": {
     "filename": "modio-dark.png",
-    "original": "https://media.mod.io/images/global/ao_modio-dark.png",
-    "thumb_64x64": "https://media.mod.io/images/global/modio-dark.png",
-    "thumb_128x128": "https://media.mod.io/images/global/am_modio-dark.png",
-    "thumb_256x256": "https://media.mod.io/images/global/al_modio-dark.png"
+    "original": "https://static.mod.io/v1/images/global/ao_modio-dark.png",
+    "thumb_64x64": "https://static.mod.io/v1/images/global/modio-dark.png",
+    "thumb_128x128": "https://static.mod.io/v1/images/global/am_modio-dark.png",
+    "thumb_256x256": "https://static.mod.io/v1/images/global/al_modio-dark.png"
   },
   "logo": {
     "filename": "modio-dark.png",
-    "original": "https://media.mod.io/images/global/modio-dark.png",
-    "thumb_320x180": "https://media.mod.io/images/global/modio-dark.png",
-    "thumb_640x360": "https://media.mod.io/images/global/modio-dark.png",
-    "thumb_1280x720": "https://media.mod.io/images/global/modio-dark.png"
+    "original": "https://static.mod.io/v1/images/global/modio-dark.png",
+    "thumb_320x180": "https://static.mod.io/v1/images/global/modio-dark.png",
+    "thumb_640x360": "https://static.mod.io/v1/images/global/modio-dark.png",
+    "thumb_1280x720": "https://static.mod.io/v1/images/global/modio-dark.png"
   },
   "header": {
     "filename": "demo.png",
-    "original": "https://media.mod.io/images/global/modio-dark.png"
+    "original": "https://static.mod.io/v1/images/global/modio-dark.png"
   },
   "homepage": "https://www.rogue-knight-game.com/",
   "name": "Rogue Knight",
@@ -1157,9 +1157,9 @@ Update details for a game. If you want to update the `icon`, `logo` or `header` 
     "date_online": 1509922961,
     "avatar": {
       "filename": "modio-dark.png",
-      "original": "https://media.mod.io/images/global/ao_modio-dark.png",
-      "thumb_50x50": "https://media.mod.io/images/global/modio-dark.png",
-      "thumb_100x100": "https://media.mod.io/images/global/am_modio-dark.png"
+      "original": "https://static.mod.io/v1/images/global/ao_modio-dark.png",
+      "thumb_50x50": "https://static.mod.io/v1/images/global/modio-dark.png",
+      "thumb_100x100": "https://static.mod.io/v1/images/global/am_modio-dark.png"
     },
     "timezone": "America/Los_Angeles",
     "language": "en",
@@ -1177,21 +1177,21 @@ Update details for a game. If you want to update the `icon`, `logo` or `header` 
   "ugc_name": "map",
   "icon": {
     "filename": "modio-dark.png",
-    "original": "https://media.mod.io/images/global/ao_modio-dark.png",
-    "thumb_64x64": "https://media.mod.io/images/global/modio-dark.png",
-    "thumb_128x128": "https://media.mod.io/images/global/am_modio-dark.png",
-    "thumb_256x256": "https://media.mod.io/images/global/al_modio-dark.png"
+    "original": "https://static.mod.io/v1/images/global/ao_modio-dark.png",
+    "thumb_64x64": "https://static.mod.io/v1/images/global/modio-dark.png",
+    "thumb_128x128": "https://static.mod.io/v1/images/global/am_modio-dark.png",
+    "thumb_256x256": "https://static.mod.io/v1/images/global/al_modio-dark.png"
   },
   "logo": {
     "filename": "modio-dark.png",
-    "original": "https://media.mod.io/images/global/modio-dark.png",
-    "thumb_320x180": "https://media.mod.io/images/global/modio-dark.png",
-    "thumb_640x360": "https://media.mod.io/images/global/modio-dark.png",
-    "thumb_1280x720": "https://media.mod.io/images/global/modio-dark.png"
+    "original": "https://static.mod.io/v1/images/global/modio-dark.png",
+    "thumb_320x180": "https://static.mod.io/v1/images/global/modio-dark.png",
+    "thumb_640x360": "https://static.mod.io/v1/images/global/modio-dark.png",
+    "thumb_1280x720": "https://static.mod.io/v1/images/global/modio-dark.png"
   },
   "header": {
     "filename": "demo.png",
-    "original": "https://media.mod.io/images/global/modio-dark.png"
+    "original": "https://static.mod.io/v1/images/global/modio-dark.png"
   },
   "homepage": "https://www.rogue-knight-game.com/",
   "name": "Rogue Knight",
@@ -1356,9 +1356,9 @@ Get all mods for the corresponding game. Successful request will return an array
         "date_online": 1509922961,
         "avatar": {
           "filename": "modio-dark.png",
-          "original": "https://media.mod.io/images/global/ao_modio-dark.png",
-          "thumb_50x50": "https://media.mod.io/images/global/modio-dark.png",
-          "thumb_100x100": "https://media.mod.io/images/global/am_modio-dark.png"
+          "original": "https://static.mod.io/v1/images/global/ao_modio-dark.png",
+          "thumb_50x50": "https://static.mod.io/v1/images/global/modio-dark.png",
+          "thumb_100x100": "https://static.mod.io/v1/images/global/am_modio-dark.png"
         },
         "timezone": "America/Los_Angeles",
         "language": "en",
@@ -1369,10 +1369,10 @@ Get all mods for the corresponding game. Successful request will return an array
       "date_live": 1499841403,
       "logo": {
         "filename": "modio-dark.png",
-        "original": "https://media.mod.io/images/global/modio-dark.png",
-        "thumb_320x180": "https://media.mod.io/images/global/modio-dark.png",
-        "thumb_640x360": "https://media.mod.io/images/global/modio-dark.png",
-        "thumb_1280x720": "https://media.mod.io/images/global/modio-dark.png"
+        "original": "https://static.mod.io/v1/images/global/modio-dark.png",
+        "thumb_320x180": "https://static.mod.io/v1/images/global/modio-dark.png",
+        "thumb_640x360": "https://static.mod.io/v1/images/global/modio-dark.png",
+        "thumb_1280x720": "https://static.mod.io/v1/images/global/modio-dark.png"
       },
       "homepage": "https://www.rogue-hdpack.com/",
       "name": "Rogue Knight HD Pack",
@@ -1412,8 +1412,8 @@ Get all mods for the corresponding game. Successful request will return an array
         "images": [
           {
             "filename": "modio-dark.png",
-            "original": "https://media.mod.io/images/global/modio-dark.png",
-            "thumb_320x180": "https://media.mod.io/images/global/modio-dark.png"
+            "original": "https://static.mod.io/v1/images/global/modio-dark.png",
+            "thumb_320x180": "https://static.mod.io/v1/images/global/modio-dark.png"
           }
         ]
       },
@@ -1558,9 +1558,9 @@ Get a mod. Successful request will return a single [Mod Object](#mod-object).
     "date_online": 1509922961,
     "avatar": {
       "filename": "modio-dark.png",
-      "original": "https://media.mod.io/images/global/ao_modio-dark.png",
-      "thumb_50x50": "https://media.mod.io/images/global/modio-dark.png",
-      "thumb_100x100": "https://media.mod.io/images/global/am_modio-dark.png"
+      "original": "https://static.mod.io/v1/images/global/ao_modio-dark.png",
+      "thumb_50x50": "https://static.mod.io/v1/images/global/modio-dark.png",
+      "thumb_100x100": "https://static.mod.io/v1/images/global/am_modio-dark.png"
     },
     "timezone": "America/Los_Angeles",
     "language": "en",
@@ -1571,10 +1571,10 @@ Get a mod. Successful request will return a single [Mod Object](#mod-object).
   "date_live": 1499841403,
   "logo": {
     "filename": "modio-dark.png",
-    "original": "https://media.mod.io/images/global/modio-dark.png",
-    "thumb_320x180": "https://media.mod.io/images/global/modio-dark.png",
-    "thumb_640x360": "https://media.mod.io/images/global/modio-dark.png",
-    "thumb_1280x720": "https://media.mod.io/images/global/modio-dark.png"
+    "original": "https://static.mod.io/v1/images/global/modio-dark.png",
+    "thumb_320x180": "https://static.mod.io/v1/images/global/modio-dark.png",
+    "thumb_640x360": "https://static.mod.io/v1/images/global/modio-dark.png",
+    "thumb_1280x720": "https://static.mod.io/v1/images/global/modio-dark.png"
   },
   "homepage": "https://www.rogue-hdpack.com/",
   "name": "Rogue Knight HD Pack",
@@ -1614,8 +1614,8 @@ Get a mod. Successful request will return a single [Mod Object](#mod-object).
     "images": [
       {
         "filename": "modio-dark.png",
-        "original": "https://media.mod.io/images/global/modio-dark.png",
-        "thumb_320x180": "https://media.mod.io/images/global/modio-dark.png"
+        "original": "https://static.mod.io/v1/images/global/modio-dark.png",
+        "thumb_320x180": "https://static.mod.io/v1/images/global/modio-dark.png"
       }
     ]
   },
@@ -1776,9 +1776,9 @@ Add a mod. Successful request will return the newly created [Mod Object](#mod-ob
     "date_online": 1509922961,
     "avatar": {
       "filename": "modio-dark.png",
-      "original": "https://media.mod.io/images/global/ao_modio-dark.png",
-      "thumb_50x50": "https://media.mod.io/images/global/modio-dark.png",
-      "thumb_100x100": "https://media.mod.io/images/global/am_modio-dark.png"
+      "original": "https://static.mod.io/v1/images/global/ao_modio-dark.png",
+      "thumb_50x50": "https://static.mod.io/v1/images/global/modio-dark.png",
+      "thumb_100x100": "https://static.mod.io/v1/images/global/am_modio-dark.png"
     },
     "timezone": "America/Los_Angeles",
     "language": "en",
@@ -1789,10 +1789,10 @@ Add a mod. Successful request will return the newly created [Mod Object](#mod-ob
   "date_live": 1499841403,
   "logo": {
     "filename": "modio-dark.png",
-    "original": "https://media.mod.io/images/global/modio-dark.png",
-    "thumb_320x180": "https://media.mod.io/images/global/modio-dark.png",
-    "thumb_640x360": "https://media.mod.io/images/global/modio-dark.png",
-    "thumb_1280x720": "https://media.mod.io/images/global/modio-dark.png"
+    "original": "https://static.mod.io/v1/images/global/modio-dark.png",
+    "thumb_320x180": "https://static.mod.io/v1/images/global/modio-dark.png",
+    "thumb_640x360": "https://static.mod.io/v1/images/global/modio-dark.png",
+    "thumb_1280x720": "https://static.mod.io/v1/images/global/modio-dark.png"
   },
   "homepage": "https://www.rogue-hdpack.com/",
   "name": "Rogue Knight HD Pack",
@@ -1832,8 +1832,8 @@ Add a mod. Successful request will return the newly created [Mod Object](#mod-ob
     "images": [
       {
         "filename": "modio-dark.png",
-        "original": "https://media.mod.io/images/global/modio-dark.png",
-        "thumb_320x180": "https://media.mod.io/images/global/modio-dark.png"
+        "original": "https://static.mod.io/v1/images/global/modio-dark.png",
+        "thumb_320x180": "https://static.mod.io/v1/images/global/modio-dark.png"
       }
     ]
   },
@@ -1999,9 +1999,9 @@ Edit details for a mod. If you want to update the `logo` or media associated wit
     "date_online": 1509922961,
     "avatar": {
       "filename": "modio-dark.png",
-      "original": "https://media.mod.io/images/global/ao_modio-dark.png",
-      "thumb_50x50": "https://media.mod.io/images/global/modio-dark.png",
-      "thumb_100x100": "https://media.mod.io/images/global/am_modio-dark.png"
+      "original": "https://static.mod.io/v1/images/global/ao_modio-dark.png",
+      "thumb_50x50": "https://static.mod.io/v1/images/global/modio-dark.png",
+      "thumb_100x100": "https://static.mod.io/v1/images/global/am_modio-dark.png"
     },
     "timezone": "America/Los_Angeles",
     "language": "en",
@@ -2012,10 +2012,10 @@ Edit details for a mod. If you want to update the `logo` or media associated wit
   "date_live": 1499841403,
   "logo": {
     "filename": "modio-dark.png",
-    "original": "https://media.mod.io/images/global/modio-dark.png",
-    "thumb_320x180": "https://media.mod.io/images/global/modio-dark.png",
-    "thumb_640x360": "https://media.mod.io/images/global/modio-dark.png",
-    "thumb_1280x720": "https://media.mod.io/images/global/modio-dark.png"
+    "original": "https://static.mod.io/v1/images/global/modio-dark.png",
+    "thumb_320x180": "https://static.mod.io/v1/images/global/modio-dark.png",
+    "thumb_640x360": "https://static.mod.io/v1/images/global/modio-dark.png",
+    "thumb_1280x720": "https://static.mod.io/v1/images/global/modio-dark.png"
   },
   "homepage": "https://www.rogue-hdpack.com/",
   "name": "Rogue Knight HD Pack",
@@ -2055,8 +2055,8 @@ Edit details for a mod. If you want to update the `logo` or media associated wit
     "images": [
       {
         "filename": "modio-dark.png",
-        "original": "https://media.mod.io/images/global/modio-dark.png",
-        "thumb_320x180": "https://media.mod.io/images/global/modio-dark.png"
+        "original": "https://static.mod.io/v1/images/global/modio-dark.png",
+        "thumb_320x180": "https://static.mod.io/v1/images/global/modio-dark.png"
       }
     ]
   },
@@ -3296,9 +3296,9 @@ Subscribe the _authenticated user_ to a corresponding mod. No body parameters ar
     "date_online": 1509922961,
     "avatar": {
       "filename": "modio-dark.png",
-      "original": "https://media.mod.io/images/global/ao_modio-dark.png",
-      "thumb_50x50": "https://media.mod.io/images/global/modio-dark.png",
-      "thumb_100x100": "https://media.mod.io/images/global/am_modio-dark.png"
+      "original": "https://static.mod.io/v1/images/global/ao_modio-dark.png",
+      "thumb_50x50": "https://static.mod.io/v1/images/global/modio-dark.png",
+      "thumb_100x100": "https://static.mod.io/v1/images/global/am_modio-dark.png"
     },
     "timezone": "America/Los_Angeles",
     "language": "en",
@@ -3309,10 +3309,10 @@ Subscribe the _authenticated user_ to a corresponding mod. No body parameters ar
   "date_live": 1499841403,
   "logo": {
     "filename": "modio-dark.png",
-    "original": "https://media.mod.io/images/global/modio-dark.png",
-    "thumb_320x180": "https://media.mod.io/images/global/modio-dark.png",
-    "thumb_640x360": "https://media.mod.io/images/global/modio-dark.png",
-    "thumb_1280x720": "https://media.mod.io/images/global/modio-dark.png"
+    "original": "https://static.mod.io/v1/images/global/modio-dark.png",
+    "thumb_320x180": "https://static.mod.io/v1/images/global/modio-dark.png",
+    "thumb_640x360": "https://static.mod.io/v1/images/global/modio-dark.png",
+    "thumb_1280x720": "https://static.mod.io/v1/images/global/modio-dark.png"
   },
   "homepage": "https://www.rogue-hdpack.com/",
   "name": "Rogue Knight HD Pack",
@@ -3352,8 +3352,8 @@ Subscribe the _authenticated user_ to a corresponding mod. No body parameters ar
     "images": [
       {
         "filename": "modio-dark.png",
-        "original": "https://media.mod.io/images/global/modio-dark.png",
-        "thumb_320x180": "https://media.mod.io/images/global/modio-dark.png"
+        "original": "https://static.mod.io/v1/images/global/modio-dark.png",
+        "thumb_320x180": "https://static.mod.io/v1/images/global/modio-dark.png"
       }
     ]
   },
@@ -5510,9 +5510,9 @@ Get all users that are part of a mod team. Successful request will return an arr
         "date_online": 1509922961,
         "avatar": {
           "filename": "modio-dark.png",
-          "original": "https://media.mod.io/images/global/ao_modio-dark.png",
-          "thumb_50x50": "https://media.mod.io/images/global/modio-dark.png",
-          "thumb_100x100": "https://media.mod.io/images/global/am_modio-dark.png"
+          "original": "https://static.mod.io/v1/images/global/ao_modio-dark.png",
+          "thumb_50x50": "https://static.mod.io/v1/images/global/modio-dark.png",
+          "thumb_100x100": "https://static.mod.io/v1/images/global/am_modio-dark.png"
         },
         "timezone": "America/Los_Angeles",
         "language": "en",
@@ -6036,9 +6036,9 @@ Get all comments posted in the mods profile. Successful request will return an a
         "date_online": 1509922961,
         "avatar": {
           "filename": "modio-dark.png",
-          "original": "https://media.mod.io/images/global/ao_modio-dark.png",
-          "thumb_50x50": "https://media.mod.io/images/global/modio-dark.png",
-          "thumb_100x100": "https://media.mod.io/images/global/am_modio-dark.png"
+          "original": "https://static.mod.io/v1/images/global/ao_modio-dark.png",
+          "thumb_50x50": "https://static.mod.io/v1/images/global/modio-dark.png",
+          "thumb_100x100": "https://static.mod.io/v1/images/global/am_modio-dark.png"
         },
         "timezone": "America/Los_Angeles",
         "language": "en",
@@ -6310,9 +6310,9 @@ Get the user that is the original _submitter_ of a resource. Successful request 
   "date_online": 1509922961,
   "avatar": {
     "filename": "modio-dark.png",
-    "original": "https://media.mod.io/images/global/ao_modio-dark.png",
-    "thumb_50x50": "https://media.mod.io/images/global/modio-dark.png",
-    "thumb_100x100": "https://media.mod.io/images/global/am_modio-dark.png"
+    "original": "https://static.mod.io/v1/images/global/ao_modio-dark.png",
+    "thumb_50x50": "https://static.mod.io/v1/images/global/modio-dark.png",
+    "thumb_100x100": "https://static.mod.io/v1/images/global/am_modio-dark.png"
   },
   "timezone": "America/Los_Angeles",
   "language": "en",
@@ -6442,9 +6442,9 @@ Get all users registered on mod.io. Successful request will return an array of [
       "date_online": 1509922961,
       "avatar": {
         "filename": "modio-dark.png",
-        "original": "https://media.mod.io/images/global/ao_modio-dark.png",
-        "thumb_50x50": "https://media.mod.io/images/global/modio-dark.png",
-        "thumb_100x100": "https://media.mod.io/images/global/am_modio-dark.png"
+        "original": "https://static.mod.io/v1/images/global/ao_modio-dark.png",
+        "thumb_50x50": "https://static.mod.io/v1/images/global/modio-dark.png",
+        "thumb_100x100": "https://static.mod.io/v1/images/global/am_modio-dark.png"
       },
       "timezone": "America/Los_Angeles",
       "language": "en",
@@ -6571,9 +6571,9 @@ Get a user. Successful request will return a single [User Object](#user-object).
   "date_online": 1509922961,
   "avatar": {
     "filename": "modio-dark.png",
-    "original": "https://media.mod.io/images/global/ao_modio-dark.png",
-    "thumb_50x50": "https://media.mod.io/images/global/modio-dark.png",
-    "thumb_100x100": "https://media.mod.io/images/global/am_modio-dark.png"
+    "original": "https://static.mod.io/v1/images/global/ao_modio-dark.png",
+    "thumb_50x50": "https://static.mod.io/v1/images/global/modio-dark.png",
+    "thumb_100x100": "https://static.mod.io/v1/images/global/am_modio-dark.png"
   },
   "timezone": "America/Los_Angeles",
   "language": "en",
@@ -6831,9 +6831,9 @@ Get the _authenticated user_ details. Successful request will return a single [U
   "date_online": 1509922961,
   "avatar": {
     "filename": "modio-dark.png",
-    "original": "https://media.mod.io/images/global/ao_modio-dark.png",
-    "thumb_50x50": "https://media.mod.io/images/global/modio-dark.png",
-    "thumb_100x100": "https://media.mod.io/images/global/am_modio-dark.png"
+    "original": "https://static.mod.io/v1/images/global/ao_modio-dark.png",
+    "thumb_50x50": "https://static.mod.io/v1/images/global/modio-dark.png",
+    "thumb_100x100": "https://static.mod.io/v1/images/global/am_modio-dark.png"
   },
   "timezone": "America/Los_Angeles",
   "language": "en",
@@ -6985,9 +6985,9 @@ Get all mod's the _authenticated user_ is subscribed to. Successful request will
         "date_online": 1509922961,
         "avatar": {
           "filename": "modio-dark.png",
-          "original": "https://media.mod.io/images/global/ao_modio-dark.png",
-          "thumb_50x50": "https://media.mod.io/images/global/modio-dark.png",
-          "thumb_100x100": "https://media.mod.io/images/global/am_modio-dark.png"
+          "original": "https://static.mod.io/v1/images/global/ao_modio-dark.png",
+          "thumb_50x50": "https://static.mod.io/v1/images/global/modio-dark.png",
+          "thumb_100x100": "https://static.mod.io/v1/images/global/am_modio-dark.png"
         },
         "timezone": "America/Los_Angeles",
         "language": "en",
@@ -6998,10 +6998,10 @@ Get all mod's the _authenticated user_ is subscribed to. Successful request will
       "date_live": 1499841403,
       "logo": {
         "filename": "modio-dark.png",
-        "original": "https://media.mod.io/images/global/modio-dark.png",
-        "thumb_320x180": "https://media.mod.io/images/global/modio-dark.png",
-        "thumb_640x360": "https://media.mod.io/images/global/modio-dark.png",
-        "thumb_1280x720": "https://media.mod.io/images/global/modio-dark.png"
+        "original": "https://static.mod.io/v1/images/global/modio-dark.png",
+        "thumb_320x180": "https://static.mod.io/v1/images/global/modio-dark.png",
+        "thumb_640x360": "https://static.mod.io/v1/images/global/modio-dark.png",
+        "thumb_1280x720": "https://static.mod.io/v1/images/global/modio-dark.png"
       },
       "homepage": "https://www.rogue-hdpack.com/",
       "name": "Rogue Knight HD Pack",
@@ -7041,8 +7041,8 @@ Get all mod's the _authenticated user_ is subscribed to. Successful request will
         "images": [
           {
             "filename": "modio-dark.png",
-            "original": "https://media.mod.io/images/global/modio-dark.png",
-            "thumb_320x180": "https://media.mod.io/images/global/modio-dark.png"
+            "original": "https://static.mod.io/v1/images/global/modio-dark.png",
+            "thumb_320x180": "https://static.mod.io/v1/images/global/modio-dark.png"
           }
         ]
       },
@@ -7193,9 +7193,9 @@ Get all games the _authenticated user_ added or is a team member of. Successful 
         "date_online": 1509922961,
         "avatar": {
           "filename": "modio-dark.png",
-          "original": "https://media.mod.io/images/global/ao_modio-dark.png",
-          "thumb_50x50": "https://media.mod.io/images/global/modio-dark.png",
-          "thumb_100x100": "https://media.mod.io/images/global/am_modio-dark.png"
+          "original": "https://static.mod.io/v1/images/global/ao_modio-dark.png",
+          "thumb_50x50": "https://static.mod.io/v1/images/global/modio-dark.png",
+          "thumb_100x100": "https://static.mod.io/v1/images/global/am_modio-dark.png"
         },
         "timezone": "America/Los_Angeles",
         "language": "en",
@@ -7213,21 +7213,21 @@ Get all games the _authenticated user_ added or is a team member of. Successful 
       "ugc_name": "map",
       "icon": {
         "filename": "modio-dark.png",
-        "original": "https://media.mod.io/images/global/ao_modio-dark.png",
-        "thumb_64x64": "https://media.mod.io/images/global/modio-dark.png",
-        "thumb_128x128": "https://media.mod.io/images/global/am_modio-dark.png",
-        "thumb_256x256": "https://media.mod.io/images/global/al_modio-dark.png"
+        "original": "https://static.mod.io/v1/images/global/ao_modio-dark.png",
+        "thumb_64x64": "https://static.mod.io/v1/images/global/modio-dark.png",
+        "thumb_128x128": "https://static.mod.io/v1/images/global/am_modio-dark.png",
+        "thumb_256x256": "https://static.mod.io/v1/images/global/al_modio-dark.png"
       },
       "logo": {
         "filename": "modio-dark.png",
-        "original": "https://media.mod.io/images/global/modio-dark.png",
-        "thumb_320x180": "https://media.mod.io/images/global/modio-dark.png",
-        "thumb_640x360": "https://media.mod.io/images/global/modio-dark.png",
-        "thumb_1280x720": "https://media.mod.io/images/global/modio-dark.png"
+        "original": "https://static.mod.io/v1/images/global/modio-dark.png",
+        "thumb_320x180": "https://static.mod.io/v1/images/global/modio-dark.png",
+        "thumb_640x360": "https://static.mod.io/v1/images/global/modio-dark.png",
+        "thumb_1280x720": "https://static.mod.io/v1/images/global/modio-dark.png"
       },
       "header": {
         "filename": "demo.png",
-        "original": "https://media.mod.io/images/global/modio-dark.png"
+        "original": "https://static.mod.io/v1/images/global/modio-dark.png"
       },
       "homepage": "https://www.rogue-knight-game.com/",
       "name": "Rogue Knight",
@@ -7380,9 +7380,9 @@ Get all mods the _authenticated user_ added or is a team member of. Successful r
         "date_online": 1509922961,
         "avatar": {
           "filename": "modio-dark.png",
-          "original": "https://media.mod.io/images/global/ao_modio-dark.png",
-          "thumb_50x50": "https://media.mod.io/images/global/modio-dark.png",
-          "thumb_100x100": "https://media.mod.io/images/global/am_modio-dark.png"
+          "original": "https://static.mod.io/v1/images/global/ao_modio-dark.png",
+          "thumb_50x50": "https://static.mod.io/v1/images/global/modio-dark.png",
+          "thumb_100x100": "https://static.mod.io/v1/images/global/am_modio-dark.png"
         },
         "timezone": "America/Los_Angeles",
         "language": "en",
@@ -7393,10 +7393,10 @@ Get all mods the _authenticated user_ added or is a team member of. Successful r
       "date_live": 1499841403,
       "logo": {
         "filename": "modio-dark.png",
-        "original": "https://media.mod.io/images/global/modio-dark.png",
-        "thumb_320x180": "https://media.mod.io/images/global/modio-dark.png",
-        "thumb_640x360": "https://media.mod.io/images/global/modio-dark.png",
-        "thumb_1280x720": "https://media.mod.io/images/global/modio-dark.png"
+        "original": "https://static.mod.io/v1/images/global/modio-dark.png",
+        "thumb_320x180": "https://static.mod.io/v1/images/global/modio-dark.png",
+        "thumb_640x360": "https://static.mod.io/v1/images/global/modio-dark.png",
+        "thumb_1280x720": "https://static.mod.io/v1/images/global/modio-dark.png"
       },
       "homepage": "https://www.rogue-hdpack.com/",
       "name": "Rogue Knight HD Pack",
@@ -7436,8 +7436,8 @@ Get all mods the _authenticated user_ added or is a team member of. Successful r
         "images": [
           {
             "filename": "modio-dark.png",
-            "original": "https://media.mod.io/images/global/modio-dark.png",
-            "thumb_320x180": "https://media.mod.io/images/global/modio-dark.png"
+            "original": "https://static.mod.io/v1/images/global/modio-dark.png",
+            "thumb_320x180": "https://static.mod.io/v1/images/global/modio-dark.png"
           }
         ]
       },
@@ -7677,10 +7677,10 @@ error|object|Contains error data.
 ```json
 {
   "filename": "modio-dark.png",
-  "original": "https://media.mod.io/images/global/modio-dark.png",
-  "thumb_320x180": "https://media.mod.io/images/global/modio-dark.png",
-  "thumb_640x360": "https://media.mod.io/images/global/modio-dark.png",
-  "thumb_1280x720": "https://media.mod.io/images/global/modio-dark.png"
+  "original": "https://static.mod.io/v1/images/global/modio-dark.png",
+  "thumb_320x180": "https://static.mod.io/v1/images/global/modio-dark.png",
+  "thumb_640x360": "https://static.mod.io/v1/images/global/modio-dark.png",
+  "thumb_1280x720": "https://static.mod.io/v1/images/global/modio-dark.png"
 } 
 ```
 
@@ -7705,10 +7705,10 @@ thumb_1280x720|string|URL to the large logo thumbnail.
 ```json
 {
   "filename": "modio-dark.png",
-  "original": "https://media.mod.io/images/global/ao_modio-dark.png",
-  "thumb_64x64": "https://media.mod.io/images/global/modio-dark.png",
-  "thumb_128x128": "https://media.mod.io/images/global/am_modio-dark.png",
-  "thumb_256x256": "https://media.mod.io/images/global/al_modio-dark.png"
+  "original": "https://static.mod.io/v1/images/global/ao_modio-dark.png",
+  "thumb_64x64": "https://static.mod.io/v1/images/global/modio-dark.png",
+  "thumb_128x128": "https://static.mod.io/v1/images/global/am_modio-dark.png",
+  "thumb_256x256": "https://static.mod.io/v1/images/global/al_modio-dark.png"
 } 
 ```
 
@@ -7733,7 +7733,7 @@ thumb_256x256|string|URL to the large thumbnail image.
 ```json
 {
   "filename": "demo.png",
-  "original": "https://media.mod.io/images/global/modio-dark.png"
+  "original": "https://static.mod.io/v1/images/global/modio-dark.png"
 } 
 ```
 
@@ -7755,9 +7755,9 @@ original|string|URL to the full-sized header image.
 ```json
 {
   "filename": "modio-dark.png",
-  "original": "https://media.mod.io/images/global/ao_modio-dark.png",
-  "thumb_50x50": "https://media.mod.io/images/global/modio-dark.png",
-  "thumb_100x100": "https://media.mod.io/images/global/am_modio-dark.png"
+  "original": "https://static.mod.io/v1/images/global/ao_modio-dark.png",
+  "thumb_50x50": "https://static.mod.io/v1/images/global/modio-dark.png",
+  "thumb_100x100": "https://static.mod.io/v1/images/global/am_modio-dark.png"
 } 
 ```
 
@@ -7781,8 +7781,8 @@ thumb_100x100|string|URL to the medium thumbnail image.
 ```json
 {
   "filename": "modio-dark.png",
-  "original": "https://media.mod.io/images/global/modio-dark.png",
-  "thumb_320x180": "https://media.mod.io/images/global/modio-dark.png"
+  "original": "https://static.mod.io/v1/images/global/modio-dark.png",
+  "thumb_320x180": "https://static.mod.io/v1/images/global/modio-dark.png"
 } 
 ```
 
@@ -7843,9 +7843,9 @@ event_type|string|Type of [event](#get-mod-events-2) was 'MODFILE_CHANGED', 'MOD
     "date_online": 1509922961,
     "avatar": {
       "filename": "modio-dark.png",
-      "original": "https://media.mod.io/images/global/ao_modio-dark.png",
-      "thumb_50x50": "https://media.mod.io/images/global/modio-dark.png",
-      "thumb_100x100": "https://media.mod.io/images/global/am_modio-dark.png"
+      "original": "https://static.mod.io/v1/images/global/ao_modio-dark.png",
+      "thumb_50x50": "https://static.mod.io/v1/images/global/modio-dark.png",
+      "thumb_100x100": "https://static.mod.io/v1/images/global/am_modio-dark.png"
     },
     "timezone": "America/Los_Angeles",
     "language": "en",
@@ -8025,9 +8025,9 @@ date_expires|integer|Unix timestamp of when the `binary_url` will expire.
     "date_online": 1509922961,
     "avatar": {
       "filename": "modio-dark.png",
-      "original": "https://media.mod.io/images/global/ao_modio-dark.png",
-      "thumb_50x50": "https://media.mod.io/images/global/modio-dark.png",
-      "thumb_100x100": "https://media.mod.io/images/global/am_modio-dark.png"
+      "original": "https://static.mod.io/v1/images/global/ao_modio-dark.png",
+      "thumb_50x50": "https://static.mod.io/v1/images/global/modio-dark.png",
+      "thumb_100x100": "https://static.mod.io/v1/images/global/am_modio-dark.png"
     },
     "timezone": "America/Los_Angeles",
     "language": "en",
@@ -8038,10 +8038,10 @@ date_expires|integer|Unix timestamp of when the `binary_url` will expire.
   "date_live": 1499841403,
   "logo": {
     "filename": "modio-dark.png",
-    "original": "https://media.mod.io/images/global/modio-dark.png",
-    "thumb_320x180": "https://media.mod.io/images/global/modio-dark.png",
-    "thumb_640x360": "https://media.mod.io/images/global/modio-dark.png",
-    "thumb_1280x720": "https://media.mod.io/images/global/modio-dark.png"
+    "original": "https://static.mod.io/v1/images/global/modio-dark.png",
+    "thumb_320x180": "https://static.mod.io/v1/images/global/modio-dark.png",
+    "thumb_640x360": "https://static.mod.io/v1/images/global/modio-dark.png",
+    "thumb_1280x720": "https://static.mod.io/v1/images/global/modio-dark.png"
   },
   "homepage": "https://www.rogue-hdpack.com/",
   "name": "Rogue Knight HD Pack",
@@ -8081,8 +8081,8 @@ date_expires|integer|Unix timestamp of when the `binary_url` will expire.
     "images": [
       {
         "filename": "modio-dark.png",
-        "original": "https://media.mod.io/images/global/modio-dark.png",
-        "thumb_320x180": "https://media.mod.io/images/global/modio-dark.png"
+        "original": "https://static.mod.io/v1/images/global/modio-dark.png",
+        "thumb_320x180": "https://static.mod.io/v1/images/global/modio-dark.png"
       }
     ]
   },
@@ -8195,8 +8195,8 @@ tags|[Mod Tag Object  ](#schemamod_tag_object)[]|Contains mod tag data.
   "images": [
     {
       "filename": "modio-dark.png",
-      "original": "https://media.mod.io/images/global/modio-dark.png",
-      "thumb_320x180": "https://media.mod.io/images/global/modio-dark.png"
+      "original": "https://static.mod.io/v1/images/global/modio-dark.png",
+      "thumb_320x180": "https://static.mod.io/v1/images/global/modio-dark.png"
     }
   ]
 } 
@@ -8254,9 +8254,9 @@ date_added|integer|Unix timestamp of date tag was applied.
     "date_online": 1509922961,
     "avatar": {
       "filename": "modio-dark.png",
-      "original": "https://media.mod.io/images/global/ao_modio-dark.png",
-      "thumb_50x50": "https://media.mod.io/images/global/modio-dark.png",
-      "thumb_100x100": "https://media.mod.io/images/global/am_modio-dark.png"
+      "original": "https://static.mod.io/v1/images/global/ao_modio-dark.png",
+      "thumb_50x50": "https://static.mod.io/v1/images/global/modio-dark.png",
+      "thumb_100x100": "https://static.mod.io/v1/images/global/am_modio-dark.png"
     },
     "timezone": "America/Los_Angeles",
     "language": "en",
@@ -8274,21 +8274,21 @@ date_added|integer|Unix timestamp of date tag was applied.
   "ugc_name": "map",
   "icon": {
     "filename": "modio-dark.png",
-    "original": "https://media.mod.io/images/global/ao_modio-dark.png",
-    "thumb_64x64": "https://media.mod.io/images/global/modio-dark.png",
-    "thumb_128x128": "https://media.mod.io/images/global/am_modio-dark.png",
-    "thumb_256x256": "https://media.mod.io/images/global/al_modio-dark.png"
+    "original": "https://static.mod.io/v1/images/global/ao_modio-dark.png",
+    "thumb_64x64": "https://static.mod.io/v1/images/global/modio-dark.png",
+    "thumb_128x128": "https://static.mod.io/v1/images/global/am_modio-dark.png",
+    "thumb_256x256": "https://static.mod.io/v1/images/global/al_modio-dark.png"
   },
   "logo": {
     "filename": "modio-dark.png",
-    "original": "https://media.mod.io/images/global/modio-dark.png",
-    "thumb_320x180": "https://media.mod.io/images/global/modio-dark.png",
-    "thumb_640x360": "https://media.mod.io/images/global/modio-dark.png",
-    "thumb_1280x720": "https://media.mod.io/images/global/modio-dark.png"
+    "original": "https://static.mod.io/v1/images/global/modio-dark.png",
+    "thumb_320x180": "https://static.mod.io/v1/images/global/modio-dark.png",
+    "thumb_640x360": "https://static.mod.io/v1/images/global/modio-dark.png",
+    "thumb_1280x720": "https://static.mod.io/v1/images/global/modio-dark.png"
   },
   "header": {
     "filename": "demo.png",
-    "original": "https://media.mod.io/images/global/modio-dark.png"
+    "original": "https://static.mod.io/v1/images/global/modio-dark.png"
   },
   "homepage": "https://www.rogue-knight-game.com/",
   "name": "Rogue Knight",
@@ -8463,9 +8463,9 @@ display_text|string|Textual representation of the rating in format:<br><br>- Ove
     "date_online": 1509922961,
     "avatar": {
       "filename": "modio-dark.png",
-      "original": "https://media.mod.io/images/global/ao_modio-dark.png",
-      "thumb_50x50": "https://media.mod.io/images/global/modio-dark.png",
-      "thumb_100x100": "https://media.mod.io/images/global/am_modio-dark.png"
+      "original": "https://static.mod.io/v1/images/global/ao_modio-dark.png",
+      "thumb_50x50": "https://static.mod.io/v1/images/global/modio-dark.png",
+      "thumb_100x100": "https://static.mod.io/v1/images/global/am_modio-dark.png"
     },
     "timezone": "America/Los_Angeles",
     "language": "en",
@@ -8515,9 +8515,9 @@ position|string|Custom title given to the user in this team.
   "date_online": 1509922961,
   "avatar": {
     "filename": "modio-dark.png",
-    "original": "https://media.mod.io/images/global/ao_modio-dark.png",
-    "thumb_50x50": "https://media.mod.io/images/global/modio-dark.png",
-    "thumb_100x100": "https://media.mod.io/images/global/am_modio-dark.png"
+    "original": "https://static.mod.io/v1/images/global/ao_modio-dark.png",
+    "thumb_50x50": "https://static.mod.io/v1/images/global/modio-dark.png",
+    "thumb_100x100": "https://static.mod.io/v1/images/global/am_modio-dark.png"
   },
   "timezone": "America/Los_Angeles",
   "language": "en",
@@ -8566,9 +8566,9 @@ profile_url|string|URL to the user's mod.io profile.
         "date_online": 1509922961,
         "avatar": {
           "filename": "modio-dark.png",
-          "original": "https://media.mod.io/images/global/ao_modio-dark.png",
-          "thumb_50x50": "https://media.mod.io/images/global/modio-dark.png",
-          "thumb_100x100": "https://media.mod.io/images/global/am_modio-dark.png"
+          "original": "https://static.mod.io/v1/images/global/ao_modio-dark.png",
+          "thumb_50x50": "https://static.mod.io/v1/images/global/modio-dark.png",
+          "thumb_100x100": "https://static.mod.io/v1/images/global/am_modio-dark.png"
         },
         "timezone": "America/Los_Angeles",
         "language": "en",
@@ -8746,9 +8746,9 @@ result_offset|integer|Number of results skipped over.
         "date_online": 1509922961,
         "avatar": {
           "filename": "modio-dark.png",
-          "original": "https://media.mod.io/images/global/ao_modio-dark.png",
-          "thumb_50x50": "https://media.mod.io/images/global/modio-dark.png",
-          "thumb_100x100": "https://media.mod.io/images/global/am_modio-dark.png"
+          "original": "https://static.mod.io/v1/images/global/ao_modio-dark.png",
+          "thumb_50x50": "https://static.mod.io/v1/images/global/modio-dark.png",
+          "thumb_100x100": "https://static.mod.io/v1/images/global/am_modio-dark.png"
         },
         "timezone": "America/Los_Angeles",
         "language": "en",
@@ -8766,21 +8766,21 @@ result_offset|integer|Number of results skipped over.
       "ugc_name": "map",
       "icon": {
         "filename": "modio-dark.png",
-        "original": "https://media.mod.io/images/global/ao_modio-dark.png",
-        "thumb_64x64": "https://media.mod.io/images/global/modio-dark.png",
-        "thumb_128x128": "https://media.mod.io/images/global/am_modio-dark.png",
-        "thumb_256x256": "https://media.mod.io/images/global/al_modio-dark.png"
+        "original": "https://static.mod.io/v1/images/global/ao_modio-dark.png",
+        "thumb_64x64": "https://static.mod.io/v1/images/global/modio-dark.png",
+        "thumb_128x128": "https://static.mod.io/v1/images/global/am_modio-dark.png",
+        "thumb_256x256": "https://static.mod.io/v1/images/global/al_modio-dark.png"
       },
       "logo": {
         "filename": "modio-dark.png",
-        "original": "https://media.mod.io/images/global/modio-dark.png",
-        "thumb_320x180": "https://media.mod.io/images/global/modio-dark.png",
-        "thumb_640x360": "https://media.mod.io/images/global/modio-dark.png",
-        "thumb_1280x720": "https://media.mod.io/images/global/modio-dark.png"
+        "original": "https://static.mod.io/v1/images/global/modio-dark.png",
+        "thumb_320x180": "https://static.mod.io/v1/images/global/modio-dark.png",
+        "thumb_640x360": "https://static.mod.io/v1/images/global/modio-dark.png",
+        "thumb_1280x720": "https://static.mod.io/v1/images/global/modio-dark.png"
       },
       "header": {
         "filename": "demo.png",
-        "original": "https://media.mod.io/images/global/modio-dark.png"
+        "original": "https://static.mod.io/v1/images/global/modio-dark.png"
       },
       "homepage": "https://www.rogue-knight-game.com/",
       "name": "Rogue Knight",
@@ -8928,9 +8928,9 @@ result_offset|integer|Number of results skipped over.
         "date_online": 1509922961,
         "avatar": {
           "filename": "modio-dark.png",
-          "original": "https://media.mod.io/images/global/ao_modio-dark.png",
-          "thumb_50x50": "https://media.mod.io/images/global/modio-dark.png",
-          "thumb_100x100": "https://media.mod.io/images/global/am_modio-dark.png"
+          "original": "https://static.mod.io/v1/images/global/ao_modio-dark.png",
+          "thumb_50x50": "https://static.mod.io/v1/images/global/modio-dark.png",
+          "thumb_100x100": "https://static.mod.io/v1/images/global/am_modio-dark.png"
         },
         "timezone": "America/Los_Angeles",
         "language": "en",
@@ -8941,10 +8941,10 @@ result_offset|integer|Number of results skipped over.
       "date_live": 1499841403,
       "logo": {
         "filename": "modio-dark.png",
-        "original": "https://media.mod.io/images/global/modio-dark.png",
-        "thumb_320x180": "https://media.mod.io/images/global/modio-dark.png",
-        "thumb_640x360": "https://media.mod.io/images/global/modio-dark.png",
-        "thumb_1280x720": "https://media.mod.io/images/global/modio-dark.png"
+        "original": "https://static.mod.io/v1/images/global/modio-dark.png",
+        "thumb_320x180": "https://static.mod.io/v1/images/global/modio-dark.png",
+        "thumb_640x360": "https://static.mod.io/v1/images/global/modio-dark.png",
+        "thumb_1280x720": "https://static.mod.io/v1/images/global/modio-dark.png"
       },
       "homepage": "https://www.rogue-hdpack.com/",
       "name": "Rogue Knight HD Pack",
@@ -8984,8 +8984,8 @@ result_offset|integer|Number of results skipped over.
         "images": [
           {
             "filename": "modio-dark.png",
-            "original": "https://media.mod.io/images/global/modio-dark.png",
-            "thumb_320x180": "https://media.mod.io/images/global/modio-dark.png"
+            "original": "https://static.mod.io/v1/images/global/modio-dark.png",
+            "thumb_320x180": "https://static.mod.io/v1/images/global/modio-dark.png"
           }
         ]
       },
@@ -9231,9 +9231,9 @@ result_offset|integer|Number of results skipped over.
         "date_online": 1509922961,
         "avatar": {
           "filename": "modio-dark.png",
-          "original": "https://media.mod.io/images/global/ao_modio-dark.png",
-          "thumb_50x50": "https://media.mod.io/images/global/modio-dark.png",
-          "thumb_100x100": "https://media.mod.io/images/global/am_modio-dark.png"
+          "original": "https://static.mod.io/v1/images/global/ao_modio-dark.png",
+          "thumb_50x50": "https://static.mod.io/v1/images/global/modio-dark.png",
+          "thumb_100x100": "https://static.mod.io/v1/images/global/am_modio-dark.png"
         },
         "timezone": "America/Los_Angeles",
         "language": "en",
@@ -9297,9 +9297,9 @@ result_offset|integer|Number of results skipped over.
       "date_online": 1509922961,
       "avatar": {
         "filename": "modio-dark.png",
-        "original": "https://media.mod.io/images/global/ao_modio-dark.png",
-        "thumb_50x50": "https://media.mod.io/images/global/modio-dark.png",
-        "thumb_100x100": "https://media.mod.io/images/global/am_modio-dark.png"
+        "original": "https://static.mod.io/v1/images/global/ao_modio-dark.png",
+        "thumb_50x50": "https://static.mod.io/v1/images/global/modio-dark.png",
+        "thumb_100x100": "https://static.mod.io/v1/images/global/am_modio-dark.png"
       },
       "timezone": "America/Los_Angeles",
       "language": "en",

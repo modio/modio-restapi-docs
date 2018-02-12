@@ -109,7 +109,7 @@ under the License.
       <div id="toc" class="toc-list-h1">
         <% toc_data(page_content).each do |h1| %>
           <li>
-            <a href="#<%= h1[:id] %>" class="toc-h1 toc-link" data-title="<%= h1[:content] %>"><%= h1[:content].text != "Response Schemas" ? "<span class=\"reficon\"><img src=\"https://media.mod.io/images/global/modio-icon-light.svg\" alt=\"Reference\" class=\"menu-reference-icon\"></span> " + h1[:content].text : "<span class=\"reficon\"><img src=\"https://media.mod.io/images/global/modio-icon-color.svg\" alt=\"Reference\" class=\"menu-reference-icon\"></span> " + h1[:content].text %></a>
+            <a href="#<%= h1[:id] %>" class="toc-h1 toc-link" data-title="<%= h1[:content] %>"><%= h1[:content].text != "Response Schemas" ? "<span class=\"reficon\"><img src=\"https://static.mod.io/v1/images/branding/modio-icon-light.svg\" alt=\"Reference\" class=\"menu-reference-icon\"></span> " + h1[:content].text : "<span class=\"reficon\"><img src=\"https://media.mod.io/images/global/modio-icon-color.svg\" alt=\"Reference\" class=\"menu-reference-icon\"></span> " + h1[:content].text %></a>
             <% if h1[:children].length > 0 %>
               <ul class="toc-list-h2">
                 <% h1[:children].each do |h2| %>
