@@ -598,6 +598,9 @@
                     <a href="#user-object" class="toc-h2 toc-link" data-title="Response Schemas">User Object</a>
                   </li>
                   <li>
+                    <a href="#get-all-mod-comments-2" class="toc-h2 toc-link" data-title="Response Schemas">Get All Mod Comments</a>
+                  </li>
+                  <li>
                     <a href="#get-all-mod-dependencies-2" class="toc-h2 toc-link" data-title="Response Schemas">Get All Mod Dependencies</a>
                   </li>
                   <li>
@@ -1361,7 +1364,7 @@ Accept-Language: de
     </span><span class="p">}</span><span class="w">
 </span><span class="p">}</span><span class="w">
 </span></code></pre>
-<p>The mod.io API provides localization for a collection of languages. To specify responses from the API to be in a particular language, simply provide the <code>Accept-Language</code> header with an <a href="https://www.iso.org/iso-639-language-codes.html">ISO 639 compliant</a> language code. The list of supported codes is listed can be seen below:</p>
+<p>The mod.io API provides localization for a collection of languages. To specify responses from the API to be in a particular language, simply provide the <code>Accept-Language</code> header with an <a href="https://www.iso.org/iso-639-language-codes.html">ISO 639 compliant</a> language code. If a valid language code is not provided and the user is authenticated, the language they have selected in their profile will be used, otherwise the system will default to English (US). The list of supported codes is listed can be seen below:</p>
 
 <table>
 <thead>
@@ -1434,8 +1437,6 @@ Accept-Language: de
 </tr>
 </tbody>
 </table>
-
-<p>If a language code is provided that is not in the above table, it will default to English (US). </p>
 
 <p><strong>NOTE</strong>: Localization for mod.io is currently a work-in-progress and thus not all responses may be in the desired language.</p>
 <h2 id="rate-limiting">Rate Limiting</h2>
@@ -9798,7 +9799,7 @@ oauth2 ( Scopes: read )
 <tr>
 <td>» language</td>
 <td>string</td>
-<td>2-character representation of users language preference.</td>
+<td>Users language preference. See <a href="#localization">localization</a> for the supported languages.</td>
 </tr>
 <tr>
 <td>» profile_url</td>
@@ -10213,7 +10214,7 @@ oauth2 ( Scopes: read )
 <tr>
 <td>» language</td>
 <td>string</td>
-<td>2-character representation of users language preference.</td>
+<td>Users language preference. See <a href="#localization">localization</a> for the supported languages.</td>
 </tr>
 <tr>
 <td>» profile_url</td>
@@ -10711,7 +10712,7 @@ oauth2 ( Scopes: read )
 <tr>
 <td>» language</td>
 <td>string</td>
-<td>2-character representation of users language preference.</td>
+<td>Users language preference. See <a href="#localization">localization</a> for the supported languages.</td>
 </tr>
 <tr>
 <td>» profile_url</td>
@@ -11119,7 +11120,7 @@ oauth2 ( Scopes: read )
 <tr>
 <td>» language</td>
 <td>string</td>
-<td>2-character representation of users language preference.</td>
+<td>Users language preference. See <a href="#localization">localization</a> for the supported languages.</td>
 </tr>
 <tr>
 <td>» profile_url</td>
@@ -11223,7 +11224,7 @@ oauth2 ( Scopes: read )
 <tr>
 <td>language</td>
 <td>string</td>
-<td>2-character representation of users language preference.</td>
+<td>Users language preference. See <a href="#localization">localization</a> for the supported languages.</td>
 </tr>
 <tr>
 <td>profile_url</td>
@@ -11232,9 +11233,7 @@ oauth2 ( Scopes: read )
 </tr>
 </tbody>
 </table>
-
-<p>## Get All Mod Comments </p>
-
+<h2 id="get-all-mod-comments-2">Get All Mod Comments</h2>
 <p><a name="schemaget_all_mod_comments"></a></p>
 <pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
   </span><span class="s2">"data"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
@@ -11355,7 +11354,7 @@ oauth2 ( Scopes: read )
 <tr>
 <td>»» language</td>
 <td>string</td>
-<td>2-character representation of users language preference.</td>
+<td>Users language preference. See <a href="#localization">localization</a> for the supported languages.</td>
 </tr>
 <tr>
 <td>»» profile_url</td>
@@ -11778,7 +11777,7 @@ oauth2 ( Scopes: read )
 <tr>
 <td>»» language</td>
 <td>string</td>
-<td>2-character representation of users language preference.</td>
+<td>Users language preference. See <a href="#localization">localization</a> for the supported languages.</td>
 </tr>
 <tr>
 <td>»» profile_url</td>
@@ -12236,7 +12235,7 @@ oauth2 ( Scopes: read )
 <tr>
 <td>»» language</td>
 <td>string</td>
-<td>2-character representation of users language preference.</td>
+<td>Users language preference. See <a href="#localization">localization</a> for the supported languages.</td>
 </tr>
 <tr>
 <td>»» profile_url</td>
@@ -12839,7 +12838,7 @@ oauth2 ( Scopes: read )
 <tr>
 <td>»» language</td>
 <td>string</td>
-<td>2-character representation of users language preference.</td>
+<td>Users language preference. See <a href="#localization">localization</a> for the supported languages.</td>
 </tr>
 <tr>
 <td>»» profile_url</td>
@@ -12974,7 +12973,7 @@ oauth2 ( Scopes: read )
 <tr>
 <td>» language</td>
 <td>string</td>
-<td>2-character representation of users language preference.</td>
+<td>Users language preference. See <a href="#localization">localization</a> for the supported languages.</td>
 </tr>
 <tr>
 <td>» profile_url</td>
