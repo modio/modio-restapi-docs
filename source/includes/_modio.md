@@ -171,7 +171,7 @@ curl -X post --parse_apiurl/games/1/mods/1/tags \
 
 ### Request Content-Type
 
-If you are making a request that includes a file, your request `Content-Type` header __must__ be `multipart/form-data`, otherwise if the request contains data (but no files) it should be `application/x-www-form-urlencoded`. 
+If you are making a request that includes a file, your request `Content-Type` header __must__ be `multipart/form-data`, otherwise if the request contains data (but no files) it should be `application/x-www-form-urlencoded` with text encoded in `UTF-8` format. 
 
 ```shell
 // Example POST request with binary file
@@ -202,7 +202,7 @@ curl -X post --parse_apiurl/games/1/team \
   -H 'Authorization: Bearer your-token-here' \
   -H 'Content-Type: application/x-www-form-urlencoded' \  
   -d 'input_json={
-		"member":"1",
+		"member":"patrick@diabolical.com",
 		"level":"8",
 		"position":"King in the North"
 	  }'
@@ -583,6 +583,56 @@ You can combine any of these options by adding them together which means there a
 The number of combinations makes using _equals_, _in_ and other filters a little complex. To solve this we support Bitwise AND (&) which makes it easy to match a column which contains any of the Options you want.
 
 - `?api-bitwise-and=5` - Will match the `api` column values 1, 3, 4, 5, 6, 7, 9, 11, 12, 13, 14, 15 (since these values contain the bits 1, 4 or both).
+
+## Localization
+
+```
+Example HTTP Header Request
+---------------------
+HTTP/1.1 200 OK
+...
+...
+Accept-Language: de
+```
+
+```json
+Example response (assuming a validation error occurred)
+
+{
+    "error": {
+        "code": 422,
+        "message": "Überprüfung fehlgeschlagen. Bitte lesen Sie unten, um ungültige Eingaben zu korrigieren:",
+        "errors": {
+            "name": "Name darf maximal 50 Zeichen haben."
+        }
+    }
+}
+```
+
+The mod.io API provides localization for a collection of languages. To specify responses from the API to be in a particular language, simply provide the `Accept-Language` header with an [ISO 639 compliant](https://www.iso.org/iso-639-language-codes.html) language code. The list of supported codes is listed can be seen below:
+
+Language Code | Language
+---------- | ----------  
+`en` | English (US) _default_
+`bg` | Bulgarian
+`fr` | French
+`de` | German
+`it` | Italian
+`pl` | Polish
+`pt` | Portuguese
+`hu` | Hungarian
+`ja` | Japanese
+`ko` | Korean
+`ru` | Russian
+`es` | Spanish
+`th` | Thai
+`zh-CN` | Chinese (Simplified)
+`zh-TW` | Chinese (Traditional)
+
+If a language code is provided that is not in the above table, it will default to English (US). 
+
+__NOTE__: Localization for mod.io is currently a work-in-progress and thus not all responses may be in the desired language.
+
 
 ## Rate Limiting
 
