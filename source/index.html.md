@@ -626,7 +626,7 @@ Example response (assuming a validation error occurred)
 }
 ```
 
-The mod.io API provides localization for a collection of languages. To specify responses from the API to be in a particular language, simply provide the `Accept-Language` header with an [ISO 639 compliant](https://www.iso.org/iso-639-language-codes.html) language code. The list of supported codes is listed can be seen below:
+The mod.io API provides localization for a collection of languages. To specify responses from the API to be in a particular language, simply provide the `Accept-Language` header with an [ISO 639 compliant](https://www.iso.org/iso-639-language-codes.html) language code. If a valid language code is not provided and the user is authenticated, the language they have selected in their profile will be used, otherwise the system will default to English (US). The list of supported codes is listed can be seen below:
 
 Language Code | Language
 ---------- | ----------  
@@ -645,8 +645,6 @@ Language Code | Language
 `th` | Thai
 `zh-CN` | Chinese (Simplified)
 `zh-TW` | Chinese (Traditional)
-
-If a language code is provided that is not in the above table, it will default to English (US). 
 
 __NOTE__: Localization for mod.io is currently a work-in-progress and thus not all responses may be in the desired language.
 
@@ -7928,7 +7926,7 @@ submitted_by|[User Object   ](#schemauser_object)|Contains user data.
 »» thumb_50x50|string|URL to the small thumbnail image.
 »» thumb_100x100|string|URL to the medium thumbnail image.
 » timezone|string|Timezone of the user, format is country/city.
-» language|string|2-character representation of users language preference.
+» language|string|Users language preference. See [localization](#localization) for the supported languages.
 » profile_url|string|URL to the user's mod.io profile.
 date_added|integer|Unix timestamp of date the comment was posted.
 reply_id|integer|Id of the parent comment this comment is replying to (can be 0 if the comment is not a reply).
@@ -8173,7 +8171,7 @@ submitted_by|[User Object   ](#schemauser_object)|Contains user data.
 »» thumb_50x50|string|URL to the small thumbnail image.
 »» thumb_100x100|string|URL to the medium thumbnail image.
 » timezone|string|Timezone of the user, format is country/city.
-» language|string|2-character representation of users language preference.
+» language|string|Users language preference. See [localization](#localization) for the supported languages.
 » profile_url|string|URL to the user's mod.io profile.
 date_added|integer|Unix timestamp of date mod was registered.
 date_updated|integer|Unix timestamp of date mod was updated.
@@ -8377,7 +8375,7 @@ submitted_by|[User Object   ](#schemauser_object)|Contains user data.
 »» thumb_50x50|string|URL to the small thumbnail image.
 »» thumb_100x100|string|URL to the medium thumbnail image.
 » timezone|string|Timezone of the user, format is country/city.
-» language|string|2-character representation of users language preference.
+» language|string|Users language preference. See [localization](#localization) for the supported languages.
 » profile_url|string|URL to the user's mod.io profile.
 date_added|integer|Unix timestamp of date game was registered.
 date_updated|integer|Unix timestamp of date game was updated.
@@ -8544,7 +8542,7 @@ user|[User Object   ](#schemauser_object)|Contains user data.
 »» thumb_50x50|string|URL to the small thumbnail image.
 »» thumb_100x100|string|URL to the medium thumbnail image.
 » timezone|string|Timezone of the user, format is country/city.
-» language|string|2-character representation of users language preference.
+» language|string|Users language preference. See [localization](#localization) for the supported languages.
 » profile_url|string|URL to the user's mod.io profile.
 level|integer|Level of permission the user has:<br><br>__1__ = Member<br>__4__ = Manager<br>__8__ = Leader
 date_added|integer|Unix timestamp of the date the user was added to the team.
@@ -8590,7 +8588,7 @@ avatar|[Avatar Object   ](#schemaavatar_object)|Contains avatar data.
 » thumb_50x50|string|URL to the small thumbnail image.
 » thumb_100x100|string|URL to the medium thumbnail image.
 timezone|string|Timezone of the user, format is country/city.
-language|string|2-character representation of users language preference.
+language|string|Users language preference. See [localization](#localization) for the supported languages.
 profile_url|string|URL to the user's mod.io profile.
 
 
@@ -8599,7 +8597,7 @@ profile_url|string|URL to the user's mod.io profile.
 
 
 
- ## Get All Mod Comments 
+## Get All Mod Comments 
 
 <a name="schemaget_all_mod_comments"></a>
 
@@ -8660,7 +8658,7 @@ data|[Comment Object   ](#schemacomment_object)[]|Array containing comment objec
 »»» thumb_50x50|string|URL to the small thumbnail image.
 »»» thumb_100x100|string|URL to the medium thumbnail image.
 »» timezone|string|Timezone of the user, format is country/city.
-»» language|string|2-character representation of users language preference.
+»» language|string|Users language preference. See [localization](#localization) for the supported languages.
 »» profile_url|string|URL to the user's mod.io profile.
 » date_added|integer|Unix timestamp of date the comment was posted.
 » reply_id|integer|Id of the parent comment this comment is replying to (can be 0 if the comment is not a reply).
@@ -8878,7 +8876,7 @@ data|[Game Object   ](#schemagame_object)[]|Array containing game objects.
 »»» thumb_50x50|string|URL to the small thumbnail image.
 »»» thumb_100x100|string|URL to the medium thumbnail image.
 »» timezone|string|Timezone of the user, format is country/city.
-»» language|string|2-character representation of users language preference.
+»» language|string|Users language preference. See [localization](#localization) for the supported languages.
 »» profile_url|string|URL to the user's mod.io profile.
 » date_added|integer|Unix timestamp of date game was registered.
 » date_updated|integer|Unix timestamp of date game was updated.
@@ -9085,7 +9083,7 @@ data|[Mod Object   ](#schemamod_object)[]|Array containing mod objects.
 »»» thumb_50x50|string|URL to the small thumbnail image.
 »»» thumb_100x100|string|URL to the medium thumbnail image.
 »» timezone|string|Timezone of the user, format is country/city.
-»» language|string|2-character representation of users language preference.
+»» language|string|Users language preference. See [localization](#localization) for the supported languages.
 »» profile_url|string|URL to the user's mod.io profile.
 » date_added|integer|Unix timestamp of date mod was registered.
 » date_updated|integer|Unix timestamp of date mod was updated.
@@ -9321,7 +9319,7 @@ data|[Team Member Object  ](#schemateam_member_object)[]|Array containing team m
 »»» thumb_50x50|string|URL to the small thumbnail image.
 »»» thumb_100x100|string|URL to the medium thumbnail image.
 »» timezone|string|Timezone of the user, format is country/city.
-»» language|string|2-character representation of users language preference.
+»» language|string|Users language preference. See [localization](#localization) for the supported languages.
 »» profile_url|string|URL to the user's mod.io profile.
 » level|integer|Level of permission the user has:<br><br>__1__ = Member<br>__4__ = Manager<br>__8__ = Leader
 » date_added|integer|Unix timestamp of the date the user was added to the team.
@@ -9381,7 +9379,7 @@ data|[User Object   ](#schemauser_object)[]|Array containing user objects.
 »» thumb_50x50|string|URL to the small thumbnail image.
 »» thumb_100x100|string|URL to the medium thumbnail image.
 » timezone|string|Timezone of the user, format is country/city.
-» language|string|2-character representation of users language preference.
+» language|string|Users language preference. See [localization](#localization) for the supported languages.
 » profile_url|string|URL to the user's mod.io profile.
 result_count|integer|Number of results returned in the data array.
 result_limit|integer|Maximum number of results returned.
