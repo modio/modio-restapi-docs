@@ -626,7 +626,7 @@ Example response (assuming a validation error occurred)
 }
 ```
 
-The mod.io API provides localization for a collection of languages. To specify responses from the API to be in a particular language, simply provide the `Accept-Language` header with an [ISO 639 compliant](https://www.iso.org/iso-639-language-codes.html) language code. The list of supported codes is listed can be seen below:
+The mod.io API provides localization for a collection of languages. To specify responses from the API to be in a particular language, simply provide the `Accept-Language` header with an [ISO 639 compliant](https://www.iso.org/iso-639-language-codes.html) language code. If a valid language code is not provided and the user is authenticated, the language they have selected in their profile will be used, otherwise the system will default to English (US). The list of supported codes is listed can be seen below:
 
 Language Code | Language
 ---------- | ----------  
@@ -645,8 +645,6 @@ Language Code | Language
 `th` | Thai
 `zh-CN` | Chinese (Simplified)
 `zh-TW` | Chinese (Traditional)
-
-If a language code is provided that is not in the above table, it will default to English (US). 
 
 __NOTE__: Localization for mod.io is currently a work-in-progress and thus not all responses may be in the desired language.
 
