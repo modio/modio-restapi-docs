@@ -3326,7 +3326,7 @@ System.out.println(response.toString());
 ```
 `POST /games/{game-id}/mods/{mod-id}/subscribe`
 
-Subscribe the _authenticated user_ to a corresponding mod. No body parameters are required for this action. Successful request will return the [Mod Object](#mod-object) of the newly subscribed mod.<br><br>__NOTE:__ Users can subscribe to mods via mod.io, we recommend you poll the [Get All Mod Events](#get-all-mod-events) endpoint to keep a users mods collection up to date.
+Subscribe the _authenticated user_ to a corresponding mod. No body parameters are required for this action. Successful request will return the [Mod Object](#mod-object) of the newly subscribed mod.<br><br>__NOTE:__ Users can subscribe to mods via mod.io, we recommend you poll the [Get All Events](#get-all-events) endpoint to keep a users mods collection up to date.
 
 
 > Example response
@@ -3640,7 +3640,7 @@ System.out.println(response.toString());
 ```
 `GET /games/{game-id}/mods/{mod-id}/events`
 
-Get the event log for a mod, showing changes made sorted by latest event first. Successful request will return an array of [Mod Event Objects](#get-mod-events-2). We recommended reading the [filtering documentation](#filtering) to return only the records you want.
+Get the event log for a mod, showing changes made sorted by latest event first. Successful request will return an array of [Event Objects](#get-mod-events-2). We recommended reading the [filtering documentation](#filtering) to return only the records you want.
 
      Filter|Type|Description
      ---|---|---
@@ -3771,7 +3771,7 @@ System.out.println(response.toString());
 ```
 `GET /games/{game-id}/mods/events`
 
-Get all mods events for the corresponding game sorted by latest event first. Successful request will return an array of [Mod Event Objects](#get-mod-events-2).<br><br>__NOTE:__ We recommend you poll this endpoint to keep mods up-to-date. If polling this endpoint for updates you should store the `id` or `date_updated` of the latest event, and on subsequent requests use that information [in the filter](#filtering), to return only newer events to process.
+Get all mods events for the corresponding game sorted by latest event first. Successful request will return an array of [Event Objects](#get-mod-events-2).<br><br>__NOTE:__ We recommend you poll this endpoint to keep mods up-to-date. If polling this endpoint for updates you should store the `id` or `date_updated` of the latest event, and on subsequent requests use that information [in the filter](#filtering), to return only newer events to process.
 
      Filter|Type|Description
      ---|---|---
@@ -7130,6 +7130,137 @@ oauth2 ( Scopes: read )
 </aside>
 
 
+## Get User Events
+
+> Example request
+
+```shell
+# You can also use wget
+curl -X GET https://api.mod.io/v1/me/events?api_key=YourApiKey \
+  -H 'Accept: application/json'
+
+```
+
+```http
+GET https://api.mod.io/v1/me/events?api_key=YourApiKey HTTP/1.1
+Host: api.mod.io
+
+Accept: application/json
+
+```
+
+```javascript
+var headers = {
+  'Accept':'application/json'
+
+};
+
+$.ajax({
+  url: 'https://api.mod.io/v1/me/events',
+  method: 'get',
+  data: '?api_key=YourApiKey',
+  headers: headers,
+  success: function(data) {
+    console.log(JSON.stringify(data));
+  }
+})
+```
+
+```javascript--nodejs
+const request = require('node-fetch');
+
+const headers = {
+  'Accept':'application/json'
+
+};
+
+fetch('https://api.mod.io/v1/me/events?api_key=YourApiKey',
+{
+  method: 'GET',
+
+  headers: headers
+})
+.then(function(res) {
+    return res.json();
+}).then(function(body) {
+    console.log(body);
+});
+```
+
+```python
+import requests
+headers = {
+  'Accept': 'application/json'
+}
+
+r = requests.get('https://api.mod.io/v1/me/events', params={
+  'api_key': 'YourApiKey'
+}, headers = headers)
+
+print r.json()
+```
+
+```java
+URL obj = new URL("https://api.mod.io/v1/me/events?api_key=YourApiKey");
+HttpURLConnection con = (HttpURLConnection) obj.openConnection();
+con.setRequestMethod("GET");
+int responseCode = con.getResponseCode();
+BufferedReader in = new BufferedReader(
+    new InputStreamReader(con.getInputStream()));
+String inputLine;
+StringBuffer response = new StringBuffer();
+while ((inputLine = in.readLine()) != null) {
+    response.append(inputLine);
+}
+in.close();
+System.out.println(response.toString());
+```
+`GET /me/events`
+
+Get events that have been fired specific to the user. Successful request will return an array of [Event Objects](#get-all-user-events). We recommended reading the [filtering documentation](#filtering) to return only the records you want.
+
+    Filter|Type|Description
+    ---|---|---
+    id|integer|Unique id of the event object.
+    mod_id|integer|Unique id of the parent mod.
+    user_id|integer|Unique id of the user who performed the action.
+    date_added|integer|Unix timestamp of date mod was updated.
+    event_type|string|Type of change that occurred:<br><br>__USER_TEAM_JOIN__ = User has joined a team.<br>__USER_TEAM_LEAVE__ = User has left a team.<br>__USER_SUBSCRIBE__ = User has subscribed to a mod.<br>__USER_UNSUBSCRIBE__ = User has un-subscribed from a mod.
+
+
+> Example response
+
+```json
+{
+  "data": [
+    {
+      "id": 13,
+      "mod_id": 13,
+      "user_id": 13,
+      "date_added": 1499846132,
+      "event_type": "MODFILE_CHANGED"
+    },
+    {
+        ...
+    }
+  ],
+  "result_count": 100,
+  "result_limit": 100,
+  "result_offset": 0
+}
+```
+<h3 id="Get-User-Events-responses">Responses</h3>
+
+Status|Meaning|Description|Response Schema
+---|---|---|---|
+200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)|Successful Request|[Get Mod Events  ](#schemaget_mod_events)
+
+<aside class="warning">
+To perform this operation, you must be authenticated by means of one of the following methods:
+apiKey, oauth2 ( Scopes: read )
+</aside>
+
+
 ## Get User Games
 
 > Example request
@@ -7848,9 +7979,9 @@ thumb_320x180|string|URL to the image thumbnail.
 
 
 
-## Mod Event Object  
+## Event Object
 
-<a name="schemamod_event_object"></a>
+   <a name="schemaevent_object"></a>
 
 ```json
 {
@@ -9172,7 +9303,7 @@ result_offset|integer|Number of results skipped over.
 
 Name|Type|Description
 ---|---|---|---|
-data|[Mod Event Object  ](#schemamod_event_object)[]|Array containing mod event objects.
+data|[Event Object   ](#schemaevent_object)[]|Array containing event objects.
 » id|integer|Unique id of the event object.
 » mod_id|integer|Unique id of the parent mod.
 » user_id|integer|Unique id of the user who performed the action.
@@ -9381,6 +9512,48 @@ data|[User Object   ](#schemauser_object)[]|Array containing user objects.
 » timezone|string|Timezone of the user, format is country/city.
 » language|string|Users language preference. See [localization](#localization) for the supported languages.
 » profile_url|string|URL to the user's mod.io profile.
+result_count|integer|Number of results returned in the data array.
+result_limit|integer|Maximum number of results returned.
+result_offset|integer|Number of results skipped over.
+
+
+
+
+## Get All User Events 
+
+<a name="schemaget_all_user_events"></a>
+
+```json
+{
+  "data": [
+    {
+      "id": 13,
+      "mod_id": 13,
+      "user_id": 13,
+      "date_added": 1499846132,
+      "event_type": "MODFILE_CHANGED"
+    },
+    {
+        ...
+    }
+  ],
+  "result_count": 100,
+  "result_limit": 100,
+  "result_offset": 0
+} 
+```
+
+
+### Properties
+
+Name|Type|Description
+---|---|---|---|
+data|[Event Object   ](#schemaevent_object)[]|Array containing event objects.
+» id|integer|Unique id of the event object.
+» mod_id|integer|Unique id of the parent mod.
+» user_id|integer|Unique id of the user who performed the action.
+» date_added|integer|Unix timestamp of date the event occurred.
+» event_type|string|Type of [event](#get-mod-events-2) was 'MODFILE_CHANGED', 'MOD_AVAILABLE', 'MOD_UNAVAILABLE', 'MOD_EDITED'.
 result_count|integer|Number of results returned in the data array.
 result_limit|integer|Maximum number of results returned.
 result_offset|integer|Number of results skipped over.
