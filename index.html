@@ -518,6 +518,9 @@
                     <a href="#get-user-subscriptions" class="toc-h2 toc-link" data-title="Me">Get User Subscriptions</a>
                   </li>
                   <li>
+                    <a href="#get-user-events" class="toc-h2 toc-link" data-title="Me">Get User Events</a>
+                  </li>
+                  <li>
                     <a href="#get-user-games" class="toc-h2 toc-link" data-title="Me">Get User Games</a>
                   </li>
                   <li>
@@ -553,7 +556,7 @@
                     <a href="#image-object" class="toc-h2 toc-link" data-title="Response Schemas">Image Object</a>
                   </li>
                   <li>
-                    <a href="#mod-event-object" class="toc-h2 toc-link" data-title="Response Schemas">Mod Event Object</a>
+                    <a href="#event-object" class="toc-h2 toc-link" data-title="Response Schemas">Event Object</a>
                   </li>
                   <li>
                     <a href="#comment-object" class="toc-h2 toc-link" data-title="Response Schemas">Comment Object</a>
@@ -629,6 +632,9 @@
                   </li>
                   <li>
                     <a href="#get-all-users-2" class="toc-h2 toc-link" data-title="Response Schemas">Get All Users</a>
+                  </li>
+                  <li>
+                    <a href="#get-all-user-events" class="toc-h2 toc-link" data-title="Response Schemas">Get All User Events</a>
                   </li>
               </ul>
           </li>
@@ -1364,7 +1370,7 @@ Accept-Language: de
     </span><span class="p">}</span><span class="w">
 </span><span class="p">}</span><span class="w">
 </span></code></pre>
-<p>The mod.io API provides localization for a collection of languages. To specify responses from the API to be in a particular language, simply provide the <code>Accept-Language</code> header with an <a href="https://www.iso.org/iso-639-language-codes.html">ISO 639 compliant</a> language code. If a valid language code is not provided and the user is authenticated, the language they have selected in their profile will be used, otherwise the system will default to English (US). The list of supported codes is listed can be seen below:</p>
+<p>The mod.io API provides localization for a collection of languages. To specify responses from the API to be in a particular language, simply provide the <code>Accept-Language</code> header with an <a href="https://www.iso.org/iso-639-language-codes.html">ISO 639 compliant</a> language code. If a valid language code is not provided and the user is authenticated, the language they have selected in <a href="#user-object">their profile</a> will be used. All other requests will default to English (US). The list of supported codes includes:</p>
 
 <table>
 <thead>
@@ -4639,7 +4645,7 @@ Content-Type: application/x-www-form-urlencoded
 </code></pre>
 <p><span class="httpmethod POST">POST</span> <span class="endpointheading">/games/{game-id}/mods/{mod-id}/subscribe</span></p>
 
-<p>Subscribe the <em>authenticated user</em> to a corresponding mod. No body parameters are required for this action. Successful request will return the <a href="#mod-object">Mod Object</a> of the newly subscribed mod.<br><br><strong>NOTE:</strong> Users can subscribe to mods via mod.io, we recommend you poll the <a href="#get-all-mod-events">Get All Mod Events</a> endpoint to keep a users mods collection up to date.</p>
+<p>Subscribe the <em>authenticated user</em> to a corresponding mod. No body parameters are required for this action. Successful request will return the <a href="#mod-object">Mod Object</a> of the newly subscribed mod.<br><br><strong>NOTE:</strong> Users can subscribe to mods via mod.io, we recommend you poll the <a href="#get-all-events">Get All Events</a> endpoint to keep a users mods collection up to date.</p>
 
 <blockquote>
 <p>Example response</p>
@@ -4943,7 +4949,7 @@ Accept: application/json
 </code></pre>
 <p><span class="httpmethod GET">GET</span> <span class="endpointheading">/games/{game-id}/mods/{mod-id}/events</span></p>
 
-<p>Get the event log for a mod, showing changes made sorted by latest event first. Successful request will return an array of <a href="#get-mod-events-2">Mod Event Objects</a>. We recommended reading the <a href="#filtering">filtering documentation</a> to return only the records you want.</p>
+<p>Get the event log for a mod, showing changes made sorted by latest event first. Successful request will return an array of <a href="#get-mod-events-2">Event Objects</a>. We recommended reading the <a href="#filtering">filtering documentation</a> to return only the records you want.</p>
 
 <table>
 <thead>
@@ -5099,7 +5105,7 @@ Accept: application/json
 </code></pre>
 <p><span class="httpmethod GET">GET</span> <span class="endpointheading">/games/{game-id}/mods/events</span></p>
 
-<p>Get all mods events for the corresponding game sorted by latest event first. Successful request will return an array of <a href="#get-mod-events-2">Mod Event Objects</a>.<br><br><strong>NOTE:</strong> We recommend you poll this endpoint to keep mods up-to-date. If polling this endpoint for updates you should store the <code>id</code> or <code>date_updated</code> of the latest event, and on subsequent requests use that information <a href="#filtering">in the filter</a>, to return only newer events to process.</p>
+<p>Get all mods events for the corresponding game sorted by latest event first. Successful request will return an array of <a href="#get-mod-events-2">Event Objects</a>.<br><br><strong>NOTE:</strong> We recommend you poll this endpoint to keep mods up-to-date. If polling this endpoint for updates you should store the <code>id</code> or <code>date_updated</code> of the latest event, and on subsequent requests use that information <a href="#filtering">in the filter</a>, to return only newer events to process.</p>
 
 <table>
 <thead>
@@ -8857,6 +8863,162 @@ Authorization: Bearer YourAccessToken
 To perform this operation, you must be authenticated by means of one of the following methods:
 oauth2 ( Scopes: read )
 </aside>
+<h2 id="get-user-events">Get User Events</h2>
+<blockquote>
+<p>Example request</p>
+</blockquote>
+<pre class="highlight shell tab-shell"><code><span class="c"># You can also use wget</span>
+curl -X GET https://api.mod.io/v1/me/events?api_key<span class="o">=</span>YourApiKey <span class="se">\</span>
+  -H <span class="s1">'Accept: application/json'</span>
+
+</code></pre><pre class="highlight http tab-http"><code><span class="nf">GET</span> <span class="nn">https://api.mod.io/v1/me/events?api_key=YourApiKey</span> <span class="k">HTTP</span><span class="o">/</span><span class="m">1.1</span>
+<span class="na">Host</span><span class="p">:</span> <span class="s">api.mod.io</span>
+
+Accept: application/json
+
+</code></pre><pre class="highlight javascript tab-javascript"><code><span class="kd">var</span> <span class="nx">headers</span> <span class="o">=</span> <span class="p">{</span>
+  <span class="s1">'Accept'</span><span class="p">:</span><span class="s1">'application/json'</span>
+
+<span class="p">};</span>
+
+<span class="nx">$</span><span class="p">.</span><span class="nx">ajax</span><span class="p">({</span>
+  <span class="na">url</span><span class="p">:</span> <span class="s1">'https://api.mod.io/v1/me/events'</span><span class="p">,</span>
+  <span class="na">method</span><span class="p">:</span> <span class="s1">'get'</span><span class="p">,</span>
+  <span class="na">data</span><span class="p">:</span> <span class="s1">'?api_key=YourApiKey'</span><span class="p">,</span>
+  <span class="na">headers</span><span class="p">:</span> <span class="nx">headers</span><span class="p">,</span>
+  <span class="na">success</span><span class="p">:</span> <span class="kd">function</span><span class="p">(</span><span class="nx">data</span><span class="p">)</span> <span class="p">{</span>
+    <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">JSON</span><span class="p">.</span><span class="nx">stringify</span><span class="p">(</span><span class="nx">data</span><span class="p">));</span>
+  <span class="p">}</span>
+<span class="p">})</span>
+</code></pre><pre class="highlight javascript tab-javascript--nodejs"><code><span class="kr">const</span> <span class="nx">request</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s1">'node-fetch'</span><span class="p">);</span>
+
+<span class="kr">const</span> <span class="nx">headers</span> <span class="o">=</span> <span class="p">{</span>
+  <span class="s1">'Accept'</span><span class="p">:</span><span class="s1">'application/json'</span>
+
+<span class="p">};</span>
+
+<span class="nx">fetch</span><span class="p">(</span><span class="s1">'https://api.mod.io/v1/me/events?api_key=YourApiKey'</span><span class="p">,</span>
+<span class="p">{</span>
+  <span class="na">method</span><span class="p">:</span> <span class="s1">'GET'</span><span class="p">,</span>
+
+  <span class="na">headers</span><span class="p">:</span> <span class="nx">headers</span>
+<span class="p">})</span>
+<span class="p">.</span><span class="nx">then</span><span class="p">(</span><span class="kd">function</span><span class="p">(</span><span class="nx">res</span><span class="p">)</span> <span class="p">{</span>
+    <span class="k">return</span> <span class="nx">res</span><span class="p">.</span><span class="nx">json</span><span class="p">();</span>
+<span class="p">}).</span><span class="nx">then</span><span class="p">(</span><span class="kd">function</span><span class="p">(</span><span class="nx">body</span><span class="p">)</span> <span class="p">{</span>
+    <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">body</span><span class="p">);</span>
+<span class="p">});</span>
+</code></pre><pre class="highlight python tab-python"><code><span class="kn">import</span> <span class="nn">requests</span>
+<span class="n">headers</span> <span class="o">=</span> <span class="p">{</span>
+  <span class="s">'Accept'</span><span class="p">:</span> <span class="s">'application/json'</span>
+<span class="p">}</span>
+
+<span class="n">r</span> <span class="o">=</span> <span class="n">requests</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s">'https://api.mod.io/v1/me/events'</span><span class="p">,</span> <span class="n">params</span><span class="o">=</span><span class="p">{</span>
+  <span class="s">'api_key'</span><span class="p">:</span> <span class="s">'YourApiKey'</span>
+<span class="p">},</span> <span class="n">headers</span> <span class="o">=</span> <span class="n">headers</span><span class="p">)</span>
+
+<span class="k">print</span> <span class="n">r</span><span class="o">.</span><span class="n">json</span><span class="p">()</span>
+</code></pre><pre class="highlight java tab-java"><code><span class="n">URL</span> <span class="n">obj</span> <span class="o">=</span> <span class="k">new</span> <span class="n">URL</span><span class="o">(</span><span class="s">"https://api.mod.io/v1/me/events?api_key=YourApiKey"</span><span class="o">);</span>
+<span class="n">HttpURLConnection</span> <span class="n">con</span> <span class="o">=</span> <span class="o">(</span><span class="n">HttpURLConnection</span><span class="o">)</span> <span class="n">obj</span><span class="o">.</span><span class="na">openConnection</span><span class="o">();</span>
+<span class="n">con</span><span class="o">.</span><span class="na">setRequestMethod</span><span class="o">(</span><span class="s">"GET"</span><span class="o">);</span>
+<span class="kt">int</span> <span class="n">responseCode</span> <span class="o">=</span> <span class="n">con</span><span class="o">.</span><span class="na">getResponseCode</span><span class="o">();</span>
+<span class="n">BufferedReader</span> <span class="n">in</span> <span class="o">=</span> <span class="k">new</span> <span class="n">BufferedReader</span><span class="o">(</span>
+    <span class="k">new</span> <span class="nf">InputStreamReader</span><span class="o">(</span><span class="n">con</span><span class="o">.</span><span class="na">getInputStream</span><span class="o">()));</span>
+<span class="n">String</span> <span class="n">inputLine</span><span class="o">;</span>
+<span class="n">StringBuffer</span> <span class="n">response</span> <span class="o">=</span> <span class="k">new</span> <span class="n">StringBuffer</span><span class="o">();</span>
+<span class="k">while</span> <span class="o">((</span><span class="n">inputLine</span> <span class="o">=</span> <span class="n">in</span><span class="o">.</span><span class="na">readLine</span><span class="o">())</span> <span class="o">!=</span> <span class="kc">null</span><span class="o">)</span> <span class="o">{</span>
+    <span class="n">response</span><span class="o">.</span><span class="na">append</span><span class="o">(</span><span class="n">inputLine</span><span class="o">);</span>
+<span class="o">}</span>
+<span class="n">in</span><span class="o">.</span><span class="na">close</span><span class="o">();</span>
+<span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="n">response</span><span class="o">.</span><span class="na">toString</span><span class="o">());</span>
+</code></pre>
+<p><span class="httpmethod GET">GET</span> <span class="endpointheading">/me/events</span></p>
+
+<p>Get events that have been fired specific to the user. Successful request will return an array of <a href="#get-all-user-events">Event Objects</a>. We recommended reading the <a href="#filtering">filtering documentation</a> to return only the records you want.</p>
+
+<table>
+<thead>
+<tr>
+<th>Filter</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>id</td>
+<td>integer</td>
+<td>Unique id of the event object.</td>
+</tr>
+<tr>
+<td>mod_id</td>
+<td>integer</td>
+<td>Unique id of the parent mod.</td>
+</tr>
+<tr>
+<td>user_id</td>
+<td>integer</td>
+<td>Unique id of the user who performed the action.</td>
+</tr>
+<tr>
+<td>date_added</td>
+<td>integer</td>
+<td>Unix timestamp of date mod was updated.</td>
+</tr>
+<tr>
+<td>event_type</td>
+<td>string</td>
+<td>Type of change that occurred:<br><br><strong>USER_TEAM_JOIN</strong> = User has joined a team.<br><strong>USER_TEAM_LEAVE</strong> = User has left a team.<br><strong>USER_SUBSCRIBE</strong> = User has subscribed to a mod.<br><strong>USER_UNSUBSCRIBE</strong> = User has un-subscribed from a mod.</td>
+</tr>
+</tbody>
+</table>
+
+<blockquote>
+<p>Example response</p>
+</blockquote>
+<pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
+  </span><span class="s2">"data"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+    </span><span class="p">{</span><span class="w">
+      </span><span class="s2">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">13</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"mod_id"</span><span class="p">:</span><span class="w"> </span><span class="mi">13</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"user_id"</span><span class="p">:</span><span class="w"> </span><span class="mi">13</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"date_added"</span><span class="p">:</span><span class="w"> </span><span class="mi">1499846132</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"event_type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"MODFILE_CHANGED"</span><span class="w">
+    </span><span class="p">},</span><span class="w">
+    </span><span class="p">{</span><span class="w">
+        </span><span class="err">...</span><span class="w">
+    </span><span class="p">}</span><span class="w">
+  </span><span class="p">],</span><span class="w">
+  </span><span class="s2">"result_count"</span><span class="p">:</span><span class="w"> </span><span class="mi">100</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"result_limit"</span><span class="p">:</span><span class="w"> </span><span class="mi">100</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"result_offset"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre>
+<h3 id="Get-User-Events-responses">Responses</h3>
+
+<table>
+<thead>
+<tr>
+<th>Status</th>
+<th>Meaning</th>
+<th>Description</th>
+<th>Response Schema</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>200</td>
+<td><a href="https://tools.ietf.org/html/rfc7231#section-6.3.1">OK</a></td>
+<td>Successful Request</td>
+<td><a href="#schemaget_mod_events">Get Mod Events  </a></td>
+</tr>
+</tbody>
+</table>
+
+<aside class="warning">
+To perform this operation, you must be authenticated by means of one of the following methods:
+apiKey, oauth2 ( Scopes: read )
+</aside>
 <h2 id="get-user-games">Get User Games</h2>
 <blockquote>
 <p>Example request</p>
@@ -9648,8 +9810,8 @@ oauth2 ( Scopes: read )
 </tr>
 </tbody>
 </table>
-<h2 id="mod-event-object">Mod Event Object</h2>
-<p><a name="schemamod_event_object"></a></p>
+<h2 id="event-object">Event Object</h2>
+<p><a name="schemaevent_object"></a></p>
 <pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
   </span><span class="s2">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">13</span><span class="p">,</span><span class="w">
   </span><span class="s2">"mod_id"</span><span class="p">:</span><span class="w"> </span><span class="mi">13</span><span class="p">,</span><span class="w">
@@ -12549,8 +12711,8 @@ oauth2 ( Scopes: read )
 <tr>
 <td>data</td>
 <td>
-<a href="#schemamod_event_object">Mod Event Object  </a>[]</td>
-<td>Array containing mod event objects.</td>
+<a href="#schemaevent_object">Event Object   </a>[]</td>
+<td>Array containing event objects.</td>
 </tr>
 <tr>
 <td>» id</td>
@@ -12979,6 +13141,83 @@ oauth2 ( Scopes: read )
 <td>» profile_url</td>
 <td>string</td>
 <td>URL to the user's mod.io profile.</td>
+</tr>
+<tr>
+<td>result_count</td>
+<td>integer</td>
+<td>Number of results returned in the data array.</td>
+</tr>
+<tr>
+<td>result_limit</td>
+<td>integer</td>
+<td>Maximum number of results returned.</td>
+</tr>
+<tr>
+<td>result_offset</td>
+<td>integer</td>
+<td>Number of results skipped over.</td>
+</tr>
+</tbody>
+</table>
+<h2 id="get-all-user-events">Get All User Events</h2>
+<p><a name="schemaget_all_user_events"></a></p>
+<pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
+  </span><span class="s2">"data"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+    </span><span class="p">{</span><span class="w">
+      </span><span class="s2">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">13</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"mod_id"</span><span class="p">:</span><span class="w"> </span><span class="mi">13</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"user_id"</span><span class="p">:</span><span class="w"> </span><span class="mi">13</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"date_added"</span><span class="p">:</span><span class="w"> </span><span class="mi">1499846132</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"event_type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"MODFILE_CHANGED"</span><span class="w">
+    </span><span class="p">},</span><span class="w">
+    </span><span class="p">{</span><span class="w">
+        </span><span class="err">...</span><span class="w">
+    </span><span class="p">}</span><span class="w">
+  </span><span class="p">],</span><span class="w">
+  </span><span class="s2">"result_count"</span><span class="p">:</span><span class="w"> </span><span class="mi">100</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"result_limit"</span><span class="p">:</span><span class="w"> </span><span class="mi">100</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"result_offset"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="w">
+</span><span class="p">}</span><span class="w"> 
+</span></code></pre><h3 id="properties-34">Properties</h3>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>data</td>
+<td>
+<a href="#schemaevent_object">Event Object   </a>[]</td>
+<td>Array containing event objects.</td>
+</tr>
+<tr>
+<td>» id</td>
+<td>integer</td>
+<td>Unique id of the event object.</td>
+</tr>
+<tr>
+<td>» mod_id</td>
+<td>integer</td>
+<td>Unique id of the parent mod.</td>
+</tr>
+<tr>
+<td>» user_id</td>
+<td>integer</td>
+<td>Unique id of the user who performed the action.</td>
+</tr>
+<tr>
+<td>» date_added</td>
+<td>integer</td>
+<td>Unix timestamp of date the event occurred.</td>
+</tr>
+<tr>
+<td>» event_type</td>
+<td>string</td>
+<td>Type of <a href="#get-mod-events-2">event</a> was 'MODFILE_CHANGED', 'MOD_AVAILABLE', 'MOD_UNAVAILABLE', 'MOD_EDITED'.</td>
 </tr>
 <tr>
 <td>result_count</td>
