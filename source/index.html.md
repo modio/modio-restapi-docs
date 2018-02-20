@@ -7226,6 +7226,7 @@ Get events that have been fired specific to the user. Successful request will re
     user_id|integer|Unique id of the user who performed the action.
     date_added|integer|Unix timestamp of date mod was updated.
     event_type|string|Type of change that occurred:<br><br>__USER_TEAM_JOIN__ = User has joined a team.<br>__USER_TEAM_LEAVE__ = User has left a team.<br>__USER_SUBSCRIBE__ = User has subscribed to a mod.<br>__USER_UNSUBSCRIBE__ = User has un-subscribed from a mod.
+    latest|boolean|_Default value is true_. Returns only the latest unique events *for each resource*.
 
 
 > Example response
