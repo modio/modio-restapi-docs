@@ -794,25 +794,25 @@ System.out.println(response.toString());
 
 Get all games. Successful request will return an array of [Game Objects](#get-all-games-2). We recommended reading the [filtering documentation](#filtering) to return only the records you want.
 
-     Filter|Type|Description
-     ---|---|---
-     id|integer|Unique id of the game.
-     status|integer|Status of the game (only admins can filter by this field, see [status and visibility](#status-amp-visibility) for details):<br><br>__0__ = Not accepted<br>__1__ = Accepted _(default with archived)_<br>__2__ = Archived<br>__3__ = Deleted
-     submitted_by|integer|Unique id of the user who has ownership of the game.
-     date_added|integer|Unix timestamp of date game was registered.
-     date_updated|integer|Unix timestamp of date game was updated.
-     date_live|integer|Unix timestamp of date game was set live.
-     name|string|Name of the game.
-     name_id|string|Subdomain for the game on mod.io.
-     summary|string|Summary of the game.
-     homepage|string|Official homepage of the game.
-     ugc_name|string|Word used to describe user-generated content (mods, items, addons etc).
-     presentation_option|integer|Presentation style used on the mod.io website:<br><br>__0__ =  Grid View: Displays mods in a grid<br>__1__ = Table View: Displays mods in a table
-     submission_option|integer|Submission process modders must follow:<br><br>__0__ = Mod uploads must occur via a tool created by the game developers<br>__1__ = Mod uploads can occur from anywhere, including the website and API
-     curation_option|integer|Curation process used to approve mods:<br><br>__0__ = No curation: Mods are immediately available to play<br>__1__ = Paid curation: Mods are immediately available to play unless they choose to receive donations. These mods must be accepted to be listed<br>__2__ = Full curation: All mods must be accepted by someone to be listed
-     community_options|integer|Community features enabled on the mod.io website:<br><br>__0__ = All of the options below are disabled<br>__1__ = Discussion board enabled<br>__2__ = Guides and news enabled<br>__?__ = Combine to find games with multiple options enabled (see [BITWISE fields](#bitwise-and-bitwise-and))
-     revenue_options|integer|Revenue capabilities mods can enable:<br><br>__0__ = All of the options below are disabled<br>__1__ = Allow mods to be sold<br>__2__ = Allow mods to receive donations<br>__4__ = Allow mods to be traded<br>__8__ = Allow mods to control supply and scarcity<br>__?__ = Combine to find games with multiple options enabled (see [BITWISE fields](#bitwise-and-bitwise-and))
-     api_access_options|integer|Level of API access allowed by this game:<br><br>__0__ = All of the options below are disabled<br>__1__ = Allow 3rd parties to access this games API endpoints<br>__2__ = Allow mods to be downloaded directly (if disabled all download URLs will contain a frequently changing verification hash to stop unauthorized use)<br>__?__ = Combine to find games with multiple options enabled (see [BITWISE fields](#bitwise-and-bitwise-and))
+    Filter|Type|Description
+    ---|---|---
+    id|integer|Unique id of the game.
+    status|integer|Status of the game (only admins can filter by this field, see [status and visibility](#status-amp-visibility) for details):<br><br>__0__ = Not accepted<br>__1__ = Accepted _(default with archived)_<br>__2__ = Archived<br>__3__ = Deleted
+    submitted_by|integer|Unique id of the user who has ownership of the game.
+    date_added|integer|Unix timestamp of date game was registered.
+    date_updated|integer|Unix timestamp of date game was updated.
+    date_live|integer|Unix timestamp of date game was set live.
+    name|string|Name of the game.
+    name_id|string|Subdomain for the game on mod.io.
+    summary|string|Summary of the game.
+    homepage|string|Official homepage of the game.
+    ugc_name|string|Word used to describe user-generated content (mods, items, addons etc).
+    presentation_option|integer|Presentation style used on the mod.io website:<br><br>__0__ =  Grid View: Displays mods in a grid<br>__1__ = Table View: Displays mods in a table
+    submission_option|integer|Submission process modders must follow:<br><br>__0__ = Mod uploads must occur via a tool created by the game developers<br>__1__ = Mod uploads can occur from anywhere, including the website and API
+    curation_option|integer|Curation process used to approve mods:<br><br>__0__ = No curation: Mods are immediately available to play<br>__1__ = Paid curation: Mods are immediately available to play unless they choose to receive donations. These mods must be accepted to be listed<br>__2__ = Full curation: All mods must be accepted by someone to be listed
+    community_options|integer|Community features enabled on the mod.io website:<br><br>__0__ = All of the options below are disabled<br>__1__ = Discussion board enabled<br>__2__ = Guides and news enabled<br>__?__ = Combine to find games with multiple options enabled (see [BITWISE fields](#bitwise-and-bitwise-and))
+    revenue_options|integer|Revenue capabilities mods can enable:<br><br>__0__ = All of the options below are disabled<br>__1__ = Allow mods to be sold<br>__2__ = Allow mods to receive donations<br>__4__ = Allow mods to be traded<br>__8__ = Allow mods to control supply and scarcity<br>__?__ = Combine to find games with multiple options enabled (see [BITWISE fields](#bitwise-and-bitwise-and))
+    api_access_options|integer|Level of API access allowed by this game:<br><br>__0__ = All of the options below are disabled<br>__1__ = Allow 3rd parties to access this games API endpoints<br>__2__ = Allow mods to be downloaded directly (if disabled all download URLs will contain a frequently changing verification hash to stop unauthorized use)<br>__?__ = Combine to find games with multiple options enabled (see [BITWISE fields](#bitwise-and-bitwise-and))
 
 
 > Example response
@@ -830,9 +830,9 @@ Get all games. Successful request will return an array of [Game Objects](#get-al
         "date_online": 1509922961,
         "avatar": {
           "filename": "modio-dark.png",
-          "original": "https://static.mod.io/v1/images/global/ao_modio-dark.png",
-          "thumb_50x50": "https://static.mod.io/v1/images/global/modio-dark.png",
-          "thumb_100x100": "https://static.mod.io/v1/images/global/am_modio-dark.png"
+          "original": "https://static.mod.io/v1/images/branding/modio-dark.png",
+          "thumb_50x50": "https://static.mod.io/v1/images/branding/modio-dark.png",
+          "thumb_100x100": "https://static.mod.io/v1/images/branding/modio-dark.png"
         },
         "timezone": "America/Los_Angeles",
         "language": "en",
@@ -850,21 +850,21 @@ Get all games. Successful request will return an array of [Game Objects](#get-al
       "ugc_name": "map",
       "icon": {
         "filename": "modio-dark.png",
-        "original": "https://static.mod.io/v1/images/global/ao_modio-dark.png",
-        "thumb_64x64": "https://static.mod.io/v1/images/global/modio-dark.png",
-        "thumb_128x128": "https://static.mod.io/v1/images/global/am_modio-dark.png",
-        "thumb_256x256": "https://static.mod.io/v1/images/global/al_modio-dark.png"
+        "original": "https://static.mod.io/v1/images/branding/modio-dark.png",
+        "thumb_64x64": "https://static.mod.io/v1/images/branding/modio-dark.png",
+        "thumb_128x128": "https://static.mod.io/v1/images/branding/modio-dark.png",
+        "thumb_256x256": "https://static.mod.io/v1/images/branding/modio-dark.png"
       },
       "logo": {
         "filename": "modio-dark.png",
-        "original": "https://static.mod.io/v1/images/global/modio-dark.png",
-        "thumb_320x180": "https://static.mod.io/v1/images/global/modio-dark.png",
-        "thumb_640x360": "https://static.mod.io/v1/images/global/modio-dark.png",
-        "thumb_1280x720": "https://static.mod.io/v1/images/global/modio-dark.png"
+        "original": "https://static.mod.io/v1/images/branding/modio-dark.png",
+        "thumb_320x180": "https://static.mod.io/v1/images/branding/modio-dark.png",
+        "thumb_640x360": "https://static.mod.io/v1/images/branding/modio-dark.png",
+        "thumb_1280x720": "https://static.mod.io/v1/images/branding/modio-dark.png"
       },
       "header": {
         "filename": "demo.png",
-        "original": "https://static.mod.io/v1/images/global/modio-dark.png"
+        "original": "https://static.mod.io/v1/images/branding/modio-dark.png"
       },
       "homepage": "https://www.rogue-knight-game.com/",
       "name": "Rogue Knight",
@@ -1007,9 +1007,9 @@ Get a game. Successful request will return a single [Game Object](#game-object).
     "date_online": 1509922961,
     "avatar": {
       "filename": "modio-dark.png",
-      "original": "https://static.mod.io/v1/images/global/ao_modio-dark.png",
-      "thumb_50x50": "https://static.mod.io/v1/images/global/modio-dark.png",
-      "thumb_100x100": "https://static.mod.io/v1/images/global/am_modio-dark.png"
+      "original": "https://static.mod.io/v1/images/branding/modio-dark.png",
+      "thumb_50x50": "https://static.mod.io/v1/images/branding/modio-dark.png",
+      "thumb_100x100": "https://static.mod.io/v1/images/branding/modio-dark.png"
     },
     "timezone": "America/Los_Angeles",
     "language": "en",
@@ -1027,21 +1027,21 @@ Get a game. Successful request will return a single [Game Object](#game-object).
   "ugc_name": "map",
   "icon": {
     "filename": "modio-dark.png",
-    "original": "https://static.mod.io/v1/images/global/ao_modio-dark.png",
-    "thumb_64x64": "https://static.mod.io/v1/images/global/modio-dark.png",
-    "thumb_128x128": "https://static.mod.io/v1/images/global/am_modio-dark.png",
-    "thumb_256x256": "https://static.mod.io/v1/images/global/al_modio-dark.png"
+    "original": "https://static.mod.io/v1/images/branding/modio-dark.png",
+    "thumb_64x64": "https://static.mod.io/v1/images/branding/modio-dark.png",
+    "thumb_128x128": "https://static.mod.io/v1/images/branding/modio-dark.png",
+    "thumb_256x256": "https://static.mod.io/v1/images/branding/modio-dark.png"
   },
   "logo": {
     "filename": "modio-dark.png",
-    "original": "https://static.mod.io/v1/images/global/modio-dark.png",
-    "thumb_320x180": "https://static.mod.io/v1/images/global/modio-dark.png",
-    "thumb_640x360": "https://static.mod.io/v1/images/global/modio-dark.png",
-    "thumb_1280x720": "https://static.mod.io/v1/images/global/modio-dark.png"
+    "original": "https://static.mod.io/v1/images/branding/modio-dark.png",
+    "thumb_320x180": "https://static.mod.io/v1/images/branding/modio-dark.png",
+    "thumb_640x360": "https://static.mod.io/v1/images/branding/modio-dark.png",
+    "thumb_1280x720": "https://static.mod.io/v1/images/branding/modio-dark.png"
   },
   "header": {
     "filename": "demo.png",
-    "original": "https://static.mod.io/v1/images/global/modio-dark.png"
+    "original": "https://static.mod.io/v1/images/branding/modio-dark.png"
   },
   "homepage": "https://www.rogue-knight-game.com/",
   "name": "Rogue Knight",
@@ -1173,23 +1173,23 @@ System.out.println(response.toString());
 
 Update details for a game. If you want to update the `icon`, `logo` or `header` fields you need to use the [Add Game Media](#add-game-media) endpoint. Successful request will return updated [Game Object](#game-object).
 
-     __NOTE:__ You can also edit [your games profile](https://mod.io/games) on the mod.io website. This is the recommended approach.
+    __NOTE:__ You can also edit [your games profile](https://mod.io/games) on the mod.io website. This is the recommended approach.
 
-     Parameter|Type|Required|Description
-     ---|---|---|---|
-     status|integer||Status of a game. We recommend you never change this once you have accepted your game to be available via the API (see [status and visibility](#status-amp-visibility) for details):<br><br>__0__ = Not accepted<br>__1__ = Accepted
-     name|string||Name of your game. Cannot exceed 80 characters.
-     name_id|string||Subdomain for the game on mod.io. Highly recommended to not change this unless absolutely required. Cannot exceed 20 characters.
-     summary|string||Explain your games mod support in 1 paragraph. Cannot exceed 250 characters.
-     instructions|string||Instructions and links creators should follow to upload mods. Keep it short and explain details like are mods submitted in-game or via tools you have created.
-     homepage|string||Official homepage for your game. Must be a valid URL.
-     ugc_name|string||Word used to describe user-generated content (mods, items, addons etc).
-     presentation_option|integer||Choose the presentation style you want on the mod.io website:<br><br>__0__ =  Grid View: Displays mods in a grid (visual but less informative, default setting) <br>__1__ = Table View: Displays mods in a table (easier to browse)
-     submission_option|integer||Choose the submission process you want modders to follow:<br><br>__0__ = Control the mod upload process (recommended): You will have to build an upload system either in-game or via a standalone tool, which enables creators to submit mods to the tags you have configured. Because you control the flow you can prevalidate and compile mods, to ensure they will work in your game and attach metadata about what settings the mod can change. In the long run this option will save you time as you can accept more submissions, but it requires more setup to get running and isn't as open as the above option. __NOTE:__ mod profiles can still be [created online](https://mod.io/mods/add), but uploads will have to occur via the API using tools you create.<br><br>__1__ = Enable mod uploads from anywhere: Allow developers to upload mods via the website and API, and pick the tags their mod is built for. No validation will be done on the files submitted, it will be the responsibility of your game and apps to process the mods installation based on the tags selected and determine if the mod is valid and works. For example a mod might be uploaded with the 'map' tag. When a user subscribes to this mod, your game will need to verify it contains a map file and install it where maps are located. If this fails, your game or the community will have to flag the mod as 'incompatible' to remove it from the listing.
-     curation_option|integer||Choose the curation process your team follows to approve mods:<br><br>__0__ = No curation (recommended): Mods are immediately available to play, without any intervention or work from your team.<br><br>__1__ = Paid curation: Screen only mods the creator wants to sell, before they are available to receive donations or be purchased via the API.<br><br>__2__ = Full curation: All mods must be accepted by someone on your team. This option is useful for games that have a small number of mods and want to control the experience, or you need to set the parameters attached to a mod (i.e. a weapon may require the rate of fire, power level, clip size etc). It can also be used for complex mods, which you may need to build into your game or distribute as DLC.
-     community_options|integer||Choose the community features enabled on the mod.io website:<br><br>__0__ = All of the options below are disabled<br>__1__ = Discussion board enabled<br>__2__ = Guides and news enabled<br>__?__ = Add the options you want together, to enable multiple features (see [BITWISE fields](#bitwise-and-bitwise-and))
-     revenue_options|integer||Choose the revenue capabilities mods can enable:<br><br>__0__ = All of the options below are disabled<br>__1__ = Allow mods to be sold<br>__2__ = Allow mods to receive donations<br>__4__ = Allow mods to be traded (not subject to revenue share)<br>__8__ = Allow mods to control supply and scarcity<br>__?__ = Add the options you want together, to enable multiple features (see [BITWISE fields](#bitwise-and-bitwise-and))
-     api_access_options|integer||Choose the level of API access your game allows:<br><br>__0__ = All of the options below are disabled<br><br>__1__ = Allow 3rd parties to access this games API endpoints. We recommend you enable this feature, an open API will encourage a healthy ecosystem of tools and apps. If you do not enable this feature, your `/games/{games-id}` endpoints will return `403 Forbidden` unless you are a member of the games team or using the games `apikey`<br><br>__2__ = Allow mods to be downloaded directly (makes implementation easier for you, game servers and services because you can save, share and reuse download URLs). If disabled all download URLs will contain a frequently changing verification hash to stop unauthorized use<br><br>__?__ = Add the options you want together, to enable multiple features (see [BITWISE fields](#bitwise-and-bitwise-and))
+    Parameter|Type|Required|Description
+    ---|---|---|---|
+    status|integer||Status of a game. We recommend you never change this once you have accepted your game to be available via the API (see [status and visibility](#status-amp-visibility) for details):<br><br>__0__ = Not accepted<br>__1__ = Accepted
+    name|string||Name of your game. Cannot exceed 80 characters.
+    name_id|string||Subdomain for the game on mod.io. Highly recommended to not change this unless absolutely required. Cannot exceed 20 characters.
+    summary|string||Explain your games mod support in 1 paragraph. Cannot exceed 250 characters.
+    instructions|string||Instructions and links creators should follow to upload mods. Keep it short and explain details like are mods submitted in-game or via tools you have created.
+    homepage|string||Official homepage for your game. Must be a valid URL.
+    ugc_name|string||Word used to describe user-generated content (mods, items, addons etc).
+    presentation_option|integer||Choose the presentation style you want on the mod.io website:<br><br>__0__ =  Grid View: Displays mods in a grid (visual but less informative, default setting) <br>__1__ = Table View: Displays mods in a table (easier to browse)
+    submission_option|integer||Choose the submission process you want modders to follow:<br><br>__0__ = Control the mod upload process (recommended): You will have to build an upload system either in-game or via a standalone tool, which enables creators to submit mods to the tags you have configured. Because you control the flow you can prevalidate and compile mods, to ensure they will work in your game and attach metadata about what settings the mod can change. In the long run this option will save you time as you can accept more submissions, but it requires more setup to get running and isn't as open as the above option. __NOTE:__ mod profiles can still be [created online](https://mod.io/mods/add), but uploads will have to occur via the API using tools you create.<br><br>__1__ = Enable mod uploads from anywhere: Allow developers to upload mods via the website and API, and pick the tags their mod is built for. No validation will be done on the files submitted, it will be the responsibility of your game and apps to process the mods installation based on the tags selected and determine if the mod is valid and works. For example a mod might be uploaded with the 'map' tag. When a user subscribes to this mod, your game will need to verify it contains a map file and install it where maps are located. If this fails, your game or the community will have to flag the mod as 'incompatible' to remove it from the listing.
+    curation_option|integer||Choose the curation process your team follows to approve mods:<br><br>__0__ = No curation (recommended): Mods are immediately available to play, without any intervention or work from your team.<br><br>__1__ = Paid curation: Screen only mods the creator wants to sell, before they are available to receive donations or be purchased via the API.<br><br>__2__ = Full curation: All mods must be accepted by someone on your team. This option is useful for games that have a small number of mods and want to control the experience, or you need to set the parameters attached to a mod (i.e. a weapon may require the rate of fire, power level, clip size etc). It can also be used for complex mods, which you may need to build into your game or distribute as DLC.
+    community_options|integer||Choose the community features enabled on the mod.io website:<br><br>__0__ = All of the options below are disabled<br>__1__ = Discussion board enabled<br>__2__ = Guides and news enabled<br>__?__ = Add the options you want together, to enable multiple features (see [BITWISE fields](#bitwise-and-bitwise-and))
+    revenue_options|integer||Choose the revenue capabilities mods can enable:<br><br>__0__ = All of the options below are disabled<br>__1__ = Allow mods to be sold<br>__2__ = Allow mods to receive donations<br>__4__ = Allow mods to be traded (not subject to revenue share)<br>__8__ = Allow mods to control supply and scarcity<br>__?__ = Add the options you want together, to enable multiple features (see [BITWISE fields](#bitwise-and-bitwise-and))
+    api_access_options|integer||Choose the level of API access your game allows:<br><br>__0__ = All of the options below are disabled<br><br>__1__ = Allow 3rd parties to access this games API endpoints. We recommend you enable this feature, an open API will encourage a healthy ecosystem of tools and apps. If you do not enable this feature, your `/games/{games-id}` endpoints will return `403 Forbidden` unless you are a member of the games team or using the games `apikey`<br><br>__2__ = Allow mods to be downloaded directly (makes implementation easier for you, game servers and services because you can save, share and reuse download URLs). If disabled all download URLs will contain a frequently changing verification hash to stop unauthorized use<br><br>__?__ = Add the options you want together, to enable multiple features (see [BITWISE fields](#bitwise-and-bitwise-and))
 
 
 > Example response
@@ -1205,9 +1205,9 @@ Update details for a game. If you want to update the `icon`, `logo` or `header` 
     "date_online": 1509922961,
     "avatar": {
       "filename": "modio-dark.png",
-      "original": "https://static.mod.io/v1/images/global/ao_modio-dark.png",
-      "thumb_50x50": "https://static.mod.io/v1/images/global/modio-dark.png",
-      "thumb_100x100": "https://static.mod.io/v1/images/global/am_modio-dark.png"
+      "original": "https://static.mod.io/v1/images/branding/modio-dark.png",
+      "thumb_50x50": "https://static.mod.io/v1/images/branding/modio-dark.png",
+      "thumb_100x100": "https://static.mod.io/v1/images/branding/modio-dark.png"
     },
     "timezone": "America/Los_Angeles",
     "language": "en",
@@ -1225,21 +1225,21 @@ Update details for a game. If you want to update the `icon`, `logo` or `header` 
   "ugc_name": "map",
   "icon": {
     "filename": "modio-dark.png",
-    "original": "https://static.mod.io/v1/images/global/ao_modio-dark.png",
-    "thumb_64x64": "https://static.mod.io/v1/images/global/modio-dark.png",
-    "thumb_128x128": "https://static.mod.io/v1/images/global/am_modio-dark.png",
-    "thumb_256x256": "https://static.mod.io/v1/images/global/al_modio-dark.png"
+    "original": "https://static.mod.io/v1/images/branding/modio-dark.png",
+    "thumb_64x64": "https://static.mod.io/v1/images/branding/modio-dark.png",
+    "thumb_128x128": "https://static.mod.io/v1/images/branding/modio-dark.png",
+    "thumb_256x256": "https://static.mod.io/v1/images/branding/modio-dark.png"
   },
   "logo": {
     "filename": "modio-dark.png",
-    "original": "https://static.mod.io/v1/images/global/modio-dark.png",
-    "thumb_320x180": "https://static.mod.io/v1/images/global/modio-dark.png",
-    "thumb_640x360": "https://static.mod.io/v1/images/global/modio-dark.png",
-    "thumb_1280x720": "https://static.mod.io/v1/images/global/modio-dark.png"
+    "original": "https://static.mod.io/v1/images/branding/modio-dark.png",
+    "thumb_320x180": "https://static.mod.io/v1/images/branding/modio-dark.png",
+    "thumb_640x360": "https://static.mod.io/v1/images/branding/modio-dark.png",
+    "thumb_1280x720": "https://static.mod.io/v1/images/branding/modio-dark.png"
   },
   "header": {
     "filename": "demo.png",
-    "original": "https://static.mod.io/v1/images/global/modio-dark.png"
+    "original": "https://static.mod.io/v1/images/branding/modio-dark.png"
   },
   "homepage": "https://www.rogue-knight-game.com/",
   "name": "Rogue Knight",
@@ -1404,9 +1404,9 @@ Get all mods for the corresponding game. Successful request will return an array
         "date_online": 1509922961,
         "avatar": {
           "filename": "modio-dark.png",
-          "original": "https://static.mod.io/v1/images/global/ao_modio-dark.png",
-          "thumb_50x50": "https://static.mod.io/v1/images/global/modio-dark.png",
-          "thumb_100x100": "https://static.mod.io/v1/images/global/am_modio-dark.png"
+          "original": "https://static.mod.io/v1/images/branding/modio-dark.png",
+          "thumb_50x50": "https://static.mod.io/v1/images/branding/modio-dark.png",
+          "thumb_100x100": "https://static.mod.io/v1/images/branding/modio-dark.png"
         },
         "timezone": "America/Los_Angeles",
         "language": "en",
@@ -1417,10 +1417,10 @@ Get all mods for the corresponding game. Successful request will return an array
       "date_live": 1499841403,
       "logo": {
         "filename": "modio-dark.png",
-        "original": "https://static.mod.io/v1/images/global/modio-dark.png",
-        "thumb_320x180": "https://static.mod.io/v1/images/global/modio-dark.png",
-        "thumb_640x360": "https://static.mod.io/v1/images/global/modio-dark.png",
-        "thumb_1280x720": "https://static.mod.io/v1/images/global/modio-dark.png"
+        "original": "https://static.mod.io/v1/images/branding/modio-dark.png",
+        "thumb_320x180": "https://static.mod.io/v1/images/branding/modio-dark.png",
+        "thumb_640x360": "https://static.mod.io/v1/images/branding/modio-dark.png",
+        "thumb_1280x720": "https://static.mod.io/v1/images/branding/modio-dark.png"
       },
       "homepage": "https://www.rogue-hdpack.com/",
       "name": "Rogue Knight HD Pack",
@@ -1460,8 +1460,8 @@ Get all mods for the corresponding game. Successful request will return an array
         "images": [
           {
             "filename": "modio-dark.png",
-            "original": "https://static.mod.io/v1/images/global/modio-dark.png",
-            "thumb_320x180": "https://static.mod.io/v1/images/global/modio-dark.png"
+            "original": "https://static.mod.io/v1/images/branding/modio-dark.png",
+            "thumb_320x180": "https://static.mod.io/v1/images/branding/modio-dark.png"
           }
         ]
       },
@@ -1606,9 +1606,9 @@ Get a mod. Successful request will return a single [Mod Object](#mod-object).
     "date_online": 1509922961,
     "avatar": {
       "filename": "modio-dark.png",
-      "original": "https://static.mod.io/v1/images/global/ao_modio-dark.png",
-      "thumb_50x50": "https://static.mod.io/v1/images/global/modio-dark.png",
-      "thumb_100x100": "https://static.mod.io/v1/images/global/am_modio-dark.png"
+      "original": "https://static.mod.io/v1/images/branding/modio-dark.png",
+      "thumb_50x50": "https://static.mod.io/v1/images/branding/modio-dark.png",
+      "thumb_100x100": "https://static.mod.io/v1/images/branding/modio-dark.png"
     },
     "timezone": "America/Los_Angeles",
     "language": "en",
@@ -1619,10 +1619,10 @@ Get a mod. Successful request will return a single [Mod Object](#mod-object).
   "date_live": 1499841403,
   "logo": {
     "filename": "modio-dark.png",
-    "original": "https://static.mod.io/v1/images/global/modio-dark.png",
-    "thumb_320x180": "https://static.mod.io/v1/images/global/modio-dark.png",
-    "thumb_640x360": "https://static.mod.io/v1/images/global/modio-dark.png",
-    "thumb_1280x720": "https://static.mod.io/v1/images/global/modio-dark.png"
+    "original": "https://static.mod.io/v1/images/branding/modio-dark.png",
+    "thumb_320x180": "https://static.mod.io/v1/images/branding/modio-dark.png",
+    "thumb_640x360": "https://static.mod.io/v1/images/branding/modio-dark.png",
+    "thumb_1280x720": "https://static.mod.io/v1/images/branding/modio-dark.png"
   },
   "homepage": "https://www.rogue-hdpack.com/",
   "name": "Rogue Knight HD Pack",
@@ -1662,8 +1662,8 @@ Get a mod. Successful request will return a single [Mod Object](#mod-object).
     "images": [
       {
         "filename": "modio-dark.png",
-        "original": "https://static.mod.io/v1/images/global/modio-dark.png",
-        "thumb_320x180": "https://static.mod.io/v1/images/global/modio-dark.png"
+        "original": "https://static.mod.io/v1/images/branding/modio-dark.png",
+        "thumb_320x180": "https://static.mod.io/v1/images/branding/modio-dark.png"
       }
     ]
   },
@@ -1824,9 +1824,9 @@ Add a mod. Successful request will return the newly created [Mod Object](#mod-ob
     "date_online": 1509922961,
     "avatar": {
       "filename": "modio-dark.png",
-      "original": "https://static.mod.io/v1/images/global/ao_modio-dark.png",
-      "thumb_50x50": "https://static.mod.io/v1/images/global/modio-dark.png",
-      "thumb_100x100": "https://static.mod.io/v1/images/global/am_modio-dark.png"
+      "original": "https://static.mod.io/v1/images/branding/modio-dark.png",
+      "thumb_50x50": "https://static.mod.io/v1/images/branding/modio-dark.png",
+      "thumb_100x100": "https://static.mod.io/v1/images/branding/modio-dark.png"
     },
     "timezone": "America/Los_Angeles",
     "language": "en",
@@ -1837,10 +1837,10 @@ Add a mod. Successful request will return the newly created [Mod Object](#mod-ob
   "date_live": 1499841403,
   "logo": {
     "filename": "modio-dark.png",
-    "original": "https://static.mod.io/v1/images/global/modio-dark.png",
-    "thumb_320x180": "https://static.mod.io/v1/images/global/modio-dark.png",
-    "thumb_640x360": "https://static.mod.io/v1/images/global/modio-dark.png",
-    "thumb_1280x720": "https://static.mod.io/v1/images/global/modio-dark.png"
+    "original": "https://static.mod.io/v1/images/branding/modio-dark.png",
+    "thumb_320x180": "https://static.mod.io/v1/images/branding/modio-dark.png",
+    "thumb_640x360": "https://static.mod.io/v1/images/branding/modio-dark.png",
+    "thumb_1280x720": "https://static.mod.io/v1/images/branding/modio-dark.png"
   },
   "homepage": "https://www.rogue-hdpack.com/",
   "name": "Rogue Knight HD Pack",
@@ -1880,8 +1880,8 @@ Add a mod. Successful request will return the newly created [Mod Object](#mod-ob
     "images": [
       {
         "filename": "modio-dark.png",
-        "original": "https://static.mod.io/v1/images/global/modio-dark.png",
-        "thumb_320x180": "https://static.mod.io/v1/images/global/modio-dark.png"
+        "original": "https://static.mod.io/v1/images/branding/modio-dark.png",
+        "thumb_320x180": "https://static.mod.io/v1/images/branding/modio-dark.png"
       }
     ]
   },
@@ -2047,9 +2047,9 @@ Edit details for a mod. If you want to update the `logo` or media associated wit
     "date_online": 1509922961,
     "avatar": {
       "filename": "modio-dark.png",
-      "original": "https://static.mod.io/v1/images/global/ao_modio-dark.png",
-      "thumb_50x50": "https://static.mod.io/v1/images/global/modio-dark.png",
-      "thumb_100x100": "https://static.mod.io/v1/images/global/am_modio-dark.png"
+      "original": "https://static.mod.io/v1/images/branding/modio-dark.png",
+      "thumb_50x50": "https://static.mod.io/v1/images/branding/modio-dark.png",
+      "thumb_100x100": "https://static.mod.io/v1/images/branding/modio-dark.png"
     },
     "timezone": "America/Los_Angeles",
     "language": "en",
@@ -2060,10 +2060,10 @@ Edit details for a mod. If you want to update the `logo` or media associated wit
   "date_live": 1499841403,
   "logo": {
     "filename": "modio-dark.png",
-    "original": "https://static.mod.io/v1/images/global/modio-dark.png",
-    "thumb_320x180": "https://static.mod.io/v1/images/global/modio-dark.png",
-    "thumb_640x360": "https://static.mod.io/v1/images/global/modio-dark.png",
-    "thumb_1280x720": "https://static.mod.io/v1/images/global/modio-dark.png"
+    "original": "https://static.mod.io/v1/images/branding/modio-dark.png",
+    "thumb_320x180": "https://static.mod.io/v1/images/branding/modio-dark.png",
+    "thumb_640x360": "https://static.mod.io/v1/images/branding/modio-dark.png",
+    "thumb_1280x720": "https://static.mod.io/v1/images/branding/modio-dark.png"
   },
   "homepage": "https://www.rogue-hdpack.com/",
   "name": "Rogue Knight HD Pack",
@@ -2103,8 +2103,8 @@ Edit details for a mod. If you want to update the `logo` or media associated wit
     "images": [
       {
         "filename": "modio-dark.png",
-        "original": "https://static.mod.io/v1/images/global/modio-dark.png",
-        "thumb_320x180": "https://static.mod.io/v1/images/global/modio-dark.png"
+        "original": "https://static.mod.io/v1/images/branding/modio-dark.png",
+        "thumb_320x180": "https://static.mod.io/v1/images/branding/modio-dark.png"
       }
     ]
   },
@@ -2935,13 +2935,13 @@ System.out.println(response.toString());
 
 Upload new media to a game. Any request you make to this endpoint *should* contain a binary file for each of the fields you want to update below. Successful request will return [Message Object](#message-object).
 
-     __NOTE:__ You can also add media to [your games profile](https://mod.io/games) on the mod.io website. This is the recommended approach.
+    __NOTE:__ You can also add media to [your games profile](https://mod.io/games) on the mod.io website. This is the recommended approach.
 
-     Parameter|Type|Required|Description
-     ---|---|---|---|
-     logo|file||Image file which will represent your games logo. Must be gif, jpg or png format and cannot exceed 8MB in filesize. Dimensions must be at least 640x360 and we recommended you supply a high resolution image with a 16 / 9 ratio. mod.io will use this logo to create three thumbnails with the dimensions of 320x180, 640x360 and 1280x720.
-     icon|file||Image file which will represent your games icon. Must be gif, jpg or png format and cannot exceed 1MB in filesize. Dimensions must be at least 64x64 and a transparent png that works on a colorful background is recommended. mod.io will use this icon to create three thumbnails with the dimensions of 64x64, 128x128 and 256x256.
-     header|file||Image file which will represent your games header. Must be gif, jpg or png format and cannot exceed 256KB in filesize. Dimensions of 400x100 and a light transparent png that works on a dark background is recommended.
+    Parameter|Type|Required|Description
+    ---|---|---|---|
+    logo|file||Image file which will represent your games logo. Must be gif, jpg or png format and cannot exceed 8MB in filesize. Dimensions must be at least 640x360 and we recommended you supply a high resolution image with a 16 / 9 ratio. mod.io will use this logo to create three thumbnails with the dimensions of 320x180, 640x360 and 1280x720.
+    icon|file||Image file which will represent your games icon. Must be gif, jpg or png format and cannot exceed 1MB in filesize. Dimensions must be at least 64x64 and a transparent png that works on a colorful background is recommended. mod.io will use this icon to create three thumbnails with the dimensions of 64x64, 128x128 and 256x256.
+    header|file||Image file which will represent your games header. Must be gif, jpg or png format and cannot exceed 256KB in filesize. Dimensions of 400x100 and a light transparent png that works on a dark background is recommended.
 
 
 > Example response
@@ -3344,9 +3344,9 @@ Subscribe the _authenticated user_ to a corresponding mod. No body parameters ar
     "date_online": 1509922961,
     "avatar": {
       "filename": "modio-dark.png",
-      "original": "https://static.mod.io/v1/images/global/ao_modio-dark.png",
-      "thumb_50x50": "https://static.mod.io/v1/images/global/modio-dark.png",
-      "thumb_100x100": "https://static.mod.io/v1/images/global/am_modio-dark.png"
+      "original": "https://static.mod.io/v1/images/branding/modio-dark.png",
+      "thumb_50x50": "https://static.mod.io/v1/images/branding/modio-dark.png",
+      "thumb_100x100": "https://static.mod.io/v1/images/branding/modio-dark.png"
     },
     "timezone": "America/Los_Angeles",
     "language": "en",
@@ -3357,10 +3357,10 @@ Subscribe the _authenticated user_ to a corresponding mod. No body parameters ar
   "date_live": 1499841403,
   "logo": {
     "filename": "modio-dark.png",
-    "original": "https://static.mod.io/v1/images/global/modio-dark.png",
-    "thumb_320x180": "https://static.mod.io/v1/images/global/modio-dark.png",
-    "thumb_640x360": "https://static.mod.io/v1/images/global/modio-dark.png",
-    "thumb_1280x720": "https://static.mod.io/v1/images/global/modio-dark.png"
+    "original": "https://static.mod.io/v1/images/branding/modio-dark.png",
+    "thumb_320x180": "https://static.mod.io/v1/images/branding/modio-dark.png",
+    "thumb_640x360": "https://static.mod.io/v1/images/branding/modio-dark.png",
+    "thumb_1280x720": "https://static.mod.io/v1/images/branding/modio-dark.png"
   },
   "homepage": "https://www.rogue-hdpack.com/",
   "name": "Rogue Knight HD Pack",
@@ -3400,8 +3400,8 @@ Subscribe the _authenticated user_ to a corresponding mod. No body parameters ar
     "images": [
       {
         "filename": "modio-dark.png",
-        "original": "https://static.mod.io/v1/images/global/modio-dark.png",
-        "thumb_320x180": "https://static.mod.io/v1/images/global/modio-dark.png"
+        "original": "https://static.mod.io/v1/images/branding/modio-dark.png",
+        "thumb_320x180": "https://static.mod.io/v1/images/branding/modio-dark.png"
       }
     ]
   },
@@ -3819,6 +3819,378 @@ apiKey, oauth2 ( Scopes: read )
 
 # Tags
 
+## Get All Mod Tags
+
+> Example request
+
+```shell
+# You can also use wget
+curl -X GET https://api.mod.io/v1/games/{game-id}/mods/{mod-id}/tags?api_key=YourApiKey \
+  -H 'Accept: application/json'
+
+```
+
+```http
+GET https://api.mod.io/v1/games/{game-id}/mods/{mod-id}/tags?api_key=YourApiKey HTTP/1.1
+Host: api.mod.io
+
+Accept: application/json
+
+```
+
+```javascript
+var headers = {
+  'Accept':'application/json'
+
+};
+
+$.ajax({
+  url: 'https://api.mod.io/v1/games/{game-id}/mods/{mod-id}/tags',
+  method: 'get',
+  data: '?api_key=YourApiKey',
+  headers: headers,
+  success: function(data) {
+    console.log(JSON.stringify(data));
+  }
+})
+```
+
+```javascript--nodejs
+const request = require('node-fetch');
+
+const headers = {
+  'Accept':'application/json'
+
+};
+
+fetch('https://api.mod.io/v1/games/{game-id}/mods/{mod-id}/tags?api_key=YourApiKey',
+{
+  method: 'GET',
+
+  headers: headers
+})
+.then(function(res) {
+    return res.json();
+}).then(function(body) {
+    console.log(body);
+});
+```
+
+```python
+import requests
+headers = {
+  'Accept': 'application/json'
+}
+
+r = requests.get('https://api.mod.io/v1/games/{game-id}/mods/{mod-id}/tags', params={
+  'api_key': 'YourApiKey'
+}, headers = headers)
+
+print r.json()
+```
+
+```java
+URL obj = new URL("https://api.mod.io/v1/games/{game-id}/mods/{mod-id}/tags?api_key=YourApiKey");
+HttpURLConnection con = (HttpURLConnection) obj.openConnection();
+con.setRequestMethod("GET");
+int responseCode = con.getResponseCode();
+BufferedReader in = new BufferedReader(
+    new InputStreamReader(con.getInputStream()));
+String inputLine;
+StringBuffer response = new StringBuffer();
+while ((inputLine = in.readLine()) != null) {
+    response.append(inputLine);
+}
+in.close();
+System.out.println(response.toString());
+```
+`GET /games/{game-id}/mods/{mod-id}/tags`
+
+Get all tags for the corresponding mod. Successful request will return an array of [Mod Tag Objects](#mod-tag-object). We recommended reading the [filtering documentation](#filtering) to return only the records you want.
+
+    Filter|Type|Description
+    ---|---|---
+    date_added|integer|Unix timestamp of date tag was added.
+    tag|string|String representation of the tag. You can check the eligible tags on the parent game object to determine all possible values for this field.
+
+
+> Example response
+
+```json
+{
+  "data": [
+    {
+      "name": "Unity",
+      "date_added": 1499841487
+    },
+    {
+        ...
+    }
+  ],
+  "result_count": 100,
+  "result_limit": 100,
+  "result_offset": 0
+}
+```
+<h3 id="Get-All-Mod-Tags-responses">Responses</h3>
+
+Status|Meaning|Description|Response Schema
+---|---|---|---|
+200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)|Successful Request|[Get All Mod Tags ](#schemaget_all_mod_tags)
+
+<aside class="warning">
+To perform this operation, you must be authenticated by means of one of the following methods:
+apiKey, oauth2 ( Scopes: read )
+</aside>
+
+
+## Add Mod Tags
+
+> Example request
+
+```shell
+# You can also use wget
+curl -X POST https://api.mod.io/v1/games/{game-id}/mods/{mod-id}/tags \
+  -H 'Authorization: Bearer {access-token}' \
+  -H 'Content-Type: application/x-www-form-urlencoded' \
+  -H 'Accept: application/json'
+
+```
+
+```http
+POST https://api.mod.io/v1/games/{game-id}/mods/{mod-id}/tags HTTP/1.1
+Host: api.mod.io
+
+Accept: application/json
+Authorization: Bearer {access-token}
+Content-Type: application/x-www-form-urlencoded
+
+
+```
+
+```javascript
+var headers = {
+  'Authorization':'Bearer {access-token}',
+  'Content-Type':'application/x-www-form-urlencoded',
+  'Accept':'application/json'
+
+};
+
+$.ajax({
+  url: 'https://api.mod.io/v1/games/{game-id}/mods/{mod-id}/tags',
+  method: 'post',
+
+  headers: headers,
+  success: function(data) {
+    console.log(JSON.stringify(data));
+  }
+})
+```
+
+```javascript--nodejs
+const request = require('node-fetch');
+
+const headers = {
+  'Authorization':'Bearer {access-token}',
+  'Content-Type':'application/x-www-form-urlencoded',
+  'Accept':'application/json'
+
+};
+
+fetch('https://api.mod.io/v1/games/{game-id}/mods/{mod-id}/tags',
+{
+  method: 'POST',
+
+  headers: headers
+})
+.then(function(res) {
+    return res.json();
+}).then(function(body) {
+    console.log(body);
+});
+```
+
+```python
+import requests
+headers = {
+  'Authorization': 'Bearer {access-token}',
+  'Content-Type': 'application/x-www-form-urlencoded',
+  'Accept': 'application/json'
+}
+
+r = requests.post('https://api.mod.io/v1/games/{game-id}/mods/{mod-id}/tags', params={
+
+}, headers = headers)
+
+print r.json()
+```
+
+```java
+URL obj = new URL("https://api.mod.io/v1/games/{game-id}/mods/{mod-id}/tags");
+HttpURLConnection con = (HttpURLConnection) obj.openConnection();
+con.setRequestMethod("POST");
+int responseCode = con.getResponseCode();
+BufferedReader in = new BufferedReader(
+    new InputStreamReader(con.getInputStream()));
+String inputLine;
+StringBuffer response = new StringBuffer();
+while ((inputLine = in.readLine()) != null) {
+    response.append(inputLine);
+}
+in.close();
+System.out.println(response.toString());
+```
+`POST /games/{game-id}/mods/{mod-id}/tags`
+
+Add tags to a mod's profile. You can only add tags allowed by the parent game, which are listed in the `tag_option` column in the [Game's Object](#game-object). Successful request will return [Message Object](#message-object).
+
+    Parameter|Type|Required|Description
+    ---|---|---|---|
+    tags|string[]|true|An array of tags to add. For example: If the parent game has a 'Theme' tag group with 'Fantasy', 'Sci-fi', 'Western' and 'Realistic' as the options, you could add 'Fantasy' and 'Sci-fi' to the `tags` array in your request. Provided the tags are valid you can add any number.
+
+
+> Example response
+
+```json
+{
+  "code": "201",
+  "message": "You have successfully added tags to the specified mod."
+}
+```
+<h3 id="Add-Mod-Tags-responses">Responses</h3>
+
+Status|Meaning|Description|Response Schema
+---|---|---|---|
+201|[Created](https://tools.ietf.org/html/rfc7231#section-6.3.2)|Created|[addModTag](#schemaaddmodtag)
+
+<aside class="warning">
+To perform this operation, you must be authenticated by means of one of the following methods:
+oauth2 ( Scopes: write )
+</aside>
+
+
+## Delete Mod Tag
+
+> Example request
+
+```shell
+# You can also use wget
+curl -X DELETE https://api.mod.io/v1/games/{game-id}/mods/{mod-id}/tags \
+  -H 'Authorization: Bearer {access-token}' \
+  -H 'Content-Type: application/x-www-form-urlencoded' \
+  -H 'Accept: application/json'
+
+```
+
+```http
+DELETE https://api.mod.io/v1/games/{game-id}/mods/{mod-id}/tags HTTP/1.1
+Host: api.mod.io
+
+Accept: application/json
+Authorization: Bearer {access-token}
+Content-Type: application/x-www-form-urlencoded
+
+
+```
+
+```javascript
+var headers = {
+  'Authorization':'Bearer {access-token}',
+  'Content-Type':'application/x-www-form-urlencoded',
+  'Accept':'application/json'
+
+};
+
+$.ajax({
+  url: 'https://api.mod.io/v1/games/{game-id}/mods/{mod-id}/tags',
+  method: 'delete',
+
+  headers: headers,
+  success: function(data) {
+    console.log(JSON.stringify(data));
+  }
+})
+```
+
+```javascript--nodejs
+const request = require('node-fetch');
+
+const headers = {
+  'Authorization':'Bearer {access-token}',
+  'Content-Type':'application/x-www-form-urlencoded',
+  'Accept':'application/json'
+
+};
+
+fetch('https://api.mod.io/v1/games/{game-id}/mods/{mod-id}/tags',
+{
+  method: 'DELETE',
+
+  headers: headers
+})
+.then(function(res) {
+    return res.json();
+}).then(function(body) {
+    console.log(body);
+});
+```
+
+```python
+import requests
+headers = {
+  'Authorization': 'Bearer {access-token}',
+  'Content-Type': 'application/x-www-form-urlencoded',
+  'Accept': 'application/json'
+}
+
+r = requests.delete('https://api.mod.io/v1/games/{game-id}/mods/{mod-id}/tags', params={
+
+}, headers = headers)
+
+print r.json()
+```
+
+```java
+URL obj = new URL("https://api.mod.io/v1/games/{game-id}/mods/{mod-id}/tags");
+HttpURLConnection con = (HttpURLConnection) obj.openConnection();
+con.setRequestMethod("DELETE");
+int responseCode = con.getResponseCode();
+BufferedReader in = new BufferedReader(
+    new InputStreamReader(con.getInputStream()));
+String inputLine;
+StringBuffer response = new StringBuffer();
+while ((inputLine = in.readLine()) != null) {
+    response.append(inputLine);
+}
+in.close();
+System.out.println(response.toString());
+```
+`DELETE /games/{game-id}/mods/{mod-id}/tags`
+
+Delete tags from a mod's profile. Deleting tags is identical to adding tags except the request method is `DELETE` instead of `POST`. Successful request will return `204 No Content`.
+
+    Parameter|Type|Required|Description
+    ---|---|---|---|
+    tags|string[]|true|An array of tags to delete.
+
+
+> Example response
+
+```json
+ 204 No Content 
+```
+<h3 id="Delete-Mod-Tag-responses">Responses</h3>
+
+Status|Meaning|Description|Response Schema
+---|---|---|---|
+204|[No Content](https://tools.ietf.org/html/rfc7231#section-6.3.5)|No Content|None
+
+<aside class="warning">
+To perform this operation, you must be authenticated by means of one of the following methods:
+oauth2 ( Scopes: write )
+</aside>
+
+
 ## Get All Game Tag Options
 
 > Example request
@@ -4043,16 +4415,16 @@ System.out.println(response.toString());
 
 Add tags which mods can apply to their profiles. Successful request will return [Message Object](#message-object).
 
-     Tagging is a critical feature that powers the searching and filtering of mods for your game, as well as allowing you to control how mods are installed and played. For example you might enforce mods to be a particular type (map, model, script, save, effects, blueprint), which dictates how you install it. You may use tags to specify what the mod replaces (building, prop, car, boat, character). Or perhaps the tags describe the theme of the mod (fun, scenic, realism). The implementation is up to you, but the more detail you support the better filtering and searching becomes. If you need to store more advanced information, you can also use [Metadata Key Value Pairs](#metadata).
+    Tagging is a critical feature that powers the searching and filtering of mods for your game, as well as allowing you to control how mods are installed and played. For example you might enforce mods to be a particular type (map, model, script, save, effects, blueprint), which dictates how you install it. You may use tags to specify what the mod replaces (building, prop, car, boat, character). Or perhaps the tags describe the theme of the mod (fun, scenic, realism). The implementation is up to you, but the more detail you support the better filtering and searching becomes. If you need to store more advanced information, you can also use [Metadata Key Value Pairs](#metadata).
 
-     __NOTE:__ You can also manage tags by editing [your games profile](https://mod.io/games) on the mod.io website. This is the recommended approach.
+    __NOTE:__ You can also manage tags by editing [your games profile](https://mod.io/games) on the mod.io website. This is the recommended approach.
 
-     Parameter|Type|Required|Description
-     ---|---|---|---|
-     name|string|true|Name of the tag group, for example you may want to have 'Difficulty' as the name with 'Easy', 'Medium' and 'Hard' as the tag values.<br><br>__NOTE:__ If the tag name already exists, its parameters will be overwritten and new tags will be added to the group (an edit). There is a separate endpoint to [delete tags](#delete-game-tag-option).
-     type|string|true|Determines whether you allow users to only select one tag (dropdown) or multiple tags (checkbox):<br><br>__dropdown__ = Mods can select only one tag from this group, dropdown menu shown on site profile.<br>__checkboxes__ = Mods can select multiple tags from this group, checkboxes shown on site profile.
-     hidden|boolean||This group of tags should be hidden from users and mod developers. Useful for games to tag special functionality, to filter on and use behind the scenes. You can also use [Metadata Key Value Pairs](#metadata) for more arbitary data.
-     tags|array|true|Array of tags mod creators can choose to apply to their profiles.
+    Parameter|Type|Required|Description
+    ---|---|---|---|
+    name|string|true|Name of the tag group, for example you may want to have 'Difficulty' as the name with 'Easy', 'Medium' and 'Hard' as the tag values.<br><br>__NOTE:__ If the tag name already exists, its parameters will be overwritten and new tags will be added to the group (an edit). There is a separate endpoint to [delete tags](#delete-game-tag-option).
+    type|string|true|Determines whether you allow users to only select one tag (dropdown) or multiple tags (checkbox):<br><br>__dropdown__ = Mods can select only one tag from this group, dropdown menu shown on site profile.<br>__checkboxes__ = Mods can select multiple tags from this group, checkboxes shown on site profile.
+    hidden|boolean||This group of tags should be hidden from users and mod developers. Useful for games to tag special functionality, to filter on and use behind the scenes. You can also use [Metadata Key Value Pairs](#metadata) for more arbitary data.
+    tags|string[]|true|Array of tags mod creators can choose to apply to their profiles.
 
 
 > Example response
@@ -4175,12 +4547,12 @@ System.out.println(response.toString());
 
 Delete an entire group of tags or individual tags. Successful request will return `204 No Content`.
 
-     __NOTE:__ You can also manage tags by editing [your games profile](https://mod.io/games) on the mod.io website. This is the recommended approach.
+    __NOTE:__ You can also manage tags by editing [your games profile](https://mod.io/games) on the mod.io website. This is the recommended approach.
 
-     Parameter|Type|Required|Description
-     ---|---|---|---|
-     name|string|true|Name of the tag group that you want to delete tags from.
-     tags|string[]|true|Array of strings representing the tag options to delete. An empty array will delete the entire group. For example:<br><br>Assume you have a group of tags titled 'Difficulty' and you want to remove the tag option 'Hard' from it. The `name` parameter would have the value 'Difficulty', and the `tags` array would have one value 'Hard'.
+    Parameter|Type|Required|Description
+    ---|---|---|---|
+    name|string|true|Name of the tag group that you want to delete tags from.
+    tags|string[]|true|Array of strings representing the tag options to delete. An empty array will delete the entire group. For example:<br><br>Assume you have a group of tags titled 'Difficulty' and you want to remove the tag option 'Hard' from it. The `name` parameter would have the value 'Difficulty', and the `tags` array would have one value 'Hard'.
 
 
 > Example response
@@ -4189,378 +4561,6 @@ Delete an entire group of tags or individual tags. Successful request will retur
  204 No Content 
 ```
 <h3 id="Delete-Game-Tag-Option-responses">Responses</h3>
-
-Status|Meaning|Description|Response Schema
----|---|---|---|
-204|[No Content](https://tools.ietf.org/html/rfc7231#section-6.3.5)|No Content|None
-
-<aside class="warning">
-To perform this operation, you must be authenticated by means of one of the following methods:
-oauth2 ( Scopes: write )
-</aside>
-
-
-## Get All Mod Tags
-
-> Example request
-
-```shell
-# You can also use wget
-curl -X GET https://api.mod.io/v1/games/{game-id}/mods/{mod-id}/tags?api_key=YourApiKey \
-  -H 'Accept: application/json'
-
-```
-
-```http
-GET https://api.mod.io/v1/games/{game-id}/mods/{mod-id}/tags?api_key=YourApiKey HTTP/1.1
-Host: api.mod.io
-
-Accept: application/json
-
-```
-
-```javascript
-var headers = {
-  'Accept':'application/json'
-
-};
-
-$.ajax({
-  url: 'https://api.mod.io/v1/games/{game-id}/mods/{mod-id}/tags',
-  method: 'get',
-  data: '?api_key=YourApiKey',
-  headers: headers,
-  success: function(data) {
-    console.log(JSON.stringify(data));
-  }
-})
-```
-
-```javascript--nodejs
-const request = require('node-fetch');
-
-const headers = {
-  'Accept':'application/json'
-
-};
-
-fetch('https://api.mod.io/v1/games/{game-id}/mods/{mod-id}/tags?api_key=YourApiKey',
-{
-  method: 'GET',
-
-  headers: headers
-})
-.then(function(res) {
-    return res.json();
-}).then(function(body) {
-    console.log(body);
-});
-```
-
-```python
-import requests
-headers = {
-  'Accept': 'application/json'
-}
-
-r = requests.get('https://api.mod.io/v1/games/{game-id}/mods/{mod-id}/tags', params={
-  'api_key': 'YourApiKey'
-}, headers = headers)
-
-print r.json()
-```
-
-```java
-URL obj = new URL("https://api.mod.io/v1/games/{game-id}/mods/{mod-id}/tags?api_key=YourApiKey");
-HttpURLConnection con = (HttpURLConnection) obj.openConnection();
-con.setRequestMethod("GET");
-int responseCode = con.getResponseCode();
-BufferedReader in = new BufferedReader(
-    new InputStreamReader(con.getInputStream()));
-String inputLine;
-StringBuffer response = new StringBuffer();
-while ((inputLine = in.readLine()) != null) {
-    response.append(inputLine);
-}
-in.close();
-System.out.println(response.toString());
-```
-`GET /games/{game-id}/mods/{mod-id}/tags`
-
-Get all tags for the corresponding mod. Successful request will return an array of [Mod Tag Objects](#mod-tag-object). We recommended reading the [filtering documentation](#filtering) to return only the records you want.
-
-     Filter|Type|Description
-     ---|---|---
-     date_added|integer|Unix timestamp of date tag was added.
-     tag|string|String representation of the tag. You can check the eligible tags on the parent game object to determine all possible values for this field.
-
-
-> Example response
-
-```json
-{
-  "data": [
-    {
-      "name": "Unity",
-      "date_added": 1499841487
-    },
-    {
-        ...
-    }
-  ],
-  "result_count": 100,
-  "result_limit": 100,
-  "result_offset": 0
-}
-```
-<h3 id="Get-All-Mod-Tags-responses">Responses</h3>
-
-Status|Meaning|Description|Response Schema
----|---|---|---|
-200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)|Successful Request|[Get All Mod Tags ](#schemaget_all_mod_tags)
-
-<aside class="warning">
-To perform this operation, you must be authenticated by means of one of the following methods:
-apiKey, oauth2 ( Scopes: read )
-</aside>
-
-
-## Add Mod Tag
-
-> Example request
-
-```shell
-# You can also use wget
-curl -X POST https://api.mod.io/v1/games/{game-id}/mods/{mod-id}/tags \
-  -H 'Authorization: Bearer {access-token}' \
-  -H 'Content-Type: application/x-www-form-urlencoded' \
-  -H 'Accept: application/json'
-
-```
-
-```http
-POST https://api.mod.io/v1/games/{game-id}/mods/{mod-id}/tags HTTP/1.1
-Host: api.mod.io
-
-Accept: application/json
-Authorization: Bearer {access-token}
-Content-Type: application/x-www-form-urlencoded
-
-
-```
-
-```javascript
-var headers = {
-  'Authorization':'Bearer {access-token}',
-  'Content-Type':'application/x-www-form-urlencoded',
-  'Accept':'application/json'
-
-};
-
-$.ajax({
-  url: 'https://api.mod.io/v1/games/{game-id}/mods/{mod-id}/tags',
-  method: 'post',
-
-  headers: headers,
-  success: function(data) {
-    console.log(JSON.stringify(data));
-  }
-})
-```
-
-```javascript--nodejs
-const request = require('node-fetch');
-
-const headers = {
-  'Authorization':'Bearer {access-token}',
-  'Content-Type':'application/x-www-form-urlencoded',
-  'Accept':'application/json'
-
-};
-
-fetch('https://api.mod.io/v1/games/{game-id}/mods/{mod-id}/tags',
-{
-  method: 'POST',
-
-  headers: headers
-})
-.then(function(res) {
-    return res.json();
-}).then(function(body) {
-    console.log(body);
-});
-```
-
-```python
-import requests
-headers = {
-  'Authorization': 'Bearer {access-token}',
-  'Content-Type': 'application/x-www-form-urlencoded',
-  'Accept': 'application/json'
-}
-
-r = requests.post('https://api.mod.io/v1/games/{game-id}/mods/{mod-id}/tags', params={
-
-}, headers = headers)
-
-print r.json()
-```
-
-```java
-URL obj = new URL("https://api.mod.io/v1/games/{game-id}/mods/{mod-id}/tags");
-HttpURLConnection con = (HttpURLConnection) obj.openConnection();
-con.setRequestMethod("POST");
-int responseCode = con.getResponseCode();
-BufferedReader in = new BufferedReader(
-    new InputStreamReader(con.getInputStream()));
-String inputLine;
-StringBuffer response = new StringBuffer();
-while ((inputLine = in.readLine()) != null) {
-    response.append(inputLine);
-}
-in.close();
-System.out.println(response.toString());
-```
-`POST /games/{game-id}/mods/{mod-id}/tags`
-
-Add tags to a mod's profile. You can only add tags allowed by the parent game, which are listed in the `tag_option` column in the [Game's Object](#game-object). Successful request will return [Message Object](#message-object).
-
-     Parameter|Type|Required|Description
-     ---|---|---|---|
-     tags|string[]|true|An array of tags to add. For example: If the parent game has a 'Theme' tag group with 'Fantasy', 'Sci-fi', 'Western' and 'Realistic' as the options, you could add 'Fantasy' and 'Sci-fi' to the `tags` array in your request. Provided the tags are valid you can add any number.
-
-
-> Example response
-
-```json
-{
-  "code": "201",
-  "message": "You have successfully added tags to the specified mod."
-}
-```
-<h3 id="Add-Mod-Tag-responses">Responses</h3>
-
-Status|Meaning|Description|Response Schema
----|---|---|---|
-201|[Created](https://tools.ietf.org/html/rfc7231#section-6.3.2)|Created|[Message Object](#message-object)
-
-<aside class="warning">
-To perform this operation, you must be authenticated by means of one of the following methods:
-oauth2 ( Scopes: write )
-</aside>
-
-
-## Delete Mod Tag
-
-> Example request
-
-```shell
-# You can also use wget
-curl -X DELETE https://api.mod.io/v1/games/{game-id}/mods/{mod-id}/tags \
-  -H 'Authorization: Bearer {access-token}' \
-  -H 'Content-Type: application/x-www-form-urlencoded' \
-  -H 'Accept: application/json'
-
-```
-
-```http
-DELETE https://api.mod.io/v1/games/{game-id}/mods/{mod-id}/tags HTTP/1.1
-Host: api.mod.io
-
-Accept: application/json
-Authorization: Bearer {access-token}
-Content-Type: application/x-www-form-urlencoded
-
-
-```
-
-```javascript
-var headers = {
-  'Authorization':'Bearer {access-token}',
-  'Content-Type':'application/x-www-form-urlencoded',
-  'Accept':'application/json'
-
-};
-
-$.ajax({
-  url: 'https://api.mod.io/v1/games/{game-id}/mods/{mod-id}/tags',
-  method: 'delete',
-
-  headers: headers,
-  success: function(data) {
-    console.log(JSON.stringify(data));
-  }
-})
-```
-
-```javascript--nodejs
-const request = require('node-fetch');
-
-const headers = {
-  'Authorization':'Bearer {access-token}',
-  'Content-Type':'application/x-www-form-urlencoded',
-  'Accept':'application/json'
-
-};
-
-fetch('https://api.mod.io/v1/games/{game-id}/mods/{mod-id}/tags',
-{
-  method: 'DELETE',
-
-  headers: headers
-})
-.then(function(res) {
-    return res.json();
-}).then(function(body) {
-    console.log(body);
-});
-```
-
-```python
-import requests
-headers = {
-  'Authorization': 'Bearer {access-token}',
-  'Content-Type': 'application/x-www-form-urlencoded',
-  'Accept': 'application/json'
-}
-
-r = requests.delete('https://api.mod.io/v1/games/{game-id}/mods/{mod-id}/tags', params={
-
-}, headers = headers)
-
-print r.json()
-```
-
-```java
-URL obj = new URL("https://api.mod.io/v1/games/{game-id}/mods/{mod-id}/tags");
-HttpURLConnection con = (HttpURLConnection) obj.openConnection();
-con.setRequestMethod("DELETE");
-int responseCode = con.getResponseCode();
-BufferedReader in = new BufferedReader(
-    new InputStreamReader(con.getInputStream()));
-String inputLine;
-StringBuffer response = new StringBuffer();
-while ((inputLine = in.readLine()) != null) {
-    response.append(inputLine);
-}
-in.close();
-System.out.println(response.toString());
-```
-`DELETE /games/{game-id}/mods/{mod-id}/tags`
-
-Delete tags from a mod's profile. Deleting tags is identical to adding tags except the request method is `DELETE` instead of `POST`. Successful request will return `204 No Content`.
-
-     Parameter|Type|Required|Description
-     ---|---|---|---|
-     tags|string[]|true|An array of tags to delete.
-
-
-> Example response
-
-```json
- 204 No Content 
-```
-<h3 id="Delete-Mod-Tag-responses">Responses</h3>
 
 Status|Meaning|Description|Response Schema
 ---|---|---|---|
@@ -5159,7 +5159,7 @@ System.out.println(response.toString());
 ```
 `GET /games/{game-id}/mods/{mod-id}/dependencies`
 
-Get all dependencies the chosen mod has selected. This is useful if a mod requires other mods be installed for it to run. Successful request will return an array of [Mod Dependencies Objects](#mod-dependencies-object).
+Get all dependencies the chosen mod has selected. This is useful if a mod requires other mods be installed for it to run. Successful request will return an array of [Mod Dependencies Objects](#get-all-mod-dependencies-2).
 
      __NOTE:__ Some developers might select _soft_ dependencies to promote or credit other mods. We advise against this but it is possible to do.
 
@@ -5558,9 +5558,9 @@ Get all users that are part of a mod team. Successful request will return an arr
         "date_online": 1509922961,
         "avatar": {
           "filename": "modio-dark.png",
-          "original": "https://static.mod.io/v1/images/global/ao_modio-dark.png",
-          "thumb_50x50": "https://static.mod.io/v1/images/global/modio-dark.png",
-          "thumb_100x100": "https://static.mod.io/v1/images/global/am_modio-dark.png"
+          "original": "https://static.mod.io/v1/images/branding/modio-dark.png",
+          "thumb_50x50": "https://static.mod.io/v1/images/branding/modio-dark.png",
+          "thumb_100x100": "https://static.mod.io/v1/images/branding/modio-dark.png"
         },
         "timezone": "America/Los_Angeles",
         "language": "en",
@@ -6084,9 +6084,9 @@ Get all comments posted in the mods profile. Successful request will return an a
         "date_online": 1509922961,
         "avatar": {
           "filename": "modio-dark.png",
-          "original": "https://static.mod.io/v1/images/global/ao_modio-dark.png",
-          "thumb_50x50": "https://static.mod.io/v1/images/global/modio-dark.png",
-          "thumb_100x100": "https://static.mod.io/v1/images/global/am_modio-dark.png"
+          "original": "https://static.mod.io/v1/images/branding/modio-dark.png",
+          "thumb_50x50": "https://static.mod.io/v1/images/branding/modio-dark.png",
+          "thumb_100x100": "https://static.mod.io/v1/images/branding/modio-dark.png"
         },
         "timezone": "America/Los_Angeles",
         "language": "en",
@@ -6358,9 +6358,9 @@ Get the user that is the original _submitter_ of a resource. Successful request 
   "date_online": 1509922961,
   "avatar": {
     "filename": "modio-dark.png",
-    "original": "https://static.mod.io/v1/images/global/ao_modio-dark.png",
-    "thumb_50x50": "https://static.mod.io/v1/images/global/modio-dark.png",
-    "thumb_100x100": "https://static.mod.io/v1/images/global/am_modio-dark.png"
+    "original": "https://static.mod.io/v1/images/branding/modio-dark.png",
+    "thumb_50x50": "https://static.mod.io/v1/images/branding/modio-dark.png",
+    "thumb_100x100": "https://static.mod.io/v1/images/branding/modio-dark.png"
   },
   "timezone": "America/Los_Angeles",
   "language": "en",
@@ -6490,9 +6490,9 @@ Get all users registered on mod.io. Successful request will return an array of [
       "date_online": 1509922961,
       "avatar": {
         "filename": "modio-dark.png",
-        "original": "https://static.mod.io/v1/images/global/ao_modio-dark.png",
-        "thumb_50x50": "https://static.mod.io/v1/images/global/modio-dark.png",
-        "thumb_100x100": "https://static.mod.io/v1/images/global/am_modio-dark.png"
+        "original": "https://static.mod.io/v1/images/branding/modio-dark.png",
+        "thumb_50x50": "https://static.mod.io/v1/images/branding/modio-dark.png",
+        "thumb_100x100": "https://static.mod.io/v1/images/branding/modio-dark.png"
       },
       "timezone": "America/Los_Angeles",
       "language": "en",
@@ -6619,9 +6619,9 @@ Get a user. Successful request will return a single [User Object](#user-object).
   "date_online": 1509922961,
   "avatar": {
     "filename": "modio-dark.png",
-    "original": "https://static.mod.io/v1/images/global/ao_modio-dark.png",
-    "thumb_50x50": "https://static.mod.io/v1/images/global/modio-dark.png",
-    "thumb_100x100": "https://static.mod.io/v1/images/global/am_modio-dark.png"
+    "original": "https://static.mod.io/v1/images/branding/modio-dark.png",
+    "thumb_50x50": "https://static.mod.io/v1/images/branding/modio-dark.png",
+    "thumb_100x100": "https://static.mod.io/v1/images/branding/modio-dark.png"
   },
   "timezone": "America/Los_Angeles",
   "language": "en",
@@ -6748,7 +6748,7 @@ Submit a report for any resource on mod.io. Successful request will return [Mess
      id|integer|true|Unique id of the resource you are reporting.
      type|integer|true|The type of report you are submitting. Must be one of the following values:<br><br>__0__ = Generic Report<br>__1__ = DMCA Report
      name|string|true|Informative title for your report.
-     summary|string|true|Detailed description of your report. Make sure you include all relevant information and links to help moderators investigate and respond appropiately.
+     summary|string|true|Detailed description of your report. Make sure you include all relevant information and links to help moderators investigate and respond appropriately.
 
 
 > Example response
@@ -6879,9 +6879,9 @@ Get the _authenticated user_ details. Successful request will return a single [U
   "date_online": 1509922961,
   "avatar": {
     "filename": "modio-dark.png",
-    "original": "https://static.mod.io/v1/images/global/ao_modio-dark.png",
-    "thumb_50x50": "https://static.mod.io/v1/images/global/modio-dark.png",
-    "thumb_100x100": "https://static.mod.io/v1/images/global/am_modio-dark.png"
+    "original": "https://static.mod.io/v1/images/branding/modio-dark.png",
+    "thumb_50x50": "https://static.mod.io/v1/images/branding/modio-dark.png",
+    "thumb_100x100": "https://static.mod.io/v1/images/branding/modio-dark.png"
   },
   "timezone": "America/Los_Angeles",
   "language": "en",
@@ -7033,9 +7033,9 @@ Get all mod's the _authenticated user_ is subscribed to. Successful request will
         "date_online": 1509922961,
         "avatar": {
           "filename": "modio-dark.png",
-          "original": "https://static.mod.io/v1/images/global/ao_modio-dark.png",
-          "thumb_50x50": "https://static.mod.io/v1/images/global/modio-dark.png",
-          "thumb_100x100": "https://static.mod.io/v1/images/global/am_modio-dark.png"
+          "original": "https://static.mod.io/v1/images/branding/modio-dark.png",
+          "thumb_50x50": "https://static.mod.io/v1/images/branding/modio-dark.png",
+          "thumb_100x100": "https://static.mod.io/v1/images/branding/modio-dark.png"
         },
         "timezone": "America/Los_Angeles",
         "language": "en",
@@ -7046,10 +7046,10 @@ Get all mod's the _authenticated user_ is subscribed to. Successful request will
       "date_live": 1499841403,
       "logo": {
         "filename": "modio-dark.png",
-        "original": "https://static.mod.io/v1/images/global/modio-dark.png",
-        "thumb_320x180": "https://static.mod.io/v1/images/global/modio-dark.png",
-        "thumb_640x360": "https://static.mod.io/v1/images/global/modio-dark.png",
-        "thumb_1280x720": "https://static.mod.io/v1/images/global/modio-dark.png"
+        "original": "https://static.mod.io/v1/images/branding/modio-dark.png",
+        "thumb_320x180": "https://static.mod.io/v1/images/branding/modio-dark.png",
+        "thumb_640x360": "https://static.mod.io/v1/images/branding/modio-dark.png",
+        "thumb_1280x720": "https://static.mod.io/v1/images/branding/modio-dark.png"
       },
       "homepage": "https://www.rogue-hdpack.com/",
       "name": "Rogue Knight HD Pack",
@@ -7089,8 +7089,8 @@ Get all mod's the _authenticated user_ is subscribed to. Successful request will
         "images": [
           {
             "filename": "modio-dark.png",
-            "original": "https://static.mod.io/v1/images/global/modio-dark.png",
-            "thumb_320x180": "https://static.mod.io/v1/images/global/modio-dark.png"
+            "original": "https://static.mod.io/v1/images/branding/modio-dark.png",
+            "thumb_320x180": "https://static.mod.io/v1/images/branding/modio-dark.png"
           }
         ]
       },
@@ -7372,9 +7372,9 @@ Get all games the _authenticated user_ added or is a team member of. Successful 
         "date_online": 1509922961,
         "avatar": {
           "filename": "modio-dark.png",
-          "original": "https://static.mod.io/v1/images/global/ao_modio-dark.png",
-          "thumb_50x50": "https://static.mod.io/v1/images/global/modio-dark.png",
-          "thumb_100x100": "https://static.mod.io/v1/images/global/am_modio-dark.png"
+          "original": "https://static.mod.io/v1/images/branding/modio-dark.png",
+          "thumb_50x50": "https://static.mod.io/v1/images/branding/modio-dark.png",
+          "thumb_100x100": "https://static.mod.io/v1/images/branding/modio-dark.png"
         },
         "timezone": "America/Los_Angeles",
         "language": "en",
@@ -7392,21 +7392,21 @@ Get all games the _authenticated user_ added or is a team member of. Successful 
       "ugc_name": "map",
       "icon": {
         "filename": "modio-dark.png",
-        "original": "https://static.mod.io/v1/images/global/ao_modio-dark.png",
-        "thumb_64x64": "https://static.mod.io/v1/images/global/modio-dark.png",
-        "thumb_128x128": "https://static.mod.io/v1/images/global/am_modio-dark.png",
-        "thumb_256x256": "https://static.mod.io/v1/images/global/al_modio-dark.png"
+        "original": "https://static.mod.io/v1/images/branding/modio-dark.png",
+        "thumb_64x64": "https://static.mod.io/v1/images/branding/modio-dark.png",
+        "thumb_128x128": "https://static.mod.io/v1/images/branding/modio-dark.png",
+        "thumb_256x256": "https://static.mod.io/v1/images/branding/modio-dark.png"
       },
       "logo": {
         "filename": "modio-dark.png",
-        "original": "https://static.mod.io/v1/images/global/modio-dark.png",
-        "thumb_320x180": "https://static.mod.io/v1/images/global/modio-dark.png",
-        "thumb_640x360": "https://static.mod.io/v1/images/global/modio-dark.png",
-        "thumb_1280x720": "https://static.mod.io/v1/images/global/modio-dark.png"
+        "original": "https://static.mod.io/v1/images/branding/modio-dark.png",
+        "thumb_320x180": "https://static.mod.io/v1/images/branding/modio-dark.png",
+        "thumb_640x360": "https://static.mod.io/v1/images/branding/modio-dark.png",
+        "thumb_1280x720": "https://static.mod.io/v1/images/branding/modio-dark.png"
       },
       "header": {
         "filename": "demo.png",
-        "original": "https://static.mod.io/v1/images/global/modio-dark.png"
+        "original": "https://static.mod.io/v1/images/branding/modio-dark.png"
       },
       "homepage": "https://www.rogue-knight-game.com/",
       "name": "Rogue Knight",
@@ -7559,9 +7559,9 @@ Get all mods the _authenticated user_ added or is a team member of. Successful r
         "date_online": 1509922961,
         "avatar": {
           "filename": "modio-dark.png",
-          "original": "https://static.mod.io/v1/images/global/ao_modio-dark.png",
-          "thumb_50x50": "https://static.mod.io/v1/images/global/modio-dark.png",
-          "thumb_100x100": "https://static.mod.io/v1/images/global/am_modio-dark.png"
+          "original": "https://static.mod.io/v1/images/branding/modio-dark.png",
+          "thumb_50x50": "https://static.mod.io/v1/images/branding/modio-dark.png",
+          "thumb_100x100": "https://static.mod.io/v1/images/branding/modio-dark.png"
         },
         "timezone": "America/Los_Angeles",
         "language": "en",
@@ -7572,10 +7572,10 @@ Get all mods the _authenticated user_ added or is a team member of. Successful r
       "date_live": 1499841403,
       "logo": {
         "filename": "modio-dark.png",
-        "original": "https://static.mod.io/v1/images/global/modio-dark.png",
-        "thumb_320x180": "https://static.mod.io/v1/images/global/modio-dark.png",
-        "thumb_640x360": "https://static.mod.io/v1/images/global/modio-dark.png",
-        "thumb_1280x720": "https://static.mod.io/v1/images/global/modio-dark.png"
+        "original": "https://static.mod.io/v1/images/branding/modio-dark.png",
+        "thumb_320x180": "https://static.mod.io/v1/images/branding/modio-dark.png",
+        "thumb_640x360": "https://static.mod.io/v1/images/branding/modio-dark.png",
+        "thumb_1280x720": "https://static.mod.io/v1/images/branding/modio-dark.png"
       },
       "homepage": "https://www.rogue-hdpack.com/",
       "name": "Rogue Knight HD Pack",
@@ -7615,8 +7615,8 @@ Get all mods the _authenticated user_ added or is a team member of. Successful r
         "images": [
           {
             "filename": "modio-dark.png",
-            "original": "https://static.mod.io/v1/images/global/modio-dark.png",
-            "thumb_320x180": "https://static.mod.io/v1/images/global/modio-dark.png"
+            "original": "https://static.mod.io/v1/images/branding/modio-dark.png",
+            "thumb_320x180": "https://static.mod.io/v1/images/branding/modio-dark.png"
           }
         ]
       },
@@ -7856,10 +7856,10 @@ error|object|Contains error data.
 ```json
 {
   "filename": "modio-dark.png",
-  "original": "https://static.mod.io/v1/images/global/modio-dark.png",
-  "thumb_320x180": "https://static.mod.io/v1/images/global/modio-dark.png",
-  "thumb_640x360": "https://static.mod.io/v1/images/global/modio-dark.png",
-  "thumb_1280x720": "https://static.mod.io/v1/images/global/modio-dark.png"
+  "original": "https://static.mod.io/v1/images/branding/modio-dark.png",
+  "thumb_320x180": "https://static.mod.io/v1/images/branding/modio-dark.png",
+  "thumb_640x360": "https://static.mod.io/v1/images/branding/modio-dark.png",
+  "thumb_1280x720": "https://static.mod.io/v1/images/branding/modio-dark.png"
 } 
 ```
 
@@ -7884,10 +7884,10 @@ thumb_1280x720|string|URL to the large logo thumbnail.
 ```json
 {
   "filename": "modio-dark.png",
-  "original": "https://static.mod.io/v1/images/global/ao_modio-dark.png",
-  "thumb_64x64": "https://static.mod.io/v1/images/global/modio-dark.png",
-  "thumb_128x128": "https://static.mod.io/v1/images/global/am_modio-dark.png",
-  "thumb_256x256": "https://static.mod.io/v1/images/global/al_modio-dark.png"
+  "original": "https://static.mod.io/v1/images/branding/modio-dark.png",
+  "thumb_64x64": "https://static.mod.io/v1/images/branding/modio-dark.png",
+  "thumb_128x128": "https://static.mod.io/v1/images/branding/modio-dark.png",
+  "thumb_256x256": "https://static.mod.io/v1/images/branding/modio-dark.png"
 } 
 ```
 
@@ -7898,9 +7898,9 @@ Name|Type|Description
 ---|---|---|---|
 filename|string|Icon filename including extension.
 original|string|URL to the full-sized icon.
-thumb_64x64|string|URL to the small thumbnail image.
-thumb_128x128|string|URL to the medium thumbnail image.
-thumb_256x256|string|URL to the large thumbnail image.
+thumb_64x64|string|URL to the small icon thumbnail.
+thumb_128x128|string|URL to the medium icon thumbnail.
+thumb_256x256|string|URL to the large icon thumbnail.
 
 
 
@@ -7912,7 +7912,7 @@ thumb_256x256|string|URL to the large thumbnail image.
 ```json
 {
   "filename": "demo.png",
-  "original": "https://static.mod.io/v1/images/global/modio-dark.png"
+  "original": "https://static.mod.io/v1/images/branding/modio-dark.png"
 } 
 ```
 
@@ -7934,9 +7934,9 @@ original|string|URL to the full-sized header image.
 ```json
 {
   "filename": "modio-dark.png",
-  "original": "https://static.mod.io/v1/images/global/ao_modio-dark.png",
-  "thumb_50x50": "https://static.mod.io/v1/images/global/modio-dark.png",
-  "thumb_100x100": "https://static.mod.io/v1/images/global/am_modio-dark.png"
+  "original": "https://static.mod.io/v1/images/branding/modio-dark.png",
+  "thumb_50x50": "https://static.mod.io/v1/images/branding/modio-dark.png",
+  "thumb_100x100": "https://static.mod.io/v1/images/branding/modio-dark.png"
 } 
 ```
 
@@ -7947,8 +7947,8 @@ Name|Type|Description
 ---|---|---|---|
 filename|string|Avatar filename including extension.
 original|string|URL to the full-sized avatar.
-thumb_50x50|string|URL to the small thumbnail image.
-thumb_100x100|string|URL to the medium thumbnail image.
+thumb_50x50|string|URL to the small avatar thumbnail.
+thumb_100x100|string|URL to the medium avatar thumbnail.
 
 
 
@@ -7960,8 +7960,8 @@ thumb_100x100|string|URL to the medium thumbnail image.
 ```json
 {
   "filename": "modio-dark.png",
-  "original": "https://static.mod.io/v1/images/global/modio-dark.png",
-  "thumb_320x180": "https://static.mod.io/v1/images/global/modio-dark.png"
+  "original": "https://static.mod.io/v1/images/branding/modio-dark.png",
+  "thumb_320x180": "https://static.mod.io/v1/images/branding/modio-dark.png"
 } 
 ```
 
@@ -8022,9 +8022,9 @@ event_type|string|Type of [event](#get-mod-events-2) was 'MODFILE_CHANGED', 'MOD
     "date_online": 1509922961,
     "avatar": {
       "filename": "modio-dark.png",
-      "original": "https://static.mod.io/v1/images/global/ao_modio-dark.png",
-      "thumb_50x50": "https://static.mod.io/v1/images/global/modio-dark.png",
-      "thumb_100x100": "https://static.mod.io/v1/images/global/am_modio-dark.png"
+      "original": "https://static.mod.io/v1/images/branding/modio-dark.png",
+      "thumb_50x50": "https://static.mod.io/v1/images/branding/modio-dark.png",
+      "thumb_100x100": "https://static.mod.io/v1/images/branding/modio-dark.png"
     },
     "timezone": "America/Los_Angeles",
     "language": "en",
@@ -8054,8 +8054,8 @@ submitted_by|[User Object   ](#schemauser_object)|Contains user data.
 » avatar|[Avatar Object   ](#schemaavatar_object)|Contains avatar data.
 »» filename|string|Avatar filename including extension.
 »» original|string|URL to the full-sized avatar.
-»» thumb_50x50|string|URL to the small thumbnail image.
-»» thumb_100x100|string|URL to the medium thumbnail image.
+»» thumb_50x50|string|URL to the small avatar thumbnail.
+»» thumb_100x100|string|URL to the medium avatar thumbnail.
 » timezone|string|Timezone of the user, format is country/city.
 » language|string|Users language preference. See [localization](#localization) for the supported languages.
 » profile_url|string|URL to the user's mod.io profile.
@@ -8232,9 +8232,9 @@ date_expires|integer|Unix timestamp of when the `binary_url` will expire.
     "date_online": 1509922961,
     "avatar": {
       "filename": "modio-dark.png",
-      "original": "https://static.mod.io/v1/images/global/ao_modio-dark.png",
-      "thumb_50x50": "https://static.mod.io/v1/images/global/modio-dark.png",
-      "thumb_100x100": "https://static.mod.io/v1/images/global/am_modio-dark.png"
+      "original": "https://static.mod.io/v1/images/branding/modio-dark.png",
+      "thumb_50x50": "https://static.mod.io/v1/images/branding/modio-dark.png",
+      "thumb_100x100": "https://static.mod.io/v1/images/branding/modio-dark.png"
     },
     "timezone": "America/Los_Angeles",
     "language": "en",
@@ -8245,10 +8245,10 @@ date_expires|integer|Unix timestamp of when the `binary_url` will expire.
   "date_live": 1499841403,
   "logo": {
     "filename": "modio-dark.png",
-    "original": "https://static.mod.io/v1/images/global/modio-dark.png",
-    "thumb_320x180": "https://static.mod.io/v1/images/global/modio-dark.png",
-    "thumb_640x360": "https://static.mod.io/v1/images/global/modio-dark.png",
-    "thumb_1280x720": "https://static.mod.io/v1/images/global/modio-dark.png"
+    "original": "https://static.mod.io/v1/images/branding/modio-dark.png",
+    "thumb_320x180": "https://static.mod.io/v1/images/branding/modio-dark.png",
+    "thumb_640x360": "https://static.mod.io/v1/images/branding/modio-dark.png",
+    "thumb_1280x720": "https://static.mod.io/v1/images/branding/modio-dark.png"
   },
   "homepage": "https://www.rogue-hdpack.com/",
   "name": "Rogue Knight HD Pack",
@@ -8288,8 +8288,8 @@ date_expires|integer|Unix timestamp of when the `binary_url` will expire.
     "images": [
       {
         "filename": "modio-dark.png",
-        "original": "https://static.mod.io/v1/images/global/modio-dark.png",
-        "thumb_320x180": "https://static.mod.io/v1/images/global/modio-dark.png"
+        "original": "https://static.mod.io/v1/images/branding/modio-dark.png",
+        "thumb_320x180": "https://static.mod.io/v1/images/branding/modio-dark.png"
       }
     ]
   },
@@ -8327,8 +8327,8 @@ submitted_by|[User Object   ](#schemauser_object)|Contains user data.
 » avatar|[Avatar Object   ](#schemaavatar_object)|Contains avatar data.
 »» filename|string|Avatar filename including extension.
 »» original|string|URL to the full-sized avatar.
-»» thumb_50x50|string|URL to the small thumbnail image.
-»» thumb_100x100|string|URL to the medium thumbnail image.
+»» thumb_50x50|string|URL to the small avatar thumbnail.
+»» thumb_100x100|string|URL to the medium avatar thumbnail.
 » timezone|string|Timezone of the user, format is country/city.
 » language|string|Users language preference. See [localization](#localization) for the supported languages.
 » profile_url|string|URL to the user's mod.io profile.
@@ -8402,8 +8402,8 @@ tags|[Mod Tag Object  ](#schemamod_tag_object)[]|Contains mod tag data.
   "images": [
     {
       "filename": "modio-dark.png",
-      "original": "https://static.mod.io/v1/images/global/modio-dark.png",
-      "thumb_320x180": "https://static.mod.io/v1/images/global/modio-dark.png"
+      "original": "https://static.mod.io/v1/images/branding/modio-dark.png",
+      "thumb_320x180": "https://static.mod.io/v1/images/branding/modio-dark.png"
     }
   ]
 } 
@@ -8461,9 +8461,9 @@ date_added|integer|Unix timestamp of date tag was applied.
     "date_online": 1509922961,
     "avatar": {
       "filename": "modio-dark.png",
-      "original": "https://static.mod.io/v1/images/global/ao_modio-dark.png",
-      "thumb_50x50": "https://static.mod.io/v1/images/global/modio-dark.png",
-      "thumb_100x100": "https://static.mod.io/v1/images/global/am_modio-dark.png"
+      "original": "https://static.mod.io/v1/images/branding/modio-dark.png",
+      "thumb_50x50": "https://static.mod.io/v1/images/branding/modio-dark.png",
+      "thumb_100x100": "https://static.mod.io/v1/images/branding/modio-dark.png"
     },
     "timezone": "America/Los_Angeles",
     "language": "en",
@@ -8481,21 +8481,21 @@ date_added|integer|Unix timestamp of date tag was applied.
   "ugc_name": "map",
   "icon": {
     "filename": "modio-dark.png",
-    "original": "https://static.mod.io/v1/images/global/ao_modio-dark.png",
-    "thumb_64x64": "https://static.mod.io/v1/images/global/modio-dark.png",
-    "thumb_128x128": "https://static.mod.io/v1/images/global/am_modio-dark.png",
-    "thumb_256x256": "https://static.mod.io/v1/images/global/al_modio-dark.png"
+    "original": "https://static.mod.io/v1/images/branding/modio-dark.png",
+    "thumb_64x64": "https://static.mod.io/v1/images/branding/modio-dark.png",
+    "thumb_128x128": "https://static.mod.io/v1/images/branding/modio-dark.png",
+    "thumb_256x256": "https://static.mod.io/v1/images/branding/modio-dark.png"
   },
   "logo": {
     "filename": "modio-dark.png",
-    "original": "https://static.mod.io/v1/images/global/modio-dark.png",
-    "thumb_320x180": "https://static.mod.io/v1/images/global/modio-dark.png",
-    "thumb_640x360": "https://static.mod.io/v1/images/global/modio-dark.png",
-    "thumb_1280x720": "https://static.mod.io/v1/images/global/modio-dark.png"
+    "original": "https://static.mod.io/v1/images/branding/modio-dark.png",
+    "thumb_320x180": "https://static.mod.io/v1/images/branding/modio-dark.png",
+    "thumb_640x360": "https://static.mod.io/v1/images/branding/modio-dark.png",
+    "thumb_1280x720": "https://static.mod.io/v1/images/branding/modio-dark.png"
   },
   "header": {
     "filename": "demo.png",
-    "original": "https://static.mod.io/v1/images/global/modio-dark.png"
+    "original": "https://static.mod.io/v1/images/branding/modio-dark.png"
   },
   "homepage": "https://www.rogue-knight-game.com/",
   "name": "Rogue Knight",
@@ -8531,8 +8531,8 @@ submitted_by|[User Object   ](#schemauser_object)|Contains user data.
 » avatar|[Avatar Object   ](#schemaavatar_object)|Contains avatar data.
 »» filename|string|Avatar filename including extension.
 »» original|string|URL to the full-sized avatar.
-»» thumb_50x50|string|URL to the small thumbnail image.
-»» thumb_100x100|string|URL to the medium thumbnail image.
+»» thumb_50x50|string|URL to the small avatar thumbnail.
+»» thumb_100x100|string|URL to the medium avatar thumbnail.
 » timezone|string|Timezone of the user, format is country/city.
 » language|string|Users language preference. See [localization](#localization) for the supported languages.
 » profile_url|string|URL to the user's mod.io profile.
@@ -8549,9 +8549,9 @@ ugc_name|string|Word used to describe user-generated content (mods, items, addon
 icon|[Icon Object   ](#schemaicon_object)|Contains icon data.
 » filename|string|Icon filename including extension.
 » original|string|URL to the full-sized icon.
-» thumb_64x64|string|URL to the small thumbnail image.
-» thumb_128x128|string|URL to the medium thumbnail image.
-» thumb_256x256|string|URL to the large thumbnail image.
+» thumb_64x64|string|URL to the small icon thumbnail.
+» thumb_128x128|string|URL to the medium icon thumbnail.
+» thumb_256x256|string|URL to the large icon thumbnail.
 logo|[Logo Object   ](#schemalogo_object)|Contains logo data.
 » filename|string|Logo filename including extension.
 » original|string|URL to the full-sized logo.
@@ -8642,9 +8642,9 @@ display_text|string|Textual representation of the rating in format:<br><br>- Ove
     "date_online": 1509922961,
     "avatar": {
       "filename": "modio-dark.png",
-      "original": "https://static.mod.io/v1/images/global/ao_modio-dark.png",
-      "thumb_50x50": "https://static.mod.io/v1/images/global/modio-dark.png",
-      "thumb_100x100": "https://static.mod.io/v1/images/global/am_modio-dark.png"
+      "original": "https://static.mod.io/v1/images/branding/modio-dark.png",
+      "thumb_50x50": "https://static.mod.io/v1/images/branding/modio-dark.png",
+      "thumb_100x100": "https://static.mod.io/v1/images/branding/modio-dark.png"
     },
     "timezone": "America/Los_Angeles",
     "language": "en",
@@ -8670,8 +8670,8 @@ user|[User Object   ](#schemauser_object)|Contains user data.
 » avatar|[Avatar Object   ](#schemaavatar_object)|Contains avatar data.
 »» filename|string|Avatar filename including extension.
 »» original|string|URL to the full-sized avatar.
-»» thumb_50x50|string|URL to the small thumbnail image.
-»» thumb_100x100|string|URL to the medium thumbnail image.
+»» thumb_50x50|string|URL to the small avatar thumbnail.
+»» thumb_100x100|string|URL to the medium avatar thumbnail.
 » timezone|string|Timezone of the user, format is country/city.
 » language|string|Users language preference. See [localization](#localization) for the supported languages.
 » profile_url|string|URL to the user's mod.io profile.
@@ -8694,9 +8694,9 @@ position|string|Custom title given to the user in this team.
   "date_online": 1509922961,
   "avatar": {
     "filename": "modio-dark.png",
-    "original": "https://static.mod.io/v1/images/global/ao_modio-dark.png",
-    "thumb_50x50": "https://static.mod.io/v1/images/global/modio-dark.png",
-    "thumb_100x100": "https://static.mod.io/v1/images/global/am_modio-dark.png"
+    "original": "https://static.mod.io/v1/images/branding/modio-dark.png",
+    "thumb_50x50": "https://static.mod.io/v1/images/branding/modio-dark.png",
+    "thumb_100x100": "https://static.mod.io/v1/images/branding/modio-dark.png"
   },
   "timezone": "America/Los_Angeles",
   "language": "en",
@@ -8716,8 +8716,8 @@ date_online|integer|Unix timestamp of date the user was last online.
 avatar|[Avatar Object   ](#schemaavatar_object)|Contains avatar data.
 » filename|string|Avatar filename including extension.
 » original|string|URL to the full-sized avatar.
-» thumb_50x50|string|URL to the small thumbnail image.
-» thumb_100x100|string|URL to the medium thumbnail image.
+» thumb_50x50|string|URL to the small avatar thumbnail.
+» thumb_100x100|string|URL to the medium avatar thumbnail.
 timezone|string|Timezone of the user, format is country/city.
 language|string|Users language preference. See [localization](#localization) for the supported languages.
 profile_url|string|URL to the user's mod.io profile.
@@ -8745,9 +8745,9 @@ profile_url|string|URL to the user's mod.io profile.
         "date_online": 1509922961,
         "avatar": {
           "filename": "modio-dark.png",
-          "original": "https://static.mod.io/v1/images/global/ao_modio-dark.png",
-          "thumb_50x50": "https://static.mod.io/v1/images/global/modio-dark.png",
-          "thumb_100x100": "https://static.mod.io/v1/images/global/am_modio-dark.png"
+          "original": "https://static.mod.io/v1/images/branding/modio-dark.png",
+          "thumb_50x50": "https://static.mod.io/v1/images/branding/modio-dark.png",
+          "thumb_100x100": "https://static.mod.io/v1/images/branding/modio-dark.png"
         },
         "timezone": "America/Los_Angeles",
         "language": "en",
@@ -8786,8 +8786,8 @@ data|[Comment Object   ](#schemacomment_object)[]|Array containing comment objec
 »» avatar|[Avatar Object   ](#schemaavatar_object)|Contains avatar data.
 »»» filename|string|Avatar filename including extension.
 »»» original|string|URL to the full-sized avatar.
-»»» thumb_50x50|string|URL to the small thumbnail image.
-»»» thumb_100x100|string|URL to the medium thumbnail image.
+»»» thumb_50x50|string|URL to the small avatar thumbnail.
+»»» thumb_100x100|string|URL to the medium avatar thumbnail.
 »» timezone|string|Timezone of the user, format is country/city.
 »» language|string|Users language preference. See [localization](#localization) for the supported languages.
 »» profile_url|string|URL to the user's mod.io profile.
@@ -8925,9 +8925,9 @@ result_offset|integer|Number of results skipped over.
         "date_online": 1509922961,
         "avatar": {
           "filename": "modio-dark.png",
-          "original": "https://static.mod.io/v1/images/global/ao_modio-dark.png",
-          "thumb_50x50": "https://static.mod.io/v1/images/global/modio-dark.png",
-          "thumb_100x100": "https://static.mod.io/v1/images/global/am_modio-dark.png"
+          "original": "https://static.mod.io/v1/images/branding/modio-dark.png",
+          "thumb_50x50": "https://static.mod.io/v1/images/branding/modio-dark.png",
+          "thumb_100x100": "https://static.mod.io/v1/images/branding/modio-dark.png"
         },
         "timezone": "America/Los_Angeles",
         "language": "en",
@@ -8945,21 +8945,21 @@ result_offset|integer|Number of results skipped over.
       "ugc_name": "map",
       "icon": {
         "filename": "modio-dark.png",
-        "original": "https://static.mod.io/v1/images/global/ao_modio-dark.png",
-        "thumb_64x64": "https://static.mod.io/v1/images/global/modio-dark.png",
-        "thumb_128x128": "https://static.mod.io/v1/images/global/am_modio-dark.png",
-        "thumb_256x256": "https://static.mod.io/v1/images/global/al_modio-dark.png"
+        "original": "https://static.mod.io/v1/images/branding/modio-dark.png",
+        "thumb_64x64": "https://static.mod.io/v1/images/branding/modio-dark.png",
+        "thumb_128x128": "https://static.mod.io/v1/images/branding/modio-dark.png",
+        "thumb_256x256": "https://static.mod.io/v1/images/branding/modio-dark.png"
       },
       "logo": {
         "filename": "modio-dark.png",
-        "original": "https://static.mod.io/v1/images/global/modio-dark.png",
-        "thumb_320x180": "https://static.mod.io/v1/images/global/modio-dark.png",
-        "thumb_640x360": "https://static.mod.io/v1/images/global/modio-dark.png",
-        "thumb_1280x720": "https://static.mod.io/v1/images/global/modio-dark.png"
+        "original": "https://static.mod.io/v1/images/branding/modio-dark.png",
+        "thumb_320x180": "https://static.mod.io/v1/images/branding/modio-dark.png",
+        "thumb_640x360": "https://static.mod.io/v1/images/branding/modio-dark.png",
+        "thumb_1280x720": "https://static.mod.io/v1/images/branding/modio-dark.png"
       },
       "header": {
         "filename": "demo.png",
-        "original": "https://static.mod.io/v1/images/global/modio-dark.png"
+        "original": "https://static.mod.io/v1/images/branding/modio-dark.png"
       },
       "homepage": "https://www.rogue-knight-game.com/",
       "name": "Rogue Knight",
@@ -9004,8 +9004,8 @@ data|[Game Object   ](#schemagame_object)[]|Array containing game objects.
 »» avatar|[Avatar Object   ](#schemaavatar_object)|Contains avatar data.
 »»» filename|string|Avatar filename including extension.
 »»» original|string|URL to the full-sized avatar.
-»»» thumb_50x50|string|URL to the small thumbnail image.
-»»» thumb_100x100|string|URL to the medium thumbnail image.
+»»» thumb_50x50|string|URL to the small avatar thumbnail.
+»»» thumb_100x100|string|URL to the medium avatar thumbnail.
 »» timezone|string|Timezone of the user, format is country/city.
 »» language|string|Users language preference. See [localization](#localization) for the supported languages.
 »» profile_url|string|URL to the user's mod.io profile.
@@ -9022,9 +9022,9 @@ data|[Game Object   ](#schemagame_object)[]|Array containing game objects.
 » icon|[Icon Object   ](#schemaicon_object)|Contains icon data.
 »» filename|string|Icon filename including extension.
 »» original|string|URL to the full-sized icon.
-»» thumb_64x64|string|URL to the small thumbnail image.
-»» thumb_128x128|string|URL to the medium thumbnail image.
-»» thumb_256x256|string|URL to the large thumbnail image.
+»» thumb_64x64|string|URL to the small icon thumbnail.
+»» thumb_128x128|string|URL to the medium icon thumbnail.
+»» thumb_256x256|string|URL to the large icon thumbnail.
 » logo|[Logo Object   ](#schemalogo_object)|Contains logo data.
 »» filename|string|Logo filename including extension.
 »» original|string|URL to the full-sized logo.
@@ -9107,9 +9107,9 @@ result_offset|integer|Number of results skipped over.
         "date_online": 1509922961,
         "avatar": {
           "filename": "modio-dark.png",
-          "original": "https://static.mod.io/v1/images/global/ao_modio-dark.png",
-          "thumb_50x50": "https://static.mod.io/v1/images/global/modio-dark.png",
-          "thumb_100x100": "https://static.mod.io/v1/images/global/am_modio-dark.png"
+          "original": "https://static.mod.io/v1/images/branding/modio-dark.png",
+          "thumb_50x50": "https://static.mod.io/v1/images/branding/modio-dark.png",
+          "thumb_100x100": "https://static.mod.io/v1/images/branding/modio-dark.png"
         },
         "timezone": "America/Los_Angeles",
         "language": "en",
@@ -9120,10 +9120,10 @@ result_offset|integer|Number of results skipped over.
       "date_live": 1499841403,
       "logo": {
         "filename": "modio-dark.png",
-        "original": "https://static.mod.io/v1/images/global/modio-dark.png",
-        "thumb_320x180": "https://static.mod.io/v1/images/global/modio-dark.png",
-        "thumb_640x360": "https://static.mod.io/v1/images/global/modio-dark.png",
-        "thumb_1280x720": "https://static.mod.io/v1/images/global/modio-dark.png"
+        "original": "https://static.mod.io/v1/images/branding/modio-dark.png",
+        "thumb_320x180": "https://static.mod.io/v1/images/branding/modio-dark.png",
+        "thumb_640x360": "https://static.mod.io/v1/images/branding/modio-dark.png",
+        "thumb_1280x720": "https://static.mod.io/v1/images/branding/modio-dark.png"
       },
       "homepage": "https://www.rogue-hdpack.com/",
       "name": "Rogue Knight HD Pack",
@@ -9163,8 +9163,8 @@ result_offset|integer|Number of results skipped over.
         "images": [
           {
             "filename": "modio-dark.png",
-            "original": "https://static.mod.io/v1/images/global/modio-dark.png",
-            "thumb_320x180": "https://static.mod.io/v1/images/global/modio-dark.png"
+            "original": "https://static.mod.io/v1/images/branding/modio-dark.png",
+            "thumb_320x180": "https://static.mod.io/v1/images/branding/modio-dark.png"
           }
         ]
       },
@@ -9211,8 +9211,8 @@ data|[Mod Object   ](#schemamod_object)[]|Array containing mod objects.
 »» avatar|[Avatar Object   ](#schemaavatar_object)|Contains avatar data.
 »»» filename|string|Avatar filename including extension.
 »»» original|string|URL to the full-sized avatar.
-»»» thumb_50x50|string|URL to the small thumbnail image.
-»»» thumb_100x100|string|URL to the medium thumbnail image.
+»»» thumb_50x50|string|URL to the small avatar thumbnail.
+»»» thumb_100x100|string|URL to the medium avatar thumbnail.
 »» timezone|string|Timezone of the user, format is country/city.
 »» language|string|Users language preference. See [localization](#localization) for the supported languages.
 »» profile_url|string|URL to the user's mod.io profile.
@@ -9316,6 +9316,42 @@ result_offset|integer|Number of results skipped over.
 
 
 
+## Get All Mod Tags 
+
+<a name="schemaget_all_mod_tags"></a>
+
+```json
+{
+  "data": [
+    {
+      "name": "Unity",
+      "date_added": 1499841487
+    },
+    {
+        ...
+    }
+  ],
+  "result_count": 100,
+  "result_limit": 100,
+  "result_offset": 0
+} 
+```
+
+
+### Properties
+
+Name|Type|Description
+---|---|---|---|
+data|[Mod Tag Object  ](#schemamod_tag_object)[]|Array containing mod tag objects.
+» name|string|Tag name.
+» date_added|integer|Unix timestamp of date tag was applied.
+result_count|integer|Number of results returned in the data array.
+result_limit|integer|Maximum number of results returned.
+result_offset|integer|Number of results skipped over.
+
+
+
+
 ## Get All Game Tag Options
 
 <a name="schemaget_all_game_tag_options"></a>
@@ -9358,42 +9394,6 @@ result_offset|integer|Number of results skipped over.
 
 
 
-## Get All Mod Tags 
-
-<a name="schemaget_all_mod_tags"></a>
-
-```json
-{
-  "data": [
-    {
-      "name": "Unity",
-      "date_added": 1499841487
-    },
-    {
-        ...
-    }
-  ],
-  "result_count": 100,
-  "result_limit": 100,
-  "result_offset": 0
-} 
-```
-
-
-### Properties
-
-Name|Type|Description
----|---|---|---|
-data|[Mod Tag Object  ](#schemamod_tag_object)[]|Array containing mod tag objects.
-» name|string|Tag name.
-» date_added|integer|Unix timestamp of date tag was applied.
-result_count|integer|Number of results returned in the data array.
-result_limit|integer|Maximum number of results returned.
-result_offset|integer|Number of results skipped over.
-
-
-
-
 ## Get All Team Members 
 
 <a name="schemaget_all_team_members"></a>
@@ -9410,9 +9410,9 @@ result_offset|integer|Number of results skipped over.
         "date_online": 1509922961,
         "avatar": {
           "filename": "modio-dark.png",
-          "original": "https://static.mod.io/v1/images/global/ao_modio-dark.png",
-          "thumb_50x50": "https://static.mod.io/v1/images/global/modio-dark.png",
-          "thumb_100x100": "https://static.mod.io/v1/images/global/am_modio-dark.png"
+          "original": "https://static.mod.io/v1/images/branding/modio-dark.png",
+          "thumb_50x50": "https://static.mod.io/v1/images/branding/modio-dark.png",
+          "thumb_100x100": "https://static.mod.io/v1/images/branding/modio-dark.png"
         },
         "timezone": "America/Los_Angeles",
         "language": "en",
@@ -9447,8 +9447,8 @@ data|[Team Member Object  ](#schemateam_member_object)[]|Array containing team m
 »» avatar|[Avatar Object   ](#schemaavatar_object)|Contains avatar data.
 »»» filename|string|Avatar filename including extension.
 »»» original|string|URL to the full-sized avatar.
-»»» thumb_50x50|string|URL to the small thumbnail image.
-»»» thumb_100x100|string|URL to the medium thumbnail image.
+»»» thumb_50x50|string|URL to the small avatar thumbnail.
+»»» thumb_100x100|string|URL to the medium avatar thumbnail.
 »» timezone|string|Timezone of the user, format is country/city.
 »» language|string|Users language preference. See [localization](#localization) for the supported languages.
 »» profile_url|string|URL to the user's mod.io profile.
@@ -9476,9 +9476,9 @@ result_offset|integer|Number of results skipped over.
       "date_online": 1509922961,
       "avatar": {
         "filename": "modio-dark.png",
-        "original": "https://static.mod.io/v1/images/global/ao_modio-dark.png",
-        "thumb_50x50": "https://static.mod.io/v1/images/global/modio-dark.png",
-        "thumb_100x100": "https://static.mod.io/v1/images/global/am_modio-dark.png"
+        "original": "https://static.mod.io/v1/images/branding/modio-dark.png",
+        "thumb_50x50": "https://static.mod.io/v1/images/branding/modio-dark.png",
+        "thumb_100x100": "https://static.mod.io/v1/images/branding/modio-dark.png"
       },
       "timezone": "America/Los_Angeles",
       "language": "en",
@@ -9507,8 +9507,8 @@ data|[User Object   ](#schemauser_object)[]|Array containing user objects.
 » avatar|[Avatar Object   ](#schemaavatar_object)|Contains avatar data.
 »» filename|string|Avatar filename including extension.
 »» original|string|URL to the full-sized avatar.
-»» thumb_50x50|string|URL to the small thumbnail image.
-»» thumb_100x100|string|URL to the medium thumbnail image.
+»» thumb_50x50|string|URL to the small avatar thumbnail.
+»» thumb_100x100|string|URL to the medium avatar thumbnail.
 » timezone|string|Timezone of the user, format is country/city.
 » language|string|Users language preference. See [localization](#localization) for the supported languages.
 » profile_url|string|URL to the user's mod.io profile.
