@@ -398,7 +398,7 @@ Parameter | Value
 ---------- | ----------  
 `result_count` | Number of results returned in the current request.
 `result_limit` | Maximum number of results returned. Defaults to _100_ unless overridden by `_limit`.
-`result_offset` | Number of results skipped over. Defaults to _1_ unless overridden by `_offset`.
+`result_offset` | Number of results skipped over. Defaults to _0_ unless overridden by `_offset`.
 
 ### _limit (Limit)
 
@@ -3944,7 +3944,7 @@ apiKey, oauth2 ( Scopes: read )
 </aside>
 
 
-## Add Mod Tags
+## Add Mod Tag
 
 > Example request
 
@@ -4057,11 +4057,11 @@ Add tags to a mod's profile. You can only add tags allowed by the parent game, w
   "message": "You have successfully added tags to the specified mod."
 }
 ```
-<h3 id="Add-Mod-Tags-responses">Responses</h3>
+<h3 id="Add-Mod-Tag-responses">Responses</h3>
 
 Status|Meaning|Description|Response Schema
 ---|---|---|---|
-201|[Created](https://tools.ietf.org/html/rfc7231#section-6.3.2)|Created|[addModTag](#schemaaddmodtag)
+201|[Created](https://tools.ietf.org/html/rfc7231#section-6.3.2)|Created|[Message Object](#message-object)
 
 <aside class="warning">
 To perform this operation, you must be authenticated by means of one of the following methods:
@@ -5159,7 +5159,7 @@ System.out.println(response.toString());
 ```
 `GET /games/{game-id}/mods/{mod-id}/dependencies`
 
-Get all dependencies the chosen mod has selected. This is useful if a mod requires other mods be installed for it to run. Successful request will return an array of [Mod Dependencies Objects](#get-all-mod-dependencies-2).
+Get all dependencies the chosen mod has selected. This is useful if a mod requires other mods be installed for it to run. Successful request will return an array of [Mod Dependencies Objects](#mod-dependencies-object).
 
      __NOTE:__ Some developers might select _soft_ dependencies to promote or credit other mods. We advise against this but it is possible to do.
 
@@ -6748,7 +6748,7 @@ Submit a report for any resource on mod.io. Successful request will return [Mess
      id|integer|true|Unique id of the resource you are reporting.
      type|integer|true|The type of report you are submitting. Must be one of the following values:<br><br>__0__ = Generic Report<br>__1__ = DMCA Report
      name|string|true|Informative title for your report.
-     summary|string|true|Detailed description of your report. Make sure you include all relevant information and links to help moderators investigate and respond appropriately.
+     summary|string|true|Detailed description of your report. Make sure you include all relevant information and links to help moderators investigate and respond appropiately.
 
 
 > Example response

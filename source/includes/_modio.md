@@ -381,7 +381,7 @@ Parameter | Value
 ---------- | ----------  
 `result_count` | Number of results returned in the current request.
 `result_limit` | Maximum number of results returned. Defaults to _100_ unless overridden by `_limit`.
-`result_offset` | Number of results skipped over. Defaults to _1_ unless overridden by `_offset`.
+`result_offset` | Number of results skipped over. Defaults to _0_ unless overridden by `_offset`.
 
 ### _limit (Limit)
 
