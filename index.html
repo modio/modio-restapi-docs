@@ -406,7 +406,7 @@
                     <a href="#get-all-mod-tags" class="toc-h2 toc-link" data-title="Tags">Get All Mod Tags</a>
                   </li>
                   <li>
-                    <a href="#add-mod-tags" class="toc-h2 toc-link" data-title="Tags">Add Mod Tags</a>
+                    <a href="#add-mod-tag" class="toc-h2 toc-link" data-title="Tags">Add Mod Tag</a>
                   </li>
                   <li>
                     <a href="#delete-mod-tag" class="toc-h2 toc-link" data-title="Tags">Delete Mod Tag</a>
@@ -1186,7 +1186,7 @@ curl -X post https://api.mod.io/v1/games/1/team <span class="se">\</span>
 </tr>
 <tr>
 <td><code>result_offset</code></td>
-<td>Number of results skipped over. Defaults to <em>1</em> unless overridden by <code>_offset</code>.</td>
+<td>Number of results skipped over. Defaults to <em>0</em> unless overridden by <code>_offset</code>.</td>
 </tr>
 </tbody>
 </table>
@@ -5340,7 +5340,7 @@ Accept: application/json
 To perform this operation, you must be authenticated by means of one of the following methods:
 apiKey, oauth2 ( Scopes: read )
 </aside>
-<h2 id="add-mod-tags">Add Mod Tags</h2>
+<h2 id="add-mod-tag">Add Mod Tag</h2>
 <blockquote>
 <p>Example request</p>
 </blockquote>
@@ -5451,7 +5451,7 @@ Content-Type: application/x-www-form-urlencoded
   </span><span class="s2">"message"</span><span class="p">:</span><span class="w"> </span><span class="s2">"You have successfully added tags to the specified mod."</span><span class="w">
 </span><span class="p">}</span><span class="w">
 </span></code></pre>
-<h3 id="Add-Mod-Tags-responses">Responses</h3>
+<h3 id="Add-Mod-Tag-responses">Responses</h3>
 
 <table>
 <thead>
@@ -5467,7 +5467,7 @@ Content-Type: application/x-www-form-urlencoded
 <td>201</td>
 <td><a href="https://tools.ietf.org/html/rfc7231#section-6.3.2">Created</a></td>
 <td>Created</td>
-<td><a href="#schemaaddmodtag">addModTag</a></td>
+<td><a href="#message-object">Message Object</a></td>
 </tr>
 </tbody>
 </table>
@@ -6622,7 +6622,7 @@ Accept: application/json
 </code></pre>
 <p><span class="httpmethod GET">GET</span> <span class="endpointheading">/games/{game-id}/mods/{mod-id}/dependencies</span></p>
 
-<p>Get all dependencies the chosen mod has selected. This is useful if a mod requires other mods be installed for it to run. Successful request will return an array of <a href="#get-all-mod-dependencies-2">Mod Dependencies Objects</a>.</p>
+<p>Get all dependencies the chosen mod has selected. This is useful if a mod requires other mods be installed for it to run. Successful request will return an array of <a href="#mod-dependencies-object">Mod Dependencies Objects</a>.</p>
 
 <p><strong>NOTE:</strong> Some developers might select <em>soft</em> dependencies to promote or credit other mods. We advise against this but it is possible to do.</p>
 
@@ -8398,7 +8398,7 @@ Content-Type: application/x-www-form-urlencoded
 <td>summary</td>
 <td>string</td>
 <td>true</td>
-<td>Detailed description of your report. Make sure you include all relevant information and links to help moderators investigate and respond appropriately.</td>
+<td>Detailed description of your report. Make sure you include all relevant information and links to help moderators investigate and respond appropiately.</td>
 </tr>
 </tbody>
 </table>
