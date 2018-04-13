@@ -1793,7 +1793,7 @@ System.out.println(response.toString());
 ```
 `POST /games/{game-id}/mods`
 
-Add a mod. Successful request will return the newly created [Mod Object](#mod-object).<br><br>__NOTE:__ By default new mods are 'not accepted' and 'public'. They can only be 'accepted' and made available via the API once a [Mod File](#add-modfile) has been uploaded. [Media](#add-mod-media), [Metadata Key Value Pairs](#add-mod-kvp-metadata) and [Dependencies](#add-mod-dependencies) can also be added after a mod profile is created.
+Add a mod. Successful request will return the newly created [Mod Object](#mod-object). By publishing your mod on [mod.io](https://mod.io), you are agreeing to the [mod.io distribution agreement](https://mod.io/distribution/widget).<br><br>__NOTE:__ By default new mods are 'not accepted' and 'public'. They can only be 'accepted' and made available via the API once a [Mod File](#add-modfile) has been uploaded. [Media](#add-mod-media), [Metadata Key Value Pairs](#add-mod-kvp-metadata) and [Dependencies](#add-mod-dependencies) can also be added after a mod profile is created.
 
      Parameter|Type|Required|Description
      ---|---|---|---|
