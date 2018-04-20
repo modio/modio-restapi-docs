@@ -693,7 +693,7 @@
 <p>Here is a brief list of the things to know about our API, as explained in more detail in the following sections.</p>
 
 <ul>
-<li>All requests to the API <strong>must</strong> be made over HTTPS (SSL).</li>
+<li>All requests to the API <strong>must</strong> be made over HTTPS (TLS).</li>
 <li>All API responses are in <code>application/json</code> format.</li>
 <li>API keys are restricted to read-only <code>GET</code> requests.</li>
 <li>OAuth 2 access tokens are required for <code>POST</code>, <code>PUT</code> and <code>DELETE</code> requests.</li>
@@ -1935,8 +1935,8 @@ apiKey, oauth2 ( Scopes: read )
 </blockquote>
 <pre class="highlight shell tab-shell"><code><span class="c"># You can also use wget</span>
 curl -X PUT https://api.mod.io/v1/games/<span class="o">{</span>game-id<span class="o">}</span> <span class="se">\</span>
-  -H <span class="s1">'Authorization: Bearer {access-token}'</span> <span class="se">\</span>
-  -H <span class="s1">'Content-Type: application/x-www-form-urlencoded'</span> <span class="se">\</span>
+  -H <span class="s1">'Authorization: Bearer {access-token}'</span> <span class="se">\ </span>
+  -H <span class="s1">'Content-Type: application/x-www-form-urlencoded'</span> <span class="se">\ </span>
   -H <span class="s1">'Accept: application/json'</span>
 
 </code></pre><pre class="highlight http tab-http"><code><span class="nf">PUT</span> <span class="nn">https://api.mod.io/v1/games/{game-id}</span> <span class="k">HTTP</span><span class="o">/</span><span class="m">1.1</span>
@@ -2712,16 +2712,18 @@ apiKey, oauth2 ( Scopes: read )
 </blockquote>
 <pre class="highlight shell tab-shell"><code><span class="c"># You can also use wget</span>
 curl -X POST https://api.mod.io/v1/games/<span class="o">{</span>game-id<span class="o">}</span>/mods <span class="se">\</span>
-  -H <span class="s1">'Authorization: Bearer {access-token}'</span> <span class="se">\</span>
-  -H <span class="s1">'Content-Type: multipart/form-data'</span> <span class="se">\</span>
-  -H <span class="s1">'Accept: application/json'</span>
+  -H <span class="s1">'Authorization: Bearer {access-token}'</span> <span class="se">\ </span>
+  -H <span class="s1">'Content-Type: multipart/form-data'</span> <span class="se">\ </span>
+  -H <span class="s1">'Accept: application/json'</span> <span class="se">\</span>
+  -F <span class="s1">'name=Graphics Overhaul Mod'</span> <span class="se">\</span>
+  -F <span class="s1">'summary=Short descriptive summary here'</span> <span class="se">\</span>
+  -F <span class="s1">'logo=@/path/to/image.jpg'</span>
 
 </code></pre><pre class="highlight http tab-http"><code><span class="nf">POST</span> <span class="nn">https://api.mod.io/v1/games/{game-id}/mods</span> <span class="k">HTTP</span><span class="o">/</span><span class="m">1.1</span>
 <span class="na">Host</span><span class="p">:</span> <span class="s">api.mod.io</span>
-
-Accept: application/json
-Authorization: Bearer {access-token}
-Content-Type: multipart/form-data
+<span class="na">Content-Type</span><span class="p">:</span> <span class="s">multipart/form-data</span>
+<span class="na">Accept</span><span class="p">:</span> <span class="s">application/json</span>
+<span class="na">Authorization</span><span class="p">:</span> <span class="s">Bearer {access-token}</span>
 
 
 </code></pre><pre class="highlight javascript tab-javascript"><code><span class="kd">var</span> <span class="nx">headers</span> <span class="o">=</span> <span class="p">{</span>
@@ -2741,7 +2743,11 @@ Content-Type: multipart/form-data
   <span class="p">}</span>
 <span class="p">})</span>
 </code></pre><pre class="highlight javascript tab-javascript--nodejs"><code><span class="kr">const</span> <span class="nx">request</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s1">'node-fetch'</span><span class="p">);</span>
-
+<span class="kr">const</span> <span class="nx">inputBody</span> <span class="o">=</span> <span class="s1">'{
+  "name": "Graphics Overhaul Mod",
+  "summary": "Short descriptive summary here",
+  "logo": "@/path/to/image.jpg"
+}'</span><span class="p">;</span>
 <span class="kr">const</span> <span class="nx">headers</span> <span class="o">=</span> <span class="p">{</span>
   <span class="s1">'Authorization'</span><span class="p">:</span><span class="s1">'Bearer {access-token}'</span><span class="p">,</span>
   <span class="s1">'Content-Type'</span><span class="p">:</span><span class="s1">'multipart/form-data'</span><span class="p">,</span>
@@ -2752,7 +2758,7 @@ Content-Type: multipart/form-data
 <span class="nx">fetch</span><span class="p">(</span><span class="s1">'https://api.mod.io/v1/games/{game-id}/mods'</span><span class="p">,</span>
 <span class="p">{</span>
   <span class="na">method</span><span class="p">:</span> <span class="s1">'POST'</span><span class="p">,</span>
-
+  <span class="na">body</span><span class="p">:</span> <span class="nx">inputBody</span><span class="p">,</span>
   <span class="na">headers</span><span class="p">:</span> <span class="nx">headers</span>
 <span class="p">})</span>
 <span class="p">.</span><span class="nx">then</span><span class="p">(</span><span class="kd">function</span><span class="p">(</span><span class="nx">res</span><span class="p">)</span> <span class="p">{</span>
@@ -3008,8 +3014,8 @@ oauth2 ( Scopes: write )
 </blockquote>
 <pre class="highlight shell tab-shell"><code><span class="c"># You can also use wget</span>
 curl -X PUT https://api.mod.io/v1/games/<span class="o">{</span>game-id<span class="o">}</span>/mods/<span class="o">{</span>mod-id<span class="o">}</span> <span class="se">\</span>
-  -H <span class="s1">'Authorization: Bearer {access-token}'</span> <span class="se">\</span>
-  -H <span class="s1">'Content-Type: application/x-www-form-urlencoded'</span> <span class="se">\</span>
+  -H <span class="s1">'Authorization: Bearer {access-token}'</span> <span class="se">\ </span>
+  -H <span class="s1">'Content-Type: application/x-www-form-urlencoded'</span> <span class="se">\ </span>
   -H <span class="s1">'Accept: application/json'</span>
 
 </code></pre><pre class="highlight http tab-http"><code><span class="nf">PUT</span> <span class="nn">https://api.mod.io/v1/games/{game-id}/mods/{mod-id}</span> <span class="k">HTTP</span><span class="o">/</span><span class="m">1.1</span>
@@ -3276,8 +3282,8 @@ oauth2 ( Scopes: write )
 </blockquote>
 <pre class="highlight shell tab-shell"><code><span class="c"># You can also use wget</span>
 curl -X DELETE https://api.mod.io/v1/games/<span class="o">{</span>game-id<span class="o">}</span>/mods/<span class="o">{</span>mod-id<span class="o">}</span> <span class="se">\</span>
-  -H <span class="s1">'Authorization: Bearer {access-token}'</span> <span class="se">\</span>
-  -H <span class="s1">'Content-Type: application/x-www-form-urlencoded'</span> <span class="se">\</span>
+  -H <span class="s1">'Authorization: Bearer {access-token}'</span> <span class="se">\ </span>
+  -H <span class="s1">'Content-Type: application/x-www-form-urlencoded'</span> <span class="se">\ </span>
   -H <span class="s1">'Accept: application/json'</span>
 
 </code></pre><pre class="highlight http tab-http"><code><span class="nf">DELETE</span> <span class="nn">https://api.mod.io/v1/games/{game-id}/mods/{mod-id}</span> <span class="k">HTTP</span><span class="o">/</span><span class="m">1.1</span>
@@ -3718,16 +3724,19 @@ apiKey, oauth2 ( Scopes: read )
 </blockquote>
 <pre class="highlight shell tab-shell"><code><span class="c"># You can also use wget</span>
 curl -X POST https://api.mod.io/v1/games/<span class="o">{</span>game-id<span class="o">}</span>/mods/<span class="o">{</span>mod-id<span class="o">}</span>/files <span class="se">\</span>
-  -H <span class="s1">'Authorization: Bearer {access-token}'</span> <span class="se">\</span>
-  -H <span class="s1">'Content-Type: multipart/form-data'</span> <span class="se">\</span>
-  -H <span class="s1">'Accept: application/json'</span>
+  -H <span class="s1">'Authorization: Bearer {access-token}'</span> <span class="se">\ </span>
+  -H <span class="s1">'Content-Type: multipart/form-data'</span> <span class="se">\ </span>
+  -H <span class="s1">'Accept: application/json'</span> <span class="se">\</span>
+  -F <span class="s1">'filedata=@/path/to/modfile.zip'</span> <span class="se">\</span>
+  -F <span class="s1">'version=1.2'</span> <span class="se">\</span>
+  -F <span class="s1">'changelog=&lt;p&gt;Rogue Knights v1.2.0 Changelog&lt;/p&gt;\n\n&lt;p&gt;New Featu...'</span> <span class="se">\</span>
+  -F <span class="s1">'metadata_blob=client_signature:9VbZccpR'</span>
 
 </code></pre><pre class="highlight http tab-http"><code><span class="nf">POST</span> <span class="nn">https://api.mod.io/v1/games/{game-id}/mods/{mod-id}/files</span> <span class="k">HTTP</span><span class="o">/</span><span class="m">1.1</span>
 <span class="na">Host</span><span class="p">:</span> <span class="s">api.mod.io</span>
-
-Accept: application/json
-Authorization: Bearer {access-token}
-Content-Type: multipart/form-data
+<span class="na">Content-Type</span><span class="p">:</span> <span class="s">multipart/form-data</span>
+<span class="na">Accept</span><span class="p">:</span> <span class="s">application/json</span>
+<span class="na">Authorization</span><span class="p">:</span> <span class="s">Bearer {access-token}</span>
 
 
 </code></pre><pre class="highlight javascript tab-javascript"><code><span class="kd">var</span> <span class="nx">headers</span> <span class="o">=</span> <span class="p">{</span>
@@ -3747,7 +3756,12 @@ Content-Type: multipart/form-data
   <span class="p">}</span>
 <span class="p">})</span>
 </code></pre><pre class="highlight javascript tab-javascript--nodejs"><code><span class="kr">const</span> <span class="nx">request</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s1">'node-fetch'</span><span class="p">);</span>
-
+<span class="kr">const</span> <span class="nx">inputBody</span> <span class="o">=</span> <span class="s1">'{
+  "filedata": "@/path/to/modfile.zip",
+  "version": "1.2",
+  "changelog": "&lt;p&gt;Rogue Knights v1.2.0 Changelog&lt;/p&gt;\\n\\n&lt;p&gt;New Featu...",
+  "metadata_blob": "client_signature:9VbZccpR"
+}'</span><span class="p">;</span>
 <span class="kr">const</span> <span class="nx">headers</span> <span class="o">=</span> <span class="p">{</span>
   <span class="s1">'Authorization'</span><span class="p">:</span><span class="s1">'Bearer {access-token}'</span><span class="p">,</span>
   <span class="s1">'Content-Type'</span><span class="p">:</span><span class="s1">'multipart/form-data'</span><span class="p">,</span>
@@ -3758,7 +3772,7 @@ Content-Type: multipart/form-data
 <span class="nx">fetch</span><span class="p">(</span><span class="s1">'https://api.mod.io/v1/games/{game-id}/mods/{mod-id}/files'</span><span class="p">,</span>
 <span class="p">{</span>
   <span class="na">method</span><span class="p">:</span> <span class="s1">'POST'</span><span class="p">,</span>
-
+  <span class="na">body</span><span class="p">:</span> <span class="nx">inputBody</span><span class="p">,</span>
   <span class="na">headers</span><span class="p">:</span> <span class="nx">headers</span>
 <span class="p">})</span>
 <span class="p">.</span><span class="nx">then</span><span class="p">(</span><span class="kd">function</span><span class="p">(</span><span class="nx">res</span><span class="p">)</span> <span class="p">{</span>
@@ -3923,8 +3937,8 @@ oauth2 ( Scopes: write )
 </blockquote>
 <pre class="highlight shell tab-shell"><code><span class="c"># You can also use wget</span>
 curl -X PUT https://api.mod.io/v1/games/<span class="o">{</span>game-id<span class="o">}</span>/mods/<span class="o">{</span>mod-id<span class="o">}</span>/files/<span class="o">{</span>file-id<span class="o">}</span> <span class="se">\</span>
-  -H <span class="s1">'Authorization: Bearer {access-token}'</span> <span class="se">\</span>
-  -H <span class="s1">'Content-Type: application/x-www-form-urlencoded'</span> <span class="se">\</span>
+  -H <span class="s1">'Authorization: Bearer {access-token}'</span> <span class="se">\ </span>
+  -H <span class="s1">'Content-Type: application/x-www-form-urlencoded'</span> <span class="se">\ </span>
   -H <span class="s1">'Accept: application/json'</span>
 
 </code></pre><pre class="highlight http tab-http"><code><span class="nf">PUT</span> <span class="nn">https://api.mod.io/v1/games/{game-id}/mods/{mod-id}/files/{file-id}</span> <span class="k">HTTP</span><span class="o">/</span><span class="m">1.1</span>
@@ -4095,16 +4109,18 @@ oauth2 ( Scopes: write )
 </blockquote>
 <pre class="highlight shell tab-shell"><code><span class="c"># You can also use wget</span>
 curl -X POST https://api.mod.io/v1/games/<span class="o">{</span>game-id<span class="o">}</span>/media <span class="se">\</span>
-  -H <span class="s1">'Authorization: Bearer {access-token}'</span> <span class="se">\</span>
-  -H <span class="s1">'Content-Type: multipart/form-data'</span> <span class="se">\</span>
-  -H <span class="s1">'Accept: application/json'</span>
+  -H <span class="s1">'Authorization: Bearer {access-token}'</span> <span class="se">\ </span>
+  -H <span class="s1">'Content-Type: multipart/form-data'</span> <span class="se">\ </span>
+  -H <span class="s1">'Accept: application/json'</span> <span class="se">\</span>
+  -F <span class="s1">'logo=@/path/to/logo.jpg'</span> <span class="se">\</span>
+  -F <span class="s1">'icon=@/path/to/icon.jpg'</span> <span class="se">\</span>
+  -F <span class="s1">'header=@/path/to/header.jpg'</span>
 
 </code></pre><pre class="highlight http tab-http"><code><span class="nf">POST</span> <span class="nn">https://api.mod.io/v1/games/{game-id}/media</span> <span class="k">HTTP</span><span class="o">/</span><span class="m">1.1</span>
 <span class="na">Host</span><span class="p">:</span> <span class="s">api.mod.io</span>
-
-Accept: application/json
-Authorization: Bearer {access-token}
-Content-Type: multipart/form-data
+<span class="na">Content-Type</span><span class="p">:</span> <span class="s">multipart/form-data</span>
+<span class="na">Accept</span><span class="p">:</span> <span class="s">application/json</span>
+<span class="na">Authorization</span><span class="p">:</span> <span class="s">Bearer {access-token}</span>
 
 
 </code></pre><pre class="highlight javascript tab-javascript"><code><span class="kd">var</span> <span class="nx">headers</span> <span class="o">=</span> <span class="p">{</span>
@@ -4124,7 +4140,11 @@ Content-Type: multipart/form-data
   <span class="p">}</span>
 <span class="p">})</span>
 </code></pre><pre class="highlight javascript tab-javascript--nodejs"><code><span class="kr">const</span> <span class="nx">request</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s1">'node-fetch'</span><span class="p">);</span>
-
+<span class="kr">const</span> <span class="nx">inputBody</span> <span class="o">=</span> <span class="s1">'{
+  "logo": "@/path/to/logo.jpg",
+  "icon": "@/path/to/icon.jpg",
+  "header": "@/path/to/header.jpg"
+}'</span><span class="p">;</span>
 <span class="kr">const</span> <span class="nx">headers</span> <span class="o">=</span> <span class="p">{</span>
   <span class="s1">'Authorization'</span><span class="p">:</span><span class="s1">'Bearer {access-token}'</span><span class="p">,</span>
   <span class="s1">'Content-Type'</span><span class="p">:</span><span class="s1">'multipart/form-data'</span><span class="p">,</span>
@@ -4135,7 +4155,7 @@ Content-Type: multipart/form-data
 <span class="nx">fetch</span><span class="p">(</span><span class="s1">'https://api.mod.io/v1/games/{game-id}/media'</span><span class="p">,</span>
 <span class="p">{</span>
   <span class="na">method</span><span class="p">:</span> <span class="s1">'POST'</span><span class="p">,</span>
-
+  <span class="na">body</span><span class="p">:</span> <span class="nx">inputBody</span><span class="p">,</span>
   <span class="na">headers</span><span class="p">:</span> <span class="nx">headers</span>
 <span class="p">})</span>
 <span class="p">.</span><span class="nx">then</span><span class="p">(</span><span class="kd">function</span><span class="p">(</span><span class="nx">res</span><span class="p">)</span> <span class="p">{</span>
@@ -4245,16 +4265,21 @@ oauth2 ( Scopes: write )
 </blockquote>
 <pre class="highlight shell tab-shell"><code><span class="c"># You can also use wget</span>
 curl -X POST https://api.mod.io/v1/games/<span class="o">{</span>game-id<span class="o">}</span>/mods/<span class="o">{</span>mod-id<span class="o">}</span>/media <span class="se">\</span>
-  -H <span class="s1">'Authorization: Bearer {access-token}'</span> <span class="se">\</span>
-  -H <span class="s1">'Content-Type: multipart/form-data'</span> <span class="se">\</span>
-  -H <span class="s1">'Accept: application/json'</span>
+  -H <span class="s1">'Authorization: Bearer {access-token}'</span> <span class="se">\ </span>
+  -H <span class="s1">'Content-Type: multipart/form-data'</span> <span class="se">\ </span>
+  -H <span class="s1">'Accept: application/json'</span> <span class="se">\</span>
+  -F <span class="s1">'logo=@/path/to/logo.jpg'</span> <span class="se">\</span>
+  -F <span class="s1">'images=@/path/to/image-collection.zip'</span> <span class="se">\</span>
+  -F <span class="s1">'image1=@/path/to/image1.jpg'</span> <span class="se">\</span>
+  -F <span class="s1">'image2=@/path/to/image2.jpg'</span> <span class="se">\</span>
+  -F <span class="s1">'youtube[]=https://www.youtube.com/watch?v=dQw4w9WgXcQ'</span> <span class="se">\</span>
+  -F <span class="s1">'sketchfab[]=https://sketchfab.com/models/7793b895f27841f4930e6b71f75a8d74'</span>
 
 </code></pre><pre class="highlight http tab-http"><code><span class="nf">POST</span> <span class="nn">https://api.mod.io/v1/games/{game-id}/mods/{mod-id}/media</span> <span class="k">HTTP</span><span class="o">/</span><span class="m">1.1</span>
 <span class="na">Host</span><span class="p">:</span> <span class="s">api.mod.io</span>
-
-Accept: application/json
-Authorization: Bearer {access-token}
-Content-Type: multipart/form-data
+<span class="na">Content-Type</span><span class="p">:</span> <span class="s">multipart/form-data</span>
+<span class="na">Accept</span><span class="p">:</span> <span class="s">application/json</span>
+<span class="na">Authorization</span><span class="p">:</span> <span class="s">Bearer {access-token}</span>
 
 
 </code></pre><pre class="highlight javascript tab-javascript"><code><span class="kd">var</span> <span class="nx">headers</span> <span class="o">=</span> <span class="p">{</span>
@@ -4274,7 +4299,14 @@ Content-Type: multipart/form-data
   <span class="p">}</span>
 <span class="p">})</span>
 </code></pre><pre class="highlight javascript tab-javascript--nodejs"><code><span class="kr">const</span> <span class="nx">request</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s1">'node-fetch'</span><span class="p">);</span>
-
+<span class="kr">const</span> <span class="nx">inputBody</span> <span class="o">=</span> <span class="s1">'{
+  "logo": "@/path/to/logo.jpg",
+  "images": "@/path/to/image-collection.zip",
+  "image1": "@/path/to/image1.jpg",
+  "image2": "@/path/to/image2.jpg",
+  "youtube": "https://www.youtube.com/watch?v=dQw4w9WgXcQ",
+  "sketchfab": "https://sketchfab.com/models/7793b895f27841f4930e6b71f75a8d74"
+}'</span><span class="p">;</span>
 <span class="kr">const</span> <span class="nx">headers</span> <span class="o">=</span> <span class="p">{</span>
   <span class="s1">'Authorization'</span><span class="p">:</span><span class="s1">'Bearer {access-token}'</span><span class="p">,</span>
   <span class="s1">'Content-Type'</span><span class="p">:</span><span class="s1">'multipart/form-data'</span><span class="p">,</span>
@@ -4285,7 +4317,7 @@ Content-Type: multipart/form-data
 <span class="nx">fetch</span><span class="p">(</span><span class="s1">'https://api.mod.io/v1/games/{game-id}/mods/{mod-id}/media'</span><span class="p">,</span>
 <span class="p">{</span>
   <span class="na">method</span><span class="p">:</span> <span class="s1">'POST'</span><span class="p">,</span>
-
+  <span class="na">body</span><span class="p">:</span> <span class="nx">inputBody</span><span class="p">,</span>
   <span class="na">headers</span><span class="p">:</span> <span class="nx">headers</span>
 <span class="p">})</span>
 <span class="p">.</span><span class="nx">then</span><span class="p">(</span><span class="kd">function</span><span class="p">(</span><span class="nx">res</span><span class="p">)</span> <span class="p">{</span>
@@ -4422,16 +4454,18 @@ oauth2 ( Scopes: write )
 </blockquote>
 <pre class="highlight shell tab-shell"><code><span class="c"># You can also use wget</span>
 curl -X DELETE https://api.mod.io/v1/games/<span class="o">{</span>game-id<span class="o">}</span>/mods/<span class="o">{</span>mod-id<span class="o">}</span>/media <span class="se">\</span>
-  -H <span class="s1">'Authorization: Bearer {access-token}'</span> <span class="se">\</span>
-  -H <span class="s1">'Content-Type: application/x-www-form-urlencoded'</span> <span class="se">\</span>
-  -H <span class="s1">'Accept: application/json'</span>
+  -H <span class="s1">'Authorization: Bearer {access-token}'</span> <span class="se">\ </span>
+  -H <span class="s1">'Content-Type: application/x-www-form-urlencoded'</span> <span class="se">\ </span>
+  -H <span class="s1">'Accept: application/json'</span> <span class="se">\</span>
+  -d <span class="s1">'images[]=filename.jpg'</span> <span class="se">\</span>
+  -d <span class="s1">'youtube[]=https://www.youtube.com/watch?v=dQw4w9WgXcQ'</span> <span class="se">\</span>
+  -d <span class="s1">'sketchfab[]=https://sketchfab.com/models/7793b895f27841f4930e6b71f75a8d74'</span>
 
 </code></pre><pre class="highlight http tab-http"><code><span class="nf">DELETE</span> <span class="nn">https://api.mod.io/v1/games/{game-id}/mods/{mod-id}/media</span> <span class="k">HTTP</span><span class="o">/</span><span class="m">1.1</span>
 <span class="na">Host</span><span class="p">:</span> <span class="s">api.mod.io</span>
-
-Accept: application/json
-Authorization: Bearer {access-token}
-Content-Type: application/x-www-form-urlencoded
+<span class="na">Content-Type</span><span class="p">:</span> <span class="s">application/x-www-form-urlencoded</span>
+<span class="na">Accept</span><span class="p">:</span> <span class="s">application/json</span>
+<span class="na">Authorization</span><span class="p">:</span> <span class="s">Bearer {access-token}</span>
 
 
 </code></pre><pre class="highlight javascript tab-javascript"><code><span class="kd">var</span> <span class="nx">headers</span> <span class="o">=</span> <span class="p">{</span>
@@ -4451,7 +4485,11 @@ Content-Type: application/x-www-form-urlencoded
   <span class="p">}</span>
 <span class="p">})</span>
 </code></pre><pre class="highlight javascript tab-javascript--nodejs"><code><span class="kr">const</span> <span class="nx">request</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s1">'node-fetch'</span><span class="p">);</span>
-
+<span class="kr">const</span> <span class="nx">inputBody</span> <span class="o">=</span> <span class="s1">'{
+  "images": "filename.jpg",
+  "youtube": "https://www.youtube.com/watch?v=dQw4w9WgXcQ",
+  "sketchfab": "https://sketchfab.com/models/7793b895f27841f4930e6b71f75a8d74"
+}'</span><span class="p">;</span>
 <span class="kr">const</span> <span class="nx">headers</span> <span class="o">=</span> <span class="p">{</span>
   <span class="s1">'Authorization'</span><span class="p">:</span><span class="s1">'Bearer {access-token}'</span><span class="p">,</span>
   <span class="s1">'Content-Type'</span><span class="p">:</span><span class="s1">'application/x-www-form-urlencoded'</span><span class="p">,</span>
@@ -4462,7 +4500,7 @@ Content-Type: application/x-www-form-urlencoded
 <span class="nx">fetch</span><span class="p">(</span><span class="s1">'https://api.mod.io/v1/games/{game-id}/mods/{mod-id}/media'</span><span class="p">,</span>
 <span class="p">{</span>
   <span class="na">method</span><span class="p">:</span> <span class="s1">'DELETE'</span><span class="p">,</span>
-
+  <span class="na">body</span><span class="p">:</span> <span class="nx">inputBody</span><span class="p">,</span>
   <span class="na">headers</span><span class="p">:</span> <span class="nx">headers</span>
 <span class="p">})</span>
 <span class="p">.</span><span class="nx">then</span><span class="p">(</span><span class="kd">function</span><span class="p">(</span><span class="nx">res</span><span class="p">)</span> <span class="p">{</span>
@@ -4569,8 +4607,8 @@ oauth2 ( Scopes: write )
 </blockquote>
 <pre class="highlight shell tab-shell"><code><span class="c"># You can also use wget</span>
 curl -X POST https://api.mod.io/v1/games/<span class="o">{</span>game-id<span class="o">}</span>/mods/<span class="o">{</span>mod-id<span class="o">}</span>/subscribe <span class="se">\</span>
-  -H <span class="s1">'Authorization: Bearer {access-token}'</span> <span class="se">\</span>
-  -H <span class="s1">'Content-Type: application/x-www-form-urlencoded'</span> <span class="se">\</span>
+  -H <span class="s1">'Authorization: Bearer {access-token}'</span> <span class="se">\ </span>
+  -H <span class="s1">'Content-Type: application/x-www-form-urlencoded'</span> <span class="se">\ </span>
   -H <span class="s1">'Accept: application/json'</span>
 
 </code></pre><pre class="highlight http tab-http"><code><span class="nf">POST</span> <span class="nn">https://api.mod.io/v1/games/{game-id}/mods/{mod-id}/subscribe</span> <span class="k">HTTP</span><span class="o">/</span><span class="m">1.1</span>
@@ -4770,8 +4808,8 @@ oauth2 ( Scopes: write )
 </blockquote>
 <pre class="highlight shell tab-shell"><code><span class="c"># You can also use wget</span>
 curl -X DELETE https://api.mod.io/v1/games/<span class="o">{</span>game-id<span class="o">}</span>/mods/<span class="o">{</span>mod-id<span class="o">}</span>/subscribe <span class="se">\</span>
-  -H <span class="s1">'Authorization: Bearer {access-token}'</span> <span class="se">\</span>
-  -H <span class="s1">'Content-Type: application/x-www-form-urlencoded'</span> <span class="se">\</span>
+  -H <span class="s1">'Authorization: Bearer {access-token}'</span> <span class="se">\ </span>
+  -H <span class="s1">'Content-Type: application/x-www-form-urlencoded'</span> <span class="se">\ </span>
   -H <span class="s1">'Accept: application/json'</span>
 
 </code></pre><pre class="highlight http tab-http"><code><span class="nf">DELETE</span> <span class="nn">https://api.mod.io/v1/games/{game-id}/mods/{mod-id}/subscribe</span> <span class="k">HTTP</span><span class="o">/</span><span class="m">1.1</span>
@@ -5346,16 +5384,16 @@ apiKey, oauth2 ( Scopes: read )
 </blockquote>
 <pre class="highlight shell tab-shell"><code><span class="c"># You can also use wget</span>
 curl -X POST https://api.mod.io/v1/games/<span class="o">{</span>game-id<span class="o">}</span>/mods/<span class="o">{</span>mod-id<span class="o">}</span>/tags <span class="se">\</span>
-  -H <span class="s1">'Authorization: Bearer {access-token}'</span> <span class="se">\</span>
-  -H <span class="s1">'Content-Type: application/x-www-form-urlencoded'</span> <span class="se">\</span>
-  -H <span class="s1">'Accept: application/json'</span>
+  -H <span class="s1">'Authorization: Bearer {access-token}'</span> <span class="se">\ </span>
+  -H <span class="s1">'Content-Type: application/x-www-form-urlencoded'</span> <span class="se">\ </span>
+  -H <span class="s1">'Accept: application/json'</span> <span class="se">\</span>
+  -d <span class="s1">'tags[]=easy'</span>
 
 </code></pre><pre class="highlight http tab-http"><code><span class="nf">POST</span> <span class="nn">https://api.mod.io/v1/games/{game-id}/mods/{mod-id}/tags</span> <span class="k">HTTP</span><span class="o">/</span><span class="m">1.1</span>
 <span class="na">Host</span><span class="p">:</span> <span class="s">api.mod.io</span>
-
-Accept: application/json
-Authorization: Bearer {access-token}
-Content-Type: application/x-www-form-urlencoded
+<span class="na">Content-Type</span><span class="p">:</span> <span class="s">application/x-www-form-urlencoded</span>
+<span class="na">Accept</span><span class="p">:</span> <span class="s">application/json</span>
+<span class="na">Authorization</span><span class="p">:</span> <span class="s">Bearer {access-token}</span>
 
 
 </code></pre><pre class="highlight javascript tab-javascript"><code><span class="kd">var</span> <span class="nx">headers</span> <span class="o">=</span> <span class="p">{</span>
@@ -5375,7 +5413,9 @@ Content-Type: application/x-www-form-urlencoded
   <span class="p">}</span>
 <span class="p">})</span>
 </code></pre><pre class="highlight javascript tab-javascript--nodejs"><code><span class="kr">const</span> <span class="nx">request</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s1">'node-fetch'</span><span class="p">);</span>
-
+<span class="kr">const</span> <span class="nx">inputBody</span> <span class="o">=</span> <span class="s1">'{
+  "tags": "easy"
+}'</span><span class="p">;</span>
 <span class="kr">const</span> <span class="nx">headers</span> <span class="o">=</span> <span class="p">{</span>
   <span class="s1">'Authorization'</span><span class="p">:</span><span class="s1">'Bearer {access-token}'</span><span class="p">,</span>
   <span class="s1">'Content-Type'</span><span class="p">:</span><span class="s1">'application/x-www-form-urlencoded'</span><span class="p">,</span>
@@ -5386,7 +5426,7 @@ Content-Type: application/x-www-form-urlencoded
 <span class="nx">fetch</span><span class="p">(</span><span class="s1">'https://api.mod.io/v1/games/{game-id}/mods/{mod-id}/tags'</span><span class="p">,</span>
 <span class="p">{</span>
   <span class="na">method</span><span class="p">:</span> <span class="s1">'POST'</span><span class="p">,</span>
-
+  <span class="na">body</span><span class="p">:</span> <span class="nx">inputBody</span><span class="p">,</span>
   <span class="na">headers</span><span class="p">:</span> <span class="nx">headers</span>
 <span class="p">})</span>
 <span class="p">.</span><span class="nx">then</span><span class="p">(</span><span class="kd">function</span><span class="p">(</span><span class="nx">res</span><span class="p">)</span> <span class="p">{</span>
@@ -5482,16 +5522,16 @@ oauth2 ( Scopes: write )
 </blockquote>
 <pre class="highlight shell tab-shell"><code><span class="c"># You can also use wget</span>
 curl -X DELETE https://api.mod.io/v1/games/<span class="o">{</span>game-id<span class="o">}</span>/mods/<span class="o">{</span>mod-id<span class="o">}</span>/tags <span class="se">\</span>
-  -H <span class="s1">'Authorization: Bearer {access-token}'</span> <span class="se">\</span>
-  -H <span class="s1">'Content-Type: application/x-www-form-urlencoded'</span> <span class="se">\</span>
-  -H <span class="s1">'Accept: application/json'</span>
+  -H <span class="s1">'Authorization: Bearer {access-token}'</span> <span class="se">\ </span>
+  -H <span class="s1">'Content-Type: application/x-www-form-urlencoded'</span> <span class="se">\ </span>
+  -H <span class="s1">'Accept: application/json'</span> <span class="se">\</span>
+  -d <span class="s1">'tags[]=easy'</span>
 
 </code></pre><pre class="highlight http tab-http"><code><span class="nf">DELETE</span> <span class="nn">https://api.mod.io/v1/games/{game-id}/mods/{mod-id}/tags</span> <span class="k">HTTP</span><span class="o">/</span><span class="m">1.1</span>
 <span class="na">Host</span><span class="p">:</span> <span class="s">api.mod.io</span>
-
-Accept: application/json
-Authorization: Bearer {access-token}
-Content-Type: application/x-www-form-urlencoded
+<span class="na">Content-Type</span><span class="p">:</span> <span class="s">application/x-www-form-urlencoded</span>
+<span class="na">Accept</span><span class="p">:</span> <span class="s">application/json</span>
+<span class="na">Authorization</span><span class="p">:</span> <span class="s">Bearer {access-token}</span>
 
 
 </code></pre><pre class="highlight javascript tab-javascript"><code><span class="kd">var</span> <span class="nx">headers</span> <span class="o">=</span> <span class="p">{</span>
@@ -5511,7 +5551,9 @@ Content-Type: application/x-www-form-urlencoded
   <span class="p">}</span>
 <span class="p">})</span>
 </code></pre><pre class="highlight javascript tab-javascript--nodejs"><code><span class="kr">const</span> <span class="nx">request</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s1">'node-fetch'</span><span class="p">);</span>
-
+<span class="kr">const</span> <span class="nx">inputBody</span> <span class="o">=</span> <span class="s1">'{
+  "tags": "easy"
+}'</span><span class="p">;</span>
 <span class="kr">const</span> <span class="nx">headers</span> <span class="o">=</span> <span class="p">{</span>
   <span class="s1">'Authorization'</span><span class="p">:</span><span class="s1">'Bearer {access-token}'</span><span class="p">,</span>
   <span class="s1">'Content-Type'</span><span class="p">:</span><span class="s1">'application/x-www-form-urlencoded'</span><span class="p">,</span>
@@ -5522,7 +5564,7 @@ Content-Type: application/x-www-form-urlencoded
 <span class="nx">fetch</span><span class="p">(</span><span class="s1">'https://api.mod.io/v1/games/{game-id}/mods/{mod-id}/tags'</span><span class="p">,</span>
 <span class="p">{</span>
   <span class="na">method</span><span class="p">:</span> <span class="s1">'DELETE'</span><span class="p">,</span>
-
+  <span class="na">body</span><span class="p">:</span> <span class="nx">inputBody</span><span class="p">,</span>
   <span class="na">headers</span><span class="p">:</span> <span class="nx">headers</span>
 <span class="p">})</span>
 <span class="p">.</span><span class="nx">then</span><span class="p">(</span><span class="kd">function</span><span class="p">(</span><span class="nx">res</span><span class="p">)</span> <span class="p">{</span>
@@ -5735,16 +5777,19 @@ apiKey, oauth2 ( Scopes: read )
 </blockquote>
 <pre class="highlight shell tab-shell"><code><span class="c"># You can also use wget</span>
 curl -X POST https://api.mod.io/v1/games/<span class="o">{</span>game-id<span class="o">}</span>/tags <span class="se">\</span>
-  -H <span class="s1">'Authorization: Bearer {access-token}'</span> <span class="se">\</span>
-  -H <span class="s1">'Content-Type: application/x-www-form-urlencoded'</span> <span class="se">\</span>
-  -H <span class="s1">'Accept: application/json'</span>
+  -H <span class="s1">'Authorization: Bearer {access-token}'</span> <span class="se">\ </span>
+  -H <span class="s1">'Content-Type: application/x-www-form-urlencoded'</span> <span class="se">\ </span>
+  -H <span class="s1">'Accept: application/json'</span> <span class="se">\</span>
+  -d <span class="s1">'name=Difficulty'</span> <span class="se">\</span>
+  -d <span class="s1">'type=dropdown'</span> <span class="se">\</span>
+  -d <span class="s1">'hidden=false'</span> <span class="se">\</span>
+  -d <span class="s1">'tags[]=easy&amp;tags[]=medium&amp;tags=hard'</span>
 
 </code></pre><pre class="highlight http tab-http"><code><span class="nf">POST</span> <span class="nn">https://api.mod.io/v1/games/{game-id}/tags</span> <span class="k">HTTP</span><span class="o">/</span><span class="m">1.1</span>
 <span class="na">Host</span><span class="p">:</span> <span class="s">api.mod.io</span>
-
-Accept: application/json
-Authorization: Bearer {access-token}
-Content-Type: application/x-www-form-urlencoded
+<span class="na">Content-Type</span><span class="p">:</span> <span class="s">application/x-www-form-urlencoded</span>
+<span class="na">Accept</span><span class="p">:</span> <span class="s">application/json</span>
+<span class="na">Authorization</span><span class="p">:</span> <span class="s">Bearer {access-token}</span>
 
 
 </code></pre><pre class="highlight javascript tab-javascript"><code><span class="kd">var</span> <span class="nx">headers</span> <span class="o">=</span> <span class="p">{</span>
@@ -5764,7 +5809,12 @@ Content-Type: application/x-www-form-urlencoded
   <span class="p">}</span>
 <span class="p">})</span>
 </code></pre><pre class="highlight javascript tab-javascript--nodejs"><code><span class="kr">const</span> <span class="nx">request</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s1">'node-fetch'</span><span class="p">);</span>
-
+<span class="kr">const</span> <span class="nx">inputBody</span> <span class="o">=</span> <span class="s1">'{
+  "name": "Difficulty",
+  "type": "dropdown",
+  "hidden": "false",
+  "tags": "easy&amp;tags[]=medium&amp;tags=hard"
+}'</span><span class="p">;</span>
 <span class="kr">const</span> <span class="nx">headers</span> <span class="o">=</span> <span class="p">{</span>
   <span class="s1">'Authorization'</span><span class="p">:</span><span class="s1">'Bearer {access-token}'</span><span class="p">,</span>
   <span class="s1">'Content-Type'</span><span class="p">:</span><span class="s1">'application/x-www-form-urlencoded'</span><span class="p">,</span>
@@ -5775,7 +5825,7 @@ Content-Type: application/x-www-form-urlencoded
 <span class="nx">fetch</span><span class="p">(</span><span class="s1">'https://api.mod.io/v1/games/{game-id}/tags'</span><span class="p">,</span>
 <span class="p">{</span>
   <span class="na">method</span><span class="p">:</span> <span class="s1">'POST'</span><span class="p">,</span>
-
+  <span class="na">body</span><span class="p">:</span> <span class="nx">inputBody</span><span class="p">,</span>
   <span class="na">headers</span><span class="p">:</span> <span class="nx">headers</span>
 <span class="p">})</span>
 <span class="p">.</span><span class="nx">then</span><span class="p">(</span><span class="kd">function</span><span class="p">(</span><span class="nx">res</span><span class="p">)</span> <span class="p">{</span>
@@ -5893,16 +5943,17 @@ oauth2 ( Scopes: write )
 </blockquote>
 <pre class="highlight shell tab-shell"><code><span class="c"># You can also use wget</span>
 curl -X DELETE https://api.mod.io/v1/games/<span class="o">{</span>game-id<span class="o">}</span>/tags <span class="se">\</span>
-  -H <span class="s1">'Authorization: Bearer {access-token}'</span> <span class="se">\</span>
-  -H <span class="s1">'Content-Type: application/x-www-form-urlencoded'</span> <span class="se">\</span>
-  -H <span class="s1">'Accept: application/json'</span>
+  -H <span class="s1">'Authorization: Bearer {access-token}'</span> <span class="se">\ </span>
+  -H <span class="s1">'Content-Type: application/x-www-form-urlencoded'</span> <span class="se">\ </span>
+  -H <span class="s1">'Accept: application/json'</span> <span class="se">\</span>
+  -d <span class="s1">'name=Difficulty'</span> <span class="se">\</span>
+  -d <span class="s1">'tags[]=easy'</span>
 
 </code></pre><pre class="highlight http tab-http"><code><span class="nf">DELETE</span> <span class="nn">https://api.mod.io/v1/games/{game-id}/tags</span> <span class="k">HTTP</span><span class="o">/</span><span class="m">1.1</span>
 <span class="na">Host</span><span class="p">:</span> <span class="s">api.mod.io</span>
-
-Accept: application/json
-Authorization: Bearer {access-token}
-Content-Type: application/x-www-form-urlencoded
+<span class="na">Content-Type</span><span class="p">:</span> <span class="s">application/x-www-form-urlencoded</span>
+<span class="na">Accept</span><span class="p">:</span> <span class="s">application/json</span>
+<span class="na">Authorization</span><span class="p">:</span> <span class="s">Bearer {access-token}</span>
 
 
 </code></pre><pre class="highlight javascript tab-javascript"><code><span class="kd">var</span> <span class="nx">headers</span> <span class="o">=</span> <span class="p">{</span>
@@ -5922,7 +5973,10 @@ Content-Type: application/x-www-form-urlencoded
   <span class="p">}</span>
 <span class="p">})</span>
 </code></pre><pre class="highlight javascript tab-javascript--nodejs"><code><span class="kr">const</span> <span class="nx">request</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s1">'node-fetch'</span><span class="p">);</span>
-
+<span class="kr">const</span> <span class="nx">inputBody</span> <span class="o">=</span> <span class="s1">'{
+  "name": "Difficulty",
+  "tags": "easy"
+}'</span><span class="p">;</span>
 <span class="kr">const</span> <span class="nx">headers</span> <span class="o">=</span> <span class="p">{</span>
   <span class="s1">'Authorization'</span><span class="p">:</span><span class="s1">'Bearer {access-token}'</span><span class="p">,</span>
   <span class="s1">'Content-Type'</span><span class="p">:</span><span class="s1">'application/x-www-form-urlencoded'</span><span class="p">,</span>
@@ -5933,7 +5987,7 @@ Content-Type: application/x-www-form-urlencoded
 <span class="nx">fetch</span><span class="p">(</span><span class="s1">'https://api.mod.io/v1/games/{game-id}/tags'</span><span class="p">,</span>
 <span class="p">{</span>
   <span class="na">method</span><span class="p">:</span> <span class="s1">'DELETE'</span><span class="p">,</span>
-
+  <span class="na">body</span><span class="p">:</span> <span class="nx">inputBody</span><span class="p">,</span>
   <span class="na">headers</span><span class="p">:</span> <span class="nx">headers</span>
 <span class="p">})</span>
 <span class="p">.</span><span class="nx">then</span><span class="p">(</span><span class="kd">function</span><span class="p">(</span><span class="nx">res</span><span class="p">)</span> <span class="p">{</span>
@@ -6034,16 +6088,16 @@ oauth2 ( Scopes: write )
 </blockquote>
 <pre class="highlight shell tab-shell"><code><span class="c"># You can also use wget</span>
 curl -X POST https://api.mod.io/v1/games/<span class="o">{</span>game-id<span class="o">}</span>/mods/<span class="o">{</span>mod-id<span class="o">}</span>/ratings <span class="se">\</span>
-  -H <span class="s1">'Authorization: Bearer {access-token}'</span> <span class="se">\</span>
-  -H <span class="s1">'Content-Type: application/x-www-form-urlencoded'</span> <span class="se">\</span>
-  -H <span class="s1">'Accept: application/json'</span>
+  -H <span class="s1">'Authorization: Bearer {access-token}'</span> <span class="se">\ </span>
+  -H <span class="s1">'Content-Type: application/x-www-form-urlencoded'</span> <span class="se">\ </span>
+  -H <span class="s1">'Accept: application/json'</span> <span class="se">\</span>
+  -d <span class="s1">'rating=1'</span>
 
 </code></pre><pre class="highlight http tab-http"><code><span class="nf">POST</span> <span class="nn">https://api.mod.io/v1/games/{game-id}/mods/{mod-id}/ratings</span> <span class="k">HTTP</span><span class="o">/</span><span class="m">1.1</span>
 <span class="na">Host</span><span class="p">:</span> <span class="s">api.mod.io</span>
-
-Accept: application/json
-Authorization: Bearer {access-token}
-Content-Type: application/x-www-form-urlencoded
+<span class="na">Content-Type</span><span class="p">:</span> <span class="s">application/x-www-form-urlencoded</span>
+<span class="na">Accept</span><span class="p">:</span> <span class="s">application/json</span>
+<span class="na">Authorization</span><span class="p">:</span> <span class="s">Bearer {access-token}</span>
 
 
 </code></pre><pre class="highlight javascript tab-javascript"><code><span class="kd">var</span> <span class="nx">headers</span> <span class="o">=</span> <span class="p">{</span>
@@ -6063,7 +6117,9 @@ Content-Type: application/x-www-form-urlencoded
   <span class="p">}</span>
 <span class="p">})</span>
 </code></pre><pre class="highlight javascript tab-javascript--nodejs"><code><span class="kr">const</span> <span class="nx">request</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s1">'node-fetch'</span><span class="p">);</span>
-
+<span class="kr">const</span> <span class="nx">inputBody</span> <span class="o">=</span> <span class="s1">'{
+  "rating": "1"
+}'</span><span class="p">;</span>
 <span class="kr">const</span> <span class="nx">headers</span> <span class="o">=</span> <span class="p">{</span>
   <span class="s1">'Authorization'</span><span class="p">:</span><span class="s1">'Bearer {access-token}'</span><span class="p">,</span>
   <span class="s1">'Content-Type'</span><span class="p">:</span><span class="s1">'application/x-www-form-urlencoded'</span><span class="p">,</span>
@@ -6074,7 +6130,7 @@ Content-Type: application/x-www-form-urlencoded
 <span class="nx">fetch</span><span class="p">(</span><span class="s1">'https://api.mod.io/v1/games/{game-id}/mods/{mod-id}/ratings'</span><span class="p">,</span>
 <span class="p">{</span>
   <span class="na">method</span><span class="p">:</span> <span class="s1">'POST'</span><span class="p">,</span>
-
+  <span class="na">body</span><span class="p">:</span> <span class="nx">inputBody</span><span class="p">,</span>
   <span class="na">headers</span><span class="p">:</span> <span class="nx">headers</span>
 <span class="p">})</span>
 <span class="p">.</span><span class="nx">then</span><span class="p">(</span><span class="kd">function</span><span class="p">(</span><span class="nx">res</span><span class="p">)</span> <span class="p">{</span>
@@ -6288,16 +6344,16 @@ apiKey, oauth2 ( Scopes: read )
 </blockquote>
 <pre class="highlight shell tab-shell"><code><span class="c"># You can also use wget</span>
 curl -X POST https://api.mod.io/v1/games/<span class="o">{</span>game-id<span class="o">}</span>/mods/<span class="o">{</span>mod-id<span class="o">}</span>/metadatakvp <span class="se">\</span>
-  -H <span class="s1">'Authorization: Bearer {access-token}'</span> <span class="se">\</span>
-  -H <span class="s1">'Content-Type: application/x-www-form-urlencoded'</span> <span class="se">\</span>
-  -H <span class="s1">'Accept: application/json'</span>
+  -H <span class="s1">'Authorization: Bearer {access-token}'</span> <span class="se">\ </span>
+  -H <span class="s1">'Content-Type: application/x-www-form-urlencoded'</span> <span class="se">\ </span>
+  -H <span class="s1">'Accept: application/json'</span> <span class="se">\</span>
+  -d <span class="s1">'metadata[]=pistol-dmg:88:400'</span>
 
 </code></pre><pre class="highlight http tab-http"><code><span class="nf">POST</span> <span class="nn">https://api.mod.io/v1/games/{game-id}/mods/{mod-id}/metadatakvp</span> <span class="k">HTTP</span><span class="o">/</span><span class="m">1.1</span>
 <span class="na">Host</span><span class="p">:</span> <span class="s">api.mod.io</span>
-
-Accept: application/json
-Authorization: Bearer {access-token}
-Content-Type: application/x-www-form-urlencoded
+<span class="na">Content-Type</span><span class="p">:</span> <span class="s">application/x-www-form-urlencoded</span>
+<span class="na">Accept</span><span class="p">:</span> <span class="s">application/json</span>
+<span class="na">Authorization</span><span class="p">:</span> <span class="s">Bearer {access-token}</span>
 
 
 </code></pre><pre class="highlight javascript tab-javascript"><code><span class="kd">var</span> <span class="nx">headers</span> <span class="o">=</span> <span class="p">{</span>
@@ -6317,7 +6373,9 @@ Content-Type: application/x-www-form-urlencoded
   <span class="p">}</span>
 <span class="p">})</span>
 </code></pre><pre class="highlight javascript tab-javascript--nodejs"><code><span class="kr">const</span> <span class="nx">request</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s1">'node-fetch'</span><span class="p">);</span>
-
+<span class="kr">const</span> <span class="nx">inputBody</span> <span class="o">=</span> <span class="s1">'{
+  "metadata": "pistol-dmg:88:400"
+}'</span><span class="p">;</span>
 <span class="kr">const</span> <span class="nx">headers</span> <span class="o">=</span> <span class="p">{</span>
   <span class="s1">'Authorization'</span><span class="p">:</span><span class="s1">'Bearer {access-token}'</span><span class="p">,</span>
   <span class="s1">'Content-Type'</span><span class="p">:</span><span class="s1">'application/x-www-form-urlencoded'</span><span class="p">,</span>
@@ -6328,7 +6386,7 @@ Content-Type: application/x-www-form-urlencoded
 <span class="nx">fetch</span><span class="p">(</span><span class="s1">'https://api.mod.io/v1/games/{game-id}/mods/{mod-id}/metadatakvp'</span><span class="p">,</span>
 <span class="p">{</span>
   <span class="na">method</span><span class="p">:</span> <span class="s1">'POST'</span><span class="p">,</span>
-
+  <span class="na">body</span><span class="p">:</span> <span class="nx">inputBody</span><span class="p">,</span>
   <span class="na">headers</span><span class="p">:</span> <span class="nx">headers</span>
 <span class="p">})</span>
 <span class="p">.</span><span class="nx">then</span><span class="p">(</span><span class="kd">function</span><span class="p">(</span><span class="nx">res</span><span class="p">)</span> <span class="p">{</span>
@@ -6424,16 +6482,16 @@ oauth2 ( Scopes: write )
 </blockquote>
 <pre class="highlight shell tab-shell"><code><span class="c"># You can also use wget</span>
 curl -X DELETE https://api.mod.io/v1/games/<span class="o">{</span>game-id<span class="o">}</span>/mods/<span class="o">{</span>mod-id<span class="o">}</span>/metadatakvp <span class="se">\</span>
-  -H <span class="s1">'Authorization: Bearer {access-token}'</span> <span class="se">\</span>
-  -H <span class="s1">'Content-Type: application/x-www-form-urlencoded'</span> <span class="se">\</span>
-  -H <span class="s1">'Accept: application/json'</span>
+  -H <span class="s1">'Authorization: Bearer {access-token}'</span> <span class="se">\ </span>
+  -H <span class="s1">'Content-Type: application/x-www-form-urlencoded'</span> <span class="se">\ </span>
+  -H <span class="s1">'Accept: application/json'</span> <span class="se">\</span>
+  -d <span class="s1">'metadata[]=pistol-dmg:88:400'</span>
 
 </code></pre><pre class="highlight http tab-http"><code><span class="nf">DELETE</span> <span class="nn">https://api.mod.io/v1/games/{game-id}/mods/{mod-id}/metadatakvp</span> <span class="k">HTTP</span><span class="o">/</span><span class="m">1.1</span>
 <span class="na">Host</span><span class="p">:</span> <span class="s">api.mod.io</span>
-
-Accept: application/json
-Authorization: Bearer {access-token}
-Content-Type: application/x-www-form-urlencoded
+<span class="na">Content-Type</span><span class="p">:</span> <span class="s">application/x-www-form-urlencoded</span>
+<span class="na">Accept</span><span class="p">:</span> <span class="s">application/json</span>
+<span class="na">Authorization</span><span class="p">:</span> <span class="s">Bearer {access-token}</span>
 
 
 </code></pre><pre class="highlight javascript tab-javascript"><code><span class="kd">var</span> <span class="nx">headers</span> <span class="o">=</span> <span class="p">{</span>
@@ -6453,7 +6511,9 @@ Content-Type: application/x-www-form-urlencoded
   <span class="p">}</span>
 <span class="p">})</span>
 </code></pre><pre class="highlight javascript tab-javascript--nodejs"><code><span class="kr">const</span> <span class="nx">request</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s1">'node-fetch'</span><span class="p">);</span>
-
+<span class="kr">const</span> <span class="nx">inputBody</span> <span class="o">=</span> <span class="s1">'{
+  "metadata": "pistol-dmg:88:400"
+}'</span><span class="p">;</span>
 <span class="kr">const</span> <span class="nx">headers</span> <span class="o">=</span> <span class="p">{</span>
   <span class="s1">'Authorization'</span><span class="p">:</span><span class="s1">'Bearer {access-token}'</span><span class="p">,</span>
   <span class="s1">'Content-Type'</span><span class="p">:</span><span class="s1">'application/x-www-form-urlencoded'</span><span class="p">,</span>
@@ -6464,7 +6524,7 @@ Content-Type: application/x-www-form-urlencoded
 <span class="nx">fetch</span><span class="p">(</span><span class="s1">'https://api.mod.io/v1/games/{game-id}/mods/{mod-id}/metadatakvp'</span><span class="p">,</span>
 <span class="p">{</span>
   <span class="na">method</span><span class="p">:</span> <span class="s1">'DELETE'</span><span class="p">,</span>
-
+  <span class="na">body</span><span class="p">:</span> <span class="nx">inputBody</span><span class="p">,</span>
   <span class="na">headers</span><span class="p">:</span> <span class="nx">headers</span>
 <span class="p">})</span>
 <span class="p">.</span><span class="nx">then</span><span class="p">(</span><span class="kd">function</span><span class="p">(</span><span class="nx">res</span><span class="p">)</span> <span class="p">{</span>
@@ -6675,16 +6735,16 @@ apiKey, oauth2 ( Scopes: read )
 </blockquote>
 <pre class="highlight shell tab-shell"><code><span class="c"># You can also use wget</span>
 curl -X POST https://api.mod.io/v1/games/<span class="o">{</span>game-id<span class="o">}</span>/mods/<span class="o">{</span>mod-id<span class="o">}</span>/dependencies <span class="se">\</span>
-  -H <span class="s1">'Authorization: Bearer {access-token}'</span> <span class="se">\</span>
-  -H <span class="s1">'Content-Type: application/x-www-form-urlencoded'</span> <span class="se">\</span>
-  -H <span class="s1">'Accept: application/json'</span>
+  -H <span class="s1">'Authorization: Bearer {access-token}'</span> <span class="se">\ </span>
+  -H <span class="s1">'Content-Type: application/x-www-form-urlencoded'</span> <span class="se">\ </span>
+  -H <span class="s1">'Accept: application/json'</span> <span class="se">\</span>
+  -d <span class="s1">'dependencies[]=284'</span>
 
 </code></pre><pre class="highlight http tab-http"><code><span class="nf">POST</span> <span class="nn">https://api.mod.io/v1/games/{game-id}/mods/{mod-id}/dependencies</span> <span class="k">HTTP</span><span class="o">/</span><span class="m">1.1</span>
 <span class="na">Host</span><span class="p">:</span> <span class="s">api.mod.io</span>
-
-Accept: application/json
-Authorization: Bearer {access-token}
-Content-Type: application/x-www-form-urlencoded
+<span class="na">Content-Type</span><span class="p">:</span> <span class="s">application/x-www-form-urlencoded</span>
+<span class="na">Accept</span><span class="p">:</span> <span class="s">application/json</span>
+<span class="na">Authorization</span><span class="p">:</span> <span class="s">Bearer {access-token}</span>
 
 
 </code></pre><pre class="highlight javascript tab-javascript"><code><span class="kd">var</span> <span class="nx">headers</span> <span class="o">=</span> <span class="p">{</span>
@@ -6704,7 +6764,9 @@ Content-Type: application/x-www-form-urlencoded
   <span class="p">}</span>
 <span class="p">})</span>
 </code></pre><pre class="highlight javascript tab-javascript--nodejs"><code><span class="kr">const</span> <span class="nx">request</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s1">'node-fetch'</span><span class="p">);</span>
-
+<span class="kr">const</span> <span class="nx">inputBody</span> <span class="o">=</span> <span class="s1">'{
+  "dependencies": "284"
+}'</span><span class="p">;</span>
 <span class="kr">const</span> <span class="nx">headers</span> <span class="o">=</span> <span class="p">{</span>
   <span class="s1">'Authorization'</span><span class="p">:</span><span class="s1">'Bearer {access-token}'</span><span class="p">,</span>
   <span class="s1">'Content-Type'</span><span class="p">:</span><span class="s1">'application/x-www-form-urlencoded'</span><span class="p">,</span>
@@ -6715,7 +6777,7 @@ Content-Type: application/x-www-form-urlencoded
 <span class="nx">fetch</span><span class="p">(</span><span class="s1">'https://api.mod.io/v1/games/{game-id}/mods/{mod-id}/dependencies'</span><span class="p">,</span>
 <span class="p">{</span>
   <span class="na">method</span><span class="p">:</span> <span class="s1">'POST'</span><span class="p">,</span>
-
+  <span class="na">body</span><span class="p">:</span> <span class="nx">inputBody</span><span class="p">,</span>
   <span class="na">headers</span><span class="p">:</span> <span class="nx">headers</span>
 <span class="p">})</span>
 <span class="p">.</span><span class="nx">then</span><span class="p">(</span><span class="kd">function</span><span class="p">(</span><span class="nx">res</span><span class="p">)</span> <span class="p">{</span>
@@ -6813,16 +6875,16 @@ oauth2 ( Scopes: write )
 </blockquote>
 <pre class="highlight shell tab-shell"><code><span class="c"># You can also use wget</span>
 curl -X DELETE https://api.mod.io/v1/games/<span class="o">{</span>game-id<span class="o">}</span>/mods/<span class="o">{</span>mod-id<span class="o">}</span>/dependencies <span class="se">\</span>
-  -H <span class="s1">'Authorization: Bearer {access-token}'</span> <span class="se">\</span>
-  -H <span class="s1">'Content-Type: application/x-www-form-urlencoded'</span> <span class="se">\</span>
-  -H <span class="s1">'Accept: application/json'</span>
+  -H <span class="s1">'Authorization: Bearer {access-token}'</span> <span class="se">\ </span>
+  -H <span class="s1">'Content-Type: application/x-www-form-urlencoded'</span> <span class="se">\ </span>
+  -H <span class="s1">'Accept: application/json'</span> <span class="se">\</span>
+  -d <span class="s1">'dependencies[]=284'</span>
 
 </code></pre><pre class="highlight http tab-http"><code><span class="nf">DELETE</span> <span class="nn">https://api.mod.io/v1/games/{game-id}/mods/{mod-id}/dependencies</span> <span class="k">HTTP</span><span class="o">/</span><span class="m">1.1</span>
 <span class="na">Host</span><span class="p">:</span> <span class="s">api.mod.io</span>
-
-Accept: application/json
-Authorization: Bearer {access-token}
-Content-Type: application/x-www-form-urlencoded
+<span class="na">Content-Type</span><span class="p">:</span> <span class="s">application/x-www-form-urlencoded</span>
+<span class="na">Accept</span><span class="p">:</span> <span class="s">application/json</span>
+<span class="na">Authorization</span><span class="p">:</span> <span class="s">Bearer {access-token}</span>
 
 
 </code></pre><pre class="highlight javascript tab-javascript"><code><span class="kd">var</span> <span class="nx">headers</span> <span class="o">=</span> <span class="p">{</span>
@@ -6842,7 +6904,9 @@ Content-Type: application/x-www-form-urlencoded
   <span class="p">}</span>
 <span class="p">})</span>
 </code></pre><pre class="highlight javascript tab-javascript--nodejs"><code><span class="kr">const</span> <span class="nx">request</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s1">'node-fetch'</span><span class="p">);</span>
-
+<span class="kr">const</span> <span class="nx">inputBody</span> <span class="o">=</span> <span class="s1">'{
+  "dependencies": "284"
+}'</span><span class="p">;</span>
 <span class="kr">const</span> <span class="nx">headers</span> <span class="o">=</span> <span class="p">{</span>
   <span class="s1">'Authorization'</span><span class="p">:</span><span class="s1">'Bearer {access-token}'</span><span class="p">,</span>
   <span class="s1">'Content-Type'</span><span class="p">:</span><span class="s1">'application/x-www-form-urlencoded'</span><span class="p">,</span>
@@ -6853,7 +6917,7 @@ Content-Type: application/x-www-form-urlencoded
 <span class="nx">fetch</span><span class="p">(</span><span class="s1">'https://api.mod.io/v1/games/{game-id}/mods/{mod-id}/dependencies'</span><span class="p">,</span>
 <span class="p">{</span>
   <span class="na">method</span><span class="p">:</span> <span class="s1">'DELETE'</span><span class="p">,</span>
-
+  <span class="na">body</span><span class="p">:</span> <span class="nx">inputBody</span><span class="p">,</span>
   <span class="na">headers</span><span class="p">:</span> <span class="nx">headers</span>
 <span class="p">})</span>
 <span class="p">.</span><span class="nx">then</span><span class="p">(</span><span class="kd">function</span><span class="p">(</span><span class="nx">res</span><span class="p">)</span> <span class="p">{</span>
@@ -7128,16 +7192,18 @@ apiKey, oauth2 ( Scopes: read )
 </blockquote>
 <pre class="highlight shell tab-shell"><code><span class="c"># You can also use wget</span>
 curl -X POST https://api.mod.io/v1/games/<span class="o">{</span>game-id<span class="o">}</span>/mods/<span class="o">{</span>mod-id<span class="o">}</span>/team <span class="se">\</span>
-  -H <span class="s1">'Authorization: Bearer {access-token}'</span> <span class="se">\</span>
-  -H <span class="s1">'Content-Type: application/x-www-form-urlencoded'</span> <span class="se">\</span>
-  -H <span class="s1">'Accept: application/json'</span>
+  -H <span class="s1">'Authorization: Bearer {access-token}'</span> <span class="se">\ </span>
+  -H <span class="s1">'Content-Type: application/x-www-form-urlencoded'</span> <span class="se">\ </span>
+  -H <span class="s1">'Accept: application/json'</span> <span class="se">\</span>
+  -d <span class="s1">'email=walrus@example.com'</span> <span class="se">\</span>
+  -d <span class="s1">'level=8'</span> <span class="se">\</span>
+  -d <span class="s1">'position=Co-Founder'</span>
 
 </code></pre><pre class="highlight http tab-http"><code><span class="nf">POST</span> <span class="nn">https://api.mod.io/v1/games/{game-id}/mods/{mod-id}/team</span> <span class="k">HTTP</span><span class="o">/</span><span class="m">1.1</span>
 <span class="na">Host</span><span class="p">:</span> <span class="s">api.mod.io</span>
-
-Accept: application/json
-Authorization: Bearer {access-token}
-Content-Type: application/x-www-form-urlencoded
+<span class="na">Content-Type</span><span class="p">:</span> <span class="s">application/x-www-form-urlencoded</span>
+<span class="na">Accept</span><span class="p">:</span> <span class="s">application/json</span>
+<span class="na">Authorization</span><span class="p">:</span> <span class="s">Bearer {access-token}</span>
 
 
 </code></pre><pre class="highlight javascript tab-javascript"><code><span class="kd">var</span> <span class="nx">headers</span> <span class="o">=</span> <span class="p">{</span>
@@ -7157,7 +7223,11 @@ Content-Type: application/x-www-form-urlencoded
   <span class="p">}</span>
 <span class="p">})</span>
 </code></pre><pre class="highlight javascript tab-javascript--nodejs"><code><span class="kr">const</span> <span class="nx">request</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s1">'node-fetch'</span><span class="p">);</span>
-
+<span class="kr">const</span> <span class="nx">inputBody</span> <span class="o">=</span> <span class="s1">'{
+  "email": "walrus@example.com",
+  "level": "8",
+  "position": "Co-Founder"
+}'</span><span class="p">;</span>
 <span class="kr">const</span> <span class="nx">headers</span> <span class="o">=</span> <span class="p">{</span>
   <span class="s1">'Authorization'</span><span class="p">:</span><span class="s1">'Bearer {access-token}'</span><span class="p">,</span>
   <span class="s1">'Content-Type'</span><span class="p">:</span><span class="s1">'application/x-www-form-urlencoded'</span><span class="p">,</span>
@@ -7168,7 +7238,7 @@ Content-Type: application/x-www-form-urlencoded
 <span class="nx">fetch</span><span class="p">(</span><span class="s1">'https://api.mod.io/v1/games/{game-id}/mods/{mod-id}/team'</span><span class="p">,</span>
 <span class="p">{</span>
   <span class="na">method</span><span class="p">:</span> <span class="s1">'POST'</span><span class="p">,</span>
-
+  <span class="na">body</span><span class="p">:</span> <span class="nx">inputBody</span><span class="p">,</span>
   <span class="na">headers</span><span class="p">:</span> <span class="nx">headers</span>
 <span class="p">})</span>
 <span class="p">.</span><span class="nx">then</span><span class="p">(</span><span class="kd">function</span><span class="p">(</span><span class="nx">res</span><span class="p">)</span> <span class="p">{</span>
@@ -7278,8 +7348,8 @@ oauth2 ( Scopes: write )
 </blockquote>
 <pre class="highlight shell tab-shell"><code><span class="c"># You can also use wget</span>
 curl -X PUT https://api.mod.io/v1/games/<span class="o">{</span>game-id<span class="o">}</span>/mods/<span class="o">{</span>mod-id<span class="o">}</span>/team/<span class="o">{</span>team-member-id<span class="o">}</span> <span class="se">\</span>
-  -H <span class="s1">'Authorization: Bearer {access-token}'</span> <span class="se">\</span>
-  -H <span class="s1">'Content-Type: application/x-www-form-urlencoded'</span> <span class="se">\</span>
+  -H <span class="s1">'Authorization: Bearer {access-token}'</span> <span class="se">\ </span>
+  -H <span class="s1">'Content-Type: application/x-www-form-urlencoded'</span> <span class="se">\ </span>
   -H <span class="s1">'Accept: application/json'</span>
 
 </code></pre><pre class="highlight http tab-http"><code><span class="nf">PUT</span> <span class="nn">https://api.mod.io/v1/games/{game-id}/mods/{mod-id}/team/{team-member-id}</span> <span class="k">HTTP</span><span class="o">/</span><span class="m">1.1</span>
@@ -7422,8 +7492,8 @@ oauth2 ( Scopes: write )
 </blockquote>
 <pre class="highlight shell tab-shell"><code><span class="c"># You can also use wget</span>
 curl -X DELETE https://api.mod.io/v1/games/<span class="o">{</span>game-id<span class="o">}</span>/mods/<span class="o">{</span>mod-id<span class="o">}</span>/team/<span class="o">{</span>team-member-id<span class="o">}</span> <span class="se">\</span>
-  -H <span class="s1">'Authorization: Bearer {access-token}'</span> <span class="se">\</span>
-  -H <span class="s1">'Content-Type: application/x-www-form-urlencoded'</span> <span class="se">\</span>
+  -H <span class="s1">'Authorization: Bearer {access-token}'</span> <span class="se">\ </span>
+  -H <span class="s1">'Content-Type: application/x-www-form-urlencoded'</span> <span class="se">\ </span>
   -H <span class="s1">'Accept: application/json'</span>
 
 </code></pre><pre class="highlight http tab-http"><code><span class="nf">DELETE</span> <span class="nn">https://api.mod.io/v1/games/{game-id}/mods/{mod-id}/team/{team-member-id}</span> <span class="k">HTTP</span><span class="o">/</span><span class="m">1.1</span>
@@ -7725,8 +7795,8 @@ apiKey, oauth2 ( Scopes: read )
 </blockquote>
 <pre class="highlight shell tab-shell"><code><span class="c"># You can also use wget</span>
 curl -X DELETE https://api.mod.io/v1/games/<span class="o">{</span>game-id<span class="o">}</span>/mods/<span class="o">{</span>mod-id<span class="o">}</span>/comments/<span class="o">{</span>comment-id<span class="o">}</span> <span class="se">\</span>
-  -H <span class="s1">'Authorization: Bearer {access-token}'</span> <span class="se">\</span>
-  -H <span class="s1">'Content-Type: application/x-www-form-urlencoded'</span> <span class="se">\</span>
+  -H <span class="s1">'Authorization: Bearer {access-token}'</span> <span class="se">\ </span>
+  -H <span class="s1">'Content-Type: application/x-www-form-urlencoded'</span> <span class="se">\ </span>
   -H <span class="s1">'Accept: application/json'</span>
 
 </code></pre><pre class="highlight http tab-http"><code><span class="nf">DELETE</span> <span class="nn">https://api.mod.io/v1/games/{game-id}/mods/{mod-id}/comments/{comment-id}</span> <span class="k">HTTP</span><span class="o">/</span><span class="m">1.1</span>
@@ -7839,8 +7909,8 @@ oauth2 ( Scopes: write )
 </blockquote>
 <pre class="highlight shell tab-shell"><code><span class="c"># You can also use wget</span>
 curl -X POST https://api.mod.io/v1/general/ownership <span class="se">\</span>
-  -H <span class="s1">'Authorization: Bearer {access-token}'</span> <span class="se">\</span>
-  -H <span class="s1">'Content-Type: application/x-www-form-urlencoded'</span> <span class="se">\</span>
+  -H <span class="s1">'Authorization: Bearer {access-token}'</span> <span class="se">\ </span>
+  -H <span class="s1">'Content-Type: application/x-www-form-urlencoded'</span> <span class="se">\ </span>
   -H <span class="s1">'Accept: application/json'</span>
 
 </code></pre><pre class="highlight http tab-http"><code><span class="nf">POST</span> <span class="nn">https://api.mod.io/v1/general/ownership</span> <span class="k">HTTP</span><span class="o">/</span><span class="m">1.1</span>
@@ -8281,16 +8351,20 @@ apiKey, oauth2 ( Scopes: read )
 </blockquote>
 <pre class="highlight shell tab-shell"><code><span class="c"># You can also use wget</span>
 curl -X POST https://api.mod.io/v1/report <span class="se">\</span>
-  -H <span class="s1">'Authorization: Bearer {access-token}'</span> <span class="se">\</span>
-  -H <span class="s1">'Content-Type: application/x-www-form-urlencoded'</span> <span class="se">\</span>
-  -H <span class="s1">'Accept: application/json'</span>
+  -H <span class="s1">'Authorization: Bearer {access-token}'</span> <span class="se">\ </span>
+  -H <span class="s1">'Content-Type: application/x-www-form-urlencoded'</span> <span class="se">\ </span>
+  -H <span class="s1">'Accept: application/json'</span> <span class="se">\</span>
+  -d <span class="s1">'resource=mods'</span> <span class="se">\</span>
+  -d <span class="s1">'id=3853'</span> <span class="se">\</span>
+  -d <span class="s1">'type=1'</span> <span class="se">\</span>
+  -d <span class="s1">'name=Mod contains copyrighted content'</span> <span class="se">\</span>
+  -d <span class="s1">'summary=Detailed explanation for report here'</span>
 
 </code></pre><pre class="highlight http tab-http"><code><span class="nf">POST</span> <span class="nn">https://api.mod.io/v1/report</span> <span class="k">HTTP</span><span class="o">/</span><span class="m">1.1</span>
 <span class="na">Host</span><span class="p">:</span> <span class="s">api.mod.io</span>
-
-Accept: application/json
-Authorization: Bearer {access-token}
-Content-Type: application/x-www-form-urlencoded
+<span class="na">Content-Type</span><span class="p">:</span> <span class="s">application/x-www-form-urlencoded</span>
+<span class="na">Accept</span><span class="p">:</span> <span class="s">application/json</span>
+<span class="na">Authorization</span><span class="p">:</span> <span class="s">Bearer {access-token}</span>
 
 
 </code></pre><pre class="highlight javascript tab-javascript"><code><span class="kd">var</span> <span class="nx">headers</span> <span class="o">=</span> <span class="p">{</span>
@@ -8310,7 +8384,13 @@ Content-Type: application/x-www-form-urlencoded
   <span class="p">}</span>
 <span class="p">})</span>
 </code></pre><pre class="highlight javascript tab-javascript--nodejs"><code><span class="kr">const</span> <span class="nx">request</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s1">'node-fetch'</span><span class="p">);</span>
-
+<span class="kr">const</span> <span class="nx">inputBody</span> <span class="o">=</span> <span class="s1">'{
+  "resource": "mods",
+  "id": "3853",
+  "type": "1",
+  "name": "Mod contains copyrighted content",
+  "summary": "Detailed explanation for report here"
+}'</span><span class="p">;</span>
 <span class="kr">const</span> <span class="nx">headers</span> <span class="o">=</span> <span class="p">{</span>
   <span class="s1">'Authorization'</span><span class="p">:</span><span class="s1">'Bearer {access-token}'</span><span class="p">,</span>
   <span class="s1">'Content-Type'</span><span class="p">:</span><span class="s1">'application/x-www-form-urlencoded'</span><span class="p">,</span>
@@ -8321,7 +8401,7 @@ Content-Type: application/x-www-form-urlencoded
 <span class="nx">fetch</span><span class="p">(</span><span class="s1">'https://api.mod.io/v1/report'</span><span class="p">,</span>
 <span class="p">{</span>
   <span class="na">method</span><span class="p">:</span> <span class="s1">'POST'</span><span class="p">,</span>
-
+  <span class="na">body</span><span class="p">:</span> <span class="nx">inputBody</span><span class="p">,</span>
   <span class="na">headers</span><span class="p">:</span> <span class="nx">headers</span>
 <span class="p">})</span>
 <span class="p">.</span><span class="nx">then</span><span class="p">(</span><span class="kd">function</span><span class="p">(</span><span class="nx">res</span><span class="p">)</span> <span class="p">{</span>
@@ -8442,7 +8522,7 @@ oauth2 ( Scopes: write )
 </blockquote>
 <pre class="highlight shell tab-shell"><code><span class="c"># You can also use wget</span>
 curl -X GET https://api.mod.io/v1/me <span class="se">\</span>
-  -H <span class="s1">'Authorization: Bearer {access-token}'</span> <span class="se">\</span>
+  -H <span class="s1">'Authorization: Bearer {access-token}'</span> <span class="se">\ </span>
   -H <span class="s1">'Accept: application/json'</span>
 
 </code></pre><pre class="highlight http tab-http"><code><span class="nf">GET</span> <span class="nn">https://api.mod.io/v1/me</span> <span class="k">HTTP</span><span class="o">/</span><span class="m">1.1</span>
@@ -8565,7 +8645,7 @@ oauth2 ( Scopes: read )
 </blockquote>
 <pre class="highlight shell tab-shell"><code><span class="c"># You can also use wget</span>
 curl -X GET https://api.mod.io/v1/me/subscribed <span class="se">\</span>
-  -H <span class="s1">'Authorization: Bearer {access-token}'</span> <span class="se">\</span>
+  -H <span class="s1">'Authorization: Bearer {access-token}'</span> <span class="se">\ </span>
   -H <span class="s1">'Accept: application/json'</span>
 
 </code></pre><pre class="highlight http tab-http"><code><span class="nf">GET</span> <span class="nn">https://api.mod.io/v1/me/subscribed</span> <span class="k">HTTP</span><span class="o">/</span><span class="m">1.1</span>
@@ -9025,7 +9105,7 @@ apiKey, oauth2 ( Scopes: read )
 </blockquote>
 <pre class="highlight shell tab-shell"><code><span class="c"># You can also use wget</span>
 curl -X GET https://api.mod.io/v1/me/games <span class="se">\</span>
-  -H <span class="s1">'Authorization: Bearer {access-token}'</span> <span class="se">\</span>
+  -H <span class="s1">'Authorization: Bearer {access-token}'</span> <span class="se">\ </span>
   -H <span class="s1">'Accept: application/json'</span>
 
 </code></pre><pre class="highlight http tab-http"><code><span class="nf">GET</span> <span class="nn">https://api.mod.io/v1/me/games</span> <span class="k">HTTP</span><span class="o">/</span><span class="m">1.1</span>
@@ -9206,7 +9286,7 @@ oauth2 ( Scopes: read )
 </blockquote>
 <pre class="highlight shell tab-shell"><code><span class="c"># You can also use wget</span>
 curl -X GET https://api.mod.io/v1/me/mods <span class="se">\</span>
-  -H <span class="s1">'Authorization: Bearer {access-token}'</span> <span class="se">\</span>
+  -H <span class="s1">'Authorization: Bearer {access-token}'</span> <span class="se">\ </span>
   -H <span class="s1">'Accept: application/json'</span>
 
 </code></pre><pre class="highlight http tab-http"><code><span class="nf">GET</span> <span class="nn">https://api.mod.io/v1/me/mods</span> <span class="k">HTTP</span><span class="o">/</span><span class="m">1.1</span>
@@ -9412,7 +9492,7 @@ oauth2 ( Scopes: read )
 </blockquote>
 <pre class="highlight shell tab-shell"><code><span class="c"># You can also use wget</span>
 curl -X GET https://api.mod.io/v1/me/files <span class="se">\</span>
-  -H <span class="s1">'Authorization: Bearer {access-token}'</span> <span class="se">\</span>
+  -H <span class="s1">'Authorization: Bearer {access-token}'</span> <span class="se">\ </span>
   -H <span class="s1">'Accept: application/json'</span>
 
 </code></pre><pre class="highlight http tab-http"><code><span class="nf">GET</span> <span class="nn">https://api.mod.io/v1/me/files</span> <span class="k">HTTP</span><span class="o">/</span><span class="m">1.1</span>
