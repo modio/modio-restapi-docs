@@ -45,7 +45,7 @@ __Tools/Plugins__ | Use tools and plugins created by the community to make imple
 
 Here is a brief list of the things to know about our API, as explained in more detail in the following sections.
 
-- All requests to the API __must__ be made over HTTPS (SSL).
+- All requests to the API __must__ be made over HTTPS (TLS).
 - All API responses are in `application/json` format.
 - API keys are restricted to read-only `GET` requests.
 - OAuth 2 access tokens are required for `POST`, `PUT` and `DELETE` requests.
@@ -1080,8 +1080,8 @@ apiKey, oauth2 ( Scopes: read )
 ```shell
 # You can also use wget
 curl -X PUT https://api.mod.io/v1/games/{game-id} \
-  -H 'Authorization: Bearer {access-token}' \
-  -H 'Content-Type: application/x-www-form-urlencoded' \
+  -H 'Authorization: Bearer {access-token}' \ 
+  -H 'Content-Type: application/x-www-form-urlencoded' \ 
   -H 'Accept: application/json'
 
 ```
@@ -1702,19 +1702,21 @@ apiKey, oauth2 ( Scopes: read )
 ```shell
 # You can also use wget
 curl -X POST https://api.mod.io/v1/games/{game-id}/mods \
-  -H 'Authorization: Bearer {access-token}' \
-  -H 'Content-Type: multipart/form-data' \
-  -H 'Accept: application/json'
+  -H 'Authorization: Bearer {access-token}' \ 
+  -H 'Content-Type: multipart/form-data' \ 
+  -H 'Accept: application/json' \
+  -F 'name=Graphics Overhaul Mod' \
+  -F 'summary=Short descriptive summary here' \
+  -F 'logo=@/path/to/image.jpg'
 
 ```
 
 ```http
 POST https://api.mod.io/v1/games/{game-id}/mods HTTP/1.1
 Host: api.mod.io
-
+Content-Type: multipart/form-data
 Accept: application/json
 Authorization: Bearer {access-token}
-Content-Type: multipart/form-data
 
 
 ```
@@ -1740,7 +1742,11 @@ $.ajax({
 
 ```javascript--nodejs
 const request = require('node-fetch');
-
+const inputBody = '{
+  "name": "Graphics Overhaul Mod",
+  "summary": "Short descriptive summary here",
+  "logo": "@/path/to/image.jpg"
+}';
 const headers = {
   'Authorization':'Bearer {access-token}',
   'Content-Type':'multipart/form-data',
@@ -1751,7 +1757,7 @@ const headers = {
 fetch('https://api.mod.io/v1/games/{game-id}/mods',
 {
   method: 'POST',
-
+  body: inputBody,
   headers: headers
 })
 .then(function(res) {
@@ -1926,8 +1932,8 @@ oauth2 ( Scopes: write )
 ```shell
 # You can also use wget
 curl -X PUT https://api.mod.io/v1/games/{game-id}/mods/{mod-id} \
-  -H 'Authorization: Bearer {access-token}' \
-  -H 'Content-Type: application/x-www-form-urlencoded' \
+  -H 'Authorization: Bearer {access-token}' \ 
+  -H 'Content-Type: application/x-www-form-urlencoded' \ 
   -H 'Accept: application/json'
 
 ```
@@ -2143,8 +2149,8 @@ oauth2 ( Scopes: write )
 ```shell
 # You can also use wget
 curl -X DELETE https://api.mod.io/v1/games/{game-id}/mods/{mod-id} \
-  -H 'Authorization: Bearer {access-token}' \
-  -H 'Content-Type: application/x-www-form-urlencoded' \
+  -H 'Authorization: Bearer {access-token}' \ 
+  -H 'Content-Type: application/x-www-form-urlencoded' \ 
   -H 'Accept: application/json'
 
 ```
@@ -2542,19 +2548,22 @@ apiKey, oauth2 ( Scopes: read )
 ```shell
 # You can also use wget
 curl -X POST https://api.mod.io/v1/games/{game-id}/mods/{mod-id}/files \
-  -H 'Authorization: Bearer {access-token}' \
-  -H 'Content-Type: multipart/form-data' \
-  -H 'Accept: application/json'
+  -H 'Authorization: Bearer {access-token}' \ 
+  -H 'Content-Type: multipart/form-data' \ 
+  -H 'Accept: application/json' \
+  -F 'filedata=@/path/to/modfile.zip' \
+  -F 'version=1.2' \
+  -F 'changelog=<p>Rogue Knights v1.2.0 Changelog</p>\n\n<p>New Featu...' \
+  -F 'metadata_blob=client_signature:9VbZccpR'
 
 ```
 
 ```http
 POST https://api.mod.io/v1/games/{game-id}/mods/{mod-id}/files HTTP/1.1
 Host: api.mod.io
-
+Content-Type: multipart/form-data
 Accept: application/json
 Authorization: Bearer {access-token}
-Content-Type: multipart/form-data
 
 
 ```
@@ -2580,7 +2589,12 @@ $.ajax({
 
 ```javascript--nodejs
 const request = require('node-fetch');
-
+const inputBody = '{
+  "filedata": "@/path/to/modfile.zip",
+  "version": "1.2",
+  "changelog": "<p>Rogue Knights v1.2.0 Changelog</p>\\n\\n<p>New Featu...",
+  "metadata_blob": "client_signature:9VbZccpR"
+}';
 const headers = {
   'Authorization':'Bearer {access-token}',
   'Content-Type':'multipart/form-data',
@@ -2591,7 +2605,7 @@ const headers = {
 fetch('https://api.mod.io/v1/games/{game-id}/mods/{mod-id}/files',
 {
   method: 'POST',
-
+  body: inputBody,
   headers: headers
 })
 .then(function(res) {
@@ -2695,8 +2709,8 @@ oauth2 ( Scopes: write )
 ```shell
 # You can also use wget
 curl -X PUT https://api.mod.io/v1/games/{game-id}/mods/{mod-id}/files/{file-id} \
-  -H 'Authorization: Bearer {access-token}' \
-  -H 'Content-Type: application/x-www-form-urlencoded' \
+  -H 'Authorization: Bearer {access-token}' \ 
+  -H 'Content-Type: application/x-www-form-urlencoded' \ 
   -H 'Accept: application/json'
 
 ```
@@ -2842,19 +2856,21 @@ oauth2 ( Scopes: write )
 ```shell
 # You can also use wget
 curl -X POST https://api.mod.io/v1/games/{game-id}/media \
-  -H 'Authorization: Bearer {access-token}' \
-  -H 'Content-Type: multipart/form-data' \
-  -H 'Accept: application/json'
+  -H 'Authorization: Bearer {access-token}' \ 
+  -H 'Content-Type: multipart/form-data' \ 
+  -H 'Accept: application/json' \
+  -F 'logo=@/path/to/logo.jpg' \
+  -F 'icon=@/path/to/icon.jpg' \
+  -F 'header=@/path/to/header.jpg'
 
 ```
 
 ```http
 POST https://api.mod.io/v1/games/{game-id}/media HTTP/1.1
 Host: api.mod.io
-
+Content-Type: multipart/form-data
 Accept: application/json
 Authorization: Bearer {access-token}
-Content-Type: multipart/form-data
 
 
 ```
@@ -2880,7 +2896,11 @@ $.ajax({
 
 ```javascript--nodejs
 const request = require('node-fetch');
-
+const inputBody = '{
+  "logo": "@/path/to/logo.jpg",
+  "icon": "@/path/to/icon.jpg",
+  "header": "@/path/to/header.jpg"
+}';
 const headers = {
   'Authorization':'Bearer {access-token}',
   'Content-Type':'multipart/form-data',
@@ -2891,7 +2911,7 @@ const headers = {
 fetch('https://api.mod.io/v1/games/{game-id}/media',
 {
   method: 'POST',
-
+  body: inputBody,
   headers: headers
 })
 .then(function(res) {
@@ -2971,19 +2991,24 @@ oauth2 ( Scopes: write )
 ```shell
 # You can also use wget
 curl -X POST https://api.mod.io/v1/games/{game-id}/mods/{mod-id}/media \
-  -H 'Authorization: Bearer {access-token}' \
-  -H 'Content-Type: multipart/form-data' \
-  -H 'Accept: application/json'
+  -H 'Authorization: Bearer {access-token}' \ 
+  -H 'Content-Type: multipart/form-data' \ 
+  -H 'Accept: application/json' \
+  -F 'logo=@/path/to/logo.jpg' \
+  -F 'images=@/path/to/image-collection.zip' \
+  -F 'image1=@/path/to/image1.jpg' \
+  -F 'image2=@/path/to/image2.jpg' \
+  -F 'youtube[]=https://www.youtube.com/watch?v=dQw4w9WgXcQ' \
+  -F 'sketchfab[]=https://sketchfab.com/models/7793b895f27841f4930e6b71f75a8d74'
 
 ```
 
 ```http
 POST https://api.mod.io/v1/games/{game-id}/mods/{mod-id}/media HTTP/1.1
 Host: api.mod.io
-
+Content-Type: multipart/form-data
 Accept: application/json
 Authorization: Bearer {access-token}
-Content-Type: multipart/form-data
 
 
 ```
@@ -3009,7 +3034,14 @@ $.ajax({
 
 ```javascript--nodejs
 const request = require('node-fetch');
-
+const inputBody = '{
+  "logo": "@/path/to/logo.jpg",
+  "images": "@/path/to/image-collection.zip",
+  "image1": "@/path/to/image1.jpg",
+  "image2": "@/path/to/image2.jpg",
+  "youtube": "https://www.youtube.com/watch?v=dQw4w9WgXcQ",
+  "sketchfab": "https://sketchfab.com/models/7793b895f27841f4930e6b71f75a8d74"
+}';
 const headers = {
   'Authorization':'Bearer {access-token}',
   'Content-Type':'multipart/form-data',
@@ -3020,7 +3052,7 @@ const headers = {
 fetch('https://api.mod.io/v1/games/{game-id}/mods/{mod-id}/media',
 {
   method: 'POST',
-
+  body: inputBody,
   headers: headers
 })
 .then(function(res) {
@@ -3107,19 +3139,21 @@ oauth2 ( Scopes: write )
 ```shell
 # You can also use wget
 curl -X DELETE https://api.mod.io/v1/games/{game-id}/mods/{mod-id}/media \
-  -H 'Authorization: Bearer {access-token}' \
-  -H 'Content-Type: application/x-www-form-urlencoded' \
-  -H 'Accept: application/json'
+  -H 'Authorization: Bearer {access-token}' \ 
+  -H 'Content-Type: application/x-www-form-urlencoded' \ 
+  -H 'Accept: application/json' \
+  -d 'images[]=filename.jpg' \
+  -d 'youtube[]=https://www.youtube.com/watch?v=dQw4w9WgXcQ' \
+  -d 'sketchfab[]=https://sketchfab.com/models/7793b895f27841f4930e6b71f75a8d74'
 
 ```
 
 ```http
 DELETE https://api.mod.io/v1/games/{game-id}/mods/{mod-id}/media HTTP/1.1
 Host: api.mod.io
-
+Content-Type: application/x-www-form-urlencoded
 Accept: application/json
 Authorization: Bearer {access-token}
-Content-Type: application/x-www-form-urlencoded
 
 
 ```
@@ -3145,7 +3179,11 @@ $.ajax({
 
 ```javascript--nodejs
 const request = require('node-fetch');
-
+const inputBody = '{
+  "images": "filename.jpg",
+  "youtube": "https://www.youtube.com/watch?v=dQw4w9WgXcQ",
+  "sketchfab": "https://sketchfab.com/models/7793b895f27841f4930e6b71f75a8d74"
+}';
 const headers = {
   'Authorization':'Bearer {access-token}',
   'Content-Type':'application/x-www-form-urlencoded',
@@ -3156,7 +3194,7 @@ const headers = {
 fetch('https://api.mod.io/v1/games/{game-id}/mods/{mod-id}/media',
 {
   method: 'DELETE',
-
+  body: inputBody,
   headers: headers
 })
 .then(function(res) {
@@ -3235,8 +3273,8 @@ oauth2 ( Scopes: write )
 ```shell
 # You can also use wget
 curl -X POST https://api.mod.io/v1/games/{game-id}/mods/{mod-id}/subscribe \
-  -H 'Authorization: Bearer {access-token}' \
-  -H 'Content-Type: application/x-www-form-urlencoded' \
+  -H 'Authorization: Bearer {access-token}' \ 
+  -H 'Content-Type: application/x-www-form-urlencoded' \ 
   -H 'Accept: application/json'
 
 ```
@@ -3440,8 +3478,8 @@ oauth2 ( Scopes: write )
 ```shell
 # You can also use wget
 curl -X DELETE https://api.mod.io/v1/games/{game-id}/mods/{mod-id}/subscribe \
-  -H 'Authorization: Bearer {access-token}' \
-  -H 'Content-Type: application/x-www-form-urlencoded' \
+  -H 'Authorization: Bearer {access-token}' \ 
+  -H 'Content-Type: application/x-www-form-urlencoded' \ 
   -H 'Accept: application/json'
 
 ```
@@ -3951,19 +3989,19 @@ apiKey, oauth2 ( Scopes: read )
 ```shell
 # You can also use wget
 curl -X POST https://api.mod.io/v1/games/{game-id}/mods/{mod-id}/tags \
-  -H 'Authorization: Bearer {access-token}' \
-  -H 'Content-Type: application/x-www-form-urlencoded' \
-  -H 'Accept: application/json'
+  -H 'Authorization: Bearer {access-token}' \ 
+  -H 'Content-Type: application/x-www-form-urlencoded' \ 
+  -H 'Accept: application/json' \
+  -d 'tags[]=easy'
 
 ```
 
 ```http
 POST https://api.mod.io/v1/games/{game-id}/mods/{mod-id}/tags HTTP/1.1
 Host: api.mod.io
-
+Content-Type: application/x-www-form-urlencoded
 Accept: application/json
 Authorization: Bearer {access-token}
-Content-Type: application/x-www-form-urlencoded
 
 
 ```
@@ -3989,7 +4027,9 @@ $.ajax({
 
 ```javascript--nodejs
 const request = require('node-fetch');
-
+const inputBody = '{
+  "tags": "easy"
+}';
 const headers = {
   'Authorization':'Bearer {access-token}',
   'Content-Type':'application/x-www-form-urlencoded',
@@ -4000,7 +4040,7 @@ const headers = {
 fetch('https://api.mod.io/v1/games/{game-id}/mods/{mod-id}/tags',
 {
   method: 'POST',
-
+  body: inputBody,
   headers: headers
 })
 .then(function(res) {
@@ -4076,19 +4116,19 @@ oauth2 ( Scopes: write )
 ```shell
 # You can also use wget
 curl -X DELETE https://api.mod.io/v1/games/{game-id}/mods/{mod-id}/tags \
-  -H 'Authorization: Bearer {access-token}' \
-  -H 'Content-Type: application/x-www-form-urlencoded' \
-  -H 'Accept: application/json'
+  -H 'Authorization: Bearer {access-token}' \ 
+  -H 'Content-Type: application/x-www-form-urlencoded' \ 
+  -H 'Accept: application/json' \
+  -d 'tags[]=easy'
 
 ```
 
 ```http
 DELETE https://api.mod.io/v1/games/{game-id}/mods/{mod-id}/tags HTTP/1.1
 Host: api.mod.io
-
+Content-Type: application/x-www-form-urlencoded
 Accept: application/json
 Authorization: Bearer {access-token}
-Content-Type: application/x-www-form-urlencoded
 
 
 ```
@@ -4114,7 +4154,9 @@ $.ajax({
 
 ```javascript--nodejs
 const request = require('node-fetch');
-
+const inputBody = '{
+  "tags": "easy"
+}';
 const headers = {
   'Authorization':'Bearer {access-token}',
   'Content-Type':'application/x-www-form-urlencoded',
@@ -4125,7 +4167,7 @@ const headers = {
 fetch('https://api.mod.io/v1/games/{game-id}/mods/{mod-id}/tags',
 {
   method: 'DELETE',
-
+  body: inputBody,
   headers: headers
 })
 .then(function(res) {
@@ -4322,19 +4364,22 @@ apiKey, oauth2 ( Scopes: read )
 ```shell
 # You can also use wget
 curl -X POST https://api.mod.io/v1/games/{game-id}/tags \
-  -H 'Authorization: Bearer {access-token}' \
-  -H 'Content-Type: application/x-www-form-urlencoded' \
-  -H 'Accept: application/json'
+  -H 'Authorization: Bearer {access-token}' \ 
+  -H 'Content-Type: application/x-www-form-urlencoded' \ 
+  -H 'Accept: application/json' \
+  -d 'name=Difficulty' \
+  -d 'type=dropdown' \
+  -d 'hidden=false' \
+  -d 'tags[]=easy&tags[]=medium&tags=hard'
 
 ```
 
 ```http
 POST https://api.mod.io/v1/games/{game-id}/tags HTTP/1.1
 Host: api.mod.io
-
+Content-Type: application/x-www-form-urlencoded
 Accept: application/json
 Authorization: Bearer {access-token}
-Content-Type: application/x-www-form-urlencoded
 
 
 ```
@@ -4360,7 +4405,12 @@ $.ajax({
 
 ```javascript--nodejs
 const request = require('node-fetch');
-
+const inputBody = '{
+  "name": "Difficulty",
+  "type": "dropdown",
+  "hidden": "false",
+  "tags": "easy&tags[]=medium&tags=hard"
+}';
 const headers = {
   'Authorization':'Bearer {access-token}',
   'Content-Type':'application/x-www-form-urlencoded',
@@ -4371,7 +4421,7 @@ const headers = {
 fetch('https://api.mod.io/v1/games/{game-id}/tags',
 {
   method: 'POST',
-
+  body: inputBody,
   headers: headers
 })
 .then(function(res) {
@@ -4454,19 +4504,20 @@ oauth2 ( Scopes: write )
 ```shell
 # You can also use wget
 curl -X DELETE https://api.mod.io/v1/games/{game-id}/tags \
-  -H 'Authorization: Bearer {access-token}' \
-  -H 'Content-Type: application/x-www-form-urlencoded' \
-  -H 'Accept: application/json'
+  -H 'Authorization: Bearer {access-token}' \ 
+  -H 'Content-Type: application/x-www-form-urlencoded' \ 
+  -H 'Accept: application/json' \
+  -d 'name=Difficulty' \
+  -d 'tags[]=easy'
 
 ```
 
 ```http
 DELETE https://api.mod.io/v1/games/{game-id}/tags HTTP/1.1
 Host: api.mod.io
-
+Content-Type: application/x-www-form-urlencoded
 Accept: application/json
 Authorization: Bearer {access-token}
-Content-Type: application/x-www-form-urlencoded
 
 
 ```
@@ -4492,7 +4543,10 @@ $.ajax({
 
 ```javascript--nodejs
 const request = require('node-fetch');
-
+const inputBody = '{
+  "name": "Difficulty",
+  "tags": "easy"
+}';
 const headers = {
   'Authorization':'Bearer {access-token}',
   'Content-Type':'application/x-www-form-urlencoded',
@@ -4503,7 +4557,7 @@ const headers = {
 fetch('https://api.mod.io/v1/games/{game-id}/tags',
 {
   method: 'DELETE',
-
+  body: inputBody,
   headers: headers
 })
 .then(function(res) {
@@ -4581,19 +4635,19 @@ oauth2 ( Scopes: write )
 ```shell
 # You can also use wget
 curl -X POST https://api.mod.io/v1/games/{game-id}/mods/{mod-id}/ratings \
-  -H 'Authorization: Bearer {access-token}' \
-  -H 'Content-Type: application/x-www-form-urlencoded' \
-  -H 'Accept: application/json'
+  -H 'Authorization: Bearer {access-token}' \ 
+  -H 'Content-Type: application/x-www-form-urlencoded' \ 
+  -H 'Accept: application/json' \
+  -d 'rating=1'
 
 ```
 
 ```http
 POST https://api.mod.io/v1/games/{game-id}/mods/{mod-id}/ratings HTTP/1.1
 Host: api.mod.io
-
+Content-Type: application/x-www-form-urlencoded
 Accept: application/json
 Authorization: Bearer {access-token}
-Content-Type: application/x-www-form-urlencoded
 
 
 ```
@@ -4619,7 +4673,9 @@ $.ajax({
 
 ```javascript--nodejs
 const request = require('node-fetch');
-
+const inputBody = '{
+  "rating": "1"
+}';
 const headers = {
   'Authorization':'Bearer {access-token}',
   'Content-Type':'application/x-www-form-urlencoded',
@@ -4630,7 +4686,7 @@ const headers = {
 fetch('https://api.mod.io/v1/games/{game-id}/mods/{mod-id}/ratings',
 {
   method: 'POST',
-
+  body: inputBody,
   headers: headers
 })
 .then(function(res) {
@@ -4830,19 +4886,19 @@ apiKey, oauth2 ( Scopes: read )
 ```shell
 # You can also use wget
 curl -X POST https://api.mod.io/v1/games/{game-id}/mods/{mod-id}/metadatakvp \
-  -H 'Authorization: Bearer {access-token}' \
-  -H 'Content-Type: application/x-www-form-urlencoded' \
-  -H 'Accept: application/json'
+  -H 'Authorization: Bearer {access-token}' \ 
+  -H 'Content-Type: application/x-www-form-urlencoded' \ 
+  -H 'Accept: application/json' \
+  -d 'metadata[]=pistol-dmg:88:400'
 
 ```
 
 ```http
 POST https://api.mod.io/v1/games/{game-id}/mods/{mod-id}/metadatakvp HTTP/1.1
 Host: api.mod.io
-
+Content-Type: application/x-www-form-urlencoded
 Accept: application/json
 Authorization: Bearer {access-token}
-Content-Type: application/x-www-form-urlencoded
 
 
 ```
@@ -4868,7 +4924,9 @@ $.ajax({
 
 ```javascript--nodejs
 const request = require('node-fetch');
-
+const inputBody = '{
+  "metadata": "pistol-dmg:88:400"
+}';
 const headers = {
   'Authorization':'Bearer {access-token}',
   'Content-Type':'application/x-www-form-urlencoded',
@@ -4879,7 +4937,7 @@ const headers = {
 fetch('https://api.mod.io/v1/games/{game-id}/mods/{mod-id}/metadatakvp',
 {
   method: 'POST',
-
+  body: inputBody,
   headers: headers
 })
 .then(function(res) {
@@ -4955,19 +5013,19 @@ oauth2 ( Scopes: write )
 ```shell
 # You can also use wget
 curl -X DELETE https://api.mod.io/v1/games/{game-id}/mods/{mod-id}/metadatakvp \
-  -H 'Authorization: Bearer {access-token}' \
-  -H 'Content-Type: application/x-www-form-urlencoded' \
-  -H 'Accept: application/json'
+  -H 'Authorization: Bearer {access-token}' \ 
+  -H 'Content-Type: application/x-www-form-urlencoded' \ 
+  -H 'Accept: application/json' \
+  -d 'metadata[]=pistol-dmg:88:400'
 
 ```
 
 ```http
 DELETE https://api.mod.io/v1/games/{game-id}/mods/{mod-id}/metadatakvp HTTP/1.1
 Host: api.mod.io
-
+Content-Type: application/x-www-form-urlencoded
 Accept: application/json
 Authorization: Bearer {access-token}
-Content-Type: application/x-www-form-urlencoded
 
 
 ```
@@ -4993,7 +5051,9 @@ $.ajax({
 
 ```javascript--nodejs
 const request = require('node-fetch');
-
+const inputBody = '{
+  "metadata": "pistol-dmg:88:400"
+}';
 const headers = {
   'Authorization':'Bearer {access-token}',
   'Content-Type':'application/x-www-form-urlencoded',
@@ -5004,7 +5064,7 @@ const headers = {
 fetch('https://api.mod.io/v1/games/{game-id}/mods/{mod-id}/metadatakvp',
 {
   method: 'DELETE',
-
+  body: inputBody,
   headers: headers
 })
 .then(function(res) {
@@ -5201,19 +5261,19 @@ apiKey, oauth2 ( Scopes: read )
 ```shell
 # You can also use wget
 curl -X POST https://api.mod.io/v1/games/{game-id}/mods/{mod-id}/dependencies \
-  -H 'Authorization: Bearer {access-token}' \
-  -H 'Content-Type: application/x-www-form-urlencoded' \
-  -H 'Accept: application/json'
+  -H 'Authorization: Bearer {access-token}' \ 
+  -H 'Content-Type: application/x-www-form-urlencoded' \ 
+  -H 'Accept: application/json' \
+  -d 'dependencies[]=284'
 
 ```
 
 ```http
 POST https://api.mod.io/v1/games/{game-id}/mods/{mod-id}/dependencies HTTP/1.1
 Host: api.mod.io
-
+Content-Type: application/x-www-form-urlencoded
 Accept: application/json
 Authorization: Bearer {access-token}
-Content-Type: application/x-www-form-urlencoded
 
 
 ```
@@ -5239,7 +5299,9 @@ $.ajax({
 
 ```javascript--nodejs
 const request = require('node-fetch');
-
+const inputBody = '{
+  "dependencies": "284"
+}';
 const headers = {
   'Authorization':'Bearer {access-token}',
   'Content-Type':'application/x-www-form-urlencoded',
@@ -5250,7 +5312,7 @@ const headers = {
 fetch('https://api.mod.io/v1/games/{game-id}/mods/{mod-id}/dependencies',
 {
   method: 'POST',
-
+  body: inputBody,
   headers: headers
 })
 .then(function(res) {
@@ -5328,19 +5390,19 @@ oauth2 ( Scopes: write )
 ```shell
 # You can also use wget
 curl -X DELETE https://api.mod.io/v1/games/{game-id}/mods/{mod-id}/dependencies \
-  -H 'Authorization: Bearer {access-token}' \
-  -H 'Content-Type: application/x-www-form-urlencoded' \
-  -H 'Accept: application/json'
+  -H 'Authorization: Bearer {access-token}' \ 
+  -H 'Content-Type: application/x-www-form-urlencoded' \ 
+  -H 'Accept: application/json' \
+  -d 'dependencies[]=284'
 
 ```
 
 ```http
 DELETE https://api.mod.io/v1/games/{game-id}/mods/{mod-id}/dependencies HTTP/1.1
 Host: api.mod.io
-
+Content-Type: application/x-www-form-urlencoded
 Accept: application/json
 Authorization: Bearer {access-token}
-Content-Type: application/x-www-form-urlencoded
 
 
 ```
@@ -5366,7 +5428,9 @@ $.ajax({
 
 ```javascript--nodejs
 const request = require('node-fetch');
-
+const inputBody = '{
+  "dependencies": "284"
+}';
 const headers = {
   'Authorization':'Bearer {access-token}',
   'Content-Type':'application/x-www-form-urlencoded',
@@ -5377,7 +5441,7 @@ const headers = {
 fetch('https://api.mod.io/v1/games/{game-id}/mods/{mod-id}/dependencies',
 {
   method: 'DELETE',
-
+  body: inputBody,
   headers: headers
 })
 .then(function(res) {
@@ -5598,19 +5662,21 @@ apiKey, oauth2 ( Scopes: read )
 ```shell
 # You can also use wget
 curl -X POST https://api.mod.io/v1/games/{game-id}/mods/{mod-id}/team \
-  -H 'Authorization: Bearer {access-token}' \
-  -H 'Content-Type: application/x-www-form-urlencoded' \
-  -H 'Accept: application/json'
+  -H 'Authorization: Bearer {access-token}' \ 
+  -H 'Content-Type: application/x-www-form-urlencoded' \ 
+  -H 'Accept: application/json' \
+  -d 'email=walrus@example.com' \
+  -d 'level=8' \
+  -d 'position=Co-Founder'
 
 ```
 
 ```http
 POST https://api.mod.io/v1/games/{game-id}/mods/{mod-id}/team HTTP/1.1
 Host: api.mod.io
-
+Content-Type: application/x-www-form-urlencoded
 Accept: application/json
 Authorization: Bearer {access-token}
-Content-Type: application/x-www-form-urlencoded
 
 
 ```
@@ -5636,7 +5702,11 @@ $.ajax({
 
 ```javascript--nodejs
 const request = require('node-fetch');
-
+const inputBody = '{
+  "email": "walrus@example.com",
+  "level": "8",
+  "position": "Co-Founder"
+}';
 const headers = {
   'Authorization':'Bearer {access-token}',
   'Content-Type':'application/x-www-form-urlencoded',
@@ -5647,7 +5717,7 @@ const headers = {
 fetch('https://api.mod.io/v1/games/{game-id}/mods/{mod-id}/team',
 {
   method: 'POST',
-
+  body: inputBody,
   headers: headers
 })
 .then(function(res) {
@@ -5727,8 +5797,8 @@ oauth2 ( Scopes: write )
 ```shell
 # You can also use wget
 curl -X PUT https://api.mod.io/v1/games/{game-id}/mods/{mod-id}/team/{team-member-id} \
-  -H 'Authorization: Bearer {access-token}' \
-  -H 'Content-Type: application/x-www-form-urlencoded' \
+  -H 'Authorization: Bearer {access-token}' \ 
+  -H 'Content-Type: application/x-www-form-urlencoded' \ 
   -H 'Accept: application/json'
 
 ```
@@ -5855,8 +5925,8 @@ oauth2 ( Scopes: write )
 ```shell
 # You can also use wget
 curl -X DELETE https://api.mod.io/v1/games/{game-id}/mods/{mod-id}/team/{team-member-id} \
-  -H 'Authorization: Bearer {access-token}' \
-  -H 'Content-Type: application/x-www-form-urlencoded' \
+  -H 'Authorization: Bearer {access-token}' \ 
+  -H 'Content-Type: application/x-www-form-urlencoded' \ 
   -H 'Accept: application/json'
 
 ```
@@ -6127,8 +6197,8 @@ apiKey, oauth2 ( Scopes: read )
 ```shell
 # You can also use wget
 curl -X DELETE https://api.mod.io/v1/games/{game-id}/mods/{mod-id}/comments/{comment-id} \
-  -H 'Authorization: Bearer {access-token}' \
-  -H 'Content-Type: application/x-www-form-urlencoded' \
+  -H 'Authorization: Bearer {access-token}' \ 
+  -H 'Content-Type: application/x-www-form-urlencoded' \ 
   -H 'Accept: application/json'
 
 ```
@@ -6247,8 +6317,8 @@ oauth2 ( Scopes: write )
 ```shell
 # You can also use wget
 curl -X POST https://api.mod.io/v1/general/ownership \
-  -H 'Authorization: Bearer {access-token}' \
-  -H 'Content-Type: application/x-www-form-urlencoded' \
+  -H 'Authorization: Bearer {access-token}' \ 
+  -H 'Content-Type: application/x-www-form-urlencoded' \ 
   -H 'Accept: application/json'
 
 ```
@@ -6649,19 +6719,23 @@ apiKey, oauth2 ( Scopes: read )
 ```shell
 # You can also use wget
 curl -X POST https://api.mod.io/v1/report \
-  -H 'Authorization: Bearer {access-token}' \
-  -H 'Content-Type: application/x-www-form-urlencoded' \
-  -H 'Accept: application/json'
+  -H 'Authorization: Bearer {access-token}' \ 
+  -H 'Content-Type: application/x-www-form-urlencoded' \ 
+  -H 'Accept: application/json' \
+  -d 'resource=mods' \
+  -d 'id=3853' \
+  -d 'type=1' \
+  -d 'name=Mod contains copyrighted content' \
+  -d 'summary=Detailed explanation for report here'
 
 ```
 
 ```http
 POST https://api.mod.io/v1/report HTTP/1.1
 Host: api.mod.io
-
+Content-Type: application/x-www-form-urlencoded
 Accept: application/json
 Authorization: Bearer {access-token}
-Content-Type: application/x-www-form-urlencoded
 
 
 ```
@@ -6687,7 +6761,13 @@ $.ajax({
 
 ```javascript--nodejs
 const request = require('node-fetch');
-
+const inputBody = '{
+  "resource": "mods",
+  "id": "3853",
+  "type": "1",
+  "name": "Mod contains copyrighted content",
+  "summary": "Detailed explanation for report here"
+}';
 const headers = {
   'Authorization':'Bearer {access-token}',
   'Content-Type':'application/x-www-form-urlencoded',
@@ -6698,7 +6778,7 @@ const headers = {
 fetch('https://api.mod.io/v1/report',
 {
   method: 'POST',
-
+  body: inputBody,
   headers: headers
 })
 .then(function(res) {
@@ -6780,7 +6860,7 @@ oauth2 ( Scopes: write )
 ```shell
 # You can also use wget
 curl -X GET https://api.mod.io/v1/me \
-  -H 'Authorization: Bearer {access-token}' \
+  -H 'Authorization: Bearer {access-token}' \ 
   -H 'Accept: application/json'
 
 ```
@@ -6907,7 +6987,7 @@ oauth2 ( Scopes: read )
 ```shell
 # You can also use wget
 curl -X GET https://api.mod.io/v1/me/subscribed \
-  -H 'Authorization: Bearer {access-token}' \
+  -H 'Authorization: Bearer {access-token}' \ 
   -H 'Accept: application/json'
 
 ```
@@ -7268,7 +7348,7 @@ apiKey, oauth2 ( Scopes: read )
 ```shell
 # You can also use wget
 curl -X GET https://api.mod.io/v1/me/games \
-  -H 'Authorization: Bearer {access-token}' \
+  -H 'Authorization: Bearer {access-token}' \ 
   -H 'Accept: application/json'
 
 ```
@@ -7453,7 +7533,7 @@ oauth2 ( Scopes: read )
 ```shell
 # You can also use wget
 curl -X GET https://api.mod.io/v1/me/mods \
-  -H 'Authorization: Bearer {access-token}' \
+  -H 'Authorization: Bearer {access-token}' \ 
   -H 'Accept: application/json'
 
 ```
@@ -7663,7 +7743,7 @@ oauth2 ( Scopes: read )
 ```shell
 # You can also use wget
 curl -X GET https://api.mod.io/v1/me/files \
-  -H 'Authorization: Bearer {access-token}' \
+  -H 'Authorization: Bearer {access-token}' \ 
   -H 'Accept: application/json'
 
 ```

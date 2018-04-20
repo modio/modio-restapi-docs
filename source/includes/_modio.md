@@ -26,7 +26,7 @@ __Tools/Plugins__ | Use tools and plugins created by the community to make imple
 
 Here is a brief list of the things to know about our API, as explained in more detail in the following sections.
 
-- All requests to the API __must__ be made over HTTPS (SSL).
+- All requests to the API __must__ be made over HTTPS (TLS).
 - All API responses are in `application/json` format.
 - API keys are restricted to read-only `GET` requests.
 - OAuth 2 access tokens are required for `POST`, `PUT` and `DELETE` requests.
