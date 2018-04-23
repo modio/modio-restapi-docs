@@ -805,7 +805,7 @@ Get all games. Successful request will return an array of [Game Objects](#get-al
     name|string|Name of the game.
     name_id|string|Subdomain for the game on mod.io.
     summary|string|Summary of the game.
-    homepage|string|Official homepage of the game.
+    instructions_url|string|Link to a mod.io guide, modding wiki or a page where modders can learn how to make and submit mods.
     ugc_name|string|Word used to describe user-generated content (mods, items, addons etc).
     presentation_option|integer|Presentation style used on the mod.io website:<br><br>__0__ =  Grid View: Displays mods in a grid<br>__1__ = Table View: Displays mods in a table
     submission_option|integer|Submission process modders must follow:<br><br>__0__ = Mod uploads must occur via a tool created by the game developers<br>__1__ = Mod uploads can occur from anywhere, including the website and API
@@ -866,11 +866,11 @@ Get all games. Successful request will return an array of [Game Objects](#get-al
         "filename": "demo.png",
         "original": "https://static.mod.io/v1/images/branding/modio-dark.png"
       },
-      "homepage": "https://www.rogue-knight-game.com/",
       "name": "Rogue Knight",
       "name_id": "rogue-knight",
       "summary": "Rogue Knight is a brand new 2D pixel platformer.",
       "instructions": "Instructions on the process to upload mods.",
+      "instructions_url": "https://www.rogue-knight-game.com/modding/getting-started",
       "profile_url": "https://rogue-knight.mod.io",
       "tag_options": [
         {
@@ -1043,11 +1043,11 @@ Get a game. Successful request will return a single [Game Object](#game-object).
     "filename": "demo.png",
     "original": "https://static.mod.io/v1/images/branding/modio-dark.png"
   },
-  "homepage": "https://www.rogue-knight-game.com/",
   "name": "Rogue Knight",
   "name_id": "rogue-knight",
   "summary": "Rogue Knight is a brand new 2D pixel platformer.",
   "instructions": "Instructions on the process to upload mods.",
+  "instructions_url": "https://www.rogue-knight-game.com/modding/getting-started",
   "profile_url": "https://rogue-knight.mod.io",
   "tag_options": [
     {
@@ -1182,7 +1182,7 @@ Update details for a game. If you want to update the `icon`, `logo` or `header` 
     name_id|string||Subdomain for the game on mod.io. Highly recommended to not change this unless absolutely required. Cannot exceed 20 characters.
     summary|string||Explain your games mod support in 1 paragraph. Cannot exceed 250 characters.
     instructions|string||Instructions and links creators should follow to upload mods. Keep it short and explain details like are mods submitted in-game or via tools you have created.
-    homepage|string||Official homepage for your game. Must be a valid URL.
+    instructions_url|string||Link to a mod.io guide, your modding wiki or a page where modders can learn how to make and submit mods to your games profile.
     ugc_name|string||Word used to describe user-generated content (mods, items, addons etc).
     presentation_option|integer||Choose the presentation style you want on the mod.io website:<br><br>__0__ =  Grid View: Displays mods in a grid (visual but less informative, default setting) <br>__1__ = Table View: Displays mods in a table (easier to browse)
     submission_option|integer||Choose the submission process you want modders to follow:<br><br>__0__ = Control the mod upload process (recommended): You will have to build an upload system either in-game or via a standalone tool, which enables creators to submit mods to the tags you have configured. Because you control the flow you can prevalidate and compile mods, to ensure they will work in your game and attach metadata about what settings the mod can change. In the long run this option will save you time as you can accept more submissions, but it requires more setup to get running and isn't as open as the above option. __NOTE:__ mod profiles can still be [created online](https://mod.io/mods/add), but uploads will have to occur via the API using tools you create.<br><br>__1__ = Enable mod uploads from anywhere: Allow developers to upload mods via the website and API, and pick the tags their mod is built for. No validation will be done on the files submitted, it will be the responsibility of your game and apps to process the mods installation based on the tags selected and determine if the mod is valid and works. For example a mod might be uploaded with the 'map' tag. When a user subscribes to this mod, your game will need to verify it contains a map file and install it where maps are located. If this fails, your game or the community will have to flag the mod as 'incompatible' to remove it from the listing.
@@ -1241,11 +1241,11 @@ Update details for a game. If you want to update the `icon`, `logo` or `header` 
     "filename": "demo.png",
     "original": "https://static.mod.io/v1/images/branding/modio-dark.png"
   },
-  "homepage": "https://www.rogue-knight-game.com/",
   "name": "Rogue Knight",
   "name_id": "rogue-knight",
   "summary": "Rogue Knight is a brand new 2D pixel platformer.",
   "instructions": "Instructions on the process to upload mods.",
+  "instructions_url": "https://www.rogue-knight-game.com/modding/getting-started",
   "profile_url": "https://rogue-knight.mod.io",
   "tag_options": [
     {
@@ -1376,7 +1376,7 @@ Get all mods for the corresponding game. Successful request will return an array
     name_id|string|Path for the mod on mod.io. For example: https://gamename.mod.io/__mod-name-id-here__
     summary|string|Summary of the mod.
     description|string|Detailed description of the mod which allows HTML.
-    homepage|string|Official homepage of the mod.
+    homepage_url|string|Official homepage of the mod.
     modfile|integer|Unique id of the file that is the current active release.
     metadata_blob|string|Metadata stored by the game developer.
     metadata_kvp|string|Colon-separated values representing the key-value pairs you want to filter the results by. If you supply more than one key-pair, separate the pairs by a comma. Will only filter by an exact key-pair match.
@@ -1422,7 +1422,7 @@ Get all mods for the corresponding game. Successful request will return an array
         "thumb_640x360": "https://static.mod.io/v1/images/branding/modio-dark.png",
         "thumb_1280x720": "https://static.mod.io/v1/images/branding/modio-dark.png"
       },
-      "homepage": "https://www.rogue-hdpack.com/",
+      "homepage_url": "https://www.rogue-hdpack.com/",
       "name": "Rogue Knight HD Pack",
       "name_id": "rogue-knight-hd-pack",
       "summary": "It's time to bask in the glory of beautiful 4k textures!",
@@ -1624,7 +1624,7 @@ Get a mod. Successful request will return a single [Mod Object](#mod-object).
     "thumb_640x360": "https://static.mod.io/v1/images/branding/modio-dark.png",
     "thumb_1280x720": "https://static.mod.io/v1/images/branding/modio-dark.png"
   },
-  "homepage": "https://www.rogue-hdpack.com/",
+  "homepage_url": "https://www.rogue-hdpack.com/",
   "name": "Rogue Knight HD Pack",
   "name_id": "rogue-knight-hd-pack",
   "summary": "It's time to bask in the glory of beautiful 4k textures!",
@@ -1809,7 +1809,7 @@ Add a mod. Successful request will return the newly created [Mod Object](#mod-ob
      name_id|string||Path for the mod on mod.io. For example: https://gamename.mod.io/__mod-name-id-here__. If no `name_id` is specified the `name` will be used. For example: _'Stellaris Shader Mod'_ will become _'stellaris-shader-mod'_. Cannot exceed 80 characters.
      summary|string|true|Summary for your mod, giving a brief overview of what it's about. Cannot exceed 250 characters.
      description|string||Detailed description for your mod, which can include details such as 'About', 'Features', 'Install Instructions', 'FAQ', etc. HTML supported and encouraged.
-     homepage|string||Official homepage for your mod. Must be a valid URL.
+     homepage_url|string||Official homepage for your mod. Must be a valid URL.
      stock|integer||Maximium number of subscribers for this mod. A value of 0 disables this limit.
      metadata_blob|string||Metadata stored by the game developer which may include properties as to how the item works, or other information you need to display. Metadata can also be stored as searchable [key value pairs](#metadata), and to individual [mod files](#get-all-modfiles).
      tags|string[]||An array of strings that represent what the mod has been tagged as. Only tags that are supported by the parent game can be applied. To determine what tags are eligible, see the tags values within `tag_options` column on the parent [Game Object](#game-object).
@@ -1848,7 +1848,7 @@ Add a mod. Successful request will return the newly created [Mod Object](#mod-ob
     "thumb_640x360": "https://static.mod.io/v1/images/branding/modio-dark.png",
     "thumb_1280x720": "https://static.mod.io/v1/images/branding/modio-dark.png"
   },
-  "homepage": "https://www.rogue-hdpack.com/",
+  "homepage_url": "https://www.rogue-hdpack.com/",
   "name": "Rogue Knight HD Pack",
   "name_id": "rogue-knight-hd-pack",
   "summary": "It's time to bask in the glory of beautiful 4k textures!",
@@ -2033,7 +2033,7 @@ Edit details for a mod. If you want to update the `logo` or media associated wit
      name_id|string||Path for the mod on mod.io. For example: https://gamename.mod.io/__mod-name-id-here__. Cannot exceed 80 characters.
      summary|string||Summary for your mod, giving a brief overview of what it's about. Cannot exceed 250 characters.
      description|string||Detailed description for your mod, which can include details such as 'About', 'Features', 'Install Instructions', 'FAQ', etc. HTML supported and encouraged.
-     homepage|string||Official homepage for your mod. Must be a valid URL.
+     homepage_url|string||Official homepage for your mod. Must be a valid URL.
      stock|integer||Maximium number of subscribers for this mod. A value of 0 disables this limit.
      metadata_blob|string||Metadata stored by the game developer which may include properties as to how the item works, or other information you need to display. Metadata can also be stored as searchable [key value pairs](#metadata), and to individual [mod files](#get-all-modfiles).
 
@@ -2071,7 +2071,7 @@ Edit details for a mod. If you want to update the `logo` or media associated wit
     "thumb_640x360": "https://static.mod.io/v1/images/branding/modio-dark.png",
     "thumb_1280x720": "https://static.mod.io/v1/images/branding/modio-dark.png"
   },
-  "homepage": "https://www.rogue-hdpack.com/",
+  "homepage_url": "https://www.rogue-hdpack.com/",
   "name": "Rogue Knight HD Pack",
   "name_id": "rogue-knight-hd-pack",
   "summary": "It's time to bask in the glory of beautiful 4k textures!",
@@ -3400,7 +3400,7 @@ Subscribe the _authenticated user_ to a corresponding mod. No body parameters ar
     "thumb_640x360": "https://static.mod.io/v1/images/branding/modio-dark.png",
     "thumb_1280x720": "https://static.mod.io/v1/images/branding/modio-dark.png"
   },
-  "homepage": "https://www.rogue-hdpack.com/",
+  "homepage_url": "https://www.rogue-hdpack.com/",
   "name": "Rogue Knight HD Pack",
   "name_id": "rogue-knight-hd-pack",
   "summary": "It's time to bask in the glory of beautiful 4k textures!",
@@ -7087,7 +7087,7 @@ Get all mod's the _authenticated user_ is subscribed to. Successful request will
     name_id|string|Path for the mod on mod.io. For example: https://gamename.mod.io/__mod-name-id-here__
     summary|string|Summary of the mod.
     description|string|Detailed description of the mod which allows HTML.
-    homepage|string|Official homepage of the mod.
+    homepage_url|string|Official homepage of the mod.
     metadata_blob|string|Metadata stored by the game developer.
     tags|string|Comma-separated values representing the tags you want to filter the results by. Only tags that are supported by the parent game can be applied. To determine what tags are eligible, see the tags values within `tag_options` column on the parent [Game Object](#game-object).
     downloads|string|Sort results by most downloads using [_sort filter](#filtering) parameter, value should be `downloads` for descending or `-downloads` for ascending results.
@@ -7131,7 +7131,7 @@ Get all mod's the _authenticated user_ is subscribed to. Successful request will
         "thumb_640x360": "https://static.mod.io/v1/images/branding/modio-dark.png",
         "thumb_1280x720": "https://static.mod.io/v1/images/branding/modio-dark.png"
       },
-      "homepage": "https://www.rogue-hdpack.com/",
+      "homepage_url": "https://www.rogue-hdpack.com/",
       "name": "Rogue Knight HD Pack",
       "name_id": "rogue-knight-hd-pack",
       "summary": "It's time to bask in the glory of beautiful 4k textures!",
@@ -7488,11 +7488,11 @@ Get all games the _authenticated user_ added or is a team member of. Successful 
         "filename": "demo.png",
         "original": "https://static.mod.io/v1/images/branding/modio-dark.png"
       },
-      "homepage": "https://www.rogue-knight-game.com/",
       "name": "Rogue Knight",
       "name_id": "rogue-knight",
       "summary": "Rogue Knight is a brand new 2D pixel platformer.",
       "instructions": "Instructions on the process to upload mods.",
+      "instructions_url": "https://www.rogue-knight-game.com/modding/getting-started",
       "profile_url": "https://rogue-knight.mod.io",
       "tag_options": [
         {
@@ -7657,7 +7657,7 @@ Get all mods the _authenticated user_ added or is a team member of. Successful r
         "thumb_640x360": "https://static.mod.io/v1/images/branding/modio-dark.png",
         "thumb_1280x720": "https://static.mod.io/v1/images/branding/modio-dark.png"
       },
-      "homepage": "https://www.rogue-hdpack.com/",
+      "homepage_url": "https://www.rogue-hdpack.com/",
       "name": "Rogue Knight HD Pack",
       "name_id": "rogue-knight-hd-pack",
       "summary": "It's time to bask in the glory of beautiful 4k textures!",
@@ -8330,7 +8330,7 @@ date_expires|integer|Unix timestamp of when the `binary_url` will expire.
     "thumb_640x360": "https://static.mod.io/v1/images/branding/modio-dark.png",
     "thumb_1280x720": "https://static.mod.io/v1/images/branding/modio-dark.png"
   },
-  "homepage": "https://www.rogue-hdpack.com/",
+  "homepage_url": "https://www.rogue-hdpack.com/",
   "name": "Rogue Knight HD Pack",
   "name_id": "rogue-knight-hd-pack",
   "summary": "It's time to bask in the glory of beautiful 4k textures!",
@@ -8421,7 +8421,7 @@ logo|[Logo Object   ](#schemalogo_object)|Contains logo data.
 » thumb_320x180|string|URL to the small logo thumbnail.
 » thumb_640x360|string|URL to the medium logo thumbnail.
 » thumb_1280x720|string|URL to the large logo thumbnail.
-homepage|string|Official homepage of the mod.
+homepage_url|string|Official homepage of the mod.
 name|string|Name of the mod.
 name_id|string|Path for the mod on mod.io. For example: https://gamename.mod.io/__mod-name-id-here__
 summary|string|Summary of the mod.
@@ -8577,11 +8577,11 @@ date_added|integer|Unix timestamp of date tag was applied.
     "filename": "demo.png",
     "original": "https://static.mod.io/v1/images/branding/modio-dark.png"
   },
-  "homepage": "https://www.rogue-knight-game.com/",
   "name": "Rogue Knight",
   "name_id": "rogue-knight",
   "summary": "Rogue Knight is a brand new 2D pixel platformer.",
   "instructions": "Instructions on the process to upload mods.",
+  "instructions_url": "https://www.rogue-knight-game.com/modding/getting-started",
   "profile_url": "https://rogue-knight.mod.io",
   "tag_options": [
     {
@@ -8641,11 +8641,11 @@ logo|[Logo Object   ](#schemalogo_object)|Contains logo data.
 header|[Header Object   ](#schemaheader_object)|Contains header data.
 » filename|string|Header image filename including extension.
 » original|string|URL to the full-sized header image.
-homepage|string|Official homepage of the game.
 name|string|Name of the game.
 name_id|string|Subdomain for the game on mod.io.
 summary|string|Summary of the game.
 instructions|string|A guide about creating and uploading mods for this game to mod.io (applicable if submission_option = 0).
+instructions_url|string|Link to a mod.io guide, your modding wiki or a page where modders can learn how to make and submit mods to your games profile.
 profile_url|string|URL to the game's mod.io page.
 tag_options|[Game Tag Option Object ](#schemagame_tag_option_object)[]|Groups of tags configured by the game developer, that mods can select.
 » name|string|Name of the tag group.
@@ -9041,11 +9041,11 @@ result_offset|integer|Number of results skipped over.
         "filename": "demo.png",
         "original": "https://static.mod.io/v1/images/branding/modio-dark.png"
       },
-      "homepage": "https://www.rogue-knight-game.com/",
       "name": "Rogue Knight",
       "name_id": "rogue-knight",
       "summary": "Rogue Knight is a brand new 2D pixel platformer.",
       "instructions": "Instructions on the process to upload mods.",
+      "instructions_url": "https://www.rogue-knight-game.com/modding/getting-started",
       "profile_url": "https://rogue-knight.mod.io",
       "tag_options": [
         {
@@ -9114,11 +9114,11 @@ data|[Game Object   ](#schemagame_object)[]|Array containing game objects.
 » header|[Header Object   ](#schemaheader_object)|Contains header data.
 »» filename|string|Header image filename including extension.
 »» original|string|URL to the full-sized header image.
-» homepage|string|Official homepage of the game.
 » name|string|Name of the game.
 » name_id|string|Subdomain for the game on mod.io.
 » summary|string|Summary of the game.
 » instructions|string|A guide about creating and uploading mods for this game to mod.io (applicable if submission_option = 0).
+» instructions_url|string|Link to a mod.io guide, your modding wiki or a page where modders can learn how to make and submit mods to your games profile.
 » profile_url|string|URL to the game's mod.io page.
 » tag_options|[Game Tag Option Object ](#schemagame_tag_option_object)[]|Groups of tags configured by the game developer, that mods can select.
 »» name|string|Name of the tag group.
@@ -9205,7 +9205,7 @@ result_offset|integer|Number of results skipped over.
         "thumb_640x360": "https://static.mod.io/v1/images/branding/modio-dark.png",
         "thumb_1280x720": "https://static.mod.io/v1/images/branding/modio-dark.png"
       },
-      "homepage": "https://www.rogue-hdpack.com/",
+      "homepage_url": "https://www.rogue-hdpack.com/",
       "name": "Rogue Knight HD Pack",
       "name_id": "rogue-knight-hd-pack",
       "summary": "It's time to bask in the glory of beautiful 4k textures!",
@@ -9305,7 +9305,7 @@ data|[Mod Object   ](#schemamod_object)[]|Array containing mod objects.
 »» thumb_320x180|string|URL to the small logo thumbnail.
 »» thumb_640x360|string|URL to the medium logo thumbnail.
 »» thumb_1280x720|string|URL to the large logo thumbnail.
-» homepage|string|Official homepage of the mod.
+» homepage_url|string|Official homepage of the mod.
 » name|string|Name of the mod.
 » name_id|string|Path for the mod on mod.io. For example: https://gamename.mod.io/__mod-name-id-here__
 » summary|string|Summary of the mod.
