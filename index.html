@@ -1620,9 +1620,9 @@ Accept: application/json
 <td>Summary of the game.</td>
 </tr>
 <tr>
-<td>homepage</td>
+<td>instructions_url</td>
 <td>string</td>
-<td>Official homepage of the game.</td>
+<td>Link to a mod.io guide, modding wiki or a page where modders can learn how to make and submit mods.</td>
 </tr>
 <tr>
 <td>ugc_name</td>
@@ -1713,11 +1713,11 @@ Accept: application/json
         </span><span class="s2">"filename"</span><span class="p">:</span><span class="w"> </span><span class="s2">"demo.png"</span><span class="p">,</span><span class="w">
         </span><span class="s2">"original"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://static.mod.io/v1/images/branding/modio-dark.png"</span><span class="w">
       </span><span class="p">},</span><span class="w">
-      </span><span class="s2">"homepage"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://www.rogue-knight-game.com/"</span><span class="p">,</span><span class="w">
       </span><span class="s2">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Rogue Knight"</span><span class="p">,</span><span class="w">
       </span><span class="s2">"name_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"rogue-knight"</span><span class="p">,</span><span class="w">
       </span><span class="s2">"summary"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Rogue Knight is a brand new 2D pixel platformer."</span><span class="p">,</span><span class="w">
       </span><span class="s2">"instructions"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Instructions on the process to upload mods."</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"instructions_url"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://www.rogue-knight-game.com/modding/getting-started"</span><span class="p">,</span><span class="w">
       </span><span class="s2">"profile_url"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://rogue-knight.mod.io"</span><span class="p">,</span><span class="w">
       </span><span class="s2">"tag_options"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
         </span><span class="p">{</span><span class="w">
@@ -1886,11 +1886,11 @@ Accept: application/json
     </span><span class="s2">"filename"</span><span class="p">:</span><span class="w"> </span><span class="s2">"demo.png"</span><span class="p">,</span><span class="w">
     </span><span class="s2">"original"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://static.mod.io/v1/images/branding/modio-dark.png"</span><span class="w">
   </span><span class="p">},</span><span class="w">
-  </span><span class="s2">"homepage"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://www.rogue-knight-game.com/"</span><span class="p">,</span><span class="w">
   </span><span class="s2">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Rogue Knight"</span><span class="p">,</span><span class="w">
   </span><span class="s2">"name_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"rogue-knight"</span><span class="p">,</span><span class="w">
   </span><span class="s2">"summary"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Rogue Knight is a brand new 2D pixel platformer."</span><span class="p">,</span><span class="w">
   </span><span class="s2">"instructions"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Instructions on the process to upload mods."</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"instructions_url"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://www.rogue-knight-game.com/modding/getting-started"</span><span class="p">,</span><span class="w">
   </span><span class="s2">"profile_url"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://rogue-knight.mod.io"</span><span class="p">,</span><span class="w">
   </span><span class="s2">"tag_options"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
     </span><span class="p">{</span><span class="w">
@@ -2056,10 +2056,10 @@ Content-Type: application/x-www-form-urlencoded
 <td>Instructions and links creators should follow to upload mods. Keep it short and explain details like are mods submitted in-game or via tools you have created.</td>
 </tr>
 <tr>
-<td>homepage</td>
+<td>instructions_url</td>
 <td>string</td>
 <td></td>
-<td>Official homepage for your game. Must be a valid URL.</td>
+<td>Link to a mod.io guide, your modding wiki or a page where modders can learn how to make and submit mods to your games profile.</td>
 </tr>
 <tr>
 <td>ugc_name</td>
@@ -2155,11 +2155,11 @@ Content-Type: application/x-www-form-urlencoded
     </span><span class="s2">"filename"</span><span class="p">:</span><span class="w"> </span><span class="s2">"demo.png"</span><span class="p">,</span><span class="w">
     </span><span class="s2">"original"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://static.mod.io/v1/images/branding/modio-dark.png"</span><span class="w">
   </span><span class="p">},</span><span class="w">
-  </span><span class="s2">"homepage"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://www.rogue-knight-game.com/"</span><span class="p">,</span><span class="w">
   </span><span class="s2">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Rogue Knight"</span><span class="p">,</span><span class="w">
   </span><span class="s2">"name_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"rogue-knight"</span><span class="p">,</span><span class="w">
   </span><span class="s2">"summary"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Rogue Knight is a brand new 2D pixel platformer."</span><span class="p">,</span><span class="w">
   </span><span class="s2">"instructions"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Instructions on the process to upload mods."</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"instructions_url"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://www.rogue-knight-game.com/modding/getting-started"</span><span class="p">,</span><span class="w">
   </span><span class="s2">"profile_url"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://rogue-knight.mod.io"</span><span class="p">,</span><span class="w">
   </span><span class="s2">"tag_options"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
     </span><span class="p">{</span><span class="w">
@@ -2342,7 +2342,7 @@ Accept: application/json
 <td>Detailed description of the mod which allows HTML.</td>
 </tr>
 <tr>
-<td>homepage</td>
+<td>homepage_url</td>
 <td>string</td>
 <td>Official homepage of the mod.</td>
 </tr>
@@ -2424,7 +2424,7 @@ Accept: application/json
         </span><span class="s2">"thumb_640x360"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://static.mod.io/v1/images/branding/modio-dark.png"</span><span class="p">,</span><span class="w">
         </span><span class="s2">"thumb_1280x720"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://static.mod.io/v1/images/branding/modio-dark.png"</span><span class="w">
       </span><span class="p">},</span><span class="w">
-      </span><span class="s2">"homepage"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://www.rogue-hdpack.com/"</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"homepage_url"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://www.rogue-hdpack.com/"</span><span class="p">,</span><span class="w">
       </span><span class="s2">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Rogue Knight HD Pack"</span><span class="p">,</span><span class="w">
       </span><span class="s2">"name_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"rogue-knight-hd-pack"</span><span class="p">,</span><span class="w">
       </span><span class="s2">"summary"</span><span class="p">:</span><span class="w"> </span><span class="s2">"It's time to bask in the glory of beautiful 4k textures!"</span><span class="p">,</span><span class="w">
@@ -2622,7 +2622,7 @@ Accept: application/json
     </span><span class="s2">"thumb_640x360"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://static.mod.io/v1/images/branding/modio-dark.png"</span><span class="p">,</span><span class="w">
     </span><span class="s2">"thumb_1280x720"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://static.mod.io/v1/images/branding/modio-dark.png"</span><span class="w">
   </span><span class="p">},</span><span class="w">
-  </span><span class="s2">"homepage"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://www.rogue-hdpack.com/"</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"homepage_url"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://www.rogue-hdpack.com/"</span><span class="p">,</span><span class="w">
   </span><span class="s2">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Rogue Knight HD Pack"</span><span class="p">,</span><span class="w">
   </span><span class="s2">"name_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"rogue-knight-hd-pack"</span><span class="p">,</span><span class="w">
   </span><span class="s2">"summary"</span><span class="p">:</span><span class="w"> </span><span class="s2">"It's time to bask in the glory of beautiful 4k textures!"</span><span class="p">,</span><span class="w">
@@ -2844,7 +2844,7 @@ curl -X POST https://api.mod.io/v1/games/<span class="o">{</span>game-id<span cl
 <td>Detailed description for your mod, which can include details such as 'About', 'Features', 'Install Instructions', 'FAQ', etc. HTML supported and encouraged.</td>
 </tr>
 <tr>
-<td>homepage</td>
+<td>homepage_url</td>
 <td>string</td>
 <td></td>
 <td>Official homepage for your mod. Must be a valid URL.</td>
@@ -2903,7 +2903,7 @@ curl -X POST https://api.mod.io/v1/games/<span class="o">{</span>game-id<span cl
     </span><span class="s2">"thumb_640x360"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://static.mod.io/v1/images/branding/modio-dark.png"</span><span class="p">,</span><span class="w">
     </span><span class="s2">"thumb_1280x720"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://static.mod.io/v1/images/branding/modio-dark.png"</span><span class="w">
   </span><span class="p">},</span><span class="w">
-  </span><span class="s2">"homepage"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://www.rogue-hdpack.com/"</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"homepage_url"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://www.rogue-hdpack.com/"</span><span class="p">,</span><span class="w">
   </span><span class="s2">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Rogue Knight HD Pack"</span><span class="p">,</span><span class="w">
   </span><span class="s2">"name_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"rogue-knight-hd-pack"</span><span class="p">,</span><span class="w">
   </span><span class="s2">"summary"</span><span class="p">:</span><span class="w"> </span><span class="s2">"It's time to bask in the glory of beautiful 4k textures!"</span><span class="p">,</span><span class="w">
@@ -3139,7 +3139,7 @@ Content-Type: application/x-www-form-urlencoded
 <td>Detailed description for your mod, which can include details such as 'About', 'Features', 'Install Instructions', 'FAQ', etc. HTML supported and encouraged.</td>
 </tr>
 <tr>
-<td>homepage</td>
+<td>homepage_url</td>
 <td>string</td>
 <td></td>
 <td>Official homepage for your mod. Must be a valid URL.</td>
@@ -3192,7 +3192,7 @@ Content-Type: application/x-www-form-urlencoded
     </span><span class="s2">"thumb_640x360"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://static.mod.io/v1/images/branding/modio-dark.png"</span><span class="p">,</span><span class="w">
     </span><span class="s2">"thumb_1280x720"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://static.mod.io/v1/images/branding/modio-dark.png"</span><span class="w">
   </span><span class="p">},</span><span class="w">
-  </span><span class="s2">"homepage"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://www.rogue-hdpack.com/"</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"homepage_url"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://www.rogue-hdpack.com/"</span><span class="p">,</span><span class="w">
   </span><span class="s2">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Rogue Knight HD Pack"</span><span class="p">,</span><span class="w">
   </span><span class="s2">"name_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"rogue-knight-hd-pack"</span><span class="p">,</span><span class="w">
   </span><span class="s2">"summary"</span><span class="p">:</span><span class="w"> </span><span class="s2">"It's time to bask in the glory of beautiful 4k textures!"</span><span class="p">,</span><span class="w">
@@ -4718,7 +4718,7 @@ Content-Type: application/x-www-form-urlencoded
     </span><span class="s2">"thumb_640x360"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://static.mod.io/v1/images/branding/modio-dark.png"</span><span class="p">,</span><span class="w">
     </span><span class="s2">"thumb_1280x720"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://static.mod.io/v1/images/branding/modio-dark.png"</span><span class="w">
   </span><span class="p">},</span><span class="w">
-  </span><span class="s2">"homepage"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://www.rogue-hdpack.com/"</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"homepage_url"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://www.rogue-hdpack.com/"</span><span class="p">,</span><span class="w">
   </span><span class="s2">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Rogue Knight HD Pack"</span><span class="p">,</span><span class="w">
   </span><span class="s2">"name_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"rogue-knight-hd-pack"</span><span class="p">,</span><span class="w">
   </span><span class="s2">"summary"</span><span class="p">:</span><span class="w"> </span><span class="s2">"It's time to bask in the glory of beautiful 4k textures!"</span><span class="p">,</span><span class="w">
@@ -8779,7 +8779,7 @@ Authorization: Bearer {access-token}
 <td>Detailed description of the mod which allows HTML.</td>
 </tr>
 <tr>
-<td>homepage</td>
+<td>homepage_url</td>
 <td>string</td>
 <td>Official homepage of the mod.</td>
 </tr>
@@ -8851,7 +8851,7 @@ Authorization: Bearer {access-token}
         </span><span class="s2">"thumb_640x360"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://static.mod.io/v1/images/branding/modio-dark.png"</span><span class="p">,</span><span class="w">
         </span><span class="s2">"thumb_1280x720"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://static.mod.io/v1/images/branding/modio-dark.png"</span><span class="w">
       </span><span class="p">},</span><span class="w">
-      </span><span class="s2">"homepage"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://www.rogue-hdpack.com/"</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"homepage_url"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://www.rogue-hdpack.com/"</span><span class="p">,</span><span class="w">
       </span><span class="s2">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Rogue Knight HD Pack"</span><span class="p">,</span><span class="w">
       </span><span class="s2">"name_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"rogue-knight-hd-pack"</span><span class="p">,</span><span class="w">
       </span><span class="s2">"summary"</span><span class="p">:</span><span class="w"> </span><span class="s2">"It's time to bask in the glory of beautiful 4k textures!"</span><span class="p">,</span><span class="w">
@@ -9229,11 +9229,11 @@ Authorization: Bearer {access-token}
         </span><span class="s2">"filename"</span><span class="p">:</span><span class="w"> </span><span class="s2">"demo.png"</span><span class="p">,</span><span class="w">
         </span><span class="s2">"original"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://static.mod.io/v1/images/branding/modio-dark.png"</span><span class="w">
       </span><span class="p">},</span><span class="w">
-      </span><span class="s2">"homepage"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://www.rogue-knight-game.com/"</span><span class="p">,</span><span class="w">
       </span><span class="s2">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Rogue Knight"</span><span class="p">,</span><span class="w">
       </span><span class="s2">"name_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"rogue-knight"</span><span class="p">,</span><span class="w">
       </span><span class="s2">"summary"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Rogue Knight is a brand new 2D pixel platformer."</span><span class="p">,</span><span class="w">
       </span><span class="s2">"instructions"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Instructions on the process to upload mods."</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"instructions_url"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://www.rogue-knight-game.com/modding/getting-started"</span><span class="p">,</span><span class="w">
       </span><span class="s2">"profile_url"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://rogue-knight.mod.io"</span><span class="p">,</span><span class="w">
       </span><span class="s2">"tag_options"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
         </span><span class="p">{</span><span class="w">
@@ -9394,7 +9394,7 @@ Authorization: Bearer {access-token}
         </span><span class="s2">"thumb_640x360"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://static.mod.io/v1/images/branding/modio-dark.png"</span><span class="p">,</span><span class="w">
         </span><span class="s2">"thumb_1280x720"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://static.mod.io/v1/images/branding/modio-dark.png"</span><span class="w">
       </span><span class="p">},</span><span class="w">
-      </span><span class="s2">"homepage"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://www.rogue-hdpack.com/"</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"homepage_url"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://www.rogue-hdpack.com/"</span><span class="p">,</span><span class="w">
       </span><span class="s2">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Rogue Knight HD Pack"</span><span class="p">,</span><span class="w">
       </span><span class="s2">"name_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"rogue-knight-hd-pack"</span><span class="p">,</span><span class="w">
       </span><span class="s2">"summary"</span><span class="p">:</span><span class="w"> </span><span class="s2">"It's time to bask in the glory of beautiful 4k textures!"</span><span class="p">,</span><span class="w">
@@ -10352,7 +10352,7 @@ oauth2 ( Scopes: read )
     </span><span class="s2">"thumb_640x360"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://static.mod.io/v1/images/branding/modio-dark.png"</span><span class="p">,</span><span class="w">
     </span><span class="s2">"thumb_1280x720"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://static.mod.io/v1/images/branding/modio-dark.png"</span><span class="w">
   </span><span class="p">},</span><span class="w">
-  </span><span class="s2">"homepage"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://www.rogue-hdpack.com/"</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"homepage_url"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://www.rogue-hdpack.com/"</span><span class="p">,</span><span class="w">
   </span><span class="s2">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Rogue Knight HD Pack"</span><span class="p">,</span><span class="w">
   </span><span class="s2">"name_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"rogue-knight-hd-pack"</span><span class="p">,</span><span class="w">
   </span><span class="s2">"summary"</span><span class="p">:</span><span class="w"> </span><span class="s2">"It's time to bask in the glory of beautiful 4k textures!"</span><span class="p">,</span><span class="w">
@@ -10551,7 +10551,7 @@ oauth2 ( Scopes: read )
 <td>URL to the large logo thumbnail.</td>
 </tr>
 <tr>
-<td>homepage</td>
+<td>homepage_url</td>
 <td>string</td>
 <td>Official homepage of the mod.</td>
 </tr>
@@ -10901,11 +10901,11 @@ oauth2 ( Scopes: read )
     </span><span class="s2">"filename"</span><span class="p">:</span><span class="w"> </span><span class="s2">"demo.png"</span><span class="p">,</span><span class="w">
     </span><span class="s2">"original"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://static.mod.io/v1/images/branding/modio-dark.png"</span><span class="w">
   </span><span class="p">},</span><span class="w">
-  </span><span class="s2">"homepage"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://www.rogue-knight-game.com/"</span><span class="p">,</span><span class="w">
   </span><span class="s2">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Rogue Knight"</span><span class="p">,</span><span class="w">
   </span><span class="s2">"name_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"rogue-knight"</span><span class="p">,</span><span class="w">
   </span><span class="s2">"summary"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Rogue Knight is a brand new 2D pixel platformer."</span><span class="p">,</span><span class="w">
   </span><span class="s2">"instructions"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Instructions on the process to upload mods."</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"instructions_url"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://www.rogue-knight-game.com/modding/getting-started"</span><span class="p">,</span><span class="w">
   </span><span class="s2">"profile_url"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://rogue-knight.mod.io"</span><span class="p">,</span><span class="w">
   </span><span class="s2">"tag_options"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
     </span><span class="p">{</span><span class="w">
@@ -11129,11 +11129,6 @@ oauth2 ( Scopes: read )
 <td>URL to the full-sized header image.</td>
 </tr>
 <tr>
-<td>homepage</td>
-<td>string</td>
-<td>Official homepage of the game.</td>
-</tr>
-<tr>
 <td>name</td>
 <td>string</td>
 <td>Name of the game.</td>
@@ -11152,6 +11147,11 @@ oauth2 ( Scopes: read )
 <td>instructions</td>
 <td>string</td>
 <td>A guide about creating and uploading mods for this game to mod.io (applicable if submission_option = 0).</td>
+</tr>
+<tr>
+<td>instructions_url</td>
+<td>string</td>
+<td>Link to a mod.io guide, your modding wiki or a page where modders can learn how to make and submit mods to your games profile.</td>
 </tr>
 <tr>
 <td>profile_url</td>
@@ -11910,11 +11910,11 @@ oauth2 ( Scopes: read )
         </span><span class="s2">"filename"</span><span class="p">:</span><span class="w"> </span><span class="s2">"demo.png"</span><span class="p">,</span><span class="w">
         </span><span class="s2">"original"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://static.mod.io/v1/images/branding/modio-dark.png"</span><span class="w">
       </span><span class="p">},</span><span class="w">
-      </span><span class="s2">"homepage"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://www.rogue-knight-game.com/"</span><span class="p">,</span><span class="w">
       </span><span class="s2">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Rogue Knight"</span><span class="p">,</span><span class="w">
       </span><span class="s2">"name_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"rogue-knight"</span><span class="p">,</span><span class="w">
       </span><span class="s2">"summary"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Rogue Knight is a brand new 2D pixel platformer."</span><span class="p">,</span><span class="w">
       </span><span class="s2">"instructions"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Instructions on the process to upload mods."</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"instructions_url"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://www.rogue-knight-game.com/modding/getting-started"</span><span class="p">,</span><span class="w">
       </span><span class="s2">"profile_url"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://rogue-knight.mod.io"</span><span class="p">,</span><span class="w">
       </span><span class="s2">"tag_options"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
         </span><span class="p">{</span><span class="w">
@@ -12152,11 +12152,6 @@ oauth2 ( Scopes: read )
 <td>URL to the full-sized header image.</td>
 </tr>
 <tr>
-<td>» homepage</td>
-<td>string</td>
-<td>Official homepage of the game.</td>
-</tr>
-<tr>
 <td>» name</td>
 <td>string</td>
 <td>Name of the game.</td>
@@ -12175,6 +12170,11 @@ oauth2 ( Scopes: read )
 <td>» instructions</td>
 <td>string</td>
 <td>A guide about creating and uploading mods for this game to mod.io (applicable if submission_option = 0).</td>
+</tr>
+<tr>
+<td>» instructions_url</td>
+<td>string</td>
+<td>Link to a mod.io guide, your modding wiki or a page where modders can learn how to make and submit mods to your games profile.</td>
 </tr>
 <tr>
 <td>» profile_url</td>
@@ -12317,7 +12317,7 @@ oauth2 ( Scopes: read )
         </span><span class="s2">"thumb_640x360"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://static.mod.io/v1/images/branding/modio-dark.png"</span><span class="p">,</span><span class="w">
         </span><span class="s2">"thumb_1280x720"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://static.mod.io/v1/images/branding/modio-dark.png"</span><span class="w">
       </span><span class="p">},</span><span class="w">
-      </span><span class="s2">"homepage"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://www.rogue-hdpack.com/"</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"homepage_url"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://www.rogue-hdpack.com/"</span><span class="p">,</span><span class="w">
       </span><span class="s2">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Rogue Knight HD Pack"</span><span class="p">,</span><span class="w">
       </span><span class="s2">"name_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"rogue-knight-hd-pack"</span><span class="p">,</span><span class="w">
       </span><span class="s2">"summary"</span><span class="p">:</span><span class="w"> </span><span class="s2">"It's time to bask in the glory of beautiful 4k textures!"</span><span class="p">,</span><span class="w">
@@ -12530,7 +12530,7 @@ oauth2 ( Scopes: read )
 <td>URL to the large logo thumbnail.</td>
 </tr>
 <tr>
-<td>» homepage</td>
+<td>» homepage_url</td>
 <td>string</td>
 <td>Official homepage of the mod.</td>
 </tr>
