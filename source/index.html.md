@@ -7470,7 +7470,27 @@ System.out.println(response.toString());
 ```
 `GET /me/games`
 
-Get all games the _authenticated user_ added or is a team member of. Successful request will return an array of [Game Objects](#get-games-2).
+Get all games the _authenticated user_ added or is a team member of. Successful request will return an array of [Game Objects](#get-games-2). We recommended reading the [filtering documentation](#filtering) to return only the records you want.
+
+    Filter|Type|Description
+    ---|---|---
+    id|integer|Unique id of the game.
+    status|integer|Status of the game (only admins can filter by this field, see [status and visibility](#status-amp-visibility) for details):<br><br>__0__ = Not accepted<br>__1__ = Accepted _(default with archived)_<br>__2__ = Archived<br>__3__ = Deleted
+    submitted_by|integer|Unique id of the user who has ownership of the game.
+    date_added|integer|Unix timestamp of date game was registered.
+    date_updated|integer|Unix timestamp of date game was updated.
+    date_live|integer|Unix timestamp of date game was set live.
+    name|string|Name of the game.
+    name_id|string|Subdomain for the game on mod.io.
+    summary|string|Summary of the game.
+    instructions_url|string|Link to a mod.io guide, modding wiki or a page where modders can learn how to make and submit mods.
+    ugc_name|string|Word used to describe user-generated content (mods, items, addons etc).
+    presentation_option|integer|Presentation style used on the mod.io website:<br><br>__0__ =  Grid View: Displays mods in a grid<br>__1__ = Table View: Displays mods in a table
+    submission_option|integer|Submission process modders must follow:<br><br>__0__ = Mod uploads must occur via a tool created by the game developers<br>__1__ = Mod uploads can occur from anywhere, including the website and API
+    curation_option|integer|Curation process used to approve mods:<br><br>__0__ = No curation: Mods are immediately available to play<br>__1__ = Paid curation: Mods are immediately available to play unless they choose to receive donations. These mods must be accepted to be listed<br>__2__ = Full curation: All mods must be accepted by someone to be listed
+    community_options|integer|Community features enabled on the mod.io website:<br><br>__0__ = All of the options below are disabled<br>__1__ = Discussion board enabled<br>__2__ = Guides and news enabled<br>__?__ = Combine to find games with multiple options enabled (see [BITWISE fields](#bitwise-and-bitwise-and))
+    revenue_options|integer|Revenue capabilities mods can enable:<br><br>__0__ = All of the options below are disabled<br>__1__ = Allow mods to be sold<br>__2__ = Allow mods to receive donations<br>__4__ = Allow mods to be traded<br>__8__ = Allow mods to control supply and scarcity<br>__?__ = Combine to find games with multiple options enabled (see [BITWISE fields](#bitwise-and-bitwise-and))
+    api_access_options|integer|Level of API access allowed by this game:<br><br>__0__ = All of the options below are disabled<br>__1__ = Allow 3rd parties to access this games API endpoints<br>__2__ = Allow mods to be downloaded directly (if disabled all download URLs will contain a frequently changing verification hash to stop unauthorized use)<br>__?__ = Combine to find games with multiple options enabled (see [BITWISE fields](#bitwise-and-bitwise-and))
 
 
 > Example response
@@ -7655,7 +7675,31 @@ System.out.println(response.toString());
 ```
 `GET /me/mods`
 
-Get all mods the _authenticated user_ added or is a team member of. Successful request will return an array of [Mod Objects](#get-all-mods-2).
+Get all mods the _authenticated user_ added or is a team member of. Successful request will return an array of [Mod Objects](#get-all-mods-2). We recommended reading the [filtering documentation](#filtering) to return only the records you want.
+
+    Filter|Type|Description
+    ---|---|---
+    id|integer|Unique id of the mod.
+    game_id|integer|Unique id of the parent game.
+    status|integer|Status of the mod (only game admins can filter by this field, see [status and visibility](#status-amp-visibility) for details):<br><br>__0__ = Not accepted<br>__1__ = Accepted _(default with archived)_<br>__2__ = Archived<br>__3__ = Deleted
+    visible|integer|Visibility of the mod (only game admins can filter by this field, see [status and visibility](#status-amp-visibility) for details):<br><br>__0__ = Hidden<br>__1__ = Public
+    submitted_by|integer|Unique id of the user who has ownership of the mod.
+    date_added|integer|Unix timestamp of date mod was registered.
+    date_updated|integer|Unix timestamp of date mod was updated.
+    date_live|integer|Unix timestamp of date mod was set live.
+    name|string|Name of the mod.
+    name_id|string|Path for the mod on mod.io. For example: https://gamename.mod.io/__mod-name-id-here__
+    summary|string|Summary of the mod.
+    description|string|Detailed description of the mod which allows HTML.
+    homepage_url|string|Official homepage of the mod.
+    modfile|integer|Unique id of the file that is the current active release.
+    metadata_blob|string|Metadata stored by the game developer.
+    metadata_kvp|string|Colon-separated values representing the key-value pairs you want to filter the results by. If you supply more than one key-pair, separate the pairs by a comma. Will only filter by an exact key-pair match.
+    tags|string|Comma-separated values representing the tags you want to filter the results by. Only tags that are supported by the parent game can be applied. To determine what tags are eligible, see the tags values within `tag_options` column on the parent [Game Object](#game-object).
+    downloads|string|Sort results by most downloads using [_sort filter](#filtering) parameter, value should be `downloads` for descending or `-downloads` for ascending results.
+    popular|string|Sort results by popularity using [_sort filter](#filtering), value should be `popular` for descending or `-popular` for ascending results.
+    rating|string|Sort results by weighted rating using [_sort filter](#filtering), value should be `rating` for descending or `-rating` for ascending results.
+    subscribers|string|Sort results by most subscribers using [_sort filter](#filtering), value should be `subscribers` for descending or `-subscribers` for ascending results.
 
 
 > Example response
@@ -7871,7 +7915,22 @@ System.out.println(response.toString());
 ```
 `GET /me/files`
 
-Get all modfiles the _authenticated user_ uploaded. Successful request will return an array of [Modfile Objects](#get-all-modfiles-2).
+Get all modfiles the _authenticated user_ uploaded. Successful request will return an array of [Modfile Objects](#get-all-modfiles-2). We recommended reading the [filtering documentation](#filtering) to return only the records you want.<br><br>__NOTE:__ If the [game](#edit-game) requires mod downloads to be initiated via the API, the `binary_url` returned will contain a verification hash. This hash must be supplied to get the modfile, and will expire after a certain period of time. Saving and reusing the `binary_url` won't work in this situation given it's dynamic nature.
+
+    Filter|Type|Description
+    ---|---|---
+    id|integer|Unique id of the file.
+    mod_id|integer|Unique id of the mod.
+    date_added|integer|Unix timestamp of date file was added.
+    date_scanned|integer|Unix timestamp of date file was virus scanned.
+    virus_status|integer|Current virus scan status of the file. For newly added files that have yet to be scanned this field will change frequently until a scan is complete:<br><br>__0__ = Not scanned<br>__1__ = Scan complete<br>__2__ = In progress<br>__3__ = Too large to scan<br>__4__ = File not found<br>__5__ = Error Scanning
+    virus_positive|integer|Was a virus detected:<br><br>__0__ = No threats detected<br>__1__ = Flagged as malicious
+    filesize|integer|Size of the file in bytes.
+    filehash|string|MD5 hash of the file.
+    filename|string|Filename including extension.
+    version|string|Release version this file represents.
+    changelog|string|Changelog for the file.
+    metadata_blob|string|Metadata stored by the game developer for this file.
 
 
 > Example response
