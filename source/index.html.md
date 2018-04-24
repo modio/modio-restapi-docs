@@ -1450,6 +1450,12 @@ Get all mods for the corresponding game. Successful request will return an array
           "date_expires": 1579316848
         }
       },
+      "metadata_kvp": [
+        {
+          "metakey": "pistol-dmg",
+          "metavalue": "800"
+        }
+      ],
       "media": {
         "youtube": [
           "https://www.youtube.com/watch?v=dQw4w9WgXcQ"
@@ -1652,6 +1658,12 @@ Get a mod. Successful request will return a single [Mod Object](#mod-object).
       "date_expires": 1579316848
     }
   },
+  "metadata_kvp": [
+    {
+      "metakey": "pistol-dmg",
+      "metavalue": "800"
+    }
+  ],
   "media": {
     "youtube": [
       "https://www.youtube.com/watch?v=dQw4w9WgXcQ"
@@ -1876,6 +1888,12 @@ Add a mod. Successful request will return the newly created [Mod Object](#mod-ob
       "date_expires": 1579316848
     }
   },
+  "metadata_kvp": [
+    {
+      "metakey": "pistol-dmg",
+      "metavalue": "800"
+    }
+  ],
   "media": {
     "youtube": [
       "https://www.youtube.com/watch?v=dQw4w9WgXcQ"
@@ -2099,6 +2117,12 @@ Edit details for a mod. If you want to update the `logo` or media associated wit
       "date_expires": 1579316848
     }
   },
+  "metadata_kvp": [
+    {
+      "metakey": "pistol-dmg",
+      "metavalue": "800"
+    }
+  ],
   "media": {
     "youtube": [
       "https://www.youtube.com/watch?v=dQw4w9WgXcQ"
@@ -3428,6 +3452,12 @@ Subscribe the _authenticated user_ to a corresponding mod. No body parameters ar
       "date_expires": 1579316848
     }
   },
+  "metadata_kvp": [
+    {
+      "metakey": "pistol-dmg",
+      "metavalue": "800"
+    }
+  ],
   "media": {
     "youtube": [
       "https://www.youtube.com/watch?v=dQw4w9WgXcQ"
@@ -3686,7 +3716,7 @@ Get the event log for a mod, showing changes made sorted by latest event first. 
      mod_id|integer|Unique id of the parent mod.
      user_id|integer|Unique id of the user who performed the action.
      date_added|integer|Unix timestamp of date mod was updated.
-     event_type|string|Type of change that occurred:<br><br>__MODFILE_CHANGED__ = Primary file changed, the mod should be updated<br>__MOD_AVAILABLE__ = Mod is marked as accepted and public<br>__MOD_UNAVAILABLE__ = Mod is marked as not accepted, deleted or hidden<br>__MOD_EDITED__ = The mod was updated (triggered when any column value changes)
+     event_type|string|Type of change that occurred:<br><br>__MODFILE_CHANGED__ = Primary file changed, the mod should be updated<br>__MOD_AVAILABLE__ = Mod is marked as accepted and public<br>__MOD_UNAVAILABLE__ = Mod is marked as not accepted, deleted or hidden<br>__MOD_EDITED__ = The mod was updated (triggered when any column value changes)<br>__MOD_DELETED__ = The mod has been permanently erased. This is an orphan record, looking up this id will return no data
 
 
 > Example response
@@ -3817,7 +3847,7 @@ Get all mods events for the corresponding game sorted by latest event first. Suc
      mod_id|integer|Unique id of the parent mod.
      user_id|integer|Unique id of the user who performed the action.
      date_added|integer|Unix timestamp of date mod was added.
-     event_type|string|Type of change that occurred:<br><br>__MODFILE_CHANGED__ = Primary file changed<br>__MOD_AVAILABLE__ = Mod is marked as accepted and public<br>__MOD_UNAVAILABLE__ = Mod is marked as not accepted, deleted or hidden<br>__MOD_EDITED__ = The mod was updated (triggered when any column value changes)
+     event_type|string|Type of change that occurred:<br><br>__MODFILE_CHANGED__ = Primary file changed<br>__MOD_AVAILABLE__ = Mod is marked as accepted and public<br>__MOD_UNAVAILABLE__ = Mod is marked as not accepted, deleted or hidden<br>__MOD_EDITED__ = The mod was updated (triggered when any column value changes)<br>__MOD_DELETED__ = The mod has been permanently erased. This is an orphan record, looking up this id will return no data
      latest|boolean|_Default value is true_. Returns only the latest unique events, which is useful for checking if the primary `modfile` has changed.
      subscribed|boolean|_Default value is false_. Returns only events connected to mods the __authenticated user__ is subscribed to, which is useful for keeping the users mods up-to-date.
 
@@ -3857,7 +3887,7 @@ apiKey, oauth2 ( Scopes: read )
 
 # Tags
 
-## Get All Mod Tags
+## Get Mod Tags
 
 > Example request
 
@@ -3970,11 +4000,11 @@ Get all tags for the corresponding mod. Successful request will return an array 
   "result_offset": 0
 }
 ```
-<h3 id="Get-All-Mod-Tags-responses">Responses</h3>
+<h3 id="Get-Mod-Tags-responses">Responses</h3>
 
 Status|Meaning|Description|Response Schema
 ---|---|---|---|
-200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)|Successful Request|[Get All Mod Tags ](#schemaget_all_mod_tags)
+200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)|Successful Request|[Get Mod Tags  ](#schemaget_mod_tags)
 
 <aside class="warning">
 To perform this operation, you must be authenticated by means of one of the following methods:
@@ -5219,9 +5249,9 @@ System.out.println(response.toString());
 ```
 `GET /games/{game-id}/mods/{mod-id}/dependencies`
 
-Get all dependencies the chosen mod has selected. This is useful if a mod requires other mods be installed for it to run. Successful request will return an array of [Mod Dependencies Objects](#mod-dependencies-object).
+Get all dependencies the chosen mod has selected. __IMPORTANT:__ Because of the complexity of supporting nested dependencies, we recommend you treat dependencies as a recommendation for your players, and do not process dependencies automatically when installing a mod unless absolutely required. Successful request will return an array of [Mod Dependencies Objects](#mod-dependencies-object).
 
-     __NOTE:__ Some developers might select _soft_ dependencies to promote or credit other mods. We advise against this but it is possible to do.
+     __NOTE:__ Some modders might select _soft_ dependencies to promote or credit other mods. We advise against this but it is possible to do, and is one of the reasons why we recommend against processing nested dependencies automatically.
 
 
 > Example response
@@ -5354,9 +5384,9 @@ System.out.println(response.toString());
 ```
 `POST /games/{game-id}/mods/{mod-id}/dependencies`
 
-Add mod dependencies required by the corresponding mod. A dependency is a mod that must be installed for this mod to run. Successful request will return [Message Object](#message-object).
+Add mod dependencies required by the corresponding mod. A dependency is a mod that should be installed for this mod to run. __IMPORTANT:__ Because of the complexity of supporting nested dependencies, we recommend you treat dependencies as a recommendation for your players, and do not process dependencies automatically when installing a mod unless absolutely required. Successful request will return [Message Object](#message-object).
 
-     __NOTE:__ Some developers might select _soft_ dependencies to promote or credit other mods. We advise against this but it is possible to do.
+     __NOTE:__ Some modders might select _soft_ dependencies to promote or credit other mods. We advise against this but it is possible to do, and is one of the reasons why we recommend against processing nested dependencies automatically.
 
      Parameter|Type|Required|Description
      ---|---|---|---|
@@ -6134,9 +6164,9 @@ Get all comments posted in the mods profile. Successful request will return an a
      submitted_by|integer|Unique id of the user who posted the comment.
      date_added|integer|Unix timestamp of date comment was posted.
      reply_id|integer|Id of the parent comment this comment is replying to (can be 0 if the comment is not a reply).
-     reply_position|string|Levels of nesting in a comment thread. You should order by this field, to maintain comment grouping. How it works:<br><br>- The first comment will have the position '01'.<br>- The second comment will have the position '02'.<br>- If someone responds to the second comment the position will be '02.01'.<br>- A maximum of 3 levels is supported.
-     karma|integer|Karma received for the comment (can be postive or negative).
-     summary|string|Contents of the comment.
+     thread_position|string|Levels of nesting in a comment thread. You should order by this field, to maintain comment grouping. How it works:<br><br>- The first comment will have the position '01'.<br>- The second comment will have the position '02'.<br>- If someone responds to the second comment the position will be '02.01'.<br>- A maximum of 3 levels is supported.
+     karma|integer|Karma received for the comment (can be positive or negative).
+     content|string|Contents of the comment.
 
 
 > Example response
@@ -6164,7 +6194,7 @@ Get all comments posted in the mods profile. Successful request will return an a
       },
       "date_added": 1499841487,
       "reply_id": 1499,
-      "reply_position": "01",
+      "thread_position": "01",
       "karma": 1,
       "karma_guest": 0,
       "content": "This mod is kickass! Great work!"
@@ -7159,6 +7189,12 @@ Get all mod's the _authenticated user_ is subscribed to. Successful request will
           "date_expires": 1579316848
         }
       },
+      "metadata_kvp": [
+        {
+          "metakey": "pistol-dmg",
+          "metavalue": "800"
+        }
+      ],
       "media": {
         "youtube": [
           "https://www.youtube.com/watch?v=dQw4w9WgXcQ"
@@ -7685,6 +7721,12 @@ Get all mods the _authenticated user_ added or is a team member of. Successful r
           "date_expires": 1579316848
         }
       },
+      "metadata_kvp": [
+        {
+          "metakey": "pistol-dmg",
+          "metavalue": "800"
+        }
+      ],
       "media": {
         "youtube": [
           "https://www.youtube.com/watch?v=dQw4w9WgXcQ"
@@ -8082,7 +8124,7 @@ id|integer|Unique id of the event object.
 mod_id|integer|Unique id of the parent mod.
 user_id|integer|Unique id of the user who performed the action.
 date_added|integer|Unix timestamp of date the event occurred.
-event_type|string|Type of [event](#get-mod-events-2) was 'MODFILE_CHANGED', 'MOD_AVAILABLE', 'MOD_UNAVAILABLE', 'MOD_EDITED'.
+event_type|string|Type of [event](#get-mod-events-2) was 'MODFILE_CHANGED', 'MOD_AVAILABLE', 'MOD_UNAVAILABLE', 'MOD_EDITED', 'MOD_DELETED'.
 
 
 
@@ -8112,7 +8154,7 @@ event_type|string|Type of [event](#get-mod-events-2) was 'MODFILE_CHANGED', 'MOD
   },
   "date_added": 1499841487,
   "reply_id": 1499,
-  "reply_position": "01",
+  "thread_position": "01",
   "karma": 1,
   "karma_guest": 0,
   "content": "This mod is kickass! Great work!"
@@ -8141,7 +8183,7 @@ submitted_by|[User Object   ](#schemauser_object)|Contains user data.
 » profile_url|string|URL to the user's mod.io profile.
 date_added|integer|Unix timestamp of date the comment was posted.
 reply_id|integer|Id of the parent comment this comment is replying to (can be 0 if the comment is not a reply).
-reply_position|string|Levels of nesting in a comment thread. How it works:<br><br>- The first comment will have the position '01'.<br>- The second comment will have the position '02'.<br>- If someone responds to the second comment the position will be '02.01'.<br>- A maximum of 3 levels is supported.
+thread_position|string|Levels of nesting in a comment thread. How it works:<br><br>- The first comment will have the position '01'.<br>- The second comment will have the position '02'.<br>- If someone responds to the second comment the position will be '02.01'.<br>- A maximum of 3 levels is supported.
 karma|integer|Karma received for the comment (can be postive or negative).
 karma_guest|integer|Karma received for guest comments (can be postive or negative).
 content|string|Contents of the comment.
@@ -8358,6 +8400,12 @@ date_expires|integer|Unix timestamp of when the `binary_url` will expire.
       "date_expires": 1579316848
     }
   },
+  "metadata_kvp": [
+    {
+      "metakey": "pistol-dmg",
+      "metavalue": "800"
+    }
+  ],
   "media": {
     "youtube": [
       "https://www.youtube.com/watch?v=dQw4w9WgXcQ"
@@ -8460,6 +8508,9 @@ rating_summary|[Rating Summary Object  ](#schemarating_summary_object)|Contains 
 » percentage_positive|integer|Number of positive ratings, divided by the total ratings to determine it’s percentage score.
 » weighted_aggregate|float|Overall rating of this item calculated using the [Wilson score confidence interval](http://www.evanmiller.org/how-not-to-sort-by-average-rating.html). This column is good to sort on, as it will order items based on number of ratings and will place items with many positive ratings above those with a higher score but fewer ratings.
 » display_text|string|Textual representation of the rating in format:<br><br>- Overwhelmingly Positive<br>- Very Positive<br>- Positive<br>- Mostly Positive<br>- Mixed<br>- Negative<br>- Mostly Negative<br>- Very Negative<br>- Overwhelmingly Negative
+metadata_kvp|[Metadata KVP Object  ](#schemametadata_kvp_object)[]|Contains key-value metadata.
+» metakey|string|The key of the key-value pair.
+» metavalue|string|The value of the key-value pair.
 tags|[Mod Tag Object  ](#schemamod_tag_object)[]|Contains mod tag data.
 » name|string|Tag name.
 » date_added|integer|Unix timestamp of date tag was applied.
@@ -8835,7 +8886,7 @@ profile_url|string|URL to the user's mod.io profile.
       },
       "date_added": 1499841487,
       "reply_id": 1499,
-      "reply_position": "01",
+      "thread_position": "01",
       "karma": 1,
       "karma_guest": 0,
       "content": "This mod is kickass! Great work!"
@@ -8873,7 +8924,7 @@ data|[Comment Object   ](#schemacomment_object)[]|Array containing comment objec
 »» profile_url|string|URL to the user's mod.io profile.
 » date_added|integer|Unix timestamp of date the comment was posted.
 » reply_id|integer|Id of the parent comment this comment is replying to (can be 0 if the comment is not a reply).
-» reply_position|string|Levels of nesting in a comment thread. How it works:<br><br>- The first comment will have the position '01'.<br>- The second comment will have the position '02'.<br>- If someone responds to the second comment the position will be '02.01'.<br>- A maximum of 3 levels is supported.
+» thread_position|string|Levels of nesting in a comment thread. How it works:<br><br>- The first comment will have the position '01'.<br>- The second comment will have the position '02'.<br>- If someone responds to the second comment the position will be '02.01'.<br>- A maximum of 3 levels is supported.
 » karma|integer|Karma received for the comment (can be postive or negative).
 » karma_guest|integer|Karma received for guest comments (can be postive or negative).
 » content|string|Contents of the comment.
@@ -9233,6 +9284,12 @@ result_offset|integer|Number of results skipped over.
           "date_expires": 1579316848
         }
       },
+      "metadata_kvp": [
+        {
+          "metakey": "pistol-dmg",
+          "metavalue": "800"
+        }
+      ],
       "media": {
         "youtube": [
           "https://www.youtube.com/watch?v=dQw4w9WgXcQ"
@@ -9344,6 +9401,9 @@ data|[Mod Object   ](#schemamod_object)[]|Array containing mod objects.
 »» percentage_positive|integer|Number of positive ratings, divided by the total ratings to determine it’s percentage score.
 »» weighted_aggregate|float|Overall rating of this item calculated using the [Wilson score confidence interval](http://www.evanmiller.org/how-not-to-sort-by-average-rating.html). This column is good to sort on, as it will order items based on number of ratings and will place items with many positive ratings above those with a higher score but fewer ratings.
 »» display_text|string|Textual representation of the rating in format:<br><br>- Overwhelmingly Positive<br>- Very Positive<br>- Positive<br>- Mostly Positive<br>- Mixed<br>- Negative<br>- Mostly Negative<br>- Very Negative<br>- Overwhelmingly Negative
+» metadata_kvp|[Metadata KVP Object  ](#schemametadata_kvp_object)[]|Contains key-value metadata.
+»» metakey|string|The key of the key-value pair.
+»» metavalue|string|The value of the key-value pair.
 » tags|[Mod Tag Object  ](#schemamod_tag_object)[]|Contains mod tag data.
 »» name|string|Tag name.
 »» date_added|integer|Unix timestamp of date tag was applied.
@@ -9388,7 +9448,7 @@ data|[Event Object   ](#schemaevent_object)[]|Array containing event objects.
 » mod_id|integer|Unique id of the parent mod.
 » user_id|integer|Unique id of the user who performed the action.
 » date_added|integer|Unix timestamp of date the event occurred.
-» event_type|string|Type of [event](#get-mod-events-2) was 'MODFILE_CHANGED', 'MOD_AVAILABLE', 'MOD_UNAVAILABLE', 'MOD_EDITED'.
+» event_type|string|Type of [event](#get-mod-events-2) was 'MODFILE_CHANGED', 'MOD_AVAILABLE', 'MOD_UNAVAILABLE', 'MOD_EDITED', 'MOD_DELETED'.
 result_count|integer|Number of results returned in the data array.
 result_limit|integer|Maximum number of results returned.
 result_offset|integer|Number of results skipped over.
@@ -9396,9 +9456,9 @@ result_offset|integer|Number of results skipped over.
 
 
 
-## Get All Mod Tags 
+## Get Mod Tags  
 
-<a name="schemaget_all_mod_tags"></a>
+<a name="schemaget_mod_tags"></a>
 
 ```json
 {
@@ -9633,7 +9693,7 @@ data|[Event Object   ](#schemaevent_object)[]|Array containing event objects.
 » mod_id|integer|Unique id of the parent mod.
 » user_id|integer|Unique id of the user who performed the action.
 » date_added|integer|Unix timestamp of date the event occurred.
-» event_type|string|Type of [event](#get-mod-events-2) was 'MODFILE_CHANGED', 'MOD_AVAILABLE', 'MOD_UNAVAILABLE', 'MOD_EDITED'.
+» event_type|string|Type of [event](#get-mod-events-2) was 'MODFILE_CHANGED', 'MOD_AVAILABLE', 'MOD_UNAVAILABLE', 'MOD_EDITED', 'MOD_DELETED'.
 result_count|integer|Number of results returned in the data array.
 result_limit|integer|Maximum number of results returned.
 result_offset|integer|Number of results skipped over.
