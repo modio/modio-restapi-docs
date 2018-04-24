@@ -403,7 +403,7 @@
             <a href="#tags" class="toc-h1 toc-link" data-title="Tags"><span class="reficon"><img src="https://static.mod.io/v1/images/branding/modio-icon-light.svg" alt="Reference" class="menu-reference-icon"></span> Tags</a>
               <ul class="toc-list-h2">
                   <li>
-                    <a href="#get-all-mod-tags" class="toc-h2 toc-link" data-title="Tags">Get All Mod Tags</a>
+                    <a href="#get-mod-tags" class="toc-h2 toc-link" data-title="Tags">Get Mod Tags</a>
                   </li>
                   <li>
                     <a href="#add-mod-tag" class="toc-h2 toc-link" data-title="Tags">Add Mod Tag</a>
@@ -622,7 +622,7 @@
                     <a href="#get-mod-events-2" class="toc-h2 toc-link" data-title="Response Schemas">Get Mod Events</a>
                   </li>
                   <li>
-                    <a href="#get-all-mod-tags-2" class="toc-h2 toc-link" data-title="Response Schemas">Get All Mod Tags</a>
+                    <a href="#get-mod-tags-2" class="toc-h2 toc-link" data-title="Response Schemas">Get Mod Tags</a>
                   </li>
                   <li>
                     <a href="#get-all-game-tag-options-2" class="toc-h2 toc-link" data-title="Response Schemas">Get All Game Tag Options</a>
@@ -2452,6 +2452,12 @@ Accept: application/json
           </span><span class="s2">"date_expires"</span><span class="p">:</span><span class="w"> </span><span class="mi">1579316848</span><span class="w">
         </span><span class="p">}</span><span class="w">
       </span><span class="p">},</span><span class="w">
+      </span><span class="s2">"metadata_kvp"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+        </span><span class="p">{</span><span class="w">
+          </span><span class="s2">"metakey"</span><span class="p">:</span><span class="w"> </span><span class="s2">"pistol-dmg"</span><span class="p">,</span><span class="w">
+          </span><span class="s2">"metavalue"</span><span class="p">:</span><span class="w"> </span><span class="s2">"800"</span><span class="w">
+        </span><span class="p">}</span><span class="w">
+      </span><span class="p">],</span><span class="w">
       </span><span class="s2">"media"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
         </span><span class="s2">"youtube"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
           </span><span class="s2">"https://www.youtube.com/watch?v=dQw4w9WgXcQ"</span><span class="w">
@@ -2650,6 +2656,12 @@ Accept: application/json
       </span><span class="s2">"date_expires"</span><span class="p">:</span><span class="w"> </span><span class="mi">1579316848</span><span class="w">
     </span><span class="p">}</span><span class="w">
   </span><span class="p">},</span><span class="w">
+  </span><span class="s2">"metadata_kvp"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+    </span><span class="p">{</span><span class="w">
+      </span><span class="s2">"metakey"</span><span class="p">:</span><span class="w"> </span><span class="s2">"pistol-dmg"</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"metavalue"</span><span class="p">:</span><span class="w"> </span><span class="s2">"800"</span><span class="w">
+    </span><span class="p">}</span><span class="w">
+  </span><span class="p">],</span><span class="w">
   </span><span class="s2">"media"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
     </span><span class="s2">"youtube"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
       </span><span class="s2">"https://www.youtube.com/watch?v=dQw4w9WgXcQ"</span><span class="w">
@@ -2931,6 +2943,12 @@ curl -X POST https://api.mod.io/v1/games/<span class="o">{</span>game-id<span cl
       </span><span class="s2">"date_expires"</span><span class="p">:</span><span class="w"> </span><span class="mi">1579316848</span><span class="w">
     </span><span class="p">}</span><span class="w">
   </span><span class="p">},</span><span class="w">
+  </span><span class="s2">"metadata_kvp"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+    </span><span class="p">{</span><span class="w">
+      </span><span class="s2">"metakey"</span><span class="p">:</span><span class="w"> </span><span class="s2">"pistol-dmg"</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"metavalue"</span><span class="p">:</span><span class="w"> </span><span class="s2">"800"</span><span class="w">
+    </span><span class="p">}</span><span class="w">
+  </span><span class="p">],</span><span class="w">
   </span><span class="s2">"media"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
     </span><span class="s2">"youtube"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
       </span><span class="s2">"https://www.youtube.com/watch?v=dQw4w9WgXcQ"</span><span class="w">
@@ -3220,6 +3238,12 @@ Content-Type: application/x-www-form-urlencoded
       </span><span class="s2">"date_expires"</span><span class="p">:</span><span class="w"> </span><span class="mi">1579316848</span><span class="w">
     </span><span class="p">}</span><span class="w">
   </span><span class="p">},</span><span class="w">
+  </span><span class="s2">"metadata_kvp"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+    </span><span class="p">{</span><span class="w">
+      </span><span class="s2">"metakey"</span><span class="p">:</span><span class="w"> </span><span class="s2">"pistol-dmg"</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"metavalue"</span><span class="p">:</span><span class="w"> </span><span class="s2">"800"</span><span class="w">
+    </span><span class="p">}</span><span class="w">
+  </span><span class="p">],</span><span class="w">
   </span><span class="s2">"media"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
     </span><span class="s2">"youtube"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
       </span><span class="s2">"https://www.youtube.com/watch?v=dQw4w9WgXcQ"</span><span class="w">
@@ -4746,6 +4770,12 @@ Content-Type: application/x-www-form-urlencoded
       </span><span class="s2">"date_expires"</span><span class="p">:</span><span class="w"> </span><span class="mi">1579316848</span><span class="w">
     </span><span class="p">}</span><span class="w">
   </span><span class="p">},</span><span class="w">
+  </span><span class="s2">"metadata_kvp"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+    </span><span class="p">{</span><span class="w">
+      </span><span class="s2">"metakey"</span><span class="p">:</span><span class="w"> </span><span class="s2">"pistol-dmg"</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"metavalue"</span><span class="p">:</span><span class="w"> </span><span class="s2">"800"</span><span class="w">
+    </span><span class="p">}</span><span class="w">
+  </span><span class="p">],</span><span class="w">
   </span><span class="s2">"media"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
     </span><span class="s2">"youtube"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
       </span><span class="s2">"https://www.youtube.com/watch?v=dQw4w9WgXcQ"</span><span class="w">
@@ -5021,7 +5051,7 @@ Accept: application/json
 <tr>
 <td>event_type</td>
 <td>string</td>
-<td>Type of change that occurred:<br><br><strong>MODFILE_CHANGED</strong> = Primary file changed, the mod should be updated<br><strong>MOD_AVAILABLE</strong> = Mod is marked as accepted and public<br><strong>MOD_UNAVAILABLE</strong> = Mod is marked as not accepted, deleted or hidden<br><strong>MOD_EDITED</strong> = The mod was updated (triggered when any column value changes)</td>
+<td>Type of change that occurred:<br><br><strong>MODFILE_CHANGED</strong> = Primary file changed, the mod should be updated<br><strong>MOD_AVAILABLE</strong> = Mod is marked as accepted and public<br><strong>MOD_UNAVAILABLE</strong> = Mod is marked as not accepted, deleted or hidden<br><strong>MOD_EDITED</strong> = The mod was updated (triggered when any column value changes)<br><strong>MOD_DELETED</strong> = The mod has been permanently erased. This is an orphan record, looking up this id will return no data</td>
 </tr>
 </tbody>
 </table>
@@ -5177,7 +5207,7 @@ Accept: application/json
 <tr>
 <td>event_type</td>
 <td>string</td>
-<td>Type of change that occurred:<br><br><strong>MODFILE_CHANGED</strong> = Primary file changed<br><strong>MOD_AVAILABLE</strong> = Mod is marked as accepted and public<br><strong>MOD_UNAVAILABLE</strong> = Mod is marked as not accepted, deleted or hidden<br><strong>MOD_EDITED</strong> = The mod was updated (triggered when any column value changes)</td>
+<td>Type of change that occurred:<br><br><strong>MODFILE_CHANGED</strong> = Primary file changed<br><strong>MOD_AVAILABLE</strong> = Mod is marked as accepted and public<br><strong>MOD_UNAVAILABLE</strong> = Mod is marked as not accepted, deleted or hidden<br><strong>MOD_EDITED</strong> = The mod was updated (triggered when any column value changes)<br><strong>MOD_DELETED</strong> = The mod has been permanently erased. This is an orphan record, looking up this id will return no data</td>
 </tr>
 <tr>
 <td>latest</td>
@@ -5240,7 +5270,7 @@ Accept: application/json
 To perform this operation, you must be authenticated by means of one of the following methods:
 apiKey, oauth2 ( Scopes: read )
 </aside>
-<h1 id="tags">Tags</h1><h2 id="get-all-mod-tags">Get All Mod Tags</h2>
+<h1 id="tags">Tags</h1><h2 id="get-mod-tags">Get Mod Tags</h2>
 <blockquote>
 <p>Example request</p>
 </blockquote>
@@ -5353,7 +5383,7 @@ Accept: application/json
   </span><span class="s2">"result_offset"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="w">
 </span><span class="p">}</span><span class="w">
 </span></code></pre>
-<h3 id="Get-All-Mod-Tags-responses">Responses</h3>
+<h3 id="Get-Mod-Tags-responses">Responses</h3>
 
 <table>
 <thead>
@@ -5369,7 +5399,7 @@ Accept: application/json
 <td>200</td>
 <td><a href="https://tools.ietf.org/html/rfc7231#section-6.3.1">OK</a></td>
 <td>Successful Request</td>
-<td><a href="#schemaget_all_mod_tags">Get All Mod Tags </a></td>
+<td><a href="#schemaget_mod_tags">Get Mod Tags  </a></td>
 </tr>
 </tbody>
 </table>
@@ -6682,9 +6712,9 @@ Accept: application/json
 </code></pre>
 <p><span class="httpmethod GET">GET</span> <span class="endpointheading">/games/{game-id}/mods/{mod-id}/dependencies</span></p>
 
-<p>Get all dependencies the chosen mod has selected. This is useful if a mod requires other mods be installed for it to run. Successful request will return an array of <a href="#mod-dependencies-object">Mod Dependencies Objects</a>.</p>
+<p>Get all dependencies the chosen mod has selected. <strong>IMPORTANT:</strong> Because of the complexity of supporting nested dependencies, we recommend you treat dependencies as a recommendation for your players, and do not process dependencies automatically when installing a mod unless absolutely required. Successful request will return an array of <a href="#mod-dependencies-object">Mod Dependencies Objects</a>.</p>
 
-<p><strong>NOTE:</strong> Some developers might select <em>soft</em> dependencies to promote or credit other mods. We advise against this but it is possible to do.</p>
+<p><strong>NOTE:</strong> Some modders might select <em>soft</em> dependencies to promote or credit other mods. We advise against this but it is possible to do, and is one of the reasons why we recommend against processing nested dependencies automatically.</p>
 
 <blockquote>
 <p>Example response</p>
@@ -6813,9 +6843,9 @@ curl -X POST https://api.mod.io/v1/games/<span class="o">{</span>game-id<span cl
 </code></pre>
 <p><span class="httpmethod POST">POST</span> <span class="endpointheading">/games/{game-id}/mods/{mod-id}/dependencies</span></p>
 
-<p>Add mod dependencies required by the corresponding mod. A dependency is a mod that must be installed for this mod to run. Successful request will return <a href="#message-object">Message Object</a>.</p>
+<p>Add mod dependencies required by the corresponding mod. A dependency is a mod that should be installed for this mod to run. <strong>IMPORTANT:</strong> Because of the complexity of supporting nested dependencies, we recommend you treat dependencies as a recommendation for your players, and do not process dependencies automatically when installing a mod unless absolutely required. Successful request will return <a href="#message-object">Message Object</a>.</p>
 
-<p><strong>NOTE:</strong> Some developers might select <em>soft</em> dependencies to promote or credit other mods. We advise against this but it is possible to do.</p>
+<p><strong>NOTE:</strong> Some modders might select <em>soft</em> dependencies to promote or credit other mods. We advise against this but it is possible to do, and is one of the reasons why we recommend against processing nested dependencies automatically.</p>
 
 <table>
 <thead>
@@ -7708,17 +7738,17 @@ Accept: application/json
 <td>Id of the parent comment this comment is replying to (can be 0 if the comment is not a reply).</td>
 </tr>
 <tr>
-<td>reply_position</td>
+<td>thread_position</td>
 <td>string</td>
 <td>Levels of nesting in a comment thread. You should order by this field, to maintain comment grouping. How it works:<br><br>- The first comment will have the position '01'.<br>- The second comment will have the position '02'.<br>- If someone responds to the second comment the position will be '02.01'.<br>- A maximum of 3 levels is supported.</td>
 </tr>
 <tr>
 <td>karma</td>
 <td>integer</td>
-<td>Karma received for the comment (can be postive or negative).</td>
+<td>Karma received for the comment (can be positive or negative).</td>
 </tr>
 <tr>
-<td>summary</td>
+<td>content</td>
 <td>string</td>
 <td>Contents of the comment.</td>
 </tr>
@@ -7750,7 +7780,7 @@ Accept: application/json
       </span><span class="p">},</span><span class="w">
       </span><span class="s2">"date_added"</span><span class="p">:</span><span class="w"> </span><span class="mi">1499841487</span><span class="p">,</span><span class="w">
       </span><span class="s2">"reply_id"</span><span class="p">:</span><span class="w"> </span><span class="mi">1499</span><span class="p">,</span><span class="w">
-      </span><span class="s2">"reply_position"</span><span class="p">:</span><span class="w"> </span><span class="s2">"01"</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"thread_position"</span><span class="p">:</span><span class="w"> </span><span class="s2">"01"</span><span class="p">,</span><span class="w">
       </span><span class="s2">"karma"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
       </span><span class="s2">"karma_guest"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
       </span><span class="s2">"content"</span><span class="p">:</span><span class="w"> </span><span class="s2">"This mod is kickass! Great work!"</span><span class="w">
@@ -8879,6 +8909,12 @@ Authorization: Bearer {access-token}
           </span><span class="s2">"date_expires"</span><span class="p">:</span><span class="w"> </span><span class="mi">1579316848</span><span class="w">
         </span><span class="p">}</span><span class="w">
       </span><span class="p">},</span><span class="w">
+      </span><span class="s2">"metadata_kvp"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+        </span><span class="p">{</span><span class="w">
+          </span><span class="s2">"metakey"</span><span class="p">:</span><span class="w"> </span><span class="s2">"pistol-dmg"</span><span class="p">,</span><span class="w">
+          </span><span class="s2">"metavalue"</span><span class="p">:</span><span class="w"> </span><span class="s2">"800"</span><span class="w">
+        </span><span class="p">}</span><span class="w">
+      </span><span class="p">],</span><span class="w">
       </span><span class="s2">"media"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
         </span><span class="s2">"youtube"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
           </span><span class="s2">"https://www.youtube.com/watch?v=dQw4w9WgXcQ"</span><span class="w">
@@ -9422,6 +9458,12 @@ Authorization: Bearer {access-token}
           </span><span class="s2">"date_expires"</span><span class="p">:</span><span class="w"> </span><span class="mi">1579316848</span><span class="w">
         </span><span class="p">}</span><span class="w">
       </span><span class="p">},</span><span class="w">
+      </span><span class="s2">"metadata_kvp"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+        </span><span class="p">{</span><span class="w">
+          </span><span class="s2">"metakey"</span><span class="p">:</span><span class="w"> </span><span class="s2">"pistol-dmg"</span><span class="p">,</span><span class="w">
+          </span><span class="s2">"metavalue"</span><span class="p">:</span><span class="w"> </span><span class="s2">"800"</span><span class="w">
+        </span><span class="p">}</span><span class="w">
+      </span><span class="p">],</span><span class="w">
       </span><span class="s2">"media"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
         </span><span class="s2">"youtube"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
           </span><span class="s2">"https://www.youtube.com/watch?v=dQw4w9WgXcQ"</span><span class="w">
@@ -9932,7 +9974,7 @@ oauth2 ( Scopes: read )
 <tr>
 <td>event_type</td>
 <td>string</td>
-<td>Type of <a href="#get-mod-events-2">event</a> was 'MODFILE_CHANGED', 'MOD_AVAILABLE', 'MOD_UNAVAILABLE', 'MOD_EDITED'.</td>
+<td>Type of <a href="#get-mod-events-2">event</a> was 'MODFILE_CHANGED', 'MOD_AVAILABLE', 'MOD_UNAVAILABLE', 'MOD_EDITED', 'MOD_DELETED'.</td>
 </tr>
 </tbody>
 </table>
@@ -9958,7 +10000,7 @@ oauth2 ( Scopes: read )
   </span><span class="p">},</span><span class="w">
   </span><span class="s2">"date_added"</span><span class="p">:</span><span class="w"> </span><span class="mi">1499841487</span><span class="p">,</span><span class="w">
   </span><span class="s2">"reply_id"</span><span class="p">:</span><span class="w"> </span><span class="mi">1499</span><span class="p">,</span><span class="w">
-  </span><span class="s2">"reply_position"</span><span class="p">:</span><span class="w"> </span><span class="s2">"01"</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"thread_position"</span><span class="p">:</span><span class="w"> </span><span class="s2">"01"</span><span class="p">,</span><span class="w">
   </span><span class="s2">"karma"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
   </span><span class="s2">"karma_guest"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
   </span><span class="s2">"content"</span><span class="p">:</span><span class="w"> </span><span class="s2">"This mod is kickass! Great work!"</span><span class="w">
@@ -10059,7 +10101,7 @@ oauth2 ( Scopes: read )
 <td>Id of the parent comment this comment is replying to (can be 0 if the comment is not a reply).</td>
 </tr>
 <tr>
-<td>reply_position</td>
+<td>thread_position</td>
 <td>string</td>
 <td>Levels of nesting in a comment thread. How it works:<br><br>- The first comment will have the position '01'.<br>- The second comment will have the position '02'.<br>- If someone responds to the second comment the position will be '02.01'.<br>- A maximum of 3 levels is supported.</td>
 </tr>
@@ -10380,6 +10422,12 @@ oauth2 ( Scopes: read )
       </span><span class="s2">"date_expires"</span><span class="p">:</span><span class="w"> </span><span class="mi">1579316848</span><span class="w">
     </span><span class="p">}</span><span class="w">
   </span><span class="p">},</span><span class="w">
+  </span><span class="s2">"metadata_kvp"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+    </span><span class="p">{</span><span class="w">
+      </span><span class="s2">"metakey"</span><span class="p">:</span><span class="w"> </span><span class="s2">"pistol-dmg"</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"metavalue"</span><span class="p">:</span><span class="w"> </span><span class="s2">"800"</span><span class="w">
+    </span><span class="p">}</span><span class="w">
+  </span><span class="p">],</span><span class="w">
   </span><span class="s2">"media"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
     </span><span class="s2">"youtube"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
       </span><span class="s2">"https://www.youtube.com/watch?v=dQw4w9WgXcQ"</span><span class="w">
@@ -10746,6 +10794,22 @@ oauth2 ( Scopes: read )
 <td>» display_text</td>
 <td>string</td>
 <td>Textual representation of the rating in format:<br><br>- Overwhelmingly Positive<br>- Very Positive<br>- Positive<br>- Mostly Positive<br>- Mixed<br>- Negative<br>- Mostly Negative<br>- Very Negative<br>- Overwhelmingly Negative</td>
+</tr>
+<tr>
+<td>metadata_kvp</td>
+<td>
+<a href="#schemametadata_kvp_object">Metadata KVP Object  </a>[]</td>
+<td>Contains key-value metadata.</td>
+</tr>
+<tr>
+<td>» metakey</td>
+<td>string</td>
+<td>The key of the key-value pair.</td>
+</tr>
+<tr>
+<td>» metavalue</td>
+<td>string</td>
+<td>The value of the key-value pair.</td>
 </tr>
 <tr>
 <td>tags</td>
@@ -11499,7 +11563,7 @@ oauth2 ( Scopes: read )
       </span><span class="p">},</span><span class="w">
       </span><span class="s2">"date_added"</span><span class="p">:</span><span class="w"> </span><span class="mi">1499841487</span><span class="p">,</span><span class="w">
       </span><span class="s2">"reply_id"</span><span class="p">:</span><span class="w"> </span><span class="mi">1499</span><span class="p">,</span><span class="w">
-      </span><span class="s2">"reply_position"</span><span class="p">:</span><span class="w"> </span><span class="s2">"01"</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"thread_position"</span><span class="p">:</span><span class="w"> </span><span class="s2">"01"</span><span class="p">,</span><span class="w">
       </span><span class="s2">"karma"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
       </span><span class="s2">"karma_guest"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
       </span><span class="s2">"content"</span><span class="p">:</span><span class="w"> </span><span class="s2">"This mod is kickass! Great work!"</span><span class="w">
@@ -11614,7 +11678,7 @@ oauth2 ( Scopes: read )
 <td>Id of the parent comment this comment is replying to (can be 0 if the comment is not a reply).</td>
 </tr>
 <tr>
-<td>» reply_position</td>
+<td>» thread_position</td>
 <td>string</td>
 <td>Levels of nesting in a comment thread. How it works:<br><br>- The first comment will have the position '01'.<br>- The second comment will have the position '02'.<br>- If someone responds to the second comment the position will be '02.01'.<br>- A maximum of 3 levels is supported.</td>
 </tr>
@@ -12345,6 +12409,12 @@ oauth2 ( Scopes: read )
           </span><span class="s2">"date_expires"</span><span class="p">:</span><span class="w"> </span><span class="mi">1579316848</span><span class="w">
         </span><span class="p">}</span><span class="w">
       </span><span class="p">},</span><span class="w">
+      </span><span class="s2">"metadata_kvp"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+        </span><span class="p">{</span><span class="w">
+          </span><span class="s2">"metakey"</span><span class="p">:</span><span class="w"> </span><span class="s2">"pistol-dmg"</span><span class="p">,</span><span class="w">
+          </span><span class="s2">"metavalue"</span><span class="p">:</span><span class="w"> </span><span class="s2">"800"</span><span class="w">
+        </span><span class="p">}</span><span class="w">
+      </span><span class="p">],</span><span class="w">
       </span><span class="s2">"media"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
         </span><span class="s2">"youtube"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
           </span><span class="s2">"https://www.youtube.com/watch?v=dQw4w9WgXcQ"</span><span class="w">
@@ -12727,6 +12797,22 @@ oauth2 ( Scopes: read )
 <td>Textual representation of the rating in format:<br><br>- Overwhelmingly Positive<br>- Very Positive<br>- Positive<br>- Mostly Positive<br>- Mixed<br>- Negative<br>- Mostly Negative<br>- Very Negative<br>- Overwhelmingly Negative</td>
 </tr>
 <tr>
+<td>» metadata_kvp</td>
+<td>
+<a href="#schemametadata_kvp_object">Metadata KVP Object  </a>[]</td>
+<td>Contains key-value metadata.</td>
+</tr>
+<tr>
+<td>»» metakey</td>
+<td>string</td>
+<td>The key of the key-value pair.</td>
+</tr>
+<tr>
+<td>»» metavalue</td>
+<td>string</td>
+<td>The value of the key-value pair.</td>
+</tr>
+<tr>
 <td>» tags</td>
 <td>
 <a href="#schemamod_tag_object">Mod Tag Object  </a>[]</td>
@@ -12817,7 +12903,7 @@ oauth2 ( Scopes: read )
 <tr>
 <td>» event_type</td>
 <td>string</td>
-<td>Type of <a href="#get-mod-events-2">event</a> was 'MODFILE_CHANGED', 'MOD_AVAILABLE', 'MOD_UNAVAILABLE', 'MOD_EDITED'.</td>
+<td>Type of <a href="#get-mod-events-2">event</a> was 'MODFILE_CHANGED', 'MOD_AVAILABLE', 'MOD_UNAVAILABLE', 'MOD_EDITED', 'MOD_DELETED'.</td>
 </tr>
 <tr>
 <td>result_count</td>
@@ -12836,8 +12922,8 @@ oauth2 ( Scopes: read )
 </tr>
 </tbody>
 </table>
-<h2 id="get-all-mod-tags-2">Get All Mod Tags</h2>
-<p><a name="schemaget_all_mod_tags"></a></p>
+<h2 id="get-mod-tags-2">Get Mod Tags</h2>
+<p><a name="schemaget_mod_tags"></a></p>
 <pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
   </span><span class="s2">"data"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
     </span><span class="p">{</span><span class="w">
@@ -13297,7 +13383,7 @@ oauth2 ( Scopes: read )
 <tr>
 <td>» event_type</td>
 <td>string</td>
-<td>Type of <a href="#get-mod-events-2">event</a> was 'MODFILE_CHANGED', 'MOD_AVAILABLE', 'MOD_UNAVAILABLE', 'MOD_EDITED'.</td>
+<td>Type of <a href="#get-mod-events-2">event</a> was 'MODFILE_CHANGED', 'MOD_AVAILABLE', 'MOD_UNAVAILABLE', 'MOD_EDITED', 'MOD_DELETED'.</td>
 </tr>
 <tr>
 <td>result_count</td>
