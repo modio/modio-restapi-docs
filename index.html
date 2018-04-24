@@ -9212,7 +9212,104 @@ Authorization: Bearer {access-token}
 </code></pre>
 <p><span class="httpmethod GET">GET</span> <span class="endpointheading">/me/games</span></p>
 
-<p>Get all games the <em>authenticated user</em> added or is a team member of. Successful request will return an array of <a href="#get-games-2">Game Objects</a>.</p>
+<p>Get all games the <em>authenticated user</em> added or is a team member of. Successful request will return an array of <a href="#get-games-2">Game Objects</a>. We recommended reading the <a href="#filtering">filtering documentation</a> to return only the records you want.</p>
+
+<table>
+<thead>
+<tr>
+<th>Filter</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>id</td>
+<td>integer</td>
+<td>Unique id of the game.</td>
+</tr>
+<tr>
+<td>status</td>
+<td>integer</td>
+<td>Status of the game (only admins can filter by this field, see <a href="#status-amp-visibility">status and visibility</a> for details):<br><br><strong>0</strong> = Not accepted<br><strong>1</strong> = Accepted <em>(default with archived)</em><br><strong>2</strong> = Archived<br><strong>3</strong> = Deleted</td>
+</tr>
+<tr>
+<td>submitted_by</td>
+<td>integer</td>
+<td>Unique id of the user who has ownership of the game.</td>
+</tr>
+<tr>
+<td>date_added</td>
+<td>integer</td>
+<td>Unix timestamp of date game was registered.</td>
+</tr>
+<tr>
+<td>date_updated</td>
+<td>integer</td>
+<td>Unix timestamp of date game was updated.</td>
+</tr>
+<tr>
+<td>date_live</td>
+<td>integer</td>
+<td>Unix timestamp of date game was set live.</td>
+</tr>
+<tr>
+<td>name</td>
+<td>string</td>
+<td>Name of the game.</td>
+</tr>
+<tr>
+<td>name_id</td>
+<td>string</td>
+<td>Subdomain for the game on mod.io.</td>
+</tr>
+<tr>
+<td>summary</td>
+<td>string</td>
+<td>Summary of the game.</td>
+</tr>
+<tr>
+<td>instructions_url</td>
+<td>string</td>
+<td>Link to a mod.io guide, modding wiki or a page where modders can learn how to make and submit mods.</td>
+</tr>
+<tr>
+<td>ugc_name</td>
+<td>string</td>
+<td>Word used to describe user-generated content (mods, items, addons etc).</td>
+</tr>
+<tr>
+<td>presentation_option</td>
+<td>integer</td>
+<td>Presentation style used on the mod.io website:<br><br><strong>0</strong> =  Grid View: Displays mods in a grid<br><strong>1</strong> = Table View: Displays mods in a table</td>
+</tr>
+<tr>
+<td>submission_option</td>
+<td>integer</td>
+<td>Submission process modders must follow:<br><br><strong>0</strong> = Mod uploads must occur via a tool created by the game developers<br><strong>1</strong> = Mod uploads can occur from anywhere, including the website and API</td>
+</tr>
+<tr>
+<td>curation_option</td>
+<td>integer</td>
+<td>Curation process used to approve mods:<br><br><strong>0</strong> = No curation: Mods are immediately available to play<br><strong>1</strong> = Paid curation: Mods are immediately available to play unless they choose to receive donations. These mods must be accepted to be listed<br><strong>2</strong> = Full curation: All mods must be accepted by someone to be listed</td>
+</tr>
+<tr>
+<td>community_options</td>
+<td>integer</td>
+<td>Community features enabled on the mod.io website:<br><br><strong>0</strong> = All of the options below are disabled<br><strong>1</strong> = Discussion board enabled<br><strong>2</strong> = Guides and news enabled<br><strong>?</strong> = Combine to find games with multiple options enabled (see <a href="#bitwise-and-bitwise-and">BITWISE fields</a>)</td>
+</tr>
+<tr>
+<td>revenue_options</td>
+<td>integer</td>
+<td>Revenue capabilities mods can enable:<br><br><strong>0</strong> = All of the options below are disabled<br><strong>1</strong> = Allow mods to be sold<br><strong>2</strong> = Allow mods to receive donations<br><strong>4</strong> = Allow mods to be traded<br><strong>8</strong> = Allow mods to control supply and scarcity<br><strong>?</strong> = Combine to find games with multiple options enabled (see <a href="#bitwise-and-bitwise-and">BITWISE fields</a>)</td>
+</tr>
+<tr>
+<td>api_access_options</td>
+<td>integer</td>
+<td>Level of API access allowed by this game:<br><br><strong>0</strong> = All of the options below are disabled<br><strong>1</strong> = Allow 3rd parties to access this games API endpoints<br><strong>2</strong> = Allow mods to be downloaded directly (if disabled all download URLs will contain a frequently changing verification hash to stop unauthorized use)<br><strong>?</strong> = Combine to find games with multiple options enabled (see <a href="#bitwise-and-bitwise-and">BITWISE fields</a>)</td>
+</tr>
+</tbody>
+</table>
 
 <blockquote>
 <p>Example response</p>
@@ -9393,7 +9490,125 @@ Authorization: Bearer {access-token}
 </code></pre>
 <p><span class="httpmethod GET">GET</span> <span class="endpointheading">/me/mods</span></p>
 
-<p>Get all mods the <em>authenticated user</em> added or is a team member of. Successful request will return an array of <a href="#get-all-mods-2">Mod Objects</a>.</p>
+<p>Get all mods the <em>authenticated user</em> added or is a team member of. Successful request will return an array of <a href="#get-all-mods-2">Mod Objects</a>. We recommended reading the <a href="#filtering">filtering documentation</a> to return only the records you want.</p>
+
+<table>
+<thead>
+<tr>
+<th>Filter</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>id</td>
+<td>integer</td>
+<td>Unique id of the mod.</td>
+</tr>
+<tr>
+<td>game_id</td>
+<td>integer</td>
+<td>Unique id of the parent game.</td>
+</tr>
+<tr>
+<td>status</td>
+<td>integer</td>
+<td>Status of the mod (only game admins can filter by this field, see <a href="#status-amp-visibility">status and visibility</a> for details):<br><br><strong>0</strong> = Not accepted<br><strong>1</strong> = Accepted <em>(default with archived)</em><br><strong>2</strong> = Archived<br><strong>3</strong> = Deleted</td>
+</tr>
+<tr>
+<td>visible</td>
+<td>integer</td>
+<td>Visibility of the mod (only game admins can filter by this field, see <a href="#status-amp-visibility">status and visibility</a> for details):<br><br><strong>0</strong> = Hidden<br><strong>1</strong> = Public</td>
+</tr>
+<tr>
+<td>submitted_by</td>
+<td>integer</td>
+<td>Unique id of the user who has ownership of the mod.</td>
+</tr>
+<tr>
+<td>date_added</td>
+<td>integer</td>
+<td>Unix timestamp of date mod was registered.</td>
+</tr>
+<tr>
+<td>date_updated</td>
+<td>integer</td>
+<td>Unix timestamp of date mod was updated.</td>
+</tr>
+<tr>
+<td>date_live</td>
+<td>integer</td>
+<td>Unix timestamp of date mod was set live.</td>
+</tr>
+<tr>
+<td>name</td>
+<td>string</td>
+<td>Name of the mod.</td>
+</tr>
+<tr>
+<td>name_id</td>
+<td>string</td>
+<td>Path for the mod on mod.io. For example: https://gamename.mod.io/<strong>mod-name-id-here</strong>
+</td>
+</tr>
+<tr>
+<td>summary</td>
+<td>string</td>
+<td>Summary of the mod.</td>
+</tr>
+<tr>
+<td>description</td>
+<td>string</td>
+<td>Detailed description of the mod which allows HTML.</td>
+</tr>
+<tr>
+<td>homepage_url</td>
+<td>string</td>
+<td>Official homepage of the mod.</td>
+</tr>
+<tr>
+<td>modfile</td>
+<td>integer</td>
+<td>Unique id of the file that is the current active release.</td>
+</tr>
+<tr>
+<td>metadata_blob</td>
+<td>string</td>
+<td>Metadata stored by the game developer.</td>
+</tr>
+<tr>
+<td>metadata_kvp</td>
+<td>string</td>
+<td>Colon-separated values representing the key-value pairs you want to filter the results by. If you supply more than one key-pair, separate the pairs by a comma. Will only filter by an exact key-pair match.</td>
+</tr>
+<tr>
+<td>tags</td>
+<td>string</td>
+<td>Comma-separated values representing the tags you want to filter the results by. Only tags that are supported by the parent game can be applied. To determine what tags are eligible, see the tags values within <code>tag_options</code> column on the parent <a href="#game-object">Game Object</a>.</td>
+</tr>
+<tr>
+<td>downloads</td>
+<td>string</td>
+<td>Sort results by most downloads using <a href="#filtering">_sort filter</a> parameter, value should be <code>downloads</code> for descending or <code>-downloads</code> for ascending results.</td>
+</tr>
+<tr>
+<td>popular</td>
+<td>string</td>
+<td>Sort results by popularity using <a href="#filtering">_sort filter</a>, value should be <code>popular</code> for descending or <code>-popular</code> for ascending results.</td>
+</tr>
+<tr>
+<td>rating</td>
+<td>string</td>
+<td>Sort results by weighted rating using <a href="#filtering">_sort filter</a>, value should be <code>rating</code> for descending or <code>-rating</code> for ascending results.</td>
+</tr>
+<tr>
+<td>subscribers</td>
+<td>string</td>
+<td>Sort results by most subscribers using <a href="#filtering">_sort filter</a>, value should be <code>subscribers</code> for descending or <code>-subscribers</code> for ascending results.</td>
+</tr>
+</tbody>
+</table>
 
 <blockquote>
 <p>Example response</p>
@@ -9605,7 +9820,79 @@ Authorization: Bearer {access-token}
 </code></pre>
 <p><span class="httpmethod GET">GET</span> <span class="endpointheading">/me/files</span></p>
 
-<p>Get all modfiles the <em>authenticated user</em> uploaded. Successful request will return an array of <a href="#get-all-modfiles-2">Modfile Objects</a>.</p>
+<p>Get all modfiles the <em>authenticated user</em> uploaded. Successful request will return an array of <a href="#get-all-modfiles-2">Modfile Objects</a>. We recommended reading the <a href="#filtering">filtering documentation</a> to return only the records you want.<br><br><strong>NOTE:</strong> If the <a href="#edit-game">game</a> requires mod downloads to be initiated via the API, the <code>binary_url</code> returned will contain a verification hash. This hash must be supplied to get the modfile, and will expire after a certain period of time. Saving and reusing the <code>binary_url</code> won't work in this situation given it's dynamic nature.</p>
+
+<table>
+<thead>
+<tr>
+<th>Filter</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>id</td>
+<td>integer</td>
+<td>Unique id of the file.</td>
+</tr>
+<tr>
+<td>mod_id</td>
+<td>integer</td>
+<td>Unique id of the mod.</td>
+</tr>
+<tr>
+<td>date_added</td>
+<td>integer</td>
+<td>Unix timestamp of date file was added.</td>
+</tr>
+<tr>
+<td>date_scanned</td>
+<td>integer</td>
+<td>Unix timestamp of date file was virus scanned.</td>
+</tr>
+<tr>
+<td>virus_status</td>
+<td>integer</td>
+<td>Current virus scan status of the file. For newly added files that have yet to be scanned this field will change frequently until a scan is complete:<br><br><strong>0</strong> = Not scanned<br><strong>1</strong> = Scan complete<br><strong>2</strong> = In progress<br><strong>3</strong> = Too large to scan<br><strong>4</strong> = File not found<br><strong>5</strong> = Error Scanning</td>
+</tr>
+<tr>
+<td>virus_positive</td>
+<td>integer</td>
+<td>Was a virus detected:<br><br><strong>0</strong> = No threats detected<br><strong>1</strong> = Flagged as malicious</td>
+</tr>
+<tr>
+<td>filesize</td>
+<td>integer</td>
+<td>Size of the file in bytes.</td>
+</tr>
+<tr>
+<td>filehash</td>
+<td>string</td>
+<td>MD5 hash of the file.</td>
+</tr>
+<tr>
+<td>filename</td>
+<td>string</td>
+<td>Filename including extension.</td>
+</tr>
+<tr>
+<td>version</td>
+<td>string</td>
+<td>Release version this file represents.</td>
+</tr>
+<tr>
+<td>changelog</td>
+<td>string</td>
+<td>Changelog for the file.</td>
+</tr>
+<tr>
+<td>metadata_blob</td>
+<td>string</td>
+<td>Metadata stored by the game developer for this file.</td>
+</tr>
+</tbody>
+</table>
 
 <blockquote>
 <p>Example response</p>
