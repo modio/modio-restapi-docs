@@ -2992,7 +2992,7 @@ Upload new media to a game. Any request you make to this endpoint *should* conta
 
 ```json
 {
-  "code": "200",
+  "code": 200,
   "message": "You have successfully added new media to the specified game profile."
 }
 ```
@@ -3118,7 +3118,7 @@ System.out.println(response.toString());
 ```
 `POST /games/{game-id}/mods/{mod-id}/media`
 
-This endpoint is very flexible and will add any images posted to the mods gallery regardless of their body name providing they are a valid image. The request `Content-Type` header __must__ be `multipart/form-data` to submit image files. Successful request will return [Message Object](#message-object).
+This endpoint is very flexible and will add any images posted to the mods gallery regardless of their body name providing they are a valid image. The request `Content-Type` header __must__ be `multipart/form-data` to submit image files. Successful request will return a [Message Object](#message-object).
 
      __NOTE:__ You can also add media to [your mods profile](https://mod.io/mods) on the mod.io website. This is the easiest way.
 
@@ -3134,7 +3134,7 @@ This endpoint is very flexible and will add any images posted to the mods galler
 
 ```json
 {
-  "code": "201",
+  "code": 201,
   "message": "You have successfully added new media to the specified mod."
 }
 ```
@@ -3716,7 +3716,7 @@ Get the event log for a mod, showing changes made sorted by latest event first. 
      mod_id|integer|Unique id of the parent mod.
      user_id|integer|Unique id of the user who performed the action.
      date_added|integer|Unix timestamp of date mod was updated.
-     event_type|string|Type of change that occurred:<br><br>__MODFILE_CHANGED__ = Primary file changed, the mod should be updated<br>__MOD_AVAILABLE__ = Mod is marked as accepted and public<br>__MOD_UNAVAILABLE__ = Mod is marked as not accepted, deleted or hidden<br>__MOD_EDITED__ = The mod was updated (triggered when any column value changes)<br>__MOD_DELETED__ = The mod has been permanently erased. This is an orphan record, looking up this id will return no data
+     event_type|string|Type of change that occurred:<br><br>__MODFILE_CHANGED__ = Primary file changed, the mod should be updated<br>__MOD_AVAILABLE__ = Mod is marked as accepted and public<br>__MOD_UNAVAILABLE__ = Mod is marked as not accepted, deleted or hidden<br>__MOD_EDITED__ = The mod was updated (triggered when any column value changes)<br>__MOD_DELETED__ = The mod has been permanently erased. This is an orphan record, looking up this id will return no data<br>__MOD_TEAM_CHANGED__ = A user has joined or left the mod team.
 
 
 > Example response
@@ -3847,7 +3847,7 @@ Get all mods events for the corresponding game sorted by latest event first. Suc
      mod_id|integer|Unique id of the parent mod.
      user_id|integer|Unique id of the user who performed the action.
      date_added|integer|Unix timestamp of date mod was added.
-     event_type|string|Type of change that occurred:<br><br>__MODFILE_CHANGED__ = Primary file changed<br>__MOD_AVAILABLE__ = Mod is marked as accepted and public<br>__MOD_UNAVAILABLE__ = Mod is marked as not accepted, deleted or hidden<br>__MOD_EDITED__ = The mod was updated (triggered when any column value changes)<br>__MOD_DELETED__ = The mod has been permanently erased. This is an orphan record, looking up this id will return no data
+     event_type|string|Type of change that occurred:<br><br>__MODFILE_CHANGED__ = Primary file changed<br>__MOD_AVAILABLE__ = Mod is marked as accepted and public<br>__MOD_UNAVAILABLE__ = Mod is marked as not accepted, deleted or hidden<br>__MOD_EDITED__ = The mod was updated (triggered when any column value changes)<br>__MOD_DELETED__ = The mod has been permanently erased. This is an orphan record, looking up this id will return no data<br>__MOD_TEAM_CHANGED__ = A user has joined or left the mod team
      latest|boolean|_Default value is true_. Returns only the latest unique events, which is useful for checking if the primary `modfile` has changed.
      subscribed|boolean|_Default value is false_. Returns only events connected to mods the __authenticated user__ is subscribed to, which is useful for keeping the users mods up-to-date.
 
@@ -4123,7 +4123,7 @@ Add tags to a mod's profile. You can only add tags allowed by the parent game, w
 
 ```json
 {
-  "code": "201",
+  "code": 201,
   "message": "You have successfully added tags to the specified mod."
 }
 ```
@@ -4511,7 +4511,7 @@ Add tags which mods can apply to their profiles. Successful request will return 
 
 ```json
 {
-  "code": "201",
+  "code": 201,
   "message": "You have successfully added categories/tags to the specified game."
 }
 ```
@@ -4771,7 +4771,7 @@ Submit a positive or negative rating for a mod. Each user can supply only one ra
 
 ```json
 {
-  "code": "201",
+  "code": 201,
   "message": "You have successfully submitted a rating for the specified mod."
 }
 ```
@@ -5020,7 +5020,7 @@ Add metadata for this mod as searchable key value pairs. Metadata is useful to d
 
 ```json
 {
-  "code": "201",
+  "code": 201,
   "message": "You have successfully added new key-value metadata to the specified mod."
 }
 ```
@@ -5397,7 +5397,7 @@ Add mod dependencies required by the corresponding mod. A dependency is a mod th
 
 ```json
 {
-  "code": "201",
+  "code": 201,
   "message": "You have successfully added new dependencies to the specified mod."
 }
 ```
@@ -5789,7 +5789,7 @@ System.out.println(response.toString());
 ```
 `POST /games/{game-id}/mods/{mod-id}/team`
 
-Add a user to a mod team. Successful request will return [Message Object](#message-object).
+Add a user to a mod team. Successful request will return [Message Object](#message-object) and fire a [__MOD_TEAM_CHANGED__ event](#get-all-mod-events).
 
      __NOTE:__ You can also add users to [your mods team](https://mod.io/mods) on the mod.io website. This is the recommended way.
 
@@ -5804,7 +5804,7 @@ Add a user to a mod team. Successful request will return [Message Object](#messa
 
 ```json
 {
-  "code": "201",
+  "code": 201,
   "message": "You have successfully added a member to the specified team."
 }
 ```
@@ -5918,7 +5918,7 @@ System.out.println(response.toString());
 ```
 `PUT /games/{game-id}/mods/{mod-id}/team/{team-member-id}`
 
-Update a mod team members details. Successful request will return [Message Object](#message-object).
+Update a mod team members details. Successful request will return a [Message Object](#message-object).
 
      __NOTE:__ You can also update [your mods team](https://mod.io/mods) users on the mod.io website. This is the recommended way.
 
@@ -5932,7 +5932,7 @@ Update a mod team members details. Successful request will return [Message Objec
 
 ```json
 {
-  "code": "201",
+  "code": 201,
   "message": "You have successfully updated the specified team members details."
 }
 ```
@@ -6046,7 +6046,7 @@ System.out.println(response.toString());
 ```
 `DELETE /games/{game-id}/mods/{mod-id}/team/{team-member-id}`
 
-Delete a user from a mod team. This will revoke their access rights if they are not the original creator of the resource. Successful request will return `204 No Content`.
+Delete a user from a mod team. This will revoke their access rights if they are not the original creator of the resource. Successful request will return `204 No Content` and fire a [__MOD_TEAM_CHANGED__ event](#get-all-mod-events).
 
 
 > Example response
@@ -6865,7 +6865,7 @@ Submit a report for any resource on mod.io. Successful request will return [Mess
 
 ```json
 {
-  "code": "201",
+  "code": 201,
   "message": "You have successfully submitted a report and it will be reviewed by the mod.io team as soon as possible."
 }
 ```
@@ -8865,7 +8865,7 @@ user|[User Object   ](#schemauser_object)|Contains user data.
 » timezone|string|Timezone of the user, format is country/city.
 » language|string|Users language preference. See [localization](#localization) for the supported languages.
 » profile_url|string|URL to the user's mod.io profile.
-level|integer|Level of permission the user has:<br><br>__1__ = Member<br>__4__ = Manager<br>__8__ = Leader
+level|integer|Level of permission the user has:<br><br>__1__ = Moderator (can moderate content submitted)<br>__4__ = Statistics (moderator access, including read only access to view reports)<br>__8__ = Administrator (full access, including editing the profile and team)
 date_added|integer|Unix timestamp of the date the user was added to the team.
 position|string|Custom title given to the user in this team.
 
@@ -9651,7 +9651,7 @@ data|[Team Member Object  ](#schemateam_member_object)[]|Array containing team m
 »» timezone|string|Timezone of the user, format is country/city.
 »» language|string|Users language preference. See [localization](#localization) for the supported languages.
 »» profile_url|string|URL to the user's mod.io profile.
-» level|integer|Level of permission the user has:<br><br>__1__ = Member<br>__4__ = Manager<br>__8__ = Leader
+» level|integer|Level of permission the user has:<br><br>__1__ = Moderator (can moderate content submitted)<br>__4__ = Statistics (moderator access, including read only access to view reports)<br>__8__ = Administrator (full access, including editing the profile and team)
 » date_added|integer|Unix timestamp of the date the user was added to the team.
 » position|string|Custom title given to the user in this team.
 result_count|integer|Number of results returned in the data array.
