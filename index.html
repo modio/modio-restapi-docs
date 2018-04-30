@@ -547,7 +547,7 @@
                     <a href="#icon-object" class="toc-h2 toc-link" data-title="Response Schemas">Icon Object</a>
                   </li>
                   <li>
-                    <a href="#header-object" class="toc-h2 toc-link" data-title="Response Schemas">Header Object</a>
+                    <a href="#header-image-object" class="toc-h2 toc-link" data-title="Response Schemas">Header Image Object</a>
                   </li>
                   <li>
                     <a href="#avatar-object" class="toc-h2 toc-link" data-title="Response Schemas">Avatar Object</a>
@@ -4254,7 +4254,7 @@ curl -X POST https://api.mod.io/v1/games/<span class="o">{</span>game-id<span cl
 <p>Example response</p>
 </blockquote>
 <pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
-  </span><span class="s2">"code"</span><span class="p">:</span><span class="w"> </span><span class="s2">"200"</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"code"</span><span class="p">:</span><span class="w"> </span><span class="mi">200</span><span class="p">,</span><span class="w">
   </span><span class="s2">"message"</span><span class="p">:</span><span class="w"> </span><span class="s2">"You have successfully added new media to the specified game profile."</span><span class="w">
 </span><span class="p">}</span><span class="w">
 </span></code></pre>
@@ -4377,7 +4377,7 @@ curl -X POST https://api.mod.io/v1/games/<span class="o">{</span>game-id<span cl
 </code></pre>
 <p><span class="httpmethod POST">POST</span> <span class="endpointheading">/games/{game-id}/mods/{mod-id}/media</span></p>
 
-<p>This endpoint is very flexible and will add any images posted to the mods gallery regardless of their body name providing they are a valid image. The request <code>Content-Type</code> header <strong>must</strong> be <code>multipart/form-data</code> to submit image files. Successful request will return <a href="#message-object">Message Object</a>.</p>
+<p>This endpoint is very flexible and will add any images posted to the mods gallery regardless of their body name providing they are a valid image. The request <code>Content-Type</code> header <strong>must</strong> be <code>multipart/form-data</code> to submit image files. Successful request will return a <a href="#message-object">Message Object</a>.</p>
 
 <p><strong>NOTE:</strong> You can also add media to <a href="https://mod.io/mods">your mods profile</a> on the mod.io website. This is the easiest way.</p>
 
@@ -4422,7 +4422,7 @@ curl -X POST https://api.mod.io/v1/games/<span class="o">{</span>game-id<span cl
 <p>Example response</p>
 </blockquote>
 <pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
-  </span><span class="s2">"code"</span><span class="p">:</span><span class="w"> </span><span class="s2">"201"</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"code"</span><span class="p">:</span><span class="w"> </span><span class="mi">201</span><span class="p">,</span><span class="w">
   </span><span class="s2">"message"</span><span class="p">:</span><span class="w"> </span><span class="s2">"You have successfully added new media to the specified mod."</span><span class="w">
 </span><span class="p">}</span><span class="w">
 </span></code></pre>
@@ -5051,7 +5051,7 @@ Accept: application/json
 <tr>
 <td>event_type</td>
 <td>string</td>
-<td>Type of change that occurred:<br><br><strong>MODFILE_CHANGED</strong> = Primary file changed, the mod should be updated<br><strong>MOD_AVAILABLE</strong> = Mod is marked as accepted and public<br><strong>MOD_UNAVAILABLE</strong> = Mod is marked as not accepted, deleted or hidden<br><strong>MOD_EDITED</strong> = The mod was updated (triggered when any column value changes)<br><strong>MOD_DELETED</strong> = The mod has been permanently erased. This is an orphan record, looking up this id will return no data</td>
+<td>Type of change that occurred:<br><br><strong>MODFILE_CHANGED</strong> = Primary file changed, the mod should be updated<br><strong>MOD_AVAILABLE</strong> = Mod is marked as accepted and public<br><strong>MOD_UNAVAILABLE</strong> = Mod is marked as not accepted, deleted or hidden<br><strong>MOD_EDITED</strong> = The mod was updated (triggered when any column value changes)<br><strong>MOD_DELETED</strong> = The mod has been permanently erased. This is an orphan record, looking up this id will return no data<br><strong>MOD_TEAM_CHANGED</strong> = A user has joined or left the mod team.</td>
 </tr>
 </tbody>
 </table>
@@ -5207,7 +5207,7 @@ Accept: application/json
 <tr>
 <td>event_type</td>
 <td>string</td>
-<td>Type of change that occurred:<br><br><strong>MODFILE_CHANGED</strong> = Primary file changed<br><strong>MOD_AVAILABLE</strong> = Mod is marked as accepted and public<br><strong>MOD_UNAVAILABLE</strong> = Mod is marked as not accepted, deleted or hidden<br><strong>MOD_EDITED</strong> = The mod was updated (triggered when any column value changes)<br><strong>MOD_DELETED</strong> = The mod has been permanently erased. This is an orphan record, looking up this id will return no data</td>
+<td>Type of change that occurred:<br><br><strong>MODFILE_CHANGED</strong> = Primary file changed<br><strong>MOD_AVAILABLE</strong> = Mod is marked as accepted and public<br><strong>MOD_UNAVAILABLE</strong> = Mod is marked as not accepted, deleted or hidden<br><strong>MOD_EDITED</strong> = The mod was updated (triggered when any column value changes)<br><strong>MOD_DELETED</strong> = The mod has been permanently erased. This is an orphan record, looking up this id will return no data<br><strong>MOD_TEAM_CHANGED</strong> = A user has joined or left the mod team</td>
 </tr>
 <tr>
 <td>latest</td>
@@ -5517,7 +5517,7 @@ curl -X POST https://api.mod.io/v1/games/<span class="o">{</span>game-id<span cl
 <p>Example response</p>
 </blockquote>
 <pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
-  </span><span class="s2">"code"</span><span class="p">:</span><span class="w"> </span><span class="s2">"201"</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"code"</span><span class="p">:</span><span class="w"> </span><span class="mi">201</span><span class="p">,</span><span class="w">
   </span><span class="s2">"message"</span><span class="p">:</span><span class="w"> </span><span class="s2">"You have successfully added tags to the specified mod."</span><span class="w">
 </span><span class="p">}</span><span class="w">
 </span></code></pre>
@@ -5938,7 +5938,7 @@ curl -X POST https://api.mod.io/v1/games/<span class="o">{</span>game-id<span cl
 <p>Example response</p>
 </blockquote>
 <pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
-  </span><span class="s2">"code"</span><span class="p">:</span><span class="w"> </span><span class="s2">"201"</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"code"</span><span class="p">:</span><span class="w"> </span><span class="mi">201</span><span class="p">,</span><span class="w">
   </span><span class="s2">"message"</span><span class="p">:</span><span class="w"> </span><span class="s2">"You have successfully added categories/tags to the specified game."</span><span class="w">
 </span><span class="p">}</span><span class="w">
 </span></code></pre>
@@ -6223,7 +6223,7 @@ curl -X POST https://api.mod.io/v1/games/<span class="o">{</span>game-id<span cl
 <p>Example response</p>
 </blockquote>
 <pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
-  </span><span class="s2">"code"</span><span class="p">:</span><span class="w"> </span><span class="s2">"201"</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"code"</span><span class="p">:</span><span class="w"> </span><span class="mi">201</span><span class="p">,</span><span class="w">
   </span><span class="s2">"message"</span><span class="p">:</span><span class="w"> </span><span class="s2">"You have successfully submitted a rating for the specified mod."</span><span class="w">
 </span><span class="p">}</span><span class="w">
 </span></code></pre>
@@ -6477,7 +6477,7 @@ curl -X POST https://api.mod.io/v1/games/<span class="o">{</span>game-id<span cl
 <p>Example response</p>
 </blockquote>
 <pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
-  </span><span class="s2">"code"</span><span class="p">:</span><span class="w"> </span><span class="s2">"201"</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"code"</span><span class="p">:</span><span class="w"> </span><span class="mi">201</span><span class="p">,</span><span class="w">
   </span><span class="s2">"message"</span><span class="p">:</span><span class="w"> </span><span class="s2">"You have successfully added new key-value metadata to the specified mod."</span><span class="w">
 </span><span class="p">}</span><span class="w">
 </span></code></pre>
@@ -6870,7 +6870,7 @@ curl -X POST https://api.mod.io/v1/games/<span class="o">{</span>game-id<span cl
 <p>Example response</p>
 </blockquote>
 <pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
-  </span><span class="s2">"code"</span><span class="p">:</span><span class="w"> </span><span class="s2">"201"</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"code"</span><span class="p">:</span><span class="w"> </span><span class="mi">201</span><span class="p">,</span><span class="w">
   </span><span class="s2">"message"</span><span class="p">:</span><span class="w"> </span><span class="s2">"You have successfully added new dependencies to the specified mod."</span><span class="w">
 </span><span class="p">}</span><span class="w">
 </span></code></pre>
@@ -7304,7 +7304,7 @@ curl -X POST https://api.mod.io/v1/games/<span class="o">{</span>game-id<span cl
 </code></pre>
 <p><span class="httpmethod POST">POST</span> <span class="endpointheading">/games/{game-id}/mods/{mod-id}/team</span></p>
 
-<p>Add a user to a mod team. Successful request will return <a href="#message-object">Message Object</a>.</p>
+<p>Add a user to a mod team. Successful request will return <a href="#message-object">Message Object</a> and fire a <a href="#get-all-mod-events"><strong>MOD_TEAM_CHANGED</strong> event</a>.</p>
 
 <p><strong>NOTE:</strong> You can also add users to <a href="https://mod.io/mods">your mods team</a> on the mod.io website. This is the recommended way.</p>
 
@@ -7343,7 +7343,7 @@ curl -X POST https://api.mod.io/v1/games/<span class="o">{</span>game-id<span cl
 <p>Example response</p>
 </blockquote>
 <pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
-  </span><span class="s2">"code"</span><span class="p">:</span><span class="w"> </span><span class="s2">"201"</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"code"</span><span class="p">:</span><span class="w"> </span><span class="mi">201</span><span class="p">,</span><span class="w">
   </span><span class="s2">"message"</span><span class="p">:</span><span class="w"> </span><span class="s2">"You have successfully added a member to the specified team."</span><span class="w">
 </span><span class="p">}</span><span class="w">
 </span></code></pre>
@@ -7454,7 +7454,7 @@ Content-Type: application/x-www-form-urlencoded
 </code></pre>
 <p><span class="httpmethod PUT">PUT</span> <span class="endpointheading">/games/{game-id}/mods/{mod-id}/team/{team-member-id}</span></p>
 
-<p>Update a mod team members details. Successful request will return <a href="#message-object">Message Object</a>.</p>
+<p>Update a mod team members details. Successful request will return a <a href="#message-object">Message Object</a>.</p>
 
 <p><strong>NOTE:</strong> You can also update <a href="https://mod.io/mods">your mods team</a> users on the mod.io website. This is the recommended way.</p>
 
@@ -7487,7 +7487,7 @@ Content-Type: application/x-www-form-urlencoded
 <p>Example response</p>
 </blockquote>
 <pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
-  </span><span class="s2">"code"</span><span class="p">:</span><span class="w"> </span><span class="s2">"201"</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"code"</span><span class="p">:</span><span class="w"> </span><span class="mi">201</span><span class="p">,</span><span class="w">
   </span><span class="s2">"message"</span><span class="p">:</span><span class="w"> </span><span class="s2">"You have successfully updated the specified team members details."</span><span class="w">
 </span><span class="p">}</span><span class="w">
 </span></code></pre>
@@ -7598,7 +7598,7 @@ Content-Type: application/x-www-form-urlencoded
 </code></pre>
 <p><span class="httpmethod DELETE">DELETE</span> <span class="endpointheading">/games/{game-id}/mods/{mod-id}/team/{team-member-id}</span></p>
 
-<p>Delete a user from a mod team. This will revoke their access rights if they are not the original creator of the resource. Successful request will return <code>204 No Content</code>.</p>
+<p>Delete a user from a mod team. This will revoke their access rights if they are not the original creator of the resource. Successful request will return <code>204 No Content</code> and fire a <a href="#get-all-mod-events"><strong>MOD_TEAM_CHANGED</strong> event</a>.</p>
 
 <blockquote>
 <p>Example response</p>
@@ -8517,7 +8517,7 @@ curl -X POST https://api.mod.io/v1/report <span class="se">\</span>
 <p>Example response</p>
 </blockquote>
 <pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
-  </span><span class="s2">"code"</span><span class="p">:</span><span class="w"> </span><span class="s2">"201"</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"code"</span><span class="p">:</span><span class="w"> </span><span class="mi">201</span><span class="p">,</span><span class="w">
   </span><span class="s2">"message"</span><span class="p">:</span><span class="w"> </span><span class="s2">"You have successfully submitted a report and it will be reviewed by the mod.io team as soon as possible."</span><span class="w">
 </span><span class="p">}</span><span class="w">
 </span></code></pre>
@@ -10117,8 +10117,8 @@ oauth2 ( Scopes: read )
 </tr>
 </tbody>
 </table>
-<h2 id="header-object">Header Object</h2>
-<p><a name="schemaheader_object"></a></p>
+<h2 id="header-image-object">Header Image Object</h2>
+<p><a name="schemaheader_image_object"></a></p>
 <pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
   </span><span class="s2">"filename"</span><span class="p">:</span><span class="w"> </span><span class="s2">"demo.png"</span><span class="p">,</span><span class="w">
   </span><span class="s2">"original"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://static.mod.io/v1/images/branding/modio-dark.png"</span><span class="w">
@@ -11466,7 +11466,7 @@ oauth2 ( Scopes: read )
 </tr>
 <tr>
 <td>header</td>
-<td><a href="#schemaheader_object">Header Object   </a></td>
+<td><a href="#schemaheader_image_object">Header Image Object  </a></td>
 <td>Contains header data.</td>
 </tr>
 <tr>
@@ -11723,7 +11723,7 @@ oauth2 ( Scopes: read )
 <tr>
 <td>level</td>
 <td>integer</td>
-<td>Level of permission the user has:<br><br><strong>1</strong> = Member<br><strong>4</strong> = Manager<br><strong>8</strong> = Leader</td>
+<td>Level of permission the user has:<br><br><strong>1</strong> = Moderator (can moderate content submitted)<br><strong>4</strong> = Statistics (moderator access, including read only access to view reports)<br><strong>8</strong> = Administrator (full access, including editing the profile and team)</td>
 </tr>
 <tr>
 <td>date_added</td>
@@ -12489,7 +12489,7 @@ oauth2 ( Scopes: read )
 </tr>
 <tr>
 <td>» header</td>
-<td><a href="#schemaheader_object">Header Object   </a></td>
+<td><a href="#schemaheader_image_object">Header Image Object  </a></td>
 <td>Contains header data.</td>
 </tr>
 <tr>
@@ -13463,7 +13463,7 @@ oauth2 ( Scopes: read )
 <tr>
 <td>» level</td>
 <td>integer</td>
-<td>Level of permission the user has:<br><br><strong>1</strong> = Member<br><strong>4</strong> = Manager<br><strong>8</strong> = Leader</td>
+<td>Level of permission the user has:<br><br><strong>1</strong> = Moderator (can moderate content submitted)<br><strong>4</strong> = Statistics (moderator access, including read only access to view reports)<br><strong>8</strong> = Administrator (full access, including editing the profile and team)</td>
 </tr>
 <tr>
 <td>» date_added</td>
