@@ -4263,7 +4263,7 @@ oauth2 ( Scopes: write )
 </aside>
 
 
-## Get All Game Tag Options
+## Get Game Tag Options
 
 > Example request
 
@@ -4375,11 +4375,11 @@ Get all tags for the corresponding game, that can be applied to any of its mods.
   "result_offset": 0
 }
 ```
-<h3 id="Get-All-Game-Tag-Options-responses">Responses</h3>
+<h3 id="Get-Game-Tag-Options-responses">Responses</h3>
 
 Status|Meaning|Description|Response Schema
 ---|---|---|---|
-200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)|Successful Request|[Get All Game Tag Options](#schemaget_all_game_tag_options)
+200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)|Successful Request|[Get Game Tag Options ](#schemaget_game_tag_options)
 
 <aside class="warning">
 To perform this operation, you must be authenticated by means of one of the following methods:
@@ -9551,9 +9551,9 @@ result_offset|integer|Number of results skipped over.
 
 
 
-## Get All Game Tag Options
+## Get Game Tag Options 
 
-<a name="schemaget_all_game_tag_options"></a>
+<a name="schemaget_game_tag_options"></a>
 
 ```json
 {
