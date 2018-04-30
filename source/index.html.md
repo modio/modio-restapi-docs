@@ -8086,9 +8086,9 @@ thumb_256x256|string|URL to the large icon thumbnail.
 
 
 
-## Header Object
+## Header Image Object  
 
-   <a name="schemaheader_object"></a>
+<a name="schemaheader_image_object"></a>
 
 ```json
 {
@@ -8748,7 +8748,7 @@ logo|[Logo Object   ](#schemalogo_object)|Contains logo data.
 » thumb_320x180|string|URL to the small logo thumbnail.
 » thumb_640x360|string|URL to the medium logo thumbnail.
 » thumb_1280x720|string|URL to the large logo thumbnail.
-header|[Header Object   ](#schemaheader_object)|Contains header data.
+header|[Header Image Object  ](#schemaheader_image_object)|Contains header data.
 » filename|string|Header image filename including extension.
 » original|string|URL to the full-sized header image.
 name|string|Name of the game.
@@ -9221,7 +9221,7 @@ data|[Game Object   ](#schemagame_object)[]|Array containing game objects.
 »» thumb_320x180|string|URL to the small logo thumbnail.
 »» thumb_640x360|string|URL to the medium logo thumbnail.
 »» thumb_1280x720|string|URL to the large logo thumbnail.
-» header|[Header Object   ](#schemaheader_object)|Contains header data.
+» header|[Header Image Object  ](#schemaheader_image_object)|Contains header data.
 »» filename|string|Header image filename including extension.
 »» original|string|URL to the full-sized header image.
 » name|string|Name of the game.
