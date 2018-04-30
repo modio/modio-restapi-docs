@@ -412,7 +412,7 @@
                     <a href="#delete-mod-tag" class="toc-h2 toc-link" data-title="Tags">Delete Mod Tag</a>
                   </li>
                   <li>
-                    <a href="#get-all-game-tag-options" class="toc-h2 toc-link" data-title="Tags">Get All Game Tag Options</a>
+                    <a href="#get-game-tag-options" class="toc-h2 toc-link" data-title="Tags">Get Game Tag Options</a>
                   </li>
                   <li>
                     <a href="#add-game-tag-option" class="toc-h2 toc-link" data-title="Tags">Add Game Tag Option</a>
@@ -625,7 +625,7 @@
                     <a href="#get-mod-tags-2" class="toc-h2 toc-link" data-title="Response Schemas">Get Mod Tags</a>
                   </li>
                   <li>
-                    <a href="#get-all-game-tag-options-2" class="toc-h2 toc-link" data-title="Response Schemas">Get All Game Tag Options</a>
+                    <a href="#get-game-tag-options-2" class="toc-h2 toc-link" data-title="Response Schemas">Get Game Tag Options</a>
                   </li>
                   <li>
                     <a href="#get-all-team-members" class="toc-h2 toc-link" data-title="Response Schemas">Get All Team Members</a>
@@ -5681,7 +5681,7 @@ curl -X DELETE https://api.mod.io/v1/games/<span class="o">{</span>game-id<span 
 To perform this operation, you must be authenticated by means of one of the following methods:
 oauth2 ( Scopes: write )
 </aside>
-<h2 id="get-all-game-tag-options">Get All Game Tag Options</h2>
+<h2 id="get-game-tag-options">Get Game Tag Options</h2>
 <blockquote>
 <p>Example request</p>
 </blockquote>
@@ -5776,7 +5776,7 @@ Accept: application/json
   </span><span class="s2">"result_offset"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="w">
 </span><span class="p">}</span><span class="w">
 </span></code></pre>
-<h3 id="Get-All-Game-Tag-Options-responses">Responses</h3>
+<h3 id="Get-Game-Tag-Options-responses">Responses</h3>
 
 <table>
 <thead>
@@ -5792,7 +5792,7 @@ Accept: application/json
 <td>200</td>
 <td><a href="https://tools.ietf.org/html/rfc7231#section-6.3.1">OK</a></td>
 <td>Successful Request</td>
-<td><a href="#schemaget_all_game_tag_options">Get All Game Tag Options</a></td>
+<td><a href="#schemaget_game_tag_options">Get Game Tag Options </a></td>
 </tr>
 </tbody>
 </table>
@@ -13268,8 +13268,8 @@ oauth2 ( Scopes: read )
 </tr>
 </tbody>
 </table>
-<h2 id="get-all-game-tag-options-2">Get All Game Tag Options</h2>
-<p><a name="schemaget_all_game_tag_options"></a></p>
+<h2 id="get-game-tag-options-2">Get Game Tag Options</h2>
+<p><a name="schemaget_game_tag_options"></a></p>
 <pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
   </span><span class="s2">"data"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
     </span><span class="p">{</span><span class="w">
