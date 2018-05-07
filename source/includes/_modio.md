@@ -2,7 +2,7 @@
 
 ## --parse_sitename API --parse_version
 
-Welcome to the official documentation for [--parse_sitename](--parse_siteurl), an API which makes it a joy to search, sort and share mods in-game. We recommend you read our _Getting Started_ guide to accurately and efficiently consume our REST API. 
+Welcome to the official documentation for [--parse_sitename](--parse_siteurl), an API which makes it a joy to search, sort and share mods in-game. We recommend you read our _Getting Started_ guide below to accurately and efficiently consume our REST API. 
 
 __Current version:__ `--parse_version`
 
@@ -682,6 +682,10 @@ __Test site:__ [--parse_sitetesturl](--parse_sitetesturl)
 __Test API path:__ [--parse_apitesturl](--parse_apitesturl)
 
 __NOTE__: We periodically reset the test environment to default - with the exception of user accounts so please do not rely on it to store important information. Any data you intend on peristing should be submitted to the production environment.
+
+## Whitelabel
+
+If you are a large studio or publisher and require a private, in-house, custom solution that accelerates your time to market with a best-in-class product, reach out [--parse_email](mailto:--parse_email?subject=Whitelabel%20license) to discuss the licensing options available.
 
 ## Contact
 
