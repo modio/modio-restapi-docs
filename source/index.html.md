@@ -1450,6 +1450,12 @@ Get all mods for the corresponding game. Successful request will return an array
           "date_expires": 1579316848
         }
       },
+      "metadata_kvp": [
+        {
+          "metakey": "pistol-dmg",
+          "metavalue": "800"
+        }
+      ],
       "media": {
         "youtube": [
           "https://www.youtube.com/watch?v=dQw4w9WgXcQ"
@@ -1652,6 +1658,12 @@ Get a mod. Successful request will return a single [Mod Object](#mod-object).
       "date_expires": 1579316848
     }
   },
+  "metadata_kvp": [
+    {
+      "metakey": "pistol-dmg",
+      "metavalue": "800"
+    }
+  ],
   "media": {
     "youtube": [
       "https://www.youtube.com/watch?v=dQw4w9WgXcQ"
@@ -1876,6 +1888,12 @@ Add a mod. Successful request will return the newly created [Mod Object](#mod-ob
       "date_expires": 1579316848
     }
   },
+  "metadata_kvp": [
+    {
+      "metakey": "pistol-dmg",
+      "metavalue": "800"
+    }
+  ],
   "media": {
     "youtube": [
       "https://www.youtube.com/watch?v=dQw4w9WgXcQ"
@@ -2099,6 +2117,12 @@ Edit details for a mod. If you want to update the `logo` or media associated wit
       "date_expires": 1579316848
     }
   },
+  "metadata_kvp": [
+    {
+      "metakey": "pistol-dmg",
+      "metavalue": "800"
+    }
+  ],
   "media": {
     "youtube": [
       "https://www.youtube.com/watch?v=dQw4w9WgXcQ"
@@ -2968,7 +2992,7 @@ Upload new media to a game. Any request you make to this endpoint *should* conta
 
 ```json
 {
-  "code": "200",
+  "code": 200,
   "message": "You have successfully added new media to the specified game profile."
 }
 ```
@@ -3094,7 +3118,7 @@ System.out.println(response.toString());
 ```
 `POST /games/{game-id}/mods/{mod-id}/media`
 
-This endpoint is very flexible and will add any images posted to the mods gallery regardless of their body name providing they are a valid image. The request `Content-Type` header __must__ be `multipart/form-data` to submit image files. Successful request will return [Message Object](#message-object).
+This endpoint is very flexible and will add any images posted to the mods gallery regardless of their body name providing they are a valid image. The request `Content-Type` header __must__ be `multipart/form-data` to submit image files. Successful request will return a [Message Object](#message-object).
 
      __NOTE:__ You can also add media to [your mods profile](https://mod.io/mods) on the mod.io website. This is the easiest way.
 
@@ -3110,7 +3134,7 @@ This endpoint is very flexible and will add any images posted to the mods galler
 
 ```json
 {
-  "code": "201",
+  "code": 201,
   "message": "You have successfully added new media to the specified mod."
 }
 ```
@@ -3428,6 +3452,12 @@ Subscribe the _authenticated user_ to a corresponding mod. No body parameters ar
       "date_expires": 1579316848
     }
   },
+  "metadata_kvp": [
+    {
+      "metakey": "pistol-dmg",
+      "metavalue": "800"
+    }
+  ],
   "media": {
     "youtube": [
       "https://www.youtube.com/watch?v=dQw4w9WgXcQ"
@@ -3686,7 +3716,7 @@ Get the event log for a mod, showing changes made sorted by latest event first. 
      mod_id|integer|Unique id of the parent mod.
      user_id|integer|Unique id of the user who performed the action.
      date_added|integer|Unix timestamp of date mod was updated.
-     event_type|string|Type of change that occurred:<br><br>__MODFILE_CHANGED__ = Primary file changed, the mod should be updated<br>__MOD_AVAILABLE__ = Mod is marked as accepted and public<br>__MOD_UNAVAILABLE__ = Mod is marked as not accepted, deleted or hidden<br>__MOD_EDITED__ = The mod was updated (triggered when any column value changes)
+     event_type|string|Type of change that occurred:<br><br>__MODFILE_CHANGED__ = Primary file changed, the mod should be updated<br>__MOD_AVAILABLE__ = Mod is marked as accepted and public<br>__MOD_UNAVAILABLE__ = Mod is marked as not accepted, deleted or hidden<br>__MOD_EDITED__ = The mod was updated (triggered when any column value changes)<br>__MOD_DELETED__ = The mod has been permanently erased. This is an orphan record, looking up this id will return no data<br>__MOD_TEAM_CHANGED__ = A user has joined or left the mod team.
 
 
 > Example response
@@ -3817,7 +3847,7 @@ Get all mods events for the corresponding game sorted by latest event first. Suc
      mod_id|integer|Unique id of the parent mod.
      user_id|integer|Unique id of the user who performed the action.
      date_added|integer|Unix timestamp of date mod was added.
-     event_type|string|Type of change that occurred:<br><br>__MODFILE_CHANGED__ = Primary file changed<br>__MOD_AVAILABLE__ = Mod is marked as accepted and public<br>__MOD_UNAVAILABLE__ = Mod is marked as not accepted, deleted or hidden<br>__MOD_EDITED__ = The mod was updated (triggered when any column value changes)
+     event_type|string|Type of change that occurred:<br><br>__MODFILE_CHANGED__ = Primary file changed<br>__MOD_AVAILABLE__ = Mod is marked as accepted and public<br>__MOD_UNAVAILABLE__ = Mod is marked as not accepted, deleted or hidden<br>__MOD_EDITED__ = The mod was updated (triggered when any column value changes)<br>__MOD_DELETED__ = The mod has been permanently erased. This is an orphan record, looking up this id will return no data<br>__MOD_TEAM_CHANGED__ = A user has joined or left the mod team
      latest|boolean|_Default value is true_. Returns only the latest unique events, which is useful for checking if the primary `modfile` has changed.
      subscribed|boolean|_Default value is false_. Returns only events connected to mods the __authenticated user__ is subscribed to, which is useful for keeping the users mods up-to-date.
 
@@ -3857,7 +3887,7 @@ apiKey, oauth2 ( Scopes: read )
 
 # Tags
 
-## Get All Mod Tags
+## Get Mod Tags
 
 > Example request
 
@@ -3970,11 +4000,11 @@ Get all tags for the corresponding mod. Successful request will return an array 
   "result_offset": 0
 }
 ```
-<h3 id="Get-All-Mod-Tags-responses">Responses</h3>
+<h3 id="Get-Mod-Tags-responses">Responses</h3>
 
 Status|Meaning|Description|Response Schema
 ---|---|---|---|
-200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)|Successful Request|[Get All Mod Tags ](#schemaget_all_mod_tags)
+200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)|Successful Request|[Get Mod Tags  ](#schemaget_mod_tags)
 
 <aside class="warning">
 To perform this operation, you must be authenticated by means of one of the following methods:
@@ -4093,7 +4123,7 @@ Add tags to a mod's profile. You can only add tags allowed by the parent game, w
 
 ```json
 {
-  "code": "201",
+  "code": 201,
   "message": "You have successfully added tags to the specified mod."
 }
 ```
@@ -4233,7 +4263,7 @@ oauth2 ( Scopes: write )
 </aside>
 
 
-## Get All Game Tag Options
+## Get Game Tag Options
 
 > Example request
 
@@ -4345,11 +4375,11 @@ Get all tags for the corresponding game, that can be applied to any of its mods.
   "result_offset": 0
 }
 ```
-<h3 id="Get-All-Game-Tag-Options-responses">Responses</h3>
+<h3 id="Get-Game-Tag-Options-responses">Responses</h3>
 
 Status|Meaning|Description|Response Schema
 ---|---|---|---|
-200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)|Successful Request|[Get All Game Tag Options](#schemaget_all_game_tag_options)
+200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)|Successful Request|[Get Game Tag Options ](#schemaget_game_tag_options)
 
 <aside class="warning">
 To perform this operation, you must be authenticated by means of one of the following methods:
@@ -4481,7 +4511,7 @@ Add tags which mods can apply to their profiles. Successful request will return 
 
 ```json
 {
-  "code": "201",
+  "code": 201,
   "message": "You have successfully added categories/tags to the specified game."
 }
 ```
@@ -4741,7 +4771,7 @@ Submit a positive or negative rating for a mod. Each user can supply only one ra
 
 ```json
 {
-  "code": "201",
+  "code": 201,
   "message": "You have successfully submitted a rating for the specified mod."
 }
 ```
@@ -4990,7 +5020,7 @@ Add metadata for this mod as searchable key value pairs. Metadata is useful to d
 
 ```json
 {
-  "code": "201",
+  "code": 201,
   "message": "You have successfully added new key-value metadata to the specified mod."
 }
 ```
@@ -5219,9 +5249,9 @@ System.out.println(response.toString());
 ```
 `GET /games/{game-id}/mods/{mod-id}/dependencies`
 
-Get all dependencies the chosen mod has selected. This is useful if a mod requires other mods be installed for it to run. Successful request will return an array of [Mod Dependencies Objects](#mod-dependencies-object).
+Get all dependencies the chosen mod has selected. __IMPORTANT:__ Because of the complexity of supporting nested dependencies, we recommend you treat dependencies as a recommendation for your players, and do not process dependencies automatically when installing a mod unless absolutely required. Successful request will return an array of [Mod Dependencies Objects](#mod-dependencies-object).
 
-     __NOTE:__ Some developers might select _soft_ dependencies to promote or credit other mods. We advise against this but it is possible to do.
+     __NOTE:__ Some modders might select _soft_ dependencies to promote or credit other mods. We advise against this but it is possible to do, and is one of the reasons why we recommend against processing nested dependencies automatically.
 
 
 > Example response
@@ -5354,9 +5384,9 @@ System.out.println(response.toString());
 ```
 `POST /games/{game-id}/mods/{mod-id}/dependencies`
 
-Add mod dependencies required by the corresponding mod. A dependency is a mod that must be installed for this mod to run. Successful request will return [Message Object](#message-object).
+Add mod dependencies required by the corresponding mod. A dependency is a mod that should be installed for this mod to run. __IMPORTANT:__ Because of the complexity of supporting nested dependencies, we recommend you treat dependencies as a recommendation for your players, and do not process dependencies automatically when installing a mod unless absolutely required. Successful request will return [Message Object](#message-object).
 
-     __NOTE:__ Some developers might select _soft_ dependencies to promote or credit other mods. We advise against this but it is possible to do.
+     __NOTE:__ Some modders might select _soft_ dependencies to promote or credit other mods. We advise against this but it is possible to do, and is one of the reasons why we recommend against processing nested dependencies automatically.
 
      Parameter|Type|Required|Description
      ---|---|---|---|
@@ -5367,7 +5397,7 @@ Add mod dependencies required by the corresponding mod. A dependency is a mod th
 
 ```json
 {
-  "code": "201",
+  "code": 201,
   "message": "You have successfully added new dependencies to the specified mod."
 }
 ```
@@ -5759,7 +5789,7 @@ System.out.println(response.toString());
 ```
 `POST /games/{game-id}/mods/{mod-id}/team`
 
-Add a user to a mod team. Successful request will return [Message Object](#message-object).
+Add a user to a mod team. Successful request will return [Message Object](#message-object) and fire a [__MOD_TEAM_CHANGED__ event](#get-all-mod-events).
 
      __NOTE:__ You can also add users to [your mods team](https://mod.io/mods) on the mod.io website. This is the recommended way.
 
@@ -5774,7 +5804,7 @@ Add a user to a mod team. Successful request will return [Message Object](#messa
 
 ```json
 {
-  "code": "201",
+  "code": 201,
   "message": "You have successfully added a member to the specified team."
 }
 ```
@@ -5888,7 +5918,7 @@ System.out.println(response.toString());
 ```
 `PUT /games/{game-id}/mods/{mod-id}/team/{team-member-id}`
 
-Update a mod team members details. Successful request will return [Message Object](#message-object).
+Update a mod team members details. Successful request will return a [Message Object](#message-object).
 
      __NOTE:__ You can also update [your mods team](https://mod.io/mods) users on the mod.io website. This is the recommended way.
 
@@ -5902,7 +5932,7 @@ Update a mod team members details. Successful request will return [Message Objec
 
 ```json
 {
-  "code": "201",
+  "code": 201,
   "message": "You have successfully updated the specified team members details."
 }
 ```
@@ -6016,7 +6046,7 @@ System.out.println(response.toString());
 ```
 `DELETE /games/{game-id}/mods/{mod-id}/team/{team-member-id}`
 
-Delete a user from a mod team. This will revoke their access rights if they are not the original creator of the resource. Successful request will return `204 No Content`.
+Delete a user from a mod team. This will revoke their access rights if they are not the original creator of the resource. Successful request will return `204 No Content` and fire a [__MOD_TEAM_CHANGED__ event](#get-all-mod-events).
 
 
 > Example response
@@ -6134,9 +6164,9 @@ Get all comments posted in the mods profile. Successful request will return an a
      submitted_by|integer|Unique id of the user who posted the comment.
      date_added|integer|Unix timestamp of date comment was posted.
      reply_id|integer|Id of the parent comment this comment is replying to (can be 0 if the comment is not a reply).
-     reply_position|string|Levels of nesting in a comment thread. You should order by this field, to maintain comment grouping. How it works:<br><br>- The first comment will have the position '01'.<br>- The second comment will have the position '02'.<br>- If someone responds to the second comment the position will be '02.01'.<br>- A maximum of 3 levels is supported.
-     karma|integer|Karma received for the comment (can be postive or negative).
-     summary|string|Contents of the comment.
+     thread_position|string|Levels of nesting in a comment thread. You should order by this field, to maintain comment grouping. How it works:<br><br>- The first comment will have the position '01'.<br>- The second comment will have the position '02'.<br>- If someone responds to the second comment the position will be '02.01'.<br>- A maximum of 3 levels is supported.
+     karma|integer|Karma received for the comment (can be positive or negative).
+     content|string|Contents of the comment.
 
 
 > Example response
@@ -6164,7 +6194,7 @@ Get all comments posted in the mods profile. Successful request will return an a
       },
       "date_added": 1499841487,
       "reply_id": 1499,
-      "reply_position": "01",
+      "thread_position": "01",
       "karma": 1,
       "karma_guest": 0,
       "content": "This mod is kickass! Great work!"
@@ -6835,7 +6865,7 @@ Submit a report for any resource on mod.io. Successful request will return [Mess
 
 ```json
 {
-  "code": "201",
+  "code": 201,
   "message": "You have successfully submitted a report and it will be reviewed by the mod.io team as soon as possible."
 }
 ```
@@ -7159,6 +7189,12 @@ Get all mod's the _authenticated user_ is subscribed to. Successful request will
           "date_expires": 1579316848
         }
       },
+      "metadata_kvp": [
+        {
+          "metakey": "pistol-dmg",
+          "metavalue": "800"
+        }
+      ],
       "media": {
         "youtube": [
           "https://www.youtube.com/watch?v=dQw4w9WgXcQ"
@@ -7434,7 +7470,27 @@ System.out.println(response.toString());
 ```
 `GET /me/games`
 
-Get all games the _authenticated user_ added or is a team member of. Successful request will return an array of [Game Objects](#get-games-2).
+Get all games the _authenticated user_ added or is a team member of. Successful request will return an array of [Game Objects](#get-games-2). We recommended reading the [filtering documentation](#filtering) to return only the records you want.
+
+    Filter|Type|Description
+    ---|---|---
+    id|integer|Unique id of the game.
+    status|integer|Status of the game (only admins can filter by this field, see [status and visibility](#status-amp-visibility) for details):<br><br>__0__ = Not accepted<br>__1__ = Accepted _(default with archived)_<br>__2__ = Archived<br>__3__ = Deleted
+    submitted_by|integer|Unique id of the user who has ownership of the game.
+    date_added|integer|Unix timestamp of date game was registered.
+    date_updated|integer|Unix timestamp of date game was updated.
+    date_live|integer|Unix timestamp of date game was set live.
+    name|string|Name of the game.
+    name_id|string|Subdomain for the game on mod.io.
+    summary|string|Summary of the game.
+    instructions_url|string|Link to a mod.io guide, modding wiki or a page where modders can learn how to make and submit mods.
+    ugc_name|string|Word used to describe user-generated content (mods, items, addons etc).
+    presentation_option|integer|Presentation style used on the mod.io website:<br><br>__0__ =  Grid View: Displays mods in a grid<br>__1__ = Table View: Displays mods in a table
+    submission_option|integer|Submission process modders must follow:<br><br>__0__ = Mod uploads must occur via a tool created by the game developers<br>__1__ = Mod uploads can occur from anywhere, including the website and API
+    curation_option|integer|Curation process used to approve mods:<br><br>__0__ = No curation: Mods are immediately available to play<br>__1__ = Paid curation: Mods are immediately available to play unless they choose to receive donations. These mods must be accepted to be listed<br>__2__ = Full curation: All mods must be accepted by someone to be listed
+    community_options|integer|Community features enabled on the mod.io website:<br><br>__0__ = All of the options below are disabled<br>__1__ = Discussion board enabled<br>__2__ = Guides and news enabled<br>__?__ = Combine to find games with multiple options enabled (see [BITWISE fields](#bitwise-and-bitwise-and))
+    revenue_options|integer|Revenue capabilities mods can enable:<br><br>__0__ = All of the options below are disabled<br>__1__ = Allow mods to be sold<br>__2__ = Allow mods to receive donations<br>__4__ = Allow mods to be traded<br>__8__ = Allow mods to control supply and scarcity<br>__?__ = Combine to find games with multiple options enabled (see [BITWISE fields](#bitwise-and-bitwise-and))
+    api_access_options|integer|Level of API access allowed by this game:<br><br>__0__ = All of the options below are disabled<br>__1__ = Allow 3rd parties to access this games API endpoints<br>__2__ = Allow mods to be downloaded directly (if disabled all download URLs will contain a frequently changing verification hash to stop unauthorized use)<br>__?__ = Combine to find games with multiple options enabled (see [BITWISE fields](#bitwise-and-bitwise-and))
 
 
 > Example response
@@ -7619,7 +7675,31 @@ System.out.println(response.toString());
 ```
 `GET /me/mods`
 
-Get all mods the _authenticated user_ added or is a team member of. Successful request will return an array of [Mod Objects](#get-all-mods-2).
+Get all mods the _authenticated user_ added or is a team member of. Successful request will return an array of [Mod Objects](#get-all-mods-2). We recommended reading the [filtering documentation](#filtering) to return only the records you want.
+
+    Filter|Type|Description
+    ---|---|---
+    id|integer|Unique id of the mod.
+    game_id|integer|Unique id of the parent game.
+    status|integer|Status of the mod (only game admins can filter by this field, see [status and visibility](#status-amp-visibility) for details):<br><br>__0__ = Not accepted<br>__1__ = Accepted _(default with archived)_<br>__2__ = Archived<br>__3__ = Deleted
+    visible|integer|Visibility of the mod (only game admins can filter by this field, see [status and visibility](#status-amp-visibility) for details):<br><br>__0__ = Hidden<br>__1__ = Public
+    submitted_by|integer|Unique id of the user who has ownership of the mod.
+    date_added|integer|Unix timestamp of date mod was registered.
+    date_updated|integer|Unix timestamp of date mod was updated.
+    date_live|integer|Unix timestamp of date mod was set live.
+    name|string|Name of the mod.
+    name_id|string|Path for the mod on mod.io. For example: https://gamename.mod.io/__mod-name-id-here__
+    summary|string|Summary of the mod.
+    description|string|Detailed description of the mod which allows HTML.
+    homepage_url|string|Official homepage of the mod.
+    modfile|integer|Unique id of the file that is the current active release.
+    metadata_blob|string|Metadata stored by the game developer.
+    metadata_kvp|string|Colon-separated values representing the key-value pairs you want to filter the results by. If you supply more than one key-pair, separate the pairs by a comma. Will only filter by an exact key-pair match.
+    tags|string|Comma-separated values representing the tags you want to filter the results by. Only tags that are supported by the parent game can be applied. To determine what tags are eligible, see the tags values within `tag_options` column on the parent [Game Object](#game-object).
+    downloads|string|Sort results by most downloads using [_sort filter](#filtering) parameter, value should be `downloads` for descending or `-downloads` for ascending results.
+    popular|string|Sort results by popularity using [_sort filter](#filtering), value should be `popular` for descending or `-popular` for ascending results.
+    rating|string|Sort results by weighted rating using [_sort filter](#filtering), value should be `rating` for descending or `-rating` for ascending results.
+    subscribers|string|Sort results by most subscribers using [_sort filter](#filtering), value should be `subscribers` for descending or `-subscribers` for ascending results.
 
 
 > Example response
@@ -7685,6 +7765,12 @@ Get all mods the _authenticated user_ added or is a team member of. Successful r
           "date_expires": 1579316848
         }
       },
+      "metadata_kvp": [
+        {
+          "metakey": "pistol-dmg",
+          "metavalue": "800"
+        }
+      ],
       "media": {
         "youtube": [
           "https://www.youtube.com/watch?v=dQw4w9WgXcQ"
@@ -7829,7 +7915,22 @@ System.out.println(response.toString());
 ```
 `GET /me/files`
 
-Get all modfiles the _authenticated user_ uploaded. Successful request will return an array of [Modfile Objects](#get-all-modfiles-2).
+Get all modfiles the _authenticated user_ uploaded. Successful request will return an array of [Modfile Objects](#get-all-modfiles-2). We recommended reading the [filtering documentation](#filtering) to return only the records you want.<br><br>__NOTE:__ If the [game](#edit-game) requires mod downloads to be initiated via the API, the `binary_url` returned will contain a verification hash. This hash must be supplied to get the modfile, and will expire after a certain period of time. Saving and reusing the `binary_url` won't work in this situation given it's dynamic nature.
+
+    Filter|Type|Description
+    ---|---|---
+    id|integer|Unique id of the file.
+    mod_id|integer|Unique id of the mod.
+    date_added|integer|Unix timestamp of date file was added.
+    date_scanned|integer|Unix timestamp of date file was virus scanned.
+    virus_status|integer|Current virus scan status of the file. For newly added files that have yet to be scanned this field will change frequently until a scan is complete:<br><br>__0__ = Not scanned<br>__1__ = Scan complete<br>__2__ = In progress<br>__3__ = Too large to scan<br>__4__ = File not found<br>__5__ = Error Scanning
+    virus_positive|integer|Was a virus detected:<br><br>__0__ = No threats detected<br>__1__ = Flagged as malicious
+    filesize|integer|Size of the file in bytes.
+    filehash|string|MD5 hash of the file.
+    filename|string|Filename including extension.
+    version|string|Release version this file represents.
+    changelog|string|Changelog for the file.
+    metadata_blob|string|Metadata stored by the game developer for this file.
 
 
 > Example response
@@ -7985,9 +8086,9 @@ thumb_256x256|string|URL to the large icon thumbnail.
 
 
 
-## Header Object
+## Header Image Object  
 
-   <a name="schemaheader_object"></a>
+<a name="schemaheader_image_object"></a>
 
 ```json
 {
@@ -8082,7 +8183,7 @@ id|integer|Unique id of the event object.
 mod_id|integer|Unique id of the parent mod.
 user_id|integer|Unique id of the user who performed the action.
 date_added|integer|Unix timestamp of date the event occurred.
-event_type|string|Type of [event](#get-mod-events-2) was 'MODFILE_CHANGED', 'MOD_AVAILABLE', 'MOD_UNAVAILABLE', 'MOD_EDITED'.
+event_type|string|Type of [event](#get-mod-events-2) was 'MODFILE_CHANGED', 'MOD_AVAILABLE', 'MOD_UNAVAILABLE', 'MOD_EDITED', 'MOD_DELETED'.
 
 
 
@@ -8112,7 +8213,7 @@ event_type|string|Type of [event](#get-mod-events-2) was 'MODFILE_CHANGED', 'MOD
   },
   "date_added": 1499841487,
   "reply_id": 1499,
-  "reply_position": "01",
+  "thread_position": "01",
   "karma": 1,
   "karma_guest": 0,
   "content": "This mod is kickass! Great work!"
@@ -8141,7 +8242,7 @@ submitted_by|[User Object   ](#schemauser_object)|Contains user data.
 » profile_url|string|URL to the user's mod.io profile.
 date_added|integer|Unix timestamp of date the comment was posted.
 reply_id|integer|Id of the parent comment this comment is replying to (can be 0 if the comment is not a reply).
-reply_position|string|Levels of nesting in a comment thread. How it works:<br><br>- The first comment will have the position '01'.<br>- The second comment will have the position '02'.<br>- If someone responds to the second comment the position will be '02.01'.<br>- A maximum of 3 levels is supported.
+thread_position|string|Levels of nesting in a comment thread. How it works:<br><br>- The first comment will have the position '01'.<br>- The second comment will have the position '02'.<br>- If someone responds to the second comment the position will be '02.01'.<br>- A maximum of 3 levels is supported.
 karma|integer|Karma received for the comment (can be postive or negative).
 karma_guest|integer|Karma received for guest comments (can be postive or negative).
 content|string|Contents of the comment.
@@ -8358,6 +8459,12 @@ date_expires|integer|Unix timestamp of when the `binary_url` will expire.
       "date_expires": 1579316848
     }
   },
+  "metadata_kvp": [
+    {
+      "metakey": "pistol-dmg",
+      "metavalue": "800"
+    }
+  ],
   "media": {
     "youtube": [
       "https://www.youtube.com/watch?v=dQw4w9WgXcQ"
@@ -8460,6 +8567,9 @@ rating_summary|[Rating Summary Object  ](#schemarating_summary_object)|Contains 
 » percentage_positive|integer|Number of positive ratings, divided by the total ratings to determine it’s percentage score.
 » weighted_aggregate|float|Overall rating of this item calculated using the [Wilson score confidence interval](http://www.evanmiller.org/how-not-to-sort-by-average-rating.html). This column is good to sort on, as it will order items based on number of ratings and will place items with many positive ratings above those with a higher score but fewer ratings.
 » display_text|string|Textual representation of the rating in format:<br><br>- Overwhelmingly Positive<br>- Very Positive<br>- Positive<br>- Mostly Positive<br>- Mixed<br>- Negative<br>- Mostly Negative<br>- Very Negative<br>- Overwhelmingly Negative
+metadata_kvp|[Metadata KVP Object  ](#schemametadata_kvp_object)[]|Contains key-value metadata.
+» metakey|string|The key of the key-value pair.
+» metavalue|string|The value of the key-value pair.
 tags|[Mod Tag Object  ](#schemamod_tag_object)[]|Contains mod tag data.
 » name|string|Tag name.
 » date_added|integer|Unix timestamp of date tag was applied.
@@ -8638,7 +8748,7 @@ logo|[Logo Object   ](#schemalogo_object)|Contains logo data.
 » thumb_320x180|string|URL to the small logo thumbnail.
 » thumb_640x360|string|URL to the medium logo thumbnail.
 » thumb_1280x720|string|URL to the large logo thumbnail.
-header|[Header Object   ](#schemaheader_object)|Contains header data.
+header|[Header Image Object  ](#schemaheader_image_object)|Contains header data.
 » filename|string|Header image filename including extension.
 » original|string|URL to the full-sized header image.
 name|string|Name of the game.
@@ -8755,7 +8865,7 @@ user|[User Object   ](#schemauser_object)|Contains user data.
 » timezone|string|Timezone of the user, format is country/city.
 » language|string|Users language preference. See [localization](#localization) for the supported languages.
 » profile_url|string|URL to the user's mod.io profile.
-level|integer|Level of permission the user has:<br><br>__1__ = Member<br>__4__ = Manager<br>__8__ = Leader
+level|integer|Level of permission the user has:<br><br>__1__ = Moderator (can moderate content submitted)<br>__4__ = Statistics (moderator access, including read only access to view reports)<br>__8__ = Administrator (full access, including editing the profile and team)
 date_added|integer|Unix timestamp of the date the user was added to the team.
 position|string|Custom title given to the user in this team.
 
@@ -8835,7 +8945,7 @@ profile_url|string|URL to the user's mod.io profile.
       },
       "date_added": 1499841487,
       "reply_id": 1499,
-      "reply_position": "01",
+      "thread_position": "01",
       "karma": 1,
       "karma_guest": 0,
       "content": "This mod is kickass! Great work!"
@@ -8873,7 +8983,7 @@ data|[Comment Object   ](#schemacomment_object)[]|Array containing comment objec
 »» profile_url|string|URL to the user's mod.io profile.
 » date_added|integer|Unix timestamp of date the comment was posted.
 » reply_id|integer|Id of the parent comment this comment is replying to (can be 0 if the comment is not a reply).
-» reply_position|string|Levels of nesting in a comment thread. How it works:<br><br>- The first comment will have the position '01'.<br>- The second comment will have the position '02'.<br>- If someone responds to the second comment the position will be '02.01'.<br>- A maximum of 3 levels is supported.
+» thread_position|string|Levels of nesting in a comment thread. How it works:<br><br>- The first comment will have the position '01'.<br>- The second comment will have the position '02'.<br>- If someone responds to the second comment the position will be '02.01'.<br>- A maximum of 3 levels is supported.
 » karma|integer|Karma received for the comment (can be postive or negative).
 » karma_guest|integer|Karma received for guest comments (can be postive or negative).
 » content|string|Contents of the comment.
@@ -9111,7 +9221,7 @@ data|[Game Object   ](#schemagame_object)[]|Array containing game objects.
 »» thumb_320x180|string|URL to the small logo thumbnail.
 »» thumb_640x360|string|URL to the medium logo thumbnail.
 »» thumb_1280x720|string|URL to the large logo thumbnail.
-» header|[Header Object   ](#schemaheader_object)|Contains header data.
+» header|[Header Image Object  ](#schemaheader_image_object)|Contains header data.
 »» filename|string|Header image filename including extension.
 »» original|string|URL to the full-sized header image.
 » name|string|Name of the game.
@@ -9233,6 +9343,12 @@ result_offset|integer|Number of results skipped over.
           "date_expires": 1579316848
         }
       },
+      "metadata_kvp": [
+        {
+          "metakey": "pistol-dmg",
+          "metavalue": "800"
+        }
+      ],
       "media": {
         "youtube": [
           "https://www.youtube.com/watch?v=dQw4w9WgXcQ"
@@ -9344,6 +9460,9 @@ data|[Mod Object   ](#schemamod_object)[]|Array containing mod objects.
 »» percentage_positive|integer|Number of positive ratings, divided by the total ratings to determine it’s percentage score.
 »» weighted_aggregate|float|Overall rating of this item calculated using the [Wilson score confidence interval](http://www.evanmiller.org/how-not-to-sort-by-average-rating.html). This column is good to sort on, as it will order items based on number of ratings and will place items with many positive ratings above those with a higher score but fewer ratings.
 »» display_text|string|Textual representation of the rating in format:<br><br>- Overwhelmingly Positive<br>- Very Positive<br>- Positive<br>- Mostly Positive<br>- Mixed<br>- Negative<br>- Mostly Negative<br>- Very Negative<br>- Overwhelmingly Negative
+» metadata_kvp|[Metadata KVP Object  ](#schemametadata_kvp_object)[]|Contains key-value metadata.
+»» metakey|string|The key of the key-value pair.
+»» metavalue|string|The value of the key-value pair.
 » tags|[Mod Tag Object  ](#schemamod_tag_object)[]|Contains mod tag data.
 »» name|string|Tag name.
 »» date_added|integer|Unix timestamp of date tag was applied.
@@ -9388,7 +9507,7 @@ data|[Event Object   ](#schemaevent_object)[]|Array containing event objects.
 » mod_id|integer|Unique id of the parent mod.
 » user_id|integer|Unique id of the user who performed the action.
 » date_added|integer|Unix timestamp of date the event occurred.
-» event_type|string|Type of [event](#get-mod-events-2) was 'MODFILE_CHANGED', 'MOD_AVAILABLE', 'MOD_UNAVAILABLE', 'MOD_EDITED'.
+» event_type|string|Type of [event](#get-mod-events-2) was 'MODFILE_CHANGED', 'MOD_AVAILABLE', 'MOD_UNAVAILABLE', 'MOD_EDITED', 'MOD_DELETED'.
 result_count|integer|Number of results returned in the data array.
 result_limit|integer|Maximum number of results returned.
 result_offset|integer|Number of results skipped over.
@@ -9396,9 +9515,9 @@ result_offset|integer|Number of results skipped over.
 
 
 
-## Get All Mod Tags 
+## Get Mod Tags  
 
-<a name="schemaget_all_mod_tags"></a>
+<a name="schemaget_mod_tags"></a>
 
 ```json
 {
@@ -9432,9 +9551,9 @@ result_offset|integer|Number of results skipped over.
 
 
 
-## Get All Game Tag Options
+## Get Game Tag Options 
 
-<a name="schemaget_all_game_tag_options"></a>
+<a name="schemaget_game_tag_options"></a>
 
 ```json
 {
@@ -9532,7 +9651,7 @@ data|[Team Member Object  ](#schemateam_member_object)[]|Array containing team m
 »» timezone|string|Timezone of the user, format is country/city.
 »» language|string|Users language preference. See [localization](#localization) for the supported languages.
 »» profile_url|string|URL to the user's mod.io profile.
-» level|integer|Level of permission the user has:<br><br>__1__ = Member<br>__4__ = Manager<br>__8__ = Leader
+» level|integer|Level of permission the user has:<br><br>__1__ = Moderator (can moderate content submitted)<br>__4__ = Statistics (moderator access, including read only access to view reports)<br>__8__ = Administrator (full access, including editing the profile and team)
 » date_added|integer|Unix timestamp of the date the user was added to the team.
 » position|string|Custom title given to the user in this team.
 result_count|integer|Number of results returned in the data array.
@@ -9633,7 +9752,7 @@ data|[Event Object   ](#schemaevent_object)[]|Array containing event objects.
 » mod_id|integer|Unique id of the parent mod.
 » user_id|integer|Unique id of the user who performed the action.
 » date_added|integer|Unix timestamp of date the event occurred.
-» event_type|string|Type of [event](#get-mod-events-2) was 'MODFILE_CHANGED', 'MOD_AVAILABLE', 'MOD_UNAVAILABLE', 'MOD_EDITED'.
+» event_type|string|Type of [event](#get-mod-events-2) was 'MODFILE_CHANGED', 'MOD_AVAILABLE', 'MOD_UNAVAILABLE', 'MOD_EDITED', 'MOD_DELETED'.
 result_count|integer|Number of results returned in the data array.
 result_limit|integer|Maximum number of results returned.
 result_offset|integer|Number of results skipped over.
