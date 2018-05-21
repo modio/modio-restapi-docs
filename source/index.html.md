@@ -101,7 +101,8 @@ curl -X POST https://api.mod.io/v1/oauth/emailrequest \
 
 Request a `security_code` be sent to the email address of the user you wish to authenticate: 
 
-`POST /oauth/emailrequest`
+
+`POST /oauth/emailrequest`
 
 Parameter | Value
 ---------- | ----------  
@@ -130,7 +131,8 @@ curl -X POST https://api.mod.io/v1/oauth/emailexchange \
 }
 ```
 
-`POST /oauth/emailexchange`
+
+`POST /oauth/emailexchange`
 
 Parameter | Value
 ---------- | ----------  
@@ -678,7 +680,7 @@ X-RateLimit-Remaining: 59
 
 mod.io returns the following headers in each request to inform you of your limit & remaining requests until reset.
 
- - `X-RateLimit-Limit` - Number of requests you can make from the supplied API key/access token per hour.
+ - `X-RateLimit-Limit` - Number of requests you can make from the supplied API key/access token per minute.
  - `X-RateLimit-Remaining` - Number of requests remaining until requests are rejected.
  - `X-Ratelimit-RetryAfter` - Amount of minutes until reset once you have been throttled (Only returned once rate limit exceeded).
 
@@ -9758,4 +9760,4 @@ result_limit|integer|Maximum number of results returned.
 result_offset|integer|Number of results skipped over.
 
 
-
+
