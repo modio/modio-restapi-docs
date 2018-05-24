@@ -308,6 +308,9 @@
                     <a href="#testing" class="toc-h2 toc-link" data-title="Getting Started">Testing</a>
                   </li>
                   <li>
+                    <a href="#whitelabel" class="toc-h2 toc-link" data-title="Getting Started">Whitelabel</a>
+                  </li>
+                  <li>
                     <a href="#contact" class="toc-h2 toc-link" data-title="Getting Started">Contact</a>
                   </li>
               </ul>
@@ -647,7 +650,7 @@
       <div class="dark-box"></div>
       <div class="content">
         <h1 id="getting-started">Getting Started</h1><h2 id="mod-io-api-v1">mod.io API v1</h2>
-<p>Welcome to the official documentation for <a href="https://mod.io">mod.io</a>, an API which makes it a joy to search, sort and share mods in-game. We recommend you read our <em>Getting Started</em> guide to accurately and efficiently consume our REST API. </p>
+<p>Welcome to the official documentation for <a href="https://mod.io">mod.io</a>, an API which makes it a joy to search, sort and share mods in-game. We recommend you read our <em>Getting Started</em> guide below to accurately and efficiently consume our REST API. </p>
 
 <p><strong>Current version:</strong> <code>v1</code></p>
 
@@ -1333,7 +1336,7 @@ curl -X post https://api.mod.io/v1/games/1/team <span class="se">\</span>
 <li>
 <code>?modfile-gt=600</code> - Get all results where the <code>modfile</code> column is greater than 600.</li>
 </ul>
-<h3 id="bitwise-and-bitwise-and">-bitwise-and (Bitwise AND)</h3><pre class="highlight plaintext"><code>v1/games?api-bitwise-and=5
+<h3 id="bitwise-and-bitwise-and">-bitwise-and (Bitwise AND)</h3><pre class="highlight plaintext"><code>v1/games?maturity_option-bitwise-and=5
 </code></pre>
 <p>Some columns are stored as bits within an integer. Their value depends on the bits selected. For example, suppose a column has 4 options:</p>
 
@@ -1346,11 +1349,11 @@ curl -X post https://api.mod.io/v1/games/1/team <span class="se">\</span>
 
 <p>You can combine any of these options by adding them together which means there are (2 ^ 4 = 16 possible combinations). For example Option A (1) and Option C (4) would be (1 + 4 = 5), Option A (1), Option C (4) and Option D (8) would be (1 + 4 + 8 = 13), all Options together would be (1 + 2 + 4 + 8 = 15).</p>
 
-<p>The number of combinations makes using <em>equals</em>, <em>in</em> and other filters a little complex. To solve this we support Bitwise AND (&amp;) which makes it easy to match a column which contains any of the Options you want.</p>
+<p>The number of combinations makes using <em>equals</em>, <em>in</em> and other filters a little complex. To solve this we support Bitwise AND (&amp;) which makes it easy to match a column which contains any of the options you want.</p>
 
 <ul>
 <li>
-<code>?api-bitwise-and=5</code> - Will match the <code>api</code> column values 1, 3, 4, 5, 6, 7, 9, 11, 12, 13, 14, 15 (since these values contain the bits 1, 4 or both).</li>
+<code>?maturity_option-bitwise-and=5</code> - Will match the <code>maturity_option</code> column values 1, 3, 4, 5, 6, 7, 9, 11, 12, 13, 14, 15 (since these values contain the bits 1, 4 or both).</li>
 </ul>
 <h2 id="localization">Localization</h2><pre class="highlight plaintext"><code>Example HTTP Header Request
 ---------------------
@@ -1470,7 +1473,7 @@ Accept-Language: de
 
 <ul>
 <li>
-<code>X-RateLimit-Limit</code> - Number of requests you can make from the supplied API key/access token per hour.</li>
+<code>X-RateLimit-Limit</code> - Number of requests you can make from the supplied API key/access token per minute.</li>
 <li>
 <code>X-RateLimit-Remaining</code> - Number of requests remaining until requests are rejected.</li>
 <li>
@@ -1490,6 +1493,8 @@ Accept-Language: de
 <p><strong>Test API path:</strong> <a href="https://api.test.mod.io/v1">https://api.test.mod.io/v1</a></p>
 
 <p><strong>NOTE</strong>: We periodically reset the test environment to default - with the exception of user accounts so please do not rely on it to store important information. Any data you intend on peristing should be submitted to the production environment.</p>
+<h2 id="whitelabel">Whitelabel</h2>
+<p>If you are a large studio or publisher and require a private, in-house, custom solution that accelerates your time to market with a best-in-class product, reach out <a href="mailto:developers@mod.io?subject=Whitelabel%20license">developers@mod.io</a> to discuss the licensing options available.</p>
 <h2 id="contact">Contact</h2>
 <p>If you spot any errors within the mod.io documentation, have feedback on how we can make it easier to follow or simply want to discuss how awesome mods are, feel free to reach out anytime to <a href="mailto:developers@mod.io?subject=API">developers@mod.io</a>. We are here to help you grow and maximise the potential of mods in your game.</p>
 <h1 id="games">Games</h1><h2 id="get-all-games">Get All Games</h2>
@@ -1659,6 +1664,11 @@ Accept: application/json
 <td>integer</td>
 <td>Level of API access allowed by this game:<br><br><strong>0</strong> = All of the options below are disabled<br><strong>1</strong> = Allow 3rd parties to access this games API endpoints<br><strong>2</strong> = Allow mods to be downloaded directly (if disabled all download URLs will contain a frequently changing verification hash to stop unauthorized use)<br><strong>?</strong> = Combine to find games with multiple options enabled (see <a href="#bitwise-and-bitwise-and">BITWISE fields</a>)</td>
 </tr>
+<tr>
+<td>maturity_options</td>
+<td>integer</td>
+<td>If the game allows developers to flag mods as containing mature content:<br><br><strong>0</strong> = Don't allow <em>(default)</em><br><strong>1</strong> = Allow</td>
+</tr>
 </tbody>
 </table>
 
@@ -1676,10 +1686,10 @@ Accept: application/json
         </span><span class="s2">"username"</span><span class="p">:</span><span class="w"> </span><span class="s2">"XanT"</span><span class="p">,</span><span class="w">
         </span><span class="s2">"date_online"</span><span class="p">:</span><span class="w"> </span><span class="mi">1509922961</span><span class="p">,</span><span class="w">
         </span><span class="s2">"avatar"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-          </span><span class="s2">"filename"</span><span class="p">:</span><span class="w"> </span><span class="s2">"modio-dark.png"</span><span class="p">,</span><span class="w">
-          </span><span class="s2">"original"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://static.mod.io/v1/images/branding/modio-dark.png"</span><span class="p">,</span><span class="w">
-          </span><span class="s2">"thumb_50x50"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://static.mod.io/v1/images/branding/modio-dark.png"</span><span class="p">,</span><span class="w">
-          </span><span class="s2">"thumb_100x100"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://static.mod.io/v1/images/branding/modio-dark.png"</span><span class="w">
+          </span><span class="s2">"filename"</span><span class="p">:</span><span class="w"> </span><span class="s2">"modio-color-dark.png"</span><span class="p">,</span><span class="w">
+          </span><span class="s2">"original"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://static.mod.io/v1/images/branding/modio-color-dark.png"</span><span class="p">,</span><span class="w">
+          </span><span class="s2">"thumb_50x50"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://static.mod.io/v1/images/branding/modio-color-dark.png"</span><span class="p">,</span><span class="w">
+          </span><span class="s2">"thumb_100x100"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://static.mod.io/v1/images/branding/modio-color-dark.png"</span><span class="w">
         </span><span class="p">},</span><span class="w">
         </span><span class="s2">"timezone"</span><span class="p">:</span><span class="w"> </span><span class="s2">"America/Los_Angeles"</span><span class="p">,</span><span class="w">
         </span><span class="s2">"language"</span><span class="p">:</span><span class="w"> </span><span class="s2">"en"</span><span class="p">,</span><span class="w">
@@ -1694,24 +1704,25 @@ Accept: application/json
       </span><span class="s2">"community_options"</span><span class="p">:</span><span class="w"> </span><span class="mi">3</span><span class="p">,</span><span class="w">
       </span><span class="s2">"revenue_options"</span><span class="p">:</span><span class="w"> </span><span class="mi">1500</span><span class="p">,</span><span class="w">
       </span><span class="s2">"api_access_options"</span><span class="p">:</span><span class="w"> </span><span class="mi">3</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"maturity_options"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
       </span><span class="s2">"ugc_name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"map"</span><span class="p">,</span><span class="w">
       </span><span class="s2">"icon"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-        </span><span class="s2">"filename"</span><span class="p">:</span><span class="w"> </span><span class="s2">"modio-dark.png"</span><span class="p">,</span><span class="w">
-        </span><span class="s2">"original"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://static.mod.io/v1/images/branding/modio-dark.png"</span><span class="p">,</span><span class="w">
-        </span><span class="s2">"thumb_64x64"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://static.mod.io/v1/images/branding/modio-dark.png"</span><span class="p">,</span><span class="w">
-        </span><span class="s2">"thumb_128x128"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://static.mod.io/v1/images/branding/modio-dark.png"</span><span class="p">,</span><span class="w">
-        </span><span class="s2">"thumb_256x256"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://static.mod.io/v1/images/branding/modio-dark.png"</span><span class="w">
+        </span><span class="s2">"filename"</span><span class="p">:</span><span class="w"> </span><span class="s2">"modio-color-dark.png"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"original"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://static.mod.io/v1/images/branding/modio-color-dark.png"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"thumb_64x64"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://static.mod.io/v1/images/branding/modio-color-dark.png"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"thumb_128x128"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://static.mod.io/v1/images/branding/modio-color-dark.png"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"thumb_256x256"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://static.mod.io/v1/images/branding/modio-color-dark.png"</span><span class="w">
       </span><span class="p">},</span><span class="w">
       </span><span class="s2">"logo"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-        </span><span class="s2">"filename"</span><span class="p">:</span><span class="w"> </span><span class="s2">"modio-dark.png"</span><span class="p">,</span><span class="w">
-        </span><span class="s2">"original"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://static.mod.io/v1/images/branding/modio-dark.png"</span><span class="p">,</span><span class="w">
-        </span><span class="s2">"thumb_320x180"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://static.mod.io/v1/images/branding/modio-dark.png"</span><span class="p">,</span><span class="w">
-        </span><span class="s2">"thumb_640x360"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://static.mod.io/v1/images/branding/modio-dark.png"</span><span class="p">,</span><span class="w">
-        </span><span class="s2">"thumb_1280x720"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://static.mod.io/v1/images/branding/modio-dark.png"</span><span class="w">
+        </span><span class="s2">"filename"</span><span class="p">:</span><span class="w"> </span><span class="s2">"modio-color-dark.png"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"original"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://static.mod.io/v1/images/branding/modio-color-dark.png"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"thumb_320x180"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://static.mod.io/v1/images/branding/modio-color-dark.png"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"thumb_640x360"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://static.mod.io/v1/images/branding/modio-color-dark.png"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"thumb_1280x720"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://static.mod.io/v1/images/branding/modio-color-dark.png"</span><span class="w">
       </span><span class="p">},</span><span class="w">
       </span><span class="s2">"header"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
         </span><span class="s2">"filename"</span><span class="p">:</span><span class="w"> </span><span class="s2">"demo.png"</span><span class="p">,</span><span class="w">
-        </span><span class="s2">"original"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://static.mod.io/v1/images/branding/modio-dark.png"</span><span class="w">
+        </span><span class="s2">"original"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://static.mod.io/v1/images/branding/modio-color-dark.png"</span><span class="w">
       </span><span class="p">},</span><span class="w">
       </span><span class="s2">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Rogue Knight"</span><span class="p">,</span><span class="w">
       </span><span class="s2">"name_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"rogue-knight"</span><span class="p">,</span><span class="w">
@@ -1849,10 +1860,10 @@ Accept: application/json
     </span><span class="s2">"username"</span><span class="p">:</span><span class="w"> </span><span class="s2">"XanT"</span><span class="p">,</span><span class="w">
     </span><span class="s2">"date_online"</span><span class="p">:</span><span class="w"> </span><span class="mi">1509922961</span><span class="p">,</span><span class="w">
     </span><span class="s2">"avatar"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-      </span><span class="s2">"filename"</span><span class="p">:</span><span class="w"> </span><span class="s2">"modio-dark.png"</span><span class="p">,</span><span class="w">
-      </span><span class="s2">"original"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://static.mod.io/v1/images/branding/modio-dark.png"</span><span class="p">,</span><span class="w">
-      </span><span class="s2">"thumb_50x50"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://static.mod.io/v1/images/branding/modio-dark.png"</span><span class="p">,</span><span class="w">
-      </span><span class="s2">"thumb_100x100"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://static.mod.io/v1/images/branding/modio-dark.png"</span><span class="w">
+      </span><span class="s2">"filename"</span><span class="p">:</span><span class="w"> </span><span class="s2">"modio-color-dark.png"</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"original"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://static.mod.io/v1/images/branding/modio-color-dark.png"</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"thumb_50x50"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://static.mod.io/v1/images/branding/modio-color-dark.png"</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"thumb_100x100"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://static.mod.io/v1/images/branding/modio-color-dark.png"</span><span class="w">
     </span><span class="p">},</span><span class="w">
     </span><span class="s2">"timezone"</span><span class="p">:</span><span class="w"> </span><span class="s2">"America/Los_Angeles"</span><span class="p">,</span><span class="w">
     </span><span class="s2">"language"</span><span class="p">:</span><span class="w"> </span><span class="s2">"en"</span><span class="p">,</span><span class="w">
@@ -1867,24 +1878,25 @@ Accept: application/json
   </span><span class="s2">"community_options"</span><span class="p">:</span><span class="w"> </span><span class="mi">3</span><span class="p">,</span><span class="w">
   </span><span class="s2">"revenue_options"</span><span class="p">:</span><span class="w"> </span><span class="mi">1500</span><span class="p">,</span><span class="w">
   </span><span class="s2">"api_access_options"</span><span class="p">:</span><span class="w"> </span><span class="mi">3</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"maturity_options"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
   </span><span class="s2">"ugc_name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"map"</span><span class="p">,</span><span class="w">
   </span><span class="s2">"icon"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-    </span><span class="s2">"filename"</span><span class="p">:</span><span class="w"> </span><span class="s2">"modio-dark.png"</span><span class="p">,</span><span class="w">
-    </span><span class="s2">"original"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://static.mod.io/v1/images/branding/modio-dark.png"</span><span class="p">,</span><span class="w">
-    </span><span class="s2">"thumb_64x64"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://static.mod.io/v1/images/branding/modio-dark.png"</span><span class="p">,</span><span class="w">
-    </span><span class="s2">"thumb_128x128"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://static.mod.io/v1/images/branding/modio-dark.png"</span><span class="p">,</span><span class="w">
-    </span><span class="s2">"thumb_256x256"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://static.mod.io/v1/images/branding/modio-dark.png"</span><span class="w">
+    </span><span class="s2">"filename"</span><span class="p">:</span><span class="w"> </span><span class="s2">"modio-color-dark.png"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"original"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://static.mod.io/v1/images/branding/modio-color-dark.png"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"thumb_64x64"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://static.mod.io/v1/images/branding/modio-color-dark.png"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"thumb_128x128"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://static.mod.io/v1/images/branding/modio-color-dark.png"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"thumb_256x256"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://static.mod.io/v1/images/branding/modio-color-dark.png"</span><span class="w">
   </span><span class="p">},</span><span class="w">
   </span><span class="s2">"logo"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-    </span><span class="s2">"filename"</span><span class="p">:</span><span class="w"> </span><span class="s2">"modio-dark.png"</span><span class="p">,</span><span class="w">
-    </span><span class="s2">"original"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://static.mod.io/v1/images/branding/modio-dark.png"</span><span class="p">,</span><span class="w">
-    </span><span class="s2">"thumb_320x180"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://static.mod.io/v1/images/branding/modio-dark.png"</span><span class="p">,</span><span class="w">
-    </span><span class="s2">"thumb_640x360"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://static.mod.io/v1/images/branding/modio-dark.png"</span><span class="p">,</span><span class="w">
-    </span><span class="s2">"thumb_1280x720"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://static.mod.io/v1/images/branding/modio-dark.png"</span><span class="w">
+    </span><span class="s2">"filename"</span><span class="p">:</span><span class="w"> </span><span class="s2">"modio-color-dark.png"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"original"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://static.mod.io/v1/images/branding/modio-color-dark.png"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"thumb_320x180"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://static.mod.io/v1/images/branding/modio-color-dark.png"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"thumb_640x360"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://static.mod.io/v1/images/branding/modio-color-dark.png"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"thumb_1280x720"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://static.mod.io/v1/images/branding/modio-color-dark.png"</span><span class="w">
   </span><span class="p">},</span><span class="w">
   </span><span class="s2">"header"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
     </span><span class="s2">"filename"</span><span class="p">:</span><span class="w"> </span><span class="s2">"demo.png"</span><span class="p">,</span><span class="w">
-    </span><span class="s2">"original"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://static.mod.io/v1/images/branding/modio-dark.png"</span><span class="w">
+    </span><span class="s2">"original"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://static.mod.io/v1/images/branding/modio-color-dark.png"</span><span class="w">
   </span><span class="p">},</span><span class="w">
   </span><span class="s2">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Rogue Knight"</span><span class="p">,</span><span class="w">
   </span><span class="s2">"name_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"rogue-knight"</span><span class="p">,</span><span class="w">
@@ -2103,6 +2115,12 @@ Content-Type: application/x-www-form-urlencoded
 <td></td>
 <td>Choose the level of API access your game allows:<br><br><strong>0</strong> = All of the options below are disabled<br><br><strong>1</strong> = Allow 3rd parties to access this games API endpoints. We recommend you enable this feature, an open API will encourage a healthy ecosystem of tools and apps. If you do not enable this feature, your <code>/games/{games-id}</code> endpoints will return <code>403 Forbidden</code> unless you are a member of the games team or using the games <code>apikey</code><br><br><strong>2</strong> = Allow mods to be downloaded directly (makes implementation easier for you, game servers and services because you can save, share and reuse download URLs). If disabled all download URLs will contain a frequently changing verification hash to stop unauthorized use<br><br><strong>?</strong> = Add the options you want together, to enable multiple features (see <a href="#bitwise-and-bitwise-and">BITWISE fields</a>)</td>
 </tr>
+<tr>
+<td>maturity_options</td>
+<td>integer</td>
+<td></td>
+<td>Choose if you want to allow developers to select if they can flag their mods as containing mature content:<br><br><strong>0</strong> = Don't allow <em>(default)</em><br><strong>1</strong> = Allow</td>
+</tr>
 </tbody>
 </table>
 
@@ -2118,10 +2136,10 @@ Content-Type: application/x-www-form-urlencoded
     </span><span class="s2">"username"</span><span class="p">:</span><span class="w"> </span><span class="s2">"XanT"</span><span class="p">,</span><span class="w">
     </span><span class="s2">"date_online"</span><span class="p">:</span><span class="w"> </span><span class="mi">1509922961</span><span class="p">,</span><span class="w">
     </span><span class="s2">"avatar"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-      </span><span class="s2">"filename"</span><span class="p">:</span><span class="w"> </span><span class="s2">"modio-dark.png"</span><span class="p">,</span><span class="w">
-      </span><span class="s2">"original"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://static.mod.io/v1/images/branding/modio-dark.png"</span><span class="p">,</span><span class="w">
-      </span><span class="s2">"thumb_50x50"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://static.mod.io/v1/images/branding/modio-dark.png"</span><span class="p">,</span><span class="w">
-      </span><span class="s2">"thumb_100x100"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://static.mod.io/v1/images/branding/modio-dark.png"</span><span class="w">
+      </span><span class="s2">"filename"</span><span class="p">:</span><span class="w"> </span><span class="s2">"modio-color-dark.png"</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"original"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://static.mod.io/v1/images/branding/modio-color-dark.png"</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"thumb_50x50"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://static.mod.io/v1/images/branding/modio-color-dark.png"</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"thumb_100x100"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://static.mod.io/v1/images/branding/modio-color-dark.png"</span><span class="w">
     </span><span class="p">},</span><span class="w">
     </span><span class="s2">"timezone"</span><span class="p">:</span><span class="w"> </span><span class="s2">"America/Los_Angeles"</span><span class="p">,</span><span class="w">
     </span><span class="s2">"language"</span><span class="p">:</span><span class="w"> </span><span class="s2">"en"</span><span class="p">,</span><span class="w">
@@ -2136,24 +2154,25 @@ Content-Type: application/x-www-form-urlencoded
   </span><span class="s2">"community_options"</span><span class="p">:</span><span class="w"> </span><span class="mi">3</span><span class="p">,</span><span class="w">
   </span><span class="s2">"revenue_options"</span><span class="p">:</span><span class="w"> </span><span class="mi">1500</span><span class="p">,</span><span class="w">
   </span><span class="s2">"api_access_options"</span><span class="p">:</span><span class="w"> </span><span class="mi">3</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"maturity_options"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
   </span><span class="s2">"ugc_name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"map"</span><span class="p">,</span><span class="w">
   </span><span class="s2">"icon"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-    </span><span class="s2">"filename"</span><span class="p">:</span><span class="w"> </span><span class="s2">"modio-dark.png"</span><span class="p">,</span><span class="w">
-    </span><span class="s2">"original"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://static.mod.io/v1/images/branding/modio-dark.png"</span><span class="p">,</span><span class="w">
-    </span><span class="s2">"thumb_64x64"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://static.mod.io/v1/images/branding/modio-dark.png"</span><span class="p">,</span><span class="w">
-    </span><span class="s2">"thumb_128x128"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://static.mod.io/v1/images/branding/modio-dark.png"</span><span class="p">,</span><span class="w">
-    </span><span class="s2">"thumb_256x256"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://static.mod.io/v1/images/branding/modio-dark.png"</span><span class="w">
+    </span><span class="s2">"filename"</span><span class="p">:</span><span class="w"> </span><span class="s2">"modio-color-dark.png"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"original"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://static.mod.io/v1/images/branding/modio-color-dark.png"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"thumb_64x64"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://static.mod.io/v1/images/branding/modio-color-dark.png"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"thumb_128x128"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://static.mod.io/v1/images/branding/modio-color-dark.png"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"thumb_256x256"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://static.mod.io/v1/images/branding/modio-color-dark.png"</span><span class="w">
   </span><span class="p">},</span><span class="w">
   </span><span class="s2">"logo"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-    </span><span class="s2">"filename"</span><span class="p">:</span><span class="w"> </span><span class="s2">"modio-dark.png"</span><span class="p">,</span><span class="w">
-    </span><span class="s2">"original"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://static.mod.io/v1/images/branding/modio-dark.png"</span><span class="p">,</span><span class="w">
-    </span><span class="s2">"thumb_320x180"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://static.mod.io/v1/images/branding/modio-dark.png"</span><span class="p">,</span><span class="w">
-    </span><span class="s2">"thumb_640x360"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://static.mod.io/v1/images/branding/modio-dark.png"</span><span class="p">,</span><span class="w">
-    </span><span class="s2">"thumb_1280x720"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://static.mod.io/v1/images/branding/modio-dark.png"</span><span class="w">
+    </span><span class="s2">"filename"</span><span class="p">:</span><span class="w"> </span><span class="s2">"modio-color-dark.png"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"original"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://static.mod.io/v1/images/branding/modio-color-dark.png"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"thumb_320x180"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://static.mod.io/v1/images/branding/modio-color-dark.png"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"thumb_640x360"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://static.mod.io/v1/images/branding/modio-color-dark.png"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"thumb_1280x720"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://static.mod.io/v1/images/branding/modio-color-dark.png"</span><span class="w">
   </span><span class="p">},</span><span class="w">
   </span><span class="s2">"header"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
     </span><span class="s2">"filename"</span><span class="p">:</span><span class="w"> </span><span class="s2">"demo.png"</span><span class="p">,</span><span class="w">
-    </span><span class="s2">"original"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://static.mod.io/v1/images/branding/modio-dark.png"</span><span class="w">
+    </span><span class="s2">"original"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://static.mod.io/v1/images/branding/modio-color-dark.png"</span><span class="w">
   </span><span class="p">},</span><span class="w">
   </span><span class="s2">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Rogue Knight"</span><span class="p">,</span><span class="w">
   </span><span class="s2">"name_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"rogue-knight"</span><span class="p">,</span><span class="w">
@@ -2321,6 +2340,11 @@ Accept: application/json
 <td>Unix timestamp of date mod was set live.</td>
 </tr>
 <tr>
+<td>maturity_option</td>
+<td>integer</td>
+<td>Maturity option(s) set by the mod developer:<br><br><strong>0</strong> = None set <em>(default)</em><br><strong>1</strong> = Alcohol<br><strong>2</strong> = Drugs<br><strong>4</strong> = Violence<br><strong>8</strong> = Explicit<br><strong>?</strong> = Add the options you want together, to enable multiple filters (see <a href="#bitwise-and-bitwise-and">BITWISE fields</a>)</td>
+</tr>
+<tr>
 <td>name</td>
 <td>string</td>
 <td>Name of the mod.</td>
@@ -2405,10 +2429,10 @@ Accept: application/json
         </span><span class="s2">"username"</span><span class="p">:</span><span class="w"> </span><span class="s2">"XanT"</span><span class="p">,</span><span class="w">
         </span><span class="s2">"date_online"</span><span class="p">:</span><span class="w"> </span><span class="mi">1509922961</span><span class="p">,</span><span class="w">
         </span><span class="s2">"avatar"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-          </span><span class="s2">"filename"</span><span class="p">:</span><span class="w"> </span><span class="s2">"modio-dark.png"</span><span class="p">,</span><span class="w">
-          </span><span class="s2">"original"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://static.mod.io/v1/images/branding/modio-dark.png"</span><span class="p">,</span><span class="w">
-          </span><span class="s2">"thumb_50x50"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://static.mod.io/v1/images/branding/modio-dark.png"</span><span class="p">,</span><span class="w">
-          </span><span class="s2">"thumb_100x100"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://static.mod.io/v1/images/branding/modio-dark.png"</span><span class="w">
+          </span><span class="s2">"filename"</span><span class="p">:</span><span class="w"> </span><span class="s2">"modio-color-dark.png"</span><span class="p">,</span><span class="w">
+          </span><span class="s2">"original"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://static.mod.io/v1/images/branding/modio-color-dark.png"</span><span class="p">,</span><span class="w">
+          </span><span class="s2">"thumb_50x50"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://static.mod.io/v1/images/branding/modio-color-dark.png"</span><span class="p">,</span><span class="w">
+          </span><span class="s2">"thumb_100x100"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://static.mod.io/v1/images/branding/modio-color-dark.png"</span><span class="w">
         </span><span class="p">},</span><span class="w">
         </span><span class="s2">"timezone"</span><span class="p">:</span><span class="w"> </span><span class="s2">"America/Los_Angeles"</span><span class="p">,</span><span class="w">
         </span><span class="s2">"language"</span><span class="p">:</span><span class="w"> </span><span class="s2">"en"</span><span class="p">,</span><span class="w">
@@ -2417,12 +2441,13 @@ Accept: application/json
       </span><span class="s2">"date_added"</span><span class="p">:</span><span class="w"> </span><span class="mi">1492564103</span><span class="p">,</span><span class="w">
       </span><span class="s2">"date_updated"</span><span class="p">:</span><span class="w"> </span><span class="mi">1499841487</span><span class="p">,</span><span class="w">
       </span><span class="s2">"date_live"</span><span class="p">:</span><span class="w"> </span><span class="mi">1499841403</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"maturity_option"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
       </span><span class="s2">"logo"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-        </span><span class="s2">"filename"</span><span class="p">:</span><span class="w"> </span><span class="s2">"modio-dark.png"</span><span class="p">,</span><span class="w">
-        </span><span class="s2">"original"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://static.mod.io/v1/images/branding/modio-dark.png"</span><span class="p">,</span><span class="w">
-        </span><span class="s2">"thumb_320x180"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://static.mod.io/v1/images/branding/modio-dark.png"</span><span class="p">,</span><span class="w">
-        </span><span class="s2">"thumb_640x360"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://static.mod.io/v1/images/branding/modio-dark.png"</span><span class="p">,</span><span class="w">
-        </span><span class="s2">"thumb_1280x720"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://static.mod.io/v1/images/branding/modio-dark.png"</span><span class="w">
+        </span><span class="s2">"filename"</span><span class="p">:</span><span class="w"> </span><span class="s2">"modio-color-dark.png"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"original"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://static.mod.io/v1/images/branding/modio-color-dark.png"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"thumb_320x180"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://static.mod.io/v1/images/branding/modio-color-dark.png"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"thumb_640x360"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://static.mod.io/v1/images/branding/modio-color-dark.png"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"thumb_1280x720"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://static.mod.io/v1/images/branding/modio-color-dark.png"</span><span class="w">
       </span><span class="p">},</span><span class="w">
       </span><span class="s2">"homepage_url"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://www.rogue-hdpack.com/"</span><span class="p">,</span><span class="w">
       </span><span class="s2">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Rogue Knight HD Pack"</span><span class="p">,</span><span class="w">
@@ -2467,9 +2492,9 @@ Accept: application/json
         </span><span class="p">],</span><span class="w">
         </span><span class="s2">"images"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
           </span><span class="p">{</span><span class="w">
-            </span><span class="s2">"filename"</span><span class="p">:</span><span class="w"> </span><span class="s2">"modio-dark.png"</span><span class="p">,</span><span class="w">
-            </span><span class="s2">"original"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://static.mod.io/v1/images/branding/modio-dark.png"</span><span class="p">,</span><span class="w">
-            </span><span class="s2">"thumb_320x180"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://static.mod.io/v1/images/branding/modio-dark.png"</span><span class="w">
+            </span><span class="s2">"filename"</span><span class="p">:</span><span class="w"> </span><span class="s2">"modio-color-dark.png"</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"original"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://static.mod.io/v1/images/branding/modio-color-dark.png"</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"thumb_320x180"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://static.mod.io/v1/images/branding/modio-color-dark.png"</span><span class="w">
           </span><span class="p">}</span><span class="w">
         </span><span class="p">]</span><span class="w">
       </span><span class="p">},</span><span class="w">
@@ -2609,10 +2634,10 @@ Accept: application/json
     </span><span class="s2">"username"</span><span class="p">:</span><span class="w"> </span><span class="s2">"XanT"</span><span class="p">,</span><span class="w">
     </span><span class="s2">"date_online"</span><span class="p">:</span><span class="w"> </span><span class="mi">1509922961</span><span class="p">,</span><span class="w">
     </span><span class="s2">"avatar"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-      </span><span class="s2">"filename"</span><span class="p">:</span><span class="w"> </span><span class="s2">"modio-dark.png"</span><span class="p">,</span><span class="w">
-      </span><span class="s2">"original"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://static.mod.io/v1/images/branding/modio-dark.png"</span><span class="p">,</span><span class="w">
-      </span><span class="s2">"thumb_50x50"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://static.mod.io/v1/images/branding/modio-dark.png"</span><span class="p">,</span><span class="w">
-      </span><span class="s2">"thumb_100x100"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://static.mod.io/v1/images/branding/modio-dark.png"</span><span class="w">
+      </span><span class="s2">"filename"</span><span class="p">:</span><span class="w"> </span><span class="s2">"modio-color-dark.png"</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"original"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://static.mod.io/v1/images/branding/modio-color-dark.png"</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"thumb_50x50"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://static.mod.io/v1/images/branding/modio-color-dark.png"</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"thumb_100x100"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://static.mod.io/v1/images/branding/modio-color-dark.png"</span><span class="w">
     </span><span class="p">},</span><span class="w">
     </span><span class="s2">"timezone"</span><span class="p">:</span><span class="w"> </span><span class="s2">"America/Los_Angeles"</span><span class="p">,</span><span class="w">
     </span><span class="s2">"language"</span><span class="p">:</span><span class="w"> </span><span class="s2">"en"</span><span class="p">,</span><span class="w">
@@ -2621,12 +2646,13 @@ Accept: application/json
   </span><span class="s2">"date_added"</span><span class="p">:</span><span class="w"> </span><span class="mi">1492564103</span><span class="p">,</span><span class="w">
   </span><span class="s2">"date_updated"</span><span class="p">:</span><span class="w"> </span><span class="mi">1499841487</span><span class="p">,</span><span class="w">
   </span><span class="s2">"date_live"</span><span class="p">:</span><span class="w"> </span><span class="mi">1499841403</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"maturity_option"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
   </span><span class="s2">"logo"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-    </span><span class="s2">"filename"</span><span class="p">:</span><span class="w"> </span><span class="s2">"modio-dark.png"</span><span class="p">,</span><span class="w">
-    </span><span class="s2">"original"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://static.mod.io/v1/images/branding/modio-dark.png"</span><span class="p">,</span><span class="w">
-    </span><span class="s2">"thumb_320x180"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://static.mod.io/v1/images/branding/modio-dark.png"</span><span class="p">,</span><span class="w">
-    </span><span class="s2">"thumb_640x360"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://static.mod.io/v1/images/branding/modio-dark.png"</span><span class="p">,</span><span class="w">
-    </span><span class="s2">"thumb_1280x720"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://static.mod.io/v1/images/branding/modio-dark.png"</span><span class="w">
+    </span><span class="s2">"filename"</span><span class="p">:</span><span class="w"> </span><span class="s2">"modio-color-dark.png"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"original"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://static.mod.io/v1/images/branding/modio-color-dark.png"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"thumb_320x180"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://static.mod.io/v1/images/branding/modio-color-dark.png"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"thumb_640x360"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://static.mod.io/v1/images/branding/modio-color-dark.png"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"thumb_1280x720"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://static.mod.io/v1/images/branding/modio-color-dark.png"</span><span class="w">
   </span><span class="p">},</span><span class="w">
   </span><span class="s2">"homepage_url"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://www.rogue-hdpack.com/"</span><span class="p">,</span><span class="w">
   </span><span class="s2">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Rogue Knight HD Pack"</span><span class="p">,</span><span class="w">
@@ -2671,9 +2697,9 @@ Accept: application/json
     </span><span class="p">],</span><span class="w">
     </span><span class="s2">"images"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
       </span><span class="p">{</span><span class="w">
-        </span><span class="s2">"filename"</span><span class="p">:</span><span class="w"> </span><span class="s2">"modio-dark.png"</span><span class="p">,</span><span class="w">
-        </span><span class="s2">"original"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://static.mod.io/v1/images/branding/modio-dark.png"</span><span class="p">,</span><span class="w">
-        </span><span class="s2">"thumb_320x180"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://static.mod.io/v1/images/branding/modio-dark.png"</span><span class="w">
+        </span><span class="s2">"filename"</span><span class="p">:</span><span class="w"> </span><span class="s2">"modio-color-dark.png"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"original"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://static.mod.io/v1/images/branding/modio-color-dark.png"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"thumb_320x180"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://static.mod.io/v1/images/branding/modio-color-dark.png"</span><span class="w">
       </span><span class="p">}</span><span class="w">
     </span><span class="p">]</span><span class="w">
   </span><span class="p">},</span><span class="w">
@@ -2868,6 +2894,12 @@ curl -X POST https://api.mod.io/v1/games/<span class="o">{</span>game-id<span cl
 <td>Maximium number of subscribers for this mod. A value of 0 disables this limit.</td>
 </tr>
 <tr>
+<td>maturity_option</td>
+<td>integer</td>
+<td></td>
+<td>Choose if this mod contains any of the following mature content. Note: The value of this field will default to 0 unless the parent game allows you to flag mature content (see <code>maturity_options</code> field in <a href="#game-object">Game Object</a>). <br><br><strong>0</strong> = None set <em>(default)</em><br><strong>1</strong> = Alcohol<br><strong>2</strong> = Drugs<br><strong>4</strong> = Violence<br><strong>8</strong> = Explicit<br><strong>?</strong> = Add the options you want together, to enable multiple options (see <a href="#bitwise-and-bitwise-and">BITWISE fields</a>)</td>
+</tr>
+<tr>
 <td>metadata_blob</td>
 <td>string</td>
 <td></td>
@@ -2896,10 +2928,10 @@ curl -X POST https://api.mod.io/v1/games/<span class="o">{</span>game-id<span cl
     </span><span class="s2">"username"</span><span class="p">:</span><span class="w"> </span><span class="s2">"XanT"</span><span class="p">,</span><span class="w">
     </span><span class="s2">"date_online"</span><span class="p">:</span><span class="w"> </span><span class="mi">1509922961</span><span class="p">,</span><span class="w">
     </span><span class="s2">"avatar"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-      </span><span class="s2">"filename"</span><span class="p">:</span><span class="w"> </span><span class="s2">"modio-dark.png"</span><span class="p">,</span><span class="w">
-      </span><span class="s2">"original"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://static.mod.io/v1/images/branding/modio-dark.png"</span><span class="p">,</span><span class="w">
-      </span><span class="s2">"thumb_50x50"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://static.mod.io/v1/images/branding/modio-dark.png"</span><span class="p">,</span><span class="w">
-      </span><span class="s2">"thumb_100x100"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://static.mod.io/v1/images/branding/modio-dark.png"</span><span class="w">
+      </span><span class="s2">"filename"</span><span class="p">:</span><span class="w"> </span><span class="s2">"modio-color-dark.png"</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"original"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://static.mod.io/v1/images/branding/modio-color-dark.png"</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"thumb_50x50"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://static.mod.io/v1/images/branding/modio-color-dark.png"</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"thumb_100x100"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://static.mod.io/v1/images/branding/modio-color-dark.png"</span><span class="w">
     </span><span class="p">},</span><span class="w">
     </span><span class="s2">"timezone"</span><span class="p">:</span><span class="w"> </span><span class="s2">"America/Los_Angeles"</span><span class="p">,</span><span class="w">
     </span><span class="s2">"language"</span><span class="p">:</span><span class="w"> </span><span class="s2">"en"</span><span class="p">,</span><span class="w">
@@ -2908,12 +2940,13 @@ curl -X POST https://api.mod.io/v1/games/<span class="o">{</span>game-id<span cl
   </span><span class="s2">"date_added"</span><span class="p">:</span><span class="w"> </span><span class="mi">1492564103</span><span class="p">,</span><span class="w">
   </span><span class="s2">"date_updated"</span><span class="p">:</span><span class="w"> </span><span class="mi">1499841487</span><span class="p">,</span><span class="w">
   </span><span class="s2">"date_live"</span><span class="p">:</span><span class="w"> </span><span class="mi">1499841403</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"maturity_option"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
   </span><span class="s2">"logo"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-    </span><span class="s2">"filename"</span><span class="p">:</span><span class="w"> </span><span class="s2">"modio-dark.png"</span><span class="p">,</span><span class="w">
-    </span><span class="s2">"original"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://static.mod.io/v1/images/branding/modio-dark.png"</span><span class="p">,</span><span class="w">
-    </span><span class="s2">"thumb_320x180"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://static.mod.io/v1/images/branding/modio-dark.png"</span><span class="p">,</span><span class="w">
-    </span><span class="s2">"thumb_640x360"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://static.mod.io/v1/images/branding/modio-dark.png"</span><span class="p">,</span><span class="w">
-    </span><span class="s2">"thumb_1280x720"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://static.mod.io/v1/images/branding/modio-dark.png"</span><span class="w">
+    </span><span class="s2">"filename"</span><span class="p">:</span><span class="w"> </span><span class="s2">"modio-color-dark.png"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"original"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://static.mod.io/v1/images/branding/modio-color-dark.png"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"thumb_320x180"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://static.mod.io/v1/images/branding/modio-color-dark.png"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"thumb_640x360"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://static.mod.io/v1/images/branding/modio-color-dark.png"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"thumb_1280x720"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://static.mod.io/v1/images/branding/modio-color-dark.png"</span><span class="w">
   </span><span class="p">},</span><span class="w">
   </span><span class="s2">"homepage_url"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://www.rogue-hdpack.com/"</span><span class="p">,</span><span class="w">
   </span><span class="s2">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Rogue Knight HD Pack"</span><span class="p">,</span><span class="w">
@@ -2958,9 +2991,9 @@ curl -X POST https://api.mod.io/v1/games/<span class="o">{</span>game-id<span cl
     </span><span class="p">],</span><span class="w">
     </span><span class="s2">"images"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
       </span><span class="p">{</span><span class="w">
-        </span><span class="s2">"filename"</span><span class="p">:</span><span class="w"> </span><span class="s2">"modio-dark.png"</span><span class="p">,</span><span class="w">
-        </span><span class="s2">"original"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://static.mod.io/v1/images/branding/modio-dark.png"</span><span class="p">,</span><span class="w">
-        </span><span class="s2">"thumb_320x180"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://static.mod.io/v1/images/branding/modio-dark.png"</span><span class="w">
+        </span><span class="s2">"filename"</span><span class="p">:</span><span class="w"> </span><span class="s2">"modio-color-dark.png"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"original"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://static.mod.io/v1/images/branding/modio-color-dark.png"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"thumb_320x180"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://static.mod.io/v1/images/branding/modio-color-dark.png"</span><span class="w">
       </span><span class="p">}</span><span class="w">
     </span><span class="p">]</span><span class="w">
   </span><span class="p">},</span><span class="w">
@@ -3169,6 +3202,12 @@ Content-Type: application/x-www-form-urlencoded
 <td>Maximium number of subscribers for this mod. A value of 0 disables this limit.</td>
 </tr>
 <tr>
+<td>maturity_option</td>
+<td>integer</td>
+<td></td>
+<td>Choose if this mod contains any of the following mature content. Note: The value of this field will default to 0 unless the parent game allows you to flag mature content (see <code>maturity_options</code> field in <a href="#game-object">Game Object</a>). <br><br><strong>0</strong> = None set <em>(default)</em><br><strong>1</strong> = Alcohol<br><strong>2</strong> = Drugs<br><strong>4</strong> = Violence<br><strong>8</strong> = Explicit<br><strong>?</strong> = Add the options you want together, to enable multiple options (see <a href="#bitwise-and-bitwise-and">BITWISE fields</a>)</td>
+</tr>
+<tr>
 <td>metadata_blob</td>
 <td>string</td>
 <td></td>
@@ -3191,10 +3230,10 @@ Content-Type: application/x-www-form-urlencoded
     </span><span class="s2">"username"</span><span class="p">:</span><span class="w"> </span><span class="s2">"XanT"</span><span class="p">,</span><span class="w">
     </span><span class="s2">"date_online"</span><span class="p">:</span><span class="w"> </span><span class="mi">1509922961</span><span class="p">,</span><span class="w">
     </span><span class="s2">"avatar"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-      </span><span class="s2">"filename"</span><span class="p">:</span><span class="w"> </span><span class="s2">"modio-dark.png"</span><span class="p">,</span><span class="w">
-      </span><span class="s2">"original"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://static.mod.io/v1/images/branding/modio-dark.png"</span><span class="p">,</span><span class="w">
-      </span><span class="s2">"thumb_50x50"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://static.mod.io/v1/images/branding/modio-dark.png"</span><span class="p">,</span><span class="w">
-      </span><span class="s2">"thumb_100x100"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://static.mod.io/v1/images/branding/modio-dark.png"</span><span class="w">
+      </span><span class="s2">"filename"</span><span class="p">:</span><span class="w"> </span><span class="s2">"modio-color-dark.png"</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"original"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://static.mod.io/v1/images/branding/modio-color-dark.png"</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"thumb_50x50"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://static.mod.io/v1/images/branding/modio-color-dark.png"</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"thumb_100x100"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://static.mod.io/v1/images/branding/modio-color-dark.png"</span><span class="w">
     </span><span class="p">},</span><span class="w">
     </span><span class="s2">"timezone"</span><span class="p">:</span><span class="w"> </span><span class="s2">"America/Los_Angeles"</span><span class="p">,</span><span class="w">
     </span><span class="s2">"language"</span><span class="p">:</span><span class="w"> </span><span class="s2">"en"</span><span class="p">,</span><span class="w">
@@ -3203,12 +3242,13 @@ Content-Type: application/x-www-form-urlencoded
   </span><span class="s2">"date_added"</span><span class="p">:</span><span class="w"> </span><span class="mi">1492564103</span><span class="p">,</span><span class="w">
   </span><span class="s2">"date_updated"</span><span class="p">:</span><span class="w"> </span><span class="mi">1499841487</span><span class="p">,</span><span class="w">
   </span><span class="s2">"date_live"</span><span class="p">:</span><span class="w"> </span><span class="mi">1499841403</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"maturity_option"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
   </span><span class="s2">"logo"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-    </span><span class="s2">"filename"</span><span class="p">:</span><span class="w"> </span><span class="s2">"modio-dark.png"</span><span class="p">,</span><span class="w">
-    </span><span class="s2">"original"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://static.mod.io/v1/images/branding/modio-dark.png"</span><span class="p">,</span><span class="w">
-    </span><span class="s2">"thumb_320x180"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://static.mod.io/v1/images/branding/modio-dark.png"</span><span class="p">,</span><span class="w">
-    </span><span class="s2">"thumb_640x360"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://static.mod.io/v1/images/branding/modio-dark.png"</span><span class="p">,</span><span class="w">
-    </span><span class="s2">"thumb_1280x720"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://static.mod.io/v1/images/branding/modio-dark.png"</span><span class="w">
+    </span><span class="s2">"filename"</span><span class="p">:</span><span class="w"> </span><span class="s2">"modio-color-dark.png"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"original"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://static.mod.io/v1/images/branding/modio-color-dark.png"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"thumb_320x180"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://static.mod.io/v1/images/branding/modio-color-dark.png"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"thumb_640x360"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://static.mod.io/v1/images/branding/modio-color-dark.png"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"thumb_1280x720"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://static.mod.io/v1/images/branding/modio-color-dark.png"</span><span class="w">
   </span><span class="p">},</span><span class="w">
   </span><span class="s2">"homepage_url"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://www.rogue-hdpack.com/"</span><span class="p">,</span><span class="w">
   </span><span class="s2">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Rogue Knight HD Pack"</span><span class="p">,</span><span class="w">
@@ -3253,9 +3293,9 @@ Content-Type: application/x-www-form-urlencoded
     </span><span class="p">],</span><span class="w">
     </span><span class="s2">"images"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
       </span><span class="p">{</span><span class="w">
-        </span><span class="s2">"filename"</span><span class="p">:</span><span class="w"> </span><span class="s2">"modio-dark.png"</span><span class="p">,</span><span class="w">
-        </span><span class="s2">"original"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://static.mod.io/v1/images/branding/modio-dark.png"</span><span class="p">,</span><span class="w">
-        </span><span class="s2">"thumb_320x180"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://static.mod.io/v1/images/branding/modio-dark.png"</span><span class="w">
+        </span><span class="s2">"filename"</span><span class="p">:</span><span class="w"> </span><span class="s2">"modio-color-dark.png"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"original"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://static.mod.io/v1/images/branding/modio-color-dark.png"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"thumb_320x180"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://static.mod.io/v1/images/branding/modio-color-dark.png"</span><span class="w">
       </span><span class="p">}</span><span class="w">
     </span><span class="p">]</span><span class="w">
   </span><span class="p">},</span><span class="w">
@@ -4723,10 +4763,10 @@ Content-Type: application/x-www-form-urlencoded
     </span><span class="s2">"username"</span><span class="p">:</span><span class="w"> </span><span class="s2">"XanT"</span><span class="p">,</span><span class="w">
     </span><span class="s2">"date_online"</span><span class="p">:</span><span class="w"> </span><span class="mi">1509922961</span><span class="p">,</span><span class="w">
     </span><span class="s2">"avatar"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-      </span><span class="s2">"filename"</span><span class="p">:</span><span class="w"> </span><span class="s2">"modio-dark.png"</span><span class="p">,</span><span class="w">
-      </span><span class="s2">"original"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://static.mod.io/v1/images/branding/modio-dark.png"</span><span class="p">,</span><span class="w">
-      </span><span class="s2">"thumb_50x50"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://static.mod.io/v1/images/branding/modio-dark.png"</span><span class="p">,</span><span class="w">
-      </span><span class="s2">"thumb_100x100"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://static.mod.io/v1/images/branding/modio-dark.png"</span><span class="w">
+      </span><span class="s2">"filename"</span><span class="p">:</span><span class="w"> </span><span class="s2">"modio-color-dark.png"</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"original"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://static.mod.io/v1/images/branding/modio-color-dark.png"</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"thumb_50x50"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://static.mod.io/v1/images/branding/modio-color-dark.png"</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"thumb_100x100"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://static.mod.io/v1/images/branding/modio-color-dark.png"</span><span class="w">
     </span><span class="p">},</span><span class="w">
     </span><span class="s2">"timezone"</span><span class="p">:</span><span class="w"> </span><span class="s2">"America/Los_Angeles"</span><span class="p">,</span><span class="w">
     </span><span class="s2">"language"</span><span class="p">:</span><span class="w"> </span><span class="s2">"en"</span><span class="p">,</span><span class="w">
@@ -4735,12 +4775,13 @@ Content-Type: application/x-www-form-urlencoded
   </span><span class="s2">"date_added"</span><span class="p">:</span><span class="w"> </span><span class="mi">1492564103</span><span class="p">,</span><span class="w">
   </span><span class="s2">"date_updated"</span><span class="p">:</span><span class="w"> </span><span class="mi">1499841487</span><span class="p">,</span><span class="w">
   </span><span class="s2">"date_live"</span><span class="p">:</span><span class="w"> </span><span class="mi">1499841403</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"maturity_option"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
   </span><span class="s2">"logo"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-    </span><span class="s2">"filename"</span><span class="p">:</span><span class="w"> </span><span class="s2">"modio-dark.png"</span><span class="p">,</span><span class="w">
-    </span><span class="s2">"original"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://static.mod.io/v1/images/branding/modio-dark.png"</span><span class="p">,</span><span class="w">
-    </span><span class="s2">"thumb_320x180"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://static.mod.io/v1/images/branding/modio-dark.png"</span><span class="p">,</span><span class="w">
-    </span><span class="s2">"thumb_640x360"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://static.mod.io/v1/images/branding/modio-dark.png"</span><span class="p">,</span><span class="w">
-    </span><span class="s2">"thumb_1280x720"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://static.mod.io/v1/images/branding/modio-dark.png"</span><span class="w">
+    </span><span class="s2">"filename"</span><span class="p">:</span><span class="w"> </span><span class="s2">"modio-color-dark.png"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"original"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://static.mod.io/v1/images/branding/modio-color-dark.png"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"thumb_320x180"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://static.mod.io/v1/images/branding/modio-color-dark.png"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"thumb_640x360"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://static.mod.io/v1/images/branding/modio-color-dark.png"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"thumb_1280x720"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://static.mod.io/v1/images/branding/modio-color-dark.png"</span><span class="w">
   </span><span class="p">},</span><span class="w">
   </span><span class="s2">"homepage_url"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://www.rogue-hdpack.com/"</span><span class="p">,</span><span class="w">
   </span><span class="s2">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Rogue Knight HD Pack"</span><span class="p">,</span><span class="w">
@@ -4785,9 +4826,9 @@ Content-Type: application/x-www-form-urlencoded
     </span><span class="p">],</span><span class="w">
     </span><span class="s2">"images"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
       </span><span class="p">{</span><span class="w">
-        </span><span class="s2">"filename"</span><span class="p">:</span><span class="w"> </span><span class="s2">"modio-dark.png"</span><span class="p">,</span><span class="w">
-        </span><span class="s2">"original"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://static.mod.io/v1/images/branding/modio-dark.png"</span><span class="p">,</span><span class="w">
-        </span><span class="s2">"thumb_320x180"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://static.mod.io/v1/images/branding/modio-dark.png"</span><span class="w">
+        </span><span class="s2">"filename"</span><span class="p">:</span><span class="w"> </span><span class="s2">"modio-color-dark.png"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"original"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://static.mod.io/v1/images/branding/modio-color-dark.png"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"thumb_320x180"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://static.mod.io/v1/images/branding/modio-color-dark.png"</span><span class="w">
       </span><span class="p">}</span><span class="w">
     </span><span class="p">]</span><span class="w">
   </span><span class="p">},</span><span class="w">
@@ -7169,10 +7210,10 @@ Accept: application/json
         </span><span class="s2">"username"</span><span class="p">:</span><span class="w"> </span><span class="s2">"XanT"</span><span class="p">,</span><span class="w">
         </span><span class="s2">"date_online"</span><span class="p">:</span><span class="w"> </span><span class="mi">1509922961</span><span class="p">,</span><span class="w">
         </span><span class="s2">"avatar"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-          </span><span class="s2">"filename"</span><span class="p">:</span><span class="w"> </span><span class="s2">"modio-dark.png"</span><span class="p">,</span><span class="w">
-          </span><span class="s2">"original"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://static.mod.io/v1/images/branding/modio-dark.png"</span><span class="p">,</span><span class="w">
-          </span><span class="s2">"thumb_50x50"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://static.mod.io/v1/images/branding/modio-dark.png"</span><span class="p">,</span><span class="w">
-          </span><span class="s2">"thumb_100x100"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://static.mod.io/v1/images/branding/modio-dark.png"</span><span class="w">
+          </span><span class="s2">"filename"</span><span class="p">:</span><span class="w"> </span><span class="s2">"modio-color-dark.png"</span><span class="p">,</span><span class="w">
+          </span><span class="s2">"original"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://static.mod.io/v1/images/branding/modio-color-dark.png"</span><span class="p">,</span><span class="w">
+          </span><span class="s2">"thumb_50x50"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://static.mod.io/v1/images/branding/modio-color-dark.png"</span><span class="p">,</span><span class="w">
+          </span><span class="s2">"thumb_100x100"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://static.mod.io/v1/images/branding/modio-color-dark.png"</span><span class="w">
         </span><span class="p">},</span><span class="w">
         </span><span class="s2">"timezone"</span><span class="p">:</span><span class="w"> </span><span class="s2">"America/Los_Angeles"</span><span class="p">,</span><span class="w">
         </span><span class="s2">"language"</span><span class="p">:</span><span class="w"> </span><span class="s2">"en"</span><span class="p">,</span><span class="w">
@@ -7701,7 +7742,7 @@ Accept: application/json
 </code></pre>
 <p><span class="httpmethod GET">GET</span> <span class="endpointheading">/games/{game-id}/mods/{mod-id}/comments</span></p>
 
-<p>Get all comments posted in the mods profile. Successful request will return an array of <a href="#get-comments">Comment Objects</a>. We recommended reading the <a href="#filtering">filtering documentation</a> to return only the records you want.</p>
+<p>Get all comments posted in the mods profile. Successful request will return an array of <a href="#get-all-mod-comments-2">Comment Objects</a>. We recommended reading the <a href="#filtering">filtering documentation</a> to return only the records you want.</p>
 
 <table>
 <thead>
@@ -7763,16 +7804,16 @@ Accept: application/json
     </span><span class="p">{</span><span class="w">
       </span><span class="s2">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span><span class="w">
       </span><span class="s2">"mod_id"</span><span class="p">:</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span><span class="w">
-      </span><span class="s2">"submitted_by"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+      </span><span class="s2">"user"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
         </span><span class="s2">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
         </span><span class="s2">"name_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"xant"</span><span class="p">,</span><span class="w">
         </span><span class="s2">"username"</span><span class="p">:</span><span class="w"> </span><span class="s2">"XanT"</span><span class="p">,</span><span class="w">
         </span><span class="s2">"date_online"</span><span class="p">:</span><span class="w"> </span><span class="mi">1509922961</span><span class="p">,</span><span class="w">
         </span><span class="s2">"avatar"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-          </span><span class="s2">"filename"</span><span class="p">:</span><span class="w"> </span><span class="s2">"modio-dark.png"</span><span class="p">,</span><span class="w">
-          </span><span class="s2">"original"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://static.mod.io/v1/images/branding/modio-dark.png"</span><span class="p">,</span><span class="w">
-          </span><span class="s2">"thumb_50x50"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://static.mod.io/v1/images/branding/modio-dark.png"</span><span class="p">,</span><span class="w">
-          </span><span class="s2">"thumb_100x100"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://static.mod.io/v1/images/branding/modio-dark.png"</span><span class="w">
+          </span><span class="s2">"filename"</span><span class="p">:</span><span class="w"> </span><span class="s2">"modio-color-dark.png"</span><span class="p">,</span><span class="w">
+          </span><span class="s2">"original"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://static.mod.io/v1/images/branding/modio-color-dark.png"</span><span class="p">,</span><span class="w">
+          </span><span class="s2">"thumb_50x50"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://static.mod.io/v1/images/branding/modio-color-dark.png"</span><span class="p">,</span><span class="w">
+          </span><span class="s2">"thumb_100x100"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://static.mod.io/v1/images/branding/modio-color-dark.png"</span><span class="w">
         </span><span class="p">},</span><span class="w">
         </span><span class="s2">"timezone"</span><span class="p">:</span><span class="w"> </span><span class="s2">"America/Los_Angeles"</span><span class="p">,</span><span class="w">
         </span><span class="s2">"language"</span><span class="p">:</span><span class="w"> </span><span class="s2">"en"</span><span class="p">,</span><span class="w">
@@ -8054,10 +8095,10 @@ Content-Type: application/x-www-form-urlencoded
   </span><span class="s2">"username"</span><span class="p">:</span><span class="w"> </span><span class="s2">"XanT"</span><span class="p">,</span><span class="w">
   </span><span class="s2">"date_online"</span><span class="p">:</span><span class="w"> </span><span class="mi">1509922961</span><span class="p">,</span><span class="w">
   </span><span class="s2">"avatar"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-    </span><span class="s2">"filename"</span><span class="p">:</span><span class="w"> </span><span class="s2">"modio-dark.png"</span><span class="p">,</span><span class="w">
-    </span><span class="s2">"original"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://static.mod.io/v1/images/branding/modio-dark.png"</span><span class="p">,</span><span class="w">
-    </span><span class="s2">"thumb_50x50"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://static.mod.io/v1/images/branding/modio-dark.png"</span><span class="p">,</span><span class="w">
-    </span><span class="s2">"thumb_100x100"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://static.mod.io/v1/images/branding/modio-dark.png"</span><span class="w">
+    </span><span class="s2">"filename"</span><span class="p">:</span><span class="w"> </span><span class="s2">"modio-color-dark.png"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"original"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://static.mod.io/v1/images/branding/modio-color-dark.png"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"thumb_50x50"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://static.mod.io/v1/images/branding/modio-color-dark.png"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"thumb_100x100"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://static.mod.io/v1/images/branding/modio-color-dark.png"</span><span class="w">
   </span><span class="p">},</span><span class="w">
   </span><span class="s2">"timezone"</span><span class="p">:</span><span class="w"> </span><span class="s2">"America/Los_Angeles"</span><span class="p">,</span><span class="w">
   </span><span class="s2">"language"</span><span class="p">:</span><span class="w"> </span><span class="s2">"en"</span><span class="p">,</span><span class="w">
@@ -8215,10 +8256,10 @@ Accept: application/json
       </span><span class="s2">"username"</span><span class="p">:</span><span class="w"> </span><span class="s2">"XanT"</span><span class="p">,</span><span class="w">
       </span><span class="s2">"date_online"</span><span class="p">:</span><span class="w"> </span><span class="mi">1509922961</span><span class="p">,</span><span class="w">
       </span><span class="s2">"avatar"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-        </span><span class="s2">"filename"</span><span class="p">:</span><span class="w"> </span><span class="s2">"modio-dark.png"</span><span class="p">,</span><span class="w">
-        </span><span class="s2">"original"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://static.mod.io/v1/images/branding/modio-dark.png"</span><span class="p">,</span><span class="w">
-        </span><span class="s2">"thumb_50x50"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://static.mod.io/v1/images/branding/modio-dark.png"</span><span class="p">,</span><span class="w">
-        </span><span class="s2">"thumb_100x100"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://static.mod.io/v1/images/branding/modio-dark.png"</span><span class="w">
+        </span><span class="s2">"filename"</span><span class="p">:</span><span class="w"> </span><span class="s2">"modio-color-dark.png"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"original"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://static.mod.io/v1/images/branding/modio-color-dark.png"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"thumb_50x50"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://static.mod.io/v1/images/branding/modio-color-dark.png"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"thumb_100x100"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://static.mod.io/v1/images/branding/modio-color-dark.png"</span><span class="w">
       </span><span class="p">},</span><span class="w">
       </span><span class="s2">"timezone"</span><span class="p">:</span><span class="w"> </span><span class="s2">"America/Los_Angeles"</span><span class="p">,</span><span class="w">
       </span><span class="s2">"language"</span><span class="p">:</span><span class="w"> </span><span class="s2">"en"</span><span class="p">,</span><span class="w">
@@ -8340,10 +8381,10 @@ Accept: application/json
   </span><span class="s2">"username"</span><span class="p">:</span><span class="w"> </span><span class="s2">"XanT"</span><span class="p">,</span><span class="w">
   </span><span class="s2">"date_online"</span><span class="p">:</span><span class="w"> </span><span class="mi">1509922961</span><span class="p">,</span><span class="w">
   </span><span class="s2">"avatar"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-    </span><span class="s2">"filename"</span><span class="p">:</span><span class="w"> </span><span class="s2">"modio-dark.png"</span><span class="p">,</span><span class="w">
-    </span><span class="s2">"original"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://static.mod.io/v1/images/branding/modio-dark.png"</span><span class="p">,</span><span class="w">
-    </span><span class="s2">"thumb_50x50"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://static.mod.io/v1/images/branding/modio-dark.png"</span><span class="p">,</span><span class="w">
-    </span><span class="s2">"thumb_100x100"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://static.mod.io/v1/images/branding/modio-dark.png"</span><span class="w">
+    </span><span class="s2">"filename"</span><span class="p">:</span><span class="w"> </span><span class="s2">"modio-color-dark.png"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"original"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://static.mod.io/v1/images/branding/modio-color-dark.png"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"thumb_50x50"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://static.mod.io/v1/images/branding/modio-color-dark.png"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"thumb_100x100"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://static.mod.io/v1/images/branding/modio-color-dark.png"</span><span class="w">
   </span><span class="p">},</span><span class="w">
   </span><span class="s2">"timezone"</span><span class="p">:</span><span class="w"> </span><span class="s2">"America/Los_Angeles"</span><span class="p">,</span><span class="w">
   </span><span class="s2">"language"</span><span class="p">:</span><span class="w"> </span><span class="s2">"en"</span><span class="p">,</span><span class="w">
@@ -8634,10 +8675,10 @@ Authorization: Bearer {access-token}
   </span><span class="s2">"username"</span><span class="p">:</span><span class="w"> </span><span class="s2">"XanT"</span><span class="p">,</span><span class="w">
   </span><span class="s2">"date_online"</span><span class="p">:</span><span class="w"> </span><span class="mi">1509922961</span><span class="p">,</span><span class="w">
   </span><span class="s2">"avatar"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-    </span><span class="s2">"filename"</span><span class="p">:</span><span class="w"> </span><span class="s2">"modio-dark.png"</span><span class="p">,</span><span class="w">
-    </span><span class="s2">"original"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://static.mod.io/v1/images/branding/modio-dark.png"</span><span class="p">,</span><span class="w">
-    </span><span class="s2">"thumb_50x50"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://static.mod.io/v1/images/branding/modio-dark.png"</span><span class="p">,</span><span class="w">
-    </span><span class="s2">"thumb_100x100"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://static.mod.io/v1/images/branding/modio-dark.png"</span><span class="w">
+    </span><span class="s2">"filename"</span><span class="p">:</span><span class="w"> </span><span class="s2">"modio-color-dark.png"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"original"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://static.mod.io/v1/images/branding/modio-color-dark.png"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"thumb_50x50"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://static.mod.io/v1/images/branding/modio-color-dark.png"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"thumb_100x100"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://static.mod.io/v1/images/branding/modio-color-dark.png"</span><span class="w">
   </span><span class="p">},</span><span class="w">
   </span><span class="s2">"timezone"</span><span class="p">:</span><span class="w"> </span><span class="s2">"America/Los_Angeles"</span><span class="p">,</span><span class="w">
   </span><span class="s2">"language"</span><span class="p">:</span><span class="w"> </span><span class="s2">"en"</span><span class="p">,</span><span class="w">
@@ -8862,10 +8903,10 @@ Authorization: Bearer {access-token}
         </span><span class="s2">"username"</span><span class="p">:</span><span class="w"> </span><span class="s2">"XanT"</span><span class="p">,</span><span class="w">
         </span><span class="s2">"date_online"</span><span class="p">:</span><span class="w"> </span><span class="mi">1509922961</span><span class="p">,</span><span class="w">
         </span><span class="s2">"avatar"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-          </span><span class="s2">"filename"</span><span class="p">:</span><span class="w"> </span><span class="s2">"modio-dark.png"</span><span class="p">,</span><span class="w">
-          </span><span class="s2">"original"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://static.mod.io/v1/images/branding/modio-dark.png"</span><span class="p">,</span><span class="w">
-          </span><span class="s2">"thumb_50x50"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://static.mod.io/v1/images/branding/modio-dark.png"</span><span class="p">,</span><span class="w">
-          </span><span class="s2">"thumb_100x100"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://static.mod.io/v1/images/branding/modio-dark.png"</span><span class="w">
+          </span><span class="s2">"filename"</span><span class="p">:</span><span class="w"> </span><span class="s2">"modio-color-dark.png"</span><span class="p">,</span><span class="w">
+          </span><span class="s2">"original"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://static.mod.io/v1/images/branding/modio-color-dark.png"</span><span class="p">,</span><span class="w">
+          </span><span class="s2">"thumb_50x50"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://static.mod.io/v1/images/branding/modio-color-dark.png"</span><span class="p">,</span><span class="w">
+          </span><span class="s2">"thumb_100x100"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://static.mod.io/v1/images/branding/modio-color-dark.png"</span><span class="w">
         </span><span class="p">},</span><span class="w">
         </span><span class="s2">"timezone"</span><span class="p">:</span><span class="w"> </span><span class="s2">"America/Los_Angeles"</span><span class="p">,</span><span class="w">
         </span><span class="s2">"language"</span><span class="p">:</span><span class="w"> </span><span class="s2">"en"</span><span class="p">,</span><span class="w">
@@ -8874,12 +8915,13 @@ Authorization: Bearer {access-token}
       </span><span class="s2">"date_added"</span><span class="p">:</span><span class="w"> </span><span class="mi">1492564103</span><span class="p">,</span><span class="w">
       </span><span class="s2">"date_updated"</span><span class="p">:</span><span class="w"> </span><span class="mi">1499841487</span><span class="p">,</span><span class="w">
       </span><span class="s2">"date_live"</span><span class="p">:</span><span class="w"> </span><span class="mi">1499841403</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"maturity_option"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
       </span><span class="s2">"logo"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-        </span><span class="s2">"filename"</span><span class="p">:</span><span class="w"> </span><span class="s2">"modio-dark.png"</span><span class="p">,</span><span class="w">
-        </span><span class="s2">"original"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://static.mod.io/v1/images/branding/modio-dark.png"</span><span class="p">,</span><span class="w">
-        </span><span class="s2">"thumb_320x180"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://static.mod.io/v1/images/branding/modio-dark.png"</span><span class="p">,</span><span class="w">
-        </span><span class="s2">"thumb_640x360"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://static.mod.io/v1/images/branding/modio-dark.png"</span><span class="p">,</span><span class="w">
-        </span><span class="s2">"thumb_1280x720"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://static.mod.io/v1/images/branding/modio-dark.png"</span><span class="w">
+        </span><span class="s2">"filename"</span><span class="p">:</span><span class="w"> </span><span class="s2">"modio-color-dark.png"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"original"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://static.mod.io/v1/images/branding/modio-color-dark.png"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"thumb_320x180"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://static.mod.io/v1/images/branding/modio-color-dark.png"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"thumb_640x360"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://static.mod.io/v1/images/branding/modio-color-dark.png"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"thumb_1280x720"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://static.mod.io/v1/images/branding/modio-color-dark.png"</span><span class="w">
       </span><span class="p">},</span><span class="w">
       </span><span class="s2">"homepage_url"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://www.rogue-hdpack.com/"</span><span class="p">,</span><span class="w">
       </span><span class="s2">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Rogue Knight HD Pack"</span><span class="p">,</span><span class="w">
@@ -8924,9 +8966,9 @@ Authorization: Bearer {access-token}
         </span><span class="p">],</span><span class="w">
         </span><span class="s2">"images"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
           </span><span class="p">{</span><span class="w">
-            </span><span class="s2">"filename"</span><span class="p">:</span><span class="w"> </span><span class="s2">"modio-dark.png"</span><span class="p">,</span><span class="w">
-            </span><span class="s2">"original"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://static.mod.io/v1/images/branding/modio-dark.png"</span><span class="p">,</span><span class="w">
-            </span><span class="s2">"thumb_320x180"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://static.mod.io/v1/images/branding/modio-dark.png"</span><span class="w">
+            </span><span class="s2">"filename"</span><span class="p">:</span><span class="w"> </span><span class="s2">"modio-color-dark.png"</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"original"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://static.mod.io/v1/images/branding/modio-color-dark.png"</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"thumb_320x180"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://static.mod.io/v1/images/branding/modio-color-dark.png"</span><span class="w">
           </span><span class="p">}</span><span class="w">
         </span><span class="p">]</span><span class="w">
       </span><span class="p">},</span><span class="w">
@@ -9325,10 +9367,10 @@ Authorization: Bearer {access-token}
         </span><span class="s2">"username"</span><span class="p">:</span><span class="w"> </span><span class="s2">"XanT"</span><span class="p">,</span><span class="w">
         </span><span class="s2">"date_online"</span><span class="p">:</span><span class="w"> </span><span class="mi">1509922961</span><span class="p">,</span><span class="w">
         </span><span class="s2">"avatar"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-          </span><span class="s2">"filename"</span><span class="p">:</span><span class="w"> </span><span class="s2">"modio-dark.png"</span><span class="p">,</span><span class="w">
-          </span><span class="s2">"original"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://static.mod.io/v1/images/branding/modio-dark.png"</span><span class="p">,</span><span class="w">
-          </span><span class="s2">"thumb_50x50"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://static.mod.io/v1/images/branding/modio-dark.png"</span><span class="p">,</span><span class="w">
-          </span><span class="s2">"thumb_100x100"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://static.mod.io/v1/images/branding/modio-dark.png"</span><span class="w">
+          </span><span class="s2">"filename"</span><span class="p">:</span><span class="w"> </span><span class="s2">"modio-color-dark.png"</span><span class="p">,</span><span class="w">
+          </span><span class="s2">"original"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://static.mod.io/v1/images/branding/modio-color-dark.png"</span><span class="p">,</span><span class="w">
+          </span><span class="s2">"thumb_50x50"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://static.mod.io/v1/images/branding/modio-color-dark.png"</span><span class="p">,</span><span class="w">
+          </span><span class="s2">"thumb_100x100"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://static.mod.io/v1/images/branding/modio-color-dark.png"</span><span class="w">
         </span><span class="p">},</span><span class="w">
         </span><span class="s2">"timezone"</span><span class="p">:</span><span class="w"> </span><span class="s2">"America/Los_Angeles"</span><span class="p">,</span><span class="w">
         </span><span class="s2">"language"</span><span class="p">:</span><span class="w"> </span><span class="s2">"en"</span><span class="p">,</span><span class="w">
@@ -9343,24 +9385,25 @@ Authorization: Bearer {access-token}
       </span><span class="s2">"community_options"</span><span class="p">:</span><span class="w"> </span><span class="mi">3</span><span class="p">,</span><span class="w">
       </span><span class="s2">"revenue_options"</span><span class="p">:</span><span class="w"> </span><span class="mi">1500</span><span class="p">,</span><span class="w">
       </span><span class="s2">"api_access_options"</span><span class="p">:</span><span class="w"> </span><span class="mi">3</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"maturity_options"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
       </span><span class="s2">"ugc_name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"map"</span><span class="p">,</span><span class="w">
       </span><span class="s2">"icon"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-        </span><span class="s2">"filename"</span><span class="p">:</span><span class="w"> </span><span class="s2">"modio-dark.png"</span><span class="p">,</span><span class="w">
-        </span><span class="s2">"original"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://static.mod.io/v1/images/branding/modio-dark.png"</span><span class="p">,</span><span class="w">
-        </span><span class="s2">"thumb_64x64"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://static.mod.io/v1/images/branding/modio-dark.png"</span><span class="p">,</span><span class="w">
-        </span><span class="s2">"thumb_128x128"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://static.mod.io/v1/images/branding/modio-dark.png"</span><span class="p">,</span><span class="w">
-        </span><span class="s2">"thumb_256x256"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://static.mod.io/v1/images/branding/modio-dark.png"</span><span class="w">
+        </span><span class="s2">"filename"</span><span class="p">:</span><span class="w"> </span><span class="s2">"modio-color-dark.png"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"original"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://static.mod.io/v1/images/branding/modio-color-dark.png"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"thumb_64x64"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://static.mod.io/v1/images/branding/modio-color-dark.png"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"thumb_128x128"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://static.mod.io/v1/images/branding/modio-color-dark.png"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"thumb_256x256"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://static.mod.io/v1/images/branding/modio-color-dark.png"</span><span class="w">
       </span><span class="p">},</span><span class="w">
       </span><span class="s2">"logo"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-        </span><span class="s2">"filename"</span><span class="p">:</span><span class="w"> </span><span class="s2">"modio-dark.png"</span><span class="p">,</span><span class="w">
-        </span><span class="s2">"original"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://static.mod.io/v1/images/branding/modio-dark.png"</span><span class="p">,</span><span class="w">
-        </span><span class="s2">"thumb_320x180"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://static.mod.io/v1/images/branding/modio-dark.png"</span><span class="p">,</span><span class="w">
-        </span><span class="s2">"thumb_640x360"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://static.mod.io/v1/images/branding/modio-dark.png"</span><span class="p">,</span><span class="w">
-        </span><span class="s2">"thumb_1280x720"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://static.mod.io/v1/images/branding/modio-dark.png"</span><span class="w">
+        </span><span class="s2">"filename"</span><span class="p">:</span><span class="w"> </span><span class="s2">"modio-color-dark.png"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"original"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://static.mod.io/v1/images/branding/modio-color-dark.png"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"thumb_320x180"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://static.mod.io/v1/images/branding/modio-color-dark.png"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"thumb_640x360"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://static.mod.io/v1/images/branding/modio-color-dark.png"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"thumb_1280x720"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://static.mod.io/v1/images/branding/modio-color-dark.png"</span><span class="w">
       </span><span class="p">},</span><span class="w">
       </span><span class="s2">"header"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
         </span><span class="s2">"filename"</span><span class="p">:</span><span class="w"> </span><span class="s2">"demo.png"</span><span class="p">,</span><span class="w">
-        </span><span class="s2">"original"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://static.mod.io/v1/images/branding/modio-dark.png"</span><span class="w">
+        </span><span class="s2">"original"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://static.mod.io/v1/images/branding/modio-color-dark.png"</span><span class="w">
       </span><span class="p">},</span><span class="w">
       </span><span class="s2">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Rogue Knight"</span><span class="p">,</span><span class="w">
       </span><span class="s2">"name_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"rogue-knight"</span><span class="p">,</span><span class="w">
@@ -9626,10 +9669,10 @@ Authorization: Bearer {access-token}
         </span><span class="s2">"username"</span><span class="p">:</span><span class="w"> </span><span class="s2">"XanT"</span><span class="p">,</span><span class="w">
         </span><span class="s2">"date_online"</span><span class="p">:</span><span class="w"> </span><span class="mi">1509922961</span><span class="p">,</span><span class="w">
         </span><span class="s2">"avatar"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-          </span><span class="s2">"filename"</span><span class="p">:</span><span class="w"> </span><span class="s2">"modio-dark.png"</span><span class="p">,</span><span class="w">
-          </span><span class="s2">"original"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://static.mod.io/v1/images/branding/modio-dark.png"</span><span class="p">,</span><span class="w">
-          </span><span class="s2">"thumb_50x50"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://static.mod.io/v1/images/branding/modio-dark.png"</span><span class="p">,</span><span class="w">
-          </span><span class="s2">"thumb_100x100"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://static.mod.io/v1/images/branding/modio-dark.png"</span><span class="w">
+          </span><span class="s2">"filename"</span><span class="p">:</span><span class="w"> </span><span class="s2">"modio-color-dark.png"</span><span class="p">,</span><span class="w">
+          </span><span class="s2">"original"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://static.mod.io/v1/images/branding/modio-color-dark.png"</span><span class="p">,</span><span class="w">
+          </span><span class="s2">"thumb_50x50"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://static.mod.io/v1/images/branding/modio-color-dark.png"</span><span class="p">,</span><span class="w">
+          </span><span class="s2">"thumb_100x100"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://static.mod.io/v1/images/branding/modio-color-dark.png"</span><span class="w">
         </span><span class="p">},</span><span class="w">
         </span><span class="s2">"timezone"</span><span class="p">:</span><span class="w"> </span><span class="s2">"America/Los_Angeles"</span><span class="p">,</span><span class="w">
         </span><span class="s2">"language"</span><span class="p">:</span><span class="w"> </span><span class="s2">"en"</span><span class="p">,</span><span class="w">
@@ -9638,12 +9681,13 @@ Authorization: Bearer {access-token}
       </span><span class="s2">"date_added"</span><span class="p">:</span><span class="w"> </span><span class="mi">1492564103</span><span class="p">,</span><span class="w">
       </span><span class="s2">"date_updated"</span><span class="p">:</span><span class="w"> </span><span class="mi">1499841487</span><span class="p">,</span><span class="w">
       </span><span class="s2">"date_live"</span><span class="p">:</span><span class="w"> </span><span class="mi">1499841403</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"maturity_option"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
       </span><span class="s2">"logo"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-        </span><span class="s2">"filename"</span><span class="p">:</span><span class="w"> </span><span class="s2">"modio-dark.png"</span><span class="p">,</span><span class="w">
-        </span><span class="s2">"original"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://static.mod.io/v1/images/branding/modio-dark.png"</span><span class="p">,</span><span class="w">
-        </span><span class="s2">"thumb_320x180"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://static.mod.io/v1/images/branding/modio-dark.png"</span><span class="p">,</span><span class="w">
-        </span><span class="s2">"thumb_640x360"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://static.mod.io/v1/images/branding/modio-dark.png"</span><span class="p">,</span><span class="w">
-        </span><span class="s2">"thumb_1280x720"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://static.mod.io/v1/images/branding/modio-dark.png"</span><span class="w">
+        </span><span class="s2">"filename"</span><span class="p">:</span><span class="w"> </span><span class="s2">"modio-color-dark.png"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"original"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://static.mod.io/v1/images/branding/modio-color-dark.png"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"thumb_320x180"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://static.mod.io/v1/images/branding/modio-color-dark.png"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"thumb_640x360"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://static.mod.io/v1/images/branding/modio-color-dark.png"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"thumb_1280x720"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://static.mod.io/v1/images/branding/modio-color-dark.png"</span><span class="w">
       </span><span class="p">},</span><span class="w">
       </span><span class="s2">"homepage_url"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://www.rogue-hdpack.com/"</span><span class="p">,</span><span class="w">
       </span><span class="s2">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Rogue Knight HD Pack"</span><span class="p">,</span><span class="w">
@@ -9688,9 +9732,9 @@ Authorization: Bearer {access-token}
         </span><span class="p">],</span><span class="w">
         </span><span class="s2">"images"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
           </span><span class="p">{</span><span class="w">
-            </span><span class="s2">"filename"</span><span class="p">:</span><span class="w"> </span><span class="s2">"modio-dark.png"</span><span class="p">,</span><span class="w">
-            </span><span class="s2">"original"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://static.mod.io/v1/images/branding/modio-dark.png"</span><span class="p">,</span><span class="w">
-            </span><span class="s2">"thumb_320x180"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://static.mod.io/v1/images/branding/modio-dark.png"</span><span class="w">
+            </span><span class="s2">"filename"</span><span class="p">:</span><span class="w"> </span><span class="s2">"modio-color-dark.png"</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"original"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://static.mod.io/v1/images/branding/modio-color-dark.png"</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"thumb_320x180"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://static.mod.io/v1/images/branding/modio-color-dark.png"</span><span class="w">
           </span><span class="p">}</span><span class="w">
         </span><span class="p">]</span><span class="w">
       </span><span class="p">},</span><span class="w">
@@ -10028,11 +10072,11 @@ oauth2 ( Scopes: read )
 <h2 id="logo-object">Logo Object</h2>
 <p><a name="schemalogo_object"></a></p>
 <pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
-  </span><span class="s2">"filename"</span><span class="p">:</span><span class="w"> </span><span class="s2">"modio-dark.png"</span><span class="p">,</span><span class="w">
-  </span><span class="s2">"original"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://static.mod.io/v1/images/branding/modio-dark.png"</span><span class="p">,</span><span class="w">
-  </span><span class="s2">"thumb_320x180"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://static.mod.io/v1/images/branding/modio-dark.png"</span><span class="p">,</span><span class="w">
-  </span><span class="s2">"thumb_640x360"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://static.mod.io/v1/images/branding/modio-dark.png"</span><span class="p">,</span><span class="w">
-  </span><span class="s2">"thumb_1280x720"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://static.mod.io/v1/images/branding/modio-dark.png"</span><span class="w">
+  </span><span class="s2">"filename"</span><span class="p">:</span><span class="w"> </span><span class="s2">"modio-color-dark.png"</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"original"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://static.mod.io/v1/images/branding/modio-color-dark.png"</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"thumb_320x180"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://static.mod.io/v1/images/branding/modio-color-dark.png"</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"thumb_640x360"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://static.mod.io/v1/images/branding/modio-color-dark.png"</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"thumb_1280x720"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://static.mod.io/v1/images/branding/modio-color-dark.png"</span><span class="w">
 </span><span class="p">}</span><span class="w"> 
 </span></code></pre><h3 id="properties-3">Properties</h3>
 <table>
@@ -10074,11 +10118,11 @@ oauth2 ( Scopes: read )
 <h2 id="icon-object">Icon Object</h2>
 <p><a name="schemaicon_object"></a></p>
 <pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
-  </span><span class="s2">"filename"</span><span class="p">:</span><span class="w"> </span><span class="s2">"modio-dark.png"</span><span class="p">,</span><span class="w">
-  </span><span class="s2">"original"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://static.mod.io/v1/images/branding/modio-dark.png"</span><span class="p">,</span><span class="w">
-  </span><span class="s2">"thumb_64x64"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://static.mod.io/v1/images/branding/modio-dark.png"</span><span class="p">,</span><span class="w">
-  </span><span class="s2">"thumb_128x128"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://static.mod.io/v1/images/branding/modio-dark.png"</span><span class="p">,</span><span class="w">
-  </span><span class="s2">"thumb_256x256"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://static.mod.io/v1/images/branding/modio-dark.png"</span><span class="w">
+  </span><span class="s2">"filename"</span><span class="p">:</span><span class="w"> </span><span class="s2">"modio-color-dark.png"</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"original"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://static.mod.io/v1/images/branding/modio-color-dark.png"</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"thumb_64x64"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://static.mod.io/v1/images/branding/modio-color-dark.png"</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"thumb_128x128"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://static.mod.io/v1/images/branding/modio-color-dark.png"</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"thumb_256x256"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://static.mod.io/v1/images/branding/modio-color-dark.png"</span><span class="w">
 </span><span class="p">}</span><span class="w"> 
 </span></code></pre><h3 id="properties-4">Properties</h3>
 <table>
@@ -10121,7 +10165,7 @@ oauth2 ( Scopes: read )
 <p><a name="schemaheader_image_object"></a></p>
 <pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
   </span><span class="s2">"filename"</span><span class="p">:</span><span class="w"> </span><span class="s2">"demo.png"</span><span class="p">,</span><span class="w">
-  </span><span class="s2">"original"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://static.mod.io/v1/images/branding/modio-dark.png"</span><span class="w">
+  </span><span class="s2">"original"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://static.mod.io/v1/images/branding/modio-color-dark.png"</span><span class="w">
 </span><span class="p">}</span><span class="w"> 
 </span></code></pre><h3 id="properties-5">Properties</h3>
 <table>
@@ -10148,10 +10192,10 @@ oauth2 ( Scopes: read )
 <h2 id="avatar-object">Avatar Object</h2>
 <p><a name="schemaavatar_object"></a></p>
 <pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
-  </span><span class="s2">"filename"</span><span class="p">:</span><span class="w"> </span><span class="s2">"modio-dark.png"</span><span class="p">,</span><span class="w">
-  </span><span class="s2">"original"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://static.mod.io/v1/images/branding/modio-dark.png"</span><span class="p">,</span><span class="w">
-  </span><span class="s2">"thumb_50x50"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://static.mod.io/v1/images/branding/modio-dark.png"</span><span class="p">,</span><span class="w">
-  </span><span class="s2">"thumb_100x100"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://static.mod.io/v1/images/branding/modio-dark.png"</span><span class="w">
+  </span><span class="s2">"filename"</span><span class="p">:</span><span class="w"> </span><span class="s2">"modio-color-dark.png"</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"original"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://static.mod.io/v1/images/branding/modio-color-dark.png"</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"thumb_50x50"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://static.mod.io/v1/images/branding/modio-color-dark.png"</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"thumb_100x100"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://static.mod.io/v1/images/branding/modio-color-dark.png"</span><span class="w">
 </span><span class="p">}</span><span class="w"> 
 </span></code></pre><h3 id="properties-6">Properties</h3>
 <table>
@@ -10188,9 +10232,9 @@ oauth2 ( Scopes: read )
 <h2 id="image-object">Image Object</h2>
 <p><a name="schemaimage_object"></a></p>
 <pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
-  </span><span class="s2">"filename"</span><span class="p">:</span><span class="w"> </span><span class="s2">"modio-dark.png"</span><span class="p">,</span><span class="w">
-  </span><span class="s2">"original"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://static.mod.io/v1/images/branding/modio-dark.png"</span><span class="p">,</span><span class="w">
-  </span><span class="s2">"thumb_320x180"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://static.mod.io/v1/images/branding/modio-dark.png"</span><span class="w">
+  </span><span class="s2">"filename"</span><span class="p">:</span><span class="w"> </span><span class="s2">"modio-color-dark.png"</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"original"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://static.mod.io/v1/images/branding/modio-color-dark.png"</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"thumb_320x180"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://static.mod.io/v1/images/branding/modio-color-dark.png"</span><span class="w">
 </span><span class="p">}</span><span class="w"> 
 </span></code></pre><h3 id="properties-7">Properties</h3>
 <table>
@@ -10270,16 +10314,16 @@ oauth2 ( Scopes: read )
 <pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
   </span><span class="s2">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span><span class="w">
   </span><span class="s2">"mod_id"</span><span class="p">:</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span><span class="w">
-  </span><span class="s2">"submitted_by"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+  </span><span class="s2">"user"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
     </span><span class="s2">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
     </span><span class="s2">"name_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"xant"</span><span class="p">,</span><span class="w">
     </span><span class="s2">"username"</span><span class="p">:</span><span class="w"> </span><span class="s2">"XanT"</span><span class="p">,</span><span class="w">
     </span><span class="s2">"date_online"</span><span class="p">:</span><span class="w"> </span><span class="mi">1509922961</span><span class="p">,</span><span class="w">
     </span><span class="s2">"avatar"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-      </span><span class="s2">"filename"</span><span class="p">:</span><span class="w"> </span><span class="s2">"modio-dark.png"</span><span class="p">,</span><span class="w">
-      </span><span class="s2">"original"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://static.mod.io/v1/images/branding/modio-dark.png"</span><span class="p">,</span><span class="w">
-      </span><span class="s2">"thumb_50x50"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://static.mod.io/v1/images/branding/modio-dark.png"</span><span class="p">,</span><span class="w">
-      </span><span class="s2">"thumb_100x100"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://static.mod.io/v1/images/branding/modio-dark.png"</span><span class="w">
+      </span><span class="s2">"filename"</span><span class="p">:</span><span class="w"> </span><span class="s2">"modio-color-dark.png"</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"original"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://static.mod.io/v1/images/branding/modio-color-dark.png"</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"thumb_50x50"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://static.mod.io/v1/images/branding/modio-color-dark.png"</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"thumb_100x100"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://static.mod.io/v1/images/branding/modio-color-dark.png"</span><span class="w">
     </span><span class="p">},</span><span class="w">
     </span><span class="s2">"timezone"</span><span class="p">:</span><span class="w"> </span><span class="s2">"America/Los_Angeles"</span><span class="p">,</span><span class="w">
     </span><span class="s2">"language"</span><span class="p">:</span><span class="w"> </span><span class="s2">"en"</span><span class="p">,</span><span class="w">
@@ -10313,7 +10357,7 @@ oauth2 ( Scopes: read )
 <td>Unique id of the parent mod.</td>
 </tr>
 <tr>
-<td>submitted_by</td>
+<td>user</td>
 <td><a href="#schemauser_object">User Object   </a></td>
 <td>Contains user data.</td>
 </tr>
@@ -10662,10 +10706,10 @@ oauth2 ( Scopes: read )
     </span><span class="s2">"username"</span><span class="p">:</span><span class="w"> </span><span class="s2">"XanT"</span><span class="p">,</span><span class="w">
     </span><span class="s2">"date_online"</span><span class="p">:</span><span class="w"> </span><span class="mi">1509922961</span><span class="p">,</span><span class="w">
     </span><span class="s2">"avatar"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-      </span><span class="s2">"filename"</span><span class="p">:</span><span class="w"> </span><span class="s2">"modio-dark.png"</span><span class="p">,</span><span class="w">
-      </span><span class="s2">"original"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://static.mod.io/v1/images/branding/modio-dark.png"</span><span class="p">,</span><span class="w">
-      </span><span class="s2">"thumb_50x50"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://static.mod.io/v1/images/branding/modio-dark.png"</span><span class="p">,</span><span class="w">
-      </span><span class="s2">"thumb_100x100"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://static.mod.io/v1/images/branding/modio-dark.png"</span><span class="w">
+      </span><span class="s2">"filename"</span><span class="p">:</span><span class="w"> </span><span class="s2">"modio-color-dark.png"</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"original"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://static.mod.io/v1/images/branding/modio-color-dark.png"</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"thumb_50x50"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://static.mod.io/v1/images/branding/modio-color-dark.png"</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"thumb_100x100"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://static.mod.io/v1/images/branding/modio-color-dark.png"</span><span class="w">
     </span><span class="p">},</span><span class="w">
     </span><span class="s2">"timezone"</span><span class="p">:</span><span class="w"> </span><span class="s2">"America/Los_Angeles"</span><span class="p">,</span><span class="w">
     </span><span class="s2">"language"</span><span class="p">:</span><span class="w"> </span><span class="s2">"en"</span><span class="p">,</span><span class="w">
@@ -10674,12 +10718,13 @@ oauth2 ( Scopes: read )
   </span><span class="s2">"date_added"</span><span class="p">:</span><span class="w"> </span><span class="mi">1492564103</span><span class="p">,</span><span class="w">
   </span><span class="s2">"date_updated"</span><span class="p">:</span><span class="w"> </span><span class="mi">1499841487</span><span class="p">,</span><span class="w">
   </span><span class="s2">"date_live"</span><span class="p">:</span><span class="w"> </span><span class="mi">1499841403</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"maturity_option"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
   </span><span class="s2">"logo"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-    </span><span class="s2">"filename"</span><span class="p">:</span><span class="w"> </span><span class="s2">"modio-dark.png"</span><span class="p">,</span><span class="w">
-    </span><span class="s2">"original"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://static.mod.io/v1/images/branding/modio-dark.png"</span><span class="p">,</span><span class="w">
-    </span><span class="s2">"thumb_320x180"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://static.mod.io/v1/images/branding/modio-dark.png"</span><span class="p">,</span><span class="w">
-    </span><span class="s2">"thumb_640x360"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://static.mod.io/v1/images/branding/modio-dark.png"</span><span class="p">,</span><span class="w">
-    </span><span class="s2">"thumb_1280x720"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://static.mod.io/v1/images/branding/modio-dark.png"</span><span class="w">
+    </span><span class="s2">"filename"</span><span class="p">:</span><span class="w"> </span><span class="s2">"modio-color-dark.png"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"original"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://static.mod.io/v1/images/branding/modio-color-dark.png"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"thumb_320x180"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://static.mod.io/v1/images/branding/modio-color-dark.png"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"thumb_640x360"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://static.mod.io/v1/images/branding/modio-color-dark.png"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"thumb_1280x720"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://static.mod.io/v1/images/branding/modio-color-dark.png"</span><span class="w">
   </span><span class="p">},</span><span class="w">
   </span><span class="s2">"homepage_url"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://www.rogue-hdpack.com/"</span><span class="p">,</span><span class="w">
   </span><span class="s2">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Rogue Knight HD Pack"</span><span class="p">,</span><span class="w">
@@ -10724,9 +10769,9 @@ oauth2 ( Scopes: read )
     </span><span class="p">],</span><span class="w">
     </span><span class="s2">"images"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
       </span><span class="p">{</span><span class="w">
-        </span><span class="s2">"filename"</span><span class="p">:</span><span class="w"> </span><span class="s2">"modio-dark.png"</span><span class="p">,</span><span class="w">
-        </span><span class="s2">"original"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://static.mod.io/v1/images/branding/modio-dark.png"</span><span class="p">,</span><span class="w">
-        </span><span class="s2">"thumb_320x180"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://static.mod.io/v1/images/branding/modio-dark.png"</span><span class="w">
+        </span><span class="s2">"filename"</span><span class="p">:</span><span class="w"> </span><span class="s2">"modio-color-dark.png"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"original"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://static.mod.io/v1/images/branding/modio-color-dark.png"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"thumb_320x180"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://static.mod.io/v1/images/branding/modio-color-dark.png"</span><span class="w">
       </span><span class="p">}</span><span class="w">
     </span><span class="p">]</span><span class="w">
   </span><span class="p">},</span><span class="w">
@@ -10854,6 +10899,11 @@ oauth2 ( Scopes: read )
 <td>date_live</td>
 <td>integer</td>
 <td>Unix timestamp of date mod was set live.</td>
+</tr>
+<tr>
+<td>maturity_option</td>
+<td>integer</td>
+<td>Maturity options flagged by the mod developer, this is only relevant if the parent game allows mods to be labelled as mature.<br><br><strong>0</strong> = None set <em>(default)</em><br><strong>1</strong> = Alcohol<br><strong>2</strong> = Drugs<br><strong>4</strong> = Violence<br><strong>8</strong> = Explicit<br><strong>?</strong> = Add the options you want together, to enable multiple filters (see <a href="#bitwise-and-bitwise-and">BITWISE fields</a>)</td>
 </tr>
 <tr>
 <td>logo</td>
@@ -11075,7 +11125,7 @@ oauth2 ( Scopes: read )
 <tr>
 <td>» weighted_aggregate</td>
 <td>float</td>
-<td>Overall rating of this item calculated using the <a href="http://www.evanmiller.org/how-not-to-sort-by-average-rating.html">Wilson score confidence interval</a>. This column is good to sort on, as it will order items based on number of ratings and will place items with many positive ratings above those with a higher score but fewer ratings.</td>
+<td>Overall rating of this item calculated using the <a href="https://www.evanmiller.org/how-not-to-sort-by-average-rating.html">Wilson score confidence interval</a>. This column is good to sort on, as it will order items based on number of ratings and will place items with many positive ratings above those with a higher score but fewer ratings.</td>
 </tr>
 <tr>
 <td>» display_text</td>
@@ -11127,9 +11177,9 @@ oauth2 ( Scopes: read )
   </span><span class="p">],</span><span class="w">
   </span><span class="s2">"images"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
     </span><span class="p">{</span><span class="w">
-      </span><span class="s2">"filename"</span><span class="p">:</span><span class="w"> </span><span class="s2">"modio-dark.png"</span><span class="p">,</span><span class="w">
-      </span><span class="s2">"original"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://static.mod.io/v1/images/branding/modio-dark.png"</span><span class="p">,</span><span class="w">
-      </span><span class="s2">"thumb_320x180"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://static.mod.io/v1/images/branding/modio-dark.png"</span><span class="w">
+      </span><span class="s2">"filename"</span><span class="p">:</span><span class="w"> </span><span class="s2">"modio-color-dark.png"</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"original"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://static.mod.io/v1/images/branding/modio-color-dark.png"</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"thumb_320x180"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://static.mod.io/v1/images/branding/modio-color-dark.png"</span><span class="w">
     </span><span class="p">}</span><span class="w">
   </span><span class="p">]</span><span class="w">
 </span><span class="p">}</span><span class="w"> 
@@ -11215,10 +11265,10 @@ oauth2 ( Scopes: read )
     </span><span class="s2">"username"</span><span class="p">:</span><span class="w"> </span><span class="s2">"XanT"</span><span class="p">,</span><span class="w">
     </span><span class="s2">"date_online"</span><span class="p">:</span><span class="w"> </span><span class="mi">1509922961</span><span class="p">,</span><span class="w">
     </span><span class="s2">"avatar"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-      </span><span class="s2">"filename"</span><span class="p">:</span><span class="w"> </span><span class="s2">"modio-dark.png"</span><span class="p">,</span><span class="w">
-      </span><span class="s2">"original"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://static.mod.io/v1/images/branding/modio-dark.png"</span><span class="p">,</span><span class="w">
-      </span><span class="s2">"thumb_50x50"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://static.mod.io/v1/images/branding/modio-dark.png"</span><span class="p">,</span><span class="w">
-      </span><span class="s2">"thumb_100x100"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://static.mod.io/v1/images/branding/modio-dark.png"</span><span class="w">
+      </span><span class="s2">"filename"</span><span class="p">:</span><span class="w"> </span><span class="s2">"modio-color-dark.png"</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"original"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://static.mod.io/v1/images/branding/modio-color-dark.png"</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"thumb_50x50"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://static.mod.io/v1/images/branding/modio-color-dark.png"</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"thumb_100x100"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://static.mod.io/v1/images/branding/modio-color-dark.png"</span><span class="w">
     </span><span class="p">},</span><span class="w">
     </span><span class="s2">"timezone"</span><span class="p">:</span><span class="w"> </span><span class="s2">"America/Los_Angeles"</span><span class="p">,</span><span class="w">
     </span><span class="s2">"language"</span><span class="p">:</span><span class="w"> </span><span class="s2">"en"</span><span class="p">,</span><span class="w">
@@ -11233,24 +11283,25 @@ oauth2 ( Scopes: read )
   </span><span class="s2">"community_options"</span><span class="p">:</span><span class="w"> </span><span class="mi">3</span><span class="p">,</span><span class="w">
   </span><span class="s2">"revenue_options"</span><span class="p">:</span><span class="w"> </span><span class="mi">1500</span><span class="p">,</span><span class="w">
   </span><span class="s2">"api_access_options"</span><span class="p">:</span><span class="w"> </span><span class="mi">3</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"maturity_options"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
   </span><span class="s2">"ugc_name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"map"</span><span class="p">,</span><span class="w">
   </span><span class="s2">"icon"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-    </span><span class="s2">"filename"</span><span class="p">:</span><span class="w"> </span><span class="s2">"modio-dark.png"</span><span class="p">,</span><span class="w">
-    </span><span class="s2">"original"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://static.mod.io/v1/images/branding/modio-dark.png"</span><span class="p">,</span><span class="w">
-    </span><span class="s2">"thumb_64x64"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://static.mod.io/v1/images/branding/modio-dark.png"</span><span class="p">,</span><span class="w">
-    </span><span class="s2">"thumb_128x128"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://static.mod.io/v1/images/branding/modio-dark.png"</span><span class="p">,</span><span class="w">
-    </span><span class="s2">"thumb_256x256"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://static.mod.io/v1/images/branding/modio-dark.png"</span><span class="w">
+    </span><span class="s2">"filename"</span><span class="p">:</span><span class="w"> </span><span class="s2">"modio-color-dark.png"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"original"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://static.mod.io/v1/images/branding/modio-color-dark.png"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"thumb_64x64"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://static.mod.io/v1/images/branding/modio-color-dark.png"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"thumb_128x128"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://static.mod.io/v1/images/branding/modio-color-dark.png"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"thumb_256x256"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://static.mod.io/v1/images/branding/modio-color-dark.png"</span><span class="w">
   </span><span class="p">},</span><span class="w">
   </span><span class="s2">"logo"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-    </span><span class="s2">"filename"</span><span class="p">:</span><span class="w"> </span><span class="s2">"modio-dark.png"</span><span class="p">,</span><span class="w">
-    </span><span class="s2">"original"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://static.mod.io/v1/images/branding/modio-dark.png"</span><span class="p">,</span><span class="w">
-    </span><span class="s2">"thumb_320x180"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://static.mod.io/v1/images/branding/modio-dark.png"</span><span class="p">,</span><span class="w">
-    </span><span class="s2">"thumb_640x360"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://static.mod.io/v1/images/branding/modio-dark.png"</span><span class="p">,</span><span class="w">
-    </span><span class="s2">"thumb_1280x720"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://static.mod.io/v1/images/branding/modio-dark.png"</span><span class="w">
+    </span><span class="s2">"filename"</span><span class="p">:</span><span class="w"> </span><span class="s2">"modio-color-dark.png"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"original"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://static.mod.io/v1/images/branding/modio-color-dark.png"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"thumb_320x180"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://static.mod.io/v1/images/branding/modio-color-dark.png"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"thumb_640x360"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://static.mod.io/v1/images/branding/modio-color-dark.png"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"thumb_1280x720"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://static.mod.io/v1/images/branding/modio-color-dark.png"</span><span class="w">
   </span><span class="p">},</span><span class="w">
   </span><span class="s2">"header"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
     </span><span class="s2">"filename"</span><span class="p">:</span><span class="w"> </span><span class="s2">"demo.png"</span><span class="p">,</span><span class="w">
-    </span><span class="s2">"original"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://static.mod.io/v1/images/branding/modio-dark.png"</span><span class="w">
+    </span><span class="s2">"original"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://static.mod.io/v1/images/branding/modio-color-dark.png"</span><span class="w">
   </span><span class="p">},</span><span class="w">
   </span><span class="s2">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Rogue Knight"</span><span class="p">,</span><span class="w">
   </span><span class="s2">"name_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"rogue-knight"</span><span class="p">,</span><span class="w">
@@ -11398,6 +11449,11 @@ oauth2 ( Scopes: read )
 <td>api_access_options</td>
 <td>integer</td>
 <td>Level of API access allowed by this game:<br><br><strong>0</strong> = All of the options below are disabled<br><strong>1</strong> = Allow 3rd parties to access this games API endpoints<br><strong>2</strong> = Allow mods to be downloaded directly (if disabled all download URLs will contain a frequently changing verification hash to stop unauthorized use)<br><strong>?</strong> = Add the options you want together, to enable multiple features (see <a href="#bitwise-and-bitwise-and">BITWISE fields</a>)</td>
+</tr>
+<tr>
+<td>maturity_options</td>
+<td>integer</td>
+<td>Switch to allow developers to select if they flag their mods as containing mature content:<br><br><strong>0</strong> = Don't allow <em>(default)</em><br><strong>1</strong> = Allow</td>
 </tr>
 <tr>
 <td>ugc_name</td>
@@ -11608,7 +11664,7 @@ oauth2 ( Scopes: read )
 <tr>
 <td>weighted_aggregate</td>
 <td>float</td>
-<td>Overall rating of this item calculated using the <a href="http://www.evanmiller.org/how-not-to-sort-by-average-rating.html">Wilson score confidence interval</a>. This column is good to sort on, as it will order items based on number of ratings and will place items with many positive ratings above those with a higher score but fewer ratings.</td>
+<td>Overall rating of this item calculated using the <a href="https://www.evanmiller.org/how-not-to-sort-by-average-rating.html">Wilson score confidence interval</a>. This column is good to sort on, as it will order items based on number of ratings and will place items with many positive ratings above those with a higher score but fewer ratings.</td>
 </tr>
 <tr>
 <td>display_text</td>
@@ -11627,10 +11683,10 @@ oauth2 ( Scopes: read )
     </span><span class="s2">"username"</span><span class="p">:</span><span class="w"> </span><span class="s2">"XanT"</span><span class="p">,</span><span class="w">
     </span><span class="s2">"date_online"</span><span class="p">:</span><span class="w"> </span><span class="mi">1509922961</span><span class="p">,</span><span class="w">
     </span><span class="s2">"avatar"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-      </span><span class="s2">"filename"</span><span class="p">:</span><span class="w"> </span><span class="s2">"modio-dark.png"</span><span class="p">,</span><span class="w">
-      </span><span class="s2">"original"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://static.mod.io/v1/images/branding/modio-dark.png"</span><span class="p">,</span><span class="w">
-      </span><span class="s2">"thumb_50x50"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://static.mod.io/v1/images/branding/modio-dark.png"</span><span class="p">,</span><span class="w">
-      </span><span class="s2">"thumb_100x100"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://static.mod.io/v1/images/branding/modio-dark.png"</span><span class="w">
+      </span><span class="s2">"filename"</span><span class="p">:</span><span class="w"> </span><span class="s2">"modio-color-dark.png"</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"original"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://static.mod.io/v1/images/branding/modio-color-dark.png"</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"thumb_50x50"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://static.mod.io/v1/images/branding/modio-color-dark.png"</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"thumb_100x100"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://static.mod.io/v1/images/branding/modio-color-dark.png"</span><span class="w">
     </span><span class="p">},</span><span class="w">
     </span><span class="s2">"timezone"</span><span class="p">:</span><span class="w"> </span><span class="s2">"America/Los_Angeles"</span><span class="p">,</span><span class="w">
     </span><span class="s2">"language"</span><span class="p">:</span><span class="w"> </span><span class="s2">"en"</span><span class="p">,</span><span class="w">
@@ -11745,10 +11801,10 @@ oauth2 ( Scopes: read )
   </span><span class="s2">"username"</span><span class="p">:</span><span class="w"> </span><span class="s2">"XanT"</span><span class="p">,</span><span class="w">
   </span><span class="s2">"date_online"</span><span class="p">:</span><span class="w"> </span><span class="mi">1509922961</span><span class="p">,</span><span class="w">
   </span><span class="s2">"avatar"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-    </span><span class="s2">"filename"</span><span class="p">:</span><span class="w"> </span><span class="s2">"modio-dark.png"</span><span class="p">,</span><span class="w">
-    </span><span class="s2">"original"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://static.mod.io/v1/images/branding/modio-dark.png"</span><span class="p">,</span><span class="w">
-    </span><span class="s2">"thumb_50x50"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://static.mod.io/v1/images/branding/modio-dark.png"</span><span class="p">,</span><span class="w">
-    </span><span class="s2">"thumb_100x100"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://static.mod.io/v1/images/branding/modio-dark.png"</span><span class="w">
+    </span><span class="s2">"filename"</span><span class="p">:</span><span class="w"> </span><span class="s2">"modio-color-dark.png"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"original"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://static.mod.io/v1/images/branding/modio-color-dark.png"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"thumb_50x50"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://static.mod.io/v1/images/branding/modio-color-dark.png"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"thumb_100x100"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://static.mod.io/v1/images/branding/modio-color-dark.png"</span><span class="w">
   </span><span class="p">},</span><span class="w">
   </span><span class="s2">"timezone"</span><span class="p">:</span><span class="w"> </span><span class="s2">"America/Los_Angeles"</span><span class="p">,</span><span class="w">
   </span><span class="s2">"language"</span><span class="p">:</span><span class="w"> </span><span class="s2">"en"</span><span class="p">,</span><span class="w">
@@ -11833,16 +11889,16 @@ oauth2 ( Scopes: read )
     </span><span class="p">{</span><span class="w">
       </span><span class="s2">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span><span class="w">
       </span><span class="s2">"mod_id"</span><span class="p">:</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span><span class="w">
-      </span><span class="s2">"submitted_by"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+      </span><span class="s2">"user"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
         </span><span class="s2">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
         </span><span class="s2">"name_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"xant"</span><span class="p">,</span><span class="w">
         </span><span class="s2">"username"</span><span class="p">:</span><span class="w"> </span><span class="s2">"XanT"</span><span class="p">,</span><span class="w">
         </span><span class="s2">"date_online"</span><span class="p">:</span><span class="w"> </span><span class="mi">1509922961</span><span class="p">,</span><span class="w">
         </span><span class="s2">"avatar"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-          </span><span class="s2">"filename"</span><span class="p">:</span><span class="w"> </span><span class="s2">"modio-dark.png"</span><span class="p">,</span><span class="w">
-          </span><span class="s2">"original"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://static.mod.io/v1/images/branding/modio-dark.png"</span><span class="p">,</span><span class="w">
-          </span><span class="s2">"thumb_50x50"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://static.mod.io/v1/images/branding/modio-dark.png"</span><span class="p">,</span><span class="w">
-          </span><span class="s2">"thumb_100x100"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://static.mod.io/v1/images/branding/modio-dark.png"</span><span class="w">
+          </span><span class="s2">"filename"</span><span class="p">:</span><span class="w"> </span><span class="s2">"modio-color-dark.png"</span><span class="p">,</span><span class="w">
+          </span><span class="s2">"original"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://static.mod.io/v1/images/branding/modio-color-dark.png"</span><span class="p">,</span><span class="w">
+          </span><span class="s2">"thumb_50x50"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://static.mod.io/v1/images/branding/modio-color-dark.png"</span><span class="p">,</span><span class="w">
+          </span><span class="s2">"thumb_100x100"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://static.mod.io/v1/images/branding/modio-color-dark.png"</span><span class="w">
         </span><span class="p">},</span><span class="w">
         </span><span class="s2">"timezone"</span><span class="p">:</span><span class="w"> </span><span class="s2">"America/Los_Angeles"</span><span class="p">,</span><span class="w">
         </span><span class="s2">"language"</span><span class="p">:</span><span class="w"> </span><span class="s2">"en"</span><span class="p">,</span><span class="w">
@@ -11890,7 +11946,7 @@ oauth2 ( Scopes: read )
 <td>Unique id of the parent mod.</td>
 </tr>
 <tr>
-<td>» submitted_by</td>
+<td>» user</td>
 <td><a href="#schemauser_object">User Object   </a></td>
 <td>Contains user data.</td>
 </tr>
@@ -12224,10 +12280,10 @@ oauth2 ( Scopes: read )
         </span><span class="s2">"username"</span><span class="p">:</span><span class="w"> </span><span class="s2">"XanT"</span><span class="p">,</span><span class="w">
         </span><span class="s2">"date_online"</span><span class="p">:</span><span class="w"> </span><span class="mi">1509922961</span><span class="p">,</span><span class="w">
         </span><span class="s2">"avatar"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-          </span><span class="s2">"filename"</span><span class="p">:</span><span class="w"> </span><span class="s2">"modio-dark.png"</span><span class="p">,</span><span class="w">
-          </span><span class="s2">"original"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://static.mod.io/v1/images/branding/modio-dark.png"</span><span class="p">,</span><span class="w">
-          </span><span class="s2">"thumb_50x50"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://static.mod.io/v1/images/branding/modio-dark.png"</span><span class="p">,</span><span class="w">
-          </span><span class="s2">"thumb_100x100"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://static.mod.io/v1/images/branding/modio-dark.png"</span><span class="w">
+          </span><span class="s2">"filename"</span><span class="p">:</span><span class="w"> </span><span class="s2">"modio-color-dark.png"</span><span class="p">,</span><span class="w">
+          </span><span class="s2">"original"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://static.mod.io/v1/images/branding/modio-color-dark.png"</span><span class="p">,</span><span class="w">
+          </span><span class="s2">"thumb_50x50"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://static.mod.io/v1/images/branding/modio-color-dark.png"</span><span class="p">,</span><span class="w">
+          </span><span class="s2">"thumb_100x100"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://static.mod.io/v1/images/branding/modio-color-dark.png"</span><span class="w">
         </span><span class="p">},</span><span class="w">
         </span><span class="s2">"timezone"</span><span class="p">:</span><span class="w"> </span><span class="s2">"America/Los_Angeles"</span><span class="p">,</span><span class="w">
         </span><span class="s2">"language"</span><span class="p">:</span><span class="w"> </span><span class="s2">"en"</span><span class="p">,</span><span class="w">
@@ -12242,24 +12298,25 @@ oauth2 ( Scopes: read )
       </span><span class="s2">"community_options"</span><span class="p">:</span><span class="w"> </span><span class="mi">3</span><span class="p">,</span><span class="w">
       </span><span class="s2">"revenue_options"</span><span class="p">:</span><span class="w"> </span><span class="mi">1500</span><span class="p">,</span><span class="w">
       </span><span class="s2">"api_access_options"</span><span class="p">:</span><span class="w"> </span><span class="mi">3</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"maturity_options"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
       </span><span class="s2">"ugc_name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"map"</span><span class="p">,</span><span class="w">
       </span><span class="s2">"icon"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-        </span><span class="s2">"filename"</span><span class="p">:</span><span class="w"> </span><span class="s2">"modio-dark.png"</span><span class="p">,</span><span class="w">
-        </span><span class="s2">"original"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://static.mod.io/v1/images/branding/modio-dark.png"</span><span class="p">,</span><span class="w">
-        </span><span class="s2">"thumb_64x64"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://static.mod.io/v1/images/branding/modio-dark.png"</span><span class="p">,</span><span class="w">
-        </span><span class="s2">"thumb_128x128"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://static.mod.io/v1/images/branding/modio-dark.png"</span><span class="p">,</span><span class="w">
-        </span><span class="s2">"thumb_256x256"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://static.mod.io/v1/images/branding/modio-dark.png"</span><span class="w">
+        </span><span class="s2">"filename"</span><span class="p">:</span><span class="w"> </span><span class="s2">"modio-color-dark.png"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"original"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://static.mod.io/v1/images/branding/modio-color-dark.png"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"thumb_64x64"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://static.mod.io/v1/images/branding/modio-color-dark.png"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"thumb_128x128"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://static.mod.io/v1/images/branding/modio-color-dark.png"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"thumb_256x256"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://static.mod.io/v1/images/branding/modio-color-dark.png"</span><span class="w">
       </span><span class="p">},</span><span class="w">
       </span><span class="s2">"logo"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-        </span><span class="s2">"filename"</span><span class="p">:</span><span class="w"> </span><span class="s2">"modio-dark.png"</span><span class="p">,</span><span class="w">
-        </span><span class="s2">"original"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://static.mod.io/v1/images/branding/modio-dark.png"</span><span class="p">,</span><span class="w">
-        </span><span class="s2">"thumb_320x180"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://static.mod.io/v1/images/branding/modio-dark.png"</span><span class="p">,</span><span class="w">
-        </span><span class="s2">"thumb_640x360"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://static.mod.io/v1/images/branding/modio-dark.png"</span><span class="p">,</span><span class="w">
-        </span><span class="s2">"thumb_1280x720"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://static.mod.io/v1/images/branding/modio-dark.png"</span><span class="w">
+        </span><span class="s2">"filename"</span><span class="p">:</span><span class="w"> </span><span class="s2">"modio-color-dark.png"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"original"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://static.mod.io/v1/images/branding/modio-color-dark.png"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"thumb_320x180"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://static.mod.io/v1/images/branding/modio-color-dark.png"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"thumb_640x360"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://static.mod.io/v1/images/branding/modio-color-dark.png"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"thumb_1280x720"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://static.mod.io/v1/images/branding/modio-color-dark.png"</span><span class="w">
       </span><span class="p">},</span><span class="w">
       </span><span class="s2">"header"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
         </span><span class="s2">"filename"</span><span class="p">:</span><span class="w"> </span><span class="s2">"demo.png"</span><span class="p">,</span><span class="w">
-        </span><span class="s2">"original"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://static.mod.io/v1/images/branding/modio-dark.png"</span><span class="w">
+        </span><span class="s2">"original"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://static.mod.io/v1/images/branding/modio-color-dark.png"</span><span class="w">
       </span><span class="p">},</span><span class="w">
       </span><span class="s2">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Rogue Knight"</span><span class="p">,</span><span class="w">
       </span><span class="s2">"name_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"rogue-knight"</span><span class="p">,</span><span class="w">
@@ -12421,6 +12478,11 @@ oauth2 ( Scopes: read )
 <td>» api_access_options</td>
 <td>integer</td>
 <td>Level of API access allowed by this game:<br><br><strong>0</strong> = All of the options below are disabled<br><strong>1</strong> = Allow 3rd parties to access this games API endpoints<br><strong>2</strong> = Allow mods to be downloaded directly (if disabled all download URLs will contain a frequently changing verification hash to stop unauthorized use)<br><strong>?</strong> = Add the options you want together, to enable multiple features (see <a href="#bitwise-and-bitwise-and">BITWISE fields</a>)</td>
+</tr>
+<tr>
+<td>» maturity_options</td>
+<td>integer</td>
+<td>Switch to allow developers to select if they flag their mods as containing mature content:<br><br><strong>0</strong> = Don't allow <em>(default)</em><br><strong>1</strong> = Allow</td>
 </tr>
 <tr>
 <td>» ugc_name</td>
@@ -12649,10 +12711,10 @@ oauth2 ( Scopes: read )
         </span><span class="s2">"username"</span><span class="p">:</span><span class="w"> </span><span class="s2">"XanT"</span><span class="p">,</span><span class="w">
         </span><span class="s2">"date_online"</span><span class="p">:</span><span class="w"> </span><span class="mi">1509922961</span><span class="p">,</span><span class="w">
         </span><span class="s2">"avatar"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-          </span><span class="s2">"filename"</span><span class="p">:</span><span class="w"> </span><span class="s2">"modio-dark.png"</span><span class="p">,</span><span class="w">
-          </span><span class="s2">"original"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://static.mod.io/v1/images/branding/modio-dark.png"</span><span class="p">,</span><span class="w">
-          </span><span class="s2">"thumb_50x50"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://static.mod.io/v1/images/branding/modio-dark.png"</span><span class="p">,</span><span class="w">
-          </span><span class="s2">"thumb_100x100"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://static.mod.io/v1/images/branding/modio-dark.png"</span><span class="w">
+          </span><span class="s2">"filename"</span><span class="p">:</span><span class="w"> </span><span class="s2">"modio-color-dark.png"</span><span class="p">,</span><span class="w">
+          </span><span class="s2">"original"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://static.mod.io/v1/images/branding/modio-color-dark.png"</span><span class="p">,</span><span class="w">
+          </span><span class="s2">"thumb_50x50"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://static.mod.io/v1/images/branding/modio-color-dark.png"</span><span class="p">,</span><span class="w">
+          </span><span class="s2">"thumb_100x100"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://static.mod.io/v1/images/branding/modio-color-dark.png"</span><span class="w">
         </span><span class="p">},</span><span class="w">
         </span><span class="s2">"timezone"</span><span class="p">:</span><span class="w"> </span><span class="s2">"America/Los_Angeles"</span><span class="p">,</span><span class="w">
         </span><span class="s2">"language"</span><span class="p">:</span><span class="w"> </span><span class="s2">"en"</span><span class="p">,</span><span class="w">
@@ -12661,12 +12723,13 @@ oauth2 ( Scopes: read )
       </span><span class="s2">"date_added"</span><span class="p">:</span><span class="w"> </span><span class="mi">1492564103</span><span class="p">,</span><span class="w">
       </span><span class="s2">"date_updated"</span><span class="p">:</span><span class="w"> </span><span class="mi">1499841487</span><span class="p">,</span><span class="w">
       </span><span class="s2">"date_live"</span><span class="p">:</span><span class="w"> </span><span class="mi">1499841403</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"maturity_option"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
       </span><span class="s2">"logo"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-        </span><span class="s2">"filename"</span><span class="p">:</span><span class="w"> </span><span class="s2">"modio-dark.png"</span><span class="p">,</span><span class="w">
-        </span><span class="s2">"original"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://static.mod.io/v1/images/branding/modio-dark.png"</span><span class="p">,</span><span class="w">
-        </span><span class="s2">"thumb_320x180"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://static.mod.io/v1/images/branding/modio-dark.png"</span><span class="p">,</span><span class="w">
-        </span><span class="s2">"thumb_640x360"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://static.mod.io/v1/images/branding/modio-dark.png"</span><span class="p">,</span><span class="w">
-        </span><span class="s2">"thumb_1280x720"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://static.mod.io/v1/images/branding/modio-dark.png"</span><span class="w">
+        </span><span class="s2">"filename"</span><span class="p">:</span><span class="w"> </span><span class="s2">"modio-color-dark.png"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"original"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://static.mod.io/v1/images/branding/modio-color-dark.png"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"thumb_320x180"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://static.mod.io/v1/images/branding/modio-color-dark.png"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"thumb_640x360"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://static.mod.io/v1/images/branding/modio-color-dark.png"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"thumb_1280x720"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://static.mod.io/v1/images/branding/modio-color-dark.png"</span><span class="w">
       </span><span class="p">},</span><span class="w">
       </span><span class="s2">"homepage_url"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://www.rogue-hdpack.com/"</span><span class="p">,</span><span class="w">
       </span><span class="s2">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Rogue Knight HD Pack"</span><span class="p">,</span><span class="w">
@@ -12711,9 +12774,9 @@ oauth2 ( Scopes: read )
         </span><span class="p">],</span><span class="w">
         </span><span class="s2">"images"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
           </span><span class="p">{</span><span class="w">
-            </span><span class="s2">"filename"</span><span class="p">:</span><span class="w"> </span><span class="s2">"modio-dark.png"</span><span class="p">,</span><span class="w">
-            </span><span class="s2">"original"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://static.mod.io/v1/images/branding/modio-dark.png"</span><span class="p">,</span><span class="w">
-            </span><span class="s2">"thumb_320x180"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://static.mod.io/v1/images/branding/modio-dark.png"</span><span class="w">
+            </span><span class="s2">"filename"</span><span class="p">:</span><span class="w"> </span><span class="s2">"modio-color-dark.png"</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"original"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://static.mod.io/v1/images/branding/modio-color-dark.png"</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"thumb_320x180"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://static.mod.io/v1/images/branding/modio-color-dark.png"</span><span class="w">
           </span><span class="p">}</span><span class="w">
         </span><span class="p">]</span><span class="w">
       </span><span class="p">},</span><span class="w">
@@ -12855,6 +12918,11 @@ oauth2 ( Scopes: read )
 <td>» date_live</td>
 <td>integer</td>
 <td>Unix timestamp of date mod was set live.</td>
+</tr>
+<tr>
+<td>» maturity_option</td>
+<td>integer</td>
+<td>Maturity options flagged by the mod developer, this is only relevant if the parent game allows mods to be labelled as mature.<br><br><strong>0</strong> = None set <em>(default)</em><br><strong>1</strong> = Alcohol<br><strong>2</strong> = Drugs<br><strong>4</strong> = Violence<br><strong>8</strong> = Explicit<br><strong>?</strong> = Add the options you want together, to enable multiple filters (see <a href="#bitwise-and-bitwise-and">BITWISE fields</a>)</td>
 </tr>
 <tr>
 <td>» logo</td>
@@ -13076,7 +13144,7 @@ oauth2 ( Scopes: read )
 <tr>
 <td>»» weighted_aggregate</td>
 <td>float</td>
-<td>Overall rating of this item calculated using the <a href="http://www.evanmiller.org/how-not-to-sort-by-average-rating.html">Wilson score confidence interval</a>. This column is good to sort on, as it will order items based on number of ratings and will place items with many positive ratings above those with a higher score but fewer ratings.</td>
+<td>Overall rating of this item calculated using the <a href="https://www.evanmiller.org/how-not-to-sort-by-average-rating.html">Wilson score confidence interval</a>. This column is good to sort on, as it will order items based on number of ratings and will place items with many positive ratings above those with a higher score but fewer ratings.</td>
 </tr>
 <tr>
 <td>»» display_text</td>
@@ -13353,10 +13421,10 @@ oauth2 ( Scopes: read )
         </span><span class="s2">"username"</span><span class="p">:</span><span class="w"> </span><span class="s2">"XanT"</span><span class="p">,</span><span class="w">
         </span><span class="s2">"date_online"</span><span class="p">:</span><span class="w"> </span><span class="mi">1509922961</span><span class="p">,</span><span class="w">
         </span><span class="s2">"avatar"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-          </span><span class="s2">"filename"</span><span class="p">:</span><span class="w"> </span><span class="s2">"modio-dark.png"</span><span class="p">,</span><span class="w">
-          </span><span class="s2">"original"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://static.mod.io/v1/images/branding/modio-dark.png"</span><span class="p">,</span><span class="w">
-          </span><span class="s2">"thumb_50x50"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://static.mod.io/v1/images/branding/modio-dark.png"</span><span class="p">,</span><span class="w">
-          </span><span class="s2">"thumb_100x100"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://static.mod.io/v1/images/branding/modio-dark.png"</span><span class="w">
+          </span><span class="s2">"filename"</span><span class="p">:</span><span class="w"> </span><span class="s2">"modio-color-dark.png"</span><span class="p">,</span><span class="w">
+          </span><span class="s2">"original"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://static.mod.io/v1/images/branding/modio-color-dark.png"</span><span class="p">,</span><span class="w">
+          </span><span class="s2">"thumb_50x50"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://static.mod.io/v1/images/branding/modio-color-dark.png"</span><span class="p">,</span><span class="w">
+          </span><span class="s2">"thumb_100x100"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://static.mod.io/v1/images/branding/modio-color-dark.png"</span><span class="w">
         </span><span class="p">},</span><span class="w">
         </span><span class="s2">"timezone"</span><span class="p">:</span><span class="w"> </span><span class="s2">"America/Los_Angeles"</span><span class="p">,</span><span class="w">
         </span><span class="s2">"language"</span><span class="p">:</span><span class="w"> </span><span class="s2">"en"</span><span class="p">,</span><span class="w">
@@ -13502,10 +13570,10 @@ oauth2 ( Scopes: read )
       </span><span class="s2">"username"</span><span class="p">:</span><span class="w"> </span><span class="s2">"XanT"</span><span class="p">,</span><span class="w">
       </span><span class="s2">"date_online"</span><span class="p">:</span><span class="w"> </span><span class="mi">1509922961</span><span class="p">,</span><span class="w">
       </span><span class="s2">"avatar"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-        </span><span class="s2">"filename"</span><span class="p">:</span><span class="w"> </span><span class="s2">"modio-dark.png"</span><span class="p">,</span><span class="w">
-        </span><span class="s2">"original"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://static.mod.io/v1/images/branding/modio-dark.png"</span><span class="p">,</span><span class="w">
-        </span><span class="s2">"thumb_50x50"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://static.mod.io/v1/images/branding/modio-dark.png"</span><span class="p">,</span><span class="w">
-        </span><span class="s2">"thumb_100x100"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://static.mod.io/v1/images/branding/modio-dark.png"</span><span class="w">
+        </span><span class="s2">"filename"</span><span class="p">:</span><span class="w"> </span><span class="s2">"modio-color-dark.png"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"original"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://static.mod.io/v1/images/branding/modio-color-dark.png"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"thumb_50x50"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://static.mod.io/v1/images/branding/modio-color-dark.png"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"thumb_100x100"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://static.mod.io/v1/images/branding/modio-color-dark.png"</span><span class="w">
       </span><span class="p">},</span><span class="w">
       </span><span class="s2">"timezone"</span><span class="p">:</span><span class="w"> </span><span class="s2">"America/Los_Angeles"</span><span class="p">,</span><span class="w">
       </span><span class="s2">"language"</span><span class="p">:</span><span class="w"> </span><span class="s2">"en"</span><span class="p">,</span><span class="w">
