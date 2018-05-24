@@ -678,7 +678,7 @@ X-RateLimit-Remaining: 59
 
 mod.io returns the following headers in each request to inform you of your limit & remaining requests until reset.
 
- - `X-RateLimit-Limit` - Number of requests you can make from the supplied API key/access token per hour.
+ - `X-RateLimit-Limit` - Number of requests you can make from the supplied API key/access token per minute.
  - `X-RateLimit-Remaining` - Number of requests remaining until requests are rejected.
  - `X-Ratelimit-RetryAfter` - Amount of minutes until reset once you have been throttled (Only returned once rate limit exceeded).
 
@@ -6172,7 +6172,7 @@ System.out.println(response.toString());
 ```
 `GET /games/{game-id}/mods/{mod-id}/comments`
 
-Get all comments posted in the mods profile. Successful request will return an array of [Comment Objects](#comment-object). We recommended reading the [filtering documentation](#filtering) to return only the records you want.
+Get all comments posted in the mods profile. Successful request will return an array of [Comment Objects](#get-all-mod-comments-2). We recommended reading the [filtering documentation](#filtering) to return only the records you want.
 
      Filter|Type|Description
      ---|---|---
@@ -6194,7 +6194,7 @@ Get all comments posted in the mods profile. Successful request will return an a
     {
       "id": 2,
       "mod_id": 2,
-      "submitted_by": {
+      "user": {
         "id": 1,
         "name_id": "xant",
         "username": "XanT",
@@ -8216,7 +8216,7 @@ event_type|string|Type of [event](#get-mod-events-2) was 'MODFILE_CHANGED', 'MOD
 {
   "id": 2,
   "mod_id": 2,
-  "submitted_by": {
+  "user": {
     "id": 1,
     "name_id": "xant",
     "username": "XanT",
@@ -8247,7 +8247,7 @@ Name|Type|Description
 ---|---|---|---|
 id|integer|Unique id of the comment.
 mod_id|integer|Unique id of the parent mod.
-submitted_by|[User Object   ](#schemauser_object)|Contains user data.
+user|[User Object   ](#schemauser_object)|Contains user data.
 » id|integer|Unique id of the user.
 » name_id|string|Path for the user on mod.io. For example: https://mod.io/members/__username-id-here__ Usually a simplified version of their username.
 » username|string|Username of the user.
@@ -8952,7 +8952,7 @@ profile_url|string|URL to the user's mod.io profile.
     {
       "id": 2,
       "mod_id": 2,
-      "submitted_by": {
+      "user": {
         "id": 1,
         "name_id": "xant",
         "username": "XanT",
@@ -8992,7 +8992,7 @@ Name|Type|Description
 data|[Comment Object   ](#schemacomment_object)[]|Array containing comment objects.
 » id|integer|Unique id of the comment.
 » mod_id|integer|Unique id of the parent mod.
-» submitted_by|[User Object   ](#schemauser_object)|Contains user data.
+» user|[User Object   ](#schemauser_object)|Contains user data.
 »» id|integer|Unique id of the user.
 »» name_id|string|Path for the user on mod.io. For example: https://mod.io/members/__username-id-here__ Usually a simplified version of their username.
 »» username|string|Username of the user.

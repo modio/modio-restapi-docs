@@ -661,7 +661,7 @@ X-RateLimit-Remaining: 59
 
 --parse_sitename returns the following headers in each request to inform you of your limit & remaining requests until reset.
 
- - `X-RateLimit-Limit` - Number of requests you can make from the supplied API key/access token per hour.
+ - `X-RateLimit-Limit` - Number of requests you can make from the supplied API key/access token per minute.
  - `X-RateLimit-Remaining` - Number of requests remaining until requests are rejected.
  - `X-Ratelimit-RetryAfter` - Amount of minutes until reset once you have been throttled (Only returned once rate limit exceeded).
 
