@@ -21,7 +21,7 @@ headingLevel: '2'
 
 ## mod.io API v1
 
-Welcome to the official documentation for [mod.io](https://mod.io), an API which makes it a joy to search, sort and share mods in-game. We recommend you read our _Getting Started_ guide to accurately and efficiently consume our REST API. 
+Welcome to the official documentation for [mod.io](https://mod.io), an API which makes it a joy to search, sort and share mods in-game. We recommend you read our _Getting Started_ guide below to accurately and efficiently consume our REST API. 
 
 __Current version:__ `v1`
 
@@ -585,7 +585,7 @@ Where the preceding column value is greater than the value specified.
 ### -bitwise-and (Bitwise AND)
 
 ```
-v1/games?api-bitwise-and=5
+v1/games?maturity_option-bitwise-and=5
 ```
 
 Some columns are stored as bits within an integer. Their value depends on the bits selected. For example, suppose a column has 4 options:
@@ -597,9 +597,9 @@ Some columns are stored as bits within an integer. Their value depends on the bi
 
 You can combine any of these options by adding them together which means there are (2 ^ 4 = 16 possible combinations). For example Option A (1) and Option C (4) would be (1 + 4 = 5), Option A (1), Option C (4) and Option D (8) would be (1 + 4 + 8 = 13), all Options together would be (1 + 2 + 4 + 8 = 15).
 
-The number of combinations makes using _equals_, _in_ and other filters a little complex. To solve this we support Bitwise AND (&) which makes it easy to match a column which contains any of the Options you want.
+The number of combinations makes using _equals_, _in_ and other filters a little complex. To solve this we support Bitwise AND (&) which makes it easy to match a column which contains any of the options you want.
 
-- `?api-bitwise-and=5` - Will match the `api` column values 1, 3, 4, 5, 6, 7, 9, 11, 12, 13, 14, 15 (since these values contain the bits 1, 4 or both).
+- `?maturity_option-bitwise-and=5` - Will match the `maturity_option` column values 1, 3, 4, 5, 6, 7, 9, 11, 12, 13, 14, 15 (since these values contain the bits 1, 4 or both).
 
 ## Localization
 
@@ -699,6 +699,10 @@ __Test site:__ [https://test.mod.io](https://test.mod.io)
 __Test API path:__ [https://api.test.mod.io/v1](https://api.test.mod.io/v1)
 
 __NOTE__: We periodically reset the test environment to default - with the exception of user accounts so please do not rely on it to store important information. Any data you intend on peristing should be submitted to the production environment.
+
+## Whitelabel
+
+If you are a large studio or publisher and require a private, in-house, custom solution that accelerates your time to market with a best-in-class product, reach out [developers@mod.io](mailto:developers@mod.io?subject=Whitelabel%20license) to discuss the licensing options available.
 
 ## Contact
 
@@ -813,6 +817,7 @@ Get all games. Successful request will return an array of [Game Objects](#get-al
     community_options|integer|Community features enabled on the mod.io website:<br><br>__0__ = All of the options below are disabled<br>__1__ = Discussion board enabled<br>__2__ = Guides and news enabled<br>__?__ = Combine to find games with multiple options enabled (see [BITWISE fields](#bitwise-and-bitwise-and))
     revenue_options|integer|Revenue capabilities mods can enable:<br><br>__0__ = All of the options below are disabled<br>__1__ = Allow mods to be sold<br>__2__ = Allow mods to receive donations<br>__4__ = Allow mods to be traded<br>__8__ = Allow mods to control supply and scarcity<br>__?__ = Combine to find games with multiple options enabled (see [BITWISE fields](#bitwise-and-bitwise-and))
     api_access_options|integer|Level of API access allowed by this game:<br><br>__0__ = All of the options below are disabled<br>__1__ = Allow 3rd parties to access this games API endpoints<br>__2__ = Allow mods to be downloaded directly (if disabled all download URLs will contain a frequently changing verification hash to stop unauthorized use)<br>__?__ = Combine to find games with multiple options enabled (see [BITWISE fields](#bitwise-and-bitwise-and))
+	maturity_options|integer|If the game allows developers to flag mods as containing mature content:<br><br>__0__ = Don't allow _(default)_<br>__1__ = Allow
 
 
 > Example response
@@ -829,10 +834,10 @@ Get all games. Successful request will return an array of [Game Objects](#get-al
         "username": "XanT",
         "date_online": 1509922961,
         "avatar": {
-          "filename": "modio-dark.png",
-          "original": "https://static.mod.io/v1/images/branding/modio-dark.png",
-          "thumb_50x50": "https://static.mod.io/v1/images/branding/modio-dark.png",
-          "thumb_100x100": "https://static.mod.io/v1/images/branding/modio-dark.png"
+          "filename": "modio-color-dark.png",
+          "original": "https://static.mod.io/v1/images/branding/modio-color-dark.png",
+          "thumb_50x50": "https://static.mod.io/v1/images/branding/modio-color-dark.png",
+          "thumb_100x100": "https://static.mod.io/v1/images/branding/modio-color-dark.png"
         },
         "timezone": "America/Los_Angeles",
         "language": "en",
@@ -847,24 +852,25 @@ Get all games. Successful request will return an array of [Game Objects](#get-al
       "community_options": 3,
       "revenue_options": 1500,
       "api_access_options": 3,
+      "maturity_options": 0,
       "ugc_name": "map",
       "icon": {
-        "filename": "modio-dark.png",
-        "original": "https://static.mod.io/v1/images/branding/modio-dark.png",
-        "thumb_64x64": "https://static.mod.io/v1/images/branding/modio-dark.png",
-        "thumb_128x128": "https://static.mod.io/v1/images/branding/modio-dark.png",
-        "thumb_256x256": "https://static.mod.io/v1/images/branding/modio-dark.png"
+        "filename": "modio-color-dark.png",
+        "original": "https://static.mod.io/v1/images/branding/modio-color-dark.png",
+        "thumb_64x64": "https://static.mod.io/v1/images/branding/modio-color-dark.png",
+        "thumb_128x128": "https://static.mod.io/v1/images/branding/modio-color-dark.png",
+        "thumb_256x256": "https://static.mod.io/v1/images/branding/modio-color-dark.png"
       },
       "logo": {
-        "filename": "modio-dark.png",
-        "original": "https://static.mod.io/v1/images/branding/modio-dark.png",
-        "thumb_320x180": "https://static.mod.io/v1/images/branding/modio-dark.png",
-        "thumb_640x360": "https://static.mod.io/v1/images/branding/modio-dark.png",
-        "thumb_1280x720": "https://static.mod.io/v1/images/branding/modio-dark.png"
+        "filename": "modio-color-dark.png",
+        "original": "https://static.mod.io/v1/images/branding/modio-color-dark.png",
+        "thumb_320x180": "https://static.mod.io/v1/images/branding/modio-color-dark.png",
+        "thumb_640x360": "https://static.mod.io/v1/images/branding/modio-color-dark.png",
+        "thumb_1280x720": "https://static.mod.io/v1/images/branding/modio-color-dark.png"
       },
       "header": {
         "filename": "demo.png",
-        "original": "https://static.mod.io/v1/images/branding/modio-dark.png"
+        "original": "https://static.mod.io/v1/images/branding/modio-color-dark.png"
       },
       "name": "Rogue Knight",
       "name_id": "rogue-knight",
@@ -1006,10 +1012,10 @@ Get a game. Successful request will return a single [Game Object](#game-object).
     "username": "XanT",
     "date_online": 1509922961,
     "avatar": {
-      "filename": "modio-dark.png",
-      "original": "https://static.mod.io/v1/images/branding/modio-dark.png",
-      "thumb_50x50": "https://static.mod.io/v1/images/branding/modio-dark.png",
-      "thumb_100x100": "https://static.mod.io/v1/images/branding/modio-dark.png"
+      "filename": "modio-color-dark.png",
+      "original": "https://static.mod.io/v1/images/branding/modio-color-dark.png",
+      "thumb_50x50": "https://static.mod.io/v1/images/branding/modio-color-dark.png",
+      "thumb_100x100": "https://static.mod.io/v1/images/branding/modio-color-dark.png"
     },
     "timezone": "America/Los_Angeles",
     "language": "en",
@@ -1024,24 +1030,25 @@ Get a game. Successful request will return a single [Game Object](#game-object).
   "community_options": 3,
   "revenue_options": 1500,
   "api_access_options": 3,
+  "maturity_options": 0,
   "ugc_name": "map",
   "icon": {
-    "filename": "modio-dark.png",
-    "original": "https://static.mod.io/v1/images/branding/modio-dark.png",
-    "thumb_64x64": "https://static.mod.io/v1/images/branding/modio-dark.png",
-    "thumb_128x128": "https://static.mod.io/v1/images/branding/modio-dark.png",
-    "thumb_256x256": "https://static.mod.io/v1/images/branding/modio-dark.png"
+    "filename": "modio-color-dark.png",
+    "original": "https://static.mod.io/v1/images/branding/modio-color-dark.png",
+    "thumb_64x64": "https://static.mod.io/v1/images/branding/modio-color-dark.png",
+    "thumb_128x128": "https://static.mod.io/v1/images/branding/modio-color-dark.png",
+    "thumb_256x256": "https://static.mod.io/v1/images/branding/modio-color-dark.png"
   },
   "logo": {
-    "filename": "modio-dark.png",
-    "original": "https://static.mod.io/v1/images/branding/modio-dark.png",
-    "thumb_320x180": "https://static.mod.io/v1/images/branding/modio-dark.png",
-    "thumb_640x360": "https://static.mod.io/v1/images/branding/modio-dark.png",
-    "thumb_1280x720": "https://static.mod.io/v1/images/branding/modio-dark.png"
+    "filename": "modio-color-dark.png",
+    "original": "https://static.mod.io/v1/images/branding/modio-color-dark.png",
+    "thumb_320x180": "https://static.mod.io/v1/images/branding/modio-color-dark.png",
+    "thumb_640x360": "https://static.mod.io/v1/images/branding/modio-color-dark.png",
+    "thumb_1280x720": "https://static.mod.io/v1/images/branding/modio-color-dark.png"
   },
   "header": {
     "filename": "demo.png",
-    "original": "https://static.mod.io/v1/images/branding/modio-dark.png"
+    "original": "https://static.mod.io/v1/images/branding/modio-color-dark.png"
   },
   "name": "Rogue Knight",
   "name_id": "rogue-knight",
@@ -1190,6 +1197,7 @@ Update details for a game. If you want to update the `icon`, `logo` or `header` 
     community_options|integer||Choose the community features enabled on the mod.io website:<br><br>__0__ = All of the options below are disabled<br>__1__ = Discussion board enabled<br>__2__ = Guides and news enabled<br>__?__ = Add the options you want together, to enable multiple features (see [BITWISE fields](#bitwise-and-bitwise-and))
     revenue_options|integer||Choose the revenue capabilities mods can enable:<br><br>__0__ = All of the options below are disabled<br>__1__ = Allow mods to be sold<br>__2__ = Allow mods to receive donations<br>__4__ = Allow mods to be traded (not subject to revenue share)<br>__8__ = Allow mods to control supply and scarcity<br>__?__ = Add the options you want together, to enable multiple features (see [BITWISE fields](#bitwise-and-bitwise-and))
     api_access_options|integer||Choose the level of API access your game allows:<br><br>__0__ = All of the options below are disabled<br><br>__1__ = Allow 3rd parties to access this games API endpoints. We recommend you enable this feature, an open API will encourage a healthy ecosystem of tools and apps. If you do not enable this feature, your `/games/{games-id}` endpoints will return `403 Forbidden` unless you are a member of the games team or using the games `apikey`<br><br>__2__ = Allow mods to be downloaded directly (makes implementation easier for you, game servers and services because you can save, share and reuse download URLs). If disabled all download URLs will contain a frequently changing verification hash to stop unauthorized use<br><br>__?__ = Add the options you want together, to enable multiple features (see [BITWISE fields](#bitwise-and-bitwise-and))
+	maturity_options|integer||Choose if you want to allow developers to select if they can flag their mods as containing mature content:<br><br>__0__ = Don't allow _(default)_<br>__1__ = Allow
 
 
 > Example response
@@ -1204,10 +1212,10 @@ Update details for a game. If you want to update the `icon`, `logo` or `header` 
     "username": "XanT",
     "date_online": 1509922961,
     "avatar": {
-      "filename": "modio-dark.png",
-      "original": "https://static.mod.io/v1/images/branding/modio-dark.png",
-      "thumb_50x50": "https://static.mod.io/v1/images/branding/modio-dark.png",
-      "thumb_100x100": "https://static.mod.io/v1/images/branding/modio-dark.png"
+      "filename": "modio-color-dark.png",
+      "original": "https://static.mod.io/v1/images/branding/modio-color-dark.png",
+      "thumb_50x50": "https://static.mod.io/v1/images/branding/modio-color-dark.png",
+      "thumb_100x100": "https://static.mod.io/v1/images/branding/modio-color-dark.png"
     },
     "timezone": "America/Los_Angeles",
     "language": "en",
@@ -1222,24 +1230,25 @@ Update details for a game. If you want to update the `icon`, `logo` or `header` 
   "community_options": 3,
   "revenue_options": 1500,
   "api_access_options": 3,
+  "maturity_options": 0,
   "ugc_name": "map",
   "icon": {
-    "filename": "modio-dark.png",
-    "original": "https://static.mod.io/v1/images/branding/modio-dark.png",
-    "thumb_64x64": "https://static.mod.io/v1/images/branding/modio-dark.png",
-    "thumb_128x128": "https://static.mod.io/v1/images/branding/modio-dark.png",
-    "thumb_256x256": "https://static.mod.io/v1/images/branding/modio-dark.png"
+    "filename": "modio-color-dark.png",
+    "original": "https://static.mod.io/v1/images/branding/modio-color-dark.png",
+    "thumb_64x64": "https://static.mod.io/v1/images/branding/modio-color-dark.png",
+    "thumb_128x128": "https://static.mod.io/v1/images/branding/modio-color-dark.png",
+    "thumb_256x256": "https://static.mod.io/v1/images/branding/modio-color-dark.png"
   },
   "logo": {
-    "filename": "modio-dark.png",
-    "original": "https://static.mod.io/v1/images/branding/modio-dark.png",
-    "thumb_320x180": "https://static.mod.io/v1/images/branding/modio-dark.png",
-    "thumb_640x360": "https://static.mod.io/v1/images/branding/modio-dark.png",
-    "thumb_1280x720": "https://static.mod.io/v1/images/branding/modio-dark.png"
+    "filename": "modio-color-dark.png",
+    "original": "https://static.mod.io/v1/images/branding/modio-color-dark.png",
+    "thumb_320x180": "https://static.mod.io/v1/images/branding/modio-color-dark.png",
+    "thumb_640x360": "https://static.mod.io/v1/images/branding/modio-color-dark.png",
+    "thumb_1280x720": "https://static.mod.io/v1/images/branding/modio-color-dark.png"
   },
   "header": {
     "filename": "demo.png",
-    "original": "https://static.mod.io/v1/images/branding/modio-dark.png"
+    "original": "https://static.mod.io/v1/images/branding/modio-color-dark.png"
   },
   "name": "Rogue Knight",
   "name_id": "rogue-knight",
@@ -1372,6 +1381,7 @@ Get all mods for the corresponding game. Successful request will return an array
     date_added|integer|Unix timestamp of date mod was registered.
     date_updated|integer|Unix timestamp of date mod was updated.
     date_live|integer|Unix timestamp of date mod was set live.
+	maturity_option|integer|Maturity option(s) set by the mod developer:<br><br>__0__ = None set _(default)_<br>__1__ = Alcohol<br>__2__ = Drugs<br>__4__ = Violence<br>__8__ = Explicit<br>__?__ = Add the options you want together, to enable multiple filters (see [BITWISE fields](#bitwise-and-bitwise-and))
     name|string|Name of the mod.
     name_id|string|Path for the mod on mod.io. For example: https://gamename.mod.io/__mod-name-id-here__
     summary|string|Summary of the mod.
@@ -1403,10 +1413,10 @@ Get all mods for the corresponding game. Successful request will return an array
         "username": "XanT",
         "date_online": 1509922961,
         "avatar": {
-          "filename": "modio-dark.png",
-          "original": "https://static.mod.io/v1/images/branding/modio-dark.png",
-          "thumb_50x50": "https://static.mod.io/v1/images/branding/modio-dark.png",
-          "thumb_100x100": "https://static.mod.io/v1/images/branding/modio-dark.png"
+          "filename": "modio-color-dark.png",
+          "original": "https://static.mod.io/v1/images/branding/modio-color-dark.png",
+          "thumb_50x50": "https://static.mod.io/v1/images/branding/modio-color-dark.png",
+          "thumb_100x100": "https://static.mod.io/v1/images/branding/modio-color-dark.png"
         },
         "timezone": "America/Los_Angeles",
         "language": "en",
@@ -1415,12 +1425,13 @@ Get all mods for the corresponding game. Successful request will return an array
       "date_added": 1492564103,
       "date_updated": 1499841487,
       "date_live": 1499841403,
+      "maturity_option": 0,
       "logo": {
-        "filename": "modio-dark.png",
-        "original": "https://static.mod.io/v1/images/branding/modio-dark.png",
-        "thumb_320x180": "https://static.mod.io/v1/images/branding/modio-dark.png",
-        "thumb_640x360": "https://static.mod.io/v1/images/branding/modio-dark.png",
-        "thumb_1280x720": "https://static.mod.io/v1/images/branding/modio-dark.png"
+        "filename": "modio-color-dark.png",
+        "original": "https://static.mod.io/v1/images/branding/modio-color-dark.png",
+        "thumb_320x180": "https://static.mod.io/v1/images/branding/modio-color-dark.png",
+        "thumb_640x360": "https://static.mod.io/v1/images/branding/modio-color-dark.png",
+        "thumb_1280x720": "https://static.mod.io/v1/images/branding/modio-color-dark.png"
       },
       "homepage_url": "https://www.rogue-hdpack.com/",
       "name": "Rogue Knight HD Pack",
@@ -1465,9 +1476,9 @@ Get all mods for the corresponding game. Successful request will return an array
         ],
         "images": [
           {
-            "filename": "modio-dark.png",
-            "original": "https://static.mod.io/v1/images/branding/modio-dark.png",
-            "thumb_320x180": "https://static.mod.io/v1/images/branding/modio-dark.png"
+            "filename": "modio-color-dark.png",
+            "original": "https://static.mod.io/v1/images/branding/modio-color-dark.png",
+            "thumb_320x180": "https://static.mod.io/v1/images/branding/modio-color-dark.png"
           }
         ]
       },
@@ -1611,10 +1622,10 @@ Get a mod. Successful request will return a single [Mod Object](#mod-object).
     "username": "XanT",
     "date_online": 1509922961,
     "avatar": {
-      "filename": "modio-dark.png",
-      "original": "https://static.mod.io/v1/images/branding/modio-dark.png",
-      "thumb_50x50": "https://static.mod.io/v1/images/branding/modio-dark.png",
-      "thumb_100x100": "https://static.mod.io/v1/images/branding/modio-dark.png"
+      "filename": "modio-color-dark.png",
+      "original": "https://static.mod.io/v1/images/branding/modio-color-dark.png",
+      "thumb_50x50": "https://static.mod.io/v1/images/branding/modio-color-dark.png",
+      "thumb_100x100": "https://static.mod.io/v1/images/branding/modio-color-dark.png"
     },
     "timezone": "America/Los_Angeles",
     "language": "en",
@@ -1623,12 +1634,13 @@ Get a mod. Successful request will return a single [Mod Object](#mod-object).
   "date_added": 1492564103,
   "date_updated": 1499841487,
   "date_live": 1499841403,
+  "maturity_option": 0,
   "logo": {
-    "filename": "modio-dark.png",
-    "original": "https://static.mod.io/v1/images/branding/modio-dark.png",
-    "thumb_320x180": "https://static.mod.io/v1/images/branding/modio-dark.png",
-    "thumb_640x360": "https://static.mod.io/v1/images/branding/modio-dark.png",
-    "thumb_1280x720": "https://static.mod.io/v1/images/branding/modio-dark.png"
+    "filename": "modio-color-dark.png",
+    "original": "https://static.mod.io/v1/images/branding/modio-color-dark.png",
+    "thumb_320x180": "https://static.mod.io/v1/images/branding/modio-color-dark.png",
+    "thumb_640x360": "https://static.mod.io/v1/images/branding/modio-color-dark.png",
+    "thumb_1280x720": "https://static.mod.io/v1/images/branding/modio-color-dark.png"
   },
   "homepage_url": "https://www.rogue-hdpack.com/",
   "name": "Rogue Knight HD Pack",
@@ -1673,9 +1685,9 @@ Get a mod. Successful request will return a single [Mod Object](#mod-object).
     ],
     "images": [
       {
-        "filename": "modio-dark.png",
-        "original": "https://static.mod.io/v1/images/branding/modio-dark.png",
-        "thumb_320x180": "https://static.mod.io/v1/images/branding/modio-dark.png"
+        "filename": "modio-color-dark.png",
+        "original": "https://static.mod.io/v1/images/branding/modio-color-dark.png",
+        "thumb_320x180": "https://static.mod.io/v1/images/branding/modio-color-dark.png"
       }
     ]
   },
@@ -1823,7 +1835,8 @@ Add a mod. Successful request will return the newly created [Mod Object](#mod-ob
      description|string||Detailed description for your mod, which can include details such as 'About', 'Features', 'Install Instructions', 'FAQ', etc. HTML supported and encouraged.
      homepage_url|string||Official homepage for your mod. Must be a valid URL.
      stock|integer||Maximium number of subscribers for this mod. A value of 0 disables this limit.
-     metadata_blob|string||Metadata stored by the game developer which may include properties as to how the item works, or other information you need to display. Metadata can also be stored as searchable [key value pairs](#metadata), and to individual [mod files](#get-all-modfiles).
+     maturity_option|integer||Choose if this mod contains any of the following mature content. Note: The value of this field will default to 0 unless the parent game allows you to flag mature content (see `maturity_options` field in [Game Object](#game-object)). <br><br>__0__ = None set _(default)_<br>__1__ = Alcohol<br>__2__ = Drugs<br>__4__ = Violence<br>__8__ = Explicit<br>__?__ = Add the options you want together, to enable multiple options (see [BITWISE fields](#bitwise-and-bitwise-and))
+	 metadata_blob|string||Metadata stored by the game developer which may include properties as to how the item works, or other information you need to display. Metadata can also be stored as searchable [key value pairs](#metadata), and to individual [mod files](#get-all-modfiles).
      tags|string[]||An array of strings that represent what the mod has been tagged as. Only tags that are supported by the parent game can be applied. To determine what tags are eligible, see the tags values within `tag_options` column on the parent [Game Object](#game-object).
 
 
@@ -1841,10 +1854,10 @@ Add a mod. Successful request will return the newly created [Mod Object](#mod-ob
     "username": "XanT",
     "date_online": 1509922961,
     "avatar": {
-      "filename": "modio-dark.png",
-      "original": "https://static.mod.io/v1/images/branding/modio-dark.png",
-      "thumb_50x50": "https://static.mod.io/v1/images/branding/modio-dark.png",
-      "thumb_100x100": "https://static.mod.io/v1/images/branding/modio-dark.png"
+      "filename": "modio-color-dark.png",
+      "original": "https://static.mod.io/v1/images/branding/modio-color-dark.png",
+      "thumb_50x50": "https://static.mod.io/v1/images/branding/modio-color-dark.png",
+      "thumb_100x100": "https://static.mod.io/v1/images/branding/modio-color-dark.png"
     },
     "timezone": "America/Los_Angeles",
     "language": "en",
@@ -1853,12 +1866,13 @@ Add a mod. Successful request will return the newly created [Mod Object](#mod-ob
   "date_added": 1492564103,
   "date_updated": 1499841487,
   "date_live": 1499841403,
+  "maturity_option": 0,
   "logo": {
-    "filename": "modio-dark.png",
-    "original": "https://static.mod.io/v1/images/branding/modio-dark.png",
-    "thumb_320x180": "https://static.mod.io/v1/images/branding/modio-dark.png",
-    "thumb_640x360": "https://static.mod.io/v1/images/branding/modio-dark.png",
-    "thumb_1280x720": "https://static.mod.io/v1/images/branding/modio-dark.png"
+    "filename": "modio-color-dark.png",
+    "original": "https://static.mod.io/v1/images/branding/modio-color-dark.png",
+    "thumb_320x180": "https://static.mod.io/v1/images/branding/modio-color-dark.png",
+    "thumb_640x360": "https://static.mod.io/v1/images/branding/modio-color-dark.png",
+    "thumb_1280x720": "https://static.mod.io/v1/images/branding/modio-color-dark.png"
   },
   "homepage_url": "https://www.rogue-hdpack.com/",
   "name": "Rogue Knight HD Pack",
@@ -1903,9 +1917,9 @@ Add a mod. Successful request will return the newly created [Mod Object](#mod-ob
     ],
     "images": [
       {
-        "filename": "modio-dark.png",
-        "original": "https://static.mod.io/v1/images/branding/modio-dark.png",
-        "thumb_320x180": "https://static.mod.io/v1/images/branding/modio-dark.png"
+        "filename": "modio-color-dark.png",
+        "original": "https://static.mod.io/v1/images/branding/modio-color-dark.png",
+        "thumb_320x180": "https://static.mod.io/v1/images/branding/modio-color-dark.png"
       }
     ]
   },
@@ -2053,6 +2067,7 @@ Edit details for a mod. If you want to update the `logo` or media associated wit
      description|string||Detailed description for your mod, which can include details such as 'About', 'Features', 'Install Instructions', 'FAQ', etc. HTML supported and encouraged.
      homepage_url|string||Official homepage for your mod. Must be a valid URL.
      stock|integer||Maximium number of subscribers for this mod. A value of 0 disables this limit.
+	 maturity_option|integer||Choose if this mod contains any of the following mature content. Note: The value of this field will default to 0 unless the parent game allows you to flag mature content (see `maturity_options` field in [Game Object](#game-object)). <br><br>__0__ = None set _(default)_<br>__1__ = Alcohol<br>__2__ = Drugs<br>__4__ = Violence<br>__8__ = Explicit<br>__?__ = Add the options you want together, to enable multiple options (see [BITWISE fields](#bitwise-and-bitwise-and))
      metadata_blob|string||Metadata stored by the game developer which may include properties as to how the item works, or other information you need to display. Metadata can also be stored as searchable [key value pairs](#metadata), and to individual [mod files](#get-all-modfiles).
 
 
@@ -2070,10 +2085,10 @@ Edit details for a mod. If you want to update the `logo` or media associated wit
     "username": "XanT",
     "date_online": 1509922961,
     "avatar": {
-      "filename": "modio-dark.png",
-      "original": "https://static.mod.io/v1/images/branding/modio-dark.png",
-      "thumb_50x50": "https://static.mod.io/v1/images/branding/modio-dark.png",
-      "thumb_100x100": "https://static.mod.io/v1/images/branding/modio-dark.png"
+      "filename": "modio-color-dark.png",
+      "original": "https://static.mod.io/v1/images/branding/modio-color-dark.png",
+      "thumb_50x50": "https://static.mod.io/v1/images/branding/modio-color-dark.png",
+      "thumb_100x100": "https://static.mod.io/v1/images/branding/modio-color-dark.png"
     },
     "timezone": "America/Los_Angeles",
     "language": "en",
@@ -2082,12 +2097,13 @@ Edit details for a mod. If you want to update the `logo` or media associated wit
   "date_added": 1492564103,
   "date_updated": 1499841487,
   "date_live": 1499841403,
+  "maturity_option": 0,
   "logo": {
-    "filename": "modio-dark.png",
-    "original": "https://static.mod.io/v1/images/branding/modio-dark.png",
-    "thumb_320x180": "https://static.mod.io/v1/images/branding/modio-dark.png",
-    "thumb_640x360": "https://static.mod.io/v1/images/branding/modio-dark.png",
-    "thumb_1280x720": "https://static.mod.io/v1/images/branding/modio-dark.png"
+    "filename": "modio-color-dark.png",
+    "original": "https://static.mod.io/v1/images/branding/modio-color-dark.png",
+    "thumb_320x180": "https://static.mod.io/v1/images/branding/modio-color-dark.png",
+    "thumb_640x360": "https://static.mod.io/v1/images/branding/modio-color-dark.png",
+    "thumb_1280x720": "https://static.mod.io/v1/images/branding/modio-color-dark.png"
   },
   "homepage_url": "https://www.rogue-hdpack.com/",
   "name": "Rogue Knight HD Pack",
@@ -2132,9 +2148,9 @@ Edit details for a mod. If you want to update the `logo` or media associated wit
     ],
     "images": [
       {
-        "filename": "modio-dark.png",
-        "original": "https://static.mod.io/v1/images/branding/modio-dark.png",
-        "thumb_320x180": "https://static.mod.io/v1/images/branding/modio-dark.png"
+        "filename": "modio-color-dark.png",
+        "original": "https://static.mod.io/v1/images/branding/modio-color-dark.png",
+        "thumb_320x180": "https://static.mod.io/v1/images/branding/modio-color-dark.png"
       }
     ]
   },
@@ -3405,10 +3421,10 @@ Subscribe the _authenticated user_ to a corresponding mod. No body parameters ar
     "username": "XanT",
     "date_online": 1509922961,
     "avatar": {
-      "filename": "modio-dark.png",
-      "original": "https://static.mod.io/v1/images/branding/modio-dark.png",
-      "thumb_50x50": "https://static.mod.io/v1/images/branding/modio-dark.png",
-      "thumb_100x100": "https://static.mod.io/v1/images/branding/modio-dark.png"
+      "filename": "modio-color-dark.png",
+      "original": "https://static.mod.io/v1/images/branding/modio-color-dark.png",
+      "thumb_50x50": "https://static.mod.io/v1/images/branding/modio-color-dark.png",
+      "thumb_100x100": "https://static.mod.io/v1/images/branding/modio-color-dark.png"
     },
     "timezone": "America/Los_Angeles",
     "language": "en",
@@ -3417,12 +3433,13 @@ Subscribe the _authenticated user_ to a corresponding mod. No body parameters ar
   "date_added": 1492564103,
   "date_updated": 1499841487,
   "date_live": 1499841403,
+  "maturity_option": 0,
   "logo": {
-    "filename": "modio-dark.png",
-    "original": "https://static.mod.io/v1/images/branding/modio-dark.png",
-    "thumb_320x180": "https://static.mod.io/v1/images/branding/modio-dark.png",
-    "thumb_640x360": "https://static.mod.io/v1/images/branding/modio-dark.png",
-    "thumb_1280x720": "https://static.mod.io/v1/images/branding/modio-dark.png"
+    "filename": "modio-color-dark.png",
+    "original": "https://static.mod.io/v1/images/branding/modio-color-dark.png",
+    "thumb_320x180": "https://static.mod.io/v1/images/branding/modio-color-dark.png",
+    "thumb_640x360": "https://static.mod.io/v1/images/branding/modio-color-dark.png",
+    "thumb_1280x720": "https://static.mod.io/v1/images/branding/modio-color-dark.png"
   },
   "homepage_url": "https://www.rogue-hdpack.com/",
   "name": "Rogue Knight HD Pack",
@@ -3467,9 +3484,9 @@ Subscribe the _authenticated user_ to a corresponding mod. No body parameters ar
     ],
     "images": [
       {
-        "filename": "modio-dark.png",
-        "original": "https://static.mod.io/v1/images/branding/modio-dark.png",
-        "thumb_320x180": "https://static.mod.io/v1/images/branding/modio-dark.png"
+        "filename": "modio-color-dark.png",
+        "original": "https://static.mod.io/v1/images/branding/modio-color-dark.png",
+        "thumb_320x180": "https://static.mod.io/v1/images/branding/modio-color-dark.png"
       }
     ]
   },
@@ -5651,10 +5668,10 @@ Get all users that are part of a mod team. Successful request will return an arr
         "username": "XanT",
         "date_online": 1509922961,
         "avatar": {
-          "filename": "modio-dark.png",
-          "original": "https://static.mod.io/v1/images/branding/modio-dark.png",
-          "thumb_50x50": "https://static.mod.io/v1/images/branding/modio-dark.png",
-          "thumb_100x100": "https://static.mod.io/v1/images/branding/modio-dark.png"
+          "filename": "modio-color-dark.png",
+          "original": "https://static.mod.io/v1/images/branding/modio-color-dark.png",
+          "thumb_50x50": "https://static.mod.io/v1/images/branding/modio-color-dark.png",
+          "thumb_100x100": "https://static.mod.io/v1/images/branding/modio-color-dark.png"
         },
         "timezone": "America/Los_Angeles",
         "language": "en",
@@ -6155,7 +6172,7 @@ System.out.println(response.toString());
 ```
 `GET /games/{game-id}/mods/{mod-id}/comments`
 
-Get all comments posted in the mods profile. Successful request will return an array of [Comment Objects](#get-comments). We recommended reading the [filtering documentation](#filtering) to return only the records you want.
+Get all comments posted in the mods profile. Successful request will return an array of [Comment Objects](#comment-object). We recommended reading the [filtering documentation](#filtering) to return only the records you want.
 
      Filter|Type|Description
      ---|---|---
@@ -6183,10 +6200,10 @@ Get all comments posted in the mods profile. Successful request will return an a
         "username": "XanT",
         "date_online": 1509922961,
         "avatar": {
-          "filename": "modio-dark.png",
-          "original": "https://static.mod.io/v1/images/branding/modio-dark.png",
-          "thumb_50x50": "https://static.mod.io/v1/images/branding/modio-dark.png",
-          "thumb_100x100": "https://static.mod.io/v1/images/branding/modio-dark.png"
+          "filename": "modio-color-dark.png",
+          "original": "https://static.mod.io/v1/images/branding/modio-color-dark.png",
+          "thumb_50x50": "https://static.mod.io/v1/images/branding/modio-color-dark.png",
+          "thumb_100x100": "https://static.mod.io/v1/images/branding/modio-color-dark.png"
         },
         "timezone": "America/Los_Angeles",
         "language": "en",
@@ -6457,10 +6474,10 @@ Get the user that is the original _submitter_ of a resource. Successful request 
   "username": "XanT",
   "date_online": 1509922961,
   "avatar": {
-    "filename": "modio-dark.png",
-    "original": "https://static.mod.io/v1/images/branding/modio-dark.png",
-    "thumb_50x50": "https://static.mod.io/v1/images/branding/modio-dark.png",
-    "thumb_100x100": "https://static.mod.io/v1/images/branding/modio-dark.png"
+    "filename": "modio-color-dark.png",
+    "original": "https://static.mod.io/v1/images/branding/modio-color-dark.png",
+    "thumb_50x50": "https://static.mod.io/v1/images/branding/modio-color-dark.png",
+    "thumb_100x100": "https://static.mod.io/v1/images/branding/modio-color-dark.png"
   },
   "timezone": "America/Los_Angeles",
   "language": "en",
@@ -6589,10 +6606,10 @@ Get all users registered on mod.io. Successful request will return an array of [
       "username": "XanT",
       "date_online": 1509922961,
       "avatar": {
-        "filename": "modio-dark.png",
-        "original": "https://static.mod.io/v1/images/branding/modio-dark.png",
-        "thumb_50x50": "https://static.mod.io/v1/images/branding/modio-dark.png",
-        "thumb_100x100": "https://static.mod.io/v1/images/branding/modio-dark.png"
+        "filename": "modio-color-dark.png",
+        "original": "https://static.mod.io/v1/images/branding/modio-color-dark.png",
+        "thumb_50x50": "https://static.mod.io/v1/images/branding/modio-color-dark.png",
+        "thumb_100x100": "https://static.mod.io/v1/images/branding/modio-color-dark.png"
       },
       "timezone": "America/Los_Angeles",
       "language": "en",
@@ -6718,10 +6735,10 @@ Get a user. Successful request will return a single [User Object](#user-object).
   "username": "XanT",
   "date_online": 1509922961,
   "avatar": {
-    "filename": "modio-dark.png",
-    "original": "https://static.mod.io/v1/images/branding/modio-dark.png",
-    "thumb_50x50": "https://static.mod.io/v1/images/branding/modio-dark.png",
-    "thumb_100x100": "https://static.mod.io/v1/images/branding/modio-dark.png"
+    "filename": "modio-color-dark.png",
+    "original": "https://static.mod.io/v1/images/branding/modio-color-dark.png",
+    "thumb_50x50": "https://static.mod.io/v1/images/branding/modio-color-dark.png",
+    "thumb_100x100": "https://static.mod.io/v1/images/branding/modio-color-dark.png"
   },
   "timezone": "America/Los_Angeles",
   "language": "en",
@@ -6988,10 +7005,10 @@ Get the _authenticated user_ details. Successful request will return a single [U
   "username": "XanT",
   "date_online": 1509922961,
   "avatar": {
-    "filename": "modio-dark.png",
-    "original": "https://static.mod.io/v1/images/branding/modio-dark.png",
-    "thumb_50x50": "https://static.mod.io/v1/images/branding/modio-dark.png",
-    "thumb_100x100": "https://static.mod.io/v1/images/branding/modio-dark.png"
+    "filename": "modio-color-dark.png",
+    "original": "https://static.mod.io/v1/images/branding/modio-color-dark.png",
+    "thumb_50x50": "https://static.mod.io/v1/images/branding/modio-color-dark.png",
+    "thumb_100x100": "https://static.mod.io/v1/images/branding/modio-color-dark.png"
   },
   "timezone": "America/Los_Angeles",
   "language": "en",
@@ -7142,10 +7159,10 @@ Get all mod's the _authenticated user_ is subscribed to. Successful request will
         "username": "XanT",
         "date_online": 1509922961,
         "avatar": {
-          "filename": "modio-dark.png",
-          "original": "https://static.mod.io/v1/images/branding/modio-dark.png",
-          "thumb_50x50": "https://static.mod.io/v1/images/branding/modio-dark.png",
-          "thumb_100x100": "https://static.mod.io/v1/images/branding/modio-dark.png"
+          "filename": "modio-color-dark.png",
+          "original": "https://static.mod.io/v1/images/branding/modio-color-dark.png",
+          "thumb_50x50": "https://static.mod.io/v1/images/branding/modio-color-dark.png",
+          "thumb_100x100": "https://static.mod.io/v1/images/branding/modio-color-dark.png"
         },
         "timezone": "America/Los_Angeles",
         "language": "en",
@@ -7154,12 +7171,13 @@ Get all mod's the _authenticated user_ is subscribed to. Successful request will
       "date_added": 1492564103,
       "date_updated": 1499841487,
       "date_live": 1499841403,
+      "maturity_option": 0,
       "logo": {
-        "filename": "modio-dark.png",
-        "original": "https://static.mod.io/v1/images/branding/modio-dark.png",
-        "thumb_320x180": "https://static.mod.io/v1/images/branding/modio-dark.png",
-        "thumb_640x360": "https://static.mod.io/v1/images/branding/modio-dark.png",
-        "thumb_1280x720": "https://static.mod.io/v1/images/branding/modio-dark.png"
+        "filename": "modio-color-dark.png",
+        "original": "https://static.mod.io/v1/images/branding/modio-color-dark.png",
+        "thumb_320x180": "https://static.mod.io/v1/images/branding/modio-color-dark.png",
+        "thumb_640x360": "https://static.mod.io/v1/images/branding/modio-color-dark.png",
+        "thumb_1280x720": "https://static.mod.io/v1/images/branding/modio-color-dark.png"
       },
       "homepage_url": "https://www.rogue-hdpack.com/",
       "name": "Rogue Knight HD Pack",
@@ -7204,9 +7222,9 @@ Get all mod's the _authenticated user_ is subscribed to. Successful request will
         ],
         "images": [
           {
-            "filename": "modio-dark.png",
-            "original": "https://static.mod.io/v1/images/branding/modio-dark.png",
-            "thumb_320x180": "https://static.mod.io/v1/images/branding/modio-dark.png"
+            "filename": "modio-color-dark.png",
+            "original": "https://static.mod.io/v1/images/branding/modio-color-dark.png",
+            "thumb_320x180": "https://static.mod.io/v1/images/branding/modio-color-dark.png"
           }
         ]
       },
@@ -7507,10 +7525,10 @@ Get all games the _authenticated user_ added or is a team member of. Successful 
         "username": "XanT",
         "date_online": 1509922961,
         "avatar": {
-          "filename": "modio-dark.png",
-          "original": "https://static.mod.io/v1/images/branding/modio-dark.png",
-          "thumb_50x50": "https://static.mod.io/v1/images/branding/modio-dark.png",
-          "thumb_100x100": "https://static.mod.io/v1/images/branding/modio-dark.png"
+          "filename": "modio-color-dark.png",
+          "original": "https://static.mod.io/v1/images/branding/modio-color-dark.png",
+          "thumb_50x50": "https://static.mod.io/v1/images/branding/modio-color-dark.png",
+          "thumb_100x100": "https://static.mod.io/v1/images/branding/modio-color-dark.png"
         },
         "timezone": "America/Los_Angeles",
         "language": "en",
@@ -7525,24 +7543,25 @@ Get all games the _authenticated user_ added or is a team member of. Successful 
       "community_options": 3,
       "revenue_options": 1500,
       "api_access_options": 3,
+      "maturity_options": 0,
       "ugc_name": "map",
       "icon": {
-        "filename": "modio-dark.png",
-        "original": "https://static.mod.io/v1/images/branding/modio-dark.png",
-        "thumb_64x64": "https://static.mod.io/v1/images/branding/modio-dark.png",
-        "thumb_128x128": "https://static.mod.io/v1/images/branding/modio-dark.png",
-        "thumb_256x256": "https://static.mod.io/v1/images/branding/modio-dark.png"
+        "filename": "modio-color-dark.png",
+        "original": "https://static.mod.io/v1/images/branding/modio-color-dark.png",
+        "thumb_64x64": "https://static.mod.io/v1/images/branding/modio-color-dark.png",
+        "thumb_128x128": "https://static.mod.io/v1/images/branding/modio-color-dark.png",
+        "thumb_256x256": "https://static.mod.io/v1/images/branding/modio-color-dark.png"
       },
       "logo": {
-        "filename": "modio-dark.png",
-        "original": "https://static.mod.io/v1/images/branding/modio-dark.png",
-        "thumb_320x180": "https://static.mod.io/v1/images/branding/modio-dark.png",
-        "thumb_640x360": "https://static.mod.io/v1/images/branding/modio-dark.png",
-        "thumb_1280x720": "https://static.mod.io/v1/images/branding/modio-dark.png"
+        "filename": "modio-color-dark.png",
+        "original": "https://static.mod.io/v1/images/branding/modio-color-dark.png",
+        "thumb_320x180": "https://static.mod.io/v1/images/branding/modio-color-dark.png",
+        "thumb_640x360": "https://static.mod.io/v1/images/branding/modio-color-dark.png",
+        "thumb_1280x720": "https://static.mod.io/v1/images/branding/modio-color-dark.png"
       },
       "header": {
         "filename": "demo.png",
-        "original": "https://static.mod.io/v1/images/branding/modio-dark.png"
+        "original": "https://static.mod.io/v1/images/branding/modio-color-dark.png"
       },
       "name": "Rogue Knight",
       "name_id": "rogue-knight",
@@ -7718,10 +7737,10 @@ Get all mods the _authenticated user_ added or is a team member of. Successful r
         "username": "XanT",
         "date_online": 1509922961,
         "avatar": {
-          "filename": "modio-dark.png",
-          "original": "https://static.mod.io/v1/images/branding/modio-dark.png",
-          "thumb_50x50": "https://static.mod.io/v1/images/branding/modio-dark.png",
-          "thumb_100x100": "https://static.mod.io/v1/images/branding/modio-dark.png"
+          "filename": "modio-color-dark.png",
+          "original": "https://static.mod.io/v1/images/branding/modio-color-dark.png",
+          "thumb_50x50": "https://static.mod.io/v1/images/branding/modio-color-dark.png",
+          "thumb_100x100": "https://static.mod.io/v1/images/branding/modio-color-dark.png"
         },
         "timezone": "America/Los_Angeles",
         "language": "en",
@@ -7730,12 +7749,13 @@ Get all mods the _authenticated user_ added or is a team member of. Successful r
       "date_added": 1492564103,
       "date_updated": 1499841487,
       "date_live": 1499841403,
+      "maturity_option": 0,
       "logo": {
-        "filename": "modio-dark.png",
-        "original": "https://static.mod.io/v1/images/branding/modio-dark.png",
-        "thumb_320x180": "https://static.mod.io/v1/images/branding/modio-dark.png",
-        "thumb_640x360": "https://static.mod.io/v1/images/branding/modio-dark.png",
-        "thumb_1280x720": "https://static.mod.io/v1/images/branding/modio-dark.png"
+        "filename": "modio-color-dark.png",
+        "original": "https://static.mod.io/v1/images/branding/modio-color-dark.png",
+        "thumb_320x180": "https://static.mod.io/v1/images/branding/modio-color-dark.png",
+        "thumb_640x360": "https://static.mod.io/v1/images/branding/modio-color-dark.png",
+        "thumb_1280x720": "https://static.mod.io/v1/images/branding/modio-color-dark.png"
       },
       "homepage_url": "https://www.rogue-hdpack.com/",
       "name": "Rogue Knight HD Pack",
@@ -7780,9 +7800,9 @@ Get all mods the _authenticated user_ added or is a team member of. Successful r
         ],
         "images": [
           {
-            "filename": "modio-dark.png",
-            "original": "https://static.mod.io/v1/images/branding/modio-dark.png",
-            "thumb_320x180": "https://static.mod.io/v1/images/branding/modio-dark.png"
+            "filename": "modio-color-dark.png",
+            "original": "https://static.mod.io/v1/images/branding/modio-color-dark.png",
+            "thumb_320x180": "https://static.mod.io/v1/images/branding/modio-color-dark.png"
           }
         ]
       },
@@ -8036,11 +8056,11 @@ error|object|Contains error data.
 
 ```json
 {
-  "filename": "modio-dark.png",
-  "original": "https://static.mod.io/v1/images/branding/modio-dark.png",
-  "thumb_320x180": "https://static.mod.io/v1/images/branding/modio-dark.png",
-  "thumb_640x360": "https://static.mod.io/v1/images/branding/modio-dark.png",
-  "thumb_1280x720": "https://static.mod.io/v1/images/branding/modio-dark.png"
+  "filename": "modio-color-dark.png",
+  "original": "https://static.mod.io/v1/images/branding/modio-color-dark.png",
+  "thumb_320x180": "https://static.mod.io/v1/images/branding/modio-color-dark.png",
+  "thumb_640x360": "https://static.mod.io/v1/images/branding/modio-color-dark.png",
+  "thumb_1280x720": "https://static.mod.io/v1/images/branding/modio-color-dark.png"
 } 
 ```
 
@@ -8064,11 +8084,11 @@ thumb_1280x720|string|URL to the large logo thumbnail.
 
 ```json
 {
-  "filename": "modio-dark.png",
-  "original": "https://static.mod.io/v1/images/branding/modio-dark.png",
-  "thumb_64x64": "https://static.mod.io/v1/images/branding/modio-dark.png",
-  "thumb_128x128": "https://static.mod.io/v1/images/branding/modio-dark.png",
-  "thumb_256x256": "https://static.mod.io/v1/images/branding/modio-dark.png"
+  "filename": "modio-color-dark.png",
+  "original": "https://static.mod.io/v1/images/branding/modio-color-dark.png",
+  "thumb_64x64": "https://static.mod.io/v1/images/branding/modio-color-dark.png",
+  "thumb_128x128": "https://static.mod.io/v1/images/branding/modio-color-dark.png",
+  "thumb_256x256": "https://static.mod.io/v1/images/branding/modio-color-dark.png"
 } 
 ```
 
@@ -8093,7 +8113,7 @@ thumb_256x256|string|URL to the large icon thumbnail.
 ```json
 {
   "filename": "demo.png",
-  "original": "https://static.mod.io/v1/images/branding/modio-dark.png"
+  "original": "https://static.mod.io/v1/images/branding/modio-color-dark.png"
 } 
 ```
 
@@ -8114,10 +8134,10 @@ original|string|URL to the full-sized header image.
 
 ```json
 {
-  "filename": "modio-dark.png",
-  "original": "https://static.mod.io/v1/images/branding/modio-dark.png",
-  "thumb_50x50": "https://static.mod.io/v1/images/branding/modio-dark.png",
-  "thumb_100x100": "https://static.mod.io/v1/images/branding/modio-dark.png"
+  "filename": "modio-color-dark.png",
+  "original": "https://static.mod.io/v1/images/branding/modio-color-dark.png",
+  "thumb_50x50": "https://static.mod.io/v1/images/branding/modio-color-dark.png",
+  "thumb_100x100": "https://static.mod.io/v1/images/branding/modio-color-dark.png"
 } 
 ```
 
@@ -8140,9 +8160,9 @@ thumb_100x100|string|URL to the medium avatar thumbnail.
 
 ```json
 {
-  "filename": "modio-dark.png",
-  "original": "https://static.mod.io/v1/images/branding/modio-dark.png",
-  "thumb_320x180": "https://static.mod.io/v1/images/branding/modio-dark.png"
+  "filename": "modio-color-dark.png",
+  "original": "https://static.mod.io/v1/images/branding/modio-color-dark.png",
+  "thumb_320x180": "https://static.mod.io/v1/images/branding/modio-color-dark.png"
 } 
 ```
 
@@ -8202,10 +8222,10 @@ event_type|string|Type of [event](#get-mod-events-2) was 'MODFILE_CHANGED', 'MOD
     "username": "XanT",
     "date_online": 1509922961,
     "avatar": {
-      "filename": "modio-dark.png",
-      "original": "https://static.mod.io/v1/images/branding/modio-dark.png",
-      "thumb_50x50": "https://static.mod.io/v1/images/branding/modio-dark.png",
-      "thumb_100x100": "https://static.mod.io/v1/images/branding/modio-dark.png"
+      "filename": "modio-color-dark.png",
+      "original": "https://static.mod.io/v1/images/branding/modio-color-dark.png",
+      "thumb_50x50": "https://static.mod.io/v1/images/branding/modio-color-dark.png",
+      "thumb_100x100": "https://static.mod.io/v1/images/branding/modio-color-dark.png"
     },
     "timezone": "America/Los_Angeles",
     "language": "en",
@@ -8412,10 +8432,10 @@ date_expires|integer|Unix timestamp of when the `binary_url` will expire.
     "username": "XanT",
     "date_online": 1509922961,
     "avatar": {
-      "filename": "modio-dark.png",
-      "original": "https://static.mod.io/v1/images/branding/modio-dark.png",
-      "thumb_50x50": "https://static.mod.io/v1/images/branding/modio-dark.png",
-      "thumb_100x100": "https://static.mod.io/v1/images/branding/modio-dark.png"
+      "filename": "modio-color-dark.png",
+      "original": "https://static.mod.io/v1/images/branding/modio-color-dark.png",
+      "thumb_50x50": "https://static.mod.io/v1/images/branding/modio-color-dark.png",
+      "thumb_100x100": "https://static.mod.io/v1/images/branding/modio-color-dark.png"
     },
     "timezone": "America/Los_Angeles",
     "language": "en",
@@ -8424,12 +8444,13 @@ date_expires|integer|Unix timestamp of when the `binary_url` will expire.
   "date_added": 1492564103,
   "date_updated": 1499841487,
   "date_live": 1499841403,
+  "maturity_option": 0,
   "logo": {
-    "filename": "modio-dark.png",
-    "original": "https://static.mod.io/v1/images/branding/modio-dark.png",
-    "thumb_320x180": "https://static.mod.io/v1/images/branding/modio-dark.png",
-    "thumb_640x360": "https://static.mod.io/v1/images/branding/modio-dark.png",
-    "thumb_1280x720": "https://static.mod.io/v1/images/branding/modio-dark.png"
+    "filename": "modio-color-dark.png",
+    "original": "https://static.mod.io/v1/images/branding/modio-color-dark.png",
+    "thumb_320x180": "https://static.mod.io/v1/images/branding/modio-color-dark.png",
+    "thumb_640x360": "https://static.mod.io/v1/images/branding/modio-color-dark.png",
+    "thumb_1280x720": "https://static.mod.io/v1/images/branding/modio-color-dark.png"
   },
   "homepage_url": "https://www.rogue-hdpack.com/",
   "name": "Rogue Knight HD Pack",
@@ -8474,9 +8495,9 @@ date_expires|integer|Unix timestamp of when the `binary_url` will expire.
     ],
     "images": [
       {
-        "filename": "modio-dark.png",
-        "original": "https://static.mod.io/v1/images/branding/modio-dark.png",
-        "thumb_320x180": "https://static.mod.io/v1/images/branding/modio-dark.png"
+        "filename": "modio-color-dark.png",
+        "original": "https://static.mod.io/v1/images/branding/modio-color-dark.png",
+        "thumb_320x180": "https://static.mod.io/v1/images/branding/modio-color-dark.png"
       }
     ]
   },
@@ -8522,6 +8543,7 @@ submitted_by|[User Object   ](#schemauser_object)|Contains user data.
 date_added|integer|Unix timestamp of date mod was registered.
 date_updated|integer|Unix timestamp of date mod was updated.
 date_live|integer|Unix timestamp of date mod was set live.
+maturity_option|integer|Maturity options flagged by the mod developer, this is only relevant if the parent game allows mods to be labelled as mature.<br><br>__0__ = None set _(default)_<br>__1__ = Alcohol<br>__2__ = Drugs<br>__4__ = Violence<br>__8__ = Explicit<br>__?__ = Add the options you want together, to enable multiple filters (see [BITWISE fields](#bitwise-and-bitwise-and))
 logo|[Logo Object   ](#schemalogo_object)|Contains logo data.
 » filename|string|Logo filename including extension.
 » original|string|URL to the full-sized logo.
@@ -8565,7 +8587,7 @@ rating_summary|[Rating Summary Object  ](#schemarating_summary_object)|Contains 
 » positive_ratings|integer|Number of positive ratings.
 » negative_ratings|integer|Number of negative ratings.
 » percentage_positive|integer|Number of positive ratings, divided by the total ratings to determine it’s percentage score.
-» weighted_aggregate|float|Overall rating of this item calculated using the [Wilson score confidence interval](http://www.evanmiller.org/how-not-to-sort-by-average-rating.html). This column is good to sort on, as it will order items based on number of ratings and will place items with many positive ratings above those with a higher score but fewer ratings.
+» weighted_aggregate|float|Overall rating of this item calculated using the [Wilson score confidence interval](https://www.evanmiller.org/how-not-to-sort-by-average-rating.html). This column is good to sort on, as it will order items based on number of ratings and will place items with many positive ratings above those with a higher score but fewer ratings.
 » display_text|string|Textual representation of the rating in format:<br><br>- Overwhelmingly Positive<br>- Very Positive<br>- Positive<br>- Mostly Positive<br>- Mixed<br>- Negative<br>- Mostly Negative<br>- Very Negative<br>- Overwhelmingly Negative
 metadata_kvp|[Metadata KVP Object  ](#schemametadata_kvp_object)[]|Contains key-value metadata.
 » metakey|string|The key of the key-value pair.
@@ -8591,9 +8613,9 @@ tags|[Mod Tag Object  ](#schemamod_tag_object)[]|Contains mod tag data.
   ],
   "images": [
     {
-      "filename": "modio-dark.png",
-      "original": "https://static.mod.io/v1/images/branding/modio-dark.png",
-      "thumb_320x180": "https://static.mod.io/v1/images/branding/modio-dark.png"
+      "filename": "modio-color-dark.png",
+      "original": "https://static.mod.io/v1/images/branding/modio-color-dark.png",
+      "thumb_320x180": "https://static.mod.io/v1/images/branding/modio-color-dark.png"
     }
   ]
 } 
@@ -8650,10 +8672,10 @@ date_added|integer|Unix timestamp of date tag was applied.
     "username": "XanT",
     "date_online": 1509922961,
     "avatar": {
-      "filename": "modio-dark.png",
-      "original": "https://static.mod.io/v1/images/branding/modio-dark.png",
-      "thumb_50x50": "https://static.mod.io/v1/images/branding/modio-dark.png",
-      "thumb_100x100": "https://static.mod.io/v1/images/branding/modio-dark.png"
+      "filename": "modio-color-dark.png",
+      "original": "https://static.mod.io/v1/images/branding/modio-color-dark.png",
+      "thumb_50x50": "https://static.mod.io/v1/images/branding/modio-color-dark.png",
+      "thumb_100x100": "https://static.mod.io/v1/images/branding/modio-color-dark.png"
     },
     "timezone": "America/Los_Angeles",
     "language": "en",
@@ -8668,24 +8690,25 @@ date_added|integer|Unix timestamp of date tag was applied.
   "community_options": 3,
   "revenue_options": 1500,
   "api_access_options": 3,
+  "maturity_options": 0,
   "ugc_name": "map",
   "icon": {
-    "filename": "modio-dark.png",
-    "original": "https://static.mod.io/v1/images/branding/modio-dark.png",
-    "thumb_64x64": "https://static.mod.io/v1/images/branding/modio-dark.png",
-    "thumb_128x128": "https://static.mod.io/v1/images/branding/modio-dark.png",
-    "thumb_256x256": "https://static.mod.io/v1/images/branding/modio-dark.png"
+    "filename": "modio-color-dark.png",
+    "original": "https://static.mod.io/v1/images/branding/modio-color-dark.png",
+    "thumb_64x64": "https://static.mod.io/v1/images/branding/modio-color-dark.png",
+    "thumb_128x128": "https://static.mod.io/v1/images/branding/modio-color-dark.png",
+    "thumb_256x256": "https://static.mod.io/v1/images/branding/modio-color-dark.png"
   },
   "logo": {
-    "filename": "modio-dark.png",
-    "original": "https://static.mod.io/v1/images/branding/modio-dark.png",
-    "thumb_320x180": "https://static.mod.io/v1/images/branding/modio-dark.png",
-    "thumb_640x360": "https://static.mod.io/v1/images/branding/modio-dark.png",
-    "thumb_1280x720": "https://static.mod.io/v1/images/branding/modio-dark.png"
+    "filename": "modio-color-dark.png",
+    "original": "https://static.mod.io/v1/images/branding/modio-color-dark.png",
+    "thumb_320x180": "https://static.mod.io/v1/images/branding/modio-color-dark.png",
+    "thumb_640x360": "https://static.mod.io/v1/images/branding/modio-color-dark.png",
+    "thumb_1280x720": "https://static.mod.io/v1/images/branding/modio-color-dark.png"
   },
   "header": {
     "filename": "demo.png",
-    "original": "https://static.mod.io/v1/images/branding/modio-dark.png"
+    "original": "https://static.mod.io/v1/images/branding/modio-color-dark.png"
   },
   "name": "Rogue Knight",
   "name_id": "rogue-knight",
@@ -8735,6 +8758,7 @@ curation_option|integer|Curation process used to approve mods:<br><br>__0__ = No
 community_options|integer|Community features enabled on the mod.io website:<br><br>__0__ = All of the options below are disabled<br>__1__ = Discussion board enabled<br>__2__ = Guides and news enabled<br>__?__ = Add the options you want together, to enable multiple features (see [BITWISE fields](#bitwise-and-bitwise-and))
 revenue_options|integer|Revenue capabilities mods can enable:<br><br>__0__ = All of the options below are disabled<br>__1__ = Allow mods to be sold<br>__2__ = Allow mods to receive donations<br>__4__ = Allow mods to be traded<br>__8__ = Allow mods to control supply and scarcity<br>__?__ = Add the options you want together, to enable multiple features (see [BITWISE fields](#bitwise-and-bitwise-and))
 api_access_options|integer|Level of API access allowed by this game:<br><br>__0__ = All of the options below are disabled<br>__1__ = Allow 3rd parties to access this games API endpoints<br>__2__ = Allow mods to be downloaded directly (if disabled all download URLs will contain a frequently changing verification hash to stop unauthorized use)<br>__?__ = Add the options you want together, to enable multiple features (see [BITWISE fields](#bitwise-and-bitwise-and))
+maturity_options|integer|Switch to allow developers to select if they flag their mods as containing mature content:<br><br>__0__ = Don't allow _(default)_<br>__1__ = Allow
 ugc_name|string|Word used to describe user-generated content (mods, items, addons etc).
 icon|[Icon Object   ](#schemaicon_object)|Contains icon data.
 » filename|string|Icon filename including extension.
@@ -8812,7 +8836,7 @@ total_ratings|integer|Number of times this item has been rated.
 positive_ratings|integer|Number of positive ratings.
 negative_ratings|integer|Number of negative ratings.
 percentage_positive|integer|Number of positive ratings, divided by the total ratings to determine it’s percentage score.
-weighted_aggregate|float|Overall rating of this item calculated using the [Wilson score confidence interval](http://www.evanmiller.org/how-not-to-sort-by-average-rating.html). This column is good to sort on, as it will order items based on number of ratings and will place items with many positive ratings above those with a higher score but fewer ratings.
+weighted_aggregate|float|Overall rating of this item calculated using the [Wilson score confidence interval](https://www.evanmiller.org/how-not-to-sort-by-average-rating.html). This column is good to sort on, as it will order items based on number of ratings and will place items with many positive ratings above those with a higher score but fewer ratings.
 display_text|string|Textual representation of the rating in format:<br><br>- Overwhelmingly Positive<br>- Very Positive<br>- Positive<br>- Mostly Positive<br>- Mixed<br>- Negative<br>- Mostly Negative<br>- Very Negative<br>- Overwhelmingly Negative
 
 
@@ -8831,10 +8855,10 @@ display_text|string|Textual representation of the rating in format:<br><br>- Ove
     "username": "XanT",
     "date_online": 1509922961,
     "avatar": {
-      "filename": "modio-dark.png",
-      "original": "https://static.mod.io/v1/images/branding/modio-dark.png",
-      "thumb_50x50": "https://static.mod.io/v1/images/branding/modio-dark.png",
-      "thumb_100x100": "https://static.mod.io/v1/images/branding/modio-dark.png"
+      "filename": "modio-color-dark.png",
+      "original": "https://static.mod.io/v1/images/branding/modio-color-dark.png",
+      "thumb_50x50": "https://static.mod.io/v1/images/branding/modio-color-dark.png",
+      "thumb_100x100": "https://static.mod.io/v1/images/branding/modio-color-dark.png"
     },
     "timezone": "America/Los_Angeles",
     "language": "en",
@@ -8883,10 +8907,10 @@ position|string|Custom title given to the user in this team.
   "username": "XanT",
   "date_online": 1509922961,
   "avatar": {
-    "filename": "modio-dark.png",
-    "original": "https://static.mod.io/v1/images/branding/modio-dark.png",
-    "thumb_50x50": "https://static.mod.io/v1/images/branding/modio-dark.png",
-    "thumb_100x100": "https://static.mod.io/v1/images/branding/modio-dark.png"
+    "filename": "modio-color-dark.png",
+    "original": "https://static.mod.io/v1/images/branding/modio-color-dark.png",
+    "thumb_50x50": "https://static.mod.io/v1/images/branding/modio-color-dark.png",
+    "thumb_100x100": "https://static.mod.io/v1/images/branding/modio-color-dark.png"
   },
   "timezone": "America/Los_Angeles",
   "language": "en",
@@ -8934,10 +8958,10 @@ profile_url|string|URL to the user's mod.io profile.
         "username": "XanT",
         "date_online": 1509922961,
         "avatar": {
-          "filename": "modio-dark.png",
-          "original": "https://static.mod.io/v1/images/branding/modio-dark.png",
-          "thumb_50x50": "https://static.mod.io/v1/images/branding/modio-dark.png",
-          "thumb_100x100": "https://static.mod.io/v1/images/branding/modio-dark.png"
+          "filename": "modio-color-dark.png",
+          "original": "https://static.mod.io/v1/images/branding/modio-color-dark.png",
+          "thumb_50x50": "https://static.mod.io/v1/images/branding/modio-color-dark.png",
+          "thumb_100x100": "https://static.mod.io/v1/images/branding/modio-color-dark.png"
         },
         "timezone": "America/Los_Angeles",
         "language": "en",
@@ -9114,10 +9138,10 @@ result_offset|integer|Number of results skipped over.
         "username": "XanT",
         "date_online": 1509922961,
         "avatar": {
-          "filename": "modio-dark.png",
-          "original": "https://static.mod.io/v1/images/branding/modio-dark.png",
-          "thumb_50x50": "https://static.mod.io/v1/images/branding/modio-dark.png",
-          "thumb_100x100": "https://static.mod.io/v1/images/branding/modio-dark.png"
+          "filename": "modio-color-dark.png",
+          "original": "https://static.mod.io/v1/images/branding/modio-color-dark.png",
+          "thumb_50x50": "https://static.mod.io/v1/images/branding/modio-color-dark.png",
+          "thumb_100x100": "https://static.mod.io/v1/images/branding/modio-color-dark.png"
         },
         "timezone": "America/Los_Angeles",
         "language": "en",
@@ -9132,24 +9156,25 @@ result_offset|integer|Number of results skipped over.
       "community_options": 3,
       "revenue_options": 1500,
       "api_access_options": 3,
+      "maturity_options": 0,
       "ugc_name": "map",
       "icon": {
-        "filename": "modio-dark.png",
-        "original": "https://static.mod.io/v1/images/branding/modio-dark.png",
-        "thumb_64x64": "https://static.mod.io/v1/images/branding/modio-dark.png",
-        "thumb_128x128": "https://static.mod.io/v1/images/branding/modio-dark.png",
-        "thumb_256x256": "https://static.mod.io/v1/images/branding/modio-dark.png"
+        "filename": "modio-color-dark.png",
+        "original": "https://static.mod.io/v1/images/branding/modio-color-dark.png",
+        "thumb_64x64": "https://static.mod.io/v1/images/branding/modio-color-dark.png",
+        "thumb_128x128": "https://static.mod.io/v1/images/branding/modio-color-dark.png",
+        "thumb_256x256": "https://static.mod.io/v1/images/branding/modio-color-dark.png"
       },
       "logo": {
-        "filename": "modio-dark.png",
-        "original": "https://static.mod.io/v1/images/branding/modio-dark.png",
-        "thumb_320x180": "https://static.mod.io/v1/images/branding/modio-dark.png",
-        "thumb_640x360": "https://static.mod.io/v1/images/branding/modio-dark.png",
-        "thumb_1280x720": "https://static.mod.io/v1/images/branding/modio-dark.png"
+        "filename": "modio-color-dark.png",
+        "original": "https://static.mod.io/v1/images/branding/modio-color-dark.png",
+        "thumb_320x180": "https://static.mod.io/v1/images/branding/modio-color-dark.png",
+        "thumb_640x360": "https://static.mod.io/v1/images/branding/modio-color-dark.png",
+        "thumb_1280x720": "https://static.mod.io/v1/images/branding/modio-color-dark.png"
       },
       "header": {
         "filename": "demo.png",
-        "original": "https://static.mod.io/v1/images/branding/modio-dark.png"
+        "original": "https://static.mod.io/v1/images/branding/modio-color-dark.png"
       },
       "name": "Rogue Knight",
       "name_id": "rogue-knight",
@@ -9208,6 +9233,7 @@ data|[Game Object   ](#schemagame_object)[]|Array containing game objects.
 » community_options|integer|Community features enabled on the mod.io website:<br><br>__0__ = All of the options below are disabled<br>__1__ = Discussion board enabled<br>__2__ = Guides and news enabled<br>__?__ = Add the options you want together, to enable multiple features (see [BITWISE fields](#bitwise-and-bitwise-and))
 » revenue_options|integer|Revenue capabilities mods can enable:<br><br>__0__ = All of the options below are disabled<br>__1__ = Allow mods to be sold<br>__2__ = Allow mods to receive donations<br>__4__ = Allow mods to be traded<br>__8__ = Allow mods to control supply and scarcity<br>__?__ = Add the options you want together, to enable multiple features (see [BITWISE fields](#bitwise-and-bitwise-and))
 » api_access_options|integer|Level of API access allowed by this game:<br><br>__0__ = All of the options below are disabled<br>__1__ = Allow 3rd parties to access this games API endpoints<br>__2__ = Allow mods to be downloaded directly (if disabled all download URLs will contain a frequently changing verification hash to stop unauthorized use)<br>__?__ = Add the options you want together, to enable multiple features (see [BITWISE fields](#bitwise-and-bitwise-and))
+» maturity_options|integer|Switch to allow developers to select if they flag their mods as containing mature content:<br><br>__0__ = Don't allow _(default)_<br>__1__ = Allow
 » ugc_name|string|Word used to describe user-generated content (mods, items, addons etc).
 » icon|[Icon Object   ](#schemaicon_object)|Contains icon data.
 »» filename|string|Icon filename including extension.
@@ -9296,10 +9322,10 @@ result_offset|integer|Number of results skipped over.
         "username": "XanT",
         "date_online": 1509922961,
         "avatar": {
-          "filename": "modio-dark.png",
-          "original": "https://static.mod.io/v1/images/branding/modio-dark.png",
-          "thumb_50x50": "https://static.mod.io/v1/images/branding/modio-dark.png",
-          "thumb_100x100": "https://static.mod.io/v1/images/branding/modio-dark.png"
+          "filename": "modio-color-dark.png",
+          "original": "https://static.mod.io/v1/images/branding/modio-color-dark.png",
+          "thumb_50x50": "https://static.mod.io/v1/images/branding/modio-color-dark.png",
+          "thumb_100x100": "https://static.mod.io/v1/images/branding/modio-color-dark.png"
         },
         "timezone": "America/Los_Angeles",
         "language": "en",
@@ -9308,12 +9334,13 @@ result_offset|integer|Number of results skipped over.
       "date_added": 1492564103,
       "date_updated": 1499841487,
       "date_live": 1499841403,
+      "maturity_option": 0,
       "logo": {
-        "filename": "modio-dark.png",
-        "original": "https://static.mod.io/v1/images/branding/modio-dark.png",
-        "thumb_320x180": "https://static.mod.io/v1/images/branding/modio-dark.png",
-        "thumb_640x360": "https://static.mod.io/v1/images/branding/modio-dark.png",
-        "thumb_1280x720": "https://static.mod.io/v1/images/branding/modio-dark.png"
+        "filename": "modio-color-dark.png",
+        "original": "https://static.mod.io/v1/images/branding/modio-color-dark.png",
+        "thumb_320x180": "https://static.mod.io/v1/images/branding/modio-color-dark.png",
+        "thumb_640x360": "https://static.mod.io/v1/images/branding/modio-color-dark.png",
+        "thumb_1280x720": "https://static.mod.io/v1/images/branding/modio-color-dark.png"
       },
       "homepage_url": "https://www.rogue-hdpack.com/",
       "name": "Rogue Knight HD Pack",
@@ -9358,9 +9385,9 @@ result_offset|integer|Number of results skipped over.
         ],
         "images": [
           {
-            "filename": "modio-dark.png",
-            "original": "https://static.mod.io/v1/images/branding/modio-dark.png",
-            "thumb_320x180": "https://static.mod.io/v1/images/branding/modio-dark.png"
+            "filename": "modio-color-dark.png",
+            "original": "https://static.mod.io/v1/images/branding/modio-color-dark.png",
+            "thumb_320x180": "https://static.mod.io/v1/images/branding/modio-color-dark.png"
           }
         ]
       },
@@ -9415,6 +9442,7 @@ data|[Mod Object   ](#schemamod_object)[]|Array containing mod objects.
 » date_added|integer|Unix timestamp of date mod was registered.
 » date_updated|integer|Unix timestamp of date mod was updated.
 » date_live|integer|Unix timestamp of date mod was set live.
+» maturity_option|integer|Maturity options flagged by the mod developer, this is only relevant if the parent game allows mods to be labelled as mature.<br><br>__0__ = None set _(default)_<br>__1__ = Alcohol<br>__2__ = Drugs<br>__4__ = Violence<br>__8__ = Explicit<br>__?__ = Add the options you want together, to enable multiple filters (see [BITWISE fields](#bitwise-and-bitwise-and))
 » logo|[Logo Object   ](#schemalogo_object)|Contains logo data.
 »» filename|string|Logo filename including extension.
 »» original|string|URL to the full-sized logo.
@@ -9458,7 +9486,7 @@ data|[Mod Object   ](#schemamod_object)[]|Array containing mod objects.
 »» positive_ratings|integer|Number of positive ratings.
 »» negative_ratings|integer|Number of negative ratings.
 »» percentage_positive|integer|Number of positive ratings, divided by the total ratings to determine it’s percentage score.
-»» weighted_aggregate|float|Overall rating of this item calculated using the [Wilson score confidence interval](http://www.evanmiller.org/how-not-to-sort-by-average-rating.html). This column is good to sort on, as it will order items based on number of ratings and will place items with many positive ratings above those with a higher score but fewer ratings.
+»» weighted_aggregate|float|Overall rating of this item calculated using the [Wilson score confidence interval](https://www.evanmiller.org/how-not-to-sort-by-average-rating.html). This column is good to sort on, as it will order items based on number of ratings and will place items with many positive ratings above those with a higher score but fewer ratings.
 »» display_text|string|Textual representation of the rating in format:<br><br>- Overwhelmingly Positive<br>- Very Positive<br>- Positive<br>- Mostly Positive<br>- Mixed<br>- Negative<br>- Mostly Negative<br>- Very Negative<br>- Overwhelmingly Negative
 » metadata_kvp|[Metadata KVP Object  ](#schemametadata_kvp_object)[]|Contains key-value metadata.
 »» metakey|string|The key of the key-value pair.
@@ -9608,10 +9636,10 @@ result_offset|integer|Number of results skipped over.
         "username": "XanT",
         "date_online": 1509922961,
         "avatar": {
-          "filename": "modio-dark.png",
-          "original": "https://static.mod.io/v1/images/branding/modio-dark.png",
-          "thumb_50x50": "https://static.mod.io/v1/images/branding/modio-dark.png",
-          "thumb_100x100": "https://static.mod.io/v1/images/branding/modio-dark.png"
+          "filename": "modio-color-dark.png",
+          "original": "https://static.mod.io/v1/images/branding/modio-color-dark.png",
+          "thumb_50x50": "https://static.mod.io/v1/images/branding/modio-color-dark.png",
+          "thumb_100x100": "https://static.mod.io/v1/images/branding/modio-color-dark.png"
         },
         "timezone": "America/Los_Angeles",
         "language": "en",
@@ -9674,10 +9702,10 @@ result_offset|integer|Number of results skipped over.
       "username": "XanT",
       "date_online": 1509922961,
       "avatar": {
-        "filename": "modio-dark.png",
-        "original": "https://static.mod.io/v1/images/branding/modio-dark.png",
-        "thumb_50x50": "https://static.mod.io/v1/images/branding/modio-dark.png",
-        "thumb_100x100": "https://static.mod.io/v1/images/branding/modio-dark.png"
+        "filename": "modio-color-dark.png",
+        "original": "https://static.mod.io/v1/images/branding/modio-color-dark.png",
+        "thumb_50x50": "https://static.mod.io/v1/images/branding/modio-color-dark.png",
+        "thumb_100x100": "https://static.mod.io/v1/images/branding/modio-color-dark.png"
       },
       "timezone": "America/Los_Angeles",
       "language": "en",

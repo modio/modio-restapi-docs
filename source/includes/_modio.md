@@ -568,7 +568,7 @@ Where the preceding column value is greater than the value specified.
 ### -bitwise-and (Bitwise AND)
 
 ```
---parse_version/games?api-bitwise-and=5
+--parse_version/games?maturity_option-bitwise-and=5
 ```
 
 Some columns are stored as bits within an integer. Their value depends on the bits selected. For example, suppose a column has 4 options:
@@ -580,9 +580,9 @@ Some columns are stored as bits within an integer. Their value depends on the bi
 
 You can combine any of these options by adding them together which means there are (2 ^ 4 = 16 possible combinations). For example Option A (1) and Option C (4) would be (1 + 4 = 5), Option A (1), Option C (4) and Option D (8) would be (1 + 4 + 8 = 13), all Options together would be (1 + 2 + 4 + 8 = 15).
 
-The number of combinations makes using _equals_, _in_ and other filters a little complex. To solve this we support Bitwise AND (&) which makes it easy to match a column which contains any of the Options you want.
+The number of combinations makes using _equals_, _in_ and other filters a little complex. To solve this we support Bitwise AND (&) which makes it easy to match a column which contains any of the options you want.
 
-- `?api-bitwise-and=5` - Will match the `api` column values 1, 3, 4, 5, 6, 7, 9, 11, 12, 13, 14, 15 (since these values contain the bits 1, 4 or both).
+- `?maturity_option-bitwise-and=5` - Will match the `maturity_option` column values 1, 3, 4, 5, 6, 7, 9, 11, 12, 13, 14, 15 (since these values contain the bits 1, 4 or both).
 
 ## Localization
 
