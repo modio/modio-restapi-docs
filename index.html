@@ -1587,7 +1587,7 @@ Accept: application/json
 <tr>
 <td>status</td>
 <td>integer</td>
-<td>Status of the game (only admins can filter by this field, see <a href="#status-amp-visibility">status and visibility</a> for details):<br><br><strong>0</strong> = Not accepted<br><strong>1</strong> = Accepted <em>(default with archived)</em><br><strong>2</strong> = Archived<br><strong>3</strong> = Deleted</td>
+<td>Status of the game (only admins can filter by this field, see <a href="#status-amp-visibility">status and visibility</a> for details):<br><br><strong>0</strong> = Not accepted<br><strong>1</strong> = Accepted <em>(default)</em><br><strong>2</strong> = Archived <em>(default)</em><br><strong>3</strong> = Deleted</td>
 </tr>
 <tr>
 <td>submitted_by</td>
@@ -2312,7 +2312,7 @@ Accept: application/json
 <tr>
 <td>status</td>
 <td>integer</td>
-<td>Status of the mod (only game admins can filter by this field, see <a href="#status-amp-visibility">status and visibility</a> for details):<br><br><strong>0</strong> = Not accepted<br><strong>1</strong> = Accepted <em>(default with archived)</em><br><strong>2</strong> = Archived<br><strong>3</strong> = Deleted</td>
+<td>Status of the mod (only game admins can filter by this field, see <a href="#status-amp-visibility">status and visibility</a> for details):<br><br><strong>0</strong> = Not accepted<br><strong>1</strong> = Accepted <em>(default)</em><br><strong>2</strong> = Archived <em>(default)</em><br><strong>3</strong> = Deleted</td>
 </tr>
 <tr>
 <td>visible</td>
@@ -4105,8 +4105,7 @@ Content-Type: application/x-www-form-urlencoded
 <td>active</td>
 <td>boolean</td>
 <td></td>
-<td>
-<em>Default value is true.</em> Label this upload as the current release, this will change the <code>modfile</code> field on the parent mod to the <code>id</code> of this file after upload.<br><br><strong>NOTE:</strong> If the <em>active</em> parameter causes the parent mods <code>modfile</code> parameter to change, a <a href="#get-all-mod-events"><strong>MODFILE_CHANGED</strong> event</a> will be fired, so game clients know there is an update available for this mod.</td>
+<td>Label this upload as the current release.<br><br><strong>NOTE:</strong> If the <em>active</em> parameter causes the parent mods <code>modfile</code> parameter to change, a <a href="#get-all-mod-events"><strong>MODFILE_CHANGED</strong> event</a> will be fired, so game clients know there is an update available for this mod.</td>
 </tr>
 <tr>
 <td>metadata_blob</td>
@@ -9273,7 +9272,7 @@ Authorization: Bearer {access-token}
 <tr>
 <td>status</td>
 <td>integer</td>
-<td>Status of the game (only admins can filter by this field, see <a href="#status-amp-visibility">status and visibility</a> for details):<br><br><strong>0</strong> = Not accepted<br><strong>1</strong> = Accepted <em>(default with archived)</em><br><strong>2</strong> = Archived<br><strong>3</strong> = Deleted</td>
+<td>Status of the game (only admins can filter by this field, see <a href="#status-amp-visibility">status and visibility</a> for details):<br><br><strong>0</strong> = Not accepted<br><strong>1</strong> = Accepted <em>(default)</em><br><strong>2</strong> = Archived <em>(default)</em><br><strong>3</strong> = Deleted</td>
 </tr>
 <tr>
 <td>submitted_by</td>
@@ -9557,7 +9556,7 @@ Authorization: Bearer {access-token}
 <tr>
 <td>status</td>
 <td>integer</td>
-<td>Status of the mod (only game admins can filter by this field, see <a href="#status-amp-visibility">status and visibility</a> for details):<br><br><strong>0</strong> = Not accepted<br><strong>1</strong> = Accepted <em>(default with archived)</em><br><strong>2</strong> = Archived<br><strong>3</strong> = Deleted</td>
+<td>Status of the mod (only game admins can filter by this field, see <a href="#status-amp-visibility">status and visibility</a> for details):<br><br><strong>0</strong> = Not accepted<br><strong>1</strong> = Accepted <em>(default)</em><br><strong>2</strong> = Archived <em>(default)</em><br><strong>3</strong> = Deleted</td>
 </tr>
 <tr>
 <td>visible</td>
