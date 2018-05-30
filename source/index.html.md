@@ -906,7 +906,7 @@ Status|Meaning|Description|Response Schema
 
 <aside class="auth-notice">
 To perform this request, you must be authenticated via one of the following methods:
-<a href="#authentication">api_key</a>, <a href="#authentication">OAuth 2</a> (Scopes: read)
+<a href="#authentication">api_key</a>, <a href="#authentication">OAuth 2</a> (Scope: read)
 </aside>
 ## Get Game
 
@@ -1074,7 +1074,7 @@ Status|Meaning|Description|Response Schema
 
 <aside class="auth-notice">
 To perform this request, you must be authenticated via one of the following methods:
-<a href="#authentication">api_key</a>, <a href="#authentication">OAuth 2</a> (Scopes: read)
+<a href="#authentication">api_key</a>, <a href="#authentication">OAuth 2</a> (Scope: read)
 </aside>
 ## Edit Game
 
@@ -1272,7 +1272,7 @@ Status|Meaning|Description|Response Schema
 
 <aside class="auth-notice">
 To perform this request, you must be authenticated via one of the following methods:
-<a href="#authentication">OAuth 2</a> (Scopes: write)
+<a href="#authentication">OAuth 2</a> (Scope: write)
 </aside>
 # Mods
 
@@ -1508,7 +1508,7 @@ Status|Meaning|Description|Response Schema
 
 <aside class="auth-notice">
 To perform this request, you must be authenticated via one of the following methods:
-<a href="#authentication">api_key</a>, <a href="#authentication">OAuth 2</a> (Scopes: read)
+<a href="#authentication">api_key</a>, <a href="#authentication">OAuth 2</a> (Scope: read)
 </aside>
 ## Get Mod
 
@@ -1707,7 +1707,7 @@ Status|Meaning|Description|Response Schema
 
 <aside class="auth-notice">
 To perform this request, you must be authenticated via one of the following methods:
-<a href="#authentication">api_key</a>, <a href="#authentication">OAuth 2</a> (Scopes: read)
+<a href="#authentication">api_key</a>, <a href="#authentication">OAuth 2</a> (Scope: read)
 </aside>
 ## Add Mod
 
@@ -1943,7 +1943,7 @@ Status|Header|Type|Format|Description
 
 <aside class="auth-notice">
 To perform this request, you must be authenticated via one of the following methods:
-<a href="#authentication">OAuth 2</a> (Scopes: write)
+<a href="#authentication">OAuth 2</a> (Scope: write)
 </aside>
 ## Edit Mod
 
@@ -2166,7 +2166,7 @@ Status|Meaning|Description|Response Schema
 
 <aside class="auth-notice">
 To perform this request, you must be authenticated via one of the following methods:
-<a href="#authentication">OAuth 2</a> (Scopes: write)
+<a href="#authentication">OAuth 2</a> (Scope: write)
 </aside>
 ## Delete Mod
 
@@ -2282,7 +2282,7 @@ Status|Meaning|Description|Response Schema
 
 <aside class="auth-notice">
 To perform this request, you must be authenticated via one of the following methods:
-<a href="#authentication">OAuth 2</a> (Scopes: write)
+<a href="#authentication">OAuth 2</a> (Scope: write)
 </aside>
 # Files
 
@@ -2434,7 +2434,7 @@ Status|Meaning|Description|Response Schema
 
 <aside class="auth-notice">
 To perform this request, you must be authenticated via one of the following methods:
-<a href="#authentication">api_key</a>, <a href="#authentication">OAuth 2</a> (Scopes: read)
+<a href="#authentication">api_key</a>, <a href="#authentication">OAuth 2</a> (Scope: read)
 </aside>
 ## Get Modfile
 
@@ -2559,7 +2559,7 @@ Status|Meaning|Description|Response Schema
 
 <aside class="auth-notice">
 To perform this request, you must be authenticated via one of the following methods:
-<a href="#authentication">api_key</a>, <a href="#authentication">OAuth 2</a> (Scopes: read)
+<a href="#authentication">api_key</a>, <a href="#authentication">OAuth 2</a> (Scope: read)
 </aside>
 ## Add Modfile
 
@@ -2718,7 +2718,7 @@ Status|Header|Type|Format|Description
 
 <aside class="auth-notice">
 To perform this request, you must be authenticated via one of the following methods:
-<a href="#authentication">OAuth 2</a> (Scopes: write)
+<a href="#authentication">OAuth 2</a> (Scope: write)
 </aside>
 ## Edit Modfile
 
@@ -2861,7 +2861,7 @@ Status|Meaning|Description|Response Schema
 
 <aside class="auth-notice">
 To perform this request, you must be authenticated via one of the following methods:
-<a href="#authentication">OAuth 2</a> (Scopes: write)
+<a href="#authentication">OAuth 2</a> (Scope: write)
 </aside>
 # Media
 
@@ -2996,7 +2996,7 @@ Status|Meaning|Description|Response Schema
 
 <aside class="auth-notice">
 To perform this request, you must be authenticated via one of the following methods:
-<a href="#authentication">OAuth 2</a> (Scopes: write)
+<a href="#authentication">OAuth 2</a> (Scope: write)
 </aside>
 ## Add Mod Media
 
@@ -3142,7 +3142,7 @@ Status|Header|Type|Format|Description
 
 <aside class="auth-notice">
 To perform this request, you must be authenticated via one of the following methods:
-<a href="#authentication">OAuth 2</a> (Scopes: write)
+<a href="#authentication">OAuth 2</a> (Scope: write)
 </aside>
 ## Delete Mod Media
 
@@ -3272,7 +3272,7 @@ Status|Meaning|Description|Response Schema
 
 <aside class="auth-notice">
 To perform this request, you must be authenticated via one of the following methods:
-<a href="#authentication">OAuth 2</a> (Scopes: write)
+<a href="#authentication">OAuth 2</a> (Scope: write)
 </aside>
 # Subscribe
 
@@ -3484,7 +3484,7 @@ Status|Meaning|Description|Response Schema
 
 <aside class="auth-notice">
 To perform this request, you must be authenticated via one of the following methods:
-<a href="#authentication">OAuth 2</a> (Scopes: write)
+<a href="#authentication">OAuth 2</a> (Scope: write)
 </aside>
 ## Unsubscribe To Mod
 
@@ -3600,7 +3600,7 @@ Status|Meaning|Description|Response Schema
 
 <aside class="auth-notice">
 To perform this request, you must be authenticated via one of the following methods:
-<a href="#authentication">OAuth 2</a> (Scopes: write)
+<a href="#authentication">OAuth 2</a> (Scope: write)
 </aside>
 # Events
 
@@ -3731,7 +3731,7 @@ Status|Meaning|Description|Response Schema
 
 <aside class="auth-notice">
 To perform this request, you must be authenticated via one of the following methods:
-<a href="#authentication">api_key</a>, <a href="#authentication">OAuth 2</a> (Scopes: read)
+<a href="#authentication">api_key</a>, <a href="#authentication">OAuth 2</a> (Scope: read)
 </aside>
 ## Get All Mod Events
 
@@ -3862,7 +3862,7 @@ Status|Meaning|Description|Response Schema
 
 <aside class="auth-notice">
 To perform this request, you must be authenticated via one of the following methods:
-<a href="#authentication">api_key</a>, <a href="#authentication">OAuth 2</a> (Scopes: read)
+<a href="#authentication">api_key</a>, <a href="#authentication">OAuth 2</a> (Scope: read)
 </aside>
 # Tags
 
@@ -3987,7 +3987,7 @@ Status|Meaning|Description|Response Schema
 
 <aside class="auth-notice">
 To perform this request, you must be authenticated via one of the following methods:
-<a href="#authentication">api_key</a>, <a href="#authentication">OAuth 2</a> (Scopes: read)
+<a href="#authentication">api_key</a>, <a href="#authentication">OAuth 2</a> (Scope: read)
 </aside>
 ## Add Mod Tag
 
@@ -4112,7 +4112,7 @@ Status|Meaning|Description|Response Schema
 
 <aside class="auth-notice">
 To perform this request, you must be authenticated via one of the following methods:
-<a href="#authentication">OAuth 2</a> (Scopes: write)
+<a href="#authentication">OAuth 2</a> (Scope: write)
 </aside>
 ## Delete Mod Tag
 
@@ -4234,7 +4234,7 @@ Status|Meaning|Description|Response Schema
 
 <aside class="auth-notice">
 To perform this request, you must be authenticated via one of the following methods:
-<a href="#authentication">OAuth 2</a> (Scopes: write)
+<a href="#authentication">OAuth 2</a> (Scope: write)
 </aside>
 ## Get Game Tag Options
 
@@ -4356,7 +4356,7 @@ Status|Meaning|Description|Response Schema
 
 <aside class="auth-notice">
 To perform this request, you must be authenticated via one of the following methods:
-<a href="#authentication">api_key</a>, <a href="#authentication">OAuth 2</a> (Scopes: read)
+<a href="#authentication">api_key</a>, <a href="#authentication">OAuth 2</a> (Scope: read)
 </aside>
 ## Add Game Tag Option
 
@@ -4494,7 +4494,7 @@ Status|Meaning|Description|Response Schema
 
 <aside class="auth-notice">
 To perform this request, you must be authenticated via one of the following methods:
-<a href="#authentication">OAuth 2</a> (Scopes: write)
+<a href="#authentication">OAuth 2</a> (Scope: write)
 </aside>
 ## Delete Game Tag Option
 
@@ -4621,7 +4621,7 @@ Status|Meaning|Description|Response Schema
 
 <aside class="auth-notice">
 To perform this request, you must be authenticated via one of the following methods:
-<a href="#authentication">OAuth 2</a> (Scopes: write)
+<a href="#authentication">OAuth 2</a> (Scope: write)
 </aside>
 # Ratings
 
@@ -4750,7 +4750,7 @@ Status|Meaning|Description|Response Schema
 
 <aside class="auth-notice">
 To perform this request, you must be authenticated via one of the following methods:
-<a href="#authentication">OAuth 2</a> (Scopes: write)
+<a href="#authentication">OAuth 2</a> (Scope: write)
 </aside>
 # Metadata
 
@@ -4870,7 +4870,7 @@ Status|Meaning|Description|Response Schema
 
 <aside class="auth-notice">
 To perform this request, you must be authenticated via one of the following methods:
-<a href="#authentication">api_key</a>, <a href="#authentication">OAuth 2</a> (Scopes: read)
+<a href="#authentication">api_key</a>, <a href="#authentication">OAuth 2</a> (Scope: read)
 </aside>
 ## Add Mod KVP Metadata
 
@@ -4995,7 +4995,7 @@ Status|Meaning|Description|Response Schema
 
 <aside class="auth-notice">
 To perform this request, you must be authenticated via one of the following methods:
-<a href="#authentication">OAuth 2</a> (Scopes: write)
+<a href="#authentication">OAuth 2</a> (Scope: write)
 </aside>
 ## Delete Mod KVP Metadata
 
@@ -5117,7 +5117,7 @@ Status|Meaning|Description|Response Schema
 
 <aside class="auth-notice">
 To perform this request, you must be authenticated via one of the following methods:
-<a href="#authentication">OAuth 2</a> (Scopes: write)
+<a href="#authentication">OAuth 2</a> (Scope: write)
 </aside>
 # Dependencies
 
@@ -5208,7 +5208,9 @@ System.out.println(response.toString());
 ```
 `GET /games/{game-id}/mods/{mod-id}/dependencies`
 
-Get all dependencies the chosen mod has selected. __IMPORTANT:__ Because of the complexity of supporting nested dependencies, we recommend you treat dependencies as a recommendation for your players, and do not process dependencies automatically when installing a mod unless absolutely required. Successful request will return an array of [Mod Dependencies Objects](#mod-dependencies-object).
+Get all dependencies the chosen mod has selected.
+
+     __IMPORTANT:__ Because of the complexity of supporting nested dependencies, we recommend you treat dependencies as a recommendation for your players, and do not process dependencies automatically when installing a mod unless absolutely required. Successful request will return an array of [Mod Dependencies Objects](#mod-dependencies-object).
 
      __NOTE:__ Some modders might select _soft_ dependencies to promote or credit other mods. We advise against this but it is possible to do, and is one of the reasons why we recommend against processing nested dependencies automatically.
 
@@ -5239,7 +5241,7 @@ Status|Meaning|Description|Response Schema
 
 <aside class="auth-notice">
 To perform this request, you must be authenticated via one of the following methods:
-<a href="#authentication">api_key</a>, <a href="#authentication">OAuth 2</a> (Scopes: read)
+<a href="#authentication">api_key</a>, <a href="#authentication">OAuth 2</a> (Scope: read)
 </aside>
 ## Add Mod Dependencies
 
@@ -5366,7 +5368,7 @@ Status|Meaning|Description|Response Schema
 
 <aside class="auth-notice">
 To perform this request, you must be authenticated via one of the following methods:
-<a href="#authentication">OAuth 2</a> (Scopes: write)
+<a href="#authentication">OAuth 2</a> (Scope: write)
 </aside>
 ## Delete Mod Dependencies
 
@@ -5488,7 +5490,7 @@ Status|Meaning|Description|Response Schema
 
 <aside class="auth-notice">
 To perform this request, you must be authenticated via one of the following methods:
-<a href="#authentication">OAuth 2</a> (Scopes: write)
+<a href="#authentication">OAuth 2</a> (Scope: write)
 </aside>
 # Teams
 
@@ -5634,7 +5636,7 @@ Status|Meaning|Description|Response Schema
 
 <aside class="auth-notice">
 To perform this request, you must be authenticated via one of the following methods:
-<a href="#authentication">api_key</a>, <a href="#authentication">OAuth 2</a> (Scopes: read)
+<a href="#authentication">api_key</a>, <a href="#authentication">OAuth 2</a> (Scope: read)
 </aside>
 ## Add Mod Team Member
 
@@ -5767,7 +5769,7 @@ Status|Meaning|Description|Response Schema
 
 <aside class="auth-notice">
 To perform this request, you must be authenticated via one of the following methods:
-<a href="#authentication">OAuth 2</a> (Scopes: write)
+<a href="#authentication">OAuth 2</a> (Scope: write)
 </aside>
 ## Update Mod Team Member
 
@@ -5893,7 +5895,7 @@ Status|Meaning|Description|Response Schema
 
 <aside class="auth-notice">
 To perform this request, you must be authenticated via one of the following methods:
-<a href="#authentication">OAuth 2</a> (Scopes: write)
+<a href="#authentication">OAuth 2</a> (Scope: write)
 </aside>
 ## Delete Mod Team Member
 
@@ -6009,7 +6011,7 @@ Status|Meaning|Description|Response Schema
 
 <aside class="auth-notice">
 To perform this request, you must be authenticated via one of the following methods:
-<a href="#authentication">OAuth 2</a> (Scopes: write)
+<a href="#authentication">OAuth 2</a> (Scope: write)
 </aside>
 # Comments
 
@@ -6161,7 +6163,7 @@ Status|Meaning|Description|Response Schema
 
 <aside class="auth-notice">
 To perform this request, you must be authenticated via one of the following methods:
-<a href="#authentication">api_key</a>, <a href="#authentication">OAuth 2</a> (Scopes: read)
+<a href="#authentication">api_key</a>, <a href="#authentication">OAuth 2</a> (Scope: read)
 </aside>
 ## Delete Mod Comment
 
@@ -6277,7 +6279,7 @@ Status|Meaning|Description|Response Schema
 
 <aside class="auth-notice">
 To perform this request, you must be authenticated via one of the following methods:
-<a href="#authentication">OAuth 2</a> (Scopes: write)
+<a href="#authentication">OAuth 2</a> (Scope: write)
 </aside>
 # Users
 
@@ -6416,7 +6418,7 @@ Status|Meaning|Description|Response Schema
 
 <aside class="auth-notice">
 To perform this request, you must be authenticated via one of the following methods:
-<a href="#authentication">api_key</a>, <a href="#authentication">OAuth 2</a> (Scopes: read)
+<a href="#authentication">api_key</a>, <a href="#authentication">OAuth 2</a> (Scope: read)
 </aside>
 ## Get All Users
 
@@ -6554,7 +6556,7 @@ Status|Meaning|Description|Response Schema
 
 <aside class="auth-notice">
 To perform this request, you must be authenticated via one of the following methods:
-<a href="#authentication">api_key</a>, <a href="#authentication">OAuth 2</a> (Scopes: read)
+<a href="#authentication">api_key</a>, <a href="#authentication">OAuth 2</a> (Scope: read)
 </aside>
 ## Get User
 
@@ -6673,7 +6675,7 @@ Status|Meaning|Description|Response Schema
 
 <aside class="auth-notice">
 To perform this request, you must be authenticated via one of the following methods:
-<a href="#authentication">api_key</a>, <a href="#authentication">OAuth 2</a> (Scopes: read)
+<a href="#authentication">api_key</a>, <a href="#authentication">OAuth 2</a> (Scope: read)
 </aside>
 # Reports
 
@@ -6812,7 +6814,7 @@ Status|Meaning|Description|Response Schema
 
 <aside class="auth-notice">
 To perform this request, you must be authenticated via one of the following methods:
-<a href="#authentication">OAuth 2</a> (Scopes: write)
+<a href="#authentication">OAuth 2</a> (Scope: write)
 </aside>
 # Me
 
@@ -6939,7 +6941,7 @@ Status|Meaning|Description|Response Schema
 
 <aside class="auth-notice">
 To perform this request, you must be authenticated via one of the following methods:
-<a href="#authentication">OAuth 2</a> (Scopes: read)
+<a href="#authentication">OAuth 2</a> (Scope: read)
 </aside>
 ## Get User Subscriptions
 
@@ -7174,7 +7176,7 @@ Status|Meaning|Description|Response Schema
 
 <aside class="auth-notice">
 To perform this request, you must be authenticated via one of the following methods:
-<a href="#authentication">OAuth 2</a> (Scopes: read)
+<a href="#authentication">OAuth 2</a> (Scope: read)
 </aside>
 ## Get User Events
 
@@ -7303,7 +7305,7 @@ Status|Meaning|Description|Response Schema
 
 <aside class="auth-notice">
 To perform this request, you must be authenticated via one of the following methods:
-<a href="#authentication">api_key</a>, <a href="#authentication">OAuth 2</a> (Scopes: read)
+<a href="#authentication">api_key</a>, <a href="#authentication">OAuth 2</a> (Scope: read)
 </aside>
 ## Get User Games
 
@@ -7507,7 +7509,7 @@ Status|Meaning|Description|Response Schema
 
 <aside class="auth-notice">
 To perform this request, you must be authenticated via one of the following methods:
-<a href="#authentication">OAuth 2</a> (Scopes: read)
+<a href="#authentication">OAuth 2</a> (Scope: read)
 </aside>
 ## Get User Mods
 
@@ -7746,7 +7748,7 @@ Status|Meaning|Description|Response Schema
 
 <aside class="auth-notice">
 To perform this request, you must be authenticated via one of the following methods:
-<a href="#authentication">OAuth 2</a> (Scopes: read)
+<a href="#authentication">OAuth 2</a> (Scope: read)
 </aside>
 ## Get User Modfiles
 
@@ -7902,7 +7904,7 @@ Status|Meaning|Description|Response Schema
 
 <aside class="auth-notice">
 To perform this request, you must be authenticated via one of the following methods:
-<a href="#authentication">OAuth 2</a> (Scopes: read)
+<a href="#authentication">OAuth 2</a> (Scope: read)
 </aside>
 # Response Schemas 
 ## Message Object
