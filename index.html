@@ -4746,7 +4746,7 @@ Content-Type: application/x-www-form-urlencoded
 </code></pre>
 <p><span class="httpmethod POST">POST</span> <span class="endpointheading">/games/{game-id}/mods/{mod-id}/subscribe</span></p>
 
-<p>Subscribe the <em>authenticated user</em> to a corresponding mod. No body parameters are required for this action. Successful request will return the <a href="#mod-object">Mod Object</a> of the newly subscribed mod.<br><br><strong>NOTE:</strong> Users can subscribe to mods via mod.io, we recommend you poll the <a href="#get-all-events">Get All Events</a> endpoint to keep a users mods collection up to date.</p>
+<p>Subscribe the <em>authenticated user</em> to a corresponding mod. No body parameters are required for this action. Successful request will return the <a href="#mod-object">Mod Object</a> of the newly subscribed mod.<br><br><strong>NOTE:</strong> Users can subscribe to mods via mod.io, we recommend you poll the <a href="#get-user-events">Get User Events</a> endpoint to keep a users mods collection up to date.</p>
 
 <blockquote>
 <p>Example response</p>
@@ -11778,7 +11778,7 @@ oauth2 ( Scopes: read )
 <tr>
 <td>level</td>
 <td>integer</td>
-<td>Level of permission the user has:<br><br><strong>1</strong> = Moderator (can moderate content submitted)<br><strong>4</strong> = Statistics (moderator access, including read only access to view reports)<br><strong>8</strong> = Administrator (full access, including editing the profile and team)</td>
+<td>Level of permission the user has:<br><br><strong>1</strong> = Moderator (can moderate comments and content attached)<br><strong>4</strong> = Creator (moderator access, including uploading builds and edit all settings except supply and team members)<br><strong>8</strong> = Administrator (full access, including editing the supply and team)</td>
 </tr>
 <tr>
 <td>date_added</td>
@@ -13530,7 +13530,7 @@ oauth2 ( Scopes: read )
 <tr>
 <td>» level</td>
 <td>integer</td>
-<td>Level of permission the user has:<br><br><strong>1</strong> = Moderator (can moderate content submitted)<br><strong>4</strong> = Statistics (moderator access, including read only access to view reports)<br><strong>8</strong> = Administrator (full access, including editing the profile and team)</td>
+<td>Level of permission the user has:<br><br><strong>1</strong> = Moderator (can moderate comments and content attached)<br><strong>4</strong> = Creator (moderator access, including uploading builds and edit all settings except supply and team members)<br><strong>8</strong> = Administrator (full access, including editing the supply and team)</td>
 </tr>
 <tr>
 <td>» date_added</td>
