@@ -489,6 +489,10 @@ html, body {
     &.success {
       background-color: $aside-success-bg;
     }
+
+    &.auth-notice {
+      background-color: $aside-auth-notice-bg;
+    }
   }
 
   aside:before {
@@ -499,6 +503,10 @@ html, body {
 
   aside.notice:before {
     @extend %icon-info-sign;
+  }
+
+  aside.auth-notice:before {
+    @extend %icon-exclamation-sign;
   }
 
   aside.warning:before {

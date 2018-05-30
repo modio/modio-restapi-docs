@@ -904,12 +904,10 @@ Status|Meaning|Description|Response Schema
 ---|---|---|---|
 200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)|OK|[Get All Games  ](#schemaget_all_games)
 
-<aside class="warning">
-To perform this operation, you must be authenticated by means of one of the following methods:
-apiKey, oauth2 ( Scopes: read )
+<aside class="auth-notice">
+To perform this request, you must be authenticated via one of the following methods:
+<a href="#authentication">api_key</a>, <a href="#authentication">OAuth 2</a> (Scopes: read)
 </aside>
-
-
 ## Get Game
 
 > Example request
@@ -1074,12 +1072,10 @@ Status|Meaning|Description|Response Schema
 ---|---|---|---|
 200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)|Request successful|[Game Object   ](#schemagame_object)
 
-<aside class="warning">
-To perform this operation, you must be authenticated by means of one of the following methods:
-apiKey, oauth2 ( Scopes: read )
+<aside class="auth-notice">
+To perform this request, you must be authenticated via one of the following methods:
+<a href="#authentication">api_key</a>, <a href="#authentication">OAuth 2</a> (Scopes: read)
 </aside>
-
-
 ## Edit Game
 
 > Example request
@@ -1274,12 +1270,10 @@ Status|Meaning|Description|Response Schema
 ---|---|---|---|
 200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)|Update successful|[Game Object   ](#schemagame_object)
 
-<aside class="warning">
-To perform this operation, you must be authenticated by means of one of the following methods:
-oauth2 ( Scopes: write )
+<aside class="auth-notice">
+To perform this request, you must be authenticated via one of the following methods:
+<a href="#authentication">OAuth 2</a> (Scopes: write)
 </aside>
-
-
 # Mods
 
 ## Get All Mods
@@ -1512,12 +1506,10 @@ Status|Meaning|Description|Response Schema
 ---|---|---|---|
 200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)|Successful Request|[Get All Mods  ](#schemaget_all_mods)
 
-<aside class="warning">
-To perform this operation, you must be authenticated by means of one of the following methods:
-apiKey, oauth2 ( Scopes: read )
+<aside class="auth-notice">
+To perform this request, you must be authenticated via one of the following methods:
+<a href="#authentication">api_key</a>, <a href="#authentication">OAuth 2</a> (Scopes: read)
 </aside>
-
-
 ## Get Mod
 
 > Example request
@@ -1713,12 +1705,10 @@ Status|Meaning|Description|Response Schema
 ---|---|---|---|
 200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)|Successful Request|[Mod Object   ](#schemamod_object)
 
-<aside class="warning">
-To perform this operation, you must be authenticated by means of one of the following methods:
-apiKey, oauth2 ( Scopes: read )
+<aside class="auth-notice">
+To perform this request, you must be authenticated via one of the following methods:
+<a href="#authentication">api_key</a>, <a href="#authentication">OAuth 2</a> (Scopes: read)
 </aside>
-
-
 ## Add Mod
 
 > Example request
@@ -1951,12 +1941,10 @@ Status|Header|Type|Format|Description
 ---|---|---|---|---|
 201|Location|string||URL to newly created resource
 
-<aside class="warning">
-To perform this operation, you must be authenticated by means of one of the following methods:
-oauth2 ( Scopes: write )
+<aside class="auth-notice">
+To perform this request, you must be authenticated via one of the following methods:
+<a href="#authentication">OAuth 2</a> (Scopes: write)
 </aside>
-
-
 ## Edit Mod
 
 > Example request
@@ -2176,12 +2164,10 @@ Status|Meaning|Description|Response Schema
 ---|---|---|---|
 200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)|Update Successful|[Mod Object   ](#schemamod_object)
 
-<aside class="warning">
-To perform this operation, you must be authenticated by means of one of the following methods:
-oauth2 ( Scopes: write )
+<aside class="auth-notice">
+To perform this request, you must be authenticated via one of the following methods:
+<a href="#authentication">OAuth 2</a> (Scopes: write)
 </aside>
-
-
 ## Delete Mod
 
 > Example request
@@ -2292,14 +2278,12 @@ Delete a mod profile. Successful request will return `204 No Content` and fire a
 
 Status|Meaning|Description|Response Schema
 ---|---|---|---|
-204|[No Content](https://tools.ietf.org/html/rfc7231#section-6.3.5)|No Content|None
+204|[No Content](https://tools.ietf.org/html/rfc7231#section-6.3.5)|Successful Request. No Body Returned.|None
 
-<aside class="warning">
-To perform this operation, you must be authenticated by means of one of the following methods:
-oauth2 ( Scopes: write )
+<aside class="auth-notice">
+To perform this request, you must be authenticated via one of the following methods:
+<a href="#authentication">OAuth 2</a> (Scopes: write)
 </aside>
-
-
 # Files
 
 ## Get All Modfiles
@@ -2448,12 +2432,10 @@ Status|Meaning|Description|Response Schema
 ---|---|---|---|
 200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)|Successful Request|[Get All Modfiles  ](#schemaget_all_modfiles)
 
-<aside class="warning">
-To perform this operation, you must be authenticated by means of one of the following methods:
-apiKey, oauth2 ( Scopes: read )
+<aside class="auth-notice">
+To perform this request, you must be authenticated via one of the following methods:
+<a href="#authentication">api_key</a>, <a href="#authentication">OAuth 2</a> (Scopes: read)
 </aside>
-
-
 ## Get Modfile
 
 > Example request
@@ -2575,12 +2557,10 @@ Status|Meaning|Description|Response Schema
 ---|---|---|---|
 200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)|Successful Request|[Modfile Object   ](#schemamodfile_object)
 
-<aside class="warning">
-To perform this operation, you must be authenticated by means of one of the following methods:
-apiKey, oauth2 ( Scopes: read )
+<aside class="auth-notice">
+To perform this request, you must be authenticated via one of the following methods:
+<a href="#authentication">api_key</a>, <a href="#authentication">OAuth 2</a> (Scopes: read)
 </aside>
-
-
 ## Add Modfile
 
 > Example request
@@ -2736,12 +2716,10 @@ Status|Header|Type|Format|Description
 ---|---|---|---|---|
 201|Location|string||URL to newly created resource
 
-<aside class="warning">
-To perform this operation, you must be authenticated by means of one of the following methods:
-oauth2 ( Scopes: write )
+<aside class="auth-notice">
+To perform this request, you must be authenticated via one of the following methods:
+<a href="#authentication">OAuth 2</a> (Scopes: write)
 </aside>
-
-
 ## Edit Modfile
 
 > Example request
@@ -2881,12 +2859,10 @@ Status|Meaning|Description|Response Schema
 ---|---|---|---|
 200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)|Update Successful|[Modfile Object   ](#schemamodfile_object)
 
-<aside class="warning">
-To perform this operation, you must be authenticated by means of one of the following methods:
-oauth2 ( Scopes: write )
+<aside class="auth-notice">
+To perform this request, you must be authenticated via one of the following methods:
+<a href="#authentication">OAuth 2</a> (Scopes: write)
 </aside>
-
-
 # Media
 
 ## Add Game Media
@@ -3018,12 +2994,10 @@ Status|Meaning|Description|Response Schema
 ---|---|---|---|
 200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)|Media Successfully uploaded|[Message Object](#message-object)
 
-<aside class="warning">
-To perform this operation, you must be authenticated by means of one of the following methods:
-oauth2 ( Scopes: write )
+<aside class="auth-notice">
+To perform this request, you must be authenticated via one of the following methods:
+<a href="#authentication">OAuth 2</a> (Scopes: write)
 </aside>
-
-
 ## Add Mod Media
 
 > Example request
@@ -3166,12 +3140,10 @@ Status|Header|Type|Format|Description
 ---|---|---|---|---|
 201|Location|string||URL to newly created resource
 
-<aside class="warning">
-To perform this operation, you must be authenticated by means of one of the following methods:
-oauth2 ( Scopes: write )
+<aside class="auth-notice">
+To perform this request, you must be authenticated via one of the following methods:
+<a href="#authentication">OAuth 2</a> (Scopes: write)
 </aside>
-
-
 ## Delete Mod Media
 
 > Example request
@@ -3296,14 +3268,12 @@ Delete images, sketchfab or youtube links from a mod profile. Successful request
 
 Status|Meaning|Description|Response Schema
 ---|---|---|---|
-204|[No Content](https://tools.ietf.org/html/rfc7231#section-6.3.5)|No Content|None
+204|[No Content](https://tools.ietf.org/html/rfc7231#section-6.3.5)|Successful Request. No Body Returned.|None
 
-<aside class="warning">
-To perform this operation, you must be authenticated by means of one of the following methods:
-oauth2 ( Scopes: write )
+<aside class="auth-notice">
+To perform this request, you must be authenticated via one of the following methods:
+<a href="#authentication">OAuth 2</a> (Scopes: write)
 </aside>
-
-
 # Subscribe
 
 ## Subscribe To Mod
@@ -3512,12 +3482,10 @@ Status|Meaning|Description|Response Schema
 ---|---|---|---|
 201|[Created](https://tools.ietf.org/html/rfc7231#section-6.3.2)|Subscription Successful|[Mod Object   ](#schemamod_object)
 
-<aside class="warning">
-To perform this operation, you must be authenticated by means of one of the following methods:
-oauth2 ( Scopes: write )
+<aside class="auth-notice">
+To perform this request, you must be authenticated via one of the following methods:
+<a href="#authentication">OAuth 2</a> (Scopes: write)
 </aside>
-
-
 ## Unsubscribe To Mod
 
 > Example request
@@ -3628,14 +3596,12 @@ Unsubscribe the _authenticated user_ from the corresponding mod. No body paramet
 
 Status|Meaning|Description|Response Schema
 ---|---|---|---|
-204|[No Content](https://tools.ietf.org/html/rfc7231#section-6.3.5)|No Content|None
+204|[No Content](https://tools.ietf.org/html/rfc7231#section-6.3.5)|Successful Request. No Body Returned.|None
 
-<aside class="warning">
-To perform this operation, you must be authenticated by means of one of the following methods:
-oauth2 ( Scopes: write )
+<aside class="auth-notice">
+To perform this request, you must be authenticated via one of the following methods:
+<a href="#authentication">OAuth 2</a> (Scopes: write)
 </aside>
-
-
 # Events
 
 ## Get Mod Events
@@ -3763,12 +3729,10 @@ Status|Meaning|Description|Response Schema
 ---|---|---|---|
 200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)|Successful Request|[Get Mod Events  ](#schemaget_mod_events)
 
-<aside class="warning">
-To perform this operation, you must be authenticated by means of one of the following methods:
-apiKey, oauth2 ( Scopes: read )
+<aside class="auth-notice">
+To perform this request, you must be authenticated via one of the following methods:
+<a href="#authentication">api_key</a>, <a href="#authentication">OAuth 2</a> (Scopes: read)
 </aside>
-
-
 ## Get All Mod Events
 
 > Example request
@@ -3896,12 +3860,10 @@ Status|Meaning|Description|Response Schema
 ---|---|---|---|
 200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)|Successful Request|[Get Mod Events  ](#schemaget_mod_events)
 
-<aside class="warning">
-To perform this operation, you must be authenticated by means of one of the following methods:
-apiKey, oauth2 ( Scopes: read )
+<aside class="auth-notice">
+To perform this request, you must be authenticated via one of the following methods:
+<a href="#authentication">api_key</a>, <a href="#authentication">OAuth 2</a> (Scopes: read)
 </aside>
-
-
 # Tags
 
 ## Get Mod Tags
@@ -4023,12 +3985,10 @@ Status|Meaning|Description|Response Schema
 ---|---|---|---|
 200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)|Successful Request|[Get Mod Tags  ](#schemaget_mod_tags)
 
-<aside class="warning">
-To perform this operation, you must be authenticated by means of one of the following methods:
-apiKey, oauth2 ( Scopes: read )
+<aside class="auth-notice">
+To perform this request, you must be authenticated via one of the following methods:
+<a href="#authentication">api_key</a>, <a href="#authentication">OAuth 2</a> (Scopes: read)
 </aside>
-
-
 ## Add Mod Tag
 
 > Example request
@@ -4150,12 +4110,10 @@ Status|Meaning|Description|Response Schema
 ---|---|---|---|
 201|[Created](https://tools.ietf.org/html/rfc7231#section-6.3.2)|Created|[Message Object](#message-object)
 
-<aside class="warning">
-To perform this operation, you must be authenticated by means of one of the following methods:
-oauth2 ( Scopes: write )
+<aside class="auth-notice">
+To perform this request, you must be authenticated via one of the following methods:
+<a href="#authentication">OAuth 2</a> (Scopes: write)
 </aside>
-
-
 ## Delete Mod Tag
 
 > Example request
@@ -4272,14 +4230,12 @@ Delete tags from a mod's profile. Deleting tags is identical to adding tags exce
 
 Status|Meaning|Description|Response Schema
 ---|---|---|---|
-204|[No Content](https://tools.ietf.org/html/rfc7231#section-6.3.5)|No Content|None
+204|[No Content](https://tools.ietf.org/html/rfc7231#section-6.3.5)|Successful Request. No Body Returned.|None
 
-<aside class="warning">
-To perform this operation, you must be authenticated by means of one of the following methods:
-oauth2 ( Scopes: write )
+<aside class="auth-notice">
+To perform this request, you must be authenticated via one of the following methods:
+<a href="#authentication">OAuth 2</a> (Scopes: write)
 </aside>
-
-
 ## Get Game Tag Options
 
 > Example request
@@ -4398,12 +4354,10 @@ Status|Meaning|Description|Response Schema
 ---|---|---|---|
 200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)|Successful Request|[Get Game Tag Options ](#schemaget_game_tag_options)
 
-<aside class="warning">
-To perform this operation, you must be authenticated by means of one of the following methods:
-apiKey, oauth2 ( Scopes: read )
+<aside class="auth-notice">
+To perform this request, you must be authenticated via one of the following methods:
+<a href="#authentication">api_key</a>, <a href="#authentication">OAuth 2</a> (Scopes: read)
 </aside>
-
-
 ## Add Game Tag Option
 
 > Example request
@@ -4538,12 +4492,10 @@ Status|Meaning|Description|Response Schema
 ---|---|---|---|
 201|[Created](https://tools.ietf.org/html/rfc7231#section-6.3.2)|Created|[Message Object](#message-object)
 
-<aside class="warning">
-To perform this operation, you must be authenticated by means of one of the following methods:
-oauth2 ( Scopes: write )
+<aside class="auth-notice">
+To perform this request, you must be authenticated via one of the following methods:
+<a href="#authentication">OAuth 2</a> (Scopes: write)
 </aside>
-
-
 ## Delete Game Tag Option
 
 > Example request
@@ -4665,14 +4617,12 @@ Delete an entire group of tags or individual tags. Successful request will retur
 
 Status|Meaning|Description|Response Schema
 ---|---|---|---|
-204|[No Content](https://tools.ietf.org/html/rfc7231#section-6.3.5)|No Content|None
+204|[No Content](https://tools.ietf.org/html/rfc7231#section-6.3.5)|Successful Request. No Body Returned.|None
 
-<aside class="warning">
-To perform this operation, you must be authenticated by means of one of the following methods:
-oauth2 ( Scopes: write )
+<aside class="auth-notice">
+To perform this request, you must be authenticated via one of the following methods:
+<a href="#authentication">OAuth 2</a> (Scopes: write)
 </aside>
-
-
 # Ratings
 
 ## Add Mod Rating
@@ -4798,12 +4748,10 @@ Status|Meaning|Description|Response Schema
 ---|---|---|---|
 201|[Created](https://tools.ietf.org/html/rfc7231#section-6.3.2)|Resource created|[Message Object](#message-object)
 
-<aside class="warning">
-To perform this operation, you must be authenticated by means of one of the following methods:
-oauth2 ( Scopes: write )
+<aside class="auth-notice">
+To perform this request, you must be authenticated via one of the following methods:
+<a href="#authentication">OAuth 2</a> (Scopes: write)
 </aside>
-
-
 # Metadata
 
 ## Get All Mod KVP Metadata
@@ -4920,12 +4868,10 @@ Status|Meaning|Description|Response Schema
 ---|---|---|---|
 200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)|Successful Request|[Get All Mod KVP Metadata](#schemaget_all_mod_kvp_metadata)
 
-<aside class="warning">
-To perform this operation, you must be authenticated by means of one of the following methods:
-apiKey, oauth2 ( Scopes: read )
+<aside class="auth-notice">
+To perform this request, you must be authenticated via one of the following methods:
+<a href="#authentication">api_key</a>, <a href="#authentication">OAuth 2</a> (Scopes: read)
 </aside>
-
-
 ## Add Mod KVP Metadata
 
 > Example request
@@ -5047,12 +4993,10 @@ Status|Meaning|Description|Response Schema
 ---|---|---|---|
 201|[Created](https://tools.ietf.org/html/rfc7231#section-6.3.2)|Created|[Message Object](#message-object)
 
-<aside class="warning">
-To perform this operation, you must be authenticated by means of one of the following methods:
-oauth2 ( Scopes: write )
+<aside class="auth-notice">
+To perform this request, you must be authenticated via one of the following methods:
+<a href="#authentication">OAuth 2</a> (Scopes: write)
 </aside>
-
-
 ## Delete Mod KVP Metadata
 
 > Example request
@@ -5169,14 +5113,12 @@ Delete key value pairs metadata defined for this mod. Successful request will re
 
 Status|Meaning|Description|Response Schema
 ---|---|---|---|
-204|[No Content](https://tools.ietf.org/html/rfc7231#section-6.3.5)|No Content|None
+204|[No Content](https://tools.ietf.org/html/rfc7231#section-6.3.5)|Successful Request. No Body Returned.|None
 
-<aside class="warning">
-To perform this operation, you must be authenticated by means of one of the following methods:
-oauth2 ( Scopes: write )
+<aside class="auth-notice">
+To perform this request, you must be authenticated via one of the following methods:
+<a href="#authentication">OAuth 2</a> (Scopes: write)
 </aside>
-
-
 # Dependencies
 
 ## Get All Mod Dependencies
@@ -5295,12 +5237,10 @@ Status|Meaning|Description|Response Schema
 ---|---|---|---|
 200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)|Successful Request|[Get All Mod Dependencies ](#schemaget_all_mod_dependencies)
 
-<aside class="warning">
-To perform this operation, you must be authenticated by means of one of the following methods:
-apiKey, oauth2 ( Scopes: read )
+<aside class="auth-notice">
+To perform this request, you must be authenticated via one of the following methods:
+<a href="#authentication">api_key</a>, <a href="#authentication">OAuth 2</a> (Scopes: read)
 </aside>
-
-
 ## Add Mod Dependencies
 
 > Example request
@@ -5424,12 +5364,10 @@ Status|Meaning|Description|Response Schema
 ---|---|---|---|
 201|[Created](https://tools.ietf.org/html/rfc7231#section-6.3.2)|Created|[Message Object](#message-object)
 
-<aside class="warning">
-To perform this operation, you must be authenticated by means of one of the following methods:
-oauth2 ( Scopes: write )
+<aside class="auth-notice">
+To perform this request, you must be authenticated via one of the following methods:
+<a href="#authentication">OAuth 2</a> (Scopes: write)
 </aside>
-
-
 ## Delete Mod Dependencies
 
 > Example request
@@ -5546,14 +5484,12 @@ Delete mod dependencies the corresponding mod has selected. Successful request w
 
 Status|Meaning|Description|Response Schema
 ---|---|---|---|
-204|[No Content](https://tools.ietf.org/html/rfc7231#section-6.3.5)|No Content|None
+204|[No Content](https://tools.ietf.org/html/rfc7231#section-6.3.5)|Successful Request. No Body Returned.|None
 
-<aside class="warning">
-To perform this operation, you must be authenticated by means of one of the following methods:
-oauth2 ( Scopes: write )
+<aside class="auth-notice">
+To perform this request, you must be authenticated via one of the following methods:
+<a href="#authentication">OAuth 2</a> (Scopes: write)
 </aside>
-
-
 # Teams
 
 ## Get All Mod Team Members
@@ -5696,12 +5632,10 @@ Status|Meaning|Description|Response Schema
 ---|---|---|---|
 200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)|Successful Request|[Get All Team Members ](#schemaget_all_team_members)
 
-<aside class="warning">
-To perform this operation, you must be authenticated by means of one of the following methods:
-apiKey, oauth2 ( Scopes: read )
+<aside class="auth-notice">
+To perform this request, you must be authenticated via one of the following methods:
+<a href="#authentication">api_key</a>, <a href="#authentication">OAuth 2</a> (Scopes: read)
 </aside>
-
-
 ## Add Mod Team Member
 
 > Example request
@@ -5831,12 +5765,10 @@ Status|Meaning|Description|Response Schema
 ---|---|---|---|
 201|[Created](https://tools.ietf.org/html/rfc7231#section-6.3.2)|Created|[Message Object](#message-object)
 
-<aside class="warning">
-To perform this operation, you must be authenticated by means of one of the following methods:
-oauth2 ( Scopes: write )
+<aside class="auth-notice">
+To perform this request, you must be authenticated via one of the following methods:
+<a href="#authentication">OAuth 2</a> (Scopes: write)
 </aside>
-
-
 ## Update Mod Team Member
 
 > Example request
@@ -5959,12 +5891,10 @@ Status|Meaning|Description|Response Schema
 ---|---|---|---|
 200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)|OK|[Message Object](#message-object)
 
-<aside class="warning">
-To perform this operation, you must be authenticated by means of one of the following methods:
-oauth2 ( Scopes: write )
+<aside class="auth-notice">
+To perform this request, you must be authenticated via one of the following methods:
+<a href="#authentication">OAuth 2</a> (Scopes: write)
 </aside>
-
-
 ## Delete Mod Team Member
 
 > Example request
@@ -6075,14 +6005,12 @@ Delete a user from a mod team. This will revoke their access rights if they are 
 
 Status|Meaning|Description|Response Schema
 ---|---|---|---|
-204|[No Content](https://tools.ietf.org/html/rfc7231#section-6.3.5)|No Content|None
+204|[No Content](https://tools.ietf.org/html/rfc7231#section-6.3.5)|Successful Request. No Body Returned.|None
 
-<aside class="warning">
-To perform this operation, you must be authenticated by means of one of the following methods:
-oauth2 ( Scopes: write )
+<aside class="auth-notice">
+To perform this request, you must be authenticated via one of the following methods:
+<a href="#authentication">OAuth 2</a> (Scopes: write)
 </aside>
-
-
 # Comments
 
 ## Get All Mod Comments
@@ -6231,12 +6159,10 @@ Status|Meaning|Description|Response Schema
 ---|---|---|---|
 200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)|OK|[Get All Mod Comments ](#schemaget_all_mod_comments)
 
-<aside class="warning">
-To perform this operation, you must be authenticated by means of one of the following methods:
-apiKey, oauth2 ( Scopes: read )
+<aside class="auth-notice">
+To perform this request, you must be authenticated via one of the following methods:
+<a href="#authentication">api_key</a>, <a href="#authentication">OAuth 2</a> (Scopes: read)
 </aside>
-
-
 ## Delete Mod Comment
 
 > Example request
@@ -6347,14 +6273,12 @@ Delete a comment from a mod profile. Successful request will return `204 No Cont
 
 Status|Meaning|Description|Response Schema
 ---|---|---|---|
-204|[No Content](https://tools.ietf.org/html/rfc7231#section-6.3.5)|No Content|None
+204|[No Content](https://tools.ietf.org/html/rfc7231#section-6.3.5)|Successful Request. No Body Returned.|None
 
-<aside class="warning">
-To perform this operation, you must be authenticated by means of one of the following methods:
-oauth2 ( Scopes: write )
+<aside class="auth-notice">
+To perform this request, you must be authenticated via one of the following methods:
+<a href="#authentication">OAuth 2</a> (Scopes: write)
 </aside>
-
-
 # Users
 
 ## Get Resource Owner
@@ -6490,12 +6414,10 @@ Status|Meaning|Description|Response Schema
 ---|---|---|---|
 200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)|Successful Request|[User Object   ](#schemauser_object)
 
-<aside class="warning">
-To perform this operation, you must be authenticated by means of one of the following methods:
-apiKey, oauth2 ( Scopes: read )
+<aside class="auth-notice">
+To perform this request, you must be authenticated via one of the following methods:
+<a href="#authentication">api_key</a>, <a href="#authentication">OAuth 2</a> (Scopes: read)
 </aside>
-
-
 ## Get All Users
 
 > Example request
@@ -6630,12 +6552,10 @@ Status|Meaning|Description|Response Schema
 ---|---|---|---|
 200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)|OK|[Get All Users  ](#schemaget_all_users)
 
-<aside class="warning">
-To perform this operation, you must be authenticated by means of one of the following methods:
-apiKey, oauth2 ( Scopes: read )
+<aside class="auth-notice">
+To perform this request, you must be authenticated via one of the following methods:
+<a href="#authentication">api_key</a>, <a href="#authentication">OAuth 2</a> (Scopes: read)
 </aside>
-
-
 ## Get User
 
 > Example request
@@ -6751,12 +6671,10 @@ Status|Meaning|Description|Response Schema
 ---|---|---|---|
 200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)|OK|[User Object   ](#schemauser_object)
 
-<aside class="warning">
-To perform this operation, you must be authenticated by means of one of the following methods:
-apiKey, oauth2 ( Scopes: read )
+<aside class="auth-notice">
+To perform this request, you must be authenticated via one of the following methods:
+<a href="#authentication">api_key</a>, <a href="#authentication">OAuth 2</a> (Scopes: read)
 </aside>
-
-
 # Reports
 
 ## Submit Report
@@ -6892,12 +6810,10 @@ Status|Meaning|Description|Response Schema
 ---|---|---|---|
 201|[Created](https://tools.ietf.org/html/rfc7231#section-6.3.2)|Report Created|[Message Object](#message-object)
 
-<aside class="warning">
-To perform this operation, you must be authenticated by means of one of the following methods:
-oauth2 ( Scopes: write )
+<aside class="auth-notice">
+To perform this request, you must be authenticated via one of the following methods:
+<a href="#authentication">OAuth 2</a> (Scopes: write)
 </aside>
-
-
 # Me
 
 ## Get Authenticated User
@@ -7021,12 +6937,10 @@ Status|Meaning|Description|Response Schema
 ---|---|---|---|
 200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)|Request Successful|[User Object   ](#schemauser_object)
 
-<aside class="warning">
-To perform this operation, you must be authenticated by means of one of the following methods:
-oauth2 ( Scopes: read )
+<aside class="auth-notice">
+To perform this request, you must be authenticated via one of the following methods:
+<a href="#authentication">OAuth 2</a> (Scopes: read)
 </aside>
-
-
 ## Get User Subscriptions
 
 > Example request
@@ -7258,12 +7172,10 @@ Status|Meaning|Description|Response Schema
 ---|---|---|---|
 200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)|Request Successful|[Get All Mods  ](#schemaget_all_mods)
 
-<aside class="warning">
-To perform this operation, you must be authenticated by means of one of the following methods:
-oauth2 ( Scopes: read )
+<aside class="auth-notice">
+To perform this request, you must be authenticated via one of the following methods:
+<a href="#authentication">OAuth 2</a> (Scopes: read)
 </aside>
-
-
 ## Get User Events
 
 > Example request
@@ -7389,12 +7301,10 @@ Status|Meaning|Description|Response Schema
 ---|---|---|---|
 200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)|Successful Request|[Get Mod Events  ](#schemaget_mod_events)
 
-<aside class="warning">
-To perform this operation, you must be authenticated by means of one of the following methods:
-apiKey, oauth2 ( Scopes: read )
+<aside class="auth-notice">
+To perform this request, you must be authenticated via one of the following methods:
+<a href="#authentication">api_key</a>, <a href="#authentication">OAuth 2</a> (Scopes: read)
 </aside>
-
-
 ## Get User Games
 
 > Example request
@@ -7595,12 +7505,10 @@ Status|Meaning|Description|Response Schema
 ---|---|---|---|
 200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)|Request Successful|[Get All Games  ](#schemaget_all_games)
 
-<aside class="warning">
-To perform this operation, you must be authenticated by means of one of the following methods:
-oauth2 ( Scopes: read )
+<aside class="auth-notice">
+To perform this request, you must be authenticated via one of the following methods:
+<a href="#authentication">OAuth 2</a> (Scopes: read)
 </aside>
-
-
 ## Get User Mods
 
 > Example request
@@ -7836,12 +7744,10 @@ Status|Meaning|Description|Response Schema
 ---|---|---|---|
 200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)|Request Successful|[Get All Mods  ](#schemaget_all_mods)
 
-<aside class="warning">
-To perform this operation, you must be authenticated by means of one of the following methods:
-oauth2 ( Scopes: read )
+<aside class="auth-notice">
+To perform this request, you must be authenticated via one of the following methods:
+<a href="#authentication">OAuth 2</a> (Scopes: read)
 </aside>
-
-
 ## Get User Modfiles
 
 > Example request
@@ -7994,12 +7900,10 @@ Status|Meaning|Description|Response Schema
 ---|---|---|---|
 200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)|Request Successful|[Get All Modfiles  ](#schemaget_all_modfiles)
 
-<aside class="warning">
-To perform this operation, you must be authenticated by means of one of the following methods:
-oauth2 ( Scopes: read )
+<aside class="auth-notice">
+To perform this request, you must be authenticated via one of the following methods:
+<a href="#authentication">OAuth 2</a> (Scopes: read)
 </aside>
-
-
 # Response Schemas 
 ## Message Object
 
