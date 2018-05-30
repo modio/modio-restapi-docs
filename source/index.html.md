@@ -801,7 +801,7 @@ Get all games. Successful request will return an array of [Game Objects](#get-al
     Filter|Type|Description
     ---|---|---
     id|integer|Unique id of the game.
-    status|integer|Status of the game (only admins can filter by this field, see [status and visibility](#status-amp-visibility) for details):<br><br>__0__ = Not accepted<br>__1__ = Accepted _(default with archived)_<br>__2__ = Archived<br>__3__ = Deleted
+    status|integer|Status of the game (only admins can filter by this field, see [status and visibility](#status-amp-visibility) for details):<br><br>__0__ = Not accepted<br>__1__ = Accepted _(default)_<br>__2__ = Archived _(default)_<br>__3__ = Deleted
     submitted_by|integer|Unique id of the user who has ownership of the game.
     date_added|integer|Unix timestamp of date game was registered.
     date_updated|integer|Unix timestamp of date game was updated.
@@ -1375,7 +1375,7 @@ Get all mods for the corresponding game. Successful request will return an array
     ---|---|---
     id|integer|Unique id of the mod.
     game_id|integer|Unique id of the parent game.
-    status|integer|Status of the mod (only game admins can filter by this field, see [status and visibility](#status-amp-visibility) for details):<br><br>__0__ = Not accepted<br>__1__ = Accepted _(default with archived)_<br>__2__ = Archived<br>__3__ = Deleted
+    status|integer|Status of the mod (only game admins can filter by this field, see [status and visibility](#status-amp-visibility) for details):<br><br>__0__ = Not accepted<br>__1__ = Accepted _(default)_<br>__2__ = Archived _(default)_<br>__3__ = Deleted
     visible|integer|Visibility of the mod (only game admins can filter by this field, see [status and visibility](#status-amp-visibility) for details):<br><br>__0__ = Hidden<br>__1__ = Public
     submitted_by|integer|Unique id of the user who has ownership of the mod.
     date_added|integer|Unix timestamp of date mod was registered.
@@ -2846,7 +2846,7 @@ Edit the details of a published file. If you want to update fields other than th
      ---|---|---|---|
      version|string||Version of the file release.
      changelog|string||Changelog of this release.
-     active|boolean||_Default value is true._ Label this upload as the current release, this will change the `modfile` field on the parent mod to the `id` of this file after upload.<br><br>__NOTE:__ If the _active_ parameter causes the parent mods `modfile` parameter to change, a [__MODFILE_CHANGED__ event](#get-all-mod-events) will be fired, so game clients know there is an update available for this mod.
+     active|boolean||Label this upload as the current release.<br><br>__NOTE:__ If the _active_ parameter causes the parent mods `modfile` parameter to change, a [__MODFILE_CHANGED__ event](#get-all-mod-events) will be fired, so game clients know there is an update available for this mod.
      metadata_blob|string||Metadata stored by the game developer which may include properties such as what version of the game this file is compatible with. Metadata can also be stored as searchable [key value pairs](#metadata), and to the [mod object](#edit-mod).
 
 
@@ -3404,7 +3404,7 @@ System.out.println(response.toString());
 ```
 `POST /games/{game-id}/mods/{mod-id}/subscribe`
 
-Subscribe the _authenticated user_ to a corresponding mod. No body parameters are required for this action. Successful request will return the [Mod Object](#mod-object) of the newly subscribed mod.<br><br>__NOTE:__ Users can subscribe to mods via mod.io, we recommend you poll the [Get All Events](#get-all-events) endpoint to keep a users mods collection up to date.
+Subscribe the _authenticated user_ to a corresponding mod. No body parameters are required for this action. Successful request will return the [Mod Object](#mod-object) of the newly subscribed mod.<br><br>__NOTE:__ Users can subscribe to mods via mod.io, we recommend you poll the [Get User Events](#get-user-events) endpoint to keep a users mods collection up to date.
 
 
 > Example response
@@ -7493,7 +7493,7 @@ Get all games the _authenticated user_ added or is a team member of. Successful 
     Filter|Type|Description
     ---|---|---
     id|integer|Unique id of the game.
-    status|integer|Status of the game (only admins can filter by this field, see [status and visibility](#status-amp-visibility) for details):<br><br>__0__ = Not accepted<br>__1__ = Accepted _(default with archived)_<br>__2__ = Archived<br>__3__ = Deleted
+    status|integer|Status of the game (only admins can filter by this field, see [status and visibility](#status-amp-visibility) for details):<br><br>__0__ = Not accepted<br>__1__ = Accepted _(default)_<br>__2__ = Archived _(default)_<br>__3__ = Deleted
     submitted_by|integer|Unique id of the user who has ownership of the game.
     date_added|integer|Unix timestamp of date game was registered.
     date_updated|integer|Unix timestamp of date game was updated.
@@ -7700,7 +7700,7 @@ Get all mods the _authenticated user_ added or is a team member of. Successful r
     ---|---|---
     id|integer|Unique id of the mod.
     game_id|integer|Unique id of the parent game.
-    status|integer|Status of the mod (only game admins can filter by this field, see [status and visibility](#status-amp-visibility) for details):<br><br>__0__ = Not accepted<br>__1__ = Accepted _(default with archived)_<br>__2__ = Archived<br>__3__ = Deleted
+    status|integer|Status of the mod (only game admins can filter by this field, see [status and visibility](#status-amp-visibility) for details):<br><br>__0__ = Not accepted<br>__1__ = Accepted _(default)_<br>__2__ = Archived _(default)_<br>__3__ = Deleted
     visible|integer|Visibility of the mod (only game admins can filter by this field, see [status and visibility](#status-amp-visibility) for details):<br><br>__0__ = Hidden<br>__1__ = Public
     submitted_by|integer|Unique id of the user who has ownership of the mod.
     date_added|integer|Unix timestamp of date mod was registered.
@@ -8889,7 +8889,7 @@ user|[User Object   ](#schemauser_object)|Contains user data.
 » timezone|string|Timezone of the user, format is country/city.
 » language|string|Users language preference. See [localization](#localization) for the supported languages.
 » profile_url|string|URL to the user's mod.io profile.
-level|integer|Level of permission the user has:<br><br>__1__ = Moderator (can moderate content submitted)<br>__4__ = Statistics (moderator access, including read only access to view reports)<br>__8__ = Administrator (full access, including editing the profile and team)
+level|integer|Level of permission the user has:<br><br>__1__ = Moderator (can moderate comments and content attached)<br>__4__ = Creator (moderator access, including uploading builds and edit all settings except supply and team members)<br>__8__ = Administrator (full access, including editing the supply and team)
 date_added|integer|Unix timestamp of the date the user was added to the team.
 position|string|Custom title given to the user in this team.
 
@@ -9679,7 +9679,7 @@ data|[Team Member Object  ](#schemateam_member_object)[]|Array containing team m
 »» timezone|string|Timezone of the user, format is country/city.
 »» language|string|Users language preference. See [localization](#localization) for the supported languages.
 »» profile_url|string|URL to the user's mod.io profile.
-» level|integer|Level of permission the user has:<br><br>__1__ = Moderator (can moderate content submitted)<br>__4__ = Statistics (moderator access, including read only access to view reports)<br>__8__ = Administrator (full access, including editing the profile and team)
+» level|integer|Level of permission the user has:<br><br>__1__ = Moderator (can moderate comments and content attached)<br>__4__ = Creator (moderator access, including uploading builds and edit all settings except supply and team members)<br>__8__ = Administrator (full access, including editing the supply and team)
 » date_added|integer|Unix timestamp of the date the user was added to the team.
 » position|string|Custom title given to the user in this team.
 result_count|integer|Number of results returned in the data array.
