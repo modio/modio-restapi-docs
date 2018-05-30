@@ -657,7 +657,11 @@ img.menu-reference-icon {
   max-width: 12px;
 }
 
-.httpmethod {
+.content table tr:last-child {
+  border-bottom: 0;
+}
+
+.content .httpmethod {
     border-radius: 5px;
     color: #fff;
     font-size: 20px;
@@ -677,19 +681,25 @@ img.menu-reference-icon {
     }
 }
 
-.endpointheading {
+.content .endpointheading {
   font-size: 24px;
   font-weight: bold;
   padding: 5px;
 }
 
-.column-attribute-highlight {
-  color: #fff;
-}
-
-.shadow-drop-lr {
+table .shadow-drop-lr {
   -webkit-animation: shadow-drop-lr 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94) both;
   animation: shadow-drop-lr 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94) both;
+}
+
+table .show-pointer {
+  cursor: pointer;
+}
+
+pre.tab-json .json-example-highlight {
+  color: #fff; 
+  font-weight: bold; 
+  border-bottom: 1px solid #44bfd4;
 }
 
 /* ----------------------------------------------
