@@ -1164,6 +1164,22 @@ curl -X post https://api.mod.io/v1/games/1/team <span class="se">\</span>
 <p>By default mods connected to a game will not be returned if they are hidden or not accepted. As a game admin, you can modify a mods <code>status</code> and <code>visible</code> fields and filter by these values (to view content normal users cannot see). <strong>We recommend</strong> you only change the <code>status</code> and let mod admins control the <code>visible</code> field.</p>
 <h3 id="mod-admin-privileges">Mod admin privileges</h3>
 <p>As a mod admin, you can modify <code>visible</code> to show or hide your mod from API requests. You <em>cannot</em> modify the <code>status</code> of your mod. When a mod is hidden <em>you</em> can still view it provided you are the mods admin or subscribed to the mod. You can call <a href="#get-user-mods">Get User Mods endpoint</a> to retrieve all mods associated with the authenticated user regardless of their <code>status</code> and <code>visible</code>.</p>
+<pre class="highlight plaintext"><code>// Valid status &amp; visibility filters
+
+status=1
+status-in=0,1
+visible=1 
+visible-in=0,1
+
+// Game Admin Only status &amp; visibility filters
+
+status-not-in=1,2
+status-gt=1
+visible-not-in=1
+visible-st=1
+
+</code></pre><h3 id="important-note-when-filtering">Important Note When Filtering</h3>
+<p>Due to the requirement of certain <code>status</code> &amp; <code>visible</code> values only being available to administrators. We have restricted the amount of <a href="#filtering">filters</a> available for <em>non-game admins</em> and thus for both of these fields <em>only</em> direct matches <code>=</code> and <code>-in</code> are permitted. Attempting to apply game admin filters without the required permissions will result in a <code>403 Forbidden</code> <a href="#error-object">error response</a>.</p>
 <h2 id="pagination">Pagination</h2>
 <p>When requesting data from endpoints that contain more than one object, you can supply an <code>_offset</code> and <code>_limit</code> to paginate through the results. Think of it as a page 1, 2, 3... system but you control the number of results per page, and the page to start from. Appended to each response will be the pagination metadata:</p>
 <pre class="highlight json tab-json"><code><span class="err">//</span><span class="w"> </span><span class="err">Metadata</span><span class="w"> </span><span class="err">example</span><span class="w">
@@ -1773,7 +1789,7 @@ Accept: application/json
 
 <aside class="auth-notice">
 To perform this request, you must be authenticated via one of the following methods:
-<a href="#authentication">api_key</a>, <a href="#authentication">OAuth 2</a> (Scope: read)
+<a href="#authentication">api_key</a>, <a href="#authentication">OAuth 2</a> (Scopes: read)
 </aside>
 <h2 id="get-game">Get Game</h2>
 <blockquote>
@@ -1939,7 +1955,7 @@ Accept: application/json
 
 <aside class="auth-notice">
 To perform this request, you must be authenticated via one of the following methods:
-<a href="#authentication">api_key</a>, <a href="#authentication">OAuth 2</a> (Scope: read)
+<a href="#authentication">api_key</a>, <a href="#authentication">OAuth 2</a> (Scopes: read)
 </aside>
 <h2 id="edit-game">Edit Game</h2>
 <blockquote>
@@ -2215,7 +2231,7 @@ Content-Type: application/x-www-form-urlencoded
 
 <aside class="auth-notice">
 To perform this request, you must be authenticated via one of the following methods:
-<a href="#authentication">OAuth 2</a> (Scope: write)
+<a href="#authentication">OAuth 2</a> (Scopes: write)
 </aside>
 <h1 id="mods">Mods</h1><h2 id="get-all-mods">Get All Mods</h2>
 <blockquote>
@@ -2545,7 +2561,7 @@ Accept: application/json
 
 <aside class="auth-notice">
 To perform this request, you must be authenticated via one of the following methods:
-<a href="#authentication">api_key</a>, <a href="#authentication">OAuth 2</a> (Scope: read)
+<a href="#authentication">api_key</a>, <a href="#authentication">OAuth 2</a> (Scopes: read)
 </aside>
 <h2 id="get-mod">Get Mod</h2>
 <blockquote>
@@ -2742,7 +2758,7 @@ Accept: application/json
 
 <aside class="auth-notice">
 To perform this request, you must be authenticated via one of the following methods:
-<a href="#authentication">api_key</a>, <a href="#authentication">OAuth 2</a> (Scope: read)
+<a href="#authentication">api_key</a>, <a href="#authentication">OAuth 2</a> (Scopes: read)
 </aside>
 <h2 id="add-mod">Add Mod</h2>
 <blockquote>
@@ -3057,7 +3073,7 @@ curl -X POST https://api.mod.io/v1/games/<span class="o">{</span>game-id<span cl
 
 <aside class="auth-notice">
 To perform this request, you must be authenticated via one of the following methods:
-<a href="#authentication">OAuth 2</a> (Scope: write)
+<a href="#authentication">OAuth 2</a> (Scopes: write)
 </aside>
 <h2 id="edit-mod">Edit Mod</h2>
 <blockquote>
@@ -3338,7 +3354,7 @@ Content-Type: application/x-www-form-urlencoded
 
 <aside class="auth-notice">
 To perform this request, you must be authenticated via one of the following methods:
-<a href="#authentication">OAuth 2</a> (Scope: write)
+<a href="#authentication">OAuth 2</a> (Scopes: write)
 </aside>
 <h2 id="delete-mod">Delete Mod</h2>
 <blockquote>
@@ -3452,7 +3468,7 @@ Content-Type: application/x-www-form-urlencoded
 
 <aside class="auth-notice">
 To perform this request, you must be authenticated via one of the following methods:
-<a href="#authentication">OAuth 2</a> (Scope: write)
+<a href="#authentication">OAuth 2</a> (Scopes: write)
 </aside>
 <h1 id="files">Files</h1><h2 id="get-all-modfiles">Get All Modfiles</h2>
 <blockquote>
@@ -3657,7 +3673,7 @@ Accept: application/json
 
 <aside class="auth-notice">
 To perform this request, you must be authenticated via one of the following methods:
-<a href="#authentication">api_key</a>, <a href="#authentication">OAuth 2</a> (Scope: read)
+<a href="#authentication">api_key</a>, <a href="#authentication">OAuth 2</a> (Scopes: read)
 </aside>
 <h2 id="get-modfile">Get Modfile</h2>
 <blockquote>
@@ -3780,7 +3796,7 @@ Accept: application/json
 
 <aside class="auth-notice">
 To perform this request, you must be authenticated via one of the following methods:
-<a href="#authentication">api_key</a>, <a href="#authentication">OAuth 2</a> (Scope: read)
+<a href="#authentication">api_key</a>, <a href="#authentication">OAuth 2</a> (Scopes: read)
 </aside>
 <h2 id="add-modfile">Add Modfile</h2>
 <blockquote>
@@ -3993,7 +4009,7 @@ curl -X POST https://api.mod.io/v1/games/<span class="o">{</span>game-id<span cl
 
 <aside class="auth-notice">
 To perform this request, you must be authenticated via one of the following methods:
-<a href="#authentication">OAuth 2</a> (Scope: write)
+<a href="#authentication">OAuth 2</a> (Scopes: write)
 </aside>
 <h2 id="edit-modfile">Edit Modfile</h2>
 <blockquote>
@@ -4164,7 +4180,7 @@ Content-Type: application/x-www-form-urlencoded
 
 <aside class="auth-notice">
 To perform this request, you must be authenticated via one of the following methods:
-<a href="#authentication">OAuth 2</a> (Scope: write)
+<a href="#authentication">OAuth 2</a> (Scopes: write)
 </aside>
 <h1 id="media">Media</h1><h2 id="add-game-media">Add Game Media</h2>
 <blockquote>
@@ -4320,7 +4336,7 @@ curl -X POST https://api.mod.io/v1/games/<span class="o">{</span>game-id<span cl
 
 <aside class="auth-notice">
 To perform this request, you must be authenticated via one of the following methods:
-<a href="#authentication">OAuth 2</a> (Scope: write)
+<a href="#authentication">OAuth 2</a> (Scopes: write)
 </aside>
 <h2 id="add-mod-media">Add Mod Media</h2>
 <blockquote>
@@ -4509,7 +4525,7 @@ curl -X POST https://api.mod.io/v1/games/<span class="o">{</span>game-id<span cl
 
 <aside class="auth-notice">
 To perform this request, you must be authenticated via one of the following methods:
-<a href="#authentication">OAuth 2</a> (Scope: write)
+<a href="#authentication">OAuth 2</a> (Scopes: write)
 </aside>
 <h2 id="delete-mod-media">Delete Mod Media</h2>
 <blockquote>
@@ -4662,7 +4678,7 @@ curl -X DELETE https://api.mod.io/v1/games/<span class="o">{</span>game-id<span 
 
 <aside class="auth-notice">
 To perform this request, you must be authenticated via one of the following methods:
-<a href="#authentication">OAuth 2</a> (Scope: write)
+<a href="#authentication">OAuth 2</a> (Scopes: write)
 </aside>
 <h1 id="subscribe">Subscribe</h1><h2 id="subscribe-to-mod">Subscribe To Mod</h2>
 <blockquote>
@@ -4870,7 +4886,7 @@ Content-Type: application/x-www-form-urlencoded
 
 <aside class="auth-notice">
 To perform this request, you must be authenticated via one of the following methods:
-<a href="#authentication">OAuth 2</a> (Scope: write)
+<a href="#authentication">OAuth 2</a> (Scopes: write)
 </aside>
 <h2 id="unsubscribe-to-mod">Unsubscribe To Mod</h2>
 <blockquote>
@@ -4984,7 +5000,7 @@ Content-Type: application/x-www-form-urlencoded
 
 <aside class="auth-notice">
 To perform this request, you must be authenticated via one of the following methods:
-<a href="#authentication">OAuth 2</a> (Scope: write)
+<a href="#authentication">OAuth 2</a> (Scopes: write)
 </aside>
 <h1 id="events">Events</h1><h2 id="get-mod-events">Get Mod Events</h2>
 <blockquote>
@@ -5140,7 +5156,7 @@ Accept: application/json
 
 <aside class="auth-notice">
 To perform this request, you must be authenticated via one of the following methods:
-<a href="#authentication">api_key</a>, <a href="#authentication">OAuth 2</a> (Scope: read)
+<a href="#authentication">api_key</a>, <a href="#authentication">OAuth 2</a> (Scopes: read)
 </aside>
 <h2 id="get-all-mod-events">Get All Mod Events</h2>
 <blockquote>
@@ -5308,7 +5324,7 @@ Accept: application/json
 
 <aside class="auth-notice">
 To perform this request, you must be authenticated via one of the following methods:
-<a href="#authentication">api_key</a>, <a href="#authentication">OAuth 2</a> (Scope: read)
+<a href="#authentication">api_key</a>, <a href="#authentication">OAuth 2</a> (Scopes: read)
 </aside>
 <h1 id="tags">Tags</h1><h2 id="get-mod-tags">Get Mod Tags</h2>
 <blockquote>
@@ -5446,7 +5462,7 @@ Accept: application/json
 
 <aside class="auth-notice">
 To perform this request, you must be authenticated via one of the following methods:
-<a href="#authentication">api_key</a>, <a href="#authentication">OAuth 2</a> (Scope: read)
+<a href="#authentication">api_key</a>, <a href="#authentication">OAuth 2</a> (Scopes: read)
 </aside>
 <h2 id="add-mod-tag">Add Mod Tag</h2>
 <blockquote>
@@ -5584,7 +5600,7 @@ curl -X POST https://api.mod.io/v1/games/<span class="o">{</span>game-id<span cl
 
 <aside class="auth-notice">
 To perform this request, you must be authenticated via one of the following methods:
-<a href="#authentication">OAuth 2</a> (Scope: write)
+<a href="#authentication">OAuth 2</a> (Scopes: write)
 </aside>
 <h2 id="delete-mod-tag">Delete Mod Tag</h2>
 <blockquote>
@@ -5719,7 +5735,7 @@ curl -X DELETE https://api.mod.io/v1/games/<span class="o">{</span>game-id<span 
 
 <aside class="auth-notice">
 To perform this request, you must be authenticated via one of the following methods:
-<a href="#authentication">OAuth 2</a> (Scope: write)
+<a href="#authentication">OAuth 2</a> (Scopes: write)
 </aside>
 <h2 id="get-game-tag-options">Get Game Tag Options</h2>
 <blockquote>
@@ -5839,7 +5855,7 @@ Accept: application/json
 
 <aside class="auth-notice">
 To perform this request, you must be authenticated via one of the following methods:
-<a href="#authentication">api_key</a>, <a href="#authentication">OAuth 2</a> (Scope: read)
+<a href="#authentication">api_key</a>, <a href="#authentication">OAuth 2</a> (Scopes: read)
 </aside>
 <h2 id="add-game-tag-option">Add Game Tag Option</h2>
 <blockquote>
@@ -6005,7 +6021,7 @@ curl -X POST https://api.mod.io/v1/games/<span class="o">{</span>game-id<span cl
 
 <aside class="auth-notice">
 To perform this request, you must be authenticated via one of the following methods:
-<a href="#authentication">OAuth 2</a> (Scope: write)
+<a href="#authentication">OAuth 2</a> (Scopes: write)
 </aside>
 <h2 id="delete-game-tag-option">Delete Game Tag Option</h2>
 <blockquote>
@@ -6150,7 +6166,7 @@ curl -X DELETE https://api.mod.io/v1/games/<span class="o">{</span>game-id<span 
 
 <aside class="auth-notice">
 To perform this request, you must be authenticated via one of the following methods:
-<a href="#authentication">OAuth 2</a> (Scope: write)
+<a href="#authentication">OAuth 2</a> (Scopes: write)
 </aside>
 <h1 id="ratings">Ratings</h1><h2 id="add-mod-rating">Add Mod Rating</h2>
 <blockquote>
@@ -6290,7 +6306,7 @@ curl -X POST https://api.mod.io/v1/games/<span class="o">{</span>game-id<span cl
 
 <aside class="auth-notice">
 To perform this request, you must be authenticated via one of the following methods:
-<a href="#authentication">OAuth 2</a> (Scope: write)
+<a href="#authentication">OAuth 2</a> (Scopes: write)
 </aside>
 <h1 id="metadata">Metadata</h1><h2 id="get-all-mod-kvp-metadata">Get All Mod KVP Metadata</h2>
 <blockquote>
@@ -6406,7 +6422,7 @@ Accept: application/json
 
 <aside class="auth-notice">
 To perform this request, you must be authenticated via one of the following methods:
-<a href="#authentication">api_key</a>, <a href="#authentication">OAuth 2</a> (Scope: read)
+<a href="#authentication">api_key</a>, <a href="#authentication">OAuth 2</a> (Scopes: read)
 </aside>
 <h2 id="add-mod-kvp-metadata">Add Mod KVP Metadata</h2>
 <blockquote>
@@ -6544,7 +6560,7 @@ curl -X POST https://api.mod.io/v1/games/<span class="o">{</span>game-id<span cl
 
 <aside class="auth-notice">
 To perform this request, you must be authenticated via one of the following methods:
-<a href="#authentication">OAuth 2</a> (Scope: write)
+<a href="#authentication">OAuth 2</a> (Scopes: write)
 </aside>
 <h2 id="delete-mod-kvp-metadata">Delete Mod KVP Metadata</h2>
 <blockquote>
@@ -6679,7 +6695,7 @@ curl -X DELETE https://api.mod.io/v1/games/<span class="o">{</span>game-id<span 
 
 <aside class="auth-notice">
 To perform this request, you must be authenticated via one of the following methods:
-<a href="#authentication">OAuth 2</a> (Scope: write)
+<a href="#authentication">OAuth 2</a> (Scopes: write)
 </aside>
 <h1 id="dependencies">Dependencies</h1><h2 id="get-all-mod-dependencies">Get All Mod Dependencies</h2>
 <blockquote>
@@ -6799,7 +6815,7 @@ Accept: application/json
 
 <aside class="auth-notice">
 To perform this request, you must be authenticated via one of the following methods:
-<a href="#authentication">api_key</a>, <a href="#authentication">OAuth 2</a> (Scope: read)
+<a href="#authentication">api_key</a>, <a href="#authentication">OAuth 2</a> (Scopes: read)
 </aside>
 <h2 id="add-mod-dependencies">Add Mod Dependencies</h2>
 <blockquote>
@@ -6939,7 +6955,7 @@ curl -X POST https://api.mod.io/v1/games/<span class="o">{</span>game-id<span cl
 
 <aside class="auth-notice">
 To perform this request, you must be authenticated via one of the following methods:
-<a href="#authentication">OAuth 2</a> (Scope: write)
+<a href="#authentication">OAuth 2</a> (Scopes: write)
 </aside>
 <h2 id="delete-mod-dependencies">Delete Mod Dependencies</h2>
 <blockquote>
@@ -7074,7 +7090,7 @@ curl -X DELETE https://api.mod.io/v1/games/<span class="o">{</span>game-id<span 
 
 <aside class="auth-notice">
 To perform this request, you must be authenticated via one of the following methods:
-<a href="#authentication">OAuth 2</a> (Scope: write)
+<a href="#authentication">OAuth 2</a> (Scopes: write)
 </aside>
 <h1 id="teams">Teams</h1><h2 id="get-all-mod-team-members">Get All Mod Team Members</h2>
 <blockquote>
@@ -7256,7 +7272,7 @@ Accept: application/json
 
 <aside class="auth-notice">
 To perform this request, you must be authenticated via one of the following methods:
-<a href="#authentication">api_key</a>, <a href="#authentication">OAuth 2</a> (Scope: read)
+<a href="#authentication">api_key</a>, <a href="#authentication">OAuth 2</a> (Scopes: read)
 </aside>
 <h2 id="add-mod-team-member">Add Mod Team Member</h2>
 <blockquote>
@@ -7412,7 +7428,7 @@ curl -X POST https://api.mod.io/v1/games/<span class="o">{</span>game-id<span cl
 
 <aside class="auth-notice">
 To perform this request, you must be authenticated via one of the following methods:
-<a href="#authentication">OAuth 2</a> (Scope: write)
+<a href="#authentication">OAuth 2</a> (Scopes: write)
 </aside>
 <h2 id="update-mod-team-member">Update Mod Team Member</h2>
 <blockquote>
@@ -7556,7 +7572,7 @@ Content-Type: application/x-www-form-urlencoded
 
 <aside class="auth-notice">
 To perform this request, you must be authenticated via one of the following methods:
-<a href="#authentication">OAuth 2</a> (Scope: write)
+<a href="#authentication">OAuth 2</a> (Scopes: write)
 </aside>
 <h2 id="delete-mod-team-member">Delete Mod Team Member</h2>
 <blockquote>
@@ -7670,7 +7686,7 @@ Content-Type: application/x-www-form-urlencoded
 
 <aside class="auth-notice">
 To perform this request, you must be authenticated via one of the following methods:
-<a href="#authentication">OAuth 2</a> (Scope: write)
+<a href="#authentication">OAuth 2</a> (Scopes: write)
 </aside>
 <h1 id="comments">Comments</h1><h2 id="get-all-mod-comments">Get All Mod Comments</h2>
 <blockquote>
@@ -7859,7 +7875,7 @@ Accept: application/json
 
 <aside class="auth-notice">
 To perform this request, you must be authenticated via one of the following methods:
-<a href="#authentication">api_key</a>, <a href="#authentication">OAuth 2</a> (Scope: read)
+<a href="#authentication">api_key</a>, <a href="#authentication">OAuth 2</a> (Scopes: read)
 </aside>
 <h2 id="delete-mod-comment">Delete Mod Comment</h2>
 <blockquote>
@@ -7973,7 +7989,7 @@ Content-Type: application/x-www-form-urlencoded
 
 <aside class="auth-notice">
 To perform this request, you must be authenticated via one of the following methods:
-<a href="#authentication">OAuth 2</a> (Scope: write)
+<a href="#authentication">OAuth 2</a> (Scopes: write)
 </aside>
 <h1 id="users">Users</h1><h2 id="get-resource-owner">Get Resource Owner</h2>
 <blockquote>
@@ -8129,7 +8145,7 @@ Content-Type: application/x-www-form-urlencoded
 
 <aside class="auth-notice">
 To perform this request, you must be authenticated via one of the following methods:
-<a href="#authentication">api_key</a>, <a href="#authentication">OAuth 2</a> (Scope: read)
+<a href="#authentication">api_key</a>, <a href="#authentication">OAuth 2</a> (Scopes: read)
 </aside>
 <h2 id="get-all-users">Get All Users</h2>
 <blockquote>
@@ -8298,7 +8314,7 @@ Accept: application/json
 
 <aside class="auth-notice">
 To perform this request, you must be authenticated via one of the following methods:
-<a href="#authentication">api_key</a>, <a href="#authentication">OAuth 2</a> (Scope: read)
+<a href="#authentication">api_key</a>, <a href="#authentication">OAuth 2</a> (Scopes: read)
 </aside>
 <h2 id="get-user">Get User</h2>
 <blockquote>
@@ -8415,7 +8431,7 @@ Accept: application/json
 
 <aside class="auth-notice">
 To perform this request, you must be authenticated via one of the following methods:
-<a href="#authentication">api_key</a>, <a href="#authentication">OAuth 2</a> (Scope: read)
+<a href="#authentication">api_key</a>, <a href="#authentication">OAuth 2</a> (Scopes: read)
 </aside>
 <h1 id="reports">Reports</h1><h2 id="submit-report">Submit Report</h2>
 <blockquote>
@@ -8586,7 +8602,7 @@ curl -X POST https://api.mod.io/v1/report <span class="se">\</span>
 
 <aside class="auth-notice">
 To perform this request, you must be authenticated via one of the following methods:
-<a href="#authentication">OAuth 2</a> (Scope: write)
+<a href="#authentication">OAuth 2</a> (Scopes: write)
 </aside>
 <h1 id="me">Me</h1><h2 id="get-authenticated-user">Get Authenticated User</h2>
 <blockquote>
@@ -8709,7 +8725,7 @@ Authorization: Bearer {access-token}
 
 <aside class="auth-notice">
 To perform this request, you must be authenticated via one of the following methods:
-<a href="#authentication">OAuth 2</a> (Scope: read)
+<a href="#authentication">OAuth 2</a> (Scopes: read)
 </aside>
 <h2 id="get-user-subscriptions">Get User Subscriptions</h2>
 <blockquote>
@@ -9020,7 +9036,7 @@ Authorization: Bearer {access-token}
 
 <aside class="auth-notice">
 To perform this request, you must be authenticated via one of the following methods:
-<a href="#authentication">OAuth 2</a> (Scope: read)
+<a href="#authentication">OAuth 2</a> (Scopes: read)
 </aside>
 <h2 id="get-user-events">Get User Events</h2>
 <blockquote>
@@ -9176,7 +9192,7 @@ Accept: application/json
 
 <aside class="auth-notice">
 To perform this request, you must be authenticated via one of the following methods:
-<a href="#authentication">api_key</a>, <a href="#authentication">OAuth 2</a> (Scope: read)
+<a href="#authentication">api_key</a>, <a href="#authentication">OAuth 2</a> (Scopes: read)
 </aside>
 <h2 id="get-user-games">Get User Games</h2>
 <blockquote>
@@ -9455,7 +9471,7 @@ Authorization: Bearer {access-token}
 
 <aside class="auth-notice">
 To perform this request, you must be authenticated via one of the following methods:
-<a href="#authentication">OAuth 2</a> (Scope: read)
+<a href="#authentication">OAuth 2</a> (Scopes: read)
 </aside>
 <h2 id="get-user-mods">Get User Mods</h2>
 <blockquote>
@@ -9786,7 +9802,7 @@ Authorization: Bearer {access-token}
 
 <aside class="auth-notice">
 To perform this request, you must be authenticated via one of the following methods:
-<a href="#authentication">OAuth 2</a> (Scope: read)
+<a href="#authentication">OAuth 2</a> (Scopes: read)
 </aside>
 <h2 id="get-user-modfiles">Get User Modfiles</h2>
 <blockquote>
@@ -9997,7 +10013,7 @@ Authorization: Bearer {access-token}
 
 <aside class="auth-notice">
 To perform this request, you must be authenticated via one of the following methods:
-<a href="#authentication">OAuth 2</a> (Scope: read)
+<a href="#authentication">OAuth 2</a> (Scopes: read)
 </aside>
 <h1 id="response-schemas">Response Schemas</h1><h2 id="message-object">Message Object</h2>
 <p><a name="schemamessage_object"></a></p>
