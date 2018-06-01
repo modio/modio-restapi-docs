@@ -366,6 +366,27 @@ By default mods connected to a game will not be returned if they are hidden or n
 
 As a mod admin, you can modify `visible` to show or hide your mod from API requests. You _cannot_ modify the `status` of your mod. When a mod is hidden _you_ can still view it provided you are the mods admin or subscribed to the mod. You can call [Get User Mods endpoint](#get-user-mods) to retrieve all mods associated with the authenticated user regardless of their `status` and `visible`.
 
+```
+// Valid status & visibility filters
+
+status=1
+status-in=0,1
+visible=1 
+visible-in=0,1
+
+// Game Admin Only status & visibility filters
+
+status-not-in=1,2
+status-gt=1
+visible-not-in=1
+visible-st=1
+
+```
+
+### Important Note When Filtering
+
+Due to the requirement of certain `status` & `visible` values only being available to administrators. We have restricted the amount of [filters](#filtering) available for _non-game admins_ and thus for both of these fields _only_ direct matches `=` and `-in` are permitted. Attempting to apply game admin filters without the required permissions will result in a `403 Forbidden` [error response](#error-object).
+
 ## Pagination
 
 When requesting data from endpoints that contain more than one object, you can supply an `_offset` and `_limit` to paginate through the results. Think of it as a page 1, 2, 3... system but you control the number of results per page, and the page to start from. Appended to each response will be the pagination metadata:
