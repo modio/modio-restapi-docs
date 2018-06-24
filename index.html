@@ -3746,7 +3746,7 @@ Accept: application/json
 </code></pre>
 <p><span class="httpmethod GET">GET</span> <span class="endpointheading">/games/{game-id}/mods/{mod-id}/files/{file-id}</span></p>
 
-<p>Get a file. Successful request will return a single <a href="#modfile_object">Modfile Object</a>.<br><br><strong>NOTE:</strong> If the <a href="#edit-game">game</a> requires mod downloads to be initiated via the API, the <code>binary_url</code> returned will contain a verification hash. This hash must be supplied to get the modfile, and will expire after a certain period of time. Saving and reusing the <code>binary_url</code> won't work in this situation given it's dynamic nature.</p>
+<p>Get a file. Successful request will return a single <a href="#modfile-object">Modfile Object</a>.<br><br><strong>NOTE:</strong> If the <a href="#edit-game">game</a> requires mod downloads to be initiated via the API, the <code>binary_url</code> returned will contain a verification hash. This hash must be supplied to get the modfile, and will expire after a certain period of time. Saving and reusing the <code>binary_url</code> won't work in this situation given it's dynamic nature.</p>
 
 <blockquote>
 <p>Example response</p>
