@@ -1836,19 +1836,19 @@ System.out.println(response.toString());
 
 Add a mod. Successful request will return the newly created [Mod Object](#mod-object). By publishing your mod on [mod.io](https://mod.io), you are agreeing to the [mod.io distribution agreement](https://mod.io/distribution/widget).<br><br>__NOTE:__ By default new mods are 'not accepted' and 'public'. They can only be 'accepted' and made available via the API once a [Mod File](#add-modfile) has been uploaded. [Media](#add-mod-media), [Metadata Key Value Pairs](#add-mod-kvp-metadata) and [Dependencies](#add-mod-dependencies) can also be added after a mod profile is created.
 
-     Parameter|Type|Required|Description
-     ---|---|---|---|
-     visible|integer||Visibility of the mod (best if this field is controlled by mod admins, see [status and visibility](#status-amp-visibility) for details):<br><br>__0__ = Hidden<br>__1__ = Public _(default)_
-     logo|file|true|Image file which will represent your mods logo. Must be gif, jpg or png format and cannot exceed 8MB in filesize. Dimensions must be at least 640x360 and we recommended you supply a high resolution image with a 16 / 9 ratio. mod.io will use this image to make three thumbnails for the dimensions 320x180, 640x360 and 1280x720.
-     name|string|true|Name of your mod.
-     name_id|string||Path for the mod on mod.io. For example: https://gamename.mod.io/__mod-name-id-here__. If no `name_id` is specified the `name` will be used. For example: _'Stellaris Shader Mod'_ will become _'stellaris-shader-mod'_. Cannot exceed 80 characters.
-     summary|string|true|Summary for your mod, giving a brief overview of what it's about. Cannot exceed 250 characters.
-     description|string||Detailed description for your mod, which can include details such as 'About', 'Features', 'Install Instructions', 'FAQ', etc. HTML supported and encouraged.
-     homepage_url|string||Official homepage for your mod. Must be a valid URL.
-     stock|integer||Maximium number of subscribers for this mod. A value of 0 disables this limit.
-     maturity_option|integer||Choose if this mod contains any of the following mature content. Note: The value of this field will default to 0 unless the parent game allows you to flag mature content (see `maturity_options` field in [Game Object](#game-object)). <br><br>__0__ = None set _(default)_<br>__1__ = Alcohol<br>__2__ = Drugs<br>__4__ = Violence<br>__8__ = Explicit<br>__?__ = Add the options you want together, to enable multiple options (see [BITWISE fields](#bitwise-and-bitwise-and))
-     metadata_blob|string||Metadata stored by the game developer which may include properties as to how the item works, or other information you need to display. Metadata can also be stored as searchable [key value pairs](#metadata), and to individual [mod files](#get-all-modfiles).
-     tags|string[]||An array of strings that represent what the mod has been tagged as. Only tags that are supported by the parent game can be applied. To determine what tags are eligible, see the tags values within `tag_options` column on the parent [Game Object](#game-object).
+    Parameter|Type|Required|Description
+    ---|---|---|---|
+    visible|integer||Visibility of the mod (best if this field is controlled by mod admins, see [status and visibility](#status-amp-visibility) for details):<br><br>__0__ = Hidden<br>__1__ = Public _(default)_
+    logo|file|true|Image file which will represent your mods logo. Must be gif, jpg or png format and cannot exceed 8MB in filesize. Dimensions must be at least 640x360 and we recommended you supply a high resolution image with a 16 / 9 ratio. mod.io will use this image to make three thumbnails for the dimensions 320x180, 640x360 and 1280x720.
+    name|string|true|Name of your mod.
+    name_id|string||Path for the mod on mod.io. For example: https://gamename.mod.io/__mod-name-id-here__. If no `name_id` is specified the `name` will be used. For example: _'Stellaris Shader Mod'_ will become _'stellaris-shader-mod'_. Cannot exceed 80 characters.
+    summary|string|true|Summary for your mod, giving a brief overview of what it's about. Cannot exceed 250 characters.
+    description|string||Detailed description for your mod, which can include details such as 'About', 'Features', 'Install Instructions', 'FAQ', etc. HTML supported and encouraged.
+    homepage_url|string||Official homepage for your mod. Must be a valid URL.
+    stock|integer||Maximium number of subscribers for this mod. A value of 0 disables this limit.
+    maturity_option|integer||Choose if this mod contains any of the following mature content. Note: The value of this field will default to 0 unless the parent game allows you to flag mature content (see `maturity_options` field in [Game Object](#game-object)). <br><br>__0__ = None set _(default)_<br>__1__ = Alcohol<br>__2__ = Drugs<br>__4__ = Violence<br>__8__ = Explicit<br>__?__ = Add the options you want together, to enable multiple options (see [BITWISE fields](#bitwise-and-bitwise-and))
+    metadata_blob|string||Metadata stored by the game developer which may include properties as to how the item works, or other information you need to display. Metadata can also be stored as searchable [key value pairs](#metadata), and to individual [mod files](#get-all-modfiles).
+    tags|string[]||An array of strings that represent what the mod has been tagged as. Only tags that are supported by the parent game can be applied. To determine what tags are eligible, see the tags values within `tag_options` column on the parent [Game Object](#game-object).
 
 
 > Example response
@@ -2066,18 +2066,18 @@ System.out.println(response.toString());
 
 Edit details for a mod. If you want to update the `logo` or media associated with this mod, you need to use the [Add Mod Media](#add-mod-media) endpoint. The same applies to [Mod Files](#add-modfile), [Metadata Key Value Pairs](#add-mod-kvp-metadata) and [Dependencies](#add-mod-dependencies) which are all managed via other endpoints. Successful request will return the updated [Mod Object](#mod-object).
 
-     Parameter|Type|Required|Description
-     ---|---|---|---|
-     status|integer||Status of a mod. The mod must have at least one uploaded `modfile` to be 'accepted' or 'archived' (best if this field is controlled by game admins, see [status and visibility](#status-amp-visibility) for details):<br><br>__0__ = Not accepted<br>__1__ = Accepted (game admins only)<br>__2__ = Archived (out of date or incompatible, game admins only)<br>__3__ = Deleted (use the [delete mod](#delete-mod) endpoint to set this status)
-     visible|integer||Visibility of the mod (best if this field is controlled by mod admins, see [status and visibility](#status-amp-visibility) for details):<br><br>__0__ = Hidden<br>__1__ = Public
-     name|string||Name of your mod. Cannot exceed 80 characters.
-     name_id|string||Path for the mod on mod.io. For example: https://gamename.mod.io/__mod-name-id-here__. Cannot exceed 80 characters.
-     summary|string||Summary for your mod, giving a brief overview of what it's about. Cannot exceed 250 characters.
-     description|string||Detailed description for your mod, which can include details such as 'About', 'Features', 'Install Instructions', 'FAQ', etc. HTML supported and encouraged.
-     homepage_url|string||Official homepage for your mod. Must be a valid URL.
-     stock|integer||Maximium number of subscribers for this mod. A value of 0 disables this limit.
-     maturity_option|integer||Choose if this mod contains any of the following mature content. Note: The value of this field will default to 0 unless the parent game allows you to flag mature content (see `maturity_options` field in [Game Object](#game-object)). <br><br>__0__ = None set _(default)_<br>__1__ = Alcohol<br>__2__ = Drugs<br>__4__ = Violence<br>__8__ = Explicit<br>__?__ = Add the options you want together, to enable multiple options (see [BITWISE fields](#bitwise-and-bitwise-and))
-     metadata_blob|string||Metadata stored by the game developer which may include properties as to how the item works, or other information you need to display. Metadata can also be stored as searchable [key value pairs](#metadata), and to individual [mod files](#get-all-modfiles).
+    Parameter|Type|Required|Description
+    ---|---|---|---|
+    status|integer||Status of a mod. The mod must have at least one uploaded `modfile` to be 'accepted' or 'archived' (best if this field is controlled by game admins, see [status and visibility](#status-amp-visibility) for details):<br><br>__0__ = Not accepted<br>__1__ = Accepted (game admins only)<br>__2__ = Archived (out of date or incompatible, game admins only)<br>__3__ = Deleted (use the [delete mod](#delete-mod) endpoint to set this status)
+    visible|integer||Visibility of the mod (best if this field is controlled by mod admins, see [status and visibility](#status-amp-visibility) for details):<br><br>__0__ = Hidden<br>__1__ = Public
+    name|string||Name of your mod. Cannot exceed 80 characters.
+    name_id|string||Path for the mod on mod.io. For example: https://gamename.mod.io/__mod-name-id-here__. Cannot exceed 80 characters.
+    summary|string||Summary for your mod, giving a brief overview of what it's about. Cannot exceed 250 characters.
+    description|string||Detailed description for your mod, which can include details such as 'About', 'Features', 'Install Instructions', 'FAQ', etc. HTML supported and encouraged.
+    homepage_url|string||Official homepage for your mod. Must be a valid URL.
+    stock|integer||Maximium number of subscribers for this mod. A value of 0 disables this limit.
+    maturity_option|integer||Choose if this mod contains any of the following mature content. Note: The value of this field will default to 0 unless the parent game allows you to flag mature content (see `maturity_options` field in [Game Object](#game-object)). <br><br>__0__ = None set _(default)_<br>__1__ = Alcohol<br>__2__ = Drugs<br>__4__ = Violence<br>__8__ = Explicit<br>__?__ = Add the options you want together, to enable multiple options (see [BITWISE fields](#bitwise-and-bitwise-and))
+    metadata_blob|string||Metadata stored by the game developer which may include properties as to how the item works, or other information you need to display. Metadata can also be stored as searchable [key value pairs](#metadata), and to individual [mod files](#get-all-modfiles).
 
 
 > Example response
@@ -2544,7 +2544,7 @@ System.out.println(response.toString());
 ```
 `GET /games/{game-id}/mods/{mod-id}/files/{file-id}`
 
-Get a file. Successful request will return a single [Modfile Object](#modfile_object).<br><br>__NOTE:__ If the [game](#edit-game) requires mod downloads to be initiated via the API, the `binary_url` returned will contain a verification hash. This hash must be supplied to get the modfile, and will expire after a certain period of time. Saving and reusing the `binary_url` won't work in this situation given it's dynamic nature.
+Get a file. Successful request will return a single [Modfile Object](#modfile-object).<br><br>__NOTE:__ If the [game](#edit-game) requires mod downloads to be initiated via the API, the `binary_url` returned will contain a verification hash. This hash must be supplied to get the modfile, and will expire after a certain period of time. Saving and reusing the `binary_url` won't work in this situation given it's dynamic nature.
 
 
 > Example response
@@ -3131,14 +3131,14 @@ System.out.println(response.toString());
 
 This endpoint is very flexible and will add any images posted to the mods gallery regardless of their body name providing they are a valid image. The request `Content-Type` header __must__ be `multipart/form-data` to submit image files. Successful request will return a [Message Object](#message-object).
 
-     __NOTE:__ You can also add media to [your mods profile](https://mod.io/mods) on the mod.io website. This is the easiest way.
+    __NOTE:__ You can also add media to [your mods profile](https://mod.io/mods) on the mod.io website. This is the easiest way.
 
-     Parameter|Type|Required|Description
-     ---|---|---|---|
-     logo|file||Image file which will represent your mods logo. Must be gif, jpg or png format and cannot exceed 8MB in filesize. Dimensions must be at least 640x360 and we recommended you supply a high resolution image with a 16 / 9 ratio. mod.io will use this logo to create three thumbnails with the dimensions of 320x180, 640x360 and 1280x720.
-     images|zip||Zip archive of images to upload. Only valid gif, jpg and png images in the zip file will be processed. The filename __must be images.zip__ all other zips will be ignored. Alternatively you can POST one or more images to this endpoint and they will be detected and added to the mods gallery.
-     youtube|string[]||Full Youtube link(s) you want to add - example 'https://www.youtube.com/watch?v=IGVZOLV9SPo'
-     sketchfab|string[]||Full Sketchfab link(s) you want to add - example 'https://sketchfab.com/models/71f04e390ff54e5f8d9a51b4e1caab7e'
+    Parameter|Type|Required|Description
+    ---|---|---|---|
+    logo|file||Image file which will represent your mods logo. Must be gif, jpg or png format and cannot exceed 8MB in filesize. Dimensions must be at least 640x360 and we recommended you supply a high resolution image with a 16 / 9 ratio. mod.io will use this logo to create three thumbnails with the dimensions of 320x180, 640x360 and 1280x720.
+    images|zip||Zip archive of images to upload. Only valid gif, jpg and png images in the zip file will be processed. The filename __must be images.zip__ all other zips will be ignored. Alternatively you can POST one or more images to this endpoint and they will be detected and added to the mods gallery.
+    youtube|string[]||Full Youtube link(s) you want to add - example 'https://www.youtube.com/watch?v=IGVZOLV9SPo'
+    sketchfab|string[]||Full Sketchfab link(s) you want to add - example 'https://sketchfab.com/models/71f04e390ff54e5f8d9a51b4e1caab7e'
 
 
 > Example response
@@ -3271,13 +3271,13 @@ System.out.println(response.toString());
 
 Delete images, sketchfab or youtube links from a mod profile. Successful request will return `204 No Content`.
 
-     __NOTE:__ You can also delete media from [your mods profile](https://mod.io/mods) on the mod.io website. This is the easiest way.
+    __NOTE:__ You can also delete media from [your mods profile](https://mod.io/mods) on the mod.io website. This is the easiest way.
 
-     Parameter|Type|Required|Description
-     ---|---|---|---|
-     images|string[]||Filename's of the image(s) you want to delete - example 'gameplay2.jpg'.
-     youtube|string[]||Full Youtube link(s) you want to delete - example 'https://www.youtube.com/watch?v=IGVZOLV9SPo'.
-     sketchfab|string[]||Full Sketchfab link(s) you want to delete - example 'https://sketchfab.com/models/71f04e390ff54e5f8d9a51b4e1caab7e'.
+    Parameter|Type|Required|Description
+    ---|---|---|---|
+    images|string[]||Filename's of the image(s) you want to delete - example 'gameplay2.jpg'.
+    youtube|string[]||Full Youtube link(s) you want to delete - example 'https://www.youtube.com/watch?v=IGVZOLV9SPo'.
+    sketchfab|string[]||Full Sketchfab link(s) you want to delete - example 'https://sketchfab.com/models/71f04e390ff54e5f8d9a51b4e1caab7e'.
 
 
 > Example response
@@ -3714,13 +3714,13 @@ System.out.println(response.toString());
 
 Get the event log for a mod, showing changes made sorted by latest event first. Successful request will return an array of [Event Objects](#get-mod-events-2). We recommended reading the [filtering documentation](#filtering) to return only the records you want.
 
-     Filter|Type|Description
-     ---|---|---
-     id|integer|Unique id of the event object.
-     mod_id|integer|Unique id of the parent mod.
-     user_id|integer|Unique id of the user who performed the action.
-     date_added|integer|Unix timestamp of date mod was updated.
-     event_type|string|Type of change that occurred:<br><br>__MODFILE_CHANGED__ = Primary file changed, the mod should be updated<br>__MOD_AVAILABLE__ = Mod is marked as accepted and public<br>__MOD_UNAVAILABLE__ = Mod is marked as not accepted, deleted or hidden<br>__MOD_EDITED__ = The mod was updated (triggered when any column value changes)<br>__MOD_DELETED__ = The mod has been permanently erased. This is an orphan record, looking up this id will return no data<br>__MOD_TEAM_CHANGED__ = A user has joined or left the mod team.
+    Filter|Type|Description
+    ---|---|---
+    id|integer|Unique id of the event object.
+    mod_id|integer|Unique id of the parent mod.
+    user_id|integer|Unique id of the user who performed the action.
+    date_added|integer|Unix timestamp of date mod was updated.
+    event_type|string|Type of change that occurred:<br><br>__MODFILE_CHANGED__ = Primary file changed, the mod should be updated<br>__MOD_AVAILABLE__ = Mod is marked as accepted and public<br>__MOD_UNAVAILABLE__ = Mod is marked as not accepted, deleted or hidden<br>__MOD_EDITED__ = The mod was updated (triggered when any column value changes)<br>__MOD_DELETED__ = The mod has been permanently erased. This is an orphan record, looking up this id will return no data<br>__MOD_TEAM_CHANGED__ = A user has joined or left the mod team.
 
 
 > Example response
@@ -3843,15 +3843,15 @@ System.out.println(response.toString());
 
 Get all mods events for the corresponding game sorted by latest event first. Successful request will return an array of [Event Objects](#get-mod-events-2).<br><br>__NOTE:__ We recommend you poll this endpoint to keep mods up-to-date. If polling this endpoint for updates you should store the `id` or `date_updated` of the latest event, and on subsequent requests use that information [in the filter](#filtering), to return only newer events to process.
 
-     Filter|Type|Description
-     ---|---|---
-     id|integer|Unique id of the event object.
-     mod_id|integer|Unique id of the parent mod.
-     user_id|integer|Unique id of the user who performed the action.
-     date_added|integer|Unix timestamp of date mod was added.
-     event_type|string|Type of change that occurred:<br><br>__MODFILE_CHANGED__ = Primary file changed<br>__MOD_AVAILABLE__ = Mod is marked as accepted and public<br>__MOD_UNAVAILABLE__ = Mod is marked as not accepted, deleted or hidden<br>__MOD_EDITED__ = The mod was updated (triggered when any column value changes)<br>__MOD_DELETED__ = The mod has been permanently erased. This is an orphan record, looking up this id will return no data<br>__MOD_TEAM_CHANGED__ = A user has joined or left the mod team
-     latest|boolean|_Default value is true_. Returns only the latest unique events, which is useful for checking if the primary `modfile` has changed.
-     subscribed|boolean|_Default value is false_. Returns only events connected to mods the __authenticated user__ is subscribed to, which is useful for keeping the users mods up-to-date.
+    Filter|Type|Description
+    ---|---|---
+    id|integer|Unique id of the event object.
+    mod_id|integer|Unique id of the parent mod.
+    user_id|integer|Unique id of the user who performed the action.
+    date_added|integer|Unix timestamp of date mod was added.
+    event_type|string|Type of change that occurred:<br><br>__MODFILE_CHANGED__ = Primary file changed<br>__MOD_AVAILABLE__ = Mod is marked as accepted and public<br>__MOD_UNAVAILABLE__ = Mod is marked as not accepted, deleted or hidden<br>__MOD_EDITED__ = The mod was updated (triggered when any column value changes)<br>__MOD_DELETED__ = The mod has been permanently erased. This is an orphan record, looking up this id will return no data<br>__MOD_TEAM_CHANGED__ = A user has joined or left the mod team
+    latest|boolean|_Default value is true_. Returns only the latest unique events, which is useful for checking if the primary `modfile` has changed.
+    subscribed|boolean|_Default value is false_. Returns only events connected to mods the __authenticated user__ is subscribed to, which is useful for keeping the users mods up-to-date.
 
 
 > Example response
@@ -5231,9 +5231,9 @@ System.out.println(response.toString());
 
 Get all dependencies the chosen mod has selected.
 
-     __IMPORTANT:__ Because of the complexity of supporting nested dependencies, we recommend you treat dependencies as a recommendation for your players, and do not process dependencies automatically when installing a mod unless absolutely required. Successful request will return an array of [Mod Dependencies Objects](#mod-dependencies-object).
+    __IMPORTANT:__ Because of the complexity of supporting nested dependencies, we recommend you treat dependencies as a recommendation for your players, and do not process dependencies automatically when installing a mod unless absolutely required. Successful request will return an array of [Mod Dependencies Objects](#mod-dependencies-object).
 
-     __NOTE:__ Some modders might select _soft_ dependencies to promote or credit other mods. We advise against this but it is possible to do, and is one of the reasons why we recommend against processing nested dependencies automatically.
+    __NOTE:__ Some modders might select _soft_ dependencies to promote or credit other mods. We advise against this but it is possible to do, and is one of the reasons why we recommend against processing nested dependencies automatically.
 
 
 > Example response
@@ -5366,11 +5366,11 @@ System.out.println(response.toString());
 
 Add mod dependencies required by the corresponding mod. A dependency is a mod that should be installed for this mod to run. __IMPORTANT:__ Because of the complexity of supporting nested dependencies, we recommend you treat dependencies as a recommendation for your players, and do not process dependencies automatically when installing a mod unless absolutely required. Successful request will return [Message Object](#message-object).
 
-     __NOTE:__ Some modders might select _soft_ dependencies to promote or credit other mods. We advise against this but it is possible to do, and is one of the reasons why we recommend against processing nested dependencies automatically.
+    __NOTE:__ Some modders might select _soft_ dependencies to promote or credit other mods. We advise against this but it is possible to do, and is one of the reasons why we recommend against processing nested dependencies automatically.
 
-     Parameter|Type|Required|Description
-     ---|---|---|---|
-     dependencies|integer[]|true|Array containing one or more mod id's that this mod is dependent on. Max of 5 dependencies per request.
+    Parameter|Type|Required|Description
+    ---|---|---|---|
+    dependencies|integer[]|true|Array containing one or more mod id's that this mod is dependent on. Max of 5 dependencies per request.
 
 
 > Example response
@@ -5493,9 +5493,9 @@ System.out.println(response.toString());
 
 Delete mod dependencies the corresponding mod has selected. Successful request will return `204 No Content`.
 
-     Parameter|Type|Required|Description
-     ---|---|---|---|
-     dependencies|integer[]|true|Array containing one or more mod id's that can be deleted as dependencies.
+    Parameter|Type|Required|Description
+    ---|---|---|---|
+    dependencies|integer[]|true|Array containing one or more mod id's that can be deleted as dependencies.
 
 
 > Example response
