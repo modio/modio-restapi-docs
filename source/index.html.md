@@ -2884,6 +2884,122 @@ Status|Meaning|Description|Response Schema
 To perform this request, you must be authenticated via one of the following methods:
 <a href="#authentication">OAuth 2</a> (Scopes: write)
 </aside>
+## Delete Modfile
+
+> Example request
+
+```shell
+# You can also use wget
+curl -X DELETE https://api.mod.io/v1/games/{game-id}/mods/{mod-id}/files/{file-id} \
+  -H 'Authorization: Bearer {access-token}' \ 
+  -H 'Content-Type: application/x-www-form-urlencoded' \ 
+  -H 'Accept: application/json'
+
+```
+
+```http
+DELETE https://api.mod.io/v1/games/{game-id}/mods/{mod-id}/files/{file-id} HTTP/1.1
+Host: api.mod.io
+
+Accept: application/json
+Authorization: Bearer {access-token}
+Content-Type: application/x-www-form-urlencoded
+
+
+```
+
+```javascript
+var headers = {
+  'Authorization':'Bearer {access-token}',
+  'Content-Type':'application/x-www-form-urlencoded',
+  'Accept':'application/json'
+
+};
+
+$.ajax({
+  url: 'https://api.mod.io/v1/games/{game-id}/mods/{mod-id}/files/{file-id}',
+  method: 'delete',
+
+  headers: headers,
+  success: function(data) {
+    console.log(JSON.stringify(data));
+  }
+})
+```
+
+```javascript--nodejs
+const request = require('node-fetch');
+
+const headers = {
+  'Authorization':'Bearer {access-token}',
+  'Content-Type':'application/x-www-form-urlencoded',
+  'Accept':'application/json'
+
+};
+
+fetch('https://api.mod.io/v1/games/{game-id}/mods/{mod-id}/files/{file-id}',
+{
+  method: 'DELETE',
+
+  headers: headers
+})
+.then(function(res) {
+    return res.json();
+}).then(function(body) {
+    console.log(body);
+});
+```
+
+```python
+import requests
+headers = {
+  'Authorization': 'Bearer {access-token}',
+  'Content-Type': 'application/x-www-form-urlencoded',
+  'Accept': 'application/json'
+}
+
+r = requests.delete('https://api.mod.io/v1/games/{game-id}/mods/{mod-id}/files/{file-id}', params={
+
+}, headers = headers)
+
+print r.json()
+```
+
+```java
+URL obj = new URL("https://api.mod.io/v1/games/{game-id}/mods/{mod-id}/files/{file-id}");
+HttpURLConnection con = (HttpURLConnection) obj.openConnection();
+con.setRequestMethod("DELETE");
+int responseCode = con.getResponseCode();
+BufferedReader in = new BufferedReader(
+    new InputStreamReader(con.getInputStream()));
+String inputLine;
+StringBuffer response = new StringBuffer();
+while ((inputLine = in.readLine()) != null) {
+    response.append(inputLine);
+}
+in.close();
+System.out.println(response.toString());
+```
+`DELETE /games/{game-id}/mods/{mod-id}/files/{file-id}`
+
+Delete a modfile. Successful request will return `204 No Content`.<br><br>__NOTE:__ A modfile can never be removed if it is currently the active release for the corresponding mod regardless of user permissions. Furthermore, this ability is only available if you are authenticated as the game administrator for this game _or_ is the original uploader of the modfile.
+
+
+> Example response
+
+```json
+ 204 No Content 
+```
+<h3 id="Delete-Modfile-responses">Responses</h3>
+
+Status|Meaning|Description|Response Schema
+---|---|---|---|
+204|[No Content](https://tools.ietf.org/html/rfc7231#section-6.3.5)|Successful Request. No Body Returned.|None
+
+<aside class="auth-notice">
+To perform this request, you must be authenticated via one of the following methods:
+<a href="#authentication">OAuth 2</a> (Scopes: write)
+</aside>
 # Media
 
 ## Add Game Media
