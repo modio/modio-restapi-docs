@@ -4978,7 +4978,7 @@ System.out.println(response.toString());
 ```
 `GET /games/{game-id}/mods/{mod-id}/metadatakvp`
 
-Get all metadata stored by the game developer for this mod as searchable key value pairs. Successful request will return an array of [Metadata KVP Objects](#get-all-mod-kvp).<br><br>__NOTE:__ Metadata can also be stored as `metadata_blob` in the [Mod Object](#mod-object).
+Get all metadata stored by the game developer for this mod as searchable key value pairs. Successful request will return an array of [Metadata KVP Objects](#get-all-mod-kvp-metadata-2).<br><br>__NOTE:__ Metadata can also be stored as `metadata_blob` in the [Mod Object](#mod-object).
 
 
 > Example response
