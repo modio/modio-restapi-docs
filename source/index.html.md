@@ -3835,7 +3835,7 @@ Get the event log for a mod, showing changes made sorted by latest event first. 
     id|integer|Unique id of the event object.
     mod_id|integer|Unique id of the parent mod.
     user_id|integer|Unique id of the user who performed the action.
-    date_added|integer|Unix timestamp of date mod was updated.
+    date_added|integer|Unix timestamp of date mod event occurred.
     event_type|string|Type of change that occurred:<br><br>__MODFILE_CHANGED__ = Primary file changed, the mod should be updated<br>__MOD_AVAILABLE__ = Mod is marked as accepted and public<br>__MOD_UNAVAILABLE__ = Mod is marked as not accepted, deleted or hidden<br>__MOD_EDITED__ = The mod was updated (triggered when any column value changes)<br>__MOD_DELETED__ = The mod has been permanently erased. This is an orphan record, looking up this id will return no data<br>__MOD_TEAM_CHANGED__ = A user has joined or left the mod team.
 
 
@@ -3957,14 +3957,14 @@ System.out.println(response.toString());
 ```
 `GET /games/{game-id}/mods/events`
 
-Get all mods events for the corresponding game sorted by latest event first. Successful request will return an array of [Event Objects](#get-mod-events-2).<br><br>__NOTE:__ We recommend you poll this endpoint to keep mods up-to-date. If polling this endpoint for updates you should store the `id` or `date_updated` of the latest event, and on subsequent requests use that information [in the filter](#filtering), to return only newer events to process.
+Get all mods events for the corresponding game sorted by latest event first. Successful request will return an array of [Event Objects](#get-mod-events-2).<br><br>__NOTE:__ We recommend you poll this endpoint to keep mods up-to-date. If polling this endpoint for updates you should store the `id` or `date_added` of the latest event, and on subsequent requests use that information [in the filter](#filtering), to return only newer events to process.
 
     Filter|Type|Description
     ---|---|---
     id|integer|Unique id of the event object.
     mod_id|integer|Unique id of the parent mod.
     user_id|integer|Unique id of the user who performed the action.
-    date_added|integer|Unix timestamp of date mod was added.
+    date_added|integer|Unix timestamp of date mod event occurred.
     event_type|string|Type of change that occurred:<br><br>__MODFILE_CHANGED__ = Primary file changed<br>__MOD_AVAILABLE__ = Mod is marked as accepted and public<br>__MOD_UNAVAILABLE__ = Mod is marked as not accepted, deleted or hidden<br>__MOD_EDITED__ = The mod was updated (triggered when any column value changes)<br>__MOD_DELETED__ = The mod has been permanently erased. This is an orphan record, looking up this id will return no data<br>__MOD_TEAM_CHANGED__ = A user has joined or left the mod team
     latest|boolean|_Default value is true_. Returns only the latest unique events, which is useful for checking if the primary `modfile` has changed.
     subscribed|boolean|_Default value is false_. Returns only events connected to mods the __authenticated user__ is subscribed to, which is useful for keeping the users mods up-to-date.
