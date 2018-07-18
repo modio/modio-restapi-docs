@@ -5219,7 +5219,7 @@ Accept: application/json
 <tr>
 <td>date_added</td>
 <td>integer</td>
-<td>Unix timestamp of date mod was updated.</td>
+<td>Unix timestamp of date mod event occurred.</td>
 </tr>
 <tr>
 <td>event_type</td>
@@ -5346,7 +5346,7 @@ Accept: application/json
 </code></pre>
 <p><span class="httpmethod GET">GET</span> <span class="endpointheading">/games/{game-id}/mods/events</span></p>
 
-<p>Get all mods events for the corresponding game sorted by latest event first. Successful request will return an array of <a href="#get-mod-events-2">Event Objects</a>.<br><br><strong>NOTE:</strong> We recommend you poll this endpoint to keep mods up-to-date. If polling this endpoint for updates you should store the <code>id</code> or <code>date_updated</code> of the latest event, and on subsequent requests use that information <a href="#filtering">in the filter</a>, to return only newer events to process.</p>
+<p>Get all mods events for the corresponding game sorted by latest event first. Successful request will return an array of <a href="#get-mod-events-2">Event Objects</a>.<br><br><strong>NOTE:</strong> We recommend you poll this endpoint to keep mods up-to-date. If polling this endpoint for updates you should store the <code>id</code> or <code>date_added</code> of the latest event, and on subsequent requests use that information <a href="#filtering">in the filter</a>, to return only newer events to process.</p>
 
 <table>
 <thead>
@@ -5375,7 +5375,7 @@ Accept: application/json
 <tr>
 <td>date_added</td>
 <td>integer</td>
-<td>Unix timestamp of date mod was added.</td>
+<td>Unix timestamp of date mod event occurred.</td>
 </tr>
 <tr>
 <td>event_type</td>
