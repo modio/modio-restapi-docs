@@ -351,14 +351,14 @@ Games and mods use the `status` attribute allowing game admins to control their 
 
 Meaning | Value | Description | Modify Authorization | Filter Authorization
 ---------- | ------- | ------- | ------- | ----------
-Not Accepted | --parse_value_notaccepted | Resource is not accepted and not returned when browsing.<br><br>Games will be returned if requested [directly](#get-game) provided the user is an admin or the `apikey` used belongs to the game.<br><br>Mods will be returned if requested [directly](#get-mod) provided the user is an admin or subscribed to the content. All resources are always returned via the [/me](#me) endpoints. | Game Admins Only | Game Admins Only
+Not Accepted | --parse_value_notaccepted | Resource is not accepted and not returned when browsing.<br><br>Games will be returned if requested [directly](#get-game) provided the user is an admin or the `api_key` used belongs to the game.<br><br>Mods will be returned if requested [directly](#get-mod) provided the user is an admin or subscribed to the content. All resources are always returned via the [/me](#me) endpoints. | Game Admins Only | Game Admins Only
 Accepted | --parse_value_accepted | Resource is accepted and returned via all endpoints. | Game Admins Only | Everyone
 Archived | --parse_value_archived | Resource is accepted and returned via all endpoints (but flagged as out of date/incompatible). | Game Admins Only | Everyone
 Deleted | --parse_value_deleted | Resource is deleted and only returned via the [/me](#me) endpoints. | Game Admins Only | Game Admins Only
 
 ### Game admin privileges
 
-As a game admin, you can modify your games `status` to show or hide it from API requests. When a game is not accepted _you_ can still view it provided you are the games admin or using the games `apikey`. You can call [Get User Games endpoint](#get-user-games) to retrieve all games associated with the authenticated user regardless of their `status`.
+As a game admin, you can modify your games `status` to show or hide it from API requests. When a game is not accepted _you_ can still view it provided you are the games admin or using the games `api_key`. You can call [Get User Games endpoint](#get-user-games) to retrieve all games associated with the authenticated user regardless of their `status`.
 
 By default mods connected to a game will not be returned if they are hidden or not accepted. As a game admin, you can modify a mods `status` and `visible` fields and filter by these values (to view content normal users cannot see). __We recommend__ you only change the `status` and let mod admins control the `visible` field.
 
@@ -692,7 +692,7 @@ You should always plan to minimize requests and cache API responses. It will mak
 
 ## Testing
 
-To help familiarize yourself with the --parse_sitename API and to ensure your implementation is battle-hardened and operating as intended, we have setup a test sandbox which is identical to the production environment. The test sandbox allows you to make requests to the API whilst your integration is a work in progress and the submitted data is not important. When you are ready to go live it's as easy as making sure your game's production profile and `apikey` is correct, and substituting the API test URL for the production URL. 
+To help familiarize yourself with the --parse_sitename API and to ensure your implementation is battle-hardened and operating as intended, we have setup a test sandbox which is identical to the production environment. The test sandbox allows you to make requests to the API whilst your integration is a work in progress and the submitted data is not important. When you are ready to go live it's as easy as making sure your game's production profile and `api_key` is correct, and substituting the API test URL for the production URL. 
 
 To begin using the test sandbox you will need to [register a test account](--parse_sitetesturl/members/register) and [add your game](--parse_sitetesturl/games/add). You will see only games you are a team member of and there is no connection between the data added to the test environment and production. We highly recommend you use the test environment when integrating as it allows you to keep your development private, and you can submit as much dummy data as you need to try the functionality required, without having to clean it up at the end.
 
