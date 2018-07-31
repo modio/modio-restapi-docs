@@ -1134,7 +1134,7 @@ curl -X post https://api.mod.io/v1/games/1/team <span class="se">\</span>
 <tr>
 <td>Not Accepted</td>
 <td>0</td>
-<td>Resource is not accepted and not returned when browsing.<br><br>Games will be returned if requested <a href="#get-game">directly</a> provided the user is an admin or the <code>apikey</code> used belongs to the game.<br><br>Mods will be returned if requested <a href="#get-mod">directly</a> provided the user is an admin or subscribed to the content. All resources are always returned via the <a href="#me">/me</a> endpoints.</td>
+<td>Resource is not accepted and not returned when browsing.<br><br>Games will be returned if requested <a href="#get-game">directly</a> provided the user is an admin or the <code>api_key</code> used belongs to the game.<br><br>Mods will be returned if requested <a href="#get-mod">directly</a> provided the user is an admin or subscribed to the content. All resources are always returned via the <a href="#me">/me</a> endpoints.</td>
 <td>Game Admins Only</td>
 <td>Game Admins Only</td>
 </tr>
@@ -1162,7 +1162,7 @@ curl -X post https://api.mod.io/v1/games/1/team <span class="se">\</span>
 </tbody>
 </table>
 <h3 id="game-admin-privileges">Game admin privileges</h3>
-<p>As a game admin, you can modify your games <code>status</code> to show or hide it from API requests. When a game is not accepted <em>you</em> can still view it provided you are the games admin or using the games <code>apikey</code>. You can call <a href="#get-user-games">Get User Games endpoint</a> to retrieve all games associated with the authenticated user regardless of their <code>status</code>.</p>
+<p>As a game admin, you can modify your games <code>status</code> to show or hide it from API requests. When a game is not accepted <em>you</em> can still view it provided you are the games admin or using the games <code>api_key</code>. You can call <a href="#get-user-games">Get User Games endpoint</a> to retrieve all games associated with the authenticated user regardless of their <code>status</code>.</p>
 
 <p>By default mods connected to a game will not be returned if they are hidden or not accepted. As a game admin, you can modify a mods <code>status</code> and <code>visible</code> fields and filter by these values (to view content normal users cannot see). <strong>We recommend</strong> you only change the <code>status</code> and let mod admins control the <code>visible</code> field.</p>
 <h3 id="mod-admin-privileges">Mod admin privileges</h3>
@@ -1501,7 +1501,7 @@ Accept-Language: de
 <h3 id="optimize-your-requests">Optimize your requests</h3>
 <p>You should always plan to minimize requests and cache API responses. It will make your app feel fluid and fast for your users. If your usage is excessive we shall reach out to discuss ways of optimizing, but our aim is to never restrict legitimate use of the API. We have set high limits that should cover 99% of use-cases, and are happy to <a href="mailto:developers@mod.io?subject=API%20usage">discuss your scenario</a> if you require more.</p>
 <h2 id="testing">Testing</h2>
-<p>To help familiarize yourself with the mod.io API and to ensure your implementation is battle-hardened and operating as intended, we have setup a test sandbox which is identical to the production environment. The test sandbox allows you to make requests to the API whilst your integration is a work in progress and the submitted data is not important. When you are ready to go live it's as easy as making sure your game's production profile and <code>apikey</code> is correct, and substituting the API test URL for the production URL. </p>
+<p>To help familiarize yourself with the mod.io API and to ensure your implementation is battle-hardened and operating as intended, we have setup a test sandbox which is identical to the production environment. The test sandbox allows you to make requests to the API whilst your integration is a work in progress and the submitted data is not important. When you are ready to go live it's as easy as making sure your game's production profile and <code>api_key</code> is correct, and substituting the API test URL for the production URL. </p>
 
 <p>To begin using the test sandbox you will need to <a href="https://test.mod.io/members/register">register a test account</a> and <a href="https://test.mod.io/games/add">add your game</a>. You will see only games you are a team member of and there is no connection between the data added to the test environment and production. We highly recommend you use the test environment when integrating as it allows you to keep your development private, and you can submit as much dummy data as you need to try the functionality required, without having to clean it up at the end.</p>
 
@@ -2132,7 +2132,7 @@ Content-Type: application/x-www-form-urlencoded
 <td>api_access_options</td>
 <td>integer</td>
 <td></td>
-<td>Choose the level of API access your game allows:<br><br><strong>0</strong> = All of the options below are disabled<br><br><strong>1</strong> = Allow 3rd parties to access this games API endpoints. We recommend you enable this feature, an open API will encourage a healthy ecosystem of tools and apps. If you do not enable this feature, your <code>/games/{games-id}</code> endpoints will return <code>403 Forbidden</code> unless you are a member of the games team or using the games <code>apikey</code><br><br><strong>2</strong> = Allow mods to be downloaded directly (makes implementation easier for you, game servers and services because you can save, share and reuse download URLs). If disabled all download URLs will contain a frequently changing verification hash to stop unauthorized use<br><br><strong>?</strong> = Add the options you want together, to enable multiple features (see <a href="#bitwise-and-bitwise-and">BITWISE fields</a>)</td>
+<td>Choose the level of API access your game allows:<br><br><strong>0</strong> = All of the options below are disabled<br><br><strong>1</strong> = Allow 3rd parties to access this games API endpoints. We recommend you enable this feature, an open API will encourage a healthy ecosystem of tools and apps. If you do not enable this feature, your <code>/games/{games-id}</code> endpoints will return <code>403 Forbidden</code> unless you are a member of the games team or using the games <code>api_key</code><br><br><strong>2</strong> = Allow mods to be downloaded directly (makes implementation easier for you, game servers and services because you can save, share and reuse download URLs). If disabled all download URLs will contain a frequently changing verification hash to stop unauthorized use<br><br><strong>?</strong> = Add the options you want together, to enable multiple features (see <a href="#bitwise-and-bitwise-and">BITWISE fields</a>)</td>
 </tr>
 <tr>
 <td>maturity_options</td>
@@ -3441,7 +3441,7 @@ Content-Type: application/x-www-form-urlencoded
 </code></pre>
 <p><span class="httpmethod DELETE">DELETE</span> <span class="endpointheading">/games/{game-id}/mods/{mod-id}</span></p>
 
-<p>Delete a mod profile. Successful request will return <code>204 No Content</code> and fire a <strong>MOD_UNAVAILABLE</strong> event.<br><br><strong>NOTE:</strong> This will close the mod profile which means it cannot be viewed or retrieved via API requests but will still exist in-case you choose to restore it at a later date. If you believe a mod should be permanently removed please <a href="mailto:support@mod.io">contact us</a>.</p>
+<p>Delete a mod profile. Successful request will return <code>204 No Content</code> and fire a <strong>MOD_UNAVAILABLE</strong> event.<br><br><strong>NOTE:</strong> This will close the mod profile which means it cannot be viewed or retrieved via API requests but will still exist in-case you choose to restore it at a later date. If you wish to permanently delete a mod you have access rights to you must do it via the <a href="https://mod.io/mods">mods profile page</a> on the mod.io website.</p>
 
 <blockquote>
 <p>Example response</p>
