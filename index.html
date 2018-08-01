@@ -1470,14 +1470,14 @@ Accept-Language: de
 <h2 id="rate-limiting">Rate Limiting</h2>
 <p>mod.io implements rate limiting to stop users abusing the service. Exceeding your rate limit will result in requests receiving a <code>429 Too Many Requests</code> response until your reset time is reached. </p>
 
-<p>It is <em>highly recommended</em> you architect your app to check for the <code>X-RateLimit</code> headers below and the <code>429</code> HTTP response code to ensure you are not making too many requests, or continuing to make requests after a <code>429</code> code is repeatedly returned. Users who continue to send requests despite a <code>429</code> response could potentially have their access tokens revoked. The following limits are implemented by default:</p>
+<p>It is <em>highly recommended</em> you architect your app to check for the <code>X-RateLimit</code> headers below and the <code>429</code> HTTP response code to ensure you are not making too many requests, or continuing to make requests after a <code>429</code> code is repeatedly returned. Users who continue to send requests despite a <code>429</code> response could potentially have their credentials revoked. The following limits are implemented by default:</p>
 <h3 id="api-key-rate-limiting">API key Rate Limiting</h3><pre class="highlight http tab-http"><code><span class="err">Example HTTP Header Response
 ---------------------
 </span><span class="k">HTTP</span><span class="o">/</span><span class="m">1.1</span> <span class="m">200</span> <span class="ne">OK</span>
 <span class="s">...</span>
 <span class="s">...</span>
-<span class="na">X-RateLimit-Limit</span><span class="p">:</span> <span class="s">60</span>
-<span class="na">X-RateLimit-Remaining</span><span class="p">:</span> <span class="s">59</span>
+<span class="na">X-RateLimit-Limit</span><span class="p">:</span> <span class="s">120</span>
+<span class="na">X-RateLimit-Remaining</span><span class="p">:</span> <span class="s">87</span>
 </code></pre>
 <ul>
 <li>API keys linked to a member have <strong>unlimited requests</strong>.</li>
@@ -1485,7 +1485,7 @@ Accept-Language: de
 </ul>
 <h3 id="oauth2-rate-limiting">OAuth2 Rate Limiting</h3>
 <ul>
-<li>Users tokens are limited to <strong>60 requests per minute</strong>. </li>
+<li>Users tokens are limited to <strong>120 requests per minute</strong>. </li>
 </ul>
 <h3 id="headers">Headers</h3>
 <p>mod.io returns the following headers in each request to inform you of your limit &amp; remaining requests until reset.</p>
@@ -1496,7 +1496,7 @@ Accept-Language: de
 <li>
 <code>X-RateLimit-Remaining</code> - Number of requests remaining until requests are rejected.</li>
 <li>
-<code>X-Ratelimit-RetryAfter</code> - Amount of minutes until reset once you have been throttled (Only returned once rate limit exceeded).</li>
+<code>X-Ratelimit-RetryAfter</code> - Amount of seconds until reset once you have been throttled (Only returned once rate limit exceeded).</li>
 </ul>
 <h3 id="optimize-your-requests">Optimize your requests</h3>
 <p>You should always plan to minimize requests and cache API responses. It will make your app feel fluid and fast for your users. If your usage is excessive we shall reach out to discuss ways of optimizing, but our aim is to never restrict legitimate use of the API. We have set high limits that should cover 99% of use-cases, and are happy to <a href="mailto:developers@mod.io?subject=API%20usage">discuss your scenario</a> if you require more.</p>
