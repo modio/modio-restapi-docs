@@ -657,7 +657,7 @@ __NOTE__: Localization for --parse_sitename is currently a work-in-progress and 
 
 --parse_sitename implements rate limiting to stop users abusing the service. Exceeding your rate limit will result in requests receiving a `429 Too Many Requests` response until your reset time is reached. 
 
-It is _highly recommended_ you architect your app to check for the `X-RateLimit` headers below and the `429` HTTP response code to ensure you are not making too many requests, or continuing to make requests after a `429` code is repeatedly returned. Users who continue to send requests despite a `429` response could potentially have their access tokens revoked. The following limits are implemented by default:
+It is _highly recommended_ you architect your app to check for the `X-RateLimit` headers below and the `429` HTTP response code to ensure you are not making too many requests, or continuing to make requests after a `429` code is repeatedly returned. Users who continue to send requests despite a `429` response could potentially have their credentials revoked. The following limits are implemented by default:
 
 ### API key Rate Limiting
 
@@ -667,8 +667,8 @@ Example HTTP Header Response
 HTTP/1.1 200 OK
 ...
 ...
-X-RateLimit-Limit: 60
-X-RateLimit-Remaining: 59
+X-RateLimit-Limit: 120
+X-RateLimit-Remaining: 87
 ```
 
 - API keys linked to a member have __unlimited requests__.
@@ -676,7 +676,7 @@ X-RateLimit-Remaining: 59
 
 ### OAuth2 Rate Limiting
 
-- Users tokens are limited to __60 requests per minute__. 
+- Users tokens are limited to __120 requests per minute__. 
 
 ### Headers
 
@@ -684,7 +684,7 @@ X-RateLimit-Remaining: 59
 
  - `X-RateLimit-Limit` - Number of requests you can make from the supplied API key/access token per minute.
  - `X-RateLimit-Remaining` - Number of requests remaining until requests are rejected.
- - `X-Ratelimit-RetryAfter` - Amount of minutes until reset once you have been throttled (Only returned once rate limit exceeded).
+ - `X-Ratelimit-RetryAfter` - Amount of seconds until reset once you have been throttled (Only returned once rate limit exceeded).
 
 ### Optimize your requests
 
