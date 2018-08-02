@@ -459,7 +459,7 @@ If the `result_count` parameter matches the `result_limit` parameter (5 in this 
 
 All endpoints are sorted by the `id` column in ascending order by default. You can override this by including a `_sort` with the column you want to sort by in the request. You can sort on all columns __in the parent object only__. You cannot sort on columns in nested objects, so if a game contains a user you cannot sort on the `username` column, but you can sort by the games `name` since the column resides in the parent object.
 
-__NOTE:__ Some endpoints like [get all mods](#get-all-mods) have special sort columns like `popular`, `downloads`, `rating` and `subscribers` which are documented alongside the filters.
+__NOTE:__ Some endpoints like [Get All Mods](#get-all-mods) have special sort columns like `popular`, `downloads`, `rating` and `subscribers` which are documented alongside the filters.
 
 ### _sort (Sort)
 
@@ -3619,6 +3619,12 @@ Status|Meaning|Description|Response Schema
 ---|---|---|---|
 201|[Created](https://tools.ietf.org/html/rfc7231#section-6.3.2)|Subscription Successful|[Mod Object   ](#schemamod_object)
 
+### Response Headers
+
+Status|Header|Type|Format|Description
+---|---|---|---|---|
+201|Location|string||URL to newly created resource
+
 <aside class="auth-notice">
 To perform this request, you must be authenticated via one of the following methods:
 <a href="#authentication">OAuth 2</a> (Scopes: write)
@@ -4247,6 +4253,12 @@ Status|Meaning|Description|Response Schema
 ---|---|---|---|
 201|[Created](https://tools.ietf.org/html/rfc7231#section-6.3.2)|Created|[Message Object](#message-object)
 
+### Response Headers
+
+Status|Header|Type|Format|Description
+---|---|---|---|---|
+201|Location|string||URL to newly created resource
+
 <aside class="auth-notice">
 To perform this request, you must be authenticated via one of the following methods:
 <a href="#authentication">OAuth 2</a> (Scopes: write)
@@ -4628,6 +4640,12 @@ Add tags which mods can apply to their profiles. Successful request will return 
 Status|Meaning|Description|Response Schema
 ---|---|---|---|
 201|[Created](https://tools.ietf.org/html/rfc7231#section-6.3.2)|Created|[Message Object](#message-object)
+
+### Response Headers
+
+Status|Header|Type|Format|Description
+---|---|---|---|---|
+201|Location|string||URL to newly created resource
 
 <aside class="auth-notice">
 To perform this request, you must be authenticated via one of the following methods:
@@ -5130,6 +5148,12 @@ Status|Meaning|Description|Response Schema
 ---|---|---|---|
 201|[Created](https://tools.ietf.org/html/rfc7231#section-6.3.2)|Created|[Message Object](#message-object)
 
+### Response Headers
+
+Status|Header|Type|Format|Description
+---|---|---|---|---|
+201|Location|string||URL to newly created resource
+
 <aside class="auth-notice">
 To perform this request, you must be authenticated via one of the following methods:
 <a href="#authentication">OAuth 2</a> (Scopes: write)
@@ -5502,6 +5526,12 @@ Add mod dependencies required by the corresponding mod. A dependency is a mod th
 Status|Meaning|Description|Response Schema
 ---|---|---|---|
 201|[Created](https://tools.ietf.org/html/rfc7231#section-6.3.2)|Created|[Message Object](#message-object)
+
+### Response Headers
+
+Status|Header|Type|Format|Description
+---|---|---|---|---|
+201|Location|string||URL to newly created resource
 
 <aside class="auth-notice">
 To perform this request, you must be authenticated via one of the following methods:
@@ -5903,6 +5933,12 @@ Add a user to a mod team. Successful request will return [Message Object](#messa
 Status|Meaning|Description|Response Schema
 ---|---|---|---|
 201|[Created](https://tools.ietf.org/html/rfc7231#section-6.3.2)|Created|[Message Object](#message-object)
+
+### Response Headers
+
+Status|Header|Type|Format|Description
+---|---|---|---|---|
+201|Location|string||URL to newly created resource
 
 <aside class="auth-notice">
 To perform this request, you must be authenticated via one of the following methods:
@@ -6818,7 +6854,7 @@ Get all users registered on mod.io. Successful request will return an array of [
 
 Status|Meaning|Description|Response Schema
 ---|---|---|---|
-200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)|OK|[Get All Users  ](#schemaget_all_users)
+200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)|Successful Request|[Get All Users  ](#schemaget_all_users)
 
 <aside class="auth-notice">
 To perform this request, you must be authenticated via one of the following methods:
