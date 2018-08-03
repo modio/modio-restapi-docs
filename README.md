@@ -1,11 +1,12 @@
 <p align="center"><a href="https://mod.io"><img src="https://static.mod.io/v1/images/branding/modio-vertical-color-dark.png" alt="mod.io" width="300"/></a></p>
-<p align="center">
-[![License](https://img.shields.io/badge/license-Apache%202-blue.svg)](https://github.com/DBolical/modioAPIDOCS/blob/master/LICENSE)
-[![Discord](https://img.shields.io/discord/389039439487434752.svg)](https://discord.mod.io)
-[![Master docs](https://img.shields.io/badge/docs-master-green.svg)](https://docs.mod.io)
-</p>
-<p align="center">Ignite a world of creativity with mod.io, an API for developers to add mod support to their games.</p>
 
+<p align="center">
+  <a href="https://github.com/DBolical/modioAPIDOCS/blob/master/LICENSE"><img src="https://img.shields.io/badge/license-Apache%202-blue.svg" alt="License"></a>
+  <a href="https://discord.mod.io"><img src="https://img.shields.io/discord/389039439487434752.svg" alt="Discord"></a>
+  <a href="https://docs.mod.io"><img src="https://img.shields.io/badge/docs-master-green.svg" alt="API Documentation"></a></p>
+
+<p align="center">Ignite a world of creativity with mod.io, an API for developers to add mod support to their games.</p>
+<br>
 
 # API Documentation
 Documentation for [mod.io](https://mod.io) is powered by [slate](https://github.com/lord/slate), a static API generator and can be [read here](https://docs.mod.io) (also see our [getting started guide](https://apps.mod.io/guides/getting-started)). We use [swagger.io](https://swagger.io/) to define our API from comments in our codebase, and generate the slate markdown files from it using [widdershins](https://github.com/Mermade/widdershins).
