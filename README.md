@@ -1,4 +1,4 @@
-<a href="https://mod.io"><img src="https://static.mod.io/v1/images/branding/modio-vertical-color-dark.png" alt="mod.io" width="400"/></a>
+<a href="https://mod.io"><img src="https://static.mod.io/v1/images/branding/modio-color-dark.svg" alt="mod.io" width="400"/></a>
 
 # API Documentation
 [![License](https://img.shields.io/badge/license-Apache%202-blue.svg)](https://github.com/DBolical/modioAPIDOCS/blob/master/LICENSE)
