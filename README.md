@@ -1,4 +1,11 @@
-# mod.io API Documentation
+<a href="https://mod.io"><img src="https://static.mod.io/v1/images/branding/modio-color-dark.svg" alt="mod.io" width="400"/></a>
+
+# API Documentation
+[![License](https://img.shields.io/badge/license-Apache%202-blue.svg)](https://github.com/DBolical/modioAPIDOCS/blob/master/LICENSE)
+[![Discord](https://img.shields.io/discord/389039439487434752.svg)](https://discord.mod.io)
+[![Master docs](https://img.shields.io/badge/docs-master-green.svg)](https://docs.mod.io)
+
+
 Documentation for [mod.io](https://mod.io) is powered by [slate](https://github.com/lord/slate), a static API generator and can be [read here](https://docs.mod.io) (also see our [getting started guide](https://apps.mod.io/guides/getting-started)). We use [swagger.io](https://swagger.io/) to define our API from comments in our codebase, and generate the slate markdown files from it using [widdershins](https://github.com/Mermade/widdershins).
 
 ## Output
