@@ -328,7 +328,9 @@ Endpoints that return more than one result, return a __JSON object__ which conta
 			...
 		},
 	],
-    "result_count": 100,
+	"result_count": 100,
+  "result_limit": 100,
+  "result_offset": 0
 }  
 ```
 
@@ -710,4 +712,4 @@ If you are a large studio or publisher and require a private, in-house, custom s
 
 ## Contact
 
-If you spot any errors within the --parse_sitename documentation, have feedback on how we can make it easier to follow or simply want to discuss how awesome mods are, feel free to reach out anytime to [--parse_email](mailto:--parse_email?subject=API). We are here to help you grow and maximise the potential of mods in your game.
+If you spot any errors within the --parse_sitename documentation, have feedback on how we can make it easier to follow or simply want to discuss how awesome mods are, feel free to reach out anytime to [--parse_email](mailto:--parse_email?subject=API) or come join us in our [discord channel](https://discord.mod.io). We are here to help you grow and maximise the potential of mods in your game.
