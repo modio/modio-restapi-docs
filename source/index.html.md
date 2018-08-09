@@ -21,7 +21,7 @@ headingLevel: '2'
 
 ## mod.io API v1
 
-Welcome to the official documentation for [mod.io](https://mod.io), an API which makes it a joy to search, sort and share mods in-game. We recommend you read our _Getting Started_ guide below to accurately and efficiently consume our REST API. 
+Welcome to the official documentation for [mod.io](https://mod.io), an API for developers to add mod support to their games. We recommend you read our _Getting Started_ guide below to accurately and efficiently consume our REST API. 
 
 __Current version:__ `v1`
 
