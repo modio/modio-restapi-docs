@@ -328,7 +328,9 @@ Endpoints that return more than one result, return a __JSON object__ which conta
 			...
 		},
 	],
-    "result_count": 100,
+	"result_count": 100,
+  "result_limit": 100,
+  "result_offset": 0
 }  
 ```
 
@@ -442,7 +444,7 @@ If the `result_count` parameter matches the `result_limit` parameter (5 in this 
 
 All endpoints are sorted by the `id` column in ascending order by default. You can override this by including a `_sort` with the column you want to sort by in the request. You can sort on all columns __in the parent object only__. You cannot sort on columns in nested objects, so if a game contains a user you cannot sort on the `username` column, but you can sort by the games `name` since the column resides in the parent object.
 
-__NOTE:__ Some endpoints like [get all mods](#get-all-mods) have special sort columns like `popular`, `downloads`, `rating` and `subscribers` which are documented alongside the filters.
+__NOTE:__ Some endpoints like [Get All Mods](#get-all-mods) have special sort columns like `popular`, `downloads`, `rating` and `subscribers` which are documented alongside the filters.
 
 ### _sort (Sort)
 
@@ -710,4 +712,4 @@ If you are a large studio or publisher and require a private, in-house, custom s
 
 ## Contact
 
-If you spot any errors within the --parse_sitename documentation, have feedback on how we can make it easier to follow or simply want to discuss how awesome mods are, feel free to reach out anytime to [--parse_email](mailto:--parse_email?subject=API). We are here to help you grow and maximise the potential of mods in your game.
+If you spot any errors within the --parse_sitename documentation, have feedback on how we can make it easier to follow or simply want to discuss how awesome mods are, feel free to reach out anytime to [--parse_email](mailto:--parse_email?subject=API) or come join us in our [discord channel](https://discord.mod.io). We are here to help you grow and maximise the potential of mods in your game.
