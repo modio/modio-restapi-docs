@@ -2,7 +2,7 @@
 
 ## --parse_sitename API --parse_version
 
-Welcome to the official documentation for [--parse_sitename](--parse_siteurl), an API which makes it a joy to search, sort and share mods in-game. We recommend you read our _Getting Started_ guide below to accurately and efficiently consume our REST API. 
+Welcome to the official documentation for [--parse_sitename](--parse_siteurl), an API for developers to add mod support to their games. We recommend you read our _Getting Started_ guide below to accurately and efficiently consume our REST API. 
 
 __Current version:__ `--parse_version`
 
