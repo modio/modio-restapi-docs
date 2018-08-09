@@ -43,6 +43,12 @@ __API__ | For connecting directly to the mod.io REST API | Web apps that need a 
 __SDK__ | Drop our [open source C/C++ SDK](https://sdk.mod.io) into your game to call mod.io functionality. | Developers that want a SDK that abstracts the uploading, downloading and unzip flows behind easy to use function calls. | [Here](https://sdk.mod.io)
 __Tools/Plugins__ | Use tools and plugins created by the community to make implementation in various engines easy. | Game developers that want a pre-built modding solution for their engine (Unity, Unreal) of choice. | [Available per tool](https://sdk.mod.io)
 
+Tools and plugins made by the mod.io team and our awesome community | - | - | -
+--- | --- | --- | ---
+![Unity Plugin](images/tool-unity.png) | __Unity Plugin__<br />[SDK](https://github.com/DBolical/modioUNITY)<br />[Getting Started](https://github.com/DBolical/modioUNITY/wiki)<br /> | ![C/C++ SDK](images/tool-ccpp.png) | __C/C++ SDK__<br />[SDK](https://github.com/DBolical/modioSDK)<br />[Getting Started](https://github.com/DBolical/modioSDK/wiki)<br />[Tutorials](https://github.com/DBolical/modioSDK/tree/master/examples/code-samples)<br /> 
+![Haxe Wrapper](images/tool-haxe.png) | __Haxe Wrapper__<br />[SDK](https://apps.mod.io/haxe-wrapper)<br />[Getting Started](https://github.com/Turupawn/modioHaxe#getting-started)<br />[Tutorials](https://github.com/Turupawn/modioOpenFLExample#openfl-integration)<br /> | ![Rust Wrapper](images/tool-rust.png) | __Rust Wrapper__<br />[SDK](https://crates.io/crates/modio)<br />[Getting Started](https://github.com/nickelc/modio-rs)<br />[Tutorials](https://github.com/nickelc/modio-rs/tree/master/examples)<br />
+Want a tool added to the list? [Contact us!](mailto:developers@mod.io?subject=Publish Tool)
+
 Here is a brief list of the things to know about our API, as explained in more detail in the following sections.
 
 - All requests to the API __must__ be made over HTTPS (TLS).
@@ -9338,7 +9344,7 @@ ratings_positive|integer|Number of positive ratings.
 ratings_negative|integer|Number of negative ratings.
 ratings_percentage_positive|integer|Number of positive ratings, divided by the total ratings to determine it’s percentage score.
 ratings_weighted_aggregate|float|Overall rating of this item calculated using the [Wilson score confidence interval](https://www.evanmiller.org/how-not-to-sort-by-average-rating.html). This column is good to sort on, as it will order items based on number of ratings and will place items with many positive ratings above those with a higher score but fewer ratings.
-ratings_display_text|string|Textual representation of the rating in format:<br><br>- Overwhelmingly Positive<br>- Very Positive<br>- Positive<br>- Mostly Positive<br>- Mixed<br>- Negative<br>- Mostly Negative<br>- Very Negative<br>- Overwhelmingly Negative
+ratings_display_text|string|Textual representation of the rating in format:<br><br>- Overwhelmingly Positive<br>- Very Positive<br>- Positive<br>- Mostly Positive<br>- Mixed<br>- Negative<br>- Mostly Negative<br>- Very Negative<br>- Overwhelmingly Negative<br>- Unrated
 date_expires|integer|Unix timestamp until this mods's statistics are considered stale.
 
 
@@ -10092,7 +10098,7 @@ data|[Stats Object   ](#schemastats_object)[]|Array containing stats objects.
 » ratings_negative|integer|Number of negative ratings.
 » ratings_percentage_positive|integer|Number of positive ratings, divided by the total ratings to determine it’s percentage score.
 » ratings_weighted_aggregate|float|Overall rating of this item calculated using the [Wilson score confidence interval](https://www.evanmiller.org/how-not-to-sort-by-average-rating.html). This column is good to sort on, as it will order items based on number of ratings and will place items with many positive ratings above those with a higher score but fewer ratings.
-» ratings_display_text|string|Textual representation of the rating in format:<br><br>- Overwhelmingly Positive<br>- Very Positive<br>- Positive<br>- Mostly Positive<br>- Mixed<br>- Negative<br>- Mostly Negative<br>- Very Negative<br>- Overwhelmingly Negative
+» ratings_display_text|string|Textual representation of the rating in format:<br><br>- Overwhelmingly Positive<br>- Very Positive<br>- Positive<br>- Mostly Positive<br>- Mixed<br>- Negative<br>- Mostly Negative<br>- Very Negative<br>- Overwhelmingly Negative<br>- Unrated
 » date_expires|integer|Unix timestamp until this mods's statistics are considered stale.
 result_count|integer|Number of results returned in the data array.
 result_limit|integer|Maximum number of results returned.

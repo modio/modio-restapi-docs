@@ -24,6 +24,12 @@ __API__ | For connecting directly to the --parse_sitename REST API | Web apps th
 __SDK__ | Drop our [open source C/C++ SDK](--parse_sdkurl) into your game to call --parse_sitename functionality. | Developers that want a SDK that abstracts the uploading, downloading and unzip flows behind easy to use function calls. | [Here](--parse_sdkurl)
 __Tools/Plugins__ | Use tools and plugins created by the community to make implementation in various engines easy. | Game developers that want a pre-built modding solution for their engine (Unity, Unreal) of choice. | [Available per tool](--parse_appsurl)
 
+Tools and plugins made by the --parse_sitename team and our awesome community | - | - | -
+--- | --- | --- | ---
+![Unity Plugin](images/tool-unity.png) | __Unity Plugin__<br />[SDK](https://github.com/DBolical/modioUNITY)<br />[Getting Started](https://github.com/DBolical/modioUNITY/wiki)<br /> | ![C/C++ SDK](images/tool-ccpp.png) | __C/C++ SDK__<br />[SDK](https://github.com/DBolical/modioSDK)<br />[Getting Started](https://github.com/DBolical/modioSDK/wiki)<br />[Tutorials](https://github.com/DBolical/modioSDK/tree/master/examples/code-samples)<br /> 
+![Haxe Wrapper](images/tool-haxe.png) | __Haxe Wrapper__<br />[SDK](https://apps.mod.io/haxe-wrapper)<br />[Getting Started](https://github.com/Turupawn/modioHaxe#getting-started)<br />[Tutorials](https://github.com/Turupawn/modioOpenFLExample#openfl-integration)<br /> | ![Rust Wrapper](images/tool-rust.png) | __Rust Wrapper__<br />[SDK](https://crates.io/crates/modio)<br />[Getting Started](https://github.com/nickelc/modio-rs)<br />[Tutorials](https://github.com/nickelc/modio-rs/tree/master/examples)<br />
+Want a tool added to the list? [Contact us!](mailto:--parse_email?subject=Publish Tool)
+
 Here is a brief list of the things to know about our API, as explained in more detail in the following sections.
 
 - All requests to the API __must__ be made over HTTPS (TLS).

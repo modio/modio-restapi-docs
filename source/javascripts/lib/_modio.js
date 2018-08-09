@@ -31,7 +31,10 @@ $(document).ready(function() {
 		$(this).removeClass('shadow-drop-lr');
 		$('span.s2').removeClass('json-example-highlight');
 	});
-	
+
+	/**
+	 Object nesting expand/collapse
+	 */
 	$('table tbody tr').each(function() {
 		td = $('td:first-child', this).not('.collapsed');
 		
@@ -61,4 +64,10 @@ $(document).ready(function() {
 		}
 		return false;
 	});
+
+	/**
+	 Add class to tools table & remove formatting placeholders.
+	 */
+	$('#implementation').nextAll('table').next().addClass('plugingrid');
+	$('table.plugingrid > thead > tr > th').not(':first').remove();
 });
