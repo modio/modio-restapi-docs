@@ -1463,6 +1463,21 @@ Get all mods for the corresponding game. Successful request will return an array
       "description": "<h2>About</h2><p>Rogue HD Pack does exactly what you thi...",
       "metadata_blob": "rogue,hd,high-res,4k,hd textures",
       "profile_url": "https://rogue-knight.mod.io/rogue-knight-hd-pack",
+      "media": {
+        "youtube": [
+          "https://www.youtube.com/watch?v=dQw4w9WgXcQ"
+        ],
+        "sketchfab": [
+          "https://sketchfab.com/models/ef40b2d300334d009984c8865b2db1c8"
+        ],
+        "images": [
+          {
+            "filename": "modio-color-dark.png",
+            "original": "https://static.mod.io/v1/images/branding/modio-color-dark.png",
+            "thumb_320x180": "https://static.mod.io/v1/images/branding/modio-color-dark.png"
+          }
+        ]
+      },
       "modfile": {
         "id": 2,
         "mod_id": 2,
@@ -1490,35 +1505,26 @@ Get all mods for the corresponding game. Successful request will return an array
           "metavalue": "800"
         }
       ],
-      "media": {
-        "youtube": [
-          "https://www.youtube.com/watch?v=dQw4w9WgXcQ"
-        ],
-        "sketchfab": [
-          "https://sketchfab.com/models/ef40b2d300334d009984c8865b2db1c8"
-        ],
-        "images": [
-          {
-            "filename": "modio-color-dark.png",
-            "original": "https://static.mod.io/v1/images/branding/modio-color-dark.png",
-            "thumb_320x180": "https://static.mod.io/v1/images/branding/modio-color-dark.png"
-          }
-        ]
-      },
-      "rating_summary": {
-        "total_ratings": 1230,
-        "positive_ratings": 1047,
-        "negative_ratings": 183,
-        "percentage_positive": 91,
-        "weighted_aggregate": 87.38,
-        "display_text": "Very Positive"
-      },
       "tags": [
         {
           "name": "Unity",
           "date_added": 1499841487
         }
-      ]
+      ],
+      "stats": {
+        "mod_id": 2,
+        "popularity_rank_position": 13,
+        "popularity_rank_total_mods": 204,
+        "downloads_total": 27492,
+        "subscribers_total": 16394,
+        "ratings_total": 1230,
+        "ratings_positive": 1047,
+        "ratings_negative": 183,
+        "ratings_percentage_positive": 91,
+        "ratings_weighted_aggregate": 87.38,
+        "ratings_display_text": "Very Positive",
+        "date_expires": 1492564103
+      }
     },
     {
         ...
@@ -1670,6 +1676,21 @@ Get a mod. Successful request will return a single [Mod Object](#mod-object).
   "description": "<h2>About</h2><p>Rogue HD Pack does exactly what you thi...",
   "metadata_blob": "rogue,hd,high-res,4k,hd textures",
   "profile_url": "https://rogue-knight.mod.io/rogue-knight-hd-pack",
+  "media": {
+    "youtube": [
+      "https://www.youtube.com/watch?v=dQw4w9WgXcQ"
+    ],
+    "sketchfab": [
+      "https://sketchfab.com/models/ef40b2d300334d009984c8865b2db1c8"
+    ],
+    "images": [
+      {
+        "filename": "modio-color-dark.png",
+        "original": "https://static.mod.io/v1/images/branding/modio-color-dark.png",
+        "thumb_320x180": "https://static.mod.io/v1/images/branding/modio-color-dark.png"
+      }
+    ]
+  },
   "modfile": {
     "id": 2,
     "mod_id": 2,
@@ -1697,35 +1718,26 @@ Get a mod. Successful request will return a single [Mod Object](#mod-object).
       "metavalue": "800"
     }
   ],
-  "media": {
-    "youtube": [
-      "https://www.youtube.com/watch?v=dQw4w9WgXcQ"
-    ],
-    "sketchfab": [
-      "https://sketchfab.com/models/ef40b2d300334d009984c8865b2db1c8"
-    ],
-    "images": [
-      {
-        "filename": "modio-color-dark.png",
-        "original": "https://static.mod.io/v1/images/branding/modio-color-dark.png",
-        "thumb_320x180": "https://static.mod.io/v1/images/branding/modio-color-dark.png"
-      }
-    ]
-  },
-  "rating_summary": {
-    "total_ratings": 1230,
-    "positive_ratings": 1047,
-    "negative_ratings": 183,
-    "percentage_positive": 91,
-    "weighted_aggregate": 87.38,
-    "display_text": "Very Positive"
-  },
   "tags": [
     {
       "name": "Unity",
       "date_added": 1499841487
     }
-  ]
+  ],
+  "stats": {
+    "mod_id": 2,
+    "popularity_rank_position": 13,
+    "popularity_rank_total_mods": 204,
+    "downloads_total": 27492,
+    "subscribers_total": 16394,
+    "ratings_total": 1230,
+    "ratings_positive": 1047,
+    "ratings_negative": 183,
+    "ratings_percentage_positive": 91,
+    "ratings_weighted_aggregate": 87.38,
+    "ratings_display_text": "Very Positive",
+    "date_expires": 1492564103
+  }
 }
 ```
 <h3 id="Get-Mod-responses">Responses</h3>
@@ -1900,6 +1912,21 @@ Add a mod. Successful request will return the newly created [Mod Object](#mod-ob
   "description": "<h2>About</h2><p>Rogue HD Pack does exactly what you thi...",
   "metadata_blob": "rogue,hd,high-res,4k,hd textures",
   "profile_url": "https://rogue-knight.mod.io/rogue-knight-hd-pack",
+  "media": {
+    "youtube": [
+      "https://www.youtube.com/watch?v=dQw4w9WgXcQ"
+    ],
+    "sketchfab": [
+      "https://sketchfab.com/models/ef40b2d300334d009984c8865b2db1c8"
+    ],
+    "images": [
+      {
+        "filename": "modio-color-dark.png",
+        "original": "https://static.mod.io/v1/images/branding/modio-color-dark.png",
+        "thumb_320x180": "https://static.mod.io/v1/images/branding/modio-color-dark.png"
+      }
+    ]
+  },
   "modfile": {
     "id": 2,
     "mod_id": 2,
@@ -1927,35 +1954,26 @@ Add a mod. Successful request will return the newly created [Mod Object](#mod-ob
       "metavalue": "800"
     }
   ],
-  "media": {
-    "youtube": [
-      "https://www.youtube.com/watch?v=dQw4w9WgXcQ"
-    ],
-    "sketchfab": [
-      "https://sketchfab.com/models/ef40b2d300334d009984c8865b2db1c8"
-    ],
-    "images": [
-      {
-        "filename": "modio-color-dark.png",
-        "original": "https://static.mod.io/v1/images/branding/modio-color-dark.png",
-        "thumb_320x180": "https://static.mod.io/v1/images/branding/modio-color-dark.png"
-      }
-    ]
-  },
-  "rating_summary": {
-    "total_ratings": 1230,
-    "positive_ratings": 1047,
-    "negative_ratings": 183,
-    "percentage_positive": 91,
-    "weighted_aggregate": 87.38,
-    "display_text": "Very Positive"
-  },
   "tags": [
     {
       "name": "Unity",
       "date_added": 1499841487
     }
-  ]
+  ],
+  "stats": {
+    "mod_id": 2,
+    "popularity_rank_position": 13,
+    "popularity_rank_total_mods": 204,
+    "downloads_total": 27492,
+    "subscribers_total": 16394,
+    "ratings_total": 1230,
+    "ratings_positive": 1047,
+    "ratings_negative": 183,
+    "ratings_percentage_positive": 91,
+    "ratings_weighted_aggregate": 87.38,
+    "ratings_display_text": "Very Positive",
+    "date_expires": 1492564103
+  }
 }
 ```
 <h3 id="Add-Mod-responses">Responses</h3>
@@ -2129,6 +2147,21 @@ Edit details for a mod. If you want to update the `logo` or media associated wit
   "description": "<h2>About</h2><p>Rogue HD Pack does exactly what you thi...",
   "metadata_blob": "rogue,hd,high-res,4k,hd textures",
   "profile_url": "https://rogue-knight.mod.io/rogue-knight-hd-pack",
+  "media": {
+    "youtube": [
+      "https://www.youtube.com/watch?v=dQw4w9WgXcQ"
+    ],
+    "sketchfab": [
+      "https://sketchfab.com/models/ef40b2d300334d009984c8865b2db1c8"
+    ],
+    "images": [
+      {
+        "filename": "modio-color-dark.png",
+        "original": "https://static.mod.io/v1/images/branding/modio-color-dark.png",
+        "thumb_320x180": "https://static.mod.io/v1/images/branding/modio-color-dark.png"
+      }
+    ]
+  },
   "modfile": {
     "id": 2,
     "mod_id": 2,
@@ -2156,35 +2189,26 @@ Edit details for a mod. If you want to update the `logo` or media associated wit
       "metavalue": "800"
     }
   ],
-  "media": {
-    "youtube": [
-      "https://www.youtube.com/watch?v=dQw4w9WgXcQ"
-    ],
-    "sketchfab": [
-      "https://sketchfab.com/models/ef40b2d300334d009984c8865b2db1c8"
-    ],
-    "images": [
-      {
-        "filename": "modio-color-dark.png",
-        "original": "https://static.mod.io/v1/images/branding/modio-color-dark.png",
-        "thumb_320x180": "https://static.mod.io/v1/images/branding/modio-color-dark.png"
-      }
-    ]
-  },
-  "rating_summary": {
-    "total_ratings": 1230,
-    "positive_ratings": 1047,
-    "negative_ratings": 183,
-    "percentage_positive": 91,
-    "weighted_aggregate": 87.38,
-    "display_text": "Very Positive"
-  },
   "tags": [
     {
       "name": "Unity",
       "date_added": 1499841487
     }
-  ]
+  ],
+  "stats": {
+    "mod_id": 2,
+    "popularity_rank_position": 13,
+    "popularity_rank_total_mods": 204,
+    "downloads_total": 27492,
+    "subscribers_total": 16394,
+    "ratings_total": 1230,
+    "ratings_positive": 1047,
+    "ratings_negative": 183,
+    "ratings_percentage_positive": 91,
+    "ratings_weighted_aggregate": 87.38,
+    "ratings_display_text": "Very Positive",
+    "date_expires": 1492564103
+  }
 }
 ```
 <h3 id="Edit-Mod-responses">Responses</h3>
@@ -3563,6 +3587,21 @@ Subscribe the _authenticated user_ to a corresponding mod. No body parameters ar
   "description": "<h2>About</h2><p>Rogue HD Pack does exactly what you thi...",
   "metadata_blob": "rogue,hd,high-res,4k,hd textures",
   "profile_url": "https://rogue-knight.mod.io/rogue-knight-hd-pack",
+  "media": {
+    "youtube": [
+      "https://www.youtube.com/watch?v=dQw4w9WgXcQ"
+    ],
+    "sketchfab": [
+      "https://sketchfab.com/models/ef40b2d300334d009984c8865b2db1c8"
+    ],
+    "images": [
+      {
+        "filename": "modio-color-dark.png",
+        "original": "https://static.mod.io/v1/images/branding/modio-color-dark.png",
+        "thumb_320x180": "https://static.mod.io/v1/images/branding/modio-color-dark.png"
+      }
+    ]
+  },
   "modfile": {
     "id": 2,
     "mod_id": 2,
@@ -3590,35 +3629,26 @@ Subscribe the _authenticated user_ to a corresponding mod. No body parameters ar
       "metavalue": "800"
     }
   ],
-  "media": {
-    "youtube": [
-      "https://www.youtube.com/watch?v=dQw4w9WgXcQ"
-    ],
-    "sketchfab": [
-      "https://sketchfab.com/models/ef40b2d300334d009984c8865b2db1c8"
-    ],
-    "images": [
-      {
-        "filename": "modio-color-dark.png",
-        "original": "https://static.mod.io/v1/images/branding/modio-color-dark.png",
-        "thumb_320x180": "https://static.mod.io/v1/images/branding/modio-color-dark.png"
-      }
-    ]
-  },
-  "rating_summary": {
-    "total_ratings": 1230,
-    "positive_ratings": 1047,
-    "negative_ratings": 183,
-    "percentage_positive": 91,
-    "weighted_aggregate": 87.38,
-    "display_text": "Very Positive"
-  },
   "tags": [
     {
       "name": "Unity",
       "date_added": 1499841487
     }
-  ]
+  ],
+  "stats": {
+    "mod_id": 2,
+    "popularity_rank_position": 13,
+    "popularity_rank_total_mods": 204,
+    "downloads_total": 27492,
+    "subscribers_total": 16394,
+    "ratings_total": 1230,
+    "ratings_positive": 1047,
+    "ratings_negative": 183,
+    "ratings_percentage_positive": 91,
+    "ratings_weighted_aggregate": 87.38,
+    "ratings_display_text": "Very Positive",
+    "date_expires": 1492564103
+  }
 }
 ```
 <h3 id="Subscribe-To-Mod-responses">Responses</h3>
@@ -4115,7 +4145,7 @@ Get all mod stats for mods of the corresponding game. Successful request will re
 {
   "data": [
     {
-      "mod_id": 142,
+      "mod_id": 2,
       "popularity_rank_position": 13,
       "popularity_rank_total_mods": 204,
       "downloads_total": 27492,
@@ -4241,7 +4271,7 @@ Get mod stats for the corresponding mod. Successful request will return a single
 
 ```json
 {
-  "mod_id": 142,
+  "mod_id": 2,
   "popularity_rank_position": 13,
   "popularity_rank_total_mods": 204,
   "downloads_total": 27492,
@@ -7662,6 +7692,21 @@ Get all mod's the _authenticated user_ is subscribed to. Successful request will
       "description": "<h2>About</h2><p>Rogue HD Pack does exactly what you thi...",
       "metadata_blob": "rogue,hd,high-res,4k,hd textures",
       "profile_url": "https://rogue-knight.mod.io/rogue-knight-hd-pack",
+      "media": {
+        "youtube": [
+          "https://www.youtube.com/watch?v=dQw4w9WgXcQ"
+        ],
+        "sketchfab": [
+          "https://sketchfab.com/models/ef40b2d300334d009984c8865b2db1c8"
+        ],
+        "images": [
+          {
+            "filename": "modio-color-dark.png",
+            "original": "https://static.mod.io/v1/images/branding/modio-color-dark.png",
+            "thumb_320x180": "https://static.mod.io/v1/images/branding/modio-color-dark.png"
+          }
+        ]
+      },
       "modfile": {
         "id": 2,
         "mod_id": 2,
@@ -7689,35 +7734,26 @@ Get all mod's the _authenticated user_ is subscribed to. Successful request will
           "metavalue": "800"
         }
       ],
-      "media": {
-        "youtube": [
-          "https://www.youtube.com/watch?v=dQw4w9WgXcQ"
-        ],
-        "sketchfab": [
-          "https://sketchfab.com/models/ef40b2d300334d009984c8865b2db1c8"
-        ],
-        "images": [
-          {
-            "filename": "modio-color-dark.png",
-            "original": "https://static.mod.io/v1/images/branding/modio-color-dark.png",
-            "thumb_320x180": "https://static.mod.io/v1/images/branding/modio-color-dark.png"
-          }
-        ]
-      },
-      "rating_summary": {
-        "total_ratings": 1230,
-        "positive_ratings": 1047,
-        "negative_ratings": 183,
-        "percentage_positive": 91,
-        "weighted_aggregate": 87.38,
-        "display_text": "Very Positive"
-      },
       "tags": [
         {
           "name": "Unity",
           "date_added": 1499841487
         }
-      ]
+      ],
+      "stats": {
+        "mod_id": 2,
+        "popularity_rank_position": 13,
+        "popularity_rank_total_mods": 204,
+        "downloads_total": 27492,
+        "subscribers_total": 16394,
+        "ratings_total": 1230,
+        "ratings_positive": 1047,
+        "ratings_negative": 183,
+        "ratings_percentage_positive": 91,
+        "ratings_weighted_aggregate": 87.38,
+        "ratings_display_text": "Very Positive",
+        "date_expires": 1492564103
+      }
     },
     {
         ...
@@ -8234,6 +8270,21 @@ Get all mods the _authenticated user_ added or is a team member of. Successful r
       "description": "<h2>About</h2><p>Rogue HD Pack does exactly what you thi...",
       "metadata_blob": "rogue,hd,high-res,4k,hd textures",
       "profile_url": "https://rogue-knight.mod.io/rogue-knight-hd-pack",
+      "media": {
+        "youtube": [
+          "https://www.youtube.com/watch?v=dQw4w9WgXcQ"
+        ],
+        "sketchfab": [
+          "https://sketchfab.com/models/ef40b2d300334d009984c8865b2db1c8"
+        ],
+        "images": [
+          {
+            "filename": "modio-color-dark.png",
+            "original": "https://static.mod.io/v1/images/branding/modio-color-dark.png",
+            "thumb_320x180": "https://static.mod.io/v1/images/branding/modio-color-dark.png"
+          }
+        ]
+      },
       "modfile": {
         "id": 2,
         "mod_id": 2,
@@ -8261,35 +8312,26 @@ Get all mods the _authenticated user_ added or is a team member of. Successful r
           "metavalue": "800"
         }
       ],
-      "media": {
-        "youtube": [
-          "https://www.youtube.com/watch?v=dQw4w9WgXcQ"
-        ],
-        "sketchfab": [
-          "https://sketchfab.com/models/ef40b2d300334d009984c8865b2db1c8"
-        ],
-        "images": [
-          {
-            "filename": "modio-color-dark.png",
-            "original": "https://static.mod.io/v1/images/branding/modio-color-dark.png",
-            "thumb_320x180": "https://static.mod.io/v1/images/branding/modio-color-dark.png"
-          }
-        ]
-      },
-      "rating_summary": {
-        "total_ratings": 1230,
-        "positive_ratings": 1047,
-        "negative_ratings": 183,
-        "percentage_positive": 91,
-        "weighted_aggregate": 87.38,
-        "display_text": "Very Positive"
-      },
       "tags": [
         {
           "name": "Unity",
           "date_added": 1499841487
         }
-      ]
+      ],
+      "stats": {
+        "mod_id": 2,
+        "popularity_rank_position": 13,
+        "popularity_rank_total_mods": 204,
+        "downloads_total": 27492,
+        "subscribers_total": 16394,
+        "ratings_total": 1230,
+        "ratings_positive": 1047,
+        "ratings_negative": 183,
+        "ratings_percentage_positive": 91,
+        "ratings_weighted_aggregate": 87.38,
+        "ratings_display_text": "Very Positive",
+        "date_expires": 1492564103
+      }
     },
     {
         ...
@@ -8925,6 +8967,21 @@ date_expires|integer|Unix timestamp of when the `binary_url` will expire.
   "description": "<h2>About</h2><p>Rogue HD Pack does exactly what you thi...",
   "metadata_blob": "rogue,hd,high-res,4k,hd textures",
   "profile_url": "https://rogue-knight.mod.io/rogue-knight-hd-pack",
+  "media": {
+    "youtube": [
+      "https://www.youtube.com/watch?v=dQw4w9WgXcQ"
+    ],
+    "sketchfab": [
+      "https://sketchfab.com/models/ef40b2d300334d009984c8865b2db1c8"
+    ],
+    "images": [
+      {
+        "filename": "modio-color-dark.png",
+        "original": "https://static.mod.io/v1/images/branding/modio-color-dark.png",
+        "thumb_320x180": "https://static.mod.io/v1/images/branding/modio-color-dark.png"
+      }
+    ]
+  },
   "modfile": {
     "id": 2,
     "mod_id": 2,
@@ -8952,35 +9009,26 @@ date_expires|integer|Unix timestamp of when the `binary_url` will expire.
       "metavalue": "800"
     }
   ],
-  "media": {
-    "youtube": [
-      "https://www.youtube.com/watch?v=dQw4w9WgXcQ"
-    ],
-    "sketchfab": [
-      "https://sketchfab.com/models/ef40b2d300334d009984c8865b2db1c8"
-    ],
-    "images": [
-      {
-        "filename": "modio-color-dark.png",
-        "original": "https://static.mod.io/v1/images/branding/modio-color-dark.png",
-        "thumb_320x180": "https://static.mod.io/v1/images/branding/modio-color-dark.png"
-      }
-    ]
-  },
-  "rating_summary": {
-    "total_ratings": 1230,
-    "positive_ratings": 1047,
-    "negative_ratings": 183,
-    "percentage_positive": 91,
-    "weighted_aggregate": 87.38,
-    "display_text": "Very Positive"
-  },
   "tags": [
     {
       "name": "Unity",
       "date_added": 1499841487
     }
-  ]
+  ],
+  "stats": {
+    "mod_id": 2,
+    "popularity_rank_position": 13,
+    "popularity_rank_total_mods": 204,
+    "downloads_total": 27492,
+    "subscribers_total": 16394,
+    "ratings_total": 1230,
+    "ratings_positive": 1047,
+    "ratings_negative": 183,
+    "ratings_percentage_positive": 91,
+    "ratings_weighted_aggregate": 87.38,
+    "ratings_display_text": "Very Positive",
+    "date_expires": 1492564103
+  }
 } 
 ```
 
@@ -9023,6 +9071,13 @@ summary|string|Summary of the mod.
 description|string|Detailed description of the mod which allows HTML.
 metadata_blob|string|Metadata stored by the game developer. Metadata can also be stored as searchable [key value pairs](#metadata), and to individual [mod files](#get-all-modfiles).
 profile_url|string|URL to the mod's mod.io profile.
+media|[Mod Media Object  ](#schemamod_media_object)|Contains mod media data.
+» youtube|string[]|Array of YouTube links.
+» sketchfab|string[]|Array of SketchFab links.
+» images|[Image Object   ](#schemaimage_object)[]|Array of image objects (a gallery).
+»» filename|string|Image filename including extension.
+»» original|string|URL to the full-sized image.
+»» thumb_320x180|string|URL to the image thumbnail.
 modfile|[Modfile Object   ](#schemamodfile_object)|Contains modfile data.
 » id|integer|Unique modfile id.
 » mod_id|integer|Unique mod id.
@@ -9041,20 +9096,19 @@ modfile|[Modfile Object   ](#schemamodfile_object)|Contains modfile data.
 » download|[Download Object   ](#schemadownload_object)|Contains download data.
 »» binary_url|string|URL to download the file from the mod.io CDN.<br><br>__NOTE:__ If the [game](#edit-game) requires mod downloads to be initiated via the API, the `binary_url` returned will contain a verification hash. This hash must be supplied to get the modfile, and will expire after a certain period of time. Saving and reusing the `binary_url` won't work in this situation given it's dynamic nature.
 »» date_expires|integer|Unix timestamp of when the `binary_url` will expire.
-media|[Mod Media Object  ](#schemamod_media_object)|Contains mod media data.
-» youtube|string[]|Array of YouTube links.
-» sketchfab|string[]|Array of SketchFab links.
-» images|[Image Object   ](#schemaimage_object)[]|Array of image objects (a gallery).
-»» filename|string|Image filename including extension.
-»» original|string|URL to the full-sized image.
-»» thumb_320x180|string|URL to the image thumbnail.
-rating_summary|[Rating Summary Object  ](#schemarating_summary_object)|Contains ratings summary.
-» total_ratings|integer|Number of times this item has been rated.
-» positive_ratings|integer|Number of positive ratings.
-» negative_ratings|integer|Number of negative ratings.
-» percentage_positive|integer|Number of positive ratings, divided by the total ratings to determine it’s percentage score.
-» weighted_aggregate|float|Overall rating of this item calculated using the [Wilson score confidence interval](https://www.evanmiller.org/how-not-to-sort-by-average-rating.html). This column is good to sort on, as it will order items based on number of ratings and will place items with many positive ratings above those with a higher score but fewer ratings.
-» display_text|string|Textual representation of the rating in format:<br><br>- Overwhelmingly Positive<br>- Very Positive<br>- Positive<br>- Mostly Positive<br>- Mixed<br>- Negative<br>- Mostly Negative<br>- Very Negative<br>- Overwhelmingly Negative
+stats|[Stats Object   ](#schemastats_object)|Array containing stats objects.
+» mod_id|integer|Unique mod id.
+» popularity_rank_position|integer|Current rank of the mod.
+» popularity_rank_total_mods|integer|Number of ranking spots the current rank is measured against.
+» downloads_total|integer|Number of total mod downloads.
+» subscribers_total|integer|Number of total users who have subscribed to the mod.
+» ratings_total|integer|Number of times this item has been rated.
+» ratings_positive|integer|Number of positive ratings.
+» ratings_negative|integer|Number of negative ratings.
+» ratings_percentage_positive|integer|Number of positive ratings, divided by the total ratings to determine it’s percentage score.
+» ratings_weighted_aggregate|float|Overall rating of this item calculated using the [Wilson score confidence interval](https://www.evanmiller.org/how-not-to-sort-by-average-rating.html). This column is good to sort on, as it will order items based on number of ratings and will place items with many positive ratings above those with a higher score but fewer ratings.
+» ratings_display_text|string|Textual representation of the rating in format:<br><br>- Overwhelmingly Positive<br>- Very Positive<br>- Positive<br>- Mostly Positive<br>- Mixed<br>- Negative<br>- Mostly Negative<br>- Very Negative<br>- Overwhelmingly Negative<br>- Unrated
+» date_expires|integer|Unix timestamp until this mods's statistics are considered stale.
 metadata_kvp|[Metadata KVP Object  ](#schemametadata_kvp_object)[]|Contains key-value metadata.
 » metakey|string|The key of the key-value pair.
 » metavalue|string|The value of the key-value pair.
@@ -9278,43 +9332,13 @@ metavalue|string|The value of the key-value pair.
 
 
 
-## Rating Summary Object  
-
-<a name="schemarating_summary_object"></a>
-
-```json
-{
-  "total_ratings": 1230,
-  "positive_ratings": 1047,
-  "negative_ratings": 183,
-  "percentage_positive": 91,
-  "weighted_aggregate": 87.38,
-  "display_text": "Very Positive"
-} 
-```
-
-
-### Properties
-
-Name|Type|Description
----|---|---|---|
-total_ratings|integer|Number of times this item has been rated.
-positive_ratings|integer|Number of positive ratings.
-negative_ratings|integer|Number of negative ratings.
-percentage_positive|integer|Number of positive ratings, divided by the total ratings to determine it’s percentage score.
-weighted_aggregate|float|Overall rating of this item calculated using the [Wilson score confidence interval](https://www.evanmiller.org/how-not-to-sort-by-average-rating.html). This column is good to sort on, as it will order items based on number of ratings and will place items with many positive ratings above those with a higher score but fewer ratings.
-display_text|string|Textual representation of the rating in format:<br><br>- Overwhelmingly Positive<br>- Very Positive<br>- Positive<br>- Mostly Positive<br>- Mixed<br>- Negative<br>- Mostly Negative<br>- Very Negative<br>- Overwhelmingly Negative
-
-
-
-
 ## Stats Object
 
    <a name="schemastats_object"></a>
 
 ```json
 {
-  "mod_id": 142,
+  "mod_id": 2,
   "popularity_rank_position": 13,
   "popularity_rank_total_mods": 204,
   "downloads_total": 27492,
@@ -9899,6 +9923,21 @@ result_offset|integer|Number of results skipped over.
       "description": "<h2>About</h2><p>Rogue HD Pack does exactly what you thi...",
       "metadata_blob": "rogue,hd,high-res,4k,hd textures",
       "profile_url": "https://rogue-knight.mod.io/rogue-knight-hd-pack",
+      "media": {
+        "youtube": [
+          "https://www.youtube.com/watch?v=dQw4w9WgXcQ"
+        ],
+        "sketchfab": [
+          "https://sketchfab.com/models/ef40b2d300334d009984c8865b2db1c8"
+        ],
+        "images": [
+          {
+            "filename": "modio-color-dark.png",
+            "original": "https://static.mod.io/v1/images/branding/modio-color-dark.png",
+            "thumb_320x180": "https://static.mod.io/v1/images/branding/modio-color-dark.png"
+          }
+        ]
+      },
       "modfile": {
         "id": 2,
         "mod_id": 2,
@@ -9926,35 +9965,26 @@ result_offset|integer|Number of results skipped over.
           "metavalue": "800"
         }
       ],
-      "media": {
-        "youtube": [
-          "https://www.youtube.com/watch?v=dQw4w9WgXcQ"
-        ],
-        "sketchfab": [
-          "https://sketchfab.com/models/ef40b2d300334d009984c8865b2db1c8"
-        ],
-        "images": [
-          {
-            "filename": "modio-color-dark.png",
-            "original": "https://static.mod.io/v1/images/branding/modio-color-dark.png",
-            "thumb_320x180": "https://static.mod.io/v1/images/branding/modio-color-dark.png"
-          }
-        ]
-      },
-      "rating_summary": {
-        "total_ratings": 1230,
-        "positive_ratings": 1047,
-        "negative_ratings": 183,
-        "percentage_positive": 91,
-        "weighted_aggregate": 87.38,
-        "display_text": "Very Positive"
-      },
       "tags": [
         {
           "name": "Unity",
           "date_added": 1499841487
         }
-      ]
+      ],
+      "stats": {
+        "mod_id": 2,
+        "popularity_rank_position": 13,
+        "popularity_rank_total_mods": 204,
+        "downloads_total": 27492,
+        "subscribers_total": 16394,
+        "ratings_total": 1230,
+        "ratings_positive": 1047,
+        "ratings_negative": 183,
+        "ratings_percentage_positive": 91,
+        "ratings_weighted_aggregate": 87.38,
+        "ratings_display_text": "Very Positive",
+        "date_expires": 1492564103
+      }
     },
     {
         ...
@@ -10006,6 +10036,13 @@ data|[Mod Object   ](#schemamod_object)[]|Array containing mod objects.
 » description|string|Detailed description of the mod which allows HTML.
 » metadata_blob|string|Metadata stored by the game developer. Metadata can also be stored as searchable [key value pairs](#metadata), and to individual [mod files](#get-all-modfiles).
 » profile_url|string|URL to the mod's mod.io profile.
+» media|[Mod Media Object  ](#schemamod_media_object)|Contains mod media data.
+»» youtube|string[]|Array of YouTube links.
+»» sketchfab|string[]|Array of SketchFab links.
+»» images|[Image Object   ](#schemaimage_object)[]|Array of image objects (a gallery).
+»»» filename|string|Image filename including extension.
+»»» original|string|URL to the full-sized image.
+»»» thumb_320x180|string|URL to the image thumbnail.
 » modfile|[Modfile Object   ](#schemamodfile_object)|Contains modfile data.
 »» id|integer|Unique modfile id.
 »» mod_id|integer|Unique mod id.
@@ -10024,20 +10061,19 @@ data|[Mod Object   ](#schemamod_object)[]|Array containing mod objects.
 »» download|[Download Object   ](#schemadownload_object)|Contains download data.
 »»» binary_url|string|URL to download the file from the mod.io CDN.<br><br>__NOTE:__ If the [game](#edit-game) requires mod downloads to be initiated via the API, the `binary_url` returned will contain a verification hash. This hash must be supplied to get the modfile, and will expire after a certain period of time. Saving and reusing the `binary_url` won't work in this situation given it's dynamic nature.
 »»» date_expires|integer|Unix timestamp of when the `binary_url` will expire.
-» media|[Mod Media Object  ](#schemamod_media_object)|Contains mod media data.
-»» youtube|string[]|Array of YouTube links.
-»» sketchfab|string[]|Array of SketchFab links.
-»» images|[Image Object   ](#schemaimage_object)[]|Array of image objects (a gallery).
-»»» filename|string|Image filename including extension.
-»»» original|string|URL to the full-sized image.
-»»» thumb_320x180|string|URL to the image thumbnail.
-» rating_summary|[Rating Summary Object  ](#schemarating_summary_object)|Contains ratings summary.
-»» total_ratings|integer|Number of times this item has been rated.
-»» positive_ratings|integer|Number of positive ratings.
-»» negative_ratings|integer|Number of negative ratings.
-»» percentage_positive|integer|Number of positive ratings, divided by the total ratings to determine it’s percentage score.
-»» weighted_aggregate|float|Overall rating of this item calculated using the [Wilson score confidence interval](https://www.evanmiller.org/how-not-to-sort-by-average-rating.html). This column is good to sort on, as it will order items based on number of ratings and will place items with many positive ratings above those with a higher score but fewer ratings.
-»» display_text|string|Textual representation of the rating in format:<br><br>- Overwhelmingly Positive<br>- Very Positive<br>- Positive<br>- Mostly Positive<br>- Mixed<br>- Negative<br>- Mostly Negative<br>- Very Negative<br>- Overwhelmingly Negative
+» stats|[Stats Object   ](#schemastats_object)|Array containing stats objects.
+»» mod_id|integer|Unique mod id.
+»» popularity_rank_position|integer|Current rank of the mod.
+»» popularity_rank_total_mods|integer|Number of ranking spots the current rank is measured against.
+»» downloads_total|integer|Number of total mod downloads.
+»» subscribers_total|integer|Number of total users who have subscribed to the mod.
+»» ratings_total|integer|Number of times this item has been rated.
+»» ratings_positive|integer|Number of positive ratings.
+»» ratings_negative|integer|Number of negative ratings.
+»» ratings_percentage_positive|integer|Number of positive ratings, divided by the total ratings to determine it’s percentage score.
+»» ratings_weighted_aggregate|float|Overall rating of this item calculated using the [Wilson score confidence interval](https://www.evanmiller.org/how-not-to-sort-by-average-rating.html). This column is good to sort on, as it will order items based on number of ratings and will place items with many positive ratings above those with a higher score but fewer ratings.
+»» ratings_display_text|string|Textual representation of the rating in format:<br><br>- Overwhelmingly Positive<br>- Very Positive<br>- Positive<br>- Mostly Positive<br>- Mixed<br>- Negative<br>- Mostly Negative<br>- Very Negative<br>- Overwhelmingly Negative<br>- Unrated
+»» date_expires|integer|Unix timestamp until this mods's statistics are considered stale.
 » metadata_kvp|[Metadata KVP Object  ](#schemametadata_kvp_object)[]|Contains key-value metadata.
 »» metakey|string|The key of the key-value pair.
 »» metavalue|string|The value of the key-value pair.
@@ -10059,7 +10095,7 @@ result_offset|integer|Number of results skipped over.
 {
   "data": [
     {
-      "mod_id": 142,
+      "mod_id": 2,
       "popularity_rank_position": 13,
       "popularity_rank_total_mods": 204,
       "downloads_total": 27492,
