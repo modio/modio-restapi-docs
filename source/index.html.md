@@ -4171,7 +4171,7 @@ Get all mod stats for mods of the corresponding game. Successful request will re
 
 Status|Meaning|Description|Response Schema
 ---|---|---|---|
-200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)|Successful Request|[Get Mod Stats  ](#schemaget_mod_stats)
+200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)|Successful Request|[Get All Mod Stats ](#schemaget_all_mod_stats)
 
 <aside class="auth-notice">
 To perform this request, you must be authenticated via one of the following methods:
@@ -10087,9 +10087,9 @@ result_offset|integer|Number of results skipped over.
 
 
 
-## Get Mod Stats  
+## Get All Mod Stats 
 
-<a name="schemaget_mod_stats"></a>
+<a name="schemaget_all_mod_stats"></a>
 
 ```json
 {
