@@ -4171,7 +4171,7 @@ Get all mod stats for mods of the corresponding game. Successful request will re
 
 Status|Meaning|Description|Response Schema
 ---|---|---|---|
-200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)|Successful Request|[Get All Mod Stats ](#schemaget_all_mod_stats)
+200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)|Successful Request|[Get Mod Stats  ](#schemaget_mod_stats)
 
 <aside class="auth-notice">
 To perform this request, you must be authenticated via one of the following methods:
@@ -7008,7 +7008,7 @@ Status|Meaning|Description|Response Schema
 
 <aside class="auth-notice">
 To perform this request, you must be authenticated via one of the following methods:
-<a href="#authentication">api_key</a>, <a href="#authentication">OAuth 2</a> (Scopes: read)
+<a href="#authentication">OAuth 2</a> (Scopes: read)
 </aside>
 ## Get All Users
 
@@ -8711,7 +8711,7 @@ id|integer|Unique id of the event object.
 mod_id|integer|Unique id of the parent mod.
 user_id|integer|Unique id of the user who performed the action.
 date_added|integer|Unix timestamp of date the event occurred.
-event_type|string|Type of [event](#get-mod-events-2) was 'MODFILE_CHANGED', 'MOD_AVAILABLE', 'MOD_UNAVAILABLE', 'MOD_EDITED', 'MOD_DELETED'.
+event_type|string|Type of event that was triggered. List of possible events: <br><br>- MODFILE_CHANGED<br>- MOD_AVAILABLE<br>- MOD_UNAVAILABLE<br>- MOD_EDITED<br>- MOD_DELETED<br>- USER_TEAM_JOIN<br>- USER_TEAM_LEAVE<br>- USER_SUBSCRIBE<br>- USER_UNSUBSCRIBE
 
 
 
@@ -9096,7 +9096,7 @@ modfile|[Modfile Object   ](#schemamodfile_object)|Contains modfile data.
 » download|[Download Object   ](#schemadownload_object)|Contains download data.
 »» binary_url|string|URL to download the file from the mod.io CDN.<br><br>__NOTE:__ If the [game](#edit-game) requires mod downloads to be initiated via the API, the `binary_url` returned will contain a verification hash. This hash must be supplied to get the modfile, and will expire after a certain period of time. Saving and reusing the `binary_url` won't work in this situation given it's dynamic nature.
 »» date_expires|integer|Unix timestamp of when the `binary_url` will expire.
-stats|[Stats Object   ](#schemastats_object)|Array containing stats objects.
+stats|[Stats Object   ](#schemastats_object)|Contains stats data.
 » mod_id|integer|Unique mod id.
 » popularity_rank_position|integer|Current rank of the mod.
 » popularity_rank_total_mods|integer|Number of ranking spots the current rank is measured against.
@@ -9620,7 +9620,7 @@ data|[Event Object   ](#schemaevent_object)[]|Array containing event objects.
 » mod_id|integer|Unique id of the parent mod.
 » user_id|integer|Unique id of the user who performed the action.
 » date_added|integer|Unix timestamp of date the event occurred.
-» event_type|string|Type of [event](#get-mod-events-2) was 'MODFILE_CHANGED', 'MOD_AVAILABLE', 'MOD_UNAVAILABLE', 'MOD_EDITED', 'MOD_DELETED'.
+» event_type|string|Type of event that was triggered. List of possible events: <br><br>- MODFILE_CHANGED<br>- MOD_AVAILABLE<br>- MOD_UNAVAILABLE<br>- MOD_EDITED<br>- MOD_DELETED<br>- USER_TEAM_JOIN<br>- USER_TEAM_LEAVE<br>- USER_SUBSCRIBE<br>- USER_UNSUBSCRIBE
 result_count|integer|Number of results returned in the data array.
 result_limit|integer|Maximum number of results returned.
 result_offset|integer|Number of results skipped over.
@@ -10061,7 +10061,7 @@ data|[Mod Object   ](#schemamod_object)[]|Array containing mod objects.
 »» download|[Download Object   ](#schemadownload_object)|Contains download data.
 »»» binary_url|string|URL to download the file from the mod.io CDN.<br><br>__NOTE:__ If the [game](#edit-game) requires mod downloads to be initiated via the API, the `binary_url` returned will contain a verification hash. This hash must be supplied to get the modfile, and will expire after a certain period of time. Saving and reusing the `binary_url` won't work in this situation given it's dynamic nature.
 »»» date_expires|integer|Unix timestamp of when the `binary_url` will expire.
-» stats|[Stats Object   ](#schemastats_object)|Array containing stats objects.
+» stats|[Stats Object   ](#schemastats_object)|Contains stats data.
 »» mod_id|integer|Unique mod id.
 »» popularity_rank_position|integer|Current rank of the mod.
 »» popularity_rank_total_mods|integer|Number of ranking spots the current rank is measured against.
@@ -10087,9 +10087,9 @@ result_offset|integer|Number of results skipped over.
 
 
 
-## Get All Mod Stats 
+## Get Mod Stats  
 
-<a name="schemaget_all_mod_stats"></a>
+<a name="schemaget_mod_stats"></a>
 
 ```json
 {
@@ -10380,7 +10380,7 @@ data|[Event Object   ](#schemaevent_object)[]|Array containing event objects.
 » mod_id|integer|Unique id of the parent mod.
 » user_id|integer|Unique id of the user who performed the action.
 » date_added|integer|Unix timestamp of date the event occurred.
-» event_type|string|Type of [event](#get-mod-events-2) was 'MODFILE_CHANGED', 'MOD_AVAILABLE', 'MOD_UNAVAILABLE', 'MOD_EDITED', 'MOD_DELETED'.
+» event_type|string|Type of event that was triggered. List of possible events: <br><br>- MODFILE_CHANGED<br>- MOD_AVAILABLE<br>- MOD_UNAVAILABLE<br>- MOD_EDITED<br>- MOD_DELETED<br>- USER_TEAM_JOIN<br>- USER_TEAM_LEAVE<br>- USER_SUBSCRIBE<br>- USER_UNSUBSCRIBE
 result_count|integer|Number of results returned in the data array.
 result_limit|integer|Maximum number of results returned.
 result_offset|integer|Number of results skipped over.
