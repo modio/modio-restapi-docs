@@ -28,6 +28,7 @@ Tools and plugins made by the --parse_sitename team and our awesome community | 
 --- | --- | --- | ---
 ![Unity Plugin](images/tool-unity.png) | __Unity Plugin__<br />[SDK](https://github.com/DBolical/modioUNITY)<br />[Getting Started](https://github.com/DBolical/modioUNITY/wiki)<br /> | ![C/C++ SDK](images/tool-ccpp.png) | __C/C++ SDK__<br />[SDK](https://github.com/DBolical/modioSDK)<br />[Getting Started](https://github.com/DBolical/modioSDK/wiki)<br />[Tutorials](https://github.com/DBolical/modioSDK/tree/master/examples/code-samples)<br /> 
 ![Haxe Wrapper](images/tool-haxe.png) | __Haxe Wrapper__<br />[SDK](https://apps.mod.io/haxe-wrapper)<br />[Getting Started](https://github.com/Turupawn/modioHaxe#getting-started)<br />[Tutorials](https://github.com/Turupawn/modioOpenFLExample#openfl-integration)<br /> | ![Rust Wrapper](images/tool-rust.png) | __Rust Wrapper__<br />[SDK](https://crates.io/crates/modio)<br />[Getting Started](https://github.com/nickelc/modio-rs)<br />[Tutorials](https://github.com/nickelc/modio-rs/tree/master/examples)<br />
+![Python Wrapper](images/tool-python.png) | __Python Wrapper__<br />[SDK](https://github.com/ClementJ18/mod.io)<br />[Getting Started](https://github.com/ClementJ18/mod.io/#example)<br />[Tutorials](https://github.com/ClementJ18/mod.io/tree/master/examples)<br /> | 
 Want a tool added to the list? [Contact us!](mailto:--parse_email?subject=Publish Tool)
 
 Here is a brief list of the things to know about our API, as explained in more detail in the following sections.
