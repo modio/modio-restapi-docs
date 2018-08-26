@@ -3668,7 +3668,7 @@ Status|Header|Type|Format|Description
 To perform this request, you must be authenticated via one of the following methods:
 <a href="#authentication">OAuth 2</a> (Scopes: write)
 </aside>
-## Unsubscribe To Mod
+## Unsubscribe From Mod
 
 > Example request
 
@@ -3774,7 +3774,7 @@ Unsubscribe the _authenticated user_ from the corresponding mod. No body paramet
 ```json
  204 No Content 
 ```
-<h3 id="Unsubscribe-To-Mod-responses">Responses</h3>
+<h3 id="Unsubscribe-From-Mod-responses">Responses</h3>
 
 Status|Meaning|Description|Response Schema
 ---|---|---|---|
@@ -4421,7 +4421,7 @@ Status|Meaning|Description|Response Schema
 To perform this request, you must be authenticated via one of the following methods:
 <a href="#authentication">api_key</a>, <a href="#authentication">OAuth 2</a> (Scopes: read)
 </aside>
-## Add Mod Tag
+## Add Mod Tags
 
 > Example request
 
@@ -4536,7 +4536,7 @@ Add tags to a mod's profile. You can only add tags allowed by the parent game, w
   "message": "You have successfully added tags to the specified mod."
 }
 ```
-<h3 id="Add-Mod-Tag-responses">Responses</h3>
+<h3 id="Add-Mod-Tags-responses">Responses</h3>
 
 Status|Meaning|Description|Response Schema
 ---|---|---|---|
@@ -4552,7 +4552,7 @@ Status|Header|Type|Format|Description
 To perform this request, you must be authenticated via one of the following methods:
 <a href="#authentication">OAuth 2</a> (Scopes: write)
 </aside>
-## Delete Mod Tag
+## Delete Mod Tags
 
 > Example request
 
@@ -4664,7 +4664,7 @@ Delete tags from a mod's profile. Deleting tags is identical to adding tags exce
 ```json
  204 No Content 
 ```
-<h3 id="Delete-Mod-Tag-responses">Responses</h3>
+<h3 id="Delete-Mod-Tags-responses">Responses</h3>
 
 Status|Meaning|Description|Response Schema
 ---|---|---|---|
