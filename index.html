@@ -390,7 +390,7 @@
                     <a href="#subscribe-to-mod" class="toc-h2 toc-link" data-title="Subscribe">Subscribe To Mod</a>
                   </li>
                   <li>
-                    <a href="#unsubscribe-to-mod" class="toc-h2 toc-link" data-title="Subscribe">Unsubscribe To Mod</a>
+                    <a href="#unsubscribe-from-mod" class="toc-h2 toc-link" data-title="Subscribe">Unsubscribe From Mod</a>
                   </li>
               </ul>
           </li>
@@ -423,10 +423,10 @@
                     <a href="#get-mod-tags" class="toc-h2 toc-link" data-title="Tags">Get Mod Tags</a>
                   </li>
                   <li>
-                    <a href="#add-mod-tag" class="toc-h2 toc-link" data-title="Tags">Add Mod Tag</a>
+                    <a href="#add-mod-tags" class="toc-h2 toc-link" data-title="Tags">Add Mod Tags</a>
                   </li>
                   <li>
-                    <a href="#delete-mod-tag" class="toc-h2 toc-link" data-title="Tags">Delete Mod Tag</a>
+                    <a href="#delete-mod-tags" class="toc-h2 toc-link" data-title="Tags">Delete Mod Tags</a>
                   </li>
                   <li>
                     <a href="#get-game-tag-options" class="toc-h2 toc-link" data-title="Tags">Get Game Tag Options</a>
@@ -5118,7 +5118,7 @@ Content-Type: application/x-www-form-urlencoded
 To perform this request, you must be authenticated via one of the following methods:
 <a href="#authentication">OAuth 2</a> (Scopes: write)
 </aside>
-<h2 id="unsubscribe-to-mod">Unsubscribe To Mod</h2>
+<h2 id="unsubscribe-from-mod">Unsubscribe From Mod</h2>
 <blockquote>
 <p>Example request</p>
 </blockquote>
@@ -5207,7 +5207,7 @@ Content-Type: application/x-www-form-urlencoded
 </blockquote>
 <pre class="highlight json tab-json"><code><span class="w"> </span><span class="mi">204</span><span class="w"> </span><span class="err">No</span><span class="w"> </span><span class="err">Content</span><span class="w"> 
 </span></code></pre>
-<h3 id="Unsubscribe-To-Mod-responses">Responses</h3>
+<h3 id="Unsubscribe-From-Mod-responses">Responses</h3>
 
 <table>
 <thead>
@@ -5946,7 +5946,7 @@ Accept: application/json
 To perform this request, you must be authenticated via one of the following methods:
 <a href="#authentication">api_key</a>, <a href="#authentication">OAuth 2</a> (Scopes: read)
 </aside>
-<h2 id="add-mod-tag">Add Mod Tag</h2>
+<h2 id="add-mod-tags">Add Mod Tags</h2>
 <blockquote>
 <p>Example request</p>
 </blockquote>
@@ -6059,7 +6059,7 @@ curl -X POST https://api.mod.io/v1/games/<span class="o">{</span>game-id<span cl
   </span><span class="s2">"message"</span><span class="p">:</span><span class="w"> </span><span class="s2">"You have successfully added tags to the specified mod."</span><span class="w">
 </span><span class="p">}</span><span class="w">
 </span></code></pre>
-<h3 id="Add-Mod-Tag-responses">Responses</h3>
+<h3 id="Add-Mod-Tags-responses">Responses</h3>
 
 <table>
 <thead>
@@ -6105,7 +6105,7 @@ curl -X POST https://api.mod.io/v1/games/<span class="o">{</span>game-id<span cl
 To perform this request, you must be authenticated via one of the following methods:
 <a href="#authentication">OAuth 2</a> (Scopes: write)
 </aside>
-<h2 id="delete-mod-tag">Delete Mod Tag</h2>
+<h2 id="delete-mod-tags">Delete Mod Tags</h2>
 <blockquote>
 <p>Example request</p>
 </blockquote>
@@ -6215,7 +6215,7 @@ curl -X DELETE https://api.mod.io/v1/games/<span class="o">{</span>game-id<span 
 </blockquote>
 <pre class="highlight json tab-json"><code><span class="w"> </span><span class="mi">204</span><span class="w"> </span><span class="err">No</span><span class="w"> </span><span class="err">Content</span><span class="w"> 
 </span></code></pre>
-<h3 id="Delete-Mod-Tag-responses">Responses</h3>
+<h3 id="Delete-Mod-Tags-responses">Responses</h3>
 
 <table>
 <thead>
