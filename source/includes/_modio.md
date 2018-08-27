@@ -619,7 +619,7 @@ The number of combinations makes using _equals_, _in_ and other filters a little
 ```
 Example HTTP Header Request
 ---------------------
-HTTP/1.1 200 OK
+HTTP/2.0 200 OK
 ...
 ...
 Accept-Language: de
