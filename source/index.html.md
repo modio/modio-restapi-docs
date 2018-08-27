@@ -1461,7 +1461,8 @@ Get all mods for the corresponding game. Successful request will return an array
       "name": "Rogue Knight HD Pack",
       "name_id": "rogue-knight-hd-pack",
       "summary": "It's time to bask in the glory of beautiful 4k textures!",
-      "description": "<h2>About</h2><p>Rogue HD Pack does exactly what you thi...",
+      "description": "<p>Rogue HD Pack does exactly what you thi...",
+      "description_plaintext": "Rogue HD Pack does exactly what you thi...",
       "metadata_blob": "rogue,hd,high-res,4k,hd textures",
       "profile_url": "https://rogue-knight.mod.io/rogue-knight-hd-pack",
       "media": {
@@ -1674,7 +1675,8 @@ Get a mod. Successful request will return a single [Mod Object](#mod-object).
   "name": "Rogue Knight HD Pack",
   "name_id": "rogue-knight-hd-pack",
   "summary": "It's time to bask in the glory of beautiful 4k textures!",
-  "description": "<h2>About</h2><p>Rogue HD Pack does exactly what you thi...",
+  "description": "<p>Rogue HD Pack does exactly what you thi...",
+  "description_plaintext": "Rogue HD Pack does exactly what you thi...",
   "metadata_blob": "rogue,hd,high-res,4k,hd textures",
   "profile_url": "https://rogue-knight.mod.io/rogue-knight-hd-pack",
   "media": {
@@ -1910,7 +1912,8 @@ Add a mod. Successful request will return the newly created [Mod Object](#mod-ob
   "name": "Rogue Knight HD Pack",
   "name_id": "rogue-knight-hd-pack",
   "summary": "It's time to bask in the glory of beautiful 4k textures!",
-  "description": "<h2>About</h2><p>Rogue HD Pack does exactly what you thi...",
+  "description": "<p>Rogue HD Pack does exactly what you thi...",
+  "description_plaintext": "Rogue HD Pack does exactly what you thi...",
   "metadata_blob": "rogue,hd,high-res,4k,hd textures",
   "profile_url": "https://rogue-knight.mod.io/rogue-knight-hd-pack",
   "media": {
@@ -2145,7 +2148,8 @@ Edit details for a mod. If you want to update the `logo` or media associated wit
   "name": "Rogue Knight HD Pack",
   "name_id": "rogue-knight-hd-pack",
   "summary": "It's time to bask in the glory of beautiful 4k textures!",
-  "description": "<h2>About</h2><p>Rogue HD Pack does exactly what you thi...",
+  "description": "<p>Rogue HD Pack does exactly what you thi...",
+  "description_plaintext": "Rogue HD Pack does exactly what you thi...",
   "metadata_blob": "rogue,hd,high-res,4k,hd textures",
   "profile_url": "https://rogue-knight.mod.io/rogue-knight-hd-pack",
   "media": {
@@ -3585,7 +3589,8 @@ Subscribe the _authenticated user_ to a corresponding mod. No body parameters ar
   "name": "Rogue Knight HD Pack",
   "name_id": "rogue-knight-hd-pack",
   "summary": "It's time to bask in the glory of beautiful 4k textures!",
-  "description": "<h2>About</h2><p>Rogue HD Pack does exactly what you thi...",
+  "description": "<p>Rogue HD Pack does exactly what you thi...",
+  "description_plaintext": "Rogue HD Pack does exactly what you thi...",
   "metadata_blob": "rogue,hd,high-res,4k,hd textures",
   "profile_url": "https://rogue-knight.mod.io/rogue-knight-hd-pack",
   "media": {
@@ -7690,7 +7695,8 @@ Get all mod's the _authenticated user_ is subscribed to. Successful request will
       "name": "Rogue Knight HD Pack",
       "name_id": "rogue-knight-hd-pack",
       "summary": "It's time to bask in the glory of beautiful 4k textures!",
-      "description": "<h2>About</h2><p>Rogue HD Pack does exactly what you thi...",
+      "description": "<p>Rogue HD Pack does exactly what you thi...",
+      "description_plaintext": "Rogue HD Pack does exactly what you thi...",
       "metadata_blob": "rogue,hd,high-res,4k,hd textures",
       "profile_url": "https://rogue-knight.mod.io/rogue-knight-hd-pack",
       "media": {
@@ -8268,7 +8274,8 @@ Get all mods the _authenticated user_ added or is a team member of. Successful r
       "name": "Rogue Knight HD Pack",
       "name_id": "rogue-knight-hd-pack",
       "summary": "It's time to bask in the glory of beautiful 4k textures!",
-      "description": "<h2>About</h2><p>Rogue HD Pack does exactly what you thi...",
+      "description": "<p>Rogue HD Pack does exactly what you thi...",
+      "description_plaintext": "Rogue HD Pack does exactly what you thi...",
       "metadata_blob": "rogue,hd,high-res,4k,hd textures",
       "profile_url": "https://rogue-knight.mod.io/rogue-knight-hd-pack",
       "media": {
@@ -8965,7 +8972,8 @@ date_expires|integer|Unix timestamp of when the `binary_url` will expire.
   "name": "Rogue Knight HD Pack",
   "name_id": "rogue-knight-hd-pack",
   "summary": "It's time to bask in the glory of beautiful 4k textures!",
-  "description": "<h2>About</h2><p>Rogue HD Pack does exactly what you thi...",
+  "description": "<p>Rogue HD Pack does exactly what you thi...",
+  "description_plaintext": "Rogue HD Pack does exactly what you thi...",
   "metadata_blob": "rogue,hd,high-res,4k,hd textures",
   "profile_url": "https://rogue-knight.mod.io/rogue-knight-hd-pack",
   "media": {
@@ -9070,6 +9078,7 @@ name|string|Name of the mod.
 name_id|string|Path for the mod on mod.io. For example: https://gamename.mod.io/__mod-name-id-here__
 summary|string|Summary of the mod.
 description|string|Detailed description of the mod which allows HTML.
+description_plaintext|string|`description` field converted into plaintext.
 metadata_blob|string|Metadata stored by the game developer. Metadata can also be stored as searchable [key value pairs](#metadata), and to individual [mod files](#get-all-modfiles).
 profile_url|string|URL to the mod's mod.io profile.
 media|[Mod Media Object  ](#schemamod_media_object)|Contains mod media data.
@@ -9921,7 +9930,8 @@ result_offset|integer|Number of results skipped over.
       "name": "Rogue Knight HD Pack",
       "name_id": "rogue-knight-hd-pack",
       "summary": "It's time to bask in the glory of beautiful 4k textures!",
-      "description": "<h2>About</h2><p>Rogue HD Pack does exactly what you thi...",
+      "description": "<p>Rogue HD Pack does exactly what you thi...",
+      "description_plaintext": "Rogue HD Pack does exactly what you thi...",
       "metadata_blob": "rogue,hd,high-res,4k,hd textures",
       "profile_url": "https://rogue-knight.mod.io/rogue-knight-hd-pack",
       "media": {
@@ -10035,6 +10045,7 @@ data|[Mod Object   ](#schemamod_object)[]|Array containing mod objects.
 » name_id|string|Path for the mod on mod.io. For example: https://gamename.mod.io/__mod-name-id-here__
 » summary|string|Summary of the mod.
 » description|string|Detailed description of the mod which allows HTML.
+» description_plaintext|string|`description` field converted into plaintext.
 » metadata_blob|string|Metadata stored by the game developer. Metadata can also be stored as searchable [key value pairs](#metadata), and to individual [mod files](#get-all-modfiles).
 » profile_url|string|URL to the mod's mod.io profile.
 » media|[Mod Media Object  ](#schemamod_media_object)|Contains mod media data.
