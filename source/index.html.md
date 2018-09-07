@@ -923,9 +923,10 @@ Get all games. Successful request will return an array of [Game Objects](#get-al
         ...
     }
   ],
-  "result_count": 100,
+  "result_count": 70,
+  "result_offset": 0,
   "result_limit": 100,
-  "result_offset": 0
+  "result_total": 70
 }
 ```
 <h3 id="Get-All-Games-responses">Responses</h3>
@@ -1532,9 +1533,10 @@ Get all mods for the corresponding game. Successful request will return an array
         ...
     }
   ],
-  "result_count": 100,
+  "result_count": 70,
+  "result_offset": 0,
   "result_limit": 100,
-  "result_offset": 0
+  "result_total": 70
 }
 ```
 <h3 id="Get-All-Mods-responses">Responses</h3>
@@ -2479,9 +2481,10 @@ Get all files that are published for the corresponding mod. Successful request w
         ...
     }
   ],
-  "result_count": 100,
+  "result_count": 70,
+  "result_offset": 0,
   "result_limit": 100,
-  "result_offset": 0
+  "result_total": 70
 }
 ```
 <h3 id="Get-All-Modfiles-responses">Responses</h3>
@@ -3907,9 +3910,10 @@ Get all mods events for the corresponding game sorted by latest event first. Suc
         ...
     }
   ],
-  "result_count": 100,
+  "result_count": 70,
+  "result_offset": 0,
   "result_limit": 100,
-  "result_offset": 0
+  "result_total": 70
 }
 ```
 <h3 id="Get-All-Mod-Events-responses">Responses</h3>
@@ -4028,9 +4032,10 @@ Get the event log for a mod, showing changes made sorted by latest event first. 
         ...
     }
   ],
-  "result_count": 100,
+  "result_count": 70,
+  "result_offset": 0,
   "result_limit": 100,
-  "result_offset": 0
+  "result_total": 70
 }
 ```
 <h3 id="Get-Mod-Events-responses">Responses</h3>
@@ -4168,9 +4173,10 @@ Get all mod stats for mods of the corresponding game. Successful request will re
         ...
     }
   ],
-  "result_count": 100,
+  "result_count": 70,
+  "result_offset": 0,
   "result_limit": 100,
-  "result_offset": 0
+  "result_total": 70
 }
 ```
 <h3 id="Get-All-Mod-Stats-responses">Responses</h3>
@@ -4411,9 +4417,10 @@ Get all tags for the corresponding mod. Successful request will return an array 
         ...
     }
   ],
-  "result_count": 100,
+  "result_count": 70,
+  "result_offset": 0,
   "result_limit": 100,
-  "result_offset": 0
+  "result_total": 70
 }
 ```
 <h3 id="Get-Mod-Tags-responses">Responses</h3>
@@ -4786,9 +4793,10 @@ Get all tags for the corresponding game, that can be applied to any of its mods.
         ...
     }
   ],
-  "result_count": 100,
+  "result_count": 70,
+  "result_offset": 0,
   "result_limit": 100,
-  "result_offset": 0
+  "result_total": 70
 }
 ```
 <h3 id="Get-Game-Tag-Options-responses">Responses</h3>
@@ -5306,9 +5314,10 @@ Get all metadata stored by the game developer for this mod as searchable key val
         ...
     }
   ],
-  "result_count": 100,
+  "result_count": 70,
+  "result_offset": 0,
   "result_limit": 100,
-  "result_offset": 0
+  "result_total": 70
 }
 ```
 <h3 id="Get-All-Mod-KVP-Metadata-responses">Responses</h3>
@@ -5683,9 +5692,10 @@ Get all dependencies the chosen mod has selected.
         ...
     }
   ],
-  "result_count": 100,
+  "result_count": 70,
+  "result_offset": 0,
   "result_limit": 100,
-  "result_offset": 0
+  "result_total": 70
 }
 ```
 <h3 id="Get-All-Mod-Dependencies-responses">Responses</h3>
@@ -6084,9 +6094,10 @@ Get all users that are part of a mod team. Successful request will return an arr
         ...
     }
   ],
-  "result_count": 100,
+  "result_count": 70,
+  "result_offset": 0,
   "result_limit": 100,
-  "result_offset": 0
+  "result_total": 70
 }
 ```
 <h3 id="Get-All-Mod-Team-Members-responses">Responses</h3>
@@ -6617,9 +6628,10 @@ Get all comments posted in the mods profile. Successful request will return an a
         ...
     }
   ],
-  "result_count": 100,
+  "result_count": 70,
+  "result_offset": 0,
   "result_limit": 100,
-  "result_offset": 0
+  "result_total": 70
 }
 ```
 <h3 id="Get-All-Mod-Comments-responses">Responses</h3>
@@ -7139,9 +7151,10 @@ Get all users registered on mod.io. Successful request will return an array of [
         ...
     }
   ],
-  "result_count": 100,
+  "result_count": 70,
+  "result_offset": 0,
   "result_limit": 100,
-  "result_offset": 0
+  "result_total": 70
 }
 ```
 <h3 id="Get-All-Users-responses">Responses</h3>
@@ -7766,9 +7779,10 @@ Get all mod's the _authenticated user_ is subscribed to. Successful request will
         ...
     }
   ],
-  "result_count": 100,
+  "result_count": 70,
+  "result_offset": 0,
   "result_limit": 100,
-  "result_offset": 0
+  "result_total": 70
 }
 ```
 <h3 id="Get-User-Subscriptions-responses">Responses</h3>
@@ -7895,9 +7909,10 @@ Get events that have been fired specific to the user. Successful request will re
         ...
     }
   ],
-  "result_count": 100,
+  "result_count": 70,
+  "result_offset": 0,
   "result_limit": 100,
-  "result_offset": 0
+  "result_total": 70
 }
 ```
 <h3 id="Get-User-Events-responses">Responses</h3>
@@ -8099,9 +8114,10 @@ Get all games the _authenticated user_ added or is a team member of. Successful 
         ...
     }
   ],
-  "result_count": 100,
+  "result_count": 70,
+  "result_offset": 0,
   "result_limit": 100,
-  "result_offset": 0
+  "result_total": 70
 }
 ```
 <h3 id="Get-User-Games-responses">Responses</h3>
@@ -8345,9 +8361,10 @@ Get all mods the _authenticated user_ added or is a team member of. Successful r
         ...
     }
   ],
-  "result_count": 100,
+  "result_count": 70,
+  "result_offset": 0,
   "result_limit": 100,
-  "result_offset": 0
+  "result_total": 70
 }
 ```
 <h3 id="Get-User-Mods-responses">Responses</h3>
@@ -8501,9 +8518,10 @@ Get all modfiles the _authenticated user_ uploaded. Successful request will retu
         ...
     }
   ],
-  "result_count": 100,
+  "result_count": 70,
+  "result_offset": 0,
   "result_limit": 100,
-  "result_offset": 0
+  "result_total": 70
 }
 ```
 <h3 id="Get-User-Modfiles-responses">Responses</h3>
@@ -8511,6 +8529,140 @@ Get all modfiles the _authenticated user_ uploaded. Successful request will retu
 Status|Meaning|Description|Response Schema
 ---|---|---|---|
 200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)|Request Successful|[Get All Modfiles  ](#schemaget_all_modfiles)
+
+<aside class="auth-notice">
+To perform this request, you must be authenticated via one of the following methods:
+<a href="#authentication">OAuth 2</a> (Scopes: read)
+</aside>
+## Get User Ratings
+
+> Example request
+
+```shell
+# You can also use wget
+curl -X GET https://api.mod.io/v1/me/ratings \
+  -H 'Authorization: Bearer {access-token}' \ 
+  -H 'Accept: application/json'
+
+```
+
+```http
+GET https://api.mod.io/v1/me/ratings HTTP/1.1
+Host: api.mod.io
+
+Accept: application/json
+Authorization: Bearer {access-token}
+
+
+```
+
+```javascript
+var headers = {
+  'Authorization':'Bearer {access-token}',
+  'Accept':'application/json'
+
+};
+
+$.ajax({
+  url: 'https://api.mod.io/v1/me/ratings',
+  method: 'get',
+
+  headers: headers,
+  success: function(data) {
+    console.log(JSON.stringify(data));
+  }
+})
+```
+
+```javascript--nodejs
+const request = require('node-fetch');
+
+const headers = {
+  'Authorization':'Bearer {access-token}',
+  'Accept':'application/json'
+
+};
+
+fetch('https://api.mod.io/v1/me/ratings',
+{
+  method: 'GET',
+
+  headers: headers
+})
+.then(function(res) {
+    return res.json();
+}).then(function(body) {
+    console.log(body);
+});
+```
+
+```python
+import requests
+headers = {
+  'Authorization': 'Bearer {access-token}',
+  'Accept': 'application/json'
+}
+
+r = requests.get('https://api.mod.io/v1/me/ratings', params={
+
+}, headers = headers)
+
+print r.json()
+```
+
+```java
+URL obj = new URL("https://api.mod.io/v1/me/ratings");
+HttpURLConnection con = (HttpURLConnection) obj.openConnection();
+con.setRequestMethod("GET");
+int responseCode = con.getResponseCode();
+BufferedReader in = new BufferedReader(
+    new InputStreamReader(con.getInputStream()));
+String inputLine;
+StringBuffer response = new StringBuffer();
+while ((inputLine = in.readLine()) != null) {
+    response.append(inputLine);
+}
+in.close();
+System.out.println(response.toString());
+```
+`GET /me/ratings`
+
+Get all mod rating's submitted by the _authenticated user_. Successful request will return an array of [Rating Objects](#get-all-user-ratings).
+
+    Filter|Type|Description
+    ---|---|---
+    game_id|integer|Unique id of the parent game.
+    mod_id|integer|Unique id of the mod.
+    rating|integer|Type of rating applied.<br><br>__-1__ = Negative Rating<br>__1__ = Positive Rating
+    date_added|integer|Unix timestamp of date rating was submitted.
+
+
+> Example response
+
+```json
+{
+  "data": [
+    {
+      "game_id": 2,
+      "mod_id": 2,
+      "rating": -1,
+      "date_added": 1492564103
+    },
+    {
+        ...
+    }
+  ],
+  "result_count": 70,
+  "result_offset": 0,
+  "result_limit": 100,
+  "result_total": 70
+}
+```
+<h3 id="Get-User-Ratings-responses">Responses</h3>
+
+Status|Meaning|Description|Response Schema
+---|---|---|---|
+200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)|Request Successful|[Get All User Ratings ](#schemaget_all_user_ratings)
 
 <aside class="auth-notice">
 To perform this request, you must be authenticated via one of the following methods:
@@ -9342,6 +9494,32 @@ metavalue|string|The value of the key-value pair.
 
 
 
+## Rating Object
+
+   <a name="schemarating_object"></a>
+
+```json
+{
+  "game_id": 2,
+  "mod_id": 2,
+  "rating": -1,
+  "date_added": 1492564103
+} 
+```
+
+
+### Properties
+
+Name|Type|Description
+---|---|---|---|
+game_id|integer|Unique game id.
+mod_id|integer|Unique mod id.
+rating|integer|Is it a positive or negative rating.
+date_added|integer|Unix timestamp of date rating was submitted.
+
+
+
+
 ## Stats Object
 
    <a name="schemastats_object"></a>
@@ -9520,9 +9698,10 @@ profile_url|string|URL to the user's mod.io profile.
         ...
     }
   ],
-  "result_count": 100,
+  "result_count": 70,
+  "result_offset": 0,
   "result_limit": 100,
-  "result_offset": 0
+  "result_total": 70
 } 
 ```
 
@@ -9553,9 +9732,10 @@ data|[Comment Object   ](#schemacomment_object)[]|Array containing comment objec
 » karma|integer|Karma received for the comment (can be postive or negative).
 » karma_guest|integer|Karma received for guest comments (can be postive or negative).
 » content|string|Contents of the comment.
-result_count|integer|Number of results returned in the data array.
-result_limit|integer|Maximum number of results returned.
-result_offset|integer|Number of results skipped over.
+result_count|integer|Number of results returned in this request.
+result_offset|integer|Number of results skipped over. Defaults to 0 unless overridden by `_offset` filter.
+result_limit|integer|Maximum number of results returned in the request. Defaults to 100 (max) unless overridden by `_limit` filter.
+result_total|integer|Total number of results found.
 
 
 
@@ -9575,9 +9755,10 @@ result_offset|integer|Number of results skipped over.
         ...
     }
   ],
-  "result_count": 100,
+  "result_count": 70,
+  "result_offset": 0,
   "result_limit": 100,
-  "result_offset": 0
+  "result_total": 70
 } 
 ```
 
@@ -9589,9 +9770,10 @@ Name|Type|Description
 data|[Mod Dependencies Object  ](#schemamod_dependencies_object)[]|Array containing mod dependencies objects.
 » mod_id|integer|Unique id of the mod that is the dependency.
 » date_added|integer|Unix timestamp of date the dependency was added.
-result_count|integer|Number of results returned in the data array.
-result_limit|integer|Maximum number of results returned.
-result_offset|integer|Number of results skipped over.
+result_count|integer|Number of results returned in this request.
+result_offset|integer|Number of results skipped over. Defaults to 0 unless overridden by `_offset` filter.
+result_limit|integer|Maximum number of results returned in the request. Defaults to 100 (max) unless overridden by `_limit` filter.
+result_total|integer|Total number of results found.
 
 
 
@@ -9614,9 +9796,10 @@ result_offset|integer|Number of results skipped over.
         ...
     }
   ],
-  "result_count": 100,
+  "result_count": 70,
+  "result_offset": 0,
   "result_limit": 100,
-  "result_offset": 0
+  "result_total": 70
 } 
 ```
 
@@ -9631,9 +9814,10 @@ data|[Event Object   ](#schemaevent_object)[]|Array containing event objects.
 » user_id|integer|Unique id of the user who performed the action.
 » date_added|integer|Unix timestamp of date the event occurred.
 » event_type|string|Type of event that was triggered. List of possible events: <br><br>- MODFILE_CHANGED<br>- MOD_AVAILABLE<br>- MOD_UNAVAILABLE<br>- MOD_EDITED<br>- MOD_DELETED<br>- USER_TEAM_JOIN<br>- USER_TEAM_LEAVE<br>- USER_SUBSCRIBE<br>- USER_UNSUBSCRIBE
-result_count|integer|Number of results returned in the data array.
-result_limit|integer|Maximum number of results returned.
-result_offset|integer|Number of results skipped over.
+result_count|integer|Number of results returned in this request.
+result_offset|integer|Number of results skipped over. Defaults to 0 unless overridden by `_offset` filter.
+result_limit|integer|Maximum number of results returned in the request. Defaults to 100 (max) unless overridden by `_limit` filter.
+result_total|integer|Total number of results found.
 
 
 
@@ -9670,9 +9854,10 @@ result_offset|integer|Number of results skipped over.
         ...
     }
   ],
-  "result_count": 100,
+  "result_count": 70,
+  "result_offset": 0,
   "result_limit": 100,
-  "result_offset": 0
+  "result_total": 70
 } 
 ```
 
@@ -9699,9 +9884,10 @@ data|[Modfile Object   ](#schemamodfile_object)[]|Array containing modfile objec
 » download|[Download Object   ](#schemadownload_object)|Contains download data.
 »» binary_url|string|URL to download the file from the mod.io CDN.<br><br>__NOTE:__ If the [game](#edit-game) requires mod downloads to be initiated via the API, the `binary_url` returned will contain a verification hash. This hash must be supplied to get the modfile, and will expire after a certain period of time. Saving and reusing the `binary_url` won't work in this situation given it's dynamic nature.
 »» date_expires|integer|Unix timestamp of when the `binary_url` will expire.
-result_count|integer|Number of results returned in the data array.
-result_limit|integer|Maximum number of results returned.
-result_offset|integer|Number of results skipped over.
+result_count|integer|Number of results returned in this request.
+result_offset|integer|Number of results skipped over. Defaults to 0 unless overridden by `_offset` filter.
+result_limit|integer|Maximum number of results returned in the request. Defaults to 100 (max) unless overridden by `_limit` filter.
+result_total|integer|Total number of results found.
 
 
 
@@ -9781,9 +9967,10 @@ result_offset|integer|Number of results skipped over.
         ...
     }
   ],
-  "result_count": 100,
+  "result_count": 70,
+  "result_offset": 0,
   "result_limit": 100,
-  "result_offset": 0
+  "result_total": 70
 } 
 ```
 
@@ -9845,9 +10032,10 @@ data|[Game Object   ](#schemagame_object)[]|Array containing game objects.
 »» type|string|Can multiple tags be selected via 'checkboxes' or should only a single tag be selected via a 'dropdown'.
 »» hidden|boolean|Groups of tags flagged as 'admin only' should only be used for filtering, and should not be displayed to users.
 »» tags|string[]|Array of tags in this group.
-result_count|integer|Number of results returned in the data array.
-result_limit|integer|Maximum number of results returned.
-result_offset|integer|Number of results skipped over.
+result_count|integer|Number of results returned in this request.
+result_offset|integer|Number of results skipped over. Defaults to 0 unless overridden by `_offset` filter.
+result_limit|integer|Maximum number of results returned in the request. Defaults to 100 (max) unless overridden by `_limit` filter.
+result_total|integer|Total number of results found.
 
 
 
@@ -9867,9 +10055,10 @@ result_offset|integer|Number of results skipped over.
         ...
     }
   ],
-  "result_count": 100,
+  "result_count": 70,
+  "result_offset": 0,
   "result_limit": 100,
-  "result_offset": 0
+  "result_total": 70
 } 
 ```
 
@@ -9881,9 +10070,10 @@ Name|Type|Description
 data|[Metadata KVP Object  ](#schemametadata_kvp_object)[]|Array containing metadata kvp objects.
 » metakey|string|The key of the key-value pair.
 » metavalue|string|The value of the key-value pair.
-result_count|integer|Number of results returned in the data array.
-result_limit|integer|Maximum number of results returned.
-result_offset|integer|Number of results skipped over.
+result_count|integer|Number of results returned in this request.
+result_offset|integer|Number of results skipped over. Defaults to 0 unless overridden by `_offset` filter.
+result_limit|integer|Maximum number of results returned in the request. Defaults to 100 (max) unless overridden by `_limit` filter.
+result_total|integer|Total number of results found.
 
 
 
@@ -10001,9 +10191,10 @@ result_offset|integer|Number of results skipped over.
         ...
     }
   ],
-  "result_count": 100,
+  "result_count": 70,
+  "result_offset": 0,
   "result_limit": 100,
-  "result_offset": 0
+  "result_total": 70
 } 
 ```
 
@@ -10092,9 +10283,10 @@ data|[Mod Object   ](#schemamod_object)[]|Array containing mod objects.
 » tags|[Mod Tag Object  ](#schemamod_tag_object)[]|Contains mod tag data.
 »» name|string|Tag name.
 »» date_added|integer|Unix timestamp of date tag was applied.
-result_count|integer|Number of results returned in the data array.
-result_limit|integer|Maximum number of results returned.
-result_offset|integer|Number of results skipped over.
+result_count|integer|Number of results returned in this request.
+result_offset|integer|Number of results skipped over. Defaults to 0 unless overridden by `_offset` filter.
+result_limit|integer|Maximum number of results returned in the request. Defaults to 100 (max) unless overridden by `_limit` filter.
+result_total|integer|Total number of results found.
 
 
 
@@ -10124,9 +10316,10 @@ result_offset|integer|Number of results skipped over.
         ...
     }
   ],
-  "result_count": 100,
+  "result_count": 70,
+  "result_offset": 0,
   "result_limit": 100,
-  "result_offset": 0
+  "result_total": 70
 } 
 ```
 
@@ -10148,9 +10341,10 @@ data|[Stats Object   ](#schemastats_object)[]|Array containing stats objects.
 » ratings_weighted_aggregate|float|Overall rating of this item calculated using the [Wilson score confidence interval](https://www.evanmiller.org/how-not-to-sort-by-average-rating.html). This column is good to sort on, as it will order items based on number of ratings and will place items with many positive ratings above those with a higher score but fewer ratings.
 » ratings_display_text|string|Textual representation of the rating in format:<br><br>- Overwhelmingly Positive<br>- Very Positive<br>- Positive<br>- Mostly Positive<br>- Mixed<br>- Negative<br>- Mostly Negative<br>- Very Negative<br>- Overwhelmingly Negative<br>- Unrated
 » date_expires|integer|Unix timestamp until this mods's statistics are considered stale.
-result_count|integer|Number of results returned in the data array.
-result_limit|integer|Maximum number of results returned.
-result_offset|integer|Number of results skipped over.
+result_count|integer|Number of results returned in this request.
+result_offset|integer|Number of results skipped over. Defaults to 0 unless overridden by `_offset` filter.
+result_limit|integer|Maximum number of results returned in the request. Defaults to 100 (max) unless overridden by `_limit` filter.
+result_total|integer|Total number of results found.
 
 
 
@@ -10170,9 +10364,10 @@ result_offset|integer|Number of results skipped over.
         ...
     }
   ],
-  "result_count": 100,
+  "result_count": 70,
+  "result_offset": 0,
   "result_limit": 100,
-  "result_offset": 0
+  "result_total": 70
 } 
 ```
 
@@ -10184,9 +10379,10 @@ Name|Type|Description
 data|[Mod Tag Object  ](#schemamod_tag_object)[]|Array containing mod tag objects.
 » name|string|Tag name.
 » date_added|integer|Unix timestamp of date tag was applied.
-result_count|integer|Number of results returned in the data array.
-result_limit|integer|Maximum number of results returned.
-result_offset|integer|Number of results skipped over.
+result_count|integer|Number of results returned in this request.
+result_offset|integer|Number of results skipped over. Defaults to 0 unless overridden by `_offset` filter.
+result_limit|integer|Maximum number of results returned in the request. Defaults to 100 (max) unless overridden by `_limit` filter.
+result_total|integer|Total number of results found.
 
 
 
@@ -10210,9 +10406,10 @@ result_offset|integer|Number of results skipped over.
         ...
     }
   ],
-  "result_count": 100,
+  "result_count": 70,
+  "result_offset": 0,
   "result_limit": 100,
-  "result_offset": 0
+  "result_total": 70
 } 
 ```
 
@@ -10226,9 +10423,10 @@ data|[Game Tag Option Object ](#schemagame_tag_option_object)[]|Array containing
 » type|string|Can multiple tags be selected via 'checkboxes' or should only a single tag be selected via a 'dropdown'.
 » hidden|boolean|Groups of tags flagged as 'admin only' should only be used for filtering, and should not be displayed to users.
 » tags|string[]|Array of tags in this group.
-result_count|integer|Number of results returned in the data array.
-result_limit|integer|Maximum number of results returned.
-result_offset|integer|Number of results skipped over.
+result_count|integer|Number of results returned in this request.
+result_offset|integer|Number of results skipped over. Defaults to 0 unless overridden by `_offset` filter.
+result_limit|integer|Maximum number of results returned in the request. Defaults to 100 (max) unless overridden by `_limit` filter.
+result_total|integer|Total number of results found.
 
 
 
@@ -10265,9 +10463,10 @@ result_offset|integer|Number of results skipped over.
         ...
     }
   ],
-  "result_count": 100,
+  "result_count": 70,
+  "result_offset": 0,
   "result_limit": 100,
-  "result_offset": 0
+  "result_total": 70
 } 
 ```
 
@@ -10294,9 +10493,10 @@ data|[Team Member Object  ](#schemateam_member_object)[]|Array containing team m
 » level|integer|Level of permission the user has:<br><br>__1__ = Moderator (can moderate comments and content attached)<br>__4__ = Creator (moderator access, including uploading builds and edit all settings except supply and team members)<br>__8__ = Administrator (full access, including editing the supply and team)
 » date_added|integer|Unix timestamp of the date the user was added to the team.
 » position|string|Custom title given to the user in this team.
-result_count|integer|Number of results returned in the data array.
-result_limit|integer|Maximum number of results returned.
-result_offset|integer|Number of results skipped over.
+result_count|integer|Number of results returned in this request.
+result_offset|integer|Number of results skipped over. Defaults to 0 unless overridden by `_offset` filter.
+result_limit|integer|Maximum number of results returned in the request. Defaults to 100 (max) unless overridden by `_limit` filter.
+result_total|integer|Total number of results found.
 
 
 
@@ -10327,9 +10527,10 @@ result_offset|integer|Number of results skipped over.
         ...
     }
   ],
-  "result_count": 100,
+  "result_count": 70,
+  "result_offset": 0,
   "result_limit": 100,
-  "result_offset": 0
+  "result_total": 70
 } 
 ```
 
@@ -10351,9 +10552,10 @@ data|[User Object   ](#schemauser_object)[]|Array containing user objects.
 » timezone|string|Timezone of the user, format is country/city.
 » language|string|Users language preference. See [localization](#localization) for the supported languages.
 » profile_url|string|URL to the user's mod.io profile.
-result_count|integer|Number of results returned in the data array.
-result_limit|integer|Maximum number of results returned.
-result_offset|integer|Number of results skipped over.
+result_count|integer|Number of results returned in this request.
+result_offset|integer|Number of results skipped over. Defaults to 0 unless overridden by `_offset` filter.
+result_limit|integer|Maximum number of results returned in the request. Defaults to 100 (max) unless overridden by `_limit` filter.
+result_total|integer|Total number of results found.
 
 
 
@@ -10376,9 +10578,10 @@ result_offset|integer|Number of results skipped over.
         ...
     }
   ],
-  "result_count": 100,
+  "result_count": 70,
+  "result_offset": 0,
   "result_limit": 100,
-  "result_offset": 0
+  "result_total": 70
 } 
 ```
 
@@ -10393,9 +10596,52 @@ data|[Event Object   ](#schemaevent_object)[]|Array containing event objects.
 » user_id|integer|Unique id of the user who performed the action.
 » date_added|integer|Unix timestamp of date the event occurred.
 » event_type|string|Type of event that was triggered. List of possible events: <br><br>- MODFILE_CHANGED<br>- MOD_AVAILABLE<br>- MOD_UNAVAILABLE<br>- MOD_EDITED<br>- MOD_DELETED<br>- USER_TEAM_JOIN<br>- USER_TEAM_LEAVE<br>- USER_SUBSCRIBE<br>- USER_UNSUBSCRIBE
-result_count|integer|Number of results returned in the data array.
-result_limit|integer|Maximum number of results returned.
-result_offset|integer|Number of results skipped over.
+result_count|integer|Number of results returned in this request.
+result_offset|integer|Number of results skipped over. Defaults to 0 unless overridden by `_offset` filter.
+result_limit|integer|Maximum number of results returned in the request. Defaults to 100 (max) unless overridden by `_limit` filter.
+result_total|integer|Total number of results found.
+
+
+
+
+## Get All User Ratings 
+
+<a name="schemaget_all_user_ratings"></a>
+
+```json
+{
+  "data": [
+    {
+      "game_id": 2,
+      "mod_id": 2,
+      "rating": -1,
+      "date_added": 1492564103
+    },
+    {
+        ...
+    }
+  ],
+  "result_count": 70,
+  "result_offset": 0,
+  "result_limit": 100,
+  "result_total": 70
+} 
+```
+
+
+### Properties
+
+Name|Type|Description
+---|---|---|---|
+data|[Rating Object   ](#schemarating_object)[]|Array containing rating objects.
+» game_id|integer|Unique game id.
+» mod_id|integer|Unique mod id.
+» rating|integer|Is it a positive or negative rating.
+» date_added|integer|Unix timestamp of date rating was submitted.
+result_count|integer|Number of results returned in this request.
+result_offset|integer|Number of results skipped over. Defaults to 0 unless overridden by `_offset` filter.
+result_limit|integer|Maximum number of results returned in the request. Defaults to 100 (max) unless overridden by `_limit` filter.
+result_total|integer|Total number of results found.
 
 
 
