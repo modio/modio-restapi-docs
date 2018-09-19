@@ -404,7 +404,8 @@ When requesting data from endpoints that contain more than one object, you can s
 // Metadata example
 "result_count": 100,
 "result_limit": 100,
-"result_offset": 0
+"result_offset": 0,
+"result_total": 127
 ```
 
 Parameter | Value
@@ -412,6 +413,7 @@ Parameter | Value
 `result_count` | Number of results returned in the current request.
 `result_limit` | Maximum number of results returned. Defaults to _100_ unless overridden by `_limit`.
 `result_offset` | Number of results skipped over. Defaults to _0_ unless overridden by `_offset`.
+`result_total` | Total number of results found.
 
 ### _limit (Limit)
 
