@@ -1,0 +1,63 @@
+# How we handle versioning
+
+Current Minor Version: __2018-05-15__ 
+
+Pioneered by [Stripe](https://docs.stripe.com), we follow a similar minor-versioning system that allows API
+consumers to lock into a version to ensure that when a backwards-incompatible
+change is made to our API, your application is not affected - and when you are
+ready to use the latest version simply update the `Modio-Version` header to
+the latest version.
+
+### Supplying the version header
+```shell
+Example cURL request
+---------------------
+curl -X GET https://api.mod.io/v1/games \
+	-H 'Modio-Version: 2018-05-15' \
+	-d 'api_key: 0d0ba6756d032246f1299f8c01abc424'	\
+```
+
+```http
+Example HTTP Header Response
+---------------------
+HTTP/1.1 200 OK
+...
+...
+Modio-Version: 2018-05-15
+```
+When you make a request, setting the version of mod.io you want to use is easy.
+To specify the versionof the API you want to use, simply suppy the `Modio-Version` header 
+with a valid version date that we have released (YYYY-MM-DD format) as shown in the code example on the right.
+
+### Handling invalid versions
+
+When using a supplied version, you need to be sure you know what functionality is available to you
+and what you can expect the API to do under every situation. With that said, and in the interest of
+being as explicit as possible if you supply a version that falls under any of the following coniditions,
+a `400 Bad Request` will be returned in the form of an [Error Object](https://docs.mod.io/#error-object).
+
+- Not in the correct format (`YYYY-MM-DD`)
+- Not a version listed below in the [changelog](#api-versions) section
+
+## What are incompatible changes
+
+The benefit of this system is we can push backwards-incompatible changes out of necessity
+and your application is not affected. To clarify, for the mod.io API the following
+are what constitutes as __backwards-incompatible__ changes:
+
+Backwards Compatible (not covered by these docs) | Backwards Incompatible (breaking)
+---------- | ----------  
+Adding a new field to an object | Modifying or removing a field in an object
+Adding new objects to a response | Modifying any code returned by a request
+Adding new headers to a request/response | Modifying any error code returned by _any_ endpoint
+Adding new events | Modifying or removing an endpoint's path
+Changing the ordering of items in a response  | Modifying or removing any request/response header
+  
+Changes that _are_ backwards-compatible will continue to be delivered to you, only breaking
+changes as described above will fall under the minor versioning system.
+
+# API Versions
+
+## 2018-05-15
+
+Initial API release.
