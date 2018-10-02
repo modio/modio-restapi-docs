@@ -43,5 +43,6 @@ def modio_post_process(page_content)
   # because we need to move the HTTP method text outside of
   # the code block to wrap it we do a single regex replace.
   html_doc = html_doc.to_s.gsub(/<code>(GET|POST|PUT|DELETE)+\s{1}(.*?)<\/code>/, '<span class="httpmethod \1">\1</span> <span class="endpointheading">\2</span>')
+  html_doc = html_doc.to_s.gsub(/<h2 id="([0-9-]*)">([0-9-]*)<\/h2>/, '<h2 id="\1"><span class="versionheading">\2</span></h2>')
   html_doc
 end

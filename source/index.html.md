@@ -23,7 +23,9 @@ headingLevel: '2'
 
 Welcome to the official documentation for [mod.io](https://mod.io), an API for developers to add mod support to their games. We recommend you read our _Getting Started_ guide below to accurately and efficiently consume our REST API. 
 
-__Current version:__ `v1`
+__Current version:__ <select id="version_dropdown" onChange="changeVersion"><option value="" data-latest="true">v1 (latest)</option></select> 
+
+<a href="/changelog"><span class="versionwrap">View Version Changelog</span></a>
 
 __API path:__ [https://api.mod.io/v1](https://api.mod.io/v1)
 
@@ -2636,7 +2638,7 @@ curl -X POST https://api.mod.io/v1/games/{game-id}/mods/{mod-id}/files \
   -H 'Accept: application/json' \
   -F 'filedata=@/path/to/modfile.zip' \
   -F 'version=1.2' \
-  -F 'changelog=<p>Rogue Knights v1.2.0 Changelog</p>\n\n<p>New Featu...' \
+  -F 'changelog=<p>Rogue Knights v1.2.0 Changelog</p></p>New Featu...' \
   -F 'metadata_blob=client_signature:9VbZccpR'
 
 ```
@@ -2675,7 +2677,7 @@ const request = require('node-fetch');
 const inputBody = '{
   "filedata": "@/path/to/modfile.zip",
   "version": "1.2",
-  "changelog": "<p>Rogue Knights v1.2.0 Changelog</p>\\n\\n<p>New Featu...",
+  "changelog": "<p>Rogue Knights v1.2.0 Changelog</p></p>New Featu...",
   "metadata_blob": "client_signature:9VbZccpR"
 }';
 const headers = {

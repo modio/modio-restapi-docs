@@ -4,7 +4,9 @@
 
 Welcome to the official documentation for [--parse_sitename](--parse_siteurl), an API for developers to add mod support to their games. We recommend you read our _Getting Started_ guide below to accurately and efficiently consume our REST API. 
 
-__Current version:__ `--parse_version`
+__Current version:__ --parse_vdropdown 
+
+<a href="/changelog"><span class="versionwrap">View Version Changelog</span></a>
 
 __API path:__ [--parse_apiurl](--parse_apiurl)
 
