@@ -5,7 +5,7 @@ $(document).ready(function() {
 		var oldApiVersion = window.location.pathname.replace(/\//g, '');
 
 		if (oldApiVersion) {
-			$(`select option[value='${oldApiVersion}']`).attr("selected", "selected");
+			$('select option[value="' + oldApiVersion + '"]').attr("selected", "selected");
 		}
 	}
 	setDropdownVersion();
@@ -16,7 +16,7 @@ $(document).ready(function() {
 	$('#version_dropdown').change(function() {
 		var version = $(this).val();
 		var latest = $(this).attr('data-latest');
-		window.location = `http://${window.location.host}/${latest ? '' : version}`;
+		window.location = "http://" + window.location.host + "/" + (latest ? '' : version);
 	});
 
 
