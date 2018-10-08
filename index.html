@@ -681,9 +681,11 @@
         <h1 id="getting-started">Getting Started</h1><h2 id="mod-io-api-v1">mod.io API v1</h2>
 <p>Welcome to the official documentation for <a href="https://mod.io">mod.io</a>, an API for developers to add mod support to their games. We recommend you read our <em>Getting Started</em> guide below to accurately and efficiently consume our REST API. </p>
 
-<p><strong>Current version:</strong> <code>v1</code></p>
-
 <p><strong>API path:</strong> <a href="https://api.mod.io/v1">https://api.mod.io/v1</a></p>
+
+<p><strong>Current version:</strong> <select id="version_dropdown" onchange="changeVersion"><option value="" data-latest="true">v1 (latest)</option></select> </p>
+
+<p><a href="/changelog"><span class="versionwrap">View Version Changelog</span></a></p>
 <h2 id="how-it-works">How It Works</h2>
 <p>Compatible with all builds of your game, mod.io operates silently in the background (without requiring your users to install another client), to give you complete control over your modding ecosystem.</p>
 
@@ -3919,7 +3921,7 @@ curl -X POST https://api.mod.io/v1/games/<span class="o">{</span>game-id<span cl
   -H <span class="s1">'Accept: application/json'</span> <span class="se">\</span>
   -F <span class="s1">'filedata=@/path/to/modfile.zip'</span> <span class="se">\</span>
   -F <span class="s1">'version=1.2'</span> <span class="se">\</span>
-  -F <span class="s1">'changelog=&lt;p&gt;Rogue Knights v1.2.0 Changelog&lt;/p&gt;\n\n&lt;p&gt;New Featu...'</span> <span class="se">\</span>
+  -F <span class="s1">'changelog=&lt;p&gt;Rogue Knights v1.2.0 Changelog&lt;/p&gt;&lt;/p&gt;New Featu...'</span> <span class="se">\</span>
   -F <span class="s1">'metadata_blob=client_signature:9VbZccpR'</span>
 
 </code></pre><pre class="highlight http tab-http"><code><span class="nf">POST</span> <span class="nn">https://api.mod.io/v1/games/{game-id}/mods/{mod-id}/files</span> <span class="k">HTTP</span><span class="o">/</span><span class="m">1.1</span>
@@ -3949,7 +3951,7 @@ curl -X POST https://api.mod.io/v1/games/<span class="o">{</span>game-id<span cl
 <span class="kr">const</span> <span class="nx">inputBody</span> <span class="o">=</span> <span class="s1">'{
   "filedata": "@/path/to/modfile.zip",
   "version": "1.2",
-  "changelog": "&lt;p&gt;Rogue Knights v1.2.0 Changelog&lt;/p&gt;\\n\\n&lt;p&gt;New Featu...",
+  "changelog": "&lt;p&gt;Rogue Knights v1.2.0 Changelog&lt;/p&gt;&lt;/p&gt;New Featu...",
   "metadata_blob": "client_signature:9VbZccpR"
 }'</span><span class="p">;</span>
 <span class="kr">const</span> <span class="nx">headers</span> <span class="o">=</span> <span class="p">{</span>
