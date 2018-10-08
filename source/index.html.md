@@ -23,11 +23,11 @@ headingLevel: '2'
 
 Welcome to the official documentation for [mod.io](https://mod.io), an API for developers to add mod support to their games. We recommend you read our _Getting Started_ guide below to accurately and efficiently consume our REST API. 
 
+__API path:__ [https://api.mod.io/v1](https://api.mod.io/v1)
+
 __Current version:__ <select id="version_dropdown" onChange="changeVersion"><option value="" data-latest="true">v1 (latest)</option></select> 
 
 <a href="/changelog"><span class="versionwrap">View Version Changelog</span></a>
-
-__API path:__ [https://api.mod.io/v1](https://api.mod.io/v1)
 
 ## How It Works
 

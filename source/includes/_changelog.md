@@ -36,8 +36,7 @@ the year and always denotes the (n)th release of that year.
 ```shell
 Example cURL request
 ---------------------
-curl -X GET --parse_apiurl/--parse_version/games \
-	-d 'api_key: 0d0ba6756d032246f1299f8c01abc424'
+curl -X GET --parse_apiurl/--parse_version/games?api_key=YourApiKey
 ```
 
 When you make a request, setting the version of --parse_sitename is a requirement as it forms
