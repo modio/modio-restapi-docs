@@ -2,16 +2,16 @@
 
 ### Latest API Version: <span class="versionwrap latest">--parse_version</span> 
 
-Our aim with --parse_sitename is to give developers the most powerful and flexible mod API available. This means continually evolving and improving based on your requirements and pushing changes when required. The majority of these changes will be non-breaking and deployed immediately, however there will be times when breaking changes are required. To ensure that your --parse_sitename implementations are not affected by the changes, we have architectured a versioning system that maintains backwards compatibility, keeps you informed of all changes and allows you to upgrade your implementation when it suits. Read on for specifics on how we version the API.
+Our aim with --parse_sitename is to offer developers the most powerful and flexible mod API available. This means continually evolving and improving based on your requirements and pushing changes when required. The majority of these changes will be non-breaking and deployed immediately, however there will be times when breaking changes are needed. To ensure your --parse_sitename implementations are not affected by the changes, we have architectured a versioning system that maintains backwards compatibility and allows you to upgrade your implementation when it suits. Read on details.
 
 ### How We Handle Versioning
 
-Upon first look, our implementation is consistent with many other REST API's, where you have a version specified in the URL and can change that value as required. The --parse_sitename API follows this convention - however, we don't treat our versions as 'major/minor' and instead __we release a new version each time breaking changes are made__. This allows us to release updates as frequently as is deemed required, with no impact on existing API consumers. Documentation is also preserved for past versions, so whilst we recommend you use the latest version of the API to access all functionality, we will always aim to support legacy versions. 
+Upon first look, our implementation is consistent with many other REST API's, where you have a version specified in the URL and can change that value as required. The --parse_sitename API follows this convention - however, we don't treat our versions as 'major' and instead __we release a new version each time breaking changes are made__. This allows us to release updates as frequently as is deemed required, with no impact on existing API consumers. Documentation is also preserved for past versions, so whilst we recommend you use the latest version of the API, we will always aim to support legacy versions.
 
 ### Versioning Format Convention
 
 For the initial release of the API, __v1__ is a valid format and version.
-However, for all future versions, the __v1__ format is _deprecated_ and the following format will be used to represent each new version that is published for the --parse_sitename API.    
+However, for all future versions, the __v1__ format is _deprecated_ and the following format will be used to represent each --parse_sitename API version.
 
 ### Format breakdown
 
@@ -48,12 +48,12 @@ part of the URL required to make a successful request.
 When making requests to the API, you need to be sure you know what functionality is available to you
 and what you can expect the API to do under every situation. With that said, and in the interest of
 being as explicit as possible if you supply a version in the URL of your request that is _not_ listed
-in the [changelog](#api-versions) below - a `404 Not Found` will be returned in the form of the [Error Object](--parse_apiurl/#error-object).
+in the [changelog](#api-versions) below - a `404 Not Found` will be returned in the form of the [Error Object](/#error-object).
 
 ## What are breaking changes
 
-The benefit of this system is we can push breaking changes to continually improve the API
-and your application will not be affected until you update. To clarify, for the --parse_sitename API the following
+The benefit of the approach we have taken to versioning, is it allows us to push breaking changes
+and continually improve the API without impacting your application until you update. To clarify, for the --parse_sitename API the following
 are what constitutes as __breaking__ changes:
 
 Non-Breaking (not covered in changelog) | Breaking Changes
