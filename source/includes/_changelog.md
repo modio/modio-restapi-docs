@@ -1,6 +1,6 @@
-# Intro
+# Getting Started
 
-## Latest API Version: <a href="#--parse_version-latest-version"><span class="versionwrap latest">--parse_version</span></a> 
+### Latest API Version: <span class="versionwrap latest">--parse_version</span> 
 
 Our aim with --parse_sitename is to give developers the most powerful and flexible mod API available. This means continually evolving and improving based on your requirements and pushing changes when required. The majority of these changes will be non-breaking and deployed immediately, however there will be times when breaking changes are required. To ensure that your --parse_sitename implementations are not affected by the changes, we have architectured a versioning system that maintains backwards compatibility, keeps you informed of all changes and allows you to upgrade your implementation when it suits. Read on for specifics on how we version the API.
 

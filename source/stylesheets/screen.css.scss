@@ -779,7 +779,7 @@ pre.tab-json .json-example-highlight {
   }
 }
 
-.index span.versionwrap, .changelog span.versionwrap {
+.index .page-wrapper span.versionwrap, .changelog .page-wrapper span.versionwrap {
   background: $nav-active-parent-bg;
   border-radius: 5px;
   color: #fff;
