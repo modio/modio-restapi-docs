@@ -110,7 +110,8 @@ curl -X POST https://api.mod.io/v1/oauth/emailrequest \
 
 Request a `security_code` be sent to the email address of the user you wish to authenticate: 
 
-`POST /oauth/emailrequest`
+
+`POST /oauth/emailrequest`
 
 Parameter | Value
 ---------- | ----------  
@@ -139,7 +140,8 @@ curl -X POST https://api.mod.io/v1/oauth/emailexchange \
 }
 ```
 
-`POST /oauth/emailexchange`
+
+`POST /oauth/emailexchange`
 
 Parameter | Value
 ---------- | ----------  
@@ -1223,7 +1225,7 @@ Update details for a game. If you want to update the `icon`, `logo` or `header` 
     instructions_url|string||Link to a mod.io guide, your modding wiki or a page where modders can learn how to make and submit mods to your games profile.
     ugc_name|string||Word used to describe user-generated content (mods, items, addons etc).
     presentation_option|integer||Choose the presentation style you want on the mod.io website:<br><br>__0__ =  Grid View: Displays mods in a grid (visual but less informative, default setting) <br>__1__ = Table View: Displays mods in a table (easier to browse)
-    submission_option|integer||Choose the submission process you want modders to follow:<br><br>__0__ = Control the mod upload process (recommended): You will have to build an upload system either in-game or via a standalone tool, which enables creators to submit mods to the tags you have configured. Because you control the flow you can prevalidate and compile mods, to ensure they will work in your game and attach metadata about what settings the mod can change. In the long run this option will save you time as you can accept more submissions, but it requires more setup to get running and isn't as open as the above option. __NOTE:__ mod profiles can still be [created online](https://mod.io/mods/add), but uploads will have to occur via the API using tools you create.<br><br>__1__ = Enable mod uploads from anywhere: Allow developers to upload mods via the website and API, and pick the tags their mod is built for. No validation will be done on the files submitted, it will be the responsibility of your game and apps to process the mods installation based on the tags selected and determine if the mod is valid and works. For example a mod might be uploaded with the 'map' tag. When a user subscribes to this mod, your game will need to verify it contains a map file and install it where maps are located. If this fails, your game or the community will have to flag the mod as 'incompatible' to remove it from the listing.
+    submission_option|integer||Choose the submission process you want modders to follow:<br><br>__0__ = Mods must be uploaded using your tools (recommended): You will have to build an upload system either in-game or via a standalone tool, which enables creators to submit mods to the tags you have configured. Because you control the flow you can prevalidate and compile mods, to ensure they will work in your game and attach metadata about what settings the mod can change. In the long run this option will save you time as you can accept more submissions, but it requires more setup to get running and isn't as open as the above option. __NOTE:__ mod profiles can still be [created online](https://mod.io/mods/add), but uploads will have to occur via the API using tools you create.<br><br>__1__ = Mods can be uploaded using the website: Allow developers to upload mods via the website and API, and pick the tags their mod is built for. No validation will be done on the files submitted, it will be the responsibility of your game and apps to process the mods installation based on the tags selected and determine if the mod is valid and works. For example a mod might be uploaded with the 'map' tag. When a user subscribes to this mod, your game will need to verify it contains a map file and install it where maps are located. If this fails, your game or the community will have to flag the mod as 'incompatible' to remove it from the listing.
     curation_option|integer||Choose the curation process your team follows to approve mods:<br><br>__0__ = No curation (recommended): Mods are immediately available to play, without any intervention or work from your team.<br><br>__1__ = Paid curation: Screen only mods the creator wants to sell, before they are available to receive donations or be purchased via the API.<br><br>__2__ = Full curation: All mods must be accepted by someone on your team. This option is useful for games that have a small number of mods and want to control the experience, or you need to set the parameters attached to a mod (i.e. a weapon may require the rate of fire, power level, clip size etc). It can also be used for complex mods, which you may need to build into your game or distribute as DLC.
     community_options|integer||Choose the community features enabled on the mod.io website:<br><br>__0__ = All of the options below are disabled<br>__1__ = Discussion board enabled<br>__2__ = Guides and news enabled<br>__?__ = Add the options you want together, to enable multiple features (see [BITWISE fields](#bitwise-and-bitwise-and))
     revenue_options|integer||Choose the revenue capabilities mods can enable:<br><br>__0__ = All of the options below are disabled<br>__1__ = Allow mods to be sold<br>__2__ = Allow mods to receive donations<br>__4__ = Allow mods to be traded (not subject to revenue share)<br>__8__ = Allow mods to control supply and scarcity<br>__?__ = Add the options you want together, to enable multiple features (see [BITWISE fields](#bitwise-and-bitwise-and))
@@ -7429,6 +7431,127 @@ Status|Meaning|Description|Response Schema
 To perform this request, you must be authenticated via one of the following methods:
 <a href="#authentication">OAuth 2</a> (Scopes: write)
 </aside>
+# External Auth
+
+## Authenticate via Steam
+
+> Example request
+
+```shell
+# You can also use wget
+curl -X POST https://api.mod.io/v1/external/steamauth?api_key=YourApiKey \
+  -H 'Content-Type: application/x-www-form-urlencoded' \ 
+  -H 'Accept: application/json' \
+  -d 'appdata=NDNuZmhnaWdyaGdqOWc0M2o5eTM0aGc='
+
+```
+
+```http
+POST https://api.mod.io/v1/external/steamauth?api_key=YourApiKey HTTP/1.1
+Host: api.mod.io
+Content-Type: application/x-www-form-urlencoded
+Accept: application/json
+
+```
+
+```javascript
+var headers = {
+  'Content-Type':'application/x-www-form-urlencoded',
+  'Accept':'application/json'
+
+};
+
+$.ajax({
+  url: 'https://api.mod.io/v1/external/steamauth',
+  method: 'post',
+  data: '?api_key=YourApiKey',
+  headers: headers,
+  success: function(data) {
+    console.log(JSON.stringify(data));
+  }
+})
+```
+
+```javascript--nodejs
+const request = require('node-fetch');
+const inputBody = '{
+  "appdata": "NDNuZmhnaWdyaGdqOWc0M2o5eTM0aGc="
+}';
+const headers = {
+  'Content-Type':'application/x-www-form-urlencoded',
+  'Accept':'application/json'
+
+};
+
+fetch('https://api.mod.io/v1/external/steamauth?api_key=YourApiKey',
+{
+  method: 'POST',
+  body: inputBody,
+  headers: headers
+})
+.then(function(res) {
+    return res.json();
+}).then(function(body) {
+    console.log(body);
+});
+```
+
+```python
+import requests
+headers = {
+  'Content-Type': 'application/x-www-form-urlencoded',
+  'Accept': 'application/json'
+}
+
+r = requests.post('https://api.mod.io/v1/external/steamauth', params={
+  'api_key': 'YourApiKey'
+}, headers = headers)
+
+print r.json()
+```
+
+```java
+URL obj = new URL("https://api.mod.io/v1/external/steamauth?api_key=YourApiKey");
+HttpURLConnection con = (HttpURLConnection) obj.openConnection();
+con.setRequestMethod("POST");
+int responseCode = con.getResponseCode();
+BufferedReader in = new BufferedReader(
+    new InputStreamReader(con.getInputStream()));
+String inputLine;
+StringBuffer response = new StringBuffer();
+while ((inputLine = in.readLine()) != null) {
+    response.append(inputLine);
+}
+in.close();
+System.out.println(response.toString());
+```
+`POST /external/steamauth`
+
+Request an access token on behalf of a Steam user. To use this functionality you *must* first have supplied your game's secret encrypted app ticket key from Steamworks via [the API](#edit-game) in the 'Options' tab of your game profile. A Successful request will return [Access Token Object](#access-token-object).
+
+     Parameter|Type|Required|Description
+     ---|---|---|---|
+     appdata|base64-encoded string|true|The Steam users [Encrypted User Authentication Ticket](https://partner.steamgames.com/doc/features/auth#encryptedapptickets). <br><br>__NOTE:__ Parameter content *MUST* be the *uint8 *rgubTicketEncrypted* returned from Steamworks API, converted into a base64-encoded string.
+
+
+> Example response
+
+```json
+{
+  "code": 200,
+  "access_token": "eyJ0eXAiOiXKV1QibCJhbLciOiJeiUzI1....."
+}
+```
+<h3 id="Authenticate-via-Steam-responses">Responses</h3>
+
+Status|Meaning|Description|Response Schema
+---|---|---|---|
+200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)|Successful Request|[Access Token Object  ](#schemaaccess_token_object)
+
+<aside class="auth-notice">
+To perform this request, you must be authenticated via one of the following methods:
+<a href="#authentication">api_key</a>
+</aside>
 # Me
 
 ## Get Authenticated User
@@ -9498,6 +9621,28 @@ metavalue|string|The value of the key-value pair.
 
 
 
+## Access Token Object  
+
+<a name="schemaaccess_token_object"></a>
+
+```json
+{
+  "code": 200,
+  "access_token": "eyJ0eXAiOiXKV1QibCJhbLciOiJeiUzI1....."
+} 
+```
+
+
+### Properties
+
+Name|Type|Description
+---|---|---|---|
+code|integer|HTTP Response Code.
+access_token|string|The user's access token.
+
+
+
+
 ## Rating Object
 
    <a name="schemarating_object"></a>
@@ -10648,4 +10793,4 @@ result_limit|integer|Maximum number of results returned in the request. Defaults
 result_total|integer|Total number of results found.
 
 
-
+
