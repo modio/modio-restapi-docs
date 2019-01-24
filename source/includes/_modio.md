@@ -279,23 +279,28 @@ Response Code | Meaning
 
 ## Response Formats
 ```json
-// Single 'view' response
+// Single object response
 
 {
-	"id": 2,
-	"mod": 0,
-	"member": 31342,
-	"date": 1492570177,
-	"datevirus": 0,
-	"virusstatus": 0,
-	"viruspositive": 0,
-	"filesize": 15181,
-	"filehash": "2d4a0e2d7273db6b0a94b0740a88ad0d",
-	"filename": "rogue-knight-v1.zip",
-	"version": "1.0",
-	"virustotal": "No threats detected.",
-	"changelog": "v1.0 - First release of Rogue Knight!",
-	"download": "--parse_siteurl/mods/file/2/c489a0354111a4dx6640d47f0cdcb294"
+    "id": 2,
+    "mod_id": 2,
+    "date_added": 1499841487,
+    "date_scanned": 1499841487,
+    "virus_status": 0,
+    "virus_positive": 0,
+    "virustotal_hash": "f9a7bf4a95ce20787337b685a79677cae2281b83c63ab0a25f091407741692af-1508147401",
+    "filesize": 15181,
+    "filehash": {
+      "md5": "2d4a0e2d7273db6b0a94b0740a88ad0d"
+    },
+    "filename": "rogue-knight-v1.zip",
+    "version": "1.3",
+    "changelog": "VERSION 1.3 -- Changes -- Fixed critical castle floor bug.",
+    "metadata_blob": "rogue,hd,high-res,4k,hd-textures",
+    "download": {
+      "binary_url": "https://mod.io/mods/file/1/",
+      "date_expires": 1579316848
+    }
 }
 ```
 
@@ -313,33 +318,39 @@ Endpoints that return more than one result, return a __JSON object__ which conta
 - metadata fields - contains [pagination metadata](#pagination) to help you paginate through the API.
 
 ```json
-// Get response
+// Multiple objects response
 
 {
 	"data": [
 		{
-			"id": 2,
-			"mod": 2,
-			"member": 31342,
-			"date": 1492570177,
-			"datevirus": 1492570177,
-			"virusstatus": 0,
-			"viruspositive": 0,
-			"filesize": 15181,
-			"filehash": "2d4a0e2d7273db6b0a94b0740a88ad0d",
-			"filename": "rogue-knightv1.zip",
-			"version": "1.0",
-			"virustotal": null,
-			"changelog": "v1.0 --- First Release --- Added main mod.",
-			"download": "--parse_siteurl/mods/file/2/c489a0354111a4d76640d47f0cdcb294"
+    		"id": 2,
+    		"mod_id": 2,
+    		"date_added": 1499841487,
+    		"date_scanned": 1499841487,
+    		"virus_status": 0,
+    		"virus_positive": 0,
+    		"virustotal_hash": "f9a7bf4a95ce20787337b685a79677cae2281b83c63ab0a25f091407741692af-1508147401",
+    		"filesize": 15181,
+    		"filehash": {
+    		  "md5": "2d4a0e2d7273db6b0a94b0740a88ad0d"
+    		},
+    		"filename": "rogue-knight-v1.zip",
+    		"version": "1.3",
+    		"changelog": "VERSION 1.3 -- Changes -- Fixed critical castle floor bug.",
+    		"metadata_blob": "rogue,hd,high-res,4k,hd-textures",
+    		"download": {
+    		  "binary_url": "https://mod.io/mods/file/1/",
+    		  "date_expires": 1579316848
+    		}
 		},
 		{
 			...
 		},
 	],
 	"result_count": 100,
-  "result_limit": 100,
-  "result_offset": 0
+	"result_limit": 100,
+	"result_offset": 0,
+	"result_total": 127
 }  
 ```
 

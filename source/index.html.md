@@ -110,8 +110,7 @@ curl -X POST https://api.mod.io/v1/oauth/emailrequest \
 
 Request a `security_code` be sent to the email address of the user you wish to authenticate: 
 
-
-`POST /oauth/emailrequest`
+`POST /oauth/emailrequest`
 
 Parameter | Value
 ---------- | ----------  
@@ -140,8 +139,7 @@ curl -X POST https://api.mod.io/v1/oauth/emailexchange \
 }
 ```
 
-
-`POST /oauth/emailexchange`
+`POST /oauth/emailexchange`
 
 Parameter | Value
 ---------- | ----------  
@@ -298,23 +296,28 @@ Response Code | Meaning
 
 ## Response Formats
 ```json
-// Single 'view' response
+// Single object response
 
 {
-	"id": 2,
-	"mod": 0,
-	"member": 31342,
-	"date": 1492570177,
-	"datevirus": 0,
-	"virusstatus": 0,
-	"viruspositive": 0,
-	"filesize": 15181,
-	"filehash": "2d4a0e2d7273db6b0a94b0740a88ad0d",
-	"filename": "rogue-knight-v1.zip",
-	"version": "1.0",
-	"virustotal": "No threats detected.",
-	"changelog": "v1.0 - First release of Rogue Knight!",
-	"download": "https://mod.io/mods/file/2/c489a0354111a4dx6640d47f0cdcb294"
+    "id": 2,
+    "mod_id": 2,
+    "date_added": 1499841487,
+    "date_scanned": 1499841487,
+    "virus_status": 0,
+    "virus_positive": 0,
+    "virustotal_hash": "f9a7bf4a95ce20787337b685a79677cae2281b83c63ab0a25f091407741692af-1508147401",
+    "filesize": 15181,
+    "filehash": {
+      "md5": "2d4a0e2d7273db6b0a94b0740a88ad0d"
+    },
+    "filename": "rogue-knight-v1.zip",
+    "version": "1.3",
+    "changelog": "VERSION 1.3 -- Changes -- Fixed critical castle floor bug.",
+    "metadata_blob": "rogue,hd,high-res,4k,hd-textures",
+    "download": {
+      "binary_url": "https://mod.io/mods/file/1/",
+      "date_expires": 1579316848
+    }
 }
 ```
 
@@ -332,33 +335,39 @@ Endpoints that return more than one result, return a __JSON object__ which conta
 - metadata fields - contains [pagination metadata](#pagination) to help you paginate through the API.
 
 ```json
-// Get response
+// Multiple objects response
 
 {
 	"data": [
 		{
-			"id": 2,
-			"mod": 2,
-			"member": 31342,
-			"date": 1492570177,
-			"datevirus": 1492570177,
-			"virusstatus": 0,
-			"viruspositive": 0,
-			"filesize": 15181,
-			"filehash": "2d4a0e2d7273db6b0a94b0740a88ad0d",
-			"filename": "rogue-knightv1.zip",
-			"version": "1.0",
-			"virustotal": null,
-			"changelog": "v1.0 --- First Release --- Added main mod.",
-			"download": "https://mod.io/mods/file/2/c489a0354111a4d76640d47f0cdcb294"
+    		"id": 2,
+    		"mod_id": 2,
+    		"date_added": 1499841487,
+    		"date_scanned": 1499841487,
+    		"virus_status": 0,
+    		"virus_positive": 0,
+    		"virustotal_hash": "f9a7bf4a95ce20787337b685a79677cae2281b83c63ab0a25f091407741692af-1508147401",
+    		"filesize": 15181,
+    		"filehash": {
+    		  "md5": "2d4a0e2d7273db6b0a94b0740a88ad0d"
+    		},
+    		"filename": "rogue-knight-v1.zip",
+    		"version": "1.3",
+    		"changelog": "VERSION 1.3 -- Changes -- Fixed critical castle floor bug.",
+    		"metadata_blob": "rogue,hd,high-res,4k,hd-textures",
+    		"download": {
+    		  "binary_url": "https://mod.io/mods/file/1/",
+    		  "date_expires": 1579316848
+    		}
 		},
 		{
 			...
 		},
 	],
 	"result_count": 100,
-  "result_limit": 100,
-  "result_offset": 0
+	"result_limit": 100,
+	"result_offset": 0,
+	"result_total": 127
 }  
 ```
 
@@ -8014,6 +8023,7 @@ Get events that have been fired specific to the user. Successful request will re
     Filter|Type|Description
     ---|---|---
     id|integer|Unique id of the event object.
+    game_id|integer|Unique id of the parent game.
     mod_id|integer|Unique id of the parent mod.
     user_id|integer|Unique id of the user who performed the action.
     date_added|integer|Unix timestamp of date mod was updated.
@@ -8027,10 +8037,11 @@ Get events that have been fired specific to the user. Successful request will re
   "data": [
     {
       "id": 13,
+      "game_id": 7,
       "mod_id": 13,
       "user_id": 13,
       "date_added": 1499846132,
-      "event_type": "MODFILE_CHANGED"
+      "event_type": "USER_SUBSCRIBE"
     },
     {
         ...
@@ -8046,7 +8057,7 @@ Get events that have been fired specific to the user. Successful request will re
 
 Status|Meaning|Description|Response Schema
 ---|---|---|---|
-200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)|Successful Request|[Get Mod Events  ](#schemaget_mod_events)
+200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)|Successful Request|[Get User Events  ](#schemaget_user_events)
 
 <aside class="auth-notice">
 To perform this request, you must be authenticated via one of the following methods:
@@ -8973,11 +8984,995 @@ thumb_320x180|string|URL to the image thumbnail.
 
 
 
+## Get All Mod Comments 
+
+<a name="schemaget_all_mod_comments"></a>
+
+```json
+{
+  "data": [
+    {
+      "id": 2,
+      "mod_id": 2,
+      "user": {
+        "id": 1,
+        "name_id": "xant",
+        "username": "XanT",
+        "date_online": 1509922961,
+        "avatar": {
+          "filename": "modio-color-dark.png",
+          "original": "https://static.mod.io/v1/images/branding/modio-color-dark.png",
+          "thumb_50x50": "https://static.mod.io/v1/images/branding/modio-color-dark.png",
+          "thumb_100x100": "https://static.mod.io/v1/images/branding/modio-color-dark.png"
+        },
+        "timezone": "America/Los_Angeles",
+        "language": "en",
+        "profile_url": "https://mod.io/members/xant"
+      },
+      "date_added": 1499841487,
+      "reply_id": 1499,
+      "thread_position": "01",
+      "karma": 1,
+      "karma_guest": 0,
+      "content": "This mod is kickass! Great work!"
+    },
+    {
+        ...
+    }
+  ],
+  "result_count": 70,
+  "result_offset": 0,
+  "result_limit": 100,
+  "result_total": 70
+} 
+```
 
 
-## Event Object
+### Properties
 
-   <a name="schemaevent_object"></a>
+Name|Type|Description
+---|---|---|---|
+data|[Comment Object   ](#schemacomment_object)[]|Array containing comment objects.
+» id|integer|Unique id of the comment.
+» mod_id|integer|Unique id of the parent mod.
+» user|[User Object   ](#schemauser_object)|Contains user data.
+»» id|integer|Unique id of the user.
+»» name_id|string|Path for the user on mod.io. For example: https://mod.io/members/__username-id-here__ Usually a simplified version of their username.
+»» username|string|Username of the user.
+»» date_online|integer|Unix timestamp of date the user was last online.
+»» avatar|[Avatar Object   ](#schemaavatar_object)|Contains avatar data.
+»»» filename|string|Avatar filename including extension.
+»»» original|string|URL to the full-sized avatar.
+»»» thumb_50x50|string|URL to the small avatar thumbnail.
+»»» thumb_100x100|string|URL to the medium avatar thumbnail.
+»» timezone|string|Timezone of the user, format is country/city.
+»» language|string|Users language preference. See [localization](#localization) for the supported languages.
+»» profile_url|string|URL to the user's mod.io profile.
+» date_added|integer|Unix timestamp of date the comment was posted.
+» reply_id|integer|Id of the parent comment this comment is replying to (can be 0 if the comment is not a reply).
+» thread_position|string|Levels of nesting in a comment thread. How it works:<br><br>- The first comment will have the position '01'.<br>- The second comment will have the position '02'.<br>- If someone responds to the second comment the position will be '02.01'.<br>- A maximum of 3 levels is supported.
+» karma|integer|Karma received for the comment (can be postive or negative).
+» karma_guest|integer|Karma received for guest comments (can be postive or negative).
+» content|string|Contents of the comment.
+result_count|integer|Number of results returned in this request.
+result_offset|integer|Number of results skipped over. Defaults to 0 unless overridden by `_offset` filter.
+result_limit|integer|Maximum number of results returned in the request. Defaults to 100 (max) unless overridden by `_limit` filter.
+result_total|integer|Total number of results found.
+
+
+
+
+## Get All Mod Dependencies 
+
+<a name="schemaget_all_mod_dependencies"></a>
+
+```json
+{
+  "data": [
+    {
+      "mod_id": 231,
+      "date_added": 1499841487
+    },
+    {
+        ...
+    }
+  ],
+  "result_count": 70,
+  "result_offset": 0,
+  "result_limit": 100,
+  "result_total": 70
+} 
+```
+
+
+### Properties
+
+Name|Type|Description
+---|---|---|---|
+data|[Mod Dependencies Object  ](#schemamod_dependencies_object)[]|Array containing mod dependencies objects.
+» mod_id|integer|Unique id of the mod that is the dependency.
+» date_added|integer|Unix timestamp of date the dependency was added.
+result_count|integer|Number of results returned in this request.
+result_offset|integer|Number of results skipped over. Defaults to 0 unless overridden by `_offset` filter.
+result_limit|integer|Maximum number of results returned in the request. Defaults to 100 (max) unless overridden by `_limit` filter.
+result_total|integer|Total number of results found.
+
+
+
+
+## Get Mod Events  
+
+<a name="schemaget_mod_events"></a>
+
+```json
+{
+  "data": [
+    {
+      "id": 13,
+      "mod_id": 13,
+      "user_id": 13,
+      "date_added": 1499846132,
+      "event_type": "MODFILE_CHANGED"
+    },
+    {
+        ...
+    }
+  ],
+  "result_count": 70,
+  "result_offset": 0,
+  "result_limit": 100,
+  "result_total": 70
+} 
+```
+
+
+### Properties
+
+Name|Type|Description
+---|---|---|---|
+data|[Mod Event Object  ](#schemamod_event_object)[]|Array containing mod event objects.
+» id|integer|Unique id of the event object.
+» mod_id|integer|Unique id of the parent mod.
+» user_id|integer|Unique id of the user who performed the action.
+» date_added|integer|Unix timestamp of date the event occurred.
+» event_type|string|Type of event that was triggered. List of possible events: <br><br>- MODFILE_CHANGED<br>- MOD_AVAILABLE<br>- MOD_UNAVAILABLE<br>- MOD_EDITED<br>- MOD_DELETED<br>- USER_TEAM_JOIN<br>- USER_TEAM_LEAVE<br>- USER_SUBSCRIBE<br>- USER_UNSUBSCRIBE
+result_count|integer|Number of results returned in this request.
+result_offset|integer|Number of results skipped over. Defaults to 0 unless overridden by `_offset` filter.
+result_limit|integer|Maximum number of results returned in the request. Defaults to 100 (max) unless overridden by `_limit` filter.
+result_total|integer|Total number of results found.
+
+
+
+
+## Get All Modfiles  
+
+<a name="schemaget_all_modfiles"></a>
+
+```json
+{
+  "data": [
+    {
+      "id": 2,
+      "mod_id": 2,
+      "date_added": 1499841487,
+      "date_scanned": 1499841487,
+      "virus_status": 0,
+      "virus_positive": 0,
+      "virustotal_hash": "f9a7bf4a95ce20787337b685a79677cae2281b83c63ab0a25f091407741692af-1508147401",
+      "filesize": 15181,
+      "filehash": {
+        "md5": "2d4a0e2d7273db6b0a94b0740a88ad0d"
+      },
+      "filename": "rogue-knight-v1.zip",
+      "version": "1.3",
+      "changelog": "VERSION 1.3 -- Changes -- Fixed critical castle floor bug.",
+      "metadata_blob": "rogue,hd,high-res,4k,hd textures",
+      "download": {
+        "binary_url": "https://mod.io/mods/file/1/c489a0354111a4d76640d47f0cdcb294",
+        "date_expires": 1579316848
+      }
+    },
+    {
+        ...
+    }
+  ],
+  "result_count": 70,
+  "result_offset": 0,
+  "result_limit": 100,
+  "result_total": 70
+} 
+```
+
+
+### Properties
+
+Name|Type|Description
+---|---|---|---|
+data|[Modfile Object   ](#schemamodfile_object)[]|Array containing modfile objects.
+» id|integer|Unique modfile id.
+» mod_id|integer|Unique mod id.
+» date_added|integer|Unix timestamp of date file was added.
+» date_scanned|integer|Unix timestamp of date file was virus scanned.
+» virus_status|integer|Current virus scan status of the file. For newly added files that have yet to be scanned this field will change frequently until a scan is complete:<br><br>__0__ = Not scanned<br>__1__ = Scan complete<br>__2__ = In progress<br>__3__ = Too large to scan<br>__4__ = File not found<br>__5__ = Error Scanning
+» virus_positive|integer|Was a virus detected:<br><br>__0__ = No threats detected<br>__1__ = Flagged as malicious
+» virustotal_hash|string|VirusTotal proprietary hash to view the [scan results](https://www.virustotal.com).
+» filesize|integer|Size of the file in bytes.
+» filehash|[Filehash Object   ](#schemafilehash_object)|Contains filehash data.
+»» md5|string|MD5 hash of the file.
+» filename|string|Filename including extension.
+» version|string|Release version this file represents.
+» changelog|string|Changelog for the file.
+» metadata_blob|string|Metadata stored by the game developer for this file.
+» download|[Download Object   ](#schemadownload_object)|Contains download data.
+»» binary_url|string|URL to download the file from the mod.io CDN.<br><br>__NOTE:__ If the [game](#edit-game) requires mod downloads to be initiated via the API, the `binary_url` returned will contain a verification hash. This hash must be supplied to get the modfile, and will expire after a certain period of time. Saving and reusing the `binary_url` won't work in this situation given it's dynamic nature.
+»» date_expires|integer|Unix timestamp of when the `binary_url` will expire.
+result_count|integer|Number of results returned in this request.
+result_offset|integer|Number of results skipped over. Defaults to 0 unless overridden by `_offset` filter.
+result_limit|integer|Maximum number of results returned in the request. Defaults to 100 (max) unless overridden by `_limit` filter.
+result_total|integer|Total number of results found.
+
+
+
+
+## Get All Games  
+
+<a name="schemaget_all_games"></a>
+
+```json
+{
+  "data": [
+    {
+      "id": 2,
+      "status": 1,
+      "submitted_by": {
+        "id": 1,
+        "name_id": "xant",
+        "username": "XanT",
+        "date_online": 1509922961,
+        "avatar": {
+          "filename": "modio-color-dark.png",
+          "original": "https://static.mod.io/v1/images/branding/modio-color-dark.png",
+          "thumb_50x50": "https://static.mod.io/v1/images/branding/modio-color-dark.png",
+          "thumb_100x100": "https://static.mod.io/v1/images/branding/modio-color-dark.png"
+        },
+        "timezone": "America/Los_Angeles",
+        "language": "en",
+        "profile_url": "https://mod.io/members/xant"
+      },
+      "date_added": 1493702614,
+      "date_updated": 1499410290,
+      "date_live": 1499841403,
+      "presentation_option": 1,
+      "submission_option": 0,
+      "curation_option": 0,
+      "community_options": 3,
+      "revenue_options": 1500,
+      "api_access_options": 3,
+      "maturity_options": 0,
+      "ugc_name": "map",
+      "icon": {
+        "filename": "modio-color-dark.png",
+        "original": "https://static.mod.io/v1/images/branding/modio-color-dark.png",
+        "thumb_64x64": "https://static.mod.io/v1/images/branding/modio-color-dark.png",
+        "thumb_128x128": "https://static.mod.io/v1/images/branding/modio-color-dark.png",
+        "thumb_256x256": "https://static.mod.io/v1/images/branding/modio-color-dark.png"
+      },
+      "logo": {
+        "filename": "modio-color-dark.png",
+        "original": "https://static.mod.io/v1/images/branding/modio-color-dark.png",
+        "thumb_320x180": "https://static.mod.io/v1/images/branding/modio-color-dark.png",
+        "thumb_640x360": "https://static.mod.io/v1/images/branding/modio-color-dark.png",
+        "thumb_1280x720": "https://static.mod.io/v1/images/branding/modio-color-dark.png"
+      },
+      "header": {
+        "filename": "demo.png",
+        "original": "https://static.mod.io/v1/images/branding/modio-color-dark.png"
+      },
+      "name": "Rogue Knight",
+      "name_id": "rogue-knight",
+      "summary": "Rogue Knight is a brand new 2D pixel platformer.",
+      "instructions": "Instructions on the process to upload mods.",
+      "instructions_url": "https://www.rogue-knight-game.com/modding/getting-started",
+      "profile_url": "https://rogue-knight.mod.io",
+      "tag_options": [
+        {
+          "name": "Theme",
+          "type": "checkboxes",
+          "tags": [
+            "Horror"
+          ],
+          "hidden": false
+        }
+      ]
+    },
+    {
+        ...
+    }
+  ],
+  "result_count": 70,
+  "result_offset": 0,
+  "result_limit": 100,
+  "result_total": 70
+} 
+```
+
+
+### Properties
+
+Name|Type|Description
+---|---|---|---|
+data|[Game Object   ](#schemagame_object)[]|Array containing game objects.
+» id|integer|Unique game id.
+» status|integer|Status of the game (see [status and visibility](#status-amp-visibility) for details):<br><br>__0__ = Not Accepted<br>__1__ = Accepted<br>__2__ = Archived (potentially out of date or incompatible)<br>__3__ = Deleted
+» submitted_by|[User Object   ](#schemauser_object)|Contains user data.
+»» id|integer|Unique id of the user.
+»» name_id|string|Path for the user on mod.io. For example: https://mod.io/members/__username-id-here__ Usually a simplified version of their username.
+»» username|string|Username of the user.
+»» date_online|integer|Unix timestamp of date the user was last online.
+»» avatar|[Avatar Object   ](#schemaavatar_object)|Contains avatar data.
+»»» filename|string|Avatar filename including extension.
+»»» original|string|URL to the full-sized avatar.
+»»» thumb_50x50|string|URL to the small avatar thumbnail.
+»»» thumb_100x100|string|URL to the medium avatar thumbnail.
+»» timezone|string|Timezone of the user, format is country/city.
+»» language|string|Users language preference. See [localization](#localization) for the supported languages.
+»» profile_url|string|URL to the user's mod.io profile.
+» date_added|integer|Unix timestamp of date game was registered.
+» date_updated|integer|Unix timestamp of date game was updated.
+» date_live|integer|Unix timestamp of date game was set live.
+» presentation_option|integer|Presentation style used on the mod.io website:<br><br>__0__ =  Grid View: Displays mods in a grid<br>__1__ = Table View: Displays mods in a table
+» submission_option|integer|Submission process modders must follow:<br><br>__0__ = Mod uploads must occur via the API using a tool created by the game developers<br>__1__ = Mod uploads can occur from anywhere, including the website and API
+» curation_option|integer|Curation process used to approve mods:<br><br>__0__ = No curation: Mods are immediately available to play<br>__1__ = Paid curation: Mods are immediately available to play unless they choose to receive donations. These mods must be accepted to be listed<br>__2__ = Full curation: All mods must be accepted by someone to be listed
+» community_options|integer|Community features enabled on the mod.io website:<br><br>__0__ = All of the options below are disabled<br>__1__ = Discussion board enabled<br>__2__ = Guides and news enabled<br>__?__ = Add the options you want together, to enable multiple features (see [BITWISE fields](#bitwise-and-bitwise-and))
+» revenue_options|integer|Revenue capabilities mods can enable:<br><br>__0__ = All of the options below are disabled<br>__1__ = Allow mods to be sold<br>__2__ = Allow mods to receive donations<br>__4__ = Allow mods to be traded<br>__8__ = Allow mods to control supply and scarcity<br>__?__ = Add the options you want together, to enable multiple features (see [BITWISE fields](#bitwise-and-bitwise-and))
+» api_access_options|integer|Level of API access allowed by this game:<br><br>__0__ = All of the options below are disabled<br>__1__ = Allow 3rd parties to access this games API endpoints<br>__2__ = Allow mods to be downloaded directly (if disabled all download URLs will contain a frequently changing verification hash to stop unauthorized use)<br>__?__ = Add the options you want together, to enable multiple features (see [BITWISE fields](#bitwise-and-bitwise-and))
+» maturity_options|integer|Switch to allow developers to select if they flag their mods as containing mature content:<br><br>__0__ = Don't allow _(default)_<br>__1__ = Allow
+» ugc_name|string|Word used to describe user-generated content (mods, items, addons etc).
+» icon|[Icon Object   ](#schemaicon_object)|Contains icon data.
+»» filename|string|Icon filename including extension.
+»» original|string|URL to the full-sized icon.
+»» thumb_64x64|string|URL to the small icon thumbnail.
+»» thumb_128x128|string|URL to the medium icon thumbnail.
+»» thumb_256x256|string|URL to the large icon thumbnail.
+» logo|[Logo Object   ](#schemalogo_object)|Contains logo data.
+»» filename|string|Logo filename including extension.
+»» original|string|URL to the full-sized logo.
+»» thumb_320x180|string|URL to the small logo thumbnail.
+»» thumb_640x360|string|URL to the medium logo thumbnail.
+»» thumb_1280x720|string|URL to the large logo thumbnail.
+» header|[Header Image Object  ](#schemaheader_image_object)|Contains header data.
+»» filename|string|Header image filename including extension.
+»» original|string|URL to the full-sized header image.
+» name|string|Name of the game.
+» name_id|string|Subdomain for the game on mod.io.
+» summary|string|Summary of the game.
+» instructions|string|A guide about creating and uploading mods for this game to mod.io (applicable if submission_option = 0).
+» instructions_url|string|Link to a mod.io guide, your modding wiki or a page where modders can learn how to make and submit mods to your games profile.
+» profile_url|string|URL to the game's mod.io page.
+» tag_options|[Game Tag Option Object ](#schemagame_tag_option_object)[]|Groups of tags configured by the game developer, that mods can select.
+»» name|string|Name of the tag group.
+»» type|string|Can multiple tags be selected via 'checkboxes' or should only a single tag be selected via a 'dropdown'.
+»» hidden|boolean|Groups of tags flagged as 'admin only' should only be used for filtering, and should not be displayed to users.
+»» tags|string[]|Array of tags in this group.
+result_count|integer|Number of results returned in this request.
+result_offset|integer|Number of results skipped over. Defaults to 0 unless overridden by `_offset` filter.
+result_limit|integer|Maximum number of results returned in the request. Defaults to 100 (max) unless overridden by `_limit` filter.
+result_total|integer|Total number of results found.
+
+
+
+
+## Get All Mod KVP Metadata
+
+<a name="schemaget_all_mod_kvp_metadata"></a>
+
+```json
+{
+  "data": [
+    {
+      "metakey": "pistol-dmg",
+      "metavalue": "800"
+    },
+    {
+        ...
+    }
+  ],
+  "result_count": 70,
+  "result_offset": 0,
+  "result_limit": 100,
+  "result_total": 70
+} 
+```
+
+
+### Properties
+
+Name|Type|Description
+---|---|---|---|
+data|[Metadata KVP Object  ](#schemametadata_kvp_object)[]|Array containing metadata kvp objects.
+» metakey|string|The key of the key-value pair.
+» metavalue|string|The value of the key-value pair.
+result_count|integer|Number of results returned in this request.
+result_offset|integer|Number of results skipped over. Defaults to 0 unless overridden by `_offset` filter.
+result_limit|integer|Maximum number of results returned in the request. Defaults to 100 (max) unless overridden by `_limit` filter.
+result_total|integer|Total number of results found.
+
+
+
+
+## Get All Mods  
+
+<a name="schemaget_all_mods"></a>
+
+```json
+{
+  "data": [
+    {
+      "id": 2,
+      "game_id": 2,
+      "status": 1,
+      "visible": 1,
+      "submitted_by": {
+        "id": 1,
+        "name_id": "xant",
+        "username": "XanT",
+        "date_online": 1509922961,
+        "avatar": {
+          "filename": "modio-color-dark.png",
+          "original": "https://static.mod.io/v1/images/branding/modio-color-dark.png",
+          "thumb_50x50": "https://static.mod.io/v1/images/branding/modio-color-dark.png",
+          "thumb_100x100": "https://static.mod.io/v1/images/branding/modio-color-dark.png"
+        },
+        "timezone": "America/Los_Angeles",
+        "language": "en",
+        "profile_url": "https://mod.io/members/xant"
+      },
+      "date_added": 1492564103,
+      "date_updated": 1499841487,
+      "date_live": 1499841403,
+      "maturity_option": 0,
+      "logo": {
+        "filename": "modio-color-dark.png",
+        "original": "https://static.mod.io/v1/images/branding/modio-color-dark.png",
+        "thumb_320x180": "https://static.mod.io/v1/images/branding/modio-color-dark.png",
+        "thumb_640x360": "https://static.mod.io/v1/images/branding/modio-color-dark.png",
+        "thumb_1280x720": "https://static.mod.io/v1/images/branding/modio-color-dark.png"
+      },
+      "homepage_url": "https://www.rogue-hdpack.com/",
+      "name": "Rogue Knight HD Pack",
+      "name_id": "rogue-knight-hd-pack",
+      "summary": "It's time to bask in the glory of beautiful 4k textures!",
+      "description": "<p>Rogue HD Pack does exactly what you thi...",
+      "description_plaintext": "Rogue HD Pack does exactly what you thi...",
+      "metadata_blob": "rogue,hd,high-res,4k,hd textures",
+      "profile_url": "https://rogue-knight.mod.io/rogue-knight-hd-pack",
+      "media": {
+        "youtube": [
+          "https://www.youtube.com/watch?v=dQw4w9WgXcQ"
+        ],
+        "sketchfab": [
+          "https://sketchfab.com/models/ef40b2d300334d009984c8865b2db1c8"
+        ],
+        "images": [
+          {
+            "filename": "modio-color-dark.png",
+            "original": "https://static.mod.io/v1/images/branding/modio-color-dark.png",
+            "thumb_320x180": "https://static.mod.io/v1/images/branding/modio-color-dark.png"
+          }
+        ]
+      },
+      "modfile": {
+        "id": 2,
+        "mod_id": 2,
+        "date_added": 1499841487,
+        "date_scanned": 1499841487,
+        "virus_status": 0,
+        "virus_positive": 0,
+        "virustotal_hash": "f9a7bf4a95ce20787337b685a79677cae2281b83c63ab0a25f091407741692af-1508147401",
+        "filesize": 15181,
+        "filehash": {
+          "md5": "2d4a0e2d7273db6b0a94b0740a88ad0d"
+        },
+        "filename": "rogue-knight-v1.zip",
+        "version": "1.3",
+        "changelog": "VERSION 1.3 -- Changes -- Fixed critical castle floor bug.",
+        "metadata_blob": "rogue,hd,high-res,4k,hd textures",
+        "download": {
+          "binary_url": "https://mod.io/mods/file/1/c489a0354111a4d76640d47f0cdcb294",
+          "date_expires": 1579316848
+        }
+      },
+      "metadata_kvp": [
+        {
+          "metakey": "pistol-dmg",
+          "metavalue": "800"
+        }
+      ],
+      "tags": [
+        {
+          "name": "Unity",
+          "date_added": 1499841487
+        }
+      ],
+      "stats": {
+        "mod_id": 2,
+        "popularity_rank_position": 13,
+        "popularity_rank_total_mods": 204,
+        "downloads_total": 27492,
+        "subscribers_total": 16394,
+        "ratings_total": 1230,
+        "ratings_positive": 1047,
+        "ratings_negative": 183,
+        "ratings_percentage_positive": 91,
+        "ratings_weighted_aggregate": 87.38,
+        "ratings_display_text": "Very Positive",
+        "date_expires": 1492564103
+      }
+    },
+    {
+        ...
+    }
+  ],
+  "result_count": 70,
+  "result_offset": 0,
+  "result_limit": 100,
+  "result_total": 70
+} 
+```
+
+
+### Properties
+
+Name|Type|Description
+---|---|---|---|
+data|[Mod Object   ](#schemamod_object)[]|Array containing mod objects.
+» id|integer|Unique mod id.
+» game_id|integer|Unique game id.
+» status|integer|Status of the mod (see [status and visibility](#status-amp-visibility) for details):<br><br>__0__ = Not Accepted<br>__1__ = Accepted<br>__2__ = Archived (potentially out of date or incompatible)<br>__3__ = Deleted
+» visible|integer|Visibility of the mod (see [status and visibility](#status-amp-visibility) for details):<br><br>__0__ = Hidden<br>__1__ = Public
+» submitted_by|[User Object   ](#schemauser_object)|Contains user data.
+»» id|integer|Unique id of the user.
+»» name_id|string|Path for the user on mod.io. For example: https://mod.io/members/__username-id-here__ Usually a simplified version of their username.
+»» username|string|Username of the user.
+»» date_online|integer|Unix timestamp of date the user was last online.
+»» avatar|[Avatar Object   ](#schemaavatar_object)|Contains avatar data.
+»»» filename|string|Avatar filename including extension.
+»»» original|string|URL to the full-sized avatar.
+»»» thumb_50x50|string|URL to the small avatar thumbnail.
+»»» thumb_100x100|string|URL to the medium avatar thumbnail.
+»» timezone|string|Timezone of the user, format is country/city.
+»» language|string|Users language preference. See [localization](#localization) for the supported languages.
+»» profile_url|string|URL to the user's mod.io profile.
+» date_added|integer|Unix timestamp of date mod was registered.
+» date_updated|integer|Unix timestamp of date mod was updated.
+» date_live|integer|Unix timestamp of date mod was set live.
+» maturity_option|integer|Maturity options flagged by the mod developer, this is only relevant if the parent game allows mods to be labelled as mature.<br><br>__0__ = None set _(default)_<br>__1__ = Alcohol<br>__2__ = Drugs<br>__4__ = Violence<br>__8__ = Explicit<br>__?__ = Add the options you want together, to enable multiple filters (see [BITWISE fields](#bitwise-and-bitwise-and))
+» logo|[Logo Object   ](#schemalogo_object)|Contains logo data.
+»» filename|string|Logo filename including extension.
+»» original|string|URL to the full-sized logo.
+»» thumb_320x180|string|URL to the small logo thumbnail.
+»» thumb_640x360|string|URL to the medium logo thumbnail.
+»» thumb_1280x720|string|URL to the large logo thumbnail.
+» homepage_url|string|Official homepage of the mod.
+» name|string|Name of the mod.
+» name_id|string|Path for the mod on mod.io. For example: https://gamename.mod.io/__mod-name-id-here__
+» summary|string|Summary of the mod.
+» description|string|Detailed description of the mod which allows HTML.
+» description_plaintext|string|`description` field converted into plaintext.
+» metadata_blob|string|Metadata stored by the game developer. Metadata can also be stored as searchable [key value pairs](#metadata), and to individual [mod files](#get-all-modfiles).
+» profile_url|string|URL to the mod's mod.io profile.
+» media|[Mod Media Object  ](#schemamod_media_object)|Contains mod media data.
+»» youtube|string[]|Array of YouTube links.
+»» sketchfab|string[]|Array of SketchFab links.
+»» images|[Image Object   ](#schemaimage_object)[]|Array of image objects (a gallery).
+»»» filename|string|Image filename including extension.
+»»» original|string|URL to the full-sized image.
+»»» thumb_320x180|string|URL to the image thumbnail.
+» modfile|[Modfile Object   ](#schemamodfile_object)|Contains modfile data.
+»» id|integer|Unique modfile id.
+»» mod_id|integer|Unique mod id.
+»» date_added|integer|Unix timestamp of date file was added.
+»» date_scanned|integer|Unix timestamp of date file was virus scanned.
+»» virus_status|integer|Current virus scan status of the file. For newly added files that have yet to be scanned this field will change frequently until a scan is complete:<br><br>__0__ = Not scanned<br>__1__ = Scan complete<br>__2__ = In progress<br>__3__ = Too large to scan<br>__4__ = File not found<br>__5__ = Error Scanning
+»» virus_positive|integer|Was a virus detected:<br><br>__0__ = No threats detected<br>__1__ = Flagged as malicious
+»» virustotal_hash|string|VirusTotal proprietary hash to view the [scan results](https://www.virustotal.com).
+»» filesize|integer|Size of the file in bytes.
+»» filehash|[Filehash Object   ](#schemafilehash_object)|Contains filehash data.
+»»» md5|string|MD5 hash of the file.
+»» filename|string|Filename including extension.
+»» version|string|Release version this file represents.
+»» changelog|string|Changelog for the file.
+»» metadata_blob|string|Metadata stored by the game developer for this file.
+»» download|[Download Object   ](#schemadownload_object)|Contains download data.
+»»» binary_url|string|URL to download the file from the mod.io CDN.<br><br>__NOTE:__ If the [game](#edit-game) requires mod downloads to be initiated via the API, the `binary_url` returned will contain a verification hash. This hash must be supplied to get the modfile, and will expire after a certain period of time. Saving and reusing the `binary_url` won't work in this situation given it's dynamic nature.
+»»» date_expires|integer|Unix timestamp of when the `binary_url` will expire.
+» stats|[Stats Object   ](#schemastats_object)|Contains stats data.
+»» mod_id|integer|Unique mod id.
+»» popularity_rank_position|integer|Current rank of the mod.
+»» popularity_rank_total_mods|integer|Number of ranking spots the current rank is measured against.
+»» downloads_total|integer|Number of total mod downloads.
+»» subscribers_total|integer|Number of total users who have subscribed to the mod.
+»» ratings_total|integer|Number of times this item has been rated.
+»» ratings_positive|integer|Number of positive ratings.
+»» ratings_negative|integer|Number of negative ratings.
+»» ratings_percentage_positive|integer|Number of positive ratings, divided by the total ratings to determine it’s percentage score.
+»» ratings_weighted_aggregate|float|Overall rating of this item calculated using the [Wilson score confidence interval](https://www.evanmiller.org/how-not-to-sort-by-average-rating.html). This column is good to sort on, as it will order items based on number of ratings and will place items with many positive ratings above those with a higher score but fewer ratings.
+»» ratings_display_text|string|Textual representation of the rating in format:<br><br>- Overwhelmingly Positive<br>- Very Positive<br>- Positive<br>- Mostly Positive<br>- Mixed<br>- Negative<br>- Mostly Negative<br>- Very Negative<br>- Overwhelmingly Negative<br>- Unrated
+»» date_expires|integer|Unix timestamp until this mods's statistics are considered stale.
+» metadata_kvp|[Metadata KVP Object  ](#schemametadata_kvp_object)[]|Contains key-value metadata.
+»» metakey|string|The key of the key-value pair.
+»» metavalue|string|The value of the key-value pair.
+» tags|[Mod Tag Object  ](#schemamod_tag_object)[]|Contains mod tag data.
+»» name|string|Tag name.
+»» date_added|integer|Unix timestamp of date tag was applied.
+result_count|integer|Number of results returned in this request.
+result_offset|integer|Number of results skipped over. Defaults to 0 unless overridden by `_offset` filter.
+result_limit|integer|Maximum number of results returned in the request. Defaults to 100 (max) unless overridden by `_limit` filter.
+result_total|integer|Total number of results found.
+
+
+
+
+## Get Mod Stats  
+
+<a name="schemaget_mod_stats"></a>
+
+```json
+{
+  "data": [
+    {
+      "mod_id": 2,
+      "popularity_rank_position": 13,
+      "popularity_rank_total_mods": 204,
+      "downloads_total": 27492,
+      "subscribers_total": 16394,
+      "ratings_total": 1230,
+      "ratings_positive": 1047,
+      "ratings_negative": 183,
+      "ratings_percentage_positive": 91,
+      "ratings_weighted_aggregate": 87.38,
+      "ratings_display_text": "Very Positive",
+      "date_expires": 1492564103
+    },
+    {
+        ...
+    }
+  ],
+  "result_count": 70,
+  "result_offset": 0,
+  "result_limit": 100,
+  "result_total": 70
+} 
+```
+
+
+### Properties
+
+Name|Type|Description
+---|---|---|---|
+data|[Stats Object   ](#schemastats_object)[]|Array containing stats objects.
+» mod_id|integer|Unique mod id.
+» popularity_rank_position|integer|Current rank of the mod.
+» popularity_rank_total_mods|integer|Number of ranking spots the current rank is measured against.
+» downloads_total|integer|Number of total mod downloads.
+» subscribers_total|integer|Number of total users who have subscribed to the mod.
+» ratings_total|integer|Number of times this item has been rated.
+» ratings_positive|integer|Number of positive ratings.
+» ratings_negative|integer|Number of negative ratings.
+» ratings_percentage_positive|integer|Number of positive ratings, divided by the total ratings to determine it’s percentage score.
+» ratings_weighted_aggregate|float|Overall rating of this item calculated using the [Wilson score confidence interval](https://www.evanmiller.org/how-not-to-sort-by-average-rating.html). This column is good to sort on, as it will order items based on number of ratings and will place items with many positive ratings above those with a higher score but fewer ratings.
+» ratings_display_text|string|Textual representation of the rating in format:<br><br>- Overwhelmingly Positive<br>- Very Positive<br>- Positive<br>- Mostly Positive<br>- Mixed<br>- Negative<br>- Mostly Negative<br>- Very Negative<br>- Overwhelmingly Negative<br>- Unrated
+» date_expires|integer|Unix timestamp until this mods's statistics are considered stale.
+result_count|integer|Number of results returned in this request.
+result_offset|integer|Number of results skipped over. Defaults to 0 unless overridden by `_offset` filter.
+result_limit|integer|Maximum number of results returned in the request. Defaults to 100 (max) unless overridden by `_limit` filter.
+result_total|integer|Total number of results found.
+
+
+
+
+## Get Mod Tags  
+
+<a name="schemaget_mod_tags"></a>
+
+```json
+{
+  "data": [
+    {
+      "name": "Unity",
+      "date_added": 1499841487
+    },
+    {
+        ...
+    }
+  ],
+  "result_count": 70,
+  "result_offset": 0,
+  "result_limit": 100,
+  "result_total": 70
+} 
+```
+
+
+### Properties
+
+Name|Type|Description
+---|---|---|---|
+data|[Mod Tag Object  ](#schemamod_tag_object)[]|Array containing mod tag objects.
+» name|string|Tag name.
+» date_added|integer|Unix timestamp of date tag was applied.
+result_count|integer|Number of results returned in this request.
+result_offset|integer|Number of results skipped over. Defaults to 0 unless overridden by `_offset` filter.
+result_limit|integer|Maximum number of results returned in the request. Defaults to 100 (max) unless overridden by `_limit` filter.
+result_total|integer|Total number of results found.
+
+
+
+
+## Get Game Tag Options 
+
+<a name="schemaget_game_tag_options"></a>
+
+```json
+{
+  "data": [
+    {
+      "name": "Theme",
+      "type": "checkboxes",
+      "tags": [
+        "Horror"
+      ],
+      "hidden": false
+    },
+    {
+        ...
+    }
+  ],
+  "result_count": 70,
+  "result_offset": 0,
+  "result_limit": 100,
+  "result_total": 70
+} 
+```
+
+
+### Properties
+
+Name|Type|Description
+---|---|---|---|
+data|[Game Tag Option Object ](#schemagame_tag_option_object)[]|Array containing game tag objects.
+» name|string|Name of the tag group.
+» type|string|Can multiple tags be selected via 'checkboxes' or should only a single tag be selected via a 'dropdown'.
+» hidden|boolean|Groups of tags flagged as 'admin only' should only be used for filtering, and should not be displayed to users.
+» tags|string[]|Array of tags in this group.
+result_count|integer|Number of results returned in this request.
+result_offset|integer|Number of results skipped over. Defaults to 0 unless overridden by `_offset` filter.
+result_limit|integer|Maximum number of results returned in the request. Defaults to 100 (max) unless overridden by `_limit` filter.
+result_total|integer|Total number of results found.
+
+
+
+
+## Get All Team Members 
+
+<a name="schemaget_all_team_members"></a>
+
+```json
+{
+  "data": [
+    {
+      "id": 457,
+      "user": {
+        "id": 1,
+        "name_id": "xant",
+        "username": "XanT",
+        "date_online": 1509922961,
+        "avatar": {
+          "filename": "modio-color-dark.png",
+          "original": "https://static.mod.io/v1/images/branding/modio-color-dark.png",
+          "thumb_50x50": "https://static.mod.io/v1/images/branding/modio-color-dark.png",
+          "thumb_100x100": "https://static.mod.io/v1/images/branding/modio-color-dark.png"
+        },
+        "timezone": "America/Los_Angeles",
+        "language": "en",
+        "profile_url": "https://mod.io/members/xant"
+      },
+      "level": 8,
+      "date_added": 1492058857,
+      "position": "Supreme Overlord"
+    },
+    {
+        ...
+    }
+  ],
+  "result_count": 70,
+  "result_offset": 0,
+  "result_limit": 100,
+  "result_total": 70
+} 
+```
+
+
+### Properties
+
+Name|Type|Description
+---|---|---|---|
+data|[Team Member Object  ](#schemateam_member_object)[]|Array containing team member objects.
+» id|integer|Unique team member id.
+» user|[User Object   ](#schemauser_object)|Contains user data.
+»» id|integer|Unique id of the user.
+»» name_id|string|Path for the user on mod.io. For example: https://mod.io/members/__username-id-here__ Usually a simplified version of their username.
+»» username|string|Username of the user.
+»» date_online|integer|Unix timestamp of date the user was last online.
+»» avatar|[Avatar Object   ](#schemaavatar_object)|Contains avatar data.
+»»» filename|string|Avatar filename including extension.
+»»» original|string|URL to the full-sized avatar.
+»»» thumb_50x50|string|URL to the small avatar thumbnail.
+»»» thumb_100x100|string|URL to the medium avatar thumbnail.
+»» timezone|string|Timezone of the user, format is country/city.
+»» language|string|Users language preference. See [localization](#localization) for the supported languages.
+»» profile_url|string|URL to the user's mod.io profile.
+» level|integer|Level of permission the user has:<br><br>__1__ = Moderator (can moderate comments and content attached)<br>__4__ = Creator (moderator access, including uploading builds and edit all settings except supply and team members)<br>__8__ = Administrator (full access, including editing the supply and team)
+» date_added|integer|Unix timestamp of the date the user was added to the team.
+» position|string|Custom title given to the user in this team.
+result_count|integer|Number of results returned in this request.
+result_offset|integer|Number of results skipped over. Defaults to 0 unless overridden by `_offset` filter.
+result_limit|integer|Maximum number of results returned in the request. Defaults to 100 (max) unless overridden by `_limit` filter.
+result_total|integer|Total number of results found.
+
+
+
+
+## Get All Users  
+
+<a name="schemaget_all_users"></a>
+
+```json
+{
+  "data": [
+    {
+      "id": 1,
+      "name_id": "xant",
+      "username": "XanT",
+      "date_online": 1509922961,
+      "avatar": {
+        "filename": "modio-color-dark.png",
+        "original": "https://static.mod.io/v1/images/branding/modio-color-dark.png",
+        "thumb_50x50": "https://static.mod.io/v1/images/branding/modio-color-dark.png",
+        "thumb_100x100": "https://static.mod.io/v1/images/branding/modio-color-dark.png"
+      },
+      "timezone": "America/Los_Angeles",
+      "language": "en",
+      "profile_url": "https://mod.io/members/xant"
+    },
+    {
+        ...
+    }
+  ],
+  "result_count": 70,
+  "result_offset": 0,
+  "result_limit": 100,
+  "result_total": 70
+} 
+```
+
+
+### Properties
+
+Name|Type|Description
+---|---|---|---|
+data|[User Object   ](#schemauser_object)[]|Array containing user objects.
+» id|integer|Unique id of the user.
+» name_id|string|Path for the user on mod.io. For example: https://mod.io/members/__username-id-here__ Usually a simplified version of their username.
+» username|string|Username of the user.
+» date_online|integer|Unix timestamp of date the user was last online.
+» avatar|[Avatar Object   ](#schemaavatar_object)|Contains avatar data.
+»» filename|string|Avatar filename including extension.
+»» original|string|URL to the full-sized avatar.
+»» thumb_50x50|string|URL to the small avatar thumbnail.
+»» thumb_100x100|string|URL to the medium avatar thumbnail.
+» timezone|string|Timezone of the user, format is country/city.
+» language|string|Users language preference. See [localization](#localization) for the supported languages.
+» profile_url|string|URL to the user's mod.io profile.
+result_count|integer|Number of results returned in this request.
+result_offset|integer|Number of results skipped over. Defaults to 0 unless overridden by `_offset` filter.
+result_limit|integer|Maximum number of results returned in the request. Defaults to 100 (max) unless overridden by `_limit` filter.
+result_total|integer|Total number of results found.
+
+
+
+
+## Get User Events  
+
+<a name="schemaget_user_events"></a>
+
+```json
+{
+  "data": [
+    {
+      "id": 13,
+      "game_id": 7,
+      "mod_id": 13,
+      "user_id": 13,
+      "date_added": 1499846132,
+      "event_type": "USER_SUBSCRIBE"
+    },
+    {
+        ...
+    }
+  ],
+  "result_count": 70,
+  "result_offset": 0,
+  "result_limit": 100,
+  "result_total": 70
+} 
+```
+
+
+### Properties
+
+Name|Type|Description
+---|---|---|---|
+data|[User Event Object  ](#schemauser_event_object)[]|Array containing user event objects.
+» id|integer|Unique id of the event object.
+» game_id|integer|Unique id of the parent game.
+» mod_id|integer|Unique id of the parent mod.
+» user_id|integer|Unique id of the user who performed the action.
+» date_added|integer|Unix timestamp of date the event occurred.
+» event_type|string|Type of event that was triggered. List of possible events: <br><br>- USER_TEAM_JOIN<br>- USER_TEAM_LEAVE<br>- USER_SUBSCRIBE<br>- USER_UNSUBSCRIBE
+result_count|integer|Number of results returned in this request.
+result_offset|integer|Number of results skipped over. Defaults to 0 unless overridden by `_offset` filter.
+result_limit|integer|Maximum number of results returned in the request. Defaults to 100 (max) unless overridden by `_limit` filter.
+result_total|integer|Total number of results found.
+
+
+
+
+## Get All User Ratings 
+
+<a name="schemaget_all_user_ratings"></a>
+
+```json
+{
+  "data": [
+    {
+      "game_id": 2,
+      "mod_id": 2,
+      "rating": -1,
+      "date_added": 1492564103
+    },
+    {
+        ...
+    }
+  ],
+  "result_count": 70,
+  "result_offset": 0,
+  "result_limit": 100,
+  "result_total": 70
+} 
+```
+
+
+### Properties
+
+Name|Type|Description
+---|---|---|---|
+data|[Rating Object   ](#schemarating_object)[]|Array containing rating objects.
+» game_id|integer|Unique game id.
+» mod_id|integer|Unique mod id.
+» rating|integer|Is it a positive or negative rating.
+» date_added|integer|Unix timestamp of date rating was submitted.
+result_count|integer|Number of results returned in this request.
+result_offset|integer|Number of results skipped over. Defaults to 0 unless overridden by `_offset` filter.
+result_limit|integer|Maximum number of results returned in the request. Defaults to 100 (max) unless overridden by `_limit` filter.
+result_total|integer|Total number of results found.
+
+
+
+
+## Mod Event Object  
+
+<a name="schemamod_event_object"></a>
 
 ```json
 {
@@ -8999,6 +9994,36 @@ mod_id|integer|Unique id of the parent mod.
 user_id|integer|Unique id of the user who performed the action.
 date_added|integer|Unix timestamp of date the event occurred.
 event_type|string|Type of event that was triggered. List of possible events: <br><br>- MODFILE_CHANGED<br>- MOD_AVAILABLE<br>- MOD_UNAVAILABLE<br>- MOD_EDITED<br>- MOD_DELETED<br>- USER_TEAM_JOIN<br>- USER_TEAM_LEAVE<br>- USER_SUBSCRIBE<br>- USER_UNSUBSCRIBE
+
+
+
+
+## User Event Object  
+
+<a name="schemauser_event_object"></a>
+
+```json
+{
+  "id": 13,
+  "game_id": 7,
+  "mod_id": 13,
+  "user_id": 13,
+  "date_added": 1499846132,
+  "event_type": "USER_SUBSCRIBE"
+} 
+```
+
+
+### Properties
+
+Name|Type|Description
+---|---|---|---|
+id|integer|Unique id of the event object.
+game_id|integer|Unique id of the parent game.
+mod_id|integer|Unique id of the parent mod.
+user_id|integer|Unique id of the user who performed the action.
+date_added|integer|Unix timestamp of date the event occurred.
+event_type|string|Type of event that was triggered. List of possible events: <br><br>- USER_TEAM_JOIN<br>- USER_TEAM_LEAVE<br>- USER_SUBSCRIBE<br>- USER_UNSUBSCRIBE
 
 
 
@@ -9808,989 +10833,6 @@ profile_url|string|URL to the user's mod.io profile.
 
 
 
-
-
-
-## Get All Mod Comments 
-
-<a name="schemaget_all_mod_comments"></a>
-
-```json
-{
-  "data": [
-    {
-      "id": 2,
-      "mod_id": 2,
-      "user": {
-        "id": 1,
-        "name_id": "xant",
-        "username": "XanT",
-        "date_online": 1509922961,
-        "avatar": {
-          "filename": "modio-color-dark.png",
-          "original": "https://static.mod.io/v1/images/branding/modio-color-dark.png",
-          "thumb_50x50": "https://static.mod.io/v1/images/branding/modio-color-dark.png",
-          "thumb_100x100": "https://static.mod.io/v1/images/branding/modio-color-dark.png"
-        },
-        "timezone": "America/Los_Angeles",
-        "language": "en",
-        "profile_url": "https://mod.io/members/xant"
-      },
-      "date_added": 1499841487,
-      "reply_id": 1499,
-      "thread_position": "01",
-      "karma": 1,
-      "karma_guest": 0,
-      "content": "This mod is kickass! Great work!"
-    },
-    {
-        ...
-    }
-  ],
-  "result_count": 70,
-  "result_offset": 0,
-  "result_limit": 100,
-  "result_total": 70
-} 
-```
-
-
-### Properties
-
-Name|Type|Description
----|---|---|---|
-data|[Comment Object   ](#schemacomment_object)[]|Array containing comment objects.
-» id|integer|Unique id of the comment.
-» mod_id|integer|Unique id of the parent mod.
-» user|[User Object   ](#schemauser_object)|Contains user data.
-»» id|integer|Unique id of the user.
-»» name_id|string|Path for the user on mod.io. For example: https://mod.io/members/__username-id-here__ Usually a simplified version of their username.
-»» username|string|Username of the user.
-»» date_online|integer|Unix timestamp of date the user was last online.
-»» avatar|[Avatar Object   ](#schemaavatar_object)|Contains avatar data.
-»»» filename|string|Avatar filename including extension.
-»»» original|string|URL to the full-sized avatar.
-»»» thumb_50x50|string|URL to the small avatar thumbnail.
-»»» thumb_100x100|string|URL to the medium avatar thumbnail.
-»» timezone|string|Timezone of the user, format is country/city.
-»» language|string|Users language preference. See [localization](#localization) for the supported languages.
-»» profile_url|string|URL to the user's mod.io profile.
-» date_added|integer|Unix timestamp of date the comment was posted.
-» reply_id|integer|Id of the parent comment this comment is replying to (can be 0 if the comment is not a reply).
-» thread_position|string|Levels of nesting in a comment thread. How it works:<br><br>- The first comment will have the position '01'.<br>- The second comment will have the position '02'.<br>- If someone responds to the second comment the position will be '02.01'.<br>- A maximum of 3 levels is supported.
-» karma|integer|Karma received for the comment (can be postive or negative).
-» karma_guest|integer|Karma received for guest comments (can be postive or negative).
-» content|string|Contents of the comment.
-result_count|integer|Number of results returned in this request.
-result_offset|integer|Number of results skipped over. Defaults to 0 unless overridden by `_offset` filter.
-result_limit|integer|Maximum number of results returned in the request. Defaults to 100 (max) unless overridden by `_limit` filter.
-result_total|integer|Total number of results found.
-
-
-
-
-## Get All Mod Dependencies 
-
-<a name="schemaget_all_mod_dependencies"></a>
-
-```json
-{
-  "data": [
-    {
-      "mod_id": 231,
-      "date_added": 1499841487
-    },
-    {
-        ...
-    }
-  ],
-  "result_count": 70,
-  "result_offset": 0,
-  "result_limit": 100,
-  "result_total": 70
-} 
-```
-
-
-### Properties
-
-Name|Type|Description
----|---|---|---|
-data|[Mod Dependencies Object  ](#schemamod_dependencies_object)[]|Array containing mod dependencies objects.
-» mod_id|integer|Unique id of the mod that is the dependency.
-» date_added|integer|Unix timestamp of date the dependency was added.
-result_count|integer|Number of results returned in this request.
-result_offset|integer|Number of results skipped over. Defaults to 0 unless overridden by `_offset` filter.
-result_limit|integer|Maximum number of results returned in the request. Defaults to 100 (max) unless overridden by `_limit` filter.
-result_total|integer|Total number of results found.
-
-
-
-
-## Get Mod Events  
-
-<a name="schemaget_mod_events"></a>
-
-```json
-{
-  "data": [
-    {
-      "id": 13,
-      "mod_id": 13,
-      "user_id": 13,
-      "date_added": 1499846132,
-      "event_type": "MODFILE_CHANGED"
-    },
-    {
-        ...
-    }
-  ],
-  "result_count": 70,
-  "result_offset": 0,
-  "result_limit": 100,
-  "result_total": 70
-} 
-```
-
-
-### Properties
-
-Name|Type|Description
----|---|---|---|
-data|[Event Object   ](#schemaevent_object)[]|Array containing event objects.
-» id|integer|Unique id of the event object.
-» mod_id|integer|Unique id of the parent mod.
-» user_id|integer|Unique id of the user who performed the action.
-» date_added|integer|Unix timestamp of date the event occurred.
-» event_type|string|Type of event that was triggered. List of possible events: <br><br>- MODFILE_CHANGED<br>- MOD_AVAILABLE<br>- MOD_UNAVAILABLE<br>- MOD_EDITED<br>- MOD_DELETED<br>- USER_TEAM_JOIN<br>- USER_TEAM_LEAVE<br>- USER_SUBSCRIBE<br>- USER_UNSUBSCRIBE
-result_count|integer|Number of results returned in this request.
-result_offset|integer|Number of results skipped over. Defaults to 0 unless overridden by `_offset` filter.
-result_limit|integer|Maximum number of results returned in the request. Defaults to 100 (max) unless overridden by `_limit` filter.
-result_total|integer|Total number of results found.
-
-
-
-
-## Get All Modfiles  
-
-<a name="schemaget_all_modfiles"></a>
-
-```json
-{
-  "data": [
-    {
-      "id": 2,
-      "mod_id": 2,
-      "date_added": 1499841487,
-      "date_scanned": 1499841487,
-      "virus_status": 0,
-      "virus_positive": 0,
-      "virustotal_hash": "f9a7bf4a95ce20787337b685a79677cae2281b83c63ab0a25f091407741692af-1508147401",
-      "filesize": 15181,
-      "filehash": {
-        "md5": "2d4a0e2d7273db6b0a94b0740a88ad0d"
-      },
-      "filename": "rogue-knight-v1.zip",
-      "version": "1.3",
-      "changelog": "VERSION 1.3 -- Changes -- Fixed critical castle floor bug.",
-      "metadata_blob": "rogue,hd,high-res,4k,hd textures",
-      "download": {
-        "binary_url": "https://mod.io/mods/file/1/c489a0354111a4d76640d47f0cdcb294",
-        "date_expires": 1579316848
-      }
-    },
-    {
-        ...
-    }
-  ],
-  "result_count": 70,
-  "result_offset": 0,
-  "result_limit": 100,
-  "result_total": 70
-} 
-```
-
-
-### Properties
-
-Name|Type|Description
----|---|---|---|
-data|[Modfile Object   ](#schemamodfile_object)[]|Array containing modfile objects.
-» id|integer|Unique modfile id.
-» mod_id|integer|Unique mod id.
-» date_added|integer|Unix timestamp of date file was added.
-» date_scanned|integer|Unix timestamp of date file was virus scanned.
-» virus_status|integer|Current virus scan status of the file. For newly added files that have yet to be scanned this field will change frequently until a scan is complete:<br><br>__0__ = Not scanned<br>__1__ = Scan complete<br>__2__ = In progress<br>__3__ = Too large to scan<br>__4__ = File not found<br>__5__ = Error Scanning
-» virus_positive|integer|Was a virus detected:<br><br>__0__ = No threats detected<br>__1__ = Flagged as malicious
-» virustotal_hash|string|VirusTotal proprietary hash to view the [scan results](https://www.virustotal.com).
-» filesize|integer|Size of the file in bytes.
-» filehash|[Filehash Object   ](#schemafilehash_object)|Contains filehash data.
-»» md5|string|MD5 hash of the file.
-» filename|string|Filename including extension.
-» version|string|Release version this file represents.
-» changelog|string|Changelog for the file.
-» metadata_blob|string|Metadata stored by the game developer for this file.
-» download|[Download Object   ](#schemadownload_object)|Contains download data.
-»» binary_url|string|URL to download the file from the mod.io CDN.<br><br>__NOTE:__ If the [game](#edit-game) requires mod downloads to be initiated via the API, the `binary_url` returned will contain a verification hash. This hash must be supplied to get the modfile, and will expire after a certain period of time. Saving and reusing the `binary_url` won't work in this situation given it's dynamic nature.
-»» date_expires|integer|Unix timestamp of when the `binary_url` will expire.
-result_count|integer|Number of results returned in this request.
-result_offset|integer|Number of results skipped over. Defaults to 0 unless overridden by `_offset` filter.
-result_limit|integer|Maximum number of results returned in the request. Defaults to 100 (max) unless overridden by `_limit` filter.
-result_total|integer|Total number of results found.
-
-
-
-
-## Get All Games  
-
-<a name="schemaget_all_games"></a>
-
-```json
-{
-  "data": [
-    {
-      "id": 2,
-      "status": 1,
-      "submitted_by": {
-        "id": 1,
-        "name_id": "xant",
-        "username": "XanT",
-        "date_online": 1509922961,
-        "avatar": {
-          "filename": "modio-color-dark.png",
-          "original": "https://static.mod.io/v1/images/branding/modio-color-dark.png",
-          "thumb_50x50": "https://static.mod.io/v1/images/branding/modio-color-dark.png",
-          "thumb_100x100": "https://static.mod.io/v1/images/branding/modio-color-dark.png"
-        },
-        "timezone": "America/Los_Angeles",
-        "language": "en",
-        "profile_url": "https://mod.io/members/xant"
-      },
-      "date_added": 1493702614,
-      "date_updated": 1499410290,
-      "date_live": 1499841403,
-      "presentation_option": 1,
-      "submission_option": 0,
-      "curation_option": 0,
-      "community_options": 3,
-      "revenue_options": 1500,
-      "api_access_options": 3,
-      "maturity_options": 0,
-      "ugc_name": "map",
-      "icon": {
-        "filename": "modio-color-dark.png",
-        "original": "https://static.mod.io/v1/images/branding/modio-color-dark.png",
-        "thumb_64x64": "https://static.mod.io/v1/images/branding/modio-color-dark.png",
-        "thumb_128x128": "https://static.mod.io/v1/images/branding/modio-color-dark.png",
-        "thumb_256x256": "https://static.mod.io/v1/images/branding/modio-color-dark.png"
-      },
-      "logo": {
-        "filename": "modio-color-dark.png",
-        "original": "https://static.mod.io/v1/images/branding/modio-color-dark.png",
-        "thumb_320x180": "https://static.mod.io/v1/images/branding/modio-color-dark.png",
-        "thumb_640x360": "https://static.mod.io/v1/images/branding/modio-color-dark.png",
-        "thumb_1280x720": "https://static.mod.io/v1/images/branding/modio-color-dark.png"
-      },
-      "header": {
-        "filename": "demo.png",
-        "original": "https://static.mod.io/v1/images/branding/modio-color-dark.png"
-      },
-      "name": "Rogue Knight",
-      "name_id": "rogue-knight",
-      "summary": "Rogue Knight is a brand new 2D pixel platformer.",
-      "instructions": "Instructions on the process to upload mods.",
-      "instructions_url": "https://www.rogue-knight-game.com/modding/getting-started",
-      "profile_url": "https://rogue-knight.mod.io",
-      "tag_options": [
-        {
-          "name": "Theme",
-          "type": "checkboxes",
-          "tags": [
-            "Horror"
-          ],
-          "hidden": false
-        }
-      ]
-    },
-    {
-        ...
-    }
-  ],
-  "result_count": 70,
-  "result_offset": 0,
-  "result_limit": 100,
-  "result_total": 70
-} 
-```
-
-
-### Properties
-
-Name|Type|Description
----|---|---|---|
-data|[Game Object   ](#schemagame_object)[]|Array containing game objects.
-» id|integer|Unique game id.
-» status|integer|Status of the game (see [status and visibility](#status-amp-visibility) for details):<br><br>__0__ = Not Accepted<br>__1__ = Accepted<br>__2__ = Archived (potentially out of date or incompatible)<br>__3__ = Deleted
-» submitted_by|[User Object   ](#schemauser_object)|Contains user data.
-»» id|integer|Unique id of the user.
-»» name_id|string|Path for the user on mod.io. For example: https://mod.io/members/__username-id-here__ Usually a simplified version of their username.
-»» username|string|Username of the user.
-»» date_online|integer|Unix timestamp of date the user was last online.
-»» avatar|[Avatar Object   ](#schemaavatar_object)|Contains avatar data.
-»»» filename|string|Avatar filename including extension.
-»»» original|string|URL to the full-sized avatar.
-»»» thumb_50x50|string|URL to the small avatar thumbnail.
-»»» thumb_100x100|string|URL to the medium avatar thumbnail.
-»» timezone|string|Timezone of the user, format is country/city.
-»» language|string|Users language preference. See [localization](#localization) for the supported languages.
-»» profile_url|string|URL to the user's mod.io profile.
-» date_added|integer|Unix timestamp of date game was registered.
-» date_updated|integer|Unix timestamp of date game was updated.
-» date_live|integer|Unix timestamp of date game was set live.
-» presentation_option|integer|Presentation style used on the mod.io website:<br><br>__0__ =  Grid View: Displays mods in a grid<br>__1__ = Table View: Displays mods in a table
-» submission_option|integer|Submission process modders must follow:<br><br>__0__ = Mod uploads must occur via the API using a tool created by the game developers<br>__1__ = Mod uploads can occur from anywhere, including the website and API
-» curation_option|integer|Curation process used to approve mods:<br><br>__0__ = No curation: Mods are immediately available to play<br>__1__ = Paid curation: Mods are immediately available to play unless they choose to receive donations. These mods must be accepted to be listed<br>__2__ = Full curation: All mods must be accepted by someone to be listed
-» community_options|integer|Community features enabled on the mod.io website:<br><br>__0__ = All of the options below are disabled<br>__1__ = Discussion board enabled<br>__2__ = Guides and news enabled<br>__?__ = Add the options you want together, to enable multiple features (see [BITWISE fields](#bitwise-and-bitwise-and))
-» revenue_options|integer|Revenue capabilities mods can enable:<br><br>__0__ = All of the options below are disabled<br>__1__ = Allow mods to be sold<br>__2__ = Allow mods to receive donations<br>__4__ = Allow mods to be traded<br>__8__ = Allow mods to control supply and scarcity<br>__?__ = Add the options you want together, to enable multiple features (see [BITWISE fields](#bitwise-and-bitwise-and))
-» api_access_options|integer|Level of API access allowed by this game:<br><br>__0__ = All of the options below are disabled<br>__1__ = Allow 3rd parties to access this games API endpoints<br>__2__ = Allow mods to be downloaded directly (if disabled all download URLs will contain a frequently changing verification hash to stop unauthorized use)<br>__?__ = Add the options you want together, to enable multiple features (see [BITWISE fields](#bitwise-and-bitwise-and))
-» maturity_options|integer|Switch to allow developers to select if they flag their mods as containing mature content:<br><br>__0__ = Don't allow _(default)_<br>__1__ = Allow
-» ugc_name|string|Word used to describe user-generated content (mods, items, addons etc).
-» icon|[Icon Object   ](#schemaicon_object)|Contains icon data.
-»» filename|string|Icon filename including extension.
-»» original|string|URL to the full-sized icon.
-»» thumb_64x64|string|URL to the small icon thumbnail.
-»» thumb_128x128|string|URL to the medium icon thumbnail.
-»» thumb_256x256|string|URL to the large icon thumbnail.
-» logo|[Logo Object   ](#schemalogo_object)|Contains logo data.
-»» filename|string|Logo filename including extension.
-»» original|string|URL to the full-sized logo.
-»» thumb_320x180|string|URL to the small logo thumbnail.
-»» thumb_640x360|string|URL to the medium logo thumbnail.
-»» thumb_1280x720|string|URL to the large logo thumbnail.
-» header|[Header Image Object  ](#schemaheader_image_object)|Contains header data.
-»» filename|string|Header image filename including extension.
-»» original|string|URL to the full-sized header image.
-» name|string|Name of the game.
-» name_id|string|Subdomain for the game on mod.io.
-» summary|string|Summary of the game.
-» instructions|string|A guide about creating and uploading mods for this game to mod.io (applicable if submission_option = 0).
-» instructions_url|string|Link to a mod.io guide, your modding wiki or a page where modders can learn how to make and submit mods to your games profile.
-» profile_url|string|URL to the game's mod.io page.
-» tag_options|[Game Tag Option Object ](#schemagame_tag_option_object)[]|Groups of tags configured by the game developer, that mods can select.
-»» name|string|Name of the tag group.
-»» type|string|Can multiple tags be selected via 'checkboxes' or should only a single tag be selected via a 'dropdown'.
-»» hidden|boolean|Groups of tags flagged as 'admin only' should only be used for filtering, and should not be displayed to users.
-»» tags|string[]|Array of tags in this group.
-result_count|integer|Number of results returned in this request.
-result_offset|integer|Number of results skipped over. Defaults to 0 unless overridden by `_offset` filter.
-result_limit|integer|Maximum number of results returned in the request. Defaults to 100 (max) unless overridden by `_limit` filter.
-result_total|integer|Total number of results found.
-
-
-
-
-## Get All Mod KVP Metadata
-
-<a name="schemaget_all_mod_kvp_metadata"></a>
-
-```json
-{
-  "data": [
-    {
-      "metakey": "pistol-dmg",
-      "metavalue": "800"
-    },
-    {
-        ...
-    }
-  ],
-  "result_count": 70,
-  "result_offset": 0,
-  "result_limit": 100,
-  "result_total": 70
-} 
-```
-
-
-### Properties
-
-Name|Type|Description
----|---|---|---|
-data|[Metadata KVP Object  ](#schemametadata_kvp_object)[]|Array containing metadata kvp objects.
-» metakey|string|The key of the key-value pair.
-» metavalue|string|The value of the key-value pair.
-result_count|integer|Number of results returned in this request.
-result_offset|integer|Number of results skipped over. Defaults to 0 unless overridden by `_offset` filter.
-result_limit|integer|Maximum number of results returned in the request. Defaults to 100 (max) unless overridden by `_limit` filter.
-result_total|integer|Total number of results found.
-
-
-
-
-## Get All Mods  
-
-<a name="schemaget_all_mods"></a>
-
-```json
-{
-  "data": [
-    {
-      "id": 2,
-      "game_id": 2,
-      "status": 1,
-      "visible": 1,
-      "submitted_by": {
-        "id": 1,
-        "name_id": "xant",
-        "username": "XanT",
-        "date_online": 1509922961,
-        "avatar": {
-          "filename": "modio-color-dark.png",
-          "original": "https://static.mod.io/v1/images/branding/modio-color-dark.png",
-          "thumb_50x50": "https://static.mod.io/v1/images/branding/modio-color-dark.png",
-          "thumb_100x100": "https://static.mod.io/v1/images/branding/modio-color-dark.png"
-        },
-        "timezone": "America/Los_Angeles",
-        "language": "en",
-        "profile_url": "https://mod.io/members/xant"
-      },
-      "date_added": 1492564103,
-      "date_updated": 1499841487,
-      "date_live": 1499841403,
-      "maturity_option": 0,
-      "logo": {
-        "filename": "modio-color-dark.png",
-        "original": "https://static.mod.io/v1/images/branding/modio-color-dark.png",
-        "thumb_320x180": "https://static.mod.io/v1/images/branding/modio-color-dark.png",
-        "thumb_640x360": "https://static.mod.io/v1/images/branding/modio-color-dark.png",
-        "thumb_1280x720": "https://static.mod.io/v1/images/branding/modio-color-dark.png"
-      },
-      "homepage_url": "https://www.rogue-hdpack.com/",
-      "name": "Rogue Knight HD Pack",
-      "name_id": "rogue-knight-hd-pack",
-      "summary": "It's time to bask in the glory of beautiful 4k textures!",
-      "description": "<p>Rogue HD Pack does exactly what you thi...",
-      "description_plaintext": "Rogue HD Pack does exactly what you thi...",
-      "metadata_blob": "rogue,hd,high-res,4k,hd textures",
-      "profile_url": "https://rogue-knight.mod.io/rogue-knight-hd-pack",
-      "media": {
-        "youtube": [
-          "https://www.youtube.com/watch?v=dQw4w9WgXcQ"
-        ],
-        "sketchfab": [
-          "https://sketchfab.com/models/ef40b2d300334d009984c8865b2db1c8"
-        ],
-        "images": [
-          {
-            "filename": "modio-color-dark.png",
-            "original": "https://static.mod.io/v1/images/branding/modio-color-dark.png",
-            "thumb_320x180": "https://static.mod.io/v1/images/branding/modio-color-dark.png"
-          }
-        ]
-      },
-      "modfile": {
-        "id": 2,
-        "mod_id": 2,
-        "date_added": 1499841487,
-        "date_scanned": 1499841487,
-        "virus_status": 0,
-        "virus_positive": 0,
-        "virustotal_hash": "f9a7bf4a95ce20787337b685a79677cae2281b83c63ab0a25f091407741692af-1508147401",
-        "filesize": 15181,
-        "filehash": {
-          "md5": "2d4a0e2d7273db6b0a94b0740a88ad0d"
-        },
-        "filename": "rogue-knight-v1.zip",
-        "version": "1.3",
-        "changelog": "VERSION 1.3 -- Changes -- Fixed critical castle floor bug.",
-        "metadata_blob": "rogue,hd,high-res,4k,hd textures",
-        "download": {
-          "binary_url": "https://mod.io/mods/file/1/c489a0354111a4d76640d47f0cdcb294",
-          "date_expires": 1579316848
-        }
-      },
-      "metadata_kvp": [
-        {
-          "metakey": "pistol-dmg",
-          "metavalue": "800"
-        }
-      ],
-      "tags": [
-        {
-          "name": "Unity",
-          "date_added": 1499841487
-        }
-      ],
-      "stats": {
-        "mod_id": 2,
-        "popularity_rank_position": 13,
-        "popularity_rank_total_mods": 204,
-        "downloads_total": 27492,
-        "subscribers_total": 16394,
-        "ratings_total": 1230,
-        "ratings_positive": 1047,
-        "ratings_negative": 183,
-        "ratings_percentage_positive": 91,
-        "ratings_weighted_aggregate": 87.38,
-        "ratings_display_text": "Very Positive",
-        "date_expires": 1492564103
-      }
-    },
-    {
-        ...
-    }
-  ],
-  "result_count": 70,
-  "result_offset": 0,
-  "result_limit": 100,
-  "result_total": 70
-} 
-```
-
-
-### Properties
-
-Name|Type|Description
----|---|---|---|
-data|[Mod Object   ](#schemamod_object)[]|Array containing mod objects.
-» id|integer|Unique mod id.
-» game_id|integer|Unique game id.
-» status|integer|Status of the mod (see [status and visibility](#status-amp-visibility) for details):<br><br>__0__ = Not Accepted<br>__1__ = Accepted<br>__2__ = Archived (potentially out of date or incompatible)<br>__3__ = Deleted
-» visible|integer|Visibility of the mod (see [status and visibility](#status-amp-visibility) for details):<br><br>__0__ = Hidden<br>__1__ = Public
-» submitted_by|[User Object   ](#schemauser_object)|Contains user data.
-»» id|integer|Unique id of the user.
-»» name_id|string|Path for the user on mod.io. For example: https://mod.io/members/__username-id-here__ Usually a simplified version of their username.
-»» username|string|Username of the user.
-»» date_online|integer|Unix timestamp of date the user was last online.
-»» avatar|[Avatar Object   ](#schemaavatar_object)|Contains avatar data.
-»»» filename|string|Avatar filename including extension.
-»»» original|string|URL to the full-sized avatar.
-»»» thumb_50x50|string|URL to the small avatar thumbnail.
-»»» thumb_100x100|string|URL to the medium avatar thumbnail.
-»» timezone|string|Timezone of the user, format is country/city.
-»» language|string|Users language preference. See [localization](#localization) for the supported languages.
-»» profile_url|string|URL to the user's mod.io profile.
-» date_added|integer|Unix timestamp of date mod was registered.
-» date_updated|integer|Unix timestamp of date mod was updated.
-» date_live|integer|Unix timestamp of date mod was set live.
-» maturity_option|integer|Maturity options flagged by the mod developer, this is only relevant if the parent game allows mods to be labelled as mature.<br><br>__0__ = None set _(default)_<br>__1__ = Alcohol<br>__2__ = Drugs<br>__4__ = Violence<br>__8__ = Explicit<br>__?__ = Add the options you want together, to enable multiple filters (see [BITWISE fields](#bitwise-and-bitwise-and))
-» logo|[Logo Object   ](#schemalogo_object)|Contains logo data.
-»» filename|string|Logo filename including extension.
-»» original|string|URL to the full-sized logo.
-»» thumb_320x180|string|URL to the small logo thumbnail.
-»» thumb_640x360|string|URL to the medium logo thumbnail.
-»» thumb_1280x720|string|URL to the large logo thumbnail.
-» homepage_url|string|Official homepage of the mod.
-» name|string|Name of the mod.
-» name_id|string|Path for the mod on mod.io. For example: https://gamename.mod.io/__mod-name-id-here__
-» summary|string|Summary of the mod.
-» description|string|Detailed description of the mod which allows HTML.
-» description_plaintext|string|`description` field converted into plaintext.
-» metadata_blob|string|Metadata stored by the game developer. Metadata can also be stored as searchable [key value pairs](#metadata), and to individual [mod files](#get-all-modfiles).
-» profile_url|string|URL to the mod's mod.io profile.
-» media|[Mod Media Object  ](#schemamod_media_object)|Contains mod media data.
-»» youtube|string[]|Array of YouTube links.
-»» sketchfab|string[]|Array of SketchFab links.
-»» images|[Image Object   ](#schemaimage_object)[]|Array of image objects (a gallery).
-»»» filename|string|Image filename including extension.
-»»» original|string|URL to the full-sized image.
-»»» thumb_320x180|string|URL to the image thumbnail.
-» modfile|[Modfile Object   ](#schemamodfile_object)|Contains modfile data.
-»» id|integer|Unique modfile id.
-»» mod_id|integer|Unique mod id.
-»» date_added|integer|Unix timestamp of date file was added.
-»» date_scanned|integer|Unix timestamp of date file was virus scanned.
-»» virus_status|integer|Current virus scan status of the file. For newly added files that have yet to be scanned this field will change frequently until a scan is complete:<br><br>__0__ = Not scanned<br>__1__ = Scan complete<br>__2__ = In progress<br>__3__ = Too large to scan<br>__4__ = File not found<br>__5__ = Error Scanning
-»» virus_positive|integer|Was a virus detected:<br><br>__0__ = No threats detected<br>__1__ = Flagged as malicious
-»» virustotal_hash|string|VirusTotal proprietary hash to view the [scan results](https://www.virustotal.com).
-»» filesize|integer|Size of the file in bytes.
-»» filehash|[Filehash Object   ](#schemafilehash_object)|Contains filehash data.
-»»» md5|string|MD5 hash of the file.
-»» filename|string|Filename including extension.
-»» version|string|Release version this file represents.
-»» changelog|string|Changelog for the file.
-»» metadata_blob|string|Metadata stored by the game developer for this file.
-»» download|[Download Object   ](#schemadownload_object)|Contains download data.
-»»» binary_url|string|URL to download the file from the mod.io CDN.<br><br>__NOTE:__ If the [game](#edit-game) requires mod downloads to be initiated via the API, the `binary_url` returned will contain a verification hash. This hash must be supplied to get the modfile, and will expire after a certain period of time. Saving and reusing the `binary_url` won't work in this situation given it's dynamic nature.
-»»» date_expires|integer|Unix timestamp of when the `binary_url` will expire.
-» stats|[Stats Object   ](#schemastats_object)|Contains stats data.
-»» mod_id|integer|Unique mod id.
-»» popularity_rank_position|integer|Current rank of the mod.
-»» popularity_rank_total_mods|integer|Number of ranking spots the current rank is measured against.
-»» downloads_total|integer|Number of total mod downloads.
-»» subscribers_total|integer|Number of total users who have subscribed to the mod.
-»» ratings_total|integer|Number of times this item has been rated.
-»» ratings_positive|integer|Number of positive ratings.
-»» ratings_negative|integer|Number of negative ratings.
-»» ratings_percentage_positive|integer|Number of positive ratings, divided by the total ratings to determine it’s percentage score.
-»» ratings_weighted_aggregate|float|Overall rating of this item calculated using the [Wilson score confidence interval](https://www.evanmiller.org/how-not-to-sort-by-average-rating.html). This column is good to sort on, as it will order items based on number of ratings and will place items with many positive ratings above those with a higher score but fewer ratings.
-»» ratings_display_text|string|Textual representation of the rating in format:<br><br>- Overwhelmingly Positive<br>- Very Positive<br>- Positive<br>- Mostly Positive<br>- Mixed<br>- Negative<br>- Mostly Negative<br>- Very Negative<br>- Overwhelmingly Negative<br>- Unrated
-»» date_expires|integer|Unix timestamp until this mods's statistics are considered stale.
-» metadata_kvp|[Metadata KVP Object  ](#schemametadata_kvp_object)[]|Contains key-value metadata.
-»» metakey|string|The key of the key-value pair.
-»» metavalue|string|The value of the key-value pair.
-» tags|[Mod Tag Object  ](#schemamod_tag_object)[]|Contains mod tag data.
-»» name|string|Tag name.
-»» date_added|integer|Unix timestamp of date tag was applied.
-result_count|integer|Number of results returned in this request.
-result_offset|integer|Number of results skipped over. Defaults to 0 unless overridden by `_offset` filter.
-result_limit|integer|Maximum number of results returned in the request. Defaults to 100 (max) unless overridden by `_limit` filter.
-result_total|integer|Total number of results found.
-
-
-
-
-## Get Mod Stats  
-
-<a name="schemaget_mod_stats"></a>
-
-```json
-{
-  "data": [
-    {
-      "mod_id": 2,
-      "popularity_rank_position": 13,
-      "popularity_rank_total_mods": 204,
-      "downloads_total": 27492,
-      "subscribers_total": 16394,
-      "ratings_total": 1230,
-      "ratings_positive": 1047,
-      "ratings_negative": 183,
-      "ratings_percentage_positive": 91,
-      "ratings_weighted_aggregate": 87.38,
-      "ratings_display_text": "Very Positive",
-      "date_expires": 1492564103
-    },
-    {
-        ...
-    }
-  ],
-  "result_count": 70,
-  "result_offset": 0,
-  "result_limit": 100,
-  "result_total": 70
-} 
-```
-
-
-### Properties
-
-Name|Type|Description
----|---|---|---|
-data|[Stats Object   ](#schemastats_object)[]|Array containing stats objects.
-» mod_id|integer|Unique mod id.
-» popularity_rank_position|integer|Current rank of the mod.
-» popularity_rank_total_mods|integer|Number of ranking spots the current rank is measured against.
-» downloads_total|integer|Number of total mod downloads.
-» subscribers_total|integer|Number of total users who have subscribed to the mod.
-» ratings_total|integer|Number of times this item has been rated.
-» ratings_positive|integer|Number of positive ratings.
-» ratings_negative|integer|Number of negative ratings.
-» ratings_percentage_positive|integer|Number of positive ratings, divided by the total ratings to determine it’s percentage score.
-» ratings_weighted_aggregate|float|Overall rating of this item calculated using the [Wilson score confidence interval](https://www.evanmiller.org/how-not-to-sort-by-average-rating.html). This column is good to sort on, as it will order items based on number of ratings and will place items with many positive ratings above those with a higher score but fewer ratings.
-» ratings_display_text|string|Textual representation of the rating in format:<br><br>- Overwhelmingly Positive<br>- Very Positive<br>- Positive<br>- Mostly Positive<br>- Mixed<br>- Negative<br>- Mostly Negative<br>- Very Negative<br>- Overwhelmingly Negative<br>- Unrated
-» date_expires|integer|Unix timestamp until this mods's statistics are considered stale.
-result_count|integer|Number of results returned in this request.
-result_offset|integer|Number of results skipped over. Defaults to 0 unless overridden by `_offset` filter.
-result_limit|integer|Maximum number of results returned in the request. Defaults to 100 (max) unless overridden by `_limit` filter.
-result_total|integer|Total number of results found.
-
-
-
-
-## Get Mod Tags  
-
-<a name="schemaget_mod_tags"></a>
-
-```json
-{
-  "data": [
-    {
-      "name": "Unity",
-      "date_added": 1499841487
-    },
-    {
-        ...
-    }
-  ],
-  "result_count": 70,
-  "result_offset": 0,
-  "result_limit": 100,
-  "result_total": 70
-} 
-```
-
-
-### Properties
-
-Name|Type|Description
----|---|---|---|
-data|[Mod Tag Object  ](#schemamod_tag_object)[]|Array containing mod tag objects.
-» name|string|Tag name.
-» date_added|integer|Unix timestamp of date tag was applied.
-result_count|integer|Number of results returned in this request.
-result_offset|integer|Number of results skipped over. Defaults to 0 unless overridden by `_offset` filter.
-result_limit|integer|Maximum number of results returned in the request. Defaults to 100 (max) unless overridden by `_limit` filter.
-result_total|integer|Total number of results found.
-
-
-
-
-## Get Game Tag Options 
-
-<a name="schemaget_game_tag_options"></a>
-
-```json
-{
-  "data": [
-    {
-      "name": "Theme",
-      "type": "checkboxes",
-      "tags": [
-        "Horror"
-      ],
-      "hidden": false
-    },
-    {
-        ...
-    }
-  ],
-  "result_count": 70,
-  "result_offset": 0,
-  "result_limit": 100,
-  "result_total": 70
-} 
-```
-
-
-### Properties
-
-Name|Type|Description
----|---|---|---|
-data|[Game Tag Option Object ](#schemagame_tag_option_object)[]|Array containing game tag objects.
-» name|string|Name of the tag group.
-» type|string|Can multiple tags be selected via 'checkboxes' or should only a single tag be selected via a 'dropdown'.
-» hidden|boolean|Groups of tags flagged as 'admin only' should only be used for filtering, and should not be displayed to users.
-» tags|string[]|Array of tags in this group.
-result_count|integer|Number of results returned in this request.
-result_offset|integer|Number of results skipped over. Defaults to 0 unless overridden by `_offset` filter.
-result_limit|integer|Maximum number of results returned in the request. Defaults to 100 (max) unless overridden by `_limit` filter.
-result_total|integer|Total number of results found.
-
-
-
-
-## Get All Team Members 
-
-<a name="schemaget_all_team_members"></a>
-
-```json
-{
-  "data": [
-    {
-      "id": 457,
-      "user": {
-        "id": 1,
-        "name_id": "xant",
-        "username": "XanT",
-        "date_online": 1509922961,
-        "avatar": {
-          "filename": "modio-color-dark.png",
-          "original": "https://static.mod.io/v1/images/branding/modio-color-dark.png",
-          "thumb_50x50": "https://static.mod.io/v1/images/branding/modio-color-dark.png",
-          "thumb_100x100": "https://static.mod.io/v1/images/branding/modio-color-dark.png"
-        },
-        "timezone": "America/Los_Angeles",
-        "language": "en",
-        "profile_url": "https://mod.io/members/xant"
-      },
-      "level": 8,
-      "date_added": 1492058857,
-      "position": "Supreme Overlord"
-    },
-    {
-        ...
-    }
-  ],
-  "result_count": 70,
-  "result_offset": 0,
-  "result_limit": 100,
-  "result_total": 70
-} 
-```
-
-
-### Properties
-
-Name|Type|Description
----|---|---|---|
-data|[Team Member Object  ](#schemateam_member_object)[]|Array containing team member objects.
-» id|integer|Unique team member id.
-» user|[User Object   ](#schemauser_object)|Contains user data.
-»» id|integer|Unique id of the user.
-»» name_id|string|Path for the user on mod.io. For example: https://mod.io/members/__username-id-here__ Usually a simplified version of their username.
-»» username|string|Username of the user.
-»» date_online|integer|Unix timestamp of date the user was last online.
-»» avatar|[Avatar Object   ](#schemaavatar_object)|Contains avatar data.
-»»» filename|string|Avatar filename including extension.
-»»» original|string|URL to the full-sized avatar.
-»»» thumb_50x50|string|URL to the small avatar thumbnail.
-»»» thumb_100x100|string|URL to the medium avatar thumbnail.
-»» timezone|string|Timezone of the user, format is country/city.
-»» language|string|Users language preference. See [localization](#localization) for the supported languages.
-»» profile_url|string|URL to the user's mod.io profile.
-» level|integer|Level of permission the user has:<br><br>__1__ = Moderator (can moderate comments and content attached)<br>__4__ = Creator (moderator access, including uploading builds and edit all settings except supply and team members)<br>__8__ = Administrator (full access, including editing the supply and team)
-» date_added|integer|Unix timestamp of the date the user was added to the team.
-» position|string|Custom title given to the user in this team.
-result_count|integer|Number of results returned in this request.
-result_offset|integer|Number of results skipped over. Defaults to 0 unless overridden by `_offset` filter.
-result_limit|integer|Maximum number of results returned in the request. Defaults to 100 (max) unless overridden by `_limit` filter.
-result_total|integer|Total number of results found.
-
-
-
-
-## Get All Users  
-
-<a name="schemaget_all_users"></a>
-
-```json
-{
-  "data": [
-    {
-      "id": 1,
-      "name_id": "xant",
-      "username": "XanT",
-      "date_online": 1509922961,
-      "avatar": {
-        "filename": "modio-color-dark.png",
-        "original": "https://static.mod.io/v1/images/branding/modio-color-dark.png",
-        "thumb_50x50": "https://static.mod.io/v1/images/branding/modio-color-dark.png",
-        "thumb_100x100": "https://static.mod.io/v1/images/branding/modio-color-dark.png"
-      },
-      "timezone": "America/Los_Angeles",
-      "language": "en",
-      "profile_url": "https://mod.io/members/xant"
-    },
-    {
-        ...
-    }
-  ],
-  "result_count": 70,
-  "result_offset": 0,
-  "result_limit": 100,
-  "result_total": 70
-} 
-```
-
-
-### Properties
-
-Name|Type|Description
----|---|---|---|
-data|[User Object   ](#schemauser_object)[]|Array containing user objects.
-» id|integer|Unique id of the user.
-» name_id|string|Path for the user on mod.io. For example: https://mod.io/members/__username-id-here__ Usually a simplified version of their username.
-» username|string|Username of the user.
-» date_online|integer|Unix timestamp of date the user was last online.
-» avatar|[Avatar Object   ](#schemaavatar_object)|Contains avatar data.
-»» filename|string|Avatar filename including extension.
-»» original|string|URL to the full-sized avatar.
-»» thumb_50x50|string|URL to the small avatar thumbnail.
-»» thumb_100x100|string|URL to the medium avatar thumbnail.
-» timezone|string|Timezone of the user, format is country/city.
-» language|string|Users language preference. See [localization](#localization) for the supported languages.
-» profile_url|string|URL to the user's mod.io profile.
-result_count|integer|Number of results returned in this request.
-result_offset|integer|Number of results skipped over. Defaults to 0 unless overridden by `_offset` filter.
-result_limit|integer|Maximum number of results returned in the request. Defaults to 100 (max) unless overridden by `_limit` filter.
-result_total|integer|Total number of results found.
-
-
-
-
-## Get All User Events 
-
-<a name="schemaget_all_user_events"></a>
-
-```json
-{
-  "data": [
-    {
-      "id": 13,
-      "mod_id": 13,
-      "user_id": 13,
-      "date_added": 1499846132,
-      "event_type": "MODFILE_CHANGED"
-    },
-    {
-        ...
-    }
-  ],
-  "result_count": 70,
-  "result_offset": 0,
-  "result_limit": 100,
-  "result_total": 70
-} 
-```
-
-
-### Properties
-
-Name|Type|Description
----|---|---|---|
-data|[Event Object   ](#schemaevent_object)[]|Array containing event objects.
-» id|integer|Unique id of the event object.
-» mod_id|integer|Unique id of the parent mod.
-» user_id|integer|Unique id of the user who performed the action.
-» date_added|integer|Unix timestamp of date the event occurred.
-» event_type|string|Type of event that was triggered. List of possible events: <br><br>- MODFILE_CHANGED<br>- MOD_AVAILABLE<br>- MOD_UNAVAILABLE<br>- MOD_EDITED<br>- MOD_DELETED<br>- USER_TEAM_JOIN<br>- USER_TEAM_LEAVE<br>- USER_SUBSCRIBE<br>- USER_UNSUBSCRIBE
-result_count|integer|Number of results returned in this request.
-result_offset|integer|Number of results skipped over. Defaults to 0 unless overridden by `_offset` filter.
-result_limit|integer|Maximum number of results returned in the request. Defaults to 100 (max) unless overridden by `_limit` filter.
-result_total|integer|Total number of results found.
-
-
-
-
-## Get All User Ratings 
-
-<a name="schemaget_all_user_ratings"></a>
-
-```json
-{
-  "data": [
-    {
-      "game_id": 2,
-      "mod_id": 2,
-      "rating": -1,
-      "date_added": 1492564103
-    },
-    {
-        ...
-    }
-  ],
-  "result_count": 70,
-  "result_offset": 0,
-  "result_limit": 100,
-  "result_total": 70
-} 
-```
-
-
-### Properties
-
-Name|Type|Description
----|---|---|---|
-data|[Rating Object   ](#schemarating_object)[]|Array containing rating objects.
-» game_id|integer|Unique game id.
-» mod_id|integer|Unique mod id.
-» rating|integer|Is it a positive or negative rating.
-» date_added|integer|Unix timestamp of date rating was submitted.
-result_count|integer|Number of results returned in this request.
-result_offset|integer|Number of results skipped over. Defaults to 0 unless overridden by `_offset` filter.
-result_limit|integer|Maximum number of results returned in the request. Defaults to 100 (max) unless overridden by `_limit` filter.
-result_total|integer|Total number of results found.
 
 
 
