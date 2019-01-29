@@ -171,7 +171,7 @@ To authenticate using an OAuth 2 access token, you must include the HTTP header 
 ```shell
 // Example POST request with no binary files
 
-curl -X post --parse_apiurl/games/1/mods/1/tags \
+curl -X POST --parse_apiurl/games/1/mods/1/tags \
   -H 'Authorization: Bearer your-token-here' \
   -H 'Content-Type: application/x-www-form-urlencoded' \
   -d 'tags[]=Unity' \
@@ -185,7 +185,7 @@ If you are making a request that includes a file, your request `Content-Type` he
 ```shell
 // Example POST request with binary file
 
-curl -X post --parse_apiurl/games/1/mods \
+curl -X POST --parse_apiurl/games/1/mods \
   -H 'Authorization: Bearer your-token-here' \
   -H 'Content-Type: multipart/form-data' \ 
   -F 'logo=@path/to/image.jpg' \
@@ -207,7 +207,7 @@ If the endpoint you are making a request to expects a file it will expect the co
 ```shell
 // Example json-encoded POST request 
 
-curl -X post --parse_apiurl/games/1/team \
+curl -X POST --parse_apiurl/games/1/team \
   -H 'Authorization: Bearer your-token-here' \
   -H 'Content-Type: application/x-www-form-urlencoded' \  
   -d 'input_json={

@@ -188,7 +188,7 @@ To authenticate using an OAuth 2 access token, you must include the HTTP header 
 ```shell
 // Example POST request with no binary files
 
-curl -X post https://api.mod.io/v1/games/1/mods/1/tags \
+curl -X POST https://api.mod.io/v1/games/1/mods/1/tags \
   -H 'Authorization: Bearer your-token-here' \
   -H 'Content-Type: application/x-www-form-urlencoded' \
   -d 'tags[]=Unity' \
@@ -202,7 +202,7 @@ If you are making a request that includes a file, your request `Content-Type` he
 ```shell
 // Example POST request with binary file
 
-curl -X post https://api.mod.io/v1/games/1/mods \
+curl -X POST https://api.mod.io/v1/games/1/mods \
   -H 'Authorization: Bearer your-token-here' \
   -H 'Content-Type: multipart/form-data' \ 
   -F 'logo=@path/to/image.jpg' \
@@ -224,7 +224,7 @@ If the endpoint you are making a request to expects a file it will expect the co
 ```shell
 // Example json-encoded POST request 
 
-curl -X post https://api.mod.io/v1/games/1/team \
+curl -X POST https://api.mod.io/v1/games/1/team \
   -H 'Authorization: Bearer your-token-here' \
   -H 'Content-Type: application/x-www-form-urlencoded' \  
   -d 'input_json={
@@ -1239,6 +1239,7 @@ Update details for a game. If you want to update the `icon`, `logo` or `header` 
     community_options|integer||Choose the community features enabled on the mod.io website:<br><br>__0__ = All of the options below are disabled<br>__1__ = Discussion board enabled<br>__2__ = Guides and news enabled<br>__?__ = Add the options you want together, to enable multiple features (see [BITWISE fields](#bitwise-and-bitwise-and))
     revenue_options|integer||Choose the revenue capabilities mods can enable:<br><br>__0__ = All of the options below are disabled<br>__1__ = Allow mods to be sold<br>__2__ = Allow mods to receive donations<br>__4__ = Allow mods to be traded (not subject to revenue share)<br>__8__ = Allow mods to control supply and scarcity<br>__?__ = Add the options you want together, to enable multiple features (see [BITWISE fields](#bitwise-and-bitwise-and))
     api_access_options|integer||Choose the level of API access your game allows:<br><br>__0__ = All of the options below are disabled<br><br>__1__ = Allow 3rd parties to access this games API endpoints. We recommend you enable this feature, an open API will encourage a healthy ecosystem of tools and apps. If you do not enable this feature, your `/games/{games-id}` endpoints will return `403 Forbidden` unless you are a member of the games team or using the games `api_key`<br><br>__2__ = Allow mods to be downloaded directly (makes implementation easier for you, game servers and services because you can save, share and reuse download URLs). If disabled all download URLs will contain a frequently changing verification hash to stop unauthorized use<br><br>__?__ = Add the options you want together, to enable multiple features (see [BITWISE fields](#bitwise-and-bitwise-and))
+    api_steam_ticket|string||Your game's secret encrypted app ticket key for Steam - this can be found under *Security > SDK auth* on your game's [Steamworks settings](#https://partner.steamgames.com/). This field is required if you wish to use the [Authenticate via Steam](#authenticate-via-steam) endpoint.
     maturity_options|integer||Choose if you want to allow developers to select if they can flag their mods as containing mature content:<br><br>__0__ = Don't allow _(default)_<br>__1__ = Allow
 
 
@@ -8018,7 +8019,7 @@ System.out.println(response.toString());
 ```
 `GET /me/events`
 
-Get events that have been fired specific to the user. Successful request will return an array of [Event Objects](#get-all-user-events). We recommended reading the [filtering documentation](#filtering) to return only the records you want.
+Get events that have been fired specific to the user. Successful request will return an array of [Event Objects](#get-user-events-2). We recommended reading the [filtering documentation](#filtering) to return only the records you want.
 
     Filter|Type|Description
     ---|---|---
