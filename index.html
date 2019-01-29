@@ -959,7 +959,7 @@ curl -X POST https://api.mod.io/v1/oauth/emailexchange <span class="se">\</span>
 <p>To authenticate using an OAuth 2 access token, you must include the HTTP header <code>Authorization</code> in your request with the value <code>Bearer your-token-here</code>. Verification via Access Token allows much greater power including creating, updating and deleting resources that you have access to. Also because OAuth 2 access tokens are tied to a user account, you can personalize the output by viewing content they are subscribed and connected to via the <a href="#me">me endpoint</a> and by using relevant filters.</p>
 <pre class="highlight shell tab-shell"><code>// Example POST request with no binary files
 
-curl -X post https://api.mod.io/v1/games/1/mods/1/tags <span class="se">\</span>
+curl -X POST https://api.mod.io/v1/games/1/mods/1/tags <span class="se">\</span>
   -H <span class="s1">'Authorization: Bearer your-token-here'</span> <span class="se">\</span>
   -H <span class="s1">'Content-Type: application/x-www-form-urlencoded'</span> <span class="se">\</span>
   -d <span class="s1">'tags[]=Unity'</span> <span class="se">\</span>
@@ -968,7 +968,7 @@ curl -X post https://api.mod.io/v1/games/1/mods/1/tags <span class="se">\</span>
 <p>If you are making a request that includes a file, your request <code>Content-Type</code> header <strong>must</strong> be <code>multipart/form-data</code>, otherwise if the request contains data (but no files) it should be <code>application/x-www-form-urlencoded</code> with text encoded in <code>UTF-8</code> format. </p>
 <pre class="highlight shell tab-shell"><code>// Example POST request with binary file
 
-curl -X post https://api.mod.io/v1/games/1/mods <span class="se">\</span>
+curl -X POST https://api.mod.io/v1/games/1/mods <span class="se">\</span>
   -H <span class="s1">'Authorization: Bearer your-token-here'</span> <span class="se">\</span>
   -H <span class="s1">'Content-Type: multipart/form-data'</span> <span class="se">\ </span>
   -F <span class="s1">'logo=@path/to/image.jpg'</span> <span class="se">\</span>
@@ -1008,7 +1008,7 @@ curl -X post https://api.mod.io/v1/games/1/mods <span class="se">\</span>
 <p>If the endpoint you are making a request to expects a file it will expect the correct <code>Content-Type</code> as mentioned. Supplying an incorrect <code>Content-Type</code> header will return a <code>415 Unsupported Media Type</code> response.</p>
 <h3 id="json-request-data">JSON Request Data</h3><pre class="highlight shell tab-shell"><code>// Example json-encoded POST request 
 
-curl -X post https://api.mod.io/v1/games/1/team <span class="se">\</span>
+curl -X POST https://api.mod.io/v1/games/1/team <span class="se">\</span>
   -H <span class="s1">'Authorization: Bearer your-token-here'</span> <span class="se">\</span>
   -H <span class="s1">'Content-Type: application/x-www-form-urlencoded'</span> <span class="se">\ </span> 
   -d <span class="s1">'input_json={
@@ -2237,6 +2237,12 @@ Content-Type: application/x-www-form-urlencoded
 <td>integer</td>
 <td></td>
 <td>Choose the level of API access your game allows:<br><br><strong>0</strong> = All of the options below are disabled<br><br><strong>1</strong> = Allow 3rd parties to access this games API endpoints. We recommend you enable this feature, an open API will encourage a healthy ecosystem of tools and apps. If you do not enable this feature, your <code>/games/{games-id}</code> endpoints will return <code>403 Forbidden</code> unless you are a member of the games team or using the games <code>api_key</code><br><br><strong>2</strong> = Allow mods to be downloaded directly (makes implementation easier for you, game servers and services because you can save, share and reuse download URLs). If disabled all download URLs will contain a frequently changing verification hash to stop unauthorized use<br><br><strong>?</strong> = Add the options you want together, to enable multiple features (see <a href="#bitwise-and-bitwise-and">BITWISE fields</a>)</td>
+</tr>
+<tr>
+<td>api_steam_ticket</td>
+<td>string</td>
+<td></td>
+<td>Your game's secret encrypted app ticket key for Steam - this can be found under <em>Security &gt; SDK auth</em> on your game's <a href="#https://partner.steamgames.com/">Steamworks settings</a>. This field is required if you wish to use the <a href="#authenticate-via-steam">Authenticate via Steam</a> endpoint.</td>
 </tr>
 <tr>
 <td>maturity_options</td>
@@ -10022,7 +10028,7 @@ Accept: application/json
 </code></pre>
 <p><span class="httpmethod GET">GET</span> <span class="endpointheading">/me/events</span></p>
 
-<p>Get events that have been fired specific to the user. Successful request will return an array of <a href="#get-all-user-events">Event Objects</a>. We recommended reading the <a href="#filtering">filtering documentation</a> to return only the records you want.</p>
+<p>Get events that have been fired specific to the user. Successful request will return an array of <a href="#get-user-events-2">Event Objects</a>. We recommended reading the <a href="#filtering">filtering documentation</a> to return only the records you want.</p>
 
 <table>
 <thead>
@@ -11120,7 +11126,7 @@ To perform this request, you must be authenticated via one of the following meth
 <tbody>
 <tr>
 <td>code</td>
-<td>integer(int32)</td>
+<td>integer</td>
 <td>
 <a href="#response-codes">HTTP status code</a> of response.</td>
 </tr>
@@ -11157,7 +11163,7 @@ To perform this request, you must be authenticated via one of the following meth
 </tr>
 <tr>
 <td>» code</td>
-<td>integer(int32)</td>
+<td>integer</td>
 <td>
 <a href="#response-codes">HTTP code</a> of the error.</td>
 </tr>
@@ -11423,12 +11429,12 @@ To perform this request, you must be authenticated via one of the following meth
 </tr>
 <tr>
 <td>» id</td>
-<td>integer(int32)</td>
+<td>integer</td>
 <td>Unique id of the comment.</td>
 </tr>
 <tr>
 <td>» mod_id</td>
-<td>integer(int32)</td>
+<td>integer</td>
 <td>Unique id of the parent mod.</td>
 </tr>
 <tr>
@@ -11438,7 +11444,7 @@ To perform this request, you must be authenticated via one of the following meth
 </tr>
 <tr>
 <td>»» id</td>
-<td>integer(int32)</td>
+<td>integer</td>
 <td>Unique id of the user.</td>
 </tr>
 <tr>
@@ -11453,7 +11459,7 @@ To perform this request, you must be authenticated via one of the following meth
 </tr>
 <tr>
 <td>»» date_online</td>
-<td>integer(int32)</td>
+<td>integer</td>
 <td>Unix timestamp of date the user was last online.</td>
 </tr>
 <tr>
@@ -11498,12 +11504,12 @@ To perform this request, you must be authenticated via one of the following meth
 </tr>
 <tr>
 <td>» date_added</td>
-<td>integer(int32)</td>
+<td>integer</td>
 <td>Unix timestamp of date the comment was posted.</td>
 </tr>
 <tr>
 <td>» reply_id</td>
-<td>integer(int32)</td>
+<td>integer</td>
 <td>Id of the parent comment this comment is replying to (can be 0 if the comment is not a reply).</td>
 </tr>
 <tr>
@@ -11513,12 +11519,12 @@ To perform this request, you must be authenticated via one of the following meth
 </tr>
 <tr>
 <td>» karma</td>
-<td>integer(int32)</td>
+<td>integer</td>
 <td>Karma received for the comment (can be postive or negative).</td>
 </tr>
 <tr>
 <td>» karma_guest</td>
-<td>integer(int32)</td>
+<td>integer</td>
 <td>Karma received for guest comments (can be postive or negative).</td>
 </tr>
 <tr>
@@ -11528,22 +11534,22 @@ To perform this request, you must be authenticated via one of the following meth
 </tr>
 <tr>
 <td>result_count</td>
-<td>integer(int32)</td>
+<td>integer</td>
 <td>Number of results returned in this request.</td>
 </tr>
 <tr>
 <td>result_offset</td>
-<td>integer(int32)</td>
+<td>integer</td>
 <td>Number of results skipped over. Defaults to 0 unless overridden by <code>_offset</code> filter.</td>
 </tr>
 <tr>
 <td>result_limit</td>
-<td>integer(int32)</td>
+<td>integer</td>
 <td>Maximum number of results returned in the request. Defaults to 100 (max) unless overridden by <code>_limit</code> filter.</td>
 </tr>
 <tr>
 <td>result_total</td>
-<td>integer(int32)</td>
+<td>integer</td>
 <td>Total number of results found.</td>
 </tr>
 </tbody>
@@ -11583,32 +11589,32 @@ To perform this request, you must be authenticated via one of the following meth
 </tr>
 <tr>
 <td>» mod_id</td>
-<td>integer(int32)</td>
+<td>integer</td>
 <td>Unique id of the mod that is the dependency.</td>
 </tr>
 <tr>
 <td>» date_added</td>
-<td>integer(int32)</td>
+<td>integer</td>
 <td>Unix timestamp of date the dependency was added.</td>
 </tr>
 <tr>
 <td>result_count</td>
-<td>integer(int32)</td>
+<td>integer</td>
 <td>Number of results returned in this request.</td>
 </tr>
 <tr>
 <td>result_offset</td>
-<td>integer(int32)</td>
+<td>integer</td>
 <td>Number of results skipped over. Defaults to 0 unless overridden by <code>_offset</code> filter.</td>
 </tr>
 <tr>
 <td>result_limit</td>
-<td>integer(int32)</td>
+<td>integer</td>
 <td>Maximum number of results returned in the request. Defaults to 100 (max) unless overridden by <code>_limit</code> filter.</td>
 </tr>
 <tr>
 <td>result_total</td>
-<td>integer(int32)</td>
+<td>integer</td>
 <td>Total number of results found.</td>
 </tr>
 </tbody>
@@ -11651,22 +11657,22 @@ To perform this request, you must be authenticated via one of the following meth
 </tr>
 <tr>
 <td>» id</td>
-<td>integer(int32)</td>
+<td>integer</td>
 <td>Unique id of the event object.</td>
 </tr>
 <tr>
 <td>» mod_id</td>
-<td>integer(int32)</td>
+<td>integer</td>
 <td>Unique id of the parent mod.</td>
 </tr>
 <tr>
 <td>» user_id</td>
-<td>integer(int32)</td>
+<td>integer</td>
 <td>Unique id of the user who performed the action.</td>
 </tr>
 <tr>
 <td>» date_added</td>
-<td>integer(int32)</td>
+<td>integer</td>
 <td>Unix timestamp of date the event occurred.</td>
 </tr>
 <tr>
@@ -11676,22 +11682,22 @@ To perform this request, you must be authenticated via one of the following meth
 </tr>
 <tr>
 <td>result_count</td>
-<td>integer(int32)</td>
+<td>integer</td>
 <td>Number of results returned in this request.</td>
 </tr>
 <tr>
 <td>result_offset</td>
-<td>integer(int32)</td>
+<td>integer</td>
 <td>Number of results skipped over. Defaults to 0 unless overridden by <code>_offset</code> filter.</td>
 </tr>
 <tr>
 <td>result_limit</td>
-<td>integer(int32)</td>
+<td>integer</td>
 <td>Maximum number of results returned in the request. Defaults to 100 (max) unless overridden by <code>_limit</code> filter.</td>
 </tr>
 <tr>
 <td>result_total</td>
-<td>integer(int32)</td>
+<td>integer</td>
 <td>Total number of results found.</td>
 </tr>
 </tbody>
@@ -11748,32 +11754,32 @@ To perform this request, you must be authenticated via one of the following meth
 </tr>
 <tr>
 <td>» id</td>
-<td>integer(int32)</td>
+<td>integer</td>
 <td>Unique modfile id.</td>
 </tr>
 <tr>
 <td>» mod_id</td>
-<td>integer(int32)</td>
+<td>integer</td>
 <td>Unique mod id.</td>
 </tr>
 <tr>
 <td>» date_added</td>
-<td>integer(int32)</td>
+<td>integer</td>
 <td>Unix timestamp of date file was added.</td>
 </tr>
 <tr>
 <td>» date_scanned</td>
-<td>integer(int32)</td>
+<td>integer</td>
 <td>Unix timestamp of date file was virus scanned.</td>
 </tr>
 <tr>
 <td>» virus_status</td>
-<td>integer(int32)</td>
+<td>integer</td>
 <td>Current virus scan status of the file. For newly added files that have yet to be scanned this field will change frequently until a scan is complete:<br><br><strong>0</strong> = Not scanned<br><strong>1</strong> = Scan complete<br><strong>2</strong> = In progress<br><strong>3</strong> = Too large to scan<br><strong>4</strong> = File not found<br><strong>5</strong> = Error Scanning</td>
 </tr>
 <tr>
 <td>» virus_positive</td>
-<td>integer(int32)</td>
+<td>integer</td>
 <td>Was a virus detected:<br><br><strong>0</strong> = No threats detected<br><strong>1</strong> = Flagged as malicious</td>
 </tr>
 <tr>
@@ -11783,7 +11789,7 @@ To perform this request, you must be authenticated via one of the following meth
 </tr>
 <tr>
 <td>» filesize</td>
-<td>integer(int32)</td>
+<td>integer</td>
 <td>Size of the file in bytes.</td>
 </tr>
 <tr>
@@ -11833,22 +11839,22 @@ To perform this request, you must be authenticated via one of the following meth
 </tr>
 <tr>
 <td>result_count</td>
-<td>integer(int32)</td>
+<td>integer</td>
 <td>Number of results returned in this request.</td>
 </tr>
 <tr>
 <td>result_offset</td>
-<td>integer(int32)</td>
+<td>integer</td>
 <td>Number of results skipped over. Defaults to 0 unless overridden by <code>_offset</code> filter.</td>
 </tr>
 <tr>
 <td>result_limit</td>
-<td>integer(int32)</td>
+<td>integer</td>
 <td>Maximum number of results returned in the request. Defaults to 100 (max) unless overridden by <code>_limit</code> filter.</td>
 </tr>
 <tr>
 <td>result_total</td>
-<td>integer(int32)</td>
+<td>integer</td>
 <td>Total number of results found.</td>
 </tr>
 </tbody>
@@ -11948,12 +11954,12 @@ To perform this request, you must be authenticated via one of the following meth
 </tr>
 <tr>
 <td>» id</td>
-<td>integer(int32)</td>
+<td>integer</td>
 <td>Unique game id.</td>
 </tr>
 <tr>
 <td>» status</td>
-<td>integer(int32)</td>
+<td>integer</td>
 <td>Status of the game (see <a href="#status-amp-visibility">status and visibility</a> for details):<br><br><strong>0</strong> = Not Accepted<br><strong>1</strong> = Accepted<br><strong>2</strong> = Archived (potentially out of date or incompatible)<br><strong>3</strong> = Deleted</td>
 </tr>
 <tr>
@@ -11963,7 +11969,7 @@ To perform this request, you must be authenticated via one of the following meth
 </tr>
 <tr>
 <td>»» id</td>
-<td>integer(int32)</td>
+<td>integer</td>
 <td>Unique id of the user.</td>
 </tr>
 <tr>
@@ -11978,7 +11984,7 @@ To perform this request, you must be authenticated via one of the following meth
 </tr>
 <tr>
 <td>»» date_online</td>
-<td>integer(int32)</td>
+<td>integer</td>
 <td>Unix timestamp of date the user was last online.</td>
 </tr>
 <tr>
@@ -12023,52 +12029,52 @@ To perform this request, you must be authenticated via one of the following meth
 </tr>
 <tr>
 <td>» date_added</td>
-<td>integer(int32)</td>
+<td>integer</td>
 <td>Unix timestamp of date game was registered.</td>
 </tr>
 <tr>
 <td>» date_updated</td>
-<td>integer(int32)</td>
+<td>integer</td>
 <td>Unix timestamp of date game was updated.</td>
 </tr>
 <tr>
 <td>» date_live</td>
-<td>integer(int32)</td>
+<td>integer</td>
 <td>Unix timestamp of date game was set live.</td>
 </tr>
 <tr>
 <td>» presentation_option</td>
-<td>integer(int32)</td>
+<td>integer</td>
 <td>Presentation style used on the mod.io website:<br><br><strong>0</strong> =  Grid View: Displays mods in a grid<br><strong>1</strong> = Table View: Displays mods in a table</td>
 </tr>
 <tr>
 <td>» submission_option</td>
-<td>integer(int32)</td>
+<td>integer</td>
 <td>Submission process modders must follow:<br><br><strong>0</strong> = Mod uploads must occur via the API using a tool created by the game developers<br><strong>1</strong> = Mod uploads can occur from anywhere, including the website and API</td>
 </tr>
 <tr>
 <td>» curation_option</td>
-<td>integer(int32)</td>
+<td>integer</td>
 <td>Curation process used to approve mods:<br><br><strong>0</strong> = No curation: Mods are immediately available to play<br><strong>1</strong> = Paid curation: Mods are immediately available to play unless they choose to receive donations. These mods must be accepted to be listed<br><strong>2</strong> = Full curation: All mods must be accepted by someone to be listed</td>
 </tr>
 <tr>
 <td>» community_options</td>
-<td>integer(int32)</td>
+<td>integer</td>
 <td>Community features enabled on the mod.io website:<br><br><strong>0</strong> = All of the options below are disabled<br><strong>1</strong> = Discussion board enabled<br><strong>2</strong> = Guides and news enabled<br><strong>?</strong> = Add the options you want together, to enable multiple features (see <a href="#bitwise-and-bitwise-and">BITWISE fields</a>)</td>
 </tr>
 <tr>
 <td>» revenue_options</td>
-<td>integer(int32)</td>
+<td>integer</td>
 <td>Revenue capabilities mods can enable:<br><br><strong>0</strong> = All of the options below are disabled<br><strong>1</strong> = Allow mods to be sold<br><strong>2</strong> = Allow mods to receive donations<br><strong>4</strong> = Allow mods to be traded<br><strong>8</strong> = Allow mods to control supply and scarcity<br><strong>?</strong> = Add the options you want together, to enable multiple features (see <a href="#bitwise-and-bitwise-and">BITWISE fields</a>)</td>
 </tr>
 <tr>
 <td>» api_access_options</td>
-<td>integer(int32)</td>
+<td>integer</td>
 <td>Level of API access allowed by this game:<br><br><strong>0</strong> = All of the options below are disabled<br><strong>1</strong> = Allow 3rd parties to access this games API endpoints<br><strong>2</strong> = Allow mods to be downloaded directly (if disabled all download URLs will contain a frequently changing verification hash to stop unauthorized use)<br><strong>?</strong> = Add the options you want together, to enable multiple features (see <a href="#bitwise-and-bitwise-and">BITWISE fields</a>)</td>
 </tr>
 <tr>
 <td>» maturity_options</td>
-<td>integer(int32)</td>
+<td>integer</td>
 <td>Switch to allow developers to select if they flag their mods as containing mature content:<br><br><strong>0</strong> = Don't allow <em>(default)</em><br><strong>1</strong> = Allow</td>
 </tr>
 <tr>
@@ -12209,22 +12215,22 @@ To perform this request, you must be authenticated via one of the following meth
 </tr>
 <tr>
 <td>result_count</td>
-<td>integer(int32)</td>
+<td>integer</td>
 <td>Number of results returned in this request.</td>
 </tr>
 <tr>
 <td>result_offset</td>
-<td>integer(int32)</td>
+<td>integer</td>
 <td>Number of results skipped over. Defaults to 0 unless overridden by <code>_offset</code> filter.</td>
 </tr>
 <tr>
 <td>result_limit</td>
-<td>integer(int32)</td>
+<td>integer</td>
 <td>Maximum number of results returned in the request. Defaults to 100 (max) unless overridden by <code>_limit</code> filter.</td>
 </tr>
 <tr>
 <td>result_total</td>
-<td>integer(int32)</td>
+<td>integer</td>
 <td>Total number of results found.</td>
 </tr>
 </tbody>
@@ -12274,22 +12280,22 @@ To perform this request, you must be authenticated via one of the following meth
 </tr>
 <tr>
 <td>result_count</td>
-<td>integer(int32)</td>
+<td>integer</td>
 <td>Number of results returned in this request.</td>
 </tr>
 <tr>
 <td>result_offset</td>
-<td>integer(int32)</td>
+<td>integer</td>
 <td>Number of results skipped over. Defaults to 0 unless overridden by <code>_offset</code> filter.</td>
 </tr>
 <tr>
 <td>result_limit</td>
-<td>integer(int32)</td>
+<td>integer</td>
 <td>Maximum number of results returned in the request. Defaults to 100 (max) unless overridden by <code>_limit</code> filter.</td>
 </tr>
 <tr>
 <td>result_total</td>
-<td>integer(int32)</td>
+<td>integer</td>
 <td>Total number of results found.</td>
 </tr>
 </tbody>
@@ -12427,22 +12433,22 @@ To perform this request, you must be authenticated via one of the following meth
 </tr>
 <tr>
 <td>» id</td>
-<td>integer(int32)</td>
+<td>integer</td>
 <td>Unique mod id.</td>
 </tr>
 <tr>
 <td>» game_id</td>
-<td>integer(int32)</td>
+<td>integer</td>
 <td>Unique game id.</td>
 </tr>
 <tr>
 <td>» status</td>
-<td>integer(int32)</td>
+<td>integer</td>
 <td>Status of the mod (see <a href="#status-amp-visibility">status and visibility</a> for details):<br><br><strong>0</strong> = Not Accepted<br><strong>1</strong> = Accepted<br><strong>2</strong> = Archived (potentially out of date or incompatible)<br><strong>3</strong> = Deleted</td>
 </tr>
 <tr>
 <td>» visible</td>
-<td>integer(int32)</td>
+<td>integer</td>
 <td>Visibility of the mod (see <a href="#status-amp-visibility">status and visibility</a> for details):<br><br><strong>0</strong> = Hidden<br><strong>1</strong> = Public</td>
 </tr>
 <tr>
@@ -12452,7 +12458,7 @@ To perform this request, you must be authenticated via one of the following meth
 </tr>
 <tr>
 <td>»» id</td>
-<td>integer(int32)</td>
+<td>integer</td>
 <td>Unique id of the user.</td>
 </tr>
 <tr>
@@ -12467,7 +12473,7 @@ To perform this request, you must be authenticated via one of the following meth
 </tr>
 <tr>
 <td>»» date_online</td>
-<td>integer(int32)</td>
+<td>integer</td>
 <td>Unix timestamp of date the user was last online.</td>
 </tr>
 <tr>
@@ -12512,22 +12518,22 @@ To perform this request, you must be authenticated via one of the following meth
 </tr>
 <tr>
 <td>» date_added</td>
-<td>integer(int32)</td>
+<td>integer</td>
 <td>Unix timestamp of date mod was registered.</td>
 </tr>
 <tr>
 <td>» date_updated</td>
-<td>integer(int32)</td>
+<td>integer</td>
 <td>Unix timestamp of date mod was updated.</td>
 </tr>
 <tr>
 <td>» date_live</td>
-<td>integer(int32)</td>
+<td>integer</td>
 <td>Unix timestamp of date mod was set live.</td>
 </tr>
 <tr>
 <td>» maturity_option</td>
-<td>integer(int32)</td>
+<td>integer</td>
 <td>Maturity options flagged by the mod developer, this is only relevant if the parent game allows mods to be labelled as mature.<br><br><strong>0</strong> = None set <em>(default)</em><br><strong>1</strong> = Alcohol<br><strong>2</strong> = Drugs<br><strong>4</strong> = Violence<br><strong>8</strong> = Explicit<br><strong>?</strong> = Add the options you want together, to enable multiple filters (see <a href="#bitwise-and-bitwise-and">BITWISE fields</a>)</td>
 </tr>
 <tr>
@@ -12645,32 +12651,32 @@ To perform this request, you must be authenticated via one of the following meth
 </tr>
 <tr>
 <td>»» id</td>
-<td>integer(int32)</td>
+<td>integer</td>
 <td>Unique modfile id.</td>
 </tr>
 <tr>
 <td>»» mod_id</td>
-<td>integer(int32)</td>
+<td>integer</td>
 <td>Unique mod id.</td>
 </tr>
 <tr>
 <td>»» date_added</td>
-<td>integer(int32)</td>
+<td>integer</td>
 <td>Unix timestamp of date file was added.</td>
 </tr>
 <tr>
 <td>»» date_scanned</td>
-<td>integer(int32)</td>
+<td>integer</td>
 <td>Unix timestamp of date file was virus scanned.</td>
 </tr>
 <tr>
 <td>»» virus_status</td>
-<td>integer(int32)</td>
+<td>integer</td>
 <td>Current virus scan status of the file. For newly added files that have yet to be scanned this field will change frequently until a scan is complete:<br><br><strong>0</strong> = Not scanned<br><strong>1</strong> = Scan complete<br><strong>2</strong> = In progress<br><strong>3</strong> = Too large to scan<br><strong>4</strong> = File not found<br><strong>5</strong> = Error Scanning</td>
 </tr>
 <tr>
 <td>»» virus_positive</td>
-<td>integer(int32)</td>
+<td>integer</td>
 <td>Was a virus detected:<br><br><strong>0</strong> = No threats detected<br><strong>1</strong> = Flagged as malicious</td>
 </tr>
 <tr>
@@ -12680,7 +12686,7 @@ To perform this request, you must be authenticated via one of the following meth
 </tr>
 <tr>
 <td>»» filesize</td>
-<td>integer(int32)</td>
+<td>integer</td>
 <td>Size of the file in bytes.</td>
 </tr>
 <tr>
@@ -12735,47 +12741,47 @@ To perform this request, you must be authenticated via one of the following meth
 </tr>
 <tr>
 <td>»» mod_id</td>
-<td>integer(int32)</td>
+<td>integer</td>
 <td>Unique mod id.</td>
 </tr>
 <tr>
 <td>»» popularity_rank_position</td>
-<td>integer(int32)</td>
+<td>integer</td>
 <td>Current rank of the mod.</td>
 </tr>
 <tr>
 <td>»» popularity_rank_total_mods</td>
-<td>integer(int32)</td>
+<td>integer</td>
 <td>Number of ranking spots the current rank is measured against.</td>
 </tr>
 <tr>
 <td>»» downloads_total</td>
-<td>integer(int32)</td>
+<td>integer</td>
 <td>Number of total mod downloads.</td>
 </tr>
 <tr>
 <td>»» subscribers_total</td>
-<td>integer(int32)</td>
+<td>integer</td>
 <td>Number of total users who have subscribed to the mod.</td>
 </tr>
 <tr>
 <td>»» ratings_total</td>
-<td>integer(int32)</td>
+<td>integer</td>
 <td>Number of times this item has been rated.</td>
 </tr>
 <tr>
 <td>»» ratings_positive</td>
-<td>integer(int32)</td>
+<td>integer</td>
 <td>Number of positive ratings.</td>
 </tr>
 <tr>
 <td>»» ratings_negative</td>
-<td>integer(int32)</td>
+<td>integer</td>
 <td>Number of negative ratings.</td>
 </tr>
 <tr>
 <td>»» ratings_percentage_positive</td>
-<td>integer(int32)</td>
+<td>integer</td>
 <td>Number of positive ratings, divided by the total ratings to determine it’s percentage score.</td>
 </tr>
 <tr>
@@ -12790,7 +12796,7 @@ To perform this request, you must be authenticated via one of the following meth
 </tr>
 <tr>
 <td>»» date_expires</td>
-<td>integer(int32)</td>
+<td>integer</td>
 <td>Unix timestamp until this mods's statistics are considered stale.</td>
 </tr>
 <tr>
@@ -12822,27 +12828,27 @@ To perform this request, you must be authenticated via one of the following meth
 </tr>
 <tr>
 <td>»» date_added</td>
-<td>integer(int32)</td>
+<td>integer</td>
 <td>Unix timestamp of date tag was applied.</td>
 </tr>
 <tr>
 <td>result_count</td>
-<td>integer(int32)</td>
+<td>integer</td>
 <td>Number of results returned in this request.</td>
 </tr>
 <tr>
 <td>result_offset</td>
-<td>integer(int32)</td>
+<td>integer</td>
 <td>Number of results skipped over. Defaults to 0 unless overridden by <code>_offset</code> filter.</td>
 </tr>
 <tr>
 <td>result_limit</td>
-<td>integer(int32)</td>
+<td>integer</td>
 <td>Maximum number of results returned in the request. Defaults to 100 (max) unless overridden by <code>_limit</code> filter.</td>
 </tr>
 <tr>
 <td>result_total</td>
-<td>integer(int32)</td>
+<td>integer</td>
 <td>Total number of results found.</td>
 </tr>
 </tbody>
@@ -12892,47 +12898,47 @@ To perform this request, you must be authenticated via one of the following meth
 </tr>
 <tr>
 <td>» mod_id</td>
-<td>integer(int32)</td>
+<td>integer</td>
 <td>Unique mod id.</td>
 </tr>
 <tr>
 <td>» popularity_rank_position</td>
-<td>integer(int32)</td>
+<td>integer</td>
 <td>Current rank of the mod.</td>
 </tr>
 <tr>
 <td>» popularity_rank_total_mods</td>
-<td>integer(int32)</td>
+<td>integer</td>
 <td>Number of ranking spots the current rank is measured against.</td>
 </tr>
 <tr>
 <td>» downloads_total</td>
-<td>integer(int32)</td>
+<td>integer</td>
 <td>Number of total mod downloads.</td>
 </tr>
 <tr>
 <td>» subscribers_total</td>
-<td>integer(int32)</td>
+<td>integer</td>
 <td>Number of total users who have subscribed to the mod.</td>
 </tr>
 <tr>
 <td>» ratings_total</td>
-<td>integer(int32)</td>
+<td>integer</td>
 <td>Number of times this item has been rated.</td>
 </tr>
 <tr>
 <td>» ratings_positive</td>
-<td>integer(int32)</td>
+<td>integer</td>
 <td>Number of positive ratings.</td>
 </tr>
 <tr>
 <td>» ratings_negative</td>
-<td>integer(int32)</td>
+<td>integer</td>
 <td>Number of negative ratings.</td>
 </tr>
 <tr>
 <td>» ratings_percentage_positive</td>
-<td>integer(int32)</td>
+<td>integer</td>
 <td>Number of positive ratings, divided by the total ratings to determine it’s percentage score.</td>
 </tr>
 <tr>
@@ -12947,27 +12953,27 @@ To perform this request, you must be authenticated via one of the following meth
 </tr>
 <tr>
 <td>» date_expires</td>
-<td>integer(int32)</td>
+<td>integer</td>
 <td>Unix timestamp until this mods's statistics are considered stale.</td>
 </tr>
 <tr>
 <td>result_count</td>
-<td>integer(int32)</td>
+<td>integer</td>
 <td>Number of results returned in this request.</td>
 </tr>
 <tr>
 <td>result_offset</td>
-<td>integer(int32)</td>
+<td>integer</td>
 <td>Number of results skipped over. Defaults to 0 unless overridden by <code>_offset</code> filter.</td>
 </tr>
 <tr>
 <td>result_limit</td>
-<td>integer(int32)</td>
+<td>integer</td>
 <td>Maximum number of results returned in the request. Defaults to 100 (max) unless overridden by <code>_limit</code> filter.</td>
 </tr>
 <tr>
 <td>result_total</td>
-<td>integer(int32)</td>
+<td>integer</td>
 <td>Total number of results found.</td>
 </tr>
 </tbody>
@@ -13012,27 +13018,27 @@ To perform this request, you must be authenticated via one of the following meth
 </tr>
 <tr>
 <td>» date_added</td>
-<td>integer(int32)</td>
+<td>integer</td>
 <td>Unix timestamp of date tag was applied.</td>
 </tr>
 <tr>
 <td>result_count</td>
-<td>integer(int32)</td>
+<td>integer</td>
 <td>Number of results returned in this request.</td>
 </tr>
 <tr>
 <td>result_offset</td>
-<td>integer(int32)</td>
+<td>integer</td>
 <td>Number of results skipped over. Defaults to 0 unless overridden by <code>_offset</code> filter.</td>
 </tr>
 <tr>
 <td>result_limit</td>
-<td>integer(int32)</td>
+<td>integer</td>
 <td>Maximum number of results returned in the request. Defaults to 100 (max) unless overridden by <code>_limit</code> filter.</td>
 </tr>
 <tr>
 <td>result_total</td>
-<td>integer(int32)</td>
+<td>integer</td>
 <td>Total number of results found.</td>
 </tr>
 </tbody>
@@ -13096,22 +13102,22 @@ To perform this request, you must be authenticated via one of the following meth
 </tr>
 <tr>
 <td>result_count</td>
-<td>integer(int32)</td>
+<td>integer</td>
 <td>Number of results returned in this request.</td>
 </tr>
 <tr>
 <td>result_offset</td>
-<td>integer(int32)</td>
+<td>integer</td>
 <td>Number of results skipped over. Defaults to 0 unless overridden by <code>_offset</code> filter.</td>
 </tr>
 <tr>
 <td>result_limit</td>
-<td>integer(int32)</td>
+<td>integer</td>
 <td>Maximum number of results returned in the request. Defaults to 100 (max) unless overridden by <code>_limit</code> filter.</td>
 </tr>
 <tr>
 <td>result_total</td>
-<td>integer(int32)</td>
+<td>integer</td>
 <td>Total number of results found.</td>
 </tr>
 </tbody>
@@ -13168,7 +13174,7 @@ To perform this request, you must be authenticated via one of the following meth
 </tr>
 <tr>
 <td>» id</td>
-<td>integer(int32)</td>
+<td>integer</td>
 <td>Unique team member id.</td>
 </tr>
 <tr>
@@ -13178,7 +13184,7 @@ To perform this request, you must be authenticated via one of the following meth
 </tr>
 <tr>
 <td>»» id</td>
-<td>integer(int32)</td>
+<td>integer</td>
 <td>Unique id of the user.</td>
 </tr>
 <tr>
@@ -13193,7 +13199,7 @@ To perform this request, you must be authenticated via one of the following meth
 </tr>
 <tr>
 <td>»» date_online</td>
-<td>integer(int32)</td>
+<td>integer</td>
 <td>Unix timestamp of date the user was last online.</td>
 </tr>
 <tr>
@@ -13238,12 +13244,12 @@ To perform this request, you must be authenticated via one of the following meth
 </tr>
 <tr>
 <td>» level</td>
-<td>integer(int32)</td>
+<td>integer</td>
 <td>Level of permission the user has:<br><br><strong>1</strong> = Moderator (can moderate comments and content attached)<br><strong>4</strong> = Creator (moderator access, including uploading builds and edit all settings except supply and team members)<br><strong>8</strong> = Administrator (full access, including editing the supply and team)</td>
 </tr>
 <tr>
 <td>» date_added</td>
-<td>integer(int32)</td>
+<td>integer</td>
 <td>Unix timestamp of the date the user was added to the team.</td>
 </tr>
 <tr>
@@ -13253,22 +13259,22 @@ To perform this request, you must be authenticated via one of the following meth
 </tr>
 <tr>
 <td>result_count</td>
-<td>integer(int32)</td>
+<td>integer</td>
 <td>Number of results returned in this request.</td>
 </tr>
 <tr>
 <td>result_offset</td>
-<td>integer(int32)</td>
+<td>integer</td>
 <td>Number of results skipped over. Defaults to 0 unless overridden by <code>_offset</code> filter.</td>
 </tr>
 <tr>
 <td>result_limit</td>
-<td>integer(int32)</td>
+<td>integer</td>
 <td>Maximum number of results returned in the request. Defaults to 100 (max) unless overridden by <code>_limit</code> filter.</td>
 </tr>
 <tr>
 <td>result_total</td>
-<td>integer(int32)</td>
+<td>integer</td>
 <td>Total number of results found.</td>
 </tr>
 </tbody>
@@ -13319,7 +13325,7 @@ To perform this request, you must be authenticated via one of the following meth
 </tr>
 <tr>
 <td>» id</td>
-<td>integer(int32)</td>
+<td>integer</td>
 <td>Unique id of the user.</td>
 </tr>
 <tr>
@@ -13334,7 +13340,7 @@ To perform this request, you must be authenticated via one of the following meth
 </tr>
 <tr>
 <td>» date_online</td>
-<td>integer(int32)</td>
+<td>integer</td>
 <td>Unix timestamp of date the user was last online.</td>
 </tr>
 <tr>
@@ -13379,22 +13385,22 @@ To perform this request, you must be authenticated via one of the following meth
 </tr>
 <tr>
 <td>result_count</td>
-<td>integer(int32)</td>
+<td>integer</td>
 <td>Number of results returned in this request.</td>
 </tr>
 <tr>
 <td>result_offset</td>
-<td>integer(int32)</td>
+<td>integer</td>
 <td>Number of results skipped over. Defaults to 0 unless overridden by <code>_offset</code> filter.</td>
 </tr>
 <tr>
 <td>result_limit</td>
-<td>integer(int32)</td>
+<td>integer</td>
 <td>Maximum number of results returned in the request. Defaults to 100 (max) unless overridden by <code>_limit</code> filter.</td>
 </tr>
 <tr>
 <td>result_total</td>
-<td>integer(int32)</td>
+<td>integer</td>
 <td>Total number of results found.</td>
 </tr>
 </tbody>
@@ -13438,27 +13444,27 @@ To perform this request, you must be authenticated via one of the following meth
 </tr>
 <tr>
 <td>» id</td>
-<td>integer(int32)</td>
+<td>integer</td>
 <td>Unique id of the event object.</td>
 </tr>
 <tr>
 <td>» game_id</td>
-<td>integer(int32)</td>
+<td>integer</td>
 <td>Unique id of the parent game.</td>
 </tr>
 <tr>
 <td>» mod_id</td>
-<td>integer(int32)</td>
+<td>integer</td>
 <td>Unique id of the parent mod.</td>
 </tr>
 <tr>
 <td>» user_id</td>
-<td>integer(int32)</td>
+<td>integer</td>
 <td>Unique id of the user who performed the action.</td>
 </tr>
 <tr>
 <td>» date_added</td>
-<td>integer(int32)</td>
+<td>integer</td>
 <td>Unix timestamp of date the event occurred.</td>
 </tr>
 <tr>
@@ -13468,22 +13474,22 @@ To perform this request, you must be authenticated via one of the following meth
 </tr>
 <tr>
 <td>result_count</td>
-<td>integer(int32)</td>
+<td>integer</td>
 <td>Number of results returned in this request.</td>
 </tr>
 <tr>
 <td>result_offset</td>
-<td>integer(int32)</td>
+<td>integer</td>
 <td>Number of results skipped over. Defaults to 0 unless overridden by <code>_offset</code> filter.</td>
 </tr>
 <tr>
 <td>result_limit</td>
-<td>integer(int32)</td>
+<td>integer</td>
 <td>Maximum number of results returned in the request. Defaults to 100 (max) unless overridden by <code>_limit</code> filter.</td>
 </tr>
 <tr>
 <td>result_total</td>
-<td>integer(int32)</td>
+<td>integer</td>
 <td>Total number of results found.</td>
 </tr>
 </tbody>
@@ -13525,12 +13531,12 @@ To perform this request, you must be authenticated via one of the following meth
 </tr>
 <tr>
 <td>» game_id</td>
-<td>integer(int32)</td>
+<td>integer</td>
 <td>Unique game id.</td>
 </tr>
 <tr>
 <td>» mod_id</td>
-<td>integer(int32)</td>
+<td>integer</td>
 <td>Unique mod id.</td>
 </tr>
 <tr>
@@ -13540,27 +13546,27 @@ To perform this request, you must be authenticated via one of the following meth
 </tr>
 <tr>
 <td>» date_added</td>
-<td>integer(int32)</td>
+<td>integer</td>
 <td>Unix timestamp of date rating was submitted.</td>
 </tr>
 <tr>
 <td>result_count</td>
-<td>integer(int32)</td>
+<td>integer</td>
 <td>Number of results returned in this request.</td>
 </tr>
 <tr>
 <td>result_offset</td>
-<td>integer(int32)</td>
+<td>integer</td>
 <td>Number of results skipped over. Defaults to 0 unless overridden by <code>_offset</code> filter.</td>
 </tr>
 <tr>
 <td>result_limit</td>
-<td>integer(int32)</td>
+<td>integer</td>
 <td>Maximum number of results returned in the request. Defaults to 100 (max) unless overridden by <code>_limit</code> filter.</td>
 </tr>
 <tr>
 <td>result_total</td>
-<td>integer(int32)</td>
+<td>integer</td>
 <td>Total number of results found.</td>
 </tr>
 </tbody>
@@ -13586,22 +13592,22 @@ To perform this request, you must be authenticated via one of the following meth
 <tbody>
 <tr>
 <td>id</td>
-<td>integer(int32)</td>
+<td>integer</td>
 <td>Unique id of the event object.</td>
 </tr>
 <tr>
 <td>mod_id</td>
-<td>integer(int32)</td>
+<td>integer</td>
 <td>Unique id of the parent mod.</td>
 </tr>
 <tr>
 <td>user_id</td>
-<td>integer(int32)</td>
+<td>integer</td>
 <td>Unique id of the user who performed the action.</td>
 </tr>
 <tr>
 <td>date_added</td>
-<td>integer(int32)</td>
+<td>integer</td>
 <td>Unix timestamp of date the event occurred.</td>
 </tr>
 <tr>
@@ -13633,27 +13639,27 @@ To perform this request, you must be authenticated via one of the following meth
 <tbody>
 <tr>
 <td>id</td>
-<td>integer(int32)</td>
+<td>integer</td>
 <td>Unique id of the event object.</td>
 </tr>
 <tr>
 <td>game_id</td>
-<td>integer(int32)</td>
+<td>integer</td>
 <td>Unique id of the parent game.</td>
 </tr>
 <tr>
 <td>mod_id</td>
-<td>integer(int32)</td>
+<td>integer</td>
 <td>Unique id of the parent mod.</td>
 </tr>
 <tr>
 <td>user_id</td>
-<td>integer(int32)</td>
+<td>integer</td>
 <td>Unique id of the user who performed the action.</td>
 </tr>
 <tr>
 <td>date_added</td>
-<td>integer(int32)</td>
+<td>integer</td>
 <td>Unix timestamp of date the event occurred.</td>
 </tr>
 <tr>
@@ -13702,12 +13708,12 @@ To perform this request, you must be authenticated via one of the following meth
 <tbody>
 <tr>
 <td>id</td>
-<td>integer(int32)</td>
+<td>integer</td>
 <td>Unique id of the comment.</td>
 </tr>
 <tr>
 <td>mod_id</td>
-<td>integer(int32)</td>
+<td>integer</td>
 <td>Unique id of the parent mod.</td>
 </tr>
 <tr>
@@ -13717,7 +13723,7 @@ To perform this request, you must be authenticated via one of the following meth
 </tr>
 <tr>
 <td>» id</td>
-<td>integer(int32)</td>
+<td>integer</td>
 <td>Unique id of the user.</td>
 </tr>
 <tr>
@@ -13732,7 +13738,7 @@ To perform this request, you must be authenticated via one of the following meth
 </tr>
 <tr>
 <td>» date_online</td>
-<td>integer(int32)</td>
+<td>integer</td>
 <td>Unix timestamp of date the user was last online.</td>
 </tr>
 <tr>
@@ -13777,12 +13783,12 @@ To perform this request, you must be authenticated via one of the following meth
 </tr>
 <tr>
 <td>date_added</td>
-<td>integer(int32)</td>
+<td>integer</td>
 <td>Unix timestamp of date the comment was posted.</td>
 </tr>
 <tr>
 <td>reply_id</td>
-<td>integer(int32)</td>
+<td>integer</td>
 <td>Id of the parent comment this comment is replying to (can be 0 if the comment is not a reply).</td>
 </tr>
 <tr>
@@ -13792,12 +13798,12 @@ To perform this request, you must be authenticated via one of the following meth
 </tr>
 <tr>
 <td>karma</td>
-<td>integer(int32)</td>
+<td>integer</td>
 <td>Karma received for the comment (can be postive or negative).</td>
 </tr>
 <tr>
 <td>karma_guest</td>
-<td>integer(int32)</td>
+<td>integer</td>
 <td>Karma received for guest comments (can be postive or negative).</td>
 </tr>
 <tr>
@@ -13825,12 +13831,12 @@ To perform this request, you must be authenticated via one of the following meth
 <tbody>
 <tr>
 <td>mod_id</td>
-<td>integer(int32)</td>
+<td>integer</td>
 <td>Unique id of the mod that is the dependency.</td>
 </tr>
 <tr>
 <td>date_added</td>
-<td>integer(int32)</td>
+<td>integer</td>
 <td>Unix timestamp of date the dependency was added.</td>
 </tr>
 </tbody>
@@ -13912,32 +13918,32 @@ To perform this request, you must be authenticated via one of the following meth
 <tbody>
 <tr>
 <td>id</td>
-<td>integer(int32)</td>
+<td>integer</td>
 <td>Unique modfile id.</td>
 </tr>
 <tr>
 <td>mod_id</td>
-<td>integer(int32)</td>
+<td>integer</td>
 <td>Unique mod id.</td>
 </tr>
 <tr>
 <td>date_added</td>
-<td>integer(int32)</td>
+<td>integer</td>
 <td>Unix timestamp of date file was added.</td>
 </tr>
 <tr>
 <td>date_scanned</td>
-<td>integer(int32)</td>
+<td>integer</td>
 <td>Unix timestamp of date file was virus scanned.</td>
 </tr>
 <tr>
 <td>virus_status</td>
-<td>integer(int32)</td>
+<td>integer</td>
 <td>Current virus scan status of the file. For newly added files that have yet to be scanned this field will change frequently until a scan is complete:<br><br><strong>0</strong> = Not scanned<br><strong>1</strong> = Scan complete<br><strong>2</strong> = In progress<br><strong>3</strong> = Too large to scan<br><strong>4</strong> = File not found<br><strong>5</strong> = Error Scanning</td>
 </tr>
 <tr>
 <td>virus_positive</td>
-<td>integer(int32)</td>
+<td>integer</td>
 <td>Was a virus detected:<br><br><strong>0</strong> = No threats detected<br><strong>1</strong> = Flagged as malicious</td>
 </tr>
 <tr>
@@ -13947,7 +13953,7 @@ To perform this request, you must be authenticated via one of the following meth
 </tr>
 <tr>
 <td>filesize</td>
-<td>integer(int32)</td>
+<td>integer</td>
 <td>Size of the file in bytes.</td>
 </tr>
 <tr>
@@ -14163,22 +14169,22 @@ To perform this request, you must be authenticated via one of the following meth
 <tbody>
 <tr>
 <td>id</td>
-<td>integer(int32)</td>
+<td>integer</td>
 <td>Unique mod id.</td>
 </tr>
 <tr>
 <td>game_id</td>
-<td>integer(int32)</td>
+<td>integer</td>
 <td>Unique game id.</td>
 </tr>
 <tr>
 <td>status</td>
-<td>integer(int32)</td>
+<td>integer</td>
 <td>Status of the mod (see <a href="#status-amp-visibility">status and visibility</a> for details):<br><br><strong>0</strong> = Not Accepted<br><strong>1</strong> = Accepted<br><strong>2</strong> = Archived (potentially out of date or incompatible)<br><strong>3</strong> = Deleted</td>
 </tr>
 <tr>
 <td>visible</td>
-<td>integer(int32)</td>
+<td>integer</td>
 <td>Visibility of the mod (see <a href="#status-amp-visibility">status and visibility</a> for details):<br><br><strong>0</strong> = Hidden<br><strong>1</strong> = Public</td>
 </tr>
 <tr>
@@ -14188,7 +14194,7 @@ To perform this request, you must be authenticated via one of the following meth
 </tr>
 <tr>
 <td>» id</td>
-<td>integer(int32)</td>
+<td>integer</td>
 <td>Unique id of the user.</td>
 </tr>
 <tr>
@@ -14203,7 +14209,7 @@ To perform this request, you must be authenticated via one of the following meth
 </tr>
 <tr>
 <td>» date_online</td>
-<td>integer(int32)</td>
+<td>integer</td>
 <td>Unix timestamp of date the user was last online.</td>
 </tr>
 <tr>
@@ -14248,22 +14254,22 @@ To perform this request, you must be authenticated via one of the following meth
 </tr>
 <tr>
 <td>date_added</td>
-<td>integer(int32)</td>
+<td>integer</td>
 <td>Unix timestamp of date mod was registered.</td>
 </tr>
 <tr>
 <td>date_updated</td>
-<td>integer(int32)</td>
+<td>integer</td>
 <td>Unix timestamp of date mod was updated.</td>
 </tr>
 <tr>
 <td>date_live</td>
-<td>integer(int32)</td>
+<td>integer</td>
 <td>Unix timestamp of date mod was set live.</td>
 </tr>
 <tr>
 <td>maturity_option</td>
-<td>integer(int32)</td>
+<td>integer</td>
 <td>Maturity options flagged by the mod developer, this is only relevant if the parent game allows mods to be labelled as mature.<br><br><strong>0</strong> = None set <em>(default)</em><br><strong>1</strong> = Alcohol<br><strong>2</strong> = Drugs<br><strong>4</strong> = Violence<br><strong>8</strong> = Explicit<br><strong>?</strong> = Add the options you want together, to enable multiple filters (see <a href="#bitwise-and-bitwise-and">BITWISE fields</a>)</td>
 </tr>
 <tr>
@@ -14381,32 +14387,32 @@ To perform this request, you must be authenticated via one of the following meth
 </tr>
 <tr>
 <td>» id</td>
-<td>integer(int32)</td>
+<td>integer</td>
 <td>Unique modfile id.</td>
 </tr>
 <tr>
 <td>» mod_id</td>
-<td>integer(int32)</td>
+<td>integer</td>
 <td>Unique mod id.</td>
 </tr>
 <tr>
 <td>» date_added</td>
-<td>integer(int32)</td>
+<td>integer</td>
 <td>Unix timestamp of date file was added.</td>
 </tr>
 <tr>
 <td>» date_scanned</td>
-<td>integer(int32)</td>
+<td>integer</td>
 <td>Unix timestamp of date file was virus scanned.</td>
 </tr>
 <tr>
 <td>» virus_status</td>
-<td>integer(int32)</td>
+<td>integer</td>
 <td>Current virus scan status of the file. For newly added files that have yet to be scanned this field will change frequently until a scan is complete:<br><br><strong>0</strong> = Not scanned<br><strong>1</strong> = Scan complete<br><strong>2</strong> = In progress<br><strong>3</strong> = Too large to scan<br><strong>4</strong> = File not found<br><strong>5</strong> = Error Scanning</td>
 </tr>
 <tr>
 <td>» virus_positive</td>
-<td>integer(int32)</td>
+<td>integer</td>
 <td>Was a virus detected:<br><br><strong>0</strong> = No threats detected<br><strong>1</strong> = Flagged as malicious</td>
 </tr>
 <tr>
@@ -14416,7 +14422,7 @@ To perform this request, you must be authenticated via one of the following meth
 </tr>
 <tr>
 <td>» filesize</td>
-<td>integer(int32)</td>
+<td>integer</td>
 <td>Size of the file in bytes.</td>
 </tr>
 <tr>
@@ -14471,47 +14477,47 @@ To perform this request, you must be authenticated via one of the following meth
 </tr>
 <tr>
 <td>» mod_id</td>
-<td>integer(int32)</td>
+<td>integer</td>
 <td>Unique mod id.</td>
 </tr>
 <tr>
 <td>» popularity_rank_position</td>
-<td>integer(int32)</td>
+<td>integer</td>
 <td>Current rank of the mod.</td>
 </tr>
 <tr>
 <td>» popularity_rank_total_mods</td>
-<td>integer(int32)</td>
+<td>integer</td>
 <td>Number of ranking spots the current rank is measured against.</td>
 </tr>
 <tr>
 <td>» downloads_total</td>
-<td>integer(int32)</td>
+<td>integer</td>
 <td>Number of total mod downloads.</td>
 </tr>
 <tr>
 <td>» subscribers_total</td>
-<td>integer(int32)</td>
+<td>integer</td>
 <td>Number of total users who have subscribed to the mod.</td>
 </tr>
 <tr>
 <td>» ratings_total</td>
-<td>integer(int32)</td>
+<td>integer</td>
 <td>Number of times this item has been rated.</td>
 </tr>
 <tr>
 <td>» ratings_positive</td>
-<td>integer(int32)</td>
+<td>integer</td>
 <td>Number of positive ratings.</td>
 </tr>
 <tr>
 <td>» ratings_negative</td>
-<td>integer(int32)</td>
+<td>integer</td>
 <td>Number of negative ratings.</td>
 </tr>
 <tr>
 <td>» ratings_percentage_positive</td>
-<td>integer(int32)</td>
+<td>integer</td>
 <td>Number of positive ratings, divided by the total ratings to determine it’s percentage score.</td>
 </tr>
 <tr>
@@ -14526,7 +14532,7 @@ To perform this request, you must be authenticated via one of the following meth
 </tr>
 <tr>
 <td>» date_expires</td>
-<td>integer(int32)</td>
+<td>integer</td>
 <td>Unix timestamp until this mods's statistics are considered stale.</td>
 </tr>
 <tr>
@@ -14558,7 +14564,7 @@ To perform this request, you must be authenticated via one of the following meth
 </tr>
 <tr>
 <td>» date_added</td>
-<td>integer(int32)</td>
+<td>integer</td>
 <td>Unix timestamp of date tag was applied.</td>
 </tr>
 </tbody>
@@ -14646,7 +14652,7 @@ To perform this request, you must be authenticated via one of the following meth
 </tr>
 <tr>
 <td>date_added</td>
-<td>integer(int32)</td>
+<td>integer</td>
 <td>Unix timestamp of date tag was applied.</td>
 </tr>
 </tbody>
@@ -14729,12 +14735,12 @@ To perform this request, you must be authenticated via one of the following meth
 <tbody>
 <tr>
 <td>id</td>
-<td>integer(int32)</td>
+<td>integer</td>
 <td>Unique game id.</td>
 </tr>
 <tr>
 <td>status</td>
-<td>integer(int32)</td>
+<td>integer</td>
 <td>Status of the game (see <a href="#status-amp-visibility">status and visibility</a> for details):<br><br><strong>0</strong> = Not Accepted<br><strong>1</strong> = Accepted<br><strong>2</strong> = Archived (potentially out of date or incompatible)<br><strong>3</strong> = Deleted</td>
 </tr>
 <tr>
@@ -14744,7 +14750,7 @@ To perform this request, you must be authenticated via one of the following meth
 </tr>
 <tr>
 <td>» id</td>
-<td>integer(int32)</td>
+<td>integer</td>
 <td>Unique id of the user.</td>
 </tr>
 <tr>
@@ -14759,7 +14765,7 @@ To perform this request, you must be authenticated via one of the following meth
 </tr>
 <tr>
 <td>» date_online</td>
-<td>integer(int32)</td>
+<td>integer</td>
 <td>Unix timestamp of date the user was last online.</td>
 </tr>
 <tr>
@@ -14804,52 +14810,52 @@ To perform this request, you must be authenticated via one of the following meth
 </tr>
 <tr>
 <td>date_added</td>
-<td>integer(int32)</td>
+<td>integer</td>
 <td>Unix timestamp of date game was registered.</td>
 </tr>
 <tr>
 <td>date_updated</td>
-<td>integer(int32)</td>
+<td>integer</td>
 <td>Unix timestamp of date game was updated.</td>
 </tr>
 <tr>
 <td>date_live</td>
-<td>integer(int32)</td>
+<td>integer</td>
 <td>Unix timestamp of date game was set live.</td>
 </tr>
 <tr>
 <td>presentation_option</td>
-<td>integer(int32)</td>
+<td>integer</td>
 <td>Presentation style used on the mod.io website:<br><br><strong>0</strong> =  Grid View: Displays mods in a grid<br><strong>1</strong> = Table View: Displays mods in a table</td>
 </tr>
 <tr>
 <td>submission_option</td>
-<td>integer(int32)</td>
+<td>integer</td>
 <td>Submission process modders must follow:<br><br><strong>0</strong> = Mod uploads must occur via the API using a tool created by the game developers<br><strong>1</strong> = Mod uploads can occur from anywhere, including the website and API</td>
 </tr>
 <tr>
 <td>curation_option</td>
-<td>integer(int32)</td>
+<td>integer</td>
 <td>Curation process used to approve mods:<br><br><strong>0</strong> = No curation: Mods are immediately available to play<br><strong>1</strong> = Paid curation: Mods are immediately available to play unless they choose to receive donations. These mods must be accepted to be listed<br><strong>2</strong> = Full curation: All mods must be accepted by someone to be listed</td>
 </tr>
 <tr>
 <td>community_options</td>
-<td>integer(int32)</td>
+<td>integer</td>
 <td>Community features enabled on the mod.io website:<br><br><strong>0</strong> = All of the options below are disabled<br><strong>1</strong> = Discussion board enabled<br><strong>2</strong> = Guides and news enabled<br><strong>?</strong> = Add the options you want together, to enable multiple features (see <a href="#bitwise-and-bitwise-and">BITWISE fields</a>)</td>
 </tr>
 <tr>
 <td>revenue_options</td>
-<td>integer(int32)</td>
+<td>integer</td>
 <td>Revenue capabilities mods can enable:<br><br><strong>0</strong> = All of the options below are disabled<br><strong>1</strong> = Allow mods to be sold<br><strong>2</strong> = Allow mods to receive donations<br><strong>4</strong> = Allow mods to be traded<br><strong>8</strong> = Allow mods to control supply and scarcity<br><strong>?</strong> = Add the options you want together, to enable multiple features (see <a href="#bitwise-and-bitwise-and">BITWISE fields</a>)</td>
 </tr>
 <tr>
 <td>api_access_options</td>
-<td>integer(int32)</td>
+<td>integer</td>
 <td>Level of API access allowed by this game:<br><br><strong>0</strong> = All of the options below are disabled<br><strong>1</strong> = Allow 3rd parties to access this games API endpoints<br><strong>2</strong> = Allow mods to be downloaded directly (if disabled all download URLs will contain a frequently changing verification hash to stop unauthorized use)<br><strong>?</strong> = Add the options you want together, to enable multiple features (see <a href="#bitwise-and-bitwise-and">BITWISE fields</a>)</td>
 </tr>
 <tr>
 <td>maturity_options</td>
-<td>integer(int32)</td>
+<td>integer</td>
 <td>Switch to allow developers to select if they flag their mods as containing mature content:<br><br><strong>0</strong> = Don't allow <em>(default)</em><br><strong>1</strong> = Allow</td>
 </tr>
 <tr>
@@ -15036,7 +15042,7 @@ To perform this request, you must be authenticated via one of the following meth
 <tbody>
 <tr>
 <td>code</td>
-<td>integer(int32)</td>
+<td>integer</td>
 <td>HTTP Response Code.</td>
 </tr>
 <tr>
@@ -15066,12 +15072,12 @@ To perform this request, you must be authenticated via one of the following meth
 <tbody>
 <tr>
 <td>game_id</td>
-<td>integer(int32)</td>
+<td>integer</td>
 <td>Unique game id.</td>
 </tr>
 <tr>
 <td>mod_id</td>
-<td>integer(int32)</td>
+<td>integer</td>
 <td>Unique mod id.</td>
 </tr>
 <tr>
@@ -15081,7 +15087,7 @@ To perform this request, you must be authenticated via one of the following meth
 </tr>
 <tr>
 <td>date_added</td>
-<td>integer(int32)</td>
+<td>integer</td>
 <td>Unix timestamp of date rating was submitted.</td>
 </tr>
 </tbody>
@@ -15114,47 +15120,47 @@ To perform this request, you must be authenticated via one of the following meth
 <tbody>
 <tr>
 <td>mod_id</td>
-<td>integer(int32)</td>
+<td>integer</td>
 <td>Unique mod id.</td>
 </tr>
 <tr>
 <td>popularity_rank_position</td>
-<td>integer(int32)</td>
+<td>integer</td>
 <td>Current rank of the mod.</td>
 </tr>
 <tr>
 <td>popularity_rank_total_mods</td>
-<td>integer(int32)</td>
+<td>integer</td>
 <td>Number of ranking spots the current rank is measured against.</td>
 </tr>
 <tr>
 <td>downloads_total</td>
-<td>integer(int32)</td>
+<td>integer</td>
 <td>Number of total mod downloads.</td>
 </tr>
 <tr>
 <td>subscribers_total</td>
-<td>integer(int32)</td>
+<td>integer</td>
 <td>Number of total users who have subscribed to the mod.</td>
 </tr>
 <tr>
 <td>ratings_total</td>
-<td>integer(int32)</td>
+<td>integer</td>
 <td>Number of times this item has been rated.</td>
 </tr>
 <tr>
 <td>ratings_positive</td>
-<td>integer(int32)</td>
+<td>integer</td>
 <td>Number of positive ratings.</td>
 </tr>
 <tr>
 <td>ratings_negative</td>
-<td>integer(int32)</td>
+<td>integer</td>
 <td>Number of negative ratings.</td>
 </tr>
 <tr>
 <td>ratings_percentage_positive</td>
-<td>integer(int32)</td>
+<td>integer</td>
 <td>Number of positive ratings, divided by the total ratings to determine it’s percentage score.</td>
 </tr>
 <tr>
@@ -15169,7 +15175,7 @@ To perform this request, you must be authenticated via one of the following meth
 </tr>
 <tr>
 <td>date_expires</td>
-<td>integer(int32)</td>
+<td>integer</td>
 <td>Unix timestamp until this mods's statistics are considered stale.</td>
 </tr>
 </tbody>
@@ -15209,7 +15215,7 @@ To perform this request, you must be authenticated via one of the following meth
 <tbody>
 <tr>
 <td>id</td>
-<td>integer(int32)</td>
+<td>integer</td>
 <td>Unique team member id.</td>
 </tr>
 <tr>
@@ -15219,7 +15225,7 @@ To perform this request, you must be authenticated via one of the following meth
 </tr>
 <tr>
 <td>» id</td>
-<td>integer(int32)</td>
+<td>integer</td>
 <td>Unique id of the user.</td>
 </tr>
 <tr>
@@ -15234,7 +15240,7 @@ To perform this request, you must be authenticated via one of the following meth
 </tr>
 <tr>
 <td>» date_online</td>
-<td>integer(int32)</td>
+<td>integer</td>
 <td>Unix timestamp of date the user was last online.</td>
 </tr>
 <tr>
@@ -15279,12 +15285,12 @@ To perform this request, you must be authenticated via one of the following meth
 </tr>
 <tr>
 <td>level</td>
-<td>integer(int32)</td>
+<td>integer</td>
 <td>Level of permission the user has:<br><br><strong>1</strong> = Moderator (can moderate comments and content attached)<br><strong>4</strong> = Creator (moderator access, including uploading builds and edit all settings except supply and team members)<br><strong>8</strong> = Administrator (full access, including editing the supply and team)</td>
 </tr>
 <tr>
 <td>date_added</td>
-<td>integer(int32)</td>
+<td>integer</td>
 <td>Unix timestamp of the date the user was added to the team.</td>
 </tr>
 <tr>
@@ -15323,7 +15329,7 @@ To perform this request, you must be authenticated via one of the following meth
 <tbody>
 <tr>
 <td>id</td>
-<td>integer(int32)</td>
+<td>integer</td>
 <td>Unique id of the user.</td>
 </tr>
 <tr>
@@ -15338,7 +15344,7 @@ To perform this request, you must be authenticated via one of the following meth
 </tr>
 <tr>
 <td>date_online</td>
-<td>integer(int32)</td>
+<td>integer</td>
 <td>Unix timestamp of date the user was last online.</td>
 </tr>
 <tr>
