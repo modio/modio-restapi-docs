@@ -2239,12 +2239,6 @@ Content-Type: application/x-www-form-urlencoded
 <td>Choose the level of API access your game allows:<br><br><strong>0</strong> = All of the options below are disabled<br><br><strong>1</strong> = Allow 3rd parties to access this games API endpoints. We recommend you enable this feature, an open API will encourage a healthy ecosystem of tools and apps. If you do not enable this feature, your <code>/games/{games-id}</code> endpoints will return <code>403 Forbidden</code> unless you are a member of the games team or using the games <code>api_key</code><br><br><strong>2</strong> = Allow mods to be downloaded directly (makes implementation easier for you, game servers and services because you can save, share and reuse download URLs). If disabled all download URLs will contain a frequently changing verification hash to stop unauthorized use<br><br><strong>?</strong> = Add the options you want together, to enable multiple features (see <a href="#bitwise-and-bitwise-and">BITWISE fields</a>)</td>
 </tr>
 <tr>
-<td>api_steam_ticket</td>
-<td>string</td>
-<td></td>
-<td>Your game's secret encrypted app ticket key for Steam - this can be found under <em>Security &gt; SDK auth</em> on your game's <a href="#https://partner.steamgames.com/">Steamworks settings</a>. This field is required if you wish to use the <a href="#authenticate-via-steam">Authenticate via Steam</a> endpoint.</td>
-</tr>
-<tr>
 <td>maturity_options</td>
 <td>integer</td>
 <td></td>
