@@ -71,7 +71,7 @@ Authentication can be done via 3 ways:
 - Manually create an [OAuth 2 Access Token (Read + Write Access)](https://mod.io/oauth/widget)
 - Use our [Email Authentication Flow](#email-authentication-flow) (to create an OAuth 2 Access Token with Read + Write Access) 
 
-You can use these methods of authentication interchangably, depending on the level of access you require.
+You can use these methods of authentication interchangeably, depending on the level of access you require.
 
 Authentication Type | In | HTTP Methods | Abilities | Purpose
 ---------- | ---------- | ---------- | ---------- | ---------- 
@@ -110,7 +110,8 @@ curl -X POST https://api.mod.io/v1/oauth/emailrequest \
 
 Request a `security_code` be sent to the email address of the user you wish to authenticate: 
 
-`POST /oauth/emailrequest`
+
+`POST /oauth/emailrequest`
 
 Parameter | Value
 ---------- | ----------  
@@ -139,7 +140,8 @@ curl -X POST https://api.mod.io/v1/oauth/emailexchange \
 }
 ```
 
-`POST /oauth/emailexchange`
+
+`POST /oauth/emailexchange`
 
 Parameter | Value
 ---------- | ----------  
@@ -517,7 +519,7 @@ Full-text search is a lenient search filter that _is only available_ if the endp
 v1/games?id=10
 ```
 
-The simpliest filter you can apply is `columnname` equals. This will return all rows which contain a column matching the value provided. 
+The simplest filter you can apply is `columnname` equals. This will return all rows which contain a column matching the value provided. 
 
 - `?id=10` - Get all results where the `id` column value is _10_.
 
@@ -743,7 +745,7 @@ __Test site:__ [https://test.mod.io](https://test.mod.io)
 
 __Test API path:__ [https://api.test.mod.io/v1](https://api.test.mod.io/v1)
 
-__NOTE__: We periodically reset the test environment to default - with the exception of user accounts so please do not rely on it to store important information. Any data you intend on peristing should be submitted to the production environment.
+__NOTE__: We periodically reset the test environment to default - with the exception of user accounts so please do not rely on it to store important information. Any data you intend on persisting should be submitted to the production environment.
 
 ## Whitelabel
 
@@ -1234,7 +1236,7 @@ Update details for a game. If you want to update the `icon`, `logo` or `header` 
     instructions_url|string||Link to a mod.io guide, your modding wiki or a page where modders can learn how to make and submit mods to your games profile.
     ugc_name|string||Word used to describe user-generated content (mods, items, addons etc).
     presentation_option|integer||Choose the presentation style you want on the mod.io website:<br><br>__0__ =  Grid View: Displays mods in a grid (visual but less informative, default setting) <br>__1__ = Table View: Displays mods in a table (easier to browse)
-    submission_option|integer||Choose the submission process you want modders to follow:<br><br>__0__ = Mods must be uploaded using your tools (recommended): You will have to build an upload system either in-game or via a standalone tool, which enables creators to submit mods to the tags you have configured. Because you control the flow you can prevalidate and compile mods, to ensure they will work in your game and attach metadata about what settings the mod can change. In the long run this option will save you time as you can accept more submissions, but it requires more setup to get running and isn't as open as the above option. __NOTE:__ mod profiles can still be [created online](https://mod.io/mods/add), but uploads will have to occur via the API using tools you create.<br><br>__1__ = Mods can be uploaded using the website: Allow developers to upload mods via the website and API, and pick the tags their mod is built for. No validation will be done on the files submitted, it will be the responsibility of your game and apps to process the mods installation based on the tags selected and determine if the mod is valid and works. For example a mod might be uploaded with the 'map' tag. When a user subscribes to this mod, your game will need to verify it contains a map file and install it where maps are located. If this fails, your game or the community will have to flag the mod as 'incompatible' to remove it from the listing.
+    submission_option|integer||Choose the submission process you want modders to follow:<br><br>__0__ = Mods must be uploaded using your tools (recommended): You will have to build an upload system either in-game or via a standalone tool, which enables creators to submit mods to the tags you have configured. Because you control the flow you can pre-validate and compile mods, to ensure they will work in your game and attach metadata about what settings the mod can change. In the long run this option will save you time as you can accept more submissions, but it requires more setup to get running and isn't as open as the above option. __NOTE:__ mod profiles can still be [created online](https://mod.io/mods/add), but uploads will have to occur via the API using tools you create.<br><br>__1__ = Mods can be uploaded using the website: Allow developers to upload mods via the website and API, and pick the tags their mod is built for. No validation will be done on the files submitted, it will be the responsibility of your game and apps to process the mods installation based on the tags selected and determine if the mod is valid and works. For example a mod might be uploaded with the 'map' tag. When a user subscribes to this mod, your game will need to verify it contains a map file and install it where maps are located. If this fails, your game or the community will have to flag the mod as 'incompatible' to remove it from the listing.
     curation_option|integer||Choose the curation process your team follows to approve mods:<br><br>__0__ = No curation (recommended): Mods are immediately available to play, without any intervention or work from your team.<br><br>__1__ = Paid curation: Screen only mods the creator wants to sell, before they are available to receive donations or be purchased via the API.<br><br>__2__ = Full curation: All mods must be accepted by someone on your team. This option is useful for games that have a small number of mods and want to control the experience, or you need to set the parameters attached to a mod (i.e. a weapon may require the rate of fire, power level, clip size etc). It can also be used for complex mods, which you may need to build into your game or distribute as DLC.
     community_options|integer||Choose the community features enabled on the mod.io website:<br><br>__0__ = All of the options below are disabled<br>__1__ = Discussion board enabled<br>__2__ = Guides and news enabled<br>__?__ = Add the options you want together, to enable multiple features (see [BITWISE fields](#bitwise-and-bitwise-and))
     revenue_options|integer||Choose the revenue capabilities mods can enable:<br><br>__0__ = All of the options below are disabled<br>__1__ = Allow mods to be sold<br>__2__ = Allow mods to receive donations<br>__4__ = Allow mods to be traded (not subject to revenue share)<br>__8__ = Allow mods to control supply and scarcity<br>__?__ = Add the options you want together, to enable multiple features (see [BITWISE fields](#bitwise-and-bitwise-and))
@@ -1885,7 +1887,7 @@ Add a mod. Successful request will return the newly created [Mod Object](#mod-ob
     summary|string|true|Summary for your mod, giving a brief overview of what it's about. Cannot exceed 250 characters.
     description|string||Detailed description for your mod, which can include details such as 'About', 'Features', 'Install Instructions', 'FAQ', etc. HTML supported and encouraged.
     homepage_url|string||Official homepage for your mod. Must be a valid URL.
-    stock|integer||Maximium number of subscribers for this mod. A value of 0 disables this limit.
+    stock|integer||Maximum number of subscribers for this mod. A value of 0 disables this limit.
     maturity_option|integer||Choose if this mod contains any of the following mature content. Note: The value of this field will default to 0 unless the parent game allows you to flag mature content (see `maturity_options` field in [Game Object](#game-object)). <br><br>__0__ = None set _(default)_<br>__1__ = Alcohol<br>__2__ = Drugs<br>__4__ = Violence<br>__8__ = Explicit<br>__?__ = Add the options you want together, to enable multiple options (see [BITWISE fields](#bitwise-and-bitwise-and))
     metadata_blob|string||Metadata stored by the game developer which may include properties as to how the item works, or other information you need to display. Metadata can also be stored as searchable [key value pairs](#metadata), and to individual [mod files](#get-all-modfiles).
     tags|string[]||An array of strings that represent what the mod has been tagged as. Only tags that are supported by the parent game can be applied. To determine what tags are eligible, see the tags values within `tag_options` column on the parent [Game Object](#game-object).
@@ -2122,7 +2124,7 @@ Edit details for a mod. If you want to update the `logo` or media associated wit
     summary|string||Summary for your mod, giving a brief overview of what it's about. Cannot exceed 250 characters.
     description|string||Detailed description for your mod, which can include details such as 'About', 'Features', 'Install Instructions', 'FAQ', etc. HTML supported and encouraged.
     homepage_url|string||Official homepage for your mod. Must be a valid URL.
-    stock|integer||Maximium number of subscribers for this mod. A value of 0 disables this limit.
+    stock|integer||Maximum number of subscribers for this mod. A value of 0 disables this limit.
     maturity_option|integer||Choose if this mod contains any of the following mature content. Note: The value of this field will default to 0 unless the parent game allows you to flag mature content (see `maturity_options` field in [Game Object](#game-object)). <br><br>__0__ = None set _(default)_<br>__1__ = Alcohol<br>__2__ = Drugs<br>__4__ = Violence<br>__8__ = Explicit<br>__?__ = Add the options you want together, to enable multiple options (see [BITWISE fields](#bitwise-and-bitwise-and))
     metadata_blob|string||Metadata stored by the game developer which may include properties as to how the item works, or other information you need to display. Metadata can also be stored as searchable [key value pairs](#metadata), and to individual [mod files](#get-all-modfiles).
 
@@ -3308,7 +3310,7 @@ This endpoint is very flexible and will add any images posted to the mods galler
     ---|---|---|---|
     logo|file||Image file which will represent your mods logo. Must be gif, jpg or png format and cannot exceed 8MB in filesize. Dimensions must be at least 640x360 and we recommended you supply a high resolution image with a 16 / 9 ratio. mod.io will use this logo to create three thumbnails with the dimensions of 320x180, 640x360 and 1280x720.
     images|zip||Zip archive of images to upload. Only valid gif, jpg and png images in the zip file will be processed. The filename __must be images.zip__ all other zips will be ignored. Alternatively you can POST one or more images to this endpoint and they will be detected and added to the mods gallery.
-    youtube|string[]||Full Youtube link(s) you want to add - example 'https://www.youtube.com/watch?v=IGVZOLV9SPo'
+    youtube|string[]||Full YouTube link(s) you want to add - example 'https://www.youtube.com/watch?v=IGVZOLV9SPo'
     sketchfab|string[]||Full Sketchfab link(s) you want to add - example 'https://sketchfab.com/models/71f04e390ff54e5f8d9a51b4e1caab7e'
 
 
@@ -5687,7 +5689,7 @@ System.out.println(response.toString());
 ```
 `GET /games/{game-id}/mods/{mod-id}/dependencies`
 
-Get all dependencies the chosen mod has selected.
+Get all dependencies the chosen mod has selected. This is useful if a mod requires other mods be installed for it to run. Successful request will return an array of [Mod Dependencies Objects](#get-all-mod-dependencies-2).
 
     __IMPORTANT:__ Because of the complexity of supporting nested dependencies, we recommend you treat dependencies as a recommendation for your players, and do not process dependencies automatically when installing a mod unless absolutely required. Successful request will return an array of [Mod Dependencies Objects](#mod-dependencies-object).
 
@@ -6074,7 +6076,7 @@ Get all users that are part of a mod team. Successful request will return an arr
      id|integer|Unique id of the team member record.
      user_id|integer|Unique id of the user.
      username|string|Username of the user.
-     level|integer|Level of permission the user has:<br><br>__1__ = Moderator (can moderate comments and content attached)<br>__4__ = Creator (moderator access, including uploading builds and edit all settings except supply and team members)<br>__8__ = Administrator (full access, including editing the supply and team)
+     level|integer|Level of permission the user has:<br><br>__1__ = Moderator (can moderate comments and content attached)<br>__4__ = Manager (moderator access, including uploading builds and editing settings except supply and team members)<br>__8__ = Administrator (full access, including editing the supply and team)
      date_added|integer|Unix timestamp of the date the user was added to the team.
      position|string|Custom title given to the user in this team.
 
@@ -6236,7 +6238,7 @@ Add a user to a mod team. Successful request will return [Message Object](#messa
      Parameter|Type|Required|Description
      ---|---|---|---|
      email|string|true|Email of the mod.io user you want to add to your team.
-     level|integer|true|Level of permission the user will get:<br><br>__1__ = Moderator (can moderate comments and content attached)<br>__4__ = Creator (moderator access, including uploading builds and edit all settings except supply and team members)<br>__8__ = Administrator (full access, including editing the supply and team)
+     level|integer|true|Level of permission the user will get:<br><br>__1__ = Moderator (can moderate comments and content attached)<br>__4__ = Manager (moderator access, including uploading builds and editing settings except supply and team members)<br>__8__ = Administrator (full access, including editing the supply and team)
      position|string||Title of the users position. For example: 'Team Leader', 'Artist'.
 
 
@@ -6368,7 +6370,7 @@ Update a mod team members details. Successful request will return a [Message Obj
 
      Parameter|Type|Required|Description
      ---|---|---|---|
-     level|integer||Level of permission the user should have:<br><br>__1__ = Moderator (can moderate comments and content attached)<br>__4__ = Creator (moderator access, including uploading builds and edit all settings except supply and team members)<br>__8__ = Administrator (full access, including editing the supply and team)
+     level|integer||Level of permission the user should have:<br><br>__1__ = Moderator (can moderate comments and content attached)<br>__4__ = Manager (moderator access, including uploading builds and editing settings except supply and team members)<br>__8__ = Administrator (full access, including editing the supply and team)
      position|string||Title of the users position. For example: 'Team Leader', 'Artist'.
 
 
@@ -7419,7 +7421,7 @@ Submit a report for any resource on mod.io. Successful request will return [Mess
      id|integer|true|Unique id of the resource you are reporting.
      type|integer|true|The type of report you are submitting. Must be one of the following values:<br><br>__0__ = Generic Report<br>__1__ = DMCA Report
      name|string|true|Informative title for your report.
-     summary|string|true|Detailed description of your report. Make sure you include all relevant information and links to help moderators investigate and respond appropiately.
+     summary|string|true|Detailed description of your report. Make sure you include all relevant information and links to help moderators investigate and respond appropriately.
 
 
 > Example response
@@ -9598,7 +9600,7 @@ data|[Mod Object   ](#schemamod_object)[]|Array containing mod objects.
 »» ratings_percentage_positive|integer|Number of positive ratings, divided by the total ratings to determine it’s percentage score.
 »» ratings_weighted_aggregate|float|Overall rating of this item calculated using the [Wilson score confidence interval](https://www.evanmiller.org/how-not-to-sort-by-average-rating.html). This column is good to sort on, as it will order items based on number of ratings and will place items with many positive ratings above those with a higher score but fewer ratings.
 »» ratings_display_text|string|Textual representation of the rating in format:<br><br>- Overwhelmingly Positive<br>- Very Positive<br>- Positive<br>- Mostly Positive<br>- Mixed<br>- Negative<br>- Mostly Negative<br>- Very Negative<br>- Overwhelmingly Negative<br>- Unrated
-»» date_expires|integer|Unix timestamp until this mods's statistics are considered stale.
+»» date_expires|integer|Unix timestamp until this mods statistics are considered stale.
 » metadata_kvp|[Metadata KVP Object  ](#schemametadata_kvp_object)[]|Contains key-value metadata.
 »» metakey|string|The key of the key-value pair.
 »» metavalue|string|The value of the key-value pair.
@@ -9662,7 +9664,7 @@ data|[Stats Object   ](#schemastats_object)[]|Array containing stats objects.
 » ratings_percentage_positive|integer|Number of positive ratings, divided by the total ratings to determine it’s percentage score.
 » ratings_weighted_aggregate|float|Overall rating of this item calculated using the [Wilson score confidence interval](https://www.evanmiller.org/how-not-to-sort-by-average-rating.html). This column is good to sort on, as it will order items based on number of ratings and will place items with many positive ratings above those with a higher score but fewer ratings.
 » ratings_display_text|string|Textual representation of the rating in format:<br><br>- Overwhelmingly Positive<br>- Very Positive<br>- Positive<br>- Mostly Positive<br>- Mixed<br>- Negative<br>- Mostly Negative<br>- Very Negative<br>- Overwhelmingly Negative<br>- Unrated
-» date_expires|integer|Unix timestamp until this mods's statistics are considered stale.
+» date_expires|integer|Unix timestamp until this mods statistics are considered stale.
 result_count|integer|Number of results returned in this request.
 result_offset|integer|Number of results skipped over. Defaults to 0 unless overridden by `_offset` filter.
 result_limit|integer|Maximum number of results returned in the request. Defaults to 100 (max) unless overridden by `_limit` filter.
@@ -9812,7 +9814,7 @@ data|[Team Member Object  ](#schemateam_member_object)[]|Array containing team m
 »» timezone|string|Timezone of the user, format is country/city.
 »» language|string|Users language preference. See [localization](#localization) for the supported languages.
 »» profile_url|string|URL to the user's mod.io profile.
-» level|integer|Level of permission the user has:<br><br>__1__ = Moderator (can moderate comments and content attached)<br>__4__ = Creator (moderator access, including uploading builds and edit all settings except supply and team members)<br>__8__ = Administrator (full access, including editing the supply and team)
+» level|integer|Level of permission the user has:<br><br>__1__ = Moderator (can moderate comments and content attached)<br>__4__ = Manager (moderator access, including uploading builds and editing settings except supply and team members)<br>__8__ = Administrator (full access, including editing the supply and team)
 » date_added|integer|Unix timestamp of the date the user was added to the team.
 » position|string|Custom title given to the user in this team.
 result_count|integer|Number of results returned in this request.
@@ -10422,7 +10424,7 @@ stats|[Stats Object   ](#schemastats_object)|Contains stats data.
 » ratings_percentage_positive|integer|Number of positive ratings, divided by the total ratings to determine it’s percentage score.
 » ratings_weighted_aggregate|float|Overall rating of this item calculated using the [Wilson score confidence interval](https://www.evanmiller.org/how-not-to-sort-by-average-rating.html). This column is good to sort on, as it will order items based on number of ratings and will place items with many positive ratings above those with a higher score but fewer ratings.
 » ratings_display_text|string|Textual representation of the rating in format:<br><br>- Overwhelmingly Positive<br>- Very Positive<br>- Positive<br>- Mostly Positive<br>- Mixed<br>- Negative<br>- Mostly Negative<br>- Very Negative<br>- Overwhelmingly Negative<br>- Unrated
-» date_expires|integer|Unix timestamp until this mods's statistics are considered stale.
+» date_expires|integer|Unix timestamp until this mods statistics are considered stale.
 metadata_kvp|[Metadata KVP Object  ](#schemametadata_kvp_object)[]|Contains key-value metadata.
 » metakey|string|The key of the key-value pair.
 » metavalue|string|The value of the key-value pair.
@@ -10731,7 +10733,7 @@ ratings_negative|integer|Number of negative ratings.
 ratings_percentage_positive|integer|Number of positive ratings, divided by the total ratings to determine it’s percentage score.
 ratings_weighted_aggregate|float|Overall rating of this item calculated using the [Wilson score confidence interval](https://www.evanmiller.org/how-not-to-sort-by-average-rating.html). This column is good to sort on, as it will order items based on number of ratings and will place items with many positive ratings above those with a higher score but fewer ratings.
 ratings_display_text|string|Textual representation of the rating in format:<br><br>- Overwhelmingly Positive<br>- Very Positive<br>- Positive<br>- Mostly Positive<br>- Mixed<br>- Negative<br>- Mostly Negative<br>- Very Negative<br>- Overwhelmingly Negative<br>- Unrated
-date_expires|integer|Unix timestamp until this mods's statistics are considered stale.
+date_expires|integer|Unix timestamp until this mods statistics are considered stale.
 
 
 
@@ -10783,7 +10785,7 @@ user|[User Object   ](#schemauser_object)|Contains user data.
 » timezone|string|Timezone of the user, format is country/city.
 » language|string|Users language preference. See [localization](#localization) for the supported languages.
 » profile_url|string|URL to the user's mod.io profile.
-level|integer|Level of permission the user has:<br><br>__1__ = Moderator (can moderate comments and content attached)<br>__4__ = Creator (moderator access, including uploading builds and edit all settings except supply and team members)<br>__8__ = Administrator (full access, including editing the supply and team)
+level|integer|Level of permission the user has:<br><br>__1__ = Moderator (can moderate comments and content attached)<br>__4__ = Manager (moderator access, including uploading builds and editing settings except supply and team members)<br>__8__ = Administrator (full access, including editing the supply and team)
 date_added|integer|Unix timestamp of the date the user was added to the team.
 position|string|Custom title given to the user in this team.
 

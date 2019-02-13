@@ -52,7 +52,7 @@ Authentication can be done via 3 ways:
 - Manually create an [OAuth 2 Access Token (Read + Write Access)](--parse_siteurl/oauth/widget)
 - Use our [Email Authentication Flow](#email-authentication-flow) (to create an OAuth 2 Access Token with Read + Write Access) 
 
-You can use these methods of authentication interchangably, depending on the level of access you require.
+You can use these methods of authentication interchangeably, depending on the level of access you require.
 
 Authentication Type | In | HTTP Methods | Abilities | Purpose
 ---------- | ---------- | ---------- | ---------- | ---------- 
@@ -500,7 +500,7 @@ Full-text search is a lenient search filter that _is only available_ if the endp
 --parse_version/games?id=10
 ```
 
-The simpliest filter you can apply is `columnname` equals. This will return all rows which contain a column matching the value provided. 
+The simplest filter you can apply is `columnname` equals. This will return all rows which contain a column matching the value provided. 
 
 - `?id=10` - Get all results where the `id` column value is _10_.
 
@@ -726,7 +726,7 @@ __Test site:__ [--parse_sitetesturl](--parse_sitetesturl)
 
 __Test API path:__ [--parse_apitesturl](--parse_apitesturl)
 
-__NOTE__: We periodically reset the test environment to default - with the exception of user accounts so please do not rely on it to store important information. Any data you intend on peristing should be submitted to the production environment.
+__NOTE__: We periodically reset the test environment to default - with the exception of user accounts so please do not rely on it to store important information. Any data you intend on persisting should be submitted to the production environment.
 
 ## Whitelabel
 
