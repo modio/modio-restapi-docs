@@ -43,13 +43,13 @@ Option | Usage | Suited for | Docs
 ---------- | ---------- | ---------- | ---------
 __API__ | For connecting directly to the mod.io REST API | Web apps that need a JSON REST API, or game developers that like a challenge and want control over their implementation. | You are reading them
 __SDK__ | Drop our [open source C/C++ SDK](https://sdk.mod.io) into your game to call mod.io functionality. | Developers that want a SDK that abstracts the uploading, downloading and unzip flows behind easy to use function calls. | [Here](https://sdk.mod.io)
-__Tools/Plugins__ | Use tools and plugins created by the community to make implementation in various engines easy. | Game developers that want a pre-built modding solution for their engine (Unity, Unreal) of choice. | [Available per tool](https://sdk.mod.io)
+__Tools/Plugins__ | Use tools, plugins and wrappers created by the community to make implementation in various engines easy. | Game developers that want a pre-built modding solution for their engine (Unity, Unreal) of choice. | [Available per tool](https://sdk.mod.io)
 
-Tools and plugins made by the mod.io team and our awesome community | - | - | -
+Tools, plugins and wrappers made by the mod.io team and our awesome community | - | - | -
 --- | --- | --- | ---
-![Unity Plugin](images/tool-unity.png) | __Unity Plugin__<br />[SDK](https://github.com/DBolical/modioUNITY)<br />[Getting Started](https://github.com/DBolical/modioUNITY/wiki)<br /> | ![C/C++ SDK](images/tool-ccpp.png) | __C/C++ SDK__<br />[SDK](https://github.com/DBolical/modioSDK)<br />[Getting Started](https://github.com/DBolical/modioSDK/wiki)<br />[Tutorials](https://github.com/DBolical/modioSDK/tree/master/examples/code-samples)<br /> 
-![Haxe Wrapper](images/tool-haxe.png) | __Haxe Wrapper__<br />[SDK](https://apps.mod.io/haxe-wrapper)<br />[Getting Started](https://github.com/Turupawn/modioHaxe#getting-started)<br />[Tutorials](https://github.com/Turupawn/modioOpenFLExample#openfl-integration)<br /> | ![Rust Wrapper](images/tool-rust.png) | __Rust Wrapper__<br />[SDK](https://crates.io/crates/modio)<br />[Getting Started](https://github.com/nickelc/modio-rs)<br />[Tutorials](https://github.com/nickelc/modio-rs/tree/master/examples)<br />
-![Python Wrapper](images/tool-python.png) | __Python Wrapper__<br />[SDK](https://github.com/ClementJ18/mod.io)<br />[Getting Started](https://github.com/ClementJ18/mod.io/#example)<br />[Tutorials](https://github.com/ClementJ18/mod.io/tree/master/examples)<br /> | 
+![Unity Plugin](images/tool-unity.png) | __Unity Plugin__<br />[SDK](https://github.com/modio/UnityPlugin)<br />[Getting Started](https://github.com/modio/UnityPlugin/wiki)<br /> | ![Unreal Plugin](images/tool-unreal.png) | __Unreal Plugin__<br />(in development)<br />[SDK](https://github.com/modio/UE4Plugin)<br />[Getting Started](https://github.com/modio/UE4Plugin/wiki)<br />
+![C/C++ SDK](images/tool-ccpp.png) | __C/C++ SDK__<br />[SDK](https://github.com/modio/SDK)<br />[Getting Started](https://github.com/modio/SDK/wiki)<br />[Tutorials](https://github.com/modio/SDK/tree/master/examples/code-samples)<br />  | ![Haxe Wrapper](images/tool-haxe.png) | __Haxe Wrapper__<br />[SDK](https://apps.mod.io/haxe-wrapper)<br />[Getting Started](https://github.com/modio/HaxeWrapper)<br />[Tutorials](https://github.com/Turupawn/modioOpenFLExample#openfl-integration)<br />
+![Rust Wrapper](images/tool-rust.png) | __Rust Wrapper__<br />[SDK](https://crates.io/crates/modio)<br />[Getting Started](https://github.com/nickelc/modio-rs)<br />[Tutorials](https://github.com/nickelc/modio-rs/tree/master/examples)<br /> | ![Python Wrapper](images/tool-python.png) | __Python Wrapper__<br />[SDK](https://github.com/ClementJ18/mod.io)<br />[Getting Started](https://github.com/ClementJ18/mod.io/#example)<br />[Tutorials](https://github.com/ClementJ18/mod.io/tree/master/examples)<br /> | 
 Want a tool added to the list? [Contact us!](mailto:developers@mod.io?subject=Publish Tool)
 
 Here is a brief list of the things to know about our API, as explained in more detail in the following sections.
@@ -6639,7 +6639,7 @@ Get all comments posted in the mods profile. Successful request will return an a
       "thread_position": "01",
       "karma": 1,
       "karma_guest": 0,
-      "content": "This mod is kickass! Great work!"
+      "content": "This mod is kick-ass! Great work!"
     },
     {
         ...
@@ -6777,7 +6777,7 @@ Get a Mod Comment. Successful request will return a single [Comment Object](#com
   "thread_position": "01",
   "karma": 1,
   "karma_guest": 0,
-  "content": "This mod is kickass! Great work!"
+  "content": "This mod is kick-ass! Great work!"
 }
 ```
 <h3 id="Get-Mod-Comment-responses">Responses</h3>
@@ -9016,7 +9016,7 @@ thumb_320x180|string|URL to the image thumbnail.
       "thread_position": "01",
       "karma": 1,
       "karma_guest": 0,
-      "content": "This mod is kickass! Great work!"
+      "content": "This mod is kick-ass! Great work!"
     },
     {
         ...
@@ -9053,8 +9053,8 @@ data|[Comment Object   ](#schemacomment_object)[]|Array containing comment objec
 » date_added|integer|Unix timestamp of date the comment was posted.
 » reply_id|integer|Id of the parent comment this comment is replying to (can be 0 if the comment is not a reply).
 » thread_position|string|Levels of nesting in a comment thread. How it works:<br><br>- The first comment will have the position '01'.<br>- The second comment will have the position '02'.<br>- If someone responds to the second comment the position will be '02.01'.<br>- A maximum of 3 levels is supported.
-» karma|integer|Karma received for the comment (can be postive or negative).
-» karma_guest|integer|Karma received for guest comments (can be postive or negative).
+» karma|integer|Karma received for the comment (can be positive or negative).
+» karma_guest|integer|Karma received for guest comments (can be positive or negative).
 » content|string|Contents of the comment.
 result_count|integer|Number of results returned in this request.
 result_offset|integer|Number of results skipped over. Defaults to 0 unless overridden by `_offset` filter.
@@ -10058,7 +10058,7 @@ event_type|string|Type of event that was triggered. List of possible events: <br
   "thread_position": "01",
   "karma": 1,
   "karma_guest": 0,
-  "content": "This mod is kickass! Great work!"
+  "content": "This mod is kick-ass! Great work!"
 } 
 ```
 
@@ -10085,8 +10085,8 @@ user|[User Object   ](#schemauser_object)|Contains user data.
 date_added|integer|Unix timestamp of date the comment was posted.
 reply_id|integer|Id of the parent comment this comment is replying to (can be 0 if the comment is not a reply).
 thread_position|string|Levels of nesting in a comment thread. How it works:<br><br>- The first comment will have the position '01'.<br>- The second comment will have the position '02'.<br>- If someone responds to the second comment the position will be '02.01'.<br>- A maximum of 3 levels is supported.
-karma|integer|Karma received for the comment (can be postive or negative).
-karma_guest|integer|Karma received for guest comments (can be postive or negative).
+karma|integer|Karma received for the comment (can be positive or negative).
+karma_guest|integer|Karma received for guest comments (can be positive or negative).
 content|string|Contents of the comment.
 
 
