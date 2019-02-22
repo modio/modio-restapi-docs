@@ -786,7 +786,7 @@
 <p>Here is a brief list of the things to know about our API, as explained in more detail in the following sections.</p>
 
 <ul>
-<li>All requests to the API <strong>must</strong> be made over HTTPS (TLS).</li>
+<li>All requests to the API must be made over HTTPS (TLS).</li>
 <li>All API responses are in <code>application/json</code> format.</li>
 <li>API keys are restricted to read-only <code>GET</code> requests.</li>
 <li>OAuth 2 access tokens are required for <code>POST</code>, <code>PUT</code> and <code>DELETE</code> requests.</li>
@@ -803,7 +803,7 @@
 </li>
 <li>Manually create an <a href="https://mod.io/oauth/widget" class="colorbox">OAuth 2 Access Token (Read + Write Access)</a>
 </li>
-<li>Use our <a href="#email-authentication-flow">Email Authentication Flow</a> (to create an OAuth 2 Access Token with Read + Write Access) </li>
+<li>Use our <a href="#email-authentication-flow">Email Authentication Flow</a> (to create an OAuth 2 Access Token with Read + Write Access)</li>
 </ul>
 
 <p>You can use these methods of authentication interchangeably, depending on the level of access you require.</p>
@@ -880,7 +880,7 @@ curl -X POST https://api.mod.io/v1/oauth/emailrequest <span class="se">\</span>
 </table>
 <h3 id="step-2-exchanging-security-code-for-access-token">Step 2: Exchanging security code for access token</h3>
 <p>After retrieving the 5-digit <code>security_code</code> sent to the email specified, you exchange it for an OAuth 2 <code>access_token</code>:</p>
-<pre class="highlight shell tab-shell"><code>// Example POST requesting access token
+<pre class="highlight shell tab-shell"><code>// Example POST requesting access token with security code
 
 curl -X POST https://api.mod.io/v1/oauth/emailexchange <span class="se">\</span>
   -H <span class="s1">'Content-Type: application/x-www-form-urlencoded'</span> <span class="se">\ </span>   
@@ -947,13 +947,13 @@ curl -X POST https://api.mod.io/v1/oauth/emailexchange <span class="se">\</span>
 </tr>
 <tr>
 <td><code>read+write</code></td>
-<td>The above scopes combined. <em>Default for email verification flow.</em>
+<td>The above scopes combined. <em>Default for email and external ticket verification flow.</em>
 </td>
 </tr>
 </tbody>
 </table>
 <h2 id="making-requests">Making Requests</h2>
-<p>Requests to the mod.io API <strong>must</strong> be over HTTPS (Port 443), any requests made over HTTP will return a <code>400 Bad Request</code> response.</p>
+<p>Requests to the mod.io API are to be over HTTPS (Port 443), any requests made over HTTP will return a <code>400 Bad Request</code> response.</p>
 <h3 id="using-an-api-key">Using an API Key</h3><pre class="highlight plaintext"><code>curl -X get https://api.mod.io/v1/games?api_key=xxxxxxxxxxxxxxxx
 </code></pre>
 <p>To authenticate using your unique 32-character API key, append the <code>api_key=xxxxxxxxxxxxxxxx</code> parameter to the end of your request. Remember that using an API key means requests are read-only, if you want to create, update or delete resources - authentication via OAuth 2 is required which you can <a href="#authentication">set up with your api key</a>.</p>
@@ -1021,9 +1021,9 @@ curl -X POST https://api.mod.io/v1/games/1/team <span class="se">\</span>
 </code></pre>
 <p>For <code>POST</code> &amp; <code>PUT</code> requests that do <em>not submit files</em> you have the option to supply your data as HTTP <code>POST</code> parameters, or as a <em>UTF-8 encoded</em> JSON object inside the parameter <code>input_json</code> which contains all required data. Regardless, whether you use JSON or not the <code>Content-Type</code> of your request still needs to be <code>application/x-www-form-urlencoded</code> with the data provided in the body of the request.</p>
 
-<p><strong>NOTE:</strong> If you supply identical key-value pairs as a request parameter and also as a parameter in your JSON object, the JSON object <strong>will take priority</strong> as only one can exist.</p>
+<p><strong>NOTE:</strong> If you supply identical key-value pairs as a request parameter and also as a parameter in your JSON object, the JSON object will take priority as only one can exist.</p>
 <h3 id="response-content-type">Response Content-Type</h3>
-<p>Responses will <strong>always</strong> be returned as <code>application/json</code>.</p>
+<p>Responses will <strong>always</strong> be returned in <code>application/json</code> format.</p>
 <h2 id="errors">Errors</h2><pre class="highlight json tab-json"><code><span class="err">//</span><span class="w"> </span><span class="err">Error</span><span class="w"> </span><span class="err">object</span><span class="w">
 
 </span><span class="s2">"error"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
@@ -2214,7 +2214,7 @@ Content-Type: application/x-www-form-urlencoded
 <td>submission_option</td>
 <td>integer</td>
 <td></td>
-<td>Choose the submission process you want modders to follow:<br><br><strong>0</strong> = Mods must be uploaded using your tools (recommended): You will have to build an upload system either in-game or via a standalone tool, which enables creators to submit mods to the tags you have configured. Because you control the flow you can pre-validate and compile mods, to ensure they will work in your game and attach metadata about what settings the mod can change. In the long run this option will save you time as you can accept more submissions, but it requires more setup to get running and isn't as open as the above option. <strong>NOTE:</strong> mod profiles can still be <a href="https://mod.io/mods/add">created online</a>, but uploads will have to occur via the API using tools you create.<br><br><strong>1</strong> = Mods can be uploaded using the website: Allow developers to upload mods via the website and API, and pick the tags their mod is built for. No validation will be done on the files submitted, it will be the responsibility of your game and apps to process the mods installation based on the tags selected and determine if the mod is valid and works. For example a mod might be uploaded with the 'map' tag. When a user subscribes to this mod, your game will need to verify it contains a map file and install it where maps are located. If this fails, your game or the community will have to flag the mod as 'incompatible' to remove it from the listing.</td>
+<td>Choose the submission process you want modders to follow:<br><br><strong>0</strong> = Mods must be uploaded using your tools (recommended): You will have to build an upload system either in-game or via a standalone tool, which enables creators to submit mods to the tags you have configured. Because you control the flow you can prevalidate and compile mods, to ensure they will work in your game and attach metadata about what settings the mod can change. In the long run this option will save you time as you can accept more submissions, but it requires more setup to get running and isn't as open as the above option. <strong>NOTE:</strong> mod profiles can still be <a href="https://mod.io/mods/add">created online</a>, but uploads will have to occur via the API using tools you create.<br><br><strong>1</strong> = Mods can be uploaded using the website: Allow developers to upload mods via the website and API, and pick the tags their mod is built for. No validation will be done on the files submitted, it will be the responsibility of your game and apps to process the mods installation based on the tags selected and determine if the mod is valid and works. For example a mod might be uploaded with the 'map' tag. When a user subscribes to this mod, your game will need to verify it contains a map file and install it where maps are located. If this fails, your game or the community will have to flag the mod as 'incompatible' to remove it from the listing.</td>
 </tr>
 <tr>
 <td>curation_option</td>
@@ -2995,7 +2995,7 @@ curl -X POST https://api.mod.io/v1/games/<span class="o">{</span>game-id<span cl
 <td>logo</td>
 <td>file</td>
 <td>true</td>
-<td>Image file which will represent your mods logo. Must be gif, jpg or png format and cannot exceed 8MB in filesize. Dimensions must be at least 640x360 and we recommended you supply a high resolution image with a 16 / 9 ratio. mod.io will use this image to make three thumbnails for the dimensions 320x180, 640x360 and 1280x720.</td>
+<td>Image file which will represent your mods logo. Must be gif, jpg or png format and cannot exceed 8MB in filesize. Dimensions must be at least 512x288 and we recommended you supply a high resolution image with a 16 / 9 ratio. mod.io will use this image to make three thumbnails for the dimensions 320x180, 640x360 and 1280x720.</td>
 </tr>
 <tr>
 <td>name</td>
@@ -4541,7 +4541,7 @@ curl -X POST https://api.mod.io/v1/games/<span class="o">{</span>game-id<span cl
 <td>logo</td>
 <td>file</td>
 <td></td>
-<td>Image file which will represent your games logo. Must be gif, jpg or png format and cannot exceed 8MB in filesize. Dimensions must be at least 640x360 and we recommended you supply a high resolution image with a 16 / 9 ratio. mod.io will use this logo to create three thumbnails with the dimensions of 320x180, 640x360 and 1280x720.</td>
+<td>Image file which will represent your games logo. Must be gif, jpg or png format and cannot exceed 8MB in filesize. Dimensions must be at least 512x288 and we recommended you supply a high resolution image with a 16 / 9 ratio. mod.io will use this logo to create three thumbnails with the dimensions of 320x180, 640x360 and 1280x720.</td>
 </tr>
 <tr>
 <td>icon</td>
@@ -4703,7 +4703,7 @@ curl -X POST https://api.mod.io/v1/games/<span class="o">{</span>game-id<span cl
 <td>logo</td>
 <td>file</td>
 <td></td>
-<td>Image file which will represent your mods logo. Must be gif, jpg or png format and cannot exceed 8MB in filesize. Dimensions must be at least 640x360 and we recommended you supply a high resolution image with a 16 / 9 ratio. mod.io will use this logo to create three thumbnails with the dimensions of 320x180, 640x360 and 1280x720.</td>
+<td>Image file which will represent your mods logo. Must be gif, jpg or png format and cannot exceed 8MB in filesize. Dimensions must be at least 512x288 and we recommended you supply a high resolution image with a 16 / 9 ratio. mod.io will use this logo to create three thumbnails with the dimensions of 320x180, 640x360 and 1280x720.</td>
 </tr>
 <tr>
 <td>images</td>
@@ -4715,7 +4715,7 @@ curl -X POST https://api.mod.io/v1/games/<span class="o">{</span>game-id<span cl
 <td>youtube</td>
 <td>string[]</td>
 <td></td>
-<td>Full YouTube link(s) you want to add - example 'https://www.youtube.com/watch?v=IGVZOLV9SPo'</td>
+<td>Full Youtube link(s) you want to add - example 'https://www.youtube.com/watch?v=IGVZOLV9SPo'</td>
 </tr>
 <tr>
 <td>sketchfab</td>
@@ -7370,7 +7370,7 @@ Accept: application/json
 </code></pre>
 <p><span class="httpmethod GET">GET</span> <span class="endpointheading">/games/{game-id}/mods/{mod-id}/dependencies</span></p>
 
-<p>Get all dependencies the chosen mod has selected. This is useful if a mod requires other mods be installed for it to run. Successful request will return an array of <a href="#get-all-mod-dependencies-2">Mod Dependencies Objects</a>.</p>
+<p>Get all dependencies the chosen mod has selected.</p>
 
 <p><strong>IMPORTANT:</strong> Because of the complexity of supporting nested dependencies, we recommend you treat dependencies as a recommendation for your players, and do not process dependencies automatically when installing a mod unless absolutely required. Successful request will return an array of <a href="#mod-dependencies-object">Mod Dependencies Objects</a>.</p>
 
@@ -8487,7 +8487,7 @@ Accept: application/json
       </span><span class="s2">"thread_position"</span><span class="p">:</span><span class="w"> </span><span class="s2">"01"</span><span class="p">,</span><span class="w">
       </span><span class="s2">"karma"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
       </span><span class="s2">"karma_guest"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
-      </span><span class="s2">"content"</span><span class="p">:</span><span class="w"> </span><span class="s2">"This mod is kick-ass! Great work!"</span><span class="w">
+      </span><span class="s2">"content"</span><span class="p">:</span><span class="w"> </span><span class="s2">"This mod is kickass! Great work!"</span><span class="w">
     </span><span class="p">},</span><span class="w">
     </span><span class="p">{</span><span class="w">
         </span><span class="err">...</span><span class="w">
@@ -8623,7 +8623,7 @@ Accept: application/json
   </span><span class="s2">"thread_position"</span><span class="p">:</span><span class="w"> </span><span class="s2">"01"</span><span class="p">,</span><span class="w">
   </span><span class="s2">"karma"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
   </span><span class="s2">"karma_guest"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
-  </span><span class="s2">"content"</span><span class="p">:</span><span class="w"> </span><span class="s2">"This mod is kick-ass! Great work!"</span><span class="w">
+  </span><span class="s2">"content"</span><span class="p">:</span><span class="w"> </span><span class="s2">"This mod is kickass! Great work!"</span><span class="w">
 </span><span class="p">}</span><span class="w">
 </span></code></pre>
 <h3 id="Get-Mod-Comment-responses">Responses</h3>
@@ -9341,7 +9341,7 @@ curl -X POST https://api.mod.io/v1/report <span class="se">\</span>
 <td>summary</td>
 <td>string</td>
 <td>true</td>
-<td>Detailed description of your report. Make sure you include all relevant information and links to help moderators investigate and respond appropriately.</td>
+<td>Detailed description of your report. Make sure you include all relevant information and links to help moderators investigate and respond appropiately.</td>
 </tr>
 </tbody>
 </table>
@@ -11396,7 +11396,7 @@ To perform this request, you must be authenticated via one of the following meth
       </span><span class="s2">"thread_position"</span><span class="p">:</span><span class="w"> </span><span class="s2">"01"</span><span class="p">,</span><span class="w">
       </span><span class="s2">"karma"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
       </span><span class="s2">"karma_guest"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
-      </span><span class="s2">"content"</span><span class="p">:</span><span class="w"> </span><span class="s2">"This mod is kick-ass! Great work!"</span><span class="w">
+      </span><span class="s2">"content"</span><span class="p">:</span><span class="w"> </span><span class="s2">"This mod is kickass! Great work!"</span><span class="w">
     </span><span class="p">},</span><span class="w">
     </span><span class="p">{</span><span class="w">
         </span><span class="err">...</span><span class="w">
@@ -11516,12 +11516,12 @@ To perform this request, you must be authenticated via one of the following meth
 <tr>
 <td>» karma</td>
 <td>integer</td>
-<td>Karma received for the comment (can be positive or negative).</td>
+<td>Karma received for the comment (can be postive or negative).</td>
 </tr>
 <tr>
 <td>» karma_guest</td>
 <td>integer</td>
-<td>Karma received for guest comments (can be positive or negative).</td>
+<td>Karma received for guest comments (can be postive or negative).</td>
 </tr>
 <tr>
 <td>» content</td>
@@ -12793,7 +12793,7 @@ To perform this request, you must be authenticated via one of the following meth
 <tr>
 <td>»» date_expires</td>
 <td>integer</td>
-<td>Unix timestamp until this mods statistics are considered stale.</td>
+<td>Unix timestamp until this mods's statistics are considered stale.</td>
 </tr>
 <tr>
 <td>» metadata_kvp</td>
@@ -12950,7 +12950,7 @@ To perform this request, you must be authenticated via one of the following meth
 <tr>
 <td>» date_expires</td>
 <td>integer</td>
-<td>Unix timestamp until this mods statistics are considered stale.</td>
+<td>Unix timestamp until this mods's statistics are considered stale.</td>
 </tr>
 <tr>
 <td>result_count</td>
@@ -13690,7 +13690,7 @@ To perform this request, you must be authenticated via one of the following meth
   </span><span class="s2">"thread_position"</span><span class="p">:</span><span class="w"> </span><span class="s2">"01"</span><span class="p">,</span><span class="w">
   </span><span class="s2">"karma"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
   </span><span class="s2">"karma_guest"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
-  </span><span class="s2">"content"</span><span class="p">:</span><span class="w"> </span><span class="s2">"This mod is kick-ass! Great work!"</span><span class="w">
+  </span><span class="s2">"content"</span><span class="p">:</span><span class="w"> </span><span class="s2">"This mod is kickass! Great work!"</span><span class="w">
 </span><span class="p">}</span><span class="w"> 
 </span></code></pre><h3 id="properties-24">Properties</h3>
 <table>
@@ -13795,12 +13795,12 @@ To perform this request, you must be authenticated via one of the following meth
 <tr>
 <td>karma</td>
 <td>integer</td>
-<td>Karma received for the comment (can be positive or negative).</td>
+<td>Karma received for the comment (can be postive or negative).</td>
 </tr>
 <tr>
 <td>karma_guest</td>
 <td>integer</td>
-<td>Karma received for guest comments (can be positive or negative).</td>
+<td>Karma received for guest comments (can be postive or negative).</td>
 </tr>
 <tr>
 <td>content</td>
@@ -14529,7 +14529,7 @@ To perform this request, you must be authenticated via one of the following meth
 <tr>
 <td>» date_expires</td>
 <td>integer</td>
-<td>Unix timestamp until this mods statistics are considered stale.</td>
+<td>Unix timestamp until this mods's statistics are considered stale.</td>
 </tr>
 <tr>
 <td>metadata_kvp</td>
@@ -15172,7 +15172,7 @@ To perform this request, you must be authenticated via one of the following meth
 <tr>
 <td>date_expires</td>
 <td>integer</td>
-<td>Unix timestamp until this mods statistics are considered stale.</td>
+<td>Unix timestamp until this mods's statistics are considered stale.</td>
 </tr>
 </tbody>
 </table>
