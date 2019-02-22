@@ -54,7 +54,7 @@ Want a tool added to the list? [Contact us!](mailto:developers@mod.io?subject=Pu
 
 Here is a brief list of the things to know about our API, as explained in more detail in the following sections.
 
-- All requests to the API __must__ be made over HTTPS (TLS).
+- All requests to the API must be made over HTTPS (TLS).
 - All API responses are in `application/json` format.
 - API keys are restricted to read-only `GET` requests.
 - OAuth 2 access tokens are required for `POST`, `PUT` and `DELETE` requests.
@@ -69,7 +69,7 @@ Authentication can be done via 3 ways:
 
 - Request an [API key (Read Only Access)](https://mod.io/apikey/widget)
 - Manually create an [OAuth 2 Access Token (Read + Write Access)](https://mod.io/oauth/widget)
-- Use our [Email Authentication Flow](#email-authentication-flow) (to create an OAuth 2 Access Token with Read + Write Access) 
+- Use our [Email Authentication Flow](#email-authentication-flow) (to create an OAuth 2 Access Token with Read + Write Access)
 
 You can use these methods of authentication interchangeably, depending on the level of access you require.
 
@@ -123,7 +123,7 @@ Parameter | Value
 After retrieving the 5-digit `security_code` sent to the email specified, you exchange it for an OAuth 2 `access_token`:
 
 ```shell
-// Example POST requesting access token
+// Example POST requesting access token with security code
 
 curl -X POST https://api.mod.io/v1/oauth/emailexchange \
   -H 'Content-Type: application/x-www-form-urlencoded' \	
@@ -169,11 +169,11 @@ Scope | Abilities
 ---------- | ----------
 `read` | When authenticated with a token that *only* contains the `read` scope, you will only be able to read data via `GET` requests. 
 `write` | When authenticated with a token that contains the `write` scope, you are able to add, edit and remove resources.
-`read+write` | The above scopes combined. _Default for email verification flow._
+`read+write` | The above scopes combined. _Default for email and external ticket verification flow._
 
 ## Making Requests
 
-Requests to the mod.io API __must__ be over HTTPS (Port 443), any requests made over HTTP will return a `400 Bad Request` response.
+Requests to the mod.io API are to be over HTTPS (Port 443), any requests made over HTTP will return a `400 Bad Request` response.
 
 ### Using an API Key
 
@@ -238,11 +238,11 @@ curl -X POST https://api.mod.io/v1/games/1/team \
 
 For `POST` & `PUT` requests that do _not submit files_ you have the option to supply your data as HTTP `POST` parameters, or as a _UTF-8 encoded_ JSON object inside the parameter `input_json` which contains all required data. Regardless, whether you use JSON or not the `Content-Type` of your request still needs to be `application/x-www-form-urlencoded` with the data provided in the body of the request.
 
-__NOTE:__ If you supply identical key-value pairs as a request parameter and also as a parameter in your JSON object, the JSON object __will take priority__ as only one can exist.
+__NOTE:__ If you supply identical key-value pairs as a request parameter and also as a parameter in your JSON object, the JSON object will take priority as only one can exist.
 
 ### Response Content-Type
 
-Responses will __always__ be returned as `application/json`.
+Responses will __always__ be returned in `application/json` format.
 
 ## Errors
 
@@ -1236,7 +1236,7 @@ Update details for a game. If you want to update the `icon`, `logo` or `header` 
     instructions_url|string||Link to a mod.io guide, your modding wiki or a page where modders can learn how to make and submit mods to your games profile.
     ugc_name|string||Word used to describe user-generated content (mods, items, addons etc).
     presentation_option|integer||Choose the presentation style you want on the mod.io website:<br><br>__0__ =  Grid View: Displays mods in a grid (visual but less informative, default setting) <br>__1__ = Table View: Displays mods in a table (easier to browse)
-    submission_option|integer||Choose the submission process you want modders to follow:<br><br>__0__ = Mods must be uploaded using your tools (recommended): You will have to build an upload system either in-game or via a standalone tool, which enables creators to submit mods to the tags you have configured. Because you control the flow you can pre-validate and compile mods, to ensure they will work in your game and attach metadata about what settings the mod can change. In the long run this option will save you time as you can accept more submissions, but it requires more setup to get running and isn't as open as the above option. __NOTE:__ mod profiles can still be [created online](https://mod.io/mods/add), but uploads will have to occur via the API using tools you create.<br><br>__1__ = Mods can be uploaded using the website: Allow developers to upload mods via the website and API, and pick the tags their mod is built for. No validation will be done on the files submitted, it will be the responsibility of your game and apps to process the mods installation based on the tags selected and determine if the mod is valid and works. For example a mod might be uploaded with the 'map' tag. When a user subscribes to this mod, your game will need to verify it contains a map file and install it where maps are located. If this fails, your game or the community will have to flag the mod as 'incompatible' to remove it from the listing.
+    submission_option|integer||Choose the submission process you want modders to follow:<br><br>__0__ = Mods must be uploaded using your tools (recommended): You will have to build an upload system either in-game or via a standalone tool, which enables creators to submit mods to the tags you have configured. Because you control the flow you can prevalidate and compile mods, to ensure they will work in your game and attach metadata about what settings the mod can change. In the long run this option will save you time as you can accept more submissions, but it requires more setup to get running and isn't as open as the above option. __NOTE:__ mod profiles can still be [created online](https://mod.io/mods/add), but uploads will have to occur via the API using tools you create.<br><br>__1__ = Mods can be uploaded using the website: Allow developers to upload mods via the website and API, and pick the tags their mod is built for. No validation will be done on the files submitted, it will be the responsibility of your game and apps to process the mods installation based on the tags selected and determine if the mod is valid and works. For example a mod might be uploaded with the 'map' tag. When a user subscribes to this mod, your game will need to verify it contains a map file and install it where maps are located. If this fails, your game or the community will have to flag the mod as 'incompatible' to remove it from the listing.
     curation_option|integer||Choose the curation process your team follows to approve mods:<br><br>__0__ = No curation (recommended): Mods are immediately available to play, without any intervention or work from your team.<br><br>__1__ = Paid curation: Screen only mods the creator wants to sell, before they are available to receive donations or be purchased via the API.<br><br>__2__ = Full curation: All mods must be accepted by someone on your team. This option is useful for games that have a small number of mods and want to control the experience, or you need to set the parameters attached to a mod (i.e. a weapon may require the rate of fire, power level, clip size etc). It can also be used for complex mods, which you may need to build into your game or distribute as DLC.
     community_options|integer||Choose the community features enabled on the mod.io website:<br><br>__0__ = All of the options below are disabled<br>__1__ = Discussion board enabled<br>__2__ = Guides and news enabled<br>__?__ = Add the options you want together, to enable multiple features (see [BITWISE fields](#bitwise-and-bitwise-and))
     revenue_options|integer||Choose the revenue capabilities mods can enable:<br><br>__0__ = All of the options below are disabled<br>__1__ = Allow mods to be sold<br>__2__ = Allow mods to receive donations<br>__4__ = Allow mods to be traded (not subject to revenue share)<br>__8__ = Allow mods to control supply and scarcity<br>__?__ = Add the options you want together, to enable multiple features (see [BITWISE fields](#bitwise-and-bitwise-and))
@@ -1881,7 +1881,7 @@ Add a mod. Successful request will return the newly created [Mod Object](#mod-ob
     Parameter|Type|Required|Description
     ---|---|---|---|
     visible|integer||Visibility of the mod (best if this field is controlled by mod admins, see [status and visibility](#status-amp-visibility) for details):<br><br>__0__ = Hidden<br>__1__ = Public _(default)_
-    logo|file|true|Image file which will represent your mods logo. Must be gif, jpg or png format and cannot exceed 8MB in filesize. Dimensions must be at least 640x360 and we recommended you supply a high resolution image with a 16 / 9 ratio. mod.io will use this image to make three thumbnails for the dimensions 320x180, 640x360 and 1280x720.
+    logo|file|true|Image file which will represent your mods logo. Must be gif, jpg or png format and cannot exceed 8MB in filesize. Dimensions must be at least 512x288 and we recommended you supply a high resolution image with a 16 / 9 ratio. mod.io will use this image to make three thumbnails for the dimensions 320x180, 640x360 and 1280x720.
     name|string|true|Name of your mod.
     name_id|string||Path for the mod on mod.io. For example: https://gamename.mod.io/__mod-name-id-here__. If no `name_id` is specified the `name` will be used. For example: _'Stellaris Shader Mod'_ will become _'stellaris-shader-mod'_. Cannot exceed 80 characters.
     summary|string|true|Summary for your mod, giving a brief overview of what it's about. Cannot exceed 250 characters.
@@ -3169,7 +3169,7 @@ Upload new media to a game. Any request you make to this endpoint *should* conta
 
     Parameter|Type|Required|Description
     ---|---|---|---|
-    logo|file||Image file which will represent your games logo. Must be gif, jpg or png format and cannot exceed 8MB in filesize. Dimensions must be at least 640x360 and we recommended you supply a high resolution image with a 16 / 9 ratio. mod.io will use this logo to create three thumbnails with the dimensions of 320x180, 640x360 and 1280x720.
+    logo|file||Image file which will represent your games logo. Must be gif, jpg or png format and cannot exceed 8MB in filesize. Dimensions must be at least 512x288 and we recommended you supply a high resolution image with a 16 / 9 ratio. mod.io will use this logo to create three thumbnails with the dimensions of 320x180, 640x360 and 1280x720.
     icon|file||Image file which will represent your games icon. Must be gif, jpg or png format and cannot exceed 1MB in filesize. Dimensions must be at least 64x64 and a transparent png that works on a colorful background is recommended. mod.io will use this icon to create three thumbnails with the dimensions of 64x64, 128x128 and 256x256.
     header|file||Image file which will represent your games header. Must be gif, jpg or png format and cannot exceed 256KB in filesize. Dimensions of 400x100 and a light transparent png that works on a dark background is recommended.
 
@@ -3308,9 +3308,9 @@ This endpoint is very flexible and will add any images posted to the mods galler
 
     Parameter|Type|Required|Description
     ---|---|---|---|
-    logo|file||Image file which will represent your mods logo. Must be gif, jpg or png format and cannot exceed 8MB in filesize. Dimensions must be at least 640x360 and we recommended you supply a high resolution image with a 16 / 9 ratio. mod.io will use this logo to create three thumbnails with the dimensions of 320x180, 640x360 and 1280x720.
+    logo|file||Image file which will represent your mods logo. Must be gif, jpg or png format and cannot exceed 8MB in filesize. Dimensions must be at least 512x288 and we recommended you supply a high resolution image with a 16 / 9 ratio. mod.io will use this logo to create three thumbnails with the dimensions of 320x180, 640x360 and 1280x720.
     images|zip||Zip archive of images to upload. Only valid gif, jpg and png images in the zip file will be processed. The filename __must be images.zip__ all other zips will be ignored. Alternatively you can POST one or more images to this endpoint and they will be detected and added to the mods gallery.
-    youtube|string[]||Full YouTube link(s) you want to add - example 'https://www.youtube.com/watch?v=IGVZOLV9SPo'
+    youtube|string[]||Full Youtube link(s) you want to add - example 'https://www.youtube.com/watch?v=IGVZOLV9SPo'
     sketchfab|string[]||Full Sketchfab link(s) you want to add - example 'https://sketchfab.com/models/71f04e390ff54e5f8d9a51b4e1caab7e'
 
 
@@ -5689,7 +5689,7 @@ System.out.println(response.toString());
 ```
 `GET /games/{game-id}/mods/{mod-id}/dependencies`
 
-Get all dependencies the chosen mod has selected. This is useful if a mod requires other mods be installed for it to run. Successful request will return an array of [Mod Dependencies Objects](#get-all-mod-dependencies-2).
+Get all dependencies the chosen mod has selected.
 
     __IMPORTANT:__ Because of the complexity of supporting nested dependencies, we recommend you treat dependencies as a recommendation for your players, and do not process dependencies automatically when installing a mod unless absolutely required. Successful request will return an array of [Mod Dependencies Objects](#mod-dependencies-object).
 
@@ -6639,7 +6639,7 @@ Get all comments posted in the mods profile. Successful request will return an a
       "thread_position": "01",
       "karma": 1,
       "karma_guest": 0,
-      "content": "This mod is kick-ass! Great work!"
+      "content": "This mod is kickass! Great work!"
     },
     {
         ...
@@ -6777,7 +6777,7 @@ Get a Mod Comment. Successful request will return a single [Comment Object](#com
   "thread_position": "01",
   "karma": 1,
   "karma_guest": 0,
-  "content": "This mod is kick-ass! Great work!"
+  "content": "This mod is kickass! Great work!"
 }
 ```
 <h3 id="Get-Mod-Comment-responses">Responses</h3>
@@ -7421,7 +7421,7 @@ Submit a report for any resource on mod.io. Successful request will return [Mess
      id|integer|true|Unique id of the resource you are reporting.
      type|integer|true|The type of report you are submitting. Must be one of the following values:<br><br>__0__ = Generic Report<br>__1__ = DMCA Report
      name|string|true|Informative title for your report.
-     summary|string|true|Detailed description of your report. Make sure you include all relevant information and links to help moderators investigate and respond appropriately.
+     summary|string|true|Detailed description of your report. Make sure you include all relevant information and links to help moderators investigate and respond appropiately.
 
 
 > Example response
@@ -9016,7 +9016,7 @@ thumb_320x180|string|URL to the image thumbnail.
       "thread_position": "01",
       "karma": 1,
       "karma_guest": 0,
-      "content": "This mod is kick-ass! Great work!"
+      "content": "This mod is kickass! Great work!"
     },
     {
         ...
@@ -9053,8 +9053,8 @@ data|[Comment Object   ](#schemacomment_object)[]|Array containing comment objec
 » date_added|integer|Unix timestamp of date the comment was posted.
 » reply_id|integer|Id of the parent comment this comment is replying to (can be 0 if the comment is not a reply).
 » thread_position|string|Levels of nesting in a comment thread. How it works:<br><br>- The first comment will have the position '01'.<br>- The second comment will have the position '02'.<br>- If someone responds to the second comment the position will be '02.01'.<br>- A maximum of 3 levels is supported.
-» karma|integer|Karma received for the comment (can be positive or negative).
-» karma_guest|integer|Karma received for guest comments (can be positive or negative).
+» karma|integer|Karma received for the comment (can be postive or negative).
+» karma_guest|integer|Karma received for guest comments (can be postive or negative).
 » content|string|Contents of the comment.
 result_count|integer|Number of results returned in this request.
 result_offset|integer|Number of results skipped over. Defaults to 0 unless overridden by `_offset` filter.
@@ -9600,7 +9600,7 @@ data|[Mod Object   ](#schemamod_object)[]|Array containing mod objects.
 »» ratings_percentage_positive|integer|Number of positive ratings, divided by the total ratings to determine it’s percentage score.
 »» ratings_weighted_aggregate|float|Overall rating of this item calculated using the [Wilson score confidence interval](https://www.evanmiller.org/how-not-to-sort-by-average-rating.html). This column is good to sort on, as it will order items based on number of ratings and will place items with many positive ratings above those with a higher score but fewer ratings.
 »» ratings_display_text|string|Textual representation of the rating in format:<br><br>- Overwhelmingly Positive<br>- Very Positive<br>- Positive<br>- Mostly Positive<br>- Mixed<br>- Negative<br>- Mostly Negative<br>- Very Negative<br>- Overwhelmingly Negative<br>- Unrated
-»» date_expires|integer|Unix timestamp until this mods statistics are considered stale.
+»» date_expires|integer|Unix timestamp until this mods's statistics are considered stale.
 » metadata_kvp|[Metadata KVP Object  ](#schemametadata_kvp_object)[]|Contains key-value metadata.
 »» metakey|string|The key of the key-value pair.
 »» metavalue|string|The value of the key-value pair.
@@ -9664,7 +9664,7 @@ data|[Stats Object   ](#schemastats_object)[]|Array containing stats objects.
 » ratings_percentage_positive|integer|Number of positive ratings, divided by the total ratings to determine it’s percentage score.
 » ratings_weighted_aggregate|float|Overall rating of this item calculated using the [Wilson score confidence interval](https://www.evanmiller.org/how-not-to-sort-by-average-rating.html). This column is good to sort on, as it will order items based on number of ratings and will place items with many positive ratings above those with a higher score but fewer ratings.
 » ratings_display_text|string|Textual representation of the rating in format:<br><br>- Overwhelmingly Positive<br>- Very Positive<br>- Positive<br>- Mostly Positive<br>- Mixed<br>- Negative<br>- Mostly Negative<br>- Very Negative<br>- Overwhelmingly Negative<br>- Unrated
-» date_expires|integer|Unix timestamp until this mods statistics are considered stale.
+» date_expires|integer|Unix timestamp until this mods's statistics are considered stale.
 result_count|integer|Number of results returned in this request.
 result_offset|integer|Number of results skipped over. Defaults to 0 unless overridden by `_offset` filter.
 result_limit|integer|Maximum number of results returned in the request. Defaults to 100 (max) unless overridden by `_limit` filter.
@@ -10058,7 +10058,7 @@ event_type|string|Type of event that was triggered. List of possible events: <br
   "thread_position": "01",
   "karma": 1,
   "karma_guest": 0,
-  "content": "This mod is kick-ass! Great work!"
+  "content": "This mod is kickass! Great work!"
 } 
 ```
 
@@ -10085,8 +10085,8 @@ user|[User Object   ](#schemauser_object)|Contains user data.
 date_added|integer|Unix timestamp of date the comment was posted.
 reply_id|integer|Id of the parent comment this comment is replying to (can be 0 if the comment is not a reply).
 thread_position|string|Levels of nesting in a comment thread. How it works:<br><br>- The first comment will have the position '01'.<br>- The second comment will have the position '02'.<br>- If someone responds to the second comment the position will be '02.01'.<br>- A maximum of 3 levels is supported.
-karma|integer|Karma received for the comment (can be positive or negative).
-karma_guest|integer|Karma received for guest comments (can be positive or negative).
+karma|integer|Karma received for the comment (can be postive or negative).
+karma_guest|integer|Karma received for guest comments (can be postive or negative).
 content|string|Contents of the comment.
 
 
@@ -10424,7 +10424,7 @@ stats|[Stats Object   ](#schemastats_object)|Contains stats data.
 » ratings_percentage_positive|integer|Number of positive ratings, divided by the total ratings to determine it’s percentage score.
 » ratings_weighted_aggregate|float|Overall rating of this item calculated using the [Wilson score confidence interval](https://www.evanmiller.org/how-not-to-sort-by-average-rating.html). This column is good to sort on, as it will order items based on number of ratings and will place items with many positive ratings above those with a higher score but fewer ratings.
 » ratings_display_text|string|Textual representation of the rating in format:<br><br>- Overwhelmingly Positive<br>- Very Positive<br>- Positive<br>- Mostly Positive<br>- Mixed<br>- Negative<br>- Mostly Negative<br>- Very Negative<br>- Overwhelmingly Negative<br>- Unrated
-» date_expires|integer|Unix timestamp until this mods statistics are considered stale.
+» date_expires|integer|Unix timestamp until this mods's statistics are considered stale.
 metadata_kvp|[Metadata KVP Object  ](#schemametadata_kvp_object)[]|Contains key-value metadata.
 » metakey|string|The key of the key-value pair.
 » metavalue|string|The value of the key-value pair.
@@ -10733,7 +10733,7 @@ ratings_negative|integer|Number of negative ratings.
 ratings_percentage_positive|integer|Number of positive ratings, divided by the total ratings to determine it’s percentage score.
 ratings_weighted_aggregate|float|Overall rating of this item calculated using the [Wilson score confidence interval](https://www.evanmiller.org/how-not-to-sort-by-average-rating.html). This column is good to sort on, as it will order items based on number of ratings and will place items with many positive ratings above those with a higher score but fewer ratings.
 ratings_display_text|string|Textual representation of the rating in format:<br><br>- Overwhelmingly Positive<br>- Very Positive<br>- Positive<br>- Mostly Positive<br>- Mixed<br>- Negative<br>- Mostly Negative<br>- Very Negative<br>- Overwhelmingly Negative<br>- Unrated
-date_expires|integer|Unix timestamp until this mods statistics are considered stale.
+date_expires|integer|Unix timestamp until this mods's statistics are considered stale.
 
 
 

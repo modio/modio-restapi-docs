@@ -35,7 +35,7 @@ Want a tool added to the list? [Contact us!](mailto:--parse_email?subject=Publis
 
 Here is a brief list of the things to know about our API, as explained in more detail in the following sections.
 
-- All requests to the API __must__ be made over HTTPS (TLS).
+- All requests to the API must be made over HTTPS (TLS).
 - All API responses are in `application/json` format.
 - API keys are restricted to read-only `GET` requests.
 - OAuth 2 access tokens are required for `POST`, `PUT` and `DELETE` requests.
@@ -50,7 +50,7 @@ Authentication can be done via 3 ways:
 
 - Request an [API key (Read Only Access)](--parse_siteurl/apikey/widget)
 - Manually create an [OAuth 2 Access Token (Read + Write Access)](--parse_siteurl/oauth/widget)
-- Use our [Email Authentication Flow](#email-authentication-flow) (to create an OAuth 2 Access Token with Read + Write Access) 
+- Use our [Email Authentication Flow](#email-authentication-flow) (to create an OAuth 2 Access Token with Read + Write Access)
 
 You can use these methods of authentication interchangeably, depending on the level of access you require.
 
@@ -104,7 +104,7 @@ Parameter | Value
 After retrieving the 5-digit `security_code` sent to the email specified, you exchange it for an OAuth 2 `access_token`:
 
 ```shell
-// Example POST requesting access token
+// Example POST requesting access token with security code
 
 curl -X POST --parse_apiurl/oauth/emailexchange \
   -H 'Content-Type: application/x-www-form-urlencoded' \	
@@ -150,11 +150,11 @@ Scope | Abilities
 ---------- | ----------
 `read` | When authenticated with a token that *only* contains the `read` scope, you will only be able to read data via `GET` requests. 
 `write` | When authenticated with a token that contains the `write` scope, you are able to add, edit and remove resources.
-`read+write` | The above scopes combined. _Default for email verification flow._
+`read+write` | The above scopes combined. _Default for email and external ticket verification flow._
 
 ## Making Requests
 
-Requests to the --parse_sitename API __must__ be over HTTPS (Port 443), any requests made over HTTP will return a `400 Bad Request` response.
+Requests to the --parse_sitename API are to be over HTTPS (Port 443), any requests made over HTTP will return a `400 Bad Request` response.
 
 ### Using an API Key
 
@@ -219,11 +219,11 @@ curl -X POST --parse_apiurl/games/1/team \
 
 For `POST` & `PUT` requests that do _not submit files_ you have the option to supply your data as HTTP `POST` parameters, or as a _UTF-8 encoded_ JSON object inside the parameter `input_json` which contains all required data. Regardless, whether you use JSON or not the `Content-Type` of your request still needs to be `application/x-www-form-urlencoded` with the data provided in the body of the request.
 
-__NOTE:__ If you supply identical key-value pairs as a request parameter and also as a parameter in your JSON object, the JSON object __will take priority__ as only one can exist.
+__NOTE:__ If you supply identical key-value pairs as a request parameter and also as a parameter in your JSON object, the JSON object will take priority as only one can exist.
 
 ### Response Content-Type
 
-Responses will __always__ be returned as `application/json`.
+Responses will __always__ be returned in `application/json` format.
 
 ## Errors
 
