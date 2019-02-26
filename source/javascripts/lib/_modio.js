@@ -81,14 +81,14 @@ $(document).ready(function() {
 			$(this).closest('tr').nextUntil('.notcollapsed,.level'+($(this).data('level')-1), 'tr.level'+$(this).data('level')).show();
 			$(this).text('collapse');
 		}
-		return false;
 	});
 
 	/**
 	 Add class to tools table & remove formatting placeholders.
 	 */
-	$('#implementation').nextAll('table').next().addClass('plugingrid');
-	$('table.plugingrid > thead > tr > th').not(':first').remove();
+	$('#implementation').nextAll('table:eq(1)').addClass('plugingrid');
+	$('#external-ticket-authentication-flow').nextAll('table:first').addClass('plugingrid');
+	$('table.plugingrid > thead > tr > th').not(':first').not(':eq(3)').remove();
 
 	/**
 	 Add class to changelog grid table.

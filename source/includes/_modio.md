@@ -51,6 +51,7 @@ Authentication can be done via 3 ways:
 - Request an [API key (Read Only Access)](--parse_siteurl/apikey/widget)
 - Manually create an [OAuth 2 Access Token (Read + Write Access)](--parse_siteurl/oauth/widget)
 - Use our [Email Authentication Flow](#email-authentication-flow) (to create an OAuth 2 Access Token with Read + Write Access)
+- Use [External App Tickets](#external-ticket-authentication-flow) via popular platforms such as Steam.
 
 You can use these methods of authentication interchangeably, depending on the level of access you require.
 
@@ -141,6 +142,36 @@ If you do not exchange your `security_code` for an `access_token` within 15 minu
 ### Step 3: Use access token to access resources.
 
 See [Making Requests](#making-requests) section.
+
+### External Ticket Authentication Flow
+
+If your game is running inside a popular game distribution platform such as Steam or GOG Galaxy, you can use the external ticket flow to authenticate your players via their encrypted session tickets which are accessible via the platform's SDK. --parse_sitename offers the ability to decode this metadata from the respective client using a [shared secret](https://en.wikipedia.org/wiki/Shared_secret) which is supplied to you by the platform.
+
+```shell
+// Example POST requesting access token with security code
+
+curl -X POST --parse_apiurl/external/steamauth \
+	-H 'Content-Type: application/x-www-form-urlencoded' \
+	-d 'api_key=0d0j67z6d032232f129hfgc01ibcb24'	\
+	-d 'appdata=NDNuZmhnaWdyaGdqOWc0M2o5eTM0aGc='
+```
+
+```json
+// Access Token Request Response (access token truncated for brevity)
+
+{
+	"code": 200,
+	"access_token": "eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiIsImp0......"
+}
+```
+
+![--parse_sitename External Ticket Authentication Flow](images/ticket.png)
+
+By supplying --parse_sitename with this secret key in your game's option page, we gain the ability to securely authenticate users to --parse_sitename without any user input. This method is a great approach for staying out of the users way and offering the ability to subscribe to mods right away, thus removing friction. Due to --parse_sitename only being able to retrieve some data representing the user, for users to achieve all the perks that our platform has to offer, your users would have to link their account (coming soon) to an e-mail address. It's important to emphasize that this is an extra, optional step.
+
+Supported Platforms | - | - | -
+--- | --- | --- | ---
+[![Steam](images/platform-steam.png)](https://www.steampowered.com) | __Steam__<br />[SDK](https://partner.steamgames.com/doc/api/SteamEncryptedAppTicket)<br />[Endpoint Reference](#authenticate-via-steam)<br /> | [![GOG Galaxy](images/platform-gog.png)](https://www.gog.com/galaxy) | __GOG Galaxy__<br />(Coming Soon)<br />
 
 ### Scopes (OAuth 2)
 
