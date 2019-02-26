@@ -804,6 +804,7 @@
 <li>Manually create an <a href="https://mod.io/oauth/widget" class="colorbox">OAuth 2 Access Token (Read + Write Access)</a>
 </li>
 <li>Use our <a href="#email-authentication-flow">Email Authentication Flow</a> (to create an OAuth 2 Access Token with Read + Write Access)</li>
+<li>Use <a href="#external-ticket-authentication-flow">External App Tickets</a> via popular platforms such as Steam.</li>
 </ul>
 
 <p>You can use these methods of authentication interchangeably, depending on the level of access you require.</p>
@@ -926,6 +927,47 @@ curl -X POST https://api.mod.io/v1/oauth/emailexchange <span class="se">\</span>
 <p>If you do not exchange your <code>security_code</code> for an <code>access_token</code> within 15 minutes of generation, you will need to begin the flow again to receive another code.</p>
 <h3 id="step-3-use-access-token-to-access-resources">Step 3: Use access token to access resources.</h3>
 <p>See <a href="#making-requests">Making Requests</a> section.</p>
+<h3 id="external-ticket-authentication-flow">External Ticket Authentication Flow</h3>
+<p>If your game is running inside a popular game distribution platform such as Steam or GOG Galaxy, you can use the external ticket flow to authenticate your players via their encrypted session tickets which are accessible via the platform's SDK. mod.io offers the ability to decode this metadata from the respective client using a <a href="https://en.wikipedia.org/wiki/Shared_secret">shared secret</a> which is supplied to you by the platform.</p>
+<pre class="highlight shell tab-shell"><code>// Example POST requesting access token with security code
+
+curl -X POST https://api.mod.io/v1/external/steamauth <span class="se">\</span>
+    -H <span class="s1">'Content-Type: application/x-www-form-urlencoded'</span> <span class="se">\</span>
+    -d <span class="s1">'api_key=0d0j67z6d032232f129hfgc01ibcb24'</span>    <span class="se">\</span>
+    -d <span class="s1">'appdata=NDNuZmhnaWdyaGdqOWc0M2o5eTM0aGc='</span>
+</code></pre><pre class="highlight json tab-json"><code><span class="err">//</span><span class="w"> </span><span class="err">Access</span><span class="w"> </span><span class="err">Token</span><span class="w"> </span><span class="err">Request</span><span class="w"> </span><span class="err">Response</span><span class="w"> </span><span class="err">(access</span><span class="w"> </span><span class="err">token</span><span class="w"> </span><span class="err">truncated</span><span class="w"> </span><span class="err">for</span><span class="w"> </span><span class="err">brevity)</span><span class="w">
+
+</span><span class="p">{</span><span class="w">
+    </span><span class="s2">"code"</span><span class="p">:</span><span class="w"> </span><span class="mi">200</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"access_token"</span><span class="p">:</span><span class="w"> </span><span class="s2">"eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiIsImp0......"</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre>
+<p><img src="images/ticket.png" alt="mod.io External Ticket Authentication Flow"></p>
+
+<p>By supplying mod.io with this secret key in your game's option page, we gain the ability to securely authenticate users to mod.io without any user input. This method is a great approach for staying out of the users way and offering the ability to subscribe to mods right away, thus removing friction. Due to mod.io only being able to retrieve some data representing the user, for users to achieve all the perks that our platform has to offer, your users would have to link their account (coming soon) to an e-mail address. It's important to emphasize that this is an extra, optional step.</p>
+
+<table>
+<thead>
+<tr>
+<th>Supported Platforms</th>
+<th>-</th>
+<th>-</th>
+<th>-</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><a href="https://www.steampowered.com"><img src="images/platform-steam.png" alt="Steam"></a></td>
+<td>
+<strong>Steam</strong><br><a href="https://partner.steamgames.com/doc/api/SteamEncryptedAppTicket">SDK</a><br><a href="#authenticate-via-steam">Endpoint Reference</a><br>
+</td>
+<td><a href="https://www.gog.com/galaxy"><img src="images/platform-gog.png" alt="GOG Galaxy"></a></td>
+<td>
+<strong>GOG Galaxy</strong><br>(Coming Soon)<br>
+</td>
+</tr>
+</tbody>
+</table>
 <h3 id="scopes-oauth-2">Scopes (OAuth 2)</h3>
 <p>mod.io allows you to specify the permission each access token has (default is <em>read+write</em>), this is done by the use of scopes. See below for a full list of scopes available, you must include at least one scope when generating a new token.</p>
 
@@ -2241,6 +2283,12 @@ Content-Type: application/x-www-form-urlencoded
 <td>Choose the level of API access your game allows:<br><br><strong>0</strong> = All of the options below are disabled<br><br><strong>1</strong> = Allow 3rd parties to access this games API endpoints. We recommend you enable this feature, an open API will encourage a healthy ecosystem of tools and apps. If you do not enable this feature, your <code>/games/{games-id}</code> endpoints will return <code>403 Forbidden</code> unless you are a member of the games team or using the games <code>api_key</code><br><br><strong>2</strong> = Allow mods to be downloaded directly (makes implementation easier for you, game servers and services because you can save, share and reuse download URLs). If disabled all download URLs will contain a frequently changing verification hash to stop unauthorized use<br><br><strong>?</strong> = Add the options you want together, to enable multiple features (see <a href="#bitwise-and-bitwise-and">BITWISE fields</a>)</td>
 </tr>
 <tr>
+<td>api_steam_ticket</td>
+<td>string</td>
+<td></td>
+<td>Your game's secret encrypted app ticket key for Steam - this can be found under <em>Security &gt; SDK auth</em> on your game's <a href="#https://partner.steamgames.com/">Steamworks settings</a>. This field is required if you wish to use the <a href="#authenticate-via-steam">Authenticate via Steam</a> endpoint.</td>
+</tr>
+<tr>
 <td>maturity_options</td>
 <td>integer</td>
 <td></td>
@@ -3031,7 +3079,7 @@ curl -X POST https://api.mod.io/v1/games/<span class="o">{</span>game-id<span cl
 <td>stock</td>
 <td>integer</td>
 <td></td>
-<td>Maximum number of subscribers for this mod. A value of 0 disables this limit.</td>
+<td>Maximium number of subscribers for this mod. A value of 0 disables this limit.</td>
 </tr>
 <tr>
 <td>maturity_option</td>
@@ -3346,7 +3394,7 @@ Content-Type: application/x-www-form-urlencoded
 <td>stock</td>
 <td>integer</td>
 <td></td>
-<td>Maximum number of subscribers for this mod. A value of 0 disables this limit.</td>
+<td>Maximium number of subscribers for this mod. A value of 0 disables this limit.</td>
 </tr>
 <tr>
 <td>maturity_option</td>
@@ -4541,7 +4589,7 @@ curl -X POST https://api.mod.io/v1/games/<span class="o">{</span>game-id<span cl
 <td>logo</td>
 <td>file</td>
 <td></td>
-<td>Image file which will represent your games logo. Must be gif, jpg or png format and cannot exceed 8MB in filesize. Dimensions must be at least 512x288 and we recommended you supply a high resolution image with a 16 / 9 ratio. mod.io will use this logo to create three thumbnails with the dimensions of 320x180, 640x360 and 1280x720.</td>
+<td>Image file which will represent your games logo. Must be gif, jpg or png format and cannot exceed 8MB in filesize. Dimensions must be at least 640x360 and we recommended you supply a high resolution image with a 16 / 9 ratio. mod.io will use this logo to create three thumbnails with the dimensions of 320x180, 640x360 and 1280x720.</td>
 </tr>
 <tr>
 <td>icon</td>
@@ -6532,13 +6580,13 @@ curl -X POST https://api.mod.io/v1/games/<span class="o">{</span>game-id<span cl
 <td>type</td>
 <td>string</td>
 <td>true</td>
-<td>Determines whether you allow users to only select one tag (dropdown) or multiple tags (checkbox):<br><br><strong>dropdown</strong> = Mods can select only one tag from this group, dropdown menu shown on site profile.<br><strong>checkboxes</strong> = Mods can select multiple tags from this group, checkboxes shown on site profile.</td>
+<td>Determines whether you allow users to only select one tag (dropdown) or multiple tags (checkbox):<br><br>- <em>dropdown</em> = Mods can select only one tag from this group, dropdown menu shown on site profile.<br>- <em>checkboxes</em> = Mods can select multiple tags from this group, checkboxes shown on site profile.</td>
 </tr>
 <tr>
 <td>hidden</td>
 <td>boolean</td>
 <td></td>
-<td>This group of tags should be hidden from users and mod developers. Useful for games to tag special functionality, to filter on and use behind the scenes. You can also use <a href="#metadata">Metadata Key Value Pairs</a> for more arbitary data.</td>
+<td>This group of tags should be hidden from users and mod developers. Useful for games to tag special functionality, to filter on and use behind the scenes. You can also use <a href="#metadata">Metadata Key Value Pairs</a> for more arbitrary data.</td>
 </tr>
 <tr>
 <td>tags</td>
@@ -8865,7 +8913,7 @@ Content-Type: application/x-www-form-urlencoded
 <td>resource_type</td>
 <td>string</td>
 <td>true</td>
-<td>Type of resource you are checking the ownership of. <strong>Must</strong> be one of the following values:<br><br><strong>games</strong><br><strong>mods</strong><br><strong>files</strong>
+<td>Type of resource you are checking the ownership of. Must be one of the following values:<br><br>- <em>games</em><br>- <em>mods</em><br>- <em>files</em>
 </td>
 </tr>
 <tr>
@@ -9316,7 +9364,7 @@ curl -X POST https://api.mod.io/v1/report <span class="se">\</span>
 <td>resource</td>
 <td>string</td>
 <td>true</td>
-<td>Type of resource you are reporting. Must be one of the following values:<br><br><strong>games</strong><br><strong>mods</strong><br><strong>users</strong>
+<td>Type of resource you are reporting. Must be one of the following values:<br><br>- <em>games</em><br>- <em>mods</em><br>- <em>users</em>
 </td>
 </tr>
 <tr>
