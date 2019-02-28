@@ -1254,7 +1254,6 @@ Update details for a game. If you want to update the `icon`, `logo` or `header` 
     community_options|integer||Choose the community features enabled on the mod.io website:<br><br>__0__ = All of the options below are disabled<br>__1__ = Discussion board enabled<br>__2__ = Guides and news enabled<br>__?__ = Add the options you want together, to enable multiple features (see [BITWISE fields](#bitwise-and-bitwise-and))
     revenue_options|integer||Choose the revenue capabilities mods can enable:<br><br>__0__ = All of the options below are disabled<br>__1__ = Allow mods to be sold<br>__2__ = Allow mods to receive donations<br>__4__ = Allow mods to be traded (not subject to revenue share)<br>__8__ = Allow mods to control supply and scarcity<br>__?__ = Add the options you want together, to enable multiple features (see [BITWISE fields](#bitwise-and-bitwise-and))
     api_access_options|integer||Choose the level of API access your game allows:<br><br>__0__ = All of the options below are disabled<br><br>__1__ = Allow 3rd parties to access this games API endpoints. We recommend you enable this feature, an open API will encourage a healthy ecosystem of tools and apps. If you do not enable this feature, your `/games/{games-id}` endpoints will return `403 Forbidden` unless you are a member of the games team or using the games `api_key`<br><br>__2__ = Allow mods to be downloaded directly (makes implementation easier for you, game servers and services because you can save, share and reuse download URLs). If disabled all download URLs will contain a frequently changing verification hash to stop unauthorized use<br><br>__?__ = Add the options you want together, to enable multiple features (see [BITWISE fields](#bitwise-and-bitwise-and))
-    api_steam_ticket|string||Your game's encrypted app ticket key for Steam - this can be found under *Security > SDK auth* on your game's [Steamworks settings](https://partner.steamgames.com/apps/sdkauth). This field is required if you wish to use the [Authenticate via Steam](#authenticate-via-steam) endpoint.
     maturity_options|integer||Choose if you want to allow developers to select if they can flag their mods as containing mature content:<br><br>__0__ = Don't allow _(default)_<br>__1__ = Allow
 
 
@@ -7683,7 +7682,7 @@ Confirm an external account (i.e. Steam) with the authenticated user's e-mail ad
 
      Parameter|Type|Required|Description
      ---|---|---|---|
-     service|string|true|The external service where the user's account originates.<br><br>Possible Options:<br>- _steam_<br>- _gog_<br>- _twitter_<br>- _facebook_<br>- _google_
+     service|string|true|The external service where the user's account originates.<br><br>Possible Options:<br>- _steam_<br>- _galaxy_<br>- _twitter_<br>- _facebook_<br>- _google_
      email|string|true|The e-mail address to link to the authenticated user's account.
 
 
