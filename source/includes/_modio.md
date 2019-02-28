@@ -147,24 +147,6 @@ See [Making Requests](#making-requests) section.
 
 If your game is running inside a popular game distribution platform such as Steam or GOG Galaxy, you can use the external ticket flow to authenticate your players via their encrypted session tickets which are accessible via the platform's SDK. --parse_sitename offers the ability to decode this metadata from the respective client using a [shared secret](https://en.wikipedia.org/wiki/Shared_secret) which is supplied to you by the platform.
 
-```shell
-// Example POST requesting access token with security code
-
-curl -X POST --parse_apiurl/external/steamauth \
-	-H 'Content-Type: application/x-www-form-urlencoded' \
-	-d 'api_key=0d0j67z6d032232f129hfgc01ibcb24'	\
-	-d 'appdata=NDNuZmhnaWdyaGdqOWc0M2o5eTM0aGc='
-```
-
-```json
-// Access Token Request Response (access token truncated for brevity)
-
-{
-	"code": 200,
-	"access_token": "eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiIsImp0......"
-}
-```
-
 ![--parse_sitename External Ticket Authentication Flow](images/ticket.png)
 
 By supplying --parse_sitename with this secret key in your game's option page, we gain the ability to securely authenticate users to --parse_sitename without any user input. This method is a great approach for staying out of the users way and offering the ability to subscribe to mods right away, thus removing friction. Due to --parse_sitename only being able to retrieve some data representing the user, for users to achieve all the perks that our platform has to offer, your users would have to link their account (coming soon) to an e-mail address. It's important to emphasize that this is an extra, optional step.

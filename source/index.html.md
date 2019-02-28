@@ -111,7 +111,8 @@ curl -X POST https://api.mod.io/v1/oauth/emailrequest \
 
 Request a `security_code` be sent to the email address of the user you wish to authenticate: 
 
-`POST /oauth/emailrequest`
+
+`POST /oauth/emailrequest`
 
 Parameter | Value
 ---------- | ----------  
@@ -140,7 +141,8 @@ curl -X POST https://api.mod.io/v1/oauth/emailexchange \
 }
 ```
 
-`POST /oauth/emailexchange`
+
+`POST /oauth/emailexchange`
 
 Parameter | Value
 ---------- | ----------  
@@ -163,24 +165,6 @@ See [Making Requests](#making-requests) section.
 ### External Ticket Authentication Flow
 
 If your game is running inside a popular game distribution platform such as Steam or GOG Galaxy, you can use the external ticket flow to authenticate your players via their encrypted session tickets which are accessible via the platform's SDK. mod.io offers the ability to decode this metadata from the respective client using a [shared secret](https://en.wikipedia.org/wiki/Shared_secret) which is supplied to you by the platform.
-
-```shell
-// Example POST requesting access token with security code
-
-curl -X POST https://api.mod.io/v1/external/steamauth \
-	-H 'Content-Type: application/x-www-form-urlencoded' \
-	-d 'api_key=0d0j67z6d032232f129hfgc01ibcb24'	\
-	-d 'appdata=NDNuZmhnaWdyaGdqOWc0M2o5eTM0aGc='
-```
-
-```json
-// Access Token Request Response (access token truncated for brevity)
-
-{
-	"code": 200,
-	"access_token": "eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiIsImp0......"
-}
-```
 
 ![mod.io External Ticket Authentication Flow](images/ticket.png)
 
@@ -1270,7 +1254,7 @@ Update details for a game. If you want to update the `icon`, `logo` or `header` 
     community_options|integer||Choose the community features enabled on the mod.io website:<br><br>__0__ = All of the options below are disabled<br>__1__ = Discussion board enabled<br>__2__ = Guides and news enabled<br>__?__ = Add the options you want together, to enable multiple features (see [BITWISE fields](#bitwise-and-bitwise-and))
     revenue_options|integer||Choose the revenue capabilities mods can enable:<br><br>__0__ = All of the options below are disabled<br>__1__ = Allow mods to be sold<br>__2__ = Allow mods to receive donations<br>__4__ = Allow mods to be traded (not subject to revenue share)<br>__8__ = Allow mods to control supply and scarcity<br>__?__ = Add the options you want together, to enable multiple features (see [BITWISE fields](#bitwise-and-bitwise-and))
     api_access_options|integer||Choose the level of API access your game allows:<br><br>__0__ = All of the options below are disabled<br><br>__1__ = Allow 3rd parties to access this games API endpoints. We recommend you enable this feature, an open API will encourage a healthy ecosystem of tools and apps. If you do not enable this feature, your `/games/{games-id}` endpoints will return `403 Forbidden` unless you are a member of the games team or using the games `api_key`<br><br>__2__ = Allow mods to be downloaded directly (makes implementation easier for you, game servers and services because you can save, share and reuse download URLs). If disabled all download URLs will contain a frequently changing verification hash to stop unauthorized use<br><br>__?__ = Add the options you want together, to enable multiple features (see [BITWISE fields](#bitwise-and-bitwise-and))
-    api_steam_ticket|string||Your game's secret encrypted app ticket key for Steam - this can be found under *Security > SDK auth* on your game's [Steamworks settings](#https://partner.steamgames.com/). This field is required if you wish to use the [Authenticate via Steam](#authenticate-via-steam) endpoint.
+    api_steam_ticket|string||Your game's encrypted app ticket key for Steam - this can be found under *Security > SDK auth* on your game's [Steamworks settings](https://partner.steamgames.com/apps/sdkauth). This field is required if you wish to use the [Authenticate via Steam](#authenticate-via-steam) endpoint.
     maturity_options|integer||Choose if you want to allow developers to select if they can flag their mods as containing mature content:<br><br>__0__ = Don't allow _(default)_<br>__1__ = Allow
 
 
@@ -7568,11 +7552,11 @@ System.out.println(response.toString());
 ```
 `POST /external/steamauth`
 
-Request an access token on behalf of a Steam user. To use this functionality you *must* first have supplied your game's secret encrypted app ticket key from Steamworks via [the API](#edit-game) in the 'Options' tab of your game profile. A Successful request will return [Access Token Object](#access-token-object).
+Request an access token on behalf of a Steam user. To use this functionality you *must* supply your games [encrypted app ticket key from Steamworks](https://partner.steamgames.com/apps/sdkauth) in the *Edit > Options* page of your games profile on mod.io. A Successful request will return an [Access Token Object](#access-token-object).
 
      Parameter|Type|Required|Description
      ---|---|---|---|
-     appdata|base64-encoded string|true|The Steam users [Encrypted User Authentication Ticket](https://partner.steamgames.com/doc/features/auth#encryptedapptickets). <br><br>__NOTE:__ Parameter content *MUST* be the *uint8 *rgubTicketEncrypted* returned from Steamworks API, converted into a base64-encoded string.
+     appdata|base64-encoded string|true|The Steam users [Encrypted User Authentication Ticket](https://partner.steamgames.com/doc/features/auth#encryptedapptickets). <br><br>__NOTE:__ Parameter content *MUST* be the [*uint8 *rgubTicketEncrypted*](https://partner.steamgames.com/doc/api/SteamEncryptedAppTicket) returned from Steamworks API, converted into a base64-encoded string.
 
 
 > Example response
@@ -7592,6 +7576,134 @@ Status|Meaning|Description|Response Schema
 <aside class="auth-notice">
 To perform this request, you must be authenticated via one of the following methods:
 <a href="#authentication">api_key</a>
+</aside>
+## Link External Account
+
+> Example request
+
+```shell
+# You can also use wget
+curl -X POST https://api.mod.io/v1/external/link \
+  -H 'Authorization: Bearer {access-token}' \ 
+  -H 'Content-Type: application/x-www-form-urlencoded' \ 
+  -H 'Accept: application/json' \
+  -d 'service=steam' \
+  -d 'email=test@mod.io'
+
+```
+
+```http
+POST https://api.mod.io/v1/external/link HTTP/1.1
+Host: api.mod.io
+Content-Type: application/x-www-form-urlencoded
+Accept: application/json
+Authorization: Bearer {access-token}
+
+
+```
+
+```javascript
+var headers = {
+  'Authorization':'Bearer {access-token}',
+  'Content-Type':'application/x-www-form-urlencoded',
+  'Accept':'application/json'
+
+};
+
+$.ajax({
+  url: 'https://api.mod.io/v1/external/link',
+  method: 'post',
+
+  headers: headers,
+  success: function(data) {
+    console.log(JSON.stringify(data));
+  }
+})
+```
+
+```javascript--nodejs
+const request = require('node-fetch');
+const inputBody = '{
+  "service": "steam",
+  "email": "test@mod.io"
+}';
+const headers = {
+  'Authorization':'Bearer {access-token}',
+  'Content-Type':'application/x-www-form-urlencoded',
+  'Accept':'application/json'
+
+};
+
+fetch('https://api.mod.io/v1/external/link',
+{
+  method: 'POST',
+  body: inputBody,
+  headers: headers
+})
+.then(function(res) {
+    return res.json();
+}).then(function(body) {
+    console.log(body);
+});
+```
+
+```python
+import requests
+headers = {
+  'Authorization': 'Bearer {access-token}',
+  'Content-Type': 'application/x-www-form-urlencoded',
+  'Accept': 'application/json'
+}
+
+r = requests.post('https://api.mod.io/v1/external/link', params={
+
+}, headers = headers)
+
+print r.json()
+```
+
+```java
+URL obj = new URL("https://api.mod.io/v1/external/link");
+HttpURLConnection con = (HttpURLConnection) obj.openConnection();
+con.setRequestMethod("POST");
+int responseCode = con.getResponseCode();
+BufferedReader in = new BufferedReader(
+    new InputStreamReader(con.getInputStream()));
+String inputLine;
+StringBuffer response = new StringBuffer();
+while ((inputLine = in.readLine()) != null) {
+    response.append(inputLine);
+}
+in.close();
+System.out.println(response.toString());
+```
+`POST /external/link`
+
+Confirm an external account (i.e. Steam) with the authenticated user's e-mail address. When calling this endpoint you must authenticate the request using the access token mod.io supplied to you from any of our external authentication endpoints, for example - the [Steam Authentication](#authenticate-via-steam) endpoint. A Successful request will return a [Message Object](#message-object) response at which point the user must check the supplied e-mail address to link the external account to the respective e-mail address.<br/><br/>__NOTE__: If you link an external account to an e-mail that already exists on mod.io and you confirm the action via the e-mail you will receive, the accounts will __automatically__ be merged together transferring all content from the external account to the native, existing account. Once this process is complete, existing access tokens to the external account will be nullified and you will need to [re-authenticate](#authentication).
+
+     Parameter|Type|Required|Description
+     ---|---|---|---|
+     service|string|true|The external service where the user's account originates.<br><br>Possible Options:<br>- _steam_<br>- _gog_<br>- _twitter_<br>- _facebook_<br>- _google_
+     email|string|true|The e-mail address to link to the authenticated user's account.
+
+
+> Example response
+
+```json
+{
+  "code": 200,
+  "message": "Please see the confirmation e-mail sent to (test@mod.io) to complete account link."
+}
+```
+<h3 id="Link-External-Account-responses">Responses</h3>
+
+Status|Meaning|Description|Response Schema
+---|---|---|---|
+200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)|Successful Request|[Message Object](#message-object)
+
+<aside class="auth-notice">
+To perform this request, you must be authenticated via one of the following methods:
+<a href="#authentication">OAuth 2</a> (Scopes: write)
 </aside>
 # Me
 
