@@ -9646,8 +9646,14 @@ curl -X POST https://api.mod.io/v1/external/link <span class="se">\</span>
 <td>service</td>
 <td>string</td>
 <td>true</td>
-<td>The external service where the user's account originates.<br><br>Possible Options:<br>- <em>steam</em><br>- <em>galaxy</em><br>- <em>twitter</em><br>- <em>facebook</em><br>- <em>google</em>
+<td>The external service where the user's account originates.<br><br>Possible Options:<br>- <em>steam</em><br>- <em>gog</em><br>- <em>twitter</em><br>- <em>facebook</em><br>- <em>google</em>
 </td>
+</tr>
+<tr>
+<td>service_id</td>
+<td>string</td>
+<td>true</td>
+<td>The external service id which is associated with the provided access token. For example, if you requested an access token via the <a href="#authenticate-via-steam">Steam Authentication</a> endpoint, the service_id would be the user's Steam ID. For security reasons, this ID must match with the service parameter provided, and also be associated with the access token used in the request. <br><br>Service ID formats:<br>- <em>steam</em> (Integer, 17 characters, Community ID format)<br>- <em>gog</em> (Integer, 12 characters)</td>
 </tr>
 <tr>
 <td>email</td>
