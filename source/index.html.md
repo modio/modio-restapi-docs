@@ -7682,7 +7682,7 @@ Confirm an external account (i.e. Steam) with the authenticated user's e-mail ad
 
      Parameter|Type|Required|Description
      ---|---|---|---|
-     service|string|true|The external service where the user's account originates.<br><br>Possible Options:<br>- _steam_<br>- _gog_<br>- _twitter_<br>- _facebook_<br>- _google_
+     service|string|true|The external service where the user's account originates.<br><br>Possible Options:<br>- _steam_<br>- _gog_
      service_id|string|true|The external service id which is associated with the provided access token. For example, if you requested an access token via the [Steam Authentication](#authenticate-via-steam) endpoint, the service_id would be the user's Steam ID. For security reasons, this ID must match with the service parameter provided, and also be associated with the access token used in the request. <br><br>Service ID formats:<br>- _steam_ (Integer, 17 characters, Community ID format)<br>- _gog_ (Integer, 12 characters)
      email|string|true|The e-mail address to link to the authenticated user's account.
 
