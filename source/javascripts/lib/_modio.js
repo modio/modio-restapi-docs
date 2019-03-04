@@ -57,12 +57,12 @@ $(document).ready(function() {
 	$('table tbody tr').each(function() {
 		td = $('td:first-child', this).not('.collapsed');
 		
-		if(td.text()[0] == '»') {
+		if (td.text()[0] == '»') {
 			level = (td.text().match(/»/g)||[]).length;
 			$(this).addClass('iscollapsed').addClass('level').addClass('level'+level).hide();
 			td.html(td.html().replace(/»/g, ''));
 			
-			if(!$(this).prev().hasClass('level') || $(this).prev().hasClass('level'+(level-1))) {
+			if (!$(this).prev().hasClass('level') || $(this).prev().hasClass('level'+(level-1))) {
 				$(this).prev().find('td:first-child').append('<a href="#" class="togglecollapse" data-level="'+level+'" style="background: rgba(0,0,0,.05); border-radius: 3px; display: inline-block; font-size: 10px; margin-left: 4px; padding: 2px 5px;">expand</a>');
 			}
 		} else {
@@ -71,7 +71,7 @@ $(document).ready(function() {
 	});
 	
 	$('.togglecollapse').click(function() {
-		if($(this).closest('tr').next('tr').is(':visible')) {
+		if ($(this).closest('tr').next('tr').is(':visible')) {
 			$(this).closest('tr').nextUntil('.notcollapsed,.level'+($(this).data('level')-1), 'tr.level'+$(this).data('level')).each(function(){
 				$(this).hide();
 				$('.togglecollapse', this).text('expand');
@@ -81,6 +81,8 @@ $(document).ready(function() {
 			$(this).closest('tr').nextUntil('.notcollapsed,.level'+($(this).data('level')-1), 'tr.level'+$(this).data('level')).show();
 			$(this).text('collapse');
 		}
+		
+		return false;
 	});
 
 	/**

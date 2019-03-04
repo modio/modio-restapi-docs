@@ -7549,7 +7549,7 @@ System.out.println(response.toString());
 ```
 `POST /external/steamauth`
 
-Request an access token on behalf of a Steam user. To use this functionality you *must* supply your games [encrypted app ticket key from Steamworks](https://partner.steamgames.com/apps/sdkauth) in the *Edit > Options* page of your games profile on mod.io. A Successful request will return an [Access Token Object](#access-token-object).
+Request an access token on behalf of a Steam user. To use this functionality you *must* supply your games [encrypted app ticket key](https://partner.steamgames.com/apps/sdkauth) supplied by Steamworks, in the *Edit > Options* page of your games profile on mod.io. A Successful request will return an [Access Token Object](#access-token-object).
 
      Parameter|Type|Required|Description
      ---|---|---|---|
@@ -7668,7 +7668,7 @@ System.out.println(response.toString());
 ```
 `POST /external/galaxyauth`
 
-Request an access token on behalf of a GOG Galaxy user. To use this functionality you *must* supply your games [encrypted app ticket key from GOG Galaxy](https://devportal.gog.com/welcome) in the *Edit > Options* page of your games profile on mod.io. A Successful request will return an [Access Token Object](#access-token-object).
+Request an access token on behalf of a GOG Galaxy user. To use this functionality you *must* supply your games [encrypted app ticket key](https://devportal.gog.com/welcome) supplied by GOG Galaxy, in the *Edit > Options* page of your games profile on mod.io. A Successful request will return an [Access Token Object](#access-token-object).
 
      Parameter|Type|Required|Description
      ---|---|---|---|
@@ -7795,7 +7795,7 @@ System.out.println(response.toString());
 ```
 `POST /external/link`
 
-Confirm an external account (i.e. Steam) with the authenticated user's e-mail address. When calling this endpoint you must authenticate the request using the access token mod.io supplied to you from any of our external authentication endpoints, for example - the [Steam Authentication](#authenticate-via-steam) endpoint. A Successful request will return a [Message Object](#message-object) response at which point the user must check the supplied e-mail address to link the external account to the respective e-mail address.<br/><br/>__NOTE__: If you link an external account to an e-mail that already exists on mod.io and you confirm the action via the e-mail you will receive, the accounts will __automatically__ be merged together transferring all content from the external account to the native, existing account. Once this process is complete, existing access tokens to the external account will be nullified and you will need to [re-authenticate](#authentication).
+Connect an external account (i.e. Steam and GOG documented above) with the authenticated user's e-mail address. When calling this endpoint you must authenticate the request with the users access token and the ID of their external account. If we have a matching external account saved for that user, a Successful request will return a [Message Object](#message-object) response at which point the user must check the supplied e-mail address to link the external account to the respective e-mail address.<br/><br/>__NOTE__: The external authentication flows (i.e. Steam and GOG documented above) only give us a users id. This endpoint allows the user to verify their e-mail and connect it to their account. It is an __optional but recommended__ step as it makes account recovery and other processes easier.<br/><br/>__NOTE__: If you link an external account to an e-mail that already exists on mod.io and you confirm the action via the e-mail you will receive, the accounts will __automatically__ be merged together transferring all content from the external account to the native, existing account. Once this process is complete, existing access tokens to the external account will be nullified and you will need to [re-authenticate](#authentication).
 
      Parameter|Type|Required|Description
      ---|---|---|---|
