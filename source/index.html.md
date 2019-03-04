@@ -65,12 +65,12 @@ Here is a brief list of the things to know about our API, as explained in more d
 
 ## Authentication
 
-Authentication can be done via 3 ways:
+Authentication can be done via 4 ways:
 
 - Request an [API key (Read Only Access)](https://mod.io/apikey/widget)
+- Use the [Email Authentication Flow (Read + Write Access)](#email-authentication-flow) (to create an OAuth 2 Access Token via email)
+- Use the [External App Tickets Flow (Read + Write Access)](#external-app-ticket-authentication-flow) (to create an OAuth 2 Access Token automatically on popular platforms such as Steam and GOG)
 - Manually create an [OAuth 2 Access Token (Read + Write Access)](https://mod.io/oauth/widget)
-- Use our [Email Authentication Flow](#email-authentication-flow) (to create an OAuth 2 Access Token with Read + Write Access)
-- Use [External App Tickets](#external-ticket-authentication-flow) via popular platforms such as Steam.
 
 You can use these methods of authentication interchangeably, depending on the level of access you require.
 
@@ -111,8 +111,7 @@ curl -X POST https://api.mod.io/v1/oauth/emailrequest \
 
 Request a `security_code` be sent to the email address of the user you wish to authenticate: 
 
-
-`POST /oauth/emailrequest`
+`POST /oauth/emailrequest`
 
 Parameter | Value
 ---------- | ----------  
@@ -141,8 +140,7 @@ curl -X POST https://api.mod.io/v1/oauth/emailexchange \
 }
 ```
 
-
-`POST /oauth/emailexchange`
+`POST /oauth/emailexchange`
 
 Parameter | Value
 ---------- | ----------  
@@ -162,17 +160,17 @@ If you do not exchange your `security_code` for an `access_token` within 15 minu
 
 See [Making Requests](#making-requests) section.
 
-### External Ticket Authentication Flow
+### External App Ticket Authentication Flow
 
-If your game is running inside a popular game distribution platform such as Steam or GOG Galaxy, you can use the external ticket flow to authenticate your players via their encrypted session tickets which are accessible via the platform's SDK. mod.io offers the ability to decode this metadata from the respective client using a [shared secret](https://en.wikipedia.org/wiki/Shared_secret) which is supplied to you by the platform.
+If your game is running inside a popular distribution platform such as Steam or GOG Galaxy, you can use the [external app ticket flow](#external-auth) to authenticate your players via their encrypted session tickets which are accessible via the platform's SDK. mod.io offers the ability to decode this metadata from the respective client using a shared secret which is supplied to you by the platform.
 
 ![mod.io External Ticket Authentication Flow](images/ticket.png)
 
-By supplying mod.io with this secret key in your game's option page, we gain the ability to securely authenticate users to mod.io without any user input. This method is a great approach for staying out of the users way and offering the ability to subscribe to mods right away, thus removing friction. Due to mod.io only being able to retrieve some data representing the user, for users to achieve all the perks that our platform has to offer, your users would have to link their account (coming soon) to an e-mail address. It's important to emphasize that this is an extra, optional step.
+By supplying mod.io with this secret key in your game's option page, we gain the ability to securely authenticate users on mod.io without requiring user input. This method is great for enabling all functionality mod.io offers users without adding friction. Due to mod.io only being able to retrieve some data representing the user from this flow, an extra step is available which allows the user to [link their account](#link-external-account) to their e-mail address (this is an __optional but recommended__ step as it makes account recovery and other processes easier).
 
 Supported Platforms | - | - | -
 --- | --- | --- | ---
-[![Steam](images/platform-steam.png)](https://www.steampowered.com) | __Steam__<br />[SDK](https://partner.steamgames.com/doc/api/SteamEncryptedAppTicket)<br />[Endpoint Reference](#authenticate-via-steam)<br /> | [![GOG Galaxy](images/platform-gog.png)](https://www.gog.com/galaxy) | __GOG Galaxy__<br />(Coming Soon)<br />
+[![Steam](images/platform-steam.png)](https://www.steampowered.com) | __Steam__<br />[SDK](https://partner.steamgames.com/doc/api/SteamEncryptedAppTicket)<br />[Endpoint Reference](#authenticate-via-steam)<br /> | [![GOG Galaxy](images/platform-gog.png)](https://www.gog.com/galaxy) | __GOG Galaxy__<br />[SDK](https://cdn.gog.com/open/galaxy/sdk/1.133.3/Documentation/classgalaxy_1_1api_1_1IUser.html#a352802aab7a6e71b1cd1b9b1adfd53d8)<br />[Endpoint Reference](#authenticate-via-gog-galaxy)
 
 ### Scopes (OAuth 2)
 
@@ -7555,7 +7553,7 @@ Request an access token on behalf of a Steam user. To use this functionality you
 
      Parameter|Type|Required|Description
      ---|---|---|---|
-     appdata|base64-encoded string|true|The Steam users [Encrypted User Authentication Ticket](https://partner.steamgames.com/doc/features/auth#encryptedapptickets). <br><br>__NOTE:__ Parameter content *MUST* be the [*uint8 *rgubTicketEncrypted*](https://partner.steamgames.com/doc/api/SteamEncryptedAppTicket) returned from Steamworks API, converted into a base64-encoded string.
+     appdata|base64-encoded string|true|The Steam users [Encrypted App Ticket](https://partner.steamgames.com/doc/features/auth#encryptedapptickets) provided by the Steamworks SDK. <br><br>__NOTE:__ Parameter content *MUST* be the [*uint8 *rgubTicketEncrypted*](https://partner.steamgames.com/doc/api/SteamEncryptedAppTicket) returned after calling [ISteamUser::GetEncryptedAppTicket()](https://partner.steamgames.com/doc/api/ISteamUser#GetEncryptedAppTicket) within the Steamworks SDK, converted into a base64-encoded string.
 
 
 > Example response
@@ -7567,6 +7565,125 @@ Request an access token on behalf of a Steam user. To use this functionality you
 }
 ```
 <h3 id="Authenticate-via-Steam-responses">Responses</h3>
+
+Status|Meaning|Description|Response Schema
+---|---|---|---|
+200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)|Successful Request|[Access Token Object  ](#schemaaccess_token_object)
+
+<aside class="auth-notice">
+To perform this request, you must be authenticated via one of the following methods:
+<a href="#authentication">api_key</a>
+</aside>
+## Authenticate via GOG Galaxy
+
+> Example request
+
+```shell
+# You can also use wget
+curl -X POST https://api.mod.io/v1/external/galaxyauth?api_key=YourApiKey \
+  -H 'Content-Type: application/x-www-form-urlencoded' \ 
+  -H 'Accept: application/json' \
+  -d 'appdata=csEYJ2MWR53QssNNqFgO87sRN'
+
+```
+
+```http
+POST https://api.mod.io/v1/external/galaxyauth?api_key=YourApiKey HTTP/1.1
+Host: api.mod.io
+Content-Type: application/x-www-form-urlencoded
+Accept: application/json
+
+```
+
+```javascript
+var headers = {
+  'Content-Type':'application/x-www-form-urlencoded',
+  'Accept':'application/json'
+
+};
+
+$.ajax({
+  url: 'https://api.mod.io/v1/external/galaxyauth',
+  method: 'post',
+  data: '?api_key=YourApiKey',
+  headers: headers,
+  success: function(data) {
+    console.log(JSON.stringify(data));
+  }
+})
+```
+
+```javascript--nodejs
+const request = require('node-fetch');
+const inputBody = '{
+  "appdata": "csEYJ2MWR53QssNNqFgO87sRN"
+}';
+const headers = {
+  'Content-Type':'application/x-www-form-urlencoded',
+  'Accept':'application/json'
+
+};
+
+fetch('https://api.mod.io/v1/external/galaxyauth?api_key=YourApiKey',
+{
+  method: 'POST',
+  body: inputBody,
+  headers: headers
+})
+.then(function(res) {
+    return res.json();
+}).then(function(body) {
+    console.log(body);
+});
+```
+
+```python
+import requests
+headers = {
+  'Content-Type': 'application/x-www-form-urlencoded',
+  'Accept': 'application/json'
+}
+
+r = requests.post('https://api.mod.io/v1/external/galaxyauth', params={
+  'api_key': 'YourApiKey'
+}, headers = headers)
+
+print r.json()
+```
+
+```java
+URL obj = new URL("https://api.mod.io/v1/external/galaxyauth?api_key=YourApiKey");
+HttpURLConnection con = (HttpURLConnection) obj.openConnection();
+con.setRequestMethod("POST");
+int responseCode = con.getResponseCode();
+BufferedReader in = new BufferedReader(
+    new InputStreamReader(con.getInputStream()));
+String inputLine;
+StringBuffer response = new StringBuffer();
+while ((inputLine = in.readLine()) != null) {
+    response.append(inputLine);
+}
+in.close();
+System.out.println(response.toString());
+```
+`POST /external/galaxyauth`
+
+Request an access token on behalf of a GOG Galaxy user. To use this functionality you *must* supply your games [encrypted app ticket key from GOG Galaxy](https://devportal.gog.com/welcome) in the *Edit > Options* page of your games profile on mod.io. A Successful request will return an [Access Token Object](#access-token-object).
+
+     Parameter|Type|Required|Description
+     ---|---|---|---|
+     appdata|string|true|The GOG Galaxy users [Encrypted App Ticket](https://cdn.gog.com/open/galaxy/sdk/1.133.3/Documentation/classgalaxy_1_1api_1_1IUser.html#a352802aab7a6e71b1cd1b9b1adfd53d8) provided by the GOG Galaxy SDK. <br><br>__NOTE:__ Parameter content *MUST* be the encrypted string returned in the buffer after calling [IUser::GetEncryptedAppTicket()](https://cdn.gog.com/open/galaxy/sdk/1.133.3/Documentation/classgalaxy_1_1api_1_1IUser.html#a96af6792efc260e75daebedca2cf74c6) within the Galaxy SDK. Unlike the [Steam Authentication](#authenticate-via-steam) endpoint, you should _not_ base64 encode the encrypted string.
+
+
+> Example response
+
+```json
+{
+  "code": 200,
+  "access_token": "eyJ0eXAiOiXKV1QibCJhbLciOiJeiUzI1....."
+}
+```
+<h3 id="Authenticate-via-GOG-Galaxy-responses">Responses</h3>
 
 Status|Meaning|Description|Response Schema
 ---|---|---|---|
@@ -7692,7 +7809,7 @@ Confirm an external account (i.e. Steam) with the authenticated user's e-mail ad
 ```json
 {
   "code": 200,
-  "message": "Please see the confirmation e-mail sent to (test@mod.io) to complete account link."
+  "message": "Please see the confirmation e-mail sent to (:email) to complete account link."
 }
 ```
 <h3 id="Link-External-Account-responses">Responses</h3>
