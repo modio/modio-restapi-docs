@@ -3073,7 +3073,7 @@ curl -X POST https://api.mod.io/v1/games/<span class="o">{</span>game-id<span cl
 <td>maturity_option</td>
 <td>integer</td>
 <td></td>
-<td>Choose if this mod contains any of the following mature content. Note: The value of this field will default to 0 unless the parent game allows you to flag mature content (see <code>maturity_options</code> field in <a href="#game-object">Game Object</a>). <br><br><strong>0</strong> = None set <em>(default)</em><br><strong>1</strong> = Alcohol<br><strong>2</strong> = Drugs<br><strong>4</strong> = Violence<br><strong>8</strong> = Explicit<br><strong>?</strong> = Add the options you want together, to enable multiple options (see <a href="#bitwise-and-bitwise-and">BITWISE fields</a>)</td>
+<td>Choose if this mod contains any of the following mature content. <strong>NOTE:</strong> The value of this field will default to 0 unless the parent game allows you to flag mature content (see <code>maturity_options</code> field in <a href="#game-object">Game Object</a>). <br><br><strong>0</strong> = None set <em>(default)</em><br><strong>1</strong> = Alcohol<br><strong>2</strong> = Drugs<br><strong>4</strong> = Violence<br><strong>8</strong> = Explicit<br><strong>?</strong> = Add the options you want together, to enable multiple options (see <a href="#bitwise-and-bitwise-and">BITWISE fields</a>)</td>
 </tr>
 <tr>
 <td>metadata_blob</td>
@@ -3388,7 +3388,7 @@ Content-Type: application/x-www-form-urlencoded
 <td>maturity_option</td>
 <td>integer</td>
 <td></td>
-<td>Choose if this mod contains any of the following mature content. Note: The value of this field will default to 0 unless the parent game allows you to flag mature content (see <code>maturity_options</code> field in <a href="#game-object">Game Object</a>). <br><br><strong>0</strong> = None set <em>(default)</em><br><strong>1</strong> = Alcohol<br><strong>2</strong> = Drugs<br><strong>4</strong> = Violence<br><strong>8</strong> = Explicit<br><strong>?</strong> = Add the options you want together, to enable multiple options (see <a href="#bitwise-and-bitwise-and">BITWISE fields</a>)</td>
+<td>Choose if this mod contains any of the following mature content. <strong>NOTE:</strong> The value of this field will default to 0 unless the parent game allows you to flag mature content (see <code>maturity_options</code> field in <a href="#game-object">Game Object</a>). <br><br><strong>0</strong> = None set <em>(default)</em><br><strong>1</strong> = Alcohol<br><strong>2</strong> = Drugs<br><strong>4</strong> = Violence<br><strong>8</strong> = Explicit<br><strong>?</strong> = Add the options you want together, to enable multiple options (see <a href="#bitwise-and-bitwise-and">BITWISE fields</a>)</td>
 </tr>
 <tr>
 <td>metadata_blob</td>
@@ -7141,7 +7141,7 @@ curl -X POST https://api.mod.io/v1/games/<span class="o">{</span>game-id<span cl
 <td>metadata</td>
 <td>string[]</td>
 <td>true</td>
-<td>Array containing one or more key value pairs where the the key and value are separated by a colon ':' (if the string contains multiple colons the split will occur on the first matched, i.e. pistol-dmg:800:400 will become key: pistol-dmg, value: 800:400). <strong>NOTE:</strong><br><br>- Keys support alphanumeric, '_' and '-' characters only.<br>- Keys can map to multiple values (1-to-many relationship).<br>- Keys and values cannot exceed 255 characters in length.<br>- Key value pairs are searchable by exact match only.</td>
+<td>Array containing one or more key value pairs where the the key and value are separated by a colon ':' (if the string contains multiple colons the split will occur on the first matched, i.e. pistol-dmg:800:400 will become key: pistol-dmg, value: 800:400). The following restrictions apply to the supplied metadata:<br><br>- Keys support alphanumeric, '_' and '-' characters only.<br>- Keys can map to multiple values (1-to-many relationship).<br>- Keys and values cannot exceed 255 characters in length.<br>- Key value pairs are searchable by exact match only.</td>
 </tr>
 </tbody>
 </table>
