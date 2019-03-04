@@ -46,12 +46,12 @@ Here is a brief list of the things to know about our API, as explained in more d
 
 ## Authentication
 
-Authentication can be done via 3 ways:
+Authentication can be done via 4 ways:
 
 - Request an [API key (Read Only Access)](--parse_siteurl/apikey/widget)
+- Use the [Email Authentication Flow (Read + Write Access)](#email-authentication-flow) (to create an OAuth 2 Access Token via email)
+- Use the [External App Tickets Flow (Read + Write Access)](#external-ticket-authentication-flow) (to create an OAuth 2 Access Token automatically on popular platforms such as Steam and GOG)
 - Manually create an [OAuth 2 Access Token (Read + Write Access)](--parse_siteurl/oauth/widget)
-- Use our [Email Authentication Flow](#email-authentication-flow) (to create an OAuth 2 Access Token with Read + Write Access)
-- Use [External App Tickets](#external-ticket-authentication-flow) via popular platforms such as Steam.
 
 You can use these methods of authentication interchangeably, depending on the level of access you require.
 
@@ -143,13 +143,13 @@ If you do not exchange your `security_code` for an `access_token` within 15 minu
 
 See [Making Requests](#making-requests) section.
 
-### External Ticket Authentication Flow
+### External App Ticket Authentication Flow
 
-If your game is running inside a popular game distribution platform such as Steam or GOG Galaxy, you can use the external ticket flow to authenticate your players via their encrypted session tickets which are accessible via the platform's SDK. --parse_sitename offers the ability to decode this metadata from the respective client using a [shared secret](https://en.wikipedia.org/wiki/Shared_secret) which is supplied to you by the platform.
+If your game is running inside a popular distribution platform such as Steam or GOG Galaxy, you can use the [external app ticket flow](#external-auth) to authenticate your players via their encrypted session tickets which are accessible via the platform's SDK. --parse_sitename offers the ability to decode this metadata from the respective client using a shared secret which is supplied to you by the platform.
 
 ![--parse_sitename External Ticket Authentication Flow](images/ticket.png)
 
-By supplying --parse_sitename with this secret key in your game's option page, we gain the ability to securely authenticate users to --parse_sitename without any user input. This method is a great approach for staying out of the users way and offering the ability to subscribe to mods right away, thus removing friction. Due to --parse_sitename only being able to retrieve some data representing the user, for users to achieve all the perks that our platform has to offer, your users would have to link their account (coming soon) to an e-mail address. It's important to emphasize that this is an extra, optional step.
+By supplying --parse_sitename with this secret key in your game's option page, we gain the ability to securely authenticate users on --parse_sitename without requiring user input. This method is great for enabling all functionality --parse_sitename offers users without adding friction. Due to --parse_sitename only being able to retrieve some data representing the user from this flow, an extra step is available which allows the user to [link their account](#link-external-account) to their e-mail address (this is an __optional but recommended__ step as it makes account recovery and other processes easier).
 
 Supported Platforms | - | - | -
 --- | --- | --- | ---
