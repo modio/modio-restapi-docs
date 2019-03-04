@@ -9493,7 +9493,7 @@ curl -X POST https://api.mod.io/v1/external/steamauth?api_key<span class="o">=</
 </code></pre>
 <p><span class="httpmethod POST">POST</span> <span class="endpointheading">/external/steamauth</span></p>
 
-<p>Request an access token on behalf of a Steam user. To use this functionality you <em>must</em> supply your games <a href="https://partner.steamgames.com/apps/sdkauth">encrypted app ticket key from Steamworks</a> in the <em>Edit &gt; Options</em> page of your games profile on mod.io. A Successful request will return an <a href="#access-token-object">Access Token Object</a>.</p>
+<p>Request an access token on behalf of a Steam user. To use this functionality you <em>must</em> supply your games <a href="https://partner.steamgames.com/apps/sdkauth">encrypted app ticket key</a> supplied by Steamworks, in the <em>Edit &gt; Options</em> page of your games profile on mod.io. A Successful request will return an <a href="#access-token-object">Access Token Object</a>.</p>
 
 <table>
 <thead>
@@ -9625,7 +9625,7 @@ curl -X POST https://api.mod.io/v1/external/galaxyauth?api_key<span class="o">=<
 </code></pre>
 <p><span class="httpmethod POST">POST</span> <span class="endpointheading">/external/galaxyauth</span></p>
 
-<p>Request an access token on behalf of a GOG Galaxy user. To use this functionality you <em>must</em> supply your games <a href="https://devportal.gog.com/welcome">encrypted app ticket key from GOG Galaxy</a> in the <em>Edit &gt; Options</em> page of your games profile on mod.io. A Successful request will return an <a href="#access-token-object">Access Token Object</a>.</p>
+<p>Request an access token on behalf of a GOG Galaxy user. To use this functionality you <em>must</em> supply your games <a href="https://devportal.gog.com/welcome">encrypted app ticket key</a> supplied by GOG Galaxy, in the <em>Edit &gt; Options</em> page of your games profile on mod.io. A Successful request will return an <a href="#access-token-object">Access Token Object</a>.</p>
 
 <table>
 <thead>
@@ -9765,7 +9765,7 @@ curl -X POST https://api.mod.io/v1/external/link <span class="se">\</span>
 </code></pre>
 <p><span class="httpmethod POST">POST</span> <span class="endpointheading">/external/link</span></p>
 
-<p>Confirm an external account (i.e. Steam) with the authenticated user's e-mail address. When calling this endpoint you must authenticate the request using the access token mod.io supplied to you from any of our external authentication endpoints, for example - the <a href="#authenticate-via-steam">Steam Authentication</a> endpoint. A Successful request will return a <a href="#message-object">Message Object</a> response at which point the user must check the supplied e-mail address to link the external account to the respective e-mail address.<br><br><strong>NOTE</strong>: If you link an external account to an e-mail that already exists on mod.io and you confirm the action via the e-mail you will receive, the accounts will <strong>automatically</strong> be merged together transferring all content from the external account to the native, existing account. Once this process is complete, existing access tokens to the external account will be nullified and you will need to <a href="#authentication">re-authenticate</a>.</p>
+<p>Connect an external account (i.e. Steam and GOG documented above) with the authenticated user's e-mail address. When calling this endpoint you must authenticate the request with the users access token and the ID of their external account. If we have a matching external account saved for that user, a Successful request will return a <a href="#message-object">Message Object</a> response at which point the user must check the supplied e-mail address to link the external account to the respective e-mail address.<br><br><strong>NOTE</strong>: The external authentication flows (i.e. Steam and GOG documented above) only give us a users id. This endpoint allows the user to verify their e-mail and connect it to their account. It is an <strong>optional but recommended</strong> step as it makes account recovery and other processes easier.<br><br><strong>NOTE</strong>: If you link an external account to an e-mail that already exists on mod.io and you confirm the action via the e-mail you will receive, the accounts will <strong>automatically</strong> be merged together transferring all content from the external account to the native, existing account. Once this process is complete, existing access tokens to the external account will be nullified and you will need to <a href="#authentication">re-authenticate</a>.</p>
 
 <table>
 <thead>
