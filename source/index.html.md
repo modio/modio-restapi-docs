@@ -68,8 +68,8 @@ Here is a brief list of the things to know about our API, as explained in more d
 Authentication can be done via 4 ways:
 
 - Request an [API key (Read Only Access)](https://mod.io/apikey/widget)
-- Use the [Email Authentication Flow (Read + Write Access)](#email-authentication-flow) (to create an OAuth 2 Access Token via email)
-- Use the [External App Tickets Flow (Read + Write Access)](#external-app-ticket-authentication-flow) (to create an OAuth 2 Access Token automatically on popular platforms such as Steam and GOG)
+- Use the [Email Authentication Flow (Read + Write Access)](#email-authentication-flow) (to create an OAuth 2 Access Token via **email**)
+- Use the [External App Tickets Flow (Read + Write Access)](#external-app-ticket-authentication-flow) (to create an OAuth 2 Access Token automatically on popular platforms such as **Steam and GOG**)
 - Manually create an [OAuth 2 Access Token (Read + Write Access)](https://mod.io/oauth/widget)
 
 You can use these methods of authentication interchangeably, depending on the level of access you require.
@@ -171,6 +171,7 @@ By supplying mod.io with this secret key in your game's option page, we gain the
 Supported Platforms | - | - | -
 --- | --- | --- | ---
 [![Steam](images/platform-steam.png)](https://www.steampowered.com) | __Steam__<br />[SDK](https://partner.steamgames.com/doc/api/SteamEncryptedAppTicket)<br />[Endpoint Reference](#authenticate-via-steam)<br /> | [![GOG Galaxy](images/platform-gog.png)](https://www.gog.com/galaxy) | __GOG Galaxy__<br />[SDK](https://cdn.gog.com/open/galaxy/sdk/1.133.3/Documentation/classgalaxy_1_1api_1_1IUser.html#a352802aab7a6e71b1cd1b9b1adfd53d8)<br />[Endpoint Reference](#authenticate-via-gog-galaxy)
+Want a platform added to the list? [Contact us!](mailto:developers@mod.io?subject=Authentication Suggestion)
 
 ### Scopes (OAuth 2)
 
