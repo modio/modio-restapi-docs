@@ -87,7 +87,7 @@ $(document).ready(function() {
 	 Add class to tools table & remove formatting placeholders.
 	 */
 	$('#implementation').nextAll('table:eq(1)').addClass('plugingrid');
-	$('#external-ticket-authentication-flow').nextAll('table:first').addClass('plugingrid');
+	$('#external-app-ticket-authentication-flow').nextAll('table:first').addClass('plugingrid');
 	$('table.plugingrid > thead > tr > th').not(':first').not(':eq(3)').remove();
 
 	/**
