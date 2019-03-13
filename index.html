@@ -807,8 +807,8 @@
 <ul>
 <li>Request an <a href="https://mod.io/apikey/widget" class="colorbox">API key (Read Only Access)</a>
 </li>
-<li>Use the <a href="#email-authentication-flow">Email Authentication Flow (Read + Write Access)</a> (to create an OAuth 2 Access Token via email)</li>
-<li>Use the <a href="#external-app-ticket-authentication-flow">External App Tickets Flow (Read + Write Access)</a> (to create an OAuth 2 Access Token automatically on popular platforms such as Steam and GOG)</li>
+<li>Use the <a href="#email-authentication-flow">Email Authentication Flow (Read + Write Access)</a> (to create an OAuth 2 Access Token via <strong>email</strong>)</li>
+<li>Use the <a href="#external-app-ticket-authentication-flow">External App Tickets Flow (Read + Write Access)</a> (to create an OAuth 2 Access Token automatically on popular platforms such as <strong>Steam and GOG</strong>)</li>
 <li>Manually create an <a href="https://mod.io/oauth/widget" class="colorbox">OAuth 2 Access Token (Read + Write Access)</a>
 </li>
 </ul>
@@ -962,6 +962,8 @@ curl -X POST https://api.mod.io/v1/oauth/emailexchange <span class="se">\</span>
 </tr>
 </tbody>
 </table>
+
+<p>Want a platform added to the list? <a href="mailto:developers@mod.io?subject=Authentication%20Suggestion">Contact us!</a></p>
 <h3 id="scopes-oauth-2">Scopes (OAuth 2)</h3>
 <p>mod.io allows you to specify the permission each access token has (default is <em>read+write</em>), this is done by the use of scopes. See below for a full list of scopes available, you must include at least one scope when generating a new token.</p>
 
