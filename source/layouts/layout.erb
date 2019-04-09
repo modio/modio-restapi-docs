@@ -65,17 +65,43 @@ under the License.
     </style>
     <%= stylesheet_link_tag :screen, media: :screen %>
     <%= stylesheet_link_tag :print, media: :print %>
+
+    <link rel="stylesheet" href="/stylesheets/colorbox.css">
+    <link rel="stylesheet" href="/stylesheets/tippy.css">
     <% if current_page.data.search %>
       <%= javascript_include_tag  "all" %>
     <% else %>
       <%= javascript_include_tag  "all_nosearch" %>
     <% end %>
 
-    <!-- colorbox -->
-    <link rel="stylesheet" href="/stylesheets/colorbox.css">
     <script>
       $(document).ready(function() {
         $('a.colorbox').colorbox({iframe:true, innerHeight:640, innerWidth:800});
+        function mergeObjects(a, b) { 
+          return $.extend({}, a, b) 
+        }
+
+        let tippyOptions = {
+          arrow: true,
+          arrowType: 'round',
+          placement: 'top',
+          flip: 'false',
+          theme: 'modio',
+          interactive: true,
+        }
+
+        tippy('.tooltip-localization.get', mergeObjects(tippyOptions, {
+          content: '<div class="content">Multiple languages supported for this field. Supply a <a href="#localization">supported language</a> in <strong>Accept-Language</strong> HTTP header to specify language.</div>'
+        }))
+
+        tippy('.tooltip-localization.put', mergeObjects(tippyOptions, {
+          content: '<div class="content">Multiple languages supported for this field. If request contains <strong>Content-Language</strong> HTTP header with a <a href="#localization">supported language</a>, contents of field will be considered as translations.</div>'
+        }))
+
+        tippy('.tooltip-localization.icon', mergeObjects(tippyOptions, {
+          theme: 'modio-example',
+          content: '<img class="localization-icon-preview" src="images/language.svg" />',
+        }))
       });
     </script>
   </head>

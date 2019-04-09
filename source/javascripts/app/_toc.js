@@ -2,6 +2,8 @@
 //= require ../lib/_imagesloaded.min
 //= require ../lib/_colorbox.js
 //= require ../lib/_modio.js
+//= require ../lib/_popper.js
+//= require ../lib/_tippy.js
 
 ;(function () {
   'use strict';

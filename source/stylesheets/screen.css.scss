@@ -665,6 +665,10 @@ img.menu-reference-icon {
   max-width: 12px;
 }
 
+img.localization-icon-preview {
+  width: 40px;
+}
+
 .content table tr:last-child {
   border-bottom: 0;
 }
@@ -687,6 +691,11 @@ img.menu-reference-icon {
   &.DELETE {
     background: $bg-endpoint-delete;
   }
+}
+
+.content img.tooltip-localization {
+  float: right;
+  width: 40px;
 }
 
 .content .endpointheading {
@@ -803,6 +812,28 @@ pre.tab-json .json-example-highlight {
   &>span.versionwrap {
     font-size: 24px;
     margin: 0px 10px;
+  }
+}
+
+.tippy-tooltip.modio-theme {
+  background-color: $examples-bg;
+  color: $nav-text;
+
+  &[data-animatefill] {
+    background-color: transparent;
+  }
+
+  .tippy-backdrop {
+    background-color: $examples-bg;
+  }
+}
+
+.tippy-tooltip.modio-example-theme {
+  background-color: #fff;
+  border: 4px solid $examples-bg;
+
+  &[data-animatefill] {
+    background-color: transparent;
   }
 }
 

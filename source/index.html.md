@@ -662,6 +662,8 @@ The number of combinations makes using _equals_, _in_ and other filters a little
 
 ## Localization
 
+### Localized Responses
+
 ```
 Example HTTP Header Request
 ---------------------
@@ -705,8 +707,49 @@ Language Code | Language
 `zh-CN` | Chinese (Simplified)
 `zh-TW` | Chinese (Traditional)
 
+```shell
+// Example request updating specified fields with Polish translations. 
+
+curl -X POST https://api.mod.io/v1/games/1/mods/1 \
+	-H 'Authorization: Bearer your-token-here' \
+	-H 'Content-Type: application/x-www-form-urlencoded' \
+	-H 'Content-Language: pl' \
+	-d 'name=Zaawansowany rozkwit Wiedźmina' \
+	-d 'summary=Zobacz zaawansowany mod oświetlenia w Kaer Morhen w zupełnie nowym świetle' 
+
+// Attempt to retrieve Polish translations within supported fields.
+
+curl -X GET https://api.mod.io/v1/games/1/mods/1 \
+	-H 'Authorization: Bearer your-token-here' \
+	-H 'Accept-Language: pl'
+```
+
 __NOTE__: Localization for mod.io is currently a work-in-progress and thus not all responses may be in the desired language.
 
+```json
+// Response
+
+{
+	"id": 1,
+	"game_id": 1,
+	...
+	"name": "Zaawansowany rozkwit Wiedźmina", 
+	"summary": "Zobacz zaawansowany mod oświetlenia w Kaer Morhen w zupełnie nowym świetle"
+}
+```
+
+### Localized Requests
+
+Specific endpoints also allow you to submit fields in the mentioned supported languages above. To specify to the API you are submitting
+a non-english language you must supply the `Content-Language` header in the request that contains a valid language code (see above). When you supply the `Content-Language` header in your request, you are explicitly indicating to the API that all eligible fields have been translated into the supplied language and if a user (or client) requests the respective language, the value for that supplied field will be returned.
+
+A brief summary when dealing with localized requests and responses:
+
+- English is still required as the default value when creating and updating a resource.
+- If you don't supply a valid `Content-Language` header value, all input data will be assumed English.
+- If you don't supply a valid `Accept-Language` header value, all response data will be in English.
+- If you supply a valid `Accept-Language` header value, all response data will be in English unless translations exist in the requested language.
+- Only fields that contain the <a href="#" class="tooltip-localization icon">localization icon</a> in the parameter section of the endpoint can be submitted in different languages.
 
 ## Rate Limiting
 
@@ -739,7 +782,7 @@ mod.io returns the following headers in each request to inform you of your limit
 
  - `X-RateLimit-Limit` - Number of requests you can make from the supplied API key/access token per minute.
  - `X-RateLimit-Remaining` - Number of requests remaining until requests are rejected.
- - `X-Ratelimit-RetryAfter` - Amount of seconds until reset once you have been throttled (Only returned once rate limit exceeded).
+ - `X-RateLimit-RetryAfter` - Amount of seconds until reset once you have been throttled (Only returned once rate limit exceeded).
 
 ### Optimize your requests
 
@@ -865,9 +908,9 @@ Get all games. Successful request will return an array of [Game Objects](#get-al
     date_added|integer|Unix timestamp of date game was registered.
     date_updated|integer|Unix timestamp of date game was updated.
     date_live|integer|Unix timestamp of date game was set live.
-    name|string|Name of the game.
+    name|string|Name of the game. <img src="images/language.svg" class="tooltip-localization get" />
     name_id|string|Subdomain for the game on mod.io.
-    summary|string|Summary of the game.
+    summary|string|Summary of the game. <img src="images/language.svg" class="tooltip-localization get" />
     instructions_url|string|Link to a mod.io guide, modding wiki or a page where modders can learn how to make and submit mods.
     ugc_name|string|Word used to describe user-generated content (mods, items, addons etc).
     presentation_option|integer|Presentation style used on the mod.io website:<br><br>__0__ =  Grid View: Displays mods in a grid<br>__1__ = Table View: Displays mods in a table
@@ -1241,9 +1284,9 @@ Update details for a game. If you want to update the `icon`, `logo` or `header` 
     Parameter|Type|Required|Description
     ---|---|---|---|
     status|integer||Status of a game. We recommend you never change this once you have accepted your game to be available via the API (see [status and visibility](#status-amp-visibility) for details):<br><br>__0__ = Not accepted<br>__1__ = Accepted
-    name|string||Name of your game. Cannot exceed 80 characters.
+    name|string||Name of your game. Cannot exceed 80 characters. <img src="images/language.svg" class="tooltip-localization put" />
     name_id|string||Subdomain for the game on mod.io. Highly recommended to not change this unless absolutely required. Cannot exceed 20 characters.
-    summary|string||Explain your games mod support in 1 paragraph. Cannot exceed 250 characters.
+    summary|string||Explain your games mod support in 1 paragraph. Cannot exceed 250 characters. <img src="images/language.svg" class="tooltip-localization put" />
     instructions|string||Instructions and links creators should follow to upload mods. Keep it short and explain details like are mods submitted in-game or via tools you have created.
     instructions_url|string||Link to a mod.io guide, your modding wiki or a page where modders can learn how to make and submit mods to your games profile.
     ugc_name|string||Word used to describe user-generated content (mods, items, addons etc).
@@ -1436,10 +1479,10 @@ Get all mods for the corresponding game. Successful request will return an array
     date_updated|integer|Unix timestamp of date mod was updated.
     date_live|integer|Unix timestamp of date mod was set live.
     maturity_option|integer|Maturity option(s) set by the mod developer:<br><br>__0__ = None set _(default)_<br>__1__ = Alcohol<br>__2__ = Drugs<br>__4__ = Violence<br>__8__ = Explicit<br>__?__ = Add the options you want together, to enable multiple filters (see [BITWISE fields](#bitwise-and-bitwise-and))
-    name|string|Name of the mod.
+    name|string|Name of the mod.  <img src="images/language.svg" class="tooltip-localization get" />
     name_id|string|Path for the mod on mod.io. For example: https://gamename.mod.io/__mod-name-id-here__
-    summary|string|Summary of the mod.
-    description|string|Detailed description of the mod which allows HTML.
+    summary|string|Summary of the mod. <img src="images/language.svg" class="tooltip-localization get" />
+    description|string|Detailed description of the mod which allows HTML. <img src="images/language.svg" class="tooltip-localization get" />
     homepage_url|string|Official homepage of the mod.
     modfile|integer|Unique id of the file that is the current active release.
     metadata_blob|string|Metadata stored by the game developer.
@@ -2131,10 +2174,10 @@ Edit details for a mod. If you want to update the `logo` or media associated wit
     ---|---|---|---|
     status|integer||Status of a mod. The mod must have at least one uploaded `modfile` to be 'accepted' or 'archived' (best if this field is controlled by game admins, see [status and visibility](#status-amp-visibility) for details):<br><br>__0__ = Not accepted<br>__1__ = Accepted (game admins only)<br>__2__ = Archived (out of date or incompatible, game admins only)<br>__3__ = Deleted (use the [delete mod](#delete-mod) endpoint to set this status)
     visible|integer||Visibility of the mod (best if this field is controlled by mod admins, see [status and visibility](#status-amp-visibility) for details):<br><br>__0__ = Hidden<br>__1__ = Public
-    name|string||Name of your mod. Cannot exceed 80 characters.
+    name|string||Name of your mod. Cannot exceed 80 characters. <img src="images/language.svg" class="tooltip-localization put" />
     name_id|string||Path for the mod on mod.io. For example: https://gamename.mod.io/__mod-name-id-here__. Cannot exceed 80 characters.
-    summary|string||Summary for your mod, giving a brief overview of what it's about. Cannot exceed 250 characters.
-    description|string||Detailed description for your mod, which can include details such as 'About', 'Features', 'Install Instructions', 'FAQ', etc. HTML supported and encouraged.
+    summary|string||Summary for your mod, giving a brief overview of what it's about. Cannot exceed 250 characters. <img src="images/language.svg" class="tooltip-localization put" />
+    description|string||Detailed description for your mod, which can include details such as 'About', 'Features', 'Install Instructions', 'FAQ', etc. HTML supported and encouraged. <img src="images/language.svg" class="tooltip-localization put" />
     homepage_url|string||Official homepage for your mod. Must be a valid URL.
     stock|integer||Maximium number of subscribers for this mod. A value of 0 disables this limit.
     maturity_option|integer||Choose if this mod contains any of the following mature content. __NOTE:__ The value of this field will default to 0 unless the parent game allows you to flag mature content (see `maturity_options` field in [Game Object](#game-object)). <br><br>__0__ = None set _(default)_<br>__1__ = Alcohol<br>__2__ = Drugs<br>__4__ = Violence<br>__8__ = Explicit<br>__?__ = Add the options you want together, to enable multiple options (see [BITWISE fields](#bitwise-and-bitwise-and))
@@ -6620,7 +6663,7 @@ Get all comments posted in the mods profile. Successful request will return an a
      reply_id|integer|Id of the parent comment this comment is replying to (can be 0 if the comment is not a reply).
      thread_position|string|Levels of nesting in a comment thread. You should order by this field, to maintain comment grouping. How it works:<br><br>- The first comment will have the position '01'.<br>- The second comment will have the position '02'.<br>- If someone responds to the second comment the position will be '02.01'.<br>- A maximum of 3 levels is supported.
      karma|integer|Karma received for the comment (can be positive or negative).
-     content|string|Contents of the comment.
+     content|string|Contents of the comment. <img src="images/language.svg" class="tooltip-localization get" />
 
 
 > Example response
@@ -9315,7 +9358,7 @@ data|[Comment Object   ](#schemacomment_object)[]|Array containing comment objec
 » thread_position|string|Levels of nesting in a comment thread. How it works:<br><br>- The first comment will have the position '01'.<br>- The second comment will have the position '02'.<br>- If someone responds to the second comment the position will be '02.01'.<br>- A maximum of 3 levels is supported.
 » karma|integer|Karma received for the comment (can be postive or negative).
 » karma_guest|integer|Karma received for guest comments (can be postive or negative).
-» content|string|Contents of the comment.
+» content|string|Contents of the comment. <img src="images/language.svg" class="tooltip-localization put" />
 result_count|integer|Number of results returned in this request.
 result_offset|integer|Number of results skipped over. Defaults to 0 unless overridden by `_offset` filter.
 result_limit|integer|Maximum number of results returned in the request. Defaults to 100 (max) unless overridden by `_limit` filter.
@@ -9605,10 +9648,10 @@ data|[Game Object   ](#schemagame_object)[]|Array containing game objects.
 » header|[Header Image Object  ](#schemaheader_image_object)|Contains header data.
 »» filename|string|Header image filename including extension.
 »» original|string|URL to the full-sized header image.
-» name|string|Name of the game.
+» name|string|Name of the game. <img src="images/language.svg" class="tooltip-localization put" />
 » name_id|string|Subdomain for the game on mod.io.
-» summary|string|Summary of the game.
-» instructions|string|A guide about creating and uploading mods for this game to mod.io (applicable if submission_option = 0).
+» summary|string|Summary of the game. <img src="images/language.svg" class="tooltip-localization put" />
+» instructions|string|A guide about creating and uploading mods for this game to mod.io (applicable if submission_option = 0). <img src="images/language.svg" class="tooltip-localization put" />
 » instructions_url|string|Link to a mod.io guide, your modding wiki or a page where modders can learn how to make and submit mods to your games profile.
 » profile_url|string|URL to the game's mod.io page.
 » tag_options|[Game Tag Option Object ](#schemagame_tag_option_object)[]|Groups of tags configured by the game developer, that mods can select.
@@ -9816,10 +9859,10 @@ data|[Mod Object   ](#schemamod_object)[]|Array containing mod objects.
 »» thumb_640x360|string|URL to the medium logo thumbnail.
 »» thumb_1280x720|string|URL to the large logo thumbnail.
 » homepage_url|string|Official homepage of the mod.
-» name|string|Name of the mod.
+» name|string|Name of the mod. <img src="images/language.svg" class="tooltip-localization put" />
 » name_id|string|Path for the mod on mod.io. For example: https://gamename.mod.io/__mod-name-id-here__
-» summary|string|Summary of the mod.
-» description|string|Detailed description of the mod which allows HTML.
+» summary|string|Summary of the mod. <img src="images/language.svg" class="tooltip-localization put" />
+» description|string|Detailed description of the mod which allows HTML. <img src="images/language.svg" class="tooltip-localization put" />
 » description_plaintext|string|`description` field converted into plaintext.
 » metadata_blob|string|Metadata stored by the game developer. Metadata can also be stored as searchable [key value pairs](#metadata), and to individual [mod files](#get-all-modfiles).
 » profile_url|string|URL to the mod's mod.io profile.
@@ -10347,7 +10390,7 @@ reply_id|integer|Id of the parent comment this comment is replying to (can be 0 
 thread_position|string|Levels of nesting in a comment thread. How it works:<br><br>- The first comment will have the position '01'.<br>- The second comment will have the position '02'.<br>- If someone responds to the second comment the position will be '02.01'.<br>- A maximum of 3 levels is supported.
 karma|integer|Karma received for the comment (can be postive or negative).
 karma_guest|integer|Karma received for guest comments (can be postive or negative).
-content|string|Contents of the comment.
+content|string|Contents of the comment. <img src="images/language.svg" class="tooltip-localization put" />
 
 
 
@@ -10640,10 +10683,10 @@ logo|[Logo Object   ](#schemalogo_object)|Contains logo data.
 » thumb_640x360|string|URL to the medium logo thumbnail.
 » thumb_1280x720|string|URL to the large logo thumbnail.
 homepage_url|string|Official homepage of the mod.
-name|string|Name of the mod.
+name|string|Name of the mod. <img src="images/language.svg" class="tooltip-localization put" />
 name_id|string|Path for the mod on mod.io. For example: https://gamename.mod.io/__mod-name-id-here__
-summary|string|Summary of the mod.
-description|string|Detailed description of the mod which allows HTML.
+summary|string|Summary of the mod. <img src="images/language.svg" class="tooltip-localization put" />
+description|string|Detailed description of the mod which allows HTML. <img src="images/language.svg" class="tooltip-localization put" />
 description_plaintext|string|`description` field converted into plaintext.
 metadata_blob|string|Metadata stored by the game developer. Metadata can also be stored as searchable [key value pairs](#metadata), and to individual [mod files](#get-all-modfiles).
 profile_url|string|URL to the mod's mod.io profile.
@@ -10871,10 +10914,10 @@ logo|[Logo Object   ](#schemalogo_object)|Contains logo data.
 header|[Header Image Object  ](#schemaheader_image_object)|Contains header data.
 » filename|string|Header image filename including extension.
 » original|string|URL to the full-sized header image.
-name|string|Name of the game.
+name|string|Name of the game. <img src="images/language.svg" class="tooltip-localization put" />
 name_id|string|Subdomain for the game on mod.io.
-summary|string|Summary of the game.
-instructions|string|A guide about creating and uploading mods for this game to mod.io (applicable if submission_option = 0).
+summary|string|Summary of the game. <img src="images/language.svg" class="tooltip-localization put" />
+instructions|string|A guide about creating and uploading mods for this game to mod.io (applicable if submission_option = 0). <img src="images/language.svg" class="tooltip-localization put" />
 instructions_url|string|Link to a mod.io guide, your modding wiki or a page where modders can learn how to make and submit mods to your games profile.
 profile_url|string|URL to the game's mod.io page.
 tag_options|[Game Tag Option Object ](#schemagame_tag_option_object)[]|Groups of tags configured by the game developer, that mods can select.

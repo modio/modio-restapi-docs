@@ -645,6 +645,8 @@ The number of combinations makes using _equals_, _in_ and other filters a little
 
 ## Localization
 
+### Localized Responses
+
 ```
 Example HTTP Header Request
 ---------------------
@@ -688,8 +690,49 @@ Language Code | Language
 `zh-CN` | Chinese (Simplified)
 `zh-TW` | Chinese (Traditional)
 
+```shell
+// Example request updating specified fields with Polish translations. 
+
+curl -X POST --parse_apiurl/games/1/mods/1 \
+	-H 'Authorization: Bearer your-token-here' \
+	-H 'Content-Type: application/x-www-form-urlencoded' \
+	-H 'Content-Language: pl' \
+	-d 'name=Zaawansowany rozkwit Wiedźmina' \
+	-d 'summary=Zobacz zaawansowany mod oświetlenia w Kaer Morhen w zupełnie nowym świetle' 
+
+// Attempt to retrieve Polish translations within supported fields.
+
+curl -X GET --parse_apiurl/games/1/mods/1 \
+	-H 'Authorization: Bearer your-token-here' \
+	-H 'Accept-Language: pl'
+```
+
 __NOTE__: Localization for --parse_sitename is currently a work-in-progress and thus not all responses may be in the desired language.
 
+```json
+// Response
+
+{
+	"id": 1,
+	"game_id": 1,
+	...
+	"name": "Zaawansowany rozkwit Wiedźmina", 
+	"summary": "Zobacz zaawansowany mod oświetlenia w Kaer Morhen w zupełnie nowym świetle"
+}
+```
+
+### Localized Requests
+
+Specific endpoints also allow you to submit fields in the mentioned supported languages above. To specify to the API you are submitting
+a non-english language you must supply the `Content-Language` header in the request that contains a valid language code (see above). When you supply the `Content-Language` header in your request, you are explicitly indicating to the API that all eligible fields have been translated into the supplied language and if a user (or client) requests the respective language, the value for that supplied field will be returned.
+
+A brief summary when dealing with localized requests and responses:
+
+- English is still required as the default value when creating and updating a resource.
+- If you don't supply a valid `Content-Language` header value, all input data will be assumed English.
+- If you don't supply a valid `Accept-Language` header value, all response data will be in English.
+- If you supply a valid `Accept-Language` header value, all response data will be in English unless translations exist in the requested language.
+- Only fields that contain the <a href="#" class="tooltip-localization icon">localization icon</a> in the parameter section of the endpoint can be submitted in different languages.
 
 ## Rate Limiting
 
@@ -722,7 +765,7 @@ X-RateLimit-Remaining: 87
 
  - `X-RateLimit-Limit` - Number of requests you can make from the supplied API key/access token per minute.
  - `X-RateLimit-Remaining` - Number of requests remaining until requests are rejected.
- - `X-Ratelimit-RetryAfter` - Amount of seconds until reset once you have been throttled (Only returned once rate limit exceeded).
+ - `X-RateLimit-RetryAfter` - Amount of seconds until reset once you have been throttled (Only returned once rate limit exceeded).
 
 ### Optimize your requests
 
