@@ -7998,10 +7998,10 @@ Submit one or API endpoint calls in a single HTTP request by batching the reques
 
      __What will it require?__
 
-     This will require three requests:
-     1. [GET /v1/games/{game-id}/mods](#get-all-mods)
-     2. [GET /v1/me/subscribed](#get-user-subscriptions)
-     3. [GET /v1/me/ratings](#get-user-ratings)
+     This will require three requests:  
+     1. [GET /v1/games/{game-id}/mods](#get-all-mods)  
+     2. [GET /v1/me/subscribed](#get-user-subscriptions)  
+     3. [GET /v1/me/ratings](#get-user-ratings)  
 
     In total, we are making 3 requests in a synchronous manner, inside a single request. Based on the above example, we need to know how to get the `id` value of the [Mod Object](#mod-object) from Request #1 and provide it as a dependency to the subsequent requests.
 
