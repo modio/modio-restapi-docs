@@ -10030,10 +10030,10 @@ curl -X POST https://api.mod.io/v1/batch <span class="se">\</span>
 
 <p><strong>What will it require?</strong></p>
 
-<p>This will require three requests:
-     1. <a href="#get-all-mods">GET /v1/games/{game-id}/mods</a>
-     2. <a href="#get-user-subscriptions">GET /v1/me/subscribed</a>
-     3. <a href="#get-user-ratings">GET /v1/me/ratings</a></p>
+<p>This will require three requests:<br>
+     1. <a href="#get-all-mods">GET /v1/games/{game-id}/mods</a><br>
+     2. <a href="#get-user-subscriptions">GET /v1/me/subscribed</a><br>
+     3. <a href="#get-user-ratings">GET /v1/me/ratings</a>  </p>
 
 <p>In total, we are making 3 requests in a synchronous manner, inside a single request. Based on the above example, we need to know how to get the <code>id</code> value of the <a href="#mod-object">Mod Object</a> from Request #1 and provide it as a dependency to the subsequent requests.</p>
 
