@@ -56,32 +56,29 @@ Here is a brief list of the things to know about our API, as explained in more d
 
 - All requests to the API must be made over HTTPS (TLS).
 - All API responses are in `application/json` format.
-- API keys are restricted to read-only `GET` requests.
-- OAuth 2 access tokens are required for `POST`, `PUT` and `DELETE` requests.
-- Binary data `POST` requests must use `Content-Type: multipart/form-data` header.
-- Non-binary `POST`, `PUT` and `DELETE` requests must use `Content-Type: application/x-www-form-urlencoded` header.
-- Non-binary data can optionally be supplied in `application/json` using the `input_json` parameter. 
-- Rate limiting can be implemented for excess usage to deter abuse and spam.
+- Any POST request with a binary payload must supply the `Content-Type: multipart/form-data` header.
+- Any non-binary POST, PUT and DELETE requests must supply the `Content-Type: application/x-www-form-urlencoded` header.
+- Any non-binary payload can be supplied in JSON format using the `input_json` parameter. 
 
 ## Authentication
 
 Authentication can be done via 4 ways:
 
-- Request an [API key (Read Only Access)](https://mod.io/apikey/widget)
+- Request an [API key (Read Only Access)](https://mod.io/apikey/widget) - or get a [test environment](https://test.mod.io/apikey/widget) key
 - Use the [Email Authentication Flow (Read + Write Access)](#email-authentication-flow) (to create an OAuth 2 Access Token via **email**)
 - Use the [External App Tickets Flow (Read + Write Access)](#external-app-ticket-authentication-flow) (to create an OAuth 2 Access Token automatically on popular platforms such as **Steam and GOG**)
-- Manually create an [OAuth 2 Access Token (Read + Write Access)](https://mod.io/oauth/widget)
+- Manually create an [OAuth 2 Access Token (Read + Write Access)](https://mod.io/oauth/widget) - or create a [test environment](https://test.mod.io/oauth/widget) token
 
 You can use these methods of authentication interchangeably, depending on the level of access you require.
 
 Authentication Type | In | HTTP Methods | Abilities | Purpose
 ---------- | ---------- | ---------- | ---------- | ---------- 
-API Key | Query | `GET` | Read-only `GET` requests and email authentication flow. | Browsing and downloading content.
-Access Token (OAuth 2) | Header | `GET`, `POST`, `PUT`, `DELETE` | Read, create, update, delete. | View, add, edit and delete content the authenticated user has subscribed to or has permission to change.
+API Key | Query | GET | Read-only GET requests and authentication flows. | Browsing and downloading content. Retrieving access tokens on behalf of users.
+Access Token (OAuth 2) | Header | GET, POST, PUT, DELETE | Read, create, update, delete. | View, add, edit and delete content the authenticated user has subscribed to or has permission to change.
 
 ### API Key Authentication
 
-To access the API authentication is required. All users and games get a [private API key](https://mod.io/apikey/widget). It is quick and easy to use in your apps but limited to read-only GET requests, due to the limited security it offers. View your [private API key(s)](https://mod.io/apikey/widget).
+To access the API authentication is required. All users and games get a private API key. It is quick and easy to use in your apps but limited to read-only GET requests, due to the limited security it offers. View your private API key(s) [on production](https://mod.io/apikey/widget) or on the [test environment](https://test.mod.io/apikey/widget).
 
 ### Email Authentication Flow
 
@@ -111,12 +108,13 @@ curl -X POST https://api.mod.io/v1/oauth/emailrequest \
 
 Request a `security_code` be sent to the email address of the user you wish to authenticate: 
 
+
 `POST /oauth/emailrequest`
 
-Parameter | Value
----------- | ----------  
-`api_key` | Your API key generated from 'API' tab within your game profile.
-`email` | A valid and secure email address your user has access to. 
+Parameter |Type | Required | Value
+---------- | ---------- |---------- | ----------
+`api_key` | string | true | Your API key generated from 'API' tab within your game profile.
+`email` | string | true | A valid and secure email address your user has access to. 
 
 ### Step 2: Exchanging security code for access token
 
@@ -140,12 +138,14 @@ curl -X POST https://api.mod.io/v1/oauth/emailexchange \
 }
 ```
 
+
 `POST /oauth/emailexchange`
 
-Parameter | Value
----------- | ----------  
-`api_key` | Your API key generated from 'API' tab within your game profile.
-`security_code` | Unique 5-digit code sent to the email address supplied in the previous request. 
+Parameter | Type | Required | Value
+---------- | ---------- | ---------- | ----------  
+`api_key` | string | true | Your API key generated from 'API' tab within your game profile.
+`security_code` | string | true | Unique 5-digit code sent to the email address supplied in the previous request. 
+`date_expires` | integer || Unix timestamp of date in which the returned token will expire. Value cannot be higher than the default value which is a common year (unix timestamp + 31536000 seconds). Using a token after it's expiry time has elapsed will result in a `401 Unauthorized` response.
 
 There are a few important things to know when using the email authentication flow:
  
@@ -179,7 +179,7 @@ mod.io allows you to specify the permission each access token has (default is _r
 
 Scope | Abilities
 ---------- | ----------
-`read` | When authenticated with a token that *only* contains the `read` scope, you will only be able to read data via `GET` requests. 
+`read` | When authenticated with a token that *only* contains the `read` scope, you will only be able to read data via GET requests. 
 `write` | When authenticated with a token that contains the `write` scope, you are able to add, edit and remove resources.
 `read+write` | The above scopes combined. _Default for email and external ticket verification flow._
 
@@ -197,8 +197,6 @@ To authenticate using your unique 32-character API key, append the `api_key=xxxx
 
 ### Using an Access Token
 
-To authenticate using an OAuth 2 access token, you must include the HTTP header `Authorization` in your request with the value `Bearer your-token-here`. Verification via Access Token allows much greater power including creating, updating and deleting resources that you have access to. Also because OAuth 2 access tokens are tied to a user account, you can personalize the output by viewing content they are subscribed and connected to via the [me endpoint](#me) and by using relevant filters.
-
 ```shell
 // Example POST request with no binary files
 
@@ -209,9 +207,17 @@ curl -X POST https://api.mod.io/v1/games/1/mods/1/tags \
   -d 'tags[]=FPS'
 ```
 
+To authenticate using an OAuth 2 access token, you must include the HTTP header `Authorization` in your request with the value Bearer *your-token-here*. Verification via Access Token allows much greater power including creating, updating and deleting resources that you have access to. Also because OAuth 2 access tokens are tied to a user account, you can personalize the output by viewing content they are subscribed and connected to via the [me endpoint](#me) and by using relevant filters.
+
+### Access Token Lifetime & Expiry
+
+By default, all access token's are long-lived - meaning they are valid for a common year (not leap year) from the date of issue. You should architect your application to smoothly handle the event in which a token expires or is revoked by the user themselves or a mod.io admin, triggering a `401 Unauthorized` API response.
+
+If you would like tokens issued through your game to have a shorter lifespan, you can do this by providing the `date_expires` parameter on any endpoint that returns an access token such as the [Email Exchange](#authentication), [Authenticate via Steam](#authenticate-via-steam) and [Authenticate via GOG Galaxy](#authenticate-via-gog-galaxy) endpoints. If the parameter is not supplied, it will default to 1 year from the request date, if the supplied parameter value is above one year or below the current server time it will be ignored and the default value restored.
+
 ### Request Content-Type
 
-If you are making a request that includes a file, your request `Content-Type` header __must__ be `multipart/form-data`, otherwise if the request contains data (but no files) it should be `application/x-www-form-urlencoded` with text encoded in `UTF-8` format. 
+If you are making a request that includes a file, your request `Content-Type` header __must__ be `multipart/form-data`, otherwise if the request contains data (but no files) it should be `application/x-www-form-urlencoded`, which is UTF-8 encoded. 
 
 ```shell
 // Example POST request with binary file
@@ -227,9 +233,9 @@ curl -X POST https://api.mod.io/v1/games/1/mods \
 
 Body Contains | Method | Content-Type
 ---------- | ------- | -------
-Binary Files | `POST` | `multipart/form-data`
-Non-Binary Data | `POST`, `PUT`, `DELETE` | `application/x-www-form-urlencoded`
-Nothing | `GET` | No `Content-Type` required.
+Binary Files | POST | `multipart/form-data`
+Non-Binary Data | POST, PUT, DELETE | `application/x-www-form-urlencoded`
+Nothing | GET | No `Content-Type` required.
 
 If the endpoint you are making a request to expects a file it will expect the correct `Content-Type` as mentioned. Supplying an incorrect `Content-Type` header will return a `415 Unsupported Media Type` response.
 
@@ -242,15 +248,15 @@ curl -X POST https://api.mod.io/v1/games/1/team \
   -H 'Authorization: Bearer your-token-here' \
   -H 'Content-Type: application/x-www-form-urlencoded' \  
   -d 'input_json={
-		"member":"patrick@diabolical.com",
-		"level":"8",
-		"position":"King in the North"
+		"member": "patrick@diabolical.com",
+		"level": 8,
+		"position": "King in the North"
 	  }'
 ```
 
-For `POST` & `PUT` requests that do _not submit files_ you have the option to supply your data as HTTP `POST` parameters, or as a _UTF-8 encoded_ JSON object inside the parameter `input_json` which contains all required data. Regardless, whether you use JSON or not the `Content-Type` of your request still needs to be `application/x-www-form-urlencoded` with the data provided in the body of the request.
+For POST & PUT requests that do _not submit files_ you have the option to supply your data as HTTP POST parameters, or as a _UTF-8 encoded_ JSON object inside the parameter `input_json` which contains all payload data. Regardless, whether you use JSON or not the `Content-Type` of your request still needs to be `application/x-www-form-urlencoded` with the data provided in the body of the request.
 
-__NOTE:__ If you supply identical key-value pairs as a request parameter and also as a parameter in your JSON object, the JSON object will take priority as only one can exist.
+__NOTE:__ If you supply identical key-value pairs as a request parameter and also as a parameter in your JSON object, the JSON object will take priority.
 
 ### Response Content-Type
 
@@ -267,7 +273,7 @@ Responses will __always__ be returned in `application/json` format.
 }
 ```
 
-If an error occurs, mod.io returns an error object with the HTTP `code` and `message` to describe what happened and when possible how to avoid repeating the error. It's important to know that if you encounter errors that are not server errors (`500+` codes) - you should review the error message before continuing to send requests to the endpoint.
+If an error occurs, mod.io returns an error object with the HTTP `code` and `message` to describe what happened and when possible how to avoid repeating the error. It's important to know that if you encounter errors that are not server errors (`500`+ codes) - you should review the error message before continuing to send requests to the endpoint.
 
 When requests contain invalid input data or query parameters (for filtering), an optional field object called `errors` can be supplied inside the `error` object, which contains a list of the invalid inputs. The nested `errors` object is only supplied with `422 Unprocessable Entity` responses. Be sure to review the [Response Codes](#response-codes) to be aware of the HTTP codes that the mod.io API returns.
 
@@ -278,8 +284,8 @@ When requests contain invalid input data or query parameters (for filtering), an
 	"code": 422,
 	"message": "Validation Failed. Please see below to fix invalid input.",
 	"errors": {
-		"member":"The member must be an integer.",
-		"name":"The name may not be greater than 50 characters."
+		"member":"The user_id value must be an integer.",
+		"name":"The name may not be greater than 80 characters."
 	}
 }
 
@@ -297,15 +303,15 @@ Response Code | Meaning
 `201` | Created -- Resource created, inspect Location header for newly created resource URL.
 `204` | No Content -- Request was successful and there was no data to be returned.
 `400` | Bad request -- Server cannot process the request due to malformed syntax or invalid request message framing.
-`401` | Unauthorized -- Your API key/access token is incorrect.
+`401` | Unauthorized -- Your API key/access token is incorrect, revoked, or expired.
 `403` | Forbidden -- You do not have permission to perform the requested action.
-`404` | Not Found -- The resource requested could not be found.
+`404` | Not Found -- The requested resource could not be found.
 `405` | Method Not Allowed -- The method of your request is incorrect.
 `406` | Not Acceptable -- You supplied or requested an incorrect Content-Type.
 `410` | Gone -- The requested resource is no longer available.
 `422` | Unprocessable Entity -- The request was well formed but unable to be followed due to semantic errors.
 `429` | Too Many Requests -- You have made too [many requests](#rate-limiting), inspect headers for reset time.
-`500` | Internal Server Error -- We had a problem with our server. Try again later. (rare)
+`500` | Internal Server Error -- The server encountered a problem processing your request. Please try again. (rare)
 `503` | Service Unavailable -- We're temporarily offline for maintenance. Please try again later. (rare)
 
 ## Response Formats
@@ -438,7 +444,7 @@ visible-st=1
 
 ### Important Note When Filtering
 
-Due to the requirement of certain `status` & `visible` values only being available to administrators. We have restricted the amount of [filters](#filtering) available for _non-game admins_ and thus for both of these fields _only_ direct matches `=` and `-in` are permitted. Attempting to apply game admin filters without the required permissions will result in a `403 Forbidden` [error response](#error-object).
+Due to the requirement of certain `status` & `visible` values only being available to administrators. We have restricted the amount of [filters](#filtering) available for _non-game admins_ and thus for both of these fields _only_ direct matches __=__ and __-in__ are permitted. Attempting to apply game admin filters without the required permissions will result in a `403 Forbidden` [error response](#error-object).
 
 ## Pagination
 
@@ -755,7 +761,7 @@ A brief summary when dealing with localized requests and responses:
 
 mod.io implements rate limiting to stop users abusing the service. Exceeding your rate limit will result in requests receiving a `429 Too Many Requests` response until your reset time is reached. 
 
-It is _highly recommended_ you architect your app to check for the `X-RateLimit` headers below and the `429` HTTP response code to ensure you are not making too many requests, or continuing to make requests after a `429` code is repeatedly returned. Users who continue to send requests despite a `429` response could potentially have their credentials revoked. The following limits are implemented by default:
+It is _highly recommended_ you architect your app to check for the `X-RateLimit` headers below and the `429 Too Many Requests` HTTP response code to ensure you are not making too many requests, or continuing to make requests after a `429` code is repeatedly returned. Users who continue to send requests despite a `429` response could potentially have their credentials revoked. The following limits are implemented by default:
 
 ### API key Rate Limiting
 
@@ -2804,7 +2810,7 @@ Upload a file for the corresponding mod. Successful request will return the newl
 
      Parameter|Type|Required|Description
      ---|---|---|---|
-     filedata|file|true|The binary file for the release. For compatibility you should ZIP the base folder of your mod, or if it is a collection of files which live in a pre-existing game folder, you should ZIP those files. Your file must meet the following conditions:<br><br>- File must be __zipped__ and cannot exceed 10GB in filesize<br>- Mods which span multiple game directories are not supported unless the game manages this<br>- Mods which overwrite files are not supported unless the game manages this
+     filedata|file|true|The binary file for the release. For compatibility you should ZIP the base folder of your mod, or if it is a collection of files which live in a pre-existing game folder, you should ZIP those files. Your file must meet the following conditions:<br><br>- File must be __zipped__ and cannot exceed 10GB in filesize<br>- Filename's cannot contain any of the following charcters: <code>\ / ? " < > &#124; : *</code><br>- Mods which span multiple game directories are not supported unless the game manages this<br>- Mods which overwrite files are not supported unless the game manages this
      version|string||Version of the file release.
      changelog|string||Changelog of this release.
      active|boolean||_Default value is true._ Label this upload as the current release, this will change the `modfile` field on the parent mod to the `id` of this file after upload.<br><br>__NOTE:__ If the _active_ parameter is _true_, a [__MODFILE_CHANGED__ event](#get-all-mod-events) will be fired, so game clients know there is an update available for this mod.
@@ -7598,6 +7604,7 @@ Request an access token on behalf of a Steam user. To use this functionality you
      Parameter|Type|Required|Description
      ---|---|---|---|
      appdata|base64-encoded string|true|The Steam users [Encrypted App Ticket](https://partner.steamgames.com/doc/features/auth#encryptedapptickets) provided by the Steamworks SDK. <br><br>__NOTE:__ Parameter content *MUST* be the [*uint8 *rgubTicketEncrypted*](https://partner.steamgames.com/doc/api/SteamEncryptedAppTicket) returned after calling [ISteamUser::GetEncryptedAppTicket()](https://partner.steamgames.com/doc/api/ISteamUser#GetEncryptedAppTicket) within the Steamworks SDK, converted into a base64-encoded string.
+     date_expires|integer||Unix timestamp of date in which the returned token will expire. Value cannot be higher than the default value which is a common year (unix timestamp + 31536000 seconds). Using a token after it's expiry time has elapsed will result in a `401 Unauthorized` response.
 
 
 > Example response
@@ -7605,7 +7612,8 @@ Request an access token on behalf of a Steam user. To use this functionality you
 ```json
 {
   "code": 200,
-  "access_token": "eyJ0eXAiOiXKV1QibCJhbLciOiJeiUzI1....."
+  "access_token": "eyJ0eXAiOiXKV1QibCJhbLciOiJeiUzI1.....",
+  "date_expires": 1570673249
 }
 ```
 <h3 id="Authenticate-via-Steam-responses">Responses</h3>
@@ -7717,6 +7725,7 @@ Request an access token on behalf of a GOG Galaxy user. To use this functionalit
      Parameter|Type|Required|Description
      ---|---|---|---|
      appdata|string|true|The GOG Galaxy users [Encrypted App Ticket](https://cdn.gog.com/open/galaxy/sdk/1.133.3/Documentation/classgalaxy_1_1api_1_1IUser.html#a352802aab7a6e71b1cd1b9b1adfd53d8) provided by the GOG Galaxy SDK. <br><br>__NOTE:__ Parameter content *MUST* be the encrypted string returned in the buffer after calling [IUser::GetEncryptedAppTicket()](https://cdn.gog.com/open/galaxy/sdk/1.133.3/Documentation/classgalaxy_1_1api_1_1IUser.html#a96af6792efc260e75daebedca2cf74c6) within the Galaxy SDK. Unlike the [Steam Authentication](#authenticate-via-steam) endpoint, you should _not_ base64 encode the encrypted string.
+     date_expires|integer||Unix timestamp of date in which the returned token will expire. Value cannot be higher than the default value which is a common year (unix timestamp + 31536000 seconds). Using a token after it's expiry time has elapsed will result in a `401 Unauthorized` response.
 
 
 > Example response
@@ -7724,7 +7733,8 @@ Request an access token on behalf of a GOG Galaxy user. To use this functionalit
 ```json
 {
   "code": 200,
-  "access_token": "eyJ0eXAiOiXKV1QibCJhbLciOiJeiUzI1....."
+  "access_token": "eyJ0eXAiOiXKV1QibCJhbLciOiJeiUzI1.....",
+  "date_expires": 1570673249
 }
 ```
 <h3 id="Authenticate-via-GOG-Galaxy-responses">Responses</h3>
@@ -7878,11 +7888,11 @@ curl -X POST https://api.mod.io/v1/batch \
   -H 'Authorization: Bearer {access-token}' \ 
   -H 'Content-Type: application/x-www-form-urlencoded' \ 
   -H 'Accept: application/json' \
-  -d 'batch[0][relative_url]=v1/games/11/mods' \
+  -d 'batch[0][relative url   ]=v1/games/11/mods' \
   -d 'batch[0][method]=GET' \
-  -d 'batch[1][relative_url]=v1/me/subscribed?id=in-$[0].data[*].id' \
+  -d 'batch[1][relative url   ]=v1/me/subscribed?id=in-$[0].data[*].id' \
   -d 'batch[1][method]=GET' \
-  -d 'batch[2][relative_url]=v1/me/ratings?id=in-$[0].data[*].id' \
+  -d 'batch[2][relative url   ]=v1/me/ratings?id=in-$[0].data[*].id' \
   -d 'batch[2][method]=GET'
 
 ```
@@ -7919,11 +7929,11 @@ $.ajax({
 ```javascript--nodejs
 const request = require('node-fetch');
 const inputBody = '{
-  "batch[0][relative url   ]": "v1/games/11/mods",
+  "batch[0][relative url]": "v1/games/11/mods",
   "batch[0][method]": "GET",
-  "batch[1][relative url   ]": "v1/me/subscribed?id=in-$[0].data[*].id",
+  "batch[1][relative url]": "v1/me/subscribed?id=in-$[0].data[*].id",
   "batch[1][method]": "GET",
-  "batch[2][relative url   ]": "v1/me/ratings?id=in-$[0].data[*].id",
+  "batch[2][relative url]": "v1/me/ratings?id=in-$[0].data[*].id",
   "batch[2][method]": "GET"
 }';
 const headers = {
@@ -7978,15 +7988,15 @@ System.out.println(response.toString());
 ```
 `POST /batch`
 
-Submit one or API endpoint calls in a single HTTP request by batching the requests together. This endpoint is convenient for repeated sequential API calls as it eliminates the HTTP overhead of each request. All encapsulated requests are processed in a synchronous manner which enables you to use the response data of a previous request as a parameter in the subsequent request which we call request dependencies (see below for more info). Successful request will return an array of [Batch Objects](#make-batch-request-2).
+Submit one or more API endpoint calls in a single HTTP request by batching the requests together. This endpoint is convenient for repeated sequential API calls as it eliminates the HTTP overhead of each request. All encapsulated requests are processed in a synchronous manner which enables you to use the response data of a previous request as a parameter in the subsequent request which we call request dependencies (see below for more info). Successful request will return an array of [Batch Objects](#make-batch-request-2).
 
      __Batch Limitations__
 
-     The following applies to all batch requests:
+     The following applies to all batch requests:  
 
-     - Who you authenticate as for the parent batch request, you will be assumed that entity for _all_ sub-requests.
-     - Authorization headers passed into sub-requests are ignored..
-     - You cannot make more than 20 requests within a batch.
+     - Who you authenticate as for the parent batch request, you will be assumed that entity for _all_ sub-requests.  
+     - Authorization headers passed into sub-requests are ignored.  
+     - You cannot make more than 20 requests within a batch.  
 
      __Batch Dependencies__
 
@@ -8021,7 +8031,7 @@ Submit one or API endpoint calls in a single HTTP request by batching the reques
      ---|---|
      `$`| Our custom prefix identifier for batch dependencies
      `[0]`| Response index, if we wanted a value from our first request, this value would be 0 to specify the first array.
-     `<Anything>` | From here onwards is a 1:1 representation of the response in [ECMAScript sytax](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Property_Accessors) with one important exception, the __body__ parameter for each request is ignored. Whilst the body parameter is in the  [Batch Object](#batch-object) responses, you do not need to reference it in regards to batch dependencies.
+     `<field>` | From here onwards is a 1:1 representation of the response in [ECMAScript sytax](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Property_Accessors) with one important exception, the __body__ parameter for each request is ignored. Whilst the body parameter is in the  [Batch Object](#batch-object) responses, you do not need to reference it in regards to batch dependencies.
 
      Given the above format, let's build our dependency string for our request.
 
@@ -10825,7 +10835,7 @@ Name|Type|Description
 data|[Rating Object](#schemarating_object)[]|Array containing rating objects.
 » game_id|integer|Unique game id.
 » mod_id|integer|Unique mod id.
-» rating|integer|Is it a positive or negative rating.
+» rating|integer|Mod rating value.<br><br>__1__ = Positive Rating<br>__-1__ = Negative Rating
 » date_added|integer|Unix timestamp of date rating was submitted.
 result_count|integer|Number of results returned in this request.
 result_offset|integer|Number of results skipped over. Defaults to 0 unless overridden by `_offset` filter.
@@ -11958,7 +11968,8 @@ metavalue|string|The value of the key-value pair.
 ```json
 {
   "code": 200,
-  "access_token": "eyJ0eXAiOiXKV1QibCJhbLciOiJeiUzI1....."
+  "access_token": "eyJ0eXAiOiXKV1QibCJhbLciOiJeiUzI1.....",
+  "date_expires": 1570673249
 } 
 ```
 
@@ -11969,6 +11980,7 @@ Name|Type|Description
 ---|---|---|---|
 code|integer|HTTP Response Code.
 access_token|string|The user's access token.
+date_expires|integer|Unix timestamp of the date this token will expire. Default is one year from issue date. See [Access Token Lifetime & Expiry](#making-requests).
 
 
 
@@ -11993,7 +12005,7 @@ Name|Type|Description
 ---|---|---|---|
 game_id|integer|Unique game id.
 mod_id|integer|Unique mod id.
-rating|integer|Is it a positive or negative rating.
+rating|integer|Mod rating value.<br><br>__1__ = Positive Rating<br>__-1__ = Negative Rating
 date_added|integer|Unix timestamp of date rating was submitted.
 
 

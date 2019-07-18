@@ -37,12 +37,9 @@ Here is a brief list of the things to know about our API, as explained in more d
 
 - All requests to the API must be made over HTTPS (TLS).
 - All API responses are in `application/json` format.
-- API keys are restricted to read-only `GET` requests.
-- OAuth 2 access tokens are required for `POST`, `PUT` and `DELETE` requests.
-- Binary data `POST` requests must use `Content-Type: multipart/form-data` header.
-- Non-binary `POST`, `PUT` and `DELETE` requests must use `Content-Type: application/x-www-form-urlencoded` header.
-- Non-binary data can optionally be supplied in `application/json` using the `input_json` parameter. 
-- Rate limiting can be implemented for excess usage to deter abuse and spam.
+- Any POST request with a binary payload must supply the `Content-Type: multipart/form-data` header.
+- Any non-binary POST, PUT and DELETE requests must supply the `Content-Type: application/x-www-form-urlencoded` header.
+- Any non-binary payload can be supplied in JSON format using the `input_json` parameter. 
 
 ## Authentication
 
@@ -57,8 +54,8 @@ You can use these methods of authentication interchangeably, depending on the le
 
 Authentication Type | In | HTTP Methods | Abilities | Purpose
 ---------- | ---------- | ---------- | ---------- | ---------- 
-API Key | Query | `GET` | Read-only `GET` requests and email authentication flow. | Browsing and downloading content.
-Access Token (OAuth 2) | Header | `GET`, `POST`, `PUT`, `DELETE` | Read, create, update, delete. | View, add, edit and delete content the authenticated user has subscribed to or has permission to change.
+API Key | Query | GET | Read-only GET requests and authentication flows. | Browsing and downloading content. Retrieving access tokens on behalf of users.
+Access Token (OAuth 2) | Header | GET, POST, PUT, DELETE | Read, create, update, delete. | View, add, edit and delete content the authenticated user has subscribed to or has permission to change.
 
 ### API Key Authentication
 
@@ -95,10 +92,10 @@ Request a `security_code` be sent to the email address of the user you wish to a
 
 `POST oauth/emailrequest`
 
-Parameter | Value
----------- | ----------  
-`api_key` | Your API key generated from 'API' tab within your game profile.
-`email` | A valid and secure email address your user has access to. 
+Parameter |Type | Required | Value
+---------- | ---------- |---------- | ----------
+`api_key` | string | true | Your API key generated from 'API' tab within your game profile.
+`email` | string | true | A valid and secure email address your user has access to. 
 
 ### Step 2: Exchanging security code for access token
 
@@ -125,10 +122,11 @@ curl -X POST --parse_apiurl/oauth/emailexchange \
 
 `POST oauth/emailexchange`
 
-Parameter | Value
----------- | ----------  
-`api_key` | Your API key generated from 'API' tab within your game profile.
-`security_code` | Unique 5-digit code sent to the email address supplied in the previous request. 
+Parameter | Type | Required | Value
+---------- | ---------- | ---------- | ----------  
+`api_key` | string | true | Your API key generated from 'API' tab within your game profile.
+`security_code` | string | true | Unique 5-digit code sent to the email address supplied in the previous request. 
+`date_expires` | integer || Unix timestamp of date in which the returned token will expire. Value cannot be higher than the default value which is a common year (unix timestamp + 31536000 seconds). Using a token after it's expiry time has elapsed will result in a `401 Unauthorized` response.
 
 There are a few important things to know when using the email authentication flow:
  
@@ -162,7 +160,7 @@ Want a platform added to the list? [Contact us!](mailto:--parse_email?subject=Au
 
 Scope | Abilities
 ---------- | ----------
-`read` | When authenticated with a token that *only* contains the `read` scope, you will only be able to read data via `GET` requests. 
+`read` | When authenticated with a token that *only* contains the `read` scope, you will only be able to read data via GET requests. 
 `write` | When authenticated with a token that contains the `write` scope, you are able to add, edit and remove resources.
 `read+write` | The above scopes combined. _Default for email and external ticket verification flow._
 
@@ -180,8 +178,6 @@ To authenticate using your unique 32-character API key, append the `api_key=xxxx
 
 ### Using an Access Token
 
-To authenticate using an OAuth 2 access token, you must include the HTTP header `Authorization` in your request with the value `Bearer your-token-here`. Verification via Access Token allows much greater power including creating, updating and deleting resources that you have access to. Also because OAuth 2 access tokens are tied to a user account, you can personalize the output by viewing content they are subscribed and connected to via the [me endpoint](#me) and by using relevant filters.
-
 ```shell
 // Example POST request with no binary files
 
@@ -192,9 +188,17 @@ curl -X POST --parse_apiurl/games/1/mods/1/tags \
   -d 'tags[]=FPS'
 ```
 
+To authenticate using an OAuth 2 access token, you must include the HTTP header `Authorization` in your request with the value Bearer *your-token-here*. Verification via Access Token allows much greater power including creating, updating and deleting resources that you have access to. Also because OAuth 2 access tokens are tied to a user account, you can personalize the output by viewing content they are subscribed and connected to via the [me endpoint](#me) and by using relevant filters.
+
+### Access Token Lifetime & Expiry
+
+By default, all access token's are long-lived - meaning they are valid for a common year (not leap year) from the date of issue. You should architect your application to smoothly handle the event in which a token expires or is revoked by the user themselves or a --parse_sitename admin, triggering a `401 Unauthorized` API response.
+
+If you would like tokens issued through your game to have a shorter lifespan, you can do this by providing the `date_expires` parameter on any endpoint that returns an access token such as the [Email Exchange](#authentication), [Authenticate via Steam](#authenticate-via-steam) and [Authenticate via GOG Galaxy](#authenticate-via-gog-galaxy) endpoints. If the parameter is not supplied, it will default to 1 year from the request date, if the supplied parameter value is above one year or below the current server time it will be ignored and the default value restored.
+
 ### Request Content-Type
 
-If you are making a request that includes a file, your request `Content-Type` header __must__ be `multipart/form-data`, otherwise if the request contains data (but no files) it should be `application/x-www-form-urlencoded` with text encoded in `UTF-8` format. 
+If you are making a request that includes a file, your request `Content-Type` header __must__ be `multipart/form-data`, otherwise if the request contains data (but no files) it should be `application/x-www-form-urlencoded`, which is UTF-8 encoded. 
 
 ```shell
 // Example POST request with binary file
@@ -210,9 +214,9 @@ curl -X POST --parse_apiurl/games/1/mods \
 
 Body Contains | Method | Content-Type
 ---------- | ------- | -------
-Binary Files | `POST` | `multipart/form-data`
-Non-Binary Data | `POST`, `PUT`, `DELETE` | `application/x-www-form-urlencoded`
-Nothing | `GET` | No `Content-Type` required.
+Binary Files | POST | `multipart/form-data`
+Non-Binary Data | POST, PUT, DELETE | `application/x-www-form-urlencoded`
+Nothing | GET | No `Content-Type` required.
 
 If the endpoint you are making a request to expects a file it will expect the correct `Content-Type` as mentioned. Supplying an incorrect `Content-Type` header will return a `415 Unsupported Media Type` response.
 
@@ -225,15 +229,15 @@ curl -X POST --parse_apiurl/games/1/team \
   -H 'Authorization: Bearer your-token-here' \
   -H 'Content-Type: application/x-www-form-urlencoded' \  
   -d 'input_json={
-		"member":"patrick@diabolical.com",
-		"level":"8",
-		"position":"King in the North"
+		"member": "patrick@diabolical.com",
+		"level": 8,
+		"position": "King in the North"
 	  }'
 ```
 
-For `POST` & `PUT` requests that do _not submit files_ you have the option to supply your data as HTTP `POST` parameters, or as a _UTF-8 encoded_ JSON object inside the parameter `input_json` which contains all required data. Regardless, whether you use JSON or not the `Content-Type` of your request still needs to be `application/x-www-form-urlencoded` with the data provided in the body of the request.
+For POST & PUT requests that do _not submit files_ you have the option to supply your data as HTTP POST parameters, or as a _UTF-8 encoded_ JSON object inside the parameter `input_json` which contains all payload data. Regardless, whether you use JSON or not the `Content-Type` of your request still needs to be `application/x-www-form-urlencoded` with the data provided in the body of the request.
 
-__NOTE:__ If you supply identical key-value pairs as a request parameter and also as a parameter in your JSON object, the JSON object will take priority as only one can exist.
+__NOTE:__ If you supply identical key-value pairs as a request parameter and also as a parameter in your JSON object, the JSON object will take priority.
 
 ### Response Content-Type
 
@@ -250,7 +254,7 @@ Responses will __always__ be returned in `application/json` format.
 }
 ```
 
-If an error occurs, --parse_sitename returns an error object with the HTTP `code` and `message` to describe what happened and when possible how to avoid repeating the error. It's important to know that if you encounter errors that are not server errors (`500+` codes) - you should review the error message before continuing to send requests to the endpoint.
+If an error occurs, --parse_sitename returns an error object with the HTTP `code` and `message` to describe what happened and when possible how to avoid repeating the error. It's important to know that if you encounter errors that are not server errors (`500`+ codes) - you should review the error message before continuing to send requests to the endpoint.
 
 When requests contain invalid input data or query parameters (for filtering), an optional field object called `errors` can be supplied inside the `error` object, which contains a list of the invalid inputs. The nested `errors` object is only supplied with `422 Unprocessable Entity` responses. Be sure to review the [Response Codes](#response-codes) to be aware of the HTTP codes that the --parse_sitename API returns.
 
@@ -261,8 +265,8 @@ When requests contain invalid input data or query parameters (for filtering), an
 	"code": 422,
 	"message": "Validation Failed. Please see below to fix invalid input.",
 	"errors": {
-		"member":"The member must be an integer.",
-		"name":"The name may not be greater than 50 characters."
+		"member":"The user_id value must be an integer.",
+		"name":"The name may not be greater than 80 characters."
 	}
 }
 
@@ -280,15 +284,15 @@ Response Code | Meaning
 `201` | Created -- Resource created, inspect Location header for newly created resource URL.
 `204` | No Content -- Request was successful and there was no data to be returned.
 `400` | Bad request -- Server cannot process the request due to malformed syntax or invalid request message framing.
-`401` | Unauthorized -- Your API key/access token is incorrect.
+`401` | Unauthorized -- Your API key/access token is incorrect, revoked, or expired.
 `403` | Forbidden -- You do not have permission to perform the requested action.
-`404` | Not Found -- The resource requested could not be found.
+`404` | Not Found -- The requested resource could not be found.
 `405` | Method Not Allowed -- The method of your request is incorrect.
 `406` | Not Acceptable -- You supplied or requested an incorrect Content-Type.
 `410` | Gone -- The requested resource is no longer available.
 `422` | Unprocessable Entity -- The request was well formed but unable to be followed due to semantic errors.
 `429` | Too Many Requests -- You have made too [many requests](#rate-limiting), inspect headers for reset time.
-`500` | Internal Server Error -- We had a problem with our server. Try again later. (rare)
+`500` | Internal Server Error -- The server encountered a problem processing your request. Please try again. (rare)
 `503` | Service Unavailable -- We're temporarily offline for maintenance. Please try again later. (rare)
 
 ## Response Formats
@@ -421,7 +425,7 @@ visible-st=1
 
 ### Important Note When Filtering
 
-Due to the requirement of certain `status` & `visible` values only being available to administrators. We have restricted the amount of [filters](#filtering) available for _non-game admins_ and thus for both of these fields _only_ direct matches `=` and `-in` are permitted. Attempting to apply game admin filters without the required permissions will result in a `403 Forbidden` [error response](#error-object).
+Due to the requirement of certain `status` & `visible` values only being available to administrators. We have restricted the amount of [filters](#filtering) available for _non-game admins_ and thus for both of these fields _only_ direct matches __=__ and __-in__ are permitted. Attempting to apply game admin filters without the required permissions will result in a `403 Forbidden` [error response](#error-object).
 
 ## Pagination
 
@@ -738,7 +742,7 @@ A brief summary when dealing with localized requests and responses:
 
 --parse_sitename implements rate limiting to stop users abusing the service. Exceeding your rate limit will result in requests receiving a `429 Too Many Requests` response until your reset time is reached. 
 
-It is _highly recommended_ you architect your app to check for the `X-RateLimit` headers below and the `429` HTTP response code to ensure you are not making too many requests, or continuing to make requests after a `429` code is repeatedly returned. Users who continue to send requests despite a `429` response could potentially have their credentials revoked. The following limits are implemented by default:
+It is _highly recommended_ you architect your app to check for the `X-RateLimit` headers below and the `429 Too Many Requests` HTTP response code to ensure you are not making too many requests, or continuing to make requests after a `429` code is repeatedly returned. Users who continue to send requests despite a `429` response could potentially have their credentials revoked. The following limits are implemented by default:
 
 ### API key Rate Limiting
 
