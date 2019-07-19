@@ -704,6 +704,13 @@ img.localization-icon-preview {
   padding: 5px;
 }
 
+.content :not(.highlight) > code {
+  border-radius: 4px;
+  color: #ff3860;
+  font-weight: bold;
+  padding: 2px 4px;
+}
+
 table .shadow-drop-lr {
   -webkit-animation: shadow-drop-lr 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94) both;
   animation: shadow-drop-lr 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94) both;
