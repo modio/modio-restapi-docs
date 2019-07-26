@@ -9520,7 +9520,7 @@ To perform this request, you must be authenticated via one of the following meth
 curl -X POST https://api.mod.io/v1/external/steamauth?api_key<span class="o">=</span>YourApiKey <span class="se">\</span>
   -H <span class="s1">'Content-Type: application/x-www-form-urlencoded'</span> <span class="se">\ </span>
   -H <span class="s1">'Accept: application/json'</span> <span class="se">\</span>
-  -d <span class="s1">'appdata=NDNuZmhnaWdyaGdqOWc0M2o5eTM0aGc='</span>
+  --data-urlencode <span class="s1">'appdata=NDNuZmhnaWdyaGdqOWc0M2o5eTM0aGc='</span>
 
 </code></pre><pre class="highlight http tab-http"><code><span class="nf">POST</span> <span class="nn">https://api.mod.io/v1/external/steamauth?api_key=YourApiKey</span> <span class="k">HTTP</span><span class="o">/</span><span class="m">1.1</span>
 <span class="na">Host</span><span class="p">:</span> <span class="s">api.mod.io</span>
@@ -9659,7 +9659,7 @@ To perform this request, you must be authenticated via one of the following meth
 curl -X POST https://api.mod.io/v1/external/galaxyauth?api_key<span class="o">=</span>YourApiKey <span class="se">\</span>
   -H <span class="s1">'Content-Type: application/x-www-form-urlencoded'</span> <span class="se">\ </span>
   -H <span class="s1">'Accept: application/json'</span> <span class="se">\</span>
-  -d <span class="s1">'appdata=csEYJ2MWR53QssNNqFgO87sRN'</span>
+  --data-urlencode <span class="s1">'appdata=GCL671bwZ/+zUeOWc0M'</span>
 
 </code></pre><pre class="highlight http tab-http"><code><span class="nf">POST</span> <span class="nn">https://api.mod.io/v1/external/galaxyauth?api_key=YourApiKey</span> <span class="k">HTTP</span><span class="o">/</span><span class="m">1.1</span>
 <span class="na">Host</span><span class="p">:</span> <span class="s">api.mod.io</span>
@@ -9683,7 +9683,7 @@ curl -X POST https://api.mod.io/v1/external/galaxyauth?api_key<span class="o">=<
 <span class="p">})</span>
 </code></pre><pre class="highlight javascript tab-javascript--nodejs"><code><span class="kr">const</span> <span class="nx">request</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s1">'node-fetch'</span><span class="p">);</span>
 <span class="kr">const</span> <span class="nx">inputBody</span> <span class="o">=</span> <span class="s1">'{
-  "appdata": "csEYJ2MWR53QssNNqFgO87sRN"
+  "appdata": "GCL671bwZ/+zUeOWc0M"
 }'</span><span class="p">;</span>
 <span class="kr">const</span> <span class="nx">headers</span> <span class="o">=</span> <span class="p">{</span>
   <span class="s1">'Content-Type'</span><span class="p">:</span><span class="s1">'application/x-www-form-urlencoded'</span><span class="p">,</span>
@@ -9952,11 +9952,11 @@ curl -X POST https://api.mod.io/v1/batch <span class="se">\</span>
   -H <span class="s1">'Authorization: Bearer {access-token}'</span> <span class="se">\ </span>
   -H <span class="s1">'Content-Type: application/x-www-form-urlencoded'</span> <span class="se">\ </span>
   -H <span class="s1">'Accept: application/json'</span> <span class="se">\</span>
-  -d <span class="s1">'batch[0][relative url]=v1/games/11/mods'</span> <span class="se">\</span>
+  -d <span class="s1">'batch[0][relative url   ]=v1/games/11/mods'</span> <span class="se">\</span>
   -d <span class="s1">'batch[0][method]=GET'</span> <span class="se">\</span>
-  -d <span class="s1">'batch[1][relative url]=v1/me/subscribed?id=in-$[0].data[*].id'</span> <span class="se">\</span>
+  -d <span class="s1">'batch[1][relative url   ]=v1/me/subscribed?id=in-$[0].data[*].id'</span> <span class="se">\</span>
   -d <span class="s1">'batch[1][method]=GET'</span> <span class="se">\</span>
-  -d <span class="s1">'batch[2][relative url]=v1/me/ratings?id=in-$[0].data[*].id'</span> <span class="se">\</span>
+  -d <span class="s1">'batch[2][relative url   ]=v1/me/ratings?id=in-$[0].data[*].id'</span> <span class="se">\</span>
   -d <span class="s1">'batch[2][method]=GET'</span>
 
 </code></pre><pre class="highlight http tab-http"><code><span class="nf">POST</span> <span class="nn">https://api.mod.io/v1/batch</span> <span class="k">HTTP</span><span class="o">/</span><span class="m">1.1</span>
