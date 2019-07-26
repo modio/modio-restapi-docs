@@ -9952,11 +9952,11 @@ curl -X POST https://api.mod.io/v1/batch <span class="se">\</span>
   -H <span class="s1">'Authorization: Bearer {access-token}'</span> <span class="se">\ </span>
   -H <span class="s1">'Content-Type: application/x-www-form-urlencoded'</span> <span class="se">\ </span>
   -H <span class="s1">'Accept: application/json'</span> <span class="se">\</span>
-  -d <span class="s1">'batch[0][relative url   ]=v1/games/11/mods'</span> <span class="se">\</span>
+  -d <span class="s1">'batch[0][relative url]=v1/games/11/mods'</span> <span class="se">\</span>
   -d <span class="s1">'batch[0][method]=GET'</span> <span class="se">\</span>
-  -d <span class="s1">'batch[1][relative url   ]=v1/me/subscribed?id=in-$[0].data[*].id'</span> <span class="se">\</span>
+  -d <span class="s1">'batch[1][relative url]=v1/me/subscribed?id=in-$[0].data[*].id'</span> <span class="se">\</span>
   -d <span class="s1">'batch[1][method]=GET'</span> <span class="se">\</span>
-  -d <span class="s1">'batch[2][relative url   ]=v1/me/ratings?id=in-$[0].data[*].id'</span> <span class="se">\</span>
+  -d <span class="s1">'batch[2][relative url]=v1/me/ratings?id=in-$[0].data[*].id'</span> <span class="se">\</span>
   -d <span class="s1">'batch[2][method]=GET'</span>
 
 </code></pre><pre class="highlight http tab-http"><code><span class="nf">POST</span> <span class="nn">https://api.mod.io/v1/batch</span> <span class="k">HTTP</span><span class="o">/</span><span class="m">1.1</span>
