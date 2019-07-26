@@ -7514,7 +7514,7 @@ To perform this request, you must be authenticated via one of the following meth
 curl -X POST https://api.mod.io/v1/external/steamauth?api_key=YourApiKey \
   -H 'Content-Type: application/x-www-form-urlencoded' \ 
   -H 'Accept: application/json' \
-  -d 'appdata=NDNuZmhnaWdyaGdqOWc0M2o5eTM0aGc='
+  --data-urlencode 'appdata=NDNuZmhnaWdyaGdqOWc0M2o5eTM0aGc='
 
 ```
 
@@ -7635,7 +7635,7 @@ To perform this request, you must be authenticated via one of the following meth
 curl -X POST https://api.mod.io/v1/external/galaxyauth?api_key=YourApiKey \
   -H 'Content-Type: application/x-www-form-urlencoded' \ 
   -H 'Accept: application/json' \
-  -d 'appdata=csEYJ2MWR53QssNNqFgO87sRN'
+  --data-urlencode 'appdata=GCL671bwZ/+zUeOWc0M'
 
 ```
 
@@ -7668,7 +7668,7 @@ $.ajax({
 ```javascript--nodejs
 const request = require('node-fetch');
 const inputBody = '{
-  "appdata": "csEYJ2MWR53QssNNqFgO87sRN"
+  "appdata": "GCL671bwZ/+zUeOWc0M"
 }';
 const headers = {
   'Content-Type':'application/x-www-form-urlencoded',
@@ -7888,11 +7888,11 @@ curl -X POST https://api.mod.io/v1/batch \
   -H 'Authorization: Bearer {access-token}' \ 
   -H 'Content-Type: application/x-www-form-urlencoded' \ 
   -H 'Accept: application/json' \
-  -d 'batch[0][relative url]=v1/games/11/mods' \
+  -d 'batch[0][relative url   ]=v1/games/11/mods' \
   -d 'batch[0][method]=GET' \
-  -d 'batch[1][relative url]=v1/me/subscribed?id=in-$[0].data[*].id' \
+  -d 'batch[1][relative url   ]=v1/me/subscribed?id=in-$[0].data[*].id' \
   -d 'batch[1][method]=GET' \
-  -d 'batch[2][relative url]=v1/me/ratings?id=in-$[0].data[*].id' \
+  -d 'batch[2][relative url   ]=v1/me/ratings?id=in-$[0].data[*].id' \
   -d 'batch[2][method]=GET'
 
 ```
