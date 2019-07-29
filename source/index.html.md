@@ -1011,7 +1011,7 @@ Get all games. Successful request will return an array of [Game Objects](#get-al
 
 Status|Meaning|Description|Response Schema
 ---|---|---|---|
-200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)|OK|[Get All Games  ](#schemaget_all_games)
+200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)|OK|[Get All Games](#schemaget_all_games)
 
 <aside class="auth-notice">
 To perform this request, you must be authenticated via one of the following methods:
@@ -1621,7 +1621,7 @@ Get all mods for the corresponding game. Successful request will return an array
 
 Status|Meaning|Description|Response Schema
 ---|---|---|---|
-200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)|Successful Request|[Get All Mods  ](#schemaget_all_mods)
+200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)|Successful Request|[Get All Mods](#schemaget_all_mods)
 
 <aside class="auth-notice">
 To perform this request, you must be authenticated via one of the following methods:
@@ -2569,7 +2569,7 @@ Get all files that are published for the corresponding mod. Successful request w
 
 Status|Meaning|Description|Response Schema
 ---|---|---|---|
-200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)|Successful Request|[Get All Modfiles  ](#schemaget_all_modfiles)
+200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)|Successful Request|[Get All Modfiles](#schemaget_all_modfiles)
 
 <aside class="auth-notice">
 To perform this request, you must be authenticated via one of the following methods:
@@ -3998,7 +3998,7 @@ Get all mods events for the corresponding game sorted by latest event first. Suc
 
 Status|Meaning|Description|Response Schema
 ---|---|---|---|
-200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)|Successful Request|[Get Mod Events  ](#schemaget_mod_events)
+200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)|Successful Request|[Get Mod Events](#schemaget_mod_events)
 
 <aside class="auth-notice">
 To perform this request, you must be authenticated via one of the following methods:
@@ -4120,7 +4120,7 @@ Get the event log for a mod, showing changes made sorted by latest event first. 
 
 Status|Meaning|Description|Response Schema
 ---|---|---|---|
-200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)|Successful Request|[Get Mod Events  ](#schemaget_mod_events)
+200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)|Successful Request|[Get Mod Events](#schemaget_mod_events)
 
 <aside class="auth-notice">
 To perform this request, you must be authenticated via one of the following methods:
@@ -4261,7 +4261,7 @@ Get all mod stats for mods of the corresponding game. Successful request will re
 
 Status|Meaning|Description|Response Schema
 ---|---|---|---|
-200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)|Successful Request|[Get Mod Stats  ](#schemaget_mod_stats)
+200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)|Successful Request|[Get Mod Stats](#schemaget_mod_stats)
 
 <aside class="auth-notice">
 To perform this request, you must be authenticated via one of the following methods:
@@ -4505,7 +4505,7 @@ Get all tags for the corresponding mod. Successful request will return an array 
 
 Status|Meaning|Description|Response Schema
 ---|---|---|---|
-200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)|Successful Request|[Get Mod Tags  ](#schemaget_mod_tags)
+200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)|Successful Request|[Get Mod Tags](#schemaget_mod_tags)
 
 <aside class="auth-notice">
 To perform this request, you must be authenticated via one of the following methods:
@@ -4851,7 +4851,7 @@ System.out.println(response.toString());
 ```
 `GET /games/{game-id}/tags`
 
-Get all tags for the corresponding game, that can be applied to any of its mods. Successful request will return an array of [Game Tag Option Objects](#game-tag-option-object).
+Get all tags for the corresponding game, that can be applied to any of its mods. Hidden tag groups will only be returned if the authenticated user is a team member of the parent game with either `Manager` or `Administrator` status. Successful request will return an array of [Game Tag Option Objects](#game-tag-option-object).
 
 
 > Example response
@@ -4881,7 +4881,7 @@ Get all tags for the corresponding game, that can be applied to any of its mods.
 
 Status|Meaning|Description|Response Schema
 ---|---|---|---|
-200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)|Successful Request|[Get Game Tag Options ](#schemaget_game_tag_options)
+200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)|Successful Request|[Get Game Tag Options](#schemaget_game_tag_options)
 
 <aside class="auth-notice">
 To perform this request, you must be authenticated via one of the following methods:
@@ -5780,7 +5780,7 @@ Get all dependencies the chosen mod has selected.
 
 Status|Meaning|Description|Response Schema
 ---|---|---|---|
-200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)|Successful Request|[Get All Mod Dependencies ](#schemaget_all_mod_dependencies)
+200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)|Successful Request|[Get All Mod Dependencies](#schemaget_all_mod_dependencies)
 
 <aside class="auth-notice">
 To perform this request, you must be authenticated via one of the following methods:
@@ -6182,7 +6182,7 @@ Get all users that are part of a mod team. Successful request will return an arr
 
 Status|Meaning|Description|Response Schema
 ---|---|---|---|
-200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)|Successful Request|[Get All Team Members ](#schemaget_all_team_members)
+200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)|Successful Request|[Get All Team Members](#schemaget_all_team_members)
 
 <aside class="auth-notice">
 To perform this request, you must be authenticated via one of the following methods:
@@ -6716,7 +6716,7 @@ Get all comments posted in the mods profile. Successful request will return an a
 
 Status|Meaning|Description|Response Schema
 ---|---|---|---|
-200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)|OK|[Get All Mod Comments ](#schemaget_all_mod_comments)
+200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)|OK|[Get All Mod Comments](#schemaget_all_mod_comments)
 
 <aside class="auth-notice">
 To perform this request, you must be authenticated via one of the following methods:
@@ -7239,7 +7239,7 @@ Get all users registered on mod.io. Successful request will return an array of [
 
 Status|Meaning|Description|Response Schema
 ---|---|---|---|
-200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)|Successful Request|[Get All Users  ](#schemaget_all_users)
+200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)|Successful Request|[Get All Users](#schemaget_all_users)
 
 <aside class="auth-notice">
 To perform this request, you must be authenticated via one of the following methods:
@@ -7620,7 +7620,7 @@ Request an access token on behalf of a Steam user. To use this functionality you
 
 Status|Meaning|Description|Response Schema
 ---|---|---|---|
-200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)|Successful Request|[Access Token Object  ](#schemaaccess_token_object)
+200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)|Successful Request|[Access Token Object](#schemaaccess_token_object)
 
 <aside class="auth-notice">
 To perform this request, you must be authenticated via one of the following methods:
@@ -7741,7 +7741,7 @@ Request an access token on behalf of a GOG Galaxy user. To use this functionalit
 
 Status|Meaning|Description|Response Schema
 ---|---|---|---|
-200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)|Successful Request|[Access Token Object  ](#schemaaccess_token_object)
+200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)|Successful Request|[Access Token Object](#schemaaccess_token_object)
 
 <aside class="auth-notice">
 To perform this request, you must be authenticated via one of the following methods:
@@ -8198,7 +8198,7 @@ Submit one or more API endpoint calls in a single HTTP request by batching the r
 
 Status|Meaning|Description|Response Schema
 ---|---|---|---|
-200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)|Successful Request|[Make Batch Request  ](#schemamake_batch_request)
+200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)|Successful Request|[Make Batch Request](#schemamake_batch_request)
 
 <aside class="auth-notice">
 To perform this request, you must be authenticated via one of the following methods:
@@ -8568,7 +8568,7 @@ Get all mod's the _authenticated user_ is subscribed to. Successful request will
 
 Status|Meaning|Description|Response Schema
 ---|---|---|---|
-200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)|Request Successful|[Get All Mods  ](#schemaget_all_mods)
+200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)|Request Successful|[Get All Mods](#schemaget_all_mods)
 
 <aside class="auth-notice">
 To perform this request, you must be authenticated via one of the following methods:
@@ -8700,7 +8700,7 @@ Get events that have been fired specific to the user. Successful request will re
 
 Status|Meaning|Description|Response Schema
 ---|---|---|---|
-200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)|Successful Request|[Get User Events  ](#schemaget_user_events)
+200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)|Successful Request|[Get User Events](#schemaget_user_events)
 
 <aside class="auth-notice">
 To perform this request, you must be authenticated via one of the following methods:
@@ -8905,7 +8905,7 @@ Get all games the _authenticated user_ added or is a team member of. Successful 
 
 Status|Meaning|Description|Response Schema
 ---|---|---|---|
-200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)|Request Successful|[Get All Games  ](#schemaget_all_games)
+200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)|Request Successful|[Get All Games](#schemaget_all_games)
 
 <aside class="auth-notice">
 To perform this request, you must be authenticated via one of the following methods:
@@ -9152,7 +9152,7 @@ Get all mods the _authenticated user_ added or is a team member of. Successful r
 
 Status|Meaning|Description|Response Schema
 ---|---|---|---|
-200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)|Request Successful|[Get All Mods  ](#schemaget_all_mods)
+200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)|Request Successful|[Get All Mods](#schemaget_all_mods)
 
 <aside class="auth-notice">
 To perform this request, you must be authenticated via one of the following methods:
@@ -9309,7 +9309,7 @@ Get all modfiles the _authenticated user_ uploaded. Successful request will retu
 
 Status|Meaning|Description|Response Schema
 ---|---|---|---|
-200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)|Request Successful|[Get All Modfiles  ](#schemaget_all_modfiles)
+200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)|Request Successful|[Get All Modfiles](#schemaget_all_modfiles)
 
 <aside class="auth-notice">
 To perform this request, you must be authenticated via one of the following methods:
@@ -9443,7 +9443,7 @@ Get all mod rating's submitted by the _authenticated user_. Successful request w
 
 Status|Meaning|Description|Response Schema
 ---|---|---|---|
-200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)|Request Successful|[Get All User Ratings ](#schemaget_all_user_ratings)
+200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)|Request Successful|[Get All User Ratings](#schemaget_all_user_ratings)
 
 <aside class="auth-notice">
 To perform this request, you must be authenticated via one of the following methods:
@@ -9767,7 +9767,7 @@ Name|Type|Description
 ---|---|---|---|
 data|[Batch Object](#schemabatch_object)[]|Array containing any response object.
 » code|integer|Response HTTP code.
-» body|[Batch Body Object  ](#schemabatch_body_object)|Contains batch request data.
+» body|[Batch Body Object](#schemabatch_body_object)|Contains batch request data.
 »» data|[Mod Object](#schemamod_object)[]|Contains Mod Objects.
 »»» id|integer|Unique mod id.
 »»» game_id|integer|Unique game id.
@@ -9804,7 +9804,7 @@ data|[Batch Object](#schemabatch_object)[]|Array containing any response object.
 »»» description_plaintext|string|`description` field converted into plaintext.
 »»» metadata_blob|string|Metadata stored by the game developer. Metadata can also be stored as searchable [key value pairs](#metadata), and to individual [mod files](#get-all-modfiles).
 »»» profile_url|string|URL to the mod's mod.io profile.
-»»» media|[Mod Media Object  ](#schemamod_media_object)|Contains mod media data.
+»»» media|[Mod Media Object](#schemamod_media_object)|Contains mod media data.
 »»»» youtube|string[]|Array of YouTube links.
 »»»» sketchfab|string[]|Array of SketchFab links.
 »»»» images|[Image Object](#schemaimage_object)[]|Array of image objects (a gallery).
@@ -9842,13 +9842,13 @@ data|[Batch Object](#schemabatch_object)[]|Array containing any response object.
 »»»» ratings_weighted_aggregate|float|Overall rating of this item calculated using the [Wilson score confidence interval](https://www.evanmiller.org/how-not-to-sort-by-average-rating.html). This column is good to sort on, as it will order items based on number of ratings and will place items with many positive ratings above those with a higher score but fewer ratings.
 »»»» ratings_display_text|string|Textual representation of the rating in format:<br><br>- Overwhelmingly Positive<br>- Very Positive<br>- Positive<br>- Mostly Positive<br>- Mixed<br>- Negative<br>- Mostly Negative<br>- Very Negative<br>- Overwhelmingly Negative<br>- Unrated
 »»»» date_expires|integer|Unix timestamp until this mods's statistics are considered stale.
-»»» metadata_kvp|[Metadata KVP Object  ](#schemametadata_kvp_object)[]|Contains key-value metadata.
+»»» metadata_kvp|[Metadata KVP Object](#schemametadata_kvp_object)[]|Contains key-value metadata.
 »»»» metakey|string|The key of the key-value pair.
 »»»» metavalue|string|The value of the key-value pair.
-»»» tags|[Mod Tag Object  ](#schemamod_tag_object)[]|Contains mod tag data.
+»»» tags|[Mod Tag Object](#schemamod_tag_object)[]|Contains mod tag data.
 »»»» name|string|Tag name.
 »»»» date_added|integer|Unix timestamp of date tag was applied.
-» headers|[[Key-Value Pair Object  ](#schemakey-value_pair_object)]|Contains key-value pairs.
+» headers|[[Key-Value Pair Object](#schemakey-value_pair_object)]|Contains key-value pairs.
 »» key|string|Key of the key-value pair.
 »» value|string|Value of the key-value pair. Will always be a string, even if numeric.
 result_count|integer|Number of results returned in this request.
@@ -9964,7 +9964,7 @@ result_total|integer|Total number of results found.
 
 Name|Type|Description
 ---|---|---|---|
-data|[Mod Dependencies Object  ](#schemamod_dependencies_object)[]|Array containing mod dependencies objects.
+data|[Mod Dependencies Object](#schemamod_dependencies_object)[]|Array containing mod dependencies objects.
 » mod_id|integer|Unique id of the mod that is the dependency.
 » date_added|integer|Unix timestamp of date the dependency was added.
 result_count|integer|Number of results returned in this request.
@@ -10005,7 +10005,7 @@ result_total|integer|Total number of results found.
 
 Name|Type|Description
 ---|---|---|---|
-data|[Mod Event Object  ](#schemamod_event_object)[]|Array containing mod event objects.
+data|[Mod Event Object](#schemamod_event_object)[]|Array containing mod event objects.
 » id|integer|Unique id of the event object.
 » mod_id|integer|Unique id of the parent mod.
 » user_id|integer|Unique id of the user who performed the action.
@@ -10215,7 +10215,7 @@ data|[Game Object](#schemagame_object)[]|Array containing game objects.
 »» thumb_320x180|string|URL to the small logo thumbnail.
 »» thumb_640x360|string|URL to the medium logo thumbnail.
 »» thumb_1280x720|string|URL to the large logo thumbnail.
-» header|[Header Image Object  ](#schemaheader_image_object)|Contains header data.
+» header|[Header Image Object](#schemaheader_image_object)|Contains header data.
 »» filename|string|Header image filename including extension.
 »» original|string|URL to the full-sized header image.
 » name|string|Name of the game.
@@ -10224,10 +10224,10 @@ data|[Game Object](#schemagame_object)[]|Array containing game objects.
 » instructions|string|A guide about creating and uploading mods for this game to mod.io (applicable if submission_option = 0).
 » instructions_url|string|Link to a mod.io guide, your modding wiki or a page where modders can learn how to make and submit mods to your games profile.
 » profile_url|string|URL to the game's mod.io page.
-» tag_options|[Game Tag Option Object ](#schemagame_tag_option_object)[]|Groups of tags configured by the game developer, that mods can select.
+» tag_options|[Game Tag Option Object](#schemagame_tag_option_object)[]|Groups of tags configured by the game developer, that mods can select.
 »» name|string|Name of the tag group.
 »» type|string|Can multiple tags be selected via 'checkboxes' or should only a single tag be selected via a 'dropdown'.
-»» hidden|boolean|Groups of tags flagged as 'admin only' should only be used for filtering, and should not be displayed to users.
+»» hidden|boolean|Groups of tags flagged as 'admin only' should only be used for filtering, and should not be displayed to users. Groups that are hidden will only be returned in a response if the authenticated user in the request is a team member of the parent game with `Manager` or `Administrator` privileges.
 »» tags|string[]|Array of tags in this group.
 result_count|integer|Number of results returned in this request.
 result_offset|integer|Number of results skipped over. Defaults to 0 unless overridden by `_offset` filter.
@@ -10264,7 +10264,7 @@ result_total|integer|Total number of results found.
 
 Name|Type|Description
 ---|---|---|---|
-data|[Metadata KVP Object  ](#schemametadata_kvp_object)[]|Array containing metadata kvp objects.
+data|[Metadata KVP Object](#schemametadata_kvp_object)[]|Array containing metadata kvp objects.
 » metakey|string|The key of the key-value pair.
 » metavalue|string|The value of the key-value pair.
 result_count|integer|Number of results returned in this request.
@@ -10436,7 +10436,7 @@ data|[Mod Object](#schemamod_object)[]|Array containing mod objects.
 » description_plaintext|string|`description` field converted into plaintext.
 » metadata_blob|string|Metadata stored by the game developer. Metadata can also be stored as searchable [key value pairs](#metadata), and to individual [mod files](#get-all-modfiles).
 » profile_url|string|URL to the mod's mod.io profile.
-» media|[Mod Media Object  ](#schemamod_media_object)|Contains mod media data.
+» media|[Mod Media Object](#schemamod_media_object)|Contains mod media data.
 »» youtube|string[]|Array of YouTube links.
 »» sketchfab|string[]|Array of SketchFab links.
 »» images|[Image Object](#schemaimage_object)[]|Array of image objects (a gallery).
@@ -10474,10 +10474,10 @@ data|[Mod Object](#schemamod_object)[]|Array containing mod objects.
 »» ratings_weighted_aggregate|float|Overall rating of this item calculated using the [Wilson score confidence interval](https://www.evanmiller.org/how-not-to-sort-by-average-rating.html). This column is good to sort on, as it will order items based on number of ratings and will place items with many positive ratings above those with a higher score but fewer ratings.
 »» ratings_display_text|string|Textual representation of the rating in format:<br><br>- Overwhelmingly Positive<br>- Very Positive<br>- Positive<br>- Mostly Positive<br>- Mixed<br>- Negative<br>- Mostly Negative<br>- Very Negative<br>- Overwhelmingly Negative<br>- Unrated
 »» date_expires|integer|Unix timestamp until this mods's statistics are considered stale.
-» metadata_kvp|[Metadata KVP Object  ](#schemametadata_kvp_object)[]|Contains key-value metadata.
+» metadata_kvp|[Metadata KVP Object](#schemametadata_kvp_object)[]|Contains key-value metadata.
 »» metakey|string|The key of the key-value pair.
 »» metavalue|string|The value of the key-value pair.
-» tags|[Mod Tag Object  ](#schemamod_tag_object)[]|Contains mod tag data.
+» tags|[Mod Tag Object](#schemamod_tag_object)[]|Contains mod tag data.
 »» name|string|Tag name.
 »» date_added|integer|Unix timestamp of date tag was applied.
 result_count|integer|Number of results returned in this request.
@@ -10573,7 +10573,7 @@ result_total|integer|Total number of results found.
 
 Name|Type|Description
 ---|---|---|---|
-data|[Mod Tag Object  ](#schemamod_tag_object)[]|Array containing mod tag objects.
+data|[Mod Tag Object](#schemamod_tag_object)[]|Array containing mod tag objects.
 » name|string|Tag name.
 » date_added|integer|Unix timestamp of date tag was applied.
 result_count|integer|Number of results returned in this request.
@@ -10615,10 +10615,10 @@ result_total|integer|Total number of results found.
 
 Name|Type|Description
 ---|---|---|---|
-data|[Game Tag Option Object ](#schemagame_tag_option_object)[]|Array containing game tag objects.
+data|[Game Tag Option Object](#schemagame_tag_option_object)[]|Array containing game tag objects.
 » name|string|Name of the tag group.
 » type|string|Can multiple tags be selected via 'checkboxes' or should only a single tag be selected via a 'dropdown'.
-» hidden|boolean|Groups of tags flagged as 'admin only' should only be used for filtering, and should not be displayed to users.
+» hidden|boolean|Groups of tags flagged as 'admin only' should only be used for filtering, and should not be displayed to users. Groups that are hidden will only be returned in a response if the authenticated user in the request is a team member of the parent game with `Manager` or `Administrator` privileges.
 » tags|string[]|Array of tags in this group.
 result_count|integer|Number of results returned in this request.
 result_offset|integer|Number of results skipped over. Defaults to 0 unless overridden by `_offset` filter.
@@ -10672,7 +10672,7 @@ result_total|integer|Total number of results found.
 
 Name|Type|Description
 ---|---|---|---|
-data|[Team Member Object  ](#schemateam_member_object)[]|Array containing team member objects.
+data|[Team Member Object](#schemateam_member_object)[]|Array containing team member objects.
 » id|integer|Unique team member id.
 » user|[User Object](#schemauser_object)|Contains user data.
 »» id|integer|Unique id of the user.
@@ -10788,7 +10788,7 @@ result_total|integer|Total number of results found.
 
 Name|Type|Description
 ---|---|---|---|
-data|[User Event Object  ](#schemauser_event_object)[]|Array containing user event objects.
+data|[User Event Object](#schemauser_event_object)[]|Array containing user event objects.
 » id|integer|Unique id of the event object.
 » game_id|integer|Unique id of the parent game.
 » mod_id|integer|Unique id of the parent mod.
@@ -11031,7 +11031,7 @@ event_type|string|Type of event that was triggered. List of possible events: <br
 Name|Type|Description
 ---|---|---|---|
 code|integer|Response HTTP code.
-body|[Batch Body Object  ](#schemabatch_body_object)|Contains batch request data.
+body|[Batch Body Object](#schemabatch_body_object)|Contains batch request data.
 » data|[Mod Object](#schemamod_object)[]|Contains Mod Objects.
 »» id|integer|Unique mod id.
 »» game_id|integer|Unique game id.
@@ -11068,7 +11068,7 @@ body|[Batch Body Object  ](#schemabatch_body_object)|Contains batch request data
 »» description_plaintext|string|`description` field converted into plaintext.
 »» metadata_blob|string|Metadata stored by the game developer. Metadata can also be stored as searchable [key value pairs](#metadata), and to individual [mod files](#get-all-modfiles).
 »» profile_url|string|URL to the mod's mod.io profile.
-»» media|[Mod Media Object  ](#schemamod_media_object)|Contains mod media data.
+»» media|[Mod Media Object](#schemamod_media_object)|Contains mod media data.
 »»» youtube|string[]|Array of YouTube links.
 »»» sketchfab|string[]|Array of SketchFab links.
 »»» images|[Image Object](#schemaimage_object)[]|Array of image objects (a gallery).
@@ -11106,13 +11106,13 @@ body|[Batch Body Object  ](#schemabatch_body_object)|Contains batch request data
 »»» ratings_weighted_aggregate|float|Overall rating of this item calculated using the [Wilson score confidence interval](https://www.evanmiller.org/how-not-to-sort-by-average-rating.html). This column is good to sort on, as it will order items based on number of ratings and will place items with many positive ratings above those with a higher score but fewer ratings.
 »»» ratings_display_text|string|Textual representation of the rating in format:<br><br>- Overwhelmingly Positive<br>- Very Positive<br>- Positive<br>- Mostly Positive<br>- Mixed<br>- Negative<br>- Mostly Negative<br>- Very Negative<br>- Overwhelmingly Negative<br>- Unrated
 »»» date_expires|integer|Unix timestamp until this mods's statistics are considered stale.
-»» metadata_kvp|[Metadata KVP Object  ](#schemametadata_kvp_object)[]|Contains key-value metadata.
+»» metadata_kvp|[Metadata KVP Object](#schemametadata_kvp_object)[]|Contains key-value metadata.
 »»» metakey|string|The key of the key-value pair.
 »»» metavalue|string|The value of the key-value pair.
-»» tags|[Mod Tag Object  ](#schemamod_tag_object)[]|Contains mod tag data.
+»» tags|[Mod Tag Object](#schemamod_tag_object)[]|Contains mod tag data.
 »»» name|string|Tag name.
 »»» date_added|integer|Unix timestamp of date tag was applied.
-headers|[[Key-Value Pair Object  ](#schemakey-value_pair_object)]|Contains key-value pairs.
+headers|[[Key-Value Pair Object](#schemakey-value_pair_object)]|Contains key-value pairs.
 » key|string|Key of the key-value pair.
 » value|string|Value of the key-value pair. Will always be a string, even if numeric.
 
@@ -11273,7 +11273,7 @@ data|[Mod Object](#schemamod_object)[]|Contains Mod Objects.
 » description_plaintext|string|`description` field converted into plaintext.
 » metadata_blob|string|Metadata stored by the game developer. Metadata can also be stored as searchable [key value pairs](#metadata), and to individual [mod files](#get-all-modfiles).
 » profile_url|string|URL to the mod's mod.io profile.
-» media|[Mod Media Object  ](#schemamod_media_object)|Contains mod media data.
+» media|[Mod Media Object](#schemamod_media_object)|Contains mod media data.
 »» youtube|string[]|Array of YouTube links.
 »» sketchfab|string[]|Array of SketchFab links.
 »» images|[Image Object](#schemaimage_object)[]|Array of image objects (a gallery).
@@ -11311,10 +11311,10 @@ data|[Mod Object](#schemamod_object)[]|Contains Mod Objects.
 »» ratings_weighted_aggregate|float|Overall rating of this item calculated using the [Wilson score confidence interval](https://www.evanmiller.org/how-not-to-sort-by-average-rating.html). This column is good to sort on, as it will order items based on number of ratings and will place items with many positive ratings above those with a higher score but fewer ratings.
 »» ratings_display_text|string|Textual representation of the rating in format:<br><br>- Overwhelmingly Positive<br>- Very Positive<br>- Positive<br>- Mostly Positive<br>- Mixed<br>- Negative<br>- Mostly Negative<br>- Very Negative<br>- Overwhelmingly Negative<br>- Unrated
 »» date_expires|integer|Unix timestamp until this mods's statistics are considered stale.
-» metadata_kvp|[Metadata KVP Object  ](#schemametadata_kvp_object)[]|Contains key-value metadata.
+» metadata_kvp|[Metadata KVP Object](#schemametadata_kvp_object)[]|Contains key-value metadata.
 »» metakey|string|The key of the key-value pair.
 »» metavalue|string|The value of the key-value pair.
-» tags|[Mod Tag Object  ](#schemamod_tag_object)[]|Contains mod tag data.
+» tags|[Mod Tag Object](#schemamod_tag_object)[]|Contains mod tag data.
 »» name|string|Tag name.
 »» date_added|integer|Unix timestamp of date tag was applied.
 
@@ -11427,7 +11427,7 @@ Name|Type|Description
 ---|---|---|---|
 name|string|Name of the tag group.
 type|string|Can multiple tags be selected via 'checkboxes' or should only a single tag be selected via a 'dropdown'.
-hidden|boolean|Groups of tags flagged as 'admin only' should only be used for filtering, and should not be displayed to users.
+hidden|boolean|Groups of tags flagged as 'admin only' should only be used for filtering, and should not be displayed to users. Groups that are hidden will only be returned in a response if the authenticated user in the request is a team member of the parent game with `Manager` or `Administrator` privileges.
 tags|string[]|Array of tags in this group.
 
 
@@ -11678,7 +11678,7 @@ description|string|Detailed description of the mod which allows HTML.
 description_plaintext|string|`description` field converted into plaintext.
 metadata_blob|string|Metadata stored by the game developer. Metadata can also be stored as searchable [key value pairs](#metadata), and to individual [mod files](#get-all-modfiles).
 profile_url|string|URL to the mod's mod.io profile.
-media|[Mod Media Object  ](#schemamod_media_object)|Contains mod media data.
+media|[Mod Media Object](#schemamod_media_object)|Contains mod media data.
 » youtube|string[]|Array of YouTube links.
 » sketchfab|string[]|Array of SketchFab links.
 » images|[Image Object](#schemaimage_object)[]|Array of image objects (a gallery).
@@ -11716,10 +11716,10 @@ stats|[Stats Object](#schemastats_object)|Contains stats data.
 » ratings_weighted_aggregate|float|Overall rating of this item calculated using the [Wilson score confidence interval](https://www.evanmiller.org/how-not-to-sort-by-average-rating.html). This column is good to sort on, as it will order items based on number of ratings and will place items with many positive ratings above those with a higher score but fewer ratings.
 » ratings_display_text|string|Textual representation of the rating in format:<br><br>- Overwhelmingly Positive<br>- Very Positive<br>- Positive<br>- Mostly Positive<br>- Mixed<br>- Negative<br>- Mostly Negative<br>- Very Negative<br>- Overwhelmingly Negative<br>- Unrated
 » date_expires|integer|Unix timestamp until this mods's statistics are considered stale.
-metadata_kvp|[Metadata KVP Object  ](#schemametadata_kvp_object)[]|Contains key-value metadata.
+metadata_kvp|[Metadata KVP Object](#schemametadata_kvp_object)[]|Contains key-value metadata.
 » metakey|string|The key of the key-value pair.
 » metavalue|string|The value of the key-value pair.
-tags|[Mod Tag Object  ](#schemamod_tag_object)[]|Contains mod tag data.
+tags|[Mod Tag Object](#schemamod_tag_object)[]|Contains mod tag data.
 » name|string|Tag name.
 » date_added|integer|Unix timestamp of date tag was applied.
 
@@ -11899,7 +11899,7 @@ logo|[Logo Object](#schemalogo_object)|Contains logo data.
 » thumb_320x180|string|URL to the small logo thumbnail.
 » thumb_640x360|string|URL to the medium logo thumbnail.
 » thumb_1280x720|string|URL to the large logo thumbnail.
-header|[Header Image Object  ](#schemaheader_image_object)|Contains header data.
+header|[Header Image Object](#schemaheader_image_object)|Contains header data.
 » filename|string|Header image filename including extension.
 » original|string|URL to the full-sized header image.
 name|string|Name of the game.
@@ -11908,10 +11908,10 @@ summary|string|Summary of the game.
 instructions|string|A guide about creating and uploading mods for this game to mod.io (applicable if submission_option = 0).
 instructions_url|string|Link to a mod.io guide, your modding wiki or a page where modders can learn how to make and submit mods to your games profile.
 profile_url|string|URL to the game's mod.io page.
-tag_options|[Game Tag Option Object ](#schemagame_tag_option_object)[]|Groups of tags configured by the game developer, that mods can select.
+tag_options|[Game Tag Option Object](#schemagame_tag_option_object)[]|Groups of tags configured by the game developer, that mods can select.
 » name|string|Name of the tag group.
 » type|string|Can multiple tags be selected via 'checkboxes' or should only a single tag be selected via a 'dropdown'.
-» hidden|boolean|Groups of tags flagged as 'admin only' should only be used for filtering, and should not be displayed to users.
+» hidden|boolean|Groups of tags flagged as 'admin only' should only be used for filtering, and should not be displayed to users. Groups that are hidden will only be returned in a response if the authenticated user in the request is a team member of the parent game with `Manager` or `Administrator` privileges.
 » tags|string[]|Array of tags in this group.
 
 
