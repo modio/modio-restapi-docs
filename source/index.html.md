@@ -80,99 +80,6 @@ Access Token (OAuth 2) | Header | GET, POST, PUT, DELETE | Read, create, update,
 
 To access the API authentication is required. All users and games get a private API key. It is quick and easy to use in your apps but limited to read-only GET requests, due to the limited security it offers. View your private API key(s) [on production](https://mod.io/apikey/widget) or on the [test environment](https://test.mod.io/apikey/widget).
 
-### Email Authentication Flow
-
-To perform writes, you will need to authenticate your users via OAuth 2. To make this frictionless in-game, we use an email verification system, similar to what Slack and others pioneered. It works by users supplying their email, which we send a time-limited 5 digit security code too. They exchange this code in-game, for an [OAuth 2 access token](https://mod.io/oauth/widget) you can save to authenticate future requests. The benefit of this approach is it avoids complex website redirects and doesn't require your users to complete a slow registration flow.
-
-![mod.io Email Authentication Flow](https://static.mod.io/v1/images/home/email.png)
-
-```shell
-// Example POST requesting security code be sent to supplied email
-
-curl -X POST https://api.mod.io/v1/oauth/emailrequest \
-  -H 'Content-Type: application/x-www-form-urlencoded' \
-  -d 'api_key=0d0ba6756d032246f1299f8c01abc424'	\
-  -d 'email=john.snow@westeros.com'
-```
-
-```json
-// Authentication Code Request Response
-
-{
-	"code": 200,
-	"message": "Enter the 5-digit security code sent to your email address (john.snow@westeros.com)"
-}
-```
-
-### Step 1: Requesting a security code
-
-Request a `security_code` be sent to the email address of the user you wish to authenticate: 
-
-
-`POST /oauth/emailrequest`
-
-Parameter |Type | Required | Value
----------- | ---------- |---------- | ----------
-`api_key` | string | true | Your API key generated from 'API' tab within your game profile.
-`email` | string | true | A valid and secure email address your user has access to. 
-
-### Step 2: Exchanging security code for access token
-
-After retrieving the 5-digit `security_code` sent to the email specified, you exchange it for an OAuth 2 `access_token`:
-
-```shell
-// Example POST requesting access token with security code
-
-curl -X POST https://api.mod.io/v1/oauth/emailexchange \
-  -H 'Content-Type: application/x-www-form-urlencoded' \	
-  -d 'api_key=0d0ba6756d032246f1299f8c01abc424' \
-  -d 'security_code=3EW50'
-```
-
-```json
-// Access Token Request Response (access token truncated for brevity)
-
-{
-	"code": 200,
-	"access_token": "eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiIsImp0......"
-}
-```
-
-
-`POST /oauth/emailexchange`
-
-Parameter | Type | Required | Value
----------- | ---------- | ---------- | ----------  
-`api_key` | string | true | Your API key generated from 'API' tab within your game profile.
-`security_code` | string | true | Unique 5-digit code sent to the email address supplied in the previous request. 
-`date_expires` | integer || Unix timestamp of date in which the returned token will expire. Value cannot be higher than the default value which is a common year (unix timestamp + 31536000 seconds). Using a token after it's expiry time has elapsed will result in a `401 Unauthorized` response.
-
-There are a few important things to know when using the email authentication flow:
- 
-- An `api_key` is required for both steps of the authentication process.
-- The _same_ `api_key` must be used for both steps.
-- The generated `security_code` is short-lived and will expire after 15 minutes.
-- Once exchanged for an `access_token`, the `security_code` is invalid.
-
-If you do not exchange your `security_code` for an `access_token` within 15 minutes of generation, you will need to begin the flow again to receive another code.
-
-### Step 3: Use access token to access resources.
-
-See [Making Requests](#making-requests) section.
-
-### External App Ticket Authentication Flow
-
-If your game is running inside a popular distribution platform such as Steam or GOG Galaxy, you can use the [external app ticket flow](#external-auth) to authenticate your players via their encrypted session tickets which are accessible via the platform's SDK. mod.io offers the ability to decode this metadata from the respective client using a shared secret which is supplied to you by the platform.
-
-![mod.io External Ticket Authentication Flow](images/ticket.png)
-
-By supplying mod.io with this secret key in your game's option page, we gain the ability to securely authenticate users on mod.io without requiring user input. This method is great for enabling all functionality mod.io offers users without adding friction. Due to mod.io only being able to retrieve some data representing the user from this flow, an extra step is available which allows the user to [link their account](#link-external-account) to their e-mail address (this is an __optional but recommended__ step as it makes account recovery and other processes easier).
-
-Supported Platforms | - | - | -
---- | --- | --- | ---
-[![Steam](images/platform-steam.png)](https://www.steampowered.com) | __Steam__<br />[SDK](https://partner.steamgames.com/doc/api/SteamEncryptedAppTicket)<br />[Endpoint Reference](#authenticate-via-steam)<br /> | [![GOG Galaxy](images/platform-gog.png)](https://www.gog.com/galaxy) | __GOG Galaxy__<br />[SDK](https://cdn.gog.com/open/galaxy/sdk/1.133.3/Documentation/classgalaxy_1_1api_1_1IUser.html#a352802aab7a6e71b1cd1b9b1adfd53d8)<br />[Endpoint Reference](#authenticate-via-gog-galaxy)
-Want a platform added to the list? [Contact us!](mailto:developers@mod.io?subject=Authentication Suggestion)
-
 ### Scopes (OAuth 2)
 
 mod.io allows you to specify the permission each access token has (default is _read+write_), this is done by the use of scopes. See below for a full list of scopes available, you must include at least one scope when generating a new token.
@@ -815,6 +722,462 @@ If you are a large studio or publisher and require a private, in-house, custom s
 ## Contact
 
 If you spot any errors within the mod.io documentation, have feedback on how we can make it easier to follow or simply want to discuss how awesome mods are, feel free to reach out anytime to [developers@mod.io](mailto:developers@mod.io?subject=API) or come join us in our [discord channel](https://discord.mod.io). We are here to help you grow and maximise the potential of mods in your game.
+# Authentication
+## Authenticate via Email
+
+To perform writes, you will need to authenticate your users via OAuth 2. To make this frictionless in-game, we use an email verification system, similar to what Slack and others pioneered. It works by users supplying their email, which we send a time-limited 5 digit security code too. They exchange this code in-game, for an [OAuth 2 access token](https://mod.io/oauth/widget) you can save to authenticate future requests. The benefit of this approach is it avoids complex website redirects and doesn't require your users to complete a slow registration flow.
+
+![mod.io Email Authentication Flow](https://static.mod.io/v1/images/home/email.png)
+
+```shell
+// Example POST requesting security code be sent to supplied email
+
+curl -X POST https://api.mod.io/v1/oauth/emailrequest \
+  -H 'Content-Type: application/x-www-form-urlencoded' \
+  -d 'api_key=0d0ba6756d032246f1299f8c01abc424'	\
+  -d 'email=john.snow@westeros.com'
+```
+
+```json
+// Authentication Code Request Response
+
+{
+	"code": 200,
+	"message": "Enter the 5-digit security code sent to your email address (john.snow@westeros.com)"
+}
+```
+
+- Step 1: Requesting a security code
+
+Request a `security_code` be sent to the email address of the user you wish to authenticate: 
+
+
+`POST /oauth/emailrequest`
+
+Parameter |Type | Required | Value
+---------- | ---------- |---------- | ----------
+`api_key` | string | true | Your API key generated from 'API' tab within your game profile.
+`email` | string | true | A valid and secure email address your user has access to. 
+
+- Step 2: Exchanging security code for access token
+
+After retrieving the 5-digit `security_code` sent to the email specified, you exchange it for an OAuth 2 `access_token`:
+
+```shell
+// Example POST requesting access token with security code
+
+curl -X POST https://api.mod.io/v1/oauth/emailexchange \
+  -H 'Content-Type: application/x-www-form-urlencoded' \	
+  -d 'api_key=0d0ba6756d032246f1299f8c01abc424' \
+  -d 'security_code=3EW50'
+```
+
+```json
+// Access Token Request Response (access token truncated for brevity)
+
+{
+	"code": 200,
+	"access_token": "eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiIsImp0......"
+}
+```
+
+
+`POST /oauth/emailexchange`
+
+Parameter | Type | Required | Value
+---------- | ---------- | ---------- | ----------  
+`api_key` | string | true | Your API key generated from 'API' tab within your game profile.
+`security_code` | string | true | Unique 5-digit code sent to the email address supplied in the previous request. 
+`date_expires` | integer || Unix timestamp of date in which the returned token will expire. Value cannot be higher than the default value which is a common year (unix timestamp + 31536000 seconds). Using a token after it's expiry time has elapsed will result in a `401 Unauthorized` response.
+
+There are a few important things to know when using the email authentication flow:
+ 
+- An `api_key` is required for both steps of the authentication process.
+- The _same_ `api_key` must be used for both steps.
+- The generated `security_code` is short-lived and will expire after 15 minutes.
+- Once exchanged for an `access_token`, the `security_code` is invalid.
+
+If you do not exchange your `security_code` for an `access_token` within 15 minutes of generation, you will need to begin the flow again to receive another code.
+
+#### Step 3: Use access token to access resources.
+
+See [Making Requests](#making-requests) section.
+
+
+
+## Authenticate via Steam
+
+> Example request
+
+```shell
+# You can also use wget
+curl -X POST https://api.mod.io/v1/external/steamauth?api_key=YourApiKey \
+  -H 'Content-Type: application/x-www-form-urlencoded' \ 
+  -H 'Accept: application/json' \
+  --data-urlencode 'appdata=NDNuZmhnaWdyaGdqOWc0M2o5eTM0aGc='
+
+```
+
+```http
+POST https://api.mod.io/v1/external/steamauth?api_key=YourApiKey HTTP/1.1
+Host: api.mod.io
+Content-Type: application/x-www-form-urlencoded
+Accept: application/json
+
+```
+
+```javascript
+var headers = {
+  'Content-Type':'application/x-www-form-urlencoded',
+  'Accept':'application/json'
+
+};
+
+$.ajax({
+  url: 'https://api.mod.io/v1/external/steamauth',
+  method: 'post',
+  data: '?api_key=YourApiKey',
+  headers: headers,
+  success: function(data) {
+    console.log(JSON.stringify(data));
+  }
+})
+```
+
+```javascript--nodejs
+const request = require('node-fetch');
+const inputBody = '{
+  "appdata": "NDNuZmhnaWdyaGdqOWc0M2o5eTM0aGc="
+}';
+const headers = {
+  'Content-Type':'application/x-www-form-urlencoded',
+  'Accept':'application/json'
+
+};
+
+fetch('https://api.mod.io/v1/external/steamauth?api_key=YourApiKey',
+{
+  method: 'POST',
+  body: inputBody,
+  headers: headers
+})
+.then(function(res) {
+    return res.json();
+}).then(function(body) {
+    console.log(body);
+});
+```
+
+```python
+import requests
+headers = {
+  'Content-Type': 'application/x-www-form-urlencoded',
+  'Accept': 'application/json'
+}
+
+r = requests.post('https://api.mod.io/v1/external/steamauth', params={
+  'api_key': 'YourApiKey'
+}, headers = headers)
+
+print r.json()
+```
+
+```java
+URL obj = new URL("https://api.mod.io/v1/external/steamauth?api_key=YourApiKey");
+HttpURLConnection con = (HttpURLConnection) obj.openConnection();
+con.setRequestMethod("POST");
+int responseCode = con.getResponseCode();
+BufferedReader in = new BufferedReader(
+    new InputStreamReader(con.getInputStream()));
+String inputLine;
+StringBuffer response = new StringBuffer();
+while ((inputLine = in.readLine()) != null) {
+    response.append(inputLine);
+}
+in.close();
+System.out.println(response.toString());
+```
+`POST /external/steamauth`
+
+Request an access token on behalf of a Steam user. To use this functionality you *must* supply your games [encrypted app ticket key](https://partner.steamgames.com/apps/sdkauth) supplied by Steamworks, in the *Edit > Options* page of your games profile on mod.io. A Successful request will return an [Access Token Object](#access-token-object).
+
+     Parameter|Type|Required|Description
+     ---|---|---|---|
+     appdata|base64-encoded string|true|The Steam users [Encrypted App Ticket](https://partner.steamgames.com/doc/features/auth#encryptedapptickets) provided by the Steamworks SDK. <br><br>Parameter content *MUST* be the [*uint8 *rgubTicketEncrypted*](https://partner.steamgames.com/doc/api/SteamEncryptedAppTicket) returned after calling [ISteamUser::GetEncryptedAppTicket()](https://partner.steamgames.com/doc/api/ISteamUser#GetEncryptedAppTicket) within the Steamworks SDK, converted into a base64-encoded string.<br><br>__NOTE:__ Due to a base64-encoded string containing special characters, you must URL encode the string after it has been base64-encoded to ensure it is successfully sent to our servers otherwise you may encounter an `422 Unprocessable Entity` response. For example, [cURL](https://ec.haxx.se/http-post.html) will do this for you by using the `--data-urlencode` option.
+     date_expires|integer||Unix timestamp of date in which the returned token will expire. Value cannot be higher than the default value which is a common year (unix timestamp + 31536000 seconds). Using a token after it's expiry time has elapsed will result in a `401 Unauthorized` response.
+
+
+> Example response
+
+```json
+{
+  "code": 200,
+  "access_token": "eyJ0eXAiOiXKV1QibCJhbLciOiJeiUzI1.....",
+  "date_expires": 1570673249
+}
+```
+<h3 id="Authenticate-via-Steam-responses">Responses</h3>
+
+Status|Meaning|Description|Response Schema
+---|---|---|---|
+200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)|Successful Request|[Access Token Object](#schemaaccess_token_object)
+
+<aside class="auth-notice">
+To perform this request, you must be authenticated via one of the following methods:
+<a href="#authentication">api_key</a>
+</aside>
+## Authenticate via GOG Galaxy
+
+> Example request
+
+```shell
+# You can also use wget
+curl -X POST https://api.mod.io/v1/external/galaxyauth?api_key=YourApiKey \
+  -H 'Content-Type: application/x-www-form-urlencoded' \ 
+  -H 'Accept: application/json' \
+  --data-urlencode 'appdata=GCL671bwZ/+zUeOWc0M'
+
+```
+
+```http
+POST https://api.mod.io/v1/external/galaxyauth?api_key=YourApiKey HTTP/1.1
+Host: api.mod.io
+Content-Type: application/x-www-form-urlencoded
+Accept: application/json
+
+```
+
+```javascript
+var headers = {
+  'Content-Type':'application/x-www-form-urlencoded',
+  'Accept':'application/json'
+
+};
+
+$.ajax({
+  url: 'https://api.mod.io/v1/external/galaxyauth',
+  method: 'post',
+  data: '?api_key=YourApiKey',
+  headers: headers,
+  success: function(data) {
+    console.log(JSON.stringify(data));
+  }
+})
+```
+
+```javascript--nodejs
+const request = require('node-fetch');
+const inputBody = '{
+  "appdata": "GCL671bwZ/+zUeOWc0M"
+}';
+const headers = {
+  'Content-Type':'application/x-www-form-urlencoded',
+  'Accept':'application/json'
+
+};
+
+fetch('https://api.mod.io/v1/external/galaxyauth?api_key=YourApiKey',
+{
+  method: 'POST',
+  body: inputBody,
+  headers: headers
+})
+.then(function(res) {
+    return res.json();
+}).then(function(body) {
+    console.log(body);
+});
+```
+
+```python
+import requests
+headers = {
+  'Content-Type': 'application/x-www-form-urlencoded',
+  'Accept': 'application/json'
+}
+
+r = requests.post('https://api.mod.io/v1/external/galaxyauth', params={
+  'api_key': 'YourApiKey'
+}, headers = headers)
+
+print r.json()
+```
+
+```java
+URL obj = new URL("https://api.mod.io/v1/external/galaxyauth?api_key=YourApiKey");
+HttpURLConnection con = (HttpURLConnection) obj.openConnection();
+con.setRequestMethod("POST");
+int responseCode = con.getResponseCode();
+BufferedReader in = new BufferedReader(
+    new InputStreamReader(con.getInputStream()));
+String inputLine;
+StringBuffer response = new StringBuffer();
+while ((inputLine = in.readLine()) != null) {
+    response.append(inputLine);
+}
+in.close();
+System.out.println(response.toString());
+```
+`POST /external/galaxyauth`
+
+Request an access token on behalf of a GOG Galaxy user. To use this functionality you *must* supply your games [encrypted app ticket key](https://devportal.gog.com/welcome) supplied by GOG Galaxy, in the *Edit > Options* page of your games profile on mod.io. A Successful request will return an [Access Token Object](#access-token-object).
+
+     Parameter|Type|Required|Description
+     ---|---|---|---|
+     appdata|string|true|The GOG Galaxy users [Encrypted App Ticket](https://cdn.gog.com/open/galaxy/sdk/1.133.3/Documentation/classgalaxy_1_1api_1_1IUser.html#a352802aab7a6e71b1cd1b9b1adfd53d8) provided by the GOG Galaxy SDK. <br><br>Parameter content *MUST* be the encrypted string returned in the buffer after calling [IUser::GetEncryptedAppTicket()](https://cdn.gog.com/open/galaxy/sdk/1.133.3/Documentation/classgalaxy_1_1api_1_1IUser.html#a96af6792efc260e75daebedca2cf74c6) within the Galaxy SDK. Unlike the [Steam Authentication](#authenticate-via-steam) endpoint, you do not need to encode the encrypted string as this is already done by the Galaxy SDK.<br><br>__NOTE:__ Due to the encrypted app ticket containing special characters, you must URL encode the string before sending the request to ensure it is successfully sent to our servers otherwise you may encounter an `422 Unprocessable Entity` response. For example, [cURL](https://ec.haxx.se/http-post.html) will do this for you by using the `--data-urlencode` option.
+     date_expires|integer||Unix timestamp of date in which the returned token will expire. Value cannot be higher than the default value which is a common year (unix timestamp + 31536000 seconds). Using a token after it's expiry time has elapsed will result in a `401 Unauthorized` response.
+
+
+> Example response
+
+```json
+{
+  "code": 200,
+  "access_token": "eyJ0eXAiOiXKV1QibCJhbLciOiJeiUzI1.....",
+  "date_expires": 1570673249
+}
+```
+<h3 id="Authenticate-via-GOG-Galaxy-responses">Responses</h3>
+
+Status|Meaning|Description|Response Schema
+---|---|---|---|
+200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)|Successful Request|[Access Token Object](#schemaaccess_token_object)
+
+<aside class="auth-notice">
+To perform this request, you must be authenticated via one of the following methods:
+<a href="#authentication">api_key</a>
+</aside>
+## Link an Email
+
+> Example request
+
+```shell
+# You can also use wget
+curl -X POST https://api.mod.io/v1/external/link \
+  -H 'Authorization: Bearer {access-token}' \ 
+  -H 'Content-Type: application/x-www-form-urlencoded' \ 
+  -H 'Accept: application/json' \
+  -d 'service=steam' \
+  -d 'service_id=1843043832041' \
+  -d 'email=test@mod.io'
+
+```
+
+```http
+POST https://api.mod.io/v1/external/link HTTP/1.1
+Host: api.mod.io
+Content-Type: application/x-www-form-urlencoded
+Accept: application/json
+Authorization: Bearer {access-token}
+
+
+```
+
+```javascript
+var headers = {
+  'Authorization':'Bearer {access-token}',
+  'Content-Type':'application/x-www-form-urlencoded',
+  'Accept':'application/json'
+
+};
+
+$.ajax({
+  url: 'https://api.mod.io/v1/external/link',
+  method: 'post',
+
+  headers: headers,
+  success: function(data) {
+    console.log(JSON.stringify(data));
+  }
+})
+```
+
+```javascript--nodejs
+const request = require('node-fetch');
+const inputBody = '{
+  "service": "steam",
+  "service_id": "1843043832041",
+  "email": "test@mod.io"
+}';
+const headers = {
+  'Authorization':'Bearer {access-token}',
+  'Content-Type':'application/x-www-form-urlencoded',
+  'Accept':'application/json'
+
+};
+
+fetch('https://api.mod.io/v1/external/link',
+{
+  method: 'POST',
+  body: inputBody,
+  headers: headers
+})
+.then(function(res) {
+    return res.json();
+}).then(function(body) {
+    console.log(body);
+});
+```
+
+```python
+import requests
+headers = {
+  'Authorization': 'Bearer {access-token}',
+  'Content-Type': 'application/x-www-form-urlencoded',
+  'Accept': 'application/json'
+}
+
+r = requests.post('https://api.mod.io/v1/external/link', params={
+
+}, headers = headers)
+
+print r.json()
+```
+
+```java
+URL obj = new URL("https://api.mod.io/v1/external/link");
+HttpURLConnection con = (HttpURLConnection) obj.openConnection();
+con.setRequestMethod("POST");
+int responseCode = con.getResponseCode();
+BufferedReader in = new BufferedReader(
+    new InputStreamReader(con.getInputStream()));
+String inputLine;
+StringBuffer response = new StringBuffer();
+while ((inputLine = in.readLine()) != null) {
+    response.append(inputLine);
+}
+in.close();
+System.out.println(response.toString());
+```
+`POST /external/link`
+
+Connect an external account (i.e. Steam and GOG documented above) with the authenticated user's e-mail address. When calling this endpoint you must authenticate the request with the users access token and the ID of their external account. If we have a matching external account saved for that user, a Successful request will return a [Message Object](#message-object) response at which point the user must check the supplied e-mail address to link the external account to the respective e-mail address.<br/><br/>__NOTE__: The external authentication flows (i.e. Steam and GOG documented above) only give us a users id. This endpoint allows the user to verify their e-mail and connect it to their account. It is an __optional but recommended__ step as it makes account recovery and other processes easier.<br/><br/>__NOTE__: If you link an external account to an e-mail that already exists on mod.io and you confirm the action via the e-mail you will receive, the accounts will __automatically__ be merged together transferring all content from the external account to the native, existing account. Once this process is complete, existing access tokens to the external account will be nullified and you will need to [re-authenticate](#authentication).
+
+     Parameter|Type|Required|Description
+     ---|---|---|---|
+     service|string|true|The external service where the user's account originates.<br><br>Possible Options:<br>- _steam_<br>- _gog_
+     service_id|string|true|The external service id which is associated with the provided access token. For example, if you requested an access token via the [Steam Authentication](#authenticate-via-steam) endpoint, the service_id would be the user's Steam ID. For security reasons, this ID must match with the service parameter provided, and also be associated with the access token used in the request. <br><br>Service ID formats:<br>- _steam_ (Integer, 17 characters, Community ID format)<br>- _gog_ (Integer, 12 characters)
+     email|string|true|The e-mail address to link to the authenticated user's account.
+
+
+> Example response
+
+```json
+{
+  "code": 200,
+  "message": "Please see the confirmation e-mail sent to (:email) to complete account link."
+}
+```
+<h3 id="Link-an-Email-responses">Responses</h3>
+
+Status|Meaning|Description|Response Schema
+---|---|---|---|
+200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)|Successful Request|[Message Object](#message-object)
+
+<aside class="auth-notice">
+To perform this request, you must be authenticated via one of the following methods:
+<a href="#authentication">OAuth 2</a> (Scopes: write)
+</aside>
 # Games
 
 ## Get All Games
@@ -7498,379 +7861,6 @@ Submit a report for any resource on mod.io. Successful request will return [Mess
 Status|Meaning|Description|Response Schema
 ---|---|---|---|
 201|[Created](https://tools.ietf.org/html/rfc7231#section-6.3.2)|Report Created|[Message Object](#message-object)
-
-<aside class="auth-notice">
-To perform this request, you must be authenticated via one of the following methods:
-<a href="#authentication">OAuth 2</a> (Scopes: write)
-</aside>
-# External Auth
-
-## Authenticate via Steam
-
-> Example request
-
-```shell
-# You can also use wget
-curl -X POST https://api.mod.io/v1/external/steamauth?api_key=YourApiKey \
-  -H 'Content-Type: application/x-www-form-urlencoded' \ 
-  -H 'Accept: application/json' \
-  --data-urlencode 'appdata=NDNuZmhnaWdyaGdqOWc0M2o5eTM0aGc='
-
-```
-
-```http
-POST https://api.mod.io/v1/external/steamauth?api_key=YourApiKey HTTP/1.1
-Host: api.mod.io
-Content-Type: application/x-www-form-urlencoded
-Accept: application/json
-
-```
-
-```javascript
-var headers = {
-  'Content-Type':'application/x-www-form-urlencoded',
-  'Accept':'application/json'
-
-};
-
-$.ajax({
-  url: 'https://api.mod.io/v1/external/steamauth',
-  method: 'post',
-  data: '?api_key=YourApiKey',
-  headers: headers,
-  success: function(data) {
-    console.log(JSON.stringify(data));
-  }
-})
-```
-
-```javascript--nodejs
-const request = require('node-fetch');
-const inputBody = '{
-  "appdata": "NDNuZmhnaWdyaGdqOWc0M2o5eTM0aGc="
-}';
-const headers = {
-  'Content-Type':'application/x-www-form-urlencoded',
-  'Accept':'application/json'
-
-};
-
-fetch('https://api.mod.io/v1/external/steamauth?api_key=YourApiKey',
-{
-  method: 'POST',
-  body: inputBody,
-  headers: headers
-})
-.then(function(res) {
-    return res.json();
-}).then(function(body) {
-    console.log(body);
-});
-```
-
-```python
-import requests
-headers = {
-  'Content-Type': 'application/x-www-form-urlencoded',
-  'Accept': 'application/json'
-}
-
-r = requests.post('https://api.mod.io/v1/external/steamauth', params={
-  'api_key': 'YourApiKey'
-}, headers = headers)
-
-print r.json()
-```
-
-```java
-URL obj = new URL("https://api.mod.io/v1/external/steamauth?api_key=YourApiKey");
-HttpURLConnection con = (HttpURLConnection) obj.openConnection();
-con.setRequestMethod("POST");
-int responseCode = con.getResponseCode();
-BufferedReader in = new BufferedReader(
-    new InputStreamReader(con.getInputStream()));
-String inputLine;
-StringBuffer response = new StringBuffer();
-while ((inputLine = in.readLine()) != null) {
-    response.append(inputLine);
-}
-in.close();
-System.out.println(response.toString());
-```
-`POST /external/steamauth`
-
-Request an access token on behalf of a Steam user. To use this functionality you *must* supply your games [encrypted app ticket key](https://partner.steamgames.com/apps/sdkauth) supplied by Steamworks, in the *Edit > Options* page of your games profile on mod.io. A Successful request will return an [Access Token Object](#access-token-object).
-
-     Parameter|Type|Required|Description
-     ---|---|---|---|
-     appdata|base64-encoded string|true|The Steam users [Encrypted App Ticket](https://partner.steamgames.com/doc/features/auth#encryptedapptickets) provided by the Steamworks SDK. <br><br>Parameter content *MUST* be the [*uint8 *rgubTicketEncrypted*](https://partner.steamgames.com/doc/api/SteamEncryptedAppTicket) returned after calling [ISteamUser::GetEncryptedAppTicket()](https://partner.steamgames.com/doc/api/ISteamUser#GetEncryptedAppTicket) within the Steamworks SDK, converted into a base64-encoded string.<br><br>__NOTE:__ Due to a base64-encoded string containing special characters, you must URL encode the string after it has been base64-encoded to ensure it is successfully sent to our servers otherwise you may encounter an `422 Unprocessable Entity` response. For example, [cURL](https://ec.haxx.se/http-post.html) will do this for you by using the `--data-urlencode` option.
-     date_expires|integer||Unix timestamp of date in which the returned token will expire. Value cannot be higher than the default value which is a common year (unix timestamp + 31536000 seconds). Using a token after it's expiry time has elapsed will result in a `401 Unauthorized` response.
-
-
-> Example response
-
-```json
-{
-  "code": 200,
-  "access_token": "eyJ0eXAiOiXKV1QibCJhbLciOiJeiUzI1.....",
-  "date_expires": 1570673249
-}
-```
-<h3 id="Authenticate-via-Steam-responses">Responses</h3>
-
-Status|Meaning|Description|Response Schema
----|---|---|---|
-200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)|Successful Request|[Access Token Object](#schemaaccess_token_object)
-
-<aside class="auth-notice">
-To perform this request, you must be authenticated via one of the following methods:
-<a href="#authentication">api_key</a>
-</aside>
-## Authenticate via GOG Galaxy
-
-> Example request
-
-```shell
-# You can also use wget
-curl -X POST https://api.mod.io/v1/external/galaxyauth?api_key=YourApiKey \
-  -H 'Content-Type: application/x-www-form-urlencoded' \ 
-  -H 'Accept: application/json' \
-  --data-urlencode 'appdata=GCL671bwZ/+zUeOWc0M'
-
-```
-
-```http
-POST https://api.mod.io/v1/external/galaxyauth?api_key=YourApiKey HTTP/1.1
-Host: api.mod.io
-Content-Type: application/x-www-form-urlencoded
-Accept: application/json
-
-```
-
-```javascript
-var headers = {
-  'Content-Type':'application/x-www-form-urlencoded',
-  'Accept':'application/json'
-
-};
-
-$.ajax({
-  url: 'https://api.mod.io/v1/external/galaxyauth',
-  method: 'post',
-  data: '?api_key=YourApiKey',
-  headers: headers,
-  success: function(data) {
-    console.log(JSON.stringify(data));
-  }
-})
-```
-
-```javascript--nodejs
-const request = require('node-fetch');
-const inputBody = '{
-  "appdata": "GCL671bwZ/+zUeOWc0M"
-}';
-const headers = {
-  'Content-Type':'application/x-www-form-urlencoded',
-  'Accept':'application/json'
-
-};
-
-fetch('https://api.mod.io/v1/external/galaxyauth?api_key=YourApiKey',
-{
-  method: 'POST',
-  body: inputBody,
-  headers: headers
-})
-.then(function(res) {
-    return res.json();
-}).then(function(body) {
-    console.log(body);
-});
-```
-
-```python
-import requests
-headers = {
-  'Content-Type': 'application/x-www-form-urlencoded',
-  'Accept': 'application/json'
-}
-
-r = requests.post('https://api.mod.io/v1/external/galaxyauth', params={
-  'api_key': 'YourApiKey'
-}, headers = headers)
-
-print r.json()
-```
-
-```java
-URL obj = new URL("https://api.mod.io/v1/external/galaxyauth?api_key=YourApiKey");
-HttpURLConnection con = (HttpURLConnection) obj.openConnection();
-con.setRequestMethod("POST");
-int responseCode = con.getResponseCode();
-BufferedReader in = new BufferedReader(
-    new InputStreamReader(con.getInputStream()));
-String inputLine;
-StringBuffer response = new StringBuffer();
-while ((inputLine = in.readLine()) != null) {
-    response.append(inputLine);
-}
-in.close();
-System.out.println(response.toString());
-```
-`POST /external/galaxyauth`
-
-Request an access token on behalf of a GOG Galaxy user. To use this functionality you *must* supply your games [encrypted app ticket key](https://devportal.gog.com/welcome) supplied by GOG Galaxy, in the *Edit > Options* page of your games profile on mod.io. A Successful request will return an [Access Token Object](#access-token-object).
-
-     Parameter|Type|Required|Description
-     ---|---|---|---|
-     appdata|string|true|The GOG Galaxy users [Encrypted App Ticket](https://cdn.gog.com/open/galaxy/sdk/1.133.3/Documentation/classgalaxy_1_1api_1_1IUser.html#a352802aab7a6e71b1cd1b9b1adfd53d8) provided by the GOG Galaxy SDK. <br><br>Parameter content *MUST* be the encrypted string returned in the buffer after calling [IUser::GetEncryptedAppTicket()](https://cdn.gog.com/open/galaxy/sdk/1.133.3/Documentation/classgalaxy_1_1api_1_1IUser.html#a96af6792efc260e75daebedca2cf74c6) within the Galaxy SDK. Unlike the [Steam Authentication](#authenticate-via-steam) endpoint, you do not need to encode the encrypted string as this is already done by the Galaxy SDK.<br><br>__NOTE:__ Due to the encrypted app ticket containing special characters, you must URL encode the string before sending the request to ensure it is successfully sent to our servers otherwise you may encounter an `422 Unprocessable Entity` response. For example, [cURL](https://ec.haxx.se/http-post.html) will do this for you by using the `--data-urlencode` option.
-     date_expires|integer||Unix timestamp of date in which the returned token will expire. Value cannot be higher than the default value which is a common year (unix timestamp + 31536000 seconds). Using a token after it's expiry time has elapsed will result in a `401 Unauthorized` response.
-
-
-> Example response
-
-```json
-{
-  "code": 200,
-  "access_token": "eyJ0eXAiOiXKV1QibCJhbLciOiJeiUzI1.....",
-  "date_expires": 1570673249
-}
-```
-<h3 id="Authenticate-via-GOG-Galaxy-responses">Responses</h3>
-
-Status|Meaning|Description|Response Schema
----|---|---|---|
-200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)|Successful Request|[Access Token Object](#schemaaccess_token_object)
-
-<aside class="auth-notice">
-To perform this request, you must be authenticated via one of the following methods:
-<a href="#authentication">api_key</a>
-</aside>
-## Link External Account
-
-> Example request
-
-```shell
-# You can also use wget
-curl -X POST https://api.mod.io/v1/external/link \
-  -H 'Authorization: Bearer {access-token}' \ 
-  -H 'Content-Type: application/x-www-form-urlencoded' \ 
-  -H 'Accept: application/json' \
-  -d 'service=steam' \
-  -d 'email=test@mod.io'
-
-```
-
-```http
-POST https://api.mod.io/v1/external/link HTTP/1.1
-Host: api.mod.io
-Content-Type: application/x-www-form-urlencoded
-Accept: application/json
-Authorization: Bearer {access-token}
-
-
-```
-
-```javascript
-var headers = {
-  'Authorization':'Bearer {access-token}',
-  'Content-Type':'application/x-www-form-urlencoded',
-  'Accept':'application/json'
-
-};
-
-$.ajax({
-  url: 'https://api.mod.io/v1/external/link',
-  method: 'post',
-
-  headers: headers,
-  success: function(data) {
-    console.log(JSON.stringify(data));
-  }
-})
-```
-
-```javascript--nodejs
-const request = require('node-fetch');
-const inputBody = '{
-  "service": "steam",
-  "email": "test@mod.io"
-}';
-const headers = {
-  'Authorization':'Bearer {access-token}',
-  'Content-Type':'application/x-www-form-urlencoded',
-  'Accept':'application/json'
-
-};
-
-fetch('https://api.mod.io/v1/external/link',
-{
-  method: 'POST',
-  body: inputBody,
-  headers: headers
-})
-.then(function(res) {
-    return res.json();
-}).then(function(body) {
-    console.log(body);
-});
-```
-
-```python
-import requests
-headers = {
-  'Authorization': 'Bearer {access-token}',
-  'Content-Type': 'application/x-www-form-urlencoded',
-  'Accept': 'application/json'
-}
-
-r = requests.post('https://api.mod.io/v1/external/link', params={
-
-}, headers = headers)
-
-print r.json()
-```
-
-```java
-URL obj = new URL("https://api.mod.io/v1/external/link");
-HttpURLConnection con = (HttpURLConnection) obj.openConnection();
-con.setRequestMethod("POST");
-int responseCode = con.getResponseCode();
-BufferedReader in = new BufferedReader(
-    new InputStreamReader(con.getInputStream()));
-String inputLine;
-StringBuffer response = new StringBuffer();
-while ((inputLine = in.readLine()) != null) {
-    response.append(inputLine);
-}
-in.close();
-System.out.println(response.toString());
-```
-`POST /external/link`
-
-Connect an external account (i.e. Steam and GOG documented above) with the authenticated user's e-mail address. When calling this endpoint you must authenticate the request with the users access token and the ID of their external account. If we have a matching external account saved for that user, a Successful request will return a [Message Object](#message-object) response at which point the user must check the supplied e-mail address to link the external account to the respective e-mail address.<br/><br/>__NOTE__: The external authentication flows (i.e. Steam and GOG documented above) only give us a users id. This endpoint allows the user to verify their e-mail and connect it to their account. It is an __optional but recommended__ step as it makes account recovery and other processes easier.<br/><br/>__NOTE__: If you link an external account to an e-mail that already exists on mod.io and you confirm the action via the e-mail you will receive, the accounts will __automatically__ be merged together transferring all content from the external account to the native, existing account. Once this process is complete, existing access tokens to the external account will be nullified and you will need to [re-authenticate](#authentication).
-
-     Parameter|Type|Required|Description
-     ---|---|---|---|
-     service|string|true|The external service where the user's account originates.<br><br>Possible Options:<br>- _steam_<br>- _gog_
-     service_id|string|true|The external service id which is associated with the provided access token. For example, if you requested an access token via the [Steam Authentication](#authenticate-via-steam) endpoint, the service_id would be the user's Steam ID. For security reasons, this ID must match with the service parameter provided, and also be associated with the access token used in the request. <br><br>Service ID formats:<br>- _steam_ (Integer, 17 characters, Community ID format)<br>- _gog_ (Integer, 12 characters)
-     email|string|true|The e-mail address to link to the authenticated user's account.
-
-
-> Example response
-
-```json
-{
-  "code": 200,
-  "message": "Please see the confirmation e-mail sent to (:email) to complete account link."
-}
-```
-<h3 id="Link-External-Account-responses">Responses</h3>
-
-Status|Meaning|Description|Response Schema
----|---|---|---|
-200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)|Successful Request|[Message Object](#message-object)
 
 <aside class="auth-notice">
 To perform this request, you must be authenticated via one of the following methods:

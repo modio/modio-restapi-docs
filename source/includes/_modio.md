@@ -85,7 +85,7 @@ curl -X POST --parse_apiurl/oauth/emailrequest \
 }
 ```
 
-### Step 1: Requesting a security code
+- Step 1: Requesting a security code
 
 Request a `security_code` be sent to the email address of the user you wish to authenticate: 
 
@@ -97,7 +97,7 @@ Parameter |Type | Required | Value
 `api_key` | string | true | Your API key generated from 'API' tab within your game profile.
 `email` | string | true | A valid and secure email address your user has access to. 
 
-### Step 2: Exchanging security code for access token
+- Step 2: Exchanging security code for access token
 
 After retrieving the 5-digit `security_code` sent to the email specified, you exchange it for an OAuth 2 `access_token`:
 
@@ -137,7 +137,7 @@ There are a few important things to know when using the email authentication flo
 
 If you do not exchange your `security_code` for an `access_token` within 15 minutes of generation, you will need to begin the flow again to receive another code.
 
-### Step 3: Use access token to access resources.
+#### Step 3: Use access token to access resources.
 
 See [Making Requests](#making-requests) section.
 
