@@ -46,8 +46,8 @@ Here is a brief list of the things to know about our API, as explained in more d
 Authentication can be done via 4 ways:
 
 - Request an [API key (Read Only Access)](--parse_siteurl/apikey/widget) - or get a [test environment](--parse_sitetesturl/apikey/widget) key
-- Use the [Email Authentication Flow (Read + Write Access)](#email-authentication-flow) (to create an OAuth 2 Access Token via **email**)
-- Use the [External App Tickets Flow (Read + Write Access)](#external-app-ticket-authentication-flow) (to create an OAuth 2 Access Token automatically on popular platforms such as **Steam and GOG**)
+- Use the [Email Authentication Flow (Read + Write Access)](#authenticate-via-email) (to create an OAuth 2 Access Token via **email**)
+- Use the [External App Tickets Flow (Read + Write Access)](#authenticate-via-steam) (to create an OAuth 2 Access Token automatically on popular platforms such as **Steam and GOG**)
 - Manually create an [OAuth 2 Access Token (Read + Write Access)](--parse_siteurl/oauth/widget) - or create a [test environment](--parse_sitetesturl/oauth/widget) token
 
 You can use these methods of authentication interchangeably, depending on the level of access you require.
