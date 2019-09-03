@@ -904,6 +904,7 @@ Request an access token on behalf of a Steam user. To use this functionality you
      Parameter|Type|Required|Description
      ---|---|---|---|
      appdata|base64-encoded string|true|The Steam users [Encrypted App Ticket](https://partner.steamgames.com/doc/features/auth#encryptedapptickets) provided by the Steamworks SDK. <br><br>Parameter content *MUST* be the [*uint8 *rgubTicketEncrypted*](https://partner.steamgames.com/doc/api/SteamEncryptedAppTicket) returned after calling [ISteamUser::GetEncryptedAppTicket()](https://partner.steamgames.com/doc/api/ISteamUser#GetEncryptedAppTicket) within the Steamworks SDK, converted into a base64-encoded string.<br><br>__NOTE:__ Due to a base64-encoded string containing special characters, you must URL encode the string after it has been base64-encoded to ensure it is successfully sent to our servers otherwise you may encounter an `422 Unprocessable Entity` response. For example, [cURL](https://ec.haxx.se/http-post.html) will do this for you by using the `--data-urlencode` option.
+     email|string||The users email address. If supplied, and the respective user does not have an email registered for their account we will send a confirmation email to confirm they have ownership of the specified email. This functionality is also available at a later time via the [Link an Email](#link-an-email) endpoint.<br><br>__NOTE__: If the user already has an e-mail on record with us, this parameter will be ignored. This parameter should also be urlencoded before the request is sent.
      date_expires|integer||Unix timestamp of date in which the returned token will expire. Value cannot be higher than the default value which is a common year (unix timestamp + 31536000 seconds). Using a token after it's expiry time has elapsed will result in a `401 Unauthorized` response.
 
 
@@ -1025,7 +1026,8 @@ Request an access token on behalf of a GOG Galaxy user. To use this functionalit
      Parameter|Type|Required|Description
      ---|---|---|---|
      appdata|string|true|The GOG Galaxy users [Encrypted App Ticket](https://cdn.gog.com/open/galaxy/sdk/1.133.3/Documentation/classgalaxy_1_1api_1_1IUser.html#a352802aab7a6e71b1cd1b9b1adfd53d8) provided by the GOG Galaxy SDK. <br><br>Parameter content *MUST* be the encrypted string returned in the buffer after calling [IUser::GetEncryptedAppTicket()](https://cdn.gog.com/open/galaxy/sdk/1.133.3/Documentation/classgalaxy_1_1api_1_1IUser.html#a96af6792efc260e75daebedca2cf74c6) within the Galaxy SDK. Unlike the [Steam Authentication](#authenticate-via-steam) endpoint, you do not need to encode the encrypted string as this is already done by the Galaxy SDK.<br><br>__NOTE:__ Due to the encrypted app ticket containing special characters, you must URL encode the string before sending the request to ensure it is successfully sent to our servers otherwise you may encounter an `422 Unprocessable Entity` response. For example, [cURL](https://ec.haxx.se/http-post.html) will do this for you by using the `--data-urlencode` option.
-     date_expires|integer||Unix timestamp of date in which the returned token will expire. Value cannot be higher than the default value which is a common year (unix timestamp + 31536000 seconds). Using a token after it's expiry time has elapsed will result in a `401 Unauthorized` response.
+     email|string||The users email address. If supplied, and the respective user does not have an email registered for their account we will send a confirmation email to confirm they have ownership of the specified email. This functionality is also available at a later time via the [Link an Email](#link-an-email) endpoint.<br><br>__NOTE__: If the user already has an e-mail on record with us, this parameter will be ignored. This parameter should also be urlencoded before the request is sent.
+        date_expires|integer||Unix timestamp of date in which the returned token will expire. Value cannot be higher than the default value which is a common year (unix timestamp + 31536000 seconds). Using a token after it's expiry time has elapsed will result in a `401 Unauthorized` response.
 
 
 > Example response
@@ -1038,6 +1040,134 @@ Request an access token on behalf of a GOG Galaxy user. To use this functionalit
 }
 ```
 <h3 id="Authenticate-via-GOG-Galaxy-responses">Responses</h3>
+
+Status|Meaning|Description|Response Schema
+---|---|---|---|
+200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)|Successful Request|[Access Token Object](#schemaaccess_token_object)
+
+<aside class="auth-notice">
+To perform this request, you must be authenticated via one of the following methods:
+<a href="#authentication">api_key</a>
+</aside>
+## Authenticate via Oculus
+
+> Example request
+
+```shell
+# You can also use wget
+curl -X POST https://api.mod.io/v1/external/oculusauth?api_key=YourApiKey \
+  -H 'Content-Type: application/x-www-form-urlencoded' \ 
+  -H 'Accept: application/json' \
+  -d 'nonce=m72VkgeZzTSUVRmNvw8v...' \
+  -d 'user_id=1829770514091149' \
+  -d 'access_token=OCAZ5fkj1SBbVNE...'
+
+```
+
+```http
+POST https://api.mod.io/v1/external/oculusauth?api_key=YourApiKey HTTP/1.1
+Host: api.mod.io
+Content-Type: application/x-www-form-urlencoded
+Accept: application/json
+
+```
+
+```javascript
+var headers = {
+  'Content-Type':'application/x-www-form-urlencoded',
+  'Accept':'application/json'
+
+};
+
+$.ajax({
+  url: 'https://api.mod.io/v1/external/oculusauth',
+  method: 'post',
+  data: '?api_key=YourApiKey',
+  headers: headers,
+  success: function(data) {
+    console.log(JSON.stringify(data));
+  }
+})
+```
+
+```javascript--nodejs
+const request = require('node-fetch');
+const inputBody = '{
+  "nonce": "m72VygeZzTSUVRmNvw8v...",
+  "user_id": "1829770514091149",
+  "access_token": "OCAf5kD1SbVNE..."
+}';
+const headers = {
+  'Content-Type':'application/x-www-form-urlencoded',
+  'Accept':'application/json'
+
+};
+
+fetch('https://api.mod.io/v1/external/oculusauth?api_key=YourApiKey',
+{
+  method: 'POST',
+  body: inputBody,
+  headers: headers
+})
+.then(function(res) {
+    return res.json();
+}).then(function(body) {
+    console.log(body);
+});
+```
+
+```python
+import requests
+headers = {
+  'Content-Type': 'application/x-www-form-urlencoded',
+  'Accept': 'application/json'
+}
+
+r = requests.post('https://api.mod.io/v1/external/oculusauth', params={
+  'api_key': 'YourApiKey'
+}, headers = headers)
+
+print r.json()
+```
+
+```java
+URL obj = new URL("https://api.mod.io/v1/external/oculusauth?api_key=YourApiKey");
+HttpURLConnection con = (HttpURLConnection) obj.openConnection();
+con.setRequestMethod("POST");
+int responseCode = con.getResponseCode();
+BufferedReader in = new BufferedReader(
+    new InputStreamReader(con.getInputStream()));
+String inputLine;
+StringBuffer response = new StringBuffer();
+while ((inputLine = in.readLine()) != null) {
+    response.append(inputLine);
+}
+in.close();
+System.out.println(response.toString());
+```
+`POST /external/oculusauth`
+
+Request an access token on behalf of an Oculus user. To use this functionality you *must* supply your games [AppId and secret](https://dashboard.oculus.com/) from the Oculus Dashboard, in the *Edit > Options* page of your games profile on mod.io. A Successful request will return an [Access Token Object](#access-token-object).
+
+     Parameter|Type|Required|Description
+     ---|---|---|---|
+     nonce|string|true|The nonce provided by calling [ovr_User_GetUserProof()](https://developer.oculus.com/documentation/platform/latest/concepts/dg-ownership/) from the Oculus SDK. <br><br>__NOTE:__ Due to the `nonce` potentially containing special characters, you must URL encode the string before sending the request to ensure it is successfully sent to our servers otherwise you may encounter an `422 Unprocessable Entity` response. For example, [cURL](https://ec.haxx.se/http-post.html) will do this for you by using the `--data-urlencode` option.
+     user_id|integer|true|The user's Oculus id providing by calling [ovr_GetLoggedInUserID()](https://developer.oculus.com/documentation/platform/latest/concepts/dg-ownership/) from the Oculus SDK. If supplied, and the respective user does not have an email registered for their account we will send a confirmation email to confirm they have ownership of the specified email. This functionality is also available at a later time via the [Link an Email](#link-an-email) endpoint.<br><br>__NOTE__: If the user already has an e-mail on record with us, this parameter will be ignored. This parameter should also be urlencoded before the request is sent.
+     access_token|string|true|The user's Oculus access token, providing by calling [ovr_User_GetAccessToken()](https://developer.oculus.com/documentation/platform/latest/concepts/dg-ownership/) from the Oculus SDK. mod.io uses this access token on the first login only to obtain the user's username and then discarded.
+     email|string||The users email address. If supplied, and the respective user does not have an email registered for their account we will send a confirmation email to confirm they have ownership of the specified email.<br><br>__WARNING__: It is __strongly__ recommended that you prompt a user in a friendly manner at some point at least once to provide their e-mail address to link to their account. Due to how Oculus handles user id's - if we are not supplied with an e-mail for a user at least once we will __never__ be able to link that user with their existing account at a later date as Oculus id's operate at the game-scope, not globally. Failing to provide an e-mail will in-affect generate an oprhan account that will only ever be able to be accessed from your title.
+     date_expires|integer||Unix timestamp of date in which the returned token will expire. Value cannot be higher than the default value which is a common year (unix timestamp + 31536000 seconds). Using a token after it's expiry time has elapsed will result in a `401 Unauthorized` response.
+
+
+> Example response
+
+```json
+{
+  "code": 200,
+  "access_token": "eyJ0eXAiOiXKV1QibCJhbLciOiJeiUzI1.....",
+  "date_expires": 1570673249
+}
+```
+<h3 id="Authenticate-via-Oculus-responses">Responses</h3>
 
 Status|Meaning|Description|Response Schema
 ---|---|---|---|
@@ -7726,9 +7856,9 @@ Submit one or more API endpoint calls in a single HTTP request by batching the r
 
      The following applies to all batch requests:
 
-     - Who you authenticate as for the parent batch request, you will be assumed that entity for _all_ sub-requests.  
-     - Authorization headers passed into sub-requests are ignored.  
-     - You cannot make more than 20 requests within a batch.  
+     - Who you authenticate as for the parent batch request, you will be assumed that entity for _all_ sub-requests.
+     - Authorization headers passed into sub-requests are ignored.
+     - You cannot make more than 20 requests within a batch.
 
      __Batch Dependencies__
 
@@ -7740,10 +7870,10 @@ Submit one or more API endpoint calls in a single HTTP request by batching the r
 
      __What will it require?__
 
-     This will require three requests:  
-     1. [GET /v1/games/{game-id}/mods](#get-all-mods)  
-     2. [GET /v1/me/subscribed](#get-user-subscriptions)  
-     3. [GET /v1/me/ratings](#get-user-ratings)  
+     This will require three requests:
+     1. [GET /v1/games/{game-id}/mods](#get-all-mods)
+     2. [GET /v1/me/subscribed](#get-user-subscriptions)
+     3. [GET /v1/me/ratings](#get-user-ratings)
 
     In total, we are making 3 requests in a synchronous manner, inside a single request. Based on the above example, we need to know how to get the `id` value of the [Mod Object](#mod-object) from Request #1 and provide it as a dependency to the subsequent requests.
 
