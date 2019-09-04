@@ -2026,9 +2026,9 @@ To perform this request, you must be authenticated via one of the following meth
 curl -X POST https://api.mod.io/v1/external/oculusauth?api_key<span class="o">=</span>YourApiKey <span class="se">\</span>
   -H <span class="s1">'Content-Type: application/x-www-form-urlencoded'</span> <span class="se">\ </span>
   -H <span class="s1">'Accept: application/json'</span> <span class="se">\</span>
-  -d <span class="s1">'nonce=m72VkgeZzTSUVRmNvw8v...'</span> <span class="se">\</span>
+  -d <span class="s1">'nonce=m72VygeZzTSUVRmNvw8v...'</span> <span class="se">\</span>
   -d <span class="s1">'user_id=1829770514091149'</span> <span class="se">\</span>
-  -d <span class="s1">'access_token=OCAZ5fkj1SBbVNE...'</span>
+  -d <span class="s1">'access_token=OCAf5kD1SbVNE...'</span>
 
 </code></pre><pre class="highlight http tab-http"><code><span class="nf">POST</span> <span class="nn">https://api.mod.io/v1/external/oculusauth?api_key=YourApiKey</span> <span class="k">HTTP</span><span class="o">/</span><span class="m">1.1</span>
 <span class="na">Host</span><span class="p">:</span> <span class="s">api.mod.io</span>
@@ -2122,13 +2122,13 @@ curl -X POST https://api.mod.io/v1/external/oculusauth?api_key<span class="o">=<
 <td>user_id</td>
 <td>integer</td>
 <td>true</td>
-<td>The user's Oculus id providing by calling <a href="https://developer.oculus.com/documentation/platform/latest/concepts/dg-ownership/">ovr_GetLoggedInUserID()</a> from the Oculus SDK. If supplied, and the respective user does not have an email registered for their account we will send a confirmation email to confirm they have ownership of the specified email. This functionality is also available at a later time via the <a href="#link-an-email">Link an Email</a> endpoint.<br><br><strong>NOTE</strong>: If the user already has an e-mail on record with us, this parameter will be ignored. This parameter should also be urlencoded before the request is sent.</td>
+<td>The user's Oculus id providing by calling <a href="https://developer.oculus.com/documentation/platform/latest/concepts/dg-ownership/">ovr_GetLoggedInUserID()</a> from the Oculus SDK.</td>
 </tr>
 <tr>
 <td>access_token</td>
 <td>string</td>
 <td>true</td>
-<td>The user's Oculus access token, providing by calling <a href="https://developer.oculus.com/documentation/platform/latest/concepts/dg-ownership/">ovr_User_GetAccessToken()</a> from the Oculus SDK. mod.io uses this access token on the first login only to obtain the user's username and then discarded.</td>
+<td>The user's access token, providing by calling <a href="https://developer.oculus.com/documentation/platform/latest/concepts/dg-ownership/">ovr_User_GetAccessToken()</a> from the Oculus SDK. mod.io uses this access token on the first login only to obtain the user's username and is not saved on our servers.</td>
 </tr>
 <tr>
 <td>email</td>
