@@ -1058,9 +1058,9 @@ To perform this request, you must be authenticated via one of the following meth
 curl -X POST https://api.mod.io/v1/external/oculusauth?api_key=YourApiKey \
   -H 'Content-Type: application/x-www-form-urlencoded' \ 
   -H 'Accept: application/json' \
-  -d 'nonce=m72VkgeZzTSUVRmNvw8v...' \
+  -d 'nonce=m72VygeZzTSUVRmNvw8v...' \
   -d 'user_id=1829770514091149' \
-  -d 'access_token=OCAZ5fkj1SBbVNE...'
+  -d 'access_token=OCAf5kD1SbVNE...'
 
 ```
 
@@ -1152,8 +1152,8 @@ Request an access token on behalf of an Oculus user. To use this functionality y
      Parameter|Type|Required|Description
      ---|---|---|---|
      nonce|string|true|The nonce provided by calling [ovr_User_GetUserProof()](https://developer.oculus.com/documentation/platform/latest/concepts/dg-ownership/) from the Oculus SDK. <br><br>__NOTE:__ Due to the `nonce` potentially containing special characters, you must URL encode the string before sending the request to ensure it is successfully sent to our servers otherwise you may encounter an `422 Unprocessable Entity` response. For example, [cURL](https://ec.haxx.se/http-post.html) will do this for you by using the `--data-urlencode` option.
-     user_id|integer|true|The user's Oculus id providing by calling [ovr_GetLoggedInUserID()](https://developer.oculus.com/documentation/platform/latest/concepts/dg-ownership/) from the Oculus SDK. If supplied, and the respective user does not have an email registered for their account we will send a confirmation email to confirm they have ownership of the specified email. This functionality is also available at a later time via the [Link an Email](#link-an-email) endpoint.<br><br>__NOTE__: If the user already has an e-mail on record with us, this parameter will be ignored. This parameter should also be urlencoded before the request is sent.
-     access_token|string|true|The user's Oculus access token, providing by calling [ovr_User_GetAccessToken()](https://developer.oculus.com/documentation/platform/latest/concepts/dg-ownership/) from the Oculus SDK. mod.io uses this access token on the first login only to obtain the user's username and then discarded.
+     user_id|integer|true|The user's Oculus id providing by calling [ovr_GetLoggedInUserID()](https://developer.oculus.com/documentation/platform/latest/concepts/dg-ownership/) from the Oculus SDK.
+     access_token|string|true|The user's access token, providing by calling [ovr_User_GetAccessToken()](https://developer.oculus.com/documentation/platform/latest/concepts/dg-ownership/) from the Oculus SDK. mod.io uses this access token on the first login only to obtain the user's username and is not saved on our servers.
      email|string||The users email address. If supplied, and the respective user does not have an email registered for their account we will send a confirmation email to confirm they have ownership of the specified email.<br><br>__WARNING__: It is __strongly__ recommended that you prompt a user in a friendly manner at some point at least once to provide their e-mail address to link to their account. Due to how Oculus handles user id's - if we are not supplied with an e-mail for a user at least once we will __never__ be able to link that user with their existing account at a later date as Oculus id's operate at the game-scope, not globally. Failing to provide an e-mail will in-affect generate an oprhan account that will only ever be able to be accessed from your title.
      date_expires|integer||Unix timestamp of date in which the returned token will expire. Value cannot be higher than the default value which is a common year (unix timestamp + 31536000 seconds). Using a token after it's expiry time has elapsed will result in a `401 Unauthorized` response.
 
