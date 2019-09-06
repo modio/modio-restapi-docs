@@ -319,7 +319,6 @@ Meaning | Value | Description | Modify Authorization | Filter Authorization
 ---------- | ------- | ------- | ------- | ----------
 Not Accepted | 0 | Resource is not accepted and not returned when browsing.<br><br>Games will be returned if requested [directly](#get-game) provided the user is an admin or the `api_key` used belongs to the game.<br><br>Mods will be returned if requested [directly](#get-mod) provided the user is an admin or subscribed to the content. All resources are always returned via the [/me](#me) endpoints. | Game Admins Only | Game Admins Only
 Accepted | 1 | Resource is accepted and returned via all endpoints. | Game Admins Only | Everyone
-Archived | 2 | Resource is accepted and returned via all endpoints (but flagged as out of date/incompatible). | Game Admins Only | Everyone
 Deleted | 3 | Resource is deleted and only returned via the [/me](#me) endpoints. | Game Admins Only | Game Admins Only
 
 ### Game admin privileges
@@ -1154,7 +1153,7 @@ Request an access token on behalf of an Oculus user. To use this functionality y
      nonce|string|true|The nonce provided by calling [ovr_User_GetUserProof()](https://developer.oculus.com/documentation/platform/latest/concepts/dg-ownership/) from the Oculus SDK. <br><br>__NOTE:__ Due to the `nonce` potentially containing special characters, you must URL encode the string before sending the request to ensure it is successfully sent to our servers otherwise you may encounter an `422 Unprocessable Entity` response. For example, [cURL](https://ec.haxx.se/http-post.html) will do this for you by using the `--data-urlencode` option.
      user_id|integer|true|The user's Oculus id providing by calling [ovr_GetLoggedInUserID()](https://developer.oculus.com/documentation/platform/latest/concepts/dg-ownership/) from the Oculus SDK.
      access_token|string|true|The user's access token, providing by calling [ovr_User_GetAccessToken()](https://developer.oculus.com/documentation/platform/latest/concepts/dg-ownership/) from the Oculus SDK. mod.io uses this access token on the first login only to obtain the user's username and is not saved on our servers.
-     email|string||The users email address. If supplied, and the respective user does not have an email registered for their account we will send a confirmation email to confirm they have ownership of the specified email.<br><br>__WARNING__: It is __strongly__ recommended that you prompt a user in a friendly manner at some point at least once to provide their e-mail address to link to their account. Due to how Oculus handles user id's - if we are not supplied with an e-mail for a user at least once we will __never__ be able to link that user with their existing account at a later date as Oculus id's operate at the game-scope, not globally. Failing to provide an e-mail will in-affect generate an oprhan account that will only ever be able to be accessed from your title.
+     email|string||The users email address. If supplied, and the respective user does not have an email registered for their account we will send a confirmation email to confirm they have ownership of the specified email.<br><br>__WARNING__: We __strongly recommend__ that you prompt your users in a friendly manner at least once to provide their e-mail address to link to their account. Due to how Oculus handles user id's - if we are not supplied with an e-mail for a user at least once we will __never__ be able to link that user with their existing account at a later date as Oculus id's operate at the game-scope, not globally. Failing to provide an e-mail will in-effect generate an orphan account that will only ever be able to be accessed from your title.
      date_expires|integer||Unix timestamp of date in which the returned token will expire. Value cannot be higher than the default value which is a common year (unix timestamp + 31536000 seconds). Using a token after it's expiry time has elapsed will result in a `401 Unauthorized` response.
 
 
@@ -1402,7 +1401,7 @@ Get all games. Successful request will return an array of [Game Objects](#get-al
     Filter|Type|Description
     ---|---|---
     id|integer|Unique id of the game.
-    status|integer|Status of the game (only admins can filter by this field, see [status and visibility](#status-amp-visibility) for details):<br><br>__0__ = Not accepted<br>__1__ = Accepted _(default)_<br>__2__ = Archived _(default)_<br>__3__ = Deleted
+    status|integer|Status of the game (only admins can filter by this field, see [status and visibility](#status-amp-visibility) for details):<br><br>__0__ = Not accepted<br>__1__ = Accepted _(default)_<br>__3__ = Deleted
     submitted_by|integer|Unique id of the user who has ownership of the game.
     date_added|integer|Unix timestamp of date game was registered.
     date_updated|integer|Unix timestamp of date game was updated.
@@ -1971,7 +1970,7 @@ Get all mods for the corresponding game. Successful request will return an array
     ---|---|---
     id|integer|Unique id of the mod.
     game_id|integer|Unique id of the parent game.
-    status|integer|Status of the mod (only game admins can filter by this field, see [status and visibility](#status-amp-visibility) for details):<br><br>__0__ = Not accepted<br>__1__ = Accepted _(default)_<br>__2__ = Archived _(default)_<br>__3__ = Deleted
+    status|integer|Status of the mod (only game admins can filter by this field, see [status and visibility](#status-amp-visibility) for details):<br><br>__0__ = Not accepted<br>__1__ = Accepted _(default)_<br>__3__ = Deleted
     visible|integer|Visibility of the mod (only game admins can filter by this field, see [status and visibility](#status-amp-visibility) for details):<br><br>__0__ = Hidden<br>__1__ = Public
     submitted_by|integer|Unique id of the user who has ownership of the mod.
     date_added|integer|Unix timestamp of date mod was registered.
@@ -2671,7 +2670,7 @@ Edit details for a mod. If you want to update the `logo` or media associated wit
 
     Parameter|Type|Required|Description
     ---|---|---|---|
-    status|integer||Status of a mod. The mod must have at least one uploaded `modfile` to be 'accepted' or 'archived' (best if this field is controlled by game admins, see [status and visibility](#status-amp-visibility) for details):<br><br>__0__ = Not accepted<br>__1__ = Accepted (game admins only)<br>__2__ = Archived (out of date or incompatible, game admins only)<br>__3__ = Deleted (use the [delete mod](#delete-mod) endpoint to set this status)
+    status|integer||Status of a mod. The mod must have at least one uploaded `modfile` to be 'accepted' (best if this field is controlled by game admins, see [status and visibility](#status-amp-visibility) for details):<br><br>__0__ = Not accepted<br>__1__ = Accepted (game admins only)<br>__3__ = Deleted (use the [delete mod](#delete-mod) endpoint to set this status)
     visible|integer||Visibility of the mod (best if this field is controlled by mod admins, see [status and visibility](#status-amp-visibility) for details):<br><br>__0__ = Hidden<br>__1__ = Public
     name|string||Name of your mod. Cannot exceed 80 characters.
     name_id|string||Path for the mod on mod.io. For example: https://gamename.mod.io/__mod-name-id-here__. Cannot exceed 80 characters.
@@ -7750,11 +7749,11 @@ curl -X POST https://api.mod.io/v1/batch \
   -H 'Authorization: Bearer {access-token}' \ 
   -H 'Content-Type: application/x-www-form-urlencoded' \ 
   -H 'Accept: application/json' \
-  -d 'batch[0][relative_url]=v1/games/11/mods' \
+  -d 'batch[0][relative url   ]=v1/games/11/mods' \
   -d 'batch[0][method]=GET' \
-  -d 'batch[1][relative_url]=v1/me/subscribed?id=in-$[0].data[*].id' \
+  -d 'batch[1][relative url   ]=v1/me/subscribed?id=in-$[0].data[*].id' \
   -d 'batch[1][method]=GET' \
-  -d 'batch[2][relative_url]=v1/me/ratings?id=in-$[0].data[*].id' \
+  -d 'batch[2][relative url   ]=v1/me/ratings?id=in-$[0].data[*].id' \
   -d 'batch[2][method]=GET'
 
 ```
@@ -8666,7 +8665,7 @@ Get all games the _authenticated user_ added or is a team member of. Successful 
     Filter|Type|Description
     ---|---|---
     id|integer|Unique id of the game.
-    status|integer|Status of the game (only admins can filter by this field, see [status and visibility](#status-amp-visibility) for details):<br><br>__0__ = Not accepted<br>__1__ = Accepted _(default)_<br>__2__ = Archived _(default)_<br>__3__ = Deleted
+    status|integer|Status of the game (only admins can filter by this field, see [status and visibility](#status-amp-visibility) for details):<br><br>__0__ = Not accepted<br>__1__ = Accepted _(default)_<br>__3__ = Deleted
     submitted_by|integer|Unique id of the user who has ownership of the game.
     date_added|integer|Unix timestamp of date game was registered.
     date_updated|integer|Unix timestamp of date game was updated.
@@ -8872,7 +8871,7 @@ Get all mods the _authenticated user_ added or is a team member of. Successful r
     ---|---|---
     id|integer|Unique id of the mod.
     game_id|integer|Unique id of the parent game.
-    status|integer|Status of the mod (only game admins can filter by this field, see [status and visibility](#status-amp-visibility) for details):<br><br>__0__ = Not accepted<br>__1__ = Accepted _(default)_<br>__2__ = Archived _(default)_<br>__3__ = Deleted
+    status|integer|Status of the mod (only game admins can filter by this field, see [status and visibility](#status-amp-visibility) for details):<br><br>__0__ = Not accepted<br>__1__ = Accepted _(default)_<br>__3__ = Deleted
     visible|integer|Visibility of the mod (only game admins can filter by this field, see [status and visibility](#status-amp-visibility) for details):<br><br>__0__ = Hidden<br>__1__ = Public
     submitted_by|integer|Unique id of the user who has ownership of the mod.
     date_added|integer|Unix timestamp of date mod was registered.
@@ -9633,7 +9632,7 @@ data|[Batch Object](#schemabatch_object)[]|Array containing any response object.
 »» data|[Mod Object](#schemamod_object)[]|Contains Mod Objects.
 »»» id|integer|Unique mod id.
 »»» game_id|integer|Unique game id.
-»»» status|integer|Status of the mod (see [status and visibility](#status-amp-visibility) for details):<br><br>__0__ = Not Accepted<br>__1__ = Accepted<br>__2__ = Archived (potentially out of date or incompatible)<br>__3__ = Deleted
+»»» status|integer|Status of the mod (see [status and visibility](#status-amp-visibility) for details):<br><br>__0__ = Not Accepted<br>__1__ = Accepted<br>__3__ = Deleted
 »»» visible|integer|Visibility of the mod (see [status and visibility](#status-amp-visibility) for details):<br><br>__0__ = Hidden<br>__1__ = Public
 »»» submitted_by|[User Object](#schemauser_object)|Contains user data.
 »»»» id|integer|Unique id of the user.
@@ -10040,7 +10039,7 @@ Name|Type|Description
 ---|---|---|---|
 data|[Game Object](#schemagame_object)[]|Array containing game objects.
 » id|integer|Unique game id.
-» status|integer|Status of the game (see [status and visibility](#status-amp-visibility) for details):<br><br>__0__ = Not Accepted<br>__1__ = Accepted<br>__2__ = Archived (potentially out of date or incompatible)<br>__3__ = Deleted
+» status|integer|Status of the game (see [status and visibility](#status-amp-visibility) for details):<br><br>__0__ = Not Accepted<br>__1__ = Accepted<br>__3__ = Deleted
 » submitted_by|[User Object](#schemauser_object)|Contains user data.
 »» id|integer|Unique id of the user.
 »» name_id|string|Path for the user on mod.io. For example: https://mod.io/members/__username-id-here__ Usually a simplified version of their username.
@@ -10265,7 +10264,7 @@ Name|Type|Description
 data|[Mod Object](#schemamod_object)[]|Array containing mod objects.
 » id|integer|Unique mod id.
 » game_id|integer|Unique game id.
-» status|integer|Status of the mod (see [status and visibility](#status-amp-visibility) for details):<br><br>__0__ = Not Accepted<br>__1__ = Accepted<br>__2__ = Archived (potentially out of date or incompatible)<br>__3__ = Deleted
+» status|integer|Status of the mod (see [status and visibility](#status-amp-visibility) for details):<br><br>__0__ = Not Accepted<br>__1__ = Accepted<br>__3__ = Deleted
 » visible|integer|Visibility of the mod (see [status and visibility](#status-amp-visibility) for details):<br><br>__0__ = Hidden<br>__1__ = Public
 » submitted_by|[User Object](#schemauser_object)|Contains user data.
 »» id|integer|Unique id of the user.
@@ -10838,7 +10837,7 @@ body|[Batch Body Object](#schemabatch_body_object)|Contains batch request data.
 » data|[Mod Object](#schemamod_object)[]|Contains Mod Objects.
 »» id|integer|Unique mod id.
 »» game_id|integer|Unique game id.
-»» status|integer|Status of the mod (see [status and visibility](#status-amp-visibility) for details):<br><br>__0__ = Not Accepted<br>__1__ = Accepted<br>__2__ = Archived (potentially out of date or incompatible)<br>__3__ = Deleted
+»» status|integer|Status of the mod (see [status and visibility](#status-amp-visibility) for details):<br><br>__0__ = Not Accepted<br>__1__ = Accepted<br>__3__ = Deleted
 »» visible|integer|Visibility of the mod (see [status and visibility](#status-amp-visibility) for details):<br><br>__0__ = Hidden<br>__1__ = Public
 »» submitted_by|[User Object](#schemauser_object)|Contains user data.
 »»» id|integer|Unique id of the user.
@@ -11043,7 +11042,7 @@ Name|Type|Description
 data|[Mod Object](#schemamod_object)[]|Contains Mod Objects.
 » id|integer|Unique mod id.
 » game_id|integer|Unique game id.
-» status|integer|Status of the mod (see [status and visibility](#status-amp-visibility) for details):<br><br>__0__ = Not Accepted<br>__1__ = Accepted<br>__2__ = Archived (potentially out of date or incompatible)<br>__3__ = Deleted
+» status|integer|Status of the mod (see [status and visibility](#status-amp-visibility) for details):<br><br>__0__ = Not Accepted<br>__1__ = Accepted<br>__3__ = Deleted
 » visible|integer|Visibility of the mod (see [status and visibility](#status-amp-visibility) for details):<br><br>__0__ = Hidden<br>__1__ = Public
 » submitted_by|[User Object](#schemauser_object)|Contains user data.
 »» id|integer|Unique id of the user.
@@ -11448,7 +11447,7 @@ Name|Type|Description
 ---|---|---|---|
 id|integer|Unique mod id.
 game_id|integer|Unique game id.
-status|integer|Status of the mod (see [status and visibility](#status-amp-visibility) for details):<br><br>__0__ = Not Accepted<br>__1__ = Accepted<br>__2__ = Archived (potentially out of date or incompatible)<br>__3__ = Deleted
+status|integer|Status of the mod (see [status and visibility](#status-amp-visibility) for details):<br><br>__0__ = Not Accepted<br>__1__ = Accepted<br>__3__ = Deleted
 visible|integer|Visibility of the mod (see [status and visibility](#status-amp-visibility) for details):<br><br>__0__ = Hidden<br>__1__ = Public
 submitted_by|[User Object](#schemauser_object)|Contains user data.
 » id|integer|Unique id of the user.
@@ -11665,7 +11664,7 @@ date_added|integer|Unix timestamp of date tag was applied.
 Name|Type|Description
 ---|---|---|---|
 id|integer|Unique game id.
-status|integer|Status of the game (see [status and visibility](#status-amp-visibility) for details):<br><br>__0__ = Not Accepted<br>__1__ = Accepted<br>__2__ = Archived (potentially out of date or incompatible)<br>__3__ = Deleted
+status|integer|Status of the game (see [status and visibility](#status-amp-visibility) for details):<br><br>__0__ = Not Accepted<br>__1__ = Accepted<br>__3__ = Deleted
 submitted_by|[User Object](#schemauser_object)|Contains user data.
 » id|integer|Unique id of the user.
 » name_id|string|Path for the user on mod.io. For example: https://mod.io/members/__username-id-here__ Usually a simplified version of their username.
