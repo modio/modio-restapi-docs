@@ -1204,13 +1204,6 @@ curl -X POST https://api.mod.io/v1/games/1/team <span class="se">\</span>
 <td>Everyone</td>
 </tr>
 <tr>
-<td>Archived</td>
-<td>2</td>
-<td>Resource is accepted and returned via all endpoints (but flagged as out of date/incompatible).</td>
-<td>Game Admins Only</td>
-<td>Everyone</td>
-</tr>
-<tr>
 <td>Deleted</td>
 <td>3</td>
 <td>Resource is deleted and only returned via the <a href="#me">/me</a> endpoints.</td>
@@ -2134,7 +2127,7 @@ curl -X POST https://api.mod.io/v1/external/oculusauth?api_key<span class="o">=<
 <td>email</td>
 <td>string</td>
 <td></td>
-<td>The users email address. If supplied, and the respective user does not have an email registered for their account we will send a confirmation email to confirm they have ownership of the specified email.<br><br><strong>WARNING</strong>: It is <strong>strongly</strong> recommended that you prompt a user in a friendly manner at some point at least once to provide their e-mail address to link to their account. Due to how Oculus handles user id's - if we are not supplied with an e-mail for a user at least once we will <strong>never</strong> be able to link that user with their existing account at a later date as Oculus id's operate at the game-scope, not globally. Failing to provide an e-mail will in-affect generate an oprhan account that will only ever be able to be accessed from your title.</td>
+<td>The users email address. If supplied, and the respective user does not have an email registered for their account we will send a confirmation email to confirm they have ownership of the specified email.<br><br><strong>WARNING</strong>: We <strong>strongly recommend</strong> that you prompt your users in a friendly manner at least once to provide their e-mail address to link to their account. Due to how Oculus handles user id's - if we are not supplied with an e-mail for a user at least once we will <strong>never</strong> be able to link that user with their existing account at a later date as Oculus id's operate at the game-scope, not globally. Failing to provide an e-mail will in-effect generate an orphan account that will only ever be able to be accessed from your title.</td>
 </tr>
 <tr>
 <td>date_expires</td>
@@ -2424,7 +2417,7 @@ Accept: application/json
 <tr>
 <td>status</td>
 <td>integer</td>
-<td>Status of the game (only admins can filter by this field, see <a href="#status-amp-visibility">status and visibility</a> for details):<br><br><strong>0</strong> = Not accepted<br><strong>1</strong> = Accepted <em>(default)</em><br><strong>2</strong> = Archived <em>(default)</em><br><strong>3</strong> = Deleted</td>
+<td>Status of the game (only admins can filter by this field, see <a href="#status-amp-visibility">status and visibility</a> for details):<br><br><strong>0</strong> = Not accepted<br><strong>1</strong> = Accepted <em>(default)</em><br><strong>3</strong> = Deleted</td>
 </tr>
 <tr>
 <td>submitted_by</td>
@@ -3150,7 +3143,7 @@ Accept: application/json
 <tr>
 <td>status</td>
 <td>integer</td>
-<td>Status of the mod (only game admins can filter by this field, see <a href="#status-amp-visibility">status and visibility</a> for details):<br><br><strong>0</strong> = Not accepted<br><strong>1</strong> = Accepted <em>(default)</em><br><strong>2</strong> = Archived <em>(default)</em><br><strong>3</strong> = Deleted</td>
+<td>Status of the mod (only game admins can filter by this field, see <a href="#status-amp-visibility">status and visibility</a> for details):<br><br><strong>0</strong> = Not accepted<br><strong>1</strong> = Accepted <em>(default)</em><br><strong>3</strong> = Deleted</td>
 </tr>
 <tr>
 <td>visible</td>
@@ -4017,7 +4010,7 @@ Content-Type: application/x-www-form-urlencoded
 <td>status</td>
 <td>integer</td>
 <td></td>
-<td>Status of a mod. The mod must have at least one uploaded <code>modfile</code> to be 'accepted' or 'archived' (best if this field is controlled by game admins, see <a href="#status-amp-visibility">status and visibility</a> for details):<br><br><strong>0</strong> = Not accepted<br><strong>1</strong> = Accepted (game admins only)<br><strong>2</strong> = Archived (out of date or incompatible, game admins only)<br><strong>3</strong> = Deleted (use the <a href="#delete-mod">delete mod</a> endpoint to set this status)</td>
+<td>Status of a mod. The mod must have at least one uploaded <code>modfile</code> to be 'accepted' (best if this field is controlled by game admins, see <a href="#status-amp-visibility">status and visibility</a> for details):<br><br><strong>0</strong> = Not accepted<br><strong>1</strong> = Accepted (game admins only)<br><strong>3</strong> = Deleted (use the <a href="#delete-mod">delete mod</a> endpoint to set this status)</td>
 </tr>
 <tr>
 <td>visible</td>
@@ -10915,7 +10908,7 @@ Authorization: Bearer {access-token}
 <tr>
 <td>status</td>
 <td>integer</td>
-<td>Status of the game (only admins can filter by this field, see <a href="#status-amp-visibility">status and visibility</a> for details):<br><br><strong>0</strong> = Not accepted<br><strong>1</strong> = Accepted <em>(default)</em><br><strong>2</strong> = Archived <em>(default)</em><br><strong>3</strong> = Deleted</td>
+<td>Status of the game (only admins can filter by this field, see <a href="#status-amp-visibility">status and visibility</a> for details):<br><br><strong>0</strong> = Not accepted<br><strong>1</strong> = Accepted <em>(default)</em><br><strong>3</strong> = Deleted</td>
 </tr>
 <tr>
 <td>submitted_by</td>
@@ -11200,7 +11193,7 @@ Authorization: Bearer {access-token}
 <tr>
 <td>status</td>
 <td>integer</td>
-<td>Status of the mod (only game admins can filter by this field, see <a href="#status-amp-visibility">status and visibility</a> for details):<br><br><strong>0</strong> = Not accepted<br><strong>1</strong> = Accepted <em>(default)</em><br><strong>2</strong> = Archived <em>(default)</em><br><strong>3</strong> = Deleted</td>
+<td>Status of the mod (only game admins can filter by this field, see <a href="#status-amp-visibility">status and visibility</a> for details):<br><br><strong>0</strong> = Not accepted<br><strong>1</strong> = Accepted <em>(default)</em><br><strong>3</strong> = Deleted</td>
 </tr>
 <tr>
 <td>visible</td>
@@ -12245,7 +12238,7 @@ To perform this request, you must be authenticated via one of the following meth
 <tr>
 <td>»»» status</td>
 <td>integer</td>
-<td>Status of the mod (see <a href="#status-amp-visibility">status and visibility</a> for details):<br><br><strong>0</strong> = Not Accepted<br><strong>1</strong> = Accepted<br><strong>2</strong> = Archived (potentially out of date or incompatible)<br><strong>3</strong> = Deleted</td>
+<td>Status of the mod (see <a href="#status-amp-visibility">status and visibility</a> for details):<br><br><strong>0</strong> = Not Accepted<br><strong>1</strong> = Accepted<br><strong>3</strong> = Deleted</td>
 </tr>
 <tr>
 <td>»»» visible</td>
@@ -13256,7 +13249,7 @@ To perform this request, you must be authenticated via one of the following meth
 <tr>
 <td>» status</td>
 <td>integer</td>
-<td>Status of the game (see <a href="#status-amp-visibility">status and visibility</a> for details):<br><br><strong>0</strong> = Not Accepted<br><strong>1</strong> = Accepted<br><strong>2</strong> = Archived (potentially out of date or incompatible)<br><strong>3</strong> = Deleted</td>
+<td>Status of the game (see <a href="#status-amp-visibility">status and visibility</a> for details):<br><br><strong>0</strong> = Not Accepted<br><strong>1</strong> = Accepted<br><strong>3</strong> = Deleted</td>
 </tr>
 <tr>
 <td>» submitted_by</td>
@@ -13740,7 +13733,7 @@ To perform this request, you must be authenticated via one of the following meth
 <tr>
 <td>» status</td>
 <td>integer</td>
-<td>Status of the mod (see <a href="#status-amp-visibility">status and visibility</a> for details):<br><br><strong>0</strong> = Not Accepted<br><strong>1</strong> = Accepted<br><strong>2</strong> = Archived (potentially out of date or incompatible)<br><strong>3</strong> = Deleted</td>
+<td>Status of the mod (see <a href="#status-amp-visibility">status and visibility</a> for details):<br><br><strong>0</strong> = Not Accepted<br><strong>1</strong> = Accepted<br><strong>3</strong> = Deleted</td>
 </tr>
 <tr>
 <td>» visible</td>
@@ -14995,7 +14988,7 @@ To perform this request, you must be authenticated via one of the following meth
 <tr>
 <td>»» status</td>
 <td>integer</td>
-<td>Status of the mod (see <a href="#status-amp-visibility">status and visibility</a> for details):<br><br><strong>0</strong> = Not Accepted<br><strong>1</strong> = Accepted<br><strong>2</strong> = Archived (potentially out of date or incompatible)<br><strong>3</strong> = Deleted</td>
+<td>Status of the mod (see <a href="#status-amp-visibility">status and visibility</a> for details):<br><br><strong>0</strong> = Not Accepted<br><strong>1</strong> = Accepted<br><strong>3</strong> = Deleted</td>
 </tr>
 <tr>
 <td>»» visible</td>
@@ -15536,7 +15529,7 @@ To perform this request, you must be authenticated via one of the following meth
 <tr>
 <td>» status</td>
 <td>integer</td>
-<td>Status of the mod (see <a href="#status-amp-visibility">status and visibility</a> for details):<br><br><strong>0</strong> = Not Accepted<br><strong>1</strong> = Accepted<br><strong>2</strong> = Archived (potentially out of date or incompatible)<br><strong>3</strong> = Deleted</td>
+<td>Status of the mod (see <a href="#status-amp-visibility">status and visibility</a> for details):<br><br><strong>0</strong> = Not Accepted<br><strong>1</strong> = Accepted<br><strong>3</strong> = Deleted</td>
 </tr>
 <tr>
 <td>» visible</td>
@@ -16436,7 +16429,7 @@ To perform this request, you must be authenticated via one of the following meth
 <tr>
 <td>status</td>
 <td>integer</td>
-<td>Status of the mod (see <a href="#status-amp-visibility">status and visibility</a> for details):<br><br><strong>0</strong> = Not Accepted<br><strong>1</strong> = Accepted<br><strong>2</strong> = Archived (potentially out of date or incompatible)<br><strong>3</strong> = Deleted</td>
+<td>Status of the mod (see <a href="#status-amp-visibility">status and visibility</a> for details):<br><br><strong>0</strong> = Not Accepted<br><strong>1</strong> = Accepted<br><strong>3</strong> = Deleted</td>
 </tr>
 <tr>
 <td>visible</td>
@@ -16997,7 +16990,7 @@ To perform this request, you must be authenticated via one of the following meth
 <tr>
 <td>status</td>
 <td>integer</td>
-<td>Status of the game (see <a href="#status-amp-visibility">status and visibility</a> for details):<br><br><strong>0</strong> = Not Accepted<br><strong>1</strong> = Accepted<br><strong>2</strong> = Archived (potentially out of date or incompatible)<br><strong>3</strong> = Deleted</td>
+<td>Status of the game (see <a href="#status-amp-visibility">status and visibility</a> for details):<br><br><strong>0</strong> = Not Accepted<br><strong>1</strong> = Accepted<br><strong>3</strong> = Deleted</td>
 </tr>
 <tr>
 <td>submitted_by</td>
