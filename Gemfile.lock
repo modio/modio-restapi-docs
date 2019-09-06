@@ -82,6 +82,8 @@ GEM
       rouge (~> 2.0)
     mini_portile2 (2.4.0)
     minitest (5.11.3)
+    nokogiri (1.10.4)
+      mini_portile2 (~> 2.4.0)
     nokogiri (1.10.4-x86-mingw32)
       mini_portile2 (~> 2.4.0)
     padrino-helpers (0.13.3.4)

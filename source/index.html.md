@@ -7749,11 +7749,11 @@ curl -X POST https://api.mod.io/v1/batch \
   -H 'Authorization: Bearer {access-token}' \ 
   -H 'Content-Type: application/x-www-form-urlencoded' \ 
   -H 'Accept: application/json' \
-  -d 'batch[0][relative url   ]=v1/games/11/mods' \
+  -d 'batch[0][relative_url]=v1/games/11/mods' \
   -d 'batch[0][method]=GET' \
-  -d 'batch[1][relative url   ]=v1/me/subscribed?id=in-$[0].data[*].id' \
+  -d 'batch[1][relative_url]=v1/me/subscribed?id=in-$[0].data[*].id' \
   -d 'batch[1][method]=GET' \
-  -d 'batch[2][relative url   ]=v1/me/ratings?id=in-$[0].data[*].id' \
+  -d 'batch[2][relative_url]=v1/me/ratings?id=in-$[0].data[*].id' \
   -d 'batch[2][method]=GET'
 
 ```
