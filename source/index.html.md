@@ -80,6 +80,10 @@ Access Token (OAuth 2) | Header | GET, POST, PUT, DELETE | Read, create, update,
 
 To access the API authentication is required. All users and games get a private API key. It is quick and easy to use in your apps but limited to read-only GET requests, due to the limited security it offers. View your private API key(s) [on production](https://mod.io/apikey/widget) or on the [test environment](https://test.mod.io/apikey/widget).
 
+### Web Overlay Authentication
+
+At the moment it is not possible to open the mod.io website in-game with the user pre-authenticated, however you can provide a hint by appending `?ref=SERVICE` to the end of the URL. What this tells mod.io, is that when the user attempts to perform an action that requires authentication, they will be prompted to login with their `SERVICE` account. For example if you want to take a mod creator to their mod edit page in-game on Steam, the URL would look something like: `https://gamename.mod.io/modname/edit?ref=steam`. Services supported are **steam**, **facebook** and *google**. 
+
 ### Scopes (OAuth 2)
 
 mod.io allows you to specify the permission each access token has (default is _read+write_), this is done by the use of scopes. See below for a full list of scopes available, you must include at least one scope when generating a new token.
@@ -681,7 +685,7 @@ X-RateLimit-Limit: 120
 X-RateLimit-Remaining: 87
 ```
 
-- API keys linked to a member have __unlimited requests__.
+- API keys linked to a user have __unlimited requests__.
 - API keys linked to a game have __unlimited requests__.
 
 ### OAuth2 Rate Limiting
