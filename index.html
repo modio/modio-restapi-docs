@@ -882,6 +882,8 @@
 </table>
 <h3 id="api-key-authentication">API Key Authentication</h3>
 <p>To access the API authentication is required. All users and games get a private API key. It is quick and easy to use in your apps but limited to read-only GET requests, due to the limited security it offers. View your private API key(s) <a href="https://mod.io/apikey/widget" class="colorbox">on production</a> or on the <a href="https://test.mod.io/apikey/widget" class="colorbox">test environment</a>.</p>
+<h3 id="web-overlay-authentication">Web Overlay Authentication</h3>
+<p>At the moment it is not possible to open the mod.io website in-game with the user pre-authenticated, however you can provide a hint by appending <code>?ref=SERVICE</code> to the end of the URL. What this tells mod.io, is that when the user attempts to perform an action that requires authentication, they will be prompted to login with their <code>SERVICE</code> account. For example if you want to take a mod creator to their mod edit page in-game on Steam, the URL would look something like: <code>https://gamename.mod.io/modname/edit?ref=steam</code>. Services supported are <strong>steam</strong>, <strong>facebook</strong> and <strong>google</strong>. </p>
 <h3 id="scopes-oauth-2">Scopes (OAuth 2)</h3>
 <p>mod.io allows you to specify the permission each access token has (default is <em>read+write</em>), this is done by the use of scopes. See below for a full list of scopes available, you must include at least one scope when generating a new token.</p>
 
@@ -1572,7 +1574,7 @@ a non-english language you must supply the <code>Content-Language</code> header 
 <span class="na">X-RateLimit-Remaining</span><span class="p">:</span> <span class="s">87</span>
 </code></pre>
 <ul>
-<li>API keys linked to a member have <strong>unlimited requests</strong>.</li>
+<li>API keys linked to a user have <strong>unlimited requests</strong>.</li>
 <li>API keys linked to a game have <strong>unlimited requests</strong>.</li>
 </ul>
 <h3 id="oauth2-rate-limiting">OAuth2 Rate Limiting</h3>
@@ -9898,9 +9900,9 @@ curl -X POST https://api.mod.io/v1/batch <span class="se">\</span>
 
 <p>The following applies to all batch requests:</p>
 
-<p>- Who you authenticate as for the parent batch request, you will be assumed that entity for <em>all</em> sub-requests.
-     - Authorization headers passed into sub-requests are ignored.
-     - You cannot make more than 20 requests within a batch.</p>
+<p>- Who you authenticate as for the parent batch request, you will be assumed that entity for <em>all</em> sub-requests.<br>
+     - Authorization headers passed into sub-requests are ignored.<br>
+     - You cannot make more than 20 requests within a batch.  </p>
 
 <p><strong>Batch Dependencies</strong></p>
 
@@ -9912,10 +9914,10 @@ curl -X POST https://api.mod.io/v1/batch <span class="se">\</span>
 
 <p><strong>What will it require?</strong></p>
 
-<p>This will require three requests:
-     1. <a href="#get-all-mods">GET /v1/games/{game-id}/mods</a>
-     2. <a href="#get-user-subscriptions">GET /v1/me/subscribed</a>
-     3. <a href="#get-user-ratings">GET /v1/me/ratings</a></p>
+<p>This will require three requests:<br>
+     1. <a href="#get-all-mods">GET /v1/games/{game-id}/mods</a><br>
+     2. <a href="#get-user-subscriptions">GET /v1/me/subscribed</a><br>
+     3. <a href="#get-user-ratings">GET /v1/me/ratings</a>  </p>
 
 <p>In total, we are making 3 requests in a synchronous manner, inside a single request. Based on the above example, we need to know how to get the <code>id</code> value of the <a href="#mod-object">Mod Object</a> from Request #1 and provide it as a dependency to the subsequent requests.</p>
 
