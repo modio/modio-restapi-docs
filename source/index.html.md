@@ -82,7 +82,7 @@ To access the API authentication is required. All users and games get a private 
 
 ### Web Overlay Authentication
 
-At the moment it is not possible to open the mod.io website in-game with the user pre-authenticated, however you can provide a hint by appending `?ref=SERVICE` to the end of the URL. What this tells mod.io, is that when the user attempts to perform an action that requires authentication, they will be prompted to login with their `SERVICE` account. For example if you want to take a mod creator to their mod edit page in-game on Steam, the URL would look something like: `https://gamename.mod.io/modname/edit?ref=steam`. Services supported are **steam**, **facebook** and *google**. 
+At the moment it is not possible to open the mod.io website in-game with the user pre-authenticated, however you can provide a hint by appending `?ref=SERVICE` to the end of the URL. What this tells mod.io, is that when the user attempts to perform an action that requires authentication, they will be prompted to login with their `SERVICE` account. For example if you want to take a mod creator to their mod edit page in-game on Steam, the URL would look something like: `https://gamename.mod.io/modname/edit?ref=steam`. Services supported are **steam**, **facebook** and **google**. 
 
 ### Scopes (OAuth 2)
 
@@ -7859,9 +7859,9 @@ Submit one or more API endpoint calls in a single HTTP request by batching the r
 
      The following applies to all batch requests:
 
-     - Who you authenticate as for the parent batch request, you will be assumed that entity for _all_ sub-requests.
-     - Authorization headers passed into sub-requests are ignored.
-     - You cannot make more than 20 requests within a batch.
+     - Who you authenticate as for the parent batch request, you will be assumed that entity for _all_ sub-requests.  
+     - Authorization headers passed into sub-requests are ignored.  
+     - You cannot make more than 20 requests within a batch.  
 
      __Batch Dependencies__
 
@@ -7873,10 +7873,10 @@ Submit one or more API endpoint calls in a single HTTP request by batching the r
 
      __What will it require?__
 
-     This will require three requests:
-     1. [GET /v1/games/{game-id}/mods](#get-all-mods)
-     2. [GET /v1/me/subscribed](#get-user-subscriptions)
-     3. [GET /v1/me/ratings](#get-user-ratings)
+     This will require three requests:  
+     1. [GET /v1/games/{game-id}/mods](#get-all-mods)  
+     2. [GET /v1/me/subscribed](#get-user-subscriptions)  
+     3. [GET /v1/me/ratings](#get-user-ratings)  
 
     In total, we are making 3 requests in a synchronous manner, inside a single request. Based on the above example, we need to know how to get the `id` value of the [Mod Object](#mod-object) from Request #1 and provide it as a dependency to the subsequent requests.
 

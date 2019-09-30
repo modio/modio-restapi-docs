@@ -154,6 +154,10 @@ Supported Platforms | - | - | -
 [![Steam](images/platform-steam.png)](https://www.steampowered.com) | __Steam__<br />[SDK](https://partner.steamgames.com/doc/api/SteamEncryptedAppTicket)<br />[Endpoint Reference](#authenticate-via-steam)<br /> | [![GOG Galaxy](images/platform-gog.png)](https://www.gog.com/galaxy) | __GOG Galaxy__<br />[SDK](https://cdn.gog.com/open/galaxy/sdk/1.133.3/Documentation/classgalaxy_1_1api_1_1IUser.html#a352802aab7a6e71b1cd1b9b1adfd53d8)<br />[Endpoint Reference](#authenticate-via-gog-galaxy)
 Want a platform added to the list? [Contact us!](mailto:--parse_email?subject=Authentication Suggestion)
 
+### Web Overlay Authentication
+
+At the moment it is not possible to open the --parse_sitename website in-game with the user pre-authenticated, however you can provide a hint by appending `?ref=SERVICE` to the end of the URL. What this tells --parse_sitename, is that when the user attempts to perform an action that requires authentication, they will be prompted to login with their `SERVICE` account. For example if you want to take a mod creator to their mod edit page in-game on Steam, the URL would look something like: `https://gamename.--parse_sitename/modname/edit?ref=steam`. Services supported are **steam**, **facebook** and **google**. 
+
 ### Scopes (OAuth 2)
 
 --parse_sitename allows you to specify the permission each access token has (default is _read+write_), this is done by the use of scopes. See below for a full list of scopes available, you must include at least one scope when generating a new token.
@@ -755,7 +759,7 @@ X-RateLimit-Limit: 120
 X-RateLimit-Remaining: 87
 ```
 
-- API keys linked to a member have __unlimited requests__.
+- API keys linked to a user have __unlimited requests__.
 - API keys linked to a game have __unlimited requests__.
 
 ### OAuth2 Rate Limiting
