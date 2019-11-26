@@ -2021,12 +2021,12 @@ To perform this request, you must be authenticated via one of the following meth
 <p>Example request</p>
 </blockquote>
 <pre class="highlight shell tab-shell"><code><span class="c"># You can also use wget</span>
-curl -X POST https://api.mod.io/v1/external/itchauth?api_key<span class="o">=</span>YourApiKey <span class="se">\</span>
+curl -X POST https://api.mod.io/v1/external/itchioauth?api_key<span class="o">=</span>YourApiKey <span class="se">\</span>
   -H <span class="s1">'Content-Type: application/x-www-form-urlencoded'</span> <span class="se">\ </span>
   -H <span class="s1">'Accept: application/json'</span> <span class="se">\</span>
-  -d <span class="s1">'itch_token=eyJhbXciOiJIUzI1Lizs....'</span>
+  -d <span class="s1">'itchio_token=eyJhbXciOiJIUzI1Lizs....'</span>
 
-</code></pre><pre class="highlight http tab-http"><code><span class="nf">POST</span> <span class="nn">https://api.mod.io/v1/external/itchauth?api_key=YourApiKey</span> <span class="k">HTTP</span><span class="o">/</span><span class="m">1.1</span>
+</code></pre><pre class="highlight http tab-http"><code><span class="nf">POST</span> <span class="nn">https://api.mod.io/v1/external/itchioauth?api_key=YourApiKey</span> <span class="k">HTTP</span><span class="o">/</span><span class="m">1.1</span>
 <span class="na">Host</span><span class="p">:</span> <span class="s">api.mod.io</span>
 <span class="na">Content-Type</span><span class="p">:</span> <span class="s">application/x-www-form-urlencoded</span>
 <span class="na">Accept</span><span class="p">:</span> <span class="s">application/json</span>
@@ -2038,7 +2038,7 @@ curl -X POST https://api.mod.io/v1/external/itchauth?api_key<span class="o">=</s
 <span class="p">};</span>
 
 <span class="nx">$</span><span class="p">.</span><span class="nx">ajax</span><span class="p">({</span>
-  <span class="na">url</span><span class="p">:</span> <span class="s1">'https://api.mod.io/v1/external/itchauth'</span><span class="p">,</span>
+  <span class="na">url</span><span class="p">:</span> <span class="s1">'https://api.mod.io/v1/external/itchioauth'</span><span class="p">,</span>
   <span class="na">method</span><span class="p">:</span> <span class="s1">'post'</span><span class="p">,</span>
   <span class="na">data</span><span class="p">:</span> <span class="s1">'?api_key=YourApiKey'</span><span class="p">,</span>
   <span class="na">headers</span><span class="p">:</span> <span class="nx">headers</span><span class="p">,</span>
@@ -2048,7 +2048,7 @@ curl -X POST https://api.mod.io/v1/external/itchauth?api_key<span class="o">=</s
 <span class="p">})</span>
 </code></pre><pre class="highlight javascript tab-javascript--nodejs"><code><span class="kr">const</span> <span class="nx">request</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s1">'node-fetch'</span><span class="p">);</span>
 <span class="kr">const</span> <span class="nx">inputBody</span> <span class="o">=</span> <span class="s1">'{
-  "itch_token": "eyJhbXciOiJIUzI1Lizs...."
+  "itchio_token": "eyJhbXciOiJIUzI1Lizs...."
 }'</span><span class="p">;</span>
 <span class="kr">const</span> <span class="nx">headers</span> <span class="o">=</span> <span class="p">{</span>
   <span class="s1">'Content-Type'</span><span class="p">:</span><span class="s1">'application/x-www-form-urlencoded'</span><span class="p">,</span>
@@ -2056,7 +2056,7 @@ curl -X POST https://api.mod.io/v1/external/itchauth?api_key<span class="o">=</s
 
 <span class="p">};</span>
 
-<span class="nx">fetch</span><span class="p">(</span><span class="s1">'https://api.mod.io/v1/external/itchauth?api_key=YourApiKey'</span><span class="p">,</span>
+<span class="nx">fetch</span><span class="p">(</span><span class="s1">'https://api.mod.io/v1/external/itchioauth?api_key=YourApiKey'</span><span class="p">,</span>
 <span class="p">{</span>
   <span class="na">method</span><span class="p">:</span> <span class="s1">'POST'</span><span class="p">,</span>
   <span class="na">body</span><span class="p">:</span> <span class="nx">inputBody</span><span class="p">,</span>
@@ -2073,12 +2073,12 @@ curl -X POST https://api.mod.io/v1/external/itchauth?api_key<span class="o">=</s
   <span class="s">'Accept'</span><span class="p">:</span> <span class="s">'application/json'</span>
 <span class="p">}</span>
 
-<span class="n">r</span> <span class="o">=</span> <span class="n">requests</span><span class="o">.</span><span class="n">post</span><span class="p">(</span><span class="s">'https://api.mod.io/v1/external/itchauth'</span><span class="p">,</span> <span class="n">params</span><span class="o">=</span><span class="p">{</span>
+<span class="n">r</span> <span class="o">=</span> <span class="n">requests</span><span class="o">.</span><span class="n">post</span><span class="p">(</span><span class="s">'https://api.mod.io/v1/external/itchioauth'</span><span class="p">,</span> <span class="n">params</span><span class="o">=</span><span class="p">{</span>
   <span class="s">'api_key'</span><span class="p">:</span> <span class="s">'YourApiKey'</span>
 <span class="p">},</span> <span class="n">headers</span> <span class="o">=</span> <span class="n">headers</span><span class="p">)</span>
 
 <span class="k">print</span> <span class="n">r</span><span class="o">.</span><span class="n">json</span><span class="p">()</span>
-</code></pre><pre class="highlight java tab-java"><code><span class="n">URL</span> <span class="n">obj</span> <span class="o">=</span> <span class="k">new</span> <span class="n">URL</span><span class="o">(</span><span class="s">"https://api.mod.io/v1/external/itchauth?api_key=YourApiKey"</span><span class="o">);</span>
+</code></pre><pre class="highlight java tab-java"><code><span class="n">URL</span> <span class="n">obj</span> <span class="o">=</span> <span class="k">new</span> <span class="n">URL</span><span class="o">(</span><span class="s">"https://api.mod.io/v1/external/itchioauth?api_key=YourApiKey"</span><span class="o">);</span>
 <span class="n">HttpURLConnection</span> <span class="n">con</span> <span class="o">=</span> <span class="o">(</span><span class="n">HttpURLConnection</span><span class="o">)</span> <span class="n">obj</span><span class="o">.</span><span class="na">openConnection</span><span class="o">();</span>
 <span class="n">con</span><span class="o">.</span><span class="na">setRequestMethod</span><span class="o">(</span><span class="s">"POST"</span><span class="o">);</span>
 <span class="kt">int</span> <span class="n">responseCode</span> <span class="o">=</span> <span class="n">con</span><span class="o">.</span><span class="na">getResponseCode</span><span class="o">();</span>
@@ -2092,9 +2092,9 @@ curl -X POST https://api.mod.io/v1/external/itchauth?api_key<span class="o">=</s
 <span class="n">in</span><span class="o">.</span><span class="na">close</span><span class="o">();</span>
 <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="n">response</span><span class="o">.</span><span class="na">toString</span><span class="o">());</span>
 </code></pre>
-<p><span class="httpmethod POST">POST</span> <span class="endpointheading">/external/itchauth</span></p>
+<p><span class="httpmethod POST">POST</span> <span class="endpointheading">/external/itchioauth</span></p>
 
-<p>Request an access token on behalf of an itch.io desktop app User. Due to the itch.io desktop application allowing multiple users to be logged in at once, if more than one user is logged in then the user at the top of that list on the itch.io login dialog will be the authenticating user. A Successful request will return an <a href="#access-token-object">Access Token Object</a>.</p>
+<p>Request an access token on behalf of an itch.io user via the itch desktop app. Due to the desktop application allowing multiple users to be logged in at once, if more than one user is logged in then the user at the top of that list on the itch.io login dialog will be the authenticating user. A Successful request will return an <a href="#access-token-object">Access Token Object</a>.</p>
 
 <table>
 <thead>
@@ -2107,7 +2107,7 @@ curl -X POST https://api.mod.io/v1/external/itchauth?api_key<span class="o">=</s
 </thead>
 <tbody>
 <tr>
-<td>itch_token</td>
+<td>itchio_token</td>
 <td>string</td>
 <td>true</td>
 <td>The <a href="https://itch.io/docs/itch/integrating/manifest-actions.html">JWT Token</a> provided by the itch.io desktop application to your game as the environment variable <code>ITCHIO_API_KEY</code>. You must setup your itch.io app manifest to include the <a href="https://itch.io/docs/itch/integrating/manifest-actions.html">API scope</a> to force itch to set this variable.</td>
@@ -2433,7 +2433,7 @@ curl -X POST https://api.mod.io/v1/external/link <span class="se">\</span>
 <td>service_id</td>
 <td>string</td>
 <td>true</td>
-<td>The external service id which is associated with the provided access token. For example, if you requested an access token via the <a href="#authenticate-via-steam">Steam Authentication</a> endpoint, the service_id would be the user's Steam ID. For security reasons, this ID must match with the service parameter provided, and also be associated with the access token used in the request. <br><br>Service ID formats:<br>- <em>steam</em> (Integer, 17 characters, Community ID format)<br>- <em>gog</em> (Integer, 12 characters)</td>
+<td>The external service id which is associated with the provided access token. For example, if you requested an access token via the <a href="#authenticate-via-steam">Steam Authentication</a> endpoint, the service_id would be the user's Steam ID. For security reasons, this ID must match with the service parameter provided, and also be associated with the access token used in the request. <br><br>Service ID formats:<br>- <em>steam</em> (Integer, 17 characters, Community ID format)<br>- <em>gog</em> (Integer, 12 characters)<br>- <em>itchio</em> (Integer, 5 characters)</td>
 </tr>
 <tr>
 <td>email</td>
