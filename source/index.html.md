@@ -1052,22 +1052,21 @@ Status|Meaning|Description|Response Schema
 To perform this request, you must be authenticated via one of the following methods:
 <a href="#authentication">api_key</a>
 </aside>
-
 ## Authenticate via itch.io
 
 > Example request
 
 ```shell
 # You can also use wget
-curl -X POST https://api.mod.io/v1/external/itchauth?api_key=YourApiKey \
+curl -X POST https://api.mod.io/v1/external/itchioauth?api_key=YourApiKey \
   -H 'Content-Type: application/x-www-form-urlencoded' \ 
   -H 'Accept: application/json' \
-  -d 'itch_token=eyJhbXciOiJIUzI1Lizs....'
+  -d 'itchio_token=eyJhbXciOiJIUzI1Lizs....'
 
 ```
 
 ```http
-POST https://api.mod.io/v1/external/itchauth?api_key=YourApiKey HTTP/1.1
+POST https://api.mod.io/v1/external/itchioauth?api_key=YourApiKey HTTP/1.1
 Host: api.mod.io
 Content-Type: application/x-www-form-urlencoded
 Accept: application/json
@@ -1082,7 +1081,7 @@ var headers = {
 };
 
 $.ajax({
-  url: 'https://api.mod.io/v1/external/itchauth',
+  url: 'https://api.mod.io/v1/external/itchioauth',
   method: 'post',
   data: '?api_key=YourApiKey',
   headers: headers,
@@ -1095,7 +1094,7 @@ $.ajax({
 ```javascript--nodejs
 const request = require('node-fetch');
 const inputBody = '{
-  "itch_token": "eyJhbXciOiJIUzI1Lizs...."
+  "itchio_token": "eyJhbXciOiJIUzI1Lizs...."
 }';
 const headers = {
   'Content-Type':'application/x-www-form-urlencoded',
@@ -1103,7 +1102,7 @@ const headers = {
 
 };
 
-fetch('https://api.mod.io/v1/external/itchauth?api_key=YourApiKey',
+fetch('https://api.mod.io/v1/external/itchioauth?api_key=YourApiKey',
 {
   method: 'POST',
   body: inputBody,
@@ -1123,7 +1122,7 @@ headers = {
   'Accept': 'application/json'
 }
 
-r = requests.post('https://api.mod.io/v1/external/itchauth', params={
+r = requests.post('https://api.mod.io/v1/external/itchioauth', params={
   'api_key': 'YourApiKey'
 }, headers = headers)
 
@@ -1131,7 +1130,7 @@ print r.json()
 ```
 
 ```java
-URL obj = new URL("https://api.mod.io/v1/external/itchauth?api_key=YourApiKey");
+URL obj = new URL("https://api.mod.io/v1/external/itchioauth?api_key=YourApiKey");
 HttpURLConnection con = (HttpURLConnection) obj.openConnection();
 con.setRequestMethod("POST");
 int responseCode = con.getResponseCode();
@@ -1145,13 +1144,13 @@ while ((inputLine = in.readLine()) != null) {
 in.close();
 System.out.println(response.toString());
 ```
-`POST /external/itchauth`
+`POST /external/itchioauth`
 
-Request an access token on behalf of an itch.io desktop app User. Due to the itch.io desktop application allowing multiple users to be logged in at once, if more than one user is logged in then the user at the top of that list on the itch.io login dialog will be the authenticating user. A Successful request will return an [Access Token Object](#access-token-object).
+Request an access token on behalf of an itch.io user via the itch desktop app. Due to the desktop application allowing multiple users to be logged in at once, if more than one user is logged in then the user at the top of that list on the itch.io login dialog will be the authenticating user. A Successful request will return an [Access Token Object](#access-token-object).
 
      Parameter|Type|Required|Description
      ---|---|---|---|
-     itch_token|string|true|The [JWT Token](https://itch.io/docs/itch/integrating/manifest-actions.html) provided by the itch.io desktop application to your game as the environment variable `ITCHIO_API_KEY`. You must setup your itch.io app manifest to include the [API scope](https://itch.io/docs/itch/integrating/manifest-actions.html) to force itch to set this variable.
+     itchio_token|string|true|The [JWT Token](https://itch.io/docs/itch/integrating/manifest-actions.html) provided by the itch.io desktop application to your game as the environment variable `ITCHIO_API_KEY`. You must setup your itch.io app manifest to include the [API scope](https://itch.io/docs/itch/integrating/manifest-actions.html) to force itch to set this variable.
      email|string||The users email address. If supplied, and the respective user does not have an email registered for their account we will send a confirmation email to confirm they have ownership of the specified email. This functionality is also available at a later time via the [Link an Email](#link-an-email) endpoint.<br><br>__NOTE__: If the user already has an e-mail on record with us, this parameter will be ignored. This parameter should also be urlencoded before the request is sent.
      date_expires|integer||Unix timestamp of date in which the returned token will expire. Value cannot be higher than the default value which is a week (unix timestamp + 604800 seconds). Using a token after it's expiry time has elapsed will result in a `401 Unauthorized` response.
 
@@ -1412,7 +1411,7 @@ Connect an external account (i.e. Steam and GOG documented above) with the authe
      Parameter|Type|Required|Description
      ---|---|---|---|
      service|string|true|The external service where the user's account originates.<br><br>Possible Options:<br>- _steam_<br>- _gog_
-     service_id|string|true|The external service id which is associated with the provided access token. For example, if you requested an access token via the [Steam Authentication](#authenticate-via-steam) endpoint, the service_id would be the user's Steam ID. For security reasons, this ID must match with the service parameter provided, and also be associated with the access token used in the request. <br><br>Service ID formats:<br>- _steam_ (Integer, 17 characters, Community ID format)<br>- _gog_ (Integer, 12 characters)
+     service_id|string|true|The external service id which is associated with the provided access token. For example, if you requested an access token via the [Steam Authentication](#authenticate-via-steam) endpoint, the service_id would be the user's Steam ID. For security reasons, this ID must match with the service parameter provided, and also be associated with the access token used in the request. <br><br>Service ID formats:<br>- _steam_ (Integer, 17 characters, Community ID format)<br>- _gog_ (Integer, 12 characters)<br>- _itchio_ (Integer, 5 characters)
      email|string|true|The e-mail address to link to the authenticated user's account.
 
 
