@@ -7739,7 +7739,8 @@ curl -X POST https://api.mod.io/v1/report \
   -d 'resource=mods' \
   -d 'id=3853' \
   -d 'type=1' \
-  -d 'name=Mod contains copyrighted content' \
+  -d 'name=Name of the user submitting the report' \
+  -d 'contact=Contact details of the user submitting the report' \
   -d 'summary=Detailed explanation for report here'
 
 ```
@@ -7779,7 +7780,8 @@ const inputBody = '{
   "resource": "mods",
   "id": "3853",
   "type": "1",
-  "name": "Mod contains copyrighted content",
+  "name": "Name of the user submitting the report",
+  "contact": "Contact details of the user submitting the report",
   "summary": "Detailed explanation for report here"
 }';
 const headers = {
@@ -7840,9 +7842,10 @@ Submit a report for any resource on mod.io. Successful request will return [Mess
      ---|---|---|---|
      resource|string|true|Type of resource you are reporting. Must be one of the following values:<br><br>- _games_<br>- _mods_<br>- _users_
      id|integer|true|Unique id of the resource you are reporting.
-     type|integer|true|The type of report you are submitting. Must be one of the following values:<br><br>__0__ = Generic Report<br>__1__ = DMCA Report
-     name|string|true|Informative title for your report.
-     summary|string|true|Detailed description of your report. Make sure you include all relevant information and links to help moderators investigate and respond appropiately.
+     type|integer|true|Type of report you are submitting. Must be one of the following values:<br><br>__0__ = Generic Report<br>__1__ = DMCA Report
+     name|string||Name of the user submitting the report. Recommended for DMCA reports.
+     contact|string||Contact details of the user submitting the report. Recommended for DMCA reports.
+     summary|string|true|Detailed description of your report. Make sure you include all relevant information and links to help moderators investigate and respond appropriately. Our [online reporting process](https://mod.io/report/widget) shows the information we collect and put into the `name`, `contact` and `summary` fields as appropiate. We recommend you implement a similar flow in-game.
 
 
 > Example response
