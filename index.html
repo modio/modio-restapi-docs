@@ -9789,7 +9789,8 @@ curl -X POST https://api.mod.io/v1/report <span class="se">\</span>
   -d <span class="s1">'resource=mods'</span> <span class="se">\</span>
   -d <span class="s1">'id=3853'</span> <span class="se">\</span>
   -d <span class="s1">'type=1'</span> <span class="se">\</span>
-  -d <span class="s1">'name=Mod contains copyrighted content'</span> <span class="se">\</span>
+  -d <span class="s1">'name=Name of the user submitting the report'</span> <span class="se">\</span>
+  -d <span class="s1">'contact=Contact details of the user submitting the report'</span> <span class="se">\</span>
   -d <span class="s1">'summary=Detailed explanation for report here'</span>
 
 </code></pre><pre class="highlight http tab-http"><code><span class="nf">POST</span> <span class="nn">https://api.mod.io/v1/report</span> <span class="k">HTTP</span><span class="o">/</span><span class="m">1.1</span>
@@ -9820,7 +9821,8 @@ curl -X POST https://api.mod.io/v1/report <span class="se">\</span>
   "resource": "mods",
   "id": "3853",
   "type": "1",
-  "name": "Mod contains copyrighted content",
+  "name": "Name of the user submitting the report",
+  "contact": "Contact details of the user submitting the report",
   "summary": "Detailed explanation for report here"
 }'</span><span class="p">;</span>
 <span class="kr">const</span> <span class="nx">headers</span> <span class="o">=</span> <span class="p">{</span>
@@ -9898,19 +9900,25 @@ curl -X POST https://api.mod.io/v1/report <span class="se">\</span>
 <td>type</td>
 <td>integer</td>
 <td>true</td>
-<td>The type of report you are submitting. Must be one of the following values:<br><br><strong>0</strong> = Generic Report<br><strong>1</strong> = DMCA Report</td>
+<td>Type of report you are submitting. Must be one of the following values:<br><br><strong>0</strong> = Generic Report<br><strong>1</strong> = DMCA Report</td>
 </tr>
 <tr>
 <td>name</td>
 <td>string</td>
-<td>true</td>
-<td>Informative title for your report.</td>
+<td></td>
+<td>Name of the user submitting the report. Recommended for DMCA reports.</td>
+</tr>
+<tr>
+<td>contact</td>
+<td>string</td>
+<td></td>
+<td>Contact details of the user submitting the report. Recommended for DMCA reports.</td>
 </tr>
 <tr>
 <td>summary</td>
 <td>string</td>
 <td>true</td>
-<td>Detailed description of your report. Make sure you include all relevant information and links to help moderators investigate and respond appropiately.</td>
+<td>Detailed description of your report. Make sure you include all relevant information and links to help moderators investigate and respond appropriately. Our <a href="https://mod.io/report/widget" class="colorbox">online reporting process</a> shows the information we collect and put into the <code>name</code>, <code>contact</code> and <code>summary</code> fields as appropiate. We recommend you implement a similar flow in-game.</td>
 </tr>
 </tbody>
 </table>
