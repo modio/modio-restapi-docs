@@ -95,8 +95,8 @@ Request a `security_code` be sent to the email address of the user you wish to a
 
 Parameter |Type | Required | Value
 ---------- | ---------- |---------- | ----------
-`api_key` | string | true | Your API key generated from 'API' tab within your game profile.
-`email` | string | true | A valid and secure email address your user has access to. 
+api_key | string | true | Your API key generated from 'API' tab within your game profile.
+email | string | true | A valid and secure email address your user has access to. 
 
 **Step 2: Exchanging security code for access token**
 
@@ -125,9 +125,9 @@ curl -X POST --parse_apiurl/oauth/emailexchange \
 
 Parameter | Type | Required | Value
 ---------- | ---------- | ---------- | ----------  
-`api_key` | string | true | Your API key generated from 'API' tab within your game profile.
-`security_code` | string | true | Unique 5-digit code sent to the email address supplied in the previous request. 
-`date_expires` | integer || Unix timestamp of date in which the returned token will expire. Value cannot be higher than the default value which is a common year (unix timestamp + 31536000 seconds). Using a token after it's expiry time has elapsed will result in a `401 Unauthorized` response.
+api_key | string | true | Your API key generated from 'API' tab within your game profile.
+security_code | string | true | Unique 5-digit code sent to the email address supplied in the previous request. 
+date_expires | integer || Unix timestamp of date in which the returned token will expire. Value cannot be higher than the default value which is a common year (unix timestamp + 31536000 seconds). Using a token after it's expiry time has elapsed will result in a `401 Unauthorized` response.
 
 There are a few important things to know when using the email authentication flow:
  
