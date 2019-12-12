@@ -64,7 +64,7 @@ To access the API authentication is required. All users and games get a private 
 
 ### Email Authentication Flow
 
-To perform writes, you will need to authenticate your users via OAuth 2. To make this frictionless in-game, we use an email verification system, similar to what Slack and others pioneered. It works by users supplying their email, which we send a time-limited 5 digit security code too. They exchange this code in-game, for an [OAuth 2 access token](--parse_siteurl/oauth/widget) you can save to authenticate future requests. The benefit of this approach is it avoids complex website redirects and doesn't require your users to complete a slow registration flow.
+To perform writes, you will need to authenticate your users via OAuth 2. To make this frictionless in-game, we offer an email verification system, similar to what Slack and others pioneered. It works by users supplying their email, which we send a time-limited 5 digit security code too. They exchange this code in-game, for an [OAuth 2 access token](--parse_siteurl/oauth/widget) you can save to authenticate future requests. The benefit of this approach is it avoids complex website redirects and doesn't require your users to complete a slow registration flow.
 
 ![--parse_sitename Email Authentication Flow](--parse_staticurl/v1/images/home/email.png)
 
@@ -86,7 +86,7 @@ curl -X POST --parse_apiurl/oauth/emailrequest \
 }
 ```
 
-- Step 1: Requesting a security code
+**Step 1: Requesting a security code**
 
 Request a `security_code` be sent to the email address of the user you wish to authenticate: 
 
@@ -98,7 +98,7 @@ Parameter |Type | Required | Value
 `api_key` | string | true | Your API key generated from 'API' tab within your game profile.
 `email` | string | true | A valid and secure email address your user has access to. 
 
-- Step 2: Exchanging security code for access token
+**Step 2: Exchanging security code for access token**
 
 After retrieving the 5-digit `security_code` sent to the email specified, you exchange it for an OAuth 2 `access_token`:
 
@@ -138,7 +138,7 @@ There are a few important things to know when using the email authentication flo
 
 If you do not exchange your `security_code` for an `access_token` within 15 minutes of generation, you will need to begin the flow again to receive another code.
 
-#### Step 3: Use access token to access resources.
+**Step 3: Use access token to access resources**
 
 See [Making Requests](#making-requests) section.
 
@@ -486,7 +486,7 @@ If the `result_count` parameter matches the `result_limit` parameter (5 in this 
 
 ## Sorting
 
-All endpoints are sorted by the `id` column in ascending order by default. You can override this by including a `_sort` with the column you want to sort by in the request. You can sort on all columns __in the parent object only__. You cannot sort on columns in nested objects, so if a game contains a user you cannot sort on the `username` column, but you can sort by the games `name` since the column resides in the parent object.
+All endpoints are sorted by the `id` column in ascending order by default. You can override this by including a `_sort` with the column you want to sort by in the request. You can sort on all columns __in the parent object only__. You cannot sort on columns in nested objects, so if a game contains a tags object you cannot sort on the `tag name` column, but you can sort by the games `name` since the games `name` resides in the parent object.
 
 __NOTE:__ Some endpoints like [Get All Mods](#get-all-mods) have special sort columns like `popular`, `downloads`, `rating` and `subscribers` which are documented alongside the filters.
 
@@ -504,7 +504,7 @@ Sort by a column, in ascending or descending order.
 
 ## Filtering
 
---parse_sitename has powerful filtering available to assist you when making requests to the API. You can filter on all columns __in the parent object only__. You cannot apply filters to columns in nested objects, so if a game contains a user object you cannot filter by the `username` column, but you can filter by the games `name` since the column resides in the parent object.
+--parse_sitename has powerful filtering available to assist you when making requests to the API. You can filter on all columns __in the parent object only__. You cannot apply filters to columns in nested objects, so if a game contains a tags object you cannot filter by the `tag name` column, but you can filter by the games `name` since the games `name` resides in the parent object.
 
 ### _q (Full text search)
 
