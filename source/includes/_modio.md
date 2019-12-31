@@ -24,13 +24,14 @@ Option | Usage | Suited for | Docs
 ---------- | ---------- | ---------- | ---------
 __API__ | For connecting directly to the --parse_sitename REST API | Web apps that need a JSON REST API, or game developers that like a challenge and want control over their implementation. | You are reading them
 __SDK__ | Drop our [open source C/C++ SDK](--parse_sdkurl) into your game to call --parse_sitename functionality. | Developers that want a SDK that abstracts the uploading, downloading and unzip flows behind easy to use function calls. | [Here](--parse_sdkurl)
-__Tools/Plugins__ | Use tools, plugins and wrappers created by the community to make implementation in various engines easy. | Game developers that want a pre-built modding solution for their engine (Unity, Unreal) of choice. | [Available per tool](--parse_appsurl)
+__Tools/Plugins__ | Use tools, plugins and wrappers created by the community to make implementation in various engines easy. | Game developers that want a pre-built modding solution for their engine (Unity, Unreal, GameMaker, Construct) of choice. | [Available per tool](--parse_appsurl)
 
 Tools, plugins and wrappers made by the --parse_sitename team and our awesome community | - | - | -
 --- | --- | --- | ---
-![Unity Plugin](images/tool-unity.png) | __Unity Plugin__<br />[SDK](https://github.com/modio/UnityPlugin)<br />[Getting Started](https://github.com/modio/UnityPlugin/wiki)<br /> | ![Unreal Plugin](images/tool-unreal.png) | __Unreal Plugin__<br />(in development)<br />[SDK](https://github.com/modio/UE4Plugin)<br />[Getting Started](https://github.com/modio/UE4Plugin/wiki)<br />
+![Unity Plugin](images/tool-unity.png) | __Unity Plugin__<br />[SDK](https://github.com/modio/UnityPlugin)<br />[Getting Started](https://github.com/modio/UnityPlugin/wiki)<br /> | ![Unreal Plugin](images/tool-unreal.png) | __Unreal Plugin__<br />[SDK](https://github.com/modio/UE4Plugin)<br />[Getting Started](https://github.com/modio/UE4Plugin/wiki)<br />[Example](https://github.com/modio/UE4Plugin)<br />
 ![C/C++ SDK](images/tool-ccpp.png) | __C/C++ SDK__<br />[SDK](https://github.com/modio/SDK)<br />[Getting Started](https://github.com/modio/SDK/wiki)<br />[Tutorials](https://github.com/modio/SDK/tree/master/examples/code-samples)<br />  | ![Haxe Wrapper](images/tool-haxe.png) | __Haxe Wrapper__<br />[SDK](https://apps.mod.io/haxe-wrapper)<br />[Getting Started](https://github.com/modio/HaxeWrapper)<br />[Tutorials](https://github.com/Turupawn/modioOpenFLExample#openfl-integration)<br />
-![Rust Wrapper](images/tool-rust.png) | __Rust Wrapper__<br />[SDK](https://crates.io/crates/modio)<br />[Getting Started](https://github.com/nickelc/modio-rs)<br />[Tutorials](https://github.com/nickelc/modio-rs/tree/master/examples)<br /> | ![Python Wrapper](images/tool-python.png) | __Python Wrapper__<br />[SDK](https://github.com/ClementJ18/mod.io)<br />[Getting Started](https://github.com/ClementJ18/mod.io/#example)<br />[Tutorials](https://github.com/ClementJ18/mod.io/tree/master/examples)<br /> | 
+![Rust Wrapper](images/tool-rust.png) | __Rust Wrapper__<br />[SDK](https://crates.io/crates/modio)<br />[Getting Started](https://github.com/nickelc/modio-rs)<br />[Tutorials](https://github.com/nickelc/modio-rs/tree/master/examples)<br /> | ![Python Wrapper](images/tool-python.png) | __Python Wrapper__<br />[SDK](https://github.com/ClementJ18/mod.io)<br />[Getting Started](https://github.com/ClementJ18/mod.io/#example)<br />[Tutorials](https://github.com/ClementJ18/mod.io/tree/master/examples)<br /> |<br />
+![Construct 2](images/construct2.png) | __Construct 2 Plugin__<br />[SDK](https://github.com/modio/C2Plugin)<br />[Getting Started](https://github.com/modio/C2Plugin)<br />
 Want a tool added to the list? [Contact us!](mailto:--parse_email?subject=Publish Tool)
 
 Here is a brief list of the things to know about our API, as explained in more detail in the following sections.
@@ -63,7 +64,7 @@ To access the API authentication is required. All users and games get a private 
 
 ### Email Authentication Flow
 
-To perform writes, you will need to authenticate your users via OAuth 2. To make this frictionless in-game, we use an email verification system, similar to what Slack and others pioneered. It works by users supplying their email, which we send a time-limited 5 digit security code too. They exchange this code in-game, for an [OAuth 2 access token](--parse_siteurl/oauth/widget) you can save to authenticate future requests. The benefit of this approach is it avoids complex website redirects and doesn't require your users to complete a slow registration flow.
+To perform writes, you will need to authenticate your users via OAuth 2. To make this frictionless in-game, we offer an email verification system, similar to what Slack and others pioneered. It works by users supplying their email, which we send a time-limited 5 digit security code too. They exchange this code in-game, for an [OAuth 2 access token](--parse_siteurl/oauth/widget) you can save to authenticate future requests. The benefit of this approach is it avoids complex website redirects and doesn't require your users to complete a slow registration flow.
 
 ![--parse_sitename Email Authentication Flow](--parse_staticurl/v1/images/home/email.png)
 
@@ -85,7 +86,7 @@ curl -X POST --parse_apiurl/oauth/emailrequest \
 }
 ```
 
-- Step 1: Requesting a security code
+**Step 1: Requesting a security code**
 
 Request a `security_code` be sent to the email address of the user you wish to authenticate: 
 
@@ -94,10 +95,10 @@ Request a `security_code` be sent to the email address of the user you wish to a
 
 Parameter |Type | Required | Value
 ---------- | ---------- |---------- | ----------
-`api_key` | string | true | Your API key generated from 'API' tab within your game profile.
-`email` | string | true | A valid and secure email address your user has access to. 
+api_key | string | true | Your API key generated from 'API' tab within your game profile.
+email | string | true | A valid and secure email address your user has access to. 
 
-- Step 2: Exchanging security code for access token
+**Step 2: Exchanging security code for access token**
 
 After retrieving the 5-digit `security_code` sent to the email specified, you exchange it for an OAuth 2 `access_token`:
 
@@ -124,9 +125,9 @@ curl -X POST --parse_apiurl/oauth/emailexchange \
 
 Parameter | Type | Required | Value
 ---------- | ---------- | ---------- | ----------  
-`api_key` | string | true | Your API key generated from 'API' tab within your game profile.
-`security_code` | string | true | Unique 5-digit code sent to the email address supplied in the previous request. 
-`date_expires` | integer || Unix timestamp of date in which the returned token will expire. Value cannot be higher than the default value which is a common year (unix timestamp + 31536000 seconds). Using a token after it's expiry time has elapsed will result in a `401 Unauthorized` response.
+api_key | string | true | Your API key generated from 'API' tab within your game profile.
+security_code | string | true | Unique 5-digit code sent to the email address supplied in the previous request. 
+date_expires | integer || Unix timestamp of date in which the returned token will expire. Value cannot be higher than the default value which is a common year (unix timestamp + 31536000 seconds). Using a token after it's expiry time has elapsed will result in a `401 Unauthorized` response.
 
 There are a few important things to know when using the email authentication flow:
  
@@ -137,7 +138,7 @@ There are a few important things to know when using the email authentication flo
 
 If you do not exchange your `security_code` for an `access_token` within 15 minutes of generation, you will need to begin the flow again to receive another code.
 
-#### Step 3: Use access token to access resources.
+**Step 3: Use access token to access resources**
 
 See [Making Requests](#making-requests) section.
 
@@ -485,7 +486,7 @@ If the `result_count` parameter matches the `result_limit` parameter (5 in this 
 
 ## Sorting
 
-All endpoints are sorted by the `id` column in ascending order by default. You can override this by including a `_sort` with the column you want to sort by in the request. You can sort on all columns __in the parent object only__. You cannot sort on columns in nested objects, so if a game contains a user you cannot sort on the `username` column, but you can sort by the games `name` since the column resides in the parent object.
+All endpoints are sorted by the `id` column in ascending order by default. You can override this by including a `_sort` with the column you want to sort by in the request. You can sort on all columns __in the parent object only__. You cannot sort on columns in nested objects, so if a game contains a tags object you cannot sort on the `tag name` column, but you can sort by the games `name` since the games `name` resides in the parent object.
 
 __NOTE:__ Some endpoints like [Get All Mods](#get-all-mods) have special sort columns like `popular`, `downloads`, `rating` and `subscribers` which are documented alongside the filters.
 
@@ -503,7 +504,7 @@ Sort by a column, in ascending or descending order.
 
 ## Filtering
 
---parse_sitename has powerful filtering available to assist you when making requests to the API. You can filter on all columns __in the parent object only__. You cannot apply filters to columns in nested objects, so if a game contains a user object you cannot filter by the `username` column, but you can filter by the games `name` since the column resides in the parent object.
+--parse_sitename has powerful filtering available to assist you when making requests to the API. You can filter on all columns __in the parent object only__. You cannot apply filters to columns in nested objects, so if a game contains a tags object you cannot filter by the `tag name` column, but you can filter by the games `name` since the games `name` resides in the parent object.
 
 ### _q (Full text search)
 
