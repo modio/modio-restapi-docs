@@ -25,6 +25,7 @@ GEM
     fast_blank (1.0.0)
     fastimage (2.1.5)
     ffi (1.10.0)
+    ffi (1.10.0-x64-mingw32)
     ffi (1.10.0-x86-mingw32)
     haml (5.0.4)
       temple (>= 0.8.0)
@@ -84,6 +85,8 @@ GEM
     minitest (5.11.3)
     nokogiri (1.10.4)
       mini_portile2 (~> 2.4.0)
+    nokogiri (1.10.4-x64-mingw32)
+      mini_portile2 (~> 2.4.0)
     nokogiri (1.10.4-x86-mingw32)
       mini_portile2 (~> 2.4.0)
     padrino-helpers (0.13.3.4)
@@ -116,6 +119,7 @@ GEM
 
 PLATFORMS
   ruby
+  x64-mingw32
   x86-mingw32
 
 DEPENDENCIES
@@ -123,7 +127,7 @@ DEPENDENCIES
   middleman-autoprefixer (~> 2.7.0)
   middleman-sprockets (~> 4.1.0)
   middleman-syntax (~> 3.0.0)
-  nokogiri (~> 1.10.4)
+  nokogiri (>= 1.10.4)
   redcarpet (~> 3.4.0)
   rouge (~> 2.0.5)
 
@@ -131,4 +135,4 @@ RUBY VERSION
    ruby 2.3.3p222
 
 BUNDLED WITH
-   1.16.2
+   1.17.2
