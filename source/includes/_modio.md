@@ -678,7 +678,7 @@ Example response (assuming a validation error occurred)
 }
 ```
 
-The --parse_sitename API provides localization for a collection of languages. To specify responses from the API to be in a particular language, simply provide the `Accept-Language` header with an [ISO 639 compliant](https://www.iso.org/iso-639-language-codes.html) language code. If a valid language code is not provided and the user is authenticated, the language they have selected in [their profile](#user-object) will be used. All other requests will default to English (US). The list of supported codes includes:
+The --parse_sitename API provides localization for a collection of languages. To specify responses from the API to be in a particular language, simply provide the `Accept-Language` header with an [ISO 639 compliant](https://www.iso.org/iso-639-language-codes.html) language code. If a valid language code is not provided and the user is authenticated, the language they have selected in their profile will be used. All other requests will default to English (US). The list of supported codes includes:
 
 Language Code | Language
 ---------- | ----------  

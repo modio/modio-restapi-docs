@@ -31,7 +31,7 @@ __Current version:__ <select id="version_dropdown" onChange="changeVersion"><opt
 
 ## How It Works
 
-Compatible with all builds of your game, mod.io operates silently in the background (without requiring your users to install another client), to give you complete control over your modding ecosystem.
+Compatible with all builds of your game on all platforms and stores, mod.io is a clientless and standalone solution which gives you complete control over your modding ecosystem.
 
 ![mod.io Overview](https://static.mod.io/v1/images/home/sdk.png).
 
@@ -43,13 +43,14 @@ Option | Usage | Suited for | Docs
 ---------- | ---------- | ---------- | ---------
 __API__ | For connecting directly to the mod.io REST API | Web apps that need a JSON REST API, or game developers that like a challenge and want control over their implementation. | You are reading them
 __SDK__ | Drop our [open source C/C++ SDK](https://sdk.mod.io) into your game to call mod.io functionality. | Developers that want a SDK that abstracts the uploading, downloading and unzip flows behind easy to use function calls. | [Here](https://sdk.mod.io)
-__Tools/Plugins__ | Use tools, plugins and wrappers created by the community to make implementation in various engines easy. | Game developers that want a pre-built modding solution for their engine (Unity, Unreal) of choice. | [Available per tool](https://sdk.mod.io)
+__Tools/Plugins__ | Use tools, plugins and wrappers created by the community to make implementation in various engines easy. | Game developers that want a pre-built modding solution for their engine (Unity, Unreal, GameMaker, Construct) of choice. | [Available per tool](https://sdk.mod.io)
 
 Tools, plugins and wrappers made by the mod.io team and our awesome community | - | - | -
 --- | --- | --- | ---
-![Unity Plugin](images/tool-unity.png) | __Unity Plugin__<br />[SDK](https://github.com/modio/UnityPlugin)<br />[Getting Started](https://github.com/modio/UnityPlugin/wiki)<br /> | ![Unreal Plugin](images/tool-unreal.png) | __Unreal Plugin__<br />(in development)<br />[SDK](https://github.com/modio/UE4Plugin)<br />[Getting Started](https://github.com/modio/UE4Plugin/wiki)<br />
+![Unity Plugin](images/tool-unity.png) | __Unity Plugin__<br />[SDK](https://github.com/modio/UnityPlugin)<br />[Getting Started](https://github.com/modio/UnityPlugin/wiki)<br /> | ![Unreal Plugin](images/tool-unreal.png) | __Unreal Plugin__<br />[SDK](https://github.com/modio/UE4Plugin)<br />[Getting Started](https://github.com/modio/UE4Plugin/wiki)<br />[Example](https://github.com/modio/UE4Plugin)<br />
 ![C/C++ SDK](images/tool-ccpp.png) | __C/C++ SDK__<br />[SDK](https://github.com/modio/SDK)<br />[Getting Started](https://github.com/modio/SDK/wiki)<br />[Tutorials](https://github.com/modio/SDK/tree/master/examples/code-samples)<br />  | ![Haxe Wrapper](images/tool-haxe.png) | __Haxe Wrapper__<br />[SDK](https://apps.mod.io/haxe-wrapper)<br />[Getting Started](https://github.com/modio/HaxeWrapper)<br />[Tutorials](https://github.com/Turupawn/modioOpenFLExample#openfl-integration)<br />
-![Rust Wrapper](images/tool-rust.png) | __Rust Wrapper__<br />[SDK](https://crates.io/crates/modio)<br />[Getting Started](https://github.com/nickelc/modio-rs)<br />[Tutorials](https://github.com/nickelc/modio-rs/tree/master/examples)<br /> | ![Python Wrapper](images/tool-python.png) | __Python Wrapper__<br />[SDK](https://github.com/ClementJ18/mod.io)<br />[Getting Started](https://github.com/ClementJ18/mod.io/#example)<br />[Tutorials](https://github.com/ClementJ18/mod.io/tree/master/examples)<br /> | 
+![Rust Wrapper](images/tool-rust.png) | __Rust Wrapper__<br />[SDK](https://crates.io/crates/modio)<br />[Getting Started](https://github.com/nickelc/modio-rs)<br />[Tutorials](https://github.com/nickelc/modio-rs/tree/master/examples)<br /> | ![Python Wrapper](images/tool-python.png) | __Python Wrapper__<br />[SDK](https://github.com/ClementJ18/mod.io)<br />[Getting Started](https://github.com/ClementJ18/mod.io/#example)<br />[Tutorials](https://github.com/ClementJ18/mod.io/tree/master/examples)<br /> |<br />
+![Construct 2](images/tool-c2.png) | __Construct 2 Plugin__<br />[SDK](https://github.com/modio/C2Plugin)<br />[Getting Started](https://github.com/modio/C2Plugin)<br /> | ![Command Line Tool](images/tool-cmd.png) | __Command Line Tool__<br />[CMD](https://github.com/nickelc/modiom)<br />[Getting Started](https://github.com/nickelc/modiom)<br />
 Want a tool added to the list? [Contact us!](mailto:developers@mod.io?subject=Publish Tool)
 
 Here is a brief list of the things to know about our API, as explained in more detail in the following sections.
@@ -82,7 +83,7 @@ To access the API authentication is required. All users and games get a private 
 
 ### Web Overlay Authentication
 
-At the moment it is not possible to open the mod.io website in-game with the user pre-authenticated, however you can provide a hint by appending `?ref=SERVICE` to the end of the URL. What this tells mod.io, is that when the user attempts to perform an action that requires authentication, they will be prompted to login with their `SERVICE` account. For example if you want to take a mod creator to their mod edit page in-game on Steam, the URL would look something like: `https://gamename.mod.io/modname/edit?ref=steam`. Services supported are **steam**, **facebook** and **google**. 
+At the moment it is not possible to open the mod.io website in-game with the user pre-authenticated, however you can provide a hint by appending `?ref=SERVICE` to the end of the URL. What this tells mod.io, is that when the user attempts to perform an action that requires authentication, they will be prompted to login with their `SERVICE` account. For example if you want to take a mod creator to their mod edit page in-game on Steam, the URL would look something like: `https://gamename.mod.io/modname/edit?ref=steam`. You can optionally add `&login=auto` as well to automatically start the login process. Services supported are **steam**, **facebook** and **google**. 
 
 ### Scopes (OAuth 2)
 
@@ -411,7 +412,7 @@ If the `result_count` parameter matches the `result_limit` parameter (5 in this 
 
 ## Sorting
 
-All endpoints are sorted by the `id` column in ascending order by default. You can override this by including a `_sort` with the column you want to sort by in the request. You can sort on all columns __in the parent object only__. You cannot sort on columns in nested objects, so if a game contains a user you cannot sort on the `username` column, but you can sort by the games `name` since the column resides in the parent object.
+All endpoints are sorted by the `id` column in ascending order by default. You can override this by including a `_sort` with the column you want to sort by in the request. You can sort on all columns __in the parent object only__. You cannot sort on columns in nested objects, so if a game contains a tags object you cannot sort on the `tag name` column, but you can sort by the games `name` since the games `name` resides in the parent object.
 
 __NOTE:__ Some endpoints like [Get All Mods](#get-all-mods) have special sort columns like `popular`, `downloads`, `rating` and `subscribers` which are documented alongside the filters.
 
@@ -429,7 +430,7 @@ Sort by a column, in ascending or descending order.
 
 ## Filtering
 
-mod.io has powerful filtering available to assist you when making requests to the API. You can filter on all columns __in the parent object only__. You cannot apply filters to columns in nested objects, so if a game contains a user object you cannot filter by the `username` column, but you can filter by the games `name` since the column resides in the parent object.
+mod.io has powerful filtering available to assist you when making requests to the API. You can filter on all columns __in the parent object only__. You cannot apply filters to columns in nested objects, so if a game contains a tags object you cannot filter by the `tag name` column, but you can filter by the games `name` since the games `name` resides in the parent object.
 
 ### _q (Full text search)
 
@@ -603,7 +604,7 @@ Example response (assuming a validation error occurred)
 }
 ```
 
-The mod.io API provides localization for a collection of languages. To specify responses from the API to be in a particular language, simply provide the `Accept-Language` header with an [ISO 639 compliant](https://www.iso.org/iso-639-language-codes.html) language code. If a valid language code is not provided and the user is authenticated, the language they have selected in [their profile](#user-object) will be used. All other requests will default to English (US). The list of supported codes includes:
+The mod.io API provides localization for a collection of languages. To specify responses from the API to be in a particular language, simply provide the `Accept-Language` header with an [ISO 639 compliant](https://www.iso.org/iso-639-language-codes.html) language code. If a valid language code is not provided and the user is authenticated, the language they have selected in their profile will be used. All other requests will default to English (US). The list of supported codes includes:
 
 Language Code | Language
 ---------- | ----------  
@@ -685,7 +686,7 @@ X-RateLimit-Limit: 120
 X-RateLimit-Remaining: 87
 ```
 
-- API keys linked to a user have __unlimited requests__.
+- API keys linked to a user have __60 requests per minute__.
 - API keys linked to a game have __unlimited requests__.
 
 ### OAuth2 Rate Limiting
@@ -728,7 +729,7 @@ If you spot any errors within the mod.io documentation, have feedback on how we 
 # Authentication
 ## Authenticate via Email
 
-To perform writes, you will need to authenticate your users via OAuth 2. To make this frictionless in-game, we use an email verification system, similar to what Slack and others pioneered. It works by users supplying their email, which we send a time-limited 5 digit security code too. They exchange this code in-game, for an [OAuth 2 access token](https://mod.io/oauth/widget) you can save to authenticate future requests. The benefit of this approach is it avoids complex website redirects and doesn't require your users to complete a slow registration flow.
+To perform writes, you will need to authenticate your users via OAuth 2. To make this frictionless in-game, we offer an email verification system, similar to what Slack and others pioneered. It works by users supplying their email, which we send a time-limited 5 digit security code too. They exchange this code in-game, for an [OAuth 2 access token](https://mod.io/oauth/widget) you can save to authenticate future requests. The benefit of this approach is it avoids complex website redirects and doesn't require your users to complete a slow registration flow.
 
 ![mod.io Email Authentication Flow](https://static.mod.io/v1/images/home/email.png)
 
@@ -750,7 +751,7 @@ curl -X POST https://api.mod.io/v1/oauth/emailrequest \
 }
 ```
 
-- Step 1: Requesting a security code
+**Step 1: Requesting a security code**
 
 Request a `security_code` be sent to the email address of the user you wish to authenticate: 
 
@@ -759,10 +760,10 @@ Request a `security_code` be sent to the email address of the user you wish to a
 
 Parameter |Type | Required | Value
 ---------- | ---------- |---------- | ----------
-`api_key` | string | true | Your API key generated from 'API' tab within your game profile.
-`email` | string | true | A valid and secure email address your user has access to. 
+api_key | string | true | Your API key generated from 'API' tab within your game profile.
+email | string | true | A valid and secure email address your user has access to. 
 
-- Step 2: Exchanging security code for access token
+**Step 2: Exchanging security code for access token**
 
 After retrieving the 5-digit `security_code` sent to the email specified, you exchange it for an OAuth 2 `access_token`:
 
@@ -789,9 +790,9 @@ curl -X POST https://api.mod.io/v1/oauth/emailexchange \
 
 Parameter | Type | Required | Value
 ---------- | ---------- | ---------- | ----------  
-`api_key` | string | true | Your API key generated from 'API' tab within your game profile.
-`security_code` | string | true | Unique 5-digit code sent to the email address supplied in the previous request. 
-`date_expires` | integer || Unix timestamp of date in which the returned token will expire. Value cannot be higher than the default value which is a common year (unix timestamp + 31536000 seconds). Using a token after it's expiry time has elapsed will result in a `401 Unauthorized` response.
+api_key | string | true | Your API key generated from 'API' tab within your game profile.
+security_code | string | true | Unique 5-digit code sent to the email address supplied in the previous request. 
+date_expires | integer || Unix timestamp of date in which the returned token will expire. Value cannot be higher than the default value which is a common year (unix timestamp + 31536000 seconds). Using a token after it's expiry time has elapsed will result in a `401 Unauthorized` response.
 
 There are a few important things to know when using the email authentication flow:
  
@@ -802,7 +803,7 @@ There are a few important things to know when using the email authentication flo
 
 If you do not exchange your `security_code` for an `access_token` within 15 minutes of generation, you will need to begin the flow again to receive another code.
 
-#### Step 3: Use access token to access resources.
+**Step 3: Use access token to access resources**
 
 See [Making Requests](#making-requests) section.
 
@@ -902,7 +903,7 @@ System.out.println(response.toString());
 ```
 `POST /external/steamauth`
 
-Request an access token on behalf of a Steam user. To use this functionality you *must* supply your games [encrypted app ticket key](https://partner.steamgames.com/apps/sdkauth) supplied by Steamworks, in the *Edit > Options* page of your games profile on mod.io. A Successful request will return an [Access Token Object](#access-token-object).
+Request an access token on behalf of a Steam user. To use this functionality you *must* supply your games [encrypted app ticket key](https://partner.steamgames.com/apps/sdkauth) supplied by Steamworks, in the *Edit > Options* page of your games profile on mod.io. A Successful request will return an [Access Token Object](#access-token-object).<br/><br/>__HINT:__ If you want to overlay the mod.io site in-game, we recommend you add `?ref=steam` to the end of the URL you open which will prompt the user to login with Steam. See [Web Overlay Authentication](#web-overlay-authentication) for details.
 
      Parameter|Type|Required|Description
      ---|---|---|---|
@@ -1146,11 +1147,11 @@ System.out.println(response.toString());
 ```
 `POST /external/itchioauth`
 
-Request an access token on behalf of an itch.io user via the itch desktop app. Due to the desktop application allowing multiple users to be logged in at once, if more than one user is logged in then the user at the top of that list on the itch.io login dialog will be the authenticating user. A Successful request will return an [Access Token Object](#access-token-object).
+Request an access token on behalf of an itch.io user via the itch.io desktop app. Due to the desktop application allowing multiple users to be logged in at once, if more than one user is logged in then the user at the top of that list on the itch.io login dialog will be the authenticating user. A Successful request will return an [Access Token Object](#access-token-object).
 
      Parameter|Type|Required|Description
      ---|---|---|---|
-     itchio_token|string|true|The [JWT Token](https://itch.io/docs/itch/integrating/manifest-actions.html) provided by the itch.io desktop application to your game as the environment variable `ITCHIO_API_KEY`. You must setup your itch.io app manifest to include the [API scope](https://itch.io/docs/itch/integrating/manifest-actions.html) to force itch to set this variable.
+     itchio_token|string|true|The [JWT Token](https://itch.io/docs/itch/integrating/manifest-actions.html) provided by the itch.io desktop application to your game as the environment variable `ITCHIO_API_KEY`. You must setup your itch.io app manifest to include the [API scope](https://itch.io/docs/itch/integrating/manifest-actions.html) to force itch.io to set this variable.
      email|string||The users email address. If supplied, and the respective user does not have an email registered for their account we will send a confirmation email to confirm they have ownership of the specified email. This functionality is also available at a later time via the [Link an Email](#link-an-email) endpoint.<br><br>__NOTE__: If the user already has an e-mail on record with us, this parameter will be ignored. This parameter should also be urlencoded before the request is sent.
      date_expires|integer||Unix timestamp of date in which the returned token will expire. Value cannot be higher than the default value which is a week (unix timestamp + 604800 seconds). Using a token after it's expiry time has elapsed will result in a `401 Unauthorized` response.
 
@@ -1168,7 +1169,7 @@ Request an access token on behalf of an itch.io user via the itch desktop app. D
 
 Status|Meaning|Description|Response Schema
 ---|---|---|---|
-200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)|Successful Request|[Access Token Object  ](#schemaaccess_token_object)
+200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)|Successful Request|[Access Token Object](#schemaaccess_token_object)
 
 <aside class="auth-notice">
 To perform this request, you must be authenticated via one of the following methods:
@@ -1278,7 +1279,7 @@ Request an access token on behalf of an Oculus user. To use this functionality y
      ---|---|---|---|
      nonce|string|true|The nonce provided by calling [ovr_User_GetUserProof()](https://developer.oculus.com/documentation/platform/latest/concepts/dg-ownership/) from the Oculus SDK. <br><br>__NOTE:__ Due to the `nonce` potentially containing special characters, you must URL encode the string before sending the request to ensure it is successfully sent to our servers otherwise you may encounter an `422 Unprocessable Entity` response. For example, [cURL](https://ec.haxx.se/http-post.html) will do this for you by using the `--data-urlencode` option.
      user_id|integer|true|The user's Oculus id providing by calling [ovr_GetLoggedInUserID()](https://developer.oculus.com/documentation/platform/latest/concepts/dg-ownership/) from the Oculus SDK.
-     access_token|string|true|The user's access token, providing by calling [ovr_User_GetAccessToken()](https://developer.oculus.com/documentation/platform/latest/concepts/dg-ownership/) from the Oculus SDK. mod.io uses this access token on the first login only to obtain the user's username and is not saved on our servers.
+     access_token|string|true|The user's access token, providing by calling [ovr_User_GetAccessToken()](https://developer.oculus.com/documentation/platform/latest/concepts/dg-ownership/) from the Oculus SDK. mod.io uses this access token on the first login only to obtain the user's alias and is not saved on our servers.
      email|string||The users email address. If supplied, and the respective user does not have an email registered for their account we will send a confirmation email to confirm they have ownership of the specified email.<br><br>__WARNING__: We __strongly recommend__ that you prompt your users in a friendly manner at least once to provide their e-mail address to link to their account. Due to how Oculus handles user id's - if we are not supplied with an e-mail for a user at least once we will __never__ be able to link that user with their existing account at a later date as Oculus id's operate at the game-scope, not globally. Failing to provide an e-mail will in-effect generate an orphan account that will only ever be able to be accessed from your title.
      date_expires|integer||Unix timestamp of date in which the returned token will expire. Value cannot be higher than the default value which is a common year (unix timestamp + 31536000 seconds). Using a token after it's expiry time has elapsed will result in a `401 Unauthorized` response.
 
@@ -1410,8 +1411,8 @@ Connect an external account (i.e. Steam and GOG documented above) with the authe
 
      Parameter|Type|Required|Description
      ---|---|---|---|
-     service|string|true|The external service where the user's account originates.<br><br>Possible Options:<br>- _steam_<br>- _gog_
-     service_id|string|true|The external service id which is associated with the provided access token. For example, if you requested an access token via the [Steam Authentication](#authenticate-via-steam) endpoint, the service_id would be the user's Steam ID. For security reasons, this ID must match with the service parameter provided, and also be associated with the access token used in the request. <br><br>Service ID formats:<br>- _steam_ (Integer, 17 characters, Community ID format)<br>- _gog_ (Integer, 12 characters)<br>- _itchio_ (Integer, 5 characters)
+     service|string|true|The external service where the user's account originates.<br><br>Possible Options:<br>- _steam_<br>- _gog_<br>- _itch_
+     service_id|string|true|The external service id which is associated with the provided access token. For example, if you requested an access token via the [Steam Authentication](#authenticate-via-steam) endpoint, the service_id would be the user's Steam ID. For security reasons, this ID must match with the service parameter provided, and also be associated with the access token used in the request. <br><br>Service ID formats:<br>- _steam_ (Integer, 17 characters, Community ID format)<br>- _gog_ (Integer, 12 characters)<br>- _itchio_ (Integer, 6 characters)
      email|string|true|The e-mail address to link to the authenticated user's account.
 
 
@@ -1533,14 +1534,14 @@ Get all games. Successful request will return an array of [Game Objects](#get-al
     date_updated|integer|Unix timestamp of date game was updated.
     date_live|integer|Unix timestamp of date game was set live.
     name|string|Name of the game.
-    name_id|string|Subdomain for the game on mod.io.
+    name_id|string|Subdomain for the game on mod.io. For example: https://gamename.mod.io
     summary|string|Summary of the game.
     instructions_url|string|Link to a mod.io guide, modding wiki or a page where modders can learn how to make and submit mods.
     ugc_name|string|Word used to describe user-generated content (mods, items, addons etc).
     presentation_option|integer|Presentation style used on the mod.io website:<br><br>__0__ =  Grid View: Displays mods in a grid<br>__1__ = Table View: Displays mods in a table
     submission_option|integer|Submission process modders must follow:<br><br>__0__ = Mod uploads must occur via the API using a tool created by the game developers<br>__1__ = Mod uploads can occur from anywhere, including the website and API
     curation_option|integer|Curation process used to approve mods:<br><br>__0__ = No curation: Mods are immediately available to play<br>__1__ = Paid curation: Mods are immediately available to play unless they choose to receive donations. These mods must be accepted to be listed<br>__2__ = Full curation: All mods must be accepted by someone to be listed
-    community_options|integer|Community features enabled on the mod.io website:<br><br>__0__ = All of the options below are disabled<br>__1__ = Discussion board enabled<br>__2__ = Guides and news enabled<br>__?__ = Combine to find games with multiple options enabled (see [BITWISE fields](#bitwise-and-bitwise-and))
+    community_options|integer|Community features enabled on the mod.io website:<br><br>__0__ = All of the options below are disabled<br>__1__ = Comments enabled<br>__2__ = Guides enabled<br>__?__ = Combine to find games with multiple options enabled (see [BITWISE fields](#bitwise-and-bitwise-and))
     revenue_options|integer|Revenue capabilities mods can enable:<br><br>__0__ = All of the options below are disabled<br>__1__ = Allow mods to be sold<br>__2__ = Allow mods to receive donations<br>__4__ = Allow mods to be traded<br>__8__ = Allow mods to control supply and scarcity<br>__?__ = Combine to find games with multiple options enabled (see [BITWISE fields](#bitwise-and-bitwise-and))
     api_access_options|integer|Level of API access allowed by this game:<br><br>__0__ = All of the options below are disabled<br>__1__ = Allow 3rd parties to access this games API endpoints<br>__2__ = Allow mods to be downloaded directly (if disabled all download URLs will contain a frequently changing verification hash to stop unauthorized use)<br>__?__ = Combine to find games with multiple options enabled (see [BITWISE fields](#bitwise-and-bitwise-and))
     maturity_options|integer|If the game allows developers to flag mods as containing mature content:<br><br>__0__ = Don't allow _(default)_<br>__1__ = Allow
@@ -1565,8 +1566,8 @@ Get all games. Successful request will return an array of [Game Objects](#get-al
           "thumb_50x50": "https://static.mod.io/v1/images/branding/modio-color-dark.png",
           "thumb_100x100": "https://static.mod.io/v1/images/branding/modio-color-dark.png"
         },
-        "timezone": "America/Los_Angeles",
-        "language": "en",
+        "timezone": "",
+        "language": "",
         "profile_url": "https://mod.io/members/xant"
       },
       "date_added": 1493702614,
@@ -1742,8 +1743,8 @@ Get a game. Successful request will return a single [Game Object](#game-object).
       "thumb_50x50": "https://static.mod.io/v1/images/branding/modio-color-dark.png",
       "thumb_100x100": "https://static.mod.io/v1/images/branding/modio-color-dark.png"
     },
-    "timezone": "America/Los_Angeles",
-    "language": "en",
+    "timezone": "",
+    "language": "",
     "profile_url": "https://mod.io/members/xant"
   },
   "date_added": 1493702614,
@@ -1909,7 +1910,7 @@ Update details for a game. If you want to update the `icon`, `logo` or `header` 
     ---|---|---|---|
     status|integer||Status of a game. We recommend you never change this once you have accepted your game to be available via the API (see [status and visibility](#status-amp-visibility) for details):<br><br>__0__ = Not accepted<br>__1__ = Accepted
     name|string||Name of your game. Cannot exceed 80 characters.
-    name_id|string||Subdomain for the game on mod.io. Highly recommended to not change this unless absolutely required. Cannot exceed 20 characters.
+    name_id|string||Subdomain for the game on mod.io. For example: https://gamename.mod.io. Highly recommended to not change this unless absolutely required. Cannot exceed 20 characters.
     summary|string||Explain your games mod support in 1 paragraph. Cannot exceed 250 characters.
     instructions|string||Instructions and links creators should follow to upload mods. Keep it short and explain details like are mods submitted in-game or via tools you have created.
     instructions_url|string||Link to a mod.io guide, your modding wiki or a page where modders can learn how to make and submit mods to your games profile.
@@ -1917,8 +1918,8 @@ Update details for a game. If you want to update the `icon`, `logo` or `header` 
     presentation_option|integer||Choose the presentation style you want on the mod.io website:<br><br>__0__ =  Grid View: Displays mods in a grid (visual but less informative, default setting) <br>__1__ = Table View: Displays mods in a table (easier to browse)
     submission_option|integer||Choose the submission process you want modders to follow:<br><br>__0__ = Mods must be uploaded using your tools (recommended): You will have to build an upload system either in-game or via a standalone tool, which enables creators to submit mods to the tags you have configured. Because you control the flow you can prevalidate and compile mods, to ensure they will work in your game and attach metadata about what settings the mod can change. In the long run this option will save you time as you can accept more submissions, but it requires more setup to get running and isn't as open as the above option. __NOTE:__ mod profiles can still be [created online](https://mod.io/mods/add), but uploads will have to occur via the API using tools you create.<br><br>__1__ = Mods can be uploaded using the website: Allow developers to upload mods via the website and API, and pick the tags their mod is built for. No validation will be done on the files submitted, it will be the responsibility of your game and apps to process the mods installation based on the tags selected and determine if the mod is valid and works. For example a mod might be uploaded with the 'map' tag. When a user subscribes to this mod, your game will need to verify it contains a map file and install it where maps are located. If this fails, your game or the community will have to flag the mod as 'incompatible' to remove it from the listing.
     curation_option|integer||Choose the curation process your team follows to approve mods:<br><br>__0__ = No curation (recommended): Mods are immediately available to play, without any intervention or work from your team.<br><br>__1__ = Paid curation: Screen only mods the creator wants to sell, before they are available to receive donations or be purchased via the API.<br><br>__2__ = Full curation: All mods must be accepted by someone on your team. This option is useful for games that have a small number of mods and want to control the experience, or you need to set the parameters attached to a mod (i.e. a weapon may require the rate of fire, power level, clip size etc). It can also be used for complex mods, which you may need to build into your game or distribute as DLC.
-    community_options|integer||Choose the community features enabled on the mod.io website:<br><br>__0__ = All of the options below are disabled<br>__1__ = Discussion board enabled<br>__2__ = Guides and news enabled<br>__?__ = Add the options you want together, to enable multiple features (see [BITWISE fields](#bitwise-and-bitwise-and))
-    revenue_options|integer||Choose the revenue capabilities mods can enable:<br><br>__0__ = All of the options below are disabled<br>__1__ = Allow mods to be sold<br>__2__ = Allow mods to receive donations<br>__4__ = Allow mods to be traded (not subject to revenue share)<br>__8__ = Allow mods to control supply and scarcity<br>__?__ = Add the options you want together, to enable multiple features (see [BITWISE fields](#bitwise-and-bitwise-and))
+    community_options|integer||Choose the community features enabled on the mod.io website:<br><br>__0__ = All of the options below are disabled<br>__1__ = Comments enabled<br>__2__ = Guides enabled<br>__?__ = Add the options you want together, to enable multiple features (see [BITWISE fields](#bitwise-and-bitwise-and))
+    revenue_options|integer||Choose the revenue capabilities mods can enable:<br><br>__0__ = All of the options below are disabled<br>__1__ = Allow mods to be sold<br>__2__ = Allow mods to receive donations<br>__4__ = Allow mods to be traded<br>__8__ = Allow mods to control supply and scarcity<br>__?__ = Add the options you want together, to enable multiple features (see [BITWISE fields](#bitwise-and-bitwise-and))
     api_access_options|integer||Choose the level of API access your game allows:<br><br>__0__ = All of the options below are disabled<br><br>__1__ = Allow 3rd parties to access this games API endpoints. We recommend you enable this feature, an open API will encourage a healthy ecosystem of tools and apps. If you do not enable this feature, your `/games/{games-id}` endpoints will return `403 Forbidden` unless you are a member of the games team or using the games `api_key`<br><br>__2__ = Allow mods to be downloaded directly (makes implementation easier for you, game servers and services because you can save, share and reuse download URLs). If disabled all download URLs will contain a frequently changing verification hash to stop unauthorized use<br><br>__?__ = Add the options you want together, to enable multiple features (see [BITWISE fields](#bitwise-and-bitwise-and))
     maturity_options|integer||Choose if you want to allow developers to select if they can flag their mods as containing mature content:<br><br>__0__ = Don't allow _(default)_<br>__1__ = Allow
 
@@ -1940,8 +1941,8 @@ Update details for a game. If you want to update the `icon`, `logo` or `header` 
       "thumb_50x50": "https://static.mod.io/v1/images/branding/modio-color-dark.png",
       "thumb_100x100": "https://static.mod.io/v1/images/branding/modio-color-dark.png"
     },
-    "timezone": "America/Los_Angeles",
-    "language": "en",
+    "timezone": "",
+    "language": "",
     "profile_url": "https://mod.io/members/xant"
   },
   "date_added": 1493702614,
@@ -2139,8 +2140,8 @@ Get all mods for the corresponding game. Successful request will return an array
           "thumb_50x50": "https://static.mod.io/v1/images/branding/modio-color-dark.png",
           "thumb_100x100": "https://static.mod.io/v1/images/branding/modio-color-dark.png"
         },
-        "timezone": "America/Los_Angeles",
-        "language": "en",
+        "timezone": "",
+        "language": "",
         "profile_url": "https://mod.io/members/xant"
       },
       "date_added": 1492564103,
@@ -2354,8 +2355,8 @@ Get a mod. Successful request will return a single [Mod Object](#mod-object).
       "thumb_50x50": "https://static.mod.io/v1/images/branding/modio-color-dark.png",
       "thumb_100x100": "https://static.mod.io/v1/images/branding/modio-color-dark.png"
     },
-    "timezone": "America/Los_Angeles",
-    "language": "en",
+    "timezone": "",
+    "language": "",
     "profile_url": "https://mod.io/members/xant"
   },
   "date_added": 1492564103,
@@ -2555,7 +2556,7 @@ System.out.println(response.toString());
 ```
 `POST /games/{game-id}/mods`
 
-Add a mod. Successful request will return the newly created [Mod Object](#mod-object). By publishing your mod on [mod.io](https://mod.io), you are agreeing to the [mod.io distribution agreement](https://mod.io/distribution/widget).<br><br>__NOTE:__ By default new mods are 'not accepted' and 'public'. They can only be 'accepted' and made available via the API once a [Mod File](#add-modfile) has been uploaded. [Media](#add-mod-media), [Metadata Key Value Pairs](#add-mod-kvp-metadata) and [Dependencies](#add-mod-dependencies) can also be added after a mod profile is created.
+Add a mod. Successful request will return the newly created [Mod Object](#mod-object). All content published by users on [mod.io](https://mod.io) is subject to the [mod.io Terms of Use](https://mod.io/terms/widget). It is a requirement that you provide a link to https://mod.io/terms in any place where users are submitting content to mod.io.<br><br>__NOTE:__ By default new mods are 'not accepted' and 'public'. They can only be 'accepted' and made available via the API once a [Mod File](#add-modfile) has been uploaded. [Media](#add-mod-media), [Metadata Key Value Pairs](#add-mod-kvp-metadata) and [Dependencies](#add-mod-dependencies) can also be added after a mod profile is created.
 
     Parameter|Type|Required|Description
     ---|---|---|---|
@@ -2591,8 +2592,8 @@ Add a mod. Successful request will return the newly created [Mod Object](#mod-ob
       "thumb_50x50": "https://static.mod.io/v1/images/branding/modio-color-dark.png",
       "thumb_100x100": "https://static.mod.io/v1/images/branding/modio-color-dark.png"
     },
-    "timezone": "America/Los_Angeles",
-    "language": "en",
+    "timezone": "",
+    "language": "",
     "profile_url": "https://mod.io/members/xant"
   },
   "date_added": 1492564103,
@@ -2827,8 +2828,8 @@ Edit details for a mod. If you want to update the `logo` or media associated wit
       "thumb_50x50": "https://static.mod.io/v1/images/branding/modio-color-dark.png",
       "thumb_100x100": "https://static.mod.io/v1/images/branding/modio-color-dark.png"
     },
-    "timezone": "America/Los_Angeles",
-    "language": "en",
+    "timezone": "",
+    "language": "",
     "profile_url": "https://mod.io/members/xant"
   },
   "date_added": 1492564103,
@@ -4269,8 +4270,8 @@ Subscribe the _authenticated user_ to a corresponding mod. No body parameters ar
       "thumb_50x50": "https://static.mod.io/v1/images/branding/modio-color-dark.png",
       "thumb_100x100": "https://static.mod.io/v1/images/branding/modio-color-dark.png"
     },
-    "timezone": "America/Los_Angeles",
-    "language": "en",
+    "timezone": "",
+    "language": "",
     "profile_url": "https://mod.io/members/xant"
   },
   "date_added": 1492564103,
@@ -6778,8 +6779,8 @@ Get all users that are part of a mod team. Successful request will return an arr
           "thumb_50x50": "https://static.mod.io/v1/images/branding/modio-color-dark.png",
           "thumb_100x100": "https://static.mod.io/v1/images/branding/modio-color-dark.png"
         },
-        "timezone": "America/Los_Angeles",
-        "language": "en",
+        "timezone": "",
+        "language": "",
         "profile_url": "https://mod.io/members/xant"
       },
       "level": 8,
@@ -7309,8 +7310,8 @@ Get all comments posted in the mods profile. Successful request will return an a
           "thumb_50x50": "https://static.mod.io/v1/images/branding/modio-color-dark.png",
           "thumb_100x100": "https://static.mod.io/v1/images/branding/modio-color-dark.png"
         },
-        "timezone": "America/Los_Angeles",
-        "language": "en",
+        "timezone": "",
+        "language": "",
         "profile_url": "https://mod.io/members/xant"
       },
       "date_added": 1499841487,
@@ -7447,8 +7448,8 @@ Get a Mod Comment. Successful request will return a single [Comment Object](#com
       "thumb_50x50": "https://static.mod.io/v1/images/branding/modio-color-dark.png",
       "thumb_100x100": "https://static.mod.io/v1/images/branding/modio-color-dark.png"
     },
-    "timezone": "America/Los_Angeles",
-    "language": "en",
+    "timezone": "",
+    "language": "",
     "profile_url": "https://mod.io/members/xant"
   },
   "date_added": 1499841487,
@@ -7709,8 +7710,8 @@ Get the user that is the original _submitter_ of a resource. Successful request 
     "thumb_50x50": "https://static.mod.io/v1/images/branding/modio-color-dark.png",
     "thumb_100x100": "https://static.mod.io/v1/images/branding/modio-color-dark.png"
   },
-  "timezone": "America/Los_Angeles",
-  "language": "en",
+  "timezone": "",
+  "language": "",
   "profile_url": "https://mod.io/members/xant"
 }
 ```
@@ -7836,7 +7837,7 @@ System.out.println(response.toString());
 ```
 `POST /report`
 
-Submit a report for any resource on mod.io. Successful request will return [Message Object](#message-object).<br><br>__NOTE:__ You can also [submit a report online](https://mod.io/report/widget) and read our [terms of use](https://mod.io/terms/widget) for information about what is/isn't acceptable.
+Report a resource on mod.io. You are responsible for content your users submit, so properly supporting the report endpoint is important ([see how we do it](https://mod.io/report/widget)). Successful request will return [Message Object](#message-object).<br><br>__NOTE:__ If you are a game owner or manager, you can [view all reports](https://mod.io/messages/reports) submitted for your game. You can also configure in your games control panel the number of reports required before content is automatically taken down for review.<br><br>__NOTE:__ You can also [submit a report online](https://mod.io/report/widget) and read our [terms of use](https://mod.io/terms/widget) for information about what is/isn't acceptable.
 
      Parameter|Type|Required|Description
      ---|---|---|---|
@@ -7984,9 +7985,9 @@ Submit one or more API endpoint calls in a single HTTP request by batching the r
 
      The following applies to all batch requests:
 
-     - Who you authenticate as for the parent batch request, you will be assumed that entity for _all_ sub-requests.  
-     - Authorization headers passed into sub-requests are ignored.  
-     - You cannot make more than 20 requests within a batch.  
+     - Who you authenticate as for the parent batch request, you will be assumed that entity for _all_ sub-requests.
+     - Authorization headers passed into sub-requests are ignored.
+     - You cannot make more than 20 requests within a batch.
 
      __Batch Dependencies__
 
@@ -7998,10 +7999,10 @@ Submit one or more API endpoint calls in a single HTTP request by batching the r
 
      __What will it require?__
 
-     This will require three requests:  
-     1. [GET /v1/games/{game-id}/mods](#get-all-mods)  
-     2. [GET /v1/me/subscribed](#get-user-subscriptions)  
-     3. [GET /v1/me/ratings](#get-user-ratings)  
+     This will require three requests:
+     1. [GET /v1/games/{game-id}/mods](#get-all-mods)
+     2. [GET /v1/me/subscribed](#get-user-subscriptions)
+     3. [GET /v1/me/ratings](#get-user-ratings)
 
     In total, we are making 3 requests in a synchronous manner, inside a single request. Based on the above example, we need to know how to get the `id` value of the [Mod Object](#mod-object) from Request #1 and provide it as a dependency to the subsequent requests.
 
@@ -8085,8 +8086,8 @@ Submit one or more API endpoint calls in a single HTTP request by batching the r
                 "thumb_50x50": "https://static.mod.io/v1/images/branding/modio-color-dark.png",
                 "thumb_100x100": "https://static.mod.io/v1/images/branding/modio-color-dark.png"
               },
-              "timezone": "America/Los_Angeles",
-              "language": "en",
+              "timezone": "",
+              "language": "",
               "profile_url": "https://mod.io/members/xant"
             },
             "date_added": 1492564103,
@@ -8306,8 +8307,8 @@ Get the _authenticated user_ details. Successful request will return a single [U
     "thumb_50x50": "https://static.mod.io/v1/images/branding/modio-color-dark.png",
     "thumb_100x100": "https://static.mod.io/v1/images/branding/modio-color-dark.png"
   },
-  "timezone": "America/Los_Angeles",
-  "language": "en",
+  "timezone": "",
+  "language": "",
   "profile_url": "https://mod.io/members/xant"
 }
 ```
@@ -8458,8 +8459,8 @@ Get all mod's the _authenticated user_ is subscribed to. Successful request will
           "thumb_50x50": "https://static.mod.io/v1/images/branding/modio-color-dark.png",
           "thumb_100x100": "https://static.mod.io/v1/images/branding/modio-color-dark.png"
         },
-        "timezone": "America/Los_Angeles",
-        "language": "en",
+        "timezone": "",
+        "language": "",
         "profile_url": "https://mod.io/members/xant"
       },
       "date_added": 1492564103,
@@ -8800,14 +8801,14 @@ Get all games the _authenticated user_ added or is a team member of. Successful 
     date_updated|integer|Unix timestamp of date game was updated.
     date_live|integer|Unix timestamp of date game was set live.
     name|string|Name of the game.
-    name_id|string|Subdomain for the game on mod.io.
+    name_id|string|Subdomain for the game on mod.io. For example: https://gamename.mod.io
     summary|string|Summary of the game.
     instructions_url|string|Link to a mod.io guide, modding wiki or a page where modders can learn how to make and submit mods.
     ugc_name|string|Word used to describe user-generated content (mods, items, addons etc).
     presentation_option|integer|Presentation style used on the mod.io website:<br><br>__0__ =  Grid View: Displays mods in a grid<br>__1__ = Table View: Displays mods in a table
     submission_option|integer|Submission process modders must follow:<br><br>__0__ = Mod uploads must occur via the API using a tool created by the game developers<br>__1__ = Mod uploads can occur from anywhere, including the website and API
     curation_option|integer|Curation process used to approve mods:<br><br>__0__ = No curation: Mods are immediately available to play<br>__1__ = Paid curation: Mods are immediately available to play unless they choose to receive donations. These mods must be accepted to be listed<br>__2__ = Full curation: All mods must be accepted by someone to be listed
-    community_options|integer|Community features enabled on the mod.io website:<br><br>__0__ = All of the options below are disabled<br>__1__ = Discussion board enabled<br>__2__ = Guides and news enabled<br>__?__ = Combine to find games with multiple options enabled (see [BITWISE fields](#bitwise-and-bitwise-and))
+    community_options|integer|Community features enabled on the mod.io website:<br><br>__0__ = All of the options below are disabled<br>__1__ = Comments enabled<br>__2__ = Guides enabled<br>__?__ = Combine to find games with multiple options enabled (see [BITWISE fields](#bitwise-and-bitwise-and))
     revenue_options|integer|Revenue capabilities mods can enable:<br><br>__0__ = All of the options below are disabled<br>__1__ = Allow mods to be sold<br>__2__ = Allow mods to receive donations<br>__4__ = Allow mods to be traded<br>__8__ = Allow mods to control supply and scarcity<br>__?__ = Combine to find games with multiple options enabled (see [BITWISE fields](#bitwise-and-bitwise-and))
     api_access_options|integer|Level of API access allowed by this game:<br><br>__0__ = All of the options below are disabled<br>__1__ = Allow 3rd parties to access this games API endpoints<br>__2__ = Allow mods to be downloaded directly (if disabled all download URLs will contain a frequently changing verification hash to stop unauthorized use)<br>__?__ = Combine to find games with multiple options enabled (see [BITWISE fields](#bitwise-and-bitwise-and))
 
@@ -8831,8 +8832,8 @@ Get all games the _authenticated user_ added or is a team member of. Successful 
           "thumb_50x50": "https://static.mod.io/v1/images/branding/modio-color-dark.png",
           "thumb_100x100": "https://static.mod.io/v1/images/branding/modio-color-dark.png"
         },
-        "timezone": "America/Los_Angeles",
-        "language": "en",
+        "timezone": "",
+        "language": "",
         "profile_url": "https://mod.io/members/xant"
       },
       "date_added": 1493702614,
@@ -9042,8 +9043,8 @@ Get all mods the _authenticated user_ added or is a team member of. Successful r
           "thumb_50x50": "https://static.mod.io/v1/images/branding/modio-color-dark.png",
           "thumb_100x100": "https://static.mod.io/v1/images/branding/modio-color-dark.png"
         },
-        "timezone": "America/Los_Angeles",
-        "language": "en",
+        "timezone": "",
+        "language": "",
         "profile_url": "https://mod.io/members/xant"
       },
       "date_added": 1492564103,
@@ -9489,134 +9490,6 @@ error|object|Contains error data.
 
 
 
-## Logo Object
-
-   <a name="schemalogo_object"></a>
-
-```json
-{
-  "filename": "modio-color-dark.png",
-  "original": "https://static.mod.io/v1/images/branding/modio-color-dark.png",
-  "thumb_320x180": "https://static.mod.io/v1/images/branding/modio-color-dark.png",
-  "thumb_640x360": "https://static.mod.io/v1/images/branding/modio-color-dark.png",
-  "thumb_1280x720": "https://static.mod.io/v1/images/branding/modio-color-dark.png"
-} 
-```
-
-
-### Properties
-
-Name|Type|Description
----|---|---|---|
-filename|string|Logo filename including extension.
-original|string|URL to the full-sized logo.
-thumb_320x180|string|URL to the small logo thumbnail.
-thumb_640x360|string|URL to the medium logo thumbnail.
-thumb_1280x720|string|URL to the large logo thumbnail.
-
-
-
-
-## Icon Object
-
-   <a name="schemaicon_object"></a>
-
-```json
-{
-  "filename": "modio-color-dark.png",
-  "original": "https://static.mod.io/v1/images/branding/modio-color-dark.png",
-  "thumb_64x64": "https://static.mod.io/v1/images/branding/modio-color-dark.png",
-  "thumb_128x128": "https://static.mod.io/v1/images/branding/modio-color-dark.png",
-  "thumb_256x256": "https://static.mod.io/v1/images/branding/modio-color-dark.png"
-} 
-```
-
-
-### Properties
-
-Name|Type|Description
----|---|---|---|
-filename|string|Icon filename including extension.
-original|string|URL to the full-sized icon.
-thumb_64x64|string|URL to the small icon thumbnail.
-thumb_128x128|string|URL to the medium icon thumbnail.
-thumb_256x256|string|URL to the large icon thumbnail.
-
-
-
-
-## Header Image Object  
-
-<a name="schemaheader_image_object"></a>
-
-```json
-{
-  "filename": "demo.png",
-  "original": "https://static.mod.io/v1/images/branding/modio-color-dark.png"
-} 
-```
-
-
-### Properties
-
-Name|Type|Description
----|---|---|---|
-filename|string|Header image filename including extension.
-original|string|URL to the full-sized header image.
-
-
-
-
-## Avatar Object
-
-   <a name="schemaavatar_object"></a>
-
-```json
-{
-  "filename": "modio-color-dark.png",
-  "original": "https://static.mod.io/v1/images/branding/modio-color-dark.png",
-  "thumb_50x50": "https://static.mod.io/v1/images/branding/modio-color-dark.png",
-  "thumb_100x100": "https://static.mod.io/v1/images/branding/modio-color-dark.png"
-} 
-```
-
-
-### Properties
-
-Name|Type|Description
----|---|---|---|
-filename|string|Avatar filename including extension.
-original|string|URL to the full-sized avatar.
-thumb_50x50|string|URL to the small avatar thumbnail.
-thumb_100x100|string|URL to the medium avatar thumbnail.
-
-
-
-
-## Image Object
-
-   <a name="schemaimage_object"></a>
-
-```json
-{
-  "filename": "modio-color-dark.png",
-  "original": "https://static.mod.io/v1/images/branding/modio-color-dark.png",
-  "thumb_320x180": "https://static.mod.io/v1/images/branding/modio-color-dark.png"
-} 
-```
-
-
-### Properties
-
-Name|Type|Description
----|---|---|---|
-filename|string|Image filename including extension.
-original|string|URL to the full-sized image.
-thumb_320x180|string|URL to the image thumbnail.
-
-
-
-
 ## Make Batch Request  
 
 <a name="schemamake_batch_request"></a>
@@ -9650,8 +9523,8 @@ thumb_320x180|string|URL to the image thumbnail.
                 "thumb_50x50": "https://static.mod.io/v1/images/branding/modio-color-dark.png",
                 "thumb_100x100": "https://static.mod.io/v1/images/branding/modio-color-dark.png"
               },
-              "timezone": "America/Los_Angeles",
-              "language": "en",
+              "timezone": "",
+              "language": "",
               "profile_url": "https://mod.io/members/xant"
             },
             "date_added": 1492564103,
@@ -9773,8 +9646,8 @@ data|[Batch Object](#schemabatch_object)[]|Array containing any response object.
 »»»»» original|string|URL to the full-sized avatar.
 »»»»» thumb_50x50|string|URL to the small avatar thumbnail.
 »»»»» thumb_100x100|string|URL to the medium avatar thumbnail.
-»»»» timezone|string|Timezone of the user, format is country/city.
-»»»» language|string|Users language preference. See [localization](#localization) for the supported languages.
+»»»» timezone|string|This field is no longer returned.
+»»»» language|string|This field is no longer used and will return an empty string. To [localize the API response](#localization) we recommend you set the Accept-Language header.
 »»»» profile_url|string|URL to the user's mod.io profile.
 »»» date_added|integer|Unix timestamp of date mod was registered.
 »»» date_updated|integer|Unix timestamp of date mod was updated.
@@ -9870,8 +9743,8 @@ result_total|integer|Total number of results found.
           "thumb_50x50": "https://static.mod.io/v1/images/branding/modio-color-dark.png",
           "thumb_100x100": "https://static.mod.io/v1/images/branding/modio-color-dark.png"
         },
-        "timezone": "America/Los_Angeles",
-        "language": "en",
+        "timezone": "",
+        "language": "",
         "profile_url": "https://mod.io/members/xant"
       },
       "date_added": 1499841487,
@@ -9910,8 +9783,8 @@ data|[Comment Object](#schemacomment_object)[]|Array containing comment objects.
 »»» original|string|URL to the full-sized avatar.
 »»» thumb_50x50|string|URL to the small avatar thumbnail.
 »»» thumb_100x100|string|URL to the medium avatar thumbnail.
-»» timezone|string|Timezone of the user, format is country/city.
-»» language|string|Users language preference. See [localization](#localization) for the supported languages.
+»» timezone|string|This field is no longer returned.
+»» language|string|This field is no longer used and will return an empty string. To [localize the API response](#localization) we recommend you set the Accept-Language header.
 »» profile_url|string|URL to the user's mod.io profile.
 » date_added|integer|Unix timestamp of date the comment was posted.
 » reply_id|integer|Id of the parent comment this comment is replying to (can be 0 if the comment is not a reply).
@@ -10100,8 +9973,8 @@ result_total|integer|Total number of results found.
           "thumb_50x50": "https://static.mod.io/v1/images/branding/modio-color-dark.png",
           "thumb_100x100": "https://static.mod.io/v1/images/branding/modio-color-dark.png"
         },
-        "timezone": "America/Los_Angeles",
-        "language": "en",
+        "timezone": "",
+        "language": "",
         "profile_url": "https://mod.io/members/xant"
       },
       "date_added": 1493702614,
@@ -10179,8 +10052,8 @@ data|[Game Object](#schemagame_object)[]|Array containing game objects.
 »»» original|string|URL to the full-sized avatar.
 »»» thumb_50x50|string|URL to the small avatar thumbnail.
 »»» thumb_100x100|string|URL to the medium avatar thumbnail.
-»» timezone|string|Timezone of the user, format is country/city.
-»» language|string|Users language preference. See [localization](#localization) for the supported languages.
+»» timezone|string|This field is no longer returned.
+»» language|string|This field is no longer used and will return an empty string. To [localize the API response](#localization) we recommend you set the Accept-Language header.
 »» profile_url|string|URL to the user's mod.io profile.
 » date_added|integer|Unix timestamp of date game was registered.
 » date_updated|integer|Unix timestamp of date game was updated.
@@ -10188,7 +10061,7 @@ data|[Game Object](#schemagame_object)[]|Array containing game objects.
 » presentation_option|integer|Presentation style used on the mod.io website:<br><br>__0__ =  Grid View: Displays mods in a grid<br>__1__ = Table View: Displays mods in a table
 » submission_option|integer|Submission process modders must follow:<br><br>__0__ = Mod uploads must occur via the API using a tool created by the game developers<br>__1__ = Mod uploads can occur from anywhere, including the website and API
 » curation_option|integer|Curation process used to approve mods:<br><br>__0__ = No curation: Mods are immediately available to play<br>__1__ = Paid curation: Mods are immediately available to play unless they choose to receive donations. These mods must be accepted to be listed<br>__2__ = Full curation: All mods must be accepted by someone to be listed
-» community_options|integer|Community features enabled on the mod.io website:<br><br>__0__ = All of the options below are disabled<br>__1__ = Discussion board enabled<br>__2__ = Guides and news enabled<br>__?__ = Add the options you want together, to enable multiple features (see [BITWISE fields](#bitwise-and-bitwise-and))
+» community_options|integer|Community features enabled on the mod.io website:<br><br>__0__ = All of the options below are disabled<br>__1__ = Comments enabled<br>__2__ = Guides enabled<br>__?__ = Add the options you want together, to enable multiple features (see [BITWISE fields](#bitwise-and-bitwise-and))
 » revenue_options|integer|Revenue capabilities mods can enable:<br><br>__0__ = All of the options below are disabled<br>__1__ = Allow mods to be sold<br>__2__ = Allow mods to receive donations<br>__4__ = Allow mods to be traded<br>__8__ = Allow mods to control supply and scarcity<br>__?__ = Add the options you want together, to enable multiple features (see [BITWISE fields](#bitwise-and-bitwise-and))
 » api_access_options|integer|Level of API access allowed by this game:<br><br>__0__ = All of the options below are disabled<br>__1__ = Allow 3rd parties to access this games API endpoints<br>__2__ = Allow mods to be downloaded directly (if disabled all download URLs will contain a frequently changing verification hash to stop unauthorized use)<br>__?__ = Add the options you want together, to enable multiple features (see [BITWISE fields](#bitwise-and-bitwise-and))
 » maturity_options|integer|Switch to allow developers to select if they flag their mods as containing mature content:<br><br>__0__ = Don't allow _(default)_<br>__1__ = Allow
@@ -10209,7 +10082,7 @@ data|[Game Object](#schemagame_object)[]|Array containing game objects.
 »» filename|string|Header image filename including extension.
 »» original|string|URL to the full-sized header image.
 » name|string|Name of the game.
-» name_id|string|Subdomain for the game on mod.io.
+» name_id|string|Subdomain for the game on mod.io. For example: https://gamename.mod.io
 » summary|string|Summary of the game.
 » instructions|string|A guide about creating and uploading mods for this game to mod.io (applicable if submission_option = 0).
 » instructions_url|string|Link to a mod.io guide, your modding wiki or a page where modders can learn how to make and submit mods to your games profile.
@@ -10288,8 +10161,8 @@ result_total|integer|Total number of results found.
           "thumb_50x50": "https://static.mod.io/v1/images/branding/modio-color-dark.png",
           "thumb_100x100": "https://static.mod.io/v1/images/branding/modio-color-dark.png"
         },
-        "timezone": "America/Los_Angeles",
-        "language": "en",
+        "timezone": "",
+        "language": "",
         "profile_url": "https://mod.io/members/xant"
       },
       "date_added": 1492564103,
@@ -10405,8 +10278,8 @@ data|[Mod Object](#schemamod_object)[]|Array containing mod objects.
 »»» original|string|URL to the full-sized avatar.
 »»» thumb_50x50|string|URL to the small avatar thumbnail.
 »»» thumb_100x100|string|URL to the medium avatar thumbnail.
-»» timezone|string|Timezone of the user, format is country/city.
-»» language|string|Users language preference. See [localization](#localization) for the supported languages.
+»» timezone|string|This field is no longer returned.
+»» language|string|This field is no longer used and will return an empty string. To [localize the API response](#localization) we recommend you set the Accept-Language header.
 »» profile_url|string|URL to the user's mod.io profile.
 » date_added|integer|Unix timestamp of date mod was registered.
 » date_updated|integer|Unix timestamp of date mod was updated.
@@ -10638,8 +10511,8 @@ result_total|integer|Total number of results found.
           "thumb_50x50": "https://static.mod.io/v1/images/branding/modio-color-dark.png",
           "thumb_100x100": "https://static.mod.io/v1/images/branding/modio-color-dark.png"
         },
-        "timezone": "America/Los_Angeles",
-        "language": "en",
+        "timezone": "",
+        "language": "",
         "profile_url": "https://mod.io/members/xant"
       },
       "level": 8,
@@ -10674,8 +10547,8 @@ data|[Team Member Object](#schemateam_member_object)[]|Array containing team mem
 »»» original|string|URL to the full-sized avatar.
 »»» thumb_50x50|string|URL to the small avatar thumbnail.
 »»» thumb_100x100|string|URL to the medium avatar thumbnail.
-»» timezone|string|Timezone of the user, format is country/city.
-»» language|string|Users language preference. See [localization](#localization) for the supported languages.
+»» timezone|string|This field is no longer returned.
+»» language|string|This field is no longer used and will return an empty string. To [localize the API response](#localization) we recommend you set the Accept-Language header.
 »» profile_url|string|URL to the user's mod.io profile.
 » level|integer|Level of permission the user has:<br><br>__1__ = Moderator (can moderate comments and content attached)<br>__4__ = Manager (moderator access, including uploading builds and editing settings except supply and team members)<br>__8__ = Administrator (full access, including editing the supply and team)
 » date_added|integer|Unix timestamp of the date the user was added to the team.
@@ -10834,6 +10707,32 @@ event_type|string|Type of event that was triggered. List of possible events: <br
 
 
 
+## Avatar Object
+
+   <a name="schemaavatar_object"></a>
+
+```json
+{
+  "filename": "modio-color-dark.png",
+  "original": "https://static.mod.io/v1/images/branding/modio-color-dark.png",
+  "thumb_50x50": "https://static.mod.io/v1/images/branding/modio-color-dark.png",
+  "thumb_100x100": "https://static.mod.io/v1/images/branding/modio-color-dark.png"
+} 
+```
+
+
+### Properties
+
+Name|Type|Description
+---|---|---|---|
+filename|string|Avatar filename including extension.
+original|string|URL to the full-sized avatar.
+thumb_50x50|string|URL to the small avatar thumbnail.
+thumb_100x100|string|URL to the medium avatar thumbnail.
+
+
+
+
 ## Batch Object
 
    <a name="schemabatch_object"></a>
@@ -10865,8 +10764,8 @@ event_type|string|Type of event that was triggered. List of possible events: <br
             "thumb_50x50": "https://static.mod.io/v1/images/branding/modio-color-dark.png",
             "thumb_100x100": "https://static.mod.io/v1/images/branding/modio-color-dark.png"
           },
-          "timezone": "America/Los_Angeles",
-          "language": "en",
+          "timezone": "",
+          "language": "",
           "profile_url": "https://mod.io/members/xant"
         },
         "date_added": 1492564103,
@@ -10978,8 +10877,8 @@ body|[Batch Body Object](#schemabatch_body_object)|Contains batch request data.
 »»»» original|string|URL to the full-sized avatar.
 »»»» thumb_50x50|string|URL to the small avatar thumbnail.
 »»»» thumb_100x100|string|URL to the medium avatar thumbnail.
-»»» timezone|string|Timezone of the user, format is country/city.
-»»» language|string|Users language preference. See [localization](#localization) for the supported languages.
+»»» timezone|string|This field is no longer returned.
+»»» language|string|This field is no longer used and will return an empty string. To [localize the API response](#localization) we recommend you set the Accept-Language header.
 »»» profile_url|string|URL to the user's mod.io profile.
 »» date_added|integer|Unix timestamp of date mod was registered.
 »» date_updated|integer|Unix timestamp of date mod was updated.
@@ -11073,8 +10972,8 @@ headers|[[Key-Value Pair Object](#schemakey-value_pair_object)]|Contains key-val
           "thumb_50x50": "https://static.mod.io/v1/images/branding/modio-color-dark.png",
           "thumb_100x100": "https://static.mod.io/v1/images/branding/modio-color-dark.png"
         },
-        "timezone": "America/Los_Angeles",
-        "language": "en",
+        "timezone": "",
+        "language": "",
         "profile_url": "https://mod.io/members/xant"
       },
       "date_added": 1492564103,
@@ -11183,8 +11082,8 @@ data|[Mod Object](#schemamod_object)[]|Contains Mod Objects.
 »»» original|string|URL to the full-sized avatar.
 »»» thumb_50x50|string|URL to the small avatar thumbnail.
 »»» thumb_100x100|string|URL to the medium avatar thumbnail.
-»» timezone|string|Timezone of the user, format is country/city.
-»» language|string|Users language preference. See [localization](#localization) for the supported languages.
+»» timezone|string|This field is no longer returned.
+»» language|string|This field is no longer used and will return an empty string. To [localize the API response](#localization) we recommend you set the Accept-Language header.
 »» profile_url|string|URL to the user's mod.io profile.
 » date_added|integer|Unix timestamp of date mod was registered.
 » date_updated|integer|Unix timestamp of date mod was updated.
@@ -11271,8 +11170,8 @@ data|[Mod Object](#schemamod_object)[]|Contains Mod Objects.
       "thumb_50x50": "https://static.mod.io/v1/images/branding/modio-color-dark.png",
       "thumb_100x100": "https://static.mod.io/v1/images/branding/modio-color-dark.png"
     },
-    "timezone": "America/Los_Angeles",
-    "language": "en",
+    "timezone": "",
+    "language": "",
     "profile_url": "https://mod.io/members/xant"
   },
   "date_added": 1499841487,
@@ -11301,8 +11200,8 @@ user|[User Object](#schemauser_object)|Contains user data.
 »» original|string|URL to the full-sized avatar.
 »» thumb_50x50|string|URL to the small avatar thumbnail.
 »» thumb_100x100|string|URL to the medium avatar thumbnail.
-» timezone|string|Timezone of the user, format is country/city.
-» language|string|Users language preference. See [localization](#localization) for the supported languages.
+» timezone|string|This field is no longer returned.
+» language|string|This field is no longer used and will return an empty string. To [localize the API response](#localization) we recommend you set the Accept-Language header.
 » profile_url|string|URL to the user's mod.io profile.
 date_added|integer|Unix timestamp of date the comment was posted.
 reply_id|integer|Id of the parent comment this comment is replying to (can be 0 if the comment is not a reply).
@@ -11481,8 +11380,8 @@ date_expires|integer|Unix timestamp of when the `binary_url` will expire.
       "thumb_50x50": "https://static.mod.io/v1/images/branding/modio-color-dark.png",
       "thumb_100x100": "https://static.mod.io/v1/images/branding/modio-color-dark.png"
     },
-    "timezone": "America/Los_Angeles",
-    "language": "en",
+    "timezone": "",
+    "language": "",
     "profile_url": "https://mod.io/members/xant"
   },
   "date_added": 1492564103,
@@ -11588,8 +11487,8 @@ submitted_by|[User Object](#schemauser_object)|Contains user data.
 »» original|string|URL to the full-sized avatar.
 »» thumb_50x50|string|URL to the small avatar thumbnail.
 »» thumb_100x100|string|URL to the medium avatar thumbnail.
-» timezone|string|Timezone of the user, format is country/city.
-» language|string|Users language preference. See [localization](#localization) for the supported languages.
+» timezone|string|This field is no longer returned.
+» language|string|This field is no longer used and will return an empty string. To [localize the API response](#localization) we recommend you set the Accept-Language header.
 » profile_url|string|URL to the user's mod.io profile.
 date_added|integer|Unix timestamp of date mod was registered.
 date_updated|integer|Unix timestamp of date mod was updated.
@@ -11735,8 +11634,8 @@ date_added|integer|Unix timestamp of date tag was applied.
       "thumb_50x50": "https://static.mod.io/v1/images/branding/modio-color-dark.png",
       "thumb_100x100": "https://static.mod.io/v1/images/branding/modio-color-dark.png"
     },
-    "timezone": "America/Los_Angeles",
-    "language": "en",
+    "timezone": "",
+    "language": "",
     "profile_url": "https://mod.io/members/xant"
   },
   "date_added": 1493702614,
@@ -11804,8 +11703,8 @@ submitted_by|[User Object](#schemauser_object)|Contains user data.
 »» original|string|URL to the full-sized avatar.
 »» thumb_50x50|string|URL to the small avatar thumbnail.
 »» thumb_100x100|string|URL to the medium avatar thumbnail.
-» timezone|string|Timezone of the user, format is country/city.
-» language|string|Users language preference. See [localization](#localization) for the supported languages.
+» timezone|string|This field is no longer returned.
+» language|string|This field is no longer used and will return an empty string. To [localize the API response](#localization) we recommend you set the Accept-Language header.
 » profile_url|string|URL to the user's mod.io profile.
 date_added|integer|Unix timestamp of date game was registered.
 date_updated|integer|Unix timestamp of date game was updated.
@@ -11813,7 +11712,7 @@ date_live|integer|Unix timestamp of date game was set live.
 presentation_option|integer|Presentation style used on the mod.io website:<br><br>__0__ =  Grid View: Displays mods in a grid<br>__1__ = Table View: Displays mods in a table
 submission_option|integer|Submission process modders must follow:<br><br>__0__ = Mod uploads must occur via the API using a tool created by the game developers<br>__1__ = Mod uploads can occur from anywhere, including the website and API
 curation_option|integer|Curation process used to approve mods:<br><br>__0__ = No curation: Mods are immediately available to play<br>__1__ = Paid curation: Mods are immediately available to play unless they choose to receive donations. These mods must be accepted to be listed<br>__2__ = Full curation: All mods must be accepted by someone to be listed
-community_options|integer|Community features enabled on the mod.io website:<br><br>__0__ = All of the options below are disabled<br>__1__ = Discussion board enabled<br>__2__ = Guides and news enabled<br>__?__ = Add the options you want together, to enable multiple features (see [BITWISE fields](#bitwise-and-bitwise-and))
+community_options|integer|Community features enabled on the mod.io website:<br><br>__0__ = All of the options below are disabled<br>__1__ = Comments enabled<br>__2__ = Guides enabled<br>__?__ = Add the options you want together, to enable multiple features (see [BITWISE fields](#bitwise-and-bitwise-and))
 revenue_options|integer|Revenue capabilities mods can enable:<br><br>__0__ = All of the options below are disabled<br>__1__ = Allow mods to be sold<br>__2__ = Allow mods to receive donations<br>__4__ = Allow mods to be traded<br>__8__ = Allow mods to control supply and scarcity<br>__?__ = Add the options you want together, to enable multiple features (see [BITWISE fields](#bitwise-and-bitwise-and))
 api_access_options|integer|Level of API access allowed by this game:<br><br>__0__ = All of the options below are disabled<br>__1__ = Allow 3rd parties to access this games API endpoints<br>__2__ = Allow mods to be downloaded directly (if disabled all download URLs will contain a frequently changing verification hash to stop unauthorized use)<br>__?__ = Add the options you want together, to enable multiple features (see [BITWISE fields](#bitwise-and-bitwise-and))
 maturity_options|integer|Switch to allow developers to select if they flag their mods as containing mature content:<br><br>__0__ = Don't allow _(default)_<br>__1__ = Allow
@@ -11834,7 +11733,7 @@ header|[Header Image Object](#schemaheader_image_object)|Contains header data.
 » filename|string|Header image filename including extension.
 » original|string|URL to the full-sized header image.
 name|string|Name of the game.
-name_id|string|Subdomain for the game on mod.io.
+name_id|string|Subdomain for the game on mod.io. For example: https://gamename.mod.io
 summary|string|Summary of the game.
 instructions|string|A guide about creating and uploading mods for this game to mod.io (applicable if submission_option = 0).
 instructions_url|string|Link to a mod.io guide, your modding wiki or a page where modders can learn how to make and submit mods to your games profile.
@@ -11844,6 +11743,80 @@ tag_options|[Game Tag Option Object](#schemagame_tag_option_object)[]|Groups of 
 » type|string|Can multiple tags be selected via 'checkboxes' or should only a single tag be selected via a 'dropdown'.
 » hidden|boolean|Groups of tags flagged as 'admin only' should only be used for filtering, and should not be displayed to users. Groups that are hidden will only be returned in a response if the authenticated user in the request is a team member of the parent game with `Manager` or `Administrator` privileges.
 » tags|string[]|Array of tags in this group.
+
+
+
+
+## Header Image Object  
+
+<a name="schemaheader_image_object"></a>
+
+```json
+{
+  "filename": "demo.png",
+  "original": "https://static.mod.io/v1/images/branding/modio-color-dark.png"
+} 
+```
+
+
+### Properties
+
+Name|Type|Description
+---|---|---|---|
+filename|string|Header image filename including extension.
+original|string|URL to the full-sized header image.
+
+
+
+
+## Icon Object
+
+   <a name="schemaicon_object"></a>
+
+```json
+{
+  "filename": "modio-color-dark.png",
+  "original": "https://static.mod.io/v1/images/branding/modio-color-dark.png",
+  "thumb_64x64": "https://static.mod.io/v1/images/branding/modio-color-dark.png",
+  "thumb_128x128": "https://static.mod.io/v1/images/branding/modio-color-dark.png",
+  "thumb_256x256": "https://static.mod.io/v1/images/branding/modio-color-dark.png"
+} 
+```
+
+
+### Properties
+
+Name|Type|Description
+---|---|---|---|
+filename|string|Icon filename including extension.
+original|string|URL to the full-sized icon.
+thumb_64x64|string|URL to the small icon thumbnail.
+thumb_128x128|string|URL to the medium icon thumbnail.
+thumb_256x256|string|URL to the large icon thumbnail.
+
+
+
+
+## Image Object
+
+   <a name="schemaimage_object"></a>
+
+```json
+{
+  "filename": "modio-color-dark.png",
+  "original": "https://static.mod.io/v1/images/branding/modio-color-dark.png",
+  "thumb_320x180": "https://static.mod.io/v1/images/branding/modio-color-dark.png"
+} 
+```
+
+
+### Properties
+
+Name|Type|Description
+---|---|---|---|
+filename|string|Image filename including extension.
+original|string|URL to the full-sized image.
+thumb_320x180|string|URL to the image thumbnail.
 
 
 
@@ -11866,6 +11839,34 @@ Name|Type|Description
 ---|---|---|---|
 key|string|Key of the key-value pair.
 value|string|Value of the key-value pair. Will always be a string, even if numeric.
+
+
+
+
+## Logo Object
+
+   <a name="schemalogo_object"></a>
+
+```json
+{
+  "filename": "modio-color-dark.png",
+  "original": "https://static.mod.io/v1/images/branding/modio-color-dark.png",
+  "thumb_320x180": "https://static.mod.io/v1/images/branding/modio-color-dark.png",
+  "thumb_640x360": "https://static.mod.io/v1/images/branding/modio-color-dark.png",
+  "thumb_1280x720": "https://static.mod.io/v1/images/branding/modio-color-dark.png"
+} 
+```
+
+
+### Properties
+
+Name|Type|Description
+---|---|---|---|
+filename|string|Logo filename including extension.
+original|string|URL to the full-sized logo.
+thumb_320x180|string|URL to the small logo thumbnail.
+thumb_640x360|string|URL to the medium logo thumbnail.
+thumb_1280x720|string|URL to the large logo thumbnail.
 
 
 
@@ -12002,8 +12003,8 @@ date_expires|integer|Unix timestamp until this mods's statistics are considered 
       "thumb_50x50": "https://static.mod.io/v1/images/branding/modio-color-dark.png",
       "thumb_100x100": "https://static.mod.io/v1/images/branding/modio-color-dark.png"
     },
-    "timezone": "America/Los_Angeles",
-    "language": "en",
+    "timezone": "",
+    "language": "",
     "profile_url": "https://mod.io/members/xant"
   },
   "level": 8,
@@ -12028,8 +12029,8 @@ user|[User Object](#schemauser_object)|Contains user data.
 »» original|string|URL to the full-sized avatar.
 »» thumb_50x50|string|URL to the small avatar thumbnail.
 »» thumb_100x100|string|URL to the medium avatar thumbnail.
-» timezone|string|Timezone of the user, format is country/city.
-» language|string|Users language preference. See [localization](#localization) for the supported languages.
+» timezone|string|This field is no longer returned.
+» language|string|This field is no longer used and will return an empty string. To [localize the API response](#localization) we recommend you set the Accept-Language header.
 » profile_url|string|URL to the user's mod.io profile.
 level|integer|Level of permission the user has:<br><br>__1__ = Moderator (can moderate comments and content attached)<br>__4__ = Manager (moderator access, including uploading builds and editing settings except supply and team members)<br>__8__ = Administrator (full access, including editing the supply and team)
 date_added|integer|Unix timestamp of the date the user was added to the team.
@@ -12054,8 +12055,8 @@ position|string|Custom title given to the user in this team.
     "thumb_50x50": "https://static.mod.io/v1/images/branding/modio-color-dark.png",
     "thumb_100x100": "https://static.mod.io/v1/images/branding/modio-color-dark.png"
   },
-  "timezone": "America/Los_Angeles",
-  "language": "en",
+  "timezone": "",
+  "language": "",
   "profile_url": "https://mod.io/members/xant"
 } 
 ```
@@ -12074,8 +12075,8 @@ avatar|[Avatar Object](#schemaavatar_object)|Contains avatar data.
 » original|string|URL to the full-sized avatar.
 » thumb_50x50|string|URL to the small avatar thumbnail.
 » thumb_100x100|string|URL to the medium avatar thumbnail.
-timezone|string|Timezone of the user, format is country/city.
-language|string|Users language preference. See [localization](#localization) for the supported languages.
+timezone|string|This field is no longer returned.
+language|string|This field is no longer used and will return an empty string. To [localize the API response](#localization) we recommend you set the Accept-Language header.
 profile_url|string|URL to the user's mod.io profile.
 
 
