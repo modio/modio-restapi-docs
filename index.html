@@ -615,21 +615,6 @@
                     <a href="#error-object" class="toc-h2 toc-link" data-title="Response Schemas">Error Object</a>
                   </li>
                   <li>
-                    <a href="#logo-object" class="toc-h2 toc-link" data-title="Response Schemas">Logo Object</a>
-                  </li>
-                  <li>
-                    <a href="#icon-object" class="toc-h2 toc-link" data-title="Response Schemas">Icon Object</a>
-                  </li>
-                  <li>
-                    <a href="#header-image-object" class="toc-h2 toc-link" data-title="Response Schemas">Header Image Object</a>
-                  </li>
-                  <li>
-                    <a href="#avatar-object" class="toc-h2 toc-link" data-title="Response Schemas">Avatar Object</a>
-                  </li>
-                  <li>
-                    <a href="#image-object" class="toc-h2 toc-link" data-title="Response Schemas">Image Object</a>
-                  </li>
-                  <li>
                     <a href="#make-batch-request-2" class="toc-h2 toc-link" data-title="Response Schemas">Make Batch Request</a>
                   </li>
                   <li>
@@ -678,6 +663,9 @@
                     <a href="#user-event-object" class="toc-h2 toc-link" data-title="Response Schemas">User Event Object</a>
                   </li>
                   <li>
+                    <a href="#avatar-object" class="toc-h2 toc-link" data-title="Response Schemas">Avatar Object</a>
+                  </li>
+                  <li>
                     <a href="#batch-object" class="toc-h2 toc-link" data-title="Response Schemas">Batch Object</a>
                   </li>
                   <li>
@@ -714,7 +702,19 @@
                     <a href="#game-object" class="toc-h2 toc-link" data-title="Response Schemas">Game Object</a>
                   </li>
                   <li>
+                    <a href="#header-image-object" class="toc-h2 toc-link" data-title="Response Schemas">Header Image Object</a>
+                  </li>
+                  <li>
+                    <a href="#icon-object" class="toc-h2 toc-link" data-title="Response Schemas">Icon Object</a>
+                  </li>
+                  <li>
+                    <a href="#image-object" class="toc-h2 toc-link" data-title="Response Schemas">Image Object</a>
+                  </li>
+                  <li>
                     <a href="#key-value-pair-object" class="toc-h2 toc-link" data-title="Response Schemas">Key-Value Pair Object</a>
+                  </li>
+                  <li>
+                    <a href="#logo-object" class="toc-h2 toc-link" data-title="Response Schemas">Logo Object</a>
                   </li>
                   <li>
                     <a href="#metadata-kvp-object" class="toc-h2 toc-link" data-title="Response Schemas">Metadata KVP Object</a>
@@ -753,7 +753,7 @@
 
 <p><a href="/changelog"><span class="versionwrap">View Version Changelog</span></a></p>
 <h2 id="how-it-works">How It Works</h2>
-<p>Compatible with all builds of your game, mod.io operates silently in the background (without requiring your users to install another client), to give you complete control over your modding ecosystem.</p>
+<p>Compatible with all builds of your game on all platforms and stores, mod.io is a clientless and standalone solution which gives you complete control over your modding ecosystem.</p>
 
 <p><img src="https://static.mod.io/v1/images/home/sdk.png" alt="mod.io Overview">.</p>
 <h2 id="implementation">Implementation</h2>
@@ -784,7 +784,7 @@
 <tr>
 <td><strong>Tools/Plugins</strong></td>
 <td>Use tools, plugins and wrappers created by the community to make implementation in various engines easy.</td>
-<td>Game developers that want a pre-built modding solution for their engine (Unity, Unreal) of choice.</td>
+<td>Game developers that want a pre-built modding solution for their engine (Unity, Unreal, GameMaker, Construct) of choice.</td>
 <td><a href="https://sdk.mod.io">Available per tool</a></td>
 </tr>
 </tbody>
@@ -807,7 +807,7 @@
 </td>
 <td><img src="images/tool-unreal.png" alt="Unreal Plugin"></td>
 <td>
-<strong>Unreal Plugin</strong><br>(in development)<br><a href="https://github.com/modio/UE4Plugin">SDK</a><br><a href="https://github.com/modio/UE4Plugin/wiki">Getting Started</a><br>
+<strong>Unreal Plugin</strong><br><a href="https://github.com/modio/UE4Plugin">SDK</a><br><a href="https://github.com/modio/UE4Plugin/wiki">Getting Started</a><br><a href="https://github.com/modio/UE4Plugin">Example</a><br>
 </td>
 </tr>
 <tr>
@@ -828,6 +828,16 @@
 <td><img src="images/tool-python.png" alt="Python Wrapper"></td>
 <td>
 <strong>Python Wrapper</strong><br><a href="https://github.com/ClementJ18/mod.io">SDK</a><br><a href="https://github.com/ClementJ18/mod.io/#example">Getting Started</a><br><a href="https://github.com/ClementJ18/mod.io/tree/master/examples">Tutorials</a><br>
+</td>
+</tr>
+<tr>
+<td><img src="images/tool-c2.png" alt="Construct 2"></td>
+<td>
+<strong>Construct 2 Plugin</strong><br><a href="https://github.com/modio/C2Plugin">SDK</a><br><a href="https://github.com/modio/C2Plugin">Getting Started</a><br>
+</td>
+<td><img src="images/tool-cmd.png" alt="Command Line Tool"></td>
+<td>
+<strong>Command Line Tool</strong><br><a href="https://github.com/nickelc/modiom">CMD</a><br><a href="https://github.com/nickelc/modiom">Getting Started</a><br>
 </td>
 </tr>
 </tbody>
@@ -886,7 +896,7 @@
 <h3 id="api-key-authentication">API Key Authentication</h3>
 <p>To access the API authentication is required. All users and games get a private API key. It is quick and easy to use in your apps but limited to read-only GET requests, due to the limited security it offers. View your private API key(s) <a href="https://mod.io/apikey/widget" class="colorbox">on production</a> or on the <a href="https://test.mod.io/apikey/widget" class="colorbox">test environment</a>.</p>
 <h3 id="web-overlay-authentication">Web Overlay Authentication</h3>
-<p>At the moment it is not possible to open the mod.io website in-game with the user pre-authenticated, however you can provide a hint by appending <code>?ref=SERVICE</code> to the end of the URL. What this tells mod.io, is that when the user attempts to perform an action that requires authentication, they will be prompted to login with their <code>SERVICE</code> account. For example if you want to take a mod creator to their mod edit page in-game on Steam, the URL would look something like: <code>https://gamename.mod.io/modname/edit?ref=steam</code>. Services supported are <strong>steam</strong>, <strong>facebook</strong> and <strong>google</strong>. </p>
+<p>At the moment it is not possible to open the mod.io website in-game with the user pre-authenticated, however you can provide a hint by appending <code>?ref=SERVICE</code> to the end of the URL. What this tells mod.io, is that when the user attempts to perform an action that requires authentication, they will be prompted to login with their <code>SERVICE</code> account. For example if you want to take a mod creator to their mod edit page in-game on Steam, the URL would look something like: <code>https://gamename.mod.io/modname/edit?ref=steam</code>. You can optionally add <code>&amp;login=auto</code> as well to automatically start the login process. Services supported are <strong>steam</strong>, <strong>facebook</strong> and <strong>google</strong>. </p>
 <h3 id="scopes-oauth-2">Scopes (OAuth 2)</h3>
 <p>mod.io allows you to specify the permission each access token has (default is <em>read+write</em>), this is done by the use of scopes. See below for a full list of scopes available, you must include at least one scope when generating a new token.</p>
 
@@ -1305,7 +1315,7 @@ visible-st=1
 <code>?_offset=35&amp;_limit=5</code> - Will retrieve the next 5 results after ignoring the first 35 (36 - 40).</li>
 </ul>
 <h2 id="sorting">Sorting</h2>
-<p>All endpoints are sorted by the <code>id</code> column in ascending order by default. You can override this by including a <code>_sort</code> with the column you want to sort by in the request. You can sort on all columns <strong>in the parent object only</strong>. You cannot sort on columns in nested objects, so if a game contains a user you cannot sort on the <code>username</code> column, but you can sort by the games <code>name</code> since the column resides in the parent object.</p>
+<p>All endpoints are sorted by the <code>id</code> column in ascending order by default. You can override this by including a <code>_sort</code> with the column you want to sort by in the request. You can sort on all columns <strong>in the parent object only</strong>. You cannot sort on columns in nested objects, so if a game contains a tags object you cannot sort on the <code>tag name</code> column, but you can sort by the games <code>name</code> since the games <code>name</code> resides in the parent object.</p>
 
 <p><strong>NOTE:</strong> Some endpoints like <a href="#get-all-mods">Get All Mods</a> have special sort columns like <code>popular</code>, <code>downloads</code>, <code>rating</code> and <code>subscribers</code> which are documented alongside the filters.</p>
 <h3 id="_sort-sort">_sort (Sort)</h3><pre class="highlight plaintext"><code>v1/games?_sort=name
@@ -1317,7 +1327,7 @@ visible-st=1
 <li><p><code>?_sort=-name</code> - Sort <code>name</code> in descending order (by prepending a <code>-</code>)</p></li>
 </ul>
 <h2 id="filtering">Filtering</h2>
-<p>mod.io has powerful filtering available to assist you when making requests to the API. You can filter on all columns <strong>in the parent object only</strong>. You cannot apply filters to columns in nested objects, so if a game contains a user object you cannot filter by the <code>username</code> column, but you can filter by the games <code>name</code> since the column resides in the parent object.</p>
+<p>mod.io has powerful filtering available to assist you when making requests to the API. You can filter on all columns <strong>in the parent object only</strong>. You cannot apply filters to columns in nested objects, so if a game contains a tags object you cannot filter by the <code>tag name</code> column, but you can filter by the games <code>name</code> since the games <code>name</code> resides in the parent object.</p>
 <h3 id="_q-full-text-search">_q (Full text search)</h3><pre class="highlight plaintext"><code>v1/games?_q=The Lord Of The Rings
 </code></pre>
 <p>Full-text search is a lenient search filter that <em>is only available</em> if the endpoint you are querying contains a <code>name</code> column. Wildcards should <em>not</em> be applied to this filter as they are ignored.</p>
@@ -1453,7 +1463,7 @@ Accept-Language: de
     </span><span class="p">}</span><span class="w">
 </span><span class="p">}</span><span class="w">
 </span></code></pre>
-<p>The mod.io API provides localization for a collection of languages. To specify responses from the API to be in a particular language, simply provide the <code>Accept-Language</code> header with an <a href="https://www.iso.org/iso-639-language-codes.html">ISO 639 compliant</a> language code. If a valid language code is not provided and the user is authenticated, the language they have selected in <a href="#user-object">their profile</a> will be used. All other requests will default to English (US). The list of supported codes includes:</p>
+<p>The mod.io API provides localization for a collection of languages. To specify responses from the API to be in a particular language, simply provide the <code>Accept-Language</code> header with an <a href="https://www.iso.org/iso-639-language-codes.html">ISO 639 compliant</a> language code. If a valid language code is not provided and the user is authenticated, the language they have selected in their profile will be used. All other requests will default to English (US). The list of supported codes includes:</p>
 
 <table>
 <thead>
@@ -1577,7 +1587,7 @@ a non-english language you must supply the <code>Content-Language</code> header 
 <span class="na">X-RateLimit-Remaining</span><span class="p">:</span> <span class="s">87</span>
 </code></pre>
 <ul>
-<li>API keys linked to a user have <strong>unlimited requests</strong>.</li>
+<li>API keys linked to a user have <strong>60 requests per minute</strong>.</li>
 <li>API keys linked to a game have <strong>unlimited requests</strong>.</li>
 </ul>
 <h3 id="oauth2-rate-limiting">OAuth2 Rate Limiting</h3>
@@ -1614,7 +1624,7 @@ a non-english language you must supply the <code>Content-Language</code> header 
 <h2 id="contact">Contact</h2>
 <p>If you spot any errors within the mod.io documentation, have feedback on how we can make it easier to follow or simply want to discuss how awesome mods are, feel free to reach out anytime to <a href="mailto:developers@mod.io?subject=API">developers@mod.io</a> or come join us in our <a href="https://discord.mod.io">discord channel</a>. We are here to help you grow and maximise the potential of mods in your game.</p>
 <h1 id="authentication-2">Authentication</h1><h2 id="authenticate-via-email">Authenticate via Email</h2>
-<p>To perform writes, you will need to authenticate your users via OAuth 2. To make this frictionless in-game, we use an email verification system, similar to what Slack and others pioneered. It works by users supplying their email, which we send a time-limited 5 digit security code too. They exchange this code in-game, for an <a href="https://mod.io/oauth/widget" class="colorbox">OAuth 2 access token</a> you can save to authenticate future requests. The benefit of this approach is it avoids complex website redirects and doesn't require your users to complete a slow registration flow.</p>
+<p>To perform writes, you will need to authenticate your users via OAuth 2. To make this frictionless in-game, we offer an email verification system, similar to what Slack and others pioneered. It works by users supplying their email, which we send a time-limited 5 digit security code too. They exchange this code in-game, for an <a href="https://mod.io/oauth/widget" class="colorbox">OAuth 2 access token</a> you can save to authenticate future requests. The benefit of this approach is it avoids complex website redirects and doesn't require your users to complete a slow registration flow.</p>
 
 <p><img src="https://static.mod.io/v1/images/home/email.png" alt="mod.io Email Authentication Flow"></p>
 <pre class="highlight shell tab-shell"><code>// Example POST requesting security code be sent to supplied email
@@ -1630,9 +1640,7 @@ curl -X POST https://api.mod.io/v1/oauth/emailrequest <span class="se">\</span>
     </span><span class="s2">"message"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Enter the 5-digit security code sent to your email address (john.snow@westeros.com)"</span><span class="w">
 </span><span class="p">}</span><span class="w">
 </span></code></pre>
-<ul>
-<li>Step 1: Requesting a security code</li>
-</ul>
+<p><strong>Step 1: Requesting a security code</strong></p>
 
 <p>Request a <code>security_code</code> be sent to the email address of the user you wish to authenticate: </p>
 
@@ -1649,13 +1657,13 @@ curl -X POST https://api.mod.io/v1/oauth/emailrequest <span class="se">\</span>
 </thead>
 <tbody>
 <tr>
-<td><code>api_key</code></td>
+<td>api_key</td>
 <td>string</td>
 <td>true</td>
 <td>Your API key generated from 'API' tab within your game profile.</td>
 </tr>
 <tr>
-<td><code>email</code></td>
+<td>email</td>
 <td>string</td>
 <td>true</td>
 <td>A valid and secure email address your user has access to.</td>
@@ -1663,9 +1671,7 @@ curl -X POST https://api.mod.io/v1/oauth/emailrequest <span class="se">\</span>
 </tbody>
 </table>
 
-<ul>
-<li>Step 2: Exchanging security code for access token</li>
-</ul>
+<p><strong>Step 2: Exchanging security code for access token</strong></p>
 
 <p>After retrieving the 5-digit <code>security_code</code> sent to the email specified, you exchange it for an OAuth 2 <code>access_token</code>:</p>
 <pre class="highlight shell tab-shell"><code>// Example POST requesting access token with security code
@@ -1694,19 +1700,19 @@ curl -X POST https://api.mod.io/v1/oauth/emailexchange <span class="se">\</span>
 </thead>
 <tbody>
 <tr>
-<td><code>api_key</code></td>
+<td>api_key</td>
 <td>string</td>
 <td>true</td>
 <td>Your API key generated from 'API' tab within your game profile.</td>
 </tr>
 <tr>
-<td><code>security_code</code></td>
+<td>security_code</td>
 <td>string</td>
 <td>true</td>
 <td>Unique 5-digit code sent to the email address supplied in the previous request.</td>
 </tr>
 <tr>
-<td><code>date_expires</code></td>
+<td>date_expires</td>
 <td>integer</td>
 <td></td>
 <td>Unix timestamp of date in which the returned token will expire. Value cannot be higher than the default value which is a common year (unix timestamp + 31536000 seconds). Using a token after it's expiry time has elapsed will result in a <code>401 Unauthorized</code> response.</td>
@@ -1724,7 +1730,9 @@ curl -X POST https://api.mod.io/v1/oauth/emailexchange <span class="se">\</span>
 </ul>
 
 <p>If you do not exchange your <code>security_code</code> for an <code>access_token</code> within 15 minutes of generation, you will need to begin the flow again to receive another code.</p>
-<h4 id="step-3-use-access-token-to-access-resources">Step 3: Use access token to access resources.</h4>
+
+<p><strong>Step 3: Use access token to access resources</strong></p>
+
 <p>See <a href="#making-requests">Making Requests</a> section.</p>
 <h2 id="authenticate-via-steam">Authenticate via Steam</h2>
 <blockquote>
@@ -1804,7 +1812,7 @@ curl -X POST https://api.mod.io/v1/external/steamauth?api_key<span class="o">=</
 </code></pre>
 <p><span class="httpmethod POST">POST</span> <span class="endpointheading">/external/steamauth</span></p>
 
-<p>Request an access token on behalf of a Steam user. To use this functionality you <em>must</em> supply your games <a href="https://partner.steamgames.com/apps/sdkauth">encrypted app ticket key</a> supplied by Steamworks, in the <em>Edit &gt; Options</em> page of your games profile on mod.io. A Successful request will return an <a href="#access-token-object">Access Token Object</a>.</p>
+<p>Request an access token on behalf of a Steam user. To use this functionality you <em>must</em> supply your games <a href="https://partner.steamgames.com/apps/sdkauth">encrypted app ticket key</a> supplied by Steamworks, in the <em>Edit &gt; Options</em> page of your games profile on mod.io. A Successful request will return an <a href="#access-token-object">Access Token Object</a>.<br><br><strong>HINT:</strong> If you want to overlay the mod.io site in-game, we recommend you add <code>?ref=steam</code> to the end of the URL you open which will prompt the user to login with Steam. See <a href="#web-overlay-authentication">Web Overlay Authentication</a> for details.</p>
 
 <table>
 <thead>
@@ -2094,7 +2102,7 @@ curl -X POST https://api.mod.io/v1/external/itchioauth?api_key<span class="o">=<
 </code></pre>
 <p><span class="httpmethod POST">POST</span> <span class="endpointheading">/external/itchioauth</span></p>
 
-<p>Request an access token on behalf of an itch.io user via the itch desktop app. Due to the desktop application allowing multiple users to be logged in at once, if more than one user is logged in then the user at the top of that list on the itch.io login dialog will be the authenticating user. A Successful request will return an <a href="#access-token-object">Access Token Object</a>.</p>
+<p>Request an access token on behalf of an itch.io user via the itch.io desktop app. Due to the desktop application allowing multiple users to be logged in at once, if more than one user is logged in then the user at the top of that list on the itch.io login dialog will be the authenticating user. A Successful request will return an <a href="#access-token-object">Access Token Object</a>.</p>
 
 <table>
 <thead>
@@ -2110,7 +2118,7 @@ curl -X POST https://api.mod.io/v1/external/itchioauth?api_key<span class="o">=<
 <td>itchio_token</td>
 <td>string</td>
 <td>true</td>
-<td>The <a href="https://itch.io/docs/itch/integrating/manifest-actions.html">JWT Token</a> provided by the itch.io desktop application to your game as the environment variable <code>ITCHIO_API_KEY</code>. You must setup your itch.io app manifest to include the <a href="https://itch.io/docs/itch/integrating/manifest-actions.html">API scope</a> to force itch to set this variable.</td>
+<td>The <a href="https://itch.io/docs/itch/integrating/manifest-actions.html">JWT Token</a> provided by the itch.io desktop application to your game as the environment variable <code>ITCHIO_API_KEY</code>. You must setup your itch.io app manifest to include the <a href="https://itch.io/docs/itch/integrating/manifest-actions.html">API scope</a> to force itch.io to set this variable.</td>
 </tr>
 <tr>
 <td>email</td>
@@ -2152,7 +2160,7 @@ curl -X POST https://api.mod.io/v1/external/itchioauth?api_key<span class="o">=<
 <td>200</td>
 <td><a href="https://tools.ietf.org/html/rfc7231#section-6.3.1">OK</a></td>
 <td>Successful Request</td>
-<td><a href="#schemaaccess_token_object">Access Token Object  </a></td>
+<td><a href="#schemaaccess_token_object">Access Token Object</a></td>
 </tr>
 </tbody>
 </table>
@@ -2271,7 +2279,7 @@ curl -X POST https://api.mod.io/v1/external/oculusauth?api_key<span class="o">=<
 <td>access_token</td>
 <td>string</td>
 <td>true</td>
-<td>The user's access token, providing by calling <a href="https://developer.oculus.com/documentation/platform/latest/concepts/dg-ownership/">ovr_User_GetAccessToken()</a> from the Oculus SDK. mod.io uses this access token on the first login only to obtain the user's username and is not saved on our servers.</td>
+<td>The user's access token, providing by calling <a href="https://developer.oculus.com/documentation/platform/latest/concepts/dg-ownership/">ovr_User_GetAccessToken()</a> from the Oculus SDK. mod.io uses this access token on the first login only to obtain the user's alias and is not saved on our servers.</td>
 </tr>
 <tr>
 <td>email</td>
@@ -2426,14 +2434,14 @@ curl -X POST https://api.mod.io/v1/external/link <span class="se">\</span>
 <td>service</td>
 <td>string</td>
 <td>true</td>
-<td>The external service where the user's account originates.<br><br>Possible Options:<br>- <em>steam</em><br>- <em>gog</em>
+<td>The external service where the user's account originates.<br><br>Possible Options:<br>- <em>steam</em><br>- <em>gog</em><br>- <em>itch</em>
 </td>
 </tr>
 <tr>
 <td>service_id</td>
 <td>string</td>
 <td>true</td>
-<td>The external service id which is associated with the provided access token. For example, if you requested an access token via the <a href="#authenticate-via-steam">Steam Authentication</a> endpoint, the service_id would be the user's Steam ID. For security reasons, this ID must match with the service parameter provided, and also be associated with the access token used in the request. <br><br>Service ID formats:<br>- <em>steam</em> (Integer, 17 characters, Community ID format)<br>- <em>gog</em> (Integer, 12 characters)<br>- <em>itchio</em> (Integer, 5 characters)</td>
+<td>The external service id which is associated with the provided access token. For example, if you requested an access token via the <a href="#authenticate-via-steam">Steam Authentication</a> endpoint, the service_id would be the user's Steam ID. For security reasons, this ID must match with the service parameter provided, and also be associated with the access token used in the request. <br><br>Service ID formats:<br>- <em>steam</em> (Integer, 17 characters, Community ID format)<br>- <em>gog</em> (Integer, 12 characters)<br>- <em>itchio</em> (Integer, 6 characters)</td>
 </tr>
 <tr>
 <td>email</td>
@@ -2597,7 +2605,7 @@ Accept: application/json
 <tr>
 <td>name_id</td>
 <td>string</td>
-<td>Subdomain for the game on mod.io.</td>
+<td>Subdomain for the game on mod.io. For example: https://gamename.mod.io</td>
 </tr>
 <tr>
 <td>summary</td>
@@ -2632,7 +2640,7 @@ Accept: application/json
 <tr>
 <td>community_options</td>
 <td>integer</td>
-<td>Community features enabled on the mod.io website:<br><br><strong>0</strong> = All of the options below are disabled<br><strong>1</strong> = Discussion board enabled<br><strong>2</strong> = Guides and news enabled<br><strong>?</strong> = Combine to find games with multiple options enabled (see <a href="#bitwise-and-bitwise-and">BITWISE fields</a>)</td>
+<td>Community features enabled on the mod.io website:<br><br><strong>0</strong> = All of the options below are disabled<br><strong>1</strong> = Comments enabled<br><strong>2</strong> = Guides enabled<br><strong>?</strong> = Combine to find games with multiple options enabled (see <a href="#bitwise-and-bitwise-and">BITWISE fields</a>)</td>
 </tr>
 <tr>
 <td>revenue_options</td>
@@ -2671,8 +2679,8 @@ Accept: application/json
           </span><span class="s2">"thumb_50x50"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://static.mod.io/v1/images/branding/modio-color-dark.png"</span><span class="p">,</span><span class="w">
           </span><span class="s2">"thumb_100x100"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://static.mod.io/v1/images/branding/modio-color-dark.png"</span><span class="w">
         </span><span class="p">},</span><span class="w">
-        </span><span class="s2">"timezone"</span><span class="p">:</span><span class="w"> </span><span class="s2">"America/Los_Angeles"</span><span class="p">,</span><span class="w">
-        </span><span class="s2">"language"</span><span class="p">:</span><span class="w"> </span><span class="s2">"en"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"timezone"</span><span class="p">:</span><span class="w"> </span><span class="s2">""</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"language"</span><span class="p">:</span><span class="w"> </span><span class="s2">""</span><span class="p">,</span><span class="w">
         </span><span class="s2">"profile_url"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://mod.io/members/xant"</span><span class="w">
       </span><span class="p">},</span><span class="w">
       </span><span class="s2">"date_added"</span><span class="p">:</span><span class="w"> </span><span class="mi">1493702614</span><span class="p">,</span><span class="w">
@@ -2846,8 +2854,8 @@ Accept: application/json
       </span><span class="s2">"thumb_50x50"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://static.mod.io/v1/images/branding/modio-color-dark.png"</span><span class="p">,</span><span class="w">
       </span><span class="s2">"thumb_100x100"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://static.mod.io/v1/images/branding/modio-color-dark.png"</span><span class="w">
     </span><span class="p">},</span><span class="w">
-    </span><span class="s2">"timezone"</span><span class="p">:</span><span class="w"> </span><span class="s2">"America/Los_Angeles"</span><span class="p">,</span><span class="w">
-    </span><span class="s2">"language"</span><span class="p">:</span><span class="w"> </span><span class="s2">"en"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"timezone"</span><span class="p">:</span><span class="w"> </span><span class="s2">""</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"language"</span><span class="p">:</span><span class="w"> </span><span class="s2">""</span><span class="p">,</span><span class="w">
     </span><span class="s2">"profile_url"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://mod.io/members/xant"</span><span class="w">
   </span><span class="p">},</span><span class="w">
   </span><span class="s2">"date_added"</span><span class="p">:</span><span class="w"> </span><span class="mi">1493702614</span><span class="p">,</span><span class="w">
@@ -3034,7 +3042,7 @@ Content-Type: application/x-www-form-urlencoded
 <td>name_id</td>
 <td>string</td>
 <td></td>
-<td>Subdomain for the game on mod.io. Highly recommended to not change this unless absolutely required. Cannot exceed 20 characters.</td>
+<td>Subdomain for the game on mod.io. For example: https://gamename.mod.io. Highly recommended to not change this unless absolutely required. Cannot exceed 20 characters.</td>
 </tr>
 <tr>
 <td>summary</td>
@@ -3082,13 +3090,13 @@ Content-Type: application/x-www-form-urlencoded
 <td>community_options</td>
 <td>integer</td>
 <td></td>
-<td>Choose the community features enabled on the mod.io website:<br><br><strong>0</strong> = All of the options below are disabled<br><strong>1</strong> = Discussion board enabled<br><strong>2</strong> = Guides and news enabled<br><strong>?</strong> = Add the options you want together, to enable multiple features (see <a href="#bitwise-and-bitwise-and">BITWISE fields</a>)</td>
+<td>Choose the community features enabled on the mod.io website:<br><br><strong>0</strong> = All of the options below are disabled<br><strong>1</strong> = Comments enabled<br><strong>2</strong> = Guides enabled<br><strong>?</strong> = Add the options you want together, to enable multiple features (see <a href="#bitwise-and-bitwise-and">BITWISE fields</a>)</td>
 </tr>
 <tr>
 <td>revenue_options</td>
 <td>integer</td>
 <td></td>
-<td>Choose the revenue capabilities mods can enable:<br><br><strong>0</strong> = All of the options below are disabled<br><strong>1</strong> = Allow mods to be sold<br><strong>2</strong> = Allow mods to receive donations<br><strong>4</strong> = Allow mods to be traded (not subject to revenue share)<br><strong>8</strong> = Allow mods to control supply and scarcity<br><strong>?</strong> = Add the options you want together, to enable multiple features (see <a href="#bitwise-and-bitwise-and">BITWISE fields</a>)</td>
+<td>Choose the revenue capabilities mods can enable:<br><br><strong>0</strong> = All of the options below are disabled<br><strong>1</strong> = Allow mods to be sold<br><strong>2</strong> = Allow mods to receive donations<br><strong>4</strong> = Allow mods to be traded<br><strong>8</strong> = Allow mods to control supply and scarcity<br><strong>?</strong> = Add the options you want together, to enable multiple features (see <a href="#bitwise-and-bitwise-and">BITWISE fields</a>)</td>
 </tr>
 <tr>
 <td>api_access_options</td>
@@ -3122,8 +3130,8 @@ Content-Type: application/x-www-form-urlencoded
       </span><span class="s2">"thumb_50x50"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://static.mod.io/v1/images/branding/modio-color-dark.png"</span><span class="p">,</span><span class="w">
       </span><span class="s2">"thumb_100x100"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://static.mod.io/v1/images/branding/modio-color-dark.png"</span><span class="w">
     </span><span class="p">},</span><span class="w">
-    </span><span class="s2">"timezone"</span><span class="p">:</span><span class="w"> </span><span class="s2">"America/Los_Angeles"</span><span class="p">,</span><span class="w">
-    </span><span class="s2">"language"</span><span class="p">:</span><span class="w"> </span><span class="s2">"en"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"timezone"</span><span class="p">:</span><span class="w"> </span><span class="s2">""</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"language"</span><span class="p">:</span><span class="w"> </span><span class="s2">""</span><span class="p">,</span><span class="w">
     </span><span class="s2">"profile_url"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://mod.io/members/xant"</span><span class="w">
   </span><span class="p">},</span><span class="w">
   </span><span class="s2">"date_added"</span><span class="p">:</span><span class="w"> </span><span class="mi">1493702614</span><span class="p">,</span><span class="w">
@@ -3415,8 +3423,8 @@ Accept: application/json
           </span><span class="s2">"thumb_50x50"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://static.mod.io/v1/images/branding/modio-color-dark.png"</span><span class="p">,</span><span class="w">
           </span><span class="s2">"thumb_100x100"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://static.mod.io/v1/images/branding/modio-color-dark.png"</span><span class="w">
         </span><span class="p">},</span><span class="w">
-        </span><span class="s2">"timezone"</span><span class="p">:</span><span class="w"> </span><span class="s2">"America/Los_Angeles"</span><span class="p">,</span><span class="w">
-        </span><span class="s2">"language"</span><span class="p">:</span><span class="w"> </span><span class="s2">"en"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"timezone"</span><span class="p">:</span><span class="w"> </span><span class="s2">""</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"language"</span><span class="p">:</span><span class="w"> </span><span class="s2">""</span><span class="p">,</span><span class="w">
         </span><span class="s2">"profile_url"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://mod.io/members/xant"</span><span class="w">
       </span><span class="p">},</span><span class="w">
       </span><span class="s2">"date_added"</span><span class="p">:</span><span class="w"> </span><span class="mi">1492564103</span><span class="p">,</span><span class="w">
@@ -3628,8 +3636,8 @@ Accept: application/json
       </span><span class="s2">"thumb_50x50"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://static.mod.io/v1/images/branding/modio-color-dark.png"</span><span class="p">,</span><span class="w">
       </span><span class="s2">"thumb_100x100"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://static.mod.io/v1/images/branding/modio-color-dark.png"</span><span class="w">
     </span><span class="p">},</span><span class="w">
-    </span><span class="s2">"timezone"</span><span class="p">:</span><span class="w"> </span><span class="s2">"America/Los_Angeles"</span><span class="p">,</span><span class="w">
-    </span><span class="s2">"language"</span><span class="p">:</span><span class="w"> </span><span class="s2">"en"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"timezone"</span><span class="p">:</span><span class="w"> </span><span class="s2">""</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"language"</span><span class="p">:</span><span class="w"> </span><span class="s2">""</span><span class="p">,</span><span class="w">
     </span><span class="s2">"profile_url"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://mod.io/members/xant"</span><span class="w">
   </span><span class="p">},</span><span class="w">
   </span><span class="s2">"date_added"</span><span class="p">:</span><span class="w"> </span><span class="mi">1492564103</span><span class="p">,</span><span class="w">
@@ -3828,7 +3836,7 @@ curl -X POST https://api.mod.io/v1/games/<span class="o">{</span>game-id<span cl
 </code></pre>
 <p><span class="httpmethod POST">POST</span> <span class="endpointheading">/games/{game-id}/mods</span></p>
 
-<p>Add a mod. Successful request will return the newly created <a href="#mod-object">Mod Object</a>. By publishing your mod on <a href="https://mod.io">mod.io</a>, you are agreeing to the <a href="https://mod.io/distribution/widget" class="colorbox">mod.io distribution agreement</a>.<br><br><strong>NOTE:</strong> By default new mods are 'not accepted' and 'public'. They can only be 'accepted' and made available via the API once a <a href="#add-modfile">Mod File</a> has been uploaded. <a href="#add-mod-media">Media</a>, <a href="#add-mod-kvp-metadata">Metadata Key Value Pairs</a> and <a href="#add-mod-dependencies">Dependencies</a> can also be added after a mod profile is created.</p>
+<p>Add a mod. Successful request will return the newly created <a href="#mod-object">Mod Object</a>. All content published by users on <a href="https://mod.io">mod.io</a> is subject to the <a href="https://mod.io/terms/widget" class="colorbox">mod.io Terms of Use</a>. It is a requirement that you provide a link to https://mod.io/terms in any place where users are submitting content to mod.io.<br><br><strong>NOTE:</strong> By default new mods are 'not accepted' and 'public'. They can only be 'accepted' and made available via the API once a <a href="#add-modfile">Mod File</a> has been uploaded. <a href="#add-mod-media">Media</a>, <a href="#add-mod-kvp-metadata">Metadata Key Value Pairs</a> and <a href="#add-mod-dependencies">Dependencies</a> can also be added after a mod profile is created.</p>
 
 <table>
 <thead>
@@ -3929,8 +3937,8 @@ curl -X POST https://api.mod.io/v1/games/<span class="o">{</span>game-id<span cl
       </span><span class="s2">"thumb_50x50"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://static.mod.io/v1/images/branding/modio-color-dark.png"</span><span class="p">,</span><span class="w">
       </span><span class="s2">"thumb_100x100"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://static.mod.io/v1/images/branding/modio-color-dark.png"</span><span class="w">
     </span><span class="p">},</span><span class="w">
-    </span><span class="s2">"timezone"</span><span class="p">:</span><span class="w"> </span><span class="s2">"America/Los_Angeles"</span><span class="p">,</span><span class="w">
-    </span><span class="s2">"language"</span><span class="p">:</span><span class="w"> </span><span class="s2">"en"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"timezone"</span><span class="p">:</span><span class="w"> </span><span class="s2">""</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"language"</span><span class="p">:</span><span class="w"> </span><span class="s2">""</span><span class="p">,</span><span class="w">
     </span><span class="s2">"profile_url"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://mod.io/members/xant"</span><span class="w">
   </span><span class="p">},</span><span class="w">
   </span><span class="s2">"date_added"</span><span class="p">:</span><span class="w"> </span><span class="mi">1492564103</span><span class="p">,</span><span class="w">
@@ -4238,8 +4246,8 @@ Content-Type: application/x-www-form-urlencoded
       </span><span class="s2">"thumb_50x50"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://static.mod.io/v1/images/branding/modio-color-dark.png"</span><span class="p">,</span><span class="w">
       </span><span class="s2">"thumb_100x100"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://static.mod.io/v1/images/branding/modio-color-dark.png"</span><span class="w">
     </span><span class="p">},</span><span class="w">
-    </span><span class="s2">"timezone"</span><span class="p">:</span><span class="w"> </span><span class="s2">"America/Los_Angeles"</span><span class="p">,</span><span class="w">
-    </span><span class="s2">"language"</span><span class="p">:</span><span class="w"> </span><span class="s2">"en"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"timezone"</span><span class="p">:</span><span class="w"> </span><span class="s2">""</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"language"</span><span class="p">:</span><span class="w"> </span><span class="s2">""</span><span class="p">,</span><span class="w">
     </span><span class="s2">"profile_url"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://mod.io/members/xant"</span><span class="w">
   </span><span class="p">},</span><span class="w">
   </span><span class="s2">"date_added"</span><span class="p">:</span><span class="w"> </span><span class="mi">1492564103</span><span class="p">,</span><span class="w">
@@ -5892,8 +5900,8 @@ Content-Type: application/x-www-form-urlencoded
       </span><span class="s2">"thumb_50x50"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://static.mod.io/v1/images/branding/modio-color-dark.png"</span><span class="p">,</span><span class="w">
       </span><span class="s2">"thumb_100x100"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://static.mod.io/v1/images/branding/modio-color-dark.png"</span><span class="w">
     </span><span class="p">},</span><span class="w">
-    </span><span class="s2">"timezone"</span><span class="p">:</span><span class="w"> </span><span class="s2">"America/Los_Angeles"</span><span class="p">,</span><span class="w">
-    </span><span class="s2">"language"</span><span class="p">:</span><span class="w"> </span><span class="s2">"en"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"timezone"</span><span class="p">:</span><span class="w"> </span><span class="s2">""</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"language"</span><span class="p">:</span><span class="w"> </span><span class="s2">""</span><span class="p">,</span><span class="w">
     </span><span class="s2">"profile_url"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://mod.io/members/xant"</span><span class="w">
   </span><span class="p">},</span><span class="w">
   </span><span class="s2">"date_added"</span><span class="p">:</span><span class="w"> </span><span class="mi">1492564103</span><span class="p">,</span><span class="w">
@@ -8712,8 +8720,8 @@ Accept: application/json
           </span><span class="s2">"thumb_50x50"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://static.mod.io/v1/images/branding/modio-color-dark.png"</span><span class="p">,</span><span class="w">
           </span><span class="s2">"thumb_100x100"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://static.mod.io/v1/images/branding/modio-color-dark.png"</span><span class="w">
         </span><span class="p">},</span><span class="w">
-        </span><span class="s2">"timezone"</span><span class="p">:</span><span class="w"> </span><span class="s2">"America/Los_Angeles"</span><span class="p">,</span><span class="w">
-        </span><span class="s2">"language"</span><span class="p">:</span><span class="w"> </span><span class="s2">"en"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"timezone"</span><span class="p">:</span><span class="w"> </span><span class="s2">""</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"language"</span><span class="p">:</span><span class="w"> </span><span class="s2">""</span><span class="p">,</span><span class="w">
         </span><span class="s2">"profile_url"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://mod.io/members/xant"</span><span class="w">
       </span><span class="p">},</span><span class="w">
       </span><span class="s2">"level"</span><span class="p">:</span><span class="w"> </span><span class="mi">8</span><span class="p">,</span><span class="w">
@@ -9334,8 +9342,8 @@ Accept: application/json
           </span><span class="s2">"thumb_50x50"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://static.mod.io/v1/images/branding/modio-color-dark.png"</span><span class="p">,</span><span class="w">
           </span><span class="s2">"thumb_100x100"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://static.mod.io/v1/images/branding/modio-color-dark.png"</span><span class="w">
         </span><span class="p">},</span><span class="w">
-        </span><span class="s2">"timezone"</span><span class="p">:</span><span class="w"> </span><span class="s2">"America/Los_Angeles"</span><span class="p">,</span><span class="w">
-        </span><span class="s2">"language"</span><span class="p">:</span><span class="w"> </span><span class="s2">"en"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"timezone"</span><span class="p">:</span><span class="w"> </span><span class="s2">""</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"language"</span><span class="p">:</span><span class="w"> </span><span class="s2">""</span><span class="p">,</span><span class="w">
         </span><span class="s2">"profile_url"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://mod.io/members/xant"</span><span class="w">
       </span><span class="p">},</span><span class="w">
       </span><span class="s2">"date_added"</span><span class="p">:</span><span class="w"> </span><span class="mi">1499841487</span><span class="p">,</span><span class="w">
@@ -9470,8 +9478,8 @@ Accept: application/json
       </span><span class="s2">"thumb_50x50"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://static.mod.io/v1/images/branding/modio-color-dark.png"</span><span class="p">,</span><span class="w">
       </span><span class="s2">"thumb_100x100"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://static.mod.io/v1/images/branding/modio-color-dark.png"</span><span class="w">
     </span><span class="p">},</span><span class="w">
-    </span><span class="s2">"timezone"</span><span class="p">:</span><span class="w"> </span><span class="s2">"America/Los_Angeles"</span><span class="p">,</span><span class="w">
-    </span><span class="s2">"language"</span><span class="p">:</span><span class="w"> </span><span class="s2">"en"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"timezone"</span><span class="p">:</span><span class="w"> </span><span class="s2">""</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"language"</span><span class="p">:</span><span class="w"> </span><span class="s2">""</span><span class="p">,</span><span class="w">
     </span><span class="s2">"profile_url"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://mod.io/members/xant"</span><span class="w">
   </span><span class="p">},</span><span class="w">
   </span><span class="s2">"date_added"</span><span class="p">:</span><span class="w"> </span><span class="mi">1499841487</span><span class="p">,</span><span class="w">
@@ -9747,8 +9755,8 @@ Content-Type: application/x-www-form-urlencoded
     </span><span class="s2">"thumb_50x50"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://static.mod.io/v1/images/branding/modio-color-dark.png"</span><span class="p">,</span><span class="w">
     </span><span class="s2">"thumb_100x100"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://static.mod.io/v1/images/branding/modio-color-dark.png"</span><span class="w">
   </span><span class="p">},</span><span class="w">
-  </span><span class="s2">"timezone"</span><span class="p">:</span><span class="w"> </span><span class="s2">"America/Los_Angeles"</span><span class="p">,</span><span class="w">
-  </span><span class="s2">"language"</span><span class="p">:</span><span class="w"> </span><span class="s2">"en"</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"timezone"</span><span class="p">:</span><span class="w"> </span><span class="s2">""</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"language"</span><span class="p">:</span><span class="w"> </span><span class="s2">""</span><span class="p">,</span><span class="w">
   </span><span class="s2">"profile_url"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://mod.io/members/xant"</span><span class="w">
 </span><span class="p">}</span><span class="w">
 </span></code></pre>
@@ -9871,7 +9879,7 @@ curl -X POST https://api.mod.io/v1/report <span class="se">\</span>
 </code></pre>
 <p><span class="httpmethod POST">POST</span> <span class="endpointheading">/report</span></p>
 
-<p>Submit a report for any resource on mod.io. Successful request will return <a href="#message-object">Message Object</a>.<br><br><strong>NOTE:</strong> You can also <a href="https://mod.io/report/widget" class="colorbox">submit a report online</a> and read our <a href="https://mod.io/terms/widget" class="colorbox">terms of use</a> for information about what is/isn't acceptable.</p>
+<p>Report a resource on mod.io. You are responsible for content your users submit, so properly supporting the report endpoint is important (<a href="https://mod.io/report/widget" class="colorbox">see how we do it</a>). Successful request will return <a href="#message-object">Message Object</a>.<br><br><strong>NOTE:</strong> If you are a game owner or manager, you can <a href="https://mod.io/messages/reports">view all reports</a> submitted for your game. You can also configure in your games control panel the number of reports required before content is automatically taken down for review.<br><br><strong>NOTE:</strong> You can also <a href="https://mod.io/report/widget" class="colorbox">submit a report online</a> and read our <a href="https://mod.io/terms/widget" class="colorbox">terms of use</a> for information about what is/isn't acceptable.</p>
 
 <table>
 <thead>
@@ -10056,9 +10064,9 @@ curl -X POST https://api.mod.io/v1/batch <span class="se">\</span>
 
 <p>The following applies to all batch requests:</p>
 
-<p>- Who you authenticate as for the parent batch request, you will be assumed that entity for <em>all</em> sub-requests.<br>
-     - Authorization headers passed into sub-requests are ignored.<br>
-     - You cannot make more than 20 requests within a batch.  </p>
+<p>- Who you authenticate as for the parent batch request, you will be assumed that entity for <em>all</em> sub-requests.
+     - Authorization headers passed into sub-requests are ignored.
+     - You cannot make more than 20 requests within a batch.</p>
 
 <p><strong>Batch Dependencies</strong></p>
 
@@ -10070,10 +10078,10 @@ curl -X POST https://api.mod.io/v1/batch <span class="se">\</span>
 
 <p><strong>What will it require?</strong></p>
 
-<p>This will require three requests:<br>
-     1. <a href="#get-all-mods">GET /v1/games/{game-id}/mods</a><br>
-     2. <a href="#get-user-subscriptions">GET /v1/me/subscribed</a><br>
-     3. <a href="#get-user-ratings">GET /v1/me/ratings</a>  </p>
+<p>This will require three requests:
+     1. <a href="#get-all-mods">GET /v1/games/{game-id}/mods</a>
+     2. <a href="#get-user-subscriptions">GET /v1/me/subscribed</a>
+     3. <a href="#get-user-ratings">GET /v1/me/ratings</a></p>
 
 <p>In total, we are making 3 requests in a synchronous manner, inside a single request. Based on the above example, we need to know how to get the <code>id</code> value of the <a href="#mod-object">Mod Object</a> from Request #1 and provide it as a dependency to the subsequent requests.</p>
 
@@ -10241,8 +10249,8 @@ curl -X POST https://api.mod.io/v1/batch <span class="se">\</span>
                 </span><span class="s2">"thumb_50x50"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://static.mod.io/v1/images/branding/modio-color-dark.png"</span><span class="p">,</span><span class="w">
                 </span><span class="s2">"thumb_100x100"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://static.mod.io/v1/images/branding/modio-color-dark.png"</span><span class="w">
               </span><span class="p">},</span><span class="w">
-              </span><span class="s2">"timezone"</span><span class="p">:</span><span class="w"> </span><span class="s2">"America/Los_Angeles"</span><span class="p">,</span><span class="w">
-              </span><span class="s2">"language"</span><span class="p">:</span><span class="w"> </span><span class="s2">"en"</span><span class="p">,</span><span class="w">
+              </span><span class="s2">"timezone"</span><span class="p">:</span><span class="w"> </span><span class="s2">""</span><span class="p">,</span><span class="w">
+              </span><span class="s2">"language"</span><span class="p">:</span><span class="w"> </span><span class="s2">""</span><span class="p">,</span><span class="w">
               </span><span class="s2">"profile_url"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://mod.io/members/xant"</span><span class="w">
             </span><span class="p">},</span><span class="w">
             </span><span class="s2">"date_added"</span><span class="p">:</span><span class="w"> </span><span class="mi">1492564103</span><span class="p">,</span><span class="w">
@@ -10458,8 +10466,8 @@ Authorization: Bearer {access-token}
     </span><span class="s2">"thumb_50x50"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://static.mod.io/v1/images/branding/modio-color-dark.png"</span><span class="p">,</span><span class="w">
     </span><span class="s2">"thumb_100x100"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://static.mod.io/v1/images/branding/modio-color-dark.png"</span><span class="w">
   </span><span class="p">},</span><span class="w">
-  </span><span class="s2">"timezone"</span><span class="p">:</span><span class="w"> </span><span class="s2">"America/Los_Angeles"</span><span class="p">,</span><span class="w">
-  </span><span class="s2">"language"</span><span class="p">:</span><span class="w"> </span><span class="s2">"en"</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"timezone"</span><span class="p">:</span><span class="w"> </span><span class="s2">""</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"language"</span><span class="p">:</span><span class="w"> </span><span class="s2">""</span><span class="p">,</span><span class="w">
   </span><span class="s2">"profile_url"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://mod.io/members/xant"</span><span class="w">
 </span><span class="p">}</span><span class="w">
 </span></code></pre>
@@ -10686,8 +10694,8 @@ Authorization: Bearer {access-token}
           </span><span class="s2">"thumb_50x50"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://static.mod.io/v1/images/branding/modio-color-dark.png"</span><span class="p">,</span><span class="w">
           </span><span class="s2">"thumb_100x100"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://static.mod.io/v1/images/branding/modio-color-dark.png"</span><span class="w">
         </span><span class="p">},</span><span class="w">
-        </span><span class="s2">"timezone"</span><span class="p">:</span><span class="w"> </span><span class="s2">"America/Los_Angeles"</span><span class="p">,</span><span class="w">
-        </span><span class="s2">"language"</span><span class="p">:</span><span class="w"> </span><span class="s2">"en"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"timezone"</span><span class="p">:</span><span class="w"> </span><span class="s2">""</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"language"</span><span class="p">:</span><span class="w"> </span><span class="s2">""</span><span class="p">,</span><span class="w">
         </span><span class="s2">"profile_url"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://mod.io/members/xant"</span><span class="w">
       </span><span class="p">},</span><span class="w">
       </span><span class="s2">"date_added"</span><span class="p">:</span><span class="w"> </span><span class="mi">1492564103</span><span class="p">,</span><span class="w">
@@ -11096,7 +11104,7 @@ Authorization: Bearer {access-token}
 <tr>
 <td>name_id</td>
 <td>string</td>
-<td>Subdomain for the game on mod.io.</td>
+<td>Subdomain for the game on mod.io. For example: https://gamename.mod.io</td>
 </tr>
 <tr>
 <td>summary</td>
@@ -11131,7 +11139,7 @@ Authorization: Bearer {access-token}
 <tr>
 <td>community_options</td>
 <td>integer</td>
-<td>Community features enabled on the mod.io website:<br><br><strong>0</strong> = All of the options below are disabled<br><strong>1</strong> = Discussion board enabled<br><strong>2</strong> = Guides and news enabled<br><strong>?</strong> = Combine to find games with multiple options enabled (see <a href="#bitwise-and-bitwise-and">BITWISE fields</a>)</td>
+<td>Community features enabled on the mod.io website:<br><br><strong>0</strong> = All of the options below are disabled<br><strong>1</strong> = Comments enabled<br><strong>2</strong> = Guides enabled<br><strong>?</strong> = Combine to find games with multiple options enabled (see <a href="#bitwise-and-bitwise-and">BITWISE fields</a>)</td>
 </tr>
 <tr>
 <td>revenue_options</td>
@@ -11165,8 +11173,8 @@ Authorization: Bearer {access-token}
           </span><span class="s2">"thumb_50x50"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://static.mod.io/v1/images/branding/modio-color-dark.png"</span><span class="p">,</span><span class="w">
           </span><span class="s2">"thumb_100x100"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://static.mod.io/v1/images/branding/modio-color-dark.png"</span><span class="w">
         </span><span class="p">},</span><span class="w">
-        </span><span class="s2">"timezone"</span><span class="p">:</span><span class="w"> </span><span class="s2">"America/Los_Angeles"</span><span class="p">,</span><span class="w">
-        </span><span class="s2">"language"</span><span class="p">:</span><span class="w"> </span><span class="s2">"en"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"timezone"</span><span class="p">:</span><span class="w"> </span><span class="s2">""</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"language"</span><span class="p">:</span><span class="w"> </span><span class="s2">""</span><span class="p">,</span><span class="w">
         </span><span class="s2">"profile_url"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://mod.io/members/xant"</span><span class="w">
       </span><span class="p">},</span><span class="w">
       </span><span class="s2">"date_added"</span><span class="p">:</span><span class="w"> </span><span class="mi">1493702614</span><span class="p">,</span><span class="w">
@@ -11468,8 +11476,8 @@ Authorization: Bearer {access-token}
           </span><span class="s2">"thumb_50x50"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://static.mod.io/v1/images/branding/modio-color-dark.png"</span><span class="p">,</span><span class="w">
           </span><span class="s2">"thumb_100x100"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://static.mod.io/v1/images/branding/modio-color-dark.png"</span><span class="w">
         </span><span class="p">},</span><span class="w">
-        </span><span class="s2">"timezone"</span><span class="p">:</span><span class="w"> </span><span class="s2">"America/Los_Angeles"</span><span class="p">,</span><span class="w">
-        </span><span class="s2">"language"</span><span class="p">:</span><span class="w"> </span><span class="s2">"en"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"timezone"</span><span class="p">:</span><span class="w"> </span><span class="s2">""</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"language"</span><span class="p">:</span><span class="w"> </span><span class="s2">""</span><span class="p">,</span><span class="w">
         </span><span class="s2">"profile_url"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://mod.io/members/xant"</span><span class="w">
       </span><span class="p">},</span><span class="w">
       </span><span class="s2">"date_added"</span><span class="p">:</span><span class="w"> </span><span class="mi">1492564103</span><span class="p">,</span><span class="w">
@@ -12029,200 +12037,6 @@ To perform this request, you must be authenticated via one of the following meth
 </tr>
 </tbody>
 </table>
-<h2 id="logo-object">Logo Object</h2>
-<p><a name="schemalogo_object"></a></p>
-<pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
-  </span><span class="s2">"filename"</span><span class="p">:</span><span class="w"> </span><span class="s2">"modio-color-dark.png"</span><span class="p">,</span><span class="w">
-  </span><span class="s2">"original"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://static.mod.io/v1/images/branding/modio-color-dark.png"</span><span class="p">,</span><span class="w">
-  </span><span class="s2">"thumb_320x180"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://static.mod.io/v1/images/branding/modio-color-dark.png"</span><span class="p">,</span><span class="w">
-  </span><span class="s2">"thumb_640x360"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://static.mod.io/v1/images/branding/modio-color-dark.png"</span><span class="p">,</span><span class="w">
-  </span><span class="s2">"thumb_1280x720"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://static.mod.io/v1/images/branding/modio-color-dark.png"</span><span class="w">
-</span><span class="p">}</span><span class="w"> 
-</span></code></pre><h3 id="properties-3">Properties</h3>
-<table>
-<thead>
-<tr>
-<th>Name</th>
-<th>Type</th>
-<th>Description</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>filename</td>
-<td>string</td>
-<td>Logo filename including extension.</td>
-</tr>
-<tr>
-<td>original</td>
-<td>string</td>
-<td>URL to the full-sized logo.</td>
-</tr>
-<tr>
-<td>thumb_320x180</td>
-<td>string</td>
-<td>URL to the small logo thumbnail.</td>
-</tr>
-<tr>
-<td>thumb_640x360</td>
-<td>string</td>
-<td>URL to the medium logo thumbnail.</td>
-</tr>
-<tr>
-<td>thumb_1280x720</td>
-<td>string</td>
-<td>URL to the large logo thumbnail.</td>
-</tr>
-</tbody>
-</table>
-<h2 id="icon-object">Icon Object</h2>
-<p><a name="schemaicon_object"></a></p>
-<pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
-  </span><span class="s2">"filename"</span><span class="p">:</span><span class="w"> </span><span class="s2">"modio-color-dark.png"</span><span class="p">,</span><span class="w">
-  </span><span class="s2">"original"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://static.mod.io/v1/images/branding/modio-color-dark.png"</span><span class="p">,</span><span class="w">
-  </span><span class="s2">"thumb_64x64"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://static.mod.io/v1/images/branding/modio-color-dark.png"</span><span class="p">,</span><span class="w">
-  </span><span class="s2">"thumb_128x128"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://static.mod.io/v1/images/branding/modio-color-dark.png"</span><span class="p">,</span><span class="w">
-  </span><span class="s2">"thumb_256x256"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://static.mod.io/v1/images/branding/modio-color-dark.png"</span><span class="w">
-</span><span class="p">}</span><span class="w"> 
-</span></code></pre><h3 id="properties-4">Properties</h3>
-<table>
-<thead>
-<tr>
-<th>Name</th>
-<th>Type</th>
-<th>Description</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>filename</td>
-<td>string</td>
-<td>Icon filename including extension.</td>
-</tr>
-<tr>
-<td>original</td>
-<td>string</td>
-<td>URL to the full-sized icon.</td>
-</tr>
-<tr>
-<td>thumb_64x64</td>
-<td>string</td>
-<td>URL to the small icon thumbnail.</td>
-</tr>
-<tr>
-<td>thumb_128x128</td>
-<td>string</td>
-<td>URL to the medium icon thumbnail.</td>
-</tr>
-<tr>
-<td>thumb_256x256</td>
-<td>string</td>
-<td>URL to the large icon thumbnail.</td>
-</tr>
-</tbody>
-</table>
-<h2 id="header-image-object">Header Image Object</h2>
-<p><a name="schemaheader_image_object"></a></p>
-<pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
-  </span><span class="s2">"filename"</span><span class="p">:</span><span class="w"> </span><span class="s2">"demo.png"</span><span class="p">,</span><span class="w">
-  </span><span class="s2">"original"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://static.mod.io/v1/images/branding/modio-color-dark.png"</span><span class="w">
-</span><span class="p">}</span><span class="w"> 
-</span></code></pre><h3 id="properties-5">Properties</h3>
-<table>
-<thead>
-<tr>
-<th>Name</th>
-<th>Type</th>
-<th>Description</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>filename</td>
-<td>string</td>
-<td>Header image filename including extension.</td>
-</tr>
-<tr>
-<td>original</td>
-<td>string</td>
-<td>URL to the full-sized header image.</td>
-</tr>
-</tbody>
-</table>
-<h2 id="avatar-object">Avatar Object</h2>
-<p><a name="schemaavatar_object"></a></p>
-<pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
-  </span><span class="s2">"filename"</span><span class="p">:</span><span class="w"> </span><span class="s2">"modio-color-dark.png"</span><span class="p">,</span><span class="w">
-  </span><span class="s2">"original"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://static.mod.io/v1/images/branding/modio-color-dark.png"</span><span class="p">,</span><span class="w">
-  </span><span class="s2">"thumb_50x50"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://static.mod.io/v1/images/branding/modio-color-dark.png"</span><span class="p">,</span><span class="w">
-  </span><span class="s2">"thumb_100x100"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://static.mod.io/v1/images/branding/modio-color-dark.png"</span><span class="w">
-</span><span class="p">}</span><span class="w"> 
-</span></code></pre><h3 id="properties-6">Properties</h3>
-<table>
-<thead>
-<tr>
-<th>Name</th>
-<th>Type</th>
-<th>Description</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>filename</td>
-<td>string</td>
-<td>Avatar filename including extension.</td>
-</tr>
-<tr>
-<td>original</td>
-<td>string</td>
-<td>URL to the full-sized avatar.</td>
-</tr>
-<tr>
-<td>thumb_50x50</td>
-<td>string</td>
-<td>URL to the small avatar thumbnail.</td>
-</tr>
-<tr>
-<td>thumb_100x100</td>
-<td>string</td>
-<td>URL to the medium avatar thumbnail.</td>
-</tr>
-</tbody>
-</table>
-<h2 id="image-object">Image Object</h2>
-<p><a name="schemaimage_object"></a></p>
-<pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
-  </span><span class="s2">"filename"</span><span class="p">:</span><span class="w"> </span><span class="s2">"modio-color-dark.png"</span><span class="p">,</span><span class="w">
-  </span><span class="s2">"original"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://static.mod.io/v1/images/branding/modio-color-dark.png"</span><span class="p">,</span><span class="w">
-  </span><span class="s2">"thumb_320x180"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://static.mod.io/v1/images/branding/modio-color-dark.png"</span><span class="w">
-</span><span class="p">}</span><span class="w"> 
-</span></code></pre><h3 id="properties-7">Properties</h3>
-<table>
-<thead>
-<tr>
-<th>Name</th>
-<th>Type</th>
-<th>Description</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>filename</td>
-<td>string</td>
-<td>Image filename including extension.</td>
-</tr>
-<tr>
-<td>original</td>
-<td>string</td>
-<td>URL to the full-sized image.</td>
-</tr>
-<tr>
-<td>thumb_320x180</td>
-<td>string</td>
-<td>URL to the image thumbnail.</td>
-</tr>
-</tbody>
-</table>
 <h2 id="make-batch-request-2">Make Batch Request</h2>
 <p><a name="schemamake_batch_request"></a></p>
 <pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
@@ -12253,8 +12067,8 @@ To perform this request, you must be authenticated via one of the following meth
                 </span><span class="s2">"thumb_50x50"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://static.mod.io/v1/images/branding/modio-color-dark.png"</span><span class="p">,</span><span class="w">
                 </span><span class="s2">"thumb_100x100"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://static.mod.io/v1/images/branding/modio-color-dark.png"</span><span class="w">
               </span><span class="p">},</span><span class="w">
-              </span><span class="s2">"timezone"</span><span class="p">:</span><span class="w"> </span><span class="s2">"America/Los_Angeles"</span><span class="p">,</span><span class="w">
-              </span><span class="s2">"language"</span><span class="p">:</span><span class="w"> </span><span class="s2">"en"</span><span class="p">,</span><span class="w">
+              </span><span class="s2">"timezone"</span><span class="p">:</span><span class="w"> </span><span class="s2">""</span><span class="p">,</span><span class="w">
+              </span><span class="s2">"language"</span><span class="p">:</span><span class="w"> </span><span class="s2">""</span><span class="p">,</span><span class="w">
               </span><span class="s2">"profile_url"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://mod.io/members/xant"</span><span class="w">
             </span><span class="p">},</span><span class="w">
             </span><span class="s2">"date_added"</span><span class="p">:</span><span class="w"> </span><span class="mi">1492564103</span><span class="p">,</span><span class="w">
@@ -12351,7 +12165,7 @@ To perform this request, you must be authenticated via one of the following meth
   </span><span class="s2">"result_limit"</span><span class="p">:</span><span class="w"> </span><span class="mi">20</span><span class="p">,</span><span class="w">
   </span><span class="s2">"result_total"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="w">
 </span><span class="p">}</span><span class="w"> 
-</span></code></pre><h3 id="properties-8">Properties</h3>
+</span></code></pre><h3 id="properties-3">Properties</h3>
 <table>
 <thead>
 <tr>
@@ -12456,12 +12270,12 @@ To perform this request, you must be authenticated via one of the following meth
 <tr>
 <td>»»»» timezone</td>
 <td>string</td>
-<td>Timezone of the user, format is country/city.</td>
+<td>This field is no longer returned.</td>
 </tr>
 <tr>
 <td>»»»» language</td>
 <td>string</td>
-<td>Users language preference. See <a href="#localization">localization</a> for the supported languages.</td>
+<td>This field is no longer used and will return an empty string. To <a href="#localization">localize the API response</a> we recommend you set the Accept-Language header.</td>
 </tr>
 <tr>
 <td>»»»» profile_url</td>
@@ -12838,8 +12652,8 @@ To perform this request, you must be authenticated via one of the following meth
           </span><span class="s2">"thumb_50x50"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://static.mod.io/v1/images/branding/modio-color-dark.png"</span><span class="p">,</span><span class="w">
           </span><span class="s2">"thumb_100x100"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://static.mod.io/v1/images/branding/modio-color-dark.png"</span><span class="w">
         </span><span class="p">},</span><span class="w">
-        </span><span class="s2">"timezone"</span><span class="p">:</span><span class="w"> </span><span class="s2">"America/Los_Angeles"</span><span class="p">,</span><span class="w">
-        </span><span class="s2">"language"</span><span class="p">:</span><span class="w"> </span><span class="s2">"en"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"timezone"</span><span class="p">:</span><span class="w"> </span><span class="s2">""</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"language"</span><span class="p">:</span><span class="w"> </span><span class="s2">""</span><span class="p">,</span><span class="w">
         </span><span class="s2">"profile_url"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://mod.io/members/xant"</span><span class="w">
       </span><span class="p">},</span><span class="w">
       </span><span class="s2">"date_added"</span><span class="p">:</span><span class="w"> </span><span class="mi">1499841487</span><span class="p">,</span><span class="w">
@@ -12858,7 +12672,7 @@ To perform this request, you must be authenticated via one of the following meth
   </span><span class="s2">"result_limit"</span><span class="p">:</span><span class="w"> </span><span class="mi">100</span><span class="p">,</span><span class="w">
   </span><span class="s2">"result_total"</span><span class="p">:</span><span class="w"> </span><span class="mi">70</span><span class="w">
 </span><span class="p">}</span><span class="w"> 
-</span></code></pre><h3 id="properties-9">Properties</h3>
+</span></code></pre><h3 id="properties-4">Properties</h3>
 <table>
 <thead>
 <tr>
@@ -12937,12 +12751,12 @@ To perform this request, you must be authenticated via one of the following meth
 <tr>
 <td>»» timezone</td>
 <td>string</td>
-<td>Timezone of the user, format is country/city.</td>
+<td>This field is no longer returned.</td>
 </tr>
 <tr>
 <td>»» language</td>
 <td>string</td>
-<td>Users language preference. See <a href="#localization">localization</a> for the supported languages.</td>
+<td>This field is no longer used and will return an empty string. To <a href="#localization">localize the API response</a> we recommend you set the Accept-Language header.</td>
 </tr>
 <tr>
 <td>»» profile_url</td>
@@ -13018,7 +12832,7 @@ To perform this request, you must be authenticated via one of the following meth
   </span><span class="s2">"result_limit"</span><span class="p">:</span><span class="w"> </span><span class="mi">100</span><span class="p">,</span><span class="w">
   </span><span class="s2">"result_total"</span><span class="p">:</span><span class="w"> </span><span class="mi">70</span><span class="w">
 </span><span class="p">}</span><span class="w"> 
-</span></code></pre><h3 id="properties-10">Properties</h3>
+</span></code></pre><h3 id="properties-5">Properties</h3>
 <table>
 <thead>
 <tr>
@@ -13086,7 +12900,7 @@ To perform this request, you must be authenticated via one of the following meth
   </span><span class="s2">"result_limit"</span><span class="p">:</span><span class="w"> </span><span class="mi">100</span><span class="p">,</span><span class="w">
   </span><span class="s2">"result_total"</span><span class="p">:</span><span class="w"> </span><span class="mi">70</span><span class="w">
 </span><span class="p">}</span><span class="w"> 
-</span></code></pre><h3 id="properties-11">Properties</h3>
+</span></code></pre><h3 id="properties-6">Properties</h3>
 <table>
 <thead>
 <tr>
@@ -13183,7 +12997,7 @@ To perform this request, you must be authenticated via one of the following meth
   </span><span class="s2">"result_limit"</span><span class="p">:</span><span class="w"> </span><span class="mi">100</span><span class="p">,</span><span class="w">
   </span><span class="s2">"result_total"</span><span class="p">:</span><span class="w"> </span><span class="mi">70</span><span class="w">
 </span><span class="p">}</span><span class="w"> 
-</span></code></pre><h3 id="properties-12">Properties</h3>
+</span></code></pre><h3 id="properties-7">Properties</h3>
 <table>
 <thead>
 <tr>
@@ -13324,8 +13138,8 @@ To perform this request, you must be authenticated via one of the following meth
           </span><span class="s2">"thumb_50x50"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://static.mod.io/v1/images/branding/modio-color-dark.png"</span><span class="p">,</span><span class="w">
           </span><span class="s2">"thumb_100x100"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://static.mod.io/v1/images/branding/modio-color-dark.png"</span><span class="w">
         </span><span class="p">},</span><span class="w">
-        </span><span class="s2">"timezone"</span><span class="p">:</span><span class="w"> </span><span class="s2">"America/Los_Angeles"</span><span class="p">,</span><span class="w">
-        </span><span class="s2">"language"</span><span class="p">:</span><span class="w"> </span><span class="s2">"en"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"timezone"</span><span class="p">:</span><span class="w"> </span><span class="s2">""</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"language"</span><span class="p">:</span><span class="w"> </span><span class="s2">""</span><span class="p">,</span><span class="w">
         </span><span class="s2">"profile_url"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://mod.io/members/xant"</span><span class="w">
       </span><span class="p">},</span><span class="w">
       </span><span class="s2">"date_added"</span><span class="p">:</span><span class="w"> </span><span class="mi">1493702614</span><span class="p">,</span><span class="w">
@@ -13383,7 +13197,7 @@ To perform this request, you must be authenticated via one of the following meth
   </span><span class="s2">"result_limit"</span><span class="p">:</span><span class="w"> </span><span class="mi">100</span><span class="p">,</span><span class="w">
   </span><span class="s2">"result_total"</span><span class="p">:</span><span class="w"> </span><span class="mi">70</span><span class="w">
 </span><span class="p">}</span><span class="w"> 
-</span></code></pre><h3 id="properties-13">Properties</h3>
+</span></code></pre><h3 id="properties-8">Properties</h3>
 <table>
 <thead>
 <tr>
@@ -13462,12 +13276,12 @@ To perform this request, you must be authenticated via one of the following meth
 <tr>
 <td>»» timezone</td>
 <td>string</td>
-<td>Timezone of the user, format is country/city.</td>
+<td>This field is no longer returned.</td>
 </tr>
 <tr>
 <td>»» language</td>
 <td>string</td>
-<td>Users language preference. See <a href="#localization">localization</a> for the supported languages.</td>
+<td>This field is no longer used and will return an empty string. To <a href="#localization">localize the API response</a> we recommend you set the Accept-Language header.</td>
 </tr>
 <tr>
 <td>»» profile_url</td>
@@ -13507,7 +13321,7 @@ To perform this request, you must be authenticated via one of the following meth
 <tr>
 <td>» community_options</td>
 <td>integer</td>
-<td>Community features enabled on the mod.io website:<br><br><strong>0</strong> = All of the options below are disabled<br><strong>1</strong> = Discussion board enabled<br><strong>2</strong> = Guides and news enabled<br><strong>?</strong> = Add the options you want together, to enable multiple features (see <a href="#bitwise-and-bitwise-and">BITWISE fields</a>)</td>
+<td>Community features enabled on the mod.io website:<br><br><strong>0</strong> = All of the options below are disabled<br><strong>1</strong> = Comments enabled<br><strong>2</strong> = Guides enabled<br><strong>?</strong> = Add the options you want together, to enable multiple features (see <a href="#bitwise-and-bitwise-and">BITWISE fields</a>)</td>
 </tr>
 <tr>
 <td>» revenue_options</td>
@@ -13612,7 +13426,7 @@ To perform this request, you must be authenticated via one of the following meth
 <tr>
 <td>» name_id</td>
 <td>string</td>
-<td>Subdomain for the game on mod.io.</td>
+<td>Subdomain for the game on mod.io. For example: https://gamename.mod.io</td>
 </tr>
 <tr>
 <td>» summary</td>
@@ -13699,7 +13513,7 @@ To perform this request, you must be authenticated via one of the following meth
   </span><span class="s2">"result_limit"</span><span class="p">:</span><span class="w"> </span><span class="mi">100</span><span class="p">,</span><span class="w">
   </span><span class="s2">"result_total"</span><span class="p">:</span><span class="w"> </span><span class="mi">70</span><span class="w">
 </span><span class="p">}</span><span class="w"> 
-</span></code></pre><h3 id="properties-14">Properties</h3>
+</span></code></pre><h3 id="properties-9">Properties</h3>
 <table>
 <thead>
 <tr>
@@ -13767,8 +13581,8 @@ To perform this request, you must be authenticated via one of the following meth
           </span><span class="s2">"thumb_50x50"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://static.mod.io/v1/images/branding/modio-color-dark.png"</span><span class="p">,</span><span class="w">
           </span><span class="s2">"thumb_100x100"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://static.mod.io/v1/images/branding/modio-color-dark.png"</span><span class="w">
         </span><span class="p">},</span><span class="w">
-        </span><span class="s2">"timezone"</span><span class="p">:</span><span class="w"> </span><span class="s2">"America/Los_Angeles"</span><span class="p">,</span><span class="w">
-        </span><span class="s2">"language"</span><span class="p">:</span><span class="w"> </span><span class="s2">"en"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"timezone"</span><span class="p">:</span><span class="w"> </span><span class="s2">""</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"language"</span><span class="p">:</span><span class="w"> </span><span class="s2">""</span><span class="p">,</span><span class="w">
         </span><span class="s2">"profile_url"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://mod.io/members/xant"</span><span class="w">
       </span><span class="p">},</span><span class="w">
       </span><span class="s2">"date_added"</span><span class="p">:</span><span class="w"> </span><span class="mi">1492564103</span><span class="p">,</span><span class="w">
@@ -13862,7 +13676,7 @@ To perform this request, you must be authenticated via one of the following meth
   </span><span class="s2">"result_limit"</span><span class="p">:</span><span class="w"> </span><span class="mi">100</span><span class="p">,</span><span class="w">
   </span><span class="s2">"result_total"</span><span class="p">:</span><span class="w"> </span><span class="mi">70</span><span class="w">
 </span><span class="p">}</span><span class="w"> 
-</span></code></pre><h3 id="properties-15">Properties</h3>
+</span></code></pre><h3 id="properties-10">Properties</h3>
 <table>
 <thead>
 <tr>
@@ -13951,12 +13765,12 @@ To perform this request, you must be authenticated via one of the following meth
 <tr>
 <td>»» timezone</td>
 <td>string</td>
-<td>Timezone of the user, format is country/city.</td>
+<td>This field is no longer returned.</td>
 </tr>
 <tr>
 <td>»» language</td>
 <td>string</td>
-<td>Users language preference. See <a href="#localization">localization</a> for the supported languages.</td>
+<td>This field is no longer used and will return an empty string. To <a href="#localization">localize the API response</a> we recommend you set the Accept-Language header.</td>
 </tr>
 <tr>
 <td>»» profile_url</td>
@@ -14327,7 +14141,7 @@ To perform this request, you must be authenticated via one of the following meth
   </span><span class="s2">"result_limit"</span><span class="p">:</span><span class="w"> </span><span class="mi">100</span><span class="p">,</span><span class="w">
   </span><span class="s2">"result_total"</span><span class="p">:</span><span class="w"> </span><span class="mi">70</span><span class="w">
 </span><span class="p">}</span><span class="w"> 
-</span></code></pre><h3 id="properties-16">Properties</h3>
+</span></code></pre><h3 id="properties-11">Properties</h3>
 <table>
 <thead>
 <tr>
@@ -14442,7 +14256,7 @@ To perform this request, you must be authenticated via one of the following meth
   </span><span class="s2">"result_limit"</span><span class="p">:</span><span class="w"> </span><span class="mi">100</span><span class="p">,</span><span class="w">
   </span><span class="s2">"result_total"</span><span class="p">:</span><span class="w"> </span><span class="mi">70</span><span class="w">
 </span><span class="p">}</span><span class="w"> 
-</span></code></pre><h3 id="properties-17">Properties</h3>
+</span></code></pre><h3 id="properties-12">Properties</h3>
 <table>
 <thead>
 <tr>
@@ -14511,7 +14325,7 @@ To perform this request, you must be authenticated via one of the following meth
   </span><span class="s2">"result_limit"</span><span class="p">:</span><span class="w"> </span><span class="mi">100</span><span class="p">,</span><span class="w">
   </span><span class="s2">"result_total"</span><span class="p">:</span><span class="w"> </span><span class="mi">70</span><span class="w">
 </span><span class="p">}</span><span class="w"> 
-</span></code></pre><h3 id="properties-18">Properties</h3>
+</span></code></pre><h3 id="properties-13">Properties</h3>
 <table>
 <thead>
 <tr>
@@ -14586,8 +14400,8 @@ To perform this request, you must be authenticated via one of the following meth
           </span><span class="s2">"thumb_50x50"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://static.mod.io/v1/images/branding/modio-color-dark.png"</span><span class="p">,</span><span class="w">
           </span><span class="s2">"thumb_100x100"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://static.mod.io/v1/images/branding/modio-color-dark.png"</span><span class="w">
         </span><span class="p">},</span><span class="w">
-        </span><span class="s2">"timezone"</span><span class="p">:</span><span class="w"> </span><span class="s2">"America/Los_Angeles"</span><span class="p">,</span><span class="w">
-        </span><span class="s2">"language"</span><span class="p">:</span><span class="w"> </span><span class="s2">"en"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"timezone"</span><span class="p">:</span><span class="w"> </span><span class="s2">""</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"language"</span><span class="p">:</span><span class="w"> </span><span class="s2">""</span><span class="p">,</span><span class="w">
         </span><span class="s2">"profile_url"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://mod.io/members/xant"</span><span class="w">
       </span><span class="p">},</span><span class="w">
       </span><span class="s2">"level"</span><span class="p">:</span><span class="w"> </span><span class="mi">8</span><span class="p">,</span><span class="w">
@@ -14603,7 +14417,7 @@ To perform this request, you must be authenticated via one of the following meth
   </span><span class="s2">"result_limit"</span><span class="p">:</span><span class="w"> </span><span class="mi">100</span><span class="p">,</span><span class="w">
   </span><span class="s2">"result_total"</span><span class="p">:</span><span class="w"> </span><span class="mi">70</span><span class="w">
 </span><span class="p">}</span><span class="w"> 
-</span></code></pre><h3 id="properties-19">Properties</h3>
+</span></code></pre><h3 id="properties-14">Properties</h3>
 <table>
 <thead>
 <tr>
@@ -14677,12 +14491,12 @@ To perform this request, you must be authenticated via one of the following meth
 <tr>
 <td>»» timezone</td>
 <td>string</td>
-<td>Timezone of the user, format is country/city.</td>
+<td>This field is no longer returned.</td>
 </tr>
 <tr>
 <td>»» language</td>
 <td>string</td>
-<td>Users language preference. See <a href="#localization">localization</a> for the supported languages.</td>
+<td>This field is no longer used and will return an empty string. To <a href="#localization">localize the API response</a> we recommend you set the Accept-Language header.</td>
 </tr>
 <tr>
 <td>»» profile_url</td>
@@ -14747,7 +14561,7 @@ To perform this request, you must be authenticated via one of the following meth
   </span><span class="s2">"result_limit"</span><span class="p">:</span><span class="w"> </span><span class="mi">100</span><span class="p">,</span><span class="w">
   </span><span class="s2">"result_total"</span><span class="p">:</span><span class="w"> </span><span class="mi">70</span><span class="w">
 </span><span class="p">}</span><span class="w"> 
-</span></code></pre><h3 id="properties-20">Properties</h3>
+</span></code></pre><h3 id="properties-15">Properties</h3>
 <table>
 <thead>
 <tr>
@@ -14834,7 +14648,7 @@ To perform this request, you must be authenticated via one of the following meth
   </span><span class="s2">"result_limit"</span><span class="p">:</span><span class="w"> </span><span class="mi">100</span><span class="p">,</span><span class="w">
   </span><span class="s2">"result_total"</span><span class="p">:</span><span class="w"> </span><span class="mi">70</span><span class="w">
 </span><span class="p">}</span><span class="w"> 
-</span></code></pre><h3 id="properties-21">Properties</h3>
+</span></code></pre><h3 id="properties-16">Properties</h3>
 <table>
 <thead>
 <tr>
@@ -14901,7 +14715,7 @@ To perform this request, you must be authenticated via one of the following meth
   </span><span class="s2">"date_added"</span><span class="p">:</span><span class="w"> </span><span class="mi">1499846132</span><span class="p">,</span><span class="w">
   </span><span class="s2">"event_type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"MODFILE_CHANGED"</span><span class="w">
 </span><span class="p">}</span><span class="w"> 
-</span></code></pre><h3 id="properties-22">Properties</h3>
+</span></code></pre><h3 id="properties-17">Properties</h3>
 <table>
 <thead>
 <tr>
@@ -14948,7 +14762,7 @@ To perform this request, you must be authenticated via one of the following meth
   </span><span class="s2">"date_added"</span><span class="p">:</span><span class="w"> </span><span class="mi">1499846132</span><span class="p">,</span><span class="w">
   </span><span class="s2">"event_type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"USER_SUBSCRIBE"</span><span class="w">
 </span><span class="p">}</span><span class="w"> 
-</span></code></pre><h3 id="properties-23">Properties</h3>
+</span></code></pre><h3 id="properties-18">Properties</h3>
 <table>
 <thead>
 <tr>
@@ -14990,6 +14804,46 @@ To perform this request, you must be authenticated via one of the following meth
 </tr>
 </tbody>
 </table>
+<h2 id="avatar-object">Avatar Object</h2>
+<p><a name="schemaavatar_object"></a></p>
+<pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
+  </span><span class="s2">"filename"</span><span class="p">:</span><span class="w"> </span><span class="s2">"modio-color-dark.png"</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"original"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://static.mod.io/v1/images/branding/modio-color-dark.png"</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"thumb_50x50"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://static.mod.io/v1/images/branding/modio-color-dark.png"</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"thumb_100x100"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://static.mod.io/v1/images/branding/modio-color-dark.png"</span><span class="w">
+</span><span class="p">}</span><span class="w"> 
+</span></code></pre><h3 id="properties-19">Properties</h3>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>filename</td>
+<td>string</td>
+<td>Avatar filename including extension.</td>
+</tr>
+<tr>
+<td>original</td>
+<td>string</td>
+<td>URL to the full-sized avatar.</td>
+</tr>
+<tr>
+<td>thumb_50x50</td>
+<td>string</td>
+<td>URL to the small avatar thumbnail.</td>
+</tr>
+<tr>
+<td>thumb_100x100</td>
+<td>string</td>
+<td>URL to the medium avatar thumbnail.</td>
+</tr>
+</tbody>
+</table>
 <h2 id="batch-object">Batch Object</h2>
 <p><a name="schemabatch_object"></a></p>
 <pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
@@ -15018,8 +14872,8 @@ To perform this request, you must be authenticated via one of the following meth
             </span><span class="s2">"thumb_50x50"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://static.mod.io/v1/images/branding/modio-color-dark.png"</span><span class="p">,</span><span class="w">
             </span><span class="s2">"thumb_100x100"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://static.mod.io/v1/images/branding/modio-color-dark.png"</span><span class="w">
           </span><span class="p">},</span><span class="w">
-          </span><span class="s2">"timezone"</span><span class="p">:</span><span class="w"> </span><span class="s2">"America/Los_Angeles"</span><span class="p">,</span><span class="w">
-          </span><span class="s2">"language"</span><span class="p">:</span><span class="w"> </span><span class="s2">"en"</span><span class="p">,</span><span class="w">
+          </span><span class="s2">"timezone"</span><span class="p">:</span><span class="w"> </span><span class="s2">""</span><span class="p">,</span><span class="w">
+          </span><span class="s2">"language"</span><span class="p">:</span><span class="w"> </span><span class="s2">""</span><span class="p">,</span><span class="w">
           </span><span class="s2">"profile_url"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://mod.io/members/xant"</span><span class="w">
         </span><span class="p">},</span><span class="w">
         </span><span class="s2">"date_added"</span><span class="p">:</span><span class="w"> </span><span class="mi">1492564103</span><span class="p">,</span><span class="w">
@@ -15107,7 +14961,7 @@ To perform this request, you must be authenticated via one of the following meth
     </span><span class="p">]</span><span class="w">
   </span><span class="p">}</span><span class="w">
 </span><span class="p">}</span><span class="w"> 
-</span></code></pre><h3 id="properties-24">Properties</h3>
+</span></code></pre><h3 id="properties-20">Properties</h3>
 <table>
 <thead>
 <tr>
@@ -15206,12 +15060,12 @@ To perform this request, you must be authenticated via one of the following meth
 <tr>
 <td>»»» timezone</td>
 <td>string</td>
-<td>Timezone of the user, format is country/city.</td>
+<td>This field is no longer returned.</td>
 </tr>
 <tr>
 <td>»»» language</td>
 <td>string</td>
-<td>Users language preference. See <a href="#localization">localization</a> for the supported languages.</td>
+<td>This field is no longer used and will return an empty string. To <a href="#localization">localize the API response</a> we recommend you set the Accept-Language header.</td>
 </tr>
 <tr>
 <td>»»» profile_url</td>
@@ -15570,8 +15424,8 @@ To perform this request, you must be authenticated via one of the following meth
           </span><span class="s2">"thumb_50x50"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://static.mod.io/v1/images/branding/modio-color-dark.png"</span><span class="p">,</span><span class="w">
           </span><span class="s2">"thumb_100x100"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://static.mod.io/v1/images/branding/modio-color-dark.png"</span><span class="w">
         </span><span class="p">},</span><span class="w">
-        </span><span class="s2">"timezone"</span><span class="p">:</span><span class="w"> </span><span class="s2">"America/Los_Angeles"</span><span class="p">,</span><span class="w">
-        </span><span class="s2">"language"</span><span class="p">:</span><span class="w"> </span><span class="s2">"en"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"timezone"</span><span class="p">:</span><span class="w"> </span><span class="s2">""</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"language"</span><span class="p">:</span><span class="w"> </span><span class="s2">""</span><span class="p">,</span><span class="w">
         </span><span class="s2">"profile_url"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://mod.io/members/xant"</span><span class="w">
       </span><span class="p">},</span><span class="w">
       </span><span class="s2">"date_added"</span><span class="p">:</span><span class="w"> </span><span class="mi">1492564103</span><span class="p">,</span><span class="w">
@@ -15658,7 +15512,7 @@ To perform this request, you must be authenticated via one of the following meth
     </span><span class="p">}</span><span class="w">
   </span><span class="p">]</span><span class="w">
 </span><span class="p">}</span><span class="w"> 
-</span></code></pre><h3 id="properties-25">Properties</h3>
+</span></code></pre><h3 id="properties-21">Properties</h3>
 <table>
 <thead>
 <tr>
@@ -15747,12 +15601,12 @@ To perform this request, you must be authenticated via one of the following meth
 <tr>
 <td>»» timezone</td>
 <td>string</td>
-<td>Timezone of the user, format is country/city.</td>
+<td>This field is no longer returned.</td>
 </tr>
 <tr>
 <td>»» language</td>
 <td>string</td>
-<td>Users language preference. See <a href="#localization">localization</a> for the supported languages.</td>
+<td>This field is no longer used and will return an empty string. To <a href="#localization">localize the API response</a> we recommend you set the Accept-Language header.</td>
 </tr>
 <tr>
 <td>»» profile_url</td>
@@ -16092,8 +15946,8 @@ To perform this request, you must be authenticated via one of the following meth
       </span><span class="s2">"thumb_50x50"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://static.mod.io/v1/images/branding/modio-color-dark.png"</span><span class="p">,</span><span class="w">
       </span><span class="s2">"thumb_100x100"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://static.mod.io/v1/images/branding/modio-color-dark.png"</span><span class="w">
     </span><span class="p">},</span><span class="w">
-    </span><span class="s2">"timezone"</span><span class="p">:</span><span class="w"> </span><span class="s2">"America/Los_Angeles"</span><span class="p">,</span><span class="w">
-    </span><span class="s2">"language"</span><span class="p">:</span><span class="w"> </span><span class="s2">"en"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"timezone"</span><span class="p">:</span><span class="w"> </span><span class="s2">""</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"language"</span><span class="p">:</span><span class="w"> </span><span class="s2">""</span><span class="p">,</span><span class="w">
     </span><span class="s2">"profile_url"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://mod.io/members/xant"</span><span class="w">
   </span><span class="p">},</span><span class="w">
   </span><span class="s2">"date_added"</span><span class="p">:</span><span class="w"> </span><span class="mi">1499841487</span><span class="p">,</span><span class="w">
@@ -16103,7 +15957,7 @@ To perform this request, you must be authenticated via one of the following meth
   </span><span class="s2">"karma_guest"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
   </span><span class="s2">"content"</span><span class="p">:</span><span class="w"> </span><span class="s2">"This mod is kickass! Great work!"</span><span class="w">
 </span><span class="p">}</span><span class="w"> 
-</span></code></pre><h3 id="properties-26">Properties</h3>
+</span></code></pre><h3 id="properties-22">Properties</h3>
 <table>
 <thead>
 <tr>
@@ -16176,12 +16030,12 @@ To perform this request, you must be authenticated via one of the following meth
 <tr>
 <td>» timezone</td>
 <td>string</td>
-<td>Timezone of the user, format is country/city.</td>
+<td>This field is no longer returned.</td>
 </tr>
 <tr>
 <td>» language</td>
 <td>string</td>
-<td>Users language preference. See <a href="#localization">localization</a> for the supported languages.</td>
+<td>This field is no longer used and will return an empty string. To <a href="#localization">localize the API response</a> we recommend you set the Accept-Language header.</td>
 </tr>
 <tr>
 <td>» profile_url</td>
@@ -16226,7 +16080,7 @@ To perform this request, you must be authenticated via one of the following meth
   </span><span class="s2">"mod_id"</span><span class="p">:</span><span class="w"> </span><span class="mi">231</span><span class="p">,</span><span class="w">
   </span><span class="s2">"date_added"</span><span class="p">:</span><span class="w"> </span><span class="mi">1499841487</span><span class="w">
 </span><span class="p">}</span><span class="w"> 
-</span></code></pre><h3 id="properties-27">Properties</h3>
+</span></code></pre><h3 id="properties-23">Properties</h3>
 <table>
 <thead>
 <tr>
@@ -16258,7 +16112,7 @@ To perform this request, you must be authenticated via one of the following meth
   </span><span class="p">],</span><span class="w">
   </span><span class="s2">"hidden"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="w">
 </span><span class="p">}</span><span class="w"> 
-</span></code></pre><h3 id="properties-28">Properties</h3>
+</span></code></pre><h3 id="properties-24">Properties</h3>
 <table>
 <thead>
 <tr>
@@ -16313,7 +16167,7 @@ To perform this request, you must be authenticated via one of the following meth
     </span><span class="s2">"date_expires"</span><span class="p">:</span><span class="w"> </span><span class="mi">1579316848</span><span class="w">
   </span><span class="p">}</span><span class="w">
 </span><span class="p">}</span><span class="w"> 
-</span></code></pre><h3 id="properties-29">Properties</h3>
+</span></code></pre><h3 id="properties-25">Properties</h3>
 <table>
 <thead>
 <tr>
@@ -16415,7 +16269,7 @@ To perform this request, you must be authenticated via one of the following meth
 <pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
   </span><span class="s2">"md5"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2d4a0e2d7273db6b0a94b0740a88ad0d"</span><span class="w">
 </span><span class="p">}</span><span class="w"> 
-</span></code></pre><h3 id="properties-30">Properties</h3>
+</span></code></pre><h3 id="properties-26">Properties</h3>
 <table>
 <thead>
 <tr>
@@ -16438,7 +16292,7 @@ To perform this request, you must be authenticated via one of the following meth
   </span><span class="s2">"binary_url"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://mod.io/mods/file/1/c489a0354111a4d76640d47f0cdcb294"</span><span class="p">,</span><span class="w">
   </span><span class="s2">"date_expires"</span><span class="p">:</span><span class="w"> </span><span class="mi">1579316848</span><span class="w">
 </span><span class="p">}</span><span class="w"> 
-</span></code></pre><h3 id="properties-31">Properties</h3>
+</span></code></pre><h3 id="properties-27">Properties</h3>
 <table>
 <thead>
 <tr>
@@ -16478,8 +16332,8 @@ To perform this request, you must be authenticated via one of the following meth
       </span><span class="s2">"thumb_50x50"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://static.mod.io/v1/images/branding/modio-color-dark.png"</span><span class="p">,</span><span class="w">
       </span><span class="s2">"thumb_100x100"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://static.mod.io/v1/images/branding/modio-color-dark.png"</span><span class="w">
     </span><span class="p">},</span><span class="w">
-    </span><span class="s2">"timezone"</span><span class="p">:</span><span class="w"> </span><span class="s2">"America/Los_Angeles"</span><span class="p">,</span><span class="w">
-    </span><span class="s2">"language"</span><span class="p">:</span><span class="w"> </span><span class="s2">"en"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"timezone"</span><span class="p">:</span><span class="w"> </span><span class="s2">""</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"language"</span><span class="p">:</span><span class="w"> </span><span class="s2">""</span><span class="p">,</span><span class="w">
     </span><span class="s2">"profile_url"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://mod.io/members/xant"</span><span class="w">
   </span><span class="p">},</span><span class="w">
   </span><span class="s2">"date_added"</span><span class="p">:</span><span class="w"> </span><span class="mi">1492564103</span><span class="p">,</span><span class="w">
@@ -16564,7 +16418,7 @@ To perform this request, you must be authenticated via one of the following meth
     </span><span class="s2">"date_expires"</span><span class="p">:</span><span class="w"> </span><span class="mi">1492564103</span><span class="w">
   </span><span class="p">}</span><span class="w">
 </span><span class="p">}</span><span class="w"> 
-</span></code></pre><h3 id="properties-32">Properties</h3>
+</span></code></pre><h3 id="properties-28">Properties</h3>
 <table>
 <thead>
 <tr>
@@ -16647,12 +16501,12 @@ To perform this request, you must be authenticated via one of the following meth
 <tr>
 <td>» timezone</td>
 <td>string</td>
-<td>Timezone of the user, format is country/city.</td>
+<td>This field is no longer returned.</td>
 </tr>
 <tr>
 <td>» language</td>
 <td>string</td>
-<td>Users language preference. See <a href="#localization">localization</a> for the supported languages.</td>
+<td>This field is no longer used and will return an empty string. To <a href="#localization">localize the API response</a> we recommend you set the Accept-Language header.</td>
 </tr>
 <tr>
 <td>» profile_url</td>
@@ -16993,7 +16847,7 @@ To perform this request, you must be authenticated via one of the following meth
     </span><span class="p">}</span><span class="w">
   </span><span class="p">]</span><span class="w">
 </span><span class="p">}</span><span class="w"> 
-</span></code></pre><h3 id="properties-33">Properties</h3>
+</span></code></pre><h3 id="properties-29">Properties</h3>
 <table>
 <thead>
 <tr>
@@ -17042,7 +16896,7 @@ To perform this request, you must be authenticated via one of the following meth
   </span><span class="s2">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Unity"</span><span class="p">,</span><span class="w">
   </span><span class="s2">"date_added"</span><span class="p">:</span><span class="w"> </span><span class="mi">1499841487</span><span class="w">
 </span><span class="p">}</span><span class="w"> 
-</span></code></pre><h3 id="properties-34">Properties</h3>
+</span></code></pre><h3 id="properties-30">Properties</h3>
 <table>
 <thead>
 <tr>
@@ -17080,8 +16934,8 @@ To perform this request, you must be authenticated via one of the following meth
       </span><span class="s2">"thumb_50x50"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://static.mod.io/v1/images/branding/modio-color-dark.png"</span><span class="p">,</span><span class="w">
       </span><span class="s2">"thumb_100x100"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://static.mod.io/v1/images/branding/modio-color-dark.png"</span><span class="w">
     </span><span class="p">},</span><span class="w">
-    </span><span class="s2">"timezone"</span><span class="p">:</span><span class="w"> </span><span class="s2">"America/Los_Angeles"</span><span class="p">,</span><span class="w">
-    </span><span class="s2">"language"</span><span class="p">:</span><span class="w"> </span><span class="s2">"en"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"timezone"</span><span class="p">:</span><span class="w"> </span><span class="s2">""</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"language"</span><span class="p">:</span><span class="w"> </span><span class="s2">""</span><span class="p">,</span><span class="w">
     </span><span class="s2">"profile_url"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://mod.io/members/xant"</span><span class="w">
   </span><span class="p">},</span><span class="w">
   </span><span class="s2">"date_added"</span><span class="p">:</span><span class="w"> </span><span class="mi">1493702614</span><span class="p">,</span><span class="w">
@@ -17130,7 +16984,7 @@ To perform this request, you must be authenticated via one of the following meth
     </span><span class="p">}</span><span class="w">
   </span><span class="p">]</span><span class="w">
 </span><span class="p">}</span><span class="w"> 
-</span></code></pre><h3 id="properties-35">Properties</h3>
+</span></code></pre><h3 id="properties-31">Properties</h3>
 <table>
 <thead>
 <tr>
@@ -17203,12 +17057,12 @@ To perform this request, you must be authenticated via one of the following meth
 <tr>
 <td>» timezone</td>
 <td>string</td>
-<td>Timezone of the user, format is country/city.</td>
+<td>This field is no longer returned.</td>
 </tr>
 <tr>
 <td>» language</td>
 <td>string</td>
-<td>Users language preference. See <a href="#localization">localization</a> for the supported languages.</td>
+<td>This field is no longer used and will return an empty string. To <a href="#localization">localize the API response</a> we recommend you set the Accept-Language header.</td>
 </tr>
 <tr>
 <td>» profile_url</td>
@@ -17248,7 +17102,7 @@ To perform this request, you must be authenticated via one of the following meth
 <tr>
 <td>community_options</td>
 <td>integer</td>
-<td>Community features enabled on the mod.io website:<br><br><strong>0</strong> = All of the options below are disabled<br><strong>1</strong> = Discussion board enabled<br><strong>2</strong> = Guides and news enabled<br><strong>?</strong> = Add the options you want together, to enable multiple features (see <a href="#bitwise-and-bitwise-and">BITWISE fields</a>)</td>
+<td>Community features enabled on the mod.io website:<br><br><strong>0</strong> = All of the options below are disabled<br><strong>1</strong> = Comments enabled<br><strong>2</strong> = Guides enabled<br><strong>?</strong> = Add the options you want together, to enable multiple features (see <a href="#bitwise-and-bitwise-and">BITWISE fields</a>)</td>
 </tr>
 <tr>
 <td>revenue_options</td>
@@ -17353,7 +17207,7 @@ To perform this request, you must be authenticated via one of the following meth
 <tr>
 <td>name_id</td>
 <td>string</td>
-<td>Subdomain for the game on mod.io.</td>
+<td>Subdomain for the game on mod.io. For example: https://gamename.mod.io</td>
 </tr>
 <tr>
 <td>summary</td>
@@ -17403,13 +17257,121 @@ To perform this request, you must be authenticated via one of the following meth
 </tr>
 </tbody>
 </table>
+<h2 id="header-image-object">Header Image Object</h2>
+<p><a name="schemaheader_image_object"></a></p>
+<pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
+  </span><span class="s2">"filename"</span><span class="p">:</span><span class="w"> </span><span class="s2">"demo.png"</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"original"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://static.mod.io/v1/images/branding/modio-color-dark.png"</span><span class="w">
+</span><span class="p">}</span><span class="w"> 
+</span></code></pre><h3 id="properties-32">Properties</h3>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>filename</td>
+<td>string</td>
+<td>Header image filename including extension.</td>
+</tr>
+<tr>
+<td>original</td>
+<td>string</td>
+<td>URL to the full-sized header image.</td>
+</tr>
+</tbody>
+</table>
+<h2 id="icon-object">Icon Object</h2>
+<p><a name="schemaicon_object"></a></p>
+<pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
+  </span><span class="s2">"filename"</span><span class="p">:</span><span class="w"> </span><span class="s2">"modio-color-dark.png"</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"original"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://static.mod.io/v1/images/branding/modio-color-dark.png"</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"thumb_64x64"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://static.mod.io/v1/images/branding/modio-color-dark.png"</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"thumb_128x128"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://static.mod.io/v1/images/branding/modio-color-dark.png"</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"thumb_256x256"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://static.mod.io/v1/images/branding/modio-color-dark.png"</span><span class="w">
+</span><span class="p">}</span><span class="w"> 
+</span></code></pre><h3 id="properties-33">Properties</h3>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>filename</td>
+<td>string</td>
+<td>Icon filename including extension.</td>
+</tr>
+<tr>
+<td>original</td>
+<td>string</td>
+<td>URL to the full-sized icon.</td>
+</tr>
+<tr>
+<td>thumb_64x64</td>
+<td>string</td>
+<td>URL to the small icon thumbnail.</td>
+</tr>
+<tr>
+<td>thumb_128x128</td>
+<td>string</td>
+<td>URL to the medium icon thumbnail.</td>
+</tr>
+<tr>
+<td>thumb_256x256</td>
+<td>string</td>
+<td>URL to the large icon thumbnail.</td>
+</tr>
+</tbody>
+</table>
+<h2 id="image-object">Image Object</h2>
+<p><a name="schemaimage_object"></a></p>
+<pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
+  </span><span class="s2">"filename"</span><span class="p">:</span><span class="w"> </span><span class="s2">"modio-color-dark.png"</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"original"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://static.mod.io/v1/images/branding/modio-color-dark.png"</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"thumb_320x180"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://static.mod.io/v1/images/branding/modio-color-dark.png"</span><span class="w">
+</span><span class="p">}</span><span class="w"> 
+</span></code></pre><h3 id="properties-34">Properties</h3>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>filename</td>
+<td>string</td>
+<td>Image filename including extension.</td>
+</tr>
+<tr>
+<td>original</td>
+<td>string</td>
+<td>URL to the full-sized image.</td>
+</tr>
+<tr>
+<td>thumb_320x180</td>
+<td>string</td>
+<td>URL to the image thumbnail.</td>
+</tr>
+</tbody>
+</table>
 <h2 id="key-value-pair-object">Key-Value Pair Object</h2>
 <p><a name="schemakey-value_pair_object"></a></p>
 <pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
   </span><span class="s2">"key"</span><span class="p">:</span><span class="w"> </span><span class="s2">"X-RateLimit-Remaining"</span><span class="p">,</span><span class="w">
   </span><span class="s2">"value"</span><span class="p">:</span><span class="w"> </span><span class="s2">"98"</span><span class="w">
 </span><span class="p">}</span><span class="w"> 
-</span></code></pre><h3 id="properties-36">Properties</h3>
+</span></code></pre><h3 id="properties-35">Properties</h3>
 <table>
 <thead>
 <tr>
@@ -17428,6 +17390,52 @@ To perform this request, you must be authenticated via one of the following meth
 <td>value</td>
 <td>string</td>
 <td>Value of the key-value pair. Will always be a string, even if numeric.</td>
+</tr>
+</tbody>
+</table>
+<h2 id="logo-object">Logo Object</h2>
+<p><a name="schemalogo_object"></a></p>
+<pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
+  </span><span class="s2">"filename"</span><span class="p">:</span><span class="w"> </span><span class="s2">"modio-color-dark.png"</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"original"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://static.mod.io/v1/images/branding/modio-color-dark.png"</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"thumb_320x180"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://static.mod.io/v1/images/branding/modio-color-dark.png"</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"thumb_640x360"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://static.mod.io/v1/images/branding/modio-color-dark.png"</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"thumb_1280x720"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://static.mod.io/v1/images/branding/modio-color-dark.png"</span><span class="w">
+</span><span class="p">}</span><span class="w"> 
+</span></code></pre><h3 id="properties-36">Properties</h3>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>filename</td>
+<td>string</td>
+<td>Logo filename including extension.</td>
+</tr>
+<tr>
+<td>original</td>
+<td>string</td>
+<td>URL to the full-sized logo.</td>
+</tr>
+<tr>
+<td>thumb_320x180</td>
+<td>string</td>
+<td>URL to the small logo thumbnail.</td>
+</tr>
+<tr>
+<td>thumb_640x360</td>
+<td>string</td>
+<td>URL to the medium logo thumbnail.</td>
+</tr>
+<tr>
+<td>thumb_1280x720</td>
+<td>string</td>
+<td>URL to the large logo thumbnail.</td>
 </tr>
 </tbody>
 </table>
@@ -17636,8 +17644,8 @@ To perform this request, you must be authenticated via one of the following meth
       </span><span class="s2">"thumb_50x50"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://static.mod.io/v1/images/branding/modio-color-dark.png"</span><span class="p">,</span><span class="w">
       </span><span class="s2">"thumb_100x100"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://static.mod.io/v1/images/branding/modio-color-dark.png"</span><span class="w">
     </span><span class="p">},</span><span class="w">
-    </span><span class="s2">"timezone"</span><span class="p">:</span><span class="w"> </span><span class="s2">"America/Los_Angeles"</span><span class="p">,</span><span class="w">
-    </span><span class="s2">"language"</span><span class="p">:</span><span class="w"> </span><span class="s2">"en"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"timezone"</span><span class="p">:</span><span class="w"> </span><span class="s2">""</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"language"</span><span class="p">:</span><span class="w"> </span><span class="s2">""</span><span class="p">,</span><span class="w">
     </span><span class="s2">"profile_url"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://mod.io/members/xant"</span><span class="w">
   </span><span class="p">},</span><span class="w">
   </span><span class="s2">"level"</span><span class="p">:</span><span class="w"> </span><span class="mi">8</span><span class="p">,</span><span class="w">
@@ -17712,12 +17720,12 @@ To perform this request, you must be authenticated via one of the following meth
 <tr>
 <td>» timezone</td>
 <td>string</td>
-<td>Timezone of the user, format is country/city.</td>
+<td>This field is no longer returned.</td>
 </tr>
 <tr>
 <td>» language</td>
 <td>string</td>
-<td>Users language preference. See <a href="#localization">localization</a> for the supported languages.</td>
+<td>This field is no longer used and will return an empty string. To <a href="#localization">localize the API response</a> we recommend you set the Accept-Language header.</td>
 </tr>
 <tr>
 <td>» profile_url</td>
@@ -17754,8 +17762,8 @@ To perform this request, you must be authenticated via one of the following meth
     </span><span class="s2">"thumb_50x50"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://static.mod.io/v1/images/branding/modio-color-dark.png"</span><span class="p">,</span><span class="w">
     </span><span class="s2">"thumb_100x100"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://static.mod.io/v1/images/branding/modio-color-dark.png"</span><span class="w">
   </span><span class="p">},</span><span class="w">
-  </span><span class="s2">"timezone"</span><span class="p">:</span><span class="w"> </span><span class="s2">"America/Los_Angeles"</span><span class="p">,</span><span class="w">
-  </span><span class="s2">"language"</span><span class="p">:</span><span class="w"> </span><span class="s2">"en"</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"timezone"</span><span class="p">:</span><span class="w"> </span><span class="s2">""</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"language"</span><span class="p">:</span><span class="w"> </span><span class="s2">""</span><span class="p">,</span><span class="w">
   </span><span class="s2">"profile_url"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://mod.io/members/xant"</span><span class="w">
 </span><span class="p">}</span><span class="w"> 
 </span></code></pre><h3 id="properties-42">Properties</h3>
@@ -17816,12 +17824,12 @@ To perform this request, you must be authenticated via one of the following meth
 <tr>
 <td>timezone</td>
 <td>string</td>
-<td>Timezone of the user, format is country/city.</td>
+<td>This field is no longer returned.</td>
 </tr>
 <tr>
 <td>language</td>
 <td>string</td>
-<td>Users language preference. See <a href="#localization">localization</a> for the supported languages.</td>
+<td>This field is no longer used and will return an empty string. To <a href="#localization">localize the API response</a> we recommend you set the Accept-Language header.</td>
 </tr>
 <tr>
 <td>profile_url</td>
