@@ -7610,9 +7610,9 @@ curl -X POST https://api.mod.io/v1/batch \
   -H 'Accept: application/json' \
   -d 'batch[0][relative_url]=v1/games/11/mods' \
   -d 'batch[0][method]=GET' \
-  -d 'batch[1][relative_url]=v1/me/subscribed?id=in-$[0].data[*].id' \
+  -d 'batch[1][relative_url]=v1/me/subscribed?id-in=$[0].data[*].id' \
   -d 'batch[1][method]=GET' \
-  -d 'batch[2][relative_url]=v1/me/ratings?id=in-$[0].data[*].id' \
+  -d 'batch[2][relative_url]=v1/me/ratings?id-in=$[0].data[*].id' \
   -d 'batch[2][method]=GET'
 
 ```
@@ -7649,11 +7649,11 @@ $.ajax({
 ```javascript--nodejs
 const request = require('node-fetch');
 const inputBody = '{
-  "batch[0][relative url   ]": "v1/games/11/mods",
+  "batch[0][relative_url]": "v1/games/11/mods",
   "batch[0][method]": "GET",
-  "batch[1][relative url   ]": "v1/me/subscribed?id=in-$[0].data[*].id",
+  "batch[1][relative_url]": "v1/me/subscribed?id-in=$[0].data[*].id",
   "batch[1][method]": "GET",
-  "batch[2][relative url   ]": "v1/me/ratings?id=in-$[0].data[*].id",
+  "batch[2][relative_url]": "v1/me/ratings?id-in=$[0].data[*].id",
   "batch[2][method]": "GET"
 }';
 const headers = {
@@ -7714,9 +7714,9 @@ Submit one or more API endpoint calls in a single HTTP request by batching the r
 
      The following applies to all batch requests:
 
-     - Who you authenticate as for the parent batch request, you will be assumed that entity for _all_ sub-requests.
-     - Authorization headers passed into sub-requests are ignored.
-     - You cannot make more than 20 requests within a batch.
+     - Who you authenticate as for the parent batch request, you will be assumed that entity for _all_ sub-requests.  
+     - Authorization headers passed into sub-requests are ignored.  
+     - You cannot make more than 20 requests within a batch.  
 
      __Batch Dependencies__
 
@@ -7728,10 +7728,10 @@ Submit one or more API endpoint calls in a single HTTP request by batching the r
 
      __What will it require?__
 
-     This will require three requests:
-     1. [GET /v1/games/{game-id}/mods](#get-mods)
-     2. [GET /v1/me/subscribed](#get-user-subscriptions)
-     3. [GET /v1/me/ratings](#get-user-ratings)
+     This will require three requests:  
+     1. [GET /v1/games/{game-id}/mods](#get-mods)  
+     2. [GET /v1/me/subscribed](#get-user-subscriptions)  
+     3. [GET /v1/me/ratings](#get-user-ratings)  
 
     In total, we are making 3 requests in a synchronous manner, inside a single request. Based on the above example, we need to know how to get the `id` value of the [Mod Object](#mod-object) from Request #1 and provide it as a dependency to the subsequent requests.
 
