@@ -22,14 +22,14 @@ You have 3 options to get connected to the --parse_sitename API which you can us
 
 Option | Usage | Suited for | Docs
 ---------- | ---------- | ---------- | ---------
-__API__ | For connecting directly to the --parse_sitename REST API | Web apps that need a JSON REST API, or game developers that like a challenge and want control over their implementation. | You are reading them
+__API__ | For connecting directly to the --parse_sitename REST API. | Web apps that need a JSON REST API, or game developers that like a challenge and want control over their implementation. | You are reading them
 __SDK__ | Drop our [open source C/C++ SDK](--parse_sdkurl) into your game to call --parse_sitename functionality. | Developers that want a SDK that abstracts the uploading, downloading and unzip flows behind easy to use function calls. | [Here](--parse_sdkurl)
 __Tools/Plugins__ | Use tools, plugins and wrappers created by the community to make implementation in various engines easy. | Game developers that want a pre-built modding solution for their engine (Unity, Unreal, GameMaker, Construct) of choice. | [Available per tool](--parse_appsurl)
 
 Tools, plugins and wrappers made by the --parse_sitename team and our awesome community | - | - | -
 --- | --- | --- | ---
 ![Unity Plugin](images/tool-unity.png) | __Unity Plugin__<br />[SDK](https://github.com/modio/UnityPlugin)<br />[Getting Started](https://github.com/modio/UnityPlugin/wiki)<br /> | ![Unreal Plugin](images/tool-unreal.png) | __Unreal Plugin__<br />[SDK](https://github.com/modio/UE4Plugin)<br />[Getting Started](https://github.com/modio/UE4Plugin/wiki)<br />[Example](https://github.com/modio/UE4Plugin)<br />
-![C/C++ SDK](images/tool-ccpp.png) | __C/C++ SDK__<br />[SDK](https://github.com/modio/SDK)<br />[Getting Started](https://github.com/modio/SDK/wiki)<br />[Tutorials](https://github.com/modio/SDK/tree/master/examples/code-samples)<br />  | ![Haxe Wrapper](images/tool-haxe.png) | __Haxe Wrapper__<br />[SDK](https://apps.mod.io/haxe-wrapper)<br />[Getting Started](https://github.com/modio/HaxeWrapper)<br />[Tutorials](https://github.com/Turupawn/modioOpenFLExample#openfl-integration)<br />
+![C/C++ SDK](images/tool-ccpp.png) | __C/C++ SDK__<br />[SDK](https://github.com/modio/SDK)<br />[Getting Started](https://github.com/modio/SDK/wiki)<br />[Tutorials](https://github.com/modio/SDK/tree/master/examples/code-samples)<br />  | ![Haxe Wrapper](images/tool-haxe.png) | __Haxe Wrapper__<br />[SDK](https://github.com/modio/HaxeWrapper)<br />[Getting Started](https://github.com/modio/HaxeWrapper)<br />[Tutorials](https://github.com/Turupawn/modioOpenFLExample#openfl-integration)<br />
 ![Rust Wrapper](images/tool-rust.png) | __Rust Wrapper__<br />[SDK](https://crates.io/crates/modio)<br />[Getting Started](https://github.com/nickelc/modio-rs)<br />[Tutorials](https://github.com/nickelc/modio-rs/tree/master/examples)<br /> | ![Python Wrapper](images/tool-python.png) | __Python Wrapper__<br />[SDK](https://github.com/ClementJ18/mod.io)<br />[Getting Started](https://github.com/ClementJ18/mod.io/#example)<br />[Tutorials](https://github.com/ClementJ18/mod.io/tree/master/examples)<br /> |<br />
 ![Construct 2](images/tool-c2.png) | __Construct 2 Plugin__<br />[SDK](https://github.com/modio/C2Plugin)<br />[Getting Started](https://github.com/modio/C2Plugin)<br /> | ![Command Line Tool](images/tool-cmd.png) | __Command Line Tool__<br />[CMD](https://github.com/nickelc/modiom)<br />[Getting Started](https://github.com/nickelc/modiom)<br />
 Want a tool added to the list? [Contact us!](mailto:--parse_email?subject=Publish Tool)
@@ -64,7 +64,7 @@ To access the API authentication is required. All users and games get a private 
 
 ### Email Authentication Flow
 
-To perform writes, you will need to authenticate your users via OAuth 2. To make this frictionless in-game, we offer an email verification system, similar to what Slack and others pioneered. It works by users supplying their email, which we send a time-limited 5 digit security code too. They exchange this code in-game, for an [OAuth 2 access token](--parse_siteurl/oauth/widget) you can save to authenticate future requests. The benefit of this approach is it avoids complex website redirects and doesn't require your users to complete a slow registration flow.
+To perform writes, you will need to authenticate your users via OAuth 2. To make this frictionless in-game, we offer an email verification system, similar to what Slack and others pioneered. It works by users supplying their email, which we send a time-limited 5 digit security code too. They exchange this code in-game, for an [OAuth 2 access token](--parse_siteurl/oauth/widget) you can save to authenticate future requests. The benefit of this approach is it avoids complex website redirects, doesn't require your users to complete a slow registration flow, and eliminates the need to store usernames / passwords.
 
 ![--parse_sitename Email Authentication Flow](--parse_staticurl/v1/images/home/email.png)
 
@@ -157,7 +157,7 @@ Want a platform added to the list? [Contact us!](mailto:--parse_email?subject=Au
 
 ### Web Overlay Authentication
 
-At the moment it is not possible to open the --parse_sitename website in-game with the user pre-authenticated, however you can provide a hint by appending `?ref=SERVICE` to the end of the URL. What this tells --parse_sitename, is that when the user attempts to perform an action that requires authentication, they will be prompted to login with their `SERVICE` account. For example if you want to take a mod creator to their mod edit page in-game on Steam, the URL would look something like: `https://gamename.--parse_sitename/modname/edit?ref=steam`. You can optionally add `&login=auto` as well to automatically start the login process. Services supported are **steam**, **facebook** and **google**. 
+At the moment it is not possible to open the --parse_sitename website in-game with the user pre-authenticated, however you can provide a hint by appending `?ref=SERVICE` to the end of the URL. What this tells --parse_sitename, is that when the user attempts to perform an action that requires authentication, they will be prompted to login with their `SERVICE` account. For example if you want to take a mod creator to their mod edit page in-game on Steam, the URL would look something like: `--parse_gameurl/modname/edit?ref=steam`. You can optionally add `&login=auto` as well to automatically start the login process. Services supported are **steam**, **itchio**, **facebook** and **google**. 
 
 ### Scopes (OAuth 2)
 
@@ -288,7 +288,7 @@ Response Code | Meaning
 `200` | OK -- Your request was successful.
 `201` | Created -- Resource created, inspect Location header for newly created resource URL.
 `204` | No Content -- Request was successful and there was no data to be returned.
-`400` | Bad request -- Server cannot process the request due to malformed syntax or invalid request message framing.
+`400` | Bad Request -- Server cannot process the request due to malformed syntax or invalid request message framing.
 `401` | Unauthorized -- Your API key/access token is incorrect, revoked, or expired.
 `403` | Forbidden -- You do not have permission to perform the requested action.
 `404` | Not Found -- The requested resource could not be found.
@@ -486,7 +486,7 @@ If the `result_count` parameter matches the `result_limit` parameter (5 in this 
 
 ## Sorting
 
-All endpoints are sorted by the `id` column in ascending order by default. You can override this by including a `_sort` with the column you want to sort by in the request. You can sort on all columns __in the parent object only__. You cannot sort on columns in nested objects, so if a game contains a tags object you cannot sort on the `tag name` column, but you can sort by the games `name` since the games `name` resides in the parent object.
+All endpoints are sorted by the `id` column in ascending order by default (oldest first). You can override this by including a `_sort` with the column you want to sort by in the request. You can sort on all columns __in the parent object only__. You cannot sort on columns in nested objects, so if a game contains a tags object you cannot sort on the `tag name` column, but you can sort by the games `name` since the games `name` resides in the parent object.
 
 __NOTE:__ Some endpoints like [Get All Mods](#get-all-mods) have special sort columns like `popular`, `downloads`, `rating` and `subscribers` which are documented alongside the filters.
 
@@ -536,42 +536,32 @@ Where the preceding column value does not equal the value specified.
 
 - `?curation-not=1` - Where the `curation` column does not equal 1.
 
-### -lk (Like)
+### -lk (Like + Wildcards)
 
 ```
 --parse_version/games?name-lk=texture
+
+--parse_version/games?name-lk=texture*
+
+--parse_version/games?name-lk=*texture*
 ```
 
-Where the string supplied matches the preceding column value. This is equivalent to SQL's `LIKE`. Consider using wildcard's `*` for the best chance of results as described below.
+Where the string supplied matches the preceding column value. This is equivalent to SQL's `LIKE`. Wildcard's `*` can be used to find content that partially matches as described below.
 
 - `?name-lk=texture` - Get all results where the `name` column value is 'texture'.
+- `?name-lk=texture*` - Get all results where the `name` column value begins with 'texture'. This means the query would return results for 'texture', 'textures' and 'texture pack'
+- `?name-lk=*texture*` - Get all results where the `name` column value contains 'texture'. This means the query would return results for 'texture', 'HD textures' and 'armor texture pack' 
 
-### -not-lk (Not Like)
+### -not-lk (Not Like + Wildcards)
 
 ```
 --parse_version/games?name-not-lk=dungeon
 ```
 
-Where the string supplied does not match the preceding column value. This is equivalent to SQL's `NOT LIKE`.
+Where the string supplied does not match the preceding column value. This is equivalent to SQL's `NOT LIKE`. Wildcard's `*` can be used as described above.
 
 - `?name-not-lk=dungeon` - Get all results where the `name` column value is not 'dungeon'.
 
-### -lk & -not-lk Wildcards
-
-```
---parse_version/games?name-lk=The Witcher*
-```
-
-```
---parse_version/games?name-lk=*Asset Pack
-```
-
-You can utilize the -lk wildcard value `*` to match more records. This is equivalent to SQL's `%`.
-
-- `?name-lk=The Witcher*` - Get all results where _The Witcher_ is succeeded by any value. This means the query would return results for 'The Witcher', 'The Witcher 2' and 'The Witcher 3'. 
-
-- `?name-lk=*Asset Pack` - Get all results where _Asset Pack_ is proceeded by any value. This means the query would return results for 'Armor Asset Pack', 'Weapon Asset Pack' and 'HD Asset Pack'. 
- 
 ### -in (In)
 
 ```
@@ -611,26 +601,6 @@ Where the preceding column value is smaller than or equal to the value specified
 Where the preceding column value is greater than or equal to the value specified.
 
 - `?game-min=20` - Get all results where the `game` column is greater than or equal to 20.
-
-### -st (Smaller Than)
-
-```
---parse_version/games?modfile-st=200
-```
-
-Where the preceding column value is smaller than the value specified.
-
-- `?modfile-st=200` - Get all results where the `modfile` column is smaller than 200.
-
-### -gt (Greater Than)
-
-```
---parse_version/games?modfile-gt=600
-```
-
-Where the preceding column value is greater than the value specified.
-
-- `?modfile-gt=600` - Get all results where the `modfile` column is greater than 600.
 
 ### -bitwise-and (Bitwise AND)
 
@@ -731,8 +701,8 @@ __NOTE__: Localization for --parse_sitename is currently a work-in-progress and 
 
 ### Localized Requests
 
-Specific endpoints also allow you to submit fields in the mentioned supported languages above. To specify to the API you are submitting
-a non-english language you must supply the `Content-Language` header in the request that contains a valid language code (see above). When you supply the `Content-Language` header in your request, you are explicitly indicating to the API that all eligible fields have been translated into the supplied language and if a user (or client) requests the respective language, the value for that supplied field will be returned.
+Specific endpoints also allow you to submit fields in the supported languages above. To tell the API you are submitting
+non-english content you must supply the `Content-Language` header in the request with a valid language code (see above). When you supply the `Content-Language` header in your request, you are explicitly indicating to the API that all eligible fields have been translated into the supplied language and if a user (or client) requests the respective language, the value for that supplied field will be returned.
 
 A brief summary when dealing with localized requests and responses:
 
@@ -781,9 +751,9 @@ You should always plan to minimize requests and cache API responses. It will mak
 
 ## Testing
 
-To help familiarize yourself with the --parse_sitename API and to ensure your implementation is battle-hardened and operating as intended, we have setup a test sandbox which is identical to the production environment. The test sandbox allows you to make requests to the API whilst your integration is a work in progress and the submitted data is not important. When you are ready to go live it's as easy as making sure your game's production profile and `api_key` is correct, and substituting the API test URL for the production URL. 
+To help familiarize yourself with the --parse_sitename API and to ensure your implementation is battle-hardened and operating as intended, we have setup a test sandbox which is identical to the production environment. The test sandbox allows you to make requests to the API whilst your integration is a work in progress and the submitted data is not important. When you are ready to go live it's as easy as adding your game to the production environment, substituting the test API URL for the production API URL, and updating the `api_key` and `game_id` you are using to the values from your games profile on production. 
 
-To begin using the test sandbox you will need to [register a test account](--parse_sitetesturl/members/register) and [add your game](--parse_sitetesturl/games/add). You will see only games you are a team member of and there is no connection between the data added to the test environment and production. We highly recommend you use the test environment when integrating as it allows you to keep your development private, and you can submit as much dummy data as you need to try the functionality required, without having to clean it up at the end.
+To begin using the test sandbox you will need to [register a test account](--parse_sitetesturl/members/register) and [add your game](--parse_sitetesturl/games/add). You will only see games you are a team member of and there is no connection between the data added to the test environment and production. We highly recommend you use the test environment when integrating as it allows you to keep your development private, and you can submit as much dummy data as you need to try the functionality required, without having to clean it up at the end.
 
 __Test version:__ `--parse_version`
 
@@ -795,8 +765,8 @@ __NOTE__: We periodically reset the test environment to default - with the excep
 
 ## Whitelabel
 
-If you are a large studio or publisher and require a private, in-house, custom solution that accelerates your time to market with a best-in-class product, reach out [--parse_email](mailto:--parse_email?subject=Whitelabel%20license) to discuss the licensing options available.
+If you are a large studio or publisher and require a private, in-house, custom solution that accelerates your time to market with a best-in-class product, reach out to [--parse_email](mailto:--parse_email?subject=Whitelabel%20license) to discuss the licensing options available.
 
 ## Contact
 
-If you spot any errors within the --parse_sitename documentation, have feedback on how we can make it easier to follow or simply want to discuss how awesome mods are, feel free to reach out anytime to [--parse_email](mailto:--parse_email?subject=API) or come join us in our [discord channel](https://discord.mod.io). We are here to help you grow and maximise the potential of mods in your game.
+If you spot any errors within the --parse_sitename documentation, have feedback on how we can make it easier to follow or simply want to discuss how awesome mods are, feel free to reach out to [--parse_email](mailto:--parse_email?subject=API) or come join us in our [discord channel](https://discord.mod.io). We are here to help you grow and maximise the potential of mods in your game.
