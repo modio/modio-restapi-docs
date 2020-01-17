@@ -9626,9 +9626,9 @@ curl -X POST https://api.mod.io/v1/batch <span class="se">\</span>
   -H <span class="s1">'Accept: application/json'</span> <span class="se">\</span>
   -d <span class="s1">'batch[0][relative_url]=v1/games/11/mods'</span> <span class="se">\</span>
   -d <span class="s1">'batch[0][method]=GET'</span> <span class="se">\</span>
-  -d <span class="s1">'batch[1][relative_url]=v1/me/subscribed?id=in-$[0].data[*].id'</span> <span class="se">\</span>
+  -d <span class="s1">'batch[1][relative_url]=v1/me/subscribed?id-in=$[0].data[*].id'</span> <span class="se">\</span>
   -d <span class="s1">'batch[1][method]=GET'</span> <span class="se">\</span>
-  -d <span class="s1">'batch[2][relative_url]=v1/me/ratings?id=in-$[0].data[*].id'</span> <span class="se">\</span>
+  -d <span class="s1">'batch[2][relative_url]=v1/me/ratings?id-in=$[0].data[*].id'</span> <span class="se">\</span>
   -d <span class="s1">'batch[2][method]=GET'</span>
 
 </code></pre><pre class="highlight http tab-http"><code><span class="nf">POST</span> <span class="nn">https://api.mod.io/v1/batch</span> <span class="k">HTTP</span><span class="o">/</span><span class="m">1.1</span>
@@ -9656,11 +9656,11 @@ curl -X POST https://api.mod.io/v1/batch <span class="se">\</span>
 <span class="p">})</span>
 </code></pre><pre class="highlight javascript tab-javascript--nodejs"><code><span class="kr">const</span> <span class="nx">request</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s1">'node-fetch'</span><span class="p">);</span>
 <span class="kr">const</span> <span class="nx">inputBody</span> <span class="o">=</span> <span class="s1">'{
-  "batch[0][relative url   ]": "v1/games/11/mods",
+  "batch[0][relative_url]": "v1/games/11/mods",
   "batch[0][method]": "GET",
-  "batch[1][relative url   ]": "v1/me/subscribed?id=in-$[0].data[*].id",
+  "batch[1][relative_url]": "v1/me/subscribed?id-in=$[0].data[*].id",
   "batch[1][method]": "GET",
-  "batch[2][relative url   ]": "v1/me/ratings?id=in-$[0].data[*].id",
+  "batch[2][relative_url]": "v1/me/ratings?id-in=$[0].data[*].id",
   "batch[2][method]": "GET"
 }'</span><span class="p">;</span>
 <span class="kr">const</span> <span class="nx">headers</span> <span class="o">=</span> <span class="p">{</span>
@@ -9715,9 +9715,9 @@ curl -X POST https://api.mod.io/v1/batch <span class="se">\</span>
 
 <p>The following applies to all batch requests:</p>
 
-<p>- Who you authenticate as for the parent batch request, you will be assumed that entity for <em>all</em> sub-requests.
-     - Authorization headers passed into sub-requests are ignored.
-     - You cannot make more than 20 requests within a batch.</p>
+<p>- Who you authenticate as for the parent batch request, you will be assumed that entity for <em>all</em> sub-requests.<br>
+     - Authorization headers passed into sub-requests are ignored.<br>
+     - You cannot make more than 20 requests within a batch.  </p>
 
 <p><strong>Batch Dependencies</strong></p>
 
@@ -9729,10 +9729,10 @@ curl -X POST https://api.mod.io/v1/batch <span class="se">\</span>
 
 <p><strong>What will it require?</strong></p>
 
-<p>This will require three requests:
-     1. <a href="#get-mods">GET /v1/games/{game-id}/mods</a>
-     2. <a href="#get-user-subscriptions">GET /v1/me/subscribed</a>
-     3. <a href="#get-user-ratings">GET /v1/me/ratings</a></p>
+<p>This will require three requests:<br>
+     1. <a href="#get-mods">GET /v1/games/{game-id}/mods</a><br>
+     2. <a href="#get-user-subscriptions">GET /v1/me/subscribed</a><br>
+     3. <a href="#get-user-ratings">GET /v1/me/ratings</a>  </p>
 
 <p>In total, we are making 3 requests in a synchronous manner, inside a single request. Based on the above example, we need to know how to get the <code>id</code> value of the <a href="#mod-object">Mod Object</a> from Request #1 and provide it as a dependency to the subsequent requests.</p>
 
