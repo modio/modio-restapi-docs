@@ -779,7 +779,7 @@
 <td><strong>Tools/Plugins</strong></td>
 <td>Use tools, plugins and wrappers created by the community to make implementation in various engines easy.</td>
 <td>Game developers that want a pre-built modding solution for their engine (Unity, Unreal, GameMaker, Construct) of choice.</td>
-<td><a href="https://sdk.mod.io">Available per tool</a></td>
+<td><a href="https://apps.mod.io">Available per tool</a></td>
 </tr>
 </tbody>
 </table>
@@ -1806,7 +1806,7 @@ curl -X POST https://api.mod.io/v1/external/steamauth?api_key<span class="o">=</
 </code></pre>
 <p><span class="httpmethod POST">POST</span> <span class="endpointheading">/external/steamauth</span></p>
 
-<p>Request an access token on behalf of a Steam user. To use this functionality you <em>must</em> supply your games <a href="https://partner.steamgames.com/apps/sdkauth">encrypted app ticket key</a> supplied by Steamworks, in the <em>Edit &gt; Options</em> page of your games profile on mod.io. A Successful request will return an <a href="#access-token-object">Access Token Object</a>.<br><br><strong>HINT:</strong> If you want to overlay the mod.io site in-game, we recommend you add <code>?ref=steam</code> to the end of the URL you open which will prompt the user to login with Steam. See <a href="#web-overlay-authentication">Web Overlay Authentication</a> for details.</p>
+<p>Request an access token on behalf of a Steam user. To use this functionality you <em>must</em> add your games <a href="https://partner.steamgames.com/apps/sdkauth">encrypted app ticket key</a> from Steamworks, to the <em>Edit &gt; Options</em> page of your games profile on mod.io. A Successful request will return an <a href="#access-token-object">Access Token Object</a>.<br><br><strong>HINT:</strong> If you want to overlay the mod.io site in-game on Steam, we recommend you add <code>?ref=steam</code> to the end of the URL you open which will prompt the user to login with Steam. See <a href="#web-overlay-authentication">Web Overlay Authentication</a> for details.</p>
 
 <table>
 <thead>
@@ -1828,7 +1828,7 @@ curl -X POST https://api.mod.io/v1/external/steamauth?api_key<span class="o">=</
 <td>email</td>
 <td>string</td>
 <td></td>
-<td>The users email address. If supplied, and the respective user does not have an email registered for their account we will send a confirmation email to confirm they have ownership of the specified email. This functionality is also available at a later time via the <a href="#link-an-email">Link an Email</a> endpoint.<br><br><strong>NOTE</strong>: If the user already has an e-mail on record with us, this parameter will be ignored. This parameter should also be urlencoded before the request is sent.</td>
+<td>The users email address. If supplied, and the respective user does not have an email registered for their account we will send a confirmation email to confirm they have ownership of the specified email.<br><br><strong>NOTE</strong>: If the user already has an email on record with us, this parameter will be ignored. This parameter should also be urlencoded before the request is sent.</td>
 </tr>
 <tr>
 <td>date_expires</td>
@@ -1951,7 +1951,7 @@ curl -X POST https://api.mod.io/v1/external/galaxyauth?api_key<span class="o">=<
 </code></pre>
 <p><span class="httpmethod POST">POST</span> <span class="endpointheading">/external/galaxyauth</span></p>
 
-<p>Request an access token on behalf of a GOG Galaxy user. To use this functionality you <em>must</em> supply your games <a href="https://devportal.gog.com/welcome">encrypted app ticket key</a> supplied by GOG Galaxy, in the <em>Edit &gt; Options</em> page of your games profile on mod.io. A Successful request will return an <a href="#access-token-object">Access Token Object</a>.</p>
+<p>Request an access token on behalf of a GOG Galaxy user. To use this functionality you <em>must</em> add your games <a href="https://devportal.gog.com/welcome">encrypted app ticket key</a> from GOG Galaxy, to the <em>Edit &gt; Options</em> page of your games profile on mod.io. A Successful request will return an <a href="#access-token-object">Access Token Object</a>.</p>
 
 <table>
 <thead>
@@ -1973,7 +1973,7 @@ curl -X POST https://api.mod.io/v1/external/galaxyauth?api_key<span class="o">=<
 <td>email</td>
 <td>string</td>
 <td></td>
-<td>The users email address. If supplied, and the respective user does not have an email registered for their account we will send a confirmation email to confirm they have ownership of the specified email. This functionality is also available at a later time via the <a href="#link-an-email">Link an Email</a> endpoint.<br><br><strong>NOTE</strong>: If the user already has an e-mail on record with us, this parameter will be ignored. This parameter should also be urlencoded before the request is sent.</td>
+<td>The users email address. If supplied, and the respective user does not have an email registered for their account we will send a confirmation email to confirm they have ownership of the specified email.<br><br><strong>NOTE</strong>: If the user already has an email on record with us, this parameter will be ignored. This parameter should also be urlencoded before the request is sent.</td>
 </tr>
 <tr>
 <td>date_expires</td>
@@ -2096,7 +2096,7 @@ curl -X POST https://api.mod.io/v1/external/itchioauth?api_key<span class="o">=<
 </code></pre>
 <p><span class="httpmethod POST">POST</span> <span class="endpointheading">/external/itchioauth</span></p>
 
-<p>Request an access token on behalf of an itch.io user via the itch.io desktop app. Due to the desktop application allowing multiple users to be logged in at once, if more than one user is logged in then the user at the top of that list on the itch.io login dialog will be the authenticating user. A Successful request will return an <a href="#access-token-object">Access Token Object</a>.</p>
+<p>Request an access token on behalf of an itch.io user via the itch.io desktop app. Due to the desktop application allowing multiple users to be logged in at once, if more than one user is logged in then the user at the top of that list on the itch.io login dialog will be the authenticating user. A Successful request will return an <a href="#access-token-object">Access Token Object</a>.<br><br><strong>HINT:</strong> If you want to overlay the mod.io site in-game on itch.io, we recommend you add <code>?ref=itchio</code> to the end of the URL you open which will prompt the user to login with itch.io. See <a href="#web-overlay-authentication">Web Overlay Authentication</a> for details.</p>
 
 <table>
 <thead>
@@ -2118,7 +2118,7 @@ curl -X POST https://api.mod.io/v1/external/itchioauth?api_key<span class="o">=<
 <td>email</td>
 <td>string</td>
 <td></td>
-<td>The users email address. If supplied, and the respective user does not have an email registered for their account we will send a confirmation email to confirm they have ownership of the specified email. This functionality is also available at a later time via the <a href="#link-an-email">Link an Email</a> endpoint.<br><br><strong>NOTE</strong>: If the user already has an e-mail on record with us, this parameter will be ignored. This parameter should also be urlencoded before the request is sent.</td>
+<td>The users email address. If supplied, and the respective user does not have an email registered for their account we will send a confirmation email to confirm they have ownership of the specified email.<br><br><strong>NOTE</strong>: If the user already has an email on record with us, this parameter will be ignored. This parameter should also be urlencoded before the request is sent.</td>
 </tr>
 <tr>
 <td>date_expires</td>
@@ -2245,7 +2245,7 @@ curl -X POST https://api.mod.io/v1/external/oculusauth?api_key<span class="o">=<
 </code></pre>
 <p><span class="httpmethod POST">POST</span> <span class="endpointheading">/external/oculusauth</span></p>
 
-<p>Request an access token on behalf of an Oculus user. To use this functionality you <em>must</em> supply your games <a href="https://dashboard.oculus.com/">AppId and secret</a> from the Oculus Dashboard, in the <em>Edit &gt; Options</em> page of your games profile on mod.io. A Successful request will return an <a href="#access-token-object">Access Token Object</a>.</p>
+<p>Request an access token on behalf of an Oculus user. To use this functionality you <em>must</em> add your games <a href="https://dashboard.oculus.com/">AppId and secret</a> from the Oculus Dashboard, to the <em>Edit &gt; Options</em> page of your games profile on mod.io. A Successful request will return an <a href="#access-token-object">Access Token Object</a>.</p>
 
 <table>
 <thead>
@@ -2279,7 +2279,7 @@ curl -X POST https://api.mod.io/v1/external/oculusauth?api_key<span class="o">=<
 <td>email</td>
 <td>string</td>
 <td></td>
-<td>The users email address. If supplied, and the respective user does not have an email registered for their account we will send a confirmation email to confirm they have ownership of the specified email.<br><br><strong>WARNING</strong>: We <strong>strongly recommend</strong> that you prompt your users in a friendly manner at least once to provide their e-mail address to link to their account. Due to how Oculus handles user id's - if we are not supplied with an e-mail for a user at least once we will <strong>never</strong> be able to link that user with their existing account at a later date as Oculus id's operate at the game-scope, not globally. Failing to provide an e-mail will in-effect generate an orphan account that will only ever be able to be accessed from your title.</td>
+<td>The users email address. If supplied, and the respective user does not have an email registered for their account we will send a confirmation email to confirm they have ownership of the specified email.<br><br><strong>WARNING</strong>: We <strong>strongly recommend</strong> that you prompt your users in a friendly manner at least once to provide their email address to link their Oculus account. Due to how Oculus handles user id's - if we are not supplied with an email for a user at least once we will <strong>never</strong> be able to link that user with their existing account at a later date as Oculus id's operate at the game-scope, not globally. Failing to provide an email will in-effect generate an orphan account that will only be able to be accessed from your title.</td>
 </tr>
 <tr>
 <td>date_expires</td>
@@ -2412,7 +2412,7 @@ curl -X POST https://api.mod.io/v1/external/link <span class="se">\</span>
 </code></pre>
 <p><span class="httpmethod POST">POST</span> <span class="endpointheading">/external/link</span></p>
 
-<p>Connect an external account (i.e. Steam and GOG documented above) with the authenticated user's e-mail address. When calling this endpoint you must authenticate the request with the users access token and the ID of their external account. If we have a matching external account saved for that user, a Successful request will return a <a href="#message-object">Message Object</a> response at which point the user must check the supplied e-mail address to link the external account to the respective e-mail address.<br><br><strong>NOTE</strong>: The external authentication flows (i.e. Steam and GOG documented above) only give us a users id. This endpoint allows the user to verify their e-mail and connect it to their account. It is an <strong>optional but recommended</strong> step as it makes account recovery and other processes easier.<br><br><strong>NOTE</strong>: If you link an external account to an e-mail that already exists on mod.io and you confirm the action via the e-mail you will receive, the accounts will <strong>automatically</strong> be merged together transferring all content from the external account to the native, existing account. Once this process is complete, existing access tokens to the external account will be nullified and you will need to <a href="#authentication">re-authenticate</a>.</p>
+<p>Connect an external account (i.e. Steam and GOG documented above) with the authenticated user's email address. When calling this endpoint you must authenticate the request with the users access token and the ID of their external account. If we have a matching external account saved for that user, a Successful request will return a <a href="#message-object">Message Object</a> response at which point the user must check the supplied email address to link the external account to the respective email address.<br><br><strong>NOTE</strong>: The external authentication flows (i.e. Steam and GOG documented above) only give us a users id. This endpoint allows the user to verify their email and connect it to their account. It is an <strong>optional but recommended</strong> step as it makes account recovery and other processes easier.<br><br><strong>NOTE</strong>: If you link an external account to an email that already exists on mod.io and you confirm the action via the email you will receive, the accounts will <strong>automatically</strong> be merged together transferring all content from the external account to the native, existing account. Once this process is complete, existing access tokens to the external account will be nullified and you will need to <a href="#authentication">re-authenticate</a>.</p>
 
 <table>
 <thead>
@@ -2441,7 +2441,7 @@ curl -X POST https://api.mod.io/v1/external/link <span class="se">\</span>
 <td>email</td>
 <td>string</td>
 <td>true</td>
-<td>The e-mail address to link to the authenticated user's account.</td>
+<td>The email address to link to the authenticated user's account.</td>
 </tr>
 </tbody>
 </table>
@@ -2451,7 +2451,7 @@ curl -X POST https://api.mod.io/v1/external/link <span class="se">\</span>
 </blockquote>
 <pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
   </span><span class="s2">"code"</span><span class="p">:</span><span class="w"> </span><span class="mi">200</span><span class="p">,</span><span class="w">
-  </span><span class="s2">"message"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Please see the confirmation e-mail sent to (:email) to complete account link."</span><span class="w">
+  </span><span class="s2">"message"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Please see the confirmation email sent to (:email) to complete account link."</span><span class="w">
 </span><span class="p">}</span><span class="w">
 </span></code></pre>
 <h3 id="Link-an-Email-responses">Responses</h3>
@@ -2604,7 +2604,7 @@ Accept: application/json
 <tr>
 <td>summary</td>
 <td>string</td>
-<td>Summary of the game.</td>
+<td>Summary of the games mod support.</td>
 </tr>
 <tr>
 <td>instructions_url</td>
@@ -2708,7 +2708,7 @@ Accept: application/json
       </span><span class="p">},</span><span class="w">
       </span><span class="s2">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Rogue Knight"</span><span class="p">,</span><span class="w">
       </span><span class="s2">"name_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"rogue-knight"</span><span class="p">,</span><span class="w">
-      </span><span class="s2">"summary"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Rogue Knight is a brand new 2D pixel platformer."</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"summary"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Rogue Knight is a brand new 2D pixel platformer that supports custom levels and characters."</span><span class="p">,</span><span class="w">
       </span><span class="s2">"instructions"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Instructions on the process to upload mods."</span><span class="p">,</span><span class="w">
       </span><span class="s2">"instructions_url"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://www.rogue-knight-game.com/modding/getting-started"</span><span class="p">,</span><span class="w">
       </span><span class="s2">"profile_url"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://rogue-knight.mod.io"</span><span class="p">,</span><span class="w">
@@ -2883,7 +2883,7 @@ Accept: application/json
   </span><span class="p">},</span><span class="w">
   </span><span class="s2">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Rogue Knight"</span><span class="p">,</span><span class="w">
   </span><span class="s2">"name_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"rogue-knight"</span><span class="p">,</span><span class="w">
-  </span><span class="s2">"summary"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Rogue Knight is a brand new 2D pixel platformer."</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"summary"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Rogue Knight is a brand new 2D pixel platformer that supports custom levels and characters."</span><span class="p">,</span><span class="w">
   </span><span class="s2">"instructions"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Instructions on the process to upload mods."</span><span class="p">,</span><span class="w">
   </span><span class="s2">"instructions_url"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://www.rogue-knight-game.com/modding/getting-started"</span><span class="p">,</span><span class="w">
   </span><span class="s2">"profile_url"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://rogue-knight.mod.io"</span><span class="p">,</span><span class="w">
@@ -3159,7 +3159,7 @@ Content-Type: application/x-www-form-urlencoded
   </span><span class="p">},</span><span class="w">
   </span><span class="s2">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Rogue Knight"</span><span class="p">,</span><span class="w">
   </span><span class="s2">"name_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"rogue-knight"</span><span class="p">,</span><span class="w">
-  </span><span class="s2">"summary"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Rogue Knight is a brand new 2D pixel platformer."</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"summary"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Rogue Knight is a brand new 2D pixel platformer that supports custom levels and characters."</span><span class="p">,</span><span class="w">
   </span><span class="s2">"instructions"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Instructions on the process to upload mods."</span><span class="p">,</span><span class="w">
   </span><span class="s2">"instructions_url"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://www.rogue-knight-game.com/modding/getting-started"</span><span class="p">,</span><span class="w">
   </span><span class="s2">"profile_url"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://rogue-knight.mod.io"</span><span class="p">,</span><span class="w">
@@ -3356,7 +3356,7 @@ Accept: application/json
 <tr>
 <td>modfile</td>
 <td>integer</td>
-<td>Unique id of the file that is the current active release.</td>
+<td>Unique id of the file that is the current active release (see <a href="#files">mod files</a>).</td>
 </tr>
 <tr>
 <td>metadata_blob</td>
@@ -3830,7 +3830,7 @@ curl -X POST https://api.mod.io/v1/games/<span class="o">{</span>game-id<span cl
 </code></pre>
 <p><span class="httpmethod POST">POST</span> <span class="endpointheading">/games/{game-id}/mods</span></p>
 
-<p>Add a mod. Successful request will return the newly created <a href="#mod-object">Mod Object</a>. All content published by users on <a href="https://mod.io">mod.io</a> is subject to the <a href="https://mod.io/terms/widget" class="colorbox">mod.io Terms of Use</a>. It is a requirement that you provide a link to https://mod.io/terms in any place where users are submitting content to mod.io.<br><br><strong>NOTE:</strong> By default new mods are 'not accepted' and 'public'. They can only be 'accepted' and made available via the API once a <a href="#add-modfile">Mod File</a> has been uploaded. <a href="#add-mod-media">Media</a>, <a href="#add-mod-kvp-metadata">Metadata Key Value Pairs</a> and <a href="#add-mod-dependencies">Dependencies</a> can also be added after a mod profile is created.</p>
+<p>Add a mod. Successful request will return the newly created <a href="#mod-object">Mod Object</a>. All content published by users on <a href="https://mod.io">mod.io</a> is subject to the <a href="https://mod.io/terms/widget" class="colorbox">mod.io Terms of Use</a>. It is a requirement that you provide a link to <a href="https://mod.io/terms">https://mod.io/terms</a> in any place where users are submitting content to mod.io.<br><br><strong>NOTE:</strong> By default new mods are 'not accepted' and 'public'. They can only be 'accepted' and made available via the API once a <a href="#add-modfile">Mod File</a> has been uploaded. <a href="#add-mod-media">Media</a>, <a href="#add-mod-kvp-metadata">Metadata Key Value Pairs</a> and <a href="#add-mod-dependencies">Dependencies</a> can also be added after a mod profile is created.</p>
 
 <table>
 <thead>
@@ -3901,7 +3901,7 @@ curl -X POST https://api.mod.io/v1/games/<span class="o">{</span>game-id<span cl
 <td>metadata_blob</td>
 <td>string</td>
 <td></td>
-<td>Metadata stored by the game developer which may include properties as to how the item works, or other information you need to display. Metadata can also be stored as searchable <a href="#metadata">key value pairs</a>, and to individual <a href="#get-modfiles">mod files</a>.</td>
+<td>Metadata stored by the game developer which may include properties as to how the item works, or other information you need to display. Metadata can also be stored as searchable <a href="#metadata">key value pairs</a>, and to individual <a href="#get-all-modfiles">mod files</a>.</td>
 </tr>
 <tr>
 <td>tags</td>
@@ -4216,7 +4216,7 @@ Content-Type: application/x-www-form-urlencoded
 <td>metadata_blob</td>
 <td>string</td>
 <td></td>
-<td>Metadata stored by the game developer which may include properties as to how the item works, or other information you need to display. Metadata can also be stored as searchable <a href="#metadata">key value pairs</a>, and to individual <a href="#get-modfiles">mod files</a>.</td>
+<td>Metadata stored by the game developer which may include properties as to how the item works, or other information you need to display. Metadata can also be stored as searchable <a href="#metadata">key value pairs</a>, and to individual <a href="#get-all-modfiles">mod files</a>.</td>
 </tr>
 </tbody>
 </table>
@@ -4434,7 +4434,7 @@ Content-Type: application/x-www-form-urlencoded
 </code></pre>
 <p><span class="httpmethod DELETE">DELETE</span> <span class="endpointheading">/games/{game-id}/mods/{mod-id}</span></p>
 
-<p>Delete a mod profile. Successful request will return <code>204 No Content</code> and fire a <strong>MOD_UNAVAILABLE</strong> event.<br><br><strong>NOTE:</strong> This will close the mod profile which means it cannot be viewed or retrieved via API requests but will still exist in-case you choose to restore it at a later date. If you wish to permanently delete a mod you have access rights to you must do it via the <a href="https://mod.io/mods">mods profile page</a> on the mod.io website.</p>
+<p>Delete a mod profile. Successful request will return <code>204 No Content</code> and fire a <strong>MOD_UNAVAILABLE</strong> event.<br><br><strong>NOTE:</strong> This will close the mod profile which means it cannot be viewed or retrieved via API requests but will still exist in-case you choose to restore it at a later date. If you wish to permanently delete a mod you have access rights to, you must do it via the <a href="https://mod.io/mods">mods profile page</a> on the mod.io website.</p>
 
 <blockquote>
 <p>Example response</p>
@@ -4885,7 +4885,7 @@ curl -X POST https://api.mod.io/v1/games/<span class="o">{</span>game-id<span cl
 </code></pre>
 <p><span class="httpmethod POST">POST</span> <span class="endpointheading">/games/{game-id}/mods/{mod-id}/files</span></p>
 
-<p>Upload a file for the corresponding mod. Successful request will return the newly created <a href="#modfile-object">Modfile Object</a>. Ensure that the release you are uploading is stable and free from any critical issues. Files are scanned upon upload, any users who upload malicious files will have their accounts closed promptly. <br><br><strong>NOTE:</strong> This endpoint does <em>not support</em> <code>input_json</code> even if you base64-encode your file method due to the already-large file sizes of some releases and base64-encoding inflating the filesize.</p>
+<p>Upload a file for the corresponding mod. Successful request will return the newly created <a href="#modfile-object">Modfile Object</a>. Ensure that the release you are uploading is stable and free from any critical issues. Files are scanned upon upload, any users who upload malicious files will have their accounts closed. <br><br><strong>NOTE:</strong> This endpoint does <em>not support</em> <code>input_json</code> even if you base64-encode your file, due to the already-large file sizes of some releases and base64-encoding inflating the filesize.</p>
 
 <table>
 <thead>
@@ -4907,7 +4907,7 @@ curl -X POST https://api.mod.io/v1/games/<span class="o">{</span>game-id<span cl
 <td>version</td>
 <td>string</td>
 <td></td>
-<td>Version of the file release.</td>
+<td>Version of the file release (recommended format 1.0.0 - MAJOR.MINOR.PATCH).</td>
 </tr>
 <tr>
 <td>changelog</td>
@@ -4920,7 +4920,7 @@ curl -X POST https://api.mod.io/v1/games/<span class="o">{</span>game-id<span cl
 <td>boolean</td>
 <td></td>
 <td>
-<em>Default value is true.</em> Label this upload as the current release, this will change the <code>modfile</code> field on the parent mod to the <code>id</code> of this file after upload.<br><br><strong>NOTE:</strong> If the <em>active</em> parameter is <em>true</em>, a <a href="#get-mod-events"><strong>MODFILE_CHANGED</strong> event</a> will be fired, so game clients know there is an update available for this mod.</td>
+<em>Default value is true.</em> Flag this upload as the current release, this will change the <code>modfile</code> field on the parent mod to the <code>id</code> of this file after upload.<br><br><strong>NOTE:</strong> If the <em>active</em> parameter is <em>true</em>, a <a href="#get-all-mod-events"><strong>MODFILE_CHANGED</strong> event</a> will be fired, so game clients know there is an update available for this mod.</td>
 </tr>
 <tr>
 <td>filehash</td>
@@ -4932,7 +4932,7 @@ curl -X POST https://api.mod.io/v1/games/<span class="o">{</span>game-id<span cl
 <td>metadata_blob</td>
 <td>string</td>
 <td></td>
-<td>Metadata stored by the game developer which may include properties such as what version of the game this file is compatible with. Metadata can also be stored as searchable <a href="#metadata">key value pairs</a>, and to the <a href="#edit-mod">mod object</a>.</td>
+<td>Metadata stored by the game developer which may include properties such as what version of the game this file is compatible with.</td>
 </tr>
 </tbody>
 </table>
@@ -5106,7 +5106,7 @@ Content-Type: application/x-www-form-urlencoded
 <td>version</td>
 <td>string</td>
 <td></td>
-<td>Version of the file release.</td>
+<td>Version of the file release (recommended format 1.0.0 - MAJOR.MINOR.PATCH).</td>
 </tr>
 <tr>
 <td>changelog</td>
@@ -5118,13 +5118,13 @@ Content-Type: application/x-www-form-urlencoded
 <td>active</td>
 <td>boolean</td>
 <td></td>
-<td>Label this upload as the current release.<br><br><strong>NOTE:</strong> If the <em>active</em> parameter causes the parent mods <code>modfile</code> parameter to change, a <a href="#get-mod-events"><strong>MODFILE_CHANGED</strong> event</a> will be fired, so game clients know there is an update available for this mod.</td>
+<td>Flag this upload as the current release.<br><br><strong>NOTE:</strong> If the <em>active</em> parameter causes the parent mods <code>modfile</code> parameter to change, a <a href="#get-all-mod-events"><strong>MODFILE_CHANGED</strong> event</a> will be fired, so game clients know there is an update available for this mod.</td>
 </tr>
 <tr>
 <td>metadata_blob</td>
 <td>string</td>
 <td></td>
-<td>Metadata stored by the game developer which may include properties such as what version of the game this file is compatible with. Metadata can also be stored as searchable <a href="#metadata">key value pairs</a>, and to the <a href="#edit-mod">mod object</a>.</td>
+<td>Metadata stored by the game developer which may include properties such as what version of the game this file is compatible with.</td>
 </tr>
 </tbody>
 </table>
@@ -5261,7 +5261,7 @@ Content-Type: application/x-www-form-urlencoded
 </code></pre>
 <p><span class="httpmethod DELETE">DELETE</span> <span class="endpointheading">/games/{game-id}/mods/{mod-id}/files/{file-id}</span></p>
 
-<p>Delete a modfile. Successful request will return <code>204 No Content</code>.<br><br><strong>NOTE:</strong> A modfile can never be removed if it is currently the active release for the corresponding mod regardless of user permissions. Furthermore, this ability is only available if you are authenticated as the game administrator for this game <em>or</em> is the original uploader of the modfile.</p>
+<p>Delete a modfile. Successful request will return <code>204 No Content</code>.<br><br><strong>NOTE:</strong> A modfile can never be removed if it is the current active release for the corresponding mod regardless of user permissions. Furthermore, this ability is only available if you are authenticated as the game administrator for this game <em>or</em> are the original uploader of the modfile.</p>
 
 <blockquote>
 <p>Example response</p>
@@ -5381,7 +5381,7 @@ curl -X POST https://api.mod.io/v1/games/<span class="o">{</span>game-id<span cl
 </code></pre>
 <p><span class="httpmethod POST">POST</span> <span class="endpointheading">/games/{game-id}/media</span></p>
 
-<p>Upload new media to a game. Any request you make to this endpoint <em>should</em> contain a binary file for each of the fields you want to update below. Successful request will return <a href="#message-object">Message Object</a>.</p>
+<p>Upload new media to a game. The request <code>Content-Type</code> header <strong>must</strong> be <code>multipart/form-data</code> to submit image files. Any request you make to this endpoint <em>should</em> contain a binary file for each of the fields you want to update below. Successful request will return <a href="#message-object">Message Object</a>.</p>
 
 <p><strong>NOTE:</strong> You can also add media to <a href="https://mod.io/games">your games profile</a> on the mod.io website. This is the recommended approach.</p>
 
@@ -5567,13 +5567,13 @@ curl -X POST https://api.mod.io/v1/games/<span class="o">{</span>game-id<span cl
 <td>images</td>
 <td>zip</td>
 <td></td>
-<td>Zip archive of images to upload. Only valid gif, jpg and png images in the zip file will be processed. The filename <strong>must be images.zip</strong> all other zips will be ignored. Alternatively you can POST one or more images to this endpoint and they will be detected and added to the mods gallery.</td>
+<td>Zip archive of images to add to the mods gallery. Only valid gif, jpg and png images in the zip file will be processed. The filename <strong>must be images.zip</strong> all other zips will be ignored. Alternatively you can POST one or more images to this endpoint and they will be detected and added to the mods gallery.</td>
 </tr>
 <tr>
 <td>youtube</td>
 <td>string[]</td>
 <td></td>
-<td>Full YouTube link(s) you want to add - example 'https://www.youtube.com/watch?v=IGVZOLV9SPo'</td>
+<td>Full Youtube link(s) you want to add - example 'https://www.youtube.com/watch?v=IGVZOLV9SPo'</td>
 </tr>
 <tr>
 <td>sketchfab</td>
@@ -5873,7 +5873,7 @@ Content-Type: application/x-www-form-urlencoded
 </code></pre>
 <p><span class="httpmethod POST">POST</span> <span class="endpointheading">/games/{game-id}/mods/{mod-id}/subscribe</span></p>
 
-<p>Subscribe the <em>authenticated user</em> to a corresponding mod. No body parameters are required for this action. Successful request will return the <a href="#mod-object">Mod Object</a> of the newly subscribed mod.<br><br><strong>NOTE:</strong> Users can subscribe to mods via mod.io, we recommend you poll the <a href="#get-user-events">Get User Events</a> endpoint to keep a users mods collection up to date.</p>
+<p>Subscribe the <em>authenticated user</em> to a corresponding mod. No body parameters are required for this action. Successful request will return the <a href="#mod-object">Mod Object</a> of the newly subscribed mod.<br><br><strong>NOTE:</strong> Users can subscribe to mods via mod.io, we recommend you poll or call the <a href="#get-user-events">Get User Events</a> endpoint when needed, to keep a users mods collection up to date.</p>
 
 <blockquote>
 <p>Example response</p>
@@ -6109,7 +6109,7 @@ Content-Type: application/x-www-form-urlencoded
 </code></pre>
 <p><span class="httpmethod DELETE">DELETE</span> <span class="endpointheading">/games/{game-id}/mods/{mod-id}/subscribe</span></p>
 
-<p>Unsubscribe the <em>authenticated user</em> from the corresponding mod. No body parameters are required for this action. Successful request will return <code>204 No Content</code>.<br><br><strong>NOTE:</strong> Users can unsubscribe from mods via mod.io, we recommend you poll the <a href="#get-mod-events">Get Mod Events</a> endpoint to keep a users mods collection up to date.</p>
+<p>Unsubscribe the <em>authenticated user</em> from the corresponding mod. No body parameters are required for this action. Successful request will return <code>204 No Content</code>.<br><br><strong>NOTE:</strong> Users can unsubscribe from mods via mod.io, we recommend you poll or call the <a href="#get-mod-events">Get Mod Events</a> endpoint when needed, to keep a users mods collection up to date.</p>
 
 <blockquote>
 <p>Example response</p>
@@ -7620,7 +7620,7 @@ curl -X POST https://api.mod.io/v1/games/<span class="o">{</span>game-id<span cl
 <td>metadata</td>
 <td>string[]</td>
 <td>true</td>
-<td>Array containing one or more key value pairs where the the key and value are separated by a colon ':' (if the string contains multiple colons the split will occur on the first matched, i.e. pistol-dmg:800:400 will become key: pistol-dmg, value: 800:400). The following restrictions apply to the supplied metadata:<br><br>- Keys support alphanumeric, '_' and '-' characters only.<br>- Keys can map to multiple values (1-to-many relationship).<br>- Keys and values cannot exceed 255 characters in length.<br>- Key value pairs are searchable by exact match only.</td>
+<td>Array containing one or more key value pairs where the the key and value are separated by a colon ':' (if the string contains multiple colons the split will occur on the first matched, i.e. pistol-dmg:800:400 will become key: <code>pistol-dmg</code>, value: <code>800:400</code>). The following restrictions apply to the supplied metadata:<br><br>- Keys support alphanumeric, '_' and '-' characters only.<br>- Keys can map to multiple values (1-to-many relationship).<br>- Keys and values cannot exceed 255 characters in length.<br>- Key value pairs are searchable by exact match only.</td>
 </tr>
 </tbody>
 </table>
@@ -8019,9 +8019,7 @@ curl -X POST https://api.mod.io/v1/games/<span class="o">{</span>game-id<span cl
 </code></pre>
 <p><span class="httpmethod POST">POST</span> <span class="endpointheading">/games/{game-id}/mods/{mod-id}/dependencies</span></p>
 
-<p>Add mod dependencies required by the corresponding mod. A dependency is a mod that should be installed for this mod to run. <strong>IMPORTANT:</strong> Because of the complexity of supporting nested dependencies, we recommend you treat dependencies as a recommendation for your players, and do not process dependencies automatically when installing a mod unless absolutely required. Successful request will return <a href="#message-object">Message Object</a>.</p>
-
-<p><strong>NOTE:</strong> Some modders might select <em>soft</em> dependencies to promote or credit other mods. We advise against this but it is possible to do, and is one of the reasons why we recommend against processing nested dependencies automatically.</p>
+<p>Add mod dependencies required by the corresponding mod. A dependency is a mod that should be installed for this mod to run. Successful request will return <a href="#message-object">Message Object</a>.</p>
 
 <table>
 <thead>
@@ -9530,7 +9528,7 @@ curl -X POST https://api.mod.io/v1/report <span class="se">\</span>
 </code></pre>
 <p><span class="httpmethod POST">POST</span> <span class="endpointheading">/report</span></p>
 
-<p>Report a resource on mod.io. You are responsible for content your users submit, so properly supporting the report endpoint is important (<a href="https://mod.io/report/widget" class="colorbox">see how we do it</a>). Successful request will return <a href="#message-object">Message Object</a>.<br><br><strong>NOTE:</strong> If you are a game owner or manager, you can <a href="https://mod.io/messages/reports">view all reports</a> submitted for your game. You can also configure in your games control panel the number of reports required before content is automatically taken down for review.<br><br><strong>NOTE:</strong> You can also <a href="https://mod.io/report/widget" class="colorbox">submit a report online</a> and read our <a href="https://mod.io/terms/widget" class="colorbox">terms of use</a> for information about what is/isn't acceptable.</p>
+<p>Report a resource on mod.io. You are responsible for content your users submit, so properly supporting the report endpoint or linking to the report page <a href="https://mod.io/report">https://mod.io/report</a> is important (<a href="https://mod.io/report/widget" class="colorbox">see how we do it</a>). Successful request will return <a href="#message-object">Message Object</a>.<br><br><strong>NOTE:</strong> If you are a game owner or manager, you can <a href="https://mod.io/messages/reports">view all reports</a> submitted for your game. You can also configure in your games control panel the number of reports required before content is automatically taken down for review.<br><br><strong>NOTE:</strong> Read our <a href="https://mod.io/terms/widget" class="colorbox">terms of use</a> for information about what is/isn't acceptable.</p>
 
 <table>
 <thead>
@@ -9577,7 +9575,7 @@ curl -X POST https://api.mod.io/v1/report <span class="se">\</span>
 <td>summary</td>
 <td>string</td>
 <td>true</td>
-<td>Detailed description of your report. Make sure you include all relevant information and links to help moderators investigate and respond appropriately. Our <a href="https://mod.io/report/widget" class="colorbox">online reporting process</a> shows the information we collect and put into the <code>name</code>, <code>contact</code> and <code>summary</code> fields as appropiate. We recommend you implement a similar flow in-game.</td>
+<td>Detailed description of your report. Make sure you include all relevant information and links to help moderators investigate and respond appropriately.<br><br>Our <a href="https://mod.io/report/widget" class="colorbox">online reporting process</a> shows the information we collect and put into the <code>name</code>, <code>contact</code> and <code>summary</code> fields as appropiate. We recommend you implement a similar flow in-game.</td>
 </tr>
 </tbody>
 </table>
@@ -9709,13 +9707,13 @@ curl -X POST https://api.mod.io/v1/batch <span class="se">\</span>
 </code></pre>
 <p><span class="httpmethod POST">POST</span> <span class="endpointheading">/batch</span></p>
 
-<p>Submit one or more API endpoint calls in a single HTTP request by batching the requests together. This endpoint is convenient for repeated sequential API calls as it eliminates the HTTP overhead of each request. All encapsulated requests are processed in a synchronous manner which enables you to use the response data of a previous request as a parameter in the subsequent request which we call request dependencies (see below for more info). Successful request will return an array of <a href="#make-batch-request-2">Batch Objects</a>.</p>
+<p>Speed up your API calls, by batching them into a single HTTP request. This endpoint is convenient for repeated sequential API calls as it eliminates the HTTP overhead of each request. All encapsulated requests are processed in a synchronous manner which enables you to use the response data of a previous request as a parameter in the subsequent request which we call request dependencies (see below for more info). Successful request will return an array of <a href="#make-batch-request-2">Batch Objects</a>.</p>
 
 <p><strong>Batch Limitations</strong></p>
 
-<p>The following applies to all batch requests:</p>
+<p>The following applies to all batch requests:  </p>
 
-<p>- Who you authenticate as for the parent batch request, you will be assumed that entity for <em>all</em> sub-requests.<br>
+<p>- Who you authenticate as for the parent batch request, will be used for <em>all</em> sub-requests.<br>
      - Authorization headers passed into sub-requests are ignored.<br>
      - You cannot make more than 20 requests within a batch.  </p>
 
@@ -9729,7 +9727,7 @@ curl -X POST https://api.mod.io/v1/batch <span class="se">\</span>
 
 <p><strong>What will it require?</strong></p>
 
-<p>This will require three requests:<br>
+<p>This will require three requests (see the example code on the right):<br>
      1. <a href="#get-mods">GET /v1/games/{game-id}/mods</a><br>
      2. <a href="#get-user-subscriptions">GET /v1/me/subscribed</a><br>
      3. <a href="#get-user-ratings">GET /v1/me/ratings</a>  </p>
@@ -9738,7 +9736,7 @@ curl -X POST https://api.mod.io/v1/batch <span class="se">\</span>
 
 <p><strong>How do we reference the mod id from request #1?</strong></p>
 
-<p>This endpoint, like every other multiple response endpoint, returns a <code>data</code> array with the resultant objects. If we look at our first request we can see that the <a href="#get-mods-2">Get Mods</a>, upon success, returns an array called <code>data</code> which contains the retrieved <a href="#get-mods">Mod Objects</a>. Sometimes you may want to get all values of a certain column within the <code>data</code> array, like we will do now. This is how we would get all mod id's from the first request and pass them into the second request as what we call a 'Batch Dependency'.</p>
+<p>If we look at our first request we can see that the <a href="#get-mods-2">Get Mods</a>, upon success, returns an array called <code>data</code> which contains the retrieved <a href="#get-mods">Mod Objects</a>. Sometimes you may want to get all values of a certain column within the <code>data</code> array, like we will do now. This is how we would get all mod id's from the first request and pass them into the second request as what we call a 'Batch Dependency'.</p>
 
 <p>Here is what our second request will look like, after adding the dependency which uses our global <code>-in</code> filter.</p>
 
@@ -10755,12 +10753,12 @@ Authorization: Bearer {access-token}
 <tr>
 <td>name_id</td>
 <td>string</td>
-<td>Subdomain for the game on mod.io. For example: https://gamename.mod.io</td>
+<td>Subdomain for the game on mod.io. For example: https://<strong>gamename</strong>.mod.io</td>
 </tr>
 <tr>
 <td>summary</td>
 <td>string</td>
-<td>Summary of the game.</td>
+<td>Summary of the games mod support.</td>
 </tr>
 <tr>
 <td>instructions_url</td>
@@ -10859,7 +10857,7 @@ Authorization: Bearer {access-token}
       </span><span class="p">},</span><span class="w">
       </span><span class="s2">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Rogue Knight"</span><span class="p">,</span><span class="w">
       </span><span class="s2">"name_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"rogue-knight"</span><span class="p">,</span><span class="w">
-      </span><span class="s2">"summary"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Rogue Knight is a brand new 2D pixel platformer."</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"summary"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Rogue Knight is a brand new 2D pixel platformer that supports custom levels and characters."</span><span class="p">,</span><span class="w">
       </span><span class="s2">"instructions"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Instructions on the process to upload mods."</span><span class="p">,</span><span class="w">
       </span><span class="s2">"instructions_url"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://www.rogue-knight-game.com/modding/getting-started"</span><span class="p">,</span><span class="w">
       </span><span class="s2">"profile_url"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://rogue-knight.mod.io"</span><span class="p">,</span><span class="w">
@@ -11066,7 +11064,7 @@ Authorization: Bearer {access-token}
 <tr>
 <td>modfile</td>
 <td>integer</td>
-<td>Unique id of the file that is the current active release.</td>
+<td>Unique id of the file that is the current active release (see <a href="#files">mod files</a>).</td>
 </tr>
 <tr>
 <td>metadata_blob</td>
@@ -11848,7 +11846,8 @@ To perform this request, you must be authenticated via one of the following meth
 <tr>
 <td>»» name_id</td>
 <td>string</td>
-<td>Path for the user on mod.io. For example: https://mod.io/members/<strong>username-id-here</strong> Usually a simplified version of their username.</td>
+<td>Path for the user on mod.io. For example: https://mod.io/members/<strong>name-id-here</strong>
+</td>
 </tr>
 <tr>
 <td>»» username</td>
@@ -11888,12 +11887,12 @@ To perform this request, you must be authenticated via one of the following meth
 <tr>
 <td>»» timezone</td>
 <td>string</td>
-<td>This field is no longer returned.</td>
+<td>This field is no longer used and will return an empty string.</td>
 </tr>
 <tr>
 <td>»» language</td>
 <td>string</td>
-<td>This field is no longer used and will return an empty string. To <a href="#localization">localize the API response</a> we recommend you set the Accept-Language header.</td>
+<td>This field is no longer used and will return an empty string. To <a href="#localization">localize the API response</a> we recommend you set the <code>Accept-Language</code> header.</td>
 </tr>
 <tr>
 <td>»» profile_url</td>
@@ -12151,7 +12150,7 @@ To perform this request, you must be authenticated via one of the following meth
 <tr>
 <td>»» ratings_total</td>
 <td>integer</td>
-<td>Number of times this item has been rated.</td>
+<td>Number of times this mod has been rated.</td>
 </tr>
 <tr>
 <td>»» ratings_positive</td>
@@ -12393,7 +12392,8 @@ To perform this request, you must be authenticated via one of the following meth
 <tr>
 <td>»»» name_id</td>
 <td>string</td>
-<td>Path for the user on mod.io. For example: https://mod.io/members/<strong>username-id-here</strong> Usually a simplified version of their username.</td>
+<td>Path for the user on mod.io. For example: https://mod.io/members/<strong>name-id-here</strong>
+</td>
 </tr>
 <tr>
 <td>»»» username</td>
@@ -12433,12 +12433,12 @@ To perform this request, you must be authenticated via one of the following meth
 <tr>
 <td>»»» timezone</td>
 <td>string</td>
-<td>This field is no longer returned.</td>
+<td>This field is no longer used and will return an empty string.</td>
 </tr>
 <tr>
 <td>»»» language</td>
 <td>string</td>
-<td>This field is no longer used and will return an empty string. To <a href="#localization">localize the API response</a> we recommend you set the Accept-Language header.</td>
+<td>This field is no longer used and will return an empty string. To <a href="#localization">localize the API response</a> we recommend you set the <code>Accept-Language</code> header.</td>
 </tr>
 <tr>
 <td>»»» profile_url</td>
@@ -12696,7 +12696,7 @@ To perform this request, you must be authenticated via one of the following meth
 <tr>
 <td>»»» ratings_total</td>
 <td>integer</td>
-<td>Number of times this item has been rated.</td>
+<td>Number of times this mod has been rated.</td>
 </tr>
 <tr>
 <td>»»» ratings_positive</td>
@@ -12837,7 +12837,8 @@ To perform this request, you must be authenticated via one of the following meth
 <tr>
 <td>» name_id</td>
 <td>string</td>
-<td>Path for the user on mod.io. For example: https://mod.io/members/<strong>username-id-here</strong> Usually a simplified version of their username.</td>
+<td>Path for the user on mod.io. For example: https://mod.io/members/<strong>name-id-here</strong>
+</td>
 </tr>
 <tr>
 <td>» username</td>
@@ -12877,12 +12878,12 @@ To perform this request, you must be authenticated via one of the following meth
 <tr>
 <td>» timezone</td>
 <td>string</td>
-<td>This field is no longer returned.</td>
+<td>This field is no longer used and will return an empty string.</td>
 </tr>
 <tr>
 <td>» language</td>
 <td>string</td>
-<td>This field is no longer used and will return an empty string. To <a href="#localization">localize the API response</a> we recommend you set the Accept-Language header.</td>
+<td>This field is no longer used and will return an empty string. To <a href="#localization">localize the API response</a> we recommend you set the <code>Accept-Language</code> header.</td>
 </tr>
 <tr>
 <td>» profile_url</td>
@@ -13064,7 +13065,7 @@ To perform this request, you must be authenticated via one of the following meth
   </span><span class="p">},</span><span class="w">
   </span><span class="s2">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Rogue Knight"</span><span class="p">,</span><span class="w">
   </span><span class="s2">"name_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"rogue-knight"</span><span class="p">,</span><span class="w">
-  </span><span class="s2">"summary"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Rogue Knight is a brand new 2D pixel platformer."</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"summary"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Rogue Knight is a brand new 2D pixel platformer that supports custom levels and characters."</span><span class="p">,</span><span class="w">
   </span><span class="s2">"instructions"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Instructions on the process to upload mods."</span><span class="p">,</span><span class="w">
   </span><span class="s2">"instructions_url"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://www.rogue-knight-game.com/modding/getting-started"</span><span class="p">,</span><span class="w">
   </span><span class="s2">"profile_url"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://rogue-knight.mod.io"</span><span class="p">,</span><span class="w">
@@ -13112,7 +13113,8 @@ To perform this request, you must be authenticated via one of the following meth
 <tr>
 <td>» name_id</td>
 <td>string</td>
-<td>Path for the user on mod.io. For example: https://mod.io/members/<strong>username-id-here</strong> Usually a simplified version of their username.</td>
+<td>Path for the user on mod.io. For example: https://mod.io/members/<strong>name-id-here</strong>
+</td>
 </tr>
 <tr>
 <td>» username</td>
@@ -13152,12 +13154,12 @@ To perform this request, you must be authenticated via one of the following meth
 <tr>
 <td>» timezone</td>
 <td>string</td>
-<td>This field is no longer returned.</td>
+<td>This field is no longer used and will return an empty string.</td>
 </tr>
 <tr>
 <td>» language</td>
 <td>string</td>
-<td>This field is no longer used and will return an empty string. To <a href="#localization">localize the API response</a> we recommend you set the Accept-Language header.</td>
+<td>This field is no longer used and will return an empty string. To <a href="#localization">localize the API response</a> we recommend you set the <code>Accept-Language</code> header.</td>
 </tr>
 <tr>
 <td>» profile_url</td>
@@ -13302,12 +13304,12 @@ To perform this request, you must be authenticated via one of the following meth
 <tr>
 <td>name_id</td>
 <td>string</td>
-<td>Subdomain for the game on mod.io. For example: https://gamename.mod.io</td>
+<td>Subdomain for the game on mod.io. For example: https://<strong>gamename</strong>.mod.io</td>
 </tr>
 <tr>
 <td>summary</td>
 <td>string</td>
-<td>Summary of the game.</td>
+<td>Summary of the games mod support.</td>
 </tr>
 <tr>
 <td>instructions</td>
@@ -13526,7 +13528,7 @@ To perform this request, you must be authenticated via one of the following meth
       </span><span class="p">},</span><span class="w">
       </span><span class="s2">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Rogue Knight"</span><span class="p">,</span><span class="w">
       </span><span class="s2">"name_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"rogue-knight"</span><span class="p">,</span><span class="w">
-      </span><span class="s2">"summary"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Rogue Knight is a brand new 2D pixel platformer."</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"summary"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Rogue Knight is a brand new 2D pixel platformer that supports custom levels and characters."</span><span class="p">,</span><span class="w">
       </span><span class="s2">"instructions"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Instructions on the process to upload mods."</span><span class="p">,</span><span class="w">
       </span><span class="s2">"instructions_url"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://www.rogue-knight-game.com/modding/getting-started"</span><span class="p">,</span><span class="w">
       </span><span class="s2">"profile_url"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://rogue-knight.mod.io"</span><span class="p">,</span><span class="w">
@@ -13589,7 +13591,8 @@ To perform this request, you must be authenticated via one of the following meth
 <tr>
 <td>»» name_id</td>
 <td>string</td>
-<td>Path for the user on mod.io. For example: https://mod.io/members/<strong>username-id-here</strong> Usually a simplified version of their username.</td>
+<td>Path for the user on mod.io. For example: https://mod.io/members/<strong>name-id-here</strong>
+</td>
 </tr>
 <tr>
 <td>»» username</td>
@@ -13629,12 +13632,12 @@ To perform this request, you must be authenticated via one of the following meth
 <tr>
 <td>»» timezone</td>
 <td>string</td>
-<td>This field is no longer returned.</td>
+<td>This field is no longer used and will return an empty string.</td>
 </tr>
 <tr>
 <td>»» language</td>
 <td>string</td>
-<td>This field is no longer used and will return an empty string. To <a href="#localization">localize the API response</a> we recommend you set the Accept-Language header.</td>
+<td>This field is no longer used and will return an empty string. To <a href="#localization">localize the API response</a> we recommend you set the <code>Accept-Language</code> header.</td>
 </tr>
 <tr>
 <td>»» profile_url</td>
@@ -13779,12 +13782,12 @@ To perform this request, you must be authenticated via one of the following meth
 <tr>
 <td>» name_id</td>
 <td>string</td>
-<td>Subdomain for the game on mod.io. For example: https://gamename.mod.io</td>
+<td>Subdomain for the game on mod.io. For example: https://<strong>gamename</strong>.mod.io</td>
 </tr>
 <tr>
 <td>» summary</td>
 <td>string</td>
-<td>Summary of the game.</td>
+<td>Summary of the games mod support.</td>
 </tr>
 <tr>
 <td>» instructions</td>
@@ -13926,7 +13929,8 @@ To perform this request, you must be authenticated via one of the following meth
 <tr>
 <td>»» name_id</td>
 <td>string</td>
-<td>Path for the user on mod.io. For example: https://mod.io/members/<strong>username-id-here</strong> Usually a simplified version of their username.</td>
+<td>Path for the user on mod.io. For example: https://mod.io/members/<strong>name-id-here</strong>
+</td>
 </tr>
 <tr>
 <td>»» username</td>
@@ -13966,12 +13970,12 @@ To perform this request, you must be authenticated via one of the following meth
 <tr>
 <td>»» timezone</td>
 <td>string</td>
-<td>This field is no longer returned.</td>
+<td>This field is no longer used and will return an empty string.</td>
 </tr>
 <tr>
 <td>»» language</td>
 <td>string</td>
-<td>This field is no longer used and will return an empty string. To <a href="#localization">localize the API response</a> we recommend you set the Accept-Language header.</td>
+<td>This field is no longer used and will return an empty string. To <a href="#localization">localize the API response</a> we recommend you set the <code>Accept-Language</code> header.</td>
 </tr>
 <tr>
 <td>»» profile_url</td>
@@ -14314,7 +14318,7 @@ To perform this request, you must be authenticated via one of the following meth
 <tr>
 <td>» ratings_total</td>
 <td>integer</td>
-<td>Number of times this item has been rated.</td>
+<td>Number of times this mod has been rated.</td>
 </tr>
 <tr>
 <td>» ratings_positive</td>
@@ -14754,7 +14758,8 @@ To perform this request, you must be authenticated via one of the following meth
 <tr>
 <td>»» name_id</td>
 <td>string</td>
-<td>Path for the user on mod.io. For example: https://mod.io/members/<strong>username-id-here</strong> Usually a simplified version of their username.</td>
+<td>Path for the user on mod.io. For example: https://mod.io/members/<strong>name-id-here</strong>
+</td>
 </tr>
 <tr>
 <td>»» username</td>
@@ -14794,12 +14799,12 @@ To perform this request, you must be authenticated via one of the following meth
 <tr>
 <td>»» timezone</td>
 <td>string</td>
-<td>This field is no longer returned.</td>
+<td>This field is no longer used and will return an empty string.</td>
 </tr>
 <tr>
 <td>»» language</td>
 <td>string</td>
-<td>This field is no longer used and will return an empty string. To <a href="#localization">localize the API response</a> we recommend you set the Accept-Language header.</td>
+<td>This field is no longer used and will return an empty string. To <a href="#localization">localize the API response</a> we recommend you set the <code>Accept-Language</code> header.</td>
 </tr>
 <tr>
 <td>»» profile_url</td>
@@ -15057,7 +15062,7 @@ To perform this request, you must be authenticated via one of the following meth
 <tr>
 <td>»» ratings_total</td>
 <td>integer</td>
-<td>Number of times this item has been rated.</td>
+<td>Number of times this mod has been rated.</td>
 </tr>
 <tr>
 <td>»» ratings_positive</td>
@@ -15211,7 +15216,8 @@ To perform this request, you must be authenticated via one of the following meth
 <tr>
 <td>»» name_id</td>
 <td>string</td>
-<td>Path for the user on mod.io. For example: https://mod.io/members/<strong>username-id-here</strong> Usually a simplified version of their username.</td>
+<td>Path for the user on mod.io. For example: https://mod.io/members/<strong>name-id-here</strong>
+</td>
 </tr>
 <tr>
 <td>»» username</td>
@@ -15251,12 +15257,12 @@ To perform this request, you must be authenticated via one of the following meth
 <tr>
 <td>»» timezone</td>
 <td>string</td>
-<td>This field is no longer returned.</td>
+<td>This field is no longer used and will return an empty string.</td>
 </tr>
 <tr>
 <td>»» language</td>
 <td>string</td>
-<td>This field is no longer used and will return an empty string. To <a href="#localization">localize the API response</a> we recommend you set the Accept-Language header.</td>
+<td>This field is no longer used and will return an empty string. To <a href="#localization">localize the API response</a> we recommend you set the <code>Accept-Language</code> header.</td>
 </tr>
 <tr>
 <td>»» profile_url</td>
@@ -15841,7 +15847,8 @@ To perform this request, you must be authenticated via one of the following meth
 <tr>
 <td>»»»» name_id</td>
 <td>string</td>
-<td>Path for the user on mod.io. For example: https://mod.io/members/<strong>username-id-here</strong> Usually a simplified version of their username.</td>
+<td>Path for the user on mod.io. For example: https://mod.io/members/<strong>name-id-here</strong>
+</td>
 </tr>
 <tr>
 <td>»»»» username</td>
@@ -15881,12 +15888,12 @@ To perform this request, you must be authenticated via one of the following meth
 <tr>
 <td>»»»» timezone</td>
 <td>string</td>
-<td>This field is no longer returned.</td>
+<td>This field is no longer used and will return an empty string.</td>
 </tr>
 <tr>
 <td>»»»» language</td>
 <td>string</td>
-<td>This field is no longer used and will return an empty string. To <a href="#localization">localize the API response</a> we recommend you set the Accept-Language header.</td>
+<td>This field is no longer used and will return an empty string. To <a href="#localization">localize the API response</a> we recommend you set the <code>Accept-Language</code> header.</td>
 </tr>
 <tr>
 <td>»»»» profile_url</td>
@@ -16144,7 +16151,7 @@ To perform this request, you must be authenticated via one of the following meth
 <tr>
 <td>»»»» ratings_total</td>
 <td>integer</td>
-<td>Number of times this item has been rated.</td>
+<td>Number of times this mod has been rated.</td>
 </tr>
 <tr>
 <td>»»»» ratings_positive</td>
@@ -16583,7 +16590,8 @@ To perform this request, you must be authenticated via one of the following meth
 <tr>
 <td>» name_id</td>
 <td>string</td>
-<td>Path for the user on mod.io. For example: https://mod.io/members/<strong>username-id-here</strong> Usually a simplified version of their username.</td>
+<td>Path for the user on mod.io. For example: https://mod.io/members/<strong>name-id-here</strong>
+</td>
 </tr>
 <tr>
 <td>» username</td>
@@ -16623,12 +16631,12 @@ To perform this request, you must be authenticated via one of the following meth
 <tr>
 <td>» timezone</td>
 <td>string</td>
-<td>This field is no longer returned.</td>
+<td>This field is no longer used and will return an empty string.</td>
 </tr>
 <tr>
 <td>» language</td>
 <td>string</td>
-<td>This field is no longer used and will return an empty string. To <a href="#localization">localize the API response</a> we recommend you set the Accept-Language header.</td>
+<td>This field is no longer used and will return an empty string. To <a href="#localization">localize the API response</a> we recommend you set the <code>Accept-Language</code> header.</td>
 </tr>
 <tr>
 <td>» profile_url</td>
@@ -16886,7 +16894,7 @@ To perform this request, you must be authenticated via one of the following meth
 <tr>
 <td>» ratings_total</td>
 <td>integer</td>
-<td>Number of times this item has been rated.</td>
+<td>Number of times this mod has been rated.</td>
 </tr>
 <tr>
 <td>» ratings_positive</td>
@@ -17194,7 +17202,7 @@ To perform this request, you must be authenticated via one of the following meth
 <tr>
 <td>ratings_total</td>
 <td>integer</td>
-<td>Number of times this item has been rated.</td>
+<td>Number of times this mod has been rated.</td>
 </tr>
 <tr>
 <td>ratings_positive</td>
@@ -17279,7 +17287,8 @@ To perform this request, you must be authenticated via one of the following meth
 <tr>
 <td>» name_id</td>
 <td>string</td>
-<td>Path for the user on mod.io. For example: https://mod.io/members/<strong>username-id-here</strong> Usually a simplified version of their username.</td>
+<td>Path for the user on mod.io. For example: https://mod.io/members/<strong>name-id-here</strong>
+</td>
 </tr>
 <tr>
 <td>» username</td>
@@ -17319,12 +17328,12 @@ To perform this request, you must be authenticated via one of the following meth
 <tr>
 <td>» timezone</td>
 <td>string</td>
-<td>This field is no longer returned.</td>
+<td>This field is no longer used and will return an empty string.</td>
 </tr>
 <tr>
 <td>» language</td>
 <td>string</td>
-<td>This field is no longer used and will return an empty string. To <a href="#localization">localize the API response</a> we recommend you set the Accept-Language header.</td>
+<td>This field is no longer used and will return an empty string. To <a href="#localization">localize the API response</a> we recommend you set the <code>Accept-Language</code> header.</td>
 </tr>
 <tr>
 <td>» profile_url</td>
@@ -17435,7 +17444,8 @@ To perform this request, you must be authenticated via one of the following meth
 <tr>
 <td>name_id</td>
 <td>string</td>
-<td>Path for the user on mod.io. For example: https://mod.io/members/<strong>username-id-here</strong> Usually a simplified version of their username.</td>
+<td>Path for the user on mod.io. For example: https://mod.io/members/<strong>name-id-here</strong>
+</td>
 </tr>
 <tr>
 <td>username</td>
@@ -17475,12 +17485,12 @@ To perform this request, you must be authenticated via one of the following meth
 <tr>
 <td>timezone</td>
 <td>string</td>
-<td>This field is no longer returned.</td>
+<td>This field is no longer used and will return an empty string.</td>
 </tr>
 <tr>
 <td>language</td>
 <td>string</td>
-<td>This field is no longer used and will return an empty string. To <a href="#localization">localize the API response</a> we recommend you set the Accept-Language header.</td>
+<td>This field is no longer used and will return an empty string. To <a href="#localization">localize the API response</a> we recommend you set the <code>Accept-Language</code> header.</td>
 </tr>
 <tr>
 <td>profile_url</td>
