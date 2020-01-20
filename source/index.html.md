@@ -43,7 +43,7 @@ Option | Usage | Suited for | Docs
 ---------- | ---------- | ---------- | ---------
 __API__ | For connecting directly to the mod.io REST API | Web apps that need a JSON REST API, or game developers that like a challenge and want control over their implementation. | You are reading them
 __SDK__ | Drop our [open source C/C++ SDK](https://sdk.mod.io) into your game to call mod.io functionality. | Developers that want a SDK that abstracts the uploading, downloading and unzip flows behind easy to use function calls. | [Here](https://sdk.mod.io)
-__Tools/Plugins__ | Use tools, plugins and wrappers created by the community to make implementation in various engines easy. | Game developers that want a pre-built modding solution for their engine (Unity, Unreal, GameMaker, Construct) of choice. | [Available per tool](https://sdk.mod.io)
+__Tools/Plugins__ | Use tools, plugins and wrappers created by the community to make implementation in various engines easy. | Game developers that want a pre-built modding solution for their engine (Unity, Unreal, GameMaker, Construct) of choice. | [Available per tool](https://apps.mod.io)
 
 Tools, plugins and wrappers made by the mod.io team and our awesome community | - | - | -
 --- | --- | --- | ---
@@ -903,12 +903,12 @@ System.out.println(response.toString());
 ```
 `POST /external/steamauth`
 
-Request an access token on behalf of a Steam user. To use this functionality you *must* supply your games [encrypted app ticket key](https://partner.steamgames.com/apps/sdkauth) supplied by Steamworks, in the *Edit > Options* page of your games profile on mod.io. A Successful request will return an [Access Token Object](#access-token-object).<br/><br/>__HINT:__ If you want to overlay the mod.io site in-game, we recommend you add `?ref=steam` to the end of the URL you open which will prompt the user to login with Steam. See [Web Overlay Authentication](#web-overlay-authentication) for details.
+Request an access token on behalf of a Steam user. To use this functionality you *must* add your games [encrypted app ticket key](https://partner.steamgames.com/apps/sdkauth) from Steamworks, to the *Edit > Options* page of your games profile on mod.io. A Successful request will return an [Access Token Object](#access-token-object).<br/><br/>__HINT:__ If you want to overlay the mod.io site in-game on Steam, we recommend you add `?ref=steam` to the end of the URL you open which will prompt the user to login with Steam. See [Web Overlay Authentication](#web-overlay-authentication) for details.
 
      Parameter|Type|Required|Description
      ---|---|---|---|
      appdata|base64-encoded string|true|The Steam users [Encrypted App Ticket](https://partner.steamgames.com/doc/features/auth#encryptedapptickets) provided by the Steamworks SDK. <br><br>Parameter content *MUST* be the [*uint8 *rgubTicketEncrypted*](https://partner.steamgames.com/doc/api/SteamEncryptedAppTicket) returned after calling [ISteamUser::GetEncryptedAppTicket()](https://partner.steamgames.com/doc/api/ISteamUser#GetEncryptedAppTicket) within the Steamworks SDK, converted into a base64-encoded string.<br><br>__NOTE:__ Due to a base64-encoded string containing special characters, you must URL encode the string after it has been base64-encoded to ensure it is successfully sent to our servers otherwise you may encounter an `422 Unprocessable Entity` response. For example, [cURL](https://ec.haxx.se/http-post.html) will do this for you by using the `--data-urlencode` option.
-     email|string||The users email address. If supplied, and the respective user does not have an email registered for their account we will send a confirmation email to confirm they have ownership of the specified email. This functionality is also available at a later time via the [Link an Email](#link-an-email) endpoint.<br><br>__NOTE__: If the user already has an e-mail on record with us, this parameter will be ignored. This parameter should also be urlencoded before the request is sent.
+     email|string||The users email address. If supplied, and the respective user does not have an email registered for their account we will send a confirmation email to confirm they have ownership of the specified email.<br><br>__NOTE__: If the user already has an email on record with us, this parameter will be ignored. This parameter should also be urlencoded before the request is sent.
      date_expires|integer||Unix timestamp of date in which the returned token will expire. Value cannot be higher than the default value which is a common year (unix timestamp + 31536000 seconds). Using a token after it's expiry time has elapsed will result in a `401 Unauthorized` response.
 
 
@@ -1025,12 +1025,12 @@ System.out.println(response.toString());
 ```
 `POST /external/galaxyauth`
 
-Request an access token on behalf of a GOG Galaxy user. To use this functionality you *must* supply your games [encrypted app ticket key](https://devportal.gog.com/welcome) supplied by GOG Galaxy, in the *Edit > Options* page of your games profile on mod.io. A Successful request will return an [Access Token Object](#access-token-object).
+Request an access token on behalf of a GOG Galaxy user. To use this functionality you *must* add your games [encrypted app ticket key](https://devportal.gog.com/welcome) from GOG Galaxy, to the *Edit > Options* page of your games profile on mod.io. A Successful request will return an [Access Token Object](#access-token-object).
 
      Parameter|Type|Required|Description
      ---|---|---|---|
      appdata|string|true|The GOG Galaxy users [Encrypted App Ticket](https://cdn.gog.com/open/galaxy/sdk/1.133.3/Documentation/classgalaxy_1_1api_1_1IUser.html#a352802aab7a6e71b1cd1b9b1adfd53d8) provided by the GOG Galaxy SDK. <br><br>Parameter content *MUST* be the encrypted string returned in the buffer after calling [IUser::GetEncryptedAppTicket()](https://cdn.gog.com/open/galaxy/sdk/1.133.3/Documentation/classgalaxy_1_1api_1_1IUser.html#a96af6792efc260e75daebedca2cf74c6) within the Galaxy SDK. Unlike the [Steam Authentication](#authenticate-via-steam) endpoint, you do not need to encode the encrypted string as this is already done by the Galaxy SDK.<br><br>__NOTE:__ Due to the encrypted app ticket containing special characters, you must URL encode the string before sending the request to ensure it is successfully sent to our servers otherwise you may encounter an `422 Unprocessable Entity` response. For example, [cURL](https://ec.haxx.se/http-post.html) will do this for you by using the `--data-urlencode` option.
-     email|string||The users email address. If supplied, and the respective user does not have an email registered for their account we will send a confirmation email to confirm they have ownership of the specified email. This functionality is also available at a later time via the [Link an Email](#link-an-email) endpoint.<br><br>__NOTE__: If the user already has an e-mail on record with us, this parameter will be ignored. This parameter should also be urlencoded before the request is sent.
+     email|string||The users email address. If supplied, and the respective user does not have an email registered for their account we will send a confirmation email to confirm they have ownership of the specified email.<br><br>__NOTE__: If the user already has an email on record with us, this parameter will be ignored. This parameter should also be urlencoded before the request is sent.
         date_expires|integer||Unix timestamp of date in which the returned token will expire. Value cannot be higher than the default value which is a common year (unix timestamp + 31536000 seconds). Using a token after it's expiry time has elapsed will result in a `401 Unauthorized` response.
 
 
@@ -1147,12 +1147,12 @@ System.out.println(response.toString());
 ```
 `POST /external/itchioauth`
 
-Request an access token on behalf of an itch.io user via the itch.io desktop app. Due to the desktop application allowing multiple users to be logged in at once, if more than one user is logged in then the user at the top of that list on the itch.io login dialog will be the authenticating user. A Successful request will return an [Access Token Object](#access-token-object).
+Request an access token on behalf of an itch.io user via the itch.io desktop app. Due to the desktop application allowing multiple users to be logged in at once, if more than one user is logged in then the user at the top of that list on the itch.io login dialog will be the authenticating user. A Successful request will return an [Access Token Object](#access-token-object).<br/><br/>__HINT:__ If you want to overlay the mod.io site in-game on itch.io, we recommend you add `?ref=itchio` to the end of the URL you open which will prompt the user to login with itch.io. See [Web Overlay Authentication](#web-overlay-authentication) for details.
 
      Parameter|Type|Required|Description
      ---|---|---|---|
      itchio_token|string|true|The [JWT Token](https://itch.io/docs/itch/integrating/manifest-actions.html) provided by the itch.io desktop application to your game as the environment variable `ITCHIO_API_KEY`. You must setup your itch.io app manifest to include the [API scope](https://itch.io/docs/itch/integrating/manifest-actions.html) to force itch.io to set this variable.
-     email|string||The users email address. If supplied, and the respective user does not have an email registered for their account we will send a confirmation email to confirm they have ownership of the specified email. This functionality is also available at a later time via the [Link an Email](#link-an-email) endpoint.<br><br>__NOTE__: If the user already has an e-mail on record with us, this parameter will be ignored. This parameter should also be urlencoded before the request is sent.
+     email|string||The users email address. If supplied, and the respective user does not have an email registered for their account we will send a confirmation email to confirm they have ownership of the specified email.<br><br>__NOTE__: If the user already has an email on record with us, this parameter will be ignored. This parameter should also be urlencoded before the request is sent.
      date_expires|integer||Unix timestamp of date in which the returned token will expire. Value cannot be higher than the default value which is a week (unix timestamp + 604800 seconds). Using a token after it's expiry time has elapsed will result in a `401 Unauthorized` response.
 
 
@@ -1273,14 +1273,14 @@ System.out.println(response.toString());
 ```
 `POST /external/oculusauth`
 
-Request an access token on behalf of an Oculus user. To use this functionality you *must* supply your games [AppId and secret](https://dashboard.oculus.com/) from the Oculus Dashboard, in the *Edit > Options* page of your games profile on mod.io. A Successful request will return an [Access Token Object](#access-token-object).
+Request an access token on behalf of an Oculus user. To use this functionality you *must* add your games [AppId and secret](https://dashboard.oculus.com/) from the Oculus Dashboard, to the *Edit > Options* page of your games profile on mod.io. A Successful request will return an [Access Token Object](#access-token-object).
 
      Parameter|Type|Required|Description
      ---|---|---|---|
      nonce|string|true|The nonce provided by calling [ovr_User_GetUserProof()](https://developer.oculus.com/documentation/platform/latest/concepts/dg-ownership/) from the Oculus SDK. <br><br>__NOTE:__ Due to the `nonce` potentially containing special characters, you must URL encode the string before sending the request to ensure it is successfully sent to our servers otherwise you may encounter an `422 Unprocessable Entity` response. For example, [cURL](https://ec.haxx.se/http-post.html) will do this for you by using the `--data-urlencode` option.
      user_id|integer|true|The user's Oculus id providing by calling [ovr_GetLoggedInUserID()](https://developer.oculus.com/documentation/platform/latest/concepts/dg-ownership/) from the Oculus SDK.
      access_token|string|true|The user's access token, providing by calling [ovr_User_GetAccessToken()](https://developer.oculus.com/documentation/platform/latest/concepts/dg-ownership/) from the Oculus SDK. mod.io uses this access token on the first login only to obtain the user's alias and is not saved on our servers.
-     email|string||The users email address. If supplied, and the respective user does not have an email registered for their account we will send a confirmation email to confirm they have ownership of the specified email.<br><br>__WARNING__: We __strongly recommend__ that you prompt your users in a friendly manner at least once to provide their e-mail address to link to their account. Due to how Oculus handles user id's - if we are not supplied with an e-mail for a user at least once we will __never__ be able to link that user with their existing account at a later date as Oculus id's operate at the game-scope, not globally. Failing to provide an e-mail will in-effect generate an orphan account that will only ever be able to be accessed from your title.
+     email|string||The users email address. If supplied, and the respective user does not have an email registered for their account we will send a confirmation email to confirm they have ownership of the specified email.<br><br>__WARNING__: We __strongly recommend__ that you prompt your users in a friendly manner at least once to provide their email address to link their Oculus account. Due to how Oculus handles user id's - if we are not supplied with an email for a user at least once we will __never__ be able to link that user with their existing account at a later date as Oculus id's operate at the game-scope, not globally. Failing to provide an email will in-effect generate an orphan account that will only be able to be accessed from your title.
      date_expires|integer||Unix timestamp of date in which the returned token will expire. Value cannot be higher than the default value which is a common year (unix timestamp + 31536000 seconds). Using a token after it's expiry time has elapsed will result in a `401 Unauthorized` response.
 
 
@@ -1407,13 +1407,13 @@ System.out.println(response.toString());
 ```
 `POST /external/link`
 
-Connect an external account (i.e. Steam and GOG documented above) with the authenticated user's e-mail address. When calling this endpoint you must authenticate the request with the users access token and the ID of their external account. If we have a matching external account saved for that user, a Successful request will return a [Message Object](#message-object) response at which point the user must check the supplied e-mail address to link the external account to the respective e-mail address.<br/><br/>__NOTE__: The external authentication flows (i.e. Steam and GOG documented above) only give us a users id. This endpoint allows the user to verify their e-mail and connect it to their account. It is an __optional but recommended__ step as it makes account recovery and other processes easier.<br/><br/>__NOTE__: If you link an external account to an e-mail that already exists on mod.io and you confirm the action via the e-mail you will receive, the accounts will __automatically__ be merged together transferring all content from the external account to the native, existing account. Once this process is complete, existing access tokens to the external account will be nullified and you will need to [re-authenticate](#authentication).
+Connect an external account (i.e. Steam and GOG documented above) with the authenticated user's email address. When calling this endpoint you must authenticate the request with the users access token and the ID of their external account. If we have a matching external account saved for that user, a Successful request will return a [Message Object](#message-object) response at which point the user must check the supplied email address to link the external account to the respective email address.<br/><br/>__NOTE__: The external authentication flows (i.e. Steam and GOG documented above) only give us a users id. This endpoint allows the user to verify their email and connect it to their account. It is an __optional but recommended__ step as it makes account recovery and other processes easier.<br/><br/>__NOTE__: If you link an external account to an email that already exists on mod.io and you confirm the action via the email you will receive, the accounts will __automatically__ be merged together transferring all content from the external account to the native, existing account. Once this process is complete, existing access tokens to the external account will be nullified and you will need to [re-authenticate](#authentication).
 
      Parameter|Type|Required|Description
      ---|---|---|---|
      service|string|true|The external service where the user's account originates.<br><br>Possible Options:<br>- _steam_<br>- _gog_<br>- _itch_
      service_id|string|true|The external service id which is associated with the provided access token. For example, if you requested an access token via the [Steam Authentication](#authenticate-via-steam) endpoint, the service_id would be the user's Steam ID. For security reasons, this ID must match with the service parameter provided, and also be associated with the access token used in the request. <br><br>Service ID formats:<br>- _steam_ (Integer, 17 characters, Community ID format)<br>- _gog_ (Integer, 12 characters)<br>- _itchio_ (Integer, 6 characters)
-     email|string|true|The e-mail address to link to the authenticated user's account.
+     email|string|true|The email address to link to the authenticated user's account.
 
 
 > Example response
@@ -1421,7 +1421,7 @@ Connect an external account (i.e. Steam and GOG documented above) with the authe
 ```json
 {
   "code": 200,
-  "message": "Please see the confirmation e-mail sent to (:email) to complete account link."
+  "message": "Please see the confirmation email sent to (:email) to complete account link."
 }
 ```
 <h3 id="Link-an-Email-responses">Responses</h3>
@@ -1535,7 +1535,7 @@ Get all games. Successful request will return an array of [Game Objects](#get-ga
     date_live|integer|Unix timestamp of date game was set live.
     name|string|Name of the game.
     name_id|string|Subdomain for the game on mod.io. For example: https://gamename.mod.io
-    summary|string|Summary of the game.
+    summary|string|Summary of the games mod support.
     instructions_url|string|Link to a mod.io guide, modding wiki or a page where modders can learn how to make and submit mods.
     ugc_name|string|Word used to describe user-generated content (mods, items, addons etc).
     presentation_option|integer|Presentation style used on the mod.io website:<br><br>__0__ =  Grid View: Displays mods in a grid<br>__1__ = Table View: Displays mods in a table
@@ -1601,7 +1601,7 @@ Get all games. Successful request will return an array of [Game Objects](#get-ga
       },
       "name": "Rogue Knight",
       "name_id": "rogue-knight",
-      "summary": "Rogue Knight is a brand new 2D pixel platformer.",
+      "summary": "Rogue Knight is a brand new 2D pixel platformer that supports custom levels and characters.",
       "instructions": "Instructions on the process to upload mods.",
       "instructions_url": "https://www.rogue-knight-game.com/modding/getting-started",
       "profile_url": "https://rogue-knight.mod.io",
@@ -1778,7 +1778,7 @@ Get a game. Successful request will return a single [Game Object](#game-object).
   },
   "name": "Rogue Knight",
   "name_id": "rogue-knight",
-  "summary": "Rogue Knight is a brand new 2D pixel platformer.",
+  "summary": "Rogue Knight is a brand new 2D pixel platformer that supports custom levels and characters.",
   "instructions": "Instructions on the process to upload mods.",
   "instructions_url": "https://www.rogue-knight-game.com/modding/getting-started",
   "profile_url": "https://rogue-knight.mod.io",
@@ -1976,7 +1976,7 @@ Update details for a game. If you want to update the `icon`, `logo` or `header` 
   },
   "name": "Rogue Knight",
   "name_id": "rogue-knight",
-  "summary": "Rogue Knight is a brand new 2D pixel platformer.",
+  "summary": "Rogue Knight is a brand new 2D pixel platformer that supports custom levels and characters.",
   "instructions": "Instructions on the process to upload mods.",
   "instructions_url": "https://www.rogue-knight-game.com/modding/getting-started",
   "profile_url": "https://rogue-knight.mod.io",
@@ -2109,7 +2109,7 @@ Get all mods for the corresponding game. Successful request will return an array
     summary|string|Summary of the mod.
     description|string|Detailed description of the mod which allows HTML.
     homepage_url|string|Official homepage of the mod.
-    modfile|integer|Unique id of the file that is the current active release.
+    modfile|integer|Unique id of the file that is the current active release (see [mod files](#files)).
     metadata_blob|string|Metadata stored by the game developer.
     metadata_kvp|string|Colon-separated values representing the key-value pairs you want to filter the results by. If you supply more than one key-pair, separate the pairs by a comma. Will only filter by an exact key-pair match.
     tags|string|Comma-separated values representing the tags you want to filter the results by. Only tags that are supported by the parent game can be applied. To determine what tags are eligible, see the tags values within `tag_options` column on the parent [Game Object](#game-object).
@@ -2556,7 +2556,7 @@ System.out.println(response.toString());
 ```
 `POST /games/{game-id}/mods`
 
-Add a mod. Successful request will return the newly created [Mod Object](#mod-object). All content published by users on [mod.io](https://mod.io) is subject to the [mod.io Terms of Use](https://mod.io/terms/widget). It is a requirement that you provide a link to https://mod.io/terms in any place where users are submitting content to mod.io.<br><br>__NOTE:__ By default new mods are 'not accepted' and 'public'. They can only be 'accepted' and made available via the API once a [Mod File](#add-modfile) has been uploaded. [Media](#add-mod-media), [Metadata Key Value Pairs](#add-mod-kvp-metadata) and [Dependencies](#add-mod-dependencies) can also be added after a mod profile is created.
+Add a mod. Successful request will return the newly created [Mod Object](#mod-object). All content published by users on [mod.io](https://mod.io) is subject to the [mod.io Terms of Use](https://mod.io/terms/widget). It is a requirement that you provide a link to [https://mod.io/terms](https://mod.io/terms) in any place where users are submitting content to mod.io.<br><br>__NOTE:__ By default new mods are 'not accepted' and 'public'. They can only be 'accepted' and made available via the API once a [Mod File](#add-modfile) has been uploaded. [Media](#add-mod-media), [Metadata Key Value Pairs](#add-mod-kvp-metadata) and [Dependencies](#add-mod-dependencies) can also be added after a mod profile is created.
 
     Parameter|Type|Required|Description
     ---|---|---|---|
@@ -2569,7 +2569,7 @@ Add a mod. Successful request will return the newly created [Mod Object](#mod-ob
     homepage_url|string||Official homepage for your mod. Must be a valid URL.
     stock|integer||Maximium number of subscribers for this mod. A value of 0 disables this limit.
     maturity_option|integer||Choose if this mod contains any of the following mature content. __NOTE:__ The value of this field will default to 0 unless the parent game allows you to flag mature content (see `maturity_options` field in [Game Object](#game-object)). <br><br>__0__ = None set _(default)_<br>__1__ = Alcohol<br>__2__ = Drugs<br>__4__ = Violence<br>__8__ = Explicit<br>__?__ = Add the options you want together, to enable multiple options (see [BITWISE fields](#bitwise-and-bitwise-and))
-    metadata_blob|string||Metadata stored by the game developer which may include properties as to how the item works, or other information you need to display. Metadata can also be stored as searchable [key value pairs](#metadata), and to individual [mod files](#get-modfiles).
+    metadata_blob|string||Metadata stored by the game developer which may include properties as to how the item works, or other information you need to display. Metadata can also be stored as searchable [key value pairs](#metadata), and to individual [mod files](#get-all-modfiles).
     tags|string[]||An array of strings that represent what the mod has been tagged as. Only tags that are supported by the parent game can be applied. To determine what tags are eligible, see the tags values within `tag_options` column on the parent [Game Object](#game-object).
 
 
@@ -2806,7 +2806,7 @@ Edit details for a mod. If you want to update the `logo` or media associated wit
     homepage_url|string||Official homepage for your mod. Must be a valid URL.
     stock|integer||Maximium number of subscribers for this mod. A value of 0 disables this limit.
     maturity_option|integer||Choose if this mod contains any of the following mature content. __NOTE:__ The value of this field will default to 0 unless the parent game allows you to flag mature content (see `maturity_options` field in [Game Object](#game-object)). <br><br>__0__ = None set _(default)_<br>__1__ = Alcohol<br>__2__ = Drugs<br>__4__ = Violence<br>__8__ = Explicit<br>__?__ = Add the options you want together, to enable multiple options (see [BITWISE fields](#bitwise-and-bitwise-and))
-    metadata_blob|string||Metadata stored by the game developer which may include properties as to how the item works, or other information you need to display. Metadata can also be stored as searchable [key value pairs](#metadata), and to individual [mod files](#get-modfiles).
+    metadata_blob|string||Metadata stored by the game developer which may include properties as to how the item works, or other information you need to display. Metadata can also be stored as searchable [key value pairs](#metadata), and to individual [mod files](#get-all-modfiles).
 
 
 > Example response
@@ -3023,7 +3023,7 @@ System.out.println(response.toString());
 ```
 `DELETE /games/{game-id}/mods/{mod-id}`
 
-Delete a mod profile. Successful request will return `204 No Content` and fire a __MOD_UNAVAILABLE__ event.<br><br>__NOTE:__ This will close the mod profile which means it cannot be viewed or retrieved via API requests but will still exist in-case you choose to restore it at a later date. If you wish to permanently delete a mod you have access rights to you must do it via the [mods profile page](https://mod.io/mods) on the mod.io website.
+Delete a mod profile. Successful request will return `204 No Content` and fire a __MOD_UNAVAILABLE__ event.<br><br>__NOTE:__ This will close the mod profile which means it cannot be viewed or retrieved via API requests but will still exist in-case you choose to restore it at a later date. If you wish to permanently delete a mod you have access rights to, you must do it via the [mods profile page](https://mod.io/mods) on the mod.io website.
 
 
 > Example response
@@ -3425,16 +3425,16 @@ System.out.println(response.toString());
 ```
 `POST /games/{game-id}/mods/{mod-id}/files`
 
-Upload a file for the corresponding mod. Successful request will return the newly created [Modfile Object](#modfile-object). Ensure that the release you are uploading is stable and free from any critical issues. Files are scanned upon upload, any users who upload malicious files will have their accounts closed promptly. <br><br>__NOTE:__ This endpoint does *not support* `input_json` even if you base64-encode your file method due to the already-large file sizes of some releases and base64-encoding inflating the filesize.
+Upload a file for the corresponding mod. Successful request will return the newly created [Modfile Object](#modfile-object). Ensure that the release you are uploading is stable and free from any critical issues. Files are scanned upon upload, any users who upload malicious files will have their accounts closed. <br><br>__NOTE:__ This endpoint does *not support* `input_json` even if you base64-encode your file, due to the already-large file sizes of some releases and base64-encoding inflating the filesize.
 
      Parameter|Type|Required|Description
      ---|---|---|---|
      filedata|file|true|The binary file for the release. For compatibility you should ZIP the base folder of your mod, or if it is a collection of files which live in a pre-existing game folder, you should ZIP those files. Your file must meet the following conditions:<br><br>- File must be __zipped__ and cannot exceed 10GB in filesize<br>- Filename's cannot contain any of the following charcters: <code>\ / ? " < > &#124; : *</code><br>- Mods which span multiple game directories are not supported unless the game manages this<br>- Mods which overwrite files are not supported unless the game manages this
-     version|string||Version of the file release.
+     version|string||Version of the file release (recommended format 1.0.0 - MAJOR.MINOR.PATCH).
      changelog|string||Changelog of this release.
-     active|boolean||_Default value is true._ Label this upload as the current release, this will change the `modfile` field on the parent mod to the `id` of this file after upload.<br><br>__NOTE:__ If the _active_ parameter is _true_, a [__MODFILE_CHANGED__ event](#get-mod-events) will be fired, so game clients know there is an update available for this mod.
+     active|boolean||_Default value is true._ Flag this upload as the current release, this will change the `modfile` field on the parent mod to the `id` of this file after upload.<br><br>__NOTE:__ If the _active_ parameter is _true_, a [__MODFILE_CHANGED__ event](#get-all-mod-events) will be fired, so game clients know there is an update available for this mod.
      filehash|string||MD5 of the submitted file. When supplied the MD5 will be compared against the uploaded files MD5. If they don't match a `422 Unprocessible Entity` error will be returned.
-     metadata_blob|string||Metadata stored by the game developer which may include properties such as what version of the game this file is compatible with. Metadata can also be stored as searchable [key value pairs](#metadata), and to the [mod object](#edit-mod).
+     metadata_blob|string||Metadata stored by the game developer which may include properties such as what version of the game this file is compatible with.
 
 
 > Example response
@@ -3580,10 +3580,10 @@ Edit the details of a published file. If you want to update fields other than th
 
      Parameter|Type|Required|Description
      ---|---|---|---|
-     version|string||Version of the file release.
+     version|string||Version of the file release (recommended format 1.0.0 - MAJOR.MINOR.PATCH).
      changelog|string||Changelog of this release.
-     active|boolean||Label this upload as the current release.<br><br>__NOTE:__ If the _active_ parameter causes the parent mods `modfile` parameter to change, a [__MODFILE_CHANGED__ event](#get-mod-events) will be fired, so game clients know there is an update available for this mod.
-     metadata_blob|string||Metadata stored by the game developer which may include properties such as what version of the game this file is compatible with. Metadata can also be stored as searchable [key value pairs](#metadata), and to the [mod object](#edit-mod).
+     active|boolean||Flag this upload as the current release.<br><br>__NOTE:__ If the _active_ parameter causes the parent mods `modfile` parameter to change, a [__MODFILE_CHANGED__ event](#get-all-mod-events) will be fired, so game clients know there is an update available for this mod.
+     metadata_blob|string||Metadata stored by the game developer which may include properties such as what version of the game this file is compatible with.
 
 
 > Example response
@@ -3719,7 +3719,7 @@ System.out.println(response.toString());
 ```
 `DELETE /games/{game-id}/mods/{mod-id}/files/{file-id}`
 
-Delete a modfile. Successful request will return `204 No Content`.<br><br>__NOTE:__ A modfile can never be removed if it is currently the active release for the corresponding mod regardless of user permissions. Furthermore, this ability is only available if you are authenticated as the game administrator for this game _or_ is the original uploader of the modfile.
+Delete a modfile. Successful request will return `204 No Content`.<br><br>__NOTE:__ A modfile can never be removed if it is the current active release for the corresponding mod regardless of user permissions. Furthermore, this ability is only available if you are authenticated as the game administrator for this game _or_ are the original uploader of the modfile.
 
 
 > Example response
@@ -3843,7 +3843,7 @@ System.out.println(response.toString());
 ```
 `POST /games/{game-id}/media`
 
-Upload new media to a game. Any request you make to this endpoint *should* contain a binary file for each of the fields you want to update below. Successful request will return [Message Object](#message-object).
+Upload new media to a game. The request `Content-Type` header __must__ be `multipart/form-data` to submit image files. Any request you make to this endpoint *should* contain a binary file for each of the fields you want to update below. Successful request will return [Message Object](#message-object).
 
     __NOTE:__ You can also add media to [your games profile](https://mod.io/games) on the mod.io website. This is the recommended approach.
 
@@ -3989,8 +3989,8 @@ This endpoint is very flexible and will add any images posted to the mods galler
     Parameter|Type|Required|Description
     ---|---|---|---|
     logo|file||Image file which will represent your mods logo. Must be gif, jpg or png format and cannot exceed 8MB in filesize. Dimensions must be at least 512x288 and we recommended you supply a high resolution image with a 16 / 9 ratio. mod.io will use this logo to create three thumbnails with the dimensions of 320x180, 640x360 and 1280x720.
-    images|zip||Zip archive of images to upload. Only valid gif, jpg and png images in the zip file will be processed. The filename __must be images.zip__ all other zips will be ignored. Alternatively you can POST one or more images to this endpoint and they will be detected and added to the mods gallery.
-    youtube|string[]||Full YouTube link(s) you want to add - example 'https://www.youtube.com/watch?v=IGVZOLV9SPo'
+    images|zip||Zip archive of images to add to the mods gallery. Only valid gif, jpg and png images in the zip file will be processed. The filename __must be images.zip__ all other zips will be ignored. Alternatively you can POST one or more images to this endpoint and they will be detected and added to the mods gallery.
+    youtube|string[]||Full Youtube link(s) you want to add - example 'https://www.youtube.com/watch?v=IGVZOLV9SPo'
     sketchfab|string[]||Full Sketchfab link(s) you want to add - example 'https://sketchfab.com/models/71f04e390ff54e5f8d9a51b4e1caab7e'
 
 
@@ -4248,7 +4248,7 @@ System.out.println(response.toString());
 ```
 `POST /games/{game-id}/mods/{mod-id}/subscribe`
 
-Subscribe the _authenticated user_ to a corresponding mod. No body parameters are required for this action. Successful request will return the [Mod Object](#mod-object) of the newly subscribed mod.<br><br>__NOTE:__ Users can subscribe to mods via mod.io, we recommend you poll the [Get User Events](#get-user-events) endpoint to keep a users mods collection up to date.
+Subscribe the _authenticated user_ to a corresponding mod. No body parameters are required for this action. Successful request will return the [Mod Object](#mod-object) of the newly subscribed mod.<br><br>__NOTE:__ Users can subscribe to mods via mod.io, we recommend you poll or call the [Get User Events](#get-user-events) endpoint when needed, to keep a users mods collection up to date.
 
 
 > Example response
@@ -4471,7 +4471,7 @@ System.out.println(response.toString());
 ```
 `DELETE /games/{game-id}/mods/{mod-id}/subscribe`
 
-Unsubscribe the _authenticated user_ from the corresponding mod. No body parameters are required for this action. Successful request will return `204 No Content`.<br><br>__NOTE:__ Users can unsubscribe from mods via mod.io, we recommend you poll the [Get Mod Events](#get-mod-events) endpoint to keep a users mods collection up to date.
+Unsubscribe the _authenticated user_ from the corresponding mod. No body parameters are required for this action. Successful request will return `204 No Content`.<br><br>__NOTE:__ Users can unsubscribe from mods via mod.io, we recommend you poll or call the [Get Mod Events](#get-mod-events) endpoint when needed, to keep a users mods collection up to date.
 
 
 > Example response
@@ -5860,7 +5860,7 @@ Add metadata for this mod as searchable key value pairs. Metadata is useful to d
 
      Parameter|Type|Required|Description
      ---|---|---|---|
-     metadata|string[]|true|Array containing one or more key value pairs where the the key and value are separated by a colon ':' (if the string contains multiple colons the split will occur on the first matched, i.e. pistol-dmg:800:400 will become key: pistol-dmg, value: 800:400). The following restrictions apply to the supplied metadata:<br><br>- Keys support alphanumeric, '_' and '-' characters only.<br>- Keys can map to multiple values (1-to-many relationship).<br>- Keys and values cannot exceed 255 characters in length.<br>- Key value pairs are searchable by exact match only.
+     metadata|string[]|true|Array containing one or more key value pairs where the the key and value are separated by a colon ':' (if the string contains multiple colons the split will occur on the first matched, i.e. pistol-dmg:800:400 will become key: `pistol-dmg`, value: `800:400`). The following restrictions apply to the supplied metadata:<br><br>- Keys support alphanumeric, '_' and '-' characters only.<br>- Keys can map to multiple values (1-to-many relationship).<br>- Keys and values cannot exceed 255 characters in length.<br>- Key value pairs are searchable by exact match only.
 
 
 > Example response
@@ -6234,9 +6234,7 @@ System.out.println(response.toString());
 ```
 `POST /games/{game-id}/mods/{mod-id}/dependencies`
 
-Add mod dependencies required by the corresponding mod. A dependency is a mod that should be installed for this mod to run. __IMPORTANT:__ Because of the complexity of supporting nested dependencies, we recommend you treat dependencies as a recommendation for your players, and do not process dependencies automatically when installing a mod unless absolutely required. Successful request will return [Message Object](#message-object).
-
-    __NOTE:__ Some modders might select _soft_ dependencies to promote or credit other mods. We advise against this but it is possible to do, and is one of the reasons why we recommend against processing nested dependencies automatically.
+Add mod dependencies required by the corresponding mod. A dependency is a mod that should be installed for this mod to run. Successful request will return [Message Object](#message-object).
 
     Parameter|Type|Required|Description
     ---|---|---|---|
@@ -7566,7 +7564,7 @@ System.out.println(response.toString());
 ```
 `POST /report`
 
-Report a resource on mod.io. You are responsible for content your users submit, so properly supporting the report endpoint is important ([see how we do it](https://mod.io/report/widget)). Successful request will return [Message Object](#message-object).<br><br>__NOTE:__ If you are a game owner or manager, you can [view all reports](https://mod.io/messages/reports) submitted for your game. You can also configure in your games control panel the number of reports required before content is automatically taken down for review.<br><br>__NOTE:__ You can also [submit a report online](https://mod.io/report/widget) and read our [terms of use](https://mod.io/terms/widget) for information about what is/isn't acceptable.
+Report a resource on mod.io. You are responsible for content your users submit, so properly supporting the report endpoint or linking to the report page [https://mod.io/report](https://mod.io/report) is important ([see how we do it](https://mod.io/report/widget)). Successful request will return [Message Object](#message-object).<br><br>__NOTE:__ If you are a game owner or manager, you can [view all reports](https://mod.io/messages/reports) submitted for your game. You can also configure in your games control panel the number of reports required before content is automatically taken down for review.<br><br>__NOTE:__ Read our [terms of use](https://mod.io/terms/widget) for information about what is/isn't acceptable.
 
      Parameter|Type|Required|Description
      ---|---|---|---|
@@ -7575,7 +7573,7 @@ Report a resource on mod.io. You are responsible for content your users submit, 
      type|integer|true|Type of report you are submitting. Must be one of the following values:<br><br>__0__ = Generic Report<br>__1__ = DMCA Report
      name|string||Name of the user submitting the report. Recommended for DMCA reports.
      contact|string||Contact details of the user submitting the report. Recommended for DMCA reports.
-     summary|string|true|Detailed description of your report. Make sure you include all relevant information and links to help moderators investigate and respond appropriately. Our [online reporting process](https://mod.io/report/widget) shows the information we collect and put into the `name`, `contact` and `summary` fields as appropiate. We recommend you implement a similar flow in-game.
+     summary|string|true|Detailed description of your report. Make sure you include all relevant information and links to help moderators investigate and respond appropriately.<br><br>Our [online reporting process](https://mod.io/report/widget) shows the information we collect and put into the `name`, `contact` and `summary` fields as appropiate. We recommend you implement a similar flow in-game.
 
 
 > Example response
@@ -7708,13 +7706,13 @@ System.out.println(response.toString());
 ```
 `POST /batch`
 
-Submit one or more API endpoint calls in a single HTTP request by batching the requests together. This endpoint is convenient for repeated sequential API calls as it eliminates the HTTP overhead of each request. All encapsulated requests are processed in a synchronous manner which enables you to use the response data of a previous request as a parameter in the subsequent request which we call request dependencies (see below for more info). Successful request will return an array of [Batch Objects](#make-batch-request-2).
+Speed up your API calls, by batching them into a single HTTP request. This endpoint is convenient for repeated sequential API calls as it eliminates the HTTP overhead of each request. All encapsulated requests are processed in a synchronous manner which enables you to use the response data of a previous request as a parameter in the subsequent request which we call request dependencies (see below for more info). Successful request will return an array of [Batch Objects](#make-batch-request-2).
 
      __Batch Limitations__
 
-     The following applies to all batch requests:
+     The following applies to all batch requests:  
 
-     - Who you authenticate as for the parent batch request, you will be assumed that entity for _all_ sub-requests.  
+     - Who you authenticate as for the parent batch request, will be used for _all_ sub-requests.  
      - Authorization headers passed into sub-requests are ignored.  
      - You cannot make more than 20 requests within a batch.  
 
@@ -7728,7 +7726,7 @@ Submit one or more API endpoint calls in a single HTTP request by batching the r
 
      __What will it require?__
 
-     This will require three requests:  
+     This will require three requests (see the example code on the right):  
      1. [GET /v1/games/{game-id}/mods](#get-mods)  
      2. [GET /v1/me/subscribed](#get-user-subscriptions)  
      3. [GET /v1/me/ratings](#get-user-ratings)  
@@ -7737,7 +7735,7 @@ Submit one or more API endpoint calls in a single HTTP request by batching the r
 
     __How do we reference the mod id from request #1?__
 
-     This endpoint, like every other multiple response endpoint, returns a `data` array with the resultant objects. If we look at our first request we can see that the [Get Mods](#get-mods-2), upon success, returns an array called `data` which contains the retrieved [Mod Objects](#get-mods). Sometimes you may want to get all values of a certain column within the `data` array, like we will do now. This is how we would get all mod id's from the first request and pass them into the second request as what we call a 'Batch Dependency'.
+     If we look at our first request we can see that the [Get Mods](#get-mods-2), upon success, returns an array called `data` which contains the retrieved [Mod Objects](#get-mods). Sometimes you may want to get all values of a certain column within the `data` array, like we will do now. This is how we would get all mod id's from the first request and pass them into the second request as what we call a 'Batch Dependency'.
 
     Here is what our second request will look like, after adding the dependency which uses our global `-in` filter.
 
@@ -8530,8 +8528,8 @@ Get all games the _authenticated user_ added or is a team member of. Successful 
     date_updated|integer|Unix timestamp of date game was updated.
     date_live|integer|Unix timestamp of date game was set live.
     name|string|Name of the game.
-    name_id|string|Subdomain for the game on mod.io. For example: https://gamename.mod.io
-    summary|string|Summary of the game.
+    name_id|string|Subdomain for the game on mod.io. For example: https://__gamename__.mod.io
+    summary|string|Summary of the games mod support.
     instructions_url|string|Link to a mod.io guide, modding wiki or a page where modders can learn how to make and submit mods.
     ugc_name|string|Word used to describe user-generated content (mods, items, addons etc).
     presentation_option|integer|Presentation style used on the mod.io website:<br><br>__0__ =  Grid View: Displays mods in a grid<br>__1__ = Table View: Displays mods in a table
@@ -8596,7 +8594,7 @@ Get all games the _authenticated user_ added or is a team member of. Successful 
       },
       "name": "Rogue Knight",
       "name_id": "rogue-knight",
-      "summary": "Rogue Knight is a brand new 2D pixel platformer.",
+      "summary": "Rogue Knight is a brand new 2D pixel platformer that supports custom levels and characters.",
       "instructions": "Instructions on the process to upload mods.",
       "instructions_url": "https://www.rogue-knight-game.com/modding/getting-started",
       "profile_url": "https://rogue-knight.mod.io",
@@ -8741,7 +8739,7 @@ Get all mods the _authenticated user_ added or is a team member of. Successful r
     summary|string|Summary of the mod.
     description|string|Detailed description of the mod which allows HTML.
     homepage_url|string|Official homepage of the mod.
-    modfile|integer|Unique id of the file that is the current active release.
+    modfile|integer|Unique id of the file that is the current active release (see [mod files](#files)).
     metadata_blob|string|Metadata stored by the game developer.
     metadata_kvp|string|Colon-separated values representing the key-value pairs you want to filter the results by. If you supply more than one key-pair, separate the pairs by a comma. Will only filter by an exact key-pair match.
     tags|string|Comma-separated values representing the tags you want to filter the results by. Only tags that are supported by the parent game can be applied. To determine what tags are eligible, see the tags values within `tag_options` column on the parent [Game Object](#game-object).
@@ -9345,7 +9343,7 @@ data|[Mod Object](#schemamod_object)[]|Contains Mod Objects.
 » visible|integer|Visibility of the mod (see [status and visibility](#status-amp-visibility) for details):<br><br>__0__ = Hidden<br>__1__ = Public
 » submitted_by|[User Object](#schemauser_object)|Contains user data.
 »» id|integer|Unique id of the user.
-»» name_id|string|Path for the user on mod.io. For example: https://mod.io/members/__username-id-here__ Usually a simplified version of their username.
+»» name_id|string|Path for the user on mod.io. For example: https://mod.io/members/__name-id-here__
 »» username|string|Username of the user.
 »» date_online|integer|Unix timestamp of date the user was last online.
 »» avatar|[Avatar Object](#schemaavatar_object)|Contains avatar data.
@@ -9353,8 +9351,8 @@ data|[Mod Object](#schemamod_object)[]|Contains Mod Objects.
 »»» original|string|URL to the full-sized avatar.
 »»» thumb_50x50|string|URL to the small avatar thumbnail.
 »»» thumb_100x100|string|URL to the medium avatar thumbnail.
-»» timezone|string|This field is no longer returned.
-»» language|string|This field is no longer used and will return an empty string. To [localize the API response](#localization) we recommend you set the Accept-Language header.
+»» timezone|string|This field is no longer used and will return an empty string.
+»» language|string|This field is no longer used and will return an empty string. To [localize the API response](#localization) we recommend you set the `Accept-Language` header.
 »» profile_url|string|URL to the user's mod.io profile.
 » date_added|integer|Unix timestamp of date mod was registered.
 » date_updated|integer|Unix timestamp of date mod was updated.
@@ -9405,7 +9403,7 @@ data|[Mod Object](#schemamod_object)[]|Contains Mod Objects.
 »» popularity_rank_total_mods|integer|Number of ranking spots the current rank is measured against.
 »» downloads_total|integer|Number of total mod downloads.
 »» subscribers_total|integer|Number of total users who have subscribed to the mod.
-»» ratings_total|integer|Number of times this item has been rated.
+»» ratings_total|integer|Number of times this mod has been rated.
 »» ratings_positive|integer|Number of positive ratings.
 »» ratings_negative|integer|Number of negative ratings.
 »» ratings_percentage_positive|integer|Number of positive ratings, divided by the total ratings to determine it’s percentage score.
@@ -9558,7 +9556,7 @@ body|[Batch Body Object](#schemabatch_body_object)|Contains batch request data.
 »» visible|integer|Visibility of the mod (see [status and visibility](#status-amp-visibility) for details):<br><br>__0__ = Hidden<br>__1__ = Public
 »» submitted_by|[User Object](#schemauser_object)|Contains user data.
 »»» id|integer|Unique id of the user.
-»»» name_id|string|Path for the user on mod.io. For example: https://mod.io/members/__username-id-here__ Usually a simplified version of their username.
+»»» name_id|string|Path for the user on mod.io. For example: https://mod.io/members/__name-id-here__
 »»» username|string|Username of the user.
 »»» date_online|integer|Unix timestamp of date the user was last online.
 »»» avatar|[Avatar Object](#schemaavatar_object)|Contains avatar data.
@@ -9566,8 +9564,8 @@ body|[Batch Body Object](#schemabatch_body_object)|Contains batch request data.
 »»»» original|string|URL to the full-sized avatar.
 »»»» thumb_50x50|string|URL to the small avatar thumbnail.
 »»»» thumb_100x100|string|URL to the medium avatar thumbnail.
-»»» timezone|string|This field is no longer returned.
-»»» language|string|This field is no longer used and will return an empty string. To [localize the API response](#localization) we recommend you set the Accept-Language header.
+»»» timezone|string|This field is no longer used and will return an empty string.
+»»» language|string|This field is no longer used and will return an empty string. To [localize the API response](#localization) we recommend you set the `Accept-Language` header.
 »»» profile_url|string|URL to the user's mod.io profile.
 »» date_added|integer|Unix timestamp of date mod was registered.
 »» date_updated|integer|Unix timestamp of date mod was updated.
@@ -9618,7 +9616,7 @@ body|[Batch Body Object](#schemabatch_body_object)|Contains batch request data.
 »»» popularity_rank_total_mods|integer|Number of ranking spots the current rank is measured against.
 »»» downloads_total|integer|Number of total mod downloads.
 »»» subscribers_total|integer|Number of total users who have subscribed to the mod.
-»»» ratings_total|integer|Number of times this item has been rated.
+»»» ratings_total|integer|Number of times this mod has been rated.
 »»» ratings_positive|integer|Number of positive ratings.
 »»» ratings_negative|integer|Number of negative ratings.
 »»» ratings_percentage_positive|integer|Number of positive ratings, divided by the total ratings to determine it’s percentage score.
@@ -9679,7 +9677,7 @@ id|integer|Unique id of the comment.
 mod_id|integer|Unique id of the parent mod.
 user|[User Object](#schemauser_object)|Contains user data.
 » id|integer|Unique id of the user.
-» name_id|string|Path for the user on mod.io. For example: https://mod.io/members/__username-id-here__ Usually a simplified version of their username.
+» name_id|string|Path for the user on mod.io. For example: https://mod.io/members/__name-id-here__
 » username|string|Username of the user.
 » date_online|integer|Unix timestamp of date the user was last online.
 » avatar|[Avatar Object](#schemaavatar_object)|Contains avatar data.
@@ -9687,8 +9685,8 @@ user|[User Object](#schemauser_object)|Contains user data.
 »» original|string|URL to the full-sized avatar.
 »» thumb_50x50|string|URL to the small avatar thumbnail.
 »» thumb_100x100|string|URL to the medium avatar thumbnail.
-» timezone|string|This field is no longer returned.
-» language|string|This field is no longer used and will return an empty string. To [localize the API response](#localization) we recommend you set the Accept-Language header.
+» timezone|string|This field is no longer used and will return an empty string.
+» language|string|This field is no longer used and will return an empty string. To [localize the API response](#localization) we recommend you set the `Accept-Language` header.
 » profile_url|string|URL to the user's mod.io profile.
 date_added|integer|Unix timestamp of date the comment was posted.
 reply_id|integer|Id of the parent comment this comment is replying to (can be 0 if the comment is not a reply).
@@ -9823,7 +9821,7 @@ md5|string|MD5 hash of the file.
   },
   "name": "Rogue Knight",
   "name_id": "rogue-knight",
-  "summary": "Rogue Knight is a brand new 2D pixel platformer.",
+  "summary": "Rogue Knight is a brand new 2D pixel platformer that supports custom levels and characters.",
   "instructions": "Instructions on the process to upload mods.",
   "instructions_url": "https://www.rogue-knight-game.com/modding/getting-started",
   "profile_url": "https://rogue-knight.mod.io",
@@ -9849,7 +9847,7 @@ id|integer|Unique game id.
 status|integer|Status of the game (see [status and visibility](#status-amp-visibility) for details):<br><br>__0__ = Not Accepted<br>__1__ = Accepted<br>__3__ = Deleted
 submitted_by|[User Object](#schemauser_object)|Contains user data.
 » id|integer|Unique id of the user.
-» name_id|string|Path for the user on mod.io. For example: https://mod.io/members/__username-id-here__ Usually a simplified version of their username.
+» name_id|string|Path for the user on mod.io. For example: https://mod.io/members/__name-id-here__
 » username|string|Username of the user.
 » date_online|integer|Unix timestamp of date the user was last online.
 » avatar|[Avatar Object](#schemaavatar_object)|Contains avatar data.
@@ -9857,8 +9855,8 @@ submitted_by|[User Object](#schemauser_object)|Contains user data.
 »» original|string|URL to the full-sized avatar.
 »» thumb_50x50|string|URL to the small avatar thumbnail.
 »» thumb_100x100|string|URL to the medium avatar thumbnail.
-» timezone|string|This field is no longer returned.
-» language|string|This field is no longer used and will return an empty string. To [localize the API response](#localization) we recommend you set the Accept-Language header.
+» timezone|string|This field is no longer used and will return an empty string.
+» language|string|This field is no longer used and will return an empty string. To [localize the API response](#localization) we recommend you set the `Accept-Language` header.
 » profile_url|string|URL to the user's mod.io profile.
 date_added|integer|Unix timestamp of date game was registered.
 date_updated|integer|Unix timestamp of date game was updated.
@@ -9887,8 +9885,8 @@ header|[Header Image Object](#schemaheader_image_object)|Contains header data.
 » filename|string|Header image filename including extension.
 » original|string|URL to the full-sized header image.
 name|string|Name of the game.
-name_id|string|Subdomain for the game on mod.io. For example: https://gamename.mod.io
-summary|string|Summary of the game.
+name_id|string|Subdomain for the game on mod.io. For example: https://__gamename__.mod.io
+summary|string|Summary of the games mod support.
 instructions|string|A guide about creating and uploading mods for this game to mod.io (applicable if submission_option = 0).
 instructions_url|string|Link to a mod.io guide, your modding wiki or a page where modders can learn how to make and submit mods to your games profile.
 profile_url|string|URL to the game's mod.io page.
@@ -10029,7 +10027,7 @@ result_total|integer|Total number of results found.
       },
       "name": "Rogue Knight",
       "name_id": "rogue-knight",
-      "summary": "Rogue Knight is a brand new 2D pixel platformer.",
+      "summary": "Rogue Knight is a brand new 2D pixel platformer that supports custom levels and characters.",
       "instructions": "Instructions on the process to upload mods.",
       "instructions_url": "https://www.rogue-knight-game.com/modding/getting-started",
       "profile_url": "https://rogue-knight.mod.io",
@@ -10065,7 +10063,7 @@ data|[Game Object](#schemagame_object)[]|Array containing game objects.
 » status|integer|Status of the game (see [status and visibility](#status-amp-visibility) for details):<br><br>__0__ = Not Accepted<br>__1__ = Accepted<br>__3__ = Deleted
 » submitted_by|[User Object](#schemauser_object)|Contains user data.
 »» id|integer|Unique id of the user.
-»» name_id|string|Path for the user on mod.io. For example: https://mod.io/members/__username-id-here__ Usually a simplified version of their username.
+»» name_id|string|Path for the user on mod.io. For example: https://mod.io/members/__name-id-here__
 »» username|string|Username of the user.
 »» date_online|integer|Unix timestamp of date the user was last online.
 »» avatar|[Avatar Object](#schemaavatar_object)|Contains avatar data.
@@ -10073,8 +10071,8 @@ data|[Game Object](#schemagame_object)[]|Array containing game objects.
 »»» original|string|URL to the full-sized avatar.
 »»» thumb_50x50|string|URL to the small avatar thumbnail.
 »»» thumb_100x100|string|URL to the medium avatar thumbnail.
-»» timezone|string|This field is no longer returned.
-»» language|string|This field is no longer used and will return an empty string. To [localize the API response](#localization) we recommend you set the Accept-Language header.
+»» timezone|string|This field is no longer used and will return an empty string.
+»» language|string|This field is no longer used and will return an empty string. To [localize the API response](#localization) we recommend you set the `Accept-Language` header.
 »» profile_url|string|URL to the user's mod.io profile.
 » date_added|integer|Unix timestamp of date game was registered.
 » date_updated|integer|Unix timestamp of date game was updated.
@@ -10103,8 +10101,8 @@ data|[Game Object](#schemagame_object)[]|Array containing game objects.
 »» filename|string|Header image filename including extension.
 »» original|string|URL to the full-sized header image.
 » name|string|Name of the game.
-» name_id|string|Subdomain for the game on mod.io. For example: https://gamename.mod.io
-» summary|string|Summary of the game.
+» name_id|string|Subdomain for the game on mod.io. For example: https://__gamename__.mod.io
+» summary|string|Summary of the games mod support.
 » instructions|string|A guide about creating and uploading mods for this game to mod.io (applicable if submission_option = 0).
 » instructions_url|string|Link to a mod.io guide, your modding wiki or a page where modders can learn how to make and submit mods to your games profile.
 » profile_url|string|URL to the game's mod.io page.
@@ -10174,7 +10172,7 @@ data|[Comment Object](#schemacomment_object)[]|Array containing comment objects.
 » mod_id|integer|Unique id of the parent mod.
 » user|[User Object](#schemauser_object)|Contains user data.
 »» id|integer|Unique id of the user.
-»» name_id|string|Path for the user on mod.io. For example: https://mod.io/members/__username-id-here__ Usually a simplified version of their username.
+»» name_id|string|Path for the user on mod.io. For example: https://mod.io/members/__name-id-here__
 »» username|string|Username of the user.
 »» date_online|integer|Unix timestamp of date the user was last online.
 »» avatar|[Avatar Object](#schemaavatar_object)|Contains avatar data.
@@ -10182,8 +10180,8 @@ data|[Comment Object](#schemacomment_object)[]|Array containing comment objects.
 »»» original|string|URL to the full-sized avatar.
 »»» thumb_50x50|string|URL to the small avatar thumbnail.
 »»» thumb_100x100|string|URL to the medium avatar thumbnail.
-»» timezone|string|This field is no longer returned.
-»» language|string|This field is no longer used and will return an empty string. To [localize the API response](#localization) we recommend you set the Accept-Language header.
+»» timezone|string|This field is no longer used and will return an empty string.
+»» language|string|This field is no longer used and will return an empty string. To [localize the API response](#localization) we recommend you set the `Accept-Language` header.
 »» profile_url|string|URL to the user's mod.io profile.
 » date_added|integer|Unix timestamp of date the comment was posted.
 » reply_id|integer|Id of the parent comment this comment is replying to (can be 0 if the comment is not a reply).
@@ -10362,7 +10360,7 @@ data|[Stats Object](#schemastats_object)[]|Array containing stats objects.
 » popularity_rank_total_mods|integer|Number of ranking spots the current rank is measured against.
 » downloads_total|integer|Number of total mod downloads.
 » subscribers_total|integer|Number of total users who have subscribed to the mod.
-» ratings_total|integer|Number of times this item has been rated.
+» ratings_total|integer|Number of times this mod has been rated.
 » ratings_positive|integer|Number of positive ratings.
 » ratings_negative|integer|Number of negative ratings.
 » ratings_percentage_positive|integer|Number of positive ratings, divided by the total ratings to determine it’s percentage score.
@@ -10617,7 +10615,7 @@ data|[Mod Object](#schemamod_object)[]|Array containing mod objects.
 » visible|integer|Visibility of the mod (see [status and visibility](#status-amp-visibility) for details):<br><br>__0__ = Hidden<br>__1__ = Public
 » submitted_by|[User Object](#schemauser_object)|Contains user data.
 »» id|integer|Unique id of the user.
-»» name_id|string|Path for the user on mod.io. For example: https://mod.io/members/__username-id-here__ Usually a simplified version of their username.
+»» name_id|string|Path for the user on mod.io. For example: https://mod.io/members/__name-id-here__
 »» username|string|Username of the user.
 »» date_online|integer|Unix timestamp of date the user was last online.
 »» avatar|[Avatar Object](#schemaavatar_object)|Contains avatar data.
@@ -10625,8 +10623,8 @@ data|[Mod Object](#schemamod_object)[]|Array containing mod objects.
 »»» original|string|URL to the full-sized avatar.
 »»» thumb_50x50|string|URL to the small avatar thumbnail.
 »»» thumb_100x100|string|URL to the medium avatar thumbnail.
-»» timezone|string|This field is no longer returned.
-»» language|string|This field is no longer used and will return an empty string. To [localize the API response](#localization) we recommend you set the Accept-Language header.
+»» timezone|string|This field is no longer used and will return an empty string.
+»» language|string|This field is no longer used and will return an empty string. To [localize the API response](#localization) we recommend you set the `Accept-Language` header.
 »» profile_url|string|URL to the user's mod.io profile.
 » date_added|integer|Unix timestamp of date mod was registered.
 » date_updated|integer|Unix timestamp of date mod was updated.
@@ -10677,7 +10675,7 @@ data|[Mod Object](#schemamod_object)[]|Array containing mod objects.
 »» popularity_rank_total_mods|integer|Number of ranking spots the current rank is measured against.
 »» downloads_total|integer|Number of total mod downloads.
 »» subscribers_total|integer|Number of total users who have subscribed to the mod.
-»» ratings_total|integer|Number of times this item has been rated.
+»» ratings_total|integer|Number of times this mod has been rated.
 »» ratings_positive|integer|Number of positive ratings.
 »» ratings_negative|integer|Number of negative ratings.
 »» ratings_percentage_positive|integer|Number of positive ratings, divided by the total ratings to determine it’s percentage score.
@@ -10746,7 +10744,7 @@ data|[Team Member Object](#schemateam_member_object)[]|Array containing team mem
 » id|integer|Unique team member id.
 » user|[User Object](#schemauser_object)|Contains user data.
 »» id|integer|Unique id of the user.
-»» name_id|string|Path for the user on mod.io. For example: https://mod.io/members/__username-id-here__ Usually a simplified version of their username.
+»» name_id|string|Path for the user on mod.io. For example: https://mod.io/members/__name-id-here__
 »» username|string|Username of the user.
 »» date_online|integer|Unix timestamp of date the user was last online.
 »» avatar|[Avatar Object](#schemaavatar_object)|Contains avatar data.
@@ -10754,8 +10752,8 @@ data|[Team Member Object](#schemateam_member_object)[]|Array containing team mem
 »»» original|string|URL to the full-sized avatar.
 »»» thumb_50x50|string|URL to the small avatar thumbnail.
 »»» thumb_100x100|string|URL to the medium avatar thumbnail.
-»» timezone|string|This field is no longer returned.
-»» language|string|This field is no longer used and will return an empty string. To [localize the API response](#localization) we recommend you set the Accept-Language header.
+»» timezone|string|This field is no longer used and will return an empty string.
+»» language|string|This field is no longer used and will return an empty string. To [localize the API response](#localization) we recommend you set the `Accept-Language` header.
 »» profile_url|string|URL to the user's mod.io profile.
 » level|integer|Level of permission the user has:<br><br>__1__ = Moderator (can moderate comments and content attached)<br>__4__ = Manager (moderator access, including uploading builds and editing settings except supply and team members)<br>__8__ = Administrator (full access, including editing the supply and team)
 » date_added|integer|Unix timestamp of the date the user was added to the team.
@@ -11128,7 +11126,7 @@ data|[Batch Object](#schemabatch_object)[]|Array containing any response object.
 »»» visible|integer|Visibility of the mod (see [status and visibility](#status-amp-visibility) for details):<br><br>__0__ = Hidden<br>__1__ = Public
 »»» submitted_by|[User Object](#schemauser_object)|Contains user data.
 »»»» id|integer|Unique id of the user.
-»»»» name_id|string|Path for the user on mod.io. For example: https://mod.io/members/__username-id-here__ Usually a simplified version of their username.
+»»»» name_id|string|Path for the user on mod.io. For example: https://mod.io/members/__name-id-here__
 »»»» username|string|Username of the user.
 »»»» date_online|integer|Unix timestamp of date the user was last online.
 »»»» avatar|[Avatar Object](#schemaavatar_object)|Contains avatar data.
@@ -11136,8 +11134,8 @@ data|[Batch Object](#schemabatch_object)[]|Array containing any response object.
 »»»»» original|string|URL to the full-sized avatar.
 »»»»» thumb_50x50|string|URL to the small avatar thumbnail.
 »»»»» thumb_100x100|string|URL to the medium avatar thumbnail.
-»»»» timezone|string|This field is no longer returned.
-»»»» language|string|This field is no longer used and will return an empty string. To [localize the API response](#localization) we recommend you set the Accept-Language header.
+»»»» timezone|string|This field is no longer used and will return an empty string.
+»»»» language|string|This field is no longer used and will return an empty string. To [localize the API response](#localization) we recommend you set the `Accept-Language` header.
 »»»» profile_url|string|URL to the user's mod.io profile.
 »»» date_added|integer|Unix timestamp of date mod was registered.
 »»» date_updated|integer|Unix timestamp of date mod was updated.
@@ -11188,7 +11186,7 @@ data|[Batch Object](#schemabatch_object)[]|Array containing any response object.
 »»»» popularity_rank_total_mods|integer|Number of ranking spots the current rank is measured against.
 »»»» downloads_total|integer|Number of total mod downloads.
 »»»» subscribers_total|integer|Number of total users who have subscribed to the mod.
-»»»» ratings_total|integer|Number of times this item has been rated.
+»»»» ratings_total|integer|Number of times this mod has been rated.
 »»»» ratings_positive|integer|Number of positive ratings.
 »»»» ratings_negative|integer|Number of negative ratings.
 »»»» ratings_percentage_positive|integer|Number of positive ratings, divided by the total ratings to determine it’s percentage score.
@@ -11463,7 +11461,7 @@ status|integer|Status of the mod (see [status and visibility](#status-amp-visibi
 visible|integer|Visibility of the mod (see [status and visibility](#status-amp-visibility) for details):<br><br>__0__ = Hidden<br>__1__ = Public
 submitted_by|[User Object](#schemauser_object)|Contains user data.
 » id|integer|Unique id of the user.
-» name_id|string|Path for the user on mod.io. For example: https://mod.io/members/__username-id-here__ Usually a simplified version of their username.
+» name_id|string|Path for the user on mod.io. For example: https://mod.io/members/__name-id-here__
 » username|string|Username of the user.
 » date_online|integer|Unix timestamp of date the user was last online.
 » avatar|[Avatar Object](#schemaavatar_object)|Contains avatar data.
@@ -11471,8 +11469,8 @@ submitted_by|[User Object](#schemauser_object)|Contains user data.
 »» original|string|URL to the full-sized avatar.
 »» thumb_50x50|string|URL to the small avatar thumbnail.
 »» thumb_100x100|string|URL to the medium avatar thumbnail.
-» timezone|string|This field is no longer returned.
-» language|string|This field is no longer used and will return an empty string. To [localize the API response](#localization) we recommend you set the Accept-Language header.
+» timezone|string|This field is no longer used and will return an empty string.
+» language|string|This field is no longer used and will return an empty string. To [localize the API response](#localization) we recommend you set the `Accept-Language` header.
 » profile_url|string|URL to the user's mod.io profile.
 date_added|integer|Unix timestamp of date mod was registered.
 date_updated|integer|Unix timestamp of date mod was updated.
@@ -11523,7 +11521,7 @@ stats|[Stats Object](#schemastats_object)|Contains stats data.
 » popularity_rank_total_mods|integer|Number of ranking spots the current rank is measured against.
 » downloads_total|integer|Number of total mod downloads.
 » subscribers_total|integer|Number of total users who have subscribed to the mod.
-» ratings_total|integer|Number of times this item has been rated.
+» ratings_total|integer|Number of times this mod has been rated.
 » ratings_positive|integer|Number of positive ratings.
 » ratings_negative|integer|Number of negative ratings.
 » ratings_percentage_positive|integer|Number of positive ratings, divided by the total ratings to determine it’s percentage score.
@@ -11673,7 +11671,7 @@ popularity_rank_position|integer|Current rank of the mod.
 popularity_rank_total_mods|integer|Number of ranking spots the current rank is measured against.
 downloads_total|integer|Number of total mod downloads.
 subscribers_total|integer|Number of total users who have subscribed to the mod.
-ratings_total|integer|Number of times this item has been rated.
+ratings_total|integer|Number of times this mod has been rated.
 ratings_positive|integer|Number of positive ratings.
 ratings_negative|integer|Number of negative ratings.
 ratings_percentage_positive|integer|Number of positive ratings, divided by the total ratings to determine it’s percentage score.
@@ -11720,7 +11718,7 @@ Name|Type|Description
 id|integer|Unique team member id.
 user|[User Object](#schemauser_object)|Contains user data.
 » id|integer|Unique id of the user.
-» name_id|string|Path for the user on mod.io. For example: https://mod.io/members/__username-id-here__ Usually a simplified version of their username.
+» name_id|string|Path for the user on mod.io. For example: https://mod.io/members/__name-id-here__
 » username|string|Username of the user.
 » date_online|integer|Unix timestamp of date the user was last online.
 » avatar|[Avatar Object](#schemaavatar_object)|Contains avatar data.
@@ -11728,8 +11726,8 @@ user|[User Object](#schemauser_object)|Contains user data.
 »» original|string|URL to the full-sized avatar.
 »» thumb_50x50|string|URL to the small avatar thumbnail.
 »» thumb_100x100|string|URL to the medium avatar thumbnail.
-» timezone|string|This field is no longer returned.
-» language|string|This field is no longer used and will return an empty string. To [localize the API response](#localization) we recommend you set the Accept-Language header.
+» timezone|string|This field is no longer used and will return an empty string.
+» language|string|This field is no longer used and will return an empty string. To [localize the API response](#localization) we recommend you set the `Accept-Language` header.
 » profile_url|string|URL to the user's mod.io profile.
 level|integer|Level of permission the user has:<br><br>__1__ = Moderator (can moderate comments and content attached)<br>__4__ = Manager (moderator access, including uploading builds and editing settings except supply and team members)<br>__8__ = Administrator (full access, including editing the supply and team)
 date_added|integer|Unix timestamp of the date the user was added to the team.
@@ -11796,7 +11794,7 @@ event_type|string|Type of event that was triggered. List of possible events: <br
 Name|Type|Description
 ---|---|---|---|
 id|integer|Unique id of the user.
-name_id|string|Path for the user on mod.io. For example: https://mod.io/members/__username-id-here__ Usually a simplified version of their username.
+name_id|string|Path for the user on mod.io. For example: https://mod.io/members/__name-id-here__
 username|string|Username of the user.
 date_online|integer|Unix timestamp of date the user was last online.
 avatar|[Avatar Object](#schemaavatar_object)|Contains avatar data.
@@ -11804,8 +11802,8 @@ avatar|[Avatar Object](#schemaavatar_object)|Contains avatar data.
 » original|string|URL to the full-sized avatar.
 » thumb_50x50|string|URL to the small avatar thumbnail.
 » thumb_100x100|string|URL to the medium avatar thumbnail.
-timezone|string|This field is no longer returned.
-language|string|This field is no longer used and will return an empty string. To [localize the API response](#localization) we recommend you set the Accept-Language header.
+timezone|string|This field is no longer used and will return an empty string.
+language|string|This field is no longer used and will return an empty string. To [localize the API response](#localization) we recommend you set the `Accept-Language` header.
 profile_url|string|URL to the user's mod.io profile.
 
 
