@@ -1303,137 +1303,6 @@ Status|Meaning|Description|Response Schema
 To perform this request, you must be authenticated via one of the following methods:
 <a href="#authentication">api_key</a>
 </aside>
-## Link an Email
-
-> Example request
-
-```shell
-# You can also use wget
-curl -X POST https://api.mod.io/v1/external/link \
-  -H 'Authorization: Bearer {access-token}' \ 
-  -H 'Content-Type: application/x-www-form-urlencoded' \ 
-  -H 'Accept: application/json' \
-  -d 'service=steam' \
-  -d 'service_id=1843043832041' \
-  -d 'email=test@mod.io'
-
-```
-
-```http
-POST https://api.mod.io/v1/external/link HTTP/1.1
-Host: api.mod.io
-Content-Type: application/x-www-form-urlencoded
-Accept: application/json
-Authorization: Bearer {access-token}
-
-
-```
-
-```javascript
-var headers = {
-  'Authorization':'Bearer {access-token}',
-  'Content-Type':'application/x-www-form-urlencoded',
-  'Accept':'application/json'
-
-};
-
-$.ajax({
-  url: 'https://api.mod.io/v1/external/link',
-  method: 'post',
-
-  headers: headers,
-  success: function(data) {
-    console.log(JSON.stringify(data));
-  }
-})
-```
-
-```javascript--nodejs
-const request = require('node-fetch');
-const inputBody = '{
-  "service": "steam",
-  "service_id": "1843043832041",
-  "email": "test@mod.io"
-}';
-const headers = {
-  'Authorization':'Bearer {access-token}',
-  'Content-Type':'application/x-www-form-urlencoded',
-  'Accept':'application/json'
-
-};
-
-fetch('https://api.mod.io/v1/external/link',
-{
-  method: 'POST',
-  body: inputBody,
-  headers: headers
-})
-.then(function(res) {
-    return res.json();
-}).then(function(body) {
-    console.log(body);
-});
-```
-
-```python
-import requests
-headers = {
-  'Authorization': 'Bearer {access-token}',
-  'Content-Type': 'application/x-www-form-urlencoded',
-  'Accept': 'application/json'
-}
-
-r = requests.post('https://api.mod.io/v1/external/link', params={
-
-}, headers = headers)
-
-print r.json()
-```
-
-```java
-URL obj = new URL("https://api.mod.io/v1/external/link");
-HttpURLConnection con = (HttpURLConnection) obj.openConnection();
-con.setRequestMethod("POST");
-int responseCode = con.getResponseCode();
-BufferedReader in = new BufferedReader(
-    new InputStreamReader(con.getInputStream()));
-String inputLine;
-StringBuffer response = new StringBuffer();
-while ((inputLine = in.readLine()) != null) {
-    response.append(inputLine);
-}
-in.close();
-System.out.println(response.toString());
-```
-`POST /external/link`
-
-Connect an external account (i.e. Steam and GOG documented above) with the authenticated user's email address. When calling this endpoint you must authenticate the request with the users access token and the ID of their external account. If we have a matching external account saved for that user, a Successful request will return a [Message Object](#message-object) response at which point the user must check the supplied email address to link the external account to the respective email address.<br/><br/>__NOTE__: The external authentication flows (i.e. Steam and GOG documented above) only give us a users id. This endpoint allows the user to verify their email and connect it to their account. It is an __optional but recommended__ step as it makes account recovery and other processes easier.<br/><br/>__NOTE__: If you link an external account to an email that already exists on mod.io and you confirm the action via the email you will receive, the accounts will __automatically__ be merged together transferring all content from the external account to the native, existing account. Once this process is complete, existing access tokens to the external account will be nullified and you will need to [re-authenticate](#authentication).
-
-     Parameter|Type|Required|Description
-     ---|---|---|---|
-     service|string|true|The external service where the user's account originates.<br><br>Possible Options:<br>- _steam_<br>- _gog_<br>- _itch_
-     service_id|string|true|The external service id which is associated with the provided access token. For example, if you requested an access token via the [Steam Authentication](#authenticate-via-steam) endpoint, the service_id would be the user's Steam ID. For security reasons, this ID must match with the service parameter provided, and also be associated with the access token used in the request. <br><br>Service ID formats:<br>- _steam_ (Integer, 17 characters, Community ID format)<br>- _gog_ (Integer, 12 characters)<br>- _itchio_ (Integer, 6 characters)
-     email|string|true|The email address to link to the authenticated user's account.
-
-
-> Example response
-
-```json
-{
-  "code": 200,
-  "message": "Please see the confirmation email sent to (:email) to complete account link."
-}
-```
-<h3 id="Link-an-Email-responses">Responses</h3>
-
-Status|Meaning|Description|Response Schema
----|---|---|---|
-200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)|Successful Request|[Message Object](#message-object)
-
-<aside class="auth-notice">
-To perform this request, you must be authenticated via one of the following methods:
-<a href="#authentication">OAuth 2</a> (Scopes: write)
-</aside>
 # Games
 
 ## Get Games
@@ -2569,7 +2438,7 @@ Add a mod. Successful request will return the newly created [Mod Object](#mod-ob
     homepage_url|string||Official homepage for your mod. Must be a valid URL.
     stock|integer||Maximium number of subscribers for this mod. A value of 0 disables this limit.
     maturity_option|integer||Choose if this mod contains any of the following mature content. __NOTE:__ The value of this field will default to 0 unless the parent game allows you to flag mature content (see `maturity_options` field in [Game Object](#game-object)). <br><br>__0__ = None set _(default)_<br>__1__ = Alcohol<br>__2__ = Drugs<br>__4__ = Violence<br>__8__ = Explicit<br>__?__ = Add the options you want together, to enable multiple options (see [BITWISE fields](#bitwise-and-bitwise-and))
-    metadata_blob|string||Metadata stored by the game developer which may include properties as to how the item works, or other information you need to display. Metadata can also be stored as searchable [key value pairs](#metadata), and to individual [mod files](#get-all-modfiles).
+    metadata_blob|string||Metadata stored by the game developer which may include properties as to how the item works, or other information you need to display. Metadata can also be stored as searchable [key value pairs](#metadata), and to individual [mod files](#get-modfiles).
     tags|string[]||An array of strings that represent what the mod has been tagged as. Only tags that are supported by the parent game can be applied. To determine what tags are eligible, see the tags values within `tag_options` column on the parent [Game Object](#game-object).
 
 
@@ -2806,7 +2675,7 @@ Edit details for a mod. If you want to update the `logo` or media associated wit
     homepage_url|string||Official homepage for your mod. Must be a valid URL.
     stock|integer||Maximium number of subscribers for this mod. A value of 0 disables this limit.
     maturity_option|integer||Choose if this mod contains any of the following mature content. __NOTE:__ The value of this field will default to 0 unless the parent game allows you to flag mature content (see `maturity_options` field in [Game Object](#game-object)). <br><br>__0__ = None set _(default)_<br>__1__ = Alcohol<br>__2__ = Drugs<br>__4__ = Violence<br>__8__ = Explicit<br>__?__ = Add the options you want together, to enable multiple options (see [BITWISE fields](#bitwise-and-bitwise-and))
-    metadata_blob|string||Metadata stored by the game developer which may include properties as to how the item works, or other information you need to display. Metadata can also be stored as searchable [key value pairs](#metadata), and to individual [mod files](#get-all-modfiles).
+    metadata_blob|string||Metadata stored by the game developer which may include properties as to how the item works, or other information you need to display. Metadata can also be stored as searchable [key value pairs](#metadata), and to individual [mod files](#get-modfiles).
 
 
 > Example response
@@ -3432,7 +3301,7 @@ Upload a file for the corresponding mod. Successful request will return the newl
      filedata|file|true|The binary file for the release. For compatibility you should ZIP the base folder of your mod, or if it is a collection of files which live in a pre-existing game folder, you should ZIP those files. Your file must meet the following conditions:<br><br>- File must be __zipped__ and cannot exceed 10GB in filesize<br>- Filename's cannot contain any of the following charcters: <code>\ / ? " < > &#124; : *</code><br>- Mods which span multiple game directories are not supported unless the game manages this<br>- Mods which overwrite files are not supported unless the game manages this
      version|string||Version of the file release (recommended format 1.0.0 - MAJOR.MINOR.PATCH).
      changelog|string||Changelog of this release.
-     active|boolean||_Default value is true._ Flag this upload as the current release, this will change the `modfile` field on the parent mod to the `id` of this file after upload.<br><br>__NOTE:__ If the _active_ parameter is _true_, a [__MODFILE_CHANGED__ event](#get-all-mod-events) will be fired, so game clients know there is an update available for this mod.
+     active|boolean||_Default value is true._ Flag this upload as the current release, this will change the `modfile` field on the parent mod to the `id` of this file after upload.<br><br>__NOTE:__ If the _active_ parameter is _true_, a [__MODFILE_CHANGED__ event](#get-mod-events) will be fired, so game clients know there is an update available for this mod.
      filehash|string||MD5 of the submitted file. When supplied the MD5 will be compared against the uploaded files MD5. If they don't match a `422 Unprocessible Entity` error will be returned.
      metadata_blob|string||Metadata stored by the game developer which may include properties such as what version of the game this file is compatible with.
 
@@ -3582,7 +3451,7 @@ Edit the details of a published file. If you want to update fields other than th
      ---|---|---|---|
      version|string||Version of the file release (recommended format 1.0.0 - MAJOR.MINOR.PATCH).
      changelog|string||Changelog of this release.
-     active|boolean||Flag this upload as the current release.<br><br>__NOTE:__ If the _active_ parameter causes the parent mods `modfile` parameter to change, a [__MODFILE_CHANGED__ event](#get-all-mod-events) will be fired, so game clients know there is an update available for this mod.
+     active|boolean||Flag this upload as the current release.<br><br>__NOTE:__ If the _active_ parameter causes the parent mods `modfile` parameter to change, a [__MODFILE_CHANGED__ event](#get-mod-events) will be fired, so game clients know there is an update available for this mod.
      metadata_blob|string||Metadata stored by the game developer which may include properties such as what version of the game this file is compatible with.
 
 
@@ -7606,11 +7475,11 @@ curl -X POST https://api.mod.io/v1/batch \
   -H 'Authorization: Bearer {access-token}' \ 
   -H 'Content-Type: application/x-www-form-urlencoded' \ 
   -H 'Accept: application/json' \
-  -d 'batch[0][relative_url]=v1/games/11/mods' \
+  -d 'batch[0][relative url   ]=v1/games/11/mods' \
   -d 'batch[0][method]=GET' \
-  -d 'batch[1][relative_url]=v1/me/subscribed?id-in=$[0].data[*].id' \
+  -d 'batch[1][relative url   ]=v1/me/subscribed?id-in=$[0].data[*].id' \
   -d 'batch[1][method]=GET' \
-  -d 'batch[2][relative_url]=v1/me/ratings?id-in=$[0].data[*].id' \
+  -d 'batch[2][relative url   ]=v1/me/ratings?id-in=$[0].data[*].id' \
   -d 'batch[2][method]=GET'
 
 ```
@@ -7647,11 +7516,11 @@ $.ajax({
 ```javascript--nodejs
 const request = require('node-fetch');
 const inputBody = '{
-  "batch[0][relative_url]": "v1/games/11/mods",
+  "batch[0][relative url   ]": "v1/games/11/mods",
   "batch[0][method]": "GET",
-  "batch[1][relative_url]": "v1/me/subscribed?id-in=$[0].data[*].id",
+  "batch[1][relative url   ]": "v1/me/subscribed?id-in=$[0].data[*].id",
   "batch[1][method]": "GET",
-  "batch[2][relative_url]": "v1/me/ratings?id-in=$[0].data[*].id",
+  "batch[2][relative url   ]": "v1/me/ratings?id-in=$[0].data[*].id",
   "batch[2][method]": "GET"
 }';
 const headers = {
@@ -9692,7 +9561,7 @@ date_added|integer|Unix timestamp of date the comment was posted.
 reply_id|integer|Id of the parent comment this comment is replying to (can be 0 if the comment is not a reply).
 thread_position|string|Levels of nesting in a comment thread. How it works:<br><br>- The first comment will have the position '01'.<br>- The second comment will have the position '02'.<br>- If someone responds to the second comment the position will be '02.01'.<br>- A maximum of 3 levels is supported.
 karma|integer|Karma received for the comment (can be postive or negative).
-karma_guest|integer|Karma received for guest comments (can be postive or negative).
+karma_guest|integer|No longer used and will be removed in subsequent API version.
 content|string|Contents of the comment.
 
 
@@ -10187,7 +10056,7 @@ data|[Comment Object](#schemacomment_object)[]|Array containing comment objects.
 » reply_id|integer|Id of the parent comment this comment is replying to (can be 0 if the comment is not a reply).
 » thread_position|string|Levels of nesting in a comment thread. How it works:<br><br>- The first comment will have the position '01'.<br>- The second comment will have the position '02'.<br>- If someone responds to the second comment the position will be '02.01'.<br>- A maximum of 3 levels is supported.
 » karma|integer|Karma received for the comment (can be postive or negative).
-» karma_guest|integer|Karma received for guest comments (can be postive or negative).
+» karma_guest|integer|No longer used and will be removed in subsequent API version.
 » content|string|Contents of the comment.
 result_count|integer|Number of results returned in this request.
 result_offset|integer|Number of results skipped over. Defaults to 0 unless overridden by `_offset` filter.
