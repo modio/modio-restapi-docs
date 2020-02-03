@@ -345,6 +345,9 @@
             <a href="#authentication-2" class="toc-h1 toc-link" data-title="Authentication"><span class="reficon"><img src="https://static.mod.io/v1/images/branding/modio-icon-light.svg" alt="Reference" class="menu-reference-icon"></span> Authentication</a>
               <ul class="toc-list-h2">
                   <li>
+                    <a href="#consent" class="toc-h2 toc-link" data-title="Authentication"></a>
+                  </li>
+                  <li>
                     <a href="#authenticate-via-email" class="toc-h2 toc-link" data-title="Authentication">Authenticate via Email</a>
                   </li>
                   <li>
@@ -358,9 +361,6 @@
                   </li>
                   <li>
                     <a href="#authenticate-via-oculus" class="toc-h2 toc-link" data-title="Authentication">Authenticate via Oculus</a>
-                  </li>
-                  <li>
-                    <a href="#link-an-email" class="toc-h2 toc-link" data-title="Authentication">Link an Email</a>
                   </li>
               </ul>
           </li>
@@ -1617,7 +1617,7 @@ a non-english language you must supply the <code>Content-Language</code> header 
 <p>If you are a large studio or publisher and require a private, in-house, custom solution that accelerates your time to market with a best-in-class product, reach out <a href="mailto:developers@mod.io?subject=Whitelabel%20license">developers@mod.io</a> to discuss the licensing options available.</p>
 <h2 id="contact">Contact</h2>
 <p>If you spot any errors within the mod.io documentation, have feedback on how we can make it easier to follow or simply want to discuss how awesome mods are, feel free to reach out anytime to <a href="mailto:developers@mod.io?subject=API">developers@mod.io</a> or come join us in our <a href="https://discord.mod.io">discord channel</a>. We are here to help you grow and maximise the potential of mods in your game.</p>
-<h1 id="authentication-2">Authentication</h1><h2 id="authenticate-via-email">Authenticate via Email</h2>
+<h1 id="authentication-2">Authentication</h1><h2 id="consent" style="visibility: hidden; margin: 0; padding: 0;"></h2><h2 id="authenticate-via-email">Authenticate via Email</h2>
 <p>To perform writes, you will need to authenticate your users via OAuth 2. To make this frictionless in-game, we offer an email verification system, similar to what Slack and others pioneered. It works by users supplying their email, which we send a time-limited 5 digit security code too. They exchange this code in-game, for an <a href="https://mod.io/oauth/widget" class="colorbox">OAuth 2 access token</a> you can save to authenticate future requests. The benefit of this approach is it avoids complex website redirects and doesn't require your users to complete a slow registration flow.</p>
 
 <p><img src="https://static.mod.io/v1/images/home/email.png" alt="mod.io Email Authentication Flow"></p>
@@ -2323,161 +2323,6 @@ curl -X POST https://api.mod.io/v1/external/oculusauth?api_key<span class="o">=<
 <aside class="auth-notice">
 To perform this request, you must be authenticated via one of the following methods:
 <a href="#authentication">api_key</a>
-</aside>
-<h2 id="link-an-email">Link an Email</h2>
-<blockquote>
-<p>Example request</p>
-</blockquote>
-<pre class="highlight shell tab-shell"><code><span class="c"># You can also use wget</span>
-curl -X POST https://api.mod.io/v1/external/link <span class="se">\</span>
-  -H <span class="s1">'Authorization: Bearer {access-token}'</span> <span class="se">\ </span>
-  -H <span class="s1">'Content-Type: application/x-www-form-urlencoded'</span> <span class="se">\ </span>
-  -H <span class="s1">'Accept: application/json'</span> <span class="se">\</span>
-  -d <span class="s1">'service=steam'</span> <span class="se">\</span>
-  -d <span class="s1">'service_id=1843043832041'</span> <span class="se">\</span>
-  -d <span class="s1">'email=test@mod.io'</span>
-
-</code></pre><pre class="highlight http tab-http"><code><span class="nf">POST</span> <span class="nn">https://api.mod.io/v1/external/link</span> <span class="k">HTTP</span><span class="o">/</span><span class="m">1.1</span>
-<span class="na">Host</span><span class="p">:</span> <span class="s">api.mod.io</span>
-<span class="na">Content-Type</span><span class="p">:</span> <span class="s">application/x-www-form-urlencoded</span>
-<span class="na">Accept</span><span class="p">:</span> <span class="s">application/json</span>
-<span class="na">Authorization</span><span class="p">:</span> <span class="s">Bearer {access-token}</span>
-
-
-</code></pre><pre class="highlight javascript tab-javascript"><code><span class="kd">var</span> <span class="nx">headers</span> <span class="o">=</span> <span class="p">{</span>
-  <span class="s1">'Authorization'</span><span class="p">:</span><span class="s1">'Bearer {access-token}'</span><span class="p">,</span>
-  <span class="s1">'Content-Type'</span><span class="p">:</span><span class="s1">'application/x-www-form-urlencoded'</span><span class="p">,</span>
-  <span class="s1">'Accept'</span><span class="p">:</span><span class="s1">'application/json'</span>
-
-<span class="p">};</span>
-
-<span class="nx">$</span><span class="p">.</span><span class="nx">ajax</span><span class="p">({</span>
-  <span class="na">url</span><span class="p">:</span> <span class="s1">'https://api.mod.io/v1/external/link'</span><span class="p">,</span>
-  <span class="na">method</span><span class="p">:</span> <span class="s1">'post'</span><span class="p">,</span>
-
-  <span class="na">headers</span><span class="p">:</span> <span class="nx">headers</span><span class="p">,</span>
-  <span class="na">success</span><span class="p">:</span> <span class="kd">function</span><span class="p">(</span><span class="nx">data</span><span class="p">)</span> <span class="p">{</span>
-    <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">JSON</span><span class="p">.</span><span class="nx">stringify</span><span class="p">(</span><span class="nx">data</span><span class="p">));</span>
-  <span class="p">}</span>
-<span class="p">})</span>
-</code></pre><pre class="highlight javascript tab-javascript--nodejs"><code><span class="kr">const</span> <span class="nx">request</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s1">'node-fetch'</span><span class="p">);</span>
-<span class="kr">const</span> <span class="nx">inputBody</span> <span class="o">=</span> <span class="s1">'{
-  "service": "steam",
-  "service_id": "1843043832041",
-  "email": "test@mod.io"
-}'</span><span class="p">;</span>
-<span class="kr">const</span> <span class="nx">headers</span> <span class="o">=</span> <span class="p">{</span>
-  <span class="s1">'Authorization'</span><span class="p">:</span><span class="s1">'Bearer {access-token}'</span><span class="p">,</span>
-  <span class="s1">'Content-Type'</span><span class="p">:</span><span class="s1">'application/x-www-form-urlencoded'</span><span class="p">,</span>
-  <span class="s1">'Accept'</span><span class="p">:</span><span class="s1">'application/json'</span>
-
-<span class="p">};</span>
-
-<span class="nx">fetch</span><span class="p">(</span><span class="s1">'https://api.mod.io/v1/external/link'</span><span class="p">,</span>
-<span class="p">{</span>
-  <span class="na">method</span><span class="p">:</span> <span class="s1">'POST'</span><span class="p">,</span>
-  <span class="na">body</span><span class="p">:</span> <span class="nx">inputBody</span><span class="p">,</span>
-  <span class="na">headers</span><span class="p">:</span> <span class="nx">headers</span>
-<span class="p">})</span>
-<span class="p">.</span><span class="nx">then</span><span class="p">(</span><span class="kd">function</span><span class="p">(</span><span class="nx">res</span><span class="p">)</span> <span class="p">{</span>
-    <span class="k">return</span> <span class="nx">res</span><span class="p">.</span><span class="nx">json</span><span class="p">();</span>
-<span class="p">}).</span><span class="nx">then</span><span class="p">(</span><span class="kd">function</span><span class="p">(</span><span class="nx">body</span><span class="p">)</span> <span class="p">{</span>
-    <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">body</span><span class="p">);</span>
-<span class="p">});</span>
-</code></pre><pre class="highlight python tab-python"><code><span class="kn">import</span> <span class="nn">requests</span>
-<span class="n">headers</span> <span class="o">=</span> <span class="p">{</span>
-  <span class="s">'Authorization'</span><span class="p">:</span> <span class="s">'Bearer {access-token}'</span><span class="p">,</span>
-  <span class="s">'Content-Type'</span><span class="p">:</span> <span class="s">'application/x-www-form-urlencoded'</span><span class="p">,</span>
-  <span class="s">'Accept'</span><span class="p">:</span> <span class="s">'application/json'</span>
-<span class="p">}</span>
-
-<span class="n">r</span> <span class="o">=</span> <span class="n">requests</span><span class="o">.</span><span class="n">post</span><span class="p">(</span><span class="s">'https://api.mod.io/v1/external/link'</span><span class="p">,</span> <span class="n">params</span><span class="o">=</span><span class="p">{</span>
-
-<span class="p">},</span> <span class="n">headers</span> <span class="o">=</span> <span class="n">headers</span><span class="p">)</span>
-
-<span class="k">print</span> <span class="n">r</span><span class="o">.</span><span class="n">json</span><span class="p">()</span>
-</code></pre><pre class="highlight java tab-java"><code><span class="n">URL</span> <span class="n">obj</span> <span class="o">=</span> <span class="k">new</span> <span class="n">URL</span><span class="o">(</span><span class="s">"https://api.mod.io/v1/external/link"</span><span class="o">);</span>
-<span class="n">HttpURLConnection</span> <span class="n">con</span> <span class="o">=</span> <span class="o">(</span><span class="n">HttpURLConnection</span><span class="o">)</span> <span class="n">obj</span><span class="o">.</span><span class="na">openConnection</span><span class="o">();</span>
-<span class="n">con</span><span class="o">.</span><span class="na">setRequestMethod</span><span class="o">(</span><span class="s">"POST"</span><span class="o">);</span>
-<span class="kt">int</span> <span class="n">responseCode</span> <span class="o">=</span> <span class="n">con</span><span class="o">.</span><span class="na">getResponseCode</span><span class="o">();</span>
-<span class="n">BufferedReader</span> <span class="n">in</span> <span class="o">=</span> <span class="k">new</span> <span class="n">BufferedReader</span><span class="o">(</span>
-    <span class="k">new</span> <span class="nf">InputStreamReader</span><span class="o">(</span><span class="n">con</span><span class="o">.</span><span class="na">getInputStream</span><span class="o">()));</span>
-<span class="n">String</span> <span class="n">inputLine</span><span class="o">;</span>
-<span class="n">StringBuffer</span> <span class="n">response</span> <span class="o">=</span> <span class="k">new</span> <span class="n">StringBuffer</span><span class="o">();</span>
-<span class="k">while</span> <span class="o">((</span><span class="n">inputLine</span> <span class="o">=</span> <span class="n">in</span><span class="o">.</span><span class="na">readLine</span><span class="o">())</span> <span class="o">!=</span> <span class="kc">null</span><span class="o">)</span> <span class="o">{</span>
-    <span class="n">response</span><span class="o">.</span><span class="na">append</span><span class="o">(</span><span class="n">inputLine</span><span class="o">);</span>
-<span class="o">}</span>
-<span class="n">in</span><span class="o">.</span><span class="na">close</span><span class="o">();</span>
-<span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="n">response</span><span class="o">.</span><span class="na">toString</span><span class="o">());</span>
-</code></pre>
-<p><span class="httpmethod POST">POST</span> <span class="endpointheading">/external/link</span></p>
-
-<p>Connect an external account (i.e. Steam and GOG documented above) with the authenticated user's email address. When calling this endpoint you must authenticate the request with the users access token and the ID of their external account. If we have a matching external account saved for that user, a Successful request will return a <a href="#message-object">Message Object</a> response at which point the user must check the supplied email address to link the external account to the respective email address.<br><br><strong>NOTE</strong>: The external authentication flows (i.e. Steam and GOG documented above) only give us a users id. This endpoint allows the user to verify their email and connect it to their account. It is an <strong>optional but recommended</strong> step as it makes account recovery and other processes easier.<br><br><strong>NOTE</strong>: If you link an external account to an email that already exists on mod.io and you confirm the action via the email you will receive, the accounts will <strong>automatically</strong> be merged together transferring all content from the external account to the native, existing account. Once this process is complete, existing access tokens to the external account will be nullified and you will need to <a href="#authentication">re-authenticate</a>.</p>
-
-<table>
-<thead>
-<tr>
-<th>Parameter</th>
-<th>Type</th>
-<th>Required</th>
-<th>Description</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>service</td>
-<td>string</td>
-<td>true</td>
-<td>The external service where the user's account originates.<br><br>Possible Options:<br>- <em>steam</em><br>- <em>gog</em><br>- <em>itch</em>
-</td>
-</tr>
-<tr>
-<td>service_id</td>
-<td>string</td>
-<td>true</td>
-<td>The external service id which is associated with the provided access token. For example, if you requested an access token via the <a href="#authenticate-via-steam">Steam Authentication</a> endpoint, the service_id would be the user's Steam ID. For security reasons, this ID must match with the service parameter provided, and also be associated with the access token used in the request. <br><br>Service ID formats:<br>- <em>steam</em> (Integer, 17 characters, Community ID format)<br>- <em>gog</em> (Integer, 12 characters)<br>- <em>itchio</em> (Integer, 6 characters)</td>
-</tr>
-<tr>
-<td>email</td>
-<td>string</td>
-<td>true</td>
-<td>The email address to link to the authenticated user's account.</td>
-</tr>
-</tbody>
-</table>
-
-<blockquote>
-<p>Example response</p>
-</blockquote>
-<pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
-  </span><span class="s2">"code"</span><span class="p">:</span><span class="w"> </span><span class="mi">200</span><span class="p">,</span><span class="w">
-  </span><span class="s2">"message"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Please see the confirmation email sent to (:email) to complete account link."</span><span class="w">
-</span><span class="p">}</span><span class="w">
-</span></code></pre>
-<h3 id="Link-an-Email-responses">Responses</h3>
-
-<table>
-<thead>
-<tr>
-<th>Status</th>
-<th>Meaning</th>
-<th>Description</th>
-<th>Response Schema</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>200</td>
-<td><a href="https://tools.ietf.org/html/rfc7231#section-6.3.1">OK</a></td>
-<td>Successful Request</td>
-<td><a href="#message-object">Message Object</a></td>
-</tr>
-</tbody>
-</table>
-
-<aside class="auth-notice">
-To perform this request, you must be authenticated via one of the following methods:
-<a href="#authentication">OAuth 2</a> (Scopes: write)
 </aside>
 <h1 id="games">Games</h1><h2 id="get-games">Get Games</h2>
 <blockquote>
@@ -3901,7 +3746,7 @@ curl -X POST https://api.mod.io/v1/games/<span class="o">{</span>game-id<span cl
 <td>metadata_blob</td>
 <td>string</td>
 <td></td>
-<td>Metadata stored by the game developer which may include properties as to how the item works, or other information you need to display. Metadata can also be stored as searchable <a href="#metadata">key value pairs</a>, and to individual <a href="#get-all-modfiles">mod files</a>.</td>
+<td>Metadata stored by the game developer which may include properties as to how the item works, or other information you need to display. Metadata can also be stored as searchable <a href="#metadata">key value pairs</a>, and to individual <a href="#get-modfiles">mod files</a>.</td>
 </tr>
 <tr>
 <td>tags</td>
@@ -4216,7 +4061,7 @@ Content-Type: application/x-www-form-urlencoded
 <td>metadata_blob</td>
 <td>string</td>
 <td></td>
-<td>Metadata stored by the game developer which may include properties as to how the item works, or other information you need to display. Metadata can also be stored as searchable <a href="#metadata">key value pairs</a>, and to individual <a href="#get-all-modfiles">mod files</a>.</td>
+<td>Metadata stored by the game developer which may include properties as to how the item works, or other information you need to display. Metadata can also be stored as searchable <a href="#metadata">key value pairs</a>, and to individual <a href="#get-modfiles">mod files</a>.</td>
 </tr>
 </tbody>
 </table>
@@ -4920,7 +4765,7 @@ curl -X POST https://api.mod.io/v1/games/<span class="o">{</span>game-id<span cl
 <td>boolean</td>
 <td></td>
 <td>
-<em>Default value is true.</em> Flag this upload as the current release, this will change the <code>modfile</code> field on the parent mod to the <code>id</code> of this file after upload.<br><br><strong>NOTE:</strong> If the <em>active</em> parameter is <em>true</em>, a <a href="#get-all-mod-events"><strong>MODFILE_CHANGED</strong> event</a> will be fired, so game clients know there is an update available for this mod.</td>
+<em>Default value is true.</em> Flag this upload as the current release, this will change the <code>modfile</code> field on the parent mod to the <code>id</code> of this file after upload.<br><br><strong>NOTE:</strong> If the <em>active</em> parameter is <em>true</em>, a <a href="#get-mod-events"><strong>MODFILE_CHANGED</strong> event</a> will be fired, so game clients know there is an update available for this mod.</td>
 </tr>
 <tr>
 <td>filehash</td>
@@ -5118,7 +4963,7 @@ Content-Type: application/x-www-form-urlencoded
 <td>active</td>
 <td>boolean</td>
 <td></td>
-<td>Flag this upload as the current release.<br><br><strong>NOTE:</strong> If the <em>active</em> parameter causes the parent mods <code>modfile</code> parameter to change, a <a href="#get-all-mod-events"><strong>MODFILE_CHANGED</strong> event</a> will be fired, so game clients know there is an update available for this mod.</td>
+<td>Flag this upload as the current release.<br><br><strong>NOTE:</strong> If the <em>active</em> parameter causes the parent mods <code>modfile</code> parameter to change, a <a href="#get-mod-events"><strong>MODFILE_CHANGED</strong> event</a> will be fired, so game clients know there is an update available for this mod.</td>
 </tr>
 <tr>
 <td>metadata_blob</td>
@@ -9622,11 +9467,11 @@ curl -X POST https://api.mod.io/v1/batch <span class="se">\</span>
   -H <span class="s1">'Authorization: Bearer {access-token}'</span> <span class="se">\ </span>
   -H <span class="s1">'Content-Type: application/x-www-form-urlencoded'</span> <span class="se">\ </span>
   -H <span class="s1">'Accept: application/json'</span> <span class="se">\</span>
-  -d <span class="s1">'batch[0][relative_url]=v1/games/11/mods'</span> <span class="se">\</span>
+  -d <span class="s1">'batch[0][relative url   ]=v1/games/11/mods'</span> <span class="se">\</span>
   -d <span class="s1">'batch[0][method]=GET'</span> <span class="se">\</span>
-  -d <span class="s1">'batch[1][relative_url]=v1/me/subscribed?id-in=$[0].data[*].id'</span> <span class="se">\</span>
+  -d <span class="s1">'batch[1][relative url   ]=v1/me/subscribed?id-in=$[0].data[*].id'</span> <span class="se">\</span>
   -d <span class="s1">'batch[1][method]=GET'</span> <span class="se">\</span>
-  -d <span class="s1">'batch[2][relative_url]=v1/me/ratings?id-in=$[0].data[*].id'</span> <span class="se">\</span>
+  -d <span class="s1">'batch[2][relative url   ]=v1/me/ratings?id-in=$[0].data[*].id'</span> <span class="se">\</span>
   -d <span class="s1">'batch[2][method]=GET'</span>
 
 </code></pre><pre class="highlight http tab-http"><code><span class="nf">POST</span> <span class="nn">https://api.mod.io/v1/batch</span> <span class="k">HTTP</span><span class="o">/</span><span class="m">1.1</span>
@@ -9654,11 +9499,11 @@ curl -X POST https://api.mod.io/v1/batch <span class="se">\</span>
 <span class="p">})</span>
 </code></pre><pre class="highlight javascript tab-javascript--nodejs"><code><span class="kr">const</span> <span class="nx">request</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s1">'node-fetch'</span><span class="p">);</span>
 <span class="kr">const</span> <span class="nx">inputBody</span> <span class="o">=</span> <span class="s1">'{
-  "batch[0][relative_url]": "v1/games/11/mods",
+  "batch[0][relative url   ]": "v1/games/11/mods",
   "batch[0][method]": "GET",
-  "batch[1][relative_url]": "v1/me/subscribed?id-in=$[0].data[*].id",
+  "batch[1][relative url   ]": "v1/me/subscribed?id-in=$[0].data[*].id",
   "batch[1][method]": "GET",
-  "batch[2][relative_url]": "v1/me/ratings?id-in=$[0].data[*].id",
+  "batch[2][relative url   ]": "v1/me/ratings?id-in=$[0].data[*].id",
   "batch[2][method]": "GET"
 }'</span><span class="p">;</span>
 <span class="kr">const</span> <span class="nx">headers</span> <span class="o">=</span> <span class="p">{</span>
@@ -12913,7 +12758,7 @@ To perform this request, you must be authenticated via one of the following meth
 <tr>
 <td>karma_guest</td>
 <td>integer</td>
-<td>Karma received for guest comments (can be postive or negative).</td>
+<td>No longer used and will be removed in subsequent API version.</td>
 </tr>
 <tr>
 <td>content</td>
@@ -14005,7 +13850,7 @@ To perform this request, you must be authenticated via one of the following meth
 <tr>
 <td>» karma_guest</td>
 <td>integer</td>
-<td>Karma received for guest comments (can be postive or negative).</td>
+<td>No longer used and will be removed in subsequent API version.</td>
 </tr>
 <tr>
 <td>» content</td>
