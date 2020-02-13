@@ -7918,11 +7918,11 @@ $.ajax({
 ```javascript--nodejs
 const request = require('node-fetch');
 const inputBody = '{
-  "batch[0][relative url   ]": "v1/games/11/mods",
+  "batch[0][relative_url]": "v1/games/11/mods",
   "batch[0][method]": "GET",
-  "batch[1][relative url   ]": "v1/me/subscribed?id-in=$[0].data[*].id",
+  "batch[1][relative_url]": "v1/me/subscribed?id-in=$[0].data[*].id",
   "batch[1][method]": "GET",
-  "batch[2][relative url   ]": "v1/me/ratings?id-in=$[0].data[*].id",
+  "batch[2][relative_url]": "v1/me/ratings?id-in=$[0].data[*].id",
   "batch[2][method]": "GET"
 }';
 const headers = {
@@ -10611,7 +10611,7 @@ data|[Mod Event Object](#schemamod_event_object)[]|Array containing mod event ob
 » mod_id|integer|Unique id of the parent mod.
 » user_id|integer|Unique id of the user who performed the action.
 » date_added|integer|Unix timestamp of date the event occurred.
-» event_type|string|Type of event that was triggered. List of possible events: <br><br>- MODFILE_CHANGED<br>- MOD_AVAILABLE<br>- MOD_UNAVAILABLE<br>- MOD_EDITED<br>- MOD_DELETED<br>- USER_TEAM_JOIN<br>- USER_TEAM_LEAVE<br>- USER_SUBSCRIBE<br>- USER_UNSUBSCRIBE
+» event_type|string|Type of event that was triggered. List of possible events: <br><br>- MODFILE_CHANGED<br>- MOD_AVAILABLE<br>- MOD_UNAVAILABLE<br>- MOD_EDITED<br>- MOD_DELETED<br>- TEAM_CHANGED
 result_count|integer|Number of results returned in this request.
 result_offset|integer|Number of results skipped over. Defaults to 0 unless overridden by `_offset` filter.
 result_limit|integer|Maximum number of results returned in the request. Defaults to 100 (max) unless overridden by `_limit` filter.
@@ -11640,7 +11640,7 @@ id|integer|Unique id of the event object.
 mod_id|integer|Unique id of the parent mod.
 user_id|integer|Unique id of the user who performed the action.
 date_added|integer|Unix timestamp of date the event occurred.
-event_type|string|Type of event that was triggered. List of possible events: <br><br>- MODFILE_CHANGED<br>- MOD_AVAILABLE<br>- MOD_UNAVAILABLE<br>- MOD_EDITED<br>- MOD_DELETED<br>- USER_TEAM_JOIN<br>- USER_TEAM_LEAVE<br>- USER_SUBSCRIBE<br>- USER_UNSUBSCRIBE
+event_type|string|Type of event that was triggered. List of possible events: <br><br>- MODFILE_CHANGED<br>- MOD_AVAILABLE<br>- MOD_UNAVAILABLE<br>- MOD_EDITED<br>- MOD_DELETED<br>- TEAM_CHANGED
 
 
 
