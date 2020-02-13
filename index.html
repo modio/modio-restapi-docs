@@ -10009,11 +10009,11 @@ curl -X POST https://api.mod.io/v1/batch <span class="se">\</span>
 <span class="p">})</span>
 </code></pre><pre class="highlight javascript tab-javascript--nodejs"><code><span class="kr">const</span> <span class="nx">request</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s1">'node-fetch'</span><span class="p">);</span>
 <span class="kr">const</span> <span class="nx">inputBody</span> <span class="o">=</span> <span class="s1">'{
-  "batch[0][relative url   ]": "v1/games/11/mods",
+  "batch[0][relative_url]": "v1/games/11/mods",
   "batch[0][method]": "GET",
-  "batch[1][relative url   ]": "v1/me/subscribed?id-in=$[0].data[*].id",
+  "batch[1][relative_url]": "v1/me/subscribed?id-in=$[0].data[*].id",
   "batch[1][method]": "GET",
-  "batch[2][relative url   ]": "v1/me/ratings?id-in=$[0].data[*].id",
+  "batch[2][relative_url]": "v1/me/ratings?id-in=$[0].data[*].id",
   "batch[2][method]": "GET"
 }'</span><span class="p">;</span>
 <span class="kr">const</span> <span class="nx">headers</span> <span class="o">=</span> <span class="p">{</span>
@@ -14661,7 +14661,7 @@ To perform this request, you must be authenticated via one of the following meth
 <tr>
 <td>» event_type</td>
 <td>string</td>
-<td>Type of event that was triggered. List of possible events: <br><br>- MODFILE_CHANGED<br>- MOD_AVAILABLE<br>- MOD_UNAVAILABLE<br>- MOD_EDITED<br>- MOD_DELETED<br>- USER_TEAM_JOIN<br>- USER_TEAM_LEAVE<br>- USER_SUBSCRIBE<br>- USER_UNSUBSCRIBE</td>
+<td>Type of event that was triggered. List of possible events: <br><br>- MODFILE_CHANGED<br>- MOD_AVAILABLE<br>- MOD_UNAVAILABLE<br>- MOD_EDITED<br>- MOD_DELETED<br>- TEAM_CHANGED</td>
 </tr>
 <tr>
 <td>result_count</td>
@@ -16882,7 +16882,7 @@ To perform this request, you must be authenticated via one of the following meth
 <tr>
 <td>event_type</td>
 <td>string</td>
-<td>Type of event that was triggered. List of possible events: <br><br>- MODFILE_CHANGED<br>- MOD_AVAILABLE<br>- MOD_UNAVAILABLE<br>- MOD_EDITED<br>- MOD_DELETED<br>- USER_TEAM_JOIN<br>- USER_TEAM_LEAVE<br>- USER_SUBSCRIBE<br>- USER_UNSUBSCRIBE</td>
+<td>Type of event that was triggered. List of possible events: <br><br>- MODFILE_CHANGED<br>- MOD_AVAILABLE<br>- MOD_UNAVAILABLE<br>- MOD_EDITED<br>- MOD_DELETED<br>- TEAM_CHANGED</td>
 </tr>
 </tbody>
 </table>
