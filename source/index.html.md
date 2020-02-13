@@ -1303,6 +1303,137 @@ Status|Meaning|Description|Response Schema
 To perform this request, you must be authenticated via one of the following methods:
 <a href="#authentication">api_key</a>
 </aside>
+## Link an Email
+
+> Example request
+
+```shell
+# You can also use wget
+curl -X POST https://api.mod.io/v1/external/link \
+  -H 'Authorization: Bearer {access-token}' \ 
+  -H 'Content-Type: application/x-www-form-urlencoded' \ 
+  -H 'Accept: application/json' \
+  -d 'service=steam' \
+  -d 'service_id=1843043832041' \
+  -d 'email=test@mod.io'
+
+```
+
+```http
+POST https://api.mod.io/v1/external/link HTTP/1.1
+Host: api.mod.io
+Content-Type: application/x-www-form-urlencoded
+Accept: application/json
+Authorization: Bearer {access-token}
+
+
+```
+
+```javascript
+var headers = {
+  'Authorization':'Bearer {access-token}',
+  'Content-Type':'application/x-www-form-urlencoded',
+  'Accept':'application/json'
+
+};
+
+$.ajax({
+  url: 'https://api.mod.io/v1/external/link',
+  method: 'post',
+
+  headers: headers,
+  success: function(data) {
+    console.log(JSON.stringify(data));
+  }
+})
+```
+
+```javascript--nodejs
+const request = require('node-fetch');
+const inputBody = '{
+  "service": "steam",
+  "service_id": "1843043832041",
+  "email": "test@mod.io"
+}';
+const headers = {
+  'Authorization':'Bearer {access-token}',
+  'Content-Type':'application/x-www-form-urlencoded',
+  'Accept':'application/json'
+
+};
+
+fetch('https://api.mod.io/v1/external/link',
+{
+  method: 'POST',
+  body: inputBody,
+  headers: headers
+})
+.then(function(res) {
+    return res.json();
+}).then(function(body) {
+    console.log(body);
+});
+```
+
+```python
+import requests
+headers = {
+  'Authorization': 'Bearer {access-token}',
+  'Content-Type': 'application/x-www-form-urlencoded',
+  'Accept': 'application/json'
+}
+
+r = requests.post('https://api.mod.io/v1/external/link', params={
+
+}, headers = headers)
+
+print r.json()
+```
+
+```java
+URL obj = new URL("https://api.mod.io/v1/external/link");
+HttpURLConnection con = (HttpURLConnection) obj.openConnection();
+con.setRequestMethod("POST");
+int responseCode = con.getResponseCode();
+BufferedReader in = new BufferedReader(
+    new InputStreamReader(con.getInputStream()));
+String inputLine;
+StringBuffer response = new StringBuffer();
+while ((inputLine = in.readLine()) != null) {
+    response.append(inputLine);
+}
+in.close();
+System.out.println(response.toString());
+```
+`POST /external/link`
+
+Connect an external account (i.e. Steam and GOG documented above) with the authenticated user's email address. When calling this endpoint you must authenticate the request with the users access token and the ID of their external account. If we have a matching external account saved for that user, a Successful request will return a [Message Object](#message-object) response at which point the user must check the supplied email address to link the external account to the respective email address.<br/><br/>__NOTE__: The external authentication flows (i.e. Steam and GOG documented above) only give us a users id. This endpoint allows the user to verify their email and connect it to their account. It is an __optional but recommended__ step as it makes account recovery and other processes easier.<br/><br/>__NOTE__: If you link an external account to an email that already exists on mod.io and you confirm the action via the email you will receive, the accounts will __automatically__ be merged together transferring all content from the external account to the native, existing account. Once this process is complete, existing access tokens to the external account will be nullified and you will need to [re-authenticate](#authentication).
+
+     Parameter|Type|Required|Description
+     ---|---|---|---|
+     service|string|true|The external service where the user's account originates.<br><br>Possible Options:<br>- _steam_<br>- _gog_<br>- _itch_
+     service_id|string|true|The external service id which is associated with the provided access token. For example, if you requested an access token via the [Steam Authentication](#authenticate-via-steam) endpoint, the service_id would be the user's Steam ID. For security reasons, this ID must match with the service parameter provided, and also be associated with the access token used in the request. <br><br>Service ID formats:<br>- _steam_ (Integer, 17 characters, Community ID format)<br>- _gog_ (Integer, 12 characters)<br>- _itchio_ (Integer, 6 characters)
+     email|string|true|The email address to link to the authenticated user's account.
+
+
+> Example response
+
+```json
+{
+  "code": 200,
+  "message": "Please see the confirmation email sent to (:email) to complete account link."
+}
+```
+<h3 id="Link-an-Email-responses">Responses</h3>
+
+Status|Meaning|Description|Response Schema
+---|---|---|---|
+200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)|Successful Request|[Message Object](#message-object)
+
+<aside class="auth-notice">
+To perform this request, you must be authenticated via one of the following methods:
+<a href="#authentication">OAuth 2</a> (Scopes: write)
+</aside>
 # Games
 
 ## Get Games
@@ -1410,7 +1541,7 @@ Get all games. Successful request will return an array of [Game Objects](#get-ga
     presentation_option|integer|Presentation style used on the mod.io website:<br><br>__0__ =  Grid View: Displays mods in a grid<br>__1__ = Table View: Displays mods in a table
     submission_option|integer|Submission process modders must follow:<br><br>__0__ = Mod uploads must occur via the API using a tool created by the game developers<br>__1__ = Mod uploads can occur from anywhere, including the website and API
     curation_option|integer|Curation process used to approve mods:<br><br>__0__ = No curation: Mods are immediately available to play<br>__1__ = Paid curation: Mods are immediately available to play unless they choose to receive donations. These mods must be accepted to be listed<br>__2__ = Full curation: All mods must be accepted by someone to be listed
-    community_options|integer|Community features enabled on the mod.io website:<br><br>__0__ = All of the options below are disabled<br>__1__ = Comments enabled<br>__2__ = Guides enabled<br>__?__ = Combine to find games with multiple options enabled (see [BITWISE fields](#bitwise-and-bitwise-and))
+    community_options|integer|Community features enabled on the mod.io website:<br><br>__0__ = All of the options below are disabled<br>__1__ = Enable comments<br>__2__ = Enable guides<br>__4__ = Disable website _"subscribe to install"_ text<br>__?__ = Combine to find games with multiple options enabled (see [BITWISE fields](#bitwise-and-bitwise-and))
     revenue_options|integer|Revenue capabilities mods can enable:<br><br>__0__ = All of the options below are disabled<br>__1__ = Allow mods to be sold<br>__2__ = Allow mods to receive donations<br>__4__ = Allow mods to be traded<br>__8__ = Allow mods to control supply and scarcity<br>__?__ = Combine to find games with multiple options enabled (see [BITWISE fields](#bitwise-and-bitwise-and))
     api_access_options|integer|Level of API access allowed by this game:<br><br>__0__ = All of the options below are disabled<br>__1__ = Allow 3rd parties to access this games API endpoints<br>__2__ = Allow mods to be downloaded directly (if disabled all download URLs will contain a frequently changing verification hash to stop unauthorized use)<br>__?__ = Combine to find games with multiple options enabled (see [BITWISE fields](#bitwise-and-bitwise-and))
     maturity_options|integer|If the game allows developers to flag mods as containing mature content:<br><br>__0__ = Don't allow _(default)_<br>__1__ = Allow
@@ -1787,7 +1918,7 @@ Update details for a game. If you want to update the `icon`, `logo` or `header` 
     presentation_option|integer||Choose the presentation style you want on the mod.io website:<br><br>__0__ =  Grid View: Displays mods in a grid (visual but less informative, default setting) <br>__1__ = Table View: Displays mods in a table (easier to browse)
     submission_option|integer||Choose the submission process you want modders to follow:<br><br>__0__ = Mods must be uploaded using your tools (recommended): You will have to build an upload system either in-game or via a standalone tool, which enables creators to submit mods to the tags you have configured. Because you control the flow you can pre-validate and compile mods, to ensure they will work in your game and attach metadata about what settings the mod can change. In the long run this option will save you time as you can accept more submissions, but it requires more setup to get running and isn't as open as the above option. __NOTE:__ mod profiles can still be [created online](https://mod.io/mods/add), but uploads will have to occur via the API using tools you create.<br><br>__1__ = Mods can be uploaded using the website: Allow developers to upload mods via the website and API, and pick the tags their mod is built for. No validation will be done on the files submitted, it will be the responsibility of your game and apps to process the mods installation based on the tags selected and determine if the mod is valid and works. For example a mod might be uploaded with the 'map' tag. When a user subscribes to this mod, your game will need to verify it contains a map file and install it where maps are located. If this fails, your game or the community will have to flag the mod as 'incompatible' to remove it from the listing.
     curation_option|integer||Choose the curation process your team follows to approve mods:<br><br>__0__ = No curation (recommended): Mods are immediately available to play, without any intervention or work from your team.<br><br>__1__ = Paid curation: Screen only mods the creator wants to sell, before they are available to receive donations or be purchased via the API.<br><br>__2__ = Full curation: All mods must be accepted by someone on your team. This option is useful for games that have a small number of mods and want to control the experience, or you need to set the parameters attached to a mod (i.e. a weapon may require the rate of fire, power level, clip size etc). It can also be used for complex mods, which you may need to build into your game or distribute as DLC.
-    community_options|integer||Choose the community features enabled on the mod.io website:<br><br>__0__ = All of the options below are disabled<br>__1__ = Comments enabled<br>__2__ = Guides enabled<br>__?__ = Add the options you want together, to enable multiple features (see [BITWISE fields](#bitwise-and-bitwise-and))
+    community_options|integer||Choose the community features enabled on the mod.io website:<br><br>__0__ = All of the options below are disabled<br>__1__ = Enable comments<br>__2__ = Enable guides<br>__4__ = Disable website _"subscribe to install"_ text<br>__?__ = Add the options you want together, to enable multiple features (see [BITWISE fields](#bitwise-and-bitwise-and))
     revenue_options|integer||Choose the revenue capabilities mods can enable:<br><br>__0__ = All of the options below are disabled<br>__1__ = Allow mods to be sold<br>__2__ = Allow mods to receive donations<br>__4__ = Allow mods to be traded<br>__8__ = Allow mods to control supply and scarcity<br>__?__ = Add the options you want together, to enable multiple features (see [BITWISE fields](#bitwise-and-bitwise-and))
     api_access_options|integer||Choose the level of API access your game allows:<br><br>__0__ = All of the options below are disabled<br><br>__1__ = Allow 3rd parties to access this games API endpoints. We recommend you enable this feature, an open API will encourage a healthy ecosystem of tools and apps. If you do not enable this feature, your `/games/{games-id}` endpoints will return `403 Forbidden` unless you are a member of the games team or using the games `api_key`<br><br>__2__ = Allow mods to be downloaded directly (makes implementation easier for you, game servers and services because you can save, share and reuse download URLs). If disabled all download URLs will contain a frequently changing verification hash to stop unauthorized use<br><br>__?__ = Add the options you want together, to enable multiple features (see [BITWISE fields](#bitwise-and-bitwise-and))
     maturity_options|integer||Choose if you want to allow developers to select if they can flag their mods as containing mature content:<br><br>__0__ = Don't allow _(default)_<br>__1__ = Allow
@@ -4360,6 +4491,138 @@ To perform this request, you must be authenticated via one of the following meth
 </aside>
 # Events
 
+## Get Mods Events
+
+> Example request
+
+```shell
+# You can also use wget
+curl -X GET https://api.mod.io/v1/games/{game-id}/mods/events?api_key=YourApiKey \
+  -H 'Accept: application/json'
+
+```
+
+```http
+GET https://api.mod.io/v1/games/{game-id}/mods/events?api_key=YourApiKey HTTP/1.1
+Host: api.mod.io
+
+Accept: application/json
+
+```
+
+```javascript
+var headers = {
+  'Accept':'application/json'
+
+};
+
+$.ajax({
+  url: 'https://api.mod.io/v1/games/{game-id}/mods/events',
+  method: 'get',
+  data: '?api_key=YourApiKey',
+  headers: headers,
+  success: function(data) {
+    console.log(JSON.stringify(data));
+  }
+})
+```
+
+```javascript--nodejs
+const request = require('node-fetch');
+
+const headers = {
+  'Accept':'application/json'
+
+};
+
+fetch('https://api.mod.io/v1/games/{game-id}/mods/events?api_key=YourApiKey',
+{
+  method: 'GET',
+
+  headers: headers
+})
+.then(function(res) {
+    return res.json();
+}).then(function(body) {
+    console.log(body);
+});
+```
+
+```python
+import requests
+headers = {
+  'Accept': 'application/json'
+}
+
+r = requests.get('https://api.mod.io/v1/games/{game-id}/mods/events', params={
+  'api_key': 'YourApiKey'
+}, headers = headers)
+
+print r.json()
+```
+
+```java
+URL obj = new URL("https://api.mod.io/v1/games/{game-id}/mods/events?api_key=YourApiKey");
+HttpURLConnection con = (HttpURLConnection) obj.openConnection();
+con.setRequestMethod("GET");
+int responseCode = con.getResponseCode();
+BufferedReader in = new BufferedReader(
+    new InputStreamReader(con.getInputStream()));
+String inputLine;
+StringBuffer response = new StringBuffer();
+while ((inputLine = in.readLine()) != null) {
+    response.append(inputLine);
+}
+in.close();
+System.out.println(response.toString());
+```
+`GET /games/{game-id}/mods/events`
+
+Get all mods events for the corresponding game sorted by latest event first. Successful request will return an array of [Event Objects](#get-mod-events-2).<br><br>__NOTE:__ We recommend you poll this endpoint to keep mods up-to-date. If polling this endpoint for updates you should store the `id` or `date_added` of the latest event, and on subsequent requests use that information [in the filter](#filtering), to return only newer events to process.
+
+    Filter|Type|Description
+    ---|---|---
+    id|integer|Unique id of the event object.
+    mod_id|integer|Unique id of the parent mod.
+    user_id|integer|Unique id of the user who performed the action.
+    date_added|integer|Unix timestamp of date mod event occurred.
+    event_type|string|Type of change that occurred:<br><br>__MODFILE_CHANGED__ = Primary file changed<br>__MOD_AVAILABLE__ = Mod is marked as accepted and public<br>__MOD_UNAVAILABLE__ = Mod is marked as not accepted, deleted or hidden<br>__MOD_EDITED__ = The mod was updated (triggered when any column value changes)<br>__MOD_DELETED__ = The mod has been permanently erased. This is an orphan record, looking up this id will return no data<br>__MOD_TEAM_CHANGED__ = A user has joined or left the mod team
+    latest|boolean|_Default value is true_. Returns only the latest unique events, which is useful for checking if the primary `modfile` has changed.
+    subscribed|boolean|_Default value is false_. Returns only events connected to mods the __authenticated user__ is subscribed to, which is useful for keeping the users mods up-to-date.
+
+
+> Example response
+
+```json
+{
+  "data": [
+    {
+      "id": 13,
+      "mod_id": 13,
+      "user_id": 13,
+      "date_added": 1499846132,
+      "event_type": "MODFILE_CHANGED"
+    },
+    {
+        ...
+    }
+  ],
+  "result_count": 70,
+  "result_offset": 0,
+  "result_limit": 100,
+  "result_total": 70
+}
+```
+<h3 id="Get-Mods-Events-responses">Responses</h3>
+
+Status|Meaning|Description|Response Schema
+---|---|---|---|
+200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)|Successful Request|[Get Mod Events](#schemaget_mod_events)
+
+<aside class="auth-notice">
+To perform this request, you must be authenticated via one of the following methods:
+<a href="#authentication">api_key</a>, <a href="#authentication">OAuth 2</a> (Scopes: read)
+</aside>
 ## Get Mod Events
 
 > Example request
@@ -4484,6 +4747,145 @@ To perform this request, you must be authenticated via one of the following meth
 </aside>
 # Stats
 
+## Get Mods Stats
+
+> Example request
+
+```shell
+# You can also use wget
+curl -X GET https://api.mod.io/v1/games/{game-id}/mods/stats?api_key=YourApiKey \
+  -H 'Accept: application/json'
+
+```
+
+```http
+GET https://api.mod.io/v1/games/{game-id}/mods/stats?api_key=YourApiKey HTTP/1.1
+Host: api.mod.io
+
+Accept: application/json
+
+```
+
+```javascript
+var headers = {
+  'Accept':'application/json'
+
+};
+
+$.ajax({
+  url: 'https://api.mod.io/v1/games/{game-id}/mods/stats',
+  method: 'get',
+  data: '?api_key=YourApiKey',
+  headers: headers,
+  success: function(data) {
+    console.log(JSON.stringify(data));
+  }
+})
+```
+
+```javascript--nodejs
+const request = require('node-fetch');
+
+const headers = {
+  'Accept':'application/json'
+
+};
+
+fetch('https://api.mod.io/v1/games/{game-id}/mods/stats?api_key=YourApiKey',
+{
+  method: 'GET',
+
+  headers: headers
+})
+.then(function(res) {
+    return res.json();
+}).then(function(body) {
+    console.log(body);
+});
+```
+
+```python
+import requests
+headers = {
+  'Accept': 'application/json'
+}
+
+r = requests.get('https://api.mod.io/v1/games/{game-id}/mods/stats', params={
+  'api_key': 'YourApiKey'
+}, headers = headers)
+
+print r.json()
+```
+
+```java
+URL obj = new URL("https://api.mod.io/v1/games/{game-id}/mods/stats?api_key=YourApiKey");
+HttpURLConnection con = (HttpURLConnection) obj.openConnection();
+con.setRequestMethod("GET");
+int responseCode = con.getResponseCode();
+BufferedReader in = new BufferedReader(
+    new InputStreamReader(con.getInputStream()));
+String inputLine;
+StringBuffer response = new StringBuffer();
+while ((inputLine = in.readLine()) != null) {
+    response.append(inputLine);
+}
+in.close();
+System.out.println(response.toString());
+```
+`GET /games/{game-id}/mods/stats`
+
+Get all mod stats for mods of the corresponding game. Successful request will return an array of [Stats Objects](#get-mod-stats).<br><br>__NOTE:__ We highly recommend you apply filters to this endpoint to get only the results you need. For more information regarding filtering please see the [filtering](#filtering) section.
+
+    Filter|Type|Description
+    ---|---|---
+    mod_id|integer|Unique id of the mod.
+    popularity_rank_position|integer|Current ranking by popularity for the corresponding mod.
+    popularity_rank_total_mods|integer|Global mod count in which `popularity_rank_position` is compared against.
+    downloads_total|integer|A sum of all modfile downloads for the corresponding mod.
+    subscribers_total|integer|A sum of all current subscribers for the corresponding mod.
+    ratings_positive|integer|Amount of positive ratings.
+    ratings_negative|integer|Amount of negative ratings.
+
+
+> Example response
+
+```json
+{
+  "data": [
+    {
+      "mod_id": 2,
+      "popularity_rank_position": 13,
+      "popularity_rank_total_mods": 204,
+      "downloads_total": 27492,
+      "subscribers_total": 16394,
+      "ratings_total": 1230,
+      "ratings_positive": 1047,
+      "ratings_negative": 183,
+      "ratings_percentage_positive": 91,
+      "ratings_weighted_aggregate": 87.38,
+      "ratings_display_text": "Very Positive",
+      "date_expires": 1492564103
+    },
+    {
+        ...
+    }
+  ],
+  "result_count": 70,
+  "result_offset": 0,
+  "result_limit": 100,
+  "result_total": 70
+}
+```
+<h3 id="Get-Mods-Stats-responses">Responses</h3>
+
+Status|Meaning|Description|Response Schema
+---|---|---|---|
+200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)|Successful Request|[Get Mod Stats](#schemaget_mod_stats)
+
+<aside class="auth-notice">
+To perform this request, you must be authenticated via one of the following methods:
+<a href="#authentication">api_key</a>, <a href="#authentication">OAuth 2</a> (Scopes: read)
+</aside>
 ## Get Mod Stats
 
 > Example request
@@ -7475,11 +7877,11 @@ curl -X POST https://api.mod.io/v1/batch \
   -H 'Authorization: Bearer {access-token}' \ 
   -H 'Content-Type: application/x-www-form-urlencoded' \ 
   -H 'Accept: application/json' \
-  -d 'batch[0][relative url   ]=v1/games/11/mods' \
+  -d 'batch[0][relative_url]=v1/games/11/mods' \
   -d 'batch[0][method]=GET' \
-  -d 'batch[1][relative url   ]=v1/me/subscribed?id-in=$[0].data[*].id' \
+  -d 'batch[1][relative_url]=v1/me/subscribed?id-in=$[0].data[*].id' \
   -d 'batch[1][method]=GET' \
-  -d 'batch[2][relative url   ]=v1/me/ratings?id-in=$[0].data[*].id' \
+  -d 'batch[2][relative_url]=v1/me/ratings?id-in=$[0].data[*].id' \
   -d 'batch[2][method]=GET'
 
 ```
@@ -8404,7 +8806,7 @@ Get all games the _authenticated user_ added or is a team member of. Successful 
     presentation_option|integer|Presentation style used on the mod.io website:<br><br>__0__ =  Grid View: Displays mods in a grid<br>__1__ = Table View: Displays mods in a table
     submission_option|integer|Submission process modders must follow:<br><br>__0__ = Mod uploads must occur via the API using a tool created by the game developers<br>__1__ = Mod uploads can occur from anywhere, including the website and API
     curation_option|integer|Curation process used to approve mods:<br><br>__0__ = No curation: Mods are immediately available to play<br>__1__ = Paid curation: Mods are immediately available to play unless they choose to receive donations. These mods must be accepted to be listed<br>__2__ = Full curation: All mods must be accepted by someone to be listed
-    community_options|integer|Community features enabled on the mod.io website:<br><br>__0__ = All of the options below are disabled<br>__1__ = Comments enabled<br>__2__ = Guides enabled<br>__?__ = Combine to find games with multiple options enabled (see [BITWISE fields](#bitwise-and-bitwise-and))
+    community_options|integer|Community features enabled on the mod.io website:<br><br>__0__ = All of the options below are disabled<br>__1__ = Enable comments<br>__2__ = Enable guides<br>__4__ = Disable website _"subscribe to install"_ text<br>__?__ = Combine to find games with multiple options enabled (see [BITWISE fields](#bitwise-and-bitwise-and))
     revenue_options|integer|Revenue capabilities mods can enable:<br><br>__0__ = All of the options below are disabled<br>__1__ = Allow mods to be sold<br>__2__ = Allow mods to receive donations<br>__4__ = Allow mods to be traded<br>__8__ = Allow mods to control supply and scarcity<br>__?__ = Combine to find games with multiple options enabled (see [BITWISE fields](#bitwise-and-bitwise-and))
     api_access_options|integer|Level of API access allowed by this game:<br><br>__0__ = All of the options below are disabled<br>__1__ = Allow 3rd parties to access this games API endpoints<br>__2__ = Allow mods to be downloaded directly (if disabled all download URLs will contain a frequently changing verification hash to stop unauthorized use)<br>__?__ = Combine to find games with multiple options enabled (see [BITWISE fields](#bitwise-and-bitwise-and))
 
@@ -9567,6 +9969,76 @@ content|string|Contents of the comment.
 
 
 
+## Consent Dialog Object  
+
+<a name="schemaconsent_dialog_object"></a>
+
+```json
+{
+  "plaintext": "We use mod.io to support user-generated content in-game. To continue you must agree to the mod.io Terms of Use and Privacy Policy. A mod.io account will be created for you to browse, share and interact with user-generated content using your:
+	- Steam User ID
+	- Display Name
+	- Avatar
+	You agree that your display name, avatar and content will be shared through the mod.io API and website which may be publicly accessible. You can manage your mod.io account and opt out any time via mod.io.",
+  "html": "<p>We use <a href="https://m.io">mod.io</a> to support user-generated content in-game. To continue you must agree to the mod.io <a href="https://m.io/terms">Terms of Use</a> and <a href="https://m.io/privacy">Privacy Policy</a>. A mod.io account will be created for you to browse, share and interact with user-generated content using your:</p><ul><li>Steam User ID</li><li>Display Name</li><li>Avatar</li></ul><p>You agree that your display name, avatar and content will be shared through the mod.io API and website which may be publicly accessible. You can manage your mod.io account and opt out any time via mod.io.</p>",
+  "buttons": {
+    "agree": {
+      "text": "I Agree"
+    },
+    "disagree": {
+      "text": "Opt Out"
+    }
+  },
+  "links": {
+    "website": {
+      "text": "Website",
+      "url": "https://mod.io"
+    },
+    "terms": {
+      "text": "Website",
+      "url": "https://mod.io/terms"
+    },
+    "privacy": {
+      "text": "Website",
+      "url": "https://mod.io/privacy"
+    },
+    "manage": {
+      "text": "Website",
+      "url": "https://mod.io/members/settings?ref=steam"
+    }
+  }
+} 
+```
+
+
+### Properties
+
+Name|Type|Description
+---|---|---|---|
+plaintext|string|Contains consent text in plaintext formatting.
+html|string|Contains consent text in HTML formatting.
+buttons|object|Contains buttons to embed into the consent dialog.
+» agree|object|I Agree Button.
+»» text|string|Button text.
+» disagree|object|Opt out Buttotn.
+»» text|string|Button text.
+links|object|Contains links to optionally embed into the consent dialog.
+» website|object|Contains website link data.
+»» text|string|Text for the link.
+»» url|string|Link to the mod.io website.
+» terms|object|Contains Terms of Use link data.
+»» text|string|Text for the link.
+»» url|string|Link to the mod.io Terms of Use.
+» privacy|object|Contains Privacy Policy link data.
+»» text|string|Text for the link.
+»» url|string|Link to the mod.io Privacy Policy.
+» manage|object|Contains Manage Account link data.
+»» text|string|Text for the link.
+»» url|string|Link to the mod.io page to manage a user's Steam Account.
+
+
+
+
 ## Download Object
 
    <a name="schemadownload_object"></a>
@@ -9733,7 +10205,7 @@ date_live|integer|Unix timestamp of date game was set live.
 presentation_option|integer|Presentation style used on the mod.io website:<br><br>__0__ =  Grid View: Displays mods in a grid<br>__1__ = Table View: Displays mods in a table
 submission_option|integer|Submission process modders must follow:<br><br>__0__ = Mod uploads must occur via the API using a tool created by the game developers<br>__1__ = Mod uploads can occur from anywhere, including the website and API
 curation_option|integer|Curation process used to approve mods:<br><br>__0__ = No curation: Mods are immediately available to play<br>__1__ = Paid curation: Mods are immediately available to play unless they choose to receive donations. These mods must be accepted to be listed<br>__2__ = Full curation: All mods must be accepted by someone to be listed
-community_options|integer|Community features enabled on the mod.io website:<br><br>__0__ = All of the options below are disabled<br>__1__ = Comments enabled<br>__2__ = Guides enabled<br>__?__ = Add the options you want together, to enable multiple features (see [BITWISE fields](#bitwise-and-bitwise-and))
+community_options|integer|Community features enabled on the mod.io website:<br><br>__0__ = All of the options below are disabled<br>__1__ = Enable comments<br>__2__ = Enable guides<br>__4__ = Disable website _"subscribe to install"_ text<br>__?__ = Add the options you want together, to enable multiple features (see [BITWISE fields](#bitwise-and-bitwise-and))
 revenue_options|integer|Revenue capabilities mods can enable:<br><br>__0__ = All of the options below are disabled<br>__1__ = Allow mods to be sold<br>__2__ = Allow mods to receive donations<br>__4__ = Allow mods to be traded<br>__8__ = Allow mods to control supply and scarcity<br>__?__ = Add the options you want together, to enable multiple features (see [BITWISE fields](#bitwise-and-bitwise-and))
 api_access_options|integer|Level of API access allowed by this game:<br><br>__0__ = All of the options below are disabled<br>__1__ = Allow 3rd parties to access this games API endpoints<br>__2__ = Allow mods to be downloaded directly (if disabled all download URLs will contain a frequently changing verification hash to stop unauthorized use)<br>__?__ = Add the options you want together, to enable multiple features (see [BITWISE fields](#bitwise-and-bitwise-and))
 maturity_options|integer|Switch to allow developers to select if they flag their mods as containing mature content:<br><br>__0__ = Don't allow _(default)_<br>__1__ = Allow
@@ -9949,7 +10421,7 @@ data|[Game Object](#schemagame_object)[]|Array containing game objects.
 » presentation_option|integer|Presentation style used on the mod.io website:<br><br>__0__ =  Grid View: Displays mods in a grid<br>__1__ = Table View: Displays mods in a table
 » submission_option|integer|Submission process modders must follow:<br><br>__0__ = Mod uploads must occur via the API using a tool created by the game developers<br>__1__ = Mod uploads can occur from anywhere, including the website and API
 » curation_option|integer|Curation process used to approve mods:<br><br>__0__ = No curation: Mods are immediately available to play<br>__1__ = Paid curation: Mods are immediately available to play unless they choose to receive donations. These mods must be accepted to be listed<br>__2__ = Full curation: All mods must be accepted by someone to be listed
-» community_options|integer|Community features enabled on the mod.io website:<br><br>__0__ = All of the options below are disabled<br>__1__ = Comments enabled<br>__2__ = Guides enabled<br>__?__ = Add the options you want together, to enable multiple features (see [BITWISE fields](#bitwise-and-bitwise-and))
+» community_options|integer|Community features enabled on the mod.io website:<br><br>__0__ = All of the options below are disabled<br>__1__ = Enable comments<br>__2__ = Enable guides<br>__4__ = Disable website _"subscribe to install"_ text<br>__?__ = Add the options you want together, to enable multiple features (see [BITWISE fields](#bitwise-and-bitwise-and))
 » revenue_options|integer|Revenue capabilities mods can enable:<br><br>__0__ = All of the options below are disabled<br>__1__ = Allow mods to be sold<br>__2__ = Allow mods to receive donations<br>__4__ = Allow mods to be traded<br>__8__ = Allow mods to control supply and scarcity<br>__?__ = Add the options you want together, to enable multiple features (see [BITWISE fields](#bitwise-and-bitwise-and))
 » api_access_options|integer|Level of API access allowed by this game:<br><br>__0__ = All of the options below are disabled<br>__1__ = Allow 3rd parties to access this games API endpoints<br>__2__ = Allow mods to be downloaded directly (if disabled all download URLs will contain a frequently changing verification hash to stop unauthorized use)<br>__?__ = Add the options you want together, to enable multiple features (see [BITWISE fields](#bitwise-and-bitwise-and))
 » maturity_options|integer|Switch to allow developers to select if they flag their mods as containing mature content:<br><br>__0__ = Don't allow _(default)_<br>__1__ = Allow
