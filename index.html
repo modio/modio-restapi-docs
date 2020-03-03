@@ -627,9 +627,6 @@
                     <a href="#comment-object" class="toc-h2 toc-link" data-title="Response Schemas">Comment Object</a>
                   </li>
                   <li>
-                    <a href="#consent-dialog-object" class="toc-h2 toc-link" data-title="Response Schemas">Consent Dialog Object</a>
-                  </li>
-                  <li>
                     <a href="#download-object" class="toc-h2 toc-link" data-title="Response Schemas">Download Object</a>
                   </li>
                   <li>
@@ -724,6 +721,9 @@
                   </li>
                   <li>
                     <a href="#modfile-object" class="toc-h2 toc-link" data-title="Response Schemas">Modfile Object</a>
+                  </li>
+                  <li>
+                    <a href="#optout-object" class="toc-h2 toc-link" data-title="Response Schemas">Optout Object</a>
                   </li>
                   <li>
                     <a href="#rating-object" class="toc-h2 toc-link" data-title="Response Schemas">Rating Object</a>
@@ -9912,7 +9912,7 @@ curl -X POST https://api.mod.io/v1/report <span class="se">\</span>
 <td>type</td>
 <td>integer</td>
 <td>true</td>
-<td>Type of report you are submitting. Must be one of the following values:<br><br><strong>0</strong> = Generic Report<br><strong>1</strong> = DMCA Report</td>
+<td>Type of report you are submitting. Must be one of the following values:<br><br><strong>0</strong> = Generic<br><strong>1</strong> = DMCA<br><strong>2</strong> = Not Working<br><strong>3</strong> = Rude Content<br><strong>4</strong> = Illegal Content<br><strong>5</strong> = Stolen Content<br><strong>6</strong> = False Information<br><strong>7</strong> = Other</td>
 </tr>
 <tr>
 <td>name</td>
@@ -10066,11 +10066,11 @@ curl -X POST https://api.mod.io/v1/batch <span class="se">\</span>
 
 <p><strong>Batch Limitations</strong></p>
 
-<p>The following applies to all batch requests:  </p>
+<p>The following applies to all batch requests:</p>
 
-<p>- Who you authenticate as for the parent batch request, will be used for <em>all</em> sub-requests.<br>
-     - Authorization headers passed into sub-requests are ignored.<br>
-     - You cannot make more than 20 requests within a batch.  </p>
+<p>- Who you authenticate as for the parent batch request, will be used for <em>all</em> sub-requests.
+     - Authorization headers passed into sub-requests are ignored.
+     - You cannot make more than 20 requests within a batch.</p>
 
 <p><strong>Batch Dependencies</strong></p>
 
@@ -10082,10 +10082,10 @@ curl -X POST https://api.mod.io/v1/batch <span class="se">\</span>
 
 <p><strong>What will it require?</strong></p>
 
-<p>This will require three requests (see the example code on the right):<br>
-     1. <a href="#get-mods">GET /v1/games/{game-id}/mods</a><br>
-     2. <a href="#get-user-subscriptions">GET /v1/me/subscribed</a><br>
-     3. <a href="#get-user-ratings">GET /v1/me/ratings</a>  </p>
+<p>This will require three requests (see the example code on the right):
+     1. <a href="#get-mods">GET /v1/games/{game-id}/mods</a>
+     2. <a href="#get-user-subscriptions">GET /v1/me/subscribed</a>
+     3. <a href="#get-user-ratings">GET /v1/me/ratings</a></p>
 
 <p>In total, we are making 3 requests in a synchronous manner, inside a single request. Based on the above example, we need to know how to get the <code>id</code> value of the <a href="#mod-object">Mod Object</a> from Request #1 and provide it as a dependency to the subsequent requests.</p>
 
@@ -13277,161 +13277,13 @@ To perform this request, you must be authenticated via one of the following meth
 </tr>
 </tbody>
 </table>
-<h2 id="consent-dialog-object">Consent Dialog Object</h2>
-<p><a name="schemaconsent_dialog_object"></a></p>
-<pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
-  </span><span class="s2">"plaintext"</span><span class="p">:</span><span class="w"> </span><span class="s2">"We use mod.io to support user-generated content in-game. To continue you must agree to the mod.io Terms of Use and Privacy Policy. A mod.io account will be created for you to browse, share and interact with user-generated content using your:
-    - Steam User ID
-    - Display Name
-    - Avatar
-    You agree that your display name, avatar and content will be shared through the mod.io API and website which may be publicly accessible. You can manage your mod.io account and opt out any time via mod.io."</span><span class="p">,</span><span class="w">
-  </span><span class="s2">"html"</span><span class="p">:</span><span class="w"> </span><span class="s2">"&lt;p&gt;We use &lt;a href="</span><span class="err">https</span><span class="p">:</span><span class="err">//m.io</span><span class="s2">"&gt;mod.io&lt;/a&gt; to support user-generated content in-game. To continue you must agree to the mod.io &lt;a href="</span><span class="err">https</span><span class="p">:</span><span class="err">//m.io/terms</span><span class="s2">"&gt;Terms of Use&lt;/a&gt; and &lt;a href="</span><span class="err">https</span><span class="p">:</span><span class="err">//m.io/privacy</span><span class="s2">"&gt;Privacy Policy&lt;/a&gt;. A mod.io account will be created for you to browse, share and interact with user-generated content using your:&lt;/p&gt;&lt;ul&gt;&lt;li&gt;Steam User ID&lt;/li&gt;&lt;li&gt;Display Name&lt;/li&gt;&lt;li&gt;Avatar&lt;/li&gt;&lt;/ul&gt;&lt;p&gt;You agree that your display name, avatar and content will be shared through the mod.io API and website which may be publicly accessible. You can manage your mod.io account and opt out any time via mod.io.&lt;/p&gt;"</span><span class="p">,</span><span class="w">
-  </span><span class="s2">"buttons"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-    </span><span class="s2">"agree"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-      </span><span class="s2">"text"</span><span class="p">:</span><span class="w"> </span><span class="s2">"I Agree"</span><span class="w">
-    </span><span class="p">},</span><span class="w">
-    </span><span class="s2">"disagree"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-      </span><span class="s2">"text"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Opt Out"</span><span class="w">
-    </span><span class="p">}</span><span class="w">
-  </span><span class="p">},</span><span class="w">
-  </span><span class="s2">"links"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-    </span><span class="s2">"website"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-      </span><span class="s2">"text"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Website"</span><span class="p">,</span><span class="w">
-      </span><span class="s2">"url"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://mod.io"</span><span class="w">
-    </span><span class="p">},</span><span class="w">
-    </span><span class="s2">"terms"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-      </span><span class="s2">"text"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Website"</span><span class="p">,</span><span class="w">
-      </span><span class="s2">"url"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://mod.io/terms"</span><span class="w">
-    </span><span class="p">},</span><span class="w">
-    </span><span class="s2">"privacy"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-      </span><span class="s2">"text"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Website"</span><span class="p">,</span><span class="w">
-      </span><span class="s2">"url"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://mod.io/privacy"</span><span class="w">
-    </span><span class="p">},</span><span class="w">
-    </span><span class="s2">"manage"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-      </span><span class="s2">"text"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Website"</span><span class="p">,</span><span class="w">
-      </span><span class="s2">"url"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://mod.io/members/settings?ref=steam"</span><span class="w">
-    </span><span class="p">}</span><span class="w">
-  </span><span class="p">}</span><span class="w">
-</span><span class="p">}</span><span class="w"> 
-</span></code></pre><h3 id="properties-6">Properties</h3>
-<table>
-<thead>
-<tr>
-<th>Name</th>
-<th>Type</th>
-<th>Description</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>plaintext</td>
-<td>string</td>
-<td>Contains consent text in plaintext formatting.</td>
-</tr>
-<tr>
-<td>html</td>
-<td>string</td>
-<td>Contains consent text in HTML formatting.</td>
-</tr>
-<tr>
-<td>buttons</td>
-<td>object</td>
-<td>Contains buttons to embed into the consent dialog.</td>
-</tr>
-<tr>
-<td>» agree</td>
-<td>object</td>
-<td>I Agree Button.</td>
-</tr>
-<tr>
-<td>»» text</td>
-<td>string</td>
-<td>Button text.</td>
-</tr>
-<tr>
-<td>» disagree</td>
-<td>object</td>
-<td>Opt out Buttotn.</td>
-</tr>
-<tr>
-<td>»» text</td>
-<td>string</td>
-<td>Button text.</td>
-</tr>
-<tr>
-<td>links</td>
-<td>object</td>
-<td>Contains links to optionally embed into the consent dialog.</td>
-</tr>
-<tr>
-<td>» website</td>
-<td>object</td>
-<td>Contains website link data.</td>
-</tr>
-<tr>
-<td>»» text</td>
-<td>string</td>
-<td>Text for the link.</td>
-</tr>
-<tr>
-<td>»» url</td>
-<td>string</td>
-<td>Link to the mod.io website.</td>
-</tr>
-<tr>
-<td>» terms</td>
-<td>object</td>
-<td>Contains Terms of Use link data.</td>
-</tr>
-<tr>
-<td>»» text</td>
-<td>string</td>
-<td>Text for the link.</td>
-</tr>
-<tr>
-<td>»» url</td>
-<td>string</td>
-<td>Link to the mod.io Terms of Use.</td>
-</tr>
-<tr>
-<td>» privacy</td>
-<td>object</td>
-<td>Contains Privacy Policy link data.</td>
-</tr>
-<tr>
-<td>»» text</td>
-<td>string</td>
-<td>Text for the link.</td>
-</tr>
-<tr>
-<td>»» url</td>
-<td>string</td>
-<td>Link to the mod.io Privacy Policy.</td>
-</tr>
-<tr>
-<td>» manage</td>
-<td>object</td>
-<td>Contains Manage Account link data.</td>
-</tr>
-<tr>
-<td>»» text</td>
-<td>string</td>
-<td>Text for the link.</td>
-</tr>
-<tr>
-<td>»» url</td>
-<td>string</td>
-<td>Link to the mod.io page to manage a user's Steam Account.</td>
-</tr>
-</tbody>
-</table>
 <h2 id="download-object">Download Object</h2>
 <p><a name="schemadownload_object"></a></p>
 <pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
   </span><span class="s2">"binary_url"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://mod.io/mods/file/1/c489a0354111a4d76640d47f0cdcb294"</span><span class="p">,</span><span class="w">
   </span><span class="s2">"date_expires"</span><span class="p">:</span><span class="w"> </span><span class="mi">1579316848</span><span class="w">
 </span><span class="p">}</span><span class="w"> 
-</span></code></pre><h3 id="properties-7">Properties</h3>
+</span></code></pre><h3 id="properties-6">Properties</h3>
 <table>
 <thead>
 <tr>
@@ -13462,7 +13314,7 @@ To perform this request, you must be authenticated via one of the following meth
     </span><span class="s2">"errors"</span><span class="p">:</span><span class="w"> </span><span class="p">{}</span><span class="w">
   </span><span class="p">}</span><span class="w">
 </span><span class="p">}</span><span class="w"> 
-</span></code></pre><h3 id="properties-8">Properties</h3>
+</span></code></pre><h3 id="properties-7">Properties</h3>
 <table>
 <thead>
 <tr>
@@ -13500,7 +13352,7 @@ To perform this request, you must be authenticated via one of the following meth
 <pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
   </span><span class="s2">"md5"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2d4a0e2d7273db6b0a94b0740a88ad0d"</span><span class="w">
 </span><span class="p">}</span><span class="w"> 
-</span></code></pre><h3 id="properties-9">Properties</h3>
+</span></code></pre><h3 id="properties-8">Properties</h3>
 <table>
 <thead>
 <tr>
@@ -13583,7 +13435,7 @@ To perform this request, you must be authenticated via one of the following meth
     </span><span class="p">}</span><span class="w">
   </span><span class="p">]</span><span class="w">
 </span><span class="p">}</span><span class="w"> 
-</span></code></pre><h3 id="properties-10">Properties</h3>
+</span></code></pre><h3 id="properties-9">Properties</h3>
 <table>
 <thead>
 <tr>
@@ -13867,7 +13719,7 @@ To perform this request, you must be authenticated via one of the following meth
   </span><span class="p">],</span><span class="w">
   </span><span class="s2">"hidden"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="w">
 </span><span class="p">}</span><span class="w"> 
-</span></code></pre><h3 id="properties-11">Properties</h3>
+</span></code></pre><h3 id="properties-10">Properties</h3>
 <table>
 <thead>
 <tr>
@@ -13920,7 +13772,7 @@ To perform this request, you must be authenticated via one of the following meth
   </span><span class="s2">"result_limit"</span><span class="p">:</span><span class="w"> </span><span class="mi">100</span><span class="p">,</span><span class="w">
   </span><span class="s2">"result_total"</span><span class="p">:</span><span class="w"> </span><span class="mi">70</span><span class="w">
 </span><span class="p">}</span><span class="w"> 
-</span></code></pre><h3 id="properties-12">Properties</h3>
+</span></code></pre><h3 id="properties-11">Properties</h3>
 <table>
 <thead>
 <tr>
@@ -14055,7 +13907,7 @@ To perform this request, you must be authenticated via one of the following meth
   </span><span class="s2">"result_limit"</span><span class="p">:</span><span class="w"> </span><span class="mi">100</span><span class="p">,</span><span class="w">
   </span><span class="s2">"result_total"</span><span class="p">:</span><span class="w"> </span><span class="mi">70</span><span class="w">
 </span><span class="p">}</span><span class="w"> 
-</span></code></pre><h3 id="properties-13">Properties</h3>
+</span></code></pre><h3 id="properties-12">Properties</h3>
 <table>
 <thead>
 <tr>
@@ -14393,7 +14245,7 @@ To perform this request, you must be authenticated via one of the following meth
   </span><span class="s2">"result_limit"</span><span class="p">:</span><span class="w"> </span><span class="mi">100</span><span class="p">,</span><span class="w">
   </span><span class="s2">"result_total"</span><span class="p">:</span><span class="w"> </span><span class="mi">70</span><span class="w">
 </span><span class="p">}</span><span class="w"> 
-</span></code></pre><h3 id="properties-14">Properties</h3>
+</span></code></pre><h3 id="properties-13">Properties</h3>
 <table>
 <thead>
 <tr>
@@ -14554,7 +14406,7 @@ To perform this request, you must be authenticated via one of the following meth
   </span><span class="s2">"result_limit"</span><span class="p">:</span><span class="w"> </span><span class="mi">100</span><span class="p">,</span><span class="w">
   </span><span class="s2">"result_total"</span><span class="p">:</span><span class="w"> </span><span class="mi">70</span><span class="w">
 </span><span class="p">}</span><span class="w"> 
-</span></code></pre><h3 id="properties-15">Properties</h3>
+</span></code></pre><h3 id="properties-14">Properties</h3>
 <table>
 <thead>
 <tr>
@@ -14622,7 +14474,7 @@ To perform this request, you must be authenticated via one of the following meth
   </span><span class="s2">"result_limit"</span><span class="p">:</span><span class="w"> </span><span class="mi">100</span><span class="p">,</span><span class="w">
   </span><span class="s2">"result_total"</span><span class="p">:</span><span class="w"> </span><span class="mi">70</span><span class="w">
 </span><span class="p">}</span><span class="w"> 
-</span></code></pre><h3 id="properties-16">Properties</h3>
+</span></code></pre><h3 id="properties-15">Properties</h3>
 <table>
 <thead>
 <tr>
@@ -14702,7 +14554,7 @@ To perform this request, you must be authenticated via one of the following meth
   </span><span class="s2">"result_limit"</span><span class="p">:</span><span class="w"> </span><span class="mi">100</span><span class="p">,</span><span class="w">
   </span><span class="s2">"result_total"</span><span class="p">:</span><span class="w"> </span><span class="mi">70</span><span class="w">
 </span><span class="p">}</span><span class="w"> 
-</span></code></pre><h3 id="properties-17">Properties</h3>
+</span></code></pre><h3 id="properties-16">Properties</h3>
 <table>
 <thead>
 <tr>
@@ -14777,7 +14629,7 @@ To perform this request, you must be authenticated via one of the following meth
   </span><span class="s2">"result_limit"</span><span class="p">:</span><span class="w"> </span><span class="mi">100</span><span class="p">,</span><span class="w">
   </span><span class="s2">"result_total"</span><span class="p">:</span><span class="w"> </span><span class="mi">70</span><span class="w">
 </span><span class="p">}</span><span class="w"> 
-</span></code></pre><h3 id="properties-18">Properties</h3>
+</span></code></pre><h3 id="properties-17">Properties</h3>
 <table>
 <thead>
 <tr>
@@ -14892,7 +14744,7 @@ To perform this request, you must be authenticated via one of the following meth
   </span><span class="s2">"result_limit"</span><span class="p">:</span><span class="w"> </span><span class="mi">100</span><span class="p">,</span><span class="w">
   </span><span class="s2">"result_total"</span><span class="p">:</span><span class="w"> </span><span class="mi">70</span><span class="w">
 </span><span class="p">}</span><span class="w"> 
-</span></code></pre><h3 id="properties-19">Properties</h3>
+</span></code></pre><h3 id="properties-18">Properties</h3>
 <table>
 <thead>
 <tr>
@@ -14974,7 +14826,7 @@ To perform this request, you must be authenticated via one of the following meth
   </span><span class="s2">"result_limit"</span><span class="p">:</span><span class="w"> </span><span class="mi">100</span><span class="p">,</span><span class="w">
   </span><span class="s2">"result_total"</span><span class="p">:</span><span class="w"> </span><span class="mi">70</span><span class="w">
 </span><span class="p">}</span><span class="w"> 
-</span></code></pre><h3 id="properties-20">Properties</h3>
+</span></code></pre><h3 id="properties-19">Properties</h3>
 <table>
 <thead>
 <tr>
@@ -15212,7 +15064,7 @@ To perform this request, you must be authenticated via one of the following meth
   </span><span class="s2">"result_limit"</span><span class="p">:</span><span class="w"> </span><span class="mi">100</span><span class="p">,</span><span class="w">
   </span><span class="s2">"result_total"</span><span class="p">:</span><span class="w"> </span><span class="mi">70</span><span class="w">
 </span><span class="p">}</span><span class="w"> 
-</span></code></pre><h3 id="properties-21">Properties</h3>
+</span></code></pre><h3 id="properties-20">Properties</h3>
 <table>
 <thead>
 <tr>
@@ -15685,7 +15537,7 @@ To perform this request, you must be authenticated via one of the following meth
   </span><span class="s2">"result_limit"</span><span class="p">:</span><span class="w"> </span><span class="mi">100</span><span class="p">,</span><span class="w">
   </span><span class="s2">"result_total"</span><span class="p">:</span><span class="w"> </span><span class="mi">70</span><span class="w">
 </span><span class="p">}</span><span class="w"> 
-</span></code></pre><h3 id="properties-22">Properties</h3>
+</span></code></pre><h3 id="properties-21">Properties</h3>
 <table>
 <thead>
 <tr>
@@ -15830,7 +15682,7 @@ To perform this request, you must be authenticated via one of the following meth
   </span><span class="s2">"result_limit"</span><span class="p">:</span><span class="w"> </span><span class="mi">100</span><span class="p">,</span><span class="w">
   </span><span class="s2">"result_total"</span><span class="p">:</span><span class="w"> </span><span class="mi">70</span><span class="w">
 </span><span class="p">}</span><span class="w"> 
-</span></code></pre><h3 id="properties-23">Properties</h3>
+</span></code></pre><h3 id="properties-22">Properties</h3>
 <table>
 <thead>
 <tr>
@@ -15917,7 +15769,7 @@ To perform this request, you must be authenticated via one of the following meth
   </span><span class="s2">"result_limit"</span><span class="p">:</span><span class="w"> </span><span class="mi">100</span><span class="p">,</span><span class="w">
   </span><span class="s2">"result_total"</span><span class="p">:</span><span class="w"> </span><span class="mi">70</span><span class="w">
 </span><span class="p">}</span><span class="w"> 
-</span></code></pre><h3 id="properties-24">Properties</h3>
+</span></code></pre><h3 id="properties-23">Properties</h3>
 <table>
 <thead>
 <tr>
@@ -15981,7 +15833,7 @@ To perform this request, you must be authenticated via one of the following meth
   </span><span class="s2">"filename"</span><span class="p">:</span><span class="w"> </span><span class="s2">"demo.png"</span><span class="p">,</span><span class="w">
   </span><span class="s2">"original"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://static.mod.io/v1/images/branding/modio-color-dark.png"</span><span class="w">
 </span><span class="p">}</span><span class="w"> 
-</span></code></pre><h3 id="properties-25">Properties</h3>
+</span></code></pre><h3 id="properties-24">Properties</h3>
 <table>
 <thead>
 <tr>
@@ -16012,7 +15864,7 @@ To perform this request, you must be authenticated via one of the following meth
   </span><span class="s2">"thumb_128x128"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://static.mod.io/v1/images/branding/modio-color-dark.png"</span><span class="p">,</span><span class="w">
   </span><span class="s2">"thumb_256x256"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://static.mod.io/v1/images/branding/modio-color-dark.png"</span><span class="w">
 </span><span class="p">}</span><span class="w"> 
-</span></code></pre><h3 id="properties-26">Properties</h3>
+</span></code></pre><h3 id="properties-25">Properties</h3>
 <table>
 <thead>
 <tr>
@@ -16056,7 +15908,7 @@ To perform this request, you must be authenticated via one of the following meth
   </span><span class="s2">"original"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://static.mod.io/v1/images/branding/modio-color-dark.png"</span><span class="p">,</span><span class="w">
   </span><span class="s2">"thumb_320x180"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://static.mod.io/v1/images/branding/modio-color-dark.png"</span><span class="w">
 </span><span class="p">}</span><span class="w"> 
-</span></code></pre><h3 id="properties-27">Properties</h3>
+</span></code></pre><h3 id="properties-26">Properties</h3>
 <table>
 <thead>
 <tr>
@@ -16089,7 +15941,7 @@ To perform this request, you must be authenticated via one of the following meth
   </span><span class="s2">"key"</span><span class="p">:</span><span class="w"> </span><span class="s2">"X-RateLimit-Remaining"</span><span class="p">,</span><span class="w">
   </span><span class="s2">"value"</span><span class="p">:</span><span class="w"> </span><span class="s2">"98"</span><span class="w">
 </span><span class="p">}</span><span class="w"> 
-</span></code></pre><h3 id="properties-28">Properties</h3>
+</span></code></pre><h3 id="properties-27">Properties</h3>
 <table>
 <thead>
 <tr>
@@ -16120,7 +15972,7 @@ To perform this request, you must be authenticated via one of the following meth
   </span><span class="s2">"thumb_640x360"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://static.mod.io/v1/images/branding/modio-color-dark.png"</span><span class="p">,</span><span class="w">
   </span><span class="s2">"thumb_1280x720"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://static.mod.io/v1/images/branding/modio-color-dark.png"</span><span class="w">
 </span><span class="p">}</span><span class="w"> 
-</span></code></pre><h3 id="properties-29">Properties</h3>
+</span></code></pre><h3 id="properties-28">Properties</h3>
 <table>
 <thead>
 <tr>
@@ -16285,7 +16137,7 @@ To perform this request, you must be authenticated via one of the following meth
   </span><span class="s2">"result_limit"</span><span class="p">:</span><span class="w"> </span><span class="mi">20</span><span class="p">,</span><span class="w">
   </span><span class="s2">"result_total"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="w">
 </span><span class="p">}</span><span class="w"> 
-</span></code></pre><h3 id="properties-30">Properties</h3>
+</span></code></pre><h3 id="properties-29">Properties</h3>
 <table>
 <thead>
 <tr>
@@ -16761,7 +16613,7 @@ To perform this request, you must be authenticated via one of the following meth
   </span><span class="s2">"code"</span><span class="p">:</span><span class="w"> </span><span class="mi">200</span><span class="p">,</span><span class="w">
   </span><span class="s2">"message"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Your request was successful."</span><span class="w">
 </span><span class="p">}</span><span class="w"> 
-</span></code></pre><h3 id="properties-31">Properties</h3>
+</span></code></pre><h3 id="properties-30">Properties</h3>
 <table>
 <thead>
 <tr>
@@ -16790,7 +16642,7 @@ To perform this request, you must be authenticated via one of the following meth
   </span><span class="s2">"metakey"</span><span class="p">:</span><span class="w"> </span><span class="s2">"pistol-dmg"</span><span class="p">,</span><span class="w">
   </span><span class="s2">"metavalue"</span><span class="p">:</span><span class="w"> </span><span class="s2">"800"</span><span class="w">
 </span><span class="p">}</span><span class="w"> 
-</span></code></pre><h3 id="properties-32">Properties</h3>
+</span></code></pre><h3 id="properties-31">Properties</h3>
 <table>
 <thead>
 <tr>
@@ -16818,7 +16670,7 @@ To perform this request, you must be authenticated via one of the following meth
   </span><span class="s2">"mod_id"</span><span class="p">:</span><span class="w"> </span><span class="mi">231</span><span class="p">,</span><span class="w">
   </span><span class="s2">"date_added"</span><span class="p">:</span><span class="w"> </span><span class="mi">1499841487</span><span class="w">
 </span><span class="p">}</span><span class="w"> 
-</span></code></pre><h3 id="properties-33">Properties</h3>
+</span></code></pre><h3 id="properties-32">Properties</h3>
 <table>
 <thead>
 <tr>
@@ -16849,7 +16701,7 @@ To perform this request, you must be authenticated via one of the following meth
   </span><span class="s2">"date_added"</span><span class="p">:</span><span class="w"> </span><span class="mi">1499846132</span><span class="p">,</span><span class="w">
   </span><span class="s2">"event_type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"MODFILE_CHANGED"</span><span class="w">
 </span><span class="p">}</span><span class="w"> 
-</span></code></pre><h3 id="properties-34">Properties</h3>
+</span></code></pre><h3 id="properties-33">Properties</h3>
 <table>
 <thead>
 <tr>
@@ -16903,7 +16755,7 @@ To perform this request, you must be authenticated via one of the following meth
     </span><span class="p">}</span><span class="w">
   </span><span class="p">]</span><span class="w">
 </span><span class="p">}</span><span class="w"> 
-</span></code></pre><h3 id="properties-35">Properties</h3>
+</span></code></pre><h3 id="properties-34">Properties</h3>
 <table>
 <thead>
 <tr>
@@ -17050,7 +16902,7 @@ To perform this request, you must be authenticated via one of the following meth
     </span><span class="s2">"date_expires"</span><span class="p">:</span><span class="w"> </span><span class="mi">1492564103</span><span class="w">
   </span><span class="p">}</span><span class="w">
 </span><span class="p">}</span><span class="w"> 
-</span></code></pre><h3 id="properties-36">Properties</h3>
+</span></code></pre><h3 id="properties-35">Properties</h3>
 <table>
 <thead>
 <tr>
@@ -17469,7 +17321,7 @@ To perform this request, you must be authenticated via one of the following meth
   </span><span class="s2">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Unity"</span><span class="p">,</span><span class="w">
   </span><span class="s2">"date_added"</span><span class="p">:</span><span class="w"> </span><span class="mi">1499841487</span><span class="w">
 </span><span class="p">}</span><span class="w"> 
-</span></code></pre><h3 id="properties-37">Properties</h3>
+</span></code></pre><h3 id="properties-36">Properties</h3>
 <table>
 <thead>
 <tr>
@@ -17514,7 +17366,7 @@ To perform this request, you must be authenticated via one of the following meth
     </span><span class="s2">"date_expires"</span><span class="p">:</span><span class="w"> </span><span class="mi">1579316848</span><span class="w">
   </span><span class="p">}</span><span class="w">
 </span><span class="p">}</span><span class="w"> 
-</span></code></pre><h3 id="properties-38">Properties</h3>
+</span></code></pre><h3 id="properties-37">Properties</h3>
 <table>
 <thead>
 <tr>
@@ -17608,6 +17460,34 @@ To perform this request, you must be authenticated via one of the following meth
 <td>» date_expires</td>
 <td>integer</td>
 <td>Unix timestamp of when the <code>binary_url</code> will expire.</td>
+</tr>
+</tbody>
+</table>
+<h2 id="optout-object">Optout Object</h2>
+<p><a name="schemaoptout_object"></a></p>
+<pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
+  </span><span class="s2">"code"</span><span class="p">:</span><span class="w"> </span><span class="mi">200</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"optout_url"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://mod.io/members/?verify=eyJlbmMiOiJBMTI4Q0JDLUhTMjU2IiwiYWxnIjoiUlNB.."</span><span class="w">
+</span><span class="p">}</span><span class="w"> 
+</span></code></pre><h3 id="properties-38">Properties</h3>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>code</td>
+<td>integer</td>
+<td>HTTP Response Code.</td>
+</tr>
+<tr>
+<td>optout_url</td>
+<td>string</td>
+<td>The URL the user must be redirected to when requesting to opt out. URL is only valid for 10 minutes from time of optout request.</td>
 </tr>
 </tbody>
 </table>
