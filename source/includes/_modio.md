@@ -91,7 +91,7 @@ curl -X POST --parse_apiurl/oauth/emailrequest \
 Request a `security_code` be sent to the email address of the user you wish to authenticate: 
 
 
-`POST oauth/emailrequest`
+`POST /oauth/emailrequest`
 
 Parameter |Type | Required | Value
 ---------- | ---------- |---------- | ----------
@@ -121,7 +121,7 @@ curl -X POST --parse_apiurl/oauth/emailexchange \
 ```
 
 
-`POST oauth/emailexchange`
+`POST /oauth/emailexchange`
 
 Parameter | Type | Required | Value
 ---------- | ---------- | ---------- | ----------  

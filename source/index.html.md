@@ -901,6 +901,7 @@ while ((inputLine = in.readLine()) != null) {
 in.close();
 System.out.println(response.toString());
 ```
+
 `POST /external/steamauth`
 
 Request an access token on behalf of a Steam user. To use this functionality you *must* add your games [encrypted app ticket key](https://partner.steamgames.com/apps/sdkauth) from Steamworks, to the *Edit > Options* page of your games profile on mod.io. A Successful request will return an [Access Token Object](#access-token-object).<br/><br/>__HINT:__ If you want to overlay the mod.io site in-game on Steam, we recommend you add `?ref=steam` to the end of the URL you open which will prompt the user to login with Steam. See [Web Overlay Authentication](#web-overlay-authentication) for details.
@@ -1023,6 +1024,7 @@ while ((inputLine = in.readLine()) != null) {
 in.close();
 System.out.println(response.toString());
 ```
+
 `POST /external/galaxyauth`
 
 Request an access token on behalf of a GOG Galaxy user. To use this functionality you *must* add your games [encrypted app ticket key](https://devportal.gog.com/welcome) from GOG Galaxy, to the *Edit > Options* page of your games profile on mod.io. A Successful request will return an [Access Token Object](#access-token-object).
@@ -1145,6 +1147,7 @@ while ((inputLine = in.readLine()) != null) {
 in.close();
 System.out.println(response.toString());
 ```
+
 `POST /external/itchioauth`
 
 Request an access token on behalf of an itch.io user via the itch.io desktop app. Due to the desktop application allowing multiple users to be logged in at once, if more than one user is logged in then the user at the top of that list on the itch.io login dialog will be the authenticating user. A Successful request will return an [Access Token Object](#access-token-object).<br/><br/>__HINT:__ If you want to overlay the mod.io site in-game on itch.io, we recommend you add `?ref=itchio` to the end of the URL you open which will prompt the user to login with itch.io. See [Web Overlay Authentication](#web-overlay-authentication) for details.
@@ -1271,6 +1274,7 @@ while ((inputLine = in.readLine()) != null) {
 in.close();
 System.out.println(response.toString());
 ```
+
 `POST /external/oculusauth`
 
 Request an access token on behalf of an Oculus user. To use this functionality you *must* add your games [AppId and secret](https://dashboard.oculus.com/) from the Oculus Dashboard, to the *Edit > Options* page of your games profile on mod.io. A Successful request will return an [Access Token Object](#access-token-object).
@@ -1405,6 +1409,7 @@ while ((inputLine = in.readLine()) != null) {
 in.close();
 System.out.println(response.toString());
 ```
+
 `POST /external/link`
 
 Connect an external account (i.e. Steam and GOG documented above) with the authenticated user's email address. When calling this endpoint you must authenticate the request with the users access token and the ID of their external account. If we have a matching external account saved for that user, a Successful request will return a [Message Object](#message-object) response at which point the user must check the supplied email address to link the external account to the respective email address.<br/><br/>__NOTE__: The external authentication flows (i.e. Steam and GOG documented above) only give us a users id. This endpoint allows the user to verify their email and connect it to their account. It is an __optional but recommended__ step as it makes account recovery and other processes easier.<br/><br/>__NOTE__: If you link an external account to an email that already exists on mod.io and you confirm the action via the email you will receive, the accounts will __automatically__ be merged together transferring all content from the external account to the native, existing account. Once this process is complete, existing access tokens to the external account will be nullified and you will need to [re-authenticate](#authentication).
@@ -1521,6 +1526,7 @@ while ((inputLine = in.readLine()) != null) {
 in.close();
 System.out.println(response.toString());
 ```
+
 `GET /games`
 
 Get all games. Successful request will return an array of [Game Objects](#get-games-2). We recommended reading the [filtering documentation](#filtering) to return only the records you want.
@@ -1721,6 +1727,7 @@ while ((inputLine = in.readLine()) != null) {
 in.close();
 System.out.println(response.toString());
 ```
+
 `GET /games/{game-id}`
 
 Get a game. Successful request will return a single [Game Object](#game-object).
@@ -1900,6 +1907,7 @@ while ((inputLine = in.readLine()) != null) {
 in.close();
 System.out.println(response.toString());
 ```
+
 `PUT /games/{game-id}`
 
 Update details for a game. If you want to update the `icon`, `logo` or `header` fields you need to use the [Add Game Media](#add-game-media) endpoint. Successful request will return updated [Game Object](#game-object).
@@ -2089,6 +2097,7 @@ while ((inputLine = in.readLine()) != null) {
 in.close();
 System.out.println(response.toString());
 ```
+
 `GET /games/{game-id}/mods`
 
 Get all mods for the corresponding game. Successful request will return an array of [Mod Objects](#get-mods-2). We recommended reading the [filtering documentation](#filtering) to return only the records you want.
@@ -2331,6 +2340,7 @@ while ((inputLine = in.readLine()) != null) {
 in.close();
 System.out.println(response.toString());
 ```
+
 `GET /games/{game-id}/mods/{mod-id}`
 
 Get a mod. Successful request will return a single [Mod Object](#mod-object).
@@ -2554,6 +2564,7 @@ while ((inputLine = in.readLine()) != null) {
 in.close();
 System.out.println(response.toString());
 ```
+
 `POST /games/{game-id}/mods`
 
 Add a mod. Successful request will return the newly created [Mod Object](#mod-object). All content published by users on [mod.io](https://mod.io) is subject to the [mod.io Terms of Use](https://mod.io/terms/widget). It is a requirement that you provide a link to [https://mod.io/terms](https://mod.io/terms) in any place where users are submitting content to mod.io.<br><br>__NOTE:__ By default new mods are 'not accepted' and 'public'. They can only be 'accepted' and made available via the API once a [Mod File](#add-modfile) has been uploaded. [Media](#add-mod-media), [Metadata Key Value Pairs](#add-mod-kvp-metadata) and [Dependencies](#add-mod-dependencies) can also be added after a mod profile is created.
@@ -2791,6 +2802,7 @@ while ((inputLine = in.readLine()) != null) {
 in.close();
 System.out.println(response.toString());
 ```
+
 `PUT /games/{game-id}/mods/{mod-id}`
 
 Edit details for a mod. If you want to update the `logo` or media associated with this mod, you need to use the [Add Mod Media](#add-mod-media) endpoint. The same applies to [Mod Files](#add-modfile), [Metadata Key Value Pairs](#add-mod-kvp-metadata) and [Dependencies](#add-mod-dependencies) which are all managed via other endpoints. Successful request will return the updated [Mod Object](#mod-object).
@@ -3021,6 +3033,7 @@ while ((inputLine = in.readLine()) != null) {
 in.close();
 System.out.println(response.toString());
 ```
+
 `DELETE /games/{game-id}/mods/{mod-id}`
 
 Delete a mod profile. Successful request will return `204 No Content` and fire a __MOD_UNAVAILABLE__ event.<br><br>__NOTE:__ This will close the mod profile which means it cannot be viewed or retrieved via API requests but will still exist in-case you choose to restore it at a later date. If you wish to permanently delete a mod you have access rights to, you must do it via the [mods profile page](https://mod.io/mods) on the mod.io website.
@@ -3128,6 +3141,7 @@ while ((inputLine = in.readLine()) != null) {
 in.close();
 System.out.println(response.toString());
 ```
+
 `GET /games/{game-id}/mods/{mod-id}/files`
 
 Get all files that are published for the corresponding mod. Successful request will return an array of [Modfile Objects](#get-modfiles-2). We recommended reading the [filtering documentation](#filtering) to return only the records you want.<br><br>__NOTE:__ If the [game](#edit-game) requires mod downloads to be initiated via the API, the `binary_url` returned will contain a verification hash. This hash must be supplied to get the modfile, and will expire after a certain period of time. Saving and reusing the `binary_url` won't work in this situation given it's dynamic nature.
@@ -3279,6 +3293,7 @@ while ((inputLine = in.readLine()) != null) {
 in.close();
 System.out.println(response.toString());
 ```
+
 `GET /games/{game-id}/mods/{mod-id}/files/{file-id}`
 
 Get a file. Successful request will return a single [Modfile Object](#modfile-object).<br><br>__NOTE:__ If the [game](#edit-game) requires mod downloads to be initiated via the API, the `binary_url` returned will contain a verification hash. This hash must be supplied to get the modfile, and will expire after a certain period of time. Saving and reusing the `binary_url` won't work in this situation given it's dynamic nature.
@@ -3423,6 +3438,7 @@ while ((inputLine = in.readLine()) != null) {
 in.close();
 System.out.println(response.toString());
 ```
+
 `POST /games/{game-id}/mods/{mod-id}/files`
 
 Upload a file for the corresponding mod. Successful request will return the newly created [Modfile Object](#modfile-object). Ensure that the release you are uploading is stable and free from any critical issues. Files are scanned upon upload, any users who upload malicious files will have their accounts closed. <br><br>__NOTE:__ This endpoint does *not support* `input_json` even if you base64-encode your file, due to the already-large file sizes of some releases and base64-encoding inflating the filesize.
@@ -3574,6 +3590,7 @@ while ((inputLine = in.readLine()) != null) {
 in.close();
 System.out.println(response.toString());
 ```
+
 `PUT /games/{game-id}/mods/{mod-id}/files/{file-id}`
 
 Edit the details of a published file. If you want to update fields other than the `changelog`, `version` and `active` status, you should add a new file instead. Successful request will return updated [Modfile Object](#modfile-object).
@@ -3717,6 +3734,7 @@ while ((inputLine = in.readLine()) != null) {
 in.close();
 System.out.println(response.toString());
 ```
+
 `DELETE /games/{game-id}/mods/{mod-id}/files/{file-id}`
 
 Delete a modfile. Successful request will return `204 No Content`.<br><br>__NOTE:__ A modfile can never be removed if it is the current active release for the corresponding mod regardless of user permissions. Furthermore, this ability is only available if you are authenticated as the game administrator for this game _or_ are the original uploader of the modfile.
@@ -3841,6 +3859,7 @@ while ((inputLine = in.readLine()) != null) {
 in.close();
 System.out.println(response.toString());
 ```
+
 `POST /games/{game-id}/media`
 
 Upload new media to a game. The request `Content-Type` header __must__ be `multipart/form-data` to submit image files. Any request you make to this endpoint *should* contain a binary file for each of the fields you want to update below. Successful request will return [Message Object](#message-object).
@@ -3980,6 +3999,7 @@ while ((inputLine = in.readLine()) != null) {
 in.close();
 System.out.println(response.toString());
 ```
+
 `POST /games/{game-id}/mods/{mod-id}/media`
 
 This endpoint is very flexible and will add any images posted to the mods gallery regardless of their body name providing they are a valid image. The request `Content-Type` header __must__ be `multipart/form-data` to submit image files. Successful request will return a [Message Object](#message-object).
@@ -4120,6 +4140,7 @@ while ((inputLine = in.readLine()) != null) {
 in.close();
 System.out.println(response.toString());
 ```
+
 `DELETE /games/{game-id}/mods/{mod-id}/media`
 
 Delete images, sketchfab or youtube links from a mod profile. Successful request will return `204 No Content`.
@@ -4246,6 +4267,7 @@ while ((inputLine = in.readLine()) != null) {
 in.close();
 System.out.println(response.toString());
 ```
+
 `POST /games/{game-id}/mods/{mod-id}/subscribe`
 
 Subscribe the _authenticated user_ to a corresponding mod. No body parameters are required for this action. Successful request will return the [Mod Object](#mod-object) of the newly subscribed mod.<br><br>__NOTE:__ Users can subscribe to mods via mod.io, we recommend you poll or call the [Get User Events](#get-user-events) endpoint when needed, to keep a users mods collection up to date.
@@ -4469,6 +4491,7 @@ while ((inputLine = in.readLine()) != null) {
 in.close();
 System.out.println(response.toString());
 ```
+
 `DELETE /games/{game-id}/mods/{mod-id}/subscribe`
 
 Unsubscribe the _authenticated user_ from the corresponding mod. No body parameters are required for this action. Successful request will return `204 No Content`.<br><br>__NOTE:__ Users can unsubscribe from mods via mod.io, we recommend you poll or call the [Get Mod Events](#get-mod-events) endpoint when needed, to keep a users mods collection up to date.
@@ -4576,6 +4599,7 @@ while ((inputLine = in.readLine()) != null) {
 in.close();
 System.out.println(response.toString());
 ```
+
 `GET /games/{game-id}/mods/events`
 
 Get all mods events for the corresponding game sorted by latest event first. Successful request will return an array of [Event Objects](#get-mod-events-2).<br><br>__NOTE:__ We recommend you poll this endpoint to keep mods up-to-date. If polling this endpoint for updates you should store the `id` or `date_added` of the latest event, and on subsequent requests use that information [in the filter](#filtering), to return only newer events to process.
@@ -4708,6 +4732,7 @@ while ((inputLine = in.readLine()) != null) {
 in.close();
 System.out.println(response.toString());
 ```
+
 `GET /games/{game-id}/mods/{mod-id}/events`
 
 Get the event log for a mod, showing changes made sorted by latest event first. Successful request will return an array of [Event Objects](#get-mod-events-2). We recommended reading the [filtering documentation](#filtering) to return only the records you want.
@@ -4832,6 +4857,7 @@ while ((inputLine = in.readLine()) != null) {
 in.close();
 System.out.println(response.toString());
 ```
+
 `GET /games/{game-id}/mods/stats`
 
 Get all mod stats for mods of the corresponding game. Successful request will return an array of [Stats Objects](#get-mod-stats).<br><br>__NOTE:__ We highly recommend you apply filters to this endpoint to get only the results you need. For more information regarding filtering please see the [filtering](#filtering) section.
@@ -4971,6 +4997,7 @@ while ((inputLine = in.readLine()) != null) {
 in.close();
 System.out.println(response.toString());
 ```
+
 `GET /games/{game-id}/mods/{mod-id}/stats`
 
 Get mod stats for the corresponding mod. Successful request will return a single [Stats Object](#stats-object).
@@ -5091,6 +5118,7 @@ while ((inputLine = in.readLine()) != null) {
 in.close();
 System.out.println(response.toString());
 ```
+
 `GET /games/{game-id}/mods/{mod-id}/tags`
 
 Get all tags for the corresponding mod. Successful request will return an array of [Mod Tag Objects](#mod-tag-object). We recommended reading the [filtering documentation](#filtering) to return only the records you want.
@@ -5228,6 +5256,7 @@ while ((inputLine = in.readLine()) != null) {
 in.close();
 System.out.println(response.toString());
 ```
+
 `POST /games/{game-id}/mods/{mod-id}/tags`
 
 Add tags to a mod's profile. You can only add tags allowed by the parent game, which are listed in the `tag_option` column in the [Game's Object](#game-object). Successful request will return [Message Object](#message-object).
@@ -5359,6 +5388,7 @@ while ((inputLine = in.readLine()) != null) {
 in.close();
 System.out.println(response.toString());
 ```
+
 `DELETE /games/{game-id}/mods/{mod-id}/tags`
 
 Delete tags from a mod's profile. Deleting tags is identical to adding tags except the request method is `DELETE` instead of `POST`. Successful request will return `204 No Content`.
@@ -5468,6 +5498,7 @@ while ((inputLine = in.readLine()) != null) {
 in.close();
 System.out.println(response.toString());
 ```
+
 `GET /games/{game-id}/tags`
 
 Get all tags for the corresponding game, that can be applied to any of its mods. Hidden tag groups will only be returned if the authenticated user is a team member of the parent game with either `Manager` or `Administrator` status. Successful request will return an array of [Game Tag Option Objects](#game-tag-option-object).
@@ -5610,6 +5641,7 @@ while ((inputLine = in.readLine()) != null) {
 in.close();
 System.out.println(response.toString());
 ```
+
 `POST /games/{game-id}/tags`
 
 Add tags which mods can apply to their profiles. Successful request will return [Message Object](#message-object).
@@ -5750,6 +5782,7 @@ while ((inputLine = in.readLine()) != null) {
 in.close();
 System.out.println(response.toString());
 ```
+
 `DELETE /games/{game-id}/tags`
 
 Delete an entire group of tags or individual tags. Successful request will return `204 No Content`.
@@ -5877,6 +5910,7 @@ while ((inputLine = in.readLine()) != null) {
 in.close();
 System.out.println(response.toString());
 ```
+
 `POST /games/{game-id}/mods/{mod-id}/ratings`
 
 Submit a positive or negative rating for a mod. Each user can supply only one rating for a mod, subsequent ratings will override the old value. Successful request will return [Message Object](#message-object).
@@ -5993,6 +6027,7 @@ while ((inputLine = in.readLine()) != null) {
 in.close();
 System.out.println(response.toString());
 ```
+
 `GET /games/{game-id}/mods/{mod-id}/metadatakvp`
 
 Get all metadata stored by the game developer for this mod as searchable key value pairs. Successful request will return an array of [Metadata KVP Objects](#get-mod-kvp-metadata-2).<br><br>__NOTE:__ Metadata can also be stored as `metadata_blob` in the [Mod Object](#mod-object).
@@ -6125,6 +6160,7 @@ while ((inputLine = in.readLine()) != null) {
 in.close();
 System.out.println(response.toString());
 ```
+
 `POST /games/{game-id}/mods/{mod-id}/metadatakvp`
 
 Add metadata for this mod as searchable key value pairs. Metadata is useful to define how a mod works, or other information you need to display and manage the mod. Successful request will return [Message Object](#message-object).<br><br>For example: A mod might change gravity and the rate of fire of weapons, you could define these properties as key value pairs. We recommend the mod upload tool you create defines and submits metadata behind the scenes, because if these settings affect gameplay, invalid information may cause problems.<br><br>__NOTE:__ Metadata can also be stored as `metadata_blob` in the [Mod Object](#mod-object).
@@ -6256,6 +6292,7 @@ while ((inputLine = in.readLine()) != null) {
 in.close();
 System.out.println(response.toString());
 ```
+
 `DELETE /games/{game-id}/mods/{mod-id}/metadatakvp`
 
 Delete key value pairs metadata defined for this mod. Successful request will return `204 No Content`.
@@ -6367,6 +6404,7 @@ while ((inputLine = in.readLine()) != null) {
 in.close();
 System.out.println(response.toString());
 ```
+
 `GET /games/{game-id}/mods/{mod-id}/dependencies`
 
 Get all dependencies the chosen mod has selected. This is useful if a mod requires other mods be installed for it to run. Successful request will return an array of [Mod Dependencies Objects](#get-mod-dependencies-2).
@@ -6503,6 +6541,7 @@ while ((inputLine = in.readLine()) != null) {
 in.close();
 System.out.println(response.toString());
 ```
+
 `POST /games/{game-id}/mods/{mod-id}/dependencies`
 
 Add mod dependencies required by the corresponding mod. A dependency is a mod that should be installed for this mod to run. Successful request will return [Message Object](#message-object).
@@ -6634,6 +6673,7 @@ while ((inputLine = in.readLine()) != null) {
 in.close();
 System.out.println(response.toString());
 ```
+
 `DELETE /games/{game-id}/mods/{mod-id}/dependencies`
 
 Delete mod dependencies the corresponding mod has selected. Successful request will return `204 No Content`.
@@ -6745,6 +6785,7 @@ while ((inputLine = in.readLine()) != null) {
 in.close();
 System.out.println(response.toString());
 ```
+
 `GET /games/{game-id}/mods/{mod-id}/team`
 
 Get all users that are part of a mod team. Successful request will return an array of [Team Member Objects](#team-member-object). We recommended reading the [filtering documentation](#filtering) to return only the records you want.
@@ -6907,6 +6948,7 @@ while ((inputLine = in.readLine()) != null) {
 in.close();
 System.out.println(response.toString());
 ```
+
 `POST /games/{game-id}/mods/{mod-id}/team`
 
 Add a user to a mod team. Successful request will return [Message Object](#message-object) and fire a [__MOD_TEAM_CHANGED__ event](#get-mod-events).
@@ -7040,6 +7082,7 @@ while ((inputLine = in.readLine()) != null) {
 in.close();
 System.out.println(response.toString());
 ```
+
 `PUT /games/{game-id}/mods/{mod-id}/team/{team-member-id}`
 
 Update a mod team members details. Successful request will return a [Message Object](#message-object).
@@ -7166,6 +7209,7 @@ while ((inputLine = in.readLine()) != null) {
 in.close();
 System.out.println(response.toString());
 ```
+
 `DELETE /games/{game-id}/mods/{mod-id}/team/{team-member-id}`
 
 Delete a user from a mod team. This will revoke their access rights if they are not the original creator of the resource. Successful request will return `204 No Content` and fire a [__MOD_TEAM_CHANGED__ event](#get-mod-events).
@@ -7273,6 +7317,7 @@ while ((inputLine = in.readLine()) != null) {
 in.close();
 System.out.println(response.toString());
 ```
+
 `GET /games/{game-id}/mods/{mod-id}/comments`
 
 Get all comments posted in the mods profile. Successful request will return an array of [Comment Objects](#get-mod-comments-2). We recommended reading the [filtering documentation](#filtering) to return only the records you want.
@@ -7424,6 +7469,7 @@ while ((inputLine = in.readLine()) != null) {
 in.close();
 System.out.println(response.toString());
 ```
+
 `GET /games/{game-id}/mods/{mod-id}/comments/{comment-id}`
 
 Get a Mod Comment. Successful request will return a single [Comment Object](#comment-object).
@@ -7564,6 +7610,7 @@ while ((inputLine = in.readLine()) != null) {
 in.close();
 System.out.println(response.toString());
 ```
+
 `DELETE /games/{game-id}/mods/{mod-id}/comments/{comment-id}`
 
 Delete a comment from a mod profile. Successful request will return `204 No Content`.
@@ -7682,6 +7729,7 @@ while ((inputLine = in.readLine()) != null) {
 in.close();
 System.out.println(response.toString());
 ```
+
 `POST /general/ownership`
 
 Get the user that is the original _submitter_ of a resource. Successful request will return a single [User Object](#user-object).
@@ -7833,6 +7881,7 @@ while ((inputLine = in.readLine()) != null) {
 in.close();
 System.out.println(response.toString());
 ```
+
 `POST /report`
 
 Report a resource on mod.io. You are responsible for content your users submit, so properly supporting the report endpoint or linking to the report page [https://mod.io/report](https://mod.io/report) is important ([see how we do it](https://mod.io/report/widget)). Successful request will return [Message Object](#message-object).<br><br>__NOTE:__ If you are a game owner or manager, you can [view all reports](https://mod.io/messages/reports) submitted for your game. You can also configure in your games control panel the number of reports required before content is automatically taken down for review.<br><br>__NOTE:__ Read our [terms of use](https://mod.io/terms/widget) for information about what is/isn't acceptable.
@@ -7841,7 +7890,7 @@ Report a resource on mod.io. You are responsible for content your users submit, 
      ---|---|---|---|
      resource|string|true|Type of resource you are reporting. Must be one of the following values:<br><br>- _games_<br>- _mods_<br>- _users_
      id|integer|true|Unique id of the resource you are reporting.
-     type|integer|true|Type of report you are submitting. Must be one of the following values:<br><br>__0__ = Generic Report<br>__1__ = DMCA Report
+     type|integer|true|Type of report you are submitting. Must be one of the following values:<br><br>__0__ = Generic<br>__1__ = DMCA<br>__2__ = Not Working<br>__3__ = Rude Content<br>__4__ = Illegal Content<br>__5__ = Stolen Content<br>__6__ = False Information<br>__7__ = Other
      name|string||Name of the user submitting the report. Recommended for DMCA reports.
      contact|string||Contact details of the user submitting the report. Recommended for DMCA reports.
      summary|string|true|Detailed description of your report. Make sure you include all relevant information and links to help moderators investigate and respond appropriately.<br><br>Our [online reporting process](https://mod.io/report/widget) shows the information we collect and put into the `name`, `contact` and `summary` fields as appropiate. We recommend you implement a similar flow in-game.
@@ -7975,17 +8024,18 @@ while ((inputLine = in.readLine()) != null) {
 in.close();
 System.out.println(response.toString());
 ```
+
 `POST /batch`
 
 Speed up your API calls, by batching them into a single HTTP request. This endpoint is convenient for repeated sequential API calls as it eliminates the HTTP overhead of each request. All encapsulated requests are processed in a synchronous manner which enables you to use the response data of a previous request as a parameter in the subsequent request which we call request dependencies (see below for more info). Successful request will return an array of [Batch Objects](#make-batch-request-2).
 
      __Batch Limitations__
 
-     The following applies to all batch requests:  
+     The following applies to all batch requests:
 
-     - Who you authenticate as for the parent batch request, will be used for _all_ sub-requests.  
-     - Authorization headers passed into sub-requests are ignored.  
-     - You cannot make more than 20 requests within a batch.  
+     - Who you authenticate as for the parent batch request, will be used for _all_ sub-requests.
+     - Authorization headers passed into sub-requests are ignored.
+     - You cannot make more than 20 requests within a batch.
 
      __Batch Dependencies__
 
@@ -7997,10 +8047,10 @@ Speed up your API calls, by batching them into a single HTTP request. This endpo
 
      __What will it require?__
 
-     This will require three requests (see the example code on the right):  
-     1. [GET /v1/games/{game-id}/mods](#get-mods)  
-     2. [GET /v1/me/subscribed](#get-user-subscriptions)  
-     3. [GET /v1/me/ratings](#get-user-ratings)  
+     This will require three requests (see the example code on the right):
+     1. [GET /v1/games/{game-id}/mods](#get-mods)
+     2. [GET /v1/me/subscribed](#get-user-subscriptions)
+     3. [GET /v1/me/ratings](#get-user-ratings)
 
     In total, we are making 3 requests in a synchronous manner, inside a single request. Based on the above example, we need to know how to get the `id` value of the [Mod Object](#mod-object) from Request #1 and provide it as a dependency to the subsequent requests.
 
@@ -8286,6 +8336,7 @@ while ((inputLine = in.readLine()) != null) {
 in.close();
 System.out.println(response.toString());
 ```
+
 `GET /me`
 
 Get the _authenticated user_ details. Successful request will return a single [User Object](#user-object).
@@ -8411,6 +8462,7 @@ while ((inputLine = in.readLine()) != null) {
 in.close();
 System.out.println(response.toString());
 ```
+
 `GET /me/subscribed`
 
 Get all mod's the _authenticated user_ is subscribed to. Successful request will return an array of [Mod Objects](#get-mods-2). We recommended reading the [filtering documentation](#filtering) to return only the records you want.
@@ -8648,6 +8700,7 @@ while ((inputLine = in.readLine()) != null) {
 in.close();
 System.out.println(response.toString());
 ```
+
 `GET /me/events`
 
 Get events that have been fired specific to the user. Successful request will return an array of [Event Objects](#get-user-events-2). We recommended reading the [filtering documentation](#filtering) to return only the records you want.
@@ -8786,6 +8839,7 @@ while ((inputLine = in.readLine()) != null) {
 in.close();
 System.out.println(response.toString());
 ```
+
 `GET /me/games`
 
 Get all games the _authenticated user_ added or is a team member of. Successful request will return an array of [Game Objects](#get-games-2). We recommended reading the [filtering documentation](#filtering) to return only the records you want.
@@ -8991,6 +9045,7 @@ while ((inputLine = in.readLine()) != null) {
 in.close();
 System.out.println(response.toString());
 ```
+
 `GET /me/mods`
 
 Get all mods the _authenticated user_ added or is a team member of. Successful request will return an array of [Mod Objects](#get-mods-2). We recommended reading the [filtering documentation](#filtering) to return only the records you want.
@@ -9238,6 +9293,7 @@ while ((inputLine = in.readLine()) != null) {
 in.close();
 System.out.println(response.toString());
 ```
+
 `GET /me/files`
 
 Get all modfiles the _authenticated user_ uploaded. Successful request will return an array of [Modfile Objects](#get-modfiles-2). We recommended reading the [filtering documentation](#filtering) to return only the records you want.<br><br>__NOTE:__ If the [game](#edit-game) requires mod downloads to be initiated via the API, the `binary_url` returned will contain a verification hash. This hash must be supplied to get the modfile, and will expire after a certain period of time. Saving and reusing the `binary_url` won't work in this situation given it's dynamic nature.
@@ -9395,6 +9451,7 @@ while ((inputLine = in.readLine()) != null) {
 in.close();
 System.out.println(response.toString());
 ```
+
 `GET /me/ratings`
 
 Get all mod rating's submitted by the _authenticated user_. Successful request will return an array of [Rating Objects](#get-user-ratings).
@@ -9965,76 +10022,6 @@ thread_position|string|Levels of nesting in a comment thread. How it works:<br><
 karma|integer|Karma received for the comment (can be postive or negative).
 karma_guest|integer|No longer used and will be removed in subsequent API version.
 content|string|Contents of the comment.
-
-
-
-
-## Consent Dialog Object  
-
-<a name="schemaconsent_dialog_object"></a>
-
-```json
-{
-  "plaintext": "We use mod.io to support user-generated content in-game. To continue you must agree to the mod.io Terms of Use and Privacy Policy. A mod.io account will be created for you to browse, share and interact with user-generated content using your:
-	- Steam User ID
-	- Display Name
-	- Avatar
-	You agree that your display name, avatar and content will be shared through the mod.io API and website which may be publicly accessible. You can manage your mod.io account and opt out any time via mod.io.",
-  "html": "<p>We use <a href="https://m.io">mod.io</a> to support user-generated content in-game. To continue you must agree to the mod.io <a href="https://m.io/terms">Terms of Use</a> and <a href="https://m.io/privacy">Privacy Policy</a>. A mod.io account will be created for you to browse, share and interact with user-generated content using your:</p><ul><li>Steam User ID</li><li>Display Name</li><li>Avatar</li></ul><p>You agree that your display name, avatar and content will be shared through the mod.io API and website which may be publicly accessible. You can manage your mod.io account and opt out any time via mod.io.</p>",
-  "buttons": {
-    "agree": {
-      "text": "I Agree"
-    },
-    "disagree": {
-      "text": "Opt Out"
-    }
-  },
-  "links": {
-    "website": {
-      "text": "Website",
-      "url": "https://mod.io"
-    },
-    "terms": {
-      "text": "Website",
-      "url": "https://mod.io/terms"
-    },
-    "privacy": {
-      "text": "Website",
-      "url": "https://mod.io/privacy"
-    },
-    "manage": {
-      "text": "Website",
-      "url": "https://mod.io/members/settings?ref=steam"
-    }
-  }
-} 
-```
-
-
-### Properties
-
-Name|Type|Description
----|---|---|---|
-plaintext|string|Contains consent text in plaintext formatting.
-html|string|Contains consent text in HTML formatting.
-buttons|object|Contains buttons to embed into the consent dialog.
-» agree|object|I Agree Button.
-»» text|string|Button text.
-» disagree|object|Opt out Buttotn.
-»» text|string|Button text.
-links|object|Contains links to optionally embed into the consent dialog.
-» website|object|Contains website link data.
-»» text|string|Text for the link.
-»» url|string|Link to the mod.io website.
-» terms|object|Contains Terms of Use link data.
-»» text|string|Text for the link.
-»» url|string|Link to the mod.io Terms of Use.
-» privacy|object|Contains Privacy Policy link data.
-»» text|string|Text for the link.
-»» url|string|Link to the mod.io Privacy Policy.
-» manage|object|Contains Manage Account link data.
-»» text|string|Text for the link.
-»» url|string|Link to the mod.io page to manage a user's Steam Account.
 
 
 
@@ -11951,6 +11938,28 @@ metadata_blob|string|Metadata stored by the game developer for this file.
 download|[Download Object](#schemadownload_object)|Contains download data.
 » binary_url|string|URL to download the file from the mod.io CDN.<br><br>__NOTE:__ If the [game](#edit-game) requires mod downloads to be initiated via the API, the `binary_url` returned will contain a verification hash. This hash must be supplied to get the modfile, and will expire after a certain period of time. Saving and reusing the `binary_url` won't work in this situation given it's dynamic nature.
 » date_expires|integer|Unix timestamp of when the `binary_url` will expire.
+
+
+
+
+## Optout Object
+
+   <a name="schemaoptout_object"></a>
+
+```json
+{
+  "code": 200,
+  "optout_url": "https://mod.io/members/?verify=eyJlbmMiOiJBMTI4Q0JDLUhTMjU2IiwiYWxnIjoiUlNB.."
+} 
+```
+
+
+### Properties
+
+Name|Type|Description
+---|---|---|---|
+code|integer|HTTP Response Code.
+optout_url|string|The URL the user must be redirected to when requesting to opt out. URL is only valid for 10 minutes from time of optout request.
 
 
 
