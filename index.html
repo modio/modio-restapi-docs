@@ -723,9 +723,6 @@
                     <a href="#modfile-object" class="toc-h2 toc-link" data-title="Response Schemas">Modfile Object</a>
                   </li>
                   <li>
-                    <a href="#optout-object" class="toc-h2 toc-link" data-title="Response Schemas">Optout Object</a>
-                  </li>
-                  <li>
                     <a href="#rating-object" class="toc-h2 toc-link" data-title="Response Schemas">Rating Object</a>
                   </li>
                   <li>
@@ -9295,11 +9292,6 @@ Accept: application/json
 <td>Unique id of the mod.</td>
 </tr>
 <tr>
-<td>submitted_by</td>
-<td>integer</td>
-<td>Unique id of the user who posted the comment.</td>
-</tr>
-<tr>
 <td>date_added</td>
 <td>integer</td>
 <td>Unix timestamp of date comment was posted.</td>
@@ -9883,7 +9875,7 @@ curl -X POST https://api.mod.io/v1/report <span class="se">\</span>
 </code></pre>
 <p><span class="httpmethod POST">POST</span> <span class="endpointheading">/report</span></p>
 
-<p>Report a resource on mod.io. You are responsible for content your users submit, so properly supporting the report endpoint or linking to the report page <a href="https://mod.io/report">https://mod.io/report</a> is important (<a href="https://mod.io/report/widget" class="colorbox">see how we do it</a>). Successful request will return <a href="#message-object">Message Object</a>.<br><br><strong>NOTE:</strong> If you are a game owner or manager, you can <a href="https://mod.io/messages/reports">view all reports</a> submitted for your game. You can also configure in your games control panel the number of reports required before content is automatically taken down for review.<br><br><strong>NOTE:</strong> Read our <a href="https://mod.io/terms/widget" class="colorbox">terms of use</a> for information about what is/isn't acceptable.</p>
+<p>Report a resource on mod.io. You are responsible for content your users submit, so properly supporting the report endpoint or linking to the report page <a href="https://mod.io/report">https://mod.io/report/widget</a> is important. Successful request will return <a href="#message-object">Message Object</a>.<br><br><strong>NOTE:</strong> If you want to link to our report page and you know the resource you want to report, the best URL to use is https://mod.io/report/<code>resource</code>/<code>id</code>/widget. For example to report a mod with an ID of 1 the URL would be: <a href="https://mod.io/report/mods/1/widget" class="colorbox">https://mod.io/report/mods/1/widget</a>. <br><br><strong>NOTE:</strong> If you are a game owner or manager, you can <a href="https://mod.io/messages/reports">view all reports</a> submitted for your game. You can also configure in your games control panel the number of reports required before content is automatically taken down for review.<br><br><strong>NOTE:</strong> Read our <a href="https://mod.io/terms/widget" class="colorbox">terms of use</a> for information about what is/isn't acceptable.</p>
 
 <table>
 <thead>
@@ -11890,7 +11882,7 @@ Authorization: Bearer {access-token}
 </code></pre>
 <p><span class="httpmethod GET">GET</span> <span class="endpointheading">/me/ratings</span></p>
 
-<p>Get all mod rating's submitted by the <em>authenticated user</em>. Successful request will return an array of <a href="#get-user-ratings">Rating Objects</a>.</p>
+<p>Get all mod rating's submitted by the <em>authenticated user</em>. Successful request will return an array of <a href="#get-user-ratings-2">Rating Objects</a>.</p>
 
 <table>
 <thead>
@@ -14513,7 +14505,7 @@ To perform this request, you must be authenticated via one of the following meth
 <tr>
 <td>» event_type</td>
 <td>string</td>
-<td>Type of event that was triggered. List of possible events: <br><br>- MODFILE_CHANGED<br>- MOD_AVAILABLE<br>- MOD_UNAVAILABLE<br>- MOD_EDITED<br>- MOD_DELETED<br>- TEAM_CHANGED</td>
+<td>Type of event that was triggered. List of possible events: <br><br>- MODFILE_CHANGED<br>- MOD_AVAILABLE<br>- MOD_UNAVAILABLE<br>- MOD_EDITED<br>- MOD_DELETED<br>- MOD_TEAM_CHANGED</td>
 </tr>
 <tr>
 <td>result_count</td>
@@ -16734,7 +16726,7 @@ To perform this request, you must be authenticated via one of the following meth
 <tr>
 <td>event_type</td>
 <td>string</td>
-<td>Type of event that was triggered. List of possible events: <br><br>- MODFILE_CHANGED<br>- MOD_AVAILABLE<br>- MOD_UNAVAILABLE<br>- MOD_EDITED<br>- MOD_DELETED<br>- TEAM_CHANGED</td>
+<td>Type of event that was triggered. List of possible events: <br><br>- MODFILE_CHANGED<br>- MOD_AVAILABLE<br>- MOD_UNAVAILABLE<br>- MOD_EDITED<br>- MOD_DELETED<br>- MOD_TEAM_CHANGED</td>
 </tr>
 </tbody>
 </table>
@@ -17463,34 +17455,6 @@ To perform this request, you must be authenticated via one of the following meth
 </tr>
 </tbody>
 </table>
-<h2 id="optout-object">Optout Object</h2>
-<p><a name="schemaoptout_object"></a></p>
-<pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
-  </span><span class="s2">"code"</span><span class="p">:</span><span class="w"> </span><span class="mi">200</span><span class="p">,</span><span class="w">
-  </span><span class="s2">"optout_url"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://mod.io/members/?verify=eyJlbmMiOiJBMTI4Q0JDLUhTMjU2IiwiYWxnIjoiUlNB.."</span><span class="w">
-</span><span class="p">}</span><span class="w"> 
-</span></code></pre><h3 id="properties-38">Properties</h3>
-<table>
-<thead>
-<tr>
-<th>Name</th>
-<th>Type</th>
-<th>Description</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>code</td>
-<td>integer</td>
-<td>HTTP Response Code.</td>
-</tr>
-<tr>
-<td>optout_url</td>
-<td>string</td>
-<td>The URL the user must be redirected to when requesting to opt out. URL is only valid for 10 minutes from time of optout request.</td>
-</tr>
-</tbody>
-</table>
 <h2 id="rating-object">Rating Object</h2>
 <p><a name="schemarating_object"></a></p>
 <pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
@@ -17499,7 +17463,7 @@ To perform this request, you must be authenticated via one of the following meth
   </span><span class="s2">"rating"</span><span class="p">:</span><span class="w"> </span><span class="mi">-1</span><span class="p">,</span><span class="w">
   </span><span class="s2">"date_added"</span><span class="p">:</span><span class="w"> </span><span class="mi">1492564103</span><span class="w">
 </span><span class="p">}</span><span class="w"> 
-</span></code></pre><h3 id="properties-39">Properties</h3>
+</span></code></pre><h3 id="properties-38">Properties</h3>
 <table>
 <thead>
 <tr>
@@ -17547,7 +17511,7 @@ To perform this request, you must be authenticated via one of the following meth
   </span><span class="s2">"ratings_display_text"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Very Positive"</span><span class="p">,</span><span class="w">
   </span><span class="s2">"date_expires"</span><span class="p">:</span><span class="w"> </span><span class="mi">1492564103</span><span class="w">
 </span><span class="p">}</span><span class="w"> 
-</span></code></pre><h3 id="properties-40">Properties</h3>
+</span></code></pre><h3 id="properties-39">Properties</h3>
 <table>
 <thead>
 <tr>
@@ -17642,7 +17606,7 @@ To perform this request, you must be authenticated via one of the following meth
   </span><span class="s2">"date_added"</span><span class="p">:</span><span class="w"> </span><span class="mi">1492058857</span><span class="p">,</span><span class="w">
   </span><span class="s2">"position"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Supreme Overlord"</span><span class="w">
 </span><span class="p">}</span><span class="w"> 
-</span></code></pre><h3 id="properties-41">Properties</h3>
+</span></code></pre><h3 id="properties-40">Properties</h3>
 <table>
 <thead>
 <tr>
@@ -17750,7 +17714,7 @@ To perform this request, you must be authenticated via one of the following meth
   </span><span class="s2">"date_added"</span><span class="p">:</span><span class="w"> </span><span class="mi">1499846132</span><span class="p">,</span><span class="w">
   </span><span class="s2">"event_type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"USER_SUBSCRIBE"</span><span class="w">
 </span><span class="p">}</span><span class="w"> 
-</span></code></pre><h3 id="properties-42">Properties</h3>
+</span></code></pre><h3 id="properties-41">Properties</h3>
 <table>
 <thead>
 <tr>
@@ -17809,7 +17773,7 @@ To perform this request, you must be authenticated via one of the following meth
   </span><span class="s2">"language"</span><span class="p">:</span><span class="w"> </span><span class="s2">""</span><span class="p">,</span><span class="w">
   </span><span class="s2">"profile_url"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://mod.io/members/xant"</span><span class="w">
 </span><span class="p">}</span><span class="w"> 
-</span></code></pre><h3 id="properties-43">Properties</h3>
+</span></code></pre><h3 id="properties-42">Properties</h3>
 <table>
 <thead>
 <tr>
