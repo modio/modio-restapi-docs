@@ -7326,7 +7326,6 @@ Get all comments posted in the mods profile. Successful request will return an a
      ---|---|---
      id|integer|Unique id of the comment.
      mod_id|integer|Unique id of the mod.
-     submitted_by|integer|Unique id of the user who posted the comment.
      date_added|integer|Unix timestamp of date comment was posted.
      reply_id|integer|Id of the parent comment this comment is replying to (can be 0 if the comment is not a reply).
      thread_position|string|Levels of nesting in a comment thread. You should order by this field, to maintain comment grouping. How it works:<br><br>- The first comment will have the position '01'.<br>- The second comment will have the position '02'.<br>- If someone responds to the second comment the position will be '02.01'.<br>- A maximum of 3 levels is supported.
@@ -7884,7 +7883,7 @@ System.out.println(response.toString());
 
 `POST /report`
 
-Report a resource on mod.io. You are responsible for content your users submit, so properly supporting the report endpoint or linking to the report page [https://mod.io/report](https://mod.io/report) is important ([see how we do it](https://mod.io/report/widget)). Successful request will return [Message Object](#message-object).<br><br>__NOTE:__ If you are a game owner or manager, you can [view all reports](https://mod.io/messages/reports) submitted for your game. You can also configure in your games control panel the number of reports required before content is automatically taken down for review.<br><br>__NOTE:__ Read our [terms of use](https://mod.io/terms/widget) for information about what is/isn't acceptable.
+Report a resource on mod.io. You are responsible for content your users submit, so properly supporting the report endpoint or linking to the report page [https://mod.io/report/widget](https://mod.io/report) is important. Successful request will return [Message Object](#message-object).<br><br>__NOTE:__ If you want to link to our report page and you know the resource you want to report, the best URL to use is https://mod.io/report/`resource`/`id`/widget. For example to report a mod with an ID of 1 the URL would be: [https://mod.io/report/mods/1/widget](https://mod.io/report/mods/1/widget). <br><br>__NOTE:__ If you are a game owner or manager, you can [view all reports](https://mod.io/messages/reports) submitted for your game. You can also configure in your games control panel the number of reports required before content is automatically taken down for review.<br><br>__NOTE:__ Read our [terms of use](https://mod.io/terms/widget) for information about what is/isn't acceptable.
 
      Parameter|Type|Required|Description
      ---|---|---|---|
@@ -9454,7 +9453,7 @@ System.out.println(response.toString());
 
 `GET /me/ratings`
 
-Get all mod rating's submitted by the _authenticated user_. Successful request will return an array of [Rating Objects](#get-user-ratings).
+Get all mod rating's submitted by the _authenticated user_. Successful request will return an array of [Rating Objects](#get-user-ratings-2).
 
     Filter|Type|Description
     ---|---|---
@@ -10598,7 +10597,7 @@ data|[Mod Event Object](#schemamod_event_object)[]|Array containing mod event ob
 » mod_id|integer|Unique id of the parent mod.
 » user_id|integer|Unique id of the user who performed the action.
 » date_added|integer|Unix timestamp of date the event occurred.
-» event_type|string|Type of event that was triggered. List of possible events: <br><br>- MODFILE_CHANGED<br>- MOD_AVAILABLE<br>- MOD_UNAVAILABLE<br>- MOD_EDITED<br>- MOD_DELETED<br>- TEAM_CHANGED
+» event_type|string|Type of event that was triggered. List of possible events: <br><br>- MODFILE_CHANGED<br>- MOD_AVAILABLE<br>- MOD_UNAVAILABLE<br>- MOD_EDITED<br>- MOD_DELETED<br>- MOD_TEAM_CHANGED
 result_count|integer|Number of results returned in this request.
 result_offset|integer|Number of results skipped over. Defaults to 0 unless overridden by `_offset` filter.
 result_limit|integer|Maximum number of results returned in the request. Defaults to 100 (max) unless overridden by `_limit` filter.
@@ -11627,7 +11626,7 @@ id|integer|Unique id of the event object.
 mod_id|integer|Unique id of the parent mod.
 user_id|integer|Unique id of the user who performed the action.
 date_added|integer|Unix timestamp of date the event occurred.
-event_type|string|Type of event that was triggered. List of possible events: <br><br>- MODFILE_CHANGED<br>- MOD_AVAILABLE<br>- MOD_UNAVAILABLE<br>- MOD_EDITED<br>- MOD_DELETED<br>- TEAM_CHANGED
+event_type|string|Type of event that was triggered. List of possible events: <br><br>- MODFILE_CHANGED<br>- MOD_AVAILABLE<br>- MOD_UNAVAILABLE<br>- MOD_EDITED<br>- MOD_DELETED<br>- MOD_TEAM_CHANGED
 
 
 
@@ -11938,28 +11937,6 @@ metadata_blob|string|Metadata stored by the game developer for this file.
 download|[Download Object](#schemadownload_object)|Contains download data.
 » binary_url|string|URL to download the file from the mod.io CDN.<br><br>__NOTE:__ If the [game](#edit-game) requires mod downloads to be initiated via the API, the `binary_url` returned will contain a verification hash. This hash must be supplied to get the modfile, and will expire after a certain period of time. Saving and reusing the `binary_url` won't work in this situation given it's dynamic nature.
 » date_expires|integer|Unix timestamp of when the `binary_url` will expire.
-
-
-
-
-## Optout Object
-
-   <a name="schemaoptout_object"></a>
-
-```json
-{
-  "code": 200,
-  "optout_url": "https://mod.io/members/?verify=eyJlbmMiOiJBMTI4Q0JDLUhTMjU2IiwiYWxnIjoiUlNB.."
-} 
-```
-
-
-### Properties
-
-Name|Type|Description
----|---|---|---|
-code|integer|HTTP Response Code.
-optout_url|string|The URL the user must be redirected to when requesting to opt out. URL is only valid for 10 minutes from time of optout request.
 
 
 
