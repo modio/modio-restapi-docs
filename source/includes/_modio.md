@@ -142,6 +142,8 @@ If you do not exchange your `security_code` for an `access_token` within 15 minu
 
 See [Making Requests](#making-requests) section.
 
+**HINT:** If you want to overlay the --parse_sitename site in-game and you authenticate users via email, we recommend you add `?ref=email` to the end of the URL you open which will prompt the user to login via their email. See [Web Overlay Authentication](#web-overlay-authentication) for details.
+
 ### External App Ticket Authentication Flow
 
 If your game is running inside a popular distribution platform such as Steam or GOG Galaxy, you can use the [external app ticket flow](#external-auth) to authenticate your players via their encrypted session tickets which are accessible via the platform's SDK. --parse_sitename offers the ability to decode this metadata from the respective client using a shared secret which is supplied to you by the platform.
@@ -157,7 +159,7 @@ Want a platform added to the list? [Contact us!](mailto:--parse_email?subject=Au
 
 ### Web Overlay Authentication
 
-At the moment it is not possible to open the --parse_sitename website in-game with the user pre-authenticated, however you can provide a hint by appending `?ref=SERVICE` to the end of the URL. What this tells --parse_sitename, is that when the user attempts to perform an action that requires authentication, they will be prompted to login with their `SERVICE` account. For example if you want to take a mod creator to their mod edit page in-game on Steam, the URL would look something like: `--parse_gameurl/modname/edit?ref=steam`. You can optionally add `&login=auto` as well to automatically start the login process. Services supported are **steam**, **itchio**, **facebook** and **google**. 
+At the moment it is not possible to open the --parse_sitename website in-game with the user pre-authenticated, however you can provide a hint by appending `?ref=SERVICE` to the end of the URL. What this tells --parse_sitename, is that when the user attempts to perform an action that requires authentication, they will be prompted to login with their `SERVICE` account. For example if you want to take a mod creator to their mod edit page in-game on Steam, the URL would look something like: `--parse_gameurl/modname/edit?ref=steam`. You can optionally add `&login=auto` as well to automatically start the login process. Services supported are **steam**, **xbox**, **itchio**, **facebook**, **google** and **email**. 
 
 ### Scopes (OAuth 2)
 
