@@ -41,14 +41,14 @@ You have 3 options to get connected to the mod.io API which you can use intercha
 
 Option | Usage | Suited for | Docs
 ---------- | ---------- | ---------- | ---------
-__API__ | For connecting directly to the mod.io REST API | Web apps that need a JSON REST API, or game developers that like a challenge and want control over their implementation. | You are reading them
+__API__ | For connecting directly to the mod.io REST API. | Web apps that need a JSON REST API, or game developers that like a challenge and want control over their implementation. | You are reading them
 __SDK__ | Drop our [open source C/C++ SDK](https://sdk.mod.io) into your game to call mod.io functionality. | Developers that want a SDK that abstracts the uploading, downloading and unzip flows behind easy to use function calls. | [Here](https://sdk.mod.io)
 __Tools/Plugins__ | Use tools, plugins and wrappers created by the community to make implementation in various engines easy. | Game developers that want a pre-built modding solution for their engine (Unity, Unreal, GameMaker, Construct) of choice. | [Available per tool](https://apps.mod.io)
 
 Tools, plugins and wrappers made by the mod.io team and our awesome community | - | - | -
 --- | --- | --- | ---
 ![Unity Plugin](images/tool-unity.png) | __Unity Plugin__<br />[SDK](https://github.com/modio/UnityPlugin)<br />[Getting Started](https://github.com/modio/UnityPlugin/wiki)<br /> | ![Unreal Plugin](images/tool-unreal.png) | __Unreal Plugin__<br />[SDK](https://github.com/modio/UE4Plugin)<br />[Getting Started](https://github.com/modio/UE4Plugin/wiki)<br />[Example](https://github.com/modio/UE4Plugin)<br />
-![C/C++ SDK](images/tool-ccpp.png) | __C/C++ SDK__<br />[SDK](https://github.com/modio/SDK)<br />[Getting Started](https://github.com/modio/SDK/wiki)<br />[Tutorials](https://github.com/modio/SDK/tree/master/examples/code-samples)<br />  | ![Haxe Wrapper](images/tool-haxe.png) | __Haxe Wrapper__<br />[SDK](https://apps.mod.io/haxe-wrapper)<br />[Getting Started](https://github.com/modio/HaxeWrapper)<br />[Tutorials](https://github.com/Turupawn/modioOpenFLExample#openfl-integration)<br />
+![C/C++ SDK](images/tool-ccpp.png) | __C/C++ SDK__<br />[SDK](https://github.com/modio/SDK)<br />[Getting Started](https://github.com/modio/SDK/wiki)<br />[Tutorials](https://github.com/modio/SDK/tree/master/examples/code-samples)<br />  | ![Haxe Wrapper](images/tool-haxe.png) | __Haxe Wrapper__<br />[SDK](https://github.com/modio/HaxeWrapper)<br />[Getting Started](https://github.com/modio/HaxeWrapper)<br />[Tutorials](https://github.com/Turupawn/modioOpenFLExample#openfl-integration)<br />
 ![Rust Wrapper](images/tool-rust.png) | __Rust Wrapper__<br />[SDK](https://crates.io/crates/modio)<br />[Getting Started](https://github.com/nickelc/modio-rs)<br />[Tutorials](https://github.com/nickelc/modio-rs/tree/master/examples)<br /> | ![Python Wrapper](images/tool-python.png) | __Python Wrapper__<br />[SDK](https://github.com/ClementJ18/mod.io)<br />[Getting Started](https://github.com/ClementJ18/mod.io/#example)<br />[Tutorials](https://github.com/ClementJ18/mod.io/tree/master/examples)<br /> |<br />
 ![Construct 2](images/tool-c2.png) | __Construct 2 Plugin__<br />[SDK](https://github.com/modio/C2Plugin)<br />[Getting Started](https://github.com/modio/C2Plugin)<br /> | ![Command Line Tool](images/tool-cmd.png) | __Command Line Tool__<br />[CMD](https://github.com/nickelc/modiom)<br />[Getting Started](https://github.com/nickelc/modiom)<br />
 Want a tool added to the list? [Contact us!](mailto:developers@mod.io?subject=Publish Tool)
@@ -83,7 +83,7 @@ To access the API authentication is required. All users and games get a private 
 
 ### Web Overlay Authentication
 
-At the moment it is not possible to open the mod.io website in-game with the user pre-authenticated, however you can provide a hint by appending `?ref=SERVICE` to the end of the URL. What this tells mod.io, is that when the user attempts to perform an action that requires authentication, they will be prompted to login with their `SERVICE` account. For example if you want to take a mod creator to their mod edit page in-game on Steam, the URL would look something like: `https://gamename.mod.io/modname/edit?ref=steam`. You can optionally add `&login=auto` as well to automatically start the login process. Services supported are **steam**, **facebook** and **google**. 
+At the moment it is not possible to open the mod.io website in-game with the user pre-authenticated, however you can provide a hint by appending `?ref=SERVICE` to the end of the URL. What this tells mod.io, is that when the user attempts to perform an action that requires authentication, they will be prompted to login with their `SERVICE` account. For example if you want to take a mod creator to their mod edit page in-game on Steam, the URL would look something like: `https://gamename.mod.io/modname/edit?ref=steam`. You can optionally add `&login=auto` as well to automatically start the login process. Services supported are **steam**, **xbox**, **itchio**, **facebook**, **google** and **email**. 
 
 ### Scopes (OAuth 2)
 
@@ -214,7 +214,7 @@ Response Code | Meaning
 `200` | OK -- Your request was successful.
 `201` | Created -- Resource created, inspect Location header for newly created resource URL.
 `204` | No Content -- Request was successful and there was no data to be returned.
-`400` | Bad request -- Server cannot process the request due to malformed syntax or invalid request message framing.
+`400` | Bad Request -- Server cannot process the request due to malformed syntax or invalid request message framing.
 `401` | Unauthorized -- Your API key/access token is incorrect, revoked, or expired.
 `403` | Forbidden -- You do not have permission to perform the requested action.
 `404` | Not Found -- The requested resource could not be found.
@@ -412,7 +412,7 @@ If the `result_count` parameter matches the `result_limit` parameter (5 in this 
 
 ## Sorting
 
-All endpoints are sorted by the `id` column in ascending order by default. You can override this by including a `_sort` with the column you want to sort by in the request. You can sort on all columns __in the parent object only__. You cannot sort on columns in nested objects, so if a game contains a tags object you cannot sort on the `tag name` column, but you can sort by the games `name` since the games `name` resides in the parent object.
+All endpoints are sorted by the `id` column in ascending order by default (oldest first). You can override this by including a `_sort` with the column you want to sort by in the request. You can sort on all columns __in the parent object only__. You cannot sort on columns in nested objects, so if a game contains a tags object you cannot sort on the `tag name` column, but you can sort by the games `name` since the games `name` resides in the parent object.
 
 __NOTE:__ Some endpoints like [Get Mods](#get-mods) have special sort columns like `popular`, `downloads`, `rating` and `subscribers` which are documented alongside the filters.
 
@@ -462,42 +462,32 @@ Where the preceding column value does not equal the value specified.
 
 - `?curation-not=1` - Where the `curation` column does not equal 1.
 
-### -lk (Like)
+### -lk (Like + Wildcards)
 
 ```
 v1/games?name-lk=texture
+
+v1/games?name-lk=texture*
+
+v1/games?name-lk=*texture*
 ```
 
-Where the string supplied matches the preceding column value. This is equivalent to SQL's `LIKE`. Consider using wildcard's `*` for the best chance of results as described below.
+Where the string supplied matches the preceding column value. This is equivalent to SQL's `LIKE`. Wildcard's `*` can be used to find content that partially matches as described below.
 
 - `?name-lk=texture` - Get all results where the `name` column value is 'texture'.
+- `?name-lk=texture*` - Get all results where the `name` column value begins with 'texture'. This means the query would return results for 'texture', 'textures' and 'texture pack'
+- `?name-lk=*texture*` - Get all results where the `name` column value contains 'texture'. This means the query would return results for 'texture', 'HD textures' and 'armor texture pack' 
 
-### -not-lk (Not Like)
+### -not-lk (Not Like + Wildcards)
 
 ```
 v1/games?name-not-lk=dungeon
 ```
 
-Where the string supplied does not match the preceding column value. This is equivalent to SQL's `NOT LIKE`.
+Where the string supplied does not match the preceding column value. This is equivalent to SQL's `NOT LIKE`. Wildcard's `*` can be used as described above.
 
 - `?name-not-lk=dungeon` - Get all results where the `name` column value is not 'dungeon'.
 
-### -lk & -not-lk Wildcards
-
-```
-v1/games?name-lk=The Witcher*
-```
-
-```
-v1/games?name-lk=*Asset Pack
-```
-
-You can utilize the -lk wildcard value `*` to match more records. This is equivalent to SQL's `%`.
-
-- `?name-lk=The Witcher*` - Get all results where _The Witcher_ is succeeded by any value. This means the query would return results for 'The Witcher', 'The Witcher 2' and 'The Witcher 3'. 
-
-- `?name-lk=*Asset Pack` - Get all results where _Asset Pack_ is proceeded by any value. This means the query would return results for 'Armor Asset Pack', 'Weapon Asset Pack' and 'HD Asset Pack'. 
- 
 ### -in (In)
 
 ```
@@ -537,26 +527,6 @@ v1/games?game-min=20
 Where the preceding column value is greater than or equal to the value specified.
 
 - `?game-min=20` - Get all results where the `game` column is greater than or equal to 20.
-
-### -st (Smaller Than)
-
-```
-v1/games?modfile-st=200
-```
-
-Where the preceding column value is smaller than the value specified.
-
-- `?modfile-st=200` - Get all results where the `modfile` column is smaller than 200.
-
-### -gt (Greater Than)
-
-```
-v1/games?modfile-gt=600
-```
-
-Where the preceding column value is greater than the value specified.
-
-- `?modfile-gt=600` - Get all results where the `modfile` column is greater than 600.
 
 ### -bitwise-and (Bitwise AND)
 
@@ -657,8 +627,8 @@ __NOTE__: Localization for mod.io is currently a work-in-progress and thus not a
 
 ### Localized Requests
 
-Specific endpoints also allow you to submit fields in the mentioned supported languages above. To specify to the API you are submitting
-a non-english language you must supply the `Content-Language` header in the request that contains a valid language code (see above). When you supply the `Content-Language` header in your request, you are explicitly indicating to the API that all eligible fields have been translated into the supplied language and if a user (or client) requests the respective language, the value for that supplied field will be returned.
+Specific endpoints also allow you to submit fields in the supported languages above. To tell the API you are submitting
+non-english content you must supply the `Content-Language` header in the request with a valid language code (see above). When you supply the `Content-Language` header in your request, you are explicitly indicating to the API that all eligible fields have been translated into the supplied language and if a user (or client) requests the respective language, the value for that supplied field will be returned.
 
 A brief summary when dealing with localized requests and responses:
 
@@ -707,9 +677,9 @@ You should always plan to minimize requests and cache API responses. It will mak
 
 ## Testing
 
-To help familiarize yourself with the mod.io API and to ensure your implementation is battle-hardened and operating as intended, we have setup a test sandbox which is identical to the production environment. The test sandbox allows you to make requests to the API whilst your integration is a work in progress and the submitted data is not important. When you are ready to go live it's as easy as making sure your game's production profile and `api_key` is correct, and substituting the API test URL for the production URL. 
+To help familiarize yourself with the mod.io API and to ensure your implementation is battle-hardened and operating as intended, we have setup a test sandbox which is identical to the production environment. The test sandbox allows you to make requests to the API whilst your integration is a work in progress and the submitted data is not important. When you are ready to go live it's as easy as adding your game to the production environment, substituting the test API URL for the production API URL, and updating the `api_key` and `game_id` you are using to the values from your games profile on production. 
 
-To begin using the test sandbox you will need to [register a test account](https://test.mod.io/members/register) and [add your game](https://test.mod.io/games/add). You will see only games you are a team member of and there is no connection between the data added to the test environment and production. We highly recommend you use the test environment when integrating as it allows you to keep your development private, and you can submit as much dummy data as you need to try the functionality required, without having to clean it up at the end.
+To begin using the test sandbox you will need to [register a test account](https://test.mod.io/members/register) and [add your game](https://test.mod.io/games/add). You will only see games you are a team member of and there is no connection between the data added to the test environment and production. We highly recommend you use the test environment when integrating as it allows you to keep your development private, and you can submit as much dummy data as you need to try the functionality required, without having to clean it up at the end.
 
 __Test version:__ `v1`
 
@@ -721,15 +691,15 @@ __NOTE__: We periodically reset the test environment to default - with the excep
 
 ## Whitelabel
 
-If you are a large studio or publisher and require a private, in-house, custom solution that accelerates your time to market with a best-in-class product, reach out [developers@mod.io](mailto:developers@mod.io?subject=Whitelabel%20license) to discuss the licensing options available.
+If you are a large studio or publisher and require a private, in-house, custom solution that accelerates your time to market with a best-in-class product, reach out to [developers@mod.io](mailto:developers@mod.io?subject=Whitelabel%20license) to discuss the licensing options available.
 
 ## Contact
 
-If you spot any errors within the mod.io documentation, have feedback on how we can make it easier to follow or simply want to discuss how awesome mods are, feel free to reach out anytime to [developers@mod.io](mailto:developers@mod.io?subject=API) or come join us in our [discord channel](https://discord.mod.io). We are here to help you grow and maximise the potential of mods in your game.
+If you spot any errors within the mod.io documentation, have feedback on how we can make it easier to follow or simply want to discuss how awesome mods are, feel free to reach out to [developers@mod.io](mailto:developers@mod.io?subject=API) or come join us in our [discord channel](https://discord.mod.io). We are here to help you grow and maximise the potential of mods in your game.
 # Authentication
 ## Authenticate via Email
 
-To perform writes, you will need to authenticate your users via OAuth 2. To make this frictionless in-game, we offer an email verification system, similar to what Slack and others pioneered. It works by users supplying their email, which we send a time-limited 5 digit security code too. They exchange this code in-game, for an [OAuth 2 access token](https://mod.io/oauth/widget) you can save to authenticate future requests. The benefit of this approach is it avoids complex website redirects and doesn't require your users to complete a slow registration flow.
+To perform writes, you will need to authenticate your users via OAuth 2. To make this frictionless in-game, we offer an email verification system, similar to what Slack and others pioneered. It works by users supplying their email, which we send a time-limited 5 digit security code too. They exchange this code in-game, for an [OAuth 2 access token](https://mod.io/oauth/widget) you can save to authenticate future requests. The benefit of this approach is it avoids complex website redirects, doesn't require your users to complete a slow registration flow, and eliminates the need to store usernames / passwords.
 
 ![mod.io Email Authentication Flow](https://static.mod.io/v1/images/home/email.png)
 
@@ -806,6 +776,8 @@ If you do not exchange your `security_code` for an `access_token` within 15 minu
 **Step 3: Use access token to access resources**
 
 See [Making Requests](#making-requests) section.
+
+**HINT:** If you want to overlay the mod.io site in-game and you authenticate users via email, we recommend you add `?ref=email` to the end of the URL you open which will prompt the user to login via their email. See [Web Overlay Authentication](#web-overlay-authentication) for details.
 
 
 
@@ -1924,7 +1896,7 @@ Update details for a game. If you want to update the `icon`, `logo` or `header` 
     instructions_url|string||Link to a mod.io guide, your modding wiki or a page where modders can learn how to make and submit mods to your games profile.
     ugc_name|string||Word used to describe user-generated content (mods, items, addons etc).
     presentation_option|integer||Choose the presentation style you want on the mod.io website:<br><br>__0__ =  Grid View: Displays mods in a grid (visual but less informative, default setting) <br>__1__ = Table View: Displays mods in a table (easier to browse)
-    submission_option|integer||Choose the submission process you want modders to follow:<br><br>__0__ = Mods must be uploaded using your tools (recommended): You will have to build an upload system either in-game or via a standalone tool, which enables creators to submit mods to the tags you have configured. Because you control the flow you can pre-validate and compile mods, to ensure they will work in your game and attach metadata about what settings the mod can change. In the long run this option will save you time as you can accept more submissions, but it requires more setup to get running and isn't as open as the above option. __NOTE:__ mod profiles can still be [created online](https://mod.io/mods/add), but uploads will have to occur via the API using tools you create.<br><br>__1__ = Mods can be uploaded using the website: Allow developers to upload mods via the website and API, and pick the tags their mod is built for. No validation will be done on the files submitted, it will be the responsibility of your game and apps to process the mods installation based on the tags selected and determine if the mod is valid and works. For example a mod might be uploaded with the 'map' tag. When a user subscribes to this mod, your game will need to verify it contains a map file and install it where maps are located. If this fails, your game or the community will have to flag the mod as 'incompatible' to remove it from the listing.
+    submission_option|integer||Choose the submission process you want modders to follow:<br><br>__0__ = Mods must be uploaded using your tools (recommended): You will have to build an upload system either in-game or via a standalone tool, which enables creators to submit mods to the tags you have configured. Because you control the flow you can pre-validate and compile mods, to ensure they will work in your game and attach metadata about what settings the mod can change. In the long run this option will save you time as you can accept more submissions, but it requires more setup to get running and isn't as open as the above option. __NOTE:__ mod profiles can be edited online once created via your tools, but all uploads will have to occur via the API using tools you create.<br><br>__1__ = Mods can be uploaded using the website: Allow developers to upload mods via the website and API, and pick the tags their mod is built for. No validation will be done on the files submitted, it will be the responsibility of your game and apps to process the mods installation based on the tags selected and determine if the mod is valid and works. For example a mod might be uploaded with the 'map' tag. When a user subscribes to this mod, your game will need to verify it contains a map file and install it where maps are located. If this fails, your game or the community will have to flag the mod as 'incompatible' to remove it from the listing.
     curation_option|integer||Choose the curation process your team follows to approve mods:<br><br>__0__ = No curation (recommended): Mods are immediately available to play, without any intervention or work from your team.<br><br>__1__ = Paid curation: Screen only mods the creator wants to sell, before they are available to receive donations or be purchased via the API.<br><br>__2__ = Full curation: All mods must be accepted by someone on your team. This option is useful for games that have a small number of mods and want to control the experience, or you need to set the parameters attached to a mod (i.e. a weapon may require the rate of fire, power level, clip size etc). It can also be used for complex mods, which you may need to build into your game or distribute as DLC.
     community_options|integer||Choose the community features enabled on the mod.io website:<br><br>__0__ = All of the options below are disabled<br>__1__ = Enable comments<br>__2__ = Enable guides<br>__4__ = Disable website _"subscribe to install"_ text<br>__?__ = Add the options you want together, to enable multiple features (see [BITWISE fields](#bitwise-and-bitwise-and))
     revenue_options|integer||Choose the revenue capabilities mods can enable:<br><br>__0__ = All of the options below are disabled<br>__1__ = Allow mods to be sold<br>__2__ = Allow mods to receive donations<br>__4__ = Allow mods to be traded<br>__8__ = Allow mods to control supply and scarcity<br>__?__ = Add the options you want together, to enable multiple features (see [BITWISE fields](#bitwise-and-bitwise-and))
@@ -4770,267 +4742,6 @@ Status|Meaning|Description|Response Schema
 To perform this request, you must be authenticated via one of the following methods:
 <a href="#authentication">api_key</a>, <a href="#authentication">OAuth 2</a> (Scopes: read)
 </aside>
-# Stats
-
-## Get Mods Stats
-
-> Example request
-
-```shell
-# You can also use wget
-curl -X GET https://api.mod.io/v1/games/{game-id}/mods/stats?api_key=YourApiKey \
-  -H 'Accept: application/json'
-
-```
-
-```http
-GET https://api.mod.io/v1/games/{game-id}/mods/stats?api_key=YourApiKey HTTP/1.1
-Host: api.mod.io
-
-Accept: application/json
-
-```
-
-```javascript
-var headers = {
-  'Accept':'application/json'
-
-};
-
-$.ajax({
-  url: 'https://api.mod.io/v1/games/{game-id}/mods/stats',
-  method: 'get',
-  data: '?api_key=YourApiKey',
-  headers: headers,
-  success: function(data) {
-    console.log(JSON.stringify(data));
-  }
-})
-```
-
-```javascript--nodejs
-const request = require('node-fetch');
-
-const headers = {
-  'Accept':'application/json'
-
-};
-
-fetch('https://api.mod.io/v1/games/{game-id}/mods/stats?api_key=YourApiKey',
-{
-  method: 'GET',
-
-  headers: headers
-})
-.then(function(res) {
-    return res.json();
-}).then(function(body) {
-    console.log(body);
-});
-```
-
-```python
-import requests
-headers = {
-  'Accept': 'application/json'
-}
-
-r = requests.get('https://api.mod.io/v1/games/{game-id}/mods/stats', params={
-  'api_key': 'YourApiKey'
-}, headers = headers)
-
-print r.json()
-```
-
-```java
-URL obj = new URL("https://api.mod.io/v1/games/{game-id}/mods/stats?api_key=YourApiKey");
-HttpURLConnection con = (HttpURLConnection) obj.openConnection();
-con.setRequestMethod("GET");
-int responseCode = con.getResponseCode();
-BufferedReader in = new BufferedReader(
-    new InputStreamReader(con.getInputStream()));
-String inputLine;
-StringBuffer response = new StringBuffer();
-while ((inputLine = in.readLine()) != null) {
-    response.append(inputLine);
-}
-in.close();
-System.out.println(response.toString());
-```
-
-`GET /games/{game-id}/mods/stats`
-
-Get all mod stats for mods of the corresponding game. Successful request will return an array of [Stats Objects](#get-mod-stats).<br><br>__NOTE:__ We highly recommend you apply filters to this endpoint to get only the results you need. For more information regarding filtering please see the [filtering](#filtering) section.
-
-    Filter|Type|Description
-    ---|---|---
-    mod_id|integer|Unique id of the mod.
-    popularity_rank_position|integer|Current ranking by popularity for the corresponding mod.
-    popularity_rank_total_mods|integer|Global mod count in which `popularity_rank_position` is compared against.
-    downloads_total|integer|A sum of all modfile downloads for the corresponding mod.
-    subscribers_total|integer|A sum of all current subscribers for the corresponding mod.
-    ratings_positive|integer|Amount of positive ratings.
-    ratings_negative|integer|Amount of negative ratings.
-
-
-> Example response
-
-```json
-{
-  "data": [
-    {
-      "mod_id": 2,
-      "popularity_rank_position": 13,
-      "popularity_rank_total_mods": 204,
-      "downloads_total": 27492,
-      "subscribers_total": 16394,
-      "ratings_total": 1230,
-      "ratings_positive": 1047,
-      "ratings_negative": 183,
-      "ratings_percentage_positive": 91,
-      "ratings_weighted_aggregate": 87.38,
-      "ratings_display_text": "Very Positive",
-      "date_expires": 1492564103
-    },
-    {
-        ...
-    }
-  ],
-  "result_count": 70,
-  "result_offset": 0,
-  "result_limit": 100,
-  "result_total": 70
-}
-```
-<h3 id="Get-Mods-Stats-responses">Responses</h3>
-
-Status|Meaning|Description|Response Schema
----|---|---|---|
-200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)|Successful Request|[Get Mod Stats](#schemaget_mod_stats)
-
-<aside class="auth-notice">
-To perform this request, you must be authenticated via one of the following methods:
-<a href="#authentication">api_key</a>, <a href="#authentication">OAuth 2</a> (Scopes: read)
-</aside>
-## Get Mod Stats
-
-> Example request
-
-```shell
-# You can also use wget
-curl -X GET https://api.mod.io/v1/games/{game-id}/mods/{mod-id}/stats?api_key=YourApiKey \
-  -H 'Accept: application/json'
-
-```
-
-```http
-GET https://api.mod.io/v1/games/{game-id}/mods/{mod-id}/stats?api_key=YourApiKey HTTP/1.1
-Host: api.mod.io
-
-Accept: application/json
-
-```
-
-```javascript
-var headers = {
-  'Accept':'application/json'
-
-};
-
-$.ajax({
-  url: 'https://api.mod.io/v1/games/{game-id}/mods/{mod-id}/stats',
-  method: 'get',
-  data: '?api_key=YourApiKey',
-  headers: headers,
-  success: function(data) {
-    console.log(JSON.stringify(data));
-  }
-})
-```
-
-```javascript--nodejs
-const request = require('node-fetch');
-
-const headers = {
-  'Accept':'application/json'
-
-};
-
-fetch('https://api.mod.io/v1/games/{game-id}/mods/{mod-id}/stats?api_key=YourApiKey',
-{
-  method: 'GET',
-
-  headers: headers
-})
-.then(function(res) {
-    return res.json();
-}).then(function(body) {
-    console.log(body);
-});
-```
-
-```python
-import requests
-headers = {
-  'Accept': 'application/json'
-}
-
-r = requests.get('https://api.mod.io/v1/games/{game-id}/mods/{mod-id}/stats', params={
-  'api_key': 'YourApiKey'
-}, headers = headers)
-
-print r.json()
-```
-
-```java
-URL obj = new URL("https://api.mod.io/v1/games/{game-id}/mods/{mod-id}/stats?api_key=YourApiKey");
-HttpURLConnection con = (HttpURLConnection) obj.openConnection();
-con.setRequestMethod("GET");
-int responseCode = con.getResponseCode();
-BufferedReader in = new BufferedReader(
-    new InputStreamReader(con.getInputStream()));
-String inputLine;
-StringBuffer response = new StringBuffer();
-while ((inputLine = in.readLine()) != null) {
-    response.append(inputLine);
-}
-in.close();
-System.out.println(response.toString());
-```
-
-`GET /games/{game-id}/mods/{mod-id}/stats`
-
-Get mod stats for the corresponding mod. Successful request will return a single [Stats Object](#stats-object).
-
-
-> Example response
-
-```json
-{
-  "mod_id": 2,
-  "popularity_rank_position": 13,
-  "popularity_rank_total_mods": 204,
-  "downloads_total": 27492,
-  "subscribers_total": 16394,
-  "ratings_total": 1230,
-  "ratings_positive": 1047,
-  "ratings_negative": 183,
-  "ratings_percentage_positive": 91,
-  "ratings_weighted_aggregate": 87.38,
-  "ratings_display_text": "Very Positive",
-  "date_expires": 1492564103
-}
-```
-<h3 id="Get-Mod-Stats-responses">Responses</h3>
-
-Status|Meaning|Description|Response Schema
----|---|---|---|
-200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)|Successful Request|[Stats Object](#schemastats_object)
-
-<aside class="auth-notice">
-To perform this request, you must be authenticated via one of the following methods:
-<a href="#authentication">api_key</a>, <a href="#authentication">OAuth 2</a> (Scopes: read)
-</aside>
 # Tags
 
 ## Get Mod Tags
@@ -5278,7 +4989,7 @@ Add tags to a mod's profile. You can only add tags allowed by the parent game, w
 
 Status|Meaning|Description|Response Schema
 ---|---|---|---|
-201|[Created](https://tools.ietf.org/html/rfc7231#section-6.3.2)|Created|[Message Object](#message-object)
+201|[Created](https://tools.ietf.org/html/rfc7231#section-6.3.2)|Created|[addModTag](#schemaaddmodtag)
 
 ### Response Headers
 
@@ -7326,6 +7037,7 @@ Get all comments posted in the mods profile. Successful request will return an a
      ---|---|---
      id|integer|Unique id of the comment.
      mod_id|integer|Unique id of the mod.
+     submitted_by|integer|Unique id of the user who posted the comment.
      date_added|integer|Unix timestamp of date comment was posted.
      reply_id|integer|Id of the parent comment this comment is replying to (can be 0 if the comment is not a reply).
      thread_position|string|Levels of nesting in a comment thread. You should order by this field, to maintain comment grouping. How it works:<br><br>- The first comment will have the position '01'.<br>- The second comment will have the position '02'.<br>- If someone responds to the second comment the position will be '02.01'.<br>- A maximum of 3 levels is supported.
@@ -9453,7 +9165,7 @@ System.out.println(response.toString());
 
 `GET /me/ratings`
 
-Get all mod rating's submitted by the _authenticated user_. Successful request will return an array of [Rating Objects](#get-user-ratings-2).
+Get all mod rating's submitted by the _authenticated user_. Successful request will return an array of [Rating Objects](#get-user-ratings).
 
     Filter|Type|Description
     ---|---|---
@@ -9493,6 +9205,381 @@ Status|Meaning|Description|Response Schema
 <aside class="auth-notice">
 To perform this request, you must be authenticated via one of the following methods:
 <a href="#authentication">OAuth 2</a> (Scopes: read)
+</aside>
+# Stats
+
+## Get Mods Stats
+
+> Example request
+
+```shell
+# You can also use wget
+curl -X GET https://api.mod.io/v1/games/{game-id}/mods/stats?api_key=YourApiKey \
+  -H 'Accept: application/json'
+
+```
+
+```http
+GET https://api.mod.io/v1/games/{game-id}/mods/stats?api_key=YourApiKey HTTP/1.1
+Host: api.mod.io
+
+Accept: application/json
+
+```
+
+```javascript
+var headers = {
+  'Accept':'application/json'
+
+};
+
+$.ajax({
+  url: 'https://api.mod.io/v1/games/{game-id}/mods/stats',
+  method: 'get',
+  data: '?api_key=YourApiKey',
+  headers: headers,
+  success: function(data) {
+    console.log(JSON.stringify(data));
+  }
+})
+```
+
+```javascript--nodejs
+const request = require('node-fetch');
+
+const headers = {
+  'Accept':'application/json'
+
+};
+
+fetch('https://api.mod.io/v1/games/{game-id}/mods/stats?api_key=YourApiKey',
+{
+  method: 'GET',
+
+  headers: headers
+})
+.then(function(res) {
+    return res.json();
+}).then(function(body) {
+    console.log(body);
+});
+```
+
+```python
+import requests
+headers = {
+  'Accept': 'application/json'
+}
+
+r = requests.get('https://api.mod.io/v1/games/{game-id}/mods/stats', params={
+  'api_key': 'YourApiKey'
+}, headers = headers)
+
+print r.json()
+```
+
+```java
+URL obj = new URL("https://api.mod.io/v1/games/{game-id}/mods/stats?api_key=YourApiKey");
+HttpURLConnection con = (HttpURLConnection) obj.openConnection();
+con.setRequestMethod("GET");
+int responseCode = con.getResponseCode();
+BufferedReader in = new BufferedReader(
+    new InputStreamReader(con.getInputStream()));
+String inputLine;
+StringBuffer response = new StringBuffer();
+while ((inputLine = in.readLine()) != null) {
+    response.append(inputLine);
+}
+in.close();
+System.out.println(response.toString());
+```
+
+`GET /games/{game-id}/mods/stats`
+
+Get all mod stats for mods of the corresponding game. Successful request will return an array of [Mod Stats Objects](#get-mod-stats).<br><br>__NOTE:__ We highly recommend you apply filters to this endpoint to get only the results you need. For more information regarding filtering please see the [filtering](#filtering) section.
+
+    Filter|Type|Description
+    ---|---|---
+    mod_id|integer|Unique id of the mod.
+    popularity_rank_position|integer|Current ranking by popularity for the corresponding mod.
+    popularity_rank_total_mods|integer|Global mod count in which `popularity_rank_position` is compared against.
+    downloads_total|integer|A sum of all modfile downloads for the corresponding mod.
+    subscribers_total|integer|A sum of all current subscribers for the corresponding mod.
+    ratings_positive|integer|Amount of positive ratings.
+    ratings_negative|integer|Amount of negative ratings.
+
+
+> Example response
+
+```json
+{
+  "data": [
+    {
+      "mod_id": 2,
+      "popularity_rank_position": 13,
+      "popularity_rank_total_mods": 204,
+      "downloads_total": 27492,
+      "subscribers_total": 16394,
+      "ratings_total": 1230,
+      "ratings_positive": 1047,
+      "ratings_negative": 183,
+      "ratings_percentage_positive": 91,
+      "ratings_weighted_aggregate": 87.38,
+      "ratings_display_text": "Very Positive",
+      "date_expires": 1492564103
+    },
+    {
+        ...
+    }
+  ],
+  "result_count": 70,
+  "result_offset": 0,
+  "result_limit": 100,
+  "result_total": 70
+}
+```
+<h3 id="Get-Mods-Stats-responses">Responses</h3>
+
+Status|Meaning|Description|Response Schema
+---|---|---|---|
+200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)|Successful Request|[Get Mod Stats](#schemaget_mod_stats)
+
+<aside class="auth-notice">
+To perform this request, you must be authenticated via one of the following methods:
+<a href="#authentication">api_key</a>, <a href="#authentication">OAuth 2</a> (Scopes: read)
+</aside>
+## Get Mod Stats
+
+> Example request
+
+```shell
+# You can also use wget
+curl -X GET https://api.mod.io/v1/games/{game-id}/mods/{mod-id}/stats?api_key=YourApiKey \
+  -H 'Accept: application/json'
+
+```
+
+```http
+GET https://api.mod.io/v1/games/{game-id}/mods/{mod-id}/stats?api_key=YourApiKey HTTP/1.1
+Host: api.mod.io
+
+Accept: application/json
+
+```
+
+```javascript
+var headers = {
+  'Accept':'application/json'
+
+};
+
+$.ajax({
+  url: 'https://api.mod.io/v1/games/{game-id}/mods/{mod-id}/stats',
+  method: 'get',
+  data: '?api_key=YourApiKey',
+  headers: headers,
+  success: function(data) {
+    console.log(JSON.stringify(data));
+  }
+})
+```
+
+```javascript--nodejs
+const request = require('node-fetch');
+
+const headers = {
+  'Accept':'application/json'
+
+};
+
+fetch('https://api.mod.io/v1/games/{game-id}/mods/{mod-id}/stats?api_key=YourApiKey',
+{
+  method: 'GET',
+
+  headers: headers
+})
+.then(function(res) {
+    return res.json();
+}).then(function(body) {
+    console.log(body);
+});
+```
+
+```python
+import requests
+headers = {
+  'Accept': 'application/json'
+}
+
+r = requests.get('https://api.mod.io/v1/games/{game-id}/mods/{mod-id}/stats', params={
+  'api_key': 'YourApiKey'
+}, headers = headers)
+
+print r.json()
+```
+
+```java
+URL obj = new URL("https://api.mod.io/v1/games/{game-id}/mods/{mod-id}/stats?api_key=YourApiKey");
+HttpURLConnection con = (HttpURLConnection) obj.openConnection();
+con.setRequestMethod("GET");
+int responseCode = con.getResponseCode();
+BufferedReader in = new BufferedReader(
+    new InputStreamReader(con.getInputStream()));
+String inputLine;
+StringBuffer response = new StringBuffer();
+while ((inputLine = in.readLine()) != null) {
+    response.append(inputLine);
+}
+in.close();
+System.out.println(response.toString());
+```
+
+`GET /games/{game-id}/mods/{mod-id}/stats`
+
+Get mod stats for the corresponding mod. Successful request will return a single [Mod Stats Object](#mod-stats-object).
+
+
+> Example response
+
+```json
+{
+  "mod_id": 2,
+  "popularity_rank_position": 13,
+  "popularity_rank_total_mods": 204,
+  "downloads_total": 27492,
+  "subscribers_total": 16394,
+  "ratings_total": 1230,
+  "ratings_positive": 1047,
+  "ratings_negative": 183,
+  "ratings_percentage_positive": 91,
+  "ratings_weighted_aggregate": 87.38,
+  "ratings_display_text": "Very Positive",
+  "date_expires": 1492564103
+}
+```
+<h3 id="Get-Mod-Stats-responses">Responses</h3>
+
+Status|Meaning|Description|Response Schema
+---|---|---|---|
+200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)|Successful Request|[Mod Stats Object](#schemamod_stats_object)
+
+<aside class="auth-notice">
+To perform this request, you must be authenticated via one of the following methods:
+<a href="#authentication">api_key</a>, <a href="#authentication">OAuth 2</a> (Scopes: read)
+</aside>
+## Get Game Stats
+
+> Example request
+
+```shell
+# You can also use wget
+curl -X GET https://api.mod.io/v1/games/{game-id}/stats?api_key=YourApiKey \
+  -H 'Accept: application/json'
+
+```
+
+```http
+GET https://api.mod.io/v1/games/{game-id}/stats?api_key=YourApiKey HTTP/1.1
+Host: api.mod.io
+
+Accept: application/json
+
+```
+
+```javascript
+var headers = {
+  'Accept':'application/json'
+
+};
+
+$.ajax({
+  url: 'https://api.mod.io/v1/games/{game-id}/stats',
+  method: 'get',
+  data: '?api_key=YourApiKey',
+  headers: headers,
+  success: function(data) {
+    console.log(JSON.stringify(data));
+  }
+})
+```
+
+```javascript--nodejs
+const request = require('node-fetch');
+
+const headers = {
+  'Accept':'application/json'
+
+};
+
+fetch('https://api.mod.io/v1/games/{game-id}/stats?api_key=YourApiKey',
+{
+  method: 'GET',
+
+  headers: headers
+})
+.then(function(res) {
+    return res.json();
+}).then(function(body) {
+    console.log(body);
+});
+```
+
+```python
+import requests
+headers = {
+  'Accept': 'application/json'
+}
+
+r = requests.get('https://api.mod.io/v1/games/{game-id}/stats', params={
+  'api_key': 'YourApiKey'
+}, headers = headers)
+
+print r.json()
+```
+
+```java
+URL obj = new URL("https://api.mod.io/v1/games/{game-id}/stats?api_key=YourApiKey");
+HttpURLConnection con = (HttpURLConnection) obj.openConnection();
+con.setRequestMethod("GET");
+int responseCode = con.getResponseCode();
+BufferedReader in = new BufferedReader(
+    new InputStreamReader(con.getInputStream()));
+String inputLine;
+StringBuffer response = new StringBuffer();
+while ((inputLine = in.readLine()) != null) {
+    response.append(inputLine);
+}
+in.close();
+System.out.println(response.toString());
+```
+
+`GET /games/{game-id}/stats`
+
+Get stats for the corresponding game. Successful request will return a single [Game Stats Object](#game-stats-object).
+
+
+> Example response
+
+```json
+{
+  "game_id": 2,
+  "mods_count_total": 13,
+  "mods_downloads_today": 204,
+  "mods_downloads_total": 27492,
+  "mods_downloads_daily_average": 1230,
+  "mods_subscribers_total": 16394,
+  "date_expires": 1492564103
+}
+```
+<h3 id="Get-Game-Stats-responses">Responses</h3>
+
+Status|Meaning|Description|Response Schema
+---|---|---|---|
+200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)|Successful Request|[Game Stats Object](#schemagame_stats_object)
+
+<aside class="auth-notice">
+To perform this request, you must be authenticated via one of the following methods:
+<a href="#authentication">api_key</a>, <a href="#authentication">OAuth 2</a> (Scopes: read)
 </aside>
 # Response Schemas 
 ## Access Token Object  
@@ -9724,7 +9811,7 @@ data|[Mod Object](#schemamod_object)[]|Contains Mod Objects.
 »» download|[Download Object](#schemadownload_object)|Contains download data.
 »»» binary_url|string|URL to download the file from the mod.io CDN.<br><br>__NOTE:__ If the [game](#edit-game) requires mod downloads to be initiated via the API, the `binary_url` returned will contain a verification hash. This hash must be supplied to get the modfile, and will expire after a certain period of time. Saving and reusing the `binary_url` won't work in this situation given it's dynamic nature.
 »»» date_expires|integer|Unix timestamp of when the `binary_url` will expire.
-» stats|[Stats Object](#schemastats_object)|Contains stats data.
+» stats|[Mod Stats Object](#schemamod_stats_object)|Contains stats data.
 »» mod_id|integer|Unique mod id.
 »» popularity_rank_position|integer|Current rank of the mod.
 »» popularity_rank_total_mods|integer|Number of ranking spots the current rank is measured against.
@@ -9937,7 +10024,7 @@ body|[Batch Body Object](#schemabatch_body_object)|Contains batch request data.
 »»» download|[Download Object](#schemadownload_object)|Contains download data.
 »»»» binary_url|string|URL to download the file from the mod.io CDN.<br><br>__NOTE:__ If the [game](#edit-game) requires mod downloads to be initiated via the API, the `binary_url` returned will contain a verification hash. This hash must be supplied to get the modfile, and will expire after a certain period of time. Saving and reusing the `binary_url` won't work in this situation given it's dynamic nature.
 »»»» date_expires|integer|Unix timestamp of when the `binary_url` will expire.
-»» stats|[Stats Object](#schemastats_object)|Contains stats data.
+»» stats|[Mod Stats Object](#schemamod_stats_object)|Contains stats data.
 »»» mod_id|integer|Unique mod id.
 »»» popularity_rank_position|integer|Current rank of the mod.
 »»» popularity_rank_total_mods|integer|Number of ranking spots the current rank is measured against.
@@ -10222,6 +10309,38 @@ tag_options|[Game Tag Option Object](#schemagame_tag_option_object)[]|Groups of 
 » type|string|Can multiple tags be selected via 'checkboxes' or should only a single tag be selected via a 'dropdown'.
 » hidden|boolean|Groups of tags flagged as 'admin only' should only be used for filtering, and should not be displayed to users. Groups that are hidden will only be returned in a response if the authenticated user in the request is a team member of the parent game with `Manager` or `Administrator` privileges.
 » tags|string[]|Array of tags in this group.
+
+
+
+
+## Game Stats Object  
+
+<a name="schemagame_stats_object"></a>
+
+```json
+{
+  "game_id": 2,
+  "mods_count_total": 13,
+  "mods_downloads_today": 204,
+  "mods_downloads_total": 27492,
+  "mods_downloads_daily_average": 1230,
+  "mods_subscribers_total": 16394,
+  "date_expires": 1492564103
+} 
+```
+
+
+### Properties
+
+Name|Type|Description
+---|---|---|---|
+game_id|integer|Unique game id.
+mods_count_total|integer|Available mod count for the corresponding game.
+mods_downloads_today|integer|Mods downloaded today for the corresponding game.
+mods_downloads_total|integer|Total mods downloaded for the corresponding game.
+mods_downloads_daily_average|integer|Average mods downloaded on a daily basis for the corresponding game.
+mods_subscribers_total|integer|Number of total users who have subscribed to mods for corresponding game.
+date_expires|integer|Unix timestamp until this game's statistics are considered stale.
 
 
 
@@ -10681,7 +10800,7 @@ result_total|integer|Total number of results found.
 
 Name|Type|Description
 ---|---|---|---|
-data|[Stats Object](#schemastats_object)[]|Array containing stats objects.
+data|[Mod Stats Object](#schemamod_stats_object)[]|Array containing stats objects.
 » mod_id|integer|Unique mod id.
 » popularity_rank_position|integer|Current rank of the mod.
 » popularity_rank_total_mods|integer|Number of ranking spots the current rank is measured against.
@@ -10996,7 +11115,7 @@ data|[Mod Object](#schemamod_object)[]|Array containing mod objects.
 »» download|[Download Object](#schemadownload_object)|Contains download data.
 »»» binary_url|string|URL to download the file from the mod.io CDN.<br><br>__NOTE:__ If the [game](#edit-game) requires mod downloads to be initiated via the API, the `binary_url` returned will contain a verification hash. This hash must be supplied to get the modfile, and will expire after a certain period of time. Saving and reusing the `binary_url` won't work in this situation given it's dynamic nature.
 »»» date_expires|integer|Unix timestamp of when the `binary_url` will expire.
-» stats|[Stats Object](#schemastats_object)|Contains stats data.
+» stats|[Mod Stats Object](#schemamod_stats_object)|Contains stats data.
 »» mod_id|integer|Unique mod id.
 »» popularity_rank_position|integer|Current rank of the mod.
 »» popularity_rank_total_mods|integer|Number of ranking spots the current rank is measured against.
@@ -11507,7 +11626,7 @@ data|[Batch Object](#schemabatch_object)[]|Array containing any response object.
 »»»» download|[Download Object](#schemadownload_object)|Contains download data.
 »»»»» binary_url|string|URL to download the file from the mod.io CDN.<br><br>__NOTE:__ If the [game](#edit-game) requires mod downloads to be initiated via the API, the `binary_url` returned will contain a verification hash. This hash must be supplied to get the modfile, and will expire after a certain period of time. Saving and reusing the `binary_url` won't work in this situation given it's dynamic nature.
 »»»»» date_expires|integer|Unix timestamp of when the `binary_url` will expire.
-»»» stats|[Stats Object](#schemastats_object)|Contains stats data.
+»»» stats|[Mod Stats Object](#schemamod_stats_object)|Contains stats data.
 »»»» mod_id|integer|Unique mod id.
 »»»» popularity_rank_position|integer|Current rank of the mod.
 »»»» popularity_rank_total_mods|integer|Number of ranking spots the current rank is measured against.
@@ -11842,7 +11961,7 @@ modfile|[Modfile Object](#schemamodfile_object)|Contains modfile data.
 » download|[Download Object](#schemadownload_object)|Contains download data.
 »» binary_url|string|URL to download the file from the mod.io CDN.<br><br>__NOTE:__ If the [game](#edit-game) requires mod downloads to be initiated via the API, the `binary_url` returned will contain a verification hash. This hash must be supplied to get the modfile, and will expire after a certain period of time. Saving and reusing the `binary_url` won't work in this situation given it's dynamic nature.
 »» date_expires|integer|Unix timestamp of when the `binary_url` will expire.
-stats|[Stats Object](#schemastats_object)|Contains stats data.
+stats|[Mod Stats Object](#schemamod_stats_object)|Contains stats data.
 » mod_id|integer|Unique mod id.
 » popularity_rank_position|integer|Current rank of the mod.
 » popularity_rank_total_mods|integer|Number of ranking spots the current rank is measured against.
@@ -11861,6 +11980,48 @@ metadata_kvp|[Metadata KVP Object](#schemametadata_kvp_object)[]|Contains key-va
 tags|[Mod Tag Object](#schemamod_tag_object)[]|Contains mod tag data.
 » name|string|Tag name.
 » date_added|integer|Unix timestamp of date tag was applied.
+
+
+
+
+## Mod Stats Object  
+
+<a name="schemamod_stats_object"></a>
+
+```json
+{
+  "mod_id": 2,
+  "popularity_rank_position": 13,
+  "popularity_rank_total_mods": 204,
+  "downloads_total": 27492,
+  "subscribers_total": 16394,
+  "ratings_total": 1230,
+  "ratings_positive": 1047,
+  "ratings_negative": 183,
+  "ratings_percentage_positive": 91,
+  "ratings_weighted_aggregate": 87.38,
+  "ratings_display_text": "Very Positive",
+  "date_expires": 1492564103
+} 
+```
+
+
+### Properties
+
+Name|Type|Description
+---|---|---|---|
+mod_id|integer|Unique mod id.
+popularity_rank_position|integer|Current rank of the mod.
+popularity_rank_total_mods|integer|Number of ranking spots the current rank is measured against.
+downloads_total|integer|Number of total mod downloads.
+subscribers_total|integer|Number of total users who have subscribed to the mod.
+ratings_total|integer|Number of times this mod has been rated.
+ratings_positive|integer|Number of positive ratings.
+ratings_negative|integer|Number of negative ratings.
+ratings_percentage_positive|integer|Number of positive ratings, divided by the total ratings to determine it’s percentage score.
+ratings_weighted_aggregate|float|Overall rating of this item calculated using the [Wilson score confidence interval](https://www.evanmiller.org/how-not-to-sort-by-average-rating.html). This column is good to sort on, as it will order items based on number of ratings and will place items with many positive ratings above those with a higher score but fewer ratings.
+ratings_display_text|string|Textual representation of the rating in format:<br><br>- Overwhelmingly Positive<br>- Very Positive<br>- Positive<br>- Mostly Positive<br>- Mixed<br>- Negative<br>- Mostly Negative<br>- Very Negative<br>- Overwhelmingly Negative<br>- Unrated
+date_expires|integer|Unix timestamp until this mods's statistics are considered stale.
 
 
 
@@ -11963,48 +12124,6 @@ game_id|integer|Unique game id.
 mod_id|integer|Unique mod id.
 rating|integer|Mod rating value.<br><br>__1__ = Positive Rating<br>__-1__ = Negative Rating
 date_added|integer|Unix timestamp of date rating was submitted.
-
-
-
-
-## Stats Object
-
-   <a name="schemastats_object"></a>
-
-```json
-{
-  "mod_id": 2,
-  "popularity_rank_position": 13,
-  "popularity_rank_total_mods": 204,
-  "downloads_total": 27492,
-  "subscribers_total": 16394,
-  "ratings_total": 1230,
-  "ratings_positive": 1047,
-  "ratings_negative": 183,
-  "ratings_percentage_positive": 91,
-  "ratings_weighted_aggregate": 87.38,
-  "ratings_display_text": "Very Positive",
-  "date_expires": 1492564103
-} 
-```
-
-
-### Properties
-
-Name|Type|Description
----|---|---|---|
-mod_id|integer|Unique mod id.
-popularity_rank_position|integer|Current rank of the mod.
-popularity_rank_total_mods|integer|Number of ranking spots the current rank is measured against.
-downloads_total|integer|Number of total mod downloads.
-subscribers_total|integer|Number of total users who have subscribed to the mod.
-ratings_total|integer|Number of times this mod has been rated.
-ratings_positive|integer|Number of positive ratings.
-ratings_negative|integer|Number of negative ratings.
-ratings_percentage_positive|integer|Number of positive ratings, divided by the total ratings to determine it’s percentage score.
-ratings_weighted_aggregate|float|Overall rating of this item calculated using the [Wilson score confidence interval](https://www.evanmiller.org/how-not-to-sort-by-average-rating.html). This column is good to sort on, as it will order items based on number of ratings and will place items with many positive ratings above those with a higher score but fewer ratings.
-ratings_display_text|string|Textual representation of the rating in format:<br><br>- Overwhelmingly Positive<br>- Very Positive<br>- Positive<br>- Mostly Positive<br>- Mixed<br>- Negative<br>- Mostly Negative<br>- Very Negative<br>- Overwhelmingly Negative<br>- Unrated
-date_expires|integer|Unix timestamp until this mods's statistics are considered stale.
 
 
 

@@ -737,7 +737,7 @@ X-RateLimit-Remaining: 87
 
 ### OAuth2 Rate Limiting
 
-- Users tokens are limited to __120 requests per minute__. 
+- Users tokens are limited to __60 requests per minute__. 
 
 ### Headers
 
