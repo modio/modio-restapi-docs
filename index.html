@@ -304,10 +304,13 @@
                     <a href="#making-requests" class="toc-h2 toc-link" data-title="Getting Started">Making Requests</a>
                   </li>
                   <li>
+                    <a href="#response-codes" class="toc-h2 toc-link" data-title="Getting Started">Response Codes</a>
+                  </li>
+                  <li>
                     <a href="#errors" class="toc-h2 toc-link" data-title="Getting Started">Errors</a>
                   </li>
                   <li>
-                    <a href="#response-codes" class="toc-h2 toc-link" data-title="Getting Started">Response Codes</a>
+                    <a href="#error-codes" class="toc-h2 toc-link" data-title="Getting Started">Error Codes</a>
                   </li>
                   <li>
                     <a href="#response-formats" class="toc-h2 toc-link" data-title="Getting Started">Response Formats</a>
@@ -458,20 +461,6 @@
               </ul>
           </li>
           <li>
-            <a href="#stats" class="toc-h1 toc-link" data-title="Stats"><span class="reficon"><img src="https://static.mod.io/v1/images/branding/modio-icon-light.svg" alt="Reference" class="menu-reference-icon"></span> Stats</a>
-              <ul class="toc-list-h2">
-                  <li>
-                    <a href="#get-mods-stats" class="toc-h2 toc-link" data-title="Stats">Get Mods Stats</a>
-                  </li>
-                  <li>
-                    <a href="#get-mod-stats" class="toc-h2 toc-link" data-title="Stats">Get Mod Stats</a>
-                  </li>
-                  <li>
-                    <a href="#get-game-stats" class="toc-h2 toc-link" data-title="Stats">Get Game Stats</a>
-                  </li>
-              </ul>
-          </li>
-          <li>
             <a href="#tags" class="toc-h1 toc-link" data-title="Tags"><span class="reficon"><img src="https://static.mod.io/v1/images/branding/modio-icon-light.svg" alt="Reference" class="menu-reference-icon"></span> Tags</a>
               <ul class="toc-list-h2">
                   <li>
@@ -608,6 +597,20 @@
                   </li>
                   <li>
                     <a href="#get-user-ratings" class="toc-h2 toc-link" data-title="Me">Get User Ratings</a>
+                  </li>
+              </ul>
+          </li>
+          <li>
+            <a href="#stats" class="toc-h1 toc-link" data-title="Stats"><span class="reficon"><img src="https://static.mod.io/v1/images/branding/modio-icon-light.svg" alt="Reference" class="menu-reference-icon"></span> Stats</a>
+              <ul class="toc-list-h2">
+                  <li>
+                    <a href="#get-mods-stats" class="toc-h2 toc-link" data-title="Stats">Get Mods Stats</a>
+                  </li>
+                  <li>
+                    <a href="#get-mod-stats" class="toc-h2 toc-link" data-title="Stats">Get Mod Stats</a>
+                  </li>
+                  <li>
+                    <a href="#get-game-stats" class="toc-h2 toc-link" data-title="Stats">Get Game Stats</a>
                   </li>
               </ul>
           </li>
@@ -1006,29 +1009,6 @@ curl -X POST https://api.mod.io/v1/games/1/team <span class="se">\</span>
 <p><strong>NOTE:</strong> If you supply identical key-value pairs as a request parameter and also as a parameter in your JSON object, the JSON object will take priority.</p>
 <h3 id="response-content-type">Response Content-Type</h3>
 <p>Responses will <strong>always</strong> be returned in <code>application/json</code> format.</p>
-<h2 id="errors">Errors</h2><pre class="highlight json tab-json"><code><span class="err">//</span><span class="w"> </span><span class="err">Error</span><span class="w"> </span><span class="err">object</span><span class="w">
-
-</span><span class="s2">"error"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-    </span><span class="s2">"code"</span><span class="p">:</span><span class="w"> </span><span class="mi">403</span><span class="p">,</span><span class="w">
-    </span><span class="s2">"message"</span><span class="p">:</span><span class="w"> </span><span class="s2">"You do not have the required permissions to access this resource."</span><span class="w">
-</span><span class="p">}</span><span class="w">
-</span></code></pre>
-<p>If an error occurs, mod.io returns an error object with the HTTP <code>code</code> and <code>message</code> to describe what happened and when possible how to avoid repeating the error. It's important to know that if you encounter errors that are not server errors (<code>500</code>+ codes) - you should review the error message before continuing to send requests to the endpoint.</p>
-
-<p>When requests contain invalid input data or query parameters (for filtering), an optional field object called <code>errors</code> can be supplied inside the <code>error</code> object, which contains a list of the invalid inputs. The nested <code>errors</code> object is only supplied with <code>422 Unprocessable Entity</code> responses. Be sure to review the <a href="#response-codes">Response Codes</a> to be aware of the HTTP codes that the mod.io API returns.</p>
-<pre class="highlight json tab-json"><code><span class="err">//</span><span class="w"> </span><span class="err">Error</span><span class="w"> </span><span class="err">object</span><span class="w"> </span><span class="err">with</span><span class="w"> </span><span class="err">input</span><span class="w"> </span><span class="err">errors</span><span class="w">
-
-</span><span class="s2">"error"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-    </span><span class="s2">"code"</span><span class="p">:</span><span class="w"> </span><span class="mi">422</span><span class="p">,</span><span class="w">
-    </span><span class="s2">"message"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Validation Failed. Please see below to fix invalid input."</span><span class="p">,</span><span class="w">
-    </span><span class="s2">"errors"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-        </span><span class="s2">"member"</span><span class="p">:</span><span class="s2">"The user_id value must be an integer."</span><span class="p">,</span><span class="w">
-        </span><span class="s2">"name"</span><span class="p">:</span><span class="s2">"The name may not be greater than 80 characters."</span><span class="w">
-    </span><span class="p">}</span><span class="w">
-</span><span class="p">}</span><span class="w">
-
-</span></code></pre>
-<p>Remember that <a href="#rate-limiting">Rate Limiting</a> applies whether an error is returned or not, so to avoid exceeding your daily quota be sure to always investigate error messages - instead of continually retrying.</p>
 <h2 id="response-codes">Response Codes</h2>
 <p>Here is a list of the most common HTTP response codes you will see while using the API.</p>
 
@@ -1095,6 +1075,162 @@ curl -X POST https://api.mod.io/v1/games/1/team <span class="se">\</span>
 <tr>
 <td><code>503</code></td>
 <td>Service Unavailable -- We're temporarily offline for maintenance. Please try again later. (rare)</td>
+</tr>
+</tbody>
+</table>
+<h2 id="errors">Errors</h2><pre class="highlight json tab-json"><code><span class="err">//</span><span class="w"> </span><span class="err">Error</span><span class="w"> </span><span class="err">object</span><span class="w">
+
+</span><span class="s2">"error"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+    </span><span class="s2">"code"</span><span class="p">:</span><span class="w"> </span><span class="mi">403</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"error_ref"</span><span class="p">:</span><span class="w"> </span><span class="s2">"15024"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"message"</span><span class="p">:</span><span class="w"> </span><span class="s2">"You do not have the required permissions to access this resource."</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre>
+<p>If an error occurs, mod.io returns an error object with the HTTP <code>code</code>, <code>error_ref</code> and <code>message</code> to describe what happened and when possible how to avoid repeating the error. It's important to know that if you encounter errors that are not server errors (<code>500</code>+ codes) - you should review the error message before continuing to send requests to the endpoint.</p>
+
+<p>When requests contain invalid input data or query parameters (for filtering), an optional field object called <code>errors</code> can be supplied inside the <code>error</code> object, which contains a list of the invalid inputs. The nested <code>errors</code> object is only supplied with <code>422 Unprocessable Entity</code> responses. Be sure to review the <a href="#response-codes">Response Codes</a> to be aware of the HTTP codes that the mod.io API returns.</p>
+<pre class="highlight json tab-json"><code><span class="err">//</span><span class="w"> </span><span class="err">Error</span><span class="w"> </span><span class="err">object</span><span class="w"> </span><span class="err">with</span><span class="w"> </span><span class="err">input</span><span class="w"> </span><span class="err">errors</span><span class="w">
+
+</span><span class="s2">"error"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+    </span><span class="s2">"code"</span><span class="p">:</span><span class="w"> </span><span class="mi">422</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"message"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Validation Failed. Please see below to fix invalid input."</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"error_ref"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"errors"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+        </span><span class="s2">"member"</span><span class="p">:</span><span class="s2">"The user_id value must be an integer."</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"name"</span><span class="p">:</span><span class="s2">"The name may not be greater than 80 characters."</span><span class="w">
+    </span><span class="p">}</span><span class="w">
+</span><span class="p">}</span><span class="w">
+
+</span></code></pre>
+<p>Remember that <a href="#rate-limiting">Rate Limiting</a> applies whether an error is returned or not, so to avoid exceeding your daily quota be sure to always investigate error messages - instead of continually retrying.</p>
+<h2 id="error-codes">Error Codes</h2>
+<p>Along with generic <a href="#response-codes">HTTP response codes</a>, we also provide mod.io specific error codes to help you better understand what has gone wrong with a request. Below is a list of the most common <code>error_ref</code> codes you could encounter when consuming the API, as well as the reason for the error occuring. For error codes specific to each endpoint, click the 'Show All Responses' dropdown on the specified endpoint documentation.</p>
+<pre class="highlight shell tab-shell"><code>// Example request with malformed api_key 
+
+curl -X GET https://api.mod.io/v1/games?api_key<span class="o">=</span>malformed_key
+</code></pre><pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
+    </span><span class="s2">"error"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+        </span><span class="s2">"code"</span><span class="p">:</span><span class="w"> </span><span class="mi">401</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"error_ref"</span><span class="p">:</span><span class="w"> </span><span class="mi">11001</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"message"</span><span class="p">:</span><span class="w"> </span><span class="s2">"We cannot complete your request due to a malformed/missing api_key in your request. Refer to documentation at https://docs.mod.io"</span><span class="w">
+    </span><span class="p">}</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre>
+<table>
+<thead>
+<tr>
+<th>Error Reference Code</th>
+<th>Meaning</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>10003</code></td>
+<td>API version supplied is invalid.</td>
+</tr>
+<tr>
+<td><code>11000</code></td>
+<td>api_key is missing from your request.</td>
+</tr>
+<tr>
+<td><code>11001</code></td>
+<td>api_key supplied is malformed.</td>
+</tr>
+<tr>
+<td><code>11002</code></td>
+<td>api_key key supplied is invalid.</td>
+</tr>
+<tr>
+<td><code>11003</code></td>
+<td>Access token is missing the write scope to perform the request.</td>
+</tr>
+<tr>
+<td><code>11004</code></td>
+<td>Access token is missing the read scope to perform the request.</td>
+</tr>
+<tr>
+<td><code>11005</code></td>
+<td>Access token is expired, or has been revoked.</td>
+</tr>
+<tr>
+<td><code>13005</code></td>
+<td>The Content-Type header is missing from your request.</td>
+</tr>
+<tr>
+<td><code>13006</code></td>
+<td>The Content-Type header is not supported for this endpoint.</td>
+</tr>
+<tr>
+<td><code>11006</code></td>
+<td>Authenticated user account has been deleted.</td>
+</tr>
+<tr>
+<td><code>11007</code></td>
+<td>Authenticated user account has been banned by mod.io admins.</td>
+</tr>
+<tr>
+<td><code>14001</code></td>
+<td>The requested game could not be found.</td>
+</tr>
+<tr>
+<td><code>14006</code></td>
+<td>The requested game has been deleted.</td>
+</tr>
+<tr>
+<td><code>15022</code></td>
+<td>The requested mod could not be found.</td>
+</tr>
+<tr>
+<td><code>15023</code></td>
+<td>The requested mod has been deleted.</td>
+</tr>
+<tr>
+<td><code>15010</code></td>
+<td>The requested modfile could not be found.</td>
+</tr>
+<tr>
+<td><code>15026</code></td>
+<td>The requested comment could not be found.</td>
+</tr>
+<tr>
+<td><code>21000</code></td>
+<td>The requested user could not be found.</td>
+</tr>
+<tr>
+<td><code>14000</code></td>
+<td>The requested resource does not exist.</td>
+</tr>
+<tr>
+<td><code>11008</code></td>
+<td>You have been ratelimited for making too many requests. See <a href="#rate-limiting">Rate Limiting</a>.</td>
+</tr>
+<tr>
+<td><code>13007</code></td>
+<td>You have requested a response format that is not supported (JSON only).</td>
+</tr>
+<tr>
+<td><code>13001</code></td>
+<td>The submitted binary file is corrupted.</td>
+</tr>
+<tr>
+<td><code>13002</code></td>
+<td>The submitted binary file is unreadable.</td>
+</tr>
+<tr>
+<td><code>13004</code></td>
+<td>You have used the <code>input_json</code> parameter with semantically incorrect JSON.</td>
+</tr>
+<tr>
+<td><code>10001</code></td>
+<td>Cross-origin request forbidden.</td>
+</tr>
+<tr>
+<td><code>10002</code></td>
+<td>mod.io failed to complete the request, please try again. (rare)</td>
+</tr>
+<tr>
+<td><code>10000</code></td>
+<td>mod.io is currently experiencing an outage. (rare)</td>
 </tr>
 </tbody>
 </table>
@@ -1847,6 +1983,7 @@ curl -X POST https://api.mod.io/v1/external/steamauth?api_key<span class="o">=</
   </span><span class="s2">"access_token"</span><span class="p">:</span><span class="w"> </span><span class="s2">"eyJ0eXAiOiXKV1QibCJhbLciOiJeiUzI1....."</span><span class="p">,</span><span class="w">
   </span><span class="s2">"date_expires"</span><span class="p">:</span><span class="w"> </span><span class="mi">1570673249</span><span class="w">
 </span><span class="p">}</span><span class="w">
+
 </span></code></pre>
 <h3 id="Authenticate-via-Steam-responses">Responses</h3>
 
@@ -1855,6 +1992,7 @@ curl -X POST https://api.mod.io/v1/external/steamauth?api_key<span class="o">=</
 <tr>
 <th>Status</th>
 <th>Meaning</th>
+<th>Error Ref</th>
 <th>Description</th>
 <th>Response Schema</th>
 </tr>
@@ -1863,8 +2001,51 @@ curl -X POST https://api.mod.io/v1/external/steamauth?api_key<span class="o">=</
 <tr>
 <td>200</td>
 <td><a href="https://tools.ietf.org/html/rfc7231#section-6.3.1">OK</a></td>
+<td></td>
 <td>Successful Request</td>
 <td><a href="#schemaaccess_token_object">Access Token Object</a></td>
+</tr>
+<tr>
+<td>401</td>
+<td><a href="https://tools.ietf.org/html/rfc7235#section-3.1">Unauthorized</a></td>
+<td>14001</td>
+<td>The game associated with the supplied api_key is currently not available.</td>
+<td><a href="#schemaerror_object">Error Object</a></td>
+</tr>
+<tr>
+<td>401</td>
+<td><a href="https://tools.ietf.org/html/rfc7235#section-3.1">Unauthorized</a></td>
+<td>11018</td>
+<td>The steam encrypted app ticket was invalid.</td>
+<td><a href="#schemaerror_object">Error Object</a></td>
+</tr>
+<tr>
+<td>401</td>
+<td><a href="https://tools.ietf.org/html/rfc7235#section-3.1">Unauthorized</a></td>
+<td>11032</td>
+<td>mod.io was unable to verify the credentials against the external service provider.</td>
+<td><a href="#schemaerror_object">Error Object</a></td>
+</tr>
+<tr>
+<td>403</td>
+<td><a href="https://tools.ietf.org/html/rfc7231#section-6.5.3">Forbidden</a></td>
+<td>11016</td>
+<td>The api_key supplied in the request must be associated with a game.</td>
+<td><a href="#schemaerror_object">Error Object</a></td>
+</tr>
+<tr>
+<td>403</td>
+<td><a href="https://tools.ietf.org/html/rfc7231#section-6.5.3">Forbidden</a></td>
+<td>11017</td>
+<td>The api_key supplied in the request is for test environment purposes only and cannot be used for this functionality.</td>
+<td><a href="#schemaerror_object">Error Object</a></td>
+</tr>
+<tr>
+<td>403</td>
+<td><a href="https://tools.ietf.org/html/rfc7231#section-6.5.3">Forbidden</a></td>
+<td>11019</td>
+<td>The secret steam app ticket associated with this game has not been configured.</td>
+<td><a href="#schemaerror_object">Error Object</a></td>
 </tr>
 </tbody>
 </table>
@@ -1992,6 +2173,7 @@ curl -X POST https://api.mod.io/v1/external/galaxyauth?api_key<span class="o">=<
   </span><span class="s2">"access_token"</span><span class="p">:</span><span class="w"> </span><span class="s2">"eyJ0eXAiOiXKV1QibCJhbLciOiJeiUzI1....."</span><span class="p">,</span><span class="w">
   </span><span class="s2">"date_expires"</span><span class="p">:</span><span class="w"> </span><span class="mi">1570673249</span><span class="w">
 </span><span class="p">}</span><span class="w">
+
 </span></code></pre>
 <h3 id="Authenticate-via-GOG-Galaxy-responses">Responses</h3>
 
@@ -2000,6 +2182,7 @@ curl -X POST https://api.mod.io/v1/external/galaxyauth?api_key<span class="o">=<
 <tr>
 <th>Status</th>
 <th>Meaning</th>
+<th>Error Ref</th>
 <th>Description</th>
 <th>Response Schema</th>
 </tr>
@@ -2008,8 +2191,51 @@ curl -X POST https://api.mod.io/v1/external/galaxyauth?api_key<span class="o">=<
 <tr>
 <td>200</td>
 <td><a href="https://tools.ietf.org/html/rfc7231#section-6.3.1">OK</a></td>
+<td></td>
 <td>Successful Request</td>
 <td><a href="#schemaaccess_token_object">Access Token Object</a></td>
+</tr>
+<tr>
+<td>401</td>
+<td><a href="https://tools.ietf.org/html/rfc7235#section-3.1">Unauthorized</a></td>
+<td>14001</td>
+<td>The game associated with the supplied api_key is currently not available.</td>
+<td><a href="#schemaerror_object">Error Object</a></td>
+</tr>
+<tr>
+<td>401</td>
+<td><a href="https://tools.ietf.org/html/rfc7235#section-3.1">Unauthorized</a></td>
+<td>11021</td>
+<td>The galaxy encrypted app ticket was invalid.</td>
+<td><a href="#schemaerror_object">Error Object</a></td>
+</tr>
+<tr>
+<td>401</td>
+<td><a href="https://tools.ietf.org/html/rfc7235#section-3.1">Unauthorized</a></td>
+<td>11032</td>
+<td>mod.io was unable to verify the credentials against the external service provider.</td>
+<td><a href="#schemaerror_object">Error Object</a></td>
+</tr>
+<tr>
+<td>403</td>
+<td><a href="https://tools.ietf.org/html/rfc7231#section-6.5.3">Forbidden</a></td>
+<td>11016</td>
+<td>The api_key supplied in the request must be associated with a game.</td>
+<td><a href="#schemaerror_object">Error Object</a></td>
+</tr>
+<tr>
+<td>403</td>
+<td><a href="https://tools.ietf.org/html/rfc7231#section-6.5.3">Forbidden</a></td>
+<td>11017</td>
+<td>The api_key supplied in the request is for test environment purposes only and cannot be used for this functionality.</td>
+<td><a href="#schemaerror_object">Error Object</a></td>
+</tr>
+<tr>
+<td>403</td>
+<td><a href="https://tools.ietf.org/html/rfc7231#section-6.5.3">Forbidden</a></td>
+<td>11022</td>
+<td>The secret galaxy app ticket associated with this game has not been configured.</td>
+<td><a href="#schemaerror_object">Error Object</a></td>
 </tr>
 </tbody>
 </table>
@@ -2137,6 +2363,7 @@ curl -X POST https://api.mod.io/v1/external/itchioauth?api_key<span class="o">=<
   </span><span class="s2">"access_token"</span><span class="p">:</span><span class="w"> </span><span class="s2">"eyJ0eXAiOiXKV1QibCJhbLciOiJeiUzI1....."</span><span class="p">,</span><span class="w">
   </span><span class="s2">"date_expires"</span><span class="p">:</span><span class="w"> </span><span class="mi">1570673249</span><span class="w">
 </span><span class="p">}</span><span class="w">
+
 </span></code></pre>
 <h3 id="Authenticate-via-itch.io-responses">Responses</h3>
 
@@ -2145,6 +2372,7 @@ curl -X POST https://api.mod.io/v1/external/itchioauth?api_key<span class="o">=<
 <tr>
 <th>Status</th>
 <th>Meaning</th>
+<th>Error Ref</th>
 <th>Description</th>
 <th>Response Schema</th>
 </tr>
@@ -2153,8 +2381,44 @@ curl -X POST https://api.mod.io/v1/external/itchioauth?api_key<span class="o">=<
 <tr>
 <td>200</td>
 <td><a href="https://tools.ietf.org/html/rfc7231#section-6.3.1">OK</a></td>
+<td></td>
 <td>Successful Request</td>
 <td><a href="#schemaaccess_token_object">Access Token Object</a></td>
+</tr>
+<tr>
+<td>401</td>
+<td><a href="https://tools.ietf.org/html/rfc7235#section-3.1">Unauthorized</a></td>
+<td>14001</td>
+<td>The game associated with the supplied api_key is currently not available.</td>
+<td><a href="#schemaerror_object">Error Object</a></td>
+</tr>
+<tr>
+<td>401</td>
+<td><a href="https://tools.ietf.org/html/rfc7235#section-3.1">Unauthorized</a></td>
+<td>11032</td>
+<td>mod.io was unable to verify the credentials against the external service provider.</td>
+<td><a href="#schemaerror_object">Error Object</a></td>
+</tr>
+<tr>
+<td>401</td>
+<td><a href="https://tools.ietf.org/html/rfc7235#section-3.1">Unauthorized</a></td>
+<td>11031</td>
+<td>mod.io was unable to get account data from itch.io servers.</td>
+<td><a href="#schemaerror_object">Error Object</a></td>
+</tr>
+<tr>
+<td>403</td>
+<td><a href="https://tools.ietf.org/html/rfc7231#section-6.5.3">Forbidden</a></td>
+<td>11016</td>
+<td>The api_key supplied in the request must be associated with a game.</td>
+<td><a href="#schemaerror_object">Error Object</a></td>
+</tr>
+<tr>
+<td>403</td>
+<td><a href="https://tools.ietf.org/html/rfc7231#section-6.5.3">Forbidden</a></td>
+<td>11017</td>
+<td>The api_key supplied in the request is for test environment purposes only and cannot be used for this functionality.</td>
+<td><a href="#schemaerror_object">Error Object</a></td>
 </tr>
 </tbody>
 </table>
@@ -2307,6 +2571,7 @@ curl -X POST https://api.mod.io/v1/external/oculusauth?api_key<span class="o">=<
   </span><span class="s2">"access_token"</span><span class="p">:</span><span class="w"> </span><span class="s2">"eyJ0eXAiOiXKV1QibCJhbLciOiJeiUzI1....."</span><span class="p">,</span><span class="w">
   </span><span class="s2">"date_expires"</span><span class="p">:</span><span class="w"> </span><span class="mi">1570673249</span><span class="w">
 </span><span class="p">}</span><span class="w">
+
 </span></code></pre>
 <h3 id="Authenticate-via-Oculus-responses">Responses</h3>
 
@@ -2315,6 +2580,7 @@ curl -X POST https://api.mod.io/v1/external/oculusauth?api_key<span class="o">=<
 <tr>
 <th>Status</th>
 <th>Meaning</th>
+<th>Error Ref</th>
 <th>Description</th>
 <th>Response Schema</th>
 </tr>
@@ -2323,8 +2589,51 @@ curl -X POST https://api.mod.io/v1/external/oculusauth?api_key<span class="o">=<
 <tr>
 <td>200</td>
 <td><a href="https://tools.ietf.org/html/rfc7231#section-6.3.1">OK</a></td>
+<td></td>
 <td>Successful Request</td>
 <td><a href="#schemaaccess_token_object">Access Token Object</a></td>
+</tr>
+<tr>
+<td>401</td>
+<td><a href="https://tools.ietf.org/html/rfc7235#section-3.1">Unauthorized</a></td>
+<td>14001</td>
+<td>The game associated with the supplied api_key is currently not available.</td>
+<td><a href="#schemaerror_object">Error Object</a></td>
+</tr>
+<tr>
+<td>401</td>
+<td><a href="https://tools.ietf.org/html/rfc7235#section-3.1">Unauthorized</a></td>
+<td>11032</td>
+<td>mod.io was unable to verify the credentials against the external service provider.</td>
+<td><a href="#schemaerror_object">Error Object</a></td>
+</tr>
+<tr>
+<td>403</td>
+<td><a href="https://tools.ietf.org/html/rfc7231#section-6.5.3">Forbidden</a></td>
+<td>11016</td>
+<td>The api_key supplied in the request must be associated with a game.</td>
+<td><a href="#schemaerror_object">Error Object</a></td>
+</tr>
+<tr>
+<td>403</td>
+<td><a href="https://tools.ietf.org/html/rfc7231#section-6.5.3">Forbidden</a></td>
+<td>11017</td>
+<td>The api_key supplied in the request is for test environment purposes only and cannot be used for this functionality.</td>
+<td><a href="#schemaerror_object">Error Object</a></td>
+</tr>
+<tr>
+<td>403</td>
+<td><a href="https://tools.ietf.org/html/rfc7231#section-6.5.3">Forbidden</a></td>
+<td>11024</td>
+<td>The secret Oculus Rift app ticket associated with this game has not been configured.</td>
+<td><a href="#schemaerror_object">Error Object</a></td>
+</tr>
+<tr>
+<td>403</td>
+<td><a href="https://tools.ietf.org/html/rfc7231#section-6.5.3">Forbidden</a></td>
+<td>11025</td>
+<td>The secret Oculus Quest app ticket associated with this game has not been configured.</td>
+<td><a href="#schemaerror_object">Error Object</a></td>
 </tr>
 </tbody>
 </table>
@@ -2462,6 +2771,7 @@ curl -X POST https://api.mod.io/v1/external/link <span class="se">\</span>
   </span><span class="s2">"code"</span><span class="p">:</span><span class="w"> </span><span class="mi">200</span><span class="p">,</span><span class="w">
   </span><span class="s2">"message"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Please see the confirmation email sent to (:email) to complete account link."</span><span class="w">
 </span><span class="p">}</span><span class="w">
+
 </span></code></pre>
 <h3 id="Link-an-Email-responses">Responses</h3>
 
@@ -2470,6 +2780,7 @@ curl -X POST https://api.mod.io/v1/external/link <span class="se">\</span>
 <tr>
 <th>Status</th>
 <th>Meaning</th>
+<th>Error Ref</th>
 <th>Description</th>
 <th>Response Schema</th>
 </tr>
@@ -2478,8 +2789,30 @@ curl -X POST https://api.mod.io/v1/external/link <span class="se">\</span>
 <tr>
 <td>200</td>
 <td><a href="https://tools.ietf.org/html/rfc7231#section-6.3.1">OK</a></td>
+<td></td>
 <td>Successful Request</td>
 <td><a href="#message-object">Message Object</a></td>
+</tr>
+<tr>
+<td>401</td>
+<td><a href="https://tools.ietf.org/html/rfc7235#section-3.1">Unauthorized</a></td>
+<td>21000</td>
+<td>The account marked to be linked does not exist.</td>
+<td><a href="#schemaerror_object">Error Object</a></td>
+</tr>
+<tr>
+<td>403</td>
+<td><a href="https://tools.ietf.org/html/rfc7231#section-6.5.3">Forbidden</a></td>
+<td>11033</td>
+<td>The supplied service id does not match up with our records for this user.</td>
+<td><a href="#schemaerror_object">Error Object</a></td>
+</tr>
+<tr>
+<td>403</td>
+<td><a href="https://tools.ietf.org/html/rfc7231#section-6.5.3">Forbidden</a></td>
+<td>11034</td>
+<td>The user has already been verified.</td>
+<td><a href="#schemaerror_object">Error Object</a></td>
 </tr>
 </tbody>
 </table>
@@ -2741,6 +3074,7 @@ Accept: application/json
   </span><span class="s2">"result_limit"</span><span class="p">:</span><span class="w"> </span><span class="mi">100</span><span class="p">,</span><span class="w">
   </span><span class="s2">"result_total"</span><span class="p">:</span><span class="w"> </span><span class="mi">70</span><span class="w">
 </span><span class="p">}</span><span class="w">
+
 </span></code></pre>
 <h3 id="Get-Games-responses">Responses</h3>
 
@@ -2749,6 +3083,7 @@ Accept: application/json
 <tr>
 <th>Status</th>
 <th>Meaning</th>
+<th>Error Ref</th>
 <th>Description</th>
 <th>Response Schema</th>
 </tr>
@@ -2757,6 +3092,7 @@ Accept: application/json
 <tr>
 <td>200</td>
 <td><a href="https://tools.ietf.org/html/rfc7231#section-6.3.1">OK</a></td>
+<td></td>
 <td>OK</td>
 <td><a href="#schemaget_games">Get Games</a></td>
 </tr>
@@ -2907,6 +3243,7 @@ Accept: application/json
     </span><span class="p">}</span><span class="w">
   </span><span class="p">]</span><span class="w">
 </span><span class="p">}</span><span class="w">
+
 </span></code></pre>
 <h3 id="Get-Game-responses">Responses</h3>
 
@@ -2915,6 +3252,7 @@ Accept: application/json
 <tr>
 <th>Status</th>
 <th>Meaning</th>
+<th>Error Ref</th>
 <th>Description</th>
 <th>Response Schema</th>
 </tr>
@@ -2923,6 +3261,7 @@ Accept: application/json
 <tr>
 <td>200</td>
 <td><a href="https://tools.ietf.org/html/rfc7231#section-6.3.1">OK</a></td>
+<td></td>
 <td>Request successful</td>
 <td><a href="#schemagame_object">Game Object</a></td>
 </tr>
@@ -3183,6 +3522,7 @@ Content-Type: application/x-www-form-urlencoded
     </span><span class="p">}</span><span class="w">
   </span><span class="p">]</span><span class="w">
 </span><span class="p">}</span><span class="w">
+
 </span></code></pre>
 <h3 id="Edit-Game-responses">Responses</h3>
 
@@ -3191,6 +3531,7 @@ Content-Type: application/x-www-form-urlencoded
 <tr>
 <th>Status</th>
 <th>Meaning</th>
+<th>Error Ref</th>
 <th>Description</th>
 <th>Response Schema</th>
 </tr>
@@ -3199,8 +3540,23 @@ Content-Type: application/x-www-form-urlencoded
 <tr>
 <td>200</td>
 <td><a href="https://tools.ietf.org/html/rfc7231#section-6.3.1">OK</a></td>
+<td></td>
 <td>Update successful</td>
 <td><a href="#schemagame_object">Game Object</a></td>
+</tr>
+<tr>
+<td>403</td>
+<td><a href="https://tools.ietf.org/html/rfc7231#section-6.5.3">Forbidden</a></td>
+<td>14002</td>
+<td>The authenticated user does not have permission to update this game. Ensure the user is part of the mod team before attempting the request again.</td>
+<td><a href="#schemaerror_object">Error Object</a></td>
+</tr>
+<tr>
+<td>403</td>
+<td><a href="https://tools.ietf.org/html/rfc7231#section-6.5.3">Forbidden</a></td>
+<td>14003</td>
+<td>The authenticated user does not have permission to update the status of this game. Ensure the user is part of the mod team before attempting the request again.</td>
+<td><a href="#schemaerror_object">Error Object</a></td>
 </tr>
 </tbody>
 </table>
@@ -3521,6 +3877,7 @@ Accept: application/json
   </span><span class="s2">"result_limit"</span><span class="p">:</span><span class="w"> </span><span class="mi">100</span><span class="p">,</span><span class="w">
   </span><span class="s2">"result_total"</span><span class="p">:</span><span class="w"> </span><span class="mi">70</span><span class="w">
 </span><span class="p">}</span><span class="w">
+
 </span></code></pre>
 <h3 id="Get-Mods-responses">Responses</h3>
 
@@ -3529,6 +3886,7 @@ Accept: application/json
 <tr>
 <th>Status</th>
 <th>Meaning</th>
+<th>Error Ref</th>
 <th>Description</th>
 <th>Response Schema</th>
 </tr>
@@ -3537,8 +3895,16 @@ Accept: application/json
 <tr>
 <td>200</td>
 <td><a href="https://tools.ietf.org/html/rfc7231#section-6.3.1">OK</a></td>
+<td></td>
 <td>Successful Request</td>
 <td><a href="#schemaget_mods">Get Mods</a></td>
+</tr>
+<tr>
+<td>403</td>
+<td><a href="https://tools.ietf.org/html/rfc7231#section-6.5.3">Forbidden</a></td>
+<td>15025</td>
+<td>The authenticated user has applied an admin-only filter or value to the request, and is not an administrator for this game.</td>
+<td><a href="#schemaerror_object">Error Object</a></td>
 </tr>
 </tbody>
 </table>
@@ -3725,6 +4091,7 @@ Accept: application/json
     </span><span class="s2">"date_expires"</span><span class="p">:</span><span class="w"> </span><span class="mi">1492564103</span><span class="w">
   </span><span class="p">}</span><span class="w">
 </span><span class="p">}</span><span class="w">
+
 </span></code></pre>
 <h3 id="Get-Mod-responses">Responses</h3>
 
@@ -3733,6 +4100,7 @@ Accept: application/json
 <tr>
 <th>Status</th>
 <th>Meaning</th>
+<th>Error Ref</th>
 <th>Description</th>
 <th>Response Schema</th>
 </tr>
@@ -3741,6 +4109,7 @@ Accept: application/json
 <tr>
 <td>200</td>
 <td><a href="https://tools.ietf.org/html/rfc7231#section-6.3.1">OK</a></td>
+<td></td>
 <td>Successful Request</td>
 <td><a href="#schemamod_object">Mod Object</a></td>
 </tr>
@@ -4026,6 +4395,7 @@ curl -X POST https://api.mod.io/v1/games/<span class="o">{</span>game-id<span cl
     </span><span class="s2">"date_expires"</span><span class="p">:</span><span class="w"> </span><span class="mi">1492564103</span><span class="w">
   </span><span class="p">}</span><span class="w">
 </span><span class="p">}</span><span class="w">
+
 </span></code></pre>
 <h3 id="Add-Mod-responses">Responses</h3>
 
@@ -4034,6 +4404,7 @@ curl -X POST https://api.mod.io/v1/games/<span class="o">{</span>game-id<span cl
 <tr>
 <th>Status</th>
 <th>Meaning</th>
+<th>Error Ref</th>
 <th>Description</th>
 <th>Response Schema</th>
 </tr>
@@ -4042,8 +4413,16 @@ curl -X POST https://api.mod.io/v1/games/<span class="o">{</span>game-id<span cl
 <tr>
 <td>201</td>
 <td><a href="https://tools.ietf.org/html/rfc7231#section-6.3.2">Created</a></td>
+<td></td>
 <td>Resource Created</td>
 <td><a href="#schemamod_object">Mod Object</a></td>
+</tr>
+<tr>
+<td>403</td>
+<td><a href="https://tools.ietf.org/html/rfc7231#section-6.5.3">Forbidden</a></td>
+<td>15012</td>
+<td>The authenticated user has had upload privileges restricted by mod.io admins, this is typically due to spam.</td>
+<td><a href="#schemaerror_object">Error Object</a></td>
 </tr>
 </tbody>
 </table>
@@ -4335,6 +4714,7 @@ Content-Type: application/x-www-form-urlencoded
     </span><span class="s2">"date_expires"</span><span class="p">:</span><span class="w"> </span><span class="mi">1492564103</span><span class="w">
   </span><span class="p">}</span><span class="w">
 </span><span class="p">}</span><span class="w">
+
 </span></code></pre>
 <h3 id="Edit-Mod-responses">Responses</h3>
 
@@ -4343,6 +4723,7 @@ Content-Type: application/x-www-form-urlencoded
 <tr>
 <th>Status</th>
 <th>Meaning</th>
+<th>Error Ref</th>
 <th>Description</th>
 <th>Response Schema</th>
 </tr>
@@ -4351,8 +4732,44 @@ Content-Type: application/x-www-form-urlencoded
 <tr>
 <td>200</td>
 <td><a href="https://tools.ietf.org/html/rfc7231#section-6.3.1">OK</a></td>
+<td></td>
 <td>Update Successful</td>
 <td><a href="#schemamod_object">Mod Object</a></td>
+</tr>
+<tr>
+<td>403</td>
+<td><a href="https://tools.ietf.org/html/rfc7231#section-6.5.3">Forbidden</a></td>
+<td>15013</td>
+<td>The authenticated user does not have permission to update this mod. Ensure the user is part of the mod team before attempting the request again.</td>
+<td><a href="#schemaerror_object">Error Object</a></td>
+</tr>
+<tr>
+<td>403</td>
+<td><a href="https://tools.ietf.org/html/rfc7231#section-6.5.3">Forbidden</a></td>
+<td>15033</td>
+<td>The authenticated user does not have permission to update the metadata for this mod, this action is restricted to team managers &amp; administrators only.</td>
+<td><a href="#schemaerror_object">Error Object</a></td>
+</tr>
+<tr>
+<td>403</td>
+<td><a href="https://tools.ietf.org/html/rfc7231#section-6.5.3">Forbidden</a></td>
+<td>15014</td>
+<td>The authenticated user does not have permission to update the maturityoptions for this mod, this action is restricted to team managers &amp; administrators only.</td>
+<td><a href="#schemaerror_object">Error Object</a></td>
+</tr>
+<tr>
+<td>403</td>
+<td><a href="https://tools.ietf.org/html/rfc7231#section-6.5.3">Forbidden</a></td>
+<td>15015</td>
+<td>The authenticated user does not have permission to update the status for this mod, this action is restricted to team managers &amp; administrators only.</td>
+<td><a href="#schemaerror_object">Error Object</a></td>
+</tr>
+<tr>
+<td>403</td>
+<td><a href="https://tools.ietf.org/html/rfc7231#section-6.5.3">Forbidden</a></td>
+<td>15016</td>
+<td>A mod cannot be set live without an associated modfile.</td>
+<td><a href="#schemaerror_object">Error Object</a></td>
 </tr>
 </tbody>
 </table>
@@ -4449,6 +4866,7 @@ Content-Type: application/x-www-form-urlencoded
 <p>Example response</p>
 </blockquote>
 <pre class="highlight json tab-json"><code><span class="w"> </span><span class="mi">204</span><span class="w"> </span><span class="err">No</span><span class="w"> </span><span class="err">Content</span><span class="w"> 
+
 </span></code></pre>
 <h3 id="Delete-Mod-responses">Responses</h3>
 
@@ -4457,6 +4875,7 @@ Content-Type: application/x-www-form-urlencoded
 <tr>
 <th>Status</th>
 <th>Meaning</th>
+<th>Error Ref</th>
 <th>Description</th>
 <th>Response Schema</th>
 </tr>
@@ -4465,8 +4884,16 @@ Content-Type: application/x-www-form-urlencoded
 <tr>
 <td>204</td>
 <td><a href="https://tools.ietf.org/html/rfc7231#section-6.3.5">No Content</a></td>
+<td></td>
 <td>Successful Request. No Body Returned.</td>
 <td>None</td>
+</tr>
+<tr>
+<td>403</td>
+<td><a href="https://tools.ietf.org/html/rfc7231#section-6.5.3">Forbidden</a></td>
+<td>15019</td>
+<td>The authenticated user does not have permission to delete this mod, this action is restricted to team managers &amp; administrators only.</td>
+<td><a href="#schemaerror_object">Error Object</a></td>
 </tr>
 </tbody>
 </table>
@@ -4655,6 +5082,7 @@ Accept: application/json
   </span><span class="s2">"result_limit"</span><span class="p">:</span><span class="w"> </span><span class="mi">100</span><span class="p">,</span><span class="w">
   </span><span class="s2">"result_total"</span><span class="p">:</span><span class="w"> </span><span class="mi">70</span><span class="w">
 </span><span class="p">}</span><span class="w">
+
 </span></code></pre>
 <h3 id="Get-Modfiles-responses">Responses</h3>
 
@@ -4663,6 +5091,7 @@ Accept: application/json
 <tr>
 <th>Status</th>
 <th>Meaning</th>
+<th>Error Ref</th>
 <th>Description</th>
 <th>Response Schema</th>
 </tr>
@@ -4671,6 +5100,7 @@ Accept: application/json
 <tr>
 <td>200</td>
 <td><a href="https://tools.ietf.org/html/rfc7231#section-6.3.1">OK</a></td>
+<td></td>
 <td>Successful Request</td>
 <td><a href="#schemaget_modfiles">Get Modfiles</a></td>
 </tr>
@@ -4778,6 +5208,7 @@ Accept: application/json
     </span><span class="s2">"date_expires"</span><span class="p">:</span><span class="w"> </span><span class="mi">1579316848</span><span class="w">
   </span><span class="p">}</span><span class="w">
 </span><span class="p">}</span><span class="w">
+
 </span></code></pre>
 <h3 id="Get-Modfile-responses">Responses</h3>
 
@@ -4786,6 +5217,7 @@ Accept: application/json
 <tr>
 <th>Status</th>
 <th>Meaning</th>
+<th>Error Ref</th>
 <th>Description</th>
 <th>Response Schema</th>
 </tr>
@@ -4794,6 +5226,7 @@ Accept: application/json
 <tr>
 <td>200</td>
 <td><a href="https://tools.ietf.org/html/rfc7231#section-6.3.1">OK</a></td>
+<td></td>
 <td>Successful Request</td>
 <td><a href="#schemamodfile_object">Modfile Object</a></td>
 </tr>
@@ -4970,6 +5403,7 @@ curl -X POST https://api.mod.io/v1/games/<span class="o">{</span>game-id<span cl
     </span><span class="s2">"date_expires"</span><span class="p">:</span><span class="w"> </span><span class="mi">1579316848</span><span class="w">
   </span><span class="p">}</span><span class="w">
 </span><span class="p">}</span><span class="w">
+
 </span></code></pre>
 <h3 id="Add-Modfile-responses">Responses</h3>
 
@@ -4978,6 +5412,7 @@ curl -X POST https://api.mod.io/v1/games/<span class="o">{</span>game-id<span cl
 <tr>
 <th>Status</th>
 <th>Meaning</th>
+<th>Error Ref</th>
 <th>Description</th>
 <th>Response Schema</th>
 </tr>
@@ -4986,8 +5421,23 @@ curl -X POST https://api.mod.io/v1/games/<span class="o">{</span>game-id<span cl
 <tr>
 <td>201</td>
 <td><a href="https://tools.ietf.org/html/rfc7231#section-6.3.2">Created</a></td>
+<td></td>
 <td>Resource Created</td>
 <td><a href="#schemamodfile_object">Modfile Object</a></td>
+</tr>
+<tr>
+<td>403</td>
+<td><a href="https://tools.ietf.org/html/rfc7231#section-6.5.3">Forbidden</a></td>
+<td>15006</td>
+<td>The authenticated user does not have permission to upload modfiles for the specified mod, ensure the user is a team manager or administrator.</td>
+<td><a href="#schemaerror_object">Error Object</a></td>
+</tr>
+<tr>
+<td>422</td>
+<td><a href="https://tools.ietf.org/html/rfc2518#section-10.3">Unprocessable Entity</a></td>
+<td>13002</td>
+<td>The payload passed in the request was unable to be validated/read by mod.io, please try again.</td>
+<td><a href="#schemaerror_object">Error Object</a></td>
 </tr>
 </tbody>
 </table>
@@ -5162,6 +5612,7 @@ Content-Type: application/x-www-form-urlencoded
     </span><span class="s2">"date_expires"</span><span class="p">:</span><span class="w"> </span><span class="mi">1579316848</span><span class="w">
   </span><span class="p">}</span><span class="w">
 </span><span class="p">}</span><span class="w">
+
 </span></code></pre>
 <h3 id="Edit-Modfile-responses">Responses</h3>
 
@@ -5170,6 +5621,7 @@ Content-Type: application/x-www-form-urlencoded
 <tr>
 <th>Status</th>
 <th>Meaning</th>
+<th>Error Ref</th>
 <th>Description</th>
 <th>Response Schema</th>
 </tr>
@@ -5178,8 +5630,23 @@ Content-Type: application/x-www-form-urlencoded
 <tr>
 <td>200</td>
 <td><a href="https://tools.ietf.org/html/rfc7231#section-6.3.1">OK</a></td>
+<td></td>
 <td>Update Successful</td>
 <td><a href="#schemamodfile_object">Modfile Object</a></td>
+</tr>
+<tr>
+<td>403</td>
+<td><a href="https://tools.ietf.org/html/rfc7231#section-6.5.3">Forbidden</a></td>
+<td>15007</td>
+<td>The authenticated user does not have permission to update modfiles for the specified mod, ensure the user is a team manager or administrator.</td>
+<td><a href="#schemaerror_object">Error Object</a></td>
+</tr>
+<tr>
+<td>403</td>
+<td><a href="https://tools.ietf.org/html/rfc7231#section-6.5.3">Forbidden</a></td>
+<td>15033</td>
+<td>The authenticated user does not have permission to update modfile metadata for the specified mod, ensure the user is a team manager or administrator.</td>
+<td><a href="#schemaerror_object">Error Object</a></td>
 </tr>
 </tbody>
 </table>
@@ -5276,6 +5743,7 @@ Content-Type: application/x-www-form-urlencoded
 <p>Example response</p>
 </blockquote>
 <pre class="highlight json tab-json"><code><span class="w"> </span><span class="mi">204</span><span class="w"> </span><span class="err">No</span><span class="w"> </span><span class="err">Content</span><span class="w"> 
+
 </span></code></pre>
 <h3 id="Delete-Modfile-responses">Responses</h3>
 
@@ -5284,6 +5752,7 @@ Content-Type: application/x-www-form-urlencoded
 <tr>
 <th>Status</th>
 <th>Meaning</th>
+<th>Error Ref</th>
 <th>Description</th>
 <th>Response Schema</th>
 </tr>
@@ -5292,8 +5761,23 @@ Content-Type: application/x-www-form-urlencoded
 <tr>
 <td>204</td>
 <td><a href="https://tools.ietf.org/html/rfc7231#section-6.3.5">No Content</a></td>
+<td></td>
 <td>Successful Request. No Body Returned.</td>
 <td>None</td>
+</tr>
+<tr>
+<td>403</td>
+<td><a href="https://tools.ietf.org/html/rfc7231#section-6.5.3">Forbidden</a></td>
+<td>15008</td>
+<td>The authenticated user does not have permission to delete modfiles for the specified mod, ensure the user is a team manager or administrator.</td>
+<td><a href="#schemaerror_object">Error Object</a></td>
+</tr>
+<tr>
+<td>403</td>
+<td><a href="https://tools.ietf.org/html/rfc7231#section-6.5.3">Forbidden</a></td>
+<td>15009</td>
+<td>The active (primary) modfile for a mod cannot be deleted.</td>
+<td><a href="#schemaerror_object">Error Object</a></td>
 </tr>
 </tbody>
 </table>
@@ -5432,6 +5916,7 @@ curl -X POST https://api.mod.io/v1/games/<span class="o">{</span>game-id<span cl
   </span><span class="s2">"code"</span><span class="p">:</span><span class="w"> </span><span class="mi">200</span><span class="p">,</span><span class="w">
   </span><span class="s2">"message"</span><span class="p">:</span><span class="w"> </span><span class="s2">"You have successfully added new media to the specified game profile."</span><span class="w">
 </span><span class="p">}</span><span class="w">
+
 </span></code></pre>
 <h3 id="Add-Game-Media-responses">Responses</h3>
 
@@ -5440,6 +5925,7 @@ curl -X POST https://api.mod.io/v1/games/<span class="o">{</span>game-id<span cl
 <tr>
 <th>Status</th>
 <th>Meaning</th>
+<th>Error Ref</th>
 <th>Description</th>
 <th>Response Schema</th>
 </tr>
@@ -5448,6 +5934,7 @@ curl -X POST https://api.mod.io/v1/games/<span class="o">{</span>game-id<span cl
 <tr>
 <td>200</td>
 <td><a href="https://tools.ietf.org/html/rfc7231#section-6.3.1">OK</a></td>
+<td></td>
 <td>Media Successfully uploaded</td>
 <td><a href="#message-object">Message Object</a></td>
 </tr>
@@ -5600,6 +6087,7 @@ curl -X POST https://api.mod.io/v1/games/<span class="o">{</span>game-id<span cl
   </span><span class="s2">"code"</span><span class="p">:</span><span class="w"> </span><span class="mi">201</span><span class="p">,</span><span class="w">
   </span><span class="s2">"message"</span><span class="p">:</span><span class="w"> </span><span class="s2">"You have successfully added new media to the specified mod."</span><span class="w">
 </span><span class="p">}</span><span class="w">
+
 </span></code></pre>
 <h3 id="Add-Mod-Media-responses">Responses</h3>
 
@@ -5608,6 +6096,7 @@ curl -X POST https://api.mod.io/v1/games/<span class="o">{</span>game-id<span cl
 <tr>
 <th>Status</th>
 <th>Meaning</th>
+<th>Error Ref</th>
 <th>Description</th>
 <th>Response Schema</th>
 </tr>
@@ -5616,8 +6105,16 @@ curl -X POST https://api.mod.io/v1/games/<span class="o">{</span>game-id<span cl
 <tr>
 <td>201</td>
 <td><a href="https://tools.ietf.org/html/rfc7231#section-6.3.2">Created</a></td>
+<td></td>
 <td>Resource Created</td>
 <td><a href="#message-object">Message Object</a></td>
+</tr>
+<tr>
+<td>403</td>
+<td><a href="https://tools.ietf.org/html/rfc7231#section-6.5.3">Forbidden</a></td>
+<td>15035</td>
+<td>The authenticated user does not have permission to add media for this mod, this action is restricted to team managers &amp; administrators only.</td>
+<td><a href="#schemaerror_object">Error Object</a></td>
 </tr>
 </tbody>
 </table>
@@ -5774,6 +6271,7 @@ curl -X DELETE https://api.mod.io/v1/games/<span class="o">{</span>game-id<span 
 <p>Example response</p>
 </blockquote>
 <pre class="highlight json tab-json"><code><span class="w"> </span><span class="mi">204</span><span class="w"> </span><span class="err">No</span><span class="w"> </span><span class="err">Content</span><span class="w"> 
+
 </span></code></pre>
 <h3 id="Delete-Mod-Media-responses">Responses</h3>
 
@@ -5782,6 +6280,7 @@ curl -X DELETE https://api.mod.io/v1/games/<span class="o">{</span>game-id<span 
 <tr>
 <th>Status</th>
 <th>Meaning</th>
+<th>Error Ref</th>
 <th>Description</th>
 <th>Response Schema</th>
 </tr>
@@ -5790,8 +6289,16 @@ curl -X DELETE https://api.mod.io/v1/games/<span class="o">{</span>game-id<span 
 <tr>
 <td>204</td>
 <td><a href="https://tools.ietf.org/html/rfc7231#section-6.3.5">No Content</a></td>
+<td></td>
 <td>Successful Request. No Body Returned.</td>
 <td>None</td>
+</tr>
+<tr>
+<td>403</td>
+<td><a href="https://tools.ietf.org/html/rfc7231#section-6.5.3">Forbidden</a></td>
+<td>15036</td>
+<td>The authenticated user does not have permission to delete media from this mod, this action is restricted to team managers &amp; administrators only.</td>
+<td><a href="#schemaerror_object">Error Object</a></td>
 </tr>
 </tbody>
 </table>
@@ -5989,6 +6496,7 @@ Content-Type: application/x-www-form-urlencoded
     </span><span class="s2">"date_expires"</span><span class="p">:</span><span class="w"> </span><span class="mi">1492564103</span><span class="w">
   </span><span class="p">}</span><span class="w">
 </span><span class="p">}</span><span class="w">
+
 </span></code></pre>
 <h3 id="Subscribe-To-Mod-responses">Responses</h3>
 
@@ -5997,6 +6505,7 @@ Content-Type: application/x-www-form-urlencoded
 <tr>
 <th>Status</th>
 <th>Meaning</th>
+<th>Error Ref</th>
 <th>Description</th>
 <th>Response Schema</th>
 </tr>
@@ -6005,8 +6514,30 @@ Content-Type: application/x-www-form-urlencoded
 <tr>
 <td>201</td>
 <td><a href="https://tools.ietf.org/html/rfc7231#section-6.3.2">Created</a></td>
+<td></td>
 <td>Subscription Successful</td>
 <td><a href="#schemamod_object">Mod Object</a></td>
+</tr>
+<tr>
+<td>400</td>
+<td><a href="https://tools.ietf.org/html/rfc7231#section-6.5.1">Bad Request</a></td>
+<td>15004</td>
+<td>The authenticated user is already subscribed to the mod.</td>
+<td><a href="#schemaerror_object">Error Object</a></td>
+</tr>
+<tr>
+<td>403</td>
+<td><a href="https://tools.ietf.org/html/rfc7231#section-6.5.3">Forbidden</a></td>
+<td>15000</td>
+<td>The requested mod cannot be subscribed to at this time due to a DMCA takedown request.</td>
+<td><a href="#schemaerror_object">Error Object</a></td>
+</tr>
+<tr>
+<td>403</td>
+<td><a href="https://tools.ietf.org/html/rfc7231#section-6.5.3">Forbidden</a></td>
+<td>15001</td>
+<td>The requested mod cannot be subscribed to due to being marked as 'hidden'.</td>
+<td><a href="#schemaerror_object">Error Object</a></td>
 </tr>
 </tbody>
 </table>
@@ -6124,6 +6655,7 @@ Content-Type: application/x-www-form-urlencoded
 <p>Example response</p>
 </blockquote>
 <pre class="highlight json tab-json"><code><span class="w"> </span><span class="mi">204</span><span class="w"> </span><span class="err">No</span><span class="w"> </span><span class="err">Content</span><span class="w"> 
+
 </span></code></pre>
 <h3 id="Unsubscribe-From-Mod-responses">Responses</h3>
 
@@ -6132,6 +6664,7 @@ Content-Type: application/x-www-form-urlencoded
 <tr>
 <th>Status</th>
 <th>Meaning</th>
+<th>Error Ref</th>
 <th>Description</th>
 <th>Response Schema</th>
 </tr>
@@ -6140,8 +6673,16 @@ Content-Type: application/x-www-form-urlencoded
 <tr>
 <td>204</td>
 <td><a href="https://tools.ietf.org/html/rfc7231#section-6.3.5">No Content</a></td>
+<td></td>
 <td>Successful Request. No Body Returned.</td>
 <td>None</td>
+</tr>
+<tr>
+<td>400</td>
+<td><a href="https://tools.ietf.org/html/rfc7231#section-6.5.1">Bad Request</a></td>
+<td>15005</td>
+<td>The requested user is not currently subscribed to the requested mod.</td>
+<td><a href="#schemaerror_object">Error Object</a></td>
 </tr>
 </tbody>
 </table>
@@ -6293,6 +6834,7 @@ Accept: application/json
   </span><span class="s2">"result_limit"</span><span class="p">:</span><span class="w"> </span><span class="mi">100</span><span class="p">,</span><span class="w">
   </span><span class="s2">"result_total"</span><span class="p">:</span><span class="w"> </span><span class="mi">70</span><span class="w">
 </span><span class="p">}</span><span class="w">
+
 </span></code></pre>
 <h3 id="Get-Mods-Events-responses">Responses</h3>
 
@@ -6301,6 +6843,7 @@ Accept: application/json
 <tr>
 <th>Status</th>
 <th>Meaning</th>
+<th>Error Ref</th>
 <th>Description</th>
 <th>Response Schema</th>
 </tr>
@@ -6309,6 +6852,7 @@ Accept: application/json
 <tr>
 <td>200</td>
 <td><a href="https://tools.ietf.org/html/rfc7231#section-6.3.1">OK</a></td>
+<td></td>
 <td>Successful Request</td>
 <td><a href="#schemaget_mod_events">Get Mod Events</a></td>
 </tr>
@@ -6413,6 +6957,7 @@ Accept: application/json
   </span><span class="s2">"result_limit"</span><span class="p">:</span><span class="w"> </span><span class="mi">100</span><span class="p">,</span><span class="w">
   </span><span class="s2">"result_total"</span><span class="p">:</span><span class="w"> </span><span class="mi">70</span><span class="w">
 </span><span class="p">}</span><span class="w">
+
 </span></code></pre>
 <h3 id="Get-Mod-Events-responses">Responses</h3>
 
@@ -6421,6 +6966,7 @@ Accept: application/json
 <tr>
 <th>Status</th>
 <th>Meaning</th>
+<th>Error Ref</th>
 <th>Description</th>
 <th>Response Schema</th>
 </tr>
@@ -6429,409 +6975,9 @@ Accept: application/json
 <tr>
 <td>200</td>
 <td><a href="https://tools.ietf.org/html/rfc7231#section-6.3.1">OK</a></td>
+<td></td>
 <td>Successful Request</td>
 <td><a href="#schemaget_mod_events">Get Mod Events</a></td>
-</tr>
-</tbody>
-</table>
-
-<aside class="auth-notice">
-To perform this request, you must be authenticated via one of the following methods:
-<a href="#authentication">api_key</a>, <a href="#authentication">OAuth 2</a> (Scopes: read)
-</aside>
-<h1 id="stats">Stats</h1><h2 id="get-mods-stats">Get Mods Stats</h2>
-<blockquote>
-<p>Example request</p>
-</blockquote>
-<pre class="highlight shell tab-shell"><code><span class="c"># You can also use wget</span>
-curl -X GET https://api.mod.io/v1/games/<span class="o">{</span>game-id<span class="o">}</span>/mods/stats?api_key<span class="o">=</span>YourApiKey <span class="se">\</span>
-  -H <span class="s1">'Accept: application/json'</span>
-
-</code></pre><pre class="highlight http tab-http"><code><span class="nf">GET</span> <span class="nn">https://api.mod.io/v1/games/{game-id}/mods/stats?api_key=YourApiKey</span> <span class="k">HTTP</span><span class="o">/</span><span class="m">1.1</span>
-<span class="na">Host</span><span class="p">:</span> <span class="s">api.mod.io</span>
-
-Accept: application/json
-
-</code></pre><pre class="highlight javascript tab-javascript"><code><span class="kd">var</span> <span class="nx">headers</span> <span class="o">=</span> <span class="p">{</span>
-  <span class="s1">'Accept'</span><span class="p">:</span><span class="s1">'application/json'</span>
-
-<span class="p">};</span>
-
-<span class="nx">$</span><span class="p">.</span><span class="nx">ajax</span><span class="p">({</span>
-  <span class="na">url</span><span class="p">:</span> <span class="s1">'https://api.mod.io/v1/games/{game-id}/mods/stats'</span><span class="p">,</span>
-  <span class="na">method</span><span class="p">:</span> <span class="s1">'get'</span><span class="p">,</span>
-  <span class="na">data</span><span class="p">:</span> <span class="s1">'?api_key=YourApiKey'</span><span class="p">,</span>
-  <span class="na">headers</span><span class="p">:</span> <span class="nx">headers</span><span class="p">,</span>
-  <span class="na">success</span><span class="p">:</span> <span class="kd">function</span><span class="p">(</span><span class="nx">data</span><span class="p">)</span> <span class="p">{</span>
-    <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">JSON</span><span class="p">.</span><span class="nx">stringify</span><span class="p">(</span><span class="nx">data</span><span class="p">));</span>
-  <span class="p">}</span>
-<span class="p">})</span>
-</code></pre><pre class="highlight javascript tab-javascript--nodejs"><code><span class="kr">const</span> <span class="nx">request</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s1">'node-fetch'</span><span class="p">);</span>
-
-<span class="kr">const</span> <span class="nx">headers</span> <span class="o">=</span> <span class="p">{</span>
-  <span class="s1">'Accept'</span><span class="p">:</span><span class="s1">'application/json'</span>
-
-<span class="p">};</span>
-
-<span class="nx">fetch</span><span class="p">(</span><span class="s1">'https://api.mod.io/v1/games/{game-id}/mods/stats?api_key=YourApiKey'</span><span class="p">,</span>
-<span class="p">{</span>
-  <span class="na">method</span><span class="p">:</span> <span class="s1">'GET'</span><span class="p">,</span>
-
-  <span class="na">headers</span><span class="p">:</span> <span class="nx">headers</span>
-<span class="p">})</span>
-<span class="p">.</span><span class="nx">then</span><span class="p">(</span><span class="kd">function</span><span class="p">(</span><span class="nx">res</span><span class="p">)</span> <span class="p">{</span>
-    <span class="k">return</span> <span class="nx">res</span><span class="p">.</span><span class="nx">json</span><span class="p">();</span>
-<span class="p">}).</span><span class="nx">then</span><span class="p">(</span><span class="kd">function</span><span class="p">(</span><span class="nx">body</span><span class="p">)</span> <span class="p">{</span>
-    <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">body</span><span class="p">);</span>
-<span class="p">});</span>
-</code></pre><pre class="highlight python tab-python"><code><span class="kn">import</span> <span class="nn">requests</span>
-<span class="n">headers</span> <span class="o">=</span> <span class="p">{</span>
-  <span class="s">'Accept'</span><span class="p">:</span> <span class="s">'application/json'</span>
-<span class="p">}</span>
-
-<span class="n">r</span> <span class="o">=</span> <span class="n">requests</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s">'https://api.mod.io/v1/games/{game-id}/mods/stats'</span><span class="p">,</span> <span class="n">params</span><span class="o">=</span><span class="p">{</span>
-  <span class="s">'api_key'</span><span class="p">:</span> <span class="s">'YourApiKey'</span>
-<span class="p">},</span> <span class="n">headers</span> <span class="o">=</span> <span class="n">headers</span><span class="p">)</span>
-
-<span class="k">print</span> <span class="n">r</span><span class="o">.</span><span class="n">json</span><span class="p">()</span>
-</code></pre><pre class="highlight java tab-java"><code><span class="n">URL</span> <span class="n">obj</span> <span class="o">=</span> <span class="k">new</span> <span class="n">URL</span><span class="o">(</span><span class="s">"https://api.mod.io/v1/games/{game-id}/mods/stats?api_key=YourApiKey"</span><span class="o">);</span>
-<span class="n">HttpURLConnection</span> <span class="n">con</span> <span class="o">=</span> <span class="o">(</span><span class="n">HttpURLConnection</span><span class="o">)</span> <span class="n">obj</span><span class="o">.</span><span class="na">openConnection</span><span class="o">();</span>
-<span class="n">con</span><span class="o">.</span><span class="na">setRequestMethod</span><span class="o">(</span><span class="s">"GET"</span><span class="o">);</span>
-<span class="kt">int</span> <span class="n">responseCode</span> <span class="o">=</span> <span class="n">con</span><span class="o">.</span><span class="na">getResponseCode</span><span class="o">();</span>
-<span class="n">BufferedReader</span> <span class="n">in</span> <span class="o">=</span> <span class="k">new</span> <span class="n">BufferedReader</span><span class="o">(</span>
-    <span class="k">new</span> <span class="nf">InputStreamReader</span><span class="o">(</span><span class="n">con</span><span class="o">.</span><span class="na">getInputStream</span><span class="o">()));</span>
-<span class="n">String</span> <span class="n">inputLine</span><span class="o">;</span>
-<span class="n">StringBuffer</span> <span class="n">response</span> <span class="o">=</span> <span class="k">new</span> <span class="n">StringBuffer</span><span class="o">();</span>
-<span class="k">while</span> <span class="o">((</span><span class="n">inputLine</span> <span class="o">=</span> <span class="n">in</span><span class="o">.</span><span class="na">readLine</span><span class="o">())</span> <span class="o">!=</span> <span class="kc">null</span><span class="o">)</span> <span class="o">{</span>
-    <span class="n">response</span><span class="o">.</span><span class="na">append</span><span class="o">(</span><span class="n">inputLine</span><span class="o">);</span>
-<span class="o">}</span>
-<span class="n">in</span><span class="o">.</span><span class="na">close</span><span class="o">();</span>
-<span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="n">response</span><span class="o">.</span><span class="na">toString</span><span class="o">());</span>
-</code></pre>
-<p><span class="httpmethod GET">GET</span> <span class="endpointheading">/games/{game-id}/mods/stats</span></p>
-
-<p>Get all mod stats for mods of the corresponding game. Successful request will return an array of <a href="#get-mod-stats">Mod Stats Objects</a>.<br><br><strong>NOTE:</strong> We highly recommend you apply filters to this endpoint to get only the results you need. For more information regarding filtering please see the <a href="#filtering">filtering</a> section.</p>
-
-<table>
-<thead>
-<tr>
-<th>Filter</th>
-<th>Type</th>
-<th>Description</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>mod_id</td>
-<td>integer</td>
-<td>Unique id of the mod.</td>
-</tr>
-<tr>
-<td>popularity_rank_position</td>
-<td>integer</td>
-<td>Current ranking by popularity for the corresponding mod.</td>
-</tr>
-<tr>
-<td>popularity_rank_total_mods</td>
-<td>integer</td>
-<td>Global mod count in which <code>popularity_rank_position</code> is compared against.</td>
-</tr>
-<tr>
-<td>downloads_total</td>
-<td>integer</td>
-<td>A sum of all modfile downloads for the corresponding mod.</td>
-</tr>
-<tr>
-<td>subscribers_total</td>
-<td>integer</td>
-<td>A sum of all current subscribers for the corresponding mod.</td>
-</tr>
-<tr>
-<td>ratings_positive</td>
-<td>integer</td>
-<td>Amount of positive ratings.</td>
-</tr>
-<tr>
-<td>ratings_negative</td>
-<td>integer</td>
-<td>Amount of negative ratings.</td>
-</tr>
-</tbody>
-</table>
-
-<blockquote>
-<p>Example response</p>
-</blockquote>
-<pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
-  </span><span class="s2">"data"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
-    </span><span class="p">{</span><span class="w">
-      </span><span class="s2">"mod_id"</span><span class="p">:</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span><span class="w">
-      </span><span class="s2">"popularity_rank_position"</span><span class="p">:</span><span class="w"> </span><span class="mi">13</span><span class="p">,</span><span class="w">
-      </span><span class="s2">"popularity_rank_total_mods"</span><span class="p">:</span><span class="w"> </span><span class="mi">204</span><span class="p">,</span><span class="w">
-      </span><span class="s2">"downloads_total"</span><span class="p">:</span><span class="w"> </span><span class="mi">27492</span><span class="p">,</span><span class="w">
-      </span><span class="s2">"subscribers_total"</span><span class="p">:</span><span class="w"> </span><span class="mi">16394</span><span class="p">,</span><span class="w">
-      </span><span class="s2">"ratings_total"</span><span class="p">:</span><span class="w"> </span><span class="mi">1230</span><span class="p">,</span><span class="w">
-      </span><span class="s2">"ratings_positive"</span><span class="p">:</span><span class="w"> </span><span class="mi">1047</span><span class="p">,</span><span class="w">
-      </span><span class="s2">"ratings_negative"</span><span class="p">:</span><span class="w"> </span><span class="mi">183</span><span class="p">,</span><span class="w">
-      </span><span class="s2">"ratings_percentage_positive"</span><span class="p">:</span><span class="w"> </span><span class="mi">91</span><span class="p">,</span><span class="w">
-      </span><span class="s2">"ratings_weighted_aggregate"</span><span class="p">:</span><span class="w"> </span><span class="mf">87.38</span><span class="p">,</span><span class="w">
-      </span><span class="s2">"ratings_display_text"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Very Positive"</span><span class="p">,</span><span class="w">
-      </span><span class="s2">"date_expires"</span><span class="p">:</span><span class="w"> </span><span class="mi">1492564103</span><span class="w">
-    </span><span class="p">},</span><span class="w">
-    </span><span class="p">{</span><span class="w">
-        </span><span class="err">...</span><span class="w">
-    </span><span class="p">}</span><span class="w">
-  </span><span class="p">],</span><span class="w">
-  </span><span class="s2">"result_count"</span><span class="p">:</span><span class="w"> </span><span class="mi">70</span><span class="p">,</span><span class="w">
-  </span><span class="s2">"result_offset"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
-  </span><span class="s2">"result_limit"</span><span class="p">:</span><span class="w"> </span><span class="mi">100</span><span class="p">,</span><span class="w">
-  </span><span class="s2">"result_total"</span><span class="p">:</span><span class="w"> </span><span class="mi">70</span><span class="w">
-</span><span class="p">}</span><span class="w">
-</span></code></pre>
-<h3 id="Get-Mods-Stats-responses">Responses</h3>
-
-<table>
-<thead>
-<tr>
-<th>Status</th>
-<th>Meaning</th>
-<th>Description</th>
-<th>Response Schema</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>200</td>
-<td><a href="https://tools.ietf.org/html/rfc7231#section-6.3.1">OK</a></td>
-<td>Successful Request</td>
-<td><a href="#schemaget_mod_stats">Get Mod Stats</a></td>
-</tr>
-</tbody>
-</table>
-
-<aside class="auth-notice">
-To perform this request, you must be authenticated via one of the following methods:
-<a href="#authentication">api_key</a>, <a href="#authentication">OAuth 2</a> (Scopes: read)
-</aside>
-<h2 id="get-mod-stats">Get Mod Stats</h2>
-<blockquote>
-<p>Example request</p>
-</blockquote>
-<pre class="highlight shell tab-shell"><code><span class="c"># You can also use wget</span>
-curl -X GET https://api.mod.io/v1/games/<span class="o">{</span>game-id<span class="o">}</span>/mods/<span class="o">{</span>mod-id<span class="o">}</span>/stats?api_key<span class="o">=</span>YourApiKey <span class="se">\</span>
-  -H <span class="s1">'Accept: application/json'</span>
-
-</code></pre><pre class="highlight http tab-http"><code><span class="nf">GET</span> <span class="nn">https://api.mod.io/v1/games/{game-id}/mods/{mod-id}/stats?api_key=YourApiKey</span> <span class="k">HTTP</span><span class="o">/</span><span class="m">1.1</span>
-<span class="na">Host</span><span class="p">:</span> <span class="s">api.mod.io</span>
-
-Accept: application/json
-
-</code></pre><pre class="highlight javascript tab-javascript"><code><span class="kd">var</span> <span class="nx">headers</span> <span class="o">=</span> <span class="p">{</span>
-  <span class="s1">'Accept'</span><span class="p">:</span><span class="s1">'application/json'</span>
-
-<span class="p">};</span>
-
-<span class="nx">$</span><span class="p">.</span><span class="nx">ajax</span><span class="p">({</span>
-  <span class="na">url</span><span class="p">:</span> <span class="s1">'https://api.mod.io/v1/games/{game-id}/mods/{mod-id}/stats'</span><span class="p">,</span>
-  <span class="na">method</span><span class="p">:</span> <span class="s1">'get'</span><span class="p">,</span>
-  <span class="na">data</span><span class="p">:</span> <span class="s1">'?api_key=YourApiKey'</span><span class="p">,</span>
-  <span class="na">headers</span><span class="p">:</span> <span class="nx">headers</span><span class="p">,</span>
-  <span class="na">success</span><span class="p">:</span> <span class="kd">function</span><span class="p">(</span><span class="nx">data</span><span class="p">)</span> <span class="p">{</span>
-    <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">JSON</span><span class="p">.</span><span class="nx">stringify</span><span class="p">(</span><span class="nx">data</span><span class="p">));</span>
-  <span class="p">}</span>
-<span class="p">})</span>
-</code></pre><pre class="highlight javascript tab-javascript--nodejs"><code><span class="kr">const</span> <span class="nx">request</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s1">'node-fetch'</span><span class="p">);</span>
-
-<span class="kr">const</span> <span class="nx">headers</span> <span class="o">=</span> <span class="p">{</span>
-  <span class="s1">'Accept'</span><span class="p">:</span><span class="s1">'application/json'</span>
-
-<span class="p">};</span>
-
-<span class="nx">fetch</span><span class="p">(</span><span class="s1">'https://api.mod.io/v1/games/{game-id}/mods/{mod-id}/stats?api_key=YourApiKey'</span><span class="p">,</span>
-<span class="p">{</span>
-  <span class="na">method</span><span class="p">:</span> <span class="s1">'GET'</span><span class="p">,</span>
-
-  <span class="na">headers</span><span class="p">:</span> <span class="nx">headers</span>
-<span class="p">})</span>
-<span class="p">.</span><span class="nx">then</span><span class="p">(</span><span class="kd">function</span><span class="p">(</span><span class="nx">res</span><span class="p">)</span> <span class="p">{</span>
-    <span class="k">return</span> <span class="nx">res</span><span class="p">.</span><span class="nx">json</span><span class="p">();</span>
-<span class="p">}).</span><span class="nx">then</span><span class="p">(</span><span class="kd">function</span><span class="p">(</span><span class="nx">body</span><span class="p">)</span> <span class="p">{</span>
-    <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">body</span><span class="p">);</span>
-<span class="p">});</span>
-</code></pre><pre class="highlight python tab-python"><code><span class="kn">import</span> <span class="nn">requests</span>
-<span class="n">headers</span> <span class="o">=</span> <span class="p">{</span>
-  <span class="s">'Accept'</span><span class="p">:</span> <span class="s">'application/json'</span>
-<span class="p">}</span>
-
-<span class="n">r</span> <span class="o">=</span> <span class="n">requests</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s">'https://api.mod.io/v1/games/{game-id}/mods/{mod-id}/stats'</span><span class="p">,</span> <span class="n">params</span><span class="o">=</span><span class="p">{</span>
-  <span class="s">'api_key'</span><span class="p">:</span> <span class="s">'YourApiKey'</span>
-<span class="p">},</span> <span class="n">headers</span> <span class="o">=</span> <span class="n">headers</span><span class="p">)</span>
-
-<span class="k">print</span> <span class="n">r</span><span class="o">.</span><span class="n">json</span><span class="p">()</span>
-</code></pre><pre class="highlight java tab-java"><code><span class="n">URL</span> <span class="n">obj</span> <span class="o">=</span> <span class="k">new</span> <span class="n">URL</span><span class="o">(</span><span class="s">"https://api.mod.io/v1/games/{game-id}/mods/{mod-id}/stats?api_key=YourApiKey"</span><span class="o">);</span>
-<span class="n">HttpURLConnection</span> <span class="n">con</span> <span class="o">=</span> <span class="o">(</span><span class="n">HttpURLConnection</span><span class="o">)</span> <span class="n">obj</span><span class="o">.</span><span class="na">openConnection</span><span class="o">();</span>
-<span class="n">con</span><span class="o">.</span><span class="na">setRequestMethod</span><span class="o">(</span><span class="s">"GET"</span><span class="o">);</span>
-<span class="kt">int</span> <span class="n">responseCode</span> <span class="o">=</span> <span class="n">con</span><span class="o">.</span><span class="na">getResponseCode</span><span class="o">();</span>
-<span class="n">BufferedReader</span> <span class="n">in</span> <span class="o">=</span> <span class="k">new</span> <span class="n">BufferedReader</span><span class="o">(</span>
-    <span class="k">new</span> <span class="nf">InputStreamReader</span><span class="o">(</span><span class="n">con</span><span class="o">.</span><span class="na">getInputStream</span><span class="o">()));</span>
-<span class="n">String</span> <span class="n">inputLine</span><span class="o">;</span>
-<span class="n">StringBuffer</span> <span class="n">response</span> <span class="o">=</span> <span class="k">new</span> <span class="n">StringBuffer</span><span class="o">();</span>
-<span class="k">while</span> <span class="o">((</span><span class="n">inputLine</span> <span class="o">=</span> <span class="n">in</span><span class="o">.</span><span class="na">readLine</span><span class="o">())</span> <span class="o">!=</span> <span class="kc">null</span><span class="o">)</span> <span class="o">{</span>
-    <span class="n">response</span><span class="o">.</span><span class="na">append</span><span class="o">(</span><span class="n">inputLine</span><span class="o">);</span>
-<span class="o">}</span>
-<span class="n">in</span><span class="o">.</span><span class="na">close</span><span class="o">();</span>
-<span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="n">response</span><span class="o">.</span><span class="na">toString</span><span class="o">());</span>
-</code></pre>
-<p><span class="httpmethod GET">GET</span> <span class="endpointheading">/games/{game-id}/mods/{mod-id}/stats</span></p>
-
-<p>Get mod stats for the corresponding mod. Successful request will return a single <a href="#mod-stats-object">Mod Stats Object</a>.</p>
-
-<blockquote>
-<p>Example response</p>
-</blockquote>
-<pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
-  </span><span class="s2">"mod_id"</span><span class="p">:</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span><span class="w">
-  </span><span class="s2">"popularity_rank_position"</span><span class="p">:</span><span class="w"> </span><span class="mi">13</span><span class="p">,</span><span class="w">
-  </span><span class="s2">"popularity_rank_total_mods"</span><span class="p">:</span><span class="w"> </span><span class="mi">204</span><span class="p">,</span><span class="w">
-  </span><span class="s2">"downloads_total"</span><span class="p">:</span><span class="w"> </span><span class="mi">27492</span><span class="p">,</span><span class="w">
-  </span><span class="s2">"subscribers_total"</span><span class="p">:</span><span class="w"> </span><span class="mi">16394</span><span class="p">,</span><span class="w">
-  </span><span class="s2">"ratings_total"</span><span class="p">:</span><span class="w"> </span><span class="mi">1230</span><span class="p">,</span><span class="w">
-  </span><span class="s2">"ratings_positive"</span><span class="p">:</span><span class="w"> </span><span class="mi">1047</span><span class="p">,</span><span class="w">
-  </span><span class="s2">"ratings_negative"</span><span class="p">:</span><span class="w"> </span><span class="mi">183</span><span class="p">,</span><span class="w">
-  </span><span class="s2">"ratings_percentage_positive"</span><span class="p">:</span><span class="w"> </span><span class="mi">91</span><span class="p">,</span><span class="w">
-  </span><span class="s2">"ratings_weighted_aggregate"</span><span class="p">:</span><span class="w"> </span><span class="mf">87.38</span><span class="p">,</span><span class="w">
-  </span><span class="s2">"ratings_display_text"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Very Positive"</span><span class="p">,</span><span class="w">
-  </span><span class="s2">"date_expires"</span><span class="p">:</span><span class="w"> </span><span class="mi">1492564103</span><span class="w">
-</span><span class="p">}</span><span class="w">
-</span></code></pre>
-<h3 id="Get-Mod-Stats-responses">Responses</h3>
-
-<table>
-<thead>
-<tr>
-<th>Status</th>
-<th>Meaning</th>
-<th>Description</th>
-<th>Response Schema</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>200</td>
-<td><a href="https://tools.ietf.org/html/rfc7231#section-6.3.1">OK</a></td>
-<td>Successful Request</td>
-<td><a href="#schemamod_stats_object">Mod Stats Object</a></td>
-</tr>
-</tbody>
-</table>
-
-<aside class="auth-notice">
-To perform this request, you must be authenticated via one of the following methods:
-<a href="#authentication">api_key</a>, <a href="#authentication">OAuth 2</a> (Scopes: read)
-</aside>
-<h2 id="get-game-stats">Get Game Stats</h2>
-<blockquote>
-<p>Example request</p>
-</blockquote>
-<pre class="highlight shell tab-shell"><code><span class="c"># You can also use wget</span>
-curl -X GET https://api.mod.io/v1/games/<span class="o">{</span>game-id<span class="o">}</span>/stats?api_key<span class="o">=</span>YourApiKey <span class="se">\</span>
-  -H <span class="s1">'Accept: application/json'</span>
-
-</code></pre><pre class="highlight http tab-http"><code><span class="nf">GET</span> <span class="nn">https://api.mod.io/v1/games/{game-id}/stats?api_key=YourApiKey</span> <span class="k">HTTP</span><span class="o">/</span><span class="m">1.1</span>
-<span class="na">Host</span><span class="p">:</span> <span class="s">api.mod.io</span>
-
-Accept: application/json
-
-</code></pre><pre class="highlight javascript tab-javascript"><code><span class="kd">var</span> <span class="nx">headers</span> <span class="o">=</span> <span class="p">{</span>
-  <span class="s1">'Accept'</span><span class="p">:</span><span class="s1">'application/json'</span>
-
-<span class="p">};</span>
-
-<span class="nx">$</span><span class="p">.</span><span class="nx">ajax</span><span class="p">({</span>
-  <span class="na">url</span><span class="p">:</span> <span class="s1">'https://api.mod.io/v1/games/{game-id}/stats'</span><span class="p">,</span>
-  <span class="na">method</span><span class="p">:</span> <span class="s1">'get'</span><span class="p">,</span>
-  <span class="na">data</span><span class="p">:</span> <span class="s1">'?api_key=YourApiKey'</span><span class="p">,</span>
-  <span class="na">headers</span><span class="p">:</span> <span class="nx">headers</span><span class="p">,</span>
-  <span class="na">success</span><span class="p">:</span> <span class="kd">function</span><span class="p">(</span><span class="nx">data</span><span class="p">)</span> <span class="p">{</span>
-    <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">JSON</span><span class="p">.</span><span class="nx">stringify</span><span class="p">(</span><span class="nx">data</span><span class="p">));</span>
-  <span class="p">}</span>
-<span class="p">})</span>
-</code></pre><pre class="highlight javascript tab-javascript--nodejs"><code><span class="kr">const</span> <span class="nx">request</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s1">'node-fetch'</span><span class="p">);</span>
-
-<span class="kr">const</span> <span class="nx">headers</span> <span class="o">=</span> <span class="p">{</span>
-  <span class="s1">'Accept'</span><span class="p">:</span><span class="s1">'application/json'</span>
-
-<span class="p">};</span>
-
-<span class="nx">fetch</span><span class="p">(</span><span class="s1">'https://api.mod.io/v1/games/{game-id}/stats?api_key=YourApiKey'</span><span class="p">,</span>
-<span class="p">{</span>
-  <span class="na">method</span><span class="p">:</span> <span class="s1">'GET'</span><span class="p">,</span>
-
-  <span class="na">headers</span><span class="p">:</span> <span class="nx">headers</span>
-<span class="p">})</span>
-<span class="p">.</span><span class="nx">then</span><span class="p">(</span><span class="kd">function</span><span class="p">(</span><span class="nx">res</span><span class="p">)</span> <span class="p">{</span>
-    <span class="k">return</span> <span class="nx">res</span><span class="p">.</span><span class="nx">json</span><span class="p">();</span>
-<span class="p">}).</span><span class="nx">then</span><span class="p">(</span><span class="kd">function</span><span class="p">(</span><span class="nx">body</span><span class="p">)</span> <span class="p">{</span>
-    <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">body</span><span class="p">);</span>
-<span class="p">});</span>
-</code></pre><pre class="highlight python tab-python"><code><span class="kn">import</span> <span class="nn">requests</span>
-<span class="n">headers</span> <span class="o">=</span> <span class="p">{</span>
-  <span class="s">'Accept'</span><span class="p">:</span> <span class="s">'application/json'</span>
-<span class="p">}</span>
-
-<span class="n">r</span> <span class="o">=</span> <span class="n">requests</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s">'https://api.mod.io/v1/games/{game-id}/stats'</span><span class="p">,</span> <span class="n">params</span><span class="o">=</span><span class="p">{</span>
-  <span class="s">'api_key'</span><span class="p">:</span> <span class="s">'YourApiKey'</span>
-<span class="p">},</span> <span class="n">headers</span> <span class="o">=</span> <span class="n">headers</span><span class="p">)</span>
-
-<span class="k">print</span> <span class="n">r</span><span class="o">.</span><span class="n">json</span><span class="p">()</span>
-</code></pre><pre class="highlight java tab-java"><code><span class="n">URL</span> <span class="n">obj</span> <span class="o">=</span> <span class="k">new</span> <span class="n">URL</span><span class="o">(</span><span class="s">"https://api.mod.io/v1/games/{game-id}/stats?api_key=YourApiKey"</span><span class="o">);</span>
-<span class="n">HttpURLConnection</span> <span class="n">con</span> <span class="o">=</span> <span class="o">(</span><span class="n">HttpURLConnection</span><span class="o">)</span> <span class="n">obj</span><span class="o">.</span><span class="na">openConnection</span><span class="o">();</span>
-<span class="n">con</span><span class="o">.</span><span class="na">setRequestMethod</span><span class="o">(</span><span class="s">"GET"</span><span class="o">);</span>
-<span class="kt">int</span> <span class="n">responseCode</span> <span class="o">=</span> <span class="n">con</span><span class="o">.</span><span class="na">getResponseCode</span><span class="o">();</span>
-<span class="n">BufferedReader</span> <span class="n">in</span> <span class="o">=</span> <span class="k">new</span> <span class="n">BufferedReader</span><span class="o">(</span>
-    <span class="k">new</span> <span class="nf">InputStreamReader</span><span class="o">(</span><span class="n">con</span><span class="o">.</span><span class="na">getInputStream</span><span class="o">()));</span>
-<span class="n">String</span> <span class="n">inputLine</span><span class="o">;</span>
-<span class="n">StringBuffer</span> <span class="n">response</span> <span class="o">=</span> <span class="k">new</span> <span class="n">StringBuffer</span><span class="o">();</span>
-<span class="k">while</span> <span class="o">((</span><span class="n">inputLine</span> <span class="o">=</span> <span class="n">in</span><span class="o">.</span><span class="na">readLine</span><span class="o">())</span> <span class="o">!=</span> <span class="kc">null</span><span class="o">)</span> <span class="o">{</span>
-    <span class="n">response</span><span class="o">.</span><span class="na">append</span><span class="o">(</span><span class="n">inputLine</span><span class="o">);</span>
-<span class="o">}</span>
-<span class="n">in</span><span class="o">.</span><span class="na">close</span><span class="o">();</span>
-<span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="n">response</span><span class="o">.</span><span class="na">toString</span><span class="o">());</span>
-</code></pre>
-<p><span class="httpmethod GET">GET</span> <span class="endpointheading">/games/{game-id}/stats</span></p>
-
-<p>Get game stats for the corresponding game. Successful request will return a single <a href="#game-stats-object">Game Stats Object</a>.</p>
-
-<blockquote>
-<p>Example response</p>
-</blockquote>
-<pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
-  </span><span class="s2">"game_id"</span><span class="p">:</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span><span class="w">
-  </span><span class="s2">"mods_count_total"</span><span class="p">:</span><span class="w"> </span><span class="mi">13</span><span class="p">,</span><span class="w">
-  </span><span class="s2">"mods_downloads_today"</span><span class="p">:</span><span class="w"> </span><span class="mi">204</span><span class="p">,</span><span class="w">
-  </span><span class="s2">"mods_downloads_total"</span><span class="p">:</span><span class="w"> </span><span class="mi">27492</span><span class="p">,</span><span class="w">
-  </span><span class="s2">"mods_downloads_daily_average"</span><span class="p">:</span><span class="w"> </span><span class="mi">1230</span><span class="p">,</span><span class="w">
-  </span><span class="s2">"mods_subscribers_total"</span><span class="p">:</span><span class="w"> </span><span class="mi">16394</span><span class="p">,</span><span class="w">
-  </span><span class="s2">"date_expires"</span><span class="p">:</span><span class="w"> </span><span class="mi">1492564103</span><span class="w">
-</span><span class="p">}</span><span class="w">
-</span></code></pre>
-<h3 id="Get-Game-Stats-responses">Responses</h3>
-
-<table>
-<thead>
-<tr>
-<th>Status</th>
-<th>Meaning</th>
-<th>Description</th>
-<th>Response Schema</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>200</td>
-<td><a href="https://tools.ietf.org/html/rfc7231#section-6.3.1">OK</a></td>
-<td>Successful Request</td>
-<td><a href="#schemagame_stats_object">Game Stats Object</a></td>
 </tr>
 </tbody>
 </table>
@@ -6953,6 +7099,7 @@ Accept: application/json
   </span><span class="s2">"result_limit"</span><span class="p">:</span><span class="w"> </span><span class="mi">100</span><span class="p">,</span><span class="w">
   </span><span class="s2">"result_total"</span><span class="p">:</span><span class="w"> </span><span class="mi">70</span><span class="w">
 </span><span class="p">}</span><span class="w">
+
 </span></code></pre>
 <h3 id="Get-Mod-Tags-responses">Responses</h3>
 
@@ -6961,6 +7108,7 @@ Accept: application/json
 <tr>
 <th>Status</th>
 <th>Meaning</th>
+<th>Error Ref</th>
 <th>Description</th>
 <th>Response Schema</th>
 </tr>
@@ -6969,6 +7117,7 @@ Accept: application/json
 <tr>
 <td>200</td>
 <td><a href="https://tools.ietf.org/html/rfc7231#section-6.3.1">OK</a></td>
+<td></td>
 <td>Successful Request</td>
 <td><a href="#schemaget_mod_tags">Get Mod Tags</a></td>
 </tr>
@@ -7091,6 +7240,7 @@ curl -X POST https://api.mod.io/v1/games/<span class="o">{</span>game-id<span cl
   </span><span class="s2">"code"</span><span class="p">:</span><span class="w"> </span><span class="mi">201</span><span class="p">,</span><span class="w">
   </span><span class="s2">"message"</span><span class="p">:</span><span class="w"> </span><span class="s2">"You have successfully added tags to the specified mod."</span><span class="w">
 </span><span class="p">}</span><span class="w">
+
 </span></code></pre>
 <h3 id="Add-Mod-Tags-responses">Responses</h3>
 
@@ -7099,6 +7249,7 @@ curl -X POST https://api.mod.io/v1/games/<span class="o">{</span>game-id<span cl
 <tr>
 <th>Status</th>
 <th>Meaning</th>
+<th>Error Ref</th>
 <th>Description</th>
 <th>Response Schema</th>
 </tr>
@@ -7107,8 +7258,16 @@ curl -X POST https://api.mod.io/v1/games/<span class="o">{</span>game-id<span cl
 <tr>
 <td>201</td>
 <td><a href="https://tools.ietf.org/html/rfc7231#section-6.3.2">Created</a></td>
+<td></td>
 <td>Created</td>
 <td><a href="#schemaaddmodtag">addModTag</a></td>
+</tr>
+<tr>
+<td>403</td>
+<td><a href="https://tools.ietf.org/html/rfc7231#section-6.5.3">Forbidden</a></td>
+<td>15037</td>
+<td>The authenticated user does not have permission to submit tags for the specified mod. Ensure the user is part of the mod team before attempting the request again.</td>
+<td><a href="#schemaerror_object">Error Object</a></td>
 </tr>
 </tbody>
 </table>
@@ -7247,6 +7406,7 @@ curl -X DELETE https://api.mod.io/v1/games/<span class="o">{</span>game-id<span 
 <p>Example response</p>
 </blockquote>
 <pre class="highlight json tab-json"><code><span class="w"> </span><span class="mi">204</span><span class="w"> </span><span class="err">No</span><span class="w"> </span><span class="err">Content</span><span class="w"> 
+
 </span></code></pre>
 <h3 id="Delete-Mod-Tags-responses">Responses</h3>
 
@@ -7255,6 +7415,7 @@ curl -X DELETE https://api.mod.io/v1/games/<span class="o">{</span>game-id<span 
 <tr>
 <th>Status</th>
 <th>Meaning</th>
+<th>Error Ref</th>
 <th>Description</th>
 <th>Response Schema</th>
 </tr>
@@ -7263,8 +7424,16 @@ curl -X DELETE https://api.mod.io/v1/games/<span class="o">{</span>game-id<span 
 <tr>
 <td>204</td>
 <td><a href="https://tools.ietf.org/html/rfc7231#section-6.3.5">No Content</a></td>
+<td></td>
 <td>Successful Request. No Body Returned.</td>
 <td>None</td>
+</tr>
+<tr>
+<td>403</td>
+<td><a href="https://tools.ietf.org/html/rfc7231#section-6.5.3">Forbidden</a></td>
+<td>15038</td>
+<td>The authenticated user does not have permission to delete tags for the specified mod. Ensure the user is part of the mod team before attempting the request again.</td>
+<td><a href="#schemaerror_object">Error Object</a></td>
 </tr>
 </tbody>
 </table>
@@ -7368,6 +7537,7 @@ Accept: application/json
   </span><span class="s2">"result_limit"</span><span class="p">:</span><span class="w"> </span><span class="mi">100</span><span class="p">,</span><span class="w">
   </span><span class="s2">"result_total"</span><span class="p">:</span><span class="w"> </span><span class="mi">70</span><span class="w">
 </span><span class="p">}</span><span class="w">
+
 </span></code></pre>
 <h3 id="Get-Game-Tag-Options-responses">Responses</h3>
 
@@ -7376,6 +7546,7 @@ Accept: application/json
 <tr>
 <th>Status</th>
 <th>Meaning</th>
+<th>Error Ref</th>
 <th>Description</th>
 <th>Response Schema</th>
 </tr>
@@ -7384,6 +7555,7 @@ Accept: application/json
 <tr>
 <td>200</td>
 <td><a href="https://tools.ietf.org/html/rfc7231#section-6.3.1">OK</a></td>
+<td></td>
 <td>Successful Request</td>
 <td><a href="#schemaget_game_tag_options">Get Game Tag Options</a></td>
 </tr>
@@ -7534,6 +7706,7 @@ curl -X POST https://api.mod.io/v1/games/<span class="o">{</span>game-id<span cl
   </span><span class="s2">"code"</span><span class="p">:</span><span class="w"> </span><span class="mi">201</span><span class="p">,</span><span class="w">
   </span><span class="s2">"message"</span><span class="p">:</span><span class="w"> </span><span class="s2">"You have successfully added categories/tags to the specified game."</span><span class="w">
 </span><span class="p">}</span><span class="w">
+
 </span></code></pre>
 <h3 id="Add-Game-Tag-Option-responses">Responses</h3>
 
@@ -7542,6 +7715,7 @@ curl -X POST https://api.mod.io/v1/games/<span class="o">{</span>game-id<span cl
 <tr>
 <th>Status</th>
 <th>Meaning</th>
+<th>Error Ref</th>
 <th>Description</th>
 <th>Response Schema</th>
 </tr>
@@ -7550,8 +7724,16 @@ curl -X POST https://api.mod.io/v1/games/<span class="o">{</span>game-id<span cl
 <tr>
 <td>201</td>
 <td><a href="https://tools.ietf.org/html/rfc7231#section-6.3.2">Created</a></td>
+<td></td>
 <td>Created</td>
 <td><a href="#message-object">Message Object</a></td>
+</tr>
+<tr>
+<td>403</td>
+<td><a href="https://tools.ietf.org/html/rfc7231#section-6.5.3">Forbidden</a></td>
+<td>14012</td>
+<td>The authenticated user does not have permission to submit tags for the specified game. Ensure the user is part of the game team before attempting the request again.</td>
+<td><a href="#schemaerror_object">Error Object</a></td>
 </tr>
 </tbody>
 </table>
@@ -7700,6 +7882,7 @@ curl -X DELETE https://api.mod.io/v1/games/<span class="o">{</span>game-id<span 
 <p>Example response</p>
 </blockquote>
 <pre class="highlight json tab-json"><code><span class="w"> </span><span class="mi">204</span><span class="w"> </span><span class="err">No</span><span class="w"> </span><span class="err">Content</span><span class="w"> 
+
 </span></code></pre>
 <h3 id="Delete-Game-Tag-Option-responses">Responses</h3>
 
@@ -7708,6 +7891,7 @@ curl -X DELETE https://api.mod.io/v1/games/<span class="o">{</span>game-id<span 
 <tr>
 <th>Status</th>
 <th>Meaning</th>
+<th>Error Ref</th>
 <th>Description</th>
 <th>Response Schema</th>
 </tr>
@@ -7716,8 +7900,16 @@ curl -X DELETE https://api.mod.io/v1/games/<span class="o">{</span>game-id<span 
 <tr>
 <td>204</td>
 <td><a href="https://tools.ietf.org/html/rfc7231#section-6.3.5">No Content</a></td>
+<td></td>
 <td>Successful Request. No Body Returned.</td>
 <td>None</td>
+</tr>
+<tr>
+<td>403</td>
+<td><a href="https://tools.ietf.org/html/rfc7231#section-6.5.3">Forbidden</a></td>
+<td>14013</td>
+<td>The authenticated user does not have permission to delete tags for the specified game. Ensure the user is part of the game team before attempting the request again.</td>
+<td><a href="#schemaerror_object">Error Object</a></td>
 </tr>
 </tbody>
 </table>
@@ -7840,6 +8032,7 @@ curl -X POST https://api.mod.io/v1/games/<span class="o">{</span>game-id<span cl
   </span><span class="s2">"code"</span><span class="p">:</span><span class="w"> </span><span class="mi">201</span><span class="p">,</span><span class="w">
   </span><span class="s2">"message"</span><span class="p">:</span><span class="w"> </span><span class="s2">"You have successfully submitted a rating for the specified mod."</span><span class="w">
 </span><span class="p">}</span><span class="w">
+
 </span></code></pre>
 <h3 id="Add-Mod-Rating-responses">Responses</h3>
 
@@ -7848,6 +8041,7 @@ curl -X POST https://api.mod.io/v1/games/<span class="o">{</span>game-id<span cl
 <tr>
 <th>Status</th>
 <th>Meaning</th>
+<th>Error Ref</th>
 <th>Description</th>
 <th>Response Schema</th>
 </tr>
@@ -7856,8 +8050,16 @@ curl -X POST https://api.mod.io/v1/games/<span class="o">{</span>game-id<span cl
 <tr>
 <td>201</td>
 <td><a href="https://tools.ietf.org/html/rfc7231#section-6.3.2">Created</a></td>
+<td></td>
 <td>Resource created</td>
 <td><a href="#message-object">Message Object</a></td>
+</tr>
+<tr>
+<td>400</td>
+<td><a href="https://tools.ietf.org/html/rfc7231#section-6.5.1">Bad Request</a></td>
+<td>15028</td>
+<td>The authenticated user has already submitted a rating for this mod.</td>
+<td><a href="#schemaerror_object">Error Object</a></td>
 </tr>
 </tbody>
 </table>
@@ -7957,6 +8159,7 @@ Accept: application/json
   </span><span class="s2">"result_limit"</span><span class="p">:</span><span class="w"> </span><span class="mi">100</span><span class="p">,</span><span class="w">
   </span><span class="s2">"result_total"</span><span class="p">:</span><span class="w"> </span><span class="mi">70</span><span class="w">
 </span><span class="p">}</span><span class="w">
+
 </span></code></pre>
 <h3 id="Get-Mod-KVP-Metadata-responses">Responses</h3>
 
@@ -7965,6 +8168,7 @@ Accept: application/json
 <tr>
 <th>Status</th>
 <th>Meaning</th>
+<th>Error Ref</th>
 <th>Description</th>
 <th>Response Schema</th>
 </tr>
@@ -7973,6 +8177,7 @@ Accept: application/json
 <tr>
 <td>200</td>
 <td><a href="https://tools.ietf.org/html/rfc7231#section-6.3.1">OK</a></td>
+<td></td>
 <td>Successful Request</td>
 <td><a href="#schemaget_mod_kvp_metadata">Get Mod KVP Metadata</a></td>
 </tr>
@@ -8095,6 +8300,7 @@ curl -X POST https://api.mod.io/v1/games/<span class="o">{</span>game-id<span cl
   </span><span class="s2">"code"</span><span class="p">:</span><span class="w"> </span><span class="mi">201</span><span class="p">,</span><span class="w">
   </span><span class="s2">"message"</span><span class="p">:</span><span class="w"> </span><span class="s2">"You have successfully added new key-value metadata to the specified mod."</span><span class="w">
 </span><span class="p">}</span><span class="w">
+
 </span></code></pre>
 <h3 id="Add-Mod-KVP-Metadata-responses">Responses</h3>
 
@@ -8103,6 +8309,7 @@ curl -X POST https://api.mod.io/v1/games/<span class="o">{</span>game-id<span cl
 <tr>
 <th>Status</th>
 <th>Meaning</th>
+<th>Error Ref</th>
 <th>Description</th>
 <th>Response Schema</th>
 </tr>
@@ -8111,8 +8318,16 @@ curl -X POST https://api.mod.io/v1/games/<span class="o">{</span>game-id<span cl
 <tr>
 <td>201</td>
 <td><a href="https://tools.ietf.org/html/rfc7231#section-6.3.2">Created</a></td>
+<td></td>
 <td>Created</td>
 <td><a href="#message-object">Message Object</a></td>
+</tr>
+<tr>
+<td>403</td>
+<td><a href="https://tools.ietf.org/html/rfc7231#section-6.5.3">Forbidden</a></td>
+<td>15033</td>
+<td>The authenticated user does not have permission to add metadata to this mod, this action is restricted to team managers &amp; administrators only.</td>
+<td><a href="#schemaerror_object">Error Object</a></td>
 </tr>
 </tbody>
 </table>
@@ -8251,6 +8466,7 @@ curl -X DELETE https://api.mod.io/v1/games/<span class="o">{</span>game-id<span 
 <p>Example response</p>
 </blockquote>
 <pre class="highlight json tab-json"><code><span class="w"> </span><span class="mi">204</span><span class="w"> </span><span class="err">No</span><span class="w"> </span><span class="err">Content</span><span class="w"> 
+
 </span></code></pre>
 <h3 id="Delete-Mod-KVP-Metadata-responses">Responses</h3>
 
@@ -8259,6 +8475,7 @@ curl -X DELETE https://api.mod.io/v1/games/<span class="o">{</span>game-id<span 
 <tr>
 <th>Status</th>
 <th>Meaning</th>
+<th>Error Ref</th>
 <th>Description</th>
 <th>Response Schema</th>
 </tr>
@@ -8267,8 +8484,16 @@ curl -X DELETE https://api.mod.io/v1/games/<span class="o">{</span>game-id<span 
 <tr>
 <td>204</td>
 <td><a href="https://tools.ietf.org/html/rfc7231#section-6.3.5">No Content</a></td>
+<td></td>
 <td>Successful Request. No Body Returned.</td>
 <td>None</td>
+</tr>
+<tr>
+<td>403</td>
+<td><a href="https://tools.ietf.org/html/rfc7231#section-6.5.3">Forbidden</a></td>
+<td>15034</td>
+<td>The authenticated user does not have permission to delete metadata from this mod, this action is restricted to team managers &amp; administrators only.</td>
+<td><a href="#schemaerror_object">Error Object</a></td>
 </tr>
 </tbody>
 </table>
@@ -8372,6 +8597,7 @@ Accept: application/json
   </span><span class="s2">"result_limit"</span><span class="p">:</span><span class="w"> </span><span class="mi">100</span><span class="p">,</span><span class="w">
   </span><span class="s2">"result_total"</span><span class="p">:</span><span class="w"> </span><span class="mi">70</span><span class="w">
 </span><span class="p">}</span><span class="w">
+
 </span></code></pre>
 <h3 id="Get-Mod-Dependencies-responses">Responses</h3>
 
@@ -8380,6 +8606,7 @@ Accept: application/json
 <tr>
 <th>Status</th>
 <th>Meaning</th>
+<th>Error Ref</th>
 <th>Description</th>
 <th>Response Schema</th>
 </tr>
@@ -8388,6 +8615,7 @@ Accept: application/json
 <tr>
 <td>200</td>
 <td><a href="https://tools.ietf.org/html/rfc7231#section-6.3.1">OK</a></td>
+<td></td>
 <td>Successful Request</td>
 <td><a href="#schemaget_mod_dependencies">Get Mod Dependencies</a></td>
 </tr>
@@ -8510,6 +8738,7 @@ curl -X POST https://api.mod.io/v1/games/<span class="o">{</span>game-id<span cl
   </span><span class="s2">"code"</span><span class="p">:</span><span class="w"> </span><span class="mi">201</span><span class="p">,</span><span class="w">
   </span><span class="s2">"message"</span><span class="p">:</span><span class="w"> </span><span class="s2">"You have successfully added new dependencies to the specified mod."</span><span class="w">
 </span><span class="p">}</span><span class="w">
+
 </span></code></pre>
 <h3 id="Add-Mod-Dependencies-responses">Responses</h3>
 
@@ -8518,6 +8747,7 @@ curl -X POST https://api.mod.io/v1/games/<span class="o">{</span>game-id<span cl
 <tr>
 <th>Status</th>
 <th>Meaning</th>
+<th>Error Ref</th>
 <th>Description</th>
 <th>Response Schema</th>
 </tr>
@@ -8526,8 +8756,16 @@ curl -X POST https://api.mod.io/v1/games/<span class="o">{</span>game-id<span cl
 <tr>
 <td>201</td>
 <td><a href="https://tools.ietf.org/html/rfc7231#section-6.3.2">Created</a></td>
+<td></td>
 <td>Created</td>
 <td><a href="#message-object">Message Object</a></td>
+</tr>
+<tr>
+<td>403</td>
+<td><a href="https://tools.ietf.org/html/rfc7231#section-6.5.3">Forbidden</a></td>
+<td>15031</td>
+<td>The authenticated user does not have permission to add dependencies for this mod, this action is restricted to team managers &amp; administrators only.</td>
+<td><a href="#schemaerror_object">Error Object</a></td>
 </tr>
 </tbody>
 </table>
@@ -8666,6 +8904,7 @@ curl -X DELETE https://api.mod.io/v1/games/<span class="o">{</span>game-id<span 
 <p>Example response</p>
 </blockquote>
 <pre class="highlight json tab-json"><code><span class="w"> </span><span class="mi">204</span><span class="w"> </span><span class="err">No</span><span class="w"> </span><span class="err">Content</span><span class="w"> 
+
 </span></code></pre>
 <h3 id="Delete-Mod-Dependencies-responses">Responses</h3>
 
@@ -8674,6 +8913,7 @@ curl -X DELETE https://api.mod.io/v1/games/<span class="o">{</span>game-id<span 
 <tr>
 <th>Status</th>
 <th>Meaning</th>
+<th>Error Ref</th>
 <th>Description</th>
 <th>Response Schema</th>
 </tr>
@@ -8682,8 +8922,16 @@ curl -X DELETE https://api.mod.io/v1/games/<span class="o">{</span>game-id<span 
 <tr>
 <td>204</td>
 <td><a href="https://tools.ietf.org/html/rfc7231#section-6.3.5">No Content</a></td>
+<td></td>
 <td>Successful Request. No Body Returned.</td>
 <td>None</td>
+</tr>
+<tr>
+<td>403</td>
+<td><a href="https://tools.ietf.org/html/rfc7231#section-6.5.3">Forbidden</a></td>
+<td>15032</td>
+<td>The authenticated user does not have permission to delete dependencies for this mod, this action is restricted to team managers &amp; administrators only.</td>
+<td><a href="#schemaerror_object">Error Object</a></td>
 </tr>
 </tbody>
 </table>
@@ -8849,6 +9097,7 @@ Accept: application/json
   </span><span class="s2">"result_limit"</span><span class="p">:</span><span class="w"> </span><span class="mi">100</span><span class="p">,</span><span class="w">
   </span><span class="s2">"result_total"</span><span class="p">:</span><span class="w"> </span><span class="mi">70</span><span class="w">
 </span><span class="p">}</span><span class="w">
+
 </span></code></pre>
 <h3 id="Get-Mod-Team-Members-responses">Responses</h3>
 
@@ -8857,6 +9106,7 @@ Accept: application/json
 <tr>
 <th>Status</th>
 <th>Meaning</th>
+<th>Error Ref</th>
 <th>Description</th>
 <th>Response Schema</th>
 </tr>
@@ -8865,6 +9115,7 @@ Accept: application/json
 <tr>
 <td>200</td>
 <td><a href="https://tools.ietf.org/html/rfc7231#section-6.3.1">OK</a></td>
+<td></td>
 <td>Successful Request</td>
 <td><a href="#schemaget_team_members">Get Team Members</a></td>
 </tr>
@@ -9005,6 +9256,7 @@ curl -X POST https://api.mod.io/v1/games/<span class="o">{</span>game-id<span cl
   </span><span class="s2">"code"</span><span class="p">:</span><span class="w"> </span><span class="mi">201</span><span class="p">,</span><span class="w">
   </span><span class="s2">"message"</span><span class="p">:</span><span class="w"> </span><span class="s2">"You have successfully added a member to the specified team."</span><span class="w">
 </span><span class="p">}</span><span class="w">
+
 </span></code></pre>
 <h3 id="Add-Mod-Team-Member-responses">Responses</h3>
 
@@ -9013,6 +9265,7 @@ curl -X POST https://api.mod.io/v1/games/<span class="o">{</span>game-id<span cl
 <tr>
 <th>Status</th>
 <th>Meaning</th>
+<th>Error Ref</th>
 <th>Description</th>
 <th>Response Schema</th>
 </tr>
@@ -9021,8 +9274,37 @@ curl -X POST https://api.mod.io/v1/games/<span class="o">{</span>game-id<span cl
 <tr>
 <td>201</td>
 <td><a href="https://tools.ietf.org/html/rfc7231#section-6.3.2">Created</a></td>
+<td></td>
 <td>Created</td>
 <td><a href="#message-object">Message Object</a></td>
+</tr>
+<tr>
+<td>403</td>
+<td><a href="https://tools.ietf.org/html/rfc7231#section-6.5.3">Forbidden</a></td>
+<td>15039</td>
+<td>The authenticated user does not have permission to add team members to this mod, this action is restricted to team leaders &amp; administrator's only.</td>
+<td><a href="#schemaerror_object">Error Object</a></td>
+</tr>
+<tr>
+<td>403</td>
+<td><a href="https://tools.ietf.org/html/rfc7231#section-6.5.3">Forbidden</a></td>
+<td>21000</td>
+<td>The specified user could not be found.</td>
+<td><a href="#schemaerror_object">Error Object</a></td>
+</tr>
+<tr>
+<td>403</td>
+<td><a href="https://tools.ietf.org/html/rfc7231#section-6.5.3">Forbidden</a></td>
+<td>15020</td>
+<td>You can't add yourself to a team twice, let's not be greedy now.</td>
+<td><a href="#schemaerror_object">Error Object</a></td>
+</tr>
+<tr>
+<td>400</td>
+<td><a href="https://tools.ietf.org/html/rfc7231#section-6.5.1">Bad Request</a></td>
+<td>15021</td>
+<td>The specified user is already a member of the team.</td>
+<td><a href="#schemaerror_object">Error Object</a></td>
 </tr>
 </tbody>
 </table>
@@ -9170,6 +9452,7 @@ Content-Type: application/x-www-form-urlencoded
   </span><span class="s2">"code"</span><span class="p">:</span><span class="w"> </span><span class="mi">201</span><span class="p">,</span><span class="w">
   </span><span class="s2">"message"</span><span class="p">:</span><span class="w"> </span><span class="s2">"You have successfully updated the specified team members details."</span><span class="w">
 </span><span class="p">}</span><span class="w">
+
 </span></code></pre>
 <h3 id="Update-Mod-Team-Member-responses">Responses</h3>
 
@@ -9178,6 +9461,7 @@ Content-Type: application/x-www-form-urlencoded
 <tr>
 <th>Status</th>
 <th>Meaning</th>
+<th>Error Ref</th>
 <th>Description</th>
 <th>Response Schema</th>
 </tr>
@@ -9186,8 +9470,16 @@ Content-Type: application/x-www-form-urlencoded
 <tr>
 <td>200</td>
 <td><a href="https://tools.ietf.org/html/rfc7231#section-6.3.1">OK</a></td>
+<td></td>
 <td>OK</td>
 <td><a href="#message-object">Message Object</a></td>
+</tr>
+<tr>
+<td>403</td>
+<td><a href="https://tools.ietf.org/html/rfc7231#section-6.5.3">Forbidden</a></td>
+<td>15039</td>
+<td>The authenticated user does not have permission to update team members for this mod, this action is restricted to team leaders &amp; administrator's only.</td>
+<td><a href="#schemaerror_object">Error Object</a></td>
 </tr>
 </tbody>
 </table>
@@ -9284,6 +9576,7 @@ Content-Type: application/x-www-form-urlencoded
 <p>Example response</p>
 </blockquote>
 <pre class="highlight json tab-json"><code><span class="w"> </span><span class="mi">204</span><span class="w"> </span><span class="err">No</span><span class="w"> </span><span class="err">Content</span><span class="w"> 
+
 </span></code></pre>
 <h3 id="Delete-Mod-Team-Member-responses">Responses</h3>
 
@@ -9292,6 +9585,7 @@ Content-Type: application/x-www-form-urlencoded
 <tr>
 <th>Status</th>
 <th>Meaning</th>
+<th>Error Ref</th>
 <th>Description</th>
 <th>Response Schema</th>
 </tr>
@@ -9300,8 +9594,16 @@ Content-Type: application/x-www-form-urlencoded
 <tr>
 <td>204</td>
 <td><a href="https://tools.ietf.org/html/rfc7231#section-6.3.5">No Content</a></td>
+<td></td>
 <td>Successful Request. No Body Returned.</td>
 <td>None</td>
+</tr>
+<tr>
+<td>403</td>
+<td><a href="https://tools.ietf.org/html/rfc7231#section-6.5.3">Forbidden</a></td>
+<td>15040</td>
+<td>The authenticated user does not have permission to delete team members for this mod, this action is restricted to team leaders &amp; administrator's only.</td>
+<td><a href="#schemaerror_object">Error Object</a></td>
 </tr>
 </tbody>
 </table>
@@ -9474,6 +9776,7 @@ Accept: application/json
   </span><span class="s2">"result_limit"</span><span class="p">:</span><span class="w"> </span><span class="mi">100</span><span class="p">,</span><span class="w">
   </span><span class="s2">"result_total"</span><span class="p">:</span><span class="w"> </span><span class="mi">70</span><span class="w">
 </span><span class="p">}</span><span class="w">
+
 </span></code></pre>
 <h3 id="Get-Mod-Comments-responses">Responses</h3>
 
@@ -9482,6 +9785,7 @@ Accept: application/json
 <tr>
 <th>Status</th>
 <th>Meaning</th>
+<th>Error Ref</th>
 <th>Description</th>
 <th>Response Schema</th>
 </tr>
@@ -9490,6 +9794,7 @@ Accept: application/json
 <tr>
 <td>200</td>
 <td><a href="https://tools.ietf.org/html/rfc7231#section-6.3.1">OK</a></td>
+<td></td>
 <td>OK</td>
 <td><a href="#schemaget_mod_comments">Get Mod Comments</a></td>
 </tr>
@@ -9601,6 +9906,7 @@ Accept: application/json
   </span><span class="s2">"karma_guest"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
   </span><span class="s2">"content"</span><span class="p">:</span><span class="w"> </span><span class="s2">"This mod is kickass! Great work!"</span><span class="w">
 </span><span class="p">}</span><span class="w">
+
 </span></code></pre>
 <h3 id="Get-Mod-Comment-responses">Responses</h3>
 
@@ -9609,6 +9915,7 @@ Accept: application/json
 <tr>
 <th>Status</th>
 <th>Meaning</th>
+<th>Error Ref</th>
 <th>Description</th>
 <th>Response Schema</th>
 </tr>
@@ -9617,6 +9924,7 @@ Accept: application/json
 <tr>
 <td>200</td>
 <td><a href="https://tools.ietf.org/html/rfc7231#section-6.3.1">OK</a></td>
+<td></td>
 <td>Successful Request</td>
 <td><a href="#schemacomment_object">Comment Object</a></td>
 </tr>
@@ -9715,6 +10023,7 @@ Content-Type: application/x-www-form-urlencoded
 <p>Example response</p>
 </blockquote>
 <pre class="highlight json tab-json"><code><span class="w"> </span><span class="mi">204</span><span class="w"> </span><span class="err">No</span><span class="w"> </span><span class="err">Content</span><span class="w"> 
+
 </span></code></pre>
 <h3 id="Delete-Mod-Comment-responses">Responses</h3>
 
@@ -9723,6 +10032,7 @@ Content-Type: application/x-www-form-urlencoded
 <tr>
 <th>Status</th>
 <th>Meaning</th>
+<th>Error Ref</th>
 <th>Description</th>
 <th>Response Schema</th>
 </tr>
@@ -9731,8 +10041,16 @@ Content-Type: application/x-www-form-urlencoded
 <tr>
 <td>204</td>
 <td><a href="https://tools.ietf.org/html/rfc7231#section-6.3.5">No Content</a></td>
+<td></td>
 <td>Successful Request. No Body Returned.</td>
 <td>None</td>
+</tr>
+<tr>
+<td>403</td>
+<td><a href="https://tools.ietf.org/html/rfc7231#section-6.5.3">Forbidden</a></td>
+<td>15027</td>
+<td>The authenticated user does not have permission to delete comments for this mod, this action is restricted to team managers &amp; administrators only.</td>
+<td><a href="#schemaerror_object">Error Object</a></td>
 </tr>
 </tbody>
 </table>
@@ -9871,6 +10189,7 @@ Content-Type: application/x-www-form-urlencoded
   </span><span class="s2">"language"</span><span class="p">:</span><span class="w"> </span><span class="s2">""</span><span class="p">,</span><span class="w">
   </span><span class="s2">"profile_url"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://mod.io/members/xant"</span><span class="w">
 </span><span class="p">}</span><span class="w">
+
 </span></code></pre>
 <h3 id="Get-Resource-Owner-responses">Responses</h3>
 
@@ -9879,6 +10198,7 @@ Content-Type: application/x-www-form-urlencoded
 <tr>
 <th>Status</th>
 <th>Meaning</th>
+<th>Error Ref</th>
 <th>Description</th>
 <th>Response Schema</th>
 </tr>
@@ -9887,6 +10207,7 @@ Content-Type: application/x-www-form-urlencoded
 <tr>
 <td>200</td>
 <td><a href="https://tools.ietf.org/html/rfc7231#section-6.3.1">OK</a></td>
+<td></td>
 <td>Successful Request</td>
 <td><a href="#schemauser_object">User Object</a></td>
 </tr>
@@ -10050,6 +10371,7 @@ curl -X POST https://api.mod.io/v1/report <span class="se">\</span>
   </span><span class="s2">"code"</span><span class="p">:</span><span class="w"> </span><span class="mi">201</span><span class="p">,</span><span class="w">
   </span><span class="s2">"message"</span><span class="p">:</span><span class="w"> </span><span class="s2">"You have successfully submitted a report and it will be reviewed by the mod.io team as soon as possible."</span><span class="w">
 </span><span class="p">}</span><span class="w">
+
 </span></code></pre>
 <h3 id="Submit-Report-responses">Responses</h3>
 
@@ -10058,6 +10380,7 @@ curl -X POST https://api.mod.io/v1/report <span class="se">\</span>
 <tr>
 <th>Status</th>
 <th>Meaning</th>
+<th>Error Ref</th>
 <th>Description</th>
 <th>Response Schema</th>
 </tr>
@@ -10066,8 +10389,30 @@ curl -X POST https://api.mod.io/v1/report <span class="se">\</span>
 <tr>
 <td>201</td>
 <td><a href="https://tools.ietf.org/html/rfc7231#section-6.3.2">Created</a></td>
+<td></td>
 <td>Report Created</td>
 <td><a href="#message-object">Message Object</a></td>
+</tr>
+<tr>
+<td>403</td>
+<td><a href="https://tools.ietf.org/html/rfc7231#section-6.5.3">Forbidden</a></td>
+<td>15029</td>
+<td>The authenticated user does not have permission to submit reports on mod.io due to their access being revoked.</td>
+<td><a href="#schemaerror_object">Error Object</a></td>
+</tr>
+<tr>
+<td>403</td>
+<td><a href="https://tools.ietf.org/html/rfc7231#section-6.5.3">Forbidden</a></td>
+<td>15030</td>
+<td>The specified resource is not able to be reported at this time, this is potentially due to the resource in question being removed.</td>
+<td><a href="#schemaerror_object">Error Object</a></td>
+</tr>
+<tr>
+<td>404</td>
+<td><a href="https://tools.ietf.org/html/rfc7231#section-6.5.4">Not Found</a></td>
+<td>14000</td>
+<td>The resource to be reported could not be found.</td>
+<td><a href="#schemaerror_object">Error Object</a></td>
 </tr>
 </tbody>
 </table>
@@ -10459,6 +10804,7 @@ curl -X POST https://api.mod.io/v1/batch <span class="se">\</span>
   </span><span class="s2">"result_limit"</span><span class="p">:</span><span class="w"> </span><span class="mi">20</span><span class="p">,</span><span class="w">
   </span><span class="s2">"result_total"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="w">
 </span><span class="p">}</span><span class="w">
+
 </span></code></pre>
 <h3 id="Make-Batch-Request-responses">Responses</h3>
 
@@ -10467,6 +10813,7 @@ curl -X POST https://api.mod.io/v1/batch <span class="se">\</span>
 <tr>
 <th>Status</th>
 <th>Meaning</th>
+<th>Error Ref</th>
 <th>Description</th>
 <th>Response Schema</th>
 </tr>
@@ -10475,6 +10822,7 @@ curl -X POST https://api.mod.io/v1/batch <span class="se">\</span>
 <tr>
 <td>200</td>
 <td><a href="https://tools.ietf.org/html/rfc7231#section-6.3.1">OK</a></td>
+<td></td>
 <td>Successful Request</td>
 <td><a href="#schemamake_batch_request">Make Batch Request</a></td>
 </tr>
@@ -10582,6 +10930,7 @@ Authorization: Bearer {access-token}
   </span><span class="s2">"language"</span><span class="p">:</span><span class="w"> </span><span class="s2">""</span><span class="p">,</span><span class="w">
   </span><span class="s2">"profile_url"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://mod.io/members/xant"</span><span class="w">
 </span><span class="p">}</span><span class="w">
+
 </span></code></pre>
 <h3 id="Get-Authenticated-User-responses">Responses</h3>
 
@@ -10590,6 +10939,7 @@ Authorization: Bearer {access-token}
 <tr>
 <th>Status</th>
 <th>Meaning</th>
+<th>Error Ref</th>
 <th>Description</th>
 <th>Response Schema</th>
 </tr>
@@ -10598,6 +10948,7 @@ Authorization: Bearer {access-token}
 <tr>
 <td>200</td>
 <td><a href="https://tools.ietf.org/html/rfc7231#section-6.3.1">OK</a></td>
+<td></td>
 <td>Request Successful</td>
 <td><a href="#schemauser_object">User Object</a></td>
 </tr>
@@ -10901,6 +11252,7 @@ Authorization: Bearer {access-token}
   </span><span class="s2">"result_limit"</span><span class="p">:</span><span class="w"> </span><span class="mi">100</span><span class="p">,</span><span class="w">
   </span><span class="s2">"result_total"</span><span class="p">:</span><span class="w"> </span><span class="mi">70</span><span class="w">
 </span><span class="p">}</span><span class="w">
+
 </span></code></pre>
 <h3 id="Get-User-Subscriptions-responses">Responses</h3>
 
@@ -10909,6 +11261,7 @@ Authorization: Bearer {access-token}
 <tr>
 <th>Status</th>
 <th>Meaning</th>
+<th>Error Ref</th>
 <th>Description</th>
 <th>Response Schema</th>
 </tr>
@@ -10917,6 +11270,7 @@ Authorization: Bearer {access-token}
 <tr>
 <td>200</td>
 <td><a href="https://tools.ietf.org/html/rfc7231#section-6.3.1">OK</a></td>
+<td></td>
 <td>Request Successful</td>
 <td><a href="#schemaget_mods">Get Mods</a></td>
 </tr>
@@ -11064,6 +11418,7 @@ Accept: application/json
   </span><span class="s2">"result_limit"</span><span class="p">:</span><span class="w"> </span><span class="mi">100</span><span class="p">,</span><span class="w">
   </span><span class="s2">"result_total"</span><span class="p">:</span><span class="w"> </span><span class="mi">70</span><span class="w">
 </span><span class="p">}</span><span class="w">
+
 </span></code></pre>
 <h3 id="Get-User-Events-responses">Responses</h3>
 
@@ -11072,6 +11427,7 @@ Accept: application/json
 <tr>
 <th>Status</th>
 <th>Meaning</th>
+<th>Error Ref</th>
 <th>Description</th>
 <th>Response Schema</th>
 </tr>
@@ -11080,6 +11436,7 @@ Accept: application/json
 <tr>
 <td>200</td>
 <td><a href="https://tools.ietf.org/html/rfc7231#section-6.3.1">OK</a></td>
+<td></td>
 <td>Successful Request</td>
 <td><a href="#schemaget_user_events">Get User Events</a></td>
 </tr>
@@ -11344,6 +11701,7 @@ Authorization: Bearer {access-token}
   </span><span class="s2">"result_limit"</span><span class="p">:</span><span class="w"> </span><span class="mi">100</span><span class="p">,</span><span class="w">
   </span><span class="s2">"result_total"</span><span class="p">:</span><span class="w"> </span><span class="mi">70</span><span class="w">
 </span><span class="p">}</span><span class="w">
+
 </span></code></pre>
 <h3 id="Get-User-Games-responses">Responses</h3>
 
@@ -11352,6 +11710,7 @@ Authorization: Bearer {access-token}
 <tr>
 <th>Status</th>
 <th>Meaning</th>
+<th>Error Ref</th>
 <th>Description</th>
 <th>Response Schema</th>
 </tr>
@@ -11360,6 +11719,7 @@ Authorization: Bearer {access-token}
 <tr>
 <td>200</td>
 <td><a href="https://tools.ietf.org/html/rfc7231#section-6.3.1">OK</a></td>
+<td></td>
 <td>Request Successful</td>
 <td><a href="#schemaget_games">Get Games</a></td>
 </tr>
@@ -11683,6 +12043,7 @@ Authorization: Bearer {access-token}
   </span><span class="s2">"result_limit"</span><span class="p">:</span><span class="w"> </span><span class="mi">100</span><span class="p">,</span><span class="w">
   </span><span class="s2">"result_total"</span><span class="p">:</span><span class="w"> </span><span class="mi">70</span><span class="w">
 </span><span class="p">}</span><span class="w">
+
 </span></code></pre>
 <h3 id="Get-User-Mods-responses">Responses</h3>
 
@@ -11691,6 +12052,7 @@ Authorization: Bearer {access-token}
 <tr>
 <th>Status</th>
 <th>Meaning</th>
+<th>Error Ref</th>
 <th>Description</th>
 <th>Response Schema</th>
 </tr>
@@ -11699,6 +12061,7 @@ Authorization: Bearer {access-token}
 <tr>
 <td>200</td>
 <td><a href="https://tools.ietf.org/html/rfc7231#section-6.3.1">OK</a></td>
+<td></td>
 <td>Request Successful</td>
 <td><a href="#schemaget_mods">Get Mods</a></td>
 </tr>
@@ -11895,6 +12258,7 @@ Authorization: Bearer {access-token}
   </span><span class="s2">"result_limit"</span><span class="p">:</span><span class="w"> </span><span class="mi">100</span><span class="p">,</span><span class="w">
   </span><span class="s2">"result_total"</span><span class="p">:</span><span class="w"> </span><span class="mi">70</span><span class="w">
 </span><span class="p">}</span><span class="w">
+
 </span></code></pre>
 <h3 id="Get-User-Modfiles-responses">Responses</h3>
 
@@ -11903,6 +12267,7 @@ Authorization: Bearer {access-token}
 <tr>
 <th>Status</th>
 <th>Meaning</th>
+<th>Error Ref</th>
 <th>Description</th>
 <th>Response Schema</th>
 </tr>
@@ -11911,6 +12276,7 @@ Authorization: Bearer {access-token}
 <tr>
 <td>200</td>
 <td><a href="https://tools.ietf.org/html/rfc7231#section-6.3.1">OK</a></td>
+<td></td>
 <td>Request Successful</td>
 <td><a href="#schemaget_modfiles">Get Modfiles</a></td>
 </tr>
@@ -12052,6 +12418,7 @@ Authorization: Bearer {access-token}
   </span><span class="s2">"result_limit"</span><span class="p">:</span><span class="w"> </span><span class="mi">100</span><span class="p">,</span><span class="w">
   </span><span class="s2">"result_total"</span><span class="p">:</span><span class="w"> </span><span class="mi">70</span><span class="w">
 </span><span class="p">}</span><span class="w">
+
 </span></code></pre>
 <h3 id="Get-User-Ratings-responses">Responses</h3>
 
@@ -12060,6 +12427,7 @@ Authorization: Bearer {access-token}
 <tr>
 <th>Status</th>
 <th>Meaning</th>
+<th>Error Ref</th>
 <th>Description</th>
 <th>Response Schema</th>
 </tr>
@@ -12068,6 +12436,7 @@ Authorization: Bearer {access-token}
 <tr>
 <td>200</td>
 <td><a href="https://tools.ietf.org/html/rfc7231#section-6.3.1">OK</a></td>
+<td></td>
 <td>Request Successful</td>
 <td><a href="#schemaget_user_ratings">Get User Ratings</a></td>
 </tr>
@@ -12077,6 +12446,416 @@ Authorization: Bearer {access-token}
 <aside class="auth-notice">
 To perform this request, you must be authenticated via one of the following methods:
 <a href="#authentication">OAuth 2</a> (Scopes: read)
+</aside>
+<h1 id="stats">Stats</h1><h2 id="get-mods-stats">Get Mods Stats</h2>
+<blockquote>
+<p>Example request</p>
+</blockquote>
+<pre class="highlight shell tab-shell"><code><span class="c"># You can also use wget</span>
+curl -X GET https://api.mod.io/v1/games/<span class="o">{</span>game-id<span class="o">}</span>/mods/stats?api_key<span class="o">=</span>YourApiKey <span class="se">\</span>
+  -H <span class="s1">'Accept: application/json'</span>
+
+</code></pre><pre class="highlight http tab-http"><code><span class="nf">GET</span> <span class="nn">https://api.mod.io/v1/games/{game-id}/mods/stats?api_key=YourApiKey</span> <span class="k">HTTP</span><span class="o">/</span><span class="m">1.1</span>
+<span class="na">Host</span><span class="p">:</span> <span class="s">api.mod.io</span>
+
+Accept: application/json
+
+</code></pre><pre class="highlight javascript tab-javascript"><code><span class="kd">var</span> <span class="nx">headers</span> <span class="o">=</span> <span class="p">{</span>
+  <span class="s1">'Accept'</span><span class="p">:</span><span class="s1">'application/json'</span>
+
+<span class="p">};</span>
+
+<span class="nx">$</span><span class="p">.</span><span class="nx">ajax</span><span class="p">({</span>
+  <span class="na">url</span><span class="p">:</span> <span class="s1">'https://api.mod.io/v1/games/{game-id}/mods/stats'</span><span class="p">,</span>
+  <span class="na">method</span><span class="p">:</span> <span class="s1">'get'</span><span class="p">,</span>
+  <span class="na">data</span><span class="p">:</span> <span class="s1">'?api_key=YourApiKey'</span><span class="p">,</span>
+  <span class="na">headers</span><span class="p">:</span> <span class="nx">headers</span><span class="p">,</span>
+  <span class="na">success</span><span class="p">:</span> <span class="kd">function</span><span class="p">(</span><span class="nx">data</span><span class="p">)</span> <span class="p">{</span>
+    <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">JSON</span><span class="p">.</span><span class="nx">stringify</span><span class="p">(</span><span class="nx">data</span><span class="p">));</span>
+  <span class="p">}</span>
+<span class="p">})</span>
+</code></pre><pre class="highlight javascript tab-javascript--nodejs"><code><span class="kr">const</span> <span class="nx">request</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s1">'node-fetch'</span><span class="p">);</span>
+
+<span class="kr">const</span> <span class="nx">headers</span> <span class="o">=</span> <span class="p">{</span>
+  <span class="s1">'Accept'</span><span class="p">:</span><span class="s1">'application/json'</span>
+
+<span class="p">};</span>
+
+<span class="nx">fetch</span><span class="p">(</span><span class="s1">'https://api.mod.io/v1/games/{game-id}/mods/stats?api_key=YourApiKey'</span><span class="p">,</span>
+<span class="p">{</span>
+  <span class="na">method</span><span class="p">:</span> <span class="s1">'GET'</span><span class="p">,</span>
+
+  <span class="na">headers</span><span class="p">:</span> <span class="nx">headers</span>
+<span class="p">})</span>
+<span class="p">.</span><span class="nx">then</span><span class="p">(</span><span class="kd">function</span><span class="p">(</span><span class="nx">res</span><span class="p">)</span> <span class="p">{</span>
+    <span class="k">return</span> <span class="nx">res</span><span class="p">.</span><span class="nx">json</span><span class="p">();</span>
+<span class="p">}).</span><span class="nx">then</span><span class="p">(</span><span class="kd">function</span><span class="p">(</span><span class="nx">body</span><span class="p">)</span> <span class="p">{</span>
+    <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">body</span><span class="p">);</span>
+<span class="p">});</span>
+</code></pre><pre class="highlight python tab-python"><code><span class="kn">import</span> <span class="nn">requests</span>
+<span class="n">headers</span> <span class="o">=</span> <span class="p">{</span>
+  <span class="s">'Accept'</span><span class="p">:</span> <span class="s">'application/json'</span>
+<span class="p">}</span>
+
+<span class="n">r</span> <span class="o">=</span> <span class="n">requests</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s">'https://api.mod.io/v1/games/{game-id}/mods/stats'</span><span class="p">,</span> <span class="n">params</span><span class="o">=</span><span class="p">{</span>
+  <span class="s">'api_key'</span><span class="p">:</span> <span class="s">'YourApiKey'</span>
+<span class="p">},</span> <span class="n">headers</span> <span class="o">=</span> <span class="n">headers</span><span class="p">)</span>
+
+<span class="k">print</span> <span class="n">r</span><span class="o">.</span><span class="n">json</span><span class="p">()</span>
+</code></pre><pre class="highlight java tab-java"><code><span class="n">URL</span> <span class="n">obj</span> <span class="o">=</span> <span class="k">new</span> <span class="n">URL</span><span class="o">(</span><span class="s">"https://api.mod.io/v1/games/{game-id}/mods/stats?api_key=YourApiKey"</span><span class="o">);</span>
+<span class="n">HttpURLConnection</span> <span class="n">con</span> <span class="o">=</span> <span class="o">(</span><span class="n">HttpURLConnection</span><span class="o">)</span> <span class="n">obj</span><span class="o">.</span><span class="na">openConnection</span><span class="o">();</span>
+<span class="n">con</span><span class="o">.</span><span class="na">setRequestMethod</span><span class="o">(</span><span class="s">"GET"</span><span class="o">);</span>
+<span class="kt">int</span> <span class="n">responseCode</span> <span class="o">=</span> <span class="n">con</span><span class="o">.</span><span class="na">getResponseCode</span><span class="o">();</span>
+<span class="n">BufferedReader</span> <span class="n">in</span> <span class="o">=</span> <span class="k">new</span> <span class="n">BufferedReader</span><span class="o">(</span>
+    <span class="k">new</span> <span class="nf">InputStreamReader</span><span class="o">(</span><span class="n">con</span><span class="o">.</span><span class="na">getInputStream</span><span class="o">()));</span>
+<span class="n">String</span> <span class="n">inputLine</span><span class="o">;</span>
+<span class="n">StringBuffer</span> <span class="n">response</span> <span class="o">=</span> <span class="k">new</span> <span class="n">StringBuffer</span><span class="o">();</span>
+<span class="k">while</span> <span class="o">((</span><span class="n">inputLine</span> <span class="o">=</span> <span class="n">in</span><span class="o">.</span><span class="na">readLine</span><span class="o">())</span> <span class="o">!=</span> <span class="kc">null</span><span class="o">)</span> <span class="o">{</span>
+    <span class="n">response</span><span class="o">.</span><span class="na">append</span><span class="o">(</span><span class="n">inputLine</span><span class="o">);</span>
+<span class="o">}</span>
+<span class="n">in</span><span class="o">.</span><span class="na">close</span><span class="o">();</span>
+<span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="n">response</span><span class="o">.</span><span class="na">toString</span><span class="o">());</span>
+</code></pre>
+<p><span class="httpmethod GET">GET</span> <span class="endpointheading">/games/{game-id}/mods/stats</span></p>
+
+<p>Get all mod stats for mods of the corresponding game. Successful request will return an array of <a href="#get-mod-stats">Mod Stats Objects</a>.<br><br><strong>NOTE:</strong> We highly recommend you apply filters to this endpoint to get only the results you need. For more information regarding filtering please see the <a href="#filtering">filtering</a> section.</p>
+
+<table>
+<thead>
+<tr>
+<th>Filter</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>mod_id</td>
+<td>integer</td>
+<td>Unique id of the mod.</td>
+</tr>
+<tr>
+<td>popularity_rank_position</td>
+<td>integer</td>
+<td>Current ranking by popularity for the corresponding mod.</td>
+</tr>
+<tr>
+<td>popularity_rank_total_mods</td>
+<td>integer</td>
+<td>Global mod count in which <code>popularity_rank_position</code> is compared against.</td>
+</tr>
+<tr>
+<td>downloads_total</td>
+<td>integer</td>
+<td>A sum of all modfile downloads for the corresponding mod.</td>
+</tr>
+<tr>
+<td>subscribers_total</td>
+<td>integer</td>
+<td>A sum of all current subscribers for the corresponding mod.</td>
+</tr>
+<tr>
+<td>ratings_positive</td>
+<td>integer</td>
+<td>Amount of positive ratings.</td>
+</tr>
+<tr>
+<td>ratings_negative</td>
+<td>integer</td>
+<td>Amount of negative ratings.</td>
+</tr>
+</tbody>
+</table>
+
+<blockquote>
+<p>Example response</p>
+</blockquote>
+<pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
+  </span><span class="s2">"data"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+    </span><span class="p">{</span><span class="w">
+      </span><span class="s2">"mod_id"</span><span class="p">:</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"popularity_rank_position"</span><span class="p">:</span><span class="w"> </span><span class="mi">13</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"popularity_rank_total_mods"</span><span class="p">:</span><span class="w"> </span><span class="mi">204</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"downloads_total"</span><span class="p">:</span><span class="w"> </span><span class="mi">27492</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"subscribers_total"</span><span class="p">:</span><span class="w"> </span><span class="mi">16394</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"ratings_total"</span><span class="p">:</span><span class="w"> </span><span class="mi">1230</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"ratings_positive"</span><span class="p">:</span><span class="w"> </span><span class="mi">1047</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"ratings_negative"</span><span class="p">:</span><span class="w"> </span><span class="mi">183</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"ratings_percentage_positive"</span><span class="p">:</span><span class="w"> </span><span class="mi">91</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"ratings_weighted_aggregate"</span><span class="p">:</span><span class="w"> </span><span class="mf">87.38</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"ratings_display_text"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Very Positive"</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"date_expires"</span><span class="p">:</span><span class="w"> </span><span class="mi">1492564103</span><span class="w">
+    </span><span class="p">},</span><span class="w">
+    </span><span class="p">{</span><span class="w">
+        </span><span class="err">...</span><span class="w">
+    </span><span class="p">}</span><span class="w">
+  </span><span class="p">],</span><span class="w">
+  </span><span class="s2">"result_count"</span><span class="p">:</span><span class="w"> </span><span class="mi">70</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"result_offset"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"result_limit"</span><span class="p">:</span><span class="w"> </span><span class="mi">100</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"result_total"</span><span class="p">:</span><span class="w"> </span><span class="mi">70</span><span class="w">
+</span><span class="p">}</span><span class="w">
+
+</span></code></pre>
+<h3 id="Get-Mods-Stats-responses">Responses</h3>
+
+<table>
+<thead>
+<tr>
+<th>Status</th>
+<th>Meaning</th>
+<th>Error Ref</th>
+<th>Description</th>
+<th>Response Schema</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>200</td>
+<td><a href="https://tools.ietf.org/html/rfc7231#section-6.3.1">OK</a></td>
+<td></td>
+<td>Successful Request</td>
+<td><a href="#schemaget_mod_stats">Get Mod Stats</a></td>
+</tr>
+</tbody>
+</table>
+
+<aside class="auth-notice">
+To perform this request, you must be authenticated via one of the following methods:
+<a href="#authentication">api_key</a>, <a href="#authentication">OAuth 2</a> (Scopes: read)
+</aside>
+<h2 id="get-mod-stats">Get Mod Stats</h2>
+<blockquote>
+<p>Example request</p>
+</blockquote>
+<pre class="highlight shell tab-shell"><code><span class="c"># You can also use wget</span>
+curl -X GET https://api.mod.io/v1/games/<span class="o">{</span>game-id<span class="o">}</span>/mods/<span class="o">{</span>mod-id<span class="o">}</span>/stats?api_key<span class="o">=</span>YourApiKey <span class="se">\</span>
+  -H <span class="s1">'Accept: application/json'</span>
+
+</code></pre><pre class="highlight http tab-http"><code><span class="nf">GET</span> <span class="nn">https://api.mod.io/v1/games/{game-id}/mods/{mod-id}/stats?api_key=YourApiKey</span> <span class="k">HTTP</span><span class="o">/</span><span class="m">1.1</span>
+<span class="na">Host</span><span class="p">:</span> <span class="s">api.mod.io</span>
+
+Accept: application/json
+
+</code></pre><pre class="highlight javascript tab-javascript"><code><span class="kd">var</span> <span class="nx">headers</span> <span class="o">=</span> <span class="p">{</span>
+  <span class="s1">'Accept'</span><span class="p">:</span><span class="s1">'application/json'</span>
+
+<span class="p">};</span>
+
+<span class="nx">$</span><span class="p">.</span><span class="nx">ajax</span><span class="p">({</span>
+  <span class="na">url</span><span class="p">:</span> <span class="s1">'https://api.mod.io/v1/games/{game-id}/mods/{mod-id}/stats'</span><span class="p">,</span>
+  <span class="na">method</span><span class="p">:</span> <span class="s1">'get'</span><span class="p">,</span>
+  <span class="na">data</span><span class="p">:</span> <span class="s1">'?api_key=YourApiKey'</span><span class="p">,</span>
+  <span class="na">headers</span><span class="p">:</span> <span class="nx">headers</span><span class="p">,</span>
+  <span class="na">success</span><span class="p">:</span> <span class="kd">function</span><span class="p">(</span><span class="nx">data</span><span class="p">)</span> <span class="p">{</span>
+    <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">JSON</span><span class="p">.</span><span class="nx">stringify</span><span class="p">(</span><span class="nx">data</span><span class="p">));</span>
+  <span class="p">}</span>
+<span class="p">})</span>
+</code></pre><pre class="highlight javascript tab-javascript--nodejs"><code><span class="kr">const</span> <span class="nx">request</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s1">'node-fetch'</span><span class="p">);</span>
+
+<span class="kr">const</span> <span class="nx">headers</span> <span class="o">=</span> <span class="p">{</span>
+  <span class="s1">'Accept'</span><span class="p">:</span><span class="s1">'application/json'</span>
+
+<span class="p">};</span>
+
+<span class="nx">fetch</span><span class="p">(</span><span class="s1">'https://api.mod.io/v1/games/{game-id}/mods/{mod-id}/stats?api_key=YourApiKey'</span><span class="p">,</span>
+<span class="p">{</span>
+  <span class="na">method</span><span class="p">:</span> <span class="s1">'GET'</span><span class="p">,</span>
+
+  <span class="na">headers</span><span class="p">:</span> <span class="nx">headers</span>
+<span class="p">})</span>
+<span class="p">.</span><span class="nx">then</span><span class="p">(</span><span class="kd">function</span><span class="p">(</span><span class="nx">res</span><span class="p">)</span> <span class="p">{</span>
+    <span class="k">return</span> <span class="nx">res</span><span class="p">.</span><span class="nx">json</span><span class="p">();</span>
+<span class="p">}).</span><span class="nx">then</span><span class="p">(</span><span class="kd">function</span><span class="p">(</span><span class="nx">body</span><span class="p">)</span> <span class="p">{</span>
+    <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">body</span><span class="p">);</span>
+<span class="p">});</span>
+</code></pre><pre class="highlight python tab-python"><code><span class="kn">import</span> <span class="nn">requests</span>
+<span class="n">headers</span> <span class="o">=</span> <span class="p">{</span>
+  <span class="s">'Accept'</span><span class="p">:</span> <span class="s">'application/json'</span>
+<span class="p">}</span>
+
+<span class="n">r</span> <span class="o">=</span> <span class="n">requests</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s">'https://api.mod.io/v1/games/{game-id}/mods/{mod-id}/stats'</span><span class="p">,</span> <span class="n">params</span><span class="o">=</span><span class="p">{</span>
+  <span class="s">'api_key'</span><span class="p">:</span> <span class="s">'YourApiKey'</span>
+<span class="p">},</span> <span class="n">headers</span> <span class="o">=</span> <span class="n">headers</span><span class="p">)</span>
+
+<span class="k">print</span> <span class="n">r</span><span class="o">.</span><span class="n">json</span><span class="p">()</span>
+</code></pre><pre class="highlight java tab-java"><code><span class="n">URL</span> <span class="n">obj</span> <span class="o">=</span> <span class="k">new</span> <span class="n">URL</span><span class="o">(</span><span class="s">"https://api.mod.io/v1/games/{game-id}/mods/{mod-id}/stats?api_key=YourApiKey"</span><span class="o">);</span>
+<span class="n">HttpURLConnection</span> <span class="n">con</span> <span class="o">=</span> <span class="o">(</span><span class="n">HttpURLConnection</span><span class="o">)</span> <span class="n">obj</span><span class="o">.</span><span class="na">openConnection</span><span class="o">();</span>
+<span class="n">con</span><span class="o">.</span><span class="na">setRequestMethod</span><span class="o">(</span><span class="s">"GET"</span><span class="o">);</span>
+<span class="kt">int</span> <span class="n">responseCode</span> <span class="o">=</span> <span class="n">con</span><span class="o">.</span><span class="na">getResponseCode</span><span class="o">();</span>
+<span class="n">BufferedReader</span> <span class="n">in</span> <span class="o">=</span> <span class="k">new</span> <span class="n">BufferedReader</span><span class="o">(</span>
+    <span class="k">new</span> <span class="nf">InputStreamReader</span><span class="o">(</span><span class="n">con</span><span class="o">.</span><span class="na">getInputStream</span><span class="o">()));</span>
+<span class="n">String</span> <span class="n">inputLine</span><span class="o">;</span>
+<span class="n">StringBuffer</span> <span class="n">response</span> <span class="o">=</span> <span class="k">new</span> <span class="n">StringBuffer</span><span class="o">();</span>
+<span class="k">while</span> <span class="o">((</span><span class="n">inputLine</span> <span class="o">=</span> <span class="n">in</span><span class="o">.</span><span class="na">readLine</span><span class="o">())</span> <span class="o">!=</span> <span class="kc">null</span><span class="o">)</span> <span class="o">{</span>
+    <span class="n">response</span><span class="o">.</span><span class="na">append</span><span class="o">(</span><span class="n">inputLine</span><span class="o">);</span>
+<span class="o">}</span>
+<span class="n">in</span><span class="o">.</span><span class="na">close</span><span class="o">();</span>
+<span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="n">response</span><span class="o">.</span><span class="na">toString</span><span class="o">());</span>
+</code></pre>
+<p><span class="httpmethod GET">GET</span> <span class="endpointheading">/games/{game-id}/mods/{mod-id}/stats</span></p>
+
+<p>Get mod stats for the corresponding mod. Successful request will return a single <a href="#mod-stats-object">Mod Stats Object</a>.</p>
+
+<blockquote>
+<p>Example response</p>
+</blockquote>
+<pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
+  </span><span class="s2">"mod_id"</span><span class="p">:</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"popularity_rank_position"</span><span class="p">:</span><span class="w"> </span><span class="mi">13</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"popularity_rank_total_mods"</span><span class="p">:</span><span class="w"> </span><span class="mi">204</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"downloads_total"</span><span class="p">:</span><span class="w"> </span><span class="mi">27492</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"subscribers_total"</span><span class="p">:</span><span class="w"> </span><span class="mi">16394</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"ratings_total"</span><span class="p">:</span><span class="w"> </span><span class="mi">1230</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"ratings_positive"</span><span class="p">:</span><span class="w"> </span><span class="mi">1047</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"ratings_negative"</span><span class="p">:</span><span class="w"> </span><span class="mi">183</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"ratings_percentage_positive"</span><span class="p">:</span><span class="w"> </span><span class="mi">91</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"ratings_weighted_aggregate"</span><span class="p">:</span><span class="w"> </span><span class="mf">87.38</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"ratings_display_text"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Very Positive"</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"date_expires"</span><span class="p">:</span><span class="w"> </span><span class="mi">1492564103</span><span class="w">
+</span><span class="p">}</span><span class="w">
+
+</span></code></pre>
+<h3 id="Get-Mod-Stats-responses">Responses</h3>
+
+<table>
+<thead>
+<tr>
+<th>Status</th>
+<th>Meaning</th>
+<th>Error Ref</th>
+<th>Description</th>
+<th>Response Schema</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>200</td>
+<td><a href="https://tools.ietf.org/html/rfc7231#section-6.3.1">OK</a></td>
+<td></td>
+<td>Successful Request</td>
+<td><a href="#schemamod_stats_object">Mod Stats Object</a></td>
+</tr>
+</tbody>
+</table>
+
+<aside class="auth-notice">
+To perform this request, you must be authenticated via one of the following methods:
+<a href="#authentication">api_key</a>, <a href="#authentication">OAuth 2</a> (Scopes: read)
+</aside>
+<h2 id="get-game-stats">Get Game Stats</h2>
+<blockquote>
+<p>Example request</p>
+</blockquote>
+<pre class="highlight shell tab-shell"><code><span class="c"># You can also use wget</span>
+curl -X GET https://api.mod.io/v1/games/<span class="o">{</span>game-id<span class="o">}</span>/stats?api_key<span class="o">=</span>YourApiKey <span class="se">\</span>
+  -H <span class="s1">'Accept: application/json'</span>
+
+</code></pre><pre class="highlight http tab-http"><code><span class="nf">GET</span> <span class="nn">https://api.mod.io/v1/games/{game-id}/stats?api_key=YourApiKey</span> <span class="k">HTTP</span><span class="o">/</span><span class="m">1.1</span>
+<span class="na">Host</span><span class="p">:</span> <span class="s">api.mod.io</span>
+
+Accept: application/json
+
+</code></pre><pre class="highlight javascript tab-javascript"><code><span class="kd">var</span> <span class="nx">headers</span> <span class="o">=</span> <span class="p">{</span>
+  <span class="s1">'Accept'</span><span class="p">:</span><span class="s1">'application/json'</span>
+
+<span class="p">};</span>
+
+<span class="nx">$</span><span class="p">.</span><span class="nx">ajax</span><span class="p">({</span>
+  <span class="na">url</span><span class="p">:</span> <span class="s1">'https://api.mod.io/v1/games/{game-id}/stats'</span><span class="p">,</span>
+  <span class="na">method</span><span class="p">:</span> <span class="s1">'get'</span><span class="p">,</span>
+  <span class="na">data</span><span class="p">:</span> <span class="s1">'?api_key=YourApiKey'</span><span class="p">,</span>
+  <span class="na">headers</span><span class="p">:</span> <span class="nx">headers</span><span class="p">,</span>
+  <span class="na">success</span><span class="p">:</span> <span class="kd">function</span><span class="p">(</span><span class="nx">data</span><span class="p">)</span> <span class="p">{</span>
+    <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">JSON</span><span class="p">.</span><span class="nx">stringify</span><span class="p">(</span><span class="nx">data</span><span class="p">));</span>
+  <span class="p">}</span>
+<span class="p">})</span>
+</code></pre><pre class="highlight javascript tab-javascript--nodejs"><code><span class="kr">const</span> <span class="nx">request</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s1">'node-fetch'</span><span class="p">);</span>
+
+<span class="kr">const</span> <span class="nx">headers</span> <span class="o">=</span> <span class="p">{</span>
+  <span class="s1">'Accept'</span><span class="p">:</span><span class="s1">'application/json'</span>
+
+<span class="p">};</span>
+
+<span class="nx">fetch</span><span class="p">(</span><span class="s1">'https://api.mod.io/v1/games/{game-id}/stats?api_key=YourApiKey'</span><span class="p">,</span>
+<span class="p">{</span>
+  <span class="na">method</span><span class="p">:</span> <span class="s1">'GET'</span><span class="p">,</span>
+
+  <span class="na">headers</span><span class="p">:</span> <span class="nx">headers</span>
+<span class="p">})</span>
+<span class="p">.</span><span class="nx">then</span><span class="p">(</span><span class="kd">function</span><span class="p">(</span><span class="nx">res</span><span class="p">)</span> <span class="p">{</span>
+    <span class="k">return</span> <span class="nx">res</span><span class="p">.</span><span class="nx">json</span><span class="p">();</span>
+<span class="p">}).</span><span class="nx">then</span><span class="p">(</span><span class="kd">function</span><span class="p">(</span><span class="nx">body</span><span class="p">)</span> <span class="p">{</span>
+    <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">body</span><span class="p">);</span>
+<span class="p">});</span>
+</code></pre><pre class="highlight python tab-python"><code><span class="kn">import</span> <span class="nn">requests</span>
+<span class="n">headers</span> <span class="o">=</span> <span class="p">{</span>
+  <span class="s">'Accept'</span><span class="p">:</span> <span class="s">'application/json'</span>
+<span class="p">}</span>
+
+<span class="n">r</span> <span class="o">=</span> <span class="n">requests</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s">'https://api.mod.io/v1/games/{game-id}/stats'</span><span class="p">,</span> <span class="n">params</span><span class="o">=</span><span class="p">{</span>
+  <span class="s">'api_key'</span><span class="p">:</span> <span class="s">'YourApiKey'</span>
+<span class="p">},</span> <span class="n">headers</span> <span class="o">=</span> <span class="n">headers</span><span class="p">)</span>
+
+<span class="k">print</span> <span class="n">r</span><span class="o">.</span><span class="n">json</span><span class="p">()</span>
+</code></pre><pre class="highlight java tab-java"><code><span class="n">URL</span> <span class="n">obj</span> <span class="o">=</span> <span class="k">new</span> <span class="n">URL</span><span class="o">(</span><span class="s">"https://api.mod.io/v1/games/{game-id}/stats?api_key=YourApiKey"</span><span class="o">);</span>
+<span class="n">HttpURLConnection</span> <span class="n">con</span> <span class="o">=</span> <span class="o">(</span><span class="n">HttpURLConnection</span><span class="o">)</span> <span class="n">obj</span><span class="o">.</span><span class="na">openConnection</span><span class="o">();</span>
+<span class="n">con</span><span class="o">.</span><span class="na">setRequestMethod</span><span class="o">(</span><span class="s">"GET"</span><span class="o">);</span>
+<span class="kt">int</span> <span class="n">responseCode</span> <span class="o">=</span> <span class="n">con</span><span class="o">.</span><span class="na">getResponseCode</span><span class="o">();</span>
+<span class="n">BufferedReader</span> <span class="n">in</span> <span class="o">=</span> <span class="k">new</span> <span class="n">BufferedReader</span><span class="o">(</span>
+    <span class="k">new</span> <span class="nf">InputStreamReader</span><span class="o">(</span><span class="n">con</span><span class="o">.</span><span class="na">getInputStream</span><span class="o">()));</span>
+<span class="n">String</span> <span class="n">inputLine</span><span class="o">;</span>
+<span class="n">StringBuffer</span> <span class="n">response</span> <span class="o">=</span> <span class="k">new</span> <span class="n">StringBuffer</span><span class="o">();</span>
+<span class="k">while</span> <span class="o">((</span><span class="n">inputLine</span> <span class="o">=</span> <span class="n">in</span><span class="o">.</span><span class="na">readLine</span><span class="o">())</span> <span class="o">!=</span> <span class="kc">null</span><span class="o">)</span> <span class="o">{</span>
+    <span class="n">response</span><span class="o">.</span><span class="na">append</span><span class="o">(</span><span class="n">inputLine</span><span class="o">);</span>
+<span class="o">}</span>
+<span class="n">in</span><span class="o">.</span><span class="na">close</span><span class="o">();</span>
+<span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="n">response</span><span class="o">.</span><span class="na">toString</span><span class="o">());</span>
+</code></pre>
+<p><span class="httpmethod GET">GET</span> <span class="endpointheading">/games/{game-id}/stats</span></p>
+
+<p>Get game stats for the corresponding game. Successful request will return a single <a href="#game-stats-object">Game Stats Object</a>.</p>
+
+<blockquote>
+<p>Example response</p>
+</blockquote>
+<pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
+  </span><span class="s2">"game_id"</span><span class="p">:</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"mods_count_total"</span><span class="p">:</span><span class="w"> </span><span class="mi">13</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"mods_downloads_today"</span><span class="p">:</span><span class="w"> </span><span class="mi">204</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"mods_downloads_total"</span><span class="p">:</span><span class="w"> </span><span class="mi">27492</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"mods_downloads_daily_average"</span><span class="p">:</span><span class="w"> </span><span class="mi">1230</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"mods_subscribers_total"</span><span class="p">:</span><span class="w"> </span><span class="mi">16394</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"date_expires"</span><span class="p">:</span><span class="w"> </span><span class="mi">1492564103</span><span class="w">
+</span><span class="p">}</span><span class="w">
+
+</span></code></pre>
+<h3 id="Get-Game-Stats-responses">Responses</h3>
+
+<table>
+<thead>
+<tr>
+<th>Status</th>
+<th>Meaning</th>
+<th>Error Ref</th>
+<th>Description</th>
+<th>Response Schema</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>200</td>
+<td><a href="https://tools.ietf.org/html/rfc7231#section-6.3.1">OK</a></td>
+<td></td>
+<td>Successful Request</td>
+<td><a href="#schemagame_stats_object">Game Stats Object</a></td>
+</tr>
+</tbody>
+</table>
+
+<aside class="auth-notice">
+To perform this request, you must be authenticated via one of the following methods:
+<a href="#authentication">api_key</a>, <a href="#authentication">OAuth 2</a> (Scopes: read)
 </aside>
 <h1 id="response-schemas">Response Schemas</h1><h2 id="access-token-object">Access Token Object</h2>
 <p><a name="schemaaccess_token_object"></a></p>
@@ -13418,6 +14197,7 @@ To perform this request, you must be authenticated via one of the following meth
 <pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
   </span><span class="s2">"error"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
     </span><span class="s2">"code"</span><span class="p">:</span><span class="w"> </span><span class="mi">403</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"error_ref"</span><span class="p">:</span><span class="w"> </span><span class="mi">10000</span><span class="p">,</span><span class="w">
     </span><span class="s2">"message"</span><span class="p">:</span><span class="w"> </span><span class="s2">"You do not have the required permissions to access this resource."</span><span class="p">,</span><span class="w">
     </span><span class="s2">"errors"</span><span class="p">:</span><span class="w"> </span><span class="p">{}</span><span class="w">
   </span><span class="p">}</span><span class="w">
@@ -13440,8 +14220,12 @@ To perform this request, you must be authenticated via one of the following meth
 <tr>
 <td>» code</td>
 <td>integer</td>
-<td>
-<a href="#response-codes">HTTP code</a> of the error.</td>
+<td>The <a href="#response-codes">HTTP code</a>.</td>
+</tr>
+<tr>
+<td>» error_ref</td>
+<td>int32</td>
+<td>The mod.io error code.</td>
 </tr>
 <tr>
 <td>» message</td>
