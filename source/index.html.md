@@ -174,37 +174,6 @@ __NOTE:__ If you supply identical key-value pairs as a request parameter and als
 
 Responses will __always__ be returned in `application/json` format.
 
-## Errors
-
-```json
-// Error object
-
-"error": {
-	"code": 403,
-	"message": "You do not have the required permissions to access this resource."
-}
-```
-
-If an error occurs, mod.io returns an error object with the HTTP `code` and `message` to describe what happened and when possible how to avoid repeating the error. It's important to know that if you encounter errors that are not server errors (`500`+ codes) - you should review the error message before continuing to send requests to the endpoint.
-
-When requests contain invalid input data or query parameters (for filtering), an optional field object called `errors` can be supplied inside the `error` object, which contains a list of the invalid inputs. The nested `errors` object is only supplied with `422 Unprocessable Entity` responses. Be sure to review the [Response Codes](#response-codes) to be aware of the HTTP codes that the mod.io API returns.
-
-```json
-// Error object with input errors
-
-"error": {
-	"code": 422,
-	"message": "Validation Failed. Please see below to fix invalid input.",
-	"errors": {
-		"member":"The user_id value must be an integer.",
-		"name":"The name may not be greater than 80 characters."
-	}
-}
-
-```
-
-Remember that [Rate Limiting](#rate-limiting) applies whether an error is returned or not, so to avoid exceeding your daily quota be sure to always investigate error messages - instead of continually retrying.
-
 ## Response Codes
 
 Here is a list of the most common HTTP response codes you will see while using the API.
@@ -225,6 +194,90 @@ Response Code | Meaning
 `429` | Too Many Requests -- You have made too [many requests](#rate-limiting), inspect headers for reset time.
 `500` | Internal Server Error -- The server encountered a problem processing your request. Please try again. (rare)
 `503` | Service Unavailable -- We're temporarily offline for maintenance. Please try again later. (rare)
+
+
+## Errors
+
+```json
+// Error object
+
+"error": {
+	"code": 403,
+	"error_ref": "15024",
+	"message": "You do not have the required permissions to access this resource."
+}
+```
+
+If an error occurs, mod.io returns an error object with the HTTP `code`, `error_ref` and `message` to describe what happened and when possible how to avoid repeating the error. It's important to know that if you encounter errors that are not server errors (`500`+ codes) - you should review the error message before continuing to send requests to the endpoint.
+
+When requests contain invalid input data or query parameters (for filtering), an optional field object called `errors` can be supplied inside the `error` object, which contains a list of the invalid inputs. The nested `errors` object is only supplied with `422 Unprocessable Entity` responses. Be sure to review the [Response Codes](#response-codes) to be aware of the HTTP codes that the mod.io API returns.
+
+```json
+// Error object with input errors
+
+"error": {
+	"code": 422,
+	"message": "Validation Failed. Please see below to fix invalid input.",
+	"error_ref": 0,
+	"errors": {
+		"member":"The user_id value must be an integer.",
+		"name":"The name may not be greater than 80 characters."
+	}
+}
+
+```
+
+Remember that [Rate Limiting](#rate-limiting) applies whether an error is returned or not, so to avoid exceeding your daily quota be sure to always investigate error messages - instead of continually retrying.
+
+## Error Codes
+
+Along with generic [HTTP response codes](#response-codes), we also provide mod.io specific error codes to help you better understand what has gone wrong with a request. Below is a list of the most common `error_ref` codes you could encounter when consuming the API, as well as the reason for the error occuring. For error codes specific to each endpoint, click the 'Show All Responses' dropdown on the specified endpoint documentation.
+
+```shell
+// Example request with malformed api_key 
+
+curl -X GET https://api.mod.io/v1/games?api_key=malformed_key
+```
+
+```json
+{
+    "error": {
+        "code": 401,
+        "error_ref": 11001,
+        "message": "We cannot complete your request due to a malformed/missing api_key in your request. Refer to documentation at https://docs.mod.io"
+    }
+}
+```
+
+Error Reference Code | Meaning
+---------- | -------
+`10003` | API version supplied is invalid.
+`11000` | api_key is missing from your request.
+`11001` | api_key supplied is malformed.
+`11002` | api_key key supplied is invalid.
+`11003` | Access token is missing the write scope to perform the request.
+`11004` | Access token is missing the read scope to perform the request.
+`11005` | Access token is expired, or has been revoked.
+`13005` | The Content-Type header is missing from your request.
+`13006` | The Content-Type header is not supported for this endpoint.
+`11006` | Authenticated user account has been deleted.
+`11007` | Authenticated user account has been banned by mod.io admins.
+`14001` | The requested game could not be found.
+`14006` | The requested game has been deleted.
+`15022` | The requested mod could not be found.
+`15023` | The requested mod has been deleted.
+`15010` | The requested modfile could not be found.
+`15026` | The requested comment could not be found.
+`21000` | The requested user could not be found.
+`14000` | The requested resource does not exist.
+`11008` | You have been ratelimited for making too many requests. See [Rate Limiting](#rate-limiting).
+`13007` | You have requested a response format that is not supported (JSON only).
+`13001` | The submitted binary file is corrupted.
+`13002` | The submitted binary file is unreadable.
+`13004` | You have used the `input_json` parameter with semantically incorrect JSON.
+`10001` | Cross-origin request forbidden.
+`10002` | mod.io failed to complete the request, please try again. (rare)
+`10000` | mod.io is currently experiencing an outage. (rare)
 
 ## Response Formats
 ```json
@@ -893,12 +946,19 @@ Request an access token on behalf of a Steam user. To use this functionality you
   "access_token": "eyJ0eXAiOiXKV1QibCJhbLciOiJeiUzI1.....",
   "date_expires": 1570673249
 }
+
 ```
 <h3 id="Authenticate-via-Steam-responses">Responses</h3>
 
-Status|Meaning|Description|Response Schema
----|---|---|---|
-200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)|Successful Request|[Access Token Object](#schemaaccess_token_object)
+Status|Meaning|Error Ref|Description|Response Schema
+---|---|----|---|---|
+200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)||Successful Request|[Access Token Object](#schemaaccess_token_object)
+401|[Unauthorized](https://tools.ietf.org/html/rfc7235#section-3.1)|14001|The game associated with the supplied api_key is currently not available.|[Error Object](#schemaerror_object)
+401|[Unauthorized](https://tools.ietf.org/html/rfc7235#section-3.1)|11018|The steam encrypted app ticket was invalid.|[Error Object](#schemaerror_object)
+401|[Unauthorized](https://tools.ietf.org/html/rfc7235#section-3.1)|11032|mod.io was unable to verify the credentials against the external service provider.|[Error Object](#schemaerror_object)
+403|[Forbidden](https://tools.ietf.org/html/rfc7231#section-6.5.3)|11016|The api_key supplied in the request must be associated with a game.|[Error Object](#schemaerror_object)
+403|[Forbidden](https://tools.ietf.org/html/rfc7231#section-6.5.3)|11017|The api_key supplied in the request is for test environment purposes only and cannot be used for this functionality.|[Error Object](#schemaerror_object)
+403|[Forbidden](https://tools.ietf.org/html/rfc7231#section-6.5.3)|11019|The secret steam app ticket associated with this game has not been configured.|[Error Object](#schemaerror_object)
 
 <aside class="auth-notice">
 To perform this request, you must be authenticated via one of the following methods:
@@ -1016,12 +1076,19 @@ Request an access token on behalf of a GOG Galaxy user. To use this functionalit
   "access_token": "eyJ0eXAiOiXKV1QibCJhbLciOiJeiUzI1.....",
   "date_expires": 1570673249
 }
+
 ```
 <h3 id="Authenticate-via-GOG-Galaxy-responses">Responses</h3>
 
-Status|Meaning|Description|Response Schema
----|---|---|---|
-200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)|Successful Request|[Access Token Object](#schemaaccess_token_object)
+Status|Meaning|Error Ref|Description|Response Schema
+---|---|----|---|---|
+200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)||Successful Request|[Access Token Object](#schemaaccess_token_object)
+401|[Unauthorized](https://tools.ietf.org/html/rfc7235#section-3.1)|14001|The game associated with the supplied api_key is currently not available.|[Error Object](#schemaerror_object)
+401|[Unauthorized](https://tools.ietf.org/html/rfc7235#section-3.1)|11021|The galaxy encrypted app ticket was invalid.|[Error Object](#schemaerror_object)
+401|[Unauthorized](https://tools.ietf.org/html/rfc7235#section-3.1)|11032|mod.io was unable to verify the credentials against the external service provider.|[Error Object](#schemaerror_object)
+403|[Forbidden](https://tools.ietf.org/html/rfc7231#section-6.5.3)|11016|The api_key supplied in the request must be associated with a game.|[Error Object](#schemaerror_object)
+403|[Forbidden](https://tools.ietf.org/html/rfc7231#section-6.5.3)|11017|The api_key supplied in the request is for test environment purposes only and cannot be used for this functionality.|[Error Object](#schemaerror_object)
+403|[Forbidden](https://tools.ietf.org/html/rfc7231#section-6.5.3)|11022|The secret galaxy app ticket associated with this game has not been configured.|[Error Object](#schemaerror_object)
 
 <aside class="auth-notice">
 To perform this request, you must be authenticated via one of the following methods:
@@ -1139,12 +1206,18 @@ Request an access token on behalf of an itch.io user via the itch.io desktop app
   "access_token": "eyJ0eXAiOiXKV1QibCJhbLciOiJeiUzI1.....",
   "date_expires": 1570673249
 }
+
 ```
 <h3 id="Authenticate-via-itch.io-responses">Responses</h3>
 
-Status|Meaning|Description|Response Schema
----|---|---|---|
-200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)|Successful Request|[Access Token Object](#schemaaccess_token_object)
+Status|Meaning|Error Ref|Description|Response Schema
+---|---|----|---|---|
+200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)||Successful Request|[Access Token Object](#schemaaccess_token_object)
+401|[Unauthorized](https://tools.ietf.org/html/rfc7235#section-3.1)|14001|The game associated with the supplied api_key is currently not available.|[Error Object](#schemaerror_object)
+401|[Unauthorized](https://tools.ietf.org/html/rfc7235#section-3.1)|11032|mod.io was unable to verify the credentials against the external service provider.|[Error Object](#schemaerror_object)
+401|[Unauthorized](https://tools.ietf.org/html/rfc7235#section-3.1)|11031|mod.io was unable to get account data from itch.io servers.|[Error Object](#schemaerror_object)
+403|[Forbidden](https://tools.ietf.org/html/rfc7231#section-6.5.3)|11016|The api_key supplied in the request must be associated with a game.|[Error Object](#schemaerror_object)
+403|[Forbidden](https://tools.ietf.org/html/rfc7231#section-6.5.3)|11017|The api_key supplied in the request is for test environment purposes only and cannot be used for this functionality.|[Error Object](#schemaerror_object)
 
 <aside class="auth-notice">
 To perform this request, you must be authenticated via one of the following methods:
@@ -1271,12 +1344,19 @@ Request an access token on behalf of an Oculus user. To use this functionality y
   "access_token": "eyJ0eXAiOiXKV1QibCJhbLciOiJeiUzI1.....",
   "date_expires": 1570673249
 }
+
 ```
 <h3 id="Authenticate-via-Oculus-responses">Responses</h3>
 
-Status|Meaning|Description|Response Schema
----|---|---|---|
-200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)|Successful Request|[Access Token Object](#schemaaccess_token_object)
+Status|Meaning|Error Ref|Description|Response Schema
+---|---|----|---|---|
+200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)||Successful Request|[Access Token Object](#schemaaccess_token_object)
+401|[Unauthorized](https://tools.ietf.org/html/rfc7235#section-3.1)|14001|The game associated with the supplied api_key is currently not available.|[Error Object](#schemaerror_object)
+401|[Unauthorized](https://tools.ietf.org/html/rfc7235#section-3.1)|11032|mod.io was unable to verify the credentials against the external service provider.|[Error Object](#schemaerror_object)
+403|[Forbidden](https://tools.ietf.org/html/rfc7231#section-6.5.3)|11016|The api_key supplied in the request must be associated with a game.|[Error Object](#schemaerror_object)
+403|[Forbidden](https://tools.ietf.org/html/rfc7231#section-6.5.3)|11017|The api_key supplied in the request is for test environment purposes only and cannot be used for this functionality.|[Error Object](#schemaerror_object)
+403|[Forbidden](https://tools.ietf.org/html/rfc7231#section-6.5.3)|11024|The secret Oculus Rift app ticket associated with this game has not been configured.|[Error Object](#schemaerror_object)
+403|[Forbidden](https://tools.ietf.org/html/rfc7231#section-6.5.3)|11025|The secret Oculus Quest app ticket associated with this game has not been configured.|[Error Object](#schemaerror_object)
 
 <aside class="auth-notice">
 To perform this request, you must be authenticated via one of the following methods:
@@ -1403,12 +1483,16 @@ Connect an external account (i.e. Steam and GOG documented above) with the authe
   "code": 200,
   "message": "Please see the confirmation email sent to (:email) to complete account link."
 }
+
 ```
 <h3 id="Link-an-Email-responses">Responses</h3>
 
-Status|Meaning|Description|Response Schema
----|---|---|---|
-200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)|Successful Request|[Message Object](#message-object)
+Status|Meaning|Error Ref|Description|Response Schema
+---|---|----|---|---|
+200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)||Successful Request|[Message Object](#message-object)
+401|[Unauthorized](https://tools.ietf.org/html/rfc7235#section-3.1)|21000|The account marked to be linked does not exist.|[Error Object](#schemaerror_object)
+403|[Forbidden](https://tools.ietf.org/html/rfc7231#section-6.5.3)|11033|The supplied service id does not match up with our records for this user.|[Error Object](#schemaerror_object)
+403|[Forbidden](https://tools.ietf.org/html/rfc7231#section-6.5.3)|11034|The user has already been verified.|[Error Object](#schemaerror_object)
 
 <aside class="auth-notice">
 To perform this request, you must be authenticated via one of the following methods:
@@ -1606,12 +1690,13 @@ Get all games. Successful request will return an array of [Game Objects](#get-ga
   "result_limit": 100,
   "result_total": 70
 }
+
 ```
 <h3 id="Get-Games-responses">Responses</h3>
 
-Status|Meaning|Description|Response Schema
----|---|---|---|
-200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)|OK|[Get Games](#schemaget_games)
+Status|Meaning|Error Ref|Description|Response Schema
+---|---|----|---|---|
+200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)||OK|[Get Games](#schemaget_games)
 
 <aside class="auth-notice">
 To perform this request, you must be authenticated via one of the following methods:
@@ -1775,12 +1860,13 @@ Get a game. Successful request will return a single [Game Object](#game-object).
     }
   ]
 }
+
 ```
 <h3 id="Get-Game-responses">Responses</h3>
 
-Status|Meaning|Description|Response Schema
----|---|---|---|
-200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)|Request successful|[Game Object](#schemagame_object)
+Status|Meaning|Error Ref|Description|Response Schema
+---|---|----|---|---|
+200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)||Request successful|[Game Object](#schemagame_object)
 
 <aside class="auth-notice">
 To perform this request, you must be authenticated via one of the following methods:
@@ -1974,12 +2060,15 @@ Update details for a game. If you want to update the `icon`, `logo` or `header` 
     }
   ]
 }
+
 ```
 <h3 id="Edit-Game-responses">Responses</h3>
 
-Status|Meaning|Description|Response Schema
----|---|---|---|
-200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)|Update successful|[Game Object](#schemagame_object)
+Status|Meaning|Error Ref|Description|Response Schema
+---|---|----|---|---|
+200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)||Update successful|[Game Object](#schemagame_object)
+403|[Forbidden](https://tools.ietf.org/html/rfc7231#section-6.5.3)|14002|The authenticated user does not have permission to update this game. Ensure the user is part of the mod team before attempting the request again.|[Error Object](#schemaerror_object)
+403|[Forbidden](https://tools.ietf.org/html/rfc7231#section-6.5.3)|14003|The authenticated user does not have permission to update the status of this game. Ensure the user is part of the mod team before attempting the request again.|[Error Object](#schemaerror_object)
 
 <aside class="auth-notice">
 To perform this request, you must be authenticated via one of the following methods:
@@ -2219,12 +2308,14 @@ Get all mods for the corresponding game. Successful request will return an array
   "result_limit": 100,
   "result_total": 70
 }
+
 ```
 <h3 id="Get-Mods-responses">Responses</h3>
 
-Status|Meaning|Description|Response Schema
----|---|---|---|
-200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)|Successful Request|[Get Mods](#schemaget_mods)
+Status|Meaning|Error Ref|Description|Response Schema
+---|---|----|---|---|
+200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)||Successful Request|[Get Mods](#schemaget_mods)
+403|[Forbidden](https://tools.ietf.org/html/rfc7231#section-6.5.3)|15025|The authenticated user has applied an admin-only filter or value to the request, and is not an administrator for this game.|[Error Object](#schemaerror_object)
 
 <aside class="auth-notice">
 To perform this request, you must be authenticated via one of the following methods:
@@ -2426,12 +2517,13 @@ Get a mod. Successful request will return a single [Mod Object](#mod-object).
     "date_expires": 1492564103
   }
 }
+
 ```
 <h3 id="Get-Mod-responses">Responses</h3>
 
-Status|Meaning|Description|Response Schema
----|---|---|---|
-200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)|Successful Request|[Mod Object](#schemamod_object)
+Status|Meaning|Error Ref|Description|Response Schema
+---|---|----|---|---|
+200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)||Successful Request|[Mod Object](#schemamod_object)
 
 <aside class="auth-notice">
 To perform this request, you must be authenticated via one of the following methods:
@@ -2664,12 +2756,14 @@ Add a mod. Successful request will return the newly created [Mod Object](#mod-ob
     "date_expires": 1492564103
   }
 }
+
 ```
 <h3 id="Add-Mod-responses">Responses</h3>
 
-Status|Meaning|Description|Response Schema
----|---|---|---|
-201|[Created](https://tools.ietf.org/html/rfc7231#section-6.3.2)|Resource Created|[Mod Object](#schemamod_object)
+Status|Meaning|Error Ref|Description|Response Schema
+---|---|----|---|---|
+201|[Created](https://tools.ietf.org/html/rfc7231#section-6.3.2)||Resource Created|[Mod Object](#schemamod_object)
+403|[Forbidden](https://tools.ietf.org/html/rfc7231#section-6.5.3)|15012|The authenticated user has had upload privileges restricted by mod.io admins, this is typically due to spam.|[Error Object](#schemaerror_object)
 
 ### Response Headers
 
@@ -2901,12 +2995,18 @@ Edit details for a mod. If you want to update the `logo` or media associated wit
     "date_expires": 1492564103
   }
 }
+
 ```
 <h3 id="Edit-Mod-responses">Responses</h3>
 
-Status|Meaning|Description|Response Schema
----|---|---|---|
-200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)|Update Successful|[Mod Object](#schemamod_object)
+Status|Meaning|Error Ref|Description|Response Schema
+---|---|----|---|---|
+200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)||Update Successful|[Mod Object](#schemamod_object)
+403|[Forbidden](https://tools.ietf.org/html/rfc7231#section-6.5.3)|15013|The authenticated user does not have permission to update this mod. Ensure the user is part of the mod team before attempting the request again.|[Error Object](#schemaerror_object)
+403|[Forbidden](https://tools.ietf.org/html/rfc7231#section-6.5.3)|15033|The authenticated user does not have permission to update the metadata for this mod, this action is restricted to team managers & administrators only.|[Error Object](#schemaerror_object)
+403|[Forbidden](https://tools.ietf.org/html/rfc7231#section-6.5.3)|15014|The authenticated user does not have permission to update the maturityoptions for this mod, this action is restricted to team managers & administrators only.|[Error Object](#schemaerror_object)
+403|[Forbidden](https://tools.ietf.org/html/rfc7231#section-6.5.3)|15015|The authenticated user does not have permission to update the status for this mod, this action is restricted to team managers & administrators only.|[Error Object](#schemaerror_object)
+403|[Forbidden](https://tools.ietf.org/html/rfc7231#section-6.5.3)|15016|A mod cannot be set live without an associated modfile.|[Error Object](#schemaerror_object)
 
 <aside class="auth-notice">
 To perform this request, you must be authenticated via one of the following methods:
@@ -3018,12 +3118,14 @@ Delete a mod profile. Successful request will return `204 No Content` and fire a
 
 ```json
  204 No Content 
+
 ```
 <h3 id="Delete-Mod-responses">Responses</h3>
 
-Status|Meaning|Description|Response Schema
----|---|---|---|
-204|[No Content](https://tools.ietf.org/html/rfc7231#section-6.3.5)|Successful Request. No Body Returned.|None
+Status|Meaning|Error Ref|Description|Response Schema
+---|---|----|---|---|
+204|[No Content](https://tools.ietf.org/html/rfc7231#section-6.3.5)||Successful Request. No Body Returned.|None
+403|[Forbidden](https://tools.ietf.org/html/rfc7231#section-6.5.3)|15019|The authenticated user does not have permission to delete this mod, this action is restricted to team managers & administrators only.|[Error Object](#schemaerror_object)
 
 <aside class="auth-notice">
 To perform this request, you must be authenticated via one of the following methods:
@@ -3172,12 +3274,13 @@ Get all files that are published for the corresponding mod. Successful request w
   "result_limit": 100,
   "result_total": 70
 }
+
 ```
 <h3 id="Get-Modfiles-responses">Responses</h3>
 
-Status|Meaning|Description|Response Schema
----|---|---|---|
-200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)|Successful Request|[Get Modfiles](#schemaget_modfiles)
+Status|Meaning|Error Ref|Description|Response Schema
+---|---|----|---|---|
+200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)||Successful Request|[Get Modfiles](#schemaget_modfiles)
 
 <aside class="auth-notice">
 To perform this request, you must be authenticated via one of the following methods:
@@ -3298,12 +3401,13 @@ Get a file. Successful request will return a single [Modfile Object](#modfile-ob
     "date_expires": 1579316848
   }
 }
+
 ```
 <h3 id="Get-Modfile-responses">Responses</h3>
 
-Status|Meaning|Description|Response Schema
----|---|---|---|
-200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)|Successful Request|[Modfile Object](#schemamodfile_object)
+Status|Meaning|Error Ref|Description|Response Schema
+---|---|----|---|---|
+200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)||Successful Request|[Modfile Object](#schemamodfile_object)
 
 <aside class="auth-notice">
 To perform this request, you must be authenticated via one of the following methods:
@@ -3452,12 +3556,15 @@ Upload a file for the corresponding mod. Successful request will return the newl
     "date_expires": 1579316848
   }
 }
+
 ```
 <h3 id="Add-Modfile-responses">Responses</h3>
 
-Status|Meaning|Description|Response Schema
----|---|---|---|
-201|[Created](https://tools.ietf.org/html/rfc7231#section-6.3.2)|Resource Created|[Modfile Object](#schemamodfile_object)
+Status|Meaning|Error Ref|Description|Response Schema
+---|---|----|---|---|
+201|[Created](https://tools.ietf.org/html/rfc7231#section-6.3.2)||Resource Created|[Modfile Object](#schemamodfile_object)
+403|[Forbidden](https://tools.ietf.org/html/rfc7231#section-6.5.3)|15006|The authenticated user does not have permission to upload modfiles for the specified mod, ensure the user is a team manager or administrator.|[Error Object](#schemaerror_object)
+422|[Unprocessable Entity](https://tools.ietf.org/html/rfc2518#section-10.3)|13002|The payload passed in the request was unable to be validated/read by mod.io, please try again.|[Error Object](#schemaerror_object)
 
 ### Response Headers
 
@@ -3602,12 +3709,15 @@ Edit the details of a published file. If you want to update fields other than th
     "date_expires": 1579316848
   }
 }
+
 ```
 <h3 id="Edit-Modfile-responses">Responses</h3>
 
-Status|Meaning|Description|Response Schema
----|---|---|---|
-200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)|Update Successful|[Modfile Object](#schemamodfile_object)
+Status|Meaning|Error Ref|Description|Response Schema
+---|---|----|---|---|
+200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)||Update Successful|[Modfile Object](#schemamodfile_object)
+403|[Forbidden](https://tools.ietf.org/html/rfc7231#section-6.5.3)|15007|The authenticated user does not have permission to update modfiles for the specified mod, ensure the user is a team manager or administrator.|[Error Object](#schemaerror_object)
+403|[Forbidden](https://tools.ietf.org/html/rfc7231#section-6.5.3)|15033|The authenticated user does not have permission to update modfile metadata for the specified mod, ensure the user is a team manager or administrator.|[Error Object](#schemaerror_object)
 
 <aside class="auth-notice">
 To perform this request, you must be authenticated via one of the following methods:
@@ -3719,12 +3829,15 @@ Delete a modfile. Successful request will return `204 No Content`.<br><br>__NOTE
 
 ```json
  204 No Content 
+
 ```
 <h3 id="Delete-Modfile-responses">Responses</h3>
 
-Status|Meaning|Description|Response Schema
----|---|---|---|
-204|[No Content](https://tools.ietf.org/html/rfc7231#section-6.3.5)|Successful Request. No Body Returned.|None
+Status|Meaning|Error Ref|Description|Response Schema
+---|---|----|---|---|
+204|[No Content](https://tools.ietf.org/html/rfc7231#section-6.3.5)||Successful Request. No Body Returned.|None
+403|[Forbidden](https://tools.ietf.org/html/rfc7231#section-6.5.3)|15008|The authenticated user does not have permission to delete modfiles for the specified mod, ensure the user is a team manager or administrator.|[Error Object](#schemaerror_object)
+403|[Forbidden](https://tools.ietf.org/html/rfc7231#section-6.5.3)|15009|The active (primary) modfile for a mod cannot be deleted.|[Error Object](#schemaerror_object)
 
 <aside class="auth-notice">
 To perform this request, you must be authenticated via one of the following methods:
@@ -3855,12 +3968,13 @@ Upload new media to a game. The request `Content-Type` header __must__ be `multi
   "code": 200,
   "message": "You have successfully added new media to the specified game profile."
 }
+
 ```
 <h3 id="Add-Game-Media-responses">Responses</h3>
 
-Status|Meaning|Description|Response Schema
----|---|---|---|
-200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)|Media Successfully uploaded|[Message Object](#message-object)
+Status|Meaning|Error Ref|Description|Response Schema
+---|---|----|---|---|
+200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)||Media Successfully uploaded|[Message Object](#message-object)
 
 <aside class="auth-notice">
 To perform this request, you must be authenticated via one of the following methods:
@@ -3996,12 +4110,14 @@ This endpoint is very flexible and will add any images posted to the mods galler
   "code": 201,
   "message": "You have successfully added new media to the specified mod."
 }
+
 ```
 <h3 id="Add-Mod-Media-responses">Responses</h3>
 
-Status|Meaning|Description|Response Schema
----|---|---|---|
-201|[Created](https://tools.ietf.org/html/rfc7231#section-6.3.2)|Resource Created|[Message Object](#message-object)
+Status|Meaning|Error Ref|Description|Response Schema
+---|---|----|---|---|
+201|[Created](https://tools.ietf.org/html/rfc7231#section-6.3.2)||Resource Created|[Message Object](#message-object)
+403|[Forbidden](https://tools.ietf.org/html/rfc7231#section-6.5.3)|15035|The authenticated user does not have permission to add media for this mod, this action is restricted to team managers & administrators only.|[Error Object](#schemaerror_object)
 
 ### Response Headers
 
@@ -4133,12 +4249,14 @@ Delete images, sketchfab or youtube links from a mod profile. Successful request
 
 ```json
  204 No Content 
+
 ```
 <h3 id="Delete-Mod-Media-responses">Responses</h3>
 
-Status|Meaning|Description|Response Schema
----|---|---|---|
-204|[No Content](https://tools.ietf.org/html/rfc7231#section-6.3.5)|Successful Request. No Body Returned.|None
+Status|Meaning|Error Ref|Description|Response Schema
+---|---|----|---|---|
+204|[No Content](https://tools.ietf.org/html/rfc7231#section-6.3.5)||Successful Request. No Body Returned.|None
+403|[Forbidden](https://tools.ietf.org/html/rfc7231#section-6.5.3)|15036|The authenticated user does not have permission to delete media from this mod, this action is restricted to team managers & administrators only.|[Error Object](#schemaerror_object)
 
 <aside class="auth-notice">
 To perform this request, you must be authenticated via one of the following methods:
@@ -4353,12 +4471,16 @@ Subscribe the _authenticated user_ to a corresponding mod. No body parameters ar
     "date_expires": 1492564103
   }
 }
+
 ```
 <h3 id="Subscribe-To-Mod-responses">Responses</h3>
 
-Status|Meaning|Description|Response Schema
----|---|---|---|
-201|[Created](https://tools.ietf.org/html/rfc7231#section-6.3.2)|Subscription Successful|[Mod Object](#schemamod_object)
+Status|Meaning|Error Ref|Description|Response Schema
+---|---|----|---|---|
+201|[Created](https://tools.ietf.org/html/rfc7231#section-6.3.2)||Subscription Successful|[Mod Object](#schemamod_object)
+400|[Bad Request](https://tools.ietf.org/html/rfc7231#section-6.5.1)|15004|The authenticated user is already subscribed to the mod.|[Error Object](#schemaerror_object)
+403|[Forbidden](https://tools.ietf.org/html/rfc7231#section-6.5.3)|15000|The requested mod cannot be subscribed to at this time due to a DMCA takedown request.|[Error Object](#schemaerror_object)
+403|[Forbidden](https://tools.ietf.org/html/rfc7231#section-6.5.3)|15001|The requested mod cannot be subscribed to due to being marked as 'hidden'.|[Error Object](#schemaerror_object)
 
 ### Response Headers
 
@@ -4476,12 +4598,14 @@ Unsubscribe the _authenticated user_ from the corresponding mod. No body paramet
 
 ```json
  204 No Content 
+
 ```
 <h3 id="Unsubscribe-From-Mod-responses">Responses</h3>
 
-Status|Meaning|Description|Response Schema
----|---|---|---|
-204|[No Content](https://tools.ietf.org/html/rfc7231#section-6.3.5)|Successful Request. No Body Returned.|None
+Status|Meaning|Error Ref|Description|Response Schema
+---|---|----|---|---|
+204|[No Content](https://tools.ietf.org/html/rfc7231#section-6.3.5)||Successful Request. No Body Returned.|None
+400|[Bad Request](https://tools.ietf.org/html/rfc7231#section-6.5.1)|15005|The requested user is not currently subscribed to the requested mod.|[Error Object](#schemaerror_object)
 
 <aside class="auth-notice">
 To perform this request, you must be authenticated via one of the following methods:
@@ -4611,12 +4735,13 @@ Get all mods events for the corresponding game sorted by latest event first. Suc
   "result_limit": 100,
   "result_total": 70
 }
+
 ```
 <h3 id="Get-Mods-Events-responses">Responses</h3>
 
-Status|Meaning|Description|Response Schema
----|---|---|---|
-200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)|Successful Request|[Get Mod Events](#schemaget_mod_events)
+Status|Meaning|Error Ref|Description|Response Schema
+---|---|----|---|---|
+200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)||Successful Request|[Get Mod Events](#schemaget_mod_events)
 
 <aside class="auth-notice">
 To perform this request, you must be authenticated via one of the following methods:
@@ -4734,387 +4859,13 @@ Get the event log for a mod, showing changes made sorted by latest event first. 
   "result_limit": 100,
   "result_total": 70
 }
+
 ```
 <h3 id="Get-Mod-Events-responses">Responses</h3>
 
-Status|Meaning|Description|Response Schema
----|---|---|---|
-200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)|Successful Request|[Get Mod Events](#schemaget_mod_events)
-
-<aside class="auth-notice">
-To perform this request, you must be authenticated via one of the following methods:
-<a href="#authentication">api_key</a>, <a href="#authentication">OAuth 2</a> (Scopes: read)
-</aside>
-# Stats
-
-## Get Mods Stats
-
-> Example request
-
-```shell
-# You can also use wget
-curl -X GET https://api.mod.io/v1/games/{game-id}/mods/stats?api_key=YourApiKey \
-  -H 'Accept: application/json'
-
-```
-
-```http
-GET https://api.mod.io/v1/games/{game-id}/mods/stats?api_key=YourApiKey HTTP/1.1
-Host: api.mod.io
-
-Accept: application/json
-
-```
-
-```javascript
-var headers = {
-  'Accept':'application/json'
-
-};
-
-$.ajax({
-  url: 'https://api.mod.io/v1/games/{game-id}/mods/stats',
-  method: 'get',
-  data: '?api_key=YourApiKey',
-  headers: headers,
-  success: function(data) {
-    console.log(JSON.stringify(data));
-  }
-})
-```
-
-```javascript--nodejs
-const request = require('node-fetch');
-
-const headers = {
-  'Accept':'application/json'
-
-};
-
-fetch('https://api.mod.io/v1/games/{game-id}/mods/stats?api_key=YourApiKey',
-{
-  method: 'GET',
-
-  headers: headers
-})
-.then(function(res) {
-    return res.json();
-}).then(function(body) {
-    console.log(body);
-});
-```
-
-```python
-import requests
-headers = {
-  'Accept': 'application/json'
-}
-
-r = requests.get('https://api.mod.io/v1/games/{game-id}/mods/stats', params={
-  'api_key': 'YourApiKey'
-}, headers = headers)
-
-print r.json()
-```
-
-```java
-URL obj = new URL("https://api.mod.io/v1/games/{game-id}/mods/stats?api_key=YourApiKey");
-HttpURLConnection con = (HttpURLConnection) obj.openConnection();
-con.setRequestMethod("GET");
-int responseCode = con.getResponseCode();
-BufferedReader in = new BufferedReader(
-    new InputStreamReader(con.getInputStream()));
-String inputLine;
-StringBuffer response = new StringBuffer();
-while ((inputLine = in.readLine()) != null) {
-    response.append(inputLine);
-}
-in.close();
-System.out.println(response.toString());
-```
-
-`GET /games/{game-id}/mods/stats`
-
-Get all mod stats for mods of the corresponding game. Successful request will return an array of [Mod Stats Objects](#get-mod-stats).<br><br>__NOTE:__ We highly recommend you apply filters to this endpoint to get only the results you need. For more information regarding filtering please see the [filtering](#filtering) section.
-
-    Filter|Type|Description
-    ---|---|---
-    mod_id|integer|Unique id of the mod.
-    popularity_rank_position|integer|Current ranking by popularity for the corresponding mod.
-    popularity_rank_total_mods|integer|Global mod count in which `popularity_rank_position` is compared against.
-    downloads_total|integer|A sum of all modfile downloads for the corresponding mod.
-    subscribers_total|integer|A sum of all current subscribers for the corresponding mod.
-    ratings_positive|integer|Amount of positive ratings.
-    ratings_negative|integer|Amount of negative ratings.
-
-
-> Example response
-
-```json
-{
-  "data": [
-    {
-      "mod_id": 2,
-      "popularity_rank_position": 13,
-      "popularity_rank_total_mods": 204,
-      "downloads_total": 27492,
-      "subscribers_total": 16394,
-      "ratings_total": 1230,
-      "ratings_positive": 1047,
-      "ratings_negative": 183,
-      "ratings_percentage_positive": 91,
-      "ratings_weighted_aggregate": 87.38,
-      "ratings_display_text": "Very Positive",
-      "date_expires": 1492564103
-    },
-    {
-        ...
-    }
-  ],
-  "result_count": 70,
-  "result_offset": 0,
-  "result_limit": 100,
-  "result_total": 70
-}
-```
-<h3 id="Get-Mods-Stats-responses">Responses</h3>
-
-Status|Meaning|Description|Response Schema
----|---|---|---|
-200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)|Successful Request|[Get Mod Stats](#schemaget_mod_stats)
-
-<aside class="auth-notice">
-To perform this request, you must be authenticated via one of the following methods:
-<a href="#authentication">api_key</a>, <a href="#authentication">OAuth 2</a> (Scopes: read)
-</aside>
-## Get Mod Stats
-
-> Example request
-
-```shell
-# You can also use wget
-curl -X GET https://api.mod.io/v1/games/{game-id}/mods/{mod-id}/stats?api_key=YourApiKey \
-  -H 'Accept: application/json'
-
-```
-
-```http
-GET https://api.mod.io/v1/games/{game-id}/mods/{mod-id}/stats?api_key=YourApiKey HTTP/1.1
-Host: api.mod.io
-
-Accept: application/json
-
-```
-
-```javascript
-var headers = {
-  'Accept':'application/json'
-
-};
-
-$.ajax({
-  url: 'https://api.mod.io/v1/games/{game-id}/mods/{mod-id}/stats',
-  method: 'get',
-  data: '?api_key=YourApiKey',
-  headers: headers,
-  success: function(data) {
-    console.log(JSON.stringify(data));
-  }
-})
-```
-
-```javascript--nodejs
-const request = require('node-fetch');
-
-const headers = {
-  'Accept':'application/json'
-
-};
-
-fetch('https://api.mod.io/v1/games/{game-id}/mods/{mod-id}/stats?api_key=YourApiKey',
-{
-  method: 'GET',
-
-  headers: headers
-})
-.then(function(res) {
-    return res.json();
-}).then(function(body) {
-    console.log(body);
-});
-```
-
-```python
-import requests
-headers = {
-  'Accept': 'application/json'
-}
-
-r = requests.get('https://api.mod.io/v1/games/{game-id}/mods/{mod-id}/stats', params={
-  'api_key': 'YourApiKey'
-}, headers = headers)
-
-print r.json()
-```
-
-```java
-URL obj = new URL("https://api.mod.io/v1/games/{game-id}/mods/{mod-id}/stats?api_key=YourApiKey");
-HttpURLConnection con = (HttpURLConnection) obj.openConnection();
-con.setRequestMethod("GET");
-int responseCode = con.getResponseCode();
-BufferedReader in = new BufferedReader(
-    new InputStreamReader(con.getInputStream()));
-String inputLine;
-StringBuffer response = new StringBuffer();
-while ((inputLine = in.readLine()) != null) {
-    response.append(inputLine);
-}
-in.close();
-System.out.println(response.toString());
-```
-
-`GET /games/{game-id}/mods/{mod-id}/stats`
-
-Get mod stats for the corresponding mod. Successful request will return a single [Mod Stats Object](#mod-stats-object).
-
-
-> Example response
-
-```json
-{
-  "mod_id": 2,
-  "popularity_rank_position": 13,
-  "popularity_rank_total_mods": 204,
-  "downloads_total": 27492,
-  "subscribers_total": 16394,
-  "ratings_total": 1230,
-  "ratings_positive": 1047,
-  "ratings_negative": 183,
-  "ratings_percentage_positive": 91,
-  "ratings_weighted_aggregate": 87.38,
-  "ratings_display_text": "Very Positive",
-  "date_expires": 1492564103
-}
-```
-<h3 id="Get-Mod-Stats-responses">Responses</h3>
-
-Status|Meaning|Description|Response Schema
----|---|---|---|
-200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)|Successful Request|[Mod Stats Object](#schemamod_stats_object)
-
-<aside class="auth-notice">
-To perform this request, you must be authenticated via one of the following methods:
-<a href="#authentication">api_key</a>, <a href="#authentication">OAuth 2</a> (Scopes: read)
-</aside>
-## Get Game Stats
-
-> Example request
-
-```shell
-# You can also use wget
-curl -X GET https://api.mod.io/v1/games/{game-id}/stats?api_key=YourApiKey \
-  -H 'Accept: application/json'
-
-```
-
-```http
-GET https://api.mod.io/v1/games/{game-id}/stats?api_key=YourApiKey HTTP/1.1
-Host: api.mod.io
-
-Accept: application/json
-
-```
-
-```javascript
-var headers = {
-  'Accept':'application/json'
-
-};
-
-$.ajax({
-  url: 'https://api.mod.io/v1/games/{game-id}/stats',
-  method: 'get',
-  data: '?api_key=YourApiKey',
-  headers: headers,
-  success: function(data) {
-    console.log(JSON.stringify(data));
-  }
-})
-```
-
-```javascript--nodejs
-const request = require('node-fetch');
-
-const headers = {
-  'Accept':'application/json'
-
-};
-
-fetch('https://api.mod.io/v1/games/{game-id}/stats?api_key=YourApiKey',
-{
-  method: 'GET',
-
-  headers: headers
-})
-.then(function(res) {
-    return res.json();
-}).then(function(body) {
-    console.log(body);
-});
-```
-
-```python
-import requests
-headers = {
-  'Accept': 'application/json'
-}
-
-r = requests.get('https://api.mod.io/v1/games/{game-id}/stats', params={
-  'api_key': 'YourApiKey'
-}, headers = headers)
-
-print r.json()
-```
-
-```java
-URL obj = new URL("https://api.mod.io/v1/games/{game-id}/stats?api_key=YourApiKey");
-HttpURLConnection con = (HttpURLConnection) obj.openConnection();
-con.setRequestMethod("GET");
-int responseCode = con.getResponseCode();
-BufferedReader in = new BufferedReader(
-    new InputStreamReader(con.getInputStream()));
-String inputLine;
-StringBuffer response = new StringBuffer();
-while ((inputLine = in.readLine()) != null) {
-    response.append(inputLine);
-}
-in.close();
-System.out.println(response.toString());
-```
-
-`GET /games/{game-id}/stats`
-
-Get game stats for the corresponding game. Successful request will return a single [Game Stats Object](#game-stats-object).
-
-
-> Example response
-
-```json
-{
-  "game_id": 2,
-  "mods_count_total": 13,
-  "mods_downloads_today": 204,
-  "mods_downloads_total": 27492,
-  "mods_downloads_daily_average": 1230,
-  "mods_subscribers_total": 16394,
-  "date_expires": 1492564103
-}
-```
-<h3 id="Get-Game-Stats-responses">Responses</h3>
-
-Status|Meaning|Description|Response Schema
----|---|---|---|
-200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)|Successful Request|[Game Stats Object](#schemagame_stats_object)
+Status|Meaning|Error Ref|Description|Response Schema
+---|---|----|---|---|
+200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)||Successful Request|[Get Mod Events](#schemaget_mod_events)
 
 <aside class="auth-notice">
 To perform this request, you must be authenticated via one of the following methods:
@@ -5236,12 +4987,13 @@ Get all tags for the corresponding mod. Successful request will return an array 
   "result_limit": 100,
   "result_total": 70
 }
+
 ```
 <h3 id="Get-Mod-Tags-responses">Responses</h3>
 
-Status|Meaning|Description|Response Schema
----|---|---|---|
-200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)|Successful Request|[Get Mod Tags](#schemaget_mod_tags)
+Status|Meaning|Error Ref|Description|Response Schema
+---|---|----|---|---|
+200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)||Successful Request|[Get Mod Tags](#schemaget_mod_tags)
 
 <aside class="auth-notice">
 To perform this request, you must be authenticated via one of the following methods:
@@ -5362,12 +5114,14 @@ Add tags to a mod's profile. You can only add tags allowed by the parent game, w
   "code": 201,
   "message": "You have successfully added tags to the specified mod."
 }
+
 ```
 <h3 id="Add-Mod-Tags-responses">Responses</h3>
 
-Status|Meaning|Description|Response Schema
----|---|---|---|
-201|[Created](https://tools.ietf.org/html/rfc7231#section-6.3.2)|Created|[addModTag](#schemaaddmodtag)
+Status|Meaning|Error Ref|Description|Response Schema
+---|---|----|---|---|
+201|[Created](https://tools.ietf.org/html/rfc7231#section-6.3.2)||Created|[addModTag](#schemaaddmodtag)
+403|[Forbidden](https://tools.ietf.org/html/rfc7231#section-6.5.3)|15037|The authenticated user does not have permission to submit tags for the specified mod. Ensure the user is part of the mod team before attempting the request again.|[Error Object](#schemaerror_object)
 
 ### Response Headers
 
@@ -5491,12 +5245,14 @@ Delete tags from a mod's profile. Deleting tags is identical to adding tags exce
 
 ```json
  204 No Content 
+
 ```
 <h3 id="Delete-Mod-Tags-responses">Responses</h3>
 
-Status|Meaning|Description|Response Schema
----|---|---|---|
-204|[No Content](https://tools.ietf.org/html/rfc7231#section-6.3.5)|Successful Request. No Body Returned.|None
+Status|Meaning|Error Ref|Description|Response Schema
+---|---|----|---|---|
+204|[No Content](https://tools.ietf.org/html/rfc7231#section-6.3.5)||Successful Request. No Body Returned.|None
+403|[Forbidden](https://tools.ietf.org/html/rfc7231#section-6.5.3)|15038|The authenticated user does not have permission to delete tags for the specified mod. Ensure the user is part of the mod team before attempting the request again.|[Error Object](#schemaerror_object)
 
 <aside class="auth-notice">
 To perform this request, you must be authenticated via one of the following methods:
@@ -5615,12 +5371,13 @@ Get all tags for the corresponding game, that can be applied to any of its mods.
   "result_limit": 100,
   "result_total": 70
 }
+
 ```
 <h3 id="Get-Game-Tag-Options-responses">Responses</h3>
 
-Status|Meaning|Description|Response Schema
----|---|---|---|
-200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)|Successful Request|[Get Game Tag Options](#schemaget_game_tag_options)
+Status|Meaning|Error Ref|Description|Response Schema
+---|---|----|---|---|
+200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)||Successful Request|[Get Game Tag Options](#schemaget_game_tag_options)
 
 <aside class="auth-notice">
 To perform this request, you must be authenticated via one of the following methods:
@@ -5754,12 +5511,14 @@ Add tags which mods can apply to their profiles. Successful request will return 
   "code": 201,
   "message": "You have successfully added categories/tags to the specified game."
 }
+
 ```
 <h3 id="Add-Game-Tag-Option-responses">Responses</h3>
 
-Status|Meaning|Description|Response Schema
----|---|---|---|
-201|[Created](https://tools.ietf.org/html/rfc7231#section-6.3.2)|Created|[Message Object](#message-object)
+Status|Meaning|Error Ref|Description|Response Schema
+---|---|----|---|---|
+201|[Created](https://tools.ietf.org/html/rfc7231#section-6.3.2)||Created|[Message Object](#message-object)
+403|[Forbidden](https://tools.ietf.org/html/rfc7231#section-6.5.3)|14012|The authenticated user does not have permission to submit tags for the specified game. Ensure the user is part of the game team before attempting the request again.|[Error Object](#schemaerror_object)
 
 ### Response Headers
 
@@ -5888,12 +5647,14 @@ Delete an entire group of tags or individual tags. Successful request will retur
 
 ```json
  204 No Content 
+
 ```
 <h3 id="Delete-Game-Tag-Option-responses">Responses</h3>
 
-Status|Meaning|Description|Response Schema
----|---|---|---|
-204|[No Content](https://tools.ietf.org/html/rfc7231#section-6.3.5)|Successful Request. No Body Returned.|None
+Status|Meaning|Error Ref|Description|Response Schema
+---|---|----|---|---|
+204|[No Content](https://tools.ietf.org/html/rfc7231#section-6.3.5)||Successful Request. No Body Returned.|None
+403|[Forbidden](https://tools.ietf.org/html/rfc7231#section-6.5.3)|14013|The authenticated user does not have permission to delete tags for the specified game. Ensure the user is part of the game team before attempting the request again.|[Error Object](#schemaerror_object)
 
 <aside class="auth-notice">
 To perform this request, you must be authenticated via one of the following methods:
@@ -6018,12 +5779,14 @@ Submit a positive or negative rating for a mod. Each user can supply only one ra
   "code": 201,
   "message": "You have successfully submitted a rating for the specified mod."
 }
+
 ```
 <h3 id="Add-Mod-Rating-responses">Responses</h3>
 
-Status|Meaning|Description|Response Schema
----|---|---|---|
-201|[Created](https://tools.ietf.org/html/rfc7231#section-6.3.2)|Resource created|[Message Object](#message-object)
+Status|Meaning|Error Ref|Description|Response Schema
+---|---|----|---|---|
+201|[Created](https://tools.ietf.org/html/rfc7231#section-6.3.2)||Resource created|[Message Object](#message-object)
+400|[Bad Request](https://tools.ietf.org/html/rfc7231#section-6.5.1)|15028|The authenticated user has already submitted a rating for this mod.|[Error Object](#schemaerror_object)
 
 <aside class="auth-notice">
 To perform this request, you must be authenticated via one of the following methods:
@@ -6140,12 +5903,13 @@ Get all metadata stored by the game developer for this mod as searchable key val
   "result_limit": 100,
   "result_total": 70
 }
+
 ```
 <h3 id="Get-Mod-KVP-Metadata-responses">Responses</h3>
 
-Status|Meaning|Description|Response Schema
----|---|---|---|
-200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)|Successful Request|[Get Mod KVP Metadata](#schemaget_mod_kvp_metadata)
+Status|Meaning|Error Ref|Description|Response Schema
+---|---|----|---|---|
+200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)||Successful Request|[Get Mod KVP Metadata](#schemaget_mod_kvp_metadata)
 
 <aside class="auth-notice">
 To perform this request, you must be authenticated via one of the following methods:
@@ -6266,12 +6030,14 @@ Add metadata for this mod as searchable key value pairs. Metadata is useful to d
   "code": 201,
   "message": "You have successfully added new key-value metadata to the specified mod."
 }
+
 ```
 <h3 id="Add-Mod-KVP-Metadata-responses">Responses</h3>
 
-Status|Meaning|Description|Response Schema
----|---|---|---|
-201|[Created](https://tools.ietf.org/html/rfc7231#section-6.3.2)|Created|[Message Object](#message-object)
+Status|Meaning|Error Ref|Description|Response Schema
+---|---|----|---|---|
+201|[Created](https://tools.ietf.org/html/rfc7231#section-6.3.2)||Created|[Message Object](#message-object)
+403|[Forbidden](https://tools.ietf.org/html/rfc7231#section-6.5.3)|15033|The authenticated user does not have permission to add metadata to this mod, this action is restricted to team managers & administrators only.|[Error Object](#schemaerror_object)
 
 ### Response Headers
 
@@ -6395,12 +6161,14 @@ Delete key value pairs metadata defined for this mod. Successful request will re
 
 ```json
  204 No Content 
+
 ```
 <h3 id="Delete-Mod-KVP-Metadata-responses">Responses</h3>
 
-Status|Meaning|Description|Response Schema
----|---|---|---|
-204|[No Content](https://tools.ietf.org/html/rfc7231#section-6.3.5)|Successful Request. No Body Returned.|None
+Status|Meaning|Error Ref|Description|Response Schema
+---|---|----|---|---|
+204|[No Content](https://tools.ietf.org/html/rfc7231#section-6.3.5)||Successful Request. No Body Returned.|None
+403|[Forbidden](https://tools.ietf.org/html/rfc7231#section-6.5.3)|15034|The authenticated user does not have permission to delete metadata from this mod, this action is restricted to team managers & administrators only.|[Error Object](#schemaerror_object)
 
 <aside class="auth-notice">
 To perform this request, you must be authenticated via one of the following methods:
@@ -6521,12 +6289,13 @@ Get all dependencies the chosen mod has selected. This is useful if a mod requir
   "result_limit": 100,
   "result_total": 70
 }
+
 ```
 <h3 id="Get-Mod-Dependencies-responses">Responses</h3>
 
-Status|Meaning|Description|Response Schema
----|---|---|---|
-200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)|Successful Request|[Get Mod Dependencies](#schemaget_mod_dependencies)
+Status|Meaning|Error Ref|Description|Response Schema
+---|---|----|---|---|
+200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)||Successful Request|[Get Mod Dependencies](#schemaget_mod_dependencies)
 
 <aside class="auth-notice">
 To perform this request, you must be authenticated via one of the following methods:
@@ -6647,12 +6416,14 @@ Add mod dependencies required by the corresponding mod. A dependency is a mod th
   "code": 201,
   "message": "You have successfully added new dependencies to the specified mod."
 }
+
 ```
 <h3 id="Add-Mod-Dependencies-responses">Responses</h3>
 
-Status|Meaning|Description|Response Schema
----|---|---|---|
-201|[Created](https://tools.ietf.org/html/rfc7231#section-6.3.2)|Created|[Message Object](#message-object)
+Status|Meaning|Error Ref|Description|Response Schema
+---|---|----|---|---|
+201|[Created](https://tools.ietf.org/html/rfc7231#section-6.3.2)||Created|[Message Object](#message-object)
+403|[Forbidden](https://tools.ietf.org/html/rfc7231#section-6.5.3)|15031|The authenticated user does not have permission to add dependencies for this mod, this action is restricted to team managers & administrators only.|[Error Object](#schemaerror_object)
 
 ### Response Headers
 
@@ -6776,12 +6547,14 @@ Delete mod dependencies the corresponding mod has selected. Successful request w
 
 ```json
  204 No Content 
+
 ```
 <h3 id="Delete-Mod-Dependencies-responses">Responses</h3>
 
-Status|Meaning|Description|Response Schema
----|---|---|---|
-204|[No Content](https://tools.ietf.org/html/rfc7231#section-6.3.5)|Successful Request. No Body Returned.|None
+Status|Meaning|Error Ref|Description|Response Schema
+---|---|----|---|---|
+204|[No Content](https://tools.ietf.org/html/rfc7231#section-6.3.5)||Successful Request. No Body Returned.|None
+403|[Forbidden](https://tools.ietf.org/html/rfc7231#section-6.5.3)|15032|The authenticated user does not have permission to delete dependencies for this mod, this action is restricted to team managers & administrators only.|[Error Object](#schemaerror_object)
 
 <aside class="auth-notice">
 To perform this request, you must be authenticated via one of the following methods:
@@ -6924,12 +6697,13 @@ Get all users that are part of a mod team. Successful request will return an arr
   "result_limit": 100,
   "result_total": 70
 }
+
 ```
 <h3 id="Get-Mod-Team-Members-responses">Responses</h3>
 
-Status|Meaning|Description|Response Schema
----|---|---|---|
-200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)|Successful Request|[Get Team Members](#schemaget_team_members)
+Status|Meaning|Error Ref|Description|Response Schema
+---|---|----|---|---|
+200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)||Successful Request|[Get Team Members](#schemaget_team_members)
 
 <aside class="auth-notice">
 To perform this request, you must be authenticated via one of the following methods:
@@ -7058,12 +6832,17 @@ Add a user to a mod team. Successful request will return [Message Object](#messa
   "code": 201,
   "message": "You have successfully added a member to the specified team."
 }
+
 ```
 <h3 id="Add-Mod-Team-Member-responses">Responses</h3>
 
-Status|Meaning|Description|Response Schema
----|---|---|---|
-201|[Created](https://tools.ietf.org/html/rfc7231#section-6.3.2)|Created|[Message Object](#message-object)
+Status|Meaning|Error Ref|Description|Response Schema
+---|---|----|---|---|
+201|[Created](https://tools.ietf.org/html/rfc7231#section-6.3.2)||Created|[Message Object](#message-object)
+403|[Forbidden](https://tools.ietf.org/html/rfc7231#section-6.5.3)|15039|The authenticated user does not have permission to add team members to this mod, this action is restricted to team leaders & administrator's only.|[Error Object](#schemaerror_object)
+403|[Forbidden](https://tools.ietf.org/html/rfc7231#section-6.5.3)|21000|The specified user could not be found.|[Error Object](#schemaerror_object)
+403|[Forbidden](https://tools.ietf.org/html/rfc7231#section-6.5.3)|15020|You can't add yourself to a team twice, let's not be greedy now.|[Error Object](#schemaerror_object)
+400|[Bad Request](https://tools.ietf.org/html/rfc7231#section-6.5.1)|15021|The specified user is already a member of the team.|[Error Object](#schemaerror_object)
 
 ### Response Headers
 
@@ -7191,12 +6970,14 @@ Update a mod team members details. Successful request will return a [Message Obj
   "code": 201,
   "message": "You have successfully updated the specified team members details."
 }
+
 ```
 <h3 id="Update-Mod-Team-Member-responses">Responses</h3>
 
-Status|Meaning|Description|Response Schema
----|---|---|---|
-200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)|OK|[Message Object](#message-object)
+Status|Meaning|Error Ref|Description|Response Schema
+---|---|----|---|---|
+200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)||OK|[Message Object](#message-object)
+403|[Forbidden](https://tools.ietf.org/html/rfc7231#section-6.5.3)|15039|The authenticated user does not have permission to update team members for this mod, this action is restricted to team leaders & administrator's only.|[Error Object](#schemaerror_object)
 
 <aside class="auth-notice">
 To perform this request, you must be authenticated via one of the following methods:
@@ -7308,12 +7089,14 @@ Delete a user from a mod team. This will revoke their access rights if they are 
 
 ```json
  204 No Content 
+
 ```
 <h3 id="Delete-Mod-Team-Member-responses">Responses</h3>
 
-Status|Meaning|Description|Response Schema
----|---|---|---|
-204|[No Content](https://tools.ietf.org/html/rfc7231#section-6.3.5)|Successful Request. No Body Returned.|None
+Status|Meaning|Error Ref|Description|Response Schema
+---|---|----|---|---|
+204|[No Content](https://tools.ietf.org/html/rfc7231#section-6.3.5)||Successful Request. No Body Returned.|None
+403|[Forbidden](https://tools.ietf.org/html/rfc7231#section-6.5.3)|15040|The authenticated user does not have permission to delete team members for this mod, this action is restricted to team leaders & administrator's only.|[Error Object](#schemaerror_object)
 
 <aside class="auth-notice">
 To perform this request, you must be authenticated via one of the following methods:
@@ -7462,12 +7245,13 @@ Get all comments posted in the mods profile. Successful request will return an a
   "result_limit": 100,
   "result_total": 70
 }
+
 ```
 <h3 id="Get-Mod-Comments-responses">Responses</h3>
 
-Status|Meaning|Description|Response Schema
----|---|---|---|
-200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)|OK|[Get Mod Comments](#schemaget_mod_comments)
+Status|Meaning|Error Ref|Description|Response Schema
+---|---|----|---|---|
+200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)||OK|[Get Mod Comments](#schemaget_mod_comments)
 
 <aside class="auth-notice">
 To perform this request, you must be authenticated via one of the following methods:
@@ -7592,12 +7376,13 @@ Get a Mod Comment. Successful request will return a single [Comment Object](#com
   "karma_guest": 0,
   "content": "This mod is kickass! Great work!"
 }
+
 ```
 <h3 id="Get-Mod-Comment-responses">Responses</h3>
 
-Status|Meaning|Description|Response Schema
----|---|---|---|
-200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)|Successful Request|[Comment Object](#schemacomment_object)
+Status|Meaning|Error Ref|Description|Response Schema
+---|---|----|---|---|
+200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)||Successful Request|[Comment Object](#schemacomment_object)
 
 <aside class="auth-notice">
 To perform this request, you must be authenticated via one of the following methods:
@@ -7709,12 +7494,14 @@ Delete a comment from a mod profile. Successful request will return `204 No Cont
 
 ```json
  204 No Content 
+
 ```
 <h3 id="Delete-Mod-Comment-responses">Responses</h3>
 
-Status|Meaning|Description|Response Schema
----|---|---|---|
-204|[No Content](https://tools.ietf.org/html/rfc7231#section-6.3.5)|Successful Request. No Body Returned.|None
+Status|Meaning|Error Ref|Description|Response Schema
+---|---|----|---|---|
+204|[No Content](https://tools.ietf.org/html/rfc7231#section-6.3.5)||Successful Request. No Body Returned.|None
+403|[Forbidden](https://tools.ietf.org/html/rfc7231#section-6.5.3)|15027|The authenticated user does not have permission to delete comments for this mod, this action is restricted to team managers & administrators only.|[Error Object](#schemaerror_object)
 
 <aside class="auth-notice">
 To perform this request, you must be authenticated via one of the following methods:
@@ -7849,12 +7636,13 @@ Get the user that is the original _submitter_ of a resource. Successful request 
   "language": "",
   "profile_url": "https://mod.io/members/xant"
 }
+
 ```
 <h3 id="Get-Resource-Owner-responses">Responses</h3>
 
-Status|Meaning|Description|Response Schema
----|---|---|---|
-200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)|Successful Request|[User Object](#schemauser_object)
+Status|Meaning|Error Ref|Description|Response Schema
+---|---|----|---|---|
+200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)||Successful Request|[User Object](#schemauser_object)
 
 <aside class="auth-notice">
 To perform this request, you must be authenticated via one of the following methods:
@@ -7992,12 +7780,16 @@ Report a resource on mod.io. You are responsible for content your users submit, 
   "code": 201,
   "message": "You have successfully submitted a report and it will be reviewed by the mod.io team as soon as possible."
 }
+
 ```
 <h3 id="Submit-Report-responses">Responses</h3>
 
-Status|Meaning|Description|Response Schema
----|---|---|---|
-201|[Created](https://tools.ietf.org/html/rfc7231#section-6.3.2)|Report Created|[Message Object](#message-object)
+Status|Meaning|Error Ref|Description|Response Schema
+---|---|----|---|---|
+201|[Created](https://tools.ietf.org/html/rfc7231#section-6.3.2)||Report Created|[Message Object](#message-object)
+403|[Forbidden](https://tools.ietf.org/html/rfc7231#section-6.5.3)|15029|The authenticated user does not have permission to submit reports on mod.io due to their access being revoked.|[Error Object](#schemaerror_object)
+403|[Forbidden](https://tools.ietf.org/html/rfc7231#section-6.5.3)|15030|The specified resource is not able to be reported at this time, this is potentially due to the resource in question being removed.|[Error Object](#schemaerror_object)
+404|[Not Found](https://tools.ietf.org/html/rfc7231#section-6.5.4)|14000|The resource to be reported could not be found.|[Error Object](#schemaerror_object)
 
 <aside class="auth-notice">
 To perform this request, you must be authenticated via one of the following methods:
@@ -8321,12 +8113,13 @@ Speed up your API calls, by batching them into a single HTTP request. This endpo
   "result_limit": 20,
   "result_total": 1
 }
+
 ```
 <h3 id="Make-Batch-Request-responses">Responses</h3>
 
-Status|Meaning|Description|Response Schema
----|---|---|---|
-200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)|Successful Request|[Make Batch Request](#schemamake_batch_request)
+Status|Meaning|Error Ref|Description|Response Schema
+---|---|----|---|---|
+200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)||Successful Request|[Make Batch Request](#schemamake_batch_request)
 
 <aside class="auth-notice">
 To perform this request, you must be authenticated via one of the following methods:
@@ -8449,12 +8242,13 @@ Get the _authenticated user_ details. Successful request will return a single [U
   "language": "",
   "profile_url": "https://mod.io/members/xant"
 }
+
 ```
 <h3 id="Get-Authenticated-User-responses">Responses</h3>
 
-Status|Meaning|Description|Response Schema
----|---|---|---|
-200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)|Request Successful|[User Object](#schemauser_object)
+Status|Meaning|Error Ref|Description|Response Schema
+---|---|----|---|---|
+200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)||Request Successful|[User Object](#schemauser_object)
 
 <aside class="auth-notice">
 To perform this request, you must be authenticated via one of the following methods:
@@ -8693,12 +8487,13 @@ Get all mod's the _authenticated user_ is subscribed to. Successful request will
   "result_limit": 100,
   "result_total": 70
 }
+
 ```
 <h3 id="Get-User-Subscriptions-responses">Responses</h3>
 
-Status|Meaning|Description|Response Schema
----|---|---|---|
-200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)|Request Successful|[Get Mods](#schemaget_mods)
+Status|Meaning|Error Ref|Description|Response Schema
+---|---|----|---|---|
+200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)||Request Successful|[Get Mods](#schemaget_mods)
 
 <aside class="auth-notice">
 To perform this request, you must be authenticated via one of the following methods:
@@ -8826,12 +8621,13 @@ Get events that have been fired specific to the user. Successful request will re
   "result_limit": 100,
   "result_total": 70
 }
+
 ```
 <h3 id="Get-User-Events-responses">Responses</h3>
 
-Status|Meaning|Description|Response Schema
----|---|---|---|
-200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)|Successful Request|[Get User Events](#schemaget_user_events)
+Status|Meaning|Error Ref|Description|Response Schema
+---|---|----|---|---|
+200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)||Successful Request|[Get User Events](#schemaget_user_events)
 
 <aside class="auth-notice">
 To perform this request, you must be authenticated via one of the following methods:
@@ -9032,12 +8828,13 @@ Get all games the _authenticated user_ added or is a team member of. Successful 
   "result_limit": 100,
   "result_total": 70
 }
+
 ```
 <h3 id="Get-User-Games-responses">Responses</h3>
 
-Status|Meaning|Description|Response Schema
----|---|---|---|
-200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)|Request Successful|[Get Games](#schemaget_games)
+Status|Meaning|Error Ref|Description|Response Schema
+---|---|----|---|---|
+200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)||Request Successful|[Get Games](#schemaget_games)
 
 <aside class="auth-notice">
 To perform this request, you must be authenticated via one of the following methods:
@@ -9280,12 +9077,13 @@ Get all mods the _authenticated user_ added or is a team member of. Successful r
   "result_limit": 100,
   "result_total": 70
 }
+
 ```
 <h3 id="Get-User-Mods-responses">Responses</h3>
 
-Status|Meaning|Description|Response Schema
----|---|---|---|
-200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)|Request Successful|[Get Mods](#schemaget_mods)
+Status|Meaning|Error Ref|Description|Response Schema
+---|---|----|---|---|
+200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)||Request Successful|[Get Mods](#schemaget_mods)
 
 <aside class="auth-notice">
 To perform this request, you must be authenticated via one of the following methods:
@@ -9438,12 +9236,13 @@ Get all modfiles the _authenticated user_ uploaded. Successful request will retu
   "result_limit": 100,
   "result_total": 70
 }
+
 ```
 <h3 id="Get-User-Modfiles-responses">Responses</h3>
 
-Status|Meaning|Description|Response Schema
----|---|---|---|
-200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)|Request Successful|[Get Modfiles](#schemaget_modfiles)
+Status|Meaning|Error Ref|Description|Response Schema
+---|---|----|---|---|
+200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)||Request Successful|[Get Modfiles](#schemaget_modfiles)
 
 <aside class="auth-notice">
 To perform this request, you must be authenticated via one of the following methods:
@@ -9573,16 +9372,395 @@ Get all mod rating's submitted by the _authenticated user_. Successful request w
   "result_limit": 100,
   "result_total": 70
 }
+
 ```
 <h3 id="Get-User-Ratings-responses">Responses</h3>
 
-Status|Meaning|Description|Response Schema
----|---|---|---|
-200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)|Request Successful|[Get User Ratings](#schemaget_user_ratings)
+Status|Meaning|Error Ref|Description|Response Schema
+---|---|----|---|---|
+200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)||Request Successful|[Get User Ratings](#schemaget_user_ratings)
 
 <aside class="auth-notice">
 To perform this request, you must be authenticated via one of the following methods:
 <a href="#authentication">OAuth 2</a> (Scopes: read)
+</aside>
+# Stats
+
+## Get Mods Stats
+
+> Example request
+
+```shell
+# You can also use wget
+curl -X GET https://api.mod.io/v1/games/{game-id}/mods/stats?api_key=YourApiKey \
+  -H 'Accept: application/json'
+
+```
+
+```http
+GET https://api.mod.io/v1/games/{game-id}/mods/stats?api_key=YourApiKey HTTP/1.1
+Host: api.mod.io
+
+Accept: application/json
+
+```
+
+```javascript
+var headers = {
+  'Accept':'application/json'
+
+};
+
+$.ajax({
+  url: 'https://api.mod.io/v1/games/{game-id}/mods/stats',
+  method: 'get',
+  data: '?api_key=YourApiKey',
+  headers: headers,
+  success: function(data) {
+    console.log(JSON.stringify(data));
+  }
+})
+```
+
+```javascript--nodejs
+const request = require('node-fetch');
+
+const headers = {
+  'Accept':'application/json'
+
+};
+
+fetch('https://api.mod.io/v1/games/{game-id}/mods/stats?api_key=YourApiKey',
+{
+  method: 'GET',
+
+  headers: headers
+})
+.then(function(res) {
+    return res.json();
+}).then(function(body) {
+    console.log(body);
+});
+```
+
+```python
+import requests
+headers = {
+  'Accept': 'application/json'
+}
+
+r = requests.get('https://api.mod.io/v1/games/{game-id}/mods/stats', params={
+  'api_key': 'YourApiKey'
+}, headers = headers)
+
+print r.json()
+```
+
+```java
+URL obj = new URL("https://api.mod.io/v1/games/{game-id}/mods/stats?api_key=YourApiKey");
+HttpURLConnection con = (HttpURLConnection) obj.openConnection();
+con.setRequestMethod("GET");
+int responseCode = con.getResponseCode();
+BufferedReader in = new BufferedReader(
+    new InputStreamReader(con.getInputStream()));
+String inputLine;
+StringBuffer response = new StringBuffer();
+while ((inputLine = in.readLine()) != null) {
+    response.append(inputLine);
+}
+in.close();
+System.out.println(response.toString());
+```
+
+`GET /games/{game-id}/mods/stats`
+
+Get all mod stats for mods of the corresponding game. Successful request will return an array of [Mod Stats Objects](#get-mod-stats).<br><br>__NOTE:__ We highly recommend you apply filters to this endpoint to get only the results you need. For more information regarding filtering please see the [filtering](#filtering) section.
+
+    Filter|Type|Description
+    ---|---|---
+    mod_id|integer|Unique id of the mod.
+    popularity_rank_position|integer|Current ranking by popularity for the corresponding mod.
+    popularity_rank_total_mods|integer|Global mod count in which `popularity_rank_position` is compared against.
+    downloads_total|integer|A sum of all modfile downloads for the corresponding mod.
+    subscribers_total|integer|A sum of all current subscribers for the corresponding mod.
+    ratings_positive|integer|Amount of positive ratings.
+    ratings_negative|integer|Amount of negative ratings.
+
+
+> Example response
+
+```json
+{
+  "data": [
+    {
+      "mod_id": 2,
+      "popularity_rank_position": 13,
+      "popularity_rank_total_mods": 204,
+      "downloads_total": 27492,
+      "subscribers_total": 16394,
+      "ratings_total": 1230,
+      "ratings_positive": 1047,
+      "ratings_negative": 183,
+      "ratings_percentage_positive": 91,
+      "ratings_weighted_aggregate": 87.38,
+      "ratings_display_text": "Very Positive",
+      "date_expires": 1492564103
+    },
+    {
+        ...
+    }
+  ],
+  "result_count": 70,
+  "result_offset": 0,
+  "result_limit": 100,
+  "result_total": 70
+}
+
+```
+<h3 id="Get-Mods-Stats-responses">Responses</h3>
+
+Status|Meaning|Error Ref|Description|Response Schema
+---|---|----|---|---|
+200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)||Successful Request|[Get Mod Stats](#schemaget_mod_stats)
+
+<aside class="auth-notice">
+To perform this request, you must be authenticated via one of the following methods:
+<a href="#authentication">api_key</a>, <a href="#authentication">OAuth 2</a> (Scopes: read)
+</aside>
+## Get Mod Stats
+
+> Example request
+
+```shell
+# You can also use wget
+curl -X GET https://api.mod.io/v1/games/{game-id}/mods/{mod-id}/stats?api_key=YourApiKey \
+  -H 'Accept: application/json'
+
+```
+
+```http
+GET https://api.mod.io/v1/games/{game-id}/mods/{mod-id}/stats?api_key=YourApiKey HTTP/1.1
+Host: api.mod.io
+
+Accept: application/json
+
+```
+
+```javascript
+var headers = {
+  'Accept':'application/json'
+
+};
+
+$.ajax({
+  url: 'https://api.mod.io/v1/games/{game-id}/mods/{mod-id}/stats',
+  method: 'get',
+  data: '?api_key=YourApiKey',
+  headers: headers,
+  success: function(data) {
+    console.log(JSON.stringify(data));
+  }
+})
+```
+
+```javascript--nodejs
+const request = require('node-fetch');
+
+const headers = {
+  'Accept':'application/json'
+
+};
+
+fetch('https://api.mod.io/v1/games/{game-id}/mods/{mod-id}/stats?api_key=YourApiKey',
+{
+  method: 'GET',
+
+  headers: headers
+})
+.then(function(res) {
+    return res.json();
+}).then(function(body) {
+    console.log(body);
+});
+```
+
+```python
+import requests
+headers = {
+  'Accept': 'application/json'
+}
+
+r = requests.get('https://api.mod.io/v1/games/{game-id}/mods/{mod-id}/stats', params={
+  'api_key': 'YourApiKey'
+}, headers = headers)
+
+print r.json()
+```
+
+```java
+URL obj = new URL("https://api.mod.io/v1/games/{game-id}/mods/{mod-id}/stats?api_key=YourApiKey");
+HttpURLConnection con = (HttpURLConnection) obj.openConnection();
+con.setRequestMethod("GET");
+int responseCode = con.getResponseCode();
+BufferedReader in = new BufferedReader(
+    new InputStreamReader(con.getInputStream()));
+String inputLine;
+StringBuffer response = new StringBuffer();
+while ((inputLine = in.readLine()) != null) {
+    response.append(inputLine);
+}
+in.close();
+System.out.println(response.toString());
+```
+
+`GET /games/{game-id}/mods/{mod-id}/stats`
+
+Get mod stats for the corresponding mod. Successful request will return a single [Mod Stats Object](#mod-stats-object).
+
+
+> Example response
+
+```json
+{
+  "mod_id": 2,
+  "popularity_rank_position": 13,
+  "popularity_rank_total_mods": 204,
+  "downloads_total": 27492,
+  "subscribers_total": 16394,
+  "ratings_total": 1230,
+  "ratings_positive": 1047,
+  "ratings_negative": 183,
+  "ratings_percentage_positive": 91,
+  "ratings_weighted_aggregate": 87.38,
+  "ratings_display_text": "Very Positive",
+  "date_expires": 1492564103
+}
+
+```
+<h3 id="Get-Mod-Stats-responses">Responses</h3>
+
+Status|Meaning|Error Ref|Description|Response Schema
+---|---|----|---|---|
+200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)||Successful Request|[Mod Stats Object](#schemamod_stats_object)
+
+<aside class="auth-notice">
+To perform this request, you must be authenticated via one of the following methods:
+<a href="#authentication">api_key</a>, <a href="#authentication">OAuth 2</a> (Scopes: read)
+</aside>
+## Get Game Stats
+
+> Example request
+
+```shell
+# You can also use wget
+curl -X GET https://api.mod.io/v1/games/{game-id}/stats?api_key=YourApiKey \
+  -H 'Accept: application/json'
+
+```
+
+```http
+GET https://api.mod.io/v1/games/{game-id}/stats?api_key=YourApiKey HTTP/1.1
+Host: api.mod.io
+
+Accept: application/json
+
+```
+
+```javascript
+var headers = {
+  'Accept':'application/json'
+
+};
+
+$.ajax({
+  url: 'https://api.mod.io/v1/games/{game-id}/stats',
+  method: 'get',
+  data: '?api_key=YourApiKey',
+  headers: headers,
+  success: function(data) {
+    console.log(JSON.stringify(data));
+  }
+})
+```
+
+```javascript--nodejs
+const request = require('node-fetch');
+
+const headers = {
+  'Accept':'application/json'
+
+};
+
+fetch('https://api.mod.io/v1/games/{game-id}/stats?api_key=YourApiKey',
+{
+  method: 'GET',
+
+  headers: headers
+})
+.then(function(res) {
+    return res.json();
+}).then(function(body) {
+    console.log(body);
+});
+```
+
+```python
+import requests
+headers = {
+  'Accept': 'application/json'
+}
+
+r = requests.get('https://api.mod.io/v1/games/{game-id}/stats', params={
+  'api_key': 'YourApiKey'
+}, headers = headers)
+
+print r.json()
+```
+
+```java
+URL obj = new URL("https://api.mod.io/v1/games/{game-id}/stats?api_key=YourApiKey");
+HttpURLConnection con = (HttpURLConnection) obj.openConnection();
+con.setRequestMethod("GET");
+int responseCode = con.getResponseCode();
+BufferedReader in = new BufferedReader(
+    new InputStreamReader(con.getInputStream()));
+String inputLine;
+StringBuffer response = new StringBuffer();
+while ((inputLine = in.readLine()) != null) {
+    response.append(inputLine);
+}
+in.close();
+System.out.println(response.toString());
+```
+
+`GET /games/{game-id}/stats`
+
+Get game stats for the corresponding game. Successful request will return a single [Game Stats Object](#game-stats-object).
+
+
+> Example response
+
+```json
+{
+  "game_id": 2,
+  "mods_count_total": 13,
+  "mods_downloads_today": 204,
+  "mods_downloads_total": 27492,
+  "mods_downloads_daily_average": 1230,
+  "mods_subscribers_total": 16394,
+  "date_expires": 1492564103
+}
+
+```
+<h3 id="Get-Game-Stats-responses">Responses</h3>
+
+Status|Meaning|Error Ref|Description|Response Schema
+---|---|----|---|---|
+200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)||Successful Request|[Game Stats Object](#schemagame_stats_object)
+
+<aside class="auth-notice">
+To perform this request, you must be authenticated via one of the following methods:
+<a href="#authentication">api_key</a>, <a href="#authentication">OAuth 2</a> (Scopes: read)
 </aside>
 # Response Schemas 
 ## Access Token Object  
@@ -10145,6 +10323,7 @@ date_expires|integer|Unix timestamp of when the `binary_url` will expire.
 {
   "error": {
     "code": 403,
+    "error_ref": 10000,
     "message": "You do not have the required permissions to access this resource.",
     "errors": {}
   }
@@ -10157,7 +10336,8 @@ date_expires|integer|Unix timestamp of when the `binary_url` will expire.
 Name|Type|Description
 ---|---|---|---|
 error|object|Contains error data.
-» code|integer|[HTTP code](#response-codes) of the error.
+» code|integer|The [HTTP code](#response-codes).
+» error_ref|int32|The mod.io error code.
 » message|string|The server response to your request. Responses will vary depending on the endpoint, but the object structure will persist.
 » errors|object|Optional Validation errors object. This field is only supplied if the response is a validation error `422 Unprocessible Entity`. See [errors documentation](#errors) for more information.
 

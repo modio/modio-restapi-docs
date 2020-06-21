@@ -493,6 +493,15 @@ html, body {
     &.auth-notice {
       background-color: $aside-auth-notice-bg;
     }
+
+    &.error-summary-notice {
+      background-color: $examples-bg;
+    }
+
+    &.error-possible-codes-notice {
+      background-color: $examples-bg;
+      color: #fff;
+    }
   }
 
   aside:before {
@@ -501,7 +510,7 @@ html, body {
     font-size: 14px;
   }
 
-  aside.notice:before {
+  aside.notice:before, aside.error-possible-codes-notice:before, aside.error-summary-notice:before {
     @extend %icon-info-sign;
   }
 
@@ -819,6 +828,12 @@ pre.tab-json .json-example-highlight {
   &>span.versionwrap {
     font-size: 24px;
     margin: 0px 10px;
+  }
+}
+
+.content span.error-preview-link {
+  a {
+    margin-left: 20px;
   }
 }
 

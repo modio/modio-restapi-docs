@@ -250,37 +250,6 @@ __NOTE:__ If you supply identical key-value pairs as a request parameter and als
 
 Responses will __always__ be returned in `application/json` format.
 
-## Errors
-
-```json
-// Error object
-
-"error": {
-	"code": 403,
-	"message": "You do not have the required permissions to access this resource."
-}
-```
-
-If an error occurs, --parse_sitename returns an error object with the HTTP `code` and `message` to describe what happened and when possible how to avoid repeating the error. It's important to know that if you encounter errors that are not server errors (`500`+ codes) - you should review the error message before continuing to send requests to the endpoint.
-
-When requests contain invalid input data or query parameters (for filtering), an optional field object called `errors` can be supplied inside the `error` object, which contains a list of the invalid inputs. The nested `errors` object is only supplied with `422 Unprocessable Entity` responses. Be sure to review the [Response Codes](#response-codes) to be aware of the HTTP codes that the --parse_sitename API returns.
-
-```json
-// Error object with input errors
-
-"error": {
-	"code": 422,
-	"message": "Validation Failed. Please see below to fix invalid input.",
-	"errors": {
-		"member":"The user_id value must be an integer.",
-		"name":"The name may not be greater than 80 characters."
-	}
-}
-
-```
-
-Remember that [Rate Limiting](#rate-limiting) applies whether an error is returned or not, so to avoid exceeding your daily quota be sure to always investigate error messages - instead of continually retrying.
-
 ## Response Codes
 
 Here is a list of the most common HTTP response codes you will see while using the API.
@@ -301,6 +270,90 @@ Response Code | Meaning
 `429` | Too Many Requests -- You have made too [many requests](#rate-limiting), inspect headers for reset time.
 `500` | Internal Server Error -- The server encountered a problem processing your request. Please try again. (rare)
 `503` | Service Unavailable -- We're temporarily offline for maintenance. Please try again later. (rare)
+
+
+## Errors
+
+```json
+// Error object
+
+"error": {
+	"code": 403,
+	"error_ref": "--parse_errorref_MOD_NO_VIEW_PERMISSION",
+	"message": "You do not have the required permissions to access this resource."
+}
+```
+
+If an error occurs, --parse_sitename returns an error object with the HTTP `code`, `error_ref` and `message` to describe what happened and when possible how to avoid repeating the error. It's important to know that if you encounter errors that are not server errors (`500`+ codes) - you should review the error message before continuing to send requests to the endpoint.
+
+When requests contain invalid input data or query parameters (for filtering), an optional field object called `errors` can be supplied inside the `error` object, which contains a list of the invalid inputs. The nested `errors` object is only supplied with `422 Unprocessable Entity` responses. Be sure to review the [Response Codes](#response-codes) to be aware of the HTTP codes that the --parse_sitename API returns.
+
+```json
+// Error object with input errors
+
+"error": {
+	"code": 422,
+	"message": "Validation Failed. Please see below to fix invalid input.",
+	"error_ref": 0,
+	"errors": {
+		"member":"The user_id value must be an integer.",
+		"name":"The name may not be greater than 80 characters."
+	}
+}
+
+```
+
+Remember that [Rate Limiting](#rate-limiting) applies whether an error is returned or not, so to avoid exceeding your daily quota be sure to always investigate error messages - instead of continually retrying.
+
+## Error Codes
+
+Along with generic [HTTP response codes](#response-codes), we also provide --parse_sitename specific error codes to help you better understand what has gone wrong with a request. Below is a list of the most common `error_ref` codes you could encounter when consuming the API, as well as the reason for the error occuring. For error codes specific to each endpoint, click the 'Show All Responses' dropdown on the specified endpoint documentation.
+
+```shell
+// Example request with malformed api_key 
+
+curl -X GET --parse_apiurl/games?api_key=malformed_key
+```
+
+```json
+{
+    "error": {
+        "code": 401,
+        "error_ref": --parse_errorref_API_KEY_MALFORMED,
+        "message": "We cannot complete your request due to a malformed/missing api_key in your request. Refer to documentation at https://docs.mod.io"
+    }
+}
+```
+
+Error Reference Code | Meaning
+---------- | -------
+`--parse_errorref_API_VERSION_INVALID` | API version supplied is invalid.
+`--parse_errorref_API_KEY_MISSING` | api_key is missing from your request.
+`--parse_errorref_API_KEY_MALFORMED` | api_key supplied is malformed.
+`--parse_errorref_API_KEY_INVALID` | api_key key supplied is invalid.
+`--parse_errorref_TOKEN_MISSING_SCOPE_WRITE` | Access token is missing the write scope to perform the request.
+`--parse_errorref_TOKEN_MISSING_SCOPE_READ` | Access token is missing the read scope to perform the request.
+`--parse_errorref_TOKEN_EXPIRED_OR_REVOKED` | Access token is expired, or has been revoked.
+`--parse_errorref_MISSING_CONTENT_TYPE` | The Content-Type header is missing from your request.
+`--parse_errorref_INCORRECT_CONTENT_TYPE` | The Content-Type header is not supported for this endpoint.
+`--parse_errorref_USER_DELETED` | Authenticated user account has been deleted.
+`--parse_errorref_USER_BANNED` | Authenticated user account has been banned by --parse_sitename admins.
+`--parse_errorref_GAME_NOT_FOUND` | The requested game could not be found.
+`--parse_errorref_GAME_DELETED` | The requested game has been deleted.
+`--parse_errorref_MOD_NOT_FOUND` | The requested mod could not be found.
+`--parse_errorref_MOD_DELETED` | The requested mod has been deleted.
+`--parse_errorref_MODFILE_NOT_FOUND` | The requested modfile could not be found.
+`--parse_errorref_COMMENT_NOT_FOUND` | The requested comment could not be found.
+`--parse_errorref_USER_NOT_FOUND` | The requested user could not be found.
+`--parse_errorref_RESOURCE_NOT_FOUND` | The requested resource does not exist.
+`--parse_errorref_RATE_LIMITED` | You have been ratelimited for making too many requests. See [Rate Limiting](#rate-limiting).
+`--parse_errorref_JSON_RESPONSE_ONLY` | You have requested a response format that is not supported (JSON only).
+`--parse_errorref_FILE_CORRUPTED` | The submitted binary file is corrupted.
+`--parse_errorref_FILE_UNREADABLE` | The submitted binary file is unreadable.
+`--parse_errorref_JSON_MALFORMED` | You have used the `input_json` parameter with semantically incorrect JSON.
+`--parse_errorref_CORS_GENERIC` | Cross-origin request forbidden.
+`--parse_errorref_UNEXPECTED_OPERATION_FAILURE` | --parse_sitename failed to complete the request, please try again. (rare)
+`--parse_errorref_UNEXPECTED_SERVICE_OUTAGE` | --parse_sitename is currently experiencing an outage. (rare)
 
 ## Response Formats
 ```json
