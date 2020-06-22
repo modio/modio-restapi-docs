@@ -1093,11 +1093,10 @@ curl -X POST https://api.mod.io/v1/games/1/team <span class="se">\</span>
 
 </span><span class="s2">"error"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
     </span><span class="s2">"code"</span><span class="p">:</span><span class="w"> </span><span class="mi">422</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"error_ref"</span><span class="p">:</span><span class="w"> </span><span class="mi">13009</span><span class="p">,</span><span class="w">
     </span><span class="s2">"message"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Validation Failed. Please see below to fix invalid input."</span><span class="p">,</span><span class="w">
-    </span><span class="s2">"error_ref"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
     </span><span class="s2">"errors"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-        </span><span class="s2">"member"</span><span class="p">:</span><span class="s2">"The user_id value must be an integer."</span><span class="p">,</span><span class="w">
-        </span><span class="s2">"name"</span><span class="p">:</span><span class="s2">"The name may not be greater than 80 characters."</span><span class="w">
+        </span><span class="s2">"summary"</span><span class="p">:</span><span class="s2">"The mod summary cannot be more than 200 characters long."</span><span class="p">,</span><span class="w">
     </span><span class="p">}</span><span class="w">
 </span><span class="p">}</span><span class="w">
 
@@ -1203,6 +1202,10 @@ curl -X GET https://api.mod.io/v1/games?api_key<span class="o">=</span>malformed
 <tr>
 <td><code>11008</code></td>
 <td>You have been ratelimited for making too many requests. See <a href="#rate-limiting">Rate Limiting</a>.</td>
+</tr>
+<tr>
+<td><code>13009</code></td>
+<td>The request contains validation errors for the data supplied. See the attached <code>errors</code> field within the <a href="#error-object">Error Object</a> to determine which input failed.</td>
 </tr>
 <tr>
 <td><code>13007</code></td>
