@@ -23,17 +23,16 @@ $(document).ready(function() {
 	$("h3[id$='-responses']").next('table').each(function() {
 		table = $(this).find('tbody tr');
 		table.not(':first').hide();
-		const possibleErrorRefs = [];
+		var possibleErrorRefs = [];
+		var HTTP_BAD_REQUEST = 400;
+		var HTTP_CODE_INDEX = 0;
+		var ERROR_REF_INDEX = 2;
+		var SCHEMA_INDEX = 4;
+		var ERROR_REF_WIDTH_MULTIPLIER = 3;
 
-		$(this).find('tbody tr').each(function(i, el) {
-			const HTTP_BAD_REQUEST = 400;
-			const HTTP_CODE_INDEX = 0;
-			const ERROR_REF_INDEX = 2;
-			const SCHEMA_INDEX = 4;
-			const ERROR_REF_WIDTH_MULTIPLIER = 3;
-
-			const prevRowCode = $(this).closest('tr').prev().find('td').eq(HTTP_CODE_INDEX).text();
-			const currentRowErrorRef = $(this).find('td').eq(ERROR_REF_INDEX).text();
+		$(this).find('tbody tr').each(function() {
+			var prevRowCode = $(this).closest('tr').prev().find('td').eq(HTTP_CODE_INDEX).text();
+			var currentRowErrorRef = $(this).find('td').eq(ERROR_REF_INDEX).text();
 			possibleErrorRefs.push('<strong>' + currentRowErrorRef + '</strong>');
 
 			if (currentRowErrorRef) {

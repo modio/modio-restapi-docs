@@ -10337,7 +10337,7 @@ Name|Type|Description
 ---|---|---|---|
 error|object|Contains error data.
 » code|integer|The [HTTP code](#response-codes).
-» error_ref|int32|The mod.io error code.
+» error_ref|integer|The mod.io error code.
 » message|string|The server response to your request. Responses will vary depending on the endpoint, but the object structure will persist.
 » errors|object|Optional Validation errors object. This field is only supplied if the response is a validation error `422 Unprocessible Entity`. See [errors documentation](#errors) for more information.
 

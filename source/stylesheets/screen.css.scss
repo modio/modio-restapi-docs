@@ -500,7 +500,11 @@ html, body {
 
     &.error-possible-codes-notice {
       background-color: $examples-bg;
-      color: #fff;
+      color: $nav-text;
+
+      a:hover {
+        color: $nav-text;
+      }
     }
   }
 
