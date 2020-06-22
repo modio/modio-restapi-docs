@@ -217,11 +217,10 @@ When requests contain invalid input data or query parameters (for filtering), an
 
 "error": {
 	"code": 422,
+	"error_ref": 13009,
 	"message": "Validation Failed. Please see below to fix invalid input.",
-	"error_ref": 0,
 	"errors": {
-		"member":"The user_id value must be an integer.",
-		"name":"The name may not be greater than 80 characters."
+		"summary":"The mod summary cannot be more than 200 characters long.",
 	}
 }
 
@@ -271,6 +270,7 @@ Error Reference Code | Meaning
 `21000` | The requested user could not be found.
 `14000` | The requested resource does not exist.
 `11008` | You have been ratelimited for making too many requests. See [Rate Limiting](#rate-limiting).
+`13009` | The request contains validation errors for the data supplied. See the attached `errors` field within the [Error Object](#error-object) to determine which input failed.
 `13007` | You have requested a response format that is not supported (JSON only).
 `13001` | The submitted binary file is corrupted.
 `13002` | The submitted binary file is unreadable.

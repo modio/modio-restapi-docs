@@ -293,11 +293,10 @@ When requests contain invalid input data or query parameters (for filtering), an
 
 "error": {
 	"code": 422,
+	"error_ref": --parse_errorref_VALIDATION_GENERIC,
 	"message": "Validation Failed. Please see below to fix invalid input.",
-	"error_ref": 0,
 	"errors": {
-		"member":"The user_id value must be an integer.",
-		"name":"The name may not be greater than 80 characters."
+		"summary":"The mod summary cannot be more than 200 characters long.",
 	}
 }
 
@@ -347,6 +346,7 @@ Error Reference Code | Meaning
 `--parse_errorref_USER_NOT_FOUND` | The requested user could not be found.
 `--parse_errorref_RESOURCE_NOT_FOUND` | The requested resource does not exist.
 `--parse_errorref_RATE_LIMITED` | You have been ratelimited for making too many requests. See [Rate Limiting](#rate-limiting).
+`--parse_errorref_VALIDATION_GENERIC` | The request contains validation errors for the data supplied. See the attached `errors` field within the [Error Object](#error-object) to determine which input failed.
 `--parse_errorref_JSON_RESPONSE_ONLY` | You have requested a response format that is not supported (JSON only).
 `--parse_errorref_FILE_CORRUPTED` | The submitted binary file is corrupted.
 `--parse_errorref_FILE_UNREADABLE` | The submitted binary file is unreadable.
