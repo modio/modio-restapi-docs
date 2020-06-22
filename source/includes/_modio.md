@@ -329,7 +329,7 @@ Error Reference Code | Meaning
 `--parse_errorref_API_VERSION_INVALID` | API version supplied is invalid.
 `--parse_errorref_API_KEY_MISSING` | api_key is missing from your request.
 `--parse_errorref_API_KEY_MALFORMED` | api_key supplied is malformed.
-`--parse_errorref_API_KEY_INVALID` | api_key key supplied is invalid.
+`--parse_errorref_API_KEY_INVALID` | api_key supplied is invalid.
 `--parse_errorref_TOKEN_MISSING_SCOPE_WRITE` | Access token is missing the write scope to perform the request.
 `--parse_errorref_TOKEN_MISSING_SCOPE_READ` | Access token is missing the read scope to perform the request.
 `--parse_errorref_TOKEN_EXPIRED_OR_REVOKED` | Access token is expired, or has been revoked.

@@ -253,7 +253,7 @@ Error Reference Code | Meaning
 `10003` | API version supplied is invalid.
 `11000` | api_key is missing from your request.
 `11001` | api_key supplied is malformed.
-`11002` | api_key key supplied is invalid.
+`11002` | api_key supplied is invalid.
 `11003` | Access token is missing the write scope to perform the request.
 `11004` | Access token is missing the read scope to perform the request.
 `11005` | Access token is expired, or has been revoked.
