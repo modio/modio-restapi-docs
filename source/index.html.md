@@ -2185,7 +2185,7 @@ Get all mods for the corresponding game. Successful request will return an array
     modfile|integer|Unique id of the file that is the current active release (see [mod files](#files)).
     metadata_blob|string|Metadata stored by the game developer.
     metadata_kvp|string|Colon-separated values representing the key-value pairs you want to filter the results by. If you supply more than one key-pair, separate the pairs by a comma. Will only filter by an exact key-pair match.
-    tags|string|Comma-separated values representing the tags you want to filter the results by. Only tags that are supported by the parent game can be applied. To determine what tags are eligible, see the tags values within `tag_options` column on the parent [Game Object](#game-object).
+    tags|string|Comma-separated values representing the tags you want to filter the results by. Only tags that are supported by the parent game can be applied. To determine what tags are eligible, see the tags values within `tag_options` column on the parent [Game Object](#game-object). <br><br>If you want to ensure mods returned do not contain particular tag(s), you can use the `tags-not-in` filter either independently or alongside this filter.
     downloads|string|Sort results by most downloads using [_sort filter](#filtering) parameter, value should be `downloads` for descending or `-downloads` for ascending results.
     popular|string|Sort results by popularity using [_sort filter](#filtering), value should be `popular` for descending or `-popular` for ascending results.
     rating|string|Sort results by weighted rating using [_sort filter](#filtering), value should be `rating` for descending or `-rating` for ascending results.
@@ -6560,6 +6560,384 @@ Status|Meaning|Error Ref|Description|Response Schema
 To perform this request, you must be authenticated via one of the following methods:
 <a href="#authentication">OAuth 2</a> (Scopes: write)
 </aside>
+# Stats
+
+## Get Mods Stats
+
+> Example request
+
+```shell
+# You can also use wget
+curl -X GET https://api.mod.io/v1/games/{game-id}/mods/stats?api_key=YourApiKey \
+  -H 'Accept: application/json'
+
+```
+
+```http
+GET https://api.mod.io/v1/games/{game-id}/mods/stats?api_key=YourApiKey HTTP/1.1
+Host: api.mod.io
+
+Accept: application/json
+
+```
+
+```javascript
+var headers = {
+  'Accept':'application/json'
+
+};
+
+$.ajax({
+  url: 'https://api.mod.io/v1/games/{game-id}/mods/stats',
+  method: 'get',
+  data: '?api_key=YourApiKey',
+  headers: headers,
+  success: function(data) {
+    console.log(JSON.stringify(data));
+  }
+})
+```
+
+```javascript--nodejs
+const request = require('node-fetch');
+
+const headers = {
+  'Accept':'application/json'
+
+};
+
+fetch('https://api.mod.io/v1/games/{game-id}/mods/stats?api_key=YourApiKey',
+{
+  method: 'GET',
+
+  headers: headers
+})
+.then(function(res) {
+    return res.json();
+}).then(function(body) {
+    console.log(body);
+});
+```
+
+```python
+import requests
+headers = {
+  'Accept': 'application/json'
+}
+
+r = requests.get('https://api.mod.io/v1/games/{game-id}/mods/stats', params={
+  'api_key': 'YourApiKey'
+}, headers = headers)
+
+print r.json()
+```
+
+```java
+URL obj = new URL("https://api.mod.io/v1/games/{game-id}/mods/stats?api_key=YourApiKey");
+HttpURLConnection con = (HttpURLConnection) obj.openConnection();
+con.setRequestMethod("GET");
+int responseCode = con.getResponseCode();
+BufferedReader in = new BufferedReader(
+    new InputStreamReader(con.getInputStream()));
+String inputLine;
+StringBuffer response = new StringBuffer();
+while ((inputLine = in.readLine()) != null) {
+    response.append(inputLine);
+}
+in.close();
+System.out.println(response.toString());
+```
+
+`GET /games/{game-id}/mods/stats`
+
+Get all mod stats for mods of the corresponding game. Successful request will return an array of [Mod Stats Objects](#get-mod-stats).<br><br>__NOTE:__ We highly recommend you apply filters to this endpoint to get only the results you need. For more information regarding filtering please see the [filtering](#filtering) section.
+
+    Filter|Type|Description
+    ---|---|---
+    mod_id|integer|Unique id of the mod.
+    popularity_rank_position|integer|Current ranking by popularity for the corresponding mod.
+    popularity_rank_total_mods|integer|Global mod count in which `popularity_rank_position` is compared against.
+    downloads_total|integer|A sum of all modfile downloads for the corresponding mod.
+    subscribers_total|integer|A sum of all current subscribers for the corresponding mod.
+    ratings_positive|integer|Amount of positive ratings.
+    ratings_negative|integer|Amount of negative ratings.
+
+
+> Example response
+
+```json
+{
+  "data": [
+    {
+      "mod_id": 2,
+      "popularity_rank_position": 13,
+      "popularity_rank_total_mods": 204,
+      "downloads_total": 27492,
+      "subscribers_total": 16394,
+      "ratings_total": 1230,
+      "ratings_positive": 1047,
+      "ratings_negative": 183,
+      "ratings_percentage_positive": 91,
+      "ratings_weighted_aggregate": 87.38,
+      "ratings_display_text": "Very Positive",
+      "date_expires": 1492564103
+    },
+    {
+        ...
+    }
+  ],
+  "result_count": 70,
+  "result_offset": 0,
+  "result_limit": 100,
+  "result_total": 70
+}
+
+```
+<h3 id="Get-Mods-Stats-responses">Responses</h3>
+
+Status|Meaning|Error Ref|Description|Response Schema
+---|---|----|---|---|
+200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)||Successful Request|[Get Mod Stats](#schemaget_mod_stats)
+
+<aside class="auth-notice">
+To perform this request, you must be authenticated via one of the following methods:
+<a href="#authentication">api_key</a>, <a href="#authentication">OAuth 2</a> (Scopes: read)
+</aside>
+## Get Mod Stats
+
+> Example request
+
+```shell
+# You can also use wget
+curl -X GET https://api.mod.io/v1/games/{game-id}/mods/{mod-id}/stats?api_key=YourApiKey \
+  -H 'Accept: application/json'
+
+```
+
+```http
+GET https://api.mod.io/v1/games/{game-id}/mods/{mod-id}/stats?api_key=YourApiKey HTTP/1.1
+Host: api.mod.io
+
+Accept: application/json
+
+```
+
+```javascript
+var headers = {
+  'Accept':'application/json'
+
+};
+
+$.ajax({
+  url: 'https://api.mod.io/v1/games/{game-id}/mods/{mod-id}/stats',
+  method: 'get',
+  data: '?api_key=YourApiKey',
+  headers: headers,
+  success: function(data) {
+    console.log(JSON.stringify(data));
+  }
+})
+```
+
+```javascript--nodejs
+const request = require('node-fetch');
+
+const headers = {
+  'Accept':'application/json'
+
+};
+
+fetch('https://api.mod.io/v1/games/{game-id}/mods/{mod-id}/stats?api_key=YourApiKey',
+{
+  method: 'GET',
+
+  headers: headers
+})
+.then(function(res) {
+    return res.json();
+}).then(function(body) {
+    console.log(body);
+});
+```
+
+```python
+import requests
+headers = {
+  'Accept': 'application/json'
+}
+
+r = requests.get('https://api.mod.io/v1/games/{game-id}/mods/{mod-id}/stats', params={
+  'api_key': 'YourApiKey'
+}, headers = headers)
+
+print r.json()
+```
+
+```java
+URL obj = new URL("https://api.mod.io/v1/games/{game-id}/mods/{mod-id}/stats?api_key=YourApiKey");
+HttpURLConnection con = (HttpURLConnection) obj.openConnection();
+con.setRequestMethod("GET");
+int responseCode = con.getResponseCode();
+BufferedReader in = new BufferedReader(
+    new InputStreamReader(con.getInputStream()));
+String inputLine;
+StringBuffer response = new StringBuffer();
+while ((inputLine = in.readLine()) != null) {
+    response.append(inputLine);
+}
+in.close();
+System.out.println(response.toString());
+```
+
+`GET /games/{game-id}/mods/{mod-id}/stats`
+
+Get mod stats for the corresponding mod. Successful request will return a single [Mod Stats Object](#mod-stats-object).
+
+
+> Example response
+
+```json
+{
+  "mod_id": 2,
+  "popularity_rank_position": 13,
+  "popularity_rank_total_mods": 204,
+  "downloads_total": 27492,
+  "subscribers_total": 16394,
+  "ratings_total": 1230,
+  "ratings_positive": 1047,
+  "ratings_negative": 183,
+  "ratings_percentage_positive": 91,
+  "ratings_weighted_aggregate": 87.38,
+  "ratings_display_text": "Very Positive",
+  "date_expires": 1492564103
+}
+
+```
+<h3 id="Get-Mod-Stats-responses">Responses</h3>
+
+Status|Meaning|Error Ref|Description|Response Schema
+---|---|----|---|---|
+200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)||Successful Request|[Mod Stats Object](#schemamod_stats_object)
+
+<aside class="auth-notice">
+To perform this request, you must be authenticated via one of the following methods:
+<a href="#authentication">api_key</a>, <a href="#authentication">OAuth 2</a> (Scopes: read)
+</aside>
+## Get Game Stats
+
+> Example request
+
+```shell
+# You can also use wget
+curl -X GET https://api.mod.io/v1/games/{game-id}/stats?api_key=YourApiKey \
+  -H 'Accept: application/json'
+
+```
+
+```http
+GET https://api.mod.io/v1/games/{game-id}/stats?api_key=YourApiKey HTTP/1.1
+Host: api.mod.io
+
+Accept: application/json
+
+```
+
+```javascript
+var headers = {
+  'Accept':'application/json'
+
+};
+
+$.ajax({
+  url: 'https://api.mod.io/v1/games/{game-id}/stats',
+  method: 'get',
+  data: '?api_key=YourApiKey',
+  headers: headers,
+  success: function(data) {
+    console.log(JSON.stringify(data));
+  }
+})
+```
+
+```javascript--nodejs
+const request = require('node-fetch');
+
+const headers = {
+  'Accept':'application/json'
+
+};
+
+fetch('https://api.mod.io/v1/games/{game-id}/stats?api_key=YourApiKey',
+{
+  method: 'GET',
+
+  headers: headers
+})
+.then(function(res) {
+    return res.json();
+}).then(function(body) {
+    console.log(body);
+});
+```
+
+```python
+import requests
+headers = {
+  'Accept': 'application/json'
+}
+
+r = requests.get('https://api.mod.io/v1/games/{game-id}/stats', params={
+  'api_key': 'YourApiKey'
+}, headers = headers)
+
+print r.json()
+```
+
+```java
+URL obj = new URL("https://api.mod.io/v1/games/{game-id}/stats?api_key=YourApiKey");
+HttpURLConnection con = (HttpURLConnection) obj.openConnection();
+con.setRequestMethod("GET");
+int responseCode = con.getResponseCode();
+BufferedReader in = new BufferedReader(
+    new InputStreamReader(con.getInputStream()));
+String inputLine;
+StringBuffer response = new StringBuffer();
+while ((inputLine = in.readLine()) != null) {
+    response.append(inputLine);
+}
+in.close();
+System.out.println(response.toString());
+```
+
+`GET /games/{game-id}/stats`
+
+Get game stats for the corresponding game. Successful request will return a single [Game Stats Object](#game-stats-object).
+
+
+> Example response
+
+```json
+{
+  "game_id": 2,
+  "mods_count_total": 13,
+  "mods_downloads_today": 204,
+  "mods_downloads_total": 27492,
+  "mods_downloads_daily_average": 1230,
+  "mods_subscribers_total": 16394,
+  "date_expires": 1492564103
+}
+
+```
+<h3 id="Get-Game-Stats-responses">Responses</h3>
+
+Status|Meaning|Error Ref|Description|Response Schema
+---|---|----|---|---|
+200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)||Successful Request|[Game Stats Object](#schemagame_stats_object)
+
+<aside class="auth-notice">
+To perform this request, you must be authenticated via one of the following methods:
+<a href="#authentication">api_key</a>, <a href="#authentication">OAuth 2</a> (Scopes: read)
+</aside>
 # Teams
 
 ## Get Mod Team Members
@@ -8364,7 +8742,7 @@ Get all mod's the _authenticated user_ is subscribed to. Successful request will
     description|string|Detailed description of the mod which allows HTML.
     homepage_url|string|Official homepage of the mod.
     metadata_blob|string|Metadata stored by the game developer.
-    tags|string|Comma-separated values representing the tags you want to filter the results by. Only tags that are supported by the parent game can be applied. To determine what tags are eligible, see the tags values within `tag_options` column on the parent [Game Object](#game-object).
+    tags|string|Comma-separated values representing the tags you want to filter the results by. Only tags that are supported by the parent game can be applied. To determine what tags are eligible, see the tags values within `tag_options` column on the parent [Game Object](#game-object). <br><br>If you want to ensure mods returned do not contain particular tag(s), you can use the `tags-not-in` filter either independently or alongside this filter.
     downloads|string|Sort results by most downloads using [_sort filter](#filtering) parameter, value should be `downloads` for descending or `-downloads` for ascending results.
     popular|string|Sort results by popularity using [_sort filter](#filtering), value should be `popular` for descending or `-popular` for ascending results.
     rating|string|Sort results by weighted rating using [_sort filter](#filtering), value should be `rating` for descending or `-rating` for ascending results.
@@ -9383,384 +9761,6 @@ Status|Meaning|Error Ref|Description|Response Schema
 <aside class="auth-notice">
 To perform this request, you must be authenticated via one of the following methods:
 <a href="#authentication">OAuth 2</a> (Scopes: read)
-</aside>
-# Stats
-
-## Get Mods Stats
-
-> Example request
-
-```shell
-# You can also use wget
-curl -X GET https://api.mod.io/v1/games/{game-id}/mods/stats?api_key=YourApiKey \
-  -H 'Accept: application/json'
-
-```
-
-```http
-GET https://api.mod.io/v1/games/{game-id}/mods/stats?api_key=YourApiKey HTTP/1.1
-Host: api.mod.io
-
-Accept: application/json
-
-```
-
-```javascript
-var headers = {
-  'Accept':'application/json'
-
-};
-
-$.ajax({
-  url: 'https://api.mod.io/v1/games/{game-id}/mods/stats',
-  method: 'get',
-  data: '?api_key=YourApiKey',
-  headers: headers,
-  success: function(data) {
-    console.log(JSON.stringify(data));
-  }
-})
-```
-
-```javascript--nodejs
-const request = require('node-fetch');
-
-const headers = {
-  'Accept':'application/json'
-
-};
-
-fetch('https://api.mod.io/v1/games/{game-id}/mods/stats?api_key=YourApiKey',
-{
-  method: 'GET',
-
-  headers: headers
-})
-.then(function(res) {
-    return res.json();
-}).then(function(body) {
-    console.log(body);
-});
-```
-
-```python
-import requests
-headers = {
-  'Accept': 'application/json'
-}
-
-r = requests.get('https://api.mod.io/v1/games/{game-id}/mods/stats', params={
-  'api_key': 'YourApiKey'
-}, headers = headers)
-
-print r.json()
-```
-
-```java
-URL obj = new URL("https://api.mod.io/v1/games/{game-id}/mods/stats?api_key=YourApiKey");
-HttpURLConnection con = (HttpURLConnection) obj.openConnection();
-con.setRequestMethod("GET");
-int responseCode = con.getResponseCode();
-BufferedReader in = new BufferedReader(
-    new InputStreamReader(con.getInputStream()));
-String inputLine;
-StringBuffer response = new StringBuffer();
-while ((inputLine = in.readLine()) != null) {
-    response.append(inputLine);
-}
-in.close();
-System.out.println(response.toString());
-```
-
-`GET /games/{game-id}/mods/stats`
-
-Get all mod stats for mods of the corresponding game. Successful request will return an array of [Mod Stats Objects](#get-mod-stats).<br><br>__NOTE:__ We highly recommend you apply filters to this endpoint to get only the results you need. For more information regarding filtering please see the [filtering](#filtering) section.
-
-    Filter|Type|Description
-    ---|---|---
-    mod_id|integer|Unique id of the mod.
-    popularity_rank_position|integer|Current ranking by popularity for the corresponding mod.
-    popularity_rank_total_mods|integer|Global mod count in which `popularity_rank_position` is compared against.
-    downloads_total|integer|A sum of all modfile downloads for the corresponding mod.
-    subscribers_total|integer|A sum of all current subscribers for the corresponding mod.
-    ratings_positive|integer|Amount of positive ratings.
-    ratings_negative|integer|Amount of negative ratings.
-
-
-> Example response
-
-```json
-{
-  "data": [
-    {
-      "mod_id": 2,
-      "popularity_rank_position": 13,
-      "popularity_rank_total_mods": 204,
-      "downloads_total": 27492,
-      "subscribers_total": 16394,
-      "ratings_total": 1230,
-      "ratings_positive": 1047,
-      "ratings_negative": 183,
-      "ratings_percentage_positive": 91,
-      "ratings_weighted_aggregate": 87.38,
-      "ratings_display_text": "Very Positive",
-      "date_expires": 1492564103
-    },
-    {
-        ...
-    }
-  ],
-  "result_count": 70,
-  "result_offset": 0,
-  "result_limit": 100,
-  "result_total": 70
-}
-
-```
-<h3 id="Get-Mods-Stats-responses">Responses</h3>
-
-Status|Meaning|Error Ref|Description|Response Schema
----|---|----|---|---|
-200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)||Successful Request|[Get Mod Stats](#schemaget_mod_stats)
-
-<aside class="auth-notice">
-To perform this request, you must be authenticated via one of the following methods:
-<a href="#authentication">api_key</a>, <a href="#authentication">OAuth 2</a> (Scopes: read)
-</aside>
-## Get Mod Stats
-
-> Example request
-
-```shell
-# You can also use wget
-curl -X GET https://api.mod.io/v1/games/{game-id}/mods/{mod-id}/stats?api_key=YourApiKey \
-  -H 'Accept: application/json'
-
-```
-
-```http
-GET https://api.mod.io/v1/games/{game-id}/mods/{mod-id}/stats?api_key=YourApiKey HTTP/1.1
-Host: api.mod.io
-
-Accept: application/json
-
-```
-
-```javascript
-var headers = {
-  'Accept':'application/json'
-
-};
-
-$.ajax({
-  url: 'https://api.mod.io/v1/games/{game-id}/mods/{mod-id}/stats',
-  method: 'get',
-  data: '?api_key=YourApiKey',
-  headers: headers,
-  success: function(data) {
-    console.log(JSON.stringify(data));
-  }
-})
-```
-
-```javascript--nodejs
-const request = require('node-fetch');
-
-const headers = {
-  'Accept':'application/json'
-
-};
-
-fetch('https://api.mod.io/v1/games/{game-id}/mods/{mod-id}/stats?api_key=YourApiKey',
-{
-  method: 'GET',
-
-  headers: headers
-})
-.then(function(res) {
-    return res.json();
-}).then(function(body) {
-    console.log(body);
-});
-```
-
-```python
-import requests
-headers = {
-  'Accept': 'application/json'
-}
-
-r = requests.get('https://api.mod.io/v1/games/{game-id}/mods/{mod-id}/stats', params={
-  'api_key': 'YourApiKey'
-}, headers = headers)
-
-print r.json()
-```
-
-```java
-URL obj = new URL("https://api.mod.io/v1/games/{game-id}/mods/{mod-id}/stats?api_key=YourApiKey");
-HttpURLConnection con = (HttpURLConnection) obj.openConnection();
-con.setRequestMethod("GET");
-int responseCode = con.getResponseCode();
-BufferedReader in = new BufferedReader(
-    new InputStreamReader(con.getInputStream()));
-String inputLine;
-StringBuffer response = new StringBuffer();
-while ((inputLine = in.readLine()) != null) {
-    response.append(inputLine);
-}
-in.close();
-System.out.println(response.toString());
-```
-
-`GET /games/{game-id}/mods/{mod-id}/stats`
-
-Get mod stats for the corresponding mod. Successful request will return a single [Mod Stats Object](#mod-stats-object).
-
-
-> Example response
-
-```json
-{
-  "mod_id": 2,
-  "popularity_rank_position": 13,
-  "popularity_rank_total_mods": 204,
-  "downloads_total": 27492,
-  "subscribers_total": 16394,
-  "ratings_total": 1230,
-  "ratings_positive": 1047,
-  "ratings_negative": 183,
-  "ratings_percentage_positive": 91,
-  "ratings_weighted_aggregate": 87.38,
-  "ratings_display_text": "Very Positive",
-  "date_expires": 1492564103
-}
-
-```
-<h3 id="Get-Mod-Stats-responses">Responses</h3>
-
-Status|Meaning|Error Ref|Description|Response Schema
----|---|----|---|---|
-200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)||Successful Request|[Mod Stats Object](#schemamod_stats_object)
-
-<aside class="auth-notice">
-To perform this request, you must be authenticated via one of the following methods:
-<a href="#authentication">api_key</a>, <a href="#authentication">OAuth 2</a> (Scopes: read)
-</aside>
-## Get Game Stats
-
-> Example request
-
-```shell
-# You can also use wget
-curl -X GET https://api.mod.io/v1/games/{game-id}/stats?api_key=YourApiKey \
-  -H 'Accept: application/json'
-
-```
-
-```http
-GET https://api.mod.io/v1/games/{game-id}/stats?api_key=YourApiKey HTTP/1.1
-Host: api.mod.io
-
-Accept: application/json
-
-```
-
-```javascript
-var headers = {
-  'Accept':'application/json'
-
-};
-
-$.ajax({
-  url: 'https://api.mod.io/v1/games/{game-id}/stats',
-  method: 'get',
-  data: '?api_key=YourApiKey',
-  headers: headers,
-  success: function(data) {
-    console.log(JSON.stringify(data));
-  }
-})
-```
-
-```javascript--nodejs
-const request = require('node-fetch');
-
-const headers = {
-  'Accept':'application/json'
-
-};
-
-fetch('https://api.mod.io/v1/games/{game-id}/stats?api_key=YourApiKey',
-{
-  method: 'GET',
-
-  headers: headers
-})
-.then(function(res) {
-    return res.json();
-}).then(function(body) {
-    console.log(body);
-});
-```
-
-```python
-import requests
-headers = {
-  'Accept': 'application/json'
-}
-
-r = requests.get('https://api.mod.io/v1/games/{game-id}/stats', params={
-  'api_key': 'YourApiKey'
-}, headers = headers)
-
-print r.json()
-```
-
-```java
-URL obj = new URL("https://api.mod.io/v1/games/{game-id}/stats?api_key=YourApiKey");
-HttpURLConnection con = (HttpURLConnection) obj.openConnection();
-con.setRequestMethod("GET");
-int responseCode = con.getResponseCode();
-BufferedReader in = new BufferedReader(
-    new InputStreamReader(con.getInputStream()));
-String inputLine;
-StringBuffer response = new StringBuffer();
-while ((inputLine = in.readLine()) != null) {
-    response.append(inputLine);
-}
-in.close();
-System.out.println(response.toString());
-```
-
-`GET /games/{game-id}/stats`
-
-Get game stats for the corresponding game. Successful request will return a single [Game Stats Object](#game-stats-object).
-
-
-> Example response
-
-```json
-{
-  "game_id": 2,
-  "mods_count_total": 13,
-  "mods_downloads_today": 204,
-  "mods_downloads_total": 27492,
-  "mods_downloads_daily_average": 1230,
-  "mods_subscribers_total": 16394,
-  "date_expires": 1492564103
-}
-
-```
-<h3 id="Get-Game-Stats-responses">Responses</h3>
-
-Status|Meaning|Error Ref|Description|Response Schema
----|---|----|---|---|
-200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)||Successful Request|[Game Stats Object](#schemagame_stats_object)
-
-<aside class="auth-notice">
-To perform this request, you must be authenticated via one of the following methods:
-<a href="#authentication">api_key</a>, <a href="#authentication">OAuth 2</a> (Scopes: read)
 </aside>
 # Response Schemas 
 ## Access Token Object  
