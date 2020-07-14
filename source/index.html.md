@@ -4355,7 +4355,7 @@ curl -X POST https://api.mod.io/v1/games/{game-id}/mods/{mod-id}/comments \
   -H 'Content-Type: application/x-www-form-urlencoded' \ 
   -H 'Accept: application/json' \
   -d 'replyid=0' \
-  -d 'summary=Hey @XanT, you should check out this mod!'
+  -d 'content=Hey @XanT, you should check out this mod!'
 
 ```
 
@@ -4392,7 +4392,7 @@ $.ajax({
 const request = require('node-fetch');
 const inputBody = '{
   "replyid": 0,
-  "summary": "Hey @XanT, you should check out this mod!"
+  "content": "Hey @XanT, you should check out this mod!"
 }';
 const headers = {
   'Authorization':'Bearer {access-token}',
@@ -4452,7 +4452,7 @@ Add a comment for the corresponding mod. Successful request will return the newl
      Parameter|Type|Required|Description
      ---|---|---|---|
      reply_id|integer|Id of the parent comment to reply to (can be 0 if the comment is not a reply and thus will not be nested). Default is 0.
-     summary|string|Contents of the comment. You can include @mentions to users, which will notify them that they have been tagged in this comment.<br><br>__Mention Markup__<br>- Format: `@<display-name>`<br>- Example: `Hey @XanT, you should check out this mod!`
+     content|string|Contents of the comment. You can include @mentions to users, which will notify them that they have been tagged in this comment.<br><br>__Mention Markup__<br>- Format: `@<display-name>`<br>- Example: `Hey @XanT, you should check out this mod!`
 
 
 > Example response
@@ -4643,7 +4643,7 @@ curl -X PUT https://api.mod.io/v1/games/{game-id}/mods/{mod-id}/comments/{commen
   -H 'Authorization: Bearer {access-token}' \ 
   -H 'Content-Type: application/x-www-form-urlencoded' \ 
   -H 'Accept: application/json'
-  -d 'summary=Test comment'
+  -d 'content=Test comment'
 
 ```
 
@@ -4679,7 +4679,7 @@ $.ajax({
 ```javascript--nodejs
 const request = require('node-fetch');
 const inputBody = '{
-  "summary": "Test comment"
+  "content": "Test comment"
 }';
 const headers = {
   'Authorization':'Bearer {access-token}',
@@ -4738,7 +4738,7 @@ Update a comment for the corresponding mod. Successful request will return the u
 
      Parameter|Type|Required|Description
      ---|---|---|---|
-     summary|string|Updated contents of the comment.
+     content|string|Updated contents of the comment.
 
 
 > Example response
