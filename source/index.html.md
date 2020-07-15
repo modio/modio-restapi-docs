@@ -4452,7 +4452,7 @@ Add a comment for the corresponding mod. Successful request will return the newl
      Parameter|Type|Required|Description
      ---|---|---|---|
      content|string|true|Contents of the comment. You can include @mentions to users, which will notify them that they have been tagged in this comment.<br><br>__Mention Markup__<br>- Format: `@<display-name>`<br>- Example: `Hey @XanT, you should check out this mod!`
-     reply_id|integer|Id of the parent comment to reply to (can be 0 if the comment is not a reply and thus will not be nested). Default is 0.
+     reply_id|integer||Id of the parent comment to reply to (can be 0 if the comment is not a reply and thus will not be nested). Default is 0.
 
 
 > Example response
