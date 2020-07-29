@@ -1494,6 +1494,135 @@ Status|Meaning|Error Ref|Description|Response Schema
 To perform this request, you must be authenticated via one of the following methods:
 <a href="#authentication">api_key</a>
 </aside>
+## Authenticate via Discord
+
+> Example request
+
+```shell
+# You can also use wget
+curl -X POST https://api.mod.io/v1/external/discordauth?api_key=YourApiKey \
+  -H 'Content-Type: application/x-www-form-urlencoded' \ 
+  -H 'Accept: application/json' \
+  -d 'discord_token=eyJhbXciOiJIUzI1Lizs....'
+
+```
+
+```http
+POST https://api.mod.io/v1/external/discordauth?api_key=YourApiKey HTTP/1.1
+Host: api.mod.io
+Content-Type: application/x-www-form-urlencoded
+Accept: application/json
+
+```
+
+```javascript
+var headers = {
+  'Content-Type':'application/x-www-form-urlencoded',
+  'Accept':'application/json'
+
+};
+
+$.ajax({
+  url: 'https://api.mod.io/v1/external/discordauth',
+  method: 'post',
+  data: '?api_key=YourApiKey',
+  headers: headers,
+  success: function(data) {
+    console.log(JSON.stringify(data));
+  }
+})
+```
+
+```javascript--nodejs
+const request = require('node-fetch');
+const inputBody = '{
+  "discord_token": "eyJhbXciOiJIUzI1Lizs...."
+}';
+const headers = {
+  'Content-Type':'application/x-www-form-urlencoded',
+  'Accept':'application/json'
+
+};
+
+fetch('https://api.mod.io/v1/external/discordauth?api_key=YourApiKey',
+{
+  method: 'POST',
+  body: inputBody,
+  headers: headers
+})
+.then(function(res) {
+    return res.json();
+}).then(function(body) {
+    console.log(body);
+});
+```
+
+```python
+import requests
+headers = {
+  'Content-Type': 'application/x-www-form-urlencoded',
+  'Accept': 'application/json'
+}
+
+r = requests.post('https://api.mod.io/v1/external/discordauth', params={
+  'api_key': 'YourApiKey'
+}, headers = headers)
+
+print r.json()
+```
+
+```java
+URL obj = new URL("https://api.mod.io/v1/external/discordauth?api_key=YourApiKey");
+HttpURLConnection con = (HttpURLConnection) obj.openConnection();
+con.setRequestMethod("POST");
+int responseCode = con.getResponseCode();
+BufferedReader in = new BufferedReader(
+    new InputStreamReader(con.getInputStream()));
+String inputLine;
+StringBuffer response = new StringBuffer();
+while ((inputLine = in.readLine()) != null) {
+    response.append(inputLine);
+}
+in.close();
+System.out.println(response.toString());
+```
+
+`POST /external/discordauth`
+
+Request an access token on behalf of a Discord user. A Successful request will return an [Access Token Object](#access-token-object).
+
+     Parameter|Type|Required|Description
+     ---|---|---|---|
+     discord_token|string|true|The access token of the user provided by Discord.
+     email|string||The users email address. If supplied, and the respective user does not have an email registered for their account we will send a confirmation email to confirm they have ownership of the specified email.<br><br>__NOTE__: If the user already has an email on record with us, this parameter will be ignored. This parameter should also be urlencoded before the request is sent.
+     date_expires|integer||Unix timestamp of date in which the returned token will expire. Value cannot be higher than the default value which is a week (unix timestamp + 604800 seconds). Using a token after it's expiry time has elapsed will result in a `401 Unauthorized` response.
+
+
+> Example response
+
+```json
+{
+  "code": 200,
+  "access_token": "eyJ0eXAiOiXKV1QibCJhbLciOiJeiUzI1.....",
+  "date_expires": 1570673249
+}
+
+```
+<h3 id="Authenticate-via-Discord-responses">Responses</h3>
+
+Status|Meaning|Error Ref|Description|Response Schema
+---|---|----|---|---|
+200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)||Successful Request|[Access Token Object](#schemaaccess_token_object)
+401|[Unauthorized](https://tools.ietf.org/html/rfc7235#section-3.1)|14001|The game associated with the supplied api_key is currently not available.|[Error Object](#schemaerror_object)
+401|[Unauthorized](https://tools.ietf.org/html/rfc7235#section-3.1)|11032|mod.io was unable to verify the credentials against the external service provider.|[Error Object](#schemaerror_object)
+401|[Unauthorized](https://tools.ietf.org/html/rfc7235#section-3.1)|11043|mod.io was unable to get account data from the Discord servers.|[Error Object](#schemaerror_object)
+403|[Forbidden](https://tools.ietf.org/html/rfc7231#section-6.5.3)|11016|The api_key supplied in the request must be associated with a game.|[Error Object](#schemaerror_object)
+403|[Forbidden](https://tools.ietf.org/html/rfc7231#section-6.5.3)|11017|The api_key supplied in the request is for test environment purposes only and cannot be used for this functionality.|[Error Object](#schemaerror_object)
+
+<aside class="auth-notice">
+To perform this request, you must be authenticated via one of the following methods:
+<a href="#authentication">api_key</a>
+</aside>
 ## Link an Email
 
 > Example request
