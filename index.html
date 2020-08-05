@@ -6848,7 +6848,7 @@ curl -X POST https://api.mod.io/v1/games/<span class="o">{</span>game-id<span cl
 </code></pre>
 <p><span class="httpmethod POST">POST</span> <span class="endpointheading">/games/{game-id}/mods/{mod-id}/comments</span></p>
 
-<p>Add a comment for the corresponding mod. Successful request will return the newly created <a href="#comment-object">Comment Object</a>.</p>
+<p>Add a comment for the corresponding mod. Successful request will return the newly created <a href="#comment-object">Comment Object</a> and fire a <strong>MOD_COMMENT_ADDED</strong> event.</p>
 
 <table>
 <thead>
@@ -7335,7 +7335,7 @@ Content-Type: application/x-www-form-urlencoded
 </code></pre>
 <p><span class="httpmethod DELETE">DELETE</span> <span class="endpointheading">/games/{game-id}/mods/{mod-id}/comments/{comment-id}</span></p>
 
-<p>Delete a comment from a mod profile. Successful request will return <code>204 No Content</code>.</p>
+<p>Delete a comment from a mod profile. Successful request will return <code>204 No Content</code>  and fire a <strong>MOD_COMMENT_DELETED</strong> event.</p>
 
 <blockquote>
 <p>Example response</p>
@@ -8003,7 +8003,7 @@ Accept: application/json
 <tr>
 <td>event_type</td>
 <td>string</td>
-<td>Type of change that occurred:<br><br><strong>MODFILE_CHANGED</strong> = Primary file changed<br><strong>MOD_AVAILABLE</strong> = Mod is marked as accepted and public<br><strong>MOD_UNAVAILABLE</strong> = Mod is marked as not accepted, deleted or hidden<br><strong>MOD_EDITED</strong> = The mod was updated (triggered when any column value changes)<br><strong>MOD_DELETED</strong> = The mod has been permanently erased. This is an orphan record, looking up this id will return no data<br><strong>MOD_TEAM_CHANGED</strong> = A user has joined or left the mod team</td>
+<td>Type of change that occurred:<br><br><strong>MODFILE_CHANGED</strong> = Primary file changed<br><strong>MOD_AVAILABLE</strong> = Mod is marked as accepted and public<br><strong>MOD_UNAVAILABLE</strong> = Mod is marked as not accepted, deleted or hidden<br><strong>MOD_EDITED</strong> = The mod was updated (triggered when any column value changes)<br><strong>MOD_DELETED</strong> = The mod has been permanently erased. This is an orphan record, looking up this id will return no data<br><strong>MOD_TEAM_CHANGED</strong> = A user has joined or left the mod team<br><strong>MOD_COMMENT_ADDED</strong> = A comment has been published for a mod<br><strong>MOD_COMMENT_DELETED</strong> = A comment has been deleted from a mod</td>
 </tr>
 <tr>
 <td>latest</td>
