@@ -4708,7 +4708,7 @@ System.out.println(response.toString());
 
 `POST /games/{game-id}/mods/{mod-id}/comments`
 
-Add a comment for the corresponding mod. Successful request will return the newly created [Comment Object](#comment-object).
+Add a comment for the corresponding mod. Successful request will return the newly created [Comment Object](#comment-object) and fire a __MOD_COMMENT_ADDED__ event.
 
      Parameter|Type|Required|Description
      ---|---|---|---|
@@ -5141,7 +5141,7 @@ System.out.println(response.toString());
 
 `DELETE /games/{game-id}/mods/{mod-id}/comments/{comment-id}`
 
-Delete a comment from a mod profile. Successful request will return `204 No Content`.
+Delete a comment from a mod profile. Successful request will return `204 No Content`  and fire a __MOD_COMMENT_DELETED__ event.
 
 
 > Example response
@@ -5678,7 +5678,7 @@ Get all mods events for the corresponding game sorted by latest event first. Suc
     mod_id|integer|Unique id of the parent mod.
     user_id|integer|Unique id of the user who performed the action.
     date_added|integer|Unix timestamp of date mod event occurred.
-    event_type|string|Type of change that occurred:<br><br>__MODFILE_CHANGED__ = Primary file changed<br>__MOD_AVAILABLE__ = Mod is marked as accepted and public<br>__MOD_UNAVAILABLE__ = Mod is marked as not accepted, deleted or hidden<br>__MOD_EDITED__ = The mod was updated (triggered when any column value changes)<br>__MOD_DELETED__ = The mod has been permanently erased. This is an orphan record, looking up this id will return no data<br>__MOD_TEAM_CHANGED__ = A user has joined or left the mod team
+    event_type|string|Type of change that occurred:<br><br>__MODFILE_CHANGED__ = Primary file changed<br>__MOD_AVAILABLE__ = Mod is marked as accepted and public<br>__MOD_UNAVAILABLE__ = Mod is marked as not accepted, deleted or hidden<br>__MOD_EDITED__ = The mod was updated (triggered when any column value changes)<br>__MOD_DELETED__ = The mod has been permanently erased. This is an orphan record, looking up this id will return no data<br>__MOD_TEAM_CHANGED__ = A user has joined or left the mod team<br>__MOD_COMMENT_ADDED__ = A comment has been published for a mod<br>__MOD_COMMENT_DELETED__ = A comment has been deleted from a mod
     latest|boolean|_Default value is true_. Returns only the latest unique events, which is useful for checking if the primary `modfile` has changed.
     subscribed|boolean|_Default value is false_. Returns only events connected to mods the __authenticated user__ is subscribed to, which is useful for keeping the users mods up-to-date.
 
