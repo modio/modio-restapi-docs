@@ -1494,6 +1494,136 @@ Status|Meaning|Error Ref|Description|Response Schema
 To perform this request, you must be authenticated via one of the following methods:
 <a href="#authentication">api_key</a>
 </aside>
+## Authenticate via Switch
+
+> Example request
+
+```shell
+# You can also use wget
+curl -X POST https://api.mod.io/v1/external/switchauth?api_key=YourApiKey \
+  -H 'Content-Type: application/x-www-form-urlencoded' \ 
+  -H 'Accept: application/json' \
+  -d 'id_token=m72VygeZzTSUVRmNvw8v...'
+
+```
+
+```http
+POST https://api.mod.io/v1/external/switchauth?api_key=YourApiKey HTTP/1.1
+Host: api.mod.io
+Content-Type: application/x-www-form-urlencoded
+Accept: application/json
+
+```
+
+```javascript
+var headers = {
+  'Content-Type':'application/x-www-form-urlencoded',
+  'Accept':'application/json'
+
+};
+
+$.ajax({
+  url: 'https://api.mod.io/v1/external/switchauth',
+  method: 'post',
+  data: '?api_key=YourApiKey',
+  headers: headers,
+  success: function(data) {
+    console.log(JSON.stringify(data));
+  }
+})
+```
+
+```javascript--nodejs
+const request = require('node-fetch');
+const inputBody = '{
+  "id_token": "m72VygeZzTSUVRmNvw8v..."
+}';
+const headers = {
+  'Content-Type':'application/x-www-form-urlencoded',
+  'Accept':'application/json'
+
+};
+
+fetch('https://api.mod.io/v1/external/switchauth?api_key=YourApiKey',
+{
+  method: 'POST',
+  body: inputBody,
+  headers: headers
+})
+.then(function(res) {
+    return res.json();
+}).then(function(body) {
+    console.log(body);
+});
+```
+
+```python
+import requests
+headers = {
+  'Content-Type': 'application/x-www-form-urlencoded',
+  'Accept': 'application/json'
+}
+
+r = requests.post('https://api.mod.io/v1/external/switchauth', params={
+  'api_key': 'YourApiKey'
+}, headers = headers)
+
+print r.json()
+```
+
+```java
+URL obj = new URL("https://api.mod.io/v1/external/switchauth?api_key=YourApiKey");
+HttpURLConnection con = (HttpURLConnection) obj.openConnection();
+con.setRequestMethod("POST");
+int responseCode = con.getResponseCode();
+BufferedReader in = new BufferedReader(
+    new InputStreamReader(con.getInputStream()));
+String inputLine;
+StringBuffer response = new StringBuffer();
+while ((inputLine = in.readLine()) != null) {
+    response.append(inputLine);
+}
+in.close();
+System.out.println(response.toString());
+```
+
+`POST /external/switchauth`
+
+Request an access token on behalf of a Nintendo Switch user. A Successful request will return an [Access Token Object](#access-token-object).<br><br>__NOTE__: To use this endpoint you will need to setup some additional settings prior to being able to authenticate Nintendo Switch users, for these instructions please [contact us](mailto:developers@mod.io).
+
+     Parameter|Type|Required|Description
+     ---|---|---|---|
+     id_token|string|true|The NSA ID supplied by the Nintendo Switch SDK.
+     email|string||The users email address. If supplied, and the respective user does not have an email registered for their account we will send a confirmation email to confirm they have ownership of the specified email.<br><br>__WARNING__: We __strongly recommend__ that you prompt your users in a friendly manner at least once to provide their email address to link their Nintendo Service account to mod.io. Failing to provide an email will in-effect generate an orphan account that will only be able to be accessed from the users' Switch device.
+     date_expires|integer||Unix timestamp of date in which the returned token will expire. Value cannot be higher than the default value which is a common year (unix timestamp + 31536000 seconds). Using a token after it's expiry time has elapsed will result in a `401 Unauthorized` response.
+
+
+> Example response
+
+```json
+{
+  "code": 200,
+  "access_token": "eyJ0eXAiOiXKV1QibCJhbLciOiJeiUzI1.....",
+  "date_expires": 1570673249
+}
+
+```
+<h3 id="Authenticate-via-Switch-responses">Responses</h3>
+
+Status|Meaning|Error Ref|Description|Response Schema
+---|---|----|---|---|
+200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)||Successful Request|[Access Token Object](#schemaaccess_token_object)
+401|[Unauthorized](https://tools.ietf.org/html/rfc7235#section-3.1)|11035|The NSA ID token was invalid/malformed.|[Error Object](#schemaerror_object)
+401|[Unauthorized](https://tools.ietf.org/html/rfc7235#section-3.1)|11039|mod.io was unable to validate the credentials with Nintendo Servers.|[Error Object](#schemaerror_object)
+401|[Unauthorized](https://tools.ietf.org/html/rfc7235#section-3.1)|11036|The NSA ID token is not valid yet.|[Error Object](#schemaerror_object)
+401|[Unauthorized](https://tools.ietf.org/html/rfc7235#section-3.1)|11037|The NSA ID token has expired. You should request another token from the Switch SDK and ensure it is delivered to mod.io before it expires.|[Error Object](#schemaerror_object)
+403|[Forbidden](https://tools.ietf.org/html/rfc7231#section-6.5.3)|11040|The application ID for the Nintendo Switch title has not been configured, this can be setup in the 'Options' tab within your game profile.|[Error Object](#schemaerror_object)
+403|[Forbidden](https://tools.ietf.org/html/rfc7231#section-6.5.3)|11041|The application ID of the originating Switch title is not permitted to authenticate users. Please check the Switch application id submitted on your games' 'Options' tab and ensure it is the same application id of the Switch title making the authentication request.|[Error Object](#schemaerror_object)
+
+<aside class="auth-notice">
+To perform this request, you must be authenticated via one of the following methods:
+<a href="#authentication">api_key</a>
+</aside>
 ## Authenticate via Discord
 
 > Example request
@@ -1732,7 +1862,7 @@ Connect an external account (i.e. Steam and GOG documented above) with the authe
 
      Parameter|Type|Required|Description
      ---|---|---|---|
-     service|string|true|The external service where the user's account originates.<br><br>Possible Options:<br>- _steam_<br>- _gog_<br>- _itch_
+     service|string|true|The external service where the user's account originates.<br><br>Possible Options:<br>- _steam_<br>- _gog_<br>- _itch_<br>- _xbox_<br>- _switch_
      service_id|string|true|The external service id which is associated with the provided access token. For example, if you requested an access token via the [Steam Authentication](#authenticate-via-steam) endpoint, the service_id would be the user's Steam ID. For security reasons, this ID must match with the service parameter provided, and also be associated with the access token used in the request. <br><br>Service ID formats:<br>- _steam_ (Integer, 17 characters, Community ID format)<br>- _gog_ (Integer, 12 characters)<br>- _itchio_ (Integer, 6 characters)
      email|string|true|The email address to link to the authenticated user's account.
 
