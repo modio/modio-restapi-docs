@@ -24,7 +24,7 @@ Option | Usage | Suited for | Docs
 ---------- | ---------- | ---------- | ---------
 __API__ | For connecting directly to the --parse_sitename REST API. | Web apps that need a JSON REST API, or game developers that like a challenge and want control over their implementation. | You are reading them
 __SDK__ | Drop our [open source C/C++ SDK](--parse_sdkurl) into your game to call --parse_sitename functionality. | Developers that want a SDK that abstracts the uploading, downloading and unzip flows behind easy to use function calls. | [Here](--parse_sdkurl)
-__Tools/Plugins__ | Use tools, plugins and wrappers created by the community to make implementation in various engines easy. | Game developers that want a pre-built modding solution for their engine (Unity, Unreal, GameMaker, Construct) of choice. | [Available per tool](--parse_appsurl)
+__Tools/Plugins__ | Use tools, plugins and wrappers created by the community to make implementation in various engines easy. | Game developers that want a pre-built modding solution for their engine (Unity, Unreal, GameMaker, Construct) of choice. | Available below
 
 Tools, plugins and wrappers made by the --parse_sitename team and our awesome community | - | - | -
 --- | --- | --- | ---
@@ -32,6 +32,7 @@ Tools, plugins and wrappers made by the --parse_sitename team and our awesome co
 ![C/C++ SDK](images/tool-ccpp.png) | __C/C++ SDK__<br />[SDK](https://github.com/modio/SDK)<br />[Getting Started](https://github.com/modio/SDK/wiki)<br />[Tutorials](https://github.com/modio/SDK/tree/master/examples/code-samples)<br />  | ![Haxe Wrapper](images/tool-haxe.png) | __Haxe Wrapper__<br />[SDK](https://github.com/modio/HaxeWrapper)<br />[Getting Started](https://github.com/modio/HaxeWrapper)<br />[Tutorials](https://github.com/Turupawn/modioOpenFLExample#openfl-integration)<br />
 ![Rust Wrapper](images/tool-rust.png) | __Rust Wrapper__<br />[SDK](https://crates.io/crates/modio)<br />[Getting Started](https://github.com/nickelc/modio-rs)<br />[Tutorials](https://github.com/nickelc/modio-rs/tree/master/examples)<br /> | ![Python Wrapper](images/tool-python.png) | __Python Wrapper__<br />[SDK](https://github.com/ClementJ18/mod.io)<br />[Getting Started](https://github.com/ClementJ18/mod.io/#example)<br />[Tutorials](https://github.com/ClementJ18/mod.io/tree/master/examples)<br /> |<br />
 ![Construct 2](images/tool-c2.png) | __Construct 2 Plugin__<br />[SDK](https://github.com/modio/C2Plugin)<br />[Getting Started](https://github.com/modio/C2Plugin)<br /> | ![Command Line Tool](images/tool-cmd.png) | __Command Line Tool__<br />[CMD](https://github.com/nickelc/modiom)<br />[Getting Started](https://github.com/nickelc/modiom)<br />
+![GameMaker Studio 2](images/tool-gm2.png) | __GameMaker Studio 2 Plugin__<br />[SDK](https://github.com/modio/modio-GameMaker2)<br />[Getting Started](https://github.com/modio/modio-GameMaker2)<br /> | ![Discord Bot](images/tool-discordbot.png) | __Discord Bot__<br />[Instructions](https://github.com/modio/DiscordBot)<br />[Invite](--parse_discordboturl)<br />
 Want a tool added to the list? [Contact us!](mailto:--parse_email?subject=Publish Tool)
 
 Here is a brief list of the things to know about our API, as explained in more detail in the following sections.
