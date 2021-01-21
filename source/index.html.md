@@ -17,22 +17,6 @@ highlight_theme: darkula
 headingLevel: '2'
 ---
 
-# mod.io API v1
-
-> Scroll down for code samples, example requests and responses. Select a language for code samples from the tabs above or the mobile navigation menu.
-
-Welcome to the official mod.io API. You will find everything you need about connecting with mod.io via the endpoints below.
-
-Base URLs:
-
-* <a href="https://api.mod.io/v1/">https://api.mod.io/v1/</a>
-
-
-
-
-
-
-
 # Getting Started
 
 ## mod.io API v1
