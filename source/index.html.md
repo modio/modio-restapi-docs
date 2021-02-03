@@ -752,6 +752,150 @@ If you are a large studio or publisher and require a private, in-house, custom s
 
 If you spot any errors within the mod.io documentation, have feedback on how we can make it easier to follow or simply want to discuss how awesome mods are, feel free to reach out to [developers@mod.io](mailto:developers@mod.io?subject=API) or come join us in our [discord channel](https://discord.mod.io). We are here to help you grow and maximise the potential of mods in your game.
 # Authentication
+## Terms
+
+> Example request
+
+```shell
+# You can also use wget
+curl -X GET https://api.mod.io/v1/authenticate/terms?api_key=YourApiKey \
+  -H 'Accept: application/json'
+
+```
+
+```http
+GET https://api.mod.io/v1/authenticate/terms?api_key=YourApiKey HTTP/1.1
+Host: api.mod.io
+
+Accept: application/json
+
+```
+
+```javascript
+var headers = {
+  'Accept':'application/json'
+
+};
+
+$.ajax({
+  url: 'https://api.mod.io/v1/authenticate/terms',
+  method: 'get',
+  data: '?api_key=YourApiKey',
+  headers: headers,
+  success: function(data) {
+    console.log(JSON.stringify(data));
+  }
+})
+```
+
+```javascript--nodejs
+const request = require('node-fetch');
+
+const headers = {
+  'Accept':'application/json'
+
+};
+
+fetch('https://api.mod.io/v1/authenticate/terms?api_key=YourApiKey',
+{
+  method: 'GET',
+
+  headers: headers
+})
+.then(function(res) {
+    return res.json();
+}).then(function(body) {
+    console.log(body);
+});
+```
+
+```python
+import requests
+headers = {
+  'Accept': 'application/json'
+}
+
+r = requests.get('https://api.mod.io/v1/authenticate/terms', params={
+  'api_key': 'YourApiKey'
+}, headers = headers)
+
+print r.json()
+```
+
+```java
+URL obj = new URL("https://api.mod.io/v1/authenticate/terms?api_key=YourApiKey");
+HttpURLConnection con = (HttpURLConnection) obj.openConnection();
+con.setRequestMethod("GET");
+int responseCode = con.getResponseCode();
+BufferedReader in = new BufferedReader(
+    new InputStreamReader(con.getInputStream()));
+String inputLine;
+StringBuffer response = new StringBuffer();
+while ((inputLine = in.readLine()) != null) {
+    response.append(inputLine);
+}
+in.close();
+System.out.println(response.toString());
+```
+
+`GET /authenticate/terms`
+
+The purpose of this endpoint is to provide the text, links and buttons you can use to get a users agreement and consent prior to authenticating them in-game (your dialog should look [similar to this](https://mod.io/termsdialog/widget)). A successful response will return a [Terms Object](#terms-object).<br><br>__IMPORTANT:__ When using a 3rd party authentication flow such as Steam or Xbox Live, it is a requirement that the user has agreed to the latest mod.io [Terms of Use](https://mod.io/terms/widget) and [Privacy Policy](https://mod.io/privacy/widget). You only need to collect the users agreement once, and also each time these policies are updated.<br><br>To make this easy to manage, all of the 3rd party authentication flows have a `terms_agreed` field which should be set to `false` by default. If the user has agreed to the latest policies, their authentication will proceed as normal, however if their agreement is required and `terms_agreed` is set to `false` an error `403 Forbidden (error_ref 11051)` will be returned. When you receive this error, you must collect the users agreement before resubmitting the authentication flow with `terms_agreed` set to `true`, which will be recorded.<br><br>__NOTE:__  You can use your own text and process (make sure the Terms of Use and Privacy Policy are correctly linked), but be aware that you are responsible for ensuring that the users agreement is properly collected and reported to us. Failure to do this correctly is a breach of the mod.io Developer Terms. If your game does not authenticate users or only uses the email authentication flow, you do not need to implement this dialog, but you should link to the mod.io Terms of Use and Privacy Policy in your Privacy Policy/EULA.
+
+    Filter|Type|Description
+    ---|---|---
+    service|string|The 3rd party authentication service you will authenticate the user with after they agree to the terms of use and consent to an account being created. Note that this field modifies the data collection lists in both the `plaintext` and `html` fields of the response, as well as the `manage` link for the user to manage their account. Must be one of the following values to modify the returned text otherwise the filter will be ignored:<br><br>- steam<br>- gog<br>- itchio<br>- oculus<br>- xbox<br>- switch<br>- discord
+
+
+> Example response
+
+```json
+{
+  "plaintext": "We use mod.io to support user-generated content in-game. By clicking "I Agree" you agree to the mod.io Terms of Use and a mod.io account will be created for you (using your Steam display name, avatar and ID). Please see the mod.io Privacy Policy on how mod.io processes your personal data.",
+  "html": "<p>We use <a href="https://mod.io">mod.io</a> to support user-generated content in-game. By clicking "I Agree" you agree to the mod.io <a href="https://mod.io/terms">Terms of Use</a> and a mod.io account will be created for you (using your Steam display name, avatar and ID). Please see the mod.io <a href="https://mod.io/privacy">Privacy Policy</a> on how mod.io processes your personal data.</p>",
+  "buttons": {
+    "agree": {
+      "text": "I Agree"
+    },
+    "disagree": {
+      "text": "No, Thanks"
+    }
+  },
+  "links": {
+    "website": {
+      "text": "Website",
+      "url": "https://mod.io",
+      "required": false
+    },
+    "terms": {
+      "text": "Terms of Use",
+      "url": "https://mod.io/terms",
+      "required": true
+    },
+    "privacy": {
+      "text": "Privacy Policy",
+      "url": "https://mod.io/privacy",
+      "required": true
+    },
+    "manage": {
+      "text": "Manage Account",
+      "url": "https://mod.io/members/settings",
+      "required": false
+    }
+  }
+}
+
+```
+<h3 id="Terms-responses">Responses</h3>
+
+Status|Meaning|Error Ref|Description|Response Schema
+---|---|----|---|---|
+200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)||Successful Request|[Terms Object](#schematerms_object)
+
+<aside class="auth-notice">
+To perform this request, you must be authenticated via one of the following methods:
+<a href="#authentication">api_key</a>
+</aside>
 ## Authenticate via Email
 
 To perform writes, you will need to authenticate your users via OAuth 2. To make this frictionless in-game, we offer an email verification system, similar to what Slack and others pioneered. It works by users supplying their email, which we send a time-limited 5 digit security code too. They exchange this code in-game, for an [OAuth 2 access token](https://mod.io/oauth/widget) you can save to authenticate future requests. The benefit of this approach is it avoids complex website redirects, doesn't require your users to complete a slow registration flow, and eliminates the need to store usernames / passwords.
@@ -931,13 +1075,14 @@ System.out.println(response.toString());
 
 `POST /external/steamauth`
 
-Request an access token on behalf of a Steam user. To use this functionality you *must* add your games [encrypted app ticket key](https://partner.steamgames.com/apps/sdkauth) from Steamworks, to the *Edit > Options* page of your games profile on mod.io. A Successful request will return an [Access Token Object](#access-token-object).<br/><br/>__HINT:__ If you want to overlay the mod.io site in-game on Steam, we recommend you add `?ref=steam` to the end of the URL you open which will prompt the user to login with Steam. See [Web Overlay Authentication](#web-overlay-authentication) for details.
+Request an access token on behalf of a Steam user. To use this functionality you *must* add your games [encrypted app ticket key](https://partner.steamgames.com/apps/sdkauth) from Steamworks, to the *Edit > Options* page of your games profile on mod.io. A Successful request will return an [Access Token Object](#access-token-object).<br><br>__HINT:__ If you want to overlay the mod.io site in-game on Steam, we recommend you add `?ref=steam` to the end of the URL you open which will prompt the user to login with Steam. See [Web Overlay Authentication](#web-overlay-authentication) for details.
 
      Parameter|Type|Required|Description
      ---|---|---|---|
      appdata|base64-encoded string|true|The Steam users [Encrypted App Ticket](https://partner.steamgames.com/doc/features/auth#encryptedapptickets) provided by the Steamworks SDK. <br><br>Parameter content *MUST* be the [*uint8 *rgubTicketEncrypted*](https://partner.steamgames.com/doc/api/SteamEncryptedAppTicket) returned after calling [ISteamUser::GetEncryptedAppTicket()](https://partner.steamgames.com/doc/api/ISteamUser#GetEncryptedAppTicket) within the Steamworks SDK, converted into a base64-encoded string.<br><br>__NOTE:__ Due to a base64-encoded string containing special characters, you must URL encode the string after it has been base64-encoded to ensure it is successfully sent to our servers otherwise you may encounter an `422 Unprocessable Entity` response. For example, [cURL](https://ec.haxx.se/http-post.html) will do this for you by using the `--data-urlencode` option.
      email|string||The users email address. If supplied, and the respective user does not have an email registered for their account we will send a confirmation email to confirm they have ownership of the specified email.<br><br>__NOTE__: If the user already has an email on record with us, this parameter will be ignored. This parameter should also be urlencoded before the request is sent.
      date_expires|integer||Unix timestamp of date in which the returned token will expire. Value cannot be higher than the default value which is a common year (unix timestamp + 31536000 seconds). Using a token after it's expiry time has elapsed will result in a `401 Unauthorized` response.
+     terms_agreed|boolean||This MUST be set to `false` unless you have collected the [users agreement](#terms) prior to calling this endpoint in which case it can be set to `true` and will be recorded.<br><br>__NOTE:__ If this is set to `false` and the user has not agreed to the latest mod.io Terms of Use and Privacy Policy, an error `403 Forbidden (error_ref 11051)` will be returned and you will need to collect the [users agreement](#terms) and retry with this value set to `true` to authenticate the user.
 
 
 > Example response
@@ -961,6 +1106,7 @@ Status|Meaning|Error Ref|Description|Response Schema
 403|[Forbidden](https://tools.ietf.org/html/rfc7231#section-6.5.3)|11016|The api_key supplied in the request must be associated with a game.|[Error Object](#schemaerror_object)
 403|[Forbidden](https://tools.ietf.org/html/rfc7231#section-6.5.3)|11017|The api_key supplied in the request is for test environment purposes only and cannot be used for this functionality.|[Error Object](#schemaerror_object)
 403|[Forbidden](https://tools.ietf.org/html/rfc7231#section-6.5.3)|11019|The secret steam app ticket associated with this game has not been configured.|[Error Object](#schemaerror_object)
+403|[Forbidden](https://tools.ietf.org/html/rfc7231#section-6.5.3)|11051|The user has not agreed to the mod.io Terms of Use. Please see terms_agreed parameter description and the [Terms](#terms) endpoint for more information.|[Error Object](#schemaerror_object)
 
 <aside class="auth-notice">
 To perform this request, you must be authenticated via one of the following methods:
@@ -1067,7 +1213,8 @@ Request an access token on behalf of a GOG Galaxy user. To use this functionalit
      ---|---|---|---|
      appdata|string|true|The GOG Galaxy users [Encrypted App Ticket](https://cdn.gog.com/open/galaxy/sdk/1.133.3/Documentation/classgalaxy_1_1api_1_1IUser.html#a352802aab7a6e71b1cd1b9b1adfd53d8) provided by the GOG Galaxy SDK. <br><br>Parameter content *MUST* be the encrypted string returned in the buffer after calling [IUser::GetEncryptedAppTicket()](https://cdn.gog.com/open/galaxy/sdk/1.133.3/Documentation/classgalaxy_1_1api_1_1IUser.html#a96af6792efc260e75daebedca2cf74c6) within the Galaxy SDK. Unlike the [Steam Authentication](#authenticate-via-steam) endpoint, you do not need to encode the encrypted string as this is already done by the Galaxy SDK.<br><br>__NOTE:__ Due to the encrypted app ticket containing special characters, you must URL encode the string before sending the request to ensure it is successfully sent to our servers otherwise you may encounter an `422 Unprocessable Entity` response. For example, [cURL](https://ec.haxx.se/http-post.html) will do this for you by using the `--data-urlencode` option.
      email|string||The users email address. If supplied, and the respective user does not have an email registered for their account we will send a confirmation email to confirm they have ownership of the specified email.<br><br>__NOTE__: If the user already has an email on record with us, this parameter will be ignored. This parameter should also be urlencoded before the request is sent.
-        date_expires|integer||Unix timestamp of date in which the returned token will expire. Value cannot be higher than the default value which is a common year (unix timestamp + 31536000 seconds). Using a token after it's expiry time has elapsed will result in a `401 Unauthorized` response.
+     date_expires|integer||Unix timestamp of date in which the returned token will expire. Value cannot be higher than the default value which is a common year (unix timestamp + 31536000 seconds). Using a token after it's expiry time has elapsed will result in a `401 Unauthorized` response.
+     terms_agreed|boolean||This MUST be set to `false` unless you have collected the [users agreement](#terms) prior to calling this endpoint in which case it can be set to `true` and will be recorded.<br><br>__NOTE:__ If this is set to `false` and the user has not agreed to the latest mod.io Terms of Use and Privacy Policy, an error `403 Forbidden (error_ref 11051)` will be returned and you will need to collect the [users agreement](#terms) and retry with this value set to `true` to authenticate the user.
 
 
 > Example response
@@ -1091,6 +1238,7 @@ Status|Meaning|Error Ref|Description|Response Schema
 403|[Forbidden](https://tools.ietf.org/html/rfc7231#section-6.5.3)|11016|The api_key supplied in the request must be associated with a game.|[Error Object](#schemaerror_object)
 403|[Forbidden](https://tools.ietf.org/html/rfc7231#section-6.5.3)|11017|The api_key supplied in the request is for test environment purposes only and cannot be used for this functionality.|[Error Object](#schemaerror_object)
 403|[Forbidden](https://tools.ietf.org/html/rfc7231#section-6.5.3)|11022|The secret galaxy app ticket associated with this game has not been configured.|[Error Object](#schemaerror_object)
+403|[Forbidden](https://tools.ietf.org/html/rfc7231#section-6.5.3)|11051|The user has not agreed to the mod.io Terms of Use. Please see terms_agreed parameter description and the [Terms](#terms) endpoint for more information.|[Error Object](#schemaerror_object)
 
 <aside class="auth-notice">
 To perform this request, you must be authenticated via one of the following methods:
@@ -1191,13 +1339,14 @@ System.out.println(response.toString());
 
 `POST /external/itchioauth`
 
-Request an access token on behalf of an itch.io user via the itch.io desktop app. Due to the desktop application allowing multiple users to be logged in at once, if more than one user is logged in then the user at the top of that list on the itch.io login dialog will be the authenticating user. A Successful request will return an [Access Token Object](#access-token-object).<br/><br/>__HINT:__ If you want to overlay the mod.io site in-game on itch.io, we recommend you add `?ref=itchio` to the end of the URL you open which will prompt the user to login with itch.io. See [Web Overlay Authentication](#web-overlay-authentication) for details.
+Request an access token on behalf of an itch.io user via the itch.io desktop app. Due to the desktop application allowing multiple users to be logged in at once, if more than one user is logged in then the user at the top of that list on the itch.io login dialog will be the authenticating user. A Successful request will return an [Access Token Object](#access-token-object).<br><br>__HINT:__ If you want to overlay the mod.io site in-game on itch.io, we recommend you add `?ref=itchio` to the end of the URL you open which will prompt the user to login with itch.io. See [Web Overlay Authentication](#web-overlay-authentication) for details.
 
      Parameter|Type|Required|Description
      ---|---|---|---|
      itchio_token|string|true|The [JWT Token](https://itch.io/docs/itch/integrating/manifest-actions.html) provided by the itch.io desktop application to your game as the environment variable `ITCHIO_API_KEY`. You must setup your itch.io app manifest to include the [API scope](https://itch.io/docs/itch/integrating/manifest-actions.html) to force itch.io to set this variable.
      email|string||The users email address. If supplied, and the respective user does not have an email registered for their account we will send a confirmation email to confirm they have ownership of the specified email.<br><br>__NOTE__: If the user already has an email on record with us, this parameter will be ignored. This parameter should also be urlencoded before the request is sent.
      date_expires|integer||Unix timestamp of date in which the returned token will expire. Value cannot be higher than the default value which is a week (unix timestamp + 604800 seconds). Using a token after it's expiry time has elapsed will result in a `401 Unauthorized` response.
+     terms_agreed|boolean||This MUST be set to `false` unless you have collected the [users agreement](#terms) prior to calling this endpoint in which case it can be set to `true` and will be recorded.<br><br>__NOTE:__ If this is set to `false` and the user has not agreed to the latest mod.io Terms of Use and Privacy Policy, an error `403 Forbidden (error_ref 11051)` will be returned and you will need to collect the [users agreement](#terms) and retry with this value set to `true` to authenticate the user.
 
 
 > Example response
@@ -1220,6 +1369,7 @@ Status|Meaning|Error Ref|Description|Response Schema
 401|[Unauthorized](https://tools.ietf.org/html/rfc7235#section-3.1)|11031|mod.io was unable to get account data from itch.io servers.|[Error Object](#schemaerror_object)
 403|[Forbidden](https://tools.ietf.org/html/rfc7231#section-6.5.3)|11016|The api_key supplied in the request must be associated with a game.|[Error Object](#schemaerror_object)
 403|[Forbidden](https://tools.ietf.org/html/rfc7231#section-6.5.3)|11017|The api_key supplied in the request is for test environment purposes only and cannot be used for this functionality.|[Error Object](#schemaerror_object)
+403|[Forbidden](https://tools.ietf.org/html/rfc7231#section-6.5.3)|11051|The user has not agreed to the mod.io Terms of Use. Please see terms_agreed parameter description and the [Terms](#terms) endpoint for more information.|[Error Object](#schemaerror_object)
 
 <aside class="auth-notice">
 To perform this request, you must be authenticated via one of the following methods:
@@ -1336,6 +1486,7 @@ Request an access token on behalf of an Oculus user. To use this functionality y
      access_token|string|true|The user's access token, providing by calling [ovr_User_GetAccessToken()](https://developer.oculus.com/documentation/platform/latest/concepts/dg-ownership/) from the Oculus SDK. mod.io uses this access token on the first login only to obtain the user's alias and is not saved on our servers.
      email|string||The users email address. If supplied, and the respective user does not have an email registered for their account we will send a confirmation email to confirm they have ownership of the specified email.<br><br>__WARNING__: We __strongly recommend__ that you prompt your users in a friendly manner at least once to provide their email address to link their Oculus account. Due to how Oculus handles user id's - if we are not supplied with an email for a user at least once we will __never__ be able to link that user with their existing account at a later date as Oculus id's operate at the game-scope, not globally. Failing to provide an email will in-effect generate an orphan account that will only be able to be accessed from your title.
      date_expires|integer||Unix timestamp of date in which the returned token will expire. Value cannot be higher than the default value which is a common year (unix timestamp + 31536000 seconds). Using a token after it's expiry time has elapsed will result in a `401 Unauthorized` response.
+     terms_agreed|boolean||This MUST be set to `false` unless you have collected the [users agreement](#terms) prior to calling this endpoint in which case it can be set to `true` and will be recorded.<br><br>__NOTE:__ If this is set to `false` and the user has not agreed to the latest mod.io Terms of Use and Privacy Policy, an error `403 Forbidden (error_ref 11051)` will be returned and you will need to collect the [users agreement](#terms) and retry with this value set to `true` to authenticate the user.
 
 
 > Example response
@@ -1359,6 +1510,7 @@ Status|Meaning|Error Ref|Description|Response Schema
 403|[Forbidden](https://tools.ietf.org/html/rfc7231#section-6.5.3)|11017|The api_key supplied in the request is for test environment purposes only and cannot be used for this functionality.|[Error Object](#schemaerror_object)
 403|[Forbidden](https://tools.ietf.org/html/rfc7231#section-6.5.3)|11024|The secret Oculus Rift app ticket associated with this game has not been configured.|[Error Object](#schemaerror_object)
 403|[Forbidden](https://tools.ietf.org/html/rfc7231#section-6.5.3)|11025|The secret Oculus Quest app ticket associated with this game has not been configured.|[Error Object](#schemaerror_object)
+403|[Forbidden](https://tools.ietf.org/html/rfc7231#section-6.5.3)|11051|The user has not agreed to the mod.io Terms of Use. Please see terms_agreed parameter description and the [Terms](#terms) endpoint for more information.|[Error Object](#schemaerror_object)
 
 <aside class="auth-notice">
 To perform this request, you must be authenticated via one of the following methods:
@@ -1466,6 +1618,7 @@ Request an access token on behalf of an Xbox Live user. A Successful request wil
      xbox_token|string|true|The Xbox Live token returned from calling [GetTokenAndSignatureAsync("POST", "https://api.mod.io")](https://docs.microsoft.com/en-us/dotnet/api/microsoft.xbox.services.system.xboxliveuser.gettokenandsignatureasync?view=xboxlive-dotnet-2017.11.20171204.01). <br><br>__NOTE:__ Due to the encrypted app ticket containing special characters, you must URL encode the string before sending the request to ensure it is successfully sent to our servers otherwise you may encounter an `422 Unprocessable Entity` response. For example, [cURL](https://ec.haxx.se/http-post.html) will do this for you by using the `--data-urlencode` option.
      email|string||The users email address. If supplied, and the respective user does not have an email registered for their account we will send a confirmation email to confirm they have ownership of the specified email. This functionality is also available at a later time via the [Link an Email](#link-an-email) endpoint.<br><br>__NOTE__: If the user already has an email on record with us, this parameter will be ignored. This parameter should also be urlencoded before the request is sent.
      date_expires|integer||Unix timestamp of date in which the returned token will expire. Value cannot be higher than the default value which is a common year (unix timestamp + 31536000 seconds). Using a token after it's expiry time has elapsed will result in a `401 Unauthorized` response.
+     terms_agreed|boolean||This MUST be set to `false` unless you have collected the [users agreement](#terms) prior to calling this endpoint in which case it can be set to `true` and will be recorded.<br><br>__NOTE:__ If this is set to `false` and the user has not agreed to the latest mod.io Terms of Use and Privacy Policy, an error `403 Forbidden (error_ref 11051)` will be returned and you will need to collect the [users agreement](#terms) and retry with this value set to `true` to authenticate the user.
 
 
 > Example response
@@ -1490,7 +1643,8 @@ Status|Meaning|Error Ref|Description|Response Schema
 403|[Forbidden](https://tools.ietf.org/html/rfc7231#section-6.5.3)|11016|The api_key supplied in the request must be associated with a game.|[Error Object](#schemaerror_object)
 403|[Forbidden](https://tools.ietf.org/html/rfc7231#section-6.5.3)|11017|The api_key supplied in the request is for test environment purposes only and cannot be used for this functionality.|[Error Object](#schemaerror_object)
 403|[Forbidden](https://tools.ietf.org/html/rfc7231#section-6.5.3)|11028|The user is not permitted to interact with UGC. This can be modified in the user's Xbox profile.|[Error Object](#schemaerror_object)
-403|[Forbidden](https://tools.ietf.org/html/rfc7231#section-6.5.3)|11030|Xbox live users with 'Child' accounts are not permitted to use mod.io. You must be 13 years or older to use mod.io.|[Error Object](#schemaerror_object)
+403|[Forbidden](https://tools.ietf.org/html/rfc7231#section-6.5.3)|11030|Xbox live users with 'Child' accounts are not permitted to use mod.io.|[Error Object](#schemaerror_object)
+403|[Forbidden](https://tools.ietf.org/html/rfc7231#section-6.5.3)|11051|The user has not agreed to the mod.io Terms of Use. Please see terms_agreed parameter description and the [Terms](#terms) endpoint for more information.|[Error Object](#schemaerror_object)
 
 <aside class="auth-notice">
 To perform this request, you must be authenticated via one of the following methods:
@@ -1598,6 +1752,7 @@ Request an access token on behalf of a Nintendo Switch user. A Successful reques
      id_token|string|true|The NSA ID supplied by the Nintendo Switch SDK.
      email|string||The users email address. If supplied, and the respective user does not have an email registered for their account we will send a confirmation email to confirm they have ownership of the specified email.<br><br>__WARNING__: We __strongly recommend__ that you prompt your users in a friendly manner at least once to provide their email address to link their Nintendo Service account to mod.io. Failing to provide an email will in-effect generate an orphan account that will only be able to be accessed from the users' Switch device.
      date_expires|integer||Unix timestamp of date in which the returned token will expire. Value cannot be higher than the default value which is a common year (unix timestamp + 31536000 seconds). Using a token after it's expiry time has elapsed will result in a `401 Unauthorized` response.
+     terms_agreed|boolean||This MUST be set to `false` unless you have collected the [users agreement](#terms) prior to calling this endpoint in which case it can be set to `true` and will be recorded.<br><br>__NOTE:__ If this is set to `false` and the user has not agreed to the latest mod.io Terms of Use and Privacy Policy, an error `403 Forbidden (error_ref 11051)` will be returned and you will need to collect the [users agreement](#terms) and retry with this value set to `true` to authenticate the user.
 
 
 > Example response
@@ -1621,6 +1776,7 @@ Status|Meaning|Error Ref|Description|Response Schema
 401|[Unauthorized](https://tools.ietf.org/html/rfc7235#section-3.1)|11037|The NSA ID token has expired. You should request another token from the Switch SDK and ensure it is delivered to mod.io before it expires.|[Error Object](#schemaerror_object)
 403|[Forbidden](https://tools.ietf.org/html/rfc7231#section-6.5.3)|11040|The application ID for the Nintendo Switch title has not been configured, this can be setup in the 'Options' tab within your game profile.|[Error Object](#schemaerror_object)
 403|[Forbidden](https://tools.ietf.org/html/rfc7231#section-6.5.3)|11041|The application ID of the originating Switch title is not permitted to authenticate users. Please check the Switch application id submitted on your games' 'Options' tab and ensure it is the same application id of the Switch title making the authentication request.|[Error Object](#schemaerror_object)
+403|[Forbidden](https://tools.ietf.org/html/rfc7231#section-6.5.3)|11051|The user has not agreed to the mod.io Terms of Use. Please see terms_agreed parameter description and the [Terms](#terms) endpoint for more information.|[Error Object](#schemaerror_object)
 
 <aside class="auth-notice">
 To perform this request, you must be authenticated via one of the following methods:
@@ -1728,6 +1884,7 @@ Request an access token on behalf of a Discord user. A Successful request will r
      discord_token|string|true|The access token of the user provided by Discord.
      email|string||The users email address. If supplied, and the respective user does not have an email registered for their account we will send a confirmation email to confirm they have ownership of the specified email.<br><br>__NOTE__: If the user already has an email on record with us, this parameter will be ignored. This parameter should also be urlencoded before the request is sent.
      date_expires|integer||Unix timestamp of date in which the returned token will expire. Value cannot be higher than the default value which is a week (unix timestamp + 604800 seconds). Using a token after it's expiry time has elapsed will result in a `401 Unauthorized` response.
+     terms_agreed|boolean||This MUST be set to `false` unless you have collected the [users agreement](#terms) prior to calling this endpoint in which case it can be set to `true` and will be recorded.<br><br>__NOTE:__ If this is set to `false` and the user has not agreed to the latest mod.io Terms of Use and Privacy Policy, an error `403 Forbidden (error_ref 11051)` will be returned and you will need to collect the [users agreement](#terms) and retry with this value set to `true` to authenticate the user.
 
 
 > Example response
@@ -1750,6 +1907,7 @@ Status|Meaning|Error Ref|Description|Response Schema
 401|[Unauthorized](https://tools.ietf.org/html/rfc7235#section-3.1)|11043|mod.io was unable to get account data from the Discord servers.|[Error Object](#schemaerror_object)
 403|[Forbidden](https://tools.ietf.org/html/rfc7231#section-6.5.3)|11016|The api_key supplied in the request must be associated with a game.|[Error Object](#schemaerror_object)
 403|[Forbidden](https://tools.ietf.org/html/rfc7231#section-6.5.3)|11017|The api_key supplied in the request is for test environment purposes only and cannot be used for this functionality.|[Error Object](#schemaerror_object)
+403|[Forbidden](https://tools.ietf.org/html/rfc7231#section-6.5.3)|11051|The user has not agreed to the mod.io Terms of Use. Please see terms_agreed parameter description and the [Terms](#terms) endpoint for more information.|[Error Object](#schemaerror_object)
 
 <aside class="auth-notice">
 To perform this request, you must be authenticated via one of the following methods:
@@ -2492,7 +2650,7 @@ Get all mods for the corresponding game. Successful request will return an array
       "description": "<p>Rogue HD Pack does exactly what you thi...",
       "description_plaintext": "Rogue HD Pack does exactly what you thi...",
       "metadata_blob": "rogue,hd,high-res,4k,hd textures",
-      "profile_url": "https://rogue-knight.mod.io/rogue-knight-hd-pack",
+      "profile_url":"https://rogue-knight.mod.io/hd-pack",
       "media": {
         "youtube": [
           "https://www.youtube.com/watch?v=dQw4w9WgXcQ"
@@ -2710,7 +2868,7 @@ Get a mod. Successful request will return a single [Mod Object](#mod-object).
   "description": "<p>Rogue HD Pack does exactly what you thi...",
   "description_plaintext": "Rogue HD Pack does exactly what you thi...",
   "metadata_blob": "rogue,hd,high-res,4k,hd textures",
-  "profile_url": "https://rogue-knight.mod.io/rogue-knight-hd-pack",
+  "profile_url":"https://rogue-knight.mod.io/hd-pack",
   "media": {
     "youtube": [
       "https://www.youtube.com/watch?v=dQw4w9WgXcQ"
@@ -2891,7 +3049,7 @@ System.out.println(response.toString());
 
 `POST /games/{game-id}/mods`
 
-Add a mod. Successful request will return the newly created [Mod Object](#mod-object). All content published by users on [mod.io](https://mod.io) is subject to the [mod.io Terms of Use](https://mod.io/terms/widget). It is a requirement that you provide a link to [https://mod.io/terms](https://mod.io/terms) in any place where users are submitting content to mod.io.<br><br>__NOTE:__ By default new mods are 'not accepted' and 'public'. They can only be 'accepted' and made available via the API once a [Mod File](#add-modfile) has been uploaded. [Media](#add-mod-media), [Metadata Key Value Pairs](#add-mod-kvp-metadata) and [Dependencies](#add-mod-dependencies) can also be added after a mod profile is created.
+Add a mod. Successful request will return the newly created [Mod Object](#mod-object). All content published by users on [--parse sitename   ](https://mod.io) is subject to the [Terms of Use](https://mod.io/terms/widget). It is a requirement that you provide a link to [https://mod.io/terms](https://mod.io/terms) in any place where users are submitting content to mod.io.<br><br>__NOTE:__ By default new mods are 'not accepted' and 'public'. They can only be 'accepted' and made available via the API once a [Mod File](#add-modfile) has been uploaded. [Media](#add-mod-media), [Metadata Key Value Pairs](#add-mod-kvp-metadata) and [Dependencies](#add-mod-dependencies) can also be added after a mod profile is created.
 
     Parameter|Type|Required|Description
     ---|---|---|---|
@@ -2949,7 +3107,7 @@ Add a mod. Successful request will return the newly created [Mod Object](#mod-ob
   "description": "<p>Rogue HD Pack does exactly what you thi...",
   "description_plaintext": "Rogue HD Pack does exactly what you thi...",
   "metadata_blob": "rogue,hd,high-res,4k,hd textures",
-  "profile_url": "https://rogue-knight.mod.io/rogue-knight-hd-pack",
+  "profile_url":"https://rogue-knight.mod.io/hd-pack",
   "media": {
     "youtube": [
       "https://www.youtube.com/watch?v=dQw4w9WgXcQ"
@@ -3188,7 +3346,7 @@ Edit details for a mod. If you want to update the `logo` or media associated wit
   "description": "<p>Rogue HD Pack does exactly what you thi...",
   "description_plaintext": "Rogue HD Pack does exactly what you thi...",
   "metadata_blob": "rogue,hd,high-res,4k,hd textures",
-  "profile_url": "https://rogue-knight.mod.io/rogue-knight-hd-pack",
+  "profile_url":"https://rogue-knight.mod.io/hd-pack",
   "media": {
     "youtube": [
       "https://www.youtube.com/watch?v=dQw4w9WgXcQ"
@@ -4245,7 +4403,7 @@ Subscribe the _authenticated user_ to a corresponding mod. No body parameters ar
   "description": "<p>Rogue HD Pack does exactly what you thi...",
   "description_plaintext": "Rogue HD Pack does exactly what you thi...",
   "metadata_blob": "rogue,hd,high-res,4k,hd textures",
-  "profile_url": "https://rogue-knight.mod.io/rogue-knight-hd-pack",
+  "profile_url":"https://rogue-knight.mod.io/hd-pack",
   "media": {
     "youtube": [
       "https://www.youtube.com/watch?v=dQw4w9WgXcQ"
@@ -8975,7 +9133,7 @@ Speed up your API calls, by batching them into a single HTTP request. This endpo
             "description": "<p>Rogue HD Pack does exactly what you thi...",
             "description_plaintext": "Rogue HD Pack does exactly what you thi...",
             "metadata_blob": "rogue,hd,high-res,4k,hd textures",
-            "profile_url": "https://rogue-knight.mod.io/rogue-knight-hd-pack",
+            "profile_url":"https://rogue-knight.mod.io/hd-pack",
             "media": {
               "youtube": [
                 "https://www.youtube.com/watch?v=dQw4w9WgXcQ"
@@ -9352,7 +9510,7 @@ Get all mod's the _authenticated user_ is subscribed to. Successful request will
       "description": "<p>Rogue HD Pack does exactly what you thi...",
       "description_plaintext": "Rogue HD Pack does exactly what you thi...",
       "metadata_blob": "rogue,hd,high-res,4k,hd textures",
-      "profile_url": "https://rogue-knight.mod.io/rogue-knight-hd-pack",
+      "profile_url":"https://rogue-knight.mod.io/hd-pack",
       "media": {
         "youtube": [
           "https://www.youtube.com/watch?v=dQw4w9WgXcQ"
@@ -9942,7 +10100,7 @@ Get all mods the _authenticated user_ added or is a team member of. Successful r
       "description": "<p>Rogue HD Pack does exactly what you thi...",
       "description_plaintext": "Rogue HD Pack does exactly what you thi...",
       "metadata_blob": "rogue,hd,high-res,4k,hd textures",
-      "profile_url": "https://rogue-knight.mod.io/rogue-knight-hd-pack",
+      "profile_url":"https://rogue-knight.mod.io/hd-pack",
       "media": {
         "youtube": [
           "https://www.youtube.com/watch?v=dQw4w9WgXcQ"
@@ -10418,7 +10576,7 @@ thumb_100x100|string|URL to the medium avatar thumbnail.
       "description": "<p>Rogue HD Pack does exactly what you thi...",
       "description_plaintext": "Rogue HD Pack does exactly what you thi...",
       "metadata_blob": "rogue,hd,high-res,4k,hd textures",
-      "profile_url": "https://rogue-knight.mod.io/rogue-knight-hd-pack",
+      "profile_url":"https://rogue-knight.mod.io/hd-pack",
       "media": {
         "youtube": [
           "https://www.youtube.com/watch?v=dQw4w9WgXcQ"
@@ -10628,7 +10786,7 @@ data|[Mod Object](#schemamod_object)[]|Contains Mod Objects.
         "description": "<p>Rogue HD Pack does exactly what you thi...",
         "description_plaintext": "Rogue HD Pack does exactly what you thi...",
         "metadata_blob": "rogue,hd,high-res,4k,hd textures",
-        "profile_url": "https://rogue-knight.mod.io/rogue-knight-hd-pack",
+        "profile_url":"https://rogue-knight.mod.io/hd-pack",
         "media": {
           "youtube": [
             "https://www.youtube.com/watch?v=dQw4w9WgXcQ"
@@ -11171,7 +11329,7 @@ tags|string[]|Array of tags in this group.
             "description": "<p>Rogue HD Pack does exactly what you thi...",
             "description_plaintext": "Rogue HD Pack does exactly what you thi...",
             "metadata_blob": "rogue,hd,high-res,4k,hd textures",
-            "profile_url": "https://rogue-knight.mod.io/rogue-knight-hd-pack",
+            "profile_url":"https://rogue-knight.mod.io/hd-pack",
             "media": {
               "youtube": [
                 "https://www.youtube.com/watch?v=dQw4w9WgXcQ"
@@ -11946,7 +12104,7 @@ result_total|integer|Total number of results found.
       "description": "<p>Rogue HD Pack does exactly what you thi...",
       "description_plaintext": "Rogue HD Pack does exactly what you thi...",
       "metadata_blob": "rogue,hd,high-res,4k,hd textures",
-      "profile_url": "https://rogue-knight.mod.io/rogue-knight-hd-pack",
+      "profile_url":"https://rogue-knight.mod.io/hd-pack",
       "media": {
         "youtube": [
           "https://www.youtube.com/watch?v=dQw4w9WgXcQ"
@@ -12570,7 +12728,7 @@ images|[Image Object](#schemaimage_object)[]|Array of image objects (a gallery).
   "description": "<p>Rogue HD Pack does exactly what you thi...",
   "description_plaintext": "Rogue HD Pack does exactly what you thi...",
   "metadata_blob": "rogue,hd,high-res,4k,hd textures",
-  "profile_url": "https://rogue-knight.mod.io/rogue-knight-hd-pack",
+  "profile_url":"https://rogue-knight.mod.io/hd-pack",
   "media": {
     "youtube": [
       "https://www.youtube.com/watch?v=dQw4w9WgXcQ"
@@ -12918,6 +13076,80 @@ user|[User Object](#schemauser_object)|Contains user data.
 level|integer|Level of permission the user has:<br><br>__1__ = Moderator (can moderate comments and content attached)<br>__4__ = Manager (moderator access, including uploading builds and editing settings except supply and team members)<br>__8__ = Administrator (full access, including editing the supply and team)
 date_added|integer|Unix timestamp of the date the user was added to the team.
 position|string|Custom title given to the user in this team.
+
+
+
+
+## Terms Object
+
+   <a name="schematerms_object"></a>
+
+```json
+{
+  "plaintext": "We use mod.io to support user-generated content in-game. By clicking "I Agree" you agree to the mod.io Terms of Use and a mod.io account will be created for you (using your Steam display name, avatar and ID). Please see the mod.io Privacy Policy on how mod.io processes your personal data.",
+  "html": "<p>We use <a href="https://mod.io">mod.io</a> to support user-generated content in-game. By clicking "I Agree" you agree to the mod.io <a href="https://mod.io/terms">Terms of Use</a> and a mod.io account will be created for you (using your Steam display name, avatar and ID). Please see the mod.io <a href="https://mod.io/privacy">Privacy Policy</a> on how mod.io processes your personal data.</p>",
+  "buttons": {
+    "agree": {
+      "text": "I Agree"
+    },
+    "disagree": {
+      "text": "No, Thanks"
+    }
+  },
+  "links": {
+    "website": {
+      "text": "Website",
+      "url": "https://mod.io",
+      "required": false
+    },
+    "terms": {
+      "text": "Terms of Use",
+      "url": "https://mod.io/terms",
+      "required": true
+    },
+    "privacy": {
+      "text": "Privacy Policy",
+      "url": "https://mod.io/privacy",
+      "required": true
+    },
+    "manage": {
+      "text": "Manage Account",
+      "url": "https://mod.io/members/settings",
+      "required": false
+    }
+  }
+} 
+```
+
+
+### Properties
+
+Name|Type|Description
+---|---|---|---|
+plaintext|string|Terms text in plaintext formatting.
+html|string|Terms text in HTML formatting.
+buttons|object|Buttons to embed into the Terms.
+» agree|object|I Agree Button.
+»» text|string|Button text.
+» disagree|object|Disagree Button.
+»» text|string|Button text.
+links|object|Links to embed into the Terms.
+» website|object|Website link.
+»» text|string|Text for the link.
+»» url|string|Link to the mod.io website.
+»» required|boolean|Is this link required.
+» terms|object|Terms of Use link.
+»» text|string|Text for the link.
+»» url|string|Link to the mod.io Terms of Use.
+»» required|boolean|Is this link required.
+» privacy|object|Privacy Policy link.
+»» text|string|Text for the link.
+»» url|string|Link to the mod.io Privacy Policy.
+»» required|boolean|Is this link required.
+» manage|object|Manage User Account link.
+»» text|string|Text for the link.
+»» url|string|Link to the mod.io page to manage a User's Account.
+»» required|boolean|Is this link required.
 
 
 
