@@ -14,7 +14,7 @@ __Current version:__ --parse_vdropdown
 
 Compatible with all builds of your game on all platforms and stores, --parse_sitename is a clientless and standalone solution which gives you complete control over your modding ecosystem.
 
-![--parse_sitename Overview](--parse_staticurl/v1/images/home/sdk.png).
+![--parse_sitename Overview](--parse_staticurl/images/home/sdk.png).
 
 ## Implementation
 
@@ -68,7 +68,7 @@ To access the API authentication is required. All users and games get a private 
 
 To perform writes, you will need to authenticate your users via OAuth 2. To make this frictionless in-game, we offer an email verification system, similar to what Slack and others pioneered. It works by users supplying their email, which we send a time-limited 5 digit security code too. They exchange this code in-game, for an [OAuth 2 access token](--parse_siteurl/oauth/widget) you can save to authenticate future requests. The benefit of this approach is it avoids complex website redirects, doesn't require your users to complete a slow registration flow, and eliminates the need to store usernames / passwords.
 
-![--parse_sitename Email Authentication Flow](--parse_staticurl/v1/images/home/email.png)
+![--parse_sitename Email Authentication Flow](--parse_staticurl/images/home/email.png)
 
 ```shell
 // Example POST requesting security code be sent to supplied email
@@ -161,7 +161,7 @@ Want a platform added to the list? [Contact us!](mailto:--parse_email?subject=Au
 
 ### Web Overlay Authentication
 
-At the moment it is not possible to open the --parse_sitename website in-game with the user pre-authenticated, however you can provide a hint by appending `?ref=SERVICE` to the end of the URL. What this tells --parse_sitename, is that when the user attempts to perform an action that requires authentication, they will be prompted to login with their `SERVICE` account. For example if you want to take a mod creator to their mod edit page in-game on Steam, the URL would look something like: `--parse_gameurl/modname/edit?ref=steam`. You can optionally add `&login=auto` as well to automatically start the login process. Services supported are **steam**, **xbox**, **itchio**, **facebook**, **google** and **email**. 
+At the moment it is not possible to open the --parse_sitename website in-game with the user pre-authenticated, however you can provide a hint by appending `?ref=SERVICE` to the end of the URL. What this tells --parse_sitename, is that when the user attempts to perform an action that requires authentication, they will be prompted to login with their `SERVICE` account. For example if you want to take a mod creator to their mod edit page in-game on Steam, the URL would look something like: `--parse_gameurl/modname/edit?ref=steam`. You can optionally add `&login=auto` as well to automatically start the login process. Services supported are **steam**, **xbox**, **itchio**, **discord**, **facebook**, **google** and **email**. 
 
 ### Scopes (OAuth 2)
 
@@ -378,7 +378,7 @@ Error Reference Code | Meaning
     "changelog": "VERSION 1.3 -- Changes -- Fixed critical castle floor bug.",
     "metadata_blob": "rogue,hd,high-res,4k,hd-textures",
     "download": {
-      "binary_url": "https://mod.io/mods/file/1/",
+      "binary_url": "--parse_siteurl/mods/file/1/",
       "date_expires": 1579316848
     }
 }
@@ -419,7 +419,7 @@ Endpoints that return more than one result, return a __JSON object__ which conta
     		"changelog": "VERSION 1.3 -- Changes -- Fixed critical castle floor bug.",
     		"metadata_blob": "rogue,hd,high-res,4k,hd-textures",
     		"download": {
-    		  "binary_url": "https://mod.io/mods/file/1/",
+    		  "binary_url": "--parse_siteurl/mods/file/1/",
     		  "date_expires": 1579316848
     		}
 		},
@@ -826,4 +826,4 @@ If you are a large studio or publisher and require a private, in-house, custom s
 
 ## Contact
 
-If you spot any errors within the --parse_sitename documentation, have feedback on how we can make it easier to follow or simply want to discuss how awesome mods are, feel free to reach out to [--parse_email](mailto:--parse_email?subject=API) or come join us in our [discord channel](https://discord.mod.io). We are here to help you grow and maximise the potential of mods in your game.
+If you spot any errors within the --parse_sitename documentation, have feedback on how we can make it easier to follow or simply want to discuss how awesome mods are, feel free to reach out to [--parse_email](mailto:--parse_email?subject=API) or come join us in our [discord channel](--parse_discordurl). We are here to help you grow and maximise the potential of mods in your game.
