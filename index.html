@@ -941,7 +941,7 @@
 <h3 id="api-key-authentication">API Key Authentication</h3>
 <p>To access the API authentication is required. All users and games get a private API key. It is quick and easy to use in your apps but limited to read-only GET requests, due to the limited security it offers. View your private API key(s) <a href="https://mod.io/apikey/widget" class="colorbox">on production</a> or on the <a href="https://test.mod.io/apikey/widget" class="colorbox">test environment</a>.</p>
 <h3 id="web-overlay-authentication">Web Overlay Authentication</h3>
-<p>At the moment it is not possible to open the mod.io website in-game with the user pre-authenticated, however you can provide a hint by appending <code>?ref=SERVICE</code> to the end of the URL. What this tells mod.io, is that when the user attempts to perform an action that requires authentication, they will be prompted to login with their <code>SERVICE</code> account. For example if you want to take a mod creator to their mod edit page in-game on Steam, the URL would look something like: <code>https://gamename.mod.io/modname/edit?ref=steam</code>. You can optionally add <code>&amp;login=auto</code> as well to automatically start the login process. Services supported are <strong>steam</strong>, <strong>xbox</strong>, <strong>itchio</strong>, <strong>facebook</strong>, <strong>google</strong> and <strong>email</strong>. </p>
+<p>At the moment it is not possible to open the mod.io website in-game with the user pre-authenticated, however you can provide a hint by appending <code>?ref=SERVICE</code> to the end of the URL. What this tells mod.io, is that when the user attempts to perform an action that requires authentication, they will be prompted to login with their <code>SERVICE</code> account. For example if you want to take a mod creator to their mod edit page in-game on Steam, the URL would look something like: <code>https://gamename.mod.io/modname/edit?ref=steam</code>. You can optionally add <code>&amp;login=auto</code> as well to automatically start the login process. Services supported are <strong>steam</strong>, <strong>xbox</strong>, <strong>itchio</strong>, <strong>discord</strong>, <strong>facebook</strong>, <strong>google</strong> and <strong>email</strong>. </p>
 <h3 id="scopes-oauth-2">Scopes (OAuth 2)</h3>
 <p>mod.io allows you to specify the permission each access token has (default is <em>read+write</em>), this is done by the use of scopes. See below for a full list of scopes available, you must include at least one scope when generating a new token.</p>
 
@@ -1090,8 +1090,8 @@ curl -X POST https://api.mod.io/v1/games/1/team <span class="se">\</span>
 <td>Not Acceptable -- You supplied or requested an incorrect Content-Type.</td>
 </tr>
 <tr>
-<td><code>410</code></td>
-<td>Gone -- The requested resource is no longer available.</td>
+<td><code>409</code></td>
+<td>Conflict -- The request could not be completed due to a competing request (duplicate POST requests).</td>
 </tr>
 <tr>
 <td><code>422</code></td>
