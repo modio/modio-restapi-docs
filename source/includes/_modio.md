@@ -267,7 +267,7 @@ Response Code | Meaning
 `404` | Not Found -- The requested resource could not be found.
 `405` | Method Not Allowed -- The method of your request is incorrect.
 `406` | Not Acceptable -- You supplied or requested an incorrect Content-Type.
-`410` | Gone -- The requested resource is no longer available.
+`409` | Conflict -- The request could not be completed due to a competing request (duplicate POST requests).
 `422` | Unprocessable Entity -- The request was well formed but unable to be followed due to semantic errors.
 `429` | Too Many Requests -- You have made too [many requests](#rate-limiting), inspect headers for reset time.
 `500` | Internal Server Error -- The server encountered a problem processing your request. Please try again. (rare)
