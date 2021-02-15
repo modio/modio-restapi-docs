@@ -2094,7 +2094,16 @@ Get all games. Successful request will return an array of [Game Objects](#get-ga
           ],
           "hidden": false
         }
-      ]
+      ],
+      "stats": {
+        "game_id": 2,
+        "mods_count_total": 13,
+        "mods_downloads_today": 204,
+        "mods_downloads_total": 27492,
+        "mods_downloads_daily_average": 1230,
+        "mods_subscribers_total": 16394,
+        "date_expires": 1492564103
+      }
     },
     {
         ...
@@ -2273,7 +2282,16 @@ Get a game. Successful request will return a single [Game Object](#game-object).
       ],
       "hidden": false
     }
-  ]
+  ],
+  "stats": {
+    "game_id": 2,
+    "mods_count_total": 13,
+    "mods_downloads_today": 204,
+    "mods_downloads_total": 27492,
+    "mods_downloads_daily_average": 1230,
+    "mods_subscribers_total": 16394,
+    "date_expires": 1492564103
+  }
 }
 
 ```
@@ -2473,7 +2491,16 @@ Update details for a game. If you want to update the `icon`, `logo` or `header` 
       ],
       "hidden": false
     }
-  ]
+  ],
+  "stats": {
+    "game_id": 2,
+    "mods_count_total": 13,
+    "mods_downloads_today": 204,
+    "mods_downloads_total": 27492,
+    "mods_downloads_daily_average": 1230,
+    "mods_subscribers_total": 16394,
+    "date_expires": 1492564103
+  }
 }
 
 ```
@@ -6892,7 +6919,7 @@ Submit a positive or negative rating for a mod. Each user can supply only one ra
 
      Parameter|Type|Required|Description
      ---|---|---|---|
-     rating|integer|true|The _authenticated users_ mod rating:<br><br>__1__ = Positive rating (thumbs up)<br>__-1__ = Negative rating (thumbs down)<br>__0__ = No rating (removes any previously submitted rating)
+     rating|integer|true|The _authenticated users_ mod rating:<br><br>__1__ = Positive rating (thumbs up)<br>__-1__ = Negative rating (thumbs down)<br>__0__ = No rating (removes any previous submitted rating)
 
 
 > Example response
@@ -9914,7 +9941,16 @@ Get all games the _authenticated user_ added or is a team member of. Successful 
           ],
           "hidden": false
         }
-      ]
+      ],
+      "stats": {
+        "game_id": 2,
+        "mods_count_total": 13,
+        "mods_downloads_today": 204,
+        "mods_downloads_total": 27492,
+        "mods_downloads_daily_average": 1230,
+        "mods_subscribers_total": 16394,
+        "date_expires": 1492564103
+      }
     },
     {
         ...
@@ -11150,8 +11186,17 @@ md5|string|MD5 hash of the file.
       ],
       "hidden": false
     }
-  ]
-} 
+  ],
+  "stats": {
+    "game_id": 2,
+    "mods_count_total": 13,
+    "mods_downloads_today": 204,
+    "mods_downloads_total": 27492,
+    "mods_downloads_daily_average": 1230,
+    "mods_subscribers_total": 16394,
+    "date_expires": 1492564103
+  }
+}
 ```
 
 
@@ -11206,6 +11251,14 @@ summary|string|Summary of the games mod support.
 instructions|string|A guide about creating and uploading mods for this game to mod.io (applicable if submission_option = 0).
 instructions_url|string|Link to a mod.io guide, your modding wiki or a page where modders can learn how to make and submit mods to your games profile.
 profile_url|string|URL to the game's mod.io page.
+stats|[Game Stats Object](#schemagame_stats_object)|Contains stats data.
+» game_id|integer|Unique game id.
+» mods_count_total|integer|Available mod count for the game.
+» mods_downloads_today|integer|Mods downloaded today for the game.
+» mods_downloads_total|integer|Total Mods downloaded for the game.
+» mods_downloads_daily_average|integer|Average mods downloaded on a daily basis.
+» mods_subscribers_total|integer|Number of total users who have subscribed to the mods for the game.
+» date_expires|integer|Unix timestamp until this game's statistics are considered stale.
 tag_options|[Game Tag Option Object](#schemagame_tag_option_object)[]|Groups of tags configured by the game developer, that mods can select.
 » name|string|Name of the tag group.
 » type|string|Can multiple tags be selected via 'checkboxes' or should only a single tag be selected via a 'dropdown'.
@@ -11620,7 +11673,16 @@ result_total|integer|Total number of results found.
           ],
           "hidden": false
         }
-      ]
+      ],
+      "stats": {
+        "game_id": 2,
+        "mods_count_total": 13,
+        "mods_downloads_today": 204,
+        "mods_downloads_total": 27492,
+        "mods_downloads_daily_average": 1230,
+        "mods_subscribers_total": 16394,
+        "date_expires": 1492564103
+      }
     },
     {
         ...
@@ -11686,6 +11748,14 @@ data|[Game Object](#schemagame_object)[]|Array containing game objects.
 » instructions|string|A guide about creating and uploading mods for this game to mod.io (applicable if submission_option = 0).
 » instructions_url|string|Link to a mod.io guide, your modding wiki or a page where modders can learn how to make and submit mods to your games profile.
 » profile_url|string|URL to the game's mod.io page.
+» stats|[Game Stats Object](#schemagame_stats_object)|Contains stats data.
+»» game_id|integer|Unique game id.
+»» mods_count_total|integer|Available mod count for the game.
+»» mods_downloads_today|integer|Mods downloaded today for the game.
+»» mods_downloads_total|integer|Total Mods downloaded for the game.
+»» mods_downloads_daily_average|integer|Average mods downloaded on a daily basis.
+»» mods_subscribers_total|integer|Number of total users who have subscribed to the mods for the game.
+»» date_expires|integer|Unix timestamp until this game's statistics are considered stale.
 » tag_options|[Game Tag Option Object](#schemagame_tag_option_object)[]|Groups of tags configured by the game developer, that mods can select.
 »» name|string|Name of the tag group.
 »» type|string|Can multiple tags be selected via 'checkboxes' or should only a single tag be selected via a 'dropdown'.
