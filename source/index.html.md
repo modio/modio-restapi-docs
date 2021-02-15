@@ -6892,7 +6892,7 @@ Submit a positive or negative rating for a mod. Each user can supply only one ra
 
      Parameter|Type|Required|Description
      ---|---|---|---|
-     rating|integer|true|The _authenticated users_ mod rating:<br><br>__1__ = Positive rating (thumbs up)<br>__-1__ = Negative rating (thumbs down)
+     rating|integer|true|The _authenticated users_ mod rating:<br><br>__1__ = Positive rating (thumbs up)<br>__-1__ = Negative rating (thumbs down)<br>__0__ = No rating (removes any previously submitted rating)
 
 
 > Example response
@@ -6910,6 +6910,7 @@ Status|Meaning|Error Ref|Description|Response Schema
 ---|---|----|---|---|
 201|[Created](https://tools.ietf.org/html/rfc7231#section-6.3.2)||Resource created|[Message Object](#message-object)
 400|[Bad Request](https://tools.ietf.org/html/rfc7231#section-6.5.1)|15028|The authenticated user has already submitted a rating for this mod.|[Error Object](#schemaerror_object)
+400|[Bad Request](https://tools.ietf.org/html/rfc7231#section-6.5.1)|15043|The authenticated user is trying to revert a rating that doesn't exist.|[Error Object](#schemaerror_object)
 
 <aside class="auth-notice">
 To perform this request, you must be authenticated via one of the following methods:
