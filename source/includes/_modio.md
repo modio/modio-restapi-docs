@@ -26,15 +26,17 @@ __API__ | For connecting directly to the --parse_sitename REST API. | Web apps t
 __SDK__ | Drop our [open source C/C++ SDK](--parse_sdkurl) into your game to call --parse_sitename functionality. | Developers that want a SDK that abstracts the uploading, downloading and unzip flows behind easy to use function calls. | [Here](--parse_sdkurl)
 __Tools/Plugins__ | Use tools, plugins and wrappers created by the community to make implementation in various engines easy. | Game developers that want a pre-built modding solution for their engine (Unity, Unreal, GameMaker, Construct) of choice. | Available below
 
-Tools, plugins and wrappers made by the --parse_sitename team and our awesome community | - | - | -
+Official tools, plugins and wrappers made by the --parse_sitename team | - | - | -
 --- | --- | --- | ---
 ![Unity Plugin](images/tool-unity.png) | __Unity Plugin__<br />[SDK](https://github.com/modio/modio-unity)<br />[Getting Started](https://github.com/modio/modio-unity/wiki)<br /> | ![Unreal Plugin](images/tool-unreal.png) | __Unreal Plugin__<br />[SDK](https://github.com/modio/modio-ue4)<br />[Getting Started](https://github.com/modio/modio-ue4/wiki)<br />[Example](https://github.com/modio/modio-ue4-example)<br />
-![C/C++ SDK](images/tool-ccpp.png) | __C/C++ SDK__<br />[SDK](https://github.com/modio/modio-sdk)<br />[Getting Started](https://github.com/modio/modio-sdk/wiki)<br />[Tutorials](https://github.com/modio/modio-sdk/tree/master/examples/code-samples)<br />  | ![Haxe Wrapper](images/tool-haxe.png) | __Haxe Wrapper__<br />[SDK](https://github.com/modio/modio-haxe)<br />[Getting Started](https://github.com/modio/modio-haxe)<br />[Tutorials](https://github.com/Turupawn/modioOpenFLExample#openfl-integration)<br />
+![C/C++ SDK](images/tool-ccpp.png) | __C/C++ SDK__<br />[SDK](https://github.com/modio/modio-sdk)<br />[Getting Started](https://github.com/modio/modio-sdk/wiki)<br />[Tutorials](https://github.com/modio/modio-sdk/tree/master/examples/code-samples)<br />  | ![Discord Bot](images/tool-discordbot.png) | __Discord Bot__<br />[Instructions](https://github.com/modio/modio-discord-bot)<br />[Invite](--parse_discordboturl)<br /> 
+
+Tools, plugins and wrappers made by our awesome community. Want a tool added to the list? [Contact us!](mailto:--parse_email?subject=Publish Tool) | - | - | -
+--- | --- | --- | ---
 ![Rust Wrapper](images/tool-rust.png) | __Rust Wrapper__<br />[SDK](https://crates.io/crates/modio)<br />[Getting Started](https://github.com/nickelc/modio-rs)<br />[Tutorials](https://github.com/nickelc/modio-rs/tree/master/examples)<br /> | ![Python Wrapper](images/tool-python.png) | __Python Wrapper__<br />[SDK](https://github.com/ClementJ18/mod.io)<br />[Getting Started](https://github.com/ClementJ18/mod.io/#example)<br />[Tutorials](https://github.com/ClementJ18/mod.io/tree/master/examples)<br /> |<br />
-![Construct 2](images/tool-c2.png) | __Construct 2 Plugin__<br />[SDK](https://github.com/modio/modio-construct2)<br />[Getting Started](https://github.com/modio/modio-construct2)<br /> | ![Command Line Tool](images/tool-cmd.png) | __Command Line Tool__<br />[CMD](https://github.com/nickelc/modiom)<br />[Getting Started](https://github.com/nickelc/modiom)<br />
-![GameMaker Studio 2](images/tool-gm2.png) | __GameMaker Studio 2 Plugin__<br />[SDK](https://github.com/modio/modio-gamemaker2)<br />[Getting Started](https://github.com/modio/modio-gamemaker2)<br /> | ![Modio.NET](images/tool-dotnet.png) | __Modio.NET__<br />[SDK](https://github.com/nickelc/modio.net)<br />[Getting Started](https://github.com/nickelc/modio.net)<br />
-![Discord Bot](images/tool-discordbot.png) | __Discord Bot__<br />[Instructions](https://github.com/modio/modio-discord-bot)<br />[Invite](--parse_discordboturl)<br /> | | 
-Want a tool added to the list? [Contact us!](mailto:--parse_email?subject=Publish Tool)
+![Construct 2](images/tool-c2.png) | __Construct 2 Plugin__<br />[SDK](https://github.com/modio/modio-construct2)<br />[Getting Started](https://github.com/modio/modio-construct2)<br /> | ![GameMaker Studio 2](images/tool-gm2.png) | __GameMaker Studio 2 Plugin__<br />[SDK](https://github.com/modio/modio-gamemaker2)<br />[Getting Started](https://github.com/modio/modio-gamemaker2)<br />
+![Command Line Tool](images/tool-cmd.png) | __Command Line Tool__<br />[CMD](https://github.com/nickelc/modiom)<br />[Getting Started](https://github.com/nickelc/modiom)<br /> | ![Modio.NET](images/tool-dotnet.png) | __Modio.NET__<br />[SDK](https://github.com/nickelc/modio.net)<br />[Getting Started](https://github.com/nickelc/modio.net)<br />
+![Haxe Wrapper](images/tool-haxe.png) | __Haxe Wrapper__<br />[SDK](https://github.com/modio/modio-haxe)<br />[Getting Started](https://github.com/modio/modio-haxe)<br />[Tutorials](https://github.com/Turupawn/modioOpenFLExample#openfl-integration)<br /> | | 
 
 Here is a brief list of the things to know about our API, as explained in more detail in the following sections.
 
@@ -48,10 +50,10 @@ Here is a brief list of the things to know about our API, as explained in more d
 
 Authentication can be done via 4 ways:
 
-- Request an [API key (Read Only Access)](--parse_siteurl/apikey/widget) - or get a [test environment](--parse_sitetesturl/apikey/widget) key
+- Request an [API key (Read Only Access)](--parse_siteurl/apikey/widget) - or get a [test environment](--parse_sitetesturl/apikey) key
 - Use the [Email Authentication Flow (Read + Write Access)](#authenticate-via-email) (to create an OAuth 2 Access Token via **email**)
 - Use the [External App Tickets Flow (Read + Write Access)](#authenticate-via-steam) (to create an OAuth 2 Access Token automatically on popular platforms such as **Steam and GOG**)
-- Manually create an [OAuth 2 Access Token (Read + Write Access)](--parse_siteurl/oauth/widget) - or create a [test environment](--parse_sitetesturl/oauth/widget) token
+- Manually create an [OAuth 2 Access Token (Read + Write Access)](--parse_siteurl/oauth/widget) - or create a [test environment](--parse_sitetesturl/oauth) token
 
 You can use these methods of authentication interchangeably, depending on the level of access you require.
 
@@ -62,7 +64,7 @@ Access Token (OAuth 2) | Header | GET, POST, PUT, DELETE | Read, create, update,
 
 ### API Key Authentication
 
-To access the API authentication is required. All users and games get a private API key. It is quick and easy to use in your apps but limited to read-only GET requests, due to the limited security it offers. View your private API key(s) [on production](--parse_siteurl/apikey/widget) or on the [test environment](--parse_sitetesturl/apikey/widget).
+To access the API authentication is required. All users and games get a private API key. It is quick and easy to use in your apps but limited to read-only GET requests, due to the limited security it offers. View your private API key(s) [on production](--parse_siteurl/apikey/widget) or on the [test environment](--parse_sitetesturl/apikey).
 
 ### Email Authentication Flow
 
