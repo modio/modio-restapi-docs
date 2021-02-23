@@ -19,6 +19,57 @@ $(document).ready(function() {
 		window.location = "http://" + window.location.host + "/" + (latest ? '' : version);
 	});
 
+	// dropdown for unsuccessful responses
+	$("h3[id$='-responses']").next('table').each(function() {
+		table = $(this).find('tbody tr');
+		table.not(':first').hide();
+		var possibleErrorRefs = [];
+		var HTTP_BAD_REQUEST = 400;
+		var HTTP_CODE_INDEX = 0;
+		var ERROR_REF_INDEX = 2;
+		var SCHEMA_INDEX = 4;
+		var ERROR_REF_WIDTH_MULTIPLIER = 3;
+
+		$(this).find('tbody tr').each(function() {
+			var prevRowCode = $(this).closest('tr').prev().find('td').eq(HTTP_CODE_INDEX).text();
+			var currentRowErrorRef = $(this).find('td').eq(ERROR_REF_INDEX).text();
+			possibleErrorRefs.push('<strong>' + currentRowErrorRef + '</strong>');
+
+			if (currentRowErrorRef) {
+				const errorRefColumn = $(this).find('td').eq(ERROR_REF_INDEX);
+				errorRefColumn.html(currentRowErrorRef);
+				errorRefColumn.css('min-width', errorRefColumn.outerWidth()*ERROR_REF_WIDTH_MULTIPLIER);
+			}
+
+			if (prevRowCode >= HTTP_BAD_REQUEST) {
+				$(this).find('td').eq(SCHEMA_INDEX).html('');
+			}
+		});
+
+		if (table.length > 1 && possibleErrorRefs.length) {
+			$('<aside class="error-possible-codes-notice"><span>Possible error ref codes returned from this endpoint: ' + possibleErrorRefs.join(', ').replace(/,\s/, '') + '.</span><br><span class="error-preview-link"><a href="#" class="toggle-error-collapse">Click to see all error details</a></span></aside>').insertAfter($(this).closest('table'));
+		}
+	});
+
+	$('.toggle-error-collapse').click(function(e) {
+		e.preventDefault();
+		const SLIDE_DELAY = 75;
+		const SLIDE_SPEED = 600;
+		
+		const globalErrorSummary = 'The above <strong>error reference codes</strong> are specific to the <i>'+$(this).parents('aside').prevAll('h2').first().text()+'</i> endpoint and there is a possibility you can encounter more common error codes, such as validation and authentication errors when making a request. To ensure your application can handle all potential responses please refer to the <a href="#error-codes">common error codes</a> section.';
+		
+		$(this).parent().prevAll('span').html(globalErrorSummary);
+		$('.error-preview-link', this).remove();
+
+		$(this).parents('.error-possible-codes-notice').prev('table').each(function() {
+			$(this).find('tr').each(function(index) {
+				if ($(this).is(':not(:first-child)')) {
+					$(this).delay(index*SLIDE_DELAY).slideToggle(SLIDE_SPEED);
+				}
+			});
+		});
+		$(this).remove();
+	});
 
 	/**
 	 Custom highlighting
