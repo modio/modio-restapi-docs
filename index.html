@@ -11423,29 +11423,29 @@ curl -X POST https://api.mod.io/v1/games/<span class="o">{</span>game-id<span cl
 <td><a href="#message-object">Message Object</a></td>
 </tr>
 <tr>
-<td>400</td>
-<td><a href="https://tools.ietf.org/html/rfc7231#section-6.5.1">Bad Request</a></td>
+<td>403</td>
+<td><a href="https://tools.ietf.org/html/rfc7231#section-6.5.3">Forbidden</a></td>
 <td>15021</td>
 <td>The specified user is already a member of the team.</td>
 <td><a href="#schemaerror_object">Error Object</a></td>
 </tr>
 <tr>
-<td>400</td>
-<td><a href="https://tools.ietf.org/html/rfc7231#section-6.5.1">Bad Request</a></td>
+<td>403</td>
+<td><a href="https://tools.ietf.org/html/rfc7231#section-6.5.3">Forbidden</a></td>
 <td>15044</td>
 <td>The specified user has already been invited to the team.</td>
 <td><a href="#schemaerror_object">Error Object</a></td>
 </tr>
 <tr>
-<td>400</td>
-<td><a href="https://tools.ietf.org/html/rfc7231#section-6.5.1">Bad Request</a></td>
+<td>403</td>
+<td><a href="https://tools.ietf.org/html/rfc7231#section-6.5.3">Forbidden</a></td>
 <td>15043</td>
 <td>The maximum number of pending invites has been reached for this team. Cancel some or wait for them to be accepted.</td>
 <td><a href="#schemaerror_object">Error Object</a></td>
 </tr>
 <tr>
-<td>400</td>
-<td><a href="https://tools.ietf.org/html/rfc7231#section-6.5.1">Bad Request</a></td>
+<td>403</td>
+<td><a href="https://tools.ietf.org/html/rfc7231#section-6.5.3">Forbidden</a></td>
 <td>17009</td>
 <td>The maximum number of pending invites you can have pending on mod.io has been reached. Cancel some or wait for them to be accepted.</td>
 <td><a href="#schemaerror_object">Error Object</a></td>
@@ -11460,15 +11460,15 @@ curl -X POST https://api.mod.io/v1/games/<span class="o">{</span>game-id<span cl
 <tr>
 <td>403</td>
 <td><a href="https://tools.ietf.org/html/rfc7231#section-6.5.3">Forbidden</a></td>
-<td>21000</td>
-<td>The specified user could not be found.</td>
+<td>15020</td>
+<td>You can't add yourself to a team twice, let's not be greedy now.</td>
 <td><a href="#schemaerror_object">Error Object</a></td>
 </tr>
 <tr>
-<td>403</td>
-<td><a href="https://tools.ietf.org/html/rfc7231#section-6.5.3">Forbidden</a></td>
-<td>15020</td>
-<td>You can't add yourself to a team twice, let's not be greedy now.</td>
+<td>404</td>
+<td><a href="https://tools.ietf.org/html/rfc7231#section-6.5.4">Not Found</a></td>
+<td>21000</td>
+<td>The specified user could not be found.</td>
 <td><a href="#schemaerror_object">Error Object</a></td>
 </tr>
 </tbody>
@@ -11646,29 +11646,29 @@ Content-Type: application/x-www-form-urlencoded
 <td><a href="#message-object">Message Object</a></td>
 </tr>
 <tr>
-<td>400</td>
-<td><a href="https://tools.ietf.org/html/rfc7231#section-6.5.1">Bad Request</a></td>
+<td>403</td>
+<td><a href="https://tools.ietf.org/html/rfc7231#section-6.5.3">Forbidden</a></td>
 <td>23010</td>
 <td>You cannot demote the last admin. The team must always have at least one admin.</td>
 <td><a href="#schemaerror_object">Error Object</a></td>
 </tr>
 <tr>
-<td>400</td>
-<td><a href="https://tools.ietf.org/html/rfc7231#section-6.5.1">Bad Request</a></td>
+<td>403</td>
+<td><a href="https://tools.ietf.org/html/rfc7231#section-6.5.3">Forbidden</a></td>
 <td>23011</td>
 <td>The leader must always be an admin.</td>
 <td><a href="#schemaerror_object">Error Object</a></td>
 </tr>
 <tr>
-<td>400</td>
-<td><a href="https://tools.ietf.org/html/rfc7231#section-6.5.1">Bad Request</a></td>
+<td>403</td>
+<td><a href="https://tools.ietf.org/html/rfc7231#section-6.5.3">Forbidden</a></td>
 <td>23012</td>
 <td>You cannot demote the team leader, only replace them. To remove this leader please set another member as the leader.</td>
 <td><a href="#schemaerror_object">Error Object</a></td>
 </tr>
 <tr>
-<td>400</td>
-<td><a href="https://tools.ietf.org/html/rfc7231#section-6.5.1">Bad Request</a></td>
+<td>403</td>
+<td><a href="https://tools.ietf.org/html/rfc7231#section-6.5.3">Forbidden</a></td>
 <td>23013</td>
 <td>The requested team leader has not yet accepted their team invitation. Please try again once they have joined the team.</td>
 <td><a href="#schemaerror_object">Error Object</a></td>
@@ -11805,8 +11805,8 @@ Content-Type: application/x-www-form-urlencoded
 <td>None</td>
 </tr>
 <tr>
-<td>400</td>
-<td><a href="https://tools.ietf.org/html/rfc7231#section-6.5.1">Bad Request</a></td>
+<td>403</td>
+<td><a href="https://tools.ietf.org/html/rfc7231#section-6.5.3">Forbidden</a></td>
 <td>23012</td>
 <td>The team leader can not be removed. Please set a new leader before removing this member.</td>
 <td><a href="#schemaerror_object">Error Object</a></td>
