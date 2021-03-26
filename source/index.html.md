@@ -8520,13 +8520,13 @@ Send an invitation to a user to join a mod team. Successful request will return 
 Status|Meaning|Error Ref|Description|Response Schema
 ---|---|----|---|---|
 201|[Created](https://tools.ietf.org/html/rfc7231#section-6.3.2)||Created|[Message Object](#message-object)
-400|[Bad Request](https://tools.ietf.org/html/rfc7231#section-6.5.1)|15021|The specified user is already a member of the team.|[Error Object](#schemaerror_object)
-400|[Bad Request](https://tools.ietf.org/html/rfc7231#section-6.5.1)|15044|The specified user has already been invited to the team.|[Error Object](#schemaerror_object)
-400|[Bad Request](https://tools.ietf.org/html/rfc7231#section-6.5.1)|15043|The maximum number of pending invites has been reached for this team. Cancel some or wait for them to be accepted.|[Error Object](#schemaerror_object)
-400|[Bad Request](https://tools.ietf.org/html/rfc7231#section-6.5.1)|17009|The maximum number of pending invites you can have pending on mod.io has been reached. Cancel some or wait for them to be accepted.|[Error Object](#schemaerror_object)
+403|[Forbidden](https://tools.ietf.org/html/rfc7231#section-6.5.3)|15021|The specified user is already a member of the team.|[Error Object](#schemaerror_object)
+403|[Forbidden](https://tools.ietf.org/html/rfc7231#section-6.5.3)|15044|The specified user has already been invited to the team.|[Error Object](#schemaerror_object)
+403|[Forbidden](https://tools.ietf.org/html/rfc7231#section-6.5.3)|15043|The maximum number of pending invites has been reached for this team. Cancel some or wait for them to be accepted.|[Error Object](#schemaerror_object)
+403|[Forbidden](https://tools.ietf.org/html/rfc7231#section-6.5.3)|17009|The maximum number of pending invites you can have pending on mod.io has been reached. Cancel some or wait for them to be accepted.|[Error Object](#schemaerror_object)
 403|[Forbidden](https://tools.ietf.org/html/rfc7231#section-6.5.3)|15039|The authenticated user does not have permission to add team members to this mod, this action is restricted to team leaders & administrator's only.|[Error Object](#schemaerror_object)
-403|[Forbidden](https://tools.ietf.org/html/rfc7231#section-6.5.3)|21000|The specified user could not be found.|[Error Object](#schemaerror_object)
 403|[Forbidden](https://tools.ietf.org/html/rfc7231#section-6.5.3)|15020|You can't add yourself to a team twice, let's not be greedy now.|[Error Object](#schemaerror_object)
+404|[Not Found](https://tools.ietf.org/html/rfc7231#section-6.5.4)|21000|The specified user could not be found.|[Error Object](#schemaerror_object)
 
 ### Response Headers
 
@@ -8662,10 +8662,10 @@ Update a mod team members details. Successful request will return a [Message Obj
 Status|Meaning|Error Ref|Description|Response Schema
 ---|---|----|---|---|
 200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)||OK|[Message Object](#message-object)
-400|[Bad Request](https://tools.ietf.org/html/rfc7231#section-6.5.1)|23010|You cannot demote the last admin. The team must always have at least one admin.|[Error Object](#schemaerror_object)
-400|[Bad Request](https://tools.ietf.org/html/rfc7231#section-6.5.1)|23011|The leader must always be an admin.|[Error Object](#schemaerror_object)
-400|[Bad Request](https://tools.ietf.org/html/rfc7231#section-6.5.1)|23012|You cannot demote the team leader, only replace them. To remove this leader please set another member as the leader.|[Error Object](#schemaerror_object)
-400|[Bad Request](https://tools.ietf.org/html/rfc7231#section-6.5.1)|23013|The requested team leader has not yet accepted their team invitation. Please try again once they have joined the team.|[Error Object](#schemaerror_object)
+403|[Forbidden](https://tools.ietf.org/html/rfc7231#section-6.5.3)|23010|You cannot demote the last admin. The team must always have at least one admin.|[Error Object](#schemaerror_object)
+403|[Forbidden](https://tools.ietf.org/html/rfc7231#section-6.5.3)|23011|The leader must always be an admin.|[Error Object](#schemaerror_object)
+403|[Forbidden](https://tools.ietf.org/html/rfc7231#section-6.5.3)|23012|You cannot demote the team leader, only replace them. To remove this leader please set another member as the leader.|[Error Object](#schemaerror_object)
+403|[Forbidden](https://tools.ietf.org/html/rfc7231#section-6.5.3)|23013|The requested team leader has not yet accepted their team invitation. Please try again once they have joined the team.|[Error Object](#schemaerror_object)
 403|[Forbidden](https://tools.ietf.org/html/rfc7231#section-6.5.3)|15039|The authenticated user does not have permission to update team members for this mod, this action is restricted to team leaders & administrator's only.|[Error Object](#schemaerror_object)
 403|[Forbidden](https://tools.ietf.org/html/rfc7231#section-6.5.3)|23101|The authenticated user does not have permission to update the team leader for this mod.|[Error Object](#schemaerror_object)
 
@@ -8786,7 +8786,7 @@ Delete a user from a mod team or cancel their invitation. This will revoke their
 Status|Meaning|Error Ref|Description|Response Schema
 ---|---|----|---|---|
 204|[No Content](https://tools.ietf.org/html/rfc7231#section-6.3.5)||Successful Request. No Body Returned.|None
-400|[Bad Request](https://tools.ietf.org/html/rfc7231#section-6.5.1)|23012|The team leader can not be removed. Please set a new leader before removing this member.|[Error Object](#schemaerror_object)
+403|[Forbidden](https://tools.ietf.org/html/rfc7231#section-6.5.3)|23012|The team leader can not be removed. Please set a new leader before removing this member.|[Error Object](#schemaerror_object)
 403|[Forbidden](https://tools.ietf.org/html/rfc7231#section-6.5.3)|15040|The authenticated user does not have permission to delete team members for this mod, this action is restricted to team leaders & administrator's only.|[Error Object](#schemaerror_object)
 
 <aside class="auth-notice">
