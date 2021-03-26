@@ -67,10 +67,10 @@ Here is a brief list of the things to know about our API, as explained in more d
 
 Authentication can be done via 4 ways:
 
-- Request an [API key (Read Only Access)](https://mod.io/apikey/widget) - or get a [test environment](https://test.mod.io/apikey/widget) key
+- Request an [API key (Read Only Access)](https://mod.io/apikey/widget) - or get a [test environment](https://test.mod.io/apikey) key
 - Use the [Email Authentication Flow (Read + Write Access)](#authenticate-via-email) (to create an OAuth 2 Access Token via **email**)
 - Use the [External App Tickets Flow (Read + Write Access)](#authenticate-via-steam) (to create an OAuth 2 Access Token automatically on popular platforms such as **Steam and GOG**)
-- Manually create an [OAuth 2 Access Token (Read + Write Access)](https://mod.io/oauth/widget) - or create a [test environment](https://test.mod.io/oauth/widget) token
+- Manually create an [OAuth 2 Access Token (Read + Write Access)](https://mod.io/oauth/widget) - or create a [test environment](https://test.mod.io/oauth) token
 
 You can use these methods of authentication interchangeably, depending on the level of access you require.
 
@@ -81,7 +81,7 @@ Access Token (OAuth 2) | Header | GET, POST, PUT, DELETE | Read, create, update,
 
 ### API Key Authentication
 
-To access the API authentication is required. All users and games get a private API key. It is quick and easy to use in your apps but limited to read-only GET requests, due to the limited security it offers. View your private API key(s) [on production](https://mod.io/apikey/widget) or on the [test environment](https://test.mod.io/apikey/widget).
+To access the API authentication is required. All users and games get a private API key. It is quick and easy to use in your apps but limited to read-only GET requests, due to the limited security it offers. View your private API key(s) [on production](https://mod.io/apikey/widget) or on the [test environment](https://test.mod.io/apikey).
 
 ### Web Overlay Authentication
 
@@ -1782,6 +1782,136 @@ Status|Meaning|Error Ref|Description|Response Schema
 To perform this request, you must be authenticated via one of the following methods:
 <a href="#authentication">api_key</a>
 </aside>
+## Authenticate via Google
+
+> Example request
+
+```shell
+# You can also use wget
+curl -X POST https://api.mod.io/v1/external/googleauth?api_key=YourApiKey \
+  -H 'Content-Type: application/x-www-form-urlencoded' \ 
+  -H 'Accept: application/json' \
+  -d 'id_token=eyJhbXciOiJIUzI1Lizs....'
+
+```
+
+```http
+POST https://api.mod.io/v1/external/googleauth?api_key=YourApiKey HTTP/1.1
+Host: api.mod.io
+Content-Type: application/x-www-form-urlencoded
+Accept: application/json
+
+```
+
+```javascript
+var headers = {
+  'Content-Type':'application/x-www-form-urlencoded',
+  'Accept':'application/json'
+
+};
+
+$.ajax({
+  url: 'https://api.mod.io/v1/external/googleauth',
+  method: 'post',
+  data: '?api_key=YourApiKey',
+  headers: headers,
+  success: function(data) {
+    console.log(JSON.stringify(data));
+  }
+})
+```
+
+```javascript--nodejs
+const request = require('node-fetch');
+const inputBody = '{
+  "id_token": "eyJhbXciOiJIUzI1Lizs...."
+}';
+const headers = {
+  'Content-Type':'application/x-www-form-urlencoded',
+  'Accept':'application/json'
+
+};
+
+fetch('https://api.mod.io/v1/external/googleauth?api_key=YourApiKey',
+{
+  method: 'POST',
+  body: inputBody,
+  headers: headers
+})
+.then(function(res) {
+    return res.json();
+}).then(function(body) {
+    console.log(body);
+});
+```
+
+```python
+import requests
+headers = {
+  'Content-Type': 'application/x-www-form-urlencoded',
+  'Accept': 'application/json'
+}
+
+r = requests.post('https://api.mod.io/v1/external/googleauth', params={
+  'api_key': 'YourApiKey'
+}, headers = headers)
+
+print r.json()
+```
+
+```java
+URL obj = new URL("https://api.mod.io/v1/external/googleauth?api_key=YourApiKey");
+HttpURLConnection con = (HttpURLConnection) obj.openConnection();
+con.setRequestMethod("POST");
+int responseCode = con.getResponseCode();
+BufferedReader in = new BufferedReader(
+    new InputStreamReader(con.getInputStream()));
+String inputLine;
+StringBuffer response = new StringBuffer();
+while ((inputLine = in.readLine()) != null) {
+    response.append(inputLine);
+}
+in.close();
+System.out.println(response.toString());
+```
+
+`POST /external/googleauth`
+
+Request an access token on behalf of a Google user. A Successful request will return an [Access Token Object](#access-token-object).<br><br>__NOTE__: To use this endpoint you will need to setup some additional settings prior to being able to authenticate Epic Games users, for these instructions please [contact us](mailto:developers@mod.io)
+
+     Parameter|Type|Required|Description
+     ---|---|---|---|
+     id_token|string|true|The `id_token` value [returned from Google](https://developers.google.com/identity/sign-in/web/backend-auth#calling-the-tokeninfo-endpoint) after you have authenticated a user via the Google OAuth2 flow.
+     email|string||The users email address. If supplied, and the respective user does not have an email registered for their account we will send a confirmation email to confirm they have ownership of the specified email.<br><br>__NOTE__: If the user already has an email on record with us, this parameter will be ignored. This parameter should also be urlencoded before the request is sent.
+     date_expires|integer||Unix timestamp of date in which the returned token will expire. Value cannot be higher than the default value which is a week (unix timestamp + 604800 seconds). Using a token after it's expiry time has elapsed will result in a `401 Unauthorized` response.
+     terms_agreed|boolean||This MUST be set to `false` unless you have collected the [users agreement](#terms) prior to calling this endpoint in which case it can be set to `true` and will be recorded.<br><br>__NOTE:__ If this is set to `false` and the user has not agreed to the latest mod.io Terms of Use and Privacy Policy, an error `403 Forbidden (error_ref 11051)` will be returned and you will need to collect the [users agreement](#terms) and retry with this value set to `true` to authenticate the user.
+
+
+> Example response
+
+```json
+{
+  "code": 200,
+  "access_token": "eyJ0eXAiOiXKV1QibCJhbLciOiJeiUzI1.....",
+  "date_expires": 1570673249
+}
+
+```
+<h3 id="Authenticate-via-Google-responses">Responses</h3>
+
+Status|Meaning|Error Ref|Description|Response Schema
+---|---|----|---|---|
+200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)||Successful Request|[Access Token Object](#schemaaccess_token_object)
+401|[Unauthorized](https://tools.ietf.org/html/rfc7235#section-3.1)|11052|The access token was invalid/malformed.|[Error Object](#schemaerror_object)
+401|[Unauthorized](https://tools.ietf.org/html/rfc7235#section-3.1)|11056|mod.io was unable to validate the credentials with Google's authentication servers.|[Error Object](#schemaerror_object)
+401|[Unauthorized](https://tools.ietf.org/html/rfc7235#section-3.1)|11053|The Google ID Token is not valid yet.|[Error Object](#schemaerror_object)
+401|[Unauthorized](https://tools.ietf.org/html/rfc7235#section-3.1)|11054|The Google ID Token has expired. You should request another ID Token from the Google OAuth 2 flow and ensure it is delivered to mod.io before it expires.|[Error Object](#schemaerror_object)
+403|[Forbidden](https://tools.ietf.org/html/rfc7231#section-6.5.3)|11051|The user has not agreed to the mod.io Terms of Use. Please see terms_agreed parameter description and the [Terms](#terms) endpoint for more information.|[Error Object](#schemaerror_object)
+
+<aside class="auth-notice">
+To perform this request, you must be authenticated via one of the following methods:
+<a href="#authentication">api_key</a>
+</aside>
 ## Authenticate via Discord
 
 > Example request
@@ -2092,6 +2222,9 @@ Get all games. Successful request will return an array of [Game Objects](#get-ga
           "tags": [
             "Horror"
           ],
+          "tag_count_map": {
+            "Horror": 52
+          },
           "hidden": false
         }
       ],
@@ -2280,6 +2413,9 @@ Get a game. Successful request will return a single [Game Object](#game-object).
       "tags": [
         "Horror"
       ],
+      "tag_count_map": {
+        "Horror": 52
+      },
       "hidden": false
     }
   ],
@@ -2405,9 +2541,9 @@ System.out.println(response.toString());
 `PUT /games/{game-id}`
 
 Update details for a game. If you want to update the `icon`, `logo` or `header` fields you need to use the [Add Game Media](#add-game-media) endpoint. Successful request will return updated [Game Object](#game-object).
-
-    __NOTE:__ You can also edit [your games profile](https://mod.io/games) on the mod.io website. This is the recommended approach.
-
+    
+     __NOTE:__ You can also edit [your games profile](https://mod.io/games) on the mod.io website. This is the recommended approach.
+    
     Parameter|Type|Required|Description
     ---|---|---|---|
     status|integer||Status of a game. We recommend you never change this once you have accepted your game to be available via the API (see [status and visibility](#status-amp-visibility) for details):<br><br>__0__ = Not accepted<br>__1__ = Accepted
@@ -2489,6 +2625,9 @@ Update details for a game. If you want to update the `icon`, `logo` or `header` 
       "tags": [
         "Horror"
       ],
+      "tag_count_map": {
+        "Horror": 52
+      },
       "hidden": false
     }
   ],
@@ -2677,7 +2816,7 @@ Get all mods for the corresponding game. Successful request will return an array
       "description": "<p>Rogue HD Pack does exactly what you thi...",
       "description_plaintext": "Rogue HD Pack does exactly what you thi...",
       "metadata_blob": "rogue,hd,high-res,4k,hd textures",
-      "profile_url":"https://rogue-knight.mod.io/hd-pack",
+      "profile_url": "https://rogue-knight.mod.io/hd-pack",
       "media": {
         "youtube": [
           "https://www.youtube.com/watch?v=dQw4w9WgXcQ"
@@ -2730,6 +2869,7 @@ Get all mods for the corresponding game. Successful request will return an array
         "mod_id": 2,
         "popularity_rank_position": 13,
         "popularity_rank_total_mods": 204,
+        "downloads_today": 327,
         "downloads_total": 27492,
         "subscribers_total": 16394,
         "ratings_total": 1230,
@@ -2895,7 +3035,7 @@ Get a mod. Successful request will return a single [Mod Object](#mod-object).
   "description": "<p>Rogue HD Pack does exactly what you thi...",
   "description_plaintext": "Rogue HD Pack does exactly what you thi...",
   "metadata_blob": "rogue,hd,high-res,4k,hd textures",
-  "profile_url":"https://rogue-knight.mod.io/hd-pack",
+  "profile_url": "https://rogue-knight.mod.io/hd-pack",
   "media": {
     "youtube": [
       "https://www.youtube.com/watch?v=dQw4w9WgXcQ"
@@ -2948,6 +3088,7 @@ Get a mod. Successful request will return a single [Mod Object](#mod-object).
     "mod_id": 2,
     "popularity_rank_position": 13,
     "popularity_rank_total_mods": 204,
+    "downloads_today": 327,
     "downloads_total": 27492,
     "subscribers_total": 16394,
     "ratings_total": 1230,
@@ -3134,7 +3275,7 @@ Add a mod. Successful request will return the newly created [Mod Object](#mod-ob
   "description": "<p>Rogue HD Pack does exactly what you thi...",
   "description_plaintext": "Rogue HD Pack does exactly what you thi...",
   "metadata_blob": "rogue,hd,high-res,4k,hd textures",
-  "profile_url":"https://rogue-knight.mod.io/hd-pack",
+  "profile_url": "https://rogue-knight.mod.io/hd-pack",
   "media": {
     "youtube": [
       "https://www.youtube.com/watch?v=dQw4w9WgXcQ"
@@ -3187,6 +3328,7 @@ Add a mod. Successful request will return the newly created [Mod Object](#mod-ob
     "mod_id": 2,
     "popularity_rank_position": 13,
     "popularity_rank_total_mods": 204,
+    "downloads_today": 327,
     "downloads_total": 27492,
     "subscribers_total": 16394,
     "ratings_total": 1230,
@@ -3373,7 +3515,7 @@ Edit details for a mod. If you want to update the `logo` or media associated wit
   "description": "<p>Rogue HD Pack does exactly what you thi...",
   "description_plaintext": "Rogue HD Pack does exactly what you thi...",
   "metadata_blob": "rogue,hd,high-res,4k,hd textures",
-  "profile_url":"https://rogue-knight.mod.io/hd-pack",
+  "profile_url": "https://rogue-knight.mod.io/hd-pack",
   "media": {
     "youtube": [
       "https://www.youtube.com/watch?v=dQw4w9WgXcQ"
@@ -3426,6 +3568,7 @@ Edit details for a mod. If you want to update the `logo` or media associated wit
     "mod_id": 2,
     "popularity_rank_position": 13,
     "popularity_rank_total_mods": 204,
+    "downloads_today": 327,
     "downloads_total": 27492,
     "subscribers_total": 16394,
     "ratings_total": 1230,
@@ -4430,7 +4573,7 @@ Subscribe the _authenticated user_ to a corresponding mod. No body parameters ar
   "description": "<p>Rogue HD Pack does exactly what you thi...",
   "description_plaintext": "Rogue HD Pack does exactly what you thi...",
   "metadata_blob": "rogue,hd,high-res,4k,hd textures",
-  "profile_url":"https://rogue-knight.mod.io/hd-pack",
+  "profile_url": "https://rogue-knight.mod.io/hd-pack",
   "media": {
     "youtube": [
       "https://www.youtube.com/watch?v=dQw4w9WgXcQ"
@@ -4483,6 +4626,7 @@ Subscribe the _authenticated user_ to a corresponding mod. No body parameters ar
     "mod_id": 2,
     "popularity_rank_position": 13,
     "popularity_rank_total_mods": 204,
+    "downloads_today": 327,
     "downloads_total": 27492,
     "subscribers_total": 16394,
     "ratings_total": 1230,
@@ -4766,7 +4910,7 @@ Get all comments posted in the mods profile. Successful request will return an a
       "thread_position": "01",
       "karma": 1,
       "karma_guest": 0,
-      "content": "Hey <a href=\"https://mod.io/members/XanT\">XanT</a>, you should check out this mod!"
+      "content": "Hey <a href=\"https://mod.io/members/guest\">guest</a>, you should check out this mod!"
     }
   ],
   "result_count": 1,
@@ -4923,7 +5067,7 @@ Add a comment for the corresponding mod. Successful request will return the newl
   "thread_position": "01",
   "karma": 1,
   "karma_guest": 0,
-  "content": "Hey <a href=\"https://mod.io/members/XanT\">XanT</a>, you should check out this mod!"
+  "content": "Hey <a href=\"https://mod.io/members/guest\">guest</a>, you should check out this mod!"
 }
 
 ```
@@ -5061,7 +5205,7 @@ Get a Mod Comment. Successful request will return a single [Comment Object](#com
   "thread_position": "01",
   "karma": 1,
   "karma_guest": 0,
-  "content": "Hey <a href=\"https://mod.io/members/XanT\">XanT</a>, you should check out this mod!"
+  "content": "Hey <a href=\"https://mod.io/members/guest\">guest</a>, you should check out this mod!"
 }
 
 ```
@@ -5209,7 +5353,7 @@ Update a comment for the corresponding mod. Successful request will return the u
   "thread_position": "01",
   "karma": 1,
   "karma_guest": 0,
-  "content": "Hey <a href=\"https://mod.io/members/XanT\">XanT</a>, you should check out this mod!"
+  "content": "Hey <a href=\"https://mod.io/members/guest\">guest</a>, you should check out this mod!"
 }
 
 ```
@@ -6510,6 +6654,9 @@ Get all tags for the corresponding game, that can be applied to any of its mods.
       "tags": [
         "Horror"
       ],
+      "tag_count_map": {
+        "Horror": 52
+      },
       "hidden": false
     },
     {
@@ -7055,6 +7202,7 @@ Get all mod stats for mods of the corresponding game. Successful request will re
       "mod_id": 2,
       "popularity_rank_position": 13,
       "popularity_rank_total_mods": 204,
+      "downloads_today": 327,
       "downloads_total": 27492,
       "subscribers_total": 16394,
       "ratings_total": 1230,
@@ -7184,6 +7332,7 @@ Get mod stats for the corresponding mod. Successful request will return a single
   "mod_id": 2,
   "popularity_rank_position": 13,
   "popularity_rank_total_mods": 204,
+  "downloads_today": 327,
   "downloads_total": 27492,
   "subscribers_total": 16394,
   "ratings_total": 1230,
@@ -8188,7 +8337,7 @@ Get all users that are part of a mod team. Successful request will return an arr
      username|string|Username of the user.
      level|integer|Level of permission the user has:<br><br>__1__ = Moderator (can moderate comments and content attached)<br>__4__ = Manager (moderator access, including uploading builds and editing settings except supply and team members)<br>__8__ = Administrator (full access, including editing the supply and team)
      date_added|integer|Unix timestamp of the date the user was added to the team.
-     position|string|Custom title given to the user in this team.
+     pending|integer|Has the user accepted the team invite?<br><br>__0__ = Accepted<br>__1__ = Pending
 
 
 > Example response
@@ -8215,7 +8364,8 @@ Get all users that are part of a mod team. Successful request will return an arr
       },
       "level": 8,
       "date_added": 1492058857,
-      "position": "Supreme Overlord"
+      "position": "Supreme Overlord",
+      "invite_pending": 1
     },
     {
         ...
@@ -8343,7 +8493,9 @@ System.out.println(response.toString());
 
 `POST /games/{game-id}/mods/{mod-id}/team`
 
-Add a user to a mod team. Successful request will return [Message Object](#message-object) and fire a [__MOD_TEAM_CHANGED__ event](#get-mod-events).
+Send an invitation to a user to join a mod team. Successful request will return [Message Object](#message-object).
+     
+     When the invitee accepts the invitation a [__MOD_TEAM_CHANGED__ event](#get-mod-events) will be fired.
 
      __NOTE:__ You can also add users to [your mods team](https://mod.io/mods) on the mod.io website. This is the recommended way.
 
@@ -8359,7 +8511,7 @@ Add a user to a mod team. Successful request will return [Message Object](#messa
 ```json
 {
   "code": 201,
-  "message": "You have successfully added a member to the specified team."
+  "message": "You have successfully sent an invitation to the user to join this team."
 }
 
 ```
@@ -8368,10 +8520,13 @@ Add a user to a mod team. Successful request will return [Message Object](#messa
 Status|Meaning|Error Ref|Description|Response Schema
 ---|---|----|---|---|
 201|[Created](https://tools.ietf.org/html/rfc7231#section-6.3.2)||Created|[Message Object](#message-object)
+400|[Bad Request](https://tools.ietf.org/html/rfc7231#section-6.5.1)|15021|The specified user is already a member of the team.|[Error Object](#schemaerror_object)
+400|[Bad Request](https://tools.ietf.org/html/rfc7231#section-6.5.1)|15044|The specified user has already been invited to the team.|[Error Object](#schemaerror_object)
+400|[Bad Request](https://tools.ietf.org/html/rfc7231#section-6.5.1)|15043|The maximum number of pending invites has been reached for this team. Cancel some or wait for them to be accepted.|[Error Object](#schemaerror_object)
+400|[Bad Request](https://tools.ietf.org/html/rfc7231#section-6.5.1)|17009|The maximum number of pending invites you can have pending on mod.io has been reached. Cancel some or wait for them to be accepted.|[Error Object](#schemaerror_object)
 403|[Forbidden](https://tools.ietf.org/html/rfc7231#section-6.5.3)|15039|The authenticated user does not have permission to add team members to this mod, this action is restricted to team leaders & administrator's only.|[Error Object](#schemaerror_object)
 403|[Forbidden](https://tools.ietf.org/html/rfc7231#section-6.5.3)|21000|The specified user could not be found.|[Error Object](#schemaerror_object)
 403|[Forbidden](https://tools.ietf.org/html/rfc7231#section-6.5.3)|15020|You can't add yourself to a team twice, let's not be greedy now.|[Error Object](#schemaerror_object)
-400|[Bad Request](https://tools.ietf.org/html/rfc7231#section-6.5.1)|15021|The specified user is already a member of the team.|[Error Object](#schemaerror_object)
 
 ### Response Headers
 
@@ -8490,6 +8645,7 @@ Update a mod team members details. Successful request will return a [Message Obj
      ---|---|---|---|
      level|integer||Level of permission the user should have:<br><br>__1__ = Moderator (can moderate comments and content attached)<br>__4__ = Manager (moderator access, including uploading builds and editing settings except supply and team members)<br>__8__ = Administrator (full access, including editing the supply and team)
      position|string||Title of the users position. For example: 'Team Leader', 'Artist'.
+     leader|boolean||Set this member as the team leader. Leaders must have administrator access and can not be removed, only replaced with a new leader.
 
 
 > Example response
@@ -8506,7 +8662,12 @@ Update a mod team members details. Successful request will return a [Message Obj
 Status|Meaning|Error Ref|Description|Response Schema
 ---|---|----|---|---|
 200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)||OK|[Message Object](#message-object)
+400|[Bad Request](https://tools.ietf.org/html/rfc7231#section-6.5.1)|23010|You cannot demote the last admin. The team must always have at least one admin.|[Error Object](#schemaerror_object)
+400|[Bad Request](https://tools.ietf.org/html/rfc7231#section-6.5.1)|23011|The leader must always be an admin.|[Error Object](#schemaerror_object)
+400|[Bad Request](https://tools.ietf.org/html/rfc7231#section-6.5.1)|23012|You cannot demote the team leader, only replace them. To remove this leader please set another member as the leader.|[Error Object](#schemaerror_object)
+400|[Bad Request](https://tools.ietf.org/html/rfc7231#section-6.5.1)|23013|The requested team leader has not yet accepted their team invitation. Please try again once they have joined the team.|[Error Object](#schemaerror_object)
 403|[Forbidden](https://tools.ietf.org/html/rfc7231#section-6.5.3)|15039|The authenticated user does not have permission to update team members for this mod, this action is restricted to team leaders & administrator's only.|[Error Object](#schemaerror_object)
+403|[Forbidden](https://tools.ietf.org/html/rfc7231#section-6.5.3)|23101|The authenticated user does not have permission to update the team leader for this mod.|[Error Object](#schemaerror_object)
 
 <aside class="auth-notice">
 To perform this request, you must be authenticated via one of the following methods:
@@ -8611,7 +8772,7 @@ System.out.println(response.toString());
 
 `DELETE /games/{game-id}/mods/{mod-id}/team/{team-member-id}`
 
-Delete a user from a mod team. This will revoke their access rights if they are not the original creator of the resource. Successful request will return `204 No Content` and fire a [__MOD_TEAM_CHANGED__ event](#get-mod-events).
+Delete a user from a mod team or cancel their invitation. This will revoke their access rights if they are not the original creator of the resource. Successful request will return `204 No Content` and fire a [__MOD_TEAM_CHANGED__ event](#get-mod-events).
 
 
 > Example response
@@ -8625,6 +8786,7 @@ Delete a user from a mod team. This will revoke their access rights if they are 
 Status|Meaning|Error Ref|Description|Response Schema
 ---|---|----|---|---|
 204|[No Content](https://tools.ietf.org/html/rfc7231#section-6.3.5)||Successful Request. No Body Returned.|None
+400|[Bad Request](https://tools.ietf.org/html/rfc7231#section-6.5.1)|23012|The team leader can not be removed. Please set a new leader before removing this member.|[Error Object](#schemaerror_object)
 403|[Forbidden](https://tools.ietf.org/html/rfc7231#section-6.5.3)|15040|The authenticated user does not have permission to delete team members for this mod, this action is restricted to team leaders & administrator's only.|[Error Object](#schemaerror_object)
 
 <aside class="auth-notice">
@@ -9161,7 +9323,7 @@ Speed up your API calls, by batching them into a single HTTP request. This endpo
             "description": "<p>Rogue HD Pack does exactly what you thi...",
             "description_plaintext": "Rogue HD Pack does exactly what you thi...",
             "metadata_blob": "rogue,hd,high-res,4k,hd textures",
-            "profile_url":"https://rogue-knight.mod.io/hd-pack",
+            "profile_url": "https://rogue-knight.mod.io/hd-pack",
             "media": {
               "youtube": [
                 "https://www.youtube.com/watch?v=dQw4w9WgXcQ"
@@ -9214,6 +9376,7 @@ Speed up your API calls, by batching them into a single HTTP request. This endpo
               "mod_id": 2,
               "popularity_rank_position": 13,
               "popularity_rank_total_mods": 204,
+              "downloads_today": 327,
               "downloads_total": 27492,
               "subscribers_total": 16394,
               "ratings_total": 1230,
@@ -9538,7 +9701,7 @@ Get all mod's the _authenticated user_ is subscribed to. Successful request will
       "description": "<p>Rogue HD Pack does exactly what you thi...",
       "description_plaintext": "Rogue HD Pack does exactly what you thi...",
       "metadata_blob": "rogue,hd,high-res,4k,hd textures",
-      "profile_url":"https://rogue-knight.mod.io/hd-pack",
+      "profile_url": "https://rogue-knight.mod.io/hd-pack",
       "media": {
         "youtube": [
           "https://www.youtube.com/watch?v=dQw4w9WgXcQ"
@@ -9591,6 +9754,7 @@ Get all mod's the _authenticated user_ is subscribed to. Successful request will
         "mod_id": 2,
         "popularity_rank_position": 13,
         "popularity_rank_total_mods": 204,
+        "downloads_today": 327,
         "downloads_total": 27492,
         "subscribers_total": 16394,
         "ratings_total": 1230,
@@ -9939,6 +10103,9 @@ Get all games the _authenticated user_ added or is a team member of. Successful 
           "tags": [
             "Horror"
           ],
+          "tag_count_map": {
+            "Horror": 52
+          },
           "hidden": false
         }
       ],
@@ -10137,7 +10304,7 @@ Get all mods the _authenticated user_ added or is a team member of. Successful r
       "description": "<p>Rogue HD Pack does exactly what you thi...",
       "description_plaintext": "Rogue HD Pack does exactly what you thi...",
       "metadata_blob": "rogue,hd,high-res,4k,hd textures",
-      "profile_url":"https://rogue-knight.mod.io/hd-pack",
+      "profile_url": "https://rogue-knight.mod.io/hd-pack",
       "media": {
         "youtube": [
           "https://www.youtube.com/watch?v=dQw4w9WgXcQ"
@@ -10190,6 +10357,7 @@ Get all mods the _authenticated user_ added or is a team member of. Successful r
         "mod_id": 2,
         "popularity_rank_position": 13,
         "popularity_rank_total_mods": 204,
+        "downloads_today": 327,
         "downloads_total": 27492,
         "subscribers_total": 16394,
         "ratings_total": 1230,
@@ -10613,7 +10781,7 @@ thumb_100x100|string|URL to the medium avatar thumbnail.
       "description": "<p>Rogue HD Pack does exactly what you thi...",
       "description_plaintext": "Rogue HD Pack does exactly what you thi...",
       "metadata_blob": "rogue,hd,high-res,4k,hd textures",
-      "profile_url":"https://rogue-knight.mod.io/hd-pack",
+      "profile_url": "https://rogue-knight.mod.io/hd-pack",
       "media": {
         "youtube": [
           "https://www.youtube.com/watch?v=dQw4w9WgXcQ"
@@ -10666,6 +10834,7 @@ thumb_100x100|string|URL to the medium avatar thumbnail.
         "mod_id": 2,
         "popularity_rank_position": 13,
         "popularity_rank_total_mods": 204,
+        "downloads_today": 327,
         "downloads_total": 27492,
         "subscribers_total": 16394,
         "ratings_total": 1230,
@@ -10716,7 +10885,7 @@ data|[Mod Object](#schemamod_object)[]|Contains Mod Objects.
 »» thumb_1280x720|string|URL to the large logo thumbnail.
 » homepage_url|string|Official homepage of the mod.
 » name|string|Name of the mod.
-» name_id|string|Path for the mod on mod.io. For example: https://gamename.mod.io/__mod-name-id-here__
+» name_id|string|Path for the mod on mod.io. For example: https://rogue-knight.mod.io/__mod-name-id-here__
 » summary|string|Summary of the mod.
 » description|string|Detailed description of the mod which allows HTML.
 » description_plaintext|string|`description` field converted into plaintext.
@@ -10751,6 +10920,7 @@ data|[Mod Object](#schemamod_object)[]|Contains Mod Objects.
 »» mod_id|integer|Unique mod id.
 »» popularity_rank_position|integer|Current rank of the mod.
 »» popularity_rank_total_mods|integer|Number of ranking spots the current rank is measured against.
+»» downloads_today|integer|Number of total mod downloads. Count resets around 11:00 UTC+11 daily.
 »» downloads_total|integer|Number of total mod downloads.
 »» subscribers_total|integer|Number of total users who have subscribed to the mod.
 »» ratings_total|integer|Number of times this mod has been rated.
@@ -10823,7 +10993,7 @@ data|[Mod Object](#schemamod_object)[]|Contains Mod Objects.
         "description": "<p>Rogue HD Pack does exactly what you thi...",
         "description_plaintext": "Rogue HD Pack does exactly what you thi...",
         "metadata_blob": "rogue,hd,high-res,4k,hd textures",
-        "profile_url":"https://rogue-knight.mod.io/hd-pack",
+        "profile_url": "https://rogue-knight.mod.io/hd-pack",
         "media": {
           "youtube": [
             "https://www.youtube.com/watch?v=dQw4w9WgXcQ"
@@ -10876,6 +11046,7 @@ data|[Mod Object](#schemamod_object)[]|Contains Mod Objects.
           "mod_id": 2,
           "popularity_rank_position": 13,
           "popularity_rank_total_mods": 204,
+          "downloads_today": 327,
           "downloads_total": 27492,
           "subscribers_total": 16394,
           "ratings_total": 1230,
@@ -10929,7 +11100,7 @@ body|[Batch Body Object](#schemabatch_body_object)|Contains batch request data.
 »»» thumb_1280x720|string|URL to the large logo thumbnail.
 »» homepage_url|string|Official homepage of the mod.
 »» name|string|Name of the mod.
-»» name_id|string|Path for the mod on mod.io. For example: https://gamename.mod.io/__mod-name-id-here__
+»» name_id|string|Path for the mod on mod.io. For example: https://rogue-knight.mod.io/__mod-name-id-here__
 »» summary|string|Summary of the mod.
 »» description|string|Detailed description of the mod which allows HTML.
 »» description_plaintext|string|`description` field converted into plaintext.
@@ -10964,6 +11135,7 @@ body|[Batch Body Object](#schemabatch_body_object)|Contains batch request data.
 »»» mod_id|integer|Unique mod id.
 »»» popularity_rank_position|integer|Current rank of the mod.
 »»» popularity_rank_total_mods|integer|Number of ranking spots the current rank is measured against.
+»»» downloads_today|integer|Number of total mod downloads. Count resets around 11:00 UTC+11 daily.
 »»» downloads_total|integer|Number of total mod downloads.
 »»» subscribers_total|integer|Number of total users who have subscribed to the mod.
 »»» ratings_total|integer|Number of times this mod has been rated.
@@ -11014,7 +11186,7 @@ headers|[[Key-Value Pair Object](#schemakey-value_pair_object)]|Contains key-val
   "thread_position": "01",
   "karma": 1,
   "karma_guest": 0,
-  "content": "Hey <a href=\"https://mod.io/members/XanT\">XanT</a>, you should check out this mod!"
+  "content": "Hey <a href=\"https://mod.io/members/guest\">guest</a>, you should check out this mod!"
 } 
 ```
 
@@ -11184,6 +11356,9 @@ md5|string|MD5 hash of the file.
       "tags": [
         "Horror"
       ],
+      "tag_count_map": {
+        "Horror": 52
+      },
       "hidden": false
     }
   ],
@@ -11196,7 +11371,7 @@ md5|string|MD5 hash of the file.
     "mods_subscribers_total": 16394,
     "date_expires": 1492564103
   }
-}
+} 
 ```
 
 
@@ -11262,6 +11437,7 @@ stats|[Game Stats Object](#schemagame_stats_object)|Contains stats data.
 tag_options|[Game Tag Option Object](#schemagame_tag_option_object)[]|Groups of tags configured by the game developer, that mods can select.
 » name|string|Name of the tag group.
 » type|string|Can multiple tags be selected via 'checkboxes' or should only a single tag be selected via a 'dropdown'.
+» tag_count_map|object|List of tag names and the count of mods with these tags.
 » hidden|boolean|Groups of tags flagged as 'admin only' should only be used for filtering, and should not be displayed to users. Groups that are hidden will only be returned in a response if the authenticated user in the request is a team member of the parent game with `Manager` or `Administrator` privileges.
 » tags|string[]|Array of tags in this group.
 
@@ -11311,6 +11487,9 @@ date_expires|integer|Unix timestamp until this game's statistics are considered 
   "tags": [
     "Horror"
   ],
+  "tag_count_map": {
+    "Horror": 52
+  },
   "hidden": false
 } 
 ```
@@ -11322,6 +11501,7 @@ Name|Type|Description
 ---|---|---|---|
 name|string|Name of the tag group.
 type|string|Can multiple tags be selected via 'checkboxes' or should only a single tag be selected via a 'dropdown'.
+tag_count_map|object|List of tag names and the count of mods with these tags.
 hidden|boolean|Groups of tags flagged as 'admin only' should only be used for filtering, and should not be displayed to users. Groups that are hidden will only be returned in a response if the authenticated user in the request is a team member of the parent game with `Manager` or `Administrator` privileges.
 tags|string[]|Array of tags in this group.
 
@@ -11383,7 +11563,7 @@ tags|string[]|Array of tags in this group.
             "description": "<p>Rogue HD Pack does exactly what you thi...",
             "description_plaintext": "Rogue HD Pack does exactly what you thi...",
             "metadata_blob": "rogue,hd,high-res,4k,hd textures",
-            "profile_url":"https://rogue-knight.mod.io/hd-pack",
+            "profile_url": "https://rogue-knight.mod.io/hd-pack",
             "media": {
               "youtube": [
                 "https://www.youtube.com/watch?v=dQw4w9WgXcQ"
@@ -11436,6 +11616,7 @@ tags|string[]|Array of tags in this group.
               "mod_id": 2,
               "popularity_rank_position": 13,
               "popularity_rank_total_mods": 204,
+              "downloads_today": 327,
               "downloads_total": 27492,
               "subscribers_total": 16394,
               "ratings_total": 1230,
@@ -11499,7 +11680,7 @@ data|[Batch Object](#schemabatch_object)[]|Array containing any response object.
 »»»» thumb_1280x720|string|URL to the large logo thumbnail.
 »»» homepage_url|string|Official homepage of the mod.
 »»» name|string|Name of the mod.
-»»» name_id|string|Path for the mod on mod.io. For example: https://gamename.mod.io/__mod-name-id-here__
+»»» name_id|string|Path for the mod on mod.io. For example: https://rogue-knight.mod.io/__mod-name-id-here__
 »»» summary|string|Summary of the mod.
 »»» description|string|Detailed description of the mod which allows HTML.
 »»» description_plaintext|string|`description` field converted into plaintext.
@@ -11534,6 +11715,7 @@ data|[Batch Object](#schemabatch_object)[]|Array containing any response object.
 »»»» mod_id|integer|Unique mod id.
 »»»» popularity_rank_position|integer|Current rank of the mod.
 »»»» popularity_rank_total_mods|integer|Number of ranking spots the current rank is measured against.
+»»»» downloads_today|integer|Number of total mod downloads. Count resets around 11:00 UTC+11 daily.
 »»»» downloads_total|integer|Number of total mod downloads.
 »»»» subscribers_total|integer|Number of total users who have subscribed to the mod.
 »»»» ratings_total|integer|Number of times this mod has been rated.
@@ -11573,6 +11755,9 @@ result_total|integer|Total number of results found.
       "tags": [
         "Horror"
       ],
+      "tag_count_map": {
+        "Horror": 52
+      },
       "hidden": false
     },
     {
@@ -11594,6 +11779,7 @@ Name|Type|Description
 data|[Game Tag Option Object](#schemagame_tag_option_object)[]|Array containing game tag objects.
 » name|string|Name of the tag group.
 » type|string|Can multiple tags be selected via 'checkboxes' or should only a single tag be selected via a 'dropdown'.
+» tag_count_map|object|List of tag names and the count of mods with these tags.
 » hidden|boolean|Groups of tags flagged as 'admin only' should only be used for filtering, and should not be displayed to users. Groups that are hidden will only be returned in a response if the authenticated user in the request is a team member of the parent game with `Manager` or `Administrator` privileges.
 » tags|string[]|Array of tags in this group.
 result_count|integer|Number of results returned in this request.
@@ -11671,6 +11857,9 @@ result_total|integer|Total number of results found.
           "tags": [
             "Horror"
           ],
+          "tag_count_map": {
+            "Horror": 52
+          },
           "hidden": false
         }
       ],
@@ -11759,6 +11948,7 @@ data|[Game Object](#schemagame_object)[]|Array containing game objects.
 » tag_options|[Game Tag Option Object](#schemagame_tag_option_object)[]|Groups of tags configured by the game developer, that mods can select.
 »» name|string|Name of the tag group.
 »» type|string|Can multiple tags be selected via 'checkboxes' or should only a single tag be selected via a 'dropdown'.
+»» tag_count_map|object|List of tag names and the count of mods with these tags.
 »» hidden|boolean|Groups of tags flagged as 'admin only' should only be used for filtering, and should not be displayed to users. Groups that are hidden will only be returned in a response if the authenticated user in the request is a team member of the parent game with `Manager` or `Administrator` privileges.
 »» tags|string[]|Array of tags in this group.
 result_count|integer|Number of results returned in this request.
@@ -11799,7 +11989,7 @@ result_total|integer|Total number of results found.
       "thread_position": "01",
       "karma": 1,
       "karma_guest": 0,
-      "content": "Hey <a href=\"https://mod.io/members/XanT\">XanT</a>, you should check out this mod!"
+      "content": "Hey <a href=\"https://mod.io/members/guest\">guest</a>, you should check out this mod!"
     }
   ],
   "result_count": 1,
@@ -11975,6 +12165,7 @@ result_total|integer|Total number of results found.
       "mod_id": 2,
       "popularity_rank_position": 13,
       "popularity_rank_total_mods": 204,
+      "downloads_today": 327,
       "downloads_total": 27492,
       "subscribers_total": 16394,
       "ratings_total": 1230,
@@ -12005,6 +12196,7 @@ data|[Mod Stats Object](#schemamod_stats_object)[]|Array containing stats object
 » mod_id|integer|Unique mod id.
 » popularity_rank_position|integer|Current rank of the mod.
 » popularity_rank_total_mods|integer|Number of ranking spots the current rank is measured against.
+» downloads_today|integer|Number of total mod downloads. Count resets around 11:00 UTC+11 daily.
 » downloads_total|integer|Number of total mod downloads.
 » subscribers_total|integer|Number of total users who have subscribed to the mod.
 » ratings_total|integer|Number of times this mod has been rated.
@@ -12175,7 +12367,7 @@ result_total|integer|Total number of results found.
       "description": "<p>Rogue HD Pack does exactly what you thi...",
       "description_plaintext": "Rogue HD Pack does exactly what you thi...",
       "metadata_blob": "rogue,hd,high-res,4k,hd textures",
-      "profile_url":"https://rogue-knight.mod.io/hd-pack",
+      "profile_url": "https://rogue-knight.mod.io/hd-pack",
       "media": {
         "youtube": [
           "https://www.youtube.com/watch?v=dQw4w9WgXcQ"
@@ -12228,6 +12420,7 @@ result_total|integer|Total number of results found.
         "mod_id": 2,
         "popularity_rank_position": 13,
         "popularity_rank_total_mods": 204,
+        "downloads_today": 327,
         "downloads_total": 27492,
         "subscribers_total": 16394,
         "ratings_total": 1230,
@@ -12285,7 +12478,7 @@ data|[Mod Object](#schemamod_object)[]|Array containing mod objects.
 »» thumb_1280x720|string|URL to the large logo thumbnail.
 » homepage_url|string|Official homepage of the mod.
 » name|string|Name of the mod.
-» name_id|string|Path for the mod on mod.io. For example: https://gamename.mod.io/__mod-name-id-here__
+» name_id|string|Path for the mod on mod.io. For example: https://rogue-knight.mod.io/__mod-name-id-here__
 » summary|string|Summary of the mod.
 » description|string|Detailed description of the mod which allows HTML.
 » description_plaintext|string|`description` field converted into plaintext.
@@ -12320,6 +12513,7 @@ data|[Mod Object](#schemamod_object)[]|Array containing mod objects.
 »» mod_id|integer|Unique mod id.
 »» popularity_rank_position|integer|Current rank of the mod.
 »» popularity_rank_total_mods|integer|Number of ranking spots the current rank is measured against.
+»» downloads_today|integer|Number of total mod downloads. Count resets around 11:00 UTC+11 daily.
 »» downloads_total|integer|Number of total mod downloads.
 »» subscribers_total|integer|Number of total users who have subscribed to the mod.
 »» ratings_total|integer|Number of times this mod has been rated.
@@ -12369,7 +12563,8 @@ result_total|integer|Total number of results found.
       },
       "level": 8,
       "date_added": 1492058857,
-      "position": "Supreme Overlord"
+      "position": "Supreme Overlord",
+      "invite_pending": 1
     },
     {
         ...
@@ -12405,6 +12600,7 @@ data|[Team Member Object](#schemateam_member_object)[]|Array containing team mem
 » level|integer|Level of permission the user has:<br><br>__1__ = Moderator (can moderate comments and content attached)<br>__4__ = Manager (moderator access, including uploading builds and editing settings except supply and team members)<br>__8__ = Administrator (full access, including editing the supply and team)
 » date_added|integer|Unix timestamp of the date the user was added to the team.
 » position|string|Custom title given to the user in this team.
+» invite_pending|integer|If the team member invitation is still pending:<br><br>__0__ = Invitation Accepted<br>__1__ = Invitation Pending
 result_count|integer|Number of results returned in this request.
 result_offset|integer|Number of results skipped over. Defaults to 0 unless overridden by `_offset` filter.
 result_limit|integer|Maximum number of results returned in the request. Defaults to 100 (max) unless overridden by `_limit` filter.
@@ -12488,7 +12684,7 @@ result_total|integer|Total number of results found.
 
 Name|Type|Description
 ---|---|---|---|
-data|[Rating Object](#schemarating_object)[]|Array containing rating objects.
+data|array|Array containing rating objects.
 » game_id|integer|Unique game id.
 » mod_id|integer|Unique mod id.
 » rating|integer|Mod rating value.<br><br>__1__ = Positive Rating<br>__-1__ = Negative Rating
@@ -12799,7 +12995,7 @@ images|[Image Object](#schemaimage_object)[]|Array of image objects (a gallery).
   "description": "<p>Rogue HD Pack does exactly what you thi...",
   "description_plaintext": "Rogue HD Pack does exactly what you thi...",
   "metadata_blob": "rogue,hd,high-res,4k,hd textures",
-  "profile_url":"https://rogue-knight.mod.io/hd-pack",
+  "profile_url": "https://rogue-knight.mod.io/hd-pack",
   "media": {
     "youtube": [
       "https://www.youtube.com/watch?v=dQw4w9WgXcQ"
@@ -12852,6 +13048,7 @@ images|[Image Object](#schemaimage_object)[]|Array of image objects (a gallery).
     "mod_id": 2,
     "popularity_rank_position": 13,
     "popularity_rank_total_mods": 204,
+    "downloads_today": 327,
     "downloads_total": 27492,
     "subscribers_total": 16394,
     "ratings_total": 1230,
@@ -12899,7 +13096,7 @@ logo|[Logo Object](#schemalogo_object)|Contains logo data.
 » thumb_1280x720|string|URL to the large logo thumbnail.
 homepage_url|string|Official homepage of the mod.
 name|string|Name of the mod.
-name_id|string|Path for the mod on mod.io. For example: https://gamename.mod.io/__mod-name-id-here__
+name_id|string|Path for the mod on mod.io. For example: https://rogue-knight.mod.io/__mod-name-id-here__
 summary|string|Summary of the mod.
 description|string|Detailed description of the mod which allows HTML.
 description_plaintext|string|`description` field converted into plaintext.
@@ -12934,6 +13131,7 @@ stats|[Mod Stats Object](#schemamod_stats_object)|Contains stats data.
 » mod_id|integer|Unique mod id.
 » popularity_rank_position|integer|Current rank of the mod.
 » popularity_rank_total_mods|integer|Number of ranking spots the current rank is measured against.
+» downloads_today|integer|Number of total mod downloads. Count resets around 11:00 UTC+11 daily.
 » downloads_total|integer|Number of total mod downloads.
 » subscribers_total|integer|Number of total users who have subscribed to the mod.
 » ratings_total|integer|Number of times this mod has been rated.
@@ -12962,6 +13160,7 @@ tags|[Mod Tag Object](#schemamod_tag_object)[]|Contains mod tag data.
   "mod_id": 2,
   "popularity_rank_position": 13,
   "popularity_rank_total_mods": 204,
+  "downloads_today": 327,
   "downloads_total": 27492,
   "subscribers_total": 16394,
   "ratings_total": 1230,
@@ -12982,6 +13181,7 @@ Name|Type|Description
 mod_id|integer|Unique mod id.
 popularity_rank_position|integer|Current rank of the mod.
 popularity_rank_total_mods|integer|Number of ranking spots the current rank is measured against.
+downloads_today|integer|Number of total mod downloads. Count resets around 11:00 UTC+11 daily.
 downloads_total|integer|Number of total mod downloads.
 subscribers_total|integer|Number of total users who have subscribed to the mod.
 ratings_total|integer|Number of times this mod has been rated.
@@ -13121,7 +13321,8 @@ date_added|integer|Unix timestamp of date rating was submitted.
   },
   "level": 8,
   "date_added": 1492058857,
-  "position": "Supreme Overlord"
+  "position": "Supreme Overlord",
+  "invite_pending": 1
 } 
 ```
 
@@ -13147,6 +13348,7 @@ user|[User Object](#schemauser_object)|Contains user data.
 level|integer|Level of permission the user has:<br><br>__1__ = Moderator (can moderate comments and content attached)<br>__4__ = Manager (moderator access, including uploading builds and editing settings except supply and team members)<br>__8__ = Administrator (full access, including editing the supply and team)
 date_added|integer|Unix timestamp of the date the user was added to the team.
 position|string|Custom title given to the user in this team.
+invite_pending|integer|If the team member invitation is still pending:<br><br>__0__ = Invitation Accepted<br>__1__ = Invitation Pending
 
 
 
