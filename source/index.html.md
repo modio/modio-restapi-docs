@@ -45,15 +45,17 @@ __API__ | For connecting directly to the mod.io REST API. | Web apps that need a
 __SDK__ | Drop our [open source C/C++ SDK](https://sdk.mod.io) into your game to call mod.io functionality. | Developers that want a SDK that abstracts the uploading, downloading and unzip flows behind easy to use function calls. | [Here](https://sdk.mod.io)
 __Tools/Plugins__ | Use tools, plugins and wrappers created by the community to make implementation in various engines easy. | Game developers that want a pre-built modding solution for their engine (Unity, Unreal, GameMaker, Construct) of choice. | Available below
 
-Tools, plugins and wrappers made by the mod.io team and our awesome community | - | - | -
+Official tools, plugins and wrappers made or supported by the mod.io team | - | - | -
 --- | --- | --- | ---
 ![Unity Plugin](images/tool-unity.png) | __Unity Plugin__<br />[SDK](https://github.com/modio/modio-unity)<br />[Getting Started](https://github.com/modio/modio-unity/wiki)<br /> | ![Unreal Plugin](images/tool-unreal.png) | __Unreal Plugin__<br />[SDK](https://github.com/modio/modio-ue4)<br />[Getting Started](https://github.com/modio/modio-ue4/wiki)<br />[Example](https://github.com/modio/modio-ue4-example)<br />
-![C/C++ SDK](images/tool-ccpp.png) | __C/C++ SDK__<br />[SDK](https://github.com/modio/modio-sdk)<br />[Getting Started](https://github.com/modio/modio-sdk/wiki)<br />[Tutorials](https://github.com/modio/modio-sdk/tree/master/examples/code-samples)<br />  | ![Haxe Wrapper](images/tool-haxe.png) | __Haxe Wrapper__<br />[SDK](https://github.com/modio/modio-haxe)<br />[Getting Started](https://github.com/modio/modio-haxe)<br />[Tutorials](https://github.com/Turupawn/modioOpenFLExample#openfl-integration)<br />
+![C/C++ SDK](images/tool-ccpp.png) | __C/C++ SDK__<br />[SDK](https://github.com/modio/modio-sdk)<br />[Getting Started](https://github.com/modio/modio-sdk/wiki)<br />[Tutorials](https://github.com/modio/modio-sdk/tree/master/examples/code-samples)<br />  | ![Discord Bot](images/tool-discordbot.png) | __Discord Bot__<br />[Instructions](https://github.com/modio/modio-discord-bot)<br />[Invite](https://discordbot.mod.io)<br />
+
+Tools, plugins and wrappers made by our awesome community. Is there a tool out there that should be added to the list? [Get in touch!](mailto:developers@mod.io?subject=Publish Tool) | - | - | -
+--- | --- | --- | ---
 ![Rust Wrapper](images/tool-rust.png) | __Rust Wrapper__<br />[SDK](https://crates.io/crates/modio)<br />[Getting Started](https://github.com/nickelc/modio-rs)<br />[Tutorials](https://github.com/nickelc/modio-rs/tree/master/examples)<br /> | ![Python Wrapper](images/tool-python.png) | __Python Wrapper__<br />[SDK](https://github.com/ClementJ18/mod.io)<br />[Getting Started](https://github.com/ClementJ18/mod.io/#example)<br />[Tutorials](https://github.com/ClementJ18/mod.io/tree/master/examples)<br /> |<br />
-![Construct 2](images/tool-c2.png) | __Construct 2 Plugin__<br />[SDK](https://github.com/modio/modio-construct2)<br />[Getting Started](https://github.com/modio/modio-construct2)<br /> | ![Command Line Tool](images/tool-cmd.png) | __Command Line Tool__<br />[CMD](https://github.com/nickelc/modiom)<br />[Getting Started](https://github.com/nickelc/modiom)<br />
-![GameMaker Studio 2](images/tool-gm2.png) | __GameMaker Studio 2 Plugin__<br />[SDK](https://github.com/modio/modio-gamemaker2)<br />[Getting Started](https://github.com/modio/modio-gamemaker2)<br /> | ![Modio.NET](images/tool-dotnet.png) | __Modio.NET__<br />[SDK](https://github.com/nickelc/modio.net)<br />[Getting Started](https://github.com/nickelc/modio.net)<br />
-![Discord Bot](images/tool-discordbot.png) | __Discord Bot__<br />[Instructions](https://github.com/modio/modio-discord-bot)<br />[Invite](https://discordbot.mod.io)<br /> | | 
-Want a tool added to the list? [Contact us!](mailto:developers@mod.io?subject=Publish Tool)
+![Construct 2](images/tool-c2.png) | __Construct 2 Plugin__<br />[SDK](https://github.com/modio/modio-construct2)<br />[Getting Started](https://github.com/modio/modio-construct2)<br /> | ![GameMaker Studio 2](images/tool-gm2.png) | __GameMaker Studio 2 Plugin__<br />[SDK](https://github.com/modio/modio-gamemaker2)<br />[Getting Started](https://github.com/modio/modio-gamemaker2)<br />
+![Haxe Wrapper](images/tool-haxe.png) | __Haxe Wrapper__<br />[SDK](https://github.com/modio/modio-haxe)<br />[Getting Started](https://github.com/modio/modio-haxe)<br />[Tutorials](https://github.com/Turupawn/modioOpenFLExample#openfl-integration)<br /> | ![Modio.NET](images/tool-dotnet.png) | __Modio.NET__<br />[SDK](https://github.com/nickelc/modio.net)<br />[Getting Started](https://github.com/nickelc/modio.net)<br />
+![Command Line Tool](images/tool-cmd.png) | __Command Line Tool__<br />[CMD](https://github.com/nickelc/modiom)<br />[Getting Started](https://github.com/nickelc/modiom)<br /> | ![GitHub Action Mod Uploader](images/tool-actions.png) | __GitHub Action Mod Uploader__<br />[GitHub](https://github.com/nickelc/upload-to-modio)<br />[Usage](https://github.com/nickelc/upload-to-modio#usage)<br />
 
 Here is a brief list of the things to know about our API, as explained in more detail in the following sections.
 
@@ -751,6 +753,62 @@ If you are a large studio or publisher and require a private, in-house, custom s
 ## Contact
 
 If you spot any errors within the mod.io documentation, have feedback on how we can make it easier to follow or simply want to discuss how awesome mods are, feel free to reach out to [developers@mod.io](mailto:developers@mod.io?subject=API) or come join us in our [discord channel](https://discord.mod.io). We are here to help you grow and maximise the potential of mods in your game.
+
+# Targeting Platforms
+
+## Targeting a Platform
+
+When making API requests, you have the ability to tell mod.io what Platform the request is originating from and more importantly what platform the returned data is destined for. If you are using mod.io on Xbox One for example, it is __important__ you specify the game client is running on Xbox One. 
+
+Passing this header enables mod.io to return data that is relevant to the specific platforms (currently a work-in-progress) such as:
+
+- Supported mods
+- Supported modfiles the player will download
+- Supported tags the player is able to filter on
+- and much more
+
+To do this, all you need to do is pass the `X-Modio-Platform` header in every request you make to the mod.io API.
+
+Official mod.io [Plugins and SDK's](#implementation) will automatically supply this value for you providing you have specified the correct platform in the tools' settings. We __strongly recommend__ you supply this header in every request with the correct platform to enable mod.io to provide the best cross-platform experience for your players. Please see a list of supported platforms below:
+
+For example, passing the HTTP header `X-Modio-Platform: XboxSeriesX` in your request tells mod.io your player is playing on Xbox Series X.
+
+Target Platform | Header Value
+---------- | ----------  
+Windows | `Windows`
+Mac | `Mac`
+Linux | `Linux`
+Android | `Android`
+iOS | `iOS`
+Xbox One | `XboxOne`
+Xbox Series X | `XboxSeriesX`
+Playstation 4 | `PS4`
+Playstation 5 | `PS5`
+Switch | `Switch`
+Wii | `Wii`
+
+These values will be valid and successful irrespective of casing, as HTTP headers are case-insensitive. Have we missed a platform you are using? [Get in touch!](mailto:developers@mod.io?subject=Platform%20Support) 
+
+## Targeting A Portal
+
+Additionally, you can also inform mod.io what portal, which you may call a store, or app that the player is interacting with mod.io through by supplying the `X-Modio-Portal` header. It is important to pass this header where possible so we can fine-tune the experience based on how your player is engaging with us.
+
+For example, passing the HTTP header `X-Modio-Portal: EGS` in your request tells mod.io the player is playing your game on the Epic Games Store.
+
+Target Portal | Header Value
+---------- | ----------  
+Xbox Live | `XboxLive`
+Playstation Network | `PSN`
+Nintendo | `Nintendo`
+Steam | `Steam`
+Apple | `Apple`
+Epic Games Store | `EGS`
+GOG | `GOG`
+itch.io | `Itchio`
+Google | `Google`
+
+Have we missed a portal you are using? [Get in touch!](mailto:developers@mod.io?subject=Portal%20Support)
+
 # Authentication
 ## Terms
 
@@ -844,7 +902,7 @@ The purpose of this endpoint is to provide the text, links and buttons you can u
 
     Filter|Type|Description
     ---|---|---
-    service|string|The 3rd party authentication service you will authenticate the user with after they agree to the terms of use and consent to an account being created. Note that this field modifies the data collection lists in both the `plaintext` and `html` fields of the response, as well as the `manage` link for the user to manage their account. Must be one of the following values to modify the returned text otherwise the filter will be ignored:<br><br>- steam<br>- gog<br>- itchio<br>- oculus<br>- xbox<br>- switch<br>- discord
+    service|string|The 3rd party authentication service you will authenticate the user with after they agree to the terms of use and consent to an account being created. Note that this field modifies the data collection lists in both the `plaintext` and `html` fields of the response, as well as the `manage` link for the user to manage their account. Must be one of the following values to modify the returned text otherwise the filter will be ignored:<br><br>- steam<br>- epic<br>- gog<br>- itchio<br>- oculus<br>- xbox<br>- switch<br>- discord
 
 
 > Example response
@@ -1877,12 +1935,11 @@ System.out.println(response.toString());
 
 `POST /external/googleauth`
 
-Request an access token on behalf of a Google user. A Successful request will return an [Access Token Object](#access-token-object).<br><br>__NOTE__: To use this endpoint you will need to setup some additional settings prior to being able to authenticate Epic Games users, for these instructions please [contact us](mailto:developers@mod.io)
+Request an access token on behalf of a Google user. A Successful request will return an [Access Token Object](#access-token-object).
 
      Parameter|Type|Required|Description
      ---|---|---|---|
      id_token|string|true|The `id_token` value [returned from Google](https://developers.google.com/identity/sign-in/web/backend-auth#calling-the-tokeninfo-endpoint) after you have authenticated a user via the Google OAuth2 flow.
-     email|string||The users email address. If supplied, and the respective user does not have an email registered for their account we will send a confirmation email to confirm they have ownership of the specified email.<br><br>__NOTE__: If the user already has an email on record with us, this parameter will be ignored. This parameter should also be urlencoded before the request is sent.
      date_expires|integer||Unix timestamp of date in which the returned token will expire. Value cannot be higher than the default value which is a week (unix timestamp + 604800 seconds). Using a token after it's expiry time has elapsed will result in a `401 Unauthorized` response.
      terms_agreed|boolean||This MUST be set to `false` unless you have collected the [users agreement](#terms) prior to calling this endpoint in which case it can be set to `true` and will be recorded.<br><br>__NOTE:__ If this is set to `false` and the user has not agreed to the latest mod.io Terms of Use and Privacy Policy, an error `403 Forbidden (error_ref 11051)` will be returned and you will need to collect the [users agreement](#terms) and retry with this value set to `true` to authenticate the user.
 
@@ -1903,9 +1960,9 @@ Status|Meaning|Error Ref|Description|Response Schema
 ---|---|----|---|---|
 200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)||Successful Request|[Access Token Object](#schemaaccess_token_object)
 401|[Unauthorized](https://tools.ietf.org/html/rfc7235#section-3.1)|11052|The access token was invalid/malformed.|[Error Object](#schemaerror_object)
-401|[Unauthorized](https://tools.ietf.org/html/rfc7235#section-3.1)|11056|mod.io was unable to validate the credentials with Google's authentication servers.|[Error Object](#schemaerror_object)
-401|[Unauthorized](https://tools.ietf.org/html/rfc7235#section-3.1)|11053|The Google ID Token is not valid yet.|[Error Object](#schemaerror_object)
-401|[Unauthorized](https://tools.ietf.org/html/rfc7235#section-3.1)|11054|The Google ID Token has expired. You should request another ID Token from the Google OAuth 2 flow and ensure it is delivered to mod.io before it expires.|[Error Object](#schemaerror_object)
+401|[Unauthorized](https://tools.ietf.org/html/rfc7235#section-3.1)|11056|mod.io was unable to validate the credentials with Google's servers.|[Error Object](#schemaerror_object)
+401|[Unauthorized](https://tools.ietf.org/html/rfc7235#section-3.1)|11053|The Google access token is not valid yet.|[Error Object](#schemaerror_object)
+401|[Unauthorized](https://tools.ietf.org/html/rfc7235#section-3.1)|11054|The Google access token has expired. You should request another token from the Google OAuth implementation and ensure it is delivered to mod.io before it expires.|[Error Object](#schemaerror_object)
 403|[Forbidden](https://tools.ietf.org/html/rfc7231#section-6.5.3)|11051|The user has not agreed to the mod.io Terms of Use. Please see terms_agreed parameter description and the [Terms](#terms) endpoint for more information.|[Error Object](#schemaerror_object)
 
 <aside class="auth-notice">
@@ -2043,6 +2100,251 @@ Status|Meaning|Error Ref|Description|Response Schema
 To perform this request, you must be authenticated via one of the following methods:
 <a href="#authentication">api_key</a>
 </aside>
+## Request Email Security Code
+
+> Example request
+
+```shell
+# You can also use wget
+curl -X POST https://api.mod.io/v1/oauth/emailrequest?api_key=YourApiKey \
+  -H 'Content-Type: application/x-www-form-urlencoded' \ 
+  -H 'Accept: application/json' \
+  -d 'email=someperson@someservice.com'
+
+```
+
+```http
+POST https://api.mod.io/v1/oauth/emailrequest?api_key=YourApiKey HTTP/1.1
+Host: api.mod.io
+Content-Type: application/x-www-form-urlencoded
+Accept: application/json
+
+```
+
+```javascript
+var headers = {
+  'Content-Type':'application/x-www-form-urlencoded',
+  'Accept':'application/json'
+
+};
+
+$.ajax({
+  url: 'https://api.mod.io/v1/oauth/emailrequest',
+  method: 'post',
+  data: '?api_key=YourApiKey',
+  headers: headers,
+  success: function(data) {
+    console.log(JSON.stringify(data));
+  }
+})
+```
+
+```javascript--nodejs
+const request = require('node-fetch');
+const inputBody = '{
+  "email": "someperson@someservice.com"
+}';
+const headers = {
+  'Content-Type':'application/x-www-form-urlencoded',
+  'Accept':'application/json'
+
+};
+
+fetch('https://api.mod.io/v1/oauth/emailrequest?api_key=YourApiKey',
+{
+  method: 'POST',
+  body: inputBody,
+  headers: headers
+})
+.then(function(res) {
+    return res.json();
+}).then(function(body) {
+    console.log(body);
+});
+```
+
+```python
+import requests
+headers = {
+  'Content-Type': 'application/x-www-form-urlencoded',
+  'Accept': 'application/json'
+}
+
+r = requests.post('https://api.mod.io/v1/oauth/emailrequest', params={
+  'api_key': 'YourApiKey'
+}, headers = headers)
+
+print r.json()
+```
+
+```java
+URL obj = new URL("https://api.mod.io/v1/oauth/emailrequest?api_key=YourApiKey");
+HttpURLConnection con = (HttpURLConnection) obj.openConnection();
+con.setRequestMethod("POST");
+int responseCode = con.getResponseCode();
+BufferedReader in = new BufferedReader(
+    new InputStreamReader(con.getInputStream()));
+String inputLine;
+StringBuffer response = new StringBuffer();
+while ((inputLine = in.readLine()) != null) {
+    response.append(inputLine);
+}
+in.close();
+System.out.println(response.toString());
+```
+
+`POST //oauth/emailrequest`
+
+Request an access token on behalf of a user, as identified by their e-mail. To use this functionality you *must* use your games api_key from your games profile on mod.io. A Successful request will return a [Message Object](#message-object).
+      
+     Parameter|Type|Required|Description
+     ---|---|---|---|     
+     email|string|true|An email address the user can access to retrieve the security code. This parameter should also be urlencoded before the request is sent.
+
+
+> Example response
+
+```json
+{
+  "code": 200,
+  "message": "Your request was successful."
+}
+
+```
+<h3 id="Request-Email-Security-Code-responses">Responses</h3>
+
+Status|Meaning|Error Ref|Description|Response Schema
+---|---|----|---|---|
+200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)||Successful Request|[Message Object](#schemamessage_object)
+
+<aside class="auth-notice">
+To perform this request, you must be authenticated via one of the following methods:
+<a href="#authentication">api_key</a>
+</aside>
+## Exchange Email Security Code
+
+> Example request
+
+```shell
+# You can also use wget
+curl -X POST https://api.mod.io/v1/oauth/emailexchange?api_key=YourApiKey \
+  -H 'Content-Type: application/x-www-form-urlencoded' \ 
+  -H 'Accept: application/json' \
+  -d 'security_code=P39TM'
+
+```
+
+```http
+POST https://api.mod.io/v1/oauth/emailexchange?api_key=YourApiKey HTTP/1.1
+Host: api.mod.io
+Content-Type: application/x-www-form-urlencoded
+Accept: application/json
+
+```
+
+```javascript
+var headers = {
+  'Content-Type':'application/x-www-form-urlencoded',
+  'Accept':'application/json'
+
+};
+
+$.ajax({
+  url: 'https://api.mod.io/v1/oauth/emailexchange',
+  method: 'post',
+  data: '?api_key=YourApiKey',
+  headers: headers,
+  success: function(data) {
+    console.log(JSON.stringify(data));
+  }
+})
+```
+
+```javascript--nodejs
+const request = require('node-fetch');
+const inputBody = '{
+  "security_code": "P39TM"
+}';
+const headers = {
+  'Content-Type':'application/x-www-form-urlencoded',
+  'Accept':'application/json'
+
+};
+
+fetch('https://api.mod.io/v1/oauth/emailexchange?api_key=YourApiKey',
+{
+  method: 'POST',
+  body: inputBody,
+  headers: headers
+})
+.then(function(res) {
+    return res.json();
+}).then(function(body) {
+    console.log(body);
+});
+```
+
+```python
+import requests
+headers = {
+  'Content-Type': 'application/x-www-form-urlencoded',
+  'Accept': 'application/json'
+}
+
+r = requests.post('https://api.mod.io/v1/oauth/emailexchange', params={
+  'api_key': 'YourApiKey'
+}, headers = headers)
+
+print r.json()
+```
+
+```java
+URL obj = new URL("https://api.mod.io/v1/oauth/emailexchange?api_key=YourApiKey");
+HttpURLConnection con = (HttpURLConnection) obj.openConnection();
+con.setRequestMethod("POST");
+int responseCode = con.getResponseCode();
+BufferedReader in = new BufferedReader(
+    new InputStreamReader(con.getInputStream()));
+String inputLine;
+StringBuffer response = new StringBuffer();
+while ((inputLine = in.readLine()) != null) {
+    response.append(inputLine);
+}
+in.close();
+System.out.println(response.toString());
+```
+
+`POST //oauth/emailexchange`
+
+Exchange a recently issued security code for an access token. To use this functionality you *must* use your games api_key from your games profile on mod.io and the same api_key must be used from the original request for a security code. A Successful request will return an [Access Token Object](#access-token-object).
+ 
+    Parameter|Type|Required|Description
+    ---|---|---|---|
+    security_code|string|true|The alpha-numeric security code.
+    date_expires|integer||Unix timestamp of date in which the returned token will expire. Value cannot be higher than the default value which is a common year (unix timestamp + 31536000 seconds). Using a token after it's expiry time has elapsed will result in a `401 Unauthorized` response.
+
+
+> Example response
+
+```json
+{
+  "code": 200,
+  "access_token": "eyJ0eXAiOiXKV1QibCJhbLciOiJeiUzI1.....",
+  "date_expires": 1570673249
+}
+
+```
+<h3 id="Exchange-Email-Security-Code-responses">Responses</h3>
+
+Status|Meaning|Error Ref|Description|Response Schema
+---|---|----|---|---|
+200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)||Successful Request|[Access Token Object](#schemaaccess_token_object)
+401|[Unauthorized](https://tools.ietf.org/html/rfc7235#section-3.1)||The supplied security_code is invalid.|[Error Object](#schemaerror_object)
+
+<aside class="auth-notice">
+To perform this request, you must be authenticated via one of the following methods:
+<a href="#authentication">api_key</a>
+</aside>
 # Games
 
 ## Get Games
@@ -2169,6 +2471,7 @@ Get all games. Successful request will return an array of [Game Objects](#get-ga
         "id": 1,
         "name_id": "xant",
         "username": "XanT",
+        "display_name_portal": null,
         "date_online": 1509922961,
         "avatar": {
           "filename": "modio-color-dark.png",
@@ -2225,7 +2528,8 @@ Get all games. Successful request will return an array of [Game Objects](#get-ga
           "tag_count_map": {
             "Horror": 52
           },
-          "hidden": false
+          "hidden": false,
+          "locked": false
         }
       ],
       "stats": {
@@ -2360,6 +2664,7 @@ Get a game. Successful request will return a single [Game Object](#game-object).
     "id": 1,
     "name_id": "xant",
     "username": "XanT",
+    "display_name_portal": null,
     "date_online": 1509922961,
     "avatar": {
       "filename": "modio-color-dark.png",
@@ -2416,7 +2721,8 @@ Get a game. Successful request will return a single [Game Object](#game-object).
       "tag_count_map": {
         "Horror": 52
       },
-      "hidden": false
+      "hidden": false,
+      "locked": false
     }
   ],
   "stats": {
@@ -2572,6 +2878,7 @@ Update details for a game. If you want to update the `icon`, `logo` or `header` 
     "id": 1,
     "name_id": "xant",
     "username": "XanT",
+    "display_name_portal": null,
     "date_online": 1509922961,
     "avatar": {
       "filename": "modio-color-dark.png",
@@ -2628,7 +2935,8 @@ Update details for a game. If you want to update the `icon`, `logo` or `header` 
       "tag_count_map": {
         "Horror": 52
       },
-      "hidden": false
+      "hidden": false,
+      "locked": false
     }
   ],
   "stats": {
@@ -2787,6 +3095,7 @@ Get all mods for the corresponding game. Successful request will return an array
         "id": 1,
         "name_id": "xant",
         "username": "XanT",
+        "display_name_portal": null,
         "date_online": 1509922961,
         "avatar": {
           "filename": "modio-color-dark.png",
@@ -3006,6 +3315,7 @@ Get a mod. Successful request will return a single [Mod Object](#mod-object).
     "id": 1,
     "name_id": "xant",
     "username": "XanT",
+    "display_name_portal": null,
     "date_online": 1509922961,
     "avatar": {
       "filename": "modio-color-dark.png",
@@ -3217,7 +3527,7 @@ System.out.println(response.toString());
 
 `POST /games/{game-id}/mods`
 
-Add a mod. Successful request will return the newly created [Mod Object](#mod-object). All content published by users on [--parse sitename   ](https://mod.io) is subject to the [Terms of Use](https://mod.io/terms/widget). It is a requirement that you provide a link to [https://mod.io/terms](https://mod.io/terms) in any place where users are submitting content to mod.io.<br><br>__NOTE:__ By default new mods are 'not accepted' and 'public'. They can only be 'accepted' and made available via the API once a [Mod File](#add-modfile) has been uploaded. [Media](#add-mod-media), [Metadata Key Value Pairs](#add-mod-kvp-metadata) and [Dependencies](#add-mod-dependencies) can also be added after a mod profile is created.
+Add a mod. Successful request will return the newly created [Mod Object](#mod-object). All content published by users on [mod.io](https://mod.io) is subject to the [Terms of Use](https://mod.io/terms/widget). It is a requirement that you provide a link to [https://mod.io/terms](https://mod.io/terms) in any place where users are submitting content to mod.io.<br><br>__NOTE:__ By default new mods are 'not accepted' and 'public'. They can only be 'accepted' and made available via the API once a [Mod File](#add-modfile) has been uploaded. [Media](#add-mod-media), [Metadata Key Value Pairs](#add-mod-kvp-metadata) and [Dependencies](#add-mod-dependencies) can also be added after a mod profile is created.
 
     Parameter|Type|Required|Description
     ---|---|---|---|
@@ -3246,6 +3556,7 @@ Add a mod. Successful request will return the newly created [Mod Object](#mod-ob
     "id": 1,
     "name_id": "xant",
     "username": "XanT",
+    "display_name_portal": null,
     "date_online": 1509922961,
     "avatar": {
       "filename": "modio-color-dark.png",
@@ -3486,6 +3797,7 @@ Edit details for a mod. If you want to update the `logo` or media associated wit
     "id": 1,
     "name_id": "xant",
     "username": "XanT",
+    "display_name_portal": null,
     "date_online": 1509922961,
     "avatar": {
       "filename": "modio-color-dark.png",
@@ -4544,6 +4856,7 @@ Subscribe the _authenticated user_ to a corresponding mod. No body parameters ar
     "id": 1,
     "name_id": "xant",
     "username": "XanT",
+    "display_name_portal": null,
     "date_online": 1509922961,
     "avatar": {
       "filename": "modio-color-dark.png",
@@ -4894,6 +5207,7 @@ Get all comments posted in the mods profile. Successful request will return an a
         "id": 1,
         "name_id": "xant",
         "username": "XanT",
+        "display_name_portal": null,
         "date_online": 1509922961,
         "avatar": {
           "filename": "modio-color-dark.png",
@@ -5051,6 +5365,7 @@ Add a comment for the corresponding mod. Successful request will return the newl
     "id": 1,
     "name_id": "xant",
     "username": "XanT",
+    "display_name_portal": null,
     "date_online": 1509922961,
     "avatar": {
       "filename": "modio-color-dark.png",
@@ -5189,6 +5504,7 @@ Get a Mod Comment. Successful request will return a single [Comment Object](#com
     "id": 1,
     "name_id": "xant",
     "username": "XanT",
+    "display_name_portal": null,
     "date_online": 1509922961,
     "avatar": {
       "filename": "modio-color-dark.png",
@@ -5337,6 +5653,7 @@ Update a comment for the corresponding mod. Successful request will return the u
     "id": 1,
     "name_id": "xant",
     "username": "XanT",
+    "display_name_portal": null,
     "date_online": 1509922961,
     "avatar": {
       "filename": "modio-color-dark.png",
@@ -6414,7 +6731,7 @@ Add tags to a mod's profile. You can only add tags allowed by the parent game, w
 
 Status|Meaning|Error Ref|Description|Response Schema
 ---|---|----|---|---|
-201|[Created](https://tools.ietf.org/html/rfc7231#section-6.3.2)||Created|[addModTag](#schemaaddmodtag)
+201|[Created](https://tools.ietf.org/html/rfc7231#section-6.3.2)||Created|[Message Object](#message-object)
 403|[Forbidden](https://tools.ietf.org/html/rfc7231#section-6.5.3)|15037|The authenticated user does not have permission to submit tags for the specified mod. Ensure the user is part of the mod team before attempting the request again.|[Error Object](#schemaerror_object)
 
 ### Response Headers
@@ -6657,7 +6974,8 @@ Get all tags for the corresponding game, that can be applied to any of its mods.
       "tag_count_map": {
         "Horror": 52
       },
-      "hidden": false
+      "hidden": false,
+      "locked": false
     },
     {
         ...
@@ -6693,6 +7011,7 @@ curl -X POST https://api.mod.io/v1/games/{game-id}/tags \
   -d 'name=Difficulty' \
   -d 'type=dropdown' \
   -d 'hidden=false' \
+  -d 'locked=false' \
   -d 'tags[]=easy&tags[]=medium&tags=hard'
 
 ```
@@ -6732,6 +7051,7 @@ const inputBody = '{
   "name": "Difficulty",
   "type": "dropdown",
   "hidden": "false",
+  "locked": "false",
   "tags": "easy&tags[]=medium&tags=hard"
 }';
 const headers = {
@@ -6797,7 +7117,8 @@ Add tags which mods can apply to their profiles. Successful request will return 
     ---|---|---|---|
     name|string|true|Name of the tag group, for example you may want to have 'Difficulty' as the name with 'Easy', 'Medium' and 'Hard' as the tag values.<br><br>__NOTE:__ If the tag name already exists, its parameters will be overwritten and new tags will be added to the group (an edit). There is a separate endpoint to [delete tags](#delete-game-tag-option).
     type|string|true|Determines whether you allow users to only select one tag (dropdown) or multiple tags (checkbox):<br><br>- _dropdown_ = Mods can select only one tag from this group, dropdown menu shown on site profile.<br>- _checkboxes_ = Mods can select multiple tags from this group, checkboxes shown on site profile.
-    hidden|boolean||This group of tags should be hidden from users and mod developers. Useful for games to tag special functionality, to filter on and use behind the scenes. You can also use [Metadata Key Value Pairs](#metadata) for more arbitrary data.
+    hidden|boolean||This group of tags should not be editable or shown to users. Useful for games to tag special functionality, to filter on and use behind the scenes. You can also use [Metadata Key Value Pairs](#metadata) for more arbitrary data.
+    locked|boolean||This group of tags should not be editable but can be shown to users. Useful for games to tag special functionality, which users can see and filter on.
     tags|string[]|true|Array of tags mod creators can choose to apply to their profiles.
 
 
@@ -7082,7 +7403,7 @@ Submit a positive or negative rating for a mod. Each user can supply only one ra
 
 Status|Meaning|Error Ref|Description|Response Schema
 ---|---|----|---|---|
-201|[Created](https://tools.ietf.org/html/rfc7231#section-6.3.2)||Resource created|[Message Object](#message-object)
+201|[Created](https://tools.ietf.org/html/rfc7231#section-6.3.2)||Created|[Message Object](#message-object)
 400|[Bad Request](https://tools.ietf.org/html/rfc7231#section-6.5.1)|15028|The authenticated user has already submitted a rating for this mod.|[Error Object](#schemaerror_object)
 400|[Bad Request](https://tools.ietf.org/html/rfc7231#section-6.5.1)|15043|The authenticated user is trying to revert a rating that doesn't exist.|[Error Object](#schemaerror_object)
 
@@ -7956,6 +8277,7 @@ Get all dependencies the chosen mod has selected. This is useful if a mod requir
   "data": [
     {
       "mod_id": 231,
+      "name": "Example Mod",
       "date_added": 1499841487
     },
     {
@@ -8351,6 +8673,7 @@ Get all users that are part of a mod team. Successful request will return an arr
         "id": 1,
         "name_id": "xant",
         "username": "XanT",
+        "display_name_portal": null,
         "date_online": 1509922961,
         "avatar": {
           "filename": "modio-color-dark.png",
@@ -8525,8 +8848,8 @@ Status|Meaning|Error Ref|Description|Response Schema
 403|[Forbidden](https://tools.ietf.org/html/rfc7231#section-6.5.3)|15043|The maximum number of pending invites has been reached for this team. Cancel some or wait for them to be accepted.|[Error Object](#schemaerror_object)
 403|[Forbidden](https://tools.ietf.org/html/rfc7231#section-6.5.3)|17009|The maximum number of pending invites you can have pending on mod.io has been reached. Cancel some or wait for them to be accepted.|[Error Object](#schemaerror_object)
 403|[Forbidden](https://tools.ietf.org/html/rfc7231#section-6.5.3)|15039|The authenticated user does not have permission to add team members to this mod, this action is restricted to team leaders & administrator's only.|[Error Object](#schemaerror_object)
-403|[Forbidden](https://tools.ietf.org/html/rfc7231#section-6.5.3)|15020|You can't add yourself to a team twice, let's not be greedy now.|[Error Object](#schemaerror_object)
 404|[Not Found](https://tools.ietf.org/html/rfc7231#section-6.5.4)|21000|The specified user could not be found.|[Error Object](#schemaerror_object)
+403|[Forbidden](https://tools.ietf.org/html/rfc7231#section-6.5.3)|15020|You can't add yourself to a team twice, let's not be greedy now.|[Error Object](#schemaerror_object)
 
 ### Response Headers
 
@@ -8661,7 +8984,7 @@ Update a mod team members details. Successful request will return a [Message Obj
 
 Status|Meaning|Error Ref|Description|Response Schema
 ---|---|----|---|---|
-200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)||OK|[Message Object](#message-object)
+201|[Created](https://tools.ietf.org/html/rfc7231#section-6.3.2)||Created|[Message Object](#message-object)
 403|[Forbidden](https://tools.ietf.org/html/rfc7231#section-6.5.3)|23010|You cannot demote the last admin. The team must always have at least one admin.|[Error Object](#schemaerror_object)
 403|[Forbidden](https://tools.ietf.org/html/rfc7231#section-6.5.3)|23011|The leader must always be an admin.|[Error Object](#schemaerror_object)
 403|[Forbidden](https://tools.ietf.org/html/rfc7231#section-6.5.3)|23012|You cannot demote the team leader, only replace them. To remove this leader please set another member as the leader.|[Error Object](#schemaerror_object)
@@ -8911,6 +9234,7 @@ Get the user that is the original _submitter_ of a resource. Successful request 
   "id": 1,
   "name_id": "xant",
   "username": "XanT",
+  "display_name_portal": null,
   "date_online": 1509922961,
   "avatar": {
     "filename": "modio-color-dark.png",
@@ -9072,7 +9396,7 @@ Report a resource on mod.io. You are responsible for content your users submit, 
 
 Status|Meaning|Error Ref|Description|Response Schema
 ---|---|----|---|---|
-201|[Created](https://tools.ietf.org/html/rfc7231#section-6.3.2)||Report Created|[Message Object](#message-object)
+201|[Created](https://tools.ietf.org/html/rfc7231#section-6.3.2)||Created|[Message Object](#message-object)
 403|[Forbidden](https://tools.ietf.org/html/rfc7231#section-6.5.3)|15029|The authenticated user does not have permission to submit reports on mod.io due to their access being revoked.|[Error Object](#schemaerror_object)
 403|[Forbidden](https://tools.ietf.org/html/rfc7231#section-6.5.3)|15030|The specified resource is not able to be reported at this time, this is potentially due to the resource in question being removed.|[Error Object](#schemaerror_object)
 404|[Not Found](https://tools.ietf.org/html/rfc7231#section-6.5.4)|14000|The resource to be reported could not be found.|[Error Object](#schemaerror_object)
@@ -9294,6 +9618,7 @@ Speed up your API calls, by batching them into a single HTTP request. This endpo
               "id": 1,
               "name_id": "xant",
               "username": "XanT",
+              "display_name_portal": null,
               "date_online": 1509922961,
               "avatar": {
                 "filename": "modio-color-dark.png",
@@ -9518,6 +9843,7 @@ Get the _authenticated user_ details. Successful request will return a single [U
   "id": 1,
   "name_id": "xant",
   "username": "XanT",
+  "display_name_portal": null,
   "date_online": 1509922961,
   "avatar": {
     "filename": "modio-color-dark.png",
@@ -9672,6 +9998,7 @@ Get all mod's the _authenticated user_ is subscribed to. Successful request will
         "id": 1,
         "name_id": "xant",
         "username": "XanT",
+        "display_name_portal": null,
         "date_online": 1509922961,
         "avatar": {
           "filename": "modio-color-dark.png",
@@ -10050,6 +10377,7 @@ Get all games the _authenticated user_ added or is a team member of. Successful 
         "id": 1,
         "name_id": "xant",
         "username": "XanT",
+        "display_name_portal": null,
         "date_online": 1509922961,
         "avatar": {
           "filename": "modio-color-dark.png",
@@ -10106,7 +10434,8 @@ Get all games the _authenticated user_ added or is a team member of. Successful 
           "tag_count_map": {
             "Horror": 52
           },
-          "hidden": false
+          "hidden": false,
+          "locked": false
         }
       ],
       "stats": {
@@ -10275,6 +10604,7 @@ Get all mods the _authenticated user_ added or is a team member of. Successful r
         "id": 1,
         "name_id": "xant",
         "username": "XanT",
+        "display_name_portal": null,
         "date_online": 1509922961,
         "avatar": {
           "filename": "modio-color-dark.png",
@@ -10752,6 +11082,7 @@ thumb_100x100|string|URL to the medium avatar thumbnail.
         "id": 1,
         "name_id": "xant",
         "username": "XanT",
+        "display_name_portal": null,
         "date_online": 1509922961,
         "avatar": {
           "filename": "modio-color-dark.png",
@@ -10864,6 +11195,7 @@ data|[Mod Object](#schemamod_object)[]|Contains Mod Objects.
 »» id|integer|Unique id of the user.
 »» name_id|string|Path for the user on mod.io. For example: https://mod.io/members/__name-id-here__
 »» username|string|Username of the user.
+»» display_name_portal|string|The users' display name for the targeted portal. Value will be `null` if no valid `X-Modio-Portal` portal header value is provided. For more information see [Targeting a Portal](#targeting-a-portal).
 »» date_online|integer|Unix timestamp of date the user was last online.
 »» avatar|[Avatar Object](#schemaavatar_object)|Contains avatar data.
 »»» filename|string|Avatar filename including extension.
@@ -10964,6 +11296,7 @@ data|[Mod Object](#schemamod_object)[]|Contains Mod Objects.
           "id": 1,
           "name_id": "xant",
           "username": "XanT",
+          "display_name_portal": null,
           "date_online": 1509922961,
           "avatar": {
             "filename": "modio-color-dark.png",
@@ -11079,6 +11412,7 @@ body|[Batch Body Object](#schemabatch_body_object)|Contains batch request data.
 »»» id|integer|Unique id of the user.
 »»» name_id|string|Path for the user on mod.io. For example: https://mod.io/members/__name-id-here__
 »»» username|string|Username of the user.
+»»» display_name_portal|string|The users' display name for the targeted portal. Value will be `null` if no valid `X-Modio-Portal` portal header value is provided. For more information see [Targeting a Portal](#targeting-a-portal).
 »»» date_online|integer|Unix timestamp of date the user was last online.
 »»» avatar|[Avatar Object](#schemaavatar_object)|Contains avatar data.
 »»»» filename|string|Avatar filename including extension.
@@ -11170,6 +11504,7 @@ headers|[[Key-Value Pair Object](#schemakey-value_pair_object)]|Contains key-val
     "id": 1,
     "name_id": "xant",
     "username": "XanT",
+    "display_name_portal": null,
     "date_online": 1509922961,
     "avatar": {
       "filename": "modio-color-dark.png",
@@ -11201,6 +11536,7 @@ user|[User Object](#schemauser_object)|Contains user data.
 » id|integer|Unique id of the user.
 » name_id|string|Path for the user on mod.io. For example: https://mod.io/members/__name-id-here__
 » username|string|Username of the user.
+» display_name_portal|string|The users' display name for the targeted portal. Value will be `null` if no valid `X-Modio-Portal` portal header value is provided. For more information see [Targeting a Portal](#targeting-a-portal).
 » date_online|integer|Unix timestamp of date the user was last online.
 » avatar|[Avatar Object](#schemaavatar_object)|Contains avatar data.
 »» filename|string|Avatar filename including extension.
@@ -11303,6 +11639,7 @@ md5|string|MD5 hash of the file.
     "id": 1,
     "name_id": "xant",
     "username": "XanT",
+    "display_name_portal": null,
     "date_online": 1509922961,
     "avatar": {
       "filename": "modio-color-dark.png",
@@ -11359,7 +11696,8 @@ md5|string|MD5 hash of the file.
       "tag_count_map": {
         "Horror": 52
       },
-      "hidden": false
+      "hidden": false,
+      "locked": false
     }
   ],
   "stats": {
@@ -11385,6 +11723,7 @@ submitted_by|[User Object](#schemauser_object)|Contains user data.
 » id|integer|Unique id of the user.
 » name_id|string|Path for the user on mod.io. For example: https://mod.io/members/__name-id-here__
 » username|string|Username of the user.
+» display_name_portal|string|The users' display name for the targeted portal. Value will be `null` if no valid `X-Modio-Portal` portal header value is provided. For more information see [Targeting a Portal](#targeting-a-portal).
 » date_online|integer|Unix timestamp of date the user was last online.
 » avatar|[Avatar Object](#schemaavatar_object)|Contains avatar data.
 »» filename|string|Avatar filename including extension.
@@ -11439,6 +11778,7 @@ tag_options|[Game Tag Option Object](#schemagame_tag_option_object)[]|Groups of 
 » type|string|Can multiple tags be selected via 'checkboxes' or should only a single tag be selected via a 'dropdown'.
 » tag_count_map|object|List of tag names and the count of mods with these tags.
 » hidden|boolean|Groups of tags flagged as 'admin only' should only be used for filtering, and should not be displayed to users. Groups that are hidden will only be returned in a response if the authenticated user in the request is a team member of the parent game with `Manager` or `Administrator` privileges.
+» locked|boolean|Groups of tags flagged as 'locked' should not be editable but can be shown to users. Useful for games to tag special functionality, which users can see and filter on.
 » tags|string[]|Array of tags in this group.
 
 
@@ -11490,7 +11830,8 @@ date_expires|integer|Unix timestamp until this game's statistics are considered 
   "tag_count_map": {
     "Horror": 52
   },
-  "hidden": false
+  "hidden": false,
+  "locked": false
 } 
 ```
 
@@ -11503,6 +11844,7 @@ name|string|Name of the tag group.
 type|string|Can multiple tags be selected via 'checkboxes' or should only a single tag be selected via a 'dropdown'.
 tag_count_map|object|List of tag names and the count of mods with these tags.
 hidden|boolean|Groups of tags flagged as 'admin only' should only be used for filtering, and should not be displayed to users. Groups that are hidden will only be returned in a response if the authenticated user in the request is a team member of the parent game with `Manager` or `Administrator` privileges.
+locked|boolean|Groups of tags flagged as 'locked' should not be editable but can be shown to users. Useful for games to tag special functionality, which users can see and filter on.
 tags|string[]|Array of tags in this group.
 
 
@@ -11534,6 +11876,7 @@ tags|string[]|Array of tags in this group.
               "id": 1,
               "name_id": "xant",
               "username": "XanT",
+              "display_name_portal": null,
               "date_online": 1509922961,
               "avatar": {
                 "filename": "modio-color-dark.png",
@@ -11659,6 +12002,7 @@ data|[Batch Object](#schemabatch_object)[]|Array containing any response object.
 »»»» id|integer|Unique id of the user.
 »»»» name_id|string|Path for the user on mod.io. For example: https://mod.io/members/__name-id-here__
 »»»» username|string|Username of the user.
+»»»» display_name_portal|string|The users' display name for the targeted portal. Value will be `null` if no valid `X-Modio-Portal` portal header value is provided. For more information see [Targeting a Portal](#targeting-a-portal).
 »»»» date_online|integer|Unix timestamp of date the user was last online.
 »»»» avatar|[Avatar Object](#schemaavatar_object)|Contains avatar data.
 »»»»» filename|string|Avatar filename including extension.
@@ -11758,7 +12102,8 @@ result_total|integer|Total number of results found.
       "tag_count_map": {
         "Horror": 52
       },
-      "hidden": false
+      "hidden": false,
+      "locked": false
     },
     {
         ...
@@ -11781,6 +12126,7 @@ data|[Game Tag Option Object](#schemagame_tag_option_object)[]|Array containing 
 » type|string|Can multiple tags be selected via 'checkboxes' or should only a single tag be selected via a 'dropdown'.
 » tag_count_map|object|List of tag names and the count of mods with these tags.
 » hidden|boolean|Groups of tags flagged as 'admin only' should only be used for filtering, and should not be displayed to users. Groups that are hidden will only be returned in a response if the authenticated user in the request is a team member of the parent game with `Manager` or `Administrator` privileges.
+» locked|boolean|Groups of tags flagged as 'locked' should not be editable but can be shown to users. Useful for games to tag special functionality, which users can see and filter on.
 » tags|string[]|Array of tags in this group.
 result_count|integer|Number of results returned in this request.
 result_offset|integer|Number of results skipped over. Defaults to 0 unless overridden by `_offset` filter.
@@ -11804,6 +12150,7 @@ result_total|integer|Total number of results found.
         "id": 1,
         "name_id": "xant",
         "username": "XanT",
+        "display_name_portal": null,
         "date_online": 1509922961,
         "avatar": {
           "filename": "modio-color-dark.png",
@@ -11860,7 +12207,8 @@ result_total|integer|Total number of results found.
           "tag_count_map": {
             "Horror": 52
           },
-          "hidden": false
+          "hidden": false,
+          "locked": false
         }
       ],
       "stats": {
@@ -11896,6 +12244,7 @@ data|[Game Object](#schemagame_object)[]|Array containing game objects.
 »» id|integer|Unique id of the user.
 »» name_id|string|Path for the user on mod.io. For example: https://mod.io/members/__name-id-here__
 »» username|string|Username of the user.
+»» display_name_portal|string|The users' display name for the targeted portal. Value will be `null` if no valid `X-Modio-Portal` portal header value is provided. For more information see [Targeting a Portal](#targeting-a-portal).
 »» date_online|integer|Unix timestamp of date the user was last online.
 »» avatar|[Avatar Object](#schemaavatar_object)|Contains avatar data.
 »»» filename|string|Avatar filename including extension.
@@ -11950,6 +12299,7 @@ data|[Game Object](#schemagame_object)[]|Array containing game objects.
 »» type|string|Can multiple tags be selected via 'checkboxes' or should only a single tag be selected via a 'dropdown'.
 »» tag_count_map|object|List of tag names and the count of mods with these tags.
 »» hidden|boolean|Groups of tags flagged as 'admin only' should only be used for filtering, and should not be displayed to users. Groups that are hidden will only be returned in a response if the authenticated user in the request is a team member of the parent game with `Manager` or `Administrator` privileges.
+»» locked|boolean|Groups of tags flagged as 'locked' should not be editable but can be shown to users. Useful for games to tag special functionality, which users can see and filter on.
 »» tags|string[]|Array of tags in this group.
 result_count|integer|Number of results returned in this request.
 result_offset|integer|Number of results skipped over. Defaults to 0 unless overridden by `_offset` filter.
@@ -11973,6 +12323,7 @@ result_total|integer|Total number of results found.
         "id": 1,
         "name_id": "xant",
         "username": "XanT",
+        "display_name_portal": null,
         "date_online": 1509922961,
         "avatar": {
           "filename": "modio-color-dark.png",
@@ -12011,6 +12362,7 @@ data|[Comment Object](#schemacomment_object)[]|Array containing comment objects.
 »» id|integer|Unique id of the user.
 »» name_id|string|Path for the user on mod.io. For example: https://mod.io/members/__name-id-here__
 »» username|string|Username of the user.
+»» display_name_portal|string|The users' display name for the targeted portal. Value will be `null` if no valid `X-Modio-Portal` portal header value is provided. For more information see [Targeting a Portal](#targeting-a-portal).
 »» date_online|integer|Unix timestamp of date the user was last online.
 »» avatar|[Avatar Object](#schemaavatar_object)|Contains avatar data.
 »»» filename|string|Avatar filename including extension.
@@ -12043,6 +12395,7 @@ result_total|integer|Total number of results found.
   "data": [
     {
       "mod_id": 231,
+      "name": "Example Mod",
       "date_added": 1499841487
     },
     {
@@ -12063,6 +12416,7 @@ Name|Type|Description
 ---|---|---|---|
 data|[Mod Dependencies Object](#schemamod_dependencies_object)[]|Array containing mod dependencies objects.
 » mod_id|integer|Unique id of the mod that is the dependency.
+» name|string|The name of the dependency (mod name).
 » date_added|integer|Unix timestamp of date the dependency was added.
 result_count|integer|Number of results returned in this request.
 result_offset|integer|Number of results skipped over. Defaults to 0 unless overridden by `_offset` filter.
@@ -12338,6 +12692,7 @@ result_total|integer|Total number of results found.
         "id": 1,
         "name_id": "xant",
         "username": "XanT",
+        "display_name_portal": null,
         "date_online": 1509922961,
         "avatar": {
           "filename": "modio-color-dark.png",
@@ -12457,6 +12812,7 @@ data|[Mod Object](#schemamod_object)[]|Array containing mod objects.
 »» id|integer|Unique id of the user.
 »» name_id|string|Path for the user on mod.io. For example: https://mod.io/members/__name-id-here__
 »» username|string|Username of the user.
+»» display_name_portal|string|The users' display name for the targeted portal. Value will be `null` if no valid `X-Modio-Portal` portal header value is provided. For more information see [Targeting a Portal](#targeting-a-portal).
 »» date_online|integer|Unix timestamp of date the user was last online.
 »» avatar|[Avatar Object](#schemaavatar_object)|Contains avatar data.
 »»» filename|string|Avatar filename including extension.
@@ -12550,6 +12906,7 @@ result_total|integer|Total number of results found.
         "id": 1,
         "name_id": "xant",
         "username": "XanT",
+        "display_name_portal": null,
         "date_online": 1509922961,
         "avatar": {
           "filename": "modio-color-dark.png",
@@ -12588,6 +12945,7 @@ data|[Team Member Object](#schemateam_member_object)[]|Array containing team mem
 »» id|integer|Unique id of the user.
 »» name_id|string|Path for the user on mod.io. For example: https://mod.io/members/__name-id-here__
 »» username|string|Username of the user.
+»» display_name_portal|string|The users' display name for the targeted portal. Value will be `null` if no valid `X-Modio-Portal` portal header value is provided. For more information see [Targeting a Portal](#targeting-a-portal).
 »» date_online|integer|Unix timestamp of date the user was last online.
 »» avatar|[Avatar Object](#schemaavatar_object)|Contains avatar data.
 »»» filename|string|Avatar filename including extension.
@@ -12872,6 +13230,7 @@ metavalue|string|The value of the key-value pair.
 ```json
 {
   "mod_id": 231,
+  "name": "Example Mod",
   "date_added": 1499841487
 } 
 ```
@@ -12882,6 +13241,7 @@ metavalue|string|The value of the key-value pair.
 Name|Type|Description
 ---|---|---|---|
 mod_id|integer|Unique id of the mod that is the dependency.
+name|string|The name of the dependency (mod name).
 date_added|integer|Unix timestamp of date the dependency was added.
 
 
@@ -12966,6 +13326,7 @@ images|[Image Object](#schemaimage_object)[]|Array of image objects (a gallery).
     "id": 1,
     "name_id": "xant",
     "username": "XanT",
+    "display_name_portal": null,
     "date_online": 1509922961,
     "avatar": {
       "filename": "modio-color-dark.png",
@@ -13075,6 +13436,7 @@ submitted_by|[User Object](#schemauser_object)|Contains user data.
 » id|integer|Unique id of the user.
 » name_id|string|Path for the user on mod.io. For example: https://mod.io/members/__name-id-here__
 » username|string|Username of the user.
+» display_name_portal|string|The users' display name for the targeted portal. Value will be `null` if no valid `X-Modio-Portal` portal header value is provided. For more information see [Targeting a Portal](#targeting-a-portal).
 » date_online|integer|Unix timestamp of date the user was last online.
 » avatar|[Avatar Object](#schemaavatar_object)|Contains avatar data.
 »» filename|string|Avatar filename including extension.
@@ -13308,6 +13670,7 @@ date_added|integer|Unix timestamp of date rating was submitted.
     "id": 1,
     "name_id": "xant",
     "username": "XanT",
+    "display_name_portal": null,
     "date_online": 1509922961,
     "avatar": {
       "filename": "modio-color-dark.png",
@@ -13336,6 +13699,7 @@ user|[User Object](#schemauser_object)|Contains user data.
 » id|integer|Unique id of the user.
 » name_id|string|Path for the user on mod.io. For example: https://mod.io/members/__name-id-here__
 » username|string|Username of the user.
+» display_name_portal|string|The users' display name for the targeted portal. Value will be `null` if no valid `X-Modio-Portal` portal header value is provided. For more information see [Targeting a Portal](#targeting-a-portal).
 » date_online|integer|Unix timestamp of date the user was last online.
 » avatar|[Avatar Object](#schemaavatar_object)|Contains avatar data.
 »» filename|string|Avatar filename including extension.
@@ -13466,6 +13830,7 @@ event_type|string|Type of event that was triggered. List of possible events: <br
   "id": 1,
   "name_id": "xant",
   "username": "XanT",
+  "display_name_portal": null,
   "date_online": 1509922961,
   "avatar": {
     "filename": "modio-color-dark.png",
@@ -13487,6 +13852,7 @@ Name|Type|Description
 id|integer|Unique id of the user.
 name_id|string|Path for the user on mod.io. For example: https://mod.io/members/__name-id-here__
 username|string|Username of the user.
+display_name_portal|string|The users' display name for the targeted portal. Value will be `null` if no valid `X-Modio-Portal` portal header value is provided. For more information see [Targeting a Portal](#targeting-a-portal).
 date_online|integer|Unix timestamp of date the user was last online.
 avatar|[Avatar Object](#schemaavatar_object)|Contains avatar data.
 » filename|string|Avatar filename including extension.

@@ -29,14 +29,14 @@ __Tools/Plugins__ | Use tools, plugins and wrappers created by the community to 
 Official tools, plugins and wrappers made or supported by the --parse_sitename team | - | - | -
 --- | --- | --- | ---
 ![Unity Plugin](images/tool-unity.png) | __Unity Plugin__<br />[SDK](https://github.com/modio/modio-unity)<br />[Getting Started](https://github.com/modio/modio-unity/wiki)<br /> | ![Unreal Plugin](images/tool-unreal.png) | __Unreal Plugin__<br />[SDK](https://github.com/modio/modio-ue4)<br />[Getting Started](https://github.com/modio/modio-ue4/wiki)<br />[Example](https://github.com/modio/modio-ue4-example)<br />
-![C/C++ SDK](images/tool-ccpp.png) | __C/C++ SDK__<br />[SDK](https://github.com/modio/modio-sdk)<br />[Getting Started](https://github.com/modio/modio-sdk/wiki)<br />[Tutorials](https://github.com/modio/modio-sdk/tree/master/examples/code-samples)<br />  | ![Discord Bot](images/tool-discordbot.png) | __Discord Bot__<br />[Instructions](https://github.com/modio/modio-discord-bot)<br />[Invite](--parse_discordboturl)<br /> 
+![C/C++ SDK](images/tool-ccpp.png) | __C/C++ SDK__<br />[SDK](https://github.com/modio/modio-sdk)<br />[Getting Started](https://github.com/modio/modio-sdk/wiki)<br />[Tutorials](https://github.com/modio/modio-sdk/tree/master/examples/code-samples)<br />  | ![Discord Bot](images/tool-discordbot.png) | __Discord Bot__<br />[Instructions](https://github.com/modio/modio-discord-bot)<br />[Invite](--parse_discordboturl)<br />
 
-Tools, plugins and wrappers made by our awesome community. Want a tool added to the list? [Contact us!](mailto:--parse_email?subject=Publish Tool) | - | - | -
+Tools, plugins and wrappers made by our awesome community. Is there a tool out there that should be added to the list? [Get in touch!](mailto:--parse_email?subject=Publish Tool) | - | - | -
 --- | --- | --- | ---
 ![Rust Wrapper](images/tool-rust.png) | __Rust Wrapper__<br />[SDK](https://crates.io/crates/modio)<br />[Getting Started](https://github.com/nickelc/modio-rs)<br />[Tutorials](https://github.com/nickelc/modio-rs/tree/master/examples)<br /> | ![Python Wrapper](images/tool-python.png) | __Python Wrapper__<br />[SDK](https://github.com/ClementJ18/mod.io)<br />[Getting Started](https://github.com/ClementJ18/mod.io/#example)<br />[Tutorials](https://github.com/ClementJ18/mod.io/tree/master/examples)<br /> |<br />
 ![Construct 2](images/tool-c2.png) | __Construct 2 Plugin__<br />[SDK](https://github.com/modio/modio-construct2)<br />[Getting Started](https://github.com/modio/modio-construct2)<br /> | ![GameMaker Studio 2](images/tool-gm2.png) | __GameMaker Studio 2 Plugin__<br />[SDK](https://github.com/modio/modio-gamemaker2)<br />[Getting Started](https://github.com/modio/modio-gamemaker2)<br />
 ![Haxe Wrapper](images/tool-haxe.png) | __Haxe Wrapper__<br />[SDK](https://github.com/modio/modio-haxe)<br />[Getting Started](https://github.com/modio/modio-haxe)<br />[Tutorials](https://github.com/Turupawn/modioOpenFLExample#openfl-integration)<br /> | ![Modio.NET](images/tool-dotnet.png) | __Modio.NET__<br />[SDK](https://github.com/nickelc/modio.net)<br />[Getting Started](https://github.com/nickelc/modio.net)<br />
-![Command Line Tool](images/tool-cmd.png) | __Command Line Tool__<br />[CMD](https://github.com/nickelc/modiom)<br />[Getting Started](https://github.com/nickelc/modiom)<br /> | ![GitHub Action Mod Uploader](images/tool-actions.png) | __GitHub Action Mod Uploader__<br />[GitHub](https://github.com/nickelc/upload-to-modio)<br />[Usage](https://github.com/nickelc/upload-to-modio#usage)<br /> | 
+![Command Line Tool](images/tool-cmd.png) | __Command Line Tool__<br />[CMD](https://github.com/nickelc/modiom)<br />[Getting Started](https://github.com/nickelc/modiom)<br /> | ![GitHub Action Mod Uploader](images/tool-actions.png) | __GitHub Action Mod Uploader__<br />[GitHub](https://github.com/nickelc/upload-to-modio)<br />[Usage](https://github.com/nickelc/upload-to-modio#usage)<br />
 
 Here is a brief list of the things to know about our API, as explained in more detail in the following sections.
 
@@ -829,3 +829,59 @@ If you are a large studio or publisher and require a private, in-house, custom s
 ## Contact
 
 If you spot any errors within the --parse_sitename documentation, have feedback on how we can make it easier to follow or simply want to discuss how awesome mods are, feel free to reach out to [--parse_email](mailto:--parse_email?subject=API) or come join us in our [discord channel](--parse_discordurl). We are here to help you grow and maximise the potential of mods in your game.
+
+# Targeting Platforms
+
+## Targeting a Platform
+
+When making API requests, you have the ability to tell --parse_sitename what Platform the request is originating from and more importantly what platform the returned data is destined for. If you are using --parse_sitename on Xbox One for example, it is __important__ you specify the game client is running on Xbox One. 
+
+Passing this header enables --parse_sitename to return data that is relevant to the specific platforms (currently a work-in-progress) such as:
+
+- Supported mods
+- Supported modfiles the player will download
+- Supported tags the player is able to filter on
+- and much more
+
+To do this, all you need to do is pass the `X-Modio-Platform` header in every request you make to the --parse_sitename API.
+
+Official --parse_sitename [Plugins and SDK's](#implementation) will automatically supply this value for you providing you have specified the correct platform in the tools' settings. We __strongly recommend__ you supply this header in every request with the correct platform to enable --parse_sitename to provide the best cross-platform experience for your players. Please see a list of supported platforms below:
+
+For example, passing the HTTP header `X-Modio-Platform: XboxSeriesX` in your request tells --parse_sitename your player is playing on Xbox Series X.
+
+Target Platform | Header Value
+---------- | ----------  
+Windows | `Windows`
+Mac | `Mac`
+Linux | `Linux`
+Android | `Android`
+iOS | `iOS`
+Xbox One | `XboxOne`
+Xbox Series X | `XboxSeriesX`
+Playstation 4 | `PS4`
+Playstation 5 | `PS5`
+Switch | `Switch`
+Wii | `Wii`
+
+These values will be valid and successful irrespective of casing, as HTTP headers are case-insensitive. Have we missed a platform you are using? [Get in touch!](mailto:--parse_email?subject=Platform%20Support) 
+
+## Targeting A Portal
+
+Additionally, you can also inform --parse_sitename what portal, which you may call a store, or app that the player is interacting with --parse_sitename through by supplying the `X-Modio-Portal` header. It is important to pass this header where possible so we can fine-tune the experience based on how your player is engaging with us.
+
+For example, passing the HTTP header `X-Modio-Portal: EGS` in your request tells --parse_sitename the player is playing your game on the Epic Games Store.
+
+Target Portal | Header Value
+---------- | ----------  
+Xbox Live | `XboxLive`
+Playstation Network | `PSN`
+Nintendo | `Nintendo`
+Steam | `Steam`
+Apple | `Apple`
+Epic Games Store | `EGS`
+GOG | `GOG`
+itch.io | `Itchio`
+Google | `Google`
+
+Have we missed a portal you are using? [Get in touch!](mailto:--parse_email?subject=Portal%20Support)
+
