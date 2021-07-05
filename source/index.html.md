@@ -2193,7 +2193,7 @@ in.close();
 System.out.println(response.toString());
 ```
 
-`POST //oauth/emailrequest`
+`POST /v1/oauth/emailrequest`
 
 Request an access token on behalf of a user, as identified by their e-mail. To use this functionality you *must* use your games api_key from your games profile on mod.io. A Successful request will return a [Message Object](#message-object).
       
@@ -2314,7 +2314,7 @@ in.close();
 System.out.println(response.toString());
 ```
 
-`POST //oauth/emailexchange`
+`POST /v1/oauth/emailexchange`
 
 Exchange a recently issued security code for an access token. To use this functionality you *must* use your games api_key from your games profile on mod.io and the same api_key must be used from the original request for a security code. A Successful request will return an [Access Token Object](#access-token-object).
  
