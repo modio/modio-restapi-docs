@@ -345,13 +345,13 @@
               </ul>
           </li>
           <li>
-            <a href="#targeting-platforms" class="toc-h1 toc-link" data-title="Targeting Platforms"><span class="reficon"><img src="https://static.mod.io/v1/images/branding/modio-icon-color.svg" alt="Reference" class="menu-reference-icon"></span> Targeting Platforms</a>
+            <a href="#platforms" class="toc-h1 toc-link" data-title="Platforms"><span class="reficon"><img src="https://static.mod.io/v1/images/branding/modio-icon-light.svg" alt="Reference" class="menu-reference-icon"></span> Platforms</a>
               <ul class="toc-list-h2">
                   <li>
-                    <a href="#targeting-a-platform" class="toc-h2 toc-link" data-title="Targeting Platforms">Targeting a Platform</a>
+                    <a href="#targeting-a-platform" class="toc-h2 toc-link" data-title="Platforms">Targeting a Platform</a>
                   </li>
                   <li>
-                    <a href="#targeting-a-portal" class="toc-h2 toc-link" data-title="Targeting Platforms">Targeting A Portal</a>
+                    <a href="#targeting-a-portal" class="toc-h2 toc-link" data-title="Platforms">Targeting a Portal</a>
                   </li>
               </ul>
           </li>
@@ -387,12 +387,6 @@
                   </li>
                   <li>
                     <a href="#authenticate-via-discord" class="toc-h2 toc-link" data-title="Authentication">Authenticate via Discord</a>
-                  </li>
-                  <li>
-                    <a href="#request-email-security-code" class="toc-h2 toc-link" data-title="Authentication">Request Email Security Code</a>
-                  </li>
-                  <li>
-                    <a href="#exchange-email-security-code" class="toc-h2 toc-link" data-title="Authentication">Exchange Email Security Code</a>
                   </li>
               </ul>
           </li>
@@ -937,13 +931,13 @@
 <p>Authentication can be done via 4 ways:</p>
 
 <ul>
-<li>Request an <a href="https://mod.io/apikey/widget" class="colorbox">API key (Read Only Access)</a> - or get a <a href="https://test.mod.io/apikey">test environment</a> key</li>
-<li>Use the <a href="#authenticate-via-email">Email Authentication Flow (Read + Write Access)</a> (to create an OAuth 2 Access Token via <strong>email</strong>)</li>
-<li>Use the <a href="#authenticate-via-steam">External App Tickets Flow (Read + Write Access)</a> (to create an OAuth 2 Access Token automatically on popular platforms such as <strong>Steam and GOG</strong>)</li>
-<li>Manually create an <a href="https://mod.io/oauth/widget" class="colorbox">OAuth 2 Access Token (Read + Write Access)</a> - or create a <a href="https://test.mod.io/oauth">test environment</a> token</li>
+<li>Use an <a href="https://mod.io/apikey/widget" class="colorbox">API key</a> for Read Only access (get a <a href="https://test.mod.io/apikey">test environment</a> API key here)</li>
+<li>Use the <a href="#authenticate-via-email">Email Authentication Flow</a> for Read and Write access (it creates an OAuth 2 Access Token via <strong>email</strong>)</li>
+<li>Use the <a href="#authenticate-via-steam">Platform Authentication Flow</a> for Read and Write access (it creates an OAuth 2 Access Token automatically on popular platforms such as <strong>Steam and Xbox</strong>)</li>
+<li>Manually create an <a href="https://mod.io/oauth/widget" class="colorbox">OAuth 2 Access Token</a> for Read and Write access (get a <a href="https://test.mod.io/oauth">test environment</a> OAuth 2 token here)</li>
 </ul>
 
-<p>You can use these methods of authentication interchangeably, depending on the level of access you require.</p>
+<p>All users and games are issued an API key, which must be included when querying the API. It is quick and easy to use but limited to read-only GET requests, due to the limited security it offers. If you want players to be able to add, edit, rate and subscribe to content, you will need to use an authentication method that generates an OAuth 2 Access token. These <a href="#authentication-2">authentication methods</a> are explained in detail here.</p>
 
 <table>
 <thead>
@@ -972,8 +966,6 @@
 </tr>
 </tbody>
 </table>
-<h3 id="api-key-authentication">API Key Authentication</h3>
-<p>To access the API authentication is required. All users and games get a private API key. It is quick and easy to use in your apps but limited to read-only GET requests, due to the limited security it offers. View your private API key(s) <a href="https://mod.io/apikey/widget" class="colorbox">on production</a> or on the <a href="https://test.mod.io/apikey">test environment</a>.</p>
 <h3 id="web-overlay-authentication">Web Overlay Authentication</h3>
 <p>At the moment it is not possible to open the mod.io website in-game with the user pre-authenticated, however you can provide a hint by appending <code>?ref=SERVICE</code> to the end of the URL. What this tells mod.io, is that when the user attempts to perform an action that requires authentication, they will be prompted to login with their <code>SERVICE</code> account. For example if you want to take a mod creator to their mod edit page in-game on Steam, the URL would look something like: <code>https://gamename.mod.io/modname/edit?ref=steam</code>. You can optionally add <code>&amp;login=auto</code> as well to automatically start the login process. Services supported are <strong>steam</strong>, <strong>xbox</strong>, <strong>itchio</strong>, <strong>discord</strong>, <strong>facebook</strong>, <strong>google</strong> and <strong>email</strong>. </p>
 <h3 id="scopes-oauth-2">Scopes (OAuth 2)</h3>
@@ -1019,7 +1011,7 @@ curl -X POST https://api.mod.io/v1/games/1/mods/1/tags <span class="se">\</span>
 <h3 id="access-token-lifetime-amp-expiry">Access Token Lifetime &amp; Expiry</h3>
 <p>By default, all access token's are long-lived - meaning they are valid for a common year (not leap year) from the date of issue. You should architect your application to smoothly handle the event in which a token expires or is revoked by the user themselves or a mod.io admin, triggering a <code>401 Unauthorized</code> API response.</p>
 
-<p>If you would like tokens issued through your game to have a shorter lifespan, you can do this by providing the <code>date_expires</code> parameter on any endpoint that returns an access token such as the <a href="#authentication">Email Exchange</a>, <a href="#authenticate-via-steam">Authenticate via Steam</a> and <a href="#authenticate-via-gog-galaxy">Authenticate via GOG Galaxy</a> endpoints. If the parameter is not supplied, it will default to 1 year from the request date, if the supplied parameter value is above one year or below the current server time it will be ignored and the default value restored.</p>
+<p>If you would like tokens issued through your game to have a shorter lifespan, you can do this by providing the <code>date_expires</code> parameter on any endpoint that returns an access token such as the <a href="#authentication">Email Exchange</a> or <a href="#authenticate-via-steam">Authenticate via Steam</a> endpoints. If the parameter is not supplied, it will default to 1 year from the request date, if the supplied parameter value is above one year or below the current server time it will be ignored and the default value restored.</p>
 <h3 id="request-content-type">Request Content-Type</h3>
 <p>If you are making a request that includes a file, your request <code>Content-Type</code> header <strong>must</strong> be <code>multipart/form-data</code>, otherwise if the request contains data (but no files) it should be <code>application/x-www-form-urlencoded</code>, which is UTF-8 encoded. </p>
 <pre class="highlight shell tab-shell"><code>// Example POST request with binary file
@@ -1821,23 +1813,18 @@ non-english content you must supply the <code>Content-Language</code> header in 
 <p>If you are a large studio or publisher and require a private, in-house, custom solution that accelerates your time to market with a best-in-class product, reach out to <a href="mailto:developers@mod.io?subject=Whitelabel%20license">developers@mod.io</a> to discuss the licensing options available.</p>
 <h2 id="contact">Contact</h2>
 <p>If you spot any errors within the mod.io documentation, have feedback on how we can make it easier to follow or simply want to discuss how awesome mods are, feel free to reach out to <a href="mailto:developers@mod.io?subject=API">developers@mod.io</a> or come join us in our <a href="https://discord.mod.io">discord channel</a>. We are here to help you grow and maximise the potential of mods in your game.</p>
-<h1 id="targeting-platforms">Targeting Platforms</h1><h2 id="targeting-a-platform">Targeting a Platform</h2>
-<p>When making API requests, you have the ability to tell mod.io what Platform the request is originating from and more importantly what platform the returned data is destined for. If you are using mod.io on Xbox One for example, it is <strong>important</strong> you specify the game client is running on Xbox One. </p>
-
-<p>Passing this header enables mod.io to return data that is relevant to the specific platforms (currently a work-in-progress) such as:</p>
+<h1 id="platforms">Platforms</h1><h2 id="targeting-a-platform">Targeting a Platform</h2>
+<p>When making API requests you should include the <code>X-Modio-Platform</code> header (with one of the values below), to tell mod.io what Platform the request is originating from. This header is <strong>important</strong> because it enables mod.io to return data that is approved for the platform such as:</p>
 
 <ul>
-<li>Supported mods</li>
-<li>Supported modfiles the player will download</li>
-<li>Supported tags the player is able to filter on</li>
-<li>and much more</li>
+<li>Supported mods and files</li>
+<li>Supported tags the player can filter on</li>
+<li>It also enables platform specific metrics</li>
 </ul>
 
-<p>To do this, all you need to do is pass the <code>X-Modio-Platform</code> header in every request you make to the mod.io API.</p>
+<p>For example, passing the HTTP header <code>X-Modio-Platform: XboxSeriesX</code> in your API request tells mod.io your player is on the Xbox Series X.</p>
 
-<p>Official mod.io <a href="#implementation">Plugins and SDK's</a> will automatically supply this value for you providing you have specified the correct platform in the tools' settings. We <strong>strongly recommend</strong> you supply this header in every request with the correct platform to enable mod.io to provide the best cross-platform experience for your players. Please see a list of supported platforms below:</p>
-
-<p>For example, passing the HTTP header <code>X-Modio-Platform: XboxSeriesX</code> in your request tells mod.io your player is playing on Xbox Series X.</p>
+<p>Official mod.io <a href="#implementation">Plugins and SDKs</a> will automatically supply this value for you providing you have specified the correct platform in the tools' settings. We <strong>strongly recommend</strong> you supply this header in every request with the correct platform to enable mod.io to provide the best cross-platform experience for your players. Please see a list of supported platforms below:</p>
 
 <table>
 <thead>
@@ -1894,11 +1881,11 @@ non-english content you must supply the <code>Content-Language</code> header in 
 </tbody>
 </table>
 
-<p>These values will be valid and successful irrespective of casing, as HTTP headers are case-insensitive. Have we missed a platform you are using? <a href="mailto:developers@mod.io?subject=Platform%20Support">Get in touch!</a> </p>
-<h2 id="targeting-a-portal">Targeting A Portal</h2>
-<p>Additionally, you can also inform mod.io what portal, which you may call a store, or app that the player is interacting with mod.io through by supplying the <code>X-Modio-Portal</code> header. It is important to pass this header where possible so we can fine-tune the experience based on how your player is engaging with us.</p>
+<p>These are the only supported values and are case-insensitive, anything else will be ignored and default to <code>Windows</code>. Have we missed a platform you are using? <a href="mailto:developers@mod.io?subject=Platform%20Support">Get in touch!</a> </p>
+<h2 id="targeting-a-portal">Targeting a Portal</h2>
+<p>When making API requests you should include the <code>X-Modio-Portal</code> header (with one of the values below), to tell mod.io what Portal (i.e. Store or App) the request is originating from. This header is <strong>important</strong> because it enables mod.io to fine-tune the experience, such as returning the display names used by players on that portal.</p>
 
-<p>For example, passing the HTTP header <code>X-Modio-Portal: EGS</code> in your request tells mod.io the player is playing your game on the Epic Games Store.</p>
+<p>For example, passing the HTTP header <code>X-Modio-Portal: EGS</code> in your API request tells mod.io your player is coming via the Epic Games Store.</p>
 
 <table>
 <thead>
@@ -1908,22 +1895,6 @@ non-english content you must supply the <code>Content-Language</code> header in 
 </tr>
 </thead>
 <tbody>
-<tr>
-<td>Xbox Live</td>
-<td><code>XboxLive</code></td>
-</tr>
-<tr>
-<td>Playstation Network</td>
-<td><code>PSN</code></td>
-</tr>
-<tr>
-<td>Nintendo</td>
-<td><code>Nintendo</code></td>
-</tr>
-<tr>
-<td>Steam</td>
-<td><code>Steam</code></td>
-</tr>
 <tr>
 <td>Apple</td>
 <td><code>Apple</code></td>
@@ -1937,17 +1908,33 @@ non-english content you must supply the <code>Content-Language</code> header in 
 <td><code>GOG</code></td>
 </tr>
 <tr>
+<td>Google</td>
+<td><code>Google</code></td>
+</tr>
+<tr>
 <td>itch.io</td>
 <td><code>Itchio</code></td>
 </tr>
 <tr>
-<td>Google</td>
-<td><code>Google</code></td>
+<td>Nintendo</td>
+<td><code>Nintendo</code></td>
+</tr>
+<tr>
+<td>Playstation Network</td>
+<td><code>PSN</code></td>
+</tr>
+<tr>
+<td>Steam</td>
+<td><code>Steam</code></td>
+</tr>
+<tr>
+<td>Xbox Live</td>
+<td><code>XboxLive</code></td>
 </tr>
 </tbody>
 </table>
 
-<p>Have we missed a portal you are using? <a href="mailto:developers@mod.io?subject=Portal%20Support">Get in touch!</a></p>
+<p>These are the only supported values and are case-insensitive, anything else will be ignored. Have we missed a portal you are using? <a href="mailto:developers@mod.io?subject=Portal%20Support">Get in touch!</a></p>
 <h1 id="authentication-2">Authentication</h1><h2 id="terms">Terms</h2>
 <blockquote>
 <p>Example request</p>
@@ -2106,8 +2093,6 @@ To perform this request, you must be authenticated via one of the following meth
 </aside>
 <h2 id="authenticate-via-email">Authenticate via Email</h2>
 <p>To perform writes, you will need to authenticate your users via OAuth 2. To make this frictionless in-game, we offer an email verification system, similar to what Slack and others pioneered. It works by users supplying their email, which we send a time-limited 5 digit security code too. They exchange this code in-game, for an <a href="https://mod.io/oauth/widget" class="colorbox">OAuth 2 access token</a> you can save to authenticate future requests. The benefit of this approach is it avoids complex website redirects, doesn't require your users to complete a slow registration flow, and eliminates the need to store usernames / passwords.</p>
-
-<p><img src="https://static.mod.io/v1/images/home/email.png" alt="mod.io Email Authentication Flow"></p>
 <pre class="highlight shell tab-shell"><code>// Example POST requesting security code be sent to supplied email
 
 curl -X POST https://api.mod.io/v1/oauth/emailrequest <span class="se">\</span>
@@ -2210,7 +2195,7 @@ curl -X POST https://api.mod.io/v1/oauth/emailexchange <span class="se">\</span>
 <li>Once exchanged for an <code>access_token</code>, the <code>security_code</code> is invalid.</li>
 </ul>
 
-<p>If you do not exchange your <code>security_code</code> for an <code>access_token</code> within 15 minutes of generation, you will need to begin the flow again to receive another code.</p>
+<p>If the user does not exchange the <code>security_code</code> they are emailed for an <code>access_token</code> within 15 minutes, you will need to begin the flow again to generate a new code.</p>
 
 <p><strong>Step 3: Use access token to access resources</strong></p>
 
@@ -3837,290 +3822,6 @@ curl -X POST https://api.mod.io/v1/external/discordauth?api_key<span class="o">=
 <td><a href="https://tools.ietf.org/html/rfc7231#section-6.5.3">Forbidden</a></td>
 <td>11051</td>
 <td>The user has not agreed to the mod.io Terms of Use. Please see terms_agreed parameter description and the <a href="#terms">Terms</a> endpoint for more information.</td>
-<td><a href="#schemaerror_object">Error Object</a></td>
-</tr>
-</tbody>
-</table>
-
-<aside class="auth-notice">
-To perform this request, you must be authenticated via one of the following methods:
-<a href="#authentication">api_key</a>
-</aside>
-<h2 id="request-email-security-code">Request Email Security Code</h2>
-<blockquote>
-<p>Example request</p>
-</blockquote>
-<pre class="highlight shell tab-shell"><code><span class="c"># You can also use wget</span>
-curl -X POST https://api.mod.io/v1/oauth/emailrequest?api_key<span class="o">=</span>YourApiKey <span class="se">\</span>
-  -H <span class="s1">'Content-Type: application/x-www-form-urlencoded'</span> <span class="se">\ </span>
-  -H <span class="s1">'Accept: application/json'</span> <span class="se">\</span>
-  -d <span class="s1">'email=someperson@someservice.com'</span>
-
-</code></pre><pre class="highlight http tab-http"><code><span class="nf">POST</span> <span class="nn">https://api.mod.io/v1/oauth/emailrequest?api_key=YourApiKey</span> <span class="k">HTTP</span><span class="o">/</span><span class="m">1.1</span>
-<span class="na">Host</span><span class="p">:</span> <span class="s">api.mod.io</span>
-<span class="na">Content-Type</span><span class="p">:</span> <span class="s">application/x-www-form-urlencoded</span>
-<span class="na">Accept</span><span class="p">:</span> <span class="s">application/json</span>
-
-</code></pre><pre class="highlight javascript tab-javascript"><code><span class="kd">var</span> <span class="nx">headers</span> <span class="o">=</span> <span class="p">{</span>
-  <span class="s1">'Content-Type'</span><span class="p">:</span><span class="s1">'application/x-www-form-urlencoded'</span><span class="p">,</span>
-  <span class="s1">'Accept'</span><span class="p">:</span><span class="s1">'application/json'</span>
-
-<span class="p">};</span>
-
-<span class="nx">$</span><span class="p">.</span><span class="nx">ajax</span><span class="p">({</span>
-  <span class="na">url</span><span class="p">:</span> <span class="s1">'https://api.mod.io/v1/oauth/emailrequest'</span><span class="p">,</span>
-  <span class="na">method</span><span class="p">:</span> <span class="s1">'post'</span><span class="p">,</span>
-  <span class="na">data</span><span class="p">:</span> <span class="s1">'?api_key=YourApiKey'</span><span class="p">,</span>
-  <span class="na">headers</span><span class="p">:</span> <span class="nx">headers</span><span class="p">,</span>
-  <span class="na">success</span><span class="p">:</span> <span class="kd">function</span><span class="p">(</span><span class="nx">data</span><span class="p">)</span> <span class="p">{</span>
-    <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">JSON</span><span class="p">.</span><span class="nx">stringify</span><span class="p">(</span><span class="nx">data</span><span class="p">));</span>
-  <span class="p">}</span>
-<span class="p">})</span>
-</code></pre><pre class="highlight javascript tab-javascript--nodejs"><code><span class="kr">const</span> <span class="nx">request</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s1">'node-fetch'</span><span class="p">);</span>
-<span class="kr">const</span> <span class="nx">inputBody</span> <span class="o">=</span> <span class="s1">'{
-  "email": "someperson@someservice.com"
-}'</span><span class="p">;</span>
-<span class="kr">const</span> <span class="nx">headers</span> <span class="o">=</span> <span class="p">{</span>
-  <span class="s1">'Content-Type'</span><span class="p">:</span><span class="s1">'application/x-www-form-urlencoded'</span><span class="p">,</span>
-  <span class="s1">'Accept'</span><span class="p">:</span><span class="s1">'application/json'</span>
-
-<span class="p">};</span>
-
-<span class="nx">fetch</span><span class="p">(</span><span class="s1">'https://api.mod.io/v1/oauth/emailrequest?api_key=YourApiKey'</span><span class="p">,</span>
-<span class="p">{</span>
-  <span class="na">method</span><span class="p">:</span> <span class="s1">'POST'</span><span class="p">,</span>
-  <span class="na">body</span><span class="p">:</span> <span class="nx">inputBody</span><span class="p">,</span>
-  <span class="na">headers</span><span class="p">:</span> <span class="nx">headers</span>
-<span class="p">})</span>
-<span class="p">.</span><span class="nx">then</span><span class="p">(</span><span class="kd">function</span><span class="p">(</span><span class="nx">res</span><span class="p">)</span> <span class="p">{</span>
-    <span class="k">return</span> <span class="nx">res</span><span class="p">.</span><span class="nx">json</span><span class="p">();</span>
-<span class="p">}).</span><span class="nx">then</span><span class="p">(</span><span class="kd">function</span><span class="p">(</span><span class="nx">body</span><span class="p">)</span> <span class="p">{</span>
-    <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">body</span><span class="p">);</span>
-<span class="p">});</span>
-</code></pre><pre class="highlight python tab-python"><code><span class="kn">import</span> <span class="nn">requests</span>
-<span class="n">headers</span> <span class="o">=</span> <span class="p">{</span>
-  <span class="s">'Content-Type'</span><span class="p">:</span> <span class="s">'application/x-www-form-urlencoded'</span><span class="p">,</span>
-  <span class="s">'Accept'</span><span class="p">:</span> <span class="s">'application/json'</span>
-<span class="p">}</span>
-
-<span class="n">r</span> <span class="o">=</span> <span class="n">requests</span><span class="o">.</span><span class="n">post</span><span class="p">(</span><span class="s">'https://api.mod.io/v1/oauth/emailrequest'</span><span class="p">,</span> <span class="n">params</span><span class="o">=</span><span class="p">{</span>
-  <span class="s">'api_key'</span><span class="p">:</span> <span class="s">'YourApiKey'</span>
-<span class="p">},</span> <span class="n">headers</span> <span class="o">=</span> <span class="n">headers</span><span class="p">)</span>
-
-<span class="k">print</span> <span class="n">r</span><span class="o">.</span><span class="n">json</span><span class="p">()</span>
-</code></pre><pre class="highlight java tab-java"><code><span class="n">URL</span> <span class="n">obj</span> <span class="o">=</span> <span class="k">new</span> <span class="n">URL</span><span class="o">(</span><span class="s">"https://api.mod.io/v1/oauth/emailrequest?api_key=YourApiKey"</span><span class="o">);</span>
-<span class="n">HttpURLConnection</span> <span class="n">con</span> <span class="o">=</span> <span class="o">(</span><span class="n">HttpURLConnection</span><span class="o">)</span> <span class="n">obj</span><span class="o">.</span><span class="na">openConnection</span><span class="o">();</span>
-<span class="n">con</span><span class="o">.</span><span class="na">setRequestMethod</span><span class="o">(</span><span class="s">"POST"</span><span class="o">);</span>
-<span class="kt">int</span> <span class="n">responseCode</span> <span class="o">=</span> <span class="n">con</span><span class="o">.</span><span class="na">getResponseCode</span><span class="o">();</span>
-<span class="n">BufferedReader</span> <span class="n">in</span> <span class="o">=</span> <span class="k">new</span> <span class="n">BufferedReader</span><span class="o">(</span>
-    <span class="k">new</span> <span class="nf">InputStreamReader</span><span class="o">(</span><span class="n">con</span><span class="o">.</span><span class="na">getInputStream</span><span class="o">()));</span>
-<span class="n">String</span> <span class="n">inputLine</span><span class="o">;</span>
-<span class="n">StringBuffer</span> <span class="n">response</span> <span class="o">=</span> <span class="k">new</span> <span class="n">StringBuffer</span><span class="o">();</span>
-<span class="k">while</span> <span class="o">((</span><span class="n">inputLine</span> <span class="o">=</span> <span class="n">in</span><span class="o">.</span><span class="na">readLine</span><span class="o">())</span> <span class="o">!=</span> <span class="kc">null</span><span class="o">)</span> <span class="o">{</span>
-    <span class="n">response</span><span class="o">.</span><span class="na">append</span><span class="o">(</span><span class="n">inputLine</span><span class="o">);</span>
-<span class="o">}</span>
-<span class="n">in</span><span class="o">.</span><span class="na">close</span><span class="o">();</span>
-<span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="n">response</span><span class="o">.</span><span class="na">toString</span><span class="o">());</span>
-</code></pre>
-<p><span class="httpmethod POST">POST</span> <span class="endpointheading">/v1/oauth/emailrequest</span></p>
-
-<p>Request an access token on behalf of a user, as identified by their e-mail. To use this functionality you <em>must</em> use your games api_key from your games profile on mod.io. A Successful request will return a <a href="#message-object">Message Object</a>.</p>
-
-<table>
-<thead>
-<tr>
-<th>Parameter</th>
-<th>Type</th>
-<th>Required</th>
-<th>Description</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>email</td>
-<td>string</td>
-<td>true</td>
-<td>An email address the user can access to retrieve the security code. This parameter should also be urlencoded before the request is sent.</td>
-</tr>
-</tbody>
-</table>
-
-<blockquote>
-<p>Example response</p>
-</blockquote>
-<pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
-  </span><span class="s2">"code"</span><span class="p">:</span><span class="w"> </span><span class="mi">200</span><span class="p">,</span><span class="w">
-  </span><span class="s2">"message"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Your request was successful."</span><span class="w">
-</span><span class="p">}</span><span class="w">
-
-</span></code></pre>
-<h3 id="Request-Email-Security-Code-responses">Responses</h3>
-
-<table>
-<thead>
-<tr>
-<th>Status</th>
-<th>Meaning</th>
-<th>Error Ref</th>
-<th>Description</th>
-<th>Response Schema</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>200</td>
-<td><a href="https://tools.ietf.org/html/rfc7231#section-6.3.1">OK</a></td>
-<td></td>
-<td>Successful Request</td>
-<td><a href="#schemamessage_object">Message Object</a></td>
-</tr>
-</tbody>
-</table>
-
-<aside class="auth-notice">
-To perform this request, you must be authenticated via one of the following methods:
-<a href="#authentication">api_key</a>
-</aside>
-<h2 id="exchange-email-security-code">Exchange Email Security Code</h2>
-<blockquote>
-<p>Example request</p>
-</blockquote>
-<pre class="highlight shell tab-shell"><code><span class="c"># You can also use wget</span>
-curl -X POST https://api.mod.io/v1/oauth/emailexchange?api_key<span class="o">=</span>YourApiKey <span class="se">\</span>
-  -H <span class="s1">'Content-Type: application/x-www-form-urlencoded'</span> <span class="se">\ </span>
-  -H <span class="s1">'Accept: application/json'</span> <span class="se">\</span>
-  -d <span class="s1">'security_code=P39TM'</span>
-
-</code></pre><pre class="highlight http tab-http"><code><span class="nf">POST</span> <span class="nn">https://api.mod.io/v1/oauth/emailexchange?api_key=YourApiKey</span> <span class="k">HTTP</span><span class="o">/</span><span class="m">1.1</span>
-<span class="na">Host</span><span class="p">:</span> <span class="s">api.mod.io</span>
-<span class="na">Content-Type</span><span class="p">:</span> <span class="s">application/x-www-form-urlencoded</span>
-<span class="na">Accept</span><span class="p">:</span> <span class="s">application/json</span>
-
-</code></pre><pre class="highlight javascript tab-javascript"><code><span class="kd">var</span> <span class="nx">headers</span> <span class="o">=</span> <span class="p">{</span>
-  <span class="s1">'Content-Type'</span><span class="p">:</span><span class="s1">'application/x-www-form-urlencoded'</span><span class="p">,</span>
-  <span class="s1">'Accept'</span><span class="p">:</span><span class="s1">'application/json'</span>
-
-<span class="p">};</span>
-
-<span class="nx">$</span><span class="p">.</span><span class="nx">ajax</span><span class="p">({</span>
-  <span class="na">url</span><span class="p">:</span> <span class="s1">'https://api.mod.io/v1/oauth/emailexchange'</span><span class="p">,</span>
-  <span class="na">method</span><span class="p">:</span> <span class="s1">'post'</span><span class="p">,</span>
-  <span class="na">data</span><span class="p">:</span> <span class="s1">'?api_key=YourApiKey'</span><span class="p">,</span>
-  <span class="na">headers</span><span class="p">:</span> <span class="nx">headers</span><span class="p">,</span>
-  <span class="na">success</span><span class="p">:</span> <span class="kd">function</span><span class="p">(</span><span class="nx">data</span><span class="p">)</span> <span class="p">{</span>
-    <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">JSON</span><span class="p">.</span><span class="nx">stringify</span><span class="p">(</span><span class="nx">data</span><span class="p">));</span>
-  <span class="p">}</span>
-<span class="p">})</span>
-</code></pre><pre class="highlight javascript tab-javascript--nodejs"><code><span class="kr">const</span> <span class="nx">request</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s1">'node-fetch'</span><span class="p">);</span>
-<span class="kr">const</span> <span class="nx">inputBody</span> <span class="o">=</span> <span class="s1">'{
-  "security_code": "P39TM"
-}'</span><span class="p">;</span>
-<span class="kr">const</span> <span class="nx">headers</span> <span class="o">=</span> <span class="p">{</span>
-  <span class="s1">'Content-Type'</span><span class="p">:</span><span class="s1">'application/x-www-form-urlencoded'</span><span class="p">,</span>
-  <span class="s1">'Accept'</span><span class="p">:</span><span class="s1">'application/json'</span>
-
-<span class="p">};</span>
-
-<span class="nx">fetch</span><span class="p">(</span><span class="s1">'https://api.mod.io/v1/oauth/emailexchange?api_key=YourApiKey'</span><span class="p">,</span>
-<span class="p">{</span>
-  <span class="na">method</span><span class="p">:</span> <span class="s1">'POST'</span><span class="p">,</span>
-  <span class="na">body</span><span class="p">:</span> <span class="nx">inputBody</span><span class="p">,</span>
-  <span class="na">headers</span><span class="p">:</span> <span class="nx">headers</span>
-<span class="p">})</span>
-<span class="p">.</span><span class="nx">then</span><span class="p">(</span><span class="kd">function</span><span class="p">(</span><span class="nx">res</span><span class="p">)</span> <span class="p">{</span>
-    <span class="k">return</span> <span class="nx">res</span><span class="p">.</span><span class="nx">json</span><span class="p">();</span>
-<span class="p">}).</span><span class="nx">then</span><span class="p">(</span><span class="kd">function</span><span class="p">(</span><span class="nx">body</span><span class="p">)</span> <span class="p">{</span>
-    <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">body</span><span class="p">);</span>
-<span class="p">});</span>
-</code></pre><pre class="highlight python tab-python"><code><span class="kn">import</span> <span class="nn">requests</span>
-<span class="n">headers</span> <span class="o">=</span> <span class="p">{</span>
-  <span class="s">'Content-Type'</span><span class="p">:</span> <span class="s">'application/x-www-form-urlencoded'</span><span class="p">,</span>
-  <span class="s">'Accept'</span><span class="p">:</span> <span class="s">'application/json'</span>
-<span class="p">}</span>
-
-<span class="n">r</span> <span class="o">=</span> <span class="n">requests</span><span class="o">.</span><span class="n">post</span><span class="p">(</span><span class="s">'https://api.mod.io/v1/oauth/emailexchange'</span><span class="p">,</span> <span class="n">params</span><span class="o">=</span><span class="p">{</span>
-  <span class="s">'api_key'</span><span class="p">:</span> <span class="s">'YourApiKey'</span>
-<span class="p">},</span> <span class="n">headers</span> <span class="o">=</span> <span class="n">headers</span><span class="p">)</span>
-
-<span class="k">print</span> <span class="n">r</span><span class="o">.</span><span class="n">json</span><span class="p">()</span>
-</code></pre><pre class="highlight java tab-java"><code><span class="n">URL</span> <span class="n">obj</span> <span class="o">=</span> <span class="k">new</span> <span class="n">URL</span><span class="o">(</span><span class="s">"https://api.mod.io/v1/oauth/emailexchange?api_key=YourApiKey"</span><span class="o">);</span>
-<span class="n">HttpURLConnection</span> <span class="n">con</span> <span class="o">=</span> <span class="o">(</span><span class="n">HttpURLConnection</span><span class="o">)</span> <span class="n">obj</span><span class="o">.</span><span class="na">openConnection</span><span class="o">();</span>
-<span class="n">con</span><span class="o">.</span><span class="na">setRequestMethod</span><span class="o">(</span><span class="s">"POST"</span><span class="o">);</span>
-<span class="kt">int</span> <span class="n">responseCode</span> <span class="o">=</span> <span class="n">con</span><span class="o">.</span><span class="na">getResponseCode</span><span class="o">();</span>
-<span class="n">BufferedReader</span> <span class="n">in</span> <span class="o">=</span> <span class="k">new</span> <span class="n">BufferedReader</span><span class="o">(</span>
-    <span class="k">new</span> <span class="nf">InputStreamReader</span><span class="o">(</span><span class="n">con</span><span class="o">.</span><span class="na">getInputStream</span><span class="o">()));</span>
-<span class="n">String</span> <span class="n">inputLine</span><span class="o">;</span>
-<span class="n">StringBuffer</span> <span class="n">response</span> <span class="o">=</span> <span class="k">new</span> <span class="n">StringBuffer</span><span class="o">();</span>
-<span class="k">while</span> <span class="o">((</span><span class="n">inputLine</span> <span class="o">=</span> <span class="n">in</span><span class="o">.</span><span class="na">readLine</span><span class="o">())</span> <span class="o">!=</span> <span class="kc">null</span><span class="o">)</span> <span class="o">{</span>
-    <span class="n">response</span><span class="o">.</span><span class="na">append</span><span class="o">(</span><span class="n">inputLine</span><span class="o">);</span>
-<span class="o">}</span>
-<span class="n">in</span><span class="o">.</span><span class="na">close</span><span class="o">();</span>
-<span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="n">response</span><span class="o">.</span><span class="na">toString</span><span class="o">());</span>
-</code></pre>
-<p><span class="httpmethod POST">POST</span> <span class="endpointheading">/v1/oauth/emailexchange</span></p>
-
-<p>Exchange a recently issued security code for an access token. To use this functionality you <em>must</em> use your games api_key from your games profile on mod.io and the same api_key must be used from the original request for a security code. A Successful request will return an <a href="#access-token-object">Access Token Object</a>.</p>
-
-<table>
-<thead>
-<tr>
-<th>Parameter</th>
-<th>Type</th>
-<th>Required</th>
-<th>Description</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>security_code</td>
-<td>string</td>
-<td>true</td>
-<td>The alpha-numeric security code.</td>
-</tr>
-<tr>
-<td>date_expires</td>
-<td>integer</td>
-<td></td>
-<td>Unix timestamp of date in which the returned token will expire. Value cannot be higher than the default value which is a common year (unix timestamp + 31536000 seconds). Using a token after it's expiry time has elapsed will result in a <code>401 Unauthorized</code> response.</td>
-</tr>
-</tbody>
-</table>
-
-<blockquote>
-<p>Example response</p>
-</blockquote>
-<pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
-  </span><span class="s2">"code"</span><span class="p">:</span><span class="w"> </span><span class="mi">200</span><span class="p">,</span><span class="w">
-  </span><span class="s2">"access_token"</span><span class="p">:</span><span class="w"> </span><span class="s2">"eyJ0eXAiOiXKV1QibCJhbLciOiJeiUzI1....."</span><span class="p">,</span><span class="w">
-  </span><span class="s2">"date_expires"</span><span class="p">:</span><span class="w"> </span><span class="mi">1570673249</span><span class="w">
-</span><span class="p">}</span><span class="w">
-
-</span></code></pre>
-<h3 id="Exchange-Email-Security-Code-responses">Responses</h3>
-
-<table>
-<thead>
-<tr>
-<th>Status</th>
-<th>Meaning</th>
-<th>Error Ref</th>
-<th>Description</th>
-<th>Response Schema</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>200</td>
-<td><a href="https://tools.ietf.org/html/rfc7231#section-6.3.1">OK</a></td>
-<td></td>
-<td>Successful Request</td>
-<td><a href="#schemaaccess_token_object">Access Token Object</a></td>
-</tr>
-<tr>
-<td>401</td>
-<td><a href="https://tools.ietf.org/html/rfc7235#section-3.1">Unauthorized</a></td>
-<td></td>
-<td>The supplied security_code is invalid.</td>
 <td><a href="#schemaerror_object">Error Object</a></td>
 </tr>
 </tbody>
