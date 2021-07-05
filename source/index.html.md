@@ -69,21 +69,17 @@ Here is a brief list of the things to know about our API, as explained in more d
 
 Authentication can be done via 4 ways:
 
-- Request an [API key (Read Only Access)](https://mod.io/apikey/widget) - or get a [test environment](https://test.mod.io/apikey) key
-- Use the [Email Authentication Flow (Read + Write Access)](#authenticate-via-email) (to create an OAuth 2 Access Token via **email**)
-- Use the [External App Tickets Flow (Read + Write Access)](#authenticate-via-steam) (to create an OAuth 2 Access Token automatically on popular platforms such as **Steam and GOG**)
-- Manually create an [OAuth 2 Access Token (Read + Write Access)](https://mod.io/oauth/widget) - or create a [test environment](https://test.mod.io/oauth) token
+- Use an [API key](https://mod.io/apikey/widget) for Read Only access (get a [test environment](https://test.mod.io/apikey) API key here)
+- Use the [Email Authentication Flow](#authenticate-via-email) for Read and Write access (it creates an OAuth 2 Access Token via **email**)
+- Use the [Platform Authentication Flow](#authenticate-via-steam) for Read and Write access (it creates an OAuth 2 Access Token automatically on popular platforms such as **Steam and Xbox**)
+- Manually create an [OAuth 2 Access Token](https://mod.io/oauth/widget) for Read and Write access (get a [test environment](https://test.mod.io/oauth) OAuth 2 token here)
 
-You can use these methods of authentication interchangeably, depending on the level of access you require.
+All users and games are issued an API key, which must be included when querying the API. It is quick and easy to use but limited to read-only GET requests, due to the limited security it offers. If you want players to be able to add, edit, rate and subscribe to content, you will need to use an authentication method that generates an OAuth 2 Access token. These [authentication methods](#authentication-2) are explained in detail here.
 
 Authentication Type | In | HTTP Methods | Abilities | Purpose
 ---------- | ---------- | ---------- | ---------- | ---------- 
 API Key | Query | GET | Read-only GET requests and authentication flows. | Browsing and downloading content. Retrieving access tokens on behalf of users.
 Access Token (OAuth 2) | Header | GET, POST, PUT, DELETE | Read, create, update, delete. | View, add, edit and delete content the authenticated user has subscribed to or has permission to change.
-
-### API Key Authentication
-
-To access the API authentication is required. All users and games get a private API key. It is quick and easy to use in your apps but limited to read-only GET requests, due to the limited security it offers. View your private API key(s) [on production](https://mod.io/apikey/widget) or on the [test environment](https://test.mod.io/apikey).
 
 ### Web Overlay Authentication
 
@@ -129,7 +125,7 @@ To authenticate using an OAuth 2 access token, you must include the HTTP header 
 
 By default, all access token's are long-lived - meaning they are valid for a common year (not leap year) from the date of issue. You should architect your application to smoothly handle the event in which a token expires or is revoked by the user themselves or a mod.io admin, triggering a `401 Unauthorized` API response.
 
-If you would like tokens issued through your game to have a shorter lifespan, you can do this by providing the `date_expires` parameter on any endpoint that returns an access token such as the [Email Exchange](#authentication), [Authenticate via Steam](#authenticate-via-steam) and [Authenticate via GOG Galaxy](#authenticate-via-gog-galaxy) endpoints. If the parameter is not supplied, it will default to 1 year from the request date, if the supplied parameter value is above one year or below the current server time it will be ignored and the default value restored.
+If you would like tokens issued through your game to have a shorter lifespan, you can do this by providing the `date_expires` parameter on any endpoint that returns an access token such as the [Email Exchange](#authentication) or [Authenticate via Steam](#authenticate-via-steam) endpoints. If the parameter is not supplied, it will default to 1 year from the request date, if the supplied parameter value is above one year or below the current server time it will be ignored and the default value restored.
 
 ### Request Content-Type
 
@@ -754,24 +750,19 @@ If you are a large studio or publisher and require a private, in-house, custom s
 
 If you spot any errors within the mod.io documentation, have feedback on how we can make it easier to follow or simply want to discuss how awesome mods are, feel free to reach out to [developers@mod.io](mailto:developers@mod.io?subject=API) or come join us in our [discord channel](https://discord.mod.io). We are here to help you grow and maximise the potential of mods in your game.
 
-# Targeting Platforms
+# Platforms
 
 ## Targeting a Platform
 
-When making API requests, you have the ability to tell mod.io what Platform the request is originating from and more importantly what platform the returned data is destined for. If you are using mod.io on Xbox One for example, it is __important__ you specify the game client is running on Xbox One. 
+When making API requests you should include the `X-Modio-Platform` header (with one of the values below), to tell mod.io what Platform the request is originating from. This header is __important__ because it enables mod.io to return data that is approved for the platform such as:
 
-Passing this header enables mod.io to return data that is relevant to the specific platforms (currently a work-in-progress) such as:
+ - Supported mods and files
+ - Supported tags the player can filter on
+ - It also enables platform specific metrics
 
-- Supported mods
-- Supported modfiles the player will download
-- Supported tags the player is able to filter on
-- and much more
+For example, passing the HTTP header `X-Modio-Platform: XboxSeriesX` in your API request tells mod.io your player is on the Xbox Series X.
 
-To do this, all you need to do is pass the `X-Modio-Platform` header in every request you make to the mod.io API.
-
-Official mod.io [Plugins and SDK's](#implementation) will automatically supply this value for you providing you have specified the correct platform in the tools' settings. We __strongly recommend__ you supply this header in every request with the correct platform to enable mod.io to provide the best cross-platform experience for your players. Please see a list of supported platforms below:
-
-For example, passing the HTTP header `X-Modio-Platform: XboxSeriesX` in your request tells mod.io your player is playing on Xbox Series X.
+Official mod.io [Plugins and SDKs](#implementation) will automatically supply this value for you providing you have specified the correct platform in the tools' settings. We __strongly recommend__ you supply this header in every request with the correct platform to enable mod.io to provide the best cross-platform experience for your players. Please see a list of supported platforms below:
 
 Target Platform | Header Value
 ---------- | ----------  
@@ -787,29 +778,30 @@ Playstation 5 | `PS5`
 Switch | `Switch`
 Wii | `Wii`
 
-These values will be valid and successful irrespective of casing, as HTTP headers are case-insensitive. Have we missed a platform you are using? [Get in touch!](mailto:developers@mod.io?subject=Platform%20Support) 
+These are the only supported values and are case-insensitive, anything else will be ignored and default to `Windows`. Have we missed a platform you are using? [Get in touch!](mailto:developers@mod.io?subject=Platform%20Support) 
 
-## Targeting A Portal
+## Targeting a Portal
 
-Additionally, you can also inform mod.io what portal, which you may call a store, or app that the player is interacting with mod.io through by supplying the `X-Modio-Portal` header. It is important to pass this header where possible so we can fine-tune the experience based on how your player is engaging with us.
+When making API requests you should include the `X-Modio-Portal` header (with one of the values below), to tell mod.io what Portal (i.e. Store or App) the request is originating from. This header is __important__ because it enables mod.io to fine-tune the experience, such as returning the display names used by players on that portal.
 
-For example, passing the HTTP header `X-Modio-Portal: EGS` in your request tells mod.io the player is playing your game on the Epic Games Store.
+For example, passing the HTTP header `X-Modio-Portal: EGS` in your API request tells mod.io your player is coming via the Epic Games Store.
 
 Target Portal | Header Value
 ---------- | ----------  
-Xbox Live | `XboxLive`
-Playstation Network | `PSN`
-Nintendo | `Nintendo`
-Steam | `Steam`
 Apple | `Apple`
 Epic Games Store | `EGS`
 GOG | `GOG`
-itch.io | `Itchio`
 Google | `Google`
+itch.io | `Itchio`
+Nintendo | `Nintendo`
+Playstation Network | `PSN`
+Steam | `Steam`
+Xbox Live | `XboxLive`
 
-Have we missed a portal you are using? [Get in touch!](mailto:developers@mod.io?subject=Portal%20Support)
+These are the only supported values and are case-insensitive, anything else will be ignored. Have we missed a portal you are using? [Get in touch!](mailto:developers@mod.io?subject=Portal%20Support)
 
 # Authentication
+
 ## Terms
 
 > Example request
@@ -958,8 +950,6 @@ To perform this request, you must be authenticated via one of the following meth
 
 To perform writes, you will need to authenticate your users via OAuth 2. To make this frictionless in-game, we offer an email verification system, similar to what Slack and others pioneered. It works by users supplying their email, which we send a time-limited 5 digit security code too. They exchange this code in-game, for an [OAuth 2 access token](https://mod.io/oauth/widget) you can save to authenticate future requests. The benefit of this approach is it avoids complex website redirects, doesn't require your users to complete a slow registration flow, and eliminates the need to store usernames / passwords.
 
-![mod.io Email Authentication Flow](https://static.mod.io/v1/images/home/email.png)
-
 ```shell
 // Example POST requesting security code be sent to supplied email
 
@@ -1028,14 +1018,13 @@ There are a few important things to know when using the email authentication flo
 - The generated `security_code` is short-lived and will expire after 15 minutes.
 - Once exchanged for an `access_token`, the `security_code` is invalid.
 
-If you do not exchange your `security_code` for an `access_token` within 15 minutes of generation, you will need to begin the flow again to receive another code.
+If the user does not exchange the `security_code` they are emailed for an `access_token` within 15 minutes, you will need to begin the flow again to generate a new code.
 
 **Step 3: Use access token to access resources**
 
 See [Making Requests](#making-requests) section.
 
 **HINT:** If you want to overlay the mod.io site in-game and you authenticate users via email, we recommend you add `?ref=email` to the end of the URL you open which will prompt the user to login via their email. See [Web Overlay Authentication](#web-overlay-authentication) for details.
-
 
 
 ## Authenticate via Steam
@@ -2095,251 +2084,6 @@ Status|Meaning|Error Ref|Description|Response Schema
 403|[Forbidden](https://tools.ietf.org/html/rfc7231#section-6.5.3)|11016|The api_key supplied in the request must be associated with a game.|[Error Object](#schemaerror_object)
 403|[Forbidden](https://tools.ietf.org/html/rfc7231#section-6.5.3)|11017|The api_key supplied in the request is for test environment purposes only and cannot be used for this functionality.|[Error Object](#schemaerror_object)
 403|[Forbidden](https://tools.ietf.org/html/rfc7231#section-6.5.3)|11051|The user has not agreed to the mod.io Terms of Use. Please see terms_agreed parameter description and the [Terms](#terms) endpoint for more information.|[Error Object](#schemaerror_object)
-
-<aside class="auth-notice">
-To perform this request, you must be authenticated via one of the following methods:
-<a href="#authentication">api_key</a>
-</aside>
-## Request Email Security Code
-
-> Example request
-
-```shell
-# You can also use wget
-curl -X POST https://api.mod.io/v1/oauth/emailrequest?api_key=YourApiKey \
-  -H 'Content-Type: application/x-www-form-urlencoded' \ 
-  -H 'Accept: application/json' \
-  -d 'email=someperson@someservice.com'
-
-```
-
-```http
-POST https://api.mod.io/v1/oauth/emailrequest?api_key=YourApiKey HTTP/1.1
-Host: api.mod.io
-Content-Type: application/x-www-form-urlencoded
-Accept: application/json
-
-```
-
-```javascript
-var headers = {
-  'Content-Type':'application/x-www-form-urlencoded',
-  'Accept':'application/json'
-
-};
-
-$.ajax({
-  url: 'https://api.mod.io/v1/oauth/emailrequest',
-  method: 'post',
-  data: '?api_key=YourApiKey',
-  headers: headers,
-  success: function(data) {
-    console.log(JSON.stringify(data));
-  }
-})
-```
-
-```javascript--nodejs
-const request = require('node-fetch');
-const inputBody = '{
-  "email": "someperson@someservice.com"
-}';
-const headers = {
-  'Content-Type':'application/x-www-form-urlencoded',
-  'Accept':'application/json'
-
-};
-
-fetch('https://api.mod.io/v1/oauth/emailrequest?api_key=YourApiKey',
-{
-  method: 'POST',
-  body: inputBody,
-  headers: headers
-})
-.then(function(res) {
-    return res.json();
-}).then(function(body) {
-    console.log(body);
-});
-```
-
-```python
-import requests
-headers = {
-  'Content-Type': 'application/x-www-form-urlencoded',
-  'Accept': 'application/json'
-}
-
-r = requests.post('https://api.mod.io/v1/oauth/emailrequest', params={
-  'api_key': 'YourApiKey'
-}, headers = headers)
-
-print r.json()
-```
-
-```java
-URL obj = new URL("https://api.mod.io/v1/oauth/emailrequest?api_key=YourApiKey");
-HttpURLConnection con = (HttpURLConnection) obj.openConnection();
-con.setRequestMethod("POST");
-int responseCode = con.getResponseCode();
-BufferedReader in = new BufferedReader(
-    new InputStreamReader(con.getInputStream()));
-String inputLine;
-StringBuffer response = new StringBuffer();
-while ((inputLine = in.readLine()) != null) {
-    response.append(inputLine);
-}
-in.close();
-System.out.println(response.toString());
-```
-
-`POST /v1/oauth/emailrequest`
-
-Request an access token on behalf of a user, as identified by their e-mail. To use this functionality you *must* use your games api_key from your games profile on mod.io. A Successful request will return a [Message Object](#message-object).
-      
-     Parameter|Type|Required|Description
-     ---|---|---|---|     
-     email|string|true|An email address the user can access to retrieve the security code. This parameter should also be urlencoded before the request is sent.
-
-
-> Example response
-
-```json
-{
-  "code": 200,
-  "message": "Your request was successful."
-}
-
-```
-<h3 id="Request-Email-Security-Code-responses">Responses</h3>
-
-Status|Meaning|Error Ref|Description|Response Schema
----|---|----|---|---|
-200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)||Successful Request|[Message Object](#schemamessage_object)
-
-<aside class="auth-notice">
-To perform this request, you must be authenticated via one of the following methods:
-<a href="#authentication">api_key</a>
-</aside>
-## Exchange Email Security Code
-
-> Example request
-
-```shell
-# You can also use wget
-curl -X POST https://api.mod.io/v1/oauth/emailexchange?api_key=YourApiKey \
-  -H 'Content-Type: application/x-www-form-urlencoded' \ 
-  -H 'Accept: application/json' \
-  -d 'security_code=P39TM'
-
-```
-
-```http
-POST https://api.mod.io/v1/oauth/emailexchange?api_key=YourApiKey HTTP/1.1
-Host: api.mod.io
-Content-Type: application/x-www-form-urlencoded
-Accept: application/json
-
-```
-
-```javascript
-var headers = {
-  'Content-Type':'application/x-www-form-urlencoded',
-  'Accept':'application/json'
-
-};
-
-$.ajax({
-  url: 'https://api.mod.io/v1/oauth/emailexchange',
-  method: 'post',
-  data: '?api_key=YourApiKey',
-  headers: headers,
-  success: function(data) {
-    console.log(JSON.stringify(data));
-  }
-})
-```
-
-```javascript--nodejs
-const request = require('node-fetch');
-const inputBody = '{
-  "security_code": "P39TM"
-}';
-const headers = {
-  'Content-Type':'application/x-www-form-urlencoded',
-  'Accept':'application/json'
-
-};
-
-fetch('https://api.mod.io/v1/oauth/emailexchange?api_key=YourApiKey',
-{
-  method: 'POST',
-  body: inputBody,
-  headers: headers
-})
-.then(function(res) {
-    return res.json();
-}).then(function(body) {
-    console.log(body);
-});
-```
-
-```python
-import requests
-headers = {
-  'Content-Type': 'application/x-www-form-urlencoded',
-  'Accept': 'application/json'
-}
-
-r = requests.post('https://api.mod.io/v1/oauth/emailexchange', params={
-  'api_key': 'YourApiKey'
-}, headers = headers)
-
-print r.json()
-```
-
-```java
-URL obj = new URL("https://api.mod.io/v1/oauth/emailexchange?api_key=YourApiKey");
-HttpURLConnection con = (HttpURLConnection) obj.openConnection();
-con.setRequestMethod("POST");
-int responseCode = con.getResponseCode();
-BufferedReader in = new BufferedReader(
-    new InputStreamReader(con.getInputStream()));
-String inputLine;
-StringBuffer response = new StringBuffer();
-while ((inputLine = in.readLine()) != null) {
-    response.append(inputLine);
-}
-in.close();
-System.out.println(response.toString());
-```
-
-`POST /v1/oauth/emailexchange`
-
-Exchange a recently issued security code for an access token. To use this functionality you *must* use your games api_key from your games profile on mod.io and the same api_key must be used from the original request for a security code. A Successful request will return an [Access Token Object](#access-token-object).
- 
-    Parameter|Type|Required|Description
-    ---|---|---|---|
-    security_code|string|true|The alpha-numeric security code.
-    date_expires|integer||Unix timestamp of date in which the returned token will expire. Value cannot be higher than the default value which is a common year (unix timestamp + 31536000 seconds). Using a token after it's expiry time has elapsed will result in a `401 Unauthorized` response.
-
-
-> Example response
-
-```json
-{
-  "code": 200,
-  "access_token": "eyJ0eXAiOiXKV1QibCJhbLciOiJeiUzI1.....",
-  "date_expires": 1570673249
-}
-
-```
-<h3 id="Exchange-Email-Security-Code-responses">Responses</h3>
-
-Status|Meaning|Error Ref|Description|Response Schema
----|---|----|---|---|
-200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)||Successful Request|[Access Token Object](#schemaaccess_token_object)
-401|[Unauthorized](https://tools.ietf.org/html/rfc7235#section-3.1)||The supplied security_code is invalid.|[Error Object](#schemaerror_object)
 
 <aside class="auth-notice">
 To perform this request, you must be authenticated via one of the following methods:
