@@ -50,27 +50,21 @@ Here is a brief list of the things to know about our API, as explained in more d
 
 Authentication can be done via 4 ways:
 
-- Request an [API key (Read Only Access)](--parse_siteurl/apikey/widget) - or get a [test environment](--parse_sitetesturl/apikey) key
-- Use the [Email Authentication Flow (Read + Write Access)](#authenticate-via-email) (to create an OAuth 2 Access Token via **email**)
-- Use the [External App Tickets Flow (Read + Write Access)](#authenticate-via-steam) (to create an OAuth 2 Access Token automatically on popular platforms such as **Steam and GOG**)
-- Manually create an [OAuth 2 Access Token (Read + Write Access)](--parse_siteurl/oauth/widget) - or create a [test environment](--parse_sitetesturl/oauth) token
+- Use an [API key](--parse_siteurl/apikey/widget) for Read Only access (get a [test environment](--parse_sitetesturl/apikey) API key here)
+- Use the [Email Authentication Flow](#authenticate-via-email) for Read and Write access (it creates an OAuth 2 Access Token via **email**)
+- Use the [Platform Authentication Flow](#authenticate-via-steam) for Read and Write access (it creates an OAuth 2 Access Token automatically on popular platforms such as **Steam and Xbox**)
+- Manually create an [OAuth 2 Access Token](--parse_siteurl/oauth/widget) for Read and Write access (get a [test environment](--parse_sitetesturl/oauth) OAuth 2 token here)
 
-You can use these methods of authentication interchangeably, depending on the level of access you require.
+All users and games are issued an API key, which must be included when querying the API. It is quick and easy to use but limited to read-only GET requests, due to the limited security it offers. If you want players to be able to add, edit, rate and subscribe to content, you will need to use an authentication method that generates an OAuth 2 Access token. These [authentication methods](#authentication-2) are explained in detail here.
 
 Authentication Type | In | HTTP Methods | Abilities | Purpose
 ---------- | ---------- | ---------- | ---------- | ---------- 
 API Key | Query | GET | Read-only GET requests and authentication flows. | Browsing and downloading content. Retrieving access tokens on behalf of users.
 Access Token (OAuth 2) | Header | GET, POST, PUT, DELETE | Read, create, update, delete. | View, add, edit and delete content the authenticated user has subscribed to or has permission to change.
 
-### API Key Authentication
-
-To access the API authentication is required. All users and games get a private API key. It is quick and easy to use in your apps but limited to read-only GET requests, due to the limited security it offers. View your private API key(s) [on production](--parse_siteurl/apikey/widget) or on the [test environment](--parse_sitetesturl/apikey).
-
 ### Email Authentication Flow
 
 To perform writes, you will need to authenticate your users via OAuth 2. To make this frictionless in-game, we offer an email verification system, similar to what Slack and others pioneered. It works by users supplying their email, which we send a time-limited 5 digit security code too. They exchange this code in-game, for an [OAuth 2 access token](--parse_siteurl/oauth/widget) you can save to authenticate future requests. The benefit of this approach is it avoids complex website redirects, doesn't require your users to complete a slow registration flow, and eliminates the need to store usernames / passwords.
-
-![--parse_sitename Email Authentication Flow](--parse_staticurl/images/home/email.png)
 
 ```shell
 // Example POST requesting security code be sent to supplied email
@@ -140,26 +134,13 @@ There are a few important things to know when using the email authentication flo
 - The generated `security_code` is short-lived and will expire after 15 minutes.
 - Once exchanged for an `access_token`, the `security_code` is invalid.
 
-If you do not exchange your `security_code` for an `access_token` within 15 minutes of generation, you will need to begin the flow again to receive another code.
+If the user does not exchange the `security_code` they are emailed for an `access_token` within 15 minutes, you will need to begin the flow again to generate a new code.
 
 **Step 3: Use access token to access resources**
 
 See [Making Requests](#making-requests) section.
 
 **HINT:** If you want to overlay the --parse_sitename site in-game and you authenticate users via email, we recommend you add `?ref=email` to the end of the URL you open which will prompt the user to login via their email. See [Web Overlay Authentication](#web-overlay-authentication) for details.
-
-### External App Ticket Authentication Flow
-
-If your game is running inside a popular distribution platform such as Steam or GOG Galaxy, you can use the [external app ticket flow](#external-auth) to authenticate your players via their encrypted session tickets which are accessible via the platform's SDK. --parse_sitename offers the ability to decode this metadata from the respective client using a shared secret which is supplied to you by the platform.
-
-![--parse_sitename External Ticket Authentication Flow](images/ticket.png)
-
-By supplying --parse_sitename with this secret key in your game's option page, we gain the ability to securely authenticate users on --parse_sitename without requiring user input. This method is great for enabling all functionality --parse_sitename offers users without adding friction. Due to --parse_sitename only being able to retrieve some data representing the user from this flow, an extra step is available which allows the user to [link their account](#link-external-account) to their e-mail address (this is an __optional but recommended__ step as it makes account recovery and other processes easier).
-
-Supported Platforms | - | - | -
---- | --- | --- | ---
-[![Steam](images/platform-steam.png)](https://www.steampowered.com) | __Steam__<br />[SDK](https://partner.steamgames.com/doc/api/SteamEncryptedAppTicket)<br />[Endpoint Reference](#authenticate-via-steam)<br /> | [![GOG Galaxy](images/platform-gog.png)](https://www.gog.com/galaxy) | __GOG Galaxy__<br />[SDK](https://cdn.gog.com/open/galaxy/sdk/1.133.3/Documentation/classgalaxy_1_1api_1_1IUser.html#a352802aab7a6e71b1cd1b9b1adfd53d8)<br />[Endpoint Reference](#authenticate-via-gog-galaxy)
-Want a platform added to the list? [Contact us!](mailto:--parse_email?subject=Authentication Suggestion)
 
 ### Web Overlay Authentication
 
@@ -205,7 +186,7 @@ To authenticate using an OAuth 2 access token, you must include the HTTP header 
 
 By default, all access token's are long-lived - meaning they are valid for a common year (not leap year) from the date of issue. You should architect your application to smoothly handle the event in which a token expires or is revoked by the user themselves or a --parse_sitename admin, triggering a `401 Unauthorized` API response.
 
-If you would like tokens issued through your game to have a shorter lifespan, you can do this by providing the `date_expires` parameter on any endpoint that returns an access token such as the [Email Exchange](#authentication), [Authenticate via Steam](#authenticate-via-steam) and [Authenticate via GOG Galaxy](#authenticate-via-gog-galaxy) endpoints. If the parameter is not supplied, it will default to 1 year from the request date, if the supplied parameter value is above one year or below the current server time it will be ignored and the default value restored.
+If you would like tokens issued through your game to have a shorter lifespan, you can do this by providing the `date_expires` parameter on any endpoint that returns an access token such as the [Email Exchange](#authentication) or [Authenticate via Steam](#authenticate-via-steam) endpoints. If the parameter is not supplied, it will default to 1 year from the request date, if the supplied parameter value is above one year or below the current server time it will be ignored and the default value restored.
 
 ### Request Content-Type
 
