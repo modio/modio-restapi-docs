@@ -50,12 +50,12 @@ Here is a brief list of the things to know about our API, as explained in more d
 
 Authentication can be done via 4 ways:
 
-- Use an [API key](--parse_siteurl/apikey/widget) for Read Only access (get a [test environment](--parse_sitetesturl/apikey) API key here)
-- Use the [Email Authentication Flow](#authenticate-via-email) for Read and Write access (it creates an OAuth 2 Access Token via **email**)
-- Use the [Platform Authentication Flow](#authenticate-via-steam) for Read and Write access (it creates an OAuth 2 Access Token automatically on popular platforms such as **Steam and Xbox**)
-- Manually create an [OAuth 2 Access Token](--parse_siteurl/oauth/widget) for Read and Write access (get a [test environment](--parse_sitetesturl/oauth) OAuth 2 token here)
+- Use an [API key](--parse_siteurl/apikey/widget) for **Read-only** access (get a [test environment](--parse_sitetesturl/apikey) API key here)
+- Use the [Email Authentication Flow](#authenticate-via-email) for **Read and Write** access (it creates an OAuth 2 Access Token via **email**)
+- Use the [Platform Authentication Flow](#authenticate-via-steam) for **Read and Write** access (it creates an OAuth 2 Access Token automatically on popular platforms such as **Steam and Xbox**)
+- Manually create an [OAuth 2 Access Token](--parse_siteurl/oauth/widget) for **Read and Write** access (get a [test environment](--parse_sitetesturl/oauth) OAuth 2 token here)
 
-All users and games are issued an API key, which must be included when querying the API. It is quick and easy to use but limited to read-only GET requests, due to the limited security it offers. If you want players to be able to add, edit, rate and subscribe to content, you will need to use an authentication method that generates an OAuth 2 Access token. These [authentication methods](#authentication-2) are explained in detail here.
+All users and games are issued an API key which must be included when querying the API. It is quick and easy to use but limited to read-only GET requests, due to the limited security it offers. If you want players to be able to add, edit, rate and subscribe to content, you will need to use an authentication method that generates an OAuth 2 Access token. These [authentication methods](#authentication-2) are explained in detail here.
 
 Authentication Type | In | HTTP Methods | Abilities | Purpose
 ---------- | ---------- | ---------- | ---------- | ---------- 
@@ -140,11 +140,11 @@ If the user does not exchange the `security_code` they are emailed for an `acces
 
 See [Making Requests](#making-requests) section.
 
-**HINT:** If you want to overlay the --parse_sitename site in-game and you authenticate users via email, we recommend you add `?ref=email` to the end of the URL you open which will prompt the user to login via their email. See [Web Overlay Authentication](#web-overlay-authentication) for details.
+**HINT:** If you want to overlay the --parse_sitename site in-game and you authenticate users via email, we recommend you add `?portal=email` to the end of the URL you open which will prompt the user to login via their email. See [Web Overlay Authentication](#web-overlay-authentication) for details.
 
 ### Web Overlay Authentication
 
-At the moment it is not possible to open the --parse_sitename website in-game with the user pre-authenticated, however you can provide a hint by appending `?ref=SERVICE` to the end of the URL. What this tells --parse_sitename, is that when the user attempts to perform an action that requires authentication, they will be prompted to login with their `SERVICE` account. For example if you want to take a mod creator to their mod edit page in-game on Steam, the URL would look something like: `--parse_gameurl/modname/edit?ref=steam`. You can optionally add `&login=auto` as well to automatically start the login process. Services supported are **steam**, **xbox**, **itchio**, **discord**, **facebook**, **google** and **email**. 
+At the moment it is not possible to open the --parse_sitename website in-game with the user pre-authenticated, however you can provide a hint by appending `?portal=PORTAL` to the end of the URL. What this tells --parse_sitename, is that when the user attempts to perform an action that requires authentication, they will be prompted to login with their `PORTAL` account. For example if you want to take a mod creator to their mod edit page in-game on Steam, the URL would look something like: `--parse_gameurl/modname/edit?portal=steam`. You can optionally add `&login=auto` as well to automatically start the login process. [Supported portals](#targeting-a-portal) can be found here.
 
 ### Scopes (OAuth 2)
 
@@ -186,7 +186,7 @@ To authenticate using an OAuth 2 access token, you must include the HTTP header 
 
 By default, all access token's are long-lived - meaning they are valid for a common year (not leap year) from the date of issue. You should architect your application to smoothly handle the event in which a token expires or is revoked by the user themselves or a --parse_sitename admin, triggering a `401 Unauthorized` API response.
 
-If you would like tokens issued through your game to have a shorter lifespan, you can do this by providing the `date_expires` parameter on any endpoint that returns an access token such as the [Email Exchange](#authentication) or [Authenticate via Steam](#authenticate-via-steam) endpoints. If the parameter is not supplied, it will default to 1 year from the request date, if the supplied parameter value is above one year or below the current server time it will be ignored and the default value restored.
+If you would like tokens issued through your game to have a shorter lifespan, you can do this by providing the `date_expires` parameter on any endpoint that returns an access token such as the [Email Exchange](#authenticate-via-email) or [Authenticate via Steam](#authenticate-via-steam) endpoints. If the parameter is not supplied, it will default to 1 year from the request date, if the supplied parameter value is above one year or below the current server time it will be ignored and the default value restored.
 
 ### Request Content-Type
 
@@ -843,14 +843,16 @@ These are the only supported values and are case-insensitive, anything else will
 
 ## Targeting a Portal
 
-When making API requests you should include the `X-Modio-Portal` header (with one of the values below), to tell --parse_sitename what Portal (i.e. Store or App) the request is originating from. This header is __important__ because it enables --parse_sitename to fine-tune the experience, such as returning the display names used by players on that portal.
+When making API requests you should include the `X-Modio-Portal` header (with one of the values below), to tell --parse_sitename what Portal (i.e. Store or App) the request is originating from. This header is __important__ because it enables --parse_sitename to fine-tune the experience, such as returning display names used by players on that portal (which can be a certification requirement).
 
 For example, passing the HTTP header `X-Modio-Portal: EGS` in your API request tells --parse_sitename your player is coming via the Epic Games Store.
 
 Target Portal | Header Value
 ---------- | ----------  
 Apple | `Apple`
+Discord | `Discord`
 Epic Games Store | `EGS`
+Facebook | `Facebook`
 GOG | `GOG`
 Google | `Google`
 itch.io | `Itchio`
