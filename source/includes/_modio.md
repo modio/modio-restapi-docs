@@ -821,7 +821,7 @@ When making API requests you should include the `X-Modio-Platform` header (with 
  - Supported tags the player can filter on
  - It also enables platform specific metrics
 
-For example, passing the HTTP header `X-Modio-Platform: XboxSeriesX` in your API request tells --parse_sitename your player is on the Xbox Series X.
+For example, passing the HTTP header `X-Modio-Platform: XboxSeriesX` in your API request tells --parse_sitename your player is on Xbox Series X.
 
 Official --parse_sitename [Plugins and SDKs](#implementation) will automatically supply this value for you providing you have specified the correct platform in the tools' settings. We __strongly recommend__ you supply this header in every request with the correct platform to enable --parse_sitename to provide the best cross-platform experience for your players. Please see a list of supported platforms below:
 
