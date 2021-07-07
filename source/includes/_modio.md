@@ -834,8 +834,8 @@ Android | `Android`
 iOS | `iOS`
 Xbox One | `XboxOne`
 Xbox Series X | `XboxSeriesX`
-Playstation 4 | `PS4`
-Playstation 5 | `PS5`
+PlayStation 4 | `PS4`
+PlayStation 5 | `PS5`
 Switch | `Switch`
 Wii | `Wii`
 
@@ -857,7 +857,7 @@ GOG | `GOG`
 Google | `Google`
 itch.io | `Itchio`
 Nintendo | `Nintendo`
-Playstation Network | `PSN`
+PlayStation Network | `PSN`
 Steam | `Steam`
 Xbox Live | `XboxLive`
 
