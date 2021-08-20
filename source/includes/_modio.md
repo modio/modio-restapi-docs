@@ -217,11 +217,11 @@ If the endpoint you are making a request to expects a file it will expect the co
 ```shell
 // Example json-encoded POST request 
 
-curl -X POST --parse_apiurl/games/1/team \
+curl -X POST --parse_apiurl/games/1/mods/1/team \
   -H 'Authorization: Bearer your-token-here' \
   -H 'Content-Type: application/x-www-form-urlencoded' \  
   -d 'input_json={
-		"member": "patrick@diabolical.com",
+		"email": "support@mod.io",
 		"level": 8,
 		"position": "King in the North"
 	  }'
