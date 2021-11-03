@@ -97,7 +97,7 @@ GEM
       activesupport (>= 3.1)
     parallel (1.13.0)
     public_suffix (3.0.3)
-    rack (2.2.3)
+    rack (2.0.8)
     rb-fsevent (0.10.3)
     rb-inotify (0.10.0)
       ffi (~> 1.0)
@@ -135,4 +135,4 @@ RUBY VERSION
    ruby 2.3.3p222
 
 BUNDLED WITH
-   1.17.2
+   2.2.21
