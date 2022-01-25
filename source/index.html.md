@@ -71,7 +71,7 @@ Authentication can be done via 4 ways:
 
 - Use an [API key](https://mod.io/apikey/widget) for **Read-only** access (get a [test environment](https://test.mod.io/apikey) API key here)
 - Use the [Email Authentication Flow](#authenticate-via-email) for **Read and Write** access (it creates an OAuth 2 Access Token via **email**)
-- Use the [Platform Authentication Flow](#authenticate-via-steam) for **Read and Write** access (it creates an OAuth 2 Access Token automatically on popular portals such as **Steam and Xbox Live**)
+- Use the [Platform Authentication Flow](#authenticate-via-steam) for **Read and Write** access (it creates an OAuth 2 Access Token automatically on popular platforms such as **Steam and Xbox**)
 - Manually create an [OAuth 2 Access Token](https://mod.io/oauth/widget) for **Read and Write** access (get a [test environment](https://test.mod.io/oauth) OAuth 2 token here)
 
 All users and games are issued an API key which must be included when querying the API. It is quick and easy to use but limited to read-only GET requests, due to the limited security it offers. If you want players to be able to add, edit, rate and subscribe to content, you will need to use an authentication method that generates an OAuth 2 Access token. These [authentication methods](#authentication-2) are explained in detail here.
@@ -1947,7 +1947,7 @@ Status|Meaning|Error Ref|Description|Response Schema
 ---|---|----|---|---|
 200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)||Successful Request|[Access Token Object](#schemaaccess_token_object)
 401|[Unauthorized](https://tools.ietf.org/html/rfc7235#section-3.1)|11052|The access token was invalid/malformed.|[Error Object](#schemaerror_object)
-401|[Unauthorized](https://tools.ietf.org/html/rfc7235#section-3.1)|11056|mod.io was unable to validate the credentials with Google servers.|[Error Object](#schemaerror_object)
+401|[Unauthorized](https://tools.ietf.org/html/rfc7235#section-3.1)|11056|mod.io was unable to validate the credentials with Google's servers.|[Error Object](#schemaerror_object)
 401|[Unauthorized](https://tools.ietf.org/html/rfc7235#section-3.1)|11053|The Google access token is not valid yet.|[Error Object](#schemaerror_object)
 401|[Unauthorized](https://tools.ietf.org/html/rfc7235#section-3.1)|11054|The Google access token has expired. You should request another token from the Google SDK and ensure it is delivered to mod.io before it expires.|[Error Object](#schemaerror_object)
 403|[Forbidden](https://tools.ietf.org/html/rfc7231#section-6.5.3)|11051|The user has not agreed to the mod.io Terms of Use. Please see terms_agreed parameter description and the [Terms](#terms) endpoint for more information.|[Error Object](#schemaerror_object)
@@ -2261,23 +2261,6 @@ Get all games. Successful request will return an array of [Game Objects](#get-ga
       "instructions": "Instructions on the process to upload mods.",
       "instructions_url": "https://www.rogue-knight-game.com/modding/getting-started",
       "profile_url": "https://rogue-knight.mod.io",
-      "stats": {
-        "game_id": 2,
-        "mods_count_total": 13,
-        "mods_downloads_today": 204,
-        "mods_downloads_total": 27492,
-        "mods_downloads_daily_average": 1230,
-        "mods_subscribers_total": 16394,
-        "date_expires": 1492564103
-      },
-      "theme": {
-        "primary": "#44bfd5",
-        "dark": "#2c2c3f",
-        "light": "#ffffff",
-        "success": "#68D391",
-        "warning": "#d6af2e",
-        "danger": "#ff000e"
-      },
       "other_urls": [
         {
           "label": "Our Steam Page",
@@ -2297,7 +2280,24 @@ Get all games. Successful request will return an array of [Game Objects](#get-ga
           "hidden": false,
           "locked": false
         }
-      ]
+      ],
+      "stats": {
+        "game_id": 2,
+        "mods_count_total": 13,
+        "mods_downloads_today": 204,
+        "mods_downloads_total": 27492,
+        "mods_downloads_daily_average": 1230,
+        "mods_subscribers_total": 16394,
+        "date_expires": 1492564103
+      },
+      "theme": {
+        "primary": "#44bfd5",
+        "dark": "#2c2c3f",
+        "light": "#ffffff",
+        "success": "#68D391",
+        "warning": "#d6af2e",
+        "danger": "#ff000e"
+      }
     },
     {
         ...
@@ -2469,23 +2469,6 @@ Get a game. Successful request will return a single [Game Object](#game-object).
   "instructions": "Instructions on the process to upload mods.",
   "instructions_url": "https://www.rogue-knight-game.com/modding/getting-started",
   "profile_url": "https://rogue-knight.mod.io",
-  "stats": {
-    "game_id": 2,
-    "mods_count_total": 13,
-    "mods_downloads_today": 204,
-    "mods_downloads_total": 27492,
-    "mods_downloads_daily_average": 1230,
-    "mods_subscribers_total": 16394,
-    "date_expires": 1492564103
-  },
-  "theme": {
-    "primary": "#44bfd5",
-    "dark": "#2c2c3f",
-    "light": "#ffffff",
-    "success": "#68D391",
-    "warning": "#d6af2e",
-    "danger": "#ff000e"
-  },
   "other_urls": [
     {
       "label": "Our Steam Page",
@@ -2505,7 +2488,24 @@ Get a game. Successful request will return a single [Game Object](#game-object).
       "hidden": false,
       "locked": false
     }
-  ]
+  ],
+  "stats": {
+    "game_id": 2,
+    "mods_count_total": 13,
+    "mods_downloads_today": 204,
+    "mods_downloads_total": 27492,
+    "mods_downloads_daily_average": 1230,
+    "mods_subscribers_total": 16394,
+    "date_expires": 1492564103
+  },
+  "theme": {
+    "primary": "#44bfd5",
+    "dark": "#2c2c3f",
+    "light": "#ffffff",
+    "success": "#68D391",
+    "warning": "#d6af2e",
+    "danger": "#ff000e"
+  }
 }
 
 ```
@@ -4744,17 +4744,17 @@ System.out.println(response.toString());
 
 Get all comments posted in the mods profile. Successful request will return an array of [Comment Objects](#get-mod-comments-2). We recommended reading the [filtering documentation](#filtering) to return only the records you want.
 
-     Filter|Type|Description
-     ---|---|---
-     id|integer|Unique id of the comment.
-     mod_id|integer|Unique id of the parent mod. This is now depreciated and will be removed in future API versions, please use resource_id instead.
-     resource_id|integer|Unique id of the resource.
-     submitted_by|integer|Unique id of the user who posted the comment.
-     date_added|integer|Unix timestamp of date comment was posted.
-     reply_id|integer|Id of the parent comment this comment is replying to (can be 0 if the comment is not a reply).
-     thread_position|string|Levels of nesting in a comment thread. You should order by this field, to maintain comment grouping. How it works:<br><br>- The first comment will have the position '01'.<br>- The second comment will have the position '02'.<br>- If someone responds to the second comment the position will be '02.01'.<br>- A maximum of 3 levels is supported.
-     karma|integer|Karma received for the comment (can be positive or negative).
-     content|string|Contents of the comment.
+    Filter|Type|Description
+    ---|---|---
+    id|integer|Unique id of the comment.
+    mod_id|integer|Unique id of the parent mod. This is now depreciated and will be removed in future API versions, please use resource_id instead.
+    resource_id|integer|Unique id of the resource.
+    submitted_by|integer|Unique id of the user who posted the comment.
+    date_added|integer|Unix timestamp of date comment was posted.
+    reply_id|integer|Id of the parent comment this comment is replying to (can be 0 if the comment is not a reply).
+    thread_position|string|Levels of nesting in a comment thread. You should order by this field, to maintain comment grouping. How it works:<br><br>- The first comment will have the position '01'.<br>- The second comment will have the position '02'.<br>- If someone responds to the second comment the position will be '02.01'.<br>- A maximum of 3 levels is supported.
+    karma|integer|Karma received for the comment (can be positive or negative).
+    content|string|Contents of the comment.
 
 
 > Example response
@@ -4913,10 +4913,10 @@ System.out.println(response.toString());
 
 Add a comment for the corresponding mod. Successful request will return the newly created [Comment Object](#comment-object) and fire a __MOD_COMMENT_ADDED__ event.
 
-     Parameter|Type|Required|Description
-     ---|---|---|---|
-     content|string|true|Contents of the comment. You can include @mentions to users, which will notify them that they have been tagged in this comment.<br><br>__Mention Markup__<br>- Format: `@<display-name>`<br>- Example: `Hey @XanT, you should check out this mod!`
-     reply_id|integer||Id of the parent comment to reply to (can be 0 if the comment is not a reply and thus will not be nested). Default is 0.
+    Parameter|Type|Required|Description
+    ---|---|---|---|
+    content|string|true|Contents of the comment. You can include @mentions to users, which will notify them that they have been tagged in this comment.<br><br>__Mention Markup__<br>- Format: `@<display-name>`<br>- Example: `Hey @XanT, you should check out this mod!`
+    reply_id|integer||Id of the parent comment to reply to (can be 0 if the comment is not a reply and thus will not be nested). Default is 0.
 
 
 > Example response
@@ -5206,9 +5206,9 @@ System.out.println(response.toString());
 
 Update a comment for the corresponding mod. Successful request will return the updated [Comment Object](#comment-object).
 
-     Parameter|Type|Required|Description
-     ---|---|---|---|
-     content|string|true|Updated contents of the comment.
+    Parameter|Type|Required|Description
+    ---|---|---|---|
+    content|string|true|Updated contents of the comment.
 
 
 > Example response
@@ -6973,7 +6973,7 @@ Submit a positive or negative rating for a mod. Each user can supply only one ra
 
 Status|Meaning|Error Ref|Description|Response Schema
 ---|---|----|---|---|
-201|[Created](https://tools.ietf.org/html/rfc7231#section-6.3.2)||Created|[Message Object](#message-object)
+201|[Created](https://tools.ietf.org/html/rfc7231#section-6.3.2)||Resource created|[Message Object](#message-object)
 400|[Bad Request](https://tools.ietf.org/html/rfc7231#section-6.5.1)|15028|The authenticated user has already submitted a rating for this mod.|[Error Object](#schemaerror_object)
 400|[Bad Request](https://tools.ietf.org/html/rfc7231#section-6.5.1)|15043|The authenticated user is trying to revert a rating that doesn't exist.|[Error Object](#schemaerror_object)
 
@@ -8563,343 +8563,10 @@ Report a resource on mod.io. You are responsible for content your users submit, 
 
 Status|Meaning|Error Ref|Description|Response Schema
 ---|---|----|---|---|
-201|[Created](https://tools.ietf.org/html/rfc7231#section-6.3.2)||Report Created|[Add Report Response](#schemaadd_report_response)
+201|[Created](https://tools.ietf.org/html/rfc7231#section-6.3.2)||Report Created|[Message Object](#message-object)
 403|[Forbidden](https://tools.ietf.org/html/rfc7231#section-6.5.3)|15029|The authenticated user does not have permission to submit reports on mod.io due to their access being revoked.|[Error Object](#schemaerror_object)
 403|[Forbidden](https://tools.ietf.org/html/rfc7231#section-6.5.3)|15030|The specified resource is not able to be reported at this time, this is potentially due to the resource in question being removed.|[Error Object](#schemaerror_object)
 404|[Not Found](https://tools.ietf.org/html/rfc7231#section-6.5.4)|14000|The resource to be reported could not be found.|[Error Object](#schemaerror_object)
-
-<aside class="auth-notice">
-To perform this request, you must be authenticated via one of the following methods:
-<a href="#authentication">OAuth 2</a> (Scopes: write)
-</aside>
-# Batch
-
-## Make Batch Request
-
-> Example request
-
-```shell
-# You can also use wget
-curl -X POST https://api.mod.io/v1/batch \
-  -H 'Authorization: Bearer {access-token}' \ 
-  -H 'Content-Type: application/x-www-form-urlencoded' \ 
-  -H 'Accept: application/json' \
-  -d 'batch[0][relative_url]=v1/games/11/mods' \
-  -d 'batch[0][method]=GET' \
-  -d 'batch[1][relative_url]=v1/me/subscribed?id-in=$[0].data[*].id' \
-  -d 'batch[1][method]=GET' \
-  -d 'batch[2][relative_url]=v1/me/ratings?id-in=$[0].data[*].id' \
-  -d 'batch[2][method]=GET'
-
-```
-
-```http
-POST https://api.mod.io/v1/batch HTTP/1.1
-Host: api.mod.io
-Content-Type: application/x-www-form-urlencoded
-Accept: application/json
-Authorization: Bearer {access-token}
-
-
-```
-
-```javascript
-var headers = {
-  'Authorization':'Bearer {access-token}',
-  'Content-Type':'application/x-www-form-urlencoded',
-  'Accept':'application/json'
-
-};
-
-$.ajax({
-  url: 'https://api.mod.io/v1/batch',
-  method: 'post',
-
-  headers: headers,
-  success: function(data) {
-    console.log(JSON.stringify(data));
-  }
-})
-```
-
-```javascript--nodejs
-const request = require('node-fetch');
-const inputBody = '{
-  "batch[0][relative_url]": "v1/games/11/mods",
-  "batch[0][method]": "GET",
-  "batch[1][relative_url]": "v1/me/subscribed?id-in=$[0].data[*].id",
-  "batch[1][method]": "GET",
-  "batch[2][relative_url]": "v1/me/ratings?id-in=$[0].data[*].id",
-  "batch[2][method]": "GET"
-}';
-const headers = {
-  'Authorization':'Bearer {access-token}',
-  'Content-Type':'application/x-www-form-urlencoded',
-  'Accept':'application/json'
-
-};
-
-fetch('https://api.mod.io/v1/batch',
-{
-  method: 'POST',
-  body: inputBody,
-  headers: headers
-})
-.then(function(res) {
-    return res.json();
-}).then(function(body) {
-    console.log(body);
-});
-```
-
-```python
-import requests
-headers = {
-  'Authorization': 'Bearer {access-token}',
-  'Content-Type': 'application/x-www-form-urlencoded',
-  'Accept': 'application/json'
-}
-
-r = requests.post('https://api.mod.io/v1/batch', params={
-
-}, headers = headers)
-
-print r.json()
-```
-
-```java
-URL obj = new URL("https://api.mod.io/v1/batch");
-HttpURLConnection con = (HttpURLConnection) obj.openConnection();
-con.setRequestMethod("POST");
-int responseCode = con.getResponseCode();
-BufferedReader in = new BufferedReader(
-    new InputStreamReader(con.getInputStream()));
-String inputLine;
-StringBuffer response = new StringBuffer();
-while ((inputLine = in.readLine()) != null) {
-    response.append(inputLine);
-}
-in.close();
-System.out.println(response.toString());
-```
-
-`POST /batch`
-
-Speed up your API calls, by batching them into a single HTTP request. This endpoint is convenient for repeated sequential API calls as it eliminates the HTTP overhead of each request. All encapsulated requests are processed in a synchronous manner which enables you to use the response data of a previous request as a parameter in the subsequent request which we call request dependencies (see below for more info). Successful request will return an array of [Batch Objects](#make-batch-request-2).
-
-     __Batch Limitations__
-
-     The following applies to all batch requests:
-
-     - Who you authenticate as for the parent batch request, will be used for _all_ sub-requests.
-     - Authorization headers passed into sub-requests are ignored.
-     - You cannot make more than 20 requests within a batch.
-
-     __Batch Dependencies__
-
-     To reference response data of previous requests to act as a dependency, you simply need to reference the expected location of the data in the response with basic array syntax. Let's assume an example batch request below:
-
-     __What do we want to do in this batch request?__
-
-     Get a list of mods for a game, and determine if the authenticated user is subscribed to or has submitted any ratings for the returned results.
-
-     __What will it require?__
-
-     This will require three requests (see the example code on the right):
-     1. [GET /v1/games/{game-id}/mods](#get-mods)  
-     2. [GET /v1/me/subscribed](#get-user-subscriptions)  
-     3. [GET /v1/me/ratings](#get-user-ratings)  
-
-    In total, we are making 3 requests in a synchronous manner, inside a single request. Based on the above example, we need to know how to get the `id` value of the [Mod Object](#mod-object) from Request #1 and provide it as a dependency to the subsequent requests.
-
-    __How do we reference the mod id from request #1?__
-
-     If we look at our first request we can see that the [Get Mods](#get-mods-2), upon success, returns an array called `data` which contains the retrieved [Mod Objects](#get-mods). Sometimes you may want to get all values of a certain column within the `data` array, like we will do now. This is how we would get all mod IDs from the first request and pass them into the second request as what we call a 'Batch Dependency'.
-
-    Here is what our second request will look like, after adding the dependency which uses our global `-in` filter.
-
-    <span class="versionwrap">GET v1/me/subscribed?id-in=__$[0].data[*].id__</span>
-
-     Let's breakdown the dependency format:
-
-    __NOTE:__ Regarding the below format, everything in the response from the base of the request to `data:["body"]` is ignored.
-
-     Placeholder|Purpose
-     ---|---|
-     `$`| Our custom prefix identifier for batch dependencies
-     `[0]`| Response index, if we wanted a value from our first request, this value would be 0 to specify the first array.
-     `<field>` | From here onwards is a 1:1 representation of the response in [ECMAScript sytax](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Property_Accessors) with one important exception, the __body__ parameter for each request is ignored. Whilst the body parameter is in the  [Batch Object](#batch-object) responses, you do not need to reference it in regards to batch dependencies.
-
-     Given the above format, let's build our dependency string for our request.
-
-     Placeholder|Purpose
-     ---|---|
-     `$`| Obligatory prefix.
-     `[0]`| We want results from Request #1, so it will be at index 0.
-     `.data` | Our response in Request #1 will contain a data array.
-     `[*]` | We want all the `id` values from all returned objects, so we specify we specify that with the `*` symbol
-     `id` | Finally, the value we want is in the `id` column
-
-     __Error Handling__
-
-     Sometimes an error can happen during a request, if you are referencing a dependency from a previous request that errors out you will encounter issues. When we return each request body, we make no modifications to the response, it is identical to calling the endpoint on its own - so you can simply check the HTTP code returned as well as the body of each response for the [Error Object](#error-object) to see if an error was returned.
-
-     With that in mind, if you do reference a dependency that does not exist - the body of the response depending upon it will return a `424 - Failed Dependency` [error](#error-object).
-
-     __Note Regarding Pagination__
-
-     For the parent request, pagination filters such as [_offset](#pagination) & [_limit](#pagination) are available however they only determine which results are returned once the batch request has finished, that is - every sub-request you submit will be proceeded regardless of these filters.
-
-     Parameter|Type|Required|Description
-     ---|---|---|---|
-     batch[]|array|true|An array of request parameters which must contain the following fields:
-     » relative_url|string|true|The endpoint, relative to the Base API path - i.e. /v1/me is valid, /me is not.
-     » method|string|true|The HTTP method of the request.
-     » body|array||The body of the request if submitting data.
-     » headers[]|array||An array of optional headers, supplied as [Key-Value Pair objects](#key-value-pair-object).
-     »» key|string|true|The name of the header.
-     »» value|string|true| The value of the header.
-
-
-> Example response
-
-```json
-{
-  "data": [
-    {
-      "code": 200,
-      "headers": [
-        {
-          "key": "X-RateLimit-Remaining",
-          "value": "98"
-        }
-      ],
-      "body": {
-        "data": [
-          {
-            "id": 2,
-            "game_id": 2,
-            "status": 1,
-            "visible": 1,
-            "submitted_by": {
-              "id": 1,
-              "name_id": "xant",
-              "username": "XanT",
-              "display_name_portal": null,
-              "date_online": 1509922961,
-              "date_joined": 1509922961,
-              "avatar": {
-                "filename": "modio-color-dark.png",
-                "original": "https://static.mod.io/v1/images/branding/modio-color-dark.png",
-                "thumb_50x50": "https://static.mod.io/v1/images/branding/modio-color-dark.png",
-                "thumb_100x100": "https://static.mod.io/v1/images/branding/modio-color-dark.png"
-              },
-              "timezone": "",
-              "language": "",
-              "profile_url": "https://mod.io/members/xant"
-            },
-            "date_added": 1492564103,
-            "date_updated": 1499841487,
-            "date_live": 1499841403,
-            "maturity_option": 0,
-            "logo": {
-              "filename": "modio-color-dark.png",
-              "original": "https://static.mod.io/v1/images/branding/modio-color-dark.png",
-              "thumb_320x180": "https://static.mod.io/v1/images/branding/modio-color-dark.png",
-              "thumb_640x360": "https://static.mod.io/v1/images/branding/modio-color-dark.png",
-              "thumb_1280x720": "https://static.mod.io/v1/images/branding/modio-color-dark.png"
-            },
-            "homepage_url": "https://www.rogue-hdpack.com/",
-            "name": "Rogue Knight HD Pack",
-            "name_id": "rogue-knight-hd-pack",
-            "summary": "It's time to bask in the glory of beautiful 4k textures!",
-            "description": "<p>Rogue HD Pack does exactly what you thi...",
-            "description_plaintext": "Rogue HD Pack does exactly what you thi...",
-            "metadata_blob": "rogue,hd,high-res,4k,hd textures",
-            "profile_url": "https://rogue-knight.mod.io/hd-pack",
-            "media": {
-              "youtube": [
-                "https://www.youtube.com/watch?v=dQw4w9WgXcQ"
-              ],
-              "sketchfab": [
-                "https://sketchfab.com/models/ef40b2d300334d009984c8865b2db1c8"
-              ],
-              "images": [
-                {
-                  "filename": "modio-color-dark.png",
-                  "original": "https://static.mod.io/v1/images/branding/modio-color-dark.png",
-                  "thumb_320x180": "https://static.mod.io/v1/images/branding/modio-color-dark.png"
-                }
-              ]
-            },
-            "modfile": {
-              "id": 2,
-              "mod_id": 2,
-              "date_added": 1499841487,
-              "date_scanned": 1499841487,
-              "virus_status": 0,
-              "virus_positive": 0,
-              "virustotal_hash": "f9a7bf4a95ce20787337b685a79677cae2281b83c63ab0a25f091407741692af-1508147401",
-              "filesize": 15181,
-              "filehash": {
-                "md5": "2d4a0e2d7273db6b0a94b0740a88ad0d"
-              },
-              "filename": "rogue-knight-v1.zip",
-              "version": "1.3",
-              "changelog": "VERSION 1.3 -- Changes -- Fixed critical castle floor bug.",
-              "metadata_blob": "rogue,hd,high-res,4k,hd textures",
-              "download": {
-                "binary_url": "https://mod.io/mods/file/1/c489a0354111a4d76640d47f0cdcb294",
-                "date_expires": 1579316848
-              }
-            },
-            "metadata_kvp": [
-              {
-                "metakey": "pistol-dmg",
-                "metavalue": "800"
-              }
-            ],
-            "tags": [
-              {
-                "name": "Unity",
-                "date_added": 1499841487
-              }
-            ],
-            "stats": {
-              "mod_id": 2,
-              "popularity_rank_position": 13,
-              "popularity_rank_total_mods": 204,
-              "downloads_today": 327,
-              "downloads_total": 27492,
-              "subscribers_total": 16394,
-              "ratings_total": 1230,
-              "ratings_positive": 1047,
-              "ratings_negative": 183,
-              "ratings_percentage_positive": 91,
-              "ratings_weighted_aggregate": 87.38,
-              "ratings_display_text": "Very Positive",
-              "date_expires": 1492564103
-            }
-          }
-        ]
-      }
-    },
-    {
-        ...
-    }
-  ],
-  "result_count": 1,
-  "result_offset": 0,
-  "result_limit": 20,
-  "result_total": 1
-}
-
-```
-<h3 id="Make-Batch-Request-responses">Responses</h3>
-
-Status|Meaning|Error Ref|Description|Response Schema
----|---|----|---|---|
-200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)||Successful Request|[Make Batch Request](#schemamake_batch_request)
 
 <aside class="auth-notice">
 To perform this request, you must be authenticated via one of the following methods:
@@ -9595,23 +9262,6 @@ Get all games the _authenticated user_ added or is a team member of. Successful 
       "instructions": "Instructions on the process to upload mods.",
       "instructions_url": "https://www.rogue-knight-game.com/modding/getting-started",
       "profile_url": "https://rogue-knight.mod.io",
-      "stats": {
-        "game_id": 2,
-        "mods_count_total": 13,
-        "mods_downloads_today": 204,
-        "mods_downloads_total": 27492,
-        "mods_downloads_daily_average": 1230,
-        "mods_subscribers_total": 16394,
-        "date_expires": 1492564103
-      },
-      "theme": {
-        "primary": "#44bfd5",
-        "dark": "#2c2c3f",
-        "light": "#ffffff",
-        "success": "#68D391",
-        "warning": "#d6af2e",
-        "danger": "#ff000e"
-      },
       "other_urls": [
         {
           "label": "Our Steam Page",
@@ -9631,7 +9281,24 @@ Get all games the _authenticated user_ added or is a team member of. Successful 
           "hidden": false,
           "locked": false
         }
-      ]
+      ],
+      "stats": {
+        "game_id": 2,
+        "mods_count_total": 13,
+        "mods_downloads_today": 204,
+        "mods_downloads_total": 27492,
+        "mods_downloads_daily_average": 1230,
+        "mods_subscribers_total": 16394,
+        "date_expires": 1492564103
+      },
+      "theme": {
+        "primary": "#44bfd5",
+        "dark": "#2c2c3f",
+        "light": "#ffffff",
+        "success": "#68D391",
+        "warning": "#d6af2e",
+        "danger": "#ff000e"
+      }
     },
     {
         ...
@@ -10899,23 +10566,6 @@ md5|string|MD5 hash of the file.
   "instructions": "Instructions on the process to upload mods.",
   "instructions_url": "https://www.rogue-knight-game.com/modding/getting-started",
   "profile_url": "https://rogue-knight.mod.io",
-  "stats": {
-    "game_id": 2,
-    "mods_count_total": 13,
-    "mods_downloads_today": 204,
-    "mods_downloads_total": 27492,
-    "mods_downloads_daily_average": 1230,
-    "mods_subscribers_total": 16394,
-    "date_expires": 1492564103
-  },
-  "theme": {
-    "primary": "#44bfd5",
-    "dark": "#2c2c3f",
-    "light": "#ffffff",
-    "success": "#68D391",
-    "warning": "#d6af2e",
-    "danger": "#ff000e"
-  },
   "other_urls": [
     {
       "label": "Our Steam Page",
@@ -10935,7 +10585,24 @@ md5|string|MD5 hash of the file.
       "hidden": false,
       "locked": false
     }
-  ]
+  ],
+  "stats": {
+    "game_id": 2,
+    "mods_count_total": 13,
+    "mods_downloads_today": 204,
+    "mods_downloads_total": 27492,
+    "mods_downloads_daily_average": 1230,
+    "mods_subscribers_total": 16394,
+    "date_expires": 1492564103
+  },
+  "theme": {
+    "primary": "#44bfd5",
+    "dark": "#2c2c3f",
+    "light": "#ffffff",
+    "success": "#68D391",
+    "warning": "#d6af2e",
+    "danger": "#ff000e"
+  }
 } 
 ```
 
@@ -11110,244 +10777,6 @@ tags|string[]|Array of tags in this group.
 
 
 
-## Get Batch
-
-   <a name="schemaget_batch"></a>
-
-```json
-{
-  "data": [
-    {
-      "code": 200,
-      "headers": [
-        {
-          "key": "X-RateLimit-Remaining",
-          "value": "98"
-        }
-      ],
-      "body": {
-        "data": [
-          {
-            "id": 2,
-            "game_id": 2,
-            "status": 1,
-            "visible": 1,
-            "submitted_by": {
-              "id": 1,
-              "name_id": "xant",
-              "username": "XanT",
-              "display_name_portal": null,
-              "date_online": 1509922961,
-              "date_joined": 1509922961,
-              "avatar": {
-                "filename": "modio-color-dark.png",
-                "original": "https://static.mod.io/v1/images/branding/modio-color-dark.png",
-                "thumb_50x50": "https://static.mod.io/v1/images/branding/modio-color-dark.png",
-                "thumb_100x100": "https://static.mod.io/v1/images/branding/modio-color-dark.png"
-              },
-              "timezone": "",
-              "language": "",
-              "profile_url": "https://mod.io/members/xant"
-            },
-            "date_added": 1492564103,
-            "date_updated": 1499841487,
-            "date_live": 1499841403,
-            "maturity_option": 0,
-            "logo": {
-              "filename": "modio-color-dark.png",
-              "original": "https://static.mod.io/v1/images/branding/modio-color-dark.png",
-              "thumb_320x180": "https://static.mod.io/v1/images/branding/modio-color-dark.png",
-              "thumb_640x360": "https://static.mod.io/v1/images/branding/modio-color-dark.png",
-              "thumb_1280x720": "https://static.mod.io/v1/images/branding/modio-color-dark.png"
-            },
-            "homepage_url": "https://www.rogue-hdpack.com/",
-            "name": "Rogue Knight HD Pack",
-            "name_id": "rogue-knight-hd-pack",
-            "summary": "It's time to bask in the glory of beautiful 4k textures!",
-            "description": "<p>Rogue HD Pack does exactly what you thi...",
-            "description_plaintext": "Rogue HD Pack does exactly what you thi...",
-            "metadata_blob": "rogue,hd,high-res,4k,hd textures",
-            "profile_url": "https://rogue-knight.mod.io/hd-pack",
-            "media": {
-              "youtube": [
-                "https://www.youtube.com/watch?v=dQw4w9WgXcQ"
-              ],
-              "sketchfab": [
-                "https://sketchfab.com/models/ef40b2d300334d009984c8865b2db1c8"
-              ],
-              "images": [
-                {
-                  "filename": "modio-color-dark.png",
-                  "original": "https://static.mod.io/v1/images/branding/modio-color-dark.png",
-                  "thumb_320x180": "https://static.mod.io/v1/images/branding/modio-color-dark.png"
-                }
-              ]
-            },
-            "modfile": {
-              "id": 2,
-              "mod_id": 2,
-              "date_added": 1499841487,
-              "date_scanned": 1499841487,
-              "virus_status": 0,
-              "virus_positive": 0,
-              "virustotal_hash": "f9a7bf4a95ce20787337b685a79677cae2281b83c63ab0a25f091407741692af-1508147401",
-              "filesize": 15181,
-              "filehash": {
-                "md5": "2d4a0e2d7273db6b0a94b0740a88ad0d"
-              },
-              "filename": "rogue-knight-v1.zip",
-              "version": "1.3",
-              "changelog": "VERSION 1.3 -- Changes -- Fixed critical castle floor bug.",
-              "metadata_blob": "rogue,hd,high-res,4k,hd textures",
-              "download": {
-                "binary_url": "https://mod.io/mods/file/1/c489a0354111a4d76640d47f0cdcb294",
-                "date_expires": 1579316848
-              }
-            },
-            "metadata_kvp": [
-              {
-                "metakey": "pistol-dmg",
-                "metavalue": "800"
-              }
-            ],
-            "tags": [
-              {
-                "name": "Unity",
-                "date_added": 1499841487
-              }
-            ],
-            "stats": {
-              "mod_id": 2,
-              "popularity_rank_position": 13,
-              "popularity_rank_total_mods": 204,
-              "downloads_today": 327,
-              "downloads_total": 27492,
-              "subscribers_total": 16394,
-              "ratings_total": 1230,
-              "ratings_positive": 1047,
-              "ratings_negative": 183,
-              "ratings_percentage_positive": 91,
-              "ratings_weighted_aggregate": 87.38,
-              "ratings_display_text": "Very Positive",
-              "date_expires": 1492564103
-            }
-          }
-        ]
-      }
-    },
-    {
-        ...
-    }
-  ],
-  "result_count": 1,
-  "result_offset": 0,
-  "result_limit": 20,
-  "result_total": 1
-} 
-```
-
-
-### Properties
-
-Name|Type|Description
----|---|---|---|
-data|[Batch Object](#schemabatch_object)[]|Array containing any response object.
-» code|integer|Response HTTP code.
-» body|[Batch Body Object](#schemabatch_body_object)|Contains batch request data.
-»» data|[Mod Object](#schemamod_object)[]|Contains Mod Objects.
-»»» id|integer|Unique mod id.
-»»» game_id|integer|Unique game id.
-»»» status|integer|Status of the mod (see [status and visibility](#status-amp-visibility) for details):<br><br>__0__ = Not Accepted<br>__1__ = Accepted<br>__3__ = Deleted
-»»» visible|integer|Visibility of the mod (see [status and visibility](#status-amp-visibility) for details):<br><br>__0__ = Hidden<br>__1__ = Public
-»»» submitted_by|[User Object](#schemauser_object)|Contains user data.
-»»»» id|integer|Unique id of the user.
-»»»» name_id|string|Path for the user on mod.io. For example: https://mod.io/members/__name-id-here__
-»»»» username|string|Username of the user.
-»»»» display_name_portal|string|The users' display name for the targeted portal. Value will be `null` if no valid `X-Modio-Portal` portal header value is provided. For more information see [Targeting a Portal](#targeting-a-portal).
-»»»» date_online|integer|Unix timestamp of date the user was last online.
-»»»» date_joined|integer|Unix timestamp of date the user joined.
-»»»» avatar|[Avatar Object](#schemaavatar_object)|Contains avatar data.
-»»»»» filename|string|Avatar filename including extension.
-»»»»» original|string|URL to the full-sized avatar.
-»»»»» thumb_50x50|string|URL to the small avatar thumbnail.
-»»»»» thumb_100x100|string|URL to the medium avatar thumbnail.
-»»»» timezone|string|This field is no longer used and will return an empty string.
-»»»» language|string|This field is no longer used and will return an empty string. To [localize the API response](#localization) we recommend you set the `Accept-Language` header.
-»»»» profile_url|string|URL to the user's mod.io profile.
-»»» date_added|integer|Unix timestamp of date mod was registered.
-»»» date_updated|integer|Unix timestamp of date mod was updated.
-»»» date_live|integer|Unix timestamp of date mod was set live.
-»»» maturity_option|integer|Maturity options flagged by the mod developer, this is only relevant if the parent game allows mods to be labelled as mature.<br><br>__0__ = None set _(default)_<br>__1__ = Alcohol<br>__2__ = Drugs<br>__4__ = Violence<br>__8__ = Explicit<br>__?__ = Add the options you want together, to enable multiple filters (see [BITWISE fields](#bitwise-and-bitwise-and))
-»»» logo|[Logo Object](#schemalogo_object)|Contains logo data.
-»»»» filename|string|Logo filename including extension.
-»»»» original|string|URL to the full-sized logo.
-»»»» thumb_320x180|string|URL to the small logo thumbnail.
-»»»» thumb_640x360|string|URL to the medium logo thumbnail.
-»»»» thumb_1280x720|string|URL to the large logo thumbnail.
-»»» homepage_url|string|Official homepage of the mod.
-»»» name|string|Name of the mod.
-»»» name_id|string|Path for the mod on mod.io. For example: https://rogue-knight.mod.io/__mod-name-id-here__
-»»» summary|string|Summary of the mod.
-»»» description|string|Detailed description of the mod which allows HTML.
-»»» description_plaintext|string|`description` field converted into plaintext.
-»»» metadata_blob|string|Metadata stored by the game developer. Metadata can also be stored as searchable [key value pairs](#metadata), and to individual [mod files](#get-modfiles).
-»»» profile_url|string|URL to the mod's mod.io profile.
-»»» media|[Mod Media Object](#schemamod_media_object)|Contains mod media data.
-»»»» youtube|string[]|Array of YouTube links.
-»»»» sketchfab|string[]|Array of SketchFab links.
-»»»» images|[Image Object](#schemaimage_object)[]|Array of image objects (a gallery).
-»»»»» filename|string|Image filename including extension.
-»»»»» original|string|URL to the full-sized image.
-»»»»» thumb_320x180|string|URL to the image thumbnail.
-»»» modfile|[Modfile Object](#schemamodfile_object)|Contains modfile data.
-»»»» id|integer|Unique modfile id.
-»»»» mod_id|integer|Unique mod id.
-»»»» date_added|integer|Unix timestamp of date file was added.
-»»»» date_scanned|integer|Unix timestamp of date file was virus scanned.
-»»»» virus_status|integer|Current virus scan status of the file. For newly added files that have yet to be scanned this field will change frequently until a scan is complete:<br><br>__0__ = Not scanned<br>__1__ = Scan complete<br>__2__ = In progress<br>__3__ = Too large to scan<br>__4__ = File not found<br>__5__ = Error Scanning
-»»»» virus_positive|integer|Was a virus detected:<br><br>__0__ = No threats detected<br>__1__ = Flagged as malicious
-»»»» virustotal_hash|string|VirusTotal proprietary hash to view the [scan results](https://www.virustotal.com).
-»»»» filesize|integer|Size of the file in bytes.
-»»»» filehash|[Filehash Object](#schemafilehash_object)|Contains filehash data.
-»»»»» md5|string|MD5 hash of the file.
-»»»» filename|string|Filename including extension.
-»»»» version|string|Release version this file represents.
-»»»» changelog|string|Changelog for the file.
-»»»» metadata_blob|string|Metadata stored by the game developer for this file.
-»»»» download|[Download Object](#schemadownload_object)|Contains download data.
-»»»»» binary_url|string|URL to download the file from the mod.io CDN.<br><br>__NOTE:__ If the [game](#edit-game) requires mod downloads to be initiated via the API, the `binary_url` returned will contain a verification hash. This hash must be supplied to get the modfile, and will expire after a certain period of time. Saving and reusing the `binary_url` won't work in this situation given it's dynamic nature.
-»»»»» date_expires|integer|Unix timestamp of when the `binary_url` will expire.
-»»» stats|[Mod Stats Object](#schemamod_stats_object)|Contains stats data.
-»»»» mod_id|integer|Unique mod id.
-»»»» popularity_rank_position|integer|Current rank of the mod.
-»»»» popularity_rank_total_mods|integer|Number of ranking spots the current rank is measured against.
-»»»» downloads_today|integer|Number of total mod downloads. Count resets around 11:00 UTC+11 daily.
-»»»» downloads_total|integer|Number of total mod downloads.
-»»»» subscribers_total|integer|Number of total users who have subscribed to the mod.
-»»»» ratings_total|integer|Number of times this mod has been rated.
-»»»» ratings_positive|integer|Number of positive ratings.
-»»»» ratings_negative|integer|Number of negative ratings.
-»»»» ratings_percentage_positive|integer|Number of positive ratings, divided by the total ratings to determine it’s percentage score.
-»»»» ratings_weighted_aggregate|number|Overall rating of this item calculated using the [Wilson score confidence interval](https://www.evanmiller.org/how-not-to-sort-by-average-rating.html). This column is good to sort on, as it will order items based on number of ratings and will place items with many positive ratings above those with a higher score but fewer ratings.
-»»»» ratings_display_text|string|Textual representation of the rating in format:<br><br>- Overwhelmingly Positive<br>- Very Positive<br>- Positive<br>- Mostly Positive<br>- Mixed<br>- Negative<br>- Mostly Negative<br>- Very Negative<br>- Overwhelmingly Negative<br>- Unrated
-»»»» date_expires|integer|Unix timestamp until this mods's statistics are considered stale.
-»»» metadata_kvp|[Metadata KVP Object](#schemametadata_kvp_object)[]|Contains key-value metadata.
-»»»» metakey|string|The key of the key-value pair.
-»»»» metavalue|string|The value of the key-value pair.
-»»» tags|[Mod Tag Object](#schemamod_tag_object)[]|Contains mod tag data.
-»»»» name|string|Tag name.
-»»»» date_added|integer|Unix timestamp of date tag was applied.
-» headers|[[Key-Value Pair Object](#schemakey-value_pair_object)]|Contains key-value pairs.
-»» key|string|Key of the key-value pair.
-»» value|string|Value of the key-value pair. Will always be a string, even if numeric.
-result_count|integer|Number of results returned in this request.
-result_offset|integer|Number of results skipped over. Defaults to 0 unless overridden by `_offset` filter.
-result_limit|integer|Maximum number of results returned in the request. Defaults to 20 (max) unless overridden by `_limit` filter.
-result_total|integer|Total number of results found.
-
-
-
-
 ## Get Game Tag Options 
 
 <a name="schemaget_game_tag_options"></a>
@@ -11460,23 +10889,6 @@ result_total|integer|Total number of results found.
       "instructions": "Instructions on the process to upload mods.",
       "instructions_url": "https://www.rogue-knight-game.com/modding/getting-started",
       "profile_url": "https://rogue-knight.mod.io",
-      "stats": {
-        "game_id": 2,
-        "mods_count_total": 13,
-        "mods_downloads_today": 204,
-        "mods_downloads_total": 27492,
-        "mods_downloads_daily_average": 1230,
-        "mods_subscribers_total": 16394,
-        "date_expires": 1492564103
-      },
-      "theme": {
-        "primary": "#44bfd5",
-        "dark": "#2c2c3f",
-        "light": "#ffffff",
-        "success": "#68D391",
-        "warning": "#d6af2e",
-        "danger": "#ff000e"
-      },
       "other_urls": [
         {
           "label": "Our Steam Page",
@@ -11496,7 +10908,24 @@ result_total|integer|Total number of results found.
           "hidden": false,
           "locked": false
         }
-      ]
+      ],
+      "stats": {
+        "game_id": 2,
+        "mods_count_total": 13,
+        "mods_downloads_today": 204,
+        "mods_downloads_total": 27492,
+        "mods_downloads_daily_average": 1230,
+        "mods_subscribers_total": 16394,
+        "date_expires": 1492564103
+      },
+      "theme": {
+        "primary": "#44bfd5",
+        "dark": "#2c2c3f",
+        "light": "#ffffff",
+        "success": "#68D391",
+        "warning": "#d6af2e",
+        "danger": "#ff000e"
+      }
     },
     {
         ...
