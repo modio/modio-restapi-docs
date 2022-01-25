@@ -80,29 +80,29 @@ html, body {
     position: relative;
 
     input {
-      background: $nav-bg;
-      border-width: 0 0 1px 0;
-      border-color: $search-box-border-color;
-      padding: 6px 0 6px 20px;
+      background: $main-bg;
+      border-width: 0;
+      border-color: $main-bg;
+      padding: 8px 0 8px 35px;
       box-sizing: border-box;
-      margin: $nav-v-padding $nav-padding;
-      width: $nav-width - 30;
+      margin: 0;
+      width: 100%;
       outline: none;
-      color: $nav-text;
+      color: $main-text;
       border-radius: 0; /* ios has a default border radius */
     }
 
     &:before {
       position: absolute;
-      top: 17px;
+      top: 9px;
       left: $nav-padding;
-      color: $nav-text;
+      color: $main-text;
       @extend %icon-search;
     }
   }
 
   .logo {
-    margin-bottom: $logo-margin;
+    margin: $logo-margin;
   }
 
   .search-results {
@@ -117,7 +117,6 @@ html, body {
     background: $nav-subitem-bg;
     &.visible {
       height: 30%;
-      margin-bottom: 1em;
     }
 
     li {
@@ -199,7 +198,7 @@ html, body {
 }
 
 .toc-link, .toc-footer li {
-  padding: 0 $nav-padding 0 $nav-padding;
+  padding: 1px $nav-padding;
   display: block;
   overflow-x: hidden;
   white-space: nowrap;
@@ -346,6 +345,16 @@ html, body {
     clear:both;
   }
 
+  a {
+	color: $nav-active-bg;
+    text-decoration: none;
+    font-weight: bold;
+
+	&:hover {
+	  color: $nav-bg;
+	}
+  }
+
   h1 {
     @extend %header-font;
     font-size: 25px;
@@ -422,11 +431,11 @@ html, body {
     }
 
     tr:nth-child(odd)>td {
-      background-color: lighten($main-bg,4.2%);
+      background-color: rgba(0,0,0,0.01);
     }
 
     tr:nth-child(even)>td {
-      background-color: lighten($main-bg,2.4%);
+      background-color: rgba(0,0,0,0.05);
     }
   }
 
@@ -467,6 +476,11 @@ html, body {
     margin-bottom: 1.5em;
     background: $aside-notice-bg;
     line-height: 1.6;
+	margin-right: 51%;
+	margin-left: 1%;
+	border-radius: 5px;
+
+    @extend %left-col-aside;
 
     &.warning {
       background-color: $aside-warning-bg;
@@ -474,6 +488,23 @@ html, body {
 
     &.success {
       background-color: $aside-success-bg;
+    }
+
+    &.auth-notice {
+      background-color: $aside-auth-notice-bg;
+    }
+
+    &.error-summary-notice {
+      background-color: $examples-bg;
+    }
+
+    &.error-possible-codes-notice {
+      background-color: $examples-bg;
+      color: $nav-text;
+
+      a:hover {
+        color: $nav-text;
+      }
     }
   }
 
@@ -483,8 +514,12 @@ html, body {
     font-size: 14px;
   }
 
-  aside.notice:before {
+  aside.notice:before, aside.error-possible-codes-notice:before, aside.error-summary-notice:before {
     @extend %icon-info-sign;
+  }
+
+  aside.auth-notice:before {
+    @extend %icon-exclamation-sign;
   }
 
   aside.warning:before {
@@ -587,6 +622,11 @@ html, body {
     margin-right: 0;
   }
 
+  %left-col-aside {
+    margin-left: 2%;
+    margin-right: 2%;
+  }
+
   .toc-wrapper .lang-selector {
     display: block;
   }
@@ -611,4 +651,249 @@ html, body {
 
 .highlight, .highlight .w {
   background-color: $code-bg;
+}
+
+////////////////////////////////////////////////////////////////////////////////
+// MODIO CUSTOM
+////////////////////////////////////////////////////////////////////////////////
+
+table tbody tr td:first-child {
+  white-space: nowrap;
+}
+
+table tbody tr.iscollapsed td:first-child {
+  border-left: 3px solid #666;
+}
+
+table tbody tr.iscollapsed.level2 td:first-child {
+  border-left-width: 6px;
+}
+
+table tbody tr.iscollapsed.level3 td:first-child {
+  border-left-width: 9px;
+}
+
+img.menu-reference-icon {
+  max-height: 12px;
+  max-width: 12px;
+}
+
+img.localization-icon-preview {
+  width: 40px;
+}
+
+.content table tr:last-child {
+  border-bottom: 0;
+}
+
+.content .httpmethod {
+  border-radius: 5px;
+  color: #fff;
+  font-size: 20px;
+  font-weight: bold;
+  padding: 5px 10px;
+  &.GET {
+    background: $bg-endpoint-get;
+  }
+  &.POST {
+    background: $bg-endpoint-post;
+  }
+  &.PUT {
+    background: $bg-endpoint-put;
+  }
+  &.DELETE {
+    background: $bg-endpoint-delete;
+  }
+}
+
+.content img.tooltip-localization {
+  float: right;
+  width: 40px;
+}
+
+.content .endpointheading {
+  font-size: 24px;
+  font-weight: bold;
+  padding: 5px;
+}
+
+.content :not(.highlight) > code {
+  border-radius: 4px;
+  color: #ff3860;
+  font-weight: bold;
+  padding: 2px 4px;
+}
+
+table .shadow-drop-lr {
+  -webkit-animation: shadow-drop-lr 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94) both;
+  animation: shadow-drop-lr 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94) both;
+}
+
+table .show-pointer {
+  cursor: pointer;
+}
+
+pre.tab-json .json-example-highlight {
+  color: #fff; 
+  font-weight: bold; 
+  border-bottom: 1px solid #44bfd4;
+}
+
+.plugingrid {
+  &>thead, &>tbody {
+    display: table;
+    width: 100%;
+  }
+
+  &>tbody {
+    &>tr {
+      &>td {
+        &:nth-child(odd) {
+          width: 20%;
+        }
+        &:nth-child(even) {
+          width: 30%;
+        }
+      }
+    }
+  }
+}
+
+.changeloggrid {
+  &>thead, &>tbody {
+    display: table;
+    width: 100%;
+  }
+
+  &>thead {
+    &>tr {
+      &>th {
+        width: 50%;
+      }
+    }
+  }
+
+  &>tbody {
+    color: #fff;
+
+    &>tr {
+      &>td {
+        width: 50%;
+        &:first-child {
+          white-space: normal;
+        }
+        &:nth-child(odd) {
+          background: $nav-active-bg;
+        }
+        &:nth-child(even) {
+          background: $bg-endpoint-delete;
+        }
+      }
+    }
+  }
+}
+
+.content .versionheading {
+  border-radius: 2px;
+  color: #fff;
+  font-size: 14px;
+  font-weight: bold;
+  padding: 5px 10px;
+  background: $bg-endpoint-get;
+}
+
+.changelog .content {
+  &>h3 {
+    margin-top: 0px;
+  }
+}
+
+.index .page-wrapper span.versionwrap, .changelog .page-wrapper span.versionwrap {
+  background: $nav-active-parent-bg;
+  border-radius: 5px;
+  color: #fff;
+  font-size: 16px;
+  font-weight: bold;
+  padding: 5px 10px;
+
+  &.latest {
+    background: $bg-endpoint-get;
+  }
+
+  &>a, &>a:hover {
+    color: #fff;
+  }
+}
+
+.changelog #format-breakdown + p {
+  text-align: center;
+  font-size: 24px;
+
+  &>span.versionwrap {
+    font-size: 24px;
+    margin: 0px 10px;
+  }
+}
+
+.content span.error-preview-link {
+  a {
+    margin-left: 20px;
+  }
+}
+
+.tippy-tooltip.modio-theme {
+  background-color: $examples-bg;
+  color: $nav-text;
+
+  &[data-animatefill] {
+    background-color: transparent;
+  }
+
+  .tippy-backdrop {
+    background-color: $examples-bg;
+  }
+}
+
+.tippy-tooltip.modio-example-theme {
+  background-color: #fff;
+  border: 4px solid $examples-bg;
+
+  &[data-animatefill] {
+    background-color: transparent;
+  }
+}
+
+/* ----------------------------------------------
+ * Generated by Animista on 2017-10-25 16:39:2
+ * w: http://animista.net, t: @cssanimista
+ * ---------------------------------------------- */
+
+/**
+ * ----------------------------------------
+ * animation shadow-drop-lr
+ * ----------------------------------------
+ */
+@-webkit-keyframes shadow-drop-lr {
+  0% {
+    -webkit-box-shadow: 0 0 0 0 rgba(0, 0, 0, 0), 0 0 0 0 rgba(0, 0, 0, 0);
+    box-shadow: 0 0 0 0 rgba(0, 0, 0, 0), 0 0 0 0 rgba(0, 0, 0, 0);
+  }
+
+  100% {
+    -webkit-box-shadow: -12px 0 20px -12px rgba(0, 0, 0, 0.35), 12px 0 20px -12px rgba(0, 0, 0, 0.35);
+    box-shadow: -12px 0 20px -12px rgba(0, 0, 0, 0.35), 12px 0 20px -12px rgba(0, 0, 0, 0.35);
+  }
+}
+
+
+@keyframes shadow-drop-lr {
+  0% {
+    -webkit-box-shadow: 0 0 0 0 rgba(0, 0, 0, 0), 0 0 0 0 rgba(0, 0, 0, 0);
+    box-shadow: 0 0 0 0 rgba(0, 0, 0, 0), 0 0 0 0 rgba(0, 0, 0, 0);
+  }
+
+  100% {
+    -webkit-box-shadow: -12px 0 20px -12px rgba(0, 0, 0, 0.35), 12px 0 20px -12px rgba(0, 0, 0, 0.35);
+    box-shadow: -12px 0 20px -12px rgba(0, 0, 0, 0.35), 12px 0 20px -12px rgba(0, 0, 0, 0.35);
+  }
 }

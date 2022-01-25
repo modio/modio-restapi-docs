@@ -23,22 +23,23 @@ under the License.
 
 // BACKGROUND COLORS
 ////////////////////
-$nav-bg: #2E3336 !default;
-$examples-bg: #2E3336 !default;
-$code-bg: #1E2224 !default;
-$code-annotation-bg: #191D1F !default;
-$nav-subitem-bg: #1E2224 !default;
-$nav-active-bg: #0F75D4 !default;
-$nav-active-parent-bg: #1E2224 !default; // parent links of the current section
-$lang-select-border: #000 !default;
-$lang-select-bg: #1E2224 !default;
-$lang-select-active-bg: $examples-bg !default; // feel free to change this to blue or something
-$lang-select-pressed-bg: #111 !default; // color of language tab bg when mouse is pressed
-$main-bg: #F3F7F9 !default;
-$aside-notice-bg: #8fbcd4 !default;
-$aside-warning-bg: #c97a7e !default;
-$aside-success-bg: #6ac174 !default;
-$search-notice-bg: #c97a7e !default;
+$nav-bg: #171727 !default;
+$examples-bg: #2d2d3f !default;
+$code-bg: #171727 !default;
+$code-annotation-bg: #2d2d3f !default;
+$nav-subitem-bg: #2d2d3f !default;
+$nav-active-bg: #44bfd4 !default;
+$nav-active-parent-bg: #2d2d3f !default; // parent links of the current section
+$lang-select-border: #2d2d3f !default;
+$lang-select-bg: #2d2d3f !default;
+$lang-select-active-bg: #44bfd4 !default; // feel free to change this to blue or something
+$lang-select-pressed-bg: #171727 !default; // color of language tab bg when mouse is pressed
+$main-bg: #fff !default;
+$aside-notice-bg: #a4e7f2 !default;
+$aside-warning-bg: #f2a4a4 !default;
+$aside-success-bg: #c1f2a4 !default;
+$search-notice-bg: #f2a4a4 !default;
+$aside-auth-notice-bg: #f5f5f5 !default;
 
 
 // TEXT COLORS
@@ -56,8 +57,8 @@ $lang-select-pressed-text: #fff !default; // color of language tab text when mou
 ////////////////////
 $nav-width: 230px !default; // width of the navbar
 $examples-width: 50% !default; // portion of the screen taken up by code examples
-$logo-margin: 0px !default; // margin below logo
-$main-padding: 28px !default; // padding to left and right of content & examples
+$logo-margin: 20px 40px !default; // margin below logo
+$main-padding: 20px !default; // padding to left and right of content & examples
 $nav-padding: 15px !default; // padding to left and right of navbar
 $nav-v-padding: 10px !default; // padding used vertically around search boxes and results
 $nav-indent: 10px !default; // extra padding for ToC subitems
@@ -85,6 +86,13 @@ $phone-width: $tablet-width - $nav-width !default; // min width before reverting
   line-height: 1.5;
 }
 
+////////////////////////////////////////////////////////////////////////////////
+// MOD.IO
+////////////////////////////////////////////////////////////////////////////////
+$bg-endpoint-get:  hsl(217, 71%, 53%);
+$bg-endpoint-post: hsl(141, 71%, 48%);
+$bg-endpoint-put: hsl(48, 100%, 47%);
+$bg-endpoint-delete: hsl(348, 100%, 61%);
 
 // OTHER
 ////////////////////
@@ -98,6 +106,6 @@ $search-box-border-color: #666 !default;
 // These settings are probably best left alone.
 
 %break-words {
-    word-break: break-all;
+    // word-break: break-all;
     hyphens: auto;
 }
