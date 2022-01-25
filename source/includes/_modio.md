@@ -837,7 +837,7 @@ Xbox Series X | `XboxSeriesX`
 PlayStation 4 | `PS4`
 PlayStation 5 | `PS5`
 Switch | `Switch`
-Wii | `Wii`
+Oculus | `Oculus`
 
 These are the only supported values and are case-insensitive, anything else will be ignored and default to `Windows`. Have we missed a platform you are using? [Get in touch!](mailto:--parse_email?subject=Platform%20Support) 
 
