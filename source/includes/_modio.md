@@ -18,7 +18,7 @@ Compatible with all builds of your game on all platforms and stores, --parse_sit
 
 ## Implementation
 
-You have 3 options to get connected to the --parse_sitename API which you can use interchangeably depending on your needs. Here's the breakdown of each option.
+Once you have added your game to --parse_sitename and got your game ID and API key, you can start integrating the --parse_sitename REST API into your game, tools and sites. There are 3 options to get connected which you can use interchangeably depending on your needs. Here's the breakdown of each option.
 
 Option | Usage | Suited for | Docs
 ---------- | ---------- | ---------- | ---------
