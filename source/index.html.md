@@ -776,7 +776,7 @@ Xbox Series X | `XboxSeriesX`
 PlayStation 4 | `PS4`
 PlayStation 5 | `PS5`
 Switch | `Switch`
-Wii | `Wii`
+Oculus | `Oculus`
 
 These are the only supported values and are case-insensitive, anything else will be ignored and default to `Windows`. Have we missed a platform you are using? [Get in touch!](mailto:developers@mod.io?subject=Platform%20Support) 
 
@@ -6953,11 +6953,11 @@ System.out.println(response.toString());
 
 Submit a positive or negative rating for a mod. Each user can supply only one rating for a mod, subsequent ratings will override the old value. Successful request will return [Message Object](#message-object).
 
-     __NOTE:__ You can order mods by their rating, and view their rating in the [Mod Object](#mod-object).
+    __NOTE:__ You can order mods by their rating, and view their rating in the [Mod Object](#mod-object).
 
-     Parameter|Type|Required|Description
-     ---|---|---|---|
-     rating|integer|true|The _authenticated users_ mod rating:<br><br>__1__ = Positive rating (thumbs up)<br>__-1__ = Negative rating (thumbs down)<br>__0__ = No rating (removes any previous submitted rating)
+    Parameter|Type|Required|Description
+    ---|---|---|---|
+    rating|integer|true|The _authenticated users_ mod rating:<br><br>__1__ = Positive rating (thumbs up)<br>__-1__ = Negative rating (thumbs down)<br>__0__ = No rating (removes any previous submitted rating)
 
 
 > Example response
@@ -6973,7 +6973,7 @@ Submit a positive or negative rating for a mod. Each user can supply only one ra
 
 Status|Meaning|Error Ref|Description|Response Schema
 ---|---|----|---|---|
-201|[Created](https://tools.ietf.org/html/rfc7231#section-6.3.2)||Resource created|[Message Object](#message-object)
+201|[Created](https://tools.ietf.org/html/rfc7231#section-6.3.2)||Created|[Message Object](#message-object)
 400|[Bad Request](https://tools.ietf.org/html/rfc7231#section-6.5.1)|15028|The authenticated user has already submitted a rating for this mod.|[Error Object](#schemaerror_object)
 400|[Bad Request](https://tools.ietf.org/html/rfc7231#section-6.5.1)|15043|The authenticated user is trying to revert a rating that doesn't exist.|[Error Object](#schemaerror_object)
 
