@@ -939,7 +939,6 @@ The purpose of this endpoint is to provide the text, links and buttons you can u
 Status|Meaning|Error Ref|Description|Response Schema
 ---|---|----|---|---|
 200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)||Successful Request|[Terms Object](#schematerms_object)
-
 <aside class="auth-notice">
 To perform this request, you must be authenticated via one of the following methods:
 <a href="#authentication">api_key</a>
@@ -1152,7 +1151,6 @@ Status|Meaning|Error Ref|Description|Response Schema
 403|[Forbidden](https://tools.ietf.org/html/rfc7231#section-6.5.3)|11017|The api_key supplied in the request is for test environment purposes only and cannot be used for this functionality.|[Error Object](#schemaerror_object)
 403|[Forbidden](https://tools.ietf.org/html/rfc7231#section-6.5.3)|11019|The secret steam app ticket associated with this game has not been configured.|[Error Object](#schemaerror_object)
 403|[Forbidden](https://tools.ietf.org/html/rfc7231#section-6.5.3)|11051|The user has not agreed to the mod.io Terms of Use. Please see terms_agreed parameter description and the [Terms](#terms) endpoint for more information.|[Error Object](#schemaerror_object)
-
 <aside class="auth-notice">
 To perform this request, you must be authenticated via one of the following methods:
 <a href="#authentication">api_key</a>
@@ -1284,7 +1282,6 @@ Status|Meaning|Error Ref|Description|Response Schema
 403|[Forbidden](https://tools.ietf.org/html/rfc7231#section-6.5.3)|11017|The api_key supplied in the request is for test environment purposes only and cannot be used for this functionality.|[Error Object](#schemaerror_object)
 403|[Forbidden](https://tools.ietf.org/html/rfc7231#section-6.5.3)|11022|The secret GOG Galaxy app ticket associated with this game has not been configured.|[Error Object](#schemaerror_object)
 403|[Forbidden](https://tools.ietf.org/html/rfc7231#section-6.5.3)|11051|The user has not agreed to the mod.io Terms of Use. Please see terms_agreed parameter description and the [Terms](#terms) endpoint for more information.|[Error Object](#schemaerror_object)
-
 <aside class="auth-notice">
 To perform this request, you must be authenticated via one of the following methods:
 <a href="#authentication">api_key</a>
@@ -1415,7 +1412,6 @@ Status|Meaning|Error Ref|Description|Response Schema
 403|[Forbidden](https://tools.ietf.org/html/rfc7231#section-6.5.3)|11016|The api_key supplied in the request must be associated with a game.|[Error Object](#schemaerror_object)
 403|[Forbidden](https://tools.ietf.org/html/rfc7231#section-6.5.3)|11017|The api_key supplied in the request is for test environment purposes only and cannot be used for this functionality.|[Error Object](#schemaerror_object)
 403|[Forbidden](https://tools.ietf.org/html/rfc7231#section-6.5.3)|11051|The user has not agreed to the mod.io Terms of Use. Please see terms_agreed parameter description and the [Terms](#terms) endpoint for more information.|[Error Object](#schemaerror_object)
-
 <aside class="auth-notice">
 To perform this request, you must be authenticated via one of the following methods:
 <a href="#authentication">api_key</a>
@@ -1556,7 +1552,6 @@ Status|Meaning|Error Ref|Description|Response Schema
 403|[Forbidden](https://tools.ietf.org/html/rfc7231#section-6.5.3)|11024|The secret Oculus Rift app ticket associated with this game has not been configured.|[Error Object](#schemaerror_object)
 403|[Forbidden](https://tools.ietf.org/html/rfc7231#section-6.5.3)|11025|The secret Oculus Quest app ticket associated with this game has not been configured.|[Error Object](#schemaerror_object)
 403|[Forbidden](https://tools.ietf.org/html/rfc7231#section-6.5.3)|11051|The user has not agreed to the mod.io Terms of Use. Please see terms_agreed parameter description and the [Terms](#terms) endpoint for more information.|[Error Object](#schemaerror_object)
-
 <aside class="auth-notice">
 To perform this request, you must be authenticated via one of the following methods:
 <a href="#authentication">api_key</a>
@@ -1690,7 +1685,6 @@ Status|Meaning|Error Ref|Description|Response Schema
 403|[Forbidden](https://tools.ietf.org/html/rfc7231#section-6.5.3)|11028|The user is not permitted to interact with UGC. This can be modified in the user's Xbox Live profile.|[Error Object](#schemaerror_object)
 403|[Forbidden](https://tools.ietf.org/html/rfc7231#section-6.5.3)|11030|Xbox Live users with 'Child' accounts are not permitted to use mod.io.|[Error Object](#schemaerror_object)
 403|[Forbidden](https://tools.ietf.org/html/rfc7231#section-6.5.3)|11051|The user has not agreed to the mod.io Terms of Use. Please see terms_agreed parameter description and the [Terms](#terms) endpoint for more information.|[Error Object](#schemaerror_object)
-
 <aside class="auth-notice">
 To perform this request, you must be authenticated via one of the following methods:
 <a href="#authentication">api_key</a>
@@ -1822,7 +1816,6 @@ Status|Meaning|Error Ref|Description|Response Schema
 403|[Forbidden](https://tools.ietf.org/html/rfc7231#section-6.5.3)|11040|The application ID for the Nintendo Switch title has not been configured, this can be setup in the 'Options' tab within your game profile.|[Error Object](#schemaerror_object)
 403|[Forbidden](https://tools.ietf.org/html/rfc7231#section-6.5.3)|11041|The application ID of the originating Switch title is not permitted to authenticate users. Please check the Switch application id submitted on your games' 'Options' tab and ensure it is the same application id of the Switch title making the authentication request.|[Error Object](#schemaerror_object)
 403|[Forbidden](https://tools.ietf.org/html/rfc7231#section-6.5.3)|11051|The user has not agreed to the mod.io Terms of Use. Please see terms_agreed parameter description and the [Terms](#terms) endpoint for more information.|[Error Object](#schemaerror_object)
-
 <aside class="auth-notice">
 To perform this request, you must be authenticated via one of the following methods:
 <a href="#authentication">api_key</a>
@@ -1951,7 +1944,6 @@ Status|Meaning|Error Ref|Description|Response Schema
 401|[Unauthorized](https://tools.ietf.org/html/rfc7235#section-3.1)|11053|The Google access token is not valid yet.|[Error Object](#schemaerror_object)
 401|[Unauthorized](https://tools.ietf.org/html/rfc7235#section-3.1)|11054|The Google access token has expired. You should request another token from the Google SDK and ensure it is delivered to mod.io before it expires.|[Error Object](#schemaerror_object)
 403|[Forbidden](https://tools.ietf.org/html/rfc7231#section-6.5.3)|11051|The user has not agreed to the mod.io Terms of Use. Please see terms_agreed parameter description and the [Terms](#terms) endpoint for more information.|[Error Object](#schemaerror_object)
-
 <aside class="auth-notice">
 To perform this request, you must be authenticated via one of the following methods:
 <a href="#authentication">api_key</a>
@@ -2082,7 +2074,6 @@ Status|Meaning|Error Ref|Description|Response Schema
 403|[Forbidden](https://tools.ietf.org/html/rfc7231#section-6.5.3)|11016|The api_key supplied in the request must be associated with a game.|[Error Object](#schemaerror_object)
 403|[Forbidden](https://tools.ietf.org/html/rfc7231#section-6.5.3)|11017|The api_key supplied in the request is for test environment purposes only and cannot be used for this functionality.|[Error Object](#schemaerror_object)
 403|[Forbidden](https://tools.ietf.org/html/rfc7231#section-6.5.3)|11051|The user has not agreed to the mod.io Terms of Use. Please see terms_agreed parameter description and the [Terms](#terms) endpoint for more information.|[Error Object](#schemaerror_object)
-
 <aside class="auth-notice">
 To perform this request, you must be authenticated via one of the following methods:
 <a href="#authentication">api_key</a>
@@ -2315,7 +2306,6 @@ Get all games. Successful request will return an array of [Game Objects](#get-ga
 Status|Meaning|Error Ref|Description|Response Schema
 ---|---|----|---|---|
 200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)||OK|[Get Games](#schemaget_games)
-
 <aside class="auth-notice">
 To perform this request, you must be authenticated via one of the following methods:
 <a href="#authentication">api_key</a>, <a href="#authentication">OAuth 2</a> (Scopes: read)
@@ -2514,7 +2504,6 @@ Get a game. Successful request will return a single [Game Object](#game-object).
 Status|Meaning|Error Ref|Description|Response Schema
 ---|---|----|---|---|
 200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)||Request successful|[Game Object](#schemagame_object)
-
 <aside class="auth-notice">
 To perform this request, you must be authenticated via one of the following methods:
 <a href="#authentication">api_key</a>, <a href="#authentication">OAuth 2</a> (Scopes: read)
@@ -2758,13 +2747,17 @@ Get all mods for the corresponding game. Successful request will return an array
 }
 
 ```
+<h3 id="endpoint-xplatform-notice">Cross-Platform Filtering</h3>
+
+If the parent game has platform filtering enabled, this endpoint supports the [targeting a platform](#targeting-a-platform) request header to return mods that have been approved for the requested platform.
+
+
 <h3 id="Get-Mods-responses">Responses</h3>
 
 Status|Meaning|Error Ref|Description|Response Schema
 ---|---|----|---|---|
 200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)||Successful Request|[Get Mods](#schemaget_mods)
 403|[Forbidden](https://tools.ietf.org/html/rfc7231#section-6.5.3)|15025|The authenticated user has applied an admin-only filter or value to the request, and is not an administrator for this game.|[Error Object](#schemaerror_object)
-
 <aside class="auth-notice">
 To perform this request, you must be authenticated via one of the following methods:
 <a href="#authentication">api_key</a>, <a href="#authentication">OAuth 2</a> (Scopes: read)
@@ -2970,12 +2963,16 @@ Get a mod. Successful request will return a single [Mod Object](#mod-object).
 }
 
 ```
+<h3 id="endpoint-xplatform-notice">Cross-Platform Filtering</h3>
+
+If the parent game has platform filtering enabled, this endpoint supports the [targeting a platform](#targeting-a-platform) request header to return the [modfile](#modfile-object) within the [Mod Object](#mod-object) for the requested platform. If the request targets a platform that is invalid, the `modfile` field will be `null`.
+
+
 <h3 id="Get-Mod-responses">Responses</h3>
 
 Status|Meaning|Error Ref|Description|Response Schema
 ---|---|----|---|---|
 200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)||Successful Request|[Mod Object](#schemamod_object)
-
 <aside class="auth-notice">
 To perform this request, you must be authenticated via one of the following methods:
 <a href="#authentication">api_key</a>, <a href="#authentication">OAuth 2</a> (Scopes: read)
@@ -3218,7 +3215,6 @@ Status|Meaning|Error Ref|Description|Response Schema
 ---|---|----|---|---|
 201|[Created](https://tools.ietf.org/html/rfc7231#section-6.3.2)||Resource Created|[Mod Object](#schemamod_object)
 403|[Forbidden](https://tools.ietf.org/html/rfc7231#section-6.5.3)|15012|The authenticated user has had upload privileges restricted by mod.io admins, this is typically due to spam.|[Error Object](#schemaerror_object)
-
 ### Response Headers
 
 Status|Header|Type|Format|Description
@@ -3464,7 +3460,6 @@ Status|Meaning|Error Ref|Description|Response Schema
 403|[Forbidden](https://tools.ietf.org/html/rfc7231#section-6.5.3)|15014|The authenticated user does not have permission to update the maturityoptions for this mod, this action is restricted to team managers & administrators only.|[Error Object](#schemaerror_object)
 403|[Forbidden](https://tools.ietf.org/html/rfc7231#section-6.5.3)|15015|The authenticated user does not have permission to update the status for this mod, this action is restricted to team managers & administrators only.|[Error Object](#schemaerror_object)
 403|[Forbidden](https://tools.ietf.org/html/rfc7231#section-6.5.3)|15016|A mod cannot be set live without an associated modfile.|[Error Object](#schemaerror_object)
-
 <aside class="auth-notice">
 To perform this request, you must be authenticated via one of the following methods:
 <a href="#authentication">OAuth 2</a> (Scopes: write)
@@ -3583,7 +3578,6 @@ Status|Meaning|Error Ref|Description|Response Schema
 ---|---|----|---|---|
 204|[No Content](https://tools.ietf.org/html/rfc7231#section-6.3.5)||Successful Request. No Body Returned.|None
 403|[Forbidden](https://tools.ietf.org/html/rfc7231#section-6.5.3)|15019|The authenticated user does not have permission to delete this mod, this action is restricted to team managers & administrators only.|[Error Object](#schemaerror_object)
-
 <aside class="auth-notice">
 To perform this request, you must be authenticated via one of the following methods:
 <a href="#authentication">OAuth 2</a> (Scopes: write)
@@ -3733,12 +3727,16 @@ Get all files that are published for the corresponding mod. Successful request w
 }
 
 ```
+<h3 id="endpoint-xplatform-notice">Cross-Platform Filtering</h3>
+
+If the parent game has platform filtering enabled, this endpoint supports the [targeting a platform](#targeting-a-platform) request header to return the [modfiles](#modfile-object) that are approved for the requested platform.
+
+
 <h3 id="Get-Modfiles-responses">Responses</h3>
 
 Status|Meaning|Error Ref|Description|Response Schema
 ---|---|----|---|---|
 200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)||Successful Request|[Get Modfiles](#schemaget_modfiles)
-
 <aside class="auth-notice">
 To perform this request, you must be authenticated via one of the following methods:
 <a href="#authentication">api_key</a>, <a href="#authentication">OAuth 2</a> (Scopes: read)
@@ -3865,7 +3863,6 @@ Get a file. Successful request will return a single [Modfile Object](#modfile-ob
 Status|Meaning|Error Ref|Description|Response Schema
 ---|---|----|---|---|
 200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)||Successful Request|[Modfile Object](#schemamodfile_object)
-
 <aside class="auth-notice">
 To perform this request, you must be authenticated via one of the following methods:
 <a href="#authentication">api_key</a>, <a href="#authentication">OAuth 2</a> (Scopes: read)
@@ -4022,7 +4019,6 @@ Status|Meaning|Error Ref|Description|Response Schema
 201|[Created](https://tools.ietf.org/html/rfc7231#section-6.3.2)||Resource Created|[Modfile Object](#schemamodfile_object)
 403|[Forbidden](https://tools.ietf.org/html/rfc7231#section-6.5.3)|15006|The authenticated user does not have permission to upload modfiles for the specified mod, ensure the user is a team manager or administrator.|[Error Object](#schemaerror_object)
 422|[Unprocessable Entity](https://tools.ietf.org/html/rfc2518#section-10.3)|13002|The payload passed in the request was unable to be validated/read by mod.io, please try again.|[Error Object](#schemaerror_object)
-
 ### Response Headers
 
 Status|Header|Type|Format|Description
@@ -4175,7 +4171,6 @@ Status|Meaning|Error Ref|Description|Response Schema
 200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)||Update Successful|[Modfile Object](#schemamodfile_object)
 403|[Forbidden](https://tools.ietf.org/html/rfc7231#section-6.5.3)|15007|The authenticated user does not have permission to update modfiles for the specified mod, ensure the user is a team manager or administrator.|[Error Object](#schemaerror_object)
 403|[Forbidden](https://tools.ietf.org/html/rfc7231#section-6.5.3)|15033|The authenticated user does not have permission to update modfile metadata for the specified mod, ensure the user is a team manager or administrator.|[Error Object](#schemaerror_object)
-
 <aside class="auth-notice">
 To perform this request, you must be authenticated via one of the following methods:
 <a href="#authentication">OAuth 2</a> (Scopes: write)
@@ -4295,7 +4290,6 @@ Status|Meaning|Error Ref|Description|Response Schema
 204|[No Content](https://tools.ietf.org/html/rfc7231#section-6.3.5)||Successful Request. No Body Returned.|None
 403|[Forbidden](https://tools.ietf.org/html/rfc7231#section-6.5.3)|15008|The authenticated user does not have permission to delete modfiles for the specified mod, ensure the user is a team manager or administrator.|[Error Object](#schemaerror_object)
 403|[Forbidden](https://tools.ietf.org/html/rfc7231#section-6.5.3)|15009|The active (primary) modfile for a mod cannot be deleted.|[Error Object](#schemaerror_object)
-
 <aside class="auth-notice">
 To perform this request, you must be authenticated via one of the following methods:
 <a href="#authentication">OAuth 2</a> (Scopes: write)
@@ -4522,7 +4516,6 @@ Status|Meaning|Error Ref|Description|Response Schema
 400|[Bad Request](https://tools.ietf.org/html/rfc7231#section-6.5.1)|15004|The authenticated user is already subscribed to the mod.|[Error Object](#schemaerror_object)
 403|[Forbidden](https://tools.ietf.org/html/rfc7231#section-6.5.3)|15000|The requested mod cannot be subscribed to at this time due to a DMCA takedown request.|[Error Object](#schemaerror_object)
 403|[Forbidden](https://tools.ietf.org/html/rfc7231#section-6.5.3)|15001|The requested mod cannot be subscribed to due to being marked as 'hidden'.|[Error Object](#schemaerror_object)
-
 ### Response Headers
 
 Status|Header|Type|Format|Description
@@ -4647,7 +4640,6 @@ Status|Meaning|Error Ref|Description|Response Schema
 ---|---|----|---|---|
 204|[No Content](https://tools.ietf.org/html/rfc7231#section-6.3.5)||Successful Request. No Body Returned.|None
 400|[Bad Request](https://tools.ietf.org/html/rfc7231#section-6.5.1)|15005|The requested user is not currently subscribed to the requested mod.|[Error Object](#schemaerror_object)
-
 <aside class="auth-notice">
 To perform this request, you must be authenticated via one of the following methods:
 <a href="#authentication">OAuth 2</a> (Scopes: write)
@@ -4803,7 +4795,6 @@ Get all comments posted in the mods profile. Successful request will return an a
 Status|Meaning|Error Ref|Description|Response Schema
 ---|---|----|---|---|
 200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)||OK|[Get Mod Comments](#schemaget_mod_comments)
-
 <aside class="auth-notice">
 To perform this request, you must be authenticated via one of the following methods:
 <a href="#authentication">api_key</a>, <a href="#authentication">OAuth 2</a> (Scopes: read)
@@ -4958,7 +4949,6 @@ Status|Meaning|Error Ref|Description|Response Schema
 ---|---|----|---|---|
 201|[Created](https://tools.ietf.org/html/rfc7231#section-6.3.2)||Resource Created|[Comment Object](#schemacomment_object)
 403|[Forbidden](https://tools.ietf.org/html/rfc7231#section-6.5.3)|15042|The authenticated user does not have permission to submit comments on mod.io due to their access being revoked.|[Error Object](#schemaerror_object)
-
 ### Response Headers
 
 Status|Header|Type|Format|Description
@@ -5098,7 +5088,6 @@ Get a Mod Comment. Successful request will return a single [Comment Object](#com
 Status|Meaning|Error Ref|Description|Response Schema
 ---|---|----|---|---|
 200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)||Successful Request|[Comment Object](#schemacomment_object)
-
 <aside class="auth-notice">
 To perform this request, you must be authenticated via one of the following methods:
 <a href="#authentication">api_key</a>, <a href="#authentication">OAuth 2</a> (Scopes: read)
@@ -5249,7 +5238,6 @@ Update a comment for the corresponding mod. Successful request will return the u
 Status|Meaning|Error Ref|Description|Response Schema
 ---|---|----|---|---|
 200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)||Update Successful|[Comment Object](#schemacomment_object)
-
 <aside class="auth-notice">
 To perform this request, you must be authenticated via one of the following methods:
 <a href="#authentication">OAuth 2</a> (Scopes: write)
@@ -5368,7 +5356,6 @@ Status|Meaning|Error Ref|Description|Response Schema
 ---|---|----|---|---|
 204|[No Content](https://tools.ietf.org/html/rfc7231#section-6.3.5)||Successful Request. No Body Returned.|None
 403|[Forbidden](https://tools.ietf.org/html/rfc7231#section-6.5.3)|15027|The authenticated user does not have permission to delete comments for this mod, this action is restricted to team managers & administrators only.|[Error Object](#schemaerror_object)
-
 <aside class="auth-notice">
 To perform this request, you must be authenticated via one of the following methods:
 <a href="#authentication">OAuth 2</a> (Scopes: write)
@@ -5505,7 +5492,6 @@ Upload new media to a game. The request `Content-Type` header __must__ be `multi
 Status|Meaning|Error Ref|Description|Response Schema
 ---|---|----|---|---|
 200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)||Media Successfully uploaded|[Message Object](#message-object)
-
 <aside class="auth-notice">
 To perform this request, you must be authenticated via one of the following methods:
 <a href="#authentication">OAuth 2</a> (Scopes: write)
@@ -5648,7 +5634,6 @@ Status|Meaning|Error Ref|Description|Response Schema
 ---|---|----|---|---|
 201|[Created](https://tools.ietf.org/html/rfc7231#section-6.3.2)||Resource Created|[Message Object](#message-object)
 403|[Forbidden](https://tools.ietf.org/html/rfc7231#section-6.5.3)|15035|The authenticated user does not have permission to add media for this mod, this action is restricted to team managers & administrators only.|[Error Object](#schemaerror_object)
-
 ### Response Headers
 
 Status|Header|Type|Format|Description
@@ -5787,7 +5772,6 @@ Status|Meaning|Error Ref|Description|Response Schema
 ---|---|----|---|---|
 204|[No Content](https://tools.ietf.org/html/rfc7231#section-6.3.5)||Successful Request. No Body Returned.|None
 403|[Forbidden](https://tools.ietf.org/html/rfc7231#section-6.5.3)|15036|The authenticated user does not have permission to delete media from this mod, this action is restricted to team managers & administrators only.|[Error Object](#schemaerror_object)
-
 <aside class="auth-notice">
 To perform this request, you must be authenticated via one of the following methods:
 <a href="#authentication">OAuth 2</a> (Scopes: write)
@@ -5923,7 +5907,6 @@ Get all mods events for the corresponding game sorted by latest event first. Suc
 Status|Meaning|Error Ref|Description|Response Schema
 ---|---|----|---|---|
 200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)||Successful Request|[Get Mod Events](#schemaget_mod_events)
-
 <aside class="auth-notice">
 To perform this request, you must be authenticated via one of the following methods:
 <a href="#authentication">api_key</a>, <a href="#authentication">OAuth 2</a> (Scopes: read)
@@ -6047,7 +6030,6 @@ Get the event log for a mod, showing changes made sorted by latest event first. 
 Status|Meaning|Error Ref|Description|Response Schema
 ---|---|----|---|---|
 200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)||Successful Request|[Get Mod Events](#schemaget_mod_events)
-
 <aside class="auth-notice">
 To perform this request, you must be authenticated via one of the following methods:
 <a href="#authentication">api_key</a>, <a href="#authentication">OAuth 2</a> (Scopes: read)
@@ -6175,7 +6157,6 @@ Get all tags for the corresponding mod. Successful request will return an array 
 Status|Meaning|Error Ref|Description|Response Schema
 ---|---|----|---|---|
 200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)||Successful Request|[Get Mod Tags](#schemaget_mod_tags)
-
 <aside class="auth-notice">
 To perform this request, you must be authenticated via one of the following methods:
 <a href="#authentication">api_key</a>, <a href="#authentication">OAuth 2</a> (Scopes: read)
@@ -6303,7 +6284,6 @@ Status|Meaning|Error Ref|Description|Response Schema
 ---|---|----|---|---|
 201|[Created](https://tools.ietf.org/html/rfc7231#section-6.3.2)||Created|[Add Mod Tag Response](#schemaadd_mod_tag_response)
 403|[Forbidden](https://tools.ietf.org/html/rfc7231#section-6.5.3)|15037|The authenticated user does not have permission to submit tags for the specified mod. Ensure the user is part of the mod team before attempting the request again.|[Error Object](#schemaerror_object)
-
 ### Response Headers
 
 Status|Header|Type|Format|Description
@@ -6434,7 +6414,6 @@ Status|Meaning|Error Ref|Description|Response Schema
 ---|---|----|---|---|
 204|[No Content](https://tools.ietf.org/html/rfc7231#section-6.3.5)||Successful Request. No Body Returned.|None
 403|[Forbidden](https://tools.ietf.org/html/rfc7231#section-6.5.3)|15038|The authenticated user does not have permission to delete tags for the specified mod. Ensure the user is part of the mod team before attempting the request again.|[Error Object](#schemaerror_object)
-
 <aside class="auth-notice">
 To perform this request, you must be authenticated via one of the following methods:
 <a href="#authentication">OAuth 2</a> (Scopes: write)
@@ -6563,7 +6542,6 @@ Get all tags for the corresponding game, that can be applied to any of its mods.
 Status|Meaning|Error Ref|Description|Response Schema
 ---|---|----|---|---|
 200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)||Successful Request|[Get Game Tag Options](#schemaget_game_tag_options)
-
 <aside class="auth-notice">
 To perform this request, you must be authenticated via one of the following methods:
 <a href="#authentication">api_key</a>, <a href="#authentication">OAuth 2</a> (Scopes: read)
@@ -6707,7 +6685,6 @@ Status|Meaning|Error Ref|Description|Response Schema
 ---|---|----|---|---|
 201|[Created](https://tools.ietf.org/html/rfc7231#section-6.3.2)||Created|[Message Object](#message-object)
 403|[Forbidden](https://tools.ietf.org/html/rfc7231#section-6.5.3)|14012|The authenticated user does not have permission to submit tags for the specified game. Ensure the user is part of the game team before attempting the request again.|[Error Object](#schemaerror_object)
-
 ### Response Headers
 
 Status|Header|Type|Format|Description
@@ -6843,7 +6820,6 @@ Status|Meaning|Error Ref|Description|Response Schema
 ---|---|----|---|---|
 204|[No Content](https://tools.ietf.org/html/rfc7231#section-6.3.5)||Successful Request. No Body Returned.|None
 403|[Forbidden](https://tools.ietf.org/html/rfc7231#section-6.5.3)|14013|The authenticated user does not have permission to delete tags for the specified game. Ensure the user is part of the game team before attempting the request again.|[Error Object](#schemaerror_object)
-
 <aside class="auth-notice">
 To perform this request, you must be authenticated via one of the following methods:
 <a href="#authentication">OAuth 2</a> (Scopes: write)
@@ -6976,7 +6952,6 @@ Status|Meaning|Error Ref|Description|Response Schema
 201|[Created](https://tools.ietf.org/html/rfc7231#section-6.3.2)||Created|[Message Object](#message-object)
 400|[Bad Request](https://tools.ietf.org/html/rfc7231#section-6.5.1)|15028|The authenticated user has already submitted a rating for this mod.|[Error Object](#schemaerror_object)
 400|[Bad Request](https://tools.ietf.org/html/rfc7231#section-6.5.1)|15043|The authenticated user is trying to revert a rating that doesn't exist.|[Error Object](#schemaerror_object)
-
 <aside class="auth-notice">
 To perform this request, you must be authenticated via one of the following methods:
 <a href="#authentication">OAuth 2</a> (Scopes: write)
@@ -7120,7 +7095,6 @@ Get all mod stats for mods of the corresponding game. Successful request will re
 Status|Meaning|Error Ref|Description|Response Schema
 ---|---|----|---|---|
 200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)||Successful Request|[Get Mod Stats](#schemaget_mod_stats)
-
 <aside class="auth-notice">
 To perform this request, you must be authenticated via one of the following methods:
 <a href="#authentication">api_key</a>, <a href="#authentication">OAuth 2</a> (Scopes: read)
@@ -7241,7 +7215,6 @@ Get mod stats for the corresponding mod. Successful request will return a single
 Status|Meaning|Error Ref|Description|Response Schema
 ---|---|----|---|---|
 200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)||Successful Request|[Mod Stats Object](#schemamod_stats_object)
-
 <aside class="auth-notice">
 To perform this request, you must be authenticated via one of the following methods:
 <a href="#authentication">api_key</a>, <a href="#authentication">OAuth 2</a> (Scopes: read)
@@ -7356,7 +7329,6 @@ Get game stats for the corresponding game. Successful request will return a sing
 Status|Meaning|Error Ref|Description|Response Schema
 ---|---|----|---|---|
 200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)||Successful Request|[Game Stats Object](#schemagame_stats_object)
-
 <aside class="auth-notice">
 To perform this request, you must be authenticated via one of the following methods:
 <a href="#authentication">api_key</a>, <a href="#authentication">OAuth 2</a> (Scopes: read)
@@ -7479,7 +7451,6 @@ Get all metadata stored by the game developer for this mod as searchable key val
 Status|Meaning|Error Ref|Description|Response Schema
 ---|---|----|---|---|
 200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)||Successful Request|[Get Mod KVP Metadata](#schemaget_mod_kvp_metadata)
-
 <aside class="auth-notice">
 To perform this request, you must be authenticated via one of the following methods:
 <a href="#authentication">api_key</a>, <a href="#authentication">OAuth 2</a> (Scopes: read)
@@ -7607,7 +7578,6 @@ Status|Meaning|Error Ref|Description|Response Schema
 ---|---|----|---|---|
 201|[Created](https://tools.ietf.org/html/rfc7231#section-6.3.2)||Created|[Message Object](#message-object)
 403|[Forbidden](https://tools.ietf.org/html/rfc7231#section-6.5.3)|15033|The authenticated user does not have permission to add metadata to this mod, this action is restricted to team managers & administrators only.|[Error Object](#schemaerror_object)
-
 ### Response Headers
 
 Status|Header|Type|Format|Description
@@ -7738,7 +7708,6 @@ Status|Meaning|Error Ref|Description|Response Schema
 ---|---|----|---|---|
 204|[No Content](https://tools.ietf.org/html/rfc7231#section-6.3.5)||Successful Request. No Body Returned.|None
 403|[Forbidden](https://tools.ietf.org/html/rfc7231#section-6.5.3)|15034|The authenticated user does not have permission to delete metadata from this mod, this action is restricted to team managers & administrators only.|[Error Object](#schemaerror_object)
-
 <aside class="auth-notice">
 To perform this request, you must be authenticated via one of the following methods:
 <a href="#authentication">OAuth 2</a> (Scopes: write)
@@ -7866,7 +7835,6 @@ Get all dependencies the chosen mod has selected. This is useful if a mod requir
 Status|Meaning|Error Ref|Description|Response Schema
 ---|---|----|---|---|
 200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)||Successful Request|[Get Mod Dependencies](#schemaget_mod_dependencies)
-
 <aside class="auth-notice">
 To perform this request, you must be authenticated via one of the following methods:
 <a href="#authentication">api_key</a>, <a href="#authentication">OAuth 2</a> (Scopes: read)
@@ -7994,7 +7962,6 @@ Status|Meaning|Error Ref|Description|Response Schema
 ---|---|----|---|---|
 201|[Created](https://tools.ietf.org/html/rfc7231#section-6.3.2)||Created|[Message Object](#message-object)
 403|[Forbidden](https://tools.ietf.org/html/rfc7231#section-6.5.3)|15031|The authenticated user does not have permission to add dependencies for this mod, this action is restricted to team managers & administrators only.|[Error Object](#schemaerror_object)
-
 ### Response Headers
 
 Status|Header|Type|Format|Description
@@ -8125,7 +8092,6 @@ Status|Meaning|Error Ref|Description|Response Schema
 ---|---|----|---|---|
 204|[No Content](https://tools.ietf.org/html/rfc7231#section-6.3.5)||Successful Request. No Body Returned.|None
 403|[Forbidden](https://tools.ietf.org/html/rfc7231#section-6.5.3)|15032|The authenticated user does not have permission to delete dependencies for this mod, this action is restricted to team managers & administrators only.|[Error Object](#schemaerror_object)
-
 <aside class="auth-notice">
 To perform this request, you must be authenticated via one of the following methods:
 <a href="#authentication">OAuth 2</a> (Scopes: write)
@@ -8277,7 +8243,6 @@ Get all users that are part of a mod team. Successful request will return an arr
 Status|Meaning|Error Ref|Description|Response Schema
 ---|---|----|---|---|
 200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)||Successful Request|[Get Team Members](#schemaget_team_members)
-
 <aside class="auth-notice">
 To perform this request, you must be authenticated via one of the following methods:
 <a href="#authentication">api_key</a>, <a href="#authentication">OAuth 2</a> (Scopes: read)
@@ -8420,7 +8385,6 @@ Get the user that is the original _submitter_ of a resource. Successful request 
 Status|Meaning|Error Ref|Description|Response Schema
 ---|---|----|---|---|
 200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)||Successful Request|[User Object](#schemauser_object)
-
 <aside class="auth-notice">
 To perform this request, you must be authenticated via one of the following methods:
 <a href="#authentication">OAuth 2</a> (Scopes: read)
@@ -8567,7 +8531,6 @@ Status|Meaning|Error Ref|Description|Response Schema
 403|[Forbidden](https://tools.ietf.org/html/rfc7231#section-6.5.3)|15029|The authenticated user does not have permission to submit reports on mod.io due to their access being revoked.|[Error Object](#schemaerror_object)
 403|[Forbidden](https://tools.ietf.org/html/rfc7231#section-6.5.3)|15030|The specified resource is not able to be reported at this time, this is potentially due to the resource in question being removed.|[Error Object](#schemaerror_object)
 404|[Not Found](https://tools.ietf.org/html/rfc7231#section-6.5.4)|14000|The resource to be reported could not be found.|[Error Object](#schemaerror_object)
-
 <aside class="auth-notice">
 To perform this request, you must be authenticated via one of the following methods:
 <a href="#authentication">OAuth 2</a> (Scopes: write)
@@ -8698,7 +8661,6 @@ Get the _authenticated user_ details. Successful request will return a single [U
 Status|Meaning|Error Ref|Description|Response Schema
 ---|---|----|---|---|
 200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)||Request Successful|[User Object](#schemauser_object)
-
 <aside class="auth-notice">
 To perform this request, you must be authenticated via one of the following methods:
 <a href="#authentication">OAuth 2</a> (Scopes: read)
@@ -8941,12 +8903,16 @@ Get all mod's the _authenticated user_ is subscribed to. Successful request will
 }
 
 ```
+<h3 id="endpoint-xplatform-notice">Cross-Platform Filtering</h3>
+
+If the parent game has platform filtering enabled, this endpoint supports the [targeting a platform](#targeting-a-platform) request header to return the [mods](#mod-object) that are approved for the requested platform. Note: To target a platform for this endpoint, you MUST also include the `game_id` filter for the game that has cross-platform filtering enabled.
+
+
 <h3 id="Get-User-Subscriptions-responses">Responses</h3>
 
 Status|Meaning|Error Ref|Description|Response Schema
 ---|---|----|---|---|
 200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)||Request Successful|[Get Mods](#schemaget_mods)
-
 <aside class="auth-notice">
 To perform this request, you must be authenticated via one of the following methods:
 <a href="#authentication">OAuth 2</a> (Scopes: read)
@@ -9080,7 +9046,6 @@ Get events that have been fired specific to the user. Successful request will re
 Status|Meaning|Error Ref|Description|Response Schema
 ---|---|----|---|---|
 200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)||Successful Request|[Get User Events](#schemaget_user_events)
-
 <aside class="auth-notice">
 To perform this request, you must be authenticated via one of the following methods:
 <a href="#authentication">api_key</a>, <a href="#authentication">OAuth 2</a> (Scopes: read)
@@ -9316,7 +9281,6 @@ Get all games the _authenticated user_ added or is a team member of. Successful 
 Status|Meaning|Error Ref|Description|Response Schema
 ---|---|----|---|---|
 200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)||Request Successful|[Get Games](#schemaget_games)
-
 <aside class="auth-notice">
 To perform this request, you must be authenticated via one of the following methods:
 <a href="#authentication">OAuth 2</a> (Scopes: read)
@@ -9568,7 +9532,6 @@ Get all mods the _authenticated user_ added or is a team member of. Successful r
 Status|Meaning|Error Ref|Description|Response Schema
 ---|---|----|---|---|
 200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)||Request Successful|[Get Mods](#schemaget_mods)
-
 <aside class="auth-notice">
 To perform this request, you must be authenticated via one of the following methods:
 <a href="#authentication">OAuth 2</a> (Scopes: read)
@@ -9727,7 +9690,6 @@ Get all modfiles the _authenticated user_ uploaded. Successful request will retu
 Status|Meaning|Error Ref|Description|Response Schema
 ---|---|----|---|---|
 200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)||Request Successful|[Get Modfiles](#schemaget_modfiles)
-
 <aside class="auth-notice">
 To perform this request, you must be authenticated via one of the following methods:
 <a href="#authentication">OAuth 2</a> (Scopes: read)
@@ -9863,7 +9825,6 @@ Get all mod rating's submitted by the _authenticated user_. Successful request w
 Status|Meaning|Error Ref|Description|Response Schema
 ---|---|----|---|---|
 200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)||Request Successful|[Get User Ratings](#schemaget_user_ratings)
-
 <aside class="auth-notice">
 To perform this request, you must be authenticated via one of the following methods:
 <a href="#authentication">OAuth 2</a> (Scopes: read)

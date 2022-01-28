@@ -494,6 +494,23 @@ html, body {
       background-color: $aside-auth-notice-bg;
     }
 
+    &.cross-platform-notice {
+      display: flex;
+      align-items: center;
+      background-color: $lang-select-active-bg;
+      padding: 0em 1em;
+      color: $main-text;
+      a { 
+        color: $main-text;
+      }
+      a:hover {
+        color: $nav-text;
+      }
+      p {
+        padding: 10px 10px 0px;
+      }
+    }
+
     &.error-summary-notice {
       background-color: $examples-bg;
     }
