@@ -26,12 +26,12 @@
 	<meta property="twitter:image" content="https://docs.mod.io/images/splash.png">
 
 	<!-- icons -->
-	<link rel="apple-touch-icon" sizes="180x180" href="images/apple-touch-icon.png">
-	<link rel="icon" type="image/png" sizes="32x32" href="images/favicon-32x32.png">
-	<link rel="icon" type="image/png" sizes="16x16" href="images/favicon-16x16.png">
+	<link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon.png">
+	<link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32.png">
+	<link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16.png">
 	<link rel="manifest" href="/images/manifest.json">
-	<link rel="mask-icon" href="images/safari-pinned-tab.svg" color="#44bfd4">
-	<link rel="shortcut icon" href="images/favicon.ico">
+	<link rel="mask-icon" href="/images/safari-pinned-tab.svg" color="#44bfd4">
+	<link rel="shortcut icon" href="/images/favicon.ico">
 	<meta name="msapplication-config" content="/images/browserconfig.xml">
 	<meta name="theme-color" content="#44bfd4">
 
@@ -227,8 +227,8 @@
     <link href="stylesheets/screen.css" rel="stylesheet" media="screen" />
     <link href="stylesheets/print.css" rel="stylesheet" media="print" />
 
-    <link rel="stylesheet" href="stylesheets/colorbox.css">
-    <link rel="stylesheet" href="stylesheets/tippy.css">
+    <link rel="stylesheet" href="/stylesheets/colorbox.css">
+    <link rel="stylesheet" href="/stylesheets/tippy.css">
       <script src="javascripts/all.js"></script>
 
     <script>
@@ -271,7 +271,7 @@
       </span>
     </a>
     <div class="toc-wrapper">
-      <a href="https://mod.io"><img src="images/logo.svg" class="logo" alt="Logo" /></a>
+      <a href="https://mod.io"><img class="logo" src="images/logo.svg" alt="Logo" /></a>
         <div class="lang-selector">
               <a href="#" data-language-name="shell">Shell</a>
               <a href="#" data-language-name="http">HTTP</a>
@@ -595,14 +595,6 @@
               </ul>
           </li>
           <li>
-            <a href="#batch" class="toc-h1 toc-link" data-title="Batch"><span class="reficon"><img src="https://static.mod.io/v1/images/branding/modio-icon-light.svg" alt="Reference" class="menu-reference-icon"></span> Batch</a>
-              <ul class="toc-list-h2">
-                  <li>
-                    <a href="#make-batch-request" class="toc-h2 toc-link" data-title="Batch">Make Batch Request</a>
-                  </li>
-              </ul>
-          </li>
-          <li>
             <a href="#me" class="toc-h1 toc-link" data-title="Me"><span class="reficon"><img src="https://static.mod.io/v1/images/branding/modio-icon-light.svg" alt="Reference" class="menu-reference-icon"></span> Me</a>
               <ul class="toc-list-h2">
                   <li>
@@ -669,9 +661,6 @@
                   </li>
                   <li>
                     <a href="#game-tag-option-object" class="toc-h2 toc-link" data-title="Response Schemas">Game Tag Option Object</a>
-                  </li>
-                  <li>
-                    <a href="#get-batch" class="toc-h2 toc-link" data-title="Response Schemas">Get Batch</a>
                   </li>
                   <li>
                     <a href="#get-game-tag-options-2" class="toc-h2 toc-link" data-title="Response Schemas">Get Game Tag Options</a>
@@ -799,7 +788,7 @@
 <h2 id="how-it-works">How It Works</h2>
 <p>Compatible with all builds of your game on all platforms and stores, mod.io is a clientless and standalone solution which gives you complete control over your modding ecosystem.</p>
 
-<p><img src="https://static.mod.io/v1/images/home/sdk.png" alt="mod.io Overview">.</p>
+<p><img alt="mod.io Overview" src="https://static.mod.io/v1/images/home/sdk.png">.</p>
 <h2 id="implementation">Implementation</h2>
 <p>You have 3 options to get connected to the mod.io API which you can use interchangeably depending on your needs. Here's the breakdown of each option.</p>
 
@@ -845,21 +834,21 @@
 </thead>
 <tbody>
 <tr>
-<td><img src="images/tool-unity.png" alt="Unity Plugin"></td>
+<td><img alt="Unity Plugin" src="images/tool-unity.png"></td>
 <td>
 <strong>Unity Plugin</strong><br><a href="https://github.com/modio/modio-unity">SDK</a><br><a href="https://github.com/modio/modio-unity/wiki">Getting Started</a><br>
 </td>
-<td><img src="images/tool-unreal.png" alt="Unreal Plugin"></td>
+<td><img alt="Unreal Plugin" src="images/tool-unreal.png"></td>
 <td>
 <strong>Unreal Plugin</strong><br><a href="https://github.com/modio/modio-ue4">SDK</a><br><a href="https://github.com/modio/modio-ue4/wiki">Getting Started</a><br><a href="https://github.com/modio/modio-ue4-example">Example</a><br>
 </td>
 </tr>
 <tr>
-<td><img src="images/tool-ccpp.png" alt="C/C++ SDK"></td>
+<td><img alt="C/C++ SDK" src="images/tool-ccpp.png"></td>
 <td>
 <strong>C/C++ SDK</strong><br><a href="https://github.com/modio/modio-sdk">SDK</a><br><a href="https://github.com/modio/modio-sdk/wiki">Getting Started</a><br><a href="https://github.com/modio/modio-sdk/tree/master/examples/code-samples">Tutorials</a><br>
 </td>
-<td><img src="images/tool-discordbot.png" alt="Discord Bot"></td>
+<td><img alt="Discord Bot" src="images/tool-discordbot.png"></td>
 <td>
 <strong>Discord Bot</strong><br><a href="https://github.com/modio/modio-discord-bot">Instructions</a><br><a href="https://discordbot.mod.io">Invite</a><br>
 </td>
@@ -879,41 +868,41 @@
 </thead>
 <tbody>
 <tr>
-<td><img src="images/tool-rust.png" alt="Rust Wrapper"></td>
+<td><img alt="Rust Wrapper" src="images/tool-rust.png"></td>
 <td>
 <strong>Rust Wrapper</strong><br><a href="https://crates.io/crates/modio">SDK</a><br><a href="https://github.com/nickelc/modio-rs">Getting Started</a><br><a href="https://github.com/nickelc/modio-rs/tree/master/examples">Tutorials</a><br>
 </td>
-<td><img src="images/tool-python.png" alt="Python Wrapper"></td>
+<td><img alt="Python Wrapper" src="images/tool-python.png"></td>
 <td>
 <strong>Python Wrapper</strong><br><a href="https://github.com/ClementJ18/mod.io">SDK</a><br><a href="https://github.com/ClementJ18/mod.io/#example">Getting Started</a><br><a href="https://github.com/ClementJ18/mod.io/tree/master/examples">Tutorials</a><br>
 </td>
 </tr>
 <tr>
-<td><img src="images/tool-c2.png" alt="Construct 2"></td>
+<td><img alt="Construct 2" src="images/tool-c2.png"></td>
 <td>
 <strong>Construct 2 Plugin</strong><br><a href="https://github.com/modio/modio-construct2">SDK</a><br><a href="https://github.com/modio/modio-construct2">Getting Started</a><br>
 </td>
-<td><img src="images/tool-gm2.png" alt="GameMaker Studio 2"></td>
+<td><img alt="GameMaker Studio 2" src="images/tool-gm2.png"></td>
 <td>
 <strong>GameMaker Studio 2 Plugin</strong><br><a href="https://github.com/modio/modio-gamemaker2">SDK</a><br><a href="https://github.com/modio/modio-gamemaker2">Getting Started</a><br>
 </td>
 </tr>
 <tr>
-<td><img src="images/tool-haxe.png" alt="Haxe Wrapper"></td>
+<td><img alt="Haxe Wrapper" src="images/tool-haxe.png"></td>
 <td>
 <strong>Haxe Wrapper</strong><br><a href="https://github.com/modio/modio-haxe">SDK</a><br><a href="https://github.com/modio/modio-haxe">Getting Started</a><br><a href="https://github.com/Turupawn/modioOpenFLExample#openfl-integration">Tutorials</a><br>
 </td>
-<td><img src="images/tool-dotnet.png" alt="Modio.NET"></td>
+<td><img alt="Modio.NET" src="images/tool-dotnet.png"></td>
 <td>
 <strong>Modio.NET</strong><br><a href="https://github.com/nickelc/modio.net">SDK</a><br><a href="https://github.com/nickelc/modio.net">Getting Started</a><br>
 </td>
 </tr>
 <tr>
-<td><img src="images/tool-cmd.png" alt="Command Line Tool"></td>
+<td><img alt="Command Line Tool" src="images/tool-cmd.png"></td>
 <td>
 <strong>Command Line Tool</strong><br><a href="https://github.com/nickelc/modiom">CMD</a><br><a href="https://github.com/nickelc/modiom">Getting Started</a><br>
 </td>
-<td><img src="images/tool-actions.png" alt="GitHub Action Mod Uploader"></td>
+<td><img alt="GitHub Action Mod Uploader" src="images/tool-actions.png"></td>
 <td>
 <strong>GitHub Action Mod Uploader</strong><br><a href="https://github.com/nickelc/upload-to-modio">GitHub</a><br><a href="https://github.com/nickelc/upload-to-modio#usage">Usage</a><br>
 </td>
@@ -936,7 +925,7 @@
 <ul>
 <li>Use an <a href="https://mod.io/apikey/widget" class="colorbox">API key</a> for <strong>Read-only</strong> access (get a <a href="https://test.mod.io/apikey">test environment</a> API key here)</li>
 <li>Use the <a href="#authenticate-via-email">Email Authentication Flow</a> for <strong>Read and Write</strong> access (it creates an OAuth 2 Access Token via <strong>email</strong>)</li>
-<li>Use the <a href="#authenticate-via-steam">Platform Authentication Flow</a> for <strong>Read and Write</strong> access (it creates an OAuth 2 Access Token automatically on popular portals such as <strong>Steam and Xbox Live</strong>)</li>
+<li>Use the <a href="#authenticate-via-steam">Platform Authentication Flow</a> for <strong>Read and Write</strong> access (it creates an OAuth 2 Access Token automatically on popular platforms such as <strong>Steam and Xbox</strong>)</li>
 <li>Manually create an <a href="https://mod.io/oauth/widget" class="colorbox">OAuth 2 Access Token</a> for <strong>Read and Write</strong> access (get a <a href="https://test.mod.io/oauth">test environment</a> OAuth 2 token here)</li>
 </ul>
 
@@ -1878,8 +1867,8 @@ non-english content you must supply the <code>Content-Language</code> header in 
 <td><code>Switch</code></td>
 </tr>
 <tr>
-<td>Wii</td>
-<td><code>Wii</code></td>
+<td>Oculus</td>
+<td><code>Oculus</code></td>
 </tr>
 </tbody>
 </table>
@@ -3598,7 +3587,7 @@ curl -X POST https://api.mod.io/v1/external/googleauth?api_key<span class="o">=<
 <td>401</td>
 <td><a href="https://tools.ietf.org/html/rfc7235#section-3.1">Unauthorized</a></td>
 <td>11056</td>
-<td>mod.io was unable to validate the credentials with Google servers.</td>
+<td>mod.io was unable to validate the credentials with Google's servers.</td>
 <td><a href="#schemaerror_object">Error Object</a></td>
 </tr>
 <tr>
@@ -4060,23 +4049,6 @@ Accept: application/json
       </span><span class="s2">"instructions"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Instructions on the process to upload mods."</span><span class="p">,</span><span class="w">
       </span><span class="s2">"instructions_url"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://www.rogue-knight-game.com/modding/getting-started"</span><span class="p">,</span><span class="w">
       </span><span class="s2">"profile_url"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://rogue-knight.mod.io"</span><span class="p">,</span><span class="w">
-      </span><span class="s2">"stats"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-        </span><span class="s2">"game_id"</span><span class="p">:</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span><span class="w">
-        </span><span class="s2">"mods_count_total"</span><span class="p">:</span><span class="w"> </span><span class="mi">13</span><span class="p">,</span><span class="w">
-        </span><span class="s2">"mods_downloads_today"</span><span class="p">:</span><span class="w"> </span><span class="mi">204</span><span class="p">,</span><span class="w">
-        </span><span class="s2">"mods_downloads_total"</span><span class="p">:</span><span class="w"> </span><span class="mi">27492</span><span class="p">,</span><span class="w">
-        </span><span class="s2">"mods_downloads_daily_average"</span><span class="p">:</span><span class="w"> </span><span class="mi">1230</span><span class="p">,</span><span class="w">
-        </span><span class="s2">"mods_subscribers_total"</span><span class="p">:</span><span class="w"> </span><span class="mi">16394</span><span class="p">,</span><span class="w">
-        </span><span class="s2">"date_expires"</span><span class="p">:</span><span class="w"> </span><span class="mi">1492564103</span><span class="w">
-      </span><span class="p">},</span><span class="w">
-      </span><span class="s2">"theme"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-        </span><span class="s2">"primary"</span><span class="p">:</span><span class="w"> </span><span class="s2">"#44bfd5"</span><span class="p">,</span><span class="w">
-        </span><span class="s2">"dark"</span><span class="p">:</span><span class="w"> </span><span class="s2">"#2c2c3f"</span><span class="p">,</span><span class="w">
-        </span><span class="s2">"light"</span><span class="p">:</span><span class="w"> </span><span class="s2">"#ffffff"</span><span class="p">,</span><span class="w">
-        </span><span class="s2">"success"</span><span class="p">:</span><span class="w"> </span><span class="s2">"#68D391"</span><span class="p">,</span><span class="w">
-        </span><span class="s2">"warning"</span><span class="p">:</span><span class="w"> </span><span class="s2">"#d6af2e"</span><span class="p">,</span><span class="w">
-        </span><span class="s2">"danger"</span><span class="p">:</span><span class="w"> </span><span class="s2">"#ff000e"</span><span class="w">
-      </span><span class="p">},</span><span class="w">
       </span><span class="s2">"other_urls"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
         </span><span class="p">{</span><span class="w">
           </span><span class="s2">"label"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Our Steam Page"</span><span class="p">,</span><span class="w">
@@ -4096,7 +4068,24 @@ Accept: application/json
           </span><span class="s2">"hidden"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span><span class="w">
           </span><span class="s2">"locked"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="w">
         </span><span class="p">}</span><span class="w">
-      </span><span class="p">]</span><span class="w">
+      </span><span class="p">],</span><span class="w">
+      </span><span class="s2">"stats"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+        </span><span class="s2">"game_id"</span><span class="p">:</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"mods_count_total"</span><span class="p">:</span><span class="w"> </span><span class="mi">13</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"mods_downloads_today"</span><span class="p">:</span><span class="w"> </span><span class="mi">204</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"mods_downloads_total"</span><span class="p">:</span><span class="w"> </span><span class="mi">27492</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"mods_downloads_daily_average"</span><span class="p">:</span><span class="w"> </span><span class="mi">1230</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"mods_subscribers_total"</span><span class="p">:</span><span class="w"> </span><span class="mi">16394</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"date_expires"</span><span class="p">:</span><span class="w"> </span><span class="mi">1492564103</span><span class="w">
+      </span><span class="p">},</span><span class="w">
+      </span><span class="s2">"theme"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+        </span><span class="s2">"primary"</span><span class="p">:</span><span class="w"> </span><span class="s2">"#44bfd5"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"dark"</span><span class="p">:</span><span class="w"> </span><span class="s2">"#2c2c3f"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"light"</span><span class="p">:</span><span class="w"> </span><span class="s2">"#ffffff"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"success"</span><span class="p">:</span><span class="w"> </span><span class="s2">"#68D391"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"warning"</span><span class="p">:</span><span class="w"> </span><span class="s2">"#d6af2e"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"danger"</span><span class="p">:</span><span class="w"> </span><span class="s2">"#ff000e"</span><span class="w">
+      </span><span class="p">}</span><span class="w">
     </span><span class="p">},</span><span class="w">
     </span><span class="p">{</span><span class="w">
         </span><span class="err">...</span><span class="w">
@@ -4267,23 +4256,6 @@ Accept: application/json
   </span><span class="s2">"instructions"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Instructions on the process to upload mods."</span><span class="p">,</span><span class="w">
   </span><span class="s2">"instructions_url"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://www.rogue-knight-game.com/modding/getting-started"</span><span class="p">,</span><span class="w">
   </span><span class="s2">"profile_url"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://rogue-knight.mod.io"</span><span class="p">,</span><span class="w">
-  </span><span class="s2">"stats"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-    </span><span class="s2">"game_id"</span><span class="p">:</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span><span class="w">
-    </span><span class="s2">"mods_count_total"</span><span class="p">:</span><span class="w"> </span><span class="mi">13</span><span class="p">,</span><span class="w">
-    </span><span class="s2">"mods_downloads_today"</span><span class="p">:</span><span class="w"> </span><span class="mi">204</span><span class="p">,</span><span class="w">
-    </span><span class="s2">"mods_downloads_total"</span><span class="p">:</span><span class="w"> </span><span class="mi">27492</span><span class="p">,</span><span class="w">
-    </span><span class="s2">"mods_downloads_daily_average"</span><span class="p">:</span><span class="w"> </span><span class="mi">1230</span><span class="p">,</span><span class="w">
-    </span><span class="s2">"mods_subscribers_total"</span><span class="p">:</span><span class="w"> </span><span class="mi">16394</span><span class="p">,</span><span class="w">
-    </span><span class="s2">"date_expires"</span><span class="p">:</span><span class="w"> </span><span class="mi">1492564103</span><span class="w">
-  </span><span class="p">},</span><span class="w">
-  </span><span class="s2">"theme"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-    </span><span class="s2">"primary"</span><span class="p">:</span><span class="w"> </span><span class="s2">"#44bfd5"</span><span class="p">,</span><span class="w">
-    </span><span class="s2">"dark"</span><span class="p">:</span><span class="w"> </span><span class="s2">"#2c2c3f"</span><span class="p">,</span><span class="w">
-    </span><span class="s2">"light"</span><span class="p">:</span><span class="w"> </span><span class="s2">"#ffffff"</span><span class="p">,</span><span class="w">
-    </span><span class="s2">"success"</span><span class="p">:</span><span class="w"> </span><span class="s2">"#68D391"</span><span class="p">,</span><span class="w">
-    </span><span class="s2">"warning"</span><span class="p">:</span><span class="w"> </span><span class="s2">"#d6af2e"</span><span class="p">,</span><span class="w">
-    </span><span class="s2">"danger"</span><span class="p">:</span><span class="w"> </span><span class="s2">"#ff000e"</span><span class="w">
-  </span><span class="p">},</span><span class="w">
   </span><span class="s2">"other_urls"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
     </span><span class="p">{</span><span class="w">
       </span><span class="s2">"label"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Our Steam Page"</span><span class="p">,</span><span class="w">
@@ -4303,7 +4275,24 @@ Accept: application/json
       </span><span class="s2">"hidden"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span><span class="w">
       </span><span class="s2">"locked"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="w">
     </span><span class="p">}</span><span class="w">
-  </span><span class="p">]</span><span class="w">
+  </span><span class="p">],</span><span class="w">
+  </span><span class="s2">"stats"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+    </span><span class="s2">"game_id"</span><span class="p">:</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"mods_count_total"</span><span class="p">:</span><span class="w"> </span><span class="mi">13</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"mods_downloads_today"</span><span class="p">:</span><span class="w"> </span><span class="mi">204</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"mods_downloads_total"</span><span class="p">:</span><span class="w"> </span><span class="mi">27492</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"mods_downloads_daily_average"</span><span class="p">:</span><span class="w"> </span><span class="mi">1230</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"mods_subscribers_total"</span><span class="p">:</span><span class="w"> </span><span class="mi">16394</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"date_expires"</span><span class="p">:</span><span class="w"> </span><span class="mi">1492564103</span><span class="w">
+  </span><span class="p">},</span><span class="w">
+  </span><span class="s2">"theme"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+    </span><span class="s2">"primary"</span><span class="p">:</span><span class="w"> </span><span class="s2">"#44bfd5"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"dark"</span><span class="p">:</span><span class="w"> </span><span class="s2">"#2c2c3f"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"light"</span><span class="p">:</span><span class="w"> </span><span class="s2">"#ffffff"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"success"</span><span class="p">:</span><span class="w"> </span><span class="s2">"#68D391"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"warning"</span><span class="p">:</span><span class="w"> </span><span class="s2">"#d6af2e"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"danger"</span><span class="p">:</span><span class="w"> </span><span class="s2">"#ff000e"</span><span class="w">
+  </span><span class="p">}</span><span class="w">
 </span><span class="p">}</span><span class="w">
 
 </span></code></pre>
@@ -4651,6 +4640,10 @@ Accept: application/json
 </span><span class="p">}</span><span class="w">
 
 </span></code></pre>
+<h3 id="endpoint-xplatform-notice">Cross-Platform Filtering</h3>
+
+<p>If the parent game has platform filtering enabled, this endpoint supports the <a href="#targeting-a-platform">targeting a platform</a> request header to return mods that have been approved for the requested platform.</p>
+
 <h3 id="Get-Mods-responses">Responses</h3>
 
 <table>
@@ -4868,6 +4861,10 @@ Accept: application/json
 </span><span class="p">}</span><span class="w">
 
 </span></code></pre>
+<h3 id="endpoint-xplatform-notice">Cross-Platform Filtering</h3>
+
+<p>If the parent game has platform filtering enabled, this endpoint supports the <a href="#targeting-a-platform">targeting a platform</a> request header to return the <a href="#modfile-object">modfile</a> within the <a href="#mod-object">Mod Object</a> for the requested platform. If the request targets a platform that is invalid, the <code>modfile</code> field will be <code>null</code>.</p>
+
 <h3 id="Get-Mod-responses">Responses</h3>
 
 <table>
@@ -5865,6 +5862,10 @@ Accept: application/json
 </span><span class="p">}</span><span class="w">
 
 </span></code></pre>
+<h3 id="endpoint-xplatform-notice">Cross-Platform Filtering</h3>
+
+<p>If the parent game has platform filtering enabled, this endpoint supports the <a href="#targeting-a-platform">targeting a platform</a> request header to return the <a href="#modfile-object">modfiles</a> that are approved for the requested platform.</p>
+
 <h3 id="Get-Modfiles-responses">Responses</h3>
 
 <table>
@@ -11501,7 +11502,7 @@ curl -X POST https://api.mod.io/v1/report <span class="se">\</span>
 <td><a href="https://tools.ietf.org/html/rfc7231#section-6.3.2">Created</a></td>
 <td></td>
 <td>Report Created</td>
-<td><a href="#schemaadd_report_response">Add Report Response</a></td>
+<td><a href="#message-object">Message Object</a></td>
 </tr>
 <tr>
 <td>403</td>
@@ -11523,421 +11524,6 @@ curl -X POST https://api.mod.io/v1/report <span class="se">\</span>
 <td>14000</td>
 <td>The resource to be reported could not be found.</td>
 <td><a href="#schemaerror_object">Error Object</a></td>
-</tr>
-</tbody>
-</table>
-
-<aside class="auth-notice">
-To perform this request, you must be authenticated via one of the following methods:
-<a href="#authentication">OAuth 2</a> (Scopes: write)
-</aside>
-<h1 id="batch">Batch</h1><h2 id="make-batch-request">Make Batch Request</h2>
-<blockquote>
-<p>Example request</p>
-</blockquote>
-<pre class="highlight shell tab-shell"><code><span class="c"># You can also use wget</span>
-curl -X POST https://api.mod.io/v1/batch <span class="se">\</span>
-  -H <span class="s1">'Authorization: Bearer {access-token}'</span> <span class="se">\ </span>
-  -H <span class="s1">'Content-Type: application/x-www-form-urlencoded'</span> <span class="se">\ </span>
-  -H <span class="s1">'Accept: application/json'</span> <span class="se">\</span>
-  -d <span class="s1">'batch[0][relative_url]=v1/games/11/mods'</span> <span class="se">\</span>
-  -d <span class="s1">'batch[0][method]=GET'</span> <span class="se">\</span>
-  -d <span class="s1">'batch[1][relative_url]=v1/me/subscribed?id-in=$[0].data[*].id'</span> <span class="se">\</span>
-  -d <span class="s1">'batch[1][method]=GET'</span> <span class="se">\</span>
-  -d <span class="s1">'batch[2][relative_url]=v1/me/ratings?id-in=$[0].data[*].id'</span> <span class="se">\</span>
-  -d <span class="s1">'batch[2][method]=GET'</span>
-
-</code></pre><pre class="highlight http tab-http"><code><span class="nf">POST</span> <span class="nn">https://api.mod.io/v1/batch</span> <span class="k">HTTP</span><span class="o">/</span><span class="m">1.1</span>
-<span class="na">Host</span><span class="p">:</span> <span class="s">api.mod.io</span>
-<span class="na">Content-Type</span><span class="p">:</span> <span class="s">application/x-www-form-urlencoded</span>
-<span class="na">Accept</span><span class="p">:</span> <span class="s">application/json</span>
-<span class="na">Authorization</span><span class="p">:</span> <span class="s">Bearer {access-token}</span>
-
-
-</code></pre><pre class="highlight javascript tab-javascript"><code><span class="kd">var</span> <span class="nx">headers</span> <span class="o">=</span> <span class="p">{</span>
-  <span class="s1">'Authorization'</span><span class="p">:</span><span class="s1">'Bearer {access-token}'</span><span class="p">,</span>
-  <span class="s1">'Content-Type'</span><span class="p">:</span><span class="s1">'application/x-www-form-urlencoded'</span><span class="p">,</span>
-  <span class="s1">'Accept'</span><span class="p">:</span><span class="s1">'application/json'</span>
-
-<span class="p">};</span>
-
-<span class="nx">$</span><span class="p">.</span><span class="nx">ajax</span><span class="p">({</span>
-  <span class="na">url</span><span class="p">:</span> <span class="s1">'https://api.mod.io/v1/batch'</span><span class="p">,</span>
-  <span class="na">method</span><span class="p">:</span> <span class="s1">'post'</span><span class="p">,</span>
-
-  <span class="na">headers</span><span class="p">:</span> <span class="nx">headers</span><span class="p">,</span>
-  <span class="na">success</span><span class="p">:</span> <span class="kd">function</span><span class="p">(</span><span class="nx">data</span><span class="p">)</span> <span class="p">{</span>
-    <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">JSON</span><span class="p">.</span><span class="nx">stringify</span><span class="p">(</span><span class="nx">data</span><span class="p">));</span>
-  <span class="p">}</span>
-<span class="p">})</span>
-</code></pre><pre class="highlight javascript tab-javascript--nodejs"><code><span class="kr">const</span> <span class="nx">request</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s1">'node-fetch'</span><span class="p">);</span>
-<span class="kr">const</span> <span class="nx">inputBody</span> <span class="o">=</span> <span class="s1">'{
-  "batch[0][relative_url]": "v1/games/11/mods",
-  "batch[0][method]": "GET",
-  "batch[1][relative_url]": "v1/me/subscribed?id-in=$[0].data[*].id",
-  "batch[1][method]": "GET",
-  "batch[2][relative_url]": "v1/me/ratings?id-in=$[0].data[*].id",
-  "batch[2][method]": "GET"
-}'</span><span class="p">;</span>
-<span class="kr">const</span> <span class="nx">headers</span> <span class="o">=</span> <span class="p">{</span>
-  <span class="s1">'Authorization'</span><span class="p">:</span><span class="s1">'Bearer {access-token}'</span><span class="p">,</span>
-  <span class="s1">'Content-Type'</span><span class="p">:</span><span class="s1">'application/x-www-form-urlencoded'</span><span class="p">,</span>
-  <span class="s1">'Accept'</span><span class="p">:</span><span class="s1">'application/json'</span>
-
-<span class="p">};</span>
-
-<span class="nx">fetch</span><span class="p">(</span><span class="s1">'https://api.mod.io/v1/batch'</span><span class="p">,</span>
-<span class="p">{</span>
-  <span class="na">method</span><span class="p">:</span> <span class="s1">'POST'</span><span class="p">,</span>
-  <span class="na">body</span><span class="p">:</span> <span class="nx">inputBody</span><span class="p">,</span>
-  <span class="na">headers</span><span class="p">:</span> <span class="nx">headers</span>
-<span class="p">})</span>
-<span class="p">.</span><span class="nx">then</span><span class="p">(</span><span class="kd">function</span><span class="p">(</span><span class="nx">res</span><span class="p">)</span> <span class="p">{</span>
-    <span class="k">return</span> <span class="nx">res</span><span class="p">.</span><span class="nx">json</span><span class="p">();</span>
-<span class="p">}).</span><span class="nx">then</span><span class="p">(</span><span class="kd">function</span><span class="p">(</span><span class="nx">body</span><span class="p">)</span> <span class="p">{</span>
-    <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">body</span><span class="p">);</span>
-<span class="p">});</span>
-</code></pre><pre class="highlight python tab-python"><code><span class="kn">import</span> <span class="nn">requests</span>
-<span class="n">headers</span> <span class="o">=</span> <span class="p">{</span>
-  <span class="s">'Authorization'</span><span class="p">:</span> <span class="s">'Bearer {access-token}'</span><span class="p">,</span>
-  <span class="s">'Content-Type'</span><span class="p">:</span> <span class="s">'application/x-www-form-urlencoded'</span><span class="p">,</span>
-  <span class="s">'Accept'</span><span class="p">:</span> <span class="s">'application/json'</span>
-<span class="p">}</span>
-
-<span class="n">r</span> <span class="o">=</span> <span class="n">requests</span><span class="o">.</span><span class="n">post</span><span class="p">(</span><span class="s">'https://api.mod.io/v1/batch'</span><span class="p">,</span> <span class="n">params</span><span class="o">=</span><span class="p">{</span>
-
-<span class="p">},</span> <span class="n">headers</span> <span class="o">=</span> <span class="n">headers</span><span class="p">)</span>
-
-<span class="k">print</span> <span class="n">r</span><span class="o">.</span><span class="n">json</span><span class="p">()</span>
-</code></pre><pre class="highlight java tab-java"><code><span class="n">URL</span> <span class="n">obj</span> <span class="o">=</span> <span class="k">new</span> <span class="n">URL</span><span class="o">(</span><span class="s">"https://api.mod.io/v1/batch"</span><span class="o">);</span>
-<span class="n">HttpURLConnection</span> <span class="n">con</span> <span class="o">=</span> <span class="o">(</span><span class="n">HttpURLConnection</span><span class="o">)</span> <span class="n">obj</span><span class="o">.</span><span class="na">openConnection</span><span class="o">();</span>
-<span class="n">con</span><span class="o">.</span><span class="na">setRequestMethod</span><span class="o">(</span><span class="s">"POST"</span><span class="o">);</span>
-<span class="kt">int</span> <span class="n">responseCode</span> <span class="o">=</span> <span class="n">con</span><span class="o">.</span><span class="na">getResponseCode</span><span class="o">();</span>
-<span class="n">BufferedReader</span> <span class="n">in</span> <span class="o">=</span> <span class="k">new</span> <span class="n">BufferedReader</span><span class="o">(</span>
-    <span class="k">new</span> <span class="nf">InputStreamReader</span><span class="o">(</span><span class="n">con</span><span class="o">.</span><span class="na">getInputStream</span><span class="o">()));</span>
-<span class="n">String</span> <span class="n">inputLine</span><span class="o">;</span>
-<span class="n">StringBuffer</span> <span class="n">response</span> <span class="o">=</span> <span class="k">new</span> <span class="n">StringBuffer</span><span class="o">();</span>
-<span class="k">while</span> <span class="o">((</span><span class="n">inputLine</span> <span class="o">=</span> <span class="n">in</span><span class="o">.</span><span class="na">readLine</span><span class="o">())</span> <span class="o">!=</span> <span class="kc">null</span><span class="o">)</span> <span class="o">{</span>
-    <span class="n">response</span><span class="o">.</span><span class="na">append</span><span class="o">(</span><span class="n">inputLine</span><span class="o">);</span>
-<span class="o">}</span>
-<span class="n">in</span><span class="o">.</span><span class="na">close</span><span class="o">();</span>
-<span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="n">response</span><span class="o">.</span><span class="na">toString</span><span class="o">());</span>
-</code></pre>
-<p><span class="httpmethod POST">POST</span> <span class="endpointheading">/batch</span></p>
-
-<p>Speed up your API calls, by batching them into a single HTTP request. This endpoint is convenient for repeated sequential API calls as it eliminates the HTTP overhead of each request. All encapsulated requests are processed in a synchronous manner which enables you to use the response data of a previous request as a parameter in the subsequent request which we call request dependencies (see below for more info). Successful request will return an array of <a href="#make-batch-request-2">Batch Objects</a>.</p>
-
-<p><strong>Batch Limitations</strong></p>
-
-<p>The following applies to all batch requests:</p>
-
-<p>- Who you authenticate as for the parent batch request, will be used for <em>all</em> sub-requests.
-     - Authorization headers passed into sub-requests are ignored.
-     - You cannot make more than 20 requests within a batch.</p>
-
-<p><strong>Batch Dependencies</strong></p>
-
-<p>To reference response data of previous requests to act as a dependency, you simply need to reference the expected location of the data in the response with basic array syntax. Let's assume an example batch request below:</p>
-
-<p><strong>What do we want to do in this batch request?</strong></p>
-
-<p>Get a list of mods for a game, and determine if the authenticated user is subscribed to or has submitted any ratings for the returned results.</p>
-
-<p><strong>What will it require?</strong></p>
-
-<p>This will require three requests (see the example code on the right):
-     1. <a href="#get-mods">GET /v1/games/{game-id}/mods</a><br>
-     2. <a href="#get-user-subscriptions">GET /v1/me/subscribed</a><br>
-     3. <a href="#get-user-ratings">GET /v1/me/ratings</a>  </p>
-
-<p>In total, we are making 3 requests in a synchronous manner, inside a single request. Based on the above example, we need to know how to get the <code>id</code> value of the <a href="#mod-object">Mod Object</a> from Request #1 and provide it as a dependency to the subsequent requests.</p>
-
-<p><strong>How do we reference the mod id from request #1?</strong></p>
-
-<p>If we look at our first request we can see that the <a href="#get-mods-2">Get Mods</a>, upon success, returns an array called <code>data</code> which contains the retrieved <a href="#get-mods">Mod Objects</a>. Sometimes you may want to get all values of a certain column within the <code>data</code> array, like we will do now. This is how we would get all mod IDs from the first request and pass them into the second request as what we call a 'Batch Dependency'.</p>
-
-<p>Here is what our second request will look like, after adding the dependency which uses our global <code>-in</code> filter.</p>
-
-<p><span class="versionwrap">GET v1/me/subscribed?id-in=<strong>$[0].data[*].id</strong></span></p>
-
-<p>Let's breakdown the dependency format:</p>
-
-<p><strong>NOTE:</strong> Regarding the below format, everything in the response from the base of the request to <code>data:["body"]</code> is ignored.</p>
-
-<table>
-<thead>
-<tr>
-<th>Placeholder</th>
-<th>Purpose</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td><code>$</code></td>
-<td>Our custom prefix identifier for batch dependencies</td>
-</tr>
-<tr>
-<td><code>[0]</code></td>
-<td>Response index, if we wanted a value from our first request, this value would be 0 to specify the first array.</td>
-</tr>
-<tr>
-<td><code>&lt;field&gt;</code></td>
-<td>From here onwards is a 1:1 representation of the response in <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Property_Accessors">ECMAScript sytax</a> with one important exception, the <strong>body</strong> parameter for each request is ignored. Whilst the body parameter is in the  <a href="#batch-object">Batch Object</a> responses, you do not need to reference it in regards to batch dependencies.</td>
-</tr>
-</tbody>
-</table>
-
-<p>Given the above format, let's build our dependency string for our request.</p>
-
-<table>
-<thead>
-<tr>
-<th>Placeholder</th>
-<th>Purpose</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td><code>$</code></td>
-<td>Obligatory prefix.</td>
-</tr>
-<tr>
-<td><code>[0]</code></td>
-<td>We want results from Request #1, so it will be at index 0.</td>
-</tr>
-<tr>
-<td><code>.data</code></td>
-<td>Our response in Request #1 will contain a data array.</td>
-</tr>
-<tr>
-<td><code>[*]</code></td>
-<td>We want all the <code>id</code> values from all returned objects, so we specify we specify that with the <code>*</code> symbol</td>
-</tr>
-<tr>
-<td><code>id</code></td>
-<td>Finally, the value we want is in the <code>id</code> column</td>
-</tr>
-</tbody>
-</table>
-
-<p><strong>Error Handling</strong></p>
-
-<p>Sometimes an error can happen during a request, if you are referencing a dependency from a previous request that errors out you will encounter issues. When we return each request body, we make no modifications to the response, it is identical to calling the endpoint on its own - so you can simply check the HTTP code returned as well as the body of each response for the <a href="#error-object">Error Object</a> to see if an error was returned.</p>
-
-<p>With that in mind, if you do reference a dependency that does not exist - the body of the response depending upon it will return a <code>424 - Failed Dependency</code> <a href="#error-object">error</a>.</p>
-
-<p><strong>Note Regarding Pagination</strong></p>
-
-<p>For the parent request, pagination filters such as <a href="#pagination">_offset</a> &amp; <a href="#pagination">_limit</a> are available however they only determine which results are returned once the batch request has finished, that is - every sub-request you submit will be proceeded regardless of these filters.</p>
-
-<table>
-<thead>
-<tr>
-<th>Parameter</th>
-<th>Type</th>
-<th>Required</th>
-<th>Description</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>batch[]</td>
-<td>array</td>
-<td>true</td>
-<td>An array of request parameters which must contain the following fields:</td>
-</tr>
-<tr>
-<td>» relative_url</td>
-<td>string</td>
-<td>true</td>
-<td>The endpoint, relative to the Base API path - i.e. /v1/me is valid, /me is not.</td>
-</tr>
-<tr>
-<td>» method</td>
-<td>string</td>
-<td>true</td>
-<td>The HTTP method of the request.</td>
-</tr>
-<tr>
-<td>» body</td>
-<td>array</td>
-<td></td>
-<td>The body of the request if submitting data.</td>
-</tr>
-<tr>
-<td>» headers[]</td>
-<td>array</td>
-<td></td>
-<td>An array of optional headers, supplied as <a href="#key-value-pair-object">Key-Value Pair objects</a>.</td>
-</tr>
-<tr>
-<td>»» key</td>
-<td>string</td>
-<td>true</td>
-<td>The name of the header.</td>
-</tr>
-<tr>
-<td>»» value</td>
-<td>string</td>
-<td>true</td>
-<td>The value of the header.</td>
-</tr>
-</tbody>
-</table>
-
-<blockquote>
-<p>Example response</p>
-</blockquote>
-<pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
-  </span><span class="s2">"data"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
-    </span><span class="p">{</span><span class="w">
-      </span><span class="s2">"code"</span><span class="p">:</span><span class="w"> </span><span class="mi">200</span><span class="p">,</span><span class="w">
-      </span><span class="s2">"headers"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
-        </span><span class="p">{</span><span class="w">
-          </span><span class="s2">"key"</span><span class="p">:</span><span class="w"> </span><span class="s2">"X-RateLimit-Remaining"</span><span class="p">,</span><span class="w">
-          </span><span class="s2">"value"</span><span class="p">:</span><span class="w"> </span><span class="s2">"98"</span><span class="w">
-        </span><span class="p">}</span><span class="w">
-      </span><span class="p">],</span><span class="w">
-      </span><span class="s2">"body"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-        </span><span class="s2">"data"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
-          </span><span class="p">{</span><span class="w">
-            </span><span class="s2">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span><span class="w">
-            </span><span class="s2">"game_id"</span><span class="p">:</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span><span class="w">
-            </span><span class="s2">"status"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
-            </span><span class="s2">"visible"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
-            </span><span class="s2">"submitted_by"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-              </span><span class="s2">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
-              </span><span class="s2">"name_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"xant"</span><span class="p">,</span><span class="w">
-              </span><span class="s2">"username"</span><span class="p">:</span><span class="w"> </span><span class="s2">"XanT"</span><span class="p">,</span><span class="w">
-              </span><span class="s2">"display_name_portal"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
-              </span><span class="s2">"date_online"</span><span class="p">:</span><span class="w"> </span><span class="mi">1509922961</span><span class="p">,</span><span class="w">
-              </span><span class="s2">"date_joined"</span><span class="p">:</span><span class="w"> </span><span class="mi">1509922961</span><span class="p">,</span><span class="w">
-              </span><span class="s2">"avatar"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-                </span><span class="s2">"filename"</span><span class="p">:</span><span class="w"> </span><span class="s2">"modio-color-dark.png"</span><span class="p">,</span><span class="w">
-                </span><span class="s2">"original"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://static.mod.io/v1/images/branding/modio-color-dark.png"</span><span class="p">,</span><span class="w">
-                </span><span class="s2">"thumb_50x50"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://static.mod.io/v1/images/branding/modio-color-dark.png"</span><span class="p">,</span><span class="w">
-                </span><span class="s2">"thumb_100x100"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://static.mod.io/v1/images/branding/modio-color-dark.png"</span><span class="w">
-              </span><span class="p">},</span><span class="w">
-              </span><span class="s2">"timezone"</span><span class="p">:</span><span class="w"> </span><span class="s2">""</span><span class="p">,</span><span class="w">
-              </span><span class="s2">"language"</span><span class="p">:</span><span class="w"> </span><span class="s2">""</span><span class="p">,</span><span class="w">
-              </span><span class="s2">"profile_url"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://mod.io/members/xant"</span><span class="w">
-            </span><span class="p">},</span><span class="w">
-            </span><span class="s2">"date_added"</span><span class="p">:</span><span class="w"> </span><span class="mi">1492564103</span><span class="p">,</span><span class="w">
-            </span><span class="s2">"date_updated"</span><span class="p">:</span><span class="w"> </span><span class="mi">1499841487</span><span class="p">,</span><span class="w">
-            </span><span class="s2">"date_live"</span><span class="p">:</span><span class="w"> </span><span class="mi">1499841403</span><span class="p">,</span><span class="w">
-            </span><span class="s2">"maturity_option"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
-            </span><span class="s2">"logo"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-              </span><span class="s2">"filename"</span><span class="p">:</span><span class="w"> </span><span class="s2">"modio-color-dark.png"</span><span class="p">,</span><span class="w">
-              </span><span class="s2">"original"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://static.mod.io/v1/images/branding/modio-color-dark.png"</span><span class="p">,</span><span class="w">
-              </span><span class="s2">"thumb_320x180"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://static.mod.io/v1/images/branding/modio-color-dark.png"</span><span class="p">,</span><span class="w">
-              </span><span class="s2">"thumb_640x360"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://static.mod.io/v1/images/branding/modio-color-dark.png"</span><span class="p">,</span><span class="w">
-              </span><span class="s2">"thumb_1280x720"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://static.mod.io/v1/images/branding/modio-color-dark.png"</span><span class="w">
-            </span><span class="p">},</span><span class="w">
-            </span><span class="s2">"homepage_url"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://www.rogue-hdpack.com/"</span><span class="p">,</span><span class="w">
-            </span><span class="s2">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Rogue Knight HD Pack"</span><span class="p">,</span><span class="w">
-            </span><span class="s2">"name_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"rogue-knight-hd-pack"</span><span class="p">,</span><span class="w">
-            </span><span class="s2">"summary"</span><span class="p">:</span><span class="w"> </span><span class="s2">"It's time to bask in the glory of beautiful 4k textures!"</span><span class="p">,</span><span class="w">
-            </span><span class="s2">"description"</span><span class="p">:</span><span class="w"> </span><span class="s2">"&lt;p&gt;Rogue HD Pack does exactly what you thi..."</span><span class="p">,</span><span class="w">
-            </span><span class="s2">"description_plaintext"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Rogue HD Pack does exactly what you thi..."</span><span class="p">,</span><span class="w">
-            </span><span class="s2">"metadata_blob"</span><span class="p">:</span><span class="w"> </span><span class="s2">"rogue,hd,high-res,4k,hd textures"</span><span class="p">,</span><span class="w">
-            </span><span class="s2">"profile_url"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://rogue-knight.mod.io/hd-pack"</span><span class="p">,</span><span class="w">
-            </span><span class="s2">"media"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-              </span><span class="s2">"youtube"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
-                </span><span class="s2">"https://www.youtube.com/watch?v=dQw4w9WgXcQ"</span><span class="w">
-              </span><span class="p">],</span><span class="w">
-              </span><span class="s2">"sketchfab"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
-                </span><span class="s2">"https://sketchfab.com/models/ef40b2d300334d009984c8865b2db1c8"</span><span class="w">
-              </span><span class="p">],</span><span class="w">
-              </span><span class="s2">"images"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
-                </span><span class="p">{</span><span class="w">
-                  </span><span class="s2">"filename"</span><span class="p">:</span><span class="w"> </span><span class="s2">"modio-color-dark.png"</span><span class="p">,</span><span class="w">
-                  </span><span class="s2">"original"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://static.mod.io/v1/images/branding/modio-color-dark.png"</span><span class="p">,</span><span class="w">
-                  </span><span class="s2">"thumb_320x180"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://static.mod.io/v1/images/branding/modio-color-dark.png"</span><span class="w">
-                </span><span class="p">}</span><span class="w">
-              </span><span class="p">]</span><span class="w">
-            </span><span class="p">},</span><span class="w">
-            </span><span class="s2">"modfile"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-              </span><span class="s2">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span><span class="w">
-              </span><span class="s2">"mod_id"</span><span class="p">:</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span><span class="w">
-              </span><span class="s2">"date_added"</span><span class="p">:</span><span class="w"> </span><span class="mi">1499841487</span><span class="p">,</span><span class="w">
-              </span><span class="s2">"date_scanned"</span><span class="p">:</span><span class="w"> </span><span class="mi">1499841487</span><span class="p">,</span><span class="w">
-              </span><span class="s2">"virus_status"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
-              </span><span class="s2">"virus_positive"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
-              </span><span class="s2">"virustotal_hash"</span><span class="p">:</span><span class="w"> </span><span class="s2">"f9a7bf4a95ce20787337b685a79677cae2281b83c63ab0a25f091407741692af-1508147401"</span><span class="p">,</span><span class="w">
-              </span><span class="s2">"filesize"</span><span class="p">:</span><span class="w"> </span><span class="mi">15181</span><span class="p">,</span><span class="w">
-              </span><span class="s2">"filehash"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-                </span><span class="s2">"md5"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2d4a0e2d7273db6b0a94b0740a88ad0d"</span><span class="w">
-              </span><span class="p">},</span><span class="w">
-              </span><span class="s2">"filename"</span><span class="p">:</span><span class="w"> </span><span class="s2">"rogue-knight-v1.zip"</span><span class="p">,</span><span class="w">
-              </span><span class="s2">"version"</span><span class="p">:</span><span class="w"> </span><span class="s2">"1.3"</span><span class="p">,</span><span class="w">
-              </span><span class="s2">"changelog"</span><span class="p">:</span><span class="w"> </span><span class="s2">"VERSION 1.3 -- Changes -- Fixed critical castle floor bug."</span><span class="p">,</span><span class="w">
-              </span><span class="s2">"metadata_blob"</span><span class="p">:</span><span class="w"> </span><span class="s2">"rogue,hd,high-res,4k,hd textures"</span><span class="p">,</span><span class="w">
-              </span><span class="s2">"download"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-                </span><span class="s2">"binary_url"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://mod.io/mods/file/1/c489a0354111a4d76640d47f0cdcb294"</span><span class="p">,</span><span class="w">
-                </span><span class="s2">"date_expires"</span><span class="p">:</span><span class="w"> </span><span class="mi">1579316848</span><span class="w">
-              </span><span class="p">}</span><span class="w">
-            </span><span class="p">},</span><span class="w">
-            </span><span class="s2">"metadata_kvp"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
-              </span><span class="p">{</span><span class="w">
-                </span><span class="s2">"metakey"</span><span class="p">:</span><span class="w"> </span><span class="s2">"pistol-dmg"</span><span class="p">,</span><span class="w">
-                </span><span class="s2">"metavalue"</span><span class="p">:</span><span class="w"> </span><span class="s2">"800"</span><span class="w">
-              </span><span class="p">}</span><span class="w">
-            </span><span class="p">],</span><span class="w">
-            </span><span class="s2">"tags"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
-              </span><span class="p">{</span><span class="w">
-                </span><span class="s2">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Unity"</span><span class="p">,</span><span class="w">
-                </span><span class="s2">"date_added"</span><span class="p">:</span><span class="w"> </span><span class="mi">1499841487</span><span class="w">
-              </span><span class="p">}</span><span class="w">
-            </span><span class="p">],</span><span class="w">
-            </span><span class="s2">"stats"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-              </span><span class="s2">"mod_id"</span><span class="p">:</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span><span class="w">
-              </span><span class="s2">"popularity_rank_position"</span><span class="p">:</span><span class="w"> </span><span class="mi">13</span><span class="p">,</span><span class="w">
-              </span><span class="s2">"popularity_rank_total_mods"</span><span class="p">:</span><span class="w"> </span><span class="mi">204</span><span class="p">,</span><span class="w">
-              </span><span class="s2">"downloads_today"</span><span class="p">:</span><span class="w"> </span><span class="mi">327</span><span class="p">,</span><span class="w">
-              </span><span class="s2">"downloads_total"</span><span class="p">:</span><span class="w"> </span><span class="mi">27492</span><span class="p">,</span><span class="w">
-              </span><span class="s2">"subscribers_total"</span><span class="p">:</span><span class="w"> </span><span class="mi">16394</span><span class="p">,</span><span class="w">
-              </span><span class="s2">"ratings_total"</span><span class="p">:</span><span class="w"> </span><span class="mi">1230</span><span class="p">,</span><span class="w">
-              </span><span class="s2">"ratings_positive"</span><span class="p">:</span><span class="w"> </span><span class="mi">1047</span><span class="p">,</span><span class="w">
-              </span><span class="s2">"ratings_negative"</span><span class="p">:</span><span class="w"> </span><span class="mi">183</span><span class="p">,</span><span class="w">
-              </span><span class="s2">"ratings_percentage_positive"</span><span class="p">:</span><span class="w"> </span><span class="mi">91</span><span class="p">,</span><span class="w">
-              </span><span class="s2">"ratings_weighted_aggregate"</span><span class="p">:</span><span class="w"> </span><span class="mf">87.38</span><span class="p">,</span><span class="w">
-              </span><span class="s2">"ratings_display_text"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Very Positive"</span><span class="p">,</span><span class="w">
-              </span><span class="s2">"date_expires"</span><span class="p">:</span><span class="w"> </span><span class="mi">1492564103</span><span class="w">
-            </span><span class="p">}</span><span class="w">
-          </span><span class="p">}</span><span class="w">
-        </span><span class="p">]</span><span class="w">
-      </span><span class="p">}</span><span class="w">
-    </span><span class="p">},</span><span class="w">
-    </span><span class="p">{</span><span class="w">
-        </span><span class="err">...</span><span class="w">
-    </span><span class="p">}</span><span class="w">
-  </span><span class="p">],</span><span class="w">
-  </span><span class="s2">"result_count"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
-  </span><span class="s2">"result_offset"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
-  </span><span class="s2">"result_limit"</span><span class="p">:</span><span class="w"> </span><span class="mi">20</span><span class="p">,</span><span class="w">
-  </span><span class="s2">"result_total"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="w">
-</span><span class="p">}</span><span class="w">
-
-</span></code></pre>
-<h3 id="Make-Batch-Request-responses">Responses</h3>
-
-<table>
-<thead>
-<tr>
-<th>Status</th>
-<th>Meaning</th>
-<th>Error Ref</th>
-<th>Description</th>
-<th>Response Schema</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>200</td>
-<td><a href="https://tools.ietf.org/html/rfc7231#section-6.3.1">OK</a></td>
-<td></td>
-<td>Successful Request</td>
-<td><a href="#schemamake_batch_request">Make Batch Request</a></td>
 </tr>
 </tbody>
 </table>
@@ -12372,6 +11958,10 @@ Authorization: Bearer {access-token}
 </span><span class="p">}</span><span class="w">
 
 </span></code></pre>
+<h3 id="endpoint-xplatform-notice">Cross-Platform Filtering</h3>
+
+<p>If the parent game has platform filtering enabled, this endpoint supports the <a href="#targeting-a-platform">targeting a platform</a> request header to return the <a href="#mod-object">mods</a> that are approved for the requested platform. Note: To target a platform for this endpoint, you MUST also include the <code>game_id</code> filter for the game that has cross-platform filtering enabled.</p>
+
 <h3 id="Get-User-Subscriptions-responses">Responses</h3>
 
 <table>
@@ -12801,23 +12391,6 @@ Authorization: Bearer {access-token}
       </span><span class="s2">"instructions"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Instructions on the process to upload mods."</span><span class="p">,</span><span class="w">
       </span><span class="s2">"instructions_url"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://www.rogue-knight-game.com/modding/getting-started"</span><span class="p">,</span><span class="w">
       </span><span class="s2">"profile_url"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://rogue-knight.mod.io"</span><span class="p">,</span><span class="w">
-      </span><span class="s2">"stats"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-        </span><span class="s2">"game_id"</span><span class="p">:</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span><span class="w">
-        </span><span class="s2">"mods_count_total"</span><span class="p">:</span><span class="w"> </span><span class="mi">13</span><span class="p">,</span><span class="w">
-        </span><span class="s2">"mods_downloads_today"</span><span class="p">:</span><span class="w"> </span><span class="mi">204</span><span class="p">,</span><span class="w">
-        </span><span class="s2">"mods_downloads_total"</span><span class="p">:</span><span class="w"> </span><span class="mi">27492</span><span class="p">,</span><span class="w">
-        </span><span class="s2">"mods_downloads_daily_average"</span><span class="p">:</span><span class="w"> </span><span class="mi">1230</span><span class="p">,</span><span class="w">
-        </span><span class="s2">"mods_subscribers_total"</span><span class="p">:</span><span class="w"> </span><span class="mi">16394</span><span class="p">,</span><span class="w">
-        </span><span class="s2">"date_expires"</span><span class="p">:</span><span class="w"> </span><span class="mi">1492564103</span><span class="w">
-      </span><span class="p">},</span><span class="w">
-      </span><span class="s2">"theme"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-        </span><span class="s2">"primary"</span><span class="p">:</span><span class="w"> </span><span class="s2">"#44bfd5"</span><span class="p">,</span><span class="w">
-        </span><span class="s2">"dark"</span><span class="p">:</span><span class="w"> </span><span class="s2">"#2c2c3f"</span><span class="p">,</span><span class="w">
-        </span><span class="s2">"light"</span><span class="p">:</span><span class="w"> </span><span class="s2">"#ffffff"</span><span class="p">,</span><span class="w">
-        </span><span class="s2">"success"</span><span class="p">:</span><span class="w"> </span><span class="s2">"#68D391"</span><span class="p">,</span><span class="w">
-        </span><span class="s2">"warning"</span><span class="p">:</span><span class="w"> </span><span class="s2">"#d6af2e"</span><span class="p">,</span><span class="w">
-        </span><span class="s2">"danger"</span><span class="p">:</span><span class="w"> </span><span class="s2">"#ff000e"</span><span class="w">
-      </span><span class="p">},</span><span class="w">
       </span><span class="s2">"other_urls"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
         </span><span class="p">{</span><span class="w">
           </span><span class="s2">"label"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Our Steam Page"</span><span class="p">,</span><span class="w">
@@ -12837,7 +12410,24 @@ Authorization: Bearer {access-token}
           </span><span class="s2">"hidden"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span><span class="w">
           </span><span class="s2">"locked"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="w">
         </span><span class="p">}</span><span class="w">
-      </span><span class="p">]</span><span class="w">
+      </span><span class="p">],</span><span class="w">
+      </span><span class="s2">"stats"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+        </span><span class="s2">"game_id"</span><span class="p">:</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"mods_count_total"</span><span class="p">:</span><span class="w"> </span><span class="mi">13</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"mods_downloads_today"</span><span class="p">:</span><span class="w"> </span><span class="mi">204</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"mods_downloads_total"</span><span class="p">:</span><span class="w"> </span><span class="mi">27492</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"mods_downloads_daily_average"</span><span class="p">:</span><span class="w"> </span><span class="mi">1230</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"mods_subscribers_total"</span><span class="p">:</span><span class="w"> </span><span class="mi">16394</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"date_expires"</span><span class="p">:</span><span class="w"> </span><span class="mi">1492564103</span><span class="w">
+      </span><span class="p">},</span><span class="w">
+      </span><span class="s2">"theme"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+        </span><span class="s2">"primary"</span><span class="p">:</span><span class="w"> </span><span class="s2">"#44bfd5"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"dark"</span><span class="p">:</span><span class="w"> </span><span class="s2">"#2c2c3f"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"light"</span><span class="p">:</span><span class="w"> </span><span class="s2">"#ffffff"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"success"</span><span class="p">:</span><span class="w"> </span><span class="s2">"#68D391"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"warning"</span><span class="p">:</span><span class="w"> </span><span class="s2">"#d6af2e"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"danger"</span><span class="p">:</span><span class="w"> </span><span class="s2">"#ff000e"</span><span class="w">
+      </span><span class="p">}</span><span class="w">
     </span><span class="p">},</span><span class="w">
     </span><span class="p">{</span><span class="w">
         </span><span class="err">...</span><span class="w">
@@ -15132,23 +14722,6 @@ To perform this request, you must be authenticated via one of the following meth
   </span><span class="s2">"instructions"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Instructions on the process to upload mods."</span><span class="p">,</span><span class="w">
   </span><span class="s2">"instructions_url"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://www.rogue-knight-game.com/modding/getting-started"</span><span class="p">,</span><span class="w">
   </span><span class="s2">"profile_url"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://rogue-knight.mod.io"</span><span class="p">,</span><span class="w">
-  </span><span class="s2">"stats"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-    </span><span class="s2">"game_id"</span><span class="p">:</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span><span class="w">
-    </span><span class="s2">"mods_count_total"</span><span class="p">:</span><span class="w"> </span><span class="mi">13</span><span class="p">,</span><span class="w">
-    </span><span class="s2">"mods_downloads_today"</span><span class="p">:</span><span class="w"> </span><span class="mi">204</span><span class="p">,</span><span class="w">
-    </span><span class="s2">"mods_downloads_total"</span><span class="p">:</span><span class="w"> </span><span class="mi">27492</span><span class="p">,</span><span class="w">
-    </span><span class="s2">"mods_downloads_daily_average"</span><span class="p">:</span><span class="w"> </span><span class="mi">1230</span><span class="p">,</span><span class="w">
-    </span><span class="s2">"mods_subscribers_total"</span><span class="p">:</span><span class="w"> </span><span class="mi">16394</span><span class="p">,</span><span class="w">
-    </span><span class="s2">"date_expires"</span><span class="p">:</span><span class="w"> </span><span class="mi">1492564103</span><span class="w">
-  </span><span class="p">},</span><span class="w">
-  </span><span class="s2">"theme"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-    </span><span class="s2">"primary"</span><span class="p">:</span><span class="w"> </span><span class="s2">"#44bfd5"</span><span class="p">,</span><span class="w">
-    </span><span class="s2">"dark"</span><span class="p">:</span><span class="w"> </span><span class="s2">"#2c2c3f"</span><span class="p">,</span><span class="w">
-    </span><span class="s2">"light"</span><span class="p">:</span><span class="w"> </span><span class="s2">"#ffffff"</span><span class="p">,</span><span class="w">
-    </span><span class="s2">"success"</span><span class="p">:</span><span class="w"> </span><span class="s2">"#68D391"</span><span class="p">,</span><span class="w">
-    </span><span class="s2">"warning"</span><span class="p">:</span><span class="w"> </span><span class="s2">"#d6af2e"</span><span class="p">,</span><span class="w">
-    </span><span class="s2">"danger"</span><span class="p">:</span><span class="w"> </span><span class="s2">"#ff000e"</span><span class="w">
-  </span><span class="p">},</span><span class="w">
   </span><span class="s2">"other_urls"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
     </span><span class="p">{</span><span class="w">
       </span><span class="s2">"label"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Our Steam Page"</span><span class="p">,</span><span class="w">
@@ -15168,7 +14741,24 @@ To perform this request, you must be authenticated via one of the following meth
       </span><span class="s2">"hidden"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span><span class="w">
       </span><span class="s2">"locked"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="w">
     </span><span class="p">}</span><span class="w">
-  </span><span class="p">]</span><span class="w">
+  </span><span class="p">],</span><span class="w">
+  </span><span class="s2">"stats"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+    </span><span class="s2">"game_id"</span><span class="p">:</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"mods_count_total"</span><span class="p">:</span><span class="w"> </span><span class="mi">13</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"mods_downloads_today"</span><span class="p">:</span><span class="w"> </span><span class="mi">204</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"mods_downloads_total"</span><span class="p">:</span><span class="w"> </span><span class="mi">27492</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"mods_downloads_daily_average"</span><span class="p">:</span><span class="w"> </span><span class="mi">1230</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"mods_subscribers_total"</span><span class="p">:</span><span class="w"> </span><span class="mi">16394</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"date_expires"</span><span class="p">:</span><span class="w"> </span><span class="mi">1492564103</span><span class="w">
+  </span><span class="p">},</span><span class="w">
+  </span><span class="s2">"theme"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+    </span><span class="s2">"primary"</span><span class="p">:</span><span class="w"> </span><span class="s2">"#44bfd5"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"dark"</span><span class="p">:</span><span class="w"> </span><span class="s2">"#2c2c3f"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"light"</span><span class="p">:</span><span class="w"> </span><span class="s2">"#ffffff"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"success"</span><span class="p">:</span><span class="w"> </span><span class="s2">"#68D391"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"warning"</span><span class="p">:</span><span class="w"> </span><span class="s2">"#d6af2e"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"danger"</span><span class="p">:</span><span class="w"> </span><span class="s2">"#ff000e"</span><span class="w">
+  </span><span class="p">}</span><span class="w">
 </span><span class="p">}</span><span class="w"> 
 </span></code></pre><h3 id="properties-10">Properties</h3>
 <table>
@@ -15697,622 +15287,6 @@ To perform this request, you must be authenticated via one of the following meth
 </tr>
 </tbody>
 </table>
-<h2 id="get-batch">Get Batch</h2>
-<p><a name="schemaget_batch"></a></p>
-<pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
-  </span><span class="s2">"data"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
-    </span><span class="p">{</span><span class="w">
-      </span><span class="s2">"code"</span><span class="p">:</span><span class="w"> </span><span class="mi">200</span><span class="p">,</span><span class="w">
-      </span><span class="s2">"headers"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
-        </span><span class="p">{</span><span class="w">
-          </span><span class="s2">"key"</span><span class="p">:</span><span class="w"> </span><span class="s2">"X-RateLimit-Remaining"</span><span class="p">,</span><span class="w">
-          </span><span class="s2">"value"</span><span class="p">:</span><span class="w"> </span><span class="s2">"98"</span><span class="w">
-        </span><span class="p">}</span><span class="w">
-      </span><span class="p">],</span><span class="w">
-      </span><span class="s2">"body"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-        </span><span class="s2">"data"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
-          </span><span class="p">{</span><span class="w">
-            </span><span class="s2">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span><span class="w">
-            </span><span class="s2">"game_id"</span><span class="p">:</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span><span class="w">
-            </span><span class="s2">"status"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
-            </span><span class="s2">"visible"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
-            </span><span class="s2">"submitted_by"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-              </span><span class="s2">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
-              </span><span class="s2">"name_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"xant"</span><span class="p">,</span><span class="w">
-              </span><span class="s2">"username"</span><span class="p">:</span><span class="w"> </span><span class="s2">"XanT"</span><span class="p">,</span><span class="w">
-              </span><span class="s2">"display_name_portal"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
-              </span><span class="s2">"date_online"</span><span class="p">:</span><span class="w"> </span><span class="mi">1509922961</span><span class="p">,</span><span class="w">
-              </span><span class="s2">"date_joined"</span><span class="p">:</span><span class="w"> </span><span class="mi">1509922961</span><span class="p">,</span><span class="w">
-              </span><span class="s2">"avatar"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-                </span><span class="s2">"filename"</span><span class="p">:</span><span class="w"> </span><span class="s2">"modio-color-dark.png"</span><span class="p">,</span><span class="w">
-                </span><span class="s2">"original"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://static.mod.io/v1/images/branding/modio-color-dark.png"</span><span class="p">,</span><span class="w">
-                </span><span class="s2">"thumb_50x50"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://static.mod.io/v1/images/branding/modio-color-dark.png"</span><span class="p">,</span><span class="w">
-                </span><span class="s2">"thumb_100x100"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://static.mod.io/v1/images/branding/modio-color-dark.png"</span><span class="w">
-              </span><span class="p">},</span><span class="w">
-              </span><span class="s2">"timezone"</span><span class="p">:</span><span class="w"> </span><span class="s2">""</span><span class="p">,</span><span class="w">
-              </span><span class="s2">"language"</span><span class="p">:</span><span class="w"> </span><span class="s2">""</span><span class="p">,</span><span class="w">
-              </span><span class="s2">"profile_url"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://mod.io/members/xant"</span><span class="w">
-            </span><span class="p">},</span><span class="w">
-            </span><span class="s2">"date_added"</span><span class="p">:</span><span class="w"> </span><span class="mi">1492564103</span><span class="p">,</span><span class="w">
-            </span><span class="s2">"date_updated"</span><span class="p">:</span><span class="w"> </span><span class="mi">1499841487</span><span class="p">,</span><span class="w">
-            </span><span class="s2">"date_live"</span><span class="p">:</span><span class="w"> </span><span class="mi">1499841403</span><span class="p">,</span><span class="w">
-            </span><span class="s2">"maturity_option"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
-            </span><span class="s2">"logo"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-              </span><span class="s2">"filename"</span><span class="p">:</span><span class="w"> </span><span class="s2">"modio-color-dark.png"</span><span class="p">,</span><span class="w">
-              </span><span class="s2">"original"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://static.mod.io/v1/images/branding/modio-color-dark.png"</span><span class="p">,</span><span class="w">
-              </span><span class="s2">"thumb_320x180"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://static.mod.io/v1/images/branding/modio-color-dark.png"</span><span class="p">,</span><span class="w">
-              </span><span class="s2">"thumb_640x360"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://static.mod.io/v1/images/branding/modio-color-dark.png"</span><span class="p">,</span><span class="w">
-              </span><span class="s2">"thumb_1280x720"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://static.mod.io/v1/images/branding/modio-color-dark.png"</span><span class="w">
-            </span><span class="p">},</span><span class="w">
-            </span><span class="s2">"homepage_url"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://www.rogue-hdpack.com/"</span><span class="p">,</span><span class="w">
-            </span><span class="s2">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Rogue Knight HD Pack"</span><span class="p">,</span><span class="w">
-            </span><span class="s2">"name_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"rogue-knight-hd-pack"</span><span class="p">,</span><span class="w">
-            </span><span class="s2">"summary"</span><span class="p">:</span><span class="w"> </span><span class="s2">"It's time to bask in the glory of beautiful 4k textures!"</span><span class="p">,</span><span class="w">
-            </span><span class="s2">"description"</span><span class="p">:</span><span class="w"> </span><span class="s2">"&lt;p&gt;Rogue HD Pack does exactly what you thi..."</span><span class="p">,</span><span class="w">
-            </span><span class="s2">"description_plaintext"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Rogue HD Pack does exactly what you thi..."</span><span class="p">,</span><span class="w">
-            </span><span class="s2">"metadata_blob"</span><span class="p">:</span><span class="w"> </span><span class="s2">"rogue,hd,high-res,4k,hd textures"</span><span class="p">,</span><span class="w">
-            </span><span class="s2">"profile_url"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://rogue-knight.mod.io/hd-pack"</span><span class="p">,</span><span class="w">
-            </span><span class="s2">"media"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-              </span><span class="s2">"youtube"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
-                </span><span class="s2">"https://www.youtube.com/watch?v=dQw4w9WgXcQ"</span><span class="w">
-              </span><span class="p">],</span><span class="w">
-              </span><span class="s2">"sketchfab"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
-                </span><span class="s2">"https://sketchfab.com/models/ef40b2d300334d009984c8865b2db1c8"</span><span class="w">
-              </span><span class="p">],</span><span class="w">
-              </span><span class="s2">"images"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
-                </span><span class="p">{</span><span class="w">
-                  </span><span class="s2">"filename"</span><span class="p">:</span><span class="w"> </span><span class="s2">"modio-color-dark.png"</span><span class="p">,</span><span class="w">
-                  </span><span class="s2">"original"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://static.mod.io/v1/images/branding/modio-color-dark.png"</span><span class="p">,</span><span class="w">
-                  </span><span class="s2">"thumb_320x180"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://static.mod.io/v1/images/branding/modio-color-dark.png"</span><span class="w">
-                </span><span class="p">}</span><span class="w">
-              </span><span class="p">]</span><span class="w">
-            </span><span class="p">},</span><span class="w">
-            </span><span class="s2">"modfile"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-              </span><span class="s2">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span><span class="w">
-              </span><span class="s2">"mod_id"</span><span class="p">:</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span><span class="w">
-              </span><span class="s2">"date_added"</span><span class="p">:</span><span class="w"> </span><span class="mi">1499841487</span><span class="p">,</span><span class="w">
-              </span><span class="s2">"date_scanned"</span><span class="p">:</span><span class="w"> </span><span class="mi">1499841487</span><span class="p">,</span><span class="w">
-              </span><span class="s2">"virus_status"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
-              </span><span class="s2">"virus_positive"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
-              </span><span class="s2">"virustotal_hash"</span><span class="p">:</span><span class="w"> </span><span class="s2">"f9a7bf4a95ce20787337b685a79677cae2281b83c63ab0a25f091407741692af-1508147401"</span><span class="p">,</span><span class="w">
-              </span><span class="s2">"filesize"</span><span class="p">:</span><span class="w"> </span><span class="mi">15181</span><span class="p">,</span><span class="w">
-              </span><span class="s2">"filehash"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-                </span><span class="s2">"md5"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2d4a0e2d7273db6b0a94b0740a88ad0d"</span><span class="w">
-              </span><span class="p">},</span><span class="w">
-              </span><span class="s2">"filename"</span><span class="p">:</span><span class="w"> </span><span class="s2">"rogue-knight-v1.zip"</span><span class="p">,</span><span class="w">
-              </span><span class="s2">"version"</span><span class="p">:</span><span class="w"> </span><span class="s2">"1.3"</span><span class="p">,</span><span class="w">
-              </span><span class="s2">"changelog"</span><span class="p">:</span><span class="w"> </span><span class="s2">"VERSION 1.3 -- Changes -- Fixed critical castle floor bug."</span><span class="p">,</span><span class="w">
-              </span><span class="s2">"metadata_blob"</span><span class="p">:</span><span class="w"> </span><span class="s2">"rogue,hd,high-res,4k,hd textures"</span><span class="p">,</span><span class="w">
-              </span><span class="s2">"download"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-                </span><span class="s2">"binary_url"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://mod.io/mods/file/1/c489a0354111a4d76640d47f0cdcb294"</span><span class="p">,</span><span class="w">
-                </span><span class="s2">"date_expires"</span><span class="p">:</span><span class="w"> </span><span class="mi">1579316848</span><span class="w">
-              </span><span class="p">}</span><span class="w">
-            </span><span class="p">},</span><span class="w">
-            </span><span class="s2">"metadata_kvp"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
-              </span><span class="p">{</span><span class="w">
-                </span><span class="s2">"metakey"</span><span class="p">:</span><span class="w"> </span><span class="s2">"pistol-dmg"</span><span class="p">,</span><span class="w">
-                </span><span class="s2">"metavalue"</span><span class="p">:</span><span class="w"> </span><span class="s2">"800"</span><span class="w">
-              </span><span class="p">}</span><span class="w">
-            </span><span class="p">],</span><span class="w">
-            </span><span class="s2">"tags"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
-              </span><span class="p">{</span><span class="w">
-                </span><span class="s2">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Unity"</span><span class="p">,</span><span class="w">
-                </span><span class="s2">"date_added"</span><span class="p">:</span><span class="w"> </span><span class="mi">1499841487</span><span class="w">
-              </span><span class="p">}</span><span class="w">
-            </span><span class="p">],</span><span class="w">
-            </span><span class="s2">"stats"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-              </span><span class="s2">"mod_id"</span><span class="p">:</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span><span class="w">
-              </span><span class="s2">"popularity_rank_position"</span><span class="p">:</span><span class="w"> </span><span class="mi">13</span><span class="p">,</span><span class="w">
-              </span><span class="s2">"popularity_rank_total_mods"</span><span class="p">:</span><span class="w"> </span><span class="mi">204</span><span class="p">,</span><span class="w">
-              </span><span class="s2">"downloads_today"</span><span class="p">:</span><span class="w"> </span><span class="mi">327</span><span class="p">,</span><span class="w">
-              </span><span class="s2">"downloads_total"</span><span class="p">:</span><span class="w"> </span><span class="mi">27492</span><span class="p">,</span><span class="w">
-              </span><span class="s2">"subscribers_total"</span><span class="p">:</span><span class="w"> </span><span class="mi">16394</span><span class="p">,</span><span class="w">
-              </span><span class="s2">"ratings_total"</span><span class="p">:</span><span class="w"> </span><span class="mi">1230</span><span class="p">,</span><span class="w">
-              </span><span class="s2">"ratings_positive"</span><span class="p">:</span><span class="w"> </span><span class="mi">1047</span><span class="p">,</span><span class="w">
-              </span><span class="s2">"ratings_negative"</span><span class="p">:</span><span class="w"> </span><span class="mi">183</span><span class="p">,</span><span class="w">
-              </span><span class="s2">"ratings_percentage_positive"</span><span class="p">:</span><span class="w"> </span><span class="mi">91</span><span class="p">,</span><span class="w">
-              </span><span class="s2">"ratings_weighted_aggregate"</span><span class="p">:</span><span class="w"> </span><span class="mf">87.38</span><span class="p">,</span><span class="w">
-              </span><span class="s2">"ratings_display_text"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Very Positive"</span><span class="p">,</span><span class="w">
-              </span><span class="s2">"date_expires"</span><span class="p">:</span><span class="w"> </span><span class="mi">1492564103</span><span class="w">
-            </span><span class="p">}</span><span class="w">
-          </span><span class="p">}</span><span class="w">
-        </span><span class="p">]</span><span class="w">
-      </span><span class="p">}</span><span class="w">
-    </span><span class="p">},</span><span class="w">
-    </span><span class="p">{</span><span class="w">
-        </span><span class="err">...</span><span class="w">
-    </span><span class="p">}</span><span class="w">
-  </span><span class="p">],</span><span class="w">
-  </span><span class="s2">"result_count"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
-  </span><span class="s2">"result_offset"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
-  </span><span class="s2">"result_limit"</span><span class="p">:</span><span class="w"> </span><span class="mi">20</span><span class="p">,</span><span class="w">
-  </span><span class="s2">"result_total"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="w">
-</span><span class="p">}</span><span class="w"> 
-</span></code></pre><h3 id="properties-14">Properties</h3>
-<table>
-<thead>
-<tr>
-<th>Name</th>
-<th>Type</th>
-<th>Description</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>data</td>
-<td>
-<a href="#schemabatch_object">Batch Object</a>[]</td>
-<td>Array containing any response object.</td>
-</tr>
-<tr>
-<td>» code</td>
-<td>integer</td>
-<td>Response HTTP code.</td>
-</tr>
-<tr>
-<td>» body</td>
-<td><a href="#schemabatch_body_object">Batch Body Object</a></td>
-<td>Contains batch request data.</td>
-</tr>
-<tr>
-<td>»» data</td>
-<td>
-<a href="#schemamod_object">Mod Object</a>[]</td>
-<td>Contains Mod Objects.</td>
-</tr>
-<tr>
-<td>»»» id</td>
-<td>integer</td>
-<td>Unique mod id.</td>
-</tr>
-<tr>
-<td>»»» game_id</td>
-<td>integer</td>
-<td>Unique game id.</td>
-</tr>
-<tr>
-<td>»»» status</td>
-<td>integer</td>
-<td>Status of the mod (see <a href="#status-amp-visibility">status and visibility</a> for details):<br><br><strong>0</strong> = Not Accepted<br><strong>1</strong> = Accepted<br><strong>3</strong> = Deleted</td>
-</tr>
-<tr>
-<td>»»» visible</td>
-<td>integer</td>
-<td>Visibility of the mod (see <a href="#status-amp-visibility">status and visibility</a> for details):<br><br><strong>0</strong> = Hidden<br><strong>1</strong> = Public</td>
-</tr>
-<tr>
-<td>»»» submitted_by</td>
-<td><a href="#schemauser_object">User Object</a></td>
-<td>Contains user data.</td>
-</tr>
-<tr>
-<td>»»»» id</td>
-<td>integer</td>
-<td>Unique id of the user.</td>
-</tr>
-<tr>
-<td>»»»» name_id</td>
-<td>string</td>
-<td>Path for the user on mod.io. For example: https://mod.io/members/<strong>name-id-here</strong>
-</td>
-</tr>
-<tr>
-<td>»»»» username</td>
-<td>string</td>
-<td>Username of the user.</td>
-</tr>
-<tr>
-<td>»»»» display_name_portal</td>
-<td>string</td>
-<td>The users' display name for the targeted portal. Value will be <code>null</code> if no valid <code>X-Modio-Portal</code> portal header value is provided. For more information see <a href="#targeting-a-portal">Targeting a Portal</a>.</td>
-</tr>
-<tr>
-<td>»»»» date_online</td>
-<td>integer</td>
-<td>Unix timestamp of date the user was last online.</td>
-</tr>
-<tr>
-<td>»»»» date_joined</td>
-<td>integer</td>
-<td>Unix timestamp of date the user joined.</td>
-</tr>
-<tr>
-<td>»»»» avatar</td>
-<td><a href="#schemaavatar_object">Avatar Object</a></td>
-<td>Contains avatar data.</td>
-</tr>
-<tr>
-<td>»»»»» filename</td>
-<td>string</td>
-<td>Avatar filename including extension.</td>
-</tr>
-<tr>
-<td>»»»»» original</td>
-<td>string</td>
-<td>URL to the full-sized avatar.</td>
-</tr>
-<tr>
-<td>»»»»» thumb_50x50</td>
-<td>string</td>
-<td>URL to the small avatar thumbnail.</td>
-</tr>
-<tr>
-<td>»»»»» thumb_100x100</td>
-<td>string</td>
-<td>URL to the medium avatar thumbnail.</td>
-</tr>
-<tr>
-<td>»»»» timezone</td>
-<td>string</td>
-<td>This field is no longer used and will return an empty string.</td>
-</tr>
-<tr>
-<td>»»»» language</td>
-<td>string</td>
-<td>This field is no longer used and will return an empty string. To <a href="#localization">localize the API response</a> we recommend you set the <code>Accept-Language</code> header.</td>
-</tr>
-<tr>
-<td>»»»» profile_url</td>
-<td>string</td>
-<td>URL to the user's mod.io profile.</td>
-</tr>
-<tr>
-<td>»»» date_added</td>
-<td>integer</td>
-<td>Unix timestamp of date mod was registered.</td>
-</tr>
-<tr>
-<td>»»» date_updated</td>
-<td>integer</td>
-<td>Unix timestamp of date mod was updated.</td>
-</tr>
-<tr>
-<td>»»» date_live</td>
-<td>integer</td>
-<td>Unix timestamp of date mod was set live.</td>
-</tr>
-<tr>
-<td>»»» maturity_option</td>
-<td>integer</td>
-<td>Maturity options flagged by the mod developer, this is only relevant if the parent game allows mods to be labelled as mature.<br><br><strong>0</strong> = None set <em>(default)</em><br><strong>1</strong> = Alcohol<br><strong>2</strong> = Drugs<br><strong>4</strong> = Violence<br><strong>8</strong> = Explicit<br><strong>?</strong> = Add the options you want together, to enable multiple filters (see <a href="#bitwise-and-bitwise-and">BITWISE fields</a>)</td>
-</tr>
-<tr>
-<td>»»» logo</td>
-<td><a href="#schemalogo_object">Logo Object</a></td>
-<td>Contains logo data.</td>
-</tr>
-<tr>
-<td>»»»» filename</td>
-<td>string</td>
-<td>Logo filename including extension.</td>
-</tr>
-<tr>
-<td>»»»» original</td>
-<td>string</td>
-<td>URL to the full-sized logo.</td>
-</tr>
-<tr>
-<td>»»»» thumb_320x180</td>
-<td>string</td>
-<td>URL to the small logo thumbnail.</td>
-</tr>
-<tr>
-<td>»»»» thumb_640x360</td>
-<td>string</td>
-<td>URL to the medium logo thumbnail.</td>
-</tr>
-<tr>
-<td>»»»» thumb_1280x720</td>
-<td>string</td>
-<td>URL to the large logo thumbnail.</td>
-</tr>
-<tr>
-<td>»»» homepage_url</td>
-<td>string</td>
-<td>Official homepage of the mod.</td>
-</tr>
-<tr>
-<td>»»» name</td>
-<td>string</td>
-<td>Name of the mod.</td>
-</tr>
-<tr>
-<td>»»» name_id</td>
-<td>string</td>
-<td>Path for the mod on mod.io. For example: https://rogue-knight.mod.io/<strong>mod-name-id-here</strong>
-</td>
-</tr>
-<tr>
-<td>»»» summary</td>
-<td>string</td>
-<td>Summary of the mod.</td>
-</tr>
-<tr>
-<td>»»» description</td>
-<td>string</td>
-<td>Detailed description of the mod which allows HTML.</td>
-</tr>
-<tr>
-<td>»»» description_plaintext</td>
-<td>string</td>
-<td>
-<code>description</code> field converted into plaintext.</td>
-</tr>
-<tr>
-<td>»»» metadata_blob</td>
-<td>string</td>
-<td>Metadata stored by the game developer. Metadata can also be stored as searchable <a href="#metadata">key value pairs</a>, and to individual <a href="#get-modfiles">mod files</a>.</td>
-</tr>
-<tr>
-<td>»»» profile_url</td>
-<td>string</td>
-<td>URL to the mod's mod.io profile.</td>
-</tr>
-<tr>
-<td>»»» media</td>
-<td><a href="#schemamod_media_object">Mod Media Object</a></td>
-<td>Contains mod media data.</td>
-</tr>
-<tr>
-<td>»»»» youtube</td>
-<td>string[]</td>
-<td>Array of YouTube links.</td>
-</tr>
-<tr>
-<td>»»»» sketchfab</td>
-<td>string[]</td>
-<td>Array of SketchFab links.</td>
-</tr>
-<tr>
-<td>»»»» images</td>
-<td>
-<a href="#schemaimage_object">Image Object</a>[]</td>
-<td>Array of image objects (a gallery).</td>
-</tr>
-<tr>
-<td>»»»»» filename</td>
-<td>string</td>
-<td>Image filename including extension.</td>
-</tr>
-<tr>
-<td>»»»»» original</td>
-<td>string</td>
-<td>URL to the full-sized image.</td>
-</tr>
-<tr>
-<td>»»»»» thumb_320x180</td>
-<td>string</td>
-<td>URL to the image thumbnail.</td>
-</tr>
-<tr>
-<td>»»» modfile</td>
-<td><a href="#schemamodfile_object">Modfile Object</a></td>
-<td>Contains modfile data.</td>
-</tr>
-<tr>
-<td>»»»» id</td>
-<td>integer</td>
-<td>Unique modfile id.</td>
-</tr>
-<tr>
-<td>»»»» mod_id</td>
-<td>integer</td>
-<td>Unique mod id.</td>
-</tr>
-<tr>
-<td>»»»» date_added</td>
-<td>integer</td>
-<td>Unix timestamp of date file was added.</td>
-</tr>
-<tr>
-<td>»»»» date_scanned</td>
-<td>integer</td>
-<td>Unix timestamp of date file was virus scanned.</td>
-</tr>
-<tr>
-<td>»»»» virus_status</td>
-<td>integer</td>
-<td>Current virus scan status of the file. For newly added files that have yet to be scanned this field will change frequently until a scan is complete:<br><br><strong>0</strong> = Not scanned<br><strong>1</strong> = Scan complete<br><strong>2</strong> = In progress<br><strong>3</strong> = Too large to scan<br><strong>4</strong> = File not found<br><strong>5</strong> = Error Scanning</td>
-</tr>
-<tr>
-<td>»»»» virus_positive</td>
-<td>integer</td>
-<td>Was a virus detected:<br><br><strong>0</strong> = No threats detected<br><strong>1</strong> = Flagged as malicious</td>
-</tr>
-<tr>
-<td>»»»» virustotal_hash</td>
-<td>string</td>
-<td>VirusTotal proprietary hash to view the <a href="https://www.virustotal.com">scan results</a>.</td>
-</tr>
-<tr>
-<td>»»»» filesize</td>
-<td>integer</td>
-<td>Size of the file in bytes.</td>
-</tr>
-<tr>
-<td>»»»» filehash</td>
-<td><a href="#schemafilehash_object">Filehash Object</a></td>
-<td>Contains filehash data.</td>
-</tr>
-<tr>
-<td>»»»»» md5</td>
-<td>string</td>
-<td>MD5 hash of the file.</td>
-</tr>
-<tr>
-<td>»»»» filename</td>
-<td>string</td>
-<td>Filename including extension.</td>
-</tr>
-<tr>
-<td>»»»» version</td>
-<td>string</td>
-<td>Release version this file represents.</td>
-</tr>
-<tr>
-<td>»»»» changelog</td>
-<td>string</td>
-<td>Changelog for the file.</td>
-</tr>
-<tr>
-<td>»»»» metadata_blob</td>
-<td>string</td>
-<td>Metadata stored by the game developer for this file.</td>
-</tr>
-<tr>
-<td>»»»» download</td>
-<td><a href="#schemadownload_object">Download Object</a></td>
-<td>Contains download data.</td>
-</tr>
-<tr>
-<td>»»»»» binary_url</td>
-<td>string</td>
-<td>URL to download the file from the mod.io CDN.<br><br><strong>NOTE:</strong> If the <a href="#edit-game">game</a> requires mod downloads to be initiated via the API, the <code>binary_url</code> returned will contain a verification hash. This hash must be supplied to get the modfile, and will expire after a certain period of time. Saving and reusing the <code>binary_url</code> won't work in this situation given it's dynamic nature.</td>
-</tr>
-<tr>
-<td>»»»»» date_expires</td>
-<td>integer</td>
-<td>Unix timestamp of when the <code>binary_url</code> will expire.</td>
-</tr>
-<tr>
-<td>»»» stats</td>
-<td><a href="#schemamod_stats_object">Mod Stats Object</a></td>
-<td>Contains stats data.</td>
-</tr>
-<tr>
-<td>»»»» mod_id</td>
-<td>integer</td>
-<td>Unique mod id.</td>
-</tr>
-<tr>
-<td>»»»» popularity_rank_position</td>
-<td>integer</td>
-<td>Current rank of the mod.</td>
-</tr>
-<tr>
-<td>»»»» popularity_rank_total_mods</td>
-<td>integer</td>
-<td>Number of ranking spots the current rank is measured against.</td>
-</tr>
-<tr>
-<td>»»»» downloads_today</td>
-<td>integer</td>
-<td>Number of total mod downloads. Count resets around 11:00 UTC+11 daily.</td>
-</tr>
-<tr>
-<td>»»»» downloads_total</td>
-<td>integer</td>
-<td>Number of total mod downloads.</td>
-</tr>
-<tr>
-<td>»»»» subscribers_total</td>
-<td>integer</td>
-<td>Number of total users who have subscribed to the mod.</td>
-</tr>
-<tr>
-<td>»»»» ratings_total</td>
-<td>integer</td>
-<td>Number of times this mod has been rated.</td>
-</tr>
-<tr>
-<td>»»»» ratings_positive</td>
-<td>integer</td>
-<td>Number of positive ratings.</td>
-</tr>
-<tr>
-<td>»»»» ratings_negative</td>
-<td>integer</td>
-<td>Number of negative ratings.</td>
-</tr>
-<tr>
-<td>»»»» ratings_percentage_positive</td>
-<td>integer</td>
-<td>Number of positive ratings, divided by the total ratings to determine it’s percentage score.</td>
-</tr>
-<tr>
-<td>»»»» ratings_weighted_aggregate</td>
-<td>number</td>
-<td>Overall rating of this item calculated using the <a href="https://www.evanmiller.org/how-not-to-sort-by-average-rating.html">Wilson score confidence interval</a>. This column is good to sort on, as it will order items based on number of ratings and will place items with many positive ratings above those with a higher score but fewer ratings.</td>
-</tr>
-<tr>
-<td>»»»» ratings_display_text</td>
-<td>string</td>
-<td>Textual representation of the rating in format:<br><br>- Overwhelmingly Positive<br>- Very Positive<br>- Positive<br>- Mostly Positive<br>- Mixed<br>- Negative<br>- Mostly Negative<br>- Very Negative<br>- Overwhelmingly Negative<br>- Unrated</td>
-</tr>
-<tr>
-<td>»»»» date_expires</td>
-<td>integer</td>
-<td>Unix timestamp until this mods's statistics are considered stale.</td>
-</tr>
-<tr>
-<td>»»» metadata_kvp</td>
-<td>
-<a href="#schemametadata_kvp_object">Metadata KVP Object</a>[]</td>
-<td>Contains key-value metadata.</td>
-</tr>
-<tr>
-<td>»»»» metakey</td>
-<td>string</td>
-<td>The key of the key-value pair.</td>
-</tr>
-<tr>
-<td>»»»» metavalue</td>
-<td>string</td>
-<td>The value of the key-value pair.</td>
-</tr>
-<tr>
-<td>»»» tags</td>
-<td>
-<a href="#schemamod_tag_object">Mod Tag Object</a>[]</td>
-<td>Contains mod tag data.</td>
-</tr>
-<tr>
-<td>»»»» name</td>
-<td>string</td>
-<td>Tag name.</td>
-</tr>
-<tr>
-<td>»»»» date_added</td>
-<td>integer</td>
-<td>Unix timestamp of date tag was applied.</td>
-</tr>
-<tr>
-<td>» headers</td>
-<td>[<a href="#schemakey-value_pair_object">Key-Value Pair Object</a>]</td>
-<td>Contains key-value pairs.</td>
-</tr>
-<tr>
-<td>»» key</td>
-<td>string</td>
-<td>Key of the key-value pair.</td>
-</tr>
-<tr>
-<td>»» value</td>
-<td>string</td>
-<td>Value of the key-value pair. Will always be a string, even if numeric.</td>
-</tr>
-<tr>
-<td>result_count</td>
-<td>integer</td>
-<td>Number of results returned in this request.</td>
-</tr>
-<tr>
-<td>result_offset</td>
-<td>integer</td>
-<td>Number of results skipped over. Defaults to 0 unless overridden by <code>_offset</code> filter.</td>
-</tr>
-<tr>
-<td>result_limit</td>
-<td>integer</td>
-<td>Maximum number of results returned in the request. Defaults to 20 (max) unless overridden by <code>_limit</code> filter.</td>
-</tr>
-<tr>
-<td>result_total</td>
-<td>integer</td>
-<td>Total number of results found.</td>
-</tr>
-</tbody>
-</table>
 <h2 id="get-game-tag-options-2">Get Game Tag Options</h2>
 <p><a name="schemaget_game_tag_options"></a></p>
 <pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
@@ -16338,7 +15312,7 @@ To perform this request, you must be authenticated via one of the following meth
   </span><span class="s2">"result_limit"</span><span class="p">:</span><span class="w"> </span><span class="mi">100</span><span class="p">,</span><span class="w">
   </span><span class="s2">"result_total"</span><span class="p">:</span><span class="w"> </span><span class="mi">70</span><span class="w">
 </span><span class="p">}</span><span class="w"> 
-</span></code></pre><h3 id="properties-15">Properties</h3>
+</span></code></pre><h3 id="properties-14">Properties</h3>
 <table>
 <thead>
 <tr>
@@ -16465,23 +15439,6 @@ To perform this request, you must be authenticated via one of the following meth
       </span><span class="s2">"instructions"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Instructions on the process to upload mods."</span><span class="p">,</span><span class="w">
       </span><span class="s2">"instructions_url"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://www.rogue-knight-game.com/modding/getting-started"</span><span class="p">,</span><span class="w">
       </span><span class="s2">"profile_url"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://rogue-knight.mod.io"</span><span class="p">,</span><span class="w">
-      </span><span class="s2">"stats"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-        </span><span class="s2">"game_id"</span><span class="p">:</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span><span class="w">
-        </span><span class="s2">"mods_count_total"</span><span class="p">:</span><span class="w"> </span><span class="mi">13</span><span class="p">,</span><span class="w">
-        </span><span class="s2">"mods_downloads_today"</span><span class="p">:</span><span class="w"> </span><span class="mi">204</span><span class="p">,</span><span class="w">
-        </span><span class="s2">"mods_downloads_total"</span><span class="p">:</span><span class="w"> </span><span class="mi">27492</span><span class="p">,</span><span class="w">
-        </span><span class="s2">"mods_downloads_daily_average"</span><span class="p">:</span><span class="w"> </span><span class="mi">1230</span><span class="p">,</span><span class="w">
-        </span><span class="s2">"mods_subscribers_total"</span><span class="p">:</span><span class="w"> </span><span class="mi">16394</span><span class="p">,</span><span class="w">
-        </span><span class="s2">"date_expires"</span><span class="p">:</span><span class="w"> </span><span class="mi">1492564103</span><span class="w">
-      </span><span class="p">},</span><span class="w">
-      </span><span class="s2">"theme"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-        </span><span class="s2">"primary"</span><span class="p">:</span><span class="w"> </span><span class="s2">"#44bfd5"</span><span class="p">,</span><span class="w">
-        </span><span class="s2">"dark"</span><span class="p">:</span><span class="w"> </span><span class="s2">"#2c2c3f"</span><span class="p">,</span><span class="w">
-        </span><span class="s2">"light"</span><span class="p">:</span><span class="w"> </span><span class="s2">"#ffffff"</span><span class="p">,</span><span class="w">
-        </span><span class="s2">"success"</span><span class="p">:</span><span class="w"> </span><span class="s2">"#68D391"</span><span class="p">,</span><span class="w">
-        </span><span class="s2">"warning"</span><span class="p">:</span><span class="w"> </span><span class="s2">"#d6af2e"</span><span class="p">,</span><span class="w">
-        </span><span class="s2">"danger"</span><span class="p">:</span><span class="w"> </span><span class="s2">"#ff000e"</span><span class="w">
-      </span><span class="p">},</span><span class="w">
       </span><span class="s2">"other_urls"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
         </span><span class="p">{</span><span class="w">
           </span><span class="s2">"label"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Our Steam Page"</span><span class="p">,</span><span class="w">
@@ -16501,7 +15458,24 @@ To perform this request, you must be authenticated via one of the following meth
           </span><span class="s2">"hidden"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span><span class="w">
           </span><span class="s2">"locked"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="w">
         </span><span class="p">}</span><span class="w">
-      </span><span class="p">]</span><span class="w">
+      </span><span class="p">],</span><span class="w">
+      </span><span class="s2">"stats"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+        </span><span class="s2">"game_id"</span><span class="p">:</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"mods_count_total"</span><span class="p">:</span><span class="w"> </span><span class="mi">13</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"mods_downloads_today"</span><span class="p">:</span><span class="w"> </span><span class="mi">204</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"mods_downloads_total"</span><span class="p">:</span><span class="w"> </span><span class="mi">27492</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"mods_downloads_daily_average"</span><span class="p">:</span><span class="w"> </span><span class="mi">1230</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"mods_subscribers_total"</span><span class="p">:</span><span class="w"> </span><span class="mi">16394</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"date_expires"</span><span class="p">:</span><span class="w"> </span><span class="mi">1492564103</span><span class="w">
+      </span><span class="p">},</span><span class="w">
+      </span><span class="s2">"theme"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+        </span><span class="s2">"primary"</span><span class="p">:</span><span class="w"> </span><span class="s2">"#44bfd5"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"dark"</span><span class="p">:</span><span class="w"> </span><span class="s2">"#2c2c3f"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"light"</span><span class="p">:</span><span class="w"> </span><span class="s2">"#ffffff"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"success"</span><span class="p">:</span><span class="w"> </span><span class="s2">"#68D391"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"warning"</span><span class="p">:</span><span class="w"> </span><span class="s2">"#d6af2e"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"danger"</span><span class="p">:</span><span class="w"> </span><span class="s2">"#ff000e"</span><span class="w">
+      </span><span class="p">}</span><span class="w">
     </span><span class="p">},</span><span class="w">
     </span><span class="p">{</span><span class="w">
         </span><span class="err">...</span><span class="w">
@@ -16512,7 +15486,7 @@ To perform this request, you must be authenticated via one of the following meth
   </span><span class="s2">"result_limit"</span><span class="p">:</span><span class="w"> </span><span class="mi">100</span><span class="p">,</span><span class="w">
   </span><span class="s2">"result_total"</span><span class="p">:</span><span class="w"> </span><span class="mi">70</span><span class="w">
 </span><span class="p">}</span><span class="w"> 
-</span></code></pre><h3 id="properties-16">Properties</h3>
+</span></code></pre><h3 id="properties-15">Properties</h3>
 <table>
 <thead>
 <tr>
@@ -16961,7 +15935,7 @@ To perform this request, you must be authenticated via one of the following meth
   </span><span class="s2">"result_limit"</span><span class="p">:</span><span class="w"> </span><span class="mi">100</span><span class="p">,</span><span class="w">
   </span><span class="s2">"result_total"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="w">
 </span><span class="p">}</span><span class="w"> 
-</span></code></pre><h3 id="properties-17">Properties</h3>
+</span></code></pre><h3 id="properties-16">Properties</h3>
 <table>
 <thead>
 <tr>
@@ -17138,7 +16112,7 @@ To perform this request, you must be authenticated via one of the following meth
   </span><span class="s2">"result_limit"</span><span class="p">:</span><span class="w"> </span><span class="mi">100</span><span class="p">,</span><span class="w">
   </span><span class="s2">"result_total"</span><span class="p">:</span><span class="w"> </span><span class="mi">70</span><span class="w">
 </span><span class="p">}</span><span class="w"> 
-</span></code></pre><h3 id="properties-18">Properties</h3>
+</span></code></pre><h3 id="properties-17">Properties</h3>
 <table>
 <thead>
 <tr>
@@ -17211,7 +16185,7 @@ To perform this request, you must be authenticated via one of the following meth
   </span><span class="s2">"result_limit"</span><span class="p">:</span><span class="w"> </span><span class="mi">100</span><span class="p">,</span><span class="w">
   </span><span class="s2">"result_total"</span><span class="p">:</span><span class="w"> </span><span class="mi">70</span><span class="w">
 </span><span class="p">}</span><span class="w"> 
-</span></code></pre><h3 id="properties-19">Properties</h3>
+</span></code></pre><h3 id="properties-18">Properties</h3>
 <table>
 <thead>
 <tr>
@@ -17291,7 +16265,7 @@ To perform this request, you must be authenticated via one of the following meth
   </span><span class="s2">"result_limit"</span><span class="p">:</span><span class="w"> </span><span class="mi">100</span><span class="p">,</span><span class="w">
   </span><span class="s2">"result_total"</span><span class="p">:</span><span class="w"> </span><span class="mi">70</span><span class="w">
 </span><span class="p">}</span><span class="w"> 
-</span></code></pre><h3 id="properties-20">Properties</h3>
+</span></code></pre><h3 id="properties-19">Properties</h3>
 <table>
 <thead>
 <tr>
@@ -17367,7 +16341,7 @@ To perform this request, you must be authenticated via one of the following meth
   </span><span class="s2">"result_limit"</span><span class="p">:</span><span class="w"> </span><span class="mi">100</span><span class="p">,</span><span class="w">
   </span><span class="s2">"result_total"</span><span class="p">:</span><span class="w"> </span><span class="mi">70</span><span class="w">
 </span><span class="p">}</span><span class="w"> 
-</span></code></pre><h3 id="properties-21">Properties</h3>
+</span></code></pre><h3 id="properties-20">Properties</h3>
 <table>
 <thead>
 <tr>
@@ -17487,7 +16461,7 @@ To perform this request, you must be authenticated via one of the following meth
   </span><span class="s2">"result_limit"</span><span class="p">:</span><span class="w"> </span><span class="mi">100</span><span class="p">,</span><span class="w">
   </span><span class="s2">"result_total"</span><span class="p">:</span><span class="w"> </span><span class="mi">70</span><span class="w">
 </span><span class="p">}</span><span class="w"> 
-</span></code></pre><h3 id="properties-22">Properties</h3>
+</span></code></pre><h3 id="properties-21">Properties</h3>
 <table>
 <thead>
 <tr>
@@ -17569,7 +16543,7 @@ To perform this request, you must be authenticated via one of the following meth
   </span><span class="s2">"result_limit"</span><span class="p">:</span><span class="w"> </span><span class="mi">100</span><span class="p">,</span><span class="w">
   </span><span class="s2">"result_total"</span><span class="p">:</span><span class="w"> </span><span class="mi">70</span><span class="w">
 </span><span class="p">}</span><span class="w"> 
-</span></code></pre><h3 id="properties-23">Properties</h3>
+</span></code></pre><h3 id="properties-22">Properties</h3>
 <table>
 <thead>
 <tr>
@@ -17810,7 +16784,7 @@ To perform this request, you must be authenticated via one of the following meth
   </span><span class="s2">"result_limit"</span><span class="p">:</span><span class="w"> </span><span class="mi">100</span><span class="p">,</span><span class="w">
   </span><span class="s2">"result_total"</span><span class="p">:</span><span class="w"> </span><span class="mi">70</span><span class="w">
 </span><span class="p">}</span><span class="w"> 
-</span></code></pre><h3 id="properties-24">Properties</h3>
+</span></code></pre><h3 id="properties-23">Properties</h3>
 <table>
 <thead>
 <tr>
@@ -18301,7 +17275,7 @@ To perform this request, you must be authenticated via one of the following meth
   </span><span class="s2">"result_limit"</span><span class="p">:</span><span class="w"> </span><span class="mi">100</span><span class="p">,</span><span class="w">
   </span><span class="s2">"result_total"</span><span class="p">:</span><span class="w"> </span><span class="mi">70</span><span class="w">
 </span><span class="p">}</span><span class="w"> 
-</span></code></pre><h3 id="properties-25">Properties</h3>
+</span></code></pre><h3 id="properties-24">Properties</h3>
 <table>
 <thead>
 <tr>
@@ -18461,7 +17435,7 @@ To perform this request, you must be authenticated via one of the following meth
   </span><span class="s2">"result_limit"</span><span class="p">:</span><span class="w"> </span><span class="mi">100</span><span class="p">,</span><span class="w">
   </span><span class="s2">"result_total"</span><span class="p">:</span><span class="w"> </span><span class="mi">70</span><span class="w">
 </span><span class="p">}</span><span class="w"> 
-</span></code></pre><h3 id="properties-26">Properties</h3>
+</span></code></pre><h3 id="properties-25">Properties</h3>
 <table>
 <thead>
 <tr>
@@ -18547,7 +17521,7 @@ To perform this request, you must be authenticated via one of the following meth
   </span><span class="s2">"result_limit"</span><span class="p">:</span><span class="w"> </span><span class="mi">100</span><span class="p">,</span><span class="w">
   </span><span class="s2">"result_total"</span><span class="p">:</span><span class="w"> </span><span class="mi">70</span><span class="w">
 </span><span class="p">}</span><span class="w"> 
-</span></code></pre><h3 id="properties-27">Properties</h3>
+</span></code></pre><h3 id="properties-26">Properties</h3>
 <table>
 <thead>
 <tr>
@@ -18610,7 +17584,7 @@ To perform this request, you must be authenticated via one of the following meth
   </span><span class="s2">"filename"</span><span class="p">:</span><span class="w"> </span><span class="s2">"demo.png"</span><span class="p">,</span><span class="w">
   </span><span class="s2">"original"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://static.mod.io/v1/images/branding/modio-color-dark.png"</span><span class="w">
 </span><span class="p">}</span><span class="w"> 
-</span></code></pre><h3 id="properties-28">Properties</h3>
+</span></code></pre><h3 id="properties-27">Properties</h3>
 <table>
 <thead>
 <tr>
@@ -18641,7 +17615,7 @@ To perform this request, you must be authenticated via one of the following meth
   </span><span class="s2">"thumb_128x128"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://static.mod.io/v1/images/branding/modio-color-dark.png"</span><span class="p">,</span><span class="w">
   </span><span class="s2">"thumb_256x256"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://static.mod.io/v1/images/branding/modio-color-dark.png"</span><span class="w">
 </span><span class="p">}</span><span class="w"> 
-</span></code></pre><h3 id="properties-29">Properties</h3>
+</span></code></pre><h3 id="properties-28">Properties</h3>
 <table>
 <thead>
 <tr>
@@ -18685,7 +17659,7 @@ To perform this request, you must be authenticated via one of the following meth
   </span><span class="s2">"original"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://static.mod.io/v1/images/branding/modio-color-dark.png"</span><span class="p">,</span><span class="w">
   </span><span class="s2">"thumb_320x180"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://static.mod.io/v1/images/branding/modio-color-dark.png"</span><span class="w">
 </span><span class="p">}</span><span class="w"> 
-</span></code></pre><h3 id="properties-30">Properties</h3>
+</span></code></pre><h3 id="properties-29">Properties</h3>
 <table>
 <thead>
 <tr>
@@ -18718,7 +17692,7 @@ To perform this request, you must be authenticated via one of the following meth
   </span><span class="s2">"key"</span><span class="p">:</span><span class="w"> </span><span class="s2">"X-RateLimit-Remaining"</span><span class="p">,</span><span class="w">
   </span><span class="s2">"value"</span><span class="p">:</span><span class="w"> </span><span class="s2">"98"</span><span class="w">
 </span><span class="p">}</span><span class="w"> 
-</span></code></pre><h3 id="properties-31">Properties</h3>
+</span></code></pre><h3 id="properties-30">Properties</h3>
 <table>
 <thead>
 <tr>
@@ -18749,7 +17723,7 @@ To perform this request, you must be authenticated via one of the following meth
   </span><span class="s2">"thumb_640x360"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://static.mod.io/v1/images/branding/modio-color-dark.png"</span><span class="p">,</span><span class="w">
   </span><span class="s2">"thumb_1280x720"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://static.mod.io/v1/images/branding/modio-color-dark.png"</span><span class="w">
 </span><span class="p">}</span><span class="w"> 
-</span></code></pre><h3 id="properties-32">Properties</h3>
+</span></code></pre><h3 id="properties-31">Properties</h3>
 <table>
 <thead>
 <tr>
@@ -18792,7 +17766,7 @@ To perform this request, you must be authenticated via one of the following meth
   </span><span class="s2">"code"</span><span class="p">:</span><span class="w"> </span><span class="mi">200</span><span class="p">,</span><span class="w">
   </span><span class="s2">"message"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Your request was successful."</span><span class="w">
 </span><span class="p">}</span><span class="w"> 
-</span></code></pre><h3 id="properties-33">Properties</h3>
+</span></code></pre><h3 id="properties-32">Properties</h3>
 <table>
 <thead>
 <tr>
@@ -18821,7 +17795,7 @@ To perform this request, you must be authenticated via one of the following meth
   </span><span class="s2">"metakey"</span><span class="p">:</span><span class="w"> </span><span class="s2">"pistol-dmg"</span><span class="p">,</span><span class="w">
   </span><span class="s2">"metavalue"</span><span class="p">:</span><span class="w"> </span><span class="s2">"800"</span><span class="w">
 </span><span class="p">}</span><span class="w"> 
-</span></code></pre><h3 id="properties-34">Properties</h3>
+</span></code></pre><h3 id="properties-33">Properties</h3>
 <table>
 <thead>
 <tr>
@@ -18850,7 +17824,7 @@ To perform this request, you must be authenticated via one of the following meth
   </span><span class="s2">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Example Mod"</span><span class="p">,</span><span class="w">
   </span><span class="s2">"date_added"</span><span class="p">:</span><span class="w"> </span><span class="mi">1499841487</span><span class="w">
 </span><span class="p">}</span><span class="w"> 
-</span></code></pre><h3 id="properties-35">Properties</h3>
+</span></code></pre><h3 id="properties-34">Properties</h3>
 <table>
 <thead>
 <tr>
@@ -18886,7 +17860,7 @@ To perform this request, you must be authenticated via one of the following meth
   </span><span class="s2">"date_added"</span><span class="p">:</span><span class="w"> </span><span class="mi">1499846132</span><span class="p">,</span><span class="w">
   </span><span class="s2">"event_type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"MODFILE_CHANGED"</span><span class="w">
 </span><span class="p">}</span><span class="w"> 
-</span></code></pre><h3 id="properties-36">Properties</h3>
+</span></code></pre><h3 id="properties-35">Properties</h3>
 <table>
 <thead>
 <tr>
@@ -18940,7 +17914,7 @@ To perform this request, you must be authenticated via one of the following meth
     </span><span class="p">}</span><span class="w">
   </span><span class="p">]</span><span class="w">
 </span><span class="p">}</span><span class="w"> 
-</span></code></pre><h3 id="properties-37">Properties</h3>
+</span></code></pre><h3 id="properties-36">Properties</h3>
 <table>
 <thead>
 <tr>
@@ -19090,7 +18064,7 @@ To perform this request, you must be authenticated via one of the following meth
     </span><span class="s2">"date_expires"</span><span class="p">:</span><span class="w"> </span><span class="mi">1492564103</span><span class="w">
   </span><span class="p">}</span><span class="w">
 </span><span class="p">}</span><span class="w"> 
-</span></code></pre><h3 id="properties-38">Properties</h3>
+</span></code></pre><h3 id="properties-37">Properties</h3>
 <table>
 <thead>
 <tr>
@@ -19535,7 +18509,7 @@ To perform this request, you must be authenticated via one of the following meth
   </span><span class="s2">"ratings_display_text"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Very Positive"</span><span class="p">,</span><span class="w">
   </span><span class="s2">"date_expires"</span><span class="p">:</span><span class="w"> </span><span class="mi">1492564103</span><span class="w">
 </span><span class="p">}</span><span class="w"> 
-</span></code></pre><h3 id="properties-39">Properties</h3>
+</span></code></pre><h3 id="properties-38">Properties</h3>
 <table>
 <thead>
 <tr>
@@ -19618,7 +18592,7 @@ To perform this request, you must be authenticated via one of the following meth
   </span><span class="s2">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Unity"</span><span class="p">,</span><span class="w">
   </span><span class="s2">"date_added"</span><span class="p">:</span><span class="w"> </span><span class="mi">1499841487</span><span class="w">
 </span><span class="p">}</span><span class="w"> 
-</span></code></pre><h3 id="properties-40">Properties</h3>
+</span></code></pre><h3 id="properties-39">Properties</h3>
 <table>
 <thead>
 <tr>
@@ -19663,7 +18637,7 @@ To perform this request, you must be authenticated via one of the following meth
     </span><span class="s2">"date_expires"</span><span class="p">:</span><span class="w"> </span><span class="mi">1579316848</span><span class="w">
   </span><span class="p">}</span><span class="w">
 </span><span class="p">}</span><span class="w"> 
-</span></code></pre><h3 id="properties-41">Properties</h3>
+</span></code></pre><h3 id="properties-40">Properties</h3>
 <table>
 <thead>
 <tr>
@@ -19768,7 +18742,7 @@ To perform this request, you must be authenticated via one of the following meth
   </span><span class="s2">"rating"</span><span class="p">:</span><span class="w"> </span><span class="mi">-1</span><span class="p">,</span><span class="w">
   </span><span class="s2">"date_added"</span><span class="p">:</span><span class="w"> </span><span class="mi">1492564103</span><span class="w">
 </span><span class="p">}</span><span class="w"> 
-</span></code></pre><h3 id="properties-42">Properties</h3>
+</span></code></pre><h3 id="properties-41">Properties</h3>
 <table>
 <thead>
 <tr>
@@ -19825,7 +18799,7 @@ To perform this request, you must be authenticated via one of the following meth
   </span><span class="s2">"date_added"</span><span class="p">:</span><span class="w"> </span><span class="mi">1492564103</span><span class="p">,</span><span class="w">
   </span><span class="s2">"reason"</span><span class="p">:</span><span class="w"> </span><span class="s2">""</span><span class="w">
 </span><span class="p">}</span><span class="w"> 
-</span></code></pre><h3 id="properties-43">Properties</h3>
+</span></code></pre><h3 id="properties-42">Properties</h3>
 <table>
 <thead>
 <tr>
@@ -19959,7 +18933,7 @@ To perform this request, you must be authenticated via one of the following meth
   </span><span class="s2">"position"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Supreme Overlord"</span><span class="p">,</span><span class="w">
   </span><span class="s2">"invite_pending"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="w">
 </span><span class="p">}</span><span class="w"> 
-</span></code></pre><h3 id="properties-44">Properties</h3>
+</span></code></pre><h3 id="properties-43">Properties</h3>
 <table>
 <thead>
 <tr>
@@ -20108,7 +19082,7 @@ To perform this request, you must be authenticated via one of the following meth
     </span><span class="p">}</span><span class="w">
   </span><span class="p">}</span><span class="w">
 </span><span class="p">}</span><span class="w"> 
-</span></code></pre><h3 id="properties-45">Properties</h3>
+</span></code></pre><h3 id="properties-44">Properties</h3>
 <table>
 <thead>
 <tr>
@@ -20250,7 +19224,7 @@ To perform this request, you must be authenticated via one of the following meth
   </span><span class="s2">"warning"</span><span class="p">:</span><span class="w"> </span><span class="s2">"#d6af2e"</span><span class="p">,</span><span class="w">
   </span><span class="s2">"danger"</span><span class="p">:</span><span class="w"> </span><span class="s2">"#ff000e"</span><span class="w">
 </span><span class="p">}</span><span class="w"> 
-</span></code></pre><h3 id="properties-46">Properties</h3>
+</span></code></pre><h3 id="properties-45">Properties</h3>
 <table>
 <thead>
 <tr>
@@ -20302,7 +19276,7 @@ To perform this request, you must be authenticated via one of the following meth
   </span><span class="s2">"date_added"</span><span class="p">:</span><span class="w"> </span><span class="mi">1499846132</span><span class="p">,</span><span class="w">
   </span><span class="s2">"event_type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"USER_SUBSCRIBE"</span><span class="w">
 </span><span class="p">}</span><span class="w"> 
-</span></code></pre><h3 id="properties-47">Properties</h3>
+</span></code></pre><h3 id="properties-46">Properties</h3>
 <table>
 <thead>
 <tr>
@@ -20363,7 +19337,7 @@ To perform this request, you must be authenticated via one of the following meth
   </span><span class="s2">"language"</span><span class="p">:</span><span class="w"> </span><span class="s2">""</span><span class="p">,</span><span class="w">
   </span><span class="s2">"profile_url"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://mod.io/members/xant"</span><span class="w">
 </span><span class="p">}</span><span class="w"> 
-</span></code></pre><h3 id="properties-48">Properties</h3>
+</span></code></pre><h3 id="properties-47">Properties</h3>
 <table>
 <thead>
 <tr>
@@ -20453,7 +19427,7 @@ To perform this request, you must be authenticated via one of the following meth
   </span><span class="s2">"success"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
   </span><span class="s2">"message"</span><span class="p">:</span><span class="w"> </span><span class="s2">"You have successfully logged out of mod.io."</span><span class="w">
 </span><span class="p">}</span><span class="w"> 
-</span></code></pre><h3 id="properties-49">Properties</h3>
+</span></code></pre><h3 id="properties-48">Properties</h3>
 <table>
 <thead>
 <tr>
