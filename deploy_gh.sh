@@ -1,5 +1,17 @@
 #!/usr/bin/env bash
+
 set -o errexit #abort if any command fails
+
+# if a deploy key is found (for the Github Pages deploy script)
+# fire up the ssh-agent and add the key for the git cli
+DEPLOY_KEY=/srv/slate/.git/deploykey
+
+if test -f "$DEPLOY_KEY"; then
+    eval "$(ssh-agent -s)"
+    chmod 400 /srv/slate/.git/deploykey
+    ssh-add /srv/slate/.git/deploykey
+fi
+
 me=$(basename "$0")
 
 help_message="\
