@@ -6187,6 +6187,10 @@ curl -X POST https://api.mod.io/v1/games/<span class="o">{</span>game-id<span cl
 </span><span class="p">}</span><span class="w">
 
 </span></code></pre>
+<h3 id="endpoint-xplatform-notice">Cross-Platform Filtering</h3>
+
+<p>If the parent game has platform filtering enabled, and you wish to upload the build for a specific platform - please use the website. This functionality will be available via the API soon.</p>
+
 <h3 id="Add-Modfile-responses">Responses</h3>
 
 <table>
@@ -6396,6 +6400,10 @@ Content-Type: application/x-www-form-urlencoded
 </span><span class="p">}</span><span class="w">
 
 </span></code></pre>
+<h3 id="endpoint-xplatform-notice">Cross-Platform Filtering</h3>
+
+<p>If the parent game has platform filtering enabled, and you wish to update a build for a specific platform - please use the website. This functionality will be available via the API soon.</p>
+
 <h3 id="Edit-Modfile-responses">Responses</h3>
 
 <table>
@@ -9526,7 +9534,7 @@ curl -X DELETE https://api.mod.io/v1/games/<span class="o">{</span>game-id<span 
 <tr>
 <td>403</td>
 <td><a href="https://tools.ietf.org/html/rfc7231#section-6.5.3">Forbidden</a></td>
-<td>14013</td>
+<td>14014</td>
 <td>The authenticated user does not have permission to delete tags for the specified game. Ensure the user is part of the game team before attempting the request again.</td>
 <td><a href="#schemaerror_object">Error Object</a></td>
 </tr>
@@ -11810,11 +11818,6 @@ Authorization: Bearer {access-token}
 <td>Metadata stored by the game developer.</td>
 </tr>
 <tr>
-<td>tags</td>
-<td>string</td>
-<td>Comma-separated values representing the tags you want to filter the results by. If you specify multiple tags, only mods which have all tags will be returned, and only tags that are supported by the parent game can be applied. To determine what tags are eligible, see the tags values within <code>tag_options</code> column on the parent <a href="#game-object">Game Object</a>. If you want to ensure mods returned do not contain particular tag(s), you can use the <code>tags-not-in</code> filter either independently or alongside this filter.</td>
-</tr>
-<tr>
 <td>downloads</td>
 <td>string</td>
 <td>Sort results by most downloads using <a href="#filtering">_sort filter</a> parameter, value should be <code>downloads</code> for descending or <code>-downloads</code> for ascending results.</td>
@@ -12785,6 +12788,10 @@ Authorization: Bearer {access-token}
 </span><span class="p">}</span><span class="w">
 
 </span></code></pre>
+<h3 id="endpoint-xplatform-notice">Cross-Platform Filtering</h3>
+
+<p>If the parent game has platform filtering enabled, this endpoint supports the <a href="#targeting-a-platform">targeting a platform</a> request header to return the <a href="#mod-object">mods</a> that are approved for the requested platform. Note: To target a platform for this endpoint, you MUST also include the <code>game_id</code> filter for the game that has cross-platform filtering enabled.</p>
+
 <h3 id="Get-User-Mods-responses">Responses</h3>
 
 <table>
