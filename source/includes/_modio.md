@@ -311,6 +311,9 @@ curl -X GET --parse_apiurl/games?api_key=malformed_key
 
 Error Reference Code | Meaning
 ---------- | -------
+`--parse_errorref_UNEXPECTED_SERVICE_OUTAGE` | --parse_sitename is currently experiencing an outage. (rare)
+`--parse_errorref_CORS_GENERIC` | Cross-origin request forbidden.
+`--parse_errorref_UNEXPECTED_OPERATION_FAILURE` | --parse_sitename failed to complete the request, please try again. (rare)
 `--parse_errorref_API_VERSION_INVALID` | API version supplied is invalid.
 `--parse_errorref_API_KEY_MISSING` | api_key is missing from your request.
 `--parse_errorref_API_KEY_MALFORMED` | api_key supplied is malformed.
@@ -318,27 +321,24 @@ Error Reference Code | Meaning
 `--parse_errorref_TOKEN_MISSING_SCOPE_WRITE` | Access token is missing the write scope to perform the request.
 `--parse_errorref_TOKEN_MISSING_SCOPE_READ` | Access token is missing the read scope to perform the request.
 `--parse_errorref_TOKEN_EXPIRED_OR_REVOKED` | Access token is expired, or has been revoked.
-`--parse_errorref_MISSING_CONTENT_TYPE` | The Content-Type header is missing from your request.
-`--parse_errorref_INCORRECT_CONTENT_TYPE` | The Content-Type header is not supported for this endpoint.
 `--parse_errorref_USER_DELETED` | Authenticated user account has been deleted.
 `--parse_errorref_USER_BANNED` | Authenticated user account has been banned by --parse_sitename admins.
-`--parse_errorref_GAME_NOT_FOUND` | The requested game could not be found.
-`--parse_errorref_GAME_DELETED` | The requested game has been deleted.
-`--parse_errorref_MOD_NOT_FOUND` | The requested mod could not be found.
-`--parse_errorref_MOD_DELETED` | The requested mod has been deleted.
-`--parse_errorref_MODFILE_NOT_FOUND` | The requested modfile could not be found.
-`--parse_errorref_COMMENT_NOT_FOUND` | The requested comment could not be found.
-`--parse_errorref_USER_NOT_FOUND` | The requested user could not be found.
-`--parse_errorref_RESOURCE_NOT_FOUND` | The requested resource does not exist.
 `--parse_errorref_RATE_LIMITED` | You have been ratelimited for making too many requests. See [Rate Limiting](#rate-limiting).
-`--parse_errorref_VALIDATION_GENERIC` | The request contains validation errors for the data supplied. See the attached `errors` field within the [Error Object](#error-object) to determine which input failed.
-`--parse_errorref_JSON_RESPONSE_ONLY` | You have requested a response format that is not supported (JSON only).
 `--parse_errorref_FILE_CORRUPTED` | The submitted binary file is corrupted.
 `--parse_errorref_FILE_UNREADABLE` | The submitted binary file is unreadable.
 `--parse_errorref_JSON_MALFORMED` | You have used the `input_json` parameter with semantically incorrect JSON.
-`--parse_errorref_CORS_GENERIC` | Cross-origin request forbidden.
-`--parse_errorref_UNEXPECTED_OPERATION_FAILURE` | --parse_sitename failed to complete the request, please try again. (rare)
-`--parse_errorref_UNEXPECTED_SERVICE_OUTAGE` | --parse_sitename is currently experiencing an outage. (rare)
+`--parse_errorref_MISSING_CONTENT_TYPE` | The Content-Type header is missing from your request.
+`--parse_errorref_INCORRECT_CONTENT_TYPE` | The Content-Type header is not supported for this endpoint.
+`--parse_errorref_JSON_RESPONSE_ONLY` | You have requested a response format that is not supported (JSON only).
+`--parse_errorref_VALIDATION_GENERIC` | The request contains validation errors for the data supplied. See the attached `errors` field within the [Error Object](#error-object) to determine which input failed.
+`--parse_errorref_RESOURCE_NOT_FOUND` | The requested resource does not exist.
+`--parse_errorref_GAME_NOT_FOUND` | The requested game could not be found.
+`--parse_errorref_GAME_DELETED` | The requested game has been deleted.
+`--parse_errorref_MODFILE_NOT_FOUND` | The requested modfile could not be found.
+`--parse_errorref_MOD_NOT_FOUND` | The requested mod could not be found.
+`--parse_errorref_MOD_DELETED` | The requested mod has been deleted.
+`--parse_errorref_COMMENT_NOT_FOUND` | The requested comment could not be found.
+`--parse_errorref_USER_NOT_FOUND` | The requested user could not be found.
 
 ## Response Formats
 ```json
@@ -843,7 +843,7 @@ These are the only supported values and are case-insensitive, anything else will
 
 ## Targeting a Portal
 
-When making API requests you should include the `X-Modio-Portal` header (with one of the values below), to tell --parse_sitename what Portal (i.e. Store or App) the request is originating from. This header is __important__ because it enables --parse_sitename to fine-tune the experience, such as returning display names used by players on that portal (which can be a certification requirement).
+When making API requests you should include the `X-Modio-Portal` header (with one of the values below), to tell --parse_sitename what Portal (eg. Store or App) the request is originating from. This header is __important__ because it enables --parse_sitename to fine-tune the experience, such as returning display names used by players on that portal (which can be a certification requirement).
 
 For example, passing the HTTP header `X-Modio-Portal: EGS` in your API request tells --parse_sitename your player is coming via the Epic Games Store.
 
