@@ -19,6 +19,16 @@ $(document).ready(function() {
 		window.location = "http://" + window.location.host + "/" + (latest ? '' : version);
 	});
 
+	/**
+	 * X-platform filtering notice
+	 */
+	$("h3[id='endpoint-xplatform-notice']").each(function() {
+		var html = $(this).next('p').html();
+		$(this).next('p').remove();
+		$(this).after('<aside class="cross-platform-notice"><img src="images/crossplatform-80x80.svg" /><p>'+html+'</p></aside>');
+		$(this).remove();
+	});
+
 	// dropdown for unsuccessful responses
 	$("h3[id$='-responses']").next('table').each(function() {
 		table = $(this).find('tbody tr');
