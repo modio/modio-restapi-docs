@@ -9,6 +9,7 @@ def toc_data(page_content)
     headers.push({
       id: header.attribute('id').to_s,
       content: header.children,
+      title: header.children.to_s.gsub(/<[^>]*>/, ''),
       level: header.name[1].to_i,
       children: []
     })
@@ -29,6 +30,7 @@ def toc_data(page_content)
   headers
 end
 
+# when updating slate, this function needs to be kept safe and added back in afterwards
 def modio_post_process(page_content)
   html_doc = Nokogiri::HTML::DocumentFragment.parse(page_content)
 
@@ -48,6 +50,6 @@ def modio_post_process(page_content)
   # we put the hidden consent anchor on the authentication heading
   # and not the consent endpoint so when it is navigated to it
   # appears on the right line-height for the reader
-  # html_doc = html_doc.to_s.gsub(/(<h1\sid="authentication-2">.*<\/h1>)/, '\1<h2 id="consent" style="visibility: hidden; margin: 0; padding: 0;"></h2>')
+  html_doc = html_doc.to_s.gsub(/(<h1\sid="authentication-2">.*<\/h1>)/, '\1<h2 id="consent" style="visibility: hidden; margin: 0; padding: 0;"></h2>')
   html_doc
 end
