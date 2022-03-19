@@ -1,6 +1,8 @@
-vendor
 *.gem
 *.rbc
+.git
+.github
+.idea
 .bundle
 .config
 coverage
