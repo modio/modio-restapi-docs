@@ -703,6 +703,16 @@ img.localization-icon-preview {
   background-color: transparent;
 }
 
+.content>div.highlight {
+  clear: right;
+  float: right;
+  width: 50%;
+}
+
+.content pre {
+  width: 100%;
+}
+
 .content table tr:last-child {
   border-bottom: 0;
 }
