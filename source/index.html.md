@@ -4130,6 +4130,7 @@ Edit the details of a published file. If you want to update fields other than th
     changelog|string||Changelog of this release.
     active|boolean||Flag this upload as the current release.<br><br>__NOTE:__ If the _active_ parameter causes the parent mods `modfile` parameter to change, a [__MODFILE_CHANGED__ event](#get-mod-events) will be fired, so game clients know there is an update available for this mod.
     metadata_blob|string||Metadata stored by the game developer which may include properties such as what version of the game this file is compatible with.
+    platforms|array|If platform filtering enabled|An array containing one or more [platforms](#targeting-a-platform) this file is targetting. Valid values can be found under the [targeting a platform](#targeting-a-platform) section.
 
 > Example response
 
@@ -12143,7 +12144,7 @@ xboxseriesx|integer|No description
 Name|Type|Description
 ---|---|---|---|
 platform|string|A [target platform](#targeting-a-platform).
-status|integer|The status of the modfile for the corresponding `platform`. Possible values:<br><br>__0__ = Pending<br>__1__ = Approved<br>__2__ Denied
+status|integer|The status of the modfile for the corresponding `platform`. Possible values:<br><br>__0__ = Pending<br>__1__ = Approved<br>__2__ = Denied
 
 
 
