@@ -6407,6 +6407,12 @@ Content-Type: application/x-www-form-urlencoded
 <td></td>
 <td>Metadata stored by the game developer which may include properties such as what version of the game this file is compatible with.</td>
 </tr>
+<tr>
+<td>platforms</td>
+<td>array</td>
+<td>If platform filtering enabled</td>
+<td>An array containing one or more <a href="#targeting-a-platform">platforms</a> this file is targetting. Valid values can be found under the <a href="#targeting-a-platform">targeting a platform</a> section.</td>
+</tr>
 </tbody>
 </table>
 
@@ -16600,7 +16606,7 @@ To perform this request, you must be authenticated via one of the following meth
 <tr>
 <td>status</td>
 <td>integer</td>
-<td>The status of the modfile for the corresponding <code>platform</code>. Possible values:<br><br><strong>0</strong> = Pending<br><strong>1</strong> = Approved<br><strong>2</strong> Denied</td>
+<td>The status of the modfile for the corresponding <code>platform</code>. Possible values:<br><br><strong>0</strong> = Pending<br><strong>1</strong> = Approved<br><strong>2</strong> = Denied</td>
 </tr>
 </tbody>
 </table>
