@@ -2199,14 +2199,13 @@ Get all games. Successful request will return an array of [Game Objects](#get-ga
         "warning": "#d6af2e",
         "danger": "#ff000e"
       },
-      "platforms": {
-        "supported": [
-          "Xbox Series X"
-        ],
-        "moderated": [
-          "Xbox Series X"
-        ]
-      }
+      "platforms": [
+        {
+          "platform": "ps5",
+          "label": "Playstation 5",
+          "moderated": true
+        }
+      ]
     },
     {
         ...
@@ -2417,14 +2416,13 @@ Get a game. Successful request will return a single [Game Object](#game-object).
     "warning": "#d6af2e",
     "danger": "#ff000e"
   },
-  "platforms": {
-    "supported": [
-      "Xbox Series X"
-    ],
-    "moderated": [
-      "Xbox Series X"
-    ]
-  }
+  "platforms": [
+    {
+      "platform": "ps5",
+      "label": "Playstation 5",
+      "moderated": true
+    }
+  ]
 }
 
 ```
@@ -2635,27 +2633,19 @@ Get all mods for the corresponding game. Successful request will return an array
           "binary_url": "https://mod.io/mods/file/1/c489a0354111a4d76640d47f0cdcb294",
           "date_expires": 1579316848
         },
-        "platforms": {
-          "targetted": [
-            "string"
-          ],
-          "approved": [
-            "string"
-          ],
-          "denied": [
-            "string"
-          ],
-          "live": [
-            "string"
-          ],
-          "pending": [
-            "string"
-          ]
+        "platforms": [
+          {
+            "platform": "windows",
+            "status": 1
+          }
+        ]
+      },
+      "platforms": [
+        {
+          "platform": "windows",
+          "modfile_live": 1
         }
-      },
-      "modfile_platform_map": {
-        "xboxseriesx": 2
-      },
+      ],
       "metadata_kvp": [
         {
           "metakey": "pistol-dmg",
@@ -2880,27 +2870,19 @@ Get a mod. Successful request will return a single [Mod Object](#mod-object).
       "binary_url": "https://mod.io/mods/file/1/c489a0354111a4d76640d47f0cdcb294",
       "date_expires": 1579316848
     },
-    "platforms": {
-      "targetted": [
-        "string"
-      ],
-      "approved": [
-        "string"
-      ],
-      "denied": [
-        "string"
-      ],
-      "live": [
-        "string"
-      ],
-      "pending": [
-        "string"
-      ]
+    "platforms": [
+      {
+        "platform": "windows",
+        "status": 1
+      }
+    ]
+  },
+  "platforms": [
+    {
+      "platform": "windows",
+      "modfile_live": 1
     }
-  },
-  "modfile_platform_map": {
-    "xboxseriesx": 2
-  },
+  ],
   "metadata_kvp": [
     {
       "metakey": "pistol-dmg",
@@ -3146,27 +3128,19 @@ Add a mod. Successful request will return the newly created [Mod Object](#mod-ob
       "binary_url": "https://mod.io/mods/file/1/c489a0354111a4d76640d47f0cdcb294",
       "date_expires": 1579316848
     },
-    "platforms": {
-      "targetted": [
-        "string"
-      ],
-      "approved": [
-        "string"
-      ],
-      "denied": [
-        "string"
-      ],
-      "live": [
-        "string"
-      ],
-      "pending": [
-        "string"
-      ]
+    "platforms": [
+      {
+        "platform": "windows",
+        "status": 1
+      }
+    ]
+  },
+  "platforms": [
+    {
+      "platform": "windows",
+      "modfile_live": 1
     }
-  },
-  "modfile_platform_map": {
-    "xboxseriesx": 2
-  },
+  ],
   "metadata_kvp": [
     {
       "metakey": "pistol-dmg",
@@ -3408,27 +3382,19 @@ Edit details for a mod. If you want to update the `logo` or media associated wit
       "binary_url": "https://mod.io/mods/file/1/c489a0354111a4d76640d47f0cdcb294",
       "date_expires": 1579316848
     },
-    "platforms": {
-      "targetted": [
-        "string"
-      ],
-      "approved": [
-        "string"
-      ],
-      "denied": [
-        "string"
-      ],
-      "live": [
-        "string"
-      ],
-      "pending": [
-        "string"
-      ]
+    "platforms": [
+      {
+        "platform": "windows",
+        "status": 1
+      }
+    ]
+  },
+  "platforms": [
+    {
+      "platform": "windows",
+      "modfile_live": 1
     }
-  },
-  "modfile_platform_map": {
-    "xboxseriesx": 2
-  },
+  ],
   "metadata_kvp": [
     {
       "metakey": "pistol-dmg",
@@ -3721,23 +3687,12 @@ Get all files that are published for the corresponding mod. Successful request w
         "binary_url": "https://mod.io/mods/file/1/c489a0354111a4d76640d47f0cdcb294",
         "date_expires": 1579316848
       },
-      "platforms": {
-        "targetted": [
-          "string"
-        ],
-        "approved": [
-          "string"
-        ],
-        "denied": [
-          "string"
-        ],
-        "live": [
-          "string"
-        ],
-        "pending": [
-          "string"
-        ]
-      }
+      "platforms": [
+        {
+          "platform": "windows",
+          "status": 1
+        }
+      ]
     },
     {
         ...
@@ -3876,23 +3831,12 @@ Get a file. Successful request will return a single [Modfile Object](#modfile-ob
     "binary_url": "https://mod.io/mods/file/1/c489a0354111a4d76640d47f0cdcb294",
     "date_expires": 1579316848
   },
-  "platforms": {
-    "targetted": [
-      "string"
-    ],
-    "approved": [
-      "string"
-    ],
-    "denied": [
-      "string"
-    ],
-    "live": [
-      "string"
-    ],
-    "pending": [
-      "string"
-    ]
-  }
+  "platforms": [
+    {
+      "platform": "windows",
+      "status": 1
+    }
+  ]
 }
 
 ```
@@ -4050,23 +3994,12 @@ Upload a file for the corresponding mod. Successful request will return the newl
     "binary_url": "https://mod.io/mods/file/1/c489a0354111a4d76640d47f0cdcb294",
     "date_expires": 1579316848
   },
-  "platforms": {
-    "targetted": [
-      "string"
-    ],
-    "approved": [
-      "string"
-    ],
-    "denied": [
-      "string"
-    ],
-    "live": [
-      "string"
-    ],
-    "pending": [
-      "string"
-    ]
-  }
+  "platforms": [
+    {
+      "platform": "windows",
+      "status": 1
+    }
+  ]
 }
 
 ```
@@ -4221,23 +4154,12 @@ Edit the details of a published file. If you want to update fields other than th
     "binary_url": "https://mod.io/mods/file/1/c489a0354111a4d76640d47f0cdcb294",
     "date_expires": 1579316848
   },
-  "platforms": {
-    "targetted": [
-      "string"
-    ],
-    "approved": [
-      "string"
-    ],
-    "denied": [
-      "string"
-    ],
-    "live": [
-      "string"
-    ],
-    "pending": [
-      "string"
-    ]
-  }
+  "platforms": [
+    {
+      "platform": "windows",
+      "status": 1
+    }
+  ]
 }
 
 ```
@@ -4502,23 +4424,12 @@ Manage the platform status of a particular modfile. This endpoint does not set a
     "binary_url": "https://mod.io/mods/file/1/c489a0354111a4d76640d47f0cdcb294",
     "date_expires": 1579316848
   },
-  "platforms": {
-    "targetted": [
-      "string"
-    ],
-    "approved": [
-      "string"
-    ],
-    "denied": [
-      "string"
-    ],
-    "live": [
-      "string"
-    ],
-    "pending": [
-      "string"
-    ]
-  }
+  "platforms": [
+    {
+      "platform": "windows",
+      "status": 1
+    }
+  ]
 }
 
 ```
@@ -4526,7 +4437,7 @@ Manage the platform status of a particular modfile. This endpoint does not set a
 
 Status|Meaning|Error Ref|Description|Response Schema
 ---|---|----|---|---|
-200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)||Successful Request. No Body Returned.|[Modfile Object](#schemamodfile_object)
+200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)||Successful Request.|[Modfile Object](#schemamodfile_object)
 403|[Forbidden](https://tools.ietf.org/html/rfc7231#section-6.5.3)|15007|The authenticated user does not have permission to edit the platforms for the specified modfile, ensure the user is a member of parent game team.|[Error Object](#schemaerror_object)
 403|[Forbidden](https://tools.ietf.org/html/rfc7231#section-6.5.3)|14037|The parent game doesn't cross-platform modfile submissions.|[Error Object](#schemaerror_object)
 <aside class="auth-notice">
@@ -4716,27 +4627,19 @@ Subscribe the _authenticated user_ to a corresponding mod. No body parameters ar
       "binary_url": "https://mod.io/mods/file/1/c489a0354111a4d76640d47f0cdcb294",
       "date_expires": 1579316848
     },
-    "platforms": {
-      "targetted": [
-        "string"
-      ],
-      "approved": [
-        "string"
-      ],
-      "denied": [
-        "string"
-      ],
-      "live": [
-        "string"
-      ],
-      "pending": [
-        "string"
-      ]
+    "platforms": [
+      {
+        "platform": "windows",
+        "status": 1
+      }
+    ]
+  },
+  "platforms": [
+    {
+      "platform": "windows",
+      "modfile_live": 1
     }
-  },
-  "modfile_platform_map": {
-    "xboxseriesx": 2
-  },
+  ],
   "metadata_kvp": [
     {
       "metakey": "pistol-dmg",
@@ -8587,7 +8490,7 @@ Get all users that are part of a mod team. Successful request will return an arr
       },
       "level": 8,
       "date_added": 1492058857,
-      "position": "Supreme Overlord",
+      "position": "Turret Builder",
       "invite_pending": 1
     },
     {
@@ -9220,27 +9123,19 @@ Get all mod's the _authenticated user_ is subscribed to. Successful request will
           "binary_url": "https://mod.io/mods/file/1/c489a0354111a4d76640d47f0cdcb294",
           "date_expires": 1579316848
         },
-        "platforms": {
-          "targetted": [
-            "string"
-          ],
-          "approved": [
-            "string"
-          ],
-          "denied": [
-            "string"
-          ],
-          "live": [
-            "string"
-          ],
-          "pending": [
-            "string"
-          ]
+        "platforms": [
+          {
+            "platform": "windows",
+            "status": 1
+          }
+        ]
+      },
+      "platforms": [
+        {
+          "platform": "windows",
+          "modfile_live": 1
         }
-      },
-      "modfile_platform_map": {
-        "xboxseriesx": 2
-      },
+      ],
       "metadata_kvp": [
         {
           "metakey": "pistol-dmg",
@@ -9638,14 +9533,13 @@ Get all games the _authenticated user_ added or is a team member of. Successful 
         "warning": "#d6af2e",
         "danger": "#ff000e"
       },
-      "platforms": {
-        "supported": [
-          "Xbox Series X"
-        ],
-        "moderated": [
-          "Xbox Series X"
-        ]
-      }
+      "platforms": [
+        {
+          "platform": "ps5",
+          "label": "Playstation 5",
+          "moderated": true
+        }
+      ]
     },
     {
         ...
@@ -9869,27 +9763,19 @@ Get all mods the _authenticated user_ added or is a team member of. Successful r
           "binary_url": "https://mod.io/mods/file/1/c489a0354111a4d76640d47f0cdcb294",
           "date_expires": 1579316848
         },
-        "platforms": {
-          "targetted": [
-            "string"
-          ],
-          "approved": [
-            "string"
-          ],
-          "denied": [
-            "string"
-          ],
-          "live": [
-            "string"
-          ],
-          "pending": [
-            "string"
-          ]
+        "platforms": [
+          {
+            "platform": "windows",
+            "status": 1
+          }
+        ]
+      },
+      "platforms": [
+        {
+          "platform": "windows",
+          "modfile_live": 1
         }
-      },
-      "modfile_platform_map": {
-        "xboxseriesx": 2
-      },
+      ],
       "metadata_kvp": [
         {
           "metakey": "pistol-dmg",
@@ -10073,23 +9959,12 @@ Get all modfiles the _authenticated user_ uploaded. Successful request will retu
         "binary_url": "https://mod.io/mods/file/1/c489a0354111a4d76640d47f0cdcb294",
         "date_expires": 1579316848
       },
-      "platforms": {
-        "targetted": [
-          "string"
-        ],
-        "approved": [
-          "string"
-        ],
-        "denied": [
-          "string"
-        ],
-        "live": [
-          "string"
-        ],
-        "pending": [
-          "string"
-        ]
-      }
+      "platforms": [
+        {
+          "platform": "windows",
+          "status": 1
+        }
+      ]
     },
     {
         ...
@@ -10392,27 +10267,19 @@ thumb_100x100|string|URL to the medium avatar thumbnail.
           "binary_url": "https://mod.io/mods/file/1/c489a0354111a4d76640d47f0cdcb294",
           "date_expires": 1579316848
         },
-        "platforms": {
-          "targetted": [
-            "string"
-          ],
-          "approved": [
-            "string"
-          ],
-          "denied": [
-            "string"
-          ],
-          "live": [
-            "string"
-          ],
-          "pending": [
-            "string"
-          ]
+        "platforms": [
+          {
+            "platform": "windows",
+            "status": 1
+          }
+        ]
+      },
+      "platforms": [
+        {
+          "platform": "windows",
+          "modfile_live": 1
         }
-      },
-      "modfile_platform_map": {
-        "xboxseriesx": 2
-      },
+      ],
       "metadata_kvp": [
         {
           "metakey": "pistol-dmg",
@@ -10546,27 +10413,19 @@ data|[Mod Object](#schemamod_object)[]|Contains Mod Objects.
             "binary_url": "https://mod.io/mods/file/1/c489a0354111a4d76640d47f0cdcb294",
             "date_expires": 1579316848
           },
-          "platforms": {
-            "targetted": [
-              "string"
-            ],
-            "approved": [
-              "string"
-            ],
-            "denied": [
-              "string"
-            ],
-            "live": [
-              "string"
-            ],
-            "pending": [
-              "string"
-            ]
+          "platforms": [
+            {
+              "platform": "windows",
+              "status": 1
+            }
+          ]
+        },
+        "platforms": [
+          {
+            "platform": "windows",
+            "modfile_live": 1
           }
-        },
-        "modfile_platform_map": {
-          "xboxseriesx": 2
-        },
+        ],
         "metadata_kvp": [
           {
             "metakey": "pistol-dmg",
@@ -10824,14 +10683,13 @@ md5|string|MD5 hash of the file.
     "warning": "#d6af2e",
     "danger": "#ff000e"
   },
-  "platforms": {
-    "supported": [
-      "Xbox Series X"
-    ],
-    "moderated": [
-      "Xbox Series X"
-    ]
-  }
+  "platforms": [
+    {
+      "platform": "ps5",
+      "label": "Playstation 5",
+      "moderated": true
+    }
+  ]
 } 
 ```
 
@@ -10864,9 +10722,9 @@ instructions_url|string|Link to a mod.io guide, your modding wiki or a page wher
 profile_url|string|URL to the game's mod.io page.
 stats|[Game Stats Object](#schemagame_stats_object)|No description
 theme|[Theme Object](#schematheme_object)|No description
-platforms|[Game Platforms Object](#schemagame_platforms_object)|No description
 other_urls|[Game OtherUrls Object](#schemagame_otherurls_object)[]|No description
 tag_options|[Game Tag Option Object](#schemagame_tag_option_object)[]|Groups of tags configured by the game developer, that mods can select.
+platforms|[Game Platforms Object](#schemagame_platforms_object)[]|Platforms that are supported by this title.
 
 
 
@@ -10896,12 +10754,9 @@ url|string|The URL to be associated with the label.
 
 ```json
 {
-  "supported": [
-    "Xbox Series X"
-  ],
-  "moderated": [
-    "Xbox Series X"
-  ]
+  "platform": "ps5",
+  "label": "Playstation 5",
+  "moderated": true
 } 
 ```
 
@@ -10909,8 +10764,9 @@ url|string|The URL to be associated with the label.
 
 Name|Type|Description
 ---|---|---|---|
-supported|string[]|Array of [valid platform strings](#targeting-a-platform) showing which platforms the game supports mods being submitted for.
-moderated|string[]|Array of [valid platform strings](#targeting-a-platform) showing which platforms the game has moderation enabled for, requiring a member of the game team to approve prior to going live.
+platform|string|A [target platform](#targeting-a-platform).
+label|integer|A presentable label of the platform.
+moderated|boolean|Is this platform moderated by game admins? If false, then user submissions for the platform will be available immediately providing the game has mod curation disabled.
 
 
 
@@ -11117,14 +10973,13 @@ result_total|integer|Total number of results found.
         "warning": "#d6af2e",
         "danger": "#ff000e"
       },
-      "platforms": {
-        "supported": [
-          "Xbox Series X"
-        ],
-        "moderated": [
-          "Xbox Series X"
-        ]
-      }
+      "platforms": [
+        {
+          "platform": "ps5",
+          "label": "Playstation 5",
+          "moderated": true
+        }
+      ]
     },
     {
         ...
@@ -11416,23 +11271,12 @@ result_total|integer|Total number of results found.
         "binary_url": "https://mod.io/mods/file/1/c489a0354111a4d76640d47f0cdcb294",
         "date_expires": 1579316848
       },
-      "platforms": {
-        "targetted": [
-          "string"
-        ],
-        "approved": [
-          "string"
-        ],
-        "denied": [
-          "string"
-        ],
-        "live": [
-          "string"
-        ],
-        "pending": [
-          "string"
-        ]
-      }
+      "platforms": [
+        {
+          "platform": "windows",
+          "status": 1
+        }
+      ]
     },
     {
         ...
@@ -11542,27 +11386,19 @@ result_total|integer|Total number of results found.
           "binary_url": "https://mod.io/mods/file/1/c489a0354111a4d76640d47f0cdcb294",
           "date_expires": 1579316848
         },
-        "platforms": {
-          "targetted": [
-            "string"
-          ],
-          "approved": [
-            "string"
-          ],
-          "denied": [
-            "string"
-          ],
-          "live": [
-            "string"
-          ],
-          "pending": [
-            "string"
-          ]
+        "platforms": [
+          {
+            "platform": "windows",
+            "status": 1
+          }
+        ]
+      },
+      "platforms": [
+        {
+          "platform": "windows",
+          "modfile_live": 1
         }
-      },
-      "modfile_platform_map": {
-        "xboxseriesx": 2
-      },
+      ],
       "metadata_kvp": [
         {
           "metakey": "pistol-dmg",
@@ -11642,7 +11478,7 @@ result_total|integer|Total number of results found.
       },
       "level": 8,
       "date_added": 1492058857,
-      "position": "Supreme Overlord",
+      "position": "Turret Builder",
       "invite_pending": 1
     },
     {
@@ -12059,27 +11895,19 @@ images|[Image Object](#schemaimage_object)[]|Array of image objects (a gallery).
       "binary_url": "https://mod.io/mods/file/1/c489a0354111a4d76640d47f0cdcb294",
       "date_expires": 1579316848
     },
-    "platforms": {
-      "targetted": [
-        "string"
-      ],
-      "approved": [
-        "string"
-      ],
-      "denied": [
-        "string"
-      ],
-      "live": [
-        "string"
-      ],
-      "pending": [
-        "string"
-      ]
+    "platforms": [
+      {
+        "platform": "windows",
+        "status": 1
+      }
+    ]
+  },
+  "platforms": [
+    {
+      "platform": "windows",
+      "modfile_live": 1
     }
-  },
-  "modfile_platform_map": {
-    "xboxseriesx": 2
-  },
+  ],
   "metadata_kvp": [
     {
       "metakey": "pistol-dmg",
@@ -12136,10 +11964,30 @@ metadata_blob|string|Metadata stored by the game developer. Metadata can also be
 profile_url|string|URL to the mod's mod.io profile.
 media|[Mod Media Object](#schemamod_media_object)|No description
 modfile|[Modfile Object](#schemamodfile_object)|No description
-modfile_platform_map|[Modfile Platform Map Object](#schemamodfile_platform_map_object)|No description
 stats|[Mod Stats Object](#schemamod_stats_object)|No description
+platforms|[Mod Platforms Object](#schemamod_platforms_object)[]|Contains mod platform data.
 metadata_kvp|[Metadata KVP Object](#schemametadata_kvp_object)[]|Contains key-value metadata.
 tags|[Mod Tag Object](#schemamod_tag_object)[]|Contains mod tag data.
+
+
+
+## Mod Platforms Object  
+
+<a name="schemamod_platforms_object"></a>
+
+```json
+{
+  "platform": "windows",
+  "modfile_live": 1
+} 
+```
+
+### Properties
+
+Name|Type|Description
+---|---|---|---|
+platform|string|A [target platform](#targeting-a-platform).
+modfile_live|integer|The unique id of the modfile that is currently live on the platform specified in the `platform` field.
 
 
 
@@ -12230,23 +12078,12 @@ date_added|integer|Unix timestamp of date tag was applied.
     "binary_url": "https://mod.io/mods/file/1/c489a0354111a4d76640d47f0cdcb294",
     "date_expires": 1579316848
   },
-  "platforms": {
-    "targetted": [
-      "string"
-    ],
-    "approved": [
-      "string"
-    ],
-    "denied": [
-      "string"
-    ],
-    "live": [
-      "string"
-    ],
-    "pending": [
-      "string"
-    ]
-  }
+  "platforms": [
+    {
+      "platform": "windows",
+      "status": 1
+    }
+  ]
 } 
 ```
 
@@ -12268,7 +12105,7 @@ version|string|Release version this file represents.
 changelog|string|Changelog for the file.
 metadata_blob|string|Metadata stored by the game developer for this file.
 download|[Download Object](#schemadownload_object)|No description
-platforms|[Modfile Platform Object](#schemamodfile_platform_object)|No description
+platforms|[Modfile Platform Object](#schemamodfile_platform_object)[]|Contains modfile platform data.
 
 
 
@@ -12296,21 +12133,8 @@ xboxseriesx|integer|No description
 
 ```json
 {
-  "targetted": [
-    "string"
-  ],
-  "approved": [
-    "string"
-  ],
-  "denied": [
-    "string"
-  ],
-  "live": [
-    "string"
-  ],
-  "pending": [
-    "string"
-  ]
+  "platform": "windows",
+  "status": 1
 } 
 ```
 
@@ -12318,47 +12142,8 @@ xboxseriesx|integer|No description
 
 Name|Type|Description
 ---|---|---|---|
-targetted|string[]|Array of [valid platform strings](#targeting-a-platform) showing which platforms the  modfile has targetted for release.
-approved|string[]|Array of [valid platform strings](#targeting-a-platform) showing which platforms the modfile has been approved for.
-denied|string[]|Array of [valid platform strings](#targeting-a-platform) showing which platforms the modfile has been denied for.
-live|string[]|Array of [valid platform strings](#targeting-a-platform) showing which platforms the modfile is currently marked as live on.
-pending|string[]|Array of [valid platform strings](#targeting-a-platform) showing which platforms the modfile is currently marked as pending on.
-
-
-
-## Modfile Platform Supported Object 
-
-<a name="schemamodfile_platform_supported_object"></a>
-
-```json
-{
-  "targetted": [
-    "string"
-  ],
-  "approved": [
-    "string"
-  ],
-  "denied": [
-    "string"
-  ],
-  "live": [
-    "string"
-  ],
-  "pending": [
-    "string"
-  ]
-} 
-```
-
-### Properties
-
-Name|Type|Description
----|---|---|---|
-targetted|string[]|Array of [valid platform strings](#targeting-a-platform) showing which platforms the  modfile has targetted for release.
-approved|string[]|Array of [valid platform strings](#targeting-a-platform) showing which platforms the modfile has been approved for.
-denied|string[]|Array of [valid platform strings](#targeting-a-platform) showing which platforms the modfile has been denied for.
-live|string[]|Array of [valid platform strings](#targeting-a-platform) showing which platforms the modfile is currently marked as live on.
-pending|string[]|Array of [valid platform strings](#targeting-a-platform) showing which platforms the modfile is currently marked as pending on.
+platform|string|A [target platform](#targeting-a-platform).
+status|integer|The status of the modfile for the corresponding `platform`. Possible values:<br><br>__0__ = Pending<br>__1__ = Approved<br>__2__ Denied
 
 
 
@@ -12454,7 +12239,7 @@ reason|string|Optional notes provided by the actionee, usually containing the re
   },
   "level": 8,
   "date_added": 1492058857,
-  "position": "Supreme Overlord",
+  "position": "Turret Builder",
   "invite_pending": 1
 } 
 ```
