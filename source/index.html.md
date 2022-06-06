@@ -804,6 +804,226 @@ These are the only supported values and are case-insensitive, anything else will
 
 # Authentication
 
+
+## Terms
+
+> Example request
+
+```shell
+# You can also use wget
+curl -X GET https://api.mod.io/v1/authenticate/terms?api_key=YourApiKey \
+  -H 'Accept: application/json'
+
+```
+
+```http
+GET https://api.mod.io/v1/authenticate/terms?api_key=YourApiKey HTTP/1.1
+Host: api.mod.io
+
+Accept: application/json
+
+```
+
+```javascript
+var headers = {
+  'Accept':'application/json'
+
+};
+
+$.ajax({
+  url: 'https://api.mod.io/v1/authenticate/terms',
+  method: 'get',
+  data: '?api_key=YourApiKey',
+  headers: headers,
+  success: function(data) {
+    console.log(JSON.stringify(data));
+  }
+})
+```
+
+```javascript--nodejs
+const request = require('node-fetch');
+
+const headers = {
+  'Accept':'application/json'
+
+};
+
+fetch('https://api.mod.io/v1/authenticate/terms?api_key=YourApiKey',
+{
+  method: 'GET',
+
+  headers: headers
+})
+.then(function(res) {
+    return res.json();
+}).then(function(body) {
+    console.log(body);
+});
+```
+
+```python
+import requests
+headers = {
+  'Accept': 'application/json'
+}
+
+r = requests.get('https://api.mod.io/v1/authenticate/terms', params={
+  'api_key': 'YourApiKey'
+}, headers = headers)
+
+print r.json()
+```
+
+```java
+URL obj = new URL("https://api.mod.io/v1/authenticate/terms?api_key=YourApiKey");
+HttpURLConnection con = (HttpURLConnection) obj.openConnection();
+con.setRequestMethod("GET");
+int responseCode = con.getResponseCode();
+BufferedReader in = new BufferedReader(
+    new InputStreamReader(con.getInputStream()));
+String inputLine;
+StringBuffer response = new StringBuffer();
+while ((inputLine = in.readLine()) != null) {
+    response.append(inputLine);
+}
+in.close();
+System.out.println(response.toString());
+```
+
+`GET /authenticate/terms`
+
+The purpose of this endpoint is to provide the text, links and buttons you can use to get a users agreement and consent prior to authenticating them in-game (your dialog should look [similar to this](https://mod.io/termsdialog/widget)). A successful response will return a [Terms Object](#terms-object).<br><br>__IMPORTANT:__ When using a 3rd party authentication flow such as Steam or Xbox Live, it is a requirement that the user has agreed to the latest mod.io [Terms of Use](https://mod.io/terms/widget) and [Privacy Policy](https://mod.io/privacy/widget). You only need to collect the users agreement once, and also each time these policies are updated.<br><br>To make this easy to manage, all of the 3rd party authentication flows have a `terms_agreed` field which should be set to `false` by default. If the user has agreed to the latest policies, their authentication will proceed as normal, however if their agreement is required and `terms_agreed` is set to `false` an error `403 Forbidden (error_ref 11051)` will be returned. When you receive this error, you must collect the users agreement before resubmitting the authentication flow with `terms_agreed` set to `true`, which will be recorded.<br><br>__NOTE:__  You can use your own text and process (make sure the Terms of Use and Privacy Policy are correctly linked), but be aware that you are responsible for ensuring that the users agreement is properly collected and reported to us. Failure to do this correctly is a breach of the mod.io Developer Terms. If your game does not authenticate users or only uses the email authentication flow, you do not need to implement this dialog, but you should link to the mod.io Terms of Use and Privacy Policy in your Privacy Policy/EULA.
+
+
+> Example response
+
+```json
+{
+  "plaintext": "We use mod.io to support user-generated content in-game. By clicking "I Agree" you agree to the mod.io Terms of Use and a mod.io account will be created for you (using your Steam display name, avatar and ID). Please see the mod.io Privacy Policy on how mod.io processes your personal data.",
+  "html": "<p>We use <a href="https://mod.io">mod.io</a> to support user-generated content in-game. By clicking "I Agree" you agree to the mod.io <a href="https://mod.io/terms">Terms of Use</a> and a mod.io account will be created for you (using your Steam display name, avatar and ID). Please see the mod.io <a href="https://mod.io/privacy">Privacy Policy</a> on how mod.io processes your personal data.</p>",
+  "buttons": {
+    "agree": {
+      "text": "I Agree"
+    },
+    "disagree": {
+      "text": "No, Thanks"
+    }
+  },
+  "links": {
+    "website": {
+      "text": "Website",
+      "url": "https://mod.io",
+      "required": false
+    },
+    "terms": {
+      "text": "Terms of Use",
+      "url": "https://mod.io/terms",
+      "required": true
+    },
+    "privacy": {
+      "text": "Privacy Policy",
+      "url": "https://mod.io/privacy",
+      "required": true
+    },
+    "manage": {
+      "text": "Manage Account",
+      "url": "https://mod.io/members/settings",
+      "required": false
+    }
+  }
+}
+
+```
+<h3 id="Terms-responses">Responses</h3>
+
+Status|Meaning|Error Ref|Description|Response Schema
+---|---|----|---|---|
+200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)||Successful Request|[Terms Object](#schematerms_object)
+<aside class="auth-notice">
+To perform this request, you must be authenticated via one of the following methods:
+<a href="#authentication">api_key</a>
+</aside>
+## Authenticate via Email
+
+To perform writes, you will need to authenticate your users via OAuth 2. To make this frictionless in-game, we offer an email verification system, similar to what Slack and others pioneered. It works by users supplying their email, which we send a time-limited 5 digit security code too. They exchange this code in-game, for an [OAuth 2 access token](https://mod.io/oauth/widget) you can save to authenticate future requests. The benefit of this approach is it avoids complex website redirects, doesn't require your users to complete a slow registration flow, and eliminates the need to store usernames / passwords.
+
+```shell
+// Example POST requesting security code be sent to supplied email
+
+curl -X POST https://api.mod.io/v1/oauth/emailrequest \
+  -H 'Content-Type: application/x-www-form-urlencoded' \
+  -d 'api_key=0d0ba6756d032246f1299f8c01abc424'	\
+  -d 'email=john.snow@westeros.com'
+```
+
+```json
+// Authentication Code Request Response
+
+{
+	"code": 200,
+	"message": "Enter the 5-digit security code sent to your email address (john.snow@westeros.com)"
+}
+```
+
+**Step 1: Requesting a security code**
+
+Request a `security_code` be sent to the email address of the user you wish to authenticate: 
+
+
+`POST /oauth/emailrequest`
+
+Parameter |Type | Required | Value
+---------- | ---------- |---------- | ----------
+api_key | string | true | Your API key generated from 'API' tab within your game profile.
+email | string | true | A valid and secure email address your user has access to. 
+
+**Step 2: Exchanging security code for access token**
+
+After retrieving the 5-digit `security_code` sent to the email specified, you exchange it for an OAuth 2 `access_token`:
+
+```shell
+// Example POST requesting access token with security code
+
+curl -X POST https://api.mod.io/v1/oauth/emailexchange \
+  -H 'Content-Type: application/x-www-form-urlencoded' \	
+  -d 'api_key=0d0ba6756d032246f1299f8c01abc424' \
+  -d 'security_code=3EW50'
+```
+
+```json
+// Access Token Request Response (access token truncated for brevity)
+
+{
+	"code": 200,
+	"access_token": "eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiIsImp0......"
+}
+```
+
+
+`POST /oauth/emailexchange`
+
+Parameter | Type | Required | Value
+---------- | ---------- | ---------- | ----------  
+api_key | string | true | Your API key generated from 'API' tab within your game profile.
+security_code | string | true | Unique 5-digit code sent to the email address supplied in the previous request. 
+date_expires | integer || Unix timestamp of date in which the returned token will expire. Value cannot be higher than the default value which is a common year (unix timestamp + 31536000 seconds). Using a token after it's expiry time has elapsed will result in a `401 Unauthorized` response.
+
+There are a few important things to know when using the email authentication flow:
+ 
+- An `api_key` is required for both steps of the authentication process.
+- The _same_ `api_key` must be used for both steps.
+- The generated `security_code` is short-lived and will expire after 15 minutes.
+- Once exchanged for an `access_token`, the `security_code` is invalid.
+
+If the user does not exchange the `security_code` they are emailed for an `access_token` within 15 minutes, you will need to begin the flow again to generate a new code.
+
+**Step 3: Use access token to access resources**
+
+See [Making Requests](#making-requests) section.
+
+**HINT:** If you want to overlay the mod.io site in-game and you authenticate users via email, we recommend you add `?portal=email` to the end of the URL you open which will prompt the user to login via their email. See [Web Overlay Authentication](#web-overlay-authentication) for details.
+
 ## Authenticate via Steam
 
 > Example request
@@ -1850,144 +2070,7 @@ Status|Meaning|Error Ref|Description|Response Schema
 To perform this request, you must be authenticated via one of the following methods:
 <a href="#authentication">api_key</a>
 </aside>
-## Terms
 
-> Example request
-
-```shell
-# You can also use wget
-curl -X GET https://api.mod.io/v1/authenticate/terms?api_key=YourApiKey \
-  -H 'Accept: application/json'
-
-```
-
-```http
-GET https://api.mod.io/v1/authenticate/terms?api_key=YourApiKey HTTP/1.1
-Host: api.mod.io
-
-Accept: application/json
-
-```
-
-```javascript
-var headers = {
-  'Accept':'application/json'
-
-};
-
-$.ajax({
-  url: 'https://api.mod.io/v1/authenticate/terms',
-  method: 'get',
-  data: '?api_key=YourApiKey',
-  headers: headers,
-  success: function(data) {
-    console.log(JSON.stringify(data));
-  }
-})
-```
-
-```javascript--nodejs
-const request = require('node-fetch');
-
-const headers = {
-  'Accept':'application/json'
-
-};
-
-fetch('https://api.mod.io/v1/authenticate/terms?api_key=YourApiKey',
-{
-  method: 'GET',
-
-  headers: headers
-})
-.then(function(res) {
-    return res.json();
-}).then(function(body) {
-    console.log(body);
-});
-```
-
-```python
-import requests
-headers = {
-  'Accept': 'application/json'
-}
-
-r = requests.get('https://api.mod.io/v1/authenticate/terms', params={
-  'api_key': 'YourApiKey'
-}, headers = headers)
-
-print r.json()
-```
-
-```java
-URL obj = new URL("https://api.mod.io/v1/authenticate/terms?api_key=YourApiKey");
-HttpURLConnection con = (HttpURLConnection) obj.openConnection();
-con.setRequestMethod("GET");
-int responseCode = con.getResponseCode();
-BufferedReader in = new BufferedReader(
-    new InputStreamReader(con.getInputStream()));
-String inputLine;
-StringBuffer response = new StringBuffer();
-while ((inputLine = in.readLine()) != null) {
-    response.append(inputLine);
-}
-in.close();
-System.out.println(response.toString());
-```
-
-`GET /authenticate/terms`
-
-The purpose of this endpoint is to provide the text, links and buttons you can use to get a users agreement and consent prior to authenticating them in-game (your dialog should look [similar to this](https://mod.io/termsdialog/widget)). A successful response will return a [Terms Object](#terms-object).<br><br>__IMPORTANT:__ When using a 3rd party authentication flow such as Steam or Xbox Live, it is a requirement that the user has agreed to the latest mod.io [Terms of Use](https://mod.io/terms/widget) and [Privacy Policy](https://mod.io/privacy/widget). You only need to collect the users agreement once, and also each time these policies are updated.<br><br>To make this easy to manage, all of the 3rd party authentication flows have a `terms_agreed` field which should be set to `false` by default. If the user has agreed to the latest policies, their authentication will proceed as normal, however if their agreement is required and `terms_agreed` is set to `false` an error `403 Forbidden (error_ref 11074)` will be returned. When you receive this error, you must collect the users agreement before resubmitting the authentication flow with `terms_agreed` set to `true`, which will be recorded.<br><br>__NOTE:__  You can use your own text and process (make sure the Terms of Use and Privacy Policy are correctly linked), but be aware that you are responsible for ensuring that the users agreement is properly collected and reported to us. Failure to do this correctly is a breach of the mod.io Developer Terms. If your game does not authenticate users or only uses the email authentication flow, you do not need to implement this dialog, but you should link to the mod.io Terms of Use and Privacy Policy in your Privacy Policy/EULA.
-
-> Example response
-
-```json
-{
-  "plaintext": "We use mod.io to support user-generated content in-game. By clicking "I Agree" you agree to the mod.io Terms of Use and a mod.io account will be created for you (using your Steam display name, avatar and ID). Please see the mod.io Privacy Policy on how mod.io processes your personal data.",
-  "html": "<p>We use <a href="https://mod.io">mod.io</a> to support user-generated content in-game. By clicking "I Agree" you agree to the mod.io <a href="https://mod.io/terms">Terms of Use</a> and a mod.io account will be created for you (using your Steam display name, avatar and ID). Please see the mod.io <a href="https://mod.io/privacy">Privacy Policy</a> on how mod.io processes your personal data.</p>",
-  "buttons": {
-    "agree": {
-      "text": "I Agree"
-    },
-    "disagree": {
-      "text": "No, Thanks"
-    }
-  },
-  "links": {
-    "website": {
-      "text": "Website",
-      "url": "https://mod.io",
-      "required": false
-    },
-    "terms": {
-      "text": "Terms of Use",
-      "url": "https://mod.io/terms",
-      "required": true
-    },
-    "privacy": {
-      "text": "Privacy Policy",
-      "url": "https://mod.io/privacy",
-      "required": true
-    },
-    "manage": {
-      "text": "Manage Account",
-      "url": "https://mod.io/members/settings",
-      "required": false
-    }
-  }
-}
-
-```
-<h3 id="Terms-responses">Responses</h3>
-
-Status|Meaning|Error Ref|Description|Response Schema
----|---|----|---|---|
-200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)||Successful Request|[Terms Object](#schematerms_object)
-<aside class="auth-notice">
-To perform this request, you must be authenticated via one of the following methods:
-<a href="#authentication">api_key</a>
-</aside>
 # Games
 
 ## Get Games
@@ -8916,6 +8999,7 @@ Mute a user. This will prevent mod.io from returning mods to you authored by the
 Status|Meaning|Error Ref|Description|Response Schema
 ---|---|----|---|---|
 204|[No Content](https://tools.ietf.org/html/rfc7231#section-6.3.5)||Successful Request. No Body Returned.|None
+403|[Forbidden](https://tools.ietf.org/html/rfc7231#section-6.5.3)|17039|You cannot mute yourself, you should potentially show restraint instead.|[Error Object](#schemaerror_object)
 404|[Not Found](https://tools.ietf.org/html/rfc7231#section-6.5.4)|17000|The user with the supplied id could not be found.|[Error Object](#schemaerror_object)
 <aside class="auth-notice">
 To perform this request, you must be authenticated via one of the following methods:
