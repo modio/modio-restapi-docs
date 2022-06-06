@@ -906,7 +906,7 @@ Request an access token on behalf of a Steam user. To use this functionality you
      appdata|base64-encoded string|true|The Steam users [Encrypted App Ticket](https://partner.steamgames.com/doc/features/auth#encryptedapptickets) provided by the Steamworks SDK. <br><br>Parameter content *MUST* be the [*uint8 *rgubTicketEncrypted*](https://partner.steamgames.com/doc/api/SteamEncryptedAppTicket) returned after calling [ISteamUser::GetEncryptedAppTicket()](https://partner.steamgames.com/doc/api/ISteamUser#GetEncryptedAppTicket) within the Steamworks SDK, converted into a base64-encoded string.<br><br>__NOTE:__ Due to a base64-encoded string containing special characters, you must URL encode the string after it has been base64-encoded to ensure it is successfully sent to our servers otherwise you may encounter an `422 Unprocessable Entity` response. For example, [cURL](https://ec.haxx.se/http-post.html) will do this for you by using the `--data-urlencode` option.
      email|string||The users email address. If supplied, and the respective user does not have an email registered for their account we will send a confirmation email to confirm they have ownership of the specified email.<br><br>__NOTE__: If the user already has an email on record with us, this parameter will be ignored. This parameter should also be urlencoded before the request is sent.
      date_expires|integer||Unix timestamp of date in which the returned token will expire. Value cannot be higher than the default value which is a common year (unix timestamp + 31536000 seconds). Using a token after it's expiry time has elapsed will result in a `401 Unauthorized` response.
-     terms_agreed|boolean||This MUST be set to `false` unless you have collected the [users agreement](#terms) prior to calling this endpoint in which case it can be set to `true` and will be recorded.<br><br>__NOTE:__ If this is set to `false` and the user has not agreed to the latest mod.io Terms of Use and Privacy Policy, an error `403 Forbidden (error_ref 11051)` will be returned and you will need to collect the [users agreement](#terms) and retry with this value set to `true` to authenticate the user.
+     terms_agreed|boolean||This MUST be set to `false` unless you have collected the [users agreement](#terms) prior to calling this endpoint in which case it can be set to `true` and will be recorded.<br><br>__NOTE:__ If this is set to `false` and the user has not agreed to the latest mod.io Terms of Use and Privacy Policy, an error `403 Forbidden (error_ref 11074)` will be returned and you will need to collect the [users agreement](#terms) and retry with this value set to `true` to authenticate the user.
 
 > Example response
 
@@ -929,7 +929,7 @@ Status|Meaning|Error Ref|Description|Response Schema
 403|[Forbidden](https://tools.ietf.org/html/rfc7231#section-6.5.3)|11016|The api_key supplied in the request must be associated with a game.|[Error Object](#schemaerror_object)
 403|[Forbidden](https://tools.ietf.org/html/rfc7231#section-6.5.3)|11017|The api_key supplied in the request is for test environment purposes only and cannot be used for this functionality.|[Error Object](#schemaerror_object)
 403|[Forbidden](https://tools.ietf.org/html/rfc7231#section-6.5.3)|11019|The secret steam app ticket associated with this game has not been configured.|[Error Object](#schemaerror_object)
-403|[Forbidden](https://tools.ietf.org/html/rfc7231#section-6.5.3)|11051|The user has not agreed to the mod.io Terms of Use. Please see terms_agreed parameter description and the [Terms](#terms) endpoint for more information.|[Error Object](#schemaerror_object)
+403|[Forbidden](https://tools.ietf.org/html/rfc7231#section-6.5.3)|11074|The user has not agreed to the mod.io Terms of Use. Please see terms_agreed parameter description and the [Terms](#terms) endpoint for more information.|[Error Object](#schemaerror_object)
 <aside class="auth-notice">
 To perform this request, you must be authenticated via one of the following methods:
 <a href="#authentication">api_key</a>
@@ -1036,7 +1036,7 @@ Request an access token on behalf of a GOG Galaxy user. To use this functionalit
      appdata|string|true|The GOG Galaxy users [Encrypted App Ticket](https://cdn.gog.com/open/galaxy/sdk/1.133.3/Documentation/classgalaxy_1_1api_1_1IUser.html#a352802aab7a6e71b1cd1b9b1adfd53d8) provided by the GOG Galaxy SDK. <br><br>Parameter content *MUST* be the encrypted string returned in the buffer after calling [IUser::GetEncryptedAppTicket()](https://cdn.gog.com/open/galaxy/sdk/1.133.3/Documentation/classgalaxy_1_1api_1_1IUser.html#a96af6792efc260e75daebedca2cf74c6) within the Galaxy SDK. Unlike the [Steam Authentication](#authenticate-via-steam) endpoint, you do not need to encode the encrypted string as this is already done by the Galaxy SDK.<br><br>__NOTE:__ Due to the encrypted app ticket containing special characters, you must URL encode the string before sending the request to ensure it is successfully sent to our servers otherwise you may encounter an `422 Unprocessable Entity` response. For example, [cURL](https://ec.haxx.se/http-post.html) will do this for you by using the `--data-urlencode` option.
      email|string||The users email address. If supplied, and the respective user does not have an email registered for their account we will send a confirmation email to confirm they have ownership of the specified email.<br><br>__NOTE__: If the user already has an email on record with us, this parameter will be ignored. This parameter should also be urlencoded before the request is sent.
      date_expires|integer||Unix timestamp of date in which the returned token will expire. Value cannot be higher than the default value which is a common year (unix timestamp + 31536000 seconds). Using a token after it's expiry time has elapsed will result in a `401 Unauthorized` response.
-     terms_agreed|boolean||This MUST be set to `false` unless you have collected the [users agreement](#terms) prior to calling this endpoint in which case it can be set to `true` and will be recorded.<br><br>__NOTE:__ If this is set to `false` and the user has not agreed to the latest mod.io Terms of Use and Privacy Policy, an error `403 Forbidden (error_ref 11051)` will be returned and you will need to collect the [users agreement](#terms) and retry with this value set to `true` to authenticate the user.
+     terms_agreed|boolean||This MUST be set to `false` unless you have collected the [users agreement](#terms) prior to calling this endpoint in which case it can be set to `true` and will be recorded.<br><br>__NOTE:__ If this is set to `false` and the user has not agreed to the latest mod.io Terms of Use and Privacy Policy, an error `403 Forbidden (error_ref 11074)` will be returned and you will need to collect the [users agreement](#terms) and retry with this value set to `true` to authenticate the user.
 
 > Example response
 
@@ -1059,7 +1059,7 @@ Status|Meaning|Error Ref|Description|Response Schema
 403|[Forbidden](https://tools.ietf.org/html/rfc7231#section-6.5.3)|11016|The api_key supplied in the request must be associated with a game.|[Error Object](#schemaerror_object)
 403|[Forbidden](https://tools.ietf.org/html/rfc7231#section-6.5.3)|11017|The api_key supplied in the request is for test environment purposes only and cannot be used for this functionality.|[Error Object](#schemaerror_object)
 403|[Forbidden](https://tools.ietf.org/html/rfc7231#section-6.5.3)|11022|The secret GOG Galaxy app ticket associated with this game has not been configured.|[Error Object](#schemaerror_object)
-403|[Forbidden](https://tools.ietf.org/html/rfc7231#section-6.5.3)|11051|The user has not agreed to the mod.io Terms of Use. Please see terms_agreed parameter description and the [Terms](#terms) endpoint for more information.|[Error Object](#schemaerror_object)
+403|[Forbidden](https://tools.ietf.org/html/rfc7231#section-6.5.3)|11074|The user has not agreed to the mod.io Terms of Use. Please see terms_agreed parameter description and the [Terms](#terms) endpoint for more information.|[Error Object](#schemaerror_object)
 <aside class="auth-notice">
 To perform this request, you must be authenticated via one of the following methods:
 <a href="#authentication">api_key</a>
@@ -1166,7 +1166,7 @@ Request an access token on behalf of an itch.io user via the itch.io desktop app
      itchio_token|string|true|The [JWT Token](https://itch.io/docs/itch/integrating/manifest-actions.html) provided by the itch.io desktop application to your game as the environment variable `ITCHIO_API_KEY`. You must setup your itch.io app manifest to include the [API scope](https://itch.io/docs/itch/integrating/manifest-actions.html) to force itch.io to set this variable.
      email|string||The users email address. If supplied, and the respective user does not have an email registered for their account we will send a confirmation email to confirm they have ownership of the specified email.<br><br>__NOTE__: If the user already has an email on record with us, this parameter will be ignored. This parameter should also be urlencoded before the request is sent.
      date_expires|integer||Unix timestamp of date in which the returned token will expire. Value cannot be higher than the default value which is a week (unix timestamp + 604800 seconds). Using a token after it's expiry time has elapsed will result in a `401 Unauthorized` response.
-     terms_agreed|boolean||This MUST be set to `false` unless you have collected the [users agreement](#terms) prior to calling this endpoint in which case it can be set to `true` and will be recorded.<br><br>__NOTE:__ If this is set to `false` and the user has not agreed to the latest mod.io Terms of Use and Privacy Policy, an error `403 Forbidden (error_ref 11051)` will be returned and you will need to collect the [users agreement](#terms) and retry with this value set to `true` to authenticate the user.
+     terms_agreed|boolean||This MUST be set to `false` unless you have collected the [users agreement](#terms) prior to calling this endpoint in which case it can be set to `true` and will be recorded.<br><br>__NOTE:__ If this is set to `false` and the user has not agreed to the latest mod.io Terms of Use and Privacy Policy, an error `403 Forbidden (error_ref 11074)` will be returned and you will need to collect the [users agreement](#terms) and retry with this value set to `true` to authenticate the user.
 
 > Example response
 
@@ -1188,7 +1188,7 @@ Status|Meaning|Error Ref|Description|Response Schema
 401|[Unauthorized](https://tools.ietf.org/html/rfc7235#section-3.1)|11031|mod.io was unable to get account data from itch.io servers.|[Error Object](#schemaerror_object)
 403|[Forbidden](https://tools.ietf.org/html/rfc7231#section-6.5.3)|11016|The api_key supplied in the request must be associated with a game.|[Error Object](#schemaerror_object)
 403|[Forbidden](https://tools.ietf.org/html/rfc7231#section-6.5.3)|11017|The api_key supplied in the request is for test environment purposes only and cannot be used for this functionality.|[Error Object](#schemaerror_object)
-403|[Forbidden](https://tools.ietf.org/html/rfc7231#section-6.5.3)|11051|The user has not agreed to the mod.io Terms of Use. Please see terms_agreed parameter description and the [Terms](#terms) endpoint for more information.|[Error Object](#schemaerror_object)
+403|[Forbidden](https://tools.ietf.org/html/rfc7231#section-6.5.3)|11074|The user has not agreed to the mod.io Terms of Use. Please see terms_agreed parameter description and the [Terms](#terms) endpoint for more information.|[Error Object](#schemaerror_object)
 <aside class="auth-notice">
 To perform this request, you must be authenticated via one of the following methods:
 <a href="#authentication">api_key</a>
@@ -1304,7 +1304,7 @@ Request an access token on behalf of an Oculus user. To use this functionality y
      access_token|string|true|The user's access token, providing by calling [ovr_User_GetAccessToken()](https://developer.oculus.com/documentation/platform/latest/concepts/dg-ownership/) from the Oculus SDK. mod.io uses this access token on the first login only to obtain the user's alias and is not saved on our servers.
      email|string||The users email address. If supplied, and the respective user does not have an email registered for their account we will send a confirmation email to confirm they have ownership of the specified email.<br><br>__WARNING__: We __strongly recommend__ that you prompt your users in a friendly manner at least once to provide their email address to link their Oculus account. Due to how Oculus handles user IDs - if we are not supplied with an email for a user at least once we will __never__ be able to link that user with their existing account at a later date as Oculus IDs operate at the game-scope, not globally. Failing to provide an email will in-effect generate an orphan account that will only be able to be accessed from your title.
      date_expires|integer||Unix timestamp of date in which the returned token will expire. Value cannot be higher than the default value which is a common year (unix timestamp + 31536000 seconds). Using a token after it's expiry time has elapsed will result in a `401 Unauthorized` response.
-     terms_agreed|boolean||This MUST be set to `false` unless you have collected the [users agreement](#terms) prior to calling this endpoint in which case it can be set to `true` and will be recorded.<br><br>__NOTE:__ If this is set to `false` and the user has not agreed to the latest mod.io Terms of Use and Privacy Policy, an error `403 Forbidden (error_ref 11051)` will be returned and you will need to collect the [users agreement](#terms) and retry with this value set to `true` to authenticate the user.
+     terms_agreed|boolean||This MUST be set to `false` unless you have collected the [users agreement](#terms) prior to calling this endpoint in which case it can be set to `true` and will be recorded.<br><br>__NOTE:__ If this is set to `false` and the user has not agreed to the latest mod.io Terms of Use and Privacy Policy, an error `403 Forbidden (error_ref 11074)` will be returned and you will need to collect the [users agreement](#terms) and retry with this value set to `true` to authenticate the user.
 
 > Example response
 
@@ -1327,7 +1327,7 @@ Status|Meaning|Error Ref|Description|Response Schema
 403|[Forbidden](https://tools.ietf.org/html/rfc7231#section-6.5.3)|11017|The api_key supplied in the request is for test environment purposes only and cannot be used for this functionality.|[Error Object](#schemaerror_object)
 403|[Forbidden](https://tools.ietf.org/html/rfc7231#section-6.5.3)|11024|The secret Oculus Rift app ticket associated with this game has not been configured.|[Error Object](#schemaerror_object)
 403|[Forbidden](https://tools.ietf.org/html/rfc7231#section-6.5.3)|11025|The secret Oculus Quest app ticket associated with this game has not been configured.|[Error Object](#schemaerror_object)
-403|[Forbidden](https://tools.ietf.org/html/rfc7231#section-6.5.3)|11051|The user has not agreed to the mod.io Terms of Use. Please see terms_agreed parameter description and the [Terms](#terms) endpoint for more information.|[Error Object](#schemaerror_object)
+403|[Forbidden](https://tools.ietf.org/html/rfc7231#section-6.5.3)|11074|The user has not agreed to the mod.io Terms of Use. Please see terms_agreed parameter description and the [Terms](#terms) endpoint for more information.|[Error Object](#schemaerror_object)
 <aside class="auth-notice">
 To perform this request, you must be authenticated via one of the following methods:
 <a href="#authentication">api_key</a>
@@ -1434,7 +1434,7 @@ Request an access token on behalf of an Xbox Live user. A Successful request wil
      xbox_token|string|true|The Xbox Live token returned from calling [GetTokenAndSignatureAsync("POST", "https://api.mod.io")](https://docs.microsoft.com/en-us/dotnet/api/microsoft.xbox.services.system.xboxliveuser.gettokenandsignatureasync?view=xboxlive-dotnet-2017.11.20171204.01). <br><br>__NOTE:__ Due to the encrypted app ticket containing special characters, you must URL encode the string before sending the request to ensure it is successfully sent to our servers otherwise you may encounter an `422 Unprocessable Entity` response. For example, [cURL](https://ec.haxx.se/http-post.html) will do this for you by using the `--data-urlencode` option.
      email|string||The users email address. If supplied, and the respective user does not have an email registered for their account we will send a confirmation email to confirm they have ownership of the specified email. This functionality is also available at a later time via the [Link an Email](#link-an-email) endpoint.<br><br>__NOTE__: If the user already has an email on record with us, this parameter will be ignored. This parameter should also be urlencoded before the request is sent.
      date_expires|integer||Unix timestamp of date in which the returned token will expire. Value cannot be higher than the default value which is a common year (unix timestamp + 31536000 seconds). Using a token after it's expiry time has elapsed will result in a `401 Unauthorized` response.
-     terms_agreed|boolean||This MUST be set to `false` unless you have collected the [users agreement](#terms) prior to calling this endpoint in which case it can be set to `true` and will be recorded.<br><br>__NOTE:__ If this is set to `false` and the user has not agreed to the latest mod.io Terms of Use and Privacy Policy, an error `403 Forbidden (error_ref 11051)` will be returned and you will need to collect the [users agreement](#terms) and retry with this value set to `true` to authenticate the user.
+     terms_agreed|boolean||This MUST be set to `false` unless you have collected the [users agreement](#terms) prior to calling this endpoint in which case it can be set to `true` and will be recorded.<br><br>__NOTE:__ If this is set to `false` and the user has not agreed to the latest mod.io Terms of Use and Privacy Policy, an error `403 Forbidden (error_ref 11074)` will be returned and you will need to collect the [users agreement](#terms) and retry with this value set to `true` to authenticate the user.
 
 > Example response
 
@@ -1459,7 +1459,7 @@ Status|Meaning|Error Ref|Description|Response Schema
 403|[Forbidden](https://tools.ietf.org/html/rfc7231#section-6.5.3)|11017|The api_key supplied in the request is for test environment purposes only and cannot be used for this functionality.|[Error Object](#schemaerror_object)
 403|[Forbidden](https://tools.ietf.org/html/rfc7231#section-6.5.3)|11028|The user is not permitted to interact with UGC. This can be modified in the user's Xbox Live profile.|[Error Object](#schemaerror_object)
 403|[Forbidden](https://tools.ietf.org/html/rfc7231#section-6.5.3)|11030|Xbox Live users with 'Child' accounts are not permitted to use mod.io.|[Error Object](#schemaerror_object)
-403|[Forbidden](https://tools.ietf.org/html/rfc7231#section-6.5.3)|11051|The user has not agreed to the mod.io Terms of Use. Please see terms_agreed parameter description and the [Terms](#terms) endpoint for more information.|[Error Object](#schemaerror_object)
+403|[Forbidden](https://tools.ietf.org/html/rfc7231#section-6.5.3)|11074|The user has not agreed to the mod.io Terms of Use. Please see terms_agreed parameter description and the [Terms](#terms) endpoint for more information.|[Error Object](#schemaerror_object)
 <aside class="auth-notice">
 To perform this request, you must be authenticated via one of the following methods:
 <a href="#authentication">api_key</a>
@@ -1566,7 +1566,7 @@ Request an access token on behalf of a Nintendo Switch user. A Successful reques
      id_token|string|true|The NSA ID supplied by the Nintendo Switch SDK.
      email|string||The users email address. If supplied, and the respective user does not have an email registered for their account we will send a confirmation email to confirm they have ownership of the specified email.<br><br>__WARNING__: We __strongly recommend__ that you prompt your users in a friendly manner at least once to provide their email address to link their Nintendo Service account to mod.io. Failing to provide an email will in-effect generate an orphan account that will only be able to be accessed from the users' Switch device.
      date_expires|integer||Unix timestamp of date in which the returned token will expire. Value cannot be higher than the default value which is a common year (unix timestamp + 31536000 seconds). Using a token after it's expiry time has elapsed will result in a `401 Unauthorized` response.
-     terms_agreed|boolean||This MUST be set to `false` unless you have collected the [users agreement](#terms) prior to calling this endpoint in which case it can be set to `true` and will be recorded.<br><br>__NOTE:__ If this is set to `false` and the user has not agreed to the latest mod.io Terms of Use and Privacy Policy, an error `403 Forbidden (error_ref 11051)` will be returned and you will need to collect the [users agreement](#terms) and retry with this value set to `true` to authenticate the user.
+     terms_agreed|boolean||This MUST be set to `false` unless you have collected the [users agreement](#terms) prior to calling this endpoint in which case it can be set to `true` and will be recorded.<br><br>__NOTE:__ If this is set to `false` and the user has not agreed to the latest mod.io Terms of Use and Privacy Policy, an error `403 Forbidden (error_ref 11074)` will be returned and you will need to collect the [users agreement](#terms) and retry with this value set to `true` to authenticate the user.
 
 > Example response
 
@@ -1589,7 +1589,7 @@ Status|Meaning|Error Ref|Description|Response Schema
 401|[Unauthorized](https://tools.ietf.org/html/rfc7235#section-3.1)|11037|The NSA ID token has expired. You should request another token from the Switch SDK and ensure it is delivered to mod.io before it expires.|[Error Object](#schemaerror_object)
 403|[Forbidden](https://tools.ietf.org/html/rfc7231#section-6.5.3)|11040|The application ID for the Nintendo Switch title has not been configured, this can be setup in the 'Options' tab within your game profile.|[Error Object](#schemaerror_object)
 403|[Forbidden](https://tools.ietf.org/html/rfc7231#section-6.5.3)|11041|The application ID of the originating Switch title is not permitted to authenticate users. Please check the Switch application id submitted on your games' 'Options' tab and ensure it is the same application id of the Switch title making the authentication request.|[Error Object](#schemaerror_object)
-403|[Forbidden](https://tools.ietf.org/html/rfc7231#section-6.5.3)|11051|The user has not agreed to the mod.io Terms of Use. Please see terms_agreed parameter description and the [Terms](#terms) endpoint for more information.|[Error Object](#schemaerror_object)
+403|[Forbidden](https://tools.ietf.org/html/rfc7231#section-6.5.3)|11074|The user has not agreed to the mod.io Terms of Use. Please see terms_agreed parameter description and the [Terms](#terms) endpoint for more information.|[Error Object](#schemaerror_object)
 <aside class="auth-notice">
 To perform this request, you must be authenticated via one of the following methods:
 <a href="#authentication">api_key</a>
@@ -1695,7 +1695,7 @@ Request an access token on behalf of a Google user. A Successful request will re
      ---|---|---|---|
      id_token|string|true|The `id_token` value [returned from Google](https://developers.google.com/identity/sign-in/web/backend-auth#calling-the-tokeninfo-endpoint) after you have authenticated a user via the Google OAuth2 flow.
      date_expires|integer||Unix timestamp of date in which the returned token will expire. Value cannot be higher than the default value which is a week (unix timestamp + 604800 seconds). Using a token after it's expiry time has elapsed will result in a `401 Unauthorized` response.
-     terms_agreed|boolean||This MUST be set to `false` unless you have collected the [users agreement](#terms) prior to calling this endpoint in which case it can be set to `true` and will be recorded.<br><br>__NOTE:__ If this is set to `false` and the user has not agreed to the latest mod.io Terms of Use and Privacy Policy, an error `403 Forbidden (error_ref 11051)` will be returned and you will need to collect the [users agreement](#terms) and retry with this value set to `true` to authenticate the user.
+     terms_agreed|boolean||This MUST be set to `false` unless you have collected the [users agreement](#terms) prior to calling this endpoint in which case it can be set to `true` and will be recorded.<br><br>__NOTE:__ If this is set to `false` and the user has not agreed to the latest mod.io Terms of Use and Privacy Policy, an error `403 Forbidden (error_ref 11074)` will be returned and you will need to collect the [users agreement](#terms) and retry with this value set to `true` to authenticate the user.
 
 > Example response
 
@@ -1716,7 +1716,7 @@ Status|Meaning|Error Ref|Description|Response Schema
 401|[Unauthorized](https://tools.ietf.org/html/rfc7235#section-3.1)|11056|mod.io was unable to validate the credentials with Google's servers.|[Error Object](#schemaerror_object)
 401|[Unauthorized](https://tools.ietf.org/html/rfc7235#section-3.1)|11053|The Google access token is not valid yet.|[Error Object](#schemaerror_object)
 401|[Unauthorized](https://tools.ietf.org/html/rfc7235#section-3.1)|11054|The Google access token has expired. You should request another token from the Google SDK and ensure it is delivered to mod.io before it expires.|[Error Object](#schemaerror_object)
-403|[Forbidden](https://tools.ietf.org/html/rfc7231#section-6.5.3)|11051|The user has not agreed to the mod.io Terms of Use. Please see terms_agreed parameter description and the [Terms](#terms) endpoint for more information.|[Error Object](#schemaerror_object)
+403|[Forbidden](https://tools.ietf.org/html/rfc7231#section-6.5.3)|11074|The user has not agreed to the mod.io Terms of Use. Please see terms_agreed parameter description and the [Terms](#terms) endpoint for more information.|[Error Object](#schemaerror_object)
 <aside class="auth-notice">
 To perform this request, you must be authenticated via one of the following methods:
 <a href="#authentication">api_key</a>
@@ -1823,7 +1823,7 @@ Request an access token on behalf of a Discord user. A Successful request will r
      discord_token|string|true|The access token of the user provided by Discord.
      email|string||The users email address. If supplied, and the respective user does not have an email registered for their account we will send a confirmation email to confirm they have ownership of the specified email.<br><br>__NOTE__: If the user already has an email on record with us, this parameter will be ignored. This parameter should also be urlencoded before the request is sent.
      date_expires|integer||Unix timestamp of date in which the returned token will expire. Value cannot be higher than the default value which is a week (unix timestamp + 604800 seconds). Using a token after it's expiry time has elapsed will result in a `401 Unauthorized` response.
-     terms_agreed|boolean||This MUST be set to `false` unless you have collected the [users agreement](#terms) prior to calling this endpoint in which case it can be set to `true` and will be recorded.<br><br>__NOTE:__ If this is set to `false` and the user has not agreed to the latest mod.io Terms of Use and Privacy Policy, an error `403 Forbidden (error_ref 11051)` will be returned and you will need to collect the [users agreement](#terms) and retry with this value set to `true` to authenticate the user.
+     terms_agreed|boolean||This MUST be set to `false` unless you have collected the [users agreement](#terms) prior to calling this endpoint in which case it can be set to `true` and will be recorded.<br><br>__NOTE:__ If this is set to `false` and the user has not agreed to the latest mod.io Terms of Use and Privacy Policy, an error `403 Forbidden (error_ref 11074)` will be returned and you will need to collect the [users agreement](#terms) and retry with this value set to `true` to authenticate the user.
 
 > Example response
 
@@ -1845,7 +1845,7 @@ Status|Meaning|Error Ref|Description|Response Schema
 401|[Unauthorized](https://tools.ietf.org/html/rfc7235#section-3.1)|11043|mod.io was unable to get account data from the Discord servers.|[Error Object](#schemaerror_object)
 403|[Forbidden](https://tools.ietf.org/html/rfc7231#section-6.5.3)|11016|The api_key supplied in the request must be associated with a game.|[Error Object](#schemaerror_object)
 403|[Forbidden](https://tools.ietf.org/html/rfc7231#section-6.5.3)|11017|The api_key supplied in the request is for test environment purposes only and cannot be used for this functionality.|[Error Object](#schemaerror_object)
-403|[Forbidden](https://tools.ietf.org/html/rfc7231#section-6.5.3)|11051|The user has not agreed to the mod.io Terms of Use. Please see terms_agreed parameter description and the [Terms](#terms) endpoint for more information.|[Error Object](#schemaerror_object)
+403|[Forbidden](https://tools.ietf.org/html/rfc7231#section-6.5.3)|11074|The user has not agreed to the mod.io Terms of Use. Please see terms_agreed parameter description and the [Terms](#terms) endpoint for more information.|[Error Object](#schemaerror_object)
 <aside class="auth-notice">
 To perform this request, you must be authenticated via one of the following methods:
 <a href="#authentication">api_key</a>
@@ -1938,7 +1938,7 @@ System.out.println(response.toString());
 
 `GET /authenticate/terms`
 
-The purpose of this endpoint is to provide the text, links and buttons you can use to get a users agreement and consent prior to authenticating them in-game (your dialog should look [similar to this](https://mod.io/termsdialog/widget)). A successful response will return a [Terms Object](#terms-object).<br><br>__IMPORTANT:__ When using a 3rd party authentication flow such as Steam or Xbox Live, it is a requirement that the user has agreed to the latest mod.io [Terms of Use](https://mod.io/terms/widget) and [Privacy Policy](https://mod.io/privacy/widget). You only need to collect the users agreement once, and also each time these policies are updated.<br><br>To make this easy to manage, all of the 3rd party authentication flows have a `terms_agreed` field which should be set to `false` by default. If the user has agreed to the latest policies, their authentication will proceed as normal, however if their agreement is required and `terms_agreed` is set to `false` an error `403 Forbidden (error_ref 11051)` will be returned. When you receive this error, you must collect the users agreement before resubmitting the authentication flow with `terms_agreed` set to `true`, which will be recorded.<br><br>__NOTE:__  You can use your own text and process (make sure the Terms of Use and Privacy Policy are correctly linked), but be aware that you are responsible for ensuring that the users agreement is properly collected and reported to us. Failure to do this correctly is a breach of the mod.io Developer Terms. If your game does not authenticate users or only uses the email authentication flow, you do not need to implement this dialog, but you should link to the mod.io Terms of Use and Privacy Policy in your Privacy Policy/EULA.
+The purpose of this endpoint is to provide the text, links and buttons you can use to get a users agreement and consent prior to authenticating them in-game (your dialog should look [similar to this](https://mod.io/termsdialog/widget)). A successful response will return a [Terms Object](#terms-object).<br><br>__IMPORTANT:__ When using a 3rd party authentication flow such as Steam or Xbox Live, it is a requirement that the user has agreed to the latest mod.io [Terms of Use](https://mod.io/terms/widget) and [Privacy Policy](https://mod.io/privacy/widget). You only need to collect the users agreement once, and also each time these policies are updated.<br><br>To make this easy to manage, all of the 3rd party authentication flows have a `terms_agreed` field which should be set to `false` by default. If the user has agreed to the latest policies, their authentication will proceed as normal, however if their agreement is required and `terms_agreed` is set to `false` an error `403 Forbidden (error_ref 11074)` will be returned. When you receive this error, you must collect the users agreement before resubmitting the authentication flow with `terms_agreed` set to `true`, which will be recorded.<br><br>__NOTE:__  You can use your own text and process (make sure the Terms of Use and Privacy Policy are correctly linked), but be aware that you are responsible for ensuring that the users agreement is properly collected and reported to us. Failure to do this correctly is a breach of the mod.io Developer Terms. If your game does not authenticate users or only uses the email authentication flow, you do not need to implement this dialog, but you should link to the mod.io Terms of Use and Privacy Policy in your Privacy Policy/EULA.
 
 > Example response
 
@@ -2609,7 +2609,8 @@ Get all mods for the corresponding game. Successful request will return an array
           {
             "filename": "modio-color-dark.png",
             "original": "https://static.mod.io/v1/images/branding/modio-color-dark.png",
-            "thumb_320x180": "https://static.mod.io/v1/images/branding/modio-color-dark.png"
+            "thumb_320x180": "https://static.mod.io/v1/images/branding/modio-color-dark.png",
+            "thumb_1280x720": "https://static.mod.io/v1/images/branding/modio-color-dark.png"
           }
         ]
       },
@@ -2846,7 +2847,8 @@ Get a mod. Successful request will return a single [Mod Object](#mod-object).
       {
         "filename": "modio-color-dark.png",
         "original": "https://static.mod.io/v1/images/branding/modio-color-dark.png",
-        "thumb_320x180": "https://static.mod.io/v1/images/branding/modio-color-dark.png"
+        "thumb_320x180": "https://static.mod.io/v1/images/branding/modio-color-dark.png",
+        "thumb_1280x720": "https://static.mod.io/v1/images/branding/modio-color-dark.png"
       }
     ]
   },
@@ -2877,6 +2879,12 @@ Get a mod. Successful request will return a single [Mod Object](#mod-object).
       }
     ]
   },
+  "platforms_stats": [
+    {
+      "live_count": 0,
+      "pending_count": 0
+    }
+  ],
   "platforms": [
     {
       "platform": "windows",
@@ -3104,7 +3112,8 @@ Add a mod. Successful request will return the newly created [Mod Object](#mod-ob
       {
         "filename": "modio-color-dark.png",
         "original": "https://static.mod.io/v1/images/branding/modio-color-dark.png",
-        "thumb_320x180": "https://static.mod.io/v1/images/branding/modio-color-dark.png"
+        "thumb_320x180": "https://static.mod.io/v1/images/branding/modio-color-dark.png",
+        "thumb_1280x720": "https://static.mod.io/v1/images/branding/modio-color-dark.png"
       }
     ]
   },
@@ -3358,7 +3367,8 @@ Edit details for a mod. If you want to update the `logo` or media associated wit
       {
         "filename": "modio-color-dark.png",
         "original": "https://static.mod.io/v1/images/branding/modio-color-dark.png",
-        "thumb_320x180": "https://static.mod.io/v1/images/branding/modio-color-dark.png"
+        "thumb_320x180": "https://static.mod.io/v1/images/branding/modio-color-dark.png",
+        "thumb_1280x720": "https://static.mod.io/v1/images/branding/modio-color-dark.png"
       }
     ]
   },
@@ -4603,7 +4613,8 @@ Subscribe the _authenticated user_ to a corresponding mod. No body parameters ar
       {
         "filename": "modio-color-dark.png",
         "original": "https://static.mod.io/v1/images/branding/modio-color-dark.png",
-        "thumb_320x180": "https://static.mod.io/v1/images/branding/modio-color-dark.png"
+        "thumb_320x180": "https://static.mod.io/v1/images/branding/modio-color-dark.png",
+        "thumb_1280x720": "https://static.mod.io/v1/images/branding/modio-color-dark.png"
       }
     ]
   },
@@ -9323,7 +9334,8 @@ Get all mod's the _authenticated user_ is subscribed to. Successful request will
           {
             "filename": "modio-color-dark.png",
             "original": "https://static.mod.io/v1/images/branding/modio-color-dark.png",
-            "thumb_320x180": "https://static.mod.io/v1/images/branding/modio-color-dark.png"
+            "thumb_320x180": "https://static.mod.io/v1/images/branding/modio-color-dark.png",
+            "thumb_1280x720": "https://static.mod.io/v1/images/branding/modio-color-dark.png"
           }
         ]
       },
@@ -9963,7 +9975,8 @@ Get all mods the _authenticated user_ added or is a team member of. Successful r
           {
             "filename": "modio-color-dark.png",
             "original": "https://static.mod.io/v1/images/branding/modio-color-dark.png",
-            "thumb_320x180": "https://static.mod.io/v1/images/branding/modio-color-dark.png"
+            "thumb_320x180": "https://static.mod.io/v1/images/branding/modio-color-dark.png",
+            "thumb_1280x720": "https://static.mod.io/v1/images/branding/modio-color-dark.png"
           }
         ]
       },
@@ -10343,6 +10356,143 @@ Status|Meaning|Error Ref|Description|Response Schema
 To perform this request, you must be authenticated via one of the following methods:
 <a href="#authentication">OAuth 2</a> (Scopes: read)
 </aside>
+## Get Users Muted
+
+> Example request
+
+```shell
+# You can also use wget
+curl -X GET https://api.mod.io/v1/me/users/muted \
+  -H 'Authorization: Bearer {access-token}' \ 
+  -H 'Accept: application/json'
+
+```
+
+```http
+GET https://api.mod.io/v1/me/users/muted HTTP/1.1
+Host: api.mod.io
+
+Accept: application/json
+Authorization: Bearer {access-token}
+
+```
+
+```javascript
+var headers = {
+  'Authorization':'Bearer {access-token}',
+  'Accept':'application/json'
+
+};
+
+$.ajax({
+  url: 'https://api.mod.io/v1/me/users/muted',
+  method: 'get',
+
+  headers: headers,
+  success: function(data) {
+    console.log(JSON.stringify(data));
+  }
+})
+```
+
+```javascript--nodejs
+const request = require('node-fetch');
+
+const headers = {
+  'Authorization':'Bearer {access-token}',
+  'Accept':'application/json'
+
+};
+
+fetch('https://api.mod.io/v1/me/users/muted',
+{
+  method: 'GET',
+
+  headers: headers
+})
+.then(function(res) {
+    return res.json();
+}).then(function(body) {
+    console.log(body);
+});
+```
+
+```python
+import requests
+headers = {
+  'Authorization': 'Bearer {access-token}',
+  'Accept': 'application/json'
+}
+
+r = requests.get('https://api.mod.io/v1/me/users/muted', params={
+
+}, headers = headers)
+
+print r.json()
+```
+
+```java
+URL obj = new URL("https://api.mod.io/v1/me/users/muted");
+HttpURLConnection con = (HttpURLConnection) obj.openConnection();
+con.setRequestMethod("GET");
+int responseCode = con.getResponseCode();
+BufferedReader in = new BufferedReader(
+    new InputStreamReader(con.getInputStream()));
+String inputLine;
+StringBuffer response = new StringBuffer();
+while ((inputLine = in.readLine()) != null) {
+    response.append(inputLine);
+}
+in.close();
+System.out.println(response.toString());
+```
+
+`GET /me/users/muted`
+
+Get all users muted by the _authenticated user_. Successful request will return an array of [User Objects](#user-object).
+
+> Example response
+
+```json
+{
+  "data": [
+    {
+      "id": 1,
+      "name_id": "xant",
+      "username": "XanT",
+      "display_name_portal": null,
+      "date_online": 1509922961,
+      "date_joined": 1509922961,
+      "avatar": {
+        "filename": "modio-color-dark.png",
+        "original": "https://static.mod.io/v1/images/branding/modio-color-dark.png",
+        "thumb_50x50": "https://static.mod.io/v1/images/branding/modio-color-dark.png",
+        "thumb_100x100": "https://static.mod.io/v1/images/branding/modio-color-dark.png"
+      },
+      "timezone": "",
+      "language": "",
+      "profile_url": "https://mod.io/members/xant"
+    },
+    {
+        ...
+    }
+  ],
+  "result_count": 1,
+  "result_offset": 0,
+  "result_limit": 100,
+  "result_total": 1
+}
+
+```
+<h3 id="Get-Users-Muted-responses">Responses</h3>
+
+Status|Meaning|Error Ref|Description|Response Schema
+---|---|----|---|---|
+200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)||Request Successful|[Get Muted Users](#schemaget_muted_users)
+<aside class="auth-notice">
+To perform this request, you must be authenticated via one of the following methods:
+<a href="#authentication">OAuth 2</a> (Scopes: read)
+</aside>
 # Response Schemas
 ## 204
 
@@ -10467,7 +10617,8 @@ thumb_100x100|string|URL to the medium avatar thumbnail.
           {
             "filename": "modio-color-dark.png",
             "original": "https://static.mod.io/v1/images/branding/modio-color-dark.png",
-            "thumb_320x180": "https://static.mod.io/v1/images/branding/modio-color-dark.png"
+            "thumb_320x180": "https://static.mod.io/v1/images/branding/modio-color-dark.png",
+            "thumb_1280x720": "https://static.mod.io/v1/images/branding/modio-color-dark.png"
           }
         ]
       },
@@ -10613,7 +10764,8 @@ data|[Mod Object](#schemamod_object)[]|Contains Mod Objects.
             {
               "filename": "modio-color-dark.png",
               "original": "https://static.mod.io/v1/images/branding/modio-color-dark.png",
-              "thumb_320x180": "https://static.mod.io/v1/images/branding/modio-color-dark.png"
+              "thumb_320x180": "https://static.mod.io/v1/images/branding/modio-color-dark.png",
+              "thumb_1280x720": "https://static.mod.io/v1/images/branding/modio-color-dark.png"
             }
           ]
         },
@@ -11586,7 +11738,8 @@ result_total|integer|Total number of results found.
           {
             "filename": "modio-color-dark.png",
             "original": "https://static.mod.io/v1/images/branding/modio-color-dark.png",
-            "thumb_320x180": "https://static.mod.io/v1/images/branding/modio-color-dark.png"
+            "thumb_320x180": "https://static.mod.io/v1/images/branding/modio-color-dark.png",
+            "thumb_1280x720": "https://static.mod.io/v1/images/branding/modio-color-dark.png"
           }
         ]
       },
@@ -11667,6 +11820,53 @@ result_total|integer|Total number of results found.
 Name|Type|Description
 ---|---|---|---|
 data|[Mod Object](#schemamod_object)[]|Array containing mod objects.
+result_count|integer|Number of results returned in this request.
+result_offset|integer|Number of results skipped over. Defaults to 0 unless overridden by `_offset` filter.
+result_limit|integer|Maximum number of results returned in the request. Defaults to 100 (max) unless overridden by `_limit` filter.
+result_total|integer|Total number of results found.
+
+
+
+## Get Muted Users  
+
+<a name="schemaget_muted_users"></a>
+
+```json
+{
+  "data": [
+    {
+      "id": 1,
+      "name_id": "xant",
+      "username": "XanT",
+      "display_name_portal": null,
+      "date_online": 1509922961,
+      "date_joined": 1509922961,
+      "avatar": {
+        "filename": "modio-color-dark.png",
+        "original": "https://static.mod.io/v1/images/branding/modio-color-dark.png",
+        "thumb_50x50": "https://static.mod.io/v1/images/branding/modio-color-dark.png",
+        "thumb_100x100": "https://static.mod.io/v1/images/branding/modio-color-dark.png"
+      },
+      "timezone": "",
+      "language": "",
+      "profile_url": "https://mod.io/members/xant"
+    },
+    {
+        ...
+    }
+  ],
+  "result_count": 1,
+  "result_offset": 0,
+  "result_limit": 100,
+  "result_total": 1
+} 
+```
+
+### Properties
+
+Name|Type|Description
+---|---|---|---|
+data|[User Object](#schemauser_object)[]|Array containing user objects.
 result_count|integer|Number of results returned in this request.
 result_offset|integer|Number of results skipped over. Defaults to 0 unless overridden by `_offset` filter.
 result_limit|integer|Maximum number of results returned in the request. Defaults to 100 (max) unless overridden by `_limit` filter.
@@ -11856,7 +12056,8 @@ thumb_256x256|string|URL to the large icon thumbnail.
 {
   "filename": "modio-color-dark.png",
   "original": "https://static.mod.io/v1/images/branding/modio-color-dark.png",
-  "thumb_320x180": "https://static.mod.io/v1/images/branding/modio-color-dark.png"
+  "thumb_320x180": "https://static.mod.io/v1/images/branding/modio-color-dark.png",
+  "thumb_1280x720": "https://static.mod.io/v1/images/branding/modio-color-dark.png"
 } 
 ```
 
@@ -11867,6 +12068,7 @@ Name|Type|Description
 filename|string|Image filename including extension.
 original|string|URL to the full-sized image.
 thumb_320x180|string|URL to the image thumbnail.
+thumb_1280x720|string|URL to the image thumbnail.
 
 
 
@@ -12020,7 +12222,8 @@ event_type|string|Type of event that was triggered. List of possible events: <br
     {
       "filename": "modio-color-dark.png",
       "original": "https://static.mod.io/v1/images/branding/modio-color-dark.png",
-      "thumb_320x180": "https://static.mod.io/v1/images/branding/modio-color-dark.png"
+      "thumb_320x180": "https://static.mod.io/v1/images/branding/modio-color-dark.png",
+      "thumb_1280x720": "https://static.mod.io/v1/images/branding/modio-color-dark.png"
     }
   ]
 } 
@@ -12095,7 +12298,8 @@ images|[Image Object](#schemaimage_object)[]|Array of image objects (a gallery).
       {
         "filename": "modio-color-dark.png",
         "original": "https://static.mod.io/v1/images/branding/modio-color-dark.png",
-        "thumb_320x180": "https://static.mod.io/v1/images/branding/modio-color-dark.png"
+        "thumb_320x180": "https://static.mod.io/v1/images/branding/modio-color-dark.png",
+        "thumb_1280x720": "https://static.mod.io/v1/images/branding/modio-color-dark.png"
       }
     ]
   },
@@ -12212,6 +12416,26 @@ Name|Type|Description
 ---|---|---|---|
 platform|string|A [target platform](#targeting-a-platform).
 modfile_live|integer|The unique id of the modfile that is currently live on the platform specified in the `platform` field.
+
+
+
+## Mod Platforms Stats Object 
+
+<a name="schemamod_platforms_stats_object"></a>
+
+```json
+{
+  "live_count": 0,
+  "pending_count": 0
+} 
+```
+
+### Properties
+
+Name|Type|Description
+---|---|---|---|
+live_count|integer|How many platforms are live for this mod.
+pending_count|integer|How many platforms are pending for this mod.
 
 
 
