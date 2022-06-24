@@ -18,7 +18,7 @@ Compatible with all builds of your game on all platforms and stores, --parse_sit
 
 ## Implementation
 
-You have 3 options to get connected to the --parse_sitename API which you can use interchangeably depending on your needs. Here's the breakdown of each option.
+Once you have added your game to --parse_sitename and got your game ID and API key, you can start integrating the --parse_sitename REST API into your game, tools and sites. There are 3 options to get connected which you can use interchangeably depending on your needs. Here's the breakdown of each option.
 
 Option | Usage | Suited for | Docs
 ---------- | ---------- | ---------- | ---------
@@ -28,8 +28,8 @@ __Tools/Plugins__ | Use tools, plugins and wrappers created by the community to 
 
 Official tools, plugins and wrappers made or supported by the --parse_sitename team | - | - | -
 --- | --- | --- | ---
-![Unity Plugin](images/tool-unity.png) | __Unity Plugin__<br />[SDK](https://github.com/modio/modio-unity)<br />[Getting Started](https://github.com/modio/modio-unity/wiki)<br /> | ![Unreal Plugin](images/tool-unreal.png) | __Unreal Plugin__<br />[SDK](https://github.com/modio/modio-ue4)<br />[Getting Started](https://github.com/modio/modio-ue4/wiki)<br />[Example](https://github.com/modio/modio-ue4-example)<br />
-![C/C++ SDK](images/tool-ccpp.png) | __C/C++ SDK__<br />[SDK](https://github.com/modio/modio-sdk)<br />[Getting Started](https://github.com/modio/modio-sdk/wiki)<br /> | ![Discord Bot](images/tool-discordbot.png) | __Discord Bot__<br />[Instructions](https://github.com/modio/modio-discord-bot)<br />[Invite](--parse_discordboturl)<br />
+![Unity Plugin](images/tool-unity.png) | __Unity Plugin__<br />[SDK](https://github.com/modio/modio-unity)<br />[Getting Started](https://github.com/modio/modio-unity/wiki)<br /> | ![Unreal Plugin](images/tool-unreal.png) | __Unreal Plugin__<br />[SDK](https://github.com/modio/modio-ue4)<br />[Getting Started](https://github.com/modio/modio-ue4/wiki)<br />
+![C/C++ SDK](images/tool-ccpp.png) | __C/C++ SDK__<br />[SDK](https://github.com/modio/modio-sdk)<br />[Getting Started](https://github.com/modio/modio-sdk/wiki)<br />[Tutorials](https://github.com/modio/modio-sdk/tree/master/examples/code-samples)<br />  | ![Discord Bot](images/tool-discordbot.png) | __Discord Bot__<br />[Instructions](https://github.com/modio/modio-discord-bot)<br />[Invite](--parse_discordboturl)<br />
 
 Tools, plugins and wrappers made by our awesome community. Is there a tool out there that should be added to the list? [Get in touch!](mailto:--parse_email?subject=Publish Tool) | - | - | -
 --- | --- | --- | ---
@@ -311,6 +311,9 @@ curl -X GET --parse_apiurl/games?api_key=malformed_key
 
 Error Reference Code | Meaning
 ---------- | -------
+`--parse_errorref_UNEXPECTED_SERVICE_OUTAGE` | --parse_sitename is currently experiencing an outage. (rare)
+`--parse_errorref_CORS_GENERIC` | Cross-origin request forbidden.
+`--parse_errorref_UNEXPECTED_OPERATION_FAILURE` | --parse_sitename failed to complete the request, please try again. (rare)
 `--parse_errorref_API_VERSION_INVALID` | API version supplied is invalid.
 `--parse_errorref_API_KEY_MISSING` | api_key is missing from your request.
 `--parse_errorref_API_KEY_MALFORMED` | api_key supplied is malformed.
@@ -318,27 +321,24 @@ Error Reference Code | Meaning
 `--parse_errorref_TOKEN_MISSING_SCOPE_WRITE` | Access token is missing the write scope to perform the request.
 `--parse_errorref_TOKEN_MISSING_SCOPE_READ` | Access token is missing the read scope to perform the request.
 `--parse_errorref_TOKEN_EXPIRED_OR_REVOKED` | Access token is expired, or has been revoked.
-`--parse_errorref_MISSING_CONTENT_TYPE` | The Content-Type header is missing from your request.
-`--parse_errorref_INCORRECT_CONTENT_TYPE` | The Content-Type header is not supported for this endpoint.
 `--parse_errorref_USER_DELETED` | Authenticated user account has been deleted.
 `--parse_errorref_USER_BANNED` | Authenticated user account has been banned by --parse_sitename admins.
-`--parse_errorref_GAME_NOT_FOUND` | The requested game could not be found.
-`--parse_errorref_GAME_DELETED` | The requested game has been deleted.
-`--parse_errorref_MOD_NOT_FOUND` | The requested mod could not be found.
-`--parse_errorref_MOD_DELETED` | The requested mod has been deleted.
-`--parse_errorref_MODFILE_NOT_FOUND` | The requested modfile could not be found.
-`--parse_errorref_COMMENT_NOT_FOUND` | The requested comment could not be found.
-`--parse_errorref_USER_NOT_FOUND` | The requested user could not be found.
-`--parse_errorref_RESOURCE_NOT_FOUND` | The requested resource does not exist.
 `--parse_errorref_RATE_LIMITED` | You have been ratelimited for making too many requests. See [Rate Limiting](#rate-limiting).
-`--parse_errorref_VALIDATION_GENERIC` | The request contains validation errors for the data supplied. See the attached `errors` field within the [Error Object](#error-object) to determine which input failed.
-`--parse_errorref_JSON_RESPONSE_ONLY` | You have requested a response format that is not supported (JSON only).
 `--parse_errorref_FILE_CORRUPTED` | The submitted binary file is corrupted.
 `--parse_errorref_FILE_UNREADABLE` | The submitted binary file is unreadable.
 `--parse_errorref_JSON_MALFORMED` | You have used the `input_json` parameter with semantically incorrect JSON.
-`--parse_errorref_CORS_GENERIC` | Cross-origin request forbidden.
-`--parse_errorref_UNEXPECTED_OPERATION_FAILURE` | --parse_sitename failed to complete the request, please try again. (rare)
-`--parse_errorref_UNEXPECTED_SERVICE_OUTAGE` | --parse_sitename is currently experiencing an outage. (rare)
+`--parse_errorref_MISSING_CONTENT_TYPE` | The Content-Type header is missing from your request.
+`--parse_errorref_INCORRECT_CONTENT_TYPE` | The Content-Type header is not supported for this endpoint.
+`--parse_errorref_JSON_RESPONSE_ONLY` | You have requested a response format that is not supported (JSON only).
+`--parse_errorref_VALIDATION_GENERIC` | The request contains validation errors for the data supplied. See the attached `errors` field within the [Error Object](#error-object) to determine which input failed.
+`--parse_errorref_RESOURCE_NOT_FOUND` | The requested resource does not exist.
+`--parse_errorref_GAME_NOT_FOUND` | The requested game could not be found.
+`--parse_errorref_GAME_DELETED` | The requested game has been deleted.
+`--parse_errorref_MODFILE_NOT_FOUND` | The requested modfile could not be found.
+`--parse_errorref_MOD_NOT_FOUND` | The requested mod could not be found.
+`--parse_errorref_MOD_DELETED` | The requested mod has been deleted.
+`--parse_errorref_COMMENT_NOT_FOUND` | The requested comment could not be found.
+`--parse_errorref_USER_NOT_FOUND` | The requested user could not be found.
 
 ## Response Formats
 ```json
@@ -843,7 +843,7 @@ These are the only supported values and are case-insensitive, anything else will
 
 ## Targeting a Portal
 
-When making API requests you should include the `X-Modio-Portal` header (with one of the values below), to tell --parse_sitename what Portal (i.e. Store or App) the request is originating from. This header is __important__ because it enables --parse_sitename to fine-tune the experience, such as returning display names used by players on that portal (which can be a certification requirement).
+When making API requests you should include the `X-Modio-Portal` header (with one of the values below), to tell --parse_sitename what Portal (eg. Store or App) the request is originating from. This header is __important__ because it enables --parse_sitename to fine-tune the experience, such as returning display names used by players on that portal (which can be a certification requirement).
 
 For example, passing the HTTP header `X-Modio-Portal: EGS` in your API request tells --parse_sitename your player is coming via the Epic Games Store.
 

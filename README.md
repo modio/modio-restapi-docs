@@ -7,7 +7,7 @@
 
 <p align="center">Slate helps you create beautiful, intelligent, responsive API documentation.</p>
 
-<p align="center"><img src="https://raw.githubusercontent.com/slatedocs/img/main/screenshot-slate.png" width=700 alt="Screenshot of Example Documentation created with Slate"></p>
+Documentation for [mod.io](https://mod.io) is powered by [slate](https://github.com/lord/slate), a static API generator and can be [read here](https://docs.mod.io) (also see our [getting started guide](https://blog.mod.io/getting-started-blog-fa404d59e3dd)). We use [swagger.io](https://swagger.io) to define our API from comments in our codebase, and generate the slate markdown files from it using [widdershins](https://github.com/Mermade/widdershins).
 
 <p align="center"><em>The example above was created with Slate. Check it out at <a href="https://slatedocs.github.io/slate">slatedocs.github.io/slate</a>.</em></p>
 
