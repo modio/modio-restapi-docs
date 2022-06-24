@@ -247,7 +247,6 @@ curl -X GET https://api.mod.io/v1/games?api_key=malformed_key
     }
 }
 ```
-
 Error Reference Code | Meaning
 ---------- | -------
 `10000` | mod.io is currently experiencing an outage. (rare)
