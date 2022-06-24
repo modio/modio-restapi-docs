@@ -842,7 +842,7 @@
 
 <p><img src="https://static.mod.io/v1/images/home/sdk.png" alt="mod.io Overview">.</p>
 <h2 id="implementation">Implementation</h2>
-<p>You have 3 options to get connected to the mod.io API which you can use interchangeably depending on your needs. Here's the breakdown of each option.</p>
+<p>Once you have added your game to mod.io and got your game ID and API key, you can start integrating the mod.io REST API into your game, tools and sites. There are 3 options to get connected which you can use interchangeably depending on your needs. Here's the breakdown of each option.</p>
 
 <table>
 <thead>
@@ -878,7 +878,7 @@
 <table>
 <thead>
 <tr>
-<th>Official tools, plugins and wrappers made or supported by the mod.io team</th>
+<th>Official tools, plugins and wrappers made or supported by the --parse_sitename team</th>
 <th>-</th>
 <th>-</th>
 <th>-</th>
@@ -892,17 +892,17 @@
 </td>
 <td><img src="images/tool-unreal-96a56843.png" alt="Unreal Plugin"></td>
 <td>
-<strong>Unreal Plugin</strong><br><a href="https://github.com/modio/modio-ue4">SDK</a><br><a href="https://github.com/modio/modio-ue4/wiki">Getting Started</a><br><a href="https://github.com/modio/modio-ue4-example">Example</a><br>
+<strong>Unreal Plugin</strong><br><a href="https://github.com/modio/modio-ue4">SDK</a><br><a href="https://github.com/modio/modio-ue4/wiki">Getting Started</a><br>
 </td>
 </tr>
 <tr>
 <td><img src="images/tool-ccpp-1f2d5425.png" alt="C/C++ SDK"></td>
 <td>
-<strong>C/C++ SDK</strong><br><a href="https://github.com/modio/modio-sdk">SDK</a><br><a href="https://github.com/modio/modio-sdk/wiki">Getting Started</a><br>
+<strong>C/C++ SDK</strong><br><a href="https://github.com/modio/modio-sdk">SDK</a><br><a href="https://github.com/modio/modio-sdk/wiki">Getting Started</a><br><a href="https://github.com/modio/modio-sdk/tree/master/examples/code-samples">Tutorials</a><br>
 </td>
 <td><img src="images/tool-discordbot-88eae366.png" alt="Discord Bot"></td>
 <td>
-<strong>Discord Bot</strong><br><a href="https://github.com/modio/modio-discord-bot">Instructions</a><br><a href="https://discordbot.mod.io">Invite</a><br>
+<strong>Discord Bot</strong><br><a href="https://github.com/modio/modio-discord-bot">Instructions</a><br><a href="--parse_discordboturl">Invite</a><br>
 </td>
 </tr>
 </tbody>
@@ -1227,6 +1227,18 @@ curl <span class="nt">-X</span> GET https://api.mod.io/v1/games?api_key<span cla
 </thead>
 <tbody>
 <tr>
+<td><code>10000</code></td>
+<td>mod.io is currently experiencing an outage. (rare)</td>
+</tr>
+<tr>
+<td><code>10001</code></td>
+<td>Cross-origin request forbidden.</td>
+</tr>
+<tr>
+<td><code>10002</code></td>
+<td>mod.io failed to complete the request, please try again. (rare)</td>
+</tr>
+<tr>
 <td><code>10003</code></td>
 <td>API version supplied is invalid.</td>
 </tr>
@@ -1255,14 +1267,6 @@ curl <span class="nt">-X</span> GET https://api.mod.io/v1/games?api_key<span cla
 <td>Access token is expired, or has been revoked.</td>
 </tr>
 <tr>
-<td><code>13005</code></td>
-<td>The Content-Type header is missing from your request.</td>
-</tr>
-<tr>
-<td><code>13006</code></td>
-<td>The Content-Type header is not supported for this endpoint.</td>
-</tr>
-<tr>
 <td><code>11006</code></td>
 <td>Authenticated user account has been deleted.</td>
 </tr>
@@ -1271,48 +1275,8 @@ curl <span class="nt">-X</span> GET https://api.mod.io/v1/games?api_key<span cla
 <td>Authenticated user account has been banned by mod.io admins.</td>
 </tr>
 <tr>
-<td><code>14001</code></td>
-<td>The requested game could not be found.</td>
-</tr>
-<tr>
-<td><code>14006</code></td>
-<td>The requested game has been deleted.</td>
-</tr>
-<tr>
-<td><code>15022</code></td>
-<td>The requested mod could not be found.</td>
-</tr>
-<tr>
-<td><code>15023</code></td>
-<td>The requested mod has been deleted.</td>
-</tr>
-<tr>
-<td><code>15010</code></td>
-<td>The requested modfile could not be found.</td>
-</tr>
-<tr>
-<td><code>15026</code></td>
-<td>The requested comment could not be found.</td>
-</tr>
-<tr>
-<td><code>17000</code></td>
-<td>The requested user could not be found.</td>
-</tr>
-<tr>
-<td><code>14000</code></td>
-<td>The requested resource does not exist.</td>
-</tr>
-<tr>
 <td><code>11008</code></td>
 <td>You have been ratelimited for making too many requests. See <a href="#rate-limiting">Rate Limiting</a>.</td>
-</tr>
-<tr>
-<td><code>13009</code></td>
-<td>The request contains validation errors for the data supplied. See the attached <code>errors</code> field within the <a href="#error-object">Error Object</a> to determine which input failed.</td>
-</tr>
-<tr>
-<td><code>13007</code></td>
-<td>You have requested a response format that is not supported (JSON only).</td>
 </tr>
 <tr>
 <td><code>13001</code></td>
@@ -1327,16 +1291,52 @@ curl <span class="nt">-X</span> GET https://api.mod.io/v1/games?api_key<span cla
 <td>You have used the <code>input_json</code> parameter with semantically incorrect JSON.</td>
 </tr>
 <tr>
-<td><code>10001</code></td>
-<td>Cross-origin request forbidden.</td>
+<td><code>13005</code></td>
+<td>The Content-Type header is missing from your request.</td>
 </tr>
 <tr>
-<td><code>10002</code></td>
-<td>mod.io failed to complete the request, please try again. (rare)</td>
+<td><code>13006</code></td>
+<td>The Content-Type header is not supported for this endpoint.</td>
 </tr>
 <tr>
-<td><code>10000</code></td>
-<td>mod.io is currently experiencing an outage. (rare)</td>
+<td><code>13007</code></td>
+<td>You have requested a response format that is not supported (JSON only).</td>
+</tr>
+<tr>
+<td><code>13009</code></td>
+<td>The request contains validation errors for the data supplied. See the attached <code>errors</code> field within the <a href="#error-object">Error Object</a> to determine which input failed.</td>
+</tr>
+<tr>
+<td><code>14000</code></td>
+<td>The requested resource does not exist.</td>
+</tr>
+<tr>
+<td><code>14001</code></td>
+<td>The requested game could not be found.</td>
+</tr>
+<tr>
+<td><code>14006</code></td>
+<td>The requested game has been deleted.</td>
+</tr>
+<tr>
+<td><code>15010</code></td>
+<td>The requested modfile could not be found.</td>
+</tr>
+<tr>
+<td><code>15022</code></td>
+<td>The requested mod could not be found.</td>
+</tr>
+<tr>
+<td><code>15023</code></td>
+<td>The requested mod has been deleted.</td>
+</tr>
+<tr>
+<td><code>15026</code></td>
+<td>The requested comment could not be found.</td>
+</tr>
+<tr>
+<td><code>17000</code></td>
+<td>The requested user could not be found.</td>
 </tr>
 </tbody>
 </table>
@@ -1927,7 +1927,7 @@ non-english content you must supply the <code>Content-Language</code> header in 
 
 <p>These are the only supported values and are case-insensitive, anything else will be ignored and default to <code>Windows</code>. Have we missed a platform you are using? <a href="mailto:developers@mod.io?subject=Platform%20Support">Get in touch!</a> </p>
 <h2 id="targeting-a-portal">Targeting a Portal</h2>
-<p>When making API requests you should include the <code>X-Modio-Portal</code> header (with one of the values below), to tell mod.io what Portal (i.e. Store or App) the request is originating from. This header is <strong>important</strong> because it enables mod.io to fine-tune the experience, such as returning display names used by players on that portal (which can be a certification requirement).</p>
+<p>When making API requests you should include the <code>X-Modio-Portal</code> header (with one of the values below), to tell mod.io what Portal (eg. Store or App) the request is originating from. This header is <strong>important</strong> because it enables mod.io to fine-tune the experience, such as returning display names used by players on that portal (which can be a certification requirement).</p>
 
 <p>For example, passing the HTTP header <code>X-Modio-Portal: EGS</code> in your API request tells mod.io your player is coming via the Epic Games Store.</p>
 
