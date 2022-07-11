@@ -221,7 +221,7 @@ curl -X POST --parse_apiurl/games/1/mods/1/team \
   -H 'Authorization: Bearer your-token-here' \
   -H 'Content-Type: application/x-www-form-urlencoded' \  
   -d 'input_json={
-		"email": "support@mod.io",
+		"email": "--parse_email",
 		"level": 8,
 		"position": "King in the North"
 	  }'
@@ -304,7 +304,7 @@ curl -X GET --parse_apiurl/games?api_key=malformed_key
     "error": {
         "code": 401,
         "error_ref": --parse_errorref_API_KEY_MALFORMED,
-        "message": "We cannot complete your request due to a malformed/missing api_key in your request. Refer to documentation at https://docs.mod.io"
+        "message": "We cannot complete your request due to a malformed/missing api_key in your request. Refer to documentation at --parse_docsurl"
     }
 }
 ```
@@ -793,7 +793,7 @@ You should always plan to minimize requests and cache API responses. It will mak
 
 To help familiarize yourself with the --parse_sitename API and to ensure your implementation is battle-hardened and operating as intended, we have setup a test sandbox which is identical to the production environment. The test sandbox allows you to make requests to the API whilst your integration is a work in progress and the submitted data is not important. When you are ready to go live it's as easy as adding your game to the production environment, substituting the test API URL for the production API URL, and updating the `api_key` and `game_id` you are using to the values from your games profile on production. 
 
-To begin using the test sandbox you will need to [register a test account](--parse_sitetesturl/members/register) and [add your game](--parse_sitetesturl/games/add). You will only see games you are a team member of and there is no connection between the data added to the test environment and production. We highly recommend you use the test environment when integrating as it allows you to keep your development private, and you can submit as much dummy data as you need to try the functionality required, without having to clean it up at the end.
+To begin using the test sandbox you will need to [register a test account](--parse_sitetesturl) and [add your game](--parse_sitetesturl/games/add). You will only see games you are a team member of and there is no connection between the data added to the test environment and production. We highly recommend you use the test environment when integrating as it allows you to keep your development private, and you can submit as much dummy data as you need to try the functionality required, without having to clean it up at the end.
 
 __Test version:__ `--parse_version`
 
