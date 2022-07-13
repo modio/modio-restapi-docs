@@ -41,24 +41,24 @@ under the License.
 	<meta property="og:description" content="Documentation for working with the mod.io API to download and install mods automatically in games.">
 	<meta property="og:site_name" content="mod.io">
 	<meta property="og:type" content="website">
-	<meta property="og:image" content="https://docs.mod.io/images/splash.png">
+	<meta property="og:image" content="/images/splash.png">
 
 	<!-- twitter -->
 	<meta property="twitter:card" content="summary_large_image">
 	<meta property="twitter:site" content="@modiohq">
 	<meta property="twitter:title" content="<%= current_page.data.title || "API Documentation" %>">
 	<meta property="twitter:description" content="Documentation for working with the mod.io API to download and install mods automatically in games.">
-	<meta property="twitter:image" content="https://docs.mod.io/images/splash.png">
+	<meta property="twitter:image" content="/images/splash.png">
 
 	<!-- icons -->
 	<link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon.png">
 	<link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32.png">
 	<link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16.png">
 	<link rel="manifest" href="/images/manifest.json">
-	<link rel="mask-icon" href="/images/safari-pinned-tab.svg" color="#44bfd4">
+	<link rel="mask-icon" href="/images/safari-pinned-tab.svg" color="#07c1d8">
 	<link rel="shortcut icon" href="/images/favicon.ico">
 	<meta name="msapplication-config" content="/images/browserconfig.xml">
-	<meta name="theme-color" content="#44bfd4">
+	<meta name="theme-color" content="#07c1d8">
 
     <style>
       <%= Rouge::Themes::MonokaiSublime.render(:scope => '.highlight') %>
@@ -135,7 +135,7 @@ under the License.
       <div id="toc" class="toc-list-h1">
         <% toc_data(page_content).each do |h1| %>
           <li>
-            <a href="#<%= h1[:id] %>" class="toc-h1 toc-link" data-title="<%= h1[:content] %>"><%= h1[:content].text != "Response Schemas" && h1[:content].text != "API Versions" && h1[:content].text != "Getting Started" && h1[:content].text != "Targeting Platforms" ? "<span class=\"reficon\"><img src=\"https://static.mod.io/v1/images/branding/modio-icon-light.svg\" alt=\"Reference\" class=\"menu-reference-icon\"></span> " + h1[:content].text : "<span class=\"reficon\"><img src=\"https://static.mod.io/v1/images/branding/modio-icon-color.svg\" alt=\"Reference\" class=\"menu-reference-icon\"></span> " + h1[:content].text %></a>
+            <a href="#<%= h1[:id] %>" class="toc-h1 toc-link" data-title="<%= h1[:content] %>"><%= h1[:content].text != "Response Schemas" && h1[:content].text != "API Versions" && h1[:content].text != "Getting Started" && h1[:content].text != "Targeting Platforms" ? "<span class=\"reficon\"><img src=\"images/cog-white.svg\" alt=\"Reference\" class=\"menu-reference-icon\"></span> " + h1[:content].text : "<span class=\"reficon\"><img src=\"images/cog-blue.svg\" alt=\"Reference\" class=\"menu-reference-icon\"></span> " + h1[:content].text %></a>
             <% if h1[:children].length > 0 %>
               <ul class="toc-list-h2">
                 <% h1[:children].each do |h2| %>

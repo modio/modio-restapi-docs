@@ -14,7 +14,7 @@ __Current version:__ --parse_vdropdown
 
 Compatible with all builds of your game on all platforms and stores, --parse_sitename is a clientless and standalone solution which gives you complete control over your modding ecosystem.
 
-![--parse_sitename Overview](--parse_staticurl/images/home/sdk.png).
+![--parse_sitename Overview](images/sdk.png).
 
 ## Implementation
 
@@ -64,7 +64,7 @@ Access Token (OAuth 2) | Header | GET, POST, PUT, DELETE | Read, create, update,
 
 ### Email Authentication Flow
 
-To perform writes, you will need to authenticate your users via OAuth 2. To make this frictionless in-game, we offer an email verification system, similar to what Slack and others pioneered. It works by users supplying their email, which we send a time-limited 5 digit security code too. They exchange this code in-game, for an [OAuth 2 access token](--parse_siteurl/oauth/widget) you can save to authenticate future requests. The benefit of this approach is it avoids complex website redirects, doesn't require your users to complete a slow registration flow, and eliminates the need to store usernames / passwords.
+To perform writes, you will need to authenticate your users via OAuth 2. To make this frictionless in-game, we offer an email verification system, similar to what Slack and others pioneered. It works by users supplying their email, which we send a time-limited 5 digit security code too. They exchange this code in-game, for an [OAuth 2 access token](--parse_siteurl/me/access) you can save to authenticate future requests. The benefit of this approach is it avoids complex website redirects, doesn't require your users to complete a slow registration flow, and eliminates the need to store usernames / passwords.
 
 ```shell
 // Example POST requesting security code be sent to supplied email
@@ -144,7 +144,7 @@ See [Making Requests](#making-requests) section.
 
 ### Web Overlay Authentication
 
-At the moment it is not possible to open the --parse_sitename website in-game with the user pre-authenticated, however you can provide a hint by appending `?portal=PORTAL` to the end of the URL. What this tells --parse_sitename, is that when the user attempts to perform an action that requires authentication, they will be prompted to login with their `PORTAL` account. For example if you want to take a mod creator to their mod edit page in-game on Steam, the URL would look something like: `--parse_gameurl/modname/edit?portal=steam`. You can optionally add `&login=auto` as well to automatically start the login process. [Supported portals](#targeting-a-portal) can be found here.
+At the moment it is not possible to open the --parse_sitename website in-game with the user pre-authenticated, however you can provide a hint by appending `?portal=PORTAL` to the end of the URL. What this tells --parse_sitename, is that when the user attempts to perform an action that requires authentication, they will be prompted to login with their `PORTAL` account. For example if you want to take a mod creator to their mod webpage in-game on Steam, the URL would look something like: `--parse_gameurl/m/modname?portal=steam`. You can optionally add `&login=auto` as well to automatically start the login process. [Supported portals](#targeting-a-portal) can be found here.
 
 ### Scopes (OAuth 2)
 
@@ -361,7 +361,7 @@ Error Reference Code | Meaning
     "changelog": "VERSION 1.3 -- Changes -- Fixed critical castle floor bug.",
     "metadata_blob": "rogue,hd,high-res,4k,hd-textures",
     "download": {
-      "binary_url": "--parse_siteurl/mods/file/1/",
+      "binary_url": "--parse_apiurlnoversion/mods/file/1/",
       "date_expires": 1579316848
     }
 }
@@ -402,7 +402,7 @@ Endpoints that return more than one result, return a __JSON object__ which conta
     		"changelog": "VERSION 1.3 -- Changes -- Fixed critical castle floor bug.",
     		"metadata_blob": "rogue,hd,high-res,4k,hd-textures",
     		"download": {
-    		  "binary_url": "--parse_siteurl/mods/file/1/",
+    		  "binary_url": "--parse_apiurlnoversion/mods/file/1/",
     		  "date_expires": 1579316848
     		}
 		},
@@ -793,7 +793,7 @@ You should always plan to minimize requests and cache API responses. It will mak
 
 To help familiarize yourself with the --parse_sitename API and to ensure your implementation is battle-hardened and operating as intended, we have setup a test sandbox which is identical to the production environment. The test sandbox allows you to make requests to the API whilst your integration is a work in progress and the submitted data is not important. When you are ready to go live it's as easy as adding your game to the production environment, substituting the test API URL for the production API URL, and updating the `api_key` and `game_id` you are using to the values from your games profile on production. 
 
-To begin using the test sandbox you will need to [register a test account](--parse_sitetesturl) and [add your game](--parse_sitetesturl/games/add). You will only see games you are a team member of and there is no connection between the data added to the test environment and production. We highly recommend you use the test environment when integrating as it allows you to keep your development private, and you can submit as much dummy data as you need to try the functionality required, without having to clean it up at the end.
+To begin using the test sandbox you will need to [register a test account](--parse_sitetesturl) and [add your game](--parse_sitetesturl/g/add). You will only see games you are a team member of and there is no connection between the data added to the test environment and production. We highly recommend you use the test environment when integrating as it allows you to keep your development private, and you can submit as much dummy data as you need to try the functionality required, without having to clean it up at the end.
 
 __Test version:__ `--parse_version`
 
