@@ -204,7 +204,7 @@ Response Code | Meaning
 ```json
 "error": {
 	"code": 403,
-	"error_ref": "15024",
+	"error_ref": 15024,
 	"message": "You do not have the required permissions to access this resource."
 }
 ```
@@ -247,6 +247,7 @@ curl -X GET https://api.mod.io/v1/games?api_key=malformed_key
     }
 }
 ```
+
 Error Reference Code | Meaning
 ---------- | -------
 `10000` | mod.io is currently experiencing an outage. (rare)
@@ -2273,7 +2274,8 @@ To perform this request, you must be authenticated via one of the following meth
 <a href="#authentication">api_key</a>
 </aside>
 ## Email Exchange
-__Step 1 of 2__
+
+__Step 1 of 2__
 
 > Example request
 
@@ -2394,8 +2396,10 @@ To perform this request, you must be authenticated via one of the following meth
 <a href="#authentication">api_key</a>
 </aside>
 
-<br>
-__Step 2 of 2__
+
+<br>
+
+__Step 2 of 2__
 
 
 > Example request

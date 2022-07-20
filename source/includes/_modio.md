@@ -185,7 +185,7 @@ Response Code | Meaning
 ```json
 "error": {
 	"code": 403,
-	"error_ref": "--parse_errorref_MOD_NO_VIEW_PERMISSION",
+	"error_ref": --parse_errorref_MOD_NO_VIEW_PERMISSION,
 	"message": "You do not have the required permissions to access this resource."
 }
 ```
