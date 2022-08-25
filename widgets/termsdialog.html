@@ -1,0 +1,112 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<title>Demonstration Dialog - mod.io</title>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<meta name="robots" content="noindex">
+	<link rel="stylesheet" type="text/css" media="all" href="../stylesheets/milligram-adc35535.css">
+	<base target="_parent">
+	<style>
+	html,
+	body {
+		width: 100%;
+		height: 100%;
+	}
+	
+	html {
+		display: table;
+	}
+	
+	body {
+		display: table-cell;
+		vertical-align: middle;
+	}
+
+    p a {
+        font-weight: bold;
+    }
+
+    @media (max-width: 768px){
+        .column-25,
+        .column-50 {
+            flex:1 1 auto !important;
+            margin-left: 0 !important;
+            max-width: 100% !important;
+            width:100% !important;
+        }
+    }
+	</style>
+	<script>
+	if(top.length) {
+		document.addEventListener("click", function(e) {
+		    e = e || window.event;
+		    target = e.target || e.srcElement;
+			
+			if(target.nodeName.toLowerCase() == "body") {
+				top.postMessage({"close": true}, "*");
+				return false;
+			}
+		}, false);
+    }
+	</script>
+</head>
+<body>
+<div class="row">
+    <div class="column">
+        <div style="background:#d6af2e; padding:20px; border-radius:4px; margin:10px;">
+            <p style="font-weight:bold; margin:0;">Demonstration Terms Dialog (links to the Terms of Use and Privacy Policy are required. If text links are hard to support, you can do <a href="#" id="buttontoggle" style="color:inherit; text-decoration:underline;">buttons like this</a>)</p>
+        </div>
+    </div>
+</div>
+<div class="row">
+    <div class="column">
+        <div style="background:#fff; box-shadow:0 0.5em 1em -0.125em rgb(10 10 10 / 10%), 0 0px 0 1px rgb(10 10 10 / 2%); padding:20px; border-radius:4px; margin:10px;">
+            <div class="row">
+                <div class="column">
+                    <p>We use <a target="_blank" href="https://mod.io">mod.io</a> to support user-generated content in-game. By clicking "I Agree" you agree to the mod.io <a target="_blank" href="https://mod.io/terms">Terms of Use</a> and a mod.io account will be created for you (using your display name, avatar and ID). Please see the mod.io <a target="_blank" href="https://mod.io/privacy">Privacy Policy</a> on how mod.io processes your personal data.</p>
+                </div>
+            </div>
+            <div class="row">
+                <div class="column column-25 column-offset-25">
+                    <button class="button" id="buttonagree" style="width:100%;">I Agree</button>
+                </div>
+                <div class="column column-25">
+                    <button class="button button-outline" id="buttonclose" style="width:100%;">No, Thanks</button>
+                </div>
+            </div>
+            <div class="row" id="rowtoggle" style="display:none;">
+                <div class="column column-50 column-offset-25">
+                    <a href="https://mod.io/terms" target="_blank" class="button" style="width:100%;">Terms of Use</a>
+                    <a href="https://mod.io/privacy" target="_blank" class="button" style="width:100%;">Privacy Policy</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<script>
+document.getElementById("buttontoggle").addEventListener("click", function(e) {
+    var x = document.getElementById("rowtoggle");
+    if(x.style.display === "none") {
+        x.style.display = "block";
+    } else {
+        x.style.display = "none";
+    }
+}, false);
+
+if(top.length) {
+    document.getElementById("buttonagree").addEventListener("click", function(e) {
+        top.postMessage({"close": true}, "*");
+        return false;
+    });
+
+    document.getElementById("buttonclose").addEventListener("click", function(e) {
+        top.postMessage({"close": true}, "*");
+        return false;
+    });
+}
+</script>
+</body>
+</html>
