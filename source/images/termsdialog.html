@@ -79,8 +79,8 @@
             </div>
             <div class="row" id="rowtoggle" style="display:none;">
                 <div class="column column-50 column-offset-25">
-                    <a href="https://mod.io/terms" target="_blank" class="button" style="width:100%;">Terms of Use</a>
-                    <a href="https://mod.io/privacy" target="_blank" class="button" style="width:100%;">Privacy Policy</a>
+                    <a href="https://mod.io/terms" target="_blank" class="button" style="width:100%; opacity: 0.5">Terms of Use</a>
+                    <a href="https://mod.io/privacy" target="_blank" class="button" style="width:100%; opacity: 0.5">Privacy Policy</a>
                 </div>
             </div>
         </div>
@@ -94,6 +94,7 @@ document.getElementById("buttontoggle").addEventListener("click", function(e) {
     } else {
         x.style.display = "none";
     }
+    return false;
 }, false);
 
 if(top.length) {
