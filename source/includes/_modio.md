@@ -756,7 +756,7 @@ A brief summary when dealing with localized requests and responses:
 
 --parse_sitename implements rate limiting to stop users abusing the service. Exceeding your rate limit will result in requests receiving a `429 Too Many Requests` response until your reset time is reached. 
 
-It is _highly recommended_ you architect your app to check for the `X-RateLimit` headers below and the `429 Too Many Requests` HTTP response code to ensure you are not making too many requests, or continuing to make requests after a `429` code is repeatedly returned. Users who continue to send requests despite a `429` response could potentially have their credentials revoked. The following limits are implemented by default:
+It is _highly recommended_ you architect your app to check for the `retry-after` header and the `429 Too Many Requests` HTTP response code to ensure you are not making too many requests, or continuing to make requests after a `429` code is repeatedly returned. Users who continue to send requests despite a `429` response could potentially have their credentials revoked. The following limits are implemented by default:
 
 ### API key Rate Limiting
 
@@ -766,20 +766,35 @@ Example HTTP Header Response
 HTTP/1.1 200 OK
 ...
 ...
-X-RateLimit-Limit: 120
-X-RateLimit-Remaining: 87
+retry-after: 57
 ```
 
-- API keys linked to a user have __60 requests per minute__.
 - API keys linked to a game have __unlimited requests__.
+- API keys linked to a user have __60 requests per minute__.
 
 ### OAuth2 Rate Limiting
 
-- Users tokens are limited to __60 requests per minute__. 
+- User token reads are limited to __200 requests per minute__. 
+- User token writes are limited to __60 requests per minute__. 
+
+### IP Rate Limiting
+
+- IP reads are limited to __1000 requests per minute__. 
+- IP writes are limited to __60 requests per minute__. 
+
+### Other Rate Limiting
+
+- Certain endpoints may override the defaults for security, spam or other reasons.
 
 ### Headers
 
---parse_sitename returns the following headers in each request to inform you of your limit & remaining requests until reset.
+If the rate limit is exceeded --parse_sitename return the following header.
+
+ - `retry-after` - Number of seconds before you can attempt to make another request to API.
+
+### Depreciation Notice
+
+On December 1st, 2022 - we intend to depreciate our use of the following custom rate limit headers. If you have written a custom mod.io SDK or library, you should replace any usage of these headers with `retry-after` before then.
 
  - `X-RateLimit-Limit` - Number of requests you can make from the supplied API key/access token per minute.
  - `X-RateLimit-Remaining` - Number of requests remaining until requests are rejected.
