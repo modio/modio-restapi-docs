@@ -2152,7 +2152,7 @@ To perform this request, you must be authenticated via one of the following meth
 curl -X POST https://api.mod.io/v1/oauth/emailrequest?api_key=YourApiKey \
   -H 'Content-Type: application/x-www-form-urlencoded' \ 
   -H 'Accept: application/json' \
-  -d 'email=awesomeplayer289@gmail.com'
+  -d 'email=someperson@someservice.com'
 
 ```
 
@@ -2185,7 +2185,7 @@ $.ajax({
 ```javascript--nodejs
 const request = require('node-fetch');
 const inputBody = '{
-  "email": "awesomeplayer289@gmail.com"
+  "email": "someperson@someservice.com"
 }';
 const headers = {
   'Content-Type':'application/x-www-form-urlencoded',
@@ -2249,7 +2249,7 @@ Request a security code for a user, identified by their e-mail which can then be
 ```json
 {
   "code": 201,
-  "message": "Please enter the 5-digit security code sent to your email address (awesomeplayer289@gmail.com)."
+  "message": "Please enter the 5-digit security code sent to your email address (someperson@someservice.com)."
 }
 
 ```
