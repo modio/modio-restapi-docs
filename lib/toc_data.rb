@@ -47,9 +47,4 @@ def modio_post_process(page_content)
   html_doc = html_doc.to_s.gsub(/<code>(GET|POST|PUT|DELETE)+\s{1}(.*?)<\/code>/, '<span class="httpmethod \1">\1</span> <span class="endpointheading">\2</span>')
   # version heading for the top of the docs
   html_doc = html_doc.to_s.gsub(/<h2 id="([0-9-]*)">([0-9-]*)<\/h2>/, '<h2 id="\1"><span class="versionheading">\2</span></h2>')
-  # we put the hidden consent anchor on the authentication heading
-  # and not the consent endpoint so when it is navigated to it
-  # appears on the right line-height for the reader
-  html_doc = html_doc.to_s.gsub(/(<h1\sid="authentication-2">.*<\/h1>)/, '\1<h2 id="consent" style="visibility: hidden; margin: 0; padding: 0;"></h2>')
-  html_doc
 end

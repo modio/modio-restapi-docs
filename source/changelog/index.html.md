@@ -1,8 +1,25 @@
-# Getting Started
+# API Versions
+
+## v1 (latest version)
+### Date Live: October 27, 2022, 2:52 am GMT
+
+Initial API Release.
+
+### <span class="versionwrap">[View v1 docs](/)</span>
+
+# Changelog
+
+## Oct 27, 2022
+
+### Depreciating X-Ratelimit headers
+
+- Beginning Nov 7, 2022, all custom rate limit headers `X-RateLimit-Limit`, `X-RateLimit-Remaining`, `X-RateLimit-RetryAfter` will no longer be returned. They will be replaced with `retry-after` when the [ratelimit is exceeded](/#rate-limiting).
+
+# How We Version
 
 ### Latest API Version: <span class="versionwrap latest">v1</span> 
 
-Our aim with mod.io is to offer developers the most powerful and flexible mod API available. This means continually evolving and improving based on your requirements and pushing changes when required. The majority of these changes will be non-breaking and deployed immediately, however there will be times when breaking changes are needed. To ensure your mod.io implementations are not affected by the changes, we have architectured a versioning system that maintains backwards compatibility and allows you to upgrade your implementation when it suits. Read on details.
+Our aim with mod.io is to offer developers the most powerful and flexible mod API available. This means continually evolving and improving based on your requirements and pushing changes when required. The majority of these changes will be non-breaking and deployed immediately, however there will be times when breaking changes are needed. To ensure your mod.io implementations are not affected by the changes, we have architectured a versioning system that aims to maintain backwards compatibility and allow you to upgrade your implementation at a time that suits.
 
 ### How We Handle Versioning
 
@@ -10,27 +27,13 @@ Upon first look, our implementation is consistent with many other REST API's, wh
 
 ### Versioning Format Convention
 
-For the initial release of the API, __v1__ is a valid format and version.
-However, for all future versions, the __v1__ format is _deprecated_ and the following format will be used to represent each mod.io API version.
-
-### Format breakdown
-
-Format: <span class="versionwrap">YYYYr{0-9}</span>
-Example: <span class="versionwrap latest">2018r1</span>
-
-- `YYYY` - The year of the version
-- `r` - Always hard-coded as 'r', signifying the release number
-- `0-9` - The release number which is incremented per release, relative to the year.
-Whenever the year is changed, the release number begins at 1.
-
-Important Reminder: The release number is __not__ a representation of the month of 
-the year and always denotes the (n)th release of that year.
+For the initial release of the API, __v1__ is a valid format and version. Future releases will continue to follow this convention, by incrementing the version number, i.e. __v[0-9]+__
 
 ### Version Examples
 
-- `v1` - First version of our API. This formatting is no longer used.
-- `2018r1` - The 1st release of a breaking API change for 2018.
-- `2019r7` - The 7th release of a breaking API change for 2019.
+- `v1` - Initial version of our API.
+- `v2` - The next major release of the API, that will require a migration to support the breaking changes made to the prior version.
+- `v9` - The 9th release of the API, that will require a migration to support the breaking changes made to the prior version.
 
 ### Version Requests
 ```shell
@@ -64,12 +67,3 @@ Adding new headers to a request/response | Modifying any HTTP error code that co
 Changing the ordering of items in a response | Modifying or removing any request/response header
   
 Changes that _are_ non-breaking will continue to be delivered to you regardless of which API version you are using, and documentation for every version will continue to be updated to reflect these changes. Only breaking changes described above will fall under this versioning system.
-
-# API Versions
-
-## v1 (Latest Version)
-### Date Live: May 15, 2018, 12:00 am GMT
-
-Initial API release.
-
-### <span class="versionwrap"><a href="https://docs.mod.io">View v1 docs</a></span>

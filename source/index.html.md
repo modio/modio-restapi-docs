@@ -8,9 +8,7 @@ language_tabs:
   - python: Python
   - java: Java
 toc_footers:
-  - >-
-    <a href="https://mod.io/about">Find out more about
-    mod.io</a>
+  - <a href="https://mod.io/about">Find out more about mod.io</a>
 includes: []
 search: true
 highlight_theme: darkula
@@ -18,6 +16,8 @@ headingLevel: '2'
 ---
 
 # Getting Started
+
+
 
 ## mod.io API v1
 
@@ -33,11 +33,11 @@ __Current version:__ <select id="version_dropdown" onChange="changeVersion"><opt
 
 Compatible with all builds of your game on all platforms and stores, mod.io is a clientless and standalone solution which gives you complete control over your modding ecosystem.
 
-![mod.io Overview](https://static.mod.io/v1/images/home/sdk.png).
+![mod.io Overview](images/sdk.png).
 
 ## Implementation
 
-You have 3 options to get connected to the mod.io API which you can use interchangeably depending on your needs. Here's the breakdown of each option.
+Once you have added your game to mod.io and got your game ID and API key, you can start integrating the mod.io REST API into your game, tools and sites. There are 3 options to get connected which you can use interchangeably depending on your needs. Here's the breakdown of each option.
 
 Option | Usage | Suited for | Docs
 ---------- | ---------- | ---------- | ---------
@@ -47,14 +47,14 @@ __Tools/Plugins__ | Use tools, plugins and wrappers created by the community to 
 
 Official tools, plugins and wrappers made or supported by the mod.io team | - | - | -
 --- | --- | --- | ---
-![Unity Plugin](images/tool-unity.png) | __Unity Plugin__<br />[SDK](https://github.com/modio/modio-unity)<br />[Getting Started](https://github.com/modio/modio-unity/wiki)<br /> | ![Unreal Plugin](images/tool-unreal.png) | __Unreal Plugin__<br />[SDK](https://github.com/modio/modio-ue4)<br />[Getting Started](https://github.com/modio/modio-ue4/wiki)<br />[Example](https://github.com/modio/modio-ue4-example)<br />
-![C/C++ SDK](images/tool-ccpp.png) | __C/C++ SDK__<br />[SDK](https://github.com/modio/modio-sdk)<br />[Getting Started](https://github.com/modio/modio-sdk/wiki)<br /> | ![Discord Bot](images/tool-discordbot.png) | __Discord Bot__<br />[Instructions](https://github.com/modio/modio-discord-bot)<br />[Invite](https://discordbot.mod.io)<br />
+![Unity Plugin](images/tool-unity.png) | __Unity Plugin__<br />[SDK](https://github.com/modio/modio-unity)<br />[Getting Started](https://github.com/modio/modio-unity/wiki)<br /> | ![Unreal Plugin](images/tool-unreal.png) | __Unreal Plugin__<br />[SDK](https://github.com/modio/modio-ue4)<br />[Getting Started](https://github.com/modio/modio-ue4/blob/main/Doc/getting-started.adoc)<br />
+![C/C++ SDK](images/tool-ccpp.png) | __C/C++ SDK__<br />[SDK](https://github.com/modio/modio-sdk)<br />[Getting Started](https://github.com/modio/modio-sdk/blob/main/doc/getting-started.adoc)<br />  | ![Discord Bot](images/tool-discordbot.png) | __Discord Bot__<br />[Instructions](https://github.com/modio/modio-discord-bot)<br />[Invite](https://discordbot.mod.io)<br />
 
 Tools, plugins and wrappers made by our awesome community. Is there a tool out there that should be added to the list? [Get in touch!](mailto:developers@mod.io?subject=Publish Tool) | - | - | -
 --- | --- | --- | ---
 ![Rust Wrapper](images/tool-rust.png) | __Rust Wrapper__<br />[SDK](https://crates.io/crates/modio)<br />[Getting Started](https://github.com/nickelc/modio-rs)<br />[Tutorials](https://github.com/nickelc/modio-rs/tree/master/examples)<br /> | ![Python Wrapper](images/tool-python.png) | __Python Wrapper__<br />[SDK](https://github.com/ClementJ18/mod.io)<br />[Getting Started](https://github.com/ClementJ18/mod.io/#example)<br />[Tutorials](https://github.com/ClementJ18/mod.io/tree/master/examples)<br /> |<br />
 ![Construct 2](images/tool-c2.png) | __Construct 2 Plugin__<br />[SDK](https://github.com/modio/modio-construct2)<br />[Getting Started](https://github.com/modio/modio-construct2)<br /> | ![GameMaker Studio 2](images/tool-gm2.png) | __GameMaker Studio 2 Plugin__<br />[SDK](https://github.com/modio/modio-gamemaker2)<br />[Getting Started](https://github.com/modio/modio-gamemaker2)<br />
-![Haxe Wrapper](images/tool-haxe.png) | __Haxe Wrapper__<br />[SDK](https://github.com/modio/modio-haxe)<br />[Getting Started](https://github.com/modio/modio-haxe)<br />[Tutorials](https://github.com/Turupawn/modioOpenFLExample#openfl-integration)<br /> | ![Modio.NET](images/tool-dotnet.png) | __Modio.NET__<br />[SDK](https://github.com/nickelc/modio.net)<br />[Getting Started](https://github.com/nickelc/modio.net)<br />
+![Haxe Wrapper](images/tool-haxe.png) | __Haxe Wrapper__<br />[SDK](https://github.com/modio/modio-haxe)<br />[Getting Started](https://github.com/Turupawn/modioOpenFLExample#openfl-integration)<br /> | ![Modio.NET](images/tool-dotnet.png) | __Modio.NET__<br />[SDK](https://github.com/nickelc/modio.net)<br />[Getting Started](https://github.com/nickelc/modio.net)<br />
 ![Command Line Tool](images/tool-cmd.png) | __Command Line Tool__<br />[CMD](https://github.com/nickelc/modiom)<br />[Getting Started](https://github.com/nickelc/modiom)<br /> | ![GitHub Action Mod Uploader](images/tool-actions.png) | __GitHub Action Mod Uploader__<br />[GitHub](https://github.com/nickelc/upload-to-modio)<br />[Usage](https://github.com/nickelc/upload-to-modio#usage)<br />
 
 Here is a brief list of the things to know about our API, as explained in more detail in the following sections.
@@ -69,10 +69,10 @@ Here is a brief list of the things to know about our API, as explained in more d
 
 Authentication can be done via 4 ways:
 
-- Use an [API key](https://mod.io/apikey/widget) for **Read-only** access (get a [test environment](https://test.mod.io/apikey) API key here)
-- Use the [Email Authentication Flow](#authenticate-via-email) for **Read and Write** access (it creates an OAuth 2 Access Token via **email**)
-- Use the [Platform Authentication Flow](#authenticate-via-steam) for **Read and Write** access (it creates an OAuth 2 Access Token automatically on popular platforms such as **Steam and Xbox**)
-- Manually create an [OAuth 2 Access Token](https://mod.io/oauth/widget) for **Read and Write** access (get a [test environment](https://test.mod.io/oauth) OAuth 2 token here)
+- Use an [API key](https://mod.io/me/access) for **Read-only** access (get a [test environment](https://test.mod.io/me/access) API key here)
+- Use the [Email Authentication Flow](#email) for **Read and Write** access (it creates an OAuth 2 Access Token via **email**)
+- Use the [Platform Authentication Flow](#steam) for **Read and Write** access (it creates an OAuth 2 Access Token automatically on popular platforms such as **Steam and Xbox**)
+- Manually create an [OAuth 2 Access Token](https://mod.io/me/access) for **Read and Write** access (get a [test environment](https://test.mod.io/me/access) OAuth 2 token here)
 
 All users and games are issued an API key which must be included when querying the API. It is quick and easy to use but limited to read-only GET requests, due to the limited security it offers. If you want players to be able to add, edit, rate and subscribe to content, you will need to use an authentication method that generates an OAuth 2 Access token. These [authentication methods](#authentication-2) are explained in detail here.
 
@@ -83,7 +83,7 @@ Access Token (OAuth 2) | Header | GET, POST, PUT, DELETE | Read, create, update,
 
 ### Web Overlay Authentication
 
-At the moment it is not possible to open the mod.io website in-game with the user pre-authenticated, however you can provide a hint by appending `?portal=PORTAL` to the end of the URL. What this tells mod.io, is that when the user attempts to perform an action that requires authentication, they will be prompted to login with their `PORTAL` account. For example if you want to take a mod creator to their mod edit page in-game on Steam, the URL would look something like: `https://gamename.mod.io/modname/edit?portal=steam`. You can optionally add `&login=auto` as well to automatically start the login process. [Supported portals](#targeting-a-portal) can be found here.
+At the moment it is not possible to open the mod.io website in-game with the user pre-authenticated, however you can provide a hint by appending `?portal=PORTAL` to the end of the URL. What this tells mod.io, is that when the user attempts to perform an action that requires authentication, they will be prompted to login with their `PORTAL` account. For example if you want to take a mod creator to their mod webpage in-game on Steam, the URL would look something like: `https://mod.io/g/gamename/m/modname?portal=steam`. You can optionally add `&login=auto` as well to automatically start the login process. [Supported portals](#targeting-a-portal) can be found here.
 
 ### Scopes (OAuth 2)
 
@@ -109,9 +109,9 @@ To authenticate using your unique 32-character API key, append the `api_key=xxxx
 
 ### Using an Access Token
 
-```shell
-// Example POST request with no binary files
+> Example POST request with no binary files
 
+```shell
 curl -X POST https://api.mod.io/v1/games/1/mods/1/tags \
   -H 'Authorization: Bearer your-token-here' \
   -H 'Content-Type: application/x-www-form-urlencoded' \
@@ -125,15 +125,15 @@ To authenticate using an OAuth 2 access token, you must include the HTTP header 
 
 By default, all access token's are long-lived - meaning they are valid for a common year (not leap year) from the date of issue. You should architect your application to smoothly handle the event in which a token expires or is revoked by the user themselves or a mod.io admin, triggering a `401 Unauthorized` API response.
 
-If you would like tokens issued through your game to have a shorter lifespan, you can do this by providing the `date_expires` parameter on any endpoint that returns an access token such as the [Email Exchange](#authenticate-via-email) or [Authenticate via Steam](#authenticate-via-steam) endpoints. If the parameter is not supplied, it will default to 1 year from the request date, if the supplied parameter value is above one year or below the current server time it will be ignored and the default value restored.
+If you would like tokens issued through your game to have a shorter lifespan, you can do this by providing the `date_expires` parameter on any endpoint that returns an access token such as the [Email Exchange](#email) or [Authenticate via Steam](#steam) endpoints. If the parameter is not supplied, it will default to 1 year from the request date, if the supplied parameter value is above one year or below the current server time it will be ignored and the default value restored.
 
 ### Request Content-Type
 
 If you are making a request that includes a file, your request `Content-Type` header __must__ be `multipart/form-data`, otherwise if the request contains data (but no files) it should be `application/x-www-form-urlencoded`, which is UTF-8 encoded. 
 
-```shell
-// Example POST request with binary file
+> Example POST request with binary file
 
+```shell
 curl -X POST https://api.mod.io/v1/games/1/mods \
   -H 'Authorization: Bearer your-token-here' \
   -H 'Content-Type: multipart/form-data' \ 
@@ -153,14 +153,14 @@ If the endpoint you are making a request to expects a file it will expect the co
 
 ### JSON Request Data
 
-```shell
-// Example json-encoded POST request 
+> Example json-encoded POST request
 
+```shell
 curl -X POST https://api.mod.io/v1/games/1/mods/1/team \
   -H 'Authorization: Bearer your-token-here' \
   -H 'Content-Type: application/x-www-form-urlencoded' \  
   -d 'input_json={
-		"email": "support@mod.io",
+		"email": "developers@mod.io",
 		"level": 8,
 		"position": "King in the North"
 	  }'
@@ -198,9 +198,9 @@ Response Code | Meaning
 
 ## Errors
 
-```json
-// Error object
+> Error object
 
+```json
 "error": {
 	"code": 403,
 	"error_ref": "15024",
@@ -212,9 +212,9 @@ If an error occurs, mod.io returns an error object with the HTTP `code`, `error_
 
 When requests contain invalid input data or query parameters (for filtering), an optional field object called `errors` can be supplied inside the `error` object, which contains a list of the invalid inputs. The nested `errors` object is only supplied with `422 Unprocessable Entity` responses. Be sure to review the [Response Codes](#response-codes) to be aware of the HTTP codes that the mod.io API returns.
 
-```json
-// Error object with input errors
+> Error object with input errors
 
+```json
 "error": {
 	"code": 422,
 	"error_ref": 13009,
@@ -223,7 +223,6 @@ When requests contain invalid input data or query parameters (for filtering), an
 		"summary":"The mod summary cannot be more than 200 characters long.",
 	}
 }
-
 ```
 
 Remember that [Rate Limiting](#rate-limiting) applies whether an error is returned or not, so to avoid exceeding your daily quota be sure to always investigate error messages - instead of continually retrying.
@@ -232,9 +231,9 @@ Remember that [Rate Limiting](#rate-limiting) applies whether an error is return
 
 Along with generic [HTTP response codes](#response-codes), we also provide mod.io specific error codes to help you better understand what has gone wrong with a request. Below is a list of the most common `error_ref` codes you could encounter when consuming the API, as well as the reason for the error occuring. For error codes specific to each endpoint, click the 'Show All Responses' dropdown on the specified endpoint documentation.
 
-```shell
-// Example request with malformed api_key 
+> Example request with malformed api_key 
 
+```shell
 curl -X GET https://api.mod.io/v1/games?api_key=malformed_key
 ```
 
@@ -250,6 +249,9 @@ curl -X GET https://api.mod.io/v1/games?api_key=malformed_key
 
 Error Reference Code | Meaning
 ---------- | -------
+`10000` | mod.io is currently experiencing an outage. (rare)
+`10001` | Cross-origin request forbidden.
+`10002` | mod.io failed to complete the request, please try again. (rare)
 `10003` | API version supplied is invalid.
 `11000` | api_key is missing from your request.
 `11001` | api_key supplied is malformed.
@@ -257,32 +259,30 @@ Error Reference Code | Meaning
 `11003` | Access token is missing the write scope to perform the request.
 `11004` | Access token is missing the read scope to perform the request.
 `11005` | Access token is expired, or has been revoked.
-`13005` | The Content-Type header is missing from your request.
-`13006` | The Content-Type header is not supported for this endpoint.
 `11006` | Authenticated user account has been deleted.
 `11007` | Authenticated user account has been banned by mod.io admins.
-`14001` | The requested game could not be found.
-`14006` | The requested game has been deleted.
-`15022` | The requested mod could not be found.
-`15023` | The requested mod has been deleted.
-`15010` | The requested modfile could not be found.
-`15026` | The requested comment could not be found.
-`17000` | The requested user could not be found.
-`14000` | The requested resource does not exist.
 `11008` | You have been ratelimited for making too many requests. See [Rate Limiting](#rate-limiting).
-`13009` | The request contains validation errors for the data supplied. See the attached `errors` field within the [Error Object](#error-object) to determine which input failed.
-`13007` | You have requested a response format that is not supported (JSON only).
 `13001` | The submitted binary file is corrupted.
 `13002` | The submitted binary file is unreadable.
 `13004` | You have used the `input_json` parameter with semantically incorrect JSON.
-`10001` | Cross-origin request forbidden.
-`10002` | mod.io failed to complete the request, please try again. (rare)
-`10000` | mod.io is currently experiencing an outage. (rare)
+`13005` | The Content-Type header is missing from your request.
+`13006` | The Content-Type header is not supported for this endpoint.
+`13007` | You have requested a response format that is not supported (JSON only).
+`13009` | The request contains validation errors for the data supplied. See the attached `errors` field within the [Error Object](#error-object) to determine which input failed.
+`14000` | The requested resource does not exist.
+`14001` | The requested game could not be found.
+`14006` | The requested game has been deleted.
+`15010` | The requested modfile could not be found.
+`15022` | The requested mod could not be found.
+`15023` | The requested mod has been deleted.
+`15026` | The requested comment could not be found.
+`17000` | The requested user could not be found.
 
 ## Response Formats
-```json
-// Single object response
 
+> Single object response
+
+```json
 {
     "id": 2,
     "mod_id": 2,
@@ -300,7 +300,7 @@ Error Reference Code | Meaning
     "changelog": "VERSION 1.3 -- Changes -- Fixed critical castle floor bug.",
     "metadata_blob": "rogue,hd,high-res,4k,hd-textures",
     "download": {
-      "binary_url": "https://mod.io/mods/file/1/",
+      "binary_url": "https://api.mod.io/mods/file/1/",
       "date_expires": 1579316848
     }
 }
@@ -319,9 +319,9 @@ Endpoints that return more than one result, return a __JSON object__ which conta
 - `data` - contains all data returned from the request.
 - metadata fields - contains [pagination metadata](#pagination) to help you paginate through the API.
 
-```json
-// Multiple objects response
+> Multiple objects response
 
+```json
 {
 	"data": [
 		{
@@ -341,7 +341,7 @@ Endpoints that return more than one result, return a __JSON object__ which conta
     		"changelog": "VERSION 1.3 -- Changes -- Fixed critical castle floor bug.",
     		"metadata_blob": "rogue,hd,high-res,4k,hd-textures",
     		"download": {
-    		  "binary_url": "https://mod.io/mods/file/1/",
+    		  "binary_url": "https://api.mod.io/mods/file/1/",
     		  "date_expires": 1579316848
     		}
 		},
@@ -389,21 +389,22 @@ By default mods connected to a game will not be returned if they are hidden or n
 
 As a mod admin, you can modify `visible` to show or hide your mod from API requests. You _cannot_ modify the `status` of your mod. When a mod is hidden _you_ can still view it provided you are the mods admin or subscribed to the mod. You can call [Get User Mods endpoint](#get-user-mods) to retrieve all mods associated with the authenticated user regardless of their `status` and `visible`.
 
-```
-// Valid status & visibility filters
+> Valid status & visibility filters
 
+```
 status=1
 status-in=0,1
 visible=1 
 visible-in=0,1
+```
 
-// Game Admin Only status & visibility filters
+> Game Admin Only status & visibility filters
 
+```
 status-not-in=1,2
 status-gt=1
 visible-not-in=1
 visible-st=1
-
 ```
 
 ### Important Note When Filtering
@@ -414,8 +415,9 @@ Due to the requirement of certain `status` & `visible` values only being availab
 
 When requesting data from endpoints that contain more than one object, you can supply an `_offset` and `_limit` to paginate through the results. Think of it as a page 1, 2, 3... system but you control the number of results per page, and the page to start from. Appended to each response will be the pagination metadata:
 
+> Metadata example
+
 ```json
-// Metadata example
 "result_count": 100,
 "result_limit": 100,
 "result_offset": 0,
@@ -613,9 +615,9 @@ HTTP/2.0 200 OK
 Accept-Language: de
 ```
 
-```json
-Example response (assuming a validation error occurred)
+> Example response (assuming a validation error occurred)
 
+```json
 {
     "error": {
         "code": 422,
@@ -647,18 +649,20 @@ Language Code | Language
 `zh-CN` | Chinese (Simplified)
 `zh-TW` | Chinese (Traditional)
 
-```shell
-// Example request updating specified fields with Polish translations. 
+> Example request updating specified fields with Polish translations.
 
+```shell
 curl -X POST https://api.mod.io/v1/games/1/mods/1 \
 	-H 'Authorization: Bearer your-token-here' \
 	-H 'Content-Type: application/x-www-form-urlencoded' \
 	-H 'Content-Language: pl' \
 	-d 'name=Zaawansowany rozkwit Wiedźmina' \
 	-d 'summary=Zobacz zaawansowany mod oświetlenia w Kaer Morhen w zupełnie nowym świetle' 
+```
 
-// Attempt to retrieve Polish translations within supported fields.
+> Attempt to retrieve Polish translations within supported fields.
 
+```shall
 curl -X GET https://api.mod.io/v1/games/1/mods/1 \
 	-H 'Authorization: Bearer your-token-here' \
 	-H 'Accept-Language: pl'
@@ -666,9 +670,9 @@ curl -X GET https://api.mod.io/v1/games/1/mods/1 \
 
 __NOTE__: Localization for mod.io is currently a work-in-progress and thus not all responses may be in the desired language.
 
-```json
-// Response
+> Response
 
+```json
 {
 	"id": 1,
 	"game_id": 1,
@@ -693,32 +697,58 @@ A brief summary when dealing with localized requests and responses:
 
 ## Rate Limiting
 
-mod.io implements rate limiting to stop users abusing the service. Exceeding your rate limit will result in requests receiving a `429 Too Many Requests` response until your reset time is reached. 
+mod.io implements rate limiting to stop users abusing the service. Exceeding the rate limit will result in requests receiving a `429 Too Many Requests` response until the reset time is reached. 
 
-It is _highly recommended_ you architect your app to check for the `X-RateLimit` headers below and the `429 Too Many Requests` HTTP response code to ensure you are not making too many requests, or continuing to make requests after a `429` code is repeatedly returned. Users who continue to send requests despite a `429` response could potentially have their credentials revoked. The following limits are implemented by default:
+It is _highly recommended_ you architect your app to check for the `429 Too Many Requests` HTTP response code, and ensure you do not continue to make requests until the duration specified in the `retry-after` header (in seconds) passes. Users who continue to send requests despite a `429` response could potentially have their credentials revoked. The following limits are implemented by default:
 
 ### API key Rate Limiting
 
-```http
-Example HTTP Header Response
----------------------
-HTTP/1.1 200 OK
-...
-...
-X-RateLimit-Limit: 120
-X-RateLimit-Remaining: 87
-```
-
-- API keys linked to a user have __60 requests per minute__.
 - API keys linked to a game have __unlimited requests__.
+- API keys linked to a user have __60 requests per minute__.
 
 ### OAuth2 Rate Limiting
 
-- Users tokens are limited to __60 requests per minute__. 
+- User token reads are limited to __200 requests per minute__. 
+- User token writes are limited to __60 requests per minute__. 
+
+### IP Rate Limiting
+
+- IP reads are limited to __1000 requests per minute__. 
+- IP writes are limited to __60 requests per minute__. 
+
+### Other Rate Limiting
+
+- Certain endpoints may override the defaults for security, spam or other reasons.
 
 ### Headers
+```
+Example HTTP Header Response
+---------------------
+HTTP/2.0 429 Too Many Requests
+...
+...
+retry-after: 57
+```
 
-mod.io returns the following headers in each request to inform you of your limit & remaining requests until reset.
+> Example ratelimit JSON response
+
+```json
+{
+	"error": {
+		"code": 429,
+		"error_ref": 11008,
+		"message": "You have made too many requests in a short period of time, please wait and try again soon."
+	}
+}
+```
+
+If the rate limit is exceeded, the following header will be returned alongside the `429 Too Many Requests` HTTP response code.
+
+ - `retry-after` - Number of seconds before you can attempt to make another request to API.
+
+### Depreciation Notice
+
+From November 7th, 2022 - the rate limit headers below will no longer be returned. If you have written a custom mod.io SDK or library, you should replace any usage of these headers with `retry-after`.
 
  - `X-RateLimit-Limit` - Number of requests you can make from the supplied API key/access token per minute.
  - `X-RateLimit-Remaining` - Number of requests remaining until requests are rejected.
@@ -732,7 +762,7 @@ You should always plan to minimize requests and cache API responses. It will mak
 
 To help familiarize yourself with the mod.io API and to ensure your implementation is battle-hardened and operating as intended, we have setup a test sandbox which is identical to the production environment. The test sandbox allows you to make requests to the API whilst your integration is a work in progress and the submitted data is not important. When you are ready to go live it's as easy as adding your game to the production environment, substituting the test API URL for the production API URL, and updating the `api_key` and `game_id` you are using to the values from your games profile on production. 
 
-To begin using the test sandbox you will need to [register a test account](https://test.mod.io/members/register) and [add your game](https://test.mod.io/games/add). You will only see games you are a team member of and there is no connection between the data added to the test environment and production. We highly recommend you use the test environment when integrating as it allows you to keep your development private, and you can submit as much dummy data as you need to try the functionality required, without having to clean it up at the end.
+To begin using the test sandbox you will need to [register a test account](https://test.mod.io) and [add your game](https://test.mod.io/g/add). You will only see games you are a team member of and there is no connection between the data added to the test environment and production. We highly recommend you use the test environment when integrating as it allows you to keep your development private, and you can submit as much dummy data as you need to try the functionality required, without having to clean it up at the end.
 
 __Test version:__ `v1`
 
@@ -782,7 +812,7 @@ These are the only supported values and are case-insensitive, anything else will
 
 ## Targeting a Portal
 
-When making API requests you should include the `X-Modio-Portal` header (with one of the values below), to tell mod.io what Portal (i.e. Store or App) the request is originating from. This header is __important__ because it enables mod.io to fine-tune the experience, such as returning display names used by players on that portal (which can be a certification requirement).
+When making API requests you should include the `X-Modio-Portal` header (with one of the values below), to tell mod.io what Portal (eg. Store or App) the request is originating from. This header is __important__ because it enables mod.io to fine-tune the experience, such as returning display names used by players on that portal (which can be a certification requirement).
 
 For example, passing the HTTP header `X-Modio-Portal: EGS` in your API request tells mod.io your player is coming via the Epic Games Store.
 
@@ -801,10 +831,7 @@ Steam | `Steam`
 Xbox Live | `XboxLive`
 
 These are the only supported values and are case-insensitive, anything else will be ignored. Have we missed a portal you are using? [Get in touch!](mailto:developers@mod.io?subject=Portal%20Support)
-
 # Authentication
-
-
 ## Terms
 
 > Example request
@@ -893,8 +920,7 @@ System.out.println(response.toString());
 
 `GET /authenticate/terms`
 
-The purpose of this endpoint is to provide the text, links and buttons you can use to get a users agreement and consent prior to authenticating them in-game (your dialog should look [similar to this](https://mod.io/termsdialog/widget)). A successful response will return a [Terms Object](#terms-object).<br><br>__IMPORTANT:__ When using a 3rd party authentication flow such as Steam or Xbox Live, it is a requirement that the user has agreed to the latest mod.io [Terms of Use](https://mod.io/terms/widget) and [Privacy Policy](https://mod.io/privacy/widget). You only need to collect the users agreement once, and also each time these policies are updated.<br><br>To make this easy to manage, all of the 3rd party authentication flows have a `terms_agreed` field which should be set to `false` by default. If the user has agreed to the latest policies, their authentication will proceed as normal, however if their agreement is required and `terms_agreed` is set to `false` an error `403 Forbidden (error_ref 11051)` will be returned. When you receive this error, you must collect the users agreement before resubmitting the authentication flow with `terms_agreed` set to `true`, which will be recorded.<br><br>__NOTE:__  You can use your own text and process (make sure the Terms of Use and Privacy Policy are correctly linked), but be aware that you are responsible for ensuring that the users agreement is properly collected and reported to us. Failure to do this correctly is a breach of the mod.io Developer Terms. If your game does not authenticate users or only uses the email authentication flow, you do not need to implement this dialog, but you should link to the mod.io Terms of Use and Privacy Policy in your Privacy Policy/EULA.
-
+The purpose of this endpoint is to provide the text, links and buttons you can use to get a users agreement and consent prior to authenticating them in-game (your dialog should look [similar to this](/images/termsdialog.html)). A successful response will return a [Terms Object](#terms-object).<br><br>__IMPORTANT:__ It is a requirement to implement this when using a 3rd party authentication flow such as Steam or Xbox Live, to ensure the user has agreed to the latest mod.io [Terms of Use](https://mod.io/terms/widget) and [Privacy Policy](https://mod.io/privacy/widget). You only need to collect the users agreement once, and also each time these policies are updated.<br><br>To make this easy to manage, all of the 3rd party authentication flows have a `terms_agreed` field which should be set to `false` by default. If the user has agreed to the latest policies, their authentication will proceed as normal, however if their agreement is required and `terms_agreed` is set to `false` an error `403 Forbidden (error_ref 11074)` will be returned. When you receive this error, you must collect the users agreement before resubmitting the authentication flow with `terms_agreed` set to `true`, which will be recorded.<br><br>__NOTE:__  You can use your own text and process (make sure the Terms of Use and Privacy Policy are correctly linked), but be aware that you are responsible for ensuring that the users agreement is properly collected and reported to us. Failure to do this correctly is a breach of the mod.io Game Terms. If your game does not authenticate users or only uses the email authentication flow, you do not need to implement this dialog, but you should link to the mod.io Terms of Use and Privacy Policy in your Privacy Policy/EULA.
 
 > Example response
 
@@ -928,7 +954,7 @@ The purpose of this endpoint is to provide the text, links and buttons you can u
     },
     "manage": {
       "text": "Manage Account",
-      "url": "https://mod.io/members/settings",
+      "url": "https://mod.io/me/account",
       "required": false
     }
   }
@@ -944,87 +970,9 @@ Status|Meaning|Error Ref|Description|Response Schema
 To perform this request, you must be authenticated via one of the following methods:
 <a href="#authentication">api_key</a>
 </aside>
-## Authenticate via Email
-
-To perform writes, you will need to authenticate your users via OAuth 2. To make this frictionless in-game, we offer an email verification system, similar to what Slack and others pioneered. It works by users supplying their email, which we send a time-limited 5 digit security code too. They exchange this code in-game, for an [OAuth 2 access token](https://mod.io/oauth/widget) you can save to authenticate future requests. The benefit of this approach is it avoids complex website redirects, doesn't require your users to complete a slow registration flow, and eliminates the need to store usernames / passwords.
-
-```shell
-// Example POST requesting security code be sent to supplied email
-
-curl -X POST https://api.mod.io/v1/oauth/emailrequest \
-  -H 'Content-Type: application/x-www-form-urlencoded' \
-  -d 'api_key=0d0ba6756d032246f1299f8c01abc424'	\
-  -d 'email=john.snow@westeros.com'
-```
-
-```json
-// Authentication Code Request Response
-
-{
-	"code": 200,
-	"message": "Enter the 5-digit security code sent to your email address (john.snow@westeros.com)"
-}
-```
-
-**Step 1: Requesting a security code**
-
-Request a `security_code` be sent to the email address of the user you wish to authenticate: 
 
 
-`POST /oauth/emailrequest`
-
-Parameter |Type | Required | Value
----------- | ---------- |---------- | ----------
-api_key | string | true | Your API key generated from 'API' tab within your game profile.
-email | string | true | A valid and secure email address your user has access to. 
-
-**Step 2: Exchanging security code for access token**
-
-After retrieving the 5-digit `security_code` sent to the email specified, you exchange it for an OAuth 2 `access_token`:
-
-```shell
-// Example POST requesting access token with security code
-
-curl -X POST https://api.mod.io/v1/oauth/emailexchange \
-  -H 'Content-Type: application/x-www-form-urlencoded' \	
-  -d 'api_key=0d0ba6756d032246f1299f8c01abc424' \
-  -d 'security_code=3EW50'
-```
-
-```json
-// Access Token Request Response (access token truncated for brevity)
-
-{
-	"code": 200,
-	"access_token": "eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiIsImp0......"
-}
-```
-
-
-`POST /oauth/emailexchange`
-
-Parameter | Type | Required | Value
----------- | ---------- | ---------- | ----------  
-api_key | string | true | Your API key generated from 'API' tab within your game profile.
-security_code | string | true | Unique 5-digit code sent to the email address supplied in the previous request. 
-date_expires | integer || Unix timestamp of date in which the returned token will expire. Value cannot be higher than the default value which is a common year (unix timestamp + 31536000 seconds). Using a token after it's expiry time has elapsed will result in a `401 Unauthorized` response.
-
-There are a few important things to know when using the email authentication flow:
- 
-- An `api_key` is required for both steps of the authentication process.
-- The _same_ `api_key` must be used for both steps.
-- The generated `security_code` is short-lived and will expire after 15 minutes.
-- Once exchanged for an `access_token`, the `security_code` is invalid.
-
-If the user does not exchange the `security_code` they are emailed for an `access_token` within 15 minutes, you will need to begin the flow again to generate a new code.
-
-**Step 3: Use access token to access resources**
-
-See [Making Requests](#making-requests) section.
-
-**HINT:** If you want to overlay the mod.io site in-game and you authenticate users via email, we recommend you add `?portal=email` to the end of the URL you open which will prompt the user to login via their email. See [Web Overlay Authentication](#web-overlay-authentication) for details.
-
-## Authenticate via Steam
+## Steam
 
 > Example request
 
@@ -1124,7 +1072,7 @@ Request an access token on behalf of a Steam user. To use this functionality you
      Parameter|Type|Required|Description
      ---|---|---|---|
      appdata|base64-encoded string|true|The Steam users [Encrypted App Ticket](https://partner.steamgames.com/doc/features/auth#encryptedapptickets) provided by the Steamworks SDK. <br><br>Parameter content *MUST* be the [*uint8 *rgubTicketEncrypted*](https://partner.steamgames.com/doc/api/SteamEncryptedAppTicket) returned after calling [ISteamUser::GetEncryptedAppTicket()](https://partner.steamgames.com/doc/api/ISteamUser#GetEncryptedAppTicket) within the Steamworks SDK, converted into a base64-encoded string.<br><br>__NOTE:__ Due to a base64-encoded string containing special characters, you must URL encode the string after it has been base64-encoded to ensure it is successfully sent to our servers otherwise you may encounter an `422 Unprocessable Entity` response. For example, [cURL](https://ec.haxx.se/http-post.html) will do this for you by using the `--data-urlencode` option.
-     email|string||The users email address. If supplied, and the respective user does not have an email registered for their account we will send a confirmation email to confirm they have ownership of the specified email.<br><br>__NOTE__: If the user already has an email on record with us, this parameter will be ignored. This parameter should also be urlencoded before the request is sent.
+     email|string||The users email address (optional but recommended to help users recover lost accounts). If supplied, and the respective user does not have an email registered for their account we will send a confirmation email to confirm they have ownership of the specified email.<br><br>__NOTE__: If the user already has an email on record with us, this parameter will be ignored. This parameter should also be urlencoded before the request is sent.
      date_expires|integer||Unix timestamp of date in which the returned token will expire. Value cannot be higher than the default value which is a common year (unix timestamp + 31536000 seconds). Using a token after it's expiry time has elapsed will result in a `401 Unauthorized` response.
      terms_agreed|boolean||This MUST be set to `false` unless you have collected the [users agreement](#terms) prior to calling this endpoint in which case it can be set to `true` and will be recorded.<br><br>__NOTE:__ If this is set to `false` and the user has not agreed to the latest mod.io Terms of Use and Privacy Policy, an error `403 Forbidden (error_ref 11074)` will be returned and you will need to collect the [users agreement](#terms) and retry with this value set to `true` to authenticate the user.
 
@@ -1138,7 +1086,7 @@ Request an access token on behalf of a Steam user. To use this functionality you
 }
 
 ```
-<h3 id="Authenticate-via-Steam-responses">Responses</h3>
+<h3 id="Steam-responses">Responses</h3>
 
 Status|Meaning|Error Ref|Description|Response Schema
 ---|---|----|---|---|
@@ -1154,405 +1102,7 @@ Status|Meaning|Error Ref|Description|Response Schema
 To perform this request, you must be authenticated via one of the following methods:
 <a href="#authentication">api_key</a>
 </aside>
-## Authenticate via GOG Galaxy
-
-> Example request
-
-```shell
-# You can also use wget
-curl -X POST https://api.mod.io/v1/external/galaxyauth?api_key=YourApiKey \
-  -H 'Content-Type: application/x-www-form-urlencoded' \ 
-  -H 'Accept: application/json' \
-  --data-urlencode 'appdata=GCL671bwZ/+zUeOWc0M'
-
-```
-
-```http
-POST https://api.mod.io/v1/external/galaxyauth?api_key=YourApiKey HTTP/1.1
-Host: api.mod.io
-Content-Type: application/x-www-form-urlencoded
-Accept: application/json
-
-```
-
-```javascript
-var headers = {
-  'Content-Type':'application/x-www-form-urlencoded',
-  'Accept':'application/json'
-
-};
-
-$.ajax({
-  url: 'https://api.mod.io/v1/external/galaxyauth',
-  method: 'post',
-  data: '?api_key=YourApiKey',
-  headers: headers,
-  success: function(data) {
-    console.log(JSON.stringify(data));
-  }
-})
-```
-
-```javascript--nodejs
-const request = require('node-fetch');
-const inputBody = '{
-  "appdata": "GCL671bwZ/+zUeOWc0M"
-}';
-const headers = {
-  'Content-Type':'application/x-www-form-urlencoded',
-  'Accept':'application/json'
-
-};
-
-fetch('https://api.mod.io/v1/external/galaxyauth?api_key=YourApiKey',
-{
-  method: 'POST',
-  body: inputBody,
-  headers: headers
-})
-.then(function(res) {
-    return res.json();
-}).then(function(body) {
-    console.log(body);
-});
-```
-
-```python
-import requests
-headers = {
-  'Content-Type': 'application/x-www-form-urlencoded',
-  'Accept': 'application/json'
-}
-
-r = requests.post('https://api.mod.io/v1/external/galaxyauth', params={
-  'api_key': 'YourApiKey'
-}, headers = headers)
-
-print r.json()
-```
-
-```java
-URL obj = new URL("https://api.mod.io/v1/external/galaxyauth?api_key=YourApiKey");
-HttpURLConnection con = (HttpURLConnection) obj.openConnection();
-con.setRequestMethod("POST");
-int responseCode = con.getResponseCode();
-BufferedReader in = new BufferedReader(
-    new InputStreamReader(con.getInputStream()));
-String inputLine;
-StringBuffer response = new StringBuffer();
-while ((inputLine = in.readLine()) != null) {
-    response.append(inputLine);
-}
-in.close();
-System.out.println(response.toString());
-```
-
-`POST /external/galaxyauth`
-
-Request an access token on behalf of a GOG Galaxy user. To use this functionality you *must* add your games [encrypted app ticket key](https://devportal.gog.com/welcome) from GOG Galaxy, to the *Edit > Options* page of your games profile on mod.io. A Successful request will return an [Access Token Object](#access-token-object).
-
-     Parameter|Type|Required|Description
-     ---|---|---|---|
-     appdata|string|true|The GOG Galaxy users [Encrypted App Ticket](https://cdn.gog.com/open/galaxy/sdk/1.133.3/Documentation/classgalaxy_1_1api_1_1IUser.html#a352802aab7a6e71b1cd1b9b1adfd53d8) provided by the GOG Galaxy SDK. <br><br>Parameter content *MUST* be the encrypted string returned in the buffer after calling [IUser::GetEncryptedAppTicket()](https://cdn.gog.com/open/galaxy/sdk/1.133.3/Documentation/classgalaxy_1_1api_1_1IUser.html#a96af6792efc260e75daebedca2cf74c6) within the Galaxy SDK. Unlike the [Steam Authentication](#authenticate-via-steam) endpoint, you do not need to encode the encrypted string as this is already done by the Galaxy SDK.<br><br>__NOTE:__ Due to the encrypted app ticket containing special characters, you must URL encode the string before sending the request to ensure it is successfully sent to our servers otherwise you may encounter an `422 Unprocessable Entity` response. For example, [cURL](https://ec.haxx.se/http-post.html) will do this for you by using the `--data-urlencode` option.
-     email|string||The users email address. If supplied, and the respective user does not have an email registered for their account we will send a confirmation email to confirm they have ownership of the specified email.<br><br>__NOTE__: If the user already has an email on record with us, this parameter will be ignored. This parameter should also be urlencoded before the request is sent.
-     date_expires|integer||Unix timestamp of date in which the returned token will expire. Value cannot be higher than the default value which is a common year (unix timestamp + 31536000 seconds). Using a token after it's expiry time has elapsed will result in a `401 Unauthorized` response.
-     terms_agreed|boolean||This MUST be set to `false` unless you have collected the [users agreement](#terms) prior to calling this endpoint in which case it can be set to `true` and will be recorded.<br><br>__NOTE:__ If this is set to `false` and the user has not agreed to the latest mod.io Terms of Use and Privacy Policy, an error `403 Forbidden (error_ref 11074)` will be returned and you will need to collect the [users agreement](#terms) and retry with this value set to `true` to authenticate the user.
-
-> Example response
-
-```json
-{
-  "code": 200,
-  "access_token": "eyJ0eXAiOiXKV1QibCJhbLciOiJeiUzI1.....",
-  "date_expires": 1570673249
-}
-
-```
-<h3 id="Authenticate-via-GOG-Galaxy-responses">Responses</h3>
-
-Status|Meaning|Error Ref|Description|Response Schema
----|---|----|---|---|
-200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)||Successful Request|[Access Token Object](#schemaaccess_token_object)
-401|[Unauthorized](https://tools.ietf.org/html/rfc7235#section-3.1)|14001|The game associated with the supplied api_key is currently not available.|[Error Object](#schemaerror_object)
-401|[Unauthorized](https://tools.ietf.org/html/rfc7235#section-3.1)|11021|The GOG Galaxy encrypted app ticket was invalid.|[Error Object](#schemaerror_object)
-401|[Unauthorized](https://tools.ietf.org/html/rfc7235#section-3.1)|11032|mod.io was unable to verify the credentials against the external service provider.|[Error Object](#schemaerror_object)
-403|[Forbidden](https://tools.ietf.org/html/rfc7231#section-6.5.3)|11016|The api_key supplied in the request must be associated with a game.|[Error Object](#schemaerror_object)
-403|[Forbidden](https://tools.ietf.org/html/rfc7231#section-6.5.3)|11017|The api_key supplied in the request is for test environment purposes only and cannot be used for this functionality.|[Error Object](#schemaerror_object)
-403|[Forbidden](https://tools.ietf.org/html/rfc7231#section-6.5.3)|11022|The secret GOG Galaxy app ticket associated with this game has not been configured.|[Error Object](#schemaerror_object)
-403|[Forbidden](https://tools.ietf.org/html/rfc7231#section-6.5.3)|11074|The user has not agreed to the mod.io Terms of Use. Please see terms_agreed parameter description and the [Terms](#terms) endpoint for more information.|[Error Object](#schemaerror_object)
-<aside class="auth-notice">
-To perform this request, you must be authenticated via one of the following methods:
-<a href="#authentication">api_key</a>
-</aside>
-## Authenticate via itch.io
-
-> Example request
-
-```shell
-# You can also use wget
-curl -X POST https://api.mod.io/v1/external/itchioauth?api_key=YourApiKey \
-  -H 'Content-Type: application/x-www-form-urlencoded' \ 
-  -H 'Accept: application/json' \
-  -d 'itchio_token=eyJhbXciOiJIUzI1Lizs....'
-
-```
-
-```http
-POST https://api.mod.io/v1/external/itchioauth?api_key=YourApiKey HTTP/1.1
-Host: api.mod.io
-Content-Type: application/x-www-form-urlencoded
-Accept: application/json
-
-```
-
-```javascript
-var headers = {
-  'Content-Type':'application/x-www-form-urlencoded',
-  'Accept':'application/json'
-
-};
-
-$.ajax({
-  url: 'https://api.mod.io/v1/external/itchioauth',
-  method: 'post',
-  data: '?api_key=YourApiKey',
-  headers: headers,
-  success: function(data) {
-    console.log(JSON.stringify(data));
-  }
-})
-```
-
-```javascript--nodejs
-const request = require('node-fetch');
-const inputBody = '{
-  "itchio_token": "eyJhbXciOiJIUzI1Lizs...."
-}';
-const headers = {
-  'Content-Type':'application/x-www-form-urlencoded',
-  'Accept':'application/json'
-
-};
-
-fetch('https://api.mod.io/v1/external/itchioauth?api_key=YourApiKey',
-{
-  method: 'POST',
-  body: inputBody,
-  headers: headers
-})
-.then(function(res) {
-    return res.json();
-}).then(function(body) {
-    console.log(body);
-});
-```
-
-```python
-import requests
-headers = {
-  'Content-Type': 'application/x-www-form-urlencoded',
-  'Accept': 'application/json'
-}
-
-r = requests.post('https://api.mod.io/v1/external/itchioauth', params={
-  'api_key': 'YourApiKey'
-}, headers = headers)
-
-print r.json()
-```
-
-```java
-URL obj = new URL("https://api.mod.io/v1/external/itchioauth?api_key=YourApiKey");
-HttpURLConnection con = (HttpURLConnection) obj.openConnection();
-con.setRequestMethod("POST");
-int responseCode = con.getResponseCode();
-BufferedReader in = new BufferedReader(
-    new InputStreamReader(con.getInputStream()));
-String inputLine;
-StringBuffer response = new StringBuffer();
-while ((inputLine = in.readLine()) != null) {
-    response.append(inputLine);
-}
-in.close();
-System.out.println(response.toString());
-```
-
-`POST /external/itchioauth`
-
-Request an access token on behalf of an itch.io user via the itch.io desktop app. Due to the desktop application allowing multiple users to be logged in at once, if more than one user is logged in then the user at the top of that list on the itch.io login dialog will be the authenticating user. A Successful request will return an [Access Token Object](#access-token-object).<br><br>__HINT:__ If you want to overlay the mod.io site in-game on itch.io, we recommend you add `?portal=itchio` to the end of the URL you open which will prompt the user to login with itch.io. See [Web Overlay Authentication](#web-overlay-authentication) for details.
-
-     Parameter|Type|Required|Description
-     ---|---|---|---|
-     itchio_token|string|true|The [JWT Token](https://itch.io/docs/itch/integrating/manifest-actions.html) provided by the itch.io desktop application to your game as the environment variable `ITCHIO_API_KEY`. You must setup your itch.io app manifest to include the [API scope](https://itch.io/docs/itch/integrating/manifest-actions.html) to force itch.io to set this variable.
-     email|string||The users email address. If supplied, and the respective user does not have an email registered for their account we will send a confirmation email to confirm they have ownership of the specified email.<br><br>__NOTE__: If the user already has an email on record with us, this parameter will be ignored. This parameter should also be urlencoded before the request is sent.
-     date_expires|integer||Unix timestamp of date in which the returned token will expire. Value cannot be higher than the default value which is a week (unix timestamp + 604800 seconds). Using a token after it's expiry time has elapsed will result in a `401 Unauthorized` response.
-     terms_agreed|boolean||This MUST be set to `false` unless you have collected the [users agreement](#terms) prior to calling this endpoint in which case it can be set to `true` and will be recorded.<br><br>__NOTE:__ If this is set to `false` and the user has not agreed to the latest mod.io Terms of Use and Privacy Policy, an error `403 Forbidden (error_ref 11074)` will be returned and you will need to collect the [users agreement](#terms) and retry with this value set to `true` to authenticate the user.
-
-> Example response
-
-```json
-{
-  "code": 200,
-  "access_token": "eyJ0eXAiOiXKV1QibCJhbLciOiJeiUzI1.....",
-  "date_expires": 1570673249
-}
-
-```
-<h3 id="Authenticate-via-itch.io-responses">Responses</h3>
-
-Status|Meaning|Error Ref|Description|Response Schema
----|---|----|---|---|
-200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)||Successful Request|[Access Token Object](#schemaaccess_token_object)
-401|[Unauthorized](https://tools.ietf.org/html/rfc7235#section-3.1)|14001|The game associated with the supplied api_key is currently not available.|[Error Object](#schemaerror_object)
-401|[Unauthorized](https://tools.ietf.org/html/rfc7235#section-3.1)|11032|mod.io was unable to verify the credentials against the external service provider.|[Error Object](#schemaerror_object)
-401|[Unauthorized](https://tools.ietf.org/html/rfc7235#section-3.1)|11031|mod.io was unable to get account data from itch.io servers.|[Error Object](#schemaerror_object)
-403|[Forbidden](https://tools.ietf.org/html/rfc7231#section-6.5.3)|11016|The api_key supplied in the request must be associated with a game.|[Error Object](#schemaerror_object)
-403|[Forbidden](https://tools.ietf.org/html/rfc7231#section-6.5.3)|11017|The api_key supplied in the request is for test environment purposes only and cannot be used for this functionality.|[Error Object](#schemaerror_object)
-403|[Forbidden](https://tools.ietf.org/html/rfc7231#section-6.5.3)|11074|The user has not agreed to the mod.io Terms of Use. Please see terms_agreed parameter description and the [Terms](#terms) endpoint for more information.|[Error Object](#schemaerror_object)
-<aside class="auth-notice">
-To perform this request, you must be authenticated via one of the following methods:
-<a href="#authentication">api_key</a>
-</aside>
-## Authenticate via Oculus
-
-> Example request
-
-```shell
-# You can also use wget
-curl -X POST https://api.mod.io/v1/external/oculusauth?api_key=YourApiKey \
-  -H 'Content-Type: application/x-www-form-urlencoded' \ 
-  -H 'Accept: application/json' \
-  -d 'device=rift' \
-  -d 'nonce=m72VygeZzTSUVRmNvw8v...' \
-  -d 'user_id=1829770514091149' \
-  -d 'access_token=OCAf5kD1SbVNE...'
-
-```
-
-```http
-POST https://api.mod.io/v1/external/oculusauth?api_key=YourApiKey HTTP/1.1
-Host: api.mod.io
-Content-Type: application/x-www-form-urlencoded
-Accept: application/json
-
-```
-
-```javascript
-var headers = {
-  'Content-Type':'application/x-www-form-urlencoded',
-  'Accept':'application/json'
-
-};
-
-$.ajax({
-  url: 'https://api.mod.io/v1/external/oculusauth',
-  method: 'post',
-  data: '?api_key=YourApiKey',
-  headers: headers,
-  success: function(data) {
-    console.log(JSON.stringify(data));
-  }
-})
-```
-
-```javascript--nodejs
-const request = require('node-fetch');
-const inputBody = '{
-  "device": "rift",
-  "nonce": "m72VygeZzTSUVRmNvw8v...",
-  "user_id": "1829770514091149",
-  "access_token": "OCAf5kD1SbVNE..."
-}';
-const headers = {
-  'Content-Type':'application/x-www-form-urlencoded',
-  'Accept':'application/json'
-
-};
-
-fetch('https://api.mod.io/v1/external/oculusauth?api_key=YourApiKey',
-{
-  method: 'POST',
-  body: inputBody,
-  headers: headers
-})
-.then(function(res) {
-    return res.json();
-}).then(function(body) {
-    console.log(body);
-});
-```
-
-```python
-import requests
-headers = {
-  'Content-Type': 'application/x-www-form-urlencoded',
-  'Accept': 'application/json'
-}
-
-r = requests.post('https://api.mod.io/v1/external/oculusauth', params={
-  'api_key': 'YourApiKey'
-}, headers = headers)
-
-print r.json()
-```
-
-```java
-URL obj = new URL("https://api.mod.io/v1/external/oculusauth?api_key=YourApiKey");
-HttpURLConnection con = (HttpURLConnection) obj.openConnection();
-con.setRequestMethod("POST");
-int responseCode = con.getResponseCode();
-BufferedReader in = new BufferedReader(
-    new InputStreamReader(con.getInputStream()));
-String inputLine;
-StringBuffer response = new StringBuffer();
-while ((inputLine = in.readLine()) != null) {
-    response.append(inputLine);
-}
-in.close();
-System.out.println(response.toString());
-```
-
-`POST /external/oculusauth`
-
-Request an access token on behalf of an Oculus user. To use this functionality you *must* add your games [AppId and secret](https://dashboard.oculus.com/) from the Oculus Dashboard, to the *Edit > Options* page of your games profile on mod.io. A Successful request will return an [Access Token Object](#access-token-object).<br><br>__HINT:__ If you want to overlay the mod.io site in-game on Oculus, we recommend you add `?portal=facebook` to the end of the URL you open which will prompt the user to login with Facebook. See [Web Overlay Authentication](#web-overlay-authentication) for details.
-
-     Parameter|Type|Required|Description
-     ---|---|---|---|
-     device|string|true|The Oculus device being used for authentication.<br><br>Possible Options:<br>- _rift_<br>- _quest_
-     nonce|string|true|The nonce provided by calling [ovr_User_GetUserProof()](https://developer.oculus.com/documentation/platform/latest/concepts/dg-ownership/) from the Oculus SDK. <br><br>__NOTE:__ Due to the `nonce` potentially containing special characters, you must URL encode the string before sending the request to ensure it is successfully sent to our servers otherwise you may encounter an `422 Unprocessable Entity` response. For example, [cURL](https://ec.haxx.se/http-post.html) will do this for you by using the `--data-urlencode` option.
-     user_id|integer|true|The user's Oculus id providing by calling [ovr_GetLoggedInUserID()](https://developer.oculus.com/documentation/platform/latest/concepts/dg-ownership/) from the Oculus SDK.
-     access_token|string|true|The user's access token, providing by calling [ovr_User_GetAccessToken()](https://developer.oculus.com/documentation/platform/latest/concepts/dg-ownership/) from the Oculus SDK. mod.io uses this access token on the first login only to obtain the user's alias and is not saved on our servers.
-     email|string||The users email address. If supplied, and the respective user does not have an email registered for their account we will send a confirmation email to confirm they have ownership of the specified email.<br><br>__WARNING__: We __strongly recommend__ that you prompt your users in a friendly manner at least once to provide their email address to link their Oculus account. Due to how Oculus handles user IDs - if we are not supplied with an email for a user at least once we will __never__ be able to link that user with their existing account at a later date as Oculus IDs operate at the game-scope, not globally. Failing to provide an email will in-effect generate an orphan account that will only be able to be accessed from your title.
-     date_expires|integer||Unix timestamp of date in which the returned token will expire. Value cannot be higher than the default value which is a common year (unix timestamp + 31536000 seconds). Using a token after it's expiry time has elapsed will result in a `401 Unauthorized` response.
-     terms_agreed|boolean||This MUST be set to `false` unless you have collected the [users agreement](#terms) prior to calling this endpoint in which case it can be set to `true` and will be recorded.<br><br>__NOTE:__ If this is set to `false` and the user has not agreed to the latest mod.io Terms of Use and Privacy Policy, an error `403 Forbidden (error_ref 11074)` will be returned and you will need to collect the [users agreement](#terms) and retry with this value set to `true` to authenticate the user.
-
-> Example response
-
-```json
-{
-  "code": 200,
-  "access_token": "eyJ0eXAiOiXKV1QibCJhbLciOiJeiUzI1.....",
-  "date_expires": 1570673249
-}
-
-```
-<h3 id="Authenticate-via-Oculus-responses">Responses</h3>
-
-Status|Meaning|Error Ref|Description|Response Schema
----|---|----|---|---|
-200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)||Successful Request|[Access Token Object](#schemaaccess_token_object)
-401|[Unauthorized](https://tools.ietf.org/html/rfc7235#section-3.1)|14001|The game associated with the supplied api_key is currently not available.|[Error Object](#schemaerror_object)
-401|[Unauthorized](https://tools.ietf.org/html/rfc7235#section-3.1)|11032|mod.io was unable to verify the credentials against the external service provider.|[Error Object](#schemaerror_object)
-403|[Forbidden](https://tools.ietf.org/html/rfc7231#section-6.5.3)|11016|The api_key supplied in the request must be associated with a game.|[Error Object](#schemaerror_object)
-403|[Forbidden](https://tools.ietf.org/html/rfc7231#section-6.5.3)|11017|The api_key supplied in the request is for test environment purposes only and cannot be used for this functionality.|[Error Object](#schemaerror_object)
-403|[Forbidden](https://tools.ietf.org/html/rfc7231#section-6.5.3)|11024|The secret Oculus Rift app ticket associated with this game has not been configured.|[Error Object](#schemaerror_object)
-403|[Forbidden](https://tools.ietf.org/html/rfc7231#section-6.5.3)|11025|The secret Oculus Quest app ticket associated with this game has not been configured.|[Error Object](#schemaerror_object)
-403|[Forbidden](https://tools.ietf.org/html/rfc7231#section-6.5.3)|11074|The user has not agreed to the mod.io Terms of Use. Please see terms_agreed parameter description and the [Terms](#terms) endpoint for more information.|[Error Object](#schemaerror_object)
-<aside class="auth-notice">
-To perform this request, you must be authenticated via one of the following methods:
-<a href="#authentication">api_key</a>
-</aside>
-## Authenticate via Xbox Live
+## Xbox Live
 
 > Example request
 
@@ -1652,7 +1202,7 @@ Request an access token on behalf of an Xbox Live user. A Successful request wil
      Parameter|Type|Required|Description
      ---|---|---|---|
      xbox_token|string|true|The Xbox Live token returned from calling [GetTokenAndSignatureAsync("POST", "https://api.mod.io")](https://docs.microsoft.com/en-us/dotnet/api/microsoft.xbox.services.system.xboxliveuser.gettokenandsignatureasync?view=xboxlive-dotnet-2017.11.20171204.01). <br><br>__NOTE:__ Due to the encrypted app ticket containing special characters, you must URL encode the string before sending the request to ensure it is successfully sent to our servers otherwise you may encounter an `422 Unprocessable Entity` response. For example, [cURL](https://ec.haxx.se/http-post.html) will do this for you by using the `--data-urlencode` option.
-     email|string||The users email address. If supplied, and the respective user does not have an email registered for their account we will send a confirmation email to confirm they have ownership of the specified email. This functionality is also available at a later time via the [Link an Email](#link-an-email) endpoint.<br><br>__NOTE__: If the user already has an email on record with us, this parameter will be ignored. This parameter should also be urlencoded before the request is sent.
+     email|string||The users email address (optional but recommended to help users recover lost accounts). If supplied, and the respective user does not have an email registered for their account we will send a confirmation email to confirm they have ownership of the specified email. This functionality is also available at a later time via the [Link an Email](#link-an-email) endpoint.<br><br>__NOTE__: If the user already has an email on record with us, this parameter will be ignored. This parameter should also be urlencoded before the request is sent.
      date_expires|integer||Unix timestamp of date in which the returned token will expire. Value cannot be higher than the default value which is a common year (unix timestamp + 31536000 seconds). Using a token after it's expiry time has elapsed will result in a `401 Unauthorized` response.
      terms_agreed|boolean||This MUST be set to `false` unless you have collected the [users agreement](#terms) prior to calling this endpoint in which case it can be set to `true` and will be recorded.<br><br>__NOTE:__ If this is set to `false` and the user has not agreed to the latest mod.io Terms of Use and Privacy Policy, an error `403 Forbidden (error_ref 11074)` will be returned and you will need to collect the [users agreement](#terms) and retry with this value set to `true` to authenticate the user.
 
@@ -1666,7 +1216,7 @@ Request an access token on behalf of an Xbox Live user. A Successful request wil
 }
 
 ```
-<h3 id="Authenticate-via-Xbox-Live-responses">Responses</h3>
+<h3 id="Xbox-Live-responses">Responses</h3>
 
 Status|Meaning|Error Ref|Description|Response Schema
 ---|---|----|---|---|
@@ -1684,7 +1234,131 @@ Status|Meaning|Error Ref|Description|Response Schema
 To perform this request, you must be authenticated via one of the following methods:
 <a href="#authentication">api_key</a>
 </aside>
-## Authenticate via Switch
+## PlayStation™ Network
+
+> Example request
+
+```shell
+# You can also use wget
+curl -X POST https://api.mod.io/v1/external/psnauth?api_key=YourApiKey \
+  -H 'Content-Type: application/x-www-form-urlencoded' \ 
+  -H 'Accept: application/json' \
+  -d 'auth_code=MAXfj2TMqpHnaUMJdwCDbZUi2L3usnV7aw7xwHX2PEqT5hLkFF2VUyhlnCAMC0tQR3trpFQot0zvMMEtBzekilqeVD1Qm9nEcs9FljneaL3hCWPFSf6jjDSxOxOSytGD'
+
+```
+
+```http
+POST https://api.mod.io/v1/external/psnauth?api_key=YourApiKey HTTP/1.1
+Host: api.mod.io
+Content-Type: application/x-www-form-urlencoded
+Accept: application/json
+
+```
+
+```javascript
+var headers = {
+  'Content-Type':'application/x-www-form-urlencoded',
+  'Accept':'application/json'
+
+};
+
+$.ajax({
+  url: 'https://api.mod.io/v1/external/psnauth',
+  method: 'post',
+  data: '?api_key=YourApiKey',
+  headers: headers,
+  success: function(data) {
+    console.log(JSON.stringify(data));
+  }
+})
+```
+
+```javascript--nodejs
+const request = require('node-fetch');
+const inputBody = '{
+  "auth_code": "MAXfj2TMqpHnaUMJdwCDbZUi2L3usnV7aw7xwHX2PEqT5hLkFF2VUyhlnCAMC0tQR3trpFQot0zvMMEtBzekilqeVD1Qm9nEcs9FljneaL3hCWPFSf6jjDSxOxOSytGD"
+}';
+const headers = {
+  'Content-Type':'application/x-www-form-urlencoded',
+  'Accept':'application/json'
+
+};
+
+fetch('https://api.mod.io/v1/external/psnauth?api_key=YourApiKey',
+{
+  method: 'POST',
+  body: inputBody,
+  headers: headers
+})
+.then(function(res) {
+    return res.json();
+}).then(function(body) {
+    console.log(body);
+});
+```
+
+```python
+import requests
+headers = {
+  'Content-Type': 'application/x-www-form-urlencoded',
+  'Accept': 'application/json'
+}
+
+r = requests.post('https://api.mod.io/v1/external/psnauth', params={
+  'api_key': 'YourApiKey'
+}, headers = headers)
+
+print r.json()
+```
+
+```java
+URL obj = new URL("https://api.mod.io/v1/external/psnauth?api_key=YourApiKey");
+HttpURLConnection con = (HttpURLConnection) obj.openConnection();
+con.setRequestMethod("POST");
+int responseCode = con.getResponseCode();
+BufferedReader in = new BufferedReader(
+    new InputStreamReader(con.getInputStream()));
+String inputLine;
+StringBuffer response = new StringBuffer();
+while ((inputLine = in.readLine()) != null) {
+    response.append(inputLine);
+}
+in.close();
+System.out.println(response.toString());
+```
+
+`POST /external/psnauth`
+
+Request an access token on behalf of a PlayStation™ Network (PSN) user. A Successful request will return an [Access Token Object](#access-token-object).<br><br>__NOTE__: To use this endpoint you will need to setup some additional settings prior to being able to authenticate Nintendo Switch users, for these instructions please [contact us](mailto:developers@mod.io).
+
+     Parameter|Type|Required|Description
+     ---|---|---|---|
+     auth_code|string|true|The auth code returned from the PlayStation™ Network API.
+     email|string||The users email address. If supplied, and the respective user does not have an email registered for their account we will send a confirmation email to confirm they have ownership of the specified email.
+     date_expires|integer||Unix timestamp of date in which the returned token will expire. Value cannot be higher than the default value which is a common year (unix timestamp + 31536000 seconds). Using a token after it's expiry time has elapsed will result in a `401 Unauthorized` response.
+     terms_agreed|boolean||This MUST be set to `false` unless you have collected the [users agreement](#terms) prior to calling this endpoint in which case it can be set to `true` and will be recorded.<br><br>__NOTE:__ If this is set to `false` and the user has not agreed to the latest mod.io Terms of Use and Privacy Policy, an error `403 Forbidden (error_ref 11074)` will be returned and you will need to collect the [users agreement](#terms) and retry with this value set to `true` to authenticate the user.
+
+> Example response
+
+```json
+{
+  "code": 200,
+  "access_token": "eyJ0eXAiOiXKV1QibCJhbLciOiJeiUzI1.....",
+  "date_expires": 1570673249
+}
+
+```
+<h3 id="PlayStation™-Network-responses">Responses</h3>
+
+Status|Meaning|Error Ref|Description|Response Schema
+---|---|----|---|---|
+200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)||Successful Request|[Access Token Object](#schemaaccess_token_object)
+403|[Forbidden](https://tools.ietf.org/html/rfc7231#section-6.5.3)|11074|The user has not agreed to the mod.io Terms of Use. Please see terms_agreed parameter description and the [Terms](#terms) endpoint for more information.|[Error Object](#schemaerror_object)
+<aside class="auth-notice">
+To perform this request, you must be authenticated via one of the following methods:
+<a href="#authentication">api_key</a>
+</aside>
+## Nintendo Switch
 
 > Example request
 
@@ -1798,7 +1472,7 @@ Request an access token on behalf of a Nintendo Switch user. A Successful reques
 }
 
 ```
-<h3 id="Authenticate-via-Switch-responses">Responses</h3>
+<h3 id="Nintendo-Switch-responses">Responses</h3>
 
 Status|Meaning|Error Ref|Description|Response Schema
 ---|---|----|---|---|
@@ -1814,7 +1488,405 @@ Status|Meaning|Error Ref|Description|Response Schema
 To perform this request, you must be authenticated via one of the following methods:
 <a href="#authentication">api_key</a>
 </aside>
-## Authenticate via Google
+## Meta Quest
+
+> Example request
+
+```shell
+# You can also use wget
+curl -X POST https://api.mod.io/v1/external/oculusauth?api_key=YourApiKey \
+  -H 'Content-Type: application/x-www-form-urlencoded' \ 
+  -H 'Accept: application/json' \
+  -d 'device=rift' \
+  -d 'nonce=m72VygeZzTSUVRmNvw8v...' \
+  -d 'user_id=1829770514091149' \
+  -d 'access_token=OCAf5kD1SbVNE...'
+
+```
+
+```http
+POST https://api.mod.io/v1/external/oculusauth?api_key=YourApiKey HTTP/1.1
+Host: api.mod.io
+Content-Type: application/x-www-form-urlencoded
+Accept: application/json
+
+```
+
+```javascript
+var headers = {
+  'Content-Type':'application/x-www-form-urlencoded',
+  'Accept':'application/json'
+
+};
+
+$.ajax({
+  url: 'https://api.mod.io/v1/external/oculusauth',
+  method: 'post',
+  data: '?api_key=YourApiKey',
+  headers: headers,
+  success: function(data) {
+    console.log(JSON.stringify(data));
+  }
+})
+```
+
+```javascript--nodejs
+const request = require('node-fetch');
+const inputBody = '{
+  "device": "rift",
+  "nonce": "m72VygeZzTSUVRmNvw8v...",
+  "user_id": "1829770514091149",
+  "access_token": "OCAf5kD1SbVNE..."
+}';
+const headers = {
+  'Content-Type':'application/x-www-form-urlencoded',
+  'Accept':'application/json'
+
+};
+
+fetch('https://api.mod.io/v1/external/oculusauth?api_key=YourApiKey',
+{
+  method: 'POST',
+  body: inputBody,
+  headers: headers
+})
+.then(function(res) {
+    return res.json();
+}).then(function(body) {
+    console.log(body);
+});
+```
+
+```python
+import requests
+headers = {
+  'Content-Type': 'application/x-www-form-urlencoded',
+  'Accept': 'application/json'
+}
+
+r = requests.post('https://api.mod.io/v1/external/oculusauth', params={
+  'api_key': 'YourApiKey'
+}, headers = headers)
+
+print r.json()
+```
+
+```java
+URL obj = new URL("https://api.mod.io/v1/external/oculusauth?api_key=YourApiKey");
+HttpURLConnection con = (HttpURLConnection) obj.openConnection();
+con.setRequestMethod("POST");
+int responseCode = con.getResponseCode();
+BufferedReader in = new BufferedReader(
+    new InputStreamReader(con.getInputStream()));
+String inputLine;
+StringBuffer response = new StringBuffer();
+while ((inputLine = in.readLine()) != null) {
+    response.append(inputLine);
+}
+in.close();
+System.out.println(response.toString());
+```
+
+`POST /external/oculusauth`
+
+Request an access token on behalf of an Meta Quest user. To use this functionality you *must* add your games [AppId and secret](https://dashboard.oculus.com/) from the Meta Quest Dashboard, to the *Edit > Options* page of your games profile on mod.io. A Successful request will return an [Access Token Object](#access-token-object).
+
+     Parameter|Type|Required|Description
+     ---|---|---|---|
+     device|string|true|The Meta Quest device being used for authentication.<br><br>Possible Options:<br>- _rift_<br>- _quest_
+     nonce|string|true|The nonce provided by calling [ovr_User_GetUserProof()](https://developer.oculus.com/documentation/platform/latest/concepts/dg-ownership/) from the Meta Quest SDK. <br><br>__NOTE:__ Due to the `nonce` potentially containing special characters, you must URL encode the string before sending the request to ensure it is successfully sent to our servers otherwise you may encounter an `422 Unprocessable Entity` response. For example, [cURL](https://ec.haxx.se/http-post.html) will do this for you by using the `--data-urlencode` option.
+     user_id|integer|true|The user's Meta Quest id providing by calling [ovr_GetLoggedInUserID()](https://developer.oculus.com/documentation/platform/latest/concepts/dg-ownership/) from the Meta Quest SDK.
+     access_token|string|true|The user's access token, providing by calling [ovr_User_GetAccessToken()](https://developer.oculus.com/documentation/platform/latest/concepts/dg-ownership/) from the Meta Quest SDK. mod.io uses this access token on the first login only to obtain the user's alias and is not saved on our servers.
+     email|string||The users email address. If supplied, and the respective user does not have an email registered for their account we will send a confirmation email to confirm they have ownership of the specified email.<br><br>__WARNING__: We __strongly recommend__ that you prompt your users in a friendly manner at least once to provide their email address to link their Meta Quest account. Due to how Meta Quest handles user IDs - if we are not supplied with an email for a user at least once we will __never__ be able to link that user with their existing account at a later date as Meta Quest IDs operate at the game-scope, not globally. Failing to provide an email will in-effect generate an orphan account that will only be able to be accessed from your title.
+     date_expires|integer||Unix timestamp of date in which the returned token will expire. Value cannot be higher than the default value which is a common year (unix timestamp + 31536000 seconds). Using a token after it's expiry time has elapsed will result in a `401 Unauthorized` response.
+     terms_agreed|boolean||This MUST be set to `false` unless you have collected the [users agreement](#terms) prior to calling this endpoint in which case it can be set to `true` and will be recorded.<br><br>__NOTE:__ If this is set to `false` and the user has not agreed to the latest mod.io Terms of Use and Privacy Policy, an error `403 Forbidden (error_ref 11074)` will be returned and you will need to collect the [users agreement](#terms) and retry with this value set to `true` to authenticate the user.
+
+> Example response
+
+```json
+{
+  "code": 200,
+  "access_token": "eyJ0eXAiOiXKV1QibCJhbLciOiJeiUzI1.....",
+  "date_expires": 1570673249
+}
+
+```
+<h3 id="Meta-Quest-responses">Responses</h3>
+
+Status|Meaning|Error Ref|Description|Response Schema
+---|---|----|---|---|
+200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)||Successful Request|[Access Token Object](#schemaaccess_token_object)
+401|[Unauthorized](https://tools.ietf.org/html/rfc7235#section-3.1)|14001|The game associated with the supplied api_key is currently not available.|[Error Object](#schemaerror_object)
+401|[Unauthorized](https://tools.ietf.org/html/rfc7235#section-3.1)|11032|mod.io was unable to verify the credentials against the external service provider.|[Error Object](#schemaerror_object)
+403|[Forbidden](https://tools.ietf.org/html/rfc7231#section-6.5.3)|11016|The api_key supplied in the request must be associated with a game.|[Error Object](#schemaerror_object)
+403|[Forbidden](https://tools.ietf.org/html/rfc7231#section-6.5.3)|11017|The api_key supplied in the request is for test environment purposes only and cannot be used for this functionality.|[Error Object](#schemaerror_object)
+403|[Forbidden](https://tools.ietf.org/html/rfc7231#section-6.5.3)|11024|The secret Oculus Rift app ticket associated with this game has not been configured.|[Error Object](#schemaerror_object)
+403|[Forbidden](https://tools.ietf.org/html/rfc7231#section-6.5.3)|11025|The secret Oculus Quest app ticket associated with this game has not been configured.|[Error Object](#schemaerror_object)
+403|[Forbidden](https://tools.ietf.org/html/rfc7231#section-6.5.3)|11074|The user has not agreed to the mod.io Terms of Use. Please see terms_agreed parameter description and the [Terms](#terms) endpoint for more information.|[Error Object](#schemaerror_object)
+<aside class="auth-notice">
+To perform this request, you must be authenticated via one of the following methods:
+<a href="#authentication">api_key</a>
+</aside>
+## GOG Galaxy
+
+> Example request
+
+```shell
+# You can also use wget
+curl -X POST https://api.mod.io/v1/external/galaxyauth?api_key=YourApiKey \
+  -H 'Content-Type: application/x-www-form-urlencoded' \ 
+  -H 'Accept: application/json' \
+  --data-urlencode 'appdata=GCL671bwZ/+zUeOWc0M'
+
+```
+
+```http
+POST https://api.mod.io/v1/external/galaxyauth?api_key=YourApiKey HTTP/1.1
+Host: api.mod.io
+Content-Type: application/x-www-form-urlencoded
+Accept: application/json
+
+```
+
+```javascript
+var headers = {
+  'Content-Type':'application/x-www-form-urlencoded',
+  'Accept':'application/json'
+
+};
+
+$.ajax({
+  url: 'https://api.mod.io/v1/external/galaxyauth',
+  method: 'post',
+  data: '?api_key=YourApiKey',
+  headers: headers,
+  success: function(data) {
+    console.log(JSON.stringify(data));
+  }
+})
+```
+
+```javascript--nodejs
+const request = require('node-fetch');
+const inputBody = '{
+  "appdata": "GCL671bwZ/+zUeOWc0M"
+}';
+const headers = {
+  'Content-Type':'application/x-www-form-urlencoded',
+  'Accept':'application/json'
+
+};
+
+fetch('https://api.mod.io/v1/external/galaxyauth?api_key=YourApiKey',
+{
+  method: 'POST',
+  body: inputBody,
+  headers: headers
+})
+.then(function(res) {
+    return res.json();
+}).then(function(body) {
+    console.log(body);
+});
+```
+
+```python
+import requests
+headers = {
+  'Content-Type': 'application/x-www-form-urlencoded',
+  'Accept': 'application/json'
+}
+
+r = requests.post('https://api.mod.io/v1/external/galaxyauth', params={
+  'api_key': 'YourApiKey'
+}, headers = headers)
+
+print r.json()
+```
+
+```java
+URL obj = new URL("https://api.mod.io/v1/external/galaxyauth?api_key=YourApiKey");
+HttpURLConnection con = (HttpURLConnection) obj.openConnection();
+con.setRequestMethod("POST");
+int responseCode = con.getResponseCode();
+BufferedReader in = new BufferedReader(
+    new InputStreamReader(con.getInputStream()));
+String inputLine;
+StringBuffer response = new StringBuffer();
+while ((inputLine = in.readLine()) != null) {
+    response.append(inputLine);
+}
+in.close();
+System.out.println(response.toString());
+```
+
+`POST /external/galaxyauth`
+
+Request an access token on behalf of a GOG Galaxy user. To use this functionality you *must* add your games [encrypted app ticket key](https://devportal.gog.com/welcome) from GOG Galaxy, to the *Edit > Options* page of your games profile on mod.io. A Successful request will return an [Access Token Object](#access-token-object).
+
+     Parameter|Type|Required|Description
+     ---|---|---|---|
+     appdata|string|true|The GOG Galaxy users [Encrypted App Ticket](https://cdn.gog.com/open/galaxy/sdk/1.133.3/Documentation/classgalaxy_1_1api_1_1IUser.html#a352802aab7a6e71b1cd1b9b1adfd53d8) provided by the GOG Galaxy SDK. <br><br>Parameter content *MUST* be the encrypted string returned in the buffer after calling [IUser::GetEncryptedAppTicket()](https://cdn.gog.com/open/galaxy/sdk/1.133.3/Documentation/classgalaxy_1_1api_1_1IUser.html#a96af6792efc260e75daebedca2cf74c6) within the Galaxy SDK. Unlike the [Steam Authentication](#steam) endpoint, you do not need to encode the encrypted string as this is already done by the Galaxy SDK.<br><br>__NOTE:__ Due to the encrypted app ticket containing special characters, you must URL encode the string before sending the request to ensure it is successfully sent to our servers otherwise you may encounter an `422 Unprocessable Entity` response. For example, [cURL](https://ec.haxx.se/http-post.html) will do this for you by using the `--data-urlencode` option.
+     email|string||The users email address (optional but recommended to help users recover lost accounts). If supplied, and the respective user does not have an email registered for their account we will send a confirmation email to confirm they have ownership of the specified email.<br><br>__NOTE__: If the user already has an email on record with us, this parameter will be ignored. This parameter should also be urlencoded before the request is sent.
+     date_expires|integer||Unix timestamp of date in which the returned token will expire. Value cannot be higher than the default value which is a common year (unix timestamp + 31536000 seconds). Using a token after it's expiry time has elapsed will result in a `401 Unauthorized` response.
+     terms_agreed|boolean||This MUST be set to `false` unless you have collected the [users agreement](#terms) prior to calling this endpoint in which case it can be set to `true` and will be recorded.<br><br>__NOTE:__ If this is set to `false` and the user has not agreed to the latest mod.io Terms of Use and Privacy Policy, an error `403 Forbidden (error_ref 11074)` will be returned and you will need to collect the [users agreement](#terms) and retry with this value set to `true` to authenticate the user.
+
+> Example response
+
+```json
+{
+  "code": 200,
+  "access_token": "eyJ0eXAiOiXKV1QibCJhbLciOiJeiUzI1.....",
+  "date_expires": 1570673249
+}
+
+```
+<h3 id="GOG-Galaxy-responses">Responses</h3>
+
+Status|Meaning|Error Ref|Description|Response Schema
+---|---|----|---|---|
+200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)||Successful Request|[Access Token Object](#schemaaccess_token_object)
+401|[Unauthorized](https://tools.ietf.org/html/rfc7235#section-3.1)|14001|The game associated with the supplied api_key is currently not available.|[Error Object](#schemaerror_object)
+401|[Unauthorized](https://tools.ietf.org/html/rfc7235#section-3.1)|11021|The GOG Galaxy encrypted app ticket was invalid.|[Error Object](#schemaerror_object)
+401|[Unauthorized](https://tools.ietf.org/html/rfc7235#section-3.1)|11032|mod.io was unable to verify the credentials against the external service provider.|[Error Object](#schemaerror_object)
+403|[Forbidden](https://tools.ietf.org/html/rfc7231#section-6.5.3)|11016|The api_key supplied in the request must be associated with a game.|[Error Object](#schemaerror_object)
+403|[Forbidden](https://tools.ietf.org/html/rfc7231#section-6.5.3)|11017|The api_key supplied in the request is for test environment purposes only and cannot be used for this functionality.|[Error Object](#schemaerror_object)
+403|[Forbidden](https://tools.ietf.org/html/rfc7231#section-6.5.3)|11022|The secret GOG Galaxy app ticket associated with this game has not been configured.|[Error Object](#schemaerror_object)
+403|[Forbidden](https://tools.ietf.org/html/rfc7231#section-6.5.3)|11074|The user has not agreed to the mod.io Terms of Use. Please see terms_agreed parameter description and the [Terms](#terms) endpoint for more information.|[Error Object](#schemaerror_object)
+<aside class="auth-notice">
+To perform this request, you must be authenticated via one of the following methods:
+<a href="#authentication">api_key</a>
+</aside>
+## itch.io
+
+> Example request
+
+```shell
+# You can also use wget
+curl -X POST https://api.mod.io/v1/external/itchioauth?api_key=YourApiKey \
+  -H 'Content-Type: application/x-www-form-urlencoded' \ 
+  -H 'Accept: application/json' \
+  -d 'itchio_token=eyJhbXciOiJIUzI1Lizs....'
+
+```
+
+```http
+POST https://api.mod.io/v1/external/itchioauth?api_key=YourApiKey HTTP/1.1
+Host: api.mod.io
+Content-Type: application/x-www-form-urlencoded
+Accept: application/json
+
+```
+
+```javascript
+var headers = {
+  'Content-Type':'application/x-www-form-urlencoded',
+  'Accept':'application/json'
+
+};
+
+$.ajax({
+  url: 'https://api.mod.io/v1/external/itchioauth',
+  method: 'post',
+  data: '?api_key=YourApiKey',
+  headers: headers,
+  success: function(data) {
+    console.log(JSON.stringify(data));
+  }
+})
+```
+
+```javascript--nodejs
+const request = require('node-fetch');
+const inputBody = '{
+  "itchio_token": "eyJhbXciOiJIUzI1Lizs...."
+}';
+const headers = {
+  'Content-Type':'application/x-www-form-urlencoded',
+  'Accept':'application/json'
+
+};
+
+fetch('https://api.mod.io/v1/external/itchioauth?api_key=YourApiKey',
+{
+  method: 'POST',
+  body: inputBody,
+  headers: headers
+})
+.then(function(res) {
+    return res.json();
+}).then(function(body) {
+    console.log(body);
+});
+```
+
+```python
+import requests
+headers = {
+  'Content-Type': 'application/x-www-form-urlencoded',
+  'Accept': 'application/json'
+}
+
+r = requests.post('https://api.mod.io/v1/external/itchioauth', params={
+  'api_key': 'YourApiKey'
+}, headers = headers)
+
+print r.json()
+```
+
+```java
+URL obj = new URL("https://api.mod.io/v1/external/itchioauth?api_key=YourApiKey");
+HttpURLConnection con = (HttpURLConnection) obj.openConnection();
+con.setRequestMethod("POST");
+int responseCode = con.getResponseCode();
+BufferedReader in = new BufferedReader(
+    new InputStreamReader(con.getInputStream()));
+String inputLine;
+StringBuffer response = new StringBuffer();
+while ((inputLine = in.readLine()) != null) {
+    response.append(inputLine);
+}
+in.close();
+System.out.println(response.toString());
+```
+
+`POST /external/itchioauth`
+
+Request an access token on behalf of an itch.io user via the itch.io desktop app. Due to the desktop application allowing multiple users to be logged in at once, if more than one user is logged in then the user at the top of that list on the itch.io login dialog will be the authenticating user. A Successful request will return an [Access Token Object](#access-token-object).<br><br>__HINT:__ If you want to overlay the mod.io site in-game on itch.io, we recommend you add `?portal=itchio` to the end of the URL you open which will prompt the user to login with itch.io. See [Web Overlay Authentication](#web-overlay-authentication) for details.
+
+     Parameter|Type|Required|Description
+     ---|---|---|---|
+     itchio_token|string|true|The [JWT Token](https://itch.io/docs/itch/integrating/manifest-actions.html) provided by the itch.io desktop application to your game as the environment variable `ITCHIO_API_KEY`. You must setup your itch.io app manifest to include the [API scope](https://itch.io/docs/itch/integrating/manifest-actions.html) to force itch.io to set this variable.
+     email|string||The users email address (optional but recommended to help users recover lost accounts). If supplied, and the respective user does not have an email registered for their account we will send a confirmation email to confirm they have ownership of the specified email.<br><br>__NOTE__: If the user already has an email on record with us, this parameter will be ignored. This parameter should also be urlencoded before the request is sent.
+     date_expires|integer||Unix timestamp of date in which the returned token will expire. Value cannot be higher than the default value which is a week (unix timestamp + 604800 seconds). Using a token after it's expiry time has elapsed will result in a `401 Unauthorized` response.
+     terms_agreed|boolean||This MUST be set to `false` unless you have collected the [users agreement](#terms) prior to calling this endpoint in which case it can be set to `true` and will be recorded.<br><br>__NOTE:__ If this is set to `false` and the user has not agreed to the latest mod.io Terms of Use and Privacy Policy, an error `403 Forbidden (error_ref 11074)` will be returned and you will need to collect the [users agreement](#terms) and retry with this value set to `true` to authenticate the user.
+
+> Example response
+
+```json
+{
+  "code": 200,
+  "access_token": "eyJ0eXAiOiXKV1QibCJhbLciOiJeiUzI1.....",
+  "date_expires": 1570673249
+}
+
+```
+<h3 id="itch.io-responses">Responses</h3>
+
+Status|Meaning|Error Ref|Description|Response Schema
+---|---|----|---|---|
+200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)||Successful Request|[Access Token Object](#schemaaccess_token_object)
+401|[Unauthorized](https://tools.ietf.org/html/rfc7235#section-3.1)|14001|The game associated with the supplied api_key is currently not available.|[Error Object](#schemaerror_object)
+401|[Unauthorized](https://tools.ietf.org/html/rfc7235#section-3.1)|11032|mod.io was unable to verify the credentials against the external service provider.|[Error Object](#schemaerror_object)
+401|[Unauthorized](https://tools.ietf.org/html/rfc7235#section-3.1)|11031|mod.io was unable to get account data from itch.io servers.|[Error Object](#schemaerror_object)
+403|[Forbidden](https://tools.ietf.org/html/rfc7231#section-6.5.3)|11016|The api_key supplied in the request must be associated with a game.|[Error Object](#schemaerror_object)
+403|[Forbidden](https://tools.ietf.org/html/rfc7231#section-6.5.3)|11017|The api_key supplied in the request is for test environment purposes only and cannot be used for this functionality.|[Error Object](#schemaerror_object)
+403|[Forbidden](https://tools.ietf.org/html/rfc7231#section-6.5.3)|11074|The user has not agreed to the mod.io Terms of Use. Please see terms_agreed parameter description and the [Terms](#terms) endpoint for more information.|[Error Object](#schemaerror_object)
+<aside class="auth-notice">
+To perform this request, you must be authenticated via one of the following methods:
+<a href="#authentication">api_key</a>
+</aside>
+## Google
 
 > Example request
 
@@ -1927,7 +1999,7 @@ Request an access token on behalf of a Google user. A Successful request will re
 }
 
 ```
-<h3 id="Authenticate-via-Google-responses">Responses</h3>
+<h3 id="Google-responses">Responses</h3>
 
 Status|Meaning|Error Ref|Description|Response Schema
 ---|---|----|---|---|
@@ -1941,7 +2013,7 @@ Status|Meaning|Error Ref|Description|Response Schema
 To perform this request, you must be authenticated via one of the following methods:
 <a href="#authentication">api_key</a>
 </aside>
-## Authenticate via Discord
+## Discord
 
 > Example request
 
@@ -2041,7 +2113,7 @@ Request an access token on behalf of a Discord user. A Successful request will r
      Parameter|Type|Required|Description
      ---|---|---|---|
      discord_token|string|true|The access token of the user provided by Discord.
-     email|string||The users email address. If supplied, and the respective user does not have an email registered for their account we will send a confirmation email to confirm they have ownership of the specified email.<br><br>__NOTE__: If the user already has an email on record with us, this parameter will be ignored. This parameter should also be urlencoded before the request is sent.
+     email|string||The users email address (optional but recommended to help users recover lost accounts). If supplied, and the respective user does not have an email registered for their account we will send a confirmation email to confirm they have ownership of the specified email.<br><br>__NOTE__: If the user already has an email on record with us, this parameter will be ignored. This parameter should also be urlencoded before the request is sent.
      date_expires|integer||Unix timestamp of date in which the returned token will expire. Value cannot be higher than the default value which is a week (unix timestamp + 604800 seconds). Using a token after it's expiry time has elapsed will result in a `401 Unauthorized` response.
      terms_agreed|boolean||This MUST be set to `false` unless you have collected the [users agreement](#terms) prior to calling this endpoint in which case it can be set to `true` and will be recorded.<br><br>__NOTE:__ If this is set to `false` and the user has not agreed to the latest mod.io Terms of Use and Privacy Policy, an error `403 Forbidden (error_ref 11074)` will be returned and you will need to collect the [users agreement](#terms) and retry with this value set to `true` to authenticate the user.
 
@@ -2055,7 +2127,7 @@ Request an access token on behalf of a Discord user. A Successful request will r
 }
 
 ```
-<h3 id="Authenticate-via-Discord-responses">Responses</h3>
+<h3 id="Discord-responses">Responses</h3>
 
 Status|Meaning|Error Ref|Description|Response Schema
 ---|---|----|---|---|
@@ -2070,7 +2142,255 @@ Status|Meaning|Error Ref|Description|Response Schema
 To perform this request, you must be authenticated via one of the following methods:
 <a href="#authentication">api_key</a>
 </aside>
+## Email Exchange
+__Step 1 of 2__
 
+> Example request
+
+```shell
+# You can also use wget
+curl -X POST https://api.mod.io/v1/oauth/emailrequest?api_key=YourApiKey \
+  -H 'Content-Type: application/x-www-form-urlencoded' \ 
+  -H 'Accept: application/json' \
+  -d 'email=awesomeplayer289@gmail.com'
+
+```
+
+```http
+POST https://api.mod.io/v1/oauth/emailrequest?api_key=YourApiKey HTTP/1.1
+Host: api.mod.io
+Content-Type: application/x-www-form-urlencoded
+Accept: application/json
+
+```
+
+```javascript
+var headers = {
+  'Content-Type':'application/x-www-form-urlencoded',
+  'Accept':'application/json'
+
+};
+
+$.ajax({
+  url: 'https://api.mod.io/v1/oauth/emailrequest',
+  method: 'post',
+  data: '?api_key=YourApiKey',
+  headers: headers,
+  success: function(data) {
+    console.log(JSON.stringify(data));
+  }
+})
+```
+
+```javascript--nodejs
+const request = require('node-fetch');
+const inputBody = '{
+  "email": "awesomeplayer289@gmail.com"
+}';
+const headers = {
+  'Content-Type':'application/x-www-form-urlencoded',
+  'Accept':'application/json'
+
+};
+
+fetch('https://api.mod.io/v1/oauth/emailrequest?api_key=YourApiKey',
+{
+  method: 'POST',
+  body: inputBody,
+  headers: headers
+})
+.then(function(res) {
+    return res.json();
+}).then(function(body) {
+    console.log(body);
+});
+```
+
+```python
+import requests
+headers = {
+  'Content-Type': 'application/x-www-form-urlencoded',
+  'Accept': 'application/json'
+}
+
+r = requests.post('https://api.mod.io/v1/oauth/emailrequest', params={
+  'api_key': 'YourApiKey'
+}, headers = headers)
+
+print r.json()
+```
+
+```java
+URL obj = new URL("https://api.mod.io/v1/oauth/emailrequest?api_key=YourApiKey");
+HttpURLConnection con = (HttpURLConnection) obj.openConnection();
+con.setRequestMethod("POST");
+int responseCode = con.getResponseCode();
+BufferedReader in = new BufferedReader(
+    new InputStreamReader(con.getInputStream()));
+String inputLine;
+StringBuffer response = new StringBuffer();
+while ((inputLine = in.readLine()) != null) {
+    response.append(inputLine);
+}
+in.close();
+System.out.println(response.toString());
+```
+
+`POST /oauth/emailrequest`
+
+Request a security code for a user, identified by their e-mail which can then be [exchanged](#email) for an access token. To use this functionality you *must* use your games api_key from your games profile on mod.io. A Successful request will return a [Message Object](#message-object).
+
+     Parameter|Type|Required|Description
+     ---|---|---|---|
+     email|string|true|An email address the user can access to retrieve the security code. This parameter should also be urlencoded before the request is sent.
+
+> Example response
+
+```json
+{
+  "code": 201,
+  "message": "Please enter the 5-digit security code sent to your email address (awesomeplayer289@gmail.com)."
+}
+
+```
+<h3 id="Email-(Request)-responses">Responses</h3>
+
+Status|Meaning|Error Ref|Description|Response Schema
+---|---|----|---|---|
+200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)||Successful Request|[Email Request Response](#schemaemail_request_response)
+403|[Forbidden](https://tools.ietf.org/html/rfc7231#section-6.5.3)|11017|The supplied api_key cannot be used to generate access tokens. Please replace the supplied api_key with your game's api_key to enable full privileges.|[Error Object](#schemaerror_object)
+<aside class="auth-notice">
+To perform this request, you must be authenticated via one of the following methods:
+<a href="#authentication">api_key</a>
+</aside>
+
+<br>
+__Step 2 of 2__
+
+
+> Example request
+
+```shell
+# You can also use wget
+curl -X POST https://api.mod.io/v1/oauth/emailexchange?api_key=YourApiKey \
+  -H 'Content-Type: application/x-www-form-urlencoded' \ 
+  -H 'Accept: application/json' \
+  -d 'security_code=P39TM'
+
+```
+
+```http
+POST https://api.mod.io/v1/oauth/emailexchange?api_key=YourApiKey HTTP/1.1
+Host: api.mod.io
+Content-Type: application/x-www-form-urlencoded
+Accept: application/json
+
+```
+
+```javascript
+var headers = {
+  'Content-Type':'application/x-www-form-urlencoded',
+  'Accept':'application/json'
+
+};
+
+$.ajax({
+  url: 'https://api.mod.io/v1/oauth/emailexchange',
+  method: 'post',
+  data: '?api_key=YourApiKey',
+  headers: headers,
+  success: function(data) {
+    console.log(JSON.stringify(data));
+  }
+})
+```
+
+```javascript--nodejs
+const request = require('node-fetch');
+const inputBody = '{
+  "security_code": "P39TM"
+}';
+const headers = {
+  'Content-Type':'application/x-www-form-urlencoded',
+  'Accept':'application/json'
+
+};
+
+fetch('https://api.mod.io/v1/oauth/emailexchange?api_key=YourApiKey',
+{
+  method: 'POST',
+  body: inputBody,
+  headers: headers
+})
+.then(function(res) {
+    return res.json();
+}).then(function(body) {
+    console.log(body);
+});
+```
+
+```python
+import requests
+headers = {
+  'Content-Type': 'application/x-www-form-urlencoded',
+  'Accept': 'application/json'
+}
+
+r = requests.post('https://api.mod.io/v1/oauth/emailexchange', params={
+  'api_key': 'YourApiKey'
+}, headers = headers)
+
+print r.json()
+```
+
+```java
+URL obj = new URL("https://api.mod.io/v1/oauth/emailexchange?api_key=YourApiKey");
+HttpURLConnection con = (HttpURLConnection) obj.openConnection();
+con.setRequestMethod("POST");
+int responseCode = con.getResponseCode();
+BufferedReader in = new BufferedReader(
+    new InputStreamReader(con.getInputStream()));
+String inputLine;
+StringBuffer response = new StringBuffer();
+while ((inputLine = in.readLine()) != null) {
+    response.append(inputLine);
+}
+in.close();
+System.out.println(response.toString());
+```
+
+`POST /oauth/emailexchange`
+
+Exchange a security code issued from the [Email Request endpoint](#email) for an access token. To use this functionality you *must* use your games api_key from your games profile on mod.io and the same api_key must be used from the original request for a security code. A Successful request will return an [Access Token Object](#access-token-object).
+
+    Parameter|Type|Required|Description
+    ---|---|---|---|
+    security_code|string|true|The alpha-numeric security code.
+    date_expires|integer||Unix timestamp of date in which the returned token will expire. Value cannot be higher than the default value which is a common year (unix timestamp + 31536000 seconds). Using a token after it's expiry time has elapsed will result in a `401 Unauthorized` response.
+
+> Example response
+
+```json
+{
+  "code": 200,
+  "access_token": "eyJ0eXAiOiXKV1QibCJhbLciOiJeiUzI1.....",
+  "date_expires": 1570673249
+}
+
+```
+<h3 id="Email-(Exchange)-responses">Responses</h3>
+
+Status|Meaning|Error Ref|Description|Response Schema
+---|---|----|---|---|
+200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)||Successful Request|[Access Token Object](#schemaaccess_token_object)
+401|[Unauthorized](https://tools.ietf.org/html/rfc7235#section-3.1)|11013|Authorization failed. You must use the same api_key for both stages of the authentication process.|[Error Object](#schemaerror_object)
+401|[Unauthorized](https://tools.ietf.org/html/rfc7235#section-3.1)|11012|Authorization failed, security code has expired. Please request a new code.|[Error Object](#schemaerror_object)
+401|[Unauthorized](https://tools.ietf.org/html/rfc7235#section-3.1)|11011|Authorization failed. Security code has already been redeemed.|[Error Object](#schemaerror_object)
+401|[Unauthorized](https://tools.ietf.org/html/rfc7235#section-3.1)|11014|Authorization failed. Invalid security code.|[Error Object](#schemaerror_object)
+<aside class="auth-notice">
+To perform this request, you must be authenticated via one of the following methods:
+<a href="#authentication">api_key</a>
+</aside>
 # Games
 
 ## Get Games
@@ -2172,17 +2492,17 @@ Get all games. Successful request will return an array of [Game Objects](#get-ga
     date_updated|integer|Unix timestamp of date game was updated.
     date_live|integer|Unix timestamp of date game was set live.
     name|string|Name of the game.
-    name_id|string|Subdomain for the game on mod.io. For example: https://gamename.mod.io
+    name_id|string|Path for the game on mod.io. For example: https://mod.io/g/gamename
     summary|string|Summary of the games mod support.
     instructions_url|string|Link to a mod.io guide, modding wiki or a page where modders can learn how to make and submit mods.
     ugc_name|string|Word used to describe user-generated content (mods, items, addons etc).
     presentation_option|integer|Presentation style used on the mod.io website:<br><br>__0__ =  Grid View: Displays mods in a grid<br>__1__ = Table View: Displays mods in a table
     submission_option|integer|Submission process modders must follow:<br><br>__0__ = Mod uploads must occur via the API using a tool created by the game developers<br>__1__ = Mod uploads can occur from anywhere, including the website and API
     curation_option|integer|Curation process used to approve mods:<br><br>__0__ = No curation: Mods are immediately available to play<br>__1__ = Paid curation: Mods are immediately available to play unless they choose to receive donations. These mods must be accepted to be listed<br>__2__ = Full curation: All mods must be accepted by someone to be listed
-    community_options|integer|Community features enabled on the mod.io website:<br><br>__0__ = All of the options below are disabled<br>__1__ = Enable comments<br>__2__ = Enable guides<br>__4__ = Disable website _"subscribe to install"_ text<br>__?__ = Combine to find games with multiple options enabled (see [BITWISE fields](#bitwise-and-bitwise-and))
+    community_options|integer|Community features enabled on the mod.io website:<br><br>__0__ = All of the options below are disabled<br>__1__ = Enable comments<br>__2__ = Enable guides<br>__?__ = Combine to find games with multiple options enabled (see [BITWISE fields](#bitwise-and-bitwise-and))
     revenue_options|integer|Revenue capabilities mods can enable:<br><br>__0__ = All of the options below are disabled<br>__1__ = Allow mods to be sold<br>__2__ = Allow mods to receive donations<br>__4__ = Allow mods to be traded<br>__8__ = Allow mods to control supply and scarcity<br>__?__ = Combine to find games with multiple options enabled (see [BITWISE fields](#bitwise-and-bitwise-and))
     api_access_options|integer|Level of API access allowed by this game:<br><br>__0__ = All of the options below are disabled<br>__1__ = Allow 3rd parties to access this games API endpoints<br>__2__ = Allow mods to be downloaded directly (if disabled all download URLs will contain a frequently changing verification hash to stop unauthorized use)<br>__?__ = Combine to find games with multiple options enabled (see [BITWISE fields](#bitwise-and-bitwise-and))
-    maturity_options|integer|If the game allows developers to flag mods as containing mature content, and/or the game is for adults only:<br><br>__0__ = Don't allow mature content in mods _(default)_<br>__1__ = Allow mature content in mods<br>__2__ = This game is for adults only<br>__?__ = Combine to find games with multiple options enabled (see [BITWISE fields](#bitwise-and-bitwise-and)
+    maturity_options|integer|Mature content setup for this game:<br><br>__0__ = Don't allow mature content in mods _(default)_<br>__1__ = Allow mature content in mods<br>__2__ = This game is for mature audiences only<br>__?__ = Combine to find games with multiple options enabled (see [BITWISE fields](#bitwise-and-bitwise-and)
     show_hidden_tags|bool|show the hidden tags associated with the given game.
 
 > Example response
@@ -2193,58 +2513,42 @@ Get all games. Successful request will return an array of [Game Objects](#get-ga
     {
       "id": 2,
       "status": 1,
-      "submitted_by": {
-        "id": 1,
-        "name_id": "xant",
-        "username": "XanT",
-        "display_name_portal": null,
-        "date_online": 1509922961,
-        "date_joined": 1509922961,
-        "avatar": {
-          "filename": "modio-color-dark.png",
-          "original": "https://static.mod.io/v1/images/branding/modio-color-dark.png",
-          "thumb_50x50": "https://static.mod.io/v1/images/branding/modio-color-dark.png",
-          "thumb_100x100": "https://static.mod.io/v1/images/branding/modio-color-dark.png"
-        },
-        "timezone": "",
-        "language": "",
-        "profile_url": "https://mod.io/members/xant"
-      },
+      "submitted_by": null,
       "date_added": 1493702614,
       "date_updated": 1499410290,
       "date_live": 1499841403,
-      "presentation_option": 1,
-      "submission_option": 0,
+      "presentation_option": 0,
+      "submission_option": 1,
       "curation_option": 0,
       "community_options": 3,
-      "revenue_options": 1500,
+      "revenue_options": 0,
       "api_access_options": 3,
       "maturity_options": 0,
-      "ugc_name": "map",
+      "ugc_name": "mods",
       "icon": {
-        "filename": "modio-color-dark.png",
-        "original": "https://static.mod.io/v1/images/branding/modio-color-dark.png",
-        "thumb_64x64": "https://static.mod.io/v1/images/branding/modio-color-dark.png",
-        "thumb_128x128": "https://static.mod.io/v1/images/branding/modio-color-dark.png",
-        "thumb_256x256": "https://static.mod.io/v1/images/branding/modio-color-dark.png"
+        "filename": "icon.png",
+        "original": "https://assets.modcdn.io/images/placeholder/icon.png",
+        "thumb_64x64": "https://assets.modcdn.io/images/placeholder/icon.png",
+        "thumb_128x128": "https://assets.modcdn.io/images/placeholder/icon.png",
+        "thumb_256x256": "https://assets.modcdn.io/images/placeholder/icon.png"
       },
       "logo": {
-        "filename": "modio-color-dark.png",
-        "original": "https://static.mod.io/v1/images/branding/modio-color-dark.png",
-        "thumb_320x180": "https://static.mod.io/v1/images/branding/modio-color-dark.png",
-        "thumb_640x360": "https://static.mod.io/v1/images/branding/modio-color-dark.png",
-        "thumb_1280x720": "https://static.mod.io/v1/images/branding/modio-color-dark.png"
+        "filename": "card.png",
+        "original": "https://assets.modcdn.io/images/placeholder/card.png",
+        "thumb_320x180": "https://assets.modcdn.io/images/placeholder/card.png",
+        "thumb_640x360": "https://assets.modcdn.io/images/placeholder/card.png",
+        "thumb_1280x720": "https://assets.modcdn.io/images/placeholder/card.png"
       },
       "header": {
-        "filename": "demo.png",
-        "original": "https://static.mod.io/v1/images/branding/modio-color-dark.png"
+        "filename": "modio-logo-bluedark.png",
+        "original": "https://assets.modcdn.io/images/branding/modio-logo-bluedark.png"
       },
       "name": "Rogue Knight",
       "name_id": "rogue-knight",
       "summary": "Rogue Knight is a brand new 2D pixel platformer that supports custom levels and characters.",
       "instructions": "Instructions on the process to upload mods.",
       "instructions_url": "https://www.rogue-knight-game.com/modding/getting-started",
-      "profile_url": "https://rogue-knight.mod.io",
+      "profile_url": "https://mod.io/g/rogue-knight",
       "other_urls": [
         {
           "label": "Our Steam Page",
@@ -2265,6 +2569,16 @@ Get all games. Successful request will return an array of [Game Objects](#get-ga
           "locked": false
         }
       ],
+      "monetisation_options": {
+        "enabled": false,
+        "patronage": false
+      },
+      "monetisation": {
+        "monetisation_team_id": 0,
+        "monetisation_type": "kyc",
+        "platform_cut": "The platform cut for this team.",
+        "onboarded": "pending"
+      },
       "stats": {
         "game_id": 2,
         "mods_count_total": 13,
@@ -2285,10 +2599,15 @@ Get all games. Successful request will return an array of [Game Objects](#get-ga
       "platforms": [
         {
           "platform": "ps5",
-          "label": "Playstation 5",
+          "label": "PlayStation 5",
           "moderated": true
         }
-      ]
+      ],
+      "patronage": {
+        "min_patronage": 100,
+        "max_patronage": 1000000,
+        "default_patronage": 500
+      }
     },
     {
         ...
@@ -2410,58 +2729,42 @@ Get a game. Successful request will return a single [Game Object](#game-object).
 {
   "id": 2,
   "status": 1,
-  "submitted_by": {
-    "id": 1,
-    "name_id": "xant",
-    "username": "XanT",
-    "display_name_portal": null,
-    "date_online": 1509922961,
-    "date_joined": 1509922961,
-    "avatar": {
-      "filename": "modio-color-dark.png",
-      "original": "https://static.mod.io/v1/images/branding/modio-color-dark.png",
-      "thumb_50x50": "https://static.mod.io/v1/images/branding/modio-color-dark.png",
-      "thumb_100x100": "https://static.mod.io/v1/images/branding/modio-color-dark.png"
-    },
-    "timezone": "",
-    "language": "",
-    "profile_url": "https://mod.io/members/xant"
-  },
+  "submitted_by": null,
   "date_added": 1493702614,
   "date_updated": 1499410290,
   "date_live": 1499841403,
-  "presentation_option": 1,
-  "submission_option": 0,
+  "presentation_option": 0,
+  "submission_option": 1,
   "curation_option": 0,
   "community_options": 3,
-  "revenue_options": 1500,
+  "revenue_options": 0,
   "api_access_options": 3,
   "maturity_options": 0,
-  "ugc_name": "map",
+  "ugc_name": "mods",
   "icon": {
-    "filename": "modio-color-dark.png",
-    "original": "https://static.mod.io/v1/images/branding/modio-color-dark.png",
-    "thumb_64x64": "https://static.mod.io/v1/images/branding/modio-color-dark.png",
-    "thumb_128x128": "https://static.mod.io/v1/images/branding/modio-color-dark.png",
-    "thumb_256x256": "https://static.mod.io/v1/images/branding/modio-color-dark.png"
+    "filename": "icon.png",
+    "original": "https://assets.modcdn.io/images/placeholder/icon.png",
+    "thumb_64x64": "https://assets.modcdn.io/images/placeholder/icon.png",
+    "thumb_128x128": "https://assets.modcdn.io/images/placeholder/icon.png",
+    "thumb_256x256": "https://assets.modcdn.io/images/placeholder/icon.png"
   },
   "logo": {
-    "filename": "modio-color-dark.png",
-    "original": "https://static.mod.io/v1/images/branding/modio-color-dark.png",
-    "thumb_320x180": "https://static.mod.io/v1/images/branding/modio-color-dark.png",
-    "thumb_640x360": "https://static.mod.io/v1/images/branding/modio-color-dark.png",
-    "thumb_1280x720": "https://static.mod.io/v1/images/branding/modio-color-dark.png"
+    "filename": "card.png",
+    "original": "https://assets.modcdn.io/images/placeholder/card.png",
+    "thumb_320x180": "https://assets.modcdn.io/images/placeholder/card.png",
+    "thumb_640x360": "https://assets.modcdn.io/images/placeholder/card.png",
+    "thumb_1280x720": "https://assets.modcdn.io/images/placeholder/card.png"
   },
   "header": {
-    "filename": "demo.png",
-    "original": "https://static.mod.io/v1/images/branding/modio-color-dark.png"
+    "filename": "modio-logo-bluedark.png",
+    "original": "https://assets.modcdn.io/images/branding/modio-logo-bluedark.png"
   },
   "name": "Rogue Knight",
   "name_id": "rogue-knight",
   "summary": "Rogue Knight is a brand new 2D pixel platformer that supports custom levels and characters.",
   "instructions": "Instructions on the process to upload mods.",
   "instructions_url": "https://www.rogue-knight-game.com/modding/getting-started",
-  "profile_url": "https://rogue-knight.mod.io",
+  "profile_url": "https://mod.io/g/rogue-knight",
   "other_urls": [
     {
       "label": "Our Steam Page",
@@ -2482,6 +2785,16 @@ Get a game. Successful request will return a single [Game Object](#game-object).
       "locked": false
     }
   ],
+  "monetisation_options": {
+    "enabled": false,
+    "patronage": false
+  },
+  "monetisation": {
+    "monetisation_team_id": 0,
+    "monetisation_type": "kyc",
+    "platform_cut": "The platform cut for this team.",
+    "onboarded": "pending"
+  },
   "stats": {
     "game_id": 2,
     "mods_count_total": 13,
@@ -2502,10 +2815,15 @@ Get a game. Successful request will return a single [Game Object](#game-object).
   "platforms": [
     {
       "platform": "ps5",
-      "label": "Playstation 5",
+      "label": "PlayStation 5",
       "moderated": true
     }
-  ]
+  ],
+  "patronage": {
+    "min_patronage": 100,
+    "max_patronage": 1000000,
+    "default_patronage": 500
+  }
 }
 
 ```
@@ -2622,12 +2940,13 @@ Get all mods for the corresponding game. Successful request will return an array
     date_live|integer|Unix timestamp of date mod was set live.
     maturity_option|integer|Maturity option(s) set by the mod developer:<br><br>__0__ = None set _(default)_<br>__1__ = Alcohol<br>__2__ = Drugs<br>__4__ = Violence<br>__8__ = Explicit<br>__?__ = Add the options you want together, to enable multiple filters (see [BITWISE fields](#bitwise-and-bitwise-and))
     name|string|Name of the mod.
-    name_id|string|URL-friendly name for the mod on mod.io. For example: https://gamename.mod.io/__mod-name-id-here__
+    name_id|string|Path for the mod on mod.io. For example: https://mod.io/g/gamename/m/__mod-name-id-here__
     modfile|integer|Unique id of the file that is the current active release (see [mod files](#files)).
     metadata_blob|string|Metadata stored by the game developer.
     metadata_kvp|string|Colon-separated values representing the key-value pairs you want to filter the results by. If you supply more than one key-pair, separate the pairs by a comma. Will only filter by an exact key-pair match.
     tags|string|Comma-separated values representing the tags you want to filter the results by. If you specify multiple tags, only mods which have all tags will be returned, and only tags that are supported by the parent game can be applied. To determine what tags are eligible, see the tags values within `tag_options` column on the parent [Game Object](#game-object). If you want to ensure mods returned do not contain particular tag(s), you can use the `tags-not-in` filter either independently or alongside this filter.
     platform_status|string|Filter results by their current platform status, valid values are `pending_only` and `live_and_pending`. The use of this filter requires the authenticated user to be a member of the parent game team. Note that this parameter is only considered in the request if the parent game has enabled [cross-platform filtering](#targeting-a-platform).
+    platforms|string|Filter results by their current platform, accepts multiple platforms as comma-separated values (e.g. `ps4,switch`), valid values are `all`, `windows`, `mac`, `linux`, `android`, `ios`, `xboxone`, `xboxseriesx`, `ps4`, `ps5`, `switch`, `oculus`. The use of this filter requires the authenticated user to be a member of the parent game team. Note that this parameter will take precedence over the header from [cross-platform filtering](#targeting-a-platform).
     downloads|string|Sort results by most downloads using [_sort filter](#filtering) parameter, value should be `downloads` for descending or `-downloads` for ascending results.
     popular|string|Sort results by popularity using [_sort filter](#filtering), value should be `popular` for descending or `-popular` for ascending results. __NOTE:__ Popularity is calculated hourly and reset daily (results are ranked from 1 to X). You should sort this column in ascending order `-popular` to get the top ranked results.
     rating|string|Sort results by weighted rating using [_sort filter](#filtering), value should be `rating` for descending or `-rating` for ascending results.
@@ -2641,7 +2960,6 @@ Get all mods for the corresponding game. Successful request will return an array
     {
       "id": 2,
       "game_id": 2,
-      "game_name": "My Awesome Game",
       "status": 1,
       "visible": 1,
       "submitted_by": {
@@ -2652,26 +2970,29 @@ Get all mods for the corresponding game. Successful request will return an array
         "date_online": 1509922961,
         "date_joined": 1509922961,
         "avatar": {
-          "filename": "modio-color-dark.png",
-          "original": "https://static.mod.io/v1/images/branding/modio-color-dark.png",
-          "thumb_50x50": "https://static.mod.io/v1/images/branding/modio-color-dark.png",
-          "thumb_100x100": "https://static.mod.io/v1/images/branding/modio-color-dark.png"
+          "filename": "avatar.png",
+          "original": "https://assets.modcdn.io/images/placeholder/avatar.png",
+          "thumb_50x50": "https://assets.modcdn.io/images/placeholder/avatar_50x50.png",
+          "thumb_100x100": "https://assets.modcdn.io/images/placeholder/avatar_100x100.png"
         },
         "timezone": "",
         "language": "",
-        "profile_url": "https://mod.io/members/xant"
+        "profile_url": "https://mod.io/u/xant",
+        "monetisation_registered": true,
+        "monetisation_onboarded": true
       },
       "date_added": 1492564103,
       "date_updated": 1499841487,
       "date_live": 1499841403,
       "maturity_option": 0,
       "community_options": 3,
+      "price": 0,
       "logo": {
-        "filename": "modio-color-dark.png",
-        "original": "https://static.mod.io/v1/images/branding/modio-color-dark.png",
-        "thumb_320x180": "https://static.mod.io/v1/images/branding/modio-color-dark.png",
-        "thumb_640x360": "https://static.mod.io/v1/images/branding/modio-color-dark.png",
-        "thumb_1280x720": "https://static.mod.io/v1/images/branding/modio-color-dark.png"
+        "filename": "card.png",
+        "original": "https://assets.modcdn.io/images/placeholder/card.png",
+        "thumb_320x180": "https://assets.modcdn.io/images/placeholder/card.png",
+        "thumb_640x360": "https://assets.modcdn.io/images/placeholder/card.png",
+        "thumb_1280x720": "https://assets.modcdn.io/images/placeholder/card.png"
       },
       "homepage_url": "https://www.rogue-hdpack.com/",
       "name": "Rogue Knight HD Pack",
@@ -2680,7 +3001,7 @@ Get all mods for the corresponding game. Successful request will return an array
       "description": "<p>Rogue HD Pack does exactly what you thi...",
       "description_plaintext": "Rogue HD Pack does exactly what you thi...",
       "metadata_blob": "rogue,hd,high-res,4k,hd textures",
-      "profile_url": "https://rogue-knight.mod.io/hd-pack",
+      "profile_url": "https://mod.io/g/rogue-knight/m/rogue-knight-hd-pack",
       "media": {
         "youtube": [
           "https://www.youtube.com/watch?v=dQw4w9WgXcQ"
@@ -2690,10 +3011,10 @@ Get all mods for the corresponding game. Successful request will return an array
         ],
         "images": [
           {
-            "filename": "modio-color-dark.png",
-            "original": "https://static.mod.io/v1/images/branding/modio-color-dark.png",
-            "thumb_320x180": "https://static.mod.io/v1/images/branding/modio-color-dark.png",
-            "thumb_1280x720": "https://static.mod.io/v1/images/branding/modio-color-dark.png"
+            "filename": "card.png",
+            "original": "https://assets.modcdn.io/images/placeholder/card.png",
+            "thumb_320x180": "https://assets.modcdn.io/images/placeholder/card.png",
+            "thumb_1280x720": "https://assets.modcdn.io/images/placeholder/card.png"
           }
         ]
       },
@@ -2714,7 +3035,7 @@ Get all mods for the corresponding game. Successful request will return an array
         "changelog": "VERSION 1.3 -- Changes -- Fixed critical castle floor bug.",
         "metadata_blob": "rogue,hd,high-res,4k,hd textures",
         "download": {
-          "binary_url": "https://mod.io/mods/file/1/c489a0354111a4d76640d47f0cdcb294",
+          "binary_url": "https://api.mod.io/mods/file/1/c489a0354111a4d76640d47f0cdcb294",
           "date_expires": 1579316848
         },
         "platforms": [
@@ -2756,6 +3077,14 @@ Get all mods for the corresponding game. Successful request will return an array
         "ratings_weighted_aggregate": 87.38,
         "ratings_display_text": "Very Positive",
         "date_expires": 1492564103
+      },
+      "monetisation_options": {
+        "enabled": false,
+        "patronage": false
+      },
+      "monetisation": {
+        "monetisation_team_id": "Team ID for the monetisation API.",
+        "onboarded": "pending"
       }
     },
     {
@@ -2879,7 +3208,6 @@ Get a mod. Successful request will return a single [Mod Object](#mod-object).
 {
   "id": 2,
   "game_id": 2,
-  "game_name": "My Awesome Game",
   "status": 1,
   "visible": 1,
   "submitted_by": {
@@ -2890,26 +3218,29 @@ Get a mod. Successful request will return a single [Mod Object](#mod-object).
     "date_online": 1509922961,
     "date_joined": 1509922961,
     "avatar": {
-      "filename": "modio-color-dark.png",
-      "original": "https://static.mod.io/v1/images/branding/modio-color-dark.png",
-      "thumb_50x50": "https://static.mod.io/v1/images/branding/modio-color-dark.png",
-      "thumb_100x100": "https://static.mod.io/v1/images/branding/modio-color-dark.png"
+      "filename": "avatar.png",
+      "original": "https://assets.modcdn.io/images/placeholder/avatar.png",
+      "thumb_50x50": "https://assets.modcdn.io/images/placeholder/avatar_50x50.png",
+      "thumb_100x100": "https://assets.modcdn.io/images/placeholder/avatar_100x100.png"
     },
     "timezone": "",
     "language": "",
-    "profile_url": "https://mod.io/members/xant"
+    "profile_url": "https://mod.io/u/xant",
+    "monetisation_registered": true,
+    "monetisation_onboarded": true
   },
   "date_added": 1492564103,
   "date_updated": 1499841487,
   "date_live": 1499841403,
   "maturity_option": 0,
   "community_options": 3,
+  "price": 0,
   "logo": {
-    "filename": "modio-color-dark.png",
-    "original": "https://static.mod.io/v1/images/branding/modio-color-dark.png",
-    "thumb_320x180": "https://static.mod.io/v1/images/branding/modio-color-dark.png",
-    "thumb_640x360": "https://static.mod.io/v1/images/branding/modio-color-dark.png",
-    "thumb_1280x720": "https://static.mod.io/v1/images/branding/modio-color-dark.png"
+    "filename": "card.png",
+    "original": "https://assets.modcdn.io/images/placeholder/card.png",
+    "thumb_320x180": "https://assets.modcdn.io/images/placeholder/card.png",
+    "thumb_640x360": "https://assets.modcdn.io/images/placeholder/card.png",
+    "thumb_1280x720": "https://assets.modcdn.io/images/placeholder/card.png"
   },
   "homepage_url": "https://www.rogue-hdpack.com/",
   "name": "Rogue Knight HD Pack",
@@ -2918,7 +3249,7 @@ Get a mod. Successful request will return a single [Mod Object](#mod-object).
   "description": "<p>Rogue HD Pack does exactly what you thi...",
   "description_plaintext": "Rogue HD Pack does exactly what you thi...",
   "metadata_blob": "rogue,hd,high-res,4k,hd textures",
-  "profile_url": "https://rogue-knight.mod.io/hd-pack",
+  "profile_url": "https://mod.io/g/rogue-knight/m/rogue-knight-hd-pack",
   "media": {
     "youtube": [
       "https://www.youtube.com/watch?v=dQw4w9WgXcQ"
@@ -2928,10 +3259,10 @@ Get a mod. Successful request will return a single [Mod Object](#mod-object).
     ],
     "images": [
       {
-        "filename": "modio-color-dark.png",
-        "original": "https://static.mod.io/v1/images/branding/modio-color-dark.png",
-        "thumb_320x180": "https://static.mod.io/v1/images/branding/modio-color-dark.png",
-        "thumb_1280x720": "https://static.mod.io/v1/images/branding/modio-color-dark.png"
+        "filename": "card.png",
+        "original": "https://assets.modcdn.io/images/placeholder/card.png",
+        "thumb_320x180": "https://assets.modcdn.io/images/placeholder/card.png",
+        "thumb_1280x720": "https://assets.modcdn.io/images/placeholder/card.png"
       }
     ]
   },
@@ -2952,7 +3283,7 @@ Get a mod. Successful request will return a single [Mod Object](#mod-object).
     "changelog": "VERSION 1.3 -- Changes -- Fixed critical castle floor bug.",
     "metadata_blob": "rogue,hd,high-res,4k,hd textures",
     "download": {
-      "binary_url": "https://mod.io/mods/file/1/c489a0354111a4d76640d47f0cdcb294",
+      "binary_url": "https://api.mod.io/mods/file/1/c489a0354111a4d76640d47f0cdcb294",
       "date_expires": 1579316848
     },
     "platforms": [
@@ -2962,12 +3293,6 @@ Get a mod. Successful request will return a single [Mod Object](#mod-object).
       }
     ]
   },
-  "platforms_stats": [
-    {
-      "live_count": 0,
-      "pending_count": 0
-    }
-  ],
   "platforms": [
     {
       "platform": "windows",
@@ -3000,6 +3325,14 @@ Get a mod. Successful request will return a single [Mod Object](#mod-object).
     "ratings_weighted_aggregate": 87.38,
     "ratings_display_text": "Very Positive",
     "date_expires": 1492564103
+  },
+  "monetisation_options": {
+    "enabled": false,
+    "patronage": false
+  },
+  "monetisation": {
+    "monetisation_team_id": "Team ID for the monetisation API.",
+    "onboarded": "pending"
   }
 }
 
@@ -3121,15 +3454,17 @@ System.out.println(response.toString());
 
 `POST /games/{game-id}/mods`
 
-Add a mod. Successful request will return the newly created [Mod Object](#mod-object). All content published by users on [mod.io](https://mod.io) is subject to the [Terms of Use](https://mod.io/terms/widget). It is a requirement that you provide a link to [https://mod.io/terms](https://mod.io/terms) in any place where users are submitting content to mod.io.<br><br>__NOTE:__ By default new mods are 'not accepted' and 'public'. They can only be 'accepted' and made available via the API once a [Mod File](#add-modfile) has been uploaded. [Media](#add-mod-media), [Metadata Key Value Pairs](#add-mod-kvp-metadata) and [Dependencies](#add-mod-dependencies) can also be added after a mod profile is created.
+Add a mod. Successful request will return the newly created [Mod Object](#mod-object). All content published by users on [mod.io](https://mod.io) is subject to the [Terms of Use](https://mod.io/terms/widget). It is a requirement that you provide a link to [https://mod.io/terms](https://mod.io/terms) in any place where users are submitting content to mod.io.
+
+    __NOTE:__ By default new mods are 'not accepted' and 'public'. They can only be 'accepted' and made available via the API once a [Mod File](#add-modfile) has been uploaded. [Media](#add-mod-media), [Metadata Key Value Pairs](#add-mod-kvp-metadata) and [Dependencies](#add-mod-dependencies) can also be added after a mod profile is created.
 
     Parameter|Type|Required|Description
     ---|---|---|---|
-    visible|integer||Visibility of the mod (best if this field is controlled by mod admins, see [status and visibility](#status-amp-visibility) for details):<br><br>__0__ = Hidden<br>__1__ = Public _(default)_
     logo|file|true|Image file which will represent your mods logo. Must be gif, jpg or png format and cannot exceed 8MB in filesize. Dimensions must be at least 512x288 and we recommended you supply a high resolution image with a 16 / 9 ratio. mod.io will use this image to make three thumbnails for the dimensions 320x180, 640x360 and 1280x720.
     name|string|true|Name of your mod.
-    name_id|string||Path for the mod on mod.io. For example: https://gamename.mod.io/__mod-name-id-here__. If no `name_id` is specified the `name` will be used. For example: _'Stellaris Shader Mod'_ will become _'stellaris-shader-mod'_. Cannot exceed 80 characters.
+    name_id|string||Path for the mod on mod.io. For example: https://mod.io/g/gamename/m/__mod-name-id-here__. If no `name_id` is specified the `name` will be used. For example: _'Stellaris Shader Mod'_ will become _'stellaris-shader-mod'_. Cannot exceed 80 characters.
     summary|string|true|Summary for your mod, giving a brief overview of what it's about. Cannot exceed 250 characters.
+    visible|integer||Visibility of the mod (best if this field is controlled by mod admins, see [status and visibility](#status-amp-visibility) for details):<br><br>__0__ = Hidden<br>__1__ = Public _(default)_
     description|string||Detailed description for your mod, which can include details such as 'About', 'Features', 'Install Instructions', 'FAQ', etc. HTML supported and encouraged.
     homepage_url|string||Official homepage for your mod. Must be a valid URL.
     stock|integer||Maximium number of subscribers for this mod. A value of 0 disables this limit.
@@ -3144,7 +3479,6 @@ Add a mod. Successful request will return the newly created [Mod Object](#mod-ob
 {
   "id": 2,
   "game_id": 2,
-  "game_name": "My Awesome Game",
   "status": 1,
   "visible": 1,
   "submitted_by": {
@@ -3155,26 +3489,29 @@ Add a mod. Successful request will return the newly created [Mod Object](#mod-ob
     "date_online": 1509922961,
     "date_joined": 1509922961,
     "avatar": {
-      "filename": "modio-color-dark.png",
-      "original": "https://static.mod.io/v1/images/branding/modio-color-dark.png",
-      "thumb_50x50": "https://static.mod.io/v1/images/branding/modio-color-dark.png",
-      "thumb_100x100": "https://static.mod.io/v1/images/branding/modio-color-dark.png"
+      "filename": "avatar.png",
+      "original": "https://assets.modcdn.io/images/placeholder/avatar.png",
+      "thumb_50x50": "https://assets.modcdn.io/images/placeholder/avatar_50x50.png",
+      "thumb_100x100": "https://assets.modcdn.io/images/placeholder/avatar_100x100.png"
     },
     "timezone": "",
     "language": "",
-    "profile_url": "https://mod.io/members/xant"
+    "profile_url": "https://mod.io/u/xant",
+    "monetisation_registered": true,
+    "monetisation_onboarded": true
   },
   "date_added": 1492564103,
   "date_updated": 1499841487,
   "date_live": 1499841403,
   "maturity_option": 0,
   "community_options": 3,
+  "price": 0,
   "logo": {
-    "filename": "modio-color-dark.png",
-    "original": "https://static.mod.io/v1/images/branding/modio-color-dark.png",
-    "thumb_320x180": "https://static.mod.io/v1/images/branding/modio-color-dark.png",
-    "thumb_640x360": "https://static.mod.io/v1/images/branding/modio-color-dark.png",
-    "thumb_1280x720": "https://static.mod.io/v1/images/branding/modio-color-dark.png"
+    "filename": "card.png",
+    "original": "https://assets.modcdn.io/images/placeholder/card.png",
+    "thumb_320x180": "https://assets.modcdn.io/images/placeholder/card.png",
+    "thumb_640x360": "https://assets.modcdn.io/images/placeholder/card.png",
+    "thumb_1280x720": "https://assets.modcdn.io/images/placeholder/card.png"
   },
   "homepage_url": "https://www.rogue-hdpack.com/",
   "name": "Rogue Knight HD Pack",
@@ -3183,7 +3520,7 @@ Add a mod. Successful request will return the newly created [Mod Object](#mod-ob
   "description": "<p>Rogue HD Pack does exactly what you thi...",
   "description_plaintext": "Rogue HD Pack does exactly what you thi...",
   "metadata_blob": "rogue,hd,high-res,4k,hd textures",
-  "profile_url": "https://rogue-knight.mod.io/hd-pack",
+  "profile_url": "https://mod.io/g/rogue-knight/m/rogue-knight-hd-pack",
   "media": {
     "youtube": [
       "https://www.youtube.com/watch?v=dQw4w9WgXcQ"
@@ -3193,10 +3530,10 @@ Add a mod. Successful request will return the newly created [Mod Object](#mod-ob
     ],
     "images": [
       {
-        "filename": "modio-color-dark.png",
-        "original": "https://static.mod.io/v1/images/branding/modio-color-dark.png",
-        "thumb_320x180": "https://static.mod.io/v1/images/branding/modio-color-dark.png",
-        "thumb_1280x720": "https://static.mod.io/v1/images/branding/modio-color-dark.png"
+        "filename": "card.png",
+        "original": "https://assets.modcdn.io/images/placeholder/card.png",
+        "thumb_320x180": "https://assets.modcdn.io/images/placeholder/card.png",
+        "thumb_1280x720": "https://assets.modcdn.io/images/placeholder/card.png"
       }
     ]
   },
@@ -3217,7 +3554,7 @@ Add a mod. Successful request will return the newly created [Mod Object](#mod-ob
     "changelog": "VERSION 1.3 -- Changes -- Fixed critical castle floor bug.",
     "metadata_blob": "rogue,hd,high-res,4k,hd textures",
     "download": {
-      "binary_url": "https://mod.io/mods/file/1/c489a0354111a4d76640d47f0cdcb294",
+      "binary_url": "https://api.mod.io/mods/file/1/c489a0354111a4d76640d47f0cdcb294",
       "date_expires": 1579316848
     },
     "platforms": [
@@ -3259,6 +3596,14 @@ Add a mod. Successful request will return the newly created [Mod Object](#mod-ob
     "ratings_weighted_aggregate": 87.38,
     "ratings_display_text": "Very Positive",
     "date_expires": 1492564103
+  },
+  "monetisation_options": {
+    "enabled": false,
+    "patronage": false
+  },
+  "monetisation": {
+    "monetisation_team_id": "Team ID for the monetisation API.",
+    "onboarded": "pending"
   }
 }
 
@@ -3384,7 +3729,7 @@ Edit details for a mod. If you want to update the `logo` or media associated wit
     status|integer||Status of a mod. The mod must have at least one uploaded `modfile` to be 'accepted' (best if this field is controlled by game admins, see [status and visibility](#status-amp-visibility) for details):<br><br>__0__ = Not accepted<br>__1__ = Accepted (game admins only)<br>__3__ = Deleted (use the [delete mod](#delete-mod) endpoint to set this status)
     visible|integer||Visibility of the mod (best if this field is controlled by mod admins, see [status and visibility](#status-amp-visibility) for details):<br><br>__0__ = Hidden<br>__1__ = Public
     name|string||Name of your mod. Cannot exceed 50 characters.
-    name_id|string||Path for the mod on mod.io. For example: https://gamename.mod.io/__mod-name-id-here__. Cannot exceed 80 characters.
+    name_id|string||Path for the mod on mod.io. For example: https://mod.io/g/gamename/m/__mod-name-id-here__. Cannot exceed 80 characters.
     summary|string||Summary for your mod, giving a brief overview of what it's about. Cannot exceed 250 characters.
     description|string||Detailed description for your mod, which can include details such as 'About', 'Features', 'Install Instructions', 'FAQ', etc. HTML supported and encouraged.
     homepage_url|string||Official homepage for your mod. Must be a valid URL.
@@ -3399,7 +3744,6 @@ Edit details for a mod. If you want to update the `logo` or media associated wit
 {
   "id": 2,
   "game_id": 2,
-  "game_name": "My Awesome Game",
   "status": 1,
   "visible": 1,
   "submitted_by": {
@@ -3410,26 +3754,29 @@ Edit details for a mod. If you want to update the `logo` or media associated wit
     "date_online": 1509922961,
     "date_joined": 1509922961,
     "avatar": {
-      "filename": "modio-color-dark.png",
-      "original": "https://static.mod.io/v1/images/branding/modio-color-dark.png",
-      "thumb_50x50": "https://static.mod.io/v1/images/branding/modio-color-dark.png",
-      "thumb_100x100": "https://static.mod.io/v1/images/branding/modio-color-dark.png"
+      "filename": "avatar.png",
+      "original": "https://assets.modcdn.io/images/placeholder/avatar.png",
+      "thumb_50x50": "https://assets.modcdn.io/images/placeholder/avatar_50x50.png",
+      "thumb_100x100": "https://assets.modcdn.io/images/placeholder/avatar_100x100.png"
     },
     "timezone": "",
     "language": "",
-    "profile_url": "https://mod.io/members/xant"
+    "profile_url": "https://mod.io/u/xant",
+    "monetisation_registered": true,
+    "monetisation_onboarded": true
   },
   "date_added": 1492564103,
   "date_updated": 1499841487,
   "date_live": 1499841403,
   "maturity_option": 0,
   "community_options": 3,
+  "price": 0,
   "logo": {
-    "filename": "modio-color-dark.png",
-    "original": "https://static.mod.io/v1/images/branding/modio-color-dark.png",
-    "thumb_320x180": "https://static.mod.io/v1/images/branding/modio-color-dark.png",
-    "thumb_640x360": "https://static.mod.io/v1/images/branding/modio-color-dark.png",
-    "thumb_1280x720": "https://static.mod.io/v1/images/branding/modio-color-dark.png"
+    "filename": "card.png",
+    "original": "https://assets.modcdn.io/images/placeholder/card.png",
+    "thumb_320x180": "https://assets.modcdn.io/images/placeholder/card.png",
+    "thumb_640x360": "https://assets.modcdn.io/images/placeholder/card.png",
+    "thumb_1280x720": "https://assets.modcdn.io/images/placeholder/card.png"
   },
   "homepage_url": "https://www.rogue-hdpack.com/",
   "name": "Rogue Knight HD Pack",
@@ -3438,7 +3785,7 @@ Edit details for a mod. If you want to update the `logo` or media associated wit
   "description": "<p>Rogue HD Pack does exactly what you thi...",
   "description_plaintext": "Rogue HD Pack does exactly what you thi...",
   "metadata_blob": "rogue,hd,high-res,4k,hd textures",
-  "profile_url": "https://rogue-knight.mod.io/hd-pack",
+  "profile_url": "https://mod.io/g/rogue-knight/m/rogue-knight-hd-pack",
   "media": {
     "youtube": [
       "https://www.youtube.com/watch?v=dQw4w9WgXcQ"
@@ -3448,10 +3795,10 @@ Edit details for a mod. If you want to update the `logo` or media associated wit
     ],
     "images": [
       {
-        "filename": "modio-color-dark.png",
-        "original": "https://static.mod.io/v1/images/branding/modio-color-dark.png",
-        "thumb_320x180": "https://static.mod.io/v1/images/branding/modio-color-dark.png",
-        "thumb_1280x720": "https://static.mod.io/v1/images/branding/modio-color-dark.png"
+        "filename": "card.png",
+        "original": "https://assets.modcdn.io/images/placeholder/card.png",
+        "thumb_320x180": "https://assets.modcdn.io/images/placeholder/card.png",
+        "thumb_1280x720": "https://assets.modcdn.io/images/placeholder/card.png"
       }
     ]
   },
@@ -3472,7 +3819,7 @@ Edit details for a mod. If you want to update the `logo` or media associated wit
     "changelog": "VERSION 1.3 -- Changes -- Fixed critical castle floor bug.",
     "metadata_blob": "rogue,hd,high-res,4k,hd textures",
     "download": {
-      "binary_url": "https://mod.io/mods/file/1/c489a0354111a4d76640d47f0cdcb294",
+      "binary_url": "https://api.mod.io/mods/file/1/c489a0354111a4d76640d47f0cdcb294",
       "date_expires": 1579316848
     },
     "platforms": [
@@ -3514,6 +3861,14 @@ Edit details for a mod. If you want to update the `logo` or media associated wit
     "ratings_weighted_aggregate": 87.38,
     "ratings_display_text": "Very Positive",
     "date_expires": 1492564103
+  },
+  "monetisation_options": {
+    "enabled": false,
+    "patronage": false
+  },
+  "monetisation": {
+    "monetisation_team_id": "Team ID for the monetisation API.",
+    "onboarded": "pending"
   }
 }
 
@@ -3525,7 +3880,7 @@ Status|Meaning|Error Ref|Description|Response Schema
 200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)||Update Successful|[Mod Object](#schemamod_object)
 403|[Forbidden](https://tools.ietf.org/html/rfc7231#section-6.5.3)|15013|The authenticated user does not have permission to update this mod. Ensure the user is part of the mod team before attempting the request again.|[Error Object](#schemaerror_object)
 403|[Forbidden](https://tools.ietf.org/html/rfc7231#section-6.5.3)|15033|The authenticated user does not have permission to update the metadata for this mod, this action is restricted to team managers & administrators only.|[Error Object](#schemaerror_object)
-403|[Forbidden](https://tools.ietf.org/html/rfc7231#section-6.5.3)|15014|The authenticated user does not have permission to update the maturityoptions for this mod, this action is restricted to team managers & administrators only.|[Error Object](#schemaerror_object)
+403|[Forbidden](https://tools.ietf.org/html/rfc7231#section-6.5.3)|15014|The authenticated user does not have permission to update the maturity options for this mod, this action is restricted to team managers & administrators only.|[Error Object](#schemaerror_object)
 403|[Forbidden](https://tools.ietf.org/html/rfc7231#section-6.5.3)|15015|The authenticated user does not have permission to update the status for this mod, this action is restricted to team managers & administrators only.|[Error Object](#schemaerror_object)
 403|[Forbidden](https://tools.ietf.org/html/rfc7231#section-6.5.3)|15016|A mod cannot be set live without an associated modfile.|[Error Object](#schemaerror_object)
 <aside class="auth-notice">
@@ -3630,7 +3985,7 @@ System.out.println(response.toString());
 
 `DELETE /games/{game-id}/mods/{mod-id}`
 
-Delete a mod profile. Successful request will return `204 No Content` and fire a __MOD_UNAVAILABLE__ event.<br><br>__NOTE:__ This will close the mod profile which means it cannot be viewed or retrieved via API requests but will still exist in-case you choose to restore it at a later date. If you wish to permanently delete a mod you have access rights to, you must do it via the [mods profile page](https://mod.io/mods) on the mod.io website.
+Delete a mod profile. Successful request will return `204 No Content` and fire a __MOD_UNAVAILABLE__ event.<br><br>__NOTE:__ This will close the mod profile which means it cannot be viewed or retrieved via API requests but will still exist in-case you choose to restore it at a later date. If you wish to permanently delete a mod you have access rights to, you must do it via the [mods profile page](https://mod.io/me/library) on the mod.io website.
 
 > Example response
 
@@ -3738,7 +4093,9 @@ System.out.println(response.toString());
 
 `GET /games/{game-id}/mods/{mod-id}/files`
 
-Get all files that are published for the corresponding mod. Successful request will return an array of [Modfile Objects](#get-modfiles-2). We recommended reading the [filtering documentation](#filtering) to return only the records you want.<br><br>__NOTE:__ If the [game](#edit-game) requires mod downloads to be initiated via the API, the `binary_url` returned will contain a verification hash. This hash must be supplied to get the modfile, and will expire after a certain period of time. Saving and reusing the `binary_url` won't work in this situation given it's dynamic nature.
+Get all files that are published for the corresponding mod. Successful request will return an array of [Modfile Objects](#get-modfiles-2). We recommended reading the [filtering documentation](#filtering) to return only the records you want.
+
+    __NOTE:__ If the [game](#edit-game) requires mod downloads to be initiated via the API, the `binary_url` returned will contain a verification hash. This hash must be supplied to get the modfile, and will expire after a certain period of time. Saving and reusing the `binary_url` won't work in this situation given it's dynamic nature.
 
     Filter|Type|Description
     ---|---|---
@@ -3777,7 +4134,7 @@ Get all files that are published for the corresponding mod. Successful request w
       "changelog": "VERSION 1.3 -- Changes -- Fixed critical castle floor bug.",
       "metadata_blob": "rogue,hd,high-res,4k,hd textures",
       "download": {
-        "binary_url": "https://mod.io/mods/file/1/c489a0354111a4d76640d47f0cdcb294",
+        "binary_url": "https://api.mod.io/mods/file/1/c489a0354111a4d76640d47f0cdcb294",
         "date_expires": 1579316848
       },
       "platforms": [
@@ -3921,7 +4278,7 @@ Get a file. Successful request will return a single [Modfile Object](#modfile-ob
   "changelog": "VERSION 1.3 -- Changes -- Fixed critical castle floor bug.",
   "metadata_blob": "rogue,hd,high-res,4k,hd textures",
   "download": {
-    "binary_url": "https://mod.io/mods/file/1/c489a0354111a4d76640d47f0cdcb294",
+    "binary_url": "https://api.mod.io/mods/file/1/c489a0354111a4d76640d47f0cdcb294",
     "date_expires": 1579316848
   },
   "platforms": [
@@ -4052,11 +4409,13 @@ System.out.println(response.toString());
 
 `POST /games/{game-id}/mods/{mod-id}/files`
 
-Upload a file for the corresponding mod. Successful request will return the newly created [Modfile Object](#modfile-object). Ensure that the release you are uploading is stable and free from any critical issues. Files are scanned upon upload, any users who upload malicious files will have their accounts closed. <br><br>__NOTE:__ This endpoint does *not support* `input_json` even if you base64-encode your file, due to the already-large file sizes of some releases and base64-encoding inflating the filesize.
+Upload a file for the corresponding mod. Successful request will return the newly created [Modfile Object](#modfile-object). Ensure that the release you are uploading is stable and free from any critical issues. Files are scanned upon upload, any users who upload malicious files will have their accounts closed.
+
+    __NOTE:__ This endpoint does *not support* `input_json` even if you base64-encode your file, due to the already-large file sizes of some releases and base64-encoding inflating the filesize.
 
     Parameter|Type|Required|Description
     ---|---|---|---|
-    filedata|file|true|The binary file for the release. For compatibility you should ZIP the base folder of your mod, or if it is a collection of files which live in a pre-existing game folder, you should ZIP those files. Your file must meet the following conditions:<br><br>- File must be __zipped__ and cannot exceed 5GB in filesize<br>- Filename's cannot contain any of the following charcters: <code>\ / ? " < > &#124; : *</code><br>- Mods which span multiple game directories are not supported unless the game manages this<br>- Mods which overwrite files are not supported unless the game manages this
+    filedata|file|true|The binary file for the release. ZIP the base folder of your mod, or if it is a collection of files which live in a pre-existing game folder, you should ZIP those files. Your file must meet the following conditions:<br><br>- File must be __zipped__ and cannot exceed 5GB in filesize<br>- Filename's cannot contain any of the following charcters: <code>\ / ? " < > &#124; : *</code><br>- Mods which span multiple game directories are not supported unless the game manages this<br>- Mods which overwrite files are not supported unless the game manages this
     version|string||Version of the file release (recommended format 1.0.0 - MAJOR.MINOR.PATCH).
     changelog|string||Changelog of this release.
     active|boolean||_Default value is true._ Flag this upload as the current release, this will change the `modfile` field on the parent mod to the `id` of this file after upload.<br><br>__NOTE:__ If the _active_ parameter is _true_, a [__MODFILE_CHANGED__ event](#get-mod-events) will be fired, so game clients know there is an update available for this mod.
@@ -4084,7 +4443,7 @@ Upload a file for the corresponding mod. Successful request will return the newl
   "changelog": "VERSION 1.3 -- Changes -- Fixed critical castle floor bug.",
   "metadata_blob": "rogue,hd,high-res,4k,hd textures",
   "download": {
-    "binary_url": "https://mod.io/mods/file/1/c489a0354111a4d76640d47f0cdcb294",
+    "binary_url": "https://api.mod.io/mods/file/1/c489a0354111a4d76640d47f0cdcb294",
     "date_expires": 1579316848
   },
   "platforms": [
@@ -4244,7 +4603,7 @@ Edit the details of a published file. If you want to update fields other than th
   "changelog": "VERSION 1.3 -- Changes -- Fixed critical castle floor bug.",
   "metadata_blob": "rogue,hd,high-res,4k,hd textures",
   "download": {
-    "binary_url": "https://mod.io/mods/file/1/c489a0354111a4d76640d47f0cdcb294",
+    "binary_url": "https://api.mod.io/mods/file/1/c489a0354111a4d76640d47f0cdcb294",
     "date_expires": 1579316848
   },
   "platforms": [
@@ -4383,7 +4742,7 @@ Status|Meaning|Error Ref|Description|Response Schema
 ---|---|----|---|---|
 204|[No Content](https://tools.ietf.org/html/rfc7231#section-6.3.5)||Successful Request. No Body Returned.|None
 403|[Forbidden](https://tools.ietf.org/html/rfc7231#section-6.5.3)|15008|The authenticated user does not have permission to delete modfiles for the specified mod, ensure the user is a team manager or administrator.|[Error Object](#schemaerror_object)
-403|[Forbidden](https://tools.ietf.org/html/rfc7231#section-6.5.3)|15009|The active (primary) modfile for a mod cannot be deleted.|[Error Object](#schemaerror_object)
+403|[Forbidden](https://tools.ietf.org/html/rfc7231#section-6.5.3)|15009|The live modfile for a mod cannot be deleted.|[Error Object](#schemaerror_object)
 <aside class="auth-notice">
 To perform this request, you must be authenticated via one of the following methods:
 <a href="#authentication">OAuth 2</a> (Scopes: write)
@@ -4486,13 +4845,14 @@ System.out.println(response.toString());
 
 `POST /games/{game-id}/mods/{mod-id}/files/{file-id}/platforms`
 
-Manage the platform status of a particular modfile. This endpoint does not set any file live, instead it allows you to approve and deny new uploads. To set a file as the *live* file for the approved platforms after you have reviewed them, you must call the [Edit Modfile](#update-modfile) with the active flag enabled. __NOTE:__ This is ony applicable if the parent game has cross-platform moderation enabled. A successful request will return the updated [Modfile object](#modfile-object).
-     *
+Manage the platform status of a particular modfile. This endpoint does not set any file live, instead it allows you to approve and deny new uploads. To set a file as the *live* file for the approved platforms after you have reviewed them, you must call the [Edit Modfile](#update-modfile) with the active flag enabled.
+
+     __NOTE:__ This is ony applicable if the parent game has cross-platform moderation enabled. A successful request will return the updated [Modfile object](#modfile-object).
 
     Parameter|Type|Required|Description
     ---|---|---|---|
     approved|array||An array containing one or more [platform strings](#targeting-a-platform) that the specified modfile is approved for.
-    denied|string||An array containing one or more [platform strings](#targeting-a-platform) that the specified modfile is denied for. <br><br>__NOTE:__ You cannot mark a live modfile as denied, if a modfile is live the only option to remove it is to set another [existing modfile](#edit-modfile) as the live modfile for that platform, or add a [new modfile](#add-modfile).
+    denied|array||An array containing one or more [platform strings](#targeting-a-platform) that the specified modfile is denied for. <br><br>__NOTE:__ You cannot mark a live modfile as denied, if a modfile is live the only option to remove it is to set another [existing modfile](#edit-modfile) as the live modfile for that platform, or add a [new modfile](#add-modfile).
 
 > Example response
 
@@ -4514,7 +4874,7 @@ Manage the platform status of a particular modfile. This endpoint does not set a
   "changelog": "VERSION 1.3 -- Changes -- Fixed critical castle floor bug.",
   "metadata_blob": "rogue,hd,high-res,4k,hd textures",
   "download": {
-    "binary_url": "https://mod.io/mods/file/1/c489a0354111a4d76640d47f0cdcb294",
+    "binary_url": "https://api.mod.io/mods/file/1/c489a0354111a4d76640d47f0cdcb294",
     "date_expires": 1579316848
   },
   "platforms": [
@@ -4645,7 +5005,6 @@ Subscribe the _authenticated user_ to a corresponding mod. No body parameters ar
 {
   "id": 2,
   "game_id": 2,
-  "game_name": "My Awesome Game",
   "status": 1,
   "visible": 1,
   "submitted_by": {
@@ -4656,26 +5015,29 @@ Subscribe the _authenticated user_ to a corresponding mod. No body parameters ar
     "date_online": 1509922961,
     "date_joined": 1509922961,
     "avatar": {
-      "filename": "modio-color-dark.png",
-      "original": "https://static.mod.io/v1/images/branding/modio-color-dark.png",
-      "thumb_50x50": "https://static.mod.io/v1/images/branding/modio-color-dark.png",
-      "thumb_100x100": "https://static.mod.io/v1/images/branding/modio-color-dark.png"
+      "filename": "avatar.png",
+      "original": "https://assets.modcdn.io/images/placeholder/avatar.png",
+      "thumb_50x50": "https://assets.modcdn.io/images/placeholder/avatar_50x50.png",
+      "thumb_100x100": "https://assets.modcdn.io/images/placeholder/avatar_100x100.png"
     },
     "timezone": "",
     "language": "",
-    "profile_url": "https://mod.io/members/xant"
+    "profile_url": "https://mod.io/u/xant",
+    "monetisation_registered": true,
+    "monetisation_onboarded": true
   },
   "date_added": 1492564103,
   "date_updated": 1499841487,
   "date_live": 1499841403,
   "maturity_option": 0,
   "community_options": 3,
+  "price": 0,
   "logo": {
-    "filename": "modio-color-dark.png",
-    "original": "https://static.mod.io/v1/images/branding/modio-color-dark.png",
-    "thumb_320x180": "https://static.mod.io/v1/images/branding/modio-color-dark.png",
-    "thumb_640x360": "https://static.mod.io/v1/images/branding/modio-color-dark.png",
-    "thumb_1280x720": "https://static.mod.io/v1/images/branding/modio-color-dark.png"
+    "filename": "card.png",
+    "original": "https://assets.modcdn.io/images/placeholder/card.png",
+    "thumb_320x180": "https://assets.modcdn.io/images/placeholder/card.png",
+    "thumb_640x360": "https://assets.modcdn.io/images/placeholder/card.png",
+    "thumb_1280x720": "https://assets.modcdn.io/images/placeholder/card.png"
   },
   "homepage_url": "https://www.rogue-hdpack.com/",
   "name": "Rogue Knight HD Pack",
@@ -4684,7 +5046,7 @@ Subscribe the _authenticated user_ to a corresponding mod. No body parameters ar
   "description": "<p>Rogue HD Pack does exactly what you thi...",
   "description_plaintext": "Rogue HD Pack does exactly what you thi...",
   "metadata_blob": "rogue,hd,high-res,4k,hd textures",
-  "profile_url": "https://rogue-knight.mod.io/hd-pack",
+  "profile_url": "https://mod.io/g/rogue-knight/m/rogue-knight-hd-pack",
   "media": {
     "youtube": [
       "https://www.youtube.com/watch?v=dQw4w9WgXcQ"
@@ -4694,10 +5056,10 @@ Subscribe the _authenticated user_ to a corresponding mod. No body parameters ar
     ],
     "images": [
       {
-        "filename": "modio-color-dark.png",
-        "original": "https://static.mod.io/v1/images/branding/modio-color-dark.png",
-        "thumb_320x180": "https://static.mod.io/v1/images/branding/modio-color-dark.png",
-        "thumb_1280x720": "https://static.mod.io/v1/images/branding/modio-color-dark.png"
+        "filename": "card.png",
+        "original": "https://assets.modcdn.io/images/placeholder/card.png",
+        "thumb_320x180": "https://assets.modcdn.io/images/placeholder/card.png",
+        "thumb_1280x720": "https://assets.modcdn.io/images/placeholder/card.png"
       }
     ]
   },
@@ -4718,7 +5080,7 @@ Subscribe the _authenticated user_ to a corresponding mod. No body parameters ar
     "changelog": "VERSION 1.3 -- Changes -- Fixed critical castle floor bug.",
     "metadata_blob": "rogue,hd,high-res,4k,hd textures",
     "download": {
-      "binary_url": "https://mod.io/mods/file/1/c489a0354111a4d76640d47f0cdcb294",
+      "binary_url": "https://api.mod.io/mods/file/1/c489a0354111a4d76640d47f0cdcb294",
       "date_expires": 1579316848
     },
     "platforms": [
@@ -4760,6 +5122,14 @@ Subscribe the _authenticated user_ to a corresponding mod. No body parameters ar
     "ratings_weighted_aggregate": 87.38,
     "ratings_display_text": "Very Positive",
     "date_expires": 1492564103
+  },
+  "monetisation_options": {
+    "enabled": false,
+    "patronage": false
+  },
+  "monetisation": {
+    "monetisation_team_id": "Team ID for the monetisation API.",
+    "onboarded": "pending"
   }
 }
 
@@ -4993,7 +5363,7 @@ Get all comments posted in the mods profile. Successful request will return an a
     Filter|Type|Description
     ---|---|---
     id|integer|Unique id of the comment.
-    mod_id|integer|Unique id of the parent mod. This is now depreciated and will be removed in future API versions, please use resource_id instead.
+    mod_id|integer|Unique id of the parent mod. This is now deprecated and will be removed in future API versions, please use resource_id instead.
     resource_id|integer|Unique id of the resource.
     submitted_by|integer|Unique id of the user who posted the comment.
     date_added|integer|Unix timestamp of date comment was posted.
@@ -5019,21 +5389,23 @@ Get all comments posted in the mods profile. Successful request will return an a
         "date_online": 1509922961,
         "date_joined": 1509922961,
         "avatar": {
-          "filename": "modio-color-dark.png",
-          "original": "https://static.mod.io/v1/images/branding/modio-color-dark.png",
-          "thumb_50x50": "https://static.mod.io/v1/images/branding/modio-color-dark.png",
-          "thumb_100x100": "https://static.mod.io/v1/images/branding/modio-color-dark.png"
+          "filename": "avatar.png",
+          "original": "https://assets.modcdn.io/images/placeholder/avatar.png",
+          "thumb_50x50": "https://assets.modcdn.io/images/placeholder/avatar_50x50.png",
+          "thumb_100x100": "https://assets.modcdn.io/images/placeholder/avatar_100x100.png"
         },
         "timezone": "",
         "language": "",
-        "profile_url": "https://mod.io/members/xant"
+        "profile_url": "https://mod.io/u/xant",
+        "monetisation_registered": true,
+        "monetisation_onboarded": true
       },
       "date_added": 1499841487,
       "reply_id": 0,
       "thread_position": "01",
       "karma": 1,
       "karma_guest": 0,
-      "content": "Hey <a href=\"https://mod.io/members/guest\">guest</a>, you should check out this mod!"
+      "content": "Hey <a href=\"https://mod.io/u/guest\">guest</a>, you should check out this mod!"
     }
   ],
   "result_count": 1,
@@ -5176,21 +5548,23 @@ Add a comment for the corresponding mod. Successful request will return the newl
     "date_online": 1509922961,
     "date_joined": 1509922961,
     "avatar": {
-      "filename": "modio-color-dark.png",
-      "original": "https://static.mod.io/v1/images/branding/modio-color-dark.png",
-      "thumb_50x50": "https://static.mod.io/v1/images/branding/modio-color-dark.png",
-      "thumb_100x100": "https://static.mod.io/v1/images/branding/modio-color-dark.png"
+      "filename": "avatar.png",
+      "original": "https://assets.modcdn.io/images/placeholder/avatar.png",
+      "thumb_50x50": "https://assets.modcdn.io/images/placeholder/avatar_50x50.png",
+      "thumb_100x100": "https://assets.modcdn.io/images/placeholder/avatar_100x100.png"
     },
     "timezone": "",
     "language": "",
-    "profile_url": "https://mod.io/members/xant"
+    "profile_url": "https://mod.io/u/xant",
+    "monetisation_registered": true,
+    "monetisation_onboarded": true
   },
   "date_added": 1499841487,
   "reply_id": 0,
   "thread_position": "01",
   "karma": 1,
   "karma_guest": 0,
-  "content": "Hey <a href=\"https://mod.io/members/guest\">guest</a>, you should check out this mod!"
+  "content": "Hey <a href=\"https://mod.io/u/guest\">guest</a>, you should check out this mod!"
 }
 
 ```
@@ -5315,21 +5689,23 @@ Get a Mod Comment. Successful request will return a single [Comment Object](#com
     "date_online": 1509922961,
     "date_joined": 1509922961,
     "avatar": {
-      "filename": "modio-color-dark.png",
-      "original": "https://static.mod.io/v1/images/branding/modio-color-dark.png",
-      "thumb_50x50": "https://static.mod.io/v1/images/branding/modio-color-dark.png",
-      "thumb_100x100": "https://static.mod.io/v1/images/branding/modio-color-dark.png"
+      "filename": "avatar.png",
+      "original": "https://assets.modcdn.io/images/placeholder/avatar.png",
+      "thumb_50x50": "https://assets.modcdn.io/images/placeholder/avatar_50x50.png",
+      "thumb_100x100": "https://assets.modcdn.io/images/placeholder/avatar_100x100.png"
     },
     "timezone": "",
     "language": "",
-    "profile_url": "https://mod.io/members/xant"
+    "profile_url": "https://mod.io/u/xant",
+    "monetisation_registered": true,
+    "monetisation_onboarded": true
   },
   "date_added": 1499841487,
   "reply_id": 0,
   "thread_position": "01",
   "karma": 1,
   "karma_guest": 0,
-  "content": "Hey <a href=\"https://mod.io/members/guest\">guest</a>, you should check out this mod!"
+  "content": "Hey <a href=\"https://mod.io/u/guest\">guest</a>, you should check out this mod!"
 }
 
 ```
@@ -5463,21 +5839,23 @@ Update a comment for the corresponding mod. Successful request will return the u
     "date_online": 1509922961,
     "date_joined": 1509922961,
     "avatar": {
-      "filename": "modio-color-dark.png",
-      "original": "https://static.mod.io/v1/images/branding/modio-color-dark.png",
-      "thumb_50x50": "https://static.mod.io/v1/images/branding/modio-color-dark.png",
-      "thumb_100x100": "https://static.mod.io/v1/images/branding/modio-color-dark.png"
+      "filename": "avatar.png",
+      "original": "https://assets.modcdn.io/images/placeholder/avatar.png",
+      "thumb_50x50": "https://assets.modcdn.io/images/placeholder/avatar_50x50.png",
+      "thumb_100x100": "https://assets.modcdn.io/images/placeholder/avatar_100x100.png"
     },
     "timezone": "",
     "language": "",
-    "profile_url": "https://mod.io/members/xant"
+    "profile_url": "https://mod.io/u/xant",
+    "monetisation_registered": true,
+    "monetisation_onboarded": true
   },
   "date_added": 1499841487,
   "reply_id": 0,
   "thread_position": "01",
   "karma": 1,
   "karma_guest": 0,
-  "content": "Hey <a href=\"https://mod.io/members/guest\">guest</a>, you should check out this mod!"
+  "content": "Hey <a href=\"https://mod.io/u/guest\">guest</a>, you should check out this mod!"
 }
 
 ```
@@ -5727,21 +6105,23 @@ Update the Karma rating in single increments or decrements for a corresponding m
     "date_online": 1509922961,
     "date_joined": 1509922961,
     "avatar": {
-      "filename": "modio-color-dark.png",
-      "original": "https://static.mod.io/v1/images/branding/modio-color-dark.png",
-      "thumb_50x50": "https://static.mod.io/v1/images/branding/modio-color-dark.png",
-      "thumb_100x100": "https://static.mod.io/v1/images/branding/modio-color-dark.png"
+      "filename": "avatar.png",
+      "original": "https://assets.modcdn.io/images/placeholder/avatar.png",
+      "thumb_50x50": "https://assets.modcdn.io/images/placeholder/avatar_50x50.png",
+      "thumb_100x100": "https://assets.modcdn.io/images/placeholder/avatar_100x100.png"
     },
     "timezone": "",
     "language": "",
-    "profile_url": "https://mod.io/members/xant"
+    "profile_url": "https://mod.io/u/xant",
+    "monetisation_registered": true,
+    "monetisation_onboarded": true
   },
   "date_added": 1499841487,
   "reply_id": 0,
   "thread_position": "01",
   "karma": 1,
   "karma_guest": 0,
-  "content": "Hey <a href=\"https://mod.io/members/guest\">guest</a>, you should check out this mod!"
+  "content": "Hey <a href=\"https://mod.io/u/guest\">guest</a>, you should check out this mod!"
 }
 
 ```
@@ -5862,7 +6242,7 @@ System.out.println(response.toString());
 
 Upload new media to a game. The request `Content-Type` header __must__ be `multipart/form-data` to submit image files. Any request you make to this endpoint *should* contain a binary file for each of the fields you want to update below. Successful request will return [Message Object](#message-object).
 
-    __NOTE:__ You can also add media to [your games profile](https://mod.io/games) on the mod.io website. This is the recommended approach.
+    __NOTE:__ You can also add media to [your games profile](https://mod.io/me/library) on the mod.io website. This is the recommended approach.
 
     Parameter|Type|Required|Description
     ---|---|---|---|
@@ -6000,7 +6380,7 @@ System.out.println(response.toString());
 
 This endpoint is very flexible and will add any images posted to the mods gallery regardless of their body name providing they are a valid image. The request `Content-Type` header __must__ be `multipart/form-data` to submit image files. Successful request will return a [Message Object](#message-object).
 
-    __NOTE:__ You can also add media to [your mods profile](https://mod.io/mods) on the mod.io website. This is the easiest way.
+    __NOTE:__ You can also add media to [your mods profile](https://mod.io/me/library) on the mod.io website. This is the easiest way.
 
     Parameter|Type|Required|Description
     ---|---|---|---|
@@ -6140,7 +6520,7 @@ System.out.println(response.toString());
 
 Delete images, sketchfab or youtube links from a mod profile. Successful request will return `204 No Content`.
 
-    __NOTE:__ You can also delete media from [your mods profile](https://mod.io/mods) on the mod.io website. This is the easiest way.
+    __NOTE:__ You can also delete media from [your mods profile](https://mod.io/me/library) on the mod.io website. This is the easiest way.
 
     Parameter|Type|Required|Description
     ---|---|---|---|
@@ -6254,7 +6634,9 @@ System.out.println(response.toString());
 
 `GET /games/{game-id}/mods/events`
 
-Get all mods events for the corresponding game sorted by latest event first. Successful request will return an array of [Event Objects](#get-mod-events-2).<br><br>__NOTE:__ We recommend you poll this endpoint to keep mods up-to-date. If polling this endpoint for updates you should store the `id` or `date_added` of the latest event, and on subsequent requests use that information [in the filter](#filtering), to return only newer events to process.
+Get all mods events for the corresponding game sorted by latest event first. Successful request will return an array of [Event Objects](#get-mod-events-2).
+
+    __NOTE:__ We recommend you poll this endpoint to keep mods up-to-date. If polling this endpoint for updates you should store the `id` or `date_added` of the latest event, and on subsequent requests use that information [in the filter](#filtering), to return only newer events to process.
 
     Filter|Type|Description
     ---|---|---
@@ -6262,8 +6644,8 @@ Get all mods events for the corresponding game sorted by latest event first. Suc
     mod_id|integer|Unique id of the parent mod.
     user_id|integer|Unique id of the user who performed the action.
     date_added|integer|Unix timestamp of date mod event occurred.
-    event_type|string|Type of change that occurred:<br><br>__MODFILE_CHANGED__ = Primary file changed<br>__MOD_AVAILABLE__ = Mod is marked as accepted and public<br>__MOD_UNAVAILABLE__ = Mod is marked as not accepted, deleted or hidden<br>__MOD_EDITED__ = The mod was updated (triggered when any column value changes)<br>__MOD_DELETED__ = The mod has been permanently erased. This is an orphan record, looking up this id will return no data<br>__MOD_TEAM_CHANGED__ = A user has joined or left the mod team<br>__MOD_COMMENT_ADDED__ = A comment has been published for a mod<br>__MOD_COMMENT_DELETED__ = A comment has been deleted from a mod
-    latest|boolean|_Default value is true_. Returns only the latest unique events, which is useful for checking if the primary `modfile` has changed.
+    event_type|string|Type of change that occurred:<br><br>__MODFILE_CHANGED__ = Live file changed<br>__MOD_AVAILABLE__ = Mod is marked as accepted and public<br>__MOD_UNAVAILABLE__ = Mod is marked as not accepted, deleted or hidden<br>__MOD_EDITED__ = The mod was updated (triggered when any column value changes)<br>__MOD_DELETED__ = The mod has been permanently erased. This is an orphan record, looking up this id will return no data<br>__MOD_TEAM_CHANGED__ = A user has joined or left the mod team<br>__MOD_COMMENT_ADDED__ = A comment has been published for a mod<br>__MOD_COMMENT_DELETED__ = A comment has been deleted from a mod
+    latest|boolean|_Default value is true_. Returns only the latest unique events, which is useful for checking if the live `modfile` has changed.
     subscribed|boolean|_Default value is false_. Returns only events connected to mods the __authenticated user__ is subscribed to, which is useful for keeping the users mods up-to-date.
 
 > Example response
@@ -6661,7 +7043,7 @@ Add tags which mods can apply to their profiles. Successful request will return 
 
     Tagging is a critical feature that powers the searching and filtering of mods for your game, as well as allowing you to control how mods are installed and played. For example you might enforce mods to be a particular type (map, model, script, save, effects, blueprint), which dictates how you install it. You may use tags to specify what the mod replaces (building, prop, car, boat, character). Or perhaps the tags describe the theme of the mod (fun, scenic, realism). The implementation is up to you, but the more detail you support the better filtering and searching becomes. If you need to store more advanced information, you can also use [Metadata Key Value Pairs](#metadata).
 
-    __NOTE:__ You can also manage tags by editing [your games profile](https://mod.io/games) on the mod.io website. This is the recommended approach.
+    __NOTE:__ You can also manage tags by editing [your games profile](https://mod.io/me/library) on the mod.io website. This is the recommended approach.
 
     Parameter|Type|Required|Description
     ---|---|---|---|
@@ -6800,7 +7182,7 @@ System.out.println(response.toString());
 
 Delete an entire group of tags or individual tags. Successful request will return `204 No Content`.
 
-    __NOTE:__ You can also manage tags by editing [your games profile](https://mod.io/games) on the mod.io website. This is the recommended approach.
+    __NOTE:__ You can also manage tags by editing [your games profile](https://mod.io/me/library) on the mod.io website. This is the recommended approach.
 
     Parameter|Type|Required|Description
     ---|---|---|---|
@@ -7533,7 +7915,9 @@ System.out.println(response.toString());
 
 `GET /games/{game-id}/mods/stats`
 
-Get all mod stats for mods of the corresponding game. Successful request will return an array of [Mod Stats Objects](#get-mod-stats).<br><br>__NOTE:__ We highly recommend you apply filters to this endpoint to get only the results you need. For more information regarding filtering please see the [filtering](#filtering) section.
+Get all mod stats for mods of the corresponding game. Successful request will return an array of [Mod Stats Objects](#get-mod-stats).
+
+    __NOTE:__ We highly recommend you apply filters to this endpoint to get only the results you need. For more information regarding filtering please see the [filtering](#filtering) section.
 
     Filter|Type|Description
     ---|---|---
@@ -7925,11 +8309,13 @@ System.out.println(response.toString());
 
 `POST /games/{game-id}/mods/{mod-id}/metadatakvp`
 
-Add metadata for this mod as searchable key value pairs. Metadata is useful to define how a mod works, or other information you need to display and manage the mod. Successful request will return [Message Object](#message-object).<br><br>For example: A mod might change gravity and the rate of fire of weapons, you could define these properties as key value pairs. We recommend the mod upload tool you create defines and submits metadata behind the scenes, because if these settings affect gameplay, invalid information may cause problems.<br><br>__NOTE:__ Metadata can also be stored as `metadata_blob` in the [Mod Object](#mod-object).
+Add metadata for this mod as searchable key value pairs. Metadata is useful to define how a mod works, or other information you need to display and manage the mod. Successful request will return [Message Object](#message-object).<br><br>For example: A mod might change gravity and the rate of fire of weapons, you could define these properties as key value pairs. We recommend the mod upload tool you create defines and submits metadata behind the scenes, because if these settings affect gameplay, invalid information may cause problems.
+
+     __NOTE:__ Metadata can also be stored as `metadata_blob` in the [Mod Object](#mod-object).
 
      Parameter|Type|Required|Description
      ---|---|---|---|
-     metadata[]|string|true|Key value pairs you want to add where the the key and value are separated by a colon ':'. Every pair to add requires a separate field with metadata[] as the key (eg. metadata[]=pistol-dmg:800, metadata[]=gravity:9.8). __NOTE:__ If the string contains multiple colons the split will occur on the first matched, i.e. sword-speed-power:100:10 will become key: `sword-speed-power`, value: `100:10`). The following restrictions apply to the supplied metadata:<br><br>- Keys support alphanumeric, '_' and '-' characters only.<br>- Keys can map to multiple values (1-to-many relationship).<br>- Keys and values cannot exceed 255 characters in length.<br>- Key value pairs are searchable by exact match only.
+     metadata[]|string|true|Key value pairs you want to add where the the key and value are separated by a colon ':'. Every pair to add requires a separate field with metadata[] as the key (eg. metadata[]=pistol-dmg:800, metadata[]=gravity:9.8). __NOTE:__ If the string contains multiple colons the split will occur on the first matched, eg. sword-speed-power:100:10 will become key: `sword-speed-power`, value: `100:10`). The following restrictions apply to the supplied metadata:<br><br>- Keys support alphanumeric, '_' and '-' characters only.<br>- Keys can map to multiple values (1-to-many relationship).<br>- Keys and values cannot exceed 255 characters in length.<br>- Key value pairs are searchable by exact match only.
 
 > Example response
 
@@ -8573,14 +8959,16 @@ Get all users that are part of a mod team. Successful request will return an arr
         "date_online": 1509922961,
         "date_joined": 1509922961,
         "avatar": {
-          "filename": "modio-color-dark.png",
-          "original": "https://static.mod.io/v1/images/branding/modio-color-dark.png",
-          "thumb_50x50": "https://static.mod.io/v1/images/branding/modio-color-dark.png",
-          "thumb_100x100": "https://static.mod.io/v1/images/branding/modio-color-dark.png"
+          "filename": "avatar.png",
+          "original": "https://assets.modcdn.io/images/placeholder/avatar.png",
+          "thumb_50x50": "https://assets.modcdn.io/images/placeholder/avatar_50x50.png",
+          "thumb_100x100": "https://assets.modcdn.io/images/placeholder/avatar_100x100.png"
         },
         "timezone": "",
         "language": "",
-        "profile_url": "https://mod.io/members/xant"
+        "profile_url": "https://mod.io/u/xant",
+        "monetisation_registered": true,
+        "monetisation_onboarded": true
       },
       "level": 8,
       "date_added": 1492058857,
@@ -8727,14 +9115,16 @@ Get the user that is the original _submitter_ of a resource. Successful request 
   "date_online": 1509922961,
   "date_joined": 1509922961,
   "avatar": {
-    "filename": "modio-color-dark.png",
-    "original": "https://static.mod.io/v1/images/branding/modio-color-dark.png",
-    "thumb_50x50": "https://static.mod.io/v1/images/branding/modio-color-dark.png",
-    "thumb_100x100": "https://static.mod.io/v1/images/branding/modio-color-dark.png"
+    "filename": "avatar.png",
+    "original": "https://assets.modcdn.io/images/placeholder/avatar.png",
+    "thumb_50x50": "https://assets.modcdn.io/images/placeholder/avatar_50x50.png",
+    "thumb_100x100": "https://assets.modcdn.io/images/placeholder/avatar_100x100.png"
   },
   "timezone": "",
   "language": "",
-  "profile_url": "https://mod.io/members/xant"
+  "profile_url": "https://mod.io/u/xant",
+  "monetisation_registered": true,
+  "monetisation_onboarded": true
 }
 
 ```
@@ -8859,7 +9249,11 @@ System.out.println(response.toString());
 
 `POST /report`
 
-Report a resource on mod.io. You are responsible for content your users submit, so properly supporting the report endpoint or linking to the report page [https://mod.io/report/widget](https://mod.io/report) is important. Successful request will return [Message Object](#message-object).<br><br>__NOTE:__ If you want to link to our report page and you know the resource you want to report, the best URL to use is https://mod.io/report/`resource`/`id`/widget. For example to report a mod with an ID of 1 the URL would be: [https://mod.io/report/mods/1/widget](https://mod.io/report/mods/1/widget). <br><br>__NOTE:__ If you are a game owner or manager, you can [view all reports](https://mod.io/messages/reports) submitted for your game. You can also configure in your games control panel the number of reports required before content is automatically taken down for review.<br><br>__NOTE:__ Read our [terms of use](https://mod.io/terms/widget) for information about what is/isn't acceptable.
+Report a resource on mod.io. You are responsible for content your users submit, so properly supporting the report endpoint or linking to the report page [https://mod.io/report/widget](https://mod.io/report) is important. Successful request will return [Message Object](#message-object).
+
+     __NOTE:__ If you want to link to our report page and you know the resource you want to report, the best URL to use is https://mod.io/report/`resource`/`id`/widget. For example to report a mod with an ID of 1 the URL would be: [https://mod.io/report/mods/1/widget](https://mod.io/report/mods/1/widget).
+     __NOTE:__ If you are a game owner or manager, you can [view all reports](https://mod.io/me/library) submitted for your game. You can also configure in your games control panel the number of reports required before content is automatically taken down for review.
+     __NOTE:__ Read our [terms of use](https://mod.io/terms/widget) for information about what is/isn't acceptable.
 
      Parameter|Type|Required|Description
      ---|---|---|---|
@@ -9098,7 +9492,7 @@ System.out.println(response.toString());
 
 `DELETE /users/{user-id}/mute`
 
-Unute a previously muted user. This will re-enable mod.io to returning mods to you authored by the muted user. Successful request will return `204 No Content`.
+Unmute a previously muted user. This will re-enable mod.io to returning mods to you authored by the muted user. Successful request will return `204 No Content`.
 
 > Example response
 
@@ -9224,14 +9618,16 @@ Get the _authenticated user_ details. Successful request will return a single [U
   "date_online": 1509922961,
   "date_joined": 1509922961,
   "avatar": {
-    "filename": "modio-color-dark.png",
-    "original": "https://static.mod.io/v1/images/branding/modio-color-dark.png",
-    "thumb_50x50": "https://static.mod.io/v1/images/branding/modio-color-dark.png",
-    "thumb_100x100": "https://static.mod.io/v1/images/branding/modio-color-dark.png"
+    "filename": "avatar.png",
+    "original": "https://assets.modcdn.io/images/placeholder/avatar.png",
+    "thumb_50x50": "https://assets.modcdn.io/images/placeholder/avatar_50x50.png",
+    "thumb_100x100": "https://assets.modcdn.io/images/placeholder/avatar_100x100.png"
   },
   "timezone": "",
   "language": "",
-  "profile_url": "https://mod.io/members/xant"
+  "profile_url": "https://mod.io/u/xant",
+  "monetisation_registered": true,
+  "monetisation_onboarded": true
 }
 
 ```
@@ -9240,270 +9636,6 @@ Get the _authenticated user_ details. Successful request will return a single [U
 Status|Meaning|Error Ref|Description|Response Schema
 ---|---|----|---|---|
 200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)||Request Successful|[User Object](#schemauser_object)
-<aside class="auth-notice">
-To perform this request, you must be authenticated via one of the following methods:
-<a href="#authentication">OAuth 2</a> (Scopes: read)
-</aside>
-## Get User Subscriptions
-
-> Example request
-
-```shell
-# You can also use wget
-curl -X GET https://api.mod.io/v1/me/subscribed \
-  -H 'Authorization: Bearer {access-token}' \ 
-  -H 'Accept: application/json'
-
-```
-
-```http
-GET https://api.mod.io/v1/me/subscribed HTTP/1.1
-Host: api.mod.io
-
-Accept: application/json
-Authorization: Bearer {access-token}
-
-```
-
-```javascript
-var headers = {
-  'Authorization':'Bearer {access-token}',
-  'Accept':'application/json'
-
-};
-
-$.ajax({
-  url: 'https://api.mod.io/v1/me/subscribed',
-  method: 'get',
-
-  headers: headers,
-  success: function(data) {
-    console.log(JSON.stringify(data));
-  }
-})
-```
-
-```javascript--nodejs
-const request = require('node-fetch');
-
-const headers = {
-  'Authorization':'Bearer {access-token}',
-  'Accept':'application/json'
-
-};
-
-fetch('https://api.mod.io/v1/me/subscribed',
-{
-  method: 'GET',
-
-  headers: headers
-})
-.then(function(res) {
-    return res.json();
-}).then(function(body) {
-    console.log(body);
-});
-```
-
-```python
-import requests
-headers = {
-  'Authorization': 'Bearer {access-token}',
-  'Accept': 'application/json'
-}
-
-r = requests.get('https://api.mod.io/v1/me/subscribed', params={
-
-}, headers = headers)
-
-print r.json()
-```
-
-```java
-URL obj = new URL("https://api.mod.io/v1/me/subscribed");
-HttpURLConnection con = (HttpURLConnection) obj.openConnection();
-con.setRequestMethod("GET");
-int responseCode = con.getResponseCode();
-BufferedReader in = new BufferedReader(
-    new InputStreamReader(con.getInputStream()));
-String inputLine;
-StringBuffer response = new StringBuffer();
-while ((inputLine = in.readLine()) != null) {
-    response.append(inputLine);
-}
-in.close();
-System.out.println(response.toString());
-```
-
-`GET /me/subscribed`
-
-Get all mod's the _authenticated user_ is subscribed to. Successful request will return an array of [Mod Objects](#get-mods-2). We recommended reading the [filtering documentation](#filtering) to return only the records you want.
-
-    Filter|Type|Description
-    ---|---|---
-    id|integer|Unique id of the mod.
-    game_id|integer|Unique id of the parent game.
-    submitted_by|integer|Unique id of the user who has ownership of the mod.
-    date_added|integer|Unix timestamp of date mod was registered.
-    date_updated|integer|Unix timestamp of date mod was updated.
-    date_live|integer|Unix timestamp of date mod was set live.
-    name|string|Name of the mod.
-    name_id|string|Path for the mod on mod.io. For example: https://gamename.mod.io/__mod-name-id-here__
-    summary|string|Summary of the mod.
-    description|string|Detailed description of the mod which allows HTML.
-    homepage_url|string|Official homepage of the mod.
-    metadata_blob|string|Metadata stored by the game developer.
-    tags|string|Comma-separated values representing the tags you want to filter the results by. If you specify multiple tags, only mods which have all tags will be returned, and only tags that are supported by the parent game can be applied. To determine what tags are eligible, see the tags values within `tag_options` column on the parent [Game Object](#game-object). If you want to ensure mods returned do not contain particular tag(s), you can use the `tags-not-in` filter either independently or alongside this filter.
-    downloads|string|Sort results by most downloads using [_sort filter](#filtering) parameter, value should be `downloads` for descending or `-downloads` for ascending results.
-    popular|string|Sort results by popularity using [_sort filter](#filtering), value should be `popular` for descending or `-popular` for ascending results. __NOTE:__ Popularity is calculated hourly and reset daily (results are ranked from 1 to X). You should sort this column in ascending order `-popular` to get the top ranked results.
-    rating|string|Sort results by weighted rating using [_sort filter](#filtering), value should be `rating` for descending or `-rating` for ascending results.
-    subscribers|string|Sort results by most subscribers using [_sort filter](#filtering), value should be `subscribers` for descending or `-subscribers` for ascending results.
-
-> Example response
-
-```json
-{
-  "data": [
-    {
-      "id": 2,
-      "game_id": 2,
-      "game_name": "My Awesome Game",
-      "status": 1,
-      "visible": 1,
-      "submitted_by": {
-        "id": 1,
-        "name_id": "xant",
-        "username": "XanT",
-        "display_name_portal": null,
-        "date_online": 1509922961,
-        "date_joined": 1509922961,
-        "avatar": {
-          "filename": "modio-color-dark.png",
-          "original": "https://static.mod.io/v1/images/branding/modio-color-dark.png",
-          "thumb_50x50": "https://static.mod.io/v1/images/branding/modio-color-dark.png",
-          "thumb_100x100": "https://static.mod.io/v1/images/branding/modio-color-dark.png"
-        },
-        "timezone": "",
-        "language": "",
-        "profile_url": "https://mod.io/members/xant"
-      },
-      "date_added": 1492564103,
-      "date_updated": 1499841487,
-      "date_live": 1499841403,
-      "maturity_option": 0,
-      "community_options": 3,
-      "logo": {
-        "filename": "modio-color-dark.png",
-        "original": "https://static.mod.io/v1/images/branding/modio-color-dark.png",
-        "thumb_320x180": "https://static.mod.io/v1/images/branding/modio-color-dark.png",
-        "thumb_640x360": "https://static.mod.io/v1/images/branding/modio-color-dark.png",
-        "thumb_1280x720": "https://static.mod.io/v1/images/branding/modio-color-dark.png"
-      },
-      "homepage_url": "https://www.rogue-hdpack.com/",
-      "name": "Rogue Knight HD Pack",
-      "name_id": "rogue-knight-hd-pack",
-      "summary": "It's time to bask in the glory of beautiful 4k textures!",
-      "description": "<p>Rogue HD Pack does exactly what you thi...",
-      "description_plaintext": "Rogue HD Pack does exactly what you thi...",
-      "metadata_blob": "rogue,hd,high-res,4k,hd textures",
-      "profile_url": "https://rogue-knight.mod.io/hd-pack",
-      "media": {
-        "youtube": [
-          "https://www.youtube.com/watch?v=dQw4w9WgXcQ"
-        ],
-        "sketchfab": [
-          "https://sketchfab.com/models/ef40b2d300334d009984c8865b2db1c8"
-        ],
-        "images": [
-          {
-            "filename": "modio-color-dark.png",
-            "original": "https://static.mod.io/v1/images/branding/modio-color-dark.png",
-            "thumb_320x180": "https://static.mod.io/v1/images/branding/modio-color-dark.png",
-            "thumb_1280x720": "https://static.mod.io/v1/images/branding/modio-color-dark.png"
-          }
-        ]
-      },
-      "modfile": {
-        "id": 2,
-        "mod_id": 2,
-        "date_added": 1499841487,
-        "date_scanned": 1499841487,
-        "virus_status": 0,
-        "virus_positive": 0,
-        "virustotal_hash": "f9a7bf4a95ce20787337b685a79677cae2281b83c63ab0a25f091407741692af-1508147401",
-        "filesize": 15181,
-        "filehash": {
-          "md5": "2d4a0e2d7273db6b0a94b0740a88ad0d"
-        },
-        "filename": "rogue-knight-v1.zip",
-        "version": "1.3",
-        "changelog": "VERSION 1.3 -- Changes -- Fixed critical castle floor bug.",
-        "metadata_blob": "rogue,hd,high-res,4k,hd textures",
-        "download": {
-          "binary_url": "https://mod.io/mods/file/1/c489a0354111a4d76640d47f0cdcb294",
-          "date_expires": 1579316848
-        },
-        "platforms": [
-          {
-            "platform": "windows",
-            "status": 1
-          }
-        ]
-      },
-      "platforms": [
-        {
-          "platform": "windows",
-          "modfile_live": 1
-        }
-      ],
-      "metadata_kvp": [
-        {
-          "metakey": "pistol-dmg",
-          "metavalue": "800"
-        }
-      ],
-      "tags": [
-        {
-          "name": "Unity",
-          "date_added": 1499841487
-        }
-      ],
-      "stats": {
-        "mod_id": 2,
-        "popularity_rank_position": 13,
-        "popularity_rank_total_mods": 204,
-        "downloads_today": 327,
-        "downloads_total": 27492,
-        "subscribers_total": 16394,
-        "ratings_total": 1230,
-        "ratings_positive": 1047,
-        "ratings_negative": 183,
-        "ratings_percentage_positive": 91,
-        "ratings_weighted_aggregate": 87.38,
-        "ratings_display_text": "Very Positive",
-        "date_expires": 1492564103
-      }
-    },
-    {
-        ...
-    }
-  ],
-  "result_count": 70,
-  "result_offset": 0,
-  "result_limit": 100,
-  "result_total": 70
-}
-
-```
-<h3 id="endpoint-xplatform-notice">Cross-Platform Filtering</h3>
-
-If the parent game has platform filtering enabled, this endpoint supports the [targeting a platform](#targeting-a-platform) request header to return the [mods](#mod-object) that are approved for the requested platform. Note: To target a platform for this endpoint, you MUST also include the `game_id` filter for the game that has cross-platform filtering enabled.
-
-<h3 id="Get-User-Subscriptions-responses">Responses</h3>
-
-Status|Meaning|Error Ref|Description|Response Schema
----|---|----|---|---|
-200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)||Request Successful|[Get Mods](#schemaget_mods)
 <aside class="auth-notice">
 To perform this request, you must be authenticated via one of the following methods:
 <a href="#authentication">OAuth 2</a> (Scopes: read)
@@ -9640,6 +9772,170 @@ Status|Meaning|Error Ref|Description|Response Schema
 To perform this request, you must be authenticated via one of the following methods:
 <a href="#authentication">api_key</a>, <a href="#authentication">OAuth 2</a> (Scopes: read)
 </aside>
+## Get User Modfiles
+
+> Example request
+
+```shell
+# You can also use wget
+curl -X GET https://api.mod.io/v1/me/files \
+  -H 'Authorization: Bearer {access-token}' \ 
+  -H 'Accept: application/json'
+
+```
+
+```http
+GET https://api.mod.io/v1/me/files HTTP/1.1
+Host: api.mod.io
+
+Accept: application/json
+Authorization: Bearer {access-token}
+
+```
+
+```javascript
+var headers = {
+  'Authorization':'Bearer {access-token}',
+  'Accept':'application/json'
+
+};
+
+$.ajax({
+  url: 'https://api.mod.io/v1/me/files',
+  method: 'get',
+
+  headers: headers,
+  success: function(data) {
+    console.log(JSON.stringify(data));
+  }
+})
+```
+
+```javascript--nodejs
+const request = require('node-fetch');
+
+const headers = {
+  'Authorization':'Bearer {access-token}',
+  'Accept':'application/json'
+
+};
+
+fetch('https://api.mod.io/v1/me/files',
+{
+  method: 'GET',
+
+  headers: headers
+})
+.then(function(res) {
+    return res.json();
+}).then(function(body) {
+    console.log(body);
+});
+```
+
+```python
+import requests
+headers = {
+  'Authorization': 'Bearer {access-token}',
+  'Accept': 'application/json'
+}
+
+r = requests.get('https://api.mod.io/v1/me/files', params={
+
+}, headers = headers)
+
+print r.json()
+```
+
+```java
+URL obj = new URL("https://api.mod.io/v1/me/files");
+HttpURLConnection con = (HttpURLConnection) obj.openConnection();
+con.setRequestMethod("GET");
+int responseCode = con.getResponseCode();
+BufferedReader in = new BufferedReader(
+    new InputStreamReader(con.getInputStream()));
+String inputLine;
+StringBuffer response = new StringBuffer();
+while ((inputLine = in.readLine()) != null) {
+    response.append(inputLine);
+}
+in.close();
+System.out.println(response.toString());
+```
+
+`GET /me/files`
+
+Get all modfiles the _authenticated user_ uploaded. Successful request will return an array of [Modfile Objects](#get-modfiles-2). We recommended reading the [filtering documentation](#filtering) to return only the records you want.
+
+    __NOTE:__ If the [game](#edit-game) requires mod downloads to be initiated via the API, the `binary_url` returned will contain a verification hash. This hash must be supplied to get the modfile, and will expire after a certain period of time. Saving and reusing the `binary_url` won't work in this situation given it's dynamic nature.
+
+    Filter|Type|Description
+    ---|---|---
+    id|integer|Unique id of the file.
+    mod_id|integer|Unique id of the mod.
+    date_added|integer|Unix timestamp of date file was added.
+    date_scanned|integer|Unix timestamp of date file was virus scanned.
+    virus_status|integer|Current virus scan status of the file. For newly added files that have yet to be scanned this field will change frequently until a scan is complete:<br><br>__0__ = Not scanned<br>__1__ = Scan complete<br>__2__ = In progress<br>__3__ = Too large to scan<br>__4__ = File not found<br>__5__ = Error Scanning
+    virus_positive|integer|Was a virus detected:<br><br>__0__ = No threats detected<br>__1__ = Flagged as malicious
+    filesize|integer|Size of the file in bytes.
+    filehash|string|MD5 hash of the file.
+    filename|string|Filename including extension.
+    version|string|Release version this file represents.
+    changelog|string|Changelog for the file.
+    metadata_blob|string|Metadata stored by the game developer for this file.
+
+> Example response
+
+```json
+{
+  "data": [
+    {
+      "id": 2,
+      "mod_id": 2,
+      "date_added": 1499841487,
+      "date_scanned": 1499841487,
+      "virus_status": 0,
+      "virus_positive": 0,
+      "virustotal_hash": "f9a7bf4a95ce20787337b685a79677cae2281b83c63ab0a25f091407741692af-1508147401",
+      "filesize": 15181,
+      "filehash": {
+        "md5": "2d4a0e2d7273db6b0a94b0740a88ad0d"
+      },
+      "filename": "rogue-knight-v1.zip",
+      "version": "1.3",
+      "changelog": "VERSION 1.3 -- Changes -- Fixed critical castle floor bug.",
+      "metadata_blob": "rogue,hd,high-res,4k,hd textures",
+      "download": {
+        "binary_url": "https://api.mod.io/mods/file/1/c489a0354111a4d76640d47f0cdcb294",
+        "date_expires": 1579316848
+      },
+      "platforms": [
+        {
+          "platform": "windows",
+          "status": 1
+        }
+      ]
+    },
+    {
+        ...
+    }
+  ],
+  "result_count": 70,
+  "result_offset": 0,
+  "result_limit": 100,
+  "result_total": 70
+}
+
+```
+<h3 id="Get-User-Modfiles-responses">Responses</h3>
+
+Status|Meaning|Error Ref|Description|Response Schema
+---|---|----|---|---|
+200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)||Request Successful|[Get Modfiles](#schemaget_modfiles)
+<aside class="auth-notice">
+To perform this request, you must be authenticated via one of the following methods:
+<a href="#authentication">OAuth 2</a> (Scopes: read)
+</aside>
 ## Get User Games
 
 > Example request
@@ -9744,14 +10040,14 @@ Get all games the _authenticated user_ added or is a team member of. Successful 
     date_updated|integer|Unix timestamp of date game was updated.
     date_live|integer|Unix timestamp of date game was set live.
     name|string|Name of the game.
-    name_id|string|Subdomain for the game on mod.io. For example: https://__gamename__.mod.io
+    name_id|string|Path for the game on mod.io. For example: https://mod.io/g/gamename
     summary|string|Summary of the games mod support.
     instructions_url|string|Link to a mod.io guide, modding wiki or a page where modders can learn how to make and submit mods.
     ugc_name|string|Word used to describe user-generated content (mods, items, addons etc).
     presentation_option|integer|Presentation style used on the mod.io website:<br><br>__0__ =  Grid View: Displays mods in a grid<br>__1__ = Table View: Displays mods in a table
     submission_option|integer|Submission process modders must follow:<br><br>__0__ = Mod uploads must occur via the API using a tool created by the game developers<br>__1__ = Mod uploads can occur from anywhere, including the website and API
     curation_option|integer|Curation process used to approve mods:<br><br>__0__ = No curation: Mods are immediately available to play<br>__1__ = Paid curation: Mods are immediately available to play unless they choose to receive donations. These mods must be accepted to be listed<br>__2__ = Full curation: All mods must be accepted by someone to be listed
-    community_options|integer|Community features enabled on the mod.io website:<br><br>__0__ = All of the options below are disabled<br>__1__ = Enable comments<br>__2__ = Enable guides<br>__4__ = Disable website _"subscribe to install"_ text<br>__?__ = Combine to find games with multiple options enabled (see [BITWISE fields](#bitwise-and-bitwise-and))
+    community_options|integer|Community features enabled on the mod.io website:<br><br>__0__ = All of the options below are disabled<br>__1__ = Enable comments<br>__2__ = Enable guides<br>__?__ = Combine to find games with multiple options enabled (see [BITWISE fields](#bitwise-and-bitwise-and))
     revenue_options|integer|Revenue capabilities mods can enable:<br><br>__0__ = All of the options below are disabled<br>__1__ = Allow mods to be sold<br>__2__ = Allow mods to receive donations<br>__4__ = Allow mods to be traded<br>__8__ = Allow mods to control supply and scarcity<br>__?__ = Combine to find games with multiple options enabled (see [BITWISE fields](#bitwise-and-bitwise-and))
     api_access_options|integer|Level of API access allowed by this game:<br><br>__0__ = All of the options below are disabled<br>__1__ = Allow 3rd parties to access this games API endpoints<br>__2__ = Allow mods to be downloaded directly (if disabled all download URLs will contain a frequently changing verification hash to stop unauthorized use)<br>__?__ = Combine to find games with multiple options enabled (see [BITWISE fields](#bitwise-and-bitwise-and)
     show_hidden_tags|bool|show the hidden tags associated with the given game.
@@ -9764,58 +10060,42 @@ Get all games the _authenticated user_ added or is a team member of. Successful 
     {
       "id": 2,
       "status": 1,
-      "submitted_by": {
-        "id": 1,
-        "name_id": "xant",
-        "username": "XanT",
-        "display_name_portal": null,
-        "date_online": 1509922961,
-        "date_joined": 1509922961,
-        "avatar": {
-          "filename": "modio-color-dark.png",
-          "original": "https://static.mod.io/v1/images/branding/modio-color-dark.png",
-          "thumb_50x50": "https://static.mod.io/v1/images/branding/modio-color-dark.png",
-          "thumb_100x100": "https://static.mod.io/v1/images/branding/modio-color-dark.png"
-        },
-        "timezone": "",
-        "language": "",
-        "profile_url": "https://mod.io/members/xant"
-      },
+      "submitted_by": null,
       "date_added": 1493702614,
       "date_updated": 1499410290,
       "date_live": 1499841403,
-      "presentation_option": 1,
-      "submission_option": 0,
+      "presentation_option": 0,
+      "submission_option": 1,
       "curation_option": 0,
       "community_options": 3,
-      "revenue_options": 1500,
+      "revenue_options": 0,
       "api_access_options": 3,
       "maturity_options": 0,
-      "ugc_name": "map",
+      "ugc_name": "mods",
       "icon": {
-        "filename": "modio-color-dark.png",
-        "original": "https://static.mod.io/v1/images/branding/modio-color-dark.png",
-        "thumb_64x64": "https://static.mod.io/v1/images/branding/modio-color-dark.png",
-        "thumb_128x128": "https://static.mod.io/v1/images/branding/modio-color-dark.png",
-        "thumb_256x256": "https://static.mod.io/v1/images/branding/modio-color-dark.png"
+        "filename": "icon.png",
+        "original": "https://assets.modcdn.io/images/placeholder/icon.png",
+        "thumb_64x64": "https://assets.modcdn.io/images/placeholder/icon.png",
+        "thumb_128x128": "https://assets.modcdn.io/images/placeholder/icon.png",
+        "thumb_256x256": "https://assets.modcdn.io/images/placeholder/icon.png"
       },
       "logo": {
-        "filename": "modio-color-dark.png",
-        "original": "https://static.mod.io/v1/images/branding/modio-color-dark.png",
-        "thumb_320x180": "https://static.mod.io/v1/images/branding/modio-color-dark.png",
-        "thumb_640x360": "https://static.mod.io/v1/images/branding/modio-color-dark.png",
-        "thumb_1280x720": "https://static.mod.io/v1/images/branding/modio-color-dark.png"
+        "filename": "card.png",
+        "original": "https://assets.modcdn.io/images/placeholder/card.png",
+        "thumb_320x180": "https://assets.modcdn.io/images/placeholder/card.png",
+        "thumb_640x360": "https://assets.modcdn.io/images/placeholder/card.png",
+        "thumb_1280x720": "https://assets.modcdn.io/images/placeholder/card.png"
       },
       "header": {
-        "filename": "demo.png",
-        "original": "https://static.mod.io/v1/images/branding/modio-color-dark.png"
+        "filename": "modio-logo-bluedark.png",
+        "original": "https://assets.modcdn.io/images/branding/modio-logo-bluedark.png"
       },
       "name": "Rogue Knight",
       "name_id": "rogue-knight",
       "summary": "Rogue Knight is a brand new 2D pixel platformer that supports custom levels and characters.",
       "instructions": "Instructions on the process to upload mods.",
       "instructions_url": "https://www.rogue-knight-game.com/modding/getting-started",
-      "profile_url": "https://rogue-knight.mod.io",
+      "profile_url": "https://mod.io/g/rogue-knight",
       "other_urls": [
         {
           "label": "Our Steam Page",
@@ -9836,6 +10116,16 @@ Get all games the _authenticated user_ added or is a team member of. Successful 
           "locked": false
         }
       ],
+      "monetisation_options": {
+        "enabled": false,
+        "patronage": false
+      },
+      "monetisation": {
+        "monetisation_team_id": 0,
+        "monetisation_type": "kyc",
+        "platform_cut": "The platform cut for this team.",
+        "onboarded": "pending"
+      },
       "stats": {
         "game_id": 2,
         "mods_count_total": 13,
@@ -9856,10 +10146,15 @@ Get all games the _authenticated user_ added or is a team member of. Successful 
       "platforms": [
         {
           "platform": "ps5",
-          "label": "Playstation 5",
+          "label": "PlayStation 5",
           "moderated": true
         }
-      ]
+      ],
+      "patronage": {
+        "min_patronage": 100,
+        "max_patronage": 1000000,
+        "default_patronage": 500
+      }
     },
     {
         ...
@@ -9877,6 +10172,280 @@ Get all games the _authenticated user_ added or is a team member of. Successful 
 Status|Meaning|Error Ref|Description|Response Schema
 ---|---|----|---|---|
 200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)||Request Successful|[Get Games](#schemaget_games)
+<aside class="auth-notice">
+To perform this request, you must be authenticated via one of the following methods:
+<a href="#authentication">OAuth 2</a> (Scopes: read)
+</aside>
+## Get User Subscriptions
+
+> Example request
+
+```shell
+# You can also use wget
+curl -X GET https://api.mod.io/v1/me/subscribed \
+  -H 'Authorization: Bearer {access-token}' \ 
+  -H 'Accept: application/json'
+
+```
+
+```http
+GET https://api.mod.io/v1/me/subscribed HTTP/1.1
+Host: api.mod.io
+
+Accept: application/json
+Authorization: Bearer {access-token}
+
+```
+
+```javascript
+var headers = {
+  'Authorization':'Bearer {access-token}',
+  'Accept':'application/json'
+
+};
+
+$.ajax({
+  url: 'https://api.mod.io/v1/me/subscribed',
+  method: 'get',
+
+  headers: headers,
+  success: function(data) {
+    console.log(JSON.stringify(data));
+  }
+})
+```
+
+```javascript--nodejs
+const request = require('node-fetch');
+
+const headers = {
+  'Authorization':'Bearer {access-token}',
+  'Accept':'application/json'
+
+};
+
+fetch('https://api.mod.io/v1/me/subscribed',
+{
+  method: 'GET',
+
+  headers: headers
+})
+.then(function(res) {
+    return res.json();
+}).then(function(body) {
+    console.log(body);
+});
+```
+
+```python
+import requests
+headers = {
+  'Authorization': 'Bearer {access-token}',
+  'Accept': 'application/json'
+}
+
+r = requests.get('https://api.mod.io/v1/me/subscribed', params={
+
+}, headers = headers)
+
+print r.json()
+```
+
+```java
+URL obj = new URL("https://api.mod.io/v1/me/subscribed");
+HttpURLConnection con = (HttpURLConnection) obj.openConnection();
+con.setRequestMethod("GET");
+int responseCode = con.getResponseCode();
+BufferedReader in = new BufferedReader(
+    new InputStreamReader(con.getInputStream()));
+String inputLine;
+StringBuffer response = new StringBuffer();
+while ((inputLine = in.readLine()) != null) {
+    response.append(inputLine);
+}
+in.close();
+System.out.println(response.toString());
+```
+
+`GET /me/subscribed`
+
+Get all mod's the _authenticated user_ is subscribed to. Successful request will return an array of [Mod Objects](#get-mods-2). We recommended reading the [filtering documentation](#filtering) to return only the records you want.
+
+    Filter|Type|Description
+    ---|---|---
+    id|integer|Unique id of the mod.
+    game_id|integer|Unique id of the parent game.
+    submitted_by|integer|Unique id of the user who has ownership of the mod.
+    date_added|integer|Unix timestamp of date mod was registered.
+    date_updated|integer|Unix timestamp of date mod was updated.
+    date_live|integer|Unix timestamp of date mod was set live.
+    name|string|Name of the mod.
+    name_id|string|Path for the mod on mod.io. For example: https://mod.io/g/gamename/m/__mod-name-id-here__
+    summary|string|Summary of the mod.
+    description|string|Detailed description of the mod which allows HTML.
+    homepage_url|string|Official homepage of the mod.
+    metadata_blob|string|Metadata stored by the game developer.
+    tags|string|Comma-separated values representing the tags you want to filter the results by. If you specify multiple tags, only mods which have all tags will be returned, and only tags that are supported by the parent game can be applied. To determine what tags are eligible, see the tags values within `tag_options` column on the parent [Game Object](#game-object). If you want to ensure mods returned do not contain particular tag(s), you can use the `tags-not-in` filter either independently or alongside this filter.
+    downloads|string|Sort results by most downloads using [_sort filter](#filtering) parameter, value should be `downloads` for descending or `-downloads` for ascending results.
+    popular|string|Sort results by popularity using [_sort filter](#filtering), value should be `popular` for descending or `-popular` for ascending results. __NOTE:__ Popularity is calculated hourly and reset daily (results are ranked from 1 to X). You should sort this column in ascending order `-popular` to get the top ranked results.
+    rating|string|Sort results by weighted rating using [_sort filter](#filtering), value should be `rating` for descending or `-rating` for ascending results.
+    subscribers|string|Sort results by most subscribers using [_sort filter](#filtering), value should be `subscribers` for descending or `-subscribers` for ascending results.
+
+> Example response
+
+```json
+{
+  "data": [
+    {
+      "id": 2,
+      "game_id": 2,
+      "status": 1,
+      "visible": 1,
+      "submitted_by": {
+        "id": 1,
+        "name_id": "xant",
+        "username": "XanT",
+        "display_name_portal": null,
+        "date_online": 1509922961,
+        "date_joined": 1509922961,
+        "avatar": {
+          "filename": "avatar.png",
+          "original": "https://assets.modcdn.io/images/placeholder/avatar.png",
+          "thumb_50x50": "https://assets.modcdn.io/images/placeholder/avatar_50x50.png",
+          "thumb_100x100": "https://assets.modcdn.io/images/placeholder/avatar_100x100.png"
+        },
+        "timezone": "",
+        "language": "",
+        "profile_url": "https://mod.io/u/xant",
+        "monetisation_registered": true,
+        "monetisation_onboarded": true
+      },
+      "date_added": 1492564103,
+      "date_updated": 1499841487,
+      "date_live": 1499841403,
+      "maturity_option": 0,
+      "community_options": 3,
+      "price": 0,
+      "logo": {
+        "filename": "card.png",
+        "original": "https://assets.modcdn.io/images/placeholder/card.png",
+        "thumb_320x180": "https://assets.modcdn.io/images/placeholder/card.png",
+        "thumb_640x360": "https://assets.modcdn.io/images/placeholder/card.png",
+        "thumb_1280x720": "https://assets.modcdn.io/images/placeholder/card.png"
+      },
+      "homepage_url": "https://www.rogue-hdpack.com/",
+      "name": "Rogue Knight HD Pack",
+      "name_id": "rogue-knight-hd-pack",
+      "summary": "It's time to bask in the glory of beautiful 4k textures!",
+      "description": "<p>Rogue HD Pack does exactly what you thi...",
+      "description_plaintext": "Rogue HD Pack does exactly what you thi...",
+      "metadata_blob": "rogue,hd,high-res,4k,hd textures",
+      "profile_url": "https://mod.io/g/rogue-knight/m/rogue-knight-hd-pack",
+      "media": {
+        "youtube": [
+          "https://www.youtube.com/watch?v=dQw4w9WgXcQ"
+        ],
+        "sketchfab": [
+          "https://sketchfab.com/models/ef40b2d300334d009984c8865b2db1c8"
+        ],
+        "images": [
+          {
+            "filename": "card.png",
+            "original": "https://assets.modcdn.io/images/placeholder/card.png",
+            "thumb_320x180": "https://assets.modcdn.io/images/placeholder/card.png",
+            "thumb_1280x720": "https://assets.modcdn.io/images/placeholder/card.png"
+          }
+        ]
+      },
+      "modfile": {
+        "id": 2,
+        "mod_id": 2,
+        "date_added": 1499841487,
+        "date_scanned": 1499841487,
+        "virus_status": 0,
+        "virus_positive": 0,
+        "virustotal_hash": "f9a7bf4a95ce20787337b685a79677cae2281b83c63ab0a25f091407741692af-1508147401",
+        "filesize": 15181,
+        "filehash": {
+          "md5": "2d4a0e2d7273db6b0a94b0740a88ad0d"
+        },
+        "filename": "rogue-knight-v1.zip",
+        "version": "1.3",
+        "changelog": "VERSION 1.3 -- Changes -- Fixed critical castle floor bug.",
+        "metadata_blob": "rogue,hd,high-res,4k,hd textures",
+        "download": {
+          "binary_url": "https://api.mod.io/mods/file/1/c489a0354111a4d76640d47f0cdcb294",
+          "date_expires": 1579316848
+        },
+        "platforms": [
+          {
+            "platform": "windows",
+            "status": 1
+          }
+        ]
+      },
+      "platforms": [
+        {
+          "platform": "windows",
+          "modfile_live": 1
+        }
+      ],
+      "metadata_kvp": [
+        {
+          "metakey": "pistol-dmg",
+          "metavalue": "800"
+        }
+      ],
+      "tags": [
+        {
+          "name": "Unity",
+          "date_added": 1499841487
+        }
+      ],
+      "stats": {
+        "mod_id": 2,
+        "popularity_rank_position": 13,
+        "popularity_rank_total_mods": 204,
+        "downloads_today": 327,
+        "downloads_total": 27492,
+        "subscribers_total": 16394,
+        "ratings_total": 1230,
+        "ratings_positive": 1047,
+        "ratings_negative": 183,
+        "ratings_percentage_positive": 91,
+        "ratings_weighted_aggregate": 87.38,
+        "ratings_display_text": "Very Positive",
+        "date_expires": 1492564103
+      },
+      "monetisation_options": {
+        "enabled": false,
+        "patronage": false
+      },
+      "monetisation": {
+        "monetisation_team_id": "Team ID for the monetisation API.",
+        "onboarded": "pending"
+      }
+    },
+    {
+        ...
+    }
+  ],
+  "result_count": 70,
+  "result_offset": 0,
+  "result_limit": 100,
+  "result_total": 70
+}
+
+```
+<h3 id="endpoint-xplatform-notice">Cross-Platform Filtering</h3>
+
+If the parent game has platform filtering enabled, this endpoint supports the [targeting a platform](#targeting-a-platform) request header to return the [mods](#mod-object) that are approved for the requested platform. Note: To target a platform for this endpoint, you MUST also include the `game_id` filter for the game that has cross-platform filtering enabled.
+
+<h3 id="Get-User-Subscriptions-responses">Responses</h3>
+
+Status|Meaning|Error Ref|Description|Response Schema
+---|---|----|---|---|
+200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)||Request Successful|[Get Mods](#schemaget_mods)
 <aside class="auth-notice">
 To perform this request, you must be authenticated via one of the following methods:
 <a href="#authentication">OAuth 2</a> (Scopes: read)
@@ -9987,7 +10556,7 @@ Get all mods the _authenticated user_ added or is a team member of. Successful r
     date_updated|integer|Unix timestamp of date mod was updated.
     date_live|integer|Unix timestamp of date mod was set live.
     name|string|Name of the mod.
-    name_id|string|Path for the mod on mod.io. For example: https://gamename.mod.io/__mod-name-id-here__
+    name_id|string|Path for the mod on mod.io. For example: https://mod.io/g/gamename/m/__mod-name-id-here__
     summary|string|Summary of the mod.
     description|string|Detailed description of the mod which allows HTML.
     homepage_url|string|Official homepage of the mod.
@@ -10008,7 +10577,6 @@ Get all mods the _authenticated user_ added or is a team member of. Successful r
     {
       "id": 2,
       "game_id": 2,
-      "game_name": "My Awesome Game",
       "status": 1,
       "visible": 1,
       "submitted_by": {
@@ -10019,26 +10587,29 @@ Get all mods the _authenticated user_ added or is a team member of. Successful r
         "date_online": 1509922961,
         "date_joined": 1509922961,
         "avatar": {
-          "filename": "modio-color-dark.png",
-          "original": "https://static.mod.io/v1/images/branding/modio-color-dark.png",
-          "thumb_50x50": "https://static.mod.io/v1/images/branding/modio-color-dark.png",
-          "thumb_100x100": "https://static.mod.io/v1/images/branding/modio-color-dark.png"
+          "filename": "avatar.png",
+          "original": "https://assets.modcdn.io/images/placeholder/avatar.png",
+          "thumb_50x50": "https://assets.modcdn.io/images/placeholder/avatar_50x50.png",
+          "thumb_100x100": "https://assets.modcdn.io/images/placeholder/avatar_100x100.png"
         },
         "timezone": "",
         "language": "",
-        "profile_url": "https://mod.io/members/xant"
+        "profile_url": "https://mod.io/u/xant",
+        "monetisation_registered": true,
+        "monetisation_onboarded": true
       },
       "date_added": 1492564103,
       "date_updated": 1499841487,
       "date_live": 1499841403,
       "maturity_option": 0,
       "community_options": 3,
+      "price": 0,
       "logo": {
-        "filename": "modio-color-dark.png",
-        "original": "https://static.mod.io/v1/images/branding/modio-color-dark.png",
-        "thumb_320x180": "https://static.mod.io/v1/images/branding/modio-color-dark.png",
-        "thumb_640x360": "https://static.mod.io/v1/images/branding/modio-color-dark.png",
-        "thumb_1280x720": "https://static.mod.io/v1/images/branding/modio-color-dark.png"
+        "filename": "card.png",
+        "original": "https://assets.modcdn.io/images/placeholder/card.png",
+        "thumb_320x180": "https://assets.modcdn.io/images/placeholder/card.png",
+        "thumb_640x360": "https://assets.modcdn.io/images/placeholder/card.png",
+        "thumb_1280x720": "https://assets.modcdn.io/images/placeholder/card.png"
       },
       "homepage_url": "https://www.rogue-hdpack.com/",
       "name": "Rogue Knight HD Pack",
@@ -10047,7 +10618,7 @@ Get all mods the _authenticated user_ added or is a team member of. Successful r
       "description": "<p>Rogue HD Pack does exactly what you thi...",
       "description_plaintext": "Rogue HD Pack does exactly what you thi...",
       "metadata_blob": "rogue,hd,high-res,4k,hd textures",
-      "profile_url": "https://rogue-knight.mod.io/hd-pack",
+      "profile_url": "https://mod.io/g/rogue-knight/m/rogue-knight-hd-pack",
       "media": {
         "youtube": [
           "https://www.youtube.com/watch?v=dQw4w9WgXcQ"
@@ -10057,10 +10628,10 @@ Get all mods the _authenticated user_ added or is a team member of. Successful r
         ],
         "images": [
           {
-            "filename": "modio-color-dark.png",
-            "original": "https://static.mod.io/v1/images/branding/modio-color-dark.png",
-            "thumb_320x180": "https://static.mod.io/v1/images/branding/modio-color-dark.png",
-            "thumb_1280x720": "https://static.mod.io/v1/images/branding/modio-color-dark.png"
+            "filename": "card.png",
+            "original": "https://assets.modcdn.io/images/placeholder/card.png",
+            "thumb_320x180": "https://assets.modcdn.io/images/placeholder/card.png",
+            "thumb_1280x720": "https://assets.modcdn.io/images/placeholder/card.png"
           }
         ]
       },
@@ -10081,7 +10652,7 @@ Get all mods the _authenticated user_ added or is a team member of. Successful r
         "changelog": "VERSION 1.3 -- Changes -- Fixed critical castle floor bug.",
         "metadata_blob": "rogue,hd,high-res,4k,hd textures",
         "download": {
-          "binary_url": "https://mod.io/mods/file/1/c489a0354111a4d76640d47f0cdcb294",
+          "binary_url": "https://api.mod.io/mods/file/1/c489a0354111a4d76640d47f0cdcb294",
           "date_expires": 1579316848
         },
         "platforms": [
@@ -10123,6 +10694,14 @@ Get all mods the _authenticated user_ added or is a team member of. Successful r
         "ratings_weighted_aggregate": 87.38,
         "ratings_display_text": "Very Positive",
         "date_expires": 1492564103
+      },
+      "monetisation_options": {
+        "enabled": false,
+        "patronage": false
+      },
+      "monetisation": {
+        "monetisation_team_id": "Team ID for the monetisation API.",
+        "onboarded": "pending"
       }
     },
     {
@@ -10145,20 +10724,20 @@ Status|Meaning|Error Ref|Description|Response Schema
 To perform this request, you must be authenticated via one of the following methods:
 <a href="#authentication">OAuth 2</a> (Scopes: read)
 </aside>
-## Get User Modfiles
+## Get Users Muted
 
 > Example request
 
 ```shell
 # You can also use wget
-curl -X GET https://api.mod.io/v1/me/files \
+curl -X GET https://api.mod.io/v1/me/users/muted \
   -H 'Authorization: Bearer {access-token}' \ 
   -H 'Accept: application/json'
 
 ```
 
 ```http
-GET https://api.mod.io/v1/me/files HTTP/1.1
+GET https://api.mod.io/v1/me/users/muted HTTP/1.1
 Host: api.mod.io
 
 Accept: application/json
@@ -10174,7 +10753,7 @@ var headers = {
 };
 
 $.ajax({
-  url: 'https://api.mod.io/v1/me/files',
+  url: 'https://api.mod.io/v1/me/users/muted',
   method: 'get',
 
   headers: headers,
@@ -10193,7 +10772,7 @@ const headers = {
 
 };
 
-fetch('https://api.mod.io/v1/me/files',
+fetch('https://api.mod.io/v1/me/users/muted',
 {
   method: 'GET',
 
@@ -10213,7 +10792,7 @@ headers = {
   'Accept': 'application/json'
 }
 
-r = requests.get('https://api.mod.io/v1/me/files', params={
+r = requests.get('https://api.mod.io/v1/me/users/muted', params={
 
 }, headers = headers)
 
@@ -10221,7 +10800,7 @@ print r.json()
 ```
 
 ```java
-URL obj = new URL("https://api.mod.io/v1/me/files");
+URL obj = new URL("https://api.mod.io/v1/me/users/muted");
 HttpURLConnection con = (HttpURLConnection) obj.openConnection();
 con.setRequestMethod("GET");
 int responseCode = con.getResponseCode();
@@ -10236,24 +10815,9 @@ in.close();
 System.out.println(response.toString());
 ```
 
-`GET /me/files`
+`GET /me/users/muted`
 
-Get all modfiles the _authenticated user_ uploaded. Successful request will return an array of [Modfile Objects](#get-modfiles-2). We recommended reading the [filtering documentation](#filtering) to return only the records you want.<br><br>__NOTE:__ If the [game](#edit-game) requires mod downloads to be initiated via the API, the `binary_url` returned will contain a verification hash. This hash must be supplied to get the modfile, and will expire after a certain period of time. Saving and reusing the `binary_url` won't work in this situation given it's dynamic nature.
-
-    Filter|Type|Description
-    ---|---|---
-    id|integer|Unique id of the file.
-    mod_id|integer|Unique id of the mod.
-    date_added|integer|Unix timestamp of date file was added.
-    date_scanned|integer|Unix timestamp of date file was virus scanned.
-    virus_status|integer|Current virus scan status of the file. For newly added files that have yet to be scanned this field will change frequently until a scan is complete:<br><br>__0__ = Not scanned<br>__1__ = Scan complete<br>__2__ = In progress<br>__3__ = Too large to scan<br>__4__ = File not found<br>__5__ = Error Scanning
-    virus_positive|integer|Was a virus detected:<br><br>__0__ = No threats detected<br>__1__ = Flagged as malicious
-    filesize|integer|Size of the file in bytes.
-    filehash|string|MD5 hash of the file.
-    filename|string|Filename including extension.
-    version|string|Release version this file represents.
-    changelog|string|Changelog for the file.
-    metadata_blob|string|Metadata stored by the game developer for this file.
+Get all users muted by the _authenticated user_. Successful request will return an array of [User Objects](#user-object).
 
 > Example response
 
@@ -10261,48 +10825,40 @@ Get all modfiles the _authenticated user_ uploaded. Successful request will retu
 {
   "data": [
     {
-      "id": 2,
-      "mod_id": 2,
-      "date_added": 1499841487,
-      "date_scanned": 1499841487,
-      "virus_status": 0,
-      "virus_positive": 0,
-      "virustotal_hash": "f9a7bf4a95ce20787337b685a79677cae2281b83c63ab0a25f091407741692af-1508147401",
-      "filesize": 15181,
-      "filehash": {
-        "md5": "2d4a0e2d7273db6b0a94b0740a88ad0d"
+      "id": 1,
+      "name_id": "xant",
+      "username": "XanT",
+      "display_name_portal": null,
+      "date_online": 1509922961,
+      "date_joined": 1509922961,
+      "avatar": {
+        "filename": "avatar.png",
+        "original": "https://assets.modcdn.io/images/placeholder/avatar.png",
+        "thumb_50x50": "https://assets.modcdn.io/images/placeholder/avatar_50x50.png",
+        "thumb_100x100": "https://assets.modcdn.io/images/placeholder/avatar_100x100.png"
       },
-      "filename": "rogue-knight-v1.zip",
-      "version": "1.3",
-      "changelog": "VERSION 1.3 -- Changes -- Fixed critical castle floor bug.",
-      "metadata_blob": "rogue,hd,high-res,4k,hd textures",
-      "download": {
-        "binary_url": "https://mod.io/mods/file/1/c489a0354111a4d76640d47f0cdcb294",
-        "date_expires": 1579316848
-      },
-      "platforms": [
-        {
-          "platform": "windows",
-          "status": 1
-        }
-      ]
+      "timezone": "",
+      "language": "",
+      "profile_url": "https://mod.io/u/xant",
+      "monetisation_registered": true,
+      "monetisation_onboarded": true
     },
     {
         ...
     }
   ],
-  "result_count": 70,
+  "result_count": 1,
   "result_offset": 0,
   "result_limit": 100,
-  "result_total": 70
+  "result_total": 1
 }
 
 ```
-<h3 id="Get-User-Modfiles-responses">Responses</h3>
+<h3 id="Get-Users-Muted-responses">Responses</h3>
 
 Status|Meaning|Error Ref|Description|Response Schema
 ---|---|----|---|---|
-200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)||Request Successful|[Get Modfiles](#schemaget_modfiles)
+200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)||Request Successful|[Get Muted Users](#schemaget_muted_users)
 <aside class="auth-notice">
 To perform this request, you must be authenticated via one of the following methods:
 <a href="#authentication">OAuth 2</a> (Scopes: read)
@@ -10440,160 +10996,7 @@ Status|Meaning|Error Ref|Description|Response Schema
 To perform this request, you must be authenticated via one of the following methods:
 <a href="#authentication">OAuth 2</a> (Scopes: read)
 </aside>
-## Get Users Muted
-
-> Example request
-
-```shell
-# You can also use wget
-curl -X GET https://api.mod.io/v1/me/users/muted \
-  -H 'Authorization: Bearer {access-token}' \ 
-  -H 'Accept: application/json'
-
-```
-
-```http
-GET https://api.mod.io/v1/me/users/muted HTTP/1.1
-Host: api.mod.io
-
-Accept: application/json
-Authorization: Bearer {access-token}
-
-```
-
-```javascript
-var headers = {
-  'Authorization':'Bearer {access-token}',
-  'Accept':'application/json'
-
-};
-
-$.ajax({
-  url: 'https://api.mod.io/v1/me/users/muted',
-  method: 'get',
-
-  headers: headers,
-  success: function(data) {
-    console.log(JSON.stringify(data));
-  }
-})
-```
-
-```javascript--nodejs
-const request = require('node-fetch');
-
-const headers = {
-  'Authorization':'Bearer {access-token}',
-  'Accept':'application/json'
-
-};
-
-fetch('https://api.mod.io/v1/me/users/muted',
-{
-  method: 'GET',
-
-  headers: headers
-})
-.then(function(res) {
-    return res.json();
-}).then(function(body) {
-    console.log(body);
-});
-```
-
-```python
-import requests
-headers = {
-  'Authorization': 'Bearer {access-token}',
-  'Accept': 'application/json'
-}
-
-r = requests.get('https://api.mod.io/v1/me/users/muted', params={
-
-}, headers = headers)
-
-print r.json()
-```
-
-```java
-URL obj = new URL("https://api.mod.io/v1/me/users/muted");
-HttpURLConnection con = (HttpURLConnection) obj.openConnection();
-con.setRequestMethod("GET");
-int responseCode = con.getResponseCode();
-BufferedReader in = new BufferedReader(
-    new InputStreamReader(con.getInputStream()));
-String inputLine;
-StringBuffer response = new StringBuffer();
-while ((inputLine = in.readLine()) != null) {
-    response.append(inputLine);
-}
-in.close();
-System.out.println(response.toString());
-```
-
-`GET /me/users/muted`
-
-Get all users muted by the _authenticated user_. Successful request will return an array of [User Objects](#user-object).
-
-> Example response
-
-```json
-{
-  "data": [
-    {
-      "id": 1,
-      "name_id": "xant",
-      "username": "XanT",
-      "display_name_portal": null,
-      "date_online": 1509922961,
-      "date_joined": 1509922961,
-      "avatar": {
-        "filename": "modio-color-dark.png",
-        "original": "https://static.mod.io/v1/images/branding/modio-color-dark.png",
-        "thumb_50x50": "https://static.mod.io/v1/images/branding/modio-color-dark.png",
-        "thumb_100x100": "https://static.mod.io/v1/images/branding/modio-color-dark.png"
-      },
-      "timezone": "",
-      "language": "",
-      "profile_url": "https://mod.io/members/xant"
-    },
-    {
-        ...
-    }
-  ],
-  "result_count": 1,
-  "result_offset": 0,
-  "result_limit": 100,
-  "result_total": 1
-}
-
-```
-<h3 id="Get-Users-Muted-responses">Responses</h3>
-
-Status|Meaning|Error Ref|Description|Response Schema
----|---|----|---|---|
-200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)||Request Successful|[Get Muted Users](#schemaget_muted_users)
-<aside class="auth-notice">
-To perform this request, you must be authenticated via one of the following methods:
-<a href="#authentication">OAuth 2</a> (Scopes: read)
-</aside>
 # Response Schemas
-## 204
-
-<a name="schema204"></a>
-
-```json
- 204 No Content  
-```
-
-### Properties
-
-Name|Type|Description
----|---|---|---|
-undefined|object|No description
-
-
-
 ## Access Token Object  
 
 <a name="schemaaccess_token_object"></a>
@@ -10622,10 +11025,10 @@ date_expires|integer|Unix timestamp of the date this token will expire. Default 
 
 ```json
 {
-  "filename": "modio-color-dark.png",
-  "original": "https://static.mod.io/v1/images/branding/modio-color-dark.png",
-  "thumb_50x50": "https://static.mod.io/v1/images/branding/modio-color-dark.png",
-  "thumb_100x100": "https://static.mod.io/v1/images/branding/modio-color-dark.png"
+  "filename": "avatar.png",
+  "original": "https://assets.modcdn.io/images/placeholder/avatar.png",
+  "thumb_50x50": "https://assets.modcdn.io/images/placeholder/avatar_50x50.png",
+  "thumb_100x100": "https://assets.modcdn.io/images/placeholder/avatar_100x100.png"
 } 
 ```
 
@@ -10637,295 +11040,6 @@ filename|string|Avatar filename including extension.
 original|string|URL to the full-sized avatar.
 thumb_50x50|string|URL to the small avatar thumbnail.
 thumb_100x100|string|URL to the medium avatar thumbnail.
-
-
-
-## Batch Body Object  
-
-<a name="schemabatch_body_object"></a>
-
-```json
-{
-  "data": [
-    {
-      "id": 2,
-      "game_id": 2,
-      "game_name": "My Awesome Game",
-      "status": 1,
-      "visible": 1,
-      "submitted_by": {
-        "id": 1,
-        "name_id": "xant",
-        "username": "XanT",
-        "display_name_portal": null,
-        "date_online": 1509922961,
-        "date_joined": 1509922961,
-        "avatar": {
-          "filename": "modio-color-dark.png",
-          "original": "https://static.mod.io/v1/images/branding/modio-color-dark.png",
-          "thumb_50x50": "https://static.mod.io/v1/images/branding/modio-color-dark.png",
-          "thumb_100x100": "https://static.mod.io/v1/images/branding/modio-color-dark.png"
-        },
-        "timezone": "",
-        "language": "",
-        "profile_url": "https://mod.io/members/xant"
-      },
-      "date_added": 1492564103,
-      "date_updated": 1499841487,
-      "date_live": 1499841403,
-      "maturity_option": 0,
-      "community_options": 3,
-      "logo": {
-        "filename": "modio-color-dark.png",
-        "original": "https://static.mod.io/v1/images/branding/modio-color-dark.png",
-        "thumb_320x180": "https://static.mod.io/v1/images/branding/modio-color-dark.png",
-        "thumb_640x360": "https://static.mod.io/v1/images/branding/modio-color-dark.png",
-        "thumb_1280x720": "https://static.mod.io/v1/images/branding/modio-color-dark.png"
-      },
-      "homepage_url": "https://www.rogue-hdpack.com/",
-      "name": "Rogue Knight HD Pack",
-      "name_id": "rogue-knight-hd-pack",
-      "summary": "It's time to bask in the glory of beautiful 4k textures!",
-      "description": "<p>Rogue HD Pack does exactly what you thi...",
-      "description_plaintext": "Rogue HD Pack does exactly what you thi...",
-      "metadata_blob": "rogue,hd,high-res,4k,hd textures",
-      "profile_url": "https://rogue-knight.mod.io/hd-pack",
-      "media": {
-        "youtube": [
-          "https://www.youtube.com/watch?v=dQw4w9WgXcQ"
-        ],
-        "sketchfab": [
-          "https://sketchfab.com/models/ef40b2d300334d009984c8865b2db1c8"
-        ],
-        "images": [
-          {
-            "filename": "modio-color-dark.png",
-            "original": "https://static.mod.io/v1/images/branding/modio-color-dark.png",
-            "thumb_320x180": "https://static.mod.io/v1/images/branding/modio-color-dark.png",
-            "thumb_1280x720": "https://static.mod.io/v1/images/branding/modio-color-dark.png"
-          }
-        ]
-      },
-      "modfile": {
-        "id": 2,
-        "mod_id": 2,
-        "date_added": 1499841487,
-        "date_scanned": 1499841487,
-        "virus_status": 0,
-        "virus_positive": 0,
-        "virustotal_hash": "f9a7bf4a95ce20787337b685a79677cae2281b83c63ab0a25f091407741692af-1508147401",
-        "filesize": 15181,
-        "filehash": {
-          "md5": "2d4a0e2d7273db6b0a94b0740a88ad0d"
-        },
-        "filename": "rogue-knight-v1.zip",
-        "version": "1.3",
-        "changelog": "VERSION 1.3 -- Changes -- Fixed critical castle floor bug.",
-        "metadata_blob": "rogue,hd,high-res,4k,hd textures",
-        "download": {
-          "binary_url": "https://mod.io/mods/file/1/c489a0354111a4d76640d47f0cdcb294",
-          "date_expires": 1579316848
-        },
-        "platforms": [
-          {
-            "platform": "windows",
-            "status": 1
-          }
-        ]
-      },
-      "platforms": [
-        {
-          "platform": "windows",
-          "modfile_live": 1
-        }
-      ],
-      "metadata_kvp": [
-        {
-          "metakey": "pistol-dmg",
-          "metavalue": "800"
-        }
-      ],
-      "tags": [
-        {
-          "name": "Unity",
-          "date_added": 1499841487
-        }
-      ],
-      "stats": {
-        "mod_id": 2,
-        "popularity_rank_position": 13,
-        "popularity_rank_total_mods": 204,
-        "downloads_today": 327,
-        "downloads_total": 27492,
-        "subscribers_total": 16394,
-        "ratings_total": 1230,
-        "ratings_positive": 1047,
-        "ratings_negative": 183,
-        "ratings_percentage_positive": 91,
-        "ratings_weighted_aggregate": 87.38,
-        "ratings_display_text": "Very Positive",
-        "date_expires": 1492564103
-      }
-    }
-  ]
-} 
-```
-
-### Properties
-
-Name|Type|Description
----|---|---|---|
-data|[Mod Object](#schemamod_object)[]|Contains Mod Objects.
-
-
-
-## Batch Object
-
-   <a name="schemabatch_object"></a>
-
-```json
-{
-  "code": 200,
-  "headers": [
-    {
-      "key": "X-RateLimit-Remaining",
-      "value": "98"
-    }
-  ],
-  "body": {
-    "data": [
-      {
-        "id": 2,
-        "game_id": 2,
-        "game_name": "My Awesome Game",
-        "status": 1,
-        "visible": 1,
-        "submitted_by": {
-          "id": 1,
-          "name_id": "xant",
-          "username": "XanT",
-          "display_name_portal": null,
-          "date_online": 1509922961,
-          "date_joined": 1509922961,
-          "avatar": {
-            "filename": "modio-color-dark.png",
-            "original": "https://static.mod.io/v1/images/branding/modio-color-dark.png",
-            "thumb_50x50": "https://static.mod.io/v1/images/branding/modio-color-dark.png",
-            "thumb_100x100": "https://static.mod.io/v1/images/branding/modio-color-dark.png"
-          },
-          "timezone": "",
-          "language": "",
-          "profile_url": "https://mod.io/members/xant"
-        },
-        "date_added": 1492564103,
-        "date_updated": 1499841487,
-        "date_live": 1499841403,
-        "maturity_option": 0,
-        "community_options": 3,
-        "logo": {
-          "filename": "modio-color-dark.png",
-          "original": "https://static.mod.io/v1/images/branding/modio-color-dark.png",
-          "thumb_320x180": "https://static.mod.io/v1/images/branding/modio-color-dark.png",
-          "thumb_640x360": "https://static.mod.io/v1/images/branding/modio-color-dark.png",
-          "thumb_1280x720": "https://static.mod.io/v1/images/branding/modio-color-dark.png"
-        },
-        "homepage_url": "https://www.rogue-hdpack.com/",
-        "name": "Rogue Knight HD Pack",
-        "name_id": "rogue-knight-hd-pack",
-        "summary": "It's time to bask in the glory of beautiful 4k textures!",
-        "description": "<p>Rogue HD Pack does exactly what you thi...",
-        "description_plaintext": "Rogue HD Pack does exactly what you thi...",
-        "metadata_blob": "rogue,hd,high-res,4k,hd textures",
-        "profile_url": "https://rogue-knight.mod.io/hd-pack",
-        "media": {
-          "youtube": [
-            "https://www.youtube.com/watch?v=dQw4w9WgXcQ"
-          ],
-          "sketchfab": [
-            "https://sketchfab.com/models/ef40b2d300334d009984c8865b2db1c8"
-          ],
-          "images": [
-            {
-              "filename": "modio-color-dark.png",
-              "original": "https://static.mod.io/v1/images/branding/modio-color-dark.png",
-              "thumb_320x180": "https://static.mod.io/v1/images/branding/modio-color-dark.png",
-              "thumb_1280x720": "https://static.mod.io/v1/images/branding/modio-color-dark.png"
-            }
-          ]
-        },
-        "modfile": {
-          "id": 2,
-          "mod_id": 2,
-          "date_added": 1499841487,
-          "date_scanned": 1499841487,
-          "virus_status": 0,
-          "virus_positive": 0,
-          "virustotal_hash": "f9a7bf4a95ce20787337b685a79677cae2281b83c63ab0a25f091407741692af-1508147401",
-          "filesize": 15181,
-          "filehash": {
-            "md5": "2d4a0e2d7273db6b0a94b0740a88ad0d"
-          },
-          "filename": "rogue-knight-v1.zip",
-          "version": "1.3",
-          "changelog": "VERSION 1.3 -- Changes -- Fixed critical castle floor bug.",
-          "metadata_blob": "rogue,hd,high-res,4k,hd textures",
-          "download": {
-            "binary_url": "https://mod.io/mods/file/1/c489a0354111a4d76640d47f0cdcb294",
-            "date_expires": 1579316848
-          },
-          "platforms": [
-            {
-              "platform": "windows",
-              "status": 1
-            }
-          ]
-        },
-        "platforms": [
-          {
-            "platform": "windows",
-            "modfile_live": 1
-          }
-        ],
-        "metadata_kvp": [
-          {
-            "metakey": "pistol-dmg",
-            "metavalue": "800"
-          }
-        ],
-        "tags": [
-          {
-            "name": "Unity",
-            "date_added": 1499841487
-          }
-        ],
-        "stats": {
-          "mod_id": 2,
-          "popularity_rank_position": 13,
-          "popularity_rank_total_mods": 204,
-          "downloads_today": 327,
-          "downloads_total": 27492,
-          "subscribers_total": 16394,
-          "ratings_total": 1230,
-          "ratings_positive": 1047,
-          "ratings_negative": 183,
-          "ratings_percentage_positive": 91,
-          "ratings_weighted_aggregate": 87.38,
-          "ratings_display_text": "Very Positive",
-          "date_expires": 1492564103
-        }
-      }
-    ]
-  }
-} 
-```
-
-### Properties
-
-Name|Type|Description
----|---|---|---|
-code|integer|Response HTTP code.
-body|[Batch Body Object](#schemabatch_body_object)|No description
-headers|[[Key-Value Pair Object](#schemakey-value_pair_object)]|Contains key-value pairs.
 
 
 
@@ -10946,21 +11060,23 @@ headers|[[Key-Value Pair Object](#schemakey-value_pair_object)]|Contains key-val
     "date_online": 1509922961,
     "date_joined": 1509922961,
     "avatar": {
-      "filename": "modio-color-dark.png",
-      "original": "https://static.mod.io/v1/images/branding/modio-color-dark.png",
-      "thumb_50x50": "https://static.mod.io/v1/images/branding/modio-color-dark.png",
-      "thumb_100x100": "https://static.mod.io/v1/images/branding/modio-color-dark.png"
+      "filename": "avatar.png",
+      "original": "https://assets.modcdn.io/images/placeholder/avatar.png",
+      "thumb_50x50": "https://assets.modcdn.io/images/placeholder/avatar_50x50.png",
+      "thumb_100x100": "https://assets.modcdn.io/images/placeholder/avatar_100x100.png"
     },
     "timezone": "",
     "language": "",
-    "profile_url": "https://mod.io/members/xant"
+    "profile_url": "https://mod.io/u/xant",
+    "monetisation_registered": true,
+    "monetisation_onboarded": true
   },
   "date_added": 1499841487,
   "reply_id": 0,
   "thread_position": "01",
   "karma": 1,
   "karma_guest": 0,
-  "content": "Hey <a href=\"https://mod.io/members/guest\">guest</a>, you should check out this mod!"
+  "content": "Hey <a href=\"https://mod.io/u/guest\">guest</a>, you should check out this mod!"
 } 
 ```
 
@@ -10969,9 +11085,9 @@ headers|[[Key-Value Pair Object](#schemakey-value_pair_object)]|Contains key-val
 Name|Type|Description
 ---|---|---|---|
 id|integer|Unique id of the comment.
-mod_id|integer|Unique id of the parent mod. This is now depreciated and will be removed in future API versions, please use resource_id instead.
+mod_id|integer|Unique id of the parent mod. This is now deprecated and will be removed in future API versions, please use resource_id instead.
 resource_id|integer|Unique id of the parent resource.
-user|[User Object](#schemauser_object)|No description
+user|[User Object](#schemauser_object)|The user who published the comment
 date_added|integer|Unix timestamp of date the comment was posted.
 reply_id|integer|Id of the parent comment this comment is replying to (can be 0 if the comment is not a reply).
 thread_position|string|Levels of nesting in a comment thread. How it works:<br><br>- The first comment will have the position '01'.<br>- The second comment will have the position '02'.<br>- If someone responds to the second comment the position will be '02.01'.<br>- A maximum of 3 levels is supported.
@@ -10987,7 +11103,7 @@ content|string|Contents of the comment.
 
 ```json
 {
-  "binary_url": "https://mod.io/mods/file/1/c489a0354111a4d76640d47f0cdcb294",
+  "binary_url": "https://api.mod.io/mods/file/1/c489a0354111a4d76640d47f0cdcb294",
   "date_expires": 1579316848
 } 
 ```
@@ -11046,6 +11162,30 @@ md5|string|MD5 hash of the file.
 
 
 
+## Game Monetisation Object  
+
+<a name="schemagame_monetisation_object"></a>
+
+```json
+{
+  "monetisation_team_id": 0,
+  "monetisation_type": "kyc",
+  "platform_cut": "The platform cut for this team.",
+  "onboarded": "pending"
+} 
+```
+
+### Properties
+
+Name|Type|Description
+---|---|---|---|
+monetisation_team_id|integer|Team ID for the monetisation API.
+monetisation_type|string|Team type onboarded as.
+platform_cut|integer|No description
+onboarded|string|Has the team completed setup?
+
+
+
 ## Game Object
 
    <a name="schemagame_object"></a>
@@ -11054,58 +11194,42 @@ md5|string|MD5 hash of the file.
 {
   "id": 2,
   "status": 1,
-  "submitted_by": {
-    "id": 1,
-    "name_id": "xant",
-    "username": "XanT",
-    "display_name_portal": null,
-    "date_online": 1509922961,
-    "date_joined": 1509922961,
-    "avatar": {
-      "filename": "modio-color-dark.png",
-      "original": "https://static.mod.io/v1/images/branding/modio-color-dark.png",
-      "thumb_50x50": "https://static.mod.io/v1/images/branding/modio-color-dark.png",
-      "thumb_100x100": "https://static.mod.io/v1/images/branding/modio-color-dark.png"
-    },
-    "timezone": "",
-    "language": "",
-    "profile_url": "https://mod.io/members/xant"
-  },
+  "submitted_by": null,
   "date_added": 1493702614,
   "date_updated": 1499410290,
   "date_live": 1499841403,
-  "presentation_option": 1,
-  "submission_option": 0,
+  "presentation_option": 0,
+  "submission_option": 1,
   "curation_option": 0,
   "community_options": 3,
-  "revenue_options": 1500,
+  "revenue_options": 0,
   "api_access_options": 3,
   "maturity_options": 0,
-  "ugc_name": "map",
+  "ugc_name": "mods",
   "icon": {
-    "filename": "modio-color-dark.png",
-    "original": "https://static.mod.io/v1/images/branding/modio-color-dark.png",
-    "thumb_64x64": "https://static.mod.io/v1/images/branding/modio-color-dark.png",
-    "thumb_128x128": "https://static.mod.io/v1/images/branding/modio-color-dark.png",
-    "thumb_256x256": "https://static.mod.io/v1/images/branding/modio-color-dark.png"
+    "filename": "icon.png",
+    "original": "https://assets.modcdn.io/images/placeholder/icon.png",
+    "thumb_64x64": "https://assets.modcdn.io/images/placeholder/icon.png",
+    "thumb_128x128": "https://assets.modcdn.io/images/placeholder/icon.png",
+    "thumb_256x256": "https://assets.modcdn.io/images/placeholder/icon.png"
   },
   "logo": {
-    "filename": "modio-color-dark.png",
-    "original": "https://static.mod.io/v1/images/branding/modio-color-dark.png",
-    "thumb_320x180": "https://static.mod.io/v1/images/branding/modio-color-dark.png",
-    "thumb_640x360": "https://static.mod.io/v1/images/branding/modio-color-dark.png",
-    "thumb_1280x720": "https://static.mod.io/v1/images/branding/modio-color-dark.png"
+    "filename": "card.png",
+    "original": "https://assets.modcdn.io/images/placeholder/card.png",
+    "thumb_320x180": "https://assets.modcdn.io/images/placeholder/card.png",
+    "thumb_640x360": "https://assets.modcdn.io/images/placeholder/card.png",
+    "thumb_1280x720": "https://assets.modcdn.io/images/placeholder/card.png"
   },
   "header": {
-    "filename": "demo.png",
-    "original": "https://static.mod.io/v1/images/branding/modio-color-dark.png"
+    "filename": "modio-logo-bluedark.png",
+    "original": "https://assets.modcdn.io/images/branding/modio-logo-bluedark.png"
   },
   "name": "Rogue Knight",
   "name_id": "rogue-knight",
   "summary": "Rogue Knight is a brand new 2D pixel platformer that supports custom levels and characters.",
   "instructions": "Instructions on the process to upload mods.",
   "instructions_url": "https://www.rogue-knight-game.com/modding/getting-started",
-  "profile_url": "https://rogue-knight.mod.io",
+  "profile_url": "https://mod.io/g/rogue-knight",
   "other_urls": [
     {
       "label": "Our Steam Page",
@@ -11126,6 +11250,16 @@ md5|string|MD5 hash of the file.
       "locked": false
     }
   ],
+  "monetisation_options": {
+    "enabled": false,
+    "patronage": false
+  },
+  "monetisation": {
+    "monetisation_team_id": 0,
+    "monetisation_type": "kyc",
+    "platform_cut": "The platform cut for this team.",
+    "onboarded": "pending"
+  },
   "stats": {
     "game_id": 2,
     "mods_count_total": 13,
@@ -11146,10 +11280,15 @@ md5|string|MD5 hash of the file.
   "platforms": [
     {
       "platform": "ps5",
-      "label": "Playstation 5",
+      "label": "PlayStation 5",
       "moderated": true
     }
-  ]
+  ],
+  "patronage": {
+    "min_patronage": 100,
+    "max_patronage": 1000000,
+    "default_patronage": 500
+  }
 } 
 ```
 
@@ -11159,31 +11298,34 @@ Name|Type|Description
 ---|---|---|---|
 id|integer|Unique game id.
 status|integer|Status of the game (see [status and visibility](#status-amp-visibility) for details):<br><br>__0__ = Not Accepted<br>__1__ = Accepted<br>__3__ = Deleted
-submitted_by|[User Object](#schemauser_object)|No description
+submitted_by|object|Depreciated. Value will always be an empty object.
 date_added|integer|Unix timestamp of date game was registered.
 date_updated|integer|Unix timestamp of date game was updated.
 date_live|integer|Unix timestamp of date game was set live.
 presentation_option|integer|Presentation style used on the mod.io website:<br><br>__0__ =  Grid View: Displays mods in a grid<br>__1__ = Table View: Displays mods in a table
 submission_option|integer|Submission process modders must follow:<br><br>__0__ = Mod uploads must occur via the API using a tool created by the game developers<br>__1__ = Mod uploads can occur from anywhere, including the website and API
-curation_option|integer|Curation process used to approve mods:<br><br>__0__ = No curation: Mods are immediately available to play<br>__1__ = Paid curation: Mods are immediately available to play unless they choose to receive donations. These mods must be accepted to be listed<br>__2__ = Full curation: All mods must be accepted by someone to be listed
-community_options|integer|Community features enabled on the mod.io website:<br><br>__0__ = All of the options below are disabled<br>__1__ = Enable comments<br>__2__ = Enable guides<br>__4__ = Disable website _"subscribe to install"_ text<br>__?__ = Add the options you want together, to enable multiple features (see [BITWISE fields](#bitwise-and-bitwise-and))
-revenue_options|integer|Revenue capabilities mods can enable:<br><br>__0__ = All of the options below are disabled<br>__1__ = Allow mods to be sold<br>__2__ = Allow mods to receive donations<br>__4__ = Allow mods to be traded<br>__8__ = Allow mods to control supply and scarcity<br>__?__ = Add the options you want together, to enable multiple features (see [BITWISE fields](#bitwise-and-bitwise-and))
+curation_option|integer|Curation process used to approve mods:<br><br>__0__ = No curation: Mods are immediately available to play<br>__1__ = Paid curation: Mods are immediately available to play unless they choose to receive patronage. These mods must be accepted to be listed<br>__2__ = Full curation: All mods must be accepted by someone to be listed
+community_options|integer|Community features enabled on the mod.io website:<br><br>__0__ = All of the options below are disabled<br>__1__ = Enable comments<br>__2__ = Enable guides<br>__?__ = Add the options you want together, to enable multiple features (see [BITWISE fields](#bitwise-and-bitwise-and))
+revenue_options|integer|Revenue capabilities mods can enable:<br><br>__0__ = All of the options below are disabled<br>__1__ = Allow mods to be sold<br>__2__ = Allow mods to receive patronage<br>__4__ = Allow mods to be traded<br>__8__ = Allow mods to control supply and scarcity<br>__?__ = Add the options you want together, to enable multiple features (see [BITWISE fields](#bitwise-and-bitwise-and))
 api_access_options|integer|Level of API access allowed by this game:<br><br>__0__ = All of the options below are disabled<br>__1__ = Allow 3rd parties to access this games API endpoints<br>__2__ = Allow mods to be downloaded directly (if disabled all download URLs will contain a frequently changing verification hash to stop unauthorized use)<br>__?__ = Add the options you want together, to enable multiple features (see [BITWISE fields](#bitwise-and-bitwise-and))
-maturity_options|integer|Setting to allow developers to select if they flag their mods as containing mature content and/or the game is for adults only:<br><br>__0__ = Don't allow mature content in mods _(default)_<br>__1__ = Allow mature content in mods<br>__2__ = This game is for adults only<br>__?__ = Add the options you want together, to enable multiple features (see [BITWISE fields](#bitwise-and-bitwise-and))
+maturity_options|integer|Mature content setup for this game:<br><br>__0__ = Don't allow mature content in mods _(default)_<br>__1__ = Allow mature content in mods<br>__2__ = This game is for mature audiences only<br>__?__ = Add the options you want together, to enable multiple features (see [BITWISE fields](#bitwise-and-bitwise-and))
 ugc_name|string|Word used to describe user-generated content (mods, items, addons etc).
-icon|[Icon Object](#schemaicon_object)|No description
-logo|[Logo Object](#schemalogo_object)|No description
-header|[Header Image Object](#schemaheader_image_object)|No description
+icon|[Icon Object](#schemaicon_object)|Contains media URL's to the icon for the game.
+logo|[Logo Object](#schemalogo_object)|Contains media URL's to the logo for the game.
+header|[Header Image Object](#schemaheader_image_object)|Contains media URL's to the preview header for the game.
 name|string|Name of the game.
-name_id|string|Subdomain for the game on mod.io. For example: https://__gamename__.mod.io
+name_id|string|Path for the game on mod.io. For example: https://mod.io/g/__rogue-knight__
 summary|string|Summary of the games mod support.
 instructions|string|A guide about creating and uploading mods for this game to mod.io (applicable if submission_option = 0).
 instructions_url|string|Link to a mod.io guide, your modding wiki or a page where modders can learn how to make and submit mods to your games profile.
-profile_url|string|URL to the game's mod.io page.
-stats|[Game Stats Object](#schemagame_stats_object)|No description
-theme|[Theme Object](#schematheme_object)|No description
-other_urls|[Game OtherUrls Object](#schemagame_otherurls_object)[]|No description
-tag_options|[Game Tag Option Object](#schemagame_tag_option_object)[]|Groups of tags configured by the game developer, that mods can select.
+profile_url|string|URL to the game.
+monetisation_options|[Monetisation Options Object](#schemamonetisation_options_object)|No description
+monetisation|[Game Monetisation Object](#schemagame_monetisation_object)|No description
+stats|[Game Stats Object](#schemagame_stats_object)|Numerous aggregate stats for the game.
+theme|[Theme Object](#schematheme_object)|Theme color values for the game.
+patronage|[Game Patronage Object](#schemagame_patronage_object)|No description
+other_urls|[Game OtherUrls Object](#schemagame_otherurls_object)[]|Creator defined URLs to share.
+tag_options|[Game Tag Option Object](#schemagame_tag_option_object)[]|Groups of tags configured by the game developer, that mods can select. Hidden tags will only be returned if `show_hidden_tags` is set to `true`.
 platforms|[Game Platforms Object](#schemagame_platforms_object)[]|Platforms that are supported by this title.
 
 
@@ -11208,6 +11350,28 @@ url|string|The URL to be associated with the label.
 
 
 
+## Game Patronage Object  
+
+<a name="schemagame_patronage_object"></a>
+
+```json
+{
+  "min_patronage": 100,
+  "max_patronage": 1000000,
+  "default_patronage": 500
+} 
+```
+
+### Properties
+
+Name|Type|Description
+---|---|---|---|
+min_patronage|integer|Min patronage amount.
+max_patronage|integer|Max patronage amount.
+default_patronage|integer|Default patronage amount.
+
+
+
 ## Game Platforms Object  
 
 <a name="schemagame_platforms_object"></a>
@@ -11215,7 +11379,7 @@ url|string|The URL to be associated with the label.
 ```json
 {
   "platform": "ps5",
-  "label": "Playstation 5",
+  "label": "PlayStation 5",
   "moderated": true
 } 
 ```
@@ -11225,7 +11389,7 @@ url|string|The URL to be associated with the label.
 Name|Type|Description
 ---|---|---|---|
 platform|string|A [target platform](#targeting-a-platform).
-label|integer|A presentable label of the platform.
+label|string|A presentable label of the platform.
 moderated|boolean|Is this platform moderated by game admins? If false, then user submissions for the platform will be available immediately providing the game has mod curation disabled.
 
 
@@ -11286,8 +11450,8 @@ Name|Type|Description
 name|string|Name of the tag group.
 type|string|Can multiple tags be selected via 'checkboxes' or should only a single tag be selected via a 'dropdown'.
 tag_count_map|object|List of tag names and the count of mods with these tags.
-hidden|boolean|Groups of tags flagged as 'admin only' should only be used for filtering, and should not be displayed to users. Groups that are hidden will only be returned in a response if the authenticated user in the request is a team member of the parent game with `Manager` or `Administrator` privileges.
-locked|boolean|Groups of tags flagged as 'locked' should not be editable but can be shown to users. Useful for games to tag special functionality, which users can see and filter on.
+hidden|boolean|Groups of tags flagged as 'hidden' are intended to be used for filtering (eg. game version), but should not be displayed to users. Hidden tags will only be returned if `show_hidden_tags` is set to `true`.
+locked|boolean|Groups of tags flagged as 'locked' are editable only if the authenticated user is a team member of the parent game. Useful for games to tag special functionality, which users can see and filter on (eg. competition winners).
 tags|string[]|Array of tags in this group.
 
 
@@ -11344,58 +11508,42 @@ result_total|integer|Total number of results found.
     {
       "id": 2,
       "status": 1,
-      "submitted_by": {
-        "id": 1,
-        "name_id": "xant",
-        "username": "XanT",
-        "display_name_portal": null,
-        "date_online": 1509922961,
-        "date_joined": 1509922961,
-        "avatar": {
-          "filename": "modio-color-dark.png",
-          "original": "https://static.mod.io/v1/images/branding/modio-color-dark.png",
-          "thumb_50x50": "https://static.mod.io/v1/images/branding/modio-color-dark.png",
-          "thumb_100x100": "https://static.mod.io/v1/images/branding/modio-color-dark.png"
-        },
-        "timezone": "",
-        "language": "",
-        "profile_url": "https://mod.io/members/xant"
-      },
+      "submitted_by": null,
       "date_added": 1493702614,
       "date_updated": 1499410290,
       "date_live": 1499841403,
-      "presentation_option": 1,
-      "submission_option": 0,
+      "presentation_option": 0,
+      "submission_option": 1,
       "curation_option": 0,
       "community_options": 3,
-      "revenue_options": 1500,
+      "revenue_options": 0,
       "api_access_options": 3,
       "maturity_options": 0,
-      "ugc_name": "map",
+      "ugc_name": "mods",
       "icon": {
-        "filename": "modio-color-dark.png",
-        "original": "https://static.mod.io/v1/images/branding/modio-color-dark.png",
-        "thumb_64x64": "https://static.mod.io/v1/images/branding/modio-color-dark.png",
-        "thumb_128x128": "https://static.mod.io/v1/images/branding/modio-color-dark.png",
-        "thumb_256x256": "https://static.mod.io/v1/images/branding/modio-color-dark.png"
+        "filename": "icon.png",
+        "original": "https://assets.modcdn.io/images/placeholder/icon.png",
+        "thumb_64x64": "https://assets.modcdn.io/images/placeholder/icon.png",
+        "thumb_128x128": "https://assets.modcdn.io/images/placeholder/icon.png",
+        "thumb_256x256": "https://assets.modcdn.io/images/placeholder/icon.png"
       },
       "logo": {
-        "filename": "modio-color-dark.png",
-        "original": "https://static.mod.io/v1/images/branding/modio-color-dark.png",
-        "thumb_320x180": "https://static.mod.io/v1/images/branding/modio-color-dark.png",
-        "thumb_640x360": "https://static.mod.io/v1/images/branding/modio-color-dark.png",
-        "thumb_1280x720": "https://static.mod.io/v1/images/branding/modio-color-dark.png"
+        "filename": "card.png",
+        "original": "https://assets.modcdn.io/images/placeholder/card.png",
+        "thumb_320x180": "https://assets.modcdn.io/images/placeholder/card.png",
+        "thumb_640x360": "https://assets.modcdn.io/images/placeholder/card.png",
+        "thumb_1280x720": "https://assets.modcdn.io/images/placeholder/card.png"
       },
       "header": {
-        "filename": "demo.png",
-        "original": "https://static.mod.io/v1/images/branding/modio-color-dark.png"
+        "filename": "modio-logo-bluedark.png",
+        "original": "https://assets.modcdn.io/images/branding/modio-logo-bluedark.png"
       },
       "name": "Rogue Knight",
       "name_id": "rogue-knight",
       "summary": "Rogue Knight is a brand new 2D pixel platformer that supports custom levels and characters.",
       "instructions": "Instructions on the process to upload mods.",
       "instructions_url": "https://www.rogue-knight-game.com/modding/getting-started",
-      "profile_url": "https://rogue-knight.mod.io",
+      "profile_url": "https://mod.io/g/rogue-knight",
       "other_urls": [
         {
           "label": "Our Steam Page",
@@ -11416,6 +11564,16 @@ result_total|integer|Total number of results found.
           "locked": false
         }
       ],
+      "monetisation_options": {
+        "enabled": false,
+        "patronage": false
+      },
+      "monetisation": {
+        "monetisation_team_id": 0,
+        "monetisation_type": "kyc",
+        "platform_cut": "The platform cut for this team.",
+        "onboarded": "pending"
+      },
       "stats": {
         "game_id": 2,
         "mods_count_total": 13,
@@ -11436,10 +11594,15 @@ result_total|integer|Total number of results found.
       "platforms": [
         {
           "platform": "ps5",
-          "label": "Playstation 5",
+          "label": "PlayStation 5",
           "moderated": true
         }
-      ]
+      ],
+      "patronage": {
+        "min_patronage": 100,
+        "max_patronage": 1000000,
+        "default_patronage": 500
+      }
     },
     {
         ...
@@ -11483,21 +11646,23 @@ result_total|integer|Total number of results found.
         "date_online": 1509922961,
         "date_joined": 1509922961,
         "avatar": {
-          "filename": "modio-color-dark.png",
-          "original": "https://static.mod.io/v1/images/branding/modio-color-dark.png",
-          "thumb_50x50": "https://static.mod.io/v1/images/branding/modio-color-dark.png",
-          "thumb_100x100": "https://static.mod.io/v1/images/branding/modio-color-dark.png"
+          "filename": "avatar.png",
+          "original": "https://assets.modcdn.io/images/placeholder/avatar.png",
+          "thumb_50x50": "https://assets.modcdn.io/images/placeholder/avatar_50x50.png",
+          "thumb_100x100": "https://assets.modcdn.io/images/placeholder/avatar_100x100.png"
         },
         "timezone": "",
         "language": "",
-        "profile_url": "https://mod.io/members/xant"
+        "profile_url": "https://mod.io/u/xant",
+        "monetisation_registered": true,
+        "monetisation_onboarded": true
       },
       "date_added": 1499841487,
       "reply_id": 0,
       "thread_position": "01",
       "karma": 1,
       "karma_guest": 0,
-      "content": "Hey <a href=\"https://mod.io/members/guest\">guest</a>, you should check out this mod!"
+      "content": "Hey <a href=\"https://mod.io/u/guest\">guest</a>, you should check out this mod!"
     }
   ],
   "result_count": 1,
@@ -11728,7 +11893,7 @@ result_total|integer|Total number of results found.
       "changelog": "VERSION 1.3 -- Changes -- Fixed critical castle floor bug.",
       "metadata_blob": "rogue,hd,high-res,4k,hd textures",
       "download": {
-        "binary_url": "https://mod.io/mods/file/1/c489a0354111a4d76640d47f0cdcb294",
+        "binary_url": "https://api.mod.io/mods/file/1/c489a0354111a4d76640d47f0cdcb294",
         "date_expires": 1579316848
       },
       "platforms": [
@@ -11771,7 +11936,6 @@ result_total|integer|Total number of results found.
     {
       "id": 2,
       "game_id": 2,
-      "game_name": "My Awesome Game",
       "status": 1,
       "visible": 1,
       "submitted_by": {
@@ -11782,26 +11946,29 @@ result_total|integer|Total number of results found.
         "date_online": 1509922961,
         "date_joined": 1509922961,
         "avatar": {
-          "filename": "modio-color-dark.png",
-          "original": "https://static.mod.io/v1/images/branding/modio-color-dark.png",
-          "thumb_50x50": "https://static.mod.io/v1/images/branding/modio-color-dark.png",
-          "thumb_100x100": "https://static.mod.io/v1/images/branding/modio-color-dark.png"
+          "filename": "avatar.png",
+          "original": "https://assets.modcdn.io/images/placeholder/avatar.png",
+          "thumb_50x50": "https://assets.modcdn.io/images/placeholder/avatar_50x50.png",
+          "thumb_100x100": "https://assets.modcdn.io/images/placeholder/avatar_100x100.png"
         },
         "timezone": "",
         "language": "",
-        "profile_url": "https://mod.io/members/xant"
+        "profile_url": "https://mod.io/u/xant",
+        "monetisation_registered": true,
+        "monetisation_onboarded": true
       },
       "date_added": 1492564103,
       "date_updated": 1499841487,
       "date_live": 1499841403,
       "maturity_option": 0,
       "community_options": 3,
+      "price": 0,
       "logo": {
-        "filename": "modio-color-dark.png",
-        "original": "https://static.mod.io/v1/images/branding/modio-color-dark.png",
-        "thumb_320x180": "https://static.mod.io/v1/images/branding/modio-color-dark.png",
-        "thumb_640x360": "https://static.mod.io/v1/images/branding/modio-color-dark.png",
-        "thumb_1280x720": "https://static.mod.io/v1/images/branding/modio-color-dark.png"
+        "filename": "card.png",
+        "original": "https://assets.modcdn.io/images/placeholder/card.png",
+        "thumb_320x180": "https://assets.modcdn.io/images/placeholder/card.png",
+        "thumb_640x360": "https://assets.modcdn.io/images/placeholder/card.png",
+        "thumb_1280x720": "https://assets.modcdn.io/images/placeholder/card.png"
       },
       "homepage_url": "https://www.rogue-hdpack.com/",
       "name": "Rogue Knight HD Pack",
@@ -11810,7 +11977,7 @@ result_total|integer|Total number of results found.
       "description": "<p>Rogue HD Pack does exactly what you thi...",
       "description_plaintext": "Rogue HD Pack does exactly what you thi...",
       "metadata_blob": "rogue,hd,high-res,4k,hd textures",
-      "profile_url": "https://rogue-knight.mod.io/hd-pack",
+      "profile_url": "https://mod.io/g/rogue-knight/m/rogue-knight-hd-pack",
       "media": {
         "youtube": [
           "https://www.youtube.com/watch?v=dQw4w9WgXcQ"
@@ -11820,10 +11987,10 @@ result_total|integer|Total number of results found.
         ],
         "images": [
           {
-            "filename": "modio-color-dark.png",
-            "original": "https://static.mod.io/v1/images/branding/modio-color-dark.png",
-            "thumb_320x180": "https://static.mod.io/v1/images/branding/modio-color-dark.png",
-            "thumb_1280x720": "https://static.mod.io/v1/images/branding/modio-color-dark.png"
+            "filename": "card.png",
+            "original": "https://assets.modcdn.io/images/placeholder/card.png",
+            "thumb_320x180": "https://assets.modcdn.io/images/placeholder/card.png",
+            "thumb_1280x720": "https://assets.modcdn.io/images/placeholder/card.png"
           }
         ]
       },
@@ -11844,7 +12011,7 @@ result_total|integer|Total number of results found.
         "changelog": "VERSION 1.3 -- Changes -- Fixed critical castle floor bug.",
         "metadata_blob": "rogue,hd,high-res,4k,hd textures",
         "download": {
-          "binary_url": "https://mod.io/mods/file/1/c489a0354111a4d76640d47f0cdcb294",
+          "binary_url": "https://api.mod.io/mods/file/1/c489a0354111a4d76640d47f0cdcb294",
           "date_expires": 1579316848
         },
         "platforms": [
@@ -11886,6 +12053,14 @@ result_total|integer|Total number of results found.
         "ratings_weighted_aggregate": 87.38,
         "ratings_display_text": "Very Positive",
         "date_expires": 1492564103
+      },
+      "monetisation_options": {
+        "enabled": false,
+        "patronage": false
+      },
+      "monetisation": {
+        "monetisation_team_id": "Team ID for the monetisation API.",
+        "onboarded": "pending"
       }
     },
     {
@@ -11926,14 +12101,16 @@ result_total|integer|Total number of results found.
       "date_online": 1509922961,
       "date_joined": 1509922961,
       "avatar": {
-        "filename": "modio-color-dark.png",
-        "original": "https://static.mod.io/v1/images/branding/modio-color-dark.png",
-        "thumb_50x50": "https://static.mod.io/v1/images/branding/modio-color-dark.png",
-        "thumb_100x100": "https://static.mod.io/v1/images/branding/modio-color-dark.png"
+        "filename": "avatar.png",
+        "original": "https://assets.modcdn.io/images/placeholder/avatar.png",
+        "thumb_50x50": "https://assets.modcdn.io/images/placeholder/avatar_50x50.png",
+        "thumb_100x100": "https://assets.modcdn.io/images/placeholder/avatar_100x100.png"
       },
       "timezone": "",
       "language": "",
-      "profile_url": "https://mod.io/members/xant"
+      "profile_url": "https://mod.io/u/xant",
+      "monetisation_registered": true,
+      "monetisation_onboarded": true
     },
     {
         ...
@@ -11975,14 +12152,16 @@ result_total|integer|Total number of results found.
         "date_online": 1509922961,
         "date_joined": 1509922961,
         "avatar": {
-          "filename": "modio-color-dark.png",
-          "original": "https://static.mod.io/v1/images/branding/modio-color-dark.png",
-          "thumb_50x50": "https://static.mod.io/v1/images/branding/modio-color-dark.png",
-          "thumb_100x100": "https://static.mod.io/v1/images/branding/modio-color-dark.png"
+          "filename": "avatar.png",
+          "original": "https://assets.modcdn.io/images/placeholder/avatar.png",
+          "thumb_50x50": "https://assets.modcdn.io/images/placeholder/avatar_50x50.png",
+          "thumb_100x100": "https://assets.modcdn.io/images/placeholder/avatar_100x100.png"
         },
         "timezone": "",
         "language": "",
-        "profile_url": "https://mod.io/members/xant"
+        "profile_url": "https://mod.io/u/xant",
+        "monetisation_registered": true,
+        "monetisation_onboarded": true
       },
       "level": 8,
       "date_added": 1492058857,
@@ -12092,8 +12271,8 @@ result_total|integer|Total number of results found.
 
 ```json
 {
-  "filename": "demo.png",
-  "original": "https://static.mod.io/v1/images/branding/modio-color-dark.png"
+  "filename": "modio-logo-bluedark.png",
+  "original": "https://assets.modcdn.io/images/branding/modio-logo-bluedark.png"
 } 
 ```
 
@@ -12112,11 +12291,11 @@ original|string|URL to the full-sized header image.
 
 ```json
 {
-  "filename": "modio-color-dark.png",
-  "original": "https://static.mod.io/v1/images/branding/modio-color-dark.png",
-  "thumb_64x64": "https://static.mod.io/v1/images/branding/modio-color-dark.png",
-  "thumb_128x128": "https://static.mod.io/v1/images/branding/modio-color-dark.png",
-  "thumb_256x256": "https://static.mod.io/v1/images/branding/modio-color-dark.png"
+  "filename": "icon.png",
+  "original": "https://assets.modcdn.io/images/placeholder/icon.png",
+  "thumb_64x64": "https://assets.modcdn.io/images/placeholder/icon.png",
+  "thumb_128x128": "https://assets.modcdn.io/images/placeholder/icon.png",
+  "thumb_256x256": "https://assets.modcdn.io/images/placeholder/icon.png"
 } 
 ```
 
@@ -12138,10 +12317,10 @@ thumb_256x256|string|URL to the large icon thumbnail.
 
 ```json
 {
-  "filename": "modio-color-dark.png",
-  "original": "https://static.mod.io/v1/images/branding/modio-color-dark.png",
-  "thumb_320x180": "https://static.mod.io/v1/images/branding/modio-color-dark.png",
-  "thumb_1280x720": "https://static.mod.io/v1/images/branding/modio-color-dark.png"
+  "filename": "card.png",
+  "original": "https://assets.modcdn.io/images/placeholder/card.png",
+  "thumb_320x180": "https://assets.modcdn.io/images/placeholder/card.png",
+  "thumb_1280x720": "https://assets.modcdn.io/images/placeholder/card.png"
 } 
 ```
 
@@ -12182,11 +12361,11 @@ value|string|Value of the key-value pair. Will always be a string, even if numer
 
 ```json
 {
-  "filename": "modio-color-dark.png",
-  "original": "https://static.mod.io/v1/images/branding/modio-color-dark.png",
-  "thumb_320x180": "https://static.mod.io/v1/images/branding/modio-color-dark.png",
-  "thumb_640x360": "https://static.mod.io/v1/images/branding/modio-color-dark.png",
-  "thumb_1280x720": "https://static.mod.io/v1/images/branding/modio-color-dark.png"
+  "filename": "card.png",
+  "original": "https://assets.modcdn.io/images/placeholder/card.png",
+  "thumb_320x180": "https://assets.modcdn.io/images/placeholder/card.png",
+  "thumb_640x360": "https://assets.modcdn.io/images/placeholder/card.png",
+  "thumb_1280x720": "https://assets.modcdn.io/images/placeholder/card.png"
 } 
 ```
 
@@ -12304,10 +12483,10 @@ event_type|string|Type of event that was triggered. List of possible events: <br
   ],
   "images": [
     {
-      "filename": "modio-color-dark.png",
-      "original": "https://static.mod.io/v1/images/branding/modio-color-dark.png",
-      "thumb_320x180": "https://static.mod.io/v1/images/branding/modio-color-dark.png",
-      "thumb_1280x720": "https://static.mod.io/v1/images/branding/modio-color-dark.png"
+      "filename": "card.png",
+      "original": "https://assets.modcdn.io/images/placeholder/card.png",
+      "thumb_320x180": "https://assets.modcdn.io/images/placeholder/card.png",
+      "thumb_1280x720": "https://assets.modcdn.io/images/placeholder/card.png"
     }
   ]
 } 
@@ -12323,6 +12502,26 @@ images|[Image Object](#schemaimage_object)[]|Array of image objects (a gallery).
 
 
 
+## Mod Monetisation Object  
+
+<a name="schemamod_monetisation_object"></a>
+
+```json
+{
+  "monetisation_team_id": "Team ID for the monetisation API.",
+  "onboarded": "pending"
+} 
+```
+
+### Properties
+
+Name|Type|Description
+---|---|---|---|
+monetisation_team_id|integer|No description
+onboarded|string|Has the team completed setup?
+
+
+
 ## Mod Object
 
    <a name="schemamod_object"></a>
@@ -12331,7 +12530,6 @@ images|[Image Object](#schemaimage_object)[]|Array of image objects (a gallery).
 {
   "id": 2,
   "game_id": 2,
-  "game_name": "My Awesome Game",
   "status": 1,
   "visible": 1,
   "submitted_by": {
@@ -12342,26 +12540,29 @@ images|[Image Object](#schemaimage_object)[]|Array of image objects (a gallery).
     "date_online": 1509922961,
     "date_joined": 1509922961,
     "avatar": {
-      "filename": "modio-color-dark.png",
-      "original": "https://static.mod.io/v1/images/branding/modio-color-dark.png",
-      "thumb_50x50": "https://static.mod.io/v1/images/branding/modio-color-dark.png",
-      "thumb_100x100": "https://static.mod.io/v1/images/branding/modio-color-dark.png"
+      "filename": "avatar.png",
+      "original": "https://assets.modcdn.io/images/placeholder/avatar.png",
+      "thumb_50x50": "https://assets.modcdn.io/images/placeholder/avatar_50x50.png",
+      "thumb_100x100": "https://assets.modcdn.io/images/placeholder/avatar_100x100.png"
     },
     "timezone": "",
     "language": "",
-    "profile_url": "https://mod.io/members/xant"
+    "profile_url": "https://mod.io/u/xant",
+    "monetisation_registered": true,
+    "monetisation_onboarded": true
   },
   "date_added": 1492564103,
   "date_updated": 1499841487,
   "date_live": 1499841403,
   "maturity_option": 0,
   "community_options": 3,
+  "price": 0,
   "logo": {
-    "filename": "modio-color-dark.png",
-    "original": "https://static.mod.io/v1/images/branding/modio-color-dark.png",
-    "thumb_320x180": "https://static.mod.io/v1/images/branding/modio-color-dark.png",
-    "thumb_640x360": "https://static.mod.io/v1/images/branding/modio-color-dark.png",
-    "thumb_1280x720": "https://static.mod.io/v1/images/branding/modio-color-dark.png"
+    "filename": "card.png",
+    "original": "https://assets.modcdn.io/images/placeholder/card.png",
+    "thumb_320x180": "https://assets.modcdn.io/images/placeholder/card.png",
+    "thumb_640x360": "https://assets.modcdn.io/images/placeholder/card.png",
+    "thumb_1280x720": "https://assets.modcdn.io/images/placeholder/card.png"
   },
   "homepage_url": "https://www.rogue-hdpack.com/",
   "name": "Rogue Knight HD Pack",
@@ -12370,7 +12571,7 @@ images|[Image Object](#schemaimage_object)[]|Array of image objects (a gallery).
   "description": "<p>Rogue HD Pack does exactly what you thi...",
   "description_plaintext": "Rogue HD Pack does exactly what you thi...",
   "metadata_blob": "rogue,hd,high-res,4k,hd textures",
-  "profile_url": "https://rogue-knight.mod.io/hd-pack",
+  "profile_url": "https://mod.io/g/rogue-knight/m/rogue-knight-hd-pack",
   "media": {
     "youtube": [
       "https://www.youtube.com/watch?v=dQw4w9WgXcQ"
@@ -12380,10 +12581,10 @@ images|[Image Object](#schemaimage_object)[]|Array of image objects (a gallery).
     ],
     "images": [
       {
-        "filename": "modio-color-dark.png",
-        "original": "https://static.mod.io/v1/images/branding/modio-color-dark.png",
-        "thumb_320x180": "https://static.mod.io/v1/images/branding/modio-color-dark.png",
-        "thumb_1280x720": "https://static.mod.io/v1/images/branding/modio-color-dark.png"
+        "filename": "card.png",
+        "original": "https://assets.modcdn.io/images/placeholder/card.png",
+        "thumb_320x180": "https://assets.modcdn.io/images/placeholder/card.png",
+        "thumb_1280x720": "https://assets.modcdn.io/images/placeholder/card.png"
       }
     ]
   },
@@ -12404,7 +12605,7 @@ images|[Image Object](#schemaimage_object)[]|Array of image objects (a gallery).
     "changelog": "VERSION 1.3 -- Changes -- Fixed critical castle floor bug.",
     "metadata_blob": "rogue,hd,high-res,4k,hd textures",
     "download": {
-      "binary_url": "https://mod.io/mods/file/1/c489a0354111a4d76640d47f0cdcb294",
+      "binary_url": "https://api.mod.io/mods/file/1/c489a0354111a4d76640d47f0cdcb294",
       "date_expires": 1579316848
     },
     "platforms": [
@@ -12446,6 +12647,14 @@ images|[Image Object](#schemaimage_object)[]|Array of image objects (a gallery).
     "ratings_weighted_aggregate": 87.38,
     "ratings_display_text": "Very Positive",
     "date_expires": 1492564103
+  },
+  "monetisation_options": {
+    "enabled": false,
+    "patronage": false
+  },
+  "monetisation": {
+    "monetisation_team_id": "Team ID for the monetisation API.",
+    "onboarded": "pending"
   }
 } 
 ```
@@ -12456,27 +12665,29 @@ Name|Type|Description
 ---|---|---|---|
 id|integer|Unique mod id.
 game_id|integer|Unique game id.
-game_name|string|Name of the parent game.
 status|integer|Status of the mod (see [status and visibility](#status-amp-visibility) for details):<br><br>__0__ = Not Accepted<br>__1__ = Accepted<br>__3__ = Deleted
 visible|integer|Visibility of the mod (see [status and visibility](#status-amp-visibility) for details):<br><br>__0__ = Hidden<br>__1__ = Public
-submitted_by|[User Object](#schemauser_object)|No description
+submitted_by|[User Object](#schemauser_object)|The user who published the mod.
 date_added|integer|Unix timestamp of date mod was registered.
 date_updated|integer|Unix timestamp of date mod was updated.
 date_live|integer|Unix timestamp of date mod was set live.
 maturity_option|integer|Maturity options flagged by the mod developer, this is only relevant if the parent game allows mods to be labelled as mature.<br><br>__0__ = None set _(default)_<br>__1__ = Alcohol<br>__2__ = Drugs<br>__4__ = Violence<br>__8__ = Explicit<br>__?__ = Add the options you want together, to enable multiple filters (see [BITWISE fields](#bitwise-and-bitwise-and))
-community_options|integer|Community features enabled for this mod by its creators. :<br><br>__0__ = All of the options below are disabled<br>__1__ = Enable comments _(default)_<br>__2__ = Enable guides<br>__4__ = Disable website _"subscribe to install"_ text<br>__?__ = Add the options you want together, to enable multiple features (see [BITWISE fields](#bitwise-and-bitwise-and))
-logo|[Logo Object](#schemalogo_object)|No description
+community_options|integer|Community features enabled for this mod by its creators. :<br><br>__0__ = All of the options below are disabled<br>__1__ = Enable comments _(default)_<br>__2__ = Enable guides<br>__?__ = Add the options you want together, to enable multiple features (see [BITWISE fields](#bitwise-and-bitwise-and))
+price|float|The price of the mod.
+logo|[Logo Object](#schemalogo_object)|Contains media URL's to the logo for the mod.
 homepage_url|string|Official homepage of the mod.
 name|string|Name of the mod.
-name_id|string|Path for the mod on mod.io. For example: https://rogue-knight.mod.io/__mod-name-id-here__
+name_id|string|Path for the mod on mod.io. For example: https://mod.io/g/rogue-knight/m/__rogue-knight-hd-pack__
 summary|string|Summary of the mod.
 description|string|Detailed description of the mod which allows HTML.
 description_plaintext|string|`description` field converted into plaintext.
 metadata_blob|string|Metadata stored by the game developer. Metadata can also be stored as searchable [key value pairs](#metadata), and to individual [mod files](#get-modfiles).
-profile_url|string|URL to the mod's mod.io profile.
-media|[Mod Media Object](#schemamod_media_object)|No description
-modfile|[Modfile Object](#schemamodfile_object)|No description
-stats|[Mod Stats Object](#schemamod_stats_object)|No description
+profile_url|string|URL to the mod.
+media|[Mod Media Object](#schemamod_media_object)|Contains YouTube & Sketchfab linsk, aswell as media URLS of images for the mod
+modfile|[Modfile Object](#schemamodfile_object)|The primary modfile for the mod
+stats|[Mod Stats Object](#schemamod_stats_object)|Numerous aggregate stats for the mod.
+monetisation_options|[Monetisation Options Object](#schemamonetisation_options_object)|No description
+monetisation|[Mod Monetisation Object](#schemamod_monetisation_object)|No description
 platforms|[Mod Platforms Object](#schemamod_platforms_object)[]|Contains mod platform data.
 metadata_kvp|[Metadata KVP Object](#schemametadata_kvp_object)[]|Contains key-value metadata.
 tags|[Mod Tag Object](#schemamod_tag_object)[]|Contains mod tag data.
@@ -12500,26 +12711,6 @@ Name|Type|Description
 ---|---|---|---|
 platform|string|A [target platform](#targeting-a-platform).
 modfile_live|integer|The unique id of the modfile that is currently live on the platform specified in the `platform` field.
-
-
-
-## Mod Platforms Stats Object 
-
-<a name="schemamod_platforms_stats_object"></a>
-
-```json
-{
-  "live_count": 0,
-  "pending_count": 0
-} 
-```
-
-### Properties
-
-Name|Type|Description
----|---|---|---|
-live_count|integer|How many platforms are live for this mod.
-pending_count|integer|How many platforms are pending for this mod.
 
 
 
@@ -12607,7 +12798,7 @@ date_added|integer|Unix timestamp of date tag was applied.
   "changelog": "VERSION 1.3 -- Changes -- Fixed critical castle floor bug.",
   "metadata_blob": "rogue,hd,high-res,4k,hd textures",
   "download": {
-    "binary_url": "https://mod.io/mods/file/1/c489a0354111a4d76640d47f0cdcb294",
+    "binary_url": "https://api.mod.io/mods/file/1/c489a0354111a4d76640d47f0cdcb294",
     "date_expires": 1579316848
   },
   "platforms": [
@@ -12631,31 +12822,13 @@ virus_status|integer|Current virus scan status of the file. For newly added file
 virus_positive|integer|Was a virus detected:<br><br>__0__ = No threats detected<br>__1__ = Flagged as malicious
 virustotal_hash|string|VirusTotal proprietary hash to view the [scan results](https://www.virustotal.com).
 filesize|integer|Size of the file in bytes.
-filehash|[Filehash Object](#schemafilehash_object)|No description
+filehash|[Filehash Object](#schemafilehash_object)|Contains a dictionary of filehashes for the contents of the download.
 filename|string|Filename including extension.
 version|string|Release version this file represents.
 changelog|string|Changelog for the file.
 metadata_blob|string|Metadata stored by the game developer for this file.
-download|[Download Object](#schemadownload_object)|No description
+download|[Download Object](#schemadownload_object)|Contains download data for the modfile.
 platforms|[Modfile Platform Object](#schemamodfile_platform_object)[]|Contains modfile platform data.
-
-
-
-## Modfile Platform Map Object 
-
-<a name="schemamodfile_platform_map_object"></a>
-
-```json
-{
-  "xboxseriesx": 2
-} 
-```
-
-### Properties
-
-Name|Type|Description
----|---|---|---|
-xboxseriesx|integer|No description
 
 
 
@@ -12676,6 +12849,62 @@ Name|Type|Description
 ---|---|---|---|
 platform|string|A [target platform](#targeting-a-platform).
 status|integer|The status of the modfile for the corresponding `platform`. Possible values:<br><br>__0__ = Pending<br>__1__ = Approved<br>__2__ Denied
+
+
+
+## Modfile Platform Supported Object 
+
+<a name="schemamodfile_platform_supported_object"></a>
+
+```json
+{
+  "targetted": [
+    "string"
+  ],
+  "approved": [
+    "string"
+  ],
+  "denied": [
+    "string"
+  ],
+  "live": [
+    "string"
+  ],
+  "pending": [
+    "string"
+  ]
+} 
+```
+
+### Properties
+
+Name|Type|Description
+---|---|---|---|
+targetted|string[]|Array of [valid platform strings](#targeting-a-platform) showing which platforms the  modfile has targetted for release.
+approved|string[]|Array of [valid platform strings](#targeting-a-platform) showing which platforms the modfile has been approved for.
+denied|string[]|Array of [valid platform strings](#targeting-a-platform) showing which platforms the modfile has been denied for.
+live|string[]|Array of [valid platform strings](#targeting-a-platform) showing which platforms the modfile is currently marked as live on.
+pending|string[]|Array of [valid platform strings](#targeting-a-platform) showing which platforms the modfile is currently marked as pending on.
+
+
+
+## Monetisation Options Object  
+
+<a name="schemamonetisation_options_object"></a>
+
+```json
+{
+  "enabled": false,
+  "patronage": false
+} 
+```
+
+### Properties
+
+Name|Type|Description
+---|---|---|---|
+enabled|boolean|Monetisation Enable/Disabled.
+patronage|boolean|Patronage Enable/Disabled.
 
 
 
@@ -12719,14 +12948,16 @@ date_added|integer|Unix timestamp of date rating was submitted.
     "date_online": 1509922961,
     "date_joined": 1509922961,
     "avatar": {
-      "filename": "modio-color-dark.png",
-      "original": "https://static.mod.io/v1/images/branding/modio-color-dark.png",
-      "thumb_50x50": "https://static.mod.io/v1/images/branding/modio-color-dark.png",
-      "thumb_100x100": "https://static.mod.io/v1/images/branding/modio-color-dark.png"
+      "filename": "avatar.png",
+      "original": "https://assets.modcdn.io/images/placeholder/avatar.png",
+      "thumb_50x50": "https://assets.modcdn.io/images/placeholder/avatar_50x50.png",
+      "thumb_100x100": "https://assets.modcdn.io/images/placeholder/avatar_100x100.png"
     },
     "timezone": "",
     "language": "",
-    "profile_url": "https://mod.io/members/xant"
+    "profile_url": "https://mod.io/u/xant",
+    "monetisation_registered": true,
+    "monetisation_onboarded": true
   },
   "date_added": 1492564103,
   "reason": ""
@@ -12760,14 +12991,16 @@ reason|string|Optional notes provided by the actionee, usually containing the re
     "date_online": 1509922961,
     "date_joined": 1509922961,
     "avatar": {
-      "filename": "modio-color-dark.png",
-      "original": "https://static.mod.io/v1/images/branding/modio-color-dark.png",
-      "thumb_50x50": "https://static.mod.io/v1/images/branding/modio-color-dark.png",
-      "thumb_100x100": "https://static.mod.io/v1/images/branding/modio-color-dark.png"
+      "filename": "avatar.png",
+      "original": "https://assets.modcdn.io/images/placeholder/avatar.png",
+      "thumb_50x50": "https://assets.modcdn.io/images/placeholder/avatar_50x50.png",
+      "thumb_100x100": "https://assets.modcdn.io/images/placeholder/avatar_100x100.png"
     },
     "timezone": "",
     "language": "",
-    "profile_url": "https://mod.io/members/xant"
+    "profile_url": "https://mod.io/u/xant",
+    "monetisation_registered": true,
+    "monetisation_onboarded": true
   },
   "level": 8,
   "date_added": 1492058857,
@@ -12781,7 +13014,7 @@ reason|string|Optional notes provided by the actionee, usually containing the re
 Name|Type|Description
 ---|---|---|---|
 id|integer|Unique team member id.
-user|[User Object](#schemauser_object)|No description
+user|[User Object](#schemauser_object)|The user associated with this team access.
 level|integer|Level of permission the user has:<br><br>__1__ = Moderator (can moderate comments and content attached)<br>__4__ = Manager (moderator access, including uploading builds and editing settings except supply and team members)<br>__8__ = Administrator (full access, including editing the supply and team)
 date_added|integer|Unix timestamp of the date the user was added to the team.
 position|string|Custom title given to the user in this team.
@@ -12823,7 +13056,7 @@ invite_pending|integer|If the team member invitation is still pending:<br><br>__
     },
     "manage": {
       "text": "Manage Account",
-      "url": "https://mod.io/members/settings",
+      "url": "https://mod.io/me/account",
       "required": false
     }
   }
@@ -12930,14 +13163,16 @@ event_type|string|Type of event that was triggered. List of possible events: <br
   "date_online": 1509922961,
   "date_joined": 1509922961,
   "avatar": {
-    "filename": "modio-color-dark.png",
-    "original": "https://static.mod.io/v1/images/branding/modio-color-dark.png",
-    "thumb_50x50": "https://static.mod.io/v1/images/branding/modio-color-dark.png",
-    "thumb_100x100": "https://static.mod.io/v1/images/branding/modio-color-dark.png"
+    "filename": "avatar.png",
+    "original": "https://assets.modcdn.io/images/placeholder/avatar.png",
+    "thumb_50x50": "https://assets.modcdn.io/images/placeholder/avatar_50x50.png",
+    "thumb_100x100": "https://assets.modcdn.io/images/placeholder/avatar_100x100.png"
   },
   "timezone": "",
   "language": "",
-  "profile_url": "https://mod.io/members/xant"
+  "profile_url": "https://mod.io/u/xant",
+  "monetisation_registered": true,
+  "monetisation_onboarded": true
 } 
 ```
 
@@ -12946,15 +13181,17 @@ event_type|string|Type of event that was triggered. List of possible events: <br
 Name|Type|Description
 ---|---|---|---|
 id|integer|Unique id of the user.
-name_id|string|Path for the user on mod.io. For example: https://mod.io/members/__name-id-here__
+name_id|string|Path for the user on mod.io. For example: https://mod.io/u/__name-id-here__
 username|string|Username of the user.
 display_name_portal|string|The users' display name for the targeted portal. Value will be `null` if no valid `X-Modio-Portal` portal header value is provided. For more information see [Targeting a Portal](#targeting-a-portal).
 date_online|integer|Unix timestamp of date the user was last online.
 date_joined|integer|Unix timestamp of date the user joined.
-avatar|[Avatar Object](#schemaavatar_object)|No description
+avatar|[Avatar Object](#schemaavatar_object)|Contains media URL's to the users avatar
 timezone|string|This field is no longer used and will return an empty string.
 language|string|This field is no longer used and will return an empty string. To [localize the API response](#localization) we recommend you set the `Accept-Language` header.
-profile_url|string|URL to the user's mod.io profile.
+profile_url|string|URL to the users profile.
+monetisation_registered|boolean|Has the user registered?
+monetisation_onboarded|boolean|Has the user completed onboarding?
 
 
 

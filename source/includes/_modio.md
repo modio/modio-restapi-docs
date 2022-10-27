@@ -51,8 +51,8 @@ Here is a brief list of the things to know about our API, as explained in more d
 Authentication can be done via 4 ways:
 
 - Use an [API key](--parse_siteurl/me/access) for **Read-only** access (get a [test environment](--parse_sitetesturl/me/access) API key here)
-- Use the [Email Authentication Flow](#authenticate-via-email) for **Read and Write** access (it creates an OAuth 2 Access Token via **email**)
-- Use the [Platform Authentication Flow](#authenticate-via-steam) for **Read and Write** access (it creates an OAuth 2 Access Token automatically on popular platforms such as **Steam and Xbox**)
+- Use the [Email Authentication Flow](#email) for **Read and Write** access (it creates an OAuth 2 Access Token via **email**)
+- Use the [Platform Authentication Flow](#steam) for **Read and Write** access (it creates an OAuth 2 Access Token automatically on popular platforms such as **Steam and Xbox**)
 - Manually create an [OAuth 2 Access Token](--parse_siteurl/me/access) for **Read and Write** access (get a [test environment](--parse_sitetesturl/me/access) OAuth 2 token here)
 
 All users and games are issued an API key which must be included when querying the API. It is quick and easy to use but limited to read-only GET requests, due to the limited security it offers. If you want players to be able to add, edit, rate and subscribe to content, you will need to use an authentication method that generates an OAuth 2 Access token. These [authentication methods](#authentication-2) are explained in detail here.
@@ -61,86 +61,6 @@ Authentication Type | In | HTTP Methods | Abilities | Purpose
 ---------- | ---------- | ---------- | ---------- | ---------- 
 API Key | Query | GET | Read-only GET requests and authentication flows. | Browsing and downloading content. Retrieving access tokens on behalf of users.
 Access Token (OAuth 2) | Header | GET, POST, PUT, DELETE | Read, create, update, delete. | View, add, edit and delete content the authenticated user has subscribed to or has permission to change.
-
-### Email Authentication Flow
-
-To perform writes, you will need to authenticate your users via OAuth 2. To make this frictionless in-game, we offer an email verification system, similar to what Slack and others pioneered. It works by users supplying their email, which we send a time-limited 5 digit security code too. They exchange this code in-game, for an [OAuth 2 access token](--parse_siteurl/me/access) you can save to authenticate future requests. The benefit of this approach is it avoids complex website redirects, doesn't require your users to complete a slow registration flow, and eliminates the need to store usernames / passwords.
-
-```shell
-// Example POST requesting security code be sent to supplied email
-
-curl -X POST --parse_apiurl/oauth/emailrequest \
-  -H 'Content-Type: application/x-www-form-urlencoded' \
-  -d 'api_key=0d0ba6756d032246f1299f8c01abc424'	\
-  -d 'email=john.snow@westeros.com'
-```
-
-```json
-// Authentication Code Request Response
-
-{
-	"code": 200,
-	"message": "Enter the 5-digit security code sent to your email address (john.snow@westeros.com)"
-}
-```
-
-**Step 1: Requesting a security code**
-
-Request a `security_code` be sent to the email address of the user you wish to authenticate: 
-
-
-`POST /oauth/emailrequest`
-
-Parameter |Type | Required | Value
----------- | ---------- |---------- | ----------
-api_key | string | true | Your API key generated from 'API' tab within your game profile.
-email | string | true | A valid and secure email address your user has access to. 
-
-**Step 2: Exchanging security code for access token**
-
-After retrieving the 5-digit `security_code` sent to the email specified, you exchange it for an OAuth 2 `access_token`:
-
-```shell
-// Example POST requesting access token with security code
-
-curl -X POST --parse_apiurl/oauth/emailexchange \
-  -H 'Content-Type: application/x-www-form-urlencoded' \	
-  -d 'api_key=0d0ba6756d032246f1299f8c01abc424' \
-  -d 'security_code=3EW50'
-```
-
-```json
-// Access Token Request Response (access token truncated for brevity)
-
-{
-	"code": 200,
-	"access_token": "eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiIsImp0......"
-}
-```
-
-
-`POST /oauth/emailexchange`
-
-Parameter | Type | Required | Value
----------- | ---------- | ---------- | ----------  
-api_key | string | true | Your API key generated from 'API' tab within your game profile.
-security_code | string | true | Unique 5-digit code sent to the email address supplied in the previous request. 
-date_expires | integer || Unix timestamp of date in which the returned token will expire. Value cannot be higher than the default value which is a common year (unix timestamp + 31536000 seconds). Using a token after it's expiry time has elapsed will result in a `401 Unauthorized` response.
-
-There are a few important things to know when using the email authentication flow:
- 
-- An `api_key` is required for both steps of the authentication process.
-- The _same_ `api_key` must be used for both steps.
-- The generated `security_code` is short-lived and will expire after 15 minutes.
-- Once exchanged for an `access_token`, the `security_code` is invalid.
-
-If the user does not exchange the `security_code` they are emailed for an `access_token` within 15 minutes, you will need to begin the flow again to generate a new code.
-
-**Step 3: Use access token to access resources**
-
-See [Making Requests](#making-requests) section.
-
-**HINT:** If you want to overlay the --parse_sitename site in-game and you authenticate users via email, we recommend you add `?portal=email` to the end of the URL you open which will prompt the user to login via their email. See [Web Overlay Authentication](#web-overlay-authentication) for details.
 
 ### Web Overlay Authentication
 
@@ -170,9 +90,9 @@ To authenticate using your unique 32-character API key, append the `api_key=xxxx
 
 ### Using an Access Token
 
-```shell
-// Example POST request with no binary files
+> Example POST request with no binary files
 
+```shell
 curl -X POST --parse_apiurl/games/1/mods/1/tags \
   -H 'Authorization: Bearer your-token-here' \
   -H 'Content-Type: application/x-www-form-urlencoded' \
@@ -186,15 +106,15 @@ To authenticate using an OAuth 2 access token, you must include the HTTP header 
 
 By default, all access token's are long-lived - meaning they are valid for a common year (not leap year) from the date of issue. You should architect your application to smoothly handle the event in which a token expires or is revoked by the user themselves or a --parse_sitename admin, triggering a `401 Unauthorized` API response.
 
-If you would like tokens issued through your game to have a shorter lifespan, you can do this by providing the `date_expires` parameter on any endpoint that returns an access token such as the [Email Exchange](#authenticate-via-email) or [Authenticate via Steam](#authenticate-via-steam) endpoints. If the parameter is not supplied, it will default to 1 year from the request date, if the supplied parameter value is above one year or below the current server time it will be ignored and the default value restored.
+If you would like tokens issued through your game to have a shorter lifespan, you can do this by providing the `date_expires` parameter on any endpoint that returns an access token such as the [Email Exchange](#email) or [Authenticate via Steam](#steam) endpoints. If the parameter is not supplied, it will default to 1 year from the request date, if the supplied parameter value is above one year or below the current server time it will be ignored and the default value restored.
 
 ### Request Content-Type
 
 If you are making a request that includes a file, your request `Content-Type` header __must__ be `multipart/form-data`, otherwise if the request contains data (but no files) it should be `application/x-www-form-urlencoded`, which is UTF-8 encoded. 
 
-```shell
-// Example POST request with binary file
+> Example POST request with binary file
 
+```shell
 curl -X POST --parse_apiurl/games/1/mods \
   -H 'Authorization: Bearer your-token-here' \
   -H 'Content-Type: multipart/form-data' \ 
@@ -214,9 +134,9 @@ If the endpoint you are making a request to expects a file it will expect the co
 
 ### JSON Request Data
 
-```shell
-// Example json-encoded POST request 
+> Example json-encoded POST request
 
+```shell
 curl -X POST --parse_apiurl/games/1/mods/1/team \
   -H 'Authorization: Bearer your-token-here' \
   -H 'Content-Type: application/x-www-form-urlencoded' \  
@@ -259,9 +179,9 @@ Response Code | Meaning
 
 ## Errors
 
-```json
-// Error object
+> Error object
 
+```json
 "error": {
 	"code": 403,
 	"error_ref": "--parse_errorref_MOD_NO_VIEW_PERMISSION",
@@ -273,9 +193,9 @@ If an error occurs, --parse_sitename returns an error object with the HTTP `code
 
 When requests contain invalid input data or query parameters (for filtering), an optional field object called `errors` can be supplied inside the `error` object, which contains a list of the invalid inputs. The nested `errors` object is only supplied with `422 Unprocessable Entity` responses. Be sure to review the [Response Codes](#response-codes) to be aware of the HTTP codes that the --parse_sitename API returns.
 
-```json
-// Error object with input errors
+> Error object with input errors
 
+```json
 "error": {
 	"code": 422,
 	"error_ref": --parse_errorref_VALIDATION_GENERIC,
@@ -284,7 +204,6 @@ When requests contain invalid input data or query parameters (for filtering), an
 		"summary":"The mod summary cannot be more than 200 characters long.",
 	}
 }
-
 ```
 
 Remember that [Rate Limiting](#rate-limiting) applies whether an error is returned or not, so to avoid exceeding your daily quota be sure to always investigate error messages - instead of continually retrying.
@@ -293,9 +212,9 @@ Remember that [Rate Limiting](#rate-limiting) applies whether an error is return
 
 Along with generic [HTTP response codes](#response-codes), we also provide --parse_sitename specific error codes to help you better understand what has gone wrong with a request. Below is a list of the most common `error_ref` codes you could encounter when consuming the API, as well as the reason for the error occuring. For error codes specific to each endpoint, click the 'Show All Responses' dropdown on the specified endpoint documentation.
 
-```shell
-// Example request with malformed api_key 
+> Example request with malformed api_key 
 
+```shell
 curl -X GET --parse_apiurl/games?api_key=malformed_key
 ```
 
@@ -341,9 +260,10 @@ Error Reference Code | Meaning
 `--parse_errorref_USER_NOT_FOUND` | The requested user could not be found.
 
 ## Response Formats
-```json
-// Single object response
 
+> Single object response
+
+```json
 {
     "id": 2,
     "mod_id": 2,
@@ -380,9 +300,9 @@ Endpoints that return more than one result, return a __JSON object__ which conta
 - `data` - contains all data returned from the request.
 - metadata fields - contains [pagination metadata](#pagination) to help you paginate through the API.
 
-```json
-// Multiple objects response
+> Multiple objects response
 
+```json
 {
 	"data": [
 		{
@@ -450,21 +370,22 @@ By default mods connected to a game will not be returned if they are hidden or n
 
 As a mod admin, you can modify `visible` to show or hide your mod from API requests. You _cannot_ modify the `status` of your mod. When a mod is hidden _you_ can still view it provided you are the mods admin or subscribed to the mod. You can call [Get User Mods endpoint](#get-user-mods) to retrieve all mods associated with the authenticated user regardless of their `status` and `visible`.
 
-```
-// Valid status & visibility filters
+> Valid status & visibility filters
 
+```
 status=1
 status-in=0,1
 visible=1 
 visible-in=0,1
+```
 
-// Game Admin Only status & visibility filters
+> Game Admin Only status & visibility filters
 
+```
 status-not-in=1,2
 status-gt=1
 visible-not-in=1
 visible-st=1
-
 ```
 
 ### Important Note When Filtering
@@ -475,8 +396,9 @@ Due to the requirement of certain `status` & `visible` values only being availab
 
 When requesting data from endpoints that contain more than one object, you can supply an `_offset` and `_limit` to paginate through the results. Think of it as a page 1, 2, 3... system but you control the number of results per page, and the page to start from. Appended to each response will be the pagination metadata:
 
+> Metadata example
+
 ```json
-// Metadata example
 "result_count": 100,
 "result_limit": 100,
 "result_offset": 0,
@@ -674,9 +596,9 @@ HTTP/2.0 200 OK
 Accept-Language: de
 ```
 
-```json
-Example response (assuming a validation error occurred)
+> Example response (assuming a validation error occurred)
 
+```json
 {
     "error": {
         "code": 422,
@@ -708,18 +630,20 @@ Language Code | Language
 `zh-CN` | Chinese (Simplified)
 `zh-TW` | Chinese (Traditional)
 
-```shell
-// Example request updating specified fields with Polish translations. 
+> Example request updating specified fields with Polish translations.
 
+```shell
 curl -X POST --parse_apiurl/games/1/mods/1 \
 	-H 'Authorization: Bearer your-token-here' \
 	-H 'Content-Type: application/x-www-form-urlencoded' \
 	-H 'Content-Language: pl' \
 	-d 'name=Zaawansowany rozkwit Wiedźmina' \
 	-d 'summary=Zobacz zaawansowany mod oświetlenia w Kaer Morhen w zupełnie nowym świetle' 
+```
 
-// Attempt to retrieve Polish translations within supported fields.
+> Attempt to retrieve Polish translations within supported fields.
 
+```shall
 curl -X GET --parse_apiurl/games/1/mods/1 \
 	-H 'Authorization: Bearer your-token-here' \
 	-H 'Accept-Language: pl'
@@ -727,9 +651,9 @@ curl -X GET --parse_apiurl/games/1/mods/1 \
 
 __NOTE__: Localization for --parse_sitename is currently a work-in-progress and thus not all responses may be in the desired language.
 
-```json
-// Response
+> Response
 
+```json
 {
 	"id": 1,
 	"game_id": 1,
@@ -754,20 +678,11 @@ A brief summary when dealing with localized requests and responses:
 
 ## Rate Limiting
 
---parse_sitename implements rate limiting to stop users abusing the service. Exceeding your rate limit will result in requests receiving a `429 Too Many Requests` response until your reset time is reached. 
+--parse_sitename implements rate limiting to stop users abusing the service. Exceeding the rate limit will result in requests receiving a `429 Too Many Requests` response until the reset time is reached. 
 
-It is _highly recommended_ you architect your app to check for the `retry-after` header and the `429 Too Many Requests` HTTP response code to ensure you are not making too many requests, or continuing to make requests after a `429` code is repeatedly returned. Users who continue to send requests despite a `429` response could potentially have their credentials revoked. The following limits are implemented by default:
+It is _highly recommended_ you architect your app to check for the `429 Too Many Requests` HTTP response code, and ensure you do not continue to make requests until the duration specified in the `retry-after` header (in seconds) passes. Users who continue to send requests despite a `429` response could potentially have their credentials revoked. The following limits are implemented by default:
 
 ### API key Rate Limiting
-
-```http
-Example HTTP Header Response
----------------------
-HTTP/1.1 200 OK
-...
-...
-retry-after: 57
-```
 
 - API keys linked to a game have __unlimited requests__.
 - API keys linked to a user have __60 requests per minute__.
@@ -787,14 +702,34 @@ retry-after: 57
 - Certain endpoints may override the defaults for security, spam or other reasons.
 
 ### Headers
+```
+Example HTTP Header Response
+---------------------
+HTTP/2.0 429 Too Many Requests
+...
+...
+retry-after: 57
+```
 
-If the rate limit is exceeded --parse_sitename return the following header.
+> Example ratelimit JSON response
+
+```json
+{
+	"error": {
+		"code": 429,
+		"error_ref": --parse_errorref_RATE_LIMITED,
+		"message": "You have made too many requests in a short period of time, please wait and try again soon."
+	}
+}
+```
+
+If the rate limit is exceeded, the following header will be returned alongside the `429 Too Many Requests` HTTP response code.
 
  - `retry-after` - Number of seconds before you can attempt to make another request to API.
 
 ### Depreciation Notice
 
-On December 1st, 2022 - we intend to depreciate our use of the following custom rate limit headers. If you have written a custom mod.io SDK or library, you should replace any usage of these headers with `retry-after` before then.
+From November 7th, 2022 - the rate limit headers below will no longer be returned. If you have written a custom mod.io SDK or library, you should replace any usage of these headers with `retry-after`.
 
  - `X-RateLimit-Limit` - Number of requests you can make from the supplied API key/access token per minute.
  - `X-RateLimit-Remaining` - Number of requests remaining until requests are rejected.
@@ -877,4 +812,3 @@ Steam | `Steam`
 Xbox Live | `XboxLive`
 
 These are the only supported values and are case-insensitive, anything else will be ignored. Have we missed a portal you are using? [Get in touch!](mailto:--parse_email?subject=Portal%20Support)
-

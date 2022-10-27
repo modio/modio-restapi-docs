@@ -1,4 +1,14 @@
-# Getting Started
+# API Versions
+
+# Changelog
+
+## Oct 27, 2022
+
+### Depreciating X-Ratelimit headers
+
+- Beginning Nov 7, 2022, all custom rate limit headers `X-RateLimit-Limit`, `X-RateLimit-Remaining`, `X-RateLimit-RetryAfter` will no longer be returned. They will be replaced with `retry-after` when the [ratelimit is exceeded](/#rate-limiting).
+
+# How We Version
 
 ### Latest API Version: <span class="versionwrap latest">--parse_version</span> 
 
@@ -50,15 +60,3 @@ Adding new headers to a request/response | Modifying any HTTP error code that co
 Changing the ordering of items in a response | Modifying or removing any request/response header
   
 Changes that _are_ non-breaking will continue to be delivered to you regardless of which API version you are using, and documentation for every version will continue to be updated to reflect these changes. Only breaking changes described above will fall under this versioning system.
-
-# Changelog
-
-### Depreciating X-Ratelimit headers
-
-__Date Depreciated: Oct 26, 2022__
-__Date Live: Dec 1, 2022__
-
-- All custom rate limit headers `X-RateLimit-Limit`, `X-RateLimit-Remaining`, `X-RateLimit-RetryAfter` are no longer returned
-- They will be replaced with `retry-after` when the [ratelimit is exceeded](/#rate-limiting)
-
-# API Versions
