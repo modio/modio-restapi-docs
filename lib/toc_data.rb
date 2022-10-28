@@ -36,7 +36,7 @@ def modio_post_process(page_content)
 
   # add colorbox class if the link contains widget
   html_doc.css('a').each do |link|
-    if (link.attribute('href').to_s.include? "widget") || (link.attribute('href').to_s.include? "termsdialog")
+    if (link.attribute('href').to_s.include? "widget")
       link['class'] = 'colorbox'
     end
   end
