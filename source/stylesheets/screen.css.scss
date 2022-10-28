@@ -494,6 +494,17 @@ html, body {
       background-color: $aside-auth-notice-bg;
     }
 
+    &.consent {
+      background-color: $aside-auth-notice-bg;
+      border: 2px solid $nav-active-parent-bg;
+
+      a { 
+        color: $main-text;
+        font-weight: normal;
+        text-decoration: underline;
+      }
+    }
+
     &.cross-platform-notice {
       display: flex;
       align-items: center;
@@ -841,14 +852,25 @@ pre.tab-json .json-example-highlight {
 
 .index .page-wrapper span.versionwrap, .changelog .page-wrapper span.versionwrap {
   background: $nav-active-parent-bg;
+  border: 2px solid $nav-active-parent-bg;
   border-radius: 5px;
   color: #fff;
   font-size: 16px;
   font-weight: bold;
-  padding: 5px 10px;
+  padding: 6px 10px;
 
   &.latest {
     background: $bg-endpoint-get;
+  }
+
+  &.outline {
+    background: #fff;
+    color: $nav-active-parent-bg;
+    margin-left: 10px;
+  }
+
+  &.cursor {
+    cursor: pointer;
   }
 
   &>a, &>a:hover {

@@ -33,7 +33,7 @@ __Current version:__ <select id="version_dropdown" onChange="changeVersion"><opt
 
 Compatible with all builds of your game on all platforms and stores, mod.io is a clientless and standalone solution which gives you complete control over your modding ecosystem.
 
-![mod.io Overview](images/sdk.png).
+![mod.io Overview](images/sdk.png)
 
 ## Implementation
 
@@ -920,7 +920,7 @@ System.out.println(response.toString());
 
 `GET /authenticate/terms`
 
-The purpose of this endpoint is to provide the text, links and buttons you can use to get a users agreement and consent prior to authenticating them in-game (your dialog should look [similar to this](/images/termsdialog.html)). A successful response will return a [Terms Object](#terms-object).<br><br>__IMPORTANT:__ It is a requirement to implement this when using a 3rd party authentication flow such as Steam or Xbox Live, to ensure the user has agreed to the latest mod.io [Terms of Use](https://mod.io/terms/widget) and [Privacy Policy](https://mod.io/privacy/widget). You only need to collect the users agreement once, and also each time these policies are updated.<br><br>To make this easy to manage, all of the 3rd party authentication flows have a `terms_agreed` field which should be set to `false` by default. If the user has agreed to the latest policies, their authentication will proceed as normal, however if their agreement is required and `terms_agreed` is set to `false` an error `403 Forbidden (error_ref 11074)` will be returned. When you receive this error, you must collect the users agreement before resubmitting the authentication flow with `terms_agreed` set to `true`, which will be recorded.<br><br>__NOTE:__  You can use your own text and process (make sure the Terms of Use and Privacy Policy are correctly linked), but be aware that you are responsible for ensuring that the users agreement is properly collected and reported to us. Failure to do this correctly is a breach of the mod.io Game Terms. If your game does not authenticate users or only uses the email authentication flow, you do not need to implement this dialog, but you should link to the mod.io Terms of Use and Privacy Policy in your Privacy Policy/EULA.
+The purpose of this endpoint is to provide the text, links and buttons you can use to get a users agreement and consent prior to authenticating them in-game (your dialog should look similar to the example below). A successful response will return a [Terms Object](#terms-object).</p><aside class='consent'>We use mod.io to support user-generated content in-game. By clicking 'I Agree' you agree to the mod.io Terms of Use and a mod.io account will be created for you (using your display name, avatar and ID). Please see the mod.io Privacy Policy on how mod.io processes your personal data.<br><br><div style='text-align:center'><span class='versionwrap cursor'> &nbsp; &nbsp; I Agree &nbsp; &nbsp; </span> <span class='versionwrap outline cursor'>No, Thanks</span><br><br>[Terms of Use](https://mod.io/terms/widget) - [Privacy Policy](https://mod.io/privacy/widget)<br></div></aside><p>__IMPORTANT:__ It is a requirement to implement this when using a 3rd party authentication flow such as Steam or Xbox Live, to ensure the user has agreed to the latest mod.io [Terms of Use](https://mod.io/terms/widget) and [Privacy Policy](https://mod.io/privacy/widget). You only need to collect the users agreement once, and also each time these policies are updated.<br><br>To make this easy to manage, all of the 3rd party authentication flows have a `terms_agreed` field which should be set to `false` by default. If the user has agreed to the latest policies, their authentication will proceed as normal, however if their agreement is required and `terms_agreed` is set to `false` an error `403 Forbidden (error_ref 11074)` will be returned. When you receive this error, you must collect the users agreement before resubmitting the authentication flow with `terms_agreed` set to `true`, which will be recorded.<br><br>__NOTE:__  You can use your own text and process (make sure the Terms of Use and Privacy Policy are correctly linked), but be aware that you are responsible for ensuring that the users agreement is properly collected and reported to us. Failure to do this correctly is a breach of the mod.io Game Terms. If your game does not authenticate users or only uses the email authentication flow, you do not need to implement this dialog, but you should link to the mod.io Terms of Use and Privacy Policy in your Privacy Policy/EULA.
 
 > Example response
 
@@ -1229,130 +1229,6 @@ Status|Meaning|Error Ref|Description|Response Schema
 403|[Forbidden](https://tools.ietf.org/html/rfc7231#section-6.5.3)|11017|The api_key supplied in the request is for test environment purposes only and cannot be used for this functionality.|[Error Object](#schemaerror_object)
 403|[Forbidden](https://tools.ietf.org/html/rfc7231#section-6.5.3)|11028|The user is not permitted to interact with UGC. This can be modified in the user's Xbox Live profile.|[Error Object](#schemaerror_object)
 403|[Forbidden](https://tools.ietf.org/html/rfc7231#section-6.5.3)|11030|Xbox Live users with 'Child' accounts are not permitted to use mod.io.|[Error Object](#schemaerror_object)
-403|[Forbidden](https://tools.ietf.org/html/rfc7231#section-6.5.3)|11074|The user has not agreed to the mod.io Terms of Use. Please see terms_agreed parameter description and the [Terms](#terms) endpoint for more information.|[Error Object](#schemaerror_object)
-<aside class="auth-notice">
-To perform this request, you must be authenticated via one of the following methods:
-<a href="#authentication">api_key</a>
-</aside>
-## PlayStation™ Network
-
-> Example request
-
-```shell
-# You can also use wget
-curl -X POST https://api.mod.io/v1/external/psnauth?api_key=YourApiKey \
-  -H 'Content-Type: application/x-www-form-urlencoded' \ 
-  -H 'Accept: application/json' \
-  -d 'auth_code=MAXfj2TMqpHnaUMJdwCDbZUi2L3usnV7aw7xwHX2PEqT5hLkFF2VUyhlnCAMC0tQR3trpFQot0zvMMEtBzekilqeVD1Qm9nEcs9FljneaL3hCWPFSf6jjDSxOxOSytGD'
-
-```
-
-```http
-POST https://api.mod.io/v1/external/psnauth?api_key=YourApiKey HTTP/1.1
-Host: api.mod.io
-Content-Type: application/x-www-form-urlencoded
-Accept: application/json
-
-```
-
-```javascript
-var headers = {
-  'Content-Type':'application/x-www-form-urlencoded',
-  'Accept':'application/json'
-
-};
-
-$.ajax({
-  url: 'https://api.mod.io/v1/external/psnauth',
-  method: 'post',
-  data: '?api_key=YourApiKey',
-  headers: headers,
-  success: function(data) {
-    console.log(JSON.stringify(data));
-  }
-})
-```
-
-```javascript--nodejs
-const request = require('node-fetch');
-const inputBody = '{
-  "auth_code": "MAXfj2TMqpHnaUMJdwCDbZUi2L3usnV7aw7xwHX2PEqT5hLkFF2VUyhlnCAMC0tQR3trpFQot0zvMMEtBzekilqeVD1Qm9nEcs9FljneaL3hCWPFSf6jjDSxOxOSytGD"
-}';
-const headers = {
-  'Content-Type':'application/x-www-form-urlencoded',
-  'Accept':'application/json'
-
-};
-
-fetch('https://api.mod.io/v1/external/psnauth?api_key=YourApiKey',
-{
-  method: 'POST',
-  body: inputBody,
-  headers: headers
-})
-.then(function(res) {
-    return res.json();
-}).then(function(body) {
-    console.log(body);
-});
-```
-
-```python
-import requests
-headers = {
-  'Content-Type': 'application/x-www-form-urlencoded',
-  'Accept': 'application/json'
-}
-
-r = requests.post('https://api.mod.io/v1/external/psnauth', params={
-  'api_key': 'YourApiKey'
-}, headers = headers)
-
-print r.json()
-```
-
-```java
-URL obj = new URL("https://api.mod.io/v1/external/psnauth?api_key=YourApiKey");
-HttpURLConnection con = (HttpURLConnection) obj.openConnection();
-con.setRequestMethod("POST");
-int responseCode = con.getResponseCode();
-BufferedReader in = new BufferedReader(
-    new InputStreamReader(con.getInputStream()));
-String inputLine;
-StringBuffer response = new StringBuffer();
-while ((inputLine = in.readLine()) != null) {
-    response.append(inputLine);
-}
-in.close();
-System.out.println(response.toString());
-```
-
-`POST /external/psnauth`
-
-Request an access token on behalf of a PlayStation™ Network (PSN) user. A Successful request will return an [Access Token Object](#access-token-object).<br><br>__NOTE__: To use this endpoint you will need to setup some additional settings prior to being able to authenticate Nintendo Switch users, for these instructions please [contact us](mailto:developers@mod.io).
-
-     Parameter|Type|Required|Description
-     ---|---|---|---|
-     auth_code|string|true|The auth code returned from the PlayStation™ Network API.
-     email|string||The users email address. If supplied, and the respective user does not have an email registered for their account we will send a confirmation email to confirm they have ownership of the specified email.
-     date_expires|integer||Unix timestamp of date in which the returned token will expire. Value cannot be higher than the default value which is a common year (unix timestamp + 31536000 seconds). Using a token after it's expiry time has elapsed will result in a `401 Unauthorized` response.
-     terms_agreed|boolean||This MUST be set to `false` unless you have collected the [users agreement](#terms) prior to calling this endpoint in which case it can be set to `true` and will be recorded.<br><br>__NOTE:__ If this is set to `false` and the user has not agreed to the latest mod.io Terms of Use and Privacy Policy, an error `403 Forbidden (error_ref 11074)` will be returned and you will need to collect the [users agreement](#terms) and retry with this value set to `true` to authenticate the user.
-
-> Example response
-
-```json
-{
-  "code": 200,
-  "access_token": "eyJ0eXAiOiXKV1QibCJhbLciOiJeiUzI1.....",
-  "date_expires": 1570673249
-}
-
-```
-<h3 id="PlayStation™-Network-responses">Responses</h3>
-
-Status|Meaning|Error Ref|Description|Response Schema
----|---|----|---|---|
-200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)||Successful Request|[Access Token Object](#schemaaccess_token_object)
 403|[Forbidden](https://tools.ietf.org/html/rfc7231#section-6.5.3)|11074|The user has not agreed to the mod.io Terms of Use. Please see terms_agreed parameter description and the [Terms](#terms) endpoint for more information.|[Error Object](#schemaerror_object)
 <aside class="auth-notice">
 To perform this request, you must be authenticated via one of the following methods:

@@ -14,7 +14,7 @@ __Current version:__ --parse_vdropdown
 
 Compatible with all builds of your game on all platforms and stores, --parse_sitename is a clientless and standalone solution which gives you complete control over your modding ecosystem.
 
-![--parse_sitename Overview](images/sdk.png).
+![--parse_sitename Overview](images/sdk.png)
 
 ## Implementation
 
