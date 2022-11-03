@@ -53,7 +53,7 @@ Authentication can be done via 5 ways:
 - Use an [API key](--parse_siteurl/me/access) for **Read-only** access (get a [test environment](--parse_sitetesturl/me/access) API key here)
 - Use the [Email Authentication Flow](#email) for **Read and Write** access (it creates an OAuth 2 Access Token via **email**)
 - Use the [Platform Authentication Flow](#steam) for **Read and Write** access (it creates an OAuth 2 Access Token automatically on popular platforms such as **Steam and Xbox**)
-- Use the [OpenID Authentication Flow](#authenticate-via-openid) for **Read and Write** access (it creates an OAuth 2 Access Token automatically using your identity provider for SSO)
+- Use the [OpenID Authentication Flow](#openid) for **Read and Write** access (it creates an OAuth 2 Access Token automatically using your identity provider for SSO)
 - Manually create an [OAuth 2 Access Token](--parse_siteurl/me/access) for **Read and Write** access (get a [test environment](--parse_sitetesturl/me/access) OAuth 2 token here)
 
 All users and games are issued an API key which must be included when querying the API. It is quick and easy to use but limited to read-only GET requests, due to the limited security it offers. If you want players to be able to add, edit, rate and subscribe to content, you will need to use an authentication method that generates an OAuth 2 Access token. These [authentication methods](#authentication-2) are explained in detail here.
