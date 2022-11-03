@@ -67,11 +67,12 @@ Here is a brief list of the things to know about our API, as explained in more d
 
 ## Authentication
 
-Authentication can be done via 4 ways:
+Authentication can be done via 5 ways:
 
 - Use an [API key](https://mod.io/me/access) for **Read-only** access (get a [test environment](https://test.mod.io/me/access) API key here)
 - Use the [Email Authentication Flow](#email) for **Read and Write** access (it creates an OAuth 2 Access Token via **email**)
 - Use the [Platform Authentication Flow](#steam) for **Read and Write** access (it creates an OAuth 2 Access Token automatically on popular platforms such as **Steam and Xbox**)
+- Use the [OpenID Authentication Flow](#authenticate-via-openid) for **Read and Write** access (it creates an OAuth 2 Access Token automatically using your identity provider for SSO)
 - Manually create an [OAuth 2 Access Token](https://mod.io/me/access) for **Read and Write** access (get a [test environment](https://test.mod.io/me/access) OAuth 2 token here)
 
 All users and games are issued an API key which must be included when querying the API. It is quick and easy to use but limited to read-only GET requests, due to the limited security it offers. If you want players to be able to add, edit, rate and subscribe to content, you will need to use an authentication method that generates an OAuth 2 Access token. These [authentication methods](#authentication-2) are explained in detail here.
@@ -748,7 +749,7 @@ If the rate limit is exceeded, the following header will be returned alongside t
 
 ### Depreciation Notice
 
-From November 7th, 2022 - the rate limit headers below will no longer be returned. If you have written a custom mod.io SDK or library, you should replace any usage of these headers with `retry-after`.
+From November 20th, 2022 - the rate limit headers below will no longer be returned. If you have written a custom mod.io SDK or library, you should replace any usage of these headers with `retry-after`.
 
  - `X-RateLimit-Limit` - Number of requests you can make from the supplied API key/access token per minute.
  - `X-RateLimit-Remaining` - Number of requests remaining until requests are rejected.
@@ -920,7 +921,7 @@ System.out.println(response.toString());
 
 `GET /authenticate/terms`
 
-The purpose of this endpoint is to provide the text, links and buttons you can use to get a users agreement and consent prior to authenticating them in-game (your dialog should look similar to the example below). A successful response will return a [Terms Object](#terms-object).</p><aside class='consent'>We use mod.io to support user-generated content in-game. By clicking 'I Agree' you agree to the mod.io Terms of Use and a mod.io account will be created for you (using your display name, avatar and ID). Please see the mod.io Privacy Policy on how mod.io processes your personal data.<br><br><div style='text-align:center'><span class='versionwrap cursor'> &nbsp; &nbsp; I Agree &nbsp; &nbsp; </span> <span class='versionwrap outline cursor'>No, Thanks</span><br><br>[Terms of Use](https://mod.io/terms/widget) - [Privacy Policy](https://mod.io/privacy/widget)<br></div></aside><p>__IMPORTANT:__ It is a requirement to implement the terms dialog when using a 3rd party authentication flow such as Steam or Xbox Live, to ensure the user has agreed to the latest mod.io [Terms of Use](https://mod.io/terms/widget) and [Privacy Policy](https://mod.io/privacy/widget). You only need to collect the users agreement once, and also each time these policies are updated.<br><br>To make this easy to manage, all of the 3rd party authentication flows have a `terms_agreed` field which should be set to `false` by default. If the user has agreed to the latest policies, their authentication will proceed as normal, however if their agreement is required and `terms_agreed` is set to `false` an error `403 Forbidden (error_ref 11074)` will be returned. When you receive this error, you must collect the users agreement before resubmitting the authentication flow with `terms_agreed` set to `true`, which will be recorded.<br><br>__NOTE:__  You can use your own text and process (make sure the Terms of Use and Privacy Policy are correctly linked), but be aware that you are responsible for ensuring that the users agreement is properly collected and reported to us. Failure to do this correctly is a breach of the mod.io Game Terms. If your game does not authenticate users or only uses the email authentication flow, you do not need to implement this dialog, but you should link to the mod.io Terms of Use and Privacy Policy in your Privacy Policy/EULA.
+The purpose of this endpoint is to provide the text, links and buttons you can use to get a users agreement and consent prior to authenticating them in-game (your dialog should look similar to the example below). A successful response will return a [Terms Object](#terms-object).<br><br>__Example Dialog:__</p><aside class='consent'>We use mod.io to support user-generated content in-game. By clicking 'I Agree' you agree to the mod.io Terms of Use and a mod.io account will be created for you (using your display name, avatar and ID). Please see the mod.io Privacy Policy on how mod.io processes your personal data.<br><br><div style='text-align:center'><span class='versionwrap cursor'> &nbsp; &nbsp; I Agree &nbsp; &nbsp; </span> <span class='versionwrap outline cursor'>No, Thanks</span><br><br>[Terms of Use](https://mod.io/terms/widget) - [Privacy Policy](https://mod.io/privacy/widget)<br></div></aside><p>__IMPORTANT:__ It is a requirement to implement the terms dialog when using a 3rd party authentication flow such as Steam or Xbox Live, to ensure the user has agreed to the latest mod.io [Terms of Use](https://mod.io/terms/widget) and [Privacy Policy](https://mod.io/privacy/widget). You only need to collect the users agreement once, and also each time these policies are updated.<br><br>To make this easy to manage, all of the 3rd party authentication flows have a `terms_agreed` field which should be set to `false` by default. If the user has agreed to the latest policies, their authentication will proceed as normal, however if their agreement is required and `terms_agreed` is set to `false` an error `403 Forbidden (error_ref 11074)` will be returned. When you receive this error, you must collect the users agreement before resubmitting the authentication flow with `terms_agreed` set to `true`, which will be recorded.<br><br>__NOTE:__  You can use your own text and process (make sure the Terms of Use and Privacy Policy are correctly linked), but be aware that you are responsible for ensuring that the users agreement is properly collected and reported to us. Failure to do this correctly is a breach of the mod.io Game Terms. If your game does not authenticate users or only uses the email authentication flow, you do not need to implement this dialog, but you should link to the mod.io Terms of Use and Privacy Policy in your Privacy Policy/EULA.
 
 > Example response
 
@@ -2148,7 +2149,7 @@ To perform this request, you must be authenticated via one of the following meth
 
 ```shell
 # You can also use wget
-curl -X POST https://api.mod.io/v1/authenticate/openid?api_key=YourApiKey \
+curl -X POST https://api.mod.io/v1/external/openid?api_key=YourApiKey \
   -H 'Content-Type: application/x-www-form-urlencoded' \ 
   -H 'Accept: application/json' \
   -d 'id_token=eyJhbXciOiJIUzI1Lizs....'
@@ -2156,7 +2157,7 @@ curl -X POST https://api.mod.io/v1/authenticate/openid?api_key=YourApiKey \
 ```
 
 ```http
-POST https://api.mod.io/v1/authenticate/openid?api_key=YourApiKey HTTP/1.1
+POST https://api.mod.io/v1/external/openid?api_key=YourApiKey HTTP/1.1
 Host: api.mod.io
 Content-Type: application/x-www-form-urlencoded
 Accept: application/json
@@ -2171,7 +2172,7 @@ var headers = {
 };
 
 $.ajax({
-  url: 'https://api.mod.io/v1/authenticate/openid',
+  url: 'https://api.mod.io/v1/external/openid',
   method: 'post',
   data: '?api_key=YourApiKey',
   headers: headers,
@@ -2192,7 +2193,7 @@ const headers = {
 
 };
 
-fetch('https://api.mod.io/v1/authenticate/openid?api_key=YourApiKey',
+fetch('https://api.mod.io/v1/external/openid?api_key=YourApiKey',
 {
   method: 'POST',
   body: inputBody,
@@ -2212,7 +2213,7 @@ headers = {
   'Accept': 'application/json'
 }
 
-r = requests.post('https://api.mod.io/v1/authenticate/openid', params={
+r = requests.post('https://api.mod.io/v1/external/openid', params={
   'api_key': 'YourApiKey'
 }, headers = headers)
 
@@ -2220,7 +2221,7 @@ print r.json()
 ```
 
 ```java
-URL obj = new URL("https://api.mod.io/v1/authenticate/openid?api_key=YourApiKey");
+URL obj = new URL("https://api.mod.io/v1/external/openid?api_key=YourApiKey");
 HttpURLConnection con = (HttpURLConnection) obj.openConnection();
 con.setRequestMethod("POST");
 int responseCode = con.getResponseCode();
@@ -2235,9 +2236,9 @@ in.close();
 System.out.println(response.toString());
 ```
 
-`POST /authenticate/openid`
+`POST /external/openid`
 
-Request an access token on behalf of an OpenID identity provider. To use this method of authentication, you must configure the OpenID config in your games authentication admin page. A Successful request will return an [Access Token Object](#access-token-object).
+Request an access token on behalf of an OpenID identity provider. To use this method of authentication, you must configure the OpenID config in your games authentication admin page. A Successful request will return an [Access Token Object](#access-token-object).<br><br>__NOTE:__ The ability to authenticate players using your identity provider is feature for advanced partners only. If you are interested in becoming an advanced partner, please [contact us](mailto:developers@mod.io?subject=OpenID SSO Request).<br><br>__HINT:__ If you want to overlay the mod.io site in-game with your SSO, we recommend you add `?portal=openid` to the end of the URL you open which will prompt the user to login with your identity provider. See [Web Overlay Authentication](#web-overlay-authentication) for details.
 
      Parameter|Type|Required|Description
      ---|---|---|---|
