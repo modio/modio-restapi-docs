@@ -827,6 +827,7 @@ GOG | `GOG`
 Google | `Google`
 itch.io | `Itchio`
 Nintendo | `Nintendo`
+OpenID | `OpenID`
 PlayStation Network | `PSN`
 Steam | `Steam`
 Xbox Live | `XboxLive`
