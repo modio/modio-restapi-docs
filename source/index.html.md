@@ -204,7 +204,7 @@ Response Code | Meaning
 ```json
 "error": {
 	"code": 403,
-	"error_ref": "15024",
+	"error_ref": 15024,
 	"message": "You do not have the required permissions to access this resource."
 }
 ```
@@ -2274,8 +2274,7 @@ To perform this request, you must be authenticated via one of the following meth
 <a href="#authentication">api_key</a>
 </aside>
 ## Email Exchange
-
-__Step 1 of 2__
+__Step 1 of 2__
 
 > Example request
 
@@ -2396,10 +2395,8 @@ To perform this request, you must be authenticated via one of the following meth
 <a href="#authentication">api_key</a>
 </aside>
 
-
-<br>
-
-__Step 2 of 2__
+<br>
+__Step 2 of 2__
 
 
 > Example request
@@ -2705,7 +2702,8 @@ Get all games. Successful request will return an array of [Game Objects](#get-ga
       ],
       "monetisation_options": {
         "enabled": false,
-        "patronage": false
+        "patronage": false,
+        "marketplace": false
       },
       "monetisation": {
         "monetisation_team_id": 0,
@@ -2921,7 +2919,8 @@ Get a game. Successful request will return a single [Game Object](#game-object).
   ],
   "monetisation_options": {
     "enabled": false,
-    "patronage": false
+    "patronage": false,
+    "marketplace": false
   },
   "monetisation": {
     "monetisation_team_id": 0,
@@ -3214,7 +3213,8 @@ Get all mods for the corresponding game. Successful request will return an array
       },
       "monetisation_options": {
         "enabled": false,
-        "patronage": false
+        "patronage": false,
+        "marketplace": false
       },
       "monetisation": {
         "monetisation_team_id": "Team ID for the monetisation API.",
@@ -3462,7 +3462,8 @@ Get a mod. Successful request will return a single [Mod Object](#mod-object).
   },
   "monetisation_options": {
     "enabled": false,
-    "patronage": false
+    "patronage": false,
+    "marketplace": false
   },
   "monetisation": {
     "monetisation_team_id": "Team ID for the monetisation API.",
@@ -3733,7 +3734,8 @@ Add a mod. Successful request will return the newly created [Mod Object](#mod-ob
   },
   "monetisation_options": {
     "enabled": false,
-    "patronage": false
+    "patronage": false,
+    "marketplace": false
   },
   "monetisation": {
     "monetisation_team_id": "Team ID for the monetisation API.",
@@ -3998,7 +4000,8 @@ Edit details for a mod. If you want to update the `logo` or media associated wit
   },
   "monetisation_options": {
     "enabled": false,
-    "patronage": false
+    "patronage": false,
+    "marketplace": false
   },
   "monetisation": {
     "monetisation_team_id": "Team ID for the monetisation API.",
@@ -5259,7 +5262,8 @@ Subscribe the _authenticated user_ to a corresponding mod. No body parameters ar
   },
   "monetisation_options": {
     "enabled": false,
-    "patronage": false
+    "patronage": false,
+    "marketplace": false
   },
   "monetisation": {
     "monetisation_team_id": "Team ID for the monetisation API.",
@@ -10252,7 +10256,8 @@ Get all games the _authenticated user_ added or is a team member of. Successful 
       ],
       "monetisation_options": {
         "enabled": false,
-        "patronage": false
+        "patronage": false,
+        "marketplace": false
       },
       "monetisation": {
         "monetisation_team_id": 0,
@@ -10553,7 +10558,8 @@ Get all mod's the _authenticated user_ is subscribed to. Successful request will
       },
       "monetisation_options": {
         "enabled": false,
-        "patronage": false
+        "patronage": false,
+        "marketplace": false
       },
       "monetisation": {
         "monetisation_team_id": "Team ID for the monetisation API.",
@@ -10831,7 +10837,8 @@ Get all mods the _authenticated user_ added or is a team member of. Successful r
       },
       "monetisation_options": {
         "enabled": false,
-        "patronage": false
+        "patronage": false,
+        "marketplace": false
       },
       "monetisation": {
         "monetisation_team_id": "Team ID for the monetisation API.",
@@ -11386,7 +11393,8 @@ onboarded|string|Has the team completed setup?
   ],
   "monetisation_options": {
     "enabled": false,
-    "patronage": false
+    "patronage": false,
+    "marketplace": false
   },
   "monetisation": {
     "monetisation_team_id": 0,
@@ -11700,7 +11708,8 @@ result_total|integer|Total number of results found.
       ],
       "monetisation_options": {
         "enabled": false,
-        "patronage": false
+        "patronage": false,
+        "marketplace": false
       },
       "monetisation": {
         "monetisation_team_id": 0,
@@ -12190,7 +12199,8 @@ result_total|integer|Total number of results found.
       },
       "monetisation_options": {
         "enabled": false,
-        "patronage": false
+        "patronage": false,
+        "marketplace": false
       },
       "monetisation": {
         "monetisation_team_id": "Team ID for the monetisation API.",
@@ -12784,7 +12794,8 @@ onboarded|string|Has the team completed setup?
   },
   "monetisation_options": {
     "enabled": false,
-    "patronage": false
+    "patronage": false,
+    "marketplace": false
   },
   "monetisation": {
     "monetisation_team_id": "Team ID for the monetisation API.",
@@ -13029,7 +13040,8 @@ pending|string[]|Array of [valid platform strings](#targeting-a-platform) showin
 ```json
 {
   "enabled": false,
-  "patronage": false
+  "patronage": false,
+  "marketplace": false
 } 
 ```
 
@@ -13039,6 +13051,7 @@ Name|Type|Description
 ---|---|---|---|
 enabled|boolean|Monetisation Enable/Disabled.
 patronage|boolean|Patronage Enable/Disabled.
+marketplace|boolean|Marketplace Enable/Disabled.
 
 
 
