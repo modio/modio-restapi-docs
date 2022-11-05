@@ -235,7 +235,7 @@
   color: #f92672;
 }
     </style>
-    <link href="../stylesheets/screen-e697cc87.css" rel="stylesheet" media="screen" />
+    <link href="../stylesheets/screen-ab5dd04f.css" rel="stylesheet" media="screen" />
     <link href="../stylesheets/print-03026987.css" rel="stylesheet" media="print" />
 
     <link rel="stylesheet" href="../stylesheets/colorbox-64ee49f2.css">
@@ -244,7 +244,7 @@
 
     <script>
       $(document).ready(function() {
-        $('a.colorbox').colorbox({iframe:true, innerHeight:640, innerWidth:600});
+        $('a.colorbox').colorbox({iframe:true, innerHeight:640, maxWidth:600, width: "90%"});
         function mergeObjects(a, b) { 
           return $.extend({}, a, b) 
         }
@@ -285,40 +285,45 @@
       <a href="https://mod.io"><img src="../images/logo-4844558f.svg" class="logo" alt="" /></a>
       <div id="toc" class="toc-list-h1">
           <li>
-            <a href="#getting-started" class="toc-h1 toc-link" data-title="Getting Started"><span class="reficon"><img src="images/cog-blue.svg" alt="Reference" class="menu-reference-icon"></span> Getting Started</a>
+            <a href="#api-versions" class="toc-h1 toc-link" data-title="API Versions"><span class="reficon"><img src="images/cog-blue.svg" alt="Reference" class="menu-reference-icon"></span> API Versions</a>
               <ul class="toc-list-h2">
                   <li>
-                    <a href="#latest-api-version-v1" class="toc-h2 toc-link" data-title="Getting Started">Latest API Version: <span class="versionwrap latest">v1</span>
-</a>
-                  </li>
-                  <li>
-                    <a href="#how-we-handle-versioning" class="toc-h2 toc-link" data-title="Getting Started">How We Handle Versioning</a>
-                  </li>
-                  <li>
-                    <a href="#versioning-format-convention" class="toc-h2 toc-link" data-title="Getting Started">Versioning Format Convention</a>
-                  </li>
-                  <li>
-                    <a href="#format-breakdown" class="toc-h2 toc-link" data-title="Getting Started">Format breakdown</a>
-                  </li>
-                  <li>
-                    <a href="#version-examples" class="toc-h2 toc-link" data-title="Getting Started">Version Examples</a>
-                  </li>
-                  <li>
-                    <a href="#version-requests" class="toc-h2 toc-link" data-title="Getting Started">Version Requests</a>
-                  </li>
-                  <li>
-                    <a href="#handling-invalid-versions" class="toc-h2 toc-link" data-title="Getting Started">Handling invalid versions</a>
-                  </li>
-                  <li>
-                    <a href="#what-are-breaking-changes" class="toc-h2 toc-link" data-title="Getting Started">What are breaking changes</a>
+                    <a href="#v1-latest-version" class="toc-h2 toc-link" data-title="API Versions">v1 (latest version)</a>
                   </li>
               </ul>
           </li>
           <li>
-            <a href="#api-versions" class="toc-h1 toc-link" data-title="API Versions"><span class="reficon"><img src="images/cog-blue.svg" alt="Reference" class="menu-reference-icon"></span> API Versions</a>
+            <a href="#changelog" class="toc-h1 toc-link" data-title="Changelog"><span class="reficon"><img src="images/cog-white.svg" alt="Reference" class="menu-reference-icon"></span> Changelog</a>
               <ul class="toc-list-h2">
                   <li>
-                    <a href="#v1-latest-version" class="toc-h2 toc-link" data-title="API Versions">v1 (Latest Version)</a>
+                    <a href="#oct-27-2022" class="toc-h2 toc-link" data-title="Changelog">Oct 27, 2022</a>
+                  </li>
+              </ul>
+          </li>
+          <li>
+            <a href="#how-we-version" class="toc-h1 toc-link" data-title="How We Version"><span class="reficon"><img src="images/cog-white.svg" alt="Reference" class="menu-reference-icon"></span> How We Version</a>
+              <ul class="toc-list-h2">
+                  <li>
+                    <a href="#latest-api-version-v1" class="toc-h2 toc-link" data-title="How We Version">Latest API Version: <span class="versionwrap latest">v1</span>
+</a>
+                  </li>
+                  <li>
+                    <a href="#how-we-handle-versioning" class="toc-h2 toc-link" data-title="How We Version">How We Handle Versioning</a>
+                  </li>
+                  <li>
+                    <a href="#versioning-format-convention" class="toc-h2 toc-link" data-title="How We Version">Versioning Format Convention</a>
+                  </li>
+                  <li>
+                    <a href="#version-examples" class="toc-h2 toc-link" data-title="How We Version">Version Examples</a>
+                  </li>
+                  <li>
+                    <a href="#version-requests" class="toc-h2 toc-link" data-title="How We Version">Version Requests</a>
+                  </li>
+                  <li>
+                    <a href="#handling-invalid-versions" class="toc-h2 toc-link" data-title="How We Version">Handling invalid versions</a>
+                  </li>
+                  <li>
+                    <a href="#what-are-breaking-changes" class="toc-h2 toc-link" data-title="How We Version">What are breaking changes</a>
                   </li>
               </ul>
           </li>
@@ -327,38 +332,27 @@
     <div class="page-wrapper">
       <div class="dark-box"></div>
       <div class="content">
-        <h1 id="getting-started">Getting Started</h1><h3 id="latest-api-version-v1">Latest API Version: <span class="versionwrap latest">v1</span>
+        <h1 id="api-versions">API Versions</h1><h2 id="v1-latest-version">v1 (latest version)</h2><h3 id="date-live-november-3-2022-6-43-am-gmt">Date Live: November 3, 2022, 6:43 am GMT</h3>
+<p>Initial API Release.</p>
+<h3 id="view-v1-docs"><span class="versionwrap"><a href="/">View v1 docs</a></span></h3><h1 id="changelog">Changelog</h1><h2 id="oct-27-2022">Oct 27, 2022</h2><h3 id="depreciating-x-ratelimit-headers">Depreciating X-Ratelimit headers</h3>
+<ul>
+<li>Beginning Nov 20th, 2022, all custom rate limit headers <code>X-RateLimit-Limit</code>, <code>X-RateLimit-Remaining</code>, <code>X-RateLimit-RetryAfter</code> will no longer be returned. They will be replaced with <code>retry-after</code> when the <a href="/#rate-limiting">ratelimit is exceeded</a>.</li>
+</ul>
+<h1 id="how-we-version">How We Version</h1><h3 id="latest-api-version-v1">Latest API Version: <span class="versionwrap latest">v1</span>
 </h3>
-<p>Our aim with mod.io is to offer developers the most powerful and flexible mod API available. This means continually evolving and improving based on your requirements and pushing changes when required. The majority of these changes will be non-breaking and deployed immediately, however there will be times when breaking changes are needed. To ensure your mod.io implementations are not affected by the changes, we have architectured a versioning system that maintains backwards compatibility and allows you to upgrade your implementation when it suits. Read on details.</p>
+<p>Our aim with mod.io is to offer developers the most powerful and flexible mod API available. This means continually evolving and improving based on your requirements and pushing changes when required. The majority of these changes will be non-breaking and deployed immediately, however there will be times when breaking changes are needed. To ensure your mod.io implementations are not affected by the changes, we have architectured a versioning system that aims to maintain backwards compatibility and allow you to upgrade your implementation at a time that suits.</p>
 <h3 id="how-we-handle-versioning">How We Handle Versioning</h3>
 <p>Upon first look, our implementation is consistent with many other REST API's, where you have a version specified in the URL and can change that value as required. The mod.io API follows this convention - however, we don't treat our versions as 'major' and instead <strong>we release a new version each time breaking changes are made</strong>. This allows us to release updates as frequently as is deemed required, with no impact on existing API consumers. Documentation is also preserved for past versions, so whilst we recommend you use the latest version of the API, we will always aim to support legacy versions.</p>
 <h3 id="versioning-format-convention">Versioning Format Convention</h3>
-<p>For the initial release of the API, <strong>v1</strong> is a valid format and version.
-However, for all future versions, the <strong>v1</strong> format is <em>deprecated</em> and the following format will be used to represent each mod.io API version.</p>
-<h3 id="format-breakdown">Format breakdown</h3>
-<p>Format: <span class="versionwrap">YYYYr{0-9}</span>
-Example: <span class="versionwrap latest">2018r1</span></p>
-
-<ul>
-<li>
-<code>YYYY</code> - The year of the version</li>
-<li>
-<code>r</code> - Always hard-coded as 'r', signifying the release number</li>
-<li>
-<code>0-9</code> - The release number which is incremented per release, relative to the year.
-Whenever the year is changed, the release number begins at 1.</li>
-</ul>
-
-<p>Important Reminder: The release number is <strong>not</strong> a representation of the month of 
-the year and always denotes the (n)th release of that year.</p>
+<p>For the initial release of the API, <strong>v1</strong> is a valid format and version. Future releases will continue to follow this convention, by incrementing the version number, i.e. <strong>v[0-9]+</strong></p>
 <h3 id="version-examples">Version Examples</h3>
 <ul>
 <li>
-<code>v1</code> - First version of our API. This formatting is no longer used.</li>
+<code>v1</code> - Initial version of our API.</li>
 <li>
-<code>2018r1</code> - The 1st release of a breaking API change for 2018.</li>
+<code>v2</code> - The next major release of the API, that will require a migration to support the breaking changes made to the prior version.</li>
 <li>
-<code>2019r7</code> - The 7th release of a breaking API change for 2019.</li>
+<code>v9</code> - The 9th release of the API, that will require a migration to support the breaking changes made to the prior version.</li>
 </ul>
 <h3 id="version-requests">Version Requests</h3><div class="highlight"><pre class="highlight shell tab-shell"><code>Example cURL request
 <span class="nt">---------------------</span>
@@ -408,9 +402,7 @@ are what constitutes as <strong>breaking</strong> changes:</p>
 </table>
 
 <p>Changes that <em>are</em> non-breaking will continue to be delivered to you regardless of which API version you are using, and documentation for every version will continue to be updated to reflect these changes. Only breaking changes described above will fall under this versioning system.</p>
-<h1 id="api-versions">API Versions</h1><h2 id="v1-latest-version">v1 (Latest Version)</h2><h3 id="date-live-may-15-2018-12-00-am-gmt">Date Live: May 15, 2018, 12:00 am GMT</h3>
-<p>Initial API release.</p>
-<h3 id="view-v1-docs"><span class="versionwrap"><a href="https://docs.mod.io">View v1 docs</a></span></h3>
+
       </div>
       <div class="dark-box">
       </div>
