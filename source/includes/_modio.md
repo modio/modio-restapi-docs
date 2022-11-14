@@ -728,7 +728,7 @@ If the rate limit is exceeded, the following header will be returned alongside t
 
  - `retry-after` - Number of seconds before you can attempt to make another request to API.
 
-### Depreciation Notice
+### Deprecation Notice
 
 From November 20th, 2022 - the rate limit headers below will no longer be returned. If you have written a custom mod.io SDK or library, you should replace any usage of these headers with `retry-after`.
 
