@@ -1,7 +1,7 @@
 # API Versions
 
 ## v1 (latest version)
-### Date Live: November 3, 2022, 6:43 am GMT
+### Date Live: November 18, 2022, 8:55 am GMT
 
 Initial API Release.
 
@@ -11,7 +11,7 @@ Initial API Release.
 
 ## Oct 27, 2022
 
-### Depreciating X-Ratelimit headers
+### Deprecating X-Ratelimit headers
 
 - Beginning Nov 20th, 2022, all custom rate limit headers `X-RateLimit-Limit`, `X-RateLimit-Remaining`, `X-RateLimit-RetryAfter` will no longer be returned. They will be replaced with `retry-after` when the [ratelimit is exceeded](/#rate-limiting).
 

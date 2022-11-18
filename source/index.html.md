@@ -747,7 +747,7 @@ If the rate limit is exceeded, the following header will be returned alongside t
 
  - `retry-after` - Number of seconds before you can attempt to make another request to API.
 
-### Depreciation Notice
+### Deprecation Notice
 
 From November 20th, 2022 - the rate limit headers below will no longer be returned. If you have written a custom mod.io SDK or library, you should replace any usage of these headers with `retry-after`.
 
@@ -1069,7 +1069,7 @@ System.out.println(response.toString());
 
 `POST /external/steamauth`
 
-Request an access token on behalf of a Steam user. To use this functionality you *must* add your games [encrypted app ticket key](https://partner.steamgames.com/apps/sdkauth) from Steamworks, to the *Edit > Options* page of your games profile on mod.io. A Successful request will return an [Access Token Object](#access-token-object).<br><br>__HINT:__ If you want to overlay the mod.io site in-game on Steam, we recommend you add `?portal=steam` to the end of the URL you open which will prompt the user to login with Steam. See [Web Overlay Authentication](#web-overlay-authentication) for details.
+Request an access token on behalf of a Steam user. To use this functionality you *must* add your games [encrypted app ticket key](https://partner.steamgames.com/apps/sdkauth) from Steamworks, to the *Edit > Options* page of your games profile on mod.io. A Successful request will return an [Access Token Object](#access-token-object).<br><br>__HINT:__ If you want to overlay the mod.io site in-game on Steam, we recommend you add `?portal=steam` to the end of the URL you open which will prompt the user to login with Steam. See [Web Overlay Authentication](#web-overlay-authentication) for details. <br><br>__NOTE__: Steam is the only authentication endpoint that requires their token to be base64 encoded. All other endpoints tokens should be provided as a UTF-8 character string.
 
      Parameter|Type|Required|Description
      ---|---|---|---|
@@ -1199,7 +1199,7 @@ System.out.println(response.toString());
 
 `POST /external/xboxauth`
 
-Request an access token on behalf of an Xbox Live user. A Successful request will return an [Access Token Object](#access-token-object).<br><br>__NOTE__: To use this endpoint you will need to setup some additional settings prior to being able to authenticate Xbox Live users, for these instructions please [contact us](mailto:developers@mod.io?subject=Xbox Live SSO Request).<br><br>__HINT:__ If you want to overlay the mod.io site in-game on Xbox, we recommend you add `?portal=xboxlive` to the end of the URL you open which will prompt the user to login with Xbox Live. See [Web Overlay Authentication](#web-overlay-authentication) for details.
+Request an access token on behalf of an Xbox Live user. A Successful request will return an [Access Token Object](#access-token-object).<br><br>__NOTE__: To use this endpoint you will need to setup some additional settings prior to being able to authenticate Xbox Live users. For these instructions please [contact us](mailto:developers@mod.io?subject=Xbox Live SSO Request).<br><br>__HINT:__ If you want to overlay the mod.io site in-game on Xbox, we recommend you add `?portal=xboxlive` to the end of the URL you open which will prompt the user to login with Xbox Live. See [Web Overlay Authentication](#web-overlay-authentication) for details.
 
      Parameter|Type|Required|Description
      ---|---|---|---|
@@ -1236,7 +1236,7 @@ Status|Meaning|Error Ref|Description|Response Schema
 To perform this request, you must be authenticated via one of the following methods:
 <a href="#authentication">api_key</a>
 </aside>
-## PlayStation™ Network
+## PlayStation Network
 
 > Example request
 
@@ -1331,7 +1331,7 @@ System.out.println(response.toString());
 
 `POST /external/psnauth`
 
-Request an access token on behalf of a PlayStation™ Network (PSN) user. A Successful request will return an [Access Token Object](#access-token-object).<br><br>__NOTE__: To use this endpoint you will need to setup some additional settings prior to being able to authenticate PlayStation™ users, for these instructions please [contact us](mailto:developers@mod.io?subject=PlayStation Network SSO Request).<br><br>__HINT:__ If you want to overlay the mod.io site in-game on PlayStation™, we recommend you add `?portal=psn` to the end of the URL you open which will prompt the user to login with PlayStation™ Network. See [Web Overlay Authentication](#web-overlay-authentication) for details.
+Request an access token on behalf of a PlayStation™ Network (PSN) user. A Successful request will return an [Access Token Object](#access-token-object).<br><br>__NOTE__: To use this endpoint you will need to setup some additional settings prior to being able to authenticate PlayStation™ users. For these instructions please [contact us](mailto:developers@mod.io?subject=PlayStation Network SSO Request).<br><br>__HINT:__ If you want to overlay the mod.io site in-game on PlayStation™, we recommend you add `?portal=psn` to the end of the URL you open which will prompt the user to login with PlayStation™ Network. See [Web Overlay Authentication](#web-overlay-authentication) for details.
 
      Parameter|Type|Required|Description
      ---|---|---|---|
@@ -1350,7 +1350,7 @@ Request an access token on behalf of a PlayStation™ Network (PSN) user. A Succ
 }
 
 ```
-<h3 id="PlayStation™-Network-responses">Responses</h3>
+<h3 id="PlayStation-Network-responses">Responses</h3>
 
 Status|Meaning|Error Ref|Description|Response Schema
 ---|---|----|---|---|
@@ -1455,7 +1455,7 @@ System.out.println(response.toString());
 
 `POST /external/switchauth`
 
-Request an access token on behalf of a Nintendo Switch user. A Successful request will return an [Access Token Object](#access-token-object).<br><br>__NOTE__: To use this endpoint you will need to setup some additional settings prior to being able to authenticate Nintendo Switch users, for these instructions please [contact us](mailto:developers@mod.io?subject=Nintendo Switch SSO Request).
+Request an access token on behalf of a Nintendo Switch user. A Successful request will return an [Access Token Object](#access-token-object).<br><br>__NOTE__: To use this endpoint you will need to setup some additional settings prior to being able to authenticate Nintendo Switch users. For these instructions please [contact us](mailto:developers@mod.io?subject=Nintendo Switch SSO Request).
 
      Parameter|Type|Required|Description
      ---|---|---|---|
@@ -1983,7 +1983,7 @@ System.out.println(response.toString());
 
 `POST /external/googleauth`
 
-Request an access token on behalf of a Google user. A Successful request will return an [Access Token Object](#access-token-object).<br><br>__NOTE__: To use this endpoint you will need to setup some additional settings prior to being able to authenticate Google users, for these instructions please [contact us](mailto:developers@mod.io?subject=Google SSO Request).<br><br>__HINT:__ If you want to overlay the mod.io site in-game on Android, we recommend you add `?portal=google` to the end of the URL you open which will prompt the user to login with Google. See [Web Overlay Authentication](#web-overlay-authentication) for details.
+Request an access token on behalf of a Google user. A Successful request will return an [Access Token Object](#access-token-object).<br><br>__NOTE__: To use this endpoint you will need to setup some additional settings prior to being able to authenticate Google users. For these instructions please [contact us](mailto:developers@mod.io?subject=Google SSO Request).<br><br>__HINT:__ If you want to overlay the mod.io site in-game on Android, we recommend you add `?portal=google` to the end of the URL you open which will prompt the user to login with Google. See [Web Overlay Authentication](#web-overlay-authentication) for details.
 
      Parameter|Type|Required|Description
      ---|---|---|---|
@@ -3120,6 +3120,7 @@ Get all mods for the corresponding game. Successful request will return an array
       "maturity_option": 0,
       "community_options": 3,
       "price": 0,
+      "tax": 0,
       "logo": {
         "filename": "card.png",
         "original": "https://assets.modcdn.io/images/placeholder/card.png",
@@ -3369,6 +3370,7 @@ Get a mod. Successful request will return a single [Mod Object](#mod-object).
   "maturity_option": 0,
   "community_options": 3,
   "price": 0,
+  "tax": 0,
   "logo": {
     "filename": "card.png",
     "original": "https://assets.modcdn.io/images/placeholder/card.png",
@@ -3641,6 +3643,7 @@ Add a mod. Successful request will return the newly created [Mod Object](#mod-ob
   "maturity_option": 0,
   "community_options": 3,
   "price": 0,
+  "tax": 0,
   "logo": {
     "filename": "card.png",
     "original": "https://assets.modcdn.io/images/placeholder/card.png",
@@ -3907,6 +3910,7 @@ Edit details for a mod. If you want to update the `logo` or media associated wit
   "maturity_option": 0,
   "community_options": 3,
   "price": 0,
+  "tax": 0,
   "logo": {
     "filename": "card.png",
     "original": "https://assets.modcdn.io/images/placeholder/card.png",
@@ -5034,6 +5038,870 @@ Status|Meaning|Error Ref|Description|Response Schema
 To perform this request, you must be authenticated via one of the following methods:
 <a href="#authentication">OAuth 2</a> (Scopes: write)
 </aside>
+# Files (Multipart Uploads)
+
+## Get Multipart Upload Parts
+
+> Example request
+
+```shell
+# You can also use wget
+curl -X GET https://api.mod.io/v1/games/{game-id}/mods/{mod-id}/files/multipart?api_key=YourApiKey \
+  -H 'Accept: application/json'
+
+```
+
+```http
+GET https://api.mod.io/v1/games/{game-id}/mods/{mod-id}/files/multipart?api_key=YourApiKey HTTP/1.1
+Host: api.mod.io
+
+Accept: application/json
+
+```
+
+```javascript
+var headers = {
+  'Accept':'application/json'
+
+};
+
+$.ajax({
+  url: 'https://api.mod.io/v1/games/{game-id}/mods/{mod-id}/files/multipart',
+  method: 'get',
+  data: '?api_key=YourApiKey',
+  headers: headers,
+  success: function(data) {
+    console.log(JSON.stringify(data));
+  }
+})
+```
+
+```javascript--nodejs
+const request = require('node-fetch');
+
+const headers = {
+  'Accept':'application/json'
+
+};
+
+fetch('https://api.mod.io/v1/games/{game-id}/mods/{mod-id}/files/multipart?api_key=YourApiKey',
+{
+  method: 'GET',
+
+  headers: headers
+})
+.then(function(res) {
+    return res.json();
+}).then(function(body) {
+    console.log(body);
+});
+```
+
+```python
+import requests
+headers = {
+  'Accept': 'application/json'
+}
+
+r = requests.get('https://api.mod.io/v1/games/{game-id}/mods/{mod-id}/files/multipart', params={
+  'api_key': 'YourApiKey'
+}, headers = headers)
+
+print r.json()
+```
+
+```java
+URL obj = new URL("https://api.mod.io/v1/games/{game-id}/mods/{mod-id}/files/multipart?api_key=YourApiKey");
+HttpURLConnection con = (HttpURLConnection) obj.openConnection();
+con.setRequestMethod("GET");
+int responseCode = con.getResponseCode();
+BufferedReader in = new BufferedReader(
+    new InputStreamReader(con.getInputStream()));
+String inputLine;
+StringBuffer response = new StringBuffer();
+while ((inputLine = in.readLine()) != null) {
+    response.append(inputLine);
+}
+in.close();
+System.out.println(response.toString());
+```
+
+`GET /games/{game-id}/mods/{mod-id}/files/multipart`
+
+Get all uploaded parts for a corresponding upload session. Successful request will return an array of [Multipart Upload Part Objects](#get-multipart-upload-part-object). We recommended reading the [filtering documentation](#filtering) to return only the records you want.
+
+> Example response
+
+```json
+{
+  "data": [
+    {
+      "upload_id": "123e4567-e89b-12d3-a456-426614174000",
+      "part_number": 1,
+      "part_size": 52428800,
+      "date_added": 1499846132
+    },
+    {
+        ...
+    }
+  ],
+  "result_count": 70,
+  "result_offset": 0,
+  "result_limit": 100,
+  "result_total": 70
+}
+
+```
+<h3 id="Get-Multipart-Upload-Parts-responses">Responses</h3>
+
+Status|Meaning|Error Ref|Description|Response Schema
+---|---|----|---|---|
+200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)||Successful Request|[Get Multipart Upload Parts](#schemaget_multipart_upload_parts)
+<aside class="auth-notice">
+To perform this request, you must be authenticated via one of the following methods:
+<a href="#authentication">api_key</a>, <a href="#authentication">OAuth 2</a> (Scopes: read)
+</aside>
+## Add Multipart Upload Part
+
+> Example request
+
+```shell
+# You can also use wget
+curl -X PUT https://api.mod.io/v1/games/{game-id}/mods/{mod-id}/files/multipart?upload_id=123e4567-e89b-12d3-a456-426614174000 \
+  -H 'Authorization: Bearer {access-token}' \ 
+  -H 'Content-Range: bytes 0-52428799/209715196' \ 
+  -H 'Digest: sha-256=X48E9qOokqqrvdts8nOJRJN3OWDUoyWxBf7kbu9DBPE=' \ 
+  -H 'Accept: application/json'
+
+```
+
+```http
+PUT https://api.mod.io/v1/games/{game-id}/mods/{mod-id}/files/multipart?upload_id=123e4567-e89b-12d3-a456-426614174000 HTTP/1.1
+Host: api.mod.io
+
+Accept: application/json
+Authorization: Bearer {access-token}
+Content-Range: bytes 0-52428799/209715196
+Digest: sha-256=X48E9qOokqqrvdts8nOJRJN3OWDUoyWxBf7kbu9DBPE=
+
+```
+
+```javascript
+var headers = {
+  'Authorization':'Bearer {access-token}',
+  'Content-Range':'bytes 0-52428799/209715196',
+  'Digest':'sha-256=X48E9qOokqqrvdts8nOJRJN3OWDUoyWxBf7kbu9DBPE=',
+  'Accept':'application/json'
+
+};
+
+$.ajax({
+  url: 'https://api.mod.io/v1/games/{game-id}/mods/{mod-id}/files/multipart',
+  method: 'put',
+  data: '?upload_id=123e4567-e89b-12d3-a456-426614174000',
+  headers: headers,
+  success: function(data) {
+    console.log(JSON.stringify(data));
+  }
+})
+```
+
+```javascript--nodejs
+const request = require('node-fetch');
+
+const headers = {
+  'Authorization':'Bearer {access-token}',
+  'Content-Range':'bytes 0-52428799/209715196',
+  'Digest':'sha-256=X48E9qOokqqrvdts8nOJRJN3OWDUoyWxBf7kbu9DBPE=',
+  'Accept':'application/json'
+
+};
+
+fetch('https://api.mod.io/v1/games/{game-id}/mods/{mod-id}/files/multipart?upload_id=123e4567-e89b-12d3-a456-426614174000',
+{
+  method: 'PUT',
+
+  headers: headers
+})
+.then(function(res) {
+    return res.json();
+}).then(function(body) {
+    console.log(body);
+});
+```
+
+```python
+import requests
+headers = {
+  'Authorization': 'Bearer {access-token}',
+  'Content-Range': 'bytes 0-52428799/209715196',
+  'Digest': 'sha-256=X48E9qOokqqrvdts8nOJRJN3OWDUoyWxBf7kbu9DBPE=',
+  'Accept': 'application/json'
+}
+
+r = requests.put('https://api.mod.io/v1/games/{game-id}/mods/{mod-id}/files/multipart', params={
+  'upload_id': '123e4567-e89b-12d3-a456-426614174000'
+}, headers = headers)
+
+print r.json()
+```
+
+```java
+URL obj = new URL("https://api.mod.io/v1/games/{game-id}/mods/{mod-id}/files/multipart?upload_id=123e4567-e89b-12d3-a456-426614174000");
+HttpURLConnection con = (HttpURLConnection) obj.openConnection();
+con.setRequestMethod("PUT");
+int responseCode = con.getResponseCode();
+BufferedReader in = new BufferedReader(
+    new InputStreamReader(con.getInputStream()));
+String inputLine;
+StringBuffer response = new StringBuffer();
+while ((inputLine = in.readLine()) != null) {
+    response.append(inputLine);
+}
+in.close();
+System.out.println(response.toString());
+```
+
+`PUT /games/{game-id}/mods/{mod-id}/files/multipart`
+
+Add a new multipart upload part to an [existing upload session](#create-multipart-upload-session). All parts must be exactly 50MB (Mebibyte) in size unless it is the final part which can be smaller. A successful request will return a single [Multipart Upload Part Object](#multipart-upload-object).<br><br>__NOTE__: Unlike other POST endpoints on this service, the body of this request should contain no form parameters and instead be the data described in the byte range of the Content-Range header of the request.
+
+    Query Parameters|Required|type|Description
+    ---|---|---|---|
+    upload_id|true|string|The `upload_id` of the existing upload session to upload the part for.
+
+    Header Parameters|Required|Description
+    ---|---|---|---|
+    Content-Range|true|The [Content-Range](https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Content-Range) of the part you are sending, in bytes.
+    Digest||Optional [Digest](https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Digest) for part integrity checks once the part has been uploaded.
+
+> Example response
+
+```json
+{
+  "upload_id": "123e4567-e89b-12d3-a456-426614174000",
+  "part_number": 1,
+  "part_size": 52428800,
+  "date_added": 1499846132
+}
+
+```
+<h3 id="Add-Multipart-Upload-Part-responses">Responses</h3>
+
+Status|Meaning|Error Ref|Description|Response Schema
+---|---|----|---|---|
+200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)||Successful Request|[Multipart Upload Part Object](#schemamultipart_upload_part_object)
+400|[Bad Request](https://tools.ietf.org/html/rfc7231#section-6.5.1)|29008|The `Content-Range` header is missing from your request.|[Error Object](#schemaerror_object)
+400|[Bad Request](https://tools.ietf.org/html/rfc7231#section-6.5.1)|29009|The unit within the Content-Range header must be of type: bytes.|[Error Object](#schemaerror_object)
+400|[Bad Request](https://tools.ietf.org/html/rfc7231#section-6.5.1)|29010|The Content-Range header must not include wild-carded values, as they are unsupported (an asterisk cannot be included).|[Error Object](#schemaerror_object)
+400|[Bad Request](https://tools.ietf.org/html/rfc7231#section-6.5.1)|29011|The Content-Range header contains a non numeric value.|[Error Object](#schemaerror_object)
+400|[Bad Request](https://tools.ietf.org/html/rfc7231#section-6.5.1)|29014|The Content-Range header contains an invalid range, ensure that the finishing byte is greater than the starting byte.|[Error Object](#schemaerror_object)
+400|[Bad Request](https://tools.ietf.org/html/rfc7231#section-6.5.1)|29012|The Content-Range header does not match the required pattern.|[Error Object](#schemaerror_object)
+400|[Bad Request](https://tools.ietf.org/html/rfc7231#section-6.5.1)|29013|The size of the part provided is either too big, or too small.|[Error Object](#schemaerror_object)
+400|[Bad Request](https://tools.ietf.org/html/rfc7231#section-6.5.1)|29026|The finish byte of that range must be 1 byte less than the total file size specified.|[Error Object](#schemaerror_object)
+400|[Bad Request](https://tools.ietf.org/html/rfc7231#section-6.5.1)|29005|The Digest header contains more than one value, please ensure only the digest for the content body is provided.|[Error Object](#schemaerror_object)
+400|[Bad Request](https://tools.ietf.org/html/rfc7231#section-6.5.1)|29006|An algorithm indicated in the Digest header is unsupported, please use one of the following algorithms instead: SHA-256, CRC32C.|[Error Object](#schemaerror_object)
+400|[Bad Request](https://tools.ietf.org/html/rfc7231#section-6.5.1)|29015|An uploaded part with the specified start - finish byte range has already been uploaded to that session. If this is in error, you may need to abort the upload session, and start again.|[Error Object](#schemaerror_object)
+403|[Forbidden](https://tools.ietf.org/html/rfc7231#section-6.5.3)|15012|The authenticated user has had upload privileges restricted by mod.io admins, this is typically due to spam.|[Error Object](#schemaerror_object)
+403|[Forbidden](https://tools.ietf.org/html/rfc7231#section-6.5.3)|15006|The authenticated user does not have permission to upload modfiles for the specified mod, ensure the user is a team manager or administrator.|[Error Object](#schemaerror_object)
+<aside class="auth-notice">
+To perform this request, you must be authenticated via one of the following methods:
+<a href="#authentication">OAuth 2</a> (Scopes: write)
+</aside>
+## Create Multipart Upload Session
+
+> Example request
+
+```shell
+# You can also use wget
+curl -X POST https://api.mod.io/v1/games/{game-id}/mods/{mod-id}/files/multipart \
+  -H 'Authorization: Bearer {access-token}' \ 
+  -H 'Content-Type: application/x-www-form-urlencoded' \ 
+  -H 'Accept: application/json' \
+  -d 'filename=testfile.zip' \
+  -d 'nonce=a93d389804ee0490f1903ab26500a66a695ce65fa7ecb074d79771857d074355'
+
+```
+
+```http
+POST https://api.mod.io/v1/games/{game-id}/mods/{mod-id}/files/multipart HTTP/1.1
+Host: api.mod.io
+Content-Type: application/x-www-form-urlencoded
+Accept: application/json
+Authorization: Bearer {access-token}
+
+```
+
+```javascript
+var headers = {
+  'Authorization':'Bearer {access-token}',
+  'Content-Type':'application/x-www-form-urlencoded',
+  'Accept':'application/json'
+
+};
+
+$.ajax({
+  url: 'https://api.mod.io/v1/games/{game-id}/mods/{mod-id}/files/multipart',
+  method: 'post',
+
+  headers: headers,
+  success: function(data) {
+    console.log(JSON.stringify(data));
+  }
+})
+```
+
+```javascript--nodejs
+const request = require('node-fetch');
+const inputBody = '{
+  "filename": "testfile.zip",
+  "nonce": "a93d389804ee0490f1903ab26500a66a695ce65fa7ecb074d79771857d074355"
+}';
+const headers = {
+  'Authorization':'Bearer {access-token}',
+  'Content-Type':'application/x-www-form-urlencoded',
+  'Accept':'application/json'
+
+};
+
+fetch('https://api.mod.io/v1/games/{game-id}/mods/{mod-id}/files/multipart',
+{
+  method: 'POST',
+  body: inputBody,
+  headers: headers
+})
+.then(function(res) {
+    return res.json();
+}).then(function(body) {
+    console.log(body);
+});
+```
+
+```python
+import requests
+headers = {
+  'Authorization': 'Bearer {access-token}',
+  'Content-Type': 'application/x-www-form-urlencoded',
+  'Accept': 'application/json'
+}
+
+r = requests.post('https://api.mod.io/v1/games/{game-id}/mods/{mod-id}/files/multipart', params={
+
+}, headers = headers)
+
+print r.json()
+```
+
+```java
+URL obj = new URL("https://api.mod.io/v1/games/{game-id}/mods/{mod-id}/files/multipart");
+HttpURLConnection con = (HttpURLConnection) obj.openConnection();
+con.setRequestMethod("POST");
+int responseCode = con.getResponseCode();
+BufferedReader in = new BufferedReader(
+    new InputStreamReader(con.getInputStream()));
+String inputLine;
+StringBuffer response = new StringBuffer();
+while ((inputLine = in.readLine()) != null) {
+    response.append(inputLine);
+}
+in.close();
+System.out.println(response.toString());
+```
+
+`POST /games/{game-id}/mods/{mod-id}/files/multipart`
+
+Create a new multipart upload session. A successful request will return a single [Multipart Upload Object](#multipart-upload-object).
+
+    Parameter|Type|Required|Description
+    ---|---|---|---|
+    filename|string|true|The filename of the file once all the parts have been [uploaded](#add-multipart-upload-part). The filename must include the `.zip` extension and cannot exceed 100 characters.
+    nonce|string||An optional nonce to provide to prevent duplicate upload sessions from being created concurrently. Maximum of 64 characters.
+
+> Example response
+
+```json
+{
+  "upload_id": "123e4567-e89b-12d3-a456-426614174000",
+  "status": 0
+}
+
+```
+<h3 id="Create-Multipart-Upload-Session-responses">Responses</h3>
+
+Status|Meaning|Error Ref|Description|Response Schema
+---|---|----|---|---|
+200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)||Successful Request|[Multipart Upload Object](#schemamultipart_upload_object)
+400|[Bad Request](https://tools.ietf.org/html/rfc7231#section-6.5.1)|29002|The nonce you provided was already associated with a completed upload session. If you wish to start a new upload you should regenerate the nonce parameter.|[Error Object](#schemaerror_object)
+403|[Forbidden](https://tools.ietf.org/html/rfc7231#section-6.5.3)|15012|The authenticated user has had upload privileges restricted by mod.io admins, this is typically due to spam.|[Error Object](#schemaerror_object)
+403|[Forbidden](https://tools.ietf.org/html/rfc7231#section-6.5.3)|15006|The authenticated user does not have permission to upload modfiles for the specified mod, ensure the user is a team manager or administrator.|[Error Object](#schemaerror_object)
+<aside class="auth-notice">
+To perform this request, you must be authenticated via one of the following methods:
+<a href="#authentication">OAuth 2</a> (Scopes: write)
+</aside>
+## Delete Multipart Upload Session
+
+> Example request
+
+```shell
+# You can also use wget
+curl -X DELETE https://api.mod.io/v1/games/{game-id}/mods/{mod-id}/files/multipart?upload_id=123e4567-e89b-12d3-a456-426614174000 \
+  -H 'Authorization: Bearer {access-token}' \ 
+  -H 'Accept: application/json'
+
+```
+
+```http
+DELETE https://api.mod.io/v1/games/{game-id}/mods/{mod-id}/files/multipart?upload_id=123e4567-e89b-12d3-a456-426614174000 HTTP/1.1
+Host: api.mod.io
+
+Accept: application/json
+Authorization: Bearer {access-token}
+
+```
+
+```javascript
+var headers = {
+  'Authorization':'Bearer {access-token}',
+  'Accept':'application/json'
+
+};
+
+$.ajax({
+  url: 'https://api.mod.io/v1/games/{game-id}/mods/{mod-id}/files/multipart',
+  method: 'delete',
+  data: '?upload_id=123e4567-e89b-12d3-a456-426614174000',
+  headers: headers,
+  success: function(data) {
+    console.log(JSON.stringify(data));
+  }
+})
+```
+
+```javascript--nodejs
+const request = require('node-fetch');
+
+const headers = {
+  'Authorization':'Bearer {access-token}',
+  'Accept':'application/json'
+
+};
+
+fetch('https://api.mod.io/v1/games/{game-id}/mods/{mod-id}/files/multipart?upload_id=123e4567-e89b-12d3-a456-426614174000',
+{
+  method: 'DELETE',
+
+  headers: headers
+})
+.then(function(res) {
+    return res.json();
+}).then(function(body) {
+    console.log(body);
+});
+```
+
+```python
+import requests
+headers = {
+  'Authorization': 'Bearer {access-token}',
+  'Accept': 'application/json'
+}
+
+r = requests.delete('https://api.mod.io/v1/games/{game-id}/mods/{mod-id}/files/multipart', params={
+  'upload_id': '123e4567-e89b-12d3-a456-426614174000'
+}, headers = headers)
+
+print r.json()
+```
+
+```java
+URL obj = new URL("https://api.mod.io/v1/games/{game-id}/mods/{mod-id}/files/multipart?upload_id=123e4567-e89b-12d3-a456-426614174000");
+HttpURLConnection con = (HttpURLConnection) obj.openConnection();
+con.setRequestMethod("DELETE");
+int responseCode = con.getResponseCode();
+BufferedReader in = new BufferedReader(
+    new InputStreamReader(con.getInputStream()));
+String inputLine;
+StringBuffer response = new StringBuffer();
+while ((inputLine = in.readLine()) != null) {
+    response.append(inputLine);
+}
+in.close();
+System.out.println(response.toString());
+```
+
+`DELETE /games/{game-id}/mods/{mod-id}/files/multipart`
+
+Terminate an active multipart upload session, a successful request will return `204 No Content`.
+
+> Example response
+
+```json
+ 204 No Content 
+
+```
+<h3 id="Delete-Multipart-Upload-Session-responses">Responses</h3>
+
+Status|Meaning|Error Ref|Description|Response Schema
+---|---|----|---|---|
+204|[No Content](https://tools.ietf.org/html/rfc7231#section-6.3.5)||Successful Request. No Body Returned.|None
+403|[Forbidden](https://tools.ietf.org/html/rfc7231#section-6.5.3)|15012|The authenticated user has had upload privileges restricted by mod.io admins, this is typically due to spam.|[Error Object](#schemaerror_object)
+<aside class="auth-notice">
+To perform this request, you must be authenticated via one of the following methods:
+<a href="#authentication">OAuth 2</a> (Scopes: write)
+</aside>
+## Get Multipart Upload Sessions
+
+> Example request
+
+```shell
+# You can also use wget
+curl -X GET https://api.mod.io/v1/games/{game-id}/mods/{mod-id}/files/multipart/sessions?api_key=YourApiKey \
+  -H 'Accept: application/json'
+
+```
+
+```http
+GET https://api.mod.io/v1/games/{game-id}/mods/{mod-id}/files/multipart/sessions?api_key=YourApiKey HTTP/1.1
+Host: api.mod.io
+
+Accept: application/json
+
+```
+
+```javascript
+var headers = {
+  'Accept':'application/json'
+
+};
+
+$.ajax({
+  url: 'https://api.mod.io/v1/games/{game-id}/mods/{mod-id}/files/multipart/sessions',
+  method: 'get',
+  data: '?api_key=YourApiKey',
+  headers: headers,
+  success: function(data) {
+    console.log(JSON.stringify(data));
+  }
+})
+```
+
+```javascript--nodejs
+const request = require('node-fetch');
+
+const headers = {
+  'Accept':'application/json'
+
+};
+
+fetch('https://api.mod.io/v1/games/{game-id}/mods/{mod-id}/files/multipart/sessions?api_key=YourApiKey',
+{
+  method: 'GET',
+
+  headers: headers
+})
+.then(function(res) {
+    return res.json();
+}).then(function(body) {
+    console.log(body);
+});
+```
+
+```python
+import requests
+headers = {
+  'Accept': 'application/json'
+}
+
+r = requests.get('https://api.mod.io/v1/games/{game-id}/mods/{mod-id}/files/multipart/sessions', params={
+  'api_key': 'YourApiKey'
+}, headers = headers)
+
+print r.json()
+```
+
+```java
+URL obj = new URL("https://api.mod.io/v1/games/{game-id}/mods/{mod-id}/files/multipart/sessions?api_key=YourApiKey");
+HttpURLConnection con = (HttpURLConnection) obj.openConnection();
+con.setRequestMethod("GET");
+int responseCode = con.getResponseCode();
+BufferedReader in = new BufferedReader(
+    new InputStreamReader(con.getInputStream()));
+String inputLine;
+StringBuffer response = new StringBuffer();
+while ((inputLine = in.readLine()) != null) {
+    response.append(inputLine);
+}
+in.close();
+System.out.println(response.toString());
+```
+
+`GET /games/{game-id}/mods/{mod-id}/files/multipart/sessions`
+
+Get all upload sessions belonging to the authenticated user for the corresponding mod. Successful request will return an array of [Multipart Upload Part Objects](#get-multipart-upload-sessions). We recommended reading the [filtering documentation](#filtering) to return only the records you want.
+
+    Filter|Type|Description
+    ---|---|---
+    status|integer|Status of the upload session.<br><br>__0__ = Incomplete (default)<br>__1__ = Pending<br>__2__ = Processing<br>__3__ = Completed<br>__4__ = Cancelled
+
+> Example response
+
+```json
+{
+  "data": [
+    {
+      "upload_id": "123e4567-e89b-12d3-a456-426614174000",
+      "status": 0
+    },
+    {
+        ...
+    }
+  ],
+  "result_count": 70,
+  "result_offset": 0,
+  "result_limit": 100,
+  "result_total": 70
+}
+
+```
+<h3 id="Get-Multipart-Upload-Sessions-responses">Responses</h3>
+
+Status|Meaning|Error Ref|Description|Response Schema
+---|---|----|---|---|
+200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)||Successful Request|[Get Multipart Upload Sessions](#schemaget_multipart_upload_sessions)
+403|[Forbidden](https://tools.ietf.org/html/rfc7231#section-6.5.3)|15012|The authenticated user has had upload privileges restricted by mod.io admins, this is typically due to spam.|[Error Object](#schemaerror_object)
+<aside class="auth-notice">
+To perform this request, you must be authenticated via one of the following methods:
+<a href="#authentication">api_key</a>, <a href="#authentication">OAuth 2</a> (Scopes: read)
+</aside>
+## Complete Multipart Upload Session
+
+> Example request
+
+```shell
+# You can also use wget
+curl -X POST https://api.mod.io/v1/games/{game-id}/mods/{mod-id}/files/multipart/complete?upload_id=123e4567-e89b-12d3-a456-426614174000 \
+  -H 'Authorization: Bearer {access-token}' \ 
+  -H 'Accept: application/json'
+
+```
+
+```http
+POST https://api.mod.io/v1/games/{game-id}/mods/{mod-id}/files/multipart/complete?upload_id=123e4567-e89b-12d3-a456-426614174000 HTTP/1.1
+Host: api.mod.io
+
+Accept: application/json
+Authorization: Bearer {access-token}
+
+```
+
+```javascript
+var headers = {
+  'Authorization':'Bearer {access-token}',
+  'Accept':'application/json'
+
+};
+
+$.ajax({
+  url: 'https://api.mod.io/v1/games/{game-id}/mods/{mod-id}/files/multipart/complete',
+  method: 'post',
+  data: '?upload_id=123e4567-e89b-12d3-a456-426614174000',
+  headers: headers,
+  success: function(data) {
+    console.log(JSON.stringify(data));
+  }
+})
+```
+
+```javascript--nodejs
+const request = require('node-fetch');
+
+const headers = {
+  'Authorization':'Bearer {access-token}',
+  'Accept':'application/json'
+
+};
+
+fetch('https://api.mod.io/v1/games/{game-id}/mods/{mod-id}/files/multipart/complete?upload_id=123e4567-e89b-12d3-a456-426614174000',
+{
+  method: 'POST',
+
+  headers: headers
+})
+.then(function(res) {
+    return res.json();
+}).then(function(body) {
+    console.log(body);
+});
+```
+
+```python
+import requests
+headers = {
+  'Authorization': 'Bearer {access-token}',
+  'Accept': 'application/json'
+}
+
+r = requests.post('https://api.mod.io/v1/games/{game-id}/mods/{mod-id}/files/multipart/complete', params={
+  'upload_id': '123e4567-e89b-12d3-a456-426614174000'
+}, headers = headers)
+
+print r.json()
+```
+
+```java
+URL obj = new URL("https://api.mod.io/v1/games/{game-id}/mods/{mod-id}/files/multipart/complete?upload_id=123e4567-e89b-12d3-a456-426614174000");
+HttpURLConnection con = (HttpURLConnection) obj.openConnection();
+con.setRequestMethod("POST");
+int responseCode = con.getResponseCode();
+BufferedReader in = new BufferedReader(
+    new InputStreamReader(con.getInputStream()));
+String inputLine;
+StringBuffer response = new StringBuffer();
+while ((inputLine = in.readLine()) != null) {
+    response.append(inputLine);
+}
+in.close();
+System.out.println(response.toString());
+```
+
+`POST /games/{game-id}/mods/{mod-id}/files/multipart/complete`
+
+Complete an active multipart upload session, this endpoint assumes that you have already uploaded
+    all individual parts. A successful request will return a `202 Accepted` response code and provides a `Location` header
+    with a URL that you can use to later query to check if the merge was successfully completed, it will also
+    return a single [Multipart Upload Object](#multipart-upload-object).
+
+> Example response
+
+```json
+{
+  "upload_id": "123e4567-e89b-12d3-a456-426614174000",
+  "status": 0
+}
+
+```
+<h3 id="Complete-Multipart-Upload-Session-responses">Responses</h3>
+
+Status|Meaning|Error Ref|Description|Response Schema
+---|---|----|---|---|
+202|[Accepted](https://tools.ietf.org/html/rfc7231#section-6.3.3)||Successful Request|[Multipart Upload Object](#schemamultipart_upload_object)
+403|[Forbidden](https://tools.ietf.org/html/rfc7231#section-6.5.3)|15012|The authenticated user has had upload privileges restricted by mod.io admins, this is typically due to spam.|[Error Object](#schemaerror_object)
+403|[Forbidden](https://tools.ietf.org/html/rfc7231#section-6.5.3)|15006|The authenticated user does not have permission to upload modfiles for the specified mod, ensure the user is a team manager or administrator.|[Error Object](#schemaerror_object)
+<aside class="auth-notice">
+To perform this request, you must be authenticated via one of the following methods:
+<a href="#authentication">OAuth 2</a> (Scopes: write)
+</aside>
+## Get Multipart Upload Status
+
+> Example request
+
+```shell
+# You can also use wget
+curl -X GET https://api.mod.io/v1/games/{game-id}/mods/{mod-id}/files/multipart/status?api_key=YourApiKey&upload_id=123e4567-e89b-12d3-a456-426614174000 \
+  -H 'Accept: application/json'
+
+```
+
+```http
+GET https://api.mod.io/v1/games/{game-id}/mods/{mod-id}/files/multipart/status?api_key=YourApiKey&upload_id=123e4567-e89b-12d3-a456-426614174000 HTTP/1.1
+Host: api.mod.io
+
+Accept: application/json
+
+```
+
+```javascript
+var headers = {
+  'Accept':'application/json'
+
+};
+
+$.ajax({
+  url: 'https://api.mod.io/v1/games/{game-id}/mods/{mod-id}/files/multipart/status',
+  method: 'get',
+  data: '?api_key=YourApiKey&upload_id=123e4567-e89b-12d3-a456-426614174000',
+  headers: headers,
+  success: function(data) {
+    console.log(JSON.stringify(data));
+  }
+})
+```
+
+```javascript--nodejs
+const request = require('node-fetch');
+
+const headers = {
+  'Accept':'application/json'
+
+};
+
+fetch('https://api.mod.io/v1/games/{game-id}/mods/{mod-id}/files/multipart/status?api_key=YourApiKey&upload_id=123e4567-e89b-12d3-a456-426614174000',
+{
+  method: 'GET',
+
+  headers: headers
+})
+.then(function(res) {
+    return res.json();
+}).then(function(body) {
+    console.log(body);
+});
+```
+
+```python
+import requests
+headers = {
+  'Accept': 'application/json'
+}
+
+r = requests.get('https://api.mod.io/v1/games/{game-id}/mods/{mod-id}/files/multipart/status', params={
+  'api_key': 'YourApiKey',  'upload_id': '123e4567-e89b-12d3-a456-426614174000'
+}, headers = headers)
+
+print r.json()
+```
+
+```java
+URL obj = new URL("https://api.mod.io/v1/games/{game-id}/mods/{mod-id}/files/multipart/status?api_key=YourApiKey&upload_id=123e4567-e89b-12d3-a456-426614174000");
+HttpURLConnection con = (HttpURLConnection) obj.openConnection();
+con.setRequestMethod("GET");
+int responseCode = con.getResponseCode();
+BufferedReader in = new BufferedReader(
+    new InputStreamReader(con.getInputStream()));
+String inputLine;
+StringBuffer response = new StringBuffer();
+while ((inputLine = in.readLine()) != null) {
+    response.append(inputLine);
+}
+in.close();
+System.out.println(response.toString());
+```
+
+`GET /games/{game-id}/mods/{mod-id}/files/multipart/status`
+
+Get the status of an existing multipart upload session, if the session is not yet complete,
+    a `Retry-After` header will be returned with the recommended amount of time you should wait before checking again.
+    A successful request will return a single [Multipart Upload Object](#multipart-upload-object).
+
+> Example response
+
+```json
+{
+  "upload_id": "123e4567-e89b-12d3-a456-426614174000",
+  "status": 0
+}
+
+```
+<h3 id="Get-Multipart-Upload-Status-responses">Responses</h3>
+
+Status|Meaning|Error Ref|Description|Response Schema
+---|---|----|---|---|
+200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)||Successful Request|[Multipart Upload Object](#schemamultipart_upload_object)
+403|[Forbidden](https://tools.ietf.org/html/rfc7231#section-6.5.3)|15012|The authenticated user has had upload privileges restricted by mod.io admins, this is typically due to spam.|[Error Object](#schemaerror_object)
+<aside class="auth-notice">
+To perform this request, you must be authenticated via one of the following methods:
+<a href="#authentication">api_key</a>, <a href="#authentication">OAuth 2</a> (Scopes: read)
+</aside>
 # Subscribe
 
 ## Subscribe To Mod
@@ -5169,6 +6037,7 @@ Subscribe the _authenticated user_ to a corresponding mod. No body parameters ar
   "maturity_option": 0,
   "community_options": 3,
   "price": 0,
+  "tax": 0,
   "logo": {
     "filename": "card.png",
     "original": "https://assets.modcdn.io/images/placeholder/card.png",
@@ -10465,6 +11334,7 @@ Get all mod's the _authenticated user_ is subscribed to. Successful request will
       "maturity_option": 0,
       "community_options": 3,
       "price": 0,
+      "tax": 0,
       "logo": {
         "filename": "card.png",
         "original": "https://assets.modcdn.io/images/placeholder/card.png",
@@ -10744,6 +11614,7 @@ Get all mods the _authenticated user_ added or is a team member of. Successful r
       "maturity_option": 0,
       "community_options": 3,
       "price": 0,
+      "tax": 0,
       "logo": {
         "filename": "card.png",
         "original": "https://assets.modcdn.io/images/placeholder/card.png",
@@ -12106,6 +12977,7 @@ result_total|integer|Total number of results found.
       "maturity_option": 0,
       "community_options": 3,
       "price": 0,
+      "tax": 0,
       "logo": {
         "filename": "card.png",
         "original": "https://assets.modcdn.io/images/placeholder/card.png",
@@ -12226,6 +13098,76 @@ data|[Mod Object](#schemamod_object)[]|Array containing mod objects.
 result_count|integer|Number of results returned in this request.
 result_offset|integer|Number of results skipped over. Defaults to 0 unless overridden by `_offset` filter.
 result_limit|integer|Maximum number of results returned in the request. Defaults to 100 (max) unless overridden by `_limit` filter.
+result_total|integer|Total number of results found.
+
+
+
+## Get Multipart Upload Parts 
+
+<a name="schemaget_multipart_upload_parts"></a>
+
+```json
+{
+  "data": [
+    {
+      "upload_id": "123e4567-e89b-12d3-a456-426614174000",
+      "part_number": 1,
+      "part_size": 52428800,
+      "date_added": 1499846132
+    },
+    {
+        ...
+    }
+  ],
+  "result_count": 70,
+  "result_offset": 0,
+  "result_limit": 100,
+  "result_total": 70
+} 
+```
+
+### Properties
+
+Name|Type|Description
+---|---|---|---|
+data|[Multipart Upload Part Object](#schemamultipart_upload_part_object)[]|Array containing Multipart Upload Part Objects.
+result_count|integer|Number of results returned in this request.
+result_offset|integer|Number of results skipped over. Defaults to 0 unless overridden by `_offset` filter.
+result_limit|integer|Maximum number of results returned in the request. Defaults to 100(max) unless overridden by `_limit` filter.
+result_total|integer|Total number of results found.
+
+
+
+## Get Multipart Upload Sessions 
+
+<a name="schemaget_multipart_upload_sessions"></a>
+
+```json
+{
+  "data": [
+    {
+      "upload_id": "123e4567-e89b-12d3-a456-426614174000",
+      "status": 0
+    },
+    {
+        ...
+    }
+  ],
+  "result_count": 70,
+  "result_offset": 0,
+  "result_limit": 100,
+  "result_total": 70
+} 
+```
+
+### Properties
+
+Name|Type|Description
+---|---|---|---|
+data|[Multipart Upload Object](#schemamultipart_upload_object)[]|Array containing Multipart Upload Part Objects.
+result_count|integer|Number of results returned in this request.
+result_offset|integer|Number of results skipped over. Defaults to 0 unless overridden by `_offset` filter.
+result_limit|integer|Maximum number of results returned in the request. Defaults to 100(max) unless overridden by `_limit` filter.
 result_total|integer|Total number of results found.
 
 
@@ -12701,6 +13643,7 @@ onboarded|string|Has the team completed setup?
   "maturity_option": 0,
   "community_options": 3,
   "price": 0,
+  "tax": 0,
   "logo": {
     "filename": "card.png",
     "original": "https://assets.modcdn.io/images/placeholder/card.png",
@@ -12819,6 +13762,7 @@ date_live|integer|Unix timestamp of date mod was set live.
 maturity_option|integer|Maturity options flagged by the mod developer, this is only relevant if the parent game allows mods to be labelled as mature.<br><br>__0__ = None set _(default)_<br>__1__ = Alcohol<br>__2__ = Drugs<br>__4__ = Violence<br>__8__ = Explicit<br>__?__ = Add the options you want together, to enable multiple filters (see [BITWISE fields](#bitwise-and-bitwise-and))
 community_options|integer|Community features enabled for this mod by its creators. :<br><br>__0__ = All of the options below are disabled<br>__1__ = Enable comments _(default)_<br>__2__ = Enable guides<br>__?__ = Add the options you want together, to enable multiple features (see [BITWISE fields](#bitwise-and-bitwise-and))
 price|float|The price of the mod.
+tax|int|The tax of the mod.
 logo|[Logo Object](#schemalogo_object)|Contains media URL's to the logo for the mod.
 homepage_url|string|Official homepage of the mod.
 name|string|Name of the mod.
@@ -13052,6 +13996,50 @@ Name|Type|Description
 enabled|boolean|Monetisation Enable/Disabled.
 patronage|boolean|Patronage Enable/Disabled.
 marketplace|boolean|Marketplace Enable/Disabled.
+
+
+
+## Multipart Upload Object  
+
+<a name="schemamultipart_upload_object"></a>
+
+```json
+{
+  "upload_id": "123e4567-e89b-12d3-a456-426614174000",
+  "status": 0
+} 
+```
+
+### Properties
+
+Name|Type|Description
+---|---|---|---|
+upload_id|string|A universally unique identifier (UUID) that represents the upload session.
+status|integer|The status of the upload session.<br><br>__0__ = Incomplete<br>__1__ = Pending<br>__2__ = Processing<br>__3__ - Complete<br>__4__ = Cancelled
+
+
+
+## Multipart Upload Part Object 
+
+<a name="schemamultipart_upload_part_object"></a>
+
+```json
+{
+  "upload_id": "123e4567-e89b-12d3-a456-426614174000",
+  "part_number": 1,
+  "part_size": 52428800,
+  "date_added": 1499846132
+} 
+```
+
+### Properties
+
+Name|Type|Description
+---|---|---|---|
+upload_id|string|A universally unique identifier (UUID) that represents the upload session.
+part_number|integer|The part number this object represents.
+part_size|integer|The size of this part in bytes.
+date_added|integer|Unix timestamp of date the part was uploaded.
 
 
 
