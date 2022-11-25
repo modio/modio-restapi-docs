@@ -709,12 +709,12 @@ It is _highly recommended_ you architect your app to check for the `429 Too Many
 
 ### OAuth2 Rate Limiting
 
-- User token reads are limited to __200 requests per minute__. 
+- User tokens are limited to __120 requests per minute__. 
 - User token writes are limited to __60 requests per minute__. 
 
 ### IP Rate Limiting
 
-- IP reads are limited to __1000 requests per minute__. 
+- IPs are limited to __1000 requests per minute__. 
 - IP writes are limited to __60 requests per minute__. 
 
 ### Other Rate Limiting
@@ -785,10 +785,13 @@ If you spot any errors within the mod.io documentation, have feedback on how we 
 
 ## Targeting a Platform
 
+mod.io supports mods on all platforms. Games can enable per-platform mod file support in their dashboard, if they wish to control which platforms each mod and their corresponding files can be accessed on. Otherwise, all mods and their files will be available on all platforms the game supports. To make this system work, it's important the following headers are included in all API requests as explained below. If you have any questions about setting up cross-platform mod support in your game, please reach out to [developers@mod.io](mailto:developers@mod.io?subject=API).
+
 When making API requests you should include the `X-Modio-Platform` header (with one of the values below), to tell mod.io what Platform the request is originating from. This header is __important__ because it enables mod.io to return data that is approved for the platform such as:
 
  - Supported mods and files
  - Supported tags the player can filter on
+ - Localization of content for the platform
  - It also enables platform specific metrics
 
 For example, passing the HTTP header `X-Modio-Platform: XboxSeriesX` in your API request tells mod.io your player is on Xbox Series X.
@@ -1336,6 +1339,7 @@ Request an access token on behalf of a PlayStation™ Network (PSN) user. A Succ
      Parameter|Type|Required|Description
      ---|---|---|---|
      auth_code|string|true|The auth code returned from the PlayStation™ Network API.
+     env|integer||The PlayStation™ Network environment you are targeting
      email|string||The users email address. If supplied, and the respective user does not have an email registered for their account we will send a confirmation email to confirm they have ownership of the specified email.
      date_expires|integer||Unix timestamp of date in which the returned token will expire. Value cannot be higher than the default value which is a common year (unix timestamp + 31536000 seconds). Using a token after it's expiry time has elapsed will result in a `401 Unauthorized` response.
      terms_agreed|boolean||This MUST be set to `false` unless you have collected the [users agreement](#terms) prior to calling this endpoint in which case it can be set to `true` and will be recorded.<br><br>__NOTE:__ If this is set to `false` and the user has not agreed to the latest mod.io Terms of Use and Privacy Policy, an error `403 Forbidden (error_ref 11074)` will be returned and you will need to collect the [users agreement](#terms) and retry with this value set to `true` to authenticate the user.
@@ -2629,12 +2633,21 @@ Get all games. Successful request will return an array of [Game Objects](#get-ga
     ugc_name|string|Word used to describe user-generated content (mods, items, addons etc).
     presentation_option|integer|Presentation style used on the mod.io website:<br><br>__0__ =  Grid View: Displays mods in a grid<br>__1__ = Table View: Displays mods in a table
     submission_option|integer|Submission process modders must follow:<br><br>__0__ = Mod uploads must occur via the API using a tool created by the game developers<br>__1__ = Mod uploads can occur from anywhere, including the website and API
-    curation_option|integer|Curation process used to approve mods:<br><br>__0__ = No curation: Mods are immediately available to play<br>__1__ = Paid curation: Mods are immediately available to play unless they choose to receive donations. These mods must be accepted to be listed<br>__2__ = Full curation: All mods must be accepted by someone to be listed
+    curation_option|integer|Curation process used to approve mods:<br><br>__0__ = No curation: Mods are immediately available to play<br>__2__ = Full curation: All mods must be accepted by someone to be listed
     community_options|integer|Community features enabled on the mod.io website:<br><br>__0__ = All of the options below are disabled<br>__1__ = Enable comments<br>__2__ = Enable guides<br>__?__ = Combine to find games with multiple options enabled (see [BITWISE fields](#bitwise-and-bitwise-and))
     revenue_options|integer|Revenue capabilities mods can enable:<br><br>__0__ = All of the options below are disabled<br>__1__ = Allow mods to be sold<br>__2__ = Allow mods to receive donations<br>__4__ = Allow mods to be traded<br>__8__ = Allow mods to control supply and scarcity<br>__?__ = Combine to find games with multiple options enabled (see [BITWISE fields](#bitwise-and-bitwise-and))
     api_access_options|integer|Level of API access allowed by this game:<br><br>__0__ = All of the options below are disabled<br>__1__ = Allow 3rd parties to access this games API endpoints<br>__2__ = Allow mods to be downloaded directly (if disabled all download URLs will contain a frequently changing verification hash to stop unauthorized use)<br>__?__ = Combine to find games with multiple options enabled (see [BITWISE fields](#bitwise-and-bitwise-and))
     maturity_options|integer|Mature content setup for this game:<br><br>__0__ = Don't allow mature content in mods _(default)_<br>__1__ = Allow mature content in mods<br>__2__ = This game is for mature audiences only<br>__?__ = Combine to find games with multiple options enabled (see [BITWISE fields](#bitwise-and-bitwise-and)
+
+    Display|Type|Description
+    ---|---|---
     show_hidden_tags|bool|show the hidden tags associated with the given game.
+
+    Sort|Description
+    ---|---
+    popular|Sort results by popularity using [_sort filter](#filtering), value should be `popular` for descending or `-popular` for ascending results. __NOTE:__ Popularity is calculated hourly and reset daily (results are ranked from 1 to X). You should sort this column in ascending order `-popular` to get the top ranked results.
+    popular_overall|Sort results by 'Popular Overall' using [_sort filter](#filtering), value should be `popular_overall` for descending or `-popular_overall` for ascending results. __NOTE:__ You should sort this column in ascending order `-popular_overall` to get the top ranked results. This filter differs from popular by filtering on the amount of downloads the game has received overall, and not just in the last 24 hours.
+    subscribers|Sort results by most subscribers using [_sort filter](#filtering), value should be `subscribers` for descending or `-subscribers` for ascending results.
 
 > Example response
 
@@ -2708,7 +2721,7 @@ Get all games. Successful request will return an array of [Game Objects](#get-ga
       "monetisation": {
         "monetisation_team_id": 0,
         "monetisation_type": "kyc",
-        "platform_cut": "The platform cut for this team.",
+        "patronage_platform_cut": "The patronage platform cut for this team.",
         "onboarded": "pending"
       },
       "stats": {
@@ -2925,7 +2938,7 @@ Get a game. Successful request will return a single [Game Object](#game-object).
   "monetisation": {
     "monetisation_team_id": 0,
     "monetisation_type": "kyc",
-    "platform_cut": "The platform cut for this team.",
+    "patronage_platform_cut": "The patronage platform cut for this team.",
     "onboarded": "pending"
   },
   "stats": {
@@ -3080,10 +3093,13 @@ Get all mods for the corresponding game. Successful request will return an array
     tags|string|Comma-separated values representing the tags you want to filter the results by. If you specify multiple tags, only mods which have all tags will be returned, and only tags that are supported by the parent game can be applied. To determine what tags are eligible, see the tags values within `tag_options` column on the parent [Game Object](#game-object). If you want to ensure mods returned do not contain particular tag(s), you can use the `tags-not-in` filter either independently or alongside this filter.
     platform_status|string|Filter results by their current platform status, valid values are `pending_only` and `live_and_pending`. The use of this filter requires the authenticated user to be a member of the parent game team. Note that this parameter is only considered in the request if the parent game has enabled [cross-platform filtering](#targeting-a-platform).
     platforms|string|Filter results by their current platform, accepts multiple platforms as comma-separated values (e.g. `ps4,switch`), valid values are `all`, `windows`, `mac`, `linux`, `android`, `ios`, `xboxone`, `xboxseriesx`, `ps4`, `ps5`, `switch`, `oculus`. The use of this filter requires the authenticated user to be a member of the parent game team. Note that this parameter will take precedence over the header from [cross-platform filtering](#targeting-a-platform).
-    downloads|string|Sort results by most downloads using [_sort filter](#filtering) parameter, value should be `downloads` for descending or `-downloads` for ascending results.
-    popular|string|Sort results by popularity using [_sort filter](#filtering), value should be `popular` for descending or `-popular` for ascending results. __NOTE:__ Popularity is calculated hourly and reset daily (results are ranked from 1 to X). You should sort this column in ascending order `-popular` to get the top ranked results.
-    rating|string|Sort results by weighted rating using [_sort filter](#filtering), value should be `rating` for descending or `-rating` for ascending results.
-    subscribers|string|Sort results by most subscribers using [_sort filter](#filtering), value should be `subscribers` for descending or `-subscribers` for ascending results.
+
+    Sort|Description
+    ---|---
+    downloads|Sort results by most downloads using [_sort filter](#filtering) parameter, value should be `downloads` for descending or `-downloads` for ascending results.
+    popular|Sort results by popularity using [_sort filter](#filtering), value should be `popular` for descending or `-popular` for ascending results. __NOTE:__ Popularity is calculated hourly and reset daily (results are ranked from 1 to X). You should sort this column in ascending order `-popular` to get the top ranked results.
+    rating|Sort results by weighted rating using [_sort filter](#filtering), value should be `rating` for descending or `-rating` for ascending results.
+    subscribers|Sort results by most subscribers using [_sort filter](#filtering), value should be `subscribers` for descending or `-subscribers` for ascending results.
 
 > Example response
 
@@ -3159,7 +3175,7 @@ Get all mods for the corresponding game. Successful request will return an array
         "date_scanned": 1499841487,
         "virus_status": 0,
         "virus_positive": 0,
-        "virustotal_hash": "f9a7bf4a95ce20787337b685a79677cae2281b83c63ab0a25f091407741692af-1508147401",
+        "virustotal_hash": "",
         "filesize": 15181,
         "filehash": {
           "md5": "2d4a0e2d7273db6b0a94b0740a88ad0d"
@@ -3409,7 +3425,7 @@ Get a mod. Successful request will return a single [Mod Object](#mod-object).
     "date_scanned": 1499841487,
     "virus_status": 0,
     "virus_positive": 0,
-    "virustotal_hash": "f9a7bf4a95ce20787337b685a79677cae2281b83c63ab0a25f091407741692af-1508147401",
+    "virustotal_hash": "",
     "filesize": 15181,
     "filehash": {
       "md5": "2d4a0e2d7273db6b0a94b0740a88ad0d"
@@ -3682,7 +3698,7 @@ Add a mod. Successful request will return the newly created [Mod Object](#mod-ob
     "date_scanned": 1499841487,
     "virus_status": 0,
     "virus_positive": 0,
-    "virustotal_hash": "f9a7bf4a95ce20787337b685a79677cae2281b83c63ab0a25f091407741692af-1508147401",
+    "virustotal_hash": "",
     "filesize": 15181,
     "filehash": {
       "md5": "2d4a0e2d7273db6b0a94b0740a88ad0d"
@@ -3865,6 +3881,7 @@ Edit details for a mod. If you want to update the `logo` or media associated wit
 
     Parameter|Type|Required|Description
     ---|---|---|---|
+    logo|file|true|Image file which will represent your mods logo. Must be gif, jpg or png format and cannot exceed 8MB in filesize. Dimensions must be at least 512x288 and we recommended you supply a high resolution image with a 16 / 9 ratio. mod.io will use this image to make three thumbnails for the dimensions 320x180, 640x360 and 1280x720.
     status|integer||Status of a mod. The mod must have at least one uploaded `modfile` to be 'accepted' (best if this field is controlled by game admins, see [status and visibility](#status-amp-visibility) for details):<br><br>__0__ = Not accepted<br>__1__ = Accepted (game admins only)<br>__3__ = Deleted (use the [delete mod](#delete-mod) endpoint to set this status)
     visible|integer||Visibility of the mod (best if this field is controlled by mod admins, see [status and visibility](#status-amp-visibility) for details):<br><br>__0__ = Hidden<br>__1__ = Public
     name|string||Name of your mod. Cannot exceed 50 characters.
@@ -3949,7 +3966,7 @@ Edit details for a mod. If you want to update the `logo` or media associated wit
     "date_scanned": 1499841487,
     "virus_status": 0,
     "virus_positive": 0,
-    "virustotal_hash": "f9a7bf4a95ce20787337b685a79677cae2281b83c63ab0a25f091407741692af-1508147401",
+    "virustotal_hash": "",
     "filesize": 15181,
     "filehash": {
       "md5": "2d4a0e2d7273db6b0a94b0740a88ad0d"
@@ -4265,7 +4282,7 @@ Get all files that are published for the corresponding mod. Successful request w
       "date_scanned": 1499841487,
       "virus_status": 0,
       "virus_positive": 0,
-      "virustotal_hash": "f9a7bf4a95ce20787337b685a79677cae2281b83c63ab0a25f091407741692af-1508147401",
+      "virustotal_hash": "",
       "filesize": 15181,
       "filehash": {
         "md5": "2d4a0e2d7273db6b0a94b0740a88ad0d"
@@ -4409,7 +4426,7 @@ Get a file. Successful request will return a single [Modfile Object](#modfile-ob
   "date_scanned": 1499841487,
   "virus_status": 0,
   "virus_positive": 0,
-  "virustotal_hash": "f9a7bf4a95ce20787337b685a79677cae2281b83c63ab0a25f091407741692af-1508147401",
+  "virustotal_hash": "",
   "filesize": 15181,
   "filehash": {
     "md5": "2d4a0e2d7273db6b0a94b0740a88ad0d"
@@ -4562,7 +4579,7 @@ Upload a file for the corresponding mod. Successful request will return the newl
     active|boolean||_Default value is true._ Flag this upload as the current release, this will change the `modfile` field on the parent mod to the `id` of this file after upload.<br><br>__NOTE:__ If the _active_ parameter is _true_, a [__MODFILE_CHANGED__ event](#get-mod-events) will be fired, so game clients know there is an update available for this mod.
     filehash|string||MD5 of the submitted file. When supplied the MD5 will be compared against the uploaded files MD5. If they don't match a `422 Unprocessible Entity` error will be returned.
     metadata_blob|string||Metadata stored by the game developer which may include properties such as what version of the game this file is compatible with.
-    platforms|array|If platform filtering enabled|An array containing one or more [platforms](#targeting-a-platform) this file is targetting. Valid values can be found under the [targeting a platform](#targeting-a-platform) section.
+    platforms|array|If platform filtering enabled|An array containing one or more [platforms](#targeting-a-platform) this file is targeting. Valid values can be found under the [targeting a platform](#targeting-a-platform) section.
 
 > Example response
 
@@ -4574,7 +4591,7 @@ Upload a file for the corresponding mod. Successful request will return the newl
   "date_scanned": 1499841487,
   "virus_status": 0,
   "virus_positive": 0,
-  "virustotal_hash": "f9a7bf4a95ce20787337b685a79677cae2281b83c63ab0a25f091407741692af-1508147401",
+  "virustotal_hash": "",
   "filesize": 15181,
   "filehash": {
     "md5": "2d4a0e2d7273db6b0a94b0740a88ad0d"
@@ -4734,7 +4751,7 @@ Edit the details of a published file. If you want to update fields other than th
   "date_scanned": 1499841487,
   "virus_status": 0,
   "virus_positive": 0,
-  "virustotal_hash": "f9a7bf4a95ce20787337b685a79677cae2281b83c63ab0a25f091407741692af-1508147401",
+  "virustotal_hash": "",
   "filesize": 15181,
   "filehash": {
     "md5": "2d4a0e2d7273db6b0a94b0740a88ad0d"
@@ -5005,7 +5022,7 @@ Manage the platform status of a particular modfile. This endpoint does not set a
   "date_scanned": 1499841487,
   "virus_status": 0,
   "virus_positive": 0,
-  "virustotal_hash": "f9a7bf4a95ce20787337b685a79677cae2281b83c63ab0a25f091407741692af-1508147401",
+  "virustotal_hash": "",
   "filesize": 15181,
   "filehash": {
     "md5": "2d4a0e2d7273db6b0a94b0740a88ad0d"
@@ -5641,7 +5658,7 @@ Get all upload sessions belonging to the authenticated user for the correspondin
 
     Filter|Type|Description
     ---|---|---
-    status|integer|Status of the upload session.<br><br>__0__ = Incomplete (default)<br>__1__ = Pending<br>__2__ = Processing<br>__3__ = Completed<br>__4__ = Cancelled
+    status|integer|Status of the upload session:<br><br>__0__ = Incomplete (default)<br>__1__ = Pending<br>__2__ = Processing<br>__3__ = Completed<br>__4__ = Cancelled
 
 > Example response
 
@@ -6076,7 +6093,7 @@ Subscribe the _authenticated user_ to a corresponding mod. No body parameters ar
     "date_scanned": 1499841487,
     "virus_status": 0,
     "virus_positive": 0,
-    "virustotal_hash": "f9a7bf4a95ce20787337b685a79677cae2281b83c63ab0a25f091407741692af-1508147401",
+    "virustotal_hash": "",
     "filesize": 15181,
     "filehash": {
       "md5": "2d4a0e2d7273db6b0a94b0740a88ad0d"
@@ -6386,6 +6403,7 @@ Get all comments posted in the mods profile. Successful request will return an a
   "data": [
     {
       "id": 2,
+      "game_id": 2,
       "mod_id": 2,
       "resource_id": 2,
       "user": {
@@ -6545,6 +6563,7 @@ Add a comment for the corresponding mod. Successful request will return the newl
 ```json
 {
   "id": 2,
+  "game_id": 2,
   "mod_id": 2,
   "resource_id": 2,
   "user": {
@@ -6686,6 +6705,7 @@ Get a Mod Comment. Successful request will return a single [Comment Object](#com
 ```json
 {
   "id": 2,
+  "game_id": 2,
   "mod_id": 2,
   "resource_id": 2,
   "user": {
@@ -6836,6 +6856,7 @@ Update a comment for the corresponding mod. Successful request will return the u
 ```json
 {
   "id": 2,
+  "game_id": 2,
   "mod_id": 2,
   "resource_id": 2,
   "user": {
@@ -7102,6 +7123,7 @@ Update the Karma rating in single increments or decrements for a corresponding m
 ```json
 {
   "id": 2,
+  "game_id": 2,
   "mod_id": 2,
   "resource_id": 2,
   "user": {
@@ -8056,8 +8078,8 @@ Add tags which mods can apply to their profiles. Successful request will return 
     ---|---|---|---|
     name|string|true|Name of the tag group, for example you may want to have 'Difficulty' as the name with 'Easy', 'Medium' and 'Hard' as the tag values.<br><br>__NOTE:__ If the tag name already exists, its parameters will be overwritten and new tags will be added to the group (an edit). There is a separate endpoint to [delete tags](#delete-game-tag-option).
     type|string|true|Determines whether you allow users to only select one tag (dropdown) or multiple tags (checkbox):<br><br>- _dropdown_ = Mods can select only one tag from this group, dropdown menu shown on site profile.<br>- _checkboxes_ = Mods can select multiple tags from this group, checkboxes shown on site profile.
-    hidden|boolean||This group of tags should not be editable or shown to users. Useful for games to tag special functionality, to filter on and use behind the scenes. You can also use [Metadata Key Value Pairs](#metadata) for more arbitrary data.
-    locked|boolean||This group of tags should not be editable but can be shown to users. Useful for games to tag special functionality, which users can see and filter on.
+    hidden|boolean||This group of tags should not be shown to users. Useful for games to tag special functionality, to filter on and use behind the scenes. You can also use [Metadata Key Value Pairs](#metadata) for more arbitrary data.
+    locked|boolean||This group of tags can only be edited by game admins. Useful for games to tag special functionality, which users can see and filter on. Can be combined with hidden if you want the tags group locked and hidden.
     tags[]|string|true|Tags that mod creators can choose to apply to their mods. Every tag to apply requires a separate field with tags[] as the key (eg. tags[]=Easy, tags[]=Medium, tags[]=Hard).
 
 > Example response
@@ -10256,7 +10278,7 @@ System.out.println(response.toString());
 
 `POST /report`
 
-Report a resource on mod.io. You are responsible for content your users submit, so properly supporting the report endpoint or linking to the report page [https://mod.io/report/widget](https://mod.io/report) is important. Successful request will return [Message Object](#message-object).
+Report a resource on mod.io. You are responsible for content your users submit, so properly supporting the report endpoint or linking to the report page [https://mod.io/report/widget](https://mod.io/report/widget) is important. Successful request will return [Message Object](#message-object).
 
      __NOTE:__ If you want to link to our report page and you know the resource you want to report, the best URL to use is https://mod.io/report/`resource`/`id`/widget. For example to report a mod with an ID of 1 the URL would be: [https://mod.io/report/mods/1/widget](https://mod.io/report/mods/1/widget).
      __NOTE:__ If you are a game owner or manager, you can [view all reports](https://mod.io/me/library) submitted for your game. You can also configure in your games control panel the number of reports required before content is automatically taken down for review.
@@ -10903,7 +10925,7 @@ Get all modfiles the _authenticated user_ uploaded. Successful request will retu
       "date_scanned": 1499841487,
       "virus_status": 0,
       "virus_positive": 0,
-      "virustotal_hash": "f9a7bf4a95ce20787337b685a79677cae2281b83c63ab0a25f091407741692af-1508147401",
+      "virustotal_hash": "",
       "filesize": 15181,
       "filehash": {
         "md5": "2d4a0e2d7273db6b0a94b0740a88ad0d"
@@ -11053,11 +11075,20 @@ Get all games the _authenticated user_ added or is a team member of. Successful 
     ugc_name|string|Word used to describe user-generated content (mods, items, addons etc).
     presentation_option|integer|Presentation style used on the mod.io website:<br><br>__0__ =  Grid View: Displays mods in a grid<br>__1__ = Table View: Displays mods in a table
     submission_option|integer|Submission process modders must follow:<br><br>__0__ = Mod uploads must occur via the API using a tool created by the game developers<br>__1__ = Mod uploads can occur from anywhere, including the website and API
-    curation_option|integer|Curation process used to approve mods:<br><br>__0__ = No curation: Mods are immediately available to play<br>__1__ = Paid curation: Mods are immediately available to play unless they choose to receive donations. These mods must be accepted to be listed<br>__2__ = Full curation: All mods must be accepted by someone to be listed
+    curation_option|integer|Curation process used to approve mods:<br><br>__0__ = No curation: Mods are immediately available to play<br>__2__ = Full curation: All mods must be accepted by someone to be listed
     community_options|integer|Community features enabled on the mod.io website:<br><br>__0__ = All of the options below are disabled<br>__1__ = Enable comments<br>__2__ = Enable guides<br>__?__ = Combine to find games with multiple options enabled (see [BITWISE fields](#bitwise-and-bitwise-and))
     revenue_options|integer|Revenue capabilities mods can enable:<br><br>__0__ = All of the options below are disabled<br>__1__ = Allow mods to be sold<br>__2__ = Allow mods to receive donations<br>__4__ = Allow mods to be traded<br>__8__ = Allow mods to control supply and scarcity<br>__?__ = Combine to find games with multiple options enabled (see [BITWISE fields](#bitwise-and-bitwise-and))
     api_access_options|integer|Level of API access allowed by this game:<br><br>__0__ = All of the options below are disabled<br>__1__ = Allow 3rd parties to access this games API endpoints<br>__2__ = Allow mods to be downloaded directly (if disabled all download URLs will contain a frequently changing verification hash to stop unauthorized use)<br>__?__ = Combine to find games with multiple options enabled (see [BITWISE fields](#bitwise-and-bitwise-and)
+
+    Display|Type|Description
+    ---|---|---
     show_hidden_tags|bool|show the hidden tags associated with the given game.
+
+    Sort|Description
+    ---|---
+    popular|Sort results by popularity using [_sort filter](#filtering), value should be `popular` for descending or `-popular` for ascending results. __NOTE:__ Popularity is calculated hourly and reset daily (results are ranked from 1 to X). You should sort this column in ascending order `-popular` to get the top ranked results.
+    popular_overall|Sort results by 'Popular Overall' using [_sort filter](#filtering), value should be `popular_overall` for descending or `-popular_overall` for ascending results. __NOTE:__ You should sort this column in ascending order `-popular_overall` to get the top ranked results. This filter differs from popular by filtering on the amount of downloads the game has received overall, and not just in the last 24 hours.
+    subscribers|Sort results by most subscribers using [_sort filter](#filtering), value should be `subscribers` for descending or `-subscribers` for ascending results.
 
 > Example response
 
@@ -11131,7 +11162,7 @@ Get all games the _authenticated user_ added or is a team member of. Successful 
       "monetisation": {
         "monetisation_team_id": 0,
         "monetisation_type": "kyc",
-        "platform_cut": "The platform cut for this team.",
+        "patronage_platform_cut": "The patronage platform cut for this team.",
         "onboarded": "pending"
       },
       "stats": {
@@ -11294,10 +11325,13 @@ Get all mod's the _authenticated user_ is subscribed to. Successful request will
     homepage_url|string|Official homepage of the mod.
     metadata_blob|string|Metadata stored by the game developer.
     tags|string|Comma-separated values representing the tags you want to filter the results by. If you specify multiple tags, only mods which have all tags will be returned, and only tags that are supported by the parent game can be applied. To determine what tags are eligible, see the tags values within `tag_options` column on the parent [Game Object](#game-object). If you want to ensure mods returned do not contain particular tag(s), you can use the `tags-not-in` filter either independently or alongside this filter.
-    downloads|string|Sort results by most downloads using [_sort filter](#filtering) parameter, value should be `downloads` for descending or `-downloads` for ascending results.
-    popular|string|Sort results by popularity using [_sort filter](#filtering), value should be `popular` for descending or `-popular` for ascending results. __NOTE:__ Popularity is calculated hourly and reset daily (results are ranked from 1 to X). You should sort this column in ascending order `-popular` to get the top ranked results.
-    rating|string|Sort results by weighted rating using [_sort filter](#filtering), value should be `rating` for descending or `-rating` for ascending results.
-    subscribers|string|Sort results by most subscribers using [_sort filter](#filtering), value should be `subscribers` for descending or `-subscribers` for ascending results.
+
+    Sort|Description
+    ---|---
+    downloads|Sort results by most downloads using [_sort filter](#filtering) parameter, value should be `downloads` for descending or `-downloads` for ascending results.
+    popular|Sort results by popularity using [_sort filter](#filtering), value should be `popular` for descending or `-popular` for ascending results. __NOTE:__ Popularity is calculated hourly and reset daily (results are ranked from 1 to X). You should sort this column in ascending order `-popular` to get the top ranked results.
+    rating|Sort results by weighted rating using [_sort filter](#filtering), value should be `rating` for descending or `-rating` for ascending results.
+    subscribers|Sort results by most subscribers using [_sort filter](#filtering), value should be `subscribers` for descending or `-subscribers` for ascending results.
 
 > Example response
 
@@ -11373,7 +11407,7 @@ Get all mod's the _authenticated user_ is subscribed to. Successful request will
         "date_scanned": 1499841487,
         "virus_status": 0,
         "virus_positive": 0,
-        "virustotal_hash": "f9a7bf4a95ce20787337b685a79677cae2281b83c63ab0a25f091407741692af-1508147401",
+        "virustotal_hash": "",
         "filesize": 15181,
         "filehash": {
           "md5": "2d4a0e2d7273db6b0a94b0740a88ad0d"
@@ -11574,10 +11608,13 @@ Get all mods the _authenticated user_ added or is a team member of. Successful r
     metadata_blob|string|Metadata stored by the game developer.
     metadata_kvp|string|Colon-separated values representing the key-value pairs you want to filter the results by. If you supply more than one key-pair, separate the pairs by a comma. Will only filter by an exact key-pair match.
     tags|string|Comma-separated values representing the tags you want to filter the results by. If you specify multiple tags, only mods which have all tags will be returned, and only tags that are supported by the parent game can be applied. To determine what tags are eligible, see the tags values within `tag_options` column on the parent [Game Object](#game-object). If you want to ensure mods returned do not contain particular tag(s), you can use the `tags-not-in` filter either independently or alongside this filter.
-    downloads|string|Sort results by most downloads using [_sort filter](#filtering) parameter, value should be `downloads` for descending or `-downloads` for ascending results.
-    popular|string|Sort results by popularity using [_sort filter](#filtering), value should be `popular` for descending or `-popular` for ascending results. __NOTE:__ Popularity is calculated hourly and reset daily (results are ranked from 1 to X). You should sort this column in ascending order `-popular` to get the top ranked results.
-    rating|string|Sort results by weighted rating using [_sort filter](#filtering), value should be `rating` for descending or `-rating` for ascending results.
-    subscribers|string|Sort results by most subscribers using [_sort filter](#filtering), value should be `subscribers` for descending or `-subscribers` for ascending results.
+
+    Sort|Description
+    ---|---
+    downloads|Sort results by most downloads using [_sort filter](#filtering) parameter, value should be `downloads` for descending or `-downloads` for ascending results.
+    popular|Sort results by popularity using [_sort filter](#filtering), value should be `popular` for descending or `-popular` for ascending results. __NOTE:__ Popularity is calculated hourly and reset daily (results are ranked from 1 to X). You should sort this column in ascending order `-popular` to get the top ranked results.
+    rating|Sort results by weighted rating using [_sort filter](#filtering), value should be `rating` for descending or `-rating` for ascending results.
+    subscribers|Sort results by most subscribers using [_sort filter](#filtering), value should be `subscribers` for descending or `-subscribers` for ascending results.
 
 > Example response
 
@@ -11653,7 +11690,7 @@ Get all mods the _authenticated user_ added or is a team member of. Successful r
         "date_scanned": 1499841487,
         "virus_status": 0,
         "virus_positive": 0,
-        "virustotal_hash": "f9a7bf4a95ce20787337b685a79677cae2281b83c63ab0a25f091407741692af-1508147401",
+        "virustotal_hash": "",
         "filesize": 15181,
         "filehash": {
           "md5": "2d4a0e2d7273db6b0a94b0740a88ad0d"
@@ -11974,7 +12011,7 @@ Get all mod rating's submitted by the _authenticated user_. Successful request w
     ---|---|---
     game_id|integer|Unique id of the parent game.
     mod_id|integer|Unique id of the mod.
-    rating|integer|Type of rating applied.<br><br>__-1__ = Negative Rating<br>__1__ = Positive Rating
+    rating|integer|Type of rating applied:<br><br>__-1__ = Negative Rating<br>__1__ = Positive Rating
     date_added|integer|Unix timestamp of date rating was submitted.
 
 > Example response
@@ -12062,6 +12099,7 @@ thumb_100x100|string|URL to the medium avatar thumbnail.
 ```json
 {
   "id": 2,
+  "game_id": 2,
   "mod_id": 2,
   "resource_id": 2,
   "user": {
@@ -12097,14 +12135,15 @@ thumb_100x100|string|URL to the medium avatar thumbnail.
 Name|Type|Description
 ---|---|---|---|
 id|integer|Unique id of the comment.
-mod_id|integer|Unique id of the parent mod. This is now deprecated and will be removed in future API versions, please use resource_id instead.
+game_id|integer|Unique game id (if applicable).
+mod_id|integer|Deprecated: Please use resource_id instead, this will be removed in subsequent API version.
 resource_id|integer|Unique id of the parent resource.
-user|[User Object](#schemauser_object)|The user who published the comment
+user|[User Object](#schemauser_object)|The user who published the comment.
 date_added|integer|Unix timestamp of date the comment was posted.
 reply_id|integer|Id of the parent comment this comment is replying to (can be 0 if the comment is not a reply).
 thread_position|string|Levels of nesting in a comment thread. How it works:<br><br>- The first comment will have the position '01'.<br>- The second comment will have the position '02'.<br>- If someone responds to the second comment the position will be '02.01'.<br>- A maximum of 3 levels is supported.
 karma|integer|Karma received for the comment (can be postive or negative).
-karma_guest|integer|No longer used and will be removed in subsequent API version.
+karma_guest|integer|Deprecated: No longer used and will be removed in subsequent API version.
 content|string|Contents of the comment.
 
 
@@ -12182,7 +12221,7 @@ md5|string|MD5 hash of the file.
 {
   "monetisation_team_id": 0,
   "monetisation_type": "kyc",
-  "platform_cut": "The platform cut for this team.",
+  "patronage_platform_cut": "The patronage platform cut for this team.",
   "onboarded": "pending"
 } 
 ```
@@ -12193,7 +12232,7 @@ Name|Type|Description
 ---|---|---|---|
 monetisation_team_id|integer|Team ID for the monetisation API.
 monetisation_type|string|Team type onboarded as.
-platform_cut|integer|No description
+patronage_platform_cut|integer|No description
 onboarded|string|Has the team completed setup?
 
 
@@ -12270,7 +12309,7 @@ onboarded|string|Has the team completed setup?
   "monetisation": {
     "monetisation_team_id": 0,
     "monetisation_type": "kyc",
-    "platform_cut": "The platform cut for this team.",
+    "patronage_platform_cut": "The patronage platform cut for this team.",
     "onboarded": "pending"
   },
   "stats": {
@@ -12311,13 +12350,13 @@ Name|Type|Description
 ---|---|---|---|
 id|integer|Unique game id.
 status|integer|Status of the game (see [status and visibility](#status-amp-visibility) for details):<br><br>__0__ = Not Accepted<br>__1__ = Accepted<br>__3__ = Deleted
-submitted_by|object|Depreciated. Value will always be an empty object.
+submitted_by|object|Deprecated: Value will always be an empty object, this will be removed in subsequent API version.
 date_added|integer|Unix timestamp of date game was registered.
 date_updated|integer|Unix timestamp of date game was updated.
 date_live|integer|Unix timestamp of date game was set live.
 presentation_option|integer|Presentation style used on the mod.io website:<br><br>__0__ =  Grid View: Displays mods in a grid<br>__1__ = Table View: Displays mods in a table
 submission_option|integer|Submission process modders must follow:<br><br>__0__ = Mod uploads must occur via the API using a tool created by the game developers<br>__1__ = Mod uploads can occur from anywhere, including the website and API
-curation_option|integer|Curation process used to approve mods:<br><br>__0__ = No curation: Mods are immediately available to play<br>__1__ = Paid curation: Mods are immediately available to play unless they choose to receive patronage. These mods must be accepted to be listed<br>__2__ = Full curation: All mods must be accepted by someone to be listed
+curation_option|integer|Curation process used to approve mods:<br><br>__0__ = No curation: Mods are immediately available to play<br>__2__ = Full curation: All mods must be accepted by someone to be listed
 community_options|integer|Community features enabled on the mod.io website:<br><br>__0__ = All of the options below are disabled<br>__1__ = Enable comments<br>__2__ = Enable guides<br>__?__ = Add the options you want together, to enable multiple features (see [BITWISE fields](#bitwise-and-bitwise-and))
 revenue_options|integer|Revenue capabilities mods can enable:<br><br>__0__ = All of the options below are disabled<br>__1__ = Allow mods to be sold<br>__2__ = Allow mods to receive patronage<br>__4__ = Allow mods to be traded<br>__8__ = Allow mods to control supply and scarcity<br>__?__ = Add the options you want together, to enable multiple features (see [BITWISE fields](#bitwise-and-bitwise-and))
 api_access_options|integer|Level of API access allowed by this game:<br><br>__0__ = All of the options below are disabled<br>__1__ = Allow 3rd parties to access this games API endpoints<br>__2__ = Allow mods to be downloaded directly (if disabled all download URLs will contain a frequently changing verification hash to stop unauthorized use)<br>__?__ = Add the options you want together, to enable multiple features (see [BITWISE fields](#bitwise-and-bitwise-and))
@@ -12585,7 +12624,7 @@ result_total|integer|Total number of results found.
       "monetisation": {
         "monetisation_team_id": 0,
         "monetisation_type": "kyc",
-        "platform_cut": "The platform cut for this team.",
+        "patronage_platform_cut": "The patronage platform cut for this team.",
         "onboarded": "pending"
       },
       "stats": {
@@ -12650,6 +12689,7 @@ result_total|integer|Total number of results found.
   "data": [
     {
       "id": 2,
+      "game_id": 2,
       "mod_id": 2,
       "resource_id": 2,
       "user": {
@@ -12897,7 +12937,7 @@ result_total|integer|Total number of results found.
       "date_scanned": 1499841487,
       "virus_status": 0,
       "virus_positive": 0,
-      "virustotal_hash": "f9a7bf4a95ce20787337b685a79677cae2281b83c63ab0a25f091407741692af-1508147401",
+      "virustotal_hash": "",
       "filesize": 15181,
       "filehash": {
         "md5": "2d4a0e2d7273db6b0a94b0740a88ad0d"
@@ -13016,7 +13056,7 @@ result_total|integer|Total number of results found.
         "date_scanned": 1499841487,
         "virus_status": 0,
         "virus_positive": 0,
-        "virustotal_hash": "f9a7bf4a95ce20787337b685a79677cae2281b83c63ab0a25f091407741692af-1508147401",
+        "virustotal_hash": "",
         "filesize": 15181,
         "filehash": {
           "md5": "2d4a0e2d7273db6b0a94b0740a88ad0d"
@@ -13427,7 +13467,7 @@ thumb_1280x720|string|URL to the image thumbnail.
 
 ```json
 {
-  "key": "X-RateLimit-Remaining",
+  "key": "retry-after",
   "value": "98"
 } 
 ```
@@ -13682,7 +13722,7 @@ onboarded|string|Has the team completed setup?
     "date_scanned": 1499841487,
     "virus_status": 0,
     "virus_positive": 0,
-    "virustotal_hash": "f9a7bf4a95ce20787337b685a79677cae2281b83c63ab0a25f091407741692af-1508147401",
+    "virustotal_hash": "",
     "filesize": 15181,
     "filehash": {
       "md5": "2d4a0e2d7273db6b0a94b0740a88ad0d"
@@ -13759,8 +13799,8 @@ submitted_by|[User Object](#schemauser_object)|The user who published the mod.
 date_added|integer|Unix timestamp of date mod was registered.
 date_updated|integer|Unix timestamp of date mod was updated.
 date_live|integer|Unix timestamp of date mod was set live.
-maturity_option|integer|Maturity options flagged by the mod developer, this is only relevant if the parent game allows mods to be labelled as mature.<br><br>__0__ = None set _(default)_<br>__1__ = Alcohol<br>__2__ = Drugs<br>__4__ = Violence<br>__8__ = Explicit<br>__?__ = Add the options you want together, to enable multiple filters (see [BITWISE fields](#bitwise-and-bitwise-and))
-community_options|integer|Community features enabled for this mod by its creators. :<br><br>__0__ = All of the options below are disabled<br>__1__ = Enable comments _(default)_<br>__2__ = Enable guides<br>__?__ = Add the options you want together, to enable multiple features (see [BITWISE fields](#bitwise-and-bitwise-and))
+maturity_option|integer|Maturity options flagged by the mod developer, this is only relevant if the parent game allows mods to be labelled as mature:<br><br>__0__ = None set _(default)_<br>__1__ = Alcohol<br>__2__ = Drugs<br>__4__ = Violence<br>__8__ = Explicit<br>__?__ = Add the options you want together, to enable multiple filters (see [BITWISE fields](#bitwise-and-bitwise-and))
+community_options|integer|Community features enabled for this mod by its creators:<br><br>__0__ = All of the options below are disabled<br>__1__ = Enable comments _(default)_<br>__2__ = Enable guides<br>__?__ = Add the options you want together, to enable multiple features (see [BITWISE fields](#bitwise-and-bitwise-and))
 price|float|The price of the mod.
 tax|int|The tax of the mod.
 logo|[Logo Object](#schemalogo_object)|Contains media URL's to the logo for the mod.
@@ -13772,8 +13812,8 @@ description|string|Detailed description of the mod which allows HTML.
 description_plaintext|string|`description` field converted into plaintext.
 metadata_blob|string|Metadata stored by the game developer. Metadata can also be stored as searchable [key value pairs](#metadata), and to individual [mod files](#get-modfiles).
 profile_url|string|URL to the mod.
-media|[Mod Media Object](#schemamod_media_object)|Contains YouTube & Sketchfab linsk, aswell as media URLS of images for the mod
-modfile|[Modfile Object](#schemamodfile_object)|The primary modfile for the mod
+media|[Mod Media Object](#schemamod_media_object)|Contains YouTube & Sketchfab links, aswell as media URL's of images for the mod.
+modfile|[Modfile Object](#schemamodfile_object)|The primary modfile for the mod.
 stats|[Mod Stats Object](#schemamod_stats_object)|Numerous aggregate stats for the mod.
 monetisation_options|[Monetisation Options Object](#schemamonetisation_options_object)|No description
 monetisation|[Mod Monetisation Object](#schemamod_monetisation_object)|No description
@@ -13839,7 +13879,7 @@ ratings_total|integer|Number of times this mod has been rated.
 ratings_positive|integer|Number of positive ratings.
 ratings_negative|integer|Number of negative ratings.
 ratings_percentage_positive|integer|Number of positive ratings, divided by the total ratings to determine it’s percentage score.
-ratings_weighted_aggregate|number|Overall rating of this item calculated using the [Wilson score confidence interval](https://www.evanmiller.org/how-not-to-sort-by-average-rating.html). This column is good to sort on, as it will order items based on number of ratings and will place items with many positive ratings above those with a higher score but fewer ratings.
+ratings_weighted_aggregate|float|Overall rating of this item calculated using the [Wilson score confidence interval](https://www.evanmiller.org/how-not-to-sort-by-average-rating.html). This column is good to sort on, as it will order items based on number of ratings and will place items with many positive ratings above those with a higher score but fewer ratings.
 ratings_display_text|string|Textual representation of the rating in format:<br><br>- Overwhelmingly Positive<br>- Very Positive<br>- Positive<br>- Mostly Positive<br>- Mixed<br>- Negative<br>- Mostly Negative<br>- Very Negative<br>- Overwhelmingly Negative<br>- Unrated
 date_expires|integer|Unix timestamp until this mods's statistics are considered stale.
 
@@ -13877,7 +13917,7 @@ date_added|integer|Unix timestamp of date tag was applied.
   "date_scanned": 1499841487,
   "virus_status": 0,
   "virus_positive": 0,
-  "virustotal_hash": "f9a7bf4a95ce20787337b685a79677cae2281b83c63ab0a25f091407741692af-1508147401",
+  "virustotal_hash": "",
   "filesize": 15181,
   "filehash": {
     "md5": "2d4a0e2d7273db6b0a94b0740a88ad0d"
@@ -13909,7 +13949,7 @@ date_added|integer|Unix timestamp of date file was added.
 date_scanned|integer|Unix timestamp of date file was virus scanned.
 virus_status|integer|Current virus scan status of the file. For newly added files that have yet to be scanned this field will change frequently until a scan is complete:<br><br>__0__ = Not scanned<br>__1__ = Scan complete<br>__2__ = In progress<br>__3__ = Too large to scan<br>__4__ = File not found<br>__5__ = Error Scanning
 virus_positive|integer|Was a virus detected:<br><br>__0__ = No threats detected<br>__1__ = Flagged as malicious
-virustotal_hash|string|VirusTotal proprietary hash to view the [scan results](https://www.virustotal.com).
+virustotal_hash|string|Deprecated: No longer used and will be removed in subsequent API version.
 filesize|integer|Size of the file in bytes.
 filehash|[Filehash Object](#schemafilehash_object)|Contains a dictionary of filehashes for the contents of the download.
 filename|string|Filename including extension.
@@ -13969,7 +14009,7 @@ status|integer|The status of the modfile for the corresponding `platform`. Possi
 
 Name|Type|Description
 ---|---|---|---|
-targetted|string[]|Array of [valid platform strings](#targeting-a-platform) showing which platforms the  modfile has targetted for release.
+targetted|string[]|Array of [valid platform strings](#targeting-a-platform) showing which platforms the  modfile has targeted for release.
 approved|string[]|Array of [valid platform strings](#targeting-a-platform) showing which platforms the modfile has been approved for.
 denied|string[]|Array of [valid platform strings](#targeting-a-platform) showing which platforms the modfile has been denied for.
 live|string[]|Array of [valid platform strings](#targeting-a-platform) showing which platforms the modfile is currently marked as live on.
@@ -14015,7 +14055,7 @@ marketplace|boolean|Marketplace Enable/Disabled.
 Name|Type|Description
 ---|---|---|---|
 upload_id|string|A universally unique identifier (UUID) that represents the upload session.
-status|integer|The status of the upload session.<br><br>__0__ = Incomplete<br>__1__ = Pending<br>__2__ = Processing<br>__3__ - Complete<br>__4__ = Cancelled
+status|integer|The status of the upload session:<br><br>__0__ = Incomplete<br>__1__ = Pending<br>__2__ = Processing<br>__3__ - Complete<br>__4__ = Cancelled
 
 
 
@@ -14062,7 +14102,7 @@ Name|Type|Description
 ---|---|---|---|
 game_id|integer|Unique game id.
 mod_id|integer|Unique mod id.
-rating|integer|Mod rating value.<br><br>__1__ = Positive Rating<br>__-1__ = Negative Rating
+rating|integer|Mod rating value:<br><br>__1__ = Positive Rating<br>__-1__ = Negative Rating
 date_added|integer|Unix timestamp of date rating was submitted.
 
 
@@ -14321,9 +14361,9 @@ username|string|Username of the user.
 display_name_portal|string|The users' display name for the targeted portal. Value will be `null` if no valid `X-Modio-Portal` portal header value is provided. For more information see [Targeting a Portal](#targeting-a-portal).
 date_online|integer|Unix timestamp of date the user was last online.
 date_joined|integer|Unix timestamp of date the user joined.
-avatar|[Avatar Object](#schemaavatar_object)|Contains media URL's to the users avatar
-timezone|string|This field is no longer used and will return an empty string.
-language|string|This field is no longer used and will return an empty string. To [localize the API response](#localization) we recommend you set the `Accept-Language` header.
+avatar|[Avatar Object](#schemaavatar_object)|Contains media URL's to the users avatar.
+timezone|string|Deprecated: No longer used and will be removed in subsequent API version.
+language|string|Deprecated: No longer used and will be removed in subsequent API version. To [localize the API response](#localization) we recommend you set the `Accept-Language` header.
 profile_url|string|URL to the users profile.
 monetisation_registered|boolean|Has the user registered?
 monetisation_onboarded|boolean|Has the user completed onboarding?

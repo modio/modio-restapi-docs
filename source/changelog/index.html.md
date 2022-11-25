@@ -1,7 +1,7 @@
 # API Versions
 
 ## v1 (latest version)
-### Date Live: November 18, 2022, 8:55 am GMT
+### Date Live: November 23, 2022, 8:28 am GMT
 
 Initial API Release.
 

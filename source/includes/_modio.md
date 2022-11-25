@@ -690,12 +690,12 @@ It is _highly recommended_ you architect your app to check for the `429 Too Many
 
 ### OAuth2 Rate Limiting
 
-- User token reads are limited to __200 requests per minute__. 
+- User tokens are limited to __120 requests per minute__. 
 - User token writes are limited to __60 requests per minute__. 
 
 ### IP Rate Limiting
 
-- IP reads are limited to __1000 requests per minute__. 
+- IPs are limited to __1000 requests per minute__. 
 - IP writes are limited to __60 requests per minute__. 
 
 ### Other Rate Limiting
@@ -766,10 +766,13 @@ If you spot any errors within the --parse_sitename documentation, have feedback 
 
 ## Targeting a Platform
 
+--parse_sitename supports mods on all platforms. Games can enable per-platform mod file support in their dashboard, if they wish to control which platforms each mod and their corresponding files can be accessed on. Otherwise, all mods and their files will be available on all platforms the game supports. To make this system work, it's important the following headers are included in all API requests as explained below. If you have any questions about setting up cross-platform mod support in your game, please reach out to [--parse_email](mailto:--parse_email?subject=API).
+
 When making API requests you should include the `X-Modio-Platform` header (with one of the values below), to tell --parse_sitename what Platform the request is originating from. This header is __important__ because it enables --parse_sitename to return data that is approved for the platform such as:
 
  - Supported mods and files
  - Supported tags the player can filter on
+ - Localization of content for the platform
  - It also enables platform specific metrics
 
 For example, passing the HTTP header `X-Modio-Platform: XboxSeriesX` in your API request tells --parse_sitename your player is on Xbox Series X.
