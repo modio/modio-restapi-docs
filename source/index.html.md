@@ -1239,7 +1239,7 @@ Status|Meaning|Error Ref|Description|Response Schema
 To perform this request, you must be authenticated via one of the following methods:
 <a href="#authentication">api_key</a>
 </aside>
-## PlayStation Network
+## PlayStation™ Network
 
 > Example request
 
@@ -1339,7 +1339,7 @@ Request an access token on behalf of a PlayStation™ Network (PSN) user. A Succ
      Parameter|Type|Required|Description
      ---|---|---|---|
      auth_code|string|true|The auth code returned from the PlayStation™ Network API.
-     env|integer||The PlayStation™ Network environment you are targeting
+     env|integer||The PlayStation™ Network environment you are targeting.
      email|string||The users email address. If supplied, and the respective user does not have an email registered for their account we will send a confirmation email to confirm they have ownership of the specified email.
      date_expires|integer||Unix timestamp of date in which the returned token will expire. Value cannot be higher than the default value which is a common year (unix timestamp + 31536000 seconds). Using a token after it's expiry time has elapsed will result in a `401 Unauthorized` response.
      terms_agreed|boolean||This MUST be set to `false` unless you have collected the [users agreement](#terms) prior to calling this endpoint in which case it can be set to `true` and will be recorded.<br><br>__NOTE:__ If this is set to `false` and the user has not agreed to the latest mod.io Terms of Use and Privacy Policy, an error `403 Forbidden (error_ref 11074)` will be returned and you will need to collect the [users agreement](#terms) and retry with this value set to `true` to authenticate the user.
@@ -1354,7 +1354,7 @@ Request an access token on behalf of a PlayStation™ Network (PSN) user. A Succ
 }
 
 ```
-<h3 id="PlayStation-Network-responses">Responses</h3>
+<h3 id="PlayStation™-Network-responses">Responses</h3>
 
 Status|Meaning|Error Ref|Description|Response Schema
 ---|---|----|---|---|
@@ -2635,7 +2635,7 @@ Get all games. Successful request will return an array of [Game Objects](#get-ga
     submission_option|integer|Submission process modders must follow:<br><br>__0__ = Mod uploads must occur via the API using a tool created by the game developers<br>__1__ = Mod uploads can occur from anywhere, including the website and API
     curation_option|integer|Curation process used to approve mods:<br><br>__0__ = No curation: Mods are immediately available to play<br>__2__ = Full curation: All mods must be accepted by someone to be listed
     community_options|integer|Community features enabled on the mod.io website:<br><br>__0__ = All of the options below are disabled<br>__1__ = Enable comments<br>__2__ = Enable guides<br>__?__ = Combine to find games with multiple options enabled (see [BITWISE fields](#bitwise-and-bitwise-and))
-    revenue_options|integer|Revenue capabilities mods can enable:<br><br>__0__ = All of the options below are disabled<br>__1__ = Allow mods to be sold<br>__2__ = Allow mods to receive donations<br>__4__ = Allow mods to be traded<br>__8__ = Allow mods to control supply and scarcity<br>__?__ = Combine to find games with multiple options enabled (see [BITWISE fields](#bitwise-and-bitwise-and))
+    monetisation_options|integer|Monetisation features mods can enable:<br><br>__0__ = All of the options below are disabled<br>__1__ = Enabled<br>__2__ = Allow creators to receive donations (patronage)<br>__4__ = Allow mods to be sold (marketplace)<br>__?__ = Combine to find games with multiple options enabled (see [BITWISE fields](#bitwise-and-bitwise-and))
     api_access_options|integer|Level of API access allowed by this game:<br><br>__0__ = All of the options below are disabled<br>__1__ = Allow 3rd parties to access this games API endpoints<br>__2__ = Allow mods to be downloaded directly (if disabled all download URLs will contain a frequently changing verification hash to stop unauthorized use)<br>__?__ = Combine to find games with multiple options enabled (see [BITWISE fields](#bitwise-and-bitwise-and))
     maturity_options|integer|Mature content setup for this game:<br><br>__0__ = Don't allow mature content in mods _(default)_<br>__1__ = Allow mature content in mods<br>__2__ = This game is for mature audiences only<br>__?__ = Combine to find games with multiple options enabled (see [BITWISE fields](#bitwise-and-bitwise-and)
 
@@ -2645,8 +2645,8 @@ Get all games. Successful request will return an array of [Game Objects](#get-ga
 
     Sort|Description
     ---|---
-    popular|Sort results by popularity using [_sort filter](#filtering), value should be `popular` for descending or `-popular` for ascending results. __NOTE:__ Popularity is calculated hourly and reset daily (results are ranked from 1 to X). You should sort this column in ascending order `-popular` to get the top ranked results.
-    popular_overall|Sort results by 'Popular Overall' using [_sort filter](#filtering), value should be `popular_overall` for descending or `-popular_overall` for ascending results. __NOTE:__ You should sort this column in ascending order `-popular_overall` to get the top ranked results. This filter differs from popular by filtering on the amount of downloads the game has received overall, and not just in the last 24 hours.
+    popular|Sort results by popularity using [_sort filter](#filtering), value should be `popular` for descending or `-popular` for ascending results.<br><br>__NOTE:__ Popularity is calculated hourly and reset daily (results are ranked from 1 to X). You should sort this column in ascending order `-popular` to get the top ranked results.
+    popular_overall|Sort results by 'Popular Overall' using [_sort filter](#filtering), value should be `popular_overall` for descending or `-popular_overall` for ascending results.<br><br>__NOTE:__ You should sort this column in ascending order `-popular_overall` to get the top ranked results. This filter differs from popular by filtering on the amount of downloads the game has received overall, and not just in the last 24 hours.
     subscribers|Sort results by most subscribers using [_sort filter](#filtering), value should be `subscribers` for descending or `-subscribers` for ascending results.
 
 > Example response
@@ -2665,6 +2665,7 @@ Get all games. Successful request will return an array of [Game Objects](#get-ga
       "submission_option": 1,
       "curation_option": 0,
       "community_options": 3,
+      "monetisation_options": 0,
       "revenue_options": 0,
       "api_access_options": 3,
       "maturity_options": 0,
@@ -2713,17 +2714,6 @@ Get all games. Successful request will return an array of [Game Objects](#get-ga
           "locked": false
         }
       ],
-      "monetisation_options": {
-        "enabled": false,
-        "patronage": false,
-        "marketplace": false
-      },
-      "monetisation": {
-        "monetisation_team_id": 0,
-        "monetisation_type": "kyc",
-        "patronage_platform_cut": "The patronage platform cut for this team.",
-        "onboarded": "pending"
-      },
       "stats": {
         "game_id": 2,
         "mods_count_total": 13,
@@ -2747,12 +2737,7 @@ Get all games. Successful request will return an array of [Game Objects](#get-ga
           "label": "PlayStation 5",
           "moderated": true
         }
-      ],
-      "patronage": {
-        "min_patronage": 100,
-        "max_patronage": 1000000,
-        "default_patronage": 500
-      }
+      ]
     },
     {
         ...
@@ -2882,6 +2867,7 @@ Get a game. Successful request will return a single [Game Object](#game-object).
   "submission_option": 1,
   "curation_option": 0,
   "community_options": 3,
+  "monetisation_options": 0,
   "revenue_options": 0,
   "api_access_options": 3,
   "maturity_options": 0,
@@ -2930,17 +2916,6 @@ Get a game. Successful request will return a single [Game Object](#game-object).
       "locked": false
     }
   ],
-  "monetisation_options": {
-    "enabled": false,
-    "patronage": false,
-    "marketplace": false
-  },
-  "monetisation": {
-    "monetisation_team_id": 0,
-    "monetisation_type": "kyc",
-    "patronage_platform_cut": "The patronage platform cut for this team.",
-    "onboarded": "pending"
-  },
   "stats": {
     "game_id": 2,
     "mods_count_total": 13,
@@ -2964,12 +2939,7 @@ Get a game. Successful request will return a single [Game Object](#game-object).
       "label": "PlayStation 5",
       "moderated": true
     }
-  ],
-  "patronage": {
-    "min_patronage": 100,
-    "max_patronage": 1000000,
-    "default_patronage": 500
-  }
+  ]
 }
 
 ```
@@ -3084,20 +3054,21 @@ Get all mods for the corresponding game. Successful request will return an array
     date_added|integer|Unix timestamp of date mod was registered.
     date_updated|integer|Unix timestamp of date mod was updated.
     date_live|integer|Unix timestamp of date mod was set live.
-    maturity_option|integer|Maturity option(s) set by the mod developer:<br><br>__0__ = None set _(default)_<br>__1__ = Alcohol<br>__2__ = Drugs<br>__4__ = Violence<br>__8__ = Explicit<br>__?__ = Add the options you want together, to enable multiple filters (see [BITWISE fields](#bitwise-and-bitwise-and))
+    maturity_option|integer|Maturity option(s) set by the mod creator:<br><br>__0__ = None _(default)_<br>__1__ = Alcohol<br>__2__ = Drugs<br>__4__ = Violence<br>__8__ = Explicit<br>__?__ = Add the options you want together, to enable multiple filters (see [BITWISE fields](#bitwise-and-bitwise-and))
+    monetisation_options|integer|Monetisation option(s) enabled by the mod creator:<br><br>__0__ = None _(default)_<br>__1__ = Enabled<br>__2__ = Patronage On<br>__4__ = Marketplace On<br>__?__ = Add the options you want together, to enable multiple filters (see [BITWISE fields](#bitwise-and-bitwise-and))
     name|string|Name of the mod.
     name_id|string|Path for the mod on mod.io. For example: https://mod.io/g/gamename/m/__mod-name-id-here__
     modfile|integer|Unique id of the file that is the current active release (see [mod files](#files)).
     metadata_blob|string|Metadata stored by the game developer.
     metadata_kvp|string|Colon-separated values representing the key-value pairs you want to filter the results by. If you supply more than one key-pair, separate the pairs by a comma. Will only filter by an exact key-pair match.
     tags|string|Comma-separated values representing the tags you want to filter the results by. If you specify multiple tags, only mods which have all tags will be returned, and only tags that are supported by the parent game can be applied. To determine what tags are eligible, see the tags values within `tag_options` column on the parent [Game Object](#game-object). If you want to ensure mods returned do not contain particular tag(s), you can use the `tags-not-in` filter either independently or alongside this filter.
-    platform_status|string|Filter results by their current platform status, valid values are `pending_only` and `live_and_pending`. The use of this filter requires the authenticated user to be a member of the parent game team. Note that this parameter is only considered in the request if the parent game has enabled [cross-platform filtering](#targeting-a-platform).
-    platforms|string|Filter results by their current platform, accepts multiple platforms as comma-separated values (e.g. `ps4,switch`), valid values are `all`, `windows`, `mac`, `linux`, `android`, `ios`, `xboxone`, `xboxseriesx`, `ps4`, `ps5`, `switch`, `oculus`. The use of this filter requires the authenticated user to be a member of the parent game team. Note that this parameter will take precedence over the header from [cross-platform filtering](#targeting-a-platform).
+    platform_status|string|Filter results by their current platform status, valid values are `pending_only` and `live_and_pending` (only game admins can filter by this field, see [status and visibility](#status-amp-visibility) for details).<br><br>__NOTE:__ that this parameter is only considered in the request if the parent game has enabled [cross-platform filtering](#targeting-a-platform).
+    platforms|string|Filter results by their current platform, accepts multiple platforms as comma-separated values (e.g. `ps4,switch`), valid values are `all`, `windows`, `mac`, `linux`, `android`, `ios`, `xboxone`, `xboxseriesx`, `ps4`, `ps5`, `switch`, `oculus` (only game admins can filter by this field, see [status and visibility](#status-amp-visibility) for details).<br><br>__NOTE:__ that this parameter will take precedence over the header from [cross-platform filtering](#targeting-a-platform).
 
     Sort|Description
     ---|---
     downloads|Sort results by most downloads using [_sort filter](#filtering) parameter, value should be `downloads` for descending or `-downloads` for ascending results.
-    popular|Sort results by popularity using [_sort filter](#filtering), value should be `popular` for descending or `-popular` for ascending results. __NOTE:__ Popularity is calculated hourly and reset daily (results are ranked from 1 to X). You should sort this column in ascending order `-popular` to get the top ranked results.
+    popular|Sort results by popularity using [_sort filter](#filtering), value should be `popular` for descending or `-popular` for ascending results.<br><br>__NOTE:__ Popularity is calculated hourly and reset daily (results are ranked from 1 to X). You should sort this column in ascending order `-popular` to get the top ranked results.
     rating|Sort results by weighted rating using [_sort filter](#filtering), value should be `rating` for descending or `-rating` for ascending results.
     subscribers|Sort results by most subscribers using [_sort filter](#filtering), value should be `subscribers` for descending or `-subscribers` for ascending results.
 
@@ -3126,15 +3097,14 @@ Get all mods for the corresponding game. Successful request will return an array
         },
         "timezone": "",
         "language": "",
-        "profile_url": "https://mod.io/u/xant",
-        "monetisation_registered": true,
-        "monetisation_onboarded": true
+        "profile_url": "https://mod.io/u/xant"
       },
       "date_added": 1492564103,
       "date_updated": 1499841487,
       "date_live": 1499841403,
       "maturity_option": 0,
       "community_options": 3,
+      "monetisation_options": 0,
       "price": 0,
       "tax": 0,
       "logo": {
@@ -3227,15 +3197,6 @@ Get all mods for the corresponding game. Successful request will return an array
         "ratings_weighted_aggregate": 87.38,
         "ratings_display_text": "Very Positive",
         "date_expires": 1492564103
-      },
-      "monetisation_options": {
-        "enabled": false,
-        "patronage": false,
-        "marketplace": false
-      },
-      "monetisation": {
-        "monetisation_team_id": "Team ID for the monetisation API.",
-        "onboarded": "pending"
       }
     },
     {
@@ -3376,15 +3337,14 @@ Get a mod. Successful request will return a single [Mod Object](#mod-object).
     },
     "timezone": "",
     "language": "",
-    "profile_url": "https://mod.io/u/xant",
-    "monetisation_registered": true,
-    "monetisation_onboarded": true
+    "profile_url": "https://mod.io/u/xant"
   },
   "date_added": 1492564103,
   "date_updated": 1499841487,
   "date_live": 1499841403,
   "maturity_option": 0,
   "community_options": 3,
+  "monetisation_options": 0,
   "price": 0,
   "tax": 0,
   "logo": {
@@ -3477,15 +3437,6 @@ Get a mod. Successful request will return a single [Mod Object](#mod-object).
     "ratings_weighted_aggregate": 87.38,
     "ratings_display_text": "Very Positive",
     "date_expires": 1492564103
-  },
-  "monetisation_options": {
-    "enabled": false,
-    "patronage": false,
-    "marketplace": false
-  },
-  "monetisation": {
-    "monetisation_team_id": "Team ID for the monetisation API.",
-    "onboarded": "pending"
   }
 }
 
@@ -3621,7 +3572,7 @@ Add a mod. Successful request will return the newly created [Mod Object](#mod-ob
     description|string||Detailed description for your mod, which can include details such as 'About', 'Features', 'Install Instructions', 'FAQ', etc. HTML supported and encouraged.
     homepage_url|string||Official homepage for your mod. Must be a valid URL.
     stock|integer||Maximium number of subscribers for this mod. A value of 0 disables this limit.
-    maturity_option|integer||Choose if this mod contains any of the following mature content. __NOTE:__ The value of this field will default to 0 unless the parent game allows you to flag mature content (see `maturity_options` field in [Game Object](#game-object)). <br><br>__0__ = None set _(default)_<br>__1__ = Alcohol<br>__2__ = Drugs<br>__4__ = Violence<br>__8__ = Explicit<br>__?__ = Add the options you want together, to enable multiple options (see [BITWISE fields](#bitwise-and-bitwise-and))
+    maturity_option|integer||Choose if this mod contains any of the following mature content.<br><br>__NOTE:__ The value of this field will default to 0 unless the parent game allows you to flag mature content (see `maturity_options` field in [Game Object](#game-object)). <br><br>__0__ = None set _(default)_<br>__1__ = Alcohol<br>__2__ = Drugs<br>__4__ = Violence<br>__8__ = Explicit<br>__?__ = Add the options you want together, to enable multiple options (see [BITWISE fields](#bitwise-and-bitwise-and))
     community_options|integer||Select which interactions players can have with your mod. <br><br>__0__ = None<br>__1__ = Ability to comment _(default)_<br>__?__ = Add the options you want together, to enable multiple options (see [BITWISE fields](#bitwise-and-bitwise-and))
     metadata_blob|string||Metadata stored by the game developer which may include properties as to how the item works, or other information you need to display. Metadata can also be stored as searchable [key value pairs](#metadata), and to individual [mod files](#get-modfiles).
     tags[]|string||Tags to apply to the mod. Every tag to apply requires a separate field with tags[] as the key (eg. tags[]=tag1, tags[]=tag2). Only the tags pre-defined by the parent game can be applied. To determine what tags are eligible, see the tags values within `tag_options` column on the parent [Game Object](#game-object).
@@ -3649,15 +3600,14 @@ Add a mod. Successful request will return the newly created [Mod Object](#mod-ob
     },
     "timezone": "",
     "language": "",
-    "profile_url": "https://mod.io/u/xant",
-    "monetisation_registered": true,
-    "monetisation_onboarded": true
+    "profile_url": "https://mod.io/u/xant"
   },
   "date_added": 1492564103,
   "date_updated": 1499841487,
   "date_live": 1499841403,
   "maturity_option": 0,
   "community_options": 3,
+  "monetisation_options": 0,
   "price": 0,
   "tax": 0,
   "logo": {
@@ -3750,15 +3700,6 @@ Add a mod. Successful request will return the newly created [Mod Object](#mod-ob
     "ratings_weighted_aggregate": 87.38,
     "ratings_display_text": "Very Positive",
     "date_expires": 1492564103
-  },
-  "monetisation_options": {
-    "enabled": false,
-    "patronage": false,
-    "marketplace": false
-  },
-  "monetisation": {
-    "monetisation_team_id": "Team ID for the monetisation API.",
-    "onboarded": "pending"
   }
 }
 
@@ -3890,7 +3831,7 @@ Edit details for a mod. If you want to update the `logo` or media associated wit
     description|string||Detailed description for your mod, which can include details such as 'About', 'Features', 'Install Instructions', 'FAQ', etc. HTML supported and encouraged.
     homepage_url|string||Official homepage for your mod. Must be a valid URL.
     stock|integer||Maximium number of subscribers for this mod. A value of 0 disables this limit.
-    maturity_option|integer||Choose if this mod contains any of the following mature content. __NOTE:__ The value of this field will default to 0 unless the parent game allows you to flag mature content (see `maturity_options` field in [Game Object](#game-object)). <br><br>__0__ = None set _(default)_<br>__1__ = Alcohol<br>__2__ = Drugs<br>__4__ = Violence<br>__8__ = Explicit<br>__?__ = Add the options you want together, to enable multiple options (see [BITWISE fields](#bitwise-and-bitwise-and))
+    maturity_option|integer||Choose if this mod contains any of the following mature content.<br><br>__NOTE:__ The value of this field will default to 0 unless the parent game allows you to flag mature content (see `maturity_options` field in [Game Object](#game-object)). <br><br>__0__ = None set _(default)_<br>__1__ = Alcohol<br>__2__ = Drugs<br>__4__ = Violence<br>__8__ = Explicit<br>__?__ = Add the options you want together, to enable multiple options (see [BITWISE fields](#bitwise-and-bitwise-and))
     community_options|integer||Select which interactions players can have with your mod. <br><br>__0__ = None<br>__1__ = Ability to comment _(default)_<br>__?__ = Add the options you want together, to enable multiple options (see [BITWISE fields](#bitwise-and-bitwise-and))
     metadata_blob|string||Metadata stored by the game developer which may include properties as to how the item works, or other information you need to display. Metadata can also be stored as searchable [key value pairs](#metadata), and to individual [mod files](#get-modfiles).
 
@@ -3917,15 +3858,14 @@ Edit details for a mod. If you want to update the `logo` or media associated wit
     },
     "timezone": "",
     "language": "",
-    "profile_url": "https://mod.io/u/xant",
-    "monetisation_registered": true,
-    "monetisation_onboarded": true
+    "profile_url": "https://mod.io/u/xant"
   },
   "date_added": 1492564103,
   "date_updated": 1499841487,
   "date_live": 1499841403,
   "maturity_option": 0,
   "community_options": 3,
+  "monetisation_options": 0,
   "price": 0,
   "tax": 0,
   "logo": {
@@ -4018,15 +3958,6 @@ Edit details for a mod. If you want to update the `logo` or media associated wit
     "ratings_weighted_aggregate": 87.38,
     "ratings_display_text": "Very Positive",
     "date_expires": 1492564103
-  },
-  "monetisation_options": {
-    "enabled": false,
-    "patronage": false,
-    "marketplace": false
-  },
-  "monetisation": {
-    "monetisation_team_id": "Team ID for the monetisation API.",
-    "onboarded": "pending"
   }
 }
 
@@ -5005,7 +4936,7 @@ System.out.println(response.toString());
 
 Manage the platform status of a particular modfile. This endpoint does not set any file live, instead it allows you to approve and deny new uploads. To set a file as the *live* file for the approved platforms after you have reviewed them, you must call the [Edit Modfile](#update-modfile) with the active flag enabled.
 
-     __NOTE:__ This is ony applicable if the parent game has cross-platform moderation enabled. A successful request will return the updated [Modfile object](#modfile-object).
+    __NOTE:__ This is ony applicable if the parent game has cross-platform moderation enabled. A successful request will return the updated [Modfile object](#modfile-object).
 
     Parameter|Type|Required|Description
     ---|---|---|---|
@@ -6044,15 +5975,14 @@ Subscribe the _authenticated user_ to a corresponding mod. No body parameters ar
     },
     "timezone": "",
     "language": "",
-    "profile_url": "https://mod.io/u/xant",
-    "monetisation_registered": true,
-    "monetisation_onboarded": true
+    "profile_url": "https://mod.io/u/xant"
   },
   "date_added": 1492564103,
   "date_updated": 1499841487,
   "date_live": 1499841403,
   "maturity_option": 0,
   "community_options": 3,
+  "monetisation_options": 0,
   "price": 0,
   "tax": 0,
   "logo": {
@@ -6145,15 +6075,6 @@ Subscribe the _authenticated user_ to a corresponding mod. No body parameters ar
     "ratings_weighted_aggregate": 87.38,
     "ratings_display_text": "Very Positive",
     "date_expires": 1492564103
-  },
-  "monetisation_options": {
-    "enabled": false,
-    "patronage": false,
-    "marketplace": false
-  },
-  "monetisation": {
-    "monetisation_team_id": "Team ID for the monetisation API.",
-    "onboarded": "pending"
   }
 }
 
@@ -6421,9 +6342,7 @@ Get all comments posted in the mods profile. Successful request will return an a
         },
         "timezone": "",
         "language": "",
-        "profile_url": "https://mod.io/u/xant",
-        "monetisation_registered": true,
-        "monetisation_onboarded": true
+        "profile_url": "https://mod.io/u/xant"
       },
       "date_added": 1499841487,
       "reply_id": 0,
@@ -6581,9 +6500,7 @@ Add a comment for the corresponding mod. Successful request will return the newl
     },
     "timezone": "",
     "language": "",
-    "profile_url": "https://mod.io/u/xant",
-    "monetisation_registered": true,
-    "monetisation_onboarded": true
+    "profile_url": "https://mod.io/u/xant"
   },
   "date_added": 1499841487,
   "reply_id": 0,
@@ -6723,9 +6640,7 @@ Get a Mod Comment. Successful request will return a single [Comment Object](#com
     },
     "timezone": "",
     "language": "",
-    "profile_url": "https://mod.io/u/xant",
-    "monetisation_registered": true,
-    "monetisation_onboarded": true
+    "profile_url": "https://mod.io/u/xant"
   },
   "date_added": 1499841487,
   "reply_id": 0,
@@ -6874,9 +6789,7 @@ Update a comment for the corresponding mod. Successful request will return the u
     },
     "timezone": "",
     "language": "",
-    "profile_url": "https://mod.io/u/xant",
-    "monetisation_registered": true,
-    "monetisation_onboarded": true
+    "profile_url": "https://mod.io/u/xant"
   },
   "date_added": 1499841487,
   "reply_id": 0,
@@ -7141,9 +7054,7 @@ Update the Karma rating in single increments or decrements for a corresponding m
     },
     "timezone": "",
     "language": "",
-    "profile_url": "https://mod.io/u/xant",
-    "monetisation_registered": true,
-    "monetisation_onboarded": true
+    "profile_url": "https://mod.io/u/xant"
   },
   "date_added": 1499841487,
   "reply_id": 0,
@@ -8216,7 +8127,7 @@ Delete an entire group of tags or individual tags. Successful request will retur
     Parameter|Type|Required|Description
     ---|---|---|---|
     name|string|true|Name of the tag group that you want to delete tags from.
-    tags[]|string|true|Tags to delete from the game and all mod profiles. Every tag to delete requires a separate field with tags[] as the key (eg. tags[]=tag1, tags[]=tag2). __NOTE:__ An empty value will delete the entire group.
+    tags[]|string|true|Tags to delete from the game and all mod profiles. Every tag to delete requires a separate field with tags[] as the key (eg. tags[]=tag1, tags[]=tag2).<br><br>__NOTE:__ An empty value will delete the entire group.
 
 > Example response
 
@@ -9340,11 +9251,11 @@ System.out.println(response.toString());
 
 Add metadata for this mod as searchable key value pairs. Metadata is useful to define how a mod works, or other information you need to display and manage the mod. Successful request will return [Message Object](#message-object).<br><br>For example: A mod might change gravity and the rate of fire of weapons, you could define these properties as key value pairs. We recommend the mod upload tool you create defines and submits metadata behind the scenes, because if these settings affect gameplay, invalid information may cause problems.
 
-     __NOTE:__ Metadata can also be stored as `metadata_blob` in the [Mod Object](#mod-object).
+    __NOTE:__ Metadata can also be stored as `metadata_blob` in the [Mod Object](#mod-object).
 
-     Parameter|Type|Required|Description
-     ---|---|---|---|
-     metadata[]|string|true|Key value pairs you want to add where the the key and value are separated by a colon ':'. Every pair to add requires a separate field with metadata[] as the key (eg. metadata[]=pistol-dmg:800, metadata[]=gravity:9.8). __NOTE:__ If the string contains multiple colons the split will occur on the first matched, eg. sword-speed-power:100:10 will become key: `sword-speed-power`, value: `100:10`). The following restrictions apply to the supplied metadata:<br><br>- Keys support alphanumeric, '_' and '-' characters only.<br>- Keys can map to multiple values (1-to-many relationship).<br>- Keys and values cannot exceed 255 characters in length.<br>- Key value pairs are searchable by exact match only.
+    Parameter|Type|Required|Description
+    ---|---|---|---|
+    metadata[]|string|true|Key value pairs you want to add where the the key and value are separated by a colon ':'. Every pair to add requires a separate field with metadata[] as the key (eg. metadata[]=pistol-dmg:800, metadata[]=gravity:9.8).<br><br>__NOTE:__ If the string contains multiple colons the split will occur on the first matched, eg. sword-speed-power:100:10 will become key: `sword-speed-power`, value: `100:10`). The following restrictions apply to the supplied metadata:<br><br>- Keys support alphanumeric, '_' and '-' characters only.<br>- Keys can map to multiple values (1-to-many relationship).<br>- Keys and values cannot exceed 255 characters in length.<br>- Key value pairs are searchable by exact match only.
 
 > Example response
 
@@ -9475,7 +9386,7 @@ Delete key value pairs metadata defined for this mod. Successful request will re
 
      Parameter|Type|Required|Description
      ---|---|---|---|
-     metadata[]|string|true|Key value pairs you want to delete where the the key and value are separated by a colon ':'. Every pair to delete requires a separate field with metadata[] as the key (eg. metadata[]=pistol-dmg:800, metadata[]=gravity:9.8). __NOTE:__ If the string contains only the key and no colon ':', _all_ metadata with that key will be removed.
+     metadata[]|string|true|Key value pairs you want to delete where the the key and value are separated by a colon ':'. Every pair to delete requires a separate field with metadata[] as the key (eg. metadata[]=pistol-dmg:800, metadata[]=gravity:9.8).<br><br>__NOTE:__ If the string contains only the key and no colon ':', _all_ metadata with that key will be removed.
 
 > Example response
 
@@ -9995,9 +9906,7 @@ Get all users that are part of a mod team. Successful request will return an arr
         },
         "timezone": "",
         "language": "",
-        "profile_url": "https://mod.io/u/xant",
-        "monetisation_registered": true,
-        "monetisation_onboarded": true
+        "profile_url": "https://mod.io/u/xant"
       },
       "level": 8,
       "date_added": 1492058857,
@@ -10126,12 +10035,12 @@ System.out.println(response.toString());
 
 Get the user that is the original _submitter_ of a resource. Successful request will return a single [User Object](#user-object).
 
-     __NOTE:__ Mods and games can be managed by teams of users, for the most accurate information you should use the [Team endpoints](#teams).
+    __NOTE:__ Mods and games can be managed by teams of users, for the most accurate information you should use the [Team endpoints](#teams).
 
-     Parameter|Type|Required|Description
-     ---|---|---|---|
-     resource_type|string|true|Type of resource you are checking the ownership of. Must be one of the following values:<br><br>- _games_<br>- _mods_<br>- _files_
-     resource_id|integer|true|Unique id of the resource you are checking the ownership of.
+    Parameter|Type|Required|Description
+    ---|---|---|---|
+    resource_type|string|true|Type of resource you are checking the ownership of. Must be one of the following values:<br><br>- _games_<br>- _mods_<br>- _files_
+    resource_id|integer|true|Unique id of the resource you are checking the ownership of.
 
 > Example response
 
@@ -10151,9 +10060,7 @@ Get the user that is the original _submitter_ of a resource. Successful request 
   },
   "timezone": "",
   "language": "",
-  "profile_url": "https://mod.io/u/xant",
-  "monetisation_registered": true,
-  "monetisation_onboarded": true
+  "profile_url": "https://mod.io/u/xant"
 }
 
 ```
@@ -10278,20 +10185,20 @@ System.out.println(response.toString());
 
 `POST /report`
 
-Report a resource on mod.io. You are responsible for content your users submit, so properly supporting the report endpoint or linking to the report page [https://mod.io/report/widget](https://mod.io/report/widget) is important. Successful request will return [Message Object](#message-object).
+Report a resource on mod.io. You are responsible for content your users submit, so properly supporting the report endpoint or linking to the report page [https://mod.io/report/widget](https://mod.io/report) is important. Successful request will return [Message Object](#message-object).
 
-     __NOTE:__ If you want to link to our report page and you know the resource you want to report, the best URL to use is https://mod.io/report/`resource`/`id`/widget. For example to report a mod with an ID of 1 the URL would be: [https://mod.io/report/mods/1/widget](https://mod.io/report/mods/1/widget).
-     __NOTE:__ If you are a game owner or manager, you can [view all reports](https://mod.io/me/library) submitted for your game. You can also configure in your games control panel the number of reports required before content is automatically taken down for review.
-     __NOTE:__ Read our [terms of use](https://mod.io/terms/widget) for information about what is/isn't acceptable.
+    __NOTE:__ If you want to link to our report page and you know the resource you want to report, the best URL to use is https://mod.io/report/`resource`/`id`/widget. For example to report a mod with an ID of 1 the URL would be: [https://mod.io/report/mods/1/widget](https://mod.io/report/mods/1/widget).
+    __NOTE:__ If you are a game owner or manager, you can [view all reports](https://mod.io/me/library) submitted for your game. You can also configure in your games control panel the number of reports required before content is automatically taken down for review.
+    __NOTE:__ Read our [terms of use](https://mod.io/terms/widget) for information about what is/isn't acceptable.
 
-     Parameter|Type|Required|Description
-     ---|---|---|---|
-     resource|string|true|Type of resource you are reporting. Must be one of the following values:<br><br>- _games_<br>- _mods_<br>- _users_
-     id|integer|true|Unique id of the resource you are reporting.
-     type|integer|true|Type of report you are submitting. Must be one of the following values:<br><br>__0__ = Generic<br>__1__ = DMCA<br>__2__ = Not Working<br>__3__ = Rude Content<br>__4__ = Illegal Content<br>__5__ = Stolen Content<br>__6__ = False Information<br>__7__ = Other
-     name|string||Name of the user submitting the report. Recommended for DMCA reports.
-     contact|string||Contact details of the user submitting the report. Recommended for DMCA reports.
-     summary|string|true|Detailed description of your report. Make sure you include all relevant information and links to help moderators investigate and respond appropriately.<br><br>Our [online reporting process](https://mod.io/report/widget) shows the information we collect and put into the `name`, `contact` and `summary` fields as appropiate. We recommend you implement a similar flow in-game.
+    Parameter|Type|Required|Description
+    ---|---|---|---|
+    resource|string|true|Type of resource you are reporting. Must be one of the following values:<br><br>- _games_<br>- _mods_<br>- _users_
+    id|integer|true|Unique id of the resource you are reporting.
+    type|integer|true|Type of report you are submitting. Must be one of the following values:<br><br>__0__ = Generic<br>__1__ = DMCA<br>__2__ = Not Working<br>__3__ = Rude Content<br>__4__ = Illegal Content<br>__5__ = Stolen Content<br>__6__ = False Information<br>__7__ = Other
+    name|string||Name of the user submitting the report. Recommended for DMCA reports.
+    contact|string||Contact details of the user submitting the report. Recommended for DMCA reports.
+    summary|string|true|Detailed description of your report. Make sure you include all relevant information and links to help moderators investigate and respond appropriately.<br><br>Our [online reporting process](https://mod.io/report/widget) shows the information we collect and put into the `name`, `contact` and `summary` fields as appropiate. We recommend you implement a similar flow in-game.
 
 > Example response
 
@@ -10654,9 +10561,7 @@ Get the _authenticated user_ details. Successful request will return a single [U
   },
   "timezone": "",
   "language": "",
-  "profile_url": "https://mod.io/u/xant",
-  "monetisation_registered": true,
-  "monetisation_onboarded": true
+  "profile_url": "https://mod.io/u/xant"
 }
 
 ```
@@ -11077,7 +10982,7 @@ Get all games the _authenticated user_ added or is a team member of. Successful 
     submission_option|integer|Submission process modders must follow:<br><br>__0__ = Mod uploads must occur via the API using a tool created by the game developers<br>__1__ = Mod uploads can occur from anywhere, including the website and API
     curation_option|integer|Curation process used to approve mods:<br><br>__0__ = No curation: Mods are immediately available to play<br>__2__ = Full curation: All mods must be accepted by someone to be listed
     community_options|integer|Community features enabled on the mod.io website:<br><br>__0__ = All of the options below are disabled<br>__1__ = Enable comments<br>__2__ = Enable guides<br>__?__ = Combine to find games with multiple options enabled (see [BITWISE fields](#bitwise-and-bitwise-and))
-    revenue_options|integer|Revenue capabilities mods can enable:<br><br>__0__ = All of the options below are disabled<br>__1__ = Allow mods to be sold<br>__2__ = Allow mods to receive donations<br>__4__ = Allow mods to be traded<br>__8__ = Allow mods to control supply and scarcity<br>__?__ = Combine to find games with multiple options enabled (see [BITWISE fields](#bitwise-and-bitwise-and))
+    monetisation_options|integer|Monetisation features mods can enable:<br><br>__0__ = All of the options below are disabled<br>__1__ = Enabled<br>__2__ = Allow creators to receive donations (patronage)<br>__4__ = Allow mods to be sold (marketplace)<br>__?__ = Combine to find games with multiple options enabled (see [BITWISE fields](#bitwise-and-bitwise-and))
     api_access_options|integer|Level of API access allowed by this game:<br><br>__0__ = All of the options below are disabled<br>__1__ = Allow 3rd parties to access this games API endpoints<br>__2__ = Allow mods to be downloaded directly (if disabled all download URLs will contain a frequently changing verification hash to stop unauthorized use)<br>__?__ = Combine to find games with multiple options enabled (see [BITWISE fields](#bitwise-and-bitwise-and)
 
     Display|Type|Description
@@ -11086,8 +10991,8 @@ Get all games the _authenticated user_ added or is a team member of. Successful 
 
     Sort|Description
     ---|---
-    popular|Sort results by popularity using [_sort filter](#filtering), value should be `popular` for descending or `-popular` for ascending results. __NOTE:__ Popularity is calculated hourly and reset daily (results are ranked from 1 to X). You should sort this column in ascending order `-popular` to get the top ranked results.
-    popular_overall|Sort results by 'Popular Overall' using [_sort filter](#filtering), value should be `popular_overall` for descending or `-popular_overall` for ascending results. __NOTE:__ You should sort this column in ascending order `-popular_overall` to get the top ranked results. This filter differs from popular by filtering on the amount of downloads the game has received overall, and not just in the last 24 hours.
+    popular|Sort results by popularity using [_sort filter](#filtering), value should be `popular` for descending or `-popular` for ascending results.<br><br>__NOTE:__ Popularity is calculated hourly and reset daily (results are ranked from 1 to X). You should sort this column in ascending order `-popular` to get the top ranked results.
+    popular_overall|Sort results by 'Popular Overall' using [_sort filter](#filtering), value should be `popular_overall` for descending or `-popular_overall` for ascending results.<br><br>__NOTE:__ You should sort this column in ascending order `-popular_overall` to get the top ranked results. This filter differs from popular by filtering on the amount of downloads the game has received overall, and not just in the last 24 hours.
     subscribers|Sort results by most subscribers using [_sort filter](#filtering), value should be `subscribers` for descending or `-subscribers` for ascending results.
 
 > Example response
@@ -11106,6 +11011,7 @@ Get all games the _authenticated user_ added or is a team member of. Successful 
       "submission_option": 1,
       "curation_option": 0,
       "community_options": 3,
+      "monetisation_options": 0,
       "revenue_options": 0,
       "api_access_options": 3,
       "maturity_options": 0,
@@ -11154,17 +11060,6 @@ Get all games the _authenticated user_ added or is a team member of. Successful 
           "locked": false
         }
       ],
-      "monetisation_options": {
-        "enabled": false,
-        "patronage": false,
-        "marketplace": false
-      },
-      "monetisation": {
-        "monetisation_team_id": 0,
-        "monetisation_type": "kyc",
-        "patronage_platform_cut": "The patronage platform cut for this team.",
-        "onboarded": "pending"
-      },
       "stats": {
         "game_id": 2,
         "mods_count_total": 13,
@@ -11188,12 +11083,7 @@ Get all games the _authenticated user_ added or is a team member of. Successful 
           "label": "PlayStation 5",
           "moderated": true
         }
-      ],
-      "patronage": {
-        "min_patronage": 100,
-        "max_patronage": 1000000,
-        "default_patronage": 500
-      }
+      ]
     },
     {
         ...
@@ -11314,22 +11204,25 @@ Get all mod's the _authenticated user_ is subscribed to. Successful request will
     ---|---|---
     id|integer|Unique id of the mod.
     game_id|integer|Unique id of the parent game.
+    status|integer|Status of the mod (only game admins can filter by this field, see [status and visibility](#status-amp-visibility) for details):<br><br>__0__ = Not accepted<br>__1__ = Accepted _(default)_<br>__3__ = Deleted
+    visible|integer|Visibility of the mod (only game admins can filter by this field, see [status and visibility](#status-amp-visibility) for details):<br><br>__0__ = Hidden<br>__1__ = Public
     submitted_by|integer|Unique id of the user who has ownership of the mod.
     date_added|integer|Unix timestamp of date mod was registered.
     date_updated|integer|Unix timestamp of date mod was updated.
     date_live|integer|Unix timestamp of date mod was set live.
+    maturity_option|integer|Maturity option(s) set by the mod creator:<br><br>__0__ = None _(default)_<br>__1__ = Alcohol<br>__2__ = Drugs<br>__4__ = Violence<br>__8__ = Explicit<br>__?__ = Add the options you want together, to enable multiple filters (see [BITWISE fields](#bitwise-and-bitwise-and))
+    monetisation_options|integer|Monetisation option(s) enabled by the mod creator:<br><br>__0__ = None _(default)_<br>__1__ = Enabled<br>__2__ = Patronage On<br>__4__ = Marketplace On<br>__?__ = Add the options you want together, to enable multiple filters (see [BITWISE fields](#bitwise-and-bitwise-and))
     name|string|Name of the mod.
     name_id|string|Path for the mod on mod.io. For example: https://mod.io/g/gamename/m/__mod-name-id-here__
-    summary|string|Summary of the mod.
-    description|string|Detailed description of the mod which allows HTML.
-    homepage_url|string|Official homepage of the mod.
+    modfile|integer|Unique id of the file that is the current active release (see [mod files](#files)).
     metadata_blob|string|Metadata stored by the game developer.
+    metadata_kvp|string|Colon-separated values representing the key-value pairs you want to filter the results by. If you supply more than one key-pair, separate the pairs by a comma. Will only filter by an exact key-pair match.
     tags|string|Comma-separated values representing the tags you want to filter the results by. If you specify multiple tags, only mods which have all tags will be returned, and only tags that are supported by the parent game can be applied. To determine what tags are eligible, see the tags values within `tag_options` column on the parent [Game Object](#game-object). If you want to ensure mods returned do not contain particular tag(s), you can use the `tags-not-in` filter either independently or alongside this filter.
 
     Sort|Description
     ---|---
     downloads|Sort results by most downloads using [_sort filter](#filtering) parameter, value should be `downloads` for descending or `-downloads` for ascending results.
-    popular|Sort results by popularity using [_sort filter](#filtering), value should be `popular` for descending or `-popular` for ascending results. __NOTE:__ Popularity is calculated hourly and reset daily (results are ranked from 1 to X). You should sort this column in ascending order `-popular` to get the top ranked results.
+    popular|Sort results by popularity using [_sort filter](#filtering), value should be `popular` for descending or `-popular` for ascending results.<br><br>__NOTE:__ Popularity is calculated hourly and reset daily (results are ranked from 1 to X). You should sort this column in ascending order `-popular` to get the top ranked results.
     rating|Sort results by weighted rating using [_sort filter](#filtering), value should be `rating` for descending or `-rating` for ascending results.
     subscribers|Sort results by most subscribers using [_sort filter](#filtering), value should be `subscribers` for descending or `-subscribers` for ascending results.
 
@@ -11358,15 +11251,14 @@ Get all mod's the _authenticated user_ is subscribed to. Successful request will
         },
         "timezone": "",
         "language": "",
-        "profile_url": "https://mod.io/u/xant",
-        "monetisation_registered": true,
-        "monetisation_onboarded": true
+        "profile_url": "https://mod.io/u/xant"
       },
       "date_added": 1492564103,
       "date_updated": 1499841487,
       "date_live": 1499841403,
       "maturity_option": 0,
       "community_options": 3,
+      "monetisation_options": 0,
       "price": 0,
       "tax": 0,
       "logo": {
@@ -11459,15 +11351,6 @@ Get all mod's the _authenticated user_ is subscribed to. Successful request will
         "ratings_weighted_aggregate": 87.38,
         "ratings_display_text": "Very Positive",
         "date_expires": 1492564103
-      },
-      "monetisation_options": {
-        "enabled": false,
-        "patronage": false,
-        "marketplace": false
-      },
-      "monetisation": {
-        "monetisation_team_id": "Team ID for the monetisation API.",
-        "onboarded": "pending"
       }
     },
     {
@@ -11599,11 +11482,10 @@ Get all mods the _authenticated user_ added or is a team member of. Successful r
     date_added|integer|Unix timestamp of date mod was registered.
     date_updated|integer|Unix timestamp of date mod was updated.
     date_live|integer|Unix timestamp of date mod was set live.
+    maturity_option|integer|Maturity option(s) set by the mod creator:<br><br>__0__ = None _(default)_<br>__1__ = Alcohol<br>__2__ = Drugs<br>__4__ = Violence<br>__8__ = Explicit<br>__?__ = Add the options you want together, to enable multiple filters (see [BITWISE fields](#bitwise-and-bitwise-and))
+    monetisation_options|integer|Monetisation option(s) enabled by the mod creator:<br><br>__0__ = None _(default)_<br>__1__ = Enabled<br>__2__ = Patronage On<br>__4__ = Marketplace On<br>__?__ = Add the options you want together, to enable multiple filters (see [BITWISE fields](#bitwise-and-bitwise-and))
     name|string|Name of the mod.
     name_id|string|Path for the mod on mod.io. For example: https://mod.io/g/gamename/m/__mod-name-id-here__
-    summary|string|Summary of the mod.
-    description|string|Detailed description of the mod which allows HTML.
-    homepage_url|string|Official homepage of the mod.
     modfile|integer|Unique id of the file that is the current active release (see [mod files](#files)).
     metadata_blob|string|Metadata stored by the game developer.
     metadata_kvp|string|Colon-separated values representing the key-value pairs you want to filter the results by. If you supply more than one key-pair, separate the pairs by a comma. Will only filter by an exact key-pair match.
@@ -11612,7 +11494,7 @@ Get all mods the _authenticated user_ added or is a team member of. Successful r
     Sort|Description
     ---|---
     downloads|Sort results by most downloads using [_sort filter](#filtering) parameter, value should be `downloads` for descending or `-downloads` for ascending results.
-    popular|Sort results by popularity using [_sort filter](#filtering), value should be `popular` for descending or `-popular` for ascending results. __NOTE:__ Popularity is calculated hourly and reset daily (results are ranked from 1 to X). You should sort this column in ascending order `-popular` to get the top ranked results.
+    popular|Sort results by popularity using [_sort filter](#filtering), value should be `popular` for descending or `-popular` for ascending results.<br><br>__NOTE:__ Popularity is calculated hourly and reset daily (results are ranked from 1 to X). You should sort this column in ascending order `-popular` to get the top ranked results.
     rating|Sort results by weighted rating using [_sort filter](#filtering), value should be `rating` for descending or `-rating` for ascending results.
     subscribers|Sort results by most subscribers using [_sort filter](#filtering), value should be `subscribers` for descending or `-subscribers` for ascending results.
 
@@ -11641,15 +11523,14 @@ Get all mods the _authenticated user_ added or is a team member of. Successful r
         },
         "timezone": "",
         "language": "",
-        "profile_url": "https://mod.io/u/xant",
-        "monetisation_registered": true,
-        "monetisation_onboarded": true
+        "profile_url": "https://mod.io/u/xant"
       },
       "date_added": 1492564103,
       "date_updated": 1499841487,
       "date_live": 1499841403,
       "maturity_option": 0,
       "community_options": 3,
+      "monetisation_options": 0,
       "price": 0,
       "tax": 0,
       "logo": {
@@ -11742,15 +11623,6 @@ Get all mods the _authenticated user_ added or is a team member of. Successful r
         "ratings_weighted_aggregate": 87.38,
         "ratings_display_text": "Very Positive",
         "date_expires": 1492564103
-      },
-      "monetisation_options": {
-        "enabled": false,
-        "patronage": false,
-        "marketplace": false
-      },
-      "monetisation": {
-        "monetisation_team_id": "Team ID for the monetisation API.",
-        "onboarded": "pending"
       }
     },
     {
@@ -11888,9 +11760,7 @@ Get all users muted by the _authenticated user_. Successful request will return 
       },
       "timezone": "",
       "language": "",
-      "profile_url": "https://mod.io/u/xant",
-      "monetisation_registered": true,
-      "monetisation_onboarded": true
+      "profile_url": "https://mod.io/u/xant"
     },
     {
         ...
@@ -12117,9 +11987,7 @@ thumb_100x100|string|URL to the medium avatar thumbnail.
     },
     "timezone": "",
     "language": "",
-    "profile_url": "https://mod.io/u/xant",
-    "monetisation_registered": true,
-    "monetisation_onboarded": true
+    "profile_url": "https://mod.io/u/xant"
   },
   "date_added": 1499841487,
   "reply_id": 0,
@@ -12213,30 +12081,6 @@ md5|string|MD5 hash of the file.
 
 
 
-## Game Monetisation Object  
-
-<a name="schemagame_monetisation_object"></a>
-
-```json
-{
-  "monetisation_team_id": 0,
-  "monetisation_type": "kyc",
-  "patronage_platform_cut": "The patronage platform cut for this team.",
-  "onboarded": "pending"
-} 
-```
-
-### Properties
-
-Name|Type|Description
----|---|---|---|
-monetisation_team_id|integer|Team ID for the monetisation API.
-monetisation_type|string|Team type onboarded as.
-patronage_platform_cut|integer|No description
-onboarded|string|Has the team completed setup?
-
-
-
 ## Game Object
 
    <a name="schemagame_object"></a>
@@ -12253,6 +12097,7 @@ onboarded|string|Has the team completed setup?
   "submission_option": 1,
   "curation_option": 0,
   "community_options": 3,
+  "monetisation_options": 0,
   "revenue_options": 0,
   "api_access_options": 3,
   "maturity_options": 0,
@@ -12301,17 +12146,6 @@ onboarded|string|Has the team completed setup?
       "locked": false
     }
   ],
-  "monetisation_options": {
-    "enabled": false,
-    "patronage": false,
-    "marketplace": false
-  },
-  "monetisation": {
-    "monetisation_team_id": 0,
-    "monetisation_type": "kyc",
-    "patronage_platform_cut": "The patronage platform cut for this team.",
-    "onboarded": "pending"
-  },
   "stats": {
     "game_id": 2,
     "mods_count_total": 13,
@@ -12335,12 +12169,7 @@ onboarded|string|Has the team completed setup?
       "label": "PlayStation 5",
       "moderated": true
     }
-  ],
-  "patronage": {
-    "min_patronage": 100,
-    "max_patronage": 1000000,
-    "default_patronage": 500
-  }
+  ]
 } 
 ```
 
@@ -12358,7 +12187,8 @@ presentation_option|integer|Presentation style used on the mod.io website:<br><b
 submission_option|integer|Submission process modders must follow:<br><br>__0__ = Mod uploads must occur via the API using a tool created by the game developers<br>__1__ = Mod uploads can occur from anywhere, including the website and API
 curation_option|integer|Curation process used to approve mods:<br><br>__0__ = No curation: Mods are immediately available to play<br>__2__ = Full curation: All mods must be accepted by someone to be listed
 community_options|integer|Community features enabled on the mod.io website:<br><br>__0__ = All of the options below are disabled<br>__1__ = Enable comments<br>__2__ = Enable guides<br>__?__ = Add the options you want together, to enable multiple features (see [BITWISE fields](#bitwise-and-bitwise-and))
-revenue_options|integer|Revenue capabilities mods can enable:<br><br>__0__ = All of the options below are disabled<br>__1__ = Allow mods to be sold<br>__2__ = Allow mods to receive patronage<br>__4__ = Allow mods to be traded<br>__8__ = Allow mods to control supply and scarcity<br>__?__ = Add the options you want together, to enable multiple features (see [BITWISE fields](#bitwise-and-bitwise-and))
+monetisation_options|integer|Monetisation features enabled for this game:<br><br>__0__ = All of the options below are disabled _(default)_<br>__1__ = Enabled<br>__2__ = Enable patronage<br>__4__ = Enable marketplace<br>__?__ = Add the options you want together, to enable multiple features (see [BITWISE fields](#bitwise-and-bitwise-and))
+revenue_options|integer|Deprecated: Please use monetisation_options instead, this will be removed in subsequent API version.
 api_access_options|integer|Level of API access allowed by this game:<br><br>__0__ = All of the options below are disabled<br>__1__ = Allow 3rd parties to access this games API endpoints<br>__2__ = Allow mods to be downloaded directly (if disabled all download URLs will contain a frequently changing verification hash to stop unauthorized use)<br>__?__ = Add the options you want together, to enable multiple features (see [BITWISE fields](#bitwise-and-bitwise-and))
 maturity_options|integer|Mature content setup for this game:<br><br>__0__ = Don't allow mature content in mods _(default)_<br>__1__ = Allow mature content in mods<br>__2__ = This game is for mature audiences only<br>__?__ = Add the options you want together, to enable multiple features (see [BITWISE fields](#bitwise-and-bitwise-and))
 ugc_name|string|Word used to describe user-generated content (mods, items, addons etc).
@@ -12371,11 +12201,8 @@ summary|string|Summary of the games mod support.
 instructions|string|A guide about creating and uploading mods for this game to mod.io (applicable if submission_option = 0).
 instructions_url|string|Link to a mod.io guide, your modding wiki or a page where modders can learn how to make and submit mods to your games profile.
 profile_url|string|URL to the game.
-monetisation_options|[Monetisation Options Object](#schemamonetisation_options_object)|No description
-monetisation|[Game Monetisation Object](#schemagame_monetisation_object)|No description
 stats|[Game Stats Object](#schemagame_stats_object)|Numerous aggregate stats for the game.
 theme|[Theme Object](#schematheme_object)|Theme color values for the game.
-patronage|[Game Patronage Object](#schemagame_patronage_object)|No description
 other_urls|[Game OtherUrls Object](#schemagame_otherurls_object)[]|Creator defined URLs to share.
 tag_options|[Game Tag Option Object](#schemagame_tag_option_object)[]|Groups of tags configured by the game developer, that mods can select. Hidden tags will only be returned if `show_hidden_tags` is set to `true`.
 platforms|[Game Platforms Object](#schemagame_platforms_object)[]|Platforms that are supported by this title.
@@ -12399,28 +12226,6 @@ Name|Type|Description
 ---|---|---|---|
 label|string|Label of the link you are sharing.
 url|string|The URL to be associated with the label.
-
-
-
-## Game Patronage Object  
-
-<a name="schemagame_patronage_object"></a>
-
-```json
-{
-  "min_patronage": 100,
-  "max_patronage": 1000000,
-  "default_patronage": 500
-} 
-```
-
-### Properties
-
-Name|Type|Description
----|---|---|---|
-min_patronage|integer|Min patronage amount.
-max_patronage|integer|Max patronage amount.
-default_patronage|integer|Default patronage amount.
 
 
 
@@ -12568,6 +12373,7 @@ result_total|integer|Total number of results found.
       "submission_option": 1,
       "curation_option": 0,
       "community_options": 3,
+      "monetisation_options": 0,
       "revenue_options": 0,
       "api_access_options": 3,
       "maturity_options": 0,
@@ -12616,17 +12422,6 @@ result_total|integer|Total number of results found.
           "locked": false
         }
       ],
-      "monetisation_options": {
-        "enabled": false,
-        "patronage": false,
-        "marketplace": false
-      },
-      "monetisation": {
-        "monetisation_team_id": 0,
-        "monetisation_type": "kyc",
-        "patronage_platform_cut": "The patronage platform cut for this team.",
-        "onboarded": "pending"
-      },
       "stats": {
         "game_id": 2,
         "mods_count_total": 13,
@@ -12650,12 +12445,7 @@ result_total|integer|Total number of results found.
           "label": "PlayStation 5",
           "moderated": true
         }
-      ],
-      "patronage": {
-        "min_patronage": 100,
-        "max_patronage": 1000000,
-        "default_patronage": 500
-      }
+      ]
     },
     {
         ...
@@ -12707,9 +12497,7 @@ result_total|integer|Total number of results found.
         },
         "timezone": "",
         "language": "",
-        "profile_url": "https://mod.io/u/xant",
-        "monetisation_registered": true,
-        "monetisation_onboarded": true
+        "profile_url": "https://mod.io/u/xant"
       },
       "date_added": 1499841487,
       "reply_id": 0,
@@ -13007,15 +12795,14 @@ result_total|integer|Total number of results found.
         },
         "timezone": "",
         "language": "",
-        "profile_url": "https://mod.io/u/xant",
-        "monetisation_registered": true,
-        "monetisation_onboarded": true
+        "profile_url": "https://mod.io/u/xant"
       },
       "date_added": 1492564103,
       "date_updated": 1499841487,
       "date_live": 1499841403,
       "maturity_option": 0,
       "community_options": 3,
+      "monetisation_options": 0,
       "price": 0,
       "tax": 0,
       "logo": {
@@ -13108,15 +12895,6 @@ result_total|integer|Total number of results found.
         "ratings_weighted_aggregate": 87.38,
         "ratings_display_text": "Very Positive",
         "date_expires": 1492564103
-      },
-      "monetisation_options": {
-        "enabled": false,
-        "patronage": false,
-        "marketplace": false
-      },
-      "monetisation": {
-        "monetisation_team_id": "Team ID for the monetisation API.",
-        "onboarded": "pending"
       }
     },
     {
@@ -13234,9 +13012,7 @@ result_total|integer|Total number of results found.
       },
       "timezone": "",
       "language": "",
-      "profile_url": "https://mod.io/u/xant",
-      "monetisation_registered": true,
-      "monetisation_onboarded": true
+      "profile_url": "https://mod.io/u/xant"
     },
     {
         ...
@@ -13285,9 +13061,7 @@ result_total|integer|Total number of results found.
         },
         "timezone": "",
         "language": "",
-        "profile_url": "https://mod.io/u/xant",
-        "monetisation_registered": true,
-        "monetisation_onboarded": true
+        "profile_url": "https://mod.io/u/xant"
       },
       "level": 8,
       "date_added": 1492058857,
@@ -13628,26 +13402,6 @@ images|[Image Object](#schemaimage_object)[]|Array of image objects (a gallery).
 
 
 
-## Mod Monetisation Object  
-
-<a name="schemamod_monetisation_object"></a>
-
-```json
-{
-  "monetisation_team_id": "Team ID for the monetisation API.",
-  "onboarded": "pending"
-} 
-```
-
-### Properties
-
-Name|Type|Description
----|---|---|---|
-monetisation_team_id|integer|No description
-onboarded|string|Has the team completed setup?
-
-
-
 ## Mod Object
 
    <a name="schemamod_object"></a>
@@ -13673,15 +13427,14 @@ onboarded|string|Has the team completed setup?
     },
     "timezone": "",
     "language": "",
-    "profile_url": "https://mod.io/u/xant",
-    "monetisation_registered": true,
-    "monetisation_onboarded": true
+    "profile_url": "https://mod.io/u/xant"
   },
   "date_added": 1492564103,
   "date_updated": 1499841487,
   "date_live": 1499841403,
   "maturity_option": 0,
   "community_options": 3,
+  "monetisation_options": 0,
   "price": 0,
   "tax": 0,
   "logo": {
@@ -13774,15 +13527,6 @@ onboarded|string|Has the team completed setup?
     "ratings_weighted_aggregate": 87.38,
     "ratings_display_text": "Very Positive",
     "date_expires": 1492564103
-  },
-  "monetisation_options": {
-    "enabled": false,
-    "patronage": false,
-    "marketplace": false
-  },
-  "monetisation": {
-    "monetisation_team_id": "Team ID for the monetisation API.",
-    "onboarded": "pending"
   }
 } 
 ```
@@ -13800,7 +13544,8 @@ date_added|integer|Unix timestamp of date mod was registered.
 date_updated|integer|Unix timestamp of date mod was updated.
 date_live|integer|Unix timestamp of date mod was set live.
 maturity_option|integer|Maturity options flagged by the mod developer, this is only relevant if the parent game allows mods to be labelled as mature:<br><br>__0__ = None set _(default)_<br>__1__ = Alcohol<br>__2__ = Drugs<br>__4__ = Violence<br>__8__ = Explicit<br>__?__ = Add the options you want together, to enable multiple filters (see [BITWISE fields](#bitwise-and-bitwise-and))
-community_options|integer|Community features enabled for this mod by its creators:<br><br>__0__ = All of the options below are disabled<br>__1__ = Enable comments _(default)_<br>__2__ = Enable guides<br>__?__ = Add the options you want together, to enable multiple features (see [BITWISE fields](#bitwise-and-bitwise-and))
+community_options|integer|Community features enabled for this mod:<br><br>__0__ = All of the options below are disabled<br>__1__ = Enable comments _(default)_<br>__2__ = Enable guides<br>__?__ = Add the options you want together, to enable multiple features (see [BITWISE fields](#bitwise-and-bitwise-and))
+monetisation_options|integer|Monetisation features enabled for this mod:<br><br>__0__ = All of the options below are disabled _(default)_<br>__1__ = Enabled<br>__2__ = Patronage On<br>__4__ = Marketplace On<br>__?__ = Add the options you want together, to enable multiple features (see [BITWISE fields](#bitwise-and-bitwise-and))
 price|float|The price of the mod.
 tax|int|The tax of the mod.
 logo|[Logo Object](#schemalogo_object)|Contains media URL's to the logo for the mod.
@@ -13815,8 +13560,6 @@ profile_url|string|URL to the mod.
 media|[Mod Media Object](#schemamod_media_object)|Contains YouTube & Sketchfab links, aswell as media URL's of images for the mod.
 modfile|[Modfile Object](#schemamodfile_object)|The primary modfile for the mod.
 stats|[Mod Stats Object](#schemamod_stats_object)|Numerous aggregate stats for the mod.
-monetisation_options|[Monetisation Options Object](#schemamonetisation_options_object)|No description
-monetisation|[Mod Monetisation Object](#schemamod_monetisation_object)|No description
 platforms|[Mod Platforms Object](#schemamod_platforms_object)[]|Contains mod platform data.
 metadata_kvp|[Metadata KVP Object](#schemametadata_kvp_object)[]|Contains key-value metadata.
 tags|[Mod Tag Object](#schemamod_tag_object)[]|Contains mod tag data.
@@ -14017,28 +13760,6 @@ pending|string[]|Array of [valid platform strings](#targeting-a-platform) showin
 
 
 
-## Monetisation Options Object  
-
-<a name="schemamonetisation_options_object"></a>
-
-```json
-{
-  "enabled": false,
-  "patronage": false,
-  "marketplace": false
-} 
-```
-
-### Properties
-
-Name|Type|Description
----|---|---|---|
-enabled|boolean|Monetisation Enable/Disabled.
-patronage|boolean|Patronage Enable/Disabled.
-marketplace|boolean|Marketplace Enable/Disabled.
-
-
-
 ## Multipart Upload Object  
 
 <a name="schemamultipart_upload_object"></a>
@@ -14130,9 +13851,7 @@ date_added|integer|Unix timestamp of date rating was submitted.
     },
     "timezone": "",
     "language": "",
-    "profile_url": "https://mod.io/u/xant",
-    "monetisation_registered": true,
-    "monetisation_onboarded": true
+    "profile_url": "https://mod.io/u/xant"
   },
   "date_added": 1492564103,
   "reason": ""
@@ -14173,9 +13892,7 @@ reason|string|Optional notes provided by the actionee, usually containing the re
     },
     "timezone": "",
     "language": "",
-    "profile_url": "https://mod.io/u/xant",
-    "monetisation_registered": true,
-    "monetisation_onboarded": true
+    "profile_url": "https://mod.io/u/xant"
   },
   "level": 8,
   "date_added": 1492058857,
@@ -14345,9 +14062,7 @@ event_type|string|Type of event that was triggered. List of possible events: <br
   },
   "timezone": "",
   "language": "",
-  "profile_url": "https://mod.io/u/xant",
-  "monetisation_registered": true,
-  "monetisation_onboarded": true
+  "profile_url": "https://mod.io/u/xant"
 } 
 ```
 
@@ -14365,8 +14080,6 @@ avatar|[Avatar Object](#schemaavatar_object)|Contains media URL's to the users a
 timezone|string|Deprecated: No longer used and will be removed in subsequent API version.
 language|string|Deprecated: No longer used and will be removed in subsequent API version. To [localize the API response](#localization) we recommend you set the `Accept-Language` header.
 profile_url|string|URL to the users profile.
-monetisation_registered|boolean|Has the user registered?
-monetisation_onboarded|boolean|Has the user completed onboarding?
 
 
 
