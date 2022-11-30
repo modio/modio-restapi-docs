@@ -7484,6 +7484,137 @@ Status|Meaning|Error Ref|Description|Response Schema
 To perform this request, you must be authenticated via one of the following methods:
 <a href="#authentication">OAuth 2</a> (Scopes: write)
 </aside>
+## Reorder Mod Media
+
+> Example request
+
+```shell
+# You can also use wget
+curl -X PUT https://api.mod.io/v1/games/{game-id}/mods/{mod-id}/media/reorder \
+  -H 'Authorization: Bearer {access-token}' \ 
+  -H 'Content-Type: application/x-www-form-urlencoded' \ 
+  -H 'Accept: application/json'
+  -d 'images[]=filename.jpg' \
+  -d 'youtube[]=https://www.youtube.com/watch?v=dQw4w9WgXcQ' \
+  -d 'sketchfab[]=https://sketchfab.com/models/7793b895f27841f4930e6b71f75a8d74'
+
+```
+
+```http
+PUT https://api.mod.io/v1/games/{game-id}/mods/{mod-id}/media/reorder HTTP/1.1
+Host: api.mod.io
+Content-Type: application/x-www-form-urlencoded
+Accept: application/json
+Authorization: Bearer {access-token}
+
+```
+
+```javascript
+var headers = {
+  'Authorization':'Bearer {access-token}',
+  'Content-Type':'application/x-www-form-urlencoded',
+  'Accept':'application/json'
+
+};
+
+$.ajax({
+  url: 'https://api.mod.io/v1/games/{game-id}/mods/{mod-id}/media/reorder',
+  method: 'put',
+
+  headers: headers,
+  success: function(data) {
+    console.log(JSON.stringify(data));
+  }
+})
+```
+
+```javascript--nodejs
+const request = require('node-fetch');
+const inputBody = '{
+  "images": "filename.jpg",
+  "youtube": "https://www.youtube.com/watch?v=dQw4w9WgXcQ",
+  "sketchfab": "https://sketchfab.com/models/7793b895f27841f4930e6b71f75a8d74"
+}';
+const headers = {
+  'Authorization':'Bearer {access-token}',
+  'Content-Type':'application/x-www-form-urlencoded',
+  'Accept':'application/json'
+
+};
+
+fetch('https://api.mod.io/v1/games/{game-id}/mods/{mod-id}/media/reorder',
+{
+  method: 'PUT',
+  body: inputBody,
+  headers: headers
+})
+.then(function(res) {
+    return res.json();
+}).then(function(body) {
+    console.log(body);
+});
+```
+
+```python
+import requests
+headers = {
+  'Authorization': 'Bearer {access-token}',
+  'Content-Type': 'application/x-www-form-urlencoded',
+  'Accept': 'application/json'
+}
+
+r = requests.put('https://api.mod.io/v1/games/{game-id}/mods/{mod-id}/media/reorder', params={
+
+}, headers = headers)
+
+print r.json()
+```
+
+```java
+URL obj = new URL("https://api.mod.io/v1/games/{game-id}/mods/{mod-id}/media/reorder");
+HttpURLConnection con = (HttpURLConnection) obj.openConnection();
+con.setRequestMethod("PUT");
+int responseCode = con.getResponseCode();
+BufferedReader in = new BufferedReader(
+    new InputStreamReader(con.getInputStream()));
+String inputLine;
+StringBuffer response = new StringBuffer();
+while ((inputLine = in.readLine()) != null) {
+    response.append(inputLine);
+}
+in.close();
+System.out.println(response.toString());
+```
+
+`PUT /games/{game-id}/mods/{mod-id}/media/reorder`
+
+Reorder images, sketchfab or youtube links from a mod profile. Successful request will return `204 No Content`.
+
+    __NOTE:__ You can only reorder existing media, any differences in the media arrays will result in a `400 Bad Request` response.
+
+    Parameter|Type|Required|Description
+    ---|---|---|---|
+    images[]|string||Filename of the image(s) you want to reorder. Every image to delete requires a separate field with images[] as the key (eg. images[]=filename1.jpg, images[]=filename2.jpg)
+    youtube[]|string||Full Youtube link(s) you want to reorder. Every Youtube link to delete requires a separate field with youtube[] as the key (eg. youtube[]=https://www.youtube.com/watch?v=IGVZOLV9SPo, youtube[]=https://www.youtube.com/watch?v=5nY6fjZ3EUc)
+    sketchfab[]|string||Full Sketchfab link(s) you want to reorder. Every Sketchfab link to delete requires a separate field with sketchfab[] as the key (eg. sketchfab[]=https://sketchfab.com/models/71f04e390ff54e5f8d9a51b4e1caab7e, sketchfab[]=https://sketchfab.com/models/5c85e649dd854cb58c2b9af081ebb0ff)
+
+> Example response
+
+```json
+ 204 No Content 
+
+```
+<h3 id="Reorder-Mod-Media-responses">Responses</h3>
+
+Status|Meaning|Error Ref|Description|Response Schema
+---|---|----|---|---|
+204|[No Content](https://tools.ietf.org/html/rfc7231#section-6.3.5)||Successful Request. No Body Returned.|None
+403|[Forbidden](https://tools.ietf.org/html/rfc7231#section-6.5.3)|15036|The authenticated user does not have permission to delete media from this mod, this action is restricted to team managers & administrators only.|[Error Object](#schemaerror_object)
+400|[Bad Request](https://tools.ietf.org/html/rfc7231#section-6.5.1)|15064|The request body contains media that does not exist on the mod, you can only reorder existing media.|[Error Object](#schemaerror_object)
+<aside class="auth-notice">
+To perform this request, you must be authenticated via one of the following methods:
+<a href="#authentication">OAuth 2</a> (Scopes: write)
+</aside>
 # Events
 
 ## Get Mods Events
