@@ -13993,8 +13993,8 @@ date_added|integer|Unix timestamp of date rating was submitted.
 
 Name|Type|Description
 ---|---|---|---|
-status_new|integer|The new status of the mod (see [status and visibility](#status-amp-visibility) for details):<br><br>__0__ = Not Accepted<br>__1__ = Accepted<br>__3__ = Deleted
-status_old|integer|The old status of the mod (see [status and visibility](#status-amp-visibility) for details):<br><br>__0__ = Not Accepted<br>__1__ = Accepted<br>__3__ = Deleted
+status_new|integer|The new status of the resource (see [status and visibility](#status-amp-visibility) for details):<br><br>__0__ = Not Accepted<br>__1__ = Accepted<br>__3__ = Deleted
+status_old|integer|The old status of the resource (see [status and visibility](#status-amp-visibility) for details):<br><br>__0__ = Not Accepted<br>__1__ = Accepted<br>__3__ = Deleted
 user|[User Object](#schemauser_object)|User Object of the user who triggered the state change.
 date_added|integer|Unix timestamp of date the status change was triggered.
 reason|string|Optional notes provided by the actionee, usually containing the reason why the status change was triggered.
