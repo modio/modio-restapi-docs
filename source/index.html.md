@@ -2526,6 +2526,130 @@ Status|Meaning|Error Ref|Description|Response Schema
 To perform this request, you must be authenticated via one of the following methods:
 <a href="#authentication">api_key</a>
 </aside>
+## Logout
+
+> Example request
+
+```shell
+# You can also use wget
+curl -X POST https://api.mod.io/v1/authenticate/logout \
+  -H 'Origin: https://mod.io' \ 
+  -H 'Authorization: Bearer {access-token}' \ 
+  -H 'Content-Type: application/json' \ 
+  -H 'Accept: application/json'
+
+```
+
+```http
+POST https://api.mod.io/v1/authenticate/logout HTTP/1.1
+Host: api.mod.io
+
+Accept: application/json
+Origin: https://mod.io
+Authorization: Bearer {access-token}
+Content-Type: application/json
+
+```
+
+```javascript
+var headers = {
+  'Origin':'https://mod.io',
+  'Authorization':'Bearer {access-token}',
+  'Content-Type':'application/json',
+  'Accept':'application/json'
+
+};
+
+$.ajax({
+  url: 'https://api.mod.io/v1/authenticate/logout',
+  method: 'post',
+
+  headers: headers,
+  success: function(data) {
+    console.log(JSON.stringify(data));
+  }
+})
+```
+
+```javascript--nodejs
+const request = require('node-fetch');
+
+const headers = {
+  'Origin':'https://mod.io',
+  'Authorization':'Bearer {access-token}',
+  'Content-Type':'application/json',
+  'Accept':'application/json'
+
+};
+
+fetch('https://api.mod.io/v1/authenticate/logout',
+{
+  method: 'POST',
+
+  headers: headers
+})
+.then(function(res) {
+    return res.json();
+}).then(function(body) {
+    console.log(body);
+});
+```
+
+```python
+import requests
+headers = {
+  'Origin': 'https://mod.io',
+  'Authorization': 'Bearer {access-token}',
+  'Content-Type': 'application/json',
+  'Accept': 'application/json'
+}
+
+r = requests.post('https://api.mod.io/v1/authenticate/logout', params={
+
+}, headers = headers)
+
+print r.json()
+```
+
+```java
+URL obj = new URL("https://api.mod.io/v1/authenticate/logout");
+HttpURLConnection con = (HttpURLConnection) obj.openConnection();
+con.setRequestMethod("POST");
+int responseCode = con.getResponseCode();
+BufferedReader in = new BufferedReader(
+    new InputStreamReader(con.getInputStream()));
+String inputLine;
+StringBuffer response = new StringBuffer();
+while ((inputLine = in.readLine()) != null) {
+    response.append(inputLine);
+}
+in.close();
+System.out.println(response.toString());
+```
+
+`POST /authenticate/logout`
+
+Log the user out by revoking their current access token. If this request successfully completes, you should remove any tokens/cookies/cached credentials linking to the now-revoked access token so the user is required to login again through your application. Successful request will return `204 No Content`.
+
+> Example response
+
+```json
+{
+  "code": 200,
+  "success": true,
+  "message": "You have successfully logged out of mod.io."
+}
+
+```
+<h3 id="Logout-responses">Responses</h3>
+
+Status|Meaning|Error Ref|Description|Response Schema
+---|---|----|---|---|
+200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)||Successful Request|[Web Message Object](#schemaweb_message_object)
+<aside class="auth-notice">
+To perform this request, you must be authenticated via one of the following methods:
+<a href="#authentication">OAuth 2</a> (Scopes: web)
+</aside>
 # Games
 
 ## Get Games
@@ -4502,9 +4626,11 @@ Upload a file for the corresponding mod. Successful request will return the newl
 
     __NOTE:__ This endpoint does *not support* `input_json` even if you base64-encode your file, due to the already-large file sizes of some releases and base64-encoding inflating the filesize.
 
+    __NOTE:__ To upload files greater than 100MB, we recommend using the [Multipart Uploads](#create-multipart-upload-session) system. This endpoint supports files up to a max of 500MB in size.
+
     Parameter|Type|Required|Description
     ---|---|---|---|
-    filedata|file|true|The binary file for the release. ZIP the base folder of your mod, or if it is a collection of files which live in a pre-existing game folder, you should ZIP those files. Your file must meet the following conditions:<br><br>- File must be __zipped__ and cannot exceed 5GB in filesize<br>- Filename's cannot contain any of the following charcters: <code>\ / ? " < > &#124; : *</code><br>- Mods which span multiple game directories are not supported unless the game manages this<br>- Mods which overwrite files are not supported unless the game manages this
+    filedata|file|true|The binary file for the release. ZIP the base folder of your mod, or if it is a collection of files which live in a pre-existing game folder, you should ZIP those files. Your file must meet the following conditions:<br><br>- File must be __zipped__ and cannot exceed __500MB__ in filesize (see [Multipart Uploads](#create-multipart-upload-session) to upload larger files)<br>- Filename's cannot contain any of the following charcters: <code>\ / ? " < > &#124; : *</code><br>- Mods which span multiple game directories are not supported unless the game manages this<br>- Mods which overwrite files are not supported unless the game manages this
     version|string||Version of the file release (recommended format 1.0.0 - MAJOR.MINOR.PATCH).
     changelog|string||Changelog of this release.
     active|boolean||_Default value is true._ Flag this upload as the current release, this will change the `modfile` field on the parent mod to the `id` of this file after upload.<br><br>__NOTE:__ If the _active_ parameter is _true_, a [__MODFILE_CHANGED__ event](#get-mod-events) will be fired, so game clients know there is an update available for this mod.
@@ -5212,7 +5338,9 @@ System.out.println(response.toString());
 
 `PUT /games/{game-id}/mods/{mod-id}/files/multipart`
 
-Add a new multipart upload part to an [existing upload session](#create-multipart-upload-session). All parts must be exactly 50MB (Mebibyte) in size unless it is the final part which can be smaller. A successful request will return a single [Multipart Upload Part Object](#multipart-upload-object).<br><br>__NOTE__: Unlike other POST endpoints on this service, the body of this request should contain no form parameters and instead be the data described in the byte range of the Content-Range header of the request.
+Add a new multipart upload part to an [existing upload session](#create-multipart-upload-session). All parts must be exactly 50MB (Mebibyte) in size unless it is the final part which can be smaller. A successful request will return a single [Multipart Upload Part Object](#multipart-upload-object).
+
+    __NOTE__: Unlike other POST endpoints on this service, the body of this request should contain no form parameters and instead be the data described in the byte range of the Content-Range header of the request.
 
     Query Parameters|Required|type|Description
     ---|---|---|---|
@@ -5359,6 +5487,8 @@ System.out.println(response.toString());
 `POST /games/{game-id}/mods/{mod-id}/files/multipart`
 
 Create a new multipart upload session. A successful request will return a single [Multipart Upload Object](#multipart-upload-object).
+
+    __NOTE:__ The multipart upload system is designed for uploading large files up to 20GB in size. If uploading files less than 100MB, we recommend using the [Add Modfile](#add-modfile) endpoint.
 
     Parameter|Type|Required|Description
     ---|---|---|---|
