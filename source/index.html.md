@@ -2532,7 +2532,7 @@ To perform this request, you must be authenticated via one of the following meth
 
 ```shell
 # You can also use wget
-curl -X POST https://api.mod.io/v1/authenticate/logout \
+curl -X POST https://api.mod.io/v1/oauth/logout \
   -H 'Origin: https://mod.io' \ 
   -H 'Authorization: Bearer {access-token}' \ 
   -H 'Content-Type: application/json' \ 
@@ -2541,7 +2541,7 @@ curl -X POST https://api.mod.io/v1/authenticate/logout \
 ```
 
 ```http
-POST https://api.mod.io/v1/authenticate/logout HTTP/1.1
+POST https://api.mod.io/v1/oauth/logout HTTP/1.1
 Host: api.mod.io
 
 Accept: application/json
@@ -2561,7 +2561,7 @@ var headers = {
 };
 
 $.ajax({
-  url: 'https://api.mod.io/v1/authenticate/logout',
+  url: 'https://api.mod.io/v1/oauth/logout',
   method: 'post',
 
   headers: headers,
@@ -2582,7 +2582,7 @@ const headers = {
 
 };
 
-fetch('https://api.mod.io/v1/authenticate/logout',
+fetch('https://api.mod.io/v1/oauth/logout',
 {
   method: 'POST',
 
@@ -2604,7 +2604,7 @@ headers = {
   'Accept': 'application/json'
 }
 
-r = requests.post('https://api.mod.io/v1/authenticate/logout', params={
+r = requests.post('https://api.mod.io/v1/oauth/logout', params={
 
 }, headers = headers)
 
@@ -2612,7 +2612,7 @@ print r.json()
 ```
 
 ```java
-URL obj = new URL("https://api.mod.io/v1/authenticate/logout");
+URL obj = new URL("https://api.mod.io/v1/oauth/logout");
 HttpURLConnection con = (HttpURLConnection) obj.openConnection();
 con.setRequestMethod("POST");
 int responseCode = con.getResponseCode();
@@ -2627,7 +2627,7 @@ in.close();
 System.out.println(response.toString());
 ```
 
-`POST /authenticate/logout`
+`POST /oauth/logout`
 
 Log the user out by revoking their current access token. If this request successfully completes, you should remove any tokens/cookies/cached credentials linking to the now-revoked access token so the user is required to login again through your application. Successful request will return `204 No Content`.
 
