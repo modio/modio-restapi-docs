@@ -1072,11 +1072,7 @@ System.out.println(response.toString());
 
 `POST /external/steamauth`
 
-Request an access token on behalf of a Steam user. To use this functionality you *must* add your games [encrypted app ticket key](https://partner.steamgames.com/apps/sdkauth) from Steamworks, to the *Edit > Options* page of your games profile on mod.io. A Successful request will return an [Access Token Object](#access-token-object).
-     
-     __HINT:__ If you want to overlay the mod.io site in-game on Steam, we recommend you add `?portal=steam` to the end of the URL you open which will prompt the user to login with Steam. See [Web Overlay Authentication](#web-overlay-authentication) for details.
-     
-     __NOTE__: Steam is the only authentication endpoint that requires their token to be base64 encoded. All other endpoints tokens should be provided as a UTF-8 character string.
+Request an access token on behalf of a Steam user. To use this functionality you *must* add your games [encrypted app ticket key](https://partner.steamgames.com/apps/sdkauth) from Steamworks, to the *Edit > Options* page of your games profile on mod.io. A Successful request will return an [Access Token Object](#access-token-object).<br><br>__HINT:__ If you want to overlay the mod.io site in-game on Steam, we recommend you add `?portal=steam` to the end of the URL you open which will prompt the user to login with Steam. See [Web Overlay Authentication](#web-overlay-authentication) for details. <br><br>__NOTE__: Steam is the only authentication endpoint that requires their token to be base64 encoded. All other endpoints tokens should be provided as a UTF-8 character string.
 
      Parameter|Type|Required|Description
      ---|---|---|---|
@@ -1206,11 +1202,7 @@ System.out.println(response.toString());
 
 `POST /external/xboxauth`
 
-Request an access token on behalf of an Xbox Live user. A Successful request will return an [Access Token Object](#access-token-object).
-     
-     __NOTE__: To use this endpoint you will need to setup some additional settings prior to being able to authenticate Xbox Live users. For these instructions please [contact us](mailto:developers@mod.io?subject=Xbox Live SSO Request).
-     
-     __HINT:__ If you want to overlay the mod.io site in-game on Xbox, we recommend you add `?portal=xboxlive` to the end of the URL you open which will prompt the user to login with Xbox Live. See [Web Overlay Authentication](#web-overlay-authentication) for details.
+Request an access token on behalf of an Xbox Live user. A Successful request will return an [Access Token Object](#access-token-object).<br><br>__NOTE__: To use this endpoint you will need to setup some additional settings prior to being able to authenticate Xbox Live users. For these instructions please [contact us](mailto:developers@mod.io?subject=Xbox Live SSO Request).<br><br>__HINT:__ If you want to overlay the mod.io site in-game on Xbox, we recommend you add `?portal=xboxlive` to the end of the URL you open which will prompt the user to login with Xbox Live. See [Web Overlay Authentication](#web-overlay-authentication) for details.
 
      Parameter|Type|Required|Description
      ---|---|---|---|
@@ -1247,7 +1239,7 @@ Status|Meaning|Error Ref|Description|Response Schema
 To perform this request, you must be authenticated via one of the following methods:
 <a href="#authentication">api_key</a>
 </aside>
-## PlayStation™Network
+## PlayStation™ Network
 
 > Example request
 
@@ -1342,18 +1334,12 @@ System.out.println(response.toString());
 
 `POST /external/psnauth`
 
-Request an access token on behalf of a PlayStation Network (PSN) user. A Successful request will return an [Access Token Object](#access-token-object).
-     
-     __NOTE__: To use this endpoint you will need to setup some additional settings prior to being able to authenticate PlayStation users. For these instructions please [contact us](mailto:developers@mod.io?subject=PlayStation Network SSO Request).
-     
-     __HINT:__ If you want to overlay the mod.io site in-game on PlayStation, we recommend you add `?portal=psn` to the end of the URL you open which will prompt the user to login with PlayStation Network. See [Web Overlay Authentication](#web-overlay-authentication) for details.
-
-     "PlayStation" and "DualSense" are registered trademarks or trademarks of Sony Interactive Entertainment Inc.
+Request an access token on behalf of a PlayStation™ Network (PSN) user. A Successful request will return an [Access Token Object](#access-token-object).<br><br>__NOTE__: To use this endpoint you will need to setup some additional settings prior to being able to authenticate PlayStation™ users. For these instructions please [contact us](mailto:developers@mod.io?subject=PlayStation Network SSO Request).<br><br>__HINT:__ If you want to overlay the mod.io site in-game on PlayStation™, we recommend you add `?portal=psn` to the end of the URL you open which will prompt the user to login with PlayStation™ Network. See [Web Overlay Authentication](#web-overlay-authentication) for details.
 
      Parameter|Type|Required|Description
      ---|---|---|---|
-     auth_code|string|true|The auth code returned from the PlayStation Network API.
-     env|integer||The PlayStation Network environment you are targeting.
+     auth_code|string|true|The auth code returned from the PlayStation™ Network API.
+     env|integer||The PlayStation™ Network environment you are targeting.
      email|string||The users email address. If supplied, and the respective user does not have an email registered for their account we will send a confirmation email to confirm they have ownership of the specified email.
      date_expires|integer||Unix timestamp of date in which the returned token will expire. Value cannot be higher than the default value which is a common year (unix timestamp + 31536000 seconds). Using a token after it's expiry time has elapsed will result in a `401 Unauthorized` response.
      terms_agreed|boolean||This MUST be set to `false` unless you have collected the [users agreement](#terms) prior to calling this endpoint in which case it can be set to `true` and will be recorded.<br><br>__NOTE:__ If this is set to `false` and the user has not agreed to the latest mod.io Terms of Use and Privacy Policy, an error `403 Forbidden (error_ref 11074)` will be returned and you will need to collect the [users agreement](#terms) and retry with this value set to `true` to authenticate the user.
@@ -1368,7 +1354,7 @@ Request an access token on behalf of a PlayStation Network (PSN) user. A Success
 }
 
 ```
-<h3 id="PlayStation™Network-responses">Responses</h3>
+<h3 id="PlayStation™-Network-responses">Responses</h3>
 
 Status|Meaning|Error Ref|Description|Response Schema
 ---|---|----|---|---|
@@ -1473,9 +1459,7 @@ System.out.println(response.toString());
 
 `POST /external/switchauth`
 
-Request an access token on behalf of a Nintendo Switch user. A Successful request will return an [Access Token Object](#access-token-object).
-     
-     __NOTE__: To use this endpoint you will need to setup some additional settings prior to being able to authenticate Nintendo Switch users. For these instructions please [contact us](mailto:developers@mod.io?subject=Nintendo Switch SSO Request).
+Request an access token on behalf of a Nintendo Switch user. A Successful request will return an [Access Token Object](#access-token-object).<br><br>__NOTE__: To use this endpoint you will need to setup some additional settings prior to being able to authenticate Nintendo Switch users. For these instructions please [contact us](mailto:developers@mod.io?subject=Nintendo Switch SSO Request).
 
      Parameter|Type|Required|Description
      ---|---|---|---|
@@ -1874,9 +1858,7 @@ System.out.println(response.toString());
 
 `POST /external/itchioauth`
 
-Request an access token on behalf of an itch.io user via the itch.io desktop app. Due to the desktop application allowing multiple users to be logged in at once, if more than one user is logged in then the user at the top of that list on the itch.io login dialog will be the authenticating user. A Successful request will return an [Access Token Object](#access-token-object).
-     
-     __HINT:__ If you want to overlay the mod.io site in-game on itch.io, we recommend you add `?portal=itchio` to the end of the URL you open which will prompt the user to login with itch.io. See [Web Overlay Authentication](#web-overlay-authentication) for details.
+Request an access token on behalf of an itch.io user via the itch.io desktop app. Due to the desktop application allowing multiple users to be logged in at once, if more than one user is logged in then the user at the top of that list on the itch.io login dialog will be the authenticating user. A Successful request will return an [Access Token Object](#access-token-object).<br><br>__HINT:__ If you want to overlay the mod.io site in-game on itch.io, we recommend you add `?portal=itchio` to the end of the URL you open which will prompt the user to login with itch.io. See [Web Overlay Authentication](#web-overlay-authentication) for details.
 
      Parameter|Type|Required|Description
      ---|---|---|---|
@@ -2005,11 +1987,7 @@ System.out.println(response.toString());
 
 `POST /external/googleauth`
 
-Request an access token on behalf of a Google user. A Successful request will return an [Access Token Object](#access-token-object).
-     
-     __NOTE__: To use this endpoint you will need to setup some additional settings prior to being able to authenticate Google users. For these instructions please [contact us](mailto:developers@mod.io?subject=Google SSO Request).
-     
-     __HINT:__ If you want to overlay the mod.io site in-game on Android, we recommend you add `?portal=google` to the end of the URL you open which will prompt the user to login with Google. See [Web Overlay Authentication](#web-overlay-authentication) for details.
+Request an access token on behalf of a Google user. A Successful request will return an [Access Token Object](#access-token-object).<br><br>__NOTE__: To use this endpoint you will need to setup some additional settings prior to being able to authenticate Google users. For these instructions please [contact us](mailto:developers@mod.io?subject=Google SSO Request).<br><br>__HINT:__ If you want to overlay the mod.io site in-game on Android, we recommend you add `?portal=google` to the end of the URL you open which will prompt the user to login with Google. See [Web Overlay Authentication](#web-overlay-authentication) for details.
 
      Parameter|Type|Required|Description
      ---|---|---|---|
@@ -2136,9 +2114,7 @@ System.out.println(response.toString());
 
 `POST /external/discordauth`
 
-Request an access token on behalf of a Discord user. A Successful request will return an [Access Token Object](#access-token-object).
-     
-     __HINT:__ If you want to overlay the mod.io site in-game with Discord authentication, we recommend you add `?portal=discord` to the end of the URL you open which will prompt the user to login with Discord. See [Web Overlay Authentication](#web-overlay-authentication) for details.
+Request an access token on behalf of a Discord user. A Successful request will return an [Access Token Object](#access-token-object).<br><br>__HINT:__ If you want to overlay the mod.io site in-game with Discord authentication, we recommend you add `?portal=discord` to the end of the URL you open which will prompt the user to login with Discord. See [Web Overlay Authentication](#web-overlay-authentication) for details.
 
      Parameter|Type|Required|Description
      ---|---|---|---|
@@ -2267,11 +2243,7 @@ System.out.println(response.toString());
 
 `POST /external/openid`
 
-Request an access token on behalf of an OpenID identity provider. To use this method of authentication, you must configure the OpenID config in your games authentication admin page. A Successful request will return an [Access Token Object](#access-token-object).
-     
-     __NOTE:__ The ability to authenticate players using your identity provider is feature for advanced partners only. If you are interested in becoming an advanced partner, please [contact us](mailto:developers@mod.io?subject=OpenID SSO Request).
-     
-     __HINT:__ If you want to overlay the mod.io site in-game with your SSO, we recommend you add `?portal=openid` to the end of the URL you open which will prompt the user to login with your identity provider. See [Web Overlay Authentication](#web-overlay-authentication) for details.
+Request an access token on behalf of an OpenID identity provider. To use this method of authentication, you must configure the OpenID config in your games authentication admin page. A Successful request will return an [Access Token Object](#access-token-object).<br><br>__NOTE:__ The ability to authenticate players using your identity provider is feature for advanced partners only. If you are interested in becoming an advanced partner, please [contact us](mailto:developers@mod.io?subject=OpenID SSO Request).<br><br>__HINT:__ If you want to overlay the mod.io site in-game with your SSO, we recommend you add `?portal=openid` to the end of the URL you open which will prompt the user to login with your identity provider. See [Web Overlay Authentication](#web-overlay-authentication) for details.
 
      Parameter|Type|Required|Description
      ---|---|---|---|
@@ -2561,7 +2533,6 @@ To perform this request, you must be authenticated via one of the following meth
 ```shell
 # You can also use wget
 curl -X POST https://api.mod.io/v1/oauth/logout \
-  -H 'Origin: https://mod.io' \ 
   -H 'Authorization: Bearer {access-token}' \ 
   -H 'Content-Type: application/json' \ 
   -H 'Accept: application/json'
@@ -2573,7 +2544,6 @@ POST https://api.mod.io/v1/oauth/logout HTTP/1.1
 Host: api.mod.io
 
 Accept: application/json
-Origin: https://mod.io
 Authorization: Bearer {access-token}
 Content-Type: application/json
 
@@ -2581,7 +2551,6 @@ Content-Type: application/json
 
 ```javascript
 var headers = {
-  'Origin':'https://mod.io',
   'Authorization':'Bearer {access-token}',
   'Content-Type':'application/json',
   'Accept':'application/json'
@@ -2603,7 +2572,6 @@ $.ajax({
 const request = require('node-fetch');
 
 const headers = {
-  'Origin':'https://mod.io',
   'Authorization':'Bearer {access-token}',
   'Content-Type':'application/json',
   'Accept':'application/json'
@@ -2626,7 +2594,6 @@ fetch('https://api.mod.io/v1/oauth/logout',
 ```python
 import requests
 headers = {
-  'Origin': 'https://mod.io',
   'Authorization': 'Bearer {access-token}',
   'Content-Type': 'application/json',
   'Accept': 'application/json'
@@ -2676,7 +2643,7 @@ Status|Meaning|Error Ref|Description|Response Schema
 200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)||Successful Request|[Web Message Object](#schemaweb_message_object)
 <aside class="auth-notice">
 To perform this request, you must be authenticated via one of the following methods:
-<a href="#authentication">OAuth 2</a> (Scopes: web)
+<a href="#authentication">OAuth 2</a> (Scopes: read)
 </aside>
 # Games
 
@@ -10510,6 +10477,284 @@ Status|Meaning|Error Ref|Description|Response Schema
 To perform this request, you must be authenticated via one of the following methods:
 <a href="#authentication">OAuth 2</a> (Scopes: write)
 </aside>
+# Agreements
+
+## Get Current Agreement
+
+> Example request
+
+```shell
+# You can also use wget
+curl -X GET https://api.mod.io/v1/agreements/types/{agreement-type-id}/current?api_key=YourApiKey \
+  -H 'Accept: application/json'
+
+```
+
+```http
+GET https://api.mod.io/v1/agreements/types/{agreement-type-id}/current?api_key=YourApiKey HTTP/1.1
+Host: api.mod.io
+
+Accept: application/json
+
+```
+
+```javascript
+var headers = {
+  'Accept':'application/json'
+
+};
+
+$.ajax({
+  url: 'https://api.mod.io/v1/agreements/types/{agreement-type-id}/current',
+  method: 'get',
+  data: '?api_key=YourApiKey',
+  headers: headers,
+  success: function(data) {
+    console.log(JSON.stringify(data));
+  }
+})
+```
+
+```javascript--nodejs
+const request = require('node-fetch');
+
+const headers = {
+  'Accept':'application/json'
+
+};
+
+fetch('https://api.mod.io/v1/agreements/types/{agreement-type-id}/current?api_key=YourApiKey',
+{
+  method: 'GET',
+
+  headers: headers
+})
+.then(function(res) {
+    return res.json();
+}).then(function(body) {
+    console.log(body);
+});
+```
+
+```python
+import requests
+headers = {
+  'Accept': 'application/json'
+}
+
+r = requests.get('https://api.mod.io/v1/agreements/types/{agreement-type-id}/current', params={
+  'api_key': 'YourApiKey'
+}, headers = headers)
+
+print r.json()
+```
+
+```java
+URL obj = new URL("https://api.mod.io/v1/agreements/types/{agreement-type-id}/current?api_key=YourApiKey");
+HttpURLConnection con = (HttpURLConnection) obj.openConnection();
+con.setRequestMethod("GET");
+int responseCode = con.getResponseCode();
+BufferedReader in = new BufferedReader(
+    new InputStreamReader(con.getInputStream()));
+String inputLine;
+StringBuffer response = new StringBuffer();
+while ((inputLine = in.readLine()) != null) {
+    response.append(inputLine);
+}
+in.close();
+System.out.println(response.toString());
+```
+
+`GET /agreements/types/{agreement-type-id}/current`
+
+Get the current agreement (version) by type. Successful request will return a single [Agreement Version Object](#agreement-version-object).
+
+     Valid agreement types are:
+
+     __1__ = Terms of Use - [https://mod.io/terms](https://mod.io/terms)<br>
+     __2__ = Privacy Policy - [https://mod.io/privacy](https://mod.io/privacy)<br>
+     __3__ = Game Terms - [https://mod.io/gameterms](https://mod.io/gameterms)<br>
+     __4__ = API Access Terms - [https://mod.io/apiterms](https://mod.io/apiterms)<br>
+     __5__ = Monetisation Terms - [https://mod.io/monetisationterms](https://mod.io/monetisationterms)<br>
+     __6__ = Acceptable Use Policy - [https://mod.io/aup](https://mod.io/aup)
+
+> Example response
+
+```json
+{
+  "id": 1,
+  "is_active": true,
+  "type": 2,
+  "user": {
+    "id": 1,
+    "name_id": "xant",
+    "username": "XanT",
+    "display_name_portal": null,
+    "date_online": 1509922961,
+    "date_joined": 1509922961,
+    "avatar": {
+      "filename": "avatar.png",
+      "original": "https://assets.modcdn.io/images/placeholder/avatar.png",
+      "thumb_50x50": "https://assets.modcdn.io/images/placeholder/avatar_50x50.png",
+      "thumb_100x100": "https://assets.modcdn.io/images/placeholder/avatar_100x100.png"
+    },
+    "timezone": "",
+    "language": "",
+    "profile_url": "https://mod.io/u/xant"
+  },
+  "date_added": 1509922961,
+  "date_updated": 1509922961,
+  "date_live": 1509922961,
+  "name": "Terms of Use",
+  "changelog": "",
+  "description": "Privacy Agreement - 20/11/2020....."
+}
+
+```
+<h3 id="Get-Current-Agreement-responses">Responses</h3>
+
+Status|Meaning|Error Ref|Description|Response Schema
+---|---|----|---|---|
+200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)||Successful Request|[Agreement Version Object](#schemaagreement_version_object)
+404|[Not Found](https://tools.ietf.org/html/rfc7231#section-6.5.4)|14000|Agreement could not be found.|[Error Object](#schemaerror_object)
+<aside class="auth-notice">
+To perform this request, you must be authenticated via one of the following methods:
+<a href="#authentication">api_key</a>, <a href="#authentication">OAuth 2</a> (Scopes: read)
+</aside>
+## Get Agreement Version
+
+> Example request
+
+```shell
+# You can also use wget
+curl -X GET https://api.mod.io/v1/agreements/versions/{agreement-version-id}?api_key=YourApiKey \
+  -H 'Accept: application/json'
+
+```
+
+```http
+GET https://api.mod.io/v1/agreements/versions/{agreement-version-id}?api_key=YourApiKey HTTP/1.1
+Host: api.mod.io
+
+Accept: application/json
+
+```
+
+```javascript
+var headers = {
+  'Accept':'application/json'
+
+};
+
+$.ajax({
+  url: 'https://api.mod.io/v1/agreements/versions/{agreement-version-id}',
+  method: 'get',
+  data: '?api_key=YourApiKey',
+  headers: headers,
+  success: function(data) {
+    console.log(JSON.stringify(data));
+  }
+})
+```
+
+```javascript--nodejs
+const request = require('node-fetch');
+
+const headers = {
+  'Accept':'application/json'
+
+};
+
+fetch('https://api.mod.io/v1/agreements/versions/{agreement-version-id}?api_key=YourApiKey',
+{
+  method: 'GET',
+
+  headers: headers
+})
+.then(function(res) {
+    return res.json();
+}).then(function(body) {
+    console.log(body);
+});
+```
+
+```python
+import requests
+headers = {
+  'Accept': 'application/json'
+}
+
+r = requests.get('https://api.mod.io/v1/agreements/versions/{agreement-version-id}', params={
+  'api_key': 'YourApiKey'
+}, headers = headers)
+
+print r.json()
+```
+
+```java
+URL obj = new URL("https://api.mod.io/v1/agreements/versions/{agreement-version-id}?api_key=YourApiKey");
+HttpURLConnection con = (HttpURLConnection) obj.openConnection();
+con.setRequestMethod("GET");
+int responseCode = con.getResponseCode();
+BufferedReader in = new BufferedReader(
+    new InputStreamReader(con.getInputStream()));
+String inputLine;
+StringBuffer response = new StringBuffer();
+while ((inputLine = in.readLine()) != null) {
+    response.append(inputLine);
+}
+in.close();
+System.out.println(response.toString());
+```
+
+`GET /agreements/versions/{agreement-version-id}`
+
+Get the specified agreement version. Successful request will return an [Agreement Version Object](#agreement-version-object).
+
+> Example response
+
+```json
+{
+  "id": 1,
+  "is_active": true,
+  "type": 2,
+  "user": {
+    "id": 1,
+    "name_id": "xant",
+    "username": "XanT",
+    "display_name_portal": null,
+    "date_online": 1509922961,
+    "date_joined": 1509922961,
+    "avatar": {
+      "filename": "avatar.png",
+      "original": "https://assets.modcdn.io/images/placeholder/avatar.png",
+      "thumb_50x50": "https://assets.modcdn.io/images/placeholder/avatar_50x50.png",
+      "thumb_100x100": "https://assets.modcdn.io/images/placeholder/avatar_100x100.png"
+    },
+    "timezone": "",
+    "language": "",
+    "profile_url": "https://mod.io/u/xant"
+  },
+  "date_added": 1509922961,
+  "date_updated": 1509922961,
+  "date_live": 1509922961,
+  "name": "Terms of Use",
+  "changelog": "",
+  "description": "Privacy Agreement - 20/11/2020....."
+}
+
+```
+<h3 id="Get-Agreement-Version-responses">Responses</h3>
+
+Status|Meaning|Error Ref|Description|Response Schema
+---|---|----|---|---|
+200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)||Successful Request|[Agreement Version Object](#schemaagreement_version_object)
+403|[Forbidden](https://tools.ietf.org/html/rfc7231#section-6.5.3)|14019|Only administrators can view agreement templates.|[Error Object](#schemaerror_object)
+404|[Not Found](https://tools.ietf.org/html/rfc7231#section-6.5.4)|14000|Agreement could not be found.|[Error Object](#schemaerror_object)
+<aside class="auth-notice">
+To perform this request, you must be authenticated via one of the following methods:
+<a href="#authentication">api_key</a>, <a href="#authentication">OAuth 2</a> (Scopes: read)
+</aside>
 # Users
 
 ## Mute a user
@@ -12224,6 +12469,58 @@ Name|Type|Description
 code|integer|HTTP Response Code.
 access_token|string|The user's access token.
 date_expires|integer|Unix timestamp of the date this token will expire. Default is one year from issue date. See [Access Token Lifetime & Expiry](#making-requests).
+
+
+
+## Agreement Version Object  
+
+<a name="schemaagreement_version_object"></a>
+
+```json
+{
+  "id": 1,
+  "is_active": true,
+  "type": 2,
+  "user": {
+    "id": 1,
+    "name_id": "xant",
+    "username": "XanT",
+    "display_name_portal": null,
+    "date_online": 1509922961,
+    "date_joined": 1509922961,
+    "avatar": {
+      "filename": "avatar.png",
+      "original": "https://assets.modcdn.io/images/placeholder/avatar.png",
+      "thumb_50x50": "https://assets.modcdn.io/images/placeholder/avatar_50x50.png",
+      "thumb_100x100": "https://assets.modcdn.io/images/placeholder/avatar_100x100.png"
+    },
+    "timezone": "",
+    "language": "",
+    "profile_url": "https://mod.io/u/xant"
+  },
+  "date_added": 1509922961,
+  "date_updated": 1509922961,
+  "date_live": 1509922961,
+  "name": "Terms of Use",
+  "changelog": "",
+  "description": "Privacy Agreement - 20/11/2020....."
+} 
+```
+
+### Properties
+
+Name|Type|Description
+---|---|---|---|
+id|integer|Unique id of the agreement.
+is_active|boolean|Is the agreement currently active? (This can also be determined if date_live > 0).
+type|integer|The type of agreement. Can be one of the following:<br><br>__1__ = Terms<br>__2__ = Privacy<br>__3__ = Developers<br>__4__ = API<br>__5__ = Payment<br>__6__ = AUP
+user|[User Object](#schemauser_object)|No description
+date_added|integer|Unix timestamp of the date the agreement was added.
+date_updated|integer|Unix timestamp of the date the agreement was updated.
+date_live|integer|Unix timestamp of the date the agreement was set live.
+name|string|Name of the agreement.
+changelog|string|Changelog for version of this agreement.
+description|string|The contents of the agreement
 
 
 
