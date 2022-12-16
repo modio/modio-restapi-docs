@@ -373,7 +373,7 @@
                     <a href="#xbox-live" class="toc-h2 toc-link" data-title="Authentication">Xbox Live</a>
                   </li>
                   <li>
-                    <a href="#playstation-network" class="toc-h2 toc-link" data-title="Authentication">PlayStation™Network</a>
+                    <a href="#playstation-network" class="toc-h2 toc-link" data-title="Authentication">PlayStation™ Network</a>
                   </li>
                   <li>
                     <a href="#nintendo-switch" class="toc-h2 toc-link" data-title="Authentication">Nintendo Switch</a>
@@ -644,6 +644,17 @@
               </ul>
           </li>
           <li>
+            <a href="#agreements" class="toc-h1 toc-link" data-title="Agreements"><span class="reficon"><img src="images/cog-white-86912766.svg" alt="Reference" class="menu-reference-icon"></span> Agreements</a>
+              <ul class="toc-list-h2">
+                  <li>
+                    <a href="#get-current-agreement" class="toc-h2 toc-link" data-title="Agreements">Get Current Agreement</a>
+                  </li>
+                  <li>
+                    <a href="#get-agreement-version" class="toc-h2 toc-link" data-title="Agreements">Get Agreement Version</a>
+                  </li>
+              </ul>
+          </li>
+          <li>
             <a href="#users" class="toc-h1 toc-link" data-title="Users"><span class="reficon"><img src="images/cog-white-86912766.svg" alt="Reference" class="menu-reference-icon"></span> Users</a>
               <ul class="toc-list-h2">
                   <li>
@@ -688,6 +699,9 @@
               <ul class="toc-list-h2">
                   <li>
                     <a href="#access-token-object" class="toc-h2 toc-link" data-title="Response Schemas">Access Token Object</a>
+                  </li>
+                  <li>
+                    <a href="#agreement-version-object" class="toc-h2 toc-link" data-title="Response Schemas">Agreement Version Object</a>
                   </li>
                   <li>
                     <a href="#avatar-object" class="toc-h2 toc-link" data-title="Response Schemas">Avatar Object</a>
@@ -2151,7 +2165,7 @@ Accept: application/json
 
 <p>The purpose of this endpoint is to provide the text, links and buttons you can use to get a users agreement and consent prior to authenticating them in-game (your dialog should look similar to the example below). A successful response will return a <a href="#terms-object">Terms Object</a>.<br><br><strong>Example Dialog:</strong></p><aside class="consent">We use mod.io to support user-generated content in-game. By clicking 'I Agree' you agree to the mod.io Terms of Use and a mod.io account will be created for you (using your display name, avatar and ID). Please see the mod.io Privacy Policy on how mod.io processes your personal data.<br><br><div style="text-align:center">
 <span class="versionwrap cursor">     I Agree     </span> <span class="versionwrap outline cursor">No, Thanks</span><br><br><a href="https://mod.io/terms/widget" class="colorbox">Terms of Use</a> - <a href="https://mod.io/privacy/widget" class="colorbox">Privacy Policy</a><br>
-</div></aside><p><strong>IMPORTANT:</strong> It is a requirement to implement the terms dialog when using a 3rd party authentication flow such as Steam or Xbox Live, to ensure the user has agreed to the latest mod.io <a href="https://mod.io/terms/widget" class="colorbox">Terms of Use</a> and <a href="https://mod.io/privacy/widget" class="colorbox">Privacy Policy</a>. You only need to collect the users agreement once, and also each time these policies are updated.<br><br>To make this easy to manage, all of the 3rd party authentication flows have a <code>terms_agreed</code> field which should be set to <code>false</code> by default. If the user has agreed to the latest policies, their authentication will proceed as normal, however if their agreement is required and <code>terms_agreed</code> is set to <code>false</code> an error <code>403 Forbidden (error_ref 11074)</code> will be returned. When you receive this error, you must collect the users agreement before resubmitting the authentication flow with <code>terms_agreed</code> set to <code>true</code>, which will be recorded.<br><br><strong>NOTE:</strong>  You can use your own text and process (make sure the Terms of Use and Privacy Policy are correctly linked), but be aware that you are responsible for ensuring that the users agreement is properly collected and reported to us. Failure to do this correctly is a breach of the mod.io Game Terms. If your game does not authenticate users or only uses the email authentication flow, you do not need to implement this dialog, but you should link to the mod.io Terms of Use and Privacy Policy in your Privacy Policy/EULA.</p>
+</div></aside><p><strong>IMPORTANT:</strong> It is a requirement to implement the terms dialog when using a 3rd party authentication flow such as Steam or Xbox Live, to ensure the user has agreed to the latest mod.io <a href="https://mod.io/terms/widget" class="colorbox">Terms of Use</a> and <a href="https://mod.io/privacy/widget" class="colorbox">Privacy Policy</a>. You only need to collect the users agreement once, and also each time these policies are updated.<br><br>To make this easy to manage, all of the 3rd party authentication flows have a <code>terms_agreed</code> field which should be set to <code>false</code> by default. If the user has agreed to the latest policies, their authentication will proceed as normal, however if their agreement is required and <code>terms_agreed</code> is set to <code>false</code> an error <code>403 Forbidden (error_ref 11074)</code> will be returned. When you receive this error, you must collect the users agreement before resubmitting the authentication flow with <code>terms_agreed</code> set to <code>true</code>, which will be recorded.<br><br><strong>NOTE:</strong>  You can use your own text and process, but must make sure the Terms of Use and Privacy Policy are correctly linked, or are displayed inline using the <a href="#agreements">agreements endpoints</a> to get the latest versions.<br><br>Be aware that you are responsible for ensuring that the users agreement is properly collected and reported. Failure to do so correctly is a breach of the mod.io Game Terms. If your game does not authenticate users or only uses the email authentication flow, you do not need to implement this dialog, but you should link to the mod.io Terms of Use and Privacy Policy in your Privacy Policy/EULA.</p>
 
 <blockquote>
 <p>Example response</p>
@@ -2297,11 +2311,7 @@ curl <span class="nt">-X</span> POST https://api.mod.io/v1/external/steamauth?ap
 </code></pre></div>
 <p><span class="httpmethod POST">POST</span> <span class="endpointheading">/external/steamauth</span></p>
 
-<p>Request an access token on behalf of a Steam user. To use this functionality you <em>must</em> add your games <a href="https://partner.steamgames.com/apps/sdkauth">encrypted app ticket key</a> from Steamworks, to the <em>Edit &gt; Options</em> page of your games profile on mod.io. A Successful request will return an <a href="#access-token-object">Access Token Object</a>.</p>
-
-<p><strong>HINT:</strong> If you want to overlay the mod.io site in-game on Steam, we recommend you add <code>?portal=steam</code> to the end of the URL you open which will prompt the user to login with Steam. See <a href="#web-overlay-authentication">Web Overlay Authentication</a> for details.</p>
-
-<p><strong>NOTE</strong>: Steam is the only authentication endpoint that requires their token to be base64 encoded. All other endpoints tokens should be provided as a UTF-8 character string.</p>
+<p>Request an access token on behalf of a Steam user. To use this functionality you <em>must</em> add your games <a href="https://partner.steamgames.com/apps/sdkauth">encrypted app ticket key</a> from Steamworks, to the <em>Edit &gt; Options</em> page of your games profile on mod.io. A Successful request will return an <a href="#access-token-object">Access Token Object</a>.<br><br><strong>HINT:</strong> If you want to overlay the mod.io site in-game on Steam, we recommend you add <code>?portal=steam</code> to the end of the URL you open which will prompt the user to login with Steam. See <a href="#web-overlay-authentication">Web Overlay Authentication</a> for details. <br><br><strong>NOTE</strong>: Steam is the only authentication endpoint that requires their token to be base64 encoded. All other endpoints tokens should be provided as a UTF-8 character string.</p>
 
 <table>
 <thead>
@@ -2504,11 +2514,7 @@ curl <span class="nt">-X</span> POST https://api.mod.io/v1/external/xboxauth?api
 </code></pre></div>
 <p><span class="httpmethod POST">POST</span> <span class="endpointheading">/external/xboxauth</span></p>
 
-<p>Request an access token on behalf of an Xbox Live user. A Successful request will return an <a href="#access-token-object">Access Token Object</a>.</p>
-
-<p><strong>NOTE</strong>: To use this endpoint you will need to setup some additional settings prior to being able to authenticate Xbox Live users. For these instructions please <a href="mailto:developers@mod.io?subject=Xbox%20Live%20SSO%20Request">contact us</a>.</p>
-
-<p><strong>HINT:</strong> If you want to overlay the mod.io site in-game on Xbox, we recommend you add <code>?portal=xboxlive</code> to the end of the URL you open which will prompt the user to login with Xbox Live. See <a href="#web-overlay-authentication">Web Overlay Authentication</a> for details.</p>
+<p>Request an access token on behalf of an Xbox Live user. A Successful request will return an <a href="#access-token-object">Access Token Object</a>.<br><br><strong>NOTE</strong>: To use this endpoint you will need to setup some additional settings prior to being able to authenticate Xbox Live users. For these instructions please <a href="mailto:developers@mod.io?subject=Xbox%20Live%20SSO%20Request">contact us</a>.<br><br><strong>HINT:</strong> If you want to overlay the mod.io site in-game on Xbox, we recommend you add <code>?portal=xboxlive</code> to the end of the URL you open which will prompt the user to login with Xbox Live. See <a href="#web-overlay-authentication">Web Overlay Authentication</a> for details.</p>
 
 <table>
 <thead>
@@ -2647,7 +2653,7 @@ curl <span class="nt">-X</span> POST https://api.mod.io/v1/external/xboxauth?api
 To perform this request, you must be authenticated via one of the following methods:
 <a href="#authentication">api_key</a>
 </aside>
-<h2 id="playstation-network">PlayStation™Network</h2>
+<h2 id="playstation-network">PlayStation™ Network</h2>
 <blockquote>
 <p>Example request</p>
 </blockquote>
@@ -2725,13 +2731,7 @@ curl <span class="nt">-X</span> POST https://api.mod.io/v1/external/psnauth?api_
 </code></pre></div>
 <p><span class="httpmethod POST">POST</span> <span class="endpointheading">/external/psnauth</span></p>
 
-<p>Request an access token on behalf of a PlayStation Network (PSN) user. A Successful request will return an <a href="#access-token-object">Access Token Object</a>.</p>
-
-<p><strong>NOTE</strong>: To use this endpoint you will need to setup some additional settings prior to being able to authenticate PlayStation users. For these instructions please <a href="mailto:developers@mod.io?subject=PlayStation%20Network%20SSO%20Request">contact us</a>.</p>
-
-<p><strong>HINT:</strong> If you want to overlay the mod.io site in-game on PlayStation, we recommend you add <code>?portal=psn</code> to the end of the URL you open which will prompt the user to login with PlayStation Network. See <a href="#web-overlay-authentication">Web Overlay Authentication</a> for details.</p>
-
-<p>"PlayStation" and "DualSense" are registered trademarks or trademarks of Sony Interactive Entertainment Inc.</p>
+<p>Request an access token on behalf of a PlayStation™ Network (PSN) user. A Successful request will return an <a href="#access-token-object">Access Token Object</a>.<br><br><strong>NOTE</strong>: To use this endpoint you will need to setup some additional settings prior to being able to authenticate PlayStation™ users. For these instructions please <a href="mailto:developers@mod.io?subject=PlayStation%20Network%20SSO%20Request">contact us</a>.<br><br><strong>HINT:</strong> If you want to overlay the mod.io site in-game on PlayStation™, we recommend you add <code>?portal=psn</code> to the end of the URL you open which will prompt the user to login with PlayStation™ Network. See <a href="#web-overlay-authentication">Web Overlay Authentication</a> for details.</p>
 
 <table>
 <thead>
@@ -2747,13 +2747,13 @@ curl <span class="nt">-X</span> POST https://api.mod.io/v1/external/psnauth?api_
 <td>auth_code</td>
 <td>string</td>
 <td>true</td>
-<td>The auth code returned from the PlayStation Network API.</td>
+<td>The auth code returned from the PlayStation™ Network API.</td>
 </tr>
 <tr>
 <td>env</td>
 <td>integer</td>
 <td></td>
-<td>The PlayStation Network environment you are targeting.</td>
+<td>The PlayStation™ Network environment you are targeting.</td>
 </tr>
 <tr>
 <td>email</td>
@@ -2786,7 +2786,7 @@ curl <span class="nt">-X</span> POST https://api.mod.io/v1/external/psnauth?api_
 </span><span class="p">}</span><span class="w">
 
 </span></code></pre></div>
-<h3 id="PlayStation™Network-responses">Responses</h3>
+<h3 id="PlayStation™-Network-responses">Responses</h3>
 
 <table>
 <thead>
@@ -2898,9 +2898,7 @@ curl <span class="nt">-X</span> POST https://api.mod.io/v1/external/switchauth?a
 </code></pre></div>
 <p><span class="httpmethod POST">POST</span> <span class="endpointheading">/external/switchauth</span></p>
 
-<p>Request an access token on behalf of a Nintendo Switch user. A Successful request will return an <a href="#access-token-object">Access Token Object</a>.</p>
-
-<p><strong>NOTE</strong>: To use this endpoint you will need to setup some additional settings prior to being able to authenticate Nintendo Switch users. For these instructions please <a href="mailto:developers@mod.io?subject=Nintendo%20Switch%20SSO%20Request">contact us</a>.</p>
+<p>Request an access token on behalf of a Nintendo Switch user. A Successful request will return an <a href="#access-token-object">Access Token Object</a>.<br><br><strong>NOTE</strong>: To use this endpoint you will need to setup some additional settings prior to being able to authenticate Nintendo Switch users. For these instructions please <a href="mailto:developers@mod.io?subject=Nintendo%20Switch%20SSO%20Request">contact us</a>.</p>
 
 <table>
 <thead>
@@ -3534,9 +3532,7 @@ curl <span class="nt">-X</span> POST https://api.mod.io/v1/external/itchioauth?a
 </code></pre></div>
 <p><span class="httpmethod POST">POST</span> <span class="endpointheading">/external/itchioauth</span></p>
 
-<p>Request an access token on behalf of an itch.io user via the itch.io desktop app. Due to the desktop application allowing multiple users to be logged in at once, if more than one user is logged in then the user at the top of that list on the itch.io login dialog will be the authenticating user. A Successful request will return an <a href="#access-token-object">Access Token Object</a>.</p>
-
-<p><strong>HINT:</strong> If you want to overlay the mod.io site in-game on itch.io, we recommend you add <code>?portal=itchio</code> to the end of the URL you open which will prompt the user to login with itch.io. See <a href="#web-overlay-authentication">Web Overlay Authentication</a> for details.</p>
+<p>Request an access token on behalf of an itch.io user via the itch.io desktop app. Due to the desktop application allowing multiple users to be logged in at once, if more than one user is logged in then the user at the top of that list on the itch.io login dialog will be the authenticating user. A Successful request will return an <a href="#access-token-object">Access Token Object</a>.<br><br><strong>HINT:</strong> If you want to overlay the mod.io site in-game on itch.io, we recommend you add <code>?portal=itchio</code> to the end of the URL you open which will prompt the user to login with itch.io. See <a href="#web-overlay-authentication">Web Overlay Authentication</a> for details.</p>
 
 <table>
 <thead>
@@ -3732,11 +3728,7 @@ curl <span class="nt">-X</span> POST https://api.mod.io/v1/external/googleauth?a
 </code></pre></div>
 <p><span class="httpmethod POST">POST</span> <span class="endpointheading">/external/googleauth</span></p>
 
-<p>Request an access token on behalf of a Google user. A Successful request will return an <a href="#access-token-object">Access Token Object</a>.</p>
-
-<p><strong>NOTE</strong>: To use this endpoint you will need to setup some additional settings prior to being able to authenticate Google users. For these instructions please <a href="mailto:developers@mod.io?subject=Google%20SSO%20Request">contact us</a>.</p>
-
-<p><strong>HINT:</strong> If you want to overlay the mod.io site in-game on Android, we recommend you add <code>?portal=google</code> to the end of the URL you open which will prompt the user to login with Google. See <a href="#web-overlay-authentication">Web Overlay Authentication</a> for details.</p>
+<p>Request an access token on behalf of a Google user. A Successful request will return an <a href="#access-token-object">Access Token Object</a>.<br><br><strong>NOTE</strong>: To use this endpoint you will need to setup some additional settings prior to being able to authenticate Google users. For these instructions please <a href="mailto:developers@mod.io?subject=Google%20SSO%20Request">contact us</a>.<br><br><strong>HINT:</strong> If you want to overlay the mod.io site in-game on Android, we recommend you add <code>?portal=google</code> to the end of the URL you open which will prompt the user to login with Google. See <a href="#web-overlay-authentication">Web Overlay Authentication</a> for details.</p>
 
 <table>
 <thead>
@@ -3919,9 +3911,7 @@ curl <span class="nt">-X</span> POST https://api.mod.io/v1/external/discordauth?
 </code></pre></div>
 <p><span class="httpmethod POST">POST</span> <span class="endpointheading">/external/discordauth</span></p>
 
-<p>Request an access token on behalf of a Discord user. A Successful request will return an <a href="#access-token-object">Access Token Object</a>.</p>
-
-<p><strong>HINT:</strong> If you want to overlay the mod.io site in-game with Discord authentication, we recommend you add <code>?portal=discord</code> to the end of the URL you open which will prompt the user to login with Discord. See <a href="#web-overlay-authentication">Web Overlay Authentication</a> for details.</p>
+<p>Request an access token on behalf of a Discord user. A Successful request will return an <a href="#access-token-object">Access Token Object</a>.<br><br><strong>HINT:</strong> If you want to overlay the mod.io site in-game with Discord authentication, we recommend you add <code>?portal=discord</code> to the end of the URL you open which will prompt the user to login with Discord. See <a href="#web-overlay-authentication">Web Overlay Authentication</a> for details.</p>
 
 <table>
 <thead>
@@ -4117,11 +4107,7 @@ curl <span class="nt">-X</span> POST https://api.mod.io/v1/external/openid?api_k
 </code></pre></div>
 <p><span class="httpmethod POST">POST</span> <span class="endpointheading">/external/openid</span></p>
 
-<p>Request an access token on behalf of an OpenID identity provider. To use this method of authentication, you must configure the OpenID config in your games authentication admin page. A Successful request will return an <a href="#access-token-object">Access Token Object</a>.</p>
-
-<p><strong>NOTE:</strong> The ability to authenticate players using your identity provider is feature for advanced partners only. If you are interested in becoming an advanced partner, please <a href="mailto:developers@mod.io?subject=OpenID%20SSO%20Request">contact us</a>.</p>
-
-<p><strong>HINT:</strong> If you want to overlay the mod.io site in-game with your SSO, we recommend you add <code>?portal=openid</code> to the end of the URL you open which will prompt the user to login with your identity provider. See <a href="#web-overlay-authentication">Web Overlay Authentication</a> for details.</p>
+<p>Request an access token on behalf of an OpenID identity provider. To use this method of authentication, you must configure the OpenID config in your games authentication admin page. A Successful request will return an <a href="#access-token-object">Access Token Object</a>.<br><br><strong>NOTE:</strong> The ability to authenticate players using your identity provider is feature for advanced partners only. If you are interested in becoming an advanced partner, please <a href="mailto:developers@mod.io?subject=OpenID%20SSO%20Request">contact us</a>.<br><br><strong>HINT:</strong> If you want to overlay the mod.io site in-game with your SSO, we recommend you add <code>?portal=openid</code> to the end of the URL you open which will prompt the user to login with your identity provider. See <a href="#web-overlay-authentication">Web Overlay Authentication</a> for details.</p>
 
 <table>
 <thead>
@@ -4563,7 +4549,6 @@ To perform this request, you must be authenticated via one of the following meth
 </blockquote>
 <div class="highlight"><pre class="highlight shell tab-shell"><code><span class="c"># You can also use wget</span>
 curl <span class="nt">-X</span> POST https://api.mod.io/v1/oauth/logout <span class="se">\</span>
-  <span class="nt">-H</span> <span class="s1">'Origin: https://mod.io'</span> <span class="se">\ </span>
   <span class="nt">-H</span> <span class="s1">'Authorization: Bearer {access-token}'</span> <span class="se">\ </span>
   <span class="nt">-H</span> <span class="s1">'Content-Type: application/json'</span> <span class="se">\ </span>
   <span class="nt">-H</span> <span class="s1">'Accept: application/json'</span>
@@ -4572,12 +4557,10 @@ curl <span class="nt">-X</span> POST https://api.mod.io/v1/oauth/logout <span cl
 <span class="na">Host</span><span class="p">:</span> <span class="s">api.mod.io</span>
 
 Accept: application/json
-Origin: https://mod.io
 Authorization: Bearer {access-token}
 Content-Type: application/json
 
 </code></pre></div><div class="highlight"><pre class="highlight javascript tab-javascript"><code><span class="kd">var</span> <span class="nx">headers</span> <span class="o">=</span> <span class="p">{</span>
-  <span class="dl">'</span><span class="s1">Origin</span><span class="dl">'</span><span class="p">:</span><span class="dl">'</span><span class="s1">https://mod.io</span><span class="dl">'</span><span class="p">,</span>
   <span class="dl">'</span><span class="s1">Authorization</span><span class="dl">'</span><span class="p">:</span><span class="dl">'</span><span class="s1">Bearer {access-token}</span><span class="dl">'</span><span class="p">,</span>
   <span class="dl">'</span><span class="s1">Content-Type</span><span class="dl">'</span><span class="p">:</span><span class="dl">'</span><span class="s1">application/json</span><span class="dl">'</span><span class="p">,</span>
   <span class="dl">'</span><span class="s1">Accept</span><span class="dl">'</span><span class="p">:</span><span class="dl">'</span><span class="s1">application/json</span><span class="dl">'</span>
@@ -4596,7 +4579,6 @@ Content-Type: application/json
 </code></pre></div><div class="highlight"><pre class="highlight javascript tab-javascript--nodejs"><code><span class="kd">const</span> <span class="nx">request</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="dl">'</span><span class="s1">node-fetch</span><span class="dl">'</span><span class="p">);</span>
 
 <span class="kd">const</span> <span class="nx">headers</span> <span class="o">=</span> <span class="p">{</span>
-  <span class="dl">'</span><span class="s1">Origin</span><span class="dl">'</span><span class="p">:</span><span class="dl">'</span><span class="s1">https://mod.io</span><span class="dl">'</span><span class="p">,</span>
   <span class="dl">'</span><span class="s1">Authorization</span><span class="dl">'</span><span class="p">:</span><span class="dl">'</span><span class="s1">Bearer {access-token}</span><span class="dl">'</span><span class="p">,</span>
   <span class="dl">'</span><span class="s1">Content-Type</span><span class="dl">'</span><span class="p">:</span><span class="dl">'</span><span class="s1">application/json</span><span class="dl">'</span><span class="p">,</span>
   <span class="dl">'</span><span class="s1">Accept</span><span class="dl">'</span><span class="p">:</span><span class="dl">'</span><span class="s1">application/json</span><span class="dl">'</span>
@@ -4616,7 +4598,6 @@ Content-Type: application/json
 <span class="p">});</span>
 </code></pre></div><div class="highlight"><pre class="highlight python tab-python"><code><span class="kn">import</span> <span class="nn">requests</span>
 <span class="n">headers</span> <span class="o">=</span> <span class="p">{</span>
-  <span class="s">'Origin'</span><span class="p">:</span> <span class="s">'https://mod.io'</span><span class="p">,</span>
   <span class="s">'Authorization'</span><span class="p">:</span> <span class="s">'Bearer {access-token}'</span><span class="p">,</span>
   <span class="s">'Content-Type'</span><span class="p">:</span> <span class="s">'application/json'</span><span class="p">,</span>
   <span class="s">'Accept'</span><span class="p">:</span> <span class="s">'application/json'</span>
@@ -4680,7 +4661,7 @@ Content-Type: application/json
 
 <aside class="auth-notice">
 To perform this request, you must be authenticated via one of the following methods:
-<a href="#authentication">OAuth 2</a> (Scopes: web)
+<a href="#authentication">OAuth 2</a> (Scopes: read)
 </aside>
 <h1 id="games">Games</h1><h2 id="get-games">Get Games</h2>
 <blockquote>
@@ -14172,6 +14153,302 @@ curl <span class="nt">-X</span> POST https://api.mod.io/v1/report <span class="s
 To perform this request, you must be authenticated via one of the following methods:
 <a href="#authentication">OAuth 2</a> (Scopes: write)
 </aside>
+<h1 id="agreements">Agreements</h1><h2 id="get-current-agreement">Get Current Agreement</h2>
+<blockquote>
+<p>Example request</p>
+</blockquote>
+<div class="highlight"><pre class="highlight shell tab-shell"><code><span class="c"># You can also use wget</span>
+curl <span class="nt">-X</span> GET https://api.mod.io/v1/agreements/types/<span class="o">{</span>agreement-type-id<span class="o">}</span>/current?api_key<span class="o">=</span>YourApiKey <span class="se">\</span>
+  <span class="nt">-H</span> <span class="s1">'Accept: application/json'</span>
+
+</code></pre></div><div class="highlight"><pre class="highlight http tab-http"><code><span class="nf">GET</span> <span class="nn">https://api.mod.io/v1/agreements/types/{agreement-type-id}/current?api_key=YourApiKey</span> <span class="k">HTTP</span><span class="o">/</span><span class="m">1.1</span>
+<span class="na">Host</span><span class="p">:</span> <span class="s">api.mod.io</span>
+
+Accept: application/json
+
+</code></pre></div><div class="highlight"><pre class="highlight javascript tab-javascript"><code><span class="kd">var</span> <span class="nx">headers</span> <span class="o">=</span> <span class="p">{</span>
+  <span class="dl">'</span><span class="s1">Accept</span><span class="dl">'</span><span class="p">:</span><span class="dl">'</span><span class="s1">application/json</span><span class="dl">'</span>
+
+<span class="p">};</span>
+
+<span class="nx">$</span><span class="p">.</span><span class="nx">ajax</span><span class="p">({</span>
+  <span class="na">url</span><span class="p">:</span> <span class="dl">'</span><span class="s1">https://api.mod.io/v1/agreements/types/{agreement-type-id}/current</span><span class="dl">'</span><span class="p">,</span>
+  <span class="na">method</span><span class="p">:</span> <span class="dl">'</span><span class="s1">get</span><span class="dl">'</span><span class="p">,</span>
+  <span class="na">data</span><span class="p">:</span> <span class="dl">'</span><span class="s1">?api_key=YourApiKey</span><span class="dl">'</span><span class="p">,</span>
+  <span class="na">headers</span><span class="p">:</span> <span class="nx">headers</span><span class="p">,</span>
+  <span class="na">success</span><span class="p">:</span> <span class="kd">function</span><span class="p">(</span><span class="nx">data</span><span class="p">)</span> <span class="p">{</span>
+    <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">JSON</span><span class="p">.</span><span class="nx">stringify</span><span class="p">(</span><span class="nx">data</span><span class="p">));</span>
+  <span class="p">}</span>
+<span class="p">})</span>
+</code></pre></div><div class="highlight"><pre class="highlight javascript tab-javascript--nodejs"><code><span class="kd">const</span> <span class="nx">request</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="dl">'</span><span class="s1">node-fetch</span><span class="dl">'</span><span class="p">);</span>
+
+<span class="kd">const</span> <span class="nx">headers</span> <span class="o">=</span> <span class="p">{</span>
+  <span class="dl">'</span><span class="s1">Accept</span><span class="dl">'</span><span class="p">:</span><span class="dl">'</span><span class="s1">application/json</span><span class="dl">'</span>
+
+<span class="p">};</span>
+
+<span class="nx">fetch</span><span class="p">(</span><span class="dl">'</span><span class="s1">https://api.mod.io/v1/agreements/types/{agreement-type-id}/current?api_key=YourApiKey</span><span class="dl">'</span><span class="p">,</span>
+<span class="p">{</span>
+  <span class="na">method</span><span class="p">:</span> <span class="dl">'</span><span class="s1">GET</span><span class="dl">'</span><span class="p">,</span>
+
+  <span class="na">headers</span><span class="p">:</span> <span class="nx">headers</span>
+<span class="p">})</span>
+<span class="p">.</span><span class="nx">then</span><span class="p">(</span><span class="kd">function</span><span class="p">(</span><span class="nx">res</span><span class="p">)</span> <span class="p">{</span>
+    <span class="k">return</span> <span class="nx">res</span><span class="p">.</span><span class="nx">json</span><span class="p">();</span>
+<span class="p">}).</span><span class="nx">then</span><span class="p">(</span><span class="kd">function</span><span class="p">(</span><span class="nx">body</span><span class="p">)</span> <span class="p">{</span>
+    <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">body</span><span class="p">);</span>
+<span class="p">});</span>
+</code></pre></div><div class="highlight"><pre class="highlight python tab-python"><code><span class="kn">import</span> <span class="nn">requests</span>
+<span class="n">headers</span> <span class="o">=</span> <span class="p">{</span>
+  <span class="s">'Accept'</span><span class="p">:</span> <span class="s">'application/json'</span>
+<span class="p">}</span>
+
+<span class="n">r</span> <span class="o">=</span> <span class="n">requests</span><span class="p">.</span><span class="n">get</span><span class="p">(</span><span class="s">'https://api.mod.io/v1/agreements/types/{agreement-type-id}/current'</span><span class="p">,</span> <span class="n">params</span><span class="o">=</span><span class="p">{</span>
+  <span class="s">'api_key'</span><span class="p">:</span> <span class="s">'YourApiKey'</span>
+<span class="p">},</span> <span class="n">headers</span> <span class="o">=</span> <span class="n">headers</span><span class="p">)</span>
+
+<span class="k">print</span> <span class="n">r</span><span class="p">.</span><span class="n">json</span><span class="p">()</span>
+</code></pre></div><div class="highlight"><pre class="highlight java tab-java"><code><span class="no">URL</span> <span class="n">obj</span> <span class="o">=</span> <span class="k">new</span> <span class="no">URL</span><span class="o">(</span><span class="s">"https://api.mod.io/v1/agreements/types/{agreement-type-id}/current?api_key=YourApiKey"</span><span class="o">);</span>
+<span class="nc">HttpURLConnection</span> <span class="n">con</span> <span class="o">=</span> <span class="o">(</span><span class="nc">HttpURLConnection</span><span class="o">)</span> <span class="n">obj</span><span class="o">.</span><span class="na">openConnection</span><span class="o">();</span>
+<span class="n">con</span><span class="o">.</span><span class="na">setRequestMethod</span><span class="o">(</span><span class="s">"GET"</span><span class="o">);</span>
+<span class="kt">int</span> <span class="n">responseCode</span> <span class="o">=</span> <span class="n">con</span><span class="o">.</span><span class="na">getResponseCode</span><span class="o">();</span>
+<span class="nc">BufferedReader</span> <span class="n">in</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">BufferedReader</span><span class="o">(</span>
+    <span class="k">new</span> <span class="nf">InputStreamReader</span><span class="o">(</span><span class="n">con</span><span class="o">.</span><span class="na">getInputStream</span><span class="o">()));</span>
+<span class="nc">String</span> <span class="n">inputLine</span><span class="o">;</span>
+<span class="nc">StringBuffer</span> <span class="n">response</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">StringBuffer</span><span class="o">();</span>
+<span class="k">while</span> <span class="o">((</span><span class="n">inputLine</span> <span class="o">=</span> <span class="n">in</span><span class="o">.</span><span class="na">readLine</span><span class="o">())</span> <span class="o">!=</span> <span class="kc">null</span><span class="o">)</span> <span class="o">{</span>
+    <span class="n">response</span><span class="o">.</span><span class="na">append</span><span class="o">(</span><span class="n">inputLine</span><span class="o">);</span>
+<span class="o">}</span>
+<span class="n">in</span><span class="o">.</span><span class="na">close</span><span class="o">();</span>
+<span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="n">response</span><span class="o">.</span><span class="na">toString</span><span class="o">());</span>
+</code></pre></div>
+<p><span class="httpmethod GET">GET</span> <span class="endpointheading">/agreements/types/{agreement-type-id}/current</span></p>
+
+<p>Get the current agreement (version) by type. Successful request will return a single <a href="#agreement-version-object">Agreement Version Object</a>.</p>
+
+<p>Valid agreement types are:</p>
+
+<p><strong>1</strong> = Terms of Use - <a href="https://mod.io/terms">https://mod.io/terms</a><br>
+     <strong>2</strong> = Privacy Policy - <a href="https://mod.io/privacy">https://mod.io/privacy</a><br>
+     <strong>3</strong> = Game Terms - <a href="https://mod.io/gameterms">https://mod.io/gameterms</a><br>
+     <strong>4</strong> = API Access Terms - <a href="https://mod.io/apiterms">https://mod.io/apiterms</a><br>
+     <strong>5</strong> = Monetisation Terms - <a href="https://mod.io/monetisationterms">https://mod.io/monetisationterms</a><br>
+     <strong>6</strong> = Acceptable Use Policy - <a href="https://mod.io/aup">https://mod.io/aup</a></p>
+
+<blockquote>
+<p>Example response</p>
+</blockquote>
+<div class="highlight"><pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
+  </span><span class="nl">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"is_active"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"type"</span><span class="p">:</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"user"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+    </span><span class="nl">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"name_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"xant"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"username"</span><span class="p">:</span><span class="w"> </span><span class="s2">"XanT"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"display_name_portal"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"date_online"</span><span class="p">:</span><span class="w"> </span><span class="mi">1509922961</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"date_joined"</span><span class="p">:</span><span class="w"> </span><span class="mi">1509922961</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"avatar"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+      </span><span class="nl">"filename"</span><span class="p">:</span><span class="w"> </span><span class="s2">"avatar.png"</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"original"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://assets.modcdn.io/images/placeholder/avatar.png"</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"thumb_50x50"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://assets.modcdn.io/images/placeholder/avatar_50x50.png"</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"thumb_100x100"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://assets.modcdn.io/images/placeholder/avatar_100x100.png"</span><span class="w">
+    </span><span class="p">},</span><span class="w">
+    </span><span class="nl">"timezone"</span><span class="p">:</span><span class="w"> </span><span class="s2">""</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"language"</span><span class="p">:</span><span class="w"> </span><span class="s2">""</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"profile_url"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://mod.io/u/xant"</span><span class="w">
+  </span><span class="p">},</span><span class="w">
+  </span><span class="nl">"date_added"</span><span class="p">:</span><span class="w"> </span><span class="mi">1509922961</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"date_updated"</span><span class="p">:</span><span class="w"> </span><span class="mi">1509922961</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"date_live"</span><span class="p">:</span><span class="w"> </span><span class="mi">1509922961</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Terms of Use"</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"changelog"</span><span class="p">:</span><span class="w"> </span><span class="s2">""</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"description"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Privacy Agreement - 20/11/2020....."</span><span class="w">
+</span><span class="p">}</span><span class="w">
+
+</span></code></pre></div>
+<h3 id="Get-Current-Agreement-responses">Responses</h3>
+
+<table>
+<thead>
+<tr>
+<th>Status</th>
+<th>Meaning</th>
+<th>Error Ref</th>
+<th>Description</th>
+<th>Response Schema</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>200</td>
+<td><a href="https://tools.ietf.org/html/rfc7231#section-6.3.1">OK</a></td>
+<td></td>
+<td>Successful Request</td>
+<td><a href="#schemaagreement_version_object">Agreement Version Object</a></td>
+</tr>
+<tr>
+<td>404</td>
+<td><a href="https://tools.ietf.org/html/rfc7231#section-6.5.4">Not Found</a></td>
+<td>14000</td>
+<td>Agreement could not be found.</td>
+<td><a href="#schemaerror_object">Error Object</a></td>
+</tr>
+</tbody>
+</table>
+
+<aside class="auth-notice">
+To perform this request, you must be authenticated via one of the following methods:
+<a href="#authentication">api_key</a>, <a href="#authentication">OAuth 2</a> (Scopes: read)
+</aside>
+<h2 id="get-agreement-version">Get Agreement Version</h2>
+<blockquote>
+<p>Example request</p>
+</blockquote>
+<div class="highlight"><pre class="highlight shell tab-shell"><code><span class="c"># You can also use wget</span>
+curl <span class="nt">-X</span> GET https://api.mod.io/v1/agreements/versions/<span class="o">{</span>agreement-version-id<span class="o">}</span>?api_key<span class="o">=</span>YourApiKey <span class="se">\</span>
+  <span class="nt">-H</span> <span class="s1">'Accept: application/json'</span>
+
+</code></pre></div><div class="highlight"><pre class="highlight http tab-http"><code><span class="nf">GET</span> <span class="nn">https://api.mod.io/v1/agreements/versions/{agreement-version-id}?api_key=YourApiKey</span> <span class="k">HTTP</span><span class="o">/</span><span class="m">1.1</span>
+<span class="na">Host</span><span class="p">:</span> <span class="s">api.mod.io</span>
+
+Accept: application/json
+
+</code></pre></div><div class="highlight"><pre class="highlight javascript tab-javascript"><code><span class="kd">var</span> <span class="nx">headers</span> <span class="o">=</span> <span class="p">{</span>
+  <span class="dl">'</span><span class="s1">Accept</span><span class="dl">'</span><span class="p">:</span><span class="dl">'</span><span class="s1">application/json</span><span class="dl">'</span>
+
+<span class="p">};</span>
+
+<span class="nx">$</span><span class="p">.</span><span class="nx">ajax</span><span class="p">({</span>
+  <span class="na">url</span><span class="p">:</span> <span class="dl">'</span><span class="s1">https://api.mod.io/v1/agreements/versions/{agreement-version-id}</span><span class="dl">'</span><span class="p">,</span>
+  <span class="na">method</span><span class="p">:</span> <span class="dl">'</span><span class="s1">get</span><span class="dl">'</span><span class="p">,</span>
+  <span class="na">data</span><span class="p">:</span> <span class="dl">'</span><span class="s1">?api_key=YourApiKey</span><span class="dl">'</span><span class="p">,</span>
+  <span class="na">headers</span><span class="p">:</span> <span class="nx">headers</span><span class="p">,</span>
+  <span class="na">success</span><span class="p">:</span> <span class="kd">function</span><span class="p">(</span><span class="nx">data</span><span class="p">)</span> <span class="p">{</span>
+    <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">JSON</span><span class="p">.</span><span class="nx">stringify</span><span class="p">(</span><span class="nx">data</span><span class="p">));</span>
+  <span class="p">}</span>
+<span class="p">})</span>
+</code></pre></div><div class="highlight"><pre class="highlight javascript tab-javascript--nodejs"><code><span class="kd">const</span> <span class="nx">request</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="dl">'</span><span class="s1">node-fetch</span><span class="dl">'</span><span class="p">);</span>
+
+<span class="kd">const</span> <span class="nx">headers</span> <span class="o">=</span> <span class="p">{</span>
+  <span class="dl">'</span><span class="s1">Accept</span><span class="dl">'</span><span class="p">:</span><span class="dl">'</span><span class="s1">application/json</span><span class="dl">'</span>
+
+<span class="p">};</span>
+
+<span class="nx">fetch</span><span class="p">(</span><span class="dl">'</span><span class="s1">https://api.mod.io/v1/agreements/versions/{agreement-version-id}?api_key=YourApiKey</span><span class="dl">'</span><span class="p">,</span>
+<span class="p">{</span>
+  <span class="na">method</span><span class="p">:</span> <span class="dl">'</span><span class="s1">GET</span><span class="dl">'</span><span class="p">,</span>
+
+  <span class="na">headers</span><span class="p">:</span> <span class="nx">headers</span>
+<span class="p">})</span>
+<span class="p">.</span><span class="nx">then</span><span class="p">(</span><span class="kd">function</span><span class="p">(</span><span class="nx">res</span><span class="p">)</span> <span class="p">{</span>
+    <span class="k">return</span> <span class="nx">res</span><span class="p">.</span><span class="nx">json</span><span class="p">();</span>
+<span class="p">}).</span><span class="nx">then</span><span class="p">(</span><span class="kd">function</span><span class="p">(</span><span class="nx">body</span><span class="p">)</span> <span class="p">{</span>
+    <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">body</span><span class="p">);</span>
+<span class="p">});</span>
+</code></pre></div><div class="highlight"><pre class="highlight python tab-python"><code><span class="kn">import</span> <span class="nn">requests</span>
+<span class="n">headers</span> <span class="o">=</span> <span class="p">{</span>
+  <span class="s">'Accept'</span><span class="p">:</span> <span class="s">'application/json'</span>
+<span class="p">}</span>
+
+<span class="n">r</span> <span class="o">=</span> <span class="n">requests</span><span class="p">.</span><span class="n">get</span><span class="p">(</span><span class="s">'https://api.mod.io/v1/agreements/versions/{agreement-version-id}'</span><span class="p">,</span> <span class="n">params</span><span class="o">=</span><span class="p">{</span>
+  <span class="s">'api_key'</span><span class="p">:</span> <span class="s">'YourApiKey'</span>
+<span class="p">},</span> <span class="n">headers</span> <span class="o">=</span> <span class="n">headers</span><span class="p">)</span>
+
+<span class="k">print</span> <span class="n">r</span><span class="p">.</span><span class="n">json</span><span class="p">()</span>
+</code></pre></div><div class="highlight"><pre class="highlight java tab-java"><code><span class="no">URL</span> <span class="n">obj</span> <span class="o">=</span> <span class="k">new</span> <span class="no">URL</span><span class="o">(</span><span class="s">"https://api.mod.io/v1/agreements/versions/{agreement-version-id}?api_key=YourApiKey"</span><span class="o">);</span>
+<span class="nc">HttpURLConnection</span> <span class="n">con</span> <span class="o">=</span> <span class="o">(</span><span class="nc">HttpURLConnection</span><span class="o">)</span> <span class="n">obj</span><span class="o">.</span><span class="na">openConnection</span><span class="o">();</span>
+<span class="n">con</span><span class="o">.</span><span class="na">setRequestMethod</span><span class="o">(</span><span class="s">"GET"</span><span class="o">);</span>
+<span class="kt">int</span> <span class="n">responseCode</span> <span class="o">=</span> <span class="n">con</span><span class="o">.</span><span class="na">getResponseCode</span><span class="o">();</span>
+<span class="nc">BufferedReader</span> <span class="n">in</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">BufferedReader</span><span class="o">(</span>
+    <span class="k">new</span> <span class="nf">InputStreamReader</span><span class="o">(</span><span class="n">con</span><span class="o">.</span><span class="na">getInputStream</span><span class="o">()));</span>
+<span class="nc">String</span> <span class="n">inputLine</span><span class="o">;</span>
+<span class="nc">StringBuffer</span> <span class="n">response</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">StringBuffer</span><span class="o">();</span>
+<span class="k">while</span> <span class="o">((</span><span class="n">inputLine</span> <span class="o">=</span> <span class="n">in</span><span class="o">.</span><span class="na">readLine</span><span class="o">())</span> <span class="o">!=</span> <span class="kc">null</span><span class="o">)</span> <span class="o">{</span>
+    <span class="n">response</span><span class="o">.</span><span class="na">append</span><span class="o">(</span><span class="n">inputLine</span><span class="o">);</span>
+<span class="o">}</span>
+<span class="n">in</span><span class="o">.</span><span class="na">close</span><span class="o">();</span>
+<span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="n">response</span><span class="o">.</span><span class="na">toString</span><span class="o">());</span>
+</code></pre></div>
+<p><span class="httpmethod GET">GET</span> <span class="endpointheading">/agreements/versions/{agreement-version-id}</span></p>
+
+<p>Get the specified agreement version. Successful request will return an <a href="#agreement-version-object">Agreement Version Object</a>.</p>
+
+<blockquote>
+<p>Example response</p>
+</blockquote>
+<div class="highlight"><pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
+  </span><span class="nl">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"is_active"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"type"</span><span class="p">:</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"user"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+    </span><span class="nl">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"name_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"xant"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"username"</span><span class="p">:</span><span class="w"> </span><span class="s2">"XanT"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"display_name_portal"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"date_online"</span><span class="p">:</span><span class="w"> </span><span class="mi">1509922961</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"date_joined"</span><span class="p">:</span><span class="w"> </span><span class="mi">1509922961</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"avatar"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+      </span><span class="nl">"filename"</span><span class="p">:</span><span class="w"> </span><span class="s2">"avatar.png"</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"original"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://assets.modcdn.io/images/placeholder/avatar.png"</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"thumb_50x50"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://assets.modcdn.io/images/placeholder/avatar_50x50.png"</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"thumb_100x100"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://assets.modcdn.io/images/placeholder/avatar_100x100.png"</span><span class="w">
+    </span><span class="p">},</span><span class="w">
+    </span><span class="nl">"timezone"</span><span class="p">:</span><span class="w"> </span><span class="s2">""</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"language"</span><span class="p">:</span><span class="w"> </span><span class="s2">""</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"profile_url"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://mod.io/u/xant"</span><span class="w">
+  </span><span class="p">},</span><span class="w">
+  </span><span class="nl">"date_added"</span><span class="p">:</span><span class="w"> </span><span class="mi">1509922961</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"date_updated"</span><span class="p">:</span><span class="w"> </span><span class="mi">1509922961</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"date_live"</span><span class="p">:</span><span class="w"> </span><span class="mi">1509922961</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Terms of Use"</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"changelog"</span><span class="p">:</span><span class="w"> </span><span class="s2">""</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"description"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Privacy Agreement - 20/11/2020....."</span><span class="w">
+</span><span class="p">}</span><span class="w">
+
+</span></code></pre></div>
+<h3 id="Get-Agreement-Version-responses">Responses</h3>
+
+<table>
+<thead>
+<tr>
+<th>Status</th>
+<th>Meaning</th>
+<th>Error Ref</th>
+<th>Description</th>
+<th>Response Schema</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>200</td>
+<td><a href="https://tools.ietf.org/html/rfc7231#section-6.3.1">OK</a></td>
+<td></td>
+<td>Successful Request</td>
+<td><a href="#schemaagreement_version_object">Agreement Version Object</a></td>
+</tr>
+<tr>
+<td>403</td>
+<td><a href="https://tools.ietf.org/html/rfc7231#section-6.5.3">Forbidden</a></td>
+<td>14019</td>
+<td>Only administrators can view agreement templates.</td>
+<td><a href="#schemaerror_object">Error Object</a></td>
+</tr>
+<tr>
+<td>404</td>
+<td><a href="https://tools.ietf.org/html/rfc7231#section-6.5.4">Not Found</a></td>
+<td>14000</td>
+<td>Agreement could not be found.</td>
+<td><a href="#schemaerror_object">Error Object</a></td>
+</tr>
+</tbody>
+</table>
+
+<aside class="auth-notice">
+To perform this request, you must be authenticated via one of the following methods:
+<a href="#authentication">api_key</a>, <a href="#authentication">OAuth 2</a> (Scopes: read)
+</aside>
 <h1 id="users">Users</h1><h2 id="mute-a-user">Mute a user</h2>
 <blockquote>
 <p>Example request</p>
@@ -16335,6 +16612,98 @@ To perform this request, you must be authenticated via one of the following meth
 </tr>
 </tbody>
 </table>
+<h2 id="agreement-version-object">Agreement Version Object</h2>
+<p><a name="schemaagreement_version_object"></a></p>
+<div class="highlight"><pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
+  </span><span class="nl">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"is_active"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"type"</span><span class="p">:</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"user"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+    </span><span class="nl">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"name_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"xant"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"username"</span><span class="p">:</span><span class="w"> </span><span class="s2">"XanT"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"display_name_portal"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"date_online"</span><span class="p">:</span><span class="w"> </span><span class="mi">1509922961</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"date_joined"</span><span class="p">:</span><span class="w"> </span><span class="mi">1509922961</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"avatar"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+      </span><span class="nl">"filename"</span><span class="p">:</span><span class="w"> </span><span class="s2">"avatar.png"</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"original"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://assets.modcdn.io/images/placeholder/avatar.png"</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"thumb_50x50"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://assets.modcdn.io/images/placeholder/avatar_50x50.png"</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"thumb_100x100"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://assets.modcdn.io/images/placeholder/avatar_100x100.png"</span><span class="w">
+    </span><span class="p">},</span><span class="w">
+    </span><span class="nl">"timezone"</span><span class="p">:</span><span class="w"> </span><span class="s2">""</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"language"</span><span class="p">:</span><span class="w"> </span><span class="s2">""</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"profile_url"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://mod.io/u/xant"</span><span class="w">
+  </span><span class="p">},</span><span class="w">
+  </span><span class="nl">"date_added"</span><span class="p">:</span><span class="w"> </span><span class="mi">1509922961</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"date_updated"</span><span class="p">:</span><span class="w"> </span><span class="mi">1509922961</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"date_live"</span><span class="p">:</span><span class="w"> </span><span class="mi">1509922961</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Terms of Use"</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"changelog"</span><span class="p">:</span><span class="w"> </span><span class="s2">""</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"description"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Privacy Agreement - 20/11/2020....."</span><span class="w">
+</span><span class="p">}</span><span class="w"> 
+</span></code></pre></div><h3 id="properties-2">Properties</h3>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>id</td>
+<td>integer</td>
+<td>Unique id of the agreement.</td>
+</tr>
+<tr>
+<td>is_active</td>
+<td>boolean</td>
+<td>Is the agreement currently active? (This can also be determined if date_live &gt; 0).</td>
+</tr>
+<tr>
+<td>type</td>
+<td>integer</td>
+<td>The type of agreement. Can be one of the following:<br><br><strong>1</strong> = Terms<br><strong>2</strong> = Privacy<br><strong>3</strong> = Developers<br><strong>4</strong> = API<br><strong>5</strong> = Payment<br><strong>6</strong> = AUP</td>
+</tr>
+<tr>
+<td>user</td>
+<td><a href="#schemauser_object">User Object</a></td>
+<td>No description</td>
+</tr>
+<tr>
+<td>date_added</td>
+<td>integer</td>
+<td>Unix timestamp of the date the agreement was added.</td>
+</tr>
+<tr>
+<td>date_updated</td>
+<td>integer</td>
+<td>Unix timestamp of the date the agreement was updated.</td>
+</tr>
+<tr>
+<td>date_live</td>
+<td>integer</td>
+<td>Unix timestamp of the date the agreement was set live.</td>
+</tr>
+<tr>
+<td>name</td>
+<td>string</td>
+<td>Name of the agreement.</td>
+</tr>
+<tr>
+<td>changelog</td>
+<td>string</td>
+<td>Changelog for version of this agreement.</td>
+</tr>
+<tr>
+<td>description</td>
+<td>string</td>
+<td>The contents of the agreement</td>
+</tr>
+</tbody>
+</table>
 <h2 id="avatar-object">Avatar Object</h2>
 <p><a name="schemaavatar_object"></a></p>
 <div class="highlight"><pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
@@ -16343,7 +16712,7 @@ To perform this request, you must be authenticated via one of the following meth
   </span><span class="nl">"thumb_50x50"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://assets.modcdn.io/images/placeholder/avatar_50x50.png"</span><span class="p">,</span><span class="w">
   </span><span class="nl">"thumb_100x100"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://assets.modcdn.io/images/placeholder/avatar_100x100.png"</span><span class="w">
 </span><span class="p">}</span><span class="w"> 
-</span></code></pre></div><h3 id="properties-2">Properties</h3>
+</span></code></pre></div><h3 id="properties-3">Properties</h3>
 <table>
 <thead>
 <tr>
@@ -16406,7 +16775,7 @@ To perform this request, you must be authenticated via one of the following meth
   </span><span class="nl">"karma_guest"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
   </span><span class="nl">"content"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Hey &lt;a href=</span><span class="se">\"</span><span class="s2">https://mod.io/u/guest</span><span class="se">\"</span><span class="s2">&gt;guest&lt;/a&gt;, you should check out this mod!"</span><span class="w">
 </span><span class="p">}</span><span class="w"> 
-</span></code></pre></div><h3 id="properties-3">Properties</h3>
+</span></code></pre></div><h3 id="properties-4">Properties</h3>
 <table>
 <thead>
 <tr>
@@ -16479,7 +16848,7 @@ To perform this request, you must be authenticated via one of the following meth
   </span><span class="nl">"binary_url"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://api.mod.io/mods/file/1/c489a0354111a4d76640d47f0cdcb294"</span><span class="p">,</span><span class="w">
   </span><span class="nl">"date_expires"</span><span class="p">:</span><span class="w"> </span><span class="mi">1579316848</span><span class="w">
 </span><span class="p">}</span><span class="w"> 
-</span></code></pre></div><h3 id="properties-4">Properties</h3>
+</span></code></pre></div><h3 id="properties-5">Properties</h3>
 <table>
 <thead>
 <tr>
@@ -16511,7 +16880,7 @@ To perform this request, you must be authenticated via one of the following meth
     </span><span class="nl">"errors"</span><span class="p">:</span><span class="w"> </span><span class="p">{}</span><span class="w">
   </span><span class="p">}</span><span class="w">
 </span><span class="p">}</span><span class="w"> 
-</span></code></pre></div><h3 id="properties-5">Properties</h3>
+</span></code></pre></div><h3 id="properties-6">Properties</h3>
 <table>
 <thead>
 <tr>
@@ -16553,7 +16922,7 @@ To perform this request, you must be authenticated via one of the following meth
 <div class="highlight"><pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
   </span><span class="nl">"md5"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2d4a0e2d7273db6b0a94b0740a88ad0d"</span><span class="w">
 </span><span class="p">}</span><span class="w"> 
-</span></code></pre></div><h3 id="properties-6">Properties</h3>
+</span></code></pre></div><h3 id="properties-7">Properties</h3>
 <table>
 <thead>
 <tr>
@@ -16657,7 +17026,7 @@ To perform this request, you must be authenticated via one of the following meth
     </span><span class="p">}</span><span class="w">
   </span><span class="p">]</span><span class="w">
 </span><span class="p">}</span><span class="w"> 
-</span></code></pre></div><h3 id="properties-7">Properties</h3>
+</span></code></pre></div><h3 id="properties-8">Properties</h3>
 <table>
 <thead>
 <tr>
@@ -16824,7 +17193,7 @@ To perform this request, you must be authenticated via one of the following meth
   </span><span class="nl">"label"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Our Steam Page"</span><span class="p">,</span><span class="w">
   </span><span class="nl">"url"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://www.steampowered.com/2348329042"</span><span class="w">
 </span><span class="p">}</span><span class="w"> 
-</span></code></pre></div><h3 id="properties-8">Properties</h3>
+</span></code></pre></div><h3 id="properties-9">Properties</h3>
 <table>
 <thead>
 <tr>
@@ -16853,7 +17222,7 @@ To perform this request, you must be authenticated via one of the following meth
   </span><span class="nl">"label"</span><span class="p">:</span><span class="w"> </span><span class="s2">"PlayStation 5"</span><span class="p">,</span><span class="w">
   </span><span class="nl">"moderated"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="w">
 </span><span class="p">}</span><span class="w"> 
-</span></code></pre></div><h3 id="properties-9">Properties</h3>
+</span></code></pre></div><h3 id="properties-10">Properties</h3>
 <table>
 <thead>
 <tr>
@@ -16891,7 +17260,7 @@ To perform this request, you must be authenticated via one of the following meth
   </span><span class="nl">"mods_subscribers_total"</span><span class="p">:</span><span class="w"> </span><span class="mi">16394</span><span class="p">,</span><span class="w">
   </span><span class="nl">"date_expires"</span><span class="p">:</span><span class="w"> </span><span class="mi">1492564103</span><span class="w">
 </span><span class="p">}</span><span class="w"> 
-</span></code></pre></div><h3 id="properties-10">Properties</h3>
+</span></code></pre></div><h3 id="properties-11">Properties</h3>
 <table>
 <thead>
 <tr>
@@ -16952,7 +17321,7 @@ To perform this request, you must be authenticated via one of the following meth
   </span><span class="nl">"hidden"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span><span class="w">
   </span><span class="nl">"locked"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="w">
 </span><span class="p">}</span><span class="w"> 
-</span></code></pre></div><h3 id="properties-11">Properties</h3>
+</span></code></pre></div><h3 id="properties-12">Properties</h3>
 <table>
 <thead>
 <tr>
@@ -17019,7 +17388,7 @@ To perform this request, you must be authenticated via one of the following meth
   </span><span class="nl">"result_limit"</span><span class="p">:</span><span class="w"> </span><span class="mi">100</span><span class="p">,</span><span class="w">
   </span><span class="nl">"result_total"</span><span class="p">:</span><span class="w"> </span><span class="mi">70</span><span class="w">
 </span><span class="p">}</span><span class="w"> 
-</span></code></pre></div><h3 id="properties-12">Properties</h3>
+</span></code></pre></div><h3 id="properties-13">Properties</h3>
 <table>
 <thead>
 <tr>
@@ -17155,7 +17524,7 @@ To perform this request, you must be authenticated via one of the following meth
   </span><span class="nl">"result_limit"</span><span class="p">:</span><span class="w"> </span><span class="mi">100</span><span class="p">,</span><span class="w">
   </span><span class="nl">"result_total"</span><span class="p">:</span><span class="w"> </span><span class="mi">70</span><span class="w">
 </span><span class="p">}</span><span class="w"> 
-</span></code></pre></div><h3 id="properties-13">Properties</h3>
+</span></code></pre></div><h3 id="properties-14">Properties</h3>
 <table>
 <thead>
 <tr>
@@ -17232,7 +17601,7 @@ To perform this request, you must be authenticated via one of the following meth
   </span><span class="nl">"result_limit"</span><span class="p">:</span><span class="w"> </span><span class="mi">100</span><span class="p">,</span><span class="w">
   </span><span class="nl">"result_total"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="w">
 </span><span class="p">}</span><span class="w"> 
-</span></code></pre></div><h3 id="properties-14">Properties</h3>
+</span></code></pre></div><h3 id="properties-15">Properties</h3>
 <table>
 <thead>
 <tr>
@@ -17288,7 +17657,7 @@ To perform this request, you must be authenticated via one of the following meth
   </span><span class="nl">"result_limit"</span><span class="p">:</span><span class="w"> </span><span class="mi">100</span><span class="p">,</span><span class="w">
   </span><span class="nl">"result_total"</span><span class="p">:</span><span class="w"> </span><span class="mi">70</span><span class="w">
 </span><span class="p">}</span><span class="w"> 
-</span></code></pre></div><h3 id="properties-15">Properties</h3>
+</span></code></pre></div><h3 id="properties-16">Properties</h3>
 <table>
 <thead>
 <tr>
@@ -17346,7 +17715,7 @@ To perform this request, you must be authenticated via one of the following meth
   </span><span class="nl">"result_limit"</span><span class="p">:</span><span class="w"> </span><span class="mi">100</span><span class="p">,</span><span class="w">
   </span><span class="nl">"result_total"</span><span class="p">:</span><span class="w"> </span><span class="mi">70</span><span class="w">
 </span><span class="p">}</span><span class="w"> 
-</span></code></pre></div><h3 id="properties-16">Properties</h3>
+</span></code></pre></div><h3 id="properties-17">Properties</h3>
 <table>
 <thead>
 <tr>
@@ -17401,7 +17770,7 @@ To perform this request, you must be authenticated via one of the following meth
   </span><span class="nl">"result_limit"</span><span class="p">:</span><span class="w"> </span><span class="mi">100</span><span class="p">,</span><span class="w">
   </span><span class="nl">"result_total"</span><span class="p">:</span><span class="w"> </span><span class="mi">70</span><span class="w">
 </span><span class="p">}</span><span class="w"> 
-</span></code></pre></div><h3 id="properties-17">Properties</h3>
+</span></code></pre></div><h3 id="properties-18">Properties</h3>
 <table>
 <thead>
 <tr>
@@ -17467,7 +17836,7 @@ To perform this request, you must be authenticated via one of the following meth
   </span><span class="nl">"result_limit"</span><span class="p">:</span><span class="w"> </span><span class="mi">100</span><span class="p">,</span><span class="w">
   </span><span class="nl">"result_total"</span><span class="p">:</span><span class="w"> </span><span class="mi">70</span><span class="w">
 </span><span class="p">}</span><span class="w"> 
-</span></code></pre></div><h3 id="properties-18">Properties</h3>
+</span></code></pre></div><h3 id="properties-19">Properties</h3>
 <table>
 <thead>
 <tr>
@@ -17522,7 +17891,7 @@ To perform this request, you must be authenticated via one of the following meth
   </span><span class="nl">"result_limit"</span><span class="p">:</span><span class="w"> </span><span class="mi">100</span><span class="p">,</span><span class="w">
   </span><span class="nl">"result_total"</span><span class="p">:</span><span class="w"> </span><span class="mi">70</span><span class="w">
 </span><span class="p">}</span><span class="w"> 
-</span></code></pre></div><h3 id="properties-19">Properties</h3>
+</span></code></pre></div><h3 id="properties-20">Properties</h3>
 <table>
 <thead>
 <tr>
@@ -17600,7 +17969,7 @@ To perform this request, you must be authenticated via one of the following meth
   </span><span class="nl">"result_limit"</span><span class="p">:</span><span class="w"> </span><span class="mi">100</span><span class="p">,</span><span class="w">
   </span><span class="nl">"result_total"</span><span class="p">:</span><span class="w"> </span><span class="mi">70</span><span class="w">
 </span><span class="p">}</span><span class="w"> 
-</span></code></pre></div><h3 id="properties-20">Properties</h3>
+</span></code></pre></div><h3 id="properties-21">Properties</h3>
 <table>
 <thead>
 <tr>
@@ -17773,7 +18142,7 @@ To perform this request, you must be authenticated via one of the following meth
   </span><span class="nl">"result_limit"</span><span class="p">:</span><span class="w"> </span><span class="mi">100</span><span class="p">,</span><span class="w">
   </span><span class="nl">"result_total"</span><span class="p">:</span><span class="w"> </span><span class="mi">70</span><span class="w">
 </span><span class="p">}</span><span class="w"> 
-</span></code></pre></div><h3 id="properties-21">Properties</h3>
+</span></code></pre></div><h3 id="properties-22">Properties</h3>
 <table>
 <thead>
 <tr>
@@ -17830,7 +18199,7 @@ To perform this request, you must be authenticated via one of the following meth
   </span><span class="nl">"result_limit"</span><span class="p">:</span><span class="w"> </span><span class="mi">100</span><span class="p">,</span><span class="w">
   </span><span class="nl">"result_total"</span><span class="p">:</span><span class="w"> </span><span class="mi">70</span><span class="w">
 </span><span class="p">}</span><span class="w"> 
-</span></code></pre></div><h3 id="properties-22">Properties</h3>
+</span></code></pre></div><h3 id="properties-23">Properties</h3>
 <table>
 <thead>
 <tr>
@@ -17885,7 +18254,7 @@ To perform this request, you must be authenticated via one of the following meth
   </span><span class="nl">"result_limit"</span><span class="p">:</span><span class="w"> </span><span class="mi">100</span><span class="p">,</span><span class="w">
   </span><span class="nl">"result_total"</span><span class="p">:</span><span class="w"> </span><span class="mi">70</span><span class="w">
 </span><span class="p">}</span><span class="w"> 
-</span></code></pre></div><h3 id="properties-23">Properties</h3>
+</span></code></pre></div><h3 id="properties-24">Properties</h3>
 <table>
 <thead>
 <tr>
@@ -17953,7 +18322,7 @@ To perform this request, you must be authenticated via one of the following meth
   </span><span class="nl">"result_limit"</span><span class="p">:</span><span class="w"> </span><span class="mi">100</span><span class="p">,</span><span class="w">
   </span><span class="nl">"result_total"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="w">
 </span><span class="p">}</span><span class="w"> 
-</span></code></pre></div><h3 id="properties-24">Properties</h3>
+</span></code></pre></div><h3 id="properties-25">Properties</h3>
 <table>
 <thead>
 <tr>
@@ -18028,7 +18397,7 @@ To perform this request, you must be authenticated via one of the following meth
   </span><span class="nl">"result_limit"</span><span class="p">:</span><span class="w"> </span><span class="mi">100</span><span class="p">,</span><span class="w">
   </span><span class="nl">"result_total"</span><span class="p">:</span><span class="w"> </span><span class="mi">70</span><span class="w">
 </span><span class="p">}</span><span class="w"> 
-</span></code></pre></div><h3 id="properties-25">Properties</h3>
+</span></code></pre></div><h3 id="properties-26">Properties</h3>
 <table>
 <thead>
 <tr>
@@ -18087,7 +18456,7 @@ To perform this request, you must be authenticated via one of the following meth
   </span><span class="nl">"result_limit"</span><span class="p">:</span><span class="w"> </span><span class="mi">100</span><span class="p">,</span><span class="w">
   </span><span class="nl">"result_total"</span><span class="p">:</span><span class="w"> </span><span class="mi">70</span><span class="w">
 </span><span class="p">}</span><span class="w"> 
-</span></code></pre></div><h3 id="properties-26">Properties</h3>
+</span></code></pre></div><h3 id="properties-27">Properties</h3>
 <table>
 <thead>
 <tr>
@@ -18143,7 +18512,7 @@ To perform this request, you must be authenticated via one of the following meth
   </span><span class="nl">"result_limit"</span><span class="p">:</span><span class="w"> </span><span class="mi">100</span><span class="p">,</span><span class="w">
   </span><span class="nl">"result_total"</span><span class="p">:</span><span class="w"> </span><span class="mi">70</span><span class="w">
 </span><span class="p">}</span><span class="w"> 
-</span></code></pre></div><h3 id="properties-27">Properties</h3>
+</span></code></pre></div><h3 id="properties-28">Properties</h3>
 <table>
 <thead>
 <tr>
@@ -18186,7 +18555,7 @@ To perform this request, you must be authenticated via one of the following meth
   </span><span class="nl">"filename"</span><span class="p">:</span><span class="w"> </span><span class="s2">"modio-logo-bluedark.png"</span><span class="p">,</span><span class="w">
   </span><span class="nl">"original"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://assets.modcdn.io/images/branding/modio-logo-bluedark.png"</span><span class="w">
 </span><span class="p">}</span><span class="w"> 
-</span></code></pre></div><h3 id="properties-28">Properties</h3>
+</span></code></pre></div><h3 id="properties-29">Properties</h3>
 <table>
 <thead>
 <tr>
@@ -18217,7 +18586,7 @@ To perform this request, you must be authenticated via one of the following meth
   </span><span class="nl">"thumb_128x128"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://assets.modcdn.io/images/placeholder/icon.png"</span><span class="p">,</span><span class="w">
   </span><span class="nl">"thumb_256x256"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://assets.modcdn.io/images/placeholder/icon.png"</span><span class="w">
 </span><span class="p">}</span><span class="w"> 
-</span></code></pre></div><h3 id="properties-29">Properties</h3>
+</span></code></pre></div><h3 id="properties-30">Properties</h3>
 <table>
 <thead>
 <tr>
@@ -18262,7 +18631,7 @@ To perform this request, you must be authenticated via one of the following meth
   </span><span class="nl">"thumb_320x180"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://assets.modcdn.io/images/placeholder/card.png"</span><span class="p">,</span><span class="w">
   </span><span class="nl">"thumb_1280x720"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://assets.modcdn.io/images/placeholder/card.png"</span><span class="w">
 </span><span class="p">}</span><span class="w"> 
-</span></code></pre></div><h3 id="properties-30">Properties</h3>
+</span></code></pre></div><h3 id="properties-31">Properties</h3>
 <table>
 <thead>
 <tr>
@@ -18300,7 +18669,7 @@ To perform this request, you must be authenticated via one of the following meth
   </span><span class="nl">"key"</span><span class="p">:</span><span class="w"> </span><span class="s2">"retry-after"</span><span class="p">,</span><span class="w">
   </span><span class="nl">"value"</span><span class="p">:</span><span class="w"> </span><span class="s2">"98"</span><span class="w">
 </span><span class="p">}</span><span class="w"> 
-</span></code></pre></div><h3 id="properties-31">Properties</h3>
+</span></code></pre></div><h3 id="properties-32">Properties</h3>
 <table>
 <thead>
 <tr>
@@ -18331,7 +18700,7 @@ To perform this request, you must be authenticated via one of the following meth
   </span><span class="nl">"thumb_640x360"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://assets.modcdn.io/images/placeholder/card.png"</span><span class="p">,</span><span class="w">
   </span><span class="nl">"thumb_1280x720"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://assets.modcdn.io/images/placeholder/card.png"</span><span class="w">
 </span><span class="p">}</span><span class="w"> 
-</span></code></pre></div><h3 id="properties-32">Properties</h3>
+</span></code></pre></div><h3 id="properties-33">Properties</h3>
 <table>
 <thead>
 <tr>
@@ -18374,7 +18743,7 @@ To perform this request, you must be authenticated via one of the following meth
   </span><span class="nl">"code"</span><span class="p">:</span><span class="w"> </span><span class="mi">200</span><span class="p">,</span><span class="w">
   </span><span class="nl">"message"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Your request was successful."</span><span class="w">
 </span><span class="p">}</span><span class="w"> 
-</span></code></pre></div><h3 id="properties-33">Properties</h3>
+</span></code></pre></div><h3 id="properties-34">Properties</h3>
 <table>
 <thead>
 <tr>
@@ -18403,7 +18772,7 @@ To perform this request, you must be authenticated via one of the following meth
   </span><span class="nl">"metakey"</span><span class="p">:</span><span class="w"> </span><span class="s2">"pistol-dmg"</span><span class="p">,</span><span class="w">
   </span><span class="nl">"metavalue"</span><span class="p">:</span><span class="w"> </span><span class="s2">"800"</span><span class="w">
 </span><span class="p">}</span><span class="w"> 
-</span></code></pre></div><h3 id="properties-34">Properties</h3>
+</span></code></pre></div><h3 id="properties-35">Properties</h3>
 <table>
 <thead>
 <tr>
@@ -18432,7 +18801,7 @@ To perform this request, you must be authenticated via one of the following meth
   </span><span class="nl">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Example Mod"</span><span class="p">,</span><span class="w">
   </span><span class="nl">"date_added"</span><span class="p">:</span><span class="w"> </span><span class="mi">1499841487</span><span class="w">
 </span><span class="p">}</span><span class="w"> 
-</span></code></pre></div><h3 id="properties-35">Properties</h3>
+</span></code></pre></div><h3 id="properties-36">Properties</h3>
 <table>
 <thead>
 <tr>
@@ -18468,7 +18837,7 @@ To perform this request, you must be authenticated via one of the following meth
   </span><span class="nl">"date_added"</span><span class="p">:</span><span class="w"> </span><span class="mi">1499846132</span><span class="p">,</span><span class="w">
   </span><span class="nl">"event_type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"MODFILE_CHANGED"</span><span class="w">
 </span><span class="p">}</span><span class="w"> 
-</span></code></pre></div><h3 id="properties-36">Properties</h3>
+</span></code></pre></div><h3 id="properties-37">Properties</h3>
 <table>
 <thead>
 <tr>
@@ -18523,7 +18892,7 @@ To perform this request, you must be authenticated via one of the following meth
     </span><span class="p">}</span><span class="w">
   </span><span class="p">]</span><span class="w">
 </span><span class="p">}</span><span class="w"> 
-</span></code></pre></div><h3 id="properties-37">Properties</h3>
+</span></code></pre></div><h3 id="properties-38">Properties</h3>
 <table>
 <thead>
 <tr>
@@ -18675,7 +19044,7 @@ To perform this request, you must be authenticated via one of the following meth
     </span><span class="nl">"date_expires"</span><span class="p">:</span><span class="w"> </span><span class="mi">1492564103</span><span class="w">
   </span><span class="p">}</span><span class="w">
 </span><span class="p">}</span><span class="w"> 
-</span></code></pre></div><h3 id="properties-38">Properties</h3>
+</span></code></pre></div><h3 id="properties-39">Properties</h3>
 <table>
 <thead>
 <tr>
@@ -18838,7 +19207,7 @@ To perform this request, you must be authenticated via one of the following meth
   </span><span class="nl">"platform"</span><span class="p">:</span><span class="w"> </span><span class="s2">"windows"</span><span class="p">,</span><span class="w">
   </span><span class="nl">"modfile_live"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="w">
 </span><span class="p">}</span><span class="w"> 
-</span></code></pre></div><h3 id="properties-39">Properties</h3>
+</span></code></pre></div><h3 id="properties-40">Properties</h3>
 <table>
 <thead>
 <tr>
@@ -18877,7 +19246,7 @@ To perform this request, you must be authenticated via one of the following meth
   </span><span class="nl">"ratings_display_text"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Very Positive"</span><span class="p">,</span><span class="w">
   </span><span class="nl">"date_expires"</span><span class="p">:</span><span class="w"> </span><span class="mi">1492564103</span><span class="w">
 </span><span class="p">}</span><span class="w"> 
-</span></code></pre></div><h3 id="properties-40">Properties</h3>
+</span></code></pre></div><h3 id="properties-41">Properties</h3>
 <table>
 <thead>
 <tr>
@@ -18960,7 +19329,7 @@ To perform this request, you must be authenticated via one of the following meth
   </span><span class="nl">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Unity"</span><span class="p">,</span><span class="w">
   </span><span class="nl">"date_added"</span><span class="p">:</span><span class="w"> </span><span class="mi">1499841487</span><span class="w">
 </span><span class="p">}</span><span class="w"> 
-</span></code></pre></div><h3 id="properties-41">Properties</h3>
+</span></code></pre></div><h3 id="properties-42">Properties</h3>
 <table>
 <thead>
 <tr>
@@ -19011,7 +19380,7 @@ To perform this request, you must be authenticated via one of the following meth
     </span><span class="p">}</span><span class="w">
   </span><span class="p">]</span><span class="w">
 </span><span class="p">}</span><span class="w"> 
-</span></code></pre></div><h3 id="properties-42">Properties</h3>
+</span></code></pre></div><h3 id="properties-43">Properties</h3>
 <table>
 <thead>
 <tr>
@@ -19105,7 +19474,7 @@ To perform this request, you must be authenticated via one of the following meth
   </span><span class="nl">"platform"</span><span class="p">:</span><span class="w"> </span><span class="s2">"windows"</span><span class="p">,</span><span class="w">
   </span><span class="nl">"status"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="w">
 </span><span class="p">}</span><span class="w"> 
-</span></code></pre></div><h3 id="properties-43">Properties</h3>
+</span></code></pre></div><h3 id="properties-44">Properties</h3>
 <table>
 <thead>
 <tr>
@@ -19146,7 +19515,7 @@ To perform this request, you must be authenticated via one of the following meth
     </span><span class="s2">"string"</span><span class="w">
   </span><span class="p">]</span><span class="w">
 </span><span class="p">}</span><span class="w"> 
-</span></code></pre></div><h3 id="properties-44">Properties</h3>
+</span></code></pre></div><h3 id="properties-45">Properties</h3>
 <table>
 <thead>
 <tr>
@@ -19189,7 +19558,7 @@ To perform this request, you must be authenticated via one of the following meth
   </span><span class="nl">"upload_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"123e4567-e89b-12d3-a456-426614174000"</span><span class="p">,</span><span class="w">
   </span><span class="nl">"status"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="w">
 </span><span class="p">}</span><span class="w"> 
-</span></code></pre></div><h3 id="properties-45">Properties</h3>
+</span></code></pre></div><h3 id="properties-46">Properties</h3>
 <table>
 <thead>
 <tr>
@@ -19219,7 +19588,7 @@ To perform this request, you must be authenticated via one of the following meth
   </span><span class="nl">"part_size"</span><span class="p">:</span><span class="w"> </span><span class="mi">52428800</span><span class="p">,</span><span class="w">
   </span><span class="nl">"date_added"</span><span class="p">:</span><span class="w"> </span><span class="mi">1499846132</span><span class="w">
 </span><span class="p">}</span><span class="w"> 
-</span></code></pre></div><h3 id="properties-46">Properties</h3>
+</span></code></pre></div><h3 id="properties-47">Properties</h3>
 <table>
 <thead>
 <tr>
@@ -19259,7 +19628,7 @@ To perform this request, you must be authenticated via one of the following meth
   </span><span class="nl">"rating"</span><span class="p">:</span><span class="w"> </span><span class="mi">-1</span><span class="p">,</span><span class="w">
   </span><span class="nl">"date_added"</span><span class="p">:</span><span class="w"> </span><span class="mi">1492564103</span><span class="w">
 </span><span class="p">}</span><span class="w"> 
-</span></code></pre></div><h3 id="properties-47">Properties</h3>
+</span></code></pre></div><h3 id="properties-48">Properties</h3>
 <table>
 <thead>
 <tr>
@@ -19316,7 +19685,7 @@ To perform this request, you must be authenticated via one of the following meth
   </span><span class="nl">"date_added"</span><span class="p">:</span><span class="w"> </span><span class="mi">1492564103</span><span class="p">,</span><span class="w">
   </span><span class="nl">"reason"</span><span class="p">:</span><span class="w"> </span><span class="s2">""</span><span class="w">
 </span><span class="p">}</span><span class="w"> 
-</span></code></pre></div><h3 id="properties-48">Properties</h3>
+</span></code></pre></div><h3 id="properties-49">Properties</h3>
 <table>
 <thead>
 <tr>
@@ -19379,7 +19748,7 @@ To perform this request, you must be authenticated via one of the following meth
   </span><span class="nl">"position"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Turret Builder"</span><span class="p">,</span><span class="w">
   </span><span class="nl">"invite_pending"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="w">
 </span><span class="p">}</span><span class="w"> 
-</span></code></pre></div><h3 id="properties-49">Properties</h3>
+</span></code></pre></div><h3 id="properties-50">Properties</h3>
 <table>
 <thead>
 <tr>
@@ -19457,7 +19826,7 @@ To perform this request, you must be authenticated via one of the following meth
     </span><span class="p">}</span><span class="w">
   </span><span class="p">}</span><span class="w">
 </span><span class="p">}</span><span class="w"> 
-</span></code></pre></div><h3 id="properties-50">Properties</h3>
+</span></code></pre></div><h3 id="properties-51">Properties</h3>
 <table>
 <thead>
 <tr>
@@ -19599,7 +19968,7 @@ To perform this request, you must be authenticated via one of the following meth
   </span><span class="nl">"warning"</span><span class="p">:</span><span class="w"> </span><span class="s2">"#d6af2e"</span><span class="p">,</span><span class="w">
   </span><span class="nl">"danger"</span><span class="p">:</span><span class="w"> </span><span class="s2">"#ff000e"</span><span class="w">
 </span><span class="p">}</span><span class="w"> 
-</span></code></pre></div><h3 id="properties-51">Properties</h3>
+</span></code></pre></div><h3 id="properties-52">Properties</h3>
 <table>
 <thead>
 <tr>
@@ -19651,7 +20020,7 @@ To perform this request, you must be authenticated via one of the following meth
   </span><span class="nl">"date_added"</span><span class="p">:</span><span class="w"> </span><span class="mi">1499846132</span><span class="p">,</span><span class="w">
   </span><span class="nl">"event_type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"USER_SUBSCRIBE"</span><span class="w">
 </span><span class="p">}</span><span class="w"> 
-</span></code></pre></div><h3 id="properties-52">Properties</h3>
+</span></code></pre></div><h3 id="properties-53">Properties</h3>
 <table>
 <thead>
 <tr>
@@ -19712,7 +20081,7 @@ To perform this request, you must be authenticated via one of the following meth
   </span><span class="nl">"language"</span><span class="p">:</span><span class="w"> </span><span class="s2">""</span><span class="p">,</span><span class="w">
   </span><span class="nl">"profile_url"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://mod.io/u/xant"</span><span class="w">
 </span><span class="p">}</span><span class="w"> 
-</span></code></pre></div><h3 id="properties-53">Properties</h3>
+</span></code></pre></div><h3 id="properties-54">Properties</h3>
 <table>
 <thead>
 <tr>
@@ -19782,7 +20151,7 @@ To perform this request, you must be authenticated via one of the following meth
   </span><span class="nl">"success"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
   </span><span class="nl">"message"</span><span class="p">:</span><span class="w"> </span><span class="s2">"You have successfully logged out of mod.io."</span><span class="w">
 </span><span class="p">}</span><span class="w"> 
-</span></code></pre></div><h3 id="properties-54">Properties</h3>
+</span></code></pre></div><h3 id="properties-55">Properties</h3>
 <table>
 <thead>
 <tr>
