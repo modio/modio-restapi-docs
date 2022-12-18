@@ -1072,7 +1072,7 @@ System.out.println(response.toString());
 
 `POST /external/steamauth`
 
-Request an access token on behalf of a Steam user. To use this functionality you *must* add your games [encrypted app ticket key](https://partner.steamgames.com/apps/sdkauth) from Steamworks, to the *Edit > Options* page of your games profile on mod.io. A Successful request will return an [Access Token Object](#access-token-object).
+Request an access token on behalf of a Steam user. To use this functionality you *must* add your games [encrypted app ticket key](https://partner.steamgames.com/apps/sdkauth) from Steamworks, to the *Game Admin > Settings* page of your games profile on mod.io. A Successful request will return an [Access Token Object](#access-token-object).
      
      __HINT:__ If you want to overlay the mod.io site in-game on Steam, we recommend you add `?portal=steam` to the end of the URL you open which will prompt the user to login with Steam. See [Web Overlay Authentication](#web-overlay-authentication) for details.
      
@@ -1611,7 +1611,7 @@ System.out.println(response.toString());
 
 `POST /external/oculusauth`
 
-Request an access token on behalf of an Meta Quest user. To use this functionality you *must* add your games [AppId and secret](https://dashboard.oculus.com/) from the Meta Quest Dashboard, to the *Edit > Options* page of your games profile on mod.io. A Successful request will return an [Access Token Object](#access-token-object).
+Request an access token on behalf of an Meta Quest user. To use this functionality you *must* add your games [AppId and secret](https://dashboard.oculus.com/) from the Meta Quest Dashboard, to the *Game Admin > Settings* page of your games profile on mod.io. A Successful request will return an [Access Token Object](#access-token-object).
 
      Parameter|Type|Required|Description
      ---|---|---|---|
@@ -1744,7 +1744,7 @@ System.out.println(response.toString());
 
 `POST /external/galaxyauth`
 
-Request an access token on behalf of a GOG Galaxy user. To use this functionality you *must* add your games [encrypted app ticket key](https://devportal.gog.com/welcome) from GOG Galaxy, to the *Edit > Options* page of your games profile on mod.io. A Successful request will return an [Access Token Object](#access-token-object).
+Request an access token on behalf of a GOG Galaxy user. To use this functionality you *must* add your games [encrypted app ticket key](https://devportal.gog.com/welcome) from GOG Galaxy, to the *Game Admin > Settings* page of your games profile on mod.io. A Successful request will return an [Access Token Object](#access-token-object).
 
      Parameter|Type|Required|Description
      ---|---|---|---|
