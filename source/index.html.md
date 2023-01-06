@@ -1073,9 +1073,9 @@ System.out.println(response.toString());
 `POST /external/steamauth`
 
 Request an access token on behalf of a Steam user. To use this functionality you *must* add your games [encrypted app ticket key](https://partner.steamgames.com/apps/sdkauth) from Steamworks, to the *Game Admin > Settings* page of your games profile on mod.io. A Successful request will return an [Access Token Object](#access-token-object).
-     
+
      __HINT:__ If you want to overlay the mod.io site in-game on Steam, we recommend you add `?portal=steam` to the end of the URL you open which will prompt the user to login with Steam. See [Web Overlay Authentication](#web-overlay-authentication) for details.
-     
+
      __NOTE__: Steam is the only authentication endpoint that requires their token to be base64 encoded. All other endpoints tokens should be provided as a UTF-8 character string.
 
      Parameter|Type|Required|Description
@@ -1207,9 +1207,9 @@ System.out.println(response.toString());
 `POST /external/xboxauth`
 
 Request an access token on behalf of an Xbox Live user. A Successful request will return an [Access Token Object](#access-token-object).
-     
+
      __NOTE__: To use this endpoint you will need to setup some additional settings prior to being able to authenticate Xbox Live users. For these instructions please [contact us](mailto:developers@mod.io?subject=Xbox Live SSO Request).
-     
+
      __HINT:__ If you want to overlay the mod.io site in-game on Xbox, we recommend you add `?portal=xboxlive` to the end of the URL you open which will prompt the user to login with Xbox Live. See [Web Overlay Authentication](#web-overlay-authentication) for details.
 
      Parameter|Type|Required|Description
@@ -1343,9 +1343,9 @@ System.out.println(response.toString());
 `POST /external/psnauth`
 
 Request an access token on behalf of a PlayStation Network (PSN) user. A Successful request will return an [Access Token Object](#access-token-object).
-     
+
      __NOTE__: To use this endpoint you will need to setup some additional settings prior to being able to authenticate PlayStation users. For these instructions please [contact us](mailto:developers@mod.io?subject=PlayStation Network SSO Request).
-     
+
      __HINT:__ If you want to overlay the mod.io site in-game on PlayStation, we recommend you add `?portal=psn` to the end of the URL you open which will prompt the user to login with PlayStation Network. See [Web Overlay Authentication](#web-overlay-authentication) for details.
 
      "PlayStation" and "DualSense" are registered trademarks or trademarks of Sony Interactive Entertainment Inc.
@@ -1474,7 +1474,7 @@ System.out.println(response.toString());
 `POST /external/switchauth`
 
 Request an access token on behalf of a Nintendo Switch user. A Successful request will return an [Access Token Object](#access-token-object).
-     
+
      __NOTE__: To use this endpoint you will need to setup some additional settings prior to being able to authenticate Nintendo Switch users. For these instructions please [contact us](mailto:developers@mod.io?subject=Nintendo Switch SSO Request).
 
      Parameter|Type|Required|Description
@@ -1875,7 +1875,7 @@ System.out.println(response.toString());
 `POST /external/itchioauth`
 
 Request an access token on behalf of an itch.io user via the itch.io desktop app. Due to the desktop application allowing multiple users to be logged in at once, if more than one user is logged in then the user at the top of that list on the itch.io login dialog will be the authenticating user. A Successful request will return an [Access Token Object](#access-token-object).
-     
+
      __HINT:__ If you want to overlay the mod.io site in-game on itch.io, we recommend you add `?portal=itchio` to the end of the URL you open which will prompt the user to login with itch.io. See [Web Overlay Authentication](#web-overlay-authentication) for details.
 
      Parameter|Type|Required|Description
@@ -2006,9 +2006,9 @@ System.out.println(response.toString());
 `POST /external/googleauth`
 
 Request an access token on behalf of a Google user. A Successful request will return an [Access Token Object](#access-token-object).
-     
+
      __NOTE__: To use this endpoint you will need to setup some additional settings prior to being able to authenticate Google users. For these instructions please [contact us](mailto:developers@mod.io?subject=Google SSO Request).
-     
+
      __HINT:__ If you want to overlay the mod.io site in-game on Android, we recommend you add `?portal=google` to the end of the URL you open which will prompt the user to login with Google. See [Web Overlay Authentication](#web-overlay-authentication) for details.
 
      Parameter|Type|Required|Description
@@ -2137,7 +2137,7 @@ System.out.println(response.toString());
 `POST /external/discordauth`
 
 Request an access token on behalf of a Discord user. A Successful request will return an [Access Token Object](#access-token-object).
-     
+
      __HINT:__ If you want to overlay the mod.io site in-game with Discord authentication, we recommend you add `?portal=discord` to the end of the URL you open which will prompt the user to login with Discord. See [Web Overlay Authentication](#web-overlay-authentication) for details.
 
      Parameter|Type|Required|Description
@@ -2268,9 +2268,9 @@ System.out.println(response.toString());
 `POST /external/openid`
 
 Request an access token on behalf of an OpenID identity provider. To use this method of authentication, you must configure the OpenID config in your games authentication admin page. A Successful request will return an [Access Token Object](#access-token-object).
-     
+
      __NOTE:__ The ability to authenticate players using your identity provider is feature for advanced partners only. If you are interested in becoming an advanced partner, please [contact us](mailto:developers@mod.io?subject=OpenID SSO Request).
-     
+
      __HINT:__ If you want to overlay the mod.io site in-game with your SSO, we recommend you add `?portal=openid` to the end of the URL you open which will prompt the user to login with your identity provider. See [Web Overlay Authentication](#web-overlay-authentication) for details.
 
      Parameter|Type|Required|Description
@@ -5225,7 +5225,7 @@ System.out.println(response.toString());
 
 `GET /games/{game-id}/mods/{mod-id}/files/multipart`
 
-Get all uploaded parts for a corresponding upload session. Successful request will return an array of [Multipart Upload Part Objects](#get-multipart-upload-part-object). We recommended reading the [filtering documentation](#filtering) to return only the records you want.
+Get all uploaded parts for a corresponding upload session. Successful request will return an array of [Multipart Upload Part Objects](#get-multipart-upload-parts-2). We recommended reading the [filtering documentation](#filtering) to return only the records you want.
 
 > Example response
 
