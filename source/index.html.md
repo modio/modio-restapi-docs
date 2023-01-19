@@ -4148,7 +4148,7 @@ Edit details for a mod. If you want to update the `logo` or media associated wit
 
     Parameter|Type|Required|Description
     ---|---|---|---|
-    logo|file|true|Image file which will represent your mods logo. Must be gif, jpg or png format and cannot exceed 8MB in filesize. Dimensions must be at least 512x288 and we recommended you supply a high resolution image with a 16 / 9 ratio. mod.io will use this image to make three thumbnails for the dimensions 320x180, 640x360 and 1280x720.
+    logo|file||Image file which will represent your mods logo. Must be gif, jpg or png format and cannot exceed 8MB in filesize. Dimensions must be at least 512x288 and we recommended you supply a high resolution image with a 16 / 9 ratio. mod.io will use this image to make three thumbnails for the dimensions 320x180, 640x360 and 1280x720.
     status|integer||Status of a mod. The mod must have at least one uploaded `modfile` to be 'accepted' (best if this field is controlled by game admins, see [status and visibility](#status-amp-visibility) for details):<br><br>__0__ = Not accepted<br>__1__ = Accepted (game admins only)<br>__3__ = Deleted (use the [delete mod](#delete-mod) endpoint to set this status)
     visible|integer||Visibility of the mod (best if this field is controlled by mod admins, see [status and visibility](#status-amp-visibility) for details):<br><br>__0__ = Hidden<br>__1__ = Public
     name|string||Name of your mod. Cannot exceed 50 characters.
