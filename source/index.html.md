@@ -12977,8 +12977,8 @@ Get all mods the _authenticated user_ added or is a team member of. Successful r
     date_added|integer|Unix timestamp of date mod was registered.
     date_updated|integer|Unix timestamp of date mod was updated.
     date_live|integer|Unix timestamp of date mod was set live.
-    maturity_option|integer|Maturity option(s) set by the mod creator:<br><br>__0__ = None<br>__1__ = Alcohol<br>__2__ = Drugs<br>__4__ = Violence<br>__8__ = Explicit<br>__?__ = Add the options you want together, to enable multiple filters (see [BITWISE fields](#bitwise-and-bitwise-and))
-    monetisation_options|integer|Monetisation option(s) enabled by the mod creator:<br><br>__0__ = None<br>__1__ = Enabled<br>__2__ = Recognition On<br>__4__ = Marketplace On<br>__?__ = Add the options you want together, to enable multiple filters (see [BITWISE fields](#bitwise-and-bitwise-and))
+    maturity_option|integer|Maturity option(s) set by the mod creator:<br><br>__0__ = None _(default)_<br>__1__ = Alcohol<br>__2__ = Drugs<br>__4__ = Violence<br>__8__ = Explicit<br>__?__ = Add the options you want together, to enable multiple filters (see [BITWISE fields](#bitwise-and-bitwise-and))
+    monetisation_options|integer|Monetisation option(s) enabled by the mod creator:<br><br>__0__ = None _(default)_<br>__1__ = Enabled<br>__2__ = Recognition On<br>__4__ = Marketplace On<br>__?__ = Add the options you want together, to enable multiple filters (see [BITWISE fields](#bitwise-and-bitwise-and))
     name|string|Name of the mod.
     name_id|string|Path for the mod on mod.io. For example: https://mod.io/g/gamename/m/__mod-name-id-here__
     modfile|integer|Unique id of the file that is the current active release (see [mod files](#files)).
