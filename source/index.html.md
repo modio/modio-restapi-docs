@@ -45,17 +45,26 @@ __API__ | For connecting directly to the mod.io REST API. | Web apps that need a
 __SDK__ | Drop our [open source C/C++ SDK](https://sdk.mod.io) into your game to call mod.io functionality. | Developers that want a SDK that abstracts the uploading, downloading and unzip flows behind easy to use function calls. | [Here](https://sdk.mod.io)
 __Tools/Plugins__ | Use tools, plugins and wrappers created by the community to make implementation in various engines easy. | Game developers that want a pre-built modding solution for their engine (Unity, Unreal, GameMaker, Construct) of choice. | Available below
 
-Official tools, plugins and wrappers made or supported by the mod.io team | - | - | -
+### Official Tools
+
+Plugins and wrappers made or supported by the mod.io team
+
+ | - | - | -
 --- | --- | --- | ---
 ![Unity Plugin](images/tool-unity.png) | __Unity Plugin__<br />[SDK](https://github.com/modio/modio-unity)<br />[Getting Started](https://github.com/modio/modio-unity/wiki)<br /> | ![Unreal Plugin](images/tool-unreal.png) | __Unreal Plugin__<br />[SDK](https://github.com/modio/modio-ue4)<br />[Getting Started](https://github.com/modio/modio-ue4/blob/main/Doc/getting-started.adoc)<br />
 ![C/C++ SDK](images/tool-ccpp.png) | __C/C++ SDK__<br />[SDK](https://github.com/modio/modio-sdk)<br />[Getting Started](https://github.com/modio/modio-sdk/blob/main/doc/getting-started.adoc)<br />  | ![Discord Bot](images/tool-discordbot.png) | __Discord Bot__<br />[Instructions](https://github.com/modio/modio-discord-bot)<br />[Invite](https://discordbot.mod.io)<br />
 
-Tools, plugins and wrappers made by our awesome community. Is there a tool out there that should be added to the list? [Get in touch!](mailto:developers@mod.io?subject=Publish Tool) | - | - | -
+### Community Tools
+
+Plugins and wrappers made by our awesome community. Is there a tool out there that should be added to the list? [Get in touch!](mailto:developers@mod.io?subject=Publish Tool)
+
+ | - | - | -
 --- | --- | --- | ---
 ![Rust Wrapper](images/tool-rust.png) | __Rust Wrapper__<br />[SDK](https://crates.io/crates/modio)<br />[Getting Started](https://github.com/nickelc/modio-rs)<br />[Tutorials](https://github.com/nickelc/modio-rs/tree/master/examples)<br /> | ![Python Wrapper](images/tool-python.png) | __Python Wrapper__<br />[SDK](https://github.com/ClementJ18/mod.io)<br />[Getting Started](https://github.com/ClementJ18/mod.io/#example)<br />[Tutorials](https://github.com/ClementJ18/mod.io/tree/master/examples)<br /> |<br />
 ![Construct 2](images/tool-c2.png) | __Construct 2 Plugin__<br />[SDK](https://github.com/modio/modio-construct2)<br />[Getting Started](https://github.com/modio/modio-construct2)<br /> | ![GameMaker Studio 2](images/tool-gm2.png) | __GameMaker Studio 2 Plugin__<br />[SDK](https://github.com/modio/modio-gamemaker2)<br />[Getting Started](https://github.com/modio/modio-gamemaker2)<br />
 ![Haxe Wrapper](images/tool-haxe.png) | __Haxe Wrapper__<br />[SDK](https://github.com/modio/modio-haxe)<br />[Getting Started](https://github.com/Turupawn/modioOpenFLExample#openfl-integration)<br /> | ![Modio.NET](images/tool-dotnet.png) | __Modio.NET__<br />[SDK](https://github.com/nickelc/modio.net)<br />[Getting Started](https://github.com/nickelc/modio.net)<br />
 ![Command Line Tool](images/tool-cmd.png) | __Command Line Tool__<br />[CMD](https://github.com/nickelc/modiom)<br />[Getting Started](https://github.com/nickelc/modiom)<br /> | ![GitHub Action Mod Uploader](images/tool-actions.png) | __GitHub Action Mod Uploader__<br />[GitHub](https://github.com/nickelc/upload-to-modio)<br />[Usage](https://github.com/nickelc/upload-to-modio#usage)<br />
+![Command Lisp](images/tool-commonlisp.png) | __Common Lisp__<br />[Github](https://github.com/Shinmera/cl-modio)<br />[Getting Started](https://shinmera.github.io/cl-modio/)<br /> |
 
 Here is a brief list of the things to know about our API, as explained in more detail in the following sections.
 
@@ -5998,9 +6007,7 @@ System.out.println(response.toString());
 `POST /games/{game-id}/mods/{mod-id}/files/multipart/complete`
 
 Complete an active multipart upload session, this endpoint assumes that you have already uploaded
-    all individual parts. A successful request will return a `202 Accepted` response code and provides a `Location` header
-    with a URL that you can use to later query to check if the merge was successfully completed, it will also
-    return a single [Multipart Upload Object](#multipart-upload-object).
+    all individual parts. A successful request will return a `200 OK` response code and return a single [Multipart Upload Object](#multipart-upload-object).
 
 > Example response
 
@@ -6015,123 +6022,12 @@ Complete an active multipart upload session, this endpoint assumes that you have
 
 Status|Meaning|Error Ref|Description|Response Schema
 ---|---|----|---|---|
-202|[Accepted](https://tools.ietf.org/html/rfc7231#section-6.3.3)||Successful Request|[Multipart Upload Object](#schemamultipart_upload_object)
+200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)||Successful Request|[Multipart Upload Object](#schemamultipart_upload_object)
 403|[Forbidden](https://tools.ietf.org/html/rfc7231#section-6.5.3)|15012|The authenticated user has had upload privileges restricted by mod.io admins, this is typically due to spam.|[Error Object](#schemaerror_object)
 403|[Forbidden](https://tools.ietf.org/html/rfc7231#section-6.5.3)|15006|The authenticated user does not have permission to upload modfiles for the specified mod, ensure the user is a team manager or administrator.|[Error Object](#schemaerror_object)
 <aside class="auth-notice">
 To perform this request, you must be authenticated via one of the following methods:
 <a href="#authentication">OAuth 2</a> (Scopes: write)
-</aside>
-## Get Multipart Upload Status
-
-> Example request
-
-```shell
-# You can also use wget
-curl -X GET https://api.mod.io/v1/games/{game-id}/mods/{mod-id}/files/multipart/status?api_key=YourApiKey&upload_id=123e4567-e89b-12d3-a456-426614174000 \
-  -H 'Accept: application/json'
-
-```
-
-```http
-GET https://api.mod.io/v1/games/{game-id}/mods/{mod-id}/files/multipart/status?api_key=YourApiKey&upload_id=123e4567-e89b-12d3-a456-426614174000 HTTP/1.1
-Host: api.mod.io
-
-Accept: application/json
-
-```
-
-```javascript
-var headers = {
-  'Accept':'application/json'
-
-};
-
-$.ajax({
-  url: 'https://api.mod.io/v1/games/{game-id}/mods/{mod-id}/files/multipart/status',
-  method: 'get',
-  data: '?api_key=YourApiKey&upload_id=123e4567-e89b-12d3-a456-426614174000',
-  headers: headers,
-  success: function(data) {
-    console.log(JSON.stringify(data));
-  }
-})
-```
-
-```javascript--nodejs
-const request = require('node-fetch');
-
-const headers = {
-  'Accept':'application/json'
-
-};
-
-fetch('https://api.mod.io/v1/games/{game-id}/mods/{mod-id}/files/multipart/status?api_key=YourApiKey&upload_id=123e4567-e89b-12d3-a456-426614174000',
-{
-  method: 'GET',
-
-  headers: headers
-})
-.then(function(res) {
-    return res.json();
-}).then(function(body) {
-    console.log(body);
-});
-```
-
-```python
-import requests
-headers = {
-  'Accept': 'application/json'
-}
-
-r = requests.get('https://api.mod.io/v1/games/{game-id}/mods/{mod-id}/files/multipart/status', params={
-  'api_key': 'YourApiKey',  'upload_id': '123e4567-e89b-12d3-a456-426614174000'
-}, headers = headers)
-
-print r.json()
-```
-
-```java
-URL obj = new URL("https://api.mod.io/v1/games/{game-id}/mods/{mod-id}/files/multipart/status?api_key=YourApiKey&upload_id=123e4567-e89b-12d3-a456-426614174000");
-HttpURLConnection con = (HttpURLConnection) obj.openConnection();
-con.setRequestMethod("GET");
-int responseCode = con.getResponseCode();
-BufferedReader in = new BufferedReader(
-    new InputStreamReader(con.getInputStream()));
-String inputLine;
-StringBuffer response = new StringBuffer();
-while ((inputLine = in.readLine()) != null) {
-    response.append(inputLine);
-}
-in.close();
-System.out.println(response.toString());
-```
-
-`GET /games/{game-id}/mods/{mod-id}/files/multipart/status`
-
-Get the status of an existing multipart upload session, if the session is not yet complete,
-    a `Retry-After` header will be returned with the recommended amount of time you should wait before checking again.
-    A successful request will return a single [Multipart Upload Object](#multipart-upload-object).
-
-> Example response
-
-```json
-{
-  "upload_id": "123e4567-e89b-12d3-a456-426614174000",
-  "status": 0
-}
-
-```
-<h3 id="Get-Multipart-Upload-Status-responses">Responses</h3>
-
-Status|Meaning|Error Ref|Description|Response Schema
----|---|----|---|---|
-200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)||Successful Request|[Multipart Upload Object](#schemamultipart_upload_object)
-403|[Forbidden](https://tools.ietf.org/html/rfc7231#section-6.5.3)|15012|The authenticated user has had upload privileges restricted by mod.io admins, this is typically due to spam.|[Error Object](#schemaerror_object)
-<aside class="auth-notice">
-To perform this request, you must be authenticated via one of the following methods:
-<a href="#authentication">api_key</a>, <a href="#authentication">OAuth 2</a> (Scopes: read)
 </aside>
 # Subscribe
 
