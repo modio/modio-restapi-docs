@@ -291,7 +291,7 @@ Error Reference Code | Meaning
     "changelog": "VERSION 1.3 -- Changes -- Fixed critical castle floor bug.",
     "metadata_blob": "rogue,hd,high-res,4k,hd-textures",
     "download": {
-      "binary_url": "--parse_apiurlnoversion/mods/file/1/",
+      "binary_url": "--parse_apiurl/games/1/mods/1/files/1/download",
       "date_expires": 1579316848
     }
 }
