@@ -934,7 +934,24 @@ System.out.println(response.toString());
 
 `GET /authenticate/terms`
 
-The purpose of this endpoint is to provide the text, links and buttons you can use to get a users agreement and consent prior to authenticating them in-game (your dialog should look similar to the example below). A successful response will return a [Terms Object](#terms-object).<br><br>__Example Dialog:__</p><aside class='consent'>We use mod.io to support user-generated content in-game. By clicking 'I Agree' you agree to the mod.io Terms of Use and a mod.io account will be created for you (using your display name, avatar and ID). Please see the mod.io Privacy Policy on how mod.io processes your personal data.<br><br><div style='text-align:center'><span class='versionwrap cursor'> &nbsp; &nbsp; I Agree &nbsp; &nbsp; </span> <span class='versionwrap outline cursor'>No, Thanks</span><br><br>[Terms of Use](https://mod.io/terms/widget) - [Privacy Policy](https://mod.io/privacy/widget)<br></div></aside><p>__IMPORTANT:__ It is a requirement to implement the terms dialog when using a 3rd party authentication flow such as Steam or Xbox Live, to ensure the user has agreed to the latest mod.io [Terms of Use](https://mod.io/terms/widget) and [Privacy Policy](https://mod.io/privacy/widget). You only need to collect the users agreement once, and also each time these policies are updated.<br><br>To make this easy to manage, all of the 3rd party authentication flows have a `terms_agreed` field which should be set to `false` by default. If the user has agreed to the latest policies, their authentication will proceed as normal, however if their agreement is required and `terms_agreed` is set to `false` an error `403 Forbidden (error_ref 11074)` will be returned. When you receive this error, you must collect the users agreement before resubmitting the authentication flow with `terms_agreed` set to `true`, which will be recorded.<br><br>If embedding the Terms of Use and Privacy Policy, you can add __/widget__ to the end of the URL to remove the menus, and you can add __?textonly=1__ to remove all external links, for example:<br><br>- [https://mod.io/terms/widget?textonly=1](https://mod.io/terms/widget?textonly=1)<br>- [https://mod.io/privacy/widget?textonly=1](https://mod.io/privacy/widget?textonly=1)<br><br>__NOTE:__  You can use your own text and process, but must make sure the Terms of Use and Privacy Policy are correctly linked, or are displayed inline using the [agreements endpoints](#agreements) to get the latest versions.<br><br>Be aware that you are responsible for ensuring that the users agreement is properly collected and reported. Failure to do so correctly is a breach of the mod.io Game Terms. If your game does not authenticate users or only uses the email authentication flow, you do not need to implement this dialog, but you should link to the mod.io Terms of Use and Privacy Policy in your Privacy Policy/EULA.
+The purpose of this endpoint is to provide the text, links and buttons you can use to get a users agreement and consent prior to authenticating them in-game (your dialog should look similar to the example below). A successful response will return a [Terms Object](#terms-object).
+
+     __Example Dialog:__
+
+     <aside class='consent'>We use mod.io to support user-generated content in-game. By clicking 'I Agree' you agree to the mod.io Terms of Use and a mod.io account will be created for you (using your display name, avatar and ID). Please see the mod.io Privacy Policy on how mod.io processes your personal data.<br><br><div style='text-align:center'><span class='versionwrap cursor'> &nbsp; &nbsp; I Agree &nbsp; &nbsp; </span> <span class='versionwrap outline cursor'>No, Thanks</span><br><br>[Terms of Use](https://mod.io/terms/widget) - [Privacy Policy](https://mod.io/privacy/widget)<br></div></aside>
+
+     __IMPORTANT:__ It is a requirement of the [Game Terms](https://mod.io/gameterms) with mod.io, and the platforms mod.io is used on, to ensure the user provides consent and has agreed to the latest mod.io [Terms of Use](https://mod.io/terms/widget) and [Privacy Policy](https://mod.io/privacy/widget). The users agreement must be collected prior to using a 3rd party authentication flow (including but not limited to Steam, PSN, Nintendo and Xbox Live). You only need to collect the users agreement once, and also each time these policies are updated.
+
+     To make this easy to manage, all of the 3rd party authentication flows have a `terms_agreed` field which should be set to `false` by default. If the user has agreed to the latest policies, their authentication will proceed as normal, however if their agreement is required and `terms_agreed` is set to `false` an error `403 Forbidden (error_ref 11074)` will be returned. When you receive this error, you must collect the users agreement before resubmitting the authentication flow with `terms_agreed` set to `true`, which will be recorded.
+
+     __NOTE:__ You must make sure the Terms of Use and Privacy Policy are correctly linked, or displayed inline using the [agreements endpoints](#agreements) to get the latest versions.
+
+     If you wish to display the agreements in a web browser overlay, we recommend adding __/widget__ and __?textonly=1__ to the end of the agreement URLs, to remove the menus and external links, for example:
+
+     - [https://mod.io/terms`/widget?textonly=1`](https://mod.io/terms/widget?textonly=1)<br>
+     - [https://mod.io/privacy`/widget?textonly=1`](https://mod.io/privacy/widget?textonly=1)
+
+     __NOTE:__ You can use your own text and process, but be aware that you are responsible for ensuring that the users agreement is properly collected and reported. Failure to do so correctly is a breach of the [mod.io Game Terms](https://mod.io/gameterms/widget). If your game does not authenticate users or only uses the email authentication flow, you do not need to implement this dialog, but you should link to the mod.io Terms of Use and Privacy Policy in your Privacy Policy/EULA.
 
 > Example response
 
@@ -1788,7 +1805,7 @@ Status|Meaning|Error Ref|Description|Response Schema
 To perform this request, you must be authenticated via one of the following methods:
 <a href="#authentication">api_key</a>
 </aside>
-## authenticate via epicgames  
+## Epic Games
 
 > Example request
 
@@ -1902,7 +1919,7 @@ Request an access token on behalf of an Epic Games user. A Successful request wi
 }
 
 ```
-<h3 id="authenticate_via_epicgames-responses">Responses</h3>
+<h3 id="Epic-Games-responses">Responses</h3>
 
 Status|Meaning|Error Ref|Description|Response Schema
 ---|---|----|---|---|
@@ -3439,7 +3456,7 @@ Get all mods for the corresponding game. Successful request will return an array
         "changelog": "VERSION 1.3 -- Changes -- Fixed critical castle floor bug.",
         "metadata_blob": "rogue,hd,high-res,4k,hd textures",
         "download": {
-          "binary_url": "https://api.mod.io/v1/games/1/mods/1/files/1/download/c489a0354111a4d76640d47f0cdcb294",
+          "binary_url": "https://api.mod.io/mods/file/1/c489a0354111a4d76640d47f0cdcb294",
           "date_expires": 1579316848
         },
         "platforms": [
@@ -3679,7 +3696,7 @@ Get a mod. Successful request will return a single [Mod Object](#mod-object).
     "changelog": "VERSION 1.3 -- Changes -- Fixed critical castle floor bug.",
     "metadata_blob": "rogue,hd,high-res,4k,hd textures",
     "download": {
-      "binary_url": "https://api.mod.io/v1/games/1/mods/1/files/1/download/c489a0354111a4d76640d47f0cdcb294",
+      "binary_url": "https://api.mod.io/mods/file/1/c489a0354111a4d76640d47f0cdcb294",
       "date_expires": 1579316848
     },
     "platforms": [
@@ -3942,7 +3959,7 @@ Add a mod. Successful request will return the newly created [Mod Object](#mod-ob
     "changelog": "VERSION 1.3 -- Changes -- Fixed critical castle floor bug.",
     "metadata_blob": "rogue,hd,high-res,4k,hd textures",
     "download": {
-      "binary_url": "https://api.mod.io/v1/games/1/mods/1/files/1/download/c489a0354111a4d76640d47f0cdcb294",
+      "binary_url": "https://api.mod.io/mods/file/1/c489a0354111a4d76640d47f0cdcb294",
       "date_expires": 1579316848
     },
     "platforms": [
@@ -4200,7 +4217,7 @@ Edit details for a mod. If you want to update the `logo` or media associated wit
     "changelog": "VERSION 1.3 -- Changes -- Fixed critical castle floor bug.",
     "metadata_blob": "rogue,hd,high-res,4k,hd textures",
     "download": {
-      "binary_url": "https://api.mod.io/v1/games/1/mods/1/files/1/download/c489a0354111a4d76640d47f0cdcb294",
+      "binary_url": "https://api.mod.io/mods/file/1/c489a0354111a4d76640d47f0cdcb294",
       "date_expires": 1579316848
     },
     "platforms": [
@@ -4508,7 +4525,7 @@ Get all files that are published for the corresponding mod. Successful request w
       "changelog": "VERSION 1.3 -- Changes -- Fixed critical castle floor bug.",
       "metadata_blob": "rogue,hd,high-res,4k,hd textures",
       "download": {
-        "binary_url": "https://api.mod.io/v1/games/1/mods/1/files/1/download/c489a0354111a4d76640d47f0cdcb294",
+        "binary_url": "https://api.mod.io/mods/file/1/c489a0354111a4d76640d47f0cdcb294",
         "date_expires": 1579316848
       },
       "platforms": [
@@ -4652,7 +4669,7 @@ Get a file. Successful request will return a single [Modfile Object](#modfile-ob
   "changelog": "VERSION 1.3 -- Changes -- Fixed critical castle floor bug.",
   "metadata_blob": "rogue,hd,high-res,4k,hd textures",
   "download": {
-    "binary_url": "https://api.mod.io/v1/games/1/mods/1/files/1/download/c489a0354111a4d76640d47f0cdcb294",
+    "binary_url": "https://api.mod.io/mods/file/1/c489a0354111a4d76640d47f0cdcb294",
     "date_expires": 1579316848
   },
   "platforms": [
@@ -4820,7 +4837,7 @@ Upload a file for the corresponding mod. Successful request will return the newl
   "changelog": "VERSION 1.3 -- Changes -- Fixed critical castle floor bug.",
   "metadata_blob": "rogue,hd,high-res,4k,hd textures",
   "download": {
-    "binary_url": "https://api.mod.io/v1/games/1/mods/1/files/1/download/c489a0354111a4d76640d47f0cdcb294",
+    "binary_url": "https://api.mod.io/mods/file/1/c489a0354111a4d76640d47f0cdcb294",
     "date_expires": 1579316848
   },
   "platforms": [
@@ -4980,7 +4997,7 @@ Edit the details of a published file. If you want to update fields other than th
   "changelog": "VERSION 1.3 -- Changes -- Fixed critical castle floor bug.",
   "metadata_blob": "rogue,hd,high-res,4k,hd textures",
   "download": {
-    "binary_url": "https://api.mod.io/v1/games/1/mods/1/files/1/download/c489a0354111a4d76640d47f0cdcb294",
+    "binary_url": "https://api.mod.io/mods/file/1/c489a0354111a4d76640d47f0cdcb294",
     "date_expires": 1579316848
   },
   "platforms": [
@@ -5251,7 +5268,7 @@ Manage the platform status of a particular modfile. This endpoint does not set a
   "changelog": "VERSION 1.3 -- Changes -- Fixed critical castle floor bug.",
   "metadata_blob": "rogue,hd,high-res,4k,hd textures",
   "download": {
-    "binary_url": "https://api.mod.io/v1/games/1/mods/1/files/1/download/c489a0354111a4d76640d47f0cdcb294",
+    "binary_url": "https://api.mod.io/mods/file/1/c489a0354111a4d76640d47f0cdcb294",
     "date_expires": 1579316848
   },
   "platforms": [
@@ -6212,7 +6229,7 @@ Subscribe the _authenticated user_ to a corresponding mod. No body parameters ar
     "changelog": "VERSION 1.3 -- Changes -- Fixed critical castle floor bug.",
     "metadata_blob": "rogue,hd,high-res,4k,hd textures",
     "download": {
-      "binary_url": "https://api.mod.io/v1/games/1/mods/1/files/1/download/c489a0354111a4d76640d47f0cdcb294",
+      "binary_url": "https://api.mod.io/mods/file/1/c489a0354111a4d76640d47f0cdcb294",
       "date_expires": 1579316848
     },
     "platforms": [
@@ -10495,11 +10512,28 @@ System.out.println(response.toString());
 
 `POST /report`
 
-Report a resource on mod.io. You are responsible for content your users submit, so properly supporting the report endpoint or linking to the report page [https://mod.io/report/widget](https://mod.io/report) is important. Successful request will return [Message Object](#message-object).
+The purpose of this endpoint is enable users to report a resource (game, mod or user) on mod.io. Successful request will return [Message Object](#message-object).
 
-    __NOTE:__ If you want to link to our report page and you know the resource you want to report, the best URL to use is https://mod.io/report/`resource`/`id`/widget. For example to report a mod with an ID of 1 the URL would be: [https://mod.io/report/mods/1/widget](https://mod.io/report/mods/1/widget).
-    __NOTE:__ If you are a game owner or manager, you can [view all reports](https://mod.io/me/library) submitted for your game. You can also configure in your games control panel the number of reports required before content is automatically taken down for review.
-    __NOTE:__ Read our [terms of use](https://mod.io/terms/widget) for information about what is/isn't acceptable.
+    __IMPORTANT:__ It is a requirement of the [Game Terms](https://mod.io/gameterms) with mod.io, and the platforms mod.io is used on (including but not limited to Steam, PlayStation, Nintendo and Xbox), to ensure all displayed content is reportable by users. You can enable a resource to be reported (by implementing a dialog similar to the example below) or linking to the report page on mod.io.
+
+    __Example Dialog:__
+
+    <aside class='consent'>Report content that is not working, or violates the mod.io Terms of Use using the form below. If you’d like to report Copyright Infringement and are the Copyright holder, select "<a href='#' class='toggledmca'>DMCA</a>" as the report type.<br><br>Be aware all details provided will be shared with mod.io staff and the games moderators for review, and maybe shared with the content creator.<br><br><label>__Reason for reporting*__<br><select class='checkdmca' required><option value='' selected></option><option value='1'>DMCA</option><option value='2'>Not working</option><option value='3'>Rude content</option><option value='4'>Illegal content</option><option value='5'>Stolen content</option><option value='6'>False information</option><option value='7'>Other</option></select></label><br><br><label>__Email__<br>Optional, if you wish to be contacted if necessary regarding your report.<br><input type='email' class='text'></label><br><br><label class='dmca' style='display: none'>__Company or name whose IP is being infringed__<br><input type='text' class='text'><br><br></label><label>__Details of your report*__<br>To help process your report, include all relevant information and links.<br><textarea cols='80' rows='3' style='width: 100%' required></textarea></label><br><br><label class='dmca checkbox' style='display: none'><input type='checkbox'> I certify that I am the copyright owner or I am authorized to act on the copyright owner's behalf in this situation.<br><br></label><label class='dmca checkbox' style='display: none'><input type='checkbox'> I certify that all material in this claim is correct and not authorized by the copyright owner, its agent, or the law.<br><br></label><div style='text-align:center'><span class='versionwrap cursor'> &nbsp; &nbsp; Submit Report &nbsp; &nbsp; </span> <span class='versionwrap outline cursor'>Cancel</span><br><br>[Terms of Use](https://mod.io/terms/widget) - [Privacy Policy](https://mod.io/privacy/widget)<br></div></aside>
+
+    __NOTE:__ If implementing your own dialog, the Terms of Use and Privacy Policy must be correctly linked, or displayed inline using the [agreements endpoints](#agreements) to get the latest versions.
+
+    If you wish to display the agreements in a web browser overlay, we recommend adding __/widget__ and __?textonly=1__ to the end of the agreement URLs, to remove the menus and external links, for example:
+
+    - [https://mod.io/terms`/widget?textonly=1`](https://mod.io/terms/widget?textonly=1)<br>
+    - [https://mod.io/privacy`/widget?textonly=1`](https://mod.io/privacy/widget?textonly=1)
+
+    __NOTE:__ If you prefer to display the report page in a web browser overlay, and you know the resource you want to report, the best URL to use is: __https://mod.io/report/`resource`/`id`/widget__
+
+    For example to report a mod with an ID of 1 the URL would be: [https://mod.io/report/`mods`/`1`/widget](https://mod.io/report/mods/1/widget). If you don't know the ID of the resource you wish to report, you can use the generic report URL: [https://mod.io/report/widget](https://mod.io/report)
+
+    __NOTE:__ If you are a game owner or manager, you can [view all reports](https://mod.io/me/library) submitted for your game(s), and you are responsible for actioning reports. You can also configure in your games control panel the number of reports required before content is automatically taken down for review.
+
+    Read our [Terms of Use](https://mod.io/terms/widget) for information about what is/isn't acceptable.
 
     Parameter|Type|Required|Description
     ---|---|---|---|
@@ -11429,7 +11463,7 @@ Get all modfiles the _authenticated user_ uploaded. Successful request will retu
       "changelog": "VERSION 1.3 -- Changes -- Fixed critical castle floor bug.",
       "metadata_blob": "rogue,hd,high-res,4k,hd textures",
       "download": {
-        "binary_url": "https://api.mod.io/v1/games/1/mods/1/files/1/download/c489a0354111a4d76640d47f0cdcb294",
+        "binary_url": "https://api.mod.io/mods/file/1/c489a0354111a4d76640d47f0cdcb294",
         "date_expires": 1579316848
       },
       "platforms": [
@@ -11901,7 +11935,7 @@ Get all mod's the _authenticated user_ is subscribed to. Successful request will
         "changelog": "VERSION 1.3 -- Changes -- Fixed critical castle floor bug.",
         "metadata_blob": "rogue,hd,high-res,4k,hd textures",
         "download": {
-          "binary_url": "https://api.mod.io/v1/games/1/mods/1/files/1/download/c489a0354111a4d76640d47f0cdcb294",
+          "binary_url": "https://api.mod.io/mods/file/1/c489a0354111a4d76640d47f0cdcb294",
           "date_expires": 1579316848
         },
         "platforms": [
@@ -12175,7 +12209,7 @@ Get all mods the _authenticated user_ added or is a team member of. Successful r
         "changelog": "VERSION 1.3 -- Changes -- Fixed critical castle floor bug.",
         "metadata_blob": "rogue,hd,high-res,4k,hd textures",
         "download": {
-          "binary_url": "https://api.mod.io/v1/games/1/mods/1/files/1/download/c489a0354111a4d76640d47f0cdcb294",
+          "binary_url": "https://api.mod.io/mods/file/1/c489a0354111a4d76640d47f0cdcb294",
           "date_expires": 1579316848
         },
         "platforms": [
@@ -12777,7 +12811,7 @@ content|string|Contents of the comment.
 
 ```json
 {
-  "binary_url": "https://api.mod.io/v1/games/1/mods/1/files/1/download/c489a0354111a4d76640d47f0cdcb294",
+  "binary_url": "https://api.mod.io/mods/file/1/c489a0354111a4d76640d47f0cdcb294",
   "date_expires": 1579316848
 } 
 ```
@@ -13490,7 +13524,7 @@ result_total|integer|Total number of results found.
       "changelog": "VERSION 1.3 -- Changes -- Fixed critical castle floor bug.",
       "metadata_blob": "rogue,hd,high-res,4k,hd textures",
       "download": {
-        "binary_url": "https://api.mod.io/v1/games/1/mods/1/files/1/download/c489a0354111a4d76640d47f0cdcb294",
+        "binary_url": "https://api.mod.io/mods/file/1/c489a0354111a4d76640d47f0cdcb294",
         "date_expires": 1579316848
       },
       "platforms": [
@@ -13608,7 +13642,7 @@ result_total|integer|Total number of results found.
         "changelog": "VERSION 1.3 -- Changes -- Fixed critical castle floor bug.",
         "metadata_blob": "rogue,hd,high-res,4k,hd textures",
         "download": {
-          "binary_url": "https://api.mod.io/v1/games/1/mods/1/files/1/download/c489a0354111a4d76640d47f0cdcb294",
+          "binary_url": "https://api.mod.io/mods/file/1/c489a0354111a4d76640d47f0cdcb294",
           "date_expires": 1579316848
         },
         "platforms": [
@@ -14240,7 +14274,7 @@ images|[Image Object](#schemaimage_object)[]|Array of image objects (a gallery).
     "changelog": "VERSION 1.3 -- Changes -- Fixed critical castle floor bug.",
     "metadata_blob": "rogue,hd,high-res,4k,hd textures",
     "download": {
-      "binary_url": "https://api.mod.io/v1/games/1/mods/1/files/1/download/c489a0354111a4d76640d47f0cdcb294",
+      "binary_url": "https://api.mod.io/mods/file/1/c489a0354111a4d76640d47f0cdcb294",
       "date_expires": 1579316848
     },
     "platforms": [
@@ -14443,7 +14477,7 @@ date_added|integer|Unix timestamp of date tag was applied.
   "changelog": "VERSION 1.3 -- Changes -- Fixed critical castle floor bug.",
   "metadata_blob": "rogue,hd,high-res,4k,hd textures",
   "download": {
-    "binary_url": "https://api.mod.io/v1/games/1/mods/1/files/1/download/c489a0354111a4d76640d47f0cdcb294",
+    "binary_url": "https://api.mod.io/mods/file/1/c489a0354111a4d76640d47f0cdcb294",
     "date_expires": 1579316848
   },
   "platforms": [

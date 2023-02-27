@@ -75,6 +75,21 @@ under the License.
           return $.extend({}, a, b) 
         }
 
+        $('.checkdmca').on('change', function(){
+          if($(this).val() == 1) {
+            $('.dmca').show();
+          } else {
+            $('.dmca').hide();
+          }
+
+          return true;
+        });
+
+        $('.toggledmca').on('click', function(){
+          $('.checkdmca').val(1).change();
+          return false;
+        });
+
         let tippyOptions = {
           arrow: true,
           arrowType: 'round',
