@@ -6196,9 +6196,10 @@ Status|Meaning|Error Ref|Description|Response Schema
 ---|---|----|---|---|
 200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)||Successful Request|[Multipart Upload Object](#schemamultipart_upload_object)
 403|[Forbidden](https://tools.ietf.org/html/rfc7231#section-6.5.3)|15012|The authenticated user has had upload privileges restricted by mod.io admins, this is typically due to spam.|[Error Object](#schemaerror_object)
+403|[Forbidden](https://tools.ietf.org/html/rfc7231#section-6.5.3)|15006|The authenticated user does not have permission to upload modfiles for the specified mod, ensure the user is a team manager or administrator.|[Error Object](#schemaerror_object)
 <aside class="auth-notice">
 To perform this request, you must be authenticated via one of the following methods:
-<a href="#authentication">api_key</a>, <a href="#authentication">OAuth 2</a> (Scopes: read)
+<a href="#authentication">OAuth 2</a> (Scopes: write)
 </aside>
 # Subscribe
 
@@ -12977,8 +12978,8 @@ Get all mods the _authenticated user_ added or is a team member of. Successful r
     date_added|integer|Unix timestamp of date mod was registered.
     date_updated|integer|Unix timestamp of date mod was updated.
     date_live|integer|Unix timestamp of date mod was set live.
-    maturity_option|integer|Maturity option(s) set by the mod creator:<br><br>__0__ = None _(default)_<br>__1__ = Alcohol<br>__2__ = Drugs<br>__4__ = Violence<br>__8__ = Explicit<br>__?__ = Add the options you want together, to enable multiple filters (see [BITWISE fields](#bitwise-and-bitwise-and))
-    monetisation_options|integer|Monetisation option(s) enabled by the mod creator:<br><br>__0__ = None _(default)_<br>__1__ = Enabled<br>__2__ = Recognition On<br>__4__ = Marketplace On<br>__?__ = Add the options you want together, to enable multiple filters (see [BITWISE fields](#bitwise-and-bitwise-and))
+    maturity_option|integer|Maturity option(s) set by the mod creator:<br><br>__0__ = None<br>__1__ = Alcohol<br>__2__ = Drugs<br>__4__ = Violence<br>__8__ = Explicit<br>__?__ = Add the options you want together, to enable multiple filters (see [BITWISE fields](#bitwise-and-bitwise-and))
+    monetisation_options|integer|Monetisation option(s) enabled by the mod creator:<br><br>__0__ = None<br>__1__ = Enabled<br>__2__ = Recognition On<br>__4__ = Marketplace On<br>__?__ = Add the options you want together, to enable multiple filters (see [BITWISE fields](#bitwise-and-bitwise-and))
     name|string|Name of the mod.
     name_id|string|Path for the mod on mod.io. For example: https://mod.io/g/gamename/m/__mod-name-id-here__
     modfile|integer|Unique id of the file that is the current active release (see [mod files](#files)).
@@ -12986,6 +12987,7 @@ Get all mods the _authenticated user_ added or is a team member of. Successful r
     metadata_kvp|string|Colon-separated values representing the key-value pairs you want to filter the results by. If you supply more than one key-pair, separate the pairs by a comma. Will only filter by an exact key-pair match.
     tags|string|Comma-separated values representing the tags you want to filter the results by. If you specify multiple tags, only mods which have all tags will be returned, and only tags that are supported by the parent game can be applied. To determine what tags are eligible, see the tags values within `tag_options` column on the parent [Game Object](#game-object). If you want to ensure mods returned do not contain particular tag(s), you can use the `tags-not-in` filter either independently or alongside this filter.
     platform_status|string|Filter results by their current platform status, valid values are `pending_only` and `live_and_pending`.<br><br>__NOTE:__ that this parameter is only considered in the request if the parent game has enabled [cross-platform filtering](#targeting-a-platform).
+    platform_status|string|Filter results by their current platform status, valid values are `pending_only` and `live_and_pending` (only game admins can filter by this field, see [status and visibility](#status-amp-visibility) for details).<br><br>__NOTE:__ that this parameter is only considered in the request if the parent game has enabled [cross-platform filtering](#targeting-a-platform).
     platforms|string|Filter results by their current platform, accepts multiple platforms as comma-separated values (e.g. `ps4,switch`), valid values are `all`, `windows`, `mac`, `linux`, `android`, `ios`, `xboxone`, `xboxseriesx`, `ps4`, `ps5`, `switch`, `oculus` (only game admins can filter by this field, see [status and visibility](#status-amp-visibility) for details).<br><br>__NOTE:__ that this parameter will take precedence over the header from [cross-platform filtering](#targeting-a-platform).
 
     Sort|Description
