@@ -332,7 +332,7 @@ Endpoints that return more than one result, return a __JSON object__ which conta
     		"changelog": "VERSION 1.3 -- Changes -- Fixed critical castle floor bug.",
     		"metadata_blob": "rogue,hd,high-res,4k,hd-textures",
     		"download": {
-    		  "binary_url": "--parse_apiurlnoversion/mods/file/1/",
+    		  "binary_url": "--parse_apiurl/games/1/mods/1/files/1/download/c489a0354111a4d76640d47f0cdcb294",
     		  "date_expires": 1579316848
     		}
 		},

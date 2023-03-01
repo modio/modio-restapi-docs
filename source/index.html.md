@@ -351,7 +351,7 @@ Endpoints that return more than one result, return a __JSON object__ which conta
     		"changelog": "VERSION 1.3 -- Changes -- Fixed critical castle floor bug.",
     		"metadata_blob": "rogue,hd,high-res,4k,hd-textures",
     		"download": {
-    		  "binary_url": "https://api.mod.io/mods/file/1/",
+    		  "binary_url": "https://api.mod.io/v1/games/1/mods/1/files/1/download/c489a0354111a4d76640d47f0cdcb294",
     		  "date_expires": 1579316848
     		}
 		},
@@ -3451,7 +3451,7 @@ Get all mods for the corresponding game. Successful request will return an array
         "changelog": "VERSION 1.3 -- Changes -- Fixed critical castle floor bug.",
         "metadata_blob": "rogue,hd,high-res,4k,hd textures",
         "download": {
-          "binary_url": "https://api.mod.io/mods/file/1/c489a0354111a4d76640d47f0cdcb294",
+          "binary_url": "https://api.mod.io/v1/games/1/mods/1/files/1/download/c489a0354111a4d76640d47f0cdcb294",
           "date_expires": 1579316848
         },
         "platforms": [
@@ -3691,7 +3691,7 @@ Get a mod. Successful request will return a single [Mod Object](#mod-object).
     "changelog": "VERSION 1.3 -- Changes -- Fixed critical castle floor bug.",
     "metadata_blob": "rogue,hd,high-res,4k,hd textures",
     "download": {
-      "binary_url": "https://api.mod.io/mods/file/1/c489a0354111a4d76640d47f0cdcb294",
+      "binary_url": "https://api.mod.io/v1/games/1/mods/1/files/1/download/c489a0354111a4d76640d47f0cdcb294",
       "date_expires": 1579316848
     },
     "platforms": [
@@ -3962,7 +3962,7 @@ Add a mod. Successful request will return the newly created [Mod Object](#mod-ob
     "changelog": "VERSION 1.3 -- Changes -- Fixed critical castle floor bug.",
     "metadata_blob": "rogue,hd,high-res,4k,hd textures",
     "download": {
-      "binary_url": "https://api.mod.io/mods/file/1/c489a0354111a4d76640d47f0cdcb294",
+      "binary_url": "https://api.mod.io/v1/games/1/mods/1/files/1/download/c489a0354111a4d76640d47f0cdcb294",
       "date_expires": 1579316848
     },
     "platforms": [
@@ -4257,7 +4257,7 @@ array and simply strip out the required field.
     "changelog": "VERSION 1.3 -- Changes -- Fixed critical castle floor bug.",
     "metadata_blob": "rogue,hd,high-res,4k,hd textures",
     "download": {
-      "binary_url": "https://api.mod.io/mods/file/1/c489a0354111a4d76640d47f0cdcb294",
+      "binary_url": "https://api.mod.io/v1/games/1/mods/1/files/1/download/c489a0354111a4d76640d47f0cdcb294",
       "date_expires": 1579316848
     },
     "platforms": [
@@ -4565,7 +4565,7 @@ Get all files that are published for the corresponding mod. Successful request w
       "changelog": "VERSION 1.3 -- Changes -- Fixed critical castle floor bug.",
       "metadata_blob": "rogue,hd,high-res,4k,hd textures",
       "download": {
-        "binary_url": "https://api.mod.io/mods/file/1/c489a0354111a4d76640d47f0cdcb294",
+        "binary_url": "https://api.mod.io/v1/games/1/mods/1/files/1/download/c489a0354111a4d76640d47f0cdcb294",
         "date_expires": 1579316848
       },
       "platforms": [
@@ -4709,7 +4709,7 @@ Get a file. Successful request will return a single [Modfile Object](#modfile-ob
   "changelog": "VERSION 1.3 -- Changes -- Fixed critical castle floor bug.",
   "metadata_blob": "rogue,hd,high-res,4k,hd textures",
   "download": {
-    "binary_url": "https://api.mod.io/mods/file/1/c489a0354111a4d76640d47f0cdcb294",
+    "binary_url": "https://api.mod.io/v1/games/1/mods/1/files/1/download/c489a0354111a4d76640d47f0cdcb294",
     "date_expires": 1579316848
   },
   "platforms": [
@@ -4877,7 +4877,7 @@ Upload a file for the corresponding mod. Successful request will return the newl
   "changelog": "VERSION 1.3 -- Changes -- Fixed critical castle floor bug.",
   "metadata_blob": "rogue,hd,high-res,4k,hd textures",
   "download": {
-    "binary_url": "https://api.mod.io/mods/file/1/c489a0354111a4d76640d47f0cdcb294",
+    "binary_url": "https://api.mod.io/v1/games/1/mods/1/files/1/download/c489a0354111a4d76640d47f0cdcb294",
     "date_expires": 1579316848
   },
   "platforms": [
@@ -5037,7 +5037,7 @@ Edit the details of a published file. If you want to update fields other than th
   "changelog": "VERSION 1.3 -- Changes -- Fixed critical castle floor bug.",
   "metadata_blob": "rogue,hd,high-res,4k,hd textures",
   "download": {
-    "binary_url": "https://api.mod.io/mods/file/1/c489a0354111a4d76640d47f0cdcb294",
+    "binary_url": "https://api.mod.io/v1/games/1/mods/1/files/1/download/c489a0354111a4d76640d47f0cdcb294",
     "date_expires": 1579316848
   },
   "platforms": [
@@ -5308,7 +5308,7 @@ Manage the platform status of a particular modfile. This endpoint does not set a
   "changelog": "VERSION 1.3 -- Changes -- Fixed critical castle floor bug.",
   "metadata_blob": "rogue,hd,high-res,4k,hd textures",
   "download": {
-    "binary_url": "https://api.mod.io/mods/file/1/c489a0354111a4d76640d47f0cdcb294",
+    "binary_url": "https://api.mod.io/v1/games/1/mods/1/files/1/download/c489a0354111a4d76640d47f0cdcb294",
     "date_expires": 1579316848
   },
   "platforms": [
@@ -6269,7 +6269,7 @@ Subscribe the _authenticated user_ to a corresponding mod. No body parameters ar
     "changelog": "VERSION 1.3 -- Changes -- Fixed critical castle floor bug.",
     "metadata_blob": "rogue,hd,high-res,4k,hd textures",
     "download": {
-      "binary_url": "https://api.mod.io/mods/file/1/c489a0354111a4d76640d47f0cdcb294",
+      "binary_url": "https://api.mod.io/v1/games/1/mods/1/files/1/download/c489a0354111a4d76640d47f0cdcb294",
       "date_expires": 1579316848
     },
     "platforms": [
@@ -12218,7 +12218,7 @@ Get all modfiles the _authenticated user_ uploaded. Successful request will retu
       "changelog": "VERSION 1.3 -- Changes -- Fixed critical castle floor bug.",
       "metadata_blob": "rogue,hd,high-res,4k,hd textures",
       "download": {
-        "binary_url": "https://api.mod.io/mods/file/1/c489a0354111a4d76640d47f0cdcb294",
+        "binary_url": "https://api.mod.io/v1/games/1/mods/1/files/1/download/c489a0354111a4d76640d47f0cdcb294",
         "date_expires": 1579316848
       },
       "platforms": [
@@ -12690,7 +12690,7 @@ Get all mod's the _authenticated user_ is subscribed to. Successful request will
         "changelog": "VERSION 1.3 -- Changes -- Fixed critical castle floor bug.",
         "metadata_blob": "rogue,hd,high-res,4k,hd textures",
         "download": {
-          "binary_url": "https://api.mod.io/mods/file/1/c489a0354111a4d76640d47f0cdcb294",
+          "binary_url": "https://api.mod.io/v1/games/1/mods/1/files/1/download/c489a0354111a4d76640d47f0cdcb294",
           "date_expires": 1579316848
         },
         "platforms": [
@@ -12964,7 +12964,7 @@ Get all mods the _authenticated user_ added or is a team member of. Successful r
         "changelog": "VERSION 1.3 -- Changes -- Fixed critical castle floor bug.",
         "metadata_blob": "rogue,hd,high-res,4k,hd textures",
         "download": {
-          "binary_url": "https://api.mod.io/mods/file/1/c489a0354111a4d76640d47f0cdcb294",
+          "binary_url": "https://api.mod.io/v1/games/1/mods/1/files/1/download/c489a0354111a4d76640d47f0cdcb294",
           "date_expires": 1579316848
         },
         "platforms": [
@@ -14547,7 +14547,7 @@ content|string|Contents of the comment.
 
 ```json
 {
-  "binary_url": "https://api.mod.io/mods/file/1/c489a0354111a4d76640d47f0cdcb294",
+  "binary_url": "https://api.mod.io/v1/games/1/mods/1/files/1/download/c489a0354111a4d76640d47f0cdcb294",
   "date_expires": 1579316848
 } 
 ```
@@ -15482,7 +15482,7 @@ result_total|integer|Total number of results found.
       "changelog": "VERSION 1.3 -- Changes -- Fixed critical castle floor bug.",
       "metadata_blob": "rogue,hd,high-res,4k,hd textures",
       "download": {
-        "binary_url": "https://api.mod.io/mods/file/1/c489a0354111a4d76640d47f0cdcb294",
+        "binary_url": "https://api.mod.io/v1/games/1/mods/1/files/1/download/c489a0354111a4d76640d47f0cdcb294",
         "date_expires": 1579316848
       },
       "platforms": [
@@ -15600,7 +15600,7 @@ result_total|integer|Total number of results found.
         "changelog": "VERSION 1.3 -- Changes -- Fixed critical castle floor bug.",
         "metadata_blob": "rogue,hd,high-res,4k,hd textures",
         "download": {
-          "binary_url": "https://api.mod.io/mods/file/1/c489a0354111a4d76640d47f0cdcb294",
+          "binary_url": "https://api.mod.io/v1/games/1/mods/1/files/1/download/c489a0354111a4d76640d47f0cdcb294",
           "date_expires": 1579316848
         },
         "platforms": [
@@ -16358,7 +16358,7 @@ images|[Image Object](#schemaimage_object)[]|Array of image objects (a gallery).
     "changelog": "VERSION 1.3 -- Changes -- Fixed critical castle floor bug.",
     "metadata_blob": "rogue,hd,high-res,4k,hd textures",
     "download": {
-      "binary_url": "https://api.mod.io/mods/file/1/c489a0354111a4d76640d47f0cdcb294",
+      "binary_url": "https://api.mod.io/v1/games/1/mods/1/files/1/download/c489a0354111a4d76640d47f0cdcb294",
       "date_expires": 1579316848
     },
     "platforms": [
@@ -16561,7 +16561,7 @@ date_added|integer|Unix timestamp of date tag was applied.
   "changelog": "VERSION 1.3 -- Changes -- Fixed critical castle floor bug.",
   "metadata_blob": "rogue,hd,high-res,4k,hd textures",
   "download": {
-    "binary_url": "https://api.mod.io/mods/file/1/c489a0354111a4d76640d47f0cdcb294",
+    "binary_url": "https://api.mod.io/v1/games/1/mods/1/files/1/download/c489a0354111a4d76640d47f0cdcb294",
     "date_expires": 1579316848
   },
   "platforms": [
