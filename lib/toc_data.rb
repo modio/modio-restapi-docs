@@ -34,9 +34,13 @@ end
 def modio_post_process(page_content)
   html_doc = Nokogiri::HTML::DocumentFragment.parse(page_content)
 
-  # add colorbox class if the link contains widget
+  # add colorbox class if the link contains widget or legal
   html_doc.css('a').each do |link|
-    if (link.attribute('href').to_s.include? "widget")
+    if (link.attribute('href').to_s.include? "/legal/")
+      link['class'] = 'colorbox'
+    end
+
+    if (link.attribute('href').to_s.include? "/widget")
       link['class'] = 'colorbox'
     end
   end

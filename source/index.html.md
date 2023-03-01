@@ -944,12 +944,7 @@ The purpose of this endpoint is to provide the text, links and buttons you can u
 
      To make this easy to manage, all of the 3rd party authentication flows have a `terms_agreed` field which should be set to `false` by default. If the user has agreed to the latest policies, their authentication will proceed as normal, however if their agreement is required and `terms_agreed` is set to `false` an error `403 Forbidden (error_ref 11074)` will be returned. When you receive this error, you must collect the users agreement before resubmitting the authentication flow with `terms_agreed` set to `true`, which will be recorded.
 
-     __NOTE:__ You must make sure the Terms of Use and Privacy Policy are correctly linked, or displayed inline using the [agreements endpoints](#agreements) to get the latest versions.
-
-     If you wish to display the agreements in a web browser overlay, we recommend adding __/widget__ and __?textonly=1__ to the end of the agreement URLs, to remove the menus and external links, for example:
-
-     - [https://mod.io/terms`/widget?textonly=1`](https://mod.io/terms/widget?textonly=1)<br>
-     - [https://mod.io/privacy`/widget?textonly=1`](https://mod.io/privacy/widget?textonly=1)
+     __NOTE:__ You must make sure the Terms of Use and Privacy Policy are correctly linked, or displayed inline following the instructions provided in the [agreements endpoints](#agreements).
 
      __NOTE:__ You can use your own text and process, but be aware that you are responsible for ensuring that the users agreement is properly collected and reported. Failure to do so correctly is a breach of the [mod.io Game Terms](https://mod.io/gameterms/widget). If your game does not authenticate users or only uses the email authentication flow, you do not need to implement this dialog, but you should link to the mod.io Terms of Use and Privacy Policy in your Privacy Policy/EULA.
 
@@ -3766,8 +3761,12 @@ curl -X POST https://api.mod.io/v1/games/{game-id}/mods \
   -H 'Content-Type: multipart/form-data' \ 
   -H 'Accept: application/json' \
   -F 'name=Graphics Overhaul Mod' \
+  -F 'name_id=graphics-overhaul-mod' \
   -F 'summary=Short descriptive summary here' \
-  -F 'logo=@/path/to/image.jpg'
+  -F 'description=<h2>Getting started with..' \
+  -F 'logo=@/path/to/image.jpg' \
+  -F 'homepage_url=https://www.example.com' \
+  -F 'tags[]=easy'
 
 ```
 
@@ -3803,8 +3802,12 @@ $.ajax({
 const request = require('node-fetch');
 const inputBody = '{
   "name": "Graphics Overhaul Mod",
+  "name_id": "graphics-overhaul-mod",
   "summary": "Short descriptive summary here",
-  "logo": "@/path/to/image.jpg"
+  "description": "<h2>Getting started with..",
+  "logo": "@/path/to/image.jpg",
+  "homepage_url": "https://www.example.com",
+  "tags": "easy"
 }';
 const headers = {
   'Authorization':'Bearer {access-token}',
@@ -4030,14 +4033,22 @@ To perform this request, you must be authenticated via one of the following meth
 curl -X POST https://api.mod.io/v1/games/{game-id}/mods/{mod-id} \
   -H 'Authorization: Bearer {access-token}' \ 
   -H 'Content-Type: multipart/form-data' \ 
-  -H 'Accept: application/json'
+  -H 'Content-Type: multipart/form-data' \ 
+  -H 'Accept: application/json' \
+  -F 'name=Graphics Overhaul Mod' \
+  -F 'name_id=graphics-overhaul-mod' \
+  -F 'summary=Short descriptive summary here' \
+  -F 'description=<h2>Getting started with..' \
+  -F 'logo=@/path/to/image.jpg' \
+  -F 'homepage_url=https://www.example.com' \
+  -F 'tags[]=easy'
 
 ```
 
 ```http
 POST https://api.mod.io/v1/games/{game-id}/mods/{mod-id} HTTP/1.1
 Host: api.mod.io
-
+Content-Type: multipart/form-data
 Accept: application/json
 Authorization: Bearer {access-token}
 Content-Type: multipart/form-data
@@ -4047,6 +4058,7 @@ Content-Type: multipart/form-data
 ```javascript
 var headers = {
   'Authorization':'Bearer {access-token}',
+  'Content-Type':'multipart/form-data',
   'Content-Type':'multipart/form-data',
   'Accept':'application/json'
 
@@ -4065,9 +4077,18 @@ $.ajax({
 
 ```javascript--nodejs
 const request = require('node-fetch');
-
+const inputBody = '{
+  "name": "Graphics Overhaul Mod",
+  "name_id": "graphics-overhaul-mod",
+  "summary": "Short descriptive summary here",
+  "description": "<h2>Getting started with..",
+  "logo": "@/path/to/image.jpg",
+  "homepage_url": "https://www.example.com",
+  "tags": "easy"
+}';
 const headers = {
   'Authorization':'Bearer {access-token}',
+  'Content-Type':'multipart/form-data',
   'Content-Type':'multipart/form-data',
   'Accept':'application/json'
 
@@ -4076,7 +4097,7 @@ const headers = {
 fetch('https://api.mod.io/v1/games/{game-id}/mods/{mod-id}',
 {
   method: 'POST',
-
+  body: inputBody,
   headers: headers
 })
 .then(function(res) {
@@ -4090,6 +4111,7 @@ fetch('https://api.mod.io/v1/games/{game-id}/mods/{mod-id}',
 import requests
 headers = {
   'Authorization': 'Bearer {access-token}',
+  'Content-Type': 'multipart/form-data',
   'Content-Type': 'multipart/form-data',
   'Accept': 'application/json'
 }
@@ -4136,6 +4158,24 @@ Edit details for a mod. If you want to update the `logo` or media associated wit
     community_options|integer||Community features enabled for this mod:<br><br>__0__ = All of the options below are disabled<br>__1__ = Enable comments<br>__?__ = Add the options you want together, to enable multiple options (see [BITWISE fields](#bitwise-and-bitwise-and))
     metadata_blob|string||Metadata stored by the game developer which may include properties as to how the item works, or other information you need to display. Metadata can also be stored as searchable [key value pairs](#metadata), and to individual [mod files](#get-modfiles).
 
+##### » name
+Rules for updating a mod. We get the original
+array and simply strip out the required field.
+##### » summary
+Rules for updating a mod. We get the original
+array and simply strip out the required field.
+##### » description
+Rules for updating a mod. We get the original
+array and simply strip out the required field.
+##### » logo
+Rules for updating a mod. We get the original
+array and simply strip out the required field.
+##### » homepage_url
+Rules for updating a mod. We get the original
+array and simply strip out the required field.
+##### » tags
+Rules for updating a mod. We get the original
+array and simply strip out the required field.
 > Example response
 
 ```json
@@ -6411,6 +6451,715 @@ To perform this request, you must be authenticated via one of the following meth
 </aside>
 # Comments
 
+## Get Guide Comments
+
+> Example request
+
+```shell
+# You can also use wget
+curl -X GET https://api.mod.io/v1/games/{game-id}/guides/{guide-id}/comments?api_key=YourApiKey \
+  -H 'Accept: application/json'
+
+```
+
+```http
+GET https://api.mod.io/v1/games/{game-id}/guides/{guide-id}/comments?api_key=YourApiKey HTTP/1.1
+Host: api.mod.io
+
+Accept: application/json
+
+```
+
+```javascript
+var headers = {
+  'Accept':'application/json'
+
+};
+
+$.ajax({
+  url: 'https://api.mod.io/v1/games/{game-id}/guides/{guide-id}/comments',
+  method: 'get',
+  data: '?api_key=YourApiKey',
+  headers: headers,
+  success: function(data) {
+    console.log(JSON.stringify(data));
+  }
+})
+```
+
+```javascript--nodejs
+const request = require('node-fetch');
+
+const headers = {
+  'Accept':'application/json'
+
+};
+
+fetch('https://api.mod.io/v1/games/{game-id}/guides/{guide-id}/comments?api_key=YourApiKey',
+{
+  method: 'GET',
+
+  headers: headers
+})
+.then(function(res) {
+    return res.json();
+}).then(function(body) {
+    console.log(body);
+});
+```
+
+```python
+import requests
+headers = {
+  'Accept': 'application/json'
+}
+
+r = requests.get('https://api.mod.io/v1/games/{game-id}/guides/{guide-id}/comments', params={
+  'api_key': 'YourApiKey'
+}, headers = headers)
+
+print r.json()
+```
+
+```java
+URL obj = new URL("https://api.mod.io/v1/games/{game-id}/guides/{guide-id}/comments?api_key=YourApiKey");
+HttpURLConnection con = (HttpURLConnection) obj.openConnection();
+con.setRequestMethod("GET");
+int responseCode = con.getResponseCode();
+BufferedReader in = new BufferedReader(
+    new InputStreamReader(con.getInputStream()));
+String inputLine;
+StringBuffer response = new StringBuffer();
+while ((inputLine = in.readLine()) != null) {
+    response.append(inputLine);
+}
+in.close();
+System.out.println(response.toString());
+```
+
+`GET /games/{game-id}/guides/{guide-id}/comments`
+
+Get all comments posted in the guides profile. Successful request will return an array of [Comment Objects](#get-guide-comments-2). We recommended reading the [filtering documentation](#filtering) to return only the records you want.
+
+    Filter|Type|Description
+    ---|---|---
+    id|integer|Unique id of the comment.
+    resource_id|integer|Unique id of the resource (guide).
+    submitted_by|integer|Unique id of the user who posted the comment.
+    date_added|integer|Unix timestamp of date comment was posted.
+    reply_id|integer|Id of the parent comment this comment is replying to (can be 0 if the comment is not a reply).
+    thread_position|string|Levels of nesting in a comment thread. You should order by this field, to maintain comment grouping. How it works:<br><br>- The first comment will have the position '01'.<br>- The second comment will have the position '02'.<br>- If someone responds to the second comment the position will be '02.01'.<br>- A maximum of 3 levels is supported.
+    karma|integer|Karma received for the comment (can be positive or negative).
+    content|string|Contents of the comment.
+
+> Example response
+
+```json
+{
+  "data": [
+    {
+      "id": 2,
+      "game_id": 2,
+      "mod_id": 2,
+      "resource_id": 2,
+      "user": {
+        "id": 1,
+        "name_id": "xant",
+        "username": "XanT",
+        "display_name_portal": null,
+        "date_online": 1509922961,
+        "date_joined": 1509922961,
+        "avatar": {
+          "filename": "avatar.png",
+          "original": "https://assets.modcdn.io/images/placeholder/avatar.png",
+          "thumb_50x50": "https://assets.modcdn.io/images/placeholder/avatar_50x50.png",
+          "thumb_100x100": "https://assets.modcdn.io/images/placeholder/avatar_100x100.png"
+        },
+        "timezone": "",
+        "language": "",
+        "profile_url": "https://mod.io/u/xant"
+      },
+      "date_added": 1499841487,
+      "reply_id": 0,
+      "thread_position": "01",
+      "karma": 1,
+      "karma_guest": 0,
+      "content": "Hey <a href=\"https://mod.io/u/guest\">guest</a>, you should check out this mod!"
+    }
+  ],
+  "result_count": 1,
+  "result_offset": 0,
+  "result_limit": 100,
+  "result_total": 1
+}
+
+```
+<h3 id="Get-Guide-Comments-responses">Responses</h3>
+
+Status|Meaning|Error Ref|Description|Response Schema
+---|---|----|---|---|
+200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)||OK|[Get Guide Comments](#schemaget_guide_comments)
+<aside class="auth-notice">
+To perform this request, you must be authenticated via one of the following methods:
+<a href="#authentication">api_key</a>, <a href="#authentication">OAuth 2</a> (Scopes: read)
+</aside>
+## Add Guide Comment
+
+> Example request
+
+```shell
+# You can also use wget
+curl -X POST https://api.mod.io/v1/games/{game-id}/guides/{guide-id}/comments \
+  -H 'Authorization: Bearer {access-token}' \ 
+  -H 'Content-Type: application/x-www-form-urlencoded' \ 
+  -H 'Accept: application/json' \
+  -d 'replyid=0' \
+  -d 'content=Hey @XanT, you should check out this mod!'
+
+```
+
+```http
+POST https://api.mod.io/v1/games/{game-id}/guides/{guide-id}/comments HTTP/1.1
+Host: api.mod.io
+Content-Type: application/x-www-form-urlencoded
+Accept: application/json
+Authorization: Bearer {access-token}
+
+```
+
+```javascript
+var headers = {
+  'Authorization':'Bearer {access-token}',
+  'Content-Type':'application/x-www-form-urlencoded',
+  'Accept':'application/json'
+
+};
+
+$.ajax({
+  url: 'https://api.mod.io/v1/games/{game-id}/guides/{guide-id}/comments',
+  method: 'post',
+
+  headers: headers,
+  success: function(data) {
+    console.log(JSON.stringify(data));
+  }
+})
+```
+
+```javascript--nodejs
+const request = require('node-fetch');
+const inputBody = '{
+  "replyid": 0,
+  "content": "Hey @XanT, you should check out this mod!"
+}';
+const headers = {
+  'Authorization':'Bearer {access-token}',
+  'Content-Type':'application/x-www-form-urlencoded',
+  'Accept':'application/json'
+
+};
+
+fetch('https://api.mod.io/v1/games/{game-id}/guides/{guide-id}/comments',
+{
+  method: 'POST',
+  body: inputBody,
+  headers: headers
+})
+.then(function(res) {
+    return res.json();
+}).then(function(body) {
+    console.log(body);
+});
+```
+
+```python
+import requests
+headers = {
+  'Authorization': 'Bearer {access-token}',
+  'Content-Type': 'application/x-www-form-urlencoded',
+  'Accept': 'application/json'
+}
+
+r = requests.post('https://api.mod.io/v1/games/{game-id}/guides/{guide-id}/comments', params={
+
+}, headers = headers)
+
+print r.json()
+```
+
+```java
+URL obj = new URL("https://api.mod.io/v1/games/{game-id}/guides/{guide-id}/comments");
+HttpURLConnection con = (HttpURLConnection) obj.openConnection();
+con.setRequestMethod("POST");
+int responseCode = con.getResponseCode();
+BufferedReader in = new BufferedReader(
+    new InputStreamReader(con.getInputStream()));
+String inputLine;
+StringBuffer response = new StringBuffer();
+while ((inputLine = in.readLine()) != null) {
+    response.append(inputLine);
+}
+in.close();
+System.out.println(response.toString());
+```
+
+`POST /games/{game-id}/guides/{guide-id}/comments`
+
+Add a comment for the corresponding guide. Successful request will return the newly created [Comment Object](#comment-object) and fire a __GUIDE_COMMENT_ADDED__ event.
+
+    Parameter|Type|Required|Description
+    ---|---|---|---|
+    content|string|true|Contents of the comment. You can include @mentions to users, which will notify them that they have been tagged in this comment.<br><br>__Mention Markup__<br>- Format: `@<display-name>`<br>- Example: `Hey @XanT, you should check out this guide!`
+    reply_id|integer||Id of the parent comment to reply to (can be 0 if the comment is not a reply and thus will not be nested). Default is 0.
+
+> Example response
+
+```json
+{
+  "id": 2,
+  "game_id": 2,
+  "mod_id": 2,
+  "resource_id": 2,
+  "user": {
+    "id": 1,
+    "name_id": "xant",
+    "username": "XanT",
+    "display_name_portal": null,
+    "date_online": 1509922961,
+    "date_joined": 1509922961,
+    "avatar": {
+      "filename": "avatar.png",
+      "original": "https://assets.modcdn.io/images/placeholder/avatar.png",
+      "thumb_50x50": "https://assets.modcdn.io/images/placeholder/avatar_50x50.png",
+      "thumb_100x100": "https://assets.modcdn.io/images/placeholder/avatar_100x100.png"
+    },
+    "timezone": "",
+    "language": "",
+    "profile_url": "https://mod.io/u/xant"
+  },
+  "date_added": 1499841487,
+  "reply_id": 0,
+  "thread_position": "01",
+  "karma": 1,
+  "karma_guest": 0,
+  "content": "Hey <a href=\"https://mod.io/u/guest\">guest</a>, you should check out this mod!"
+}
+
+```
+<h3 id="Add-Guide-Comment-responses">Responses</h3>
+
+Status|Meaning|Error Ref|Description|Response Schema
+---|---|----|---|---|
+201|[Created](https://tools.ietf.org/html/rfc7231#section-6.3.2)||Resource Created|[Comment Object](#schemacomment_object)
+403|[Forbidden](https://tools.ietf.org/html/rfc7231#section-6.5.3)|19042|The authenticated user does not have permission to submit comments on mod.io due to their access being revoked.|[Error Object](#schemaerror_object)
+### Response Headers
+
+Status|Header|Type|Format|Description
+---|---|---|---|---|
+201|Location|string||URL to newly created resource
+
+<aside class="auth-notice">
+To perform this request, you must be authenticated via one of the following methods:
+<a href="#authentication">OAuth 2</a> (Scopes: write)
+</aside>
+## Get Guide Comment
+
+> Example request
+
+```shell
+# You can also use wget
+curl -X GET https://api.mod.io/v1/games/{game-id}/guides/{guide-id}/comments/{comment-id}?api_key=YourApiKey \
+  -H 'Accept: application/json'
+
+```
+
+```http
+GET https://api.mod.io/v1/games/{game-id}/guides/{guide-id}/comments/{comment-id}?api_key=YourApiKey HTTP/1.1
+Host: api.mod.io
+
+Accept: application/json
+
+```
+
+```javascript
+var headers = {
+  'Accept':'application/json'
+
+};
+
+$.ajax({
+  url: 'https://api.mod.io/v1/games/{game-id}/guides/{guide-id}/comments/{comment-id}',
+  method: 'get',
+  data: '?api_key=YourApiKey',
+  headers: headers,
+  success: function(data) {
+    console.log(JSON.stringify(data));
+  }
+})
+```
+
+```javascript--nodejs
+const request = require('node-fetch');
+
+const headers = {
+  'Accept':'application/json'
+
+};
+
+fetch('https://api.mod.io/v1/games/{game-id}/guides/{guide-id}/comments/{comment-id}?api_key=YourApiKey',
+{
+  method: 'GET',
+
+  headers: headers
+})
+.then(function(res) {
+    return res.json();
+}).then(function(body) {
+    console.log(body);
+});
+```
+
+```python
+import requests
+headers = {
+  'Accept': 'application/json'
+}
+
+r = requests.get('https://api.mod.io/v1/games/{game-id}/guides/{guide-id}/comments/{comment-id}', params={
+  'api_key': 'YourApiKey'
+}, headers = headers)
+
+print r.json()
+```
+
+```java
+URL obj = new URL("https://api.mod.io/v1/games/{game-id}/guides/{guide-id}/comments/{comment-id}?api_key=YourApiKey");
+HttpURLConnection con = (HttpURLConnection) obj.openConnection();
+con.setRequestMethod("GET");
+int responseCode = con.getResponseCode();
+BufferedReader in = new BufferedReader(
+    new InputStreamReader(con.getInputStream()));
+String inputLine;
+StringBuffer response = new StringBuffer();
+while ((inputLine = in.readLine()) != null) {
+    response.append(inputLine);
+}
+in.close();
+System.out.println(response.toString());
+```
+
+`GET /games/{game-id}/guides/{guide-id}/comments/{comment-id}`
+
+Get a Guide Comment. Successful request will return a single [Comment Object](#comment-object).
+
+> Example response
+
+```json
+{
+  "id": 2,
+  "game_id": 2,
+  "mod_id": 2,
+  "resource_id": 2,
+  "user": {
+    "id": 1,
+    "name_id": "xant",
+    "username": "XanT",
+    "display_name_portal": null,
+    "date_online": 1509922961,
+    "date_joined": 1509922961,
+    "avatar": {
+      "filename": "avatar.png",
+      "original": "https://assets.modcdn.io/images/placeholder/avatar.png",
+      "thumb_50x50": "https://assets.modcdn.io/images/placeholder/avatar_50x50.png",
+      "thumb_100x100": "https://assets.modcdn.io/images/placeholder/avatar_100x100.png"
+    },
+    "timezone": "",
+    "language": "",
+    "profile_url": "https://mod.io/u/xant"
+  },
+  "date_added": 1499841487,
+  "reply_id": 0,
+  "thread_position": "01",
+  "karma": 1,
+  "karma_guest": 0,
+  "content": "Hey <a href=\"https://mod.io/u/guest\">guest</a>, you should check out this mod!"
+}
+
+```
+<h3 id="Get-Guide-Comment-responses">Responses</h3>
+
+Status|Meaning|Error Ref|Description|Response Schema
+---|---|----|---|---|
+200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)||Successful Request|[Comment Object](#schemacomment_object)
+<aside class="auth-notice">
+To perform this request, you must be authenticated via one of the following methods:
+<a href="#authentication">api_key</a>, <a href="#authentication">OAuth 2</a> (Scopes: read)
+</aside>
+## Update Guide Comment
+
+> Example request
+
+```shell
+# You can also use wget
+curl -X PUT https://api.mod.io/v1/games/{game-id}/guides/{guide-id}/comments/{comment-id} \
+  -H 'Authorization: Bearer {access-token}' \ 
+  -H 'Content-Type: application/x-www-form-urlencoded' \ 
+  -H 'Accept: application/json'
+  -d 'content=Test comment'
+
+```
+
+```http
+PUT https://api.mod.io/v1/games/{game-id}/guides/{guide-id}/comments/{comment-id} HTTP/1.1
+Host: api.mod.io
+Content-Type: application/x-www-form-urlencoded
+Accept: application/json
+Authorization: Bearer {access-token}
+
+```
+
+```javascript
+var headers = {
+  'Authorization':'Bearer {access-token}',
+  'Content-Type':'application/x-www-form-urlencoded',
+  'Accept':'application/json'
+
+};
+
+$.ajax({
+  url: 'https://api.mod.io/v1/games/{game-id}/guides/{guide-id}/comments/{comment-id}',
+  method: 'put',
+
+  headers: headers,
+  success: function(data) {
+    console.log(JSON.stringify(data));
+  }
+})
+```
+
+```javascript--nodejs
+const request = require('node-fetch');
+const inputBody = '{
+  "content": "Test comment"
+}';
+const headers = {
+  'Authorization':'Bearer {access-token}',
+  'Content-Type':'application/x-www-form-urlencoded',
+  'Accept':'application/json'
+
+};
+
+fetch('https://api.mod.io/v1/games/{game-id}/guides/{guide-id}/comments/{comment-id}',
+{
+  method: 'PUT',
+  body: inputBody,
+  headers: headers
+})
+.then(function(res) {
+    return res.json();
+}).then(function(body) {
+    console.log(body);
+});
+```
+
+```python
+import requests
+headers = {
+  'Authorization': 'Bearer {access-token}',
+  'Content-Type': 'application/x-www-form-urlencoded',
+  'Accept': 'application/json'
+}
+
+r = requests.put('https://api.mod.io/v1/games/{game-id}/guides/{guide-id}/comments/{comment-id}', params={
+
+}, headers = headers)
+
+print r.json()
+```
+
+```java
+URL obj = new URL("https://api.mod.io/v1/games/{game-id}/guides/{guide-id}/comments/{comment-id}");
+HttpURLConnection con = (HttpURLConnection) obj.openConnection();
+con.setRequestMethod("PUT");
+int responseCode = con.getResponseCode();
+BufferedReader in = new BufferedReader(
+    new InputStreamReader(con.getInputStream()));
+String inputLine;
+StringBuffer response = new StringBuffer();
+while ((inputLine = in.readLine()) != null) {
+    response.append(inputLine);
+}
+in.close();
+System.out.println(response.toString());
+```
+
+`PUT /games/{game-id}/guides/{guide-id}/comments/{comment-id}`
+
+Update a comment for the corresponding guide. Successful request will return the updated [Comment Object](#comment-object).
+
+    Parameter|Type|Required|Description
+    ---|---|---|---|
+    content|string|true|Updated contents of the comment.
+
+> Example response
+
+```json
+{
+  "id": 2,
+  "game_id": 2,
+  "mod_id": 2,
+  "resource_id": 2,
+  "user": {
+    "id": 1,
+    "name_id": "xant",
+    "username": "XanT",
+    "display_name_portal": null,
+    "date_online": 1509922961,
+    "date_joined": 1509922961,
+    "avatar": {
+      "filename": "avatar.png",
+      "original": "https://assets.modcdn.io/images/placeholder/avatar.png",
+      "thumb_50x50": "https://assets.modcdn.io/images/placeholder/avatar_50x50.png",
+      "thumb_100x100": "https://assets.modcdn.io/images/placeholder/avatar_100x100.png"
+    },
+    "timezone": "",
+    "language": "",
+    "profile_url": "https://mod.io/u/xant"
+  },
+  "date_added": 1499841487,
+  "reply_id": 0,
+  "thread_position": "01",
+  "karma": 1,
+  "karma_guest": 0,
+  "content": "Hey <a href=\"https://mod.io/u/guest\">guest</a>, you should check out this mod!"
+}
+
+```
+<h3 id="Update-Guide-Comment-responses">Responses</h3>
+
+Status|Meaning|Error Ref|Description|Response Schema
+---|---|----|---|---|
+200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)||Update Successful|[Comment Object](#schemacomment_object)
+<aside class="auth-notice">
+To perform this request, you must be authenticated via one of the following methods:
+<a href="#authentication">OAuth 2</a> (Scopes: write)
+</aside>
+## Delete Guide Comment
+
+> Example request
+
+```shell
+# You can also use wget
+curl -X DELETE https://api.mod.io/v1/games/{game-id}/guides/{guide-id}/comments/{comment-id} \
+  -H 'Authorization: Bearer {access-token}' \ 
+  -H 'Content-Type: application/x-www-form-urlencoded' \ 
+  -H 'Accept: application/json'
+
+```
+
+```http
+DELETE https://api.mod.io/v1/games/{game-id}/guides/{guide-id}/comments/{comment-id} HTTP/1.1
+Host: api.mod.io
+
+Accept: application/json
+Authorization: Bearer {access-token}
+Content-Type: application/x-www-form-urlencoded
+
+```
+
+```javascript
+var headers = {
+  'Authorization':'Bearer {access-token}',
+  'Content-Type':'application/x-www-form-urlencoded',
+  'Accept':'application/json'
+
+};
+
+$.ajax({
+  url: 'https://api.mod.io/v1/games/{game-id}/guides/{guide-id}/comments/{comment-id}',
+  method: 'delete',
+
+  headers: headers,
+  success: function(data) {
+    console.log(JSON.stringify(data));
+  }
+})
+```
+
+```javascript--nodejs
+const request = require('node-fetch');
+
+const headers = {
+  'Authorization':'Bearer {access-token}',
+  'Content-Type':'application/x-www-form-urlencoded',
+  'Accept':'application/json'
+
+};
+
+fetch('https://api.mod.io/v1/games/{game-id}/guides/{guide-id}/comments/{comment-id}',
+{
+  method: 'DELETE',
+
+  headers: headers
+})
+.then(function(res) {
+    return res.json();
+}).then(function(body) {
+    console.log(body);
+});
+```
+
+```python
+import requests
+headers = {
+  'Authorization': 'Bearer {access-token}',
+  'Content-Type': 'application/x-www-form-urlencoded',
+  'Accept': 'application/json'
+}
+
+r = requests.delete('https://api.mod.io/v1/games/{game-id}/guides/{guide-id}/comments/{comment-id}', params={
+
+}, headers = headers)
+
+print r.json()
+```
+
+```java
+URL obj = new URL("https://api.mod.io/v1/games/{game-id}/guides/{guide-id}/comments/{comment-id}");
+HttpURLConnection con = (HttpURLConnection) obj.openConnection();
+con.setRequestMethod("DELETE");
+int responseCode = con.getResponseCode();
+BufferedReader in = new BufferedReader(
+    new InputStreamReader(con.getInputStream()));
+String inputLine;
+StringBuffer response = new StringBuffer();
+while ((inputLine = in.readLine()) != null) {
+    response.append(inputLine);
+}
+in.close();
+System.out.println(response.toString());
+```
+
+`DELETE /games/{game-id}/guides/{guide-id}/comments/{comment-id}`
+
+Delete a comment from a guide profile. Successful request will return `204 No Content`  and fire a __GUIDE_COMMENT_DELETED__ event.
+
+> Example response
+
+```json
+ 204 No Content 
+
+```
+<h3 id="Delete-Guide-Comment-responses">Responses</h3>
+
+Status|Meaning|Error Ref|Description|Response Schema
+---|---|----|---|---|
+204|[No Content](https://tools.ietf.org/html/rfc7231#section-6.3.5)||Successful Request. No Body Returned.|None
+403|[Forbidden](https://tools.ietf.org/html/rfc7231#section-6.5.3)|19027|The authenticated user does not have permission to delete comments for this guide, this action is restricted to game team managers & administrators only.|[Error Object](#schemaerror_object)
+<aside class="auth-notice">
+To perform this request, you must be authenticated via one of the following methods:
+<a href="#authentication">OAuth 2</a> (Scopes: write)
+</aside>
 ## Get Mod Comments
 
 > Example request
@@ -10520,12 +11269,7 @@ The purpose of this endpoint is enable users to report a resource (game, mod or 
 
     <aside class='consent'>Report content that is not working, or violates the mod.io Terms of Use using the form below. If you’d like to report Copyright Infringement and are the Copyright holder, select "<a href='#' class='toggledmca'>DMCA</a>" as the report type.<br><br>Be aware all details provided will be shared with mod.io staff and the games moderators for review, and maybe shared with the content creator.<br><br><label>__Reason for reporting*__<br><select class='checkdmca' required><option value='' selected></option><option value='1'>DMCA</option><option value='2'>Not working</option><option value='3'>Rude content</option><option value='4'>Illegal content</option><option value='5'>Stolen content</option><option value='6'>False information</option><option value='7'>Other</option></select></label><br><br><label>__Email__<br>Optional, if you wish to be contacted if necessary regarding your report.<br><input type='email' class='text'></label><br><br><label class='dmca' style='display: none'>__Company or name whose IP is being infringed__<br><input type='text' class='text'><br><br></label><label>__Details of your report*__<br>To help process your report, include all relevant information and links.<br><textarea cols='80' rows='3' style='width: 100%' required></textarea></label><br><br><label class='dmca checkbox' style='display: none'><input type='checkbox'> I certify that I am the copyright owner or I am authorized to act on the copyright owner's behalf in this situation.<br><br></label><label class='dmca checkbox' style='display: none'><input type='checkbox'> I certify that all material in this claim is correct and not authorized by the copyright owner, its agent, or the law.<br><br></label><div style='text-align:center'><span class='versionwrap cursor'> &nbsp; &nbsp; Submit Report &nbsp; &nbsp; </span> <span class='versionwrap outline cursor'>Cancel</span><br><br>[Terms of Use](https://mod.io/terms/widget) - [Privacy Policy](https://mod.io/privacy/widget)<br></div></aside>
 
-    __NOTE:__ If implementing your own dialog, the Terms of Use and Privacy Policy must be correctly linked, or displayed inline using the [agreements endpoints](#agreements) to get the latest versions.
-
-    If you wish to display the agreements in a web browser overlay, we recommend adding __/widget__ and __?textonly=1__ to the end of the agreement URLs, to remove the menus and external links, for example:
-
-    - [https://mod.io/terms`/widget?textonly=1`](https://mod.io/terms/widget?textonly=1)<br>
-    - [https://mod.io/privacy`/widget?textonly=1`](https://mod.io/privacy/widget?textonly=1)
+    __NOTE:__ If implementing your own report dialog, the Terms of Use and Privacy Policy must be correctly linked, or displayed inline following the instructions provided in the [agreements endpoints](#agreements).
 
     __NOTE:__ If you prefer to display the report page in a web browser overlay, and you know the resource you want to report, the best URL to use is: __https://mod.io/report/`resource`/`id`/widget__
 
@@ -10657,7 +11401,7 @@ System.out.println(response.toString());
 
 Get the current agreement (version) by type. Successful request will return a single [Agreement Version Object](#agreement-version-object).
 
-     Valid agreement types are:
+     __Valid agreement types are:__
 
      __1__ = Terms of Use - [https://mod.io/terms](https://mod.io/terms)<br>
      __2__ = Privacy Policy - [https://mod.io/privacy](https://mod.io/privacy)<br>
@@ -10665,6 +11409,17 @@ Get the current agreement (version) by type. Successful request will return a si
      __4__ = API Access Terms - [https://mod.io/apiterms](https://mod.io/apiterms)<br>
      __5__ = Monetisation Terms - [https://mod.io/monetisationterms](https://mod.io/monetisationterms)<br>
      __6__ = Acceptable Use Policy - [https://mod.io/aup](https://mod.io/aup)
+     
+     There are three ways you can display mod.io agreements. Pick which is easiest and most suitable for your implementation.
+     
+     __1. Linking to__ the applicable agreement using the URLs listed above.
+     
+     __2. Using this endpoint__ to fetch the applicable agreement and create a UI to display it inline.
+     
+     __3. Web browser overlay__ to display the applicable agreement inline. If doing this, we recommend prefixing the agreement URL path with `/legal` to remove all menus, and if wanting to remove all links add `?no_links=true` to the end of the URL. For example use:
+     
+     - [https://mod.io/legal/terms](https://mod.io/legal/terms) to remove menus<br>
+     - [https://mod.io/legal/terms?no_links=true](https://mod.io/legal/terms?no_links=true) to remove menus and links
 
 > Example response
 
@@ -12543,6 +13298,987 @@ Status|Meaning|Error Ref|Description|Response Schema
 To perform this request, you must be authenticated via one of the following methods:
 <a href="#authentication">OAuth 2</a> (Scopes: read)
 </aside>
+# Guides
+
+## Get Guides
+
+> Example request
+
+```shell
+# You can also use wget
+curl -X GET https://api.mod.io/v1/games/{game-id}/guides?api_key=YourApiKey \
+  -H 'Accept: application/json'
+
+```
+
+```http
+GET https://api.mod.io/v1/games/{game-id}/guides?api_key=YourApiKey HTTP/1.1
+Host: api.mod.io
+
+Accept: application/json
+
+```
+
+```javascript
+var headers = {
+  'Accept':'application/json'
+
+};
+
+$.ajax({
+  url: 'https://api.mod.io/v1/games/{game-id}/guides',
+  method: 'get',
+  data: '?api_key=YourApiKey',
+  headers: headers,
+  success: function(data) {
+    console.log(JSON.stringify(data));
+  }
+})
+```
+
+```javascript--nodejs
+const request = require('node-fetch');
+
+const headers = {
+  'Accept':'application/json'
+
+};
+
+fetch('https://api.mod.io/v1/games/{game-id}/guides?api_key=YourApiKey',
+{
+  method: 'GET',
+
+  headers: headers
+})
+.then(function(res) {
+    return res.json();
+}).then(function(body) {
+    console.log(body);
+});
+```
+
+```python
+import requests
+headers = {
+  'Accept': 'application/json'
+}
+
+r = requests.get('https://api.mod.io/v1/games/{game-id}/guides', params={
+  'api_key': 'YourApiKey'
+}, headers = headers)
+
+print r.json()
+```
+
+```java
+URL obj = new URL("https://api.mod.io/v1/games/{game-id}/guides?api_key=YourApiKey");
+HttpURLConnection con = (HttpURLConnection) obj.openConnection();
+con.setRequestMethod("GET");
+int responseCode = con.getResponseCode();
+BufferedReader in = new BufferedReader(
+    new InputStreamReader(con.getInputStream()));
+String inputLine;
+StringBuffer response = new StringBuffer();
+while ((inputLine = in.readLine()) != null) {
+    response.append(inputLine);
+}
+in.close();
+System.out.println(response.toString());
+```
+
+`GET /games/{game-id}/guides`
+
+Get all guides for a game. Successful request will return an array of [Guide Objects](#get-guides).
+
+    Filter|Type|Description
+    ---|---|---
+    id|integer|Unique id of the guide.
+    game_id|integer|Unique id of the parent game.
+    status|integer|Status of the guide (only game admins can filter by this field, see [status and visibility](#status-amp-visibility) for details):<br><br>__0__ = Not accepted<br>__1__ = Accepted _(default)_
+    date_added|integer|Unix timestamp of date guide was registered.
+    date_updated|integer|Unix timestamp of date guide was updated.
+    date_live|integer|Unix timestamp of date guide was set live.
+    name_id|string|Path for the guide on mod.io. For example: https://mod.io/g/gamename/r/__guide-name-id-here__
+    tags|string|Comma-separated values representing the tags you want to filter the results by. If you specify multiple tags, only guides which have all tags will be returned.
+
+    Sort|Description
+    ---|---
+    popular|Sort results by popularity using [_sort filter](#filtering), value should be `popular` for descending or `-popular` for ascending results.<br><br>__NOTE:__ Popularity is calculated hourly and reset daily (results are ranked from 1 to X). You should sort this column in ascending order `-popular` to get the top ranked results.
+    popular_overall|Sort results by 'Popular Overall' using [_sort filter](#filtering), value should be `popular_overall` for descending or `-popular_overall` for ascending results.<br><br>__NOTE:__ You should sort this column in ascending order `-popular_overall` to get the top ranked results. This filter differs from popular by filtering on the amount of visits it has received overall, and not just in the last 24 hours.
+
+> Example response
+
+```json
+{
+  "data": [
+    {
+      "id": 1209,
+      "game_id": 3,
+      "game_name": "My Awesome Game",
+      "logo": {
+        "filename": "card.png",
+        "original": "https://assets.modcdn.io/images/placeholder/card.png",
+        "thumb_320x180": "https://assets.modcdn.io/images/placeholder/card.png",
+        "thumb_640x360": "https://assets.modcdn.io/images/placeholder/card.png",
+        "thumb_1280x720": "https://assets.modcdn.io/images/placeholder/card.png"
+      },
+      "user": {
+        "id": 1,
+        "name_id": "xant",
+        "username": "XanT",
+        "display_name_portal": null,
+        "date_online": 1509922961,
+        "date_joined": 1509922961,
+        "avatar": {
+          "filename": "avatar.png",
+          "original": "https://assets.modcdn.io/images/placeholder/avatar.png",
+          "thumb_50x50": "https://assets.modcdn.io/images/placeholder/avatar_50x50.png",
+          "thumb_100x100": "https://assets.modcdn.io/images/placeholder/avatar_100x100.png"
+        },
+        "timezone": "",
+        "language": "",
+        "profile_url": "https://mod.io/u/xant"
+      },
+      "date_added": 1509922961,
+      "date_updated": 1509922961,
+      "date_live": 1509922961,
+      "status": 1,
+      "url": "https://mod.io/g/rogue-knight/r/getting-started",
+      "name": "Getting Started",
+      "name_id": "getting-started",
+      "summary": "Alright, so let's get started with modding on mod.io",
+      "description": "<h1>Getting Started</h2><p>Download this suspiciou....",
+      "tags": [
+        {
+          "name": "Instructions",
+          "date_added": 1499841487,
+          "count": 22
+        }
+      ],
+      "stats": [
+        {
+          "guide_id": 2,
+          "visits_total": 0,
+          "comments_total": 0
+        }
+      ]
+    },
+    {
+        ...
+    }
+  ],
+  "result_count": 70,
+  "result_offset": 0,
+  "result_limit": 100,
+  "result_total": 70
+}
+
+```
+<h3 id="Get-Guides-responses">Responses</h3>
+
+Status|Meaning|Error Ref|Description|Response Schema
+---|---|----|---|---|
+200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)||Successful Request|[Get Guides](#schemaget_guides)
+<aside class="auth-notice">
+To perform this request, you must be authenticated via one of the following methods:
+<a href="#authentication">api_key</a>, <a href="#authentication">OAuth 2</a> (Scopes: read)
+</aside>
+## Get Guide
+
+> Example request
+
+```shell
+# You can also use wget
+curl -X GET https://api.mod.io/v1/games/{game-id}/guides/{guide-id}?api_key=YourApiKey \
+  -H 'Accept: application/json'
+
+```
+
+```http
+GET https://api.mod.io/v1/games/{game-id}/guides/{guide-id}?api_key=YourApiKey HTTP/1.1
+Host: api.mod.io
+
+Accept: application/json
+
+```
+
+```javascript
+var headers = {
+  'Accept':'application/json'
+
+};
+
+$.ajax({
+  url: 'https://api.mod.io/v1/games/{game-id}/guides/{guide-id}',
+  method: 'get',
+  data: '?api_key=YourApiKey',
+  headers: headers,
+  success: function(data) {
+    console.log(JSON.stringify(data));
+  }
+})
+```
+
+```javascript--nodejs
+const request = require('node-fetch');
+
+const headers = {
+  'Accept':'application/json'
+
+};
+
+fetch('https://api.mod.io/v1/games/{game-id}/guides/{guide-id}?api_key=YourApiKey',
+{
+  method: 'GET',
+
+  headers: headers
+})
+.then(function(res) {
+    return res.json();
+}).then(function(body) {
+    console.log(body);
+});
+```
+
+```python
+import requests
+headers = {
+  'Accept': 'application/json'
+}
+
+r = requests.get('https://api.mod.io/v1/games/{game-id}/guides/{guide-id}', params={
+  'api_key': 'YourApiKey'
+}, headers = headers)
+
+print r.json()
+```
+
+```java
+URL obj = new URL("https://api.mod.io/v1/games/{game-id}/guides/{guide-id}?api_key=YourApiKey");
+HttpURLConnection con = (HttpURLConnection) obj.openConnection();
+con.setRequestMethod("GET");
+int responseCode = con.getResponseCode();
+BufferedReader in = new BufferedReader(
+    new InputStreamReader(con.getInputStream()));
+String inputLine;
+StringBuffer response = new StringBuffer();
+while ((inputLine = in.readLine()) != null) {
+    response.append(inputLine);
+}
+in.close();
+System.out.println(response.toString());
+```
+
+`GET /games/{game-id}/guides/{guide-id}`
+
+Get a guide. Successful request will return a single [Guide Object](#guide-object).
+
+> Example response
+
+```json
+{
+  "id": 1209,
+  "game_id": 3,
+  "game_name": "My Awesome Game",
+  "logo": {
+    "filename": "card.png",
+    "original": "https://assets.modcdn.io/images/placeholder/card.png",
+    "thumb_320x180": "https://assets.modcdn.io/images/placeholder/card.png",
+    "thumb_640x360": "https://assets.modcdn.io/images/placeholder/card.png",
+    "thumb_1280x720": "https://assets.modcdn.io/images/placeholder/card.png"
+  },
+  "user": {
+    "id": 1,
+    "name_id": "xant",
+    "username": "XanT",
+    "display_name_portal": null,
+    "date_online": 1509922961,
+    "date_joined": 1509922961,
+    "avatar": {
+      "filename": "avatar.png",
+      "original": "https://assets.modcdn.io/images/placeholder/avatar.png",
+      "thumb_50x50": "https://assets.modcdn.io/images/placeholder/avatar_50x50.png",
+      "thumb_100x100": "https://assets.modcdn.io/images/placeholder/avatar_100x100.png"
+    },
+    "timezone": "",
+    "language": "",
+    "profile_url": "https://mod.io/u/xant"
+  },
+  "date_added": 1509922961,
+  "date_updated": 1509922961,
+  "date_live": 1509922961,
+  "status": 1,
+  "url": "https://mod.io/g/rogue-knight/r/getting-started",
+  "name": "Getting Started",
+  "name_id": "getting-started",
+  "summary": "Alright, so let's get started with modding on mod.io",
+  "description": "<h1>Getting Started</h2><p>Download this suspiciou....",
+  "tags": [
+    {
+      "name": "Instructions",
+      "date_added": 1499841487,
+      "count": 22
+    }
+  ],
+  "stats": [
+    {
+      "guide_id": 2,
+      "visits_total": 0,
+      "comments_total": 0
+    }
+  ]
+}
+
+```
+<h3 id="Get-Guide-responses">Responses</h3>
+
+Status|Meaning|Error Ref|Description|Response Schema
+---|---|----|---|---|
+200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)||Successful Request|[Guide Object](#schemaguide_object)
+<aside class="auth-notice">
+To perform this request, you must be authenticated via one of the following methods:
+<a href="#authentication">api_key</a>, <a href="#authentication">OAuth 2</a> (Scopes: read)
+</aside>
+## Add Guide
+
+> Example request
+
+```shell
+# You can also use wget
+curl -X POST https://api.mod.io/v1/games/{game-id}/guides \
+  -H 'Authorization: Bearer {access-token}' \ 
+  -H 'Content-Type: multipart/form-data' \ 
+  -H 'Content-Type: multipart/form-data' \ 
+  -H 'Accept: application/json' \
+  -F 'name=Modding Guide for Rogue Knight' \
+  -F 'summary=Short descriptive summary here' \
+  -F 'description=<h2>Getting started with..' \
+  -F 'logo=@/path/to/image.jpg' \
+  -F 'date_live=1626667557'
+
+```
+
+```http
+POST https://api.mod.io/v1/games/{game-id}/guides HTTP/1.1
+Host: api.mod.io
+Content-Type: multipart/form-data
+Accept: application/json
+Authorization: Bearer {access-token}
+Content-Type: multipart/form-data
+
+```
+
+```javascript
+var headers = {
+  'Authorization':'Bearer {access-token}',
+  'Content-Type':'multipart/form-data',
+  'Content-Type':'multipart/form-data',
+  'Accept':'application/json'
+
+};
+
+$.ajax({
+  url: 'https://api.mod.io/v1/games/{game-id}/guides',
+  method: 'post',
+
+  headers: headers,
+  success: function(data) {
+    console.log(JSON.stringify(data));
+  }
+})
+```
+
+```javascript--nodejs
+const request = require('node-fetch');
+const inputBody = '{
+  "name": "Modding Guide for Rogue Knight",
+  "summary": "Short descriptive summary here",
+  "description": "<h2>Getting started with..",
+  "logo": "@/path/to/image.jpg",
+  "date_live": 1626667557
+}';
+const headers = {
+  'Authorization':'Bearer {access-token}',
+  'Content-Type':'multipart/form-data',
+  'Content-Type':'multipart/form-data',
+  'Accept':'application/json'
+
+};
+
+fetch('https://api.mod.io/v1/games/{game-id}/guides',
+{
+  method: 'POST',
+  body: inputBody,
+  headers: headers
+})
+.then(function(res) {
+    return res.json();
+}).then(function(body) {
+    console.log(body);
+});
+```
+
+```python
+import requests
+headers = {
+  'Authorization': 'Bearer {access-token}',
+  'Content-Type': 'multipart/form-data',
+  'Content-Type': 'multipart/form-data',
+  'Accept': 'application/json'
+}
+
+r = requests.post('https://api.mod.io/v1/games/{game-id}/guides', params={
+
+}, headers = headers)
+
+print r.json()
+```
+
+```java
+URL obj = new URL("https://api.mod.io/v1/games/{game-id}/guides");
+HttpURLConnection con = (HttpURLConnection) obj.openConnection();
+con.setRequestMethod("POST");
+int responseCode = con.getResponseCode();
+BufferedReader in = new BufferedReader(
+    new InputStreamReader(con.getInputStream()));
+String inputLine;
+StringBuffer response = new StringBuffer();
+while ((inputLine = in.readLine()) != null) {
+    response.append(inputLine);
+}
+in.close();
+System.out.println(response.toString());
+```
+
+`POST /games/{game-id}/guides`
+
+Add a guide for a game. Successful request will return a single [Guide Object](#guide-object).
+
+    Parameter|Type|Required|Description
+    ---|---|---|---|
+    logo|file|true|Image file which will represent your guides logo. Must be gif, jpg or png format and cannot exceed 8MB in filesize. Dimensions must be at least 512x288 and we recommended you supply a high resolution image with a 16 / 9 ratio. mod.io will use this image to make three thumbnails for the dimensions 320x180, 640x360 and 1280x720.
+    name|string|true|Name of your guide.
+    name_id|string||Path for the guide on mod.io. For example: https://mod.io/g/gamename/r/__guide-name-id-here__. If no `name_id` is specified the `name` will be used. For example: _'Stellaris Shader Guide'_ will become _'stellaris-shader-guide'_. Cannot exceed 80 characters.
+    summary|string|true|Summary for your guide, giving a brief overview of what it's about. Cannot exceed 250 characters.
+    description|string||Detailed description for your guide, which can include details such as 'About', 'Features', 'Install Instructions', 'FAQ', etc. HTML supported and encouraged.
+    url|string||Official homepage for your guide. Must be a valid URL.
+    tags[]|string||Tags to apply to the guide. Every tag to apply requires a separate field with tags[] as the key (eg. tags[]=tag1, tags[]=tag2).
+    date_live|integer||Unix timestamp of when this guide should go live. To release the guide immediately provide the current time along with the `status` value of 1. If this field is not provided and the `status` is 0, the guide will not be released.
+
+> Example response
+
+```json
+{
+  "id": 1209,
+  "game_id": 3,
+  "game_name": "My Awesome Game",
+  "logo": {
+    "filename": "card.png",
+    "original": "https://assets.modcdn.io/images/placeholder/card.png",
+    "thumb_320x180": "https://assets.modcdn.io/images/placeholder/card.png",
+    "thumb_640x360": "https://assets.modcdn.io/images/placeholder/card.png",
+    "thumb_1280x720": "https://assets.modcdn.io/images/placeholder/card.png"
+  },
+  "user": {
+    "id": 1,
+    "name_id": "xant",
+    "username": "XanT",
+    "display_name_portal": null,
+    "date_online": 1509922961,
+    "date_joined": 1509922961,
+    "avatar": {
+      "filename": "avatar.png",
+      "original": "https://assets.modcdn.io/images/placeholder/avatar.png",
+      "thumb_50x50": "https://assets.modcdn.io/images/placeholder/avatar_50x50.png",
+      "thumb_100x100": "https://assets.modcdn.io/images/placeholder/avatar_100x100.png"
+    },
+    "timezone": "",
+    "language": "",
+    "profile_url": "https://mod.io/u/xant"
+  },
+  "date_added": 1509922961,
+  "date_updated": 1509922961,
+  "date_live": 1509922961,
+  "status": 1,
+  "url": "https://mod.io/g/rogue-knight/r/getting-started",
+  "name": "Getting Started",
+  "name_id": "getting-started",
+  "summary": "Alright, so let's get started with modding on mod.io",
+  "description": "<h1>Getting Started</h2><p>Download this suspiciou....",
+  "tags": [
+    {
+      "name": "Instructions",
+      "date_added": 1499841487,
+      "count": 22
+    }
+  ],
+  "stats": [
+    {
+      "guide_id": 2,
+      "visits_total": 0,
+      "comments_total": 0
+    }
+  ]
+}
+
+```
+<h3 id="Add-Guide-responses">Responses</h3>
+
+Status|Meaning|Error Ref|Description|Response Schema
+---|---|----|---|---|
+201|[Created](https://tools.ietf.org/html/rfc7231#section-6.3.2)||Created|[Guide Object](#schemaguide_object)
+403|[Forbidden](https://tools.ietf.org/html/rfc7231#section-6.5.3)|14027|The authenticated user does not have permission to add guides to this game. Ensure the user is part of the game team before attempting the request again.|[Error Object](#schemaerror_object)
+<aside class="auth-notice">
+To perform this request, you must be authenticated via one of the following methods:
+<a href="#authentication">OAuth 2</a> (Scopes: web)
+</aside>
+## Edit Guide
+
+> Example request
+
+```shell
+# You can also use wget
+curl -X POST https://api.mod.io/v1/games/{game-id}/guides/{guide-id} \
+  -H 'Authorization: Bearer {access-token}' \ 
+  -H 'Content-Type: multipart/form-data' \ 
+  -H 'Content-Type: multipart/form-data' \ 
+  -H 'Accept: application/json' \
+  -F 'name=Modding Guide for Rogue Knight' \
+  -F 'summary=Short descriptive summary here' \
+  -F 'description=<h2>Getting started with..' \
+  -F 'logo=@/path/to/image.jpg' \
+  -F 'date_live=1626667557'
+
+```
+
+```http
+POST https://api.mod.io/v1/games/{game-id}/guides/{guide-id} HTTP/1.1
+Host: api.mod.io
+Content-Type: multipart/form-data
+Accept: application/json
+Authorization: Bearer {access-token}
+Content-Type: multipart/form-data
+
+```
+
+```javascript
+var headers = {
+  'Authorization':'Bearer {access-token}',
+  'Content-Type':'multipart/form-data',
+  'Content-Type':'multipart/form-data',
+  'Accept':'application/json'
+
+};
+
+$.ajax({
+  url: 'https://api.mod.io/v1/games/{game-id}/guides/{guide-id}',
+  method: 'post',
+
+  headers: headers,
+  success: function(data) {
+    console.log(JSON.stringify(data));
+  }
+})
+```
+
+```javascript--nodejs
+const request = require('node-fetch');
+const inputBody = '{
+  "name": "Modding Guide for Rogue Knight",
+  "summary": "Short descriptive summary here",
+  "description": "<h2>Getting started with..",
+  "logo": "@/path/to/image.jpg",
+  "date_live": 1626667557
+}';
+const headers = {
+  'Authorization':'Bearer {access-token}',
+  'Content-Type':'multipart/form-data',
+  'Content-Type':'multipart/form-data',
+  'Accept':'application/json'
+
+};
+
+fetch('https://api.mod.io/v1/games/{game-id}/guides/{guide-id}',
+{
+  method: 'POST',
+  body: inputBody,
+  headers: headers
+})
+.then(function(res) {
+    return res.json();
+}).then(function(body) {
+    console.log(body);
+});
+```
+
+```python
+import requests
+headers = {
+  'Authorization': 'Bearer {access-token}',
+  'Content-Type': 'multipart/form-data',
+  'Content-Type': 'multipart/form-data',
+  'Accept': 'application/json'
+}
+
+r = requests.post('https://api.mod.io/v1/games/{game-id}/guides/{guide-id}', params={
+
+}, headers = headers)
+
+print r.json()
+```
+
+```java
+URL obj = new URL("https://api.mod.io/v1/games/{game-id}/guides/{guide-id}");
+HttpURLConnection con = (HttpURLConnection) obj.openConnection();
+con.setRequestMethod("POST");
+int responseCode = con.getResponseCode();
+BufferedReader in = new BufferedReader(
+    new InputStreamReader(con.getInputStream()));
+String inputLine;
+StringBuffer response = new StringBuffer();
+while ((inputLine = in.readLine()) != null) {
+    response.append(inputLine);
+}
+in.close();
+System.out.println(response.toString());
+```
+
+`POST /games/{game-id}/guides/{guide-id}`
+
+Update an existing guide. Successful request will return the updated [Guide Object](#guide-object).
+
+    Parameter|Type|Required|Description
+    ---|---|---|---|
+    status|integer||Status of the guide, see [status and visibility](#status-amp-visibility) for details):<br><br>__0__ = Not accepted<br>__1__ = Accepted (game admins only)<br>__3__ = Deleted (use the [delete guide](#delete-guide) endpoint to set this status)
+    logo|file||Image file which will represent your guides logo. Must be gif, jpg or png format and cannot exceed 8MB in filesize. Dimensions must be at least 512x288 and we recommended you supply a high resolution image with a 16 / 9 ratio. mod.io will use this image to make three thumbnails for the dimensions 320x180, 640x360 and 1280x720.
+    name|string||Name of your guide.
+    name_id|string||Path for the guide on mod.io. For example: https://mod.io/g/gamename/r/__guide-name-id-here__. If no `name_id` is specified the `name` will be used. For example: _'Stellaris Shader Guide'_ will become _'stellaris-shader-guide'_. Cannot exceed 80 characters.
+    summary|string||Summary for your guide, giving a brief overview of what it's about. Cannot exceed 250 characters.
+    description|string||Detailed description for your guide, which can include details such as 'About', 'Features', 'Install Instructions', 'FAQ', etc. HTML supported and encouraged.
+    url|string||Official homepage for your guide. Must be a valid URL.
+    tags[]|string||Tags to apply to the guide. Every tag to apply requires a separate field with tags[] as the key (eg. tags[]=tag1, tags[]=tag2).<br><br>__NOTE:__ When editing a guide any tags you add or remove from the existing tags list will be added/removed, so if you do not wish to remove any tags you must re-submit all existing tags.
+    date_live|integer||Unix timestamp of when this guide should go live. To release the guide immediately provide the current time along with the `status` 1. If this field is not provided and the `status` is 0, the guide will not be released.
+
+##### » name
+Rules for updating a mod. We get the original
+array and simply strip out the required field.
+##### » summary
+Rules for updating a mod. We get the original
+array and simply strip out the required field.
+##### » description
+Rules for updating a mod. We get the original
+array and simply strip out the required field.
+##### » logo
+Rules for updating a mod. We get the original
+array and simply strip out the required field.
+##### » date_live
+Rules for updating a mod. We get the original
+array and simply strip out the required field.
+> Example response
+
+```json
+{
+  "id": 1209,
+  "game_id": 3,
+  "game_name": "My Awesome Game",
+  "logo": {
+    "filename": "card.png",
+    "original": "https://assets.modcdn.io/images/placeholder/card.png",
+    "thumb_320x180": "https://assets.modcdn.io/images/placeholder/card.png",
+    "thumb_640x360": "https://assets.modcdn.io/images/placeholder/card.png",
+    "thumb_1280x720": "https://assets.modcdn.io/images/placeholder/card.png"
+  },
+  "user": {
+    "id": 1,
+    "name_id": "xant",
+    "username": "XanT",
+    "display_name_portal": null,
+    "date_online": 1509922961,
+    "date_joined": 1509922961,
+    "avatar": {
+      "filename": "avatar.png",
+      "original": "https://assets.modcdn.io/images/placeholder/avatar.png",
+      "thumb_50x50": "https://assets.modcdn.io/images/placeholder/avatar_50x50.png",
+      "thumb_100x100": "https://assets.modcdn.io/images/placeholder/avatar_100x100.png"
+    },
+    "timezone": "",
+    "language": "",
+    "profile_url": "https://mod.io/u/xant"
+  },
+  "date_added": 1509922961,
+  "date_updated": 1509922961,
+  "date_live": 1509922961,
+  "status": 1,
+  "url": "https://mod.io/g/rogue-knight/r/getting-started",
+  "name": "Getting Started",
+  "name_id": "getting-started",
+  "summary": "Alright, so let's get started with modding on mod.io",
+  "description": "<h1>Getting Started</h2><p>Download this suspiciou....",
+  "tags": [
+    {
+      "name": "Instructions",
+      "date_added": 1499841487,
+      "count": 22
+    }
+  ],
+  "stats": [
+    {
+      "guide_id": 2,
+      "visits_total": 0,
+      "comments_total": 0
+    }
+  ]
+}
+
+```
+<h3 id="Edit-Guide-responses">Responses</h3>
+
+Status|Meaning|Error Ref|Description|Response Schema
+---|---|----|---|---|
+200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)||OK|[Guide Object](#schemaguide_object)
+403|[Forbidden](https://tools.ietf.org/html/rfc7231#section-6.5.3)|14036|The authenticated user does not have permission to edit guides to this game. Ensure the user is part of the game team before attempting the request again.|[Error Object](#schemaerror_object)
+403|[Forbidden](https://tools.ietf.org/html/rfc7231#section-6.5.3)|14031|The guide status cannot be changed to accepted due to the request originating from a non-site admin whilst there is a DMCA report active against the guide.|[Error Object](#schemaerror_object)
+<aside class="auth-notice">
+To perform this request, you must be authenticated via one of the following methods:
+<a href="#authentication">OAuth 2</a> (Scopes: web)
+</aside>
+## Delete Guide
+
+> Example request
+
+```shell
+# You can also use wget
+curl -X DELETE https://api.mod.io/v1/games/{game-id}/guides/{guide-id} \
+  -H 'Authorization: Bearer {access-token}' \ 
+  -H 'Content-Type: application/x-www-form-urlencoded' \ 
+  -H 'Accept: application/json'
+
+```
+
+```http
+DELETE https://api.mod.io/v1/games/{game-id}/guides/{guide-id} HTTP/1.1
+Host: api.mod.io
+
+Accept: application/json
+Authorization: Bearer {access-token}
+Content-Type: application/x-www-form-urlencoded
+
+```
+
+```javascript
+var headers = {
+  'Authorization':'Bearer {access-token}',
+  'Content-Type':'application/x-www-form-urlencoded',
+  'Accept':'application/json'
+
+};
+
+$.ajax({
+  url: 'https://api.mod.io/v1/games/{game-id}/guides/{guide-id}',
+  method: 'delete',
+
+  headers: headers,
+  success: function(data) {
+    console.log(JSON.stringify(data));
+  }
+})
+```
+
+```javascript--nodejs
+const request = require('node-fetch');
+
+const headers = {
+  'Authorization':'Bearer {access-token}',
+  'Content-Type':'application/x-www-form-urlencoded',
+  'Accept':'application/json'
+
+};
+
+fetch('https://api.mod.io/v1/games/{game-id}/guides/{guide-id}',
+{
+  method: 'DELETE',
+
+  headers: headers
+})
+.then(function(res) {
+    return res.json();
+}).then(function(body) {
+    console.log(body);
+});
+```
+
+```python
+import requests
+headers = {
+  'Authorization': 'Bearer {access-token}',
+  'Content-Type': 'application/x-www-form-urlencoded',
+  'Accept': 'application/json'
+}
+
+r = requests.delete('https://api.mod.io/v1/games/{game-id}/guides/{guide-id}', params={
+
+}, headers = headers)
+
+print r.json()
+```
+
+```java
+URL obj = new URL("https://api.mod.io/v1/games/{game-id}/guides/{guide-id}");
+HttpURLConnection con = (HttpURLConnection) obj.openConnection();
+con.setRequestMethod("DELETE");
+int responseCode = con.getResponseCode();
+BufferedReader in = new BufferedReader(
+    new InputStreamReader(con.getInputStream()));
+String inputLine;
+StringBuffer response = new StringBuffer();
+while ((inputLine = in.readLine()) != null) {
+    response.append(inputLine);
+}
+in.close();
+System.out.println(response.toString());
+```
+
+`DELETE /games/{game-id}/guides/{guide-id}`
+
+Delete a guide. Successful request will return `204 No Content`.
+
+> Example response
+
+```json
+ 204 No Content 
+
+```
+<h3 id="Delete-Guide-responses">Responses</h3>
+
+Status|Meaning|Error Ref|Description|Response Schema
+---|---|----|---|---|
+204|[No Content](https://tools.ietf.org/html/rfc7231#section-6.3.5)||Successful Request. No Body Returned.|None
+403|[Forbidden](https://tools.ietf.org/html/rfc7231#section-6.5.3)|14028|The authenticated user does not have permission to delete guides to this game. Ensure the user is part of the game team before attempting the request again.|[Error Object](#schemaerror_object)
+403|[Forbidden](https://tools.ietf.org/html/rfc7231#section-6.5.3)|14031|The guide cannot be deleted due to the request originating from a non-site admin whilst there is a DMCA report active against the guide.|[Error Object](#schemaerror_object)
+<aside class="auth-notice">
+To perform this request, you must be authenticated via one of the following methods:
+<a href="#authentication">OAuth 2</a> (Scopes: web)
+</aside>
+## Get Guides Tags
+
+> Example request
+
+```shell
+# You can also use wget
+curl -X GET https://api.mod.io/v1/games/{game-id}/guides/tags?api_key=YourApiKey \
+  -H 'Accept: application/json'
+
+```
+
+```http
+GET https://api.mod.io/v1/games/{game-id}/guides/tags?api_key=YourApiKey HTTP/1.1
+Host: api.mod.io
+
+Accept: application/json
+
+```
+
+```javascript
+var headers = {
+  'Accept':'application/json'
+
+};
+
+$.ajax({
+  url: 'https://api.mod.io/v1/games/{game-id}/guides/tags',
+  method: 'get',
+  data: '?api_key=YourApiKey',
+  headers: headers,
+  success: function(data) {
+    console.log(JSON.stringify(data));
+  }
+})
+```
+
+```javascript--nodejs
+const request = require('node-fetch');
+
+const headers = {
+  'Accept':'application/json'
+
+};
+
+fetch('https://api.mod.io/v1/games/{game-id}/guides/tags?api_key=YourApiKey',
+{
+  method: 'GET',
+
+  headers: headers
+})
+.then(function(res) {
+    return res.json();
+}).then(function(body) {
+    console.log(body);
+});
+```
+
+```python
+import requests
+headers = {
+  'Accept': 'application/json'
+}
+
+r = requests.get('https://api.mod.io/v1/games/{game-id}/guides/tags', params={
+  'api_key': 'YourApiKey'
+}, headers = headers)
+
+print r.json()
+```
+
+```java
+URL obj = new URL("https://api.mod.io/v1/games/{game-id}/guides/tags?api_key=YourApiKey");
+HttpURLConnection con = (HttpURLConnection) obj.openConnection();
+con.setRequestMethod("GET");
+int responseCode = con.getResponseCode();
+BufferedReader in = new BufferedReader(
+    new InputStreamReader(con.getInputStream()));
+String inputLine;
+StringBuffer response = new StringBuffer();
+while ((inputLine = in.readLine()) != null) {
+    response.append(inputLine);
+}
+in.close();
+System.out.println(response.toString());
+```
+
+`GET /games/{game-id}/guides/tags`
+
+Get all guide tags for a game. Successful request will return an array of [Guide Tag Objects](#get-guide-tags).
+
+> Example response
+
+```json
+{
+  "data": [
+    {
+      "name": "Instructions",
+      "date_added": 1499841487,
+      "count": 22
+    },
+    {
+        ...
+    }
+  ],
+  "result_count": 70,
+  "result_offset": 0,
+  "result_limit": 100,
+  "result_total": 70
+}
+
+```
+<h3 id="Get-Guides-Tags-responses">Responses</h3>
+
+Status|Meaning|Error Ref|Description|Response Schema
+---|---|----|---|---|
+200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)||Successful Request|[Get Guide Tags](#schemaget_guide_tags)
+<aside class="auth-notice">
+To perform this request, you must be authenticated via one of the following methods:
+<a href="#authentication">api_key</a>, <a href="#authentication">OAuth 2</a> (Scopes: read)
+</aside>
 # Price
 
 ## Get Mod Price
@@ -13040,6 +14776,55 @@ moderated|boolean|Is this platform moderated by game admins? If false, then user
 
 
 
+## Game Rule Config  
+
+<a name="schemagame_rule_config"></a>
+
+```json
+{
+  "config": [
+    {
+      "endpoint": "string",
+      "name": "string",
+      "rules": [
+        {
+          "type": "string",
+          "field": "string",
+          "operator": "string",
+          "value": "string",
+          "connector": "string"
+        }
+      ],
+      "behaviors": [
+        {
+          "type": "string",
+          "if_outcome_equals": true
+        }
+      ]
+    }
+  ]
+} 
+```
+
+### Properties
+
+Name|Type|Description
+---|---|---|---|
+config|array[]|No description
+» endpoint|string|The endpoint to apply the rules to. May be one of: <br><br>- _add_guide_comment_<br>- _update_guide_comment_<br>- _add_guide_<br>- _edit_guide_<br>- _add_mod_comment_<br>- _update_mod_comment_<br>- _add_mod_dependencies_<br>- _add_modfile_<br>- _add_mod_kvp_metadata_<br>- _add_mod_<br>- _edit_mod_<br>- _add_mod_tags_
+» name|string|A helpful name to remember the ruleset by (max 50 characters). If ommited the name will be provided automatically in the format of `Ruleset #n` where `n` is the nth unnamed rule.
+» rules|array[]|The set of rules to apply to the endpoint. _Each rule may contain dynamic fields not listed here, however the below are the minimum requirements for every rule_.
+»» type|string|The type of rule. May be one of: <br><br>- _payload_<br>- _user_<br>- _userstats_
+»» field|string|The field to apply the rule to.
+»» operator|string|The operator to use when comparing the field to the value. May be one of: <br><br>- `=`<br>-  `!=`<br>-  `>`<br>-  `<`<br>-  `>=`<br>-  `<=`<br>-  `contains`<br>-  `not_contains`
+»» value|string|The value to compare the field to.
+»» connector|string|The connector to use when comparing this rule to the next. May be one of: `and`, `or` or `none`.
+» behaviors|array[]|The set of behaviors to apply to the above ruleset. _Each behavior may contain dynamic fields not listed here, however the below are the minimum requirements for every rule_.
+»» type|string|The type of behavior. May be one of: <br><br>- _allowdeny_<br>- _thirdparty_
+»» if_outcome_equals|boolean|The outcome to match against. If the outcome of the ruleset matches this value, the behavior will be applied.
+
+
+
 ## Game Stats Object  
 
 <a name="schemagame_stats_object"></a>
@@ -13252,6 +15037,179 @@ result_total|integer|Total number of results found.
 Name|Type|Description
 ---|---|---|---|
 data|[Game Object](#schemagame_object)[]|Array containing game objects.
+result_count|integer|Number of results returned in this request.
+result_offset|integer|Number of results skipped over. Defaults to 0 unless overridden by `_offset` filter.
+result_limit|integer|Maximum number of results returned in the request. Defaults to 100 (max) unless overridden by `_limit` filter.
+result_total|integer|Total number of results found.
+
+
+
+## Get Guide Comments  
+
+<a name="schemaget_guide_comments"></a>
+
+```json
+{
+  "data": [
+    {
+      "id": 2,
+      "game_id": 2,
+      "mod_id": 2,
+      "resource_id": 2,
+      "user": {
+        "id": 1,
+        "name_id": "xant",
+        "username": "XanT",
+        "display_name_portal": null,
+        "date_online": 1509922961,
+        "date_joined": 1509922961,
+        "avatar": {
+          "filename": "avatar.png",
+          "original": "https://assets.modcdn.io/images/placeholder/avatar.png",
+          "thumb_50x50": "https://assets.modcdn.io/images/placeholder/avatar_50x50.png",
+          "thumb_100x100": "https://assets.modcdn.io/images/placeholder/avatar_100x100.png"
+        },
+        "timezone": "",
+        "language": "",
+        "profile_url": "https://mod.io/u/xant"
+      },
+      "date_added": 1499841487,
+      "reply_id": 0,
+      "thread_position": "01",
+      "karma": 1,
+      "karma_guest": 0,
+      "content": "Hey <a href=\"https://mod.io/u/guest\">guest</a>, you should check out this mod!"
+    }
+  ],
+  "result_count": 1,
+  "result_offset": 0,
+  "result_limit": 100,
+  "result_total": 1
+} 
+```
+
+### Properties
+
+Name|Type|Description
+---|---|---|---|
+data|[Comment Object](#schemacomment_object)[]|Array containing comment objects.
+result_count|integer|Number of results returned in this request.
+result_offset|integer|Number of results skipped over. Defaults to 0 unless overridden by `_offset` filter.
+result_limit|integer|Maximum number of results returned in the request. Defaults to 100 (max) unless overridden by `_limit` filter.
+result_total|integer|Total number of results found.
+
+
+
+## Get Guide Tags  
+
+<a name="schemaget_guide_tags"></a>
+
+```json
+{
+  "data": [
+    {
+      "name": "Instructions",
+      "date_added": 1499841487,
+      "count": 22
+    },
+    {
+        ...
+    }
+  ],
+  "result_count": 70,
+  "result_offset": 0,
+  "result_limit": 100,
+  "result_total": 70
+} 
+```
+
+### Properties
+
+Name|Type|Description
+---|---|---|---|
+data|[Guide Tag Object](#schemaguide_tag_object)[]|Array containing guide tag objects.
+result_count|integer|Number of results returned in this request.
+result_offset|integer|Number of results skipped over. Defaults to 0 unless overridden by `_offset` filter.
+result_limit|integer|Maximum number of results returned in the request. Defaults to 100 (max) unless overridden by `_limit` filter.
+result_total|integer|Total number of results found.
+
+
+
+## Get Guides
+
+   <a name="schemaget_guides"></a>
+
+```json
+{
+  "data": [
+    {
+      "id": 1209,
+      "game_id": 3,
+      "game_name": "My Awesome Game",
+      "logo": {
+        "filename": "card.png",
+        "original": "https://assets.modcdn.io/images/placeholder/card.png",
+        "thumb_320x180": "https://assets.modcdn.io/images/placeholder/card.png",
+        "thumb_640x360": "https://assets.modcdn.io/images/placeholder/card.png",
+        "thumb_1280x720": "https://assets.modcdn.io/images/placeholder/card.png"
+      },
+      "user": {
+        "id": 1,
+        "name_id": "xant",
+        "username": "XanT",
+        "display_name_portal": null,
+        "date_online": 1509922961,
+        "date_joined": 1509922961,
+        "avatar": {
+          "filename": "avatar.png",
+          "original": "https://assets.modcdn.io/images/placeholder/avatar.png",
+          "thumb_50x50": "https://assets.modcdn.io/images/placeholder/avatar_50x50.png",
+          "thumb_100x100": "https://assets.modcdn.io/images/placeholder/avatar_100x100.png"
+        },
+        "timezone": "",
+        "language": "",
+        "profile_url": "https://mod.io/u/xant"
+      },
+      "date_added": 1509922961,
+      "date_updated": 1509922961,
+      "date_live": 1509922961,
+      "status": 1,
+      "url": "https://mod.io/g/rogue-knight/r/getting-started",
+      "name": "Getting Started",
+      "name_id": "getting-started",
+      "summary": "Alright, so let's get started with modding on mod.io",
+      "description": "<h1>Getting Started</h2><p>Download this suspiciou....",
+      "tags": [
+        {
+          "name": "Instructions",
+          "date_added": 1499841487,
+          "count": 22
+        }
+      ],
+      "stats": [
+        {
+          "guide_id": 2,
+          "visits_total": 0,
+          "comments_total": 0
+        }
+      ]
+    },
+    {
+        ...
+    }
+  ],
+  "result_count": 70,
+  "result_offset": 0,
+  "result_limit": 100,
+  "result_total": 70
+} 
+```
+
+### Properties
+
+Name|Type|Description
+---|---|---|---|
+data|[Guide Object](#schemaguide_object)[]|Array containing guide objects.
 result_count|integer|Number of results returned in this request.
 result_offset|integer|Number of results skipped over. Defaults to 0 unless overridden by `_offset` filter.
 result_limit|integer|Maximum number of results returned in the request. Defaults to 100 (max) unless overridden by `_limit` filter.
@@ -13954,6 +15912,132 @@ result_total|integer|Total number of results found.
 
 
 
+## Guide Object
+
+   <a name="schemaguide_object"></a>
+
+```json
+{
+  "id": 1209,
+  "game_id": 3,
+  "game_name": "My Awesome Game",
+  "logo": {
+    "filename": "card.png",
+    "original": "https://assets.modcdn.io/images/placeholder/card.png",
+    "thumb_320x180": "https://assets.modcdn.io/images/placeholder/card.png",
+    "thumb_640x360": "https://assets.modcdn.io/images/placeholder/card.png",
+    "thumb_1280x720": "https://assets.modcdn.io/images/placeholder/card.png"
+  },
+  "user": {
+    "id": 1,
+    "name_id": "xant",
+    "username": "XanT",
+    "display_name_portal": null,
+    "date_online": 1509922961,
+    "date_joined": 1509922961,
+    "avatar": {
+      "filename": "avatar.png",
+      "original": "https://assets.modcdn.io/images/placeholder/avatar.png",
+      "thumb_50x50": "https://assets.modcdn.io/images/placeholder/avatar_50x50.png",
+      "thumb_100x100": "https://assets.modcdn.io/images/placeholder/avatar_100x100.png"
+    },
+    "timezone": "",
+    "language": "",
+    "profile_url": "https://mod.io/u/xant"
+  },
+  "date_added": 1509922961,
+  "date_updated": 1509922961,
+  "date_live": 1509922961,
+  "status": 1,
+  "url": "https://mod.io/g/rogue-knight/r/getting-started",
+  "name": "Getting Started",
+  "name_id": "getting-started",
+  "summary": "Alright, so let's get started with modding on mod.io",
+  "description": "<h1>Getting Started</h2><p>Download this suspiciou....",
+  "tags": [
+    {
+      "name": "Instructions",
+      "date_added": 1499841487,
+      "count": 22
+    }
+  ],
+  "stats": [
+    {
+      "guide_id": 2,
+      "visits_total": 0,
+      "comments_total": 0
+    }
+  ]
+} 
+```
+
+### Properties
+
+Name|Type|Description
+---|---|---|---|
+id|integer|Unique id of the guide.
+game_id|integer|Unique id of the parent game.
+game_name|string|Name of the parent game.
+logo|[Logo Object](#schemalogo_object)|No description
+user|[User Object](#schemauser_object)|No description
+date_added|integer|Unix timestamp of the date the guide was made.
+date_updated|integer|Unix timestamp of the date the guide was updated.
+date_live|integer|Unix timestamp of the date the guide was set live.
+status|integer|Status of the guide:<br><br>__0__ = Not Accepted<br>__1__ = Accepted<br>__3__ = Deleted
+url|string|URL to the guide.
+name|string|The name of the guide
+name_id|string|Path for the guide on mod.io. For example: https://mod.io/g/rogue-knight/r/__getting-started__
+summary|string|The summary of the guide
+description|string|Detailed description of the guide (the contents) which allows HTML.
+tags|[Guide Tag Object](#schemaguide_tag_object)[]|Contains guide tag data.
+stats|[Guide Stats Object](#schemaguide_stats_object)[]|Contains stats data.
+
+
+
+## Guide Stats Object  
+
+<a name="schemaguide_stats_object"></a>
+
+```json
+{
+  "guide_id": 2,
+  "visits_total": 0,
+  "comments_total": 0
+} 
+```
+
+### Properties
+
+Name|Type|Description
+---|---|---|---|
+guide_id|integer|Unique guide id.
+visits_total|integer|Total number of visits for this guide
+comments_total|integer|Total number of comments for this guide
+
+
+
+## Guide Tag Object  
+
+<a name="schemaguide_tag_object"></a>
+
+```json
+{
+  "name": "Instructions",
+  "date_added": 1499841487,
+  "count": 22
+} 
+```
+
+### Properties
+
+Name|Type|Description
+---|---|---|---|
+name|string|Tag name.
+date_added|integer|Unix timestamp of date tag was applied.
+count|integer|The amount of times this tag has been applied to guides. This value will only be returned for the Get Guide Tags endpoint.
+
+
+
 ## Header Image Object  
 
 <a name="schemaheader_image_object"></a>
@@ -14632,6 +16716,152 @@ game_id|integer|Unique game id.
 mod_id|integer|Unique mod id.
 rating|integer|Mod rating value:<br><br>__1__ = Positive Rating<br>__-1__ = Negative Rating
 date_added|integer|Unix timestamp of date rating was submitted.
+
+
+
+## Rules Based Moderation Config Behavior
+
+<a name="schemarules_based_moderation_config_behavior_object"></a>
+
+```json
+{
+  "type": "payload",
+  "name": "Allow/Deny",
+  "description": "Does some pretty wild stuff!",
+  "validation_rules": {
+    "property1": null,
+    "property2": null
+  },
+  "field_map": {
+    "property1": null,
+    "property2": null
+  }
+} 
+```
+
+### Properties
+
+Name|Type|Description
+---|---|---|---|
+type|string|The string identifier for this behavior (allowdeny, thirdparty, requiresmoderation).
+name|string|The display name of the behavior.
+description|string|The description of the behavior.
+validation_rules|object|Array of Laravel-like validation rules seperated by a pipe character ('|') that can be used to validate the values of each rules unique configuration options.
+field_map|object|Array of input field types and any applicable options for frontend form building purposes.
+
+
+
+## Rules Based Moderation Config Endpoint
+
+<a name="schemarules_based_moderation_config_endpoint_object"></a>
+
+```json
+{
+  "id": "add_mod",
+  "name": "Add Mod",
+  "attributes": [
+    "string"
+  ]
+} 
+```
+
+### Properties
+
+Name|Type|Description
+---|---|---|---|
+id|string|The swagger `operationId` that represents this endpoint.
+name|string|The name of the endpoint.
+attributes|string[]|Array of attributes that rules can be created against for this endpoint.
+
+
+
+## Rules Based Moderation Config Object
+
+<a name="schemarules_based_moderation_config_object"></a>
+
+```json
+{
+  "endpoints": [
+    {
+      "id": "add_mod",
+      "name": "Add Mod",
+      "attributes": [
+        "string"
+      ]
+    }
+  ],
+  "rules": [
+    {
+      "type": "payload",
+      "name": "Payload Attribute Inspection",
+      "description": "Careful, this rule can be very dangerous if not used properly.",
+      "validation_rules": {
+        "property1": null,
+        "property2": null
+      },
+      "field_map": {
+        "property1": null,
+        "property2": null
+      }
+    }
+  ],
+  "behaviors": [
+    {
+      "type": "payload",
+      "name": "Allow/Deny",
+      "description": "Does some pretty wild stuff!",
+      "validation_rules": {
+        "property1": null,
+        "property2": null
+      },
+      "field_map": {
+        "property1": null,
+        "property2": null
+      }
+    }
+  ]
+} 
+```
+
+### Properties
+
+Name|Type|Description
+---|---|---|---|
+endpoints|[Rules Based Moderation Config Endpoint](#schemarules_based_moderation_config_endpoint_object)[]|No description
+rules|[Rules Based Moderation Config Rule](#schemarules_based_moderation_config_rule_object)[]|Array of available rules.
+behaviors|[Rules Based Moderation Config Behavior](#schemarules_based_moderation_config_behavior_object)[]|Array of available behaviors.
+
+
+
+## Rules Based Moderation Config Rule
+
+<a name="schemarules_based_moderation_config_rule_object"></a>
+
+```json
+{
+  "type": "payload",
+  "name": "Payload Attribute Inspection",
+  "description": "Careful, this rule can be very dangerous if not used properly.",
+  "validation_rules": {
+    "property1": null,
+    "property2": null
+  },
+  "field_map": {
+    "property1": null,
+    "property2": null
+  }
+} 
+```
+
+### Properties
+
+Name|Type|Description
+---|---|---|---|
+type|string|The string identifier for this rule (payload, user, etc).
+name|string|The display name of the rule.
+description|string|The description of the rule.
+validation_rules|object|Array of Laravel-like validation rules seperated by a pipe character ('|') that can be used to validate the values of each rules unique configuration options.
+field_map|object|Array of input field types and any applicable options for frontend form building purposes.
 
 
 
