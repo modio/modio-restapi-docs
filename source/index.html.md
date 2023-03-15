@@ -2455,8 +2455,7 @@ To perform this request, you must be authenticated via one of the following meth
 <a href="#authentication">api_key</a>
 </aside>
 ## Email Exchange
-
-__Step 1 of 2__
+__Step 1 of 2__
 
 > Example request
 
@@ -2577,10 +2576,8 @@ To perform this request, you must be authenticated via one of the following meth
 <a href="#authentication">api_key</a>
 </aside>
 
-
-<br>
-
-__Step 2 of 2__
+<br>
+__Step 2 of 2__
 
 
 > Example request
@@ -6079,118 +6076,6 @@ Complete an active multipart upload session, this endpoint assumes that you have
 
 ```
 <h3 id="Complete-Multipart-Upload-Session-responses">Responses</h3>
-
-Status|Meaning|Error Ref|Description|Response Schema
----|---|----|---|---|
-200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)||Successful Request|[Multipart Upload Object](#schemamultipart_upload_object)
-403|[Forbidden](https://tools.ietf.org/html/rfc7231#section-6.5.3)|15012|The authenticated user has had upload privileges restricted by mod.io admins, this is typically due to spam.|[Error Object](#schemaerror_object)
-403|[Forbidden](https://tools.ietf.org/html/rfc7231#section-6.5.3)|15006|The authenticated user does not have permission to upload modfiles for the specified mod, ensure the user is a team manager or administrator.|[Error Object](#schemaerror_object)
-<aside class="auth-notice">
-To perform this request, you must be authenticated via one of the following methods:
-<a href="#authentication">OAuth 2</a> (Scopes: write)
-</aside>
-## Get Multipart Upload Status
-
-> Example request
-
-```shell
-# You can also use wget
-curl -X GET https://api.mod.io/v1/games/{game-id}/mods/{mod-id}/files/multipart/status?api_key=YourApiKey&upload_id=123e4567-e89b-12d3-a456-426614174000 \
-  -H 'Accept: application/json'
-
-```
-
-```http
-GET https://api.mod.io/v1/games/{game-id}/mods/{mod-id}/files/multipart/status?api_key=YourApiKey&upload_id=123e4567-e89b-12d3-a456-426614174000 HTTP/1.1
-Host: api.mod.io
-
-Accept: application/json
-
-```
-
-```javascript
-var headers = {
-  'Accept':'application/json'
-
-};
-
-$.ajax({
-  url: 'https://api.mod.io/v1/games/{game-id}/mods/{mod-id}/files/multipart/status',
-  method: 'get',
-  data: '?api_key=YourApiKey&upload_id=123e4567-e89b-12d3-a456-426614174000',
-  headers: headers,
-  success: function(data) {
-    console.log(JSON.stringify(data));
-  }
-})
-```
-
-```javascript--nodejs
-const request = require('node-fetch');
-
-const headers = {
-  'Accept':'application/json'
-
-};
-
-fetch('https://api.mod.io/v1/games/{game-id}/mods/{mod-id}/files/multipart/status?api_key=YourApiKey&upload_id=123e4567-e89b-12d3-a456-426614174000',
-{
-  method: 'GET',
-
-  headers: headers
-})
-.then(function(res) {
-    return res.json();
-}).then(function(body) {
-    console.log(body);
-});
-```
-
-```python
-import requests
-headers = {
-  'Accept': 'application/json'
-}
-
-r = requests.get('https://api.mod.io/v1/games/{game-id}/mods/{mod-id}/files/multipart/status', params={
-  'api_key': 'YourApiKey',  'upload_id': '123e4567-e89b-12d3-a456-426614174000'
-}, headers = headers)
-
-print r.json()
-```
-
-```java
-URL obj = new URL("https://api.mod.io/v1/games/{game-id}/mods/{mod-id}/files/multipart/status?api_key=YourApiKey&upload_id=123e4567-e89b-12d3-a456-426614174000");
-HttpURLConnection con = (HttpURLConnection) obj.openConnection();
-con.setRequestMethod("GET");
-int responseCode = con.getResponseCode();
-BufferedReader in = new BufferedReader(
-    new InputStreamReader(con.getInputStream()));
-String inputLine;
-StringBuffer response = new StringBuffer();
-while ((inputLine = in.readLine()) != null) {
-    response.append(inputLine);
-}
-in.close();
-System.out.println(response.toString());
-```
-
-`GET /games/{game-id}/mods/{mod-id}/files/multipart/status`
-
-Get the status of an existing multipart upload session, if the session is not yet complete,
-    a `Retry-After` header will be returned with the recommended amount of time you should wait before checking again.
-    A successful request will return a single [Multipart Upload Object](#multipart-upload-object).
-
-> Example response
-
-```json
-{
-  "upload_id": "123e4567-e89b-12d3-a456-426614174000",
-  "status": 0
-}
-
-```
-<h3 id="Get-Multipart-Upload-Status-responses">Responses</h3>
 
 Status|Meaning|Error Ref|Description|Response Schema
 ---|---|----|---|---|
@@ -12987,7 +12872,6 @@ Get all mods the _authenticated user_ added or is a team member of. Successful r
     metadata_kvp|string|Colon-separated values representing the key-value pairs you want to filter the results by. If you supply more than one key-pair, separate the pairs by a comma. Will only filter by an exact key-pair match.
     tags|string|Comma-separated values representing the tags you want to filter the results by. If you specify multiple tags, only mods which have all tags will be returned, and only tags that are supported by the parent game can be applied. To determine what tags are eligible, see the tags values within `tag_options` column on the parent [Game Object](#game-object). If you want to ensure mods returned do not contain particular tag(s), you can use the `tags-not-in` filter either independently or alongside this filter.
     platform_status|string|Filter results by their current platform status, valid values are `pending_only` and `live_and_pending`.<br><br>__NOTE:__ that this parameter is only considered in the request if the parent game has enabled [cross-platform filtering](#targeting-a-platform).
-    platform_status|string|Filter results by their current platform status, valid values are `pending_only` and `live_and_pending` (only game admins can filter by this field, see [status and visibility](#status-amp-visibility) for details).<br><br>__NOTE:__ that this parameter is only considered in the request if the parent game has enabled [cross-platform filtering](#targeting-a-platform).
     platforms|string|Filter results by their current platform, accepts multiple platforms as comma-separated values (e.g. `ps4,switch`), valid values are `all`, `windows`, `mac`, `linux`, `android`, `ios`, `xboxone`, `xboxseriesx`, `ps4`, `ps5`, `switch`, `oculus` (only game admins can filter by this field, see [status and visibility](#status-amp-visibility) for details).<br><br>__NOTE:__ that this parameter will take precedence over the header from [cross-platform filtering](#targeting-a-platform).
 
     Sort|Description
