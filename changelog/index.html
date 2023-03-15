@@ -229,7 +229,7 @@
   color: #f92672;
 }
     </style>
-    <link href="../stylesheets/screen-ab5dd04f.css" rel="stylesheet" media="screen" />
+    <link href="../stylesheets/screen-fc80455a.css" rel="stylesheet" media="screen" />
     <link href="../stylesheets/print-03026987.css" rel="stylesheet" media="print" />
 
     <link rel="stylesheet" href="../stylesheets/colorbox-64ee49f2.css">
@@ -242,6 +242,21 @@
         function mergeObjects(a, b) { 
           return $.extend({}, a, b) 
         }
+
+        $('.checkdmca').on('change', function(){
+          if($(this).val() == 1) {
+            $('.dmca').show();
+          } else {
+            $('.dmca').hide();
+          }
+
+          return true;
+        });
+
+        $('.toggledmca').on('click', function(){
+          $('.checkdmca').val(1).change();
+          return false;
+        });
 
         let tippyOptions = {
           arrow: true,
