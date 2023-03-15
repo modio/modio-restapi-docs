@@ -2927,10 +2927,10 @@ Get all games. Successful request will return an array of [Game Objects](#get-ga
     summary|string|Summary of the games mod support.
     instructions_url|string|Link to a mod.io guide, modding wiki or a page where modders can learn how to make and submit mods.
     ugc_name|string|Word used to describe user-generated content (mods, items, addons etc).
-    presentation_option|integer|Presentation style used on the mod.io website:<br><br>__0__ =  Grid View: Displays mods in a grid<br>__1__ = Table View: Displays mods in a table
+    presentation_option|integer|Presentation style used on the mod.io website:<br><br>__0__ = Grid View: Displays mods in a grid<br>__1__ = Table View: Displays mods in a table
     submission_option|integer|Submission process modders must follow:<br><br>__0__ = Mod uploads must occur via the API using a tool created by the game developers<br>__1__ = Mod uploads can occur from anywhere, including the website and API
     curation_option|integer|Curation process used to approve mods:<br><br>__0__ = No curation: Mods are immediately available to play<br>__2__ = Full curation: All mods must be accepted by someone to be listed
-    community_options|integer|Community features enabled for this game:<br><br>__0__ = None<br>__1__ = Enable comments<br>__2__ = Enable guides<br>__?__ = Combine to find games with multiple options enabled (see [BITWISE fields](#bitwise-and-bitwise-and))
+    community_options|integer|Community features enabled for this game:<br><br>__0__ = None<br>__1__ = Enable comments<br>__2__ = Enable guides<br>__4__ = Pin on homepage<br>__8__ = Show on homepage<br>__16__ = Show more on homepage<br>__32__ = Allow change status<br>__?__ = Combine to find games with multiple options enabled (see [BITWISE fields](#bitwise-and-bitwise-and))
     monetisation_options|integer|Monetisation features mods can enable:<br><br>__0__ = None<br>__1__ = Enabled<br>__2__ = Allow creators to receive donations (recognition)<br>__4__ = Allow mods to be sold (marketplace)<br>__?__ = Combine to find games with multiple options enabled (see [BITWISE fields](#bitwise-and-bitwise-and))
     api_access_options|integer|Level of API access allowed by this game:<br><br>__0__ = None<br>__1__ = Allow 3rd parties to access this games API endpoints<br>__2__ = Allow mods to be downloaded directly (if disabled all download URLs will contain a frequently changing verification hash to stop unauthorized use)<br>__?__ = Combine to find games with multiple options enabled (see [BITWISE fields](#bitwise-and-bitwise-and))
     maturity_options|integer|Mature content setup for this game:<br><br>__0__ = Don't allow mature content in mods<br>__1__ = Allow mature content in mods<br>__2__ = This game is for mature audiences only<br>__?__ = Combine to find games with multiple options enabled (see [BITWISE fields](#bitwise-and-bitwise-and)
@@ -11409,15 +11409,15 @@ Get the current agreement (version) by type. Successful request will return a si
      __4__ = API Access Terms - [https://mod.io/apiterms](https://mod.io/apiterms)<br>
      __5__ = Monetisation Terms - [https://mod.io/monetisationterms](https://mod.io/monetisationterms)<br>
      __6__ = Acceptable Use Policy - [https://mod.io/aup](https://mod.io/aup)
-     
+
      There are three ways you can display mod.io agreements. Pick which is easiest and most suitable for your implementation.
-     
+
      __1. Linking to__ the applicable agreement using the URLs listed above.
-     
+
      __2. Using this endpoint__ to fetch the applicable agreement and create a UI to display it inline.
-     
+
      __3. Web browser overlay__ to display the applicable agreement inline. If doing this, we recommend prefixing the agreement URL path with `/legal` to remove all menus, and if wanting to remove all links add `?no_links=true` to the end of the URL. For example use:
-     
+
      - [https://mod.io/legal/terms](https://mod.io/legal/terms) to remove menus<br>
      - [https://mod.io/legal/terms?no_links=true](https://mod.io/legal/terms?no_links=true) to remove menus and links
 
@@ -12356,10 +12356,10 @@ Get all games the _authenticated user_ added or is a team member of. Successful 
     summary|string|Summary of the games mod support.
     instructions_url|string|Link to a mod.io guide, modding wiki or a page where modders can learn how to make and submit mods.
     ugc_name|string|Word used to describe user-generated content (mods, items, addons etc).
-    presentation_option|integer|Presentation style used on the mod.io website:<br><br>__0__ =  Grid View: Displays mods in a grid<br>__1__ = Table View: Displays mods in a table
+    presentation_option|integer|Presentation style used on the mod.io website:<br><br>__0__ = Grid View: Displays mods in a grid<br>__1__ = Table View: Displays mods in a table
     submission_option|integer|Submission process modders must follow:<br><br>__0__ = Mod uploads must occur via the API using a tool created by the game developers<br>__1__ = Mod uploads can occur from anywhere, including the website and API
     curation_option|integer|Curation process used to approve mods:<br><br>__0__ = No curation: Mods are immediately available to play<br>__2__ = Full curation: All mods must be accepted by someone to be listed
-    community_options|integer|Community features enabled for this game:<br><br>__0__ = None<br>__1__ = Enable comments<br>__2__ = Enable guides<br>__?__ = Combine to find games with multiple options enabled (see [BITWISE fields](#bitwise-and-bitwise-and))
+    community_options|integer|Community features enabled for this game:<br><br>__0__ = None<br>__1__ = Enable comments<br>__2__ = Enable guides<br>__4__ = Pin on homepage<br>__8__ = Show on homepage<br>__16__ = Show more on homepage<br>__32__ = Allow change status<br>__?__ = Combine to find games with multiple options enabled (see [BITWISE fields](#bitwise-and-bitwise-and))
     monetisation_options|integer|Monetisation features mods can enable:<br><br>__0__ = None<br>__1__ = Enabled<br>__2__ = Allow creators to receive donations (recognition)<br>__4__ = Allow mods to be sold (marketplace)<br>__?__ = Combine to find games with multiple options enabled (see [BITWISE fields](#bitwise-and-bitwise-and))
     api_access_options|integer|Level of API access allowed by this game:<br><br>__0__ = None<br>__1__ = Allow 3rd parties to access this games API endpoints<br>__2__ = Allow mods to be downloaded directly (if disabled all download URLs will contain a frequently changing verification hash to stop unauthorized use)<br>__?__ = Combine to find games with multiple options enabled (see [BITWISE fields](#bitwise-and-bitwise-and)
     maturity_options|integer|Mature content setup for this game:<br><br>__0__ = Don't allow mature content in mods<br>__1__ = Allow mature content in mods<br>__2__ = This game is for mature audiences only<br>__?__ = Combine to find games with multiple options enabled (see [BITWISE fields](#bitwise-and-bitwise-and)
@@ -12583,8 +12583,8 @@ Get all mod's the _authenticated user_ is subscribed to. Successful request will
     ---|---|---
     id|integer|Unique id of the mod.
     game_id|integer|Unique id of the parent game.
-    status|integer|Status of the mod (only game admins can filter by this field, see [status and visibility](#status-amp-visibility) for details):<br><br>__0__ = Not Accepted<br>__1__ = Accepted<br>__3__ = Deleted
-    visible|integer|Visibility of the mod (only game admins can filter by this field, see [status and visibility](#status-amp-visibility) for details):<br><br>__0__ = Hidden<br>__1__ = Public
+    status|integer|Status of the mod (only game admins can filter by this field, see [status and visibility](#status-amp-visibility) for details):<br><br>__0__ = Not accepted _(default)_<br>__1__ = Accepted _(default)_<br>__3__ = Deleted
+    visible|integer|Visibility of the mod (only game admins can filter by this field, see [status and visibility](#status-amp-visibility) for details):<br><br>__0__ = Hidden _(default)_<br>__1__ = Public _(default)_
     submitted_by|integer|Unique id of the user who has ownership of the mod.
     date_added|integer|Unix timestamp of date mod was registered.
     date_updated|integer|Unix timestamp of date mod was updated.
@@ -12857,8 +12857,8 @@ Get all mods the _authenticated user_ added or is a team member of. Successful r
     ---|---|---
     id|integer|Unique id of the mod.
     game_id|integer|Unique id of the parent game.
-    status|integer|Status of the mod (only game admins can filter by this field, see [status and visibility](#status-amp-visibility) for details):<br><br>__0__ = Not Accepted<br>__1__ = Accepted<br>__3__ = Deleted
-    visible|integer|Visibility of the mod (only game admins can filter by this field, see [status and visibility](#status-amp-visibility) for details):<br><br>__0__ = Hidden<br>__1__ = Public
+    status|integer|Status of the mod:<br><br>__0__ = Not accepted _(default)_<br>__1__ = Accepted _(default)_<br>__3__ = Deleted _(default)_
+    visible|integer|Visibility of the mod:<br><br>__0__ = Hidden _(default)_<br>__1__ = Public _(default)_
     submitted_by|integer|Unique id of the user who has ownership of the mod.
     date_added|integer|Unix timestamp of date mod was registered.
     date_updated|integer|Unix timestamp of date mod was updated.
@@ -12871,7 +12871,7 @@ Get all mods the _authenticated user_ added or is a team member of. Successful r
     metadata_blob|string|Metadata stored by the game developer.
     metadata_kvp|string|Colon-separated values representing the key-value pairs you want to filter the results by. If you supply more than one key-pair, separate the pairs by a comma. Will only filter by an exact key-pair match.
     tags|string|Comma-separated values representing the tags you want to filter the results by. If you specify multiple tags, only mods which have all tags will be returned, and only tags that are supported by the parent game can be applied. To determine what tags are eligible, see the tags values within `tag_options` column on the parent [Game Object](#game-object). If you want to ensure mods returned do not contain particular tag(s), you can use the `tags-not-in` filter either independently or alongside this filter.
-    platform_status|string|Filter results by their current platform status, valid values are `pending_only` and `live_and_pending` (only game admins can filter by this field, see [status and visibility](#status-amp-visibility) for details).<br><br>__NOTE:__ that this parameter is only considered in the request if the parent game has enabled [cross-platform filtering](#targeting-a-platform).
+    platform_status|string|Filter results by their current platform status, valid values are `pending_only` and `live_and_pending`.<br><br>__NOTE:__ that this parameter is only considered in the request if the parent game has enabled [cross-platform filtering](#targeting-a-platform).
     platforms|string|Filter results by their current platform, accepts multiple platforms as comma-separated values (e.g. `ps4,switch`), valid values are `all`, `windows`, `mac`, `linux`, `android`, `ios`, `xboxone`, `xboxseriesx`, `ps4`, `ps5`, `switch`, `oculus` (only game admins can filter by this field, see [status and visibility](#status-amp-visibility) for details).<br><br>__NOTE:__ that this parameter will take precedence over the header from [cross-platform filtering](#targeting-a-platform).
 
     Sort|Description
@@ -14708,10 +14708,10 @@ submitted_by|object|Deprecated: Value will always be an empty object, this will 
 date_added|integer|Unix timestamp of date game was registered.
 date_updated|integer|Unix timestamp of date game was updated.
 date_live|integer|Unix timestamp of date game was set live.
-presentation_option|integer|Presentation style used on the mod.io website:<br><br>__0__ =  Grid View: Displays mods in a grid<br>__1__ = Table View: Displays mods in a table
+presentation_option|integer|Presentation style used on the mod.io website:<br><br>__0__ = Grid View: Displays mods in a grid<br>__1__ = Table View: Displays mods in a table
 submission_option|integer|Submission process modders must follow:<br><br>__0__ = Mod uploads must occur via the API using a tool created by the game developers<br>__1__ = Mod uploads can occur from anywhere, including the website and API
 curation_option|integer|Curation process used to approve mods:<br><br>__0__ = No curation: Mods are immediately available to play<br>__2__ = Full curation: All mods must be accepted by someone to be listed
-community_options|integer|Community features enabled for this game:<br><br>__0__ = All of the options below are disabled<br>__1__ = Enable comments<br>__2__ = Enable guides<br>__?__ = Add the options you want together, to enable multiple features (see [BITWISE fields](#bitwise-and-bitwise-and))
+community_options|integer|Community features enabled for this game:<br><br>__0__ = All of the options below are disabled<br>__1__ = Enable comments<br>__2__ = Enable guides<br>__4__ = Pin on homepage<br>__8__ = Show on homepage<br>__16__ = Show more on homepage<br>__32__ = Allow change status<br>__?__ = Add the options you want together, to enable multiple features (see [BITWISE fields](#bitwise-and-bitwise-and))
 monetisation_options|integer|Monetisation features mods can enable:<br><br>__0__ = All of the options below are disabled<br>__1__ = Enabled<br>__2__ = Enable recognition<br>__4__ = Enable marketplace<br>__?__ = Add the options you want together, to enable multiple features (see [BITWISE fields](#bitwise-and-bitwise-and))
 revenue_options|integer|Deprecated: Please use monetisation_options instead, this will be removed in subsequent API version.
 api_access_options|integer|Level of API access allowed by this game:<br><br>__0__ = All of the options below are disabled<br>__1__ = Allow 3rd parties to access this games API endpoints<br>__2__ = Allow mods to be downloaded directly (if disabled all download URLs will contain a frequently changing verification hash to stop unauthorized use)<br>__?__ = Add the options you want together, to enable multiple features (see [BITWISE fields](#bitwise-and-bitwise-and))
