@@ -944,7 +944,12 @@ The purpose of this endpoint is to provide the text, links and buttons you can u
 
      To make this easy to manage, all of the 3rd party authentication flows have a `terms_agreed` field which should be set to `false` by default. If the user has agreed to the latest policies, their authentication will proceed as normal, however if their agreement is required and `terms_agreed` is set to `false` an error `403 Forbidden (error_ref 11074)` will be returned. When you receive this error, you must collect the users agreement before resubmitting the authentication flow with `terms_agreed` set to `true`, which will be recorded.
 
-     __NOTE:__ You must make sure the Terms of Use and Privacy Policy are correctly linked, or displayed inline following the instructions provided in the [agreements endpoints](#agreements).
+     __NOTE:__ You must make sure the Terms of Use and Privacy Policy are correctly linked, or displayed inline using the [agreements endpoints](#agreements) to get the latest versions.
+
+     If you wish to display the agreements in a web browser overlay, we recommend adding __/widget__ and __?no_links=true__ to the end of the agreement URLs, to remove the menus and external links, for example:
+
+     - [https://mod.io/terms`/widget?no_links=true`](https://mod.io/terms/widget?no_links=true)<br>
+     - [https://mod.io/privacy`/widget?no_links=true`](https://mod.io/privacy/widget?no_links=true)
 
      __NOTE:__ You can use your own text and process, but be aware that you are responsible for ensuring that the users agreement is properly collected and reported. Failure to do so correctly is a breach of the [mod.io Game Terms](https://mod.io/gameterms/widget). If your game does not authenticate users or only uses the email authentication flow, you do not need to implement this dialog, but you should link to the mod.io Terms of Use and Privacy Policy in your Privacy Policy/EULA.
 
@@ -1670,136 +1675,6 @@ Status|Meaning|Error Ref|Description|Response Schema
 To perform this request, you must be authenticated via one of the following methods:
 <a href="#authentication">api_key</a>
 </aside>
-## GOG Galaxy
-
-> Example request
-
-```shell
-# You can also use wget
-curl -X POST https://api.mod.io/v1/external/galaxyauth?api_key=YourApiKey \
-  -H 'Content-Type: application/x-www-form-urlencoded' \ 
-  -H 'Accept: application/json' \
-  --data-urlencode 'appdata=GCL671bwZ/+zUeOWc0M'
-
-```
-
-```http
-POST https://api.mod.io/v1/external/galaxyauth?api_key=YourApiKey HTTP/1.1
-Host: api.mod.io
-Content-Type: application/x-www-form-urlencoded
-Accept: application/json
-
-```
-
-```javascript
-var headers = {
-  'Content-Type':'application/x-www-form-urlencoded',
-  'Accept':'application/json'
-
-};
-
-$.ajax({
-  url: 'https://api.mod.io/v1/external/galaxyauth',
-  method: 'post',
-  data: '?api_key=YourApiKey',
-  headers: headers,
-  success: function(data) {
-    console.log(JSON.stringify(data));
-  }
-})
-```
-
-```javascript--nodejs
-const request = require('node-fetch');
-const inputBody = '{
-  "appdata": "GCL671bwZ/+zUeOWc0M"
-}';
-const headers = {
-  'Content-Type':'application/x-www-form-urlencoded',
-  'Accept':'application/json'
-
-};
-
-fetch('https://api.mod.io/v1/external/galaxyauth?api_key=YourApiKey',
-{
-  method: 'POST',
-  body: inputBody,
-  headers: headers
-})
-.then(function(res) {
-    return res.json();
-}).then(function(body) {
-    console.log(body);
-});
-```
-
-```python
-import requests
-headers = {
-  'Content-Type': 'application/x-www-form-urlencoded',
-  'Accept': 'application/json'
-}
-
-r = requests.post('https://api.mod.io/v1/external/galaxyauth', params={
-  'api_key': 'YourApiKey'
-}, headers = headers)
-
-print r.json()
-```
-
-```java
-URL obj = new URL("https://api.mod.io/v1/external/galaxyauth?api_key=YourApiKey");
-HttpURLConnection con = (HttpURLConnection) obj.openConnection();
-con.setRequestMethod("POST");
-int responseCode = con.getResponseCode();
-BufferedReader in = new BufferedReader(
-    new InputStreamReader(con.getInputStream()));
-String inputLine;
-StringBuffer response = new StringBuffer();
-while ((inputLine = in.readLine()) != null) {
-    response.append(inputLine);
-}
-in.close();
-System.out.println(response.toString());
-```
-
-`POST /external/galaxyauth`
-
-Request an access token on behalf of a GOG Galaxy user. To use this functionality you *must* add your games [encrypted app ticket key](https://devportal.gog.com/welcome) from GOG Galaxy, to the *Game Admin > Settings* page of your games profile on mod.io. A Successful request will return an [Access Token Object](#access-token-object).
-
-     Parameter|Type|Required|Description
-     ---|---|---|---|
-     appdata|string|true|The GOG Galaxy users [Encrypted App Ticket](https://cdn.gog.com/open/galaxy/sdk/1.133.3/Documentation/classgalaxy_1_1api_1_1IUser.html#a352802aab7a6e71b1cd1b9b1adfd53d8) provided by the GOG Galaxy SDK. <br><br>Parameter content *MUST* be the encrypted string returned in the buffer after calling [IUser::GetEncryptedAppTicket()](https://cdn.gog.com/open/galaxy/sdk/1.133.3/Documentation/classgalaxy_1_1api_1_1IUser.html#a96af6792efc260e75daebedca2cf74c6) within the Galaxy SDK. Unlike the [Steam Authentication](#steam) endpoint, you do not need to encode the encrypted string as this is already done by the Galaxy SDK.<br><br>__NOTE:__ Due to the encrypted app ticket containing special characters, you must URL encode the string before sending the request to ensure it is successfully sent to our servers otherwise you may encounter an `422 Unprocessable Entity` response. For example, [cURL](https://ec.haxx.se/http-post.html) will do this for you by using the `--data-urlencode` option.
-     email|string||The users email address (optional but recommended to help users recover lost accounts). If supplied, and the respective user does not have an email registered for their account we will send a confirmation email to confirm they have ownership of the specified email.<br><br>__NOTE__: If the user already has an email on record with us, this parameter will be ignored. This parameter should also be urlencoded before the request is sent.
-     date_expires|integer||Unix timestamp of date in which the returned token will expire. Value cannot be higher than the default value which is a common year (unix timestamp + 31536000 seconds). Using a token after it's expiry time has elapsed will result in a `401 Unauthorized` response.
-     terms_agreed|boolean||This MUST be set to `false` unless you have collected the [users agreement](#terms) prior to calling this endpoint in which case it can be set to `true` and will be recorded.<br><br>__NOTE:__ If this is set to `false` and the user has not agreed to the latest mod.io Terms of Use and Privacy Policy, an error `403 Forbidden (error_ref 11074)` will be returned and you will need to collect the [users agreement](#terms) and retry with this value set to `true` to authenticate the user.
-
-> Example response
-
-```json
-{
-  "code": 200,
-  "access_token": "eyJ0eXAiOiXKV1QibCJhbLciOiJeiUzI1.....",
-  "date_expires": 1570673249
-}
-
-```
-<h3 id="GOG-Galaxy-responses">Responses</h3>
-
-Status|Meaning|Error Ref|Description|Response Schema
----|---|----|---|---|
-200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)||Successful Request|[Access Token Object](#schemaaccess_token_object)
-401|[Unauthorized](https://tools.ietf.org/html/rfc7235#section-3.1)|14001|The game associated with the supplied api_key is currently not available.|[Error Object](#schemaerror_object)
-401|[Unauthorized](https://tools.ietf.org/html/rfc7235#section-3.1)|11021|The GOG Galaxy encrypted app ticket was invalid.|[Error Object](#schemaerror_object)
-401|[Unauthorized](https://tools.ietf.org/html/rfc7235#section-3.1)|11032|mod.io was unable to verify the credentials against the external service provider.|[Error Object](#schemaerror_object)
-403|[Forbidden](https://tools.ietf.org/html/rfc7231#section-6.5.3)|11016|The api_key supplied in the request must be associated with a game.|[Error Object](#schemaerror_object)
-403|[Forbidden](https://tools.ietf.org/html/rfc7231#section-6.5.3)|11017|The api_key supplied in the request is for test environment purposes only and cannot be used for this functionality.|[Error Object](#schemaerror_object)
-403|[Forbidden](https://tools.ietf.org/html/rfc7231#section-6.5.3)|11022|The secret GOG Galaxy app ticket associated with this game has not been configured.|[Error Object](#schemaerror_object)
-403|[Forbidden](https://tools.ietf.org/html/rfc7231#section-6.5.3)|11074|The user has not agreed to the mod.io Terms of Use. Please see terms_agreed parameter description and the [Terms](#terms) endpoint for more information.|[Error Object](#schemaerror_object)
-<aside class="auth-notice">
-To perform this request, you must be authenticated via one of the following methods:
-<a href="#authentication">api_key</a>
-</aside>
 ## Epic Games
 
 > Example request
@@ -1923,137 +1798,6 @@ Status|Meaning|Error Ref|Description|Response Schema
 401|[Unauthorized](https://tools.ietf.org/html/rfc7235#section-3.1)|11048|mod.io was unable to validate the credentials with Epic Games.|[Error Object](#schemaerror_object)
 401|[Unauthorized](https://tools.ietf.org/html/rfc7235#section-3.1)|11045|The Epic Games access token is not valid yet.|[Error Object](#schemaerror_object)
 401|[Unauthorized](https://tools.ietf.org/html/rfc7235#section-3.1)|11046|The Epic Games access token has expired. You should request another token from the EOS SDK and ensure it is delivered to mod.io before it expires.|[Error Object](#schemaerror_object)
-403|[Forbidden](https://tools.ietf.org/html/rfc7231#section-6.5.3)|11074|The user has not agreed to the mod.io Terms of Use. Please see terms_agreed parameter description and the [Terms](#terms) endpoint for more information.|[Error Object](#schemaerror_object)
-<aside class="auth-notice">
-To perform this request, you must be authenticated via one of the following methods:
-<a href="#authentication">api_key</a>
-</aside>
-## itch.io
-
-> Example request
-
-```shell
-# You can also use wget
-curl -X POST https://api.mod.io/v1/external/itchioauth?api_key=YourApiKey \
-  -H 'Content-Type: application/x-www-form-urlencoded' \ 
-  -H 'Accept: application/json' \
-  -d 'itchio_token=eyJhbXciOiJIUzI1Lizs....'
-
-```
-
-```http
-POST https://api.mod.io/v1/external/itchioauth?api_key=YourApiKey HTTP/1.1
-Host: api.mod.io
-Content-Type: application/x-www-form-urlencoded
-Accept: application/json
-
-```
-
-```javascript
-var headers = {
-  'Content-Type':'application/x-www-form-urlencoded',
-  'Accept':'application/json'
-
-};
-
-$.ajax({
-  url: 'https://api.mod.io/v1/external/itchioauth',
-  method: 'post',
-  data: '?api_key=YourApiKey',
-  headers: headers,
-  success: function(data) {
-    console.log(JSON.stringify(data));
-  }
-})
-```
-
-```javascript--nodejs
-const request = require('node-fetch');
-const inputBody = '{
-  "itchio_token": "eyJhbXciOiJIUzI1Lizs...."
-}';
-const headers = {
-  'Content-Type':'application/x-www-form-urlencoded',
-  'Accept':'application/json'
-
-};
-
-fetch('https://api.mod.io/v1/external/itchioauth?api_key=YourApiKey',
-{
-  method: 'POST',
-  body: inputBody,
-  headers: headers
-})
-.then(function(res) {
-    return res.json();
-}).then(function(body) {
-    console.log(body);
-});
-```
-
-```python
-import requests
-headers = {
-  'Content-Type': 'application/x-www-form-urlencoded',
-  'Accept': 'application/json'
-}
-
-r = requests.post('https://api.mod.io/v1/external/itchioauth', params={
-  'api_key': 'YourApiKey'
-}, headers = headers)
-
-print r.json()
-```
-
-```java
-URL obj = new URL("https://api.mod.io/v1/external/itchioauth?api_key=YourApiKey");
-HttpURLConnection con = (HttpURLConnection) obj.openConnection();
-con.setRequestMethod("POST");
-int responseCode = con.getResponseCode();
-BufferedReader in = new BufferedReader(
-    new InputStreamReader(con.getInputStream()));
-String inputLine;
-StringBuffer response = new StringBuffer();
-while ((inputLine = in.readLine()) != null) {
-    response.append(inputLine);
-}
-in.close();
-System.out.println(response.toString());
-```
-
-`POST /external/itchioauth`
-
-Request an access token on behalf of an itch.io user via the itch.io desktop app. Due to the desktop application allowing multiple users to be logged in at once, if more than one user is logged in then the user at the top of that list on the itch.io login dialog will be the authenticating user. A Successful request will return an [Access Token Object](#access-token-object).
-
-     __HINT:__ If you want to overlay the mod.io site in-game on itch.io, we recommend you add `?portal=itchio` to the end of the URL you open which will prompt the user to login with itch.io. See [Web Overlay Authentication](#web-overlay-authentication) for details.
-
-     Parameter|Type|Required|Description
-     ---|---|---|---|
-     itchio_token|string|true|The [JWT Token](https://itch.io/docs/itch/integrating/manifest-actions.html) provided by the itch.io desktop application to your game as the environment variable `ITCHIO_API_KEY`. You must setup your itch.io app manifest to include the [API scope](https://itch.io/docs/itch/integrating/manifest-actions.html) to force itch.io to set this variable.
-     email|string||The users email address (optional but recommended to help users recover lost accounts). If supplied, and the respective user does not have an email registered for their account we will send a confirmation email to confirm they have ownership of the specified email.<br><br>__NOTE__: If the user already has an email on record with us, this parameter will be ignored. This parameter should also be urlencoded before the request is sent.
-     date_expires|integer||Unix timestamp of date in which the returned token will expire. Value cannot be higher than the default value which is a week (unix timestamp + 604800 seconds). Using a token after it's expiry time has elapsed will result in a `401 Unauthorized` response.
-     terms_agreed|boolean||This MUST be set to `false` unless you have collected the [users agreement](#terms) prior to calling this endpoint in which case it can be set to `true` and will be recorded.<br><br>__NOTE:__ If this is set to `false` and the user has not agreed to the latest mod.io Terms of Use and Privacy Policy, an error `403 Forbidden (error_ref 11074)` will be returned and you will need to collect the [users agreement](#terms) and retry with this value set to `true` to authenticate the user.
-
-> Example response
-
-```json
-{
-  "code": 200,
-  "access_token": "eyJ0eXAiOiXKV1QibCJhbLciOiJeiUzI1.....",
-  "date_expires": 1570673249
-}
-
-```
-<h3 id="itch.io-responses">Responses</h3>
-
-Status|Meaning|Error Ref|Description|Response Schema
----|---|----|---|---|
-200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)||Successful Request|[Access Token Object](#schemaaccess_token_object)
-401|[Unauthorized](https://tools.ietf.org/html/rfc7235#section-3.1)|14001|The game associated with the supplied api_key is currently not available.|[Error Object](#schemaerror_object)
-401|[Unauthorized](https://tools.ietf.org/html/rfc7235#section-3.1)|11032|mod.io was unable to verify the credentials against the external service provider.|[Error Object](#schemaerror_object)
-401|[Unauthorized](https://tools.ietf.org/html/rfc7235#section-3.1)|11031|mod.io was unable to get account data from itch.io servers.|[Error Object](#schemaerror_object)
-403|[Forbidden](https://tools.ietf.org/html/rfc7231#section-6.5.3)|11016|The api_key supplied in the request must be associated with a game.|[Error Object](#schemaerror_object)
-403|[Forbidden](https://tools.ietf.org/html/rfc7231#section-6.5.3)|11017|The api_key supplied in the request is for test environment purposes only and cannot be used for this functionality.|[Error Object](#schemaerror_object)
 403|[Forbidden](https://tools.ietf.org/html/rfc7231#section-6.5.3)|11074|The user has not agreed to the mod.io Terms of Use. Please see terms_agreed parameter description and the [Terms](#terms) endpoint for more information.|[Error Object](#schemaerror_object)
 <aside class="auth-notice">
 To perform this request, you must be authenticated via one of the following methods:
@@ -3443,6 +3187,7 @@ Get all mods for the corresponding game. Successful request will return an array
         "virus_positive": 0,
         "virustotal_hash": "",
         "filesize": 15181,
+        "filesize_uncompressed": 16384,
         "filehash": {
           "md5": "2d4a0e2d7273db6b0a94b0740a88ad0d"
         },
@@ -3683,6 +3428,7 @@ Get a mod. Successful request will return a single [Mod Object](#mod-object).
     "virus_positive": 0,
     "virustotal_hash": "",
     "filesize": 15181,
+    "filesize_uncompressed": 16384,
     "filehash": {
       "md5": "2d4a0e2d7273db6b0a94b0740a88ad0d"
     },
@@ -3954,6 +3700,7 @@ Add a mod. Successful request will return the newly created [Mod Object](#mod-ob
     "virus_positive": 0,
     "virustotal_hash": "",
     "filesize": 15181,
+    "filesize_uncompressed": 16384,
     "filehash": {
       "md5": "2d4a0e2d7273db6b0a94b0740a88ad0d"
     },
@@ -4155,27 +3902,9 @@ Edit details for a mod. If you want to update the `logo` or media associated wit
     homepage_url|string||Official homepage for your mod. Must be a valid URL.
     stock|integer||Maximium number of subscribers for this mod. A value of 0 disables this limit.
     maturity_option|integer||Choose if this mod contains any of the following mature content.<br><br>__NOTE:__ The value of this field will default to 0 unless the parent game allows you to flag mature content (see `maturity_options` field in [Game Object](#game-object)). <br><br>__0__ = None set<br>__1__ = Alcohol<br>__2__ = Drugs<br>__4__ = Violence<br>__8__ = Explicit<br>__?__ = Add the options you want together, to enable multiple options (see [BITWISE fields](#bitwise-and-bitwise-and))
-    community_options|integer||Community features enabled for this mod:<br><br>__0__ = All of the options below are disabled<br>__1__ = Enable comments<br>__?__ = Add the options you want together, to enable multiple options (see [BITWISE fields](#bitwise-and-bitwise-and))
+    community_options|integer||Community features enabled for this mod:<br><br>__0__ = All of the options below are disabled<br>__1__ = Enable comments<br>_64__ = Enable previews<br>__?__ = Add the options you want together, to enable multiple options (see [BITWISE fields](#bitwise-and-bitwise-and))
     metadata_blob|string||Metadata stored by the game developer which may include properties as to how the item works, or other information you need to display. Metadata can also be stored as searchable [key value pairs](#metadata), and to individual [mod files](#get-modfiles).
 
-##### » name
-Rules for updating a mod. We get the original
-array and simply strip out the required field.
-##### » summary
-Rules for updating a mod. We get the original
-array and simply strip out the required field.
-##### » description
-Rules for updating a mod. We get the original
-array and simply strip out the required field.
-##### » logo
-Rules for updating a mod. We get the original
-array and simply strip out the required field.
-##### » homepage_url
-Rules for updating a mod. We get the original
-array and simply strip out the required field.
-##### » tags
-Rules for updating a mod. We get the original
-array and simply strip out the required field.
 > Example response
 
 ```json
@@ -4249,6 +3978,7 @@ array and simply strip out the required field.
     "virus_positive": 0,
     "virustotal_hash": "",
     "filesize": 15181,
+    "filesize_uncompressed": 16384,
     "filehash": {
       "md5": "2d4a0e2d7273db6b0a94b0740a88ad0d"
     },
@@ -4534,7 +4264,7 @@ Get all files that are published for the corresponding mod. Successful request w
     date_added|integer|Unix timestamp of date file was added.
     date_scanned|integer|Unix timestamp of date file was virus scanned.
     virus_status|integer|Current virus scan status of the file. For newly added files that have yet to be scanned this field will change frequently until a scan is complete:<br><br>__0__ = Not scanned<br>__1__ = Scan complete<br>__2__ = In progress<br>__3__ = Too large to scan<br>__4__ = File not found<br>__5__ = Error Scanning
-    virus_positive|integer|Was a virus detected:<br><br>__0__ = No threats detected<br>__1__ = Flagged as malicious
+    virus_positive|integer|Was a virus detected:<br><br>__0__ = No threats detected<br>__1__ = Flagged as malicious<br>__2__ = Flagged as containing potentially harmful files (i.e. EXEs)
     filesize|integer|Size of the file in bytes.
     filehash|string|MD5 hash of the file.
     filename|string|Filename including extension.
@@ -4557,6 +4287,7 @@ Get all files that are published for the corresponding mod. Successful request w
       "virus_positive": 0,
       "virustotal_hash": "",
       "filesize": 15181,
+      "filesize_uncompressed": 16384,
       "filehash": {
         "md5": "2d4a0e2d7273db6b0a94b0740a88ad0d"
       },
@@ -4701,6 +4432,7 @@ Get a file. Successful request will return a single [Modfile Object](#modfile-ob
   "virus_positive": 0,
   "virustotal_hash": "",
   "filesize": 15181,
+  "filesize_uncompressed": 16384,
   "filehash": {
     "md5": "2d4a0e2d7273db6b0a94b0740a88ad0d"
   },
@@ -4869,6 +4601,7 @@ Upload a file for the corresponding mod. Successful request will return the newl
   "virus_positive": 0,
   "virustotal_hash": "",
   "filesize": 15181,
+  "filesize_uncompressed": 16384,
   "filehash": {
     "md5": "2d4a0e2d7273db6b0a94b0740a88ad0d"
   },
@@ -5029,6 +4762,7 @@ Edit the details of a published file. If you want to update fields other than th
   "virus_positive": 0,
   "virustotal_hash": "",
   "filesize": 15181,
+  "filesize_uncompressed": 16384,
   "filehash": {
     "md5": "2d4a0e2d7273db6b0a94b0740a88ad0d"
   },
@@ -5300,6 +5034,7 @@ Manage the platform status of a particular modfile. This endpoint does not set a
   "virus_positive": 0,
   "virustotal_hash": "",
   "filesize": 15181,
+  "filesize_uncompressed": 16384,
   "filehash": {
     "md5": "2d4a0e2d7273db6b0a94b0740a88ad0d"
   },
@@ -6261,6 +5996,7 @@ Subscribe the _authenticated user_ to a corresponding mod. No body parameters ar
     "virus_positive": 0,
     "virustotal_hash": "",
     "filesize": 15181,
+    "filesize_uncompressed": 16384,
     "filehash": {
       "md5": "2d4a0e2d7273db6b0a94b0740a88ad0d"
     },
@@ -10572,9 +10308,15 @@ System.out.println(response.toString());
 
 Get all dependencies the chosen mod has selected. This is useful if a mod requires other mods be installed for it to run. Successful request will return an array of [Mod Dependencies Objects](#get-mod-dependencies-2).
 
-    __IMPORTANT:__ Because of the complexity of supporting nested dependencies, we recommend you treat dependencies as a recommendation for your players, and do not process dependencies automatically when installing a mod unless absolutely required. Successful request will return an array of [Mod Dependencies Objects](#mod-dependencies-object).
+    __NOTE:__ This endpoint returns all mod dependencies, irrespective of their status, visibility or platform support. If your game automatically installs dependencies, we recommend moderating the use of this feature strictly, to ensure creators are not selecting _soft_ dependencies to promote or credit other mods, and dependencies are checked for suitability prior to install.
 
-    __NOTE:__ Some modders might select _soft_ dependencies to promote or credit other mods. We advise against this but it is possible to do, and is one of the reasons why we recommend against processing nested dependencies automatically.
+    For example: the official mod.io plugins where dependency support is enabled, typically subscribe users to all dependencies, so the mods suitability and synchronization can be managed by the subscription process. Following a similar process is recommend, particularly if enabling `recursive` dependency fetching, given it can result in many mods being returned.
+
+    __DEPRECATION WARNING__: By default, this endpoint does not return dependencies recursively. However, in a future version of the API, dependencies _will_ be shown recursively by default. We suggest that you remove any custom implementation you may have in order to retrieve dependencies recursively, and instead use the `?recursive=true` query parameter to fetch all dependencies in a single request.
+
+    Filter|Type|Description
+    ---|---|---
+    recursive|integer|Recommended. Include child dependencies in a recursive manner. A value of `true` will display dependencies up to a maximum depth of 5. A value of `false` will only display immediate dependencies.<br><br>Defaults to `false`.<br><br>__NOTE:__ This will be enabled by default in API v2.
 
 > Example response
 
@@ -10584,7 +10326,44 @@ Get all dependencies the chosen mod has selected. This is useful if a mod requir
     {
       "mod_id": 231,
       "name": "Example Mod",
-      "date_added": 1499841487
+      "name_id": "rogue-knight-hd-pack",
+      "date_added": 1499841487,
+      "dependency_depth": 0,
+      "logo": {
+        "filename": "card.png",
+        "original": "https://assets.modcdn.io/images/placeholder/card.png",
+        "thumb_320x180": "https://assets.modcdn.io/images/placeholder/card.png",
+        "thumb_640x360": "https://assets.modcdn.io/images/placeholder/card.png",
+        "thumb_1280x720": "https://assets.modcdn.io/images/placeholder/card.png"
+      },
+      "modfile": {
+        "id": 2,
+        "mod_id": 2,
+        "date_added": 1499841487,
+        "date_scanned": 1499841487,
+        "virus_status": 0,
+        "virus_positive": 0,
+        "virustotal_hash": "",
+        "filesize": 15181,
+        "filesize_uncompressed": 16384,
+        "filehash": {
+          "md5": "2d4a0e2d7273db6b0a94b0740a88ad0d"
+        },
+        "filename": "rogue-knight-v1.zip",
+        "version": "1.3",
+        "changelog": "VERSION 1.3 -- Changes -- Fixed critical castle floor bug.",
+        "metadata_blob": "rogue,hd,high-res,4k,hd textures",
+        "download": {
+          "binary_url": "https://api.mod.io/v1/games/1/mods/1/files/1/download/c489a0354111a4d76640d47f0cdcb294",
+          "date_expires": 1579316848
+        },
+        "platforms": [
+          {
+            "platform": "windows",
+            "status": 1
+          }
+        ]
+      }
     },
     {
         ...
@@ -11269,7 +11048,12 @@ The purpose of this endpoint is enable users to report a resource (game, mod or 
 
     <aside class='consent'>Report content that is not working, or violates the mod.io Terms of Use using the form below. If you’d like to report Copyright Infringement and are the Copyright holder, select "<a href='#' class='toggledmca'>DMCA</a>" as the report type.<br><br>Be aware all details provided will be shared with mod.io staff and the games moderators for review, and maybe shared with the content creator.<br><br><label>__Reason for reporting*__<br><select class='checkdmca' required><option value='' selected></option><option value='1'>DMCA</option><option value='2'>Not working</option><option value='3'>Rude content</option><option value='4'>Illegal content</option><option value='5'>Stolen content</option><option value='6'>False information</option><option value='7'>Other</option></select></label><br><br><label>__Email__<br>Optional, if you wish to be contacted if necessary regarding your report.<br><input type='email' class='text'></label><br><br><label class='dmca' style='display: none'>__Company or name whose IP is being infringed__<br><input type='text' class='text'><br><br></label><label>__Details of your report*__<br>To help process your report, include all relevant information and links.<br><textarea cols='80' rows='3' style='width: 100%' required></textarea></label><br><br><label class='dmca checkbox' style='display: none'><input type='checkbox'> I certify that I am the copyright owner or I am authorized to act on the copyright owner's behalf in this situation.<br><br></label><label class='dmca checkbox' style='display: none'><input type='checkbox'> I certify that all material in this claim is correct and not authorized by the copyright owner, its agent, or the law.<br><br></label><div style='text-align:center'><span class='versionwrap cursor'> &nbsp; &nbsp; Submit Report &nbsp; &nbsp; </span> <span class='versionwrap outline cursor'>Cancel</span><br><br>[Terms of Use](https://mod.io/terms/widget) - [Privacy Policy](https://mod.io/privacy/widget)<br></div></aside>
 
-    __NOTE:__ If implementing your own report dialog, the Terms of Use and Privacy Policy must be correctly linked, or displayed inline following the instructions provided in the [agreements endpoints](#agreements).
+    __NOTE:__ If implementing your own report dialog, the Terms of Use and Privacy Policy must be correctly linked, or displayed inline using the [agreements endpoints](#agreements) to get the latest versions.
+
+    If you wish to display the agreements in a web browser overlay, we recommend adding __/widget__ and __?no_links=true__ to the end of the agreement URLs, to remove the menus and external links, for example:
+
+    - [https://mod.io/terms`/widget?no_links=true`](https://mod.io/terms/widget?no_links=true)<br>
+    - [https://mod.io/privacy`/widget?no_links=true`](https://mod.io/privacy/widget?no_links=true)
 
     __NOTE:__ If you prefer to display the report page in a web browser overlay, and you know the resource you want to report, the best URL to use is: __https://mod.io/report/`resource`/`id`/widget__
 
@@ -11600,7 +11384,7 @@ To perform this request, you must be authenticated via one of the following meth
 </aside>
 # Users
 
-## Mute a user
+## Mute a User
 
 > Example request
 
@@ -11701,7 +11485,7 @@ Mute a user. This will prevent mod.io from returning mods to you authored by the
  204 No Content 
 
 ```
-<h3 id="Mute-a-user-responses">Responses</h3>
+<h3 id="Mute-a-User-responses">Responses</h3>
 
 Status|Meaning|Error Ref|Description|Response Schema
 ---|---|----|---|---|
@@ -11712,7 +11496,7 @@ Status|Meaning|Error Ref|Description|Response Schema
 To perform this request, you must be authenticated via one of the following methods:
 <a href="#authentication">OAuth 2</a> (Scopes: web)
 </aside>
-## Unmute a user
+## Unmute a User
 
 > Example request
 
@@ -11813,7 +11597,7 @@ Unmute a previously muted user. This will re-enable mod.io to returning mods to 
  204 No Content 
 
 ```
-<h3 id="Unmute-a-user-responses">Responses</h3>
+<h3 id="Unmute-a-User-responses">Responses</h3>
 
 Status|Meaning|Error Ref|Description|Response Schema
 ---|---|----|---|---|
@@ -12210,6 +11994,7 @@ Get all modfiles the _authenticated user_ uploaded. Successful request will retu
       "virus_positive": 0,
       "virustotal_hash": "",
       "filesize": 15181,
+      "filesize_uncompressed": 16384,
       "filehash": {
         "md5": "2d4a0e2d7273db6b0a94b0740a88ad0d"
       },
@@ -12682,6 +12467,7 @@ Get all mod's the _authenticated user_ is subscribed to. Successful request will
         "virus_positive": 0,
         "virustotal_hash": "",
         "filesize": 15181,
+        "filesize_uncompressed": 16384,
         "filehash": {
           "md5": "2d4a0e2d7273db6b0a94b0740a88ad0d"
         },
@@ -12956,6 +12742,7 @@ Get all mods the _authenticated user_ added or is a team member of. Successful r
         "virus_positive": 0,
         "virustotal_hash": "",
         "filesize": 15181,
+        "filesize_uncompressed": 16384,
         "filehash": {
           "md5": "2d4a0e2d7273db6b0a94b0740a88ad0d"
         },
@@ -13959,21 +13746,6 @@ Update an existing guide. Successful request will return the updated [Guide Obje
     tags[]|string||Tags to apply to the guide. Every tag to apply requires a separate field with tags[] as the key (eg. tags[]=tag1, tags[]=tag2).<br><br>__NOTE:__ When editing a guide any tags you add or remove from the existing tags list will be added/removed, so if you do not wish to remove any tags you must re-submit all existing tags.
     date_live|integer||Unix timestamp of when this guide should go live. To release the guide immediately provide the current time along with the `status` 1. If this field is not provided and the `status` is 0, the guide will not be released.
 
-##### » name
-Rules for updating a mod. We get the original
-array and simply strip out the required field.
-##### » summary
-Rules for updating a mod. We get the original
-array and simply strip out the required field.
-##### » description
-Rules for updating a mod. We get the original
-array and simply strip out the required field.
-##### » logo
-Rules for updating a mod. We get the original
-array and simply strip out the required field.
-##### » date_live
-Rules for updating a mod. We get the original
-array and simply strip out the required field.
 > Example response
 
 ```json
@@ -14275,115 +14047,6 @@ Get all guide tags for a game. Successful request will return an array of [Guide
 Status|Meaning|Error Ref|Description|Response Schema
 ---|---|----|---|---|
 200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)||Successful Request|[Get Guide Tags](#schemaget_guide_tags)
-<aside class="auth-notice">
-To perform this request, you must be authenticated via one of the following methods:
-<a href="#authentication">api_key</a>, <a href="#authentication">OAuth 2</a> (Scopes: read)
-</aside>
-# Price
-
-## Get Mod Price
-
-> Example request
-
-```shell
-# You can also use wget
-curl -X GET https://api.mod.io/v1/games/{game-id}/mods/{mod-id}/price?api_key=YourApiKey \
-  -H 'Accept: application/json'
-
-```
-
-```http
-GET https://api.mod.io/v1/games/{game-id}/mods/{mod-id}/price?api_key=YourApiKey HTTP/1.1
-Host: api.mod.io
-
-Accept: application/json
-
-```
-
-```javascript
-var headers = {
-  'Accept':'application/json'
-
-};
-
-$.ajax({
-  url: 'https://api.mod.io/v1/games/{game-id}/mods/{mod-id}/price',
-  method: 'get',
-  data: '?api_key=YourApiKey',
-  headers: headers,
-  success: function(data) {
-    console.log(JSON.stringify(data));
-  }
-})
-```
-
-```javascript--nodejs
-const request = require('node-fetch');
-
-const headers = {
-  'Accept':'application/json'
-
-};
-
-fetch('https://api.mod.io/v1/games/{game-id}/mods/{mod-id}/price?api_key=YourApiKey',
-{
-  method: 'GET',
-
-  headers: headers
-})
-.then(function(res) {
-    return res.json();
-}).then(function(body) {
-    console.log(body);
-});
-```
-
-```python
-import requests
-headers = {
-  'Accept': 'application/json'
-}
-
-r = requests.get('https://api.mod.io/v1/games/{game-id}/mods/{mod-id}/price', params={
-  'api_key': 'YourApiKey'
-}, headers = headers)
-
-print r.json()
-```
-
-```java
-URL obj = new URL("https://api.mod.io/v1/games/{game-id}/mods/{mod-id}/price?api_key=YourApiKey");
-HttpURLConnection con = (HttpURLConnection) obj.openConnection();
-con.setRequestMethod("GET");
-int responseCode = con.getResponseCode();
-BufferedReader in = new BufferedReader(
-    new InputStreamReader(con.getInputStream()));
-String inputLine;
-StringBuffer response = new StringBuffer();
-while ((inputLine = in.readLine()) != null) {
-    response.append(inputLine);
-}
-in.close();
-System.out.println(response.toString());
-```
-
-`GET /games/{game-id}/mods/{mod-id}/price`
-
-Get mod price for the corresponding mod. Successful request will return a single [Mod Price Object](#mod-price-object).
-
-> Example response
-
-```json
-{
-  "price": 0
-}
-
-```
-<h3 id="Get-Mod-Price-responses">Responses</h3>
-
-Status|Meaning|Error Ref|Description|Response Schema
----|---|----|---|---|
-200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)||Successful Request|[Mod Price Object](#schemamod_price_object)
 <aside class="auth-notice">
 To perform this request, you must be authenticated via one of the following methods:
 <a href="#authentication">api_key</a>, <a href="#authentication">OAuth 2</a> (Scopes: read)
@@ -14773,55 +14436,6 @@ Name|Type|Description
 platform|string|A [target platform](#targeting-a-platform).
 label|string|A presentable label of the platform.
 moderated|boolean|Is this platform moderated by game admins? If false, then user submissions for the platform will be available immediately providing the game has mod curation disabled.
-
-
-
-## Game Rule Config  
-
-<a name="schemagame_rule_config"></a>
-
-```json
-{
-  "config": [
-    {
-      "endpoint": "string",
-      "name": "string",
-      "rules": [
-        {
-          "type": "string",
-          "field": "string",
-          "operator": "string",
-          "value": "string",
-          "connector": "string"
-        }
-      ],
-      "behaviors": [
-        {
-          "type": "string",
-          "if_outcome_equals": true
-        }
-      ]
-    }
-  ]
-} 
-```
-
-### Properties
-
-Name|Type|Description
----|---|---|---|
-config|array[]|No description
-» endpoint|string|The endpoint to apply the rules to. May be one of: <br><br>- _add_guide_comment_<br>- _update_guide_comment_<br>- _add_guide_<br>- _edit_guide_<br>- _add_mod_comment_<br>- _update_mod_comment_<br>- _add_mod_dependencies_<br>- _add_modfile_<br>- _add_mod_kvp_metadata_<br>- _add_mod_<br>- _edit_mod_<br>- _add_mod_tags_
-» name|string|A helpful name to remember the ruleset by (max 50 characters). If ommited the name will be provided automatically in the format of `Ruleset #n` where `n` is the nth unnamed rule.
-» rules|array[]|The set of rules to apply to the endpoint. _Each rule may contain dynamic fields not listed here, however the below are the minimum requirements for every rule_.
-»» type|string|The type of rule. May be one of: <br><br>- _payload_<br>- _user_<br>- _userstats_
-»» field|string|The field to apply the rule to.
-»» operator|string|The operator to use when comparing the field to the value. May be one of: <br><br>- `=`<br>-  `!=`<br>-  `>`<br>-  `<`<br>-  `>=`<br>-  `<=`<br>-  `contains`<br>-  `not_contains`
-»» value|string|The value to compare the field to.
-»» connector|string|The connector to use when comparing this rule to the next. May be one of: `and`, `or` or `none`.
-» behaviors|array[]|The set of behaviors to apply to the above ruleset. _Each behavior may contain dynamic fields not listed here, however the below are the minimum requirements for every rule_.
-»» type|string|The type of behavior. May be one of: <br><br>- _allowdeny_<br>- _thirdparty_
-»» if_outcome_equals|boolean|The outcome to match against. If the outcome of the ruleset matches this value, the behavior will be applied.
 
 
 
@@ -15283,7 +14897,44 @@ result_total|integer|Total number of results found.
     {
       "mod_id": 231,
       "name": "Example Mod",
-      "date_added": 1499841487
+      "name_id": "rogue-knight-hd-pack",
+      "date_added": 1499841487,
+      "dependency_depth": 0,
+      "logo": {
+        "filename": "card.png",
+        "original": "https://assets.modcdn.io/images/placeholder/card.png",
+        "thumb_320x180": "https://assets.modcdn.io/images/placeholder/card.png",
+        "thumb_640x360": "https://assets.modcdn.io/images/placeholder/card.png",
+        "thumb_1280x720": "https://assets.modcdn.io/images/placeholder/card.png"
+      },
+      "modfile": {
+        "id": 2,
+        "mod_id": 2,
+        "date_added": 1499841487,
+        "date_scanned": 1499841487,
+        "virus_status": 0,
+        "virus_positive": 0,
+        "virustotal_hash": "",
+        "filesize": 15181,
+        "filesize_uncompressed": 16384,
+        "filehash": {
+          "md5": "2d4a0e2d7273db6b0a94b0740a88ad0d"
+        },
+        "filename": "rogue-knight-v1.zip",
+        "version": "1.3",
+        "changelog": "VERSION 1.3 -- Changes -- Fixed critical castle floor bug.",
+        "metadata_blob": "rogue,hd,high-res,4k,hd textures",
+        "download": {
+          "binary_url": "https://api.mod.io/v1/games/1/mods/1/files/1/download/c489a0354111a4d76640d47f0cdcb294",
+          "date_expires": 1579316848
+        },
+        "platforms": [
+          {
+            "platform": "windows",
+            "status": 1
+          }
+        ]
+      }
     },
     {
         ...
@@ -15474,6 +15125,7 @@ result_total|integer|Total number of results found.
       "virus_positive": 0,
       "virustotal_hash": "",
       "filesize": 15181,
+      "filesize_uncompressed": 16384,
       "filehash": {
         "md5": "2d4a0e2d7273db6b0a94b0740a88ad0d"
       },
@@ -15592,6 +15244,7 @@ result_total|integer|Total number of results found.
         "virus_positive": 0,
         "virustotal_hash": "",
         "filesize": 15181,
+        "filesize_uncompressed": 16384,
         "filehash": {
           "md5": "2d4a0e2d7273db6b0a94b0740a88ad0d"
         },
@@ -16202,7 +15855,44 @@ metavalue|string|The value of the key-value pair.
 {
   "mod_id": 231,
   "name": "Example Mod",
-  "date_added": 1499841487
+  "name_id": "rogue-knight-hd-pack",
+  "date_added": 1499841487,
+  "dependency_depth": 0,
+  "logo": {
+    "filename": "card.png",
+    "original": "https://assets.modcdn.io/images/placeholder/card.png",
+    "thumb_320x180": "https://assets.modcdn.io/images/placeholder/card.png",
+    "thumb_640x360": "https://assets.modcdn.io/images/placeholder/card.png",
+    "thumb_1280x720": "https://assets.modcdn.io/images/placeholder/card.png"
+  },
+  "modfile": {
+    "id": 2,
+    "mod_id": 2,
+    "date_added": 1499841487,
+    "date_scanned": 1499841487,
+    "virus_status": 0,
+    "virus_positive": 0,
+    "virustotal_hash": "",
+    "filesize": 15181,
+    "filesize_uncompressed": 16384,
+    "filehash": {
+      "md5": "2d4a0e2d7273db6b0a94b0740a88ad0d"
+    },
+    "filename": "rogue-knight-v1.zip",
+    "version": "1.3",
+    "changelog": "VERSION 1.3 -- Changes -- Fixed critical castle floor bug.",
+    "metadata_blob": "rogue,hd,high-res,4k,hd textures",
+    "download": {
+      "binary_url": "https://api.mod.io/v1/games/1/mods/1/files/1/download/c489a0354111a4d76640d47f0cdcb294",
+      "date_expires": 1579316848
+    },
+    "platforms": [
+      {
+        "platform": "windows",
+        "status": 1
+      }
+    ]
+  }
 } 
 ```
 
@@ -16210,9 +15900,13 @@ metavalue|string|The value of the key-value pair.
 
 Name|Type|Description
 ---|---|---|---|
-mod_id|integer|Unique id of the mod that is the dependency.
-name|string|The name of the dependency (mod name).
+mod_id|integer|Unique ID of the mod that serves as the dependency.
+name|string|Name of the mod dependency.
+name_id|string|Path for the mod on mod.io. For example: https://mod.io/g/rogue-knight/m/__rogue-knight-hd-pack__
 date_added|integer|Unix timestamp of date the dependency was added.
+dependency_depth|integer|When a dependency depth is greater than zero (0), it means that the dependencies themselves rely on additional dependencies. To ensure smooth installation, it is recommended dependencies be installed in _descending_ order of depth, beginning with those with the highest depth. Please note only dependencies with a depth of up to 5 will be shown.
+logo|[Logo Object](#schemalogo_object)|Contains media URL's to the logo for the mod.
+modfile|[Modfile Object](#schemamodfile_object)|The primary modfile for the mod.
 
 
 
@@ -16350,6 +16044,7 @@ images|[Image Object](#schemaimage_object)[]|Array of image objects (a gallery).
     "virus_positive": 0,
     "virustotal_hash": "",
     "filesize": 15181,
+    "filesize_uncompressed": 16384,
     "filehash": {
       "md5": "2d4a0e2d7273db6b0a94b0740a88ad0d"
     },
@@ -16553,6 +16248,7 @@ date_added|integer|Unix timestamp of date tag was applied.
   "virus_positive": 0,
   "virustotal_hash": "",
   "filesize": 15181,
+  "filesize_uncompressed": 16384,
   "filehash": {
     "md5": "2d4a0e2d7273db6b0a94b0740a88ad0d"
   },
@@ -16582,9 +16278,10 @@ mod_id|integer|Unique mod id.
 date_added|integer|Unix timestamp of date file was added.
 date_scanned|integer|Unix timestamp of date file was virus scanned.
 virus_status|integer|Current virus scan status of the file. For newly added files that have yet to be scanned this field will change frequently until a scan is complete:<br><br>__0__ = Not scanned<br>__1__ = Scan complete<br>__2__ = In progress<br>__3__ = Too large to scan<br>__4__ = File not found<br>__5__ = Error Scanning
-virus_positive|integer|Was a virus detected:<br><br>__0__ = No threats detected<br>__1__ = Flagged as malicious
+virus_positive|integer|Was a virus detected:<br><br>__0__ = No threats detected<br>__1__ = Flagged as malicious<br>__2__ = Flagged as containing potentially harmful files (i.e. EXEs)
 virustotal_hash|string|Deprecated: No longer used and will be removed in subsequent API version.
 filesize|integer|Size of the file in bytes.
+filesize_uncompressed|integer|The uncompressed filesize of the zip archive.
 filehash|[Filehash Object](#schemafilehash_object)|Contains a dictionary of filehashes for the contents of the download.
 filename|string|Filename including extension.
 version|string|Release version this file represents.
@@ -16695,6 +16392,28 @@ date_added|integer|Unix timestamp of date the part was uploaded.
 
 
 
+## Preview Object
+
+   <a name="schemapreview_object"></a>
+
+```json
+{
+  "resource_url": "https://mod.io/g/@rogueknight/m/@some-mod?preview=00000000000000000000000000000000",
+  "date_added": 1499841487,
+  "date_updated": 1499841487
+} 
+```
+
+### Properties
+
+Name|Type|Description
+---|---|---|---|
+resource_url|string|The sharable URL that resource admins can pass around.
+date_added|integer|Unix timestamp of the date the hash was first generated.
+date_updated|integer|Unix timestamp of the date the hash was regenerated.
+
+
+
 ## Rating Object
 
    <a name="schemarating_object"></a>
@@ -16716,152 +16435,6 @@ game_id|integer|Unique game id.
 mod_id|integer|Unique mod id.
 rating|integer|Mod rating value:<br><br>__1__ = Positive Rating<br>__-1__ = Negative Rating
 date_added|integer|Unix timestamp of date rating was submitted.
-
-
-
-## Rules Based Moderation Config Behavior
-
-<a name="schemarules_based_moderation_config_behavior_object"></a>
-
-```json
-{
-  "type": "payload",
-  "name": "Allow/Deny",
-  "description": "Does some pretty wild stuff!",
-  "validation_rules": {
-    "property1": null,
-    "property2": null
-  },
-  "field_map": {
-    "property1": null,
-    "property2": null
-  }
-} 
-```
-
-### Properties
-
-Name|Type|Description
----|---|---|---|
-type|string|The string identifier for this behavior (allowdeny, thirdparty, requiresmoderation).
-name|string|The display name of the behavior.
-description|string|The description of the behavior.
-validation_rules|object|Array of Laravel-like validation rules seperated by a pipe character ('|') that can be used to validate the values of each rules unique configuration options.
-field_map|object|Array of input field types and any applicable options for frontend form building purposes.
-
-
-
-## Rules Based Moderation Config Endpoint
-
-<a name="schemarules_based_moderation_config_endpoint_object"></a>
-
-```json
-{
-  "id": "add_mod",
-  "name": "Add Mod",
-  "attributes": [
-    "string"
-  ]
-} 
-```
-
-### Properties
-
-Name|Type|Description
----|---|---|---|
-id|string|The swagger `operationId` that represents this endpoint.
-name|string|The name of the endpoint.
-attributes|string[]|Array of attributes that rules can be created against for this endpoint.
-
-
-
-## Rules Based Moderation Config Object
-
-<a name="schemarules_based_moderation_config_object"></a>
-
-```json
-{
-  "endpoints": [
-    {
-      "id": "add_mod",
-      "name": "Add Mod",
-      "attributes": [
-        "string"
-      ]
-    }
-  ],
-  "rules": [
-    {
-      "type": "payload",
-      "name": "Payload Attribute Inspection",
-      "description": "Careful, this rule can be very dangerous if not used properly.",
-      "validation_rules": {
-        "property1": null,
-        "property2": null
-      },
-      "field_map": {
-        "property1": null,
-        "property2": null
-      }
-    }
-  ],
-  "behaviors": [
-    {
-      "type": "payload",
-      "name": "Allow/Deny",
-      "description": "Does some pretty wild stuff!",
-      "validation_rules": {
-        "property1": null,
-        "property2": null
-      },
-      "field_map": {
-        "property1": null,
-        "property2": null
-      }
-    }
-  ]
-} 
-```
-
-### Properties
-
-Name|Type|Description
----|---|---|---|
-endpoints|[Rules Based Moderation Config Endpoint](#schemarules_based_moderation_config_endpoint_object)[]|No description
-rules|[Rules Based Moderation Config Rule](#schemarules_based_moderation_config_rule_object)[]|Array of available rules.
-behaviors|[Rules Based Moderation Config Behavior](#schemarules_based_moderation_config_behavior_object)[]|Array of available behaviors.
-
-
-
-## Rules Based Moderation Config Rule
-
-<a name="schemarules_based_moderation_config_rule_object"></a>
-
-```json
-{
-  "type": "payload",
-  "name": "Payload Attribute Inspection",
-  "description": "Careful, this rule can be very dangerous if not used properly.",
-  "validation_rules": {
-    "property1": null,
-    "property2": null
-  },
-  "field_map": {
-    "property1": null,
-    "property2": null
-  }
-} 
-```
-
-### Properties
-
-Name|Type|Description
----|---|---|---|
-type|string|The string identifier for this rule (payload, user, etc).
-name|string|The display name of the rule.
-description|string|The description of the rule.
-validation_rules|object|Array of Laravel-like validation rules seperated by a pipe character ('|') that can be used to validate the values of each rules unique configuration options.
-field_map|object|Array of input field types and any applicable options for frontend form building purposes.
 
 
 
@@ -17117,6 +16690,44 @@ avatar|[Avatar Object](#schemaavatar_object)|Contains media URL's to the users a
 timezone|string|Deprecated: No longer used and will be removed in subsequent API version.
 language|string|Deprecated: No longer used and will be removed in subsequent API version. To [localize the API response](#localization) we recommend you set the `Accept-Language` header.
 profile_url|string|URL to the users profile.
+
+
+
+## User Preview Object  
+
+<a name="schemauser_preview_object"></a>
+
+```json
+{
+  "user": {
+    "id": 1,
+    "name_id": "xant",
+    "username": "XanT",
+    "display_name_portal": null,
+    "date_online": 1509922961,
+    "date_joined": 1509922961,
+    "avatar": {
+      "filename": "avatar.png",
+      "original": "https://assets.modcdn.io/images/placeholder/avatar.png",
+      "thumb_50x50": "https://assets.modcdn.io/images/placeholder/avatar_50x50.png",
+      "thumb_100x100": "https://assets.modcdn.io/images/placeholder/avatar_100x100.png"
+    },
+    "timezone": "",
+    "language": "",
+    "profile_url": "https://mod.io/u/xant"
+  },
+  "resource_url": "https://mod.io/g/@rogueknight/m/@some-mod",
+  "date_added": 1499841487
+} 
+```
+
+### Properties
+
+Name|Type|Description
+---|---|---|---|
+user|[User Object](#schemauser_object)|No description
+resource_url|string|The URL of the resource that the registrant should be redirect to upon success.
+date_added|integer|Unix timestamp of the date the user was registered as a previewer.
 
 
 
