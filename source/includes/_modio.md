@@ -784,45 +784,45 @@ When making API requests you should include the `X-Modio-Platform` header (with 
  - Localization of content for the platform
  - It also enables platform specific metrics
 
-For example, passing the HTTP header `X-Modio-Platform: XboxSeriesX` in your API request tells --parse_sitename your player is on Xbox Series X.
+For example, passing the HTTP header `X-Modio-Platform: xboxseriesx` in your API request tells --parse_sitename your player is on Xbox Series X.
 
 Official --parse_sitename [Plugins and SDKs](#implementation) will automatically supply this value for you providing you have specified the correct platform in the tools' settings. We __strongly recommend__ you supply this header in every request with the correct platform to enable --parse_sitename to provide the best cross-platform experience for your players. Please see a list of supported platforms below:
 
 Target Platform | Header Value
 ---------- | ----------  
-Windows | `Windows`
-Mac | `Mac`
-Linux | `Linux`
-Android | `Android`
-iOS | `iOS`
-Xbox One | `XboxOne`
-Xbox Series X | `XboxSeriesX`
-PlayStation 4 | `PS4`
-PlayStation 5 | `PS5`
-Switch | `Switch`
-Oculus | `Oculus`
+Windows | `windows`
+Mac | `mac`
+Linux | `linux`
+Android | `android`
+iOS | `ios`
+Xbox One | `xboxone`
+Xbox Series X | `xboxseriesx`
+PlayStation 4 | `ps4`
+PlayStation 5 | `ps5`
+Switch | `switch`
+Oculus | `oculus`
 
-These are the only supported values and are case-insensitive, anything else will be ignored and default to `Windows`. Have we missed a platform you are using? [Get in touch!](mailto:--parse_email?subject=Platform%20Support) 
+These are the only supported values and are case-insensitive, anything else will be ignored and default to `windows`. Have we missed a platform you are using? [Get in touch!](mailto:--parse_email?subject=Platform%20Support) 
 
 ## Targeting a Portal
 
 When making API requests you should include the `X-Modio-Portal` header (with one of the values below), to tell --parse_sitename what Portal (eg. Store or App) the request is originating from. This header is __important__ because it enables --parse_sitename to fine-tune the experience, such as returning display names used by players on that portal (which can be a certification requirement).
 
-For example, passing the HTTP header `X-Modio-Portal: EGS` in your API request tells --parse_sitename your player is coming via the Epic Games Store.
+For example, passing the HTTP header `X-Modio-Portal: epicgames` in your API request tells --parse_sitename your player is coming via the Epic Games Store.
 
 Target Portal | Header Value
 ---------- | ----------  
-Apple | `Apple`
-Discord | `Discord`
-Epic Games Store | `EGS`
-Facebook | `Facebook`
-GOG | `GOG`
-Google | `Google`
-itch.io | `Itchio`
-Nintendo | `Nintendo`
-OpenID | `OpenID`
-PlayStation Network | `PSN`
-Steam | `Steam`
-Xbox Live | `XboxLive`
+Apple | `apple`
+Discord | `discord`
+Epic Games Store | `epicgames`
+Facebook | `facebook`
+GOG | `gog`
+Google | `google`
+itch.io | `itchio`
+Nintendo | `nintendo`
+OpenID | `openid`
+PlayStation Network | `psn`
+Steam | `steam`
+Xbox Live | `xboxlive`
 
 These are the only supported values and are case-insensitive, anything else will be ignored. Have we missed a portal you are using? [Get in touch!](mailto:--parse_email?subject=Portal%20Support)
