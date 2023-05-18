@@ -51,8 +51,8 @@ Plugins and wrappers made or supported by the mod.io team
 
  | - | - | -
 --- | --- | --- | ---
-![Unity Plugin](images/tool-unity.png) | __Unity Plugin__<br />[SDK](https://github.com/modio/modio-unity)<br />[Getting Started](https://github.com/modio/modio-unity/wiki)<br /> | ![Unreal Plugin](images/tool-unreal.png) | __Unreal Plugin__<br />[SDK](https://github.com/modio/modio-ue4)<br />[Getting Started](https://github.com/modio/modio-ue4/blob/main/Doc/getting-started.adoc)<br />
-![C/C++ SDK](images/tool-ccpp.png) | __C/C++ SDK__<br />[SDK](https://github.com/modio/modio-sdk)<br />[Getting Started](https://github.com/modio/modio-sdk/blob/main/doc/getting-started.adoc)<br />  | ![Discord Bot](images/tool-discordbot.png) | __Discord Bot__<br />[Instructions](https://github.com/modio/modio-discord-bot)<br />[Invite](https://discordbot.mod.io)<br />
+![Unity Plugin](images/tool-unity.png) | __Unity Plugin__<br />[SDK](https://github.com/modio/modio-unity)<br />[Getting Started](https://go.mod.io/unity-docs)<br />[Sample Project](https://go.mod.io/unity-samples)<br /> | ![Unreal Plugin](images/tool-unreal.png) | __Unreal Plugin__<br />[SDK](https://github.com/modio/modio-ue)<br />[Getting Started](https://go.mod.io/ue-docs)<br />[UE4 Sample Project](https://go.mod.io/ue-samples)<br />
+![C/C++ SDK](images/tool-ccpp.png) | __C/C++ SDK__<br />[SDK](https://github.com/modio/modio-sdk)<br />[Getting Started](https://go.mod.io/sdk-docs)<br />  | ![Discord Bot](images/tool-discordbot.png) | __Discord Bot__<br />[Instructions](https://github.com/modio/modio-discord-bot)<br />[Invite](https://discordbot.mod.io)<br />
 
 ### Community Tools
 
@@ -803,46 +803,46 @@ When making API requests you should include the `X-Modio-Platform` header (with 
  - Localization of content for the platform
  - It also enables platform specific metrics
 
-For example, passing the HTTP header `X-Modio-Platform: XboxSeriesX` in your API request tells mod.io your player is on Xbox Series X.
+For example, passing the HTTP header `X-Modio-Platform: xboxseriesx` in your API request tells mod.io your player is on Xbox Series X.
 
 Official mod.io [Plugins and SDKs](#implementation) will automatically supply this value for you providing you have specified the correct platform in the tools' settings. We __strongly recommend__ you supply this header in every request with the correct platform to enable mod.io to provide the best cross-platform experience for your players. Please see a list of supported platforms below:
 
 Target Platform | Header Value
 ---------- | ----------  
-Windows | `Windows`
-Mac | `Mac`
-Linux | `Linux`
-Android | `Android`
-iOS | `iOS`
-Xbox One | `XboxOne`
-Xbox Series X | `XboxSeriesX`
-PlayStation 4 | `PS4`
-PlayStation 5 | `PS5`
-Switch | `Switch`
-Oculus | `Oculus`
+Windows | `windows`
+Mac | `mac`
+Linux | `linux`
+Android | `android`
+iOS | `ios`
+Xbox One | `xboxone`
+Xbox Series X | `xboxseriesx`
+PlayStation 4 | `ps4`
+PlayStation 5 | `ps5`
+Switch | `switch`
+Oculus | `oculus`
 
-These are the only supported values and are case-insensitive, anything else will be ignored and default to `Windows`. Have we missed a platform you are using? [Get in touch!](mailto:developers@mod.io?subject=Platform%20Support) 
+These are the only supported values and are case-insensitive, anything else will be ignored and default to `windows`. Have we missed a platform you are using? [Get in touch!](mailto:developers@mod.io?subject=Platform%20Support) 
 
 ## Targeting a Portal
 
 When making API requests you should include the `X-Modio-Portal` header (with one of the values below), to tell mod.io what Portal (eg. Store or App) the request is originating from. This header is __important__ because it enables mod.io to fine-tune the experience, such as returning display names used by players on that portal (which can be a certification requirement).
 
-For example, passing the HTTP header `X-Modio-Portal: EGS` in your API request tells mod.io your player is coming via the Epic Games Store.
+For example, passing the HTTP header `X-Modio-Portal: epicgames` in your API request tells mod.io your player is coming via the Epic Games Store.
 
 Target Portal | Header Value
 ---------- | ----------  
-Apple | `Apple`
-Discord | `Discord`
-Epic Games Store | `EGS`
-Facebook | `Facebook`
-GOG | `GOG`
-Google | `Google`
-itch.io | `Itchio`
-Nintendo | `Nintendo`
-OpenID | `OpenID`
-PlayStation Network | `PSN`
-Steam | `Steam`
-Xbox Live | `XboxLive`
+Apple | `apple`
+Discord | `discord`
+Epic Games Store | `epicgames`
+Facebook | `facebook`
+GOG | `gog`
+Google | `google`
+itch.io | `itchio`
+Nintendo | `nintendo`
+OpenID | `openid`
+PlayStation Network | `psn`
+Steam | `steam`
+Xbox Live | `xboxlive`
 
 These are the only supported values and are case-insensitive, anything else will be ignored. Have we missed a portal you are using? [Get in touch!](mailto:developers@mod.io?subject=Portal%20Support)
 # Authentication
@@ -1774,7 +1774,7 @@ Request an access token on behalf of an Epic Games user. A Successful request wi
 
      Parameter|Type|Required|Description
      ---|---|---|---|
-     access_token|string|true|The access token [returned from the EOS SDK](https://dev.epicgames.com/docs/services/en-US/API/EOS/EOS/_tagEOS_Auth_Token/index.html) when you authenticate a user to use mod.io.
+     access_token|string|true|The Access Token [returned from the EOS SDK](https://dev.epicgames.com/docs/en-US/api-ref/structs/eos-auth-token) when you authenticate a user to use mod.io.
      email|string||The users email address (optional but recommended to help users recover lost accounts). If supplied, and the respective user does not have an email registered for their account we will send a confirmation email to confirm they have ownership of the specified email.<br><br>__NOTE__: If the user already has an email on record with us, this parameter will be ignored. This parameter should also be urlencoded before the request is sent.
      date_expires|integer||Unix timestamp of date in which the returned token will expire. Value cannot be higher than the default value which is a week (unix timestamp + 604800 seconds). Using a token after it's expiry time has elapsed will result in a `401 Unauthorized` response.
      terms_agreed|boolean||This MUST be set to `false` unless you have collected the [users agreement](#terms) prior to calling this endpoint in which case it can be set to `true` and will be recorded.<br><br>__NOTE:__ If this is set to `false` and the user has not agreed to the latest mod.io Terms of Use and Privacy Policy, an error `403 Forbidden (error_ref 11074)` will be returned and you will need to collect the [users agreement](#terms) and retry with this value set to `true` to authenticate the user.
@@ -2162,9 +2162,7 @@ System.out.println(response.toString());
 
 Request an access token on behalf of an OpenID identity provider. To use this method of authentication, you must configure the OpenID config in your games authentication admin page. A Successful request will return an [Access Token Object](#access-token-object).
 
-     __NOTE:__ The ability to authenticate players using your identity provider is feature for advanced partners only. If you are interested in becoming an advanced partner, please [contact us](mailto:developers@mod.io?subject=OpenID SSO Request).
-
-     __HINT:__ If you want to overlay the mod.io site in-game with your SSO, we recommend you add `?portal=openid` to the end of the URL you open which will prompt the user to login with your identity provider. See [Web Overlay Authentication](#web-overlay-authentication) for details.
+     __NOTE:__ The ability to authenticate players using your identity provider is a feature for advanced partners only. If you are interested in becoming an advanced partner, please [contact us](mailto:developers@mod.io?subject=OpenID SSO Request).
 
      Parameter|Type|Required|Description
      ---|---|---|---|
@@ -2673,8 +2671,8 @@ Get all games. Successful request will return an array of [Game Objects](#get-ga
     ugc_name|string|Word used to describe user-generated content (mods, items, addons etc).
     presentation_option|integer|Presentation style used on the mod.io website:<br><br>__0__ = Grid View: Displays mods in a grid<br>__1__ = Table View: Displays mods in a table
     submission_option|integer|Submission process modders must follow:<br><br>__0__ = Mod uploads must occur via the API using a tool created by the game developers<br>__1__ = Mod uploads can occur from anywhere, including the website and API
-    curation_option|integer|Curation process used to approve mods:<br><br>__0__ = No curation: Mods are immediately available to play<br>__2__ = Full curation: All mods must be accepted by someone to be listed
-    community_options|integer|Community features enabled for this game:<br><br>__0__ = None<br>__1__ = Enable comments<br>__2__ = Enable guides<br>__4__ = Pin on homepage<br>__8__ = Show on homepage<br>__16__ = Show more on homepage<br>__32__ = Allow change status<br>__?__ = Combine to find games with multiple options enabled (see [BITWISE fields](#bitwise-and-bitwise-and))
+    curation_option|integer|Curation options enabled by this game to approve mods:<br><br>__0__ = No curation: Mods are immediately available to play<br>__1__ = Price change approval: Pricing changes for marketplace mods queued for acceptance<br>__2__ = Full curation: All mods must be accepted by someone to be listed<br>__?__ = Combine to enable multiple features (see BITWISE fields)
+    community_options|integer|Community features enabled for this game:<br><br>__0__ = None<br>__1__ = Enable comments<br>__2__ = Enable guides<br>__4__ = Pin on homepage<br>__8__ = Show on homepage<br>__16__ = Show more on homepage<br>__32__ = Allow change status<br>__64__ = Enable Previews (Game must be hidden)<br>__128__ = Allow Preview Share-URL (Previews must be enabled)<br>__?__ = Combine to find games with multiple options enabled (see [BITWISE fields](#bitwise-and-bitwise-and))
     monetisation_options|integer|Monetisation features mods can enable:<br><br>__0__ = None<br>__1__ = Enabled<br>__2__ = Allow creators to receive donations (recognition)<br>__4__ = Allow mods to be sold (marketplace)<br>__?__ = Combine to find games with multiple options enabled (see [BITWISE fields](#bitwise-and-bitwise-and))
     api_access_options|integer|Level of API access allowed by this game:<br><br>__0__ = None<br>__1__ = Allow 3rd parties to access this games API endpoints<br>__2__ = Allow mods to be downloaded directly (if disabled all download URLs will contain a frequently changing verification hash to stop unauthorized use)<br>__?__ = Combine to find games with multiple options enabled (see [BITWISE fields](#bitwise-and-bitwise-and))
     maturity_options|integer|Mature content setup for this game:<br><br>__0__ = Don't allow mature content in mods<br>__1__ = Allow mature content in mods<br>__2__ = This game is for mature audiences only<br>__?__ = Combine to find games with multiple options enabled (see [BITWISE fields](#bitwise-and-bitwise-and)
@@ -3787,8 +3785,7 @@ curl -X POST https://api.mod.io/v1/games/{game-id}/mods/{mod-id} \
   -F 'summary=Short descriptive summary here' \
   -F 'description=<h2>Getting started with..' \
   -F 'logo=@/path/to/image.jpg' \
-  -F 'homepage_url=https://www.example.com' \
-  -F 'tags[]=easy'
+  -F 'homepage_url=https://www.example.com'
 
 ```
 
@@ -3830,8 +3827,7 @@ const inputBody = '{
   "summary": "Short descriptive summary here",
   "description": "<h2>Getting started with..",
   "logo": "@/path/to/image.jpg",
-  "homepage_url": "https://www.example.com",
-  "tags": "easy"
+  "homepage_url": "https://www.example.com"
 }';
 const headers = {
   'Authorization':'Bearer {access-token}',
@@ -3902,7 +3898,7 @@ Edit details for a mod. If you want to update the `logo` or media associated wit
     homepage_url|string||Official homepage for your mod. Must be a valid URL.
     stock|integer||Maximium number of subscribers for this mod. A value of 0 disables this limit.
     maturity_option|integer||Choose if this mod contains any of the following mature content.<br><br>__NOTE:__ The value of this field will default to 0 unless the parent game allows you to flag mature content (see `maturity_options` field in [Game Object](#game-object)). <br><br>__0__ = None set<br>__1__ = Alcohol<br>__2__ = Drugs<br>__4__ = Violence<br>__8__ = Explicit<br>__?__ = Add the options you want together, to enable multiple options (see [BITWISE fields](#bitwise-and-bitwise-and))
-    community_options|integer||Community features enabled for this mod:<br><br>__0__ = All of the options below are disabled<br>__1__ = Enable comments<br>_64__ = Enable previews<br>__?__ = Add the options you want together, to enable multiple options (see [BITWISE fields](#bitwise-and-bitwise-and))
+    community_options|integer||Community features enabled for this mod:<br><br>__0__ = All of the options below are disabled<br>__1__ = Enable comments<br>_64_ = Enable previews<br>__?__ = Add the options you want together, to enable multiple options (see [BITWISE fields](#bitwise-and-bitwise-and))
     metadata_blob|string||Metadata stored by the game developer which may include properties as to how the item works, or other information you need to display. Metadata can also be stored as searchable [key value pairs](#metadata), and to individual [mod files](#get-modfiles).
 
 > Example response
@@ -8957,6 +8953,134 @@ Status|Meaning|Error Ref|Description|Response Schema
 To perform this request, you must be authenticated via one of the following methods:
 <a href="#authentication">OAuth 2</a> (Scopes: write)
 </aside>
+## Rename Game Tag
+
+> Example request
+
+```shell
+# You can also use wget
+curl -X PUT https://api.mod.io/v1/games/{game-id}/tags/rename \
+  -H 'Authorization: Bearer {access-token}' \ 
+  -H 'Content-Type: application/x-www-form-urlencoded' \ 
+  -H 'Accept: application/json'
+  -d 'from=Medium' \
+  -d 'to=Intermediate'
+
+```
+
+```http
+PUT https://api.mod.io/v1/games/{game-id}/tags/rename HTTP/1.1
+Host: api.mod.io
+Content-Type: application/x-www-form-urlencoded
+Accept: application/json
+Authorization: Bearer {access-token}
+
+```
+
+```javascript
+var headers = {
+  'Authorization':'Bearer {access-token}',
+  'Content-Type':'application/x-www-form-urlencoded',
+  'Accept':'application/json'
+
+};
+
+$.ajax({
+  url: 'https://api.mod.io/v1/games/{game-id}/tags/rename',
+  method: 'put',
+
+  headers: headers,
+  success: function(data) {
+    console.log(JSON.stringify(data));
+  }
+})
+```
+
+```javascript--nodejs
+const request = require('node-fetch');
+const inputBody = '{
+  "from": "Medium",
+  "to": "Intermediate"
+}';
+const headers = {
+  'Authorization':'Bearer {access-token}',
+  'Content-Type':'application/x-www-form-urlencoded',
+  'Accept':'application/json'
+
+};
+
+fetch('https://api.mod.io/v1/games/{game-id}/tags/rename',
+{
+  method: 'PUT',
+  body: inputBody,
+  headers: headers
+})
+.then(function(res) {
+    return res.json();
+}).then(function(body) {
+    console.log(body);
+});
+```
+
+```python
+import requests
+headers = {
+  'Authorization': 'Bearer {access-token}',
+  'Content-Type': 'application/x-www-form-urlencoded',
+  'Accept': 'application/json'
+}
+
+r = requests.put('https://api.mod.io/v1/games/{game-id}/tags/rename', params={
+
+}, headers = headers)
+
+print r.json()
+```
+
+```java
+URL obj = new URL("https://api.mod.io/v1/games/{game-id}/tags/rename");
+HttpURLConnection con = (HttpURLConnection) obj.openConnection();
+con.setRequestMethod("PUT");
+int responseCode = con.getResponseCode();
+BufferedReader in = new BufferedReader(
+    new InputStreamReader(con.getInputStream()));
+String inputLine;
+StringBuffer response = new StringBuffer();
+while ((inputLine = in.readLine()) != null) {
+    response.append(inputLine);
+}
+in.close();
+System.out.println(response.toString());
+```
+
+`PUT /games/{game-id}/tags/rename`
+
+Rename an existing tag, updating all mods in the progress. Successful request will return a [Message Object](#message-object).
+
+    Parameter|Type|Required|Description
+    ---|---|---|---|
+    from|string|true|The exact name of an existing tag you want to rename.
+    to|string|true|The name that you would like to rename the existing tag to.
+
+> Example response
+
+```json
+{
+  "code": 200,
+  "message": "Your request was successful."
+}
+
+```
+<h3 id="Rename-Game-Tag-responses">Responses</h3>
+
+Status|Meaning|Error Ref|Description|Response Schema
+---|---|----|---|---|
+200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)||Successful Request.|[Message Object](#schemamessage_object)
+409|[Conflict](https://tools.ietf.org/html/rfc7231#section-6.5.8)|14030|A request to rename the given tag is currently in progress.|[Error Object](#schemaerror_object)
+<aside class="auth-notice">
+To perform this request, you must be authenticated via one of the following methods:
+<a href="#authentication">OAuth 2</a> (Scopes: write)
+</aside>
 ## Get Mod Tags
 
 > Example request
@@ -9191,8 +9315,8 @@ Add tags to a mod's profile. You can only add tags allowed by the parent game, w
 
 ```json
 {
-  "code": 201,
-  "message": "You have successfully added tags to the specified mod."
+  "code": 200,
+  "message": "Your request was successful."
 }
 
 ```
@@ -9200,7 +9324,7 @@ Add tags to a mod's profile. You can only add tags allowed by the parent game, w
 
 Status|Meaning|Error Ref|Description|Response Schema
 ---|---|----|---|---|
-201|[Created](https://tools.ietf.org/html/rfc7231#section-6.3.2)||Created|[Add Mod Tag Response](#schemaadd_mod_tag_response)
+201|[Created](https://tools.ietf.org/html/rfc7231#section-6.3.2)||Created|[Message Object](#schemamessage_object)
 403|[Forbidden](https://tools.ietf.org/html/rfc7231#section-6.5.3)|15037|The authenticated user does not have permission to submit tags for the specified mod. Ensure the user is part of the mod team before attempting the request again.|[Error Object](#schemaerror_object)
 ### Response Headers
 
@@ -11971,7 +12095,7 @@ Get all modfiles the _authenticated user_ uploaded. Successful request will retu
     date_added|integer|Unix timestamp of date file was added.
     date_scanned|integer|Unix timestamp of date file was virus scanned.
     virus_status|integer|Current virus scan status of the file. For newly added files that have yet to be scanned this field will change frequently until a scan is complete:<br><br>__0__ = Not scanned<br>__1__ = Scan complete<br>__2__ = In progress<br>__3__ = Too large to scan<br>__4__ = File not found<br>__5__ = Error Scanning
-    virus_positive|integer|Was a virus detected:<br><br>__0__ = No threats detected<br>__1__ = Flagged as malicious
+    virus_positive|integer|Was a virus detected:<br><br>__0__ = No threats detected<br>__1__ = Flagged as malicious<br>__2__ = Flagged as containing potentially harmful files (i.e. EXEs)
     filesize|integer|Size of the file in bytes.
     filehash|string|MD5 hash of the file.
     filename|string|Filename including extension.
@@ -12143,8 +12267,8 @@ Get all games the _authenticated user_ added or is a team member of. Successful 
     ugc_name|string|Word used to describe user-generated content (mods, items, addons etc).
     presentation_option|integer|Presentation style used on the mod.io website:<br><br>__0__ = Grid View: Displays mods in a grid<br>__1__ = Table View: Displays mods in a table
     submission_option|integer|Submission process modders must follow:<br><br>__0__ = Mod uploads must occur via the API using a tool created by the game developers<br>__1__ = Mod uploads can occur from anywhere, including the website and API
-    curation_option|integer|Curation process used to approve mods:<br><br>__0__ = No curation: Mods are immediately available to play<br>__2__ = Full curation: All mods must be accepted by someone to be listed
-    community_options|integer|Community features enabled for this game:<br><br>__0__ = None<br>__1__ = Enable comments<br>__2__ = Enable guides<br>__4__ = Pin on homepage<br>__8__ = Show on homepage<br>__16__ = Show more on homepage<br>__32__ = Allow change status<br>__?__ = Combine to find games with multiple options enabled (see [BITWISE fields](#bitwise-and-bitwise-and))
+    curation_option|integer|Curation options enabled by this game to approve mods:<br><br>__0__ = No curation: Mods are immediately available to play<br>__1__ = Price change approval: Pricing changes for marketplace mods queued for acceptance<br>__2__ = Full curation: All mods must be accepted by someone to be listed<br>__?__ = Combine to enable multiple features (see BITWISE fields)
+    community_options|integer|Community features enabled for this game:<br><br>__0__ = None<br>__1__ = Enable comments<br>__2__ = Enable guides<br>__4__ = Pin on homepage<br>__8__ = Show on homepage<br>__16__ = Show more on homepage<br>__32__ = Allow change status<br>__64__ = Enable Previews (Game must be hidden)<br>__128__ = Allow Preview Share-URL (Previews must be enabled)<br>__?__ = Combine to find games with multiple options enabled (see [BITWISE fields](#bitwise-and-bitwise-and))
     monetisation_options|integer|Monetisation features mods can enable:<br><br>__0__ = None<br>__1__ = Enabled<br>__2__ = Allow creators to receive donations (recognition)<br>__4__ = Allow mods to be sold (marketplace)<br>__?__ = Combine to find games with multiple options enabled (see [BITWISE fields](#bitwise-and-bitwise-and))
     api_access_options|integer|Level of API access allowed by this game:<br><br>__0__ = None<br>__1__ = Allow 3rd parties to access this games API endpoints<br>__2__ = Allow mods to be downloaded directly (if disabled all download URLs will contain a frequently changing verification hash to stop unauthorized use)<br>__?__ = Combine to find games with multiple options enabled (see [BITWISE fields](#bitwise-and-bitwise-and)
     maturity_options|integer|Mature content setup for this game:<br><br>__0__ = Don't allow mature content in mods<br>__1__ = Allow mature content in mods<br>__2__ = This game is for mature audiences only<br>__?__ = Combine to find games with multiple options enabled (see [BITWISE fields](#bitwise-and-bitwise-and)
@@ -14373,8 +14497,8 @@ date_updated|integer|Unix timestamp of date game was updated.
 date_live|integer|Unix timestamp of date game was set live.
 presentation_option|integer|Presentation style used on the mod.io website:<br><br>__0__ = Grid View: Displays mods in a grid<br>__1__ = Table View: Displays mods in a table
 submission_option|integer|Submission process modders must follow:<br><br>__0__ = Mod uploads must occur via the API using a tool created by the game developers<br>__1__ = Mod uploads can occur from anywhere, including the website and API
-curation_option|integer|Curation process used to approve mods:<br><br>__0__ = No curation: Mods are immediately available to play<br>__2__ = Full curation: All mods must be accepted by someone to be listed
-community_options|integer|Community features enabled for this game:<br><br>__0__ = All of the options below are disabled<br>__1__ = Enable comments<br>__2__ = Enable guides<br>__4__ = Pin on homepage<br>__8__ = Show on homepage<br>__16__ = Show more on homepage<br>__32__ = Allow change status<br>__?__ = Add the options you want together, to enable multiple features (see [BITWISE fields](#bitwise-and-bitwise-and))
+curation_option|integer|Curation options enabled by this game to approve mods:<br><br>__0__ = No curation: Mods are immediately available to play<br>__1__ = Price change approval: Pricing changes for marketplace mods queued for acceptance<br>__2__ = Full curation: All mods must be accepted by someone to be listed<br>__?__ = Combine to enable multiple features (see BITWISE fields)
+community_options|integer|Community features enabled for this game:<br><br>__0__ = All of the options below are disabled<br>__1__ = Enable comments<br>__2__ = Enable guides<br>__4__ = Pin on homepage<br>__8__ = Show on homepage<br>__16__ = Show more on homepage<br>__32__ = Allow change status<br>__64__ = Enable Previews (Game must be hidden)<br>__128__ = Allow Preview Share-URL (Previews must be enabled)<br>__?__ = Add the options you want together, to enable multiple features (see [BITWISE fields](#bitwise-and-bitwise-and))
 monetisation_options|integer|Monetisation features mods can enable:<br><br>__0__ = All of the options below are disabled<br>__1__ = Enabled<br>__2__ = Enable recognition<br>__4__ = Enable marketplace<br>__?__ = Add the options you want together, to enable multiple features (see [BITWISE fields](#bitwise-and-bitwise-and))
 revenue_options|integer|Deprecated: Please use monetisation_options instead, this will be removed in subsequent API version.
 api_access_options|integer|Level of API access allowed by this game:<br><br>__0__ = All of the options below are disabled<br>__1__ = Allow 3rd parties to access this games API endpoints<br>__2__ = Allow mods to be downloaded directly (if disabled all download URLs will contain a frequently changing verification hash to stop unauthorized use)<br>__?__ = Add the options you want together, to enable multiple features (see [BITWISE fields](#bitwise-and-bitwise-and))
@@ -14498,6 +14622,44 @@ tag_count_map|object|List of tag names and the count of mods with these tags.
 hidden|boolean|Groups of tags flagged as 'hidden' are intended to be used for filtering (eg. game version), but should not be displayed to users. Hidden tags will only be returned if `show_hidden_tags` is set to `true`.
 locked|boolean|Groups of tags flagged as 'locked' are editable only if the authenticated user is a team member of the parent game. Useful for games to tag special functionality, which users can see and filter on (eg. competition winners).
 tags|string[]|Array of tags in this group.
+
+
+
+## Game User Preview Object 
+
+<a name="schemagame_user_preview_object"></a>
+
+```json
+{
+  "user": {
+    "id": 1,
+    "name_id": "xant",
+    "username": "XanT",
+    "display_name_portal": null,
+    "date_online": 1509922961,
+    "date_joined": 1509922961,
+    "avatar": {
+      "filename": "avatar.png",
+      "original": "https://assets.modcdn.io/images/placeholder/avatar.png",
+      "thumb_50x50": "https://assets.modcdn.io/images/placeholder/avatar_50x50.png",
+      "thumb_100x100": "https://assets.modcdn.io/images/placeholder/avatar_100x100.png"
+    },
+    "timezone": "",
+    "language": "",
+    "profile_url": "https://mod.io/u/xant"
+  },
+  "resource_url": "https://mod.io/g/@rogueknight/m/@some-mod",
+  "date_added": 1499841487
+} 
+```
+
+### Properties
+
+Name|Type|Description
+---|---|---|---|
+user|[User Object](#schemauser_object)|No description
+resource_url|string|The URL of the resource that the registrant should be redirect to upon success.
+date_added|integer|Unix timestamp of the date the user was registered as a previewer.
 
 
 
@@ -16234,6 +16396,46 @@ date_added|integer|Unix timestamp of date tag was applied.
 
 
 
+## Mod User Preview Object 
+
+<a name="schemamod_user_preview_object"></a>
+
+```json
+{
+  "user": {
+    "id": 1,
+    "name_id": "xant",
+    "username": "XanT",
+    "display_name_portal": null,
+    "date_online": 1509922961,
+    "date_joined": 1509922961,
+    "avatar": {
+      "filename": "avatar.png",
+      "original": "https://assets.modcdn.io/images/placeholder/avatar.png",
+      "thumb_50x50": "https://assets.modcdn.io/images/placeholder/avatar_50x50.png",
+      "thumb_100x100": "https://assets.modcdn.io/images/placeholder/avatar_100x100.png"
+    },
+    "timezone": "",
+    "language": "",
+    "profile_url": "https://mod.io/u/xant"
+  },
+  "resource_url": "https://mod.io/g/@rogueknight/m/@some-mod",
+  "subscribed": false,
+  "date_added": 1499841487
+} 
+```
+
+### Properties
+
+Name|Type|Description
+---|---|---|---|
+user|[User Object](#schemauser_object)|No description
+resource_url|string|The URL of the resource that the registrant should be redirect to upon success.
+subscribed|boolean|If the user is also subscribed to the resource.
+date_added|integer|Unix timestamp of the date the user was registered as a previewer.
+
+
+
 ## Modfile Object
 
    <a name="schemamodfile_object"></a>
@@ -16690,44 +16892,6 @@ avatar|[Avatar Object](#schemaavatar_object)|Contains media URL's to the users a
 timezone|string|Deprecated: No longer used and will be removed in subsequent API version.
 language|string|Deprecated: No longer used and will be removed in subsequent API version. To [localize the API response](#localization) we recommend you set the `Accept-Language` header.
 profile_url|string|URL to the users profile.
-
-
-
-## User Preview Object  
-
-<a name="schemauser_preview_object"></a>
-
-```json
-{
-  "user": {
-    "id": 1,
-    "name_id": "xant",
-    "username": "XanT",
-    "display_name_portal": null,
-    "date_online": 1509922961,
-    "date_joined": 1509922961,
-    "avatar": {
-      "filename": "avatar.png",
-      "original": "https://assets.modcdn.io/images/placeholder/avatar.png",
-      "thumb_50x50": "https://assets.modcdn.io/images/placeholder/avatar_50x50.png",
-      "thumb_100x100": "https://assets.modcdn.io/images/placeholder/avatar_100x100.png"
-    },
-    "timezone": "",
-    "language": "",
-    "profile_url": "https://mod.io/u/xant"
-  },
-  "resource_url": "https://mod.io/g/@rogueknight/m/@some-mod",
-  "date_added": 1499841487
-} 
-```
-
-### Properties
-
-Name|Type|Description
----|---|---|---|
-user|[User Object](#schemauser_object)|No description
-resource_url|string|The URL of the resource that the registrant should be redirect to upon success.
-date_added|integer|Unix timestamp of the date the user was registered as a previewer.
 
 
 
