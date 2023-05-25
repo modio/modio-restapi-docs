@@ -790,6 +790,7 @@ Official --parse_sitename [Plugins and SDKs](#implementation) will automatically
 
 Target Platform | Header Value
 ---------- | ----------  
+Source | `source`
 Windows | `windows`
 Mac | `mac`
 Linux | `linux`

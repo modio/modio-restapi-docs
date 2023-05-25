@@ -809,6 +809,7 @@ Official mod.io [Plugins and SDKs](#implementation) will automatically supply th
 
 Target Platform | Header Value
 ---------- | ----------  
+Source | `source`
 Windows | `windows`
 Mac | `mac`
 Linux | `linux`
@@ -2071,7 +2072,7 @@ To perform this request, you must be authenticated via one of the following meth
 
 ```shell
 # You can also use wget
-curl -X POST https://api.mod.io/v1/external/openid?api_key=YourApiKey \
+curl -X POST https://api.mod.io/v1/external/openidauth?api_key=YourApiKey \
   -H 'Content-Type: application/x-www-form-urlencoded' \ 
   -H 'Accept: application/json' \
   -d 'id_token=eyJhbXciOiJIUzI1Lizs....'
@@ -2079,7 +2080,7 @@ curl -X POST https://api.mod.io/v1/external/openid?api_key=YourApiKey \
 ```
 
 ```http
-POST https://api.mod.io/v1/external/openid?api_key=YourApiKey HTTP/1.1
+POST https://api.mod.io/v1/external/openidauth?api_key=YourApiKey HTTP/1.1
 Host: api.mod.io
 Content-Type: application/x-www-form-urlencoded
 Accept: application/json
@@ -2094,7 +2095,7 @@ var headers = {
 };
 
 $.ajax({
-  url: 'https://api.mod.io/v1/external/openid',
+  url: 'https://api.mod.io/v1/external/openidauth',
   method: 'post',
   data: '?api_key=YourApiKey',
   headers: headers,
@@ -2115,7 +2116,7 @@ const headers = {
 
 };
 
-fetch('https://api.mod.io/v1/external/openid?api_key=YourApiKey',
+fetch('https://api.mod.io/v1/external/openidauth?api_key=YourApiKey',
 {
   method: 'POST',
   body: inputBody,
@@ -2135,7 +2136,7 @@ headers = {
   'Accept': 'application/json'
 }
 
-r = requests.post('https://api.mod.io/v1/external/openid', params={
+r = requests.post('https://api.mod.io/v1/external/openidauth', params={
   'api_key': 'YourApiKey'
 }, headers = headers)
 
@@ -2143,7 +2144,7 @@ print r.json()
 ```
 
 ```java
-URL obj = new URL("https://api.mod.io/v1/external/openid?api_key=YourApiKey");
+URL obj = new URL("https://api.mod.io/v1/external/openidauth?api_key=YourApiKey");
 HttpURLConnection con = (HttpURLConnection) obj.openConnection();
 con.setRequestMethod("POST");
 int responseCode = con.getResponseCode();
@@ -2158,7 +2159,7 @@ in.close();
 System.out.println(response.toString());
 ```
 
-`POST /external/openid`
+`POST /external/openidauth`
 
 Request an access token on behalf of an OpenID identity provider. To use this method of authentication, you must configure the OpenID config in your games authentication admin page. A Successful request will return an [Access Token Object](#access-token-object).
 
@@ -3101,7 +3102,6 @@ Get all mods for the corresponding game. Successful request will return an array
     metadata_kvp|string|Colon-separated values representing the key-value pairs you want to filter the results by. If you supply more than one key-pair, separate the pairs by a comma. Will only filter by an exact key-pair match.
     tags|string|Comma-separated values representing the tags you want to filter the results by. If you specify multiple tags, only mods which have all tags will be returned, and only tags that are supported by the parent game can be applied. To determine what tags are eligible, see the tags values within `tag_options` column on the parent [Game Object](#game-object). If you want to ensure mods returned do not contain particular tag(s), you can use the `tags-not-in` filter either independently or alongside this filter.
     platform_status|string|Filter results by their current platform status, valid values are `pending_only` and `live_and_pending` (only game admins can filter by this field, see [status and visibility](#status-amp-visibility) for details).<br><br>__NOTE:__ that this parameter is only considered in the request if the parent game has enabled [cross-platform filtering](#targeting-a-platform).
-    platforms|string|Filter results by their current platform, accepts multiple platforms as comma-separated values (e.g. `ps4,switch`), valid values are `all`, `windows`, `mac`, `linux`, `android`, `ios`, `xboxone`, `xboxseriesx`, `ps4`, `ps5`, `switch`, `oculus` (only game admins can filter by this field, see [status and visibility](#status-amp-visibility) for details).<br><br>__NOTE:__ that this parameter will take precedence over the header from [cross-platform filtering](#targeting-a-platform).
 
     Sort|Description
     ---|---
@@ -12507,7 +12507,6 @@ Get all mod's the _authenticated user_ is subscribed to. Successful request will
     metadata_kvp|string|Colon-separated values representing the key-value pairs you want to filter the results by. If you supply more than one key-pair, separate the pairs by a comma. Will only filter by an exact key-pair match.
     tags|string|Comma-separated values representing the tags you want to filter the results by. If you specify multiple tags, only mods which have all tags will be returned, and only tags that are supported by the parent game can be applied. To determine what tags are eligible, see the tags values within `tag_options` column on the parent [Game Object](#game-object). If you want to ensure mods returned do not contain particular tag(s), you can use the `tags-not-in` filter either independently or alongside this filter.
     platform_status|string|Filter results by their current platform status, valid values are `pending_only` and `live_and_pending` (only game admins can filter by this field, see [status and visibility](#status-amp-visibility) for details).<br><br>__NOTE:__ that this parameter is only considered in the request if the parent game has enabled [cross-platform filtering](#targeting-a-platform).
-    platforms|string|Filter results by their current platform, accepts multiple platforms as comma-separated values (e.g. `ps4,switch`), valid values are `all`, `windows`, `mac`, `linux`, `android`, `ios`, `xboxone`, `xboxseriesx`, `ps4`, `ps5`, `switch`, `oculus` (only game admins can filter by this field, see [status and visibility](#status-amp-visibility) for details).<br><br>__NOTE:__ that this parameter will take precedence over the header from [cross-platform filtering](#targeting-a-platform).
 
     Sort|Description
     ---|---
@@ -12782,7 +12781,6 @@ Get all mods the _authenticated user_ added or is a team member of. Successful r
     metadata_kvp|string|Colon-separated values representing the key-value pairs you want to filter the results by. If you supply more than one key-pair, separate the pairs by a comma. Will only filter by an exact key-pair match.
     tags|string|Comma-separated values representing the tags you want to filter the results by. If you specify multiple tags, only mods which have all tags will be returned, and only tags that are supported by the parent game can be applied. To determine what tags are eligible, see the tags values within `tag_options` column on the parent [Game Object](#game-object). If you want to ensure mods returned do not contain particular tag(s), you can use the `tags-not-in` filter either independently or alongside this filter.
     platform_status|string|Filter results by their current platform status, valid values are `pending_only` and `live_and_pending`.<br><br>__NOTE:__ that this parameter is only considered in the request if the parent game has enabled [cross-platform filtering](#targeting-a-platform).
-    platforms|string|Filter results by their current platform, accepts multiple platforms as comma-separated values (e.g. `ps4,switch`), valid values are `all`, `windows`, `mac`, `linux`, `android`, `ios`, `xboxone`, `xboxseriesx`, `ps4`, `ps5`, `switch`, `oculus` (only game admins can filter by this field, see [status and visibility](#status-amp-visibility) for details).<br><br>__NOTE:__ that this parameter will take precedence over the header from [cross-platform filtering](#targeting-a-platform).
 
     Sort|Description
     ---|---
