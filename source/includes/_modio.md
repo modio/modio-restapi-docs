@@ -4,7 +4,7 @@
 
 Welcome to the official documentation for [--parse_sitename](--parse_siteurl), an API for developers to add mod support to their games. We recommend you read our _Getting Started_ guide below to accurately and efficiently consume our REST API. 
 
-__API path:__ [--parse_apiurl](--parse_apiurl)
+__API path:__ [--parse_apiurl](--parse_apiurl) (see your API access dashboard)
 
 __Current version:__ --parse_vdropdown 
 
@@ -751,7 +751,7 @@ You should always plan to minimize requests and cache API responses. It will mak
 
 ## Testing
 
-To help familiarize yourself with the --parse_sitename API and to ensure your implementation is battle-hardened and operating as intended, we have setup a test sandbox which is identical to the production environment. The test sandbox allows you to make requests to the API whilst your integration is a work in progress and the submitted data is not important. When you are ready to go live it's as easy as adding your game to the production environment, substituting the test API URL for the production API URL, and updating the `api_key` and `game_id` you are using to the values from your games profile on production. 
+To help familiarize yourself with the --parse_sitename API and to ensure your implementation is battle-hardened and operating as intended, we have setup a test sandbox which is identical to the production environment. The test sandbox allows you to make requests to the API whilst your integration is a work in progress and the submitted data is not important. When you are ready to go live it's as easy as adding your game to the production environment, substituting the test API path for the production API path, and updating the `api_key` and `game_id` you are using to the values from your games profile on production. 
 
 To begin using the test sandbox you will need to [register a test account](--parse_sitetesturl) and [add your game](--parse_sitetesturl/g/add). You will only see games you are a team member of and there is no connection between the data added to the test environment and production. We highly recommend you use the test environment when integrating as it allows you to keep your development private, and you can submit as much dummy data as you need to try the functionality required, without having to clean it up at the end.
 
