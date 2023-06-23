@@ -3900,6 +3900,7 @@ Edit details for a mod. If you want to update the `logo` or media associated wit
     homepage_url|string||Official homepage for your mod. Must be a valid URL.
     stock|integer||Maximium number of subscribers for this mod. A value of 0 disables this limit.
     maturity_option|integer||Choose if this mod contains any of the following mature content.<br><br>__NOTE:__ The value of this field will default to 0 unless the parent game allows you to flag mature content (see `maturity_options` field in [Game Object](#game-object)). <br><br>__0__ = None set<br>__1__ = Alcohol<br>__2__ = Drugs<br>__4__ = Violence<br>__8__ = Explicit<br>__?__ = Add the options you want together, to enable multiple options (see [BITWISE fields](#bitwise-and-bitwise-and))
+    game_options|integer||Game Moderator only features enabled for this mod:<br><br>__0__ = All of the options below are disabled<br>__1__ = Enable Featured, allowing this mod to be filter by featured<br>_2_ = Enable Official, marking this mod as official content<br>__?__ = Add the options you want together, to enable multiple options (see [BITWISE fields](#bitwise-and-bitwise-and))
     community_options|integer||Community features enabled for this mod:<br><br>__0__ = All of the options below are disabled<br>__1__ = Enable comments<br>_64_ = Enable previews<br>__?__ = Add the options you want together, to enable multiple options (see [BITWISE fields](#bitwise-and-bitwise-and))
     metadata_blob|string||Metadata stored by the game developer which may include properties as to how the item works, or other information you need to display. Metadata can also be stored as searchable [key value pairs](#metadata), and to individual [mod files](#get-modfiles).
 
@@ -13210,6 +13211,274 @@ Status|Meaning|Error Ref|Description|Response Schema
 To perform this request, you must be authenticated via one of the following methods:
 <a href="#authentication">OAuth 2</a> (Scopes: read)
 </aside>
+# Login with mod.io
+
+## Exchange Authorization Code
+
+> Example request
+
+```shell
+# You can also use wget
+curl -X POST https://api.mod.io/v1/oauth/token \
+  -H 'Content-Type: application/x-www-form-urlencoded' \ 
+  -H 'Accept: application/json' \
+  -d 'client_id=1234' \
+  -d 'client_secret=bqyMxkGE4QVBaYpHQcf6XJENjZ5RWFHsbEZ5SFiGa' \
+  -d 'code=c7b033d3f163a5cf58844899214334dab11e6a06ddb2539e4e' \
+  -d 'grant_type=authorization_code' \
+  -d 'redirect_uri=https://your-backend-server.com/oauth/login/callback'
+
+```
+
+```http
+POST https://api.mod.io/v1/oauth/token HTTP/1.1
+Host: api.mod.io
+Content-Type: application/x-www-form-urlencoded
+Accept: application/json
+
+```
+
+```javascript
+var headers = {
+  'Content-Type':'application/x-www-form-urlencoded',
+  'Accept':'application/json'
+
+};
+
+$.ajax({
+  url: 'https://api.mod.io/v1/oauth/token',
+  method: 'post',
+
+  headers: headers,
+  success: function(data) {
+    console.log(JSON.stringify(data));
+  }
+})
+```
+
+```javascript--nodejs
+const request = require('node-fetch');
+const inputBody = '{
+  "client_id": "1234",
+  "client_secret": "bqyMxkGE4QVBaYpHQcf6XJENjZ5RWFHsbEZ5SFiGa",
+  "code": "c7b033d3f163a5cf58844899214334dab11e6a06ddb2539e4e",
+  "grant_type": "authorization_code",
+  "redirect_uri": "https://your-backend-server.com/oauth/login/callback"
+}';
+const headers = {
+  'Content-Type':'application/x-www-form-urlencoded',
+  'Accept':'application/json'
+
+};
+
+fetch('https://api.mod.io/v1/oauth/token',
+{
+  method: 'POST',
+  body: inputBody,
+  headers: headers
+})
+.then(function(res) {
+    return res.json();
+}).then(function(body) {
+    console.log(body);
+});
+```
+
+```python
+import requests
+headers = {
+  'Content-Type': 'application/x-www-form-urlencoded',
+  'Accept': 'application/json'
+}
+
+r = requests.post('https://api.mod.io/v1/oauth/token', params={
+
+}, headers = headers)
+
+print r.json()
+```
+
+```java
+URL obj = new URL("https://api.mod.io/v1/oauth/token");
+HttpURLConnection con = (HttpURLConnection) obj.openConnection();
+con.setRequestMethod("POST");
+int responseCode = con.getResponseCode();
+BufferedReader in = new BufferedReader(
+    new InputStreamReader(con.getInputStream()));
+String inputLine;
+StringBuffer response = new StringBuffer();
+while ((inputLine = in.readLine()) != null) {
+    response.append(inputLine);
+}
+in.close();
+System.out.println(response.toString());
+```
+
+`POST /oauth/token`
+
+Exchange a `code` returned to your server with your client id & secret for an access token. Successful request will return a [TODO](#todo) object.
+
+    Parameter|Type|Required|Description
+    ---|---|---|---|
+    client_id|integer|true|Your issued Client ID.
+    client_secret|string|true|Your issued Client Secret. This should be secure on a backend server and never displayed to players.
+    grant_type|string|true|Must be `authorization_code`, for refresh tokens see [Exchange Refresh Token](#exchange-refresh-token) endpoint.
+    code|string|true|The code returned to your backend server.
+    redirect_uri|string|true|The `redirect_uri` registered with your application. This must be the same redirect_uri used in the first step when logging in via mod.io.
+
+> Example response
+
+```json
+{
+  "token_type": "Bearer",
+  "expires_in": "10800",
+  "access_token": "eyJlbmMiOiJBMTI4Q0JDLUhTMjU2IiwiYWxnIjoiUlNBLU9BRVAiLCJjdHkiOi....",
+  "refresh_token": "eyJlbmMiOiJBMTI4Q0JDLUhTMjU2IiwiYWxnIjoiUlNBLU9BRVAiLCJjdHkiOi...."
+}
+
+```
+<h3 id="Exchange-Authorization-Code-responses">Responses</h3>
+
+Status|Meaning|Error Ref|Description|Response Schema
+---|---|----|---|---|
+200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)||Success|[Web Access Token Object](#schemaweb_access_token_object)
+<aside class="auth-notice">
+To perform this request, you must be authenticated via one of the following methods:
+<a href="#authentication">OAuth 2</a> (Scopes: web)
+</aside>
+## Exchange Refresh Token
+
+> Example request
+
+```shell
+# You can also use wget
+curl -X POST https://api.mod.io/v1/oauth/token/ \
+  -H 'Content-Type: application/x-www-form-urlencoded' \ 
+  -H 'Accept: application/json' \
+  -d 'client_id=1234' \
+  -d 'client_secret=bqyMxkGE4QVBaYpHQcf6XJENjZ5RWFHsbEZ5SFiGa' \
+  -d 'refresh_token=eyJlbmMiOiJBMTI4Q0JDLUhTMjU2IiwiYWxnIjoiUlNBLU9BRVAiLC' \
+  -d 'grant_type=refresh_token' \
+  -d 'redirect_uri=https://your-backend-server.com/oauth/login/callback'
+
+```
+
+```http
+POST https://api.mod.io/v1/oauth/token/ HTTP/1.1
+Host: api.mod.io
+Content-Type: application/x-www-form-urlencoded
+Accept: application/json
+
+```
+
+```javascript
+var headers = {
+  'Content-Type':'application/x-www-form-urlencoded',
+  'Accept':'application/json'
+
+};
+
+$.ajax({
+  url: 'https://api.mod.io/v1/oauth/token/',
+  method: 'post',
+
+  headers: headers,
+  success: function(data) {
+    console.log(JSON.stringify(data));
+  }
+})
+```
+
+```javascript--nodejs
+const request = require('node-fetch');
+const inputBody = '{
+  "client_id": "1234",
+  "client_secret": "bqyMxkGE4QVBaYpHQcf6XJENjZ5RWFHsbEZ5SFiGa",
+  "refresh_token": "eyJlbmMiOiJBMTI4Q0JDLUhTMjU2IiwiYWxnIjoiUlNBLU9BRVAiLC",
+  "grant_type": "refresh_token",
+  "redirect_uri": "https://your-backend-server.com/oauth/login/callback"
+}';
+const headers = {
+  'Content-Type':'application/x-www-form-urlencoded',
+  'Accept':'application/json'
+
+};
+
+fetch('https://api.mod.io/v1/oauth/token/',
+{
+  method: 'POST',
+  body: inputBody,
+  headers: headers
+})
+.then(function(res) {
+    return res.json();
+}).then(function(body) {
+    console.log(body);
+});
+```
+
+```python
+import requests
+headers = {
+  'Content-Type': 'application/x-www-form-urlencoded',
+  'Accept': 'application/json'
+}
+
+r = requests.post('https://api.mod.io/v1/oauth/token/', params={
+
+}, headers = headers)
+
+print r.json()
+```
+
+```java
+URL obj = new URL("https://api.mod.io/v1/oauth/token/");
+HttpURLConnection con = (HttpURLConnection) obj.openConnection();
+con.setRequestMethod("POST");
+int responseCode = con.getResponseCode();
+BufferedReader in = new BufferedReader(
+    new InputStreamReader(con.getInputStream()));
+String inputLine;
+StringBuffer response = new StringBuffer();
+while ((inputLine = in.readLine()) != null) {
+    response.append(inputLine);
+}
+in.close();
+System.out.println(response.toString());
+```
+
+`POST /oauth/token/`
+
+Exchange a `refresh_token` for an access token. Successful request will return a [Web Access Token Object](#web-access-token-object) object.
+
+    Parameter|Type|Required|Description
+    ---|---|---|---|
+    client_id|integer|true|Your issued Client ID.
+    client_secret|string|true|Your issued Client Secret. This should be secure on a backend server and never displayed to players.
+    grant_type|string|true|Must be `refresh_token`.
+    refresh_token|string|true|The refresh token.
+    redirect_uri|string|true|The `redirect_uri` registered with your application. This must be the same redirect_uri used in the first step when logging in via mod.io.
+
+> Example response
+
+```json
+{
+  "token_type": "Bearer",
+  "expires_in": "10800",
+  "access_token": "eyJlbmMiOiJBMTI4Q0JDLUhTMjU2IiwiYWxnIjoiUlNBLU9BRVAiLCJjdHkiOi....",
+  "refresh_token": "eyJlbmMiOiJBMTI4Q0JDLUhTMjU2IiwiYWxnIjoiUlNBLU9BRVAiLCJjdHkiOi...."
+}
+
+```
+<h3 id="Exchange-Refresh-Token-responses">Responses</h3>
+
+Status|Meaning|Error Ref|Description|Response Schema
+---|---|----|---|---|
+200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)||Success|[Web Access Token Object](#schemaweb_access_token_object)
+<aside class="auth-notice">
+To perform this request, you must be authenticated via one of the following methods:
+<a href="#authentication">OAuth 2</a> (Scopes: web)
+</aside>
 # Guides
 
 ## Get Guides
@@ -14175,6 +14444,129 @@ Status|Meaning|Error Ref|Description|Response Schema
 <aside class="auth-notice">
 To perform this request, you must be authenticated via one of the following methods:
 <a href="#authentication">api_key</a>, <a href="#authentication">OAuth 2</a> (Scopes: read)
+</aside>
+# WebSocket
+
+## Process WebSocket Message
+
+> Example request
+
+```shell
+# You can also use wget
+curl -X POST https://api.mod.io/v1/websocket/message \
+  -H 'Origin: https://mod.io' \ 
+  -H 'Accept: application/json'
+
+```
+
+```http
+POST https://api.mod.io/v1/websocket/message HTTP/1.1
+Host: api.mod.io
+
+Accept: application/json
+Origin: https://mod.io
+
+```
+
+```javascript
+var headers = {
+  'Origin':'https://mod.io',
+  'Accept':'application/json'
+
+};
+
+$.ajax({
+  url: 'https://api.mod.io/v1/websocket/message',
+  method: 'post',
+
+  headers: headers,
+  success: function(data) {
+    console.log(JSON.stringify(data));
+  }
+})
+```
+
+```javascript--nodejs
+const request = require('node-fetch');
+
+const headers = {
+  'Origin':'https://mod.io',
+  'Accept':'application/json'
+
+};
+
+fetch('https://api.mod.io/v1/websocket/message',
+{
+  method: 'POST',
+
+  headers: headers
+})
+.then(function(res) {
+    return res.json();
+}).then(function(body) {
+    console.log(body);
+});
+```
+
+```python
+import requests
+headers = {
+  'Origin': 'https://mod.io',
+  'Accept': 'application/json'
+}
+
+r = requests.post('https://api.mod.io/v1/websocket/message', params={
+
+}, headers = headers)
+
+print r.json()
+```
+
+```java
+URL obj = new URL("https://api.mod.io/v1/websocket/message");
+HttpURLConnection con = (HttpURLConnection) obj.openConnection();
+con.setRequestMethod("POST");
+int responseCode = con.getResponseCode();
+BufferedReader in = new BufferedReader(
+    new InputStreamReader(con.getInputStream()));
+String inputLine;
+StringBuffer response = new StringBuffer();
+while ((inputLine = in.readLine()) != null) {
+    response.append(inputLine);
+}
+in.close();
+System.out.println(response.toString());
+```
+
+`POST //websocket/message`
+
+Send a websocket message (from our API Gateway proxy) to the API for processing. Successful request will return a [WebSocket Message Object](#websocket-message-object).
+
+    Parameter|Type|Required|Description
+    ---|---|---|---|
+    messages|array|true|The messages sent from the API Gateway.
+
+    Header Parameters|Required|Description
+    ---|---|---|---|
+    ConnectionId|true|The unique connection ID to identify a websocket connection.
+    Referer|true|The domain (including sub-domain) that the request originated from. The API expects `g-{id}.ws.*`.
+
+> Example response
+
+```json
+{
+  "success": true
+}
+
+```
+<h3 id="Process-WebSocket-Message-responses">Responses</h3>
+
+Status|Meaning|Error Ref|Description|Response Schema
+---|---|----|---|---|
+200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)||Successful Request|[Proxy Transformer Object](#schemaproxy_transformer_object)
+<aside class="auth-notice">
+To perform this request, you must be authenticated via one of the following methods:
+<a href="#authentication">OAuth 2</a> (Scopes: web)
 </aside>
 # Response Schemas
 ## Access Token Object  
@@ -16515,7 +16907,7 @@ platforms|[Modfile Platform Object](#schemamodfile_platform_object)[]|Contains m
 Name|Type|Description
 ---|---|---|---|
 platform|string|A [target platform](#targeting-a-platform).
-status|integer|The status of the modfile for the corresponding `platform`. Possible values:<br><br>__0__ = Pending<br>__1__ = Approved<br>__2__ Denied
+status|integer|The status of the modfile for the corresponding `platform`. Possible values:<br><br>__0__ = Pending<br>__1__ = Approved<br>__2__ = Denied
 
 
 
@@ -16618,6 +17010,24 @@ Name|Type|Description
 resource_url|string|The sharable URL that resource admins can pass around.
 date_added|integer|Unix timestamp of the date the hash was first generated.
 date_updated|integer|Unix timestamp of the date the hash was regenerated.
+
+
+
+## Proxy Transformer Object  
+
+<a name="schemaproxy_transformer_object"></a>
+
+```json
+{
+  "success": true
+} 
+```
+
+### Properties
+
+Name|Type|Description
+---|---|---|---|
+success|bool|Did the operation succeed?
 
 
 
@@ -16831,6 +17241,32 @@ danger|string|The danger hex color code.
 
 
 
+## User Access Object  
+
+<a name="schemauser_access_object"></a>
+
+```json
+{
+  "resource_type": "games",
+  "resource_id": 3026,
+  "resource_name": "My Awesome Mod",
+  "resource_name_id": "my-awesome-mod",
+  "resource_url": ""
+} 
+```
+
+### Properties
+
+Name|Type|Description
+---|---|---|---|
+resource_type|string|Type of resource. Can be one of the following:<br><br>- _games_<br>- _mods_<br>-_guides_
+resource_id|integer|Unique id of the resource.
+resource_name|integer|The relative name of the resource.
+resource_name_id|string|Path for the resource on mod.io.
+resource_url|string|URL to the resource that was reported. If the resource has been permanently deleted, and thus you cannot access it anymore - this field will be null.
+
+
+
 ## User Event Object  
 
 <a name="schemauser_event_object"></a>
@@ -16897,6 +17333,50 @@ avatar|[Avatar Object](#schemaavatar_object)|Contains media URL's to the users a
 timezone|string|Deprecated: No longer used and will be removed in subsequent API version.
 language|string|Deprecated: No longer used and will be removed in subsequent API version. To [localize the API response](#localization) we recommend you set the `Accept-Language` header.
 profile_url|string|URL to the users profile.
+
+
+
+## Web Access Token Object 
+
+<a name="schemaweb_access_token_object"></a>
+
+```json
+{
+  "token_type": "Bearer",
+  "expires_in": "10800",
+  "access_token": "eyJlbmMiOiJBMTI4Q0JDLUhTMjU2IiwiYWxnIjoiUlNBLU9BRVAiLCJjdHkiOi....",
+  "refresh_token": "eyJlbmMiOiJBMTI4Q0JDLUhTMjU2IiwiYWxnIjoiUlNBLU9BRVAiLCJjdHkiOi...."
+} 
+```
+
+### Properties
+
+Name|Type|Description
+---|---|---|---|
+token_type|string|Token type, always `Bearer`.
+expires_in|int|Seconds until the supplied `access_token` expires which is fixed at 3 hours.
+access_token|string|The access token used to make requests to the mod.io API on behalf of the user.
+refresh_token|string|The refresh token that can be exchanged via the _Exchange Refresh Token_ endpoint for a new access token.
+
+
+
+## Web Authorize Object  
+
+<a name="schemaweb_authorize_object"></a>
+
+```json
+{
+  "code": "def5020077deb4eafe6fb6743b1fd6857ce22112d3400e6cc684633f8c9904faae1a83c23b",
+  "state": "T6KQGIXWrHXxFDfyp5Hh"
+} 
+```
+
+### Properties
+
+Name|Type|Description
+---|---|---|---|
+code|string|The authorization code to exchange for an access token.
+state|string|Optional state parameter to inspect against to prevent CSFR attacks.
 
 
 
