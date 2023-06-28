@@ -3900,7 +3900,6 @@ Edit details for a mod. If you want to update the `logo` or media associated wit
     homepage_url|string||Official homepage for your mod. Must be a valid URL.
     stock|integer||Maximium number of subscribers for this mod. A value of 0 disables this limit.
     maturity_option|integer||Choose if this mod contains any of the following mature content.<br><br>__NOTE:__ The value of this field will default to 0 unless the parent game allows you to flag mature content (see `maturity_options` field in [Game Object](#game-object)). <br><br>__0__ = None set<br>__1__ = Alcohol<br>__2__ = Drugs<br>__4__ = Violence<br>__8__ = Explicit<br>__?__ = Add the options you want together, to enable multiple options (see [BITWISE fields](#bitwise-and-bitwise-and))
-    game_options|integer||Game Moderator only features enabled for this mod:<br><br>__0__ = All of the options below are disabled<br>__1__ = Enable Featured, allowing this mod to be filter by featured<br>_2_ = Enable Official, marking this mod as official content<br>__?__ = Add the options you want together, to enable multiple options (see [BITWISE fields](#bitwise-and-bitwise-and))
     community_options|integer||Community features enabled for this mod:<br><br>__0__ = All of the options below are disabled<br>__1__ = Enable comments<br>_64_ = Enable previews<br>__?__ = Add the options you want together, to enable multiple options (see [BITWISE fields](#bitwise-and-bitwise-and))
     metadata_blob|string||Metadata stored by the game developer which may include properties as to how the item works, or other information you need to display. Metadata can also be stored as searchable [key value pairs](#metadata), and to individual [mod files](#get-modfiles).
 
@@ -13211,7 +13210,7 @@ Status|Meaning|Error Ref|Description|Response Schema
 To perform this request, you must be authenticated via one of the following methods:
 <a href="#authentication">OAuth 2</a> (Scopes: read)
 </aside>
-# Login with mod.io
+# Sign in with mod.io
 
 ## Exchange Authorization Code
 
@@ -13352,7 +13351,7 @@ To perform this request, you must be authenticated via one of the following meth
 
 ```shell
 # You can also use wget
-curl -X POST https://api.mod.io/v1/oauth/token/ \
+curl -X POST https://api.mod.io/v1/oauth/token/refresh \
   -H 'Content-Type: application/x-www-form-urlencoded' \ 
   -H 'Accept: application/json' \
   -d 'client_id=1234' \
@@ -13364,7 +13363,7 @@ curl -X POST https://api.mod.io/v1/oauth/token/ \
 ```
 
 ```http
-POST https://api.mod.io/v1/oauth/token/ HTTP/1.1
+POST https://api.mod.io/v1/oauth/token/refresh HTTP/1.1
 Host: api.mod.io
 Content-Type: application/x-www-form-urlencoded
 Accept: application/json
@@ -13379,7 +13378,7 @@ var headers = {
 };
 
 $.ajax({
-  url: 'https://api.mod.io/v1/oauth/token/',
+  url: 'https://api.mod.io/v1/oauth/token/refresh',
   method: 'post',
 
   headers: headers,
@@ -13404,7 +13403,7 @@ const headers = {
 
 };
 
-fetch('https://api.mod.io/v1/oauth/token/',
+fetch('https://api.mod.io/v1/oauth/token/refresh',
 {
   method: 'POST',
   body: inputBody,
@@ -13424,7 +13423,7 @@ headers = {
   'Accept': 'application/json'
 }
 
-r = requests.post('https://api.mod.io/v1/oauth/token/', params={
+r = requests.post('https://api.mod.io/v1/oauth/token/refresh', params={
 
 }, headers = headers)
 
@@ -13432,7 +13431,7 @@ print r.json()
 ```
 
 ```java
-URL obj = new URL("https://api.mod.io/v1/oauth/token/");
+URL obj = new URL("https://api.mod.io/v1/oauth/token/refresh");
 HttpURLConnection con = (HttpURLConnection) obj.openConnection();
 con.setRequestMethod("POST");
 int responseCode = con.getResponseCode();
@@ -13447,7 +13446,7 @@ in.close();
 System.out.println(response.toString());
 ```
 
-`POST /oauth/token/`
+`POST /oauth/token/refresh`
 
 Exchange a `refresh_token` for an access token. Successful request will return a [Web Access Token Object](#web-access-token-object) object.
 
