@@ -2565,6 +2565,391 @@ Status|Meaning|Error Ref|Description|Response Schema
 To perform this request, you must be authenticated via one of the following methods:
 <a href="#authentication">OAuth 2</a> (Scopes: read)
 </aside>
+# Sign in with mod.io (Web)
+
+## 1. Sign in with mod.io
+
+> Example request
+
+```shell
+# You can also use wget
+curl -X GET https://api.mod.io/v1/authorize?client_id=your-client-id&grant_type=authorization_code&response_type=code&scope=read%2520write&state=T6KQGIXWrHXxFDfyp5Hh&redirect_uri=https%3A%2F%2Fyour-callback-server.com%2Foauth%2Flogin%2Fcallback \
+  -H 'Accept: application/json'
+
+```
+
+```http
+GET https://api.mod.io/v1/authorize?client_id=your-client-id&grant_type=authorization_code&response_type=code&scope=read%2520write&state=T6KQGIXWrHXxFDfyp5Hh&redirect_uri=https%3A%2F%2Fyour-callback-server.com%2Foauth%2Flogin%2Fcallback HTTP/1.1
+Host: api.mod.io
+
+Accept: application/json
+
+```
+
+```javascript
+var headers = {
+  'Accept':'application/json'
+
+};
+
+$.ajax({
+  url: 'https://api.mod.io/v1/authorize',
+  method: 'get',
+  data: '?client_id=your-client-id&grant_type=authorization_code&response_type=code&scope=read%2520write&state=T6KQGIXWrHXxFDfyp5Hh&redirect_uri=https%3A%2F%2Fyour-callback-server.com%2Foauth%2Flogin%2Fcallback',
+  headers: headers,
+  success: function(data) {
+    console.log(JSON.stringify(data));
+  }
+})
+```
+
+```javascript--nodejs
+const request = require('node-fetch');
+
+const headers = {
+  'Accept':'application/json'
+
+};
+
+fetch('https://api.mod.io/v1/authorize?client_id=your-client-id&grant_type=authorization_code&response_type=code&scope=read%2520write&state=T6KQGIXWrHXxFDfyp5Hh&redirect_uri=https%3A%2F%2Fyour-callback-server.com%2Foauth%2Flogin%2Fcallback',
+{
+  method: 'GET',
+
+  headers: headers
+})
+.then(function(res) {
+    return res.json();
+}).then(function(body) {
+    console.log(body);
+});
+```
+
+```python
+import requests
+headers = {
+  'Accept': 'application/json'
+}
+
+r = requests.get('https://api.mod.io/v1/authorize', params={
+  'client_id': 'your-client-id',  'grant_type': 'authorization_code',  'response_type': 'code',  'scope': 'read%20write',  'state': 'T6KQGIXWrHXxFDfyp5Hh',  'redirect_uri': 'https://your-callback-server.com/oauth/login/callback'
+}, headers = headers)
+
+print r.json()
+```
+
+```java
+URL obj = new URL("https://api.mod.io/v1/authorize?client_id=your-client-id&grant_type=authorization_code&response_type=code&scope=read%2520write&state=T6KQGIXWrHXxFDfyp5Hh&redirect_uri=https%3A%2F%2Fyour-callback-server.com%2Foauth%2Flogin%2Fcallback");
+HttpURLConnection con = (HttpURLConnection) obj.openConnection();
+con.setRequestMethod("GET");
+int responseCode = con.getResponseCode();
+BufferedReader in = new BufferedReader(
+    new InputStreamReader(con.getInputStream()));
+String inputLine;
+StringBuffer response = new StringBuffer();
+while ((inputLine = in.readLine()) != null) {
+    response.append(inputLine);
+}
+in.close();
+System.out.println(response.toString());
+```
+
+`GET /authorize`
+
+Log a user into your website with a mod.io account using the OAuth2 [Authorization Code flow](https://datatracker.ietf.org/doc/html/rfc6749#section-1.3.1). Your application should redirect to this URL after the user initiates the login flow. Upon a successful login the user will be redirected to your registered callback URL where you can [exchange](#2-exchange-authorization-code) the `code` returned for an access token.<br><br>__Note:__ This request is a web display hosted by mod.io, and therefore does not target the usual base API URL as shown by the example code snippet.
+
+    Parameter|Type|Required|Description
+    ---|---|---|---|
+    client_id|integer|true|Client ID issued to your game.
+    grant_type|string|true|Grant Type. Must be `authorization_code`
+    response_type|string|true|Response Type. Must be `code`
+    scope|string|true|Space-separated scopes you want to request access to. Currently only `read` and `write` is supported. To use both provide value `read write`
+    state|string|false|A random string you supply and validate upon redirection to your backend service to ensure the value is identical to prevent [CSRF attacks](https://en.wikipedia.org/wiki/Cross-site_request_forgery). Optional but highly recommended.
+    redirect_uri|string|true|The URL to your server which mod.io will redirect after login. This value must be a one of the redirect URL's configured in your game admin portal.
+
+> Example response
+
+```json
+{
+  "code": "def5020077deb4eafe6fb6743b1fd6857ce22112d3400e6cc684633f8c9904faae1a83c23b",
+  "state": "T6KQGIXWrHXxFDfyp5Hh"
+}
+
+```
+<h3 id="1.-Sign-in-with-mod.io-responses">Responses</h3>
+
+Status|Meaning|Error Ref|Description|Response Schema
+---|---|----|---|---|
+200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)||Successful Request|[Web Authorize Object](#schemaweb_authorize_object)
+<aside class="success">
+This operation does not require authentication
+</aside>
+
+## 2. Exchange Authorization Code
+
+> Example request
+
+```shell
+# You can also use wget
+curl -X POST https://api.mod.io/v1/oauth/token \
+  -H 'Content-Type: application/x-www-form-urlencoded' \ 
+  -H 'Accept: application/json' \
+  -d 'client_id=1234' \
+  -d 'client_secret=bqyMxkGE4QVBaYpHQcf6XJENjZ5RWFHsbEZ5SFiGa' \
+  -d 'code=c7b033d3f163a5cf58844899214334dab11e6a06ddb2539e4e' \
+  -d 'grant_type=authorization_code' \
+  -d 'redirect_uri=https://your-callback-server.com/oauth/login/callback'
+
+```
+
+```http
+POST https://api.mod.io/v1/oauth/token HTTP/1.1
+Host: api.mod.io
+Content-Type: application/x-www-form-urlencoded
+Accept: application/json
+
+```
+
+```javascript
+var headers = {
+  'Content-Type':'application/x-www-form-urlencoded',
+  'Accept':'application/json'
+
+};
+
+$.ajax({
+  url: 'https://api.mod.io/v1/oauth/token',
+  method: 'post',
+
+  headers: headers,
+  success: function(data) {
+    console.log(JSON.stringify(data));
+  }
+})
+```
+
+```javascript--nodejs
+const request = require('node-fetch');
+const inputBody = '{
+  "client_id": "1234",
+  "client_secret": "bqyMxkGE4QVBaYpHQcf6XJENjZ5RWFHsbEZ5SFiGa",
+  "code": "c7b033d3f163a5cf58844899214334dab11e6a06ddb2539e4e",
+  "grant_type": "authorization_code",
+  "redirect_uri": "https://your-callback-server.com/oauth/login/callback"
+}';
+const headers = {
+  'Content-Type':'application/x-www-form-urlencoded',
+  'Accept':'application/json'
+
+};
+
+fetch('https://api.mod.io/v1/oauth/token',
+{
+  method: 'POST',
+  body: inputBody,
+  headers: headers
+})
+.then(function(res) {
+    return res.json();
+}).then(function(body) {
+    console.log(body);
+});
+```
+
+```python
+import requests
+headers = {
+  'Content-Type': 'application/x-www-form-urlencoded',
+  'Accept': 'application/json'
+}
+
+r = requests.post('https://api.mod.io/v1/oauth/token', params={
+
+}, headers = headers)
+
+print r.json()
+```
+
+```java
+URL obj = new URL("https://api.mod.io/v1/oauth/token");
+HttpURLConnection con = (HttpURLConnection) obj.openConnection();
+con.setRequestMethod("POST");
+int responseCode = con.getResponseCode();
+BufferedReader in = new BufferedReader(
+    new InputStreamReader(con.getInputStream()));
+String inputLine;
+StringBuffer response = new StringBuffer();
+while ((inputLine = in.readLine()) != null) {
+    response.append(inputLine);
+}
+in.close();
+System.out.println(response.toString());
+```
+
+`POST /oauth/token`
+
+Exchange the `code` returned to your callback server for an access token. If the `state` parameter was supplied in the [first step](#1-sign-in-with-mod.io), you should compare the returned state prior to making this API call to verify its identical. Successful request will return a [Web Access Token Object](#web-access-token-object) object.
+
+    Parameter|Type|Required|Description
+    ---|---|---|---|
+    client_id|integer|true|Client ID issued to your game.
+    client_secret|string|true|Client Secret issued to your game. This request should be initiated from a secure backend server and the secret, never displayed to players or transferred to the game client.
+    grant_type|string|true|Must be `authorization_code`, for refresh tokens see [Exchange Refresh Token](#3-exchange-refresh-token) endpoint.
+    code|string|true|The code returned to your registered callback server.
+    redirect_uri|string|true|The `redirect_uri` registered with your application. This must be the same redirect_uri used in the first step when logging in via mod.io.
+
+> Example response
+
+```json
+{
+  "token_type": "Bearer",
+  "expires_in": "2592000",
+  "access_token": "eyJlbmMiOiJBMTI4Q0JDLUhTMjU2IiwiYWxnIjoiUlNBLU9BRVAiLCJjdHkiOi....",
+  "refresh_token": "eyJlbmMiOiJBMTI4Q0JDLUhTMjU2IiwiYWxnIjoiUlNBLU9BRVAiLCJjdHkiOi...."
+}
+
+```
+<h3 id="2.-Exchange-Authorization-Code-responses">Responses</h3>
+
+Status|Meaning|Error Ref|Description|Response Schema
+---|---|----|---|---|
+200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)||Success|[Web Access Token Object](#schemaweb_access_token_object)
+<aside class="success">
+This operation does not require authentication
+</aside>
+
+## 3. Exchange Refresh Token
+
+> Example request
+
+```shell
+# You can also use wget
+curl -X POST https://api.mod.io/v1/oauth/token/refresh \
+  -H 'Content-Type: application/x-www-form-urlencoded' \ 
+  -H 'Accept: application/json' \
+  -d 'client_id=1234' \
+  -d 'client_secret=bqyMxkGE4QVBaYpHQcf6XJENjZ5RWFHsbEZ5SFiGa' \
+  -d 'refresh_token=eyJlbmMiOiJBMTI4Q0JDLUhTMjU2IiwiYWxnIjoiUlNBLU9BRVAiLC' \
+  -d 'grant_type=refresh_token' \
+  -d 'redirect_uri=https://your-callback-server.com/oauth/login/callback'
+
+```
+
+```http
+POST https://api.mod.io/v1/oauth/token/refresh HTTP/1.1
+Host: api.mod.io
+Content-Type: application/x-www-form-urlencoded
+Accept: application/json
+
+```
+
+```javascript
+var headers = {
+  'Content-Type':'application/x-www-form-urlencoded',
+  'Accept':'application/json'
+
+};
+
+$.ajax({
+  url: 'https://api.mod.io/v1/oauth/token/refresh',
+  method: 'post',
+
+  headers: headers,
+  success: function(data) {
+    console.log(JSON.stringify(data));
+  }
+})
+```
+
+```javascript--nodejs
+const request = require('node-fetch');
+const inputBody = '{
+  "client_id": "1234",
+  "client_secret": "bqyMxkGE4QVBaYpHQcf6XJENjZ5RWFHsbEZ5SFiGa",
+  "refresh_token": "eyJlbmMiOiJBMTI4Q0JDLUhTMjU2IiwiYWxnIjoiUlNBLU9BRVAiLC",
+  "grant_type": "refresh_token",
+  "redirect_uri": "https://your-callback-server.com/oauth/login/callback"
+}';
+const headers = {
+  'Content-Type':'application/x-www-form-urlencoded',
+  'Accept':'application/json'
+
+};
+
+fetch('https://api.mod.io/v1/oauth/token/refresh',
+{
+  method: 'POST',
+  body: inputBody,
+  headers: headers
+})
+.then(function(res) {
+    return res.json();
+}).then(function(body) {
+    console.log(body);
+});
+```
+
+```python
+import requests
+headers = {
+  'Content-Type': 'application/x-www-form-urlencoded',
+  'Accept': 'application/json'
+}
+
+r = requests.post('https://api.mod.io/v1/oauth/token/refresh', params={
+
+}, headers = headers)
+
+print r.json()
+```
+
+```java
+URL obj = new URL("https://api.mod.io/v1/oauth/token/refresh");
+HttpURLConnection con = (HttpURLConnection) obj.openConnection();
+con.setRequestMethod("POST");
+int responseCode = con.getResponseCode();
+BufferedReader in = new BufferedReader(
+    new InputStreamReader(con.getInputStream()));
+String inputLine;
+StringBuffer response = new StringBuffer();
+while ((inputLine = in.readLine()) != null) {
+    response.append(inputLine);
+}
+in.close();
+System.out.println(response.toString());
+```
+
+`POST /oauth/token/refresh`
+
+Exchange a `refresh_token` for an access token. You should always attempt to refresh a users session with a refresh token prior to re-starting the authentication flow to get a new access token unless your application is aware the refresh token will be [expired](#web-access-token-object). Successful request will return a [Web Access Token Object](#web-access-token-object) object.
+
+    Parameter|Type|Required|Description
+    ---|---|---|---|
+    client_id|integer|true|Client ID issued to your game.
+    client_secret|string|true|Client Secret issued to your game. This should be secure on a backend server and never displayed to players.
+    grant_type|string|true|Must be `refresh_token`.
+    refresh_token|string|true|The refresh token which was returned previously with the access token.
+    redirect_uri|string|true|The `redirect_uri` registered with your application. This must be the same redirect_uri used in the first step when logging in via mod.io.
+
+> Example response
+
+```json
+{
+  "token_type": "Bearer",
+  "expires_in": "2592000",
+  "access_token": "eyJlbmMiOiJBMTI4Q0JDLUhTMjU2IiwiYWxnIjoiUlNBLU9BRVAiLCJjdHkiOi....",
+  "refresh_token": "eyJlbmMiOiJBMTI4Q0JDLUhTMjU2IiwiYWxnIjoiUlNBLU9BRVAiLCJjdHkiOi...."
+}
+
+```
+<h3 id="3.-Exchange-Refresh-Token-responses">Responses</h3>
+
+Status|Meaning|Error Ref|Description|Response Schema
+---|---|----|---|---|
+200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)||Success|[Web Access Token Object](#schemaweb_access_token_object)
+<aside class="success">
+This operation does not require authentication
+</aside>
+
 # Games
 
 ## Get Games
@@ -7765,9 +8150,7 @@ curl -X POST https://api.mod.io/v1/games/{game-id}/media \
   -H 'Authorization: Bearer {access-token}' \ 
   -H 'Content-Type: multipart/form-data' \ 
   -H 'Accept: application/json' \
-  -F 'logo=@/path/to/logo.jpg' \
-  -F 'icon=@/path/to/icon.jpg' \
-  -F 'header=@/path/to/header.jpg'
+  -d 'redirect_uris[]=undefined'
 
 ```
 
@@ -7802,9 +8185,9 @@ $.ajax({
 ```javascript--nodejs
 const request = require('node-fetch');
 const inputBody = '{
-  "logo": "@/path/to/logo.jpg",
-  "icon": "@/path/to/icon.jpg",
-  "header": "@/path/to/header.jpg"
+  "redirect_uris": [
+    "string"
+  ]
 }';
 const headers = {
   'Authorization':'Bearer {access-token}',
@@ -13210,274 +13593,6 @@ Status|Meaning|Error Ref|Description|Response Schema
 To perform this request, you must be authenticated via one of the following methods:
 <a href="#authentication">OAuth 2</a> (Scopes: read)
 </aside>
-# Sign in with mod.io
-
-## Exchange Authorization Code
-
-> Example request
-
-```shell
-# You can also use wget
-curl -X POST https://api.mod.io/v1/oauth/token \
-  -H 'Content-Type: application/x-www-form-urlencoded' \ 
-  -H 'Accept: application/json' \
-  -d 'client_id=1234' \
-  -d 'client_secret=bqyMxkGE4QVBaYpHQcf6XJENjZ5RWFHsbEZ5SFiGa' \
-  -d 'code=c7b033d3f163a5cf58844899214334dab11e6a06ddb2539e4e' \
-  -d 'grant_type=authorization_code' \
-  -d 'redirect_uri=https://your-backend-server.com/oauth/login/callback'
-
-```
-
-```http
-POST https://api.mod.io/v1/oauth/token HTTP/1.1
-Host: api.mod.io
-Content-Type: application/x-www-form-urlencoded
-Accept: application/json
-
-```
-
-```javascript
-var headers = {
-  'Content-Type':'application/x-www-form-urlencoded',
-  'Accept':'application/json'
-
-};
-
-$.ajax({
-  url: 'https://api.mod.io/v1/oauth/token',
-  method: 'post',
-
-  headers: headers,
-  success: function(data) {
-    console.log(JSON.stringify(data));
-  }
-})
-```
-
-```javascript--nodejs
-const request = require('node-fetch');
-const inputBody = '{
-  "client_id": "1234",
-  "client_secret": "bqyMxkGE4QVBaYpHQcf6XJENjZ5RWFHsbEZ5SFiGa",
-  "code": "c7b033d3f163a5cf58844899214334dab11e6a06ddb2539e4e",
-  "grant_type": "authorization_code",
-  "redirect_uri": "https://your-backend-server.com/oauth/login/callback"
-}';
-const headers = {
-  'Content-Type':'application/x-www-form-urlencoded',
-  'Accept':'application/json'
-
-};
-
-fetch('https://api.mod.io/v1/oauth/token',
-{
-  method: 'POST',
-  body: inputBody,
-  headers: headers
-})
-.then(function(res) {
-    return res.json();
-}).then(function(body) {
-    console.log(body);
-});
-```
-
-```python
-import requests
-headers = {
-  'Content-Type': 'application/x-www-form-urlencoded',
-  'Accept': 'application/json'
-}
-
-r = requests.post('https://api.mod.io/v1/oauth/token', params={
-
-}, headers = headers)
-
-print r.json()
-```
-
-```java
-URL obj = new URL("https://api.mod.io/v1/oauth/token");
-HttpURLConnection con = (HttpURLConnection) obj.openConnection();
-con.setRequestMethod("POST");
-int responseCode = con.getResponseCode();
-BufferedReader in = new BufferedReader(
-    new InputStreamReader(con.getInputStream()));
-String inputLine;
-StringBuffer response = new StringBuffer();
-while ((inputLine = in.readLine()) != null) {
-    response.append(inputLine);
-}
-in.close();
-System.out.println(response.toString());
-```
-
-`POST /oauth/token`
-
-Exchange a `code` returned to your server with your client id & secret for an access token. Successful request will return a [TODO](#todo) object.
-
-    Parameter|Type|Required|Description
-    ---|---|---|---|
-    client_id|integer|true|Your issued Client ID.
-    client_secret|string|true|Your issued Client Secret. This should be secure on a backend server and never displayed to players.
-    grant_type|string|true|Must be `authorization_code`, for refresh tokens see [Exchange Refresh Token](#exchange-refresh-token) endpoint.
-    code|string|true|The code returned to your backend server.
-    redirect_uri|string|true|The `redirect_uri` registered with your application. This must be the same redirect_uri used in the first step when logging in via mod.io.
-
-> Example response
-
-```json
-{
-  "token_type": "Bearer",
-  "expires_in": "10800",
-  "access_token": "eyJlbmMiOiJBMTI4Q0JDLUhTMjU2IiwiYWxnIjoiUlNBLU9BRVAiLCJjdHkiOi....",
-  "refresh_token": "eyJlbmMiOiJBMTI4Q0JDLUhTMjU2IiwiYWxnIjoiUlNBLU9BRVAiLCJjdHkiOi...."
-}
-
-```
-<h3 id="Exchange-Authorization-Code-responses">Responses</h3>
-
-Status|Meaning|Error Ref|Description|Response Schema
----|---|----|---|---|
-200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)||Success|[Web Access Token Object](#schemaweb_access_token_object)
-<aside class="auth-notice">
-To perform this request, you must be authenticated via one of the following methods:
-<a href="#authentication">OAuth 2</a> (Scopes: web)
-</aside>
-## Exchange Refresh Token
-
-> Example request
-
-```shell
-# You can also use wget
-curl -X POST https://api.mod.io/v1/oauth/token/refresh \
-  -H 'Content-Type: application/x-www-form-urlencoded' \ 
-  -H 'Accept: application/json' \
-  -d 'client_id=1234' \
-  -d 'client_secret=bqyMxkGE4QVBaYpHQcf6XJENjZ5RWFHsbEZ5SFiGa' \
-  -d 'refresh_token=eyJlbmMiOiJBMTI4Q0JDLUhTMjU2IiwiYWxnIjoiUlNBLU9BRVAiLC' \
-  -d 'grant_type=refresh_token' \
-  -d 'redirect_uri=https://your-backend-server.com/oauth/login/callback'
-
-```
-
-```http
-POST https://api.mod.io/v1/oauth/token/refresh HTTP/1.1
-Host: api.mod.io
-Content-Type: application/x-www-form-urlencoded
-Accept: application/json
-
-```
-
-```javascript
-var headers = {
-  'Content-Type':'application/x-www-form-urlencoded',
-  'Accept':'application/json'
-
-};
-
-$.ajax({
-  url: 'https://api.mod.io/v1/oauth/token/refresh',
-  method: 'post',
-
-  headers: headers,
-  success: function(data) {
-    console.log(JSON.stringify(data));
-  }
-})
-```
-
-```javascript--nodejs
-const request = require('node-fetch');
-const inputBody = '{
-  "client_id": "1234",
-  "client_secret": "bqyMxkGE4QVBaYpHQcf6XJENjZ5RWFHsbEZ5SFiGa",
-  "refresh_token": "eyJlbmMiOiJBMTI4Q0JDLUhTMjU2IiwiYWxnIjoiUlNBLU9BRVAiLC",
-  "grant_type": "refresh_token",
-  "redirect_uri": "https://your-backend-server.com/oauth/login/callback"
-}';
-const headers = {
-  'Content-Type':'application/x-www-form-urlencoded',
-  'Accept':'application/json'
-
-};
-
-fetch('https://api.mod.io/v1/oauth/token/refresh',
-{
-  method: 'POST',
-  body: inputBody,
-  headers: headers
-})
-.then(function(res) {
-    return res.json();
-}).then(function(body) {
-    console.log(body);
-});
-```
-
-```python
-import requests
-headers = {
-  'Content-Type': 'application/x-www-form-urlencoded',
-  'Accept': 'application/json'
-}
-
-r = requests.post('https://api.mod.io/v1/oauth/token/refresh', params={
-
-}, headers = headers)
-
-print r.json()
-```
-
-```java
-URL obj = new URL("https://api.mod.io/v1/oauth/token/refresh");
-HttpURLConnection con = (HttpURLConnection) obj.openConnection();
-con.setRequestMethod("POST");
-int responseCode = con.getResponseCode();
-BufferedReader in = new BufferedReader(
-    new InputStreamReader(con.getInputStream()));
-String inputLine;
-StringBuffer response = new StringBuffer();
-while ((inputLine = in.readLine()) != null) {
-    response.append(inputLine);
-}
-in.close();
-System.out.println(response.toString());
-```
-
-`POST /oauth/token/refresh`
-
-Exchange a `refresh_token` for an access token. Successful request will return a [Web Access Token Object](#web-access-token-object) object.
-
-    Parameter|Type|Required|Description
-    ---|---|---|---|
-    client_id|integer|true|Your issued Client ID.
-    client_secret|string|true|Your issued Client Secret. This should be secure on a backend server and never displayed to players.
-    grant_type|string|true|Must be `refresh_token`.
-    refresh_token|string|true|The refresh token.
-    redirect_uri|string|true|The `redirect_uri` registered with your application. This must be the same redirect_uri used in the first step when logging in via mod.io.
-
-> Example response
-
-```json
-{
-  "token_type": "Bearer",
-  "expires_in": "10800",
-  "access_token": "eyJlbmMiOiJBMTI4Q0JDLUhTMjU2IiwiYWxnIjoiUlNBLU9BRVAiLCJjdHkiOi....",
-  "refresh_token": "eyJlbmMiOiJBMTI4Q0JDLUhTMjU2IiwiYWxnIjoiUlNBLU9BRVAiLCJjdHkiOi...."
-}
-
-```
-<h3 id="Exchange-Refresh-Token-responses">Responses</h3>
-
-Status|Meaning|Error Ref|Description|Response Schema
----|---|----|---|---|
-200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)||Success|[Web Access Token Object](#schemaweb_access_token_object)
-<aside class="auth-notice">
-To perform this request, you must be authenticated via one of the following methods:
-<a href="#authentication">OAuth 2</a> (Scopes: web)
-</aside>
 # Guides
 
 ## Get Guides
@@ -14443,129 +14558,6 @@ Status|Meaning|Error Ref|Description|Response Schema
 <aside class="auth-notice">
 To perform this request, you must be authenticated via one of the following methods:
 <a href="#authentication">api_key</a>, <a href="#authentication">OAuth 2</a> (Scopes: read)
-</aside>
-# WebSocket
-
-## Process WebSocket Message
-
-> Example request
-
-```shell
-# You can also use wget
-curl -X POST https://api.mod.io/v1/websocket/message \
-  -H 'Origin: https://mod.io' \ 
-  -H 'Accept: application/json'
-
-```
-
-```http
-POST https://api.mod.io/v1/websocket/message HTTP/1.1
-Host: api.mod.io
-
-Accept: application/json
-Origin: https://mod.io
-
-```
-
-```javascript
-var headers = {
-  'Origin':'https://mod.io',
-  'Accept':'application/json'
-
-};
-
-$.ajax({
-  url: 'https://api.mod.io/v1/websocket/message',
-  method: 'post',
-
-  headers: headers,
-  success: function(data) {
-    console.log(JSON.stringify(data));
-  }
-})
-```
-
-```javascript--nodejs
-const request = require('node-fetch');
-
-const headers = {
-  'Origin':'https://mod.io',
-  'Accept':'application/json'
-
-};
-
-fetch('https://api.mod.io/v1/websocket/message',
-{
-  method: 'POST',
-
-  headers: headers
-})
-.then(function(res) {
-    return res.json();
-}).then(function(body) {
-    console.log(body);
-});
-```
-
-```python
-import requests
-headers = {
-  'Origin': 'https://mod.io',
-  'Accept': 'application/json'
-}
-
-r = requests.post('https://api.mod.io/v1/websocket/message', params={
-
-}, headers = headers)
-
-print r.json()
-```
-
-```java
-URL obj = new URL("https://api.mod.io/v1/websocket/message");
-HttpURLConnection con = (HttpURLConnection) obj.openConnection();
-con.setRequestMethod("POST");
-int responseCode = con.getResponseCode();
-BufferedReader in = new BufferedReader(
-    new InputStreamReader(con.getInputStream()));
-String inputLine;
-StringBuffer response = new StringBuffer();
-while ((inputLine = in.readLine()) != null) {
-    response.append(inputLine);
-}
-in.close();
-System.out.println(response.toString());
-```
-
-`POST //websocket/message`
-
-Send a websocket message (from our API Gateway proxy) to the API for processing. Successful request will return a [WebSocket Message Object](#websocket-message-object).
-
-    Parameter|Type|Required|Description
-    ---|---|---|---|
-    messages|array|true|The messages sent from the API Gateway.
-
-    Header Parameters|Required|Description
-    ---|---|---|---|
-    ConnectionId|true|The unique connection ID to identify a websocket connection.
-    Referer|true|The domain (including sub-domain) that the request originated from. The API expects `g-{id}.ws.*`.
-
-> Example response
-
-```json
-{
-  "success": true
-}
-
-```
-<h3 id="Process-WebSocket-Message-responses">Responses</h3>
-
-Status|Meaning|Error Ref|Description|Response Schema
----|---|----|---|---|
-200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)||Successful Request|[Proxy Transformer Object](#schemaproxy_transformer_object)
-<aside class="auth-notice">
-To perform this request, you must be authenticated via one of the following methods:
-<a href="#authentication">OAuth 2</a> (Scopes: web)
 </aside>
 # Response Schemas
 ## Access Token Object  
@@ -17342,7 +17334,7 @@ profile_url|string|URL to the users profile.
 ```json
 {
   "token_type": "Bearer",
-  "expires_in": "10800",
+  "expires_in": "2592000",
   "access_token": "eyJlbmMiOiJBMTI4Q0JDLUhTMjU2IiwiYWxnIjoiUlNBLU9BRVAiLCJjdHkiOi....",
   "refresh_token": "eyJlbmMiOiJBMTI4Q0JDLUhTMjU2IiwiYWxnIjoiUlNBLU9BRVAiLCJjdHkiOi...."
 } 
@@ -17353,9 +17345,9 @@ profile_url|string|URL to the users profile.
 Name|Type|Description
 ---|---|---|---|
 token_type|string|Token type, always `Bearer`.
-expires_in|int|Seconds until the supplied `access_token` expires which is fixed at 3 hours.
+expires_in|int|Seconds until the supplied `access_token` expires which is fixed at `2592000` seconds (approx 1 month).
 access_token|string|The access token used to make requests to the mod.io API on behalf of the user.
-refresh_token|string|The refresh token that can be exchanged via the _Exchange Refresh Token_ endpoint for a new access token.
+refresh_token|string|The refresh token that can be exchanged via the _Exchange Refresh Token_ endpoint for a new access token. Fixed at `7776000` seconds (approx 3 months).
 
 
 
