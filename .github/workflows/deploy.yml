@@ -13,9 +13,13 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v2
 
+      - name: Install gems
+        run: |
+          sudo gem install bundler
+          sudo gem install middleman
+
       - name: Run deployment script
         shell: bash
         run: |
           chmod +x ./deploy_gh.sh
-          sudo gem install bundler
           ./deploy_gh.sh
