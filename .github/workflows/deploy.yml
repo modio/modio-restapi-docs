@@ -16,6 +16,7 @@ jobs:
       - name: Install gems
         run: |
           sudo gem install bundler
+          sudo gem install middleman-syntax -v 3.2.0
           sudo gem install middleman -v 4.4.2
 
       - name: Run deployment script
