@@ -234,7 +234,7 @@
 
     <link rel="stylesheet" href="stylesheets/colorbox-64ee49f2.css">
     <link rel="stylesheet" href="stylesheets/tippy-0bbd61d4.css">
-      <script src="javascripts/all-f5c51480.js"></script>
+      <script src="javascripts/all-f5001c97.js"></script>
 
     <script>
       $(document).ready(function() {
@@ -397,13 +397,7 @@
                     <a href="#meta-quest" class="toc-h2 toc-link" data-title="Authentication">Meta Quest</a>
                   </li>
                   <li>
-                    <a href="#gog-galaxy" class="toc-h2 toc-link" data-title="Authentication">GOG Galaxy</a>
-                  </li>
-                  <li>
                     <a href="#epic-games" class="toc-h2 toc-link" data-title="Authentication">Epic Games</a>
-                  </li>
-                  <li>
-                    <a href="#itch-io" class="toc-h2 toc-link" data-title="Authentication">itch.io</a>
                   </li>
                   <li>
                     <a href="#google" class="toc-h2 toc-link" data-title="Authentication">Google</a>
@@ -419,6 +413,20 @@
                   </li>
                   <li>
                     <a href="#logout" class="toc-h2 toc-link" data-title="Authentication">Logout</a>
+                  </li>
+              </ul>
+          </li>
+          <li>
+            <a href="#sign-in-with-mod-io-web" class="toc-h1 toc-link" data-title="Sign in with mod.io (Web)"><span class="reficon"><img src="images/cog-white-86912766.svg" alt="Reference" class="menu-reference-icon"></span> Sign in with mod.io (Web)</a>
+              <ul class="toc-list-h2">
+                  <li>
+                    <a href="#1-sign-in-with-mod-io" class="toc-h2 toc-link" data-title="Sign in with mod.io (Web)">1. Sign in with mod.io</a>
+                  </li>
+                  <li>
+                    <a href="#2-exchange-authorization-code" class="toc-h2 toc-link" data-title="Sign in with mod.io (Web)">2. Exchange Authorization Code</a>
+                  </li>
+                  <li>
+                    <a href="#3-exchange-refresh-token" class="toc-h2 toc-link" data-title="Sign in with mod.io (Web)">3. Exchange Refresh Token</a>
                   </li>
               </ul>
           </li>
@@ -589,6 +597,9 @@
                     <a href="#delete-game-tag-option" class="toc-h2 toc-link" data-title="Tags">Delete Game Tag Option</a>
                   </li>
                   <li>
+                    <a href="#rename-game-tag" class="toc-h2 toc-link" data-title="Tags">Rename Game Tag</a>
+                  </li>
+                  <li>
                     <a href="#get-mod-tags" class="toc-h2 toc-link" data-title="Tags">Get Mod Tags</a>
                   </li>
                   <li>
@@ -688,10 +699,10 @@
             <a href="#users" class="toc-h1 toc-link" data-title="Users"><span class="reficon"><img src="images/cog-white-86912766.svg" alt="Reference" class="menu-reference-icon"></span> Users</a>
               <ul class="toc-list-h2">
                   <li>
-                    <a href="#mute-a-user" class="toc-h2 toc-link" data-title="Users">Mute a user</a>
+                    <a href="#mute-a-user" class="toc-h2 toc-link" data-title="Users">Mute a User</a>
                   </li>
                   <li>
-                    <a href="#unmute-a-user" class="toc-h2 toc-link" data-title="Users">Unmute a user</a>
+                    <a href="#unmute-a-user" class="toc-h2 toc-link" data-title="Users">Unmute a User</a>
                   </li>
               </ul>
           </li>
@@ -748,6 +759,9 @@
               </ul>
           </li>
           <li>
+            <a href="#platforms-2" class="toc-h1 toc-link" data-title="Platforms"><span class="reficon"><img src="images/cog-white-86912766.svg" alt="Reference" class="menu-reference-icon"></span> Platforms</a>
+          </li>
+          <li>
             <a href="#response-schemas" class="toc-h1 toc-link" data-title="Response Schemas"><span class="reficon"><img src="images/cog-blue-57263f8c.svg" alt="Reference" class="menu-reference-icon"></span> Response Schemas</a>
               <ul class="toc-list-h2">
                   <li>
@@ -785,6 +799,9 @@
                   </li>
                   <li>
                     <a href="#game-tag-option-object" class="toc-h2 toc-link" data-title="Response Schemas">Game Tag Option Object</a>
+                  </li>
+                  <li>
+                    <a href="#game-user-preview-object" class="toc-h2 toc-link" data-title="Response Schemas">Game User Preview Object</a>
                   </li>
                   <li>
                     <a href="#get-game-tag-options-2" class="toc-h2 toc-link" data-title="Response Schemas">Get Game Tag Options</a>
@@ -898,6 +915,9 @@
                     <a href="#mod-tag-object" class="toc-h2 toc-link" data-title="Response Schemas">Mod Tag Object</a>
                   </li>
                   <li>
+                    <a href="#mod-user-preview-object" class="toc-h2 toc-link" data-title="Response Schemas">Mod User Preview Object</a>
+                  </li>
+                  <li>
                     <a href="#modfile-object" class="toc-h2 toc-link" data-title="Response Schemas">Modfile Object</a>
                   </li>
                   <li>
@@ -916,6 +936,9 @@
                     <a href="#preview-object" class="toc-h2 toc-link" data-title="Response Schemas">Preview Object</a>
                   </li>
                   <li>
+                    <a href="#proxy-transformer-object" class="toc-h2 toc-link" data-title="Response Schemas">Proxy Transformer Object</a>
+                  </li>
+                  <li>
                     <a href="#rating-object" class="toc-h2 toc-link" data-title="Response Schemas">Rating Object</a>
                   </li>
                   <li>
@@ -931,13 +954,19 @@
                     <a href="#theme-object" class="toc-h2 toc-link" data-title="Response Schemas">Theme Object</a>
                   </li>
                   <li>
+                    <a href="#user-access-object" class="toc-h2 toc-link" data-title="Response Schemas">User Access Object</a>
+                  </li>
+                  <li>
                     <a href="#user-event-object" class="toc-h2 toc-link" data-title="Response Schemas">User Event Object</a>
                   </li>
                   <li>
                     <a href="#user-object" class="toc-h2 toc-link" data-title="Response Schemas">User Object</a>
                   </li>
                   <li>
-                    <a href="#user-preview-object" class="toc-h2 toc-link" data-title="Response Schemas">User Preview Object</a>
+                    <a href="#web-access-token-object" class="toc-h2 toc-link" data-title="Response Schemas">Web Access Token Object</a>
+                  </li>
+                  <li>
+                    <a href="#web-authorize-object" class="toc-h2 toc-link" data-title="Response Schemas">Web Authorize Object</a>
                   </li>
                   <li>
                     <a href="#web-message-object" class="toc-h2 toc-link" data-title="Response Schemas">Web Message Object</a>
@@ -955,7 +984,7 @@
         <h1 id="getting-started">Getting Started</h1><h2 id="mod-io-api-v1">mod.io API v1</h2>
 <p>Welcome to the official documentation for <a href="https://mod.io">mod.io</a>, an API for developers to add mod support to their games. We recommend you read our <em>Getting Started</em> guide below to accurately and efficiently consume our REST API. </p>
 
-<p><strong>API path:</strong> <a href="https://api.mod.io/v1">https://api.mod.io/v1</a></p>
+<p><strong>API path:</strong> <a href="https://api.mod.io/v1">https://api.mod.io/v1</a> (see your API access dashboard)</p>
 
 <p><strong>Current version:</strong> <select id="version_dropdown" onchange="changeVersion"><option value="" data-latest="true">v1 (latest)</option></select> </p>
 
@@ -1011,24 +1040,32 @@
 </thead>
 <tbody>
 <tr>
-<td><img src="images/tool-unity-da52d9b3.png" alt="Unity Plugin"></td>
+<td><img src="images/tool-unity-54e25ea4.png" alt="Unity Plugin"></td>
 <td>
-<strong>Unity Plugin</strong><br><a href="https://github.com/modio/modio-unity">SDK</a><br><a href="https://github.com/modio/modio-unity/wiki">Getting Started</a><br>
+<strong>Unity Plugin</strong><br><a href="https://github.com/modio/modio-unity">SDK</a><br><a href="https://go.mod.io/unity-docs">Getting Started</a><br><a href="https://go.mod.io/unity-samples">Sample Project</a><br>
 </td>
-<td><img src="images/tool-unreal-96a56843.png" alt="Unreal Plugin"></td>
+<td><img src="images/tool-unreal-73799aa5.png" alt="Unreal Plugin"></td>
 <td>
-<strong>Unreal Plugin</strong><br><a href="https://github.com/modio/modio-ue4">SDK</a><br><a href="https://github.com/modio/modio-ue4/blob/main/Doc/getting-started.adoc">Getting Started</a><br>
+<strong>Unreal Plugin</strong><br><a href="https://github.com/modio/modio-ue">SDK</a><br><a href="https://go.mod.io/ue-docs">Getting Started</a><br><a href="https://go.mod.io/ue-samples">UE4 Sample Project</a><br><a href="https://go.mod.io/ue5-sample">UE5 Sample Project</a><br>
 </td>
 </tr>
 <tr>
+<td><img src="images/tool-gm-210484e1.png" alt="GameMaker"></td>
+<td>
+<strong>GameMaker</strong><br><a href="https://github.com/YoYoGames/GMEXT-mod.io">SDK</a><br><a href="https://github.com/YoYoGames/GMEXT-mod.io/wiki">Getting Started</a><br>
+</td>
 <td><img src="images/tool-ccpp-1f2d5425.png" alt="C/C++ SDK"></td>
 <td>
-<strong>C/C++ SDK</strong><br><a href="https://github.com/modio/modio-sdk">SDK</a><br><a href="https://github.com/modio/modio-sdk/blob/main/doc/getting-started.adoc">Getting Started</a><br>
+<strong>C/C++ SDK</strong><br><a href="https://github.com/modio/modio-sdk">SDK</a><br><a href="https://go.mod.io/sdk-docs">Getting Started</a><br>
 </td>
+</tr>
+<tr>
 <td><img src="images/tool-discordbot-88eae366.png" alt="Discord Bot"></td>
 <td>
 <strong>Discord Bot</strong><br><a href="https://github.com/modio/modio-discord-bot">Instructions</a><br><a href="https://discordbot.mod.io">Invite</a><br>
 </td>
+<td></td>
+<td></td>
 </tr>
 </tbody>
 </table>
@@ -1046,33 +1083,33 @@
 </thead>
 <tbody>
 <tr>
-<td><img src="images/tool-rust-efd8698a.png" alt="Rust Wrapper"></td>
-<td>
-<strong>Rust Wrapper</strong><br><a href="https://crates.io/crates/modio">SDK</a><br><a href="https://github.com/nickelc/modio-rs">Getting Started</a><br><a href="https://github.com/nickelc/modio-rs/tree/master/examples">Tutorials</a><br>
-</td>
-<td><img src="images/tool-python-dee807ea.png" alt="Python Wrapper"></td>
-<td>
-<strong>Python Wrapper</strong><br><a href="https://github.com/ClementJ18/mod.io">SDK</a><br><a href="https://github.com/ClementJ18/mod.io/#example">Getting Started</a><br><a href="https://github.com/ClementJ18/mod.io/tree/master/examples">Tutorials</a><br>
-</td>
-</tr>
-<tr>
 <td><img src="images/tool-c2-8d2b1cd5.png" alt="Construct 2"></td>
 <td>
 <strong>Construct 2 Plugin</strong><br><a href="https://github.com/modio/modio-construct2">SDK</a><br><a href="https://github.com/modio/modio-construct2">Getting Started</a><br>
 </td>
-<td><img src="images/tool-gm2-7eb27c94.png" alt="GameMaker Studio 2"></td>
-<td>
-<strong>GameMaker Studio 2 Plugin</strong><br><a href="https://github.com/modio/modio-gamemaker2">SDK</a><br><a href="https://github.com/modio/modio-gamemaker2">Getting Started</a><br>
-</td>
-</tr>
-<tr>
 <td><img src="images/tool-haxe-08a46a9f.png" alt="Haxe Wrapper"></td>
 <td>
 <strong>Haxe Wrapper</strong><br><a href="https://github.com/modio/modio-haxe">SDK</a><br><a href="https://github.com/Turupawn/modioOpenFLExample#openfl-integration">Getting Started</a><br>
 </td>
+</tr>
+<tr>
 <td><img src="images/tool-dotnet-bd332e0c.png" alt="Modio.NET"></td>
 <td>
 <strong>Modio.NET</strong><br><a href="https://github.com/nickelc/modio.net">SDK</a><br><a href="https://github.com/nickelc/modio.net">Getting Started</a><br>
+</td>
+<td><img src="images/tool-rust-efd8698a.png" alt="Rust Wrapper"></td>
+<td>
+<strong>Rust Wrapper</strong><br><a href="https://crates.io/crates/modio">SDK</a><br><a href="https://github.com/nickelc/modio-rs">Getting Started</a><br><a href="https://github.com/nickelc/modio-rs/tree/master/examples">Tutorials</a><br>
+</td>
+</tr>
+<tr>
+<td><img src="images/tool-python-dee807ea.png" alt="Python Wrapper"></td>
+<td>
+<strong>Python Wrapper</strong><br><a href="https://github.com/ClementJ18/mod.io">SDK</a><br><a href="https://github.com/ClementJ18/mod.io/#example">Getting Started</a><br><a href="https://github.com/ClementJ18/mod.io/tree/master/examples">Tutorials</a><br>
+</td>
+<td><img src="images/tool-commonlisp-efa742c0.png" alt="Command Lisp"></td>
+<td>
+<strong>Common Lisp</strong><br><a href="https://github.com/Shinmera/cl-modio">Github</a><br><a href="https://shinmera.github.io/cl-modio/">Getting Started</a><br>
 </td>
 </tr>
 <tr>
@@ -1084,14 +1121,6 @@
 <td>
 <strong>GitHub Action Mod Uploader</strong><br><a href="https://github.com/nickelc/upload-to-modio">GitHub</a><br><a href="https://github.com/nickelc/upload-to-modio#usage">Usage</a><br>
 </td>
-</tr>
-<tr>
-<td><img src="images/tool-commonlisp-efa742c0.png" alt="Command Lisp"></td>
-<td>
-<strong>Common Lisp</strong><br><a href="https://github.com/Shinmera/cl-modio">Github</a><br><a href="https://shinmera.github.io/cl-modio/">Getting Started</a><br>
-</td>
-<td></td>
-<td></td>
 </tr>
 </tbody>
 </table>
@@ -2031,7 +2060,7 @@ retry-after: 57
 <h3 id="optimize-your-requests">Optimize your requests</h3>
 <p>You should always plan to minimize requests and cache API responses. It will make your app feel fluid and fast for your users. If your usage is excessive we shall reach out to discuss ways of optimizing, but our aim is to never restrict legitimate use of the API. We have set high limits that should cover 99% of use-cases, and are happy to <a href="mailto:developers@mod.io?subject=API%20usage">discuss your scenario</a> if you require more.</p>
 <h2 id="testing">Testing</h2>
-<p>To help familiarize yourself with the mod.io API and to ensure your implementation is battle-hardened and operating as intended, we have setup a test sandbox which is identical to the production environment. The test sandbox allows you to make requests to the API whilst your integration is a work in progress and the submitted data is not important. When you are ready to go live it's as easy as adding your game to the production environment, substituting the test API URL for the production API URL, and updating the <code>api_key</code> and <code>game_id</code> you are using to the values from your games profile on production. </p>
+<p>To help familiarize yourself with the mod.io API and to ensure your implementation is battle-hardened and operating as intended, we have setup a test sandbox which is identical to the production environment. The test sandbox allows you to make requests to the API whilst your integration is a work in progress and the submitted data is not important. When you are ready to go live it's as easy as adding your game to the production environment, substituting the test API path for the production API path, and updating the <code>api_key</code> and <code>game_id</code> you are using to the values from your games profile on production. </p>
 
 <p>To begin using the test sandbox you will need to <a href="https://test.mod.io">register a test account</a> and <a href="https://test.mod.io/g/add">add your game</a>. You will only see games you are a team member of and there is no connection between the data added to the test environment and production. We highly recommend you use the test environment when integrating as it allows you to keep your development private, and you can submit as much dummy data as you need to try the functionality required, without having to clean it up at the end.</p>
 
@@ -2058,7 +2087,7 @@ retry-after: 57
 <li>It also enables platform specific metrics</li>
 </ul>
 
-<p>For example, passing the HTTP header <code>X-Modio-Platform: XboxSeriesX</code> in your API request tells mod.io your player is on Xbox Series X.</p>
+<p>For example, passing the HTTP header <code>X-Modio-Platform: xboxseriesx</code> in your API request tells mod.io your player is on Xbox Series X.</p>
 
 <p>Official mod.io <a href="#implementation">Plugins and SDKs</a> will automatically supply this value for you providing you have specified the correct platform in the tools' settings. We <strong>strongly recommend</strong> you supply this header in every request with the correct platform to enable mod.io to provide the best cross-platform experience for your players. Please see a list of supported platforms below:</p>
 
@@ -2071,57 +2100,61 @@ retry-after: 57
 </thead>
 <tbody>
 <tr>
+<td>Source</td>
+<td><code>source</code></td>
+</tr>
+<tr>
 <td>Windows</td>
-<td><code>Windows</code></td>
+<td><code>windows</code></td>
 </tr>
 <tr>
 <td>Mac</td>
-<td><code>Mac</code></td>
+<td><code>mac</code></td>
 </tr>
 <tr>
 <td>Linux</td>
-<td><code>Linux</code></td>
+<td><code>linux</code></td>
 </tr>
 <tr>
 <td>Android</td>
-<td><code>Android</code></td>
+<td><code>android</code></td>
 </tr>
 <tr>
 <td>iOS</td>
-<td><code>iOS</code></td>
+<td><code>ios</code></td>
 </tr>
 <tr>
 <td>Xbox One</td>
-<td><code>XboxOne</code></td>
+<td><code>xboxone</code></td>
 </tr>
 <tr>
 <td>Xbox Series X</td>
-<td><code>XboxSeriesX</code></td>
+<td><code>xboxseriesx</code></td>
 </tr>
 <tr>
 <td>PlayStation 4</td>
-<td><code>PS4</code></td>
+<td><code>ps4</code></td>
 </tr>
 <tr>
 <td>PlayStation 5</td>
-<td><code>PS5</code></td>
+<td><code>ps5</code></td>
 </tr>
 <tr>
 <td>Switch</td>
-<td><code>Switch</code></td>
+<td><code>switch</code></td>
 </tr>
 <tr>
 <td>Oculus</td>
-<td><code>Oculus</code></td>
+<td><code>oculus</code></td>
 </tr>
 </tbody>
 </table>
 
-<p>These are the only supported values and are case-insensitive, anything else will be ignored and default to <code>Windows</code>. Have we missed a platform you are using? <a href="mailto:developers@mod.io?subject=Platform%20Support">Get in touch!</a> </p>
+<p>These are the only supported values and are case-insensitive, anything else will be ignored and default to <code>windows</code>. Have we missed a platform you are using? <a href="mailto:developers@mod.io?subject=Platform%20Support">Get in touch!</a> </p>
 <h2 id="targeting-a-portal">Targeting a Portal</h2>
 <p>When making API requests you should include the <code>X-Modio-Portal</code> header (with one of the values below), to tell mod.io what Portal (eg. Store or App) the request is originating from. This header is <strong>important</strong> because it enables mod.io to fine-tune the experience, such as returning display names used by players on that portal (which can be a certification requirement).</p>
 
-<p>For example, passing the HTTP header <code>X-Modio-Portal: EGS</code> in your API request tells mod.io your player is coming via the Epic Games Store.</p>
+<p>For example, passing the HTTP header <code>X-Modio-Portal: epicgames</code> in your API request tells mod.io your player is coming via the Epic Games Store.</p>
 
 <table>
 <thead>
@@ -2133,51 +2166,51 @@ retry-after: 57
 <tbody>
 <tr>
 <td>Apple</td>
-<td><code>Apple</code></td>
+<td><code>apple</code></td>
 </tr>
 <tr>
 <td>Discord</td>
-<td><code>Discord</code></td>
+<td><code>discord</code></td>
 </tr>
 <tr>
 <td>Epic Games Store</td>
-<td><code>EGS</code></td>
+<td><code>epicgames</code></td>
 </tr>
 <tr>
 <td>Facebook</td>
-<td><code>Facebook</code></td>
+<td><code>facebook</code></td>
 </tr>
 <tr>
 <td>GOG</td>
-<td><code>GOG</code></td>
+<td><code>gog</code></td>
 </tr>
 <tr>
 <td>Google</td>
-<td><code>Google</code></td>
+<td><code>google</code></td>
 </tr>
 <tr>
 <td>itch.io</td>
-<td><code>Itchio</code></td>
+<td><code>itchio</code></td>
 </tr>
 <tr>
 <td>Nintendo</td>
-<td><code>Nintendo</code></td>
+<td><code>nintendo</code></td>
 </tr>
 <tr>
 <td>OpenID</td>
-<td><code>OpenID</code></td>
+<td><code>openid</code></td>
 </tr>
 <tr>
 <td>PlayStation Network</td>
-<td><code>PSN</code></td>
+<td><code>psn</code></td>
 </tr>
 <tr>
 <td>Steam</td>
-<td><code>Steam</code></td>
+<td><code>steam</code></td>
 </tr>
 <tr>
 <td>Xbox Live</td>
-<td><code>XboxLive</code></td>
+<td><code>xboxlive</code></td>
 </tr>
 </tbody>
 </table>
@@ -3375,209 +3408,6 @@ curl <span class="nt">-X</span> POST https://api.mod.io/v1/external/oculusauth?a
 To perform this request, you must be authenticated via one of the following methods:
 <a href="#authentication">api_key</a>
 </aside>
-<h2 id="gog-galaxy">GOG Galaxy</h2>
-<blockquote>
-<p>Example request</p>
-</blockquote>
-<div class="highlight"><pre class="highlight shell tab-shell"><code><span class="c"># You can also use wget</span>
-curl <span class="nt">-X</span> POST https://api.mod.io/v1/external/galaxyauth?api_key<span class="o">=</span>YourApiKey <span class="se">\</span>
-  <span class="nt">-H</span> <span class="s1">'Content-Type: application/x-www-form-urlencoded'</span> <span class="se">\ </span>
-  <span class="nt">-H</span> <span class="s1">'Accept: application/json'</span> <span class="se">\</span>
-  <span class="nt">--data-urlencode</span> <span class="s1">'appdata=GCL671bwZ/+zUeOWc0M'</span>
-
-</code></pre></div><div class="highlight"><pre class="highlight http tab-http"><code><span class="nf">POST</span> <span class="nn">https://api.mod.io/v1/external/galaxyauth?api_key=YourApiKey</span> <span class="k">HTTP</span><span class="o">/</span><span class="m">1.1</span>
-<span class="na">Host</span><span class="p">:</span> <span class="s">api.mod.io</span>
-<span class="na">Content-Type</span><span class="p">:</span> <span class="s">application/x-www-form-urlencoded</span>
-<span class="na">Accept</span><span class="p">:</span> <span class="s">application/json</span>
-
-</code></pre></div><div class="highlight"><pre class="highlight javascript tab-javascript"><code><span class="kd">var</span> <span class="nx">headers</span> <span class="o">=</span> <span class="p">{</span>
-  <span class="dl">'</span><span class="s1">Content-Type</span><span class="dl">'</span><span class="p">:</span><span class="dl">'</span><span class="s1">application/x-www-form-urlencoded</span><span class="dl">'</span><span class="p">,</span>
-  <span class="dl">'</span><span class="s1">Accept</span><span class="dl">'</span><span class="p">:</span><span class="dl">'</span><span class="s1">application/json</span><span class="dl">'</span>
-
-<span class="p">};</span>
-
-<span class="nx">$</span><span class="p">.</span><span class="nx">ajax</span><span class="p">({</span>
-  <span class="na">url</span><span class="p">:</span> <span class="dl">'</span><span class="s1">https://api.mod.io/v1/external/galaxyauth</span><span class="dl">'</span><span class="p">,</span>
-  <span class="na">method</span><span class="p">:</span> <span class="dl">'</span><span class="s1">post</span><span class="dl">'</span><span class="p">,</span>
-  <span class="na">data</span><span class="p">:</span> <span class="dl">'</span><span class="s1">?api_key=YourApiKey</span><span class="dl">'</span><span class="p">,</span>
-  <span class="na">headers</span><span class="p">:</span> <span class="nx">headers</span><span class="p">,</span>
-  <span class="na">success</span><span class="p">:</span> <span class="kd">function</span><span class="p">(</span><span class="nx">data</span><span class="p">)</span> <span class="p">{</span>
-    <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">JSON</span><span class="p">.</span><span class="nx">stringify</span><span class="p">(</span><span class="nx">data</span><span class="p">));</span>
-  <span class="p">}</span>
-<span class="p">})</span>
-</code></pre></div><div class="highlight"><pre class="highlight javascript tab-javascript--nodejs"><code><span class="kd">const</span> <span class="nx">request</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="dl">'</span><span class="s1">node-fetch</span><span class="dl">'</span><span class="p">);</span>
-<span class="kd">const</span> <span class="nx">inputBody</span> <span class="o">=</span> <span class="dl">'</span><span class="s1">{
-  "appdata": "GCL671bwZ/+zUeOWc0M"
-}</span><span class="dl">'</span><span class="p">;</span>
-<span class="kd">const</span> <span class="nx">headers</span> <span class="o">=</span> <span class="p">{</span>
-  <span class="dl">'</span><span class="s1">Content-Type</span><span class="dl">'</span><span class="p">:</span><span class="dl">'</span><span class="s1">application/x-www-form-urlencoded</span><span class="dl">'</span><span class="p">,</span>
-  <span class="dl">'</span><span class="s1">Accept</span><span class="dl">'</span><span class="p">:</span><span class="dl">'</span><span class="s1">application/json</span><span class="dl">'</span>
-
-<span class="p">};</span>
-
-<span class="nx">fetch</span><span class="p">(</span><span class="dl">'</span><span class="s1">https://api.mod.io/v1/external/galaxyauth?api_key=YourApiKey</span><span class="dl">'</span><span class="p">,</span>
-<span class="p">{</span>
-  <span class="na">method</span><span class="p">:</span> <span class="dl">'</span><span class="s1">POST</span><span class="dl">'</span><span class="p">,</span>
-  <span class="na">body</span><span class="p">:</span> <span class="nx">inputBody</span><span class="p">,</span>
-  <span class="na">headers</span><span class="p">:</span> <span class="nx">headers</span>
-<span class="p">})</span>
-<span class="p">.</span><span class="nx">then</span><span class="p">(</span><span class="kd">function</span><span class="p">(</span><span class="nx">res</span><span class="p">)</span> <span class="p">{</span>
-    <span class="k">return</span> <span class="nx">res</span><span class="p">.</span><span class="nx">json</span><span class="p">();</span>
-<span class="p">}).</span><span class="nx">then</span><span class="p">(</span><span class="kd">function</span><span class="p">(</span><span class="nx">body</span><span class="p">)</span> <span class="p">{</span>
-    <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">body</span><span class="p">);</span>
-<span class="p">});</span>
-</code></pre></div><div class="highlight"><pre class="highlight python tab-python"><code><span class="kn">import</span> <span class="nn">requests</span>
-<span class="n">headers</span> <span class="o">=</span> <span class="p">{</span>
-  <span class="s">'Content-Type'</span><span class="p">:</span> <span class="s">'application/x-www-form-urlencoded'</span><span class="p">,</span>
-  <span class="s">'Accept'</span><span class="p">:</span> <span class="s">'application/json'</span>
-<span class="p">}</span>
-
-<span class="n">r</span> <span class="o">=</span> <span class="n">requests</span><span class="p">.</span><span class="n">post</span><span class="p">(</span><span class="s">'https://api.mod.io/v1/external/galaxyauth'</span><span class="p">,</span> <span class="n">params</span><span class="o">=</span><span class="p">{</span>
-  <span class="s">'api_key'</span><span class="p">:</span> <span class="s">'YourApiKey'</span>
-<span class="p">},</span> <span class="n">headers</span> <span class="o">=</span> <span class="n">headers</span><span class="p">)</span>
-
-<span class="k">print</span> <span class="n">r</span><span class="p">.</span><span class="n">json</span><span class="p">()</span>
-</code></pre></div><div class="highlight"><pre class="highlight java tab-java"><code><span class="no">URL</span> <span class="n">obj</span> <span class="o">=</span> <span class="k">new</span> <span class="no">URL</span><span class="o">(</span><span class="s">"https://api.mod.io/v1/external/galaxyauth?api_key=YourApiKey"</span><span class="o">);</span>
-<span class="nc">HttpURLConnection</span> <span class="n">con</span> <span class="o">=</span> <span class="o">(</span><span class="nc">HttpURLConnection</span><span class="o">)</span> <span class="n">obj</span><span class="o">.</span><span class="na">openConnection</span><span class="o">();</span>
-<span class="n">con</span><span class="o">.</span><span class="na">setRequestMethod</span><span class="o">(</span><span class="s">"POST"</span><span class="o">);</span>
-<span class="kt">int</span> <span class="n">responseCode</span> <span class="o">=</span> <span class="n">con</span><span class="o">.</span><span class="na">getResponseCode</span><span class="o">();</span>
-<span class="nc">BufferedReader</span> <span class="n">in</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">BufferedReader</span><span class="o">(</span>
-    <span class="k">new</span> <span class="nf">InputStreamReader</span><span class="o">(</span><span class="n">con</span><span class="o">.</span><span class="na">getInputStream</span><span class="o">()));</span>
-<span class="nc">String</span> <span class="n">inputLine</span><span class="o">;</span>
-<span class="nc">StringBuffer</span> <span class="n">response</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">StringBuffer</span><span class="o">();</span>
-<span class="k">while</span> <span class="o">((</span><span class="n">inputLine</span> <span class="o">=</span> <span class="n">in</span><span class="o">.</span><span class="na">readLine</span><span class="o">())</span> <span class="o">!=</span> <span class="kc">null</span><span class="o">)</span> <span class="o">{</span>
-    <span class="n">response</span><span class="o">.</span><span class="na">append</span><span class="o">(</span><span class="n">inputLine</span><span class="o">);</span>
-<span class="o">}</span>
-<span class="n">in</span><span class="o">.</span><span class="na">close</span><span class="o">();</span>
-<span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="n">response</span><span class="o">.</span><span class="na">toString</span><span class="o">());</span>
-</code></pre></div>
-<p><span class="httpmethod POST">POST</span> <span class="endpointheading">/external/galaxyauth</span></p>
-
-<p>Request an access token on behalf of a GOG Galaxy user. To use this functionality you <em>must</em> add your games <a href="https://devportal.gog.com/welcome">encrypted app ticket key</a> from GOG Galaxy, to the <em>Game Admin &gt; Settings</em> page of your games profile on mod.io. A Successful request will return an <a href="#access-token-object">Access Token Object</a>.</p>
-
-<table>
-<thead>
-<tr>
-<th>Parameter</th>
-<th>Type</th>
-<th>Required</th>
-<th>Description</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>appdata</td>
-<td>string</td>
-<td>true</td>
-<td>The GOG Galaxy users <a href="https://cdn.gog.com/open/galaxy/sdk/1.133.3/Documentation/classgalaxy_1_1api_1_1IUser.html#a352802aab7a6e71b1cd1b9b1adfd53d8">Encrypted App Ticket</a> provided by the GOG Galaxy SDK. <br><br>Parameter content <em>MUST</em> be the encrypted string returned in the buffer after calling <a href="https://cdn.gog.com/open/galaxy/sdk/1.133.3/Documentation/classgalaxy_1_1api_1_1IUser.html#a96af6792efc260e75daebedca2cf74c6">IUser::GetEncryptedAppTicket()</a> within the Galaxy SDK. Unlike the <a href="#steam">Steam Authentication</a> endpoint, you do not need to encode the encrypted string as this is already done by the Galaxy SDK.<br><br><strong>NOTE:</strong> Due to the encrypted app ticket containing special characters, you must URL encode the string before sending the request to ensure it is successfully sent to our servers otherwise you may encounter an <code>422 Unprocessable Entity</code> response. For example, <a href="https://ec.haxx.se/http-post.html">cURL</a> will do this for you by using the <code>--data-urlencode</code> option.</td>
-</tr>
-<tr>
-<td>email</td>
-<td>string</td>
-<td></td>
-<td>The users email address (optional but recommended to help users recover lost accounts). If supplied, and the respective user does not have an email registered for their account we will send a confirmation email to confirm they have ownership of the specified email.<br><br><strong>NOTE</strong>: If the user already has an email on record with us, this parameter will be ignored. This parameter should also be urlencoded before the request is sent.</td>
-</tr>
-<tr>
-<td>date_expires</td>
-<td>integer</td>
-<td></td>
-<td>Unix timestamp of date in which the returned token will expire. Value cannot be higher than the default value which is a common year (unix timestamp + 31536000 seconds). Using a token after it's expiry time has elapsed will result in a <code>401 Unauthorized</code> response.</td>
-</tr>
-<tr>
-<td>terms_agreed</td>
-<td>boolean</td>
-<td></td>
-<td>This MUST be set to <code>false</code> unless you have collected the <a href="#terms">users agreement</a> prior to calling this endpoint in which case it can be set to <code>true</code> and will be recorded.<br><br><strong>NOTE:</strong> If this is set to <code>false</code> and the user has not agreed to the latest mod.io Terms of Use and Privacy Policy, an error <code>403 Forbidden (error_ref 11074)</code> will be returned and you will need to collect the <a href="#terms">users agreement</a> and retry with this value set to <code>true</code> to authenticate the user.</td>
-</tr>
-</tbody>
-</table>
-
-<blockquote>
-<p>Example response</p>
-</blockquote>
-<div class="highlight"><pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
-  </span><span class="nl">"code"</span><span class="p">:</span><span class="w"> </span><span class="mi">200</span><span class="p">,</span><span class="w">
-  </span><span class="nl">"access_token"</span><span class="p">:</span><span class="w"> </span><span class="s2">"eyJ0eXAiOiXKV1QibCJhbLciOiJeiUzI1....."</span><span class="p">,</span><span class="w">
-  </span><span class="nl">"date_expires"</span><span class="p">:</span><span class="w"> </span><span class="mi">1570673249</span><span class="w">
-</span><span class="p">}</span><span class="w">
-
-</span></code></pre></div>
-<h3 id="GOG-Galaxy-responses">Responses</h3>
-
-<table>
-<thead>
-<tr>
-<th>Status</th>
-<th>Meaning</th>
-<th>Error Ref</th>
-<th>Description</th>
-<th>Response Schema</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>200</td>
-<td><a href="https://tools.ietf.org/html/rfc7231#section-6.3.1">OK</a></td>
-<td></td>
-<td>Successful Request</td>
-<td><a href="#schemaaccess_token_object">Access Token Object</a></td>
-</tr>
-<tr>
-<td>401</td>
-<td><a href="https://tools.ietf.org/html/rfc7235#section-3.1">Unauthorized</a></td>
-<td>14001</td>
-<td>The game associated with the supplied api_key is currently not available.</td>
-<td><a href="#schemaerror_object">Error Object</a></td>
-</tr>
-<tr>
-<td>401</td>
-<td><a href="https://tools.ietf.org/html/rfc7235#section-3.1">Unauthorized</a></td>
-<td>11021</td>
-<td>The GOG Galaxy encrypted app ticket was invalid.</td>
-<td><a href="#schemaerror_object">Error Object</a></td>
-</tr>
-<tr>
-<td>401</td>
-<td><a href="https://tools.ietf.org/html/rfc7235#section-3.1">Unauthorized</a></td>
-<td>11032</td>
-<td>mod.io was unable to verify the credentials against the external service provider.</td>
-<td><a href="#schemaerror_object">Error Object</a></td>
-</tr>
-<tr>
-<td>403</td>
-<td><a href="https://tools.ietf.org/html/rfc7231#section-6.5.3">Forbidden</a></td>
-<td>11016</td>
-<td>The api_key supplied in the request must be associated with a game.</td>
-<td><a href="#schemaerror_object">Error Object</a></td>
-</tr>
-<tr>
-<td>403</td>
-<td><a href="https://tools.ietf.org/html/rfc7231#section-6.5.3">Forbidden</a></td>
-<td>11017</td>
-<td>The api_key supplied in the request is for test environment purposes only and cannot be used for this functionality.</td>
-<td><a href="#schemaerror_object">Error Object</a></td>
-</tr>
-<tr>
-<td>403</td>
-<td><a href="https://tools.ietf.org/html/rfc7231#section-6.5.3">Forbidden</a></td>
-<td>11022</td>
-<td>The secret GOG Galaxy app ticket associated with this game has not been configured.</td>
-<td><a href="#schemaerror_object">Error Object</a></td>
-</tr>
-<tr>
-<td>403</td>
-<td><a href="https://tools.ietf.org/html/rfc7231#section-6.5.3">Forbidden</a></td>
-<td>11074</td>
-<td>The user has not agreed to the mod.io Terms of Use. Please see terms_agreed parameter description and the <a href="#terms">Terms</a> endpoint for more information.</td>
-<td><a href="#schemaerror_object">Error Object</a></td>
-</tr>
-</tbody>
-</table>
-
-<aside class="auth-notice">
-To perform this request, you must be authenticated via one of the following methods:
-<a href="#authentication">api_key</a>
-</aside>
 <h2 id="epic-games">Epic Games</h2>
 <blockquote>
 <p>Example request</p>
@@ -3672,7 +3502,7 @@ curl <span class="nt">-X</span> POST https://api.mod.io/v1/external/epicgamesaut
 <td>access_token</td>
 <td>string</td>
 <td>true</td>
-<td>The access token <a href="https://dev.epicgames.com/docs/services/en-US/API/EOS/EOS/_tagEOS_Auth_Token/index.html">returned from the EOS SDK</a> when you authenticate a user to use mod.io.</td>
+<td>The Access Token <a href="https://dev.epicgames.com/docs/en-US/api-ref/structs/eos-auth-token">returned from the EOS SDK</a> when you authenticate a user to use mod.io.</td>
 </tr>
 <tr>
 <td>email</td>
@@ -3751,204 +3581,6 @@ curl <span class="nt">-X</span> POST https://api.mod.io/v1/external/epicgamesaut
 <td><a href="https://tools.ietf.org/html/rfc7235#section-3.1">Unauthorized</a></td>
 <td>11046</td>
 <td>The Epic Games access token has expired. You should request another token from the EOS SDK and ensure it is delivered to mod.io before it expires.</td>
-<td><a href="#schemaerror_object">Error Object</a></td>
-</tr>
-<tr>
-<td>403</td>
-<td><a href="https://tools.ietf.org/html/rfc7231#section-6.5.3">Forbidden</a></td>
-<td>11074</td>
-<td>The user has not agreed to the mod.io Terms of Use. Please see terms_agreed parameter description and the <a href="#terms">Terms</a> endpoint for more information.</td>
-<td><a href="#schemaerror_object">Error Object</a></td>
-</tr>
-</tbody>
-</table>
-
-<aside class="auth-notice">
-To perform this request, you must be authenticated via one of the following methods:
-<a href="#authentication">api_key</a>
-</aside>
-<h2 id="itch-io">itch.io</h2>
-<blockquote>
-<p>Example request</p>
-</blockquote>
-<div class="highlight"><pre class="highlight shell tab-shell"><code><span class="c"># You can also use wget</span>
-curl <span class="nt">-X</span> POST https://api.mod.io/v1/external/itchioauth?api_key<span class="o">=</span>YourApiKey <span class="se">\</span>
-  <span class="nt">-H</span> <span class="s1">'Content-Type: application/x-www-form-urlencoded'</span> <span class="se">\ </span>
-  <span class="nt">-H</span> <span class="s1">'Accept: application/json'</span> <span class="se">\</span>
-  <span class="nt">-d</span> <span class="s1">'itchio_token=eyJhbXciOiJIUzI1Lizs....'</span>
-
-</code></pre></div><div class="highlight"><pre class="highlight http tab-http"><code><span class="nf">POST</span> <span class="nn">https://api.mod.io/v1/external/itchioauth?api_key=YourApiKey</span> <span class="k">HTTP</span><span class="o">/</span><span class="m">1.1</span>
-<span class="na">Host</span><span class="p">:</span> <span class="s">api.mod.io</span>
-<span class="na">Content-Type</span><span class="p">:</span> <span class="s">application/x-www-form-urlencoded</span>
-<span class="na">Accept</span><span class="p">:</span> <span class="s">application/json</span>
-
-</code></pre></div><div class="highlight"><pre class="highlight javascript tab-javascript"><code><span class="kd">var</span> <span class="nx">headers</span> <span class="o">=</span> <span class="p">{</span>
-  <span class="dl">'</span><span class="s1">Content-Type</span><span class="dl">'</span><span class="p">:</span><span class="dl">'</span><span class="s1">application/x-www-form-urlencoded</span><span class="dl">'</span><span class="p">,</span>
-  <span class="dl">'</span><span class="s1">Accept</span><span class="dl">'</span><span class="p">:</span><span class="dl">'</span><span class="s1">application/json</span><span class="dl">'</span>
-
-<span class="p">};</span>
-
-<span class="nx">$</span><span class="p">.</span><span class="nx">ajax</span><span class="p">({</span>
-  <span class="na">url</span><span class="p">:</span> <span class="dl">'</span><span class="s1">https://api.mod.io/v1/external/itchioauth</span><span class="dl">'</span><span class="p">,</span>
-  <span class="na">method</span><span class="p">:</span> <span class="dl">'</span><span class="s1">post</span><span class="dl">'</span><span class="p">,</span>
-  <span class="na">data</span><span class="p">:</span> <span class="dl">'</span><span class="s1">?api_key=YourApiKey</span><span class="dl">'</span><span class="p">,</span>
-  <span class="na">headers</span><span class="p">:</span> <span class="nx">headers</span><span class="p">,</span>
-  <span class="na">success</span><span class="p">:</span> <span class="kd">function</span><span class="p">(</span><span class="nx">data</span><span class="p">)</span> <span class="p">{</span>
-    <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">JSON</span><span class="p">.</span><span class="nx">stringify</span><span class="p">(</span><span class="nx">data</span><span class="p">));</span>
-  <span class="p">}</span>
-<span class="p">})</span>
-</code></pre></div><div class="highlight"><pre class="highlight javascript tab-javascript--nodejs"><code><span class="kd">const</span> <span class="nx">request</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="dl">'</span><span class="s1">node-fetch</span><span class="dl">'</span><span class="p">);</span>
-<span class="kd">const</span> <span class="nx">inputBody</span> <span class="o">=</span> <span class="dl">'</span><span class="s1">{
-  "itchio_token": "eyJhbXciOiJIUzI1Lizs...."
-}</span><span class="dl">'</span><span class="p">;</span>
-<span class="kd">const</span> <span class="nx">headers</span> <span class="o">=</span> <span class="p">{</span>
-  <span class="dl">'</span><span class="s1">Content-Type</span><span class="dl">'</span><span class="p">:</span><span class="dl">'</span><span class="s1">application/x-www-form-urlencoded</span><span class="dl">'</span><span class="p">,</span>
-  <span class="dl">'</span><span class="s1">Accept</span><span class="dl">'</span><span class="p">:</span><span class="dl">'</span><span class="s1">application/json</span><span class="dl">'</span>
-
-<span class="p">};</span>
-
-<span class="nx">fetch</span><span class="p">(</span><span class="dl">'</span><span class="s1">https://api.mod.io/v1/external/itchioauth?api_key=YourApiKey</span><span class="dl">'</span><span class="p">,</span>
-<span class="p">{</span>
-  <span class="na">method</span><span class="p">:</span> <span class="dl">'</span><span class="s1">POST</span><span class="dl">'</span><span class="p">,</span>
-  <span class="na">body</span><span class="p">:</span> <span class="nx">inputBody</span><span class="p">,</span>
-  <span class="na">headers</span><span class="p">:</span> <span class="nx">headers</span>
-<span class="p">})</span>
-<span class="p">.</span><span class="nx">then</span><span class="p">(</span><span class="kd">function</span><span class="p">(</span><span class="nx">res</span><span class="p">)</span> <span class="p">{</span>
-    <span class="k">return</span> <span class="nx">res</span><span class="p">.</span><span class="nx">json</span><span class="p">();</span>
-<span class="p">}).</span><span class="nx">then</span><span class="p">(</span><span class="kd">function</span><span class="p">(</span><span class="nx">body</span><span class="p">)</span> <span class="p">{</span>
-    <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">body</span><span class="p">);</span>
-<span class="p">});</span>
-</code></pre></div><div class="highlight"><pre class="highlight python tab-python"><code><span class="kn">import</span> <span class="nn">requests</span>
-<span class="n">headers</span> <span class="o">=</span> <span class="p">{</span>
-  <span class="s">'Content-Type'</span><span class="p">:</span> <span class="s">'application/x-www-form-urlencoded'</span><span class="p">,</span>
-  <span class="s">'Accept'</span><span class="p">:</span> <span class="s">'application/json'</span>
-<span class="p">}</span>
-
-<span class="n">r</span> <span class="o">=</span> <span class="n">requests</span><span class="p">.</span><span class="n">post</span><span class="p">(</span><span class="s">'https://api.mod.io/v1/external/itchioauth'</span><span class="p">,</span> <span class="n">params</span><span class="o">=</span><span class="p">{</span>
-  <span class="s">'api_key'</span><span class="p">:</span> <span class="s">'YourApiKey'</span>
-<span class="p">},</span> <span class="n">headers</span> <span class="o">=</span> <span class="n">headers</span><span class="p">)</span>
-
-<span class="k">print</span> <span class="n">r</span><span class="p">.</span><span class="n">json</span><span class="p">()</span>
-</code></pre></div><div class="highlight"><pre class="highlight java tab-java"><code><span class="no">URL</span> <span class="n">obj</span> <span class="o">=</span> <span class="k">new</span> <span class="no">URL</span><span class="o">(</span><span class="s">"https://api.mod.io/v1/external/itchioauth?api_key=YourApiKey"</span><span class="o">);</span>
-<span class="nc">HttpURLConnection</span> <span class="n">con</span> <span class="o">=</span> <span class="o">(</span><span class="nc">HttpURLConnection</span><span class="o">)</span> <span class="n">obj</span><span class="o">.</span><span class="na">openConnection</span><span class="o">();</span>
-<span class="n">con</span><span class="o">.</span><span class="na">setRequestMethod</span><span class="o">(</span><span class="s">"POST"</span><span class="o">);</span>
-<span class="kt">int</span> <span class="n">responseCode</span> <span class="o">=</span> <span class="n">con</span><span class="o">.</span><span class="na">getResponseCode</span><span class="o">();</span>
-<span class="nc">BufferedReader</span> <span class="n">in</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">BufferedReader</span><span class="o">(</span>
-    <span class="k">new</span> <span class="nf">InputStreamReader</span><span class="o">(</span><span class="n">con</span><span class="o">.</span><span class="na">getInputStream</span><span class="o">()));</span>
-<span class="nc">String</span> <span class="n">inputLine</span><span class="o">;</span>
-<span class="nc">StringBuffer</span> <span class="n">response</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">StringBuffer</span><span class="o">();</span>
-<span class="k">while</span> <span class="o">((</span><span class="n">inputLine</span> <span class="o">=</span> <span class="n">in</span><span class="o">.</span><span class="na">readLine</span><span class="o">())</span> <span class="o">!=</span> <span class="kc">null</span><span class="o">)</span> <span class="o">{</span>
-    <span class="n">response</span><span class="o">.</span><span class="na">append</span><span class="o">(</span><span class="n">inputLine</span><span class="o">);</span>
-<span class="o">}</span>
-<span class="n">in</span><span class="o">.</span><span class="na">close</span><span class="o">();</span>
-<span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="n">response</span><span class="o">.</span><span class="na">toString</span><span class="o">());</span>
-</code></pre></div>
-<p><span class="httpmethod POST">POST</span> <span class="endpointheading">/external/itchioauth</span></p>
-
-<p>Request an access token on behalf of an itch.io user via the itch.io desktop app. Due to the desktop application allowing multiple users to be logged in at once, if more than one user is logged in then the user at the top of that list on the itch.io login dialog will be the authenticating user. A Successful request will return an <a href="#access-token-object">Access Token Object</a>.</p>
-
-<p><strong>HINT:</strong> If you want to overlay the mod.io site in-game on itch.io, we recommend you add <code>?portal=itchio</code> to the end of the URL you open which will prompt the user to login with itch.io. See <a href="#web-overlay-authentication">Web Overlay Authentication</a> for details.</p>
-
-<table>
-<thead>
-<tr>
-<th>Parameter</th>
-<th>Type</th>
-<th>Required</th>
-<th>Description</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>itchio_token</td>
-<td>string</td>
-<td>true</td>
-<td>The <a href="https://itch.io/docs/itch/integrating/manifest-actions.html">JWT Token</a> provided by the itch.io desktop application to your game as the environment variable <code>ITCHIO_API_KEY</code>. You must setup your itch.io app manifest to include the <a href="https://itch.io/docs/itch/integrating/manifest-actions.html">API scope</a> to force itch.io to set this variable.</td>
-</tr>
-<tr>
-<td>email</td>
-<td>string</td>
-<td></td>
-<td>The users email address (optional but recommended to help users recover lost accounts). If supplied, and the respective user does not have an email registered for their account we will send a confirmation email to confirm they have ownership of the specified email.<br><br><strong>NOTE</strong>: If the user already has an email on record with us, this parameter will be ignored. This parameter should also be urlencoded before the request is sent.</td>
-</tr>
-<tr>
-<td>date_expires</td>
-<td>integer</td>
-<td></td>
-<td>Unix timestamp of date in which the returned token will expire. Value cannot be higher than the default value which is a week (unix timestamp + 604800 seconds). Using a token after it's expiry time has elapsed will result in a <code>401 Unauthorized</code> response.</td>
-</tr>
-<tr>
-<td>terms_agreed</td>
-<td>boolean</td>
-<td></td>
-<td>This MUST be set to <code>false</code> unless you have collected the <a href="#terms">users agreement</a> prior to calling this endpoint in which case it can be set to <code>true</code> and will be recorded.<br><br><strong>NOTE:</strong> If this is set to <code>false</code> and the user has not agreed to the latest mod.io Terms of Use and Privacy Policy, an error <code>403 Forbidden (error_ref 11074)</code> will be returned and you will need to collect the <a href="#terms">users agreement</a> and retry with this value set to <code>true</code> to authenticate the user.</td>
-</tr>
-</tbody>
-</table>
-
-<blockquote>
-<p>Example response</p>
-</blockquote>
-<div class="highlight"><pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
-  </span><span class="nl">"code"</span><span class="p">:</span><span class="w"> </span><span class="mi">200</span><span class="p">,</span><span class="w">
-  </span><span class="nl">"access_token"</span><span class="p">:</span><span class="w"> </span><span class="s2">"eyJ0eXAiOiXKV1QibCJhbLciOiJeiUzI1....."</span><span class="p">,</span><span class="w">
-  </span><span class="nl">"date_expires"</span><span class="p">:</span><span class="w"> </span><span class="mi">1570673249</span><span class="w">
-</span><span class="p">}</span><span class="w">
-
-</span></code></pre></div>
-<h3 id="itch.io-responses">Responses</h3>
-
-<table>
-<thead>
-<tr>
-<th>Status</th>
-<th>Meaning</th>
-<th>Error Ref</th>
-<th>Description</th>
-<th>Response Schema</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>200</td>
-<td><a href="https://tools.ietf.org/html/rfc7231#section-6.3.1">OK</a></td>
-<td></td>
-<td>Successful Request</td>
-<td><a href="#schemaaccess_token_object">Access Token Object</a></td>
-</tr>
-<tr>
-<td>401</td>
-<td><a href="https://tools.ietf.org/html/rfc7235#section-3.1">Unauthorized</a></td>
-<td>14001</td>
-<td>The game associated with the supplied api_key is currently not available.</td>
-<td><a href="#schemaerror_object">Error Object</a></td>
-</tr>
-<tr>
-<td>401</td>
-<td><a href="https://tools.ietf.org/html/rfc7235#section-3.1">Unauthorized</a></td>
-<td>11032</td>
-<td>mod.io was unable to verify the credentials against the external service provider.</td>
-<td><a href="#schemaerror_object">Error Object</a></td>
-</tr>
-<tr>
-<td>401</td>
-<td><a href="https://tools.ietf.org/html/rfc7235#section-3.1">Unauthorized</a></td>
-<td>11031</td>
-<td>mod.io was unable to get account data from itch.io servers.</td>
-<td><a href="#schemaerror_object">Error Object</a></td>
-</tr>
-<tr>
-<td>403</td>
-<td><a href="https://tools.ietf.org/html/rfc7231#section-6.5.3">Forbidden</a></td>
-<td>11016</td>
-<td>The api_key supplied in the request must be associated with a game.</td>
-<td><a href="#schemaerror_object">Error Object</a></td>
-</tr>
-<tr>
-<td>403</td>
-<td><a href="https://tools.ietf.org/html/rfc7231#section-6.5.3">Forbidden</a></td>
-<td>11017</td>
-<td>The api_key supplied in the request is for test environment purposes only and cannot be used for this functionality.</td>
 <td><a href="#schemaerror_object">Error Object</a></td>
 </tr>
 <tr>
@@ -4355,12 +3987,12 @@ To perform this request, you must be authenticated via one of the following meth
 <p>Example request</p>
 </blockquote>
 <div class="highlight"><pre class="highlight shell tab-shell"><code><span class="c"># You can also use wget</span>
-curl <span class="nt">-X</span> POST https://api.mod.io/v1/external/openid?api_key<span class="o">=</span>YourApiKey <span class="se">\</span>
+curl <span class="nt">-X</span> POST https://api.mod.io/v1/external/openidauth?api_key<span class="o">=</span>YourApiKey <span class="se">\</span>
   <span class="nt">-H</span> <span class="s1">'Content-Type: application/x-www-form-urlencoded'</span> <span class="se">\ </span>
   <span class="nt">-H</span> <span class="s1">'Accept: application/json'</span> <span class="se">\</span>
   <span class="nt">-d</span> <span class="s1">'id_token=eyJhbXciOiJIUzI1Lizs....'</span>
 
-</code></pre></div><div class="highlight"><pre class="highlight http tab-http"><code><span class="nf">POST</span> <span class="nn">https://api.mod.io/v1/external/openid?api_key=YourApiKey</span> <span class="k">HTTP</span><span class="o">/</span><span class="m">1.1</span>
+</code></pre></div><div class="highlight"><pre class="highlight http tab-http"><code><span class="nf">POST</span> <span class="nn">https://api.mod.io/v1/external/openidauth?api_key=YourApiKey</span> <span class="k">HTTP</span><span class="o">/</span><span class="m">1.1</span>
 <span class="na">Host</span><span class="p">:</span> <span class="s">api.mod.io</span>
 <span class="na">Content-Type</span><span class="p">:</span> <span class="s">application/x-www-form-urlencoded</span>
 <span class="na">Accept</span><span class="p">:</span> <span class="s">application/json</span>
@@ -4372,7 +4004,7 @@ curl <span class="nt">-X</span> POST https://api.mod.io/v1/external/openid?api_k
 <span class="p">};</span>
 
 <span class="nx">$</span><span class="p">.</span><span class="nx">ajax</span><span class="p">({</span>
-  <span class="na">url</span><span class="p">:</span> <span class="dl">'</span><span class="s1">https://api.mod.io/v1/external/openid</span><span class="dl">'</span><span class="p">,</span>
+  <span class="na">url</span><span class="p">:</span> <span class="dl">'</span><span class="s1">https://api.mod.io/v1/external/openidauth</span><span class="dl">'</span><span class="p">,</span>
   <span class="na">method</span><span class="p">:</span> <span class="dl">'</span><span class="s1">post</span><span class="dl">'</span><span class="p">,</span>
   <span class="na">data</span><span class="p">:</span> <span class="dl">'</span><span class="s1">?api_key=YourApiKey</span><span class="dl">'</span><span class="p">,</span>
   <span class="na">headers</span><span class="p">:</span> <span class="nx">headers</span><span class="p">,</span>
@@ -4390,7 +4022,7 @@ curl <span class="nt">-X</span> POST https://api.mod.io/v1/external/openid?api_k
 
 <span class="p">};</span>
 
-<span class="nx">fetch</span><span class="p">(</span><span class="dl">'</span><span class="s1">https://api.mod.io/v1/external/openid?api_key=YourApiKey</span><span class="dl">'</span><span class="p">,</span>
+<span class="nx">fetch</span><span class="p">(</span><span class="dl">'</span><span class="s1">https://api.mod.io/v1/external/openidauth?api_key=YourApiKey</span><span class="dl">'</span><span class="p">,</span>
 <span class="p">{</span>
   <span class="na">method</span><span class="p">:</span> <span class="dl">'</span><span class="s1">POST</span><span class="dl">'</span><span class="p">,</span>
   <span class="na">body</span><span class="p">:</span> <span class="nx">inputBody</span><span class="p">,</span>
@@ -4407,12 +4039,12 @@ curl <span class="nt">-X</span> POST https://api.mod.io/v1/external/openid?api_k
   <span class="s">'Accept'</span><span class="p">:</span> <span class="s">'application/json'</span>
 <span class="p">}</span>
 
-<span class="n">r</span> <span class="o">=</span> <span class="n">requests</span><span class="p">.</span><span class="n">post</span><span class="p">(</span><span class="s">'https://api.mod.io/v1/external/openid'</span><span class="p">,</span> <span class="n">params</span><span class="o">=</span><span class="p">{</span>
+<span class="n">r</span> <span class="o">=</span> <span class="n">requests</span><span class="p">.</span><span class="n">post</span><span class="p">(</span><span class="s">'https://api.mod.io/v1/external/openidauth'</span><span class="p">,</span> <span class="n">params</span><span class="o">=</span><span class="p">{</span>
   <span class="s">'api_key'</span><span class="p">:</span> <span class="s">'YourApiKey'</span>
 <span class="p">},</span> <span class="n">headers</span> <span class="o">=</span> <span class="n">headers</span><span class="p">)</span>
 
 <span class="k">print</span> <span class="n">r</span><span class="p">.</span><span class="n">json</span><span class="p">()</span>
-</code></pre></div><div class="highlight"><pre class="highlight java tab-java"><code><span class="no">URL</span> <span class="n">obj</span> <span class="o">=</span> <span class="k">new</span> <span class="no">URL</span><span class="o">(</span><span class="s">"https://api.mod.io/v1/external/openid?api_key=YourApiKey"</span><span class="o">);</span>
+</code></pre></div><div class="highlight"><pre class="highlight java tab-java"><code><span class="no">URL</span> <span class="n">obj</span> <span class="o">=</span> <span class="k">new</span> <span class="no">URL</span><span class="o">(</span><span class="s">"https://api.mod.io/v1/external/openidauth?api_key=YourApiKey"</span><span class="o">);</span>
 <span class="nc">HttpURLConnection</span> <span class="n">con</span> <span class="o">=</span> <span class="o">(</span><span class="nc">HttpURLConnection</span><span class="o">)</span> <span class="n">obj</span><span class="o">.</span><span class="na">openConnection</span><span class="o">();</span>
 <span class="n">con</span><span class="o">.</span><span class="na">setRequestMethod</span><span class="o">(</span><span class="s">"POST"</span><span class="o">);</span>
 <span class="kt">int</span> <span class="n">responseCode</span> <span class="o">=</span> <span class="n">con</span><span class="o">.</span><span class="na">getResponseCode</span><span class="o">();</span>
@@ -4426,13 +4058,11 @@ curl <span class="nt">-X</span> POST https://api.mod.io/v1/external/openid?api_k
 <span class="n">in</span><span class="o">.</span><span class="na">close</span><span class="o">();</span>
 <span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="n">response</span><span class="o">.</span><span class="na">toString</span><span class="o">());</span>
 </code></pre></div>
-<p><span class="httpmethod POST">POST</span> <span class="endpointheading">/external/openid</span></p>
+<p><span class="httpmethod POST">POST</span> <span class="endpointheading">/external/openidauth</span></p>
 
 <p>Request an access token on behalf of an OpenID identity provider. To use this method of authentication, you must configure the OpenID config in your games authentication admin page. A Successful request will return an <a href="#access-token-object">Access Token Object</a>.</p>
 
-<p><strong>NOTE:</strong> The ability to authenticate players using your identity provider is feature for advanced partners only. If you are interested in becoming an advanced partner, please <a href="mailto:developers@mod.io?subject=OpenID%20SSO%20Request">contact us</a>.</p>
-
-<p><strong>HINT:</strong> If you want to overlay the mod.io site in-game with your SSO, we recommend you add <code>?portal=openid</code> to the end of the URL you open which will prompt the user to login with your identity provider. See <a href="#web-overlay-authentication">Web Overlay Authentication</a> for details.</p>
+<p><strong>NOTE:</strong> The ability to authenticate players using your identity provider is a feature for advanced partners only. If you are interested in becoming an advanced partner, please <a href="mailto:developers@mod.io?subject=OpenID%20SSO%20Request">contact us</a>.</p>
 
 <table>
 <thead>
@@ -4988,6 +4618,502 @@ Content-Type: application/json
 To perform this request, you must be authenticated via one of the following methods:
 <a href="#authentication">OAuth 2</a> (Scopes: read)
 </aside>
+<h1 id="sign-in-with-mod-io-web">Sign in with mod.io (Web)</h1><h2 id="1-sign-in-with-mod-io">1. Sign in with mod.io</h2>
+<blockquote>
+<p>Example request</p>
+</blockquote>
+<div class="highlight"><pre class="highlight shell tab-shell"><code><span class="c"># You can also use wget</span>
+curl <span class="nt">-X</span> GET https://api.mod.io/v1/authorize?client_id<span class="o">=</span>your-client-id&amp;grant_type<span class="o">=</span>authorization_code&amp;response_type<span class="o">=</span>code&amp;scope<span class="o">=</span><span class="nb">read</span>%2520write&amp;state<span class="o">=</span>T6KQGIXWrHXxFDfyp5Hh&amp;redirect_uri<span class="o">=</span>https%3A%2F%2Fyour-callback-server.com%2Foauth%2Flogin%2Fcallback <span class="se">\</span>
+  <span class="nt">-H</span> <span class="s1">'Accept: application/json'</span>
+
+</code></pre></div><div class="highlight"><pre class="highlight http tab-http"><code><span class="nf">GET</span> <span class="nn">https://api.mod.io/v1/authorize?client_id=your-client-id&amp;grant_type=authorization_code&amp;response_type=code&amp;scope=read%2520write&amp;state=T6KQGIXWrHXxFDfyp5Hh&amp;redirect_uri=https%3A%2F%2Fyour-callback-server.com%2Foauth%2Flogin%2Fcallback</span> <span class="k">HTTP</span><span class="o">/</span><span class="m">1.1</span>
+<span class="na">Host</span><span class="p">:</span> <span class="s">api.mod.io</span>
+
+Accept: application/json
+
+</code></pre></div><div class="highlight"><pre class="highlight javascript tab-javascript"><code><span class="kd">var</span> <span class="nx">headers</span> <span class="o">=</span> <span class="p">{</span>
+  <span class="dl">'</span><span class="s1">Accept</span><span class="dl">'</span><span class="p">:</span><span class="dl">'</span><span class="s1">application/json</span><span class="dl">'</span>
+
+<span class="p">};</span>
+
+<span class="nx">$</span><span class="p">.</span><span class="nx">ajax</span><span class="p">({</span>
+  <span class="na">url</span><span class="p">:</span> <span class="dl">'</span><span class="s1">https://api.mod.io/v1/authorize</span><span class="dl">'</span><span class="p">,</span>
+  <span class="na">method</span><span class="p">:</span> <span class="dl">'</span><span class="s1">get</span><span class="dl">'</span><span class="p">,</span>
+  <span class="na">data</span><span class="p">:</span> <span class="dl">'</span><span class="s1">?client_id=your-client-id&amp;grant_type=authorization_code&amp;response_type=code&amp;scope=read%2520write&amp;state=T6KQGIXWrHXxFDfyp5Hh&amp;redirect_uri=https%3A%2F%2Fyour-callback-server.com%2Foauth%2Flogin%2Fcallback</span><span class="dl">'</span><span class="p">,</span>
+  <span class="na">headers</span><span class="p">:</span> <span class="nx">headers</span><span class="p">,</span>
+  <span class="na">success</span><span class="p">:</span> <span class="kd">function</span><span class="p">(</span><span class="nx">data</span><span class="p">)</span> <span class="p">{</span>
+    <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">JSON</span><span class="p">.</span><span class="nx">stringify</span><span class="p">(</span><span class="nx">data</span><span class="p">));</span>
+  <span class="p">}</span>
+<span class="p">})</span>
+</code></pre></div><div class="highlight"><pre class="highlight javascript tab-javascript--nodejs"><code><span class="kd">const</span> <span class="nx">request</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="dl">'</span><span class="s1">node-fetch</span><span class="dl">'</span><span class="p">);</span>
+
+<span class="kd">const</span> <span class="nx">headers</span> <span class="o">=</span> <span class="p">{</span>
+  <span class="dl">'</span><span class="s1">Accept</span><span class="dl">'</span><span class="p">:</span><span class="dl">'</span><span class="s1">application/json</span><span class="dl">'</span>
+
+<span class="p">};</span>
+
+<span class="nx">fetch</span><span class="p">(</span><span class="dl">'</span><span class="s1">https://api.mod.io/v1/authorize?client_id=your-client-id&amp;grant_type=authorization_code&amp;response_type=code&amp;scope=read%2520write&amp;state=T6KQGIXWrHXxFDfyp5Hh&amp;redirect_uri=https%3A%2F%2Fyour-callback-server.com%2Foauth%2Flogin%2Fcallback</span><span class="dl">'</span><span class="p">,</span>
+<span class="p">{</span>
+  <span class="na">method</span><span class="p">:</span> <span class="dl">'</span><span class="s1">GET</span><span class="dl">'</span><span class="p">,</span>
+
+  <span class="na">headers</span><span class="p">:</span> <span class="nx">headers</span>
+<span class="p">})</span>
+<span class="p">.</span><span class="nx">then</span><span class="p">(</span><span class="kd">function</span><span class="p">(</span><span class="nx">res</span><span class="p">)</span> <span class="p">{</span>
+    <span class="k">return</span> <span class="nx">res</span><span class="p">.</span><span class="nx">json</span><span class="p">();</span>
+<span class="p">}).</span><span class="nx">then</span><span class="p">(</span><span class="kd">function</span><span class="p">(</span><span class="nx">body</span><span class="p">)</span> <span class="p">{</span>
+    <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">body</span><span class="p">);</span>
+<span class="p">});</span>
+</code></pre></div><div class="highlight"><pre class="highlight python tab-python"><code><span class="kn">import</span> <span class="nn">requests</span>
+<span class="n">headers</span> <span class="o">=</span> <span class="p">{</span>
+  <span class="s">'Accept'</span><span class="p">:</span> <span class="s">'application/json'</span>
+<span class="p">}</span>
+
+<span class="n">r</span> <span class="o">=</span> <span class="n">requests</span><span class="p">.</span><span class="n">get</span><span class="p">(</span><span class="s">'https://api.mod.io/v1/authorize'</span><span class="p">,</span> <span class="n">params</span><span class="o">=</span><span class="p">{</span>
+  <span class="s">'client_id'</span><span class="p">:</span> <span class="s">'your-client-id'</span><span class="p">,</span>  <span class="s">'grant_type'</span><span class="p">:</span> <span class="s">'authorization_code'</span><span class="p">,</span>  <span class="s">'response_type'</span><span class="p">:</span> <span class="s">'code'</span><span class="p">,</span>  <span class="s">'scope'</span><span class="p">:</span> <span class="s">'read%20write'</span><span class="p">,</span>  <span class="s">'state'</span><span class="p">:</span> <span class="s">'T6KQGIXWrHXxFDfyp5Hh'</span><span class="p">,</span>  <span class="s">'redirect_uri'</span><span class="p">:</span> <span class="s">'https://your-callback-server.com/oauth/login/callback'</span>
+<span class="p">},</span> <span class="n">headers</span> <span class="o">=</span> <span class="n">headers</span><span class="p">)</span>
+
+<span class="k">print</span> <span class="n">r</span><span class="p">.</span><span class="n">json</span><span class="p">()</span>
+</code></pre></div><div class="highlight"><pre class="highlight java tab-java"><code><span class="no">URL</span> <span class="n">obj</span> <span class="o">=</span> <span class="k">new</span> <span class="no">URL</span><span class="o">(</span><span class="s">"https://api.mod.io/v1/authorize?client_id=your-client-id&amp;grant_type=authorization_code&amp;response_type=code&amp;scope=read%2520write&amp;state=T6KQGIXWrHXxFDfyp5Hh&amp;redirect_uri=https%3A%2F%2Fyour-callback-server.com%2Foauth%2Flogin%2Fcallback"</span><span class="o">);</span>
+<span class="nc">HttpURLConnection</span> <span class="n">con</span> <span class="o">=</span> <span class="o">(</span><span class="nc">HttpURLConnection</span><span class="o">)</span> <span class="n">obj</span><span class="o">.</span><span class="na">openConnection</span><span class="o">();</span>
+<span class="n">con</span><span class="o">.</span><span class="na">setRequestMethod</span><span class="o">(</span><span class="s">"GET"</span><span class="o">);</span>
+<span class="kt">int</span> <span class="n">responseCode</span> <span class="o">=</span> <span class="n">con</span><span class="o">.</span><span class="na">getResponseCode</span><span class="o">();</span>
+<span class="nc">BufferedReader</span> <span class="n">in</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">BufferedReader</span><span class="o">(</span>
+    <span class="k">new</span> <span class="nf">InputStreamReader</span><span class="o">(</span><span class="n">con</span><span class="o">.</span><span class="na">getInputStream</span><span class="o">()));</span>
+<span class="nc">String</span> <span class="n">inputLine</span><span class="o">;</span>
+<span class="nc">StringBuffer</span> <span class="n">response</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">StringBuffer</span><span class="o">();</span>
+<span class="k">while</span> <span class="o">((</span><span class="n">inputLine</span> <span class="o">=</span> <span class="n">in</span><span class="o">.</span><span class="na">readLine</span><span class="o">())</span> <span class="o">!=</span> <span class="kc">null</span><span class="o">)</span> <span class="o">{</span>
+    <span class="n">response</span><span class="o">.</span><span class="na">append</span><span class="o">(</span><span class="n">inputLine</span><span class="o">);</span>
+<span class="o">}</span>
+<span class="n">in</span><span class="o">.</span><span class="na">close</span><span class="o">();</span>
+<span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="n">response</span><span class="o">.</span><span class="na">toString</span><span class="o">());</span>
+</code></pre></div>
+<p><span class="httpmethod GET">GET</span> <span class="endpointheading">/authorize</span></p>
+
+<p>Log a user into your website with a mod.io account using the OAuth2 <a href="https://datatracker.ietf.org/doc/html/rfc6749#section-1.3.1">Authorization Code flow</a>. Your application should redirect to this URL after the user initiates the login flow. Upon a successful login the user will be redirected to your registered callback URL where you can <a href="#2-exchange-authorization-code">exchange</a> the <code>code</code> returned for an access token.<br><br><strong>Note:</strong> This request is a web display hosted by mod.io, and therefore does not target the usual base API URL as shown by the example code snippet.</p>
+
+<table>
+<thead>
+<tr>
+<th>Parameter</th>
+<th>Type</th>
+<th>Required</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>client_id</td>
+<td>integer</td>
+<td>true</td>
+<td>Client ID issued to your game.</td>
+</tr>
+<tr>
+<td>grant_type</td>
+<td>string</td>
+<td>true</td>
+<td>Grant Type. Must be <code>authorization_code</code>
+</td>
+</tr>
+<tr>
+<td>response_type</td>
+<td>string</td>
+<td>true</td>
+<td>Response Type. Must be <code>code</code>
+</td>
+</tr>
+<tr>
+<td>scope</td>
+<td>string</td>
+<td>true</td>
+<td>Space-separated scopes you want to request access to. Currently only <code>read</code> and <code>write</code> is supported. To use both provide value <code>read write</code>
+</td>
+</tr>
+<tr>
+<td>state</td>
+<td>string</td>
+<td>false</td>
+<td>A random string you supply and validate upon redirection to your backend service to ensure the value is identical to prevent <a href="https://en.wikipedia.org/wiki/Cross-site_request_forgery">CSRF attacks</a>. Optional but highly recommended.</td>
+</tr>
+<tr>
+<td>redirect_uri</td>
+<td>string</td>
+<td>true</td>
+<td>The URL to your server which mod.io will redirect after login. This value must be a one of the redirect URL's configured in your game admin portal.</td>
+</tr>
+</tbody>
+</table>
+
+<blockquote>
+<p>Example response</p>
+</blockquote>
+<div class="highlight"><pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
+  </span><span class="nl">"code"</span><span class="p">:</span><span class="w"> </span><span class="s2">"def5020077deb4eafe6fb6743b1fd6857ce22112d3400e6cc684633f8c9904faae1a83c23b"</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"state"</span><span class="p">:</span><span class="w"> </span><span class="s2">"T6KQGIXWrHXxFDfyp5Hh"</span><span class="w">
+</span><span class="p">}</span><span class="w">
+
+</span></code></pre></div>
+<h3 id="1.-Sign-in-with-mod.io-responses">Responses</h3>
+
+<table>
+<thead>
+<tr>
+<th>Status</th>
+<th>Meaning</th>
+<th>Error Ref</th>
+<th>Description</th>
+<th>Response Schema</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>200</td>
+<td><a href="https://tools.ietf.org/html/rfc7231#section-6.3.1">OK</a></td>
+<td></td>
+<td>Successful Request</td>
+<td><a href="#schemaweb_authorize_object">Web Authorize Object</a></td>
+</tr>
+</tbody>
+</table>
+
+<aside class="success">
+This operation does not require authentication
+</aside>
+<h2 id="2-exchange-authorization-code">2. Exchange Authorization Code</h2>
+<blockquote>
+<p>Example request</p>
+</blockquote>
+<div class="highlight"><pre class="highlight shell tab-shell"><code><span class="c"># You can also use wget</span>
+curl <span class="nt">-X</span> POST https://api.mod.io/v1/oauth/token <span class="se">\</span>
+  <span class="nt">-H</span> <span class="s1">'Content-Type: application/x-www-form-urlencoded'</span> <span class="se">\ </span>
+  <span class="nt">-H</span> <span class="s1">'Accept: application/json'</span> <span class="se">\</span>
+  <span class="nt">-d</span> <span class="s1">'client_id=1234'</span> <span class="se">\</span>
+  <span class="nt">-d</span> <span class="s1">'client_secret=bqyMxkGE4QVBaYpHQcf6XJENjZ5RWFHsbEZ5SFiGa'</span> <span class="se">\</span>
+  <span class="nt">-d</span> <span class="s1">'code=c7b033d3f163a5cf58844899214334dab11e6a06ddb2539e4e'</span> <span class="se">\</span>
+  <span class="nt">-d</span> <span class="s1">'grant_type=authorization_code'</span> <span class="se">\</span>
+  <span class="nt">-d</span> <span class="s1">'redirect_uri=https://your-callback-server.com/oauth/login/callback'</span>
+
+</code></pre></div><div class="highlight"><pre class="highlight http tab-http"><code><span class="nf">POST</span> <span class="nn">https://api.mod.io/v1/oauth/token</span> <span class="k">HTTP</span><span class="o">/</span><span class="m">1.1</span>
+<span class="na">Host</span><span class="p">:</span> <span class="s">api.mod.io</span>
+<span class="na">Content-Type</span><span class="p">:</span> <span class="s">application/x-www-form-urlencoded</span>
+<span class="na">Accept</span><span class="p">:</span> <span class="s">application/json</span>
+
+</code></pre></div><div class="highlight"><pre class="highlight javascript tab-javascript"><code><span class="kd">var</span> <span class="nx">headers</span> <span class="o">=</span> <span class="p">{</span>
+  <span class="dl">'</span><span class="s1">Content-Type</span><span class="dl">'</span><span class="p">:</span><span class="dl">'</span><span class="s1">application/x-www-form-urlencoded</span><span class="dl">'</span><span class="p">,</span>
+  <span class="dl">'</span><span class="s1">Accept</span><span class="dl">'</span><span class="p">:</span><span class="dl">'</span><span class="s1">application/json</span><span class="dl">'</span>
+
+<span class="p">};</span>
+
+<span class="nx">$</span><span class="p">.</span><span class="nx">ajax</span><span class="p">({</span>
+  <span class="na">url</span><span class="p">:</span> <span class="dl">'</span><span class="s1">https://api.mod.io/v1/oauth/token</span><span class="dl">'</span><span class="p">,</span>
+  <span class="na">method</span><span class="p">:</span> <span class="dl">'</span><span class="s1">post</span><span class="dl">'</span><span class="p">,</span>
+
+  <span class="na">headers</span><span class="p">:</span> <span class="nx">headers</span><span class="p">,</span>
+  <span class="na">success</span><span class="p">:</span> <span class="kd">function</span><span class="p">(</span><span class="nx">data</span><span class="p">)</span> <span class="p">{</span>
+    <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">JSON</span><span class="p">.</span><span class="nx">stringify</span><span class="p">(</span><span class="nx">data</span><span class="p">));</span>
+  <span class="p">}</span>
+<span class="p">})</span>
+</code></pre></div><div class="highlight"><pre class="highlight javascript tab-javascript--nodejs"><code><span class="kd">const</span> <span class="nx">request</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="dl">'</span><span class="s1">node-fetch</span><span class="dl">'</span><span class="p">);</span>
+<span class="kd">const</span> <span class="nx">inputBody</span> <span class="o">=</span> <span class="dl">'</span><span class="s1">{
+  "client_id": "1234",
+  "client_secret": "bqyMxkGE4QVBaYpHQcf6XJENjZ5RWFHsbEZ5SFiGa",
+  "code": "c7b033d3f163a5cf58844899214334dab11e6a06ddb2539e4e",
+  "grant_type": "authorization_code",
+  "redirect_uri": "https://your-callback-server.com/oauth/login/callback"
+}</span><span class="dl">'</span><span class="p">;</span>
+<span class="kd">const</span> <span class="nx">headers</span> <span class="o">=</span> <span class="p">{</span>
+  <span class="dl">'</span><span class="s1">Content-Type</span><span class="dl">'</span><span class="p">:</span><span class="dl">'</span><span class="s1">application/x-www-form-urlencoded</span><span class="dl">'</span><span class="p">,</span>
+  <span class="dl">'</span><span class="s1">Accept</span><span class="dl">'</span><span class="p">:</span><span class="dl">'</span><span class="s1">application/json</span><span class="dl">'</span>
+
+<span class="p">};</span>
+
+<span class="nx">fetch</span><span class="p">(</span><span class="dl">'</span><span class="s1">https://api.mod.io/v1/oauth/token</span><span class="dl">'</span><span class="p">,</span>
+<span class="p">{</span>
+  <span class="na">method</span><span class="p">:</span> <span class="dl">'</span><span class="s1">POST</span><span class="dl">'</span><span class="p">,</span>
+  <span class="na">body</span><span class="p">:</span> <span class="nx">inputBody</span><span class="p">,</span>
+  <span class="na">headers</span><span class="p">:</span> <span class="nx">headers</span>
+<span class="p">})</span>
+<span class="p">.</span><span class="nx">then</span><span class="p">(</span><span class="kd">function</span><span class="p">(</span><span class="nx">res</span><span class="p">)</span> <span class="p">{</span>
+    <span class="k">return</span> <span class="nx">res</span><span class="p">.</span><span class="nx">json</span><span class="p">();</span>
+<span class="p">}).</span><span class="nx">then</span><span class="p">(</span><span class="kd">function</span><span class="p">(</span><span class="nx">body</span><span class="p">)</span> <span class="p">{</span>
+    <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">body</span><span class="p">);</span>
+<span class="p">});</span>
+</code></pre></div><div class="highlight"><pre class="highlight python tab-python"><code><span class="kn">import</span> <span class="nn">requests</span>
+<span class="n">headers</span> <span class="o">=</span> <span class="p">{</span>
+  <span class="s">'Content-Type'</span><span class="p">:</span> <span class="s">'application/x-www-form-urlencoded'</span><span class="p">,</span>
+  <span class="s">'Accept'</span><span class="p">:</span> <span class="s">'application/json'</span>
+<span class="p">}</span>
+
+<span class="n">r</span> <span class="o">=</span> <span class="n">requests</span><span class="p">.</span><span class="n">post</span><span class="p">(</span><span class="s">'https://api.mod.io/v1/oauth/token'</span><span class="p">,</span> <span class="n">params</span><span class="o">=</span><span class="p">{</span>
+
+<span class="p">},</span> <span class="n">headers</span> <span class="o">=</span> <span class="n">headers</span><span class="p">)</span>
+
+<span class="k">print</span> <span class="n">r</span><span class="p">.</span><span class="n">json</span><span class="p">()</span>
+</code></pre></div><div class="highlight"><pre class="highlight java tab-java"><code><span class="no">URL</span> <span class="n">obj</span> <span class="o">=</span> <span class="k">new</span> <span class="no">URL</span><span class="o">(</span><span class="s">"https://api.mod.io/v1/oauth/token"</span><span class="o">);</span>
+<span class="nc">HttpURLConnection</span> <span class="n">con</span> <span class="o">=</span> <span class="o">(</span><span class="nc">HttpURLConnection</span><span class="o">)</span> <span class="n">obj</span><span class="o">.</span><span class="na">openConnection</span><span class="o">();</span>
+<span class="n">con</span><span class="o">.</span><span class="na">setRequestMethod</span><span class="o">(</span><span class="s">"POST"</span><span class="o">);</span>
+<span class="kt">int</span> <span class="n">responseCode</span> <span class="o">=</span> <span class="n">con</span><span class="o">.</span><span class="na">getResponseCode</span><span class="o">();</span>
+<span class="nc">BufferedReader</span> <span class="n">in</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">BufferedReader</span><span class="o">(</span>
+    <span class="k">new</span> <span class="nf">InputStreamReader</span><span class="o">(</span><span class="n">con</span><span class="o">.</span><span class="na">getInputStream</span><span class="o">()));</span>
+<span class="nc">String</span> <span class="n">inputLine</span><span class="o">;</span>
+<span class="nc">StringBuffer</span> <span class="n">response</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">StringBuffer</span><span class="o">();</span>
+<span class="k">while</span> <span class="o">((</span><span class="n">inputLine</span> <span class="o">=</span> <span class="n">in</span><span class="o">.</span><span class="na">readLine</span><span class="o">())</span> <span class="o">!=</span> <span class="kc">null</span><span class="o">)</span> <span class="o">{</span>
+    <span class="n">response</span><span class="o">.</span><span class="na">append</span><span class="o">(</span><span class="n">inputLine</span><span class="o">);</span>
+<span class="o">}</span>
+<span class="n">in</span><span class="o">.</span><span class="na">close</span><span class="o">();</span>
+<span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="n">response</span><span class="o">.</span><span class="na">toString</span><span class="o">());</span>
+</code></pre></div>
+<p><span class="httpmethod POST">POST</span> <span class="endpointheading">/oauth/token</span></p>
+
+<p>Exchange the <code>code</code> returned to your callback server for an access token. If the <code>state</code> parameter was supplied in the <a href="#1-sign-in-with-mod-io">first step</a>, you should compare the returned state prior to making this API call to verify its identical. Successful request will return a <a href="#web-access-token-object">Web Access Token Object</a> object.</p>
+
+<table>
+<thead>
+<tr>
+<th>Parameter</th>
+<th>Type</th>
+<th>Required</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>client_id</td>
+<td>integer</td>
+<td>true</td>
+<td>Client ID issued to your game.</td>
+</tr>
+<tr>
+<td>client_secret</td>
+<td>string</td>
+<td>true</td>
+<td>Client Secret issued to your game. This request should be initiated from a secure backend server and the secret, never displayed to players or transferred to the game client.</td>
+</tr>
+<tr>
+<td>grant_type</td>
+<td>string</td>
+<td>true</td>
+<td>Must be <code>authorization_code</code>, for refresh tokens see <a href="#3-exchange-refresh-token">Exchange Refresh Token</a> endpoint.</td>
+</tr>
+<tr>
+<td>code</td>
+<td>string</td>
+<td>true</td>
+<td>The code returned to your registered callback server.</td>
+</tr>
+<tr>
+<td>redirect_uri</td>
+<td>string</td>
+<td>true</td>
+<td>The <code>redirect_uri</code> registered with your application. This must be the same redirect_uri used in the first step when logging in via mod.io.</td>
+</tr>
+</tbody>
+</table>
+
+<blockquote>
+<p>Example response</p>
+</blockquote>
+<div class="highlight"><pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
+  </span><span class="nl">"token_type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Bearer"</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"expires_in"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2592000"</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"access_token"</span><span class="p">:</span><span class="w"> </span><span class="s2">"eyJlbmMiOiJBMTI4Q0JDLUhTMjU2IiwiYWxnIjoiUlNBLU9BRVAiLCJjdHkiOi...."</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"refresh_token"</span><span class="p">:</span><span class="w"> </span><span class="s2">"eyJlbmMiOiJBMTI4Q0JDLUhTMjU2IiwiYWxnIjoiUlNBLU9BRVAiLCJjdHkiOi...."</span><span class="w">
+</span><span class="p">}</span><span class="w">
+
+</span></code></pre></div>
+<h3 id="2.-Exchange-Authorization-Code-responses">Responses</h3>
+
+<table>
+<thead>
+<tr>
+<th>Status</th>
+<th>Meaning</th>
+<th>Error Ref</th>
+<th>Description</th>
+<th>Response Schema</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>200</td>
+<td><a href="https://tools.ietf.org/html/rfc7231#section-6.3.1">OK</a></td>
+<td></td>
+<td>Success</td>
+<td><a href="#schemaweb_access_token_object">Web Access Token Object</a></td>
+</tr>
+</tbody>
+</table>
+
+<aside class="success">
+This operation does not require authentication
+</aside>
+<h2 id="3-exchange-refresh-token">3. Exchange Refresh Token</h2>
+<blockquote>
+<p>Example request</p>
+</blockquote>
+<div class="highlight"><pre class="highlight shell tab-shell"><code><span class="c"># You can also use wget</span>
+curl <span class="nt">-X</span> POST https://api.mod.io/v1/oauth/token/refresh <span class="se">\</span>
+  <span class="nt">-H</span> <span class="s1">'Content-Type: application/x-www-form-urlencoded'</span> <span class="se">\ </span>
+  <span class="nt">-H</span> <span class="s1">'Accept: application/json'</span> <span class="se">\</span>
+  <span class="nt">-d</span> <span class="s1">'client_id=1234'</span> <span class="se">\</span>
+  <span class="nt">-d</span> <span class="s1">'client_secret=bqyMxkGE4QVBaYpHQcf6XJENjZ5RWFHsbEZ5SFiGa'</span> <span class="se">\</span>
+  <span class="nt">-d</span> <span class="s1">'refresh_token=eyJlbmMiOiJBMTI4Q0JDLUhTMjU2IiwiYWxnIjoiUlNBLU9BRVAiLC'</span> <span class="se">\</span>
+  <span class="nt">-d</span> <span class="s1">'grant_type=refresh_token'</span> <span class="se">\</span>
+  <span class="nt">-d</span> <span class="s1">'redirect_uri=https://your-callback-server.com/oauth/login/callback'</span>
+
+</code></pre></div><div class="highlight"><pre class="highlight http tab-http"><code><span class="nf">POST</span> <span class="nn">https://api.mod.io/v1/oauth/token/refresh</span> <span class="k">HTTP</span><span class="o">/</span><span class="m">1.1</span>
+<span class="na">Host</span><span class="p">:</span> <span class="s">api.mod.io</span>
+<span class="na">Content-Type</span><span class="p">:</span> <span class="s">application/x-www-form-urlencoded</span>
+<span class="na">Accept</span><span class="p">:</span> <span class="s">application/json</span>
+
+</code></pre></div><div class="highlight"><pre class="highlight javascript tab-javascript"><code><span class="kd">var</span> <span class="nx">headers</span> <span class="o">=</span> <span class="p">{</span>
+  <span class="dl">'</span><span class="s1">Content-Type</span><span class="dl">'</span><span class="p">:</span><span class="dl">'</span><span class="s1">application/x-www-form-urlencoded</span><span class="dl">'</span><span class="p">,</span>
+  <span class="dl">'</span><span class="s1">Accept</span><span class="dl">'</span><span class="p">:</span><span class="dl">'</span><span class="s1">application/json</span><span class="dl">'</span>
+
+<span class="p">};</span>
+
+<span class="nx">$</span><span class="p">.</span><span class="nx">ajax</span><span class="p">({</span>
+  <span class="na">url</span><span class="p">:</span> <span class="dl">'</span><span class="s1">https://api.mod.io/v1/oauth/token/refresh</span><span class="dl">'</span><span class="p">,</span>
+  <span class="na">method</span><span class="p">:</span> <span class="dl">'</span><span class="s1">post</span><span class="dl">'</span><span class="p">,</span>
+
+  <span class="na">headers</span><span class="p">:</span> <span class="nx">headers</span><span class="p">,</span>
+  <span class="na">success</span><span class="p">:</span> <span class="kd">function</span><span class="p">(</span><span class="nx">data</span><span class="p">)</span> <span class="p">{</span>
+    <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">JSON</span><span class="p">.</span><span class="nx">stringify</span><span class="p">(</span><span class="nx">data</span><span class="p">));</span>
+  <span class="p">}</span>
+<span class="p">})</span>
+</code></pre></div><div class="highlight"><pre class="highlight javascript tab-javascript--nodejs"><code><span class="kd">const</span> <span class="nx">request</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="dl">'</span><span class="s1">node-fetch</span><span class="dl">'</span><span class="p">);</span>
+<span class="kd">const</span> <span class="nx">inputBody</span> <span class="o">=</span> <span class="dl">'</span><span class="s1">{
+  "client_id": "1234",
+  "client_secret": "bqyMxkGE4QVBaYpHQcf6XJENjZ5RWFHsbEZ5SFiGa",
+  "refresh_token": "eyJlbmMiOiJBMTI4Q0JDLUhTMjU2IiwiYWxnIjoiUlNBLU9BRVAiLC",
+  "grant_type": "refresh_token",
+  "redirect_uri": "https://your-callback-server.com/oauth/login/callback"
+}</span><span class="dl">'</span><span class="p">;</span>
+<span class="kd">const</span> <span class="nx">headers</span> <span class="o">=</span> <span class="p">{</span>
+  <span class="dl">'</span><span class="s1">Content-Type</span><span class="dl">'</span><span class="p">:</span><span class="dl">'</span><span class="s1">application/x-www-form-urlencoded</span><span class="dl">'</span><span class="p">,</span>
+  <span class="dl">'</span><span class="s1">Accept</span><span class="dl">'</span><span class="p">:</span><span class="dl">'</span><span class="s1">application/json</span><span class="dl">'</span>
+
+<span class="p">};</span>
+
+<span class="nx">fetch</span><span class="p">(</span><span class="dl">'</span><span class="s1">https://api.mod.io/v1/oauth/token/refresh</span><span class="dl">'</span><span class="p">,</span>
+<span class="p">{</span>
+  <span class="na">method</span><span class="p">:</span> <span class="dl">'</span><span class="s1">POST</span><span class="dl">'</span><span class="p">,</span>
+  <span class="na">body</span><span class="p">:</span> <span class="nx">inputBody</span><span class="p">,</span>
+  <span class="na">headers</span><span class="p">:</span> <span class="nx">headers</span>
+<span class="p">})</span>
+<span class="p">.</span><span class="nx">then</span><span class="p">(</span><span class="kd">function</span><span class="p">(</span><span class="nx">res</span><span class="p">)</span> <span class="p">{</span>
+    <span class="k">return</span> <span class="nx">res</span><span class="p">.</span><span class="nx">json</span><span class="p">();</span>
+<span class="p">}).</span><span class="nx">then</span><span class="p">(</span><span class="kd">function</span><span class="p">(</span><span class="nx">body</span><span class="p">)</span> <span class="p">{</span>
+    <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">body</span><span class="p">);</span>
+<span class="p">});</span>
+</code></pre></div><div class="highlight"><pre class="highlight python tab-python"><code><span class="kn">import</span> <span class="nn">requests</span>
+<span class="n">headers</span> <span class="o">=</span> <span class="p">{</span>
+  <span class="s">'Content-Type'</span><span class="p">:</span> <span class="s">'application/x-www-form-urlencoded'</span><span class="p">,</span>
+  <span class="s">'Accept'</span><span class="p">:</span> <span class="s">'application/json'</span>
+<span class="p">}</span>
+
+<span class="n">r</span> <span class="o">=</span> <span class="n">requests</span><span class="p">.</span><span class="n">post</span><span class="p">(</span><span class="s">'https://api.mod.io/v1/oauth/token/refresh'</span><span class="p">,</span> <span class="n">params</span><span class="o">=</span><span class="p">{</span>
+
+<span class="p">},</span> <span class="n">headers</span> <span class="o">=</span> <span class="n">headers</span><span class="p">)</span>
+
+<span class="k">print</span> <span class="n">r</span><span class="p">.</span><span class="n">json</span><span class="p">()</span>
+</code></pre></div><div class="highlight"><pre class="highlight java tab-java"><code><span class="no">URL</span> <span class="n">obj</span> <span class="o">=</span> <span class="k">new</span> <span class="no">URL</span><span class="o">(</span><span class="s">"https://api.mod.io/v1/oauth/token/refresh"</span><span class="o">);</span>
+<span class="nc">HttpURLConnection</span> <span class="n">con</span> <span class="o">=</span> <span class="o">(</span><span class="nc">HttpURLConnection</span><span class="o">)</span> <span class="n">obj</span><span class="o">.</span><span class="na">openConnection</span><span class="o">();</span>
+<span class="n">con</span><span class="o">.</span><span class="na">setRequestMethod</span><span class="o">(</span><span class="s">"POST"</span><span class="o">);</span>
+<span class="kt">int</span> <span class="n">responseCode</span> <span class="o">=</span> <span class="n">con</span><span class="o">.</span><span class="na">getResponseCode</span><span class="o">();</span>
+<span class="nc">BufferedReader</span> <span class="n">in</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">BufferedReader</span><span class="o">(</span>
+    <span class="k">new</span> <span class="nf">InputStreamReader</span><span class="o">(</span><span class="n">con</span><span class="o">.</span><span class="na">getInputStream</span><span class="o">()));</span>
+<span class="nc">String</span> <span class="n">inputLine</span><span class="o">;</span>
+<span class="nc">StringBuffer</span> <span class="n">response</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">StringBuffer</span><span class="o">();</span>
+<span class="k">while</span> <span class="o">((</span><span class="n">inputLine</span> <span class="o">=</span> <span class="n">in</span><span class="o">.</span><span class="na">readLine</span><span class="o">())</span> <span class="o">!=</span> <span class="kc">null</span><span class="o">)</span> <span class="o">{</span>
+    <span class="n">response</span><span class="o">.</span><span class="na">append</span><span class="o">(</span><span class="n">inputLine</span><span class="o">);</span>
+<span class="o">}</span>
+<span class="n">in</span><span class="o">.</span><span class="na">close</span><span class="o">();</span>
+<span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="n">response</span><span class="o">.</span><span class="na">toString</span><span class="o">());</span>
+</code></pre></div>
+<p><span class="httpmethod POST">POST</span> <span class="endpointheading">/oauth/token/refresh</span></p>
+
+<p>Exchange a <code>refresh_token</code> for an access token. You should always attempt to refresh a users session with a refresh token prior to re-starting the authentication flow to get a new access token unless your application is aware the refresh token will be <a href="#web-access-token-object">expired</a>. Successful request will return a <a href="#web-access-token-object">Web Access Token Object</a> object.</p>
+
+<table>
+<thead>
+<tr>
+<th>Parameter</th>
+<th>Type</th>
+<th>Required</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>client_id</td>
+<td>integer</td>
+<td>true</td>
+<td>Client ID issued to your game.</td>
+</tr>
+<tr>
+<td>client_secret</td>
+<td>string</td>
+<td>true</td>
+<td>Client Secret issued to your game. This should be secure on a backend server and never displayed to players.</td>
+</tr>
+<tr>
+<td>grant_type</td>
+<td>string</td>
+<td>true</td>
+<td>Must be <code>refresh_token</code>.</td>
+</tr>
+<tr>
+<td>refresh_token</td>
+<td>string</td>
+<td>true</td>
+<td>The refresh token which was returned previously with the access token.</td>
+</tr>
+<tr>
+<td>redirect_uri</td>
+<td>string</td>
+<td>true</td>
+<td>The <code>redirect_uri</code> registered with your application. This must be the same redirect_uri used in the first step when logging in via mod.io.</td>
+</tr>
+</tbody>
+</table>
+
+<blockquote>
+<p>Example response</p>
+</blockquote>
+<div class="highlight"><pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
+  </span><span class="nl">"token_type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Bearer"</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"expires_in"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2592000"</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"access_token"</span><span class="p">:</span><span class="w"> </span><span class="s2">"eyJlbmMiOiJBMTI4Q0JDLUhTMjU2IiwiYWxnIjoiUlNBLU9BRVAiLCJjdHkiOi...."</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"refresh_token"</span><span class="p">:</span><span class="w"> </span><span class="s2">"eyJlbmMiOiJBMTI4Q0JDLUhTMjU2IiwiYWxnIjoiUlNBLU9BRVAiLCJjdHkiOi...."</span><span class="w">
+</span><span class="p">}</span><span class="w">
+
+</span></code></pre></div>
+<h3 id="3.-Exchange-Refresh-Token-responses">Responses</h3>
+
+<table>
+<thead>
+<tr>
+<th>Status</th>
+<th>Meaning</th>
+<th>Error Ref</th>
+<th>Description</th>
+<th>Response Schema</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>200</td>
+<td><a href="https://tools.ietf.org/html/rfc7231#section-6.3.1">OK</a></td>
+<td></td>
+<td>Success</td>
+<td><a href="#schemaweb_access_token_object">Web Access Token Object</a></td>
+</tr>
+</tbody>
+</table>
+
+<aside class="success">
+This operation does not require authentication
+</aside>
 <h1 id="games">Games</h1><h2 id="get-games">Get Games</h2>
 <blockquote>
 <p>Example request</p>
@@ -5138,12 +5264,12 @@ Accept: application/json
 <tr>
 <td>curation_option</td>
 <td>integer</td>
-<td>Curation process used to approve mods:<br><br><strong>0</strong> = No curation: Mods are immediately available to play<br><strong>2</strong> = Full curation: All mods must be accepted by someone to be listed</td>
+<td>Curation options enabled by this game to approve mods:<br><br><strong>0</strong> = No curation: Mods are immediately available to play<br><strong>1</strong> = Price change approval: Pricing changes for marketplace mods queued for acceptance<br><strong>2</strong> = Full curation: All mods must be accepted by someone to be listed<br><strong>?</strong> = Combine to enable multiple features (see BITWISE fields)</td>
 </tr>
 <tr>
 <td>community_options</td>
 <td>integer</td>
-<td>Community features enabled for this game:<br><br><strong>0</strong> = None<br><strong>1</strong> = Enable comments<br><strong>2</strong> = Enable guides<br><strong>4</strong> = Pin on homepage<br><strong>8</strong> = Show on homepage<br><strong>16</strong> = Show more on homepage<br><strong>32</strong> = Allow change status<br><strong>?</strong> = Combine to find games with multiple options enabled (see <a href="#bitwise-and-bitwise-and">BITWISE fields</a>)</td>
+<td>Community features enabled for this game:<br><br><strong>0</strong> = None<br><strong>1</strong> = Enable comments<br><strong>2</strong> = Enable guides<br><strong>4</strong> = Pin on homepage<br><strong>8</strong> = Show on homepage<br><strong>16</strong> = Show more on homepage<br><strong>32</strong> = Allow change status<br><strong>64</strong> = Enable Previews (Game must be hidden)<br><strong>128</strong> = Allow Preview Share-URL (Previews must be enabled)<br><strong>?</strong> = Combine to find games with multiple options enabled (see <a href="#bitwise-and-bitwise-and">BITWISE fields</a>)</td>
 </tr>
 <tr>
 <td>monetisation_options</td>
@@ -5290,7 +5416,8 @@ Accept: application/json
         </span><span class="p">{</span><span class="w">
           </span><span class="nl">"platform"</span><span class="p">:</span><span class="w"> </span><span class="s2">"ps5"</span><span class="p">,</span><span class="w">
           </span><span class="nl">"label"</span><span class="p">:</span><span class="w"> </span><span class="s2">"PlayStation 5"</span><span class="p">,</span><span class="w">
-          </span><span class="nl">"moderated"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="w">
+          </span><span class="nl">"moderated"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
+          </span><span class="nl">"locked"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="w">
         </span><span class="p">}</span><span class="w">
       </span><span class="p">]</span><span class="w">
     </span><span class="p">},</span><span class="w">
@@ -5506,7 +5633,8 @@ Accept: application/json
     </span><span class="p">{</span><span class="w">
       </span><span class="nl">"platform"</span><span class="p">:</span><span class="w"> </span><span class="s2">"ps5"</span><span class="p">,</span><span class="w">
       </span><span class="nl">"label"</span><span class="p">:</span><span class="w"> </span><span class="s2">"PlayStation 5"</span><span class="p">,</span><span class="w">
-      </span><span class="nl">"moderated"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="w">
+      </span><span class="nl">"moderated"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"locked"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="w">
     </span><span class="p">}</span><span class="w">
   </span><span class="p">]</span><span class="w">
 </span><span class="p">}</span><span class="w">
@@ -5706,12 +5834,7 @@ Accept: application/json
 <tr>
 <td>platform_status</td>
 <td>string</td>
-<td>Filter results by their current platform status, valid values are <code>pending_only</code> and <code>live_and_pending</code> (only game admins can filter by this field, see <a href="#status-amp-visibility">status and visibility</a> for details).<br><br><strong>NOTE:</strong> that this parameter is only considered in the request if the parent game has enabled <a href="#targeting-a-platform">cross-platform filtering</a>.</td>
-</tr>
-<tr>
-<td>platforms</td>
-<td>string</td>
-<td>Filter results by their current platform, accepts multiple platforms as comma-separated values (e.g. <code>ps4,switch</code>), valid values are <code>all</code>, <code>windows</code>, <code>mac</code>, <code>linux</code>, <code>android</code>, <code>ios</code>, <code>xboxone</code>, <code>xboxseriesx</code>, <code>ps4</code>, <code>ps5</code>, <code>switch</code>, <code>oculus</code> (only game admins can filter by this field, see <a href="#status-amp-visibility">status and visibility</a> for details).<br><br><strong>NOTE:</strong> that this parameter will take precedence over the header from <a href="#targeting-a-platform">cross-platform filtering</a>.</td>
+<td>If the parent game has enabled per-platform files, by default only mods with files which are approved and live for the <a href="#targeting-a-platform">target platform</a> will be returned.<br><br>To QA mods with pending files, you can filter results by their current platform status, using <code>pending_only</code> or <code>live_and_pending</code>.<br><br><strong>NOTE:</strong> only game admins can filter by this field.</td>
 </tr>
 </tbody>
 </table>
@@ -6535,8 +6658,7 @@ curl <span class="nt">-X</span> POST https://api.mod.io/v1/games/<span class="o"
   <span class="nt">-F</span> <span class="s1">'summary=Short descriptive summary here'</span> <span class="se">\</span>
   <span class="nt">-F</span> <span class="s1">'description=&lt;h2&gt;Getting started with..'</span> <span class="se">\</span>
   <span class="nt">-F</span> <span class="s1">'logo=@/path/to/image.jpg'</span> <span class="se">\</span>
-  <span class="nt">-F</span> <span class="s1">'homepage_url=https://www.example.com'</span> <span class="se">\</span>
-  <span class="nt">-F</span> <span class="s1">'tags[]=easy'</span>
+  <span class="nt">-F</span> <span class="s1">'homepage_url=https://www.example.com'</span>
 
 </code></pre></div><div class="highlight"><pre class="highlight http tab-http"><code><span class="nf">POST</span> <span class="nn">https://api.mod.io/v1/games/{game-id}/mods/{mod-id}</span> <span class="k">HTTP</span><span class="o">/</span><span class="m">1.1</span>
 <span class="na">Host</span><span class="p">:</span> <span class="s">api.mod.io</span>
@@ -6569,8 +6691,7 @@ curl <span class="nt">-X</span> POST https://api.mod.io/v1/games/<span class="o"
   "summary": "Short descriptive summary here",
   "description": "&lt;h2&gt;Getting started with..",
   "logo": "@/path/to/image.jpg",
-  "homepage_url": "https://www.example.com",
-  "tags": "easy"
+  "homepage_url": "https://www.example.com"
 }</span><span class="dl">'</span><span class="p">;</span>
 <span class="kd">const</span> <span class="nx">headers</span> <span class="o">=</span> <span class="p">{</span>
   <span class="dl">'</span><span class="s1">Authorization</span><span class="dl">'</span><span class="p">:</span><span class="dl">'</span><span class="s1">Bearer {access-token}</span><span class="dl">'</span><span class="p">,</span>
@@ -6696,7 +6817,7 @@ curl <span class="nt">-X</span> POST https://api.mod.io/v1/games/<span class="o"
 <td>community_options</td>
 <td>integer</td>
 <td></td>
-<td>Community features enabled for this mod:<br><br><strong>0</strong> = All of the options below are disabled<br><strong>1</strong> = Enable comments<br><em>64</em>_ = Enable previews<br><strong>?</strong> = Add the options you want together, to enable multiple options (see <a href="#bitwise-and-bitwise-and">BITWISE fields</a>)</td>
+<td>Community features enabled for this mod:<br><br><strong>0</strong> = All of the options below are disabled<br><strong>1</strong> = Enable comments<br><em>64</em> = Enable previews<br><strong>?</strong> = Add the options you want together, to enable multiple options (see <a href="#bitwise-and-bitwise-and">BITWISE fields</a>)</td>
 </tr>
 <tr>
 <td>metadata_blob</td>
@@ -7132,7 +7253,7 @@ Accept: application/json
 <tr>
 <td>virus_positive</td>
 <td>integer</td>
-<td>Was a virus detected:<br><br><strong>0</strong> = No threats detected<br><strong>1</strong> = Flagged as malicious</td>
+<td>Was a virus detected:<br><br><strong>0</strong> = No threats detected<br><strong>1</strong> = Flagged as malicious<br><strong>2</strong> = Flagged as containing potentially harmful files (i.e. EXEs)</td>
 </tr>
 <tr>
 <td>filesize</td>
@@ -7167,7 +7288,7 @@ Accept: application/json
 <tr>
 <td>platform_status</td>
 <td>string</td>
-<td>Filter results by their current platform status, valid values are <code>pending_only</code>, <code>approved_only</code> and <code>live_and_pending</code>. With the exception of <code>approved_only</code> which is available to everyone, all other values are restricted to game administrators only, see <a href="#status-amp-visibility">status and visibility</a> for details.<br><br><strong>NOTE:</strong> that this parameter is only considered in the request if the parent game has enabled <a href="#targeting-a-platform">cross-platform filtering</a>.</td>
+<td>If the parent game has enabled per-platform files, by default only files which are approved and live for the <a href="#targeting-a-platform">target platform</a> will be returned.<br><br>To QA pending files, you can filter results by their current platform status, using <code>pending_only</code>, <code>approved_only</code> or <code>live_and_pending</code>. With the exception of <code>approved_only</code> which is available to everyone, all other values are restricted to game administrators.</td>
 </tr>
 </tbody>
 </table>
@@ -11314,9 +11435,7 @@ curl <span class="nt">-X</span> POST https://api.mod.io/v1/games/<span class="o"
   <span class="nt">-H</span> <span class="s1">'Authorization: Bearer {access-token}'</span> <span class="se">\ </span>
   <span class="nt">-H</span> <span class="s1">'Content-Type: multipart/form-data'</span> <span class="se">\ </span>
   <span class="nt">-H</span> <span class="s1">'Accept: application/json'</span> <span class="se">\</span>
-  <span class="nt">-F</span> <span class="s1">'logo=@/path/to/logo.jpg'</span> <span class="se">\</span>
-  <span class="nt">-F</span> <span class="s1">'icon=@/path/to/icon.jpg'</span> <span class="se">\</span>
-  <span class="nt">-F</span> <span class="s1">'header=@/path/to/header.jpg'</span>
+  <span class="nt">-d</span> <span class="s1">'redirect_uris[]=undefined'</span>
 
 </code></pre></div><div class="highlight"><pre class="highlight http tab-http"><code><span class="nf">POST</span> <span class="nn">https://api.mod.io/v1/games/{game-id}/media</span> <span class="k">HTTP</span><span class="o">/</span><span class="m">1.1</span>
 <span class="na">Host</span><span class="p">:</span> <span class="s">api.mod.io</span>
@@ -11342,9 +11461,9 @@ curl <span class="nt">-X</span> POST https://api.mod.io/v1/games/<span class="o"
 <span class="p">})</span>
 </code></pre></div><div class="highlight"><pre class="highlight javascript tab-javascript--nodejs"><code><span class="kd">const</span> <span class="nx">request</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="dl">'</span><span class="s1">node-fetch</span><span class="dl">'</span><span class="p">);</span>
 <span class="kd">const</span> <span class="nx">inputBody</span> <span class="o">=</span> <span class="dl">'</span><span class="s1">{
-  "logo": "@/path/to/logo.jpg",
-  "icon": "@/path/to/icon.jpg",
-  "header": "@/path/to/header.jpg"
+  "redirect_uris": [
+    "string"
+  ]
 }</span><span class="dl">'</span><span class="p">;</span>
 <span class="kd">const</span> <span class="nx">headers</span> <span class="o">=</span> <span class="p">{</span>
   <span class="dl">'</span><span class="s1">Authorization</span><span class="dl">'</span><span class="p">:</span><span class="dl">'</span><span class="s1">Bearer {access-token}</span><span class="dl">'</span><span class="p">,</span>
@@ -12775,6 +12894,161 @@ curl <span class="nt">-X</span> DELETE https://api.mod.io/v1/games/<span class="
 To perform this request, you must be authenticated via one of the following methods:
 <a href="#authentication">OAuth 2</a> (Scopes: write)
 </aside>
+<h2 id="rename-game-tag">Rename Game Tag</h2>
+<blockquote>
+<p>Example request</p>
+</blockquote>
+<div class="highlight"><pre class="highlight shell tab-shell"><code><span class="c"># You can also use wget</span>
+curl <span class="nt">-X</span> PUT https://api.mod.io/v1/games/<span class="o">{</span>game-id<span class="o">}</span>/tags/rename <span class="se">\</span>
+  <span class="nt">-H</span> <span class="s1">'Authorization: Bearer {access-token}'</span> <span class="se">\ </span>
+  <span class="nt">-H</span> <span class="s1">'Content-Type: application/x-www-form-urlencoded'</span> <span class="se">\ </span>
+  <span class="nt">-H</span> <span class="s1">'Accept: application/json'</span>
+  <span class="nt">-d</span> <span class="s1">'from=Medium'</span> <span class="se">\</span>
+  <span class="nt">-d</span> <span class="s1">'to=Intermediate'</span>
+
+</code></pre></div><div class="highlight"><pre class="highlight http tab-http"><code><span class="nf">PUT</span> <span class="nn">https://api.mod.io/v1/games/{game-id}/tags/rename</span> <span class="k">HTTP</span><span class="o">/</span><span class="m">1.1</span>
+<span class="na">Host</span><span class="p">:</span> <span class="s">api.mod.io</span>
+<span class="na">Content-Type</span><span class="p">:</span> <span class="s">application/x-www-form-urlencoded</span>
+<span class="na">Accept</span><span class="p">:</span> <span class="s">application/json</span>
+<span class="na">Authorization</span><span class="p">:</span> <span class="s">Bearer {access-token}</span>
+
+</code></pre></div><div class="highlight"><pre class="highlight javascript tab-javascript"><code><span class="kd">var</span> <span class="nx">headers</span> <span class="o">=</span> <span class="p">{</span>
+  <span class="dl">'</span><span class="s1">Authorization</span><span class="dl">'</span><span class="p">:</span><span class="dl">'</span><span class="s1">Bearer {access-token}</span><span class="dl">'</span><span class="p">,</span>
+  <span class="dl">'</span><span class="s1">Content-Type</span><span class="dl">'</span><span class="p">:</span><span class="dl">'</span><span class="s1">application/x-www-form-urlencoded</span><span class="dl">'</span><span class="p">,</span>
+  <span class="dl">'</span><span class="s1">Accept</span><span class="dl">'</span><span class="p">:</span><span class="dl">'</span><span class="s1">application/json</span><span class="dl">'</span>
+
+<span class="p">};</span>
+
+<span class="nx">$</span><span class="p">.</span><span class="nx">ajax</span><span class="p">({</span>
+  <span class="na">url</span><span class="p">:</span> <span class="dl">'</span><span class="s1">https://api.mod.io/v1/games/{game-id}/tags/rename</span><span class="dl">'</span><span class="p">,</span>
+  <span class="na">method</span><span class="p">:</span> <span class="dl">'</span><span class="s1">put</span><span class="dl">'</span><span class="p">,</span>
+
+  <span class="na">headers</span><span class="p">:</span> <span class="nx">headers</span><span class="p">,</span>
+  <span class="na">success</span><span class="p">:</span> <span class="kd">function</span><span class="p">(</span><span class="nx">data</span><span class="p">)</span> <span class="p">{</span>
+    <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">JSON</span><span class="p">.</span><span class="nx">stringify</span><span class="p">(</span><span class="nx">data</span><span class="p">));</span>
+  <span class="p">}</span>
+<span class="p">})</span>
+</code></pre></div><div class="highlight"><pre class="highlight javascript tab-javascript--nodejs"><code><span class="kd">const</span> <span class="nx">request</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="dl">'</span><span class="s1">node-fetch</span><span class="dl">'</span><span class="p">);</span>
+<span class="kd">const</span> <span class="nx">inputBody</span> <span class="o">=</span> <span class="dl">'</span><span class="s1">{
+  "from": "Medium",
+  "to": "Intermediate"
+}</span><span class="dl">'</span><span class="p">;</span>
+<span class="kd">const</span> <span class="nx">headers</span> <span class="o">=</span> <span class="p">{</span>
+  <span class="dl">'</span><span class="s1">Authorization</span><span class="dl">'</span><span class="p">:</span><span class="dl">'</span><span class="s1">Bearer {access-token}</span><span class="dl">'</span><span class="p">,</span>
+  <span class="dl">'</span><span class="s1">Content-Type</span><span class="dl">'</span><span class="p">:</span><span class="dl">'</span><span class="s1">application/x-www-form-urlencoded</span><span class="dl">'</span><span class="p">,</span>
+  <span class="dl">'</span><span class="s1">Accept</span><span class="dl">'</span><span class="p">:</span><span class="dl">'</span><span class="s1">application/json</span><span class="dl">'</span>
+
+<span class="p">};</span>
+
+<span class="nx">fetch</span><span class="p">(</span><span class="dl">'</span><span class="s1">https://api.mod.io/v1/games/{game-id}/tags/rename</span><span class="dl">'</span><span class="p">,</span>
+<span class="p">{</span>
+  <span class="na">method</span><span class="p">:</span> <span class="dl">'</span><span class="s1">PUT</span><span class="dl">'</span><span class="p">,</span>
+  <span class="na">body</span><span class="p">:</span> <span class="nx">inputBody</span><span class="p">,</span>
+  <span class="na">headers</span><span class="p">:</span> <span class="nx">headers</span>
+<span class="p">})</span>
+<span class="p">.</span><span class="nx">then</span><span class="p">(</span><span class="kd">function</span><span class="p">(</span><span class="nx">res</span><span class="p">)</span> <span class="p">{</span>
+    <span class="k">return</span> <span class="nx">res</span><span class="p">.</span><span class="nx">json</span><span class="p">();</span>
+<span class="p">}).</span><span class="nx">then</span><span class="p">(</span><span class="kd">function</span><span class="p">(</span><span class="nx">body</span><span class="p">)</span> <span class="p">{</span>
+    <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">body</span><span class="p">);</span>
+<span class="p">});</span>
+</code></pre></div><div class="highlight"><pre class="highlight python tab-python"><code><span class="kn">import</span> <span class="nn">requests</span>
+<span class="n">headers</span> <span class="o">=</span> <span class="p">{</span>
+  <span class="s">'Authorization'</span><span class="p">:</span> <span class="s">'Bearer {access-token}'</span><span class="p">,</span>
+  <span class="s">'Content-Type'</span><span class="p">:</span> <span class="s">'application/x-www-form-urlencoded'</span><span class="p">,</span>
+  <span class="s">'Accept'</span><span class="p">:</span> <span class="s">'application/json'</span>
+<span class="p">}</span>
+
+<span class="n">r</span> <span class="o">=</span> <span class="n">requests</span><span class="p">.</span><span class="n">put</span><span class="p">(</span><span class="s">'https://api.mod.io/v1/games/{game-id}/tags/rename'</span><span class="p">,</span> <span class="n">params</span><span class="o">=</span><span class="p">{</span>
+
+<span class="p">},</span> <span class="n">headers</span> <span class="o">=</span> <span class="n">headers</span><span class="p">)</span>
+
+<span class="k">print</span> <span class="n">r</span><span class="p">.</span><span class="n">json</span><span class="p">()</span>
+</code></pre></div><div class="highlight"><pre class="highlight java tab-java"><code><span class="no">URL</span> <span class="n">obj</span> <span class="o">=</span> <span class="k">new</span> <span class="no">URL</span><span class="o">(</span><span class="s">"https://api.mod.io/v1/games/{game-id}/tags/rename"</span><span class="o">);</span>
+<span class="nc">HttpURLConnection</span> <span class="n">con</span> <span class="o">=</span> <span class="o">(</span><span class="nc">HttpURLConnection</span><span class="o">)</span> <span class="n">obj</span><span class="o">.</span><span class="na">openConnection</span><span class="o">();</span>
+<span class="n">con</span><span class="o">.</span><span class="na">setRequestMethod</span><span class="o">(</span><span class="s">"PUT"</span><span class="o">);</span>
+<span class="kt">int</span> <span class="n">responseCode</span> <span class="o">=</span> <span class="n">con</span><span class="o">.</span><span class="na">getResponseCode</span><span class="o">();</span>
+<span class="nc">BufferedReader</span> <span class="n">in</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">BufferedReader</span><span class="o">(</span>
+    <span class="k">new</span> <span class="nf">InputStreamReader</span><span class="o">(</span><span class="n">con</span><span class="o">.</span><span class="na">getInputStream</span><span class="o">()));</span>
+<span class="nc">String</span> <span class="n">inputLine</span><span class="o">;</span>
+<span class="nc">StringBuffer</span> <span class="n">response</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">StringBuffer</span><span class="o">();</span>
+<span class="k">while</span> <span class="o">((</span><span class="n">inputLine</span> <span class="o">=</span> <span class="n">in</span><span class="o">.</span><span class="na">readLine</span><span class="o">())</span> <span class="o">!=</span> <span class="kc">null</span><span class="o">)</span> <span class="o">{</span>
+    <span class="n">response</span><span class="o">.</span><span class="na">append</span><span class="o">(</span><span class="n">inputLine</span><span class="o">);</span>
+<span class="o">}</span>
+<span class="n">in</span><span class="o">.</span><span class="na">close</span><span class="o">();</span>
+<span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="n">response</span><span class="o">.</span><span class="na">toString</span><span class="o">());</span>
+</code></pre></div>
+<p><span class="httpmethod PUT">PUT</span> <span class="endpointheading">/games/{game-id}/tags/rename</span></p>
+
+<p>Rename an existing tag, updating all mods in the progress. Successful request will return a <a href="#message-object">Message Object</a>.</p>
+
+<table>
+<thead>
+<tr>
+<th>Parameter</th>
+<th>Type</th>
+<th>Required</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>from</td>
+<td>string</td>
+<td>true</td>
+<td>The exact name of an existing tag you want to rename.</td>
+</tr>
+<tr>
+<td>to</td>
+<td>string</td>
+<td>true</td>
+<td>The name that you would like to rename the existing tag to.</td>
+</tr>
+</tbody>
+</table>
+
+<blockquote>
+<p>Example response</p>
+</blockquote>
+<div class="highlight"><pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
+  </span><span class="nl">"code"</span><span class="p">:</span><span class="w"> </span><span class="mi">200</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"message"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Your request was successful."</span><span class="w">
+</span><span class="p">}</span><span class="w">
+
+</span></code></pre></div>
+<h3 id="Rename-Game-Tag-responses">Responses</h3>
+
+<table>
+<thead>
+<tr>
+<th>Status</th>
+<th>Meaning</th>
+<th>Error Ref</th>
+<th>Description</th>
+<th>Response Schema</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>200</td>
+<td><a href="https://tools.ietf.org/html/rfc7231#section-6.3.1">OK</a></td>
+<td></td>
+<td>Successful Request.</td>
+<td><a href="#schemamessage_object">Message Object</a></td>
+</tr>
+<tr>
+<td>409</td>
+<td><a href="https://tools.ietf.org/html/rfc7231#section-6.5.8">Conflict</a></td>
+<td>14030</td>
+<td>A request to rename the given tag is currently in progress.</td>
+<td><a href="#schemaerror_object">Error Object</a></td>
+</tr>
+</tbody>
+</table>
+
+<aside class="auth-notice">
+To perform this request, you must be authenticated via one of the following methods:
+<a href="#authentication">OAuth 2</a> (Scopes: write)
+</aside>
 <h2 id="get-mod-tags">Get Mod Tags</h2>
 <blockquote>
 <p>Example request</p>
@@ -13025,8 +13299,8 @@ curl <span class="nt">-X</span> POST https://api.mod.io/v1/games/<span class="o"
 <p>Example response</p>
 </blockquote>
 <div class="highlight"><pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
-  </span><span class="nl">"code"</span><span class="p">:</span><span class="w"> </span><span class="mi">201</span><span class="p">,</span><span class="w">
-  </span><span class="nl">"message"</span><span class="p">:</span><span class="w"> </span><span class="s2">"You have successfully added tags to the specified mod."</span><span class="w">
+  </span><span class="nl">"code"</span><span class="p">:</span><span class="w"> </span><span class="mi">200</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"message"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Your request was successful."</span><span class="w">
 </span><span class="p">}</span><span class="w">
 
 </span></code></pre></div>
@@ -13048,7 +13322,7 @@ curl <span class="nt">-X</span> POST https://api.mod.io/v1/games/<span class="o"
 <td><a href="https://tools.ietf.org/html/rfc7231#section-6.3.2">Created</a></td>
 <td></td>
 <td>Created</td>
-<td><a href="#schemaadd_mod_tag_response">Add Mod Tag Response</a></td>
+<td><a href="#schemamessage_object">Message Object</a></td>
 </tr>
 <tr>
 <td>403</td>
@@ -15614,7 +15888,7 @@ Accept: application/json
 To perform this request, you must be authenticated via one of the following methods:
 <a href="#authentication">api_key</a>, <a href="#authentication">OAuth 2</a> (Scopes: read)
 </aside>
-<h1 id="users">Users</h1><h2 id="mute-a-user">Mute a user</h2>
+<h1 id="users">Users</h1><h2 id="mute-a-user">Mute a User</h2>
 <blockquote>
 <p>Example request</p>
 </blockquote>
@@ -15698,7 +15972,7 @@ Authorization: Bearer {access-token}
 <div class="highlight"><pre class="highlight json tab-json"><code><span class="w"> </span><span class="mi">204</span><span class="w"> </span><span class="err">No</span><span class="w"> </span><span class="err">Content</span><span class="w"> 
 
 </span></code></pre></div>
-<h3 id="Mute-a-user-responses">Responses</h3>
+<h3 id="Mute-a-User-responses">Responses</h3>
 
 <table>
 <thead>
@@ -15739,7 +16013,7 @@ Authorization: Bearer {access-token}
 To perform this request, you must be authenticated via one of the following methods:
 <a href="#authentication">OAuth 2</a> (Scopes: web)
 </aside>
-<h2 id="unmute-a-user">Unmute a user</h2>
+<h2 id="unmute-a-user">Unmute a User</h2>
 <blockquote>
 <p>Example request</p>
 </blockquote>
@@ -15823,7 +16097,7 @@ Authorization: Bearer {access-token}
 <div class="highlight"><pre class="highlight json tab-json"><code><span class="w"> </span><span class="mi">204</span><span class="w"> </span><span class="err">No</span><span class="w"> </span><span class="err">Content</span><span class="w"> 
 
 </span></code></pre></div>
-<h3 id="Unmute-a-user-responses">Responses</h3>
+<h3 id="Unmute-a-User-responses">Responses</h3>
 
 <table>
 <thead>
@@ -16267,7 +16541,7 @@ Authorization: Bearer {access-token}
 <tr>
 <td>virus_positive</td>
 <td>integer</td>
-<td>Was a virus detected:<br><br><strong>0</strong> = No threats detected<br><strong>1</strong> = Flagged as malicious</td>
+<td>Was a virus detected:<br><br><strong>0</strong> = No threats detected<br><strong>1</strong> = Flagged as malicious<br><strong>2</strong> = Flagged as containing potentially harmful files (i.e. EXEs)</td>
 </tr>
 <tr>
 <td>filesize</td>
@@ -16302,7 +16576,7 @@ Authorization: Bearer {access-token}
 <tr>
 <td>platform_status</td>
 <td>string</td>
-<td>Filter results by their current platform status, valid values are <code>pending_only</code>, <code>approved_only</code> and <code>live_and_pending</code>. With the exception of <code>approved_only</code> which is available to everyone, all other values are restricted to game administrators only, see <a href="#status-amp-visibility">status and visibility</a> for details.<br><br><strong>NOTE:</strong> that this parameter is only considered in the request if the parent game has enabled <a href="#targeting-a-platform">cross-platform filtering</a>.</td>
+<td>If the parent game has enabled per-platform files, by default only files which are approved and live for the <a href="#targeting-a-platform">target platform</a> will be returned.<br><br>To request pending files, you can filter results by their current platform status, using <code>pending_only</code>, <code>approved_only</code> or <code>live_and_pending</code>.</td>
 </tr>
 </tbody>
 </table>
@@ -16533,12 +16807,12 @@ Authorization: Bearer {access-token}
 <tr>
 <td>curation_option</td>
 <td>integer</td>
-<td>Curation process used to approve mods:<br><br><strong>0</strong> = No curation: Mods are immediately available to play<br><strong>2</strong> = Full curation: All mods must be accepted by someone to be listed</td>
+<td>Curation options enabled by this game to approve mods:<br><br><strong>0</strong> = No curation: Mods are immediately available to play<br><strong>1</strong> = Price change approval: Pricing changes for marketplace mods queued for acceptance<br><strong>2</strong> = Full curation: All mods must be accepted by someone to be listed<br><strong>?</strong> = Combine to enable multiple features (see BITWISE fields)</td>
 </tr>
 <tr>
 <td>community_options</td>
 <td>integer</td>
-<td>Community features enabled for this game:<br><br><strong>0</strong> = None<br><strong>1</strong> = Enable comments<br><strong>2</strong> = Enable guides<br><strong>4</strong> = Pin on homepage<br><strong>8</strong> = Show on homepage<br><strong>16</strong> = Show more on homepage<br><strong>32</strong> = Allow change status<br><strong>?</strong> = Combine to find games with multiple options enabled (see <a href="#bitwise-and-bitwise-and">BITWISE fields</a>)</td>
+<td>Community features enabled for this game:<br><br><strong>0</strong> = None<br><strong>1</strong> = Enable comments<br><strong>2</strong> = Enable guides<br><strong>4</strong> = Pin on homepage<br><strong>8</strong> = Show on homepage<br><strong>16</strong> = Show more on homepage<br><strong>32</strong> = Allow change status<br><strong>64</strong> = Enable Previews (Game must be hidden)<br><strong>128</strong> = Allow Preview Share-URL (Previews must be enabled)<br><strong>?</strong> = Combine to find games with multiple options enabled (see <a href="#bitwise-and-bitwise-and">BITWISE fields</a>)</td>
 </tr>
 <tr>
 <td>monetisation_options</td>
@@ -16686,7 +16960,8 @@ Authorization: Bearer {access-token}
         </span><span class="p">{</span><span class="w">
           </span><span class="nl">"platform"</span><span class="p">:</span><span class="w"> </span><span class="s2">"ps5"</span><span class="p">,</span><span class="w">
           </span><span class="nl">"label"</span><span class="p">:</span><span class="w"> </span><span class="s2">"PlayStation 5"</span><span class="p">,</span><span class="w">
-          </span><span class="nl">"moderated"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="w">
+          </span><span class="nl">"moderated"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
+          </span><span class="nl">"locked"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="w">
         </span><span class="p">}</span><span class="w">
       </span><span class="p">]</span><span class="w">
     </span><span class="p">},</span><span class="w">
@@ -16900,12 +17175,7 @@ Authorization: Bearer {access-token}
 <tr>
 <td>platform_status</td>
 <td>string</td>
-<td>Filter results by their current platform status, valid values are <code>pending_only</code> and <code>live_and_pending</code> (only game admins can filter by this field, see <a href="#status-amp-visibility">status and visibility</a> for details).<br><br><strong>NOTE:</strong> that this parameter is only considered in the request if the parent game has enabled <a href="#targeting-a-platform">cross-platform filtering</a>.</td>
-</tr>
-<tr>
-<td>platforms</td>
-<td>string</td>
-<td>Filter results by their current platform, accepts multiple platforms as comma-separated values (e.g. <code>ps4,switch</code>), valid values are <code>all</code>, <code>windows</code>, <code>mac</code>, <code>linux</code>, <code>android</code>, <code>ios</code>, <code>xboxone</code>, <code>xboxseriesx</code>, <code>ps4</code>, <code>ps5</code>, <code>switch</code>, <code>oculus</code> (only game admins can filter by this field, see <a href="#status-amp-visibility">status and visibility</a> for details).<br><br><strong>NOTE:</strong> that this parameter will take precedence over the header from <a href="#targeting-a-platform">cross-platform filtering</a>.</td>
+<td>If the parent game has enabled per-platform files, by default only mods with files which are approved and live for the <a href="#targeting-a-platform">target platform</a> will be returned.<br><br>To QA mods with pending files, you can filter results by their current platform status, using <code>pending_only</code> or <code>live_and_pending</code>.<br><br><strong>NOTE:</strong> only game admins can filter by this field.</td>
 </tr>
 </tbody>
 </table>
@@ -17280,12 +17550,7 @@ Authorization: Bearer {access-token}
 <tr>
 <td>platform_status</td>
 <td>string</td>
-<td>Filter results by their current platform status, valid values are <code>pending_only</code> and <code>live_and_pending</code>.<br><br><strong>NOTE:</strong> that this parameter is only considered in the request if the parent game has enabled <a href="#targeting-a-platform">cross-platform filtering</a>.</td>
-</tr>
-<tr>
-<td>platforms</td>
-<td>string</td>
-<td>Filter results by their current platform, accepts multiple platforms as comma-separated values (e.g. <code>ps4,switch</code>), valid values are <code>all</code>, <code>windows</code>, <code>mac</code>, <code>linux</code>, <code>android</code>, <code>ios</code>, <code>xboxone</code>, <code>xboxseriesx</code>, <code>ps4</code>, <code>ps5</code>, <code>switch</code>, <code>oculus</code> (only game admins can filter by this field, see <a href="#status-amp-visibility">status and visibility</a> for details).<br><br><strong>NOTE:</strong> that this parameter will take precedence over the header from <a href="#targeting-a-platform">cross-platform filtering</a>.</td>
+<td>If the parent game has enabled per-platform files, by default only mods with files which are approved and live for the <a href="#targeting-a-platform">target platform</a> will be returned.<br><br>To request mods with pending files, you can filter results by their current platform status, using <code>pending_only</code> or <code>live_and_pending</code>.</td>
 </tr>
 </tbody>
 </table>
@@ -18942,7 +19207,7 @@ Accept: application/json
 To perform this request, you must be authenticated via one of the following methods:
 <a href="#authentication">api_key</a>, <a href="#authentication">OAuth 2</a> (Scopes: read)
 </aside>
-<h1 id="response-schemas">Response Schemas</h1><h2 id="access-token-object">Access Token Object</h2>
+<h1 id="platforms-2">Platforms</h1><h1 id="response-schemas">Response Schemas</h1><h2 id="access-token-object">Access Token Object</h2>
 <p><a name="schemaaccess_token_object"></a></p>
 <div class="highlight"><pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
   </span><span class="nl">"code"</span><span class="p">:</span><span class="w"> </span><span class="mi">200</span><span class="p">,</span><span class="w">
@@ -19386,7 +19651,8 @@ To perform this request, you must be authenticated via one of the following meth
     </span><span class="p">{</span><span class="w">
       </span><span class="nl">"platform"</span><span class="p">:</span><span class="w"> </span><span class="s2">"ps5"</span><span class="p">,</span><span class="w">
       </span><span class="nl">"label"</span><span class="p">:</span><span class="w"> </span><span class="s2">"PlayStation 5"</span><span class="p">,</span><span class="w">
-      </span><span class="nl">"moderated"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="w">
+      </span><span class="nl">"moderated"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"locked"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="w">
     </span><span class="p">}</span><span class="w">
   </span><span class="p">]</span><span class="w">
 </span><span class="p">}</span><span class="w"> 
@@ -19443,12 +19709,12 @@ To perform this request, you must be authenticated via one of the following meth
 <tr>
 <td>curation_option</td>
 <td>integer</td>
-<td>Curation process used to approve mods:<br><br><strong>0</strong> = No curation: Mods are immediately available to play<br><strong>2</strong> = Full curation: All mods must be accepted by someone to be listed</td>
+<td>Curation options enabled by this game to approve mods:<br><br><strong>0</strong> = No curation: Mods are immediately available to play<br><strong>1</strong> = Price change approval: Pricing changes for marketplace mods queued for acceptance<br><strong>2</strong> = Full curation: All mods must be accepted by someone to be listed<br><strong>?</strong> = Combine to enable multiple features (see BITWISE fields)</td>
 </tr>
 <tr>
 <td>community_options</td>
 <td>integer</td>
-<td>Community features enabled for this game:<br><br><strong>0</strong> = All of the options below are disabled<br><strong>1</strong> = Enable comments<br><strong>2</strong> = Enable guides<br><strong>4</strong> = Pin on homepage<br><strong>8</strong> = Show on homepage<br><strong>16</strong> = Show more on homepage<br><strong>32</strong> = Allow change status<br><strong>?</strong> = Add the options you want together, to enable multiple features (see <a href="#bitwise-and-bitwise-and">BITWISE fields</a>)</td>
+<td>Community features enabled for this game:<br><br><strong>0</strong> = All of the options below are disabled<br><strong>1</strong> = Enable comments<br><strong>2</strong> = Enable guides<br><strong>4</strong> = Pin on homepage<br><strong>8</strong> = Show on homepage<br><strong>16</strong> = Show more on homepage<br><strong>32</strong> = Allow change status<br><strong>64</strong> = Enable Previews (Game must be hidden)<br><strong>128</strong> = Allow Preview Share-URL (Previews must be enabled)<br><strong>?</strong> = Add the options you want together, to enable multiple features (see <a href="#bitwise-and-bitwise-and">BITWISE fields</a>)</td>
 </tr>
 <tr>
 <td>monetisation_options</td>
@@ -19584,7 +19850,8 @@ To perform this request, you must be authenticated via one of the following meth
 <div class="highlight"><pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
   </span><span class="nl">"platform"</span><span class="p">:</span><span class="w"> </span><span class="s2">"ps5"</span><span class="p">,</span><span class="w">
   </span><span class="nl">"label"</span><span class="p">:</span><span class="w"> </span><span class="s2">"PlayStation 5"</span><span class="p">,</span><span class="w">
-  </span><span class="nl">"moderated"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="w">
+  </span><span class="nl">"moderated"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"locked"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="w">
 </span><span class="p">}</span><span class="w"> 
 </span></code></pre></div><h3 id="properties-10">Properties</h3>
 <table>
@@ -19610,6 +19877,11 @@ To perform this request, you must be authenticated via one of the following meth
 <td>moderated</td>
 <td>boolean</td>
 <td>Is this platform moderated by game admins? If false, then user submissions for the platform will be available immediately providing the game has mod curation disabled.</td>
+</tr>
+<tr>
+<td>locked</td>
+<td>boolean</td>
+<td>Are users able to upload files to this platform? By default, users are able to upload to all supported platforms, platforms set to <code>true</code> may only be used by game admins only.</td>
 </tr>
 </tbody>
 </table>
@@ -19727,6 +19999,56 @@ To perform this request, you must be authenticated via one of the following meth
 </tr>
 </tbody>
 </table>
+<h2 id="game-user-preview-object">Game User Preview Object</h2>
+<p><a name="schemagame_user_preview_object"></a></p>
+<div class="highlight"><pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
+  </span><span class="nl">"user"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+    </span><span class="nl">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"name_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"xant"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"username"</span><span class="p">:</span><span class="w"> </span><span class="s2">"XanT"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"display_name_portal"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"date_online"</span><span class="p">:</span><span class="w"> </span><span class="mi">1509922961</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"date_joined"</span><span class="p">:</span><span class="w"> </span><span class="mi">1509922961</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"avatar"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+      </span><span class="nl">"filename"</span><span class="p">:</span><span class="w"> </span><span class="s2">"avatar.png"</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"original"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://assets.modcdn.io/images/placeholder/avatar.png"</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"thumb_50x50"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://assets.modcdn.io/images/placeholder/avatar_50x50.png"</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"thumb_100x100"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://assets.modcdn.io/images/placeholder/avatar_100x100.png"</span><span class="w">
+    </span><span class="p">},</span><span class="w">
+    </span><span class="nl">"timezone"</span><span class="p">:</span><span class="w"> </span><span class="s2">""</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"language"</span><span class="p">:</span><span class="w"> </span><span class="s2">""</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"profile_url"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://mod.io/u/xant"</span><span class="w">
+  </span><span class="p">},</span><span class="w">
+  </span><span class="nl">"resource_url"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://mod.io/g/@rogueknight/m/@some-mod"</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"date_added"</span><span class="p">:</span><span class="w"> </span><span class="mi">1499841487</span><span class="w">
+</span><span class="p">}</span><span class="w"> 
+</span></code></pre></div><h3 id="properties-13">Properties</h3>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>user</td>
+<td><a href="#schemauser_object">User Object</a></td>
+<td>No description</td>
+</tr>
+<tr>
+<td>resource_url</td>
+<td>string</td>
+<td>The URL of the resource that the registrant should be redirect to upon success.</td>
+</tr>
+<tr>
+<td>date_added</td>
+<td>integer</td>
+<td>Unix timestamp of the date the user was registered as a previewer.</td>
+</tr>
+</tbody>
+</table>
 <h2 id="get-game-tag-options-2">Get Game Tag Options</h2>
 <p><a name="schemaget_game_tag_options"></a></p>
 <div class="highlight"><pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
@@ -19752,7 +20074,7 @@ To perform this request, you must be authenticated via one of the following meth
   </span><span class="nl">"result_limit"</span><span class="p">:</span><span class="w"> </span><span class="mi">100</span><span class="p">,</span><span class="w">
   </span><span class="nl">"result_total"</span><span class="p">:</span><span class="w"> </span><span class="mi">70</span><span class="w">
 </span><span class="p">}</span><span class="w"> 
-</span></code></pre></div><h3 id="properties-13">Properties</h3>
+</span></code></pre></div><h3 id="properties-14">Properties</h3>
 <table>
 <thead>
 <tr>
@@ -19875,7 +20197,8 @@ To perform this request, you must be authenticated via one of the following meth
         </span><span class="p">{</span><span class="w">
           </span><span class="nl">"platform"</span><span class="p">:</span><span class="w"> </span><span class="s2">"ps5"</span><span class="p">,</span><span class="w">
           </span><span class="nl">"label"</span><span class="p">:</span><span class="w"> </span><span class="s2">"PlayStation 5"</span><span class="p">,</span><span class="w">
-          </span><span class="nl">"moderated"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="w">
+          </span><span class="nl">"moderated"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
+          </span><span class="nl">"locked"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="w">
         </span><span class="p">}</span><span class="w">
       </span><span class="p">]</span><span class="w">
     </span><span class="p">},</span><span class="w">
@@ -19888,7 +20211,7 @@ To perform this request, you must be authenticated via one of the following meth
   </span><span class="nl">"result_limit"</span><span class="p">:</span><span class="w"> </span><span class="mi">100</span><span class="p">,</span><span class="w">
   </span><span class="nl">"result_total"</span><span class="p">:</span><span class="w"> </span><span class="mi">70</span><span class="w">
 </span><span class="p">}</span><span class="w"> 
-</span></code></pre></div><h3 id="properties-14">Properties</h3>
+</span></code></pre></div><h3 id="properties-15">Properties</h3>
 <table>
 <thead>
 <tr>
@@ -19965,7 +20288,7 @@ To perform this request, you must be authenticated via one of the following meth
   </span><span class="nl">"result_limit"</span><span class="p">:</span><span class="w"> </span><span class="mi">100</span><span class="p">,</span><span class="w">
   </span><span class="nl">"result_total"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="w">
 </span><span class="p">}</span><span class="w"> 
-</span></code></pre></div><h3 id="properties-15">Properties</h3>
+</span></code></pre></div><h3 id="properties-16">Properties</h3>
 <table>
 <thead>
 <tr>
@@ -20021,7 +20344,7 @@ To perform this request, you must be authenticated via one of the following meth
   </span><span class="nl">"result_limit"</span><span class="p">:</span><span class="w"> </span><span class="mi">100</span><span class="p">,</span><span class="w">
   </span><span class="nl">"result_total"</span><span class="p">:</span><span class="w"> </span><span class="mi">70</span><span class="w">
 </span><span class="p">}</span><span class="w"> 
-</span></code></pre></div><h3 id="properties-16">Properties</h3>
+</span></code></pre></div><h3 id="properties-17">Properties</h3>
 <table>
 <thead>
 <tr>
@@ -20124,7 +20447,7 @@ To perform this request, you must be authenticated via one of the following meth
   </span><span class="nl">"result_limit"</span><span class="p">:</span><span class="w"> </span><span class="mi">100</span><span class="p">,</span><span class="w">
   </span><span class="nl">"result_total"</span><span class="p">:</span><span class="w"> </span><span class="mi">70</span><span class="w">
 </span><span class="p">}</span><span class="w"> 
-</span></code></pre></div><h3 id="properties-17">Properties</h3>
+</span></code></pre></div><h3 id="properties-18">Properties</h3>
 <table>
 <thead>
 <tr>
@@ -20201,7 +20524,7 @@ To perform this request, you must be authenticated via one of the following meth
   </span><span class="nl">"result_limit"</span><span class="p">:</span><span class="w"> </span><span class="mi">100</span><span class="p">,</span><span class="w">
   </span><span class="nl">"result_total"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="w">
 </span><span class="p">}</span><span class="w"> 
-</span></code></pre></div><h3 id="properties-18">Properties</h3>
+</span></code></pre></div><h3 id="properties-19">Properties</h3>
 <table>
 <thead>
 <tr>
@@ -20294,7 +20617,7 @@ To perform this request, you must be authenticated via one of the following meth
   </span><span class="nl">"result_limit"</span><span class="p">:</span><span class="w"> </span><span class="mi">100</span><span class="p">,</span><span class="w">
   </span><span class="nl">"result_total"</span><span class="p">:</span><span class="w"> </span><span class="mi">70</span><span class="w">
 </span><span class="p">}</span><span class="w"> 
-</span></code></pre></div><h3 id="properties-19">Properties</h3>
+</span></code></pre></div><h3 id="properties-20">Properties</h3>
 <table>
 <thead>
 <tr>
@@ -20352,7 +20675,7 @@ To perform this request, you must be authenticated via one of the following meth
   </span><span class="nl">"result_limit"</span><span class="p">:</span><span class="w"> </span><span class="mi">100</span><span class="p">,</span><span class="w">
   </span><span class="nl">"result_total"</span><span class="p">:</span><span class="w"> </span><span class="mi">70</span><span class="w">
 </span><span class="p">}</span><span class="w"> 
-</span></code></pre></div><h3 id="properties-20">Properties</h3>
+</span></code></pre></div><h3 id="properties-21">Properties</h3>
 <table>
 <thead>
 <tr>
@@ -20407,7 +20730,7 @@ To perform this request, you must be authenticated via one of the following meth
   </span><span class="nl">"result_limit"</span><span class="p">:</span><span class="w"> </span><span class="mi">100</span><span class="p">,</span><span class="w">
   </span><span class="nl">"result_total"</span><span class="p">:</span><span class="w"> </span><span class="mi">70</span><span class="w">
 </span><span class="p">}</span><span class="w"> 
-</span></code></pre></div><h3 id="properties-21">Properties</h3>
+</span></code></pre></div><h3 id="properties-22">Properties</h3>
 <table>
 <thead>
 <tr>
@@ -20473,7 +20796,7 @@ To perform this request, you must be authenticated via one of the following meth
   </span><span class="nl">"result_limit"</span><span class="p">:</span><span class="w"> </span><span class="mi">100</span><span class="p">,</span><span class="w">
   </span><span class="nl">"result_total"</span><span class="p">:</span><span class="w"> </span><span class="mi">70</span><span class="w">
 </span><span class="p">}</span><span class="w"> 
-</span></code></pre></div><h3 id="properties-22">Properties</h3>
+</span></code></pre></div><h3 id="properties-23">Properties</h3>
 <table>
 <thead>
 <tr>
@@ -20528,7 +20851,7 @@ To perform this request, you must be authenticated via one of the following meth
   </span><span class="nl">"result_limit"</span><span class="p">:</span><span class="w"> </span><span class="mi">100</span><span class="p">,</span><span class="w">
   </span><span class="nl">"result_total"</span><span class="p">:</span><span class="w"> </span><span class="mi">70</span><span class="w">
 </span><span class="p">}</span><span class="w"> 
-</span></code></pre></div><h3 id="properties-23">Properties</h3>
+</span></code></pre></div><h3 id="properties-24">Properties</h3>
 <table>
 <thead>
 <tr>
@@ -20607,7 +20930,7 @@ To perform this request, you must be authenticated via one of the following meth
   </span><span class="nl">"result_limit"</span><span class="p">:</span><span class="w"> </span><span class="mi">100</span><span class="p">,</span><span class="w">
   </span><span class="nl">"result_total"</span><span class="p">:</span><span class="w"> </span><span class="mi">70</span><span class="w">
 </span><span class="p">}</span><span class="w"> 
-</span></code></pre></div><h3 id="properties-24">Properties</h3>
+</span></code></pre></div><h3 id="properties-25">Properties</h3>
 <table>
 <thead>
 <tr>
@@ -20781,7 +21104,7 @@ To perform this request, you must be authenticated via one of the following meth
   </span><span class="nl">"result_limit"</span><span class="p">:</span><span class="w"> </span><span class="mi">100</span><span class="p">,</span><span class="w">
   </span><span class="nl">"result_total"</span><span class="p">:</span><span class="w"> </span><span class="mi">70</span><span class="w">
 </span><span class="p">}</span><span class="w"> 
-</span></code></pre></div><h3 id="properties-25">Properties</h3>
+</span></code></pre></div><h3 id="properties-26">Properties</h3>
 <table>
 <thead>
 <tr>
@@ -20838,7 +21161,7 @@ To perform this request, you must be authenticated via one of the following meth
   </span><span class="nl">"result_limit"</span><span class="p">:</span><span class="w"> </span><span class="mi">100</span><span class="p">,</span><span class="w">
   </span><span class="nl">"result_total"</span><span class="p">:</span><span class="w"> </span><span class="mi">70</span><span class="w">
 </span><span class="p">}</span><span class="w"> 
-</span></code></pre></div><h3 id="properties-26">Properties</h3>
+</span></code></pre></div><h3 id="properties-27">Properties</h3>
 <table>
 <thead>
 <tr>
@@ -20893,7 +21216,7 @@ To perform this request, you must be authenticated via one of the following meth
   </span><span class="nl">"result_limit"</span><span class="p">:</span><span class="w"> </span><span class="mi">100</span><span class="p">,</span><span class="w">
   </span><span class="nl">"result_total"</span><span class="p">:</span><span class="w"> </span><span class="mi">70</span><span class="w">
 </span><span class="p">}</span><span class="w"> 
-</span></code></pre></div><h3 id="properties-27">Properties</h3>
+</span></code></pre></div><h3 id="properties-28">Properties</h3>
 <table>
 <thead>
 <tr>
@@ -20961,7 +21284,7 @@ To perform this request, you must be authenticated via one of the following meth
   </span><span class="nl">"result_limit"</span><span class="p">:</span><span class="w"> </span><span class="mi">100</span><span class="p">,</span><span class="w">
   </span><span class="nl">"result_total"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="w">
 </span><span class="p">}</span><span class="w"> 
-</span></code></pre></div><h3 id="properties-28">Properties</h3>
+</span></code></pre></div><h3 id="properties-29">Properties</h3>
 <table>
 <thead>
 <tr>
@@ -21036,7 +21359,7 @@ To perform this request, you must be authenticated via one of the following meth
   </span><span class="nl">"result_limit"</span><span class="p">:</span><span class="w"> </span><span class="mi">100</span><span class="p">,</span><span class="w">
   </span><span class="nl">"result_total"</span><span class="p">:</span><span class="w"> </span><span class="mi">70</span><span class="w">
 </span><span class="p">}</span><span class="w"> 
-</span></code></pre></div><h3 id="properties-29">Properties</h3>
+</span></code></pre></div><h3 id="properties-30">Properties</h3>
 <table>
 <thead>
 <tr>
@@ -21095,7 +21418,7 @@ To perform this request, you must be authenticated via one of the following meth
   </span><span class="nl">"result_limit"</span><span class="p">:</span><span class="w"> </span><span class="mi">100</span><span class="p">,</span><span class="w">
   </span><span class="nl">"result_total"</span><span class="p">:</span><span class="w"> </span><span class="mi">70</span><span class="w">
 </span><span class="p">}</span><span class="w"> 
-</span></code></pre></div><h3 id="properties-30">Properties</h3>
+</span></code></pre></div><h3 id="properties-31">Properties</h3>
 <table>
 <thead>
 <tr>
@@ -21151,7 +21474,7 @@ To perform this request, you must be authenticated via one of the following meth
   </span><span class="nl">"result_limit"</span><span class="p">:</span><span class="w"> </span><span class="mi">100</span><span class="p">,</span><span class="w">
   </span><span class="nl">"result_total"</span><span class="p">:</span><span class="w"> </span><span class="mi">70</span><span class="w">
 </span><span class="p">}</span><span class="w"> 
-</span></code></pre></div><h3 id="properties-31">Properties</h3>
+</span></code></pre></div><h3 id="properties-32">Properties</h3>
 <table>
 <thead>
 <tr>
@@ -21242,7 +21565,7 @@ To perform this request, you must be authenticated via one of the following meth
     </span><span class="p">}</span><span class="w">
   </span><span class="p">]</span><span class="w">
 </span><span class="p">}</span><span class="w"> 
-</span></code></pre></div><h3 id="properties-32">Properties</h3>
+</span></code></pre></div><h3 id="properties-33">Properties</h3>
 <table>
 <thead>
 <tr>
@@ -21344,7 +21667,7 @@ To perform this request, you must be authenticated via one of the following meth
   </span><span class="nl">"visits_total"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
   </span><span class="nl">"comments_total"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="w">
 </span><span class="p">}</span><span class="w"> 
-</span></code></pre></div><h3 id="properties-33">Properties</h3>
+</span></code></pre></div><h3 id="properties-34">Properties</h3>
 <table>
 <thead>
 <tr>
@@ -21378,7 +21701,7 @@ To perform this request, you must be authenticated via one of the following meth
   </span><span class="nl">"date_added"</span><span class="p">:</span><span class="w"> </span><span class="mi">1499841487</span><span class="p">,</span><span class="w">
   </span><span class="nl">"count"</span><span class="p">:</span><span class="w"> </span><span class="mi">22</span><span class="w">
 </span><span class="p">}</span><span class="w"> 
-</span></code></pre></div><h3 id="properties-34">Properties</h3>
+</span></code></pre></div><h3 id="properties-35">Properties</h3>
 <table>
 <thead>
 <tr>
@@ -21411,7 +21734,7 @@ To perform this request, you must be authenticated via one of the following meth
   </span><span class="nl">"filename"</span><span class="p">:</span><span class="w"> </span><span class="s2">"modio-logo-bluedark.png"</span><span class="p">,</span><span class="w">
   </span><span class="nl">"original"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://assets.modcdn.io/images/branding/modio-logo-bluedark.png"</span><span class="w">
 </span><span class="p">}</span><span class="w"> 
-</span></code></pre></div><h3 id="properties-35">Properties</h3>
+</span></code></pre></div><h3 id="properties-36">Properties</h3>
 <table>
 <thead>
 <tr>
@@ -21442,7 +21765,7 @@ To perform this request, you must be authenticated via one of the following meth
   </span><span class="nl">"thumb_128x128"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://assets.modcdn.io/images/placeholder/icon.png"</span><span class="p">,</span><span class="w">
   </span><span class="nl">"thumb_256x256"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://assets.modcdn.io/images/placeholder/icon.png"</span><span class="w">
 </span><span class="p">}</span><span class="w"> 
-</span></code></pre></div><h3 id="properties-36">Properties</h3>
+</span></code></pre></div><h3 id="properties-37">Properties</h3>
 <table>
 <thead>
 <tr>
@@ -21487,7 +21810,7 @@ To perform this request, you must be authenticated via one of the following meth
   </span><span class="nl">"thumb_320x180"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://assets.modcdn.io/images/placeholder/card.png"</span><span class="p">,</span><span class="w">
   </span><span class="nl">"thumb_1280x720"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://assets.modcdn.io/images/placeholder/card.png"</span><span class="w">
 </span><span class="p">}</span><span class="w"> 
-</span></code></pre></div><h3 id="properties-37">Properties</h3>
+</span></code></pre></div><h3 id="properties-38">Properties</h3>
 <table>
 <thead>
 <tr>
@@ -21525,7 +21848,7 @@ To perform this request, you must be authenticated via one of the following meth
   </span><span class="nl">"key"</span><span class="p">:</span><span class="w"> </span><span class="s2">"retry-after"</span><span class="p">,</span><span class="w">
   </span><span class="nl">"value"</span><span class="p">:</span><span class="w"> </span><span class="s2">"98"</span><span class="w">
 </span><span class="p">}</span><span class="w"> 
-</span></code></pre></div><h3 id="properties-38">Properties</h3>
+</span></code></pre></div><h3 id="properties-39">Properties</h3>
 <table>
 <thead>
 <tr>
@@ -21556,7 +21879,7 @@ To perform this request, you must be authenticated via one of the following meth
   </span><span class="nl">"thumb_640x360"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://assets.modcdn.io/images/placeholder/card.png"</span><span class="p">,</span><span class="w">
   </span><span class="nl">"thumb_1280x720"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://assets.modcdn.io/images/placeholder/card.png"</span><span class="w">
 </span><span class="p">}</span><span class="w"> 
-</span></code></pre></div><h3 id="properties-39">Properties</h3>
+</span></code></pre></div><h3 id="properties-40">Properties</h3>
 <table>
 <thead>
 <tr>
@@ -21599,7 +21922,7 @@ To perform this request, you must be authenticated via one of the following meth
   </span><span class="nl">"code"</span><span class="p">:</span><span class="w"> </span><span class="mi">200</span><span class="p">,</span><span class="w">
   </span><span class="nl">"message"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Your request was successful."</span><span class="w">
 </span><span class="p">}</span><span class="w"> 
-</span></code></pre></div><h3 id="properties-40">Properties</h3>
+</span></code></pre></div><h3 id="properties-41">Properties</h3>
 <table>
 <thead>
 <tr>
@@ -21628,7 +21951,7 @@ To perform this request, you must be authenticated via one of the following meth
   </span><span class="nl">"metakey"</span><span class="p">:</span><span class="w"> </span><span class="s2">"pistol-dmg"</span><span class="p">,</span><span class="w">
   </span><span class="nl">"metavalue"</span><span class="p">:</span><span class="w"> </span><span class="s2">"800"</span><span class="w">
 </span><span class="p">}</span><span class="w"> 
-</span></code></pre></div><h3 id="properties-41">Properties</h3>
+</span></code></pre></div><h3 id="properties-42">Properties</h3>
 <table>
 <thead>
 <tr>
@@ -21694,7 +22017,7 @@ To perform this request, you must be authenticated via one of the following meth
     </span><span class="p">]</span><span class="w">
   </span><span class="p">}</span><span class="w">
 </span><span class="p">}</span><span class="w"> 
-</span></code></pre></div><h3 id="properties-42">Properties</h3>
+</span></code></pre></div><h3 id="properties-43">Properties</h3>
 <table>
 <thead>
 <tr>
@@ -21751,7 +22074,7 @@ To perform this request, you must be authenticated via one of the following meth
   </span><span class="nl">"date_added"</span><span class="p">:</span><span class="w"> </span><span class="mi">1499846132</span><span class="p">,</span><span class="w">
   </span><span class="nl">"event_type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"MODFILE_CHANGED"</span><span class="w">
 </span><span class="p">}</span><span class="w"> 
-</span></code></pre></div><h3 id="properties-43">Properties</h3>
+</span></code></pre></div><h3 id="properties-44">Properties</h3>
 <table>
 <thead>
 <tr>
@@ -21806,7 +22129,7 @@ To perform this request, you must be authenticated via one of the following meth
     </span><span class="p">}</span><span class="w">
   </span><span class="p">]</span><span class="w">
 </span><span class="p">}</span><span class="w"> 
-</span></code></pre></div><h3 id="properties-44">Properties</h3>
+</span></code></pre></div><h3 id="properties-45">Properties</h3>
 <table>
 <thead>
 <tr>
@@ -21959,7 +22282,7 @@ To perform this request, you must be authenticated via one of the following meth
     </span><span class="nl">"date_expires"</span><span class="p">:</span><span class="w"> </span><span class="mi">1492564103</span><span class="w">
   </span><span class="p">}</span><span class="w">
 </span><span class="p">}</span><span class="w"> 
-</span></code></pre></div><h3 id="properties-45">Properties</h3>
+</span></code></pre></div><h3 id="properties-46">Properties</h3>
 <table>
 <thead>
 <tr>
@@ -22122,7 +22445,7 @@ To perform this request, you must be authenticated via one of the following meth
   </span><span class="nl">"platform"</span><span class="p">:</span><span class="w"> </span><span class="s2">"windows"</span><span class="p">,</span><span class="w">
   </span><span class="nl">"modfile_live"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="w">
 </span><span class="p">}</span><span class="w"> 
-</span></code></pre></div><h3 id="properties-46">Properties</h3>
+</span></code></pre></div><h3 id="properties-47">Properties</h3>
 <table>
 <thead>
 <tr>
@@ -22149,7 +22472,7 @@ To perform this request, you must be authenticated via one of the following meth
 <div class="highlight"><pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
   </span><span class="nl">"price"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="w">
 </span><span class="p">}</span><span class="w"> 
-</span></code></pre></div><h3 id="properties-47">Properties</h3>
+</span></code></pre></div><h3 id="properties-48">Properties</h3>
 <table>
 <thead>
 <tr>
@@ -22183,7 +22506,7 @@ To perform this request, you must be authenticated via one of the following meth
   </span><span class="nl">"ratings_display_text"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Very Positive"</span><span class="p">,</span><span class="w">
   </span><span class="nl">"date_expires"</span><span class="p">:</span><span class="w"> </span><span class="mi">1492564103</span><span class="w">
 </span><span class="p">}</span><span class="w"> 
-</span></code></pre></div><h3 id="properties-48">Properties</h3>
+</span></code></pre></div><h3 id="properties-49">Properties</h3>
 <table>
 <thead>
 <tr>
@@ -22266,7 +22589,7 @@ To perform this request, you must be authenticated via one of the following meth
   </span><span class="nl">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Unity"</span><span class="p">,</span><span class="w">
   </span><span class="nl">"date_added"</span><span class="p">:</span><span class="w"> </span><span class="mi">1499841487</span><span class="w">
 </span><span class="p">}</span><span class="w"> 
-</span></code></pre></div><h3 id="properties-49">Properties</h3>
+</span></code></pre></div><h3 id="properties-50">Properties</h3>
 <table>
 <thead>
 <tr>
@@ -22285,6 +22608,62 @@ To perform this request, you must be authenticated via one of the following meth
 <td>date_added</td>
 <td>integer</td>
 <td>Unix timestamp of date tag was applied.</td>
+</tr>
+</tbody>
+</table>
+<h2 id="mod-user-preview-object">Mod User Preview Object</h2>
+<p><a name="schemamod_user_preview_object"></a></p>
+<div class="highlight"><pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
+  </span><span class="nl">"user"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+    </span><span class="nl">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"name_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"xant"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"username"</span><span class="p">:</span><span class="w"> </span><span class="s2">"XanT"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"display_name_portal"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"date_online"</span><span class="p">:</span><span class="w"> </span><span class="mi">1509922961</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"date_joined"</span><span class="p">:</span><span class="w"> </span><span class="mi">1509922961</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"avatar"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+      </span><span class="nl">"filename"</span><span class="p">:</span><span class="w"> </span><span class="s2">"avatar.png"</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"original"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://assets.modcdn.io/images/placeholder/avatar.png"</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"thumb_50x50"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://assets.modcdn.io/images/placeholder/avatar_50x50.png"</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"thumb_100x100"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://assets.modcdn.io/images/placeholder/avatar_100x100.png"</span><span class="w">
+    </span><span class="p">},</span><span class="w">
+    </span><span class="nl">"timezone"</span><span class="p">:</span><span class="w"> </span><span class="s2">""</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"language"</span><span class="p">:</span><span class="w"> </span><span class="s2">""</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"profile_url"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://mod.io/u/xant"</span><span class="w">
+  </span><span class="p">},</span><span class="w">
+  </span><span class="nl">"resource_url"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://mod.io/g/@rogueknight/m/@some-mod"</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"subscribed"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"date_added"</span><span class="p">:</span><span class="w"> </span><span class="mi">1499841487</span><span class="w">
+</span><span class="p">}</span><span class="w"> 
+</span></code></pre></div><h3 id="properties-51">Properties</h3>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>user</td>
+<td><a href="#schemauser_object">User Object</a></td>
+<td>No description</td>
+</tr>
+<tr>
+<td>resource_url</td>
+<td>string</td>
+<td>The URL of the resource that the registrant should be redirect to upon success.</td>
+</tr>
+<tr>
+<td>subscribed</td>
+<td>boolean</td>
+<td>If the user is also subscribed to the resource.</td>
+</tr>
+<tr>
+<td>date_added</td>
+<td>integer</td>
+<td>Unix timestamp of the date the user was registered as a previewer.</td>
 </tr>
 </tbody>
 </table>
@@ -22318,7 +22697,7 @@ To perform this request, you must be authenticated via one of the following meth
     </span><span class="p">}</span><span class="w">
   </span><span class="p">]</span><span class="w">
 </span><span class="p">}</span><span class="w"> 
-</span></code></pre></div><h3 id="properties-50">Properties</h3>
+</span></code></pre></div><h3 id="properties-52">Properties</h3>
 <table>
 <thead>
 <tr>
@@ -22356,7 +22735,7 @@ To perform this request, you must be authenticated via one of the following meth
 <tr>
 <td>virus_positive</td>
 <td>integer</td>
-<td>Was a virus detected:<br><br><strong>0</strong> = No threats detected<br><strong>1</strong> = Flagged as malicious</td>
+<td>Was a virus detected:<br><br><strong>0</strong> = No threats detected<br><strong>1</strong> = Flagged as malicious<br><strong>2</strong> = Flagged as containing potentially harmful files (i.e. EXEs)</td>
 </tr>
 <tr>
 <td>virustotal_hash</td>
@@ -22417,7 +22796,7 @@ To perform this request, you must be authenticated via one of the following meth
   </span><span class="nl">"platform"</span><span class="p">:</span><span class="w"> </span><span class="s2">"windows"</span><span class="p">,</span><span class="w">
   </span><span class="nl">"status"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="w">
 </span><span class="p">}</span><span class="w"> 
-</span></code></pre></div><h3 id="properties-51">Properties</h3>
+</span></code></pre></div><h3 id="properties-53">Properties</h3>
 <table>
 <thead>
 <tr>
@@ -22435,7 +22814,7 @@ To perform this request, you must be authenticated via one of the following meth
 <tr>
 <td>status</td>
 <td>integer</td>
-<td>The status of the modfile for the corresponding <code>platform</code>. Possible values:<br><br><strong>0</strong> = Pending<br><strong>1</strong> = Approved<br><strong>2</strong> Denied</td>
+<td>The status of the modfile for the corresponding <code>platform</code>. Possible values:<br><br><strong>0</strong> = Pending<br><strong>1</strong> = Approved<br><strong>2</strong> = Denied</td>
 </tr>
 </tbody>
 </table>
@@ -22458,7 +22837,7 @@ To perform this request, you must be authenticated via one of the following meth
     </span><span class="s2">"string"</span><span class="w">
   </span><span class="p">]</span><span class="w">
 </span><span class="p">}</span><span class="w"> 
-</span></code></pre></div><h3 id="properties-52">Properties</h3>
+</span></code></pre></div><h3 id="properties-54">Properties</h3>
 <table>
 <thead>
 <tr>
@@ -22501,7 +22880,7 @@ To perform this request, you must be authenticated via one of the following meth
   </span><span class="nl">"upload_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"123e4567-e89b-12d3-a456-426614174000"</span><span class="p">,</span><span class="w">
   </span><span class="nl">"status"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="w">
 </span><span class="p">}</span><span class="w"> 
-</span></code></pre></div><h3 id="properties-53">Properties</h3>
+</span></code></pre></div><h3 id="properties-55">Properties</h3>
 <table>
 <thead>
 <tr>
@@ -22531,7 +22910,7 @@ To perform this request, you must be authenticated via one of the following meth
   </span><span class="nl">"part_size"</span><span class="p">:</span><span class="w"> </span><span class="mi">52428800</span><span class="p">,</span><span class="w">
   </span><span class="nl">"date_added"</span><span class="p">:</span><span class="w"> </span><span class="mi">1499846132</span><span class="w">
 </span><span class="p">}</span><span class="w"> 
-</span></code></pre></div><h3 id="properties-54">Properties</h3>
+</span></code></pre></div><h3 id="properties-56">Properties</h3>
 <table>
 <thead>
 <tr>
@@ -22570,7 +22949,7 @@ To perform this request, you must be authenticated via one of the following meth
   </span><span class="nl">"date_added"</span><span class="p">:</span><span class="w"> </span><span class="mi">1499841487</span><span class="p">,</span><span class="w">
   </span><span class="nl">"date_updated"</span><span class="p">:</span><span class="w"> </span><span class="mi">1499841487</span><span class="w">
 </span><span class="p">}</span><span class="w"> 
-</span></code></pre></div><h3 id="properties-55">Properties</h3>
+</span></code></pre></div><h3 id="properties-57">Properties</h3>
 <table>
 <thead>
 <tr>
@@ -22597,6 +22976,28 @@ To perform this request, you must be authenticated via one of the following meth
 </tr>
 </tbody>
 </table>
+<h2 id="proxy-transformer-object">Proxy Transformer Object</h2>
+<p><a name="schemaproxy_transformer_object"></a></p>
+<div class="highlight"><pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
+  </span><span class="nl">"success"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="w">
+</span><span class="p">}</span><span class="w"> 
+</span></code></pre></div><h3 id="properties-58">Properties</h3>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>success</td>
+<td>bool</td>
+<td>Did the operation succeed?</td>
+</tr>
+</tbody>
+</table>
 <h2 id="rating-object">Rating Object</h2>
 <p><a name="schemarating_object"></a></p>
 <div class="highlight"><pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
@@ -22605,7 +23006,7 @@ To perform this request, you must be authenticated via one of the following meth
   </span><span class="nl">"rating"</span><span class="p">:</span><span class="w"> </span><span class="mi">-1</span><span class="p">,</span><span class="w">
   </span><span class="nl">"date_added"</span><span class="p">:</span><span class="w"> </span><span class="mi">1492564103</span><span class="w">
 </span><span class="p">}</span><span class="w"> 
-</span></code></pre></div><h3 id="properties-56">Properties</h3>
+</span></code></pre></div><h3 id="properties-59">Properties</h3>
 <table>
 <thead>
 <tr>
@@ -22662,7 +23063,7 @@ To perform this request, you must be authenticated via one of the following meth
   </span><span class="nl">"date_added"</span><span class="p">:</span><span class="w"> </span><span class="mi">1492564103</span><span class="p">,</span><span class="w">
   </span><span class="nl">"reason"</span><span class="p">:</span><span class="w"> </span><span class="s2">""</span><span class="w">
 </span><span class="p">}</span><span class="w"> 
-</span></code></pre></div><h3 id="properties-57">Properties</h3>
+</span></code></pre></div><h3 id="properties-60">Properties</h3>
 <table>
 <thead>
 <tr>
@@ -22725,7 +23126,7 @@ To perform this request, you must be authenticated via one of the following meth
   </span><span class="nl">"position"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Turret Builder"</span><span class="p">,</span><span class="w">
   </span><span class="nl">"invite_pending"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="w">
 </span><span class="p">}</span><span class="w"> 
-</span></code></pre></div><h3 id="properties-58">Properties</h3>
+</span></code></pre></div><h3 id="properties-61">Properties</h3>
 <table>
 <thead>
 <tr>
@@ -22803,7 +23204,7 @@ To perform this request, you must be authenticated via one of the following meth
     </span><span class="p">}</span><span class="w">
   </span><span class="p">}</span><span class="w">
 </span><span class="p">}</span><span class="w"> 
-</span></code></pre></div><h3 id="properties-59">Properties</h3>
+</span></code></pre></div><h3 id="properties-62">Properties</h3>
 <table>
 <thead>
 <tr>
@@ -22945,7 +23346,7 @@ To perform this request, you must be authenticated via one of the following meth
   </span><span class="nl">"warning"</span><span class="p">:</span><span class="w"> </span><span class="s2">"#d6af2e"</span><span class="p">,</span><span class="w">
   </span><span class="nl">"danger"</span><span class="p">:</span><span class="w"> </span><span class="s2">"#ff000e"</span><span class="w">
 </span><span class="p">}</span><span class="w"> 
-</span></code></pre></div><h3 id="properties-60">Properties</h3>
+</span></code></pre></div><h3 id="properties-63">Properties</h3>
 <table>
 <thead>
 <tr>
@@ -22987,6 +23388,53 @@ To perform this request, you must be authenticated via one of the following meth
 </tr>
 </tbody>
 </table>
+<h2 id="user-access-object">User Access Object</h2>
+<p><a name="schemauser_access_object"></a></p>
+<div class="highlight"><pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
+  </span><span class="nl">"resource_type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"games"</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"resource_id"</span><span class="p">:</span><span class="w"> </span><span class="mi">3026</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"resource_name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"My Awesome Mod"</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"resource_name_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"my-awesome-mod"</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"resource_url"</span><span class="p">:</span><span class="w"> </span><span class="s2">""</span><span class="w">
+</span><span class="p">}</span><span class="w"> 
+</span></code></pre></div><h3 id="properties-64">Properties</h3>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>resource_type</td>
+<td>string</td>
+<td>Type of resource. Can be one of the following:<br><br>- <em>games</em><br>- <em>mods</em><br>-<em>guides</em>
+</td>
+</tr>
+<tr>
+<td>resource_id</td>
+<td>integer</td>
+<td>Unique id of the resource.</td>
+</tr>
+<tr>
+<td>resource_name</td>
+<td>integer</td>
+<td>The relative name of the resource.</td>
+</tr>
+<tr>
+<td>resource_name_id</td>
+<td>string</td>
+<td>Path for the resource on mod.io.</td>
+</tr>
+<tr>
+<td>resource_url</td>
+<td>string</td>
+<td>URL to the resource that was reported. If the resource has been permanently deleted, and thus you cannot access it anymore - this field will be null.</td>
+</tr>
+</tbody>
+</table>
 <h2 id="user-event-object">User Event Object</h2>
 <p><a name="schemauser_event_object"></a></p>
 <div class="highlight"><pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
@@ -22997,7 +23445,7 @@ To perform this request, you must be authenticated via one of the following meth
   </span><span class="nl">"date_added"</span><span class="p">:</span><span class="w"> </span><span class="mi">1499846132</span><span class="p">,</span><span class="w">
   </span><span class="nl">"event_type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"USER_SUBSCRIBE"</span><span class="w">
 </span><span class="p">}</span><span class="w"> 
-</span></code></pre></div><h3 id="properties-61">Properties</h3>
+</span></code></pre></div><h3 id="properties-65">Properties</h3>
 <table>
 <thead>
 <tr>
@@ -23058,7 +23506,7 @@ To perform this request, you must be authenticated via one of the following meth
   </span><span class="nl">"language"</span><span class="p">:</span><span class="w"> </span><span class="s2">""</span><span class="p">,</span><span class="w">
   </span><span class="nl">"profile_url"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://mod.io/u/xant"</span><span class="w">
 </span><span class="p">}</span><span class="w"> 
-</span></code></pre></div><h3 id="properties-62">Properties</h3>
+</span></code></pre></div><h3 id="properties-66">Properties</h3>
 <table>
 <thead>
 <tr>
@@ -23121,30 +23569,15 @@ To perform this request, you must be authenticated via one of the following meth
 </tr>
 </tbody>
 </table>
-<h2 id="user-preview-object">User Preview Object</h2>
-<p><a name="schemauser_preview_object"></a></p>
+<h2 id="web-access-token-object">Web Access Token Object</h2>
+<p><a name="schemaweb_access_token_object"></a></p>
 <div class="highlight"><pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
-  </span><span class="nl">"user"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-    </span><span class="nl">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
-    </span><span class="nl">"name_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"xant"</span><span class="p">,</span><span class="w">
-    </span><span class="nl">"username"</span><span class="p">:</span><span class="w"> </span><span class="s2">"XanT"</span><span class="p">,</span><span class="w">
-    </span><span class="nl">"display_name_portal"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
-    </span><span class="nl">"date_online"</span><span class="p">:</span><span class="w"> </span><span class="mi">1509922961</span><span class="p">,</span><span class="w">
-    </span><span class="nl">"date_joined"</span><span class="p">:</span><span class="w"> </span><span class="mi">1509922961</span><span class="p">,</span><span class="w">
-    </span><span class="nl">"avatar"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-      </span><span class="nl">"filename"</span><span class="p">:</span><span class="w"> </span><span class="s2">"avatar.png"</span><span class="p">,</span><span class="w">
-      </span><span class="nl">"original"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://assets.modcdn.io/images/placeholder/avatar.png"</span><span class="p">,</span><span class="w">
-      </span><span class="nl">"thumb_50x50"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://assets.modcdn.io/images/placeholder/avatar_50x50.png"</span><span class="p">,</span><span class="w">
-      </span><span class="nl">"thumb_100x100"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://assets.modcdn.io/images/placeholder/avatar_100x100.png"</span><span class="w">
-    </span><span class="p">},</span><span class="w">
-    </span><span class="nl">"timezone"</span><span class="p">:</span><span class="w"> </span><span class="s2">""</span><span class="p">,</span><span class="w">
-    </span><span class="nl">"language"</span><span class="p">:</span><span class="w"> </span><span class="s2">""</span><span class="p">,</span><span class="w">
-    </span><span class="nl">"profile_url"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://mod.io/u/xant"</span><span class="w">
-  </span><span class="p">},</span><span class="w">
-  </span><span class="nl">"resource_url"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://mod.io/g/@rogueknight/m/@some-mod"</span><span class="p">,</span><span class="w">
-  </span><span class="nl">"date_added"</span><span class="p">:</span><span class="w"> </span><span class="mi">1499841487</span><span class="w">
+  </span><span class="nl">"token_type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Bearer"</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"expires_in"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2592000"</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"access_token"</span><span class="p">:</span><span class="w"> </span><span class="s2">"eyJlbmMiOiJBMTI4Q0JDLUhTMjU2IiwiYWxnIjoiUlNBLU9BRVAiLCJjdHkiOi...."</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"refresh_token"</span><span class="p">:</span><span class="w"> </span><span class="s2">"eyJlbmMiOiJBMTI4Q0JDLUhTMjU2IiwiYWxnIjoiUlNBLU9BRVAiLCJjdHkiOi...."</span><span class="w">
 </span><span class="p">}</span><span class="w"> 
-</span></code></pre></div><h3 id="properties-63">Properties</h3>
+</span></code></pre></div><h3 id="properties-67">Properties</h3>
 <table>
 <thead>
 <tr>
@@ -23155,19 +23588,52 @@ To perform this request, you must be authenticated via one of the following meth
 </thead>
 <tbody>
 <tr>
-<td>user</td>
-<td><a href="#schemauser_object">User Object</a></td>
-<td>No description</td>
-</tr>
-<tr>
-<td>resource_url</td>
+<td>token_type</td>
 <td>string</td>
-<td>The URL of the resource that the registrant should be redirect to upon success.</td>
+<td>Token type, always <code>Bearer</code>.</td>
 </tr>
 <tr>
-<td>date_added</td>
-<td>integer</td>
-<td>Unix timestamp of the date the user was registered as a previewer.</td>
+<td>expires_in</td>
+<td>int</td>
+<td>Seconds until the supplied <code>access_token</code> expires which is fixed at <code>2592000</code> seconds (approx 1 month).</td>
+</tr>
+<tr>
+<td>access_token</td>
+<td>string</td>
+<td>The access token used to make requests to the mod.io API on behalf of the user.</td>
+</tr>
+<tr>
+<td>refresh_token</td>
+<td>string</td>
+<td>The refresh token that can be exchanged via the <em>Exchange Refresh Token</em> endpoint for a new access token. Fixed at <code>7776000</code> seconds (approx 3 months).</td>
+</tr>
+</tbody>
+</table>
+<h2 id="web-authorize-object">Web Authorize Object</h2>
+<p><a name="schemaweb_authorize_object"></a></p>
+<div class="highlight"><pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
+  </span><span class="nl">"code"</span><span class="p">:</span><span class="w"> </span><span class="s2">"def5020077deb4eafe6fb6743b1fd6857ce22112d3400e6cc684633f8c9904faae1a83c23b"</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"state"</span><span class="p">:</span><span class="w"> </span><span class="s2">"T6KQGIXWrHXxFDfyp5Hh"</span><span class="w">
+</span><span class="p">}</span><span class="w"> 
+</span></code></pre></div><h3 id="properties-68">Properties</h3>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>code</td>
+<td>string</td>
+<td>The authorization code to exchange for an access token.</td>
+</tr>
+<tr>
+<td>state</td>
+<td>string</td>
+<td>Optional state parameter to inspect against to prevent CSFR attacks.</td>
 </tr>
 </tbody>
 </table>
@@ -23178,7 +23644,7 @@ To perform this request, you must be authenticated via one of the following meth
   </span><span class="nl">"success"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
   </span><span class="nl">"message"</span><span class="p">:</span><span class="w"> </span><span class="s2">"You have successfully logged out of mod.io."</span><span class="w">
 </span><span class="p">}</span><span class="w"> 
-</span></code></pre></div><h3 id="properties-64">Properties</h3>
+</span></code></pre></div><h3 id="properties-69">Properties</h3>
 <table>
 <thead>
 <tr>
