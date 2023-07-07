@@ -17,5 +17,5 @@ jobs:
         shell: bash
         run: |
           chmod +x ./deploy_gh.sh
-          gem install bundler
+          sudo gem install bundler
           ./deploy_gh.sh
