@@ -1,7 +1,7 @@
 # API Versions
 
 ## v1 (latest version)
-### Date Live: November 23, 2022, 8:28 am GMT
+### Date Live: February 22, 2023, 12:42 pm GMT
 
 Initial API Release.
 
@@ -39,7 +39,7 @@ For the initial release of the API, __v1__ is a valid format and version. Future
 ```shell
 Example cURL request
 ---------------------
-curl -X GET https://api.mod.io/v1/games?api_key=YourApiKey
+curl -X GET https://example.modapi.io/v1/games?api_key=YourApiKey
 ```
 
 When you make a request, setting the version of mod.io is a requirement as it forms

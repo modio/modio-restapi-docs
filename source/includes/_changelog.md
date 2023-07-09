@@ -32,7 +32,7 @@ For the initial release of the API, __v1__ is a valid format and version. Future
 ```shell
 Example cURL request
 ---------------------
-curl -X GET --parse_apiurl/--parse_version/games?api_key=YourApiKey
+curl -X GET --parse_apiurl/games?api_key=YourApiKey
 ```
 
 When you make a request, setting the version of --parse_sitename is a requirement as it forms
