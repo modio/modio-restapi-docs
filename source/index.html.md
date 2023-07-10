@@ -23,7 +23,7 @@ headingLevel: '2'
 
 Welcome to the official documentation for [mod.io](https://mod.io), an API for developers to add mod support to their games. We recommend you read our _Getting Started_ guide below to accurately and efficiently consume our REST API. 
 
-__API path:__ [https://example.modapi.io/v1](https://example.modapi.io/v1) (see your API access dashboard)
+__API path:__ [https://*.modapi.io/v1](https://*.modapi.io/v1) (see your API access dashboard)
 
 __Current version:__ <select id="version_dropdown" onChange="changeVersion"><option value="" data-latest="true">v1 (latest)</option></select> 
 
@@ -112,7 +112,7 @@ Requests to the mod.io API are to be over HTTPS (Port 443), any requests made ov
 ### Using an API Key
 
 ```
-curl -X get https://example.modapi.io/v1/games?api_key=xxxxxxxxxxxxxxxx
+curl -X get https://*.modapi.io/v1/games?api_key=xxxxxxxxxxxxxxxx
 ``` 
 
 To authenticate using your unique 32-character API key, append the `api_key=xxxxxxxxxxxxxxxx` parameter to the end of your request. Remember that using an API key means requests are read-only, if you want to create, update or delete resources - authentication via OAuth 2 is required which you can [set up with your api key](#authentication).
@@ -122,7 +122,7 @@ To authenticate using your unique 32-character API key, append the `api_key=xxxx
 > Example POST request with no binary files
 
 ```shell
-curl -X POST https://example.modapi.io/v1/games/1/mods/1/tags \
+curl -X POST https://*.modapi.io/v1/games/1/mods/1/tags \
   -H 'Authorization: Bearer your-token-here' \
   -H 'Content-Type: application/x-www-form-urlencoded' \
   -d 'tags[]=Unity' \
@@ -144,7 +144,7 @@ If you are making a request that includes a file, your request `Content-Type` he
 > Example POST request with binary file
 
 ```shell
-curl -X POST https://example.modapi.io/v1/games/1/mods \
+curl -X POST https://*.modapi.io/v1/games/1/mods \
   -H 'Authorization: Bearer your-token-here' \
   -H 'Content-Type: multipart/form-data' \ 
   -F 'logo=@path/to/image.jpg' \
@@ -166,7 +166,7 @@ If the endpoint you are making a request to expects a file it will expect the co
 > Example json-encoded POST request
 
 ```shell
-curl -X POST https://example.modapi.io/v1/games/1/mods/1/team \
+curl -X POST https://*.modapi.io/v1/games/1/mods/1/team \
   -H 'Authorization: Bearer your-token-here' \
   -H 'Content-Type: application/x-www-form-urlencoded' \  
   -d 'input_json={
@@ -244,7 +244,7 @@ Along with generic [HTTP response codes](#response-codes), we also provide mod.i
 > Example request with malformed api_key 
 
 ```shell
-curl -X GET https://example.modapi.io/v1/games?api_key=malformed_key
+curl -X GET https://*.modapi.io/v1/games?api_key=malformed_key
 ```
 
 ```json
@@ -310,7 +310,7 @@ Error Reference Code | Meaning
     "changelog": "VERSION 1.3 -- Changes -- Fixed critical castle floor bug.",
     "metadata_blob": "rogue,hd,high-res,4k,hd-textures",
     "download": {
-      "binary_url": "https://example.modapi.io/v1/games/1/mods/1/files/1/download",
+      "binary_url": "https://*.modapi.io/v1/games/1/mods/1/files/1/download",
       "date_expires": 1579316848
     }
 }
@@ -351,7 +351,7 @@ Endpoints that return more than one result, return a __JSON object__ which conta
     		"changelog": "VERSION 1.3 -- Changes -- Fixed critical castle floor bug.",
     		"metadata_blob": "rogue,hd,high-res,4k,hd-textures",
     		"download": {
-    		  "binary_url": "https://example.modapi.io/v1/games/1/mods/1/files/1/download/c489a0354111a4d76640d47f0cdcb294",
+    		  "binary_url": "https://*.modapi.io/v1/games/1/mods/1/files/1/download/c489a0354111a4d76640d47f0cdcb294",
     		  "date_expires": 1579316848
     		}
 		},
@@ -662,7 +662,7 @@ Language Code | Language
 > Example request updating specified fields with Polish translations.
 
 ```shell
-curl -X POST https://example.modapi.io/v1/games/1/mods/1 \
+curl -X POST https://*.modapi.io/v1/games/1/mods/1 \
 	-H 'Authorization: Bearer your-token-here' \
 	-H 'Content-Type: application/x-www-form-urlencoded' \
 	-H 'Content-Language: pl' \
@@ -673,7 +673,7 @@ curl -X POST https://example.modapi.io/v1/games/1/mods/1 \
 > Attempt to retrieve Polish translations within supported fields.
 
 ```shall
-curl -X GET https://example.modapi.io/v1/games/1/mods/1 \
+curl -X GET https://*.modapi.io/v1/games/1/mods/1 \
 	-H 'Authorization: Bearer your-token-here' \
 	-H 'Accept-Language: pl'
 ```
@@ -853,14 +853,14 @@ These are the only supported values and are case-insensitive, anything else will
 
 ```shell
 # You can also use wget
-curl -X GET https://example.modapi.io/v1/authenticate/terms?api_key=YourApiKey \
+curl -X GET https://*.modapi.io/v1/authenticate/terms?api_key=YourApiKey \
   -H 'Accept: application/json'
 
 ```
 
 ```http
-GET https://example.modapi.io/v1/authenticate/terms?api_key=YourApiKey HTTP/1.1
-Host: example.modapi.io
+GET https://*.modapi.io/v1/authenticate/terms?api_key=YourApiKey HTTP/1.1
+Host: *.modapi.io
 
 Accept: application/json
 
@@ -873,7 +873,7 @@ var headers = {
 };
 
 $.ajax({
-  url: 'https://example.modapi.io/v1/authenticate/terms',
+  url: 'https://*.modapi.io/v1/authenticate/terms',
   method: 'get',
   data: '?api_key=YourApiKey',
   headers: headers,
@@ -891,7 +891,7 @@ const headers = {
 
 };
 
-fetch('https://example.modapi.io/v1/authenticate/terms?api_key=YourApiKey',
+fetch('https://*.modapi.io/v1/authenticate/terms?api_key=YourApiKey',
 {
   method: 'GET',
 
@@ -910,7 +910,7 @@ headers = {
   'Accept': 'application/json'
 }
 
-r = requests.get('https://example.modapi.io/v1/authenticate/terms', params={
+r = requests.get('https://*.modapi.io/v1/authenticate/terms', params={
   'api_key': 'YourApiKey'
 }, headers = headers)
 
@@ -918,7 +918,7 @@ print r.json()
 ```
 
 ```java
-URL obj = new URL("https://example.modapi.io/v1/authenticate/terms?api_key=YourApiKey");
+URL obj = new URL("https://*.modapi.io/v1/authenticate/terms?api_key=YourApiKey");
 HttpURLConnection con = (HttpURLConnection) obj.openConnection();
 con.setRequestMethod("GET");
 int responseCode = con.getResponseCode();
@@ -1010,7 +1010,7 @@ To perform this request, you must be authenticated via one of the following meth
 
 ```shell
 # You can also use wget
-curl -X POST https://example.modapi.io/v1/external/steamauth?api_key=YourApiKey \
+curl -X POST https://*.modapi.io/v1/external/steamauth?api_key=YourApiKey \
   -H 'Content-Type: application/x-www-form-urlencoded' \ 
   -H 'Accept: application/json' \
   --data-urlencode 'appdata=NDNuZmhnaWdyaGdqOWc0M2o5eTM0aGc='
@@ -1018,8 +1018,8 @@ curl -X POST https://example.modapi.io/v1/external/steamauth?api_key=YourApiKey 
 ```
 
 ```http
-POST https://example.modapi.io/v1/external/steamauth?api_key=YourApiKey HTTP/1.1
-Host: example.modapi.io
+POST https://*.modapi.io/v1/external/steamauth?api_key=YourApiKey HTTP/1.1
+Host: *.modapi.io
 Content-Type: application/x-www-form-urlencoded
 Accept: application/json
 
@@ -1033,7 +1033,7 @@ var headers = {
 };
 
 $.ajax({
-  url: 'https://example.modapi.io/v1/external/steamauth',
+  url: 'https://*.modapi.io/v1/external/steamauth',
   method: 'post',
   data: '?api_key=YourApiKey',
   headers: headers,
@@ -1054,7 +1054,7 @@ const headers = {
 
 };
 
-fetch('https://example.modapi.io/v1/external/steamauth?api_key=YourApiKey',
+fetch('https://*.modapi.io/v1/external/steamauth?api_key=YourApiKey',
 {
   method: 'POST',
   body: inputBody,
@@ -1074,7 +1074,7 @@ headers = {
   'Accept': 'application/json'
 }
 
-r = requests.post('https://example.modapi.io/v1/external/steamauth', params={
+r = requests.post('https://*.modapi.io/v1/external/steamauth', params={
   'api_key': 'YourApiKey'
 }, headers = headers)
 
@@ -1082,7 +1082,7 @@ print r.json()
 ```
 
 ```java
-URL obj = new URL("https://example.modapi.io/v1/external/steamauth?api_key=YourApiKey");
+URL obj = new URL("https://*.modapi.io/v1/external/steamauth?api_key=YourApiKey");
 HttpURLConnection con = (HttpURLConnection) obj.openConnection();
 con.setRequestMethod("POST");
 int responseCode = con.getResponseCode();
@@ -1144,7 +1144,7 @@ To perform this request, you must be authenticated via one of the following meth
 
 ```shell
 # You can also use wget
-curl -X POST https://example.modapi.io/v1/external/xboxauth?api_key=YourApiKey \
+curl -X POST https://*.modapi.io/v1/external/xboxauth?api_key=YourApiKey \
   -H 'Content-Type: application/x-www-form-urlencoded' \ 
   -H 'Accept: application/json' \
   -d 'xbox_token=XBL3.0 x=9264027439329321064;eym72VygeZzTSUVRmNvw8v...'
@@ -1152,8 +1152,8 @@ curl -X POST https://example.modapi.io/v1/external/xboxauth?api_key=YourApiKey \
 ```
 
 ```http
-POST https://example.modapi.io/v1/external/xboxauth?api_key=YourApiKey HTTP/1.1
-Host: example.modapi.io
+POST https://*.modapi.io/v1/external/xboxauth?api_key=YourApiKey HTTP/1.1
+Host: *.modapi.io
 Content-Type: application/x-www-form-urlencoded
 Accept: application/json
 
@@ -1167,7 +1167,7 @@ var headers = {
 };
 
 $.ajax({
-  url: 'https://example.modapi.io/v1/external/xboxauth',
+  url: 'https://*.modapi.io/v1/external/xboxauth',
   method: 'post',
   data: '?api_key=YourApiKey',
   headers: headers,
@@ -1188,7 +1188,7 @@ const headers = {
 
 };
 
-fetch('https://example.modapi.io/v1/external/xboxauth?api_key=YourApiKey',
+fetch('https://*.modapi.io/v1/external/xboxauth?api_key=YourApiKey',
 {
   method: 'POST',
   body: inputBody,
@@ -1208,7 +1208,7 @@ headers = {
   'Accept': 'application/json'
 }
 
-r = requests.post('https://example.modapi.io/v1/external/xboxauth', params={
+r = requests.post('https://*.modapi.io/v1/external/xboxauth', params={
   'api_key': 'YourApiKey'
 }, headers = headers)
 
@@ -1216,7 +1216,7 @@ print r.json()
 ```
 
 ```java
-URL obj = new URL("https://example.modapi.io/v1/external/xboxauth?api_key=YourApiKey");
+URL obj = new URL("https://*.modapi.io/v1/external/xboxauth?api_key=YourApiKey");
 HttpURLConnection con = (HttpURLConnection) obj.openConnection();
 con.setRequestMethod("POST");
 int responseCode = con.getResponseCode();
@@ -1241,7 +1241,7 @@ Request an access token on behalf of an Xbox Live user. A Successful request wil
 
      Parameter|Type|Required|Description
      ---|---|---|---|
-     xbox_token|string|true|The Xbox Live token returned from calling [GetTokenAndSignatureAsync("POST", "https://example.modapi.io")](https://docs.microsoft.com/en-us/dotnet/api/microsoft.xbox.services.system.xboxliveuser.gettokenandsignatureasync?view=xboxlive-dotnet-2017.11.20171204.01). <br><br>__NOTE:__ Due to the encrypted app ticket containing special characters, you must URL encode the string before sending the request to ensure it is successfully sent to our servers otherwise you may encounter an `422 Unprocessable Entity` response. For example, [cURL](https://ec.haxx.se/http-post.html) will do this for you by using the `--data-urlencode` option.
+     xbox_token|string|true|The Xbox Live token returned from calling [GetTokenAndSignatureAsync("POST", "https://*.modapi.io")](https://docs.microsoft.com/en-us/dotnet/api/microsoft.xbox.services.system.xboxliveuser.gettokenandsignatureasync?view=xboxlive-dotnet-2017.11.20171204.01). <br><br>__NOTE:__ Due to the encrypted app ticket containing special characters, you must URL encode the string before sending the request to ensure it is successfully sent to our servers otherwise you may encounter an `422 Unprocessable Entity` response. For example, [cURL](https://ec.haxx.se/http-post.html) will do this for you by using the `--data-urlencode` option.
      email|string||The users email address (optional but recommended to help users recover lost accounts). If supplied, and the respective user does not have an email registered for their account we will send a confirmation email to confirm they have ownership of the specified email. This functionality is also available at a later time via the [Link an Email](#link-an-email) endpoint.<br><br>__NOTE__: If the user already has an email on record with us, this parameter will be ignored. This parameter should also be urlencoded before the request is sent.
      date_expires|integer||Unix timestamp of date in which the returned token will expire. Value cannot be higher than the default value which is a common year (unix timestamp + 31536000 seconds). Using a token after it's expiry time has elapsed will result in a `401 Unauthorized` response.
      terms_agreed|boolean||This MUST be set to `false` unless you have collected the [users agreement](#terms) prior to calling this endpoint in which case it can be set to `true` and will be recorded.<br><br>__NOTE:__ If this is set to `false` and the user has not agreed to the latest mod.io Terms of Use and Privacy Policy, an error `403 Forbidden (error_ref 11074)` will be returned and you will need to collect the [users agreement](#terms) and retry with this value set to `true` to authenticate the user.
@@ -1280,7 +1280,7 @@ To perform this request, you must be authenticated via one of the following meth
 
 ```shell
 # You can also use wget
-curl -X POST https://example.modapi.io/v1/external/psnauth?api_key=YourApiKey \
+curl -X POST https://*.modapi.io/v1/external/psnauth?api_key=YourApiKey \
   -H 'Content-Type: application/x-www-form-urlencoded' \ 
   -H 'Accept: application/json' \
   -d 'auth_code=MAXfj2TMqpHnaUMJdwCDbZUi2L3usnV7aw7xwHX2PEqT5hLkFF2VUyhlnCAMC0tQR3trpFQot0zvMMEtBzekilqeVD1Qm9nEcs9FljneaL3hCWPFSf6jjDSxOxOSytGD'
@@ -1288,8 +1288,8 @@ curl -X POST https://example.modapi.io/v1/external/psnauth?api_key=YourApiKey \
 ```
 
 ```http
-POST https://example.modapi.io/v1/external/psnauth?api_key=YourApiKey HTTP/1.1
-Host: example.modapi.io
+POST https://*.modapi.io/v1/external/psnauth?api_key=YourApiKey HTTP/1.1
+Host: *.modapi.io
 Content-Type: application/x-www-form-urlencoded
 Accept: application/json
 
@@ -1303,7 +1303,7 @@ var headers = {
 };
 
 $.ajax({
-  url: 'https://example.modapi.io/v1/external/psnauth',
+  url: 'https://*.modapi.io/v1/external/psnauth',
   method: 'post',
   data: '?api_key=YourApiKey',
   headers: headers,
@@ -1324,7 +1324,7 @@ const headers = {
 
 };
 
-fetch('https://example.modapi.io/v1/external/psnauth?api_key=YourApiKey',
+fetch('https://*.modapi.io/v1/external/psnauth?api_key=YourApiKey',
 {
   method: 'POST',
   body: inputBody,
@@ -1344,7 +1344,7 @@ headers = {
   'Accept': 'application/json'
 }
 
-r = requests.post('https://example.modapi.io/v1/external/psnauth', params={
+r = requests.post('https://*.modapi.io/v1/external/psnauth', params={
   'api_key': 'YourApiKey'
 }, headers = headers)
 
@@ -1352,7 +1352,7 @@ print r.json()
 ```
 
 ```java
-URL obj = new URL("https://example.modapi.io/v1/external/psnauth?api_key=YourApiKey");
+URL obj = new URL("https://*.modapi.io/v1/external/psnauth?api_key=YourApiKey");
 HttpURLConnection con = (HttpURLConnection) obj.openConnection();
 con.setRequestMethod("POST");
 int responseCode = con.getResponseCode();
@@ -1411,7 +1411,7 @@ To perform this request, you must be authenticated via one of the following meth
 
 ```shell
 # You can also use wget
-curl -X POST https://example.modapi.io/v1/external/switchauth?api_key=YourApiKey \
+curl -X POST https://*.modapi.io/v1/external/switchauth?api_key=YourApiKey \
   -H 'Content-Type: application/x-www-form-urlencoded' \ 
   -H 'Accept: application/json' \
   -d 'id_token=m72VygeZzTSUVRmNvw8v...'
@@ -1419,8 +1419,8 @@ curl -X POST https://example.modapi.io/v1/external/switchauth?api_key=YourApiKey
 ```
 
 ```http
-POST https://example.modapi.io/v1/external/switchauth?api_key=YourApiKey HTTP/1.1
-Host: example.modapi.io
+POST https://*.modapi.io/v1/external/switchauth?api_key=YourApiKey HTTP/1.1
+Host: *.modapi.io
 Content-Type: application/x-www-form-urlencoded
 Accept: application/json
 
@@ -1434,7 +1434,7 @@ var headers = {
 };
 
 $.ajax({
-  url: 'https://example.modapi.io/v1/external/switchauth',
+  url: 'https://*.modapi.io/v1/external/switchauth',
   method: 'post',
   data: '?api_key=YourApiKey',
   headers: headers,
@@ -1455,7 +1455,7 @@ const headers = {
 
 };
 
-fetch('https://example.modapi.io/v1/external/switchauth?api_key=YourApiKey',
+fetch('https://*.modapi.io/v1/external/switchauth?api_key=YourApiKey',
 {
   method: 'POST',
   body: inputBody,
@@ -1475,7 +1475,7 @@ headers = {
   'Accept': 'application/json'
 }
 
-r = requests.post('https://example.modapi.io/v1/external/switchauth', params={
+r = requests.post('https://*.modapi.io/v1/external/switchauth', params={
   'api_key': 'YourApiKey'
 }, headers = headers)
 
@@ -1483,7 +1483,7 @@ print r.json()
 ```
 
 ```java
-URL obj = new URL("https://example.modapi.io/v1/external/switchauth?api_key=YourApiKey");
+URL obj = new URL("https://*.modapi.io/v1/external/switchauth?api_key=YourApiKey");
 HttpURLConnection con = (HttpURLConnection) obj.openConnection();
 con.setRequestMethod("POST");
 int responseCode = con.getResponseCode();
@@ -1543,7 +1543,7 @@ To perform this request, you must be authenticated via one of the following meth
 
 ```shell
 # You can also use wget
-curl -X POST https://example.modapi.io/v1/external/oculusauth?api_key=YourApiKey \
+curl -X POST https://*.modapi.io/v1/external/oculusauth?api_key=YourApiKey \
   -H 'Content-Type: application/x-www-form-urlencoded' \ 
   -H 'Accept: application/json' \
   -d 'device=rift' \
@@ -1554,8 +1554,8 @@ curl -X POST https://example.modapi.io/v1/external/oculusauth?api_key=YourApiKey
 ```
 
 ```http
-POST https://example.modapi.io/v1/external/oculusauth?api_key=YourApiKey HTTP/1.1
-Host: example.modapi.io
+POST https://*.modapi.io/v1/external/oculusauth?api_key=YourApiKey HTTP/1.1
+Host: *.modapi.io
 Content-Type: application/x-www-form-urlencoded
 Accept: application/json
 
@@ -1569,7 +1569,7 @@ var headers = {
 };
 
 $.ajax({
-  url: 'https://example.modapi.io/v1/external/oculusauth',
+  url: 'https://*.modapi.io/v1/external/oculusauth',
   method: 'post',
   data: '?api_key=YourApiKey',
   headers: headers,
@@ -1593,7 +1593,7 @@ const headers = {
 
 };
 
-fetch('https://example.modapi.io/v1/external/oculusauth?api_key=YourApiKey',
+fetch('https://*.modapi.io/v1/external/oculusauth?api_key=YourApiKey',
 {
   method: 'POST',
   body: inputBody,
@@ -1613,7 +1613,7 @@ headers = {
   'Accept': 'application/json'
 }
 
-r = requests.post('https://example.modapi.io/v1/external/oculusauth', params={
+r = requests.post('https://*.modapi.io/v1/external/oculusauth', params={
   'api_key': 'YourApiKey'
 }, headers = headers)
 
@@ -1621,7 +1621,7 @@ print r.json()
 ```
 
 ```java
-URL obj = new URL("https://example.modapi.io/v1/external/oculusauth?api_key=YourApiKey");
+URL obj = new URL("https://*.modapi.io/v1/external/oculusauth?api_key=YourApiKey");
 HttpURLConnection con = (HttpURLConnection) obj.openConnection();
 con.setRequestMethod("POST");
 int responseCode = con.getResponseCode();
@@ -1682,7 +1682,7 @@ To perform this request, you must be authenticated via one of the following meth
 
 ```shell
 # You can also use wget
-curl -X POST https://example.modapi.io/v1/external/epicgamesauth?api_key=YourApiKey \
+curl -X POST https://*.modapi.io/v1/external/epicgamesauth?api_key=YourApiKey \
   -H 'Content-Type: application/x-www-form-urlencoded' \ 
   -H 'Accept: application/json' \
   -d 'access_token=eym72VygeZzTSUVRmNvw8v...'
@@ -1690,8 +1690,8 @@ curl -X POST https://example.modapi.io/v1/external/epicgamesauth?api_key=YourApi
 ```
 
 ```http
-POST https://example.modapi.io/v1/external/epicgamesauth?api_key=YourApiKey HTTP/1.1
-Host: example.modapi.io
+POST https://*.modapi.io/v1/external/epicgamesauth?api_key=YourApiKey HTTP/1.1
+Host: *.modapi.io
 Content-Type: application/x-www-form-urlencoded
 Accept: application/json
 
@@ -1705,7 +1705,7 @@ var headers = {
 };
 
 $.ajax({
-  url: 'https://example.modapi.io/v1/external/epicgamesauth',
+  url: 'https://*.modapi.io/v1/external/epicgamesauth',
   method: 'post',
   data: '?api_key=YourApiKey',
   headers: headers,
@@ -1726,7 +1726,7 @@ const headers = {
 
 };
 
-fetch('https://example.modapi.io/v1/external/epicgamesauth?api_key=YourApiKey',
+fetch('https://*.modapi.io/v1/external/epicgamesauth?api_key=YourApiKey',
 {
   method: 'POST',
   body: inputBody,
@@ -1746,7 +1746,7 @@ headers = {
   'Accept': 'application/json'
 }
 
-r = requests.post('https://example.modapi.io/v1/external/epicgamesauth', params={
+r = requests.post('https://*.modapi.io/v1/external/epicgamesauth', params={
   'api_key': 'YourApiKey'
 }, headers = headers)
 
@@ -1754,7 +1754,7 @@ print r.json()
 ```
 
 ```java
-URL obj = new URL("https://example.modapi.io/v1/external/epicgamesauth?api_key=YourApiKey");
+URL obj = new URL("https://*.modapi.io/v1/external/epicgamesauth?api_key=YourApiKey");
 HttpURLConnection con = (HttpURLConnection) obj.openConnection();
 con.setRequestMethod("POST");
 int responseCode = con.getResponseCode();
@@ -1775,7 +1775,7 @@ Request an access token on behalf of an Epic Games user. A Successful request wi
 
      Parameter|Type|Required|Description
      ---|---|---|---|
-     access_token|string|true|The Access Token [returned from the EOS SDK](https://dev.epicgames.com/docs/en-US/api-ref/structs/eos-auth-token) when you authenticate a user to use mod.io.
+     id_token|string|true|The ID Token [returned from the EOS SDK](https://dev.epicgames.com/docs/api-ref/functions/eos-auth-copy-id-token) when you authenticate a user to use mod.io.
      email|string||The users email address (optional but recommended to help users recover lost accounts). If supplied, and the respective user does not have an email registered for their account we will send a confirmation email to confirm they have ownership of the specified email.<br><br>__NOTE__: If the user already has an email on record with us, this parameter will be ignored. This parameter should also be urlencoded before the request is sent.
      date_expires|integer||Unix timestamp of date in which the returned token will expire. Value cannot be higher than the default value which is a week (unix timestamp + 604800 seconds). Using a token after it's expiry time has elapsed will result in a `401 Unauthorized` response.
      terms_agreed|boolean||This MUST be set to `false` unless you have collected the [users agreement](#terms) prior to calling this endpoint in which case it can be set to `true` and will be recorded.<br><br>__NOTE:__ If this is set to `false` and the user has not agreed to the latest mod.io Terms of Use and Privacy Policy, an error `403 Forbidden (error_ref 11074)` will be returned and you will need to collect the [users agreement](#terms) and retry with this value set to `true` to authenticate the user.
@@ -1810,7 +1810,7 @@ To perform this request, you must be authenticated via one of the following meth
 
 ```shell
 # You can also use wget
-curl -X POST https://example.modapi.io/v1/external/googleauth?api_key=YourApiKey \
+curl -X POST https://*.modapi.io/v1/external/googleauth?api_key=YourApiKey \
   -H 'Content-Type: application/x-www-form-urlencoded' \ 
   -H 'Accept: application/json' \
   -d 'id_token=eyJhbXciOiJIUzI1Lizs....'
@@ -1818,8 +1818,8 @@ curl -X POST https://example.modapi.io/v1/external/googleauth?api_key=YourApiKey
 ```
 
 ```http
-POST https://example.modapi.io/v1/external/googleauth?api_key=YourApiKey HTTP/1.1
-Host: example.modapi.io
+POST https://*.modapi.io/v1/external/googleauth?api_key=YourApiKey HTTP/1.1
+Host: *.modapi.io
 Content-Type: application/x-www-form-urlencoded
 Accept: application/json
 
@@ -1833,7 +1833,7 @@ var headers = {
 };
 
 $.ajax({
-  url: 'https://example.modapi.io/v1/external/googleauth',
+  url: 'https://*.modapi.io/v1/external/googleauth',
   method: 'post',
   data: '?api_key=YourApiKey',
   headers: headers,
@@ -1854,7 +1854,7 @@ const headers = {
 
 };
 
-fetch('https://example.modapi.io/v1/external/googleauth?api_key=YourApiKey',
+fetch('https://*.modapi.io/v1/external/googleauth?api_key=YourApiKey',
 {
   method: 'POST',
   body: inputBody,
@@ -1874,7 +1874,7 @@ headers = {
   'Accept': 'application/json'
 }
 
-r = requests.post('https://example.modapi.io/v1/external/googleauth', params={
+r = requests.post('https://*.modapi.io/v1/external/googleauth', params={
   'api_key': 'YourApiKey'
 }, headers = headers)
 
@@ -1882,7 +1882,7 @@ print r.json()
 ```
 
 ```java
-URL obj = new URL("https://example.modapi.io/v1/external/googleauth?api_key=YourApiKey");
+URL obj = new URL("https://*.modapi.io/v1/external/googleauth?api_key=YourApiKey");
 HttpURLConnection con = (HttpURLConnection) obj.openConnection();
 con.setRequestMethod("POST");
 int responseCode = con.getResponseCode();
@@ -1941,7 +1941,7 @@ To perform this request, you must be authenticated via one of the following meth
 
 ```shell
 # You can also use wget
-curl -X POST https://example.modapi.io/v1/external/discordauth?api_key=YourApiKey \
+curl -X POST https://*.modapi.io/v1/external/discordauth?api_key=YourApiKey \
   -H 'Content-Type: application/x-www-form-urlencoded' \ 
   -H 'Accept: application/json' \
   -d 'discord_token=eyJhbXciOiJIUzI1Lizs....'
@@ -1949,8 +1949,8 @@ curl -X POST https://example.modapi.io/v1/external/discordauth?api_key=YourApiKe
 ```
 
 ```http
-POST https://example.modapi.io/v1/external/discordauth?api_key=YourApiKey HTTP/1.1
-Host: example.modapi.io
+POST https://*.modapi.io/v1/external/discordauth?api_key=YourApiKey HTTP/1.1
+Host: *.modapi.io
 Content-Type: application/x-www-form-urlencoded
 Accept: application/json
 
@@ -1964,7 +1964,7 @@ var headers = {
 };
 
 $.ajax({
-  url: 'https://example.modapi.io/v1/external/discordauth',
+  url: 'https://*.modapi.io/v1/external/discordauth',
   method: 'post',
   data: '?api_key=YourApiKey',
   headers: headers,
@@ -1985,7 +1985,7 @@ const headers = {
 
 };
 
-fetch('https://example.modapi.io/v1/external/discordauth?api_key=YourApiKey',
+fetch('https://*.modapi.io/v1/external/discordauth?api_key=YourApiKey',
 {
   method: 'POST',
   body: inputBody,
@@ -2005,7 +2005,7 @@ headers = {
   'Accept': 'application/json'
 }
 
-r = requests.post('https://example.modapi.io/v1/external/discordauth', params={
+r = requests.post('https://*.modapi.io/v1/external/discordauth', params={
   'api_key': 'YourApiKey'
 }, headers = headers)
 
@@ -2013,7 +2013,7 @@ print r.json()
 ```
 
 ```java
-URL obj = new URL("https://example.modapi.io/v1/external/discordauth?api_key=YourApiKey");
+URL obj = new URL("https://*.modapi.io/v1/external/discordauth?api_key=YourApiKey");
 HttpURLConnection con = (HttpURLConnection) obj.openConnection();
 con.setRequestMethod("POST");
 int responseCode = con.getResponseCode();
@@ -2072,7 +2072,7 @@ To perform this request, you must be authenticated via one of the following meth
 
 ```shell
 # You can also use wget
-curl -X POST https://example.modapi.io/v1/external/openidauth?api_key=YourApiKey \
+curl -X POST https://*.modapi.io/v1/external/openidauth?api_key=YourApiKey \
   -H 'Content-Type: application/x-www-form-urlencoded' \ 
   -H 'Accept: application/json' \
   -d 'id_token=eyJhbXciOiJIUzI1Lizs....'
@@ -2080,8 +2080,8 @@ curl -X POST https://example.modapi.io/v1/external/openidauth?api_key=YourApiKey
 ```
 
 ```http
-POST https://example.modapi.io/v1/external/openidauth?api_key=YourApiKey HTTP/1.1
-Host: example.modapi.io
+POST https://*.modapi.io/v1/external/openidauth?api_key=YourApiKey HTTP/1.1
+Host: *.modapi.io
 Content-Type: application/x-www-form-urlencoded
 Accept: application/json
 
@@ -2095,7 +2095,7 @@ var headers = {
 };
 
 $.ajax({
-  url: 'https://example.modapi.io/v1/external/openidauth',
+  url: 'https://*.modapi.io/v1/external/openidauth',
   method: 'post',
   data: '?api_key=YourApiKey',
   headers: headers,
@@ -2116,7 +2116,7 @@ const headers = {
 
 };
 
-fetch('https://example.modapi.io/v1/external/openidauth?api_key=YourApiKey',
+fetch('https://*.modapi.io/v1/external/openidauth?api_key=YourApiKey',
 {
   method: 'POST',
   body: inputBody,
@@ -2136,7 +2136,7 @@ headers = {
   'Accept': 'application/json'
 }
 
-r = requests.post('https://example.modapi.io/v1/external/openidauth', params={
+r = requests.post('https://*.modapi.io/v1/external/openidauth', params={
   'api_key': 'YourApiKey'
 }, headers = headers)
 
@@ -2144,7 +2144,7 @@ print r.json()
 ```
 
 ```java
-URL obj = new URL("https://example.modapi.io/v1/external/openidauth?api_key=YourApiKey");
+URL obj = new URL("https://*.modapi.io/v1/external/openidauth?api_key=YourApiKey");
 HttpURLConnection con = (HttpURLConnection) obj.openConnection();
 con.setRequestMethod("POST");
 int responseCode = con.getResponseCode();
@@ -2204,7 +2204,7 @@ To perform this request, you must be authenticated via one of the following meth
 
 ```shell
 # You can also use wget
-curl -X POST https://example.modapi.io/v1/oauth/emailrequest?api_key=YourApiKey \
+curl -X POST https://*.modapi.io/v1/oauth/emailrequest?api_key=YourApiKey \
   -H 'Content-Type: application/x-www-form-urlencoded' \ 
   -H 'Accept: application/json' \
   -d 'email=someperson@someservice.com'
@@ -2212,8 +2212,8 @@ curl -X POST https://example.modapi.io/v1/oauth/emailrequest?api_key=YourApiKey 
 ```
 
 ```http
-POST https://example.modapi.io/v1/oauth/emailrequest?api_key=YourApiKey HTTP/1.1
-Host: example.modapi.io
+POST https://*.modapi.io/v1/oauth/emailrequest?api_key=YourApiKey HTTP/1.1
+Host: *.modapi.io
 Content-Type: application/x-www-form-urlencoded
 Accept: application/json
 
@@ -2227,7 +2227,7 @@ var headers = {
 };
 
 $.ajax({
-  url: 'https://example.modapi.io/v1/oauth/emailrequest',
+  url: 'https://*.modapi.io/v1/oauth/emailrequest',
   method: 'post',
   data: '?api_key=YourApiKey',
   headers: headers,
@@ -2248,7 +2248,7 @@ const headers = {
 
 };
 
-fetch('https://example.modapi.io/v1/oauth/emailrequest?api_key=YourApiKey',
+fetch('https://*.modapi.io/v1/oauth/emailrequest?api_key=YourApiKey',
 {
   method: 'POST',
   body: inputBody,
@@ -2268,7 +2268,7 @@ headers = {
   'Accept': 'application/json'
 }
 
-r = requests.post('https://example.modapi.io/v1/oauth/emailrequest', params={
+r = requests.post('https://*.modapi.io/v1/oauth/emailrequest', params={
   'api_key': 'YourApiKey'
 }, headers = headers)
 
@@ -2276,7 +2276,7 @@ print r.json()
 ```
 
 ```java
-URL obj = new URL("https://example.modapi.io/v1/oauth/emailrequest?api_key=YourApiKey");
+URL obj = new URL("https://*.modapi.io/v1/oauth/emailrequest?api_key=YourApiKey");
 HttpURLConnection con = (HttpURLConnection) obj.openConnection();
 con.setRequestMethod("POST");
 int responseCode = con.getResponseCode();
@@ -2327,7 +2327,7 @@ To perform this request, you must be authenticated via one of the following meth
 
 ```shell
 # You can also use wget
-curl -X POST https://example.modapi.io/v1/oauth/emailexchange?api_key=YourApiKey \
+curl -X POST https://*.modapi.io/v1/oauth/emailexchange?api_key=YourApiKey \
   -H 'Content-Type: application/x-www-form-urlencoded' \ 
   -H 'Accept: application/json' \
   -d 'security_code=P39TM'
@@ -2335,8 +2335,8 @@ curl -X POST https://example.modapi.io/v1/oauth/emailexchange?api_key=YourApiKey
 ```
 
 ```http
-POST https://example.modapi.io/v1/oauth/emailexchange?api_key=YourApiKey HTTP/1.1
-Host: example.modapi.io
+POST https://*.modapi.io/v1/oauth/emailexchange?api_key=YourApiKey HTTP/1.1
+Host: *.modapi.io
 Content-Type: application/x-www-form-urlencoded
 Accept: application/json
 
@@ -2350,7 +2350,7 @@ var headers = {
 };
 
 $.ajax({
-  url: 'https://example.modapi.io/v1/oauth/emailexchange',
+  url: 'https://*.modapi.io/v1/oauth/emailexchange',
   method: 'post',
   data: '?api_key=YourApiKey',
   headers: headers,
@@ -2371,7 +2371,7 @@ const headers = {
 
 };
 
-fetch('https://example.modapi.io/v1/oauth/emailexchange?api_key=YourApiKey',
+fetch('https://*.modapi.io/v1/oauth/emailexchange?api_key=YourApiKey',
 {
   method: 'POST',
   body: inputBody,
@@ -2391,7 +2391,7 @@ headers = {
   'Accept': 'application/json'
 }
 
-r = requests.post('https://example.modapi.io/v1/oauth/emailexchange', params={
+r = requests.post('https://*.modapi.io/v1/oauth/emailexchange', params={
   'api_key': 'YourApiKey'
 }, headers = headers)
 
@@ -2399,7 +2399,7 @@ print r.json()
 ```
 
 ```java
-URL obj = new URL("https://example.modapi.io/v1/oauth/emailexchange?api_key=YourApiKey");
+URL obj = new URL("https://*.modapi.io/v1/oauth/emailexchange?api_key=YourApiKey");
 HttpURLConnection con = (HttpURLConnection) obj.openConnection();
 con.setRequestMethod("POST");
 int responseCode = con.getResponseCode();
@@ -2452,7 +2452,7 @@ To perform this request, you must be authenticated via one of the following meth
 
 ```shell
 # You can also use wget
-curl -X POST https://example.modapi.io/v1/oauth/logout \
+curl -X POST https://*.modapi.io/v1/oauth/logout \
   -H 'Authorization: Bearer {access-token}' \ 
   -H 'Content-Type: application/json' \ 
   -H 'Accept: application/json'
@@ -2460,8 +2460,8 @@ curl -X POST https://example.modapi.io/v1/oauth/logout \
 ```
 
 ```http
-POST https://example.modapi.io/v1/oauth/logout HTTP/1.1
-Host: example.modapi.io
+POST https://*.modapi.io/v1/oauth/logout HTTP/1.1
+Host: *.modapi.io
 
 Accept: application/json
 Authorization: Bearer {access-token}
@@ -2478,7 +2478,7 @@ var headers = {
 };
 
 $.ajax({
-  url: 'https://example.modapi.io/v1/oauth/logout',
+  url: 'https://*.modapi.io/v1/oauth/logout',
   method: 'post',
 
   headers: headers,
@@ -2498,7 +2498,7 @@ const headers = {
 
 };
 
-fetch('https://example.modapi.io/v1/oauth/logout',
+fetch('https://*.modapi.io/v1/oauth/logout',
 {
   method: 'POST',
 
@@ -2519,7 +2519,7 @@ headers = {
   'Accept': 'application/json'
 }
 
-r = requests.post('https://example.modapi.io/v1/oauth/logout', params={
+r = requests.post('https://*.modapi.io/v1/oauth/logout', params={
 
 }, headers = headers)
 
@@ -2527,7 +2527,7 @@ print r.json()
 ```
 
 ```java
-URL obj = new URL("https://example.modapi.io/v1/oauth/logout");
+URL obj = new URL("https://*.modapi.io/v1/oauth/logout");
 HttpURLConnection con = (HttpURLConnection) obj.openConnection();
 con.setRequestMethod("POST");
 int responseCode = con.getResponseCode();
@@ -2573,14 +2573,14 @@ To perform this request, you must be authenticated via one of the following meth
 
 ```shell
 # You can also use wget
-curl -X GET https://example.modapi.io/v1/authorize?client_id=your-client-id&grant_type=authorization_code&response_type=code&scope=read%2520write&state=T6KQGIXWrHXxFDfyp5Hh&redirect_uri=https%3A%2F%2Fyour-callback-server.com%2Foauth%2Flogin%2Fcallback \
+curl -X GET https://*.modapi.io/v1/authorize?client_id=your-client-id&grant_type=authorization_code&response_type=code&scope=read%2520write&state=T6KQGIXWrHXxFDfyp5Hh&redirect_uri=https%3A%2F%2Fyour-callback-server.com%2Foauth%2Flogin%2Fcallback \
   -H 'Accept: application/json'
 
 ```
 
 ```http
-GET https://example.modapi.io/v1/authorize?client_id=your-client-id&grant_type=authorization_code&response_type=code&scope=read%2520write&state=T6KQGIXWrHXxFDfyp5Hh&redirect_uri=https%3A%2F%2Fyour-callback-server.com%2Foauth%2Flogin%2Fcallback HTTP/1.1
-Host: example.modapi.io
+GET https://*.modapi.io/v1/authorize?client_id=your-client-id&grant_type=authorization_code&response_type=code&scope=read%2520write&state=T6KQGIXWrHXxFDfyp5Hh&redirect_uri=https%3A%2F%2Fyour-callback-server.com%2Foauth%2Flogin%2Fcallback HTTP/1.1
+Host: *.modapi.io
 
 Accept: application/json
 
@@ -2593,7 +2593,7 @@ var headers = {
 };
 
 $.ajax({
-  url: 'https://example.modapi.io/v1/authorize',
+  url: 'https://*.modapi.io/v1/authorize',
   method: 'get',
   data: '?client_id=your-client-id&grant_type=authorization_code&response_type=code&scope=read%2520write&state=T6KQGIXWrHXxFDfyp5Hh&redirect_uri=https%3A%2F%2Fyour-callback-server.com%2Foauth%2Flogin%2Fcallback',
   headers: headers,
@@ -2611,7 +2611,7 @@ const headers = {
 
 };
 
-fetch('https://example.modapi.io/v1/authorize?client_id=your-client-id&grant_type=authorization_code&response_type=code&scope=read%2520write&state=T6KQGIXWrHXxFDfyp5Hh&redirect_uri=https%3A%2F%2Fyour-callback-server.com%2Foauth%2Flogin%2Fcallback',
+fetch('https://*.modapi.io/v1/authorize?client_id=your-client-id&grant_type=authorization_code&response_type=code&scope=read%2520write&state=T6KQGIXWrHXxFDfyp5Hh&redirect_uri=https%3A%2F%2Fyour-callback-server.com%2Foauth%2Flogin%2Fcallback',
 {
   method: 'GET',
 
@@ -2630,7 +2630,7 @@ headers = {
   'Accept': 'application/json'
 }
 
-r = requests.get('https://example.modapi.io/v1/authorize', params={
+r = requests.get('https://*.modapi.io/v1/authorize', params={
   'client_id': 'your-client-id',  'grant_type': 'authorization_code',  'response_type': 'code',  'scope': 'read%20write',  'state': 'T6KQGIXWrHXxFDfyp5Hh',  'redirect_uri': 'https://your-callback-server.com/oauth/login/callback'
 }, headers = headers)
 
@@ -2638,7 +2638,7 @@ print r.json()
 ```
 
 ```java
-URL obj = new URL("https://example.modapi.io/v1/authorize?client_id=your-client-id&grant_type=authorization_code&response_type=code&scope=read%2520write&state=T6KQGIXWrHXxFDfyp5Hh&redirect_uri=https%3A%2F%2Fyour-callback-server.com%2Foauth%2Flogin%2Fcallback");
+URL obj = new URL("https://*.modapi.io/v1/authorize?client_id=your-client-id&grant_type=authorization_code&response_type=code&scope=read%2520write&state=T6KQGIXWrHXxFDfyp5Hh&redirect_uri=https%3A%2F%2Fyour-callback-server.com%2Foauth%2Flogin%2Fcallback");
 HttpURLConnection con = (HttpURLConnection) obj.openConnection();
 con.setRequestMethod("GET");
 int responseCode = con.getResponseCode();
@@ -2690,7 +2690,7 @@ This operation does not require authentication
 
 ```shell
 # You can also use wget
-curl -X POST https://example.modapi.io/v1/oauth/token \
+curl -X POST https://*.modapi.io/v1/oauth/token \
   -H 'Content-Type: application/x-www-form-urlencoded' \ 
   -H 'Accept: application/json' \
   -d 'client_id=1234' \
@@ -2702,8 +2702,8 @@ curl -X POST https://example.modapi.io/v1/oauth/token \
 ```
 
 ```http
-POST https://example.modapi.io/v1/oauth/token HTTP/1.1
-Host: example.modapi.io
+POST https://*.modapi.io/v1/oauth/token HTTP/1.1
+Host: *.modapi.io
 Content-Type: application/x-www-form-urlencoded
 Accept: application/json
 
@@ -2717,7 +2717,7 @@ var headers = {
 };
 
 $.ajax({
-  url: 'https://example.modapi.io/v1/oauth/token',
+  url: 'https://*.modapi.io/v1/oauth/token',
   method: 'post',
 
   headers: headers,
@@ -2742,7 +2742,7 @@ const headers = {
 
 };
 
-fetch('https://example.modapi.io/v1/oauth/token',
+fetch('https://*.modapi.io/v1/oauth/token',
 {
   method: 'POST',
   body: inputBody,
@@ -2762,7 +2762,7 @@ headers = {
   'Accept': 'application/json'
 }
 
-r = requests.post('https://example.modapi.io/v1/oauth/token', params={
+r = requests.post('https://*.modapi.io/v1/oauth/token', params={
 
 }, headers = headers)
 
@@ -2770,7 +2770,7 @@ print r.json()
 ```
 
 ```java
-URL obj = new URL("https://example.modapi.io/v1/oauth/token");
+URL obj = new URL("https://*.modapi.io/v1/oauth/token");
 HttpURLConnection con = (HttpURLConnection) obj.openConnection();
 con.setRequestMethod("POST");
 int responseCode = con.getResponseCode();
@@ -2823,7 +2823,7 @@ This operation does not require authentication
 
 ```shell
 # You can also use wget
-curl -X POST https://example.modapi.io/v1/oauth/token/refresh \
+curl -X POST https://*.modapi.io/v1/oauth/token/refresh \
   -H 'Content-Type: application/x-www-form-urlencoded' \ 
   -H 'Accept: application/json' \
   -d 'client_id=1234' \
@@ -2835,8 +2835,8 @@ curl -X POST https://example.modapi.io/v1/oauth/token/refresh \
 ```
 
 ```http
-POST https://example.modapi.io/v1/oauth/token/refresh HTTP/1.1
-Host: example.modapi.io
+POST https://*.modapi.io/v1/oauth/token/refresh HTTP/1.1
+Host: *.modapi.io
 Content-Type: application/x-www-form-urlencoded
 Accept: application/json
 
@@ -2850,7 +2850,7 @@ var headers = {
 };
 
 $.ajax({
-  url: 'https://example.modapi.io/v1/oauth/token/refresh',
+  url: 'https://*.modapi.io/v1/oauth/token/refresh',
   method: 'post',
 
   headers: headers,
@@ -2875,7 +2875,7 @@ const headers = {
 
 };
 
-fetch('https://example.modapi.io/v1/oauth/token/refresh',
+fetch('https://*.modapi.io/v1/oauth/token/refresh',
 {
   method: 'POST',
   body: inputBody,
@@ -2895,7 +2895,7 @@ headers = {
   'Accept': 'application/json'
 }
 
-r = requests.post('https://example.modapi.io/v1/oauth/token/refresh', params={
+r = requests.post('https://*.modapi.io/v1/oauth/token/refresh', params={
 
 }, headers = headers)
 
@@ -2903,7 +2903,7 @@ print r.json()
 ```
 
 ```java
-URL obj = new URL("https://example.modapi.io/v1/oauth/token/refresh");
+URL obj = new URL("https://*.modapi.io/v1/oauth/token/refresh");
 HttpURLConnection con = (HttpURLConnection) obj.openConnection();
 con.setRequestMethod("POST");
 int responseCode = con.getResponseCode();
@@ -2958,14 +2958,14 @@ This operation does not require authentication
 
 ```shell
 # You can also use wget
-curl -X GET https://example.modapi.io/v1/games?api_key=YourApiKey \
+curl -X GET https://*.modapi.io/v1/games?api_key=YourApiKey \
   -H 'Accept: application/json'
 
 ```
 
 ```http
-GET https://example.modapi.io/v1/games?api_key=YourApiKey HTTP/1.1
-Host: example.modapi.io
+GET https://*.modapi.io/v1/games?api_key=YourApiKey HTTP/1.1
+Host: *.modapi.io
 
 Accept: application/json
 
@@ -2978,7 +2978,7 @@ var headers = {
 };
 
 $.ajax({
-  url: 'https://example.modapi.io/v1/games',
+  url: 'https://*.modapi.io/v1/games',
   method: 'get',
   data: '?api_key=YourApiKey',
   headers: headers,
@@ -2996,7 +2996,7 @@ const headers = {
 
 };
 
-fetch('https://example.modapi.io/v1/games?api_key=YourApiKey',
+fetch('https://*.modapi.io/v1/games?api_key=YourApiKey',
 {
   method: 'GET',
 
@@ -3015,7 +3015,7 @@ headers = {
   'Accept': 'application/json'
 }
 
-r = requests.get('https://example.modapi.io/v1/games', params={
+r = requests.get('https://*.modapi.io/v1/games', params={
   'api_key': 'YourApiKey'
 }, headers = headers)
 
@@ -3023,7 +3023,7 @@ print r.json()
 ```
 
 ```java
-URL obj = new URL("https://example.modapi.io/v1/games?api_key=YourApiKey");
+URL obj = new URL("https://*.modapi.io/v1/games?api_key=YourApiKey");
 HttpURLConnection con = (HttpURLConnection) obj.openConnection();
 con.setRequestMethod("GET");
 int responseCode = con.getResponseCode();
@@ -3190,14 +3190,14 @@ To perform this request, you must be authenticated via one of the following meth
 
 ```shell
 # You can also use wget
-curl -X GET https://example.modapi.io/v1/games/{game-id}?api_key=YourApiKey \
+curl -X GET https://*.modapi.io/v1/games/{game-id}?api_key=YourApiKey \
   -H 'Accept: application/json'
 
 ```
 
 ```http
-GET https://example.modapi.io/v1/games/{game-id}?api_key=YourApiKey HTTP/1.1
-Host: example.modapi.io
+GET https://*.modapi.io/v1/games/{game-id}?api_key=YourApiKey HTTP/1.1
+Host: *.modapi.io
 
 Accept: application/json
 
@@ -3210,7 +3210,7 @@ var headers = {
 };
 
 $.ajax({
-  url: 'https://example.modapi.io/v1/games/{game-id}',
+  url: 'https://*.modapi.io/v1/games/{game-id}',
   method: 'get',
   data: '?api_key=YourApiKey',
   headers: headers,
@@ -3228,7 +3228,7 @@ const headers = {
 
 };
 
-fetch('https://example.modapi.io/v1/games/{game-id}?api_key=YourApiKey',
+fetch('https://*.modapi.io/v1/games/{game-id}?api_key=YourApiKey',
 {
   method: 'GET',
 
@@ -3247,7 +3247,7 @@ headers = {
   'Accept': 'application/json'
 }
 
-r = requests.get('https://example.modapi.io/v1/games/{game-id}', params={
+r = requests.get('https://*.modapi.io/v1/games/{game-id}', params={
   'api_key': 'YourApiKey'
 }, headers = headers)
 
@@ -3255,7 +3255,7 @@ print r.json()
 ```
 
 ```java
-URL obj = new URL("https://example.modapi.io/v1/games/{game-id}?api_key=YourApiKey");
+URL obj = new URL("https://*.modapi.io/v1/games/{game-id}?api_key=YourApiKey");
 HttpURLConnection con = (HttpURLConnection) obj.openConnection();
 con.setRequestMethod("GET");
 int responseCode = con.getResponseCode();
@@ -3386,14 +3386,14 @@ To perform this request, you must be authenticated via one of the following meth
 
 ```shell
 # You can also use wget
-curl -X GET https://example.modapi.io/v1/games/{game-id}/mods?api_key=YourApiKey \
+curl -X GET https://*.modapi.io/v1/games/{game-id}/mods?api_key=YourApiKey \
   -H 'Accept: application/json'
 
 ```
 
 ```http
-GET https://example.modapi.io/v1/games/{game-id}/mods?api_key=YourApiKey HTTP/1.1
-Host: example.modapi.io
+GET https://*.modapi.io/v1/games/{game-id}/mods?api_key=YourApiKey HTTP/1.1
+Host: *.modapi.io
 
 Accept: application/json
 
@@ -3406,7 +3406,7 @@ var headers = {
 };
 
 $.ajax({
-  url: 'https://example.modapi.io/v1/games/{game-id}/mods',
+  url: 'https://*.modapi.io/v1/games/{game-id}/mods',
   method: 'get',
   data: '?api_key=YourApiKey',
   headers: headers,
@@ -3424,7 +3424,7 @@ const headers = {
 
 };
 
-fetch('https://example.modapi.io/v1/games/{game-id}/mods?api_key=YourApiKey',
+fetch('https://*.modapi.io/v1/games/{game-id}/mods?api_key=YourApiKey',
 {
   method: 'GET',
 
@@ -3443,7 +3443,7 @@ headers = {
   'Accept': 'application/json'
 }
 
-r = requests.get('https://example.modapi.io/v1/games/{game-id}/mods', params={
+r = requests.get('https://*.modapi.io/v1/games/{game-id}/mods', params={
   'api_key': 'YourApiKey'
 }, headers = headers)
 
@@ -3451,7 +3451,7 @@ print r.json()
 ```
 
 ```java
-URL obj = new URL("https://example.modapi.io/v1/games/{game-id}/mods?api_key=YourApiKey");
+URL obj = new URL("https://*.modapi.io/v1/games/{game-id}/mods?api_key=YourApiKey");
 HttpURLConnection con = (HttpURLConnection) obj.openConnection();
 con.setRequestMethod("GET");
 int responseCode = con.getResponseCode();
@@ -3581,7 +3581,7 @@ Get all mods for the corresponding game. Successful request will return an array
         "changelog": "VERSION 1.3 -- Changes -- Fixed critical castle floor bug.",
         "metadata_blob": "rogue,hd,high-res,4k,hd textures",
         "download": {
-          "binary_url": "https://example.modapi.io/v1/games/1/mods/1/files/1/download/c489a0354111a4d76640d47f0cdcb294",
+          "binary_url": "https://*.modapi.io/v1/games/1/mods/1/files/1/download/c489a0354111a4d76640d47f0cdcb294",
           "date_expires": 1579316848
         },
         "platforms": [
@@ -3656,14 +3656,14 @@ To perform this request, you must be authenticated via one of the following meth
 
 ```shell
 # You can also use wget
-curl -X GET https://example.modapi.io/v1/games/{game-id}/mods/{mod-id}?api_key=YourApiKey \
+curl -X GET https://*.modapi.io/v1/games/{game-id}/mods/{mod-id}?api_key=YourApiKey \
   -H 'Accept: application/json'
 
 ```
 
 ```http
-GET https://example.modapi.io/v1/games/{game-id}/mods/{mod-id}?api_key=YourApiKey HTTP/1.1
-Host: example.modapi.io
+GET https://*.modapi.io/v1/games/{game-id}/mods/{mod-id}?api_key=YourApiKey HTTP/1.1
+Host: *.modapi.io
 
 Accept: application/json
 
@@ -3676,7 +3676,7 @@ var headers = {
 };
 
 $.ajax({
-  url: 'https://example.modapi.io/v1/games/{game-id}/mods/{mod-id}',
+  url: 'https://*.modapi.io/v1/games/{game-id}/mods/{mod-id}',
   method: 'get',
   data: '?api_key=YourApiKey',
   headers: headers,
@@ -3694,7 +3694,7 @@ const headers = {
 
 };
 
-fetch('https://example.modapi.io/v1/games/{game-id}/mods/{mod-id}?api_key=YourApiKey',
+fetch('https://*.modapi.io/v1/games/{game-id}/mods/{mod-id}?api_key=YourApiKey',
 {
   method: 'GET',
 
@@ -3713,7 +3713,7 @@ headers = {
   'Accept': 'application/json'
 }
 
-r = requests.get('https://example.modapi.io/v1/games/{game-id}/mods/{mod-id}', params={
+r = requests.get('https://*.modapi.io/v1/games/{game-id}/mods/{mod-id}', params={
   'api_key': 'YourApiKey'
 }, headers = headers)
 
@@ -3721,7 +3721,7 @@ print r.json()
 ```
 
 ```java
-URL obj = new URL("https://example.modapi.io/v1/games/{game-id}/mods/{mod-id}?api_key=YourApiKey");
+URL obj = new URL("https://*.modapi.io/v1/games/{game-id}/mods/{mod-id}?api_key=YourApiKey");
 HttpURLConnection con = (HttpURLConnection) obj.openConnection();
 con.setRequestMethod("GET");
 int responseCode = con.getResponseCode();
@@ -3822,7 +3822,7 @@ Get a mod. Successful request will return a single [Mod Object](#mod-object).
     "changelog": "VERSION 1.3 -- Changes -- Fixed critical castle floor bug.",
     "metadata_blob": "rogue,hd,high-res,4k,hd textures",
     "download": {
-      "binary_url": "https://example.modapi.io/v1/games/1/mods/1/files/1/download/c489a0354111a4d76640d47f0cdcb294",
+      "binary_url": "https://*.modapi.io/v1/games/1/mods/1/files/1/download/c489a0354111a4d76640d47f0cdcb294",
       "date_expires": 1579316848
     },
     "platforms": [
@@ -3887,7 +3887,7 @@ To perform this request, you must be authenticated via one of the following meth
 
 ```shell
 # You can also use wget
-curl -X POST https://example.modapi.io/v1/games/{game-id}/mods \
+curl -X POST https://*.modapi.io/v1/games/{game-id}/mods \
   -H 'Authorization: Bearer {access-token}' \ 
   -H 'Content-Type: multipart/form-data' \ 
   -H 'Accept: application/json' \
@@ -3902,8 +3902,8 @@ curl -X POST https://example.modapi.io/v1/games/{game-id}/mods \
 ```
 
 ```http
-POST https://example.modapi.io/v1/games/{game-id}/mods HTTP/1.1
-Host: example.modapi.io
+POST https://*.modapi.io/v1/games/{game-id}/mods HTTP/1.1
+Host: *.modapi.io
 Content-Type: multipart/form-data
 Accept: application/json
 Authorization: Bearer {access-token}
@@ -3919,7 +3919,7 @@ var headers = {
 };
 
 $.ajax({
-  url: 'https://example.modapi.io/v1/games/{game-id}/mods',
+  url: 'https://*.modapi.io/v1/games/{game-id}/mods',
   method: 'post',
 
   headers: headers,
@@ -3947,7 +3947,7 @@ const headers = {
 
 };
 
-fetch('https://example.modapi.io/v1/games/{game-id}/mods',
+fetch('https://*.modapi.io/v1/games/{game-id}/mods',
 {
   method: 'POST',
   body: inputBody,
@@ -3968,7 +3968,7 @@ headers = {
   'Accept': 'application/json'
 }
 
-r = requests.post('https://example.modapi.io/v1/games/{game-id}/mods', params={
+r = requests.post('https://*.modapi.io/v1/games/{game-id}/mods', params={
 
 }, headers = headers)
 
@@ -3976,7 +3976,7 @@ print r.json()
 ```
 
 ```java
-URL obj = new URL("https://example.modapi.io/v1/games/{game-id}/mods");
+URL obj = new URL("https://*.modapi.io/v1/games/{game-id}/mods");
 HttpURLConnection con = (HttpURLConnection) obj.openConnection();
 con.setRequestMethod("POST");
 int responseCode = con.getResponseCode();
@@ -4094,7 +4094,7 @@ Add a mod. Successful request will return the newly created [Mod Object](#mod-ob
     "changelog": "VERSION 1.3 -- Changes -- Fixed critical castle floor bug.",
     "metadata_blob": "rogue,hd,high-res,4k,hd textures",
     "download": {
-      "binary_url": "https://example.modapi.io/v1/games/1/mods/1/files/1/download/c489a0354111a4d76640d47f0cdcb294",
+      "binary_url": "https://*.modapi.io/v1/games/1/mods/1/files/1/download/c489a0354111a4d76640d47f0cdcb294",
       "date_expires": 1579316848
     },
     "platforms": [
@@ -4162,7 +4162,7 @@ To perform this request, you must be authenticated via one of the following meth
 
 ```shell
 # You can also use wget
-curl -X POST https://example.modapi.io/v1/games/{game-id}/mods/{mod-id} \
+curl -X POST https://*.modapi.io/v1/games/{game-id}/mods/{mod-id} \
   -H 'Authorization: Bearer {access-token}' \ 
   -H 'Content-Type: multipart/form-data' \ 
   -H 'Content-Type: multipart/form-data' \ 
@@ -4177,8 +4177,8 @@ curl -X POST https://example.modapi.io/v1/games/{game-id}/mods/{mod-id} \
 ```
 
 ```http
-POST https://example.modapi.io/v1/games/{game-id}/mods/{mod-id} HTTP/1.1
-Host: example.modapi.io
+POST https://*.modapi.io/v1/games/{game-id}/mods/{mod-id} HTTP/1.1
+Host: *.modapi.io
 Content-Type: multipart/form-data
 Accept: application/json
 Authorization: Bearer {access-token}
@@ -4196,7 +4196,7 @@ var headers = {
 };
 
 $.ajax({
-  url: 'https://example.modapi.io/v1/games/{game-id}/mods/{mod-id}',
+  url: 'https://*.modapi.io/v1/games/{game-id}/mods/{mod-id}',
   method: 'post',
 
   headers: headers,
@@ -4224,7 +4224,7 @@ const headers = {
 
 };
 
-fetch('https://example.modapi.io/v1/games/{game-id}/mods/{mod-id}',
+fetch('https://*.modapi.io/v1/games/{game-id}/mods/{mod-id}',
 {
   method: 'POST',
   body: inputBody,
@@ -4246,7 +4246,7 @@ headers = {
   'Accept': 'application/json'
 }
 
-r = requests.post('https://example.modapi.io/v1/games/{game-id}/mods/{mod-id}', params={
+r = requests.post('https://*.modapi.io/v1/games/{game-id}/mods/{mod-id}', params={
 
 }, headers = headers)
 
@@ -4254,7 +4254,7 @@ print r.json()
 ```
 
 ```java
-URL obj = new URL("https://example.modapi.io/v1/games/{game-id}/mods/{mod-id}");
+URL obj = new URL("https://*.modapi.io/v1/games/{game-id}/mods/{mod-id}");
 HttpURLConnection con = (HttpURLConnection) obj.openConnection();
 con.setRequestMethod("POST");
 int responseCode = con.getResponseCode();
@@ -4370,7 +4370,7 @@ Edit details for a mod. If you want to update the `logo` or media associated wit
     "changelog": "VERSION 1.3 -- Changes -- Fixed critical castle floor bug.",
     "metadata_blob": "rogue,hd,high-res,4k,hd textures",
     "download": {
-      "binary_url": "https://example.modapi.io/v1/games/1/mods/1/files/1/download/c489a0354111a4d76640d47f0cdcb294",
+      "binary_url": "https://*.modapi.io/v1/games/1/mods/1/files/1/download/c489a0354111a4d76640d47f0cdcb294",
       "date_expires": 1579316848
     },
     "platforms": [
@@ -4436,7 +4436,7 @@ To perform this request, you must be authenticated via one of the following meth
 
 ```shell
 # You can also use wget
-curl -X DELETE https://example.modapi.io/v1/games/{game-id}/mods/{mod-id} \
+curl -X DELETE https://*.modapi.io/v1/games/{game-id}/mods/{mod-id} \
   -H 'Authorization: Bearer {access-token}' \ 
   -H 'Content-Type: multipart/form-data' \ 
   -H 'Accept: application/json'
@@ -4444,8 +4444,8 @@ curl -X DELETE https://example.modapi.io/v1/games/{game-id}/mods/{mod-id} \
 ```
 
 ```http
-DELETE https://example.modapi.io/v1/games/{game-id}/mods/{mod-id} HTTP/1.1
-Host: example.modapi.io
+DELETE https://*.modapi.io/v1/games/{game-id}/mods/{mod-id} HTTP/1.1
+Host: *.modapi.io
 
 Accept: application/json
 Authorization: Bearer {access-token}
@@ -4462,7 +4462,7 @@ var headers = {
 };
 
 $.ajax({
-  url: 'https://example.modapi.io/v1/games/{game-id}/mods/{mod-id}',
+  url: 'https://*.modapi.io/v1/games/{game-id}/mods/{mod-id}',
   method: 'delete',
 
   headers: headers,
@@ -4482,7 +4482,7 @@ const headers = {
 
 };
 
-fetch('https://example.modapi.io/v1/games/{game-id}/mods/{mod-id}',
+fetch('https://*.modapi.io/v1/games/{game-id}/mods/{mod-id}',
 {
   method: 'DELETE',
 
@@ -4503,7 +4503,7 @@ headers = {
   'Accept': 'application/json'
 }
 
-r = requests.delete('https://example.modapi.io/v1/games/{game-id}/mods/{mod-id}', params={
+r = requests.delete('https://*.modapi.io/v1/games/{game-id}/mods/{mod-id}', params={
 
 }, headers = headers)
 
@@ -4511,7 +4511,7 @@ print r.json()
 ```
 
 ```java
-URL obj = new URL("https://example.modapi.io/v1/games/{game-id}/mods/{mod-id}");
+URL obj = new URL("https://*.modapi.io/v1/games/{game-id}/mods/{mod-id}");
 HttpURLConnection con = (HttpURLConnection) obj.openConnection();
 con.setRequestMethod("DELETE");
 int responseCode = con.getResponseCode();
@@ -4554,14 +4554,14 @@ To perform this request, you must be authenticated via one of the following meth
 
 ```shell
 # You can also use wget
-curl -X GET https://example.modapi.io/v1/games/{game-id}/mods/{mod-id}/files?api_key=YourApiKey \
+curl -X GET https://*.modapi.io/v1/games/{game-id}/mods/{mod-id}/files?api_key=YourApiKey \
   -H 'Accept: application/json'
 
 ```
 
 ```http
-GET https://example.modapi.io/v1/games/{game-id}/mods/{mod-id}/files?api_key=YourApiKey HTTP/1.1
-Host: example.modapi.io
+GET https://*.modapi.io/v1/games/{game-id}/mods/{mod-id}/files?api_key=YourApiKey HTTP/1.1
+Host: *.modapi.io
 
 Accept: application/json
 
@@ -4574,7 +4574,7 @@ var headers = {
 };
 
 $.ajax({
-  url: 'https://example.modapi.io/v1/games/{game-id}/mods/{mod-id}/files',
+  url: 'https://*.modapi.io/v1/games/{game-id}/mods/{mod-id}/files',
   method: 'get',
   data: '?api_key=YourApiKey',
   headers: headers,
@@ -4592,7 +4592,7 @@ const headers = {
 
 };
 
-fetch('https://example.modapi.io/v1/games/{game-id}/mods/{mod-id}/files?api_key=YourApiKey',
+fetch('https://*.modapi.io/v1/games/{game-id}/mods/{mod-id}/files?api_key=YourApiKey',
 {
   method: 'GET',
 
@@ -4611,7 +4611,7 @@ headers = {
   'Accept': 'application/json'
 }
 
-r = requests.get('https://example.modapi.io/v1/games/{game-id}/mods/{mod-id}/files', params={
+r = requests.get('https://*.modapi.io/v1/games/{game-id}/mods/{mod-id}/files', params={
   'api_key': 'YourApiKey'
 }, headers = headers)
 
@@ -4619,7 +4619,7 @@ print r.json()
 ```
 
 ```java
-URL obj = new URL("https://example.modapi.io/v1/games/{game-id}/mods/{mod-id}/files?api_key=YourApiKey");
+URL obj = new URL("https://*.modapi.io/v1/games/{game-id}/mods/{mod-id}/files?api_key=YourApiKey");
 HttpURLConnection con = (HttpURLConnection) obj.openConnection();
 con.setRequestMethod("GET");
 int responseCode = con.getResponseCode();
@@ -4679,7 +4679,7 @@ Get all files that are published for the corresponding mod. Successful request w
       "changelog": "VERSION 1.3 -- Changes -- Fixed critical castle floor bug.",
       "metadata_blob": "rogue,hd,high-res,4k,hd textures",
       "download": {
-        "binary_url": "https://example.modapi.io/v1/games/1/mods/1/files/1/download/c489a0354111a4d76640d47f0cdcb294",
+        "binary_url": "https://*.modapi.io/v1/games/1/mods/1/files/1/download/c489a0354111a4d76640d47f0cdcb294",
         "date_expires": 1579316848
       },
       "platforms": [
@@ -4719,14 +4719,14 @@ To perform this request, you must be authenticated via one of the following meth
 
 ```shell
 # You can also use wget
-curl -X GET https://example.modapi.io/v1/games/{game-id}/mods/{mod-id}/files/{file-id}?api_key=YourApiKey \
+curl -X GET https://*.modapi.io/v1/games/{game-id}/mods/{mod-id}/files/{file-id}?api_key=YourApiKey \
   -H 'Accept: application/json'
 
 ```
 
 ```http
-GET https://example.modapi.io/v1/games/{game-id}/mods/{mod-id}/files/{file-id}?api_key=YourApiKey HTTP/1.1
-Host: example.modapi.io
+GET https://*.modapi.io/v1/games/{game-id}/mods/{mod-id}/files/{file-id}?api_key=YourApiKey HTTP/1.1
+Host: *.modapi.io
 
 Accept: application/json
 
@@ -4739,7 +4739,7 @@ var headers = {
 };
 
 $.ajax({
-  url: 'https://example.modapi.io/v1/games/{game-id}/mods/{mod-id}/files/{file-id}',
+  url: 'https://*.modapi.io/v1/games/{game-id}/mods/{mod-id}/files/{file-id}',
   method: 'get',
   data: '?api_key=YourApiKey',
   headers: headers,
@@ -4757,7 +4757,7 @@ const headers = {
 
 };
 
-fetch('https://example.modapi.io/v1/games/{game-id}/mods/{mod-id}/files/{file-id}?api_key=YourApiKey',
+fetch('https://*.modapi.io/v1/games/{game-id}/mods/{mod-id}/files/{file-id}?api_key=YourApiKey',
 {
   method: 'GET',
 
@@ -4776,7 +4776,7 @@ headers = {
   'Accept': 'application/json'
 }
 
-r = requests.get('https://example.modapi.io/v1/games/{game-id}/mods/{mod-id}/files/{file-id}', params={
+r = requests.get('https://*.modapi.io/v1/games/{game-id}/mods/{mod-id}/files/{file-id}', params={
   'api_key': 'YourApiKey'
 }, headers = headers)
 
@@ -4784,7 +4784,7 @@ print r.json()
 ```
 
 ```java
-URL obj = new URL("https://example.modapi.io/v1/games/{game-id}/mods/{mod-id}/files/{file-id}?api_key=YourApiKey");
+URL obj = new URL("https://*.modapi.io/v1/games/{game-id}/mods/{mod-id}/files/{file-id}?api_key=YourApiKey");
 HttpURLConnection con = (HttpURLConnection) obj.openConnection();
 con.setRequestMethod("GET");
 int responseCode = con.getResponseCode();
@@ -4824,7 +4824,7 @@ Get a file. Successful request will return a single [Modfile Object](#modfile-ob
   "changelog": "VERSION 1.3 -- Changes -- Fixed critical castle floor bug.",
   "metadata_blob": "rogue,hd,high-res,4k,hd textures",
   "download": {
-    "binary_url": "https://example.modapi.io/v1/games/1/mods/1/files/1/download/c489a0354111a4d76640d47f0cdcb294",
+    "binary_url": "https://*.modapi.io/v1/games/1/mods/1/files/1/download/c489a0354111a4d76640d47f0cdcb294",
     "date_expires": 1579316848
   },
   "platforms": [
@@ -4851,7 +4851,7 @@ To perform this request, you must be authenticated via one of the following meth
 
 ```shell
 # You can also use wget
-curl -X POST https://example.modapi.io/v1/games/{game-id}/mods/{mod-id}/files \
+curl -X POST https://*.modapi.io/v1/games/{game-id}/mods/{mod-id}/files \
   -H 'Authorization: Bearer {access-token}' \ 
   -H 'Content-Type: multipart/form-data' \ 
   -H 'Accept: application/json' \
@@ -4864,8 +4864,8 @@ curl -X POST https://example.modapi.io/v1/games/{game-id}/mods/{mod-id}/files \
 ```
 
 ```http
-POST https://example.modapi.io/v1/games/{game-id}/mods/{mod-id}/files HTTP/1.1
-Host: example.modapi.io
+POST https://*.modapi.io/v1/games/{game-id}/mods/{mod-id}/files HTTP/1.1
+Host: *.modapi.io
 Content-Type: multipart/form-data
 Accept: application/json
 Authorization: Bearer {access-token}
@@ -4881,7 +4881,7 @@ var headers = {
 };
 
 $.ajax({
-  url: 'https://example.modapi.io/v1/games/{game-id}/mods/{mod-id}/files',
+  url: 'https://*.modapi.io/v1/games/{game-id}/mods/{mod-id}/files',
   method: 'post',
 
   headers: headers,
@@ -4909,7 +4909,7 @@ const headers = {
 
 };
 
-fetch('https://example.modapi.io/v1/games/{game-id}/mods/{mod-id}/files',
+fetch('https://*.modapi.io/v1/games/{game-id}/mods/{mod-id}/files',
 {
   method: 'POST',
   body: inputBody,
@@ -4930,7 +4930,7 @@ headers = {
   'Accept': 'application/json'
 }
 
-r = requests.post('https://example.modapi.io/v1/games/{game-id}/mods/{mod-id}/files', params={
+r = requests.post('https://*.modapi.io/v1/games/{game-id}/mods/{mod-id}/files', params={
 
 }, headers = headers)
 
@@ -4938,7 +4938,7 @@ print r.json()
 ```
 
 ```java
-URL obj = new URL("https://example.modapi.io/v1/games/{game-id}/mods/{mod-id}/files");
+URL obj = new URL("https://*.modapi.io/v1/games/{game-id}/mods/{mod-id}/files");
 HttpURLConnection con = (HttpURLConnection) obj.openConnection();
 con.setRequestMethod("POST");
 int responseCode = con.getResponseCode();
@@ -4993,7 +4993,7 @@ Upload a file for the corresponding mod. Successful request will return the newl
   "changelog": "VERSION 1.3 -- Changes -- Fixed critical castle floor bug.",
   "metadata_blob": "rogue,hd,high-res,4k,hd textures",
   "download": {
-    "binary_url": "https://example.modapi.io/v1/games/1/mods/1/files/1/download/c489a0354111a4d76640d47f0cdcb294",
+    "binary_url": "https://*.modapi.io/v1/games/1/mods/1/files/1/download/c489a0354111a4d76640d47f0cdcb294",
     "date_expires": 1579316848
   },
   "platforms": [
@@ -5032,7 +5032,7 @@ To perform this request, you must be authenticated via one of the following meth
 
 ```shell
 # You can also use wget
-curl -X PUT https://example.modapi.io/v1/games/{game-id}/mods/{mod-id}/files/{file-id} \
+curl -X PUT https://*.modapi.io/v1/games/{game-id}/mods/{mod-id}/files/{file-id} \
   -H 'Authorization: Bearer {access-token}' \ 
   -H 'Content-Type: application/x-www-form-urlencoded' \ 
   -H 'Accept: application/json'
@@ -5040,8 +5040,8 @@ curl -X PUT https://example.modapi.io/v1/games/{game-id}/mods/{mod-id}/files/{fi
 ```
 
 ```http
-PUT https://example.modapi.io/v1/games/{game-id}/mods/{mod-id}/files/{file-id} HTTP/1.1
-Host: example.modapi.io
+PUT https://*.modapi.io/v1/games/{game-id}/mods/{mod-id}/files/{file-id} HTTP/1.1
+Host: *.modapi.io
 
 Accept: application/json
 Authorization: Bearer {access-token}
@@ -5058,7 +5058,7 @@ var headers = {
 };
 
 $.ajax({
-  url: 'https://example.modapi.io/v1/games/{game-id}/mods/{mod-id}/files/{file-id}',
+  url: 'https://*.modapi.io/v1/games/{game-id}/mods/{mod-id}/files/{file-id}',
   method: 'put',
 
   headers: headers,
@@ -5078,7 +5078,7 @@ const headers = {
 
 };
 
-fetch('https://example.modapi.io/v1/games/{game-id}/mods/{mod-id}/files/{file-id}',
+fetch('https://*.modapi.io/v1/games/{game-id}/mods/{mod-id}/files/{file-id}',
 {
   method: 'PUT',
 
@@ -5099,7 +5099,7 @@ headers = {
   'Accept': 'application/json'
 }
 
-r = requests.put('https://example.modapi.io/v1/games/{game-id}/mods/{mod-id}/files/{file-id}', params={
+r = requests.put('https://*.modapi.io/v1/games/{game-id}/mods/{mod-id}/files/{file-id}', params={
 
 }, headers = headers)
 
@@ -5107,7 +5107,7 @@ print r.json()
 ```
 
 ```java
-URL obj = new URL("https://example.modapi.io/v1/games/{game-id}/mods/{mod-id}/files/{file-id}");
+URL obj = new URL("https://*.modapi.io/v1/games/{game-id}/mods/{mod-id}/files/{file-id}");
 HttpURLConnection con = (HttpURLConnection) obj.openConnection();
 con.setRequestMethod("PUT");
 int responseCode = con.getResponseCode();
@@ -5154,7 +5154,7 @@ Edit the details of a published file. If you want to update fields other than th
   "changelog": "VERSION 1.3 -- Changes -- Fixed critical castle floor bug.",
   "metadata_blob": "rogue,hd,high-res,4k,hd textures",
   "download": {
-    "binary_url": "https://example.modapi.io/v1/games/1/mods/1/files/1/download/c489a0354111a4d76640d47f0cdcb294",
+    "binary_url": "https://*.modapi.io/v1/games/1/mods/1/files/1/download/c489a0354111a4d76640d47f0cdcb294",
     "date_expires": 1579316848
   },
   "platforms": [
@@ -5187,7 +5187,7 @@ To perform this request, you must be authenticated via one of the following meth
 
 ```shell
 # You can also use wget
-curl -X DELETE https://example.modapi.io/v1/games/{game-id}/mods/{mod-id}/files/{file-id} \
+curl -X DELETE https://*.modapi.io/v1/games/{game-id}/mods/{mod-id}/files/{file-id} \
   -H 'Authorization: Bearer {access-token}' \ 
   -H 'Content-Type: application/x-www-form-urlencoded' \ 
   -H 'Accept: application/json'
@@ -5195,8 +5195,8 @@ curl -X DELETE https://example.modapi.io/v1/games/{game-id}/mods/{mod-id}/files/
 ```
 
 ```http
-DELETE https://example.modapi.io/v1/games/{game-id}/mods/{mod-id}/files/{file-id} HTTP/1.1
-Host: example.modapi.io
+DELETE https://*.modapi.io/v1/games/{game-id}/mods/{mod-id}/files/{file-id} HTTP/1.1
+Host: *.modapi.io
 
 Accept: application/json
 Authorization: Bearer {access-token}
@@ -5213,7 +5213,7 @@ var headers = {
 };
 
 $.ajax({
-  url: 'https://example.modapi.io/v1/games/{game-id}/mods/{mod-id}/files/{file-id}',
+  url: 'https://*.modapi.io/v1/games/{game-id}/mods/{mod-id}/files/{file-id}',
   method: 'delete',
 
   headers: headers,
@@ -5233,7 +5233,7 @@ const headers = {
 
 };
 
-fetch('https://example.modapi.io/v1/games/{game-id}/mods/{mod-id}/files/{file-id}',
+fetch('https://*.modapi.io/v1/games/{game-id}/mods/{mod-id}/files/{file-id}',
 {
   method: 'DELETE',
 
@@ -5254,7 +5254,7 @@ headers = {
   'Accept': 'application/json'
 }
 
-r = requests.delete('https://example.modapi.io/v1/games/{game-id}/mods/{mod-id}/files/{file-id}', params={
+r = requests.delete('https://*.modapi.io/v1/games/{game-id}/mods/{mod-id}/files/{file-id}', params={
 
 }, headers = headers)
 
@@ -5262,7 +5262,7 @@ print r.json()
 ```
 
 ```java
-URL obj = new URL("https://example.modapi.io/v1/games/{game-id}/mods/{mod-id}/files/{file-id}");
+URL obj = new URL("https://*.modapi.io/v1/games/{game-id}/mods/{mod-id}/files/{file-id}");
 HttpURLConnection con = (HttpURLConnection) obj.openConnection();
 con.setRequestMethod("DELETE");
 int responseCode = con.getResponseCode();
@@ -5304,7 +5304,7 @@ To perform this request, you must be authenticated via one of the following meth
 
 ```shell
 # You can also use wget
-curl -X POST https://example.modapi.io/v1/games/{game-id}/mods/{mod-id}/files/{file-id}/platforms \
+curl -X POST https://*.modapi.io/v1/games/{game-id}/mods/{mod-id}/files/{file-id}/platforms \
   -H 'Authorization: Bearer {access-token}' \ 
   -H 'Content-Type: application/x-www-form-urlencoded' \ 
   -H 'Accept: application/json'
@@ -5312,8 +5312,8 @@ curl -X POST https://example.modapi.io/v1/games/{game-id}/mods/{mod-id}/files/{f
 ```
 
 ```http
-POST https://example.modapi.io/v1/games/{game-id}/mods/{mod-id}/files/{file-id}/platforms HTTP/1.1
-Host: example.modapi.io
+POST https://*.modapi.io/v1/games/{game-id}/mods/{mod-id}/files/{file-id}/platforms HTTP/1.1
+Host: *.modapi.io
 
 Accept: application/json
 Authorization: Bearer {access-token}
@@ -5330,7 +5330,7 @@ var headers = {
 };
 
 $.ajax({
-  url: 'https://example.modapi.io/v1/games/{game-id}/mods/{mod-id}/files/{file-id}/platforms',
+  url: 'https://*.modapi.io/v1/games/{game-id}/mods/{mod-id}/files/{file-id}/platforms',
   method: 'post',
 
   headers: headers,
@@ -5350,7 +5350,7 @@ const headers = {
 
 };
 
-fetch('https://example.modapi.io/v1/games/{game-id}/mods/{mod-id}/files/{file-id}/platforms',
+fetch('https://*.modapi.io/v1/games/{game-id}/mods/{mod-id}/files/{file-id}/platforms',
 {
   method: 'POST',
 
@@ -5371,7 +5371,7 @@ headers = {
   'Accept': 'application/json'
 }
 
-r = requests.post('https://example.modapi.io/v1/games/{game-id}/mods/{mod-id}/files/{file-id}/platforms', params={
+r = requests.post('https://*.modapi.io/v1/games/{game-id}/mods/{mod-id}/files/{file-id}/platforms', params={
 
 }, headers = headers)
 
@@ -5379,7 +5379,7 @@ print r.json()
 ```
 
 ```java
-URL obj = new URL("https://example.modapi.io/v1/games/{game-id}/mods/{mod-id}/files/{file-id}/platforms");
+URL obj = new URL("https://*.modapi.io/v1/games/{game-id}/mods/{mod-id}/files/{file-id}/platforms");
 HttpURLConnection con = (HttpURLConnection) obj.openConnection();
 con.setRequestMethod("POST");
 int responseCode = con.getResponseCode();
@@ -5426,7 +5426,7 @@ Manage the platform status of a particular modfile. This endpoint does not set a
   "changelog": "VERSION 1.3 -- Changes -- Fixed critical castle floor bug.",
   "metadata_blob": "rogue,hd,high-res,4k,hd textures",
   "download": {
-    "binary_url": "https://example.modapi.io/v1/games/1/mods/1/files/1/download/c489a0354111a4d76640d47f0cdcb294",
+    "binary_url": "https://*.modapi.io/v1/games/1/mods/1/files/1/download/c489a0354111a4d76640d47f0cdcb294",
     "date_expires": 1579316848
   },
   "platforms": [
@@ -5457,14 +5457,14 @@ To perform this request, you must be authenticated via one of the following meth
 
 ```shell
 # You can also use wget
-curl -X GET https://example.modapi.io/v1/games/{game-id}/mods/{mod-id}/files/multipart?api_key=YourApiKey \
+curl -X GET https://*.modapi.io/v1/games/{game-id}/mods/{mod-id}/files/multipart?api_key=YourApiKey \
   -H 'Accept: application/json'
 
 ```
 
 ```http
-GET https://example.modapi.io/v1/games/{game-id}/mods/{mod-id}/files/multipart?api_key=YourApiKey HTTP/1.1
-Host: example.modapi.io
+GET https://*.modapi.io/v1/games/{game-id}/mods/{mod-id}/files/multipart?api_key=YourApiKey HTTP/1.1
+Host: *.modapi.io
 
 Accept: application/json
 
@@ -5477,7 +5477,7 @@ var headers = {
 };
 
 $.ajax({
-  url: 'https://example.modapi.io/v1/games/{game-id}/mods/{mod-id}/files/multipart',
+  url: 'https://*.modapi.io/v1/games/{game-id}/mods/{mod-id}/files/multipart',
   method: 'get',
   data: '?api_key=YourApiKey',
   headers: headers,
@@ -5495,7 +5495,7 @@ const headers = {
 
 };
 
-fetch('https://example.modapi.io/v1/games/{game-id}/mods/{mod-id}/files/multipart?api_key=YourApiKey',
+fetch('https://*.modapi.io/v1/games/{game-id}/mods/{mod-id}/files/multipart?api_key=YourApiKey',
 {
   method: 'GET',
 
@@ -5514,7 +5514,7 @@ headers = {
   'Accept': 'application/json'
 }
 
-r = requests.get('https://example.modapi.io/v1/games/{game-id}/mods/{mod-id}/files/multipart', params={
+r = requests.get('https://*.modapi.io/v1/games/{game-id}/mods/{mod-id}/files/multipart', params={
   'api_key': 'YourApiKey'
 }, headers = headers)
 
@@ -5522,7 +5522,7 @@ print r.json()
 ```
 
 ```java
-URL obj = new URL("https://example.modapi.io/v1/games/{game-id}/mods/{mod-id}/files/multipart?api_key=YourApiKey");
+URL obj = new URL("https://*.modapi.io/v1/games/{game-id}/mods/{mod-id}/files/multipart?api_key=YourApiKey");
 HttpURLConnection con = (HttpURLConnection) obj.openConnection();
 con.setRequestMethod("GET");
 int responseCode = con.getResponseCode();
@@ -5578,7 +5578,7 @@ To perform this request, you must be authenticated via one of the following meth
 
 ```shell
 # You can also use wget
-curl -X PUT https://example.modapi.io/v1/games/{game-id}/mods/{mod-id}/files/multipart?upload_id=123e4567-e89b-12d3-a456-426614174000 \
+curl -X PUT https://*.modapi.io/v1/games/{game-id}/mods/{mod-id}/files/multipart?upload_id=123e4567-e89b-12d3-a456-426614174000 \
   -H 'Authorization: Bearer {access-token}' \ 
   -H 'Content-Range: bytes 0-52428799/209715196' \ 
   -H 'Digest: sha-256=X48E9qOokqqrvdts8nOJRJN3OWDUoyWxBf7kbu9DBPE=' \ 
@@ -5587,8 +5587,8 @@ curl -X PUT https://example.modapi.io/v1/games/{game-id}/mods/{mod-id}/files/mul
 ```
 
 ```http
-PUT https://example.modapi.io/v1/games/{game-id}/mods/{mod-id}/files/multipart?upload_id=123e4567-e89b-12d3-a456-426614174000 HTTP/1.1
-Host: example.modapi.io
+PUT https://*.modapi.io/v1/games/{game-id}/mods/{mod-id}/files/multipart?upload_id=123e4567-e89b-12d3-a456-426614174000 HTTP/1.1
+Host: *.modapi.io
 
 Accept: application/json
 Authorization: Bearer {access-token}
@@ -5607,7 +5607,7 @@ var headers = {
 };
 
 $.ajax({
-  url: 'https://example.modapi.io/v1/games/{game-id}/mods/{mod-id}/files/multipart',
+  url: 'https://*.modapi.io/v1/games/{game-id}/mods/{mod-id}/files/multipart',
   method: 'put',
   data: '?upload_id=123e4567-e89b-12d3-a456-426614174000',
   headers: headers,
@@ -5628,7 +5628,7 @@ const headers = {
 
 };
 
-fetch('https://example.modapi.io/v1/games/{game-id}/mods/{mod-id}/files/multipart?upload_id=123e4567-e89b-12d3-a456-426614174000',
+fetch('https://*.modapi.io/v1/games/{game-id}/mods/{mod-id}/files/multipart?upload_id=123e4567-e89b-12d3-a456-426614174000',
 {
   method: 'PUT',
 
@@ -5650,7 +5650,7 @@ headers = {
   'Accept': 'application/json'
 }
 
-r = requests.put('https://example.modapi.io/v1/games/{game-id}/mods/{mod-id}/files/multipart', params={
+r = requests.put('https://*.modapi.io/v1/games/{game-id}/mods/{mod-id}/files/multipart', params={
   'upload_id': '123e4567-e89b-12d3-a456-426614174000'
 }, headers = headers)
 
@@ -5658,7 +5658,7 @@ print r.json()
 ```
 
 ```java
-URL obj = new URL("https://example.modapi.io/v1/games/{game-id}/mods/{mod-id}/files/multipart?upload_id=123e4567-e89b-12d3-a456-426614174000");
+URL obj = new URL("https://*.modapi.io/v1/games/{game-id}/mods/{mod-id}/files/multipart?upload_id=123e4567-e89b-12d3-a456-426614174000");
 HttpURLConnection con = (HttpURLConnection) obj.openConnection();
 con.setRequestMethod("PUT");
 int responseCode = con.getResponseCode();
@@ -5727,7 +5727,7 @@ To perform this request, you must be authenticated via one of the following meth
 
 ```shell
 # You can also use wget
-curl -X POST https://example.modapi.io/v1/games/{game-id}/mods/{mod-id}/files/multipart \
+curl -X POST https://*.modapi.io/v1/games/{game-id}/mods/{mod-id}/files/multipart \
   -H 'Authorization: Bearer {access-token}' \ 
   -H 'Content-Type: application/x-www-form-urlencoded' \ 
   -H 'Accept: application/json' \
@@ -5737,8 +5737,8 @@ curl -X POST https://example.modapi.io/v1/games/{game-id}/mods/{mod-id}/files/mu
 ```
 
 ```http
-POST https://example.modapi.io/v1/games/{game-id}/mods/{mod-id}/files/multipart HTTP/1.1
-Host: example.modapi.io
+POST https://*.modapi.io/v1/games/{game-id}/mods/{mod-id}/files/multipart HTTP/1.1
+Host: *.modapi.io
 Content-Type: application/x-www-form-urlencoded
 Accept: application/json
 Authorization: Bearer {access-token}
@@ -5754,7 +5754,7 @@ var headers = {
 };
 
 $.ajax({
-  url: 'https://example.modapi.io/v1/games/{game-id}/mods/{mod-id}/files/multipart',
+  url: 'https://*.modapi.io/v1/games/{game-id}/mods/{mod-id}/files/multipart',
   method: 'post',
 
   headers: headers,
@@ -5777,7 +5777,7 @@ const headers = {
 
 };
 
-fetch('https://example.modapi.io/v1/games/{game-id}/mods/{mod-id}/files/multipart',
+fetch('https://*.modapi.io/v1/games/{game-id}/mods/{mod-id}/files/multipart',
 {
   method: 'POST',
   body: inputBody,
@@ -5798,7 +5798,7 @@ headers = {
   'Accept': 'application/json'
 }
 
-r = requests.post('https://example.modapi.io/v1/games/{game-id}/mods/{mod-id}/files/multipart', params={
+r = requests.post('https://*.modapi.io/v1/games/{game-id}/mods/{mod-id}/files/multipart', params={
 
 }, headers = headers)
 
@@ -5806,7 +5806,7 @@ print r.json()
 ```
 
 ```java
-URL obj = new URL("https://example.modapi.io/v1/games/{game-id}/mods/{mod-id}/files/multipart");
+URL obj = new URL("https://*.modapi.io/v1/games/{game-id}/mods/{mod-id}/files/multipart");
 HttpURLConnection con = (HttpURLConnection) obj.openConnection();
 con.setRequestMethod("POST");
 int responseCode = con.getResponseCode();
@@ -5859,15 +5859,15 @@ To perform this request, you must be authenticated via one of the following meth
 
 ```shell
 # You can also use wget
-curl -X DELETE https://example.modapi.io/v1/games/{game-id}/mods/{mod-id}/files/multipart?upload_id=123e4567-e89b-12d3-a456-426614174000 \
+curl -X DELETE https://*.modapi.io/v1/games/{game-id}/mods/{mod-id}/files/multipart?upload_id=123e4567-e89b-12d3-a456-426614174000 \
   -H 'Authorization: Bearer {access-token}' \ 
   -H 'Accept: application/json'
 
 ```
 
 ```http
-DELETE https://example.modapi.io/v1/games/{game-id}/mods/{mod-id}/files/multipart?upload_id=123e4567-e89b-12d3-a456-426614174000 HTTP/1.1
-Host: example.modapi.io
+DELETE https://*.modapi.io/v1/games/{game-id}/mods/{mod-id}/files/multipart?upload_id=123e4567-e89b-12d3-a456-426614174000 HTTP/1.1
+Host: *.modapi.io
 
 Accept: application/json
 Authorization: Bearer {access-token}
@@ -5882,7 +5882,7 @@ var headers = {
 };
 
 $.ajax({
-  url: 'https://example.modapi.io/v1/games/{game-id}/mods/{mod-id}/files/multipart',
+  url: 'https://*.modapi.io/v1/games/{game-id}/mods/{mod-id}/files/multipart',
   method: 'delete',
   data: '?upload_id=123e4567-e89b-12d3-a456-426614174000',
   headers: headers,
@@ -5901,7 +5901,7 @@ const headers = {
 
 };
 
-fetch('https://example.modapi.io/v1/games/{game-id}/mods/{mod-id}/files/multipart?upload_id=123e4567-e89b-12d3-a456-426614174000',
+fetch('https://*.modapi.io/v1/games/{game-id}/mods/{mod-id}/files/multipart?upload_id=123e4567-e89b-12d3-a456-426614174000',
 {
   method: 'DELETE',
 
@@ -5921,7 +5921,7 @@ headers = {
   'Accept': 'application/json'
 }
 
-r = requests.delete('https://example.modapi.io/v1/games/{game-id}/mods/{mod-id}/files/multipart', params={
+r = requests.delete('https://*.modapi.io/v1/games/{game-id}/mods/{mod-id}/files/multipart', params={
   'upload_id': '123e4567-e89b-12d3-a456-426614174000'
 }, headers = headers)
 
@@ -5929,7 +5929,7 @@ print r.json()
 ```
 
 ```java
-URL obj = new URL("https://example.modapi.io/v1/games/{game-id}/mods/{mod-id}/files/multipart?upload_id=123e4567-e89b-12d3-a456-426614174000");
+URL obj = new URL("https://*.modapi.io/v1/games/{game-id}/mods/{mod-id}/files/multipart?upload_id=123e4567-e89b-12d3-a456-426614174000");
 HttpURLConnection con = (HttpURLConnection) obj.openConnection();
 con.setRequestMethod("DELETE");
 int responseCode = con.getResponseCode();
@@ -5970,14 +5970,14 @@ To perform this request, you must be authenticated via one of the following meth
 
 ```shell
 # You can also use wget
-curl -X GET https://example.modapi.io/v1/games/{game-id}/mods/{mod-id}/files/multipart/sessions?api_key=YourApiKey \
+curl -X GET https://*.modapi.io/v1/games/{game-id}/mods/{mod-id}/files/multipart/sessions?api_key=YourApiKey \
   -H 'Accept: application/json'
 
 ```
 
 ```http
-GET https://example.modapi.io/v1/games/{game-id}/mods/{mod-id}/files/multipart/sessions?api_key=YourApiKey HTTP/1.1
-Host: example.modapi.io
+GET https://*.modapi.io/v1/games/{game-id}/mods/{mod-id}/files/multipart/sessions?api_key=YourApiKey HTTP/1.1
+Host: *.modapi.io
 
 Accept: application/json
 
@@ -5990,7 +5990,7 @@ var headers = {
 };
 
 $.ajax({
-  url: 'https://example.modapi.io/v1/games/{game-id}/mods/{mod-id}/files/multipart/sessions',
+  url: 'https://*.modapi.io/v1/games/{game-id}/mods/{mod-id}/files/multipart/sessions',
   method: 'get',
   data: '?api_key=YourApiKey',
   headers: headers,
@@ -6008,7 +6008,7 @@ const headers = {
 
 };
 
-fetch('https://example.modapi.io/v1/games/{game-id}/mods/{mod-id}/files/multipart/sessions?api_key=YourApiKey',
+fetch('https://*.modapi.io/v1/games/{game-id}/mods/{mod-id}/files/multipart/sessions?api_key=YourApiKey',
 {
   method: 'GET',
 
@@ -6027,7 +6027,7 @@ headers = {
   'Accept': 'application/json'
 }
 
-r = requests.get('https://example.modapi.io/v1/games/{game-id}/mods/{mod-id}/files/multipart/sessions', params={
+r = requests.get('https://*.modapi.io/v1/games/{game-id}/mods/{mod-id}/files/multipart/sessions', params={
   'api_key': 'YourApiKey'
 }, headers = headers)
 
@@ -6035,7 +6035,7 @@ print r.json()
 ```
 
 ```java
-URL obj = new URL("https://example.modapi.io/v1/games/{game-id}/mods/{mod-id}/files/multipart/sessions?api_key=YourApiKey");
+URL obj = new URL("https://*.modapi.io/v1/games/{game-id}/mods/{mod-id}/files/multipart/sessions?api_key=YourApiKey");
 HttpURLConnection con = (HttpURLConnection) obj.openConnection();
 con.setRequestMethod("GET");
 int responseCode = con.getResponseCode();
@@ -6094,15 +6094,15 @@ To perform this request, you must be authenticated via one of the following meth
 
 ```shell
 # You can also use wget
-curl -X POST https://example.modapi.io/v1/games/{game-id}/mods/{mod-id}/files/multipart/complete?upload_id=123e4567-e89b-12d3-a456-426614174000 \
+curl -X POST https://*.modapi.io/v1/games/{game-id}/mods/{mod-id}/files/multipart/complete?upload_id=123e4567-e89b-12d3-a456-426614174000 \
   -H 'Authorization: Bearer {access-token}' \ 
   -H 'Accept: application/json'
 
 ```
 
 ```http
-POST https://example.modapi.io/v1/games/{game-id}/mods/{mod-id}/files/multipart/complete?upload_id=123e4567-e89b-12d3-a456-426614174000 HTTP/1.1
-Host: example.modapi.io
+POST https://*.modapi.io/v1/games/{game-id}/mods/{mod-id}/files/multipart/complete?upload_id=123e4567-e89b-12d3-a456-426614174000 HTTP/1.1
+Host: *.modapi.io
 
 Accept: application/json
 Authorization: Bearer {access-token}
@@ -6117,7 +6117,7 @@ var headers = {
 };
 
 $.ajax({
-  url: 'https://example.modapi.io/v1/games/{game-id}/mods/{mod-id}/files/multipart/complete',
+  url: 'https://*.modapi.io/v1/games/{game-id}/mods/{mod-id}/files/multipart/complete',
   method: 'post',
   data: '?upload_id=123e4567-e89b-12d3-a456-426614174000',
   headers: headers,
@@ -6136,7 +6136,7 @@ const headers = {
 
 };
 
-fetch('https://example.modapi.io/v1/games/{game-id}/mods/{mod-id}/files/multipart/complete?upload_id=123e4567-e89b-12d3-a456-426614174000',
+fetch('https://*.modapi.io/v1/games/{game-id}/mods/{mod-id}/files/multipart/complete?upload_id=123e4567-e89b-12d3-a456-426614174000',
 {
   method: 'POST',
 
@@ -6156,7 +6156,7 @@ headers = {
   'Accept': 'application/json'
 }
 
-r = requests.post('https://example.modapi.io/v1/games/{game-id}/mods/{mod-id}/files/multipart/complete', params={
+r = requests.post('https://*.modapi.io/v1/games/{game-id}/mods/{mod-id}/files/multipart/complete', params={
   'upload_id': '123e4567-e89b-12d3-a456-426614174000'
 }, headers = headers)
 
@@ -6164,7 +6164,7 @@ print r.json()
 ```
 
 ```java
-URL obj = new URL("https://example.modapi.io/v1/games/{game-id}/mods/{mod-id}/files/multipart/complete?upload_id=123e4567-e89b-12d3-a456-426614174000");
+URL obj = new URL("https://*.modapi.io/v1/games/{game-id}/mods/{mod-id}/files/multipart/complete?upload_id=123e4567-e89b-12d3-a456-426614174000");
 HttpURLConnection con = (HttpURLConnection) obj.openConnection();
 con.setRequestMethod("POST");
 int responseCode = con.getResponseCode();
@@ -6212,7 +6212,7 @@ To perform this request, you must be authenticated via one of the following meth
 
 ```shell
 # You can also use wget
-curl -X POST https://example.modapi.io/v1/games/{game-id}/mods/{mod-id}/subscribe \
+curl -X POST https://*.modapi.io/v1/games/{game-id}/mods/{mod-id}/subscribe \
   -H 'Authorization: Bearer {access-token}' \ 
   -H 'Content-Type: application/x-www-form-urlencoded' \ 
   -H 'Accept: application/json'
@@ -6220,8 +6220,8 @@ curl -X POST https://example.modapi.io/v1/games/{game-id}/mods/{mod-id}/subscrib
 ```
 
 ```http
-POST https://example.modapi.io/v1/games/{game-id}/mods/{mod-id}/subscribe HTTP/1.1
-Host: example.modapi.io
+POST https://*.modapi.io/v1/games/{game-id}/mods/{mod-id}/subscribe HTTP/1.1
+Host: *.modapi.io
 
 Accept: application/json
 Authorization: Bearer {access-token}
@@ -6238,7 +6238,7 @@ var headers = {
 };
 
 $.ajax({
-  url: 'https://example.modapi.io/v1/games/{game-id}/mods/{mod-id}/subscribe',
+  url: 'https://*.modapi.io/v1/games/{game-id}/mods/{mod-id}/subscribe',
   method: 'post',
 
   headers: headers,
@@ -6258,7 +6258,7 @@ const headers = {
 
 };
 
-fetch('https://example.modapi.io/v1/games/{game-id}/mods/{mod-id}/subscribe',
+fetch('https://*.modapi.io/v1/games/{game-id}/mods/{mod-id}/subscribe',
 {
   method: 'POST',
 
@@ -6279,7 +6279,7 @@ headers = {
   'Accept': 'application/json'
 }
 
-r = requests.post('https://example.modapi.io/v1/games/{game-id}/mods/{mod-id}/subscribe', params={
+r = requests.post('https://*.modapi.io/v1/games/{game-id}/mods/{mod-id}/subscribe', params={
 
 }, headers = headers)
 
@@ -6287,7 +6287,7 @@ print r.json()
 ```
 
 ```java
-URL obj = new URL("https://example.modapi.io/v1/games/{game-id}/mods/{mod-id}/subscribe");
+URL obj = new URL("https://*.modapi.io/v1/games/{game-id}/mods/{mod-id}/subscribe");
 HttpURLConnection con = (HttpURLConnection) obj.openConnection();
 con.setRequestMethod("POST");
 int responseCode = con.getResponseCode();
@@ -6388,7 +6388,7 @@ Subscribe the _authenticated user_ to a corresponding mod. No body parameters ar
     "changelog": "VERSION 1.3 -- Changes -- Fixed critical castle floor bug.",
     "metadata_blob": "rogue,hd,high-res,4k,hd textures",
     "download": {
-      "binary_url": "https://example.modapi.io/v1/games/1/mods/1/files/1/download/c489a0354111a4d76640d47f0cdcb294",
+      "binary_url": "https://*.modapi.io/v1/games/1/mods/1/files/1/download/c489a0354111a4d76640d47f0cdcb294",
       "date_expires": 1579316848
     },
     "platforms": [
@@ -6458,7 +6458,7 @@ To perform this request, you must be authenticated via one of the following meth
 
 ```shell
 # You can also use wget
-curl -X DELETE https://example.modapi.io/v1/games/{game-id}/mods/{mod-id}/subscribe \
+curl -X DELETE https://*.modapi.io/v1/games/{game-id}/mods/{mod-id}/subscribe \
   -H 'Authorization: Bearer {access-token}' \ 
   -H 'Content-Type: application/x-www-form-urlencoded' \ 
   -H 'Accept: application/json'
@@ -6466,8 +6466,8 @@ curl -X DELETE https://example.modapi.io/v1/games/{game-id}/mods/{mod-id}/subscr
 ```
 
 ```http
-DELETE https://example.modapi.io/v1/games/{game-id}/mods/{mod-id}/subscribe HTTP/1.1
-Host: example.modapi.io
+DELETE https://*.modapi.io/v1/games/{game-id}/mods/{mod-id}/subscribe HTTP/1.1
+Host: *.modapi.io
 
 Accept: application/json
 Authorization: Bearer {access-token}
@@ -6484,7 +6484,7 @@ var headers = {
 };
 
 $.ajax({
-  url: 'https://example.modapi.io/v1/games/{game-id}/mods/{mod-id}/subscribe',
+  url: 'https://*.modapi.io/v1/games/{game-id}/mods/{mod-id}/subscribe',
   method: 'delete',
 
   headers: headers,
@@ -6504,7 +6504,7 @@ const headers = {
 
 };
 
-fetch('https://example.modapi.io/v1/games/{game-id}/mods/{mod-id}/subscribe',
+fetch('https://*.modapi.io/v1/games/{game-id}/mods/{mod-id}/subscribe',
 {
   method: 'DELETE',
 
@@ -6525,7 +6525,7 @@ headers = {
   'Accept': 'application/json'
 }
 
-r = requests.delete('https://example.modapi.io/v1/games/{game-id}/mods/{mod-id}/subscribe', params={
+r = requests.delete('https://*.modapi.io/v1/games/{game-id}/mods/{mod-id}/subscribe', params={
 
 }, headers = headers)
 
@@ -6533,7 +6533,7 @@ print r.json()
 ```
 
 ```java
-URL obj = new URL("https://example.modapi.io/v1/games/{game-id}/mods/{mod-id}/subscribe");
+URL obj = new URL("https://*.modapi.io/v1/games/{game-id}/mods/{mod-id}/subscribe");
 HttpURLConnection con = (HttpURLConnection) obj.openConnection();
 con.setRequestMethod("DELETE");
 int responseCode = con.getResponseCode();
@@ -6576,14 +6576,14 @@ To perform this request, you must be authenticated via one of the following meth
 
 ```shell
 # You can also use wget
-curl -X GET https://example.modapi.io/v1/games/{game-id}/guides/{guide-id}/comments?api_key=YourApiKey \
+curl -X GET https://*.modapi.io/v1/games/{game-id}/guides/{guide-id}/comments?api_key=YourApiKey \
   -H 'Accept: application/json'
 
 ```
 
 ```http
-GET https://example.modapi.io/v1/games/{game-id}/guides/{guide-id}/comments?api_key=YourApiKey HTTP/1.1
-Host: example.modapi.io
+GET https://*.modapi.io/v1/games/{game-id}/guides/{guide-id}/comments?api_key=YourApiKey HTTP/1.1
+Host: *.modapi.io
 
 Accept: application/json
 
@@ -6596,7 +6596,7 @@ var headers = {
 };
 
 $.ajax({
-  url: 'https://example.modapi.io/v1/games/{game-id}/guides/{guide-id}/comments',
+  url: 'https://*.modapi.io/v1/games/{game-id}/guides/{guide-id}/comments',
   method: 'get',
   data: '?api_key=YourApiKey',
   headers: headers,
@@ -6614,7 +6614,7 @@ const headers = {
 
 };
 
-fetch('https://example.modapi.io/v1/games/{game-id}/guides/{guide-id}/comments?api_key=YourApiKey',
+fetch('https://*.modapi.io/v1/games/{game-id}/guides/{guide-id}/comments?api_key=YourApiKey',
 {
   method: 'GET',
 
@@ -6633,7 +6633,7 @@ headers = {
   'Accept': 'application/json'
 }
 
-r = requests.get('https://example.modapi.io/v1/games/{game-id}/guides/{guide-id}/comments', params={
+r = requests.get('https://*.modapi.io/v1/games/{game-id}/guides/{guide-id}/comments', params={
   'api_key': 'YourApiKey'
 }, headers = headers)
 
@@ -6641,7 +6641,7 @@ print r.json()
 ```
 
 ```java
-URL obj = new URL("https://example.modapi.io/v1/games/{game-id}/guides/{guide-id}/comments?api_key=YourApiKey");
+URL obj = new URL("https://*.modapi.io/v1/games/{game-id}/guides/{guide-id}/comments?api_key=YourApiKey");
 HttpURLConnection con = (HttpURLConnection) obj.openConnection();
 con.setRequestMethod("GET");
 int responseCode = con.getResponseCode();
@@ -6728,7 +6728,7 @@ To perform this request, you must be authenticated via one of the following meth
 
 ```shell
 # You can also use wget
-curl -X POST https://example.modapi.io/v1/games/{game-id}/guides/{guide-id}/comments \
+curl -X POST https://*.modapi.io/v1/games/{game-id}/guides/{guide-id}/comments \
   -H 'Authorization: Bearer {access-token}' \ 
   -H 'Content-Type: application/x-www-form-urlencoded' \ 
   -H 'Accept: application/json' \
@@ -6738,8 +6738,8 @@ curl -X POST https://example.modapi.io/v1/games/{game-id}/guides/{guide-id}/comm
 ```
 
 ```http
-POST https://example.modapi.io/v1/games/{game-id}/guides/{guide-id}/comments HTTP/1.1
-Host: example.modapi.io
+POST https://*.modapi.io/v1/games/{game-id}/guides/{guide-id}/comments HTTP/1.1
+Host: *.modapi.io
 Content-Type: application/x-www-form-urlencoded
 Accept: application/json
 Authorization: Bearer {access-token}
@@ -6755,7 +6755,7 @@ var headers = {
 };
 
 $.ajax({
-  url: 'https://example.modapi.io/v1/games/{game-id}/guides/{guide-id}/comments',
+  url: 'https://*.modapi.io/v1/games/{game-id}/guides/{guide-id}/comments',
   method: 'post',
 
   headers: headers,
@@ -6778,7 +6778,7 @@ const headers = {
 
 };
 
-fetch('https://example.modapi.io/v1/games/{game-id}/guides/{guide-id}/comments',
+fetch('https://*.modapi.io/v1/games/{game-id}/guides/{guide-id}/comments',
 {
   method: 'POST',
   body: inputBody,
@@ -6799,7 +6799,7 @@ headers = {
   'Accept': 'application/json'
 }
 
-r = requests.post('https://example.modapi.io/v1/games/{game-id}/guides/{guide-id}/comments', params={
+r = requests.post('https://*.modapi.io/v1/games/{game-id}/guides/{guide-id}/comments', params={
 
 }, headers = headers)
 
@@ -6807,7 +6807,7 @@ print r.json()
 ```
 
 ```java
-URL obj = new URL("https://example.modapi.io/v1/games/{game-id}/guides/{guide-id}/comments");
+URL obj = new URL("https://*.modapi.io/v1/games/{game-id}/guides/{guide-id}/comments");
 HttpURLConnection con = (HttpURLConnection) obj.openConnection();
 con.setRequestMethod("POST");
 int responseCode = con.getResponseCode();
@@ -6887,14 +6887,14 @@ To perform this request, you must be authenticated via one of the following meth
 
 ```shell
 # You can also use wget
-curl -X GET https://example.modapi.io/v1/games/{game-id}/guides/{guide-id}/comments/{comment-id}?api_key=YourApiKey \
+curl -X GET https://*.modapi.io/v1/games/{game-id}/guides/{guide-id}/comments/{comment-id}?api_key=YourApiKey \
   -H 'Accept: application/json'
 
 ```
 
 ```http
-GET https://example.modapi.io/v1/games/{game-id}/guides/{guide-id}/comments/{comment-id}?api_key=YourApiKey HTTP/1.1
-Host: example.modapi.io
+GET https://*.modapi.io/v1/games/{game-id}/guides/{guide-id}/comments/{comment-id}?api_key=YourApiKey HTTP/1.1
+Host: *.modapi.io
 
 Accept: application/json
 
@@ -6907,7 +6907,7 @@ var headers = {
 };
 
 $.ajax({
-  url: 'https://example.modapi.io/v1/games/{game-id}/guides/{guide-id}/comments/{comment-id}',
+  url: 'https://*.modapi.io/v1/games/{game-id}/guides/{guide-id}/comments/{comment-id}',
   method: 'get',
   data: '?api_key=YourApiKey',
   headers: headers,
@@ -6925,7 +6925,7 @@ const headers = {
 
 };
 
-fetch('https://example.modapi.io/v1/games/{game-id}/guides/{guide-id}/comments/{comment-id}?api_key=YourApiKey',
+fetch('https://*.modapi.io/v1/games/{game-id}/guides/{guide-id}/comments/{comment-id}?api_key=YourApiKey',
 {
   method: 'GET',
 
@@ -6944,7 +6944,7 @@ headers = {
   'Accept': 'application/json'
 }
 
-r = requests.get('https://example.modapi.io/v1/games/{game-id}/guides/{guide-id}/comments/{comment-id}', params={
+r = requests.get('https://*.modapi.io/v1/games/{game-id}/guides/{guide-id}/comments/{comment-id}', params={
   'api_key': 'YourApiKey'
 }, headers = headers)
 
@@ -6952,7 +6952,7 @@ print r.json()
 ```
 
 ```java
-URL obj = new URL("https://example.modapi.io/v1/games/{game-id}/guides/{guide-id}/comments/{comment-id}?api_key=YourApiKey");
+URL obj = new URL("https://*.modapi.io/v1/games/{game-id}/guides/{guide-id}/comments/{comment-id}?api_key=YourApiKey");
 HttpURLConnection con = (HttpURLConnection) obj.openConnection();
 con.setRequestMethod("GET");
 int responseCode = con.getResponseCode();
@@ -7020,7 +7020,7 @@ To perform this request, you must be authenticated via one of the following meth
 
 ```shell
 # You can also use wget
-curl -X PUT https://example.modapi.io/v1/games/{game-id}/guides/{guide-id}/comments/{comment-id} \
+curl -X PUT https://*.modapi.io/v1/games/{game-id}/guides/{guide-id}/comments/{comment-id} \
   -H 'Authorization: Bearer {access-token}' \ 
   -H 'Content-Type: application/x-www-form-urlencoded' \ 
   -H 'Accept: application/json'
@@ -7029,8 +7029,8 @@ curl -X PUT https://example.modapi.io/v1/games/{game-id}/guides/{guide-id}/comme
 ```
 
 ```http
-PUT https://example.modapi.io/v1/games/{game-id}/guides/{guide-id}/comments/{comment-id} HTTP/1.1
-Host: example.modapi.io
+PUT https://*.modapi.io/v1/games/{game-id}/guides/{guide-id}/comments/{comment-id} HTTP/1.1
+Host: *.modapi.io
 Content-Type: application/x-www-form-urlencoded
 Accept: application/json
 Authorization: Bearer {access-token}
@@ -7046,7 +7046,7 @@ var headers = {
 };
 
 $.ajax({
-  url: 'https://example.modapi.io/v1/games/{game-id}/guides/{guide-id}/comments/{comment-id}',
+  url: 'https://*.modapi.io/v1/games/{game-id}/guides/{guide-id}/comments/{comment-id}',
   method: 'put',
 
   headers: headers,
@@ -7068,7 +7068,7 @@ const headers = {
 
 };
 
-fetch('https://example.modapi.io/v1/games/{game-id}/guides/{guide-id}/comments/{comment-id}',
+fetch('https://*.modapi.io/v1/games/{game-id}/guides/{guide-id}/comments/{comment-id}',
 {
   method: 'PUT',
   body: inputBody,
@@ -7089,7 +7089,7 @@ headers = {
   'Accept': 'application/json'
 }
 
-r = requests.put('https://example.modapi.io/v1/games/{game-id}/guides/{guide-id}/comments/{comment-id}', params={
+r = requests.put('https://*.modapi.io/v1/games/{game-id}/guides/{guide-id}/comments/{comment-id}', params={
 
 }, headers = headers)
 
@@ -7097,7 +7097,7 @@ print r.json()
 ```
 
 ```java
-URL obj = new URL("https://example.modapi.io/v1/games/{game-id}/guides/{guide-id}/comments/{comment-id}");
+URL obj = new URL("https://*.modapi.io/v1/games/{game-id}/guides/{guide-id}/comments/{comment-id}");
 HttpURLConnection con = (HttpURLConnection) obj.openConnection();
 con.setRequestMethod("PUT");
 int responseCode = con.getResponseCode();
@@ -7169,7 +7169,7 @@ To perform this request, you must be authenticated via one of the following meth
 
 ```shell
 # You can also use wget
-curl -X DELETE https://example.modapi.io/v1/games/{game-id}/guides/{guide-id}/comments/{comment-id} \
+curl -X DELETE https://*.modapi.io/v1/games/{game-id}/guides/{guide-id}/comments/{comment-id} \
   -H 'Authorization: Bearer {access-token}' \ 
   -H 'Content-Type: application/x-www-form-urlencoded' \ 
   -H 'Accept: application/json'
@@ -7177,8 +7177,8 @@ curl -X DELETE https://example.modapi.io/v1/games/{game-id}/guides/{guide-id}/co
 ```
 
 ```http
-DELETE https://example.modapi.io/v1/games/{game-id}/guides/{guide-id}/comments/{comment-id} HTTP/1.1
-Host: example.modapi.io
+DELETE https://*.modapi.io/v1/games/{game-id}/guides/{guide-id}/comments/{comment-id} HTTP/1.1
+Host: *.modapi.io
 
 Accept: application/json
 Authorization: Bearer {access-token}
@@ -7195,7 +7195,7 @@ var headers = {
 };
 
 $.ajax({
-  url: 'https://example.modapi.io/v1/games/{game-id}/guides/{guide-id}/comments/{comment-id}',
+  url: 'https://*.modapi.io/v1/games/{game-id}/guides/{guide-id}/comments/{comment-id}',
   method: 'delete',
 
   headers: headers,
@@ -7215,7 +7215,7 @@ const headers = {
 
 };
 
-fetch('https://example.modapi.io/v1/games/{game-id}/guides/{guide-id}/comments/{comment-id}',
+fetch('https://*.modapi.io/v1/games/{game-id}/guides/{guide-id}/comments/{comment-id}',
 {
   method: 'DELETE',
 
@@ -7236,7 +7236,7 @@ headers = {
   'Accept': 'application/json'
 }
 
-r = requests.delete('https://example.modapi.io/v1/games/{game-id}/guides/{guide-id}/comments/{comment-id}', params={
+r = requests.delete('https://*.modapi.io/v1/games/{game-id}/guides/{guide-id}/comments/{comment-id}', params={
 
 }, headers = headers)
 
@@ -7244,7 +7244,7 @@ print r.json()
 ```
 
 ```java
-URL obj = new URL("https://example.modapi.io/v1/games/{game-id}/guides/{guide-id}/comments/{comment-id}");
+URL obj = new URL("https://*.modapi.io/v1/games/{game-id}/guides/{guide-id}/comments/{comment-id}");
 HttpURLConnection con = (HttpURLConnection) obj.openConnection();
 con.setRequestMethod("DELETE");
 int responseCode = con.getResponseCode();
@@ -7285,14 +7285,14 @@ To perform this request, you must be authenticated via one of the following meth
 
 ```shell
 # You can also use wget
-curl -X GET https://example.modapi.io/v1/games/{game-id}/mods/{mod-id}/comments?api_key=YourApiKey \
+curl -X GET https://*.modapi.io/v1/games/{game-id}/mods/{mod-id}/comments?api_key=YourApiKey \
   -H 'Accept: application/json'
 
 ```
 
 ```http
-GET https://example.modapi.io/v1/games/{game-id}/mods/{mod-id}/comments?api_key=YourApiKey HTTP/1.1
-Host: example.modapi.io
+GET https://*.modapi.io/v1/games/{game-id}/mods/{mod-id}/comments?api_key=YourApiKey HTTP/1.1
+Host: *.modapi.io
 
 Accept: application/json
 
@@ -7305,7 +7305,7 @@ var headers = {
 };
 
 $.ajax({
-  url: 'https://example.modapi.io/v1/games/{game-id}/mods/{mod-id}/comments',
+  url: 'https://*.modapi.io/v1/games/{game-id}/mods/{mod-id}/comments',
   method: 'get',
   data: '?api_key=YourApiKey',
   headers: headers,
@@ -7323,7 +7323,7 @@ const headers = {
 
 };
 
-fetch('https://example.modapi.io/v1/games/{game-id}/mods/{mod-id}/comments?api_key=YourApiKey',
+fetch('https://*.modapi.io/v1/games/{game-id}/mods/{mod-id}/comments?api_key=YourApiKey',
 {
   method: 'GET',
 
@@ -7342,7 +7342,7 @@ headers = {
   'Accept': 'application/json'
 }
 
-r = requests.get('https://example.modapi.io/v1/games/{game-id}/mods/{mod-id}/comments', params={
+r = requests.get('https://*.modapi.io/v1/games/{game-id}/mods/{mod-id}/comments', params={
   'api_key': 'YourApiKey'
 }, headers = headers)
 
@@ -7350,7 +7350,7 @@ print r.json()
 ```
 
 ```java
-URL obj = new URL("https://example.modapi.io/v1/games/{game-id}/mods/{mod-id}/comments?api_key=YourApiKey");
+URL obj = new URL("https://*.modapi.io/v1/games/{game-id}/mods/{mod-id}/comments?api_key=YourApiKey");
 HttpURLConnection con = (HttpURLConnection) obj.openConnection();
 con.setRequestMethod("GET");
 int responseCode = con.getResponseCode();
@@ -7438,7 +7438,7 @@ To perform this request, you must be authenticated via one of the following meth
 
 ```shell
 # You can also use wget
-curl -X POST https://example.modapi.io/v1/games/{game-id}/mods/{mod-id}/comments \
+curl -X POST https://*.modapi.io/v1/games/{game-id}/mods/{mod-id}/comments \
   -H 'Authorization: Bearer {access-token}' \ 
   -H 'Content-Type: application/x-www-form-urlencoded' \ 
   -H 'Accept: application/json' \
@@ -7448,8 +7448,8 @@ curl -X POST https://example.modapi.io/v1/games/{game-id}/mods/{mod-id}/comments
 ```
 
 ```http
-POST https://example.modapi.io/v1/games/{game-id}/mods/{mod-id}/comments HTTP/1.1
-Host: example.modapi.io
+POST https://*.modapi.io/v1/games/{game-id}/mods/{mod-id}/comments HTTP/1.1
+Host: *.modapi.io
 Content-Type: application/x-www-form-urlencoded
 Accept: application/json
 Authorization: Bearer {access-token}
@@ -7465,7 +7465,7 @@ var headers = {
 };
 
 $.ajax({
-  url: 'https://example.modapi.io/v1/games/{game-id}/mods/{mod-id}/comments',
+  url: 'https://*.modapi.io/v1/games/{game-id}/mods/{mod-id}/comments',
   method: 'post',
 
   headers: headers,
@@ -7488,7 +7488,7 @@ const headers = {
 
 };
 
-fetch('https://example.modapi.io/v1/games/{game-id}/mods/{mod-id}/comments',
+fetch('https://*.modapi.io/v1/games/{game-id}/mods/{mod-id}/comments',
 {
   method: 'POST',
   body: inputBody,
@@ -7509,7 +7509,7 @@ headers = {
   'Accept': 'application/json'
 }
 
-r = requests.post('https://example.modapi.io/v1/games/{game-id}/mods/{mod-id}/comments', params={
+r = requests.post('https://*.modapi.io/v1/games/{game-id}/mods/{mod-id}/comments', params={
 
 }, headers = headers)
 
@@ -7517,7 +7517,7 @@ print r.json()
 ```
 
 ```java
-URL obj = new URL("https://example.modapi.io/v1/games/{game-id}/mods/{mod-id}/comments");
+URL obj = new URL("https://*.modapi.io/v1/games/{game-id}/mods/{mod-id}/comments");
 HttpURLConnection con = (HttpURLConnection) obj.openConnection();
 con.setRequestMethod("POST");
 int responseCode = con.getResponseCode();
@@ -7597,14 +7597,14 @@ To perform this request, you must be authenticated via one of the following meth
 
 ```shell
 # You can also use wget
-curl -X GET https://example.modapi.io/v1/games/{game-id}/mods/{mod-id}/comments/{comment-id}?api_key=YourApiKey \
+curl -X GET https://*.modapi.io/v1/games/{game-id}/mods/{mod-id}/comments/{comment-id}?api_key=YourApiKey \
   -H 'Accept: application/json'
 
 ```
 
 ```http
-GET https://example.modapi.io/v1/games/{game-id}/mods/{mod-id}/comments/{comment-id}?api_key=YourApiKey HTTP/1.1
-Host: example.modapi.io
+GET https://*.modapi.io/v1/games/{game-id}/mods/{mod-id}/comments/{comment-id}?api_key=YourApiKey HTTP/1.1
+Host: *.modapi.io
 
 Accept: application/json
 
@@ -7617,7 +7617,7 @@ var headers = {
 };
 
 $.ajax({
-  url: 'https://example.modapi.io/v1/games/{game-id}/mods/{mod-id}/comments/{comment-id}',
+  url: 'https://*.modapi.io/v1/games/{game-id}/mods/{mod-id}/comments/{comment-id}',
   method: 'get',
   data: '?api_key=YourApiKey',
   headers: headers,
@@ -7635,7 +7635,7 @@ const headers = {
 
 };
 
-fetch('https://example.modapi.io/v1/games/{game-id}/mods/{mod-id}/comments/{comment-id}?api_key=YourApiKey',
+fetch('https://*.modapi.io/v1/games/{game-id}/mods/{mod-id}/comments/{comment-id}?api_key=YourApiKey',
 {
   method: 'GET',
 
@@ -7654,7 +7654,7 @@ headers = {
   'Accept': 'application/json'
 }
 
-r = requests.get('https://example.modapi.io/v1/games/{game-id}/mods/{mod-id}/comments/{comment-id}', params={
+r = requests.get('https://*.modapi.io/v1/games/{game-id}/mods/{mod-id}/comments/{comment-id}', params={
   'api_key': 'YourApiKey'
 }, headers = headers)
 
@@ -7662,7 +7662,7 @@ print r.json()
 ```
 
 ```java
-URL obj = new URL("https://example.modapi.io/v1/games/{game-id}/mods/{mod-id}/comments/{comment-id}?api_key=YourApiKey");
+URL obj = new URL("https://*.modapi.io/v1/games/{game-id}/mods/{mod-id}/comments/{comment-id}?api_key=YourApiKey");
 HttpURLConnection con = (HttpURLConnection) obj.openConnection();
 con.setRequestMethod("GET");
 int responseCode = con.getResponseCode();
@@ -7730,7 +7730,7 @@ To perform this request, you must be authenticated via one of the following meth
 
 ```shell
 # You can also use wget
-curl -X PUT https://example.modapi.io/v1/games/{game-id}/mods/{mod-id}/comments/{comment-id} \
+curl -X PUT https://*.modapi.io/v1/games/{game-id}/mods/{mod-id}/comments/{comment-id} \
   -H 'Authorization: Bearer {access-token}' \ 
   -H 'Content-Type: application/x-www-form-urlencoded' \ 
   -H 'Accept: application/json'
@@ -7739,8 +7739,8 @@ curl -X PUT https://example.modapi.io/v1/games/{game-id}/mods/{mod-id}/comments/
 ```
 
 ```http
-PUT https://example.modapi.io/v1/games/{game-id}/mods/{mod-id}/comments/{comment-id} HTTP/1.1
-Host: example.modapi.io
+PUT https://*.modapi.io/v1/games/{game-id}/mods/{mod-id}/comments/{comment-id} HTTP/1.1
+Host: *.modapi.io
 Content-Type: application/x-www-form-urlencoded
 Accept: application/json
 Authorization: Bearer {access-token}
@@ -7756,7 +7756,7 @@ var headers = {
 };
 
 $.ajax({
-  url: 'https://example.modapi.io/v1/games/{game-id}/mods/{mod-id}/comments/{comment-id}',
+  url: 'https://*.modapi.io/v1/games/{game-id}/mods/{mod-id}/comments/{comment-id}',
   method: 'put',
 
   headers: headers,
@@ -7778,7 +7778,7 @@ const headers = {
 
 };
 
-fetch('https://example.modapi.io/v1/games/{game-id}/mods/{mod-id}/comments/{comment-id}',
+fetch('https://*.modapi.io/v1/games/{game-id}/mods/{mod-id}/comments/{comment-id}',
 {
   method: 'PUT',
   body: inputBody,
@@ -7799,7 +7799,7 @@ headers = {
   'Accept': 'application/json'
 }
 
-r = requests.put('https://example.modapi.io/v1/games/{game-id}/mods/{mod-id}/comments/{comment-id}', params={
+r = requests.put('https://*.modapi.io/v1/games/{game-id}/mods/{mod-id}/comments/{comment-id}', params={
 
 }, headers = headers)
 
@@ -7807,7 +7807,7 @@ print r.json()
 ```
 
 ```java
-URL obj = new URL("https://example.modapi.io/v1/games/{game-id}/mods/{mod-id}/comments/{comment-id}");
+URL obj = new URL("https://*.modapi.io/v1/games/{game-id}/mods/{mod-id}/comments/{comment-id}");
 HttpURLConnection con = (HttpURLConnection) obj.openConnection();
 con.setRequestMethod("PUT");
 int responseCode = con.getResponseCode();
@@ -7879,7 +7879,7 @@ To perform this request, you must be authenticated via one of the following meth
 
 ```shell
 # You can also use wget
-curl -X DELETE https://example.modapi.io/v1/games/{game-id}/mods/{mod-id}/comments/{comment-id} \
+curl -X DELETE https://*.modapi.io/v1/games/{game-id}/mods/{mod-id}/comments/{comment-id} \
   -H 'Authorization: Bearer {access-token}' \ 
   -H 'Content-Type: application/x-www-form-urlencoded' \ 
   -H 'Accept: application/json'
@@ -7887,8 +7887,8 @@ curl -X DELETE https://example.modapi.io/v1/games/{game-id}/mods/{mod-id}/commen
 ```
 
 ```http
-DELETE https://example.modapi.io/v1/games/{game-id}/mods/{mod-id}/comments/{comment-id} HTTP/1.1
-Host: example.modapi.io
+DELETE https://*.modapi.io/v1/games/{game-id}/mods/{mod-id}/comments/{comment-id} HTTP/1.1
+Host: *.modapi.io
 
 Accept: application/json
 Authorization: Bearer {access-token}
@@ -7905,7 +7905,7 @@ var headers = {
 };
 
 $.ajax({
-  url: 'https://example.modapi.io/v1/games/{game-id}/mods/{mod-id}/comments/{comment-id}',
+  url: 'https://*.modapi.io/v1/games/{game-id}/mods/{mod-id}/comments/{comment-id}',
   method: 'delete',
 
   headers: headers,
@@ -7925,7 +7925,7 @@ const headers = {
 
 };
 
-fetch('https://example.modapi.io/v1/games/{game-id}/mods/{mod-id}/comments/{comment-id}',
+fetch('https://*.modapi.io/v1/games/{game-id}/mods/{mod-id}/comments/{comment-id}',
 {
   method: 'DELETE',
 
@@ -7946,7 +7946,7 @@ headers = {
   'Accept': 'application/json'
 }
 
-r = requests.delete('https://example.modapi.io/v1/games/{game-id}/mods/{mod-id}/comments/{comment-id}', params={
+r = requests.delete('https://*.modapi.io/v1/games/{game-id}/mods/{mod-id}/comments/{comment-id}', params={
 
 }, headers = headers)
 
@@ -7954,7 +7954,7 @@ print r.json()
 ```
 
 ```java
-URL obj = new URL("https://example.modapi.io/v1/games/{game-id}/mods/{mod-id}/comments/{comment-id}");
+URL obj = new URL("https://*.modapi.io/v1/games/{game-id}/mods/{mod-id}/comments/{comment-id}");
 HttpURLConnection con = (HttpURLConnection) obj.openConnection();
 con.setRequestMethod("DELETE");
 int responseCode = con.getResponseCode();
@@ -7995,7 +7995,7 @@ To perform this request, you must be authenticated via one of the following meth
 
 ```shell
 # You can also use wget
-curl -X POST https://example.modapi.io/v1/games/{game-id}/mods/{mod-id}/comments/{comment-id}/karma \
+curl -X POST https://*.modapi.io/v1/games/{game-id}/mods/{mod-id}/comments/{comment-id}/karma \
   -H 'Authorization: Bearer {access-token}' \ 
   -H 'Content-Type: application/x-www-form-urlencoded' \ 
   -H 'Accept: application/json' \
@@ -8004,8 +8004,8 @@ curl -X POST https://example.modapi.io/v1/games/{game-id}/mods/{mod-id}/comments
 ```
 
 ```http
-POST https://example.modapi.io/v1/games/{game-id}/mods/{mod-id}/comments/{comment-id}/karma HTTP/1.1
-Host: example.modapi.io
+POST https://*.modapi.io/v1/games/{game-id}/mods/{mod-id}/comments/{comment-id}/karma HTTP/1.1
+Host: *.modapi.io
 Content-Type: application/x-www-form-urlencoded
 Accept: application/json
 Authorization: Bearer {access-token}
@@ -8021,7 +8021,7 @@ var headers = {
 };
 
 $.ajax({
-  url: 'https://example.modapi.io/v1/games/{game-id}/mods/{mod-id}/comments/{comment-id}/karma',
+  url: 'https://*.modapi.io/v1/games/{game-id}/mods/{mod-id}/comments/{comment-id}/karma',
   method: 'post',
 
   headers: headers,
@@ -8043,7 +8043,7 @@ const headers = {
 
 };
 
-fetch('https://example.modapi.io/v1/games/{game-id}/mods/{mod-id}/comments/{comment-id}/karma',
+fetch('https://*.modapi.io/v1/games/{game-id}/mods/{mod-id}/comments/{comment-id}/karma',
 {
   method: 'POST',
   body: inputBody,
@@ -8064,7 +8064,7 @@ headers = {
   'Accept': 'application/json'
 }
 
-r = requests.post('https://example.modapi.io/v1/games/{game-id}/mods/{mod-id}/comments/{comment-id}/karma', params={
+r = requests.post('https://*.modapi.io/v1/games/{game-id}/mods/{mod-id}/comments/{comment-id}/karma', params={
 
 }, headers = headers)
 
@@ -8072,7 +8072,7 @@ print r.json()
 ```
 
 ```java
-URL obj = new URL("https://example.modapi.io/v1/games/{game-id}/mods/{mod-id}/comments/{comment-id}/karma");
+URL obj = new URL("https://*.modapi.io/v1/games/{game-id}/mods/{mod-id}/comments/{comment-id}/karma");
 HttpURLConnection con = (HttpURLConnection) obj.openConnection();
 con.setRequestMethod("POST");
 int responseCode = con.getResponseCode();
@@ -8146,7 +8146,7 @@ To perform this request, you must be authenticated via one of the following meth
 
 ```shell
 # You can also use wget
-curl -X POST https://example.modapi.io/v1/games/{game-id}/media \
+curl -X POST https://*.modapi.io/v1/games/{game-id}/media \
   -H 'Authorization: Bearer {access-token}' \ 
   -H 'Content-Type: multipart/form-data' \ 
   -H 'Accept: application/json' \
@@ -8155,8 +8155,8 @@ curl -X POST https://example.modapi.io/v1/games/{game-id}/media \
 ```
 
 ```http
-POST https://example.modapi.io/v1/games/{game-id}/media HTTP/1.1
-Host: example.modapi.io
+POST https://*.modapi.io/v1/games/{game-id}/media HTTP/1.1
+Host: *.modapi.io
 Content-Type: multipart/form-data
 Accept: application/json
 Authorization: Bearer {access-token}
@@ -8172,7 +8172,7 @@ var headers = {
 };
 
 $.ajax({
-  url: 'https://example.modapi.io/v1/games/{game-id}/media',
+  url: 'https://*.modapi.io/v1/games/{game-id}/media',
   method: 'post',
 
   headers: headers,
@@ -8196,7 +8196,7 @@ const headers = {
 
 };
 
-fetch('https://example.modapi.io/v1/games/{game-id}/media',
+fetch('https://*.modapi.io/v1/games/{game-id}/media',
 {
   method: 'POST',
   body: inputBody,
@@ -8217,7 +8217,7 @@ headers = {
   'Accept': 'application/json'
 }
 
-r = requests.post('https://example.modapi.io/v1/games/{game-id}/media', params={
+r = requests.post('https://*.modapi.io/v1/games/{game-id}/media', params={
 
 }, headers = headers)
 
@@ -8225,7 +8225,7 @@ print r.json()
 ```
 
 ```java
-URL obj = new URL("https://example.modapi.io/v1/games/{game-id}/media");
+URL obj = new URL("https://*.modapi.io/v1/games/{game-id}/media");
 HttpURLConnection con = (HttpURLConnection) obj.openConnection();
 con.setRequestMethod("POST");
 int responseCode = con.getResponseCode();
@@ -8276,7 +8276,7 @@ To perform this request, you must be authenticated via one of the following meth
 
 ```shell
 # You can also use wget
-curl -X POST https://example.modapi.io/v1/games/{game-id}/mods/{mod-id}/media \
+curl -X POST https://*.modapi.io/v1/games/{game-id}/mods/{mod-id}/media \
   -H 'Authorization: Bearer {access-token}' \ 
   -H 'Content-Type: multipart/form-data' \ 
   -H 'Accept: application/json' \
@@ -8290,8 +8290,8 @@ curl -X POST https://example.modapi.io/v1/games/{game-id}/mods/{mod-id}/media \
 ```
 
 ```http
-POST https://example.modapi.io/v1/games/{game-id}/mods/{mod-id}/media HTTP/1.1
-Host: example.modapi.io
+POST https://*.modapi.io/v1/games/{game-id}/mods/{mod-id}/media HTTP/1.1
+Host: *.modapi.io
 Content-Type: multipart/form-data
 Accept: application/json
 Authorization: Bearer {access-token}
@@ -8307,7 +8307,7 @@ var headers = {
 };
 
 $.ajax({
-  url: 'https://example.modapi.io/v1/games/{game-id}/mods/{mod-id}/media',
+  url: 'https://*.modapi.io/v1/games/{game-id}/mods/{mod-id}/media',
   method: 'post',
 
   headers: headers,
@@ -8334,7 +8334,7 @@ const headers = {
 
 };
 
-fetch('https://example.modapi.io/v1/games/{game-id}/mods/{mod-id}/media',
+fetch('https://*.modapi.io/v1/games/{game-id}/mods/{mod-id}/media',
 {
   method: 'POST',
   body: inputBody,
@@ -8355,7 +8355,7 @@ headers = {
   'Accept': 'application/json'
 }
 
-r = requests.post('https://example.modapi.io/v1/games/{game-id}/mods/{mod-id}/media', params={
+r = requests.post('https://*.modapi.io/v1/games/{game-id}/mods/{mod-id}/media', params={
 
 }, headers = headers)
 
@@ -8363,7 +8363,7 @@ print r.json()
 ```
 
 ```java
-URL obj = new URL("https://example.modapi.io/v1/games/{game-id}/mods/{mod-id}/media");
+URL obj = new URL("https://*.modapi.io/v1/games/{game-id}/mods/{mod-id}/media");
 HttpURLConnection con = (HttpURLConnection) obj.openConnection();
 con.setRequestMethod("POST");
 int responseCode = con.getResponseCode();
@@ -8422,7 +8422,7 @@ To perform this request, you must be authenticated via one of the following meth
 
 ```shell
 # You can also use wget
-curl -X DELETE https://example.modapi.io/v1/games/{game-id}/mods/{mod-id}/media \
+curl -X DELETE https://*.modapi.io/v1/games/{game-id}/mods/{mod-id}/media \
   -H 'Authorization: Bearer {access-token}' \ 
   -H 'Content-Type: application/x-www-form-urlencoded' \ 
   -H 'Accept: application/json' \
@@ -8433,8 +8433,8 @@ curl -X DELETE https://example.modapi.io/v1/games/{game-id}/mods/{mod-id}/media 
 ```
 
 ```http
-DELETE https://example.modapi.io/v1/games/{game-id}/mods/{mod-id}/media HTTP/1.1
-Host: example.modapi.io
+DELETE https://*.modapi.io/v1/games/{game-id}/mods/{mod-id}/media HTTP/1.1
+Host: *.modapi.io
 Content-Type: application/x-www-form-urlencoded
 Accept: application/json
 Authorization: Bearer {access-token}
@@ -8450,7 +8450,7 @@ var headers = {
 };
 
 $.ajax({
-  url: 'https://example.modapi.io/v1/games/{game-id}/mods/{mod-id}/media',
+  url: 'https://*.modapi.io/v1/games/{game-id}/mods/{mod-id}/media',
   method: 'delete',
 
   headers: headers,
@@ -8474,7 +8474,7 @@ const headers = {
 
 };
 
-fetch('https://example.modapi.io/v1/games/{game-id}/mods/{mod-id}/media',
+fetch('https://*.modapi.io/v1/games/{game-id}/mods/{mod-id}/media',
 {
   method: 'DELETE',
   body: inputBody,
@@ -8495,7 +8495,7 @@ headers = {
   'Accept': 'application/json'
 }
 
-r = requests.delete('https://example.modapi.io/v1/games/{game-id}/mods/{mod-id}/media', params={
+r = requests.delete('https://*.modapi.io/v1/games/{game-id}/mods/{mod-id}/media', params={
 
 }, headers = headers)
 
@@ -8503,7 +8503,7 @@ print r.json()
 ```
 
 ```java
-URL obj = new URL("https://example.modapi.io/v1/games/{game-id}/mods/{mod-id}/media");
+URL obj = new URL("https://*.modapi.io/v1/games/{game-id}/mods/{mod-id}/media");
 HttpURLConnection con = (HttpURLConnection) obj.openConnection();
 con.setRequestMethod("DELETE");
 int responseCode = con.getResponseCode();
@@ -8552,7 +8552,7 @@ To perform this request, you must be authenticated via one of the following meth
 
 ```shell
 # You can also use wget
-curl -X PUT https://example.modapi.io/v1/games/{game-id}/mods/{mod-id}/media/reorder \
+curl -X PUT https://*.modapi.io/v1/games/{game-id}/mods/{mod-id}/media/reorder \
   -H 'Authorization: Bearer {access-token}' \ 
   -H 'Content-Type: application/x-www-form-urlencoded' \ 
   -H 'Accept: application/json'
@@ -8563,8 +8563,8 @@ curl -X PUT https://example.modapi.io/v1/games/{game-id}/mods/{mod-id}/media/reo
 ```
 
 ```http
-PUT https://example.modapi.io/v1/games/{game-id}/mods/{mod-id}/media/reorder HTTP/1.1
-Host: example.modapi.io
+PUT https://*.modapi.io/v1/games/{game-id}/mods/{mod-id}/media/reorder HTTP/1.1
+Host: *.modapi.io
 Content-Type: application/x-www-form-urlencoded
 Accept: application/json
 Authorization: Bearer {access-token}
@@ -8580,7 +8580,7 @@ var headers = {
 };
 
 $.ajax({
-  url: 'https://example.modapi.io/v1/games/{game-id}/mods/{mod-id}/media/reorder',
+  url: 'https://*.modapi.io/v1/games/{game-id}/mods/{mod-id}/media/reorder',
   method: 'put',
 
   headers: headers,
@@ -8604,7 +8604,7 @@ const headers = {
 
 };
 
-fetch('https://example.modapi.io/v1/games/{game-id}/mods/{mod-id}/media/reorder',
+fetch('https://*.modapi.io/v1/games/{game-id}/mods/{mod-id}/media/reorder',
 {
   method: 'PUT',
   body: inputBody,
@@ -8625,7 +8625,7 @@ headers = {
   'Accept': 'application/json'
 }
 
-r = requests.put('https://example.modapi.io/v1/games/{game-id}/mods/{mod-id}/media/reorder', params={
+r = requests.put('https://*.modapi.io/v1/games/{game-id}/mods/{mod-id}/media/reorder', params={
 
 }, headers = headers)
 
@@ -8633,7 +8633,7 @@ print r.json()
 ```
 
 ```java
-URL obj = new URL("https://example.modapi.io/v1/games/{game-id}/mods/{mod-id}/media/reorder");
+URL obj = new URL("https://*.modapi.io/v1/games/{game-id}/mods/{mod-id}/media/reorder");
 HttpURLConnection con = (HttpURLConnection) obj.openConnection();
 con.setRequestMethod("PUT");
 int responseCode = con.getResponseCode();
@@ -8685,14 +8685,14 @@ To perform this request, you must be authenticated via one of the following meth
 
 ```shell
 # You can also use wget
-curl -X GET https://example.modapi.io/v1/games/{game-id}/mods/events?api_key=YourApiKey \
+curl -X GET https://*.modapi.io/v1/games/{game-id}/mods/events?api_key=YourApiKey \
   -H 'Accept: application/json'
 
 ```
 
 ```http
-GET https://example.modapi.io/v1/games/{game-id}/mods/events?api_key=YourApiKey HTTP/1.1
-Host: example.modapi.io
+GET https://*.modapi.io/v1/games/{game-id}/mods/events?api_key=YourApiKey HTTP/1.1
+Host: *.modapi.io
 
 Accept: application/json
 
@@ -8705,7 +8705,7 @@ var headers = {
 };
 
 $.ajax({
-  url: 'https://example.modapi.io/v1/games/{game-id}/mods/events',
+  url: 'https://*.modapi.io/v1/games/{game-id}/mods/events',
   method: 'get',
   data: '?api_key=YourApiKey',
   headers: headers,
@@ -8723,7 +8723,7 @@ const headers = {
 
 };
 
-fetch('https://example.modapi.io/v1/games/{game-id}/mods/events?api_key=YourApiKey',
+fetch('https://*.modapi.io/v1/games/{game-id}/mods/events?api_key=YourApiKey',
 {
   method: 'GET',
 
@@ -8742,7 +8742,7 @@ headers = {
   'Accept': 'application/json'
 }
 
-r = requests.get('https://example.modapi.io/v1/games/{game-id}/mods/events', params={
+r = requests.get('https://*.modapi.io/v1/games/{game-id}/mods/events', params={
   'api_key': 'YourApiKey'
 }, headers = headers)
 
@@ -8750,7 +8750,7 @@ print r.json()
 ```
 
 ```java
-URL obj = new URL("https://example.modapi.io/v1/games/{game-id}/mods/events?api_key=YourApiKey");
+URL obj = new URL("https://*.modapi.io/v1/games/{game-id}/mods/events?api_key=YourApiKey");
 HttpURLConnection con = (HttpURLConnection) obj.openConnection();
 con.setRequestMethod("GET");
 int responseCode = con.getResponseCode();
@@ -8819,14 +8819,14 @@ To perform this request, you must be authenticated via one of the following meth
 
 ```shell
 # You can also use wget
-curl -X GET https://example.modapi.io/v1/games/{game-id}/mods/{mod-id}/events?api_key=YourApiKey \
+curl -X GET https://*.modapi.io/v1/games/{game-id}/mods/{mod-id}/events?api_key=YourApiKey \
   -H 'Accept: application/json'
 
 ```
 
 ```http
-GET https://example.modapi.io/v1/games/{game-id}/mods/{mod-id}/events?api_key=YourApiKey HTTP/1.1
-Host: example.modapi.io
+GET https://*.modapi.io/v1/games/{game-id}/mods/{mod-id}/events?api_key=YourApiKey HTTP/1.1
+Host: *.modapi.io
 
 Accept: application/json
 
@@ -8839,7 +8839,7 @@ var headers = {
 };
 
 $.ajax({
-  url: 'https://example.modapi.io/v1/games/{game-id}/mods/{mod-id}/events',
+  url: 'https://*.modapi.io/v1/games/{game-id}/mods/{mod-id}/events',
   method: 'get',
   data: '?api_key=YourApiKey',
   headers: headers,
@@ -8857,7 +8857,7 @@ const headers = {
 
 };
 
-fetch('https://example.modapi.io/v1/games/{game-id}/mods/{mod-id}/events?api_key=YourApiKey',
+fetch('https://*.modapi.io/v1/games/{game-id}/mods/{mod-id}/events?api_key=YourApiKey',
 {
   method: 'GET',
 
@@ -8876,7 +8876,7 @@ headers = {
   'Accept': 'application/json'
 }
 
-r = requests.get('https://example.modapi.io/v1/games/{game-id}/mods/{mod-id}/events', params={
+r = requests.get('https://*.modapi.io/v1/games/{game-id}/mods/{mod-id}/events', params={
   'api_key': 'YourApiKey'
 }, headers = headers)
 
@@ -8884,7 +8884,7 @@ print r.json()
 ```
 
 ```java
-URL obj = new URL("https://example.modapi.io/v1/games/{game-id}/mods/{mod-id}/events?api_key=YourApiKey");
+URL obj = new URL("https://*.modapi.io/v1/games/{game-id}/mods/{mod-id}/events?api_key=YourApiKey");
 HttpURLConnection con = (HttpURLConnection) obj.openConnection();
 con.setRequestMethod("GET");
 int responseCode = con.getResponseCode();
@@ -8943,14 +8943,14 @@ To perform this request, you must be authenticated via one of the following meth
 
 ```shell
 # You can also use wget
-curl -X GET https://example.modapi.io/v1/games/{game-id}/tags?api_key=YourApiKey \
+curl -X GET https://*.modapi.io/v1/games/{game-id}/tags?api_key=YourApiKey \
   -H 'Accept: application/json'
 
 ```
 
 ```http
-GET https://example.modapi.io/v1/games/{game-id}/tags?api_key=YourApiKey HTTP/1.1
-Host: example.modapi.io
+GET https://*.modapi.io/v1/games/{game-id}/tags?api_key=YourApiKey HTTP/1.1
+Host: *.modapi.io
 
 Accept: application/json
 
@@ -8963,7 +8963,7 @@ var headers = {
 };
 
 $.ajax({
-  url: 'https://example.modapi.io/v1/games/{game-id}/tags',
+  url: 'https://*.modapi.io/v1/games/{game-id}/tags',
   method: 'get',
   data: '?api_key=YourApiKey',
   headers: headers,
@@ -8981,7 +8981,7 @@ const headers = {
 
 };
 
-fetch('https://example.modapi.io/v1/games/{game-id}/tags?api_key=YourApiKey',
+fetch('https://*.modapi.io/v1/games/{game-id}/tags?api_key=YourApiKey',
 {
   method: 'GET',
 
@@ -9000,7 +9000,7 @@ headers = {
   'Accept': 'application/json'
 }
 
-r = requests.get('https://example.modapi.io/v1/games/{game-id}/tags', params={
+r = requests.get('https://*.modapi.io/v1/games/{game-id}/tags', params={
   'api_key': 'YourApiKey'
 }, headers = headers)
 
@@ -9008,7 +9008,7 @@ print r.json()
 ```
 
 ```java
-URL obj = new URL("https://example.modapi.io/v1/games/{game-id}/tags?api_key=YourApiKey");
+URL obj = new URL("https://*.modapi.io/v1/games/{game-id}/tags?api_key=YourApiKey");
 HttpURLConnection con = (HttpURLConnection) obj.openConnection();
 con.setRequestMethod("GET");
 int responseCode = con.getResponseCode();
@@ -9070,7 +9070,7 @@ To perform this request, you must be authenticated via one of the following meth
 
 ```shell
 # You can also use wget
-curl -X POST https://example.modapi.io/v1/games/{game-id}/tags \
+curl -X POST https://*.modapi.io/v1/games/{game-id}/tags \
   -H 'Authorization: Bearer {access-token}' \ 
   -H 'Content-Type: application/x-www-form-urlencoded' \ 
   -H 'Accept: application/json' \
@@ -9083,8 +9083,8 @@ curl -X POST https://example.modapi.io/v1/games/{game-id}/tags \
 ```
 
 ```http
-POST https://example.modapi.io/v1/games/{game-id}/tags HTTP/1.1
-Host: example.modapi.io
+POST https://*.modapi.io/v1/games/{game-id}/tags HTTP/1.1
+Host: *.modapi.io
 Content-Type: application/x-www-form-urlencoded
 Accept: application/json
 Authorization: Bearer {access-token}
@@ -9100,7 +9100,7 @@ var headers = {
 };
 
 $.ajax({
-  url: 'https://example.modapi.io/v1/games/{game-id}/tags',
+  url: 'https://*.modapi.io/v1/games/{game-id}/tags',
   method: 'post',
 
   headers: headers,
@@ -9126,7 +9126,7 @@ const headers = {
 
 };
 
-fetch('https://example.modapi.io/v1/games/{game-id}/tags',
+fetch('https://*.modapi.io/v1/games/{game-id}/tags',
 {
   method: 'POST',
   body: inputBody,
@@ -9147,7 +9147,7 @@ headers = {
   'Accept': 'application/json'
 }
 
-r = requests.post('https://example.modapi.io/v1/games/{game-id}/tags', params={
+r = requests.post('https://*.modapi.io/v1/games/{game-id}/tags', params={
 
 }, headers = headers)
 
@@ -9155,7 +9155,7 @@ print r.json()
 ```
 
 ```java
-URL obj = new URL("https://example.modapi.io/v1/games/{game-id}/tags");
+URL obj = new URL("https://*.modapi.io/v1/games/{game-id}/tags");
 HttpURLConnection con = (HttpURLConnection) obj.openConnection();
 con.setRequestMethod("POST");
 int responseCode = con.getResponseCode();
@@ -9217,7 +9217,7 @@ To perform this request, you must be authenticated via one of the following meth
 
 ```shell
 # You can also use wget
-curl -X DELETE https://example.modapi.io/v1/games/{game-id}/tags \
+curl -X DELETE https://*.modapi.io/v1/games/{game-id}/tags \
   -H 'Authorization: Bearer {access-token}' \ 
   -H 'Content-Type: application/x-www-form-urlencoded' \ 
   -H 'Accept: application/json' \
@@ -9227,8 +9227,8 @@ curl -X DELETE https://example.modapi.io/v1/games/{game-id}/tags \
 ```
 
 ```http
-DELETE https://example.modapi.io/v1/games/{game-id}/tags HTTP/1.1
-Host: example.modapi.io
+DELETE https://*.modapi.io/v1/games/{game-id}/tags HTTP/1.1
+Host: *.modapi.io
 Content-Type: application/x-www-form-urlencoded
 Accept: application/json
 Authorization: Bearer {access-token}
@@ -9244,7 +9244,7 @@ var headers = {
 };
 
 $.ajax({
-  url: 'https://example.modapi.io/v1/games/{game-id}/tags',
+  url: 'https://*.modapi.io/v1/games/{game-id}/tags',
   method: 'delete',
 
   headers: headers,
@@ -9267,7 +9267,7 @@ const headers = {
 
 };
 
-fetch('https://example.modapi.io/v1/games/{game-id}/tags',
+fetch('https://*.modapi.io/v1/games/{game-id}/tags',
 {
   method: 'DELETE',
   body: inputBody,
@@ -9288,7 +9288,7 @@ headers = {
   'Accept': 'application/json'
 }
 
-r = requests.delete('https://example.modapi.io/v1/games/{game-id}/tags', params={
+r = requests.delete('https://*.modapi.io/v1/games/{game-id}/tags', params={
 
 }, headers = headers)
 
@@ -9296,7 +9296,7 @@ print r.json()
 ```
 
 ```java
-URL obj = new URL("https://example.modapi.io/v1/games/{game-id}/tags");
+URL obj = new URL("https://*.modapi.io/v1/games/{game-id}/tags");
 HttpURLConnection con = (HttpURLConnection) obj.openConnection();
 con.setRequestMethod("DELETE");
 int responseCode = con.getResponseCode();
@@ -9344,7 +9344,7 @@ To perform this request, you must be authenticated via one of the following meth
 
 ```shell
 # You can also use wget
-curl -X PUT https://example.modapi.io/v1/games/{game-id}/tags/rename \
+curl -X PUT https://*.modapi.io/v1/games/{game-id}/tags/rename \
   -H 'Authorization: Bearer {access-token}' \ 
   -H 'Content-Type: application/x-www-form-urlencoded' \ 
   -H 'Accept: application/json'
@@ -9354,8 +9354,8 @@ curl -X PUT https://example.modapi.io/v1/games/{game-id}/tags/rename \
 ```
 
 ```http
-PUT https://example.modapi.io/v1/games/{game-id}/tags/rename HTTP/1.1
-Host: example.modapi.io
+PUT https://*.modapi.io/v1/games/{game-id}/tags/rename HTTP/1.1
+Host: *.modapi.io
 Content-Type: application/x-www-form-urlencoded
 Accept: application/json
 Authorization: Bearer {access-token}
@@ -9371,7 +9371,7 @@ var headers = {
 };
 
 $.ajax({
-  url: 'https://example.modapi.io/v1/games/{game-id}/tags/rename',
+  url: 'https://*.modapi.io/v1/games/{game-id}/tags/rename',
   method: 'put',
 
   headers: headers,
@@ -9394,7 +9394,7 @@ const headers = {
 
 };
 
-fetch('https://example.modapi.io/v1/games/{game-id}/tags/rename',
+fetch('https://*.modapi.io/v1/games/{game-id}/tags/rename',
 {
   method: 'PUT',
   body: inputBody,
@@ -9415,7 +9415,7 @@ headers = {
   'Accept': 'application/json'
 }
 
-r = requests.put('https://example.modapi.io/v1/games/{game-id}/tags/rename', params={
+r = requests.put('https://*.modapi.io/v1/games/{game-id}/tags/rename', params={
 
 }, headers = headers)
 
@@ -9423,7 +9423,7 @@ print r.json()
 ```
 
 ```java
-URL obj = new URL("https://example.modapi.io/v1/games/{game-id}/tags/rename");
+URL obj = new URL("https://*.modapi.io/v1/games/{game-id}/tags/rename");
 HttpURLConnection con = (HttpURLConnection) obj.openConnection();
 con.setRequestMethod("PUT");
 int responseCode = con.getResponseCode();
@@ -9472,14 +9472,14 @@ To perform this request, you must be authenticated via one of the following meth
 
 ```shell
 # You can also use wget
-curl -X GET https://example.modapi.io/v1/games/{game-id}/mods/{mod-id}/tags?api_key=YourApiKey \
+curl -X GET https://*.modapi.io/v1/games/{game-id}/mods/{mod-id}/tags?api_key=YourApiKey \
   -H 'Accept: application/json'
 
 ```
 
 ```http
-GET https://example.modapi.io/v1/games/{game-id}/mods/{mod-id}/tags?api_key=YourApiKey HTTP/1.1
-Host: example.modapi.io
+GET https://*.modapi.io/v1/games/{game-id}/mods/{mod-id}/tags?api_key=YourApiKey HTTP/1.1
+Host: *.modapi.io
 
 Accept: application/json
 
@@ -9492,7 +9492,7 @@ var headers = {
 };
 
 $.ajax({
-  url: 'https://example.modapi.io/v1/games/{game-id}/mods/{mod-id}/tags',
+  url: 'https://*.modapi.io/v1/games/{game-id}/mods/{mod-id}/tags',
   method: 'get',
   data: '?api_key=YourApiKey',
   headers: headers,
@@ -9510,7 +9510,7 @@ const headers = {
 
 };
 
-fetch('https://example.modapi.io/v1/games/{game-id}/mods/{mod-id}/tags?api_key=YourApiKey',
+fetch('https://*.modapi.io/v1/games/{game-id}/mods/{mod-id}/tags?api_key=YourApiKey',
 {
   method: 'GET',
 
@@ -9529,7 +9529,7 @@ headers = {
   'Accept': 'application/json'
 }
 
-r = requests.get('https://example.modapi.io/v1/games/{game-id}/mods/{mod-id}/tags', params={
+r = requests.get('https://*.modapi.io/v1/games/{game-id}/mods/{mod-id}/tags', params={
   'api_key': 'YourApiKey'
 }, headers = headers)
 
@@ -9537,7 +9537,7 @@ print r.json()
 ```
 
 ```java
-URL obj = new URL("https://example.modapi.io/v1/games/{game-id}/mods/{mod-id}/tags?api_key=YourApiKey");
+URL obj = new URL("https://*.modapi.io/v1/games/{game-id}/mods/{mod-id}/tags?api_key=YourApiKey");
 HttpURLConnection con = (HttpURLConnection) obj.openConnection();
 con.setRequestMethod("GET");
 int responseCode = con.getResponseCode();
@@ -9596,7 +9596,7 @@ To perform this request, you must be authenticated via one of the following meth
 
 ```shell
 # You can also use wget
-curl -X POST https://example.modapi.io/v1/games/{game-id}/mods/{mod-id}/tags \
+curl -X POST https://*.modapi.io/v1/games/{game-id}/mods/{mod-id}/tags \
   -H 'Authorization: Bearer {access-token}' \ 
   -H 'Content-Type: application/x-www-form-urlencoded' \ 
   -H 'Accept: application/json' \
@@ -9605,8 +9605,8 @@ curl -X POST https://example.modapi.io/v1/games/{game-id}/mods/{mod-id}/tags \
 ```
 
 ```http
-POST https://example.modapi.io/v1/games/{game-id}/mods/{mod-id}/tags HTTP/1.1
-Host: example.modapi.io
+POST https://*.modapi.io/v1/games/{game-id}/mods/{mod-id}/tags HTTP/1.1
+Host: *.modapi.io
 Content-Type: application/x-www-form-urlencoded
 Accept: application/json
 Authorization: Bearer {access-token}
@@ -9622,7 +9622,7 @@ var headers = {
 };
 
 $.ajax({
-  url: 'https://example.modapi.io/v1/games/{game-id}/mods/{mod-id}/tags',
+  url: 'https://*.modapi.io/v1/games/{game-id}/mods/{mod-id}/tags',
   method: 'post',
 
   headers: headers,
@@ -9644,7 +9644,7 @@ const headers = {
 
 };
 
-fetch('https://example.modapi.io/v1/games/{game-id}/mods/{mod-id}/tags',
+fetch('https://*.modapi.io/v1/games/{game-id}/mods/{mod-id}/tags',
 {
   method: 'POST',
   body: inputBody,
@@ -9665,7 +9665,7 @@ headers = {
   'Accept': 'application/json'
 }
 
-r = requests.post('https://example.modapi.io/v1/games/{game-id}/mods/{mod-id}/tags', params={
+r = requests.post('https://*.modapi.io/v1/games/{game-id}/mods/{mod-id}/tags', params={
 
 }, headers = headers)
 
@@ -9673,7 +9673,7 @@ print r.json()
 ```
 
 ```java
-URL obj = new URL("https://example.modapi.io/v1/games/{game-id}/mods/{mod-id}/tags");
+URL obj = new URL("https://*.modapi.io/v1/games/{game-id}/mods/{mod-id}/tags");
 HttpURLConnection con = (HttpURLConnection) obj.openConnection();
 con.setRequestMethod("POST");
 int responseCode = con.getResponseCode();
@@ -9727,7 +9727,7 @@ To perform this request, you must be authenticated via one of the following meth
 
 ```shell
 # You can also use wget
-curl -X DELETE https://example.modapi.io/v1/games/{game-id}/mods/{mod-id}/tags \
+curl -X DELETE https://*.modapi.io/v1/games/{game-id}/mods/{mod-id}/tags \
   -H 'Authorization: Bearer {access-token}' \ 
   -H 'Content-Type: application/x-www-form-urlencoded' \ 
   -H 'Accept: application/json' \
@@ -9736,8 +9736,8 @@ curl -X DELETE https://example.modapi.io/v1/games/{game-id}/mods/{mod-id}/tags \
 ```
 
 ```http
-DELETE https://example.modapi.io/v1/games/{game-id}/mods/{mod-id}/tags HTTP/1.1
-Host: example.modapi.io
+DELETE https://*.modapi.io/v1/games/{game-id}/mods/{mod-id}/tags HTTP/1.1
+Host: *.modapi.io
 Content-Type: application/x-www-form-urlencoded
 Accept: application/json
 Authorization: Bearer {access-token}
@@ -9753,7 +9753,7 @@ var headers = {
 };
 
 $.ajax({
-  url: 'https://example.modapi.io/v1/games/{game-id}/mods/{mod-id}/tags',
+  url: 'https://*.modapi.io/v1/games/{game-id}/mods/{mod-id}/tags',
   method: 'delete',
 
   headers: headers,
@@ -9775,7 +9775,7 @@ const headers = {
 
 };
 
-fetch('https://example.modapi.io/v1/games/{game-id}/mods/{mod-id}/tags',
+fetch('https://*.modapi.io/v1/games/{game-id}/mods/{mod-id}/tags',
 {
   method: 'DELETE',
   body: inputBody,
@@ -9796,7 +9796,7 @@ headers = {
   'Accept': 'application/json'
 }
 
-r = requests.delete('https://example.modapi.io/v1/games/{game-id}/mods/{mod-id}/tags', params={
+r = requests.delete('https://*.modapi.io/v1/games/{game-id}/mods/{mod-id}/tags', params={
 
 }, headers = headers)
 
@@ -9804,7 +9804,7 @@ print r.json()
 ```
 
 ```java
-URL obj = new URL("https://example.modapi.io/v1/games/{game-id}/mods/{mod-id}/tags");
+URL obj = new URL("https://*.modapi.io/v1/games/{game-id}/mods/{mod-id}/tags");
 HttpURLConnection con = (HttpURLConnection) obj.openConnection();
 con.setRequestMethod("DELETE");
 int responseCode = con.getResponseCode();
@@ -9851,7 +9851,7 @@ To perform this request, you must be authenticated via one of the following meth
 
 ```shell
 # You can also use wget
-curl -X POST https://example.modapi.io/v1/games/{game-id}/mods/{mod-id}/ratings \
+curl -X POST https://*.modapi.io/v1/games/{game-id}/mods/{mod-id}/ratings \
   -H 'Authorization: Bearer {access-token}' \ 
   -H 'Content-Type: application/x-www-form-urlencoded' \ 
   -H 'Accept: application/json' \
@@ -9860,8 +9860,8 @@ curl -X POST https://example.modapi.io/v1/games/{game-id}/mods/{mod-id}/ratings 
 ```
 
 ```http
-POST https://example.modapi.io/v1/games/{game-id}/mods/{mod-id}/ratings HTTP/1.1
-Host: example.modapi.io
+POST https://*.modapi.io/v1/games/{game-id}/mods/{mod-id}/ratings HTTP/1.1
+Host: *.modapi.io
 Content-Type: application/x-www-form-urlencoded
 Accept: application/json
 Authorization: Bearer {access-token}
@@ -9877,7 +9877,7 @@ var headers = {
 };
 
 $.ajax({
-  url: 'https://example.modapi.io/v1/games/{game-id}/mods/{mod-id}/ratings',
+  url: 'https://*.modapi.io/v1/games/{game-id}/mods/{mod-id}/ratings',
   method: 'post',
 
   headers: headers,
@@ -9899,7 +9899,7 @@ const headers = {
 
 };
 
-fetch('https://example.modapi.io/v1/games/{game-id}/mods/{mod-id}/ratings',
+fetch('https://*.modapi.io/v1/games/{game-id}/mods/{mod-id}/ratings',
 {
   method: 'POST',
   body: inputBody,
@@ -9920,7 +9920,7 @@ headers = {
   'Accept': 'application/json'
 }
 
-r = requests.post('https://example.modapi.io/v1/games/{game-id}/mods/{mod-id}/ratings', params={
+r = requests.post('https://*.modapi.io/v1/games/{game-id}/mods/{mod-id}/ratings', params={
 
 }, headers = headers)
 
@@ -9928,7 +9928,7 @@ print r.json()
 ```
 
 ```java
-URL obj = new URL("https://example.modapi.io/v1/games/{game-id}/mods/{mod-id}/ratings");
+URL obj = new URL("https://*.modapi.io/v1/games/{game-id}/mods/{mod-id}/ratings");
 HttpURLConnection con = (HttpURLConnection) obj.openConnection();
 con.setRequestMethod("POST");
 int responseCode = con.getResponseCode();
@@ -9981,14 +9981,14 @@ To perform this request, you must be authenticated via one of the following meth
 
 ```shell
 # You can also use wget
-curl -X GET https://example.modapi.io/v1/games/{game-id}/stats?api_key=YourApiKey \
+curl -X GET https://*.modapi.io/v1/games/{game-id}/stats?api_key=YourApiKey \
   -H 'Accept: application/json'
 
 ```
 
 ```http
-GET https://example.modapi.io/v1/games/{game-id}/stats?api_key=YourApiKey HTTP/1.1
-Host: example.modapi.io
+GET https://*.modapi.io/v1/games/{game-id}/stats?api_key=YourApiKey HTTP/1.1
+Host: *.modapi.io
 
 Accept: application/json
 
@@ -10001,7 +10001,7 @@ var headers = {
 };
 
 $.ajax({
-  url: 'https://example.modapi.io/v1/games/{game-id}/stats',
+  url: 'https://*.modapi.io/v1/games/{game-id}/stats',
   method: 'get',
   data: '?api_key=YourApiKey',
   headers: headers,
@@ -10019,7 +10019,7 @@ const headers = {
 
 };
 
-fetch('https://example.modapi.io/v1/games/{game-id}/stats?api_key=YourApiKey',
+fetch('https://*.modapi.io/v1/games/{game-id}/stats?api_key=YourApiKey',
 {
   method: 'GET',
 
@@ -10038,7 +10038,7 @@ headers = {
   'Accept': 'application/json'
 }
 
-r = requests.get('https://example.modapi.io/v1/games/{game-id}/stats', params={
+r = requests.get('https://*.modapi.io/v1/games/{game-id}/stats', params={
   'api_key': 'YourApiKey'
 }, headers = headers)
 
@@ -10046,7 +10046,7 @@ print r.json()
 ```
 
 ```java
-URL obj = new URL("https://example.modapi.io/v1/games/{game-id}/stats?api_key=YourApiKey");
+URL obj = new URL("https://*.modapi.io/v1/games/{game-id}/stats?api_key=YourApiKey");
 HttpURLConnection con = (HttpURLConnection) obj.openConnection();
 con.setRequestMethod("GET");
 int responseCode = con.getResponseCode();
@@ -10094,14 +10094,14 @@ To perform this request, you must be authenticated via one of the following meth
 
 ```shell
 # You can also use wget
-curl -X GET https://example.modapi.io/v1/games/{game-id}/mods/stats?api_key=YourApiKey \
+curl -X GET https://*.modapi.io/v1/games/{game-id}/mods/stats?api_key=YourApiKey \
   -H 'Accept: application/json'
 
 ```
 
 ```http
-GET https://example.modapi.io/v1/games/{game-id}/mods/stats?api_key=YourApiKey HTTP/1.1
-Host: example.modapi.io
+GET https://*.modapi.io/v1/games/{game-id}/mods/stats?api_key=YourApiKey HTTP/1.1
+Host: *.modapi.io
 
 Accept: application/json
 
@@ -10114,7 +10114,7 @@ var headers = {
 };
 
 $.ajax({
-  url: 'https://example.modapi.io/v1/games/{game-id}/mods/stats',
+  url: 'https://*.modapi.io/v1/games/{game-id}/mods/stats',
   method: 'get',
   data: '?api_key=YourApiKey',
   headers: headers,
@@ -10132,7 +10132,7 @@ const headers = {
 
 };
 
-fetch('https://example.modapi.io/v1/games/{game-id}/mods/stats?api_key=YourApiKey',
+fetch('https://*.modapi.io/v1/games/{game-id}/mods/stats?api_key=YourApiKey',
 {
   method: 'GET',
 
@@ -10151,7 +10151,7 @@ headers = {
   'Accept': 'application/json'
 }
 
-r = requests.get('https://example.modapi.io/v1/games/{game-id}/mods/stats', params={
+r = requests.get('https://*.modapi.io/v1/games/{game-id}/mods/stats', params={
   'api_key': 'YourApiKey'
 }, headers = headers)
 
@@ -10159,7 +10159,7 @@ print r.json()
 ```
 
 ```java
-URL obj = new URL("https://example.modapi.io/v1/games/{game-id}/mods/stats?api_key=YourApiKey");
+URL obj = new URL("https://*.modapi.io/v1/games/{game-id}/mods/stats?api_key=YourApiKey");
 HttpURLConnection con = (HttpURLConnection) obj.openConnection();
 con.setRequestMethod("GET");
 int responseCode = con.getResponseCode();
@@ -10236,14 +10236,14 @@ To perform this request, you must be authenticated via one of the following meth
 
 ```shell
 # You can also use wget
-curl -X GET https://example.modapi.io/v1/games/{game-id}/mods/{mod-id}/stats?api_key=YourApiKey \
+curl -X GET https://*.modapi.io/v1/games/{game-id}/mods/{mod-id}/stats?api_key=YourApiKey \
   -H 'Accept: application/json'
 
 ```
 
 ```http
-GET https://example.modapi.io/v1/games/{game-id}/mods/{mod-id}/stats?api_key=YourApiKey HTTP/1.1
-Host: example.modapi.io
+GET https://*.modapi.io/v1/games/{game-id}/mods/{mod-id}/stats?api_key=YourApiKey HTTP/1.1
+Host: *.modapi.io
 
 Accept: application/json
 
@@ -10256,7 +10256,7 @@ var headers = {
 };
 
 $.ajax({
-  url: 'https://example.modapi.io/v1/games/{game-id}/mods/{mod-id}/stats',
+  url: 'https://*.modapi.io/v1/games/{game-id}/mods/{mod-id}/stats',
   method: 'get',
   data: '?api_key=YourApiKey',
   headers: headers,
@@ -10274,7 +10274,7 @@ const headers = {
 
 };
 
-fetch('https://example.modapi.io/v1/games/{game-id}/mods/{mod-id}/stats?api_key=YourApiKey',
+fetch('https://*.modapi.io/v1/games/{game-id}/mods/{mod-id}/stats?api_key=YourApiKey',
 {
   method: 'GET',
 
@@ -10293,7 +10293,7 @@ headers = {
   'Accept': 'application/json'
 }
 
-r = requests.get('https://example.modapi.io/v1/games/{game-id}/mods/{mod-id}/stats', params={
+r = requests.get('https://*.modapi.io/v1/games/{game-id}/mods/{mod-id}/stats', params={
   'api_key': 'YourApiKey'
 }, headers = headers)
 
@@ -10301,7 +10301,7 @@ print r.json()
 ```
 
 ```java
-URL obj = new URL("https://example.modapi.io/v1/games/{game-id}/mods/{mod-id}/stats?api_key=YourApiKey");
+URL obj = new URL("https://*.modapi.io/v1/games/{game-id}/mods/{mod-id}/stats?api_key=YourApiKey");
 HttpURLConnection con = (HttpURLConnection) obj.openConnection();
 con.setRequestMethod("GET");
 int responseCode = con.getResponseCode();
@@ -10357,14 +10357,14 @@ To perform this request, you must be authenticated via one of the following meth
 
 ```shell
 # You can also use wget
-curl -X GET https://example.modapi.io/v1/games/{game-id}/mods/{mod-id}/metadatakvp?api_key=YourApiKey \
+curl -X GET https://*.modapi.io/v1/games/{game-id}/mods/{mod-id}/metadatakvp?api_key=YourApiKey \
   -H 'Accept: application/json'
 
 ```
 
 ```http
-GET https://example.modapi.io/v1/games/{game-id}/mods/{mod-id}/metadatakvp?api_key=YourApiKey HTTP/1.1
-Host: example.modapi.io
+GET https://*.modapi.io/v1/games/{game-id}/mods/{mod-id}/metadatakvp?api_key=YourApiKey HTTP/1.1
+Host: *.modapi.io
 
 Accept: application/json
 
@@ -10377,7 +10377,7 @@ var headers = {
 };
 
 $.ajax({
-  url: 'https://example.modapi.io/v1/games/{game-id}/mods/{mod-id}/metadatakvp',
+  url: 'https://*.modapi.io/v1/games/{game-id}/mods/{mod-id}/metadatakvp',
   method: 'get',
   data: '?api_key=YourApiKey',
   headers: headers,
@@ -10395,7 +10395,7 @@ const headers = {
 
 };
 
-fetch('https://example.modapi.io/v1/games/{game-id}/mods/{mod-id}/metadatakvp?api_key=YourApiKey',
+fetch('https://*.modapi.io/v1/games/{game-id}/mods/{mod-id}/metadatakvp?api_key=YourApiKey',
 {
   method: 'GET',
 
@@ -10414,7 +10414,7 @@ headers = {
   'Accept': 'application/json'
 }
 
-r = requests.get('https://example.modapi.io/v1/games/{game-id}/mods/{mod-id}/metadatakvp', params={
+r = requests.get('https://*.modapi.io/v1/games/{game-id}/mods/{mod-id}/metadatakvp', params={
   'api_key': 'YourApiKey'
 }, headers = headers)
 
@@ -10422,7 +10422,7 @@ print r.json()
 ```
 
 ```java
-URL obj = new URL("https://example.modapi.io/v1/games/{game-id}/mods/{mod-id}/metadatakvp?api_key=YourApiKey");
+URL obj = new URL("https://*.modapi.io/v1/games/{game-id}/mods/{mod-id}/metadatakvp?api_key=YourApiKey");
 HttpURLConnection con = (HttpURLConnection) obj.openConnection();
 con.setRequestMethod("GET");
 int responseCode = con.getResponseCode();
@@ -10476,7 +10476,7 @@ To perform this request, you must be authenticated via one of the following meth
 
 ```shell
 # You can also use wget
-curl -X POST https://example.modapi.io/v1/games/{game-id}/mods/{mod-id}/metadatakvp \
+curl -X POST https://*.modapi.io/v1/games/{game-id}/mods/{mod-id}/metadatakvp \
   -H 'Authorization: Bearer {access-token}' \ 
   -H 'Content-Type: application/x-www-form-urlencoded' \ 
   -H 'Accept: application/json' \
@@ -10485,8 +10485,8 @@ curl -X POST https://example.modapi.io/v1/games/{game-id}/mods/{mod-id}/metadata
 ```
 
 ```http
-POST https://example.modapi.io/v1/games/{game-id}/mods/{mod-id}/metadatakvp HTTP/1.1
-Host: example.modapi.io
+POST https://*.modapi.io/v1/games/{game-id}/mods/{mod-id}/metadatakvp HTTP/1.1
+Host: *.modapi.io
 Content-Type: application/x-www-form-urlencoded
 Accept: application/json
 Authorization: Bearer {access-token}
@@ -10502,7 +10502,7 @@ var headers = {
 };
 
 $.ajax({
-  url: 'https://example.modapi.io/v1/games/{game-id}/mods/{mod-id}/metadatakvp',
+  url: 'https://*.modapi.io/v1/games/{game-id}/mods/{mod-id}/metadatakvp',
   method: 'post',
 
   headers: headers,
@@ -10524,7 +10524,7 @@ const headers = {
 
 };
 
-fetch('https://example.modapi.io/v1/games/{game-id}/mods/{mod-id}/metadatakvp',
+fetch('https://*.modapi.io/v1/games/{game-id}/mods/{mod-id}/metadatakvp',
 {
   method: 'POST',
   body: inputBody,
@@ -10545,7 +10545,7 @@ headers = {
   'Accept': 'application/json'
 }
 
-r = requests.post('https://example.modapi.io/v1/games/{game-id}/mods/{mod-id}/metadatakvp', params={
+r = requests.post('https://*.modapi.io/v1/games/{game-id}/mods/{mod-id}/metadatakvp', params={
 
 }, headers = headers)
 
@@ -10553,7 +10553,7 @@ print r.json()
 ```
 
 ```java
-URL obj = new URL("https://example.modapi.io/v1/games/{game-id}/mods/{mod-id}/metadatakvp");
+URL obj = new URL("https://*.modapi.io/v1/games/{game-id}/mods/{mod-id}/metadatakvp");
 HttpURLConnection con = (HttpURLConnection) obj.openConnection();
 con.setRequestMethod("POST");
 int responseCode = con.getResponseCode();
@@ -10609,7 +10609,7 @@ To perform this request, you must be authenticated via one of the following meth
 
 ```shell
 # You can also use wget
-curl -X DELETE https://example.modapi.io/v1/games/{game-id}/mods/{mod-id}/metadatakvp \
+curl -X DELETE https://*.modapi.io/v1/games/{game-id}/mods/{mod-id}/metadatakvp \
   -H 'Authorization: Bearer {access-token}' \ 
   -H 'Content-Type: application/x-www-form-urlencoded' \ 
   -H 'Accept: application/json' \
@@ -10618,8 +10618,8 @@ curl -X DELETE https://example.modapi.io/v1/games/{game-id}/mods/{mod-id}/metada
 ```
 
 ```http
-DELETE https://example.modapi.io/v1/games/{game-id}/mods/{mod-id}/metadatakvp HTTP/1.1
-Host: example.modapi.io
+DELETE https://*.modapi.io/v1/games/{game-id}/mods/{mod-id}/metadatakvp HTTP/1.1
+Host: *.modapi.io
 Content-Type: application/x-www-form-urlencoded
 Accept: application/json
 Authorization: Bearer {access-token}
@@ -10635,7 +10635,7 @@ var headers = {
 };
 
 $.ajax({
-  url: 'https://example.modapi.io/v1/games/{game-id}/mods/{mod-id}/metadatakvp',
+  url: 'https://*.modapi.io/v1/games/{game-id}/mods/{mod-id}/metadatakvp',
   method: 'delete',
 
   headers: headers,
@@ -10657,7 +10657,7 @@ const headers = {
 
 };
 
-fetch('https://example.modapi.io/v1/games/{game-id}/mods/{mod-id}/metadatakvp',
+fetch('https://*.modapi.io/v1/games/{game-id}/mods/{mod-id}/metadatakvp',
 {
   method: 'DELETE',
   body: inputBody,
@@ -10678,7 +10678,7 @@ headers = {
   'Accept': 'application/json'
 }
 
-r = requests.delete('https://example.modapi.io/v1/games/{game-id}/mods/{mod-id}/metadatakvp', params={
+r = requests.delete('https://*.modapi.io/v1/games/{game-id}/mods/{mod-id}/metadatakvp', params={
 
 }, headers = headers)
 
@@ -10686,7 +10686,7 @@ print r.json()
 ```
 
 ```java
-URL obj = new URL("https://example.modapi.io/v1/games/{game-id}/mods/{mod-id}/metadatakvp");
+URL obj = new URL("https://*.modapi.io/v1/games/{game-id}/mods/{mod-id}/metadatakvp");
 HttpURLConnection con = (HttpURLConnection) obj.openConnection();
 con.setRequestMethod("DELETE");
 int responseCode = con.getResponseCode();
@@ -10733,14 +10733,14 @@ To perform this request, you must be authenticated via one of the following meth
 
 ```shell
 # You can also use wget
-curl -X GET https://example.modapi.io/v1/games/{game-id}/mods/{mod-id}/dependencies?api_key=YourApiKey \
+curl -X GET https://*.modapi.io/v1/games/{game-id}/mods/{mod-id}/dependencies?api_key=YourApiKey \
   -H 'Accept: application/json'
 
 ```
 
 ```http
-GET https://example.modapi.io/v1/games/{game-id}/mods/{mod-id}/dependencies?api_key=YourApiKey HTTP/1.1
-Host: example.modapi.io
+GET https://*.modapi.io/v1/games/{game-id}/mods/{mod-id}/dependencies?api_key=YourApiKey HTTP/1.1
+Host: *.modapi.io
 
 Accept: application/json
 
@@ -10753,7 +10753,7 @@ var headers = {
 };
 
 $.ajax({
-  url: 'https://example.modapi.io/v1/games/{game-id}/mods/{mod-id}/dependencies',
+  url: 'https://*.modapi.io/v1/games/{game-id}/mods/{mod-id}/dependencies',
   method: 'get',
   data: '?api_key=YourApiKey',
   headers: headers,
@@ -10771,7 +10771,7 @@ const headers = {
 
 };
 
-fetch('https://example.modapi.io/v1/games/{game-id}/mods/{mod-id}/dependencies?api_key=YourApiKey',
+fetch('https://*.modapi.io/v1/games/{game-id}/mods/{mod-id}/dependencies?api_key=YourApiKey',
 {
   method: 'GET',
 
@@ -10790,7 +10790,7 @@ headers = {
   'Accept': 'application/json'
 }
 
-r = requests.get('https://example.modapi.io/v1/games/{game-id}/mods/{mod-id}/dependencies', params={
+r = requests.get('https://*.modapi.io/v1/games/{game-id}/mods/{mod-id}/dependencies', params={
   'api_key': 'YourApiKey'
 }, headers = headers)
 
@@ -10798,7 +10798,7 @@ print r.json()
 ```
 
 ```java
-URL obj = new URL("https://example.modapi.io/v1/games/{game-id}/mods/{mod-id}/dependencies?api_key=YourApiKey");
+URL obj = new URL("https://*.modapi.io/v1/games/{game-id}/mods/{mod-id}/dependencies?api_key=YourApiKey");
 HttpURLConnection con = (HttpURLConnection) obj.openConnection();
 con.setRequestMethod("GET");
 int responseCode = con.getResponseCode();
@@ -10863,7 +10863,7 @@ Get all dependencies the chosen mod has selected. This is useful if a mod requir
         "changelog": "VERSION 1.3 -- Changes -- Fixed critical castle floor bug.",
         "metadata_blob": "rogue,hd,high-res,4k,hd textures",
         "download": {
-          "binary_url": "https://example.modapi.io/v1/games/1/mods/1/files/1/download/c489a0354111a4d76640d47f0cdcb294",
+          "binary_url": "https://*.modapi.io/v1/games/1/mods/1/files/1/download/c489a0354111a4d76640d47f0cdcb294",
           "date_expires": 1579316848
         },
         "platforms": [
@@ -10900,7 +10900,7 @@ To perform this request, you must be authenticated via one of the following meth
 
 ```shell
 # You can also use wget
-curl -X POST https://example.modapi.io/v1/games/{game-id}/mods/{mod-id}/dependencies \
+curl -X POST https://*.modapi.io/v1/games/{game-id}/mods/{mod-id}/dependencies \
   -H 'Authorization: Bearer {access-token}' \ 
   -H 'Content-Type: application/x-www-form-urlencoded' \ 
   -H 'Accept: application/json' \
@@ -10909,8 +10909,8 @@ curl -X POST https://example.modapi.io/v1/games/{game-id}/mods/{mod-id}/dependen
 ```
 
 ```http
-POST https://example.modapi.io/v1/games/{game-id}/mods/{mod-id}/dependencies HTTP/1.1
-Host: example.modapi.io
+POST https://*.modapi.io/v1/games/{game-id}/mods/{mod-id}/dependencies HTTP/1.1
+Host: *.modapi.io
 Content-Type: application/x-www-form-urlencoded
 Accept: application/json
 Authorization: Bearer {access-token}
@@ -10926,7 +10926,7 @@ var headers = {
 };
 
 $.ajax({
-  url: 'https://example.modapi.io/v1/games/{game-id}/mods/{mod-id}/dependencies',
+  url: 'https://*.modapi.io/v1/games/{game-id}/mods/{mod-id}/dependencies',
   method: 'post',
 
   headers: headers,
@@ -10948,7 +10948,7 @@ const headers = {
 
 };
 
-fetch('https://example.modapi.io/v1/games/{game-id}/mods/{mod-id}/dependencies',
+fetch('https://*.modapi.io/v1/games/{game-id}/mods/{mod-id}/dependencies',
 {
   method: 'POST',
   body: inputBody,
@@ -10969,7 +10969,7 @@ headers = {
   'Accept': 'application/json'
 }
 
-r = requests.post('https://example.modapi.io/v1/games/{game-id}/mods/{mod-id}/dependencies', params={
+r = requests.post('https://*.modapi.io/v1/games/{game-id}/mods/{mod-id}/dependencies', params={
 
 }, headers = headers)
 
@@ -10977,7 +10977,7 @@ print r.json()
 ```
 
 ```java
-URL obj = new URL("https://example.modapi.io/v1/games/{game-id}/mods/{mod-id}/dependencies");
+URL obj = new URL("https://*.modapi.io/v1/games/{game-id}/mods/{mod-id}/dependencies");
 HttpURLConnection con = (HttpURLConnection) obj.openConnection();
 con.setRequestMethod("POST");
 int responseCode = con.getResponseCode();
@@ -11031,7 +11031,7 @@ To perform this request, you must be authenticated via one of the following meth
 
 ```shell
 # You can also use wget
-curl -X DELETE https://example.modapi.io/v1/games/{game-id}/mods/{mod-id}/dependencies \
+curl -X DELETE https://*.modapi.io/v1/games/{game-id}/mods/{mod-id}/dependencies \
   -H 'Authorization: Bearer {access-token}' \ 
   -H 'Content-Type: application/x-www-form-urlencoded' \ 
   -H 'Accept: application/json' \
@@ -11040,8 +11040,8 @@ curl -X DELETE https://example.modapi.io/v1/games/{game-id}/mods/{mod-id}/depend
 ```
 
 ```http
-DELETE https://example.modapi.io/v1/games/{game-id}/mods/{mod-id}/dependencies HTTP/1.1
-Host: example.modapi.io
+DELETE https://*.modapi.io/v1/games/{game-id}/mods/{mod-id}/dependencies HTTP/1.1
+Host: *.modapi.io
 Content-Type: application/x-www-form-urlencoded
 Accept: application/json
 Authorization: Bearer {access-token}
@@ -11057,7 +11057,7 @@ var headers = {
 };
 
 $.ajax({
-  url: 'https://example.modapi.io/v1/games/{game-id}/mods/{mod-id}/dependencies',
+  url: 'https://*.modapi.io/v1/games/{game-id}/mods/{mod-id}/dependencies',
   method: 'delete',
 
   headers: headers,
@@ -11079,7 +11079,7 @@ const headers = {
 
 };
 
-fetch('https://example.modapi.io/v1/games/{game-id}/mods/{mod-id}/dependencies',
+fetch('https://*.modapi.io/v1/games/{game-id}/mods/{mod-id}/dependencies',
 {
   method: 'DELETE',
   body: inputBody,
@@ -11100,7 +11100,7 @@ headers = {
   'Accept': 'application/json'
 }
 
-r = requests.delete('https://example.modapi.io/v1/games/{game-id}/mods/{mod-id}/dependencies', params={
+r = requests.delete('https://*.modapi.io/v1/games/{game-id}/mods/{mod-id}/dependencies', params={
 
 }, headers = headers)
 
@@ -11108,7 +11108,7 @@ print r.json()
 ```
 
 ```java
-URL obj = new URL("https://example.modapi.io/v1/games/{game-id}/mods/{mod-id}/dependencies");
+URL obj = new URL("https://*.modapi.io/v1/games/{game-id}/mods/{mod-id}/dependencies");
 HttpURLConnection con = (HttpURLConnection) obj.openConnection();
 con.setRequestMethod("DELETE");
 int responseCode = con.getResponseCode();
@@ -11155,14 +11155,14 @@ To perform this request, you must be authenticated via one of the following meth
 
 ```shell
 # You can also use wget
-curl -X GET https://example.modapi.io/v1/games/{game-id}/mods/{mod-id}/team?api_key=YourApiKey \
+curl -X GET https://*.modapi.io/v1/games/{game-id}/mods/{mod-id}/team?api_key=YourApiKey \
   -H 'Accept: application/json'
 
 ```
 
 ```http
-GET https://example.modapi.io/v1/games/{game-id}/mods/{mod-id}/team?api_key=YourApiKey HTTP/1.1
-Host: example.modapi.io
+GET https://*.modapi.io/v1/games/{game-id}/mods/{mod-id}/team?api_key=YourApiKey HTTP/1.1
+Host: *.modapi.io
 
 Accept: application/json
 
@@ -11175,7 +11175,7 @@ var headers = {
 };
 
 $.ajax({
-  url: 'https://example.modapi.io/v1/games/{game-id}/mods/{mod-id}/team',
+  url: 'https://*.modapi.io/v1/games/{game-id}/mods/{mod-id}/team',
   method: 'get',
   data: '?api_key=YourApiKey',
   headers: headers,
@@ -11193,7 +11193,7 @@ const headers = {
 
 };
 
-fetch('https://example.modapi.io/v1/games/{game-id}/mods/{mod-id}/team?api_key=YourApiKey',
+fetch('https://*.modapi.io/v1/games/{game-id}/mods/{mod-id}/team?api_key=YourApiKey',
 {
   method: 'GET',
 
@@ -11212,7 +11212,7 @@ headers = {
   'Accept': 'application/json'
 }
 
-r = requests.get('https://example.modapi.io/v1/games/{game-id}/mods/{mod-id}/team', params={
+r = requests.get('https://*.modapi.io/v1/games/{game-id}/mods/{mod-id}/team', params={
   'api_key': 'YourApiKey'
 }, headers = headers)
 
@@ -11220,7 +11220,7 @@ print r.json()
 ```
 
 ```java
-URL obj = new URL("https://example.modapi.io/v1/games/{game-id}/mods/{mod-id}/team?api_key=YourApiKey");
+URL obj = new URL("https://*.modapi.io/v1/games/{game-id}/mods/{mod-id}/team?api_key=YourApiKey");
 HttpURLConnection con = (HttpURLConnection) obj.openConnection();
 con.setRequestMethod("GET");
 int responseCode = con.getResponseCode();
@@ -11305,7 +11305,7 @@ To perform this request, you must be authenticated via one of the following meth
 
 ```shell
 # You can also use wget
-curl -X POST https://example.modapi.io/v1/general/ownership \
+curl -X POST https://*.modapi.io/v1/general/ownership \
   -H 'Authorization: Bearer {access-token}' \ 
   -H 'Content-Type: application/x-www-form-urlencoded' \ 
   -H 'Accept: application/json'
@@ -11313,8 +11313,8 @@ curl -X POST https://example.modapi.io/v1/general/ownership \
 ```
 
 ```http
-POST https://example.modapi.io/v1/general/ownership HTTP/1.1
-Host: example.modapi.io
+POST https://*.modapi.io/v1/general/ownership HTTP/1.1
+Host: *.modapi.io
 
 Accept: application/json
 Authorization: Bearer {access-token}
@@ -11331,7 +11331,7 @@ var headers = {
 };
 
 $.ajax({
-  url: 'https://example.modapi.io/v1/general/ownership',
+  url: 'https://*.modapi.io/v1/general/ownership',
   method: 'post',
 
   headers: headers,
@@ -11351,7 +11351,7 @@ const headers = {
 
 };
 
-fetch('https://example.modapi.io/v1/general/ownership',
+fetch('https://*.modapi.io/v1/general/ownership',
 {
   method: 'POST',
 
@@ -11372,7 +11372,7 @@ headers = {
   'Accept': 'application/json'
 }
 
-r = requests.post('https://example.modapi.io/v1/general/ownership', params={
+r = requests.post('https://*.modapi.io/v1/general/ownership', params={
 
 }, headers = headers)
 
@@ -11380,7 +11380,7 @@ print r.json()
 ```
 
 ```java
-URL obj = new URL("https://example.modapi.io/v1/general/ownership");
+URL obj = new URL("https://*.modapi.io/v1/general/ownership");
 HttpURLConnection con = (HttpURLConnection) obj.openConnection();
 con.setRequestMethod("POST");
 int responseCode = con.getResponseCode();
@@ -11445,7 +11445,7 @@ To perform this request, you must be authenticated via one of the following meth
 
 ```shell
 # You can also use wget
-curl -X POST https://example.modapi.io/v1/report \
+curl -X POST https://*.modapi.io/v1/report \
   -H 'Authorization: Bearer {access-token}' \ 
   -H 'Content-Type: application/x-www-form-urlencoded' \ 
   -H 'Accept: application/json' \
@@ -11459,8 +11459,8 @@ curl -X POST https://example.modapi.io/v1/report \
 ```
 
 ```http
-POST https://example.modapi.io/v1/report HTTP/1.1
-Host: example.modapi.io
+POST https://*.modapi.io/v1/report HTTP/1.1
+Host: *.modapi.io
 Content-Type: application/x-www-form-urlencoded
 Accept: application/json
 Authorization: Bearer {access-token}
@@ -11476,7 +11476,7 @@ var headers = {
 };
 
 $.ajax({
-  url: 'https://example.modapi.io/v1/report',
+  url: 'https://*.modapi.io/v1/report',
   method: 'post',
 
   headers: headers,
@@ -11503,7 +11503,7 @@ const headers = {
 
 };
 
-fetch('https://example.modapi.io/v1/report',
+fetch('https://*.modapi.io/v1/report',
 {
   method: 'POST',
   body: inputBody,
@@ -11524,7 +11524,7 @@ headers = {
   'Accept': 'application/json'
 }
 
-r = requests.post('https://example.modapi.io/v1/report', params={
+r = requests.post('https://*.modapi.io/v1/report', params={
 
 }, headers = headers)
 
@@ -11532,7 +11532,7 @@ print r.json()
 ```
 
 ```java
-URL obj = new URL("https://example.modapi.io/v1/report");
+URL obj = new URL("https://*.modapi.io/v1/report");
 HttpURLConnection con = (HttpURLConnection) obj.openConnection();
 con.setRequestMethod("POST");
 int responseCode = con.getResponseCode();
@@ -11610,14 +11610,14 @@ To perform this request, you must be authenticated via one of the following meth
 
 ```shell
 # You can also use wget
-curl -X GET https://example.modapi.io/v1/agreements/types/{agreement-type-id}/current?api_key=YourApiKey \
+curl -X GET https://*.modapi.io/v1/agreements/types/{agreement-type-id}/current?api_key=YourApiKey \
   -H 'Accept: application/json'
 
 ```
 
 ```http
-GET https://example.modapi.io/v1/agreements/types/{agreement-type-id}/current?api_key=YourApiKey HTTP/1.1
-Host: example.modapi.io
+GET https://*.modapi.io/v1/agreements/types/{agreement-type-id}/current?api_key=YourApiKey HTTP/1.1
+Host: *.modapi.io
 
 Accept: application/json
 
@@ -11630,7 +11630,7 @@ var headers = {
 };
 
 $.ajax({
-  url: 'https://example.modapi.io/v1/agreements/types/{agreement-type-id}/current',
+  url: 'https://*.modapi.io/v1/agreements/types/{agreement-type-id}/current',
   method: 'get',
   data: '?api_key=YourApiKey',
   headers: headers,
@@ -11648,7 +11648,7 @@ const headers = {
 
 };
 
-fetch('https://example.modapi.io/v1/agreements/types/{agreement-type-id}/current?api_key=YourApiKey',
+fetch('https://*.modapi.io/v1/agreements/types/{agreement-type-id}/current?api_key=YourApiKey',
 {
   method: 'GET',
 
@@ -11667,7 +11667,7 @@ headers = {
   'Accept': 'application/json'
 }
 
-r = requests.get('https://example.modapi.io/v1/agreements/types/{agreement-type-id}/current', params={
+r = requests.get('https://*.modapi.io/v1/agreements/types/{agreement-type-id}/current', params={
   'api_key': 'YourApiKey'
 }, headers = headers)
 
@@ -11675,7 +11675,7 @@ print r.json()
 ```
 
 ```java
-URL obj = new URL("https://example.modapi.io/v1/agreements/types/{agreement-type-id}/current?api_key=YourApiKey");
+URL obj = new URL("https://*.modapi.io/v1/agreements/types/{agreement-type-id}/current?api_key=YourApiKey");
 HttpURLConnection con = (HttpURLConnection) obj.openConnection();
 con.setRequestMethod("GET");
 int responseCode = con.getResponseCode();
@@ -11763,14 +11763,14 @@ To perform this request, you must be authenticated via one of the following meth
 
 ```shell
 # You can also use wget
-curl -X GET https://example.modapi.io/v1/agreements/versions/{agreement-version-id}?api_key=YourApiKey \
+curl -X GET https://*.modapi.io/v1/agreements/versions/{agreement-version-id}?api_key=YourApiKey \
   -H 'Accept: application/json'
 
 ```
 
 ```http
-GET https://example.modapi.io/v1/agreements/versions/{agreement-version-id}?api_key=YourApiKey HTTP/1.1
-Host: example.modapi.io
+GET https://*.modapi.io/v1/agreements/versions/{agreement-version-id}?api_key=YourApiKey HTTP/1.1
+Host: *.modapi.io
 
 Accept: application/json
 
@@ -11783,7 +11783,7 @@ var headers = {
 };
 
 $.ajax({
-  url: 'https://example.modapi.io/v1/agreements/versions/{agreement-version-id}',
+  url: 'https://*.modapi.io/v1/agreements/versions/{agreement-version-id}',
   method: 'get',
   data: '?api_key=YourApiKey',
   headers: headers,
@@ -11801,7 +11801,7 @@ const headers = {
 
 };
 
-fetch('https://example.modapi.io/v1/agreements/versions/{agreement-version-id}?api_key=YourApiKey',
+fetch('https://*.modapi.io/v1/agreements/versions/{agreement-version-id}?api_key=YourApiKey',
 {
   method: 'GET',
 
@@ -11820,7 +11820,7 @@ headers = {
   'Accept': 'application/json'
 }
 
-r = requests.get('https://example.modapi.io/v1/agreements/versions/{agreement-version-id}', params={
+r = requests.get('https://*.modapi.io/v1/agreements/versions/{agreement-version-id}', params={
   'api_key': 'YourApiKey'
 }, headers = headers)
 
@@ -11828,7 +11828,7 @@ print r.json()
 ```
 
 ```java
-URL obj = new URL("https://example.modapi.io/v1/agreements/versions/{agreement-version-id}?api_key=YourApiKey");
+URL obj = new URL("https://*.modapi.io/v1/agreements/versions/{agreement-version-id}?api_key=YourApiKey");
 HttpURLConnection con = (HttpURLConnection) obj.openConnection();
 con.setRequestMethod("GET");
 int responseCode = con.getResponseCode();
@@ -11899,15 +11899,15 @@ To perform this request, you must be authenticated via one of the following meth
 
 ```shell
 # You can also use wget
-curl -X POST https://example.modapi.io/v1/users/{user-id}/mute \
+curl -X POST https://*.modapi.io/v1/users/{user-id}/mute \
   -H 'Authorization: Bearer {access-token}' \ 
   -H 'Accept: application/json'
 
 ```
 
 ```http
-POST https://example.modapi.io/v1/users/{user-id}/mute HTTP/1.1
-Host: example.modapi.io
+POST https://*.modapi.io/v1/users/{user-id}/mute HTTP/1.1
+Host: *.modapi.io
 
 Accept: application/json
 Authorization: Bearer {access-token}
@@ -11922,7 +11922,7 @@ var headers = {
 };
 
 $.ajax({
-  url: 'https://example.modapi.io/v1/users/{user-id}/mute',
+  url: 'https://*.modapi.io/v1/users/{user-id}/mute',
   method: 'post',
 
   headers: headers,
@@ -11941,7 +11941,7 @@ const headers = {
 
 };
 
-fetch('https://example.modapi.io/v1/users/{user-id}/mute',
+fetch('https://*.modapi.io/v1/users/{user-id}/mute',
 {
   method: 'POST',
 
@@ -11961,7 +11961,7 @@ headers = {
   'Accept': 'application/json'
 }
 
-r = requests.post('https://example.modapi.io/v1/users/{user-id}/mute', params={
+r = requests.post('https://*.modapi.io/v1/users/{user-id}/mute', params={
 
 }, headers = headers)
 
@@ -11969,7 +11969,7 @@ print r.json()
 ```
 
 ```java
-URL obj = new URL("https://example.modapi.io/v1/users/{user-id}/mute");
+URL obj = new URL("https://*.modapi.io/v1/users/{user-id}/mute");
 HttpURLConnection con = (HttpURLConnection) obj.openConnection();
 con.setRequestMethod("POST");
 int responseCode = con.getResponseCode();
@@ -12011,15 +12011,15 @@ To perform this request, you must be authenticated via one of the following meth
 
 ```shell
 # You can also use wget
-curl -X DELETE https://example.modapi.io/v1/users/{user-id}/mute \
+curl -X DELETE https://*.modapi.io/v1/users/{user-id}/mute \
   -H 'Authorization: Bearer {access-token}' \ 
   -H 'Accept: application/json'
 
 ```
 
 ```http
-DELETE https://example.modapi.io/v1/users/{user-id}/mute HTTP/1.1
-Host: example.modapi.io
+DELETE https://*.modapi.io/v1/users/{user-id}/mute HTTP/1.1
+Host: *.modapi.io
 
 Accept: application/json
 Authorization: Bearer {access-token}
@@ -12034,7 +12034,7 @@ var headers = {
 };
 
 $.ajax({
-  url: 'https://example.modapi.io/v1/users/{user-id}/mute',
+  url: 'https://*.modapi.io/v1/users/{user-id}/mute',
   method: 'delete',
 
   headers: headers,
@@ -12053,7 +12053,7 @@ const headers = {
 
 };
 
-fetch('https://example.modapi.io/v1/users/{user-id}/mute',
+fetch('https://*.modapi.io/v1/users/{user-id}/mute',
 {
   method: 'DELETE',
 
@@ -12073,7 +12073,7 @@ headers = {
   'Accept': 'application/json'
 }
 
-r = requests.delete('https://example.modapi.io/v1/users/{user-id}/mute', params={
+r = requests.delete('https://*.modapi.io/v1/users/{user-id}/mute', params={
 
 }, headers = headers)
 
@@ -12081,7 +12081,7 @@ print r.json()
 ```
 
 ```java
-URL obj = new URL("https://example.modapi.io/v1/users/{user-id}/mute");
+URL obj = new URL("https://*.modapi.io/v1/users/{user-id}/mute");
 HttpURLConnection con = (HttpURLConnection) obj.openConnection();
 con.setRequestMethod("DELETE");
 int responseCode = con.getResponseCode();
@@ -12124,15 +12124,15 @@ To perform this request, you must be authenticated via one of the following meth
 
 ```shell
 # You can also use wget
-curl -X GET https://example.modapi.io/v1/me \
+curl -X GET https://*.modapi.io/v1/me \
   -H 'Authorization: Bearer {access-token}' \ 
   -H 'Accept: application/json'
 
 ```
 
 ```http
-GET https://example.modapi.io/v1/me HTTP/1.1
-Host: example.modapi.io
+GET https://*.modapi.io/v1/me HTTP/1.1
+Host: *.modapi.io
 
 Accept: application/json
 Authorization: Bearer {access-token}
@@ -12147,7 +12147,7 @@ var headers = {
 };
 
 $.ajax({
-  url: 'https://example.modapi.io/v1/me',
+  url: 'https://*.modapi.io/v1/me',
   method: 'get',
 
   headers: headers,
@@ -12166,7 +12166,7 @@ const headers = {
 
 };
 
-fetch('https://example.modapi.io/v1/me',
+fetch('https://*.modapi.io/v1/me',
 {
   method: 'GET',
 
@@ -12186,7 +12186,7 @@ headers = {
   'Accept': 'application/json'
 }
 
-r = requests.get('https://example.modapi.io/v1/me', params={
+r = requests.get('https://*.modapi.io/v1/me', params={
 
 }, headers = headers)
 
@@ -12194,7 +12194,7 @@ print r.json()
 ```
 
 ```java
-URL obj = new URL("https://example.modapi.io/v1/me");
+URL obj = new URL("https://*.modapi.io/v1/me");
 HttpURLConnection con = (HttpURLConnection) obj.openConnection();
 con.setRequestMethod("GET");
 int responseCode = con.getResponseCode();
@@ -12250,14 +12250,14 @@ To perform this request, you must be authenticated via one of the following meth
 
 ```shell
 # You can also use wget
-curl -X GET https://example.modapi.io/v1/me/events?api_key=YourApiKey \
+curl -X GET https://*.modapi.io/v1/me/events?api_key=YourApiKey \
   -H 'Accept: application/json'
 
 ```
 
 ```http
-GET https://example.modapi.io/v1/me/events?api_key=YourApiKey HTTP/1.1
-Host: example.modapi.io
+GET https://*.modapi.io/v1/me/events?api_key=YourApiKey HTTP/1.1
+Host: *.modapi.io
 
 Accept: application/json
 
@@ -12270,7 +12270,7 @@ var headers = {
 };
 
 $.ajax({
-  url: 'https://example.modapi.io/v1/me/events',
+  url: 'https://*.modapi.io/v1/me/events',
   method: 'get',
   data: '?api_key=YourApiKey',
   headers: headers,
@@ -12288,7 +12288,7 @@ const headers = {
 
 };
 
-fetch('https://example.modapi.io/v1/me/events?api_key=YourApiKey',
+fetch('https://*.modapi.io/v1/me/events?api_key=YourApiKey',
 {
   method: 'GET',
 
@@ -12307,7 +12307,7 @@ headers = {
   'Accept': 'application/json'
 }
 
-r = requests.get('https://example.modapi.io/v1/me/events', params={
+r = requests.get('https://*.modapi.io/v1/me/events', params={
   'api_key': 'YourApiKey'
 }, headers = headers)
 
@@ -12315,7 +12315,7 @@ print r.json()
 ```
 
 ```java
-URL obj = new URL("https://example.modapi.io/v1/me/events?api_key=YourApiKey");
+URL obj = new URL("https://*.modapi.io/v1/me/events?api_key=YourApiKey");
 HttpURLConnection con = (HttpURLConnection) obj.openConnection();
 con.setRequestMethod("GET");
 int responseCode = con.getResponseCode();
@@ -12382,15 +12382,15 @@ To perform this request, you must be authenticated via one of the following meth
 
 ```shell
 # You can also use wget
-curl -X GET https://example.modapi.io/v1/me/files \
+curl -X GET https://*.modapi.io/v1/me/files \
   -H 'Authorization: Bearer {access-token}' \ 
   -H 'Accept: application/json'
 
 ```
 
 ```http
-GET https://example.modapi.io/v1/me/files HTTP/1.1
-Host: example.modapi.io
+GET https://*.modapi.io/v1/me/files HTTP/1.1
+Host: *.modapi.io
 
 Accept: application/json
 Authorization: Bearer {access-token}
@@ -12405,7 +12405,7 @@ var headers = {
 };
 
 $.ajax({
-  url: 'https://example.modapi.io/v1/me/files',
+  url: 'https://*.modapi.io/v1/me/files',
   method: 'get',
 
   headers: headers,
@@ -12424,7 +12424,7 @@ const headers = {
 
 };
 
-fetch('https://example.modapi.io/v1/me/files',
+fetch('https://*.modapi.io/v1/me/files',
 {
   method: 'GET',
 
@@ -12444,7 +12444,7 @@ headers = {
   'Accept': 'application/json'
 }
 
-r = requests.get('https://example.modapi.io/v1/me/files', params={
+r = requests.get('https://*.modapi.io/v1/me/files', params={
 
 }, headers = headers)
 
@@ -12452,7 +12452,7 @@ print r.json()
 ```
 
 ```java
-URL obj = new URL("https://example.modapi.io/v1/me/files");
+URL obj = new URL("https://*.modapi.io/v1/me/files");
 HttpURLConnection con = (HttpURLConnection) obj.openConnection();
 con.setRequestMethod("GET");
 int responseCode = con.getResponseCode();
@@ -12512,7 +12512,7 @@ Get all modfiles the _authenticated user_ uploaded. Successful request will retu
       "changelog": "VERSION 1.3 -- Changes -- Fixed critical castle floor bug.",
       "metadata_blob": "rogue,hd,high-res,4k,hd textures",
       "download": {
-        "binary_url": "https://example.modapi.io/v1/games/1/mods/1/files/1/download/c489a0354111a4d76640d47f0cdcb294",
+        "binary_url": "https://*.modapi.io/v1/games/1/mods/1/files/1/download/c489a0354111a4d76640d47f0cdcb294",
         "date_expires": 1579316848
       },
       "platforms": [
@@ -12548,15 +12548,15 @@ To perform this request, you must be authenticated via one of the following meth
 
 ```shell
 # You can also use wget
-curl -X GET https://example.modapi.io/v1/me/games \
+curl -X GET https://*.modapi.io/v1/me/games \
   -H 'Authorization: Bearer {access-token}' \ 
   -H 'Accept: application/json'
 
 ```
 
 ```http
-GET https://example.modapi.io/v1/me/games HTTP/1.1
-Host: example.modapi.io
+GET https://*.modapi.io/v1/me/games HTTP/1.1
+Host: *.modapi.io
 
 Accept: application/json
 Authorization: Bearer {access-token}
@@ -12571,7 +12571,7 @@ var headers = {
 };
 
 $.ajax({
-  url: 'https://example.modapi.io/v1/me/games',
+  url: 'https://*.modapi.io/v1/me/games',
   method: 'get',
 
   headers: headers,
@@ -12590,7 +12590,7 @@ const headers = {
 
 };
 
-fetch('https://example.modapi.io/v1/me/games',
+fetch('https://*.modapi.io/v1/me/games',
 {
   method: 'GET',
 
@@ -12610,7 +12610,7 @@ headers = {
   'Accept': 'application/json'
 }
 
-r = requests.get('https://example.modapi.io/v1/me/games', params={
+r = requests.get('https://*.modapi.io/v1/me/games', params={
 
 }, headers = headers)
 
@@ -12618,7 +12618,7 @@ print r.json()
 ```
 
 ```java
-URL obj = new URL("https://example.modapi.io/v1/me/games");
+URL obj = new URL("https://*.modapi.io/v1/me/games");
 HttpURLConnection con = (HttpURLConnection) obj.openConnection();
 con.setRequestMethod("GET");
 int responseCode = con.getResponseCode();
@@ -12785,15 +12785,15 @@ To perform this request, you must be authenticated via one of the following meth
 
 ```shell
 # You can also use wget
-curl -X GET https://example.modapi.io/v1/me/subscribed \
+curl -X GET https://*.modapi.io/v1/me/subscribed \
   -H 'Authorization: Bearer {access-token}' \ 
   -H 'Accept: application/json'
 
 ```
 
 ```http
-GET https://example.modapi.io/v1/me/subscribed HTTP/1.1
-Host: example.modapi.io
+GET https://*.modapi.io/v1/me/subscribed HTTP/1.1
+Host: *.modapi.io
 
 Accept: application/json
 Authorization: Bearer {access-token}
@@ -12808,7 +12808,7 @@ var headers = {
 };
 
 $.ajax({
-  url: 'https://example.modapi.io/v1/me/subscribed',
+  url: 'https://*.modapi.io/v1/me/subscribed',
   method: 'get',
 
   headers: headers,
@@ -12827,7 +12827,7 @@ const headers = {
 
 };
 
-fetch('https://example.modapi.io/v1/me/subscribed',
+fetch('https://*.modapi.io/v1/me/subscribed',
 {
   method: 'GET',
 
@@ -12847,7 +12847,7 @@ headers = {
   'Accept': 'application/json'
 }
 
-r = requests.get('https://example.modapi.io/v1/me/subscribed', params={
+r = requests.get('https://*.modapi.io/v1/me/subscribed', params={
 
 }, headers = headers)
 
@@ -12855,7 +12855,7 @@ print r.json()
 ```
 
 ```java
-URL obj = new URL("https://example.modapi.io/v1/me/subscribed");
+URL obj = new URL("https://*.modapi.io/v1/me/subscribed");
 HttpURLConnection con = (HttpURLConnection) obj.openConnection();
 con.setRequestMethod("GET");
 int responseCode = con.getResponseCode();
@@ -12985,7 +12985,7 @@ Get all mod's the _authenticated user_ is subscribed to. Successful request will
         "changelog": "VERSION 1.3 -- Changes -- Fixed critical castle floor bug.",
         "metadata_blob": "rogue,hd,high-res,4k,hd textures",
         "download": {
-          "binary_url": "https://example.modapi.io/v1/games/1/mods/1/files/1/download/c489a0354111a4d76640d47f0cdcb294",
+          "binary_url": "https://*.modapi.io/v1/games/1/mods/1/files/1/download/c489a0354111a4d76640d47f0cdcb294",
           "date_expires": 1579316848
         },
         "platforms": [
@@ -13059,15 +13059,15 @@ To perform this request, you must be authenticated via one of the following meth
 
 ```shell
 # You can also use wget
-curl -X GET https://example.modapi.io/v1/me/mods \
+curl -X GET https://*.modapi.io/v1/me/mods \
   -H 'Authorization: Bearer {access-token}' \ 
   -H 'Accept: application/json'
 
 ```
 
 ```http
-GET https://example.modapi.io/v1/me/mods HTTP/1.1
-Host: example.modapi.io
+GET https://*.modapi.io/v1/me/mods HTTP/1.1
+Host: *.modapi.io
 
 Accept: application/json
 Authorization: Bearer {access-token}
@@ -13082,7 +13082,7 @@ var headers = {
 };
 
 $.ajax({
-  url: 'https://example.modapi.io/v1/me/mods',
+  url: 'https://*.modapi.io/v1/me/mods',
   method: 'get',
 
   headers: headers,
@@ -13101,7 +13101,7 @@ const headers = {
 
 };
 
-fetch('https://example.modapi.io/v1/me/mods',
+fetch('https://*.modapi.io/v1/me/mods',
 {
   method: 'GET',
 
@@ -13121,7 +13121,7 @@ headers = {
   'Accept': 'application/json'
 }
 
-r = requests.get('https://example.modapi.io/v1/me/mods', params={
+r = requests.get('https://*.modapi.io/v1/me/mods', params={
 
 }, headers = headers)
 
@@ -13129,7 +13129,7 @@ print r.json()
 ```
 
 ```java
-URL obj = new URL("https://example.modapi.io/v1/me/mods");
+URL obj = new URL("https://*.modapi.io/v1/me/mods");
 HttpURLConnection con = (HttpURLConnection) obj.openConnection();
 con.setRequestMethod("GET");
 int responseCode = con.getResponseCode();
@@ -13259,7 +13259,7 @@ Get all mods the _authenticated user_ added or is a team member of. Successful r
         "changelog": "VERSION 1.3 -- Changes -- Fixed critical castle floor bug.",
         "metadata_blob": "rogue,hd,high-res,4k,hd textures",
         "download": {
-          "binary_url": "https://example.modapi.io/v1/games/1/mods/1/files/1/download/c489a0354111a4d76640d47f0cdcb294",
+          "binary_url": "https://*.modapi.io/v1/games/1/mods/1/files/1/download/c489a0354111a4d76640d47f0cdcb294",
           "date_expires": 1579316848
         },
         "platforms": [
@@ -13329,15 +13329,15 @@ To perform this request, you must be authenticated via one of the following meth
 
 ```shell
 # You can also use wget
-curl -X GET https://example.modapi.io/v1/me/users/muted \
+curl -X GET https://*.modapi.io/v1/me/users/muted \
   -H 'Authorization: Bearer {access-token}' \ 
   -H 'Accept: application/json'
 
 ```
 
 ```http
-GET https://example.modapi.io/v1/me/users/muted HTTP/1.1
-Host: example.modapi.io
+GET https://*.modapi.io/v1/me/users/muted HTTP/1.1
+Host: *.modapi.io
 
 Accept: application/json
 Authorization: Bearer {access-token}
@@ -13352,7 +13352,7 @@ var headers = {
 };
 
 $.ajax({
-  url: 'https://example.modapi.io/v1/me/users/muted',
+  url: 'https://*.modapi.io/v1/me/users/muted',
   method: 'get',
 
   headers: headers,
@@ -13371,7 +13371,7 @@ const headers = {
 
 };
 
-fetch('https://example.modapi.io/v1/me/users/muted',
+fetch('https://*.modapi.io/v1/me/users/muted',
 {
   method: 'GET',
 
@@ -13391,7 +13391,7 @@ headers = {
   'Accept': 'application/json'
 }
 
-r = requests.get('https://example.modapi.io/v1/me/users/muted', params={
+r = requests.get('https://*.modapi.io/v1/me/users/muted', params={
 
 }, headers = headers)
 
@@ -13399,7 +13399,7 @@ print r.json()
 ```
 
 ```java
-URL obj = new URL("https://example.modapi.io/v1/me/users/muted");
+URL obj = new URL("https://*.modapi.io/v1/me/users/muted");
 HttpURLConnection con = (HttpURLConnection) obj.openConnection();
 con.setRequestMethod("GET");
 int responseCode = con.getResponseCode();
@@ -13466,15 +13466,15 @@ To perform this request, you must be authenticated via one of the following meth
 
 ```shell
 # You can also use wget
-curl -X GET https://example.modapi.io/v1/me/ratings \
+curl -X GET https://*.modapi.io/v1/me/ratings \
   -H 'Authorization: Bearer {access-token}' \ 
   -H 'Accept: application/json'
 
 ```
 
 ```http
-GET https://example.modapi.io/v1/me/ratings HTTP/1.1
-Host: example.modapi.io
+GET https://*.modapi.io/v1/me/ratings HTTP/1.1
+Host: *.modapi.io
 
 Accept: application/json
 Authorization: Bearer {access-token}
@@ -13489,7 +13489,7 @@ var headers = {
 };
 
 $.ajax({
-  url: 'https://example.modapi.io/v1/me/ratings',
+  url: 'https://*.modapi.io/v1/me/ratings',
   method: 'get',
 
   headers: headers,
@@ -13508,7 +13508,7 @@ const headers = {
 
 };
 
-fetch('https://example.modapi.io/v1/me/ratings',
+fetch('https://*.modapi.io/v1/me/ratings',
 {
   method: 'GET',
 
@@ -13528,7 +13528,7 @@ headers = {
   'Accept': 'application/json'
 }
 
-r = requests.get('https://example.modapi.io/v1/me/ratings', params={
+r = requests.get('https://*.modapi.io/v1/me/ratings', params={
 
 }, headers = headers)
 
@@ -13536,7 +13536,7 @@ print r.json()
 ```
 
 ```java
-URL obj = new URL("https://example.modapi.io/v1/me/ratings");
+URL obj = new URL("https://*.modapi.io/v1/me/ratings");
 HttpURLConnection con = (HttpURLConnection) obj.openConnection();
 con.setRequestMethod("GET");
 int responseCode = con.getResponseCode();
@@ -13601,14 +13601,14 @@ To perform this request, you must be authenticated via one of the following meth
 
 ```shell
 # You can also use wget
-curl -X GET https://example.modapi.io/v1/games/{game-id}/guides?api_key=YourApiKey \
+curl -X GET https://*.modapi.io/v1/games/{game-id}/guides?api_key=YourApiKey \
   -H 'Accept: application/json'
 
 ```
 
 ```http
-GET https://example.modapi.io/v1/games/{game-id}/guides?api_key=YourApiKey HTTP/1.1
-Host: example.modapi.io
+GET https://*.modapi.io/v1/games/{game-id}/guides?api_key=YourApiKey HTTP/1.1
+Host: *.modapi.io
 
 Accept: application/json
 
@@ -13621,7 +13621,7 @@ var headers = {
 };
 
 $.ajax({
-  url: 'https://example.modapi.io/v1/games/{game-id}/guides',
+  url: 'https://*.modapi.io/v1/games/{game-id}/guides',
   method: 'get',
   data: '?api_key=YourApiKey',
   headers: headers,
@@ -13639,7 +13639,7 @@ const headers = {
 
 };
 
-fetch('https://example.modapi.io/v1/games/{game-id}/guides?api_key=YourApiKey',
+fetch('https://*.modapi.io/v1/games/{game-id}/guides?api_key=YourApiKey',
 {
   method: 'GET',
 
@@ -13658,7 +13658,7 @@ headers = {
   'Accept': 'application/json'
 }
 
-r = requests.get('https://example.modapi.io/v1/games/{game-id}/guides', params={
+r = requests.get('https://*.modapi.io/v1/games/{game-id}/guides', params={
   'api_key': 'YourApiKey'
 }, headers = headers)
 
@@ -13666,7 +13666,7 @@ print r.json()
 ```
 
 ```java
-URL obj = new URL("https://example.modapi.io/v1/games/{game-id}/guides?api_key=YourApiKey");
+URL obj = new URL("https://*.modapi.io/v1/games/{game-id}/guides?api_key=YourApiKey");
 HttpURLConnection con = (HttpURLConnection) obj.openConnection();
 con.setRequestMethod("GET");
 int responseCode = con.getResponseCode();
@@ -13784,14 +13784,14 @@ To perform this request, you must be authenticated via one of the following meth
 
 ```shell
 # You can also use wget
-curl -X GET https://example.modapi.io/v1/games/{game-id}/guides/{guide-id}?api_key=YourApiKey \
+curl -X GET https://*.modapi.io/v1/games/{game-id}/guides/{guide-id}?api_key=YourApiKey \
   -H 'Accept: application/json'
 
 ```
 
 ```http
-GET https://example.modapi.io/v1/games/{game-id}/guides/{guide-id}?api_key=YourApiKey HTTP/1.1
-Host: example.modapi.io
+GET https://*.modapi.io/v1/games/{game-id}/guides/{guide-id}?api_key=YourApiKey HTTP/1.1
+Host: *.modapi.io
 
 Accept: application/json
 
@@ -13804,7 +13804,7 @@ var headers = {
 };
 
 $.ajax({
-  url: 'https://example.modapi.io/v1/games/{game-id}/guides/{guide-id}',
+  url: 'https://*.modapi.io/v1/games/{game-id}/guides/{guide-id}',
   method: 'get',
   data: '?api_key=YourApiKey',
   headers: headers,
@@ -13822,7 +13822,7 @@ const headers = {
 
 };
 
-fetch('https://example.modapi.io/v1/games/{game-id}/guides/{guide-id}?api_key=YourApiKey',
+fetch('https://*.modapi.io/v1/games/{game-id}/guides/{guide-id}?api_key=YourApiKey',
 {
   method: 'GET',
 
@@ -13841,7 +13841,7 @@ headers = {
   'Accept': 'application/json'
 }
 
-r = requests.get('https://example.modapi.io/v1/games/{game-id}/guides/{guide-id}', params={
+r = requests.get('https://*.modapi.io/v1/games/{game-id}/guides/{guide-id}', params={
   'api_key': 'YourApiKey'
 }, headers = headers)
 
@@ -13849,7 +13849,7 @@ print r.json()
 ```
 
 ```java
-URL obj = new URL("https://example.modapi.io/v1/games/{game-id}/guides/{guide-id}?api_key=YourApiKey");
+URL obj = new URL("https://*.modapi.io/v1/games/{game-id}/guides/{guide-id}?api_key=YourApiKey");
 HttpURLConnection con = (HttpURLConnection) obj.openConnection();
 con.setRequestMethod("GET");
 int responseCode = con.getResponseCode();
@@ -13940,7 +13940,7 @@ To perform this request, you must be authenticated via one of the following meth
 
 ```shell
 # You can also use wget
-curl -X POST https://example.modapi.io/v1/games/{game-id}/guides \
+curl -X POST https://*.modapi.io/v1/games/{game-id}/guides \
   -H 'Authorization: Bearer {access-token}' \ 
   -H 'Content-Type: multipart/form-data' \ 
   -H 'Content-Type: multipart/form-data' \ 
@@ -13954,8 +13954,8 @@ curl -X POST https://example.modapi.io/v1/games/{game-id}/guides \
 ```
 
 ```http
-POST https://example.modapi.io/v1/games/{game-id}/guides HTTP/1.1
-Host: example.modapi.io
+POST https://*.modapi.io/v1/games/{game-id}/guides HTTP/1.1
+Host: *.modapi.io
 Content-Type: multipart/form-data
 Accept: application/json
 Authorization: Bearer {access-token}
@@ -13973,7 +13973,7 @@ var headers = {
 };
 
 $.ajax({
-  url: 'https://example.modapi.io/v1/games/{game-id}/guides',
+  url: 'https://*.modapi.io/v1/games/{game-id}/guides',
   method: 'post',
 
   headers: headers,
@@ -14000,7 +14000,7 @@ const headers = {
 
 };
 
-fetch('https://example.modapi.io/v1/games/{game-id}/guides',
+fetch('https://*.modapi.io/v1/games/{game-id}/guides',
 {
   method: 'POST',
   body: inputBody,
@@ -14022,7 +14022,7 @@ headers = {
   'Accept': 'application/json'
 }
 
-r = requests.post('https://example.modapi.io/v1/games/{game-id}/guides', params={
+r = requests.post('https://*.modapi.io/v1/games/{game-id}/guides', params={
 
 }, headers = headers)
 
@@ -14030,7 +14030,7 @@ print r.json()
 ```
 
 ```java
-URL obj = new URL("https://example.modapi.io/v1/games/{game-id}/guides");
+URL obj = new URL("https://*.modapi.io/v1/games/{game-id}/guides");
 HttpURLConnection con = (HttpURLConnection) obj.openConnection();
 con.setRequestMethod("POST");
 int responseCode = con.getResponseCode();
@@ -14133,7 +14133,7 @@ To perform this request, you must be authenticated via one of the following meth
 
 ```shell
 # You can also use wget
-curl -X POST https://example.modapi.io/v1/games/{game-id}/guides/{guide-id} \
+curl -X POST https://*.modapi.io/v1/games/{game-id}/guides/{guide-id} \
   -H 'Authorization: Bearer {access-token}' \ 
   -H 'Content-Type: multipart/form-data' \ 
   -H 'Content-Type: multipart/form-data' \ 
@@ -14147,8 +14147,8 @@ curl -X POST https://example.modapi.io/v1/games/{game-id}/guides/{guide-id} \
 ```
 
 ```http
-POST https://example.modapi.io/v1/games/{game-id}/guides/{guide-id} HTTP/1.1
-Host: example.modapi.io
+POST https://*.modapi.io/v1/games/{game-id}/guides/{guide-id} HTTP/1.1
+Host: *.modapi.io
 Content-Type: multipart/form-data
 Accept: application/json
 Authorization: Bearer {access-token}
@@ -14166,7 +14166,7 @@ var headers = {
 };
 
 $.ajax({
-  url: 'https://example.modapi.io/v1/games/{game-id}/guides/{guide-id}',
+  url: 'https://*.modapi.io/v1/games/{game-id}/guides/{guide-id}',
   method: 'post',
 
   headers: headers,
@@ -14193,7 +14193,7 @@ const headers = {
 
 };
 
-fetch('https://example.modapi.io/v1/games/{game-id}/guides/{guide-id}',
+fetch('https://*.modapi.io/v1/games/{game-id}/guides/{guide-id}',
 {
   method: 'POST',
   body: inputBody,
@@ -14215,7 +14215,7 @@ headers = {
   'Accept': 'application/json'
 }
 
-r = requests.post('https://example.modapi.io/v1/games/{game-id}/guides/{guide-id}', params={
+r = requests.post('https://*.modapi.io/v1/games/{game-id}/guides/{guide-id}', params={
 
 }, headers = headers)
 
@@ -14223,7 +14223,7 @@ print r.json()
 ```
 
 ```java
-URL obj = new URL("https://example.modapi.io/v1/games/{game-id}/guides/{guide-id}");
+URL obj = new URL("https://*.modapi.io/v1/games/{game-id}/guides/{guide-id}");
 HttpURLConnection con = (HttpURLConnection) obj.openConnection();
 con.setRequestMethod("POST");
 int responseCode = con.getResponseCode();
@@ -14328,7 +14328,7 @@ To perform this request, you must be authenticated via one of the following meth
 
 ```shell
 # You can also use wget
-curl -X DELETE https://example.modapi.io/v1/games/{game-id}/guides/{guide-id} \
+curl -X DELETE https://*.modapi.io/v1/games/{game-id}/guides/{guide-id} \
   -H 'Authorization: Bearer {access-token}' \ 
   -H 'Content-Type: application/x-www-form-urlencoded' \ 
   -H 'Accept: application/json'
@@ -14336,8 +14336,8 @@ curl -X DELETE https://example.modapi.io/v1/games/{game-id}/guides/{guide-id} \
 ```
 
 ```http
-DELETE https://example.modapi.io/v1/games/{game-id}/guides/{guide-id} HTTP/1.1
-Host: example.modapi.io
+DELETE https://*.modapi.io/v1/games/{game-id}/guides/{guide-id} HTTP/1.1
+Host: *.modapi.io
 
 Accept: application/json
 Authorization: Bearer {access-token}
@@ -14354,7 +14354,7 @@ var headers = {
 };
 
 $.ajax({
-  url: 'https://example.modapi.io/v1/games/{game-id}/guides/{guide-id}',
+  url: 'https://*.modapi.io/v1/games/{game-id}/guides/{guide-id}',
   method: 'delete',
 
   headers: headers,
@@ -14374,7 +14374,7 @@ const headers = {
 
 };
 
-fetch('https://example.modapi.io/v1/games/{game-id}/guides/{guide-id}',
+fetch('https://*.modapi.io/v1/games/{game-id}/guides/{guide-id}',
 {
   method: 'DELETE',
 
@@ -14395,7 +14395,7 @@ headers = {
   'Accept': 'application/json'
 }
 
-r = requests.delete('https://example.modapi.io/v1/games/{game-id}/guides/{guide-id}', params={
+r = requests.delete('https://*.modapi.io/v1/games/{game-id}/guides/{guide-id}', params={
 
 }, headers = headers)
 
@@ -14403,7 +14403,7 @@ print r.json()
 ```
 
 ```java
-URL obj = new URL("https://example.modapi.io/v1/games/{game-id}/guides/{guide-id}");
+URL obj = new URL("https://*.modapi.io/v1/games/{game-id}/guides/{guide-id}");
 HttpURLConnection con = (HttpURLConnection) obj.openConnection();
 con.setRequestMethod("DELETE");
 int responseCode = con.getResponseCode();
@@ -14445,14 +14445,14 @@ To perform this request, you must be authenticated via one of the following meth
 
 ```shell
 # You can also use wget
-curl -X GET https://example.modapi.io/v1/games/{game-id}/guides/tags?api_key=YourApiKey \
+curl -X GET https://*.modapi.io/v1/games/{game-id}/guides/tags?api_key=YourApiKey \
   -H 'Accept: application/json'
 
 ```
 
 ```http
-GET https://example.modapi.io/v1/games/{game-id}/guides/tags?api_key=YourApiKey HTTP/1.1
-Host: example.modapi.io
+GET https://*.modapi.io/v1/games/{game-id}/guides/tags?api_key=YourApiKey HTTP/1.1
+Host: *.modapi.io
 
 Accept: application/json
 
@@ -14465,7 +14465,7 @@ var headers = {
 };
 
 $.ajax({
-  url: 'https://example.modapi.io/v1/games/{game-id}/guides/tags',
+  url: 'https://*.modapi.io/v1/games/{game-id}/guides/tags',
   method: 'get',
   data: '?api_key=YourApiKey',
   headers: headers,
@@ -14483,7 +14483,7 @@ const headers = {
 
 };
 
-fetch('https://example.modapi.io/v1/games/{game-id}/guides/tags?api_key=YourApiKey',
+fetch('https://*.modapi.io/v1/games/{game-id}/guides/tags?api_key=YourApiKey',
 {
   method: 'GET',
 
@@ -14502,7 +14502,7 @@ headers = {
   'Accept': 'application/json'
 }
 
-r = requests.get('https://example.modapi.io/v1/games/{game-id}/guides/tags', params={
+r = requests.get('https://*.modapi.io/v1/games/{game-id}/guides/tags', params={
   'api_key': 'YourApiKey'
 }, headers = headers)
 
@@ -14510,7 +14510,7 @@ print r.json()
 ```
 
 ```java
-URL obj = new URL("https://example.modapi.io/v1/games/{game-id}/guides/tags?api_key=YourApiKey");
+URL obj = new URL("https://*.modapi.io/v1/games/{game-id}/guides/tags?api_key=YourApiKey");
 HttpURLConnection con = (HttpURLConnection) obj.openConnection();
 con.setRequestMethod("GET");
 int responseCode = con.getResponseCode();
@@ -14718,7 +14718,7 @@ content|string|Contents of the comment.
 
 ```json
 {
-  "binary_url": "https://example.modapi.io/v1/games/1/mods/1/files/1/download/c489a0354111a4d76640d47f0cdcb294",
+  "binary_url": "https://*.modapi.io/v1/games/1/mods/1/files/1/download/c489a0354111a4d76640d47f0cdcb294",
   "date_expires": 1579316848
 } 
 ```
@@ -15475,7 +15475,7 @@ result_total|integer|Total number of results found.
         "changelog": "VERSION 1.3 -- Changes -- Fixed critical castle floor bug.",
         "metadata_blob": "rogue,hd,high-res,4k,hd textures",
         "download": {
-          "binary_url": "https://example.modapi.io/v1/games/1/mods/1/files/1/download/c489a0354111a4d76640d47f0cdcb294",
+          "binary_url": "https://*.modapi.io/v1/games/1/mods/1/files/1/download/c489a0354111a4d76640d47f0cdcb294",
           "date_expires": 1579316848
         },
         "platforms": [
@@ -15684,7 +15684,7 @@ result_total|integer|Total number of results found.
       "changelog": "VERSION 1.3 -- Changes -- Fixed critical castle floor bug.",
       "metadata_blob": "rogue,hd,high-res,4k,hd textures",
       "download": {
-        "binary_url": "https://example.modapi.io/v1/games/1/mods/1/files/1/download/c489a0354111a4d76640d47f0cdcb294",
+        "binary_url": "https://*.modapi.io/v1/games/1/mods/1/files/1/download/c489a0354111a4d76640d47f0cdcb294",
         "date_expires": 1579316848
       },
       "platforms": [
@@ -15803,7 +15803,7 @@ result_total|integer|Total number of results found.
         "changelog": "VERSION 1.3 -- Changes -- Fixed critical castle floor bug.",
         "metadata_blob": "rogue,hd,high-res,4k,hd textures",
         "download": {
-          "binary_url": "https://example.modapi.io/v1/games/1/mods/1/files/1/download/c489a0354111a4d76640d47f0cdcb294",
+          "binary_url": "https://*.modapi.io/v1/games/1/mods/1/files/1/download/c489a0354111a4d76640d47f0cdcb294",
           "date_expires": 1579316848
         },
         "platforms": [
@@ -16433,7 +16433,7 @@ metavalue|string|The value of the key-value pair.
     "changelog": "VERSION 1.3 -- Changes -- Fixed critical castle floor bug.",
     "metadata_blob": "rogue,hd,high-res,4k,hd textures",
     "download": {
-      "binary_url": "https://example.modapi.io/v1/games/1/mods/1/files/1/download/c489a0354111a4d76640d47f0cdcb294",
+      "binary_url": "https://*.modapi.io/v1/games/1/mods/1/files/1/download/c489a0354111a4d76640d47f0cdcb294",
       "date_expires": 1579316848
     },
     "platforms": [
@@ -16603,7 +16603,7 @@ images|[Image Object](#schemaimage_object)[]|Array of image objects (a gallery).
     "changelog": "VERSION 1.3 -- Changes -- Fixed critical castle floor bug.",
     "metadata_blob": "rogue,hd,high-res,4k,hd textures",
     "download": {
-      "binary_url": "https://example.modapi.io/v1/games/1/mods/1/files/1/download/c489a0354111a4d76640d47f0cdcb294",
+      "binary_url": "https://*.modapi.io/v1/games/1/mods/1/files/1/download/c489a0354111a4d76640d47f0cdcb294",
       "date_expires": 1579316848
     },
     "platforms": [
@@ -16847,7 +16847,7 @@ date_added|integer|Unix timestamp of the date the user was registered as a previ
   "changelog": "VERSION 1.3 -- Changes -- Fixed critical castle floor bug.",
   "metadata_blob": "rogue,hd,high-res,4k,hd textures",
   "download": {
-    "binary_url": "https://example.modapi.io/v1/games/1/mods/1/files/1/download/c489a0354111a4d76640d47f0cdcb294",
+    "binary_url": "https://*.modapi.io/v1/games/1/mods/1/files/1/download/c489a0354111a4d76640d47f0cdcb294",
     "date_expires": 1579316848
   },
   "platforms": [
@@ -16898,7 +16898,7 @@ platforms|[Modfile Platform Object](#schemamodfile_platform_object)[]|Contains m
 Name|Type|Description
 ---|---|---|---|
 platform|string|A [target platform](#targeting-a-platform).
-status|integer|The status of the modfile for the corresponding `platform`. Possible values:<br><br>__0__ = Pending<br>__1__ = Approved<br>__2__ = Denied
+status|integer|The status of the modfile for the corresponding `platform`. Possible values:<br><br>__0__ = Pending<br>__1__ = Approved<br>__2__ = Denied<br>__3__ = Targetted
 
 
 
@@ -16954,7 +16954,7 @@ pending|string[]|Array of [valid platform strings](#targeting-a-platform) showin
 Name|Type|Description
 ---|---|---|---|
 upload_id|string|A universally unique identifier (UUID) that represents the upload session.
-status|integer|The status of the upload session:<br><br>__0__ = Incomplete<br>__1__ = Pending<br>__2__ = Processing<br>__3__ Complete<br>__4__ = Cancelled
+status|integer|The status of the upload session:<br><br>__0__ = Incomplete<br>__1__ = Pending<br>__2__ = Processing<br>__3__ = Complete<br>__4__ = Cancelled
 
 
 
