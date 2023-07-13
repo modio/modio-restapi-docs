@@ -4438,7 +4438,7 @@ To perform this request, you must be authenticated via one of the following meth
 # You can also use wget
 curl -X DELETE https://api.mod.io/v1/games/{game-id}/mods/{mod-id} \
   -H 'Authorization: Bearer {access-token}' \ 
-  -H 'Content-Type: multipart/form-data' \ 
+  -H 'Content-Type: application/x-www-form-urlencoded' \ 
   -H 'Accept: application/json'
 
 ```
@@ -4449,14 +4449,14 @@ Host: api.mod.io
 
 Accept: application/json
 Authorization: Bearer {access-token}
-Content-Type: multipart/form-data
+Content-Type: application/x-www-form-urlencoded
 
 ```
 
 ```javascript
 var headers = {
   'Authorization':'Bearer {access-token}',
-  'Content-Type':'multipart/form-data',
+  'Content-Type':'application/x-www-form-urlencoded',
   'Accept':'application/json'
 
 };
@@ -4477,7 +4477,7 @@ const request = require('node-fetch');
 
 const headers = {
   'Authorization':'Bearer {access-token}',
-  'Content-Type':'multipart/form-data',
+  'Content-Type':'application/x-www-form-urlencoded',
   'Accept':'application/json'
 
 };
@@ -4499,7 +4499,7 @@ fetch('https://api.mod.io/v1/games/{game-id}/mods/{mod-id}',
 import requests
 headers = {
   'Authorization': 'Bearer {access-token}',
-  'Content-Type': 'multipart/form-data',
+  'Content-Type': 'application/x-www-form-urlencoded',
   'Accept': 'application/json'
 }
 
