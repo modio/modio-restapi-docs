@@ -7022,7 +7022,7 @@ To perform this request, you must be authenticated via one of the following meth
 <div class="highlight"><pre class="highlight shell tab-shell"><code><span class="c"># You can also use wget</span>
 curl <span class="nt">-X</span> DELETE https://api.mod.io/v1/games/<span class="o">{</span>game-id<span class="o">}</span>/mods/<span class="o">{</span>mod-id<span class="o">}</span> <span class="se">\</span>
   <span class="nt">-H</span> <span class="s1">'Authorization: Bearer {access-token}'</span> <span class="se">\ </span>
-  <span class="nt">-H</span> <span class="s1">'Content-Type: multipart/form-data'</span> <span class="se">\ </span>
+  <span class="nt">-H</span> <span class="s1">'Content-Type: application/x-www-form-urlencoded'</span> <span class="se">\ </span>
   <span class="nt">-H</span> <span class="s1">'Accept: application/json'</span>
 
 </code></pre></div><div class="highlight"><pre class="highlight http tab-http"><code><span class="nf">DELETE</span> <span class="nn">https://api.mod.io/v1/games/{game-id}/mods/{mod-id}</span> <span class="k">HTTP</span><span class="o">/</span><span class="m">1.1</span>
@@ -7030,11 +7030,11 @@ curl <span class="nt">-X</span> DELETE https://api.mod.io/v1/games/<span class="
 
 Accept: application/json
 Authorization: Bearer {access-token}
-Content-Type: multipart/form-data
+Content-Type: application/x-www-form-urlencoded
 
 </code></pre></div><div class="highlight"><pre class="highlight javascript tab-javascript"><code><span class="kd">var</span> <span class="nx">headers</span> <span class="o">=</span> <span class="p">{</span>
   <span class="dl">'</span><span class="s1">Authorization</span><span class="dl">'</span><span class="p">:</span><span class="dl">'</span><span class="s1">Bearer {access-token}</span><span class="dl">'</span><span class="p">,</span>
-  <span class="dl">'</span><span class="s1">Content-Type</span><span class="dl">'</span><span class="p">:</span><span class="dl">'</span><span class="s1">multipart/form-data</span><span class="dl">'</span><span class="p">,</span>
+  <span class="dl">'</span><span class="s1">Content-Type</span><span class="dl">'</span><span class="p">:</span><span class="dl">'</span><span class="s1">application/x-www-form-urlencoded</span><span class="dl">'</span><span class="p">,</span>
   <span class="dl">'</span><span class="s1">Accept</span><span class="dl">'</span><span class="p">:</span><span class="dl">'</span><span class="s1">application/json</span><span class="dl">'</span>
 
 <span class="p">};</span>
@@ -7052,7 +7052,7 @@ Content-Type: multipart/form-data
 
 <span class="kd">const</span> <span class="nx">headers</span> <span class="o">=</span> <span class="p">{</span>
   <span class="dl">'</span><span class="s1">Authorization</span><span class="dl">'</span><span class="p">:</span><span class="dl">'</span><span class="s1">Bearer {access-token}</span><span class="dl">'</span><span class="p">,</span>
-  <span class="dl">'</span><span class="s1">Content-Type</span><span class="dl">'</span><span class="p">:</span><span class="dl">'</span><span class="s1">multipart/form-data</span><span class="dl">'</span><span class="p">,</span>
+  <span class="dl">'</span><span class="s1">Content-Type</span><span class="dl">'</span><span class="p">:</span><span class="dl">'</span><span class="s1">application/x-www-form-urlencoded</span><span class="dl">'</span><span class="p">,</span>
   <span class="dl">'</span><span class="s1">Accept</span><span class="dl">'</span><span class="p">:</span><span class="dl">'</span><span class="s1">application/json</span><span class="dl">'</span>
 
 <span class="p">};</span>
@@ -7071,7 +7071,7 @@ Content-Type: multipart/form-data
 </code></pre></div><div class="highlight"><pre class="highlight python tab-python"><code><span class="kn">import</span> <span class="nn">requests</span>
 <span class="n">headers</span> <span class="o">=</span> <span class="p">{</span>
   <span class="s">'Authorization'</span><span class="p">:</span> <span class="s">'Bearer {access-token}'</span><span class="p">,</span>
-  <span class="s">'Content-Type'</span><span class="p">:</span> <span class="s">'multipart/form-data'</span><span class="p">,</span>
+  <span class="s">'Content-Type'</span><span class="p">:</span> <span class="s">'application/x-www-form-urlencoded'</span><span class="p">,</span>
   <span class="s">'Accept'</span><span class="p">:</span> <span class="s">'application/json'</span>
 <span class="p">}</span>
 
