@@ -4836,7 +4836,7 @@ Get a mod. Successful request will return a single [Mod Object](#mod-object).
 ```
 <h3 id="endpoint-xplatform-notice">Cross-Platform Filtering</h3>
 
-If the parent game has platform filtering enabled, this endpoint supports the [targeting a platform](#targeting-a-platform) request header to return the [modfile](#modfile-object) within the [Mod Object](#mod-object) for the requested platform. If the request targets a platform that is invalid, the `modfile` field will be and empty object `{}`.
+If the parent game has platform filtering enabled, this endpoint supports the [targeting a platform](#targeting-a-platform) request header to return the [modfile](#modfile-object) within the [Mod Object](#mod-object) for the requested platform. If the request targets a platform that is invalid, the `modfile` field will be an empty object `{}`.
 
 <h3 id="Get-Mod-responses">Responses</h3>
 
