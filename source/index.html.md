@@ -2655,7 +2655,9 @@ System.out.println(response.toString());
 
 `GET /authorize`
 
-Log a user into your website with a mod.io account using the OAuth2 [Authorization Code flow](https://datatracker.ietf.org/doc/html/rfc6749#section-1.3.1). Your application should redirect to this URL after the user initiates the login flow. Upon a successful login the user will be redirected to your registered callback URL where you can [exchange](#2-exchange-authorization-code) the `code` returned for an access token.<br><br>__Note:__ This request is a web display hosted by mod.io, and therefore does not target the usual base API URL as shown by the example code snippet.
+Log a user into your website with a mod.io account using the OAuth2 [Authorization Code flow](https://datatracker.ietf.org/doc/html/rfc6749#section-1.3.1). Your application should redirect to this URL after the user initiates the login flow. Upon a successful login the user will be redirected to your registered callback URL where you can [exchange](#2-exchange-authorization-code) the `code` returned for an access token.
+
+    __Note:__ This request is a web display hosted by mod.io, and therefore does not target the usual base API URL as shown by the example code snippet.
 
     Parameter|Type|Required|Description
     ---|---|---|---|
@@ -4557,6 +4559,7 @@ Get all mods for the corresponding game. Successful request will return an array
           }
         ]
       },
+      "dependencies": false,
       "platforms": [
         {
           "platform": "windows",
@@ -4798,6 +4801,7 @@ Get a mod. Successful request will return a single [Mod Object](#mod-object).
       }
     ]
   },
+  "dependencies": false,
   "platforms": [
     {
       "platform": "windows",
@@ -5070,6 +5074,7 @@ Add a mod. Successful request will return the newly created [Mod Object](#mod-ob
       }
     ]
   },
+  "dependencies": false,
   "platforms": [
     {
       "platform": "windows",
@@ -5346,6 +5351,7 @@ Edit details for a mod. If you want to update the `logo` or media associated wit
       }
     ]
   },
+  "dependencies": false,
   "platforms": [
     {
       "platform": "windows",
@@ -5494,7 +5500,9 @@ System.out.println(response.toString());
 
 `DELETE /games/{game-id}/mods/{mod-id}`
 
-Delete a mod profile. Successful request will return `204 No Content` and fire a __MOD_UNAVAILABLE__ event.<br><br>__NOTE:__ This will close the mod profile which means it cannot be viewed or retrieved via API requests but will still exist in-case you choose to restore it at a later date. If you wish to permanently delete a mod you have access rights to, you must do it via the [mods profile page](https://mod.io/me/library) on the mod.io website.
+Delete a mod profile. Successful request will return `204 No Content` and fire a __MOD_UNAVAILABLE__ event.
+
+     __NOTE:__ This will close the mod profile which means it cannot be viewed or retrieved via API requests but will still exist in-case you choose to restore it at a later date. If you wish to permanently delete a mod you have access rights to, you must do it via the [mods profile page](https://mod.io/me/library) on the mod.io website.
 
 > Example response
 
@@ -5767,7 +5775,9 @@ System.out.println(response.toString());
 
 `GET /games/{game-id}/mods/{mod-id}/files/{file-id}`
 
-Get a file. Successful request will return a single [Modfile Object](#modfile-object).<br><br>__NOTE:__ If the [game](#edit-game) requires mod downloads to be initiated via the API, the `binary_url` returned will contain a verification hash. This hash must be supplied to get the modfile, and will expire after a certain period of time. Saving and reusing the `binary_url` won't work in this situation given it's dynamic nature.
+Get a file. Successful request will return a single [Modfile Object](#modfile-object).
+
+     __NOTE:__ If the [game](#edit-game) requires mod downloads to be initiated via the API, the `binary_url` returned will contain a verification hash. This hash must be supplied to get the modfile, and will expire after a certain period of time. Saving and reusing the `binary_url` won't work in this situation given it's dynamic nature.
 
 > Example response
 
@@ -6245,7 +6255,9 @@ System.out.println(response.toString());
 
 `DELETE /games/{game-id}/mods/{mod-id}/files/{file-id}`
 
-Delete a modfile. Successful request will return `204 No Content`.<br><br>__NOTE:__ A modfile can never be removed if it is the current active release for the corresponding mod regardless of user permissions. Furthermore, this ability is only available if you are authenticated as the game administrator for this game _or_ are the original uploader of the modfile.
+Delete a modfile. Successful request will return `204 No Content`.
+
+     __NOTE:__ A modfile can never be removed if it is the current active release for the corresponding mod regardless of user permissions. Furthermore, this ability is only available if you are authenticated as the game administrator for this game _or_ are the original uploader of the modfile.
 
 > Example response
 
@@ -7181,17 +7193,17 @@ To perform this request, you must be authenticated via one of the following meth
 curl -X POST https://*.modapi.io/v1/games/{game-id}/mods/{mod-id}/subscribe \
   -H 'Authorization: Bearer {access-token}' \ 
   -H 'Content-Type: application/x-www-form-urlencoded' \ 
-  -H 'Accept: application/json'
+  -H 'Accept: application/json' \
+  -d 'include_dependencies=false'
 
 ```
 
 ```http
 POST https://*.modapi.io/v1/games/{game-id}/mods/{mod-id}/subscribe HTTP/1.1
 Host: *.modapi.io
-
+Content-Type: application/x-www-form-urlencoded
 Accept: application/json
 Authorization: Bearer {access-token}
-Content-Type: application/x-www-form-urlencoded
 
 ```
 
@@ -7216,7 +7228,9 @@ $.ajax({
 
 ```javascript--nodejs
 const request = require('node-fetch');
-
+const inputBody = '{
+  "include_dependencies": false
+}';
 const headers = {
   'Authorization':'Bearer {access-token}',
   'Content-Type':'application/x-www-form-urlencoded',
@@ -7227,7 +7241,7 @@ const headers = {
 fetch('https://*.modapi.io/v1/games/{game-id}/mods/{mod-id}/subscribe',
 {
   method: 'POST',
-
+  body: inputBody,
   headers: headers
 })
 .then(function(res) {
@@ -7270,7 +7284,13 @@ System.out.println(response.toString());
 
 `POST /games/{game-id}/mods/{mod-id}/subscribe`
 
-Subscribe the _authenticated user_ to a corresponding mod. No body parameters are required for this action. Successful request will return the [Mod Object](#mod-object) of the newly subscribed mod.<br><br>__NOTE:__ Users can subscribe to mods via mod.io, we recommend you poll or call the [Get User Events](#get-user-events) endpoint when needed, to keep a users mods collection up to date.
+Subscribe the _authenticated user_ to a corresponding mod. No body parameters are required for this action. Successful request will return the [Mod Object](#mod-object) of the newly subscribed mod.
+
+    __NOTE:__ Users can subscribe to mods via mod.io, we recommend you call [Get Users Subscriptions](#get-user-subscriptions) or the [Get User Events](#get-user-events) endpoint when needed, to keep a users mods collection up to date.
+
+    Parameter|Type|Required|Description
+    ---|---|---|---|
+    include_dependencies|boolean|false|If the mod has dependencies, providing this attribute with a value of `true` will result in dependant mods being subscribed to as well, recursively. You should only include this attribute when the [Mod Object](#mod-object) indicates the mod has dependencies.
 
 > Example response
 
@@ -7364,6 +7384,7 @@ Subscribe the _authenticated user_ to a corresponding mod. No body parameters ar
       }
     ]
   },
+  "dependencies": false,
   "platforms": [
     {
       "platform": "windows",
@@ -7516,7 +7537,9 @@ System.out.println(response.toString());
 
 `DELETE /games/{game-id}/mods/{mod-id}/subscribe`
 
-Unsubscribe the _authenticated user_ from the corresponding mod. No body parameters are required for this action. Successful request will return `204 No Content`.<br><br>__NOTE:__ Users can unsubscribe from mods via mod.io, we recommend you poll or call the [Get Mod Events](#get-mod-events) endpoint when needed, to keep a users mods collection up to date.
+Unsubscribe the _authenticated user_ from the corresponding mod. No body parameters are required for this action. Successful request will return `204 No Content`.
+
+     __NOTE:__ Users can unsubscribe from mods via mod.io, we recommend you call [Get Users Subscriptions](#get-user-subscriptions) or the [Get User Events](#get-user-events) endpoint when needed, to keep a users mods collection up to date.
 
 > Example response
 
@@ -9884,7 +9907,7 @@ System.out.println(response.toString());
 
 Get all mods events for the corresponding game sorted by latest event first. Successful request will return an array of [Event Objects](#get-mod-events-2).
 
-    __NOTE:__ We recommend you poll this endpoint to keep mods up-to-date. If polling this endpoint for updates you should store the `id` or `date_added` of the latest event, and on subsequent requests use that information [in the filter](#filtering), to return only newer events to process.
+    __NOTE:__ We recommend you check this endpoint on initalization, or call [Get Users Subscriptions](#get-user-subscriptions) to keep their mods up-to-date. If polling this endpoint for updates you should store the `id` or `date_added` of the latest event, and on subsequent requests use that information [in the filter](#filtering), to return only newer events to process.
 
     Filter|Type|Description
     ---|---|---
@@ -11554,7 +11577,9 @@ System.out.println(response.toString());
 
 `GET /games/{game-id}/mods/{mod-id}/metadatakvp`
 
-Get all metadata stored by the game developer for this mod as searchable key value pairs. Successful request will return an array of [Metadata KVP Objects](#get-mod-kvp-metadata-2).<br><br>__NOTE:__ Metadata can also be stored as `metadata_blob` in the [Mod Object](#mod-object).
+Get all metadata stored by the game developer for this mod as searchable key value pairs. Successful request will return an array of [Metadata KVP Objects](#get-mod-kvp-metadata-2).
+
+     __NOTE:__ Metadata can also be stored as `metadata_blob` in the [Mod Object](#mod-object).
 
 > Example response
 
@@ -13970,6 +13995,7 @@ Get all mod's the _authenticated user_ is subscribed to. Successful request will
           }
         ]
       },
+      "dependencies": false,
       "platforms": [
         {
           "platform": "windows",
@@ -14244,6 +14270,7 @@ Get all mods the _authenticated user_ added or is a team member of. Successful r
           }
         ]
       },
+      "dependencies": false,
       "platforms": [
         {
           "platform": "windows",
@@ -15962,6 +15989,7 @@ result_total|integer|Total number of results found.
           }
         ]
       },
+      "dependencies": false,
       "platforms": [
         {
           "platform": "windows",
@@ -16762,6 +16790,7 @@ images|[Image Object](#schemaimage_object)[]|Array of image objects (a gallery).
       }
     ]
   },
+  "dependencies": false,
   "platforms": [
     {
       "platform": "windows",
@@ -16826,6 +16855,7 @@ metadata_blob|string|Metadata stored by the game developer. Metadata can also be
 profile_url|string|URL to the mod.
 media|[Mod Media Object](#schemamod_media_object)|Contains YouTube & Sketchfab links, aswell as media URL's of images for the mod.
 modfile|[Modfile Object](#schemamodfile_object)|The primary modfile for the mod.
+dependencies|boolean|If the mod has any dependencies, this value will be set to `true`.
 stats|[Mod Stats Object](#schemamod_stats_object)|Numerous aggregate stats for the mod.
 platforms|[Mod Platforms Object](#schemamod_platforms_object)[]|Contains mod platform data.
 metadata_kvp|[Metadata KVP Object](#schemametadata_kvp_object)[]|Contains key-value metadata.
