@@ -21,7 +21,7 @@ headingLevel: '2'
 
 ## mod.io API v1
 
-Welcome to the official documentation for [mod.io](https://mod.io), an API for developers to add mod support to their games. We recommend you read our _Getting Started_ guide below to accurately and efficiently consume our REST API. 
+Welcome to the official documentation for [mod.io](https://mod.io), an API for developers to add mod support to their games. Using our [SDKs and plugins](#implementation) for popular and custom game engines, getting your creator community started and making the mods they create discoverable and installable via your in-game menu is straight forward, with full cross-platform support. If you are a game developer, you can manage your games via your [mod.io library dashboard]().
 
 __API path:__ [https://*.modapi.io/v1](https://*.modapi.io/v1) (see your API access dashboard)
 
@@ -2198,7 +2198,8 @@ To perform this request, you must be authenticated via one of the following meth
 <a href="#authentication">api_key</a>
 </aside>
 ## Email Exchange
-__Step 1 of 2__
+
+__Step 1 of 2__
 
 > Example request
 
@@ -2319,8 +2320,10 @@ To perform this request, you must be authenticated via one of the following meth
 <a href="#authentication">api_key</a>
 </aside>
 
-<br>
-__Step 2 of 2__
+
+<br>
+
+__Step 2 of 2__
 
 
 > Example request

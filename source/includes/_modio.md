@@ -2,7 +2,7 @@
 
 ## --parse_sitename API --parse_version
 
-Welcome to the official documentation for [--parse_sitename](--parse_siteurl), an API for developers to add mod support to their games. We recommend you read our _Getting Started_ guide below to accurately and efficiently consume our REST API. 
+Welcome to the official documentation for [--parse_sitename](--parse_siteurl), an API for developers to add mod support to their games. Using our [SDKs and plugins](#implementation) for popular and custom game engines, getting your creator community started and making the mods they create discoverable and installable via your in-game menu is straight forward, with full cross-platform support. If you are a game developer, you can manage your games and API access via your [--parse_sitename library dashboard](--parse_siteurl/library). If you are a user creating tools and apps, you can request API access via your [--parse_sitename account](--parse_siteurl/me/access).
 
 __API path:__ [--parse_apiurl](--parse_apiurl) (see your API access dashboard)
 
@@ -18,7 +18,7 @@ Compatible with all builds of your game on all platforms and stores, --parse_sit
 
 ## Implementation
 
-Once you have added your game to --parse_sitename and got your game ID and API key, you can start integrating the --parse_sitename REST API into your game, tools and sites. There are 3 options to get connected which you can use interchangeably depending on your needs. Here's the breakdown of each option.
+Once you have added your game to --parse_sitename and got your [game ID and API key](--parse_siteurl/library), you can start integrating the --parse_sitename REST API into your game, tools and sites. There are 3 options to get connected which you can use interchangeably depending on your needs. Here's the breakdown of each option.
 
 Option | Usage | Suited for | Docs
 ---------- | ---------- | ---------- | ---------
