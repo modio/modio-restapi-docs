@@ -3090,6 +3090,9 @@ Get all games. Successful request will return an array of [Game Objects](#get-ga
       "curation_option": 0,
       "community_options": 3,
       "monetisation_options": 0,
+      "monetisation_team": {
+        "team_id": "1"
+      },
       "revenue_options": 0,
       "api_access_options": 3,
       "maturity_options": 0,
@@ -3293,6 +3296,9 @@ Get a game. Successful request will return a single [Game Object](#game-object).
   "curation_option": 0,
   "community_options": 3,
   "monetisation_options": 0,
+  "monetisation_team": {
+    "team_id": "1"
+  },
   "revenue_options": 0,
   "api_access_options": 3,
   "maturity_options": 0,
@@ -5494,7 +5500,7 @@ System.out.println(response.toString());
 
 `DELETE /games/{game-id}/mods/{mod-id}`
 
-Delete a mod profile. Successful request will return `204 No Content` and fire a __MOD_UNAVAILABLE__ event.<br><br>__NOTE:__ This will close the mod profile which means it cannot be viewed or retrieved via API requests but will still exist in-case you choose to restore it at a later date. If you wish to permanently delete a mod you have access rights to, you must do it via the [mods profile page](https://mod.io/me/library) on the mod.io website.
+Delete a mod profile. Successful request will return `204 No Content` and fire a __MOD_UNAVAILABLE__ event.<br><br>__NOTE:__ This will close the mod profile which means it cannot be viewed or retrieved via API requests but will still exist in-case you choose to restore it at a later date. If you wish to permanently delete a mod you have access rights to, you must do it via the [mods profile page](https://mod.io/library) on the mod.io website.
 
 > Example response
 
@@ -6423,13 +6429,13 @@ To perform this request, you must be authenticated via one of the following meth
 
 ```shell
 # You can also use wget
-curl -X GET https://*.modapi.io/v1/games/{game-id}/mods/{mod-id}/files/multipart?api_key=YourApiKey \
+curl -X GET https://*.modapi.io/v1/games/{game-id}/mods/{mod-id}/files/multipart?api_key=YourApiKey&upload_id=123e4567-e89b-12d3-a456-426614174000 \
   -H 'Accept: application/json'
 
 ```
 
 ```http
-GET https://*.modapi.io/v1/games/{game-id}/mods/{mod-id}/files/multipart?api_key=YourApiKey HTTP/1.1
+GET https://*.modapi.io/v1/games/{game-id}/mods/{mod-id}/files/multipart?api_key=YourApiKey&upload_id=123e4567-e89b-12d3-a456-426614174000 HTTP/1.1
 Host: *.modapi.io
 
 Accept: application/json
@@ -6445,7 +6451,7 @@ var headers = {
 $.ajax({
   url: 'https://*.modapi.io/v1/games/{game-id}/mods/{mod-id}/files/multipart',
   method: 'get',
-  data: '?api_key=YourApiKey',
+  data: '?api_key=YourApiKey&upload_id=123e4567-e89b-12d3-a456-426614174000',
   headers: headers,
   success: function(data) {
     console.log(JSON.stringify(data));
@@ -6461,7 +6467,7 @@ const headers = {
 
 };
 
-fetch('https://*.modapi.io/v1/games/{game-id}/mods/{mod-id}/files/multipart?api_key=YourApiKey',
+fetch('https://*.modapi.io/v1/games/{game-id}/mods/{mod-id}/files/multipart?api_key=YourApiKey&upload_id=123e4567-e89b-12d3-a456-426614174000',
 {
   method: 'GET',
 
@@ -6481,14 +6487,14 @@ headers = {
 }
 
 r = requests.get('https://*.modapi.io/v1/games/{game-id}/mods/{mod-id}/files/multipart', params={
-  'api_key': 'YourApiKey'
+  'api_key': 'YourApiKey',  'upload_id': '123e4567-e89b-12d3-a456-426614174000'
 }, headers = headers)
 
 print r.json()
 ```
 
 ```java
-URL obj = new URL("https://*.modapi.io/v1/games/{game-id}/mods/{mod-id}/files/multipart?api_key=YourApiKey");
+URL obj = new URL("https://*.modapi.io/v1/games/{game-id}/mods/{mod-id}/files/multipart?api_key=YourApiKey&upload_id=123e4567-e89b-12d3-a456-426614174000");
 HttpURLConnection con = (HttpURLConnection) obj.openConnection();
 con.setRequestMethod("GET");
 int responseCode = con.getResponseCode();
@@ -6506,6 +6512,10 @@ System.out.println(response.toString());
 `GET /games/{game-id}/mods/{mod-id}/files/multipart`
 
 Get all uploaded parts for a corresponding upload session. Successful request will return an array of [Multipart Upload Part Objects](#get-multipart-upload-parts-2). We recommended reading the [filtering documentation](#filtering) to return only the records you want.
+
+    Query Parameters|Required|type|Description
+    ---|---|---|---|
+    upload_id|true|string|The `upload_id` of the existing upload session to fetch parts already uploaded.
 
 > Example response
 
@@ -9359,7 +9369,7 @@ System.out.println(response.toString());
 
 Upload new media to a game. The request `Content-Type` header __must__ be `multipart/form-data` to submit image files. Any request you make to this endpoint *should* contain a binary file for each of the fields you want to update below. Successful request will return [Message Object](#message-object).
 
-    __NOTE:__ You can also add media to [your games profile](https://mod.io/me/library) on the mod.io website. This is the recommended approach.
+    __NOTE:__ You can also add media to [your games profile](https://mod.io/library) on the mod.io website. This is the recommended approach.
 
     Parameter|Type|Required|Description
     ---|---|---|---|
@@ -9497,7 +9507,7 @@ System.out.println(response.toString());
 
 This endpoint is very flexible and will add any images posted to the mods gallery regardless of their body name providing they are a valid image. The request `Content-Type` header __must__ be `multipart/form-data` to submit image files. Successful request will return a [Message Object](#message-object).
 
-    __NOTE:__ You can also add media to [your mods profile](https://mod.io/me/library) on the mod.io website. This is the easiest way.
+    __NOTE:__ You can also add media to [your mods profile](https://mod.io/library) on the mod.io website. This is the easiest way.
 
     Parameter|Type|Required|Description
     ---|---|---|---|
@@ -9637,7 +9647,7 @@ System.out.println(response.toString());
 
 Delete images, sketchfab or youtube links from a mod profile. Successful request will return `204 No Content`.
 
-    __NOTE:__ You can also delete media from [your mods profile](https://mod.io/me/library) on the mod.io website. This is the easiest way.
+    __NOTE:__ You can also delete media from [your mods profile](https://mod.io/library) on the mod.io website. This is the easiest way.
 
     Parameter|Type|Required|Description
     ---|---|---|---|
@@ -10193,7 +10203,7 @@ curl -X POST https://*.modapi.io/v1/games/{game-id}/tags \
   -d 'type=dropdown' \
   -d 'hidden=false' \
   -d 'locked=false' \
-  -d 'tags[]=easy&tags[]=medium&tags=hard'
+  -d 'tags[]=tags[]=easy&tags[]=medium&tags[]=hard'
 
 ```
 
@@ -10232,7 +10242,7 @@ const inputBody = '{
   "type": "dropdown",
   "hidden": "false",
   "locked": "false",
-  "tags": "easy&tags[]=medium&tags=hard"
+  "tags": "tags[]=easy&tags[]=medium&tags[]=hard"
 }';
 const headers = {
   'Authorization':'Bearer {access-token}',
@@ -10291,7 +10301,7 @@ Add tags which mods can apply to their profiles. Successful request will return 
 
     Tagging is a critical feature that powers the searching and filtering of mods for your game, as well as allowing you to control how mods are installed and played. For example you might enforce mods to be a particular type (map, model, script, save, effects, blueprint), which dictates how you install it. You may use tags to specify what the mod replaces (building, prop, car, boat, character). Or perhaps the tags describe the theme of the mod (fun, scenic, realism). The implementation is up to you, but the more detail you support the better filtering and searching becomes. If you need to store more advanced information, you can also use [Metadata Key Value Pairs](#metadata).
 
-    __NOTE:__ You can also manage tags by editing [your games profile](https://mod.io/me/library) on the mod.io website. This is the recommended approach.
+    __NOTE:__ You can also manage tags by editing [your games profile](https://mod.io/library) on the mod.io website. This is the recommended approach.
 
     Parameter|Type|Required|Description
     ---|---|---|---|
@@ -10430,7 +10440,7 @@ System.out.println(response.toString());
 
 Delete an entire group of tags or individual tags. Successful request will return `204 No Content`.
 
-    __NOTE:__ You can also manage tags by editing [your games profile](https://mod.io/me/library) on the mod.io website. This is the recommended approach.
+    __NOTE:__ You can also manage tags by editing [your games profile](https://mod.io/library) on the mod.io website. This is the recommended approach.
 
     Parameter|Type|Required|Description
     ---|---|---|---|
@@ -12543,7 +12553,7 @@ The purpose of this endpoint is enable users to report a resource (game, mod or 
 
     For example to report a mod with an ID of 1 the URL would be: [https://mod.io/report/`mods`/`1`/widget](https://mod.io/report/mods/1/widget). If you don't know the ID of the resource you wish to report, you can use the generic report URL: [https://mod.io/report/widget](https://mod.io/report)
 
-    __NOTE:__ If you are a game owner or manager, you can [view all reports](https://mod.io/me/library) submitted for your game(s), and you are responsible for actioning reports. You can also configure in your games control panel the number of reports required before content is automatically taken down for review.
+    __NOTE:__ If you are a game owner or manager, you can [view all reports](https://mod.io/library) submitted for your game(s), and you are responsible for actioning reports. You can also configure in your games control panel the number of reports required before content is automatically taken down for review.
 
     Read our [Terms of Use](https://mod.io/terms/widget) for information about what is/isn't acceptable.
 
@@ -13660,6 +13670,9 @@ Get all games the _authenticated user_ added or is a team member of. Successful 
       "curation_option": 0,
       "community_options": 3,
       "monetisation_options": 0,
+      "monetisation_team": {
+        "team_id": "1"
+      },
       "revenue_options": 0,
       "api_access_options": 3,
       "maturity_options": 0,
@@ -14926,6 +14939,24 @@ md5|string|MD5 hash of the file.
 
 
 
+## Game Monetisation Team Object 
+
+<a name="schemagame_monetisation_team_object"></a>
+
+```json
+{
+  "team_id": "1"
+} 
+```
+
+### Properties
+
+Name|Type|Description
+---|---|---|---|
+team_id|integer|The ID of the monetisation team.
+
+
+
 ## Game Object
 
    <a name="schemagame_object"></a>
@@ -14943,6 +14974,9 @@ md5|string|MD5 hash of the file.
   "curation_option": 0,
   "community_options": 3,
   "monetisation_options": 0,
+  "monetisation_team": {
+    "team_id": "1"
+  },
   "revenue_options": 0,
   "api_access_options": 3,
   "maturity_options": 0,
@@ -15034,6 +15068,7 @@ submission_option|integer|Submission process modders must follow:<br><br>__0__ =
 curation_option|integer|Curation options enabled by this game to approve mods:<br><br>__0__ = No curation: Mods are immediately available to play<br>__1__ = Price change approval: Pricing changes for marketplace mods queued for acceptance<br>__2__ = Full curation: All mods must be accepted by someone to be listed<br>__?__ = Combine to enable multiple features (see BITWISE fields)
 community_options|integer|Community features enabled for this game:<br><br>__0__ = All of the options below are disabled<br>__1__ = Enable comments<br>__2__ = Enable guides<br>__4__ = Pin on homepage<br>__8__ = Show on homepage<br>__16__ = Show more on homepage<br>__32__ = Allow change status<br>__64__ = Enable Previews (Game must be hidden)<br>__128__ = Allow Preview Share-URL (Previews must be enabled)<br>__?__ = Add the options you want together, to enable multiple features (see [BITWISE fields](#bitwise-and-bitwise-and))
 monetisation_options|integer|Monetisation features mods can enable:<br><br>__0__ = All of the options below are disabled<br>__1__ = Enabled<br>__2__ = Enable marketplace<br>__?__ = Add the options you want together, to enable multiple features (see [BITWISE fields](#bitwise-and-bitwise-and))
+monetisation_team|[Game Monetisation Team Object](#schemagame_monetisation_team_object)|The monetisation team for this resource. [Game Monetisation Team Object](#game-monetisation-team-object).
 revenue_options|integer|Deprecated: Please use monetisation_options instead, this will be removed in subsequent API version.
 api_access_options|integer|Level of API access allowed by this game:<br><br>__0__ = All of the options below are disabled<br>__1__ = Allow 3rd parties to access this games API endpoints<br>__2__ = Allow mods to be downloaded directly (if disabled all download URLs will contain a frequently changing verification hash to stop unauthorized use)<br>__?__ = Add the options you want together, to enable multiple features (see [BITWISE fields](#bitwise-and-bitwise-and))
 maturity_options|integer|Mature content setup for this game:<br><br>__0__ = Don't allow mature content in mods<br>__1__ = Allow mature content in mods<br>__2__ = This game is for mature audiences only<br>__?__ = Add the options you want together, to enable multiple features (see [BITWISE fields](#bitwise-and-bitwise-and))
@@ -15260,6 +15295,9 @@ result_total|integer|Total number of results found.
       "curation_option": 0,
       "community_options": 3,
       "monetisation_options": 0,
+      "monetisation_team": {
+        "team_id": "1"
+      },
       "revenue_options": 0,
       "api_access_options": 3,
       "maturity_options": 0,
