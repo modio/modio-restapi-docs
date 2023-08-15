@@ -3097,6 +3097,7 @@ Get all games. Successful request will return an array of [Game Objects](#get-ga
       "api_access_options": 3,
       "maturity_options": 0,
       "ugc_name": "mods",
+      "token_name": "MIO",
       "icon": {
         "filename": "icon.png",
         "original": "https://assets.modcdn.io/images/placeholder/icon.png",
@@ -3303,6 +3304,7 @@ Get a game. Successful request will return a single [Game Object](#game-object).
   "api_access_options": 3,
   "maturity_options": 0,
   "ugc_name": "mods",
+  "token_name": "MIO",
   "icon": {
     "filename": "icon.png",
     "original": "https://assets.modcdn.io/images/placeholder/icon.png",
@@ -5137,14 +5139,14 @@ To perform this request, you must be authenticated via one of the following meth
 curl -X POST https://*.modapi.io/v1/games/{game-id}/mods/{mod-id} \
   -H 'Authorization: Bearer {access-token}' \ 
   -H 'Content-Type: multipart/form-data' \ 
-  -H 'Content-Type: multipart/form-data' \ 
   -H 'Accept: application/json' \
   -F 'name=Graphics Overhaul Mod' \
   -F 'name_id=graphics-overhaul-mod' \
   -F 'summary=Short descriptive summary here' \
   -F 'description=<h2>Getting started with..' \
   -F 'logo=@/path/to/image.jpg' \
-  -F 'homepage_url=https://www.example.com'
+  -F 'homepage_url=https://www.example.com' \
+  -F 'tags[]=easy'
 
 ```
 
@@ -5154,14 +5156,12 @@ Host: *.modapi.io
 Content-Type: multipart/form-data
 Accept: application/json
 Authorization: Bearer {access-token}
-Content-Type: multipart/form-data
 
 ```
 
 ```javascript
 var headers = {
   'Authorization':'Bearer {access-token}',
-  'Content-Type':'multipart/form-data',
   'Content-Type':'multipart/form-data',
   'Accept':'application/json'
 
@@ -5186,11 +5186,11 @@ const inputBody = '{
   "summary": "Short descriptive summary here",
   "description": "<h2>Getting started with..",
   "logo": "@/path/to/image.jpg",
-  "homepage_url": "https://www.example.com"
+  "homepage_url": "https://www.example.com",
+  "tags": "easy"
 }';
 const headers = {
   'Authorization':'Bearer {access-token}',
-  'Content-Type':'multipart/form-data',
   'Content-Type':'multipart/form-data',
   'Accept':'application/json'
 
@@ -5213,7 +5213,6 @@ fetch('https://*.modapi.io/v1/games/{game-id}/mods/{mod-id}',
 import requests
 headers = {
   'Authorization': 'Bearer {access-token}',
-  'Content-Type': 'multipart/form-data',
   'Content-Type': 'multipart/form-data',
   'Accept': 'application/json'
 }
@@ -5257,8 +5256,9 @@ Edit details for a mod. If you want to update the `logo` or media associated wit
     homepage_url|string||Official homepage for your mod. Must be a valid URL.
     stock|integer||Maximium number of subscribers for this mod. A value of 0 disables this limit.
     maturity_option|integer||Choose if this mod contains any of the following mature content.<br><br>__NOTE:__ The value of this field will default to 0 unless the parent game allows you to flag mature content (see `maturity_options` field in [Game Object](#game-object)). <br><br>__0__ = None set<br>__1__ = Alcohol<br>__2__ = Drugs<br>__4__ = Violence<br>__8__ = Explicit<br>__?__ = Add the options you want together, to enable multiple options (see [BITWISE fields](#bitwise-and-bitwise-and))
-    community_options|integer||Community features enabled for this mod:<br><br>__0__ = All of the options below are disabled<br>__1__ = Enable comments<br>_64_ = Enable previews<br>__?__ = Add the options you want together, to enable multiple options (see [BITWISE fields](#bitwise-and-bitwise-and))
+    community_options|integer||Community features enabled for this mod:<br><br>__0__ = All of the options below are disabled<br>__1__ = Enable comments<br>__64__ = Enable previews<br>__?__ = Add the options you want together, to enable multiple options (see [BITWISE fields](#bitwise-and-bitwise-and))
     metadata_blob|string||Metadata stored by the game developer which may include properties as to how the item works, or other information you need to display. Metadata can also be stored as searchable [key value pairs](#metadata), and to individual [mod files](#get-modfiles).
+    tags[]|string||When providing this attribute, if the input array contains tags, they will entirely replace any existing tags assigned to the mod. __If an empty array is passed, all currently assigned tags will be removed__. If `null` or omitted, no changes will be made to the assigned tags. To determine what tags are eligible, see the tags values within `tag_options` column on the parent [Game Object](#game-object).
 
 > Example response
 
@@ -13677,6 +13677,7 @@ Get all games the _authenticated user_ added or is a team member of. Successful 
       "api_access_options": 3,
       "maturity_options": 0,
       "ugc_name": "mods",
+      "token_name": "MIO",
       "icon": {
         "filename": "icon.png",
         "original": "https://assets.modcdn.io/images/placeholder/icon.png",
@@ -14981,6 +14982,7 @@ team_id|integer|The ID of the monetisation team.
   "api_access_options": 3,
   "maturity_options": 0,
   "ugc_name": "mods",
+  "token_name": "MIO",
   "icon": {
     "filename": "icon.png",
     "original": "https://assets.modcdn.io/images/placeholder/icon.png",
@@ -15073,6 +15075,7 @@ revenue_options|integer|Deprecated: Please use monetisation_options instead, thi
 api_access_options|integer|Level of API access allowed by this game:<br><br>__0__ = All of the options below are disabled<br>__1__ = Allow 3rd parties to access this games API endpoints<br>__2__ = Allow mods to be downloaded directly (if disabled all download URLs will contain a frequently changing verification hash to stop unauthorized use)<br>__?__ = Add the options you want together, to enable multiple features (see [BITWISE fields](#bitwise-and-bitwise-and))
 maturity_options|integer|Mature content setup for this game:<br><br>__0__ = Don't allow mature content in mods<br>__1__ = Allow mature content in mods<br>__2__ = This game is for mature audiences only<br>__?__ = Add the options you want together, to enable multiple features (see [BITWISE fields](#bitwise-and-bitwise-and))
 ugc_name|string|Word used to describe user-generated content (mods, items, addons etc).
+token_name|string|Word used to describe the games token.
 icon|[Icon Object](#schemaicon_object)|Contains media URL's to the icon for the game.
 logo|[Logo Object](#schemalogo_object)|Contains media URL's to the logo for the game.
 header|[Header Image Object](#schemaheader_image_object)|Contains media URL's to the preview header for the game.
@@ -15302,6 +15305,7 @@ result_total|integer|Total number of results found.
       "api_access_options": 3,
       "maturity_options": 0,
       "ugc_name": "mods",
+      "token_name": "MIO",
       "icon": {
         "filename": "icon.png",
         "original": "https://assets.modcdn.io/images/placeholder/icon.png",
