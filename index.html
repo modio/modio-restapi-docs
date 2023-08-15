@@ -1174,6 +1174,8 @@
 </tr>
 </tbody>
 </table>
+
+<p>You can use an OAuth 2.0 bearer token instead of an API key for GET endpoints (excluding <a href="#authentication-2">Authentication</a> endpoints). But remember, if you provide both an Access Token (OAuth 2) and an API key in one request, the access token takes precedence and the API key is ignored. So, always ensure you use a valid access token and have the process in place to get a new token when the old one expires.</p>
 <h3 id="web-overlay-authentication">Web Overlay Authentication</h3>
 <p>At the moment it is not possible to open the mod.io website in-game with the user pre-authenticated, however you can provide a hint by appending <code>?portal=PORTAL</code> to the end of the URL. What this tells mod.io, is that when the user attempts to perform an action that requires authentication, they will be prompted to login with their <code>PORTAL</code> account. For example if you want to take a mod creator to their mod webpage in-game on Steam, the URL would look something like: <code>https://mod.io/g/gamename/m/modname?portal=steam</code>. You can optionally add <code>&amp;login=auto</code> as well to automatically start the login process. <a href="#targeting-a-portal">Supported portals</a> can be found here.</p>
 <h3 id="scopes-oauth-2">Scopes (OAuth 2)</h3>
