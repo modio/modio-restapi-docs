@@ -21,7 +21,7 @@ headingLevel: '2'
 
 ## mod.io API v1
 
-Welcome to the official documentation for [mod.io](https://mod.io), an API for developers to add mod support to their games. Using our [SDKs and plugins](#implementation) for popular and custom game engines, getting your creator community started and making the mods they create discoverable and installable via your in-game menu is straight forward, with full cross-platform support. If you are a game developer, you can manage your games via your [mod.io library dashboard]().
+Welcome to the official documentation for [mod.io](https://mod.io), an API for developers to add mod support to their games. Using our [SDKs and plugins](#implementation) for popular and custom game engines, getting your creator community started and making the mods they create discoverable and installable via your in-game menu is straight forward, with full cross-platform support. If you are a game developer, you can manage your games and API access via your [mod.io library dashboard](https://mod.io/library). If you are a user creating tools and apps, you can request API access via your [mod.io account](https://mod.io/me/access).
 
 __API path:__ [https://*.modapi.io/v1](https://*.modapi.io/v1) (see your API access dashboard)
 
@@ -37,7 +37,7 @@ Compatible with all builds of your game on all platforms and stores, mod.io is a
 
 ## Implementation
 
-Once you have added your game to mod.io and got your game ID and API key, you can start integrating the mod.io REST API into your game, tools and sites. There are 3 options to get connected which you can use interchangeably depending on your needs. Here's the breakdown of each option.
+Once you have added your game to mod.io and got your [game ID and API key](https://mod.io/library), you can start integrating the mod.io REST API into your game, tools and sites. There are 3 options to get connected which you can use interchangeably depending on your needs. Here's the breakdown of each option.
 
 Option | Usage | Suited for | Docs
 ---------- | ---------- | ---------- | ---------
@@ -935,7 +935,7 @@ System.out.println(response.toString());
 
 `GET /authenticate/terms`
 
-The purpose of this endpoint is to provide the text, links and buttons you can use to get a users agreement and consent prior to authenticating them in-game (your dialog should look similar to the example below). A successful response will return a [Terms Object](#terms-object).
+The purpose of this endpoint is to provide the text, links and buttons you can use to get a users agreement and consent prior to authenticating them in-game (your dialog should look similar to the example below). If you are authenticating using platform SSO, you must call this endpoint with the `X-Modio-Portal` [header set](#targeting-a-portal), so the text is localized to match the platforms requirements. A successful response will return a [Terms Object](#terms-object).
 
      __Example Dialog:__
 
@@ -958,8 +958,8 @@ The purpose of this endpoint is to provide the text, links and buttons you can u
 
 ```json
 {
-  "plaintext": "We use mod.io to support user-generated content in-game. By clicking "I Agree" you agree to the mod.io Terms of Use and a mod.io account will be created for you (using your Steam display name, avatar and ID). Please see the mod.io Privacy Policy on how mod.io processes your personal data.",
-  "html": "<p>We use <a href="https://mod.io">mod.io</a> to support user-generated content in-game. By clicking "I Agree" you agree to the mod.io <a href="https://mod.io/terms">Terms of Use</a> and a mod.io account will be created for you (using your Steam display name, avatar and ID). Please see the mod.io <a href="https://mod.io/privacy">Privacy Policy</a> on how mod.io processes your personal data.</p>",
+  "plaintext": "We use mod.io to support user-generated content in-game. By clicking "I Agree" you agree to the mod.io Terms of Use and a mod.io account will be created for you (using your display name, avatar and ID). Please see the mod.io Privacy Policy on how mod.io processes your personal data.",
+  "html": "<p>We use <a href="https://mod.io">mod.io</a> to support user-generated content in-game. By clicking "I Agree" you agree to the mod.io <a href="https://mod.io/terms">Terms of Use</a> and a mod.io account will be created for you (using your display name, avatar and ID). Please see the mod.io <a href="https://mod.io/privacy">Privacy Policy</a> on how mod.io processes your personal data.</p>",
   "buttons": {
     "agree": {
       "text": "I Agree"
@@ -2198,8 +2198,7 @@ To perform this request, you must be authenticated via one of the following meth
 <a href="#authentication">api_key</a>
 </aside>
 ## Email Exchange
-
-__Step 1 of 2__
+__Step 1 of 2__
 
 > Example request
 
@@ -2320,10 +2319,8 @@ To perform this request, you must be authenticated via one of the following meth
 <a href="#authentication">api_key</a>
 </aside>
 
-
-<br>
-
-__Step 2 of 2__
+<br>
+__Step 2 of 2__
 
 
 > Example request
@@ -2658,9 +2655,7 @@ System.out.println(response.toString());
 
 `GET /authorize`
 
-Log a user into your website with a mod.io account using the OAuth2 [Authorization Code flow](https://datatracker.ietf.org/doc/html/rfc6749#section-1.3.1). Your application should redirect to this URL after the user initiates the login flow. Upon a successful login the user will be redirected to your registered callback URL where you can [exchange](#2-exchange-authorization-code) the `code` returned for an access token.
-
-    __Note:__ This request is a web display hosted by mod.io, and therefore does not target the usual base API URL as shown by the example code snippet.
+Log a user into your website with a mod.io account using the OAuth2 [Authorization Code flow](https://datatracker.ietf.org/doc/html/rfc6749#section-1.3.1). Your application should redirect to this URL after the user initiates the login flow. Upon a successful login the user will be redirected to your registered callback URL where you can [exchange](#2-exchange-authorization-code) the `code` returned for an access token.<br><br>__Note:__ This request is a web display hosted by mod.io, and therefore does not target the usual base API URL as shown by the example code snippet.
 
     Parameter|Type|Required|Description
     ---|---|---|---|
@@ -3095,10 +3090,14 @@ Get all games. Successful request will return an array of [Game Objects](#get-ga
       "curation_option": 0,
       "community_options": 3,
       "monetisation_options": 0,
+      "monetisation_team": {
+        "team_id": "1"
+      },
       "revenue_options": 0,
       "api_access_options": 3,
       "maturity_options": 0,
       "ugc_name": "mods",
+      "token_name": "MIO",
       "icon": {
         "filename": "icon.png",
         "original": "https://assets.modcdn.io/images/placeholder/icon.png",
@@ -3298,10 +3297,14 @@ Get a game. Successful request will return a single [Game Object](#game-object).
   "curation_option": 0,
   "community_options": 3,
   "monetisation_options": 0,
+  "monetisation_team": {
+    "team_id": "1"
+  },
   "revenue_options": 0,
   "api_access_options": 3,
   "maturity_options": 0,
   "ugc_name": "mods",
+  "token_name": "MIO",
   "icon": {
     "filename": "icon.png",
     "original": "https://assets.modcdn.io/images/placeholder/icon.png",
@@ -4538,6 +4541,7 @@ Get all mods for the corresponding game. Successful request will return an array
         "id": 2,
         "mod_id": 2,
         "date_added": 1499841487,
+        "date_updated": 1499841487,
         "date_scanned": 1499841487,
         "virus_status": 0,
         "virus_positive": 0,
@@ -4562,7 +4566,6 @@ Get all mods for the corresponding game. Successful request will return an array
           }
         ]
       },
-      "dependencies": false,
       "platforms": [
         {
           "platform": "windows",
@@ -4780,6 +4783,7 @@ Get a mod. Successful request will return a single [Mod Object](#mod-object).
     "id": 2,
     "mod_id": 2,
     "date_added": 1499841487,
+    "date_updated": 1499841487,
     "date_scanned": 1499841487,
     "virus_status": 0,
     "virus_positive": 0,
@@ -4804,7 +4808,6 @@ Get a mod. Successful request will return a single [Mod Object](#mod-object).
       }
     ]
   },
-  "dependencies": false,
   "platforms": [
     {
       "platform": "windows",
@@ -5053,6 +5056,7 @@ Add a mod. Successful request will return the newly created [Mod Object](#mod-ob
     "id": 2,
     "mod_id": 2,
     "date_added": 1499841487,
+    "date_updated": 1499841487,
     "date_scanned": 1499841487,
     "virus_status": 0,
     "virus_positive": 0,
@@ -5077,7 +5081,6 @@ Add a mod. Successful request will return the newly created [Mod Object](#mod-ob
       }
     ]
   },
-  "dependencies": false,
   "platforms": [
     {
       "platform": "windows",
@@ -5139,14 +5142,14 @@ To perform this request, you must be authenticated via one of the following meth
 curl -X POST https://*.modapi.io/v1/games/{game-id}/mods/{mod-id} \
   -H 'Authorization: Bearer {access-token}' \ 
   -H 'Content-Type: multipart/form-data' \ 
-  -H 'Content-Type: multipart/form-data' \ 
   -H 'Accept: application/json' \
   -F 'name=Graphics Overhaul Mod' \
   -F 'name_id=graphics-overhaul-mod' \
   -F 'summary=Short descriptive summary here' \
   -F 'description=<h2>Getting started with..' \
   -F 'logo=@/path/to/image.jpg' \
-  -F 'homepage_url=https://www.example.com'
+  -F 'homepage_url=https://www.example.com' \
+  -F 'tags[]=easy'
 
 ```
 
@@ -5156,14 +5159,12 @@ Host: *.modapi.io
 Content-Type: multipart/form-data
 Accept: application/json
 Authorization: Bearer {access-token}
-Content-Type: multipart/form-data
 
 ```
 
 ```javascript
 var headers = {
   'Authorization':'Bearer {access-token}',
-  'Content-Type':'multipart/form-data',
   'Content-Type':'multipart/form-data',
   'Accept':'application/json'
 
@@ -5188,11 +5189,11 @@ const inputBody = '{
   "summary": "Short descriptive summary here",
   "description": "<h2>Getting started with..",
   "logo": "@/path/to/image.jpg",
-  "homepage_url": "https://www.example.com"
+  "homepage_url": "https://www.example.com",
+  "tags": "easy"
 }';
 const headers = {
   'Authorization':'Bearer {access-token}',
-  'Content-Type':'multipart/form-data',
   'Content-Type':'multipart/form-data',
   'Accept':'application/json'
 
@@ -5215,7 +5216,6 @@ fetch('https://*.modapi.io/v1/games/{game-id}/mods/{mod-id}',
 import requests
 headers = {
   'Authorization': 'Bearer {access-token}',
-  'Content-Type': 'multipart/form-data',
   'Content-Type': 'multipart/form-data',
   'Accept': 'application/json'
 }
@@ -5259,8 +5259,9 @@ Edit details for a mod. If you want to update the `logo` or media associated wit
     homepage_url|string||Official homepage for your mod. Must be a valid URL.
     stock|integer||Maximium number of subscribers for this mod. A value of 0 disables this limit.
     maturity_option|integer||Choose if this mod contains any of the following mature content.<br><br>__NOTE:__ The value of this field will default to 0 unless the parent game allows you to flag mature content (see `maturity_options` field in [Game Object](#game-object)). <br><br>__0__ = None set<br>__1__ = Alcohol<br>__2__ = Drugs<br>__4__ = Violence<br>__8__ = Explicit<br>__?__ = Add the options you want together, to enable multiple options (see [BITWISE fields](#bitwise-and-bitwise-and))
-    community_options|integer||Community features enabled for this mod:<br><br>__0__ = All of the options below are disabled<br>__1__ = Enable comments<br>_64_ = Enable previews<br>__?__ = Add the options you want together, to enable multiple options (see [BITWISE fields](#bitwise-and-bitwise-and))
+    community_options|integer||Community features enabled for this mod:<br><br>__0__ = All of the options below are disabled<br>__1__ = Enable comments<br>__64__ = Enable previews<br>__?__ = Add the options you want together, to enable multiple options (see [BITWISE fields](#bitwise-and-bitwise-and))
     metadata_blob|string||Metadata stored by the game developer which may include properties as to how the item works, or other information you need to display. Metadata can also be stored as searchable [key value pairs](#metadata), and to individual [mod files](#get-modfiles).
+    tags[]|string||When providing this attribute, if the input array contains tags, they will entirely replace any existing tags assigned to the mod. __If an empty array is passed, all currently assigned tags will be removed__. If `null` or omitted, no changes will be made to the assigned tags. To determine what tags are eligible, see the tags values within `tag_options` column on the parent [Game Object](#game-object).
 
 > Example response
 
@@ -5330,6 +5331,7 @@ Edit details for a mod. If you want to update the `logo` or media associated wit
     "id": 2,
     "mod_id": 2,
     "date_added": 1499841487,
+    "date_updated": 1499841487,
     "date_scanned": 1499841487,
     "virus_status": 0,
     "virus_positive": 0,
@@ -5354,7 +5356,6 @@ Edit details for a mod. If you want to update the `logo` or media associated wit
       }
     ]
   },
-  "dependencies": false,
   "platforms": [
     {
       "platform": "windows",
@@ -5503,9 +5504,7 @@ System.out.println(response.toString());
 
 `DELETE /games/{game-id}/mods/{mod-id}`
 
-Delete a mod profile. Successful request will return `204 No Content` and fire a __MOD_UNAVAILABLE__ event.
-
-     __NOTE:__ This will close the mod profile which means it cannot be viewed or retrieved via API requests but will still exist in-case you choose to restore it at a later date. If you wish to permanently delete a mod you have access rights to, you must do it via the [mods profile page](https://mod.io/me/library) on the mod.io website.
+Delete a mod profile. Successful request will return `204 No Content` and fire a __MOD_UNAVAILABLE__ event.<br><br>__NOTE:__ This will close the mod profile which means it cannot be viewed or retrieved via API requests but will still exist in-case you choose to restore it at a later date. If you wish to permanently delete a mod you have access rights to, you must do it via the [mods profile page](https://mod.io/library) on the mod.io website.
 
 > Example response
 
@@ -5642,6 +5641,7 @@ Get all files that are published for the corresponding mod. Successful request w
       "id": 2,
       "mod_id": 2,
       "date_added": 1499841487,
+      "date_updated": 1499841487,
       "date_scanned": 1499841487,
       "virus_status": 0,
       "virus_positive": 0,
@@ -5778,9 +5778,7 @@ System.out.println(response.toString());
 
 `GET /games/{game-id}/mods/{mod-id}/files/{file-id}`
 
-Get a file. Successful request will return a single [Modfile Object](#modfile-object).
-
-     __NOTE:__ If the [game](#edit-game) requires mod downloads to be initiated via the API, the `binary_url` returned will contain a verification hash. This hash must be supplied to get the modfile, and will expire after a certain period of time. Saving and reusing the `binary_url` won't work in this situation given it's dynamic nature.
+Get a file. Successful request will return a single [Modfile Object](#modfile-object).<br><br>__NOTE:__ If the [game](#edit-game) requires mod downloads to be initiated via the API, the `binary_url` returned will contain a verification hash. This hash must be supplied to get the modfile, and will expire after a certain period of time. Saving and reusing the `binary_url` won't work in this situation given it's dynamic nature.
 
 > Example response
 
@@ -5789,6 +5787,7 @@ Get a file. Successful request will return a single [Modfile Object](#modfile-ob
   "id": 2,
   "mod_id": 2,
   "date_added": 1499841487,
+  "date_updated": 1499841487,
   "date_scanned": 1499841487,
   "virus_status": 0,
   "virus_positive": 0,
@@ -5958,6 +5957,7 @@ Upload a file for the corresponding mod. Successful request will return the newl
   "id": 2,
   "mod_id": 2,
   "date_added": 1499841487,
+  "date_updated": 1499841487,
   "date_scanned": 1499841487,
   "virus_status": 0,
   "virus_positive": 0,
@@ -6119,6 +6119,7 @@ Edit the details of a published file. If you want to update fields other than th
   "id": 2,
   "mod_id": 2,
   "date_added": 1499841487,
+  "date_updated": 1499841487,
   "date_scanned": 1499841487,
   "virus_status": 0,
   "virus_positive": 0,
@@ -6258,9 +6259,7 @@ System.out.println(response.toString());
 
 `DELETE /games/{game-id}/mods/{mod-id}/files/{file-id}`
 
-Delete a modfile. Successful request will return `204 No Content`.
-
-     __NOTE:__ A modfile can never be removed if it is the current active release for the corresponding mod regardless of user permissions. Furthermore, this ability is only available if you are authenticated as the game administrator for this game _or_ are the original uploader of the modfile.
+Delete a modfile. Successful request will return `204 No Content`.<br><br>__NOTE:__ A modfile can never be removed if it is the current active release for the corresponding mod regardless of user permissions. Furthermore, this ability is only available if you are authenticated as the game administrator for this game _or_ are the original uploader of the modfile.
 
 > Example response
 
@@ -6393,6 +6392,7 @@ Manage the platform status of a particular modfile. This endpoint does not set a
   "id": 2,
   "mod_id": 2,
   "date_added": 1499841487,
+  "date_updated": 1499841487,
   "date_scanned": 1499841487,
   "virus_status": 0,
   "virus_positive": 0,
@@ -6438,13 +6438,13 @@ To perform this request, you must be authenticated via one of the following meth
 
 ```shell
 # You can also use wget
-curl -X GET https://*.modapi.io/v1/games/{game-id}/mods/{mod-id}/files/multipart?api_key=YourApiKey \
+curl -X GET https://*.modapi.io/v1/games/{game-id}/mods/{mod-id}/files/multipart?api_key=YourApiKey&upload_id=123e4567-e89b-12d3-a456-426614174000 \
   -H 'Accept: application/json'
 
 ```
 
 ```http
-GET https://*.modapi.io/v1/games/{game-id}/mods/{mod-id}/files/multipart?api_key=YourApiKey HTTP/1.1
+GET https://*.modapi.io/v1/games/{game-id}/mods/{mod-id}/files/multipart?api_key=YourApiKey&upload_id=123e4567-e89b-12d3-a456-426614174000 HTTP/1.1
 Host: *.modapi.io
 
 Accept: application/json
@@ -6460,7 +6460,7 @@ var headers = {
 $.ajax({
   url: 'https://*.modapi.io/v1/games/{game-id}/mods/{mod-id}/files/multipart',
   method: 'get',
-  data: '?api_key=YourApiKey',
+  data: '?api_key=YourApiKey&upload_id=123e4567-e89b-12d3-a456-426614174000',
   headers: headers,
   success: function(data) {
     console.log(JSON.stringify(data));
@@ -6476,7 +6476,7 @@ const headers = {
 
 };
 
-fetch('https://*.modapi.io/v1/games/{game-id}/mods/{mod-id}/files/multipart?api_key=YourApiKey',
+fetch('https://*.modapi.io/v1/games/{game-id}/mods/{mod-id}/files/multipart?api_key=YourApiKey&upload_id=123e4567-e89b-12d3-a456-426614174000',
 {
   method: 'GET',
 
@@ -6496,14 +6496,14 @@ headers = {
 }
 
 r = requests.get('https://*.modapi.io/v1/games/{game-id}/mods/{mod-id}/files/multipart', params={
-  'api_key': 'YourApiKey'
+  'api_key': 'YourApiKey',  'upload_id': '123e4567-e89b-12d3-a456-426614174000'
 }, headers = headers)
 
 print r.json()
 ```
 
 ```java
-URL obj = new URL("https://*.modapi.io/v1/games/{game-id}/mods/{mod-id}/files/multipart?api_key=YourApiKey");
+URL obj = new URL("https://*.modapi.io/v1/games/{game-id}/mods/{mod-id}/files/multipart?api_key=YourApiKey&upload_id=123e4567-e89b-12d3-a456-426614174000");
 HttpURLConnection con = (HttpURLConnection) obj.openConnection();
 con.setRequestMethod("GET");
 int responseCode = con.getResponseCode();
@@ -6521,6 +6521,10 @@ System.out.println(response.toString());
 `GET /games/{game-id}/mods/{mod-id}/files/multipart`
 
 Get all uploaded parts for a corresponding upload session. Successful request will return an array of [Multipart Upload Part Objects](#get-multipart-upload-parts-2). We recommended reading the [filtering documentation](#filtering) to return only the records you want.
+
+    Query Parameters|Required|type|Description
+    ---|---|---|---|
+    upload_id|true|string|The `upload_id` of the existing upload session to fetch parts already uploaded.
 
 > Example response
 
@@ -7196,17 +7200,17 @@ To perform this request, you must be authenticated via one of the following meth
 curl -X POST https://*.modapi.io/v1/games/{game-id}/mods/{mod-id}/subscribe \
   -H 'Authorization: Bearer {access-token}' \ 
   -H 'Content-Type: application/x-www-form-urlencoded' \ 
-  -H 'Accept: application/json' \
-  -d 'include_dependencies=false'
+  -H 'Accept: application/json'
 
 ```
 
 ```http
 POST https://*.modapi.io/v1/games/{game-id}/mods/{mod-id}/subscribe HTTP/1.1
 Host: *.modapi.io
-Content-Type: application/x-www-form-urlencoded
+
 Accept: application/json
 Authorization: Bearer {access-token}
+Content-Type: application/x-www-form-urlencoded
 
 ```
 
@@ -7231,9 +7235,7 @@ $.ajax({
 
 ```javascript--nodejs
 const request = require('node-fetch');
-const inputBody = '{
-  "include_dependencies": false
-}';
+
 const headers = {
   'Authorization':'Bearer {access-token}',
   'Content-Type':'application/x-www-form-urlencoded',
@@ -7244,7 +7246,7 @@ const headers = {
 fetch('https://*.modapi.io/v1/games/{game-id}/mods/{mod-id}/subscribe',
 {
   method: 'POST',
-  body: inputBody,
+
   headers: headers
 })
 .then(function(res) {
@@ -7287,13 +7289,7 @@ System.out.println(response.toString());
 
 `POST /games/{game-id}/mods/{mod-id}/subscribe`
 
-Subscribe the _authenticated user_ to a corresponding mod. No body parameters are required for this action. Successful request will return the [Mod Object](#mod-object) of the newly subscribed mod.
-
-    __NOTE:__ Users can subscribe to mods via mod.io, we recommend you call [Get Users Subscriptions](#get-user-subscriptions) or the [Get User Events](#get-user-events) endpoint when needed, to keep a users mods collection up to date.
-
-    Parameter|Type|Required|Description
-    ---|---|---|---|
-    include_dependencies|boolean|false|If the mod has dependencies, providing this attribute with a value of `true` will result in dependant mods being subscribed to as well, recursively. You should only include this attribute when the [Mod Object](#mod-object) indicates the mod has dependencies.
+Subscribe the _authenticated user_ to a corresponding mod. No body parameters are required for this action. Successful request will return the [Mod Object](#mod-object) of the newly subscribed mod.<br><br>__NOTE:__ Users can subscribe to mods via mod.io, we recommend you poll or call the [Get User Events](#get-user-events) endpoint when needed, to keep a users mods collection up to date.
 
 > Example response
 
@@ -7363,6 +7359,7 @@ Subscribe the _authenticated user_ to a corresponding mod. No body parameters ar
     "id": 2,
     "mod_id": 2,
     "date_added": 1499841487,
+    "date_updated": 1499841487,
     "date_scanned": 1499841487,
     "virus_status": 0,
     "virus_positive": 0,
@@ -7387,7 +7384,6 @@ Subscribe the _authenticated user_ to a corresponding mod. No body parameters ar
       }
     ]
   },
-  "dependencies": false,
   "platforms": [
     {
       "platform": "windows",
@@ -7540,9 +7536,7 @@ System.out.println(response.toString());
 
 `DELETE /games/{game-id}/mods/{mod-id}/subscribe`
 
-Unsubscribe the _authenticated user_ from the corresponding mod. No body parameters are required for this action. Successful request will return `204 No Content`.
-
-     __NOTE:__ Users can unsubscribe from mods via mod.io, we recommend you call [Get Users Subscriptions](#get-user-subscriptions) or the [Get User Events](#get-user-events) endpoint when needed, to keep a users mods collection up to date.
+Unsubscribe the _authenticated user_ from the corresponding mod. No body parameters are required for this action. Successful request will return `204 No Content`.<br><br>__NOTE:__ Users can unsubscribe from mods via mod.io, we recommend you poll or call the [Get Mod Events](#get-mod-events) endpoint when needed, to keep a users mods collection up to date.
 
 > Example response
 
@@ -9385,7 +9379,7 @@ System.out.println(response.toString());
 
 Upload new media to a game. The request `Content-Type` header __must__ be `multipart/form-data` to submit image files. Any request you make to this endpoint *should* contain a binary file for each of the fields you want to update below. Successful request will return [Message Object](#message-object).
 
-    __NOTE:__ You can also add media to [your games profile](https://mod.io/me/library) on the mod.io website. This is the recommended approach.
+    __NOTE:__ You can also add media to [your games profile](https://mod.io/library) on the mod.io website. This is the recommended approach.
 
     Parameter|Type|Required|Description
     ---|---|---|---|
@@ -9523,7 +9517,7 @@ System.out.println(response.toString());
 
 This endpoint is very flexible and will add any images posted to the mods gallery regardless of their body name providing they are a valid image. The request `Content-Type` header __must__ be `multipart/form-data` to submit image files. Successful request will return a [Message Object](#message-object).
 
-    __NOTE:__ You can also add media to [your mods profile](https://mod.io/me/library) on the mod.io website. This is the easiest way.
+    __NOTE:__ You can also add media to [your mods profile](https://mod.io/library) on the mod.io website. This is the easiest way.
 
     Parameter|Type|Required|Description
     ---|---|---|---|
@@ -9663,7 +9657,7 @@ System.out.println(response.toString());
 
 Delete images, sketchfab or youtube links from a mod profile. Successful request will return `204 No Content`.
 
-    __NOTE:__ You can also delete media from [your mods profile](https://mod.io/me/library) on the mod.io website. This is the easiest way.
+    __NOTE:__ You can also delete media from [your mods profile](https://mod.io/library) on the mod.io website. This is the easiest way.
 
     Parameter|Type|Required|Description
     ---|---|---|---|
@@ -9910,7 +9904,7 @@ System.out.println(response.toString());
 
 Get all mods events for the corresponding game sorted by latest event first. Successful request will return an array of [Event Objects](#get-mod-events-2).
 
-    __NOTE:__ We recommend you check this endpoint on initalization, or call [Get Users Subscriptions](#get-user-subscriptions) to keep their mods up-to-date. If polling this endpoint for updates you should store the `id` or `date_added` of the latest event, and on subsequent requests use that information [in the filter](#filtering), to return only newer events to process.
+    __NOTE:__ We recommend you poll this endpoint to keep mods up-to-date. If polling this endpoint for updates you should store the `id` or `date_added` of the latest event, and on subsequent requests use that information [in the filter](#filtering), to return only newer events to process.
 
     Filter|Type|Description
     ---|---|---
@@ -10219,7 +10213,7 @@ curl -X POST https://*.modapi.io/v1/games/{game-id}/tags \
   -d 'type=dropdown' \
   -d 'hidden=false' \
   -d 'locked=false' \
-  -d 'tags[]=easy&tags[]=medium&tags=hard'
+  -d 'tags[]=tags[]=easy&tags[]=medium&tags[]=hard'
 
 ```
 
@@ -10258,7 +10252,7 @@ const inputBody = '{
   "type": "dropdown",
   "hidden": "false",
   "locked": "false",
-  "tags": "easy&tags[]=medium&tags=hard"
+  "tags": "tags[]=easy&tags[]=medium&tags[]=hard"
 }';
 const headers = {
   'Authorization':'Bearer {access-token}',
@@ -10317,7 +10311,7 @@ Add tags which mods can apply to their profiles. Successful request will return 
 
     Tagging is a critical feature that powers the searching and filtering of mods for your game, as well as allowing you to control how mods are installed and played. For example you might enforce mods to be a particular type (map, model, script, save, effects, blueprint), which dictates how you install it. You may use tags to specify what the mod replaces (building, prop, car, boat, character). Or perhaps the tags describe the theme of the mod (fun, scenic, realism). The implementation is up to you, but the more detail you support the better filtering and searching becomes. If you need to store more advanced information, you can also use [Metadata Key Value Pairs](#metadata).
 
-    __NOTE:__ You can also manage tags by editing [your games profile](https://mod.io/me/library) on the mod.io website. This is the recommended approach.
+    __NOTE:__ You can also manage tags by editing [your games profile](https://mod.io/library) on the mod.io website. This is the recommended approach.
 
     Parameter|Type|Required|Description
     ---|---|---|---|
@@ -10456,7 +10450,7 @@ System.out.println(response.toString());
 
 Delete an entire group of tags or individual tags. Successful request will return `204 No Content`.
 
-    __NOTE:__ You can also manage tags by editing [your games profile](https://mod.io/me/library) on the mod.io website. This is the recommended approach.
+    __NOTE:__ You can also manage tags by editing [your games profile](https://mod.io/library) on the mod.io website. This is the recommended approach.
 
     Parameter|Type|Required|Description
     ---|---|---|---|
@@ -11580,9 +11574,7 @@ System.out.println(response.toString());
 
 `GET /games/{game-id}/mods/{mod-id}/metadatakvp`
 
-Get all metadata stored by the game developer for this mod as searchable key value pairs. Successful request will return an array of [Metadata KVP Objects](#get-mod-kvp-metadata-2).
-
-     __NOTE:__ Metadata can also be stored as `metadata_blob` in the [Mod Object](#mod-object).
+Get all metadata stored by the game developer for this mod as searchable key value pairs. Successful request will return an array of [Metadata KVP Objects](#get-mod-kvp-metadata-2).<br><br>__NOTE:__ Metadata can also be stored as `metadata_blob` in the [Mod Object](#mod-object).
 
 > Example response
 
@@ -11992,6 +11984,7 @@ Get all dependencies the chosen mod has selected. This is useful if a mod requir
         "id": 2,
         "mod_id": 2,
         "date_added": 1499841487,
+        "date_updated": 1499841487,
         "date_scanned": 1499841487,
         "virus_status": 0,
         "virus_positive": 0,
@@ -12571,7 +12564,7 @@ The purpose of this endpoint is enable users to report a resource (game, mod or 
 
     For example to report a mod with an ID of 1 the URL would be: [https://mod.io/report/`mods`/`1`/widget](https://mod.io/report/mods/1/widget). If you don't know the ID of the resource you wish to report, you can use the generic report URL: [https://mod.io/report/widget](https://mod.io/report)
 
-    __NOTE:__ If you are a game owner or manager, you can [view all reports](https://mod.io/me/library) submitted for your game(s), and you are responsible for actioning reports. You can also configure in your games control panel the number of reports required before content is automatically taken down for review.
+    __NOTE:__ If you are a game owner or manager, you can [view all reports](https://mod.io/library) submitted for your game(s), and you are responsible for actioning reports. You can also configure in your games control panel the number of reports required before content is automatically taken down for review.
 
     Read our [Terms of Use](https://mod.io/terms/widget) for information about what is/isn't acceptable.
 
@@ -13501,6 +13494,7 @@ Get all modfiles the _authenticated user_ uploaded. Successful request will retu
       "id": 2,
       "mod_id": 2,
       "date_added": 1499841487,
+      "date_updated": 1499841487,
       "date_scanned": 1499841487,
       "virus_status": 0,
       "virus_positive": 0,
@@ -13688,10 +13682,14 @@ Get all games the _authenticated user_ added or is a team member of. Successful 
       "curation_option": 0,
       "community_options": 3,
       "monetisation_options": 0,
+      "monetisation_team": {
+        "team_id": "1"
+      },
       "revenue_options": 0,
       "api_access_options": 3,
       "maturity_options": 0,
       "ugc_name": "mods",
+      "token_name": "MIO",
       "icon": {
         "filename": "icon.png",
         "original": "https://assets.modcdn.io/images/placeholder/icon.png",
@@ -13974,6 +13972,7 @@ Get all mod's the _authenticated user_ is subscribed to. Successful request will
         "id": 2,
         "mod_id": 2,
         "date_added": 1499841487,
+        "date_updated": 1499841487,
         "date_scanned": 1499841487,
         "virus_status": 0,
         "virus_positive": 0,
@@ -13998,7 +13997,6 @@ Get all mod's the _authenticated user_ is subscribed to. Successful request will
           }
         ]
       },
-      "dependencies": false,
       "platforms": [
         {
           "platform": "windows",
@@ -14249,6 +14247,7 @@ Get all mods the _authenticated user_ added or is a team member of. Successful r
         "id": 2,
         "mod_id": 2,
         "date_added": 1499841487,
+        "date_updated": 1499841487,
         "date_scanned": 1499841487,
         "virus_status": 0,
         "virus_positive": 0,
@@ -14273,7 +14272,6 @@ Get all mods the _authenticated user_ added or is a team member of. Successful r
           }
         ]
       },
-      "dependencies": false,
       "platforms": [
         {
           "platform": "windows",
@@ -14956,6 +14954,24 @@ md5|string|MD5 hash of the file.
 
 
 
+## Game Monetisation Team Object 
+
+<a name="schemagame_monetisation_team_object"></a>
+
+```json
+{
+  "team_id": "1"
+} 
+```
+
+### Properties
+
+Name|Type|Description
+---|---|---|---|
+team_id|integer|The ID of the monetisation team.
+
+
+
 ## Game Object
 
    <a name="schemagame_object"></a>
@@ -14973,10 +14989,14 @@ md5|string|MD5 hash of the file.
   "curation_option": 0,
   "community_options": 3,
   "monetisation_options": 0,
+  "monetisation_team": {
+    "team_id": "1"
+  },
   "revenue_options": 0,
   "api_access_options": 3,
   "maturity_options": 0,
   "ugc_name": "mods",
+  "token_name": "MIO",
   "icon": {
     "filename": "icon.png",
     "original": "https://assets.modcdn.io/images/placeholder/icon.png",
@@ -15064,10 +15084,12 @@ submission_option|integer|Submission process modders must follow:<br><br>__0__ =
 curation_option|integer|Curation options enabled by this game to approve mods:<br><br>__0__ = No curation: Mods are immediately available to play<br>__1__ = Price change approval: Pricing changes for marketplace mods queued for acceptance<br>__2__ = Full curation: All mods must be accepted by someone to be listed<br>__?__ = Combine to enable multiple features (see BITWISE fields)
 community_options|integer|Community features enabled for this game:<br><br>__0__ = All of the options below are disabled<br>__1__ = Enable comments<br>__2__ = Enable guides<br>__4__ = Pin on homepage<br>__8__ = Show on homepage<br>__16__ = Show more on homepage<br>__32__ = Allow change status<br>__64__ = Enable Previews (Game must be hidden)<br>__128__ = Allow Preview Share-URL (Previews must be enabled)<br>__?__ = Add the options you want together, to enable multiple features (see [BITWISE fields](#bitwise-and-bitwise-and))
 monetisation_options|integer|Monetisation features mods can enable:<br><br>__0__ = All of the options below are disabled<br>__1__ = Enabled<br>__2__ = Enable marketplace<br>__?__ = Add the options you want together, to enable multiple features (see [BITWISE fields](#bitwise-and-bitwise-and))
+monetisation_team|[Game Monetisation Team Object](#schemagame_monetisation_team_object)|The monetisation team for this resource. [Game Monetisation Team Object](#game-monetisation-team-object).
 revenue_options|integer|Deprecated: Please use monetisation_options instead, this will be removed in subsequent API version.
 api_access_options|integer|Level of API access allowed by this game:<br><br>__0__ = All of the options below are disabled<br>__1__ = Allow 3rd parties to access this games API endpoints<br>__2__ = Allow mods to be downloaded directly (if disabled all download URLs will contain a frequently changing verification hash to stop unauthorized use)<br>__?__ = Add the options you want together, to enable multiple features (see [BITWISE fields](#bitwise-and-bitwise-and))
 maturity_options|integer|Mature content setup for this game:<br><br>__0__ = Don't allow mature content in mods<br>__1__ = Allow mature content in mods<br>__2__ = This game is for mature audiences only<br>__?__ = Add the options you want together, to enable multiple features (see [BITWISE fields](#bitwise-and-bitwise-and))
 ugc_name|string|Word used to describe user-generated content (mods, items, addons etc).
+token_name|string|Word used to describe the games token.
 icon|[Icon Object](#schemaicon_object)|Contains media URL's to the icon for the game.
 logo|[Logo Object](#schemalogo_object)|Contains media URL's to the logo for the game.
 header|[Header Image Object](#schemaheader_image_object)|Contains media URL's to the preview header for the game.
@@ -15290,10 +15312,14 @@ result_total|integer|Total number of results found.
       "curation_option": 0,
       "community_options": 3,
       "monetisation_options": 0,
+      "monetisation_team": {
+        "team_id": "1"
+      },
       "revenue_options": 0,
       "api_access_options": 3,
       "maturity_options": 0,
       "ugc_name": "mods",
+      "token_name": "MIO",
       "icon": {
         "filename": "icon.png",
         "original": "https://assets.modcdn.io/images/placeholder/icon.png",
@@ -15640,6 +15666,7 @@ result_total|integer|Total number of results found.
         "id": 2,
         "mod_id": 2,
         "date_added": 1499841487,
+        "date_updated": 1499841487,
         "date_scanned": 1499841487,
         "virus_status": 0,
         "virus_positive": 0,
@@ -15849,6 +15876,7 @@ result_total|integer|Total number of results found.
       "id": 2,
       "mod_id": 2,
       "date_added": 1499841487,
+      "date_updated": 1499841487,
       "date_scanned": 1499841487,
       "virus_status": 0,
       "virus_positive": 0,
@@ -15968,6 +15996,7 @@ result_total|integer|Total number of results found.
         "id": 2,
         "mod_id": 2,
         "date_added": 1499841487,
+        "date_updated": 1499841487,
         "date_scanned": 1499841487,
         "virus_status": 0,
         "virus_positive": 0,
@@ -15992,7 +16021,6 @@ result_total|integer|Total number of results found.
           }
         ]
       },
-      "dependencies": false,
       "platforms": [
         {
           "platform": "windows",
@@ -16599,6 +16627,7 @@ metavalue|string|The value of the key-value pair.
     "id": 2,
     "mod_id": 2,
     "date_added": 1499841487,
+    "date_updated": 1499841487,
     "date_scanned": 1499841487,
     "virus_status": 0,
     "virus_positive": 0,
@@ -16769,6 +16798,7 @@ images|[Image Object](#schemaimage_object)[]|Array of image objects (a gallery).
     "id": 2,
     "mod_id": 2,
     "date_added": 1499841487,
+    "date_updated": 1499841487,
     "date_scanned": 1499841487,
     "virus_status": 0,
     "virus_positive": 0,
@@ -16793,7 +16823,6 @@ images|[Image Object](#schemaimage_object)[]|Array of image objects (a gallery).
       }
     ]
   },
-  "dependencies": false,
   "platforms": [
     {
       "platform": "windows",
@@ -16858,7 +16887,6 @@ metadata_blob|string|Metadata stored by the game developer. Metadata can also be
 profile_url|string|URL to the mod.
 media|[Mod Media Object](#schemamod_media_object)|Contains YouTube & Sketchfab links, aswell as media URL's of images for the mod.
 modfile|[Modfile Object](#schemamodfile_object)|The primary modfile for the mod.
-dependencies|boolean|If the mod has any dependencies, this value will be set to `true`.
 stats|[Mod Stats Object](#schemamod_stats_object)|Numerous aggregate stats for the mod.
 platforms|[Mod Platforms Object](#schemamod_platforms_object)[]|Contains mod platform data.
 metadata_kvp|[Metadata KVP Object](#schemametadata_kvp_object)[]|Contains key-value metadata.
@@ -16997,6 +17025,7 @@ date_added|integer|Unix timestamp of the date the user was registered as a previ
   "id": 2,
   "mod_id": 2,
   "date_added": 1499841487,
+  "date_updated": 1499841487,
   "date_scanned": 1499841487,
   "virus_status": 0,
   "virus_positive": 0,
@@ -17030,6 +17059,7 @@ Name|Type|Description
 id|integer|Unique modfile id.
 mod_id|integer|Unique mod id.
 date_added|integer|Unix timestamp of date file was added.
+date_updated|integer|Unix timestamp of date file was updated.
 date_scanned|integer|Unix timestamp of date file was virus scanned.
 virus_status|integer|Current virus scan status of the file. For newly added files that have yet to be scanned this field will change frequently until a scan is complete:<br><br>__0__ = Not scanned<br>__1__ = Scan complete<br>__2__ = In progress<br>__3__ = Too large to scan<br>__4__ = File not found<br>__5__ = Error Scanning
 virus_positive|integer|Was a virus detected:<br><br>__0__ = No threats detected<br>__1__ = Flagged as malicious<br>__2__ = Flagged as containing potentially harmful files (i.e. EXEs)
@@ -17302,8 +17332,8 @@ invite_pending|integer|If the team member invitation is still pending:<br><br>__
 
 ```json
 {
-  "plaintext": "We use mod.io to support user-generated content in-game. By clicking "I Agree" you agree to the mod.io Terms of Use and a mod.io account will be created for you (using your Steam display name, avatar and ID). Please see the mod.io Privacy Policy on how mod.io processes your personal data.",
-  "html": "<p>We use <a href="https://mod.io">mod.io</a> to support user-generated content in-game. By clicking "I Agree" you agree to the mod.io <a href="https://mod.io/terms">Terms of Use</a> and a mod.io account will be created for you (using your Steam display name, avatar and ID). Please see the mod.io <a href="https://mod.io/privacy">Privacy Policy</a> on how mod.io processes your personal data.</p>",
+  "plaintext": "We use mod.io to support user-generated content in-game. By clicking "I Agree" you agree to the mod.io Terms of Use and a mod.io account will be created for you (using your display name, avatar and ID). Please see the mod.io Privacy Policy on how mod.io processes your personal data.",
+  "html": "<p>We use <a href="https://mod.io">mod.io</a> to support user-generated content in-game. By clicking "I Agree" you agree to the mod.io <a href="https://mod.io/terms">Terms of Use</a> and a mod.io account will be created for you (using your display name, avatar and ID). Please see the mod.io <a href="https://mod.io/privacy">Privacy Policy</a> on how mod.io processes your personal data.</p>",
   "buttons": {
     "agree": {
       "text": "I Agree"
