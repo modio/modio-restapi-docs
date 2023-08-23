@@ -12700,6 +12700,7 @@ Get the current agreement (version) by type. Successful request will return a si
      __4__ = API Access Terms - [https://mod.io/apiterms](https://mod.io/apiterms)<br>
      __5__ = Monetisation Terms - [https://mod.io/monetisationterms](https://mod.io/monetisationterms)<br>
      __6__ = Acceptable Use Policy - [https://mod.io/aup](https://mod.io/aup)
+     __7__ = Cookies Policy - [https://mod.io/cookies](https://mod.io/cookies)
 
      There are three ways you can display mod.io agreements. Pick which is easiest and most suitable for your implementation.
 
@@ -14802,7 +14803,7 @@ Name|Type|Description
 ---|---|---|---|
 id|integer|Unique id of the agreement.
 is_active|boolean|Is the agreement currently active? (This can also be determined if date_live > 0).
-type|integer|The type of agreement. Can be one of the following:<br><br>__1__ = Terms<br>__2__ = Privacy<br>__3__ = Developers<br>__4__ = API<br>__5__ = Payment<br>__6__ = AUP
+type|integer|The type of agreement. Can be one of the following:<br><br>__1__ = Terms<br>__2__ = Privacy<br>__3__ = Developers<br>__4__ = API<br>__5__ = Payment<br>__6__ = AUP<br>__7__ = Cookies
 user|[User Object](#schemauser_object)|No description
 date_added|integer|Unix timestamp of the date the agreement was added.
 date_updated|integer|Unix timestamp of the date the agreement was updated.
