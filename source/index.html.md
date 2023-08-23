@@ -937,7 +937,7 @@ System.out.println(response.toString());
 
 `GET /authenticate/terms`
 
-The purpose of this endpoint is to provide the text, links and buttons you can use to get a users agreement and consent prior to authenticating them in-game (your dialog should look similar to the example below). A successful response will return a [Terms Object](#terms-object).
+The purpose of this endpoint is to provide the text, links and buttons you can use to get a users agreement and consent prior to authenticating them in-game (your dialog should look similar to the example below). If you are authenticating using platform SSO, you must call this endpoint with the `X-Modio-Portal` [header set](#targeting-a-portal), so the text is localized to match the platforms requirements. A successful response will return a [Terms Object](#terms-object).
 
      __Example Dialog:__
 
@@ -960,8 +960,8 @@ The purpose of this endpoint is to provide the text, links and buttons you can u
 
 ```json
 {
-  "plaintext": "We use mod.io to support user-generated content in-game. By clicking "I Agree" you agree to the mod.io Terms of Use and a mod.io account will be created for you (using your Steam display name, avatar and ID). Please see the mod.io Privacy Policy on how mod.io processes your personal data.",
-  "html": "<p>We use <a href="https://mod.io">mod.io</a> to support user-generated content in-game. By clicking "I Agree" you agree to the mod.io <a href="https://mod.io/terms">Terms of Use</a> and a mod.io account will be created for you (using your Steam display name, avatar and ID). Please see the mod.io <a href="https://mod.io/privacy">Privacy Policy</a> on how mod.io processes your personal data.</p>",
+  "plaintext": "We use mod.io to support user-generated content in-game. By clicking "I Agree" you agree to the mod.io Terms of Use and a mod.io account will be created for you (using your display name, avatar and ID). Please see the mod.io Privacy Policy on how mod.io processes your personal data.",
+  "html": "<p>We use <a href="https://mod.io">mod.io</a> to support user-generated content in-game. By clicking "I Agree" you agree to the mod.io <a href="https://mod.io/terms">Terms of Use</a> and a mod.io account will be created for you (using your display name, avatar and ID). Please see the mod.io <a href="https://mod.io/privacy">Privacy Policy</a> on how mod.io processes your personal data.</p>",
   "buttons": {
     "agree": {
       "text": "I Agree"
@@ -4543,6 +4543,7 @@ Get all mods for the corresponding game. Successful request will return an array
         "id": 2,
         "mod_id": 2,
         "date_added": 1499841487,
+        "date_updated": 1499841487,
         "date_scanned": 1499841487,
         "virus_status": 0,
         "virus_positive": 0,
@@ -4784,6 +4785,7 @@ Get a mod. Successful request will return a single [Mod Object](#mod-object).
     "id": 2,
     "mod_id": 2,
     "date_added": 1499841487,
+    "date_updated": 1499841487,
     "date_scanned": 1499841487,
     "virus_status": 0,
     "virus_positive": 0,
@@ -5056,6 +5058,7 @@ Add a mod. Successful request will return the newly created [Mod Object](#mod-ob
     "id": 2,
     "mod_id": 2,
     "date_added": 1499841487,
+    "date_updated": 1499841487,
     "date_scanned": 1499841487,
     "virus_status": 0,
     "virus_positive": 0,
@@ -5330,6 +5333,7 @@ Edit details for a mod. If you want to update the `logo` or media associated wit
     "id": 2,
     "mod_id": 2,
     "date_added": 1499841487,
+    "date_updated": 1499841487,
     "date_scanned": 1499841487,
     "virus_status": 0,
     "virus_positive": 0,
@@ -5639,6 +5643,7 @@ Get all files that are published for the corresponding mod. Successful request w
       "id": 2,
       "mod_id": 2,
       "date_added": 1499841487,
+      "date_updated": 1499841487,
       "date_scanned": 1499841487,
       "virus_status": 0,
       "virus_positive": 0,
@@ -5784,6 +5789,7 @@ Get a file. Successful request will return a single [Modfile Object](#modfile-ob
   "id": 2,
   "mod_id": 2,
   "date_added": 1499841487,
+  "date_updated": 1499841487,
   "date_scanned": 1499841487,
   "virus_status": 0,
   "virus_positive": 0,
@@ -5953,6 +5959,7 @@ Upload a file for the corresponding mod. Successful request will return the newl
   "id": 2,
   "mod_id": 2,
   "date_added": 1499841487,
+  "date_updated": 1499841487,
   "date_scanned": 1499841487,
   "virus_status": 0,
   "virus_positive": 0,
@@ -6114,6 +6121,7 @@ Edit the details of a published file. If you want to update fields other than th
   "id": 2,
   "mod_id": 2,
   "date_added": 1499841487,
+  "date_updated": 1499841487,
   "date_scanned": 1499841487,
   "virus_status": 0,
   "virus_positive": 0,
@@ -6386,6 +6394,7 @@ Manage the platform status of a particular modfile. This endpoint does not set a
   "id": 2,
   "mod_id": 2,
   "date_added": 1499841487,
+  "date_updated": 1499841487,
   "date_scanned": 1499841487,
   "virus_status": 0,
   "virus_positive": 0,
@@ -7352,6 +7361,7 @@ Subscribe the _authenticated user_ to a corresponding mod. No body parameters ar
     "id": 2,
     "mod_id": 2,
     "date_added": 1499841487,
+    "date_updated": 1499841487,
     "date_scanned": 1499841487,
     "virus_status": 0,
     "virus_positive": 0,
@@ -11976,6 +11986,7 @@ Get all dependencies the chosen mod has selected. This is useful if a mod requir
         "id": 2,
         "mod_id": 2,
         "date_added": 1499841487,
+        "date_updated": 1499841487,
         "date_scanned": 1499841487,
         "virus_status": 0,
         "virus_positive": 0,
@@ -13485,6 +13496,7 @@ Get all modfiles the _authenticated user_ uploaded. Successful request will retu
       "id": 2,
       "mod_id": 2,
       "date_added": 1499841487,
+      "date_updated": 1499841487,
       "date_scanned": 1499841487,
       "virus_status": 0,
       "virus_positive": 0,
@@ -13962,6 +13974,7 @@ Get all mod's the _authenticated user_ is subscribed to. Successful request will
         "id": 2,
         "mod_id": 2,
         "date_added": 1499841487,
+        "date_updated": 1499841487,
         "date_scanned": 1499841487,
         "virus_status": 0,
         "virus_positive": 0,
@@ -14236,6 +14249,7 @@ Get all mods the _authenticated user_ added or is a team member of. Successful r
         "id": 2,
         "mod_id": 2,
         "date_added": 1499841487,
+        "date_updated": 1499841487,
         "date_scanned": 1499841487,
         "virus_status": 0,
         "virus_positive": 0,
@@ -15654,6 +15668,7 @@ result_total|integer|Total number of results found.
         "id": 2,
         "mod_id": 2,
         "date_added": 1499841487,
+        "date_updated": 1499841487,
         "date_scanned": 1499841487,
         "virus_status": 0,
         "virus_positive": 0,
@@ -15863,6 +15878,7 @@ result_total|integer|Total number of results found.
       "id": 2,
       "mod_id": 2,
       "date_added": 1499841487,
+      "date_updated": 1499841487,
       "date_scanned": 1499841487,
       "virus_status": 0,
       "virus_positive": 0,
@@ -15982,6 +15998,7 @@ result_total|integer|Total number of results found.
         "id": 2,
         "mod_id": 2,
         "date_added": 1499841487,
+        "date_updated": 1499841487,
         "date_scanned": 1499841487,
         "virus_status": 0,
         "virus_positive": 0,
@@ -16612,6 +16629,7 @@ metavalue|string|The value of the key-value pair.
     "id": 2,
     "mod_id": 2,
     "date_added": 1499841487,
+    "date_updated": 1499841487,
     "date_scanned": 1499841487,
     "virus_status": 0,
     "virus_positive": 0,
@@ -16782,6 +16800,7 @@ images|[Image Object](#schemaimage_object)[]|Array of image objects (a gallery).
     "id": 2,
     "mod_id": 2,
     "date_added": 1499841487,
+    "date_updated": 1499841487,
     "date_scanned": 1499841487,
     "virus_status": 0,
     "virus_positive": 0,
@@ -17008,6 +17027,7 @@ date_added|integer|Unix timestamp of the date the user was registered as a previ
   "id": 2,
   "mod_id": 2,
   "date_added": 1499841487,
+  "date_updated": 1499841487,
   "date_scanned": 1499841487,
   "virus_status": 0,
   "virus_positive": 0,
@@ -17041,6 +17061,7 @@ Name|Type|Description
 id|integer|Unique modfile id.
 mod_id|integer|Unique mod id.
 date_added|integer|Unix timestamp of date file was added.
+date_updated|integer|Unix timestamp of date file was updated.
 date_scanned|integer|Unix timestamp of date file was virus scanned.
 virus_status|integer|Current virus scan status of the file. For newly added files that have yet to be scanned this field will change frequently until a scan is complete:<br><br>__0__ = Not scanned<br>__1__ = Scan complete<br>__2__ = In progress<br>__3__ = Too large to scan<br>__4__ = File not found<br>__5__ = Error Scanning
 virus_positive|integer|Was a virus detected:<br><br>__0__ = No threats detected<br>__1__ = Flagged as malicious<br>__2__ = Flagged as containing potentially harmful files (i.e. EXEs)
@@ -17313,8 +17334,8 @@ invite_pending|integer|If the team member invitation is still pending:<br><br>__
 
 ```json
 {
-  "plaintext": "We use mod.io to support user-generated content in-game. By clicking "I Agree" you agree to the mod.io Terms of Use and a mod.io account will be created for you (using your Steam display name, avatar and ID). Please see the mod.io Privacy Policy on how mod.io processes your personal data.",
-  "html": "<p>We use <a href="https://mod.io">mod.io</a> to support user-generated content in-game. By clicking "I Agree" you agree to the mod.io <a href="https://mod.io/terms">Terms of Use</a> and a mod.io account will be created for you (using your Steam display name, avatar and ID). Please see the mod.io <a href="https://mod.io/privacy">Privacy Policy</a> on how mod.io processes your personal data.</p>",
+  "plaintext": "We use mod.io to support user-generated content in-game. By clicking "I Agree" you agree to the mod.io Terms of Use and a mod.io account will be created for you (using your display name, avatar and ID). Please see the mod.io Privacy Policy on how mod.io processes your personal data.",
+  "html": "<p>We use <a href="https://mod.io">mod.io</a> to support user-generated content in-game. By clicking "I Agree" you agree to the mod.io <a href="https://mod.io/terms">Terms of Use</a> and a mod.io account will be created for you (using your display name, avatar and ID). Please see the mod.io <a href="https://mod.io/privacy">Privacy Policy</a> on how mod.io processes your personal data.</p>",
   "buttons": {
     "agree": {
       "text": "I Agree"
