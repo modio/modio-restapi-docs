@@ -12699,7 +12699,7 @@ Get the current agreement (version) by type. Successful request will return a si
      __3__ = Game Terms - [https://mod.io/gameterms](https://mod.io/gameterms)<br>
      __4__ = API Access Terms - [https://mod.io/apiterms](https://mod.io/apiterms)<br>
      __5__ = Monetisation Terms - [https://mod.io/monetisationterms](https://mod.io/monetisationterms)<br>
-     __6__ = Acceptable Use Policy - [https://mod.io/aup](https://mod.io/aup)
+     __6__ = Acceptable Use Policy - [https://mod.io/aup](https://mod.io/aup)<br>
      __7__ = Cookies Policy - [https://mod.io/cookies](https://mod.io/cookies)
 
      There are three ways you can display mod.io agreements. Pick which is easiest and most suitable for your implementation.
