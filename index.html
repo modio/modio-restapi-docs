@@ -2289,7 +2289,7 @@ Accept: application/json
 </code></pre></div>
 <p><span class="httpmethod GET">GET</span> <span class="endpointheading">/authenticate/terms</span></p>
 
-<p>The purpose of this endpoint is to provide the text, links and buttons you can use to get a users agreement and consent prior to authenticating them in-game (your dialog should look similar to the example below). A successful response will return a <a href="#terms-object">Terms Object</a>.</p>
+<p>The purpose of this endpoint is to provide the text, links and buttons you can use to get a users agreement and consent prior to authenticating them in-game (your dialog should look similar to the example below). If you are authenticating using platform SSO, you must call this endpoint with the <code>X-Modio-Portal</code> <a href="#targeting-a-portal">header set</a>, so the text is localized to match the platforms requirements. A successful response will return a <a href="#terms-object">Terms Object</a>.</p>
 
 <p><strong>Example Dialog:</strong></p>
 
@@ -2314,8 +2314,8 @@ Accept: application/json
 <p>Example response</p>
 </blockquote>
 <div class="highlight"><pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
-  </span><span class="nl">"plaintext"</span><span class="p">:</span><span class="w"> </span><span class="s2">"We use mod.io to support user-generated content in-game. By clicking "</span><span class="err">I</span><span class="w"> </span><span class="err">Agree</span><span class="s2">" you agree to the mod.io Terms of Use and a mod.io account will be created for you (using your Steam display name, avatar and ID). Please see the mod.io Privacy Policy on how mod.io processes your personal data."</span><span class="p">,</span><span class="w">
-  </span><span class="nl">"html"</span><span class="p">:</span><span class="w"> </span><span class="s2">"&lt;p&gt;We use &lt;a href="</span><span class="err">https://mod.io</span><span class="s2">"&gt;mod.io&lt;/a&gt; to support user-generated content in-game. By clicking "</span><span class="err">I</span><span class="w"> </span><span class="err">Agree</span><span class="s2">" you agree to the mod.io &lt;a href="</span><span class="err">https://mod.io/terms</span><span class="s2">"&gt;Terms of Use&lt;/a&gt; and a mod.io account will be created for you (using your Steam display name, avatar and ID). Please see the mod.io &lt;a href="</span><span class="err">https://mod.io/privacy</span><span class="s2">"&gt;Privacy Policy&lt;/a&gt; on how mod.io processes your personal data.&lt;/p&gt;"</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"plaintext"</span><span class="p">:</span><span class="w"> </span><span class="s2">"We use mod.io to support user-generated content in-game. By clicking "</span><span class="err">I</span><span class="w"> </span><span class="err">Agree</span><span class="s2">" you agree to the mod.io Terms of Use and a mod.io account will be created for you (using your display name, avatar and ID). Please see the mod.io Privacy Policy on how mod.io processes your personal data."</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"html"</span><span class="p">:</span><span class="w"> </span><span class="s2">"&lt;p&gt;We use &lt;a href="</span><span class="err">https://mod.io</span><span class="s2">"&gt;mod.io&lt;/a&gt; to support user-generated content in-game. By clicking "</span><span class="err">I</span><span class="w"> </span><span class="err">Agree</span><span class="s2">" you agree to the mod.io &lt;a href="</span><span class="err">https://mod.io/terms</span><span class="s2">"&gt;Terms of Use&lt;/a&gt; and a mod.io account will be created for you (using your display name, avatar and ID). Please see the mod.io &lt;a href="</span><span class="err">https://mod.io/privacy</span><span class="s2">"&gt;Privacy Policy&lt;/a&gt; on how mod.io processes your personal data.&lt;/p&gt;"</span><span class="p">,</span><span class="w">
   </span><span class="nl">"buttons"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
     </span><span class="nl">"agree"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
       </span><span class="nl">"text"</span><span class="p">:</span><span class="w"> </span><span class="s2">"I Agree"</span><span class="w">
@@ -7108,6 +7108,7 @@ Accept: application/json
         </span><span class="nl">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span><span class="w">
         </span><span class="nl">"mod_id"</span><span class="p">:</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span><span class="w">
         </span><span class="nl">"date_added"</span><span class="p">:</span><span class="w"> </span><span class="mi">1499841487</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"date_updated"</span><span class="p">:</span><span class="w"> </span><span class="mi">1499841487</span><span class="p">,</span><span class="w">
         </span><span class="nl">"date_scanned"</span><span class="p">:</span><span class="w"> </span><span class="mi">1499841487</span><span class="p">,</span><span class="w">
         </span><span class="nl">"virus_status"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
         </span><span class="nl">"virus_positive"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
@@ -7356,6 +7357,7 @@ Accept: application/json
     </span><span class="nl">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span><span class="w">
     </span><span class="nl">"mod_id"</span><span class="p">:</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span><span class="w">
     </span><span class="nl">"date_added"</span><span class="p">:</span><span class="w"> </span><span class="mi">1499841487</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"date_updated"</span><span class="p">:</span><span class="w"> </span><span class="mi">1499841487</span><span class="p">,</span><span class="w">
     </span><span class="nl">"date_scanned"</span><span class="p">:</span><span class="w"> </span><span class="mi">1499841487</span><span class="p">,</span><span class="w">
     </span><span class="nl">"virus_status"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
     </span><span class="nl">"virus_positive"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
@@ -7700,6 +7702,7 @@ curl <span class="nt">-X</span> POST https://<span class="k">*</span>.modapi.io/
     </span><span class="nl">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span><span class="w">
     </span><span class="nl">"mod_id"</span><span class="p">:</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span><span class="w">
     </span><span class="nl">"date_added"</span><span class="p">:</span><span class="w"> </span><span class="mi">1499841487</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"date_updated"</span><span class="p">:</span><span class="w"> </span><span class="mi">1499841487</span><span class="p">,</span><span class="w">
     </span><span class="nl">"date_scanned"</span><span class="p">:</span><span class="w"> </span><span class="mi">1499841487</span><span class="p">,</span><span class="w">
     </span><span class="nl">"virus_status"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
     </span><span class="nl">"virus_positive"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
@@ -8071,6 +8074,7 @@ curl <span class="nt">-X</span> POST https://<span class="k">*</span>.modapi.io/
     </span><span class="nl">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span><span class="w">
     </span><span class="nl">"mod_id"</span><span class="p">:</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span><span class="w">
     </span><span class="nl">"date_added"</span><span class="p">:</span><span class="w"> </span><span class="mi">1499841487</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"date_updated"</span><span class="p">:</span><span class="w"> </span><span class="mi">1499841487</span><span class="p">,</span><span class="w">
     </span><span class="nl">"date_scanned"</span><span class="p">:</span><span class="w"> </span><span class="mi">1499841487</span><span class="p">,</span><span class="w">
     </span><span class="nl">"virus_status"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
     </span><span class="nl">"virus_positive"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
@@ -8477,6 +8481,7 @@ Accept: application/json
       </span><span class="nl">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span><span class="w">
       </span><span class="nl">"mod_id"</span><span class="p">:</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span><span class="w">
       </span><span class="nl">"date_added"</span><span class="p">:</span><span class="w"> </span><span class="mi">1499841487</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"date_updated"</span><span class="p">:</span><span class="w"> </span><span class="mi">1499841487</span><span class="p">,</span><span class="w">
       </span><span class="nl">"date_scanned"</span><span class="p">:</span><span class="w"> </span><span class="mi">1499841487</span><span class="p">,</span><span class="w">
       </span><span class="nl">"virus_status"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
       </span><span class="nl">"virus_positive"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
@@ -8623,6 +8628,7 @@ Accept: application/json
   </span><span class="nl">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span><span class="w">
   </span><span class="nl">"mod_id"</span><span class="p">:</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span><span class="w">
   </span><span class="nl">"date_added"</span><span class="p">:</span><span class="w"> </span><span class="mi">1499841487</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"date_updated"</span><span class="p">:</span><span class="w"> </span><span class="mi">1499841487</span><span class="p">,</span><span class="w">
   </span><span class="nl">"date_scanned"</span><span class="p">:</span><span class="w"> </span><span class="mi">1499841487</span><span class="p">,</span><span class="w">
   </span><span class="nl">"virus_status"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
   </span><span class="nl">"virus_positive"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
@@ -8844,6 +8850,7 @@ curl <span class="nt">-X</span> POST https://<span class="k">*</span>.modapi.io/
   </span><span class="nl">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span><span class="w">
   </span><span class="nl">"mod_id"</span><span class="p">:</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span><span class="w">
   </span><span class="nl">"date_added"</span><span class="p">:</span><span class="w"> </span><span class="mi">1499841487</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"date_updated"</span><span class="p">:</span><span class="w"> </span><span class="mi">1499841487</span><span class="p">,</span><span class="w">
   </span><span class="nl">"date_scanned"</span><span class="p">:</span><span class="w"> </span><span class="mi">1499841487</span><span class="p">,</span><span class="w">
   </span><span class="nl">"virus_status"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
   </span><span class="nl">"virus_positive"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
@@ -9063,6 +9070,7 @@ Content-Type: application/x-www-form-urlencoded
   </span><span class="nl">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span><span class="w">
   </span><span class="nl">"mod_id"</span><span class="p">:</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span><span class="w">
   </span><span class="nl">"date_added"</span><span class="p">:</span><span class="w"> </span><span class="mi">1499841487</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"date_updated"</span><span class="p">:</span><span class="w"> </span><span class="mi">1499841487</span><span class="p">,</span><span class="w">
   </span><span class="nl">"date_scanned"</span><span class="p">:</span><span class="w"> </span><span class="mi">1499841487</span><span class="p">,</span><span class="w">
   </span><span class="nl">"virus_status"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
   </span><span class="nl">"virus_positive"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
@@ -9381,6 +9389,7 @@ Content-Type: application/x-www-form-urlencoded
   </span><span class="nl">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span><span class="w">
   </span><span class="nl">"mod_id"</span><span class="p">:</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span><span class="w">
   </span><span class="nl">"date_added"</span><span class="p">:</span><span class="w"> </span><span class="mi">1499841487</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"date_updated"</span><span class="p">:</span><span class="w"> </span><span class="mi">1499841487</span><span class="p">,</span><span class="w">
   </span><span class="nl">"date_scanned"</span><span class="p">:</span><span class="w"> </span><span class="mi">1499841487</span><span class="p">,</span><span class="w">
   </span><span class="nl">"virus_status"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
   </span><span class="nl">"virus_positive"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
@@ -10562,6 +10571,7 @@ Content-Type: application/x-www-form-urlencoded
     </span><span class="nl">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span><span class="w">
     </span><span class="nl">"mod_id"</span><span class="p">:</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span><span class="w">
     </span><span class="nl">"date_added"</span><span class="p">:</span><span class="w"> </span><span class="mi">1499841487</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"date_updated"</span><span class="p">:</span><span class="w"> </span><span class="mi">1499841487</span><span class="p">,</span><span class="w">
     </span><span class="nl">"date_scanned"</span><span class="p">:</span><span class="w"> </span><span class="mi">1499841487</span><span class="p">,</span><span class="w">
     </span><span class="nl">"virus_status"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
     </span><span class="nl">"virus_positive"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
@@ -15984,6 +15994,7 @@ Accept: application/json
         </span><span class="nl">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span><span class="w">
         </span><span class="nl">"mod_id"</span><span class="p">:</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span><span class="w">
         </span><span class="nl">"date_added"</span><span class="p">:</span><span class="w"> </span><span class="mi">1499841487</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"date_updated"</span><span class="p">:</span><span class="w"> </span><span class="mi">1499841487</span><span class="p">,</span><span class="w">
         </span><span class="nl">"date_scanned"</span><span class="p">:</span><span class="w"> </span><span class="mi">1499841487</span><span class="p">,</span><span class="w">
         </span><span class="nl">"virus_status"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
         </span><span class="nl">"virus_positive"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
@@ -17789,6 +17800,7 @@ Authorization: Bearer {access-token}
       </span><span class="nl">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span><span class="w">
       </span><span class="nl">"mod_id"</span><span class="p">:</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span><span class="w">
       </span><span class="nl">"date_added"</span><span class="p">:</span><span class="w"> </span><span class="mi">1499841487</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"date_updated"</span><span class="p">:</span><span class="w"> </span><span class="mi">1499841487</span><span class="p">,</span><span class="w">
       </span><span class="nl">"date_scanned"</span><span class="p">:</span><span class="w"> </span><span class="mi">1499841487</span><span class="p">,</span><span class="w">
       </span><span class="nl">"virus_status"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
       </span><span class="nl">"virus_positive"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
@@ -18480,6 +18492,7 @@ Authorization: Bearer {access-token}
         </span><span class="nl">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span><span class="w">
         </span><span class="nl">"mod_id"</span><span class="p">:</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span><span class="w">
         </span><span class="nl">"date_added"</span><span class="p">:</span><span class="w"> </span><span class="mi">1499841487</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"date_updated"</span><span class="p">:</span><span class="w"> </span><span class="mi">1499841487</span><span class="p">,</span><span class="w">
         </span><span class="nl">"date_scanned"</span><span class="p">:</span><span class="w"> </span><span class="mi">1499841487</span><span class="p">,</span><span class="w">
         </span><span class="nl">"virus_status"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
         </span><span class="nl">"virus_positive"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
@@ -18855,6 +18868,7 @@ Authorization: Bearer {access-token}
         </span><span class="nl">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span><span class="w">
         </span><span class="nl">"mod_id"</span><span class="p">:</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span><span class="w">
         </span><span class="nl">"date_added"</span><span class="p">:</span><span class="w"> </span><span class="mi">1499841487</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"date_updated"</span><span class="p">:</span><span class="w"> </span><span class="mi">1499841487</span><span class="p">,</span><span class="w">
         </span><span class="nl">"date_scanned"</span><span class="p">:</span><span class="w"> </span><span class="mi">1499841487</span><span class="p">,</span><span class="w">
         </span><span class="nl">"virus_status"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
         </span><span class="nl">"virus_positive"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
@@ -20824,6 +20838,7 @@ To perform this request, you must be authenticated via one of the following meth
         </span><span class="nl">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span><span class="w">
         </span><span class="nl">"mod_id"</span><span class="p">:</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span><span class="w">
         </span><span class="nl">"date_added"</span><span class="p">:</span><span class="w"> </span><span class="mi">1499841487</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"date_updated"</span><span class="p">:</span><span class="w"> </span><span class="mi">1499841487</span><span class="p">,</span><span class="w">
         </span><span class="nl">"date_scanned"</span><span class="p">:</span><span class="w"> </span><span class="mi">1499841487</span><span class="p">,</span><span class="w">
         </span><span class="nl">"virus_status"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
         </span><span class="nl">"virus_positive"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
@@ -21138,6 +21153,7 @@ To perform this request, you must be authenticated via one of the following meth
       </span><span class="nl">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span><span class="w">
       </span><span class="nl">"mod_id"</span><span class="p">:</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span><span class="w">
       </span><span class="nl">"date_added"</span><span class="p">:</span><span class="w"> </span><span class="mi">1499841487</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"date_updated"</span><span class="p">:</span><span class="w"> </span><span class="mi">1499841487</span><span class="p">,</span><span class="w">
       </span><span class="nl">"date_scanned"</span><span class="p">:</span><span class="w"> </span><span class="mi">1499841487</span><span class="p">,</span><span class="w">
       </span><span class="nl">"virus_status"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
       </span><span class="nl">"virus_positive"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
@@ -21278,6 +21294,7 @@ To perform this request, you must be authenticated via one of the following meth
         </span><span class="nl">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span><span class="w">
         </span><span class="nl">"mod_id"</span><span class="p">:</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span><span class="w">
         </span><span class="nl">"date_added"</span><span class="p">:</span><span class="w"> </span><span class="mi">1499841487</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"date_updated"</span><span class="p">:</span><span class="w"> </span><span class="mi">1499841487</span><span class="p">,</span><span class="w">
         </span><span class="nl">"date_scanned"</span><span class="p">:</span><span class="w"> </span><span class="mi">1499841487</span><span class="p">,</span><span class="w">
         </span><span class="nl">"virus_status"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
         </span><span class="nl">"virus_positive"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
@@ -22233,6 +22250,7 @@ To perform this request, you must be authenticated via one of the following meth
     </span><span class="nl">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span><span class="w">
     </span><span class="nl">"mod_id"</span><span class="p">:</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span><span class="w">
     </span><span class="nl">"date_added"</span><span class="p">:</span><span class="w"> </span><span class="mi">1499841487</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"date_updated"</span><span class="p">:</span><span class="w"> </span><span class="mi">1499841487</span><span class="p">,</span><span class="w">
     </span><span class="nl">"date_scanned"</span><span class="p">:</span><span class="w"> </span><span class="mi">1499841487</span><span class="p">,</span><span class="w">
     </span><span class="nl">"virus_status"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
     </span><span class="nl">"virus_positive"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
@@ -22465,6 +22483,7 @@ To perform this request, you must be authenticated via one of the following meth
     </span><span class="nl">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span><span class="w">
     </span><span class="nl">"mod_id"</span><span class="p">:</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span><span class="w">
     </span><span class="nl">"date_added"</span><span class="p">:</span><span class="w"> </span><span class="mi">1499841487</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"date_updated"</span><span class="p">:</span><span class="w"> </span><span class="mi">1499841487</span><span class="p">,</span><span class="w">
     </span><span class="nl">"date_scanned"</span><span class="p">:</span><span class="w"> </span><span class="mi">1499841487</span><span class="p">,</span><span class="w">
     </span><span class="nl">"virus_status"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
     </span><span class="nl">"virus_positive"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
@@ -22892,6 +22911,7 @@ To perform this request, you must be authenticated via one of the following meth
   </span><span class="nl">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span><span class="w">
   </span><span class="nl">"mod_id"</span><span class="p">:</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span><span class="w">
   </span><span class="nl">"date_added"</span><span class="p">:</span><span class="w"> </span><span class="mi">1499841487</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"date_updated"</span><span class="p">:</span><span class="w"> </span><span class="mi">1499841487</span><span class="p">,</span><span class="w">
   </span><span class="nl">"date_scanned"</span><span class="p">:</span><span class="w"> </span><span class="mi">1499841487</span><span class="p">,</span><span class="w">
   </span><span class="nl">"virus_status"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
   </span><span class="nl">"virus_positive"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
@@ -22940,6 +22960,11 @@ To perform this request, you must be authenticated via one of the following meth
 <td>date_added</td>
 <td>integer</td>
 <td>Unix timestamp of date file was added.</td>
+</tr>
+<tr>
+<td>date_updated</td>
+<td>integer</td>
+<td>Unix timestamp of date file was updated.</td>
 </tr>
 <tr>
 <td>date_scanned</td>
@@ -23390,8 +23415,8 @@ To perform this request, you must be authenticated via one of the following meth
 <h2 id="terms-object">Terms Object</h2>
 <p><a name="schematerms_object"></a></p>
 <div class="highlight"><pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
-  </span><span class="nl">"plaintext"</span><span class="p">:</span><span class="w"> </span><span class="s2">"We use mod.io to support user-generated content in-game. By clicking "</span><span class="err">I</span><span class="w"> </span><span class="err">Agree</span><span class="s2">" you agree to the mod.io Terms of Use and a mod.io account will be created for you (using your Steam display name, avatar and ID). Please see the mod.io Privacy Policy on how mod.io processes your personal data."</span><span class="p">,</span><span class="w">
-  </span><span class="nl">"html"</span><span class="p">:</span><span class="w"> </span><span class="s2">"&lt;p&gt;We use &lt;a href="</span><span class="err">https://mod.io</span><span class="s2">"&gt;mod.io&lt;/a&gt; to support user-generated content in-game. By clicking "</span><span class="err">I</span><span class="w"> </span><span class="err">Agree</span><span class="s2">" you agree to the mod.io &lt;a href="</span><span class="err">https://mod.io/terms</span><span class="s2">"&gt;Terms of Use&lt;/a&gt; and a mod.io account will be created for you (using your Steam display name, avatar and ID). Please see the mod.io &lt;a href="</span><span class="err">https://mod.io/privacy</span><span class="s2">"&gt;Privacy Policy&lt;/a&gt; on how mod.io processes your personal data.&lt;/p&gt;"</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"plaintext"</span><span class="p">:</span><span class="w"> </span><span class="s2">"We use mod.io to support user-generated content in-game. By clicking "</span><span class="err">I</span><span class="w"> </span><span class="err">Agree</span><span class="s2">" you agree to the mod.io Terms of Use and a mod.io account will be created for you (using your display name, avatar and ID). Please see the mod.io Privacy Policy on how mod.io processes your personal data."</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"html"</span><span class="p">:</span><span class="w"> </span><span class="s2">"&lt;p&gt;We use &lt;a href="</span><span class="err">https://mod.io</span><span class="s2">"&gt;mod.io&lt;/a&gt; to support user-generated content in-game. By clicking "</span><span class="err">I</span><span class="w"> </span><span class="err">Agree</span><span class="s2">" you agree to the mod.io &lt;a href="</span><span class="err">https://mod.io/terms</span><span class="s2">"&gt;Terms of Use&lt;/a&gt; and a mod.io account will be created for you (using your display name, avatar and ID). Please see the mod.io &lt;a href="</span><span class="err">https://mod.io/privacy</span><span class="s2">"&gt;Privacy Policy&lt;/a&gt; on how mod.io processes your personal data.&lt;/p&gt;"</span><span class="p">,</span><span class="w">
   </span><span class="nl">"buttons"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
     </span><span class="nl">"agree"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
       </span><span class="nl">"text"</span><span class="p">:</span><span class="w"> </span><span class="s2">"I Agree"</span><span class="w">
