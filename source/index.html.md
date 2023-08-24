@@ -961,7 +961,7 @@ The purpose of this endpoint is to provide the text, links and buttons you can u
 ```json
 {
   "plaintext": "We use mod.io to support user-generated content in-game. By clicking "I Agree" you agree to the mod.io Terms of Use and a mod.io account will be created for you (using your display name, avatar and ID). Please see the mod.io Privacy Policy on how mod.io processes your personal data.",
-  "html": "<p>We use <a href="https://mod.io">mod.io</a> to support user-generated content in-game. By clicking "I Agree" you agree to the mod.io <a href="https://mod.io/terms">Terms of Use</a> and a mod.io account will be created for you (using your display name, avatar and ID). Please see the mod.io <a href="https://mod.io/privacy">Privacy Policy</a> on how mod.io processes your personal data.</p>",
+  "html": "<p>We use <a href="https://mod.io">mod.io</a> to support user-generated content in-game. By clicking "I Agree" you agree to the mod.io <a href="https://mod.io/terms">Terms of Use</a> and a mod.io account will be created for you (using your  display name, avatar and ID). Please see the mod.io <a href="https://mod.io/privacy">Privacy Policy</a> on how mod.io processes your personal data.</p>",
   "buttons": {
     "agree": {
       "text": "I Agree"
@@ -17336,7 +17336,7 @@ invite_pending|integer|If the team member invitation is still pending:<br><br>__
 ```json
 {
   "plaintext": "We use mod.io to support user-generated content in-game. By clicking "I Agree" you agree to the mod.io Terms of Use and a mod.io account will be created for you (using your display name, avatar and ID). Please see the mod.io Privacy Policy on how mod.io processes your personal data.",
-  "html": "<p>We use <a href="https://mod.io">mod.io</a> to support user-generated content in-game. By clicking "I Agree" you agree to the mod.io <a href="https://mod.io/terms">Terms of Use</a> and a mod.io account will be created for you (using your display name, avatar and ID). Please see the mod.io <a href="https://mod.io/privacy">Privacy Policy</a> on how mod.io processes your personal data.</p>",
+  "html": "<p>We use <a href="https://mod.io">mod.io</a> to support user-generated content in-game. By clicking "I Agree" you agree to the mod.io <a href="https://mod.io/terms">Terms of Use</a> and a mod.io account will be created for you (using your  display name, avatar and ID). Please see the mod.io <a href="https://mod.io/privacy">Privacy Policy</a> on how mod.io processes your personal data.</p>",
   "buttons": {
     "agree": {
       "text": "I Agree"
