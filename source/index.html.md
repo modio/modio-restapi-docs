@@ -1899,7 +1899,7 @@ System.out.println(response.toString());
 
 `POST /external/galaxyauth`
 
-Request an access token on behalf of a GOG Galaxy user. To use this functionality you *must* add your games [encrypted app ticket key](https://devportal.gog.com/welcome) from GOG Galaxy, to the *Game Admin > Settings* page of your games profile on mod.io. A Successful request will return an [Access Token Object](#access-token-object).
+Request an access token on behalf of a GOG Galaxy user. To use this functionality you *must* add your games [encrypted app ticket key](https://docs.gog.com/sdk-encrypted-tickets/) from GOG Galaxy, to the *Game Admin > Settings* page of your games profile on mod.io. A Successful request will return an [Access Token Object](#access-token-object).
 
      Parameter|Type|Required|Description
      ---|---|---|---|
@@ -15173,7 +15173,7 @@ curl -X POST https://*.modapi.io/v1/games/{game-id}/mods/{mod-id}/checkout \
   -F 'gateway_fee=undefined' \
   -F 'transaction_type=undefined' \
   -F 'meta=undefined' \
-  -F 'purchase_date=undefined' \
+  -F 'purchase_date=1626667557' \
   -F 'wallet_type=undefined' \
   -F 'balance=undefined' \
   -F 'payment_method_id=undefined'
@@ -15220,7 +15220,7 @@ const inputBody = '{
   "gateway_fee": 0,
   "transaction_type": "string",
   "meta": {},
-  "purchase_date": null,
+  "purchase_date": 1626667557,
   "wallet_type": "string",
   "balance": 0,
   "payment_method_id": "string"
@@ -15297,7 +15297,7 @@ Purchase an item. A Successful request will return the newly created [Checkout P
   "gateway_fee": 0,
   "transaction_type": "string",
   "meta": {},
-  "purchase_date": null,
+  "purchase_date": 1626667557,
   "wallet_type": "string",
   "balance": 0,
   "payment_method_id": "string"
@@ -17911,7 +17911,7 @@ date_added|integer|Unix timestamp of date the part was uploaded.
   "gateway_fee": 0,
   "transaction_type": "string",
   "meta": {},
-  "purchase_date": null,
+  "purchase_date": 1626667557,
   "wallet_type": "string",
   "balance": 0,
   "payment_method_id": "string"
@@ -17929,7 +17929,7 @@ platform_fee|integer|The platform fee of the purchase in the lowest denomination
 gateway_fee|integer|The gateway fee of the purchase in the lowest denomination of currency.
 transaction_type|string|The state of the transaction that was processed. E.g. CANCELLED, CLEARED, FAILED, PAID, PENDING, REFUNDED.
 meta|object|The metadata that was given in the transaction.
-purchase_date|timestamp|The time of the purchase.
+purchase_date|integer|The time of the purchase.
 wallet_type|string|The type of wallet that was used for the purchase. E.g. STANDARD_MIO.
 balance|integer|The balance of the wallet.
 payment_method_id|string|The payment method id that was used.
