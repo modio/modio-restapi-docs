@@ -1901,7 +1901,7 @@ System.out.println(response.toString());
 
 `POST /external/galaxyauth`
 
-Request an access token on behalf of a GOG Galaxy user. To use this functionality you *must* add your games [encrypted app ticket key](https://devportal.gog.com/welcome) from GOG Galaxy, to the *Game Admin > Settings* page of your games profile on mod.io. A Successful request will return an [Access Token Object](#access-token-object).
+Request an access token on behalf of a GOG Galaxy user. To use this functionality you *must* add your games [encrypted app ticket key](https://docs.gog.com/sdk-encrypted-tickets/) from GOG Galaxy, to the *Game Admin > Settings* page of your games profile on mod.io. A Successful request will return an [Access Token Object](#access-token-object).
 
      Parameter|Type|Required|Description
      ---|---|---|---|
@@ -4595,6 +4595,7 @@ Get all mods for the corresponding game. Successful request will return an array
     metadata_kvp|string|Colon-separated values representing the key-value pairs you want to filter the results by. If you supply more than one key-pair, separate the pairs by a comma. Will only filter by an exact key-pair match.
     tags|string|Comma-separated values representing the tags you want to filter the results by. If you specify multiple tags, only mods which have all tags will be returned, and only tags that are supported by the parent game can be applied. To determine what tags are eligible, see the tags values within `tag_options` column on the parent [Game Object](#game-object). If you want to ensure mods returned do not contain particular tag(s), you can use the `tags-not-in` filter either independently or alongside this filter.
     platform_status|string|If the parent game has enabled per-platform files, by default only mods with files which are approved and live for the [target platform](#targeting-a-platform) will be returned.<br><br>To QA mods with pending files, you can filter results by their current platform status, using `pending_only` or `live_and_pending`.<br><br>__NOTE:__ only game admins can filter by this field.
+    revenue_type|integer|Finds all mods with or without a price. Defaults to free. <br><br>__0__ = Free<br>__1__ = Paid<br>__2__ = Free and Paid
 
     Sort|Description
     ---|---
@@ -4698,6 +4699,7 @@ Get all mods for the corresponding game. Successful request will return an array
           }
         ]
       },
+      "dependencies": false,
       "platforms": [
         {
           "platform": "windows",
@@ -4940,6 +4942,7 @@ Get a mod. Successful request will return a single [Mod Object](#mod-object).
       }
     ]
   },
+  "dependencies": false,
   "platforms": [
     {
       "platform": "windows",
@@ -5213,6 +5216,7 @@ Add a mod. Successful request will return the newly created [Mod Object](#mod-ob
       }
     ]
   },
+  "dependencies": false,
   "platforms": [
     {
       "platform": "windows",
@@ -5488,6 +5492,7 @@ Edit details for a mod. If you want to update the `logo` or media associated wit
       }
     ]
   },
+  "dependencies": false,
   "platforms": [
     {
       "platform": "windows",
@@ -7332,17 +7337,17 @@ To perform this request, you must be authenticated via one of the following meth
 curl -X POST https://*.modapi.io/v1/games/{game-id}/mods/{mod-id}/subscribe \
   -H 'Authorization: Bearer {access-token}' \ 
   -H 'Content-Type: application/x-www-form-urlencoded' \ 
-  -H 'Accept: application/json'
+  -H 'Accept: application/json' \
+  -d 'include_dependencies=false'
 
 ```
 
 ```http
 POST https://*.modapi.io/v1/games/{game-id}/mods/{mod-id}/subscribe HTTP/1.1
 Host: *.modapi.io
-
+Content-Type: application/x-www-form-urlencoded
 Accept: application/json
 Authorization: Bearer {access-token}
-Content-Type: application/x-www-form-urlencoded
 
 ```
 
@@ -7367,7 +7372,9 @@ $.ajax({
 
 ```javascript--nodejs
 const request = require('node-fetch');
-
+const inputBody = '{
+  "include_dependencies": false
+}';
 const headers = {
   'Authorization':'Bearer {access-token}',
   'Content-Type':'application/x-www-form-urlencoded',
@@ -7378,7 +7385,7 @@ const headers = {
 fetch('https://*.modapi.io/v1/games/{game-id}/mods/{mod-id}/subscribe',
 {
   method: 'POST',
-
+  body: inputBody,
   headers: headers
 })
 .then(function(res) {
@@ -7422,6 +7429,10 @@ System.out.println(response.toString());
 `POST /games/{game-id}/mods/{mod-id}/subscribe`
 
 Subscribe the _authenticated user_ to a corresponding mod. No body parameters are required for this action. Successful request will return the [Mod Object](#mod-object) of the newly subscribed mod.<br><br>__NOTE:__ Users can subscribe to mods via mod.io, we recommend you poll or call the [Get User Events](#get-user-events) endpoint when needed, to keep a users mods collection up to date.
+
+    Parameter|Type|Required|Description
+    ---|---|---|---|
+    include_dependencies|boolean|false|If the mod has dependencies, providing this attribute with a value of `true` will result in dependant mods being subscribed to as well, recursively. You should only include this attribute when the [Mod Object](#mod-object) indicates that the mod has dependencies.
 
 > Example response
 
@@ -7516,6 +7527,7 @@ Subscribe the _authenticated user_ to a corresponding mod. No body parameters ar
       }
     ]
   },
+  "dependencies": false,
   "platforms": [
     {
       "platform": "windows",
@@ -14130,6 +14142,7 @@ Get all mod's the _authenticated user_ is subscribed to. Successful request will
           }
         ]
       },
+      "dependencies": false,
       "platforms": [
         {
           "platform": "windows",
@@ -14405,6 +14418,7 @@ Get all mods the _authenticated user_ added or is a team member of. Successful r
           }
         ]
       },
+      "dependencies": false,
       "platforms": [
         {
           "platform": "windows",
@@ -14451,6 +14465,278 @@ Get all mods the _authenticated user_ added or is a team member of. Successful r
 
 ```
 <h3 id="Get-User-Mods-responses">Responses</h3>
+
+Status|Meaning|Error Ref|Description|Response Schema
+---|---|----|---|---|
+200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)||Request Successful|[Get Mods](#schemaget_mods)
+<aside class="auth-notice">
+To perform this request, you must be authenticated via one of the following methods:
+<a href="#authentication">OAuth 2</a> (Scopes: read)
+</aside>
+## Get User Purchases
+
+> Example request
+
+```shell
+# You can also use wget
+curl -X GET https://*.modapi.io/v1/me/purchased?api_key=YourApiKey \
+  -H 'Accept: application/json'
+
+```
+
+```http
+GET https://*.modapi.io/v1/me/purchased?api_key=YourApiKey HTTP/1.1
+Host: *.modapi.io
+
+Accept: application/json
+
+```
+
+```javascript
+var headers = {
+  'Accept':'application/json'
+
+};
+
+$.ajax({
+  url: 'https://*.modapi.io/v1/me/purchased',
+  method: 'get',
+  data: '?api_key=YourApiKey',
+  headers: headers,
+  success: function(data) {
+    console.log(JSON.stringify(data));
+  }
+})
+```
+
+```javascript--nodejs
+const request = require('node-fetch');
+
+const headers = {
+  'Accept':'application/json'
+
+};
+
+fetch('https://*.modapi.io/v1/me/purchased?api_key=YourApiKey',
+{
+  method: 'GET',
+
+  headers: headers
+})
+.then(function(res) {
+    return res.json();
+}).then(function(body) {
+    console.log(body);
+});
+```
+
+```python
+import requests
+headers = {
+  'Accept': 'application/json'
+}
+
+r = requests.get('https://*.modapi.io/v1/me/purchased', params={
+  'api_key': 'YourApiKey'
+}, headers = headers)
+
+print r.json()
+```
+
+```java
+URL obj = new URL("https://*.modapi.io/v1/me/purchased?api_key=YourApiKey");
+HttpURLConnection con = (HttpURLConnection) obj.openConnection();
+con.setRequestMethod("GET");
+int responseCode = con.getResponseCode();
+BufferedReader in = new BufferedReader(
+    new InputStreamReader(con.getInputStream()));
+String inputLine;
+StringBuffer response = new StringBuffer();
+while ((inputLine = in.readLine()) != null) {
+    response.append(inputLine);
+}
+in.close();
+System.out.println(response.toString());
+```
+
+`GET /me/purchased`
+
+Get all mod's the _authenticated user_ has purchased. Successful request will return an array of [Mod Objects](#get-mods-2). We recommended reading the [filtering documentation](#filtering) to return only the records you want.
+
+    Filter|Type|Description
+    ---|---|---
+    id|integer|Unique id of the mod.
+    game_id|integer|Unique id of the parent game.
+    status|integer|Status of the mod (only game admins can filter by this field, see [status and visibility](#status-amp-visibility) for details):<br><br>__0__ = Not accepted _(default)_<br>__1__ = Accepted _(default)_<br>__3__ = Deleted
+    visible|integer|Visibility of the mod (only game admins can filter by this field, see [status and visibility](#status-amp-visibility) for details):<br><br>__0__ = Hidden _(default)_<br>__1__ = Public _(default)_
+    submitted_by|integer|Unique id of the user who has ownership of the mod.
+    date_added|integer|Unix timestamp of date mod was registered.
+    date_updated|integer|Unix timestamp of date mod was updated.
+    date_live|integer|Unix timestamp of date mod was set live.
+    maturity_option|integer|Maturity option(s) set by the mod creator:<br><br>__0__ = None<br>__1__ = Alcohol<br>__2__ = Drugs<br>__4__ = Violence<br>__8__ = Explicit<br>__?__ = Add the options you want together, to enable multiple filters (see [BITWISE fields](#bitwise-and-bitwise-and))
+    monetisation_options|integer|Monetisation option(s) enabled by the mod creator:<br><br>__0__ = None<br>__1__ = Enabled<br>__2__ = Marketplace On<br>__?__ = Add the options you want together, to enable multiple filters (see [BITWISE fields](#bitwise-and-bitwise-and))
+    name|string|Name of the mod.
+    name_id|string|Path for the mod on mod.io. For example: https://mod.io/g/gamename/m/__mod-name-id-here__
+    modfile|integer|Unique id of the file that is the current active release (see [mod files](#files)).
+    metadata_blob|string|Metadata stored by the game developer.
+    metadata_kvp|string|Colon-separated values representing the key-value pairs you want to filter the results by. If you supply more than one key-pair, separate the pairs by a comma. Will only filter by an exact key-pair match.
+    tags|string|Comma-separated values representing the tags you want to filter the results by. If you specify multiple tags, only mods which have all tags will be returned, and only tags that are supported by the parent game can be applied. To determine what tags are eligible, see the tags values within `tag_options` column on the parent [Game Object](#game-object). If you want to ensure mods returned do not contain particular tag(s), you can use the `tags-not-in` filter either independently or alongside this filter.
+    platform_status|string|Filter results by their current platform status, valid values are `pending_only` and `live_and_pending` (only game admins can filter by this field, see [status and visibility](#status-amp-visibility) for details).<br><br>__NOTE:__ that this parameter is only considered in the request if the parent game has enabled [cross-platform filtering](#targeting-a-platform).
+    platforms|string|Filter results by their current platform, accepts multiple platforms as comma-separated values (e.g. `ps4,switch`), valid values are `all`, `source`, `windows`, `mac`, `linux`, `android`, `ios`, `xboxone`, `xboxseriesx`, `ps4`, `ps5`, `switch`, `oculus` (only game admins can filter by this field, see [status and visibility](#status-amp-visibility) for details).<br><br>__NOTE:__ that this parameter will take precedence over the header from [cross-platform filtering](#targeting-a-platform).
+
+    Sort|Description
+    ---|---
+    downloads|Sort results by most downloads using [_sort filter](#filtering) parameter, value should be `downloads` for descending or `-downloads` for ascending results.
+    popular|Sort results by popularity using [_sort filter](#filtering), value should be `popular` for descending or `-popular` for ascending results.<br><br>__NOTE:__ Popularity is calculated hourly and reset daily (results are ranked from 1 to X). You should sort this column in ascending order `-popular` to get the top ranked results.
+    rating|Sort results by weighted rating using [_sort filter](#filtering), value should be `rating` for descending or `-rating` for ascending results.
+    subscribers|Sort results by most subscribers using [_sort filter](#filtering), value should be `subscribers` for descending or `-subscribers` for ascending results.
+
+> Example response
+
+```json
+{
+  "data": [
+    {
+      "id": 2,
+      "game_id": 2,
+      "status": 1,
+      "visible": 1,
+      "submitted_by": {
+        "id": 1,
+        "name_id": "xant",
+        "username": "XanT",
+        "display_name_portal": null,
+        "date_online": 1509922961,
+        "date_joined": 1509922961,
+        "avatar": {
+          "filename": "avatar.png",
+          "original": "https://assets.modcdn.io/images/placeholder/avatar.png",
+          "thumb_50x50": "https://assets.modcdn.io/images/placeholder/avatar_50x50.png",
+          "thumb_100x100": "https://assets.modcdn.io/images/placeholder/avatar_100x100.png"
+        },
+        "timezone": "",
+        "language": "",
+        "profile_url": "https://mod.io/u/xant"
+      },
+      "date_added": 1492564103,
+      "date_updated": 1499841487,
+      "date_live": 1499841403,
+      "maturity_option": 0,
+      "community_options": 3,
+      "monetisation_options": 0,
+      "price": 0,
+      "tax": 0,
+      "logo": {
+        "filename": "card.png",
+        "original": "https://assets.modcdn.io/images/placeholder/card.png",
+        "thumb_320x180": "https://assets.modcdn.io/images/placeholder/card.png",
+        "thumb_640x360": "https://assets.modcdn.io/images/placeholder/card.png",
+        "thumb_1280x720": "https://assets.modcdn.io/images/placeholder/card.png"
+      },
+      "homepage_url": "https://www.rogue-hdpack.com/",
+      "name": "Rogue Knight HD Pack",
+      "name_id": "rogue-knight-hd-pack",
+      "summary": "It's time to bask in the glory of beautiful 4k textures!",
+      "description": "<p>Rogue HD Pack does exactly what you thi...",
+      "description_plaintext": "Rogue HD Pack does exactly what you thi...",
+      "metadata_blob": "rogue,hd,high-res,4k,hd textures",
+      "profile_url": "https://mod.io/g/rogue-knight/m/rogue-knight-hd-pack",
+      "media": {
+        "youtube": [
+          "https://www.youtube.com/watch?v=dQw4w9WgXcQ"
+        ],
+        "sketchfab": [
+          "https://sketchfab.com/models/ef40b2d300334d009984c8865b2db1c8"
+        ],
+        "images": [
+          {
+            "filename": "card.png",
+            "original": "https://assets.modcdn.io/images/placeholder/card.png",
+            "thumb_320x180": "https://assets.modcdn.io/images/placeholder/card.png",
+            "thumb_1280x720": "https://assets.modcdn.io/images/placeholder/card.png"
+          }
+        ]
+      },
+      "modfile": {
+        "id": 2,
+        "mod_id": 2,
+        "date_added": 1499841487,
+        "date_updated": 1499841487,
+        "date_scanned": 1499841487,
+        "virus_status": 0,
+        "virus_positive": 0,
+        "virustotal_hash": "",
+        "filesize": 15181,
+        "filesize_uncompressed": 16384,
+        "filehash": {
+          "md5": "2d4a0e2d7273db6b0a94b0740a88ad0d"
+        },
+        "filename": "rogue-knight-v1.zip",
+        "version": "1.3",
+        "changelog": "VERSION 1.3 -- Changes -- Fixed critical castle floor bug.",
+        "metadata_blob": "rogue,hd,high-res,4k,hd textures",
+        "download": {
+          "binary_url": "https://*.modapi.io/v1/games/1/mods/1/files/1/download/c489a0354111a4d76640d47f0cdcb294",
+          "date_expires": 1579316848
+        },
+        "platforms": [
+          {
+            "platform": "windows",
+            "status": 1
+          }
+        ]
+      },
+      "dependencies": false,
+      "platforms": [
+        {
+          "platform": "windows",
+          "modfile_live": 1
+        }
+      ],
+      "metadata_kvp": [
+        {
+          "metakey": "pistol-dmg",
+          "metavalue": "800"
+        }
+      ],
+      "tags": [
+        {
+          "name": "Unity",
+          "date_added": 1499841487
+        }
+      ],
+      "stats": {
+        "mod_id": 2,
+        "popularity_rank_position": 13,
+        "popularity_rank_total_mods": 204,
+        "downloads_today": 327,
+        "downloads_total": 27492,
+        "subscribers_total": 16394,
+        "ratings_total": 1230,
+        "ratings_positive": 1047,
+        "ratings_negative": 183,
+        "ratings_percentage_positive": 91,
+        "ratings_weighted_aggregate": 87.38,
+        "ratings_display_text": "Very Positive",
+        "date_expires": 1492564103
+      }
+    },
+    {
+        ...
+    }
+  ],
+  "result_count": 70,
+  "result_offset": 0,
+  "result_limit": 100,
+  "result_total": 70
+}
+
+```
+<h3 id="endpoint-xplatform-notice">Cross-Platform Filtering</h3>
+
+If the parent game has platform filtering enabled, this endpoint supports the [targeting a platform](#targeting-a-platform) request header to return the [mods](#mod-object) that are approved for the requested platform. Note: To target a platform for this endpoint, you MUST also include the `game_id` filter for the game that has cross-platform filtering enabled.
+
+<h3 id="Get-User-Purchases-responses">Responses</h3>
 
 Status|Meaning|Error Ref|Description|Response Schema
 ---|---|----|---|---|
@@ -14865,6 +15151,308 @@ Get the user that is the original _submitter_ of a resource. Successful request 
 Status|Meaning|Error Ref|Description|Response Schema
 ---|---|----|---|---|
 200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)||Successful Request|[User Object](#schemauser_object)
+<aside class="auth-notice">
+To perform this request, you must be authenticated via one of the following methods:
+<a href="#authentication">OAuth 2</a> (Scopes: read)
+</aside>
+# Checkout
+
+## Purchase An Item
+
+> Example request
+
+```shell
+# You can also use wget
+curl -X POST https://*.modapi.io/v1/games/{game-id}/mods/{mod-id}/checkout \
+  -H 'Origin: https://mod.io' \ 
+  -H 'Authorization: Bearer {access-token}' \ 
+  -H 'Content-Type: application/x-www-form-urlencoded' \ 
+  -H 'Accept: application/json' \
+  -F 'transaction_id=undefined' \
+  -F 'gross_amount=undefined' \
+  -F 'net_amount=undefined' \
+  -F 'platform_fee=undefined' \
+  -F 'gateway_fee=undefined' \
+  -F 'transaction_type=undefined' \
+  -F 'meta=undefined' \
+  -F 'purchase_date=1626667557' \
+  -F 'wallet_type=undefined' \
+  -F 'balance=undefined' \
+  -F 'payment_method_id=undefined'
+
+```
+
+```http
+POST https://*.modapi.io/v1/games/{game-id}/mods/{mod-id}/checkout HTTP/1.1
+Host: *.modapi.io
+Content-Type: application/x-www-form-urlencoded
+Accept: application/json
+Origin: https://mod.io
+Authorization: Bearer {access-token}
+
+```
+
+```javascript
+var headers = {
+  'Origin':'https://mod.io',
+  'Authorization':'Bearer {access-token}',
+  'Content-Type':'application/x-www-form-urlencoded',
+  'Accept':'application/json'
+
+};
+
+$.ajax({
+  url: 'https://*.modapi.io/v1/games/{game-id}/mods/{mod-id}/checkout',
+  method: 'post',
+
+  headers: headers,
+  success: function(data) {
+    console.log(JSON.stringify(data));
+  }
+})
+```
+
+```javascript--nodejs
+const request = require('node-fetch');
+const inputBody = '{
+  "transaction_id": 0,
+  "gross_amount": 0,
+  "net_amount": 0,
+  "platform_fee": 0,
+  "gateway_fee": 0,
+  "transaction_type": "string",
+  "meta": {},
+  "purchase_date": 1626667557,
+  "wallet_type": "string",
+  "balance": 0,
+  "payment_method_id": "string"
+}';
+const headers = {
+  'Origin':'https://mod.io',
+  'Authorization':'Bearer {access-token}',
+  'Content-Type':'application/x-www-form-urlencoded',
+  'Accept':'application/json'
+
+};
+
+fetch('https://*.modapi.io/v1/games/{game-id}/mods/{mod-id}/checkout',
+{
+  method: 'POST',
+  body: inputBody,
+  headers: headers
+})
+.then(function(res) {
+    return res.json();
+}).then(function(body) {
+    console.log(body);
+});
+```
+
+```python
+import requests
+headers = {
+  'Origin': 'https://mod.io',
+  'Authorization': 'Bearer {access-token}',
+  'Content-Type': 'application/x-www-form-urlencoded',
+  'Accept': 'application/json'
+}
+
+r = requests.post('https://*.modapi.io/v1/games/{game-id}/mods/{mod-id}/checkout', params={
+
+}, headers = headers)
+
+print r.json()
+```
+
+```java
+URL obj = new URL("https://*.modapi.io/v1/games/{game-id}/mods/{mod-id}/checkout");
+HttpURLConnection con = (HttpURLConnection) obj.openConnection();
+con.setRequestMethod("POST");
+int responseCode = con.getResponseCode();
+BufferedReader in = new BufferedReader(
+    new InputStreamReader(con.getInputStream()));
+String inputLine;
+StringBuffer response = new StringBuffer();
+while ((inputLine = in.readLine()) != null) {
+    response.append(inputLine);
+}
+in.close();
+System.out.println(response.toString());
+```
+
+`POST /games/{game-id}/mods/{mod-id}/checkout`
+
+Purchase an item. A Successful request will return the newly created [Checkout Process Object](#checkout-process-object).
+
+     Parameter|Type|Required|Description
+     ---|---|---|---|
+     display_amount|integer|true|The amount that was shown to the user for the purchase.
+
+> Example response
+
+```json
+{
+  "transaction_id": 0,
+  "gross_amount": 0,
+  "net_amount": 0,
+  "platform_fee": 0,
+  "gateway_fee": 0,
+  "transaction_type": "string",
+  "meta": {},
+  "purchase_date": 1626667557,
+  "wallet_type": "string",
+  "balance": 0,
+  "payment_method_id": "string"
+}
+
+```
+<h3 id="Purchase-An-Item-responses">Responses</h3>
+
+Status|Meaning|Error Ref|Description|Response Schema
+---|---|----|---|---|
+200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)||Successful Request|[Pay Object](#schemapay_object)
+400|[Bad Request](https://tools.ietf.org/html/rfc7231#section-6.5.1)|15004|The authenticated user is already subscribed to the mod.|[Error Object](#schemaerror_object)
+402|[Payment Required](https://tools.ietf.org/html/rfc7231#section-6.5.2)|900030|The payment failed. Please try again later.|[Error Object](#schemaerror_object)
+403|[Forbidden](https://tools.ietf.org/html/rfc7231#section-6.5.3)|15011|The item has not been accepted and can not be purchased at this time.|[Error Object](#schemaerror_object)
+404|[Not Found](https://tools.ietf.org/html/rfc7231#section-6.5.4)|900022|The game may not be currently active for monetisation.|[Error Object](#schemaerror_object)
+422|[Unprocessable Entity](https://tools.ietf.org/html/rfc2518#section-10.3)|900035|The given display price does not match the price of the mod.|[Error Object](#schemaerror_object)
+422|[Unprocessable Entity](https://tools.ietf.org/html/rfc2518#section-10.3)|900008|Unable to fetch the accounts' wallet. Please confirm the account has one|[Error Object](#schemaerror_object)
+422|[Unprocessable Entity](https://tools.ietf.org/html/rfc2518#section-10.3)|900001|Unable to communicate with the monetisation system. Please try again later.|[Error Object](#schemaerror_object)
+422|[Unprocessable Entity](https://tools.ietf.org/html/rfc2518#section-10.3)|900034|The account already owns this item.|[Error Object](#schemaerror_object)
+422|[Unprocessable Entity](https://tools.ietf.org/html/rfc2518#section-10.3)|900049|The account has insufficent funds to make this purchase.|[Error Object](#schemaerror_object)
+422|[Unprocessable Entity](https://tools.ietf.org/html/rfc2518#section-10.3)|900002|A failure has occured when trying to authenticate with the monetisation system.|[Error Object](#schemaerror_object)
+422|[Unprocessable Entity](https://tools.ietf.org/html/rfc2518#section-10.3)|900007|The account has not been created with monetisation.|[Error Object](#schemaerror_object)
+422|[Unprocessable Entity](https://tools.ietf.org/html/rfc2518#section-10.3)|900000|An un expected error has occured. Please try again later.|[Error Object](#schemaerror_object)
+403|[Forbidden](https://tools.ietf.org/html/rfc7231#section-6.5.3)|15023|The item has been deleted and can not be purchased at this time.|[Error Object](#schemaerror_object)
+403|[Forbidden](https://tools.ietf.org/html/rfc7231#section-6.5.3)|900015|The account has been disabled from monetisation.|[Error Object](#schemaerror_object)
+403|[Forbidden](https://tools.ietf.org/html/rfc7231#section-6.5.3)|900012|The monetisation is currently in maintance mode. Please try again later.|[Error Object](#schemaerror_object)
+403|[Forbidden](https://tools.ietf.org/html/rfc7231#section-6.5.3)|15020|This mod is missing a file and cannot be subscribed to.|[Error Object](#schemaerror_object)
+403|[Forbidden](https://tools.ietf.org/html/rfc7231#section-6.5.3)|15001|This mod is hidden and the user cannot be subscribed to it.|[Error Object](#schemaerror_object)
+403|[Forbidden](https://tools.ietf.org/html/rfc7231#section-6.5.3)|15000|This mod is currently under DMCA and the user cannot be subscribed to it.|[Error Object](#schemaerror_object)
+<aside class="auth-notice">
+To perform this request, you must be authenticated via one of the following methods:
+<a href="#authentication">OAuth 2</a> (Scopes: web)
+</aside>
+# Wallets
+
+## Get User Wallet
+
+> Example request
+
+```shell
+# You can also use wget
+curl -X GET https://*.modapi.io/v1/me/wallets \
+  -H 'Authorization: Bearer {access-token}' \ 
+  -H 'Accept: application/json'
+
+```
+
+```http
+GET https://*.modapi.io/v1/me/wallets HTTP/1.1
+Host: *.modapi.io
+
+Accept: application/json
+Authorization: Bearer {access-token}
+
+```
+
+```javascript
+var headers = {
+  'Authorization':'Bearer {access-token}',
+  'Accept':'application/json'
+
+};
+
+$.ajax({
+  url: 'https://*.modapi.io/v1/me/wallets',
+  method: 'get',
+
+  headers: headers,
+  success: function(data) {
+    console.log(JSON.stringify(data));
+  }
+})
+```
+
+```javascript--nodejs
+const request = require('node-fetch');
+
+const headers = {
+  'Authorization':'Bearer {access-token}',
+  'Accept':'application/json'
+
+};
+
+fetch('https://*.modapi.io/v1/me/wallets',
+{
+  method: 'GET',
+
+  headers: headers
+})
+.then(function(res) {
+    return res.json();
+}).then(function(body) {
+    console.log(body);
+});
+```
+
+```python
+import requests
+headers = {
+  'Authorization': 'Bearer {access-token}',
+  'Accept': 'application/json'
+}
+
+r = requests.get('https://*.modapi.io/v1/me/wallets', params={
+
+}, headers = headers)
+
+print r.json()
+```
+
+```java
+URL obj = new URL("https://*.modapi.io/v1/me/wallets");
+HttpURLConnection con = (HttpURLConnection) obj.openConnection();
+con.setRequestMethod("GET");
+int responseCode = con.getResponseCode();
+BufferedReader in = new BufferedReader(
+    new InputStreamReader(con.getInputStream()));
+String inputLine;
+StringBuffer response = new StringBuffer();
+while ((inputLine = in.readLine()) != null) {
+    response.append(inputLine);
+}
+in.close();
+System.out.println(response.toString());
+```
+
+`GET /me/wallets`
+
+Get the _authenticated user_ wallets. Successful request will return a single [Wallet Object](#wallet-object).
+     Filter|Type|Description
+     ---|---|---
+     game_id|integer|Unique id of the parent game.
+
+> Example response
+
+```json
+{
+  "type": "string",
+  "payment_method_id": "string",
+  "currency": "",
+  "balance": "string"
+}
+
+```
+<h3 id="Get-User-Wallet-responses">Responses</h3>
+
+Status|Meaning|Error Ref|Description|Response Schema
+---|---|----|---|---|
+200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)||Request Successful|[Wallet Object](#schemawallet_object)
+404|[Not Found](https://tools.ietf.org/html/rfc7231#section-6.5.4)|14001|The game associated with the supplied api_key is currently not available.|[Error Object](#schemaerror_object)
+404|[Not Found](https://tools.ietf.org/html/rfc7231#section-6.5.4)|900022|The game may not be setup for monetisation as no active monetisation team could be found.|[Error Object](#schemaerror_object)
+422|[Unprocessable Entity](https://tools.ietf.org/html/rfc2518#section-10.3)|900008|A failure has occured when trying to find the user's wallet.|[Error Object](#schemaerror_object)
+422|[Unprocessable Entity](https://tools.ietf.org/html/rfc2518#section-10.3)|900002|A failure has occured when trying to communicate with the monetisation system.|[Error Object](#schemaerror_object)
 <aside class="auth-notice">
 To perform this request, you must be authenticated via one of the following methods:
 <a href="#authentication">OAuth 2</a> (Scopes: read)
@@ -16154,6 +16742,7 @@ result_total|integer|Total number of results found.
           }
         ]
       },
+      "dependencies": false,
       "platforms": [
         {
           "platform": "windows",
@@ -16956,6 +17545,7 @@ images|[Image Object](#schemaimage_object)[]|Array of image objects (a gallery).
       }
     ]
   },
+  "dependencies": false,
   "platforms": [
     {
       "platform": "windows",
@@ -17020,6 +17610,7 @@ metadata_blob|string|Metadata stored by the game developer. Metadata can also be
 profile_url|string|URL to the mod.
 media|[Mod Media Object](#schemamod_media_object)|Contains YouTube & Sketchfab links, aswell as media URL's of images for the mod.
 modfile|[Modfile Object](#schemamodfile_object)|The primary modfile for the mod.
+dependencies|boolean|If the mod has any dependencies, this value will be set to `true`.
 stats|[Mod Stats Object](#schemamod_stats_object)|Numerous aggregate stats for the mod.
 platforms|[Mod Platforms Object](#schemamod_platforms_object)[]|Contains mod platform data.
 metadata_kvp|[Metadata KVP Object](#schemametadata_kvp_object)[]|Contains key-value metadata.
@@ -17306,6 +17897,44 @@ upload_id|string|A universally unique identifier (UUID) that represents the uplo
 part_number|integer|The part number this object represents.
 part_size|integer|The size of this part in bytes.
 date_added|integer|Unix timestamp of date the part was uploaded.
+
+
+
+## Pay Object
+
+   <a name="schemapay_object"></a>
+
+```json
+{
+  "transaction_id": 0,
+  "gross_amount": 0,
+  "net_amount": 0,
+  "platform_fee": 0,
+  "gateway_fee": 0,
+  "transaction_type": "string",
+  "meta": {},
+  "purchase_date": 1626667557,
+  "wallet_type": "string",
+  "balance": 0,
+  "payment_method_id": "string"
+} 
+```
+
+### Properties
+
+Name|Type|Description
+---|---|---|---|
+transaction_id|integer|The transaction id.
+gross_amount|integer|The gross amount of the purchase in the lowest denomination of currency.
+net_amount|integer|The net amount of the purchase in the lowest denomination of currency.
+platform_fee|integer|The platform fee of the purchase in the lowest denomination of currency.
+gateway_fee|integer|The gateway fee of the purchase in the lowest denomination of currency.
+transaction_type|string|The state of the transaction that was processed. E.g. CANCELLED, CLEARED, FAILED, PAID, PENDING, REFUNDED.
+meta|object|The metadata that was given in the transaction.
+purchase_date|integer|The time of the purchase.
+wallet_type|string|The type of wallet that was used for the purchase. E.g. STANDARD_MIO.
+balance|integer|The balance of the wallet.
+payment_method_id|string|The payment method id that was used.
 
 
 
@@ -17651,6 +18280,30 @@ avatar|[Avatar Object](#schemaavatar_object)|Contains media URL's to the users a
 timezone|string|Deprecated: No longer used and will be removed in subsequent API version.
 language|string|Deprecated: No longer used and will be removed in subsequent API version. To [localize the API response](#localization) we recommend you set the `Accept-Language` header.
 profile_url|string|URL to the users profile.
+
+
+
+## Wallet Object
+
+   <a name="schemawallet_object"></a>
+
+```json
+{
+  "type": "string",
+  "payment_method_id": "string",
+  "currency": "",
+  "balance": "string"
+} 
+```
+
+### Properties
+
+Name|Type|Description
+---|---|---|---|
+type|string|The type of the wallet.
+payment_method_id|string|The payment_method_id of the wallet.
+currency|string|The currency of the wallet.
+balance|string|The balance of the wallet.
 
 
 
