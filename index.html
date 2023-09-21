@@ -808,7 +808,7 @@
                     <a href="#filehash-object" class="toc-h2 toc-link" data-title="Response Schemas">Filehash Object</a>
                   </li>
                   <li>
-                    <a href="#game-monetisation-team-object" class="toc-h2 toc-link" data-title="Response Schemas">Game Monetisation Team Object</a>
+                    <a href="#game-monetization-team-object" class="toc-h2 toc-link" data-title="Response Schemas">Game Monetization Team Object</a>
                   </li>
                   <li>
                     <a href="#game-object" class="toc-h2 toc-link" data-title="Response Schemas">Game Object</a>
@@ -5505,9 +5505,9 @@ Accept: application/json
 <td>Community features enabled for this game:<br><br><strong>0</strong> = None<br><strong>1</strong> = Enable comments<br><strong>2</strong> = Enable guides<br><strong>4</strong> = Pin on homepage<br><strong>8</strong> = Show on homepage<br><strong>16</strong> = Show more on homepage<br><strong>32</strong> = Allow change status<br><strong>64</strong> = Enable Previews (Game must be hidden)<br><strong>128</strong> = Allow Preview Share-URL (Previews must be enabled)<br><strong>?</strong> = Combine to find games with multiple options enabled (see <a href="#bitwise-and-bitwise-and">BITWISE fields</a>)</td>
 </tr>
 <tr>
-<td>monetisation_options</td>
+<td>monetization_options</td>
 <td>integer</td>
-<td>Monetisation features mods can enable:<br><br><strong>0</strong> = None<br><strong>1</strong> = Enabled<br><strong>2</strong> = Allow mods to be sold (marketplace)<br><strong>?</strong> = Combine to find games with multiple options enabled (see <a href="#bitwise-and-bitwise-and">BITWISE fields</a>)</td>
+<td>Monetization features mods can enable:<br><br><strong>0</strong> = None<br><strong>1</strong> = Enabled<br><strong>2</strong> = Allow mods to be sold (marketplace)<br><strong>?</strong> = Combine to find games with multiple options enabled (see <a href="#bitwise-and-bitwise-and">BITWISE fields</a>)</td>
 </tr>
 <tr>
 <td>api_access_options</td>
@@ -5579,8 +5579,8 @@ Accept: application/json
       </span><span class="nl">"submission_option"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
       </span><span class="nl">"curation_option"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
       </span><span class="nl">"community_options"</span><span class="p">:</span><span class="w"> </span><span class="mi">3</span><span class="p">,</span><span class="w">
-      </span><span class="nl">"monetisation_options"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
-      </span><span class="nl">"monetisation_team"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+      </span><span class="nl">"monetization_options"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"monetization_team"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
         </span><span class="nl">"team_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"1"</span><span class="w">
       </span><span class="p">},</span><span class="w">
       </span><span class="nl">"revenue_options"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
@@ -5800,8 +5800,8 @@ Accept: application/json
   </span><span class="nl">"submission_option"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
   </span><span class="nl">"curation_option"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
   </span><span class="nl">"community_options"</span><span class="p">:</span><span class="w"> </span><span class="mi">3</span><span class="p">,</span><span class="w">
-  </span><span class="nl">"monetisation_options"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
-  </span><span class="nl">"monetisation_team"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+  </span><span class="nl">"monetization_options"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"monetization_team"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
     </span><span class="nl">"team_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"1"</span><span class="w">
   </span><span class="p">},</span><span class="w">
   </span><span class="nl">"revenue_options"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
@@ -7199,9 +7199,9 @@ Accept: application/json
 <td>Maturity option(s) set by the mod creator:<br><br><strong>0</strong> = None<br><strong>1</strong> = Alcohol<br><strong>2</strong> = Drugs<br><strong>4</strong> = Violence<br><strong>8</strong> = Explicit<br><strong>?</strong> = Add the options you want together, to enable multiple filters (see <a href="#bitwise-and-bitwise-and">BITWISE fields</a>)</td>
 </tr>
 <tr>
-<td>monetisation_options</td>
+<td>monetization_options</td>
 <td>integer</td>
-<td>Monetisation option(s) enabled by the mod creator:<br><br><strong>0</strong> = None<br><strong>1</strong> = Enabled<br><strong>2</strong> = Marketplace On<br><strong>?</strong> = Add the options you want together, to enable multiple filters (see <a href="#bitwise-and-bitwise-and">BITWISE fields</a>)</td>
+<td>Monetization option(s) enabled by the mod creator:<br><br><strong>0</strong> = None<br><strong>1</strong> = Enabled<br><strong>2</strong> = Marketplace On<br><strong>?</strong> = Add the options you want together, to enable multiple filters (see <a href="#bitwise-and-bitwise-and">BITWISE fields</a>)</td>
 </tr>
 <tr>
 <td>name</td>
@@ -7306,7 +7306,7 @@ Accept: application/json
       </span><span class="nl">"date_live"</span><span class="p">:</span><span class="w"> </span><span class="mi">1499841403</span><span class="p">,</span><span class="w">
       </span><span class="nl">"maturity_option"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
       </span><span class="nl">"community_options"</span><span class="p">:</span><span class="w"> </span><span class="mi">3</span><span class="p">,</span><span class="w">
-      </span><span class="nl">"monetisation_options"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"monetization_options"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
       </span><span class="nl">"price"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
       </span><span class="nl">"tax"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
       </span><span class="nl">"logo"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
@@ -7556,7 +7556,7 @@ Accept: application/json
   </span><span class="nl">"date_live"</span><span class="p">:</span><span class="w"> </span><span class="mi">1499841403</span><span class="p">,</span><span class="w">
   </span><span class="nl">"maturity_option"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
   </span><span class="nl">"community_options"</span><span class="p">:</span><span class="w"> </span><span class="mi">3</span><span class="p">,</span><span class="w">
-  </span><span class="nl">"monetisation_options"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"monetization_options"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
   </span><span class="nl">"price"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
   </span><span class="nl">"tax"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
   </span><span class="nl">"logo"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
@@ -7902,7 +7902,7 @@ curl <span class="nt">-X</span> POST https://<span class="k">*</span>.modapi.io/
   </span><span class="nl">"date_live"</span><span class="p">:</span><span class="w"> </span><span class="mi">1499841403</span><span class="p">,</span><span class="w">
   </span><span class="nl">"maturity_option"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
   </span><span class="nl">"community_options"</span><span class="p">:</span><span class="w"> </span><span class="mi">3</span><span class="p">,</span><span class="w">
-  </span><span class="nl">"monetisation_options"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"monetization_options"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
   </span><span class="nl">"price"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
   </span><span class="nl">"tax"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
   </span><span class="nl">"logo"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
@@ -8275,7 +8275,7 @@ curl <span class="nt">-X</span> POST https://<span class="k">*</span>.modapi.io/
   </span><span class="nl">"date_live"</span><span class="p">:</span><span class="w"> </span><span class="mi">1499841403</span><span class="p">,</span><span class="w">
   </span><span class="nl">"maturity_option"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
   </span><span class="nl">"community_options"</span><span class="p">:</span><span class="w"> </span><span class="mi">3</span><span class="p">,</span><span class="w">
-  </span><span class="nl">"monetisation_options"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"monetization_options"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
   </span><span class="nl">"price"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
   </span><span class="nl">"tax"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
   </span><span class="nl">"logo"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
@@ -10794,7 +10794,7 @@ curl <span class="nt">-X</span> POST https://<span class="k">*</span>.modapi.io/
   </span><span class="nl">"date_live"</span><span class="p">:</span><span class="w"> </span><span class="mi">1499841403</span><span class="p">,</span><span class="w">
   </span><span class="nl">"maturity_option"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
   </span><span class="nl">"community_options"</span><span class="p">:</span><span class="w"> </span><span class="mi">3</span><span class="p">,</span><span class="w">
-  </span><span class="nl">"monetisation_options"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"monetization_options"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
   </span><span class="nl">"price"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
   </span><span class="nl">"tax"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
   </span><span class="nl">"logo"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
@@ -17132,7 +17132,7 @@ Accept: application/json
      <strong>2</strong> = Privacy Policy - <a href="https://mod.io/privacy">https://mod.io/privacy</a><br>
      <strong>3</strong> = Game Terms - <a href="https://mod.io/gameterms">https://mod.io/gameterms</a><br>
      <strong>4</strong> = API Access Terms - <a href="https://mod.io/apiterms">https://mod.io/apiterms</a><br>
-     <strong>5</strong> = Monetisation Terms - <a href="https://mod.io/monetisationterms">https://mod.io/monetisationterms</a><br>
+     <strong>5</strong> = Monetization Terms - <a href="https://mod.io/monetizationterms">https://mod.io/monetizationterms</a><br>
      <strong>6</strong> = Acceptable Use Policy - <a href="https://mod.io/aup">https://mod.io/aup</a><br>
      <strong>7</strong> = Cookies Policy - <a href="https://mod.io/cookies">https://mod.io/cookies</a></p>
 
@@ -18289,9 +18289,9 @@ Authorization: Bearer {access-token}
 <td>Community features enabled for this game:<br><br><strong>0</strong> = None<br><strong>1</strong> = Enable comments<br><strong>2</strong> = Enable guides<br><strong>4</strong> = Pin on homepage<br><strong>8</strong> = Show on homepage<br><strong>16</strong> = Show more on homepage<br><strong>32</strong> = Allow change status<br><strong>64</strong> = Enable Previews (Game must be hidden)<br><strong>128</strong> = Allow Preview Share-URL (Previews must be enabled)<br><strong>?</strong> = Combine to find games with multiple options enabled (see <a href="#bitwise-and-bitwise-and">BITWISE fields</a>)</td>
 </tr>
 <tr>
-<td>monetisation_options</td>
+<td>monetization_options</td>
 <td>integer</td>
-<td>Monetisation features mods can enable:<br><br><strong>0</strong> = None<br><strong>1</strong> = Enabled<br><strong>2</strong> = Allow mods to be sold (marketplace)<br><strong>?</strong> = Combine to find games with multiple options enabled (see <a href="#bitwise-and-bitwise-and">BITWISE fields</a>)</td>
+<td>Monetization features mods can enable:<br><br><strong>0</strong> = None<br><strong>1</strong> = Enabled<br><strong>2</strong> = Allow mods to be sold (marketplace)<br><strong>?</strong> = Combine to find games with multiple options enabled (see <a href="#bitwise-and-bitwise-and">BITWISE fields</a>)</td>
 </tr>
 <tr>
 <td>api_access_options</td>
@@ -18364,8 +18364,8 @@ Authorization: Bearer {access-token}
       </span><span class="nl">"submission_option"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
       </span><span class="nl">"curation_option"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
       </span><span class="nl">"community_options"</span><span class="p">:</span><span class="w"> </span><span class="mi">3</span><span class="p">,</span><span class="w">
-      </span><span class="nl">"monetisation_options"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
-      </span><span class="nl">"monetisation_team"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+      </span><span class="nl">"monetization_options"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"monetization_team"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
         </span><span class="nl">"team_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"1"</span><span class="w">
       </span><span class="p">},</span><span class="w">
       </span><span class="nl">"revenue_options"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
@@ -18615,9 +18615,9 @@ Authorization: Bearer {access-token}
 <td>Maturity option(s) set by the mod creator:<br><br><strong>0</strong> = None<br><strong>1</strong> = Alcohol<br><strong>2</strong> = Drugs<br><strong>4</strong> = Violence<br><strong>8</strong> = Explicit<br><strong>?</strong> = Add the options you want together, to enable multiple filters (see <a href="#bitwise-and-bitwise-and">BITWISE fields</a>)</td>
 </tr>
 <tr>
-<td>monetisation_options</td>
+<td>monetization_options</td>
 <td>integer</td>
-<td>Monetisation option(s) enabled by the mod creator:<br><br><strong>0</strong> = None<br><strong>1</strong> = Enabled<br><strong>2</strong> = Marketplace On<br><strong>?</strong> = Add the options you want together, to enable multiple filters (see <a href="#bitwise-and-bitwise-and">BITWISE fields</a>)</td>
+<td>Monetization option(s) enabled by the mod creator:<br><br><strong>0</strong> = None<br><strong>1</strong> = Enabled<br><strong>2</strong> = Marketplace On<br><strong>?</strong> = Add the options you want together, to enable multiple filters (see <a href="#bitwise-and-bitwise-and">BITWISE fields</a>)</td>
 </tr>
 <tr>
 <td>name</td>
@@ -18717,7 +18717,7 @@ Authorization: Bearer {access-token}
       </span><span class="nl">"date_live"</span><span class="p">:</span><span class="w"> </span><span class="mi">1499841403</span><span class="p">,</span><span class="w">
       </span><span class="nl">"maturity_option"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
       </span><span class="nl">"community_options"</span><span class="p">:</span><span class="w"> </span><span class="mi">3</span><span class="p">,</span><span class="w">
-      </span><span class="nl">"monetisation_options"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"monetization_options"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
       </span><span class="nl">"price"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
       </span><span class="nl">"tax"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
       </span><span class="nl">"logo"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
@@ -18992,9 +18992,9 @@ Authorization: Bearer {access-token}
 <td>Maturity option(s) set by the mod creator:<br><br><strong>0</strong> = None<br><strong>1</strong> = Alcohol<br><strong>2</strong> = Drugs<br><strong>4</strong> = Violence<br><strong>8</strong> = Explicit<br><strong>?</strong> = Add the options you want together, to enable multiple filters (see <a href="#bitwise-and-bitwise-and">BITWISE fields</a>)</td>
 </tr>
 <tr>
-<td>monetisation_options</td>
+<td>monetization_options</td>
 <td>integer</td>
-<td>Monetisation option(s) enabled by the mod creator:<br><br><strong>0</strong> = None<br><strong>1</strong> = Enabled<br><strong>2</strong> = Marketplace On<br><strong>?</strong> = Add the options you want together, to enable multiple filters (see <a href="#bitwise-and-bitwise-and">BITWISE fields</a>)</td>
+<td>Monetization option(s) enabled by the mod creator:<br><br><strong>0</strong> = None<br><strong>1</strong> = Enabled<br><strong>2</strong> = Marketplace On<br><strong>?</strong> = Add the options you want together, to enable multiple filters (see <a href="#bitwise-and-bitwise-and">BITWISE fields</a>)</td>
 </tr>
 <tr>
 <td>name</td>
@@ -19094,7 +19094,7 @@ Authorization: Bearer {access-token}
       </span><span class="nl">"date_live"</span><span class="p">:</span><span class="w"> </span><span class="mi">1499841403</span><span class="p">,</span><span class="w">
       </span><span class="nl">"maturity_option"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
       </span><span class="nl">"community_options"</span><span class="p">:</span><span class="w"> </span><span class="mi">3</span><span class="p">,</span><span class="w">
-      </span><span class="nl">"monetisation_options"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"monetization_options"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
       </span><span class="nl">"price"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
       </span><span class="nl">"tax"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
       </span><span class="nl">"logo"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
@@ -19359,9 +19359,9 @@ Accept: application/json
 <td>Maturity option(s) set by the mod creator:<br><br><strong>0</strong> = None<br><strong>1</strong> = Alcohol<br><strong>2</strong> = Drugs<br><strong>4</strong> = Violence<br><strong>8</strong> = Explicit<br><strong>?</strong> = Add the options you want together, to enable multiple filters (see <a href="#bitwise-and-bitwise-and">BITWISE fields</a>)</td>
 </tr>
 <tr>
-<td>monetisation_options</td>
+<td>monetization_options</td>
 <td>integer</td>
-<td>Monetisation option(s) enabled by the mod creator:<br><br><strong>0</strong> = None<br><strong>1</strong> = Enabled<br><strong>2</strong> = Marketplace On<br><strong>?</strong> = Add the options you want together, to enable multiple filters (see <a href="#bitwise-and-bitwise-and">BITWISE fields</a>)</td>
+<td>Monetization option(s) enabled by the mod creator:<br><br><strong>0</strong> = None<br><strong>1</strong> = Enabled<br><strong>2</strong> = Marketplace On<br><strong>?</strong> = Add the options you want together, to enable multiple filters (see <a href="#bitwise-and-bitwise-and">BITWISE fields</a>)</td>
 </tr>
 <tr>
 <td>name</td>
@@ -19466,7 +19466,7 @@ Accept: application/json
       </span><span class="nl">"date_live"</span><span class="p">:</span><span class="w"> </span><span class="mi">1499841403</span><span class="p">,</span><span class="w">
       </span><span class="nl">"maturity_option"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
       </span><span class="nl">"community_options"</span><span class="p">:</span><span class="w"> </span><span class="mi">3</span><span class="p">,</span><span class="w">
-      </span><span class="nl">"monetisation_options"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"monetization_options"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
       </span><span class="nl">"price"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
       </span><span class="nl">"tax"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
       </span><span class="nl">"logo"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
@@ -20069,31 +20069,19 @@ To perform this request, you must be authenticated via one of the following meth
 </blockquote>
 <div class="highlight"><pre class="highlight shell tab-shell"><code><span class="c"># You can also use wget</span>
 curl <span class="nt">-X</span> POST https://<span class="k">*</span>.modapi.io/v1/games/<span class="o">{</span>game-id<span class="o">}</span>/mods/<span class="o">{</span>mod-id<span class="o">}</span>/checkout <span class="se">\</span>
-  <span class="nt">-H</span> <span class="s1">'Origin: https://mod.io'</span> <span class="se">\ </span>
   <span class="nt">-H</span> <span class="s1">'Authorization: Bearer {access-token}'</span> <span class="se">\ </span>
   <span class="nt">-H</span> <span class="s1">'Content-Type: application/x-www-form-urlencoded'</span> <span class="se">\ </span>
   <span class="nt">-H</span> <span class="s1">'Accept: application/json'</span> <span class="se">\</span>
-  <span class="nt">-F</span> <span class="s1">'transaction_id=undefined'</span> <span class="se">\</span>
-  <span class="nt">-F</span> <span class="s1">'gross_amount=undefined'</span> <span class="se">\</span>
-  <span class="nt">-F</span> <span class="s1">'net_amount=undefined'</span> <span class="se">\</span>
-  <span class="nt">-F</span> <span class="s1">'platform_fee=undefined'</span> <span class="se">\</span>
-  <span class="nt">-F</span> <span class="s1">'gateway_fee=undefined'</span> <span class="se">\</span>
-  <span class="nt">-F</span> <span class="s1">'transaction_type=undefined'</span> <span class="se">\</span>
-  <span class="nt">-F</span> <span class="s1">'meta=undefined'</span> <span class="se">\</span>
-  <span class="nt">-F</span> <span class="s1">'purchase_date=1626667557'</span> <span class="se">\</span>
-  <span class="nt">-F</span> <span class="s1">'wallet_type=undefined'</span> <span class="se">\</span>
-  <span class="nt">-F</span> <span class="s1">'balance=undefined'</span> <span class="se">\</span>
-  <span class="nt">-F</span> <span class="s1">'payment_method_id=undefined'</span>
+  <span class="nt">-d</span> <span class="s1">'display_amount=undefined'</span> <span class="se">\</span>
+  <span class="nt">-d</span> <span class="s1">'idempotent_key=undefined'</span>
 
 </code></pre></div><div class="highlight"><pre class="highlight http tab-http"><code><span class="nf">POST</span> <span class="nn">https://*.modapi.io/v1/games/{game-id}/mods/{mod-id}/checkout</span> <span class="k">HTTP</span><span class="o">/</span><span class="m">1.1</span>
 <span class="na">Host</span><span class="p">:</span> <span class="s">*.modapi.io</span>
 <span class="na">Content-Type</span><span class="p">:</span> <span class="s">application/x-www-form-urlencoded</span>
 <span class="na">Accept</span><span class="p">:</span> <span class="s">application/json</span>
-<span class="na">Origin</span><span class="p">:</span> <span class="s">https://mod.io</span>
 <span class="na">Authorization</span><span class="p">:</span> <span class="s">Bearer {access-token}</span>
 
 </code></pre></div><div class="highlight"><pre class="highlight javascript tab-javascript"><code><span class="kd">var</span> <span class="nx">headers</span> <span class="o">=</span> <span class="p">{</span>
-  <span class="dl">'</span><span class="s1">Origin</span><span class="dl">'</span><span class="p">:</span><span class="dl">'</span><span class="s1">https://mod.io</span><span class="dl">'</span><span class="p">,</span>
   <span class="dl">'</span><span class="s1">Authorization</span><span class="dl">'</span><span class="p">:</span><span class="dl">'</span><span class="s1">Bearer {access-token}</span><span class="dl">'</span><span class="p">,</span>
   <span class="dl">'</span><span class="s1">Content-Type</span><span class="dl">'</span><span class="p">:</span><span class="dl">'</span><span class="s1">application/x-www-form-urlencoded</span><span class="dl">'</span><span class="p">,</span>
   <span class="dl">'</span><span class="s1">Accept</span><span class="dl">'</span><span class="p">:</span><span class="dl">'</span><span class="s1">application/json</span><span class="dl">'</span>
@@ -20111,20 +20099,10 @@ curl <span class="nt">-X</span> POST https://<span class="k">*</span>.modapi.io/
 <span class="p">})</span>
 </code></pre></div><div class="highlight"><pre class="highlight javascript tab-javascript--nodejs"><code><span class="kd">const</span> <span class="nx">request</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="dl">'</span><span class="s1">node-fetch</span><span class="dl">'</span><span class="p">);</span>
 <span class="kd">const</span> <span class="nx">inputBody</span> <span class="o">=</span> <span class="dl">'</span><span class="s1">{
-  "transaction_id": 0,
-  "gross_amount": 0,
-  "net_amount": 0,
-  "platform_fee": 0,
-  "gateway_fee": 0,
-  "transaction_type": "string",
-  "meta": {},
-  "purchase_date": 1626667557,
-  "wallet_type": "string",
-  "balance": 0,
-  "payment_method_id": "string"
+  "display_amount": 0,
+  "idempotent_key": "string"
 }</span><span class="dl">'</span><span class="p">;</span>
 <span class="kd">const</span> <span class="nx">headers</span> <span class="o">=</span> <span class="p">{</span>
-  <span class="dl">'</span><span class="s1">Origin</span><span class="dl">'</span><span class="p">:</span><span class="dl">'</span><span class="s1">https://mod.io</span><span class="dl">'</span><span class="p">,</span>
   <span class="dl">'</span><span class="s1">Authorization</span><span class="dl">'</span><span class="p">:</span><span class="dl">'</span><span class="s1">Bearer {access-token}</span><span class="dl">'</span><span class="p">,</span>
   <span class="dl">'</span><span class="s1">Content-Type</span><span class="dl">'</span><span class="p">:</span><span class="dl">'</span><span class="s1">application/x-www-form-urlencoded</span><span class="dl">'</span><span class="p">,</span>
   <span class="dl">'</span><span class="s1">Accept</span><span class="dl">'</span><span class="p">:</span><span class="dl">'</span><span class="s1">application/json</span><span class="dl">'</span>
@@ -20144,7 +20122,6 @@ curl <span class="nt">-X</span> POST https://<span class="k">*</span>.modapi.io/
 <span class="p">});</span>
 </code></pre></div><div class="highlight"><pre class="highlight python tab-python"><code><span class="kn">import</span> <span class="nn">requests</span>
 <span class="n">headers</span> <span class="o">=</span> <span class="p">{</span>
-  <span class="s">'Origin'</span><span class="p">:</span> <span class="s">'https://mod.io'</span><span class="p">,</span>
   <span class="s">'Authorization'</span><span class="p">:</span> <span class="s">'Bearer {access-token}'</span><span class="p">,</span>
   <span class="s">'Content-Type'</span><span class="p">:</span> <span class="s">'application/x-www-form-urlencoded'</span><span class="p">,</span>
   <span class="s">'Accept'</span><span class="p">:</span> <span class="s">'application/json'</span>
@@ -20171,7 +20148,7 @@ curl <span class="nt">-X</span> POST https://<span class="k">*</span>.modapi.io/
 </code></pre></div>
 <p><span class="httpmethod POST">POST</span> <span class="endpointheading">/games/{game-id}/mods/{mod-id}/checkout</span></p>
 
-<p>Purchase an item. A Successful request will return the newly created <a href="#checkout-process-object">Checkout Process Object</a>.</p>
+<p>Purchase an item. A Successful request will return the newly created <a href="#pay-object">Pay Object</a>.</p>
 
 <table>
 <thead>
@@ -20188,6 +20165,12 @@ curl <span class="nt">-X</span> POST https://<span class="k">*</span>.modapi.io/
 <td>integer</td>
 <td>true</td>
 <td>The amount that was shown to the user for the purchase.</td>
+</tr>
+<tr>
+<td>idempotent_key</td>
+<td>string</td>
+<td>true</td>
+<td>The use of the idempotency key is for if in the event of a connection error, you can confidently reattempt the request without the concern of inadvertently creating a duplicate purchase or executing the purchase twice. All idempotent keys last 24 hours.</td>
 </tr>
 </tbody>
 </table>
@@ -20255,7 +20238,7 @@ curl <span class="nt">-X</span> POST https://<span class="k">*</span>.modapi.io/
 <td>404</td>
 <td><a href="https://tools.ietf.org/html/rfc7231#section-6.5.4">Not Found</a></td>
 <td>900022</td>
-<td>The game may not be currently active for monetisation.</td>
+<td>The game may not be currently active for monetization.</td>
 <td><a href="#schemaerror_object">Error Object</a></td>
 </tr>
 <tr>
@@ -20276,7 +20259,7 @@ curl <span class="nt">-X</span> POST https://<span class="k">*</span>.modapi.io/
 <td>422</td>
 <td><a href="https://tools.ietf.org/html/rfc2518#section-10.3">Unprocessable Entity</a></td>
 <td>900001</td>
-<td>Unable to communicate with the monetisation system. Please try again later.</td>
+<td>Unable to communicate with the monetization system. Please try again later.</td>
 <td><a href="#schemaerror_object">Error Object</a></td>
 </tr>
 <tr>
@@ -20297,14 +20280,14 @@ curl <span class="nt">-X</span> POST https://<span class="k">*</span>.modapi.io/
 <td>422</td>
 <td><a href="https://tools.ietf.org/html/rfc2518#section-10.3">Unprocessable Entity</a></td>
 <td>900002</td>
-<td>A failure has occured when trying to authenticate with the monetisation system.</td>
+<td>A failure has occured when trying to authenticate with the monetization system.</td>
 <td><a href="#schemaerror_object">Error Object</a></td>
 </tr>
 <tr>
 <td>422</td>
 <td><a href="https://tools.ietf.org/html/rfc2518#section-10.3">Unprocessable Entity</a></td>
 <td>900007</td>
-<td>The account has not been created with monetisation.</td>
+<td>The account has not been created with monetization.</td>
 <td><a href="#schemaerror_object">Error Object</a></td>
 </tr>
 <tr>
@@ -20325,14 +20308,14 @@ curl <span class="nt">-X</span> POST https://<span class="k">*</span>.modapi.io/
 <td>403</td>
 <td><a href="https://tools.ietf.org/html/rfc7231#section-6.5.3">Forbidden</a></td>
 <td>900015</td>
-<td>The account has been disabled from monetisation.</td>
+<td>The account has been disabled from monetization.</td>
 <td><a href="#schemaerror_object">Error Object</a></td>
 </tr>
 <tr>
 <td>403</td>
 <td><a href="https://tools.ietf.org/html/rfc7231#section-6.5.3">Forbidden</a></td>
 <td>900012</td>
-<td>The monetisation is currently in maintance mode. Please try again later.</td>
+<td>The monetization is currently in maintance mode. Please try again later.</td>
 <td><a href="#schemaerror_object">Error Object</a></td>
 </tr>
 <tr>
@@ -20361,7 +20344,7 @@ curl <span class="nt">-X</span> POST https://<span class="k">*</span>.modapi.io/
 
 <aside class="auth-notice">
 To perform this request, you must be authenticated via one of the following methods:
-<a href="#authentication">OAuth 2</a> (Scopes: web)
+<a href="#authentication">OAuth 2</a> (Scopes: write)
 </aside>
 <h1 id="wallets">Wallets</h1><h2 id="get-user-wallet">Get User Wallet</h2>
 <blockquote>
@@ -20440,9 +20423,9 @@ Authorization: Bearer {access-token}
 <p><span class="httpmethod GET">GET</span> <span class="endpointheading">/me/wallets</span></p>
 
 <p>Get the <em>authenticated user</em> wallets. Successful request will return a single <a href="#wallet-object">Wallet Object</a>.
-     Filter|Type|Description
-     ---|---|---
-     game_id|integer|Unique id of the parent game.</p>
+     * Filter|Type|Description
+     * ---|---|---
+     * game_id|integer|Unique id of the parent game.</p>
 
 <blockquote>
 <p>Example response</p>
@@ -20450,8 +20433,8 @@ Authorization: Bearer {access-token}
 <div class="highlight"><pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
   </span><span class="nl">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"string"</span><span class="p">,</span><span class="w">
   </span><span class="nl">"payment_method_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"string"</span><span class="p">,</span><span class="w">
-  </span><span class="nl">"currency"</span><span class="p">:</span><span class="w"> </span><span class="s2">""</span><span class="p">,</span><span class="w">
-  </span><span class="nl">"balance"</span><span class="p">:</span><span class="w"> </span><span class="s2">"string"</span><span class="w">
+  </span><span class="nl">"currency"</span><span class="p">:</span><span class="w"> </span><span class="s2">"string"</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"balance"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="w">
 </span><span class="p">}</span><span class="w">
 
 </span></code></pre></div>
@@ -20486,7 +20469,7 @@ Authorization: Bearer {access-token}
 <td>404</td>
 <td><a href="https://tools.ietf.org/html/rfc7231#section-6.5.4">Not Found</a></td>
 <td>900022</td>
-<td>The game may not be setup for monetisation as no active monetisation team could be found.</td>
+<td>The game may not be setup for monetization as no active monetization team could be found.</td>
 <td><a href="#schemaerror_object">Error Object</a></td>
 </tr>
 <tr>
@@ -20500,7 +20483,21 @@ Authorization: Bearer {access-token}
 <td>422</td>
 <td><a href="https://tools.ietf.org/html/rfc2518#section-10.3">Unprocessable Entity</a></td>
 <td>900002</td>
-<td>A failure has occured when trying to communicate with the monetisation system.</td>
+<td>A failure has occured when trying to communicate with the monetization system.</td>
+<td><a href="#schemaerror_object">Error Object</a></td>
+</tr>
+<tr>
+<td>422</td>
+<td><a href="https://tools.ietf.org/html/rfc2518#section-10.3">Unprocessable Entity</a></td>
+<td>900007</td>
+<td>Unable to create the account with monetization.</td>
+<td><a href="#schemaerror_object">Error Object</a></td>
+</tr>
+<tr>
+<td>422</td>
+<td><a href="https://tools.ietf.org/html/rfc2518#section-10.3">Unprocessable Entity</a></td>
+<td>17034</td>
+<td>Users email must be verified before they can create the account with monetization.</td>
 <td><a href="#schemaerror_object">Error Object</a></td>
 </tr>
 </tbody>
@@ -20871,8 +20868,8 @@ To perform this request, you must be authenticated via one of the following meth
 </tr>
 </tbody>
 </table>
-<h2 id="game-monetisation-team-object">Game Monetisation Team Object</h2>
-<p><a name="schemagame_monetisation_team_object"></a></p>
+<h2 id="game-monetization-team-object">Game Monetization Team Object</h2>
+<p><a name="schemagame_monetization_team_object"></a></p>
 <div class="highlight"><pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
   </span><span class="nl">"team_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"1"</span><span class="w">
 </span><span class="p">}</span><span class="w"> 
@@ -20889,7 +20886,7 @@ To perform this request, you must be authenticated via one of the following meth
 <tr>
 <td>team_id</td>
 <td>integer</td>
-<td>The ID of the monetisation team.</td>
+<td>The ID of the monetization team.</td>
 </tr>
 </tbody>
 </table>
@@ -20906,8 +20903,8 @@ To perform this request, you must be authenticated via one of the following meth
   </span><span class="nl">"submission_option"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
   </span><span class="nl">"curation_option"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
   </span><span class="nl">"community_options"</span><span class="p">:</span><span class="w"> </span><span class="mi">3</span><span class="p">,</span><span class="w">
-  </span><span class="nl">"monetisation_options"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
-  </span><span class="nl">"monetisation_team"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+  </span><span class="nl">"monetization_options"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"monetization_team"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
     </span><span class="nl">"team_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"1"</span><span class="w">
   </span><span class="p">},</span><span class="w">
   </span><span class="nl">"revenue_options"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
@@ -21046,19 +21043,19 @@ To perform this request, you must be authenticated via one of the following meth
 <td>Community features enabled for this game:<br><br><strong>0</strong> = All of the options below are disabled<br><strong>1</strong> = Enable comments<br><strong>2</strong> = Enable guides<br><strong>4</strong> = Pin on homepage<br><strong>8</strong> = Show on homepage<br><strong>16</strong> = Show more on homepage<br><strong>32</strong> = Allow change status<br><strong>64</strong> = Enable Previews (Game must be hidden)<br><strong>128</strong> = Allow Preview Share-URL (Previews must be enabled)<br><strong>?</strong> = Add the options you want together, to enable multiple features (see <a href="#bitwise-and-bitwise-and">BITWISE fields</a>)</td>
 </tr>
 <tr>
-<td>monetisation_options</td>
+<td>monetization_options</td>
 <td>integer</td>
-<td>Monetisation features mods can enable:<br><br><strong>0</strong> = All of the options below are disabled<br><strong>1</strong> = Enabled<br><strong>2</strong> = Enable marketplace<br><strong>?</strong> = Add the options you want together, to enable multiple features (see <a href="#bitwise-and-bitwise-and">BITWISE fields</a>)</td>
+<td>Monetization features mods can enable:<br><br><strong>0</strong> = All of the options below are disabled<br><strong>1</strong> = Enabled<br><strong>2</strong> = Enable marketplace<br><strong>?</strong> = Add the options you want together, to enable multiple features (see <a href="#bitwise-and-bitwise-and">BITWISE fields</a>)</td>
 </tr>
 <tr>
-<td>monetisation_team</td>
-<td><a href="#schemagame_monetisation_team_object">Game Monetisation Team Object</a></td>
-<td>The monetisation team for this resource. <a href="#game-monetisation-team-object">Game Monetisation Team Object</a>.</td>
+<td>monetization_team</td>
+<td><a href="#schemagame_monetization_team_object">Game Monetization Team Object</a></td>
+<td>The monetization team for this resource. <a href="#game-monetization-team-object">Game Monetization Team Object</a>.</td>
 </tr>
 <tr>
 <td>revenue_options</td>
 <td>integer</td>
-<td>Deprecated: Please use monetisation_options instead, this will be removed in subsequent API version.</td>
+<td>Deprecated: Please use monetization_options instead, this will be removed in subsequent API version.</td>
 </tr>
 <tr>
 <td>api_access_options</td>
@@ -21466,8 +21463,8 @@ To perform this request, you must be authenticated via one of the following meth
       </span><span class="nl">"submission_option"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
       </span><span class="nl">"curation_option"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
       </span><span class="nl">"community_options"</span><span class="p">:</span><span class="w"> </span><span class="mi">3</span><span class="p">,</span><span class="w">
-      </span><span class="nl">"monetisation_options"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
-      </span><span class="nl">"monetisation_team"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+      </span><span class="nl">"monetization_options"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"monetization_team"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
         </span><span class="nl">"team_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"1"</span><span class="w">
       </span><span class="p">},</span><span class="w">
       </span><span class="nl">"revenue_options"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
@@ -22344,7 +22341,7 @@ To perform this request, you must be authenticated via one of the following meth
       </span><span class="nl">"date_live"</span><span class="p">:</span><span class="w"> </span><span class="mi">1499841403</span><span class="p">,</span><span class="w">
       </span><span class="nl">"maturity_option"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
       </span><span class="nl">"community_options"</span><span class="p">:</span><span class="w"> </span><span class="mi">3</span><span class="p">,</span><span class="w">
-      </span><span class="nl">"monetisation_options"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"monetization_options"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
       </span><span class="nl">"price"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
       </span><span class="nl">"tax"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
       </span><span class="nl">"logo"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
@@ -23534,7 +23531,7 @@ To perform this request, you must be authenticated via one of the following meth
   </span><span class="nl">"date_live"</span><span class="p">:</span><span class="w"> </span><span class="mi">1499841403</span><span class="p">,</span><span class="w">
   </span><span class="nl">"maturity_option"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
   </span><span class="nl">"community_options"</span><span class="p">:</span><span class="w"> </span><span class="mi">3</span><span class="p">,</span><span class="w">
-  </span><span class="nl">"monetisation_options"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"monetization_options"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
   </span><span class="nl">"price"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
   </span><span class="nl">"tax"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
   </span><span class="nl">"logo"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
@@ -23693,9 +23690,9 @@ To perform this request, you must be authenticated via one of the following meth
 <td>Community features enabled for this mod:<br><br><strong>0</strong> = All of the options below are disabled<br><strong>1</strong> = Enable comments<br><strong>?</strong> = Add the options you want together, to enable multiple features (see <a href="#bitwise-and-bitwise-and">BITWISE fields</a>)</td>
 </tr>
 <tr>
-<td>monetisation_options</td>
+<td>monetization_options</td>
 <td>integer</td>
-<td>Monetisation features enabled for this mod:<br><br><strong>0</strong> = All of the options below are disabled<br><strong>1</strong> = Enabled<br><strong>2</strong> = Marketplace On<br><strong>?</strong> = Add the options you want together, to enable multiple features (see <a href="#bitwise-and-bitwise-and">BITWISE fields</a>)</td>
+<td>Monetization features enabled for this mod:<br><br><strong>0</strong> = All of the options below are disabled<br><strong>1</strong> = Enabled<br><strong>2</strong> = Marketplace On<br><strong>?</strong> = Add the options you want together, to enable multiple features (see <a href="#bitwise-and-bitwise-and">BITWISE fields</a>)</td>
 </tr>
 <tr>
 <td>price</td>
@@ -24995,8 +24992,8 @@ To perform this request, you must be authenticated via one of the following meth
 <div class="highlight"><pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
   </span><span class="nl">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"string"</span><span class="p">,</span><span class="w">
   </span><span class="nl">"payment_method_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"string"</span><span class="p">,</span><span class="w">
-  </span><span class="nl">"currency"</span><span class="p">:</span><span class="w"> </span><span class="s2">""</span><span class="p">,</span><span class="w">
-  </span><span class="nl">"balance"</span><span class="p">:</span><span class="w"> </span><span class="s2">"string"</span><span class="w">
+  </span><span class="nl">"currency"</span><span class="p">:</span><span class="w"> </span><span class="s2">"string"</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"balance"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="w">
 </span><span class="p">}</span><span class="w"> 
 </span></code></pre></div><h3 id="properties-68">Properties</h3>
 <table>
@@ -25025,7 +25022,7 @@ To perform this request, you must be authenticated via one of the following meth
 </tr>
 <tr>
 <td>balance</td>
-<td>string</td>
+<td>integer</td>
 <td>The balance of the wallet.</td>
 </tr>
 </tbody>
