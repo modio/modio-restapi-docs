@@ -15015,6 +15015,131 @@ Status|Meaning|Error Ref|Description|Response Schema
 To perform this request, you must be authenticated via one of the following methods:
 <a href="#authentication">OAuth 2</a> (Scopes: read)
 </aside>
+## Get User Wallet
+
+> Example request
+
+```shell
+# You can also use wget
+curl -X GET https://*.modapi.io/v1/me/wallets \
+  -H 'Authorization: Bearer {access-token}' \ 
+  -H 'Accept: application/json'
+
+```
+
+```http
+GET https://*.modapi.io/v1/me/wallets HTTP/1.1
+Host: *.modapi.io
+
+Accept: application/json
+Authorization: Bearer {access-token}
+
+```
+
+```javascript
+var headers = {
+  'Authorization':'Bearer {access-token}',
+  'Accept':'application/json'
+
+};
+
+$.ajax({
+  url: 'https://*.modapi.io/v1/me/wallets',
+  method: 'get',
+
+  headers: headers,
+  success: function(data) {
+    console.log(JSON.stringify(data));
+  }
+})
+```
+
+```javascript--nodejs
+const request = require('node-fetch');
+
+const headers = {
+  'Authorization':'Bearer {access-token}',
+  'Accept':'application/json'
+
+};
+
+fetch('https://*.modapi.io/v1/me/wallets',
+{
+  method: 'GET',
+
+  headers: headers
+})
+.then(function(res) {
+    return res.json();
+}).then(function(body) {
+    console.log(body);
+});
+```
+
+```python
+import requests
+headers = {
+  'Authorization': 'Bearer {access-token}',
+  'Accept': 'application/json'
+}
+
+r = requests.get('https://*.modapi.io/v1/me/wallets', params={
+
+}, headers = headers)
+
+print r.json()
+```
+
+```java
+URL obj = new URL("https://*.modapi.io/v1/me/wallets");
+HttpURLConnection con = (HttpURLConnection) obj.openConnection();
+con.setRequestMethod("GET");
+int responseCode = con.getResponseCode();
+BufferedReader in = new BufferedReader(
+    new InputStreamReader(con.getInputStream()));
+String inputLine;
+StringBuffer response = new StringBuffer();
+while ((inputLine = in.readLine()) != null) {
+    response.append(inputLine);
+}
+in.close();
+System.out.println(response.toString());
+```
+
+`GET /me/wallets`
+
+Get the _authenticated user_ wallets. Successful request will return a single [Wallet Object](#wallet-object).
+
+     Filter|Type|Description
+     ---|---|---
+     game_id|integer|Unique id of the parent game.
+
+> Example response
+
+```json
+{
+  "type": "string",
+  "payment_method_id": "string",
+  "currency": "string",
+  "balance": 0
+}
+
+```
+<h3 id="Get-User-Wallet-responses">Responses</h3>
+
+Status|Meaning|Error Ref|Description|Response Schema
+---|---|----|---|---|
+200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)||Request Successful|[Wallet Object](#schemawallet_object)
+404|[Not Found](https://tools.ietf.org/html/rfc7231#section-6.5.4)|14001|The game associated with the supplied api_key is currently not available.|[Error Object](#schemaerror_object)
+404|[Not Found](https://tools.ietf.org/html/rfc7231#section-6.5.4)|900022|The game may not be setup for monetization as no active monetization team could be found.|[Error Object](#schemaerror_object)
+422|[Unprocessable Entity](https://tools.ietf.org/html/rfc2518#section-10.3)|900008|A failure has occured when trying to find the user's wallet.|[Error Object](#schemaerror_object)
+422|[Unprocessable Entity](https://tools.ietf.org/html/rfc2518#section-10.3)|900002|A failure has occured when trying to communicate with the monetization system.|[Error Object](#schemaerror_object)
+422|[Unprocessable Entity](https://tools.ietf.org/html/rfc2518#section-10.3)|900007|Unable to create the account with monetization.|[Error Object](#schemaerror_object)
+422|[Unprocessable Entity](https://tools.ietf.org/html/rfc2518#section-10.3)|17034|Users email must be verified before they can create the account with monetization.|[Error Object](#schemaerror_object)
+<aside class="auth-notice">
+To perform this request, you must be authenticated via one of the following methods:
+<a href="#authentication">OAuth 2</a> (Scopes: read)
+</aside>
 # General
 
 ## Get Resource Owner
@@ -15310,132 +15435,6 @@ Status|Meaning|Error Ref|Description|Response Schema
 <aside class="auth-notice">
 To perform this request, you must be authenticated via one of the following methods:
 <a href="#authentication">OAuth 2</a> (Scopes: write)
-</aside>
-# Wallets
-
-## Get User Wallet
-
-> Example request
-
-```shell
-# You can also use wget
-curl -X GET https://*.modapi.io/v1/me/wallets \
-  -H 'Authorization: Bearer {access-token}' \ 
-  -H 'Accept: application/json'
-
-```
-
-```http
-GET https://*.modapi.io/v1/me/wallets HTTP/1.1
-Host: *.modapi.io
-
-Accept: application/json
-Authorization: Bearer {access-token}
-
-```
-
-```javascript
-var headers = {
-  'Authorization':'Bearer {access-token}',
-  'Accept':'application/json'
-
-};
-
-$.ajax({
-  url: 'https://*.modapi.io/v1/me/wallets',
-  method: 'get',
-
-  headers: headers,
-  success: function(data) {
-    console.log(JSON.stringify(data));
-  }
-})
-```
-
-```javascript--nodejs
-const request = require('node-fetch');
-
-const headers = {
-  'Authorization':'Bearer {access-token}',
-  'Accept':'application/json'
-
-};
-
-fetch('https://*.modapi.io/v1/me/wallets',
-{
-  method: 'GET',
-
-  headers: headers
-})
-.then(function(res) {
-    return res.json();
-}).then(function(body) {
-    console.log(body);
-});
-```
-
-```python
-import requests
-headers = {
-  'Authorization': 'Bearer {access-token}',
-  'Accept': 'application/json'
-}
-
-r = requests.get('https://*.modapi.io/v1/me/wallets', params={
-
-}, headers = headers)
-
-print r.json()
-```
-
-```java
-URL obj = new URL("https://*.modapi.io/v1/me/wallets");
-HttpURLConnection con = (HttpURLConnection) obj.openConnection();
-con.setRequestMethod("GET");
-int responseCode = con.getResponseCode();
-BufferedReader in = new BufferedReader(
-    new InputStreamReader(con.getInputStream()));
-String inputLine;
-StringBuffer response = new StringBuffer();
-while ((inputLine = in.readLine()) != null) {
-    response.append(inputLine);
-}
-in.close();
-System.out.println(response.toString());
-```
-
-`GET /me/wallets`
-
-Get the _authenticated user_ wallets. Successful request will return a single [Wallet Object](#wallet-object).
-     * Filter|Type|Description
-     * ---|---|---
-     * game_id|integer|Unique id of the parent game.
-
-> Example response
-
-```json
-{
-  "type": "string",
-  "payment_method_id": "string",
-  "currency": "string",
-  "balance": 0
-}
-
-```
-<h3 id="Get-User-Wallet-responses">Responses</h3>
-
-Status|Meaning|Error Ref|Description|Response Schema
----|---|----|---|---|
-200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)||Request Successful|[Wallet Object](#schemawallet_object)
-404|[Not Found](https://tools.ietf.org/html/rfc7231#section-6.5.4)|14001|The game associated with the supplied api_key is currently not available.|[Error Object](#schemaerror_object)
-404|[Not Found](https://tools.ietf.org/html/rfc7231#section-6.5.4)|900022|The game may not be setup for monetization as no active monetization team could be found.|[Error Object](#schemaerror_object)
-422|[Unprocessable Entity](https://tools.ietf.org/html/rfc2518#section-10.3)|900008|A failure has occured when trying to find the user's wallet.|[Error Object](#schemaerror_object)
-422|[Unprocessable Entity](https://tools.ietf.org/html/rfc2518#section-10.3)|900002|A failure has occured when trying to communicate with the monetization system.|[Error Object](#schemaerror_object)
-422|[Unprocessable Entity](https://tools.ietf.org/html/rfc2518#section-10.3)|900007|Unable to create the account with monetization.|[Error Object](#schemaerror_object)
-422|[Unprocessable Entity](https://tools.ietf.org/html/rfc2518#section-10.3)|17034|Users email must be verified before they can create the account with monetization.|[Error Object](#schemaerror_object)
-<aside class="auth-notice">
-To perform this request, you must be authenticated via one of the following methods:
-<a href="#authentication">OAuth 2</a> (Scopes: read)
 </aside>
 # Response Schemas
 ## Access Token Object  
