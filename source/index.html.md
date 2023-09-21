@@ -3191,7 +3191,7 @@ Get all games. Successful request will return an array of [Game Objects](#get-ga
     submission_option|integer|Submission process modders must follow:<br><br>__0__ = Mod uploads must occur via the API using a tool created by the game developers<br>__1__ = Mod uploads can occur from anywhere, including the website and API
     curation_option|integer|Curation options enabled by this game to approve mods:<br><br>__0__ = No curation: Mods are immediately available to play<br>__1__ = Price change approval: Pricing changes for marketplace mods queued for acceptance<br>__2__ = Full curation: All mods must be accepted by someone to be listed<br>__?__ = Combine to enable multiple features (see BITWISE fields)
     community_options|integer|Community features enabled for this game:<br><br>__0__ = None<br>__1__ = Enable comments<br>__2__ = Enable guides<br>__4__ = Pin on homepage<br>__8__ = Show on homepage<br>__16__ = Show more on homepage<br>__32__ = Allow change status<br>__64__ = Enable Previews (Game must be hidden)<br>__128__ = Allow Preview Share-URL (Previews must be enabled)<br>__?__ = Combine to find games with multiple options enabled (see [BITWISE fields](#bitwise-and-bitwise-and))
-    monetisation_options|integer|Monetisation features mods can enable:<br><br>__0__ = None<br>__1__ = Enabled<br>__2__ = Allow mods to be sold (marketplace)<br>__?__ = Combine to find games with multiple options enabled (see [BITWISE fields](#bitwise-and-bitwise-and))
+    monetization_options|integer|Monetization features mods can enable:<br><br>__0__ = None<br>__1__ = Enabled<br>__2__ = Allow mods to be sold (marketplace)<br>__?__ = Combine to find games with multiple options enabled (see [BITWISE fields](#bitwise-and-bitwise-and))
     api_access_options|integer|Level of API access allowed by this game:<br><br>__0__ = None<br>__1__ = Allow 3rd parties to access this games API endpoints<br>__2__ = Allow mods to be downloaded directly (if disabled all download URLs will contain a frequently changing verification hash to stop unauthorized use)<br>__?__ = Combine to find games with multiple options enabled (see [BITWISE fields](#bitwise-and-bitwise-and))
     maturity_options|integer|Mature content setup for this game:<br><br>__0__ = Don't allow mature content in mods<br>__1__ = Allow mature content in mods<br>__2__ = This game is for mature audiences only<br>__?__ = Combine to find games with multiple options enabled (see [BITWISE fields](#bitwise-and-bitwise-and)
 
@@ -3221,8 +3221,8 @@ Get all games. Successful request will return an array of [Game Objects](#get-ga
       "submission_option": 1,
       "curation_option": 0,
       "community_options": 3,
-      "monetisation_options": 0,
-      "monetisation_team": {
+      "monetization_options": 0,
+      "monetization_team": {
         "team_id": "1"
       },
       "revenue_options": 0,
@@ -3428,8 +3428,8 @@ Get a game. Successful request will return a single [Game Object](#game-object).
   "submission_option": 1,
   "curation_option": 0,
   "community_options": 3,
-  "monetisation_options": 0,
-  "monetisation_team": {
+  "monetization_options": 0,
+  "monetization_team": {
     "team_id": "1"
   },
   "revenue_options": 0,
@@ -4587,7 +4587,7 @@ Get all mods for the corresponding game. Successful request will return an array
     date_updated|integer|Unix timestamp of date mod was updated.
     date_live|integer|Unix timestamp of date mod was set live.
     maturity_option|integer|Maturity option(s) set by the mod creator:<br><br>__0__ = None<br>__1__ = Alcohol<br>__2__ = Drugs<br>__4__ = Violence<br>__8__ = Explicit<br>__?__ = Add the options you want together, to enable multiple filters (see [BITWISE fields](#bitwise-and-bitwise-and))
-    monetisation_options|integer|Monetisation option(s) enabled by the mod creator:<br><br>__0__ = None<br>__1__ = Enabled<br>__2__ = Marketplace On<br>__?__ = Add the options you want together, to enable multiple filters (see [BITWISE fields](#bitwise-and-bitwise-and))
+    monetization_options|integer|Monetization option(s) enabled by the mod creator:<br><br>__0__ = None<br>__1__ = Enabled<br>__2__ = Marketplace On<br>__?__ = Add the options you want together, to enable multiple filters (see [BITWISE fields](#bitwise-and-bitwise-and))
     name|string|Name of the mod.
     name_id|string|Path for the mod on mod.io. For example: https://mod.io/g/gamename/m/__mod-name-id-here__
     modfile|integer|Unique id of the file that is the current active release (see [mod files](#files)).
@@ -4636,7 +4636,7 @@ Get all mods for the corresponding game. Successful request will return an array
       "date_live": 1499841403,
       "maturity_option": 0,
       "community_options": 3,
-      "monetisation_options": 0,
+      "monetization_options": 0,
       "price": 0,
       "tax": 0,
       "logo": {
@@ -4879,7 +4879,7 @@ Get a mod. Successful request will return a single [Mod Object](#mod-object).
   "date_live": 1499841403,
   "maturity_option": 0,
   "community_options": 3,
-  "monetisation_options": 0,
+  "monetization_options": 0,
   "price": 0,
   "tax": 0,
   "logo": {
@@ -5153,7 +5153,7 @@ Add a mod. Successful request will return the newly created [Mod Object](#mod-ob
   "date_live": 1499841403,
   "maturity_option": 0,
   "community_options": 3,
-  "monetisation_options": 0,
+  "monetization_options": 0,
   "price": 0,
   "tax": 0,
   "logo": {
@@ -5429,7 +5429,7 @@ Edit details for a mod. If you want to update the `logo` or media associated wit
   "date_live": 1499841403,
   "maturity_option": 0,
   "community_options": 3,
-  "monetisation_options": 0,
+  "monetization_options": 0,
   "price": 0,
   "tax": 0,
   "logo": {
@@ -7464,7 +7464,7 @@ Subscribe the _authenticated user_ to a corresponding mod. No body parameters ar
   "date_live": 1499841403,
   "maturity_option": 0,
   "community_options": 3,
-  "monetisation_options": 0,
+  "monetization_options": 0,
   "price": 0,
   "tax": 0,
   "logo": {
@@ -12840,7 +12840,7 @@ Get the current agreement (version) by type. Successful request will return a si
      __2__ = Privacy Policy - [https://mod.io/privacy](https://mod.io/privacy)<br>
      __3__ = Game Terms - [https://mod.io/gameterms](https://mod.io/gameterms)<br>
      __4__ = API Access Terms - [https://mod.io/apiterms](https://mod.io/apiterms)<br>
-     __5__ = Monetisation Terms - [https://mod.io/monetisationterms](https://mod.io/monetisationterms)<br>
+     __5__ = Monetization Terms - [https://mod.io/monetizationterms](https://mod.io/monetizationterms)<br>
      __6__ = Acceptable Use Policy - [https://mod.io/aup](https://mod.io/aup)<br>
      __7__ = Cookies Policy - [https://mod.io/cookies](https://mod.io/cookies)
 
@@ -13796,7 +13796,7 @@ Get all games the _authenticated user_ added or is a team member of. Successful 
     submission_option|integer|Submission process modders must follow:<br><br>__0__ = Mod uploads must occur via the API using a tool created by the game developers<br>__1__ = Mod uploads can occur from anywhere, including the website and API
     curation_option|integer|Curation options enabled by this game to approve mods:<br><br>__0__ = No curation: Mods are immediately available to play<br>__1__ = Price change approval: Pricing changes for marketplace mods queued for acceptance<br>__2__ = Full curation: All mods must be accepted by someone to be listed<br>__?__ = Combine to enable multiple features (see BITWISE fields)
     community_options|integer|Community features enabled for this game:<br><br>__0__ = None<br>__1__ = Enable comments<br>__2__ = Enable guides<br>__4__ = Pin on homepage<br>__8__ = Show on homepage<br>__16__ = Show more on homepage<br>__32__ = Allow change status<br>__64__ = Enable Previews (Game must be hidden)<br>__128__ = Allow Preview Share-URL (Previews must be enabled)<br>__?__ = Combine to find games with multiple options enabled (see [BITWISE fields](#bitwise-and-bitwise-and))
-    monetisation_options|integer|Monetisation features mods can enable:<br><br>__0__ = None<br>__1__ = Enabled<br>__2__ = Allow mods to be sold (marketplace)<br>__?__ = Combine to find games with multiple options enabled (see [BITWISE fields](#bitwise-and-bitwise-and))
+    monetization_options|integer|Monetization features mods can enable:<br><br>__0__ = None<br>__1__ = Enabled<br>__2__ = Allow mods to be sold (marketplace)<br>__?__ = Combine to find games with multiple options enabled (see [BITWISE fields](#bitwise-and-bitwise-and))
     api_access_options|integer|Level of API access allowed by this game:<br><br>__0__ = None<br>__1__ = Allow 3rd parties to access this games API endpoints<br>__2__ = Allow mods to be downloaded directly (if disabled all download URLs will contain a frequently changing verification hash to stop unauthorized use)<br>__?__ = Combine to find games with multiple options enabled (see [BITWISE fields](#bitwise-and-bitwise-and)
     maturity_options|integer|Mature content setup for this game:<br><br>__0__ = Don't allow mature content in mods<br>__1__ = Allow mature content in mods<br>__2__ = This game is for mature audiences only<br>__?__ = Combine to find games with multiple options enabled (see [BITWISE fields](#bitwise-and-bitwise-and)
 
@@ -13826,8 +13826,8 @@ Get all games the _authenticated user_ added or is a team member of. Successful 
       "submission_option": 1,
       "curation_option": 0,
       "community_options": 3,
-      "monetisation_options": 0,
-      "monetisation_team": {
+      "monetization_options": 0,
+      "monetization_team": {
         "team_id": "1"
       },
       "revenue_options": 0,
@@ -14031,7 +14031,7 @@ Get all mod's the _authenticated user_ is subscribed to. Successful request will
     date_updated|integer|Unix timestamp of date mod was updated.
     date_live|integer|Unix timestamp of date mod was set live.
     maturity_option|integer|Maturity option(s) set by the mod creator:<br><br>__0__ = None<br>__1__ = Alcohol<br>__2__ = Drugs<br>__4__ = Violence<br>__8__ = Explicit<br>__?__ = Add the options you want together, to enable multiple filters (see [BITWISE fields](#bitwise-and-bitwise-and))
-    monetisation_options|integer|Monetisation option(s) enabled by the mod creator:<br><br>__0__ = None<br>__1__ = Enabled<br>__2__ = Marketplace On<br>__?__ = Add the options you want together, to enable multiple filters (see [BITWISE fields](#bitwise-and-bitwise-and))
+    monetization_options|integer|Monetization option(s) enabled by the mod creator:<br><br>__0__ = None<br>__1__ = Enabled<br>__2__ = Marketplace On<br>__?__ = Add the options you want together, to enable multiple filters (see [BITWISE fields](#bitwise-and-bitwise-and))
     name|string|Name of the mod.
     name_id|string|Path for the mod on mod.io. For example: https://mod.io/g/gamename/m/__mod-name-id-here__
     modfile|integer|Unique id of the file that is the current active release (see [mod files](#files)).
@@ -14079,7 +14079,7 @@ Get all mod's the _authenticated user_ is subscribed to. Successful request will
       "date_live": 1499841403,
       "maturity_option": 0,
       "community_options": 3,
-      "monetisation_options": 0,
+      "monetization_options": 0,
       "price": 0,
       "tax": 0,
       "logo": {
@@ -14307,7 +14307,7 @@ Get all mods the _authenticated user_ added or is a team member of. Successful r
     date_updated|integer|Unix timestamp of date mod was updated.
     date_live|integer|Unix timestamp of date mod was set live.
     maturity_option|integer|Maturity option(s) set by the mod creator:<br><br>__0__ = None<br>__1__ = Alcohol<br>__2__ = Drugs<br>__4__ = Violence<br>__8__ = Explicit<br>__?__ = Add the options you want together, to enable multiple filters (see [BITWISE fields](#bitwise-and-bitwise-and))
-    monetisation_options|integer|Monetisation option(s) enabled by the mod creator:<br><br>__0__ = None<br>__1__ = Enabled<br>__2__ = Marketplace On<br>__?__ = Add the options you want together, to enable multiple filters (see [BITWISE fields](#bitwise-and-bitwise-and))
+    monetization_options|integer|Monetization option(s) enabled by the mod creator:<br><br>__0__ = None<br>__1__ = Enabled<br>__2__ = Marketplace On<br>__?__ = Add the options you want together, to enable multiple filters (see [BITWISE fields](#bitwise-and-bitwise-and))
     name|string|Name of the mod.
     name_id|string|Path for the mod on mod.io. For example: https://mod.io/g/gamename/m/__mod-name-id-here__
     modfile|integer|Unique id of the file that is the current active release (see [mod files](#files)).
@@ -14355,7 +14355,7 @@ Get all mods the _authenticated user_ added or is a team member of. Successful r
       "date_live": 1499841403,
       "maturity_option": 0,
       "community_options": 3,
-      "monetisation_options": 0,
+      "monetization_options": 0,
       "price": 0,
       "tax": 0,
       "logo": {
@@ -14574,7 +14574,7 @@ Get all mod's the _authenticated user_ has purchased. Successful request will re
     date_updated|integer|Unix timestamp of date mod was updated.
     date_live|integer|Unix timestamp of date mod was set live.
     maturity_option|integer|Maturity option(s) set by the mod creator:<br><br>__0__ = None<br>__1__ = Alcohol<br>__2__ = Drugs<br>__4__ = Violence<br>__8__ = Explicit<br>__?__ = Add the options you want together, to enable multiple filters (see [BITWISE fields](#bitwise-and-bitwise-and))
-    monetisation_options|integer|Monetisation option(s) enabled by the mod creator:<br><br>__0__ = None<br>__1__ = Enabled<br>__2__ = Marketplace On<br>__?__ = Add the options you want together, to enable multiple filters (see [BITWISE fields](#bitwise-and-bitwise-and))
+    monetization_options|integer|Monetization option(s) enabled by the mod creator:<br><br>__0__ = None<br>__1__ = Enabled<br>__2__ = Marketplace On<br>__?__ = Add the options you want together, to enable multiple filters (see [BITWISE fields](#bitwise-and-bitwise-and))
     name|string|Name of the mod.
     name_id|string|Path for the mod on mod.io. For example: https://mod.io/g/gamename/m/__mod-name-id-here__
     modfile|integer|Unique id of the file that is the current active release (see [mod files](#files)).
@@ -14623,7 +14623,7 @@ Get all mod's the _authenticated user_ has purchased. Successful request will re
       "date_live": 1499841403,
       "maturity_option": 0,
       "community_options": 3,
-      "monetisation_options": 0,
+      "monetization_options": 0,
       "price": 0,
       "tax": 0,
       "logo": {
@@ -15164,21 +15164,11 @@ To perform this request, you must be authenticated via one of the following meth
 ```shell
 # You can also use wget
 curl -X POST https://*.modapi.io/v1/games/{game-id}/mods/{mod-id}/checkout \
-  -H 'Origin: https://mod.io' \ 
   -H 'Authorization: Bearer {access-token}' \ 
   -H 'Content-Type: application/x-www-form-urlencoded' \ 
   -H 'Accept: application/json' \
-  -F 'transaction_id=undefined' \
-  -F 'gross_amount=undefined' \
-  -F 'net_amount=undefined' \
-  -F 'platform_fee=undefined' \
-  -F 'gateway_fee=undefined' \
-  -F 'transaction_type=undefined' \
-  -F 'meta=undefined' \
-  -F 'purchase_date=1626667557' \
-  -F 'wallet_type=undefined' \
-  -F 'balance=undefined' \
-  -F 'payment_method_id=undefined'
+  -d 'display_amount=undefined' \
+  -d 'idempotent_key=undefined'
 
 ```
 
@@ -15187,14 +15177,12 @@ POST https://*.modapi.io/v1/games/{game-id}/mods/{mod-id}/checkout HTTP/1.1
 Host: *.modapi.io
 Content-Type: application/x-www-form-urlencoded
 Accept: application/json
-Origin: https://mod.io
 Authorization: Bearer {access-token}
 
 ```
 
 ```javascript
 var headers = {
-  'Origin':'https://mod.io',
   'Authorization':'Bearer {access-token}',
   'Content-Type':'application/x-www-form-urlencoded',
   'Accept':'application/json'
@@ -15215,20 +15203,10 @@ $.ajax({
 ```javascript--nodejs
 const request = require('node-fetch');
 const inputBody = '{
-  "transaction_id": 0,
-  "gross_amount": 0,
-  "net_amount": 0,
-  "platform_fee": 0,
-  "gateway_fee": 0,
-  "transaction_type": "string",
-  "meta": {},
-  "purchase_date": 1626667557,
-  "wallet_type": "string",
-  "balance": 0,
-  "payment_method_id": "string"
+  "display_amount": 0,
+  "idempotent_key": "string"
 }';
 const headers = {
-  'Origin':'https://mod.io',
   'Authorization':'Bearer {access-token}',
   'Content-Type':'application/x-www-form-urlencoded',
   'Accept':'application/json'
@@ -15251,7 +15229,6 @@ fetch('https://*.modapi.io/v1/games/{game-id}/mods/{mod-id}/checkout',
 ```python
 import requests
 headers = {
-  'Origin': 'https://mod.io',
   'Authorization': 'Bearer {access-token}',
   'Content-Type': 'application/x-www-form-urlencoded',
   'Accept': 'application/json'
@@ -15282,11 +15259,12 @@ System.out.println(response.toString());
 
 `POST /games/{game-id}/mods/{mod-id}/checkout`
 
-Purchase an item. A Successful request will return the newly created [Checkout Process Object](#checkout-process-object).
+Purchase an item. A Successful request will return the newly created [Pay Object](#pay-object).
 
      Parameter|Type|Required|Description
      ---|---|---|---|
      display_amount|integer|true|The amount that was shown to the user for the purchase.
+     idempotent_key|string|true|The use of the idempotency key is for if in the event of a connection error, you can confidently reattempt the request without the concern of inadvertently creating a duplicate purchase or executing the purchase twice. All idempotent keys last 24 hours.
 
 > Example response
 
@@ -15314,24 +15292,24 @@ Status|Meaning|Error Ref|Description|Response Schema
 400|[Bad Request](https://tools.ietf.org/html/rfc7231#section-6.5.1)|15004|The authenticated user is already subscribed to the mod.|[Error Object](#schemaerror_object)
 402|[Payment Required](https://tools.ietf.org/html/rfc7231#section-6.5.2)|900030|The payment failed. Please try again later.|[Error Object](#schemaerror_object)
 403|[Forbidden](https://tools.ietf.org/html/rfc7231#section-6.5.3)|15011|The item has not been accepted and can not be purchased at this time.|[Error Object](#schemaerror_object)
-404|[Not Found](https://tools.ietf.org/html/rfc7231#section-6.5.4)|900022|The game may not be currently active for monetisation.|[Error Object](#schemaerror_object)
+404|[Not Found](https://tools.ietf.org/html/rfc7231#section-6.5.4)|900022|The game may not be currently active for monetization.|[Error Object](#schemaerror_object)
 422|[Unprocessable Entity](https://tools.ietf.org/html/rfc2518#section-10.3)|900035|The given display price does not match the price of the mod.|[Error Object](#schemaerror_object)
 422|[Unprocessable Entity](https://tools.ietf.org/html/rfc2518#section-10.3)|900008|Unable to fetch the accounts' wallet. Please confirm the account has one|[Error Object](#schemaerror_object)
-422|[Unprocessable Entity](https://tools.ietf.org/html/rfc2518#section-10.3)|900001|Unable to communicate with the monetisation system. Please try again later.|[Error Object](#schemaerror_object)
+422|[Unprocessable Entity](https://tools.ietf.org/html/rfc2518#section-10.3)|900001|Unable to communicate with the monetization system. Please try again later.|[Error Object](#schemaerror_object)
 422|[Unprocessable Entity](https://tools.ietf.org/html/rfc2518#section-10.3)|900034|The account already owns this item.|[Error Object](#schemaerror_object)
 422|[Unprocessable Entity](https://tools.ietf.org/html/rfc2518#section-10.3)|900049|The account has insufficent funds to make this purchase.|[Error Object](#schemaerror_object)
-422|[Unprocessable Entity](https://tools.ietf.org/html/rfc2518#section-10.3)|900002|A failure has occured when trying to authenticate with the monetisation system.|[Error Object](#schemaerror_object)
-422|[Unprocessable Entity](https://tools.ietf.org/html/rfc2518#section-10.3)|900007|The account has not been created with monetisation.|[Error Object](#schemaerror_object)
+422|[Unprocessable Entity](https://tools.ietf.org/html/rfc2518#section-10.3)|900002|A failure has occured when trying to authenticate with the monetization system.|[Error Object](#schemaerror_object)
+422|[Unprocessable Entity](https://tools.ietf.org/html/rfc2518#section-10.3)|900007|The account has not been created with monetization.|[Error Object](#schemaerror_object)
 422|[Unprocessable Entity](https://tools.ietf.org/html/rfc2518#section-10.3)|900000|An un expected error has occured. Please try again later.|[Error Object](#schemaerror_object)
 403|[Forbidden](https://tools.ietf.org/html/rfc7231#section-6.5.3)|15023|The item has been deleted and can not be purchased at this time.|[Error Object](#schemaerror_object)
-403|[Forbidden](https://tools.ietf.org/html/rfc7231#section-6.5.3)|900015|The account has been disabled from monetisation.|[Error Object](#schemaerror_object)
-403|[Forbidden](https://tools.ietf.org/html/rfc7231#section-6.5.3)|900012|The monetisation is currently in maintance mode. Please try again later.|[Error Object](#schemaerror_object)
+403|[Forbidden](https://tools.ietf.org/html/rfc7231#section-6.5.3)|900015|The account has been disabled from monetization.|[Error Object](#schemaerror_object)
+403|[Forbidden](https://tools.ietf.org/html/rfc7231#section-6.5.3)|900012|The monetization is currently in maintance mode. Please try again later.|[Error Object](#schemaerror_object)
 403|[Forbidden](https://tools.ietf.org/html/rfc7231#section-6.5.3)|15020|This mod is missing a file and cannot be subscribed to.|[Error Object](#schemaerror_object)
 403|[Forbidden](https://tools.ietf.org/html/rfc7231#section-6.5.3)|15001|This mod is hidden and the user cannot be subscribed to it.|[Error Object](#schemaerror_object)
 403|[Forbidden](https://tools.ietf.org/html/rfc7231#section-6.5.3)|15000|This mod is currently under DMCA and the user cannot be subscribed to it.|[Error Object](#schemaerror_object)
 <aside class="auth-notice">
 To perform this request, you must be authenticated via one of the following methods:
-<a href="#authentication">OAuth 2</a> (Scopes: web)
+<a href="#authentication">OAuth 2</a> (Scopes: write)
 </aside>
 # Wallets
 
@@ -15429,9 +15407,9 @@ System.out.println(response.toString());
 `GET /me/wallets`
 
 Get the _authenticated user_ wallets. Successful request will return a single [Wallet Object](#wallet-object).
-     Filter|Type|Description
-     ---|---|---
-     game_id|integer|Unique id of the parent game.
+     * Filter|Type|Description
+     * ---|---|---
+     * game_id|integer|Unique id of the parent game.
 
 > Example response
 
@@ -15439,8 +15417,8 @@ Get the _authenticated user_ wallets. Successful request will return a single [W
 {
   "type": "string",
   "payment_method_id": "string",
-  "currency": "",
-  "balance": "string"
+  "currency": "string",
+  "balance": 0
 }
 
 ```
@@ -15450,9 +15428,11 @@ Status|Meaning|Error Ref|Description|Response Schema
 ---|---|----|---|---|
 200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)||Request Successful|[Wallet Object](#schemawallet_object)
 404|[Not Found](https://tools.ietf.org/html/rfc7231#section-6.5.4)|14001|The game associated with the supplied api_key is currently not available.|[Error Object](#schemaerror_object)
-404|[Not Found](https://tools.ietf.org/html/rfc7231#section-6.5.4)|900022|The game may not be setup for monetisation as no active monetisation team could be found.|[Error Object](#schemaerror_object)
+404|[Not Found](https://tools.ietf.org/html/rfc7231#section-6.5.4)|900022|The game may not be setup for monetization as no active monetization team could be found.|[Error Object](#schemaerror_object)
 422|[Unprocessable Entity](https://tools.ietf.org/html/rfc2518#section-10.3)|900008|A failure has occured when trying to find the user's wallet.|[Error Object](#schemaerror_object)
-422|[Unprocessable Entity](https://tools.ietf.org/html/rfc2518#section-10.3)|900002|A failure has occured when trying to communicate with the monetisation system.|[Error Object](#schemaerror_object)
+422|[Unprocessable Entity](https://tools.ietf.org/html/rfc2518#section-10.3)|900002|A failure has occured when trying to communicate with the monetization system.|[Error Object](#schemaerror_object)
+422|[Unprocessable Entity](https://tools.ietf.org/html/rfc2518#section-10.3)|900007|Unable to create the account with monetization.|[Error Object](#schemaerror_object)
+422|[Unprocessable Entity](https://tools.ietf.org/html/rfc2518#section-10.3)|17034|Users email must be verified before they can create the account with monetization.|[Error Object](#schemaerror_object)
 <aside class="auth-notice">
 To perform this request, you must be authenticated via one of the following methods:
 <a href="#authentication">OAuth 2</a> (Scopes: read)
@@ -15675,9 +15655,9 @@ md5|string|MD5 hash of the file.
 
 
 
-## Game Monetisation Team Object 
+## Game Monetization Team Object 
 
-<a name="schemagame_monetisation_team_object"></a>
+<a name="schemagame_monetization_team_object"></a>
 
 ```json
 {
@@ -15689,7 +15669,7 @@ md5|string|MD5 hash of the file.
 
 Name|Type|Description
 ---|---|---|---|
-team_id|integer|The ID of the monetisation team.
+team_id|integer|The ID of the monetization team.
 
 
 
@@ -15709,8 +15689,8 @@ team_id|integer|The ID of the monetisation team.
   "submission_option": 1,
   "curation_option": 0,
   "community_options": 3,
-  "monetisation_options": 0,
-  "monetisation_team": {
+  "monetization_options": 0,
+  "monetization_team": {
     "team_id": "1"
   },
   "revenue_options": 0,
@@ -15804,9 +15784,9 @@ presentation_option|integer|Presentation style used on the mod.io website:<br><b
 submission_option|integer|Submission process modders must follow:<br><br>__0__ = Mod uploads must occur via the API using a tool created by the game developers<br>__1__ = Mod uploads can occur from anywhere, including the website and API
 curation_option|integer|Curation options enabled by this game to approve mods:<br><br>__0__ = No curation: Mods are immediately available to play<br>__1__ = Price change approval: Pricing changes for marketplace mods queued for acceptance<br>__2__ = Full curation: All mods must be accepted by someone to be listed<br>__?__ = Combine to enable multiple features (see BITWISE fields)
 community_options|integer|Community features enabled for this game:<br><br>__0__ = All of the options below are disabled<br>__1__ = Enable comments<br>__2__ = Enable guides<br>__4__ = Pin on homepage<br>__8__ = Show on homepage<br>__16__ = Show more on homepage<br>__32__ = Allow change status<br>__64__ = Enable Previews (Game must be hidden)<br>__128__ = Allow Preview Share-URL (Previews must be enabled)<br>__?__ = Add the options you want together, to enable multiple features (see [BITWISE fields](#bitwise-and-bitwise-and))
-monetisation_options|integer|Monetisation features mods can enable:<br><br>__0__ = All of the options below are disabled<br>__1__ = Enabled<br>__2__ = Enable marketplace<br>__?__ = Add the options you want together, to enable multiple features (see [BITWISE fields](#bitwise-and-bitwise-and))
-monetisation_team|[Game Monetisation Team Object](#schemagame_monetisation_team_object)|The monetisation team for this resource. [Game Monetisation Team Object](#game-monetisation-team-object).
-revenue_options|integer|Deprecated: Please use monetisation_options instead, this will be removed in subsequent API version.
+monetization_options|integer|Monetization features mods can enable:<br><br>__0__ = All of the options below are disabled<br>__1__ = Enabled<br>__2__ = Enable marketplace<br>__?__ = Add the options you want together, to enable multiple features (see [BITWISE fields](#bitwise-and-bitwise-and))
+monetization_team|[Game Monetization Team Object](#schemagame_monetization_team_object)|The monetization team for this resource. [Game Monetization Team Object](#game-monetization-team-object).
+revenue_options|integer|Deprecated: Please use monetization_options instead, this will be removed in subsequent API version.
 api_access_options|integer|Level of API access allowed by this game:<br><br>__0__ = All of the options below are disabled<br>__1__ = Allow 3rd parties to access this games API endpoints<br>__2__ = Allow mods to be downloaded directly (if disabled all download URLs will contain a frequently changing verification hash to stop unauthorized use)<br>__?__ = Add the options you want together, to enable multiple features (see [BITWISE fields](#bitwise-and-bitwise-and))
 maturity_options|integer|Mature content setup for this game:<br><br>__0__ = Don't allow mature content in mods<br>__1__ = Allow mature content in mods<br>__2__ = This game is for mature audiences only<br>__?__ = Add the options you want together, to enable multiple features (see [BITWISE fields](#bitwise-and-bitwise-and))
 ugc_name|string|Word used to describe user-generated content (mods, items, addons etc).
@@ -16032,8 +16012,8 @@ result_total|integer|Total number of results found.
       "submission_option": 1,
       "curation_option": 0,
       "community_options": 3,
-      "monetisation_options": 0,
-      "monetisation_team": {
+      "monetization_options": 0,
+      "monetization_team": {
         "team_id": "1"
       },
       "revenue_options": 0,
@@ -16679,7 +16659,7 @@ result_total|integer|Total number of results found.
       "date_live": 1499841403,
       "maturity_option": 0,
       "community_options": 3,
-      "monetisation_options": 0,
+      "monetization_options": 0,
       "price": 0,
       "tax": 0,
       "logo": {
@@ -17482,7 +17462,7 @@ images|[Image Object](#schemaimage_object)[]|Array of image objects (a gallery).
   "date_live": 1499841403,
   "maturity_option": 0,
   "community_options": 3,
-  "monetisation_options": 0,
+  "monetization_options": 0,
   "price": 0,
   "tax": 0,
   "logo": {
@@ -17596,7 +17576,7 @@ date_updated|integer|Unix timestamp of date mod was updated.
 date_live|integer|Unix timestamp of date mod was set live.
 maturity_option|integer|Maturity options flagged by the mod developer, this is only relevant if the parent game allows mods to be labelled as mature:<br><br>__0__ = None<br>__1__ = Alcohol<br>__2__ = Drugs<br>__4__ = Violence<br>__8__ = Explicit<br>__?__ = Add the options you want together, to enable multiple filters (see [BITWISE fields](#bitwise-and-bitwise-and))
 community_options|integer|Community features enabled for this mod:<br><br>__0__ = All of the options below are disabled<br>__1__ = Enable comments<br>__?__ = Add the options you want together, to enable multiple features (see [BITWISE fields](#bitwise-and-bitwise-and))
-monetisation_options|integer|Monetisation features enabled for this mod:<br><br>__0__ = All of the options below are disabled<br>__1__ = Enabled<br>__2__ = Marketplace On<br>__?__ = Add the options you want together, to enable multiple features (see [BITWISE fields](#bitwise-and-bitwise-and))
+monetization_options|integer|Monetization features enabled for this mod:<br><br>__0__ = All of the options below are disabled<br>__1__ = Enabled<br>__2__ = Marketplace On<br>__?__ = Add the options you want together, to enable multiple features (see [BITWISE fields](#bitwise-and-bitwise-and))
 price|integer|The price of the mod.
 tax|integer|The tax of the mod.
 logo|[Logo Object](#schemalogo_object)|Contains media URL's to the logo for the mod.
@@ -18291,8 +18271,8 @@ profile_url|string|URL to the users profile.
 {
   "type": "string",
   "payment_method_id": "string",
-  "currency": "",
-  "balance": "string"
+  "currency": "string",
+  "balance": 0
 } 
 ```
 
@@ -18303,7 +18283,7 @@ Name|Type|Description
 type|string|The type of the wallet.
 payment_method_id|string|The payment_method_id of the wallet.
 currency|string|The currency of the wallet.
-balance|string|The balance of the wallet.
+balance|integer|The balance of the wallet.
 
 
 
