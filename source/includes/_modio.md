@@ -253,7 +253,7 @@ Error Reference Code | Meaning
 `--parse_errorref_USER_DELETED` | Authenticated user account has been deleted.
 `--parse_errorref_USER_BANNED` | Authenticated user account has been banned by --parse_sitename admins.
 `--parse_errorref_RATE_LIMITED_GLOBAL` | You have been ratelimited globally for making too many requests. See [Rate Limiting](#rate-limiting).
-`--parse_errorref_RATE_LIMITED_ENDPOINT` | You have been ratelimited from this endpoint for making too many requests. See [Rate Limiting](#rate-limiting).
+`--parse_errorref_RATE_LIMITED_ENDPOINT` | You have been ratelimited from calling this endpoint again, for making too many requests. See [Rate Limiting](#rate-limiting).
 `--parse_errorref_FILE_CORRUPTED` | The submitted binary file is corrupted.
 `--parse_errorref_FILE_UNREADABLE` | The submitted binary file is unreadable.
 `--parse_errorref_JSON_MALFORMED` | You have used the `input_json` parameter with semantically incorrect JSON.
@@ -691,7 +691,7 @@ A brief summary when dealing with localized requests and responses:
 
 --parse_sitename implements rate limiting to stop users abusing the service. Exceeding the rate limit will result in requests receiving a `429 Too Many Requests` response until the reset time is reached. 
 
-It is _highly recommended_ you architect your app to check for the `429 Too Many Requests` HTTP response code, and ensure you do not continue to make requests until the duration specified in the `retry-after` header (in seconds) passes. Be aware we enforce global rate limits which will result in all requests being blocked (error ref --parse_errorref_RATE_LIMITED_GLOBAL). We also enforce per-endpoint rate limits which will only result in requests to that endpoint being blocked (error ref --parse_errorref_RATE_LIMITED_ENDPOINT) until the duration specified in the `retry-after` header (in seconds) passes, allowing you to continue to call other endpoints. Users who continue to send requests despite a `429` response could potentially have their credentials revoked. The following limits are implemented by default:
+It is _highly recommended_ you architect your app to check for the `429 Too Many Requests` HTTP response code, and ensure you do not continue to make requests until the duration specified in the `retry-after` header (in seconds) passes. Be aware we enforce global rate limits which will result in all requests being blocked (error ref **--parse_errorref_RATE_LIMITED_GLOBAL**). We also enforce per-endpoint rate limits which will only result in requests to that endpoint being blocked (error ref **--parse_errorref_RATE_LIMITED_ENDPOINT**) until the duration specified in the `retry-after` header (in seconds) passes, allowing you to continue to call other endpoints. Users who continue to send requests despite a `429` response could potentially have their credentials revoked. The following limits are implemented by default:
 
 ### Global API key Rate Limiting
 
@@ -711,7 +711,7 @@ It is _highly recommended_ you architect your app to check for the `429 Too Many
 ### Per-Endpoint Rate Limiting
 
 - Certain endpoints may override the defaults for security, spam or other reasons.
-- When this (error ref --parse_errorref_RATE_LIMITED_ENDPOINT) is encountered, its ok to continue requesting other endpoints, as the `retry-after` only applies to this endpoint.
+- When this (error ref **--parse_errorref_RATE_LIMITED_ENDPOINT**) is encountered, its ok to continue requesting other endpoints, as the `retry-after` only applies to this endpoint.
 
 ### Headers
 ```
