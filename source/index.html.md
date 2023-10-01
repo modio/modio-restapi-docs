@@ -273,7 +273,7 @@ Error Reference Code | Meaning
 `11005` | Access token is expired, or has been revoked.
 `11006` | Authenticated user account has been deleted.
 `11007` | Authenticated user account has been banned by mod.io admins.
-`11008` | You have been ratelimited for making too many requests. See [Rate Limiting](#rate-limiting).
+`--parse_errorref_RATE_LIMITED` | You have been ratelimited for making too many requests. See [Rate Limiting](#rate-limiting).
 `13001` | The submitted binary file is corrupted.
 `13002` | The submitted binary file is unreadable.
 `13004` | You have used the `input_json` parameter with semantically incorrect JSON.
@@ -748,7 +748,7 @@ retry-after: 57
 {
 	"error": {
 		"code": 429,
-		"error_ref": 11008,
+		"error_ref": --parse_errorref_RATE_LIMITED,
 		"message": "You have made too many requests in a short period of time, please wait and try again soon."
 	}
 }
