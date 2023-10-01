@@ -2,6 +2,12 @@
 
 # Changelog
 
+## Oct 1, 2023
+
+### Adding new rate limit error ref
+
+- Beginning Jan 1st, 2024, the error ref **--parse_errorref_RATE_LIMITED_ENDPOINT** will be returned when a rate limit applies only to the endpoint being called. Error ref **--parse_errorref_RATE_LIMITED_GLOBAL** will continue to be returned in all other scenarios where the rate limit applies to all endpoints.
+
 ## Oct 27, 2022
 
 ### Deprecating X-Ratelimit headers

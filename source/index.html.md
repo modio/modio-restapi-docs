@@ -766,6 +766,8 @@ From November 20th, 2022 - the rate limit headers below will no longer be return
  - `X-RateLimit-Remaining` - Number of requests remaining until requests are rejected.
  - `X-RateLimit-RetryAfter` - Amount of seconds until reset once you have been throttled (Only returned once rate limit exceeded).
 
+From January 1st, 2024 - the error ref **11009** will be returned when a rate limit applies only to the endpoint being called. Error ref **11008** will continue to be returned in all other scenarios where the rate limit applies to all endpoints.
+
 ### Optimize your requests
 
 You should always plan to minimize requests and cache API responses. It will make your app feel fluid and fast for your users. If your usage is excessive we shall reach out to discuss ways of optimizing, but our aim is to never restrict legitimate use of the API. We have set high limits that should cover 99% of use-cases, and are happy to [discuss your scenario](mailto:developers@mod.io?subject=API%20usage) if you require more.

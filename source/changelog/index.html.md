@@ -1,13 +1,19 @@
 # API Versions
 
 ## v1 (latest version)
-### Date Live: July 10, 2023, 6:16 am GMT
+### Date Live: August 15, 2023, 3:59 pm GMT
 
 Initial API Release.
 
 ### <span class="versionwrap">[View v1 docs](/)</span>
 
 # Changelog
+
+## Oct 1, 2023
+
+### Adding new rate limit error ref
+
+- Beginning Jan 1st, 2024, the error ref **--parse_errorref_RATE_LIMITED_ENDPOINT** will be returned when a rate limit applies only to the endpoint being called. Error ref **--parse_errorref_RATE_LIMITED_GLOBAL** will continue to be returned in all other scenarios where the rate limit applies to all endpoints.
 
 ## Oct 27, 2022
 
