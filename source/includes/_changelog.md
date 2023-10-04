@@ -2,6 +2,12 @@
 
 # Changelog
 
+## Oct 1, 2023
+
+### Adding new rate limit error ref
+
+- Beginning Jan 1st, 2024, the error ref **--parse_errorref_RATE_LIMITED_ENDPOINT** will be returned when a rate limit applies only to the endpoint being called. Error ref **--parse_errorref_RATE_LIMITED_GLOBAL** will continue to be returned in all other scenarios where the rate limit applies to all endpoints.
+
 ## Oct 27, 2022
 
 ### Deprecating X-Ratelimit headers
@@ -32,7 +38,7 @@ For the initial release of the API, __v1__ is a valid format and version. Future
 ```shell
 Example cURL request
 ---------------------
-curl -X GET --parse_apiurl/--parse_version/games?api_key=YourApiKey
+curl -X GET --parse_apiurl/games?api_key=YourApiKey
 ```
 
 When you make a request, setting the version of --parse_sitename is a requirement as it forms

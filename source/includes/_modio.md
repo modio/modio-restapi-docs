@@ -2,7 +2,7 @@
 
 ## --parse_sitename API --parse_version
 
-Welcome to the official documentation for [--parse_sitename](--parse_siteurl), an API for developers to add mod support to their games. We recommend you read our _Getting Started_ guide below to accurately and efficiently consume our REST API. 
+Welcome to the official documentation for [--parse_sitename](--parse_siteurl), an API for developers to add mod support to their games. Using our [SDKs and plugins](#implementation) for popular and custom game engines, getting your creator community started and making the mods they create discoverable and installable via your in-game menu is straight forward, with full cross-platform support. If you are a game developer, you can manage your games and API access via your [--parse_sitename library dashboard](--parse_siteurl/library). If you are a user creating tools and apps, you can request API access via your [--parse_sitename account](--parse_siteurl/me/access).
 
 __API path:__ [--parse_apiurl](--parse_apiurl) (see your API access dashboard)
 
@@ -18,12 +18,12 @@ Compatible with all builds of your game on all platforms and stores, --parse_sit
 
 ## Implementation
 
-Once you have added your game to --parse_sitename and got your game ID and API key, you can start integrating the --parse_sitename REST API into your game, tools and sites. There are 3 options to get connected which you can use interchangeably depending on your needs. Here's the breakdown of each option.
+Once you have added your game to --parse_sitename and got your [game ID and API key](--parse_siteurl/library), you can start integrating the --parse_sitename REST API into your game, tools and sites. There are 3 options to get connected which you can use interchangeably depending on your needs. Here's the breakdown of each option.
 
 Option | Usage | Suited for | Docs
 ---------- | ---------- | ---------- | ---------
 __API__ | For connecting directly to the --parse_sitename REST API. | Web apps that need a JSON REST API, or game developers that like a challenge and want control over their implementation. | You are reading them
-__SDK__ | Drop our [open source C/C++ SDK](--parse_sdkurl) into your game to call --parse_sitename functionality. | Developers that want a SDK that abstracts the uploading, downloading and unzip flows behind easy to use function calls. | [Here](--parse_sdkurl)
+__SDK__ | Drop our [open source C/C++ SDK](https://github.com/modio/modio-sdk) into your game to call --parse_sitename functionality. | Developers that want a SDK that abstracts the uploading, downloading and unzip flows behind easy to use function calls. | [Here](https://go.mod.io/sdk-docs)
 __Tools/Plugins__ | Use tools, plugins and wrappers created by the community to make implementation in various engines easy. | Game developers that want a pre-built modding solution for their engine (Unity, Unreal, GameMaker, Construct) of choice. | Available below
 
 ### Official Tools
@@ -254,7 +254,8 @@ Error Reference Code | Meaning
 `--parse_errorref_TOKEN_EXPIRED_OR_REVOKED` | Access token is expired, or has been revoked.
 `--parse_errorref_USER_DELETED` | Authenticated user account has been deleted.
 `--parse_errorref_USER_BANNED` | Authenticated user account has been banned by --parse_sitename admins.
-`--parse_errorref_RATE_LIMITED` | You have been ratelimited for making too many requests. See [Rate Limiting](#rate-limiting).
+`--parse_errorref_RATE_LIMITED_GLOBAL` | You have been ratelimited globally for making too many requests. See [Rate Limiting](#rate-limiting).
+`--parse_errorref_RATE_LIMITED_ENDPOINT` | You have been ratelimited from calling this endpoint again, for making too many requests. See [Rate Limiting](#rate-limiting).
 `--parse_errorref_FILE_CORRUPTED` | The submitted binary file is corrupted.
 `--parse_errorref_FILE_UNREADABLE` | The submitted binary file is unreadable.
 `--parse_errorref_JSON_MALFORMED` | You have used the `input_json` parameter with semantically incorrect JSON.
@@ -692,26 +693,27 @@ A brief summary when dealing with localized requests and responses:
 
 --parse_sitename implements rate limiting to stop users abusing the service. Exceeding the rate limit will result in requests receiving a `429 Too Many Requests` response until the reset time is reached. 
 
-It is _highly recommended_ you architect your app to check for the `429 Too Many Requests` HTTP response code, and ensure you do not continue to make requests until the duration specified in the `retry-after` header (in seconds) passes. Users who continue to send requests despite a `429` response could potentially have their credentials revoked. The following limits are implemented by default:
+It is _highly recommended_ you architect your app to check for the `429 Too Many Requests` HTTP response code, and ensure you do not continue to make requests until the duration specified in the `retry-after` header (in seconds) passes. Be aware we enforce global rate limits which will result in all requests being blocked (error ref **--parse_errorref_RATE_LIMITED_GLOBAL**). We also enforce per-endpoint rate limits which will only result in requests to that endpoint being blocked (error ref **--parse_errorref_RATE_LIMITED_ENDPOINT**) until the duration specified in the `retry-after` header (in seconds) passes, allowing you to continue to call other endpoints. Users who continue to send requests despite a `429` response could potentially have their credentials revoked. The following limits are implemented by default:
 
-### API key Rate Limiting
+### Global API key Rate Limiting
 
 - API keys linked to a game have __unlimited requests__.
 - API keys linked to a user have __60 requests per minute__.
 
-### OAuth2 Rate Limiting
+### Global OAuth2 Rate Limiting
 
 - User tokens are limited to __120 requests per minute__. 
 - User token writes are limited to __60 requests per minute__. 
 
-### IP Rate Limiting
+### Global IP Rate Limiting
 
 - IPs are limited to __1000 requests per minute__. 
 - IP writes are limited to __60 requests per minute__. 
 
-### Other Rate Limiting
+### Per-Endpoint Rate Limiting
 
 - Certain endpoints may override the defaults for security, spam or other reasons.
+- When this (error ref **--parse_errorref_RATE_LIMITED_ENDPOINT**) is encountered, its ok to continue requesting other endpoints, as the `retry-after` only applies to this endpoint.
 
 ### Headers
 ```
@@ -729,7 +731,7 @@ retry-after: 57
 {
 	"error": {
 		"code": 429,
-		"error_ref": --parse_errorref_RATE_LIMITED,
+		"error_ref": --parse_errorref_RATE_LIMITED_GLOBAL,
 		"message": "You have made too many requests in a short period of time, please wait and try again soon."
 	}
 }
@@ -746,6 +748,8 @@ From November 20th, 2022 - the rate limit headers below will no longer be return
  - `X-RateLimit-Limit` - Number of requests you can make from the supplied API key/access token per minute.
  - `X-RateLimit-Remaining` - Number of requests remaining until requests are rejected.
  - `X-RateLimit-RetryAfter` - Amount of seconds until reset once you have been throttled (Only returned once rate limit exceeded).
+
+From January 1st, 2024 - the error ref **--parse_errorref_RATE_LIMITED_ENDPOINT** will be returned when a rate limit applies only to the endpoint being called. Error ref **--parse_errorref_RATE_LIMITED_GLOBAL** will continue to be returned in all other scenarios where the rate limit applies to all endpoints.
 
 ### Optimize your requests
 
