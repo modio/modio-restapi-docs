@@ -1,7 +1,7 @@
 # API Versions
 
 ## v1 (latest version)
-### Date Live: August 15, 2023, 3:59 pm GMT
+### Date Updated: August 15, 2023, 3:59 pm GMT
 
 Initial API Release.
 
@@ -9,17 +9,13 @@ Initial API Release.
 
 # Changelog
 
-## Oct 1, 2023
+### Oct 1, 2023 - Adding new rate limit error ref
 
-### Adding new rate limit error ref
+Beginning Jan 1st, 2024, the error ref **11009** will be returned when a rate limit applies only to the endpoint being called. Error ref **11008** will continue to be returned in all other scenarios where the [rate limit](/#rate-limiting) applies to all endpoints.
 
-- Beginning Jan 1st, 2024, the error ref **--parse_errorref_RATE_LIMITED_ENDPOINT** will be returned when a rate limit applies only to the endpoint being called. Error ref **--parse_errorref_RATE_LIMITED_GLOBAL** will continue to be returned in all other scenarios where the rate limit applies to all endpoints.
+### Oct 27, 2022 - Deprecating X-Ratelimit headers
 
-## Oct 27, 2022
-
-### Deprecating X-Ratelimit headers
-
-- Beginning Nov 20th, 2022, all custom rate limit headers `X-RateLimit-Limit`, `X-RateLimit-Remaining`, `X-RateLimit-RetryAfter` will no longer be returned. They will be replaced with `retry-after` when the [ratelimit is exceeded](/#rate-limiting).
+Beginning Nov 20th, 2022, all custom rate limit headers `X-RateLimit-Limit`, `X-RateLimit-Remaining`, `X-RateLimit-RetryAfter` will no longer be returned. They will be replaced with `retry-after` when the [ratelimit is exceeded](/#rate-limiting).
 
 # How We Version
 
