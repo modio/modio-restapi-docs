@@ -305,6 +305,9 @@
             <a href="#changelog" class="toc-h1 toc-link" data-title="Changelog"><span class="reficon"><img src="images/cog-white.svg" alt="Reference" class="menu-reference-icon"></span> Changelog</a>
               <ul class="toc-list-h2">
                   <li>
+                    <a href="#oct-1-2023" class="toc-h2 toc-link" data-title="Changelog">Oct 1, 2023</a>
+                  </li>
+                  <li>
                     <a href="#oct-27-2022" class="toc-h2 toc-link" data-title="Changelog">Oct 27, 2022</a>
                   </li>
               </ul>
@@ -341,9 +344,13 @@
     <div class="page-wrapper">
       <div class="dark-box"></div>
       <div class="content">
-        <h1 id="api-versions">API Versions</h1><h2 id="v1-latest-version">v1 (latest version)</h2><h3 id="date-live-november-23-2022-8-28-am-gmt">Date Live: November 23, 2022, 8:28 am GMT</h3>
+        <h1 id="api-versions">API Versions</h1><h2 id="v1-latest-version">v1 (latest version)</h2><h3 id="date-live-august-15-2023-3-59-pm-gmt">Date Live: August 15, 2023, 3:59 pm GMT</h3>
 <p>Initial API Release.</p>
-<h3 id="view-v1-docs"><span class="versionwrap"><a href="/">View v1 docs</a></span></h3><h1 id="changelog">Changelog</h1><h2 id="oct-27-2022">Oct 27, 2022</h2><h3 id="deprecating-x-ratelimit-headers">Deprecating X-Ratelimit headers</h3>
+<h3 id="view-v1-docs"><span class="versionwrap"><a href="/">View v1 docs</a></span></h3><h1 id="changelog">Changelog</h1><h2 id="oct-1-2023">Oct 1, 2023</h2><h3 id="adding-new-rate-limit-error-ref">Adding new rate limit error ref</h3>
+<ul>
+<li>Beginning Jan 1st, 2024, the error ref <strong>--parse_errorref_RATE_LIMITED_ENDPOINT</strong> will be returned when a rate limit applies only to the endpoint being called. Error ref <strong>--parse_errorref_RATE_LIMITED_GLOBAL</strong> will continue to be returned in all other scenarios where the rate limit applies to all endpoints.</li>
+</ul>
+<h2 id="oct-27-2022">Oct 27, 2022</h2><h3 id="deprecating-x-ratelimit-headers">Deprecating X-Ratelimit headers</h3>
 <ul>
 <li>Beginning Nov 20th, 2022, all custom rate limit headers <code>X-RateLimit-Limit</code>, <code>X-RateLimit-Remaining</code>, <code>X-RateLimit-RetryAfter</code> will no longer be returned. They will be replaced with <code>retry-after</code> when the <a href="/#rate-limiting">ratelimit is exceeded</a>.</li>
 </ul>
@@ -365,7 +372,7 @@
 </ul>
 <h3 id="version-requests">Version Requests</h3><div class="highlight"><pre class="highlight shell tab-shell"><code>Example cURL request
 <span class="nt">---------------------</span>
-curl <span class="nt">-X</span> GET https://api.mod.io/v1/games?api_key<span class="o">=</span>YourApiKey
+curl <span class="nt">-X</span> GET https://<span class="k">*</span>.modapi.io/v1/games?api_key<span class="o">=</span>YourApiKey
 </code></pre></div>
 <p>When you make a request, setting the version of mod.io is a requirement as it forms
 part of the URL required to make a successful request. </p>

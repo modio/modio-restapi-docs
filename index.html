@@ -1005,7 +1005,7 @@
       <div class="dark-box"></div>
       <div class="content">
         <h1 id="getting-started">Getting Started</h1><h2 id="mod-io-api-v1">mod.io API v1</h2>
-<p>Welcome to the official documentation for <a href="https://mod.io">mod.io</a>, an API for developers to add mod support to their games. We recommend you read our <em>Getting Started</em> guide below to accurately and efficiently consume our REST API. </p>
+<p>Welcome to the official documentation for <a href="https://mod.io">mod.io</a>, an API for developers to add mod support to their games. Using our <a href="#implementation">SDKs and plugins</a> for popular and custom game engines, getting your creator community started and making the mods they create discoverable and installable via your in-game menu is straight forward, with full cross-platform support. If you are a game developer, you can manage your games and API access via your <a href="https://mod.io/library">mod.io library dashboard</a>. If you are a user creating tools and apps, you can request API access via your <a href="https://mod.io/me/access">mod.io account</a>.</p>
 
 <p><strong>API path:</strong> <a href="https://*.modapi.io/v1">https://*.modapi.io/v1</a> (see your API access dashboard)</p>
 
@@ -1017,7 +1017,7 @@
 
 <p><img src="images/sdk-1a0606e3.png" alt="mod.io Overview"></p>
 <h2 id="implementation">Implementation</h2>
-<p>Once you have added your game to mod.io and got your game ID and API key, you can start integrating the mod.io REST API into your game, tools and sites. There are 3 options to get connected which you can use interchangeably depending on your needs. Here's the breakdown of each option.</p>
+<p>Once you have added your game to mod.io and got your <a href="https://mod.io/library">game ID and API key</a>, you can start integrating the mod.io REST API into your game, tools and sites. There are 3 options to get connected which you can use interchangeably depending on your needs. Here's the breakdown of each option.</p>
 
 <table>
 <thead>
@@ -1037,7 +1037,7 @@
 </tr>
 <tr>
 <td><strong>SDK</strong></td>
-<td>Drop our <a href="https://go.mod.io/sdk-docs">open source C/C++ SDK</a> into your game to call mod.io functionality.</td>
+<td>Drop our <a href="https://github.com/modio/modio-sdk">open source C/C++ SDK</a> into your game to call mod.io functionality.</td>
 <td>Developers that want a SDK that abstracts the uploading, downloading and unzip flows behind easy to use function calls.</td>
 <td><a href="https://go.mod.io/sdk-docs">Here</a></td>
 </tr>
@@ -1475,8 +1475,12 @@
 <td>Authenticated user account has been banned by mod.io admins.</td>
 </tr>
 <tr>
-<td><code>--parse_errorref_RATE_LIMITED</code></td>
-<td>You have been ratelimited for making too many requests. See <a href="#rate-limiting">Rate Limiting</a>.</td>
+<td><code>11008</code></td>
+<td>You have been ratelimited globally for making too many requests. See <a href="#rate-limiting">Rate Limiting</a>.</td>
+</tr>
+<tr>
+<td><code>11009</code></td>
+<td>You have been ratelimited from calling this endpoint again, for making too many requests. See <a href="#rate-limiting">Rate Limiting</a>.</td>
 </tr>
 <tr>
 <td><code>13001</code></td>
@@ -2027,25 +2031,26 @@ non-english content you must supply the <code>Content-Language</code> header in 
 <h2 id="rate-limiting">Rate Limiting</h2>
 <p>mod.io implements rate limiting to stop users abusing the service. Exceeding the rate limit will result in requests receiving a <code>429 Too Many Requests</code> response until the reset time is reached. </p>
 
-<p>It is <em>highly recommended</em> you architect your app to check for the <code>429 Too Many Requests</code> HTTP response code, and ensure you do not continue to make requests until the duration specified in the <code>retry-after</code> header (in seconds) passes. Users who continue to send requests despite a <code>429</code> response could potentially have their credentials revoked. The following limits are implemented by default:</p>
-<h3 id="api-key-rate-limiting">API key Rate Limiting</h3>
+<p>It is <em>highly recommended</em> you architect your app to check for the <code>429 Too Many Requests</code> HTTP response code, and ensure you do not continue to make requests until the duration specified in the <code>retry-after</code> header (in seconds) passes. Be aware we enforce global rate limits which will result in all requests being blocked (error ref <strong>11008</strong>). We also enforce per-endpoint rate limits which will only result in requests to that endpoint being blocked (error ref <strong>11009</strong>) until the duration specified in the <code>retry-after</code> header (in seconds) passes, allowing you to continue to call other endpoints. Users who continue to send requests despite a <code>429</code> response could potentially have their credentials revoked. The following limits are implemented by default:</p>
+<h3 id="global-api-key-rate-limiting">Global API key Rate Limiting</h3>
 <ul>
 <li>API keys linked to a game have <strong>unlimited requests</strong>.</li>
 <li>API keys linked to a user have <strong>60 requests per minute</strong>.</li>
 </ul>
-<h3 id="oauth2-rate-limiting">OAuth2 Rate Limiting</h3>
+<h3 id="global-oauth2-rate-limiting">Global OAuth2 Rate Limiting</h3>
 <ul>
 <li>User tokens are limited to <strong>120 requests per minute</strong>. </li>
 <li>User token writes are limited to <strong>60 requests per minute</strong>. </li>
 </ul>
-<h3 id="ip-rate-limiting">IP Rate Limiting</h3>
+<h3 id="global-ip-rate-limiting">Global IP Rate Limiting</h3>
 <ul>
 <li>IPs are limited to <strong>1000 requests per minute</strong>. </li>
 <li>IP writes are limited to <strong>60 requests per minute</strong>. </li>
 </ul>
-<h3 id="other-rate-limiting">Other Rate Limiting</h3>
+<h3 id="per-endpoint-rate-limiting">Per-Endpoint Rate Limiting</h3>
 <ul>
 <li>Certain endpoints may override the defaults for security, spam or other reasons.</li>
+<li>When this (error ref <strong>11009</strong>) is encountered, its ok to continue requesting other endpoints, as the <code>retry-after</code> only applies to this endpoint.</li>
 </ul>
 <h3 id="headers">Headers</h3><div class="highlight"><pre class="highlight plaintext"><code>Example HTTP Header Response
 ---------------------
@@ -2082,6 +2087,8 @@ retry-after: 57
 <li>
 <code>X-RateLimit-RetryAfter</code> - Amount of seconds until reset once you have been throttled (Only returned once rate limit exceeded).</li>
 </ul>
+
+<p>From January 1st, 2024 - the error ref <strong>11009</strong> will be returned when a rate limit applies only to the endpoint being called. Error ref <strong>11008</strong> will continue to be returned in all other scenarios where the rate limit applies to all endpoints.</p>
 <h3 id="optimize-your-requests">Optimize your requests</h3>
 <p>You should always plan to minimize requests and cache API responses. It will make your app feel fluid and fast for your users. If your usage is excessive we shall reach out to discuss ways of optimizing, but our aim is to never restrict legitimate use of the API. We have set high limits that should cover 99% of use-cases, and are happy to <a href="mailto:developers@mod.io?subject=API%20usage">discuss your scenario</a> if you require more.</p>
 <h2 id="testing">Testing</h2>
