@@ -4,7 +4,8 @@
 
 Welcome to the official documentation for [--parse_sitename](--parse_siteurl), an API for developers to add mod support to their games. Using our [SDKs and plugins](#implementation) for popular and custom game engines, getting your creator community started and making the mods they create discoverable and installable via your in-game menu is straight forward, with full cross-platform support. If you are a game developer, you can manage your games and API access via your [--parse_sitename library dashboard](--parse_siteurl/library). If you are a user creating tools and apps, you can request API access via your [--parse_sitename account](--parse_siteurl/me/access).
 
-__API path:__ [--parse_apiurl](--parse_apiurl) (see your API access dashboard)
+__API path:__ [--parse_apiurl](--parse_apiurl) (see your API access dashboard)  
+__Swagger JSON:__ [--parse_apiurl/swagger](--parse_apiurl/swagger)
 
 __Current version:__ --parse_vdropdown 
 
