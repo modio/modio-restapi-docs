@@ -8180,22 +8180,98 @@ curl <span class="nt">-X</span> POST https://<span class="k">*</span>.modapi.io/
 </code></pre></div>
 <p><span class="httpmethod POST">POST</span> <span class="endpointheading">/games/{game-id}/mods/{mod-id}</span></p>
 
-<p>Edit details for a mod. If you want to update the <code>logo</code> or media associated with this mod, you need to use the <a href="#add-mod-media">Add Mod Media</a> endpoint. The same applies to <a href="#add-modfile">Mod Files</a>, <a href="#add-mod-kvp-metadata">Metadata Key Value Pairs</a> and <a href="#add-mod-dependencies">Dependencies</a> which are all managed via other endpoints. Successful request will return the updated <a href="#mod-object">Mod Object</a>.
-Parameter|Type|Required|Description
-     ---|---|---|---|
-    logo|file|true|Image file which will represent your mods logo. Must be gif, jpg or png format and cannot exceed 8MB in filesize. Dimensions must be at least 512x288 and we recommended you supply a high resolution image with a 16 / 9 ratio. mod.io will use this image to make three thumbnails for the dimensions 320x180, 640x360 and 1280x720.
-    status|integer||Status of a mod. The mod must have at least one uploaded <code>modfile</code> to be 'accepted' (best if this field is controlled by game admins, see <a href="#status-amp-visibility">status and visibility</a> for details):<br><br><strong>0</strong> = Not accepted<br><strong>1</strong> = Accepted (game admins only)<br><strong>3</strong> = Deleted (use the <a href="#delete-mod">delete mod</a> endpoint to set this status)
-    visible|integer||Visibility of the mod (best if this field is controlled by mod admins, see <a href="#status-amp-visibility">status and visibility</a> for details):<br><br><strong>0</strong> = Hidden<br><strong>1</strong> = Public
-    name|string||Name of your mod. Cannot exceed 50 characters.
-    name_id|string||Path for the mod on mod.io. For example: https://mod.io/g/gamename/m/<strong>mod-name-id-here</strong>. Cannot exceed 80 characters.
-    summary|string||Summary for your mod, giving a brief overview of what it's about. Cannot exceed 250 characters.
-    description|string||Detailed description for your mod, which can include details such as 'About', 'Features', 'Install Instructions', 'FAQ', etc. HTML supported and encouraged.
-    homepage_url|string||Official homepage for your mod. Must be a valid URL.
-    stock|integer||Maximium number of subscribers for this mod. A value of 0 disables this limit.
-    maturity_option|integer||Choose if this mod contains any of the following mature content.<br><br><strong>NOTE:</strong> The value of this field will default to 0 unless the parent game allows you to flag mature content (see <code>maturity_options</code> field in <a href="#game-object">Game Object</a>). <br><br><strong>0</strong> = None set<br><strong>1</strong> = Alcohol<br><strong>2</strong> = Drugs<br><strong>4</strong> = Violence<br><strong>8</strong> = Explicit<br><strong>?</strong> = Add the options you want together, to enable multiple options (see <a href="#bitwise-and-bitwise-and">BITWISE fields</a>)
-    community_options|integer||Community features enabled for this mod:<br><br><strong>0</strong> = All of the options below are disabled<br><strong>1</strong> = Enable comments<br><strong>64</strong> = Enable previews<br><strong>?</strong> = Add the options you want together, to enable multiple options (see <a href="#bitwise-and-bitwise-and">BITWISE fields</a>)
-    metadata_blob|string||Metadata stored by the game developer which may include properties as to how the item works, or other information you need to display. Metadata can also be stored as searchable <a href="#metadata">key value pairs</a>, and to individual <a href="#get-modfiles">mod files</a>.
-    tags[]|string||When providing this attribute, if the input array contains tags, they will entirely replace any existing tags assigned to the mod. <strong>If an empty array is passed, all currently assigned tags will be removed</strong>. If <code>null</code> or omitted, no changes will be made to the assigned tags. To determine what tags are eligible, see the tags values within <code>tag_options</code> column on the parent <a href="#game-object">Game Object</a>.</p>
+<p>Edit details for a mod. If you want to update the <code>logo</code> or media associated with this mod, you need to use the <a href="#add-mod-media">Add Mod Media</a> endpoint. The same applies to <a href="#add-modfile">Mod Files</a>, <a href="#add-mod-kvp-metadata">Metadata Key Value Pairs</a> and <a href="#add-mod-dependencies">Dependencies</a> which are all managed via other endpoints. Successful request will return the updated <a href="#mod-object">Mod Object</a>.</p>
+
+<table>
+<thead>
+<tr>
+<th>Parameter</th>
+<th>Type</th>
+<th>Required</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>logo</td>
+<td>file</td>
+<td>true</td>
+<td>Image file which will represent your mods logo. Must be gif, jpg or png format and cannot exceed 8MB in filesize. Dimensions must be at least 512x288 and we recommended you supply a high resolution image with a 16 / 9 ratio. mod.io will use this image to make three thumbnails for the dimensions 320x180, 640x360 and 1280x720.</td>
+</tr>
+<tr>
+<td>status</td>
+<td>integer</td>
+<td></td>
+<td>Status of a mod. The mod must have at least one uploaded <code>modfile</code> to be 'accepted' (best if this field is controlled by game admins, see <a href="#status-amp-visibility">status and visibility</a> for details):<br><br><strong>0</strong> = Not accepted<br><strong>1</strong> = Accepted (game admins only)<br><strong>3</strong> = Deleted (use the <a href="#delete-mod">delete mod</a> endpoint to set this status)</td>
+</tr>
+<tr>
+<td>visible</td>
+<td>integer</td>
+<td></td>
+<td>Visibility of the mod (best if this field is controlled by mod admins, see <a href="#status-amp-visibility">status and visibility</a> for details):<br><br><strong>0</strong> = Hidden<br><strong>1</strong> = Public</td>
+</tr>
+<tr>
+<td>name</td>
+<td>string</td>
+<td></td>
+<td>Name of your mod. Cannot exceed 50 characters.</td>
+</tr>
+<tr>
+<td>name_id</td>
+<td>string</td>
+<td></td>
+<td>Path for the mod on mod.io. For example: https://mod.io/g/gamename/m/<strong>mod-name-id-here</strong>. Cannot exceed 80 characters.</td>
+</tr>
+<tr>
+<td>summary</td>
+<td>string</td>
+<td></td>
+<td>Summary for your mod, giving a brief overview of what it's about. Cannot exceed 250 characters.</td>
+</tr>
+<tr>
+<td>description</td>
+<td>string</td>
+<td></td>
+<td>Detailed description for your mod, which can include details such as 'About', 'Features', 'Install Instructions', 'FAQ', etc. HTML supported and encouraged.</td>
+</tr>
+<tr>
+<td>homepage_url</td>
+<td>string</td>
+<td></td>
+<td>Official homepage for your mod. Must be a valid URL.</td>
+</tr>
+<tr>
+<td>stock</td>
+<td>integer</td>
+<td></td>
+<td>Maximium number of subscribers for this mod. A value of 0 disables this limit.</td>
+</tr>
+<tr>
+<td>maturity_option</td>
+<td>integer</td>
+<td></td>
+<td>Choose if this mod contains any of the following mature content.<br><br><strong>NOTE:</strong> The value of this field will default to 0 unless the parent game allows you to flag mature content (see <code>maturity_options</code> field in <a href="#game-object">Game Object</a>). <br><br><strong>0</strong> = None set<br><strong>1</strong> = Alcohol<br><strong>2</strong> = Drugs<br><strong>4</strong> = Violence<br><strong>8</strong> = Explicit<br><strong>?</strong> = Add the options you want together, to enable multiple options (see <a href="#bitwise-and-bitwise-and">BITWISE fields</a>)</td>
+</tr>
+<tr>
+<td>community_options</td>
+<td>integer</td>
+<td></td>
+<td>Community features enabled for this mod:<br><br><strong>0</strong> = All of the options below are disabled<br><strong>1</strong> = Enable comments<br><strong>64</strong> = Enable previews<br><strong>?</strong> = Add the options you want together, to enable multiple options (see <a href="#bitwise-and-bitwise-and">BITWISE fields</a>)</td>
+</tr>
+<tr>
+<td>metadata_blob</td>
+<td>string</td>
+<td></td>
+<td>Metadata stored by the game developer which may include properties as to how the item works, or other information you need to display. Metadata can also be stored as searchable <a href="#metadata">key value pairs</a>, and to individual <a href="#get-modfiles">mod files</a>.</td>
+</tr>
+<tr>
+<td>tags[]</td>
+<td>string</td>
+<td></td>
+<td>When providing this attribute, if the input array contains tags, they will entirely replace any existing tags assigned to the mod. <strong>If an empty array is passed, all currently assigned tags will be removed</strong>. If <code>null</code> or omitted, no changes will be made to the assigned tags. To determine what tags are eligible, see the tags values within <code>tag_options</code> column on the parent <a href="#game-object">Game Object</a>.</td>
+</tr>
+</tbody>
+</table>
 
 <blockquote>
 <p>Example response</p>
@@ -8380,13 +8456,6 @@ Parameter|Type|Required|Description
 <td><a href="https://tools.ietf.org/html/rfc7231#section-6.5.3">Forbidden</a></td>
 <td>15016</td>
 <td>A mod cannot be set live without an associated modfile.</td>
-<td><a href="#schemaerror_object">Error Object</a></td>
-</tr>
-<tr>
-<td>400</td>
-<td><a href="https://tools.ietf.org/html/rfc7231#section-6.5.1">Bad Request</a></td>
-<td>19301</td>
-<td>This game is not currently allowing edits to mod. Please contact the game administrator if you wish to make changes to this mod.</td>
 <td><a href="#schemaerror_object">Error Object</a></td>
 </tr>
 </tbody>
