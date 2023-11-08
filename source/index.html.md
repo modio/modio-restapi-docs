@@ -5380,8 +5380,9 @@ System.out.println(response.toString());
 `POST /games/{game-id}/mods/{mod-id}`
 
 Edit details for a mod. If you want to update the `logo` or media associated with this mod, you need to use the [Add Mod Media](#add-mod-media) endpoint. The same applies to [Mod Files](#add-modfile), [Metadata Key Value Pairs](#add-mod-kvp-metadata) and [Dependencies](#add-mod-dependencies) which are all managed via other endpoints. Successful request will return the updated [Mod Object](#mod-object).
-Parameter|Type|Required|Description
-     ---|---|---|---|
+
+    Parameter|Type|Required|Description
+    ---|---|---|---|
     logo|file|true|Image file which will represent your mods logo. Must be gif, jpg or png format and cannot exceed 8MB in filesize. Dimensions must be at least 512x288 and we recommended you supply a high resolution image with a 16 / 9 ratio. mod.io will use this image to make three thumbnails for the dimensions 320x180, 640x360 and 1280x720.
     status|integer||Status of a mod. The mod must have at least one uploaded `modfile` to be 'accepted' (best if this field is controlled by game admins, see [status and visibility](#status-amp-visibility) for details):<br><br>__0__ = Not accepted<br>__1__ = Accepted (game admins only)<br>__3__ = Deleted (use the [delete mod](#delete-mod) endpoint to set this status)
     visible|integer||Visibility of the mod (best if this field is controlled by mod admins, see [status and visibility](#status-amp-visibility) for details):<br><br>__0__ = Hidden<br>__1__ = Public
@@ -5536,7 +5537,6 @@ Status|Meaning|Error Ref|Description|Response Schema
 403|[Forbidden](https://tools.ietf.org/html/rfc7231#section-6.5.3)|15014|The authenticated user does not have permission to update the maturity options for this mod, this action is restricted to team managers & administrators only.|[Error Object](#schemaerror_object)
 403|[Forbidden](https://tools.ietf.org/html/rfc7231#section-6.5.3)|15015|The authenticated user does not have permission to update the status for this mod, this action is restricted to team managers & administrators only.|[Error Object](#schemaerror_object)
 403|[Forbidden](https://tools.ietf.org/html/rfc7231#section-6.5.3)|15016|A mod cannot be set live without an associated modfile.|[Error Object](#schemaerror_object)
-400|[Bad Request](https://tools.ietf.org/html/rfc7231#section-6.5.1)|19301|This game is not currently allowing edits to mod. Please contact the game administrator if you wish to make changes to this mod.|[Error Object](#schemaerror_object)
 <aside class="auth-notice">
 To perform this request, you must be authenticated via one of the following methods:
 <a href="#authentication">OAuth 2</a> (Scopes: write)
