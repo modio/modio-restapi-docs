@@ -1193,11 +1193,11 @@
 <p>Authentication can be done via 5 ways:</p>
 
 <ul>
-<li>Use an <a href="https://mod.io/me/access">API key</a> for <strong>Read-only</strong> access</li>
+<li>Use an <a href="https://mod.io/me/access">API key</a> for <strong>Read-only</strong> access (get a <a href="https://test.mod.io/me/access">test environment</a> API key here)</li>
 <li>Use the <a href="#email">Email Authentication Flow</a> for <strong>Read and Write</strong> access (it creates an OAuth 2 Access Token via <strong>email</strong>)</li>
 <li>Use the <a href="#steam">Platform Authentication Flow</a> for <strong>Read and Write</strong> access (it creates an OAuth 2 Access Token automatically on popular platforms such as <strong>Steam and Xbox</strong>)</li>
 <li>Use the <a href="#openid">OpenID Authentication Flow</a> for <strong>Read and Write</strong> access (it creates an OAuth 2 Access Token automatically using your identity provider for SSO)</li>
-<li>Manually create an <a href="https://mod.io/me/access">OAuth 2 Access Token</a> for <strong>Read and Write</strong> access</li>
+<li>Manually create an <a href="https://mod.io/me/access">OAuth 2 Access Token</a> for <strong>Read and Write</strong> access (get a <a href="https://test.mod.io/me/access">test environment</a> OAuth 2 token here)</li>
 </ul>
 
 <p>All users and games are issued an API key which must be included when querying the API. It is quick and easy to use but limited to read-only GET requests, due to the limited security it offers. If you want players to be able to add, edit, rate and subscribe to content, you will need to use an authentication method that generates an OAuth 2 Access token. These <a href="#authentication-2">authentication methods</a> are explained in detail here.</p>
@@ -2124,11 +2124,17 @@ retry-after: 57
 <h3 id="optimize-your-requests">Optimize your requests</h3>
 <p>You should always plan to minimize requests and cache API responses. It will make your app feel fluid and fast for your users. If your usage is excessive we shall reach out to discuss ways of optimizing, but our aim is to never restrict legitimate use of the API. We have set high limits that should cover 99% of use-cases, and are happy to <a href="mailto:developers@mod.io?subject=API%20usage">discuss your scenario</a> if you require more.</p>
 <h2 id="testing">Testing</h2>
-<p>To help familiarize yourself with the mod.io API and to ensure your implementation is battle-hardened and operating as intended, you can <a href="https://mod.io/g/add">setup test games profiles</a> on mod.io which will be available via <a href="https://mod.io/library">your teams library</a>. By default all game profiles are hidden and accessible only by users who you add to the games team, or invite using the preview system. This is until you set a game live, which will make it accessible for everyone.</p>
+<p>To help familiarize yourself with the mod.io API and to ensure your implementation is battle-hardened and operating as intended, we have setup a test sandbox which is identical to the production environment. The test sandbox allows you to make requests to the API whilst your integration is a work in progress and the submitted data is not important. When you are ready to go live it's as easy as adding your game to the production environment, substituting the test API path for the production API path, and updating the <code>api_key</code> and <code>game_id</code> you are using to the values from your games profile on production. </p>
 
-<p>Each game added will be assigned it's own <code>api_url</code>, <code>api_key</code> and <code>game_id</code>. When switching between game builds (i.e. production, test, staging) you will need to ensure each build is pointing to the right game profile on mod.io.</p>
+<p>To begin using the test sandbox you will need to <a href="https://test.mod.io">register a test account</a> and <a href="https://test.mod.io/g/add">add your game</a>. You will only see games you are a team member of and there is no connection between the data added to the test environment and production. We highly recommend you use the test environment when integrating as it allows you to keep your development private, and you can submit as much dummy data as you need to try the functionality required, without having to clean it up at the end.</p>
 
-<p><strong>Note:</strong> If your game is in stealth, we recommend using codenames and non-descriptive screenshots when uploading content. While your game won't be shown as long as it remains hidden, content connected to your game may appear in the profile of users who you have given permission to interact with it, including your own profile.</p>
+<p><strong>Test version:</strong> <code>v1</code></p>
+
+<p><strong>Test site:</strong> <a href="https://test.mod.io">https://test.mod.io</a></p>
+
+<p><strong>Test API path:</strong> <a href="https://api.test.mod.io/v1">https://api.test.mod.io/v1</a></p>
+
+<p><strong>NOTE</strong>: We periodically reset the test environment to default - with the exception of user accounts so please do not rely on it to store important information. Any data you intend on persisting should be submitted to the production environment.</p>
 <h2 id="whitelabel">Whitelabel</h2>
 <p>If you are a large studio or publisher and require a private, in-house, custom solution that accelerates your time to market with a best-in-class product, reach out to <a href="mailto:developers@mod.io?subject=Whitelabel%20license">developers@mod.io</a> to discuss the licensing options available.</p>
 <h2 id="contact">Contact</h2>
