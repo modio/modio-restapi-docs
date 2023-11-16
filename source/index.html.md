@@ -5123,9 +5123,9 @@ Add a mod. Successful request will return the newly created [Mod Object](#mod-ob
     homepage_url|string||Official homepage for your mod. Must be a valid URL.
     stock|integer||Maximium number of subscribers for this mod. A value of 0 disables this limit.
     maturity_option|integer||Choose if this mod contains any of the following mature content.<br><br>__NOTE:__ The value of this field will default to 0 unless the parent game allows you to flag mature content (see `maturity_options` field in [Game Object](#game-object)). <br><br>__0__ = None _(default)_<br>__1__ = Alcohol<br>__2__ = Drugs<br>__4__ = Violence<br>__8__ = Explicit<br>__?__ = Add the options you want together, to enable multiple options (see [BITWISE fields](#bitwise-and-bitwise-and))
-    community_options|integer||Community features enabled for this mod:<br><br>__0__ = All of the options below are disabled<br>__1__ = Enable comments _(default)_<br>__?__ = Add the options you want together, to enable multiple options (see [BITWISE fields](#bitwise-and-bitwise-and))
+    community_options|integer||Community features enabled for this mod:<br><br>__0__ = All the options below are disabled<br>__1__ = Enable comments<br>__64__ = Enable previews<br>__?__ = Add the options you want together, to enable multiple options (see [BITWISE fields](#bitwise-and-bitwise-and))
     metadata_blob|string||Metadata stored by the game developer which may include properties as to how the item works, or other information you need to display. Metadata can also be stored as searchable [key value pairs](#metadata), and to individual [mod files](#get-modfiles).
-    tags[]|string||Tags to apply to the mod. Every tag to apply requires a separate field with tags[] as the key (eg. tags[]=tag1, tags[]=tag2). Only the tags pre-defined by the parent game can be applied. To determine what tags are eligible, see the tags values within `tag_options` column on the parent [Game Object](#game-object).
+    tags[]|string||Tags to apply to the mod. Every tag to apply requires a separate field with tags[] as the key (e.g. tags[]=tag1, tags[]=tag2). Only the tags pre-defined by the parent game can be applied. To determine what tags are eligible, see the tags values within `tag_options` column on the parent [Game Object](#game-object).
 
 > Example response
 
@@ -5399,7 +5399,7 @@ Edit details for a mod. If you want to update the `logo` or media associated wit
     homepage_url|string||Official homepage for your mod. Must be a valid URL.
     stock|integer||Maximium number of subscribers for this mod. A value of 0 disables this limit.
     maturity_option|integer||Choose if this mod contains any of the following mature content.<br><br>__NOTE:__ The value of this field will default to 0 unless the parent game allows you to flag mature content (see `maturity_options` field in [Game Object](#game-object)). <br><br>__0__ = None set<br>__1__ = Alcohol<br>__2__ = Drugs<br>__4__ = Violence<br>__8__ = Explicit<br>__?__ = Add the options you want together, to enable multiple options (see [BITWISE fields](#bitwise-and-bitwise-and))
-    community_options|integer||Community features enabled for this mod:<br><br>__0__ = All of the options below are disabled<br>__1__ = Enable comments<br>__64__ = Enable previews<br>__?__ = Add the options you want together, to enable multiple options (see [BITWISE fields](#bitwise-and-bitwise-and))
+    community_options|integer||Community features enabled for this mod:<br><br>__0__ = All the options below are disabled<br>__1__ = Enable comments<br>__64__ = Enable previews<br>__?__ = Add the options you want together, to enable multiple options (see [BITWISE fields](#bitwise-and-bitwise-and))
     metadata_blob|string||Metadata stored by the game developer which may include properties as to how the item works, or other information you need to display. Metadata can also be stored as searchable [key value pairs](#metadata), and to individual [mod files](#get-modfiles).
     tags[]|string||When providing this attribute, if the input array contains tags, they will entirely replace any existing tags assigned to the mod. __If an empty array is passed, all currently assigned tags will be removed__. If `null` or omitted, no changes will be made to the assigned tags. To determine what tags are eligible, see the tags values within `tag_options` column on the parent [Game Object](#game-object).
 
@@ -12109,7 +12109,7 @@ Get all dependencies the chosen mod has selected. This is useful if a mod requir
 
     Filter|Type|Description
     ---|---|---
-    recursive|integer|Recommended. Include child dependencies in a recursive manner. A value of `true` will display dependencies up to a maximum depth of 5. A value of `false` will only display immediate dependencies.<br><br>Defaults to `false`.<br><br>__NOTE:__ This will be enabled by default in API v2.
+    recursive|boolean|Recommended. Include child dependencies in a recursive manner. A value of `true` will display dependencies up to a maximum depth of 5. A value of `false` will only display immediate dependencies.<br><br>Defaults to `false`.<br><br>__NOTE:__ This will be enabled by default in API v2.
 
 > Example response
 
