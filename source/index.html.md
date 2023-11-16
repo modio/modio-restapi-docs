@@ -4692,7 +4692,6 @@ Get all mods for the corresponding game. Successful request will return an array
         "version": "1.3",
         "changelog": "VERSION 1.3 -- Changes -- Fixed critical castle floor bug.",
         "metadata_blob": "rogue,hd,high-res,4k,hd textures",
-        "issues_raised": 0,
         "download": {
           "binary_url": "https://*.modapi.io/v1/games/1/mods/1/files/1/download/c489a0354111a4d76640d47f0cdcb294",
           "date_expires": 1579316848
@@ -4936,7 +4935,6 @@ Get a mod. Successful request will return a single [Mod Object](#mod-object).
     "version": "1.3",
     "changelog": "VERSION 1.3 -- Changes -- Fixed critical castle floor bug.",
     "metadata_blob": "rogue,hd,high-res,4k,hd textures",
-    "issues_raised": 0,
     "download": {
       "binary_url": "https://*.modapi.io/v1/games/1/mods/1/files/1/download/c489a0354111a4d76640d47f0cdcb294",
       "date_expires": 1579316848
@@ -5211,7 +5209,6 @@ Add a mod. Successful request will return the newly created [Mod Object](#mod-ob
     "version": "1.3",
     "changelog": "VERSION 1.3 -- Changes -- Fixed critical castle floor bug.",
     "metadata_blob": "rogue,hd,high-res,4k,hd textures",
-    "issues_raised": 0,
     "download": {
       "binary_url": "https://*.modapi.io/v1/games/1/mods/1/files/1/download/c489a0354111a4d76640d47f0cdcb294",
       "date_expires": 1579316848
@@ -5389,8 +5386,9 @@ System.out.println(response.toString());
 `POST /games/{game-id}/mods/{mod-id}`
 
 Edit details for a mod. If you want to update the `logo` or media associated with this mod, you need to use the [Add Mod Media](#add-mod-media) endpoint. The same applies to [Mod Files](#add-modfile), [Metadata Key Value Pairs](#add-mod-kvp-metadata) and [Dependencies](#add-mod-dependencies) which are all managed via other endpoints. Successful request will return the updated [Mod Object](#mod-object).
-Parameter|Type|Required|Description
-     ---|---|---|---|
+
+    Parameter|Type|Required|Description
+    ---|---|---|---|
     logo|file|true|Image file which will represent your mods logo. Must be gif, jpg or png format and cannot exceed 8MB in filesize. Dimensions must be at least 512x288 and we recommended you supply a high resolution image with a 16 / 9 ratio. mod.io will use this image to make three thumbnails for the dimensions 320x180, 640x360 and 1280x720.
     status|integer||Status of a mod. The mod must have at least one uploaded `modfile` to be 'accepted' (best if this field is controlled by game admins, see [status and visibility](#status-amp-visibility) for details):<br><br>__0__ = Not accepted<br>__1__ = Accepted (game admins only)<br>__3__ = Deleted (use the [delete mod](#delete-mod) endpoint to set this status)
     visible|integer||Visibility of the mod (best if this field is controlled by mod admins, see [status and visibility](#status-amp-visibility) for details):<br><br>__0__ = Hidden<br>__1__ = Public
@@ -5487,7 +5485,6 @@ Parameter|Type|Required|Description
     "version": "1.3",
     "changelog": "VERSION 1.3 -- Changes -- Fixed critical castle floor bug.",
     "metadata_blob": "rogue,hd,high-res,4k,hd textures",
-    "issues_raised": 0,
     "download": {
       "binary_url": "https://*.modapi.io/v1/games/1/mods/1/files/1/download/c489a0354111a4d76640d47f0cdcb294",
       "date_expires": 1579316848
@@ -5800,7 +5797,6 @@ Get all files that are published for the corresponding mod. Successful request w
       "version": "1.3",
       "changelog": "VERSION 1.3 -- Changes -- Fixed critical castle floor bug.",
       "metadata_blob": "rogue,hd,high-res,4k,hd textures",
-      "issues_raised": 0,
       "download": {
         "binary_url": "https://*.modapi.io/v1/games/1/mods/1/files/1/download/c489a0354111a4d76640d47f0cdcb294",
         "date_expires": 1579316848
@@ -5947,7 +5943,6 @@ Get a file. Successful request will return a single [Modfile Object](#modfile-ob
   "version": "1.3",
   "changelog": "VERSION 1.3 -- Changes -- Fixed critical castle floor bug.",
   "metadata_blob": "rogue,hd,high-res,4k,hd textures",
-  "issues_raised": 0,
   "download": {
     "binary_url": "https://*.modapi.io/v1/games/1/mods/1/files/1/download/c489a0354111a4d76640d47f0cdcb294",
     "date_expires": 1579316848
@@ -6118,7 +6113,6 @@ Upload a file for the corresponding mod. Successful request will return the newl
   "version": "1.3",
   "changelog": "VERSION 1.3 -- Changes -- Fixed critical castle floor bug.",
   "metadata_blob": "rogue,hd,high-res,4k,hd textures",
-  "issues_raised": 0,
   "download": {
     "binary_url": "https://*.modapi.io/v1/games/1/mods/1/files/1/download/c489a0354111a4d76640d47f0cdcb294",
     "date_expires": 1579316848
@@ -6281,7 +6275,6 @@ Edit the details of a published file. If you want to update fields other than th
   "version": "1.3",
   "changelog": "VERSION 1.3 -- Changes -- Fixed critical castle floor bug.",
   "metadata_blob": "rogue,hd,high-res,4k,hd textures",
-  "issues_raised": 0,
   "download": {
     "binary_url": "https://*.modapi.io/v1/games/1/mods/1/files/1/download/c489a0354111a4d76640d47f0cdcb294",
     "date_expires": 1579316848
@@ -6555,7 +6548,6 @@ Manage the platform status of a particular modfile. This endpoint does not set a
   "version": "1.3",
   "changelog": "VERSION 1.3 -- Changes -- Fixed critical castle floor bug.",
   "metadata_blob": "rogue,hd,high-res,4k,hd textures",
-  "issues_raised": 0,
   "download": {
     "binary_url": "https://*.modapi.io/v1/games/1/mods/1/files/1/download/c489a0354111a4d76640d47f0cdcb294",
     "date_expires": 1579316848
@@ -6576,368 +6568,6 @@ Status|Meaning|Error Ref|Description|Response Schema
 200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)||Successful Request.|[Modfile Object](#schemamodfile_object)
 403|[Forbidden](https://tools.ietf.org/html/rfc7231#section-6.5.3)|15007|The authenticated user does not have permission to edit the platforms for the specified modfile, ensure the user is a member of parent game team.|[Error Object](#schemaerror_object)
 403|[Forbidden](https://tools.ietf.org/html/rfc7231#section-6.5.3)|14037|The parent game doesn't cross-platform modfile submissions.|[Error Object](#schemaerror_object)
-<aside class="auth-notice">
-To perform this request, you must be authenticated via one of the following methods:
-<a href="#authentication">OAuth 2</a> (Scopes: write)
-</aside>
-## Get Modfile Broken Report Count Map
-
-> Example request
-
-```shell
-# You can also use wget
-curl -X GET https://*.modapi.io/v1/games/{game-id}/mods/{mod-id}/files/{file-id}/broken?api_key=YourApiKey \
-  -H 'Accept: application/json'
-
-```
-
-```http
-GET https://*.modapi.io/v1/games/{game-id}/mods/{mod-id}/files/{file-id}/broken?api_key=YourApiKey HTTP/1.1
-Host: *.modapi.io
-
-Accept: application/json
-
-```
-
-```javascript
-var headers = {
-  'Accept':'application/json'
-
-};
-
-$.ajax({
-  url: 'https://*.modapi.io/v1/games/{game-id}/mods/{mod-id}/files/{file-id}/broken',
-  method: 'get',
-  data: '?api_key=YourApiKey',
-  headers: headers,
-  success: function(data) {
-    console.log(JSON.stringify(data));
-  }
-})
-```
-
-```javascript--nodejs
-const request = require('node-fetch');
-
-const headers = {
-  'Accept':'application/json'
-
-};
-
-fetch('https://*.modapi.io/v1/games/{game-id}/mods/{mod-id}/files/{file-id}/broken?api_key=YourApiKey',
-{
-  method: 'GET',
-
-  headers: headers
-})
-.then(function(res) {
-    return res.json();
-}).then(function(body) {
-    console.log(body);
-});
-```
-
-```python
-import requests
-headers = {
-  'Accept': 'application/json'
-}
-
-r = requests.get('https://*.modapi.io/v1/games/{game-id}/mods/{mod-id}/files/{file-id}/broken', params={
-  'api_key': 'YourApiKey'
-}, headers = headers)
-
-print r.json()
-```
-
-```java
-URL obj = new URL("https://*.modapi.io/v1/games/{game-id}/mods/{mod-id}/files/{file-id}/broken?api_key=YourApiKey");
-HttpURLConnection con = (HttpURLConnection) obj.openConnection();
-con.setRequestMethod("GET");
-int responseCode = con.getResponseCode();
-BufferedReader in = new BufferedReader(
-    new InputStreamReader(con.getInputStream()));
-String inputLine;
-StringBuffer response = new StringBuffer();
-while ((inputLine = in.readLine()) != null) {
-    response.append(inputLine);
-}
-in.close();
-System.out.println(response.toString());
-```
-
-`GET /games/{game-id}/mods/{mod-id}/files/{file-id}/broken`
-
-Get a count of how many broken or not-working reports have been submitted by unique users in the recent 24 hours. Successful request will return a single [Modfile Broken Report Count Object](#modfile-broken-report-type-count).
-
-> Example response
-
-```json
-{
-  "map": {}
-}
-
-```
-<h3 id="Get-Modfile-Broken-Report-Count-Map-responses">Responses</h3>
-
-Status|Meaning|Error Ref|Description|Response Schema
----|---|----|---|---|
-200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)||Successful Request|[Modfile Broken Report Count Object](#schemamodfile_broken_report_count_object)
-<aside class="auth-notice">
-To perform this request, you must be authenticated via one of the following methods:
-<a href="#authentication">api_key</a>, <a href="#authentication">OAuth 2</a> (Scopes: read)
-</aside>
-## Report Modfile Broken
-
-> Example request
-
-```shell
-# You can also use wget
-curl -X POST https://*.modapi.io/v1/games/{game-id}/mods/{mod-id}/files/{file-id}/broken \
-  -H 'Authorization: Bearer {access-token}' \ 
-  -H 'Content-Type: multipart/form-data' \ 
-  -H 'Accept: application/json' \
-  -F 'filedata=@/path/to/modfile.zip' \
-  -F 'type=0' \
-  -F 'changelog=<p>Rogue Knights v1.2.0 Changelog</p></p>New Featu...' \
-  -F 'metadata_blob=client_signature:9VbZccpR' \
-  -F 'platforms[]=undefined'
-
-```
-
-```http
-POST https://*.modapi.io/v1/games/{game-id}/mods/{mod-id}/files/{file-id}/broken HTTP/1.1
-Host: *.modapi.io
-Content-Type: multipart/form-data
-Accept: application/json
-Authorization: Bearer {access-token}
-
-```
-
-```javascript
-var headers = {
-  'Authorization':'Bearer {access-token}',
-  'Content-Type':'multipart/form-data',
-  'Accept':'application/json'
-
-};
-
-$.ajax({
-  url: 'https://*.modapi.io/v1/games/{game-id}/mods/{mod-id}/files/{file-id}/broken',
-  method: 'post',
-
-  headers: headers,
-  success: function(data) {
-    console.log(JSON.stringify(data));
-  }
-})
-```
-
-```javascript--nodejs
-const request = require('node-fetch');
-const inputBody = '{
-  "filedata": "@/path/to/modfile.zip",
-  "type": 0,
-  "changelog": "<p>Rogue Knights v1.2.0 Changelog</p></p>New Featu...",
-  "metadata_blob": "client_signature:9VbZccpR",
-  "platforms": [
-    "string"
-  ]
-}';
-const headers = {
-  'Authorization':'Bearer {access-token}',
-  'Content-Type':'multipart/form-data',
-  'Accept':'application/json'
-
-};
-
-fetch('https://*.modapi.io/v1/games/{game-id}/mods/{mod-id}/files/{file-id}/broken',
-{
-  method: 'POST',
-  body: inputBody,
-  headers: headers
-})
-.then(function(res) {
-    return res.json();
-}).then(function(body) {
-    console.log(body);
-});
-```
-
-```python
-import requests
-headers = {
-  'Authorization': 'Bearer {access-token}',
-  'Content-Type': 'multipart/form-data',
-  'Accept': 'application/json'
-}
-
-r = requests.post('https://*.modapi.io/v1/games/{game-id}/mods/{mod-id}/files/{file-id}/broken', params={
-
-}, headers = headers)
-
-print r.json()
-```
-
-```java
-URL obj = new URL("https://*.modapi.io/v1/games/{game-id}/mods/{mod-id}/files/{file-id}/broken");
-HttpURLConnection con = (HttpURLConnection) obj.openConnection();
-con.setRequestMethod("POST");
-int responseCode = con.getResponseCode();
-BufferedReader in = new BufferedReader(
-    new InputStreamReader(con.getInputStream()));
-String inputLine;
-StringBuffer response = new StringBuffer();
-while ((inputLine = in.readLine()) != null) {
-    response.append(inputLine);
-}
-in.close();
-System.out.println(response.toString());
-```
-
-`POST /games/{game-id}/mods/{mod-id}/files/{file-id}/broken`
-
-Report a modfile as broken/not working, notifying the mod owner directly. Successful request will return a [Message Object](#message-object).
-
-     __NOTE__: Each user may only report a specific modfile as broken once every 24 hours.
-
-     Parameter|Type|Required|Description
-     ---|---|---|---|
-     type|integer|true|The type of issue being reported.<br><br>__Possible types include:__<br><br>__0__ = Won't Load<br>__1__ = Texture Issues<br>__2__ = Crashes the Game<br>__3__ = Compatibility Problems<br>__4__ = Gameplay Bugs<br>__5__ = Missing Content<br>__6__ = Sounds Issue<br>__7__ = UI/Interface Problems<br>__8__ = Performance Issues<br>__9__ = Scripting Errors<br>__10__ = Localization/Translation Errors<br>__11__ = Quest/Storyline Blockers<br>__12__ = AI/NPC Problems<br>__13__ = Missing Instructions<br>__14__ = Outdated Mod<br>__15__ = Save Game Corruption<br>
-
-> Example response
-
-```json
-{
-  "code": 200,
-  "message": "Your request was successful."
-}
-
-```
-<h3 id="Report-Modfile-Broken-responses">Responses</h3>
-
-Status|Meaning|Error Ref|Description|Response Schema
----|---|----|---|---|
-200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)||Successful Request|[Message Object](#schemamessage_object)
-403|[Forbidden](https://tools.ietf.org/html/rfc7231#section-6.5.3)|9|You must be subscribed to perform that action.|[Error Object](#schemaerror_object)
-<aside class="auth-notice">
-To perform this request, you must be authenticated via one of the following methods:
-<a href="#authentication">OAuth 2</a> (Scopes: write)
-</aside>
-## Resolve Modfile Broken Reports
-
-> Example request
-
-```shell
-# You can also use wget
-curl -X DELETE https://*.modapi.io/v1/games/{game-id}/mods/{mod-id}/files/{file-id}/broken \
-  -H 'Authorization: Bearer {access-token}' \ 
-  -H 'Content-Type: application/x-www-form-urlencoded' \ 
-  -H 'Accept: application/json'
-
-```
-
-```http
-DELETE https://*.modapi.io/v1/games/{game-id}/mods/{mod-id}/files/{file-id}/broken HTTP/1.1
-Host: *.modapi.io
-
-Accept: application/json
-Authorization: Bearer {access-token}
-Content-Type: application/x-www-form-urlencoded
-
-```
-
-```javascript
-var headers = {
-  'Authorization':'Bearer {access-token}',
-  'Content-Type':'application/x-www-form-urlencoded',
-  'Accept':'application/json'
-
-};
-
-$.ajax({
-  url: 'https://*.modapi.io/v1/games/{game-id}/mods/{mod-id}/files/{file-id}/broken',
-  method: 'delete',
-
-  headers: headers,
-  success: function(data) {
-    console.log(JSON.stringify(data));
-  }
-})
-```
-
-```javascript--nodejs
-const request = require('node-fetch');
-
-const headers = {
-  'Authorization':'Bearer {access-token}',
-  'Content-Type':'application/x-www-form-urlencoded',
-  'Accept':'application/json'
-
-};
-
-fetch('https://*.modapi.io/v1/games/{game-id}/mods/{mod-id}/files/{file-id}/broken',
-{
-  method: 'DELETE',
-
-  headers: headers
-})
-.then(function(res) {
-    return res.json();
-}).then(function(body) {
-    console.log(body);
-});
-```
-
-```python
-import requests
-headers = {
-  'Authorization': 'Bearer {access-token}',
-  'Content-Type': 'application/x-www-form-urlencoded',
-  'Accept': 'application/json'
-}
-
-r = requests.delete('https://*.modapi.io/v1/games/{game-id}/mods/{mod-id}/files/{file-id}/broken', params={
-
-}, headers = headers)
-
-print r.json()
-```
-
-```java
-URL obj = new URL("https://*.modapi.io/v1/games/{game-id}/mods/{mod-id}/files/{file-id}/broken");
-HttpURLConnection con = (HttpURLConnection) obj.openConnection();
-con.setRequestMethod("DELETE");
-int responseCode = con.getResponseCode();
-BufferedReader in = new BufferedReader(
-    new InputStreamReader(con.getInputStream()));
-String inputLine;
-StringBuffer response = new StringBuffer();
-while ((inputLine = in.readLine()) != null) {
-    response.append(inputLine);
-}
-in.close();
-System.out.println(response.toString());
-```
-
-`DELETE /games/{game-id}/mods/{mod-id}/files/{file-id}/broken`
-
-Resolve modfile broken reports submitted by users in the recent 24 hours. Successful request will return a [Message Object](#message-object).
-
-> Example response
-
-```json
-{
-  "code": 200,
-  "message": "Your request was successful."
-}
-
-```
-<h3 id="Resolve-Modfile-Broken-Reports-responses">Responses</h3>
-
-Status|Meaning|Error Ref|Description|Response Schema
----|---|----|---|---|
-200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)||Successful Request|[Message Object](#schemamessage_object)
 <aside class="auth-notice">
 To perform this request, you must be authenticated via one of the following methods:
 <a href="#authentication">OAuth 2</a> (Scopes: write)
@@ -7891,7 +7521,6 @@ Subscribe the _authenticated user_ to a corresponding mod. No body parameters ar
     "version": "1.3",
     "changelog": "VERSION 1.3 -- Changes -- Fixed critical castle floor bug.",
     "metadata_blob": "rogue,hd,high-res,4k,hd textures",
-    "issues_raised": 0,
     "download": {
       "binary_url": "https://*.modapi.io/v1/games/1/mods/1/files/1/download/c489a0354111a4d76640d47f0cdcb294",
       "date_expires": 1579316848
@@ -12518,7 +12147,6 @@ Get all dependencies the chosen mod has selected. This is useful if a mod requir
         "version": "1.3",
         "changelog": "VERSION 1.3 -- Changes -- Fixed critical castle floor bug.",
         "metadata_blob": "rogue,hd,high-res,4k,hd textures",
-        "issues_raised": 0,
         "download": {
           "binary_url": "https://*.modapi.io/v1/games/1/mods/1/files/1/download/c489a0354111a4d76640d47f0cdcb294",
           "date_expires": 1579316848
@@ -14148,7 +13776,6 @@ Get all modfiles the _authenticated user_ uploaded. Successful request will retu
       "version": "1.3",
       "changelog": "VERSION 1.3 -- Changes -- Fixed critical castle floor bug.",
       "metadata_blob": "rogue,hd,high-res,4k,hd textures",
-      "issues_raised": 0,
       "download": {
         "binary_url": "https://*.modapi.io/v1/games/1/mods/1/files/1/download/c489a0354111a4d76640d47f0cdcb294",
         "date_expires": 1579316848
@@ -14627,7 +14254,6 @@ Get all mod's the _authenticated user_ is subscribed to. Successful request will
         "version": "1.3",
         "changelog": "VERSION 1.3 -- Changes -- Fixed critical castle floor bug.",
         "metadata_blob": "rogue,hd,high-res,4k,hd textures",
-        "issues_raised": 0,
         "download": {
           "binary_url": "https://*.modapi.io/v1/games/1/mods/1/files/1/download/c489a0354111a4d76640d47f0cdcb294",
           "date_expires": 1579316848
@@ -14904,7 +14530,6 @@ Get all mods the _authenticated user_ added or is a team member of. Successful r
         "version": "1.3",
         "changelog": "VERSION 1.3 -- Changes -- Fixed critical castle floor bug.",
         "metadata_blob": "rogue,hd,high-res,4k,hd textures",
-        "issues_raised": 0,
         "download": {
           "binary_url": "https://*.modapi.io/v1/games/1/mods/1/files/1/download/c489a0354111a4d76640d47f0cdcb294",
           "date_expires": 1579316848
@@ -15173,7 +14798,6 @@ Get all mod's the _authenticated user_ has purchased. Successful request will re
         "version": "1.3",
         "changelog": "VERSION 1.3 -- Changes -- Fixed critical castle floor bug.",
         "metadata_blob": "rogue,hd,high-res,4k,hd textures",
-        "issues_raised": 0,
         "download": {
           "binary_url": "https://*.modapi.io/v1/games/1/mods/1/files/1/download/c489a0354111a4d76640d47f0cdcb294",
           "date_expires": 1579316848
@@ -15984,7 +15608,6 @@ Purchase an item. A Successful request will return the newly created [Pay Object
       "version": "1.3",
       "changelog": "VERSION 1.3 -- Changes -- Fixed critical castle floor bug.",
       "metadata_blob": "rogue,hd,high-res,4k,hd textures",
-      "issues_raised": 0,
       "download": {
         "binary_url": "https://*.modapi.io/v1/games/1/mods/1/files/1/download/c489a0354111a4d76640d47f0cdcb294",
         "date_expires": 1579316848
@@ -17539,7 +17162,6 @@ result_total|integer|Total number of results found.
         "version": "1.3",
         "changelog": "VERSION 1.3 -- Changes -- Fixed critical castle floor bug.",
         "metadata_blob": "rogue,hd,high-res,4k,hd textures",
-        "issues_raised": 0,
         "download": {
           "binary_url": "https://*.modapi.io/v1/games/1/mods/1/files/1/download/c489a0354111a4d76640d47f0cdcb294",
           "date_expires": 1579316848
@@ -17750,7 +17372,6 @@ result_total|integer|Total number of results found.
       "version": "1.3",
       "changelog": "VERSION 1.3 -- Changes -- Fixed critical castle floor bug.",
       "metadata_blob": "rogue,hd,high-res,4k,hd textures",
-      "issues_raised": 0,
       "download": {
         "binary_url": "https://*.modapi.io/v1/games/1/mods/1/files/1/download/c489a0354111a4d76640d47f0cdcb294",
         "date_expires": 1579316848
@@ -17871,7 +17492,6 @@ result_total|integer|Total number of results found.
         "version": "1.3",
         "changelog": "VERSION 1.3 -- Changes -- Fixed critical castle floor bug.",
         "metadata_blob": "rogue,hd,high-res,4k,hd textures",
-        "issues_raised": 0,
         "download": {
           "binary_url": "https://*.modapi.io/v1/games/1/mods/1/files/1/download/c489a0354111a4d76640d47f0cdcb294",
           "date_expires": 1579316848
@@ -18504,7 +18124,6 @@ metavalue|string|The value of the key-value pair.
     "version": "1.3",
     "changelog": "VERSION 1.3 -- Changes -- Fixed critical castle floor bug.",
     "metadata_blob": "rogue,hd,high-res,4k,hd textures",
-    "issues_raised": 0,
     "download": {
       "binary_url": "https://*.modapi.io/v1/games/1/mods/1/files/1/download/c489a0354111a4d76640d47f0cdcb294",
       "date_expires": 1579316848
@@ -18676,7 +18295,6 @@ images|[Image Object](#schemaimage_object)[]|Array of image objects (a gallery).
     "version": "1.3",
     "changelog": "VERSION 1.3 -- Changes -- Fixed critical castle floor bug.",
     "metadata_blob": "rogue,hd,high-res,4k,hd textures",
-    "issues_raised": 0,
     "download": {
       "binary_url": "https://*.modapi.io/v1/games/1/mods/1/files/1/download/c489a0354111a4d76640d47f0cdcb294",
       "date_expires": 1579316848
@@ -18901,24 +18519,6 @@ date_added|integer|Unix timestamp of the date the user was registered as a previ
 
 
 
-## Modfile Broken Report Count Object
-
-<a name="schemamodfile_broken_report_count_object"></a>
-
-```json
-{
-  "map": {}
-} 
-```
-
-### Properties
-
-Name|Type|Description
----|---|---|---|
-map|object|A key-value pair array where the key is the report type (an integer) and the value is the count of people who have reported it (an integer).<br><br>__Key Reference:__<br><br>__0__ = Won't Load<br>__1__ = Texture Issues<br>__2__ = Crashes the Game<br>__3__ = Compatibility Problems<br>__4__ = Gameplay Bugs<br>__5__ = Missing Content<br>__6__ = Sounds Issue<br>__7__ = UI/Interface Problems<br>__8__ = Performance Issues<br>__9__ = Scripting Errors<br>__10__ = Localization/Translation Errors<br>__11__ = Quest/Storyline Blockers<br>__12__ = AI/NPC Problems<br>__13__ = Missing Instructions<br>__14__ = Outdated Mod<br>__15__ = Save Game Corruption<br>
-
-
-
 ## Modfile Object
 
    <a name="schemamodfile_object"></a>
@@ -18942,7 +18542,6 @@ map|object|A key-value pair array where the key is the report type (an integer) 
   "version": "1.3",
   "changelog": "VERSION 1.3 -- Changes -- Fixed critical castle floor bug.",
   "metadata_blob": "rogue,hd,high-res,4k,hd textures",
-  "issues_raised": 0,
   "download": {
     "binary_url": "https://*.modapi.io/v1/games/1/mods/1/files/1/download/c489a0354111a4d76640d47f0cdcb294",
     "date_expires": 1579316848
@@ -18975,7 +18574,6 @@ filename|string|Filename including extension.
 version|string|Release version this file represents.
 changelog|string|Changelog for the file.
 metadata_blob|string|Metadata stored by the game developer for this file.
-issues_raised|integer|A total of how many users have reported this file as broken or not working in the past 24 hours.
 download|[Download Object](#schemadownload_object)|Contains download data for the modfile.
 platforms|[Modfile Platform Object](#schemamodfile_platform_object)[]|Contains modfile platform data.
 
@@ -19177,7 +18775,6 @@ date_added|integer|Unix timestamp of date the part was uploaded.
       "version": "1.3",
       "changelog": "VERSION 1.3 -- Changes -- Fixed critical castle floor bug.",
       "metadata_blob": "rogue,hd,high-res,4k,hd textures",
-      "issues_raised": 0,
       "download": {
         "binary_url": "https://*.modapi.io/v1/games/1/mods/1/files/1/download/c489a0354111a4d76640d47f0cdcb294",
         "date_expires": 1579316848
