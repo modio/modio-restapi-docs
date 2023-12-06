@@ -739,7 +739,7 @@ retry-after: 57
 
 If the rate limit is exceeded, the following header will be returned alongside the `429 Too Many Requests` HTTP response code.
 
- - `retry-after` - Number of seconds before you can attempt to make another request to API.
+ - `retry-after` - Number of seconds before you can attempt to make another request to API. __NOTE:__ If the `retry-after` value is 0, that means you have hit a rolling ratelimit. Rolling ratelimits don't block for a set timeframe once the limit is reached, instead they permit a certain number of requests within the timeframe (see [this explanation](https://developers.cloudflare.com/waf/rate-limiting-rules/parameters/#with-the-following-behavior)). If you encounter a 0, we recommend retrying the endpoint again after 60 seconds.
 
 ### Deprecation Notice
 
