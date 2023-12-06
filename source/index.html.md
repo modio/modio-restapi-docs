@@ -750,7 +750,7 @@ retry-after: 57
 {
 	"error": {
 		"code": 429,
-		"error_ref": --parse_errorref_RATE_LIMITED,
+		"error_ref": 11008,
 		"message": "You have made too many requests in a short period of time, please wait and try again soon."
 	}
 }
@@ -2334,8 +2334,7 @@ To perform this request, you must be authenticated via one of the following meth
 <a href="#authentication">api_key</a>
 </aside>
 ## Email Exchange
-
-__Step 1 of 2__
+__Step 1 of 2__
 
 > Example request
 
@@ -2456,10 +2455,8 @@ To perform this request, you must be authenticated via one of the following meth
 <a href="#authentication">api_key</a>
 </aside>
 
-
-<br>
-
-__Step 2 of 2__
+<br>
+__Step 2 of 2__
 
 
 > Example request
@@ -2683,7 +2680,7 @@ System.out.println(response.toString());
 
 `POST /oauth/logout`
 
-Log the user out by revoking their current access token. If this request successfully completes, you should remove any tokens/cookies/cached credentials linking to the now-revoked access token so the user is required to login again through your application. Successful request will return `204 No Content`.
+Log the user out by revoking their current access token. If this request successfully completes, you should remove any tokens/cookies/cached credentials linking to the now-revoked access token so the user is required to login again through your application. Successful request will return a [Message Object](#message-object).
 
 > Example response
 
@@ -5126,9 +5123,9 @@ Add a mod. Successful request will return the newly created [Mod Object](#mod-ob
     homepage_url|string||Official homepage for your mod. Must be a valid URL.
     stock|integer||Maximium number of subscribers for this mod. A value of 0 disables this limit.
     maturity_option|integer||Choose if this mod contains any of the following mature content.<br><br>__NOTE:__ The value of this field will default to 0 unless the parent game allows you to flag mature content (see `maturity_options` field in [Game Object](#game-object)). <br><br>__0__ = None _(default)_<br>__1__ = Alcohol<br>__2__ = Drugs<br>__4__ = Violence<br>__8__ = Explicit<br>__?__ = Add the options you want together, to enable multiple options (see [BITWISE fields](#bitwise-and-bitwise-and))
-    community_options|integer||Community features enabled for this mod:<br><br>__0__ = All of the options below are disabled<br>__1__ = Enable comments _(default)_<br>__?__ = Add the options you want together, to enable multiple options (see [BITWISE fields](#bitwise-and-bitwise-and))
+    community_options|integer||Community features enabled for this mod:<br><br>__0__ = All the options below are disabled<br>__1__ = Enable comments<br>__64__ = Enable previews<br>__?__ = Add the options you want together, to enable multiple options (see [BITWISE fields](#bitwise-and-bitwise-and))
     metadata_blob|string||Metadata stored by the game developer which may include properties as to how the item works, or other information you need to display. Metadata can also be stored as searchable [key value pairs](#metadata), and to individual [mod files](#get-modfiles).
-    tags[]|string||Tags to apply to the mod. Every tag to apply requires a separate field with tags[] as the key (eg. tags[]=tag1, tags[]=tag2). Only the tags pre-defined by the parent game can be applied. To determine what tags are eligible, see the tags values within `tag_options` column on the parent [Game Object](#game-object).
+    tags[]|string||Tags to apply to the mod. Every tag to apply requires a separate field with tags[] as the key (e.g. tags[]=tag1, tags[]=tag2). Only the tags pre-defined by the parent game can be applied. To determine what tags are eligible, see the tags values within `tag_options` column on the parent [Game Object](#game-object).
 
 > Example response
 
@@ -5402,7 +5399,7 @@ Edit details for a mod. If you want to update the `logo` or media associated wit
     homepage_url|string||Official homepage for your mod. Must be a valid URL.
     stock|integer||Maximium number of subscribers for this mod. A value of 0 disables this limit.
     maturity_option|integer||Choose if this mod contains any of the following mature content.<br><br>__NOTE:__ The value of this field will default to 0 unless the parent game allows you to flag mature content (see `maturity_options` field in [Game Object](#game-object)). <br><br>__0__ = None set<br>__1__ = Alcohol<br>__2__ = Drugs<br>__4__ = Violence<br>__8__ = Explicit<br>__?__ = Add the options you want together, to enable multiple options (see [BITWISE fields](#bitwise-and-bitwise-and))
-    community_options|integer||Community features enabled for this mod:<br><br>__0__ = All of the options below are disabled<br>__1__ = Enable comments<br>__64__ = Enable previews<br>__?__ = Add the options you want together, to enable multiple options (see [BITWISE fields](#bitwise-and-bitwise-and))
+    community_options|integer||Community features enabled for this mod:<br><br>__0__ = All the options below are disabled<br>__1__ = Enable comments<br>__64__ = Enable previews<br>__?__ = Add the options you want together, to enable multiple options (see [BITWISE fields](#bitwise-and-bitwise-and))
     metadata_blob|string||Metadata stored by the game developer which may include properties as to how the item works, or other information you need to display. Metadata can also be stored as searchable [key value pairs](#metadata), and to individual [mod files](#get-modfiles).
     tags[]|string||When providing this attribute, if the input array contains tags, they will entirely replace any existing tags assigned to the mod. __If an empty array is passed, all currently assigned tags will be removed__. If `null` or omitted, no changes will be made to the assigned tags. To determine what tags are eligible, see the tags values within `tag_options` column on the parent [Game Object](#game-object).
 
@@ -5546,6 +5543,7 @@ Status|Meaning|Error Ref|Description|Response Schema
 403|[Forbidden](https://tools.ietf.org/html/rfc7231#section-6.5.3)|15014|The authenticated user does not have permission to update the maturity options for this mod, this action is restricted to team managers & administrators only.|[Error Object](#schemaerror_object)
 403|[Forbidden](https://tools.ietf.org/html/rfc7231#section-6.5.3)|15015|The authenticated user does not have permission to update the status for this mod, this action is restricted to team managers & administrators only.|[Error Object](#schemaerror_object)
 403|[Forbidden](https://tools.ietf.org/html/rfc7231#section-6.5.3)|15016|A mod cannot be set live without an associated modfile.|[Error Object](#schemaerror_object)
+400|[Bad Request](https://tools.ietf.org/html/rfc7231#section-6.5.1)|19301|This game is not currently allowing edits to mod. Please contact the game administrator if you wish to make changes to this mod.|[Error Object](#schemaerror_object)
 <aside class="auth-notice">
 To perform this request, you must be authenticated via one of the following methods:
 <a href="#authentication">OAuth 2</a> (Scopes: write)
@@ -12111,7 +12109,7 @@ Get all dependencies the chosen mod has selected. This is useful if a mod requir
 
     Filter|Type|Description
     ---|---|---
-    recursive|integer|Recommended. Include child dependencies in a recursive manner. A value of `true` will display dependencies up to a maximum depth of 5. A value of `false` will only display immediate dependencies.<br><br>Defaults to `false`.<br><br>__NOTE:__ This will be enabled by default in API v2.
+    recursive|boolean|Recommended. Include child dependencies in a recursive manner. A value of `true` will display dependencies up to a maximum depth of 5. A value of `false` will only display immediate dependencies.<br><br>Defaults to `false`.<br><br>__NOTE:__ This will be enabled by default in API v2.
 
 > Example response
 
@@ -13266,6 +13264,124 @@ To perform this request, you must be authenticated via one of the following meth
 </aside>
 # Me
 
+## Generate Service Ticket
+
+> Example request
+
+```shell
+# You can also use wget
+curl -X POST https://*.modapi.io/v1/s2s/ticket \
+  -H 'Authorization: Bearer {access-token}' \ 
+  -H 'Content-Type: application/json' \ 
+  -H 'Accept: application/json'
+
+```
+
+```http
+POST https://*.modapi.io/v1/s2s/ticket HTTP/1.1
+Host: *.modapi.io
+
+Accept: application/json
+Authorization: Bearer {access-token}
+Content-Type: application/json
+
+```
+
+```javascript
+var headers = {
+  'Authorization':'Bearer {access-token}',
+  'Content-Type':'application/json',
+  'Accept':'application/json'
+
+};
+
+$.ajax({
+  url: 'https://*.modapi.io/v1/s2s/ticket',
+  method: 'post',
+
+  headers: headers,
+  success: function(data) {
+    console.log(JSON.stringify(data));
+  }
+})
+```
+
+```javascript--nodejs
+const request = require('node-fetch');
+
+const headers = {
+  'Authorization':'Bearer {access-token}',
+  'Content-Type':'application/json',
+  'Accept':'application/json'
+
+};
+
+fetch('https://*.modapi.io/v1/s2s/ticket',
+{
+  method: 'POST',
+
+  headers: headers
+})
+.then(function(res) {
+    return res.json();
+}).then(function(body) {
+    console.log(body);
+});
+```
+
+```python
+import requests
+headers = {
+  'Authorization': 'Bearer {access-token}',
+  'Content-Type': 'application/json',
+  'Accept': 'application/json'
+}
+
+r = requests.post('https://*.modapi.io/v1/s2s/ticket', params={
+
+}, headers = headers)
+
+print r.json()
+```
+
+```java
+URL obj = new URL("https://*.modapi.io/v1/s2s/ticket");
+HttpURLConnection con = (HttpURLConnection) obj.openConnection();
+con.setRequestMethod("POST");
+int responseCode = con.getResponseCode();
+BufferedReader in = new BufferedReader(
+    new InputStreamReader(con.getInputStream()));
+String inputLine;
+StringBuffer response = new StringBuffer();
+while ((inputLine = in.readLine()) != null) {
+    response.append(inputLine);
+}
+in.close();
+System.out.println(response.toString());
+```
+
+`POST //s2s/ticket`
+
+Generate a service-to-service (S2S) ticket on behalf of the authenticated user. The returned ticket should be passed to your secure backend to used with your registered backend server to facilitate S2S requests on behalf of a user. Service tickets are only valid for 1 hour, at which point you will need to make another request to this endpoint. A successful request will return a [Service Ticket](#service-ticket) object.
+
+> Example response
+
+```json
+{
+  "resource": "game-secure-server",
+  "service_ticket": "eyJ0eXAiOiXKV1QibCJhbLciOiJeiUzI1....."
+}
+
+```
+<h3 id="Generate-Service-Ticket-responses">Responses</h3>
+
+Status|Meaning|Error Ref|Description|Response Schema
+---|---|----|---|---|
+200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)||Successful Request|[Service Ticket Object](#schemaservice_ticket_object)
+<aside class="auth-notice">
+To perform this request, you must be authenticated via one of the following methods:
+<a href="#authentication">OAuth 2</a> (Scopes: write)
+</aside>
 ## Get Authenticated User
 
 > Example request
@@ -15117,9 +15233,9 @@ System.out.println(response.toString());
 
 Get the _authenticated user_ wallets. Successful request will return a single [Wallet Object](#wallet-object).
 
-     Filter|Type|Description
-     ---|---|---
-     game_id|integer|Unique id of the parent game.
+    Filter|Type|Required|Description
+    ---|---|---|---|
+     game_id|integer|true|Unique id of the parent game.
 
 > Example response
 
@@ -15412,7 +15528,132 @@ Purchase an item. A Successful request will return the newly created [Pay Object
   "purchase_date": 1626667557,
   "wallet_type": "string",
   "balance": 0,
-  "payment_method_id": "string"
+  "payment_method_id": "string",
+  "mod": {
+    "id": 2,
+    "game_id": 2,
+    "status": 1,
+    "visible": 1,
+    "submitted_by": {
+      "id": 1,
+      "name_id": "xant",
+      "username": "XanT",
+      "display_name_portal": null,
+      "date_online": 1509922961,
+      "date_joined": 1509922961,
+      "avatar": {
+        "filename": "avatar.png",
+        "original": "https://assets.modcdn.io/images/placeholder/avatar.png",
+        "thumb_50x50": "https://assets.modcdn.io/images/placeholder/avatar_50x50.png",
+        "thumb_100x100": "https://assets.modcdn.io/images/placeholder/avatar_100x100.png"
+      },
+      "timezone": "",
+      "language": "",
+      "profile_url": "https://mod.io/u/xant"
+    },
+    "date_added": 1492564103,
+    "date_updated": 1499841487,
+    "date_live": 1499841403,
+    "maturity_option": 0,
+    "community_options": 3,
+    "monetization_options": 0,
+    "price": 0,
+    "tax": 0,
+    "logo": {
+      "filename": "card.png",
+      "original": "https://assets.modcdn.io/images/placeholder/card.png",
+      "thumb_320x180": "https://assets.modcdn.io/images/placeholder/card.png",
+      "thumb_640x360": "https://assets.modcdn.io/images/placeholder/card.png",
+      "thumb_1280x720": "https://assets.modcdn.io/images/placeholder/card.png"
+    },
+    "homepage_url": "https://www.rogue-hdpack.com/",
+    "name": "Rogue Knight HD Pack",
+    "name_id": "rogue-knight-hd-pack",
+    "summary": "It's time to bask in the glory of beautiful 4k textures!",
+    "description": "<p>Rogue HD Pack does exactly what you thi...",
+    "description_plaintext": "Rogue HD Pack does exactly what you thi...",
+    "metadata_blob": "rogue,hd,high-res,4k,hd textures",
+    "profile_url": "https://mod.io/g/rogue-knight/m/rogue-knight-hd-pack",
+    "media": {
+      "youtube": [
+        "https://www.youtube.com/watch?v=dQw4w9WgXcQ"
+      ],
+      "sketchfab": [
+        "https://sketchfab.com/models/ef40b2d300334d009984c8865b2db1c8"
+      ],
+      "images": [
+        {
+          "filename": "card.png",
+          "original": "https://assets.modcdn.io/images/placeholder/card.png",
+          "thumb_320x180": "https://assets.modcdn.io/images/placeholder/card.png",
+          "thumb_1280x720": "https://assets.modcdn.io/images/placeholder/card.png"
+        }
+      ]
+    },
+    "modfile": {
+      "id": 2,
+      "mod_id": 2,
+      "date_added": 1499841487,
+      "date_updated": 1499841487,
+      "date_scanned": 1499841487,
+      "virus_status": 0,
+      "virus_positive": 0,
+      "virustotal_hash": "",
+      "filesize": 15181,
+      "filesize_uncompressed": 16384,
+      "filehash": {
+        "md5": "2d4a0e2d7273db6b0a94b0740a88ad0d"
+      },
+      "filename": "rogue-knight-v1.zip",
+      "version": "1.3",
+      "changelog": "VERSION 1.3 -- Changes -- Fixed critical castle floor bug.",
+      "metadata_blob": "rogue,hd,high-res,4k,hd textures",
+      "download": {
+        "binary_url": "https://*.modapi.io/v1/games/1/mods/1/files/1/download/c489a0354111a4d76640d47f0cdcb294",
+        "date_expires": 1579316848
+      },
+      "platforms": [
+        {
+          "platform": "windows",
+          "status": 1
+        }
+      ]
+    },
+    "dependencies": false,
+    "platforms": [
+      {
+        "platform": "windows",
+        "modfile_live": 1
+      }
+    ],
+    "metadata_kvp": [
+      {
+        "metakey": "pistol-dmg",
+        "metavalue": "800"
+      }
+    ],
+    "tags": [
+      {
+        "name": "Unity",
+        "date_added": 1499841487
+      }
+    ],
+    "stats": {
+      "mod_id": 2,
+      "popularity_rank_position": 13,
+      "popularity_rank_total_mods": 204,
+      "downloads_today": 327,
+      "downloads_total": 27492,
+      "subscribers_total": 16394,
+      "ratings_total": 1230,
+      "ratings_positive": 1047,
+      "ratings_negative": 183,
+      "ratings_percentage_positive": 91,
+      "ratings_weighted_aggregate": 87.38,
+      "ratings_display_text": "Very Positive",
+      "date_expires": 1492564103
+    }
+  }
 }
 
 ```
@@ -15439,6 +15680,433 @@ Status|Meaning|Error Ref|Description|Response Schema
 403|[Forbidden](https://tools.ietf.org/html/rfc7231#section-6.5.3)|15020|This mod is missing a file and cannot be subscribed to.|[Error Object](#schemaerror_object)
 403|[Forbidden](https://tools.ietf.org/html/rfc7231#section-6.5.3)|15001|This mod is hidden and the user cannot be subscribed to it.|[Error Object](#schemaerror_object)
 403|[Forbidden](https://tools.ietf.org/html/rfc7231#section-6.5.3)|15000|This mod is currently under DMCA and the user cannot be subscribed to it.|[Error Object](#schemaerror_object)
+<aside class="auth-notice">
+To perform this request, you must be authenticated via one of the following methods:
+<a href="#authentication">OAuth 2</a> (Scopes: write)
+</aside>
+# In-App Purchases
+
+## Sync Xbox Live Entitlements
+
+> Example request
+
+```shell
+# You can also use wget
+curl -X POST https://*.modapi.io/v1/me/iap/xboxlive/sync?api_key=YourApiKey \
+  -H 'Authorization: Bearer {access-token}' \ 
+  -H 'Content-Type: application/x-www-form-urlencoded' \ 
+  -H 'Accept: application/json' \
+  -d 'xbox_token=XBL3.0 x=9264027439329321064;eym72VygeZzTSUVRmNvw8v...'
+
+```
+
+```http
+POST https://*.modapi.io/v1/me/iap/xboxlive/sync?api_key=YourApiKey HTTP/1.1
+Host: *.modapi.io
+Content-Type: application/x-www-form-urlencoded
+Accept: application/json
+Authorization: Bearer {access-token}
+
+```
+
+```javascript
+var headers = {
+  'Authorization':'Bearer {access-token}',
+  'Content-Type':'application/x-www-form-urlencoded',
+  'Accept':'application/json'
+
+};
+
+$.ajax({
+  url: 'https://*.modapi.io/v1/me/iap/xboxlive/sync',
+  method: 'post',
+  data: '?api_key=YourApiKey',
+  headers: headers,
+  success: function(data) {
+    console.log(JSON.stringify(data));
+  }
+})
+```
+
+```javascript--nodejs
+const request = require('node-fetch');
+const inputBody = '{
+  "xbox_token": "XBL3.0 x=9264027439329321064;eym72VygeZzTSUVRmNvw8v..."
+}';
+const headers = {
+  'Authorization':'Bearer {access-token}',
+  'Content-Type':'application/x-www-form-urlencoded',
+  'Accept':'application/json'
+
+};
+
+fetch('https://*.modapi.io/v1/me/iap/xboxlive/sync?api_key=YourApiKey',
+{
+  method: 'POST',
+  body: inputBody,
+  headers: headers
+})
+.then(function(res) {
+    return res.json();
+}).then(function(body) {
+    console.log(body);
+});
+```
+
+```python
+import requests
+headers = {
+  'Authorization': 'Bearer {access-token}',
+  'Content-Type': 'application/x-www-form-urlencoded',
+  'Accept': 'application/json'
+}
+
+r = requests.post('https://*.modapi.io/v1/me/iap/xboxlive/sync', params={
+  'api_key': 'YourApiKey'
+}, headers = headers)
+
+print r.json()
+```
+
+```java
+URL obj = new URL("https://*.modapi.io/v1/me/iap/xboxlive/sync?api_key=YourApiKey");
+HttpURLConnection con = (HttpURLConnection) obj.openConnection();
+con.setRequestMethod("POST");
+int responseCode = con.getResponseCode();
+BufferedReader in = new BufferedReader(
+    new InputStreamReader(con.getInputStream()));
+String inputLine;
+StringBuffer response = new StringBuffer();
+while ((inputLine = in.readLine()) != null) {
+    response.append(inputLine);
+}
+in.close();
+System.out.println(response.toString());
+```
+
+`POST /me/iap/xboxlive/sync`
+
+Convert an in-game consumable that a user has purchased on Xbox Live into a users mod.io inventory. This endpoint will consume the entitlement on behalf of the user against the portal in which the entitlements reside (i.e. Xbox Live).
+
+     Parameter|Type|Required|Description
+     ---|---|---|---|
+     xbox_token|string|true|The Xbox Live token returned from calling [GetTokenAndSignatureAsync("POST", "https://*.modapi.io")](https://docs.microsoft.com/en-us/dotnet/api/microsoft.xbox.services.system.xboxliveuser.gettokenandsignatureasync?view=xboxlive-dotnet-2017.11.20171204.01). <br><br>__NOTE:__ Due to the encrypted app ticket containing special characters, you must URL encode the string before sending the request to ensure it is successfully sent to our servers otherwise you may encounter an `422 Unprocessable Entity` response. For example, [cURL](https://ec.haxx.se/http-post.html) will do this for you by using the `--data-urlencode` option.     
+
+> Example response
+
+```json
+{
+  "wallet": {
+    "balance": 0
+  },
+  "data": [
+    {
+      "transaction_id": "124641934672",
+      "transaction_state": 2,
+      "sku_id": "MODIO0001",
+      "entitlement_consumed": true,
+      "entitlement_type": 0,
+      "details": {
+        "tokens_allocated": 1000
+      }
+    }
+  ],
+  "result_count": 70,
+  "result_offset": 0,
+  "result_limit": 100,
+  "result_total": 70
+}
+
+```
+<h3 id="Sync-Xbox-Live-Entitlements-responses">Responses</h3>
+
+Status|Meaning|Error Ref|Description|Response Schema
+---|---|----|---|---|
+200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)||Successful Request|[Get Entitlement Sync Status](#schemaget_entitlement_sync_status)
+400|[Bad Request](https://tools.ietf.org/html/rfc7231#section-6.5.1)|900057|In-App Purchase Syncing is only supported for active game sessions.|[Error Object](#schemaerror_object)
+400|[Bad Request](https://tools.ietf.org/html/rfc7231#section-6.5.1)|11069|The authenticated user does not have a XboxLive account connected to their mod.io account. The user must log into mod.io with their XboxLive account either from your game client or our website before re-attempting this request.|[Error Object](#schemaerror_object)
+<aside class="auth-notice">
+To perform this request, you must be authenticated via one of the following methods:
+<a href="#authentication">OAuth 2</a> (Scopes: write)
+</aside>
+## Sync PlayStation™Network Entitlements
+
+> Example request
+
+```shell
+# You can also use wget
+curl -X POST https://*.modapi.io/v1/me/iap/psn/sync?api_key=YourApiKey \
+  -H 'Authorization: Bearer {access-token}' \ 
+  -H 'Content-Type: application/x-www-form-urlencoded' \ 
+  -H 'Accept: application/json' \
+  -d 'auth_code=v3.AbCdE' \
+  -d 'env=256' \
+  -d 'service_label=0'
+
+```
+
+```http
+POST https://*.modapi.io/v1/me/iap/psn/sync?api_key=YourApiKey HTTP/1.1
+Host: *.modapi.io
+Content-Type: application/x-www-form-urlencoded
+Accept: application/json
+Authorization: Bearer {access-token}
+
+```
+
+```javascript
+var headers = {
+  'Authorization':'Bearer {access-token}',
+  'Content-Type':'application/x-www-form-urlencoded',
+  'Accept':'application/json'
+
+};
+
+$.ajax({
+  url: 'https://*.modapi.io/v1/me/iap/psn/sync',
+  method: 'post',
+  data: '?api_key=YourApiKey',
+  headers: headers,
+  success: function(data) {
+    console.log(JSON.stringify(data));
+  }
+})
+```
+
+```javascript--nodejs
+const request = require('node-fetch');
+const inputBody = '{
+  "auth_code": "v3.AbCdE",
+  "env": 256,
+  "service_label": 0
+}';
+const headers = {
+  'Authorization':'Bearer {access-token}',
+  'Content-Type':'application/x-www-form-urlencoded',
+  'Accept':'application/json'
+
+};
+
+fetch('https://*.modapi.io/v1/me/iap/psn/sync?api_key=YourApiKey',
+{
+  method: 'POST',
+  body: inputBody,
+  headers: headers
+})
+.then(function(res) {
+    return res.json();
+}).then(function(body) {
+    console.log(body);
+});
+```
+
+```python
+import requests
+headers = {
+  'Authorization': 'Bearer {access-token}',
+  'Content-Type': 'application/x-www-form-urlencoded',
+  'Accept': 'application/json'
+}
+
+r = requests.post('https://*.modapi.io/v1/me/iap/psn/sync', params={
+  'api_key': 'YourApiKey'
+}, headers = headers)
+
+print r.json()
+```
+
+```java
+URL obj = new URL("https://*.modapi.io/v1/me/iap/psn/sync?api_key=YourApiKey");
+HttpURLConnection con = (HttpURLConnection) obj.openConnection();
+con.setRequestMethod("POST");
+int responseCode = con.getResponseCode();
+BufferedReader in = new BufferedReader(
+    new InputStreamReader(con.getInputStream()));
+String inputLine;
+StringBuffer response = new StringBuffer();
+while ((inputLine = in.readLine()) != null) {
+    response.append(inputLine);
+}
+in.close();
+System.out.println(response.toString());
+```
+
+`POST /me/iap/psn/sync`
+
+Convert an in-game consumable that a user has purchased via PlayStation™Network into a users mod.io inventory. This endpoint will consume the entitlement on behalf of the user against the portal in which the entitlements reside (i.e. PlayStation™Network). Requests to this endpoint should specify if they are syncing PS4 or PS5 entitlements via the [platform header](#targeting-a-platform). If the platform header is omitted from the request, the endpoint will default to syncing PS5 entitlements.
+
+    Body Parameter|Type|Required|Description
+    ---|---|---|---|
+    auth_code|string|true|The auth code returned from the PlayStation™Network API.
+    env|integer||The PlayStation™Network environment you are targeting. If omitted, the request will default to targeting the production environment.
+    service_label|int||The service label where the entitlements for mod.io reside. If omitted the default value will be 0.
+
+> Example response
+
+```json
+{
+  "wallet": {
+    "balance": 0
+  },
+  "data": [
+    {
+      "transaction_id": "124641934672",
+      "transaction_state": 2,
+      "sku_id": "MODIO0001",
+      "entitlement_consumed": true,
+      "entitlement_type": 0,
+      "details": {
+        "tokens_allocated": 1000
+      }
+    }
+  ],
+  "result_count": 70,
+  "result_offset": 0,
+  "result_limit": 100,
+  "result_total": 70
+}
+
+```
+<h3 id="Sync-PlayStation™Network-Entitlements-responses">Responses</h3>
+
+Status|Meaning|Error Ref|Description|Response Schema
+---|---|----|---|---|
+200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)||Successful Request|[Get Entitlement Sync Status](#schemaget_entitlement_sync_status)
+400|[Bad Request](https://tools.ietf.org/html/rfc7231#section-6.5.1)|900054|The In-App Purchase config has not been configured for PlayStation™Network. Please submit the required credentials within the IAP config section of your game admin panel.|[Error Object](#schemaerror_object)
+400|[Bad Request](https://tools.ietf.org/html/rfc7231#section-6.5.1)|11069|The authenticated user does not have a PlayStation™Network account connected to their mod.io account. The user must log into mod.io with their PlayStation™Network account either from your game client or our website before re-attempting this request.|[Error Object](#schemaerror_object)
+400|[Bad Request](https://tools.ietf.org/html/rfc7231#section-6.5.1)|900057|In-App Purchase Syncing is only supported for active game sessions.|[Error Object](#schemaerror_object)
+<aside class="auth-notice">
+To perform this request, you must be authenticated via one of the following methods:
+<a href="#authentication">OAuth 2</a> (Scopes: write)
+</aside>
+## Sync Steam Entitlements
+
+> Example request
+
+```shell
+# You can also use wget
+curl -X POST https://*.modapi.io/v1/me/iap/steam/sync?api_key=YourApiKey \
+  -H 'Authorization: Bearer {access-token}' \ 
+  -H 'Accept: application/json'
+
+```
+
+```http
+POST https://*.modapi.io/v1/me/iap/steam/sync?api_key=YourApiKey HTTP/1.1
+Host: *.modapi.io
+
+Accept: application/json
+Authorization: Bearer {access-token}
+
+```
+
+```javascript
+var headers = {
+  'Authorization':'Bearer {access-token}',
+  'Accept':'application/json'
+
+};
+
+$.ajax({
+  url: 'https://*.modapi.io/v1/me/iap/steam/sync',
+  method: 'post',
+  data: '?api_key=YourApiKey',
+  headers: headers,
+  success: function(data) {
+    console.log(JSON.stringify(data));
+  }
+})
+```
+
+```javascript--nodejs
+const request = require('node-fetch');
+
+const headers = {
+  'Authorization':'Bearer {access-token}',
+  'Accept':'application/json'
+
+};
+
+fetch('https://*.modapi.io/v1/me/iap/steam/sync?api_key=YourApiKey',
+{
+  method: 'POST',
+
+  headers: headers
+})
+.then(function(res) {
+    return res.json();
+}).then(function(body) {
+    console.log(body);
+});
+```
+
+```python
+import requests
+headers = {
+  'Authorization': 'Bearer {access-token}',
+  'Accept': 'application/json'
+}
+
+r = requests.post('https://*.modapi.io/v1/me/iap/steam/sync', params={
+  'api_key': 'YourApiKey'
+}, headers = headers)
+
+print r.json()
+```
+
+```java
+URL obj = new URL("https://*.modapi.io/v1/me/iap/steam/sync?api_key=YourApiKey");
+HttpURLConnection con = (HttpURLConnection) obj.openConnection();
+con.setRequestMethod("POST");
+int responseCode = con.getResponseCode();
+BufferedReader in = new BufferedReader(
+    new InputStreamReader(con.getInputStream()));
+String inputLine;
+StringBuffer response = new StringBuffer();
+while ((inputLine = in.readLine()) != null) {
+    response.append(inputLine);
+}
+in.close();
+System.out.println(response.toString());
+```
+
+`POST /me/iap/steam/sync`
+
+Convert an in-game consumable that a user has purchased on Steam into a users mod.io inventory. This endpoint will consume the entitlement on behalf of the user against the portal in which the entitlement resides (i.e. Steam).
+
+> Example response
+
+```json
+{
+  "wallet": {
+    "balance": 0
+  },
+  "data": [
+    {
+      "transaction_id": "124641934672",
+      "transaction_state": 2,
+      "sku_id": "MODIO0001",
+      "entitlement_consumed": true,
+      "entitlement_type": 0,
+      "details": {
+        "tokens_allocated": 1000
+      }
+    }
+  ],
+  "result_count": 70,
+  "result_offset": 0,
+  "result_limit": 100,
+  "result_total": 70
+}
+
+```
+<h3 id="Sync-Steam-Entitlements-responses">Responses</h3>
+
+Status|Meaning|Error Ref|Description|Response Schema
+---|---|----|---|---|
+200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)||Successful Request|[Get Entitlement Sync Status](#schemaget_entitlement_sync_status)
+400|[Bad Request](https://tools.ietf.org/html/rfc7231#section-6.5.1)|900054|The In-App Purchase config has not been configured for Steam. Please submit the required credentials within the IAP config section of your game admin panel.|[Error Object](#schemaerror_object)
+404|[Not Found](https://tools.ietf.org/html/rfc7231#section-6.5.4)|11069|The authenticated user does not have a Steam account connected to their mod.io account. The user must log into mod.io with their Steam account either from your game client or our website before re-attempting this request.|[Error Object](#schemaerror_object)
 <aside class="auth-notice">
 To perform this request, you must be authenticated via one of the following methods:
 <a href="#authentication">OAuth 2</a> (Scopes: write)
@@ -15613,6 +16281,54 @@ Name|Type|Description
 ---|---|---|---|
 binary_url|string|URL to download the file from the mod.io CDN.<br><br>__NOTE:__ If the [game](#edit-game) requires mod downloads to be initiated via the API, the `binary_url` returned will contain a verification hash. This hash must be supplied to get the modfile, and will expire after a certain period of time. Saving and reusing the `binary_url` won't work in this situation given it's dynamic nature.
 date_expires|integer|Unix timestamp of when the `binary_url` will expire.
+
+
+
+## Entitlement Details Object  
+
+<a name="schemaentitlement_details_object"></a>
+
+```json
+{
+  "tokens_allocated": 1000
+} 
+```
+
+### Properties
+
+Name|Type|Description
+---|---|---|---|
+tokens_allocated|integer|The amount of virtual tokens (Mio's) allocated from the entitlement consumption.
+
+
+
+## Entitlement Fulfillment Object  
+
+<a name="schemaentitlement_fulfillment_object"></a>
+
+```json
+{
+  "transaction_id": "124641934672",
+  "transaction_state": 2,
+  "sku_id": "MODIO0001",
+  "entitlement_consumed": true,
+  "entitlement_type": 0,
+  "details": {
+    "tokens_allocated": 1000
+  }
+} 
+```
+
+### Properties
+
+Name|Type|Description
+---|---|---|---|
+transaction_id|string|The mod.io transaction ID for the entitlement transfer.
+transaction_state|integer|The mod.io transaction state from converting the portal entitlements into mod.io assets / currency. Possible values:<br><br>__0__ = Failed<br>__1__ = Pending<br>__2__ = Fulfilled<br>__3__ = Consume Limit Exceeded
+sku_id|string|The portal SKU ID associated with the transaction.
+entitlement_consumed|bool|Has the entitlement been consumed in the 3rd-party portal?
+entitlement_type|integer|The entitlement type, once consumed and the entitlement is transferred to mod.io. Possible values:<br><br>__0__ = Virtual Tokens
+details|[Entitlement Details Object](#schemaentitlement_details_object)|Details associated with the transaction.
 
 
 
@@ -15943,6 +16659,23 @@ tags|string[]|Array of tags in this group.
     "language": "",
     "profile_url": "https://mod.io/u/xant"
   },
+  "user_from": {
+    "id": 1,
+    "name_id": "xant",
+    "username": "XanT",
+    "display_name_portal": null,
+    "date_online": 1509922961,
+    "date_joined": 1509922961,
+    "avatar": {
+      "filename": "avatar.png",
+      "original": "https://assets.modcdn.io/images/placeholder/avatar.png",
+      "thumb_50x50": "https://assets.modcdn.io/images/placeholder/avatar_50x50.png",
+      "thumb_100x100": "https://assets.modcdn.io/images/placeholder/avatar_100x100.png"
+    },
+    "timezone": "",
+    "language": "",
+    "profile_url": "https://mod.io/u/xant"
+  },
   "resource_url": "https://mod.io/g/@rogueknight/m/@some-mod",
   "date_added": 1499841487
 } 
@@ -15952,9 +16685,51 @@ tags|string[]|Array of tags in this group.
 
 Name|Type|Description
 ---|---|---|---|
-user|[User Object](#schemauser_object)|No description
+user|[User Object](#schemauser_object)|The previewing user.
+user_from|[User Object](#schemauser_object)|The user who invited the previewing user, if the previewer was added manually.
 resource_url|string|The URL of the resource that the registrant should be redirect to upon success.
 date_added|integer|Unix timestamp of the date the user was registered as a previewer.
+
+
+
+## Get Entitlement Sync Status 
+
+<a name="schemaget_entitlement_sync_status"></a>
+
+```json
+{
+  "wallet": {
+    "balance": 0
+  },
+  "data": [
+    {
+      "transaction_id": "124641934672",
+      "transaction_state": 2,
+      "sku_id": "MODIO0001",
+      "entitlement_consumed": true,
+      "entitlement_type": 0,
+      "details": {
+        "tokens_allocated": 1000
+      }
+    }
+  ],
+  "result_count": 70,
+  "result_offset": 0,
+  "result_limit": 100,
+  "result_total": 70
+} 
+```
+
+### Properties
+
+Name|Type|Description
+---|---|---|---|
+wallet|[Wallet Balance Object](#schemawallet_balance_object)|A summary of wallet-related data, such as the updated wallet balance after any eligible entitlements have been sync'd. This value is returned for convenience, and will be `null` if no eligible entitlements were converted into mod.io Virtual Tokens. To reliably ascertain the users current balance, you should call the [Get User Wallet](#get-user-wallet) endpoint.
+data|[Entitlement Fulfillment Object](#schemaentitlement_fulfillment_object)[]|Array containing entitlement fulfillment objects.
+result_count|integer|Number of entitlements mod.io was able to retrieve in this request. This is not an indication the entitlement was consumed and the transaction successful. This value will cap out at 5.
+result_offset|integer|Number of results skipped over. Always 0.
+result_limit|integer|Maximum number of results returned in the request. Defaults to 100 (max) unless overridden by `_limit` filter.
+result_total|integer|Number of entitlements mod.io was able to retrieve that can be associated with SKU's registered on mod.io. Due to the max limit of 5 entitlements consumed per request your application should check if `results_total > results_count` and if so, repeat the request to consume the next batch.
 
 
 
@@ -17709,6 +18484,23 @@ date_added|integer|Unix timestamp of date tag was applied.
     "language": "",
     "profile_url": "https://mod.io/u/xant"
   },
+  "user_from": {
+    "id": 1,
+    "name_id": "xant",
+    "username": "XanT",
+    "display_name_portal": null,
+    "date_online": 1509922961,
+    "date_joined": 1509922961,
+    "avatar": {
+      "filename": "avatar.png",
+      "original": "https://assets.modcdn.io/images/placeholder/avatar.png",
+      "thumb_50x50": "https://assets.modcdn.io/images/placeholder/avatar_50x50.png",
+      "thumb_100x100": "https://assets.modcdn.io/images/placeholder/avatar_100x100.png"
+    },
+    "timezone": "",
+    "language": "",
+    "profile_url": "https://mod.io/u/xant"
+  },
   "resource_url": "https://mod.io/g/@rogueknight/m/@some-mod",
   "subscribed": false,
   "date_added": 1499841487
@@ -17719,7 +18511,8 @@ date_added|integer|Unix timestamp of date tag was applied.
 
 Name|Type|Description
 ---|---|---|---|
-user|[User Object](#schemauser_object)|No description
+user|[User Object](#schemauser_object)|The previewing user.
+user_from|[User Object](#schemauser_object)|The user who invited the previewing user, if the previewer was added manually.
 resource_url|string|The URL of the resource that the registrant should be redirect to upon success.
 subscribed|boolean|If the user is also subscribed to the resource.
 date_added|integer|Unix timestamp of the date the user was registered as a previewer.
@@ -17902,7 +18695,132 @@ date_added|integer|Unix timestamp of date the part was uploaded.
   "purchase_date": 1626667557,
   "wallet_type": "string",
   "balance": 0,
-  "payment_method_id": "string"
+  "payment_method_id": "string",
+  "mod": {
+    "id": 2,
+    "game_id": 2,
+    "status": 1,
+    "visible": 1,
+    "submitted_by": {
+      "id": 1,
+      "name_id": "xant",
+      "username": "XanT",
+      "display_name_portal": null,
+      "date_online": 1509922961,
+      "date_joined": 1509922961,
+      "avatar": {
+        "filename": "avatar.png",
+        "original": "https://assets.modcdn.io/images/placeholder/avatar.png",
+        "thumb_50x50": "https://assets.modcdn.io/images/placeholder/avatar_50x50.png",
+        "thumb_100x100": "https://assets.modcdn.io/images/placeholder/avatar_100x100.png"
+      },
+      "timezone": "",
+      "language": "",
+      "profile_url": "https://mod.io/u/xant"
+    },
+    "date_added": 1492564103,
+    "date_updated": 1499841487,
+    "date_live": 1499841403,
+    "maturity_option": 0,
+    "community_options": 3,
+    "monetization_options": 0,
+    "price": 0,
+    "tax": 0,
+    "logo": {
+      "filename": "card.png",
+      "original": "https://assets.modcdn.io/images/placeholder/card.png",
+      "thumb_320x180": "https://assets.modcdn.io/images/placeholder/card.png",
+      "thumb_640x360": "https://assets.modcdn.io/images/placeholder/card.png",
+      "thumb_1280x720": "https://assets.modcdn.io/images/placeholder/card.png"
+    },
+    "homepage_url": "https://www.rogue-hdpack.com/",
+    "name": "Rogue Knight HD Pack",
+    "name_id": "rogue-knight-hd-pack",
+    "summary": "It's time to bask in the glory of beautiful 4k textures!",
+    "description": "<p>Rogue HD Pack does exactly what you thi...",
+    "description_plaintext": "Rogue HD Pack does exactly what you thi...",
+    "metadata_blob": "rogue,hd,high-res,4k,hd textures",
+    "profile_url": "https://mod.io/g/rogue-knight/m/rogue-knight-hd-pack",
+    "media": {
+      "youtube": [
+        "https://www.youtube.com/watch?v=dQw4w9WgXcQ"
+      ],
+      "sketchfab": [
+        "https://sketchfab.com/models/ef40b2d300334d009984c8865b2db1c8"
+      ],
+      "images": [
+        {
+          "filename": "card.png",
+          "original": "https://assets.modcdn.io/images/placeholder/card.png",
+          "thumb_320x180": "https://assets.modcdn.io/images/placeholder/card.png",
+          "thumb_1280x720": "https://assets.modcdn.io/images/placeholder/card.png"
+        }
+      ]
+    },
+    "modfile": {
+      "id": 2,
+      "mod_id": 2,
+      "date_added": 1499841487,
+      "date_updated": 1499841487,
+      "date_scanned": 1499841487,
+      "virus_status": 0,
+      "virus_positive": 0,
+      "virustotal_hash": "",
+      "filesize": 15181,
+      "filesize_uncompressed": 16384,
+      "filehash": {
+        "md5": "2d4a0e2d7273db6b0a94b0740a88ad0d"
+      },
+      "filename": "rogue-knight-v1.zip",
+      "version": "1.3",
+      "changelog": "VERSION 1.3 -- Changes -- Fixed critical castle floor bug.",
+      "metadata_blob": "rogue,hd,high-res,4k,hd textures",
+      "download": {
+        "binary_url": "https://*.modapi.io/v1/games/1/mods/1/files/1/download/c489a0354111a4d76640d47f0cdcb294",
+        "date_expires": 1579316848
+      },
+      "platforms": [
+        {
+          "platform": "windows",
+          "status": 1
+        }
+      ]
+    },
+    "dependencies": false,
+    "platforms": [
+      {
+        "platform": "windows",
+        "modfile_live": 1
+      }
+    ],
+    "metadata_kvp": [
+      {
+        "metakey": "pistol-dmg",
+        "metavalue": "800"
+      }
+    ],
+    "tags": [
+      {
+        "name": "Unity",
+        "date_added": 1499841487
+      }
+    ],
+    "stats": {
+      "mod_id": 2,
+      "popularity_rank_position": 13,
+      "popularity_rank_total_mods": 204,
+      "downloads_today": 327,
+      "downloads_total": 27492,
+      "subscribers_total": 16394,
+      "ratings_total": 1230,
+      "ratings_positive": 1047,
+      "ratings_negative": 183,
+      "ratings_percentage_positive": 91,
+      "ratings_weighted_aggregate": 87.38,
+      "ratings_display_text": "Very Positive",
+      "date_expires": 1492564103
+    }
+  }
 } 
 ```
 
@@ -17921,6 +18839,7 @@ purchase_date|integer|The time of the purchase.
 wallet_type|string|The type of wallet that was used for the purchase. E.g. STANDARD_MIO.
 balance|integer|The balance of the wallet.
 payment_method_id|string|The payment method id that was used.
+mod|[Mod Object](#schemamod_object)|The mod that was purchased.
 
 
 
@@ -17985,6 +18904,26 @@ game_id|integer|Unique game id.
 mod_id|integer|Unique mod id.
 rating|integer|Mod rating value:<br><br>__1__ = Positive Rating<br>__-1__ = Negative Rating
 date_added|integer|Unix timestamp of date rating was submitted.
+
+
+
+## Service Ticket Object  
+
+<a name="schemaservice_ticket_object"></a>
+
+```json
+{
+  "resource": "game-secure-server",
+  "service_ticket": "eyJ0eXAiOiXKV1QibCJhbLciOiJeiUzI1....."
+} 
+```
+
+### Properties
+
+Name|Type|Description
+---|---|---|---|
+resource|string|The resource as to which the service ticket is issued for. Possible Values are `game-secure-server` and `xboxlive`
+service_ticket|string|The service ticket for the requested audience.
 
 
 
@@ -18266,6 +19205,24 @@ avatar|[Avatar Object](#schemaavatar_object)|Contains media URL's to the users a
 timezone|string|Deprecated: No longer used and will be removed in subsequent API version.
 language|string|Deprecated: No longer used and will be removed in subsequent API version. To [localize the API response](#localization) we recommend you set the `Accept-Language` header.
 profile_url|string|URL to the users profile.
+
+
+
+## Wallet Balance Object  
+
+<a name="schemawallet_balance_object"></a>
+
+```json
+{
+  "balance": 0
+} 
+```
+
+### Properties
+
+Name|Type|Description
+---|---|---|---|
+balance|integer|The balance of the wallet.
 
 
 
