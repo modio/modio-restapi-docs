@@ -693,6 +693,12 @@
             <a href="#teams" class="toc-h1 toc-link" data-title="Teams"><span class="reficon"><img src="images/cog-white.svg" alt="Reference" class="menu-reference-icon"></span> Teams</a>
               <ul class="toc-list-h2">
                   <li>
+                    <a href="#get-users-in-mod-monetization-team" class="toc-h2 toc-link" data-title="Teams">Get Users In Mod Monetization Team</a>
+                  </li>
+                  <li>
+                    <a href="#create-mod-monetization-team" class="toc-h2 toc-link" data-title="Teams">Create Mod Monetization Team</a>
+                  </li>
+                  <li>
                     <a href="#get-mod-team-members" class="toc-h2 toc-link" data-title="Teams">Get Mod Team Members</a>
                   </li>
               </ul>
@@ -968,6 +974,9 @@
                   </li>
                   <li>
                     <a href="#modfile-platform-supported-object" class="toc-h2 toc-link" data-title="Response Schemas">Modfile Platform Supported Object</a>
+                  </li>
+                  <li>
+                    <a href="#monetization-team-accounts-object" class="toc-h2 toc-link" data-title="Response Schemas">Monetization Team Accounts Object</a>
                   </li>
                   <li>
                     <a href="#multipart-upload-object" class="toc-h2 toc-link" data-title="Response Schemas">Multipart Upload Object</a>
@@ -2106,7 +2115,7 @@ retry-after: 57
 
 <ul>
 <li>
-<code>retry-after</code> - Number of seconds before you can attempt to make another request to API.</li>
+<code>retry-after</code> - Number of seconds before you can attempt to make another request to API. <strong>NOTE:</strong> If the <code>retry-after</code> value is 0, that means you have hit a rolling ratelimit. Rolling ratelimits don't block for a set timeframe once the limit is reached, instead they permit a certain number of requests within the timeframe (see <a href="https://developers.cloudflare.com/waf/rate-limiting-rules/parameters/#with-the-following-behavior">this explanation</a>). If you encounter a 0, we recommend retrying the endpoint again after 60 seconds.</li>
 </ul>
 <h3 id="deprecation-notice">Deprecation Notice</h3>
 <p>From November 20th, 2022 - the rate limit headers below will no longer be returned. If you have written a custom mod.io SDK or library, you should replace any usage of these headers with <code>retry-after</code>.</p>
@@ -2220,6 +2229,8 @@ retry-after: 57
 
 <p>For example, passing the HTTP header <code>X-Modio-Portal: epicgames</code> in your API request tells mod.io your player is coming via the Epic Games Store.</p>
 
+<p>You can also instruct the mod.io website to authenticate the player using a portal from the list above (provided it is supported), as explained in <a href="#authentication">Web Overlay Authentication</a>. For example, if your game client has logged the player into mod.io on PlayStation using their PlayStation™Network account, and you want to open the mod.io website in-game with the player logged in using the same authentication method, you would add <code>?portal=psn</code> to the end of the URL: <code>https://mod.io/g/gamename?portal=psn</code>. You can optionally add <code>&amp;login=auto</code> as well to automatically start the login process.</p>
+
 <table>
 <thead>
 <tr>
@@ -2261,12 +2272,12 @@ retry-after: 57
 <td><code>nintendo</code></td>
 </tr>
 <tr>
-<td>OpenID</td>
-<td><code>openid</code></td>
+<td>PlayStation™Network</td>
+<td><code>psn</code></td>
 </tr>
 <tr>
-<td>PlayStation Network</td>
-<td><code>psn</code></td>
+<td>SSO</td>
+<td><code>sso</code></td>
 </tr>
 <tr>
 <td>Steam</td>
@@ -2376,8 +2387,8 @@ Accept: application/json
 <p>Example response</p>
 </blockquote>
 <div class="highlight"><pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
-  </span><span class="nl">"plaintext"</span><span class="p">:</span><span class="w"> </span><span class="s2">"We use mod.io to support user-generated content in-game. By clicking "</span><span class="err">I</span><span class="w"> </span><span class="err">Agree</span><span class="s2">" you agree to the mod.io Terms of Use and a mod.io account will be created for you (using your display name, avatar and ID). Please see the mod.io Privacy Policy on how mod.io processes your personal data."</span><span class="p">,</span><span class="w">
-  </span><span class="nl">"html"</span><span class="p">:</span><span class="w"> </span><span class="s2">"&lt;p&gt;We use &lt;a href="</span><span class="err">https://mod.io</span><span class="s2">"&gt;mod.io&lt;/a&gt; to support user-generated content in-game. By clicking "</span><span class="err">I</span><span class="w"> </span><span class="err">Agree</span><span class="s2">" you agree to the mod.io &lt;a href="</span><span class="err">https://mod.io/terms</span><span class="s2">"&gt;Terms of Use&lt;/a&gt; and a mod.io account will be created for you (using your  display name, avatar and ID). Please see the mod.io &lt;a href="</span><span class="err">https://mod.io/privacy</span><span class="s2">"&gt;Privacy Policy&lt;/a&gt; on how mod.io processes your personal data.&lt;/p&gt;"</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"plaintext"</span><span class="p">:</span><span class="w"> </span><span class="s2">"We use mod.io to support user-generated content in-game. By selecting "</span><span class="err">I</span><span class="w"> </span><span class="err">Agree</span><span class="s2">" you agree to the mod.io Terms of Use and a mod.io account will be created for you (using your display name, avatar and ID). Please see the mod.io Privacy Policy on how mod.io processes your personal data."</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"html"</span><span class="p">:</span><span class="w"> </span><span class="s2">"&lt;p&gt;We use &lt;a href="</span><span class="err">https://mod.io</span><span class="s2">"&gt;mod.io&lt;/a&gt; to support user-generated content in-game. By selecting "</span><span class="err">I</span><span class="w"> </span><span class="err">Agree</span><span class="s2">" you agree to the mod.io &lt;a href="</span><span class="err">https://mod.io/terms</span><span class="s2">"&gt;Terms of Use&lt;/a&gt; and a mod.io account will be created for you (using your  display name, avatar and ID). Please see the mod.io &lt;a href="</span><span class="err">https://mod.io/privacy</span><span class="s2">"&gt;Privacy Policy&lt;/a&gt; on how mod.io processes your personal data.&lt;/p&gt;"</span><span class="p">,</span><span class="w">
   </span><span class="nl">"buttons"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
     </span><span class="nl">"agree"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
       </span><span class="nl">"text"</span><span class="p">:</span><span class="w"> </span><span class="s2">"I Agree"</span><span class="w">
@@ -2518,9 +2529,8 @@ curl <span class="nt">-X</span> POST https://<span class="k">*</span>.modapi.io/
 
 <p>Request an access token on behalf of a Steam user. To use this functionality you <em>must</em> add your games <a href="https://partner.steamgames.com/apps/sdkauth">encrypted app ticket key</a> from Steamworks, to the <em>Game Admin &gt; Settings</em> page of your games profile on mod.io. A Successful request will return an <a href="#access-token-object">Access Token Object</a>.</p>
 
-<p><strong>HINT:</strong> If you want to overlay the mod.io site in-game on Steam, we recommend you add <code>?portal=steam</code> to the end of the URL you open which will prompt the user to login with Steam. See <a href="#web-overlay-authentication">Web Overlay Authentication</a> for details.</p>
-
-<p><strong>NOTE</strong>: Steam is the only authentication endpoint that requires their token to be base64 encoded. All other endpoints tokens should be provided as a UTF-8 character string.</p>
+<p><strong>HINT:</strong> If you want to overlay the mod.io site in-game on Steam, we recommend you add <code>?portal=steam</code> to the end of the URL you open which will prompt the user to login with Steam. See <a href="#web-overlay-authentication">Web Overlay Authentication</a> for details.
+    <strong>NOTE</strong>: Steam is the only authentication endpoint that requires their token to be base64 encoded. All other endpoints tokens should be provided as a UTF-8 character string.</p>
 
 <table>
 <thead>
@@ -2638,6 +2648,13 @@ curl <span class="nt">-X</span> POST https://<span class="k">*</span>.modapi.io/
 <td>The user has not agreed to the mod.io Terms of Use. Please see terms_agreed parameter description and the <a href="#terms">Terms</a> endpoint for more information.</td>
 <td><a href="#schemaerror_object">Error Object</a></td>
 </tr>
+<tr>
+<td>403</td>
+<td><a href="https://tools.ietf.org/html/rfc7231#section-6.5.3">Forbidden</a></td>
+<td>17053</td>
+<td>The user account associated with this email is locked. Please contact support for assistance.</td>
+<td><a href="#schemaerror_object">Error Object</a></td>
+</tr>
 </tbody>
 </table>
 
@@ -2723,48 +2740,18 @@ curl <span class="nt">-X</span> POST https://<span class="k">*</span>.modapi.io/
 </code></pre></div>
 <p><span class="httpmethod POST">POST</span> <span class="endpointheading">/external/xboxauth</span></p>
 
-<p>Request an access token on behalf of an Xbox Live user. A Successful request will return an <a href="#access-token-object">Access Token Object</a>.</p>
-
-<p><strong>NOTE</strong>: To use this endpoint you will need to setup some additional settings prior to being able to authenticate Xbox Live users. For these instructions please <a href="mailto:developers@mod.io?subject=Xbox%20Live%20SSO%20Request">contact us</a>.</p>
-
-<p><strong>HINT:</strong> If you want to overlay the mod.io site in-game on Xbox, we recommend you add <code>?portal=xboxlive</code> to the end of the URL you open which will prompt the user to login with Xbox Live. See <a href="#web-overlay-authentication">Web Overlay Authentication</a> for details.</p>
-
-<table>
-<thead>
-<tr>
-<th>Parameter</th>
-<th>Type</th>
-<th>Required</th>
-<th>Description</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>xbox_token</td>
-<td>string</td>
-<td>true</td>
-<td>The Xbox Live token returned from calling <a href="https://docs.microsoft.com/en-us/dotnet/api/microsoft.xbox.services.system.xboxliveuser.gettokenandsignatureasync?view=xboxlive-dotnet-2017.11.20171204.01">GetTokenAndSignatureAsync("POST", "https://*.modapi.io")</a>. <br><br><strong>NOTE:</strong> Due to the encrypted app ticket containing special characters, you must URL encode the string before sending the request to ensure it is successfully sent to our servers otherwise you may encounter an <code>422 Unprocessable Entity</code> response. For example, <a href="https://ec.haxx.se/http-post.html">cURL</a> will do this for you by using the <code>--data-urlencode</code> option.</td>
-</tr>
-<tr>
-<td>email</td>
-<td>string</td>
-<td></td>
-<td>The users email address (optional but recommended to help users recover lost accounts). If supplied, and the respective user does not have an email registered for their account we will send a confirmation email to confirm they have ownership of the specified email. This functionality is also available at a later time via the <a href="#link-an-email">Link an Email</a> endpoint.<br><br><strong>NOTE</strong>: If the user already has an email on record with us, this parameter will be ignored. This parameter should also be urlencoded before the request is sent.</td>
-</tr>
-<tr>
-<td>date_expires</td>
-<td>integer</td>
-<td></td>
-<td>Unix timestamp of date in which the returned token will expire. Value cannot be higher than the default value which is a common year (unix timestamp + 31536000 seconds). Using a token after it's expiry time has elapsed will result in a <code>401 Unauthorized</code> response.</td>
-</tr>
-<tr>
-<td>terms_agreed</td>
-<td>boolean</td>
-<td></td>
-<td>This MUST be set to <code>false</code> unless you have collected the <a href="#terms">users agreement</a> prior to calling this endpoint in which case it can be set to <code>true</code> and will be recorded.<br><br><strong>NOTE:</strong> If this is set to <code>false</code> and the user has not agreed to the latest mod.io Terms of Use and Privacy Policy, an error <code>403 Forbidden (error_ref 11074)</code> will be returned and you will need to collect the <a href="#terms">users agreement</a> and retry with this value set to <code>true</code> to authenticate the user.</td>
-</tr>
-</tbody>
-</table>
+<p>Request an access token on behalf of an Xbox Live user. A Successful request will return an <a href="#access-token-object">Access Token Object</a>.
+ *
+* <strong>NOTE</strong>: To use this endpoint you will need to setup some additional settings prior to being able to authenticate Xbox Live users. For these instructions please <a href="mailto:developers@mod.io?subject=Xbox%20Live%20SSO%20Request">contact us</a>.
+ *
+* <strong>HINT:</strong> If you want to overlay the mod.io site in-game on Xbox, we recommend you add <code>?portal=xboxlive</code> to the end of the URL you open which will prompt the user to login with Xbox Live. See <a href="#web-overlay-authentication">Web Overlay Authentication</a> for details.
+ *
+* Parameter|Type|Required|Description
+     * ---|---|---|---|
+     * xbox_token|string|true|The Xbox Live token returned from calling <a href="https://docs.microsoft.com/en-us/dotnet/api/microsoft.xbox.services.system.xboxliveuser.gettokenandsignatureasync?view=xboxlive-dotnet-2017.11.20171204.01">GetTokenAndSignatureAsync("POST", "https://*.modapi.io")</a>. <br><br><strong>NOTE:</strong> Due to the encrypted app ticket containing special characters, you must URL encode the string before sending the request to ensure it is successfully sent to our servers otherwise you may encounter an <code>422 Unprocessable Entity</code> response. For example, <a href="https://ec.haxx.se/http-post.html">cURL</a> will do this for you by using the <code>--data-urlencode</code> option.
+     * email|string||The users email address (optional but recommended to help users recover lost accounts). If supplied, and the respective user does not have an email registered for their account we will send a confirmation email to confirm they have ownership of the specified email. This functionality is also available at a later time via the <a href="#link-an-email">Link an Email</a> endpoint.<br><br><strong>NOTE</strong>: If the user already has an email on record with us, this parameter will be ignored. This parameter should also be urlencoded before the request is sent.
+     * date_expires|integer||Unix timestamp of date in which the returned token will expire. Value cannot be higher than the default value which is a common year (unix timestamp + 31536000 seconds). Using a token after it's expiry time has elapsed will result in a <code>401 Unauthorized</code> response.
+     * terms_agreed|boolean||This MUST be set to <code>false</code> unless you have collected the <a href="#terms">users agreement</a> prior to calling this endpoint in which case it can be set to <code>true</code> and will be recorded.<br><br><strong>NOTE:</strong> If this is set to <code>false</code> and the user has not agreed to the latest mod.io Terms of Use and Privacy Policy, an error <code>403 Forbidden (error_ref 11074)</code> will be returned and you will need to collect the <a href="#terms">users agreement</a> and retry with this value set to <code>true</code> to authenticate the user.</p>
 
 <blockquote>
 <p>Example response</p>
@@ -3117,46 +3104,16 @@ curl <span class="nt">-X</span> POST https://<span class="k">*</span>.modapi.io/
 </code></pre></div>
 <p><span class="httpmethod POST">POST</span> <span class="endpointheading">/external/switchauth</span></p>
 
-<p>Request an access token on behalf of a Nintendo Switch user. A Successful request will return an <a href="#access-token-object">Access Token Object</a>.</p>
-
-<p><strong>NOTE</strong>: To use this endpoint you will need to setup some additional settings prior to being able to authenticate Nintendo Switch users. For these instructions please <a href="mailto:developers@mod.io?subject=Nintendo%20Switch%20SSO%20Request">contact us</a>.</p>
-
-<table>
-<thead>
-<tr>
-<th>Parameter</th>
-<th>Type</th>
-<th>Required</th>
-<th>Description</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>id_token</td>
-<td>string</td>
-<td>true</td>
-<td>The NSA ID supplied by the Nintendo Switch SDK.</td>
-</tr>
-<tr>
-<td>email</td>
-<td>string</td>
-<td></td>
-<td>The users email address. If supplied, and the respective user does not have an email registered for their account we will send a confirmation email to confirm they have ownership of the specified email.<br><br><strong>WARNING</strong>: We <strong>strongly recommend</strong> that you prompt your users in a friendly manner at least once to provide their email address to link their Nintendo Service account to mod.io. Failing to provide an email will in-effect generate an orphan account that will only be able to be accessed from the users' Switch device.</td>
-</tr>
-<tr>
-<td>date_expires</td>
-<td>integer</td>
-<td></td>
-<td>Unix timestamp of date in which the returned token will expire. Value cannot be higher than the default value which is a common year (unix timestamp + 31536000 seconds). Using a token after it's expiry time has elapsed will result in a <code>401 Unauthorized</code> response.</td>
-</tr>
-<tr>
-<td>terms_agreed</td>
-<td>boolean</td>
-<td></td>
-<td>This MUST be set to <code>false</code> unless you have collected the <a href="#terms">users agreement</a> prior to calling this endpoint in which case it can be set to <code>true</code> and will be recorded.<br><br><strong>NOTE:</strong> If this is set to <code>false</code> and the user has not agreed to the latest mod.io Terms of Use and Privacy Policy, an error <code>403 Forbidden (error_ref 11074)</code> will be returned and you will need to collect the <a href="#terms">users agreement</a> and retry with this value set to <code>true</code> to authenticate the user.</td>
-</tr>
-</tbody>
-</table>
+<p>Request an access token on behalf of a Nintendo Switch user. A Successful request will return an <a href="#access-token-object">Access Token Object</a>.
+ *
+* <strong>NOTE</strong>: To use this endpoint you will need to setup some additional settings prior to being able to authenticate Nintendo Switch users. For these instructions please <a href="mailto:developers@mod.io?subject=Nintendo%20Switch%20SSO%20Request">contact us</a>.
+ *
+* Parameter|Type|Required|Description
+     * ---|---|---|---|
+     * id_token|string|true|The NSA ID supplied by the Nintendo Switch SDK.
+     * email|string||The users email address. If supplied, and the respective user does not have an email registered for their account we will send a confirmation email to confirm they have ownership of the specified email.<br><br><strong>WARNING</strong>: We <strong>strongly recommend</strong> that you prompt your users in a friendly manner at least once to provide their email address to link their Nintendo Service account to mod.io. Failing to provide an email will in-effect generate an orphan account that will only be able to be accessed from the users' Switch device.
+     * date_expires|integer||Unix timestamp of date in which the returned token will expire. Value cannot be higher than the default value which is a common year (unix timestamp + 31536000 seconds). Using a token after it's expiry time has elapsed will result in a <code>401 Unauthorized</code> response.
+     * terms_agreed|boolean||This MUST be set to <code>false</code> unless you have collected the <a href="#terms">users agreement</a> prior to calling this endpoint in which case it can be set to <code>true</code> and will be recorded.<br><br><strong>NOTE:</strong> If this is set to <code>false</code> and the user has not agreed to the latest mod.io Terms of Use and Privacy Policy, an error <code>403 Forbidden (error_ref 11074)</code> will be returned and you will need to collect the <a href="#terms">users agreement</a> and retry with this value set to <code>true</code> to authenticate the user.</p>
 
 <blockquote>
 <p>Example response</p>
@@ -3328,63 +3285,17 @@ curl <span class="nt">-X</span> POST https://<span class="k">*</span>.modapi.io/
 </code></pre></div>
 <p><span class="httpmethod POST">POST</span> <span class="endpointheading">/external/oculusauth</span></p>
 
-<p>Request an access token on behalf of an Meta Quest user. To use this functionality you <em>must</em> add your games <a href="https://dashboard.oculus.com/">AppId and secret</a> from the Meta Quest Dashboard, to the <em>Game Admin &gt; Settings</em> page of your games profile on mod.io. A Successful request will return an <a href="#access-token-object">Access Token Object</a>.</p>
-
-<table>
-<thead>
-<tr>
-<th>Parameter</th>
-<th>Type</th>
-<th>Required</th>
-<th>Description</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>device</td>
-<td>string</td>
-<td>true</td>
-<td>The Meta Quest device being used for authentication.<br><br>Possible Options:<br>- <em>rift</em><br>- <em>quest</em>
-</td>
-</tr>
-<tr>
-<td>nonce</td>
-<td>string</td>
-<td>true</td>
-<td>The nonce provided by calling <a href="https://developer.oculus.com/documentation/platform/latest/concepts/dg-ownership/">ovr_User_GetUserProof()</a> from the Meta Quest SDK. <br><br><strong>NOTE:</strong> Due to the <code>nonce</code> potentially containing special characters, you must URL encode the string before sending the request to ensure it is successfully sent to our servers otherwise you may encounter an <code>422 Unprocessable Entity</code> response. For example, <a href="https://ec.haxx.se/http-post.html">cURL</a> will do this for you by using the <code>--data-urlencode</code> option.</td>
-</tr>
-<tr>
-<td>user_id</td>
-<td>integer</td>
-<td>true</td>
-<td>The user's Meta Quest id providing by calling <a href="https://developer.oculus.com/documentation/platform/latest/concepts/dg-ownership/">ovr_GetLoggedInUserID()</a> from the Meta Quest SDK.</td>
-</tr>
-<tr>
-<td>access_token</td>
-<td>string</td>
-<td>true</td>
-<td>The user's access token, providing by calling <a href="https://developer.oculus.com/documentation/platform/latest/concepts/dg-ownership/">ovr_User_GetAccessToken()</a> from the Meta Quest SDK. mod.io uses this access token on the first login only to obtain the user's alias and is not saved on our servers.</td>
-</tr>
-<tr>
-<td>email</td>
-<td>string</td>
-<td></td>
-<td>The users email address. If supplied, and the respective user does not have an email registered for their account we will send a confirmation email to confirm they have ownership of the specified email.<br><br><strong>WARNING</strong>: We <strong>strongly recommend</strong> that you prompt your users in a friendly manner at least once to provide their email address to link their Meta Quest account. Due to how Meta Quest handles user IDs - if we are not supplied with an email for a user at least once we will <strong>never</strong> be able to link that user with their existing account at a later date as Meta Quest IDs operate at the game-scope, not globally. Failing to provide an email will in-effect generate an orphan account that will only be able to be accessed from your title.</td>
-</tr>
-<tr>
-<td>date_expires</td>
-<td>integer</td>
-<td></td>
-<td>Unix timestamp of date in which the returned token will expire. Value cannot be higher than the default value which is a common year (unix timestamp + 31536000 seconds). Using a token after it's expiry time has elapsed will result in a <code>401 Unauthorized</code> response.</td>
-</tr>
-<tr>
-<td>terms_agreed</td>
-<td>boolean</td>
-<td></td>
-<td>This MUST be set to <code>false</code> unless you have collected the <a href="#terms">users agreement</a> prior to calling this endpoint in which case it can be set to <code>true</code> and will be recorded.<br><br><strong>NOTE:</strong> If this is set to <code>false</code> and the user has not agreed to the latest mod.io Terms of Use and Privacy Policy, an error <code>403 Forbidden (error_ref 11074)</code> will be returned and you will need to collect the <a href="#terms">users agreement</a> and retry with this value set to <code>true</code> to authenticate the user.</td>
-</tr>
-</tbody>
-</table>
+<p>Request an access token on behalf of an Meta Quest user. To use this functionality you <em>must</em> add your games <a href="https://dashboard.oculus.com/">AppId and secret</a> from the Meta Quest Dashboard, to the <em>Game Admin &gt; Settings</em> page of your games profile on mod.io. A Successful request will return an <a href="#access-token-object">Access Token Object</a>.
+ *
+* Parameter|Type|Required|Description
+     * ---|---|---|---|
+     * device|string|true|The Meta Quest device being used for authentication.<br><br>Possible Options:<br>- <em>rift</em><br>- <em>quest</em>
+     * nonce|string|true|The nonce provided by calling <a href="https://developer.oculus.com/documentation/platform/latest/concepts/dg-ownership/">ovr_User_GetUserProof()</a> from the Meta Quest SDK. <br><br><strong>NOTE:</strong> Due to the <code>nonce</code> potentially containing special characters, you must URL encode the string before sending the request to ensure it is successfully sent to our servers otherwise you may encounter an <code>422 Unprocessable Entity</code> response. For example, <a href="https://ec.haxx.se/http-post.html">cURL</a> will do this for you by using the <code>--data-urlencode</code> option.
+     * user_id|integer|true|The user's Meta Quest id providing by calling <a href="https://developer.oculus.com/documentation/platform/latest/concepts/dg-ownership/">ovr_GetLoggedInUserID()</a> from the Meta Quest SDK.
+     * access_token|string|true|The user's access token, providing by calling <a href="https://developer.oculus.com/documentation/platform/latest/concepts/dg-ownership/">ovr_User_GetAccessToken()</a> from the Meta Quest SDK. mod.io uses this access token on the first login only to obtain the user's alias and is not saved on our servers.
+     * email|string||The users email address. If supplied, and the respective user does not have an email registered for their account we will send a confirmation email to confirm they have ownership of the specified email.<br><br><strong>WARNING</strong>: We <strong>strongly recommend</strong> that you prompt your users in a friendly manner at least once to provide their email address to link their Meta Quest account. Due to how Meta Quest handles user IDs - if we are not supplied with an email for a user at least once we will <strong>never</strong> be able to link that user with their existing account at a later date as Meta Quest IDs operate at the game-scope, not globally. Failing to provide an email will in-effect generate an orphan account that will only be able to be accessed from your title.
+     * date_expires|integer||Unix timestamp of date in which the returned token will expire. Value cannot be higher than the default value which is a common year (unix timestamp + 31536000 seconds). Using a token after it's expiry time has elapsed will result in a <code>401 Unauthorized</code> response.
+     * terms_agreed|boolean||This MUST be set to <code>false</code> unless you have collected the <a href="#terms">users agreement</a> prior to calling this endpoint in which case it can be set to <code>true</code> and will be recorded.<br><br><strong>NOTE:</strong> If this is set to <code>false</code> and the user has not agreed to the latest mod.io Terms of Use and Privacy Policy, an error <code>403 Forbidden (error_ref 11074)</code> will be returned and you will need to collect the <a href="#terms">users agreement</a> and retry with this value set to <code>true</code> to authenticate the user.</p>
 
 <blockquote>
 <p>Example response</p>
@@ -3550,44 +3461,14 @@ curl <span class="nt">-X</span> POST https://<span class="k">*</span>.modapi.io/
 </code></pre></div>
 <p><span class="httpmethod POST">POST</span> <span class="endpointheading">/external/epicgamesauth</span></p>
 
-<p>Request an access token on behalf of an Epic Games user. A Successful request will return an <a href="#access-token-object">Access Token Object</a>.</p>
-
-<table>
-<thead>
-<tr>
-<th>Parameter</th>
-<th>Type</th>
-<th>Required</th>
-<th>Description</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>id_token</td>
-<td>string</td>
-<td>true</td>
-<td>The ID Token <a href="https://dev.epicgames.com/docs/api-ref/functions/eos-auth-copy-id-token">returned from the EOS SDK</a> when you authenticate a user to use mod.io.</td>
-</tr>
-<tr>
-<td>email</td>
-<td>string</td>
-<td></td>
-<td>The users email address (optional but recommended to help users recover lost accounts). If supplied, and the respective user does not have an email registered for their account we will send a confirmation email to confirm they have ownership of the specified email.<br><br><strong>NOTE</strong>: If the user already has an email on record with us, this parameter will be ignored. This parameter should also be urlencoded before the request is sent.</td>
-</tr>
-<tr>
-<td>date_expires</td>
-<td>integer</td>
-<td></td>
-<td>Unix timestamp of date in which the returned token will expire. Value cannot be higher than the default value which is a week (unix timestamp + 604800 seconds). Using a token after it's expiry time has elapsed will result in a <code>401 Unauthorized</code> response.</td>
-</tr>
-<tr>
-<td>terms_agreed</td>
-<td>boolean</td>
-<td></td>
-<td>This MUST be set to <code>false</code> unless you have collected the <a href="#terms">users agreement</a> prior to calling this endpoint in which case it can be set to <code>true</code> and will be recorded.<br><br><strong>NOTE:</strong> If this is set to <code>false</code> and the user has not agreed to the latest mod.io Terms of Use and Privacy Policy, an error <code>403 Forbidden (error_ref 11074)</code> will be returned and you will need to collect the <a href="#terms">users agreement</a> and retry with this value set to <code>true</code> to authenticate the user.</td>
-</tr>
-</tbody>
-</table>
+<p>Request an access token on behalf of an Epic Games user. A Successful request will return an <a href="#access-token-object">Access Token Object</a>.
+ *
+* Parameter|Type|Required|Description
+     * ---|---|---|---|
+     * id_token|string|true|The ID Token <a href="https://dev.epicgames.com/docs/api-ref/functions/eos-auth-copy-id-token">returned from the EOS SDK</a> when you authenticate a user to use mod.io.
+     * email|string||The users email address (optional but recommended to help users recover lost accounts). If supplied, and the respective user does not have an email registered for their account we will send a confirmation email to confirm they have ownership of the specified email.<br><br><strong>NOTE</strong>: If the user already has an email on record with us, this parameter will be ignored. This parameter should also be urlencoded before the request is sent.
+     * date_expires|integer||Unix timestamp of date in which the returned token will expire. Value cannot be higher than the default value which is a week (unix timestamp + 604800 seconds). Using a token after it's expiry time has elapsed will result in a <code>401 Unauthorized</code> response.
+     * terms_agreed|boolean||This MUST be set to <code>false</code> unless you have collected the <a href="#terms">users agreement</a> prior to calling this endpoint in which case it can be set to <code>true</code> and will be recorded.<br><br><strong>NOTE:</strong> If this is set to <code>false</code> and the user has not agreed to the latest mod.io Terms of Use and Privacy Policy, an error <code>403 Forbidden (error_ref 11074)</code> will be returned and you will need to collect the <a href="#terms">users agreement</a> and retry with this value set to <code>true</code> to authenticate the user.</p>
 
 <blockquote>
 <p>Example response</p>
@@ -3739,44 +3620,14 @@ curl <span class="nt">-X</span> POST https://<span class="k">*</span>.modapi.io/
 </code></pre></div>
 <p><span class="httpmethod POST">POST</span> <span class="endpointheading">/external/galaxyauth</span></p>
 
-<p>Request an access token on behalf of a GOG Galaxy user. To use this functionality you <em>must</em> add your games <a href="https://docs.gog.com/sdk-encrypted-tickets/">encrypted app ticket key</a> from GOG Galaxy, to the <em>Game Admin &gt; Settings</em> page of your games profile on mod.io. A Successful request will return an <a href="#access-token-object">Access Token Object</a>.</p>
-
-<table>
-<thead>
-<tr>
-<th>Parameter</th>
-<th>Type</th>
-<th>Required</th>
-<th>Description</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>appdata</td>
-<td>string</td>
-<td>true</td>
-<td>The GOG Galaxy users <a href="https://cdn.gog.com/open/galaxy/sdk/1.133.3/Documentation/classgalaxy_1_1api_1_1IUser.html#a352802aab7a6e71b1cd1b9b1adfd53d8">Encrypted App Ticket</a> provided by the GOG Galaxy SDK. <br><br>Parameter content <em>MUST</em> be the encrypted string returned in the buffer after calling <a href="https://cdn.gog.com/open/galaxy/sdk/1.133.3/Documentation/classgalaxy_1_1api_1_1IUser.html#a96af6792efc260e75daebedca2cf74c6">IUser::GetEncryptedAppTicket()</a> within the Galaxy SDK. Unlike the <a href="#steam">Steam Authentication</a> endpoint, you do not need to encode the encrypted string as this is already done by the Galaxy SDK.<br><br><strong>NOTE:</strong> Due to the encrypted app ticket containing special characters, you must URL encode the string before sending the request to ensure it is successfully sent to our servers otherwise you may encounter an <code>422 Unprocessable Entity</code> response. For example, <a href="https://ec.haxx.se/http-post.html">cURL</a> will do this for you by using the <code>--data-urlencode</code> option.</td>
-</tr>
-<tr>
-<td>email</td>
-<td>string</td>
-<td></td>
-<td>The users email address. If supplied, and the respective user does not have an email registered for their account we will send a confirmation email to confirm they have ownership of the specified email.<br><br><strong>WARNING</strong>: We <strong>strongly recommend</strong> that you prompt your users in a friendly manner at least once to provide their email address to link their GOG Galaxy account to mod.io. Failing to provide an email will in-effect generate an orphan account that will only be able to be accessed from GOG Galaxy.</td>
-</tr>
-<tr>
-<td>date_expires</td>
-<td>integer</td>
-<td></td>
-<td>Unix timestamp of date in which the returned token will expire. Value cannot be higher than the default value which is a common year (unix timestamp + 31536000 seconds). Using a token after it's expiry time has elapsed will result in a <code>401 Unauthorized</code> response.</td>
-</tr>
-<tr>
-<td>terms_agreed</td>
-<td>boolean</td>
-<td></td>
-<td>This MUST be set to <code>false</code> unless you have collected the <a href="#terms">users agreement</a> prior to calling this endpoint in which case it can be set to <code>true</code> and will be recorded.<br><br><strong>NOTE:</strong> If this is set to <code>false</code> and the user has not agreed to the latest mod.io Terms of Use and Privacy Policy, an error <code>403 Forbidden (error_ref 11074)</code> will be returned and you will need to collect the <a href="#terms">users agreement</a> and retry with this value set to <code>true</code> to authenticate the user.</td>
-</tr>
-</tbody>
-</table>
+<p>Request an access token on behalf of a GOG Galaxy user. To use this functionality you <em>must</em> add your games <a href="https://docs.gog.com/sdk-encrypted-tickets/">encrypted app ticket key</a> from GOG Galaxy, to the <em>Game Admin &gt; Settings</em> page of your games profile on mod.io. A Successful request will return an <a href="#access-token-object">Access Token Object</a>.
+ *
+* Parameter|Type|Required|Description
+     * ---|---|---|---|
+     * appdata|string|true|The GOG Galaxy users <a href="https://cdn.gog.com/open/galaxy/sdk/1.133.3/Documentation/classgalaxy_1_1api_1_1IUser.html#a352802aab7a6e71b1cd1b9b1adfd53d8">Encrypted App Ticket</a> provided by the GOG Galaxy SDK. <br><br>Parameter content <em>MUST</em> be the encrypted string returned in the buffer after calling <a href="https://cdn.gog.com/open/galaxy/sdk/1.133.3/Documentation/classgalaxy_1_1api_1_1IUser.html#a96af6792efc260e75daebedca2cf74c6">IUser::GetEncryptedAppTicket()</a> within the Galaxy SDK. Unlike the <a href="#steam">Steam Authentication</a> endpoint, you do not need to encode the encrypted string as this is already done by the Galaxy SDK.<br><br><strong>NOTE:</strong> Due to the encrypted app ticket containing special characters, you must URL encode the string before sending the request to ensure it is successfully sent to our servers otherwise you may encounter an <code>422 Unprocessable Entity</code> response. For example, <a href="https://ec.haxx.se/http-post.html">cURL</a> will do this for you by using the <code>--data-urlencode</code> option.
+     * email|string||The users email address. If supplied, and the respective user does not have an email registered for their account we will send a confirmation email to confirm they have ownership of the specified email.<br><br><strong>WARNING</strong>: We <strong>strongly recommend</strong> that you prompt your users in a friendly manner at least once to provide their email address to link their GOG Galaxy account to mod.io. Failing to provide an email will in-effect generate an orphan account that will only be able to be accessed from GOG Galaxy.
+     * date_expires|integer||Unix timestamp of date in which the returned token will expire. Value cannot be higher than the default value which is a common year (unix timestamp + 31536000 seconds). Using a token after it's expiry time has elapsed will result in a <code>401 Unauthorized</code> response.
+     * terms_agreed|boolean||This MUST be set to <code>false</code> unless you have collected the <a href="#terms">users agreement</a> prior to calling this endpoint in which case it can be set to <code>true</code> and will be recorded.<br><br><strong>NOTE:</strong> If this is set to <code>false</code> and the user has not agreed to the latest mod.io Terms of Use and Privacy Policy, an error <code>403 Forbidden (error_ref 11074)</code> will be returned and you will need to collect the <a href="#terms">users agreement</a> and retry with this value set to <code>true</code> to authenticate the user.</p>
 
 <blockquote>
 <p>Example response</p>
@@ -3942,42 +3793,17 @@ curl <span class="nt">-X</span> POST https://<span class="k">*</span>.modapi.io/
 </code></pre></div>
 <p><span class="httpmethod POST">POST</span> <span class="endpointheading">/external/googleauth</span></p>
 
-<p>Request an access token on behalf of a Google user. A Successful request will return an <a href="#access-token-object">Access Token Object</a>.</p>
-
-<p><strong>NOTE</strong>: To use this endpoint you will need to setup some additional settings prior to being able to authenticate Google users. For these instructions please <a href="mailto:developers@mod.io?subject=Google%20SSO%20Request">contact us</a>.</p>
-
-<p><strong>HINT:</strong> If you want to overlay the mod.io site in-game on Android, we recommend you add <code>?portal=google</code> to the end of the URL you open which will prompt the user to login with Google. See <a href="#web-overlay-authentication">Web Overlay Authentication</a> for details.</p>
-
-<table>
-<thead>
-<tr>
-<th>Parameter</th>
-<th>Type</th>
-<th>Required</th>
-<th>Description</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>id_token</td>
-<td>string</td>
-<td>true</td>
-<td>The <code>id_token</code> value <a href="https://developers.google.com/identity/sign-in/web/backend-auth#calling-the-tokeninfo-endpoint">returned from Google</a> after you have authenticated a user via the Google OAuth2 flow.</td>
-</tr>
-<tr>
-<td>date_expires</td>
-<td>integer</td>
-<td></td>
-<td>Unix timestamp of date in which the returned token will expire. Value cannot be higher than the default value which is a week (unix timestamp + 604800 seconds). Using a token after it's expiry time has elapsed will result in a <code>401 Unauthorized</code> response.</td>
-</tr>
-<tr>
-<td>terms_agreed</td>
-<td>boolean</td>
-<td></td>
-<td>This MUST be set to <code>false</code> unless you have collected the <a href="#terms">users agreement</a> prior to calling this endpoint in which case it can be set to <code>true</code> and will be recorded.<br><br><strong>NOTE:</strong> If this is set to <code>false</code> and the user has not agreed to the latest mod.io Terms of Use and Privacy Policy, an error <code>403 Forbidden (error_ref 11074)</code> will be returned and you will need to collect the <a href="#terms">users agreement</a> and retry with this value set to <code>true</code> to authenticate the user.</td>
-</tr>
-</tbody>
-</table>
+<p>Request an access token on behalf of a Google user. A Successful request will return an <a href="#access-token-object">Access Token Object</a>.
+ *
+* <strong>NOTE</strong>: To use this endpoint you will need to setup some additional settings prior to being able to authenticate Google users. For these instructions please <a href="mailto:developers@mod.io?subject=Google%20SSO%20Request">contact us</a>.
+ *
+* <strong>HINT:</strong> If you want to overlay the mod.io site in-game on Android, we recommend you add <code>?portal=google</code> to the end of the URL you open which will prompt the user to login with Google. See <a href="#web-overlay-authentication">Web Overlay Authentication</a> for details.
+ *
+* Parameter|Type|Required|Description
+     * ---|---|---|---|
+     * id_token|string|true|The <code>id_token</code> value <a href="https://developers.google.com/identity/sign-in/web/backend-auth#calling-the-tokeninfo-endpoint">returned from Google</a> after you have authenticated a user via the Google OAuth2 flow.
+     * date_expires|integer||Unix timestamp of date in which the returned token will expire. Value cannot be higher than the default value which is a week (unix timestamp + 604800 seconds). Using a token after it's expiry time has elapsed will result in a <code>401 Unauthorized</code> response.
+     * terms_agreed|boolean||This MUST be set to <code>false</code> unless you have collected the <a href="#terms">users agreement</a> prior to calling this endpoint in which case it can be set to <code>true</code> and will be recorded.<br><br><strong>NOTE:</strong> If this is set to <code>false</code> and the user has not agreed to the latest mod.io Terms of Use and Privacy Policy, an error <code>403 Forbidden (error_ref 11074)</code> will be returned and you will need to collect the <a href="#terms">users agreement</a> and retry with this value set to <code>true</code> to authenticate the user.</p>
 
 <blockquote>
 <p>Example response</p>
@@ -4035,6 +3861,13 @@ curl <span class="nt">-X</span> POST https://<span class="k">*</span>.modapi.io/
 <td><a href="https://tools.ietf.org/html/rfc7235#section-3.1">Unauthorized</a></td>
 <td>11054</td>
 <td>The Google access token has expired. You should request another token from the Google SDK and ensure it is delivered to mod.io before it expires.</td>
+<td><a href="#schemaerror_object">Error Object</a></td>
+</tr>
+<tr>
+<td>403</td>
+<td><a href="https://tools.ietf.org/html/rfc7231#section-6.5.3">Forbidden</a></td>
+<td>17053</td>
+<td>The user account associated with this email is locked. Please contact support for assistance.</td>
 <td><a href="#schemaerror_object">Error Object</a></td>
 </tr>
 <tr>
@@ -4327,46 +4160,16 @@ curl <span class="nt">-X</span> POST https://<span class="k">*</span>.modapi.io/
 </code></pre></div>
 <p><span class="httpmethod POST">POST</span> <span class="endpointheading">/external/openidauth</span></p>
 
-<p>Request an access token on behalf of an OpenID identity provider. To use this method of authentication, you must configure the OpenID config in your games authentication admin page. A Successful request will return an <a href="#access-token-object">Access Token Object</a>.</p>
-
-<p><strong>NOTE:</strong> The ability to authenticate players using your identity provider is a feature for advanced partners only. If you are interested in becoming an advanced partner, please <a href="mailto:developers@mod.io?subject=OpenID%20SSO%20Request">contact us</a>.</p>
-
-<table>
-<thead>
-<tr>
-<th>Parameter</th>
-<th>Type</th>
-<th>Required</th>
-<th>Description</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>id_token</td>
-<td>string</td>
-<td>true</td>
-<td>The ID token issued by the configured identity provider.</td>
-</tr>
-<tr>
-<td>email</td>
-<td>string</td>
-<td></td>
-<td>The users email address (optional but recommended to help users recover lost accounts). If supplied, and the respective user does not have an email registered for their account we will send a confirmation email to confirm they have ownership of the specified email.<br><br><strong>NOTE</strong>: If the user already has an email on record with us, this parameter will be ignored. This parameter should also be urlencoded before the request is sent.</td>
-</tr>
-<tr>
-<td>date_expires</td>
-<td>integer</td>
-<td></td>
-<td>Unix timestamp of date in which the returned token will expire. Value cannot be higher than the default value which is a week (unix timestamp + 604800 seconds). Using a token after it's expiry time has elapsed will result in a <code>401 Unauthorized</code> response.</td>
-</tr>
-<tr>
-<td>terms_agreed</td>
-<td>boolean</td>
-<td></td>
-<td>This MUST be set to <code>false</code> unless you have collected the <a href="#terms">users agreement</a> prior to calling this endpoint in which case it can be set to <code>true</code> and will be recorded.<br><br><strong>NOTE:</strong> If this is set to <code>false</code> and the user has not agreed to the latest mod.io Terms of Use and Privacy Policy, an error <code>403 Forbidden (error_ref 11074)</code> will be returned and you will need to collect the <a href="#terms">users agreement</a> and retry with this value set to <code>true</code> to authenticate the user.</td>
-</tr>
-</tbody>
-</table>
+<p>Request an access token on behalf of an OpenID identity provider. To use this method of authentication, you must configure the OpenID config in your games authentication admin page. A Successful request will return an <a href="#access-token-object">Access Token Object</a>.
+ *
+* <strong>NOTE:</strong> The ability to authenticate players using your identity provider is a feature for advanced partners only. If you are interested in becoming an advanced partner, please <a href="mailto:developers@mod.io?subject=OpenID%20SSO%20Request">contact us</a>.
+ *
+* Parameter|Type|Required|Description
+     * ---|---|---|---|
+     * id_token|string|true|The ID token issued by the configured identity provider.
+     * email|string||The users email address (optional but recommended to help users recover lost accounts). If supplied, and the respective user does not have an email registered for their account we will send a confirmation email to confirm they have ownership of the specified email.<br><br><strong>NOTE</strong>: If the user already has an email on record with us, this parameter will be ignored. This parameter should also be urlencoded before the request is sent.
+     * date_expires|integer||Unix timestamp of date in which the returned token will expire. Value cannot be higher than the default value which is a week (unix timestamp + 604800 seconds). Using a token after it's expiry time has elapsed will result in a <code>401 Unauthorized</code> response.
+     * terms_agreed|boolean||This MUST be set to <code>false</code> unless you have collected the <a href="#terms">users agreement</a> prior to calling this endpoint in which case it can be set to <code>true</code> and will be recorded.<br><br><strong>NOTE:</strong> If this is set to <code>false</code> and the user has not agreed to the latest mod.io Terms of Use and Privacy Policy, an error <code>403 Forbidden (error_ref 11074)</code> will be returned and you will need to collect the <a href="#terms">users agreement</a> and retry with this value set to <code>true</code> to authenticate the user.</p>
 
 <blockquote>
 <p>Example response</p>
@@ -4431,6 +4234,13 @@ curl <span class="nt">-X</span> POST https://<span class="k">*</span>.modapi.io/
 <td><a href="https://tools.ietf.org/html/rfc7231#section-6.5.3">Forbidden</a></td>
 <td>11074</td>
 <td>The user has not agreed to the mod.io Terms of Use. Please see terms_agreed parameter description and the <a href="#terms">Terms</a> endpoint for more information.</td>
+<td><a href="#schemaerror_object">Error Object</a></td>
+</tr>
+<tr>
+<td>403</td>
+<td><a href="https://tools.ietf.org/html/rfc7231#section-6.5.3">Forbidden</a></td>
+<td>17053</td>
+<td>The user account associated with this email is locked. Please contact support for assistance.</td>
 <td><a href="#schemaerror_object">Error Object</a></td>
 </tr>
 <tr>
@@ -4673,32 +4483,11 @@ curl <span class="nt">-X</span> POST https://<span class="k">*</span>.modapi.io/
 </code></pre></div>
 <p><span class="httpmethod POST">POST</span> <span class="endpointheading">/oauth/emailexchange</span></p>
 
-<p>Exchange a security code issued from the <a href="#email">Email Request endpoint</a> for an access token. To use this functionality you <em>must</em> use your games api_key from your games profile on mod.io and the same api_key must be used from the original request for a security code. A Successful request will return an <a href="#access-token-object">Access Token Object</a>.</p>
-
-<table>
-<thead>
-<tr>
-<th>Parameter</th>
-<th>Type</th>
-<th>Required</th>
-<th>Description</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>security_code</td>
-<td>string</td>
-<td>true</td>
-<td>The alpha-numeric security code.</td>
-</tr>
-<tr>
-<td>date_expires</td>
-<td>integer</td>
-<td></td>
-<td>Unix timestamp of date in which the returned token will expire. Value cannot be higher than the default value which is a common year (unix timestamp + 31536000 seconds). Using a token after it's expiry time has elapsed will result in a <code>401 Unauthorized</code> response.</td>
-</tr>
-</tbody>
-</table>
+<p>Exchange a security code issued from the <a href="#email">Email Request endpoint</a> for an access token. To use this functionality you <em>must</em> use your games api_key from your games profile on mod.io and the same api_key must be used from the original request for a security code. A Successful request will return an <a href="#access-token-object">Access Token Object</a>.
+    Parameter|Type|Required|Description
+    ---|---|---|---|
+    security_code|string|true|The alpha-numeric security code.
+    date_expires|integer||Unix timestamp of date in which the returned token will expire. Value cannot be higher than the default value which is a common year (unix timestamp + 31536000 seconds). Using a token after it's expiry time has elapsed will result in a <code>401 Unauthorized</code> response.</p>
 
 <blockquote>
 <p>Example response</p>
@@ -4749,6 +4538,13 @@ curl <span class="nt">-X</span> POST https://<span class="k">*</span>.modapi.io/
 <td><a href="https://tools.ietf.org/html/rfc7235#section-3.1">Unauthorized</a></td>
 <td>11011</td>
 <td>Authorization failed. Security code has already been redeemed.</td>
+<td><a href="#schemaerror_object">Error Object</a></td>
+</tr>
+<tr>
+<td>403</td>
+<td><a href="https://tools.ietf.org/html/rfc7231#section-6.5.3">Forbidden</a></td>
+<td>17053</td>
+<td>The user account associated with this email is locked. Please contact support for assistance.</td>
 <td><a href="#schemaerror_object">Error Object</a></td>
 </tr>
 <tr>
@@ -5584,15 +5380,15 @@ Accept: application/json
 <tbody>
 <tr>
 <td>popular</td>
-<td>Sort results by popularity using <a href="#filtering">_sort filter</a>, value should be <code>popular</code> for descending or <code>-popular</code> for ascending results.<br><br><strong>NOTE:</strong> Popularity is calculated hourly and reset daily (results are ranked from 1 to X). You should sort this column in ascending order <code>-popular</code> to get the top ranked results.</td>
+<td>Sort results by popularity using <a href="#filtering">_sort filter</a>, value should be <code>popular</code> for descending or <code>-popular</code> for ascending results.<br><br><strong>NOTE:</strong> Popularity is calculated hourly and reset daily (results are ranked from 1 to X). You should sort this column in descending order <code>popular</code> to get the top ranked results.</td>
 </tr>
 <tr>
-<td>popular_overall</td>
-<td>Sort results by 'Popular Overall' using <a href="#filtering">_sort filter</a>, value should be <code>popular_overall</code> for descending or <code>-popular_overall</code> for ascending results.<br><br><strong>NOTE:</strong> You should sort this column in ascending order <code>-popular_overall</code> to get the top ranked results. This filter differs from popular by filtering on the amount of downloads the game has received overall, and not just in the last 24 hours.</td>
+<td>downloads</td>
+<td>Sort results by total downloads using <a href="#filtering">_sort filter</a>, value should be <code>downloads</code> for descending or <code>-downloads</code> for ascending results.<br><br><strong>NOTE:</strong> You should sort this column in descending order <code>downloads</code> to get the top ranked results. This filter differs from popular by filtering on the amount of downloads the game has received overall, and not just in the last 24 hours.</td>
 </tr>
 <tr>
-<td>subscribers</td>
-<td>Sort results by most subscribers using <a href="#filtering">_sort filter</a>, value should be <code>subscribers</code> for descending or <code>-subscribers</code> for ascending results.</td>
+<td>mods</td>
+<td>Sort results by total mod count using <a href="#filtering">_sort filter</a>, value should be <code>mods</code> for descending or <code>-mods</code> for ascending results.</td>
 </tr>
 </tbody>
 </table>
@@ -5618,6 +5414,7 @@ Accept: application/json
         </span><span class="nl">"team_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"1"</span><span class="w">
       </span><span class="p">},</span><span class="w">
       </span><span class="nl">"revenue_options"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"max_stock"</span><span class="p">:</span><span class="w"> </span><span class="mi">8388607</span><span class="p">,</span><span class="w">
       </span><span class="nl">"api_access_options"</span><span class="p">:</span><span class="w"> </span><span class="mi">3</span><span class="p">,</span><span class="w">
       </span><span class="nl">"maturity_options"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
       </span><span class="nl">"ugc_name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"mods"</span><span class="p">,</span><span class="w">
@@ -5839,6 +5636,7 @@ Accept: application/json
     </span><span class="nl">"team_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"1"</span><span class="w">
   </span><span class="p">},</span><span class="w">
   </span><span class="nl">"revenue_options"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"max_stock"</span><span class="p">:</span><span class="w"> </span><span class="mi">8388607</span><span class="p">,</span><span class="w">
   </span><span class="nl">"api_access_options"</span><span class="p">:</span><span class="w"> </span><span class="mi">3</span><span class="p">,</span><span class="w">
   </span><span class="nl">"maturity_options"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
   </span><span class="nl">"ugc_name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"mods"</span><span class="p">,</span><span class="w">
@@ -6452,7 +6250,7 @@ curl <span class="nt">-X</span> POST https://<span class="k">*</span>.modapi.io/
 <td>logo</td>
 <td>file</td>
 <td>true</td>
-<td>Image file which will represent your guides logo. Must be gif, jpg or png format and cannot exceed 8MB in filesize. Dimensions must be at least 512x288 and we recommended you supply a high resolution image with a 16 / 9 ratio. mod.io will use this image to make three thumbnails for the dimensions 320x180, 640x360 and 1280x720.</td>
+<td>Image file which will represent your guides logo. Must be jpg, jpeg or png format and cannot exceed 8MB in filesize. Dimensions must be at least 512x288 and we recommended you supply a high resolution image with a 16 / 9 ratio. mod.io will use this image to make three thumbnails for the dimensions 320x180, 640x360 and 1280x720.</td>
 </tr>
 <tr>
 <td>name</td>
@@ -6708,7 +6506,7 @@ curl <span class="nt">-X</span> POST https://<span class="k">*</span>.modapi.io/
 <td>logo</td>
 <td>file</td>
 <td></td>
-<td>Image file which will represent your guides logo. Must be gif, jpg or png format and cannot exceed 8MB in filesize. Dimensions must be at least 512x288 and we recommended you supply a high resolution image with a 16 / 9 ratio. mod.io will use this image to make three thumbnails for the dimensions 320x180, 640x360 and 1280x720.</td>
+<td>Image file which will represent your guides logo. Must be jpg, jpeg or png format and cannot exceed 8MB in filesize. Dimensions must be at least 512x288 and we recommended you supply a high resolution image with a 16 / 9 ratio. mod.io will use this image to make three thumbnails for the dimensions 320x180, 640x360 and 1280x720.</td>
 </tr>
 <tr>
 <td>name</td>
@@ -7256,7 +7054,7 @@ Accept: application/json
 <tr>
 <td>metadata_blob</td>
 <td>string</td>
-<td>Metadata stored by the game developer.</td>
+<td>Metadata that is designed to be handled by the game client and is recommended to not be exposed to content creators when submitting their mods. As an example, this may include properties as to how the item works, or other information you need to display. Metadata can also be stored as searchable <a href="#metadata">key value pairs</a>, and to individual <a href="#get-modfiles">mod files</a>.</td>
 </tr>
 <tr>
 <td>metadata_kvp</td>
@@ -7341,6 +7139,7 @@ Accept: application/json
       </span><span class="nl">"maturity_option"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
       </span><span class="nl">"community_options"</span><span class="p">:</span><span class="w"> </span><span class="mi">3</span><span class="p">,</span><span class="w">
       </span><span class="nl">"monetization_options"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"stock"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
       </span><span class="nl">"price"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
       </span><span class="nl">"tax"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
       </span><span class="nl">"logo"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
@@ -7591,6 +7390,7 @@ Accept: application/json
   </span><span class="nl">"maturity_option"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
   </span><span class="nl">"community_options"</span><span class="p">:</span><span class="w"> </span><span class="mi">3</span><span class="p">,</span><span class="w">
   </span><span class="nl">"monetization_options"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"stock"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
   </span><span class="nl">"price"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
   </span><span class="nl">"tax"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
   </span><span class="nl">"logo"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
@@ -7736,6 +7536,7 @@ curl <span class="nt">-X</span> POST https://<span class="k">*</span>.modapi.io/
   <span class="nt">-F</span> <span class="s1">'description=&lt;h2&gt;Getting started with..'</span> <span class="se">\</span>
   <span class="nt">-F</span> <span class="s1">'logo=@/path/to/image.jpg'</span> <span class="se">\</span>
   <span class="nt">-F</span> <span class="s1">'homepage_url=https://www.example.com'</span> <span class="se">\</span>
+  <span class="nt">-F</span> <span class="s1">'metadata_blob={"version_sig":"YXJlbnQgeW91IGlucXVpc2l0dmU="}'</span> <span class="se">\</span>
   <span class="nt">-F</span> <span class="s1">'tags[]=easy'</span>
 
 </code></pre></div><div class="highlight"><pre class="highlight http tab-http"><code><span class="nf">POST</span> <span class="nn">https://*.modapi.io/v1/games/{game-id}/mods</span> <span class="k">HTTP</span><span class="o">/</span><span class="m">1.1</span>
@@ -7768,6 +7569,7 @@ curl <span class="nt">-X</span> POST https://<span class="k">*</span>.modapi.io/
   "description": "&lt;h2&gt;Getting started with..",
   "logo": "@/path/to/image.jpg",
   "homepage_url": "https://www.example.com",
+  "metadata_blob": "{</span><span class="se">\</span><span class="s1">"version_sig</span><span class="se">\</span><span class="s1">":</span><span class="se">\</span><span class="s1">"YXJlbnQgeW91IGlucXVpc2l0dmU=</span><span class="se">\</span><span class="s1">"}",
   "tags": "easy"
 }</span><span class="dl">'</span><span class="p">;</span>
 <span class="kd">const</span> <span class="nx">headers</span> <span class="o">=</span> <span class="p">{</span>
@@ -7834,7 +7636,7 @@ curl <span class="nt">-X</span> POST https://<span class="k">*</span>.modapi.io/
 <td>logo</td>
 <td>file</td>
 <td>true</td>
-<td>Image file which will represent your mods logo. Must be gif, jpg or png format and cannot exceed 8MB in filesize. Dimensions must be at least 512x288 and we recommended you supply a high resolution image with a 16 / 9 ratio. mod.io will use this image to make three thumbnails for the dimensions 320x180, 640x360 and 1280x720.</td>
+<td>Image file which will represent your mods logo. Must be jpg, jpeg or png format and cannot exceed 8MB in filesize. Dimensions must be at least 512x288 and we recommended you supply a high resolution image with a 16 / 9 ratio. mod.io will use this image to make three thumbnails for the dimensions 320x180, 640x360 and 1280x720.</td>
 </tr>
 <tr>
 <td>name</td>
@@ -7874,16 +7676,34 @@ curl <span class="nt">-X</span> POST https://<span class="k">*</span>.modapi.io/
 <td>Official homepage for your mod. Must be a valid URL.</td>
 </tr>
 <tr>
-<td>stock</td>
+<td>price</td>
+<td>int</td>
+<td>true</td>
+<td>The price of the mod.<br><br><strong>NOTE:</strong> The value of this field will be ignored if the parent game's queue is enabled (see <code>curation_option</code> field in <a href="#game-object">Game Object</a>).</td>
+</tr>
+<tr>
+<td>monetization_options</td>
 <td>integer</td>
+<td>Monetization option(s) enabled by the mod creator.<br><br><strong>NOTE:</strong> The value of this field will be ignored if the parent game's queue is enabled (see <code>curation_option</code> field in <a href="#game-object">Game Object</a>). <br><br><strong>0</strong> = None<br><strong>1</strong> = Enabled<br><strong>2</strong> = Marketplace On<br><strong>?</strong> = Add the options you want together, to enable multiple filters (see <a href="#bitwise-and-bitwise-and">BITWISE fields</a>)</td>
 <td></td>
-<td>Maximium number of subscribers for this mod. A value of 0 disables this limit.</td>
 </tr>
 <tr>
 <td>maturity_option</td>
 <td>integer</td>
 <td></td>
 <td>Choose if this mod contains any of the following mature content.<br><br><strong>NOTE:</strong> The value of this field will default to 0 unless the parent game allows you to flag mature content (see <code>maturity_options</code> field in <a href="#game-object">Game Object</a>). <br><br><strong>0</strong> = None <em>(default)</em><br><strong>1</strong> = Alcohol<br><strong>2</strong> = Drugs<br><strong>4</strong> = Violence<br><strong>8</strong> = Explicit<br><strong>?</strong> = Add the options you want together, to enable multiple options (see <a href="#bitwise-and-bitwise-and">BITWISE fields</a>)</td>
+</tr>
+<tr>
+<td>stock</td>
+<td>integer</td>
+<td></td>
+<td>Maximum number of times this Mod can be sold. <br><br><strong>NOTE:</strong> Scarcity can be enforced by the parent Game. The value of this field is not used if the parent game's or mod's scarcity is disabled (see <code>monetization_options</code> field in <a href="#game-object">Game Object</a>).</td>
+</tr>
+<tr>
+<td>maturity_option</td>
+<td>integer</td>
+<td></td>
+<td>Choose if this mod contains any of the following mature content.</td>
 </tr>
 <tr>
 <td>community_options</td>
@@ -7895,7 +7715,7 @@ curl <span class="nt">-X</span> POST https://<span class="k">*</span>.modapi.io/
 <td>metadata_blob</td>
 <td>string</td>
 <td></td>
-<td>Metadata stored by the game developer which may include properties as to how the item works, or other information you need to display. Metadata can also be stored as searchable <a href="#metadata">key value pairs</a>, and to individual <a href="#get-modfiles">mod files</a>.</td>
+<td>Metadata that is designed to be handled by the game client and is recommended to not be exposed to content creators when submitting their mods. As an example, this may include properties as to how the item works, or other information you need to display. Metadata can also be stored as searchable <a href="#metadata">key value pairs</a>, and to individual <a href="#get-modfiles">mod files</a>.</td>
 </tr>
 <tr>
 <td>tags[]</td>
@@ -7937,6 +7757,7 @@ curl <span class="nt">-X</span> POST https://<span class="k">*</span>.modapi.io/
   </span><span class="nl">"maturity_option"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
   </span><span class="nl">"community_options"</span><span class="p">:</span><span class="w"> </span><span class="mi">3</span><span class="p">,</span><span class="w">
   </span><span class="nl">"monetization_options"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"stock"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
   </span><span class="nl">"price"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
   </span><span class="nl">"tax"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
   </span><span class="nl">"logo"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
@@ -8057,6 +7878,13 @@ curl <span class="nt">-X</span> POST https://<span class="k">*</span>.modapi.io/
 <td><a href="#schemamod_object">Mod Object</a></td>
 </tr>
 <tr>
+<td>422</td>
+<td><a href="https://tools.ietf.org/html/rfc2518#section-10.3">Unprocessable Entity</a></td>
+<td>900011</td>
+<td>Your marketplace amount is not within the minimum or maximum amount allowed.</td>
+<td><a href="#schemaerror_object">Error Object</a></td>
+</tr>
+<tr>
 <td>403</td>
 <td><a href="https://tools.ietf.org/html/rfc7231#section-6.5.3">Forbidden</a></td>
 <td>15012</td>
@@ -8106,6 +7934,7 @@ curl <span class="nt">-X</span> POST https://<span class="k">*</span>.modapi.io/
   <span class="nt">-F</span> <span class="s1">'description=&lt;h2&gt;Getting started with..'</span> <span class="se">\</span>
   <span class="nt">-F</span> <span class="s1">'logo=@/path/to/image.jpg'</span> <span class="se">\</span>
   <span class="nt">-F</span> <span class="s1">'homepage_url=https://www.example.com'</span> <span class="se">\</span>
+  <span class="nt">-F</span> <span class="s1">'metadata_blob={"version_sig":"YXJlbnQgeW91IGlucXVpc2l0dmU="}'</span> <span class="se">\</span>
   <span class="nt">-F</span> <span class="s1">'tags[]=easy'</span>
 
 </code></pre></div><div class="highlight"><pre class="highlight http tab-http"><code><span class="nf">POST</span> <span class="nn">https://*.modapi.io/v1/games/{game-id}/mods/{mod-id}</span> <span class="k">HTTP</span><span class="o">/</span><span class="m">1.1</span>
@@ -8138,6 +7967,7 @@ curl <span class="nt">-X</span> POST https://<span class="k">*</span>.modapi.io/
   "description": "&lt;h2&gt;Getting started with..",
   "logo": "@/path/to/image.jpg",
   "homepage_url": "https://www.example.com",
+  "metadata_blob": "{</span><span class="se">\</span><span class="s1">"version_sig</span><span class="se">\</span><span class="s1">":</span><span class="se">\</span><span class="s1">"YXJlbnQgeW91IGlucXVpc2l0dmU=</span><span class="se">\</span><span class="s1">"}",
   "tags": "easy"
 }</span><span class="dl">'</span><span class="p">;</span>
 <span class="kd">const</span> <span class="nx">headers</span> <span class="o">=</span> <span class="p">{</span>
@@ -8202,7 +8032,7 @@ curl <span class="nt">-X</span> POST https://<span class="k">*</span>.modapi.io/
 <td>logo</td>
 <td>file</td>
 <td>true</td>
-<td>Image file which will represent your mods logo. Must be gif, jpg or png format and cannot exceed 8MB in filesize. Dimensions must be at least 512x288 and we recommended you supply a high resolution image with a 16 / 9 ratio. mod.io will use this image to make three thumbnails for the dimensions 320x180, 640x360 and 1280x720.</td>
+<td>Image file which will represent your mods logo. Must be jpg, jpeg or png format and cannot exceed 8MB in filesize. Dimensions must be at least 512x288 and we recommended you supply a high resolution image with a 16 / 9 ratio. mod.io will use this image to make three thumbnails for the dimensions 320x180, 640x360 and 1280x720.</td>
 </tr>
 <tr>
 <td>status</td>
@@ -8247,10 +8077,22 @@ curl <span class="nt">-X</span> POST https://<span class="k">*</span>.modapi.io/
 <td>Official homepage for your mod. Must be a valid URL.</td>
 </tr>
 <tr>
+<td>price</td>
+<td>int</td>
+<td>true</td>
+<td>The price of the mod.<br><br><strong>NOTE:</strong> The value of this field will be ignored if the parent game's queue is enabled (see <code>curation_option</code> field in <a href="#game-object">Game Object</a>).</td>
+</tr>
+<tr>
+<td>monetization_options</td>
+<td>integer</td>
+<td>Monetization option(s) enabled by the mod creator.<br><br><strong>NOTE:</strong> The value of this field will be ignored if the parent game's queue is enabled (see <code>curation_option</code> field in <a href="#game-object">Game Object</a>). <br><br><strong>0</strong> = None<br><strong>1</strong> = Enabled<br><strong>2</strong> = Marketplace On<br><strong>?</strong> = Add the options you want together, to enable multiple filters (see <a href="#bitwise-and-bitwise-and">BITWISE fields</a>)</td>
+<td></td>
+</tr>
+<tr>
 <td>stock</td>
 <td>integer</td>
 <td></td>
-<td>Maximium number of subscribers for this mod. A value of 0 disables this limit.</td>
+<td>Maximum number of times this Mod can be sold. <br><br><strong>NOTE:</strong> The value of this field is not used if the parent game's or mod's scarcity is disabled (see <code>monetization_options</code> field in <a href="#game-object">Game Object</a>).</td>
 </tr>
 <tr>
 <td>maturity_option</td>
@@ -8268,7 +8110,7 @@ curl <span class="nt">-X</span> POST https://<span class="k">*</span>.modapi.io/
 <td>metadata_blob</td>
 <td>string</td>
 <td></td>
-<td>Metadata stored by the game developer which may include properties as to how the item works, or other information you need to display. Metadata can also be stored as searchable <a href="#metadata">key value pairs</a>, and to individual <a href="#get-modfiles">mod files</a>.</td>
+<td>Metadata that is designed to be handled by the game client and is recommended to not be exposed to content creators when submitting their mods. As an example, this may include properties as to how the item works, or other information you need to display. Metadata can also be stored as searchable <a href="#metadata">key value pairs</a>, and to individual <a href="#get-modfiles">mod files</a>.</td>
 </tr>
 <tr>
 <td>tags[]</td>
@@ -8310,6 +8152,7 @@ curl <span class="nt">-X</span> POST https://<span class="k">*</span>.modapi.io/
   </span><span class="nl">"maturity_option"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
   </span><span class="nl">"community_options"</span><span class="p">:</span><span class="w"> </span><span class="mi">3</span><span class="p">,</span><span class="w">
   </span><span class="nl">"monetization_options"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"stock"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
   </span><span class="nl">"price"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
   </span><span class="nl">"tax"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
   </span><span class="nl">"logo"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
@@ -8430,17 +8273,17 @@ curl <span class="nt">-X</span> POST https://<span class="k">*</span>.modapi.io/
 <td><a href="#schemamod_object">Mod Object</a></td>
 </tr>
 <tr>
-<td>403</td>
-<td><a href="https://tools.ietf.org/html/rfc7231#section-6.5.3">Forbidden</a></td>
-<td>15013</td>
-<td>The authenticated user does not have permission to update this mod. Ensure the user is part of the mod team before attempting the request again.</td>
+<td>422</td>
+<td><a href="https://tools.ietf.org/html/rfc2518#section-10.3">Unprocessable Entity</a></td>
+<td>900011</td>
+<td>Your marketplace amount is not within the minimum or maximum amount allowed.</td>
 <td><a href="#schemaerror_object">Error Object</a></td>
 </tr>
 <tr>
 <td>403</td>
 <td><a href="https://tools.ietf.org/html/rfc7231#section-6.5.3">Forbidden</a></td>
-<td>15033</td>
-<td>The authenticated user does not have permission to update the metadata for this mod, this action is restricted to team managers &amp; administrators only.</td>
+<td>15013</td>
+<td>The authenticated user does not have permission to update this mod. Ensure the user is part of the mod team before attempting the request again.</td>
 <td><a href="#schemaerror_object">Error Object</a></td>
 </tr>
 <tr>
@@ -8462,13 +8305,6 @@ curl <span class="nt">-X</span> POST https://<span class="k">*</span>.modapi.io/
 <td><a href="https://tools.ietf.org/html/rfc7231#section-6.5.3">Forbidden</a></td>
 <td>15016</td>
 <td>A mod cannot be set live without an associated modfile.</td>
-<td><a href="#schemaerror_object">Error Object</a></td>
-</tr>
-<tr>
-<td>400</td>
-<td><a href="https://tools.ietf.org/html/rfc7231#section-6.5.1">Bad Request</a></td>
-<td>19301</td>
-<td>This game is not currently allowing edits to mod. Please contact the game administrator if you wish to make changes to this mod.</td>
 <td><a href="#schemaerror_object">Error Object</a></td>
 </tr>
 </tbody>
@@ -8743,7 +8579,7 @@ Accept: application/json
 <tr>
 <td>metadata_blob</td>
 <td>string</td>
-<td>Metadata stored by the game developer for this file.</td>
+<td>Metadata that is designed to be handled by the game client and is recommended to not be exposed to content creators when submitting their modfiles. As an example, this may include properties such as what version of the game this file is compatible with.</td>
 </tr>
 <tr>
 <td>platform_status</td>
@@ -9113,7 +8949,7 @@ curl <span class="nt">-X</span> POST https://<span class="k">*</span>.modapi.io/
 <td>metadata_blob</td>
 <td>string</td>
 <td></td>
-<td>Metadata stored by the game developer which may include properties such as what version of the game this file is compatible with.</td>
+<td>Metadata that is designed to be handled by the game client and is recommended to not be exposed to content creators when submitting their modfiles. As an example, this may include properties such as what version of the game this file is compatible with.</td>
 </tr>
 <tr>
 <td>platforms</td>
@@ -9339,7 +9175,7 @@ Content-Type: application/x-www-form-urlencoded
 <td>metadata_blob</td>
 <td>string</td>
 <td></td>
-<td>Metadata stored by the game developer which may include properties such as what version of the game this file is compatible with.</td>
+<td>Metadata that is designed to be handled by the game client and is recommended to not be exposed to content creators when submitting their modfiles. As an example, this may include properties such as what version of the game this file is compatible with.</td>
 </tr>
 </tbody>
 </table>
@@ -9407,13 +9243,6 @@ Content-Type: application/x-www-form-urlencoded
 <td><a href="https://tools.ietf.org/html/rfc7231#section-6.5.3">Forbidden</a></td>
 <td>15007</td>
 <td>The authenticated user does not have permission to update modfiles for the specified mod, ensure the user is a team manager or administrator.</td>
-<td><a href="#schemaerror_object">Error Object</a></td>
-</tr>
-<tr>
-<td>403</td>
-<td><a href="https://tools.ietf.org/html/rfc7231#section-6.5.3">Forbidden</a></td>
-<td>15033</td>
-<td>The authenticated user does not have permission to update modfile metadata for the specified mod, ensure the user is a team manager or administrator.</td>
 <td><a href="#schemaerror_object">Error Object</a></td>
 </tr>
 </tbody>
@@ -10836,6 +10665,7 @@ curl <span class="nt">-X</span> POST https://<span class="k">*</span>.modapi.io/
   </span><span class="nl">"maturity_option"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
   </span><span class="nl">"community_options"</span><span class="p">:</span><span class="w"> </span><span class="mi">3</span><span class="p">,</span><span class="w">
   </span><span class="nl">"monetization_options"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"stock"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
   </span><span class="nl">"price"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
   </span><span class="nl">"tax"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
   </span><span class="nl">"logo"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
@@ -13201,19 +13031,19 @@ curl <span class="nt">-X</span> POST https://<span class="k">*</span>.modapi.io/
 <td>logo</td>
 <td>file</td>
 <td></td>
-<td>Image file which will represent your games logo. Must be gif, jpg or png format and cannot exceed 8MB in filesize. Dimensions must be at least 640x360 and we recommended you supply a high resolution image with a 16 / 9 ratio. mod.io will use this logo to create three thumbnails with the dimensions of 320x180, 640x360 and 1280x720.</td>
+<td>Image file which will represent your games logo. Must be jpg, jpeg or png format and cannot exceed 8MB in filesize. Dimensions must be at least 640x360 and we recommended you supply a high resolution image with a 16 / 9 ratio. mod.io will use this logo to create three thumbnails with the dimensions of 320x180, 640x360 and 1280x720.</td>
 </tr>
 <tr>
 <td>icon</td>
 <td>file</td>
 <td></td>
-<td>Image file which will represent your games icon. Must be gif, jpg or png format and cannot exceed 1MB in filesize. Dimensions must be at least 64x64 and a transparent png that works on a colorful background is recommended. mod.io will use this icon to create three thumbnails with the dimensions of 64x64, 128x128 and 256x256.</td>
+<td>Image file which will represent your games icon. Must be jpg, jpeg or png format and cannot exceed 1MB in filesize. Dimensions must be at least 64x64 and a transparent png that works on a colorful background is recommended. mod.io will use this icon to create three thumbnails with the dimensions of 64x64, 128x128 and 256x256.</td>
 </tr>
 <tr>
 <td>header</td>
 <td>file</td>
 <td></td>
-<td>Image file which will represent your games header. Must be gif, jpg or png format and cannot exceed 256KB in filesize. Dimensions of 400x100 and a light transparent png that works on a dark background is recommended.</td>
+<td>Image file which will represent your games header. Must be jpg, jpeg or png format and cannot exceed 256KB in filesize. Dimensions of 400x100 and a light transparent png that works on a dark background is recommended.</td>
 </tr>
 </tbody>
 </table>
@@ -13365,13 +13195,13 @@ curl <span class="nt">-X</span> POST https://<span class="k">*</span>.modapi.io/
 <td>logo</td>
 <td>file</td>
 <td></td>
-<td>Image file which will represent your mods logo. Must be gif, jpg or png format and cannot exceed 8MB in filesize. Dimensions must be at least 512x288 and we recommended you supply a high resolution image with a 16 / 9 ratio. mod.io will use this logo to create three thumbnails with the dimensions of 320x180, 640x360 and 1280x720.</td>
+<td>Image file which will represent your mods logo. Must be jpg, jpeg or png format and cannot exceed 8MB in filesize. Dimensions must be at least 512x288 and we recommended you supply a high resolution image with a 16 / 9 ratio. mod.io will use this logo to create three thumbnails with the dimensions of 320x180, 640x360 and 1280x720.</td>
 </tr>
 <tr>
 <td>images</td>
 <td>zip</td>
 <td></td>
-<td>Zip archive of images to add to the mods gallery. Only valid gif, jpg and png images in the zip file will be processed. The filename <strong>must be images.zip</strong> all other zips will be ignored. Alternatively you can POST one or more images to this endpoint and they will be detected and added to the mods gallery.</td>
+<td>Zip archive of images to add to the mods gallery. Only valid jpg, jpeg and png images in the zip file will be processed. The filename <strong>must be images.zip</strong> all other zips will be ignored. Alternatively you can POST one or more images to this endpoint and they will be detected and added to the mods gallery.</td>
 </tr>
 <tr>
 <td>youtube[]</td>
@@ -16003,8 +15833,8 @@ curl <span class="nt">-X</span> POST https://<span class="k">*</span>.modapi.io/
 <tr>
 <td>403</td>
 <td><a href="https://tools.ietf.org/html/rfc7231#section-6.5.3">Forbidden</a></td>
-<td>15033</td>
-<td>The authenticated user does not have permission to add metadata to this mod, this action is restricted to team managers &amp; administrators only.</td>
+<td>15013</td>
+<td>The authenticated user does not have permission to update this mod. Ensure the user is part of the mod team before attempting the request again.</td>
 <td><a href="#schemaerror_object">Error Object</a></td>
 </tr>
 </tbody>
@@ -16168,7 +15998,7 @@ curl <span class="nt">-X</span> DELETE https://<span class="k">*</span>.modapi.i
 <tr>
 <td>403</td>
 <td><a href="https://tools.ietf.org/html/rfc7231#section-6.5.3">Forbidden</a></td>
-<td>15034</td>
+<td>15013</td>
 <td>The authenticated user does not have permission to delete metadata from this mod, this action is restricted to team managers &amp; administrators only.</td>
 <td><a href="#schemaerror_object">Error Object</a></td>
 </tr>
@@ -16673,7 +16503,333 @@ curl <span class="nt">-X</span> DELETE https://<span class="k">*</span>.modapi.i
 To perform this request, you must be authenticated via one of the following methods:
 <a href="#authentication">OAuth 2</a> (Scopes: write)
 </aside>
-<h1 id="teams">Teams</h1><h2 id="get-mod-team-members">Get Mod Team Members</h2>
+<h1 id="teams">Teams</h1><h2 id="get-users-in-mod-monetization-team">Get Users In Mod Monetization Team</h2>
+<blockquote>
+<p>Example request</p>
+</blockquote>
+<div class="highlight"><pre class="highlight shell tab-shell"><code><span class="c"># You can also use wget</span>
+curl <span class="nt">-X</span> GET https://<span class="k">*</span>.modapi.io/v1/games/<span class="o">{</span>game-id<span class="o">}</span>/mods/<span class="o">{</span>mod-id<span class="o">}</span>/monetization/team <span class="se">\</span>
+  <span class="nt">-H</span> <span class="s1">'Authorization: Bearer {access-token}'</span> <span class="se">\ </span>
+  <span class="nt">-H</span> <span class="s1">'Accept: application/json'</span>
+
+</code></pre></div><div class="highlight"><pre class="highlight http tab-http"><code><span class="nf">GET</span> <span class="nn">https://*.modapi.io/v1/games/{game-id}/mods/{mod-id}/monetization/team</span> <span class="k">HTTP</span><span class="o">/</span><span class="m">1.1</span>
+<span class="na">Host</span><span class="p">:</span> <span class="s">*.modapi.io</span>
+
+Accept: application/json
+Authorization: Bearer {access-token}
+
+</code></pre></div><div class="highlight"><pre class="highlight javascript tab-javascript"><code><span class="kd">var</span> <span class="nx">headers</span> <span class="o">=</span> <span class="p">{</span>
+  <span class="dl">'</span><span class="s1">Authorization</span><span class="dl">'</span><span class="p">:</span><span class="dl">'</span><span class="s1">Bearer {access-token}</span><span class="dl">'</span><span class="p">,</span>
+  <span class="dl">'</span><span class="s1">Accept</span><span class="dl">'</span><span class="p">:</span><span class="dl">'</span><span class="s1">application/json</span><span class="dl">'</span>
+
+<span class="p">};</span>
+
+<span class="nx">$</span><span class="p">.</span><span class="nx">ajax</span><span class="p">({</span>
+  <span class="na">url</span><span class="p">:</span> <span class="dl">'</span><span class="s1">https://*.modapi.io/v1/games/{game-id}/mods/{mod-id}/monetization/team</span><span class="dl">'</span><span class="p">,</span>
+  <span class="na">method</span><span class="p">:</span> <span class="dl">'</span><span class="s1">get</span><span class="dl">'</span><span class="p">,</span>
+
+  <span class="na">headers</span><span class="p">:</span> <span class="nx">headers</span><span class="p">,</span>
+  <span class="na">success</span><span class="p">:</span> <span class="kd">function</span><span class="p">(</span><span class="nx">data</span><span class="p">)</span> <span class="p">{</span>
+    <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">JSON</span><span class="p">.</span><span class="nx">stringify</span><span class="p">(</span><span class="nx">data</span><span class="p">));</span>
+  <span class="p">}</span>
+<span class="p">})</span>
+</code></pre></div><div class="highlight"><pre class="highlight javascript tab-javascript--nodejs"><code><span class="kd">const</span> <span class="nx">request</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="dl">'</span><span class="s1">node-fetch</span><span class="dl">'</span><span class="p">);</span>
+
+<span class="kd">const</span> <span class="nx">headers</span> <span class="o">=</span> <span class="p">{</span>
+  <span class="dl">'</span><span class="s1">Authorization</span><span class="dl">'</span><span class="p">:</span><span class="dl">'</span><span class="s1">Bearer {access-token}</span><span class="dl">'</span><span class="p">,</span>
+  <span class="dl">'</span><span class="s1">Accept</span><span class="dl">'</span><span class="p">:</span><span class="dl">'</span><span class="s1">application/json</span><span class="dl">'</span>
+
+<span class="p">};</span>
+
+<span class="nx">fetch</span><span class="p">(</span><span class="dl">'</span><span class="s1">https://*.modapi.io/v1/games/{game-id}/mods/{mod-id}/monetization/team</span><span class="dl">'</span><span class="p">,</span>
+<span class="p">{</span>
+  <span class="na">method</span><span class="p">:</span> <span class="dl">'</span><span class="s1">GET</span><span class="dl">'</span><span class="p">,</span>
+
+  <span class="na">headers</span><span class="p">:</span> <span class="nx">headers</span>
+<span class="p">})</span>
+<span class="p">.</span><span class="nx">then</span><span class="p">(</span><span class="kd">function</span><span class="p">(</span><span class="nx">res</span><span class="p">)</span> <span class="p">{</span>
+    <span class="k">return</span> <span class="nx">res</span><span class="p">.</span><span class="nx">json</span><span class="p">();</span>
+<span class="p">}).</span><span class="nx">then</span><span class="p">(</span><span class="kd">function</span><span class="p">(</span><span class="nx">body</span><span class="p">)</span> <span class="p">{</span>
+    <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">body</span><span class="p">);</span>
+<span class="p">});</span>
+</code></pre></div><div class="highlight"><pre class="highlight python tab-python"><code><span class="kn">import</span> <span class="nn">requests</span>
+<span class="n">headers</span> <span class="o">=</span> <span class="p">{</span>
+  <span class="s">'Authorization'</span><span class="p">:</span> <span class="s">'Bearer {access-token}'</span><span class="p">,</span>
+  <span class="s">'Accept'</span><span class="p">:</span> <span class="s">'application/json'</span>
+<span class="p">}</span>
+
+<span class="n">r</span> <span class="o">=</span> <span class="n">requests</span><span class="p">.</span><span class="n">get</span><span class="p">(</span><span class="s">'https://*.modapi.io/v1/games/{game-id}/mods/{mod-id}/monetization/team'</span><span class="p">,</span> <span class="n">params</span><span class="o">=</span><span class="p">{</span>
+
+<span class="p">},</span> <span class="n">headers</span> <span class="o">=</span> <span class="n">headers</span><span class="p">)</span>
+
+<span class="k">print</span> <span class="n">r</span><span class="p">.</span><span class="n">json</span><span class="p">()</span>
+</code></pre></div><div class="highlight"><pre class="highlight java tab-java"><code><span class="no">URL</span> <span class="n">obj</span> <span class="o">=</span> <span class="k">new</span> <span class="no">URL</span><span class="o">(</span><span class="s">"https://*.modapi.io/v1/games/{game-id}/mods/{mod-id}/monetization/team"</span><span class="o">);</span>
+<span class="nc">HttpURLConnection</span> <span class="n">con</span> <span class="o">=</span> <span class="o">(</span><span class="nc">HttpURLConnection</span><span class="o">)</span> <span class="n">obj</span><span class="o">.</span><span class="na">openConnection</span><span class="o">();</span>
+<span class="n">con</span><span class="o">.</span><span class="na">setRequestMethod</span><span class="o">(</span><span class="s">"GET"</span><span class="o">);</span>
+<span class="kt">int</span> <span class="n">responseCode</span> <span class="o">=</span> <span class="n">con</span><span class="o">.</span><span class="na">getResponseCode</span><span class="o">();</span>
+<span class="nc">BufferedReader</span> <span class="n">in</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">BufferedReader</span><span class="o">(</span>
+    <span class="k">new</span> <span class="nf">InputStreamReader</span><span class="o">(</span><span class="n">con</span><span class="o">.</span><span class="na">getInputStream</span><span class="o">()));</span>
+<span class="nc">String</span> <span class="n">inputLine</span><span class="o">;</span>
+<span class="nc">StringBuffer</span> <span class="n">response</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">StringBuffer</span><span class="o">();</span>
+<span class="k">while</span> <span class="o">((</span><span class="n">inputLine</span> <span class="o">=</span> <span class="n">in</span><span class="o">.</span><span class="na">readLine</span><span class="o">())</span> <span class="o">!=</span> <span class="kc">null</span><span class="o">)</span> <span class="o">{</span>
+    <span class="n">response</span><span class="o">.</span><span class="na">append</span><span class="o">(</span><span class="n">inputLine</span><span class="o">);</span>
+<span class="o">}</span>
+<span class="n">in</span><span class="o">.</span><span class="na">close</span><span class="o">();</span>
+<span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="n">response</span><span class="o">.</span><span class="na">toString</span><span class="o">());</span>
+</code></pre></div>
+<p><span class="httpmethod GET">GET</span> <span class="endpointheading">/games/{game-id}/mods/{mod-id}/monetization/team</span></p>
+
+<p>Get users in a monetization team. Successful request will return a <a href="#monetization-team-accounts-object">Monetization Team Accounts Object</a>.</p>
+
+<blockquote>
+<p>Example response</p>
+</blockquote>
+<div class="highlight"><pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
+  </span><span class="nl">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"name_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"xant"</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"username"</span><span class="p">:</span><span class="w"> </span><span class="s2">"XanT"</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"monetization_status"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"monetization_options"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"split"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="w">
+</span><span class="p">}</span><span class="w">
+
+</span></code></pre></div>
+<h3 id="Get-Users-In-Mod-Monetization-Team-responses">Responses</h3>
+
+<table>
+<thead>
+<tr>
+<th>Status</th>
+<th>Meaning</th>
+<th>Error Ref</th>
+<th>Description</th>
+<th>Response Schema</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>200</td>
+<td><a href="https://tools.ietf.org/html/rfc7231#section-6.3.1">OK</a></td>
+<td></td>
+<td>Successful Request</td>
+<td><a href="#schemamonetization_team_accounts_object">Monetization Team Accounts Object</a></td>
+</tr>
+<tr>
+<td>403</td>
+<td><a href="https://tools.ietf.org/html/rfc7231#section-6.5.3">Forbidden</a></td>
+<td>900023</td>
+<td>You do not have the required permissions.</td>
+<td><a href="#schemaerror_object">Error Object</a></td>
+</tr>
+<tr>
+<td>404</td>
+<td><a href="https://tools.ietf.org/html/rfc7231#section-6.5.4">Not Found</a></td>
+<td>900022</td>
+<td>Monetization team could not be found.</td>
+<td><a href="#schemaerror_object">Error Object</a></td>
+</tr>
+</tbody>
+</table>
+
+<aside class="auth-notice">
+To perform this request, you must be authenticated via one of the following methods:
+<a href="#authentication">OAuth 2</a> (Scopes: write)
+</aside>
+<h2 id="create-mod-monetization-team">Create Mod Monetization Team</h2>
+<blockquote>
+<p>Example request</p>
+</blockquote>
+<div class="highlight"><pre class="highlight shell tab-shell"><code><span class="c"># You can also use wget</span>
+curl <span class="nt">-X</span> POST https://<span class="k">*</span>.modapi.io/v1/games/<span class="o">{</span>game-id<span class="o">}</span>/mods/<span class="o">{</span>mod-id<span class="o">}</span>/monetization/team <span class="se">\</span>
+  <span class="nt">-H</span> <span class="s1">'Authorization: Bearer {access-token}'</span> <span class="se">\ </span>
+  <span class="nt">-H</span> <span class="s1">'Accept: application/json'</span>
+
+</code></pre></div><div class="highlight"><pre class="highlight http tab-http"><code><span class="nf">POST</span> <span class="nn">https://*.modapi.io/v1/games/{game-id}/mods/{mod-id}/monetization/team</span> <span class="k">HTTP</span><span class="o">/</span><span class="m">1.1</span>
+<span class="na">Host</span><span class="p">:</span> <span class="s">*.modapi.io</span>
+
+Accept: application/json
+Authorization: Bearer {access-token}
+
+</code></pre></div><div class="highlight"><pre class="highlight javascript tab-javascript"><code><span class="kd">var</span> <span class="nx">headers</span> <span class="o">=</span> <span class="p">{</span>
+  <span class="dl">'</span><span class="s1">Authorization</span><span class="dl">'</span><span class="p">:</span><span class="dl">'</span><span class="s1">Bearer {access-token}</span><span class="dl">'</span><span class="p">,</span>
+  <span class="dl">'</span><span class="s1">Accept</span><span class="dl">'</span><span class="p">:</span><span class="dl">'</span><span class="s1">application/json</span><span class="dl">'</span>
+
+<span class="p">};</span>
+
+<span class="nx">$</span><span class="p">.</span><span class="nx">ajax</span><span class="p">({</span>
+  <span class="na">url</span><span class="p">:</span> <span class="dl">'</span><span class="s1">https://*.modapi.io/v1/games/{game-id}/mods/{mod-id}/monetization/team</span><span class="dl">'</span><span class="p">,</span>
+  <span class="na">method</span><span class="p">:</span> <span class="dl">'</span><span class="s1">post</span><span class="dl">'</span><span class="p">,</span>
+
+  <span class="na">headers</span><span class="p">:</span> <span class="nx">headers</span><span class="p">,</span>
+  <span class="na">success</span><span class="p">:</span> <span class="kd">function</span><span class="p">(</span><span class="nx">data</span><span class="p">)</span> <span class="p">{</span>
+    <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">JSON</span><span class="p">.</span><span class="nx">stringify</span><span class="p">(</span><span class="nx">data</span><span class="p">));</span>
+  <span class="p">}</span>
+<span class="p">})</span>
+</code></pre></div><div class="highlight"><pre class="highlight javascript tab-javascript--nodejs"><code><span class="kd">const</span> <span class="nx">request</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="dl">'</span><span class="s1">node-fetch</span><span class="dl">'</span><span class="p">);</span>
+
+<span class="kd">const</span> <span class="nx">headers</span> <span class="o">=</span> <span class="p">{</span>
+  <span class="dl">'</span><span class="s1">Authorization</span><span class="dl">'</span><span class="p">:</span><span class="dl">'</span><span class="s1">Bearer {access-token}</span><span class="dl">'</span><span class="p">,</span>
+  <span class="dl">'</span><span class="s1">Accept</span><span class="dl">'</span><span class="p">:</span><span class="dl">'</span><span class="s1">application/json</span><span class="dl">'</span>
+
+<span class="p">};</span>
+
+<span class="nx">fetch</span><span class="p">(</span><span class="dl">'</span><span class="s1">https://*.modapi.io/v1/games/{game-id}/mods/{mod-id}/monetization/team</span><span class="dl">'</span><span class="p">,</span>
+<span class="p">{</span>
+  <span class="na">method</span><span class="p">:</span> <span class="dl">'</span><span class="s1">POST</span><span class="dl">'</span><span class="p">,</span>
+
+  <span class="na">headers</span><span class="p">:</span> <span class="nx">headers</span>
+<span class="p">})</span>
+<span class="p">.</span><span class="nx">then</span><span class="p">(</span><span class="kd">function</span><span class="p">(</span><span class="nx">res</span><span class="p">)</span> <span class="p">{</span>
+    <span class="k">return</span> <span class="nx">res</span><span class="p">.</span><span class="nx">json</span><span class="p">();</span>
+<span class="p">}).</span><span class="nx">then</span><span class="p">(</span><span class="kd">function</span><span class="p">(</span><span class="nx">body</span><span class="p">)</span> <span class="p">{</span>
+    <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">body</span><span class="p">);</span>
+<span class="p">});</span>
+</code></pre></div><div class="highlight"><pre class="highlight python tab-python"><code><span class="kn">import</span> <span class="nn">requests</span>
+<span class="n">headers</span> <span class="o">=</span> <span class="p">{</span>
+  <span class="s">'Authorization'</span><span class="p">:</span> <span class="s">'Bearer {access-token}'</span><span class="p">,</span>
+  <span class="s">'Accept'</span><span class="p">:</span> <span class="s">'application/json'</span>
+<span class="p">}</span>
+
+<span class="n">r</span> <span class="o">=</span> <span class="n">requests</span><span class="p">.</span><span class="n">post</span><span class="p">(</span><span class="s">'https://*.modapi.io/v1/games/{game-id}/mods/{mod-id}/monetization/team'</span><span class="p">,</span> <span class="n">params</span><span class="o">=</span><span class="p">{</span>
+
+<span class="p">},</span> <span class="n">headers</span> <span class="o">=</span> <span class="n">headers</span><span class="p">)</span>
+
+<span class="k">print</span> <span class="n">r</span><span class="p">.</span><span class="n">json</span><span class="p">()</span>
+</code></pre></div><div class="highlight"><pre class="highlight java tab-java"><code><span class="no">URL</span> <span class="n">obj</span> <span class="o">=</span> <span class="k">new</span> <span class="no">URL</span><span class="o">(</span><span class="s">"https://*.modapi.io/v1/games/{game-id}/mods/{mod-id}/monetization/team"</span><span class="o">);</span>
+<span class="nc">HttpURLConnection</span> <span class="n">con</span> <span class="o">=</span> <span class="o">(</span><span class="nc">HttpURLConnection</span><span class="o">)</span> <span class="n">obj</span><span class="o">.</span><span class="na">openConnection</span><span class="o">();</span>
+<span class="n">con</span><span class="o">.</span><span class="na">setRequestMethod</span><span class="o">(</span><span class="s">"POST"</span><span class="o">);</span>
+<span class="kt">int</span> <span class="n">responseCode</span> <span class="o">=</span> <span class="n">con</span><span class="o">.</span><span class="na">getResponseCode</span><span class="o">();</span>
+<span class="nc">BufferedReader</span> <span class="n">in</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">BufferedReader</span><span class="o">(</span>
+    <span class="k">new</span> <span class="nf">InputStreamReader</span><span class="o">(</span><span class="n">con</span><span class="o">.</span><span class="na">getInputStream</span><span class="o">()));</span>
+<span class="nc">String</span> <span class="n">inputLine</span><span class="o">;</span>
+<span class="nc">StringBuffer</span> <span class="n">response</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">StringBuffer</span><span class="o">();</span>
+<span class="k">while</span> <span class="o">((</span><span class="n">inputLine</span> <span class="o">=</span> <span class="n">in</span><span class="o">.</span><span class="na">readLine</span><span class="o">())</span> <span class="o">!=</span> <span class="kc">null</span><span class="o">)</span> <span class="o">{</span>
+    <span class="n">response</span><span class="o">.</span><span class="na">append</span><span class="o">(</span><span class="n">inputLine</span><span class="o">);</span>
+<span class="o">}</span>
+<span class="n">in</span><span class="o">.</span><span class="na">close</span><span class="o">();</span>
+<span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="n">response</span><span class="o">.</span><span class="na">toString</span><span class="o">());</span>
+</code></pre></div>
+<p><span class="httpmethod POST">POST</span> <span class="endpointheading">/games/{game-id}/mods/{mod-id}/monetization/team</span></p>
+
+<p>Send a request to create a monetization team for a mod team. Successful request will return a <a href="#monetization-team-accounts-object">Monetization Team Accounts Object</a>.</p>
+
+<table>
+<thead>
+<tr>
+<th>Parameter</th>
+<th>Type</th>
+<th>Required</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+</tbody>
+</table>
+
+<blockquote>
+<p>Example response</p>
+</blockquote>
+<div class="highlight"><pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
+  </span><span class="nl">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"name_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"xant"</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"username"</span><span class="p">:</span><span class="w"> </span><span class="s2">"XanT"</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"monetization_status"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"monetization_options"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"split"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="w">
+</span><span class="p">}</span><span class="w">
+
+</span></code></pre></div>
+<h3 id="Create-Mod-Monetization-Team-responses">Responses</h3>
+
+<table>
+<thead>
+<tr>
+<th>Status</th>
+<th>Meaning</th>
+<th>Error Ref</th>
+<th>Description</th>
+<th>Response Schema</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>200</td>
+<td><a href="https://tools.ietf.org/html/rfc7231#section-6.3.1">OK</a></td>
+<td></td>
+<td>Successful Request</td>
+<td><a href="#schemamonetization_team_accounts_object">Monetization Team Accounts Object</a></td>
+</tr>
+<tr>
+<td>403</td>
+<td><a href="https://tools.ietf.org/html/rfc7231#section-6.5.3">Forbidden</a></td>
+<td>900023</td>
+<td>Team members must belong to the current game or mod.</td>
+<td><a href="#schemaerror_object">Error Object</a></td>
+</tr>
+<tr>
+<td>404</td>
+<td><a href="https://tools.ietf.org/html/rfc7231#section-6.5.4">Not Found</a></td>
+<td>900022</td>
+<td>Monetization team could not be found.</td>
+<td><a href="#schemaerror_object">Error Object</a></td>
+</tr>
+<tr>
+<td>422</td>
+<td><a href="https://tools.ietf.org/html/rfc2518#section-10.3">Unprocessable Entity</a></td>
+<td>900024</td>
+<td>Unable to process your data with the payment system.</td>
+<td><a href="#schemaerror_object">Error Object</a></td>
+</tr>
+<tr>
+<td>422</td>
+<td><a href="https://tools.ietf.org/html/rfc2518#section-10.3">Unprocessable Entity</a></td>
+<td>900003</td>
+<td>Your account does not have the required creator wallets.</td>
+<td><a href="#schemaerror_object">Error Object</a></td>
+</tr>
+<tr>
+<td>422</td>
+<td><a href="https://tools.ietf.org/html/rfc2518#section-10.3">Unprocessable Entity</a></td>
+<td>900026</td>
+<td>Your provided split share must total 100%.</td>
+<td><a href="#schemaerror_object">Error Object</a></td>
+</tr>
+<tr>
+<td>422</td>
+<td><a href="https://tools.ietf.org/html/rfc2518#section-10.3">Unprocessable Entity</a></td>
+<td>900029</td>
+<td>You may only add up to 5 users to a team.</td>
+<td><a href="#schemaerror_object">Error Object</a></td>
+</tr>
+<tr>
+<td>422</td>
+<td><a href="https://tools.ietf.org/html/rfc2518#section-10.3">Unprocessable Entity</a></td>
+<td>900025</td>
+<td>Unable to process your data with the payment system.</td>
+<td><a href="#schemaerror_object">Error Object</a></td>
+</tr>
+<tr>
+<td>403</td>
+<td><a href="https://tools.ietf.org/html/rfc7231#section-6.5.3">Forbidden</a></td>
+<td>900023</td>
+<td>Team members must be approved before they can be added to the current team.</td>
+<td><a href="#schemaerror_object">Error Object</a></td>
+</tr>
+<tr>
+<td>404</td>
+<td><a href="https://tools.ietf.org/html/rfc7231#section-6.5.4">Not Found</a></td>
+<td>900003</td>
+<td>Monetization team could not be found.</td>
+<td><a href="#schemaerror_object">Error Object</a></td>
+</tr>
+</tbody>
+</table>
+
+<aside class="auth-notice">
+To perform this request, you must be authenticated via one of the following methods:
+<a href="#authentication">OAuth 2</a> (Scopes: write)
+</aside>
+<h2 id="get-mod-team-members">Get Mod Team Members</h2>
 <blockquote>
 <p>Example request</p>
 </blockquote>
@@ -18204,7 +18360,7 @@ Authorization: Bearer {access-token}
 <tr>
 <td>metadata_blob</td>
 <td>string</td>
-<td>Metadata stored by the game developer for this file.</td>
+<td>Metadata that is designed to be handled by the game client. As an example, this may include properties as to how the item works, or other information you need to display. Metadata can also be stored as searchable <a href="#metadata">key value pairs</a>, and to individual <a href="#get-modfiles">mod files</a>.</td>
 </tr>
 <tr>
 <td>platform_status</td>
@@ -18495,15 +18651,15 @@ Authorization: Bearer {access-token}
 <tbody>
 <tr>
 <td>popular</td>
-<td>Sort results by popularity using <a href="#filtering">_sort filter</a>, value should be <code>popular</code> for descending or <code>-popular</code> for ascending results.<br><br><strong>NOTE:</strong> Popularity is calculated hourly and reset daily (results are ranked from 1 to X). You should sort this column in ascending order <code>-popular</code> to get the top ranked results.</td>
+<td>Sort results by popularity using <a href="#filtering">_sort filter</a>, value should be <code>popular</code> for descending or <code>-popular</code> for ascending results.<br><br><strong>NOTE:</strong> Popularity is calculated hourly and reset daily (results are ranked from 1 to X). You should sort this column in descending order <code>popular</code> to get the top ranked results.</td>
 </tr>
 <tr>
-<td>popular_overall</td>
-<td>Sort results by 'Popular Overall' using <a href="#filtering">_sort filter</a>, value should be <code>popular_overall</code> for descending or <code>-popular_overall</code> for ascending results.<br><br><strong>NOTE:</strong> You should sort this column in ascending order <code>-popular_overall</code> to get the top ranked results. This filter differs from popular by filtering on the amount of downloads the game has received overall, and not just in the last 24 hours.</td>
+<td>downloads</td>
+<td>Sort results by total downloads using <a href="#filtering">_sort filter</a>, value should be <code>downloads</code> for descending or <code>-downloads</code> for ascending results.<br><br><strong>NOTE:</strong> You should sort this column in descending order <code>downloads</code> to get the top ranked results. This filter differs from popular by filtering on the amount of downloads the game has received overall, and not just in the last 24 hours.</td>
 </tr>
 <tr>
-<td>subscribers</td>
-<td>Sort results by most subscribers using <a href="#filtering">_sort filter</a>, value should be <code>subscribers</code> for descending or <code>-subscribers</code> for ascending results.</td>
+<td>mods</td>
+<td>Sort results by total mod count using <a href="#filtering">_sort filter</a>, value should be <code>mods</code> for descending or <code>-mods</code> for ascending results.</td>
 </tr>
 </tbody>
 </table>
@@ -18529,6 +18685,7 @@ Authorization: Bearer {access-token}
         </span><span class="nl">"team_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"1"</span><span class="w">
       </span><span class="p">},</span><span class="w">
       </span><span class="nl">"revenue_options"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"max_stock"</span><span class="p">:</span><span class="w"> </span><span class="mi">8388607</span><span class="p">,</span><span class="w">
       </span><span class="nl">"api_access_options"</span><span class="p">:</span><span class="w"> </span><span class="mi">3</span><span class="p">,</span><span class="w">
       </span><span class="nl">"maturity_options"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
       </span><span class="nl">"ugc_name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"mods"</span><span class="p">,</span><span class="w">
@@ -18798,7 +18955,7 @@ Authorization: Bearer {access-token}
 <tr>
 <td>metadata_blob</td>
 <td>string</td>
-<td>Metadata stored by the game developer.</td>
+<td>Metadata that is designed to be handled by the game client and is recommended to not be exposed to content creators when submitting their mods.</td>
 </tr>
 <tr>
 <td>metadata_kvp</td>
@@ -18878,6 +19035,7 @@ Authorization: Bearer {access-token}
       </span><span class="nl">"maturity_option"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
       </span><span class="nl">"community_options"</span><span class="p">:</span><span class="w"> </span><span class="mi">3</span><span class="p">,</span><span class="w">
       </span><span class="nl">"monetization_options"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"stock"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
       </span><span class="nl">"price"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
       </span><span class="nl">"tax"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
       </span><span class="nl">"logo"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
@@ -19175,7 +19333,7 @@ Authorization: Bearer {access-token}
 <tr>
 <td>metadata_blob</td>
 <td>string</td>
-<td>Metadata stored by the game developer.</td>
+<td>Metadata that is designed to be handled by the game client and is recommended to not be exposed to content creators when submitting their mods.</td>
 </tr>
 <tr>
 <td>metadata_kvp</td>
@@ -19255,6 +19413,7 @@ Authorization: Bearer {access-token}
       </span><span class="nl">"maturity_option"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
       </span><span class="nl">"community_options"</span><span class="p">:</span><span class="w"> </span><span class="mi">3</span><span class="p">,</span><span class="w">
       </span><span class="nl">"monetization_options"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"stock"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
       </span><span class="nl">"price"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
       </span><span class="nl">"tax"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
       </span><span class="nl">"logo"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
@@ -19542,7 +19701,7 @@ Accept: application/json
 <tr>
 <td>metadata_blob</td>
 <td>string</td>
-<td>Metadata stored by the game developer.</td>
+<td>Metadata that is designed to be handled by the game client and is recommended to not be exposed to content creators when submitting their mods.</td>
 </tr>
 <tr>
 <td>metadata_kvp</td>
@@ -19627,6 +19786,7 @@ Accept: application/json
       </span><span class="nl">"maturity_option"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
       </span><span class="nl">"community_options"</span><span class="p">:</span><span class="w"> </span><span class="mi">3</span><span class="p">,</span><span class="w">
       </span><span class="nl">"monetization_options"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"stock"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
       </span><span class="nl">"price"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
       </span><span class="nl">"tax"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
       </span><span class="nl">"logo"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
@@ -20167,7 +20327,8 @@ Authorization: Bearer {access-token}
   </span><span class="nl">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"string"</span><span class="p">,</span><span class="w">
   </span><span class="nl">"payment_method_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"string"</span><span class="p">,</span><span class="w">
   </span><span class="nl">"currency"</span><span class="p">:</span><span class="w"> </span><span class="s2">"string"</span><span class="p">,</span><span class="w">
-  </span><span class="nl">"balance"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="w">
+  </span><span class="nl">"balance"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"deficit"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="w">
 </span><span class="p">}</span><span class="w">
 
 </span></code></pre></div>
@@ -20526,6 +20687,7 @@ curl <span class="nt">-X</span> POST https://<span class="k">*</span>.modapi.io/
   </span><span class="nl">"purchase_date"</span><span class="p">:</span><span class="w"> </span><span class="mi">1626667557</span><span class="p">,</span><span class="w">
   </span><span class="nl">"wallet_type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"string"</span><span class="p">,</span><span class="w">
   </span><span class="nl">"balance"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"deficit"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
   </span><span class="nl">"payment_method_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"string"</span><span class="p">,</span><span class="w">
   </span><span class="nl">"mod"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
     </span><span class="nl">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span><span class="w">
@@ -20555,6 +20717,7 @@ curl <span class="nt">-X</span> POST https://<span class="k">*</span>.modapi.io/
     </span><span class="nl">"maturity_option"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
     </span><span class="nl">"community_options"</span><span class="p">:</span><span class="w"> </span><span class="mi">3</span><span class="p">,</span><span class="w">
     </span><span class="nl">"monetization_options"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"stock"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
     </span><span class="nl">"price"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
     </span><span class="nl">"tax"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
     </span><span class="nl">"logo"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
@@ -20757,6 +20920,13 @@ curl <span class="nt">-X</span> POST https://<span class="k">*</span>.modapi.io/
 <td><a href="https://tools.ietf.org/html/rfc2518#section-10.3">Unprocessable Entity</a></td>
 <td>900000</td>
 <td>An un expected error has occured. Please try again later.</td>
+<td><a href="#schemaerror_object">Error Object</a></td>
+</tr>
+<tr>
+<td>422</td>
+<td><a href="https://tools.ietf.org/html/rfc2518#section-10.3">Unprocessable Entity</a></td>
+<td>900061</td>
+<td>The mod that was attempting to be purchased has sold out. Only applicable if the Game and Mod have enabled scarcity.</td>
 <td><a href="#schemaerror_object">Error Object</a></td>
 </tr>
 <tr>
@@ -21795,6 +21965,7 @@ To perform this request, you must be authenticated via one of the following meth
     </span><span class="nl">"team_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"1"</span><span class="w">
   </span><span class="p">},</span><span class="w">
   </span><span class="nl">"revenue_options"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"max_stock"</span><span class="p">:</span><span class="w"> </span><span class="mi">8388607</span><span class="p">,</span><span class="w">
   </span><span class="nl">"api_access_options"</span><span class="p">:</span><span class="w"> </span><span class="mi">3</span><span class="p">,</span><span class="w">
   </span><span class="nl">"maturity_options"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
   </span><span class="nl">"ugc_name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"mods"</span><span class="p">,</span><span class="w">
@@ -21932,7 +22103,7 @@ To perform this request, you must be authenticated via one of the following meth
 <tr>
 <td>monetization_options</td>
 <td>integer</td>
-<td>Monetization features mods can enable:<br><br><strong>0</strong> = All of the options below are disabled<br><strong>1</strong> = Enabled<br><strong>2</strong> = Enable marketplace<br><strong>?</strong> = Add the options you want together, to enable multiple features (see <a href="#bitwise-and-bitwise-and">BITWISE fields</a>)</td>
+<td>Monetization features games can enable:<br><br><strong>0</strong> = All of the options below are disabled<br><strong>1</strong> = Enabled<br><strong>2</strong> = Enable marketplace<br><strong>4</strong> = Enable partner program<br><strong>8</strong> = Enable scarcity<br><strong>?</strong> = Add the options you want together, to enable multiple features (see <a href="#bitwise-and-bitwise-and">BITWISE fields</a>)</td>
 </tr>
 <tr>
 <td>monetization_team</td>
@@ -21943,6 +22114,11 @@ To perform this request, you must be authenticated via one of the following meth
 <td>revenue_options</td>
 <td>integer</td>
 <td>Deprecated: Please use monetization_options instead, this will be removed in subsequent API version.</td>
+</tr>
+<tr>
+<td>max_stock</td>
+<td>integer</td>
+<td>Max Stock for mod scarcity.</td>
 </tr>
 <tr>
 <td>api_access_options</td>
@@ -22443,6 +22619,7 @@ To perform this request, you must be authenticated via one of the following meth
         </span><span class="nl">"team_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"1"</span><span class="w">
       </span><span class="p">},</span><span class="w">
       </span><span class="nl">"revenue_options"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"max_stock"</span><span class="p">:</span><span class="w"> </span><span class="mi">8388607</span><span class="p">,</span><span class="w">
       </span><span class="nl">"api_access_options"</span><span class="p">:</span><span class="w"> </span><span class="mi">3</span><span class="p">,</span><span class="w">
       </span><span class="nl">"maturity_options"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
       </span><span class="nl">"ugc_name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"mods"</span><span class="p">,</span><span class="w">
@@ -23317,6 +23494,7 @@ To perform this request, you must be authenticated via one of the following meth
       </span><span class="nl">"maturity_option"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
       </span><span class="nl">"community_options"</span><span class="p">:</span><span class="w"> </span><span class="mi">3</span><span class="p">,</span><span class="w">
       </span><span class="nl">"monetization_options"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"stock"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
       </span><span class="nl">"price"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
       </span><span class="nl">"tax"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
       </span><span class="nl">"logo"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
@@ -24507,6 +24685,7 @@ To perform this request, you must be authenticated via one of the following meth
   </span><span class="nl">"maturity_option"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
   </span><span class="nl">"community_options"</span><span class="p">:</span><span class="w"> </span><span class="mi">3</span><span class="p">,</span><span class="w">
   </span><span class="nl">"monetization_options"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"stock"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
   </span><span class="nl">"price"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
   </span><span class="nl">"tax"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
   </span><span class="nl">"logo"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
@@ -24667,7 +24846,12 @@ To perform this request, you must be authenticated via one of the following meth
 <tr>
 <td>monetization_options</td>
 <td>integer</td>
-<td>Monetization features enabled for this mod:<br><br><strong>0</strong> = All of the options below are disabled<br><strong>1</strong> = Enabled<br><strong>2</strong> = Marketplace On<br><strong>?</strong> = Add the options you want together, to enable multiple features (see <a href="#bitwise-and-bitwise-and">BITWISE fields</a>)</td>
+<td>Monetization features mods can enable:<br><br><strong>0</strong> = All of the options below are disabled<br><strong>1</strong> = Enabled<br><strong>2</strong> = Enable marketplace<br><strong>4</strong> = Enable partner program<br><strong>8</strong> = Enable scarcity<br><strong>?</strong> = Add the options you want together, to enable multiple features (see <a href="#bitwise-and-bitwise-and">BITWISE fields</a>)</td>
+</tr>
+<tr>
+<td>stock</td>
+<td>integer</td>
+<td>The stock of the mod. 0 is the default value, and is only used when the mod has scarcity enabled.</td>
 </tr>
 <tr>
 <td>price</td>
@@ -24719,7 +24903,7 @@ To perform this request, you must be authenticated via one of the following meth
 <tr>
 <td>metadata_blob</td>
 <td>string</td>
-<td>Metadata stored by the game developer. Metadata can also be stored as searchable <a href="#metadata">key value pairs</a>, and to individual <a href="#get-modfiles">mod files</a>.</td>
+<td>Metadata that is designed to be handled by the game client and is recommended to not be exposed to content creators when submitting their mods. Metadata can also be stored as searchable <a href="#metadata">key value pairs</a>, and to individual <a href="#get-modfiles">mod files</a>.</td>
 </tr>
 <tr>
 <td>profile_url</td>
@@ -25207,13 +25391,66 @@ To perform this request, you must be authenticated via one of the following meth
 </tr>
 </tbody>
 </table>
+<h2 id="monetization-team-accounts-object">Monetization Team Accounts Object</h2>
+<p><a name="schemamonetization_team_accounts_object"></a></p>
+<div class="highlight"><pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
+  </span><span class="nl">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"name_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"xant"</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"username"</span><span class="p">:</span><span class="w"> </span><span class="s2">"XanT"</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"monetization_status"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"monetization_options"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"split"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="w">
+</span><span class="p">}</span><span class="w"> 
+</span></code></pre></div><h3 id="properties-58">Properties</h3>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>id</td>
+<td>integer</td>
+<td>Unique id of the user.</td>
+</tr>
+<tr>
+<td>name_id</td>
+<td>string</td>
+<td>Path for the user on mod.io. For example: https://mod.io/u/<strong>name-id-here</strong>
+</td>
+</tr>
+<tr>
+<td>username</td>
+<td>string</td>
+<td>Username of the user.</td>
+</tr>
+<tr>
+<td>monetization_status</td>
+<td>integer</td>
+<td>The monetization status of the user.</td>
+</tr>
+<tr>
+<td>monetization_options</td>
+<td>integer</td>
+<td>The monetization options of the user.</td>
+</tr>
+<tr>
+<td>split</td>
+<td>integer</td>
+<td>User monetization split.</td>
+</tr>
+</tbody>
+</table>
 <h2 id="multipart-upload-object">Multipart Upload Object</h2>
 <p><a name="schemamultipart_upload_object"></a></p>
 <div class="highlight"><pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
   </span><span class="nl">"upload_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"123e4567-e89b-12d3-a456-426614174000"</span><span class="p">,</span><span class="w">
   </span><span class="nl">"status"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="w">
 </span><span class="p">}</span><span class="w"> 
-</span></code></pre></div><h3 id="properties-58">Properties</h3>
+</span></code></pre></div><h3 id="properties-59">Properties</h3>
 <table>
 <thead>
 <tr>
@@ -25243,7 +25480,7 @@ To perform this request, you must be authenticated via one of the following meth
   </span><span class="nl">"part_size"</span><span class="p">:</span><span class="w"> </span><span class="mi">52428800</span><span class="p">,</span><span class="w">
   </span><span class="nl">"date_added"</span><span class="p">:</span><span class="w"> </span><span class="mi">1499846132</span><span class="w">
 </span><span class="p">}</span><span class="w"> 
-</span></code></pre></div><h3 id="properties-59">Properties</h3>
+</span></code></pre></div><h3 id="properties-60">Properties</h3>
 <table>
 <thead>
 <tr>
@@ -25288,6 +25525,7 @@ To perform this request, you must be authenticated via one of the following meth
   </span><span class="nl">"purchase_date"</span><span class="p">:</span><span class="w"> </span><span class="mi">1626667557</span><span class="p">,</span><span class="w">
   </span><span class="nl">"wallet_type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"string"</span><span class="p">,</span><span class="w">
   </span><span class="nl">"balance"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"deficit"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
   </span><span class="nl">"payment_method_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"string"</span><span class="p">,</span><span class="w">
   </span><span class="nl">"mod"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
     </span><span class="nl">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span><span class="w">
@@ -25317,6 +25555,7 @@ To perform this request, you must be authenticated via one of the following meth
     </span><span class="nl">"maturity_option"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
     </span><span class="nl">"community_options"</span><span class="p">:</span><span class="w"> </span><span class="mi">3</span><span class="p">,</span><span class="w">
     </span><span class="nl">"monetization_options"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"stock"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
     </span><span class="nl">"price"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
     </span><span class="nl">"tax"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
     </span><span class="nl">"logo"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
@@ -25415,7 +25654,7 @@ To perform this request, you must be authenticated via one of the following meth
     </span><span class="p">}</span><span class="w">
   </span><span class="p">}</span><span class="w">
 </span><span class="p">}</span><span class="w"> 
-</span></code></pre></div><h3 id="properties-60">Properties</h3>
+</span></code></pre></div><h3 id="properties-61">Properties</h3>
 <table>
 <thead>
 <tr>
@@ -25476,6 +25715,11 @@ To perform this request, you must be authenticated via one of the following meth
 <td>The balance of the wallet.</td>
 </tr>
 <tr>
+<td>deficit</td>
+<td>integer</td>
+<td>The deficit of the wallet.</td>
+</tr>
+<tr>
 <td>payment_method_id</td>
 <td>string</td>
 <td>The payment method id that was used.</td>
@@ -25494,7 +25738,7 @@ To perform this request, you must be authenticated via one of the following meth
   </span><span class="nl">"date_added"</span><span class="p">:</span><span class="w"> </span><span class="mi">1499841487</span><span class="p">,</span><span class="w">
   </span><span class="nl">"date_updated"</span><span class="p">:</span><span class="w"> </span><span class="mi">1499841487</span><span class="w">
 </span><span class="p">}</span><span class="w"> 
-</span></code></pre></div><h3 id="properties-61">Properties</h3>
+</span></code></pre></div><h3 id="properties-62">Properties</h3>
 <table>
 <thead>
 <tr>
@@ -25526,7 +25770,7 @@ To perform this request, you must be authenticated via one of the following meth
 <div class="highlight"><pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
   </span><span class="nl">"success"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="w">
 </span><span class="p">}</span><span class="w"> 
-</span></code></pre></div><h3 id="properties-62">Properties</h3>
+</span></code></pre></div><h3 id="properties-63">Properties</h3>
 <table>
 <thead>
 <tr>
@@ -25551,7 +25795,7 @@ To perform this request, you must be authenticated via one of the following meth
   </span><span class="nl">"rating"</span><span class="p">:</span><span class="w"> </span><span class="mi">-1</span><span class="p">,</span><span class="w">
   </span><span class="nl">"date_added"</span><span class="p">:</span><span class="w"> </span><span class="mi">1492564103</span><span class="w">
 </span><span class="p">}</span><span class="w"> 
-</span></code></pre></div><h3 id="properties-63">Properties</h3>
+</span></code></pre></div><h3 id="properties-64">Properties</h3>
 <table>
 <thead>
 <tr>
@@ -25589,7 +25833,7 @@ To perform this request, you must be authenticated via one of the following meth
   </span><span class="nl">"resource"</span><span class="p">:</span><span class="w"> </span><span class="s2">"game-secure-server"</span><span class="p">,</span><span class="w">
   </span><span class="nl">"service_ticket"</span><span class="p">:</span><span class="w"> </span><span class="s2">"eyJ0eXAiOiXKV1QibCJhbLciOiJeiUzI1....."</span><span class="w">
 </span><span class="p">}</span><span class="w"> 
-</span></code></pre></div><h3 id="properties-64">Properties</h3>
+</span></code></pre></div><h3 id="properties-65">Properties</h3>
 <table>
 <thead>
 <tr>
@@ -25637,7 +25881,7 @@ To perform this request, you must be authenticated via one of the following meth
   </span><span class="nl">"date_added"</span><span class="p">:</span><span class="w"> </span><span class="mi">1492564103</span><span class="p">,</span><span class="w">
   </span><span class="nl">"reason"</span><span class="p">:</span><span class="w"> </span><span class="s2">""</span><span class="w">
 </span><span class="p">}</span><span class="w"> 
-</span></code></pre></div><h3 id="properties-65">Properties</h3>
+</span></code></pre></div><h3 id="properties-66">Properties</h3>
 <table>
 <thead>
 <tr>
@@ -25700,7 +25944,7 @@ To perform this request, you must be authenticated via one of the following meth
   </span><span class="nl">"position"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Turret Builder"</span><span class="p">,</span><span class="w">
   </span><span class="nl">"invite_pending"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="w">
 </span><span class="p">}</span><span class="w"> 
-</span></code></pre></div><h3 id="properties-66">Properties</h3>
+</span></code></pre></div><h3 id="properties-67">Properties</h3>
 <table>
 <thead>
 <tr>
@@ -25745,8 +25989,8 @@ To perform this request, you must be authenticated via one of the following meth
 <h2 id="terms-object">Terms Object</h2>
 <p><a name="schematerms_object"></a></p>
 <div class="highlight"><pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
-  </span><span class="nl">"plaintext"</span><span class="p">:</span><span class="w"> </span><span class="s2">"We use mod.io to support user-generated content in-game. By clicking "</span><span class="err">I</span><span class="w"> </span><span class="err">Agree</span><span class="s2">" you agree to the mod.io Terms of Use and a mod.io account will be created for you (using your display name, avatar and ID). Please see the mod.io Privacy Policy on how mod.io processes your personal data."</span><span class="p">,</span><span class="w">
-  </span><span class="nl">"html"</span><span class="p">:</span><span class="w"> </span><span class="s2">"&lt;p&gt;We use &lt;a href="</span><span class="err">https://mod.io</span><span class="s2">"&gt;mod.io&lt;/a&gt; to support user-generated content in-game. By clicking "</span><span class="err">I</span><span class="w"> </span><span class="err">Agree</span><span class="s2">" you agree to the mod.io &lt;a href="</span><span class="err">https://mod.io/terms</span><span class="s2">"&gt;Terms of Use&lt;/a&gt; and a mod.io account will be created for you (using your  display name, avatar and ID). Please see the mod.io &lt;a href="</span><span class="err">https://mod.io/privacy</span><span class="s2">"&gt;Privacy Policy&lt;/a&gt; on how mod.io processes your personal data.&lt;/p&gt;"</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"plaintext"</span><span class="p">:</span><span class="w"> </span><span class="s2">"We use mod.io to support user-generated content in-game. By selecting "</span><span class="err">I</span><span class="w"> </span><span class="err">Agree</span><span class="s2">" you agree to the mod.io Terms of Use and a mod.io account will be created for you (using your display name, avatar and ID). Please see the mod.io Privacy Policy on how mod.io processes your personal data."</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"html"</span><span class="p">:</span><span class="w"> </span><span class="s2">"&lt;p&gt;We use &lt;a href="</span><span class="err">https://mod.io</span><span class="s2">"&gt;mod.io&lt;/a&gt; to support user-generated content in-game. By selecting "</span><span class="err">I</span><span class="w"> </span><span class="err">Agree</span><span class="s2">" you agree to the mod.io &lt;a href="</span><span class="err">https://mod.io/terms</span><span class="s2">"&gt;Terms of Use&lt;/a&gt; and a mod.io account will be created for you (using your  display name, avatar and ID). Please see the mod.io &lt;a href="</span><span class="err">https://mod.io/privacy</span><span class="s2">"&gt;Privacy Policy&lt;/a&gt; on how mod.io processes your personal data.&lt;/p&gt;"</span><span class="p">,</span><span class="w">
   </span><span class="nl">"buttons"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
     </span><span class="nl">"agree"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
       </span><span class="nl">"text"</span><span class="p">:</span><span class="w"> </span><span class="s2">"I Agree"</span><span class="w">
@@ -25778,7 +26022,7 @@ To perform this request, you must be authenticated via one of the following meth
     </span><span class="p">}</span><span class="w">
   </span><span class="p">}</span><span class="w">
 </span><span class="p">}</span><span class="w"> 
-</span></code></pre></div><h3 id="properties-67">Properties</h3>
+</span></code></pre></div><h3 id="properties-68">Properties</h3>
 <table>
 <thead>
 <tr>
@@ -25920,7 +26164,7 @@ To perform this request, you must be authenticated via one of the following meth
   </span><span class="nl">"warning"</span><span class="p">:</span><span class="w"> </span><span class="s2">"#d6af2e"</span><span class="p">,</span><span class="w">
   </span><span class="nl">"danger"</span><span class="p">:</span><span class="w"> </span><span class="s2">"#ff000e"</span><span class="w">
 </span><span class="p">}</span><span class="w"> 
-</span></code></pre></div><h3 id="properties-68">Properties</h3>
+</span></code></pre></div><h3 id="properties-69">Properties</h3>
 <table>
 <thead>
 <tr>
@@ -25971,7 +26215,7 @@ To perform this request, you must be authenticated via one of the following meth
   </span><span class="nl">"resource_name_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"my-awesome-mod"</span><span class="p">,</span><span class="w">
   </span><span class="nl">"resource_url"</span><span class="p">:</span><span class="w"> </span><span class="s2">""</span><span class="w">
 </span><span class="p">}</span><span class="w"> 
-</span></code></pre></div><h3 id="properties-69">Properties</h3>
+</span></code></pre></div><h3 id="properties-70">Properties</h3>
 <table>
 <thead>
 <tr>
@@ -26019,7 +26263,7 @@ To perform this request, you must be authenticated via one of the following meth
   </span><span class="nl">"date_added"</span><span class="p">:</span><span class="w"> </span><span class="mi">1499846132</span><span class="p">,</span><span class="w">
   </span><span class="nl">"event_type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"USER_SUBSCRIBE"</span><span class="w">
 </span><span class="p">}</span><span class="w"> 
-</span></code></pre></div><h3 id="properties-70">Properties</h3>
+</span></code></pre></div><h3 id="properties-71">Properties</h3>
 <table>
 <thead>
 <tr>
@@ -26080,7 +26324,7 @@ To perform this request, you must be authenticated via one of the following meth
   </span><span class="nl">"language"</span><span class="p">:</span><span class="w"> </span><span class="s2">""</span><span class="p">,</span><span class="w">
   </span><span class="nl">"profile_url"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://mod.io/u/xant"</span><span class="w">
 </span><span class="p">}</span><span class="w"> 
-</span></code></pre></div><h3 id="properties-71">Properties</h3>
+</span></code></pre></div><h3 id="properties-72">Properties</h3>
 <table>
 <thead>
 <tr>
@@ -26148,7 +26392,7 @@ To perform this request, you must be authenticated via one of the following meth
 <div class="highlight"><pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
   </span><span class="nl">"balance"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="w">
 </span><span class="p">}</span><span class="w"> 
-</span></code></pre></div><h3 id="properties-72">Properties</h3>
+</span></code></pre></div><h3 id="properties-73">Properties</h3>
 <table>
 <thead>
 <tr>
@@ -26171,9 +26415,10 @@ To perform this request, you must be authenticated via one of the following meth
   </span><span class="nl">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"string"</span><span class="p">,</span><span class="w">
   </span><span class="nl">"payment_method_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"string"</span><span class="p">,</span><span class="w">
   </span><span class="nl">"currency"</span><span class="p">:</span><span class="w"> </span><span class="s2">"string"</span><span class="p">,</span><span class="w">
-  </span><span class="nl">"balance"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="w">
+  </span><span class="nl">"balance"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"deficit"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="w">
 </span><span class="p">}</span><span class="w"> 
-</span></code></pre></div><h3 id="properties-73">Properties</h3>
+</span></code></pre></div><h3 id="properties-74">Properties</h3>
 <table>
 <thead>
 <tr>
@@ -26203,6 +26448,11 @@ To perform this request, you must be authenticated via one of the following meth
 <td>integer</td>
 <td>The balance of the wallet.</td>
 </tr>
+<tr>
+<td>deficit</td>
+<td>integer</td>
+<td>The deficit of the wallet.</td>
+</tr>
 </tbody>
 </table>
 <h2 id="web-access-token-object">Web Access Token Object</h2>
@@ -26213,7 +26463,7 @@ To perform this request, you must be authenticated via one of the following meth
   </span><span class="nl">"access_token"</span><span class="p">:</span><span class="w"> </span><span class="s2">"eyJlbmMiOiJBMTI4Q0JDLUhTMjU2IiwiYWxnIjoiUlNBLU9BRVAiLCJjdHkiOi...."</span><span class="p">,</span><span class="w">
   </span><span class="nl">"refresh_token"</span><span class="p">:</span><span class="w"> </span><span class="s2">"eyJlbmMiOiJBMTI4Q0JDLUhTMjU2IiwiYWxnIjoiUlNBLU9BRVAiLCJjdHkiOi...."</span><span class="w">
 </span><span class="p">}</span><span class="w"> 
-</span></code></pre></div><h3 id="properties-74">Properties</h3>
+</span></code></pre></div><h3 id="properties-75">Properties</h3>
 <table>
 <thead>
 <tr>
@@ -26251,7 +26501,7 @@ To perform this request, you must be authenticated via one of the following meth
   </span><span class="nl">"code"</span><span class="p">:</span><span class="w"> </span><span class="s2">"def5020077deb4eafe6fb6743b1fd6857ce22112d3400e6cc684633f8c9904faae1a83c23b"</span><span class="p">,</span><span class="w">
   </span><span class="nl">"state"</span><span class="p">:</span><span class="w"> </span><span class="s2">"T6KQGIXWrHXxFDfyp5Hh"</span><span class="w">
 </span><span class="p">}</span><span class="w"> 
-</span></code></pre></div><h3 id="properties-75">Properties</h3>
+</span></code></pre></div><h3 id="properties-76">Properties</h3>
 <table>
 <thead>
 <tr>
@@ -26280,7 +26530,7 @@ To perform this request, you must be authenticated via one of the following meth
   </span><span class="nl">"success"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
   </span><span class="nl">"message"</span><span class="p">:</span><span class="w"> </span><span class="s2">"You have successfully logged out of mod.io."</span><span class="w">
 </span><span class="p">}</span><span class="w"> 
-</span></code></pre></div><h3 id="properties-76">Properties</h3>
+</span></code></pre></div><h3 id="properties-77">Properties</h3>
 <table>
 <thead>
 <tr>
