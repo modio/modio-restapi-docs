@@ -758,7 +758,7 @@ retry-after: 57
 
 If the rate limit is exceeded, the following header will be returned alongside the `429 Too Many Requests` HTTP response code.
 
- - `retry-after` - Number of seconds before you can attempt to make another request to API.
+ - `retry-after` - Number of seconds before you can attempt to make another request to API. __NOTE:__ If the `retry-after` value is 0, that means you have hit a rolling ratelimit. Rolling ratelimits don't block for a set timeframe once the limit is reached, instead they permit a certain number of requests within the timeframe (see [this explanation](https://developers.cloudflare.com/waf/rate-limiting-rules/parameters/#with-the-following-behavior)). If you encounter a 0, we recommend retrying the endpoint again after 60 seconds.
 
 ### Deprecation Notice
 
@@ -836,6 +836,8 @@ When making API requests you should include the `X-Modio-Portal` header (with on
 
 For example, passing the HTTP header `X-Modio-Portal: epicgames` in your API request tells mod.io your player is coming via the Epic Games Store.
 
+You can also instruct the mod.io website to authenticate the player using a portal from the list above (provided it is supported), as explained in [Web Overlay Authentication](#authentication). For example, if your game client has logged the player into mod.io on PlayStation using their PlayStation™Network account, and you want to open the mod.io website in-game with the player logged in using the same authentication method, you would add `?portal=psn` to the end of the URL: `https://mod.io/g/gamename?portal=psn`. You can optionally add `&login=auto` as well to automatically start the login process.
+
 Target Portal | Header Value
 ---------- | ----------  
 Apple | `apple`
@@ -846,8 +848,8 @@ GOG | `gog`
 Google | `google`
 itch.io | `itchio`
 Nintendo | `nintendo`
-OpenID | `openid`
-PlayStation Network | `psn`
+PlayStation™Network | `psn`
+SSO | `sso`
 Steam | `steam`
 Xbox Live | `xboxlive`
 
@@ -964,8 +966,8 @@ The purpose of this endpoint is to provide the text, links and buttons you can u
 
 ```json
 {
-  "plaintext": "We use mod.io to support user-generated content in-game. By clicking "I Agree" you agree to the mod.io Terms of Use and a mod.io account will be created for you (using your display name, avatar and ID). Please see the mod.io Privacy Policy on how mod.io processes your personal data.",
-  "html": "<p>We use <a href="https://mod.io">mod.io</a> to support user-generated content in-game. By clicking "I Agree" you agree to the mod.io <a href="https://mod.io/terms">Terms of Use</a> and a mod.io account will be created for you (using your  display name, avatar and ID). Please see the mod.io <a href="https://mod.io/privacy">Privacy Policy</a> on how mod.io processes your personal data.</p>",
+  "plaintext": "We use mod.io to support user-generated content in-game. By selecting "I Agree" you agree to the mod.io Terms of Use and a mod.io account will be created for you (using your display name, avatar and ID). Please see the mod.io Privacy Policy on how mod.io processes your personal data.",
+  "html": "<p>We use <a href="https://mod.io">mod.io</a> to support user-generated content in-game. By selecting "I Agree" you agree to the mod.io <a href="https://mod.io/terms">Terms of Use</a> and a mod.io account will be created for you (using your  display name, avatar and ID). Please see the mod.io <a href="https://mod.io/privacy">Privacy Policy</a> on how mod.io processes your personal data.</p>",
   "buttons": {
     "agree": {
       "text": "I Agree"
@@ -1107,9 +1109,8 @@ System.out.println(response.toString());
 
 Request an access token on behalf of a Steam user. To use this functionality you *must* add your games [encrypted app ticket key](https://partner.steamgames.com/apps/sdkauth) from Steamworks, to the *Game Admin > Settings* page of your games profile on mod.io. A Successful request will return an [Access Token Object](#access-token-object).
 
-     __HINT:__ If you want to overlay the mod.io site in-game on Steam, we recommend you add `?portal=steam` to the end of the URL you open which will prompt the user to login with Steam. See [Web Overlay Authentication](#web-overlay-authentication) for details.
-
-     __NOTE__: Steam is the only authentication endpoint that requires their token to be base64 encoded. All other endpoints tokens should be provided as a UTF-8 character string.
+    __HINT:__ If you want to overlay the mod.io site in-game on Steam, we recommend you add `?portal=steam` to the end of the URL you open which will prompt the user to login with Steam. See [Web Overlay Authentication](#web-overlay-authentication) for details.
+    __NOTE__: Steam is the only authentication endpoint that requires their token to be base64 encoded. All other endpoints tokens should be provided as a UTF-8 character string.
 
      Parameter|Type|Required|Description
      ---|---|---|---|
@@ -1140,6 +1141,7 @@ Status|Meaning|Error Ref|Description|Response Schema
 403|[Forbidden](https://tools.ietf.org/html/rfc7231#section-6.5.3)|11017|The api_key supplied in the request is for test environment purposes only and cannot be used for this functionality.|[Error Object](#schemaerror_object)
 403|[Forbidden](https://tools.ietf.org/html/rfc7231#section-6.5.3)|11019|The secret steam app ticket associated with this game has not been configured.|[Error Object](#schemaerror_object)
 403|[Forbidden](https://tools.ietf.org/html/rfc7231#section-6.5.3)|11074|The user has not agreed to the mod.io Terms of Use. Please see terms_agreed parameter description and the [Terms](#terms) endpoint for more information.|[Error Object](#schemaerror_object)
+403|[Forbidden](https://tools.ietf.org/html/rfc7231#section-6.5.3)|17053|The user account associated with this email is locked. Please contact support for assistance.|[Error Object](#schemaerror_object)
 <aside class="auth-notice">
 To perform this request, you must be authenticated via one of the following methods:
 <a href="#authentication">api_key</a>
@@ -1240,17 +1242,17 @@ System.out.println(response.toString());
 `POST /external/xboxauth`
 
 Request an access token on behalf of an Xbox Live user. A Successful request will return an [Access Token Object](#access-token-object).
-
-     __NOTE__: To use this endpoint you will need to setup some additional settings prior to being able to authenticate Xbox Live users. For these instructions please [contact us](mailto:developers@mod.io?subject=Xbox Live SSO Request).
-
-     __HINT:__ If you want to overlay the mod.io site in-game on Xbox, we recommend you add `?portal=xboxlive` to the end of the URL you open which will prompt the user to login with Xbox Live. See [Web Overlay Authentication](#web-overlay-authentication) for details.
-
-     Parameter|Type|Required|Description
-     ---|---|---|---|
-     xbox_token|string|true|The Xbox Live token returned from calling [GetTokenAndSignatureAsync("POST", "https://*.modapi.io")](https://docs.microsoft.com/en-us/dotnet/api/microsoft.xbox.services.system.xboxliveuser.gettokenandsignatureasync?view=xboxlive-dotnet-2017.11.20171204.01). <br><br>__NOTE:__ Due to the encrypted app ticket containing special characters, you must URL encode the string before sending the request to ensure it is successfully sent to our servers otherwise you may encounter an `422 Unprocessable Entity` response. For example, [cURL](https://ec.haxx.se/http-post.html) will do this for you by using the `--data-urlencode` option.
-     email|string||The users email address (optional but recommended to help users recover lost accounts). If supplied, and the respective user does not have an email registered for their account we will send a confirmation email to confirm they have ownership of the specified email. This functionality is also available at a later time via the [Link an Email](#link-an-email) endpoint.<br><br>__NOTE__: If the user already has an email on record with us, this parameter will be ignored. This parameter should also be urlencoded before the request is sent.
-     date_expires|integer||Unix timestamp of date in which the returned token will expire. Value cannot be higher than the default value which is a common year (unix timestamp + 31536000 seconds). Using a token after it's expiry time has elapsed will result in a `401 Unauthorized` response.
-     terms_agreed|boolean||This MUST be set to `false` unless you have collected the [users agreement](#terms) prior to calling this endpoint in which case it can be set to `true` and will be recorded.<br><br>__NOTE:__ If this is set to `false` and the user has not agreed to the latest mod.io Terms of Use and Privacy Policy, an error `403 Forbidden (error_ref 11074)` will be returned and you will need to collect the [users agreement](#terms) and retry with this value set to `true` to authenticate the user.
+ *
+* __NOTE__: To use this endpoint you will need to setup some additional settings prior to being able to authenticate Xbox Live users. For these instructions please [contact us](mailto:developers@mod.io?subject=Xbox Live SSO Request).
+ *
+* __HINT:__ If you want to overlay the mod.io site in-game on Xbox, we recommend you add `?portal=xboxlive` to the end of the URL you open which will prompt the user to login with Xbox Live. See [Web Overlay Authentication](#web-overlay-authentication) for details.
+ *
+* Parameter|Type|Required|Description
+     * ---|---|---|---|
+     * xbox_token|string|true|The Xbox Live token returned from calling [GetTokenAndSignatureAsync("POST", "https://*.modapi.io")](https://docs.microsoft.com/en-us/dotnet/api/microsoft.xbox.services.system.xboxliveuser.gettokenandsignatureasync?view=xboxlive-dotnet-2017.11.20171204.01). <br><br>__NOTE:__ Due to the encrypted app ticket containing special characters, you must URL encode the string before sending the request to ensure it is successfully sent to our servers otherwise you may encounter an `422 Unprocessable Entity` response. For example, [cURL](https://ec.haxx.se/http-post.html) will do this for you by using the `--data-urlencode` option.
+     * email|string||The users email address (optional but recommended to help users recover lost accounts). If supplied, and the respective user does not have an email registered for their account we will send a confirmation email to confirm they have ownership of the specified email. This functionality is also available at a later time via the [Link an Email](#link-an-email) endpoint.<br><br>__NOTE__: If the user already has an email on record with us, this parameter will be ignored. This parameter should also be urlencoded before the request is sent.
+     * date_expires|integer||Unix timestamp of date in which the returned token will expire. Value cannot be higher than the default value which is a common year (unix timestamp + 31536000 seconds). Using a token after it's expiry time has elapsed will result in a `401 Unauthorized` response.
+     * terms_agreed|boolean||This MUST be set to `false` unless you have collected the [users agreement](#terms) prior to calling this endpoint in which case it can be set to `true` and will be recorded.<br><br>__NOTE:__ If this is set to `false` and the user has not agreed to the latest mod.io Terms of Use and Privacy Policy, an error `403 Forbidden (error_ref 11074)` will be returned and you will need to collect the [users agreement](#terms) and retry with this value set to `true` to authenticate the user.
 
 > Example response
 
@@ -1507,15 +1509,15 @@ System.out.println(response.toString());
 `POST /external/switchauth`
 
 Request an access token on behalf of a Nintendo Switch user. A Successful request will return an [Access Token Object](#access-token-object).
-
-     __NOTE__: To use this endpoint you will need to setup some additional settings prior to being able to authenticate Nintendo Switch users. For these instructions please [contact us](mailto:developers@mod.io?subject=Nintendo Switch SSO Request).
-
-     Parameter|Type|Required|Description
-     ---|---|---|---|
-     id_token|string|true|The NSA ID supplied by the Nintendo Switch SDK.
-     email|string||The users email address. If supplied, and the respective user does not have an email registered for their account we will send a confirmation email to confirm they have ownership of the specified email.<br><br>__WARNING__: We __strongly recommend__ that you prompt your users in a friendly manner at least once to provide their email address to link their Nintendo Service account to mod.io. Failing to provide an email will in-effect generate an orphan account that will only be able to be accessed from the users' Switch device.
-     date_expires|integer||Unix timestamp of date in which the returned token will expire. Value cannot be higher than the default value which is a common year (unix timestamp + 31536000 seconds). Using a token after it's expiry time has elapsed will result in a `401 Unauthorized` response.
-     terms_agreed|boolean||This MUST be set to `false` unless you have collected the [users agreement](#terms) prior to calling this endpoint in which case it can be set to `true` and will be recorded.<br><br>__NOTE:__ If this is set to `false` and the user has not agreed to the latest mod.io Terms of Use and Privacy Policy, an error `403 Forbidden (error_ref 11074)` will be returned and you will need to collect the [users agreement](#terms) and retry with this value set to `true` to authenticate the user.
+ *
+* __NOTE__: To use this endpoint you will need to setup some additional settings prior to being able to authenticate Nintendo Switch users. For these instructions please [contact us](mailto:developers@mod.io?subject=Nintendo Switch SSO Request).
+ *
+* Parameter|Type|Required|Description
+     * ---|---|---|---|
+     * id_token|string|true|The NSA ID supplied by the Nintendo Switch SDK.
+     * email|string||The users email address. If supplied, and the respective user does not have an email registered for their account we will send a confirmation email to confirm they have ownership of the specified email.<br><br>__WARNING__: We __strongly recommend__ that you prompt your users in a friendly manner at least once to provide their email address to link their Nintendo Service account to mod.io. Failing to provide an email will in-effect generate an orphan account that will only be able to be accessed from the users' Switch device.
+     * date_expires|integer||Unix timestamp of date in which the returned token will expire. Value cannot be higher than the default value which is a common year (unix timestamp + 31536000 seconds). Using a token after it's expiry time has elapsed will result in a `401 Unauthorized` response.
+     * terms_agreed|boolean||This MUST be set to `false` unless you have collected the [users agreement](#terms) prior to calling this endpoint in which case it can be set to `true` and will be recorded.<br><br>__NOTE:__ If this is set to `false` and the user has not agreed to the latest mod.io Terms of Use and Privacy Policy, an error `403 Forbidden (error_ref 11074)` will be returned and you will need to collect the [users agreement](#terms) and retry with this value set to `true` to authenticate the user.
 
 > Example response
 
@@ -1645,16 +1647,16 @@ System.out.println(response.toString());
 `POST /external/oculusauth`
 
 Request an access token on behalf of an Meta Quest user. To use this functionality you *must* add your games [AppId and secret](https://dashboard.oculus.com/) from the Meta Quest Dashboard, to the *Game Admin > Settings* page of your games profile on mod.io. A Successful request will return an [Access Token Object](#access-token-object).
-
-     Parameter|Type|Required|Description
-     ---|---|---|---|
-     device|string|true|The Meta Quest device being used for authentication.<br><br>Possible Options:<br>- _rift_<br>- _quest_
-     nonce|string|true|The nonce provided by calling [ovr_User_GetUserProof()](https://developer.oculus.com/documentation/platform/latest/concepts/dg-ownership/) from the Meta Quest SDK. <br><br>__NOTE:__ Due to the `nonce` potentially containing special characters, you must URL encode the string before sending the request to ensure it is successfully sent to our servers otherwise you may encounter an `422 Unprocessable Entity` response. For example, [cURL](https://ec.haxx.se/http-post.html) will do this for you by using the `--data-urlencode` option.
-     user_id|integer|true|The user's Meta Quest id providing by calling [ovr_GetLoggedInUserID()](https://developer.oculus.com/documentation/platform/latest/concepts/dg-ownership/) from the Meta Quest SDK.
-     access_token|string|true|The user's access token, providing by calling [ovr_User_GetAccessToken()](https://developer.oculus.com/documentation/platform/latest/concepts/dg-ownership/) from the Meta Quest SDK. mod.io uses this access token on the first login only to obtain the user's alias and is not saved on our servers.
-     email|string||The users email address. If supplied, and the respective user does not have an email registered for their account we will send a confirmation email to confirm they have ownership of the specified email.<br><br>__WARNING__: We __strongly recommend__ that you prompt your users in a friendly manner at least once to provide their email address to link their Meta Quest account. Due to how Meta Quest handles user IDs - if we are not supplied with an email for a user at least once we will __never__ be able to link that user with their existing account at a later date as Meta Quest IDs operate at the game-scope, not globally. Failing to provide an email will in-effect generate an orphan account that will only be able to be accessed from your title.
-     date_expires|integer||Unix timestamp of date in which the returned token will expire. Value cannot be higher than the default value which is a common year (unix timestamp + 31536000 seconds). Using a token after it's expiry time has elapsed will result in a `401 Unauthorized` response.
-     terms_agreed|boolean||This MUST be set to `false` unless you have collected the [users agreement](#terms) prior to calling this endpoint in which case it can be set to `true` and will be recorded.<br><br>__NOTE:__ If this is set to `false` and the user has not agreed to the latest mod.io Terms of Use and Privacy Policy, an error `403 Forbidden (error_ref 11074)` will be returned and you will need to collect the [users agreement](#terms) and retry with this value set to `true` to authenticate the user.
+ *
+* Parameter|Type|Required|Description
+     * ---|---|---|---|
+     * device|string|true|The Meta Quest device being used for authentication.<br><br>Possible Options:<br>- _rift_<br>- _quest_
+     * nonce|string|true|The nonce provided by calling [ovr_User_GetUserProof()](https://developer.oculus.com/documentation/platform/latest/concepts/dg-ownership/) from the Meta Quest SDK. <br><br>__NOTE:__ Due to the `nonce` potentially containing special characters, you must URL encode the string before sending the request to ensure it is successfully sent to our servers otherwise you may encounter an `422 Unprocessable Entity` response. For example, [cURL](https://ec.haxx.se/http-post.html) will do this for you by using the `--data-urlencode` option.
+     * user_id|integer|true|The user's Meta Quest id providing by calling [ovr_GetLoggedInUserID()](https://developer.oculus.com/documentation/platform/latest/concepts/dg-ownership/) from the Meta Quest SDK.
+     * access_token|string|true|The user's access token, providing by calling [ovr_User_GetAccessToken()](https://developer.oculus.com/documentation/platform/latest/concepts/dg-ownership/) from the Meta Quest SDK. mod.io uses this access token on the first login only to obtain the user's alias and is not saved on our servers.
+     * email|string||The users email address. If supplied, and the respective user does not have an email registered for their account we will send a confirmation email to confirm they have ownership of the specified email.<br><br>__WARNING__: We __strongly recommend__ that you prompt your users in a friendly manner at least once to provide their email address to link their Meta Quest account. Due to how Meta Quest handles user IDs - if we are not supplied with an email for a user at least once we will __never__ be able to link that user with their existing account at a later date as Meta Quest IDs operate at the game-scope, not globally. Failing to provide an email will in-effect generate an orphan account that will only be able to be accessed from your title.
+     * date_expires|integer||Unix timestamp of date in which the returned token will expire. Value cannot be higher than the default value which is a common year (unix timestamp + 31536000 seconds). Using a token after it's expiry time has elapsed will result in a `401 Unauthorized` response.
+     * terms_agreed|boolean||This MUST be set to `false` unless you have collected the [users agreement](#terms) prior to calling this endpoint in which case it can be set to `true` and will be recorded.<br><br>__NOTE:__ If this is set to `false` and the user has not agreed to the latest mod.io Terms of Use and Privacy Policy, an error `403 Forbidden (error_ref 11074)` will be returned and you will need to collect the [users agreement](#terms) and retry with this value set to `true` to authenticate the user.
 
 > Example response
 
@@ -1778,13 +1780,13 @@ System.out.println(response.toString());
 `POST /external/epicgamesauth`
 
 Request an access token on behalf of an Epic Games user. A Successful request will return an [Access Token Object](#access-token-object).
-
-     Parameter|Type|Required|Description
-     ---|---|---|---|
-     id_token|string|true|The ID Token [returned from the EOS SDK](https://dev.epicgames.com/docs/api-ref/functions/eos-auth-copy-id-token) when you authenticate a user to use mod.io.
-     email|string||The users email address (optional but recommended to help users recover lost accounts). If supplied, and the respective user does not have an email registered for their account we will send a confirmation email to confirm they have ownership of the specified email.<br><br>__NOTE__: If the user already has an email on record with us, this parameter will be ignored. This parameter should also be urlencoded before the request is sent.
-     date_expires|integer||Unix timestamp of date in which the returned token will expire. Value cannot be higher than the default value which is a week (unix timestamp + 604800 seconds). Using a token after it's expiry time has elapsed will result in a `401 Unauthorized` response.
-     terms_agreed|boolean||This MUST be set to `false` unless you have collected the [users agreement](#terms) prior to calling this endpoint in which case it can be set to `true` and will be recorded.<br><br>__NOTE:__ If this is set to `false` and the user has not agreed to the latest mod.io Terms of Use and Privacy Policy, an error `403 Forbidden (error_ref 11074)` will be returned and you will need to collect the [users agreement](#terms) and retry with this value set to `true` to authenticate the user.
+ *
+* Parameter|Type|Required|Description
+     * ---|---|---|---|
+     * id_token|string|true|The ID Token [returned from the EOS SDK](https://dev.epicgames.com/docs/api-ref/functions/eos-auth-copy-id-token) when you authenticate a user to use mod.io.
+     * email|string||The users email address (optional but recommended to help users recover lost accounts). If supplied, and the respective user does not have an email registered for their account we will send a confirmation email to confirm they have ownership of the specified email.<br><br>__NOTE__: If the user already has an email on record with us, this parameter will be ignored. This parameter should also be urlencoded before the request is sent.
+     * date_expires|integer||Unix timestamp of date in which the returned token will expire. Value cannot be higher than the default value which is a week (unix timestamp + 604800 seconds). Using a token after it's expiry time has elapsed will result in a `401 Unauthorized` response.
+     * terms_agreed|boolean||This MUST be set to `false` unless you have collected the [users agreement](#terms) prior to calling this endpoint in which case it can be set to `true` and will be recorded.<br><br>__NOTE:__ If this is set to `false` and the user has not agreed to the latest mod.io Terms of Use and Privacy Policy, an error `403 Forbidden (error_ref 11074)` will be returned and you will need to collect the [users agreement](#terms) and retry with this value set to `true` to authenticate the user.
 
 > Example response
 
@@ -1906,13 +1908,13 @@ System.out.println(response.toString());
 `POST /external/galaxyauth`
 
 Request an access token on behalf of a GOG Galaxy user. To use this functionality you *must* add your games [encrypted app ticket key](https://docs.gog.com/sdk-encrypted-tickets/) from GOG Galaxy, to the *Game Admin > Settings* page of your games profile on mod.io. A Successful request will return an [Access Token Object](#access-token-object).
-
-     Parameter|Type|Required|Description
-     ---|---|---|---|
-     appdata|string|true|The GOG Galaxy users [Encrypted App Ticket](https://cdn.gog.com/open/galaxy/sdk/1.133.3/Documentation/classgalaxy_1_1api_1_1IUser.html#a352802aab7a6e71b1cd1b9b1adfd53d8) provided by the GOG Galaxy SDK. <br><br>Parameter content *MUST* be the encrypted string returned in the buffer after calling [IUser::GetEncryptedAppTicket()](https://cdn.gog.com/open/galaxy/sdk/1.133.3/Documentation/classgalaxy_1_1api_1_1IUser.html#a96af6792efc260e75daebedca2cf74c6) within the Galaxy SDK. Unlike the [Steam Authentication](#steam) endpoint, you do not need to encode the encrypted string as this is already done by the Galaxy SDK.<br><br>__NOTE:__ Due to the encrypted app ticket containing special characters, you must URL encode the string before sending the request to ensure it is successfully sent to our servers otherwise you may encounter an `422 Unprocessable Entity` response. For example, [cURL](https://ec.haxx.se/http-post.html) will do this for you by using the `--data-urlencode` option.
-     email|string||The users email address. If supplied, and the respective user does not have an email registered for their account we will send a confirmation email to confirm they have ownership of the specified email.<br><br>__WARNING__: We __strongly recommend__ that you prompt your users in a friendly manner at least once to provide their email address to link their GOG Galaxy account to mod.io. Failing to provide an email will in-effect generate an orphan account that will only be able to be accessed from GOG Galaxy.
-     date_expires|integer||Unix timestamp of date in which the returned token will expire. Value cannot be higher than the default value which is a common year (unix timestamp + 31536000 seconds). Using a token after it's expiry time has elapsed will result in a `401 Unauthorized` response.
-     terms_agreed|boolean||This MUST be set to `false` unless you have collected the [users agreement](#terms) prior to calling this endpoint in which case it can be set to `true` and will be recorded.<br><br>__NOTE:__ If this is set to `false` and the user has not agreed to the latest mod.io Terms of Use and Privacy Policy, an error `403 Forbidden (error_ref 11074)` will be returned and you will need to collect the [users agreement](#terms) and retry with this value set to `true` to authenticate the user.
+ *
+* Parameter|Type|Required|Description
+     * ---|---|---|---|
+     * appdata|string|true|The GOG Galaxy users [Encrypted App Ticket](https://cdn.gog.com/open/galaxy/sdk/1.133.3/Documentation/classgalaxy_1_1api_1_1IUser.html#a352802aab7a6e71b1cd1b9b1adfd53d8) provided by the GOG Galaxy SDK. <br><br>Parameter content *MUST* be the encrypted string returned in the buffer after calling [IUser::GetEncryptedAppTicket()](https://cdn.gog.com/open/galaxy/sdk/1.133.3/Documentation/classgalaxy_1_1api_1_1IUser.html#a96af6792efc260e75daebedca2cf74c6) within the Galaxy SDK. Unlike the [Steam Authentication](#steam) endpoint, you do not need to encode the encrypted string as this is already done by the Galaxy SDK.<br><br>__NOTE:__ Due to the encrypted app ticket containing special characters, you must URL encode the string before sending the request to ensure it is successfully sent to our servers otherwise you may encounter an `422 Unprocessable Entity` response. For example, [cURL](https://ec.haxx.se/http-post.html) will do this for you by using the `--data-urlencode` option.
+     * email|string||The users email address. If supplied, and the respective user does not have an email registered for their account we will send a confirmation email to confirm they have ownership of the specified email.<br><br>__WARNING__: We __strongly recommend__ that you prompt your users in a friendly manner at least once to provide their email address to link their GOG Galaxy account to mod.io. Failing to provide an email will in-effect generate an orphan account that will only be able to be accessed from GOG Galaxy.
+     * date_expires|integer||Unix timestamp of date in which the returned token will expire. Value cannot be higher than the default value which is a common year (unix timestamp + 31536000 seconds). Using a token after it's expiry time has elapsed will result in a `401 Unauthorized` response.
+     * terms_agreed|boolean||This MUST be set to `false` unless you have collected the [users agreement](#terms) prior to calling this endpoint in which case it can be set to `true` and will be recorded.<br><br>__NOTE:__ If this is set to `false` and the user has not agreed to the latest mod.io Terms of Use and Privacy Policy, an error `403 Forbidden (error_ref 11074)` will be returned and you will need to collect the [users agreement](#terms) and retry with this value set to `true` to authenticate the user.
 
 > Example response
 
@@ -2036,16 +2038,16 @@ System.out.println(response.toString());
 `POST /external/googleauth`
 
 Request an access token on behalf of a Google user. A Successful request will return an [Access Token Object](#access-token-object).
-
-     __NOTE__: To use this endpoint you will need to setup some additional settings prior to being able to authenticate Google users. For these instructions please [contact us](mailto:developers@mod.io?subject=Google SSO Request).
-
-     __HINT:__ If you want to overlay the mod.io site in-game on Android, we recommend you add `?portal=google` to the end of the URL you open which will prompt the user to login with Google. See [Web Overlay Authentication](#web-overlay-authentication) for details.
-
-     Parameter|Type|Required|Description
-     ---|---|---|---|
-     id_token|string|true|The `id_token` value [returned from Google](https://developers.google.com/identity/sign-in/web/backend-auth#calling-the-tokeninfo-endpoint) after you have authenticated a user via the Google OAuth2 flow.
-     date_expires|integer||Unix timestamp of date in which the returned token will expire. Value cannot be higher than the default value which is a week (unix timestamp + 604800 seconds). Using a token after it's expiry time has elapsed will result in a `401 Unauthorized` response.
-     terms_agreed|boolean||This MUST be set to `false` unless you have collected the [users agreement](#terms) prior to calling this endpoint in which case it can be set to `true` and will be recorded.<br><br>__NOTE:__ If this is set to `false` and the user has not agreed to the latest mod.io Terms of Use and Privacy Policy, an error `403 Forbidden (error_ref 11074)` will be returned and you will need to collect the [users agreement](#terms) and retry with this value set to `true` to authenticate the user.
+ *
+* __NOTE__: To use this endpoint you will need to setup some additional settings prior to being able to authenticate Google users. For these instructions please [contact us](mailto:developers@mod.io?subject=Google SSO Request).
+ *
+* __HINT:__ If you want to overlay the mod.io site in-game on Android, we recommend you add `?portal=google` to the end of the URL you open which will prompt the user to login with Google. See [Web Overlay Authentication](#web-overlay-authentication) for details.
+ *
+* Parameter|Type|Required|Description
+     * ---|---|---|---|
+     * id_token|string|true|The `id_token` value [returned from Google](https://developers.google.com/identity/sign-in/web/backend-auth#calling-the-tokeninfo-endpoint) after you have authenticated a user via the Google OAuth2 flow.
+     * date_expires|integer||Unix timestamp of date in which the returned token will expire. Value cannot be higher than the default value which is a week (unix timestamp + 604800 seconds). Using a token after it's expiry time has elapsed will result in a `401 Unauthorized` response.
+     * terms_agreed|boolean||This MUST be set to `false` unless you have collected the [users agreement](#terms) prior to calling this endpoint in which case it can be set to `true` and will be recorded.<br><br>__NOTE:__ If this is set to `false` and the user has not agreed to the latest mod.io Terms of Use and Privacy Policy, an error `403 Forbidden (error_ref 11074)` will be returned and you will need to collect the [users agreement](#terms) and retry with this value set to `true` to authenticate the user.
 
 > Example response
 
@@ -2066,6 +2068,7 @@ Status|Meaning|Error Ref|Description|Response Schema
 401|[Unauthorized](https://tools.ietf.org/html/rfc7235#section-3.1)|11056|mod.io was unable to validate the credentials with Google's servers.|[Error Object](#schemaerror_object)
 401|[Unauthorized](https://tools.ietf.org/html/rfc7235#section-3.1)|11053|The Google access token is not valid yet.|[Error Object](#schemaerror_object)
 401|[Unauthorized](https://tools.ietf.org/html/rfc7235#section-3.1)|11054|The Google access token has expired. You should request another token from the Google SDK and ensure it is delivered to mod.io before it expires.|[Error Object](#schemaerror_object)
+403|[Forbidden](https://tools.ietf.org/html/rfc7231#section-6.5.3)|17053|The user account associated with this email is locked. Please contact support for assistance.|[Error Object](#schemaerror_object)
 403|[Forbidden](https://tools.ietf.org/html/rfc7231#section-6.5.3)|11074|The user has not agreed to the mod.io Terms of Use. Please see terms_agreed parameter description and the [Terms](#terms) endpoint for more information.|[Error Object](#schemaerror_object)
 <aside class="auth-notice">
 To perform this request, you must be authenticated via one of the following methods:
@@ -2298,15 +2301,15 @@ System.out.println(response.toString());
 `POST /external/openidauth`
 
 Request an access token on behalf of an OpenID identity provider. To use this method of authentication, you must configure the OpenID config in your games authentication admin page. A Successful request will return an [Access Token Object](#access-token-object).
-
-     __NOTE:__ The ability to authenticate players using your identity provider is a feature for advanced partners only. If you are interested in becoming an advanced partner, please [contact us](mailto:developers@mod.io?subject=OpenID SSO Request).
-
-     Parameter|Type|Required|Description
-     ---|---|---|---|
-     id_token|string|true|The ID token issued by the configured identity provider.
-     email|string||The users email address (optional but recommended to help users recover lost accounts). If supplied, and the respective user does not have an email registered for their account we will send a confirmation email to confirm they have ownership of the specified email.<br><br>__NOTE__: If the user already has an email on record with us, this parameter will be ignored. This parameter should also be urlencoded before the request is sent.
-     date_expires|integer||Unix timestamp of date in which the returned token will expire. Value cannot be higher than the default value which is a week (unix timestamp + 604800 seconds). Using a token after it's expiry time has elapsed will result in a `401 Unauthorized` response.
-     terms_agreed|boolean||This MUST be set to `false` unless you have collected the [users agreement](#terms) prior to calling this endpoint in which case it can be set to `true` and will be recorded.<br><br>__NOTE:__ If this is set to `false` and the user has not agreed to the latest mod.io Terms of Use and Privacy Policy, an error `403 Forbidden (error_ref 11074)` will be returned and you will need to collect the [users agreement](#terms) and retry with this value set to `true` to authenticate the user.
+ *
+* __NOTE:__ The ability to authenticate players using your identity provider is a feature for advanced partners only. If you are interested in becoming an advanced partner, please [contact us](mailto:developers@mod.io?subject=OpenID SSO Request).
+ *
+* Parameter|Type|Required|Description
+     * ---|---|---|---|
+     * id_token|string|true|The ID token issued by the configured identity provider.
+     * email|string||The users email address (optional but recommended to help users recover lost accounts). If supplied, and the respective user does not have an email registered for their account we will send a confirmation email to confirm they have ownership of the specified email.<br><br>__NOTE__: If the user already has an email on record with us, this parameter will be ignored. This parameter should also be urlencoded before the request is sent.
+     * date_expires|integer||Unix timestamp of date in which the returned token will expire. Value cannot be higher than the default value which is a week (unix timestamp + 604800 seconds). Using a token after it's expiry time has elapsed will result in a `401 Unauthorized` response.
+     * terms_agreed|boolean||This MUST be set to `false` unless you have collected the [users agreement](#terms) prior to calling this endpoint in which case it can be set to `true` and will be recorded.<br><br>__NOTE:__ If this is set to `false` and the user has not agreed to the latest mod.io Terms of Use and Privacy Policy, an error `403 Forbidden (error_ref 11074)` will be returned and you will need to collect the [users agreement](#terms) and retry with this value set to `true` to authenticate the user.
 
 > Example response
 
@@ -2328,6 +2331,7 @@ Status|Meaning|Error Ref|Description|Response Schema
 403|[Forbidden](https://tools.ietf.org/html/rfc7231#section-6.5.3)|11016|The api_key supplied in the request must be associated with a game.|[Error Object](#schemaerror_object)
 403|[Forbidden](https://tools.ietf.org/html/rfc7231#section-6.5.3)|11017|The api_key supplied in the request is for test environment purposes only and cannot be used for this functionality.|[Error Object](#schemaerror_object)
 403|[Forbidden](https://tools.ietf.org/html/rfc7231#section-6.5.3)|11074|The user has not agreed to the mod.io Terms of Use. Please see terms_agreed parameter description and the [Terms](#terms) endpoint for more information.|[Error Object](#schemaerror_object)
+403|[Forbidden](https://tools.ietf.org/html/rfc7231#section-6.5.3)|17053|The user account associated with this email is locked. Please contact support for assistance.|[Error Object](#schemaerror_object)
 403|[Forbidden](https://tools.ietf.org/html/rfc7231#section-6.5.3)|11086|You must configure your OpenID config for your game in your game authentication settings before being able to authenticate users.|[Error Object](#schemaerror_object)
 <aside class="auth-notice">
 To perform this request, you must be authenticated via one of the following methods:
@@ -2431,9 +2435,9 @@ System.out.println(response.toString());
 
 Request a security code for a user, identified by their e-mail which can then be [exchanged](#email) for an access token. To use this functionality you *must* use your games api_key from your games profile on mod.io. A Successful request will return a [Message Object](#message-object).
 
-     Parameter|Type|Required|Description
-     ---|---|---|---|
-     email|string|true|An email address the user can access to retrieve the security code. This parameter should also be urlencoded before the request is sent.
+    Parameter|Type|Required|Description
+    ---|---|---|---|
+    email|string|true|An email address the user can access to retrieve the security code. This parameter should also be urlencoded before the request is sent.
 
 > Example response
 
@@ -2553,7 +2557,6 @@ System.out.println(response.toString());
 `POST /oauth/emailexchange`
 
 Exchange a security code issued from the [Email Request endpoint](#email) for an access token. To use this functionality you *must* use your games api_key from your games profile on mod.io and the same api_key must be used from the original request for a security code. A Successful request will return an [Access Token Object](#access-token-object).
-
     Parameter|Type|Required|Description
     ---|---|---|---|
     security_code|string|true|The alpha-numeric security code.
@@ -2577,6 +2580,7 @@ Status|Meaning|Error Ref|Description|Response Schema
 401|[Unauthorized](https://tools.ietf.org/html/rfc7235#section-3.1)|11013|Authorization failed. You must use the same api_key for both stages of the authentication process.|[Error Object](#schemaerror_object)
 401|[Unauthorized](https://tools.ietf.org/html/rfc7235#section-3.1)|11012|Authorization failed, security code has expired. Please request a new code.|[Error Object](#schemaerror_object)
 401|[Unauthorized](https://tools.ietf.org/html/rfc7235#section-3.1)|11011|Authorization failed. Security code has already been redeemed.|[Error Object](#schemaerror_object)
+403|[Forbidden](https://tools.ietf.org/html/rfc7231#section-6.5.3)|17053|The user account associated with this email is locked. Please contact support for assistance.|[Error Object](#schemaerror_object)
 401|[Unauthorized](https://tools.ietf.org/html/rfc7235#section-3.1)|11014|Authorization failed. Invalid security code.|[Error Object](#schemaerror_object)
 <aside class="auth-notice">
 To perform this request, you must be authenticated via one of the following methods:
@@ -3205,9 +3209,9 @@ Get all games. Successful request will return an array of [Game Objects](#get-ga
 
     Sort|Description
     ---|---
-    popular|Sort results by popularity using [_sort filter](#filtering), value should be `popular` for descending or `-popular` for ascending results.<br><br>__NOTE:__ Popularity is calculated hourly and reset daily (results are ranked from 1 to X). You should sort this column in ascending order `-popular` to get the top ranked results.
-    popular_overall|Sort results by 'Popular Overall' using [_sort filter](#filtering), value should be `popular_overall` for descending or `-popular_overall` for ascending results.<br><br>__NOTE:__ You should sort this column in ascending order `-popular_overall` to get the top ranked results. This filter differs from popular by filtering on the amount of downloads the game has received overall, and not just in the last 24 hours.
-    subscribers|Sort results by most subscribers using [_sort filter](#filtering), value should be `subscribers` for descending or `-subscribers` for ascending results.
+    popular|Sort results by popularity using [_sort filter](#filtering), value should be `popular` for descending or `-popular` for ascending results.<br><br>__NOTE:__ Popularity is calculated hourly and reset daily (results are ranked from 1 to X). You should sort this column in descending order `popular` to get the top ranked results.
+    downloads|Sort results by total downloads using [_sort filter](#filtering), value should be `downloads` for descending or `-downloads` for ascending results.<br><br>__NOTE:__ You should sort this column in descending order `downloads` to get the top ranked results. This filter differs from popular by filtering on the amount of downloads the game has received overall, and not just in the last 24 hours.
+    mods|Sort results by total mod count using [_sort filter](#filtering), value should be `mods` for descending or `-mods` for ascending results.
 
 > Example response
 
@@ -3230,6 +3234,7 @@ Get all games. Successful request will return an array of [Game Objects](#get-ga
         "team_id": "1"
       },
       "revenue_options": 0,
+      "max_stock": 8388607,
       "api_access_options": 3,
       "maturity_options": 0,
       "ugc_name": "mods",
@@ -3437,6 +3442,7 @@ Get a game. Successful request will return a single [Game Object](#game-object).
     "team_id": "1"
   },
   "revenue_options": 0,
+  "max_stock": 8388607,
   "api_access_options": 3,
   "maturity_options": 0,
   "ugc_name": "mods",
@@ -3980,7 +3986,7 @@ Add a guide for a game. Successful request will return a single [Guide Object](#
 
     Parameter|Type|Required|Description
     ---|---|---|---|
-    logo|file|true|Image file which will represent your guides logo. Must be gif, jpg or png format and cannot exceed 8MB in filesize. Dimensions must be at least 512x288 and we recommended you supply a high resolution image with a 16 / 9 ratio. mod.io will use this image to make three thumbnails for the dimensions 320x180, 640x360 and 1280x720.
+    logo|file|true|Image file which will represent your guides logo. Must be jpg, jpeg or png format and cannot exceed 8MB in filesize. Dimensions must be at least 512x288 and we recommended you supply a high resolution image with a 16 / 9 ratio. mod.io will use this image to make three thumbnails for the dimensions 320x180, 640x360 and 1280x720.
     name|string|true|Name of your guide.
     name_id|string||Path for the guide on mod.io. For example: https://mod.io/g/gamename/r/__guide-name-id-here__. If no `name_id` is specified the `name` will be used. For example: _'Stellaris Shader Guide'_ will become _'stellaris-shader-guide'_. Cannot exceed 80 characters.
     summary|string|true|Summary for your guide, giving a brief overview of what it's about. Cannot exceed 250 characters.
@@ -4174,7 +4180,7 @@ Update an existing guide. Successful request will return the updated [Guide Obje
     Parameter|Type|Required|Description
     ---|---|---|---|
     status|integer||Status of the guide, see [status and visibility](#status-amp-visibility) for details):<br><br>__0__ = Not accepted<br>__1__ = Accepted (game admins only)<br>__3__ = Deleted (use the [delete guide](#delete-guide) endpoint to set this status)
-    logo|file||Image file which will represent your guides logo. Must be gif, jpg or png format and cannot exceed 8MB in filesize. Dimensions must be at least 512x288 and we recommended you supply a high resolution image with a 16 / 9 ratio. mod.io will use this image to make three thumbnails for the dimensions 320x180, 640x360 and 1280x720.
+    logo|file||Image file which will represent your guides logo. Must be jpg, jpeg or png format and cannot exceed 8MB in filesize. Dimensions must be at least 512x288 and we recommended you supply a high resolution image with a 16 / 9 ratio. mod.io will use this image to make three thumbnails for the dimensions 320x180, 640x360 and 1280x720.
     name|string||Name of your guide.
     name_id|string||Path for the guide on mod.io. For example: https://mod.io/g/gamename/r/__guide-name-id-here__. If no `name_id` is specified the `name` will be used. For example: _'Stellaris Shader Guide'_ will become _'stellaris-shader-guide'_. Cannot exceed 80 characters.
     summary|string||Summary for your guide, giving a brief overview of what it's about. Cannot exceed 250 characters.
@@ -4595,7 +4601,7 @@ Get all mods for the corresponding game. Successful request will return an array
     name|string|Name of the mod.
     name_id|string|Path for the mod on mod.io. For example: https://mod.io/g/gamename/m/__mod-name-id-here__
     modfile|integer|Unique id of the file that is the current active release (see [mod files](#files)).
-    metadata_blob|string|Metadata stored by the game developer.
+    metadata_blob|string|Metadata that is designed to be handled by the game client and is recommended to not be exposed to content creators when submitting their mods. As an example, this may include properties as to how the item works, or other information you need to display. Metadata can also be stored as searchable [key value pairs](#metadata), and to individual [mod files](#get-modfiles).
     metadata_kvp|string|Colon-separated values representing the key-value pairs you want to filter the results by. If you supply more than one key-pair, separate the pairs by a comma. Will only filter by an exact key-pair match.
     tags|string|Comma-separated values representing the tags you want to filter the results by. If you specify multiple tags, only mods which have all tags will be returned, and only tags that are supported by the parent game can be applied. To determine what tags are eligible, see the tags values within `tag_options` column on the parent [Game Object](#game-object). If you want to ensure mods returned do not contain particular tag(s), you can use the `tags-not-in` filter either independently or alongside this filter.
     platform_status|string|If the parent game has enabled per-platform files, by default only mods with files which are approved and live for the [target platform](#targeting-a-platform) will be returned.<br><br>To QA mods with pending files, you can filter results by their current platform status, using `pending_only` or `live_and_pending`.<br><br>__NOTE:__ only game admins can filter by this field.
@@ -4641,6 +4647,7 @@ Get all mods for the corresponding game. Successful request will return an array
       "maturity_option": 0,
       "community_options": 3,
       "monetization_options": 0,
+      "stock": 0,
       "price": 0,
       "tax": 0,
       "logo": {
@@ -4884,6 +4891,7 @@ Get a mod. Successful request will return a single [Mod Object](#mod-object).
   "maturity_option": 0,
   "community_options": 3,
   "monetization_options": 0,
+  "stock": 0,
   "price": 0,
   "tax": 0,
   "logo": {
@@ -5012,6 +5020,7 @@ curl -X POST https://*.modapi.io/v1/games/{game-id}/mods \
   -F 'description=<h2>Getting started with..' \
   -F 'logo=@/path/to/image.jpg' \
   -F 'homepage_url=https://www.example.com' \
+  -F 'metadata_blob={"version_sig":"YXJlbnQgeW91IGlucXVpc2l0dmU="}' \
   -F 'tags[]=easy'
 
 ```
@@ -5053,6 +5062,7 @@ const inputBody = '{
   "description": "<h2>Getting started with..",
   "logo": "@/path/to/image.jpg",
   "homepage_url": "https://www.example.com",
+  "metadata_blob": "{\"version_sig\":\"YXJlbnQgeW91IGlucXVpc2l0dmU=\"}",
   "tags": "easy"
 }';
 const headers = {
@@ -5114,17 +5124,20 @@ Add a mod. Successful request will return the newly created [Mod Object](#mod-ob
 
     Parameter|Type|Required|Description
     ---|---|---|---|
-    logo|file|true|Image file which will represent your mods logo. Must be gif, jpg or png format and cannot exceed 8MB in filesize. Dimensions must be at least 512x288 and we recommended you supply a high resolution image with a 16 / 9 ratio. mod.io will use this image to make three thumbnails for the dimensions 320x180, 640x360 and 1280x720.
+    logo|file|true|Image file which will represent your mods logo. Must be jpg, jpeg or png format and cannot exceed 8MB in filesize. Dimensions must be at least 512x288 and we recommended you supply a high resolution image with a 16 / 9 ratio. mod.io will use this image to make three thumbnails for the dimensions 320x180, 640x360 and 1280x720.
     name|string|true|Name of your mod.
     name_id|string||Path for the mod on mod.io. For example: https://mod.io/g/gamename/m/__mod-name-id-here__. If no `name_id` is specified the `name` will be used. For example: _'Stellaris Shader Mod'_ will become _'stellaris-shader-mod'_. Cannot exceed 80 characters.
     summary|string|true|Summary for your mod, giving a brief overview of what it's about. Cannot exceed 250 characters.
     visible|integer||Visibility of the mod (best if this field is controlled by mod admins, see [status and visibility](#status-amp-visibility) for details):<br><br>__0__ = Hidden<br>__1__ = Public _(default)_
     description|string||Detailed description for your mod, which can include details such as 'About', 'Features', 'Install Instructions', 'FAQ', etc. HTML supported and encouraged.
     homepage_url|string||Official homepage for your mod. Must be a valid URL.
-    stock|integer||Maximium number of subscribers for this mod. A value of 0 disables this limit.
+    price|int|true|The price of the mod.<br><br>__NOTE:__ The value of this field will be ignored if the parent game's queue is enabled (see `curation_option` field in [Game Object](#game-object)).
+    monetization_options|integer|Monetization option(s) enabled by the mod creator.<br><br>__NOTE:__ The value of this field will be ignored if the parent game's queue is enabled (see `curation_option` field in [Game Object](#game-object)). <br><br>__0__ = None<br>__1__ = Enabled<br>__2__ = Marketplace On<br>__?__ = Add the options you want together, to enable multiple filters (see [BITWISE fields](#bitwise-and-bitwise-and))
     maturity_option|integer||Choose if this mod contains any of the following mature content.<br><br>__NOTE:__ The value of this field will default to 0 unless the parent game allows you to flag mature content (see `maturity_options` field in [Game Object](#game-object)). <br><br>__0__ = None _(default)_<br>__1__ = Alcohol<br>__2__ = Drugs<br>__4__ = Violence<br>__8__ = Explicit<br>__?__ = Add the options you want together, to enable multiple options (see [BITWISE fields](#bitwise-and-bitwise-and))
+    stock|integer||Maximum number of times this Mod can be sold. <br><br>__NOTE:__ Scarcity can be enforced by the parent Game. The value of this field is not used if the parent game's or mod's scarcity is disabled (see `monetization_options` field in [Game Object](#game-object)).
+    maturity_option|integer||Choose if this mod contains any of the following mature content.
     community_options|integer||Community features enabled for this mod:<br><br>__0__ = All the options below are disabled<br>__1__ = Enable comments<br>__64__ = Enable previews<br>__?__ = Add the options you want together, to enable multiple options (see [BITWISE fields](#bitwise-and-bitwise-and))
-    metadata_blob|string||Metadata stored by the game developer which may include properties as to how the item works, or other information you need to display. Metadata can also be stored as searchable [key value pairs](#metadata), and to individual [mod files](#get-modfiles).
+    metadata_blob|string||Metadata that is designed to be handled by the game client and is recommended to not be exposed to content creators when submitting their mods. As an example, this may include properties as to how the item works, or other information you need to display. Metadata can also be stored as searchable [key value pairs](#metadata), and to individual [mod files](#get-modfiles).
     tags[]|string||Tags to apply to the mod. Every tag to apply requires a separate field with tags[] as the key (e.g. tags[]=tag1, tags[]=tag2). Only the tags pre-defined by the parent game can be applied. To determine what tags are eligible, see the tags values within `tag_options` column on the parent [Game Object](#game-object).
 
 > Example response
@@ -5158,6 +5171,7 @@ Add a mod. Successful request will return the newly created [Mod Object](#mod-ob
   "maturity_option": 0,
   "community_options": 3,
   "monetization_options": 0,
+  "stock": 0,
   "price": 0,
   "tax": 0,
   "logo": {
@@ -5262,6 +5276,7 @@ Add a mod. Successful request will return the newly created [Mod Object](#mod-ob
 Status|Meaning|Error Ref|Description|Response Schema
 ---|---|----|---|---|
 201|[Created](https://tools.ietf.org/html/rfc7231#section-6.3.2)||Resource Created|[Mod Object](#schemamod_object)
+422|[Unprocessable Entity](https://tools.ietf.org/html/rfc2518#section-10.3)|900011|Your marketplace amount is not within the minimum or maximum amount allowed.|[Error Object](#schemaerror_object)
 403|[Forbidden](https://tools.ietf.org/html/rfc7231#section-6.5.3)|15012|The authenticated user has had upload privileges restricted by mod.io admins, this is typically due to spam.|[Error Object](#schemaerror_object)
 ### Response Headers
 
@@ -5289,6 +5304,7 @@ curl -X POST https://*.modapi.io/v1/games/{game-id}/mods/{mod-id} \
   -F 'description=<h2>Getting started with..' \
   -F 'logo=@/path/to/image.jpg' \
   -F 'homepage_url=https://www.example.com' \
+  -F 'metadata_blob={"version_sig":"YXJlbnQgeW91IGlucXVpc2l0dmU="}' \
   -F 'tags[]=easy'
 
 ```
@@ -5330,6 +5346,7 @@ const inputBody = '{
   "description": "<h2>Getting started with..",
   "logo": "@/path/to/image.jpg",
   "homepage_url": "https://www.example.com",
+  "metadata_blob": "{\"version_sig\":\"YXJlbnQgeW91IGlucXVpc2l0dmU=\"}",
   "tags": "easy"
 }';
 const headers = {
@@ -5389,7 +5406,7 @@ Edit details for a mod. If you want to update the `logo` or media associated wit
 
     Parameter|Type|Required|Description
     ---|---|---|---|
-    logo|file|true|Image file which will represent your mods logo. Must be gif, jpg or png format and cannot exceed 8MB in filesize. Dimensions must be at least 512x288 and we recommended you supply a high resolution image with a 16 / 9 ratio. mod.io will use this image to make three thumbnails for the dimensions 320x180, 640x360 and 1280x720.
+    logo|file|true|Image file which will represent your mods logo. Must be jpg, jpeg or png format and cannot exceed 8MB in filesize. Dimensions must be at least 512x288 and we recommended you supply a high resolution image with a 16 / 9 ratio. mod.io will use this image to make three thumbnails for the dimensions 320x180, 640x360 and 1280x720.
     status|integer||Status of a mod. The mod must have at least one uploaded `modfile` to be 'accepted' (best if this field is controlled by game admins, see [status and visibility](#status-amp-visibility) for details):<br><br>__0__ = Not accepted<br>__1__ = Accepted (game admins only)<br>__3__ = Deleted (use the [delete mod](#delete-mod) endpoint to set this status)
     visible|integer||Visibility of the mod (best if this field is controlled by mod admins, see [status and visibility](#status-amp-visibility) for details):<br><br>__0__ = Hidden<br>__1__ = Public
     name|string||Name of your mod. Cannot exceed 50 characters.
@@ -5397,10 +5414,12 @@ Edit details for a mod. If you want to update the `logo` or media associated wit
     summary|string||Summary for your mod, giving a brief overview of what it's about. Cannot exceed 250 characters.
     description|string||Detailed description for your mod, which can include details such as 'About', 'Features', 'Install Instructions', 'FAQ', etc. HTML supported and encouraged.
     homepage_url|string||Official homepage for your mod. Must be a valid URL.
-    stock|integer||Maximium number of subscribers for this mod. A value of 0 disables this limit.
+    price|int|true|The price of the mod.<br><br>__NOTE:__ The value of this field will be ignored if the parent game's queue is enabled (see `curation_option` field in [Game Object](#game-object)).
+    monetization_options|integer|Monetization option(s) enabled by the mod creator.<br><br>__NOTE:__ The value of this field will be ignored if the parent game's queue is enabled (see `curation_option` field in [Game Object](#game-object)). <br><br>__0__ = None<br>__1__ = Enabled<br>__2__ = Marketplace On<br>__?__ = Add the options you want together, to enable multiple filters (see [BITWISE fields](#bitwise-and-bitwise-and))
+    stock|integer||Maximum number of times this Mod can be sold. <br><br>__NOTE:__ The value of this field is not used if the parent game's or mod's scarcity is disabled (see `monetization_options` field in [Game Object](#game-object)).
     maturity_option|integer||Choose if this mod contains any of the following mature content.<br><br>__NOTE:__ The value of this field will default to 0 unless the parent game allows you to flag mature content (see `maturity_options` field in [Game Object](#game-object)). <br><br>__0__ = None set<br>__1__ = Alcohol<br>__2__ = Drugs<br>__4__ = Violence<br>__8__ = Explicit<br>__?__ = Add the options you want together, to enable multiple options (see [BITWISE fields](#bitwise-and-bitwise-and))
     community_options|integer||Community features enabled for this mod:<br><br>__0__ = All the options below are disabled<br>__1__ = Enable comments<br>__64__ = Enable previews<br>__?__ = Add the options you want together, to enable multiple options (see [BITWISE fields](#bitwise-and-bitwise-and))
-    metadata_blob|string||Metadata stored by the game developer which may include properties as to how the item works, or other information you need to display. Metadata can also be stored as searchable [key value pairs](#metadata), and to individual [mod files](#get-modfiles).
+    metadata_blob|string||Metadata that is designed to be handled by the game client and is recommended to not be exposed to content creators when submitting their mods. As an example, this may include properties as to how the item works, or other information you need to display. Metadata can also be stored as searchable [key value pairs](#metadata), and to individual [mod files](#get-modfiles).
     tags[]|string||When providing this attribute, if the input array contains tags, they will entirely replace any existing tags assigned to the mod. __If an empty array is passed, all currently assigned tags will be removed__. If `null` or omitted, no changes will be made to the assigned tags. To determine what tags are eligible, see the tags values within `tag_options` column on the parent [Game Object](#game-object).
 
 > Example response
@@ -5434,6 +5453,7 @@ Edit details for a mod. If you want to update the `logo` or media associated wit
   "maturity_option": 0,
   "community_options": 3,
   "monetization_options": 0,
+  "stock": 0,
   "price": 0,
   "tax": 0,
   "logo": {
@@ -5538,12 +5558,11 @@ Edit details for a mod. If you want to update the `logo` or media associated wit
 Status|Meaning|Error Ref|Description|Response Schema
 ---|---|----|---|---|
 200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)||Update Successful|[Mod Object](#schemamod_object)
+422|[Unprocessable Entity](https://tools.ietf.org/html/rfc2518#section-10.3)|900011|Your marketplace amount is not within the minimum or maximum amount allowed.|[Error Object](#schemaerror_object)
 403|[Forbidden](https://tools.ietf.org/html/rfc7231#section-6.5.3)|15013|The authenticated user does not have permission to update this mod. Ensure the user is part of the mod team before attempting the request again.|[Error Object](#schemaerror_object)
-403|[Forbidden](https://tools.ietf.org/html/rfc7231#section-6.5.3)|15033|The authenticated user does not have permission to update the metadata for this mod, this action is restricted to team managers & administrators only.|[Error Object](#schemaerror_object)
 403|[Forbidden](https://tools.ietf.org/html/rfc7231#section-6.5.3)|15014|The authenticated user does not have permission to update the maturity options for this mod, this action is restricted to team managers & administrators only.|[Error Object](#schemaerror_object)
 403|[Forbidden](https://tools.ietf.org/html/rfc7231#section-6.5.3)|15015|The authenticated user does not have permission to update the status for this mod, this action is restricted to team managers & administrators only.|[Error Object](#schemaerror_object)
 403|[Forbidden](https://tools.ietf.org/html/rfc7231#section-6.5.3)|15016|A mod cannot be set live without an associated modfile.|[Error Object](#schemaerror_object)
-400|[Bad Request](https://tools.ietf.org/html/rfc7231#section-6.5.1)|19301|This game is not currently allowing edits to mod. Please contact the game administrator if you wish to make changes to this mod.|[Error Object](#schemaerror_object)
 <aside class="auth-notice">
 To perform this request, you must be authenticated via one of the following methods:
 <a href="#authentication">OAuth 2</a> (Scopes: write)
@@ -5771,7 +5790,7 @@ Get all files that are published for the corresponding mod. Successful request w
     filename|string|Filename including extension.
     version|string|Release version this file represents.
     changelog|string|Changelog for the file.
-    metadata_blob|string|Metadata stored by the game developer for this file.
+    metadata_blob|string|Metadata that is designed to be handled by the game client and is recommended to not be exposed to content creators when submitting their modfiles. As an example, this may include properties such as what version of the game this file is compatible with.
     platform_status|string|If the parent game has enabled per-platform files, by default only files which are approved and live for the [target platform](#targeting-a-platform) will be returned.<br><br>To QA pending files, you can filter results by their current platform status, using `pending_only`, `approved_only` or `live_and_pending`. With the exception of `approved_only` which is available to everyone, all other values are restricted to game administrators.
 
 > Example response
@@ -6089,7 +6108,7 @@ Upload a file for the corresponding mod. Successful request will return the newl
     changelog|string||Changelog of this release.
     active|boolean||_Default value is true._ Flag this upload as the current release, this will change the `modfile` field on the parent mod to the `id` of this file after upload.<br><br>__NOTE:__ If the _active_ parameter is _true_, a [__MODFILE_CHANGED__ event](#get-mod-events) will be fired, so game clients know there is an update available for this mod.
     filehash|string||MD5 of the submitted file. When supplied the MD5 will be compared against the uploaded files MD5. If they don't match a `422 Unprocessible Entity` error will be returned.
-    metadata_blob|string||Metadata stored by the game developer which may include properties such as what version of the game this file is compatible with.
+    metadata_blob|string||Metadata that is designed to be handled by the game client and is recommended to not be exposed to content creators when submitting their modfiles. As an example, this may include properties such as what version of the game this file is compatible with.
     platforms|array|If platform filtering enabled|An array containing one or more [platforms](#targeting-a-platform) this file is targeting. Valid values can be found under the [targeting a platform](#targeting-a-platform) section.
 
 > Example response
@@ -6252,7 +6271,7 @@ Edit the details of a published file. If you want to update fields other than th
     version|string||Version of the file release (recommended format 1.0.0 - MAJOR.MINOR.PATCH).
     changelog|string||Changelog of this release.
     active|boolean||Flag this upload as the current release.<br><br>__NOTE:__ If the _active_ parameter causes the parent mods `modfile` parameter to change, a [__MODFILE_CHANGED__ event](#get-mod-events) will be fired, so game clients know there is an update available for this mod.
-    metadata_blob|string||Metadata stored by the game developer which may include properties such as what version of the game this file is compatible with.
+    metadata_blob|string||Metadata that is designed to be handled by the game client and is recommended to not be exposed to content creators when submitting their modfiles. As an example, this may include properties such as what version of the game this file is compatible with.
 
 > Example response
 
@@ -6298,7 +6317,6 @@ Status|Meaning|Error Ref|Description|Response Schema
 ---|---|----|---|---|
 200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)||Update Successful|[Modfile Object](#schemamodfile_object)
 403|[Forbidden](https://tools.ietf.org/html/rfc7231#section-6.5.3)|15007|The authenticated user does not have permission to update modfiles for the specified mod, ensure the user is a team manager or administrator.|[Error Object](#schemaerror_object)
-403|[Forbidden](https://tools.ietf.org/html/rfc7231#section-6.5.3)|15033|The authenticated user does not have permission to update modfile metadata for the specified mod, ensure the user is a team manager or administrator.|[Error Object](#schemaerror_object)
 <aside class="auth-notice">
 To perform this request, you must be authenticated via one of the following methods:
 <a href="#authentication">OAuth 2</a> (Scopes: write)
@@ -7470,6 +7488,7 @@ Subscribe the _authenticated user_ to a corresponding mod. No body parameters ar
   "maturity_option": 0,
   "community_options": 3,
   "monetization_options": 0,
+  "stock": 0,
   "price": 0,
   "tax": 0,
   "logo": {
@@ -9532,9 +9551,9 @@ Upload new media to a game. The request `Content-Type` header __must__ be `multi
 
     Parameter|Type|Required|Description
     ---|---|---|---|
-    logo|file||Image file which will represent your games logo. Must be gif, jpg or png format and cannot exceed 8MB in filesize. Dimensions must be at least 640x360 and we recommended you supply a high resolution image with a 16 / 9 ratio. mod.io will use this logo to create three thumbnails with the dimensions of 320x180, 640x360 and 1280x720.
-    icon|file||Image file which will represent your games icon. Must be gif, jpg or png format and cannot exceed 1MB in filesize. Dimensions must be at least 64x64 and a transparent png that works on a colorful background is recommended. mod.io will use this icon to create three thumbnails with the dimensions of 64x64, 128x128 and 256x256.
-    header|file||Image file which will represent your games header. Must be gif, jpg or png format and cannot exceed 256KB in filesize. Dimensions of 400x100 and a light transparent png that works on a dark background is recommended.
+    logo|file||Image file which will represent your games logo. Must be jpg, jpeg or png format and cannot exceed 8MB in filesize. Dimensions must be at least 640x360 and we recommended you supply a high resolution image with a 16 / 9 ratio. mod.io will use this logo to create three thumbnails with the dimensions of 320x180, 640x360 and 1280x720.
+    icon|file||Image file which will represent your games icon. Must be jpg, jpeg or png format and cannot exceed 1MB in filesize. Dimensions must be at least 64x64 and a transparent png that works on a colorful background is recommended. mod.io will use this icon to create three thumbnails with the dimensions of 64x64, 128x128 and 256x256.
+    header|file||Image file which will represent your games header. Must be jpg, jpeg or png format and cannot exceed 256KB in filesize. Dimensions of 400x100 and a light transparent png that works on a dark background is recommended.
 
 > Example response
 
@@ -9670,8 +9689,8 @@ This endpoint is very flexible and will add any images posted to the mods galler
 
     Parameter|Type|Required|Description
     ---|---|---|---|
-    logo|file||Image file which will represent your mods logo. Must be gif, jpg or png format and cannot exceed 8MB in filesize. Dimensions must be at least 512x288 and we recommended you supply a high resolution image with a 16 / 9 ratio. mod.io will use this logo to create three thumbnails with the dimensions of 320x180, 640x360 and 1280x720.
-    images|zip||Zip archive of images to add to the mods gallery. Only valid gif, jpg and png images in the zip file will be processed. The filename __must be images.zip__ all other zips will be ignored. Alternatively you can POST one or more images to this endpoint and they will be detected and added to the mods gallery.
+    logo|file||Image file which will represent your mods logo. Must be jpg, jpeg or png format and cannot exceed 8MB in filesize. Dimensions must be at least 512x288 and we recommended you supply a high resolution image with a 16 / 9 ratio. mod.io will use this logo to create three thumbnails with the dimensions of 320x180, 640x360 and 1280x720.
+    images|zip||Zip archive of images to add to the mods gallery. Only valid jpg, jpeg and png images in the zip file will be processed. The filename __must be images.zip__ all other zips will be ignored. Alternatively you can POST one or more images to this endpoint and they will be detected and added to the mods gallery.
     youtube[]|string||Full Youtube link(s) you want to add. Every Youtube link to add requires a separate field with youtube[] as the key (eg. youtube[]=https://www.youtube.com/watch?v=IGVZOLV9SPo, youtube[]=https://www.youtube.com/watch?v=5nY6fjZ3EUc)
     sketchfab[]|string||Full Sketchfab link(s) you want to add. Every Sketchfab link to add requires a separate field with sketchfab[] as the key (eg. sketchfab[]=https://sketchfab.com/models/71f04e390ff54e5f8d9a51b4e1caab7e, sketchfab[]=https://sketchfab.com/models/5c85e649dd854cb58c2b9af081ebb0ff)
 
@@ -11876,7 +11895,7 @@ Add metadata for this mod as searchable key value pairs. Metadata is useful to d
 Status|Meaning|Error Ref|Description|Response Schema
 ---|---|----|---|---|
 201|[Created](https://tools.ietf.org/html/rfc7231#section-6.3.2)||Created|[Message Object](#message-object)
-403|[Forbidden](https://tools.ietf.org/html/rfc7231#section-6.5.3)|15033|The authenticated user does not have permission to add metadata to this mod, this action is restricted to team managers & administrators only.|[Error Object](#schemaerror_object)
+403|[Forbidden](https://tools.ietf.org/html/rfc7231#section-6.5.3)|15013|The authenticated user does not have permission to update this mod. Ensure the user is part of the mod team before attempting the request again.|[Error Object](#schemaerror_object)
 ### Response Headers
 
 Status|Header|Type|Format|Description
@@ -12004,7 +12023,7 @@ Delete key value pairs metadata defined for this mod. Successful request will re
 Status|Meaning|Error Ref|Description|Response Schema
 ---|---|----|---|---|
 204|[No Content](https://tools.ietf.org/html/rfc7231#section-6.3.5)||Successful Request. No Body Returned.|None
-403|[Forbidden](https://tools.ietf.org/html/rfc7231#section-6.5.3)|15034|The authenticated user does not have permission to delete metadata from this mod, this action is restricted to team managers & administrators only.|[Error Object](#schemaerror_object)
+403|[Forbidden](https://tools.ietf.org/html/rfc7231#section-6.5.3)|15013|The authenticated user does not have permission to delete metadata from this mod, this action is restricted to team managers & administrators only.|[Error Object](#schemaerror_object)
 <aside class="auth-notice">
 To perform this request, you must be authenticated via one of the following methods:
 <a href="#authentication">OAuth 2</a> (Scopes: write)
@@ -12434,6 +12453,254 @@ To perform this request, you must be authenticated via one of the following meth
 </aside>
 # Teams
 
+## Get Users In Mod Monetization Team
+
+> Example request
+
+```shell
+# You can also use wget
+curl -X GET https://*.modapi.io/v1/games/{game-id}/mods/{mod-id}/monetization/team \
+  -H 'Authorization: Bearer {access-token}' \ 
+  -H 'Accept: application/json'
+
+```
+
+```http
+GET https://*.modapi.io/v1/games/{game-id}/mods/{mod-id}/monetization/team HTTP/1.1
+Host: *.modapi.io
+
+Accept: application/json
+Authorization: Bearer {access-token}
+
+```
+
+```javascript
+var headers = {
+  'Authorization':'Bearer {access-token}',
+  'Accept':'application/json'
+
+};
+
+$.ajax({
+  url: 'https://*.modapi.io/v1/games/{game-id}/mods/{mod-id}/monetization/team',
+  method: 'get',
+
+  headers: headers,
+  success: function(data) {
+    console.log(JSON.stringify(data));
+  }
+})
+```
+
+```javascript--nodejs
+const request = require('node-fetch');
+
+const headers = {
+  'Authorization':'Bearer {access-token}',
+  'Accept':'application/json'
+
+};
+
+fetch('https://*.modapi.io/v1/games/{game-id}/mods/{mod-id}/monetization/team',
+{
+  method: 'GET',
+
+  headers: headers
+})
+.then(function(res) {
+    return res.json();
+}).then(function(body) {
+    console.log(body);
+});
+```
+
+```python
+import requests
+headers = {
+  'Authorization': 'Bearer {access-token}',
+  'Accept': 'application/json'
+}
+
+r = requests.get('https://*.modapi.io/v1/games/{game-id}/mods/{mod-id}/monetization/team', params={
+
+}, headers = headers)
+
+print r.json()
+```
+
+```java
+URL obj = new URL("https://*.modapi.io/v1/games/{game-id}/mods/{mod-id}/monetization/team");
+HttpURLConnection con = (HttpURLConnection) obj.openConnection();
+con.setRequestMethod("GET");
+int responseCode = con.getResponseCode();
+BufferedReader in = new BufferedReader(
+    new InputStreamReader(con.getInputStream()));
+String inputLine;
+StringBuffer response = new StringBuffer();
+while ((inputLine = in.readLine()) != null) {
+    response.append(inputLine);
+}
+in.close();
+System.out.println(response.toString());
+```
+
+`GET /games/{game-id}/mods/{mod-id}/monetization/team`
+
+Get users in a monetization team. Successful request will return a [Monetization Team Accounts Object](#monetization-team-accounts-object).
+
+> Example response
+
+```json
+{
+  "id": 1,
+  "name_id": "xant",
+  "username": "XanT",
+  "monetization_status": 0,
+  "monetization_options": 0,
+  "split": 0
+}
+
+```
+<h3 id="Get-Users-In-Mod-Monetization-Team-responses">Responses</h3>
+
+Status|Meaning|Error Ref|Description|Response Schema
+---|---|----|---|---|
+200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)||Successful Request|[Monetization Team Accounts Object](#schemamonetization_team_accounts_object)
+403|[Forbidden](https://tools.ietf.org/html/rfc7231#section-6.5.3)|900023|You do not have the required permissions.|[Error Object](#schemaerror_object)
+404|[Not Found](https://tools.ietf.org/html/rfc7231#section-6.5.4)|900022|Monetization team could not be found.|[Error Object](#schemaerror_object)
+<aside class="auth-notice">
+To perform this request, you must be authenticated via one of the following methods:
+<a href="#authentication">OAuth 2</a> (Scopes: write)
+</aside>
+## Create Mod Monetization Team
+
+> Example request
+
+```shell
+# You can also use wget
+curl -X POST https://*.modapi.io/v1/games/{game-id}/mods/{mod-id}/monetization/team \
+  -H 'Authorization: Bearer {access-token}' \ 
+  -H 'Accept: application/json'
+
+```
+
+```http
+POST https://*.modapi.io/v1/games/{game-id}/mods/{mod-id}/monetization/team HTTP/1.1
+Host: *.modapi.io
+
+Accept: application/json
+Authorization: Bearer {access-token}
+
+```
+
+```javascript
+var headers = {
+  'Authorization':'Bearer {access-token}',
+  'Accept':'application/json'
+
+};
+
+$.ajax({
+  url: 'https://*.modapi.io/v1/games/{game-id}/mods/{mod-id}/monetization/team',
+  method: 'post',
+
+  headers: headers,
+  success: function(data) {
+    console.log(JSON.stringify(data));
+  }
+})
+```
+
+```javascript--nodejs
+const request = require('node-fetch');
+
+const headers = {
+  'Authorization':'Bearer {access-token}',
+  'Accept':'application/json'
+
+};
+
+fetch('https://*.modapi.io/v1/games/{game-id}/mods/{mod-id}/monetization/team',
+{
+  method: 'POST',
+
+  headers: headers
+})
+.then(function(res) {
+    return res.json();
+}).then(function(body) {
+    console.log(body);
+});
+```
+
+```python
+import requests
+headers = {
+  'Authorization': 'Bearer {access-token}',
+  'Accept': 'application/json'
+}
+
+r = requests.post('https://*.modapi.io/v1/games/{game-id}/mods/{mod-id}/monetization/team', params={
+
+}, headers = headers)
+
+print r.json()
+```
+
+```java
+URL obj = new URL("https://*.modapi.io/v1/games/{game-id}/mods/{mod-id}/monetization/team");
+HttpURLConnection con = (HttpURLConnection) obj.openConnection();
+con.setRequestMethod("POST");
+int responseCode = con.getResponseCode();
+BufferedReader in = new BufferedReader(
+    new InputStreamReader(con.getInputStream()));
+String inputLine;
+StringBuffer response = new StringBuffer();
+while ((inputLine = in.readLine()) != null) {
+    response.append(inputLine);
+}
+in.close();
+System.out.println(response.toString());
+```
+
+`POST /games/{game-id}/mods/{mod-id}/monetization/team`
+
+Send a request to create a monetization team for a mod team. Successful request will return a [Monetization Team Accounts Object](#monetization-team-accounts-object).
+
+    Parameter|Type|Required|Description
+    ---|---|---|---|
+
+> Example response
+
+```json
+{
+  "id": 1,
+  "name_id": "xant",
+  "username": "XanT",
+  "monetization_status": 0,
+  "monetization_options": 0,
+  "split": 0
+}
+
+```
+<h3 id="Create-Mod-Monetization-Team-responses">Responses</h3>
+
+Status|Meaning|Error Ref|Description|Response Schema
+---|---|----|---|---|
+200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)||Successful Request|[Monetization Team Accounts Object](#schemamonetization_team_accounts_object)
+403|[Forbidden](https://tools.ietf.org/html/rfc7231#section-6.5.3)|900023|Team members must belong to the current game or mod.|[Error Object](#schemaerror_object)
+404|[Not Found](https://tools.ietf.org/html/rfc7231#section-6.5.4)|900022|Monetization team could not be found.|[Error Object](#schemaerror_object)
+422|[Unprocessable Entity](https://tools.ietf.org/html/rfc2518#section-10.3)|900024|Unable to process your data with the payment system.|[Error Object](#schemaerror_object)
+422|[Unprocessable Entity](https://tools.ietf.org/html/rfc2518#section-10.3)|900003|Your account does not have the required creator wallets.|[Error Object](#schemaerror_object)
+422|[Unprocessable Entity](https://tools.ietf.org/html/rfc2518#section-10.3)|900026|Your provided split share must total 100%.|[Error Object](#schemaerror_object)
+422|[Unprocessable Entity](https://tools.ietf.org/html/rfc2518#section-10.3)|900029|You may only add up to 5 users to a team.|[Error Object](#schemaerror_object)
+422|[Unprocessable Entity](https://tools.ietf.org/html/rfc2518#section-10.3)|900025|Unable to process your data with the payment system.|[Error Object](#schemaerror_object)
+403|[Forbidden](https://tools.ietf.org/html/rfc7231#section-6.5.3)|900023|Team members must be approved before they can be added to the current team.|[Error Object](#schemaerror_object)
+404|[Not Found](https://tools.ietf.org/html/rfc7231#section-6.5.4)|900003|Monetization team could not be found.|[Error Object](#schemaerror_object)
+<aside class="auth-notice">
+To perform this request, you must be authenticated via one of the following methods:
+<a href="#authentication">OAuth 2</a> (Scopes: write)
+</aside>
 ## Get Mod Team Members
 
 > Example request
@@ -13750,7 +14017,7 @@ Get all modfiles the _authenticated user_ uploaded. Successful request will retu
     filename|string|Filename including extension.
     version|string|Release version this file represents.
     changelog|string|Changelog for the file.
-    metadata_blob|string|Metadata stored by the game developer for this file.
+    metadata_blob|string|Metadata that is designed to be handled by the game client. As an example, this may include properties as to how the item works, or other information you need to display. Metadata can also be stored as searchable [key value pairs](#metadata), and to individual [mod files](#get-modfiles).
     platform_status|string|If the parent game has enabled per-platform files, by default only files which are approved and live for the [target platform](#targeting-a-platform) will be returned.<br><br>To request pending files, you can filter results by their current platform status, using `pending_only`, `approved_only` or `live_and_pending`.
 
 > Example response
@@ -13929,9 +14196,9 @@ Get all games the _authenticated user_ added or is a team member of. Successful 
 
     Sort|Description
     ---|---
-    popular|Sort results by popularity using [_sort filter](#filtering), value should be `popular` for descending or `-popular` for ascending results.<br><br>__NOTE:__ Popularity is calculated hourly and reset daily (results are ranked from 1 to X). You should sort this column in ascending order `-popular` to get the top ranked results.
-    popular_overall|Sort results by 'Popular Overall' using [_sort filter](#filtering), value should be `popular_overall` for descending or `-popular_overall` for ascending results.<br><br>__NOTE:__ You should sort this column in ascending order `-popular_overall` to get the top ranked results. This filter differs from popular by filtering on the amount of downloads the game has received overall, and not just in the last 24 hours.
-    subscribers|Sort results by most subscribers using [_sort filter](#filtering), value should be `subscribers` for descending or `-subscribers` for ascending results.
+    popular|Sort results by popularity using [_sort filter](#filtering), value should be `popular` for descending or `-popular` for ascending results.<br><br>__NOTE:__ Popularity is calculated hourly and reset daily (results are ranked from 1 to X). You should sort this column in descending order `popular` to get the top ranked results.
+    downloads|Sort results by total downloads using [_sort filter](#filtering), value should be `downloads` for descending or `-downloads` for ascending results.<br><br>__NOTE:__ You should sort this column in descending order `downloads` to get the top ranked results. This filter differs from popular by filtering on the amount of downloads the game has received overall, and not just in the last 24 hours.
+    mods|Sort results by total mod count using [_sort filter](#filtering), value should be `mods` for descending or `-mods` for ascending results.
 
 > Example response
 
@@ -13954,6 +14221,7 @@ Get all games the _authenticated user_ added or is a team member of. Successful 
         "team_id": "1"
       },
       "revenue_options": 0,
+      "max_stock": 8388607,
       "api_access_options": 3,
       "maturity_options": 0,
       "ugc_name": "mods",
@@ -14158,7 +14426,7 @@ Get all mod's the _authenticated user_ is subscribed to. Successful request will
     name|string|Name of the mod.
     name_id|string|Path for the mod on mod.io. For example: https://mod.io/g/gamename/m/__mod-name-id-here__
     modfile|integer|Unique id of the file that is the current active release (see [mod files](#files)).
-    metadata_blob|string|Metadata stored by the game developer.
+    metadata_blob|string|Metadata that is designed to be handled by the game client and is recommended to not be exposed to content creators when submitting their mods.
     metadata_kvp|string|Colon-separated values representing the key-value pairs you want to filter the results by. If you supply more than one key-pair, separate the pairs by a comma. Will only filter by an exact key-pair match.
     tags|string|Comma-separated values representing the tags you want to filter the results by. If you specify multiple tags, only mods which have all tags will be returned, and only tags that are supported by the parent game can be applied. To determine what tags are eligible, see the tags values within `tag_options` column on the parent [Game Object](#game-object). If you want to ensure mods returned do not contain particular tag(s), you can use the `tags-not-in` filter either independently or alongside this filter.
     platform_status|string|If the parent game has enabled per-platform files, by default only mods with files which are approved and live for the [target platform](#targeting-a-platform) will be returned.<br><br>To QA mods with pending files, you can filter results by their current platform status, using `pending_only` or `live_and_pending`.<br><br>__NOTE:__ only game admins can filter by this field.
@@ -14203,6 +14471,7 @@ Get all mod's the _authenticated user_ is subscribed to. Successful request will
       "maturity_option": 0,
       "community_options": 3,
       "monetization_options": 0,
+      "stock": 0,
       "price": 0,
       "tax": 0,
       "logo": {
@@ -14434,7 +14703,7 @@ Get all mods the _authenticated user_ added or is a team member of. Successful r
     name|string|Name of the mod.
     name_id|string|Path for the mod on mod.io. For example: https://mod.io/g/gamename/m/__mod-name-id-here__
     modfile|integer|Unique id of the file that is the current active release (see [mod files](#files)).
-    metadata_blob|string|Metadata stored by the game developer.
+    metadata_blob|string|Metadata that is designed to be handled by the game client and is recommended to not be exposed to content creators when submitting their mods.
     metadata_kvp|string|Colon-separated values representing the key-value pairs you want to filter the results by. If you supply more than one key-pair, separate the pairs by a comma. Will only filter by an exact key-pair match.
     tags|string|Comma-separated values representing the tags you want to filter the results by. If you specify multiple tags, only mods which have all tags will be returned, and only tags that are supported by the parent game can be applied. To determine what tags are eligible, see the tags values within `tag_options` column on the parent [Game Object](#game-object). If you want to ensure mods returned do not contain particular tag(s), you can use the `tags-not-in` filter either independently or alongside this filter.
     platform_status|string|If the parent game has enabled per-platform files, by default only mods with files which are approved and live for the [target platform](#targeting-a-platform) will be returned.<br><br>To request mods with pending files, you can filter results by their current platform status, using `pending_only` or `live_and_pending`.
@@ -14479,6 +14748,7 @@ Get all mods the _authenticated user_ added or is a team member of. Successful r
       "maturity_option": 0,
       "community_options": 3,
       "monetization_options": 0,
+      "stock": 0,
       "price": 0,
       "tax": 0,
       "logo": {
@@ -14701,7 +14971,7 @@ Get all mod's the _authenticated user_ has purchased. Successful request will re
     name|string|Name of the mod.
     name_id|string|Path for the mod on mod.io. For example: https://mod.io/g/gamename/m/__mod-name-id-here__
     modfile|integer|Unique id of the file that is the current active release (see [mod files](#files)).
-    metadata_blob|string|Metadata stored by the game developer.
+    metadata_blob|string|Metadata that is designed to be handled by the game client and is recommended to not be exposed to content creators when submitting their mods.
     metadata_kvp|string|Colon-separated values representing the key-value pairs you want to filter the results by. If you supply more than one key-pair, separate the pairs by a comma. Will only filter by an exact key-pair match.
     tags|string|Comma-separated values representing the tags you want to filter the results by. If you specify multiple tags, only mods which have all tags will be returned, and only tags that are supported by the parent game can be applied. To determine what tags are eligible, see the tags values within `tag_options` column on the parent [Game Object](#game-object). If you want to ensure mods returned do not contain particular tag(s), you can use the `tags-not-in` filter either independently or alongside this filter.
     platform_status|string|Filter results by their current platform status, valid values are `pending_only` and `live_and_pending` (only game admins can filter by this field, see [status and visibility](#status-amp-visibility) for details).<br><br>__NOTE:__ that this parameter is only considered in the request if the parent game has enabled [cross-platform filtering](#targeting-a-platform).
@@ -14747,6 +15017,7 @@ Get all mod's the _authenticated user_ has purchased. Successful request will re
       "maturity_option": 0,
       "community_options": 3,
       "monetization_options": 0,
+      "stock": 0,
       "price": 0,
       "tax": 0,
       "logo": {
@@ -15244,7 +15515,8 @@ Get the _authenticated user_ wallets. Successful request will return a single [W
   "type": "string",
   "payment_method_id": "string",
   "currency": "string",
-  "balance": 0
+  "balance": 0,
+  "deficit": 0
 }
 
 ```
@@ -15528,6 +15800,7 @@ Purchase an item. A Successful request will return the newly created [Pay Object
   "purchase_date": 1626667557,
   "wallet_type": "string",
   "balance": 0,
+  "deficit": 0,
   "payment_method_id": "string",
   "mod": {
     "id": 2,
@@ -15557,6 +15830,7 @@ Purchase an item. A Successful request will return the newly created [Pay Object
     "maturity_option": 0,
     "community_options": 3,
     "monetization_options": 0,
+    "stock": 0,
     "price": 0,
     "tax": 0,
     "logo": {
@@ -15674,6 +15948,7 @@ Status|Meaning|Error Ref|Description|Response Schema
 422|[Unprocessable Entity](https://tools.ietf.org/html/rfc2518#section-10.3)|900002|A failure has occured when trying to authenticate with the monetization system.|[Error Object](#schemaerror_object)
 422|[Unprocessable Entity](https://tools.ietf.org/html/rfc2518#section-10.3)|900007|The account has not been created with monetization.|[Error Object](#schemaerror_object)
 422|[Unprocessable Entity](https://tools.ietf.org/html/rfc2518#section-10.3)|900000|An un expected error has occured. Please try again later.|[Error Object](#schemaerror_object)
+422|[Unprocessable Entity](https://tools.ietf.org/html/rfc2518#section-10.3)|900061|The mod that was attempting to be purchased has sold out. Only applicable if the Game and Mod have enabled scarcity.|[Error Object](#schemaerror_object)
 403|[Forbidden](https://tools.ietf.org/html/rfc7231#section-6.5.3)|15023|The item has been deleted and can not be purchased at this time.|[Error Object](#schemaerror_object)
 403|[Forbidden](https://tools.ietf.org/html/rfc7231#section-6.5.3)|900015|The account has been disabled from monetization.|[Error Object](#schemaerror_object)
 403|[Forbidden](https://tools.ietf.org/html/rfc7231#section-6.5.3)|900012|The monetization is currently in maintance mode. Please try again later.|[Error Object](#schemaerror_object)
@@ -16416,6 +16691,7 @@ team_id|integer|The ID of the monetization team.
     "team_id": "1"
   },
   "revenue_options": 0,
+  "max_stock": 8388607,
   "api_access_options": 3,
   "maturity_options": 0,
   "ugc_name": "mods",
@@ -16506,9 +16782,10 @@ presentation_option|integer|Presentation style used on the mod.io website:<br><b
 submission_option|integer|Submission process modders must follow:<br><br>__0__ = Mod uploads must occur via the API using a tool created by the game developers<br>__1__ = Mod uploads can occur from anywhere, including the website and API
 curation_option|integer|Curation options enabled by this game to approve mods:<br><br>__0__ = No curation: Mods are immediately available to play<br>__1__ = Price change approval: Pricing changes for marketplace mods queued for acceptance<br>__2__ = Full curation: All mods must be accepted by someone to be listed<br>__?__ = Combine to enable multiple features (see BITWISE fields)
 community_options|integer|Community features enabled for this game:<br><br>__0__ = All of the options below are disabled<br>__1__ = Enable comments<br>__2__ = Enable guides<br>__4__ = Pin on homepage<br>__8__ = Show on homepage<br>__16__ = Show more on homepage<br>__32__ = Allow change status<br>__64__ = Enable Previews (Game must be hidden)<br>__128__ = Allow Preview Share-URL (Previews must be enabled)<br>__256__ = Allow negative ratings<br>__?__ = Add the options you want together, to enable multiple features (see [BITWISE fields](#bitwise-and-bitwise-and))
-monetization_options|integer|Monetization features mods can enable:<br><br>__0__ = All of the options below are disabled<br>__1__ = Enabled<br>__2__ = Enable marketplace<br>__?__ = Add the options you want together, to enable multiple features (see [BITWISE fields](#bitwise-and-bitwise-and))
+monetization_options|integer|Monetization features games can enable:<br><br>__0__ = All of the options below are disabled<br>__1__ = Enabled<br>__2__ = Enable marketplace<br>__4__ = Enable partner program<br>__8__ = Enable scarcity<br>__?__ = Add the options you want together, to enable multiple features (see [BITWISE fields](#bitwise-and-bitwise-and))
 monetization_team|[Game Monetization Team Object](#schemagame_monetization_team_object)|The monetization team for this resource. [Game Monetization Team Object](#game-monetization-team-object).
 revenue_options|integer|Deprecated: Please use monetization_options instead, this will be removed in subsequent API version.
+max_stock|integer|Max Stock for mod scarcity.
 api_access_options|integer|Level of API access allowed by this game:<br><br>__0__ = All of the options below are disabled<br>__1__ = Allow 3rd parties to access this games API endpoints<br>__2__ = Allow mods to be downloaded directly (if disabled all download URLs will contain a frequently changing verification hash to stop unauthorized use)<br>__?__ = Add the options you want together, to enable multiple features (see [BITWISE fields](#bitwise-and-bitwise-and))
 maturity_options|integer|Mature content setup for this game:<br><br>__0__ = Don't allow mature content in mods<br>__1__ = Allow mature content in mods<br>__2__ = This game is for mature audiences only<br>__?__ = Add the options you want together, to enable multiple features (see [BITWISE fields](#bitwise-and-bitwise-and))
 ugc_name|string|Word used to describe user-generated content (mods, items, addons etc).
@@ -16798,6 +17075,7 @@ result_total|integer|Total number of results found.
         "team_id": "1"
       },
       "revenue_options": 0,
+      "max_stock": 8388607,
       "api_access_options": 3,
       "maturity_options": 0,
       "ugc_name": "mods",
@@ -17441,6 +17719,7 @@ result_total|integer|Total number of results found.
       "maturity_option": 0,
       "community_options": 3,
       "monetization_options": 0,
+      "stock": 0,
       "price": 0,
       "tax": 0,
       "logo": {
@@ -18244,6 +18523,7 @@ images|[Image Object](#schemaimage_object)[]|Array of image objects (a gallery).
   "maturity_option": 0,
   "community_options": 3,
   "monetization_options": 0,
+  "stock": 0,
   "price": 0,
   "tax": 0,
   "logo": {
@@ -18357,7 +18637,8 @@ date_updated|integer|Unix timestamp of date mod was updated.
 date_live|integer|Unix timestamp of date mod was set live.
 maturity_option|integer|Maturity options flagged by the mod developer, this is only relevant if the parent game allows mods to be labelled as mature:<br><br>__0__ = None<br>__1__ = Alcohol<br>__2__ = Drugs<br>__4__ = Violence<br>__8__ = Explicit<br>__?__ = Add the options you want together, to enable multiple filters (see [BITWISE fields](#bitwise-and-bitwise-and))
 community_options|integer|Community features enabled for this mod:<br><br>__0__ = All of the options below are disabled<br>__1__ = Enable comments<br>__?__ = Add the options you want together, to enable multiple features (see [BITWISE fields](#bitwise-and-bitwise-and))
-monetization_options|integer|Monetization features enabled for this mod:<br><br>__0__ = All of the options below are disabled<br>__1__ = Enabled<br>__2__ = Marketplace On<br>__?__ = Add the options you want together, to enable multiple features (see [BITWISE fields](#bitwise-and-bitwise-and))
+monetization_options|integer|Monetization features mods can enable:<br><br>__0__ = All of the options below are disabled<br>__1__ = Enabled<br>__2__ = Enable marketplace<br>__4__ = Enable partner program<br>__8__ = Enable scarcity<br>__?__ = Add the options you want together, to enable multiple features (see [BITWISE fields](#bitwise-and-bitwise-and))
+stock|integer|The stock of the mod. 0 is the default value, and is only used when the mod has scarcity enabled.
 price|integer|The price of the mod.
 tax|integer|The tax of the mod.
 logo|[Logo Object](#schemalogo_object)|Contains media URL's to the logo for the mod.
@@ -18367,7 +18648,7 @@ name_id|string|Path for the mod on mod.io. For example: https://mod.io/g/rogue-k
 summary|string|Summary of the mod.
 description|string|Detailed description of the mod which allows HTML.
 description_plaintext|string|`description` field converted into plaintext.
-metadata_blob|string|Metadata stored by the game developer. Metadata can also be stored as searchable [key value pairs](#metadata), and to individual [mod files](#get-modfiles).
+metadata_blob|string|Metadata that is designed to be handled by the game client and is recommended to not be exposed to content creators when submitting their mods. Metadata can also be stored as searchable [key value pairs](#metadata), and to individual [mod files](#get-modfiles).
 profile_url|string|URL to the mod.
 media|[Mod Media Object](#schemamod_media_object)|Contains YouTube & Sketchfab links, aswell as media URL's of images for the mod.
 modfile|[Modfile Object](#schemamodfile_object)|The primary modfile for the mod.
@@ -18635,6 +18916,34 @@ pending|string[]|Array of [valid platform strings](#targeting-a-platform) showin
 
 
 
+## Monetization Team Accounts Object 
+
+<a name="schemamonetization_team_accounts_object"></a>
+
+```json
+{
+  "id": 1,
+  "name_id": "xant",
+  "username": "XanT",
+  "monetization_status": 0,
+  "monetization_options": 0,
+  "split": 0
+} 
+```
+
+### Properties
+
+Name|Type|Description
+---|---|---|---|
+id|integer|Unique id of the user.
+name_id|string|Path for the user on mod.io. For example: https://mod.io/u/__name-id-here__
+username|string|Username of the user.
+monetization_status|integer|The monetization status of the user.
+monetization_options|integer|The monetization options of the user.
+split|integer|User monetization split.
+
+
+
 ## Multipart Upload Object  
 
 <a name="schemamultipart_upload_object"></a>
@@ -18695,6 +19004,7 @@ date_added|integer|Unix timestamp of date the part was uploaded.
   "purchase_date": 1626667557,
   "wallet_type": "string",
   "balance": 0,
+  "deficit": 0,
   "payment_method_id": "string",
   "mod": {
     "id": 2,
@@ -18724,6 +19034,7 @@ date_added|integer|Unix timestamp of date the part was uploaded.
     "maturity_option": 0,
     "community_options": 3,
     "monetization_options": 0,
+    "stock": 0,
     "price": 0,
     "tax": 0,
     "logo": {
@@ -18838,6 +19149,7 @@ meta|object|The metadata that was given in the transaction.
 purchase_date|integer|The time of the purchase.
 wallet_type|string|The type of wallet that was used for the purchase. E.g. STANDARD_MIO.
 balance|integer|The balance of the wallet.
+deficit|integer|The deficit of the wallet.
 payment_method_id|string|The payment method id that was used.
 mod|[Mod Object](#schemamod_object)|The mod that was purchased.
 
@@ -19019,8 +19331,8 @@ invite_pending|integer|If the team member invitation is still pending:<br><br>__
 
 ```json
 {
-  "plaintext": "We use mod.io to support user-generated content in-game. By clicking "I Agree" you agree to the mod.io Terms of Use and a mod.io account will be created for you (using your display name, avatar and ID). Please see the mod.io Privacy Policy on how mod.io processes your personal data.",
-  "html": "<p>We use <a href="https://mod.io">mod.io</a> to support user-generated content in-game. By clicking "I Agree" you agree to the mod.io <a href="https://mod.io/terms">Terms of Use</a> and a mod.io account will be created for you (using your  display name, avatar and ID). Please see the mod.io <a href="https://mod.io/privacy">Privacy Policy</a> on how mod.io processes your personal data.</p>",
+  "plaintext": "We use mod.io to support user-generated content in-game. By selecting "I Agree" you agree to the mod.io Terms of Use and a mod.io account will be created for you (using your display name, avatar and ID). Please see the mod.io Privacy Policy on how mod.io processes your personal data.",
+  "html": "<p>We use <a href="https://mod.io">mod.io</a> to support user-generated content in-game. By selecting "I Agree" you agree to the mod.io <a href="https://mod.io/terms">Terms of Use</a> and a mod.io account will be created for you (using your  display name, avatar and ID). Please see the mod.io <a href="https://mod.io/privacy">Privacy Policy</a> on how mod.io processes your personal data.</p>",
   "buttons": {
     "agree": {
       "text": "I Agree"
@@ -19235,7 +19547,8 @@ balance|integer|The balance of the wallet.
   "type": "string",
   "payment_method_id": "string",
   "currency": "string",
-  "balance": 0
+  "balance": 0,
+  "deficit": 0
 } 
 ```
 
@@ -19247,6 +19560,7 @@ type|string|The type of the wallet.
 payment_method_id|string|The payment_method_id of the wallet.
 currency|string|The currency of the wallet.
 balance|integer|The balance of the wallet.
+deficit|integer|The deficit of the wallet.
 
 
 

@@ -817,6 +817,8 @@ When making API requests you should include the `X-Modio-Portal` header (with on
 
 For example, passing the HTTP header `X-Modio-Portal: epicgames` in your API request tells --parse_sitename your player is coming via the Epic Games Store.
 
+You can also instruct the --parse_sitename website to authenticate the player using a portal from the list above (provided it is supported), as explained in [Web Overlay Authentication](#authentication). For example, if your game client has logged the player into --parse_sitename on PlayStation using their PlayStation™Network account, and you want to open the --parse_sitename website in-game with the player logged in using the same authentication method, you would add `?portal=psn` to the end of the URL: `--parse_gameurl?portal=psn`. You can optionally add `&login=auto` as well to automatically start the login process.
+
 Target Portal | Header Value
 ---------- | ----------  
 Apple | `apple`
@@ -827,8 +829,8 @@ GOG | `gog`
 Google | `google`
 itch.io | `itchio`
 Nintendo | `nintendo`
-OpenID | `openid`
-PlayStation Network | `psn`
+PlayStation™Network | `psn`
+SSO | `sso`
 Steam | `steam`
 Xbox Live | `xboxlive`
 
