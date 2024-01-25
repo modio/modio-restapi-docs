@@ -2740,18 +2740,48 @@ curl <span class="nt">-X</span> POST https://<span class="k">*</span>.modapi.io/
 </code></pre></div>
 <p><span class="httpmethod POST">POST</span> <span class="endpointheading">/external/xboxauth</span></p>
 
-<p>Request an access token on behalf of an Xbox Live user. A Successful request will return an <a href="#access-token-object">Access Token Object</a>.
- *
-* <strong>NOTE</strong>: To use this endpoint you will need to setup some additional settings prior to being able to authenticate Xbox Live users. For these instructions please <a href="mailto:developers@mod.io?subject=Xbox%20Live%20SSO%20Request">contact us</a>.
- *
-* <strong>HINT:</strong> If you want to overlay the mod.io site in-game on Xbox, we recommend you add <code>?portal=xboxlive</code> to the end of the URL you open which will prompt the user to login with Xbox Live. See <a href="#web-overlay-authentication">Web Overlay Authentication</a> for details.
- *
-* Parameter|Type|Required|Description
-     * ---|---|---|---|
-     * xbox_token|string|true|The Xbox Live token returned from calling <a href="https://docs.microsoft.com/en-us/dotnet/api/microsoft.xbox.services.system.xboxliveuser.gettokenandsignatureasync?view=xboxlive-dotnet-2017.11.20171204.01">GetTokenAndSignatureAsync("POST", "https://*.modapi.io")</a>. <br><br><strong>NOTE:</strong> Due to the encrypted app ticket containing special characters, you must URL encode the string before sending the request to ensure it is successfully sent to our servers otherwise you may encounter an <code>422 Unprocessable Entity</code> response. For example, <a href="https://ec.haxx.se/http-post.html">cURL</a> will do this for you by using the <code>--data-urlencode</code> option.
-     * email|string||The users email address (optional but recommended to help users recover lost accounts). If supplied, and the respective user does not have an email registered for their account we will send a confirmation email to confirm they have ownership of the specified email. This functionality is also available at a later time via the <a href="#link-an-email">Link an Email</a> endpoint.<br><br><strong>NOTE</strong>: If the user already has an email on record with us, this parameter will be ignored. This parameter should also be urlencoded before the request is sent.
-     * date_expires|integer||Unix timestamp of date in which the returned token will expire. Value cannot be higher than the default value which is a common year (unix timestamp + 31536000 seconds). Using a token after it's expiry time has elapsed will result in a <code>401 Unauthorized</code> response.
-     * terms_agreed|boolean||This MUST be set to <code>false</code> unless you have collected the <a href="#terms">users agreement</a> prior to calling this endpoint in which case it can be set to <code>true</code> and will be recorded.<br><br><strong>NOTE:</strong> If this is set to <code>false</code> and the user has not agreed to the latest mod.io Terms of Use and Privacy Policy, an error <code>403 Forbidden (error_ref 11074)</code> will be returned and you will need to collect the <a href="#terms">users agreement</a> and retry with this value set to <code>true</code> to authenticate the user.</p>
+<p>Request an access token on behalf of an Xbox Live user. A Successful request will return an <a href="#access-token-object">Access Token Object</a>.</p>
+
+<p><strong>NOTE</strong>: To use this endpoint you will need to setup some additional settings prior to being able to authenticate Xbox Live users. For these instructions please <a href="mailto:developers@mod.io?subject=Xbox%20Live%20SSO%20Request">contact us</a>.</p>
+
+<p><strong>HINT:</strong> If you want to overlay the mod.io site in-game on Xbox, we recommend you add <code>?portal=xboxlive</code> to the end of the URL you open which will prompt the user to login with Xbox Live. See <a href="#web-overlay-authentication">Web Overlay Authentication</a> for details.</p>
+
+<table>
+<thead>
+<tr>
+<th>Parameter</th>
+<th>Type</th>
+<th>Required</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>xbox_token</td>
+<td>string</td>
+<td>true</td>
+<td>The Xbox Live token returned from calling <a href="https://docs.microsoft.com/en-us/dotnet/api/microsoft.xbox.services.system.xboxliveuser.gettokenandsignatureasync?view=xboxlive-dotnet-2017.11.20171204.01">GetTokenAndSignatureAsync("POST", "https://*.modapi.io")</a>. <br><br><strong>NOTE:</strong> Due to the encrypted app ticket containing special characters, you must URL encode the string before sending the request to ensure it is successfully sent to our servers otherwise you may encounter an <code>422 Unprocessable Entity</code> response. For example, <a href="https://ec.haxx.se/http-post.html">cURL</a> will do this for you by using the <code>--data-urlencode</code> option.</td>
+</tr>
+<tr>
+<td>email</td>
+<td>string</td>
+<td></td>
+<td>The users email address (optional but recommended to help users recover lost accounts). If supplied, and the respective user does not have an email registered for their account we will send a confirmation email to confirm they have ownership of the specified email. This functionality is also available at a later time via the <a href="#link-an-email">Link an Email</a> endpoint.<br><br><strong>NOTE</strong>: If the user already has an email on record with us, this parameter will be ignored. This parameter should also be urlencoded before the request is sent.</td>
+</tr>
+<tr>
+<td>date_expires</td>
+<td>integer</td>
+<td></td>
+<td>Unix timestamp of date in which the returned token will expire. Value cannot be higher than the default value which is a common year (unix timestamp + 31536000 seconds). Using a token after it's expiry time has elapsed will result in a <code>401 Unauthorized</code> response.</td>
+</tr>
+<tr>
+<td>terms_agreed</td>
+<td>boolean</td>
+<td></td>
+<td>This MUST be set to <code>false</code> unless you have collected the <a href="#terms">users agreement</a> prior to calling this endpoint in which case it can be set to <code>true</code> and will be recorded.<br><br><strong>NOTE:</strong> If this is set to <code>false</code> and the user has not agreed to the latest mod.io Terms of Use and Privacy Policy, an error <code>403 Forbidden (error_ref 11074)</code> will be returned and you will need to collect the <a href="#terms">users agreement</a> and retry with this value set to <code>true</code> to authenticate the user.</td>
+</tr>
+</tbody>
+</table>
 
 <blockquote>
 <p>Example response</p>
@@ -3104,16 +3134,46 @@ curl <span class="nt">-X</span> POST https://<span class="k">*</span>.modapi.io/
 </code></pre></div>
 <p><span class="httpmethod POST">POST</span> <span class="endpointheading">/external/switchauth</span></p>
 
-<p>Request an access token on behalf of a Nintendo Switch user. A Successful request will return an <a href="#access-token-object">Access Token Object</a>.
- *
-* <strong>NOTE</strong>: To use this endpoint you will need to setup some additional settings prior to being able to authenticate Nintendo Switch users. For these instructions please <a href="mailto:developers@mod.io?subject=Nintendo%20Switch%20SSO%20Request">contact us</a>.
- *
-* Parameter|Type|Required|Description
-     * ---|---|---|---|
-     * id_token|string|true|The NSA ID supplied by the Nintendo Switch SDK.
-     * email|string||The users email address. If supplied, and the respective user does not have an email registered for their account we will send a confirmation email to confirm they have ownership of the specified email.<br><br><strong>WARNING</strong>: We <strong>strongly recommend</strong> that you prompt your users in a friendly manner at least once to provide their email address to link their Nintendo Service account to mod.io. Failing to provide an email will in-effect generate an orphan account that will only be able to be accessed from the users' Switch device.
-     * date_expires|integer||Unix timestamp of date in which the returned token will expire. Value cannot be higher than the default value which is a common year (unix timestamp + 31536000 seconds). Using a token after it's expiry time has elapsed will result in a <code>401 Unauthorized</code> response.
-     * terms_agreed|boolean||This MUST be set to <code>false</code> unless you have collected the <a href="#terms">users agreement</a> prior to calling this endpoint in which case it can be set to <code>true</code> and will be recorded.<br><br><strong>NOTE:</strong> If this is set to <code>false</code> and the user has not agreed to the latest mod.io Terms of Use and Privacy Policy, an error <code>403 Forbidden (error_ref 11074)</code> will be returned and you will need to collect the <a href="#terms">users agreement</a> and retry with this value set to <code>true</code> to authenticate the user.</p>
+<p>Request an access token on behalf of a Nintendo Switch user. A Successful request will return an <a href="#access-token-object">Access Token Object</a>.</p>
+
+<p><strong>NOTE</strong>: To use this endpoint you will need to setup some additional settings prior to being able to authenticate Nintendo Switch users. For these instructions please <a href="mailto:developers@mod.io?subject=Nintendo%20Switch%20SSO%20Request">contact us</a>.</p>
+
+<table>
+<thead>
+<tr>
+<th>Parameter</th>
+<th>Type</th>
+<th>Required</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>id_token</td>
+<td>string</td>
+<td>true</td>
+<td>The NSA ID supplied by the Nintendo Switch SDK.</td>
+</tr>
+<tr>
+<td>email</td>
+<td>string</td>
+<td></td>
+<td>The users email address. If supplied, and the respective user does not have an email registered for their account we will send a confirmation email to confirm they have ownership of the specified email.<br><br><strong>WARNING</strong>: We <strong>strongly recommend</strong> that you prompt your users in a friendly manner at least once to provide their email address to link their Nintendo Service account to mod.io. Failing to provide an email will in-effect generate an orphan account that will only be able to be accessed from the users' Switch device.</td>
+</tr>
+<tr>
+<td>date_expires</td>
+<td>integer</td>
+<td></td>
+<td>Unix timestamp of date in which the returned token will expire. Value cannot be higher than the default value which is a common year (unix timestamp + 31536000 seconds). Using a token after it's expiry time has elapsed will result in a <code>401 Unauthorized</code> response.</td>
+</tr>
+<tr>
+<td>terms_agreed</td>
+<td>boolean</td>
+<td></td>
+<td>This MUST be set to <code>false</code> unless you have collected the <a href="#terms">users agreement</a> prior to calling this endpoint in which case it can be set to <code>true</code> and will be recorded.<br><br><strong>NOTE:</strong> If this is set to <code>false</code> and the user has not agreed to the latest mod.io Terms of Use and Privacy Policy, an error <code>403 Forbidden (error_ref 11074)</code> will be returned and you will need to collect the <a href="#terms">users agreement</a> and retry with this value set to <code>true</code> to authenticate the user.</td>
+</tr>
+</tbody>
+</table>
 
 <blockquote>
 <p>Example response</p>
@@ -3285,17 +3345,63 @@ curl <span class="nt">-X</span> POST https://<span class="k">*</span>.modapi.io/
 </code></pre></div>
 <p><span class="httpmethod POST">POST</span> <span class="endpointheading">/external/oculusauth</span></p>
 
-<p>Request an access token on behalf of an Meta Quest user. To use this functionality you <em>must</em> add your games <a href="https://dashboard.oculus.com/">AppId and secret</a> from the Meta Quest Dashboard, to the <em>Game Admin &gt; Settings</em> page of your games profile on mod.io. A Successful request will return an <a href="#access-token-object">Access Token Object</a>.
- *
-* Parameter|Type|Required|Description
-     * ---|---|---|---|
-     * device|string|true|The Meta Quest device being used for authentication.<br><br>Possible Options:<br>- <em>rift</em><br>- <em>quest</em>
-     * nonce|string|true|The nonce provided by calling <a href="https://developer.oculus.com/documentation/platform/latest/concepts/dg-ownership/">ovr_User_GetUserProof()</a> from the Meta Quest SDK. <br><br><strong>NOTE:</strong> Due to the <code>nonce</code> potentially containing special characters, you must URL encode the string before sending the request to ensure it is successfully sent to our servers otherwise you may encounter an <code>422 Unprocessable Entity</code> response. For example, <a href="https://ec.haxx.se/http-post.html">cURL</a> will do this for you by using the <code>--data-urlencode</code> option.
-     * user_id|integer|true|The user's Meta Quest id providing by calling <a href="https://developer.oculus.com/documentation/platform/latest/concepts/dg-ownership/">ovr_GetLoggedInUserID()</a> from the Meta Quest SDK.
-     * access_token|string|true|The user's access token, providing by calling <a href="https://developer.oculus.com/documentation/platform/latest/concepts/dg-ownership/">ovr_User_GetAccessToken()</a> from the Meta Quest SDK. mod.io uses this access token on the first login only to obtain the user's alias and is not saved on our servers.
-     * email|string||The users email address. If supplied, and the respective user does not have an email registered for their account we will send a confirmation email to confirm they have ownership of the specified email.<br><br><strong>WARNING</strong>: We <strong>strongly recommend</strong> that you prompt your users in a friendly manner at least once to provide their email address to link their Meta Quest account. Due to how Meta Quest handles user IDs - if we are not supplied with an email for a user at least once we will <strong>never</strong> be able to link that user with their existing account at a later date as Meta Quest IDs operate at the game-scope, not globally. Failing to provide an email will in-effect generate an orphan account that will only be able to be accessed from your title.
-     * date_expires|integer||Unix timestamp of date in which the returned token will expire. Value cannot be higher than the default value which is a common year (unix timestamp + 31536000 seconds). Using a token after it's expiry time has elapsed will result in a <code>401 Unauthorized</code> response.
-     * terms_agreed|boolean||This MUST be set to <code>false</code> unless you have collected the <a href="#terms">users agreement</a> prior to calling this endpoint in which case it can be set to <code>true</code> and will be recorded.<br><br><strong>NOTE:</strong> If this is set to <code>false</code> and the user has not agreed to the latest mod.io Terms of Use and Privacy Policy, an error <code>403 Forbidden (error_ref 11074)</code> will be returned and you will need to collect the <a href="#terms">users agreement</a> and retry with this value set to <code>true</code> to authenticate the user.</p>
+<p>Request an access token on behalf of an Meta Quest user. To use this functionality you <em>must</em> add your games <a href="https://dashboard.oculus.com/">AppId and secret</a> from the Meta Quest Dashboard, to the <em>Game Admin &gt; Settings</em> page of your games profile on mod.io. A Successful request will return an <a href="#access-token-object">Access Token Object</a>.</p>
+
+<table>
+<thead>
+<tr>
+<th>Parameter</th>
+<th>Type</th>
+<th>Required</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>device</td>
+<td>string</td>
+<td>true</td>
+<td>The Meta Quest device being used for authentication.<br><br>Possible Options:<br>- <em>rift</em><br>- <em>quest</em>
+</td>
+</tr>
+<tr>
+<td>nonce</td>
+<td>string</td>
+<td>true</td>
+<td>The nonce provided by calling <a href="https://developer.oculus.com/documentation/platform/latest/concepts/dg-ownership/">ovr_User_GetUserProof()</a> from the Meta Quest SDK. <br><br><strong>NOTE:</strong> Due to the <code>nonce</code> potentially containing special characters, you must URL encode the string before sending the request to ensure it is successfully sent to our servers otherwise you may encounter an <code>422 Unprocessable Entity</code> response. For example, <a href="https://ec.haxx.se/http-post.html">cURL</a> will do this for you by using the <code>--data-urlencode</code> option.</td>
+</tr>
+<tr>
+<td>user_id</td>
+<td>integer</td>
+<td>true</td>
+<td>The user's Meta Quest id providing by calling <a href="https://developer.oculus.com/documentation/platform/latest/concepts/dg-ownership/">ovr_GetLoggedInUserID()</a> from the Meta Quest SDK.</td>
+</tr>
+<tr>
+<td>access_token</td>
+<td>string</td>
+<td>true</td>
+<td>The user's access token, providing by calling <a href="https://developer.oculus.com/documentation/platform/latest/concepts/dg-ownership/">ovr_User_GetAccessToken()</a> from the Meta Quest SDK. mod.io uses this access token on the first login only to obtain the user's alias and is not saved on our servers.</td>
+</tr>
+<tr>
+<td>email</td>
+<td>string</td>
+<td></td>
+<td>The users email address. If supplied, and the respective user does not have an email registered for their account we will send a confirmation email to confirm they have ownership of the specified email.<br><br><strong>WARNING</strong>: We <strong>strongly recommend</strong> that you prompt your users in a friendly manner at least once to provide their email address to link their Meta Quest account. Due to how Meta Quest handles user IDs - if we are not supplied with an email for a user at least once we will <strong>never</strong> be able to link that user with their existing account at a later date as Meta Quest IDs operate at the game-scope, not globally. Failing to provide an email will in-effect generate an orphan account that will only be able to be accessed from your title.</td>
+</tr>
+<tr>
+<td>date_expires</td>
+<td>integer</td>
+<td></td>
+<td>Unix timestamp of date in which the returned token will expire. Value cannot be higher than the default value which is a common year (unix timestamp + 31536000 seconds). Using a token after it's expiry time has elapsed will result in a <code>401 Unauthorized</code> response.</td>
+</tr>
+<tr>
+<td>terms_agreed</td>
+<td>boolean</td>
+<td></td>
+<td>This MUST be set to <code>false</code> unless you have collected the <a href="#terms">users agreement</a> prior to calling this endpoint in which case it can be set to <code>true</code> and will be recorded.<br><br><strong>NOTE:</strong> If this is set to <code>false</code> and the user has not agreed to the latest mod.io Terms of Use and Privacy Policy, an error <code>403 Forbidden (error_ref 11074)</code> will be returned and you will need to collect the <a href="#terms">users agreement</a> and retry with this value set to <code>true</code> to authenticate the user.</td>
+</tr>
+</tbody>
+</table>
 
 <blockquote>
 <p>Example response</p>
@@ -3461,14 +3567,44 @@ curl <span class="nt">-X</span> POST https://<span class="k">*</span>.modapi.io/
 </code></pre></div>
 <p><span class="httpmethod POST">POST</span> <span class="endpointheading">/external/epicgamesauth</span></p>
 
-<p>Request an access token on behalf of an Epic Games user. A Successful request will return an <a href="#access-token-object">Access Token Object</a>.
- *
-* Parameter|Type|Required|Description
-     * ---|---|---|---|
-     * id_token|string|true|The ID Token <a href="https://dev.epicgames.com/docs/api-ref/functions/eos-auth-copy-id-token">returned from the EOS SDK</a> when you authenticate a user to use mod.io.
-     * email|string||The users email address (optional but recommended to help users recover lost accounts). If supplied, and the respective user does not have an email registered for their account we will send a confirmation email to confirm they have ownership of the specified email.<br><br><strong>NOTE</strong>: If the user already has an email on record with us, this parameter will be ignored. This parameter should also be urlencoded before the request is sent.
-     * date_expires|integer||Unix timestamp of date in which the returned token will expire. Value cannot be higher than the default value which is a week (unix timestamp + 604800 seconds). Using a token after it's expiry time has elapsed will result in a <code>401 Unauthorized</code> response.
-     * terms_agreed|boolean||This MUST be set to <code>false</code> unless you have collected the <a href="#terms">users agreement</a> prior to calling this endpoint in which case it can be set to <code>true</code> and will be recorded.<br><br><strong>NOTE:</strong> If this is set to <code>false</code> and the user has not agreed to the latest mod.io Terms of Use and Privacy Policy, an error <code>403 Forbidden (error_ref 11074)</code> will be returned and you will need to collect the <a href="#terms">users agreement</a> and retry with this value set to <code>true</code> to authenticate the user.</p>
+<p>Request an access token on behalf of an Epic Games user. A Successful request will return an <a href="#access-token-object">Access Token Object</a>.</p>
+
+<table>
+<thead>
+<tr>
+<th>Parameter</th>
+<th>Type</th>
+<th>Required</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>id_token</td>
+<td>string</td>
+<td>true</td>
+<td>The ID Token <a href="https://dev.epicgames.com/docs/api-ref/functions/eos-auth-copy-id-token">returned from the EOS SDK</a> when you authenticate a user to use mod.io.</td>
+</tr>
+<tr>
+<td>email</td>
+<td>string</td>
+<td></td>
+<td>The users email address (optional but recommended to help users recover lost accounts). If supplied, and the respective user does not have an email registered for their account we will send a confirmation email to confirm they have ownership of the specified email.<br><br><strong>NOTE</strong>: If the user already has an email on record with us, this parameter will be ignored. This parameter should also be urlencoded before the request is sent.</td>
+</tr>
+<tr>
+<td>date_expires</td>
+<td>integer</td>
+<td></td>
+<td>Unix timestamp of date in which the returned token will expire. Value cannot be higher than the default value which is a week (unix timestamp + 604800 seconds). Using a token after it's expiry time has elapsed will result in a <code>401 Unauthorized</code> response.</td>
+</tr>
+<tr>
+<td>terms_agreed</td>
+<td>boolean</td>
+<td></td>
+<td>This MUST be set to <code>false</code> unless you have collected the <a href="#terms">users agreement</a> prior to calling this endpoint in which case it can be set to <code>true</code> and will be recorded.<br><br><strong>NOTE:</strong> If this is set to <code>false</code> and the user has not agreed to the latest mod.io Terms of Use and Privacy Policy, an error <code>403 Forbidden (error_ref 11074)</code> will be returned and you will need to collect the <a href="#terms">users agreement</a> and retry with this value set to <code>true</code> to authenticate the user.</td>
+</tr>
+</tbody>
+</table>
 
 <blockquote>
 <p>Example response</p>
@@ -3620,14 +3756,44 @@ curl <span class="nt">-X</span> POST https://<span class="k">*</span>.modapi.io/
 </code></pre></div>
 <p><span class="httpmethod POST">POST</span> <span class="endpointheading">/external/galaxyauth</span></p>
 
-<p>Request an access token on behalf of a GOG Galaxy user. To use this functionality you <em>must</em> add your games <a href="https://docs.gog.com/sdk-encrypted-tickets/">encrypted app ticket key</a> from GOG Galaxy, to the <em>Game Admin &gt; Settings</em> page of your games profile on mod.io. A Successful request will return an <a href="#access-token-object">Access Token Object</a>.
- *
-* Parameter|Type|Required|Description
-     * ---|---|---|---|
-     * appdata|string|true|The GOG Galaxy users <a href="https://cdn.gog.com/open/galaxy/sdk/1.133.3/Documentation/classgalaxy_1_1api_1_1IUser.html#a352802aab7a6e71b1cd1b9b1adfd53d8">Encrypted App Ticket</a> provided by the GOG Galaxy SDK. <br><br>Parameter content <em>MUST</em> be the encrypted string returned in the buffer after calling <a href="https://cdn.gog.com/open/galaxy/sdk/1.133.3/Documentation/classgalaxy_1_1api_1_1IUser.html#a96af6792efc260e75daebedca2cf74c6">IUser::GetEncryptedAppTicket()</a> within the Galaxy SDK. Unlike the <a href="#steam">Steam Authentication</a> endpoint, you do not need to encode the encrypted string as this is already done by the Galaxy SDK.<br><br><strong>NOTE:</strong> Due to the encrypted app ticket containing special characters, you must URL encode the string before sending the request to ensure it is successfully sent to our servers otherwise you may encounter an <code>422 Unprocessable Entity</code> response. For example, <a href="https://ec.haxx.se/http-post.html">cURL</a> will do this for you by using the <code>--data-urlencode</code> option.
-     * email|string||The users email address. If supplied, and the respective user does not have an email registered for their account we will send a confirmation email to confirm they have ownership of the specified email.<br><br><strong>WARNING</strong>: We <strong>strongly recommend</strong> that you prompt your users in a friendly manner at least once to provide their email address to link their GOG Galaxy account to mod.io. Failing to provide an email will in-effect generate an orphan account that will only be able to be accessed from GOG Galaxy.
-     * date_expires|integer||Unix timestamp of date in which the returned token will expire. Value cannot be higher than the default value which is a common year (unix timestamp + 31536000 seconds). Using a token after it's expiry time has elapsed will result in a <code>401 Unauthorized</code> response.
-     * terms_agreed|boolean||This MUST be set to <code>false</code> unless you have collected the <a href="#terms">users agreement</a> prior to calling this endpoint in which case it can be set to <code>true</code> and will be recorded.<br><br><strong>NOTE:</strong> If this is set to <code>false</code> and the user has not agreed to the latest mod.io Terms of Use and Privacy Policy, an error <code>403 Forbidden (error_ref 11074)</code> will be returned and you will need to collect the <a href="#terms">users agreement</a> and retry with this value set to <code>true</code> to authenticate the user.</p>
+<p>Request an access token on behalf of a GOG Galaxy user. To use this functionality you <em>must</em> add your games <a href="https://docs.gog.com/sdk-encrypted-tickets/">encrypted app ticket key</a> from GOG Galaxy, to the <em>Game Admin &gt; Settings</em> page of your games profile on mod.io. A Successful request will return an <a href="#access-token-object">Access Token Object</a>.</p>
+
+<table>
+<thead>
+<tr>
+<th>Parameter</th>
+<th>Type</th>
+<th>Required</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>appdata</td>
+<td>string</td>
+<td>true</td>
+<td>The GOG Galaxy users <a href="https://cdn.gog.com/open/galaxy/sdk/1.133.3/Documentation/classgalaxy_1_1api_1_1IUser.html#a352802aab7a6e71b1cd1b9b1adfd53d8">Encrypted App Ticket</a> provided by the GOG Galaxy SDK. <br><br>Parameter content <em>MUST</em> be the encrypted string returned in the buffer after calling <a href="https://cdn.gog.com/open/galaxy/sdk/1.133.3/Documentation/classgalaxy_1_1api_1_1IUser.html#a96af6792efc260e75daebedca2cf74c6">IUser::GetEncryptedAppTicket()</a> within the Galaxy SDK. Unlike the <a href="#steam">Steam Authentication</a> endpoint, you do not need to encode the encrypted string as this is already done by the Galaxy SDK.<br><br><strong>NOTE:</strong> Due to the encrypted app ticket containing special characters, you must URL encode the string before sending the request to ensure it is successfully sent to our servers otherwise you may encounter an <code>422 Unprocessable Entity</code> response. For example, <a href="https://ec.haxx.se/http-post.html">cURL</a> will do this for you by using the <code>--data-urlencode</code> option.</td>
+</tr>
+<tr>
+<td>email</td>
+<td>string</td>
+<td></td>
+<td>The users email address. If supplied, and the respective user does not have an email registered for their account we will send a confirmation email to confirm they have ownership of the specified email.<br><br><strong>WARNING</strong>: We <strong>strongly recommend</strong> that you prompt your users in a friendly manner at least once to provide their email address to link their GOG Galaxy account to mod.io. Failing to provide an email will in-effect generate an orphan account that will only be able to be accessed from GOG Galaxy.</td>
+</tr>
+<tr>
+<td>date_expires</td>
+<td>integer</td>
+<td></td>
+<td>Unix timestamp of date in which the returned token will expire. Value cannot be higher than the default value which is a common year (unix timestamp + 31536000 seconds). Using a token after it's expiry time has elapsed will result in a <code>401 Unauthorized</code> response.</td>
+</tr>
+<tr>
+<td>terms_agreed</td>
+<td>boolean</td>
+<td></td>
+<td>This MUST be set to <code>false</code> unless you have collected the <a href="#terms">users agreement</a> prior to calling this endpoint in which case it can be set to <code>true</code> and will be recorded.<br><br><strong>NOTE:</strong> If this is set to <code>false</code> and the user has not agreed to the latest mod.io Terms of Use and Privacy Policy, an error <code>403 Forbidden (error_ref 11074)</code> will be returned and you will need to collect the <a href="#terms">users agreement</a> and retry with this value set to <code>true</code> to authenticate the user.</td>
+</tr>
+</tbody>
+</table>
 
 <blockquote>
 <p>Example response</p>
@@ -3793,17 +3959,42 @@ curl <span class="nt">-X</span> POST https://<span class="k">*</span>.modapi.io/
 </code></pre></div>
 <p><span class="httpmethod POST">POST</span> <span class="endpointheading">/external/googleauth</span></p>
 
-<p>Request an access token on behalf of a Google user. A Successful request will return an <a href="#access-token-object">Access Token Object</a>.
- *
-* <strong>NOTE</strong>: To use this endpoint you will need to setup some additional settings prior to being able to authenticate Google users. For these instructions please <a href="mailto:developers@mod.io?subject=Google%20SSO%20Request">contact us</a>.
- *
-* <strong>HINT:</strong> If you want to overlay the mod.io site in-game on Android, we recommend you add <code>?portal=google</code> to the end of the URL you open which will prompt the user to login with Google. See <a href="#web-overlay-authentication">Web Overlay Authentication</a> for details.
- *
-* Parameter|Type|Required|Description
-     * ---|---|---|---|
-     * id_token|string|true|The <code>id_token</code> value <a href="https://developers.google.com/identity/sign-in/web/backend-auth#calling-the-tokeninfo-endpoint">returned from Google</a> after you have authenticated a user via the Google OAuth2 flow.
-     * date_expires|integer||Unix timestamp of date in which the returned token will expire. Value cannot be higher than the default value which is a week (unix timestamp + 604800 seconds). Using a token after it's expiry time has elapsed will result in a <code>401 Unauthorized</code> response.
-     * terms_agreed|boolean||This MUST be set to <code>false</code> unless you have collected the <a href="#terms">users agreement</a> prior to calling this endpoint in which case it can be set to <code>true</code> and will be recorded.<br><br><strong>NOTE:</strong> If this is set to <code>false</code> and the user has not agreed to the latest mod.io Terms of Use and Privacy Policy, an error <code>403 Forbidden (error_ref 11074)</code> will be returned and you will need to collect the <a href="#terms">users agreement</a> and retry with this value set to <code>true</code> to authenticate the user.</p>
+<p>Request an access token on behalf of a Google user. A Successful request will return an <a href="#access-token-object">Access Token Object</a>.</p>
+
+<p><strong>NOTE</strong>: To use this endpoint you will need to setup some additional settings prior to being able to authenticate Google users. For these instructions please <a href="mailto:developers@mod.io?subject=Google%20SSO%20Request">contact us</a>.</p>
+
+<p><strong>HINT:</strong> If you want to overlay the mod.io site in-game on Android, we recommend you add <code>?portal=google</code> to the end of the URL you open which will prompt the user to login with Google. See <a href="#web-overlay-authentication">Web Overlay Authentication</a> for details.</p>
+
+<table>
+<thead>
+<tr>
+<th>Parameter</th>
+<th>Type</th>
+<th>Required</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>id_token</td>
+<td>string</td>
+<td>true</td>
+<td>The <code>id_token</code> value <a href="https://developers.google.com/identity/sign-in/web/backend-auth#calling-the-tokeninfo-endpoint">returned from Google</a> after you have authenticated a user via the Google OAuth2 flow.</td>
+</tr>
+<tr>
+<td>date_expires</td>
+<td>integer</td>
+<td></td>
+<td>Unix timestamp of date in which the returned token will expire. Value cannot be higher than the default value which is a week (unix timestamp + 604800 seconds). Using a token after it's expiry time has elapsed will result in a <code>401 Unauthorized</code> response.</td>
+</tr>
+<tr>
+<td>terms_agreed</td>
+<td>boolean</td>
+<td></td>
+<td>This MUST be set to <code>false</code> unless you have collected the <a href="#terms">users agreement</a> prior to calling this endpoint in which case it can be set to <code>true</code> and will be recorded.<br><br><strong>NOTE:</strong> If this is set to <code>false</code> and the user has not agreed to the latest mod.io Terms of Use and Privacy Policy, an error <code>403 Forbidden (error_ref 11074)</code> will be returned and you will need to collect the <a href="#terms">users agreement</a> and retry with this value set to <code>true</code> to authenticate the user.</td>
+</tr>
+</tbody>
+</table>
 
 <blockquote>
 <p>Example response</p>
@@ -4160,16 +4351,46 @@ curl <span class="nt">-X</span> POST https://<span class="k">*</span>.modapi.io/
 </code></pre></div>
 <p><span class="httpmethod POST">POST</span> <span class="endpointheading">/external/openidauth</span></p>
 
-<p>Request an access token on behalf of an OpenID identity provider. To use this method of authentication, you must configure the OpenID config in your games authentication admin page. A Successful request will return an <a href="#access-token-object">Access Token Object</a>.
- *
-* <strong>NOTE:</strong> The ability to authenticate players using your identity provider is a feature for advanced partners only. If you are interested in becoming an advanced partner, please <a href="mailto:developers@mod.io?subject=OpenID%20SSO%20Request">contact us</a>.
- *
-* Parameter|Type|Required|Description
-     * ---|---|---|---|
-     * id_token|string|true|The ID token issued by the configured identity provider.
-     * email|string||The users email address (optional but recommended to help users recover lost accounts). If supplied, and the respective user does not have an email registered for their account we will send a confirmation email to confirm they have ownership of the specified email.<br><br><strong>NOTE</strong>: If the user already has an email on record with us, this parameter will be ignored. This parameter should also be urlencoded before the request is sent.
-     * date_expires|integer||Unix timestamp of date in which the returned token will expire. Value cannot be higher than the default value which is a week (unix timestamp + 604800 seconds). Using a token after it's expiry time has elapsed will result in a <code>401 Unauthorized</code> response.
-     * terms_agreed|boolean||This MUST be set to <code>false</code> unless you have collected the <a href="#terms">users agreement</a> prior to calling this endpoint in which case it can be set to <code>true</code> and will be recorded.<br><br><strong>NOTE:</strong> If this is set to <code>false</code> and the user has not agreed to the latest mod.io Terms of Use and Privacy Policy, an error <code>403 Forbidden (error_ref 11074)</code> will be returned and you will need to collect the <a href="#terms">users agreement</a> and retry with this value set to <code>true</code> to authenticate the user.</p>
+<p>Request an access token on behalf of an OpenID identity provider. To use this method of authentication, you must configure the OpenID config in your games authentication admin page. A Successful request will return an <a href="#access-token-object">Access Token Object</a>.</p>
+
+<p><strong>NOTE:</strong> The ability to authenticate players using your identity provider is a feature for advanced partners only. If you are interested in becoming an advanced partner, please <a href="mailto:developers@mod.io?subject=OpenID%20SSO%20Request">contact us</a>.</p>
+
+<table>
+<thead>
+<tr>
+<th>Parameter</th>
+<th>Type</th>
+<th>Required</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>id_token</td>
+<td>string</td>
+<td>true</td>
+<td>The ID token issued by the configured identity provider.</td>
+</tr>
+<tr>
+<td>email</td>
+<td>string</td>
+<td></td>
+<td>The users email address (optional but recommended to help users recover lost accounts). If supplied, and the respective user does not have an email registered for their account we will send a confirmation email to confirm they have ownership of the specified email.<br><br><strong>NOTE</strong>: If the user already has an email on record with us, this parameter will be ignored. This parameter should also be urlencoded before the request is sent.</td>
+</tr>
+<tr>
+<td>date_expires</td>
+<td>integer</td>
+<td></td>
+<td>Unix timestamp of date in which the returned token will expire. Value cannot be higher than the default value which is a week (unix timestamp + 604800 seconds). Using a token after it's expiry time has elapsed will result in a <code>401 Unauthorized</code> response.</td>
+</tr>
+<tr>
+<td>terms_agreed</td>
+<td>boolean</td>
+<td></td>
+<td>This MUST be set to <code>false</code> unless you have collected the <a href="#terms">users agreement</a> prior to calling this endpoint in which case it can be set to <code>true</code> and will be recorded.<br><br><strong>NOTE:</strong> If this is set to <code>false</code> and the user has not agreed to the latest mod.io Terms of Use and Privacy Policy, an error <code>403 Forbidden (error_ref 11074)</code> will be returned and you will need to collect the <a href="#terms">users agreement</a> and retry with this value set to <code>true</code> to authenticate the user.</td>
+</tr>
+</tbody>
+</table>
 
 <blockquote>
 <p>Example response</p>
@@ -4483,11 +4704,32 @@ curl <span class="nt">-X</span> POST https://<span class="k">*</span>.modapi.io/
 </code></pre></div>
 <p><span class="httpmethod POST">POST</span> <span class="endpointheading">/oauth/emailexchange</span></p>
 
-<p>Exchange a security code issued from the <a href="#email">Email Request endpoint</a> for an access token. To use this functionality you <em>must</em> use your games api_key from your games profile on mod.io and the same api_key must be used from the original request for a security code. A Successful request will return an <a href="#access-token-object">Access Token Object</a>.
-    Parameter|Type|Required|Description
-    ---|---|---|---|
-    security_code|string|true|The alpha-numeric security code.
-    date_expires|integer||Unix timestamp of date in which the returned token will expire. Value cannot be higher than the default value which is a common year (unix timestamp + 31536000 seconds). Using a token after it's expiry time has elapsed will result in a <code>401 Unauthorized</code> response.</p>
+<p>Exchange a security code issued from the <a href="#email">Email Request endpoint</a> for an access token. To use this functionality you <em>must</em> use your games api_key from your games profile on mod.io and the same api_key must be used from the original request for a security code. A Successful request will return an <a href="#access-token-object">Access Token Object</a>.</p>
+
+<table>
+<thead>
+<tr>
+<th>Parameter</th>
+<th>Type</th>
+<th>Required</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>security_code</td>
+<td>string</td>
+<td>true</td>
+<td>The alpha-numeric security code.</td>
+</tr>
+<tr>
+<td>date_expires</td>
+<td>integer</td>
+<td></td>
+<td>Unix timestamp of date in which the returned token will expire. Value cannot be higher than the default value which is a common year (unix timestamp + 31536000 seconds). Using a token after it's expiry time has elapsed will result in a <code>401 Unauthorized</code> response.</td>
+</tr>
+</tbody>
+</table>
 
 <blockquote>
 <p>Example response</p>
