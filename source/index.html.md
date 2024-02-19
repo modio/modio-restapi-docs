@@ -947,7 +947,7 @@ The purpose of this endpoint is to provide the text, links and buttons you can u
 
      __Example Dialog:__
 
-     <aside class='consent'>We use mod.io to support user-generated content in-game. By clicking 'I Agree' you agree to the mod.io Terms of Use and a mod.io account will be created for you (using your display name, avatar and ID). Please see the mod.io Privacy Policy on how mod.io processes your personal data.<br><br><div style='text-align:center'><span class='versionwrap cursor'> &nbsp; &nbsp; I Agree &nbsp; &nbsp; </span> <span class='versionwrap outline cursor'>No, Thanks</span><br><br>[Terms of Use](https://mod.io/terms/widget) - [Privacy Policy](https://mod.io/privacy/widget)<br></div></aside>
+     <aside class='consent'>This game uses mod.io to support user-generated content. By clicking 'I Agree' you agree to the mod.io Terms of Use and a mod.io account will be created for you (using your display name, avatar and ID). Please see the mod.io Privacy Policy on how mod.io processes your personal data.<br><br><div style='text-align:center'><span class='versionwrap cursor'> &nbsp; &nbsp; I Agree &nbsp; &nbsp; </span> <span class='versionwrap outline cursor'>No, Thanks</span><br><br>[Terms of Use](https://mod.io/terms/widget) - [Privacy Policy](https://mod.io/privacy/widget)<br></div></aside>
 
      __IMPORTANT:__ It is a requirement of the [Game Terms](https://mod.io/gameterms) with mod.io, and the platforms mod.io is used on, to ensure the user provides consent and has agreed to the latest mod.io [Terms of Use](https://mod.io/terms/widget) and [Privacy Policy](https://mod.io/privacy/widget). The users agreement must be collected prior to using a 3rd party authentication flow (including but not limited to Steam, PSN, Nintendo and Xbox Live). You only need to collect the users agreement once, and also each time these policies are updated.
 
@@ -966,8 +966,8 @@ The purpose of this endpoint is to provide the text, links and buttons you can u
 
 ```json
 {
-  "plaintext": "We use mod.io to support user-generated content in-game. By selecting "I Agree" you agree to the mod.io Terms of Use and a mod.io account will be created for you (using your display name, avatar and ID). Please see the mod.io Privacy Policy on how mod.io processes your personal data.",
-  "html": "<p>We use <a href="https://mod.io">mod.io</a> to support user-generated content in-game. By selecting "I Agree" you agree to the mod.io <a href="https://mod.io/terms">Terms of Use</a> and a mod.io account will be created for you (using your  display name, avatar and ID). Please see the mod.io <a href="https://mod.io/privacy">Privacy Policy</a> on how mod.io processes your personal data.</p>",
+  "plaintext": "This game uses mod.io to support user-generated content. By selecting "I Agree" you agree to the mod.io Terms of Use and a mod.io account will be created for you (using your display name, avatar and ID). Please see the mod.io Privacy Policy on how mod.io processes your personal data.",
+  "html": "<p>This game uses <a href="https://mod.io">mod.io</a> to support user-generated content. By selecting "I Agree" you agree to the mod.io <a href="https://mod.io/terms">Terms of Use</a> and a mod.io account will be created for you (using your  display name, avatar and ID). Please see the mod.io <a href="https://mod.io/privacy">Privacy Policy</a> on how mod.io processes your personal data.</p>",
   "buttons": {
     "agree": {
       "text": "I Agree"
@@ -2300,7 +2300,7 @@ System.out.println(response.toString());
 
 `POST /external/openidauth`
 
-Request an access token on behalf of an OpenID identity provider. To use this method of authentication, you must configure the OpenID config in your games authentication admin page. A Successful request will return an [Access Token Object](#access-token-object).
+Request an access token on behalf of an OpenID identity provider. To use this method of authentication, you must configure the OpenID config in your game's authentication admin page. A Successful request will return an [Access Token Object](#access-token-object).
 
      __NOTE:__ The ability to authenticate players using your identity provider is a feature for advanced partners only. If you are interested in becoming an advanced partner, please [contact us](mailto:developers@mod.io?subject=OpenID SSO Request).
 
@@ -3989,7 +3989,7 @@ Add a guide for a game. Successful request will return a single [Guide Object](#
     ---|---|---|---|
     logo|file|true|Image file which will represent your guides logo. Must be jpg, jpeg or png format and cannot exceed 8MB in filesize. Dimensions must be at least 512x288 and we recommended you supply a high resolution image with a 16 / 9 ratio. mod.io will use this image to make three thumbnails for the dimensions 320x180, 640x360 and 1280x720.
     name|string|true|Name of your guide.
-    name_id|string||Path for the guide on mod.io. For example: https://mod.io/g/gamename/r/__guide-name-id-here__. If no `name_id` is specified the `name` will be used. For example: _'Stellaris Shader Guide'_ will become _'stellaris-shader-guide'_. Cannot exceed 80 characters.
+    name_id|string||Path for the guide on mod.io. For example: https://mod.io/g/gamename/r/__guide-name-id-here__. If no `name_id` is specified the `name` will be used. For example: _'Stellaris Shader Guide'_ will become _'stellaris-shader-guide'_. Cannot exceed 50 characters.
     summary|string|true|Summary for your guide, giving a brief overview of what it's about. Cannot exceed 250 characters.
     description|string||Detailed description for your guide, which can include details such as 'About', 'Features', 'Install Instructions', 'FAQ', etc. HTML supported and encouraged.
     url|string||Official homepage for your guide. Must be a valid URL.
@@ -4183,7 +4183,7 @@ Update an existing guide. Successful request will return the updated [Guide Obje
     status|integer||Status of the guide, see [status and visibility](#status-amp-visibility) for details):<br><br>__0__ = Not accepted<br>__1__ = Accepted (game admins only)<br>__3__ = Deleted (use the [delete guide](#delete-guide) endpoint to set this status)
     logo|file||Image file which will represent your guides logo. Must be jpg, jpeg or png format and cannot exceed 8MB in filesize. Dimensions must be at least 512x288 and we recommended you supply a high resolution image with a 16 / 9 ratio. mod.io will use this image to make three thumbnails for the dimensions 320x180, 640x360 and 1280x720.
     name|string||Name of your guide.
-    name_id|string||Path for the guide on mod.io. For example: https://mod.io/g/gamename/r/__guide-name-id-here__. If no `name_id` is specified the `name` will be used. For example: _'Stellaris Shader Guide'_ will become _'stellaris-shader-guide'_. Cannot exceed 80 characters.
+    name_id|string||Path for the guide on mod.io. For example: https://mod.io/g/gamename/r/__guide-name-id-here__. If no `name_id` is specified the `name` will be used. For example: _'Stellaris Shader Guide'_ will become _'stellaris-shader-guide'_. Cannot exceed 50 characters.
     summary|string||Summary for your guide, giving a brief overview of what it's about. Cannot exceed 250 characters.
     description|string||Detailed description for your guide, which can include details such as 'About', 'Features', 'Install Instructions', 'FAQ', etc. HTML supported and encouraged.
     url|string||Official homepage for your guide. Must be a valid URL.
@@ -4607,6 +4607,7 @@ Get all mods for the corresponding game. Successful request will return an array
     tags|string|Comma-separated values representing the tags you want to filter the results by. If you specify multiple tags, only mods which have all tags will be returned, and only tags that are supported by the parent game can be applied. To determine what tags are eligible, see the tags values within `tag_options` column on the parent [Game Object](#game-object). If you want to ensure mods returned do not contain particular tag(s), you can use the `tags-not-in` filter either independently or alongside this filter.
     platform_status|string|If the parent game has enabled per-platform files, by default only mods with files which are approved and live for the [target platform](#targeting-a-platform) will be returned.<br><br>To QA mods with pending files, you can filter results by their current platform status, using `pending_only` or `live_and_pending`.<br><br>__NOTE:__ only game admins can filter by this field.
     revenue_type|integer|Finds all mods with or without a price. Defaults to free. <br><br>__0__ = Free<br>__1__ = Paid<br>__2__ = Free and Paid
+    stock|integer|Finds all mods that are in/out of stock. <br><br>__0__ = Sold Out<br>__1__ = In Stock
 
     Sort|Description
     ---|---
@@ -5127,13 +5128,12 @@ Add a mod. Successful request will return the newly created [Mod Object](#mod-ob
     ---|---|---|---|
     logo|file|true|Image file which will represent your mods logo. Must be jpg, jpeg or png format and cannot exceed 8MB in filesize. Dimensions must be at least 512x288 and we recommended you supply a high resolution image with a 16 / 9 ratio. mod.io will use this image to make three thumbnails for the dimensions 320x180, 640x360 and 1280x720.
     name|string|true|Name of your mod.
-    name_id|string||Path for the mod on mod.io. For example: https://mod.io/g/gamename/m/__mod-name-id-here__. If no `name_id` is specified the `name` will be used. For example: _'Stellaris Shader Mod'_ will become _'stellaris-shader-mod'_. Cannot exceed 80 characters.
+    name_id|string||Path for the mod on mod.io. For example: https://mod.io/g/gamename/m/__mod-name-id-here__. If no `name_id` is specified the `name` will be used. For example: _'Stellaris Shader Mod'_ will become _'stellaris-shader-mod'_. Cannot exceed 50 characters.
     summary|string|true|Summary for your mod, giving a brief overview of what it's about. Cannot exceed 250 characters.
     visible|integer||Visibility of the mod (best if this field is controlled by mod admins, see [status and visibility](#status-amp-visibility) for details):<br><br>__0__ = Hidden<br>__1__ = Public _(default)_
     description|string||Detailed description for your mod, which can include details such as 'About', 'Features', 'Install Instructions', 'FAQ', etc. HTML supported and encouraged.
     homepage_url|string||Official homepage for your mod. Must be a valid URL.
     price|int|true|The price of the mod.<br><br>__NOTE:__ The value of this field will be ignored if the parent game's queue is enabled (see `curation_option` field in [Game Object](#game-object)).
-    monetization_options|integer|Monetization option(s) enabled by the mod creator.<br><br>__NOTE:__ The value of this field will be ignored if the parent game's queue is enabled (see `curation_option` field in [Game Object](#game-object)). <br><br>__0__ = None<br>__1__ = Enabled<br>__2__ = Marketplace On<br>__?__ = Add the options you want together, to enable multiple filters (see [BITWISE fields](#bitwise-and-bitwise-and))
     maturity_option|integer||Choose if this mod contains any of the following mature content.<br><br>__NOTE:__ The value of this field will default to 0 unless the parent game allows you to flag mature content (see `maturity_options` field in [Game Object](#game-object)). <br><br>__0__ = None _(default)_<br>__1__ = Alcohol<br>__2__ = Drugs<br>__4__ = Violence<br>__8__ = Explicit<br>__?__ = Add the options you want together, to enable multiple options (see [BITWISE fields](#bitwise-and-bitwise-and))
     stock|integer||Maximum number of times this Mod can be sold. <br><br>__NOTE:__ Scarcity can be enforced by the parent Game. The value of this field is not used if the parent game's or mod's scarcity is disabled (see `monetization_options` field in [Game Object](#game-object)).
     maturity_option|integer||Choose if this mod contains any of the following mature content.
@@ -5411,12 +5411,12 @@ Edit details for a mod. If you want to update the `logo` or media associated wit
     status|integer||Status of a mod. The mod must have at least one uploaded `modfile` to be 'accepted' (best if this field is controlled by game admins, see [status and visibility](#status-amp-visibility) for details):<br><br>__0__ = Not accepted<br>__1__ = Accepted (game admins only)<br>__3__ = Deleted (use the [delete mod](#delete-mod) endpoint to set this status)
     visible|integer||Visibility of the mod (best if this field is controlled by mod admins, see [status and visibility](#status-amp-visibility) for details):<br><br>__0__ = Hidden<br>__1__ = Public
     name|string||Name of your mod. Cannot exceed 50 characters.
-    name_id|string||Path for the mod on mod.io. For example: https://mod.io/g/gamename/m/__mod-name-id-here__. Cannot exceed 80 characters.
+    name_id|string||Path for the mod on mod.io. For example: https://mod.io/g/gamename/m/__mod-name-id-here__. Cannot exceed 50 characters.
     summary|string||Summary for your mod, giving a brief overview of what it's about. Cannot exceed 250 characters.
     description|string||Detailed description for your mod, which can include details such as 'About', 'Features', 'Install Instructions', 'FAQ', etc. HTML supported and encouraged.
     homepage_url|string||Official homepage for your mod. Must be a valid URL.
     price|int|true|The price of the mod.<br><br>__NOTE:__ The value of this field will be ignored if the parent game's queue is enabled (see `curation_option` field in [Game Object](#game-object)).
-    monetization_options|integer|Monetization option(s) enabled by the mod creator.<br><br>__NOTE:__ The value of this field will be ignored if the parent game's queue is enabled (see `curation_option` field in [Game Object](#game-object)). <br><br>__0__ = None<br>__1__ = Enabled<br>__2__ = Marketplace On<br>__?__ = Add the options you want together, to enable multiple filters (see [BITWISE fields](#bitwise-and-bitwise-and))
+    monetization_options|integer||Monetization option(s) enabled by the mod creator.<br><br>__NOTE:__ The value of this field will be ignored if the parent game's queue is enabled (see `curation_option` field in [Game Object](#game-object)). <br><br>__0__ = None<br>__1__ = Enabled<br>__2__ = Marketplace On<br>__?__ = Add the options you want together, to enable multiple filters (see [BITWISE fields](#bitwise-and-bitwise-and))
     stock|integer||Maximum number of times this Mod can be sold. <br><br>__NOTE:__ The value of this field is not used if the parent game's or mod's scarcity is disabled (see `monetization_options` field in [Game Object](#game-object)).
     maturity_option|integer||Choose if this mod contains any of the following mature content.<br><br>__NOTE:__ The value of this field will default to 0 unless the parent game allows you to flag mature content (see `maturity_options` field in [Game Object](#game-object)). <br><br>__0__ = None set<br>__1__ = Alcohol<br>__2__ = Drugs<br>__4__ = Violence<br>__8__ = Explicit<br>__?__ = Add the options you want together, to enable multiple options (see [BITWISE fields](#bitwise-and-bitwise-and))
     community_options|integer||Community features enabled for this mod:<br><br>__0__ = All the options below are disabled<br>__1__ = Enable comments<br>__64__ = Enable previews<br>__?__ = Add the options you want together, to enable multiple options (see [BITWISE fields](#bitwise-and-bitwise-and))
@@ -13116,6 +13116,7 @@ Get the current agreement (version) by type. Successful request will return a si
      __5__ = Monetization Terms - [https://mod.io/monetizationterms](https://mod.io/monetizationterms)<br>
      __6__ = Acceptable Use Policy - [https://mod.io/aup](https://mod.io/aup)<br>
      __7__ = Cookies Policy - [https://mod.io/cookies](https://mod.io/cookies)
+     __8__ = Refund Policy - [https://mod.io/refund](https://mod.io/refund)
 
      There are three ways you can display mod.io agreements. Pick which is easiest and most suitable for your implementation.
 
@@ -15689,6 +15690,7 @@ curl -X POST https://*.modapi.io/v1/games/{game-id}/mods/{mod-id}/checkout \
   -H 'Content-Type: application/x-www-form-urlencoded' \ 
   -H 'Accept: application/json' \
   -d 'display_amount=undefined' \
+  -d 'subscribe=false' \
   -d 'idempotent_key=undefined'
 
 ```
@@ -15725,6 +15727,7 @@ $.ajax({
 const request = require('node-fetch');
 const inputBody = '{
   "display_amount": 0,
+  "subscribe": false,
   "idempotent_key": "string"
 }';
 const headers = {
@@ -16787,7 +16790,7 @@ monetization_options|integer|Monetization features games can enable:<br><br>__0_
 monetization_team|[Game Monetization Team Object](#schemagame_monetization_team_object)|The monetization team for this resource. [Game Monetization Team Object](#game-monetization-team-object).
 revenue_options|integer|Deprecated: Please use monetization_options instead, this will be removed in subsequent API version.
 max_stock|integer|Max Stock for mod scarcity.
-api_access_options|integer|Level of API access allowed by this game:<br><br>__0__ = All of the options below are disabled<br>__1__ = Allow 3rd parties to access this games API endpoints<br>__2__ = Allow mods to be downloaded directly (if disabled all download URLs will contain a frequently changing verification hash to stop unauthorized use)<br>__?__ = Add the options you want together, to enable multiple features (see [BITWISE fields](#bitwise-and-bitwise-and))
+api_access_options|integer|Level of API access allowed by this game:<br><br>__0__ = All of the options below are disabled<br>__1__ = Allow 3rd parties to access this games API endpoints<br>__2__ = Allow mods to be downloaded directly (if disabled all download URLs will contain a frequently changing verification hash to stop unauthorized use)<br>__4__ = Checks authorization on mods to be downloaded directly (if enabled the consuming application must send the users bearer token)<br>__8__ = Checks ownership on mods to be downloaded directly (if enabled the consuming application must send the users bearer token)<br>__?__ = Add the options you want together, to enable multiple features (see [BITWISE fields](#bitwise-and-bitwise-and))
 maturity_options|integer|Mature content setup for this game:<br><br>__0__ = Don't allow mature content in mods<br>__1__ = Allow mature content in mods<br>__2__ = This game is for mature audiences only<br>__?__ = Add the options you want together, to enable multiple features (see [BITWISE fields](#bitwise-and-bitwise-and))
 ugc_name|string|Word used to describe user-generated content (mods, items, addons etc).
 token_name|string|Word used to describe the games token.
@@ -19332,8 +19335,8 @@ invite_pending|integer|If the team member invitation is still pending:<br><br>__
 
 ```json
 {
-  "plaintext": "We use mod.io to support user-generated content in-game. By selecting "I Agree" you agree to the mod.io Terms of Use and a mod.io account will be created for you (using your display name, avatar and ID). Please see the mod.io Privacy Policy on how mod.io processes your personal data.",
-  "html": "<p>We use <a href="https://mod.io">mod.io</a> to support user-generated content in-game. By selecting "I Agree" you agree to the mod.io <a href="https://mod.io/terms">Terms of Use</a> and a mod.io account will be created for you (using your  display name, avatar and ID). Please see the mod.io <a href="https://mod.io/privacy">Privacy Policy</a> on how mod.io processes your personal data.</p>",
+  "plaintext": "This game uses mod.io to support user-generated content. By selecting "I Agree" you agree to the mod.io Terms of Use and a mod.io account will be created for you (using your display name, avatar and ID). Please see the mod.io Privacy Policy on how mod.io processes your personal data.",
+  "html": "<p>This game uses <a href="https://mod.io">mod.io</a> to support user-generated content. By selecting "I Agree" you agree to the mod.io <a href="https://mod.io/terms">Terms of Use</a> and a mod.io account will be created for you (using your  display name, avatar and ID). Please see the mod.io <a href="https://mod.io/privacy">Privacy Policy</a> on how mod.io processes your personal data.</p>",
   "buttons": {
     "agree": {
       "text": "I Agree"
