@@ -2366,7 +2366,7 @@ Accept: application/json
 
 <p><strong>Example Dialog:</strong></p>
 
-<p><aside class="consent">We use mod.io to support user-generated content in-game. By clicking 'I Agree' you agree to the mod.io Terms of Use and a mod.io account will be created for you (using your display name, avatar and ID). Please see the mod.io Privacy Policy on how mod.io processes your personal data.<br><br><div style="text-align:center">
+<p><aside class="consent">This game uses mod.io to support user-generated content. By clicking 'I Agree' you agree to the mod.io Terms of Use and a mod.io account will be created for you (using your display name, avatar and ID). Please see the mod.io Privacy Policy on how mod.io processes your personal data.<br><br><div style="text-align:center">
 <span class="versionwrap cursor">     I Agree     </span> <span class="versionwrap outline cursor">No, Thanks</span><br><br><a href="https://mod.io/terms/widget" class="colorbox">Terms of Use</a> - <a href="https://mod.io/privacy/widget" class="colorbox">Privacy Policy</a><br>
 </div></aside></p>
 
@@ -2387,8 +2387,8 @@ Accept: application/json
 <p>Example response</p>
 </blockquote>
 <div class="highlight"><pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
-  </span><span class="nl">"plaintext"</span><span class="p">:</span><span class="w"> </span><span class="s2">"We use mod.io to support user-generated content in-game. By selecting "</span><span class="err">I</span><span class="w"> </span><span class="err">Agree</span><span class="s2">" you agree to the mod.io Terms of Use and a mod.io account will be created for you (using your display name, avatar and ID). Please see the mod.io Privacy Policy on how mod.io processes your personal data."</span><span class="p">,</span><span class="w">
-  </span><span class="nl">"html"</span><span class="p">:</span><span class="w"> </span><span class="s2">"&lt;p&gt;We use &lt;a href="</span><span class="err">https://mod.io</span><span class="s2">"&gt;mod.io&lt;/a&gt; to support user-generated content in-game. By selecting "</span><span class="err">I</span><span class="w"> </span><span class="err">Agree</span><span class="s2">" you agree to the mod.io &lt;a href="</span><span class="err">https://mod.io/terms</span><span class="s2">"&gt;Terms of Use&lt;/a&gt; and a mod.io account will be created for you (using your  display name, avatar and ID). Please see the mod.io &lt;a href="</span><span class="err">https://mod.io/privacy</span><span class="s2">"&gt;Privacy Policy&lt;/a&gt; on how mod.io processes your personal data.&lt;/p&gt;"</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"plaintext"</span><span class="p">:</span><span class="w"> </span><span class="s2">"This game uses mod.io to support user-generated content. By selecting "</span><span class="err">I</span><span class="w"> </span><span class="err">Agree</span><span class="s2">" you agree to the mod.io Terms of Use and a mod.io account will be created for you (using your display name, avatar and ID). Please see the mod.io Privacy Policy on how mod.io processes your personal data."</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"html"</span><span class="p">:</span><span class="w"> </span><span class="s2">"&lt;p&gt;This game uses &lt;a href="</span><span class="err">https://mod.io</span><span class="s2">"&gt;mod.io&lt;/a&gt; to support user-generated content. By selecting "</span><span class="err">I</span><span class="w"> </span><span class="err">Agree</span><span class="s2">" you agree to the mod.io &lt;a href="</span><span class="err">https://mod.io/terms</span><span class="s2">"&gt;Terms of Use&lt;/a&gt; and a mod.io account will be created for you (using your  display name, avatar and ID). Please see the mod.io &lt;a href="</span><span class="err">https://mod.io/privacy</span><span class="s2">"&gt;Privacy Policy&lt;/a&gt; on how mod.io processes your personal data.&lt;/p&gt;"</span><span class="p">,</span><span class="w">
   </span><span class="nl">"buttons"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
     </span><span class="nl">"agree"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
       </span><span class="nl">"text"</span><span class="p">:</span><span class="w"> </span><span class="s2">"I Agree"</span><span class="w">
@@ -4351,7 +4351,7 @@ curl <span class="nt">-X</span> POST https://<span class="k">*</span>.modapi.io/
 </code></pre></div>
 <p><span class="httpmethod POST">POST</span> <span class="endpointheading">/external/openidauth</span></p>
 
-<p>Request an access token on behalf of an OpenID identity provider. To use this method of authentication, you must configure the OpenID config in your games authentication admin page. A Successful request will return an <a href="#access-token-object">Access Token Object</a>.</p>
+<p>Request an access token on behalf of an OpenID identity provider. To use this method of authentication, you must configure the OpenID config in your game's authentication admin page. A Successful request will return an <a href="#access-token-object">Access Token Object</a>.</p>
 
 <p><strong>NOTE:</strong> The ability to authenticate players using your identity provider is a feature for advanced partners only. If you are interested in becoming an advanced partner, please <a href="mailto:developers@mod.io?subject=OpenID%20SSO%20Request">contact us</a>.</p>
 
@@ -6504,7 +6504,7 @@ curl <span class="nt">-X</span> POST https://<span class="k">*</span>.modapi.io/
 <td>name_id</td>
 <td>string</td>
 <td></td>
-<td>Path for the guide on mod.io. For example: https://mod.io/g/gamename/r/<strong>guide-name-id-here</strong>. If no <code>name_id</code> is specified the <code>name</code> will be used. For example: <em>'Stellaris Shader Guide'</em> will become <em>'stellaris-shader-guide'</em>. Cannot exceed 80 characters.</td>
+<td>Path for the guide on mod.io. For example: https://mod.io/g/gamename/r/<strong>guide-name-id-here</strong>. If no <code>name_id</code> is specified the <code>name</code> will be used. For example: <em>'Stellaris Shader Guide'</em> will become <em>'stellaris-shader-guide'</em>. Cannot exceed 50 characters.</td>
 </tr>
 <tr>
 <td>summary</td>
@@ -6760,7 +6760,7 @@ curl <span class="nt">-X</span> POST https://<span class="k">*</span>.modapi.io/
 <td>name_id</td>
 <td>string</td>
 <td></td>
-<td>Path for the guide on mod.io. For example: https://mod.io/g/gamename/r/<strong>guide-name-id-here</strong>. If no <code>name_id</code> is specified the <code>name</code> will be used. For example: <em>'Stellaris Shader Guide'</em> will become <em>'stellaris-shader-guide'</em>. Cannot exceed 80 characters.</td>
+<td>Path for the guide on mod.io. For example: https://mod.io/g/gamename/r/<strong>guide-name-id-here</strong>. If no <code>name_id</code> is specified the <code>name</code> will be used. For example: <em>'Stellaris Shader Guide'</em> will become <em>'stellaris-shader-guide'</em>. Cannot exceed 50 characters.</td>
 </tr>
 <tr>
 <td>summary</td>
@@ -7317,6 +7317,11 @@ Accept: application/json
 <td>revenue_type</td>
 <td>integer</td>
 <td>Finds all mods with or without a price. Defaults to free. <br><br><strong>0</strong> = Free<br><strong>1</strong> = Paid<br><strong>2</strong> = Free and Paid</td>
+</tr>
+<tr>
+<td>stock</td>
+<td>integer</td>
+<td>Finds all mods that are in/out of stock. <br><br><strong>0</strong> = Sold Out<br><strong>1</strong> = In Stock</td>
 </tr>
 </tbody>
 </table>
@@ -7890,7 +7895,7 @@ curl <span class="nt">-X</span> POST https://<span class="k">*</span>.modapi.io/
 <td>name_id</td>
 <td>string</td>
 <td></td>
-<td>Path for the mod on mod.io. For example: https://mod.io/g/gamename/m/<strong>mod-name-id-here</strong>. If no <code>name_id</code> is specified the <code>name</code> will be used. For example: <em>'Stellaris Shader Mod'</em> will become <em>'stellaris-shader-mod'</em>. Cannot exceed 80 characters.</td>
+<td>Path for the mod on mod.io. For example: https://mod.io/g/gamename/m/<strong>mod-name-id-here</strong>. If no <code>name_id</code> is specified the <code>name</code> will be used. For example: <em>'Stellaris Shader Mod'</em> will become <em>'stellaris-shader-mod'</em>. Cannot exceed 50 characters.</td>
 </tr>
 <tr>
 <td>summary</td>
@@ -7922,12 +7927,6 @@ curl <span class="nt">-X</span> POST https://<span class="k">*</span>.modapi.io/
 <td>int</td>
 <td>true</td>
 <td>The price of the mod.<br><br><strong>NOTE:</strong> The value of this field will be ignored if the parent game's queue is enabled (see <code>curation_option</code> field in <a href="#game-object">Game Object</a>).</td>
-</tr>
-<tr>
-<td>monetization_options</td>
-<td>integer</td>
-<td>Monetization option(s) enabled by the mod creator.<br><br><strong>NOTE:</strong> The value of this field will be ignored if the parent game's queue is enabled (see <code>curation_option</code> field in <a href="#game-object">Game Object</a>). <br><br><strong>0</strong> = None<br><strong>1</strong> = Enabled<br><strong>2</strong> = Marketplace On<br><strong>?</strong> = Add the options you want together, to enable multiple filters (see <a href="#bitwise-and-bitwise-and">BITWISE fields</a>)</td>
-<td></td>
 </tr>
 <tr>
 <td>maturity_option</td>
@@ -8298,7 +8297,7 @@ curl <span class="nt">-X</span> POST https://<span class="k">*</span>.modapi.io/
 <td>name_id</td>
 <td>string</td>
 <td></td>
-<td>Path for the mod on mod.io. For example: https://mod.io/g/gamename/m/<strong>mod-name-id-here</strong>. Cannot exceed 80 characters.</td>
+<td>Path for the mod on mod.io. For example: https://mod.io/g/gamename/m/<strong>mod-name-id-here</strong>. Cannot exceed 50 characters.</td>
 </tr>
 <tr>
 <td>summary</td>
@@ -8327,8 +8326,8 @@ curl <span class="nt">-X</span> POST https://<span class="k">*</span>.modapi.io/
 <tr>
 <td>monetization_options</td>
 <td>integer</td>
-<td>Monetization option(s) enabled by the mod creator.<br><br><strong>NOTE:</strong> The value of this field will be ignored if the parent game's queue is enabled (see <code>curation_option</code> field in <a href="#game-object">Game Object</a>). <br><br><strong>0</strong> = None<br><strong>1</strong> = Enabled<br><strong>2</strong> = Marketplace On<br><strong>?</strong> = Add the options you want together, to enable multiple filters (see <a href="#bitwise-and-bitwise-and">BITWISE fields</a>)</td>
 <td></td>
+<td>Monetization option(s) enabled by the mod creator.<br><br><strong>NOTE:</strong> The value of this field will be ignored if the parent game's queue is enabled (see <code>curation_option</code> field in <a href="#game-object">Game Object</a>). <br><br><strong>0</strong> = None<br><strong>1</strong> = Enabled<br><strong>2</strong> = Marketplace On<br><strong>?</strong> = Add the options you want together, to enable multiple filters (see <a href="#bitwise-and-bitwise-and">BITWISE fields</a>)</td>
 </tr>
 <tr>
 <td>stock</td>
@@ -17573,7 +17572,8 @@ Accept: application/json
      <strong>4</strong> = API Access Terms - <a href="https://mod.io/apiterms">https://mod.io/apiterms</a><br>
      <strong>5</strong> = Monetization Terms - <a href="https://mod.io/monetizationterms">https://mod.io/monetizationterms</a><br>
      <strong>6</strong> = Acceptable Use Policy - <a href="https://mod.io/aup">https://mod.io/aup</a><br>
-     <strong>7</strong> = Cookies Policy - <a href="https://mod.io/cookies">https://mod.io/cookies</a></p>
+     <strong>7</strong> = Cookies Policy - <a href="https://mod.io/cookies">https://mod.io/cookies</a>
+     <strong>8</strong> = Refund Policy - <a href="https://mod.io/refund">https://mod.io/refund</a></p>
 
 <p>There are three ways you can display mod.io agreements. Pick which is easiest and most suitable for your implementation.</p>
 
@@ -20813,6 +20813,7 @@ curl <span class="nt">-X</span> POST https://<span class="k">*</span>.modapi.io/
   <span class="nt">-H</span> <span class="s1">'Content-Type: application/x-www-form-urlencoded'</span> <span class="se">\ </span>
   <span class="nt">-H</span> <span class="s1">'Accept: application/json'</span> <span class="se">\</span>
   <span class="nt">-d</span> <span class="s1">'display_amount=undefined'</span> <span class="se">\</span>
+  <span class="nt">-d</span> <span class="s1">'subscribe=false'</span> <span class="se">\</span>
   <span class="nt">-d</span> <span class="s1">'idempotent_key=undefined'</span>
 
 </code></pre></div><div class="highlight"><pre class="highlight http tab-http"><code><span class="nf">POST</span> <span class="nn">https://*.modapi.io/v1/games/{game-id}/mods/{mod-id}/checkout</span> <span class="k">HTTP</span><span class="o">/</span><span class="m">1.1</span>
@@ -20840,6 +20841,7 @@ curl <span class="nt">-X</span> POST https://<span class="k">*</span>.modapi.io/
 </code></pre></div><div class="highlight"><pre class="highlight javascript tab-javascript--nodejs"><code><span class="kd">const</span> <span class="nx">request</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="dl">'</span><span class="s1">node-fetch</span><span class="dl">'</span><span class="p">);</span>
 <span class="kd">const</span> <span class="nx">inputBody</span> <span class="o">=</span> <span class="dl">'</span><span class="s1">{
   "display_amount": 0,
+  "subscribe": false,
   "idempotent_key": "string"
 }</span><span class="dl">'</span><span class="p">;</span>
 <span class="kd">const</span> <span class="nx">headers</span> <span class="o">=</span> <span class="p">{</span>
@@ -22365,7 +22367,7 @@ To perform this request, you must be authenticated via one of the following meth
 <tr>
 <td>api_access_options</td>
 <td>integer</td>
-<td>Level of API access allowed by this game:<br><br><strong>0</strong> = All of the options below are disabled<br><strong>1</strong> = Allow 3rd parties to access this games API endpoints<br><strong>2</strong> = Allow mods to be downloaded directly (if disabled all download URLs will contain a frequently changing verification hash to stop unauthorized use)<br><strong>?</strong> = Add the options you want together, to enable multiple features (see <a href="#bitwise-and-bitwise-and">BITWISE fields</a>)</td>
+<td>Level of API access allowed by this game:<br><br><strong>0</strong> = All of the options below are disabled<br><strong>1</strong> = Allow 3rd parties to access this games API endpoints<br><strong>2</strong> = Allow mods to be downloaded directly (if disabled all download URLs will contain a frequently changing verification hash to stop unauthorized use)<br><strong>4</strong> = Checks authorization on mods to be downloaded directly (if enabled the consuming application must send the users bearer token)<br><strong>8</strong> = Checks ownership on mods to be downloaded directly (if enabled the consuming application must send the users bearer token)<br><strong>?</strong> = Add the options you want together, to enable multiple features (see <a href="#bitwise-and-bitwise-and">BITWISE fields</a>)</td>
 </tr>
 <tr>
 <td>maturity_options</td>
@@ -26231,8 +26233,8 @@ To perform this request, you must be authenticated via one of the following meth
 <h2 id="terms-object">Terms Object</h2>
 <p><a name="schematerms_object"></a></p>
 <div class="highlight"><pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
-  </span><span class="nl">"plaintext"</span><span class="p">:</span><span class="w"> </span><span class="s2">"We use mod.io to support user-generated content in-game. By selecting "</span><span class="err">I</span><span class="w"> </span><span class="err">Agree</span><span class="s2">" you agree to the mod.io Terms of Use and a mod.io account will be created for you (using your display name, avatar and ID). Please see the mod.io Privacy Policy on how mod.io processes your personal data."</span><span class="p">,</span><span class="w">
-  </span><span class="nl">"html"</span><span class="p">:</span><span class="w"> </span><span class="s2">"&lt;p&gt;We use &lt;a href="</span><span class="err">https://mod.io</span><span class="s2">"&gt;mod.io&lt;/a&gt; to support user-generated content in-game. By selecting "</span><span class="err">I</span><span class="w"> </span><span class="err">Agree</span><span class="s2">" you agree to the mod.io &lt;a href="</span><span class="err">https://mod.io/terms</span><span class="s2">"&gt;Terms of Use&lt;/a&gt; and a mod.io account will be created for you (using your  display name, avatar and ID). Please see the mod.io &lt;a href="</span><span class="err">https://mod.io/privacy</span><span class="s2">"&gt;Privacy Policy&lt;/a&gt; on how mod.io processes your personal data.&lt;/p&gt;"</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"plaintext"</span><span class="p">:</span><span class="w"> </span><span class="s2">"This game uses mod.io to support user-generated content. By selecting "</span><span class="err">I</span><span class="w"> </span><span class="err">Agree</span><span class="s2">" you agree to the mod.io Terms of Use and a mod.io account will be created for you (using your display name, avatar and ID). Please see the mod.io Privacy Policy on how mod.io processes your personal data."</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"html"</span><span class="p">:</span><span class="w"> </span><span class="s2">"&lt;p&gt;This game uses &lt;a href="</span><span class="err">https://mod.io</span><span class="s2">"&gt;mod.io&lt;/a&gt; to support user-generated content. By selecting "</span><span class="err">I</span><span class="w"> </span><span class="err">Agree</span><span class="s2">" you agree to the mod.io &lt;a href="</span><span class="err">https://mod.io/terms</span><span class="s2">"&gt;Terms of Use&lt;/a&gt; and a mod.io account will be created for you (using your  display name, avatar and ID). Please see the mod.io &lt;a href="</span><span class="err">https://mod.io/privacy</span><span class="s2">"&gt;Privacy Policy&lt;/a&gt; on how mod.io processes your personal data.&lt;/p&gt;"</span><span class="p">,</span><span class="w">
   </span><span class="nl">"buttons"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
     </span><span class="nl">"agree"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
       </span><span class="nl">"text"</span><span class="p">:</span><span class="w"> </span><span class="s2">"I Agree"</span><span class="w">
