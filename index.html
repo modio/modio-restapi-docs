@@ -620,12 +620,6 @@
                     <a href="#get-game-tag-options" class="toc-h2 toc-link" data-title="Tags">Get Game Tag Options</a>
                   </li>
                   <li>
-                    <a href="#add-game-tag-option" class="toc-h2 toc-link" data-title="Tags">Add Game Tag Option</a>
-                  </li>
-                  <li>
-                    <a href="#delete-game-tag-option" class="toc-h2 toc-link" data-title="Tags">Delete Game Tag Option</a>
-                  </li>
-                  <li>
                     <a href="#rename-game-tag" class="toc-h2 toc-link" data-title="Tags">Rename Game Tag</a>
                   </li>
                   <li>
@@ -2362,7 +2356,7 @@ Accept: application/json
 </code></pre></div>
 <p><span class="httpmethod GET">GET</span> <span class="endpointheading">/authenticate/terms</span></p>
 
-<p>The purpose of this endpoint is to provide the text, links and buttons you can use to get a users agreement and consent prior to authenticating them in-game (your dialog should look similar to the example below). If you are authenticating using platform SSO, you must call this endpoint with the <code>X-Modio-Portal</code> <a href="#targeting-a-portal">header set</a>, so the text is localized to match the platforms requirements. A successful response will return a <a href="#terms-object">Terms Object</a>.</p>
+<p>The purpose of this endpoint is to provide the text, links and buttons you can use to get a users agreement and consent prior to authenticating them in-game (your dialog should look similar to the example below). This text will be localized based on the <code>Accept-Language</code> header, into one of our <a href="#localization">supported languages</a> (note: our full Terms of Use and Privacy Policy are currently in English-only). If you are authenticating using platform SSO, you must call this endpoint with the <code>X-Modio-Portal</code> <a href="#targeting-a-portal">header set</a>, so the text is localized to match the platforms requirements. A successful response will return a <a href="#terms-object">Terms Object</a>.</p>
 
 <p><strong>Example Dialog:</strong></p>
 
@@ -14279,364 +14273,6 @@ Accept: application/json
 To perform this request, you must be authenticated via one of the following methods:
 <a href="#authentication">api_key</a>, <a href="#authentication">OAuth 2</a> (Scopes: read)
 </aside>
-<h2 id="add-game-tag-option">Add Game Tag Option</h2>
-<blockquote>
-<p>Example request</p>
-</blockquote>
-<div class="highlight"><pre class="highlight shell tab-shell"><code><span class="c"># You can also use wget</span>
-curl <span class="nt">-X</span> POST https://<span class="k">*</span>.modapi.io/v1/games/<span class="o">{</span>game-id<span class="o">}</span>/tags <span class="se">\</span>
-  <span class="nt">-H</span> <span class="s1">'Authorization: Bearer {access-token}'</span> <span class="se">\ </span>
-  <span class="nt">-H</span> <span class="s1">'Content-Type: application/x-www-form-urlencoded'</span> <span class="se">\ </span>
-  <span class="nt">-H</span> <span class="s1">'Accept: application/json'</span> <span class="se">\</span>
-  <span class="nt">-d</span> <span class="s1">'name=Difficulty'</span> <span class="se">\</span>
-  <span class="nt">-d</span> <span class="s1">'type=dropdown'</span> <span class="se">\</span>
-  <span class="nt">-d</span> <span class="s1">'hidden=false'</span> <span class="se">\</span>
-  <span class="nt">-d</span> <span class="s1">'locked=false'</span> <span class="se">\</span>
-  <span class="nt">-d</span> <span class="s1">'tags[]=tags[]=easy&amp;tags[]=medium&amp;tags[]=hard'</span>
-
-</code></pre></div><div class="highlight"><pre class="highlight http tab-http"><code><span class="nf">POST</span> <span class="nn">https://*.modapi.io/v1/games/{game-id}/tags</span> <span class="k">HTTP</span><span class="o">/</span><span class="m">1.1</span>
-<span class="na">Host</span><span class="p">:</span> <span class="s">*.modapi.io</span>
-<span class="na">Content-Type</span><span class="p">:</span> <span class="s">application/x-www-form-urlencoded</span>
-<span class="na">Accept</span><span class="p">:</span> <span class="s">application/json</span>
-<span class="na">Authorization</span><span class="p">:</span> <span class="s">Bearer {access-token}</span>
-
-</code></pre></div><div class="highlight"><pre class="highlight javascript tab-javascript"><code><span class="kd">var</span> <span class="nx">headers</span> <span class="o">=</span> <span class="p">{</span>
-  <span class="dl">'</span><span class="s1">Authorization</span><span class="dl">'</span><span class="p">:</span><span class="dl">'</span><span class="s1">Bearer {access-token}</span><span class="dl">'</span><span class="p">,</span>
-  <span class="dl">'</span><span class="s1">Content-Type</span><span class="dl">'</span><span class="p">:</span><span class="dl">'</span><span class="s1">application/x-www-form-urlencoded</span><span class="dl">'</span><span class="p">,</span>
-  <span class="dl">'</span><span class="s1">Accept</span><span class="dl">'</span><span class="p">:</span><span class="dl">'</span><span class="s1">application/json</span><span class="dl">'</span>
-
-<span class="p">};</span>
-
-<span class="nx">$</span><span class="p">.</span><span class="nx">ajax</span><span class="p">({</span>
-  <span class="na">url</span><span class="p">:</span> <span class="dl">'</span><span class="s1">https://*.modapi.io/v1/games/{game-id}/tags</span><span class="dl">'</span><span class="p">,</span>
-  <span class="na">method</span><span class="p">:</span> <span class="dl">'</span><span class="s1">post</span><span class="dl">'</span><span class="p">,</span>
-
-  <span class="na">headers</span><span class="p">:</span> <span class="nx">headers</span><span class="p">,</span>
-  <span class="na">success</span><span class="p">:</span> <span class="kd">function</span><span class="p">(</span><span class="nx">data</span><span class="p">)</span> <span class="p">{</span>
-    <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">JSON</span><span class="p">.</span><span class="nx">stringify</span><span class="p">(</span><span class="nx">data</span><span class="p">));</span>
-  <span class="p">}</span>
-<span class="p">})</span>
-</code></pre></div><div class="highlight"><pre class="highlight javascript tab-javascript--nodejs"><code><span class="kd">const</span> <span class="nx">request</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="dl">'</span><span class="s1">node-fetch</span><span class="dl">'</span><span class="p">);</span>
-<span class="kd">const</span> <span class="nx">inputBody</span> <span class="o">=</span> <span class="dl">'</span><span class="s1">{
-  "name": "Difficulty",
-  "type": "dropdown",
-  "hidden": "false",
-  "locked": "false",
-  "tags": "tags[]=easy&amp;tags[]=medium&amp;tags[]=hard"
-}</span><span class="dl">'</span><span class="p">;</span>
-<span class="kd">const</span> <span class="nx">headers</span> <span class="o">=</span> <span class="p">{</span>
-  <span class="dl">'</span><span class="s1">Authorization</span><span class="dl">'</span><span class="p">:</span><span class="dl">'</span><span class="s1">Bearer {access-token}</span><span class="dl">'</span><span class="p">,</span>
-  <span class="dl">'</span><span class="s1">Content-Type</span><span class="dl">'</span><span class="p">:</span><span class="dl">'</span><span class="s1">application/x-www-form-urlencoded</span><span class="dl">'</span><span class="p">,</span>
-  <span class="dl">'</span><span class="s1">Accept</span><span class="dl">'</span><span class="p">:</span><span class="dl">'</span><span class="s1">application/json</span><span class="dl">'</span>
-
-<span class="p">};</span>
-
-<span class="nx">fetch</span><span class="p">(</span><span class="dl">'</span><span class="s1">https://*.modapi.io/v1/games/{game-id}/tags</span><span class="dl">'</span><span class="p">,</span>
-<span class="p">{</span>
-  <span class="na">method</span><span class="p">:</span> <span class="dl">'</span><span class="s1">POST</span><span class="dl">'</span><span class="p">,</span>
-  <span class="na">body</span><span class="p">:</span> <span class="nx">inputBody</span><span class="p">,</span>
-  <span class="na">headers</span><span class="p">:</span> <span class="nx">headers</span>
-<span class="p">})</span>
-<span class="p">.</span><span class="nx">then</span><span class="p">(</span><span class="kd">function</span><span class="p">(</span><span class="nx">res</span><span class="p">)</span> <span class="p">{</span>
-    <span class="k">return</span> <span class="nx">res</span><span class="p">.</span><span class="nx">json</span><span class="p">();</span>
-<span class="p">}).</span><span class="nx">then</span><span class="p">(</span><span class="kd">function</span><span class="p">(</span><span class="nx">body</span><span class="p">)</span> <span class="p">{</span>
-    <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">body</span><span class="p">);</span>
-<span class="p">});</span>
-</code></pre></div><div class="highlight"><pre class="highlight python tab-python"><code><span class="kn">import</span> <span class="nn">requests</span>
-<span class="n">headers</span> <span class="o">=</span> <span class="p">{</span>
-  <span class="s">'Authorization'</span><span class="p">:</span> <span class="s">'Bearer {access-token}'</span><span class="p">,</span>
-  <span class="s">'Content-Type'</span><span class="p">:</span> <span class="s">'application/x-www-form-urlencoded'</span><span class="p">,</span>
-  <span class="s">'Accept'</span><span class="p">:</span> <span class="s">'application/json'</span>
-<span class="p">}</span>
-
-<span class="n">r</span> <span class="o">=</span> <span class="n">requests</span><span class="p">.</span><span class="n">post</span><span class="p">(</span><span class="s">'https://*.modapi.io/v1/games/{game-id}/tags'</span><span class="p">,</span> <span class="n">params</span><span class="o">=</span><span class="p">{</span>
-
-<span class="p">},</span> <span class="n">headers</span> <span class="o">=</span> <span class="n">headers</span><span class="p">)</span>
-
-<span class="k">print</span> <span class="n">r</span><span class="p">.</span><span class="n">json</span><span class="p">()</span>
-</code></pre></div><div class="highlight"><pre class="highlight java tab-java"><code><span class="no">URL</span> <span class="n">obj</span> <span class="o">=</span> <span class="k">new</span> <span class="no">URL</span><span class="o">(</span><span class="s">"https://*.modapi.io/v1/games/{game-id}/tags"</span><span class="o">);</span>
-<span class="nc">HttpURLConnection</span> <span class="n">con</span> <span class="o">=</span> <span class="o">(</span><span class="nc">HttpURLConnection</span><span class="o">)</span> <span class="n">obj</span><span class="o">.</span><span class="na">openConnection</span><span class="o">();</span>
-<span class="n">con</span><span class="o">.</span><span class="na">setRequestMethod</span><span class="o">(</span><span class="s">"POST"</span><span class="o">);</span>
-<span class="kt">int</span> <span class="n">responseCode</span> <span class="o">=</span> <span class="n">con</span><span class="o">.</span><span class="na">getResponseCode</span><span class="o">();</span>
-<span class="nc">BufferedReader</span> <span class="n">in</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">BufferedReader</span><span class="o">(</span>
-    <span class="k">new</span> <span class="nf">InputStreamReader</span><span class="o">(</span><span class="n">con</span><span class="o">.</span><span class="na">getInputStream</span><span class="o">()));</span>
-<span class="nc">String</span> <span class="n">inputLine</span><span class="o">;</span>
-<span class="nc">StringBuffer</span> <span class="n">response</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">StringBuffer</span><span class="o">();</span>
-<span class="k">while</span> <span class="o">((</span><span class="n">inputLine</span> <span class="o">=</span> <span class="n">in</span><span class="o">.</span><span class="na">readLine</span><span class="o">())</span> <span class="o">!=</span> <span class="kc">null</span><span class="o">)</span> <span class="o">{</span>
-    <span class="n">response</span><span class="o">.</span><span class="na">append</span><span class="o">(</span><span class="n">inputLine</span><span class="o">);</span>
-<span class="o">}</span>
-<span class="n">in</span><span class="o">.</span><span class="na">close</span><span class="o">();</span>
-<span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="n">response</span><span class="o">.</span><span class="na">toString</span><span class="o">());</span>
-</code></pre></div>
-<p><span class="httpmethod POST">POST</span> <span class="endpointheading">/games/{game-id}/tags</span></p>
-
-<p>Add tags which mods can apply to their profiles. Successful request will return <a href="#message-object">Message Object</a>.</p>
-
-<p>Tagging is a critical feature that powers the searching and filtering of mods for your game, as well as allowing you to control how mods are installed and played. For example you might enforce mods to be a particular type (map, model, script, save, effects, blueprint), which dictates how you install it. You may use tags to specify what the mod replaces (building, prop, car, boat, character). Or perhaps the tags describe the theme of the mod (fun, scenic, realism). The implementation is up to you, but the more detail you support the better filtering and searching becomes. If you need to store more advanced information, you can also use <a href="#metadata">Metadata Key Value Pairs</a>.</p>
-
-<p><strong>NOTE:</strong> You can also manage tags by editing <a href="https://mod.io/library">your games profile</a> on the mod.io website. This is the recommended approach.</p>
-
-<table>
-<thead>
-<tr>
-<th>Parameter</th>
-<th>Type</th>
-<th>Required</th>
-<th>Description</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>name</td>
-<td>string</td>
-<td>true</td>
-<td>Name of the tag group, for example you may want to have 'Difficulty' as the name with 'Easy', 'Medium' and 'Hard' as the tag values.<br><br><strong>NOTE:</strong> If the tag name already exists, its parameters will be overwritten and new tags will be added to the group (an edit). There is a separate endpoint to <a href="#delete-game-tag-option">delete tags</a>.</td>
-</tr>
-<tr>
-<td>type</td>
-<td>string</td>
-<td>true</td>
-<td>Determines whether you allow users to only select one tag (dropdown) or multiple tags (checkbox):<br><br>- <em>dropdown</em> = Mods can select only one tag from this group, dropdown menu shown on site profile.<br>- <em>checkboxes</em> = Mods can select multiple tags from this group, checkboxes shown on site profile.</td>
-</tr>
-<tr>
-<td>hidden</td>
-<td>boolean</td>
-<td></td>
-<td>This group of tags should not be shown to users. Useful for games to tag special functionality, to filter on and use behind the scenes. You can also use <a href="#metadata">Metadata Key Value Pairs</a> for more arbitrary data.</td>
-</tr>
-<tr>
-<td>locked</td>
-<td>boolean</td>
-<td></td>
-<td>This group of tags can only be edited by game admins. Useful for games to tag special functionality, which users can see and filter on. Can be combined with hidden if you want the tags group locked and hidden.</td>
-</tr>
-<tr>
-<td>tags[]</td>
-<td>string</td>
-<td>true</td>
-<td>Tags that mod creators can choose to apply to their mods. Every tag to apply requires a separate field with tags[] as the key (eg. tags[]=Easy, tags[]=Medium, tags[]=Hard).</td>
-</tr>
-</tbody>
-</table>
-
-<blockquote>
-<p>Example response</p>
-</blockquote>
-<div class="highlight"><pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
-  </span><span class="nl">"code"</span><span class="p">:</span><span class="w"> </span><span class="mi">201</span><span class="p">,</span><span class="w">
-  </span><span class="nl">"message"</span><span class="p">:</span><span class="w"> </span><span class="s2">"You have successfully added categories/tags to the specified game."</span><span class="w">
-</span><span class="p">}</span><span class="w">
-
-</span></code></pre></div>
-<h3 id="Add-Game-Tag-Option-responses">Responses</h3>
-
-<table>
-<thead>
-<tr>
-<th>Status</th>
-<th>Meaning</th>
-<th>Error Ref</th>
-<th>Description</th>
-<th>Response Schema</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>201</td>
-<td><a href="https://tools.ietf.org/html/rfc7231#section-6.3.2">Created</a></td>
-<td></td>
-<td>Created</td>
-<td><a href="#message-object">Message Object</a></td>
-</tr>
-<tr>
-<td>403</td>
-<td><a href="https://tools.ietf.org/html/rfc7231#section-6.5.3">Forbidden</a></td>
-<td>14012</td>
-<td>The authenticated user does not have permission to submit tags for the specified game. Ensure the user is part of the game team before attempting the request again.</td>
-<td><a href="#schemaerror_object">Error Object</a></td>
-</tr>
-</tbody>
-</table>
-<h3 id="response-headers-7">Response Headers</h3>
-<table>
-<thead>
-<tr>
-<th>Status</th>
-<th>Header</th>
-<th>Type</th>
-<th>Format</th>
-<th>Description</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>201</td>
-<td>Location</td>
-<td>string</td>
-<td></td>
-<td>URL to newly created resource</td>
-</tr>
-</tbody>
-</table>
-
-<aside class="auth-notice">
-To perform this request, you must be authenticated via one of the following methods:
-<a href="#authentication">OAuth 2</a> (Scopes: write)
-</aside>
-<h2 id="delete-game-tag-option">Delete Game Tag Option</h2>
-<blockquote>
-<p>Example request</p>
-</blockquote>
-<div class="highlight"><pre class="highlight shell tab-shell"><code><span class="c"># You can also use wget</span>
-curl <span class="nt">-X</span> DELETE https://<span class="k">*</span>.modapi.io/v1/games/<span class="o">{</span>game-id<span class="o">}</span>/tags <span class="se">\</span>
-  <span class="nt">-H</span> <span class="s1">'Authorization: Bearer {access-token}'</span> <span class="se">\ </span>
-  <span class="nt">-H</span> <span class="s1">'Content-Type: application/x-www-form-urlencoded'</span> <span class="se">\ </span>
-  <span class="nt">-H</span> <span class="s1">'Accept: application/json'</span> <span class="se">\</span>
-  <span class="nt">-d</span> <span class="s1">'name=Difficulty'</span> <span class="se">\</span>
-  <span class="nt">-d</span> <span class="s1">'tags[]=easy'</span>
-
-</code></pre></div><div class="highlight"><pre class="highlight http tab-http"><code><span class="nf">DELETE</span> <span class="nn">https://*.modapi.io/v1/games/{game-id}/tags</span> <span class="k">HTTP</span><span class="o">/</span><span class="m">1.1</span>
-<span class="na">Host</span><span class="p">:</span> <span class="s">*.modapi.io</span>
-<span class="na">Content-Type</span><span class="p">:</span> <span class="s">application/x-www-form-urlencoded</span>
-<span class="na">Accept</span><span class="p">:</span> <span class="s">application/json</span>
-<span class="na">Authorization</span><span class="p">:</span> <span class="s">Bearer {access-token}</span>
-
-</code></pre></div><div class="highlight"><pre class="highlight javascript tab-javascript"><code><span class="kd">var</span> <span class="nx">headers</span> <span class="o">=</span> <span class="p">{</span>
-  <span class="dl">'</span><span class="s1">Authorization</span><span class="dl">'</span><span class="p">:</span><span class="dl">'</span><span class="s1">Bearer {access-token}</span><span class="dl">'</span><span class="p">,</span>
-  <span class="dl">'</span><span class="s1">Content-Type</span><span class="dl">'</span><span class="p">:</span><span class="dl">'</span><span class="s1">application/x-www-form-urlencoded</span><span class="dl">'</span><span class="p">,</span>
-  <span class="dl">'</span><span class="s1">Accept</span><span class="dl">'</span><span class="p">:</span><span class="dl">'</span><span class="s1">application/json</span><span class="dl">'</span>
-
-<span class="p">};</span>
-
-<span class="nx">$</span><span class="p">.</span><span class="nx">ajax</span><span class="p">({</span>
-  <span class="na">url</span><span class="p">:</span> <span class="dl">'</span><span class="s1">https://*.modapi.io/v1/games/{game-id}/tags</span><span class="dl">'</span><span class="p">,</span>
-  <span class="na">method</span><span class="p">:</span> <span class="dl">'</span><span class="s1">delete</span><span class="dl">'</span><span class="p">,</span>
-
-  <span class="na">headers</span><span class="p">:</span> <span class="nx">headers</span><span class="p">,</span>
-  <span class="na">success</span><span class="p">:</span> <span class="kd">function</span><span class="p">(</span><span class="nx">data</span><span class="p">)</span> <span class="p">{</span>
-    <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">JSON</span><span class="p">.</span><span class="nx">stringify</span><span class="p">(</span><span class="nx">data</span><span class="p">));</span>
-  <span class="p">}</span>
-<span class="p">})</span>
-</code></pre></div><div class="highlight"><pre class="highlight javascript tab-javascript--nodejs"><code><span class="kd">const</span> <span class="nx">request</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="dl">'</span><span class="s1">node-fetch</span><span class="dl">'</span><span class="p">);</span>
-<span class="kd">const</span> <span class="nx">inputBody</span> <span class="o">=</span> <span class="dl">'</span><span class="s1">{
-  "name": "Difficulty",
-  "tags": "easy"
-}</span><span class="dl">'</span><span class="p">;</span>
-<span class="kd">const</span> <span class="nx">headers</span> <span class="o">=</span> <span class="p">{</span>
-  <span class="dl">'</span><span class="s1">Authorization</span><span class="dl">'</span><span class="p">:</span><span class="dl">'</span><span class="s1">Bearer {access-token}</span><span class="dl">'</span><span class="p">,</span>
-  <span class="dl">'</span><span class="s1">Content-Type</span><span class="dl">'</span><span class="p">:</span><span class="dl">'</span><span class="s1">application/x-www-form-urlencoded</span><span class="dl">'</span><span class="p">,</span>
-  <span class="dl">'</span><span class="s1">Accept</span><span class="dl">'</span><span class="p">:</span><span class="dl">'</span><span class="s1">application/json</span><span class="dl">'</span>
-
-<span class="p">};</span>
-
-<span class="nx">fetch</span><span class="p">(</span><span class="dl">'</span><span class="s1">https://*.modapi.io/v1/games/{game-id}/tags</span><span class="dl">'</span><span class="p">,</span>
-<span class="p">{</span>
-  <span class="na">method</span><span class="p">:</span> <span class="dl">'</span><span class="s1">DELETE</span><span class="dl">'</span><span class="p">,</span>
-  <span class="na">body</span><span class="p">:</span> <span class="nx">inputBody</span><span class="p">,</span>
-  <span class="na">headers</span><span class="p">:</span> <span class="nx">headers</span>
-<span class="p">})</span>
-<span class="p">.</span><span class="nx">then</span><span class="p">(</span><span class="kd">function</span><span class="p">(</span><span class="nx">res</span><span class="p">)</span> <span class="p">{</span>
-    <span class="k">return</span> <span class="nx">res</span><span class="p">.</span><span class="nx">json</span><span class="p">();</span>
-<span class="p">}).</span><span class="nx">then</span><span class="p">(</span><span class="kd">function</span><span class="p">(</span><span class="nx">body</span><span class="p">)</span> <span class="p">{</span>
-    <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">body</span><span class="p">);</span>
-<span class="p">});</span>
-</code></pre></div><div class="highlight"><pre class="highlight python tab-python"><code><span class="kn">import</span> <span class="nn">requests</span>
-<span class="n">headers</span> <span class="o">=</span> <span class="p">{</span>
-  <span class="s">'Authorization'</span><span class="p">:</span> <span class="s">'Bearer {access-token}'</span><span class="p">,</span>
-  <span class="s">'Content-Type'</span><span class="p">:</span> <span class="s">'application/x-www-form-urlencoded'</span><span class="p">,</span>
-  <span class="s">'Accept'</span><span class="p">:</span> <span class="s">'application/json'</span>
-<span class="p">}</span>
-
-<span class="n">r</span> <span class="o">=</span> <span class="n">requests</span><span class="p">.</span><span class="n">delete</span><span class="p">(</span><span class="s">'https://*.modapi.io/v1/games/{game-id}/tags'</span><span class="p">,</span> <span class="n">params</span><span class="o">=</span><span class="p">{</span>
-
-<span class="p">},</span> <span class="n">headers</span> <span class="o">=</span> <span class="n">headers</span><span class="p">)</span>
-
-<span class="k">print</span> <span class="n">r</span><span class="p">.</span><span class="n">json</span><span class="p">()</span>
-</code></pre></div><div class="highlight"><pre class="highlight java tab-java"><code><span class="no">URL</span> <span class="n">obj</span> <span class="o">=</span> <span class="k">new</span> <span class="no">URL</span><span class="o">(</span><span class="s">"https://*.modapi.io/v1/games/{game-id}/tags"</span><span class="o">);</span>
-<span class="nc">HttpURLConnection</span> <span class="n">con</span> <span class="o">=</span> <span class="o">(</span><span class="nc">HttpURLConnection</span><span class="o">)</span> <span class="n">obj</span><span class="o">.</span><span class="na">openConnection</span><span class="o">();</span>
-<span class="n">con</span><span class="o">.</span><span class="na">setRequestMethod</span><span class="o">(</span><span class="s">"DELETE"</span><span class="o">);</span>
-<span class="kt">int</span> <span class="n">responseCode</span> <span class="o">=</span> <span class="n">con</span><span class="o">.</span><span class="na">getResponseCode</span><span class="o">();</span>
-<span class="nc">BufferedReader</span> <span class="n">in</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">BufferedReader</span><span class="o">(</span>
-    <span class="k">new</span> <span class="nf">InputStreamReader</span><span class="o">(</span><span class="n">con</span><span class="o">.</span><span class="na">getInputStream</span><span class="o">()));</span>
-<span class="nc">String</span> <span class="n">inputLine</span><span class="o">;</span>
-<span class="nc">StringBuffer</span> <span class="n">response</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">StringBuffer</span><span class="o">();</span>
-<span class="k">while</span> <span class="o">((</span><span class="n">inputLine</span> <span class="o">=</span> <span class="n">in</span><span class="o">.</span><span class="na">readLine</span><span class="o">())</span> <span class="o">!=</span> <span class="kc">null</span><span class="o">)</span> <span class="o">{</span>
-    <span class="n">response</span><span class="o">.</span><span class="na">append</span><span class="o">(</span><span class="n">inputLine</span><span class="o">);</span>
-<span class="o">}</span>
-<span class="n">in</span><span class="o">.</span><span class="na">close</span><span class="o">();</span>
-<span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="n">response</span><span class="o">.</span><span class="na">toString</span><span class="o">());</span>
-</code></pre></div>
-<p><span class="httpmethod DELETE">DELETE</span> <span class="endpointheading">/games/{game-id}/tags</span></p>
-
-<p>Delete an entire group of tags or individual tags. Successful request will return <code>204 No Content</code>.</p>
-
-<p><strong>NOTE:</strong> You can also manage tags by editing <a href="https://mod.io/library">your games profile</a> on the mod.io website. This is the recommended approach.</p>
-
-<table>
-<thead>
-<tr>
-<th>Parameter</th>
-<th>Type</th>
-<th>Required</th>
-<th>Description</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>name</td>
-<td>string</td>
-<td>true</td>
-<td>Name of the tag group that you want to delete tags from.</td>
-</tr>
-<tr>
-<td>tags[]</td>
-<td>string</td>
-<td>true</td>
-<td>Tags to delete from the game and all mod profiles. Every tag to delete requires a separate field with tags[] as the key (eg. tags[]=tag1, tags[]=tag2).<br><br><strong>NOTE:</strong> An empty value will delete the entire group.</td>
-</tr>
-</tbody>
-</table>
-
-<blockquote>
-<p>Example response</p>
-</blockquote>
-<div class="highlight"><pre class="highlight json tab-json"><code><span class="w"> </span><span class="mi">204</span><span class="w"> </span><span class="err">No</span><span class="w"> </span><span class="err">Content</span><span class="w"> 
-
-</span></code></pre></div>
-<h3 id="Delete-Game-Tag-Option-responses">Responses</h3>
-
-<table>
-<thead>
-<tr>
-<th>Status</th>
-<th>Meaning</th>
-<th>Error Ref</th>
-<th>Description</th>
-<th>Response Schema</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>204</td>
-<td><a href="https://tools.ietf.org/html/rfc7231#section-6.3.5">No Content</a></td>
-<td></td>
-<td>Successful Request. No Body Returned.</td>
-<td>None</td>
-</tr>
-<tr>
-<td>403</td>
-<td><a href="https://tools.ietf.org/html/rfc7231#section-6.5.3">Forbidden</a></td>
-<td>14014</td>
-<td>The authenticated user does not have permission to delete tags for the specified game. Ensure the user is part of the game team before attempting the request again.</td>
-<td><a href="#schemaerror_object">Error Object</a></td>
-</tr>
-</tbody>
-</table>
-
-<aside class="auth-notice">
-To perform this request, you must be authenticated via one of the following methods:
-<a href="#authentication">OAuth 2</a> (Scopes: write)
-</aside>
 <h2 id="rename-game-tag">Rename Game Tag</h2>
 <blockquote>
 <p>Example request</p>
@@ -15076,7 +14712,7 @@ curl <span class="nt">-X</span> POST https://<span class="k">*</span>.modapi.io/
 </tr>
 </tbody>
 </table>
-<h3 id="response-headers-8">Response Headers</h3>
+<h3 id="response-headers-7">Response Headers</h3>
 <table>
 <thead>
 <tr>
@@ -16080,7 +15716,7 @@ curl <span class="nt">-X</span> POST https://<span class="k">*</span>.modapi.io/
 </tr>
 </tbody>
 </table>
-<h3 id="response-headers-9">Response Headers</h3>
+<h3 id="response-headers-8">Response Headers</h3>
 <table>
 <thead>
 <tr>
@@ -16574,7 +16210,7 @@ curl <span class="nt">-X</span> POST https://<span class="k">*</span>.modapi.io/
 </tr>
 </tbody>
 </table>
-<h3 id="response-headers-10">Response Headers</h3>
+<h3 id="response-headers-9">Response Headers</h3>
 <table>
 <thead>
 <tr>
@@ -17047,6 +16683,13 @@ Authorization: Bearer {access-token}
 <td><a href="https://tools.ietf.org/html/rfc2518#section-10.3">Unprocessable Entity</a></td>
 <td>900025</td>
 <td>Unable to process your data with the payment system.</td>
+<td><a href="#schemaerror_object">Error Object</a></td>
+</tr>
+<tr>
+<td>422</td>
+<td><a href="https://tools.ietf.org/html/rfc2518#section-10.3">Unprocessable Entity</a></td>
+<td>900008</td>
+<td>A failure has occured when trying to find the user's wallet.</td>
 <td><a href="#schemaerror_object">Error Object</a></td>
 </tr>
 <tr>
@@ -21213,6 +20856,13 @@ curl <span class="nt">-X</span> POST https://<span class="k">*</span>.modapi.io/
 <td><a href="https://tools.ietf.org/html/rfc7231#section-6.5.3">Forbidden</a></td>
 <td>15000</td>
 <td>This mod is currently under DMCA and the user cannot be subscribed to it.</td>
+<td><a href="#schemaerror_object">Error Object</a></td>
+</tr>
+<tr>
+<td>403</td>
+<td><a href="https://tools.ietf.org/html/rfc7231#section-6.5.3">Forbidden</a></td>
+<td>15000</td>
+<td>This item cannot be purchased at this time due to a DMCA takedown request.</td>
 <td><a href="#schemaerror_object">Error Object</a></td>
 </tr>
 </tbody>
