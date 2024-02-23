@@ -943,7 +943,7 @@ System.out.println(response.toString());
 
 `GET /authenticate/terms`
 
-The purpose of this endpoint is to provide the text, links and buttons you can use to get a users agreement and consent prior to authenticating them in-game (your dialog should look similar to the example below). If you are authenticating using platform SSO, you must call this endpoint with the `X-Modio-Portal` [header set](#targeting-a-portal), so the text is localized to match the platforms requirements. A successful response will return a [Terms Object](#terms-object).
+The purpose of this endpoint is to provide the text, links and buttons you can use to get a users agreement and consent prior to authenticating them in-game (your dialog should look similar to the example below). This text will be localized based on the `Accept-Language` header, into one of our [supported languages](#localization) (note: our full Terms of Use and Privacy Policy are currently in English-only). If you are authenticating using platform SSO, you must call this endpoint with the `X-Modio-Portal` [header set](#targeting-a-portal), so the text is localized to match the platforms requirements. A successful response will return a [Terms Object](#terms-object).
 
      __Example Dialog:__
 
@@ -10368,280 +10368,6 @@ Status|Meaning|Error Ref|Description|Response Schema
 To perform this request, you must be authenticated via one of the following methods:
 <a href="#authentication">api_key</a>, <a href="#authentication">OAuth 2</a> (Scopes: read)
 </aside>
-## Add Game Tag Option
-
-> Example request
-
-```shell
-# You can also use wget
-curl -X POST https://*.modapi.io/v1/games/{game-id}/tags \
-  -H 'Authorization: Bearer {access-token}' \ 
-  -H 'Content-Type: application/x-www-form-urlencoded' \ 
-  -H 'Accept: application/json' \
-  -d 'name=Difficulty' \
-  -d 'type=dropdown' \
-  -d 'hidden=false' \
-  -d 'locked=false' \
-  -d 'tags[]=tags[]=easy&tags[]=medium&tags[]=hard'
-
-```
-
-```http
-POST https://*.modapi.io/v1/games/{game-id}/tags HTTP/1.1
-Host: *.modapi.io
-Content-Type: application/x-www-form-urlencoded
-Accept: application/json
-Authorization: Bearer {access-token}
-
-```
-
-```javascript
-var headers = {
-  'Authorization':'Bearer {access-token}',
-  'Content-Type':'application/x-www-form-urlencoded',
-  'Accept':'application/json'
-
-};
-
-$.ajax({
-  url: 'https://*.modapi.io/v1/games/{game-id}/tags',
-  method: 'post',
-
-  headers: headers,
-  success: function(data) {
-    console.log(JSON.stringify(data));
-  }
-})
-```
-
-```javascript--nodejs
-const request = require('node-fetch');
-const inputBody = '{
-  "name": "Difficulty",
-  "type": "dropdown",
-  "hidden": "false",
-  "locked": "false",
-  "tags": "tags[]=easy&tags[]=medium&tags[]=hard"
-}';
-const headers = {
-  'Authorization':'Bearer {access-token}',
-  'Content-Type':'application/x-www-form-urlencoded',
-  'Accept':'application/json'
-
-};
-
-fetch('https://*.modapi.io/v1/games/{game-id}/tags',
-{
-  method: 'POST',
-  body: inputBody,
-  headers: headers
-})
-.then(function(res) {
-    return res.json();
-}).then(function(body) {
-    console.log(body);
-});
-```
-
-```python
-import requests
-headers = {
-  'Authorization': 'Bearer {access-token}',
-  'Content-Type': 'application/x-www-form-urlencoded',
-  'Accept': 'application/json'
-}
-
-r = requests.post('https://*.modapi.io/v1/games/{game-id}/tags', params={
-
-}, headers = headers)
-
-print r.json()
-```
-
-```java
-URL obj = new URL("https://*.modapi.io/v1/games/{game-id}/tags");
-HttpURLConnection con = (HttpURLConnection) obj.openConnection();
-con.setRequestMethod("POST");
-int responseCode = con.getResponseCode();
-BufferedReader in = new BufferedReader(
-    new InputStreamReader(con.getInputStream()));
-String inputLine;
-StringBuffer response = new StringBuffer();
-while ((inputLine = in.readLine()) != null) {
-    response.append(inputLine);
-}
-in.close();
-System.out.println(response.toString());
-```
-
-`POST /games/{game-id}/tags`
-
-Add tags which mods can apply to their profiles. Successful request will return [Message Object](#message-object).
-
-    Tagging is a critical feature that powers the searching and filtering of mods for your game, as well as allowing you to control how mods are installed and played. For example you might enforce mods to be a particular type (map, model, script, save, effects, blueprint), which dictates how you install it. You may use tags to specify what the mod replaces (building, prop, car, boat, character). Or perhaps the tags describe the theme of the mod (fun, scenic, realism). The implementation is up to you, but the more detail you support the better filtering and searching becomes. If you need to store more advanced information, you can also use [Metadata Key Value Pairs](#metadata).
-
-    __NOTE:__ You can also manage tags by editing [your games profile](https://mod.io/library) on the mod.io website. This is the recommended approach.
-
-    Parameter|Type|Required|Description
-    ---|---|---|---|
-    name|string|true|Name of the tag group, for example you may want to have 'Difficulty' as the name with 'Easy', 'Medium' and 'Hard' as the tag values.<br><br>__NOTE:__ If the tag name already exists, its parameters will be overwritten and new tags will be added to the group (an edit). There is a separate endpoint to [delete tags](#delete-game-tag-option).
-    type|string|true|Determines whether you allow users to only select one tag (dropdown) or multiple tags (checkbox):<br><br>- _dropdown_ = Mods can select only one tag from this group, dropdown menu shown on site profile.<br>- _checkboxes_ = Mods can select multiple tags from this group, checkboxes shown on site profile.
-    hidden|boolean||This group of tags should not be shown to users. Useful for games to tag special functionality, to filter on and use behind the scenes. You can also use [Metadata Key Value Pairs](#metadata) for more arbitrary data.
-    locked|boolean||This group of tags can only be edited by game admins. Useful for games to tag special functionality, which users can see and filter on. Can be combined with hidden if you want the tags group locked and hidden.
-    tags[]|string|true|Tags that mod creators can choose to apply to their mods. Every tag to apply requires a separate field with tags[] as the key (eg. tags[]=Easy, tags[]=Medium, tags[]=Hard).
-
-> Example response
-
-```json
-{
-  "code": 201,
-  "message": "You have successfully added categories/tags to the specified game."
-}
-
-```
-<h3 id="Add-Game-Tag-Option-responses">Responses</h3>
-
-Status|Meaning|Error Ref|Description|Response Schema
----|---|----|---|---|
-201|[Created](https://tools.ietf.org/html/rfc7231#section-6.3.2)||Created|[Message Object](#message-object)
-403|[Forbidden](https://tools.ietf.org/html/rfc7231#section-6.5.3)|14012|The authenticated user does not have permission to submit tags for the specified game. Ensure the user is part of the game team before attempting the request again.|[Error Object](#schemaerror_object)
-### Response Headers
-
-Status|Header|Type|Format|Description
----|---|---|---|---|
-201|Location|string||URL to newly created resource
-
-<aside class="auth-notice">
-To perform this request, you must be authenticated via one of the following methods:
-<a href="#authentication">OAuth 2</a> (Scopes: write)
-</aside>
-## Delete Game Tag Option
-
-> Example request
-
-```shell
-# You can also use wget
-curl -X DELETE https://*.modapi.io/v1/games/{game-id}/tags \
-  -H 'Authorization: Bearer {access-token}' \ 
-  -H 'Content-Type: application/x-www-form-urlencoded' \ 
-  -H 'Accept: application/json' \
-  -d 'name=Difficulty' \
-  -d 'tags[]=easy'
-
-```
-
-```http
-DELETE https://*.modapi.io/v1/games/{game-id}/tags HTTP/1.1
-Host: *.modapi.io
-Content-Type: application/x-www-form-urlencoded
-Accept: application/json
-Authorization: Bearer {access-token}
-
-```
-
-```javascript
-var headers = {
-  'Authorization':'Bearer {access-token}',
-  'Content-Type':'application/x-www-form-urlencoded',
-  'Accept':'application/json'
-
-};
-
-$.ajax({
-  url: 'https://*.modapi.io/v1/games/{game-id}/tags',
-  method: 'delete',
-
-  headers: headers,
-  success: function(data) {
-    console.log(JSON.stringify(data));
-  }
-})
-```
-
-```javascript--nodejs
-const request = require('node-fetch');
-const inputBody = '{
-  "name": "Difficulty",
-  "tags": "easy"
-}';
-const headers = {
-  'Authorization':'Bearer {access-token}',
-  'Content-Type':'application/x-www-form-urlencoded',
-  'Accept':'application/json'
-
-};
-
-fetch('https://*.modapi.io/v1/games/{game-id}/tags',
-{
-  method: 'DELETE',
-  body: inputBody,
-  headers: headers
-})
-.then(function(res) {
-    return res.json();
-}).then(function(body) {
-    console.log(body);
-});
-```
-
-```python
-import requests
-headers = {
-  'Authorization': 'Bearer {access-token}',
-  'Content-Type': 'application/x-www-form-urlencoded',
-  'Accept': 'application/json'
-}
-
-r = requests.delete('https://*.modapi.io/v1/games/{game-id}/tags', params={
-
-}, headers = headers)
-
-print r.json()
-```
-
-```java
-URL obj = new URL("https://*.modapi.io/v1/games/{game-id}/tags");
-HttpURLConnection con = (HttpURLConnection) obj.openConnection();
-con.setRequestMethod("DELETE");
-int responseCode = con.getResponseCode();
-BufferedReader in = new BufferedReader(
-    new InputStreamReader(con.getInputStream()));
-String inputLine;
-StringBuffer response = new StringBuffer();
-while ((inputLine = in.readLine()) != null) {
-    response.append(inputLine);
-}
-in.close();
-System.out.println(response.toString());
-```
-
-`DELETE /games/{game-id}/tags`
-
-Delete an entire group of tags or individual tags. Successful request will return `204 No Content`.
-
-    __NOTE:__ You can also manage tags by editing [your games profile](https://mod.io/library) on the mod.io website. This is the recommended approach.
-
-    Parameter|Type|Required|Description
-    ---|---|---|---|
-    name|string|true|Name of the tag group that you want to delete tags from.
-    tags[]|string|true|Tags to delete from the game and all mod profiles. Every tag to delete requires a separate field with tags[] as the key (eg. tags[]=tag1, tags[]=tag2).<br><br>__NOTE:__ An empty value will delete the entire group.
-
-> Example response
-
-```json
- 204 No Content 
-
-```
-<h3 id="Delete-Game-Tag-Option-responses">Responses</h3>
-
-Status|Meaning|Error Ref|Description|Response Schema
----|---|----|---|---|
-204|[No Content](https://tools.ietf.org/html/rfc7231#section-6.3.5)||Successful Request. No Body Returned.|None
-403|[Forbidden](https://tools.ietf.org/html/rfc7231#section-6.5.3)|14014|The authenticated user does not have permission to delete tags for the specified game. Ensure the user is part of the game team before attempting the request again.|[Error Object](#schemaerror_object)
-<aside class="auth-notice">
-To perform this request, you must be authenticated via one of the following methods:
-<a href="#authentication">OAuth 2</a> (Scopes: write)
-</aside>
 ## Rename Game Tag
 
 > Example request
@@ -12696,6 +12422,7 @@ Status|Meaning|Error Ref|Description|Response Schema
 422|[Unprocessable Entity](https://tools.ietf.org/html/rfc2518#section-10.3)|900026|Your provided split share must total 100%.|[Error Object](#schemaerror_object)
 422|[Unprocessable Entity](https://tools.ietf.org/html/rfc2518#section-10.3)|900029|You may only add up to 5 users to a team.|[Error Object](#schemaerror_object)
 422|[Unprocessable Entity](https://tools.ietf.org/html/rfc2518#section-10.3)|900025|Unable to process your data with the payment system.|[Error Object](#schemaerror_object)
+422|[Unprocessable Entity](https://tools.ietf.org/html/rfc2518#section-10.3)|900008|A failure has occured when trying to find the user's wallet.|[Error Object](#schemaerror_object)
 403|[Forbidden](https://tools.ietf.org/html/rfc7231#section-6.5.3)|900023|Team members must be approved before they can be added to the current team.|[Error Object](#schemaerror_object)
 404|[Not Found](https://tools.ietf.org/html/rfc7231#section-6.5.4)|900003|Monetization team could not be found.|[Error Object](#schemaerror_object)
 <aside class="auth-notice">
@@ -15959,6 +15686,7 @@ Status|Meaning|Error Ref|Description|Response Schema
 403|[Forbidden](https://tools.ietf.org/html/rfc7231#section-6.5.3)|15020|This mod is missing a file and cannot be subscribed to.|[Error Object](#schemaerror_object)
 403|[Forbidden](https://tools.ietf.org/html/rfc7231#section-6.5.3)|15001|This mod is hidden and the user cannot be subscribed to it.|[Error Object](#schemaerror_object)
 403|[Forbidden](https://tools.ietf.org/html/rfc7231#section-6.5.3)|15000|This mod is currently under DMCA and the user cannot be subscribed to it.|[Error Object](#schemaerror_object)
+403|[Forbidden](https://tools.ietf.org/html/rfc7231#section-6.5.3)|15000|This item cannot be purchased at this time due to a DMCA takedown request.|[Error Object](#schemaerror_object)
 <aside class="auth-notice">
 To perform this request, you must be authenticated via one of the following methods:
 <a href="#authentication">OAuth 2</a> (Scopes: write)
