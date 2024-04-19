@@ -4996,6 +4996,7 @@ Get all mods for the corresponding game. Successful request will return an array
       "tags": [
         {
           "name": "Unity",
+          "name_localized": "Unity",
           "date_added": 1499841487
         }
       ],
@@ -5240,6 +5241,7 @@ Get a mod. Successful request will return a single [Mod Object](#mod-object).
   "tags": [
     {
       "name": "Unity",
+      "name_localized": "Unity",
       "date_added": 1499841487
     }
   ],
@@ -5519,6 +5521,7 @@ Add a mod. Successful request will return the newly created [Mod Object](#mod-ob
   "tags": [
     {
       "name": "Unity",
+      "name_localized": "Unity",
       "date_added": 1499841487
     }
   ],
@@ -5801,6 +5804,7 @@ Edit details for a mod. If you want to update the `logo` or media associated wit
   "tags": [
     {
       "name": "Unity",
+      "name_localized": "Unity",
       "date_added": 1499841487
     }
   ],
@@ -7836,6 +7840,7 @@ Subscribe the _authenticated user_ to a corresponding mod. No body parameters ar
   "tags": [
     {
       "name": "Unity",
+      "name_localized": "Unity",
       "date_added": 1499841487
     }
   ],
@@ -10763,6 +10768,7 @@ Get all tags for the corresponding mod. Successful request will return an array 
   "data": [
     {
       "name": "Unity",
+      "name_localized": "Unity",
       "date_added": 1499841487
     },
     {
@@ -14330,6 +14336,7 @@ Get all mod's the _authenticated user_ is subscribed to. Successful request will
       "tags": [
         {
           "name": "Unity",
+          "name_localized": "Unity",
           "date_added": 1499841487
         }
       ],
@@ -14607,6 +14614,7 @@ Get all mods the _authenticated user_ added or is a team member of. Successful r
       "tags": [
         {
           "name": "Unity",
+          "name_localized": "Unity",
           "date_added": 1499841487
         }
       ],
@@ -14876,6 +14884,7 @@ Get all mod's the _authenticated user_ has purchased. Successful request will re
       "tags": [
         {
           "name": "Unity",
+          "name_localized": "Unity",
           "date_added": 1499841487
         }
       ],
@@ -15814,6 +15823,7 @@ Purchase an item. A Successful request will return the newly created [Pay Object
     "tags": [
       {
         "name": "Unity",
+        "name_localized": "Unity",
         "date_added": 1499841487
       }
     ],
@@ -17940,6 +17950,7 @@ result_total|integer|Total number of results found.
   "data": [
     {
       "name": "Unity",
+      "name_localized": "Unity",
       "date_added": 1499841487
     },
     {
@@ -18138,6 +18149,7 @@ result_total|integer|Total number of results found.
       "tags": [
         {
           "name": "Unity",
+          "name_localized": "Unity",
           "date_added": 1499841487
         }
       ],
@@ -18942,6 +18954,7 @@ images|[Image Object](#schemaimage_object)[]|Array of image objects (a gallery).
   "tags": [
     {
       "name": "Unity",
+      "name_localized": "Unity",
       "date_added": 1499841487
     }
   ],
@@ -19069,6 +19082,7 @@ date_expires|integer|Unix timestamp until this mods's statistics are considered 
 ```json
 {
   "name": "Unity",
+  "name_localized": "Unity",
   "date_added": 1499841487
 } 
 ```
@@ -19078,6 +19092,7 @@ date_expires|integer|Unix timestamp until this mods's statistics are considered 
 Name|Type|Description
 ---|---|---|---|
 name|string|Tag name.
+name_localized|string|The localized tag name influenced by the [Accept-Language](https://docs.mod.io/#localization) header, defaults to English.
 date_added|integer|**Deprecated:** Unix timestamp of date tag was applied.
 
 
@@ -19453,6 +19468,7 @@ date_added|integer|Unix timestamp of date the part was uploaded.
     "tags": [
       {
         "name": "Unity",
+        "name_localized": "Unity",
         "date_added": 1499841487
       }
     ],
