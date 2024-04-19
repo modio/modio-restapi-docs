@@ -1942,6 +1942,137 @@ Status|Meaning|Error Ref|Description|Response Schema
 To perform this request, you must be authenticated via one of the following methods:
 <a href="#authentication">api_key</a>
 </aside>
+## Apple
+
+> Example request
+
+```shell
+# You can also use wget
+curl -X POST https://*.modapi.io/v1/external/appleauth?api_key=YourApiKey \
+  -H 'Content-Type: application/x-www-form-urlencoded' \ 
+  -H 'Accept: application/json' \
+  -d 'id_token=eyJhbXciOiJIUzI1Lizs....'
+
+```
+
+```http
+POST https://*.modapi.io/v1/external/appleauth?api_key=YourApiKey HTTP/1.1
+Host: *.modapi.io
+Content-Type: application/x-www-form-urlencoded
+Accept: application/json
+
+```
+
+```javascript
+var headers = {
+  'Content-Type':'application/x-www-form-urlencoded',
+  'Accept':'application/json'
+
+};
+
+$.ajax({
+  url: 'https://*.modapi.io/v1/external/appleauth',
+  method: 'post',
+  data: '?api_key=YourApiKey',
+  headers: headers,
+  success: function(data) {
+    console.log(JSON.stringify(data));
+  }
+})
+```
+
+```javascript--nodejs
+const request = require('node-fetch');
+const inputBody = '{
+  "id_token": "eyJhbXciOiJIUzI1Lizs...."
+}';
+const headers = {
+  'Content-Type':'application/x-www-form-urlencoded',
+  'Accept':'application/json'
+
+};
+
+fetch('https://*.modapi.io/v1/external/appleauth?api_key=YourApiKey',
+{
+  method: 'POST',
+  body: inputBody,
+  headers: headers
+})
+.then(function(res) {
+    return res.json();
+}).then(function(body) {
+    console.log(body);
+});
+```
+
+```python
+import requests
+headers = {
+  'Content-Type': 'application/x-www-form-urlencoded',
+  'Accept': 'application/json'
+}
+
+r = requests.post('https://*.modapi.io/v1/external/appleauth', params={
+  'api_key': 'YourApiKey'
+}, headers = headers)
+
+print r.json()
+```
+
+```java
+URL obj = new URL("https://*.modapi.io/v1/external/appleauth?api_key=YourApiKey");
+HttpURLConnection con = (HttpURLConnection) obj.openConnection();
+con.setRequestMethod("POST");
+int responseCode = con.getResponseCode();
+BufferedReader in = new BufferedReader(
+    new InputStreamReader(con.getInputStream()));
+String inputLine;
+StringBuffer response = new StringBuffer();
+while ((inputLine = in.readLine()) != null) {
+    response.append(inputLine);
+}
+in.close();
+System.out.println(response.toString());
+```
+
+`POST /external/appleauth`
+
+Request an access token on behalf of a 'Sign in with Apple' user. A Successful request will return an [Access Token Object](#access-token-object).
+
+    Parameter|Type|Required|Description
+    ---|---|---|---|
+    id_token|string|true|The ID token returned to your iOS application upon using Sign in with Apple functionality.
+    date_expires|integer||Unix timestamp of date in which the returned token will expire. Value cannot be higher than the default value which is a week (unix timestamp + 604800 seconds). Using a token after it's expiry time has elapsed will result in a `401 Unauthorized` response.
+    terms_agreed|boolean||This MUST be set to `false` unless you have collected the [users agreement](#terms) prior to calling this endpoint in which case it can be set to `true` and will be recorded.<br><br>__NOTE:__ If this is set to `false` and the user has not agreed to the latest mod.io Terms of Use and Privacy Policy, an error `403 Forbidden (error_ref 11074)` will be returned and you will need to collect the [users agreement](#terms) and retry with this value set to `true` to authenticate the user.
+
+> Example response
+
+```json
+{
+  "code": 200,
+  "access_token": "eyJ0eXAiOiXKV1QibCJhbLciOiJeiUzI1.....",
+  "date_expires": 1570673249
+}
+
+```
+<h3 id="Apple-responses">Responses</h3>
+
+Status|Meaning|Error Ref|Description|Response Schema
+---|---|----|---|---|
+200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)||Successful Request|[Access Token Object](#schemaaccess_token_object)
+401|[Unauthorized](https://tools.ietf.org/html/rfc7235#section-3.1)|14001|The game associated with the supplied api_key is currently not available.|[Error Object](#schemaerror_object)
+401|[Unauthorized](https://tools.ietf.org/html/rfc7235#section-3.1)|11201|The Apple token supplied in the request is invalid.|[Error Object](#schemaerror_object)
+401|[Unauthorized](https://tools.ietf.org/html/rfc7235#section-3.1)|11202|The Apple token supplied has expired.|[Error Object](#schemaerror_object)
+401|[Unauthorized](https://tools.ietf.org/html/rfc7235#section-3.1)|11032|mod.io was unable to verify the credentials against the external service provider.|[Error Object](#schemaerror_object)
+403|[Forbidden](https://tools.ietf.org/html/rfc7231#section-6.5.3)|11016|The api_key supplied in the request must be associated with a game.|[Error Object](#schemaerror_object)
+403|[Forbidden](https://tools.ietf.org/html/rfc7231#section-6.5.3)|11017|The api_key supplied in the request is for test environment purposes only and cannot be used for this functionality.|[Error Object](#schemaerror_object)
+403|[Forbidden](https://tools.ietf.org/html/rfc7231#section-6.5.3)|11074|The user has not agreed to the mod.io Terms of Use. Please see terms_agreed parameter description and the [Terms](#terms) endpoint for more information.|[Error Object](#schemaerror_object)
+403|[Forbidden](https://tools.ietf.org/html/rfc7231#section-6.5.3)|11203|The Apple Bundle ID associated with this game has not been configured.|[Error Object](#schemaerror_object)
+403|[Forbidden](https://tools.ietf.org/html/rfc7231#section-6.5.3)|11205|The Apple Bundle ID associated with this game is invalid.|[Error Object](#schemaerror_object)
+<aside class="auth-notice">
+To perform this request, you must be authenticated via one of the following methods:
+<a href="#authentication">api_key</a>
+</aside>
 ## Google
 
 > Example request
@@ -2038,16 +2169,17 @@ System.out.println(response.toString());
 `POST /external/googleauth`
 
 Request an access token on behalf of a Google user. A Successful request will return an [Access Token Object](#access-token-object).
+     *
+      __NOTE__: To use this endpoint you will need to setup some additional settings prior to being able to authenticate Google users. For these instructions please [contact us](mailto:developers@mod.io?subject=Google SSO Request).
 
-    __NOTE__: To use this endpoint you will need to setup some additional settings prior to being able to authenticate Google users. For these instructions please [contact us](mailto:developers@mod.io?subject=Google SSO Request).
+     __HINT:__ If you want to overlay the mod.io site in-game on Android, we recommend you add `?portal=google` to the end of the URL you open which will prompt the user to login with Google. See [Web Overlay Authentication](#web-overlay-authentication) for details.
 
-    __HINT:__ If you want to overlay the mod.io site in-game on Android, we recommend you add `?portal=google` to the end of the URL you open which will prompt the user to login with Google. See [Web Overlay Authentication](#web-overlay-authentication) for details.
-
-    Parameter|Type|Required|Description
-    ---|---|---|---|
-    id_token|string|true|The `id_token` value [returned from Google](https://developers.google.com/identity/sign-in/web/backend-auth#calling-the-tokeninfo-endpoint) after you have authenticated a user via the Google OAuth2 flow.
-    date_expires|integer||Unix timestamp of date in which the returned token will expire. Value cannot be higher than the default value which is a week (unix timestamp + 604800 seconds). Using a token after it's expiry time has elapsed will result in a `401 Unauthorized` response.
-    terms_agreed|boolean||This MUST be set to `false` unless you have collected the [users agreement](#terms) prior to calling this endpoint in which case it can be set to `true` and will be recorded.<br><br>__NOTE:__ If this is set to `false` and the user has not agreed to the latest mod.io Terms of Use and Privacy Policy, an error `403 Forbidden (error_ref 11074)` will be returned and you will need to collect the [users agreement](#terms) and retry with this value set to `true` to authenticate the user.
+     Parameter|Type|Required|Description
+     ---|---|---|---|
+     auth_code|string|required_if|The `auth_code` value [returned from Google](https://developers.google.com/identity/sign-in/android/offline-access) after you have authenticated a user in-app. This is required if an id_token is not provided.
+     id_token|string|required_if|The `id_token` value [returned from Google](https://developers.google.com/identity/sign-in/web/backend-auth#calling-the-tokeninfo-endpoint) after you have authenticated a user via the Google OAuth2 flow. This is required if an auth_code is not provided.
+     date_expires|integer||Unix timestamp of date in which the returned token will expire. Value cannot be higher than the default value which is a week (unix timestamp + 604800 seconds). Using a token after it's expiry time has elapsed will result in a `401 Unauthorized` response.
+     terms_agreed|boolean||This MUST be set to `false` unless you have collected the [users agreement](#terms) prior to calling this endpoint in which case it can be set to `true` and will be recorded.<br><br>__NOTE:__ If this is set to `false` and the user has not agreed to the latest mod.io Terms of Use and Privacy Policy, an error `403 Forbidden (error_ref 11074)` will be returned and you will need to collect the [users agreement](#terms) and retry with this value set to `true` to authenticate the user.
 
 > Example response
 
@@ -2064,10 +2196,8 @@ Request an access token on behalf of a Google user. A Successful request will re
 Status|Meaning|Error Ref|Description|Response Schema
 ---|---|----|---|---|
 200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)||Successful Request|[Access Token Object](#schemaaccess_token_object)
-401|[Unauthorized](https://tools.ietf.org/html/rfc7235#section-3.1)|11052|The access token was invalid/malformed.|[Error Object](#schemaerror_object)
-401|[Unauthorized](https://tools.ietf.org/html/rfc7235#section-3.1)|11056|mod.io was unable to validate the credentials with Google's servers.|[Error Object](#schemaerror_object)
-401|[Unauthorized](https://tools.ietf.org/html/rfc7235#section-3.1)|11053|The Google access token is not valid yet.|[Error Object](#schemaerror_object)
-401|[Unauthorized](https://tools.ietf.org/html/rfc7235#section-3.1)|11054|The Google access token has expired. You should request another token from the Google SDK and ensure it is delivered to mod.io before it expires.|[Error Object](#schemaerror_object)
+400|[Bad Request](https://tools.ietf.org/html/rfc7231#section-6.5.1)|11053|Google authentication settings have not been configured. Please contact support for assistance.|[Error Object](#schemaerror_object)
+401|[Unauthorized](https://tools.ietf.org/html/rfc7235#section-3.1)|11054|mod.io was unable to validate the credentials with Google's servers.|[Error Object](#schemaerror_object)
 403|[Forbidden](https://tools.ietf.org/html/rfc7231#section-6.5.3)|17053|The user account associated with this email is locked. Please contact support for assistance.|[Error Object](#schemaerror_object)
 403|[Forbidden](https://tools.ietf.org/html/rfc7231#section-6.5.3)|11074|The user has not agreed to the mod.io Terms of Use. Please see terms_agreed parameter description and the [Terms](#terms) endpoint for more information.|[Error Object](#schemaerror_object)
 <aside class="auth-notice">
@@ -2170,15 +2300,15 @@ System.out.println(response.toString());
 `POST /external/discordauth`
 
 Request an access token on behalf of a Discord user. A Successful request will return an [Access Token Object](#access-token-object).
-
-     __HINT:__ If you want to overlay the mod.io site in-game with Discord authentication, we recommend you add `?portal=discord` to the end of the URL you open which will prompt the user to login with Discord. See [Web Overlay Authentication](#web-overlay-authentication) for details.
-
-     Parameter|Type|Required|Description
-     ---|---|---|---|
-     discord_token|string|true|The access token of the user provided by Discord.
-     email|string||The users email address (optional but recommended to help users recover lost accounts). If supplied, and the respective user does not have an email registered for their account we will send a confirmation email to confirm they have ownership of the specified email.<br><br>__NOTE__: If the user already has an email on record with us, this parameter will be ignored. This parameter should also be urlencoded before the request is sent.
-     date_expires|integer||Unix timestamp of date in which the returned token will expire. Value cannot be higher than the default value which is a week (unix timestamp + 604800 seconds). Using a token after it's expiry time has elapsed will result in a `401 Unauthorized` response.
-     terms_agreed|boolean||This MUST be set to `false` unless you have collected the [users agreement](#terms) prior to calling this endpoint in which case it can be set to `true` and will be recorded.<br><br>__NOTE:__ If this is set to `false` and the user has not agreed to the latest mod.io Terms of Use and Privacy Policy, an error `403 Forbidden (error_ref 11074)` will be returned and you will need to collect the [users agreement](#terms) and retry with this value set to `true` to authenticate the user.
+     *
+     * __HINT:__ If you want to overlay the mod.io site in-game with Discord authentication, we recommend you add `?portal=discord` to the end of the URL you open which will prompt the user to login with Discord. See [Web Overlay Authentication](#web-overlay-authentication) for details.
+     *
+     * Parameter|Type|Required|Description
+     * ---|---|---|---|
+     * discord_token|string|true|The access token of the user provided by Discord.
+     * email|string||The users email address (optional but recommended to help users recover lost accounts). If supplied, and the respective user does not have an email registered for their account we will send a confirmation email to confirm they have ownership of the specified email.<br><br>__NOTE__: If the user already has an email on record with us, this parameter will be ignored. This parameter should also be urlencoded before the request is sent.
+     * date_expires|integer||Unix timestamp of date in which the returned token will expire. Value cannot be higher than the default value which is a week (unix timestamp + 604800 seconds). Using a token after it's expiry time has elapsed will result in a `401 Unauthorized` response.
+     * terms_agreed|boolean||This MUST be set to `false` unless you have collected the [users agreement](#terms) prior to calling this endpoint in which case it can be set to `true` and will be recorded.<br><br>__NOTE:__ If this is set to `false` and the user has not agreed to the latest mod.io Terms of Use and Privacy Policy, an error `403 Forbidden (error_ref 11074)` will be returned and you will need to collect the [users agreement](#terms) and retry with this value set to `true` to authenticate the user.
 
 > Example response
 
@@ -2337,6 +2467,136 @@ Status|Meaning|Error Ref|Description|Response Schema
 To perform this request, you must be authenticated via one of the following methods:
 <a href="#authentication">api_key</a>
 </aside>
+## Exchange Client Credentials Token
+
+> Example request
+
+```shell
+# You can also use wget
+curl -X POST https://*.modapi.io/v1/oauth/token/ \
+  -H 'Content-Type: application/x-www-form-urlencoded' \ 
+  -H 'Accept: application/json' \
+  -d 'client_id=1234' \
+  -d 'client_secret=bqyMxkGE4QVBaYpHQcf6XJENjZ5RWFHsbEZ5SFiGa' \
+  -d 'grant_type=client_credentials' \
+  -d 'scopes=read,write,read_monetization'
+
+```
+
+```http
+POST https://*.modapi.io/v1/oauth/token/ HTTP/1.1
+Host: *.modapi.io
+Content-Type: application/x-www-form-urlencoded
+Accept: application/json
+
+```
+
+```javascript
+var headers = {
+  'Content-Type':'application/x-www-form-urlencoded',
+  'Accept':'application/json'
+
+};
+
+$.ajax({
+  url: 'https://*.modapi.io/v1/oauth/token/',
+  method: 'post',
+
+  headers: headers,
+  success: function(data) {
+    console.log(JSON.stringify(data));
+  }
+})
+```
+
+```javascript--nodejs
+const request = require('node-fetch');
+const inputBody = '{
+  "client_id": "1234",
+  "client_secret": "bqyMxkGE4QVBaYpHQcf6XJENjZ5RWFHsbEZ5SFiGa",
+  "grant_type": "client_credentials",
+  "scopes": "read,write,read_monetization"
+}';
+const headers = {
+  'Content-Type':'application/x-www-form-urlencoded',
+  'Accept':'application/json'
+
+};
+
+fetch('https://*.modapi.io/v1/oauth/token/',
+{
+  method: 'POST',
+  body: inputBody,
+  headers: headers
+})
+.then(function(res) {
+    return res.json();
+}).then(function(body) {
+    console.log(body);
+});
+```
+
+```python
+import requests
+headers = {
+  'Content-Type': 'application/x-www-form-urlencoded',
+  'Accept': 'application/json'
+}
+
+r = requests.post('https://*.modapi.io/v1/oauth/token/', params={
+
+}, headers = headers)
+
+print r.json()
+```
+
+```java
+URL obj = new URL("https://*.modapi.io/v1/oauth/token/");
+HttpURLConnection con = (HttpURLConnection) obj.openConnection();
+con.setRequestMethod("POST");
+int responseCode = con.getResponseCode();
+BufferedReader in = new BufferedReader(
+    new InputStreamReader(con.getInputStream()));
+String inputLine;
+StringBuffer response = new StringBuffer();
+while ((inputLine = in.readLine()) != null) {
+    response.append(inputLine);
+}
+in.close();
+System.out.println(response.toString());
+```
+
+`POST /oauth/token/`
+
+Exchange `client_id` and `client_secret` for an access token. Successful request will return a [Client Credentials Access Token Object](#client-credentials-access-token-object) object.
+
+     Parameter|Type|Required|Description
+     ---|---|---|---|
+     client_id|integer|true|Client ID issued to your game.
+     client_secret|string|true|Client Secret issued to your game. This should be secure on a backend server and never displayed to players.
+     grant_type|string|true|Must be `client_credentials`.
+     scopes|string|false|The scopes you wish your token to have. Currently only, read, write, and read_monetization is supported.
+
+> Example response
+
+```json
+{
+  "token_type": "Bearer",
+  "expires_in": "2592000",
+  "access_token": "eyJlbmMiOiJBMTI4Q0JDLUhTMjU2IiwiYWxnIjoiUlNBLU9BRVAiLCJjdHkiOi....",
+  "scopes": "read,write"
+}
+
+```
+<h3 id="Exchange-Client-Credentials-Token-responses">Responses</h3>
+
+Status|Meaning|Error Ref|Description|Response Schema
+---|---|----|---|---|
+200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)||Success|[Client Credentials Access Token Object](#schemaclient_credentials_access_token_object)
+<aside class="success">
+This operation does not require authentication
+</aside>
+
 ## Email Exchange
 __Step 1 of 2__
 
@@ -3201,7 +3461,7 @@ Get all games. Successful request will return an array of [Game Objects](#get-ga
     curation_option|integer|Curation options enabled by this game to approve mods:<br><br>__0__ = No curation: Mods are immediately available to play<br>__1__ = Price change approval: Pricing changes for marketplace mods queued for acceptance<br>__2__ = Full curation: All mods must be accepted by someone to be listed<br>__?__ = Combine to enable multiple features (see BITWISE fields)
     community_options|integer|Community features enabled for this game:<br><br>__0__ = None<br>__1__ = Enable comments<br>__2__ = Enable guides<br>__4__ = Pin on homepage<br>__8__ = Show on homepage<br>__16__ = Show more on homepage<br>__32__ = Allow change status<br>__64__ = Enable Previews (Game must be hidden)<br>__128__ = Allow Preview Share-URL (Previews must be enabled)<br>__256__ = Allow negative ratings<br>__?__ = Combine to find games with multiple options enabled (see [BITWISE fields](#bitwise-and-bitwise-and))
     monetization_options|integer|Monetization features mods can enable:<br><br>__0__ = None<br>__1__ = Enabled<br>__2__ = Allow mods to be sold (marketplace)<br>__?__ = Combine to find games with multiple options enabled (see [BITWISE fields](#bitwise-and-bitwise-and))
-    api_access_options|integer|Level of API access allowed by this game:<br><br>__0__ = None<br>__1__ = Allow 3rd parties to access this games API endpoints<br>__2__ = Allow mods to be downloaded directly (if disabled all download URLs will contain a frequently changing verification hash to stop unauthorized use)<br>__?__ = Combine to find games with multiple options enabled (see [BITWISE fields](#bitwise-and-bitwise-and))
+    api_access_options|integer|Level of API access allowed by this game:<br><br>__0__ = None<br>__1__ = Allow 3rd parties to access this games API endpoints<br>__2__ = Allow mods to be downloaded directly (if disabled all download URLs will contain a frequently changing verification hash to stop unauthorized use)<br>__4__ = Requires a bearer token to be supplied when attempting the download to enforce authenticated downloads only<br>__8__ = Requires a bearer token to be supplied and for the user to own the file when attempting the download<br>__?__ = Combine to find games with multiple options enabled (see [BITWISE fields](#bitwise-and-bitwise-and))
     maturity_options|integer|Mature content setup for this game:<br><br>__0__ = Don't allow mature content in mods<br>__1__ = Allow mature content in mods<br>__2__ = This game is for mature audiences only<br>__?__ = Combine to find games with multiple options enabled (see [BITWISE fields](#bitwise-and-bitwise-and)
 
     Display|Type|Description
@@ -3273,10 +3533,14 @@ Get all games. Successful request will return an array of [Game Objects](#get-ga
       "tag_options": [
         {
           "name": "Theme",
+          "name_localized": "string",
           "type": "checkboxes",
           "tags": [
             "Horror"
           ],
+          "tags_localized": {
+            "Horror": "Horreur"
+          },
           "tag_count_map": {
             "Horror": 52
           },
@@ -3481,10 +3745,14 @@ Get a game. Successful request will return a single [Game Object](#game-object).
   "tag_options": [
     {
       "name": "Theme",
+      "name_localized": "string",
       "type": "checkboxes",
       "tags": [
         "Horror"
       ],
+      "tags_localized": {
+        "Horror": "Horreur"
+      },
       "tag_count_map": {
         "Horror": 52
       },
@@ -7858,7 +8126,8 @@ Get all comments posted in the guides profile. Successful request will return an
       "thread_position": "01",
       "karma": 1,
       "karma_guest": 0,
-      "content": "Hey <a href=\"https://mod.io/u/guest\">guest</a>, you should check out this mod!"
+      "content": "Hey <a href=\"https://mod.io/u/guest\">guest</a>, you should check out this mod!",
+      "options": 0
     }
   ],
   "result_count": 1,
@@ -8016,7 +8285,8 @@ Add a comment for the corresponding guide. Successful request will return the ne
   "thread_position": "01",
   "karma": 1,
   "karma_guest": 0,
-  "content": "Hey <a href=\"https://mod.io/u/guest\">guest</a>, you should check out this mod!"
+  "content": "Hey <a href=\"https://mod.io/u/guest\">guest</a>, you should check out this mod!",
+  "options": 0
 }
 
 ```
@@ -8156,7 +8426,8 @@ Get a Guide Comment. Successful request will return a single [Comment Object](#c
   "thread_position": "01",
   "karma": 1,
   "karma_guest": 0,
-  "content": "Hey <a href=\"https://mod.io/u/guest\">guest</a>, you should check out this mod!"
+  "content": "Hey <a href=\"https://mod.io/u/guest\">guest</a>, you should check out this mod!",
+  "options": 0
 }
 
 ```
@@ -8305,7 +8576,8 @@ Update a comment for the corresponding guide. Successful request will return the
   "thread_position": "01",
   "karma": 1,
   "karma_guest": 0,
-  "content": "Hey <a href=\"https://mod.io/u/guest\">guest</a>, you should check out this mod!"
+  "content": "Hey <a href=\"https://mod.io/u/guest\">guest</a>, you should check out this mod!",
+  "options": 0
 }
 
 ```
@@ -8570,7 +8842,8 @@ Update the Karma rating in single increments or decrements for a corresponding g
   "thread_position": "01",
   "karma": 1,
   "karma_guest": 0,
-  "content": "Hey <a href=\"https://mod.io/u/guest\">guest</a>, you should check out this mod!"
+  "content": "Hey <a href=\"https://mod.io/u/guest\">guest</a>, you should check out this mod!",
+  "options": 0
 }
 
 ```
@@ -8717,7 +8990,8 @@ Get all comments posted in the mods profile. Successful request will return an a
       "thread_position": "01",
       "karma": 1,
       "karma_guest": 0,
-      "content": "Hey <a href=\"https://mod.io/u/guest\">guest</a>, you should check out this mod!"
+      "content": "Hey <a href=\"https://mod.io/u/guest\">guest</a>, you should check out this mod!",
+      "options": 0
     }
   ],
   "result_count": 1,
@@ -8875,7 +9149,8 @@ Add a comment for the corresponding mod. Successful request will return the newl
   "thread_position": "01",
   "karma": 1,
   "karma_guest": 0,
-  "content": "Hey <a href=\"https://mod.io/u/guest\">guest</a>, you should check out this mod!"
+  "content": "Hey <a href=\"https://mod.io/u/guest\">guest</a>, you should check out this mod!",
+  "options": 0
 }
 
 ```
@@ -9015,7 +9290,8 @@ Get a Mod Comment. Successful request will return a single [Comment Object](#com
   "thread_position": "01",
   "karma": 1,
   "karma_guest": 0,
-  "content": "Hey <a href=\"https://mod.io/u/guest\">guest</a>, you should check out this mod!"
+  "content": "Hey <a href=\"https://mod.io/u/guest\">guest</a>, you should check out this mod!",
+  "options": 0
 }
 
 ```
@@ -9164,7 +9440,8 @@ Update a comment for the corresponding mod. Successful request will return the u
   "thread_position": "01",
   "karma": 1,
   "karma_guest": 0,
-  "content": "Hey <a href=\"https://mod.io/u/guest\">guest</a>, you should check out this mod!"
+  "content": "Hey <a href=\"https://mod.io/u/guest\">guest</a>, you should check out this mod!",
+  "options": 0
 }
 
 ```
@@ -9429,7 +9706,8 @@ Update the Karma rating in single increments or decrements for a corresponding m
   "thread_position": "01",
   "karma": 1,
   "karma_guest": 0,
-  "content": "Hey <a href=\"https://mod.io/u/guest\">guest</a>, you should check out this mod!"
+  "content": "Hey <a href=\"https://mod.io/u/guest\">guest</a>, you should check out this mod!",
+  "options": 0
 }
 
 ```
@@ -10338,9 +10616,24 @@ Get all tags for the corresponding game, that can be applied to any of its mods.
   "data": [
     {
       "name": "Theme",
+      "name_localization": {
+        "en": "Difficulty",
+        "de": "",
+        "fr": ""
+      },
       "type": "checkboxes",
       "tags": [
         "Horror"
+      ],
+      "tags_localization": [
+        {
+          "tag": "string",
+          "translations": {
+            "en": "",
+            "de": "",
+            "fr": ""
+          }
+        }
       ],
       "tag_count_map": {
         "Horror": 52
@@ -10367,134 +10660,6 @@ Status|Meaning|Error Ref|Description|Response Schema
 <aside class="auth-notice">
 To perform this request, you must be authenticated via one of the following methods:
 <a href="#authentication">api_key</a>, <a href="#authentication">OAuth 2</a> (Scopes: read)
-</aside>
-## Rename Game Tag
-
-> Example request
-
-```shell
-# You can also use wget
-curl -X PUT https://*.modapi.io/v1/games/{game-id}/tags/rename \
-  -H 'Authorization: Bearer {access-token}' \ 
-  -H 'Content-Type: application/x-www-form-urlencoded' \ 
-  -H 'Accept: application/json'
-  -d 'from=Medium' \
-  -d 'to=Intermediate'
-
-```
-
-```http
-PUT https://*.modapi.io/v1/games/{game-id}/tags/rename HTTP/1.1
-Host: *.modapi.io
-Content-Type: application/x-www-form-urlencoded
-Accept: application/json
-Authorization: Bearer {access-token}
-
-```
-
-```javascript
-var headers = {
-  'Authorization':'Bearer {access-token}',
-  'Content-Type':'application/x-www-form-urlencoded',
-  'Accept':'application/json'
-
-};
-
-$.ajax({
-  url: 'https://*.modapi.io/v1/games/{game-id}/tags/rename',
-  method: 'put',
-
-  headers: headers,
-  success: function(data) {
-    console.log(JSON.stringify(data));
-  }
-})
-```
-
-```javascript--nodejs
-const request = require('node-fetch');
-const inputBody = '{
-  "from": "Medium",
-  "to": "Intermediate"
-}';
-const headers = {
-  'Authorization':'Bearer {access-token}',
-  'Content-Type':'application/x-www-form-urlencoded',
-  'Accept':'application/json'
-
-};
-
-fetch('https://*.modapi.io/v1/games/{game-id}/tags/rename',
-{
-  method: 'PUT',
-  body: inputBody,
-  headers: headers
-})
-.then(function(res) {
-    return res.json();
-}).then(function(body) {
-    console.log(body);
-});
-```
-
-```python
-import requests
-headers = {
-  'Authorization': 'Bearer {access-token}',
-  'Content-Type': 'application/x-www-form-urlencoded',
-  'Accept': 'application/json'
-}
-
-r = requests.put('https://*.modapi.io/v1/games/{game-id}/tags/rename', params={
-
-}, headers = headers)
-
-print r.json()
-```
-
-```java
-URL obj = new URL("https://*.modapi.io/v1/games/{game-id}/tags/rename");
-HttpURLConnection con = (HttpURLConnection) obj.openConnection();
-con.setRequestMethod("PUT");
-int responseCode = con.getResponseCode();
-BufferedReader in = new BufferedReader(
-    new InputStreamReader(con.getInputStream()));
-String inputLine;
-StringBuffer response = new StringBuffer();
-while ((inputLine = in.readLine()) != null) {
-    response.append(inputLine);
-}
-in.close();
-System.out.println(response.toString());
-```
-
-`PUT /games/{game-id}/tags/rename`
-
-Rename an existing tag, updating all mods in the progress. Successful request will return a [Message Object](#message-object).
-
-    Parameter|Type|Required|Description
-    ---|---|---|---|
-    from|string|true|The exact name of an existing tag you want to rename.
-    to|string|true|The name that you would like to rename the existing tag to.
-
-> Example response
-
-```json
-{
-  "code": 200,
-  "message": "Your request was successful."
-}
-
-```
-<h3 id="Rename-Game-Tag-responses">Responses</h3>
-
-Status|Meaning|Error Ref|Description|Response Schema
----|---|----|---|---|
-200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)||Successful Request.|[Message Object](#schemamessage_object)
-409|[Conflict](https://tools.ietf.org/html/rfc7231#section-6.5.8)|14030|A request to rename the given tag is currently in progress.|[Error Object](#schemaerror_object)
-<aside class="auth-notice">
-To perform this request, you must be authenticated via one of the following methods:
-<a href="#authentication">OAuth 2</a> (Scopes: write)
 </aside>
 ## Get Mod Tags
 
@@ -13260,124 +13425,6 @@ To perform this request, you must be authenticated via one of the following meth
 </aside>
 # Me
 
-## Generate Service Ticket
-
-> Example request
-
-```shell
-# You can also use wget
-curl -X POST https://*.modapi.io/v1/s2s/ticket \
-  -H 'Authorization: Bearer {access-token}' \ 
-  -H 'Content-Type: application/json' \ 
-  -H 'Accept: application/json'
-
-```
-
-```http
-POST https://*.modapi.io/v1/s2s/ticket HTTP/1.1
-Host: *.modapi.io
-
-Accept: application/json
-Authorization: Bearer {access-token}
-Content-Type: application/json
-
-```
-
-```javascript
-var headers = {
-  'Authorization':'Bearer {access-token}',
-  'Content-Type':'application/json',
-  'Accept':'application/json'
-
-};
-
-$.ajax({
-  url: 'https://*.modapi.io/v1/s2s/ticket',
-  method: 'post',
-
-  headers: headers,
-  success: function(data) {
-    console.log(JSON.stringify(data));
-  }
-})
-```
-
-```javascript--nodejs
-const request = require('node-fetch');
-
-const headers = {
-  'Authorization':'Bearer {access-token}',
-  'Content-Type':'application/json',
-  'Accept':'application/json'
-
-};
-
-fetch('https://*.modapi.io/v1/s2s/ticket',
-{
-  method: 'POST',
-
-  headers: headers
-})
-.then(function(res) {
-    return res.json();
-}).then(function(body) {
-    console.log(body);
-});
-```
-
-```python
-import requests
-headers = {
-  'Authorization': 'Bearer {access-token}',
-  'Content-Type': 'application/json',
-  'Accept': 'application/json'
-}
-
-r = requests.post('https://*.modapi.io/v1/s2s/ticket', params={
-
-}, headers = headers)
-
-print r.json()
-```
-
-```java
-URL obj = new URL("https://*.modapi.io/v1/s2s/ticket");
-HttpURLConnection con = (HttpURLConnection) obj.openConnection();
-con.setRequestMethod("POST");
-int responseCode = con.getResponseCode();
-BufferedReader in = new BufferedReader(
-    new InputStreamReader(con.getInputStream()));
-String inputLine;
-StringBuffer response = new StringBuffer();
-while ((inputLine = in.readLine()) != null) {
-    response.append(inputLine);
-}
-in.close();
-System.out.println(response.toString());
-```
-
-`POST //s2s/ticket`
-
-Generate a service-to-service (S2S) ticket on behalf of the authenticated user. The returned ticket should be passed to your secure backend to used with your registered backend server to facilitate S2S requests on behalf of a user. Service tickets are only valid for 1 hour, at which point you will need to make another request to this endpoint. A successful request will return a [Service Ticket](#service-ticket) object.
-
-> Example response
-
-```json
-{
-  "resource": "game-secure-server",
-  "service_ticket": "eyJ0eXAiOiXKV1QibCJhbLciOiJeiUzI1....."
-}
-
-```
-<h3 id="Generate-Service-Ticket-responses">Responses</h3>
-
-Status|Meaning|Error Ref|Description|Response Schema
----|---|----|---|---|
-200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)||Successful Request|[Service Ticket Object](#schemaservice_ticket_object)
-<aside class="auth-notice">
-To perform this request, you must be authenticated via one of the following methods:
-<a href="#authentication">OAuth 2</a> (Scopes: write)
-</aside>
 ## Get Authenticated User
 
 > Example request
@@ -13592,7 +13639,7 @@ System.out.println(response.toString());
 
 `GET /me/events`
 
-Get events that have been fired specific to the user. Successful request will return an array of [Event Objects](#get-user-events-2). We recommended reading the [filtering documentation](#filtering) to return only the records you want.
+__Deprecated__: This endpoint is deprecated for in-game use and will be removed at a later date. As of March 31st 2024, events will only be returned for existing games for legacy reasons. Any new game should use the [Get User Subscriptions](#get-user-subscriptions) endpoint to fetch the latest mods subscribed to by the authenticated user as this endpoint will no longer return events for games created after that date. If you have any concerns please [reach out to us](mailto:support@mod.io?subject=Events Deprecation).<br><br> Get events that have been fired specific to the user. Successful request will return an array of [Event Objects](#get-user-events-2). We recommended reading the [filtering documentation](#filtering) to return only the records you want.
 
     Filter|Type|Description
     ---|---|---
@@ -13916,7 +13963,7 @@ Get all games the _authenticated user_ added or is a team member of. Successful 
     curation_option|integer|Curation options enabled by this game to approve mods:<br><br>__0__ = No curation: Mods are immediately available to play<br>__1__ = Price change approval: Pricing changes for marketplace mods queued for acceptance<br>__2__ = Full curation: All mods must be accepted by someone to be listed<br>__?__ = Combine to enable multiple features (see BITWISE fields)
     community_options|integer|Community features enabled for this game:<br><br>__0__ = None<br>__1__ = Enable comments<br>__2__ = Enable guides<br>__4__ = Pin on homepage<br>__8__ = Show on homepage<br>__16__ = Show more on homepage<br>__32__ = Allow change status<br>__64__ = Enable Previews (Game must be hidden)<br>__128__ = Allow Preview Share-URL (Previews must be enabled)<br>__256__ = Allow negative ratings<br>__?__ = Combine to find games with multiple options enabled (see [BITWISE fields](#bitwise-and-bitwise-and))
     monetization_options|integer|Monetization features mods can enable:<br><br>__0__ = None<br>__1__ = Enabled<br>__2__ = Allow mods to be sold (marketplace)<br>__?__ = Combine to find games with multiple options enabled (see [BITWISE fields](#bitwise-and-bitwise-and))
-    api_access_options|integer|Level of API access allowed by this game:<br><br>__0__ = None<br>__1__ = Allow 3rd parties to access this games API endpoints<br>__2__ = Allow mods to be downloaded directly (if disabled all download URLs will contain a frequently changing verification hash to stop unauthorized use)<br>__?__ = Combine to find games with multiple options enabled (see [BITWISE fields](#bitwise-and-bitwise-and)
+    api_access_options|integer|Level of API access allowed by this game:<br><br>__0__ = None<br>__1__ = Allow 3rd parties to access this games API endpoints<br>__2__ = Allow mods to be downloaded directly (if disabled all download URLs will contain a frequently changing verification hash to stop unauthorized use)<br>__4__ = Requires a bearer token to be supplied when attempting the download to enforce authenticated downloads only<br>__8__ = Requires a bearer token to be supplied and for the user to own the file when attempting the download<br>__?__ = Combine to find games with multiple options enabled (see [BITWISE fields](#bitwise-and-bitwise-and))
     maturity_options|integer|Mature content setup for this game:<br><br>__0__ = Don't allow mature content in mods<br>__1__ = Allow mature content in mods<br>__2__ = This game is for mature audiences only<br>__?__ = Combine to find games with multiple options enabled (see [BITWISE fields](#bitwise-and-bitwise-and)
 
     Display|Type|Description
@@ -13988,10 +14035,14 @@ Get all games the _authenticated user_ added or is a team member of. Successful 
       "tag_options": [
         {
           "name": "Theme",
+          "name_localized": "string",
           "type": "checkboxes",
           "tags": [
             "Horror"
           ],
+          "tags_localized": {
+            "Horror": "Horreur"
+          },
           "tag_count_map": {
             "Horror": 52
           },
@@ -15404,6 +15455,129 @@ Status|Meaning|Error Ref|Description|Response Schema
 To perform this request, you must be authenticated via one of the following methods:
 <a href="#authentication">OAuth 2</a> (Scopes: read)
 </aside>
+# Monetization
+
+## Get Game Token Packs
+
+> Example request
+
+```shell
+# You can also use wget
+curl -X GET https://*.modapi.io/v1/games/{game-id}/monetization/token-packs \
+  -H 'Authorization: Bearer {access-token}' \ 
+  -H 'Accept: application/json'
+
+```
+
+```http
+GET https://*.modapi.io/v1/games/{game-id}/monetization/token-packs HTTP/1.1
+Host: *.modapi.io
+
+Accept: application/json
+Authorization: Bearer {access-token}
+
+```
+
+```javascript
+var headers = {
+  'Authorization':'Bearer {access-token}',
+  'Accept':'application/json'
+
+};
+
+$.ajax({
+  url: 'https://*.modapi.io/v1/games/{game-id}/monetization/token-packs',
+  method: 'get',
+
+  headers: headers,
+  success: function(data) {
+    console.log(JSON.stringify(data));
+  }
+})
+```
+
+```javascript--nodejs
+const request = require('node-fetch');
+
+const headers = {
+  'Authorization':'Bearer {access-token}',
+  'Accept':'application/json'
+
+};
+
+fetch('https://*.modapi.io/v1/games/{game-id}/monetization/token-packs',
+{
+  method: 'GET',
+
+  headers: headers
+})
+.then(function(res) {
+    return res.json();
+}).then(function(body) {
+    console.log(body);
+});
+```
+
+```python
+import requests
+headers = {
+  'Authorization': 'Bearer {access-token}',
+  'Accept': 'application/json'
+}
+
+r = requests.get('https://*.modapi.io/v1/games/{game-id}/monetization/token-packs', params={
+
+}, headers = headers)
+
+print r.json()
+```
+
+```java
+URL obj = new URL("https://*.modapi.io/v1/games/{game-id}/monetization/token-packs");
+HttpURLConnection con = (HttpURLConnection) obj.openConnection();
+con.setRequestMethod("GET");
+int responseCode = con.getResponseCode();
+BufferedReader in = new BufferedReader(
+    new InputStreamReader(con.getInputStream()));
+String inputLine;
+StringBuffer response = new StringBuffer();
+while ((inputLine = in.readLine()) != null) {
+    response.append(inputLine);
+}
+in.close();
+System.out.println(response.toString());
+```
+
+`GET /games/{game-id}/monetization/token-packs`
+
+Get all token packs for a game. Successful request will return a [Game Token Pack Object](#game-token-pack-object).
+
+> Example response
+
+```json
+{
+  "id": 1,
+  "token_pack_id": 1,
+  "price": 1000,
+  "amount": 1000,
+  "portal": "WEB",
+  "sku": "SKU0001",
+  "name": "Token Pack A",
+  "description": "This pack contains 1000 tokens!",
+  "date_added": 1492564103,
+  "date_updated": 1492564103
+}
+
+```
+<h3 id="Get-Game-Token-Packs-responses">Responses</h3>
+
+Status|Meaning|Error Ref|Description|Response Schema
+---|---|----|---|---|
+200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)||Game Token Pack Successful|[Game Token Pack Object](#schemagame_token_pack_object)
+<aside class="auth-notice">
+To perform this request, you must be authenticated via one of the following methods:
+<a href="#authentication">OAuth 2</a> (Scopes: write)
+</aside>
 # Checkout
 
 ## Purchase An Item
@@ -15691,6 +15865,8 @@ Status|Meaning|Error Ref|Description|Response Schema
 To perform this request, you must be authenticated via one of the following methods:
 <a href="#authentication">OAuth 2</a> (Scopes: write)
 </aside>
+# s2s
+
 # In-App Purchases
 
 ## Sync Xbox Live Entitlements
@@ -15793,7 +15969,7 @@ System.out.println(response.toString());
 
 `POST /me/iap/xboxlive/sync`
 
-Convert an in-game consumable that a user has purchased on Xbox Live into a users mod.io inventory. This endpoint will consume the entitlement on behalf of the user against the portal in which the entitlements reside (i.e. Xbox Live).
+Convert an in-game consumable that a user has purchased on Xbox Live into a users mod.io inventory. For an entitlement to be eligible for consumption it must be registered on mod.io within the In-App Purchases section of your game profile. This endpoint will consume the entitlement on behalf of the user against the portal in which the entitlements reside (i.e. Xbox Live).
 
      Parameter|Type|Required|Description
      ---|---|---|---|
@@ -15830,8 +16006,8 @@ Convert an in-game consumable that a user has purchased on Xbox Live into a user
 Status|Meaning|Error Ref|Description|Response Schema
 ---|---|----|---|---|
 200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)||Successful Request|[Get Entitlement Sync Status](#schemaget_entitlement_sync_status)
-400|[Bad Request](https://tools.ietf.org/html/rfc7231#section-6.5.1)|900057|In-App Purchase Syncing is only supported for active game sessions.|[Error Object](#schemaerror_object)
-400|[Bad Request](https://tools.ietf.org/html/rfc7231#section-6.5.1)|11069|The authenticated user does not have a XboxLive account connected to their mod.io account. The user must log into mod.io with their XboxLive account either from your game client or our website before re-attempting this request.|[Error Object](#schemaerror_object)
+403|[Forbidden](https://tools.ietf.org/html/rfc7231#section-6.5.3)|900057|In-App Purchase Syncing is only supported for active game sessions.|[Error Object](#schemaerror_object)
+403|[Forbidden](https://tools.ietf.org/html/rfc7231#section-6.5.3)|11069|The authenticated user does not have a XboxLive account connected to their mod.io account. The user must log into mod.io with their XboxLive account either from your game client or our website before re-attempting this request.|[Error Object](#schemaerror_object)
 <aside class="auth-notice">
 To perform this request, you must be authenticated via one of the following methods:
 <a href="#authentication">OAuth 2</a> (Scopes: write)
@@ -15940,7 +16116,7 @@ System.out.println(response.toString());
 
 `POST /me/iap/psn/sync`
 
-Convert an in-game consumable that a user has purchased via PlayStation™Network into a users mod.io inventory. This endpoint will consume the entitlement on behalf of the user against the portal in which the entitlements reside (i.e. PlayStation™Network). Requests to this endpoint should specify if they are syncing PS4 or PS5 entitlements via the [platform header](#targeting-a-platform). If the platform header is omitted from the request, the endpoint will default to syncing PS5 entitlements.
+Convert an in-game consumable that a user has purchased via PlayStation™Network into a users mod.io inventory. For an entitlement to be eligible for consumption it must be registered on mod.io within the In-App Purchases section of your game profile. This endpoint will consume the entitlement on behalf of the user against the portal in which the entitlements reside (i.e. PlayStation™Network). Requests to this endpoint should specify if they are syncing PS4 or PS5 entitlements via the [platform header](#targeting-a-platform). If the platform header is omitted from the request, the endpoint will default to syncing PS5 entitlements.
 
     Body Parameter|Type|Required|Description
     ---|---|---|---|
@@ -15979,9 +16155,9 @@ Convert an in-game consumable that a user has purchased via PlayStation™Networ
 Status|Meaning|Error Ref|Description|Response Schema
 ---|---|----|---|---|
 200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)||Successful Request|[Get Entitlement Sync Status](#schemaget_entitlement_sync_status)
-400|[Bad Request](https://tools.ietf.org/html/rfc7231#section-6.5.1)|900054|The In-App Purchase config has not been configured for PlayStation™Network. Please submit the required credentials within the IAP config section of your game admin panel.|[Error Object](#schemaerror_object)
-400|[Bad Request](https://tools.ietf.org/html/rfc7231#section-6.5.1)|11069|The authenticated user does not have a PlayStation™Network account connected to their mod.io account. The user must log into mod.io with their PlayStation™Network account either from your game client or our website before re-attempting this request.|[Error Object](#schemaerror_object)
-400|[Bad Request](https://tools.ietf.org/html/rfc7231#section-6.5.1)|900057|In-App Purchase Syncing is only supported for active game sessions.|[Error Object](#schemaerror_object)
+403|[Forbidden](https://tools.ietf.org/html/rfc7231#section-6.5.3)|900054|The In-App Purchase config has not been configured for PlayStation™Network. Please submit the required credentials within the IAP config section of your game admin panel.|[Error Object](#schemaerror_object)
+403|[Forbidden](https://tools.ietf.org/html/rfc7231#section-6.5.3)|11069|The authenticated user does not have a PlayStation™Network account connected to their mod.io account. The user must log into mod.io with their PlayStation™Network account either from your game client or our website before re-attempting this request.|[Error Object](#schemaerror_object)
+403|[Forbidden](https://tools.ietf.org/html/rfc7231#section-6.5.3)|900057|In-App Purchase Syncing is only supported for active game sessions.|[Error Object](#schemaerror_object)
 <aside class="auth-notice">
 To perform this request, you must be authenticated via one of the following methods:
 <a href="#authentication">OAuth 2</a> (Scopes: write)
@@ -16079,7 +16255,7 @@ System.out.println(response.toString());
 
 `POST /me/iap/steam/sync`
 
-Convert an in-game consumable that a user has purchased on Steam into a users mod.io inventory. This endpoint will consume the entitlement on behalf of the user against the portal in which the entitlement resides (i.e. Steam).
+Convert an in-game consumable that a user has purchased on Steam into a users mod.io inventory. For an entitlement to be eligible for consumption it must be registered on mod.io within the In-App Purchases section of your game profile. This endpoint will consume the entitlement on behalf of the user against the portal in which the entitlement resides (i.e. Steam).
 
 > Example response
 
@@ -16112,8 +16288,290 @@ Convert an in-game consumable that a user has purchased on Steam into a users mo
 Status|Meaning|Error Ref|Description|Response Schema
 ---|---|----|---|---|
 200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)||Successful Request|[Get Entitlement Sync Status](#schemaget_entitlement_sync_status)
-400|[Bad Request](https://tools.ietf.org/html/rfc7231#section-6.5.1)|900054|The In-App Purchase config has not been configured for Steam. Please submit the required credentials within the IAP config section of your game admin panel.|[Error Object](#schemaerror_object)
+403|[Forbidden](https://tools.ietf.org/html/rfc7231#section-6.5.3)|900054|The In-App Purchase config has not been configured for Steam. Please submit the required credentials within the IAP config section of your game admin panel.|[Error Object](#schemaerror_object)
 404|[Not Found](https://tools.ietf.org/html/rfc7231#section-6.5.4)|11069|The authenticated user does not have a Steam account connected to their mod.io account. The user must log into mod.io with their Steam account either from your game client or our website before re-attempting this request.|[Error Object](#schemaerror_object)
+<aside class="auth-notice">
+To perform this request, you must be authenticated via one of the following methods:
+<a href="#authentication">OAuth 2</a> (Scopes: write)
+</aside>
+## Sync Apple Entitlements
+
+> Example request
+
+```shell
+# You can also use wget
+curl -X POST https://*.modapi.io/v1/me/iap/apple/sync?api_key=YourApiKey \
+  -H 'Authorization: Bearer {access-token}' \ 
+  -H 'Content-Type: application/x-www-form-urlencoded' \ 
+  -H 'Accept: application/json' \
+  -d 'receipt=MIAGCSqGSIb3DQEHAqCAMIACAQExDzANBgl.....'
+
+```
+
+```http
+POST https://*.modapi.io/v1/me/iap/apple/sync?api_key=YourApiKey HTTP/1.1
+Host: *.modapi.io
+Content-Type: application/x-www-form-urlencoded
+Accept: application/json
+Authorization: Bearer {access-token}
+
+```
+
+```javascript
+var headers = {
+  'Authorization':'Bearer {access-token}',
+  'Content-Type':'application/x-www-form-urlencoded',
+  'Accept':'application/json'
+
+};
+
+$.ajax({
+  url: 'https://*.modapi.io/v1/me/iap/apple/sync',
+  method: 'post',
+  data: '?api_key=YourApiKey',
+  headers: headers,
+  success: function(data) {
+    console.log(JSON.stringify(data));
+  }
+})
+```
+
+```javascript--nodejs
+const request = require('node-fetch');
+const inputBody = '{
+  "receipt": "MIAGCSqGSIb3DQEHAqCAMIACAQExDzANBgl....."
+}';
+const headers = {
+  'Authorization':'Bearer {access-token}',
+  'Content-Type':'application/x-www-form-urlencoded',
+  'Accept':'application/json'
+
+};
+
+fetch('https://*.modapi.io/v1/me/iap/apple/sync?api_key=YourApiKey',
+{
+  method: 'POST',
+  body: inputBody,
+  headers: headers
+})
+.then(function(res) {
+    return res.json();
+}).then(function(body) {
+    console.log(body);
+});
+```
+
+```python
+import requests
+headers = {
+  'Authorization': 'Bearer {access-token}',
+  'Content-Type': 'application/x-www-form-urlencoded',
+  'Accept': 'application/json'
+}
+
+r = requests.post('https://*.modapi.io/v1/me/iap/apple/sync', params={
+  'api_key': 'YourApiKey'
+}, headers = headers)
+
+print r.json()
+```
+
+```java
+URL obj = new URL("https://*.modapi.io/v1/me/iap/apple/sync?api_key=YourApiKey");
+HttpURLConnection con = (HttpURLConnection) obj.openConnection();
+con.setRequestMethod("POST");
+int responseCode = con.getResponseCode();
+BufferedReader in = new BufferedReader(
+    new InputStreamReader(con.getInputStream()));
+String inputLine;
+StringBuffer response = new StringBuffer();
+while ((inputLine = in.readLine()) != null) {
+    response.append(inputLine);
+}
+in.close();
+System.out.println(response.toString());
+```
+
+`POST /me/iap/apple/sync`
+
+Convert in-app consumables that a user has purchased on the iOS store into their mod.io inventory. For an entitlement to be eligible for consumption it must be registered on mod.io within the In-App Purchases section of your game profile. This endpoint will consume the entitlement on behalf of the user against the portal in which the entitlements reside (i.e. Apple).
+
+     Parameter|Type|Required|Description
+     ---|---|---|---|
+     receipt|string|true|The receipt returned to your app after a successful purchase on the iOS marketplace.
+
+> Example response
+
+```json
+{
+  "wallet": {
+    "balance": 0
+  },
+  "data": [
+    {
+      "transaction_id": "124641934672",
+      "transaction_state": 2,
+      "sku_id": "MODIO0001",
+      "entitlement_consumed": true,
+      "entitlement_type": 0,
+      "details": {
+        "tokens_allocated": 1000
+      }
+    }
+  ],
+  "result_count": 70,
+  "result_offset": 0,
+  "result_limit": 100,
+  "result_total": 70
+}
+
+```
+<h3 id="Sync-Apple-Entitlements-responses">Responses</h3>
+
+Status|Meaning|Error Ref|Description|Response Schema
+---|---|----|---|---|
+200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)||Successful Request|[Get Entitlement Sync Status](#schemaget_entitlement_sync_status)
+403|[Forbidden](https://tools.ietf.org/html/rfc7231#section-6.5.3)|900057|In-App Purchase Syncing is only supported for active game sessions.|[Error Object](#schemaerror_object)
+403|[Forbidden](https://tools.ietf.org/html/rfc7231#section-6.5.3)|11069|The authenticated user does not have an Apple account connected to their mod.io account. The user must log into mod.io with their Apple account either from your game client or our website before re-attempting this request.|[Error Object](#schemaerror_object)
+403|[Forbidden](https://tools.ietf.org/html/rfc7231#section-6.5.3)|11203|In-App Purchase functionality has not yet been configured for this title.|[Error Object](#schemaerror_object)
+403|[Forbidden](https://tools.ietf.org/html/rfc7231#section-6.5.3)|11205|The Apple Bundle ID is invalid.|[Error Object](#schemaerror_object)
+<aside class="auth-notice">
+To perform this request, you must be authenticated via one of the following methods:
+<a href="#authentication">OAuth 2</a> (Scopes: write)
+</aside>
+## Sync Google™ Entitlements
+
+> Example request
+
+```shell
+# You can also use wget
+curl -X POST https://*.modapi.io/v1/me/iap/google/sync?api_key=YourApiKey \
+  -H 'Authorization: Bearer {access-token}' \ 
+  -H 'Accept: application/json'
+
+```
+
+```http
+POST https://*.modapi.io/v1/me/iap/google/sync?api_key=YourApiKey HTTP/1.1
+Host: *.modapi.io
+
+Accept: application/json
+Authorization: Bearer {access-token}
+
+```
+
+```javascript
+var headers = {
+  'Authorization':'Bearer {access-token}',
+  'Accept':'application/json'
+
+};
+
+$.ajax({
+  url: 'https://*.modapi.io/v1/me/iap/google/sync',
+  method: 'post',
+  data: '?api_key=YourApiKey',
+  headers: headers,
+  success: function(data) {
+    console.log(JSON.stringify(data));
+  }
+})
+```
+
+```javascript--nodejs
+const request = require('node-fetch');
+
+const headers = {
+  'Authorization':'Bearer {access-token}',
+  'Accept':'application/json'
+
+};
+
+fetch('https://*.modapi.io/v1/me/iap/google/sync?api_key=YourApiKey',
+{
+  method: 'POST',
+
+  headers: headers
+})
+.then(function(res) {
+    return res.json();
+}).then(function(body) {
+    console.log(body);
+});
+```
+
+```python
+import requests
+headers = {
+  'Authorization': 'Bearer {access-token}',
+  'Accept': 'application/json'
+}
+
+r = requests.post('https://*.modapi.io/v1/me/iap/google/sync', params={
+  'api_key': 'YourApiKey'
+}, headers = headers)
+
+print r.json()
+```
+
+```java
+URL obj = new URL("https://*.modapi.io/v1/me/iap/google/sync?api_key=YourApiKey");
+HttpURLConnection con = (HttpURLConnection) obj.openConnection();
+con.setRequestMethod("POST");
+int responseCode = con.getResponseCode();
+BufferedReader in = new BufferedReader(
+    new InputStreamReader(con.getInputStream()));
+String inputLine;
+StringBuffer response = new StringBuffer();
+while ((inputLine = in.readLine()) != null) {
+    response.append(inputLine);
+}
+in.close();
+System.out.println(response.toString());
+```
+
+`POST /me/iap/google/sync`
+
+Convert an in-game consumable that a user has purchased via GooglePlay™ into a users mod.io inventory. This endpoint will consume the entitlement on behalf of the user against the portal in which the entitlements reside (i.e. Google).
+
+    Body Parameter|Type|Required|Description
+    ---|---|---|---|
+    receipt|string||The json receipt returned from GooglePlay™ store. Required.
+
+> Example response
+
+```json
+{
+  "wallet": {
+    "balance": 0
+  },
+  "data": [
+    {
+      "transaction_id": "124641934672",
+      "transaction_state": 2,
+      "sku_id": "MODIO0001",
+      "entitlement_consumed": true,
+      "entitlement_type": 0,
+      "details": {
+        "tokens_allocated": 1000
+      }
+    }
+  ],
+  "result_count": 70,
+  "result_offset": 0,
+  "result_limit": 100,
+  "result_total": 70
+}
+
+```
+<h3 id="Sync-Google™-Entitlements-responses">Responses</h3>
+
+Status|Meaning|Error Ref|Description|Response Schema
+---|---|----|---|---|
+200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)||Successful Request|[Get Entitlement Sync Status](#schemaget_entitlement_sync_status)
+400|[Bad Request](https://tools.ietf.org/html/rfc7231#section-6.5.1)|900054|The In-App Purchase config has not been configured for Google™. Please submit the required credentials within the IAP config section of your game admin panel.|[Error Object](#schemaerror_object)
+400|[Bad Request](https://tools.ietf.org/html/rfc7231#section-6.5.1)|11069|The authenticated user does not have a Google™ account connected to their mod.io account. The user must log into mod.io with their PlayStation™Network account either from your game client or our website before re-attempting this request.|[Error Object](#schemaerror_object)
+400|[Bad Request](https://tools.ietf.org/html/rfc7231#section-6.5.1)|900057|In-App Purchase Syncing is only supported for active game sessions.|[Error Object](#schemaerror_object)
 <aside class="auth-notice">
 To perform this request, you must be authenticated via one of the following methods:
 <a href="#authentication">OAuth 2</a> (Scopes: write)
@@ -16217,6 +16675,30 @@ thumb_100x100|string|URL to the medium avatar thumbnail.
 
 
 
+## Client Credentials Access Token Object
+
+<a name="schemaclient_credentials_access_token_object"></a>
+
+```json
+{
+  "token_type": "Bearer",
+  "expires_in": "2592000",
+  "access_token": "eyJlbmMiOiJBMTI4Q0JDLUhTMjU2IiwiYWxnIjoiUlNBLU9BRVAiLCJjdHkiOi....",
+  "scopes": "read,write"
+} 
+```
+
+### Properties
+
+Name|Type|Description
+---|---|---|---|
+token_type|string|Token type, always `Bearer`.
+expires_in|int|Seconds until the supplied `access_token` expires which is fixed at `2592000` seconds (approx 1 month).
+access_token|string|The access token used to make requests to the mod.io API on behalf of the user.
+scopes|string|The scopes the of the token that have been set.
+
+
+
 ## Comment Object
 
    <a name="schemacomment_object"></a>
@@ -16249,7 +16731,8 @@ thumb_100x100|string|URL to the medium avatar thumbnail.
   "thread_position": "01",
   "karma": 1,
   "karma_guest": 0,
-  "content": "Hey <a href=\"https://mod.io/u/guest\">guest</a>, you should check out this mod!"
+  "content": "Hey <a href=\"https://mod.io/u/guest\">guest</a>, you should check out this mod!",
+  "options": 0
 } 
 ```
 
@@ -16268,6 +16751,7 @@ thread_position|string|Levels of nesting in a comment thread. How it works:<br><
 karma|integer|Karma received for the comment (can be postive or negative).
 karma_guest|integer|Deprecated: No longer used and will be removed in subsequent API version.
 content|string|Contents of the comment.
+options|integer|The options specified by the mod or guide team. Available options are:<br><br>__0__ = All of the options below are disabled<br>__1__ = Pinned comment<br>__2__ = Locked comment<br>__?__ = Add the options you want together, to enable multiple features (see [BITWISE fields](#bitwise-and-bitwise-and))
 
 
 
@@ -16461,10 +16945,14 @@ team_id|integer|The ID of the monetization team.
   "tag_options": [
     {
       "name": "Theme",
+      "name_localized": "string",
       "type": "checkboxes",
       "tags": [
         "Horror"
       ],
+      "tags_localized": {
+        "Horror": "Horreur"
+      },
       "tag_count_map": {
         "Horror": 52
       },
@@ -16534,7 +17022,7 @@ profile_url|string|URL to the game.
 stats|[Game Stats Object](#schemagame_stats_object)|Numerous aggregate stats for the game.
 theme|[Theme Object](#schematheme_object)|Theme color values for the game.
 other_urls|[Game OtherUrls Object](#schemagame_otherurls_object)[]|Creator defined URLs to share.
-tag_options|[Game Tag Option Object](#schemagame_tag_option_object)[]|Groups of tags configured by the game developer, that mods can select. Hidden tags will only be returned if `show_hidden_tags` is set to `true`.
+tag_options|[Game Tag Option Localized Object](#schemagame_tag_option_localized_object)[]|Groups of tags configured by the game developer, that mods can select. Hidden tags will only be returned if `show_hidden_tags` is set to `true`. Group names and tags will be localized into the specified `Accept-Language` header value if provided, for a list of supported languages see [Localization](#localization) (Note that if a localized variant of a tag is not available it will default to English).
 platforms|[Game Platforms Object](#schemagame_platforms_object)[]|Platforms that are supported by this title.
 
 
@@ -16613,6 +17101,44 @@ date_expires|integer|Unix timestamp until this game's statistics are considered 
 
 
 
+## Game Tag Option Localized Object
+
+<a name="schemagame_tag_option_localized_object"></a>
+
+```json
+{
+  "name": "Theme",
+  "name_localized": "string",
+  "type": "checkboxes",
+  "tags": [
+    "Horror"
+  ],
+  "tags_localized": {
+    "Horror": "Horreur"
+  },
+  "tag_count_map": {
+    "Horror": 52
+  },
+  "hidden": false,
+  "locked": false
+} 
+```
+
+### Properties
+
+Name|Type|Description
+---|---|---|---|
+name|string|Name of the tag group.
+name_localized|string|No description
+type|string|Can multiple tags be selected via 'checkboxes' or should only a single tag be selected via a 'dropdown'.
+tags_localized|object|List of tag names and the localized variant of the tag.
+tag_count_map|object|List of tag names and the count of mods with these tags.
+hidden|boolean|Groups of tags flagged as 'hidden' are intended to be used for filtering (eg. game version), but should not be displayed to users. Hidden tags will only be returned if `show_hidden_tags` is set to `true`.
+locked|boolean|Groups of tags flagged as 'locked' are editable only if the authenticated user is a team member of the parent game. Useful for games to tag special functionality, which users can see and filter on (eg. competition winners).
+tags|string[]|Array of tags in this group.
+
+
+
 ## Game Tag Option Object 
 
 <a name="schemagame_tag_option_object"></a>
@@ -16620,9 +17146,24 @@ date_expires|integer|Unix timestamp until this game's statistics are considered 
 ```json
 {
   "name": "Theme",
+  "name_localization": {
+    "en": "Difficulty",
+    "de": "",
+    "fr": ""
+  },
   "type": "checkboxes",
   "tags": [
     "Horror"
+  ],
+  "tags_localization": [
+    {
+      "tag": "string",
+      "translations": {
+        "en": "",
+        "de": "",
+        "fr": ""
+      }
+    }
   ],
   "tag_count_map": {
     "Horror": 52
@@ -16637,11 +17178,57 @@ date_expires|integer|Unix timestamp until this game's statistics are considered 
 Name|Type|Description
 ---|---|---|---|
 name|string|Name of the tag group.
+name_localization|object|No description
+» en|string|No description
+» de|string|Optional language translation.
+» fr|string|Optional language translation.
 type|string|Can multiple tags be selected via 'checkboxes' or should only a single tag be selected via a 'dropdown'.
 tag_count_map|object|List of tag names and the count of mods with these tags.
 hidden|boolean|Groups of tags flagged as 'hidden' are intended to be used for filtering (eg. game version), but should not be displayed to users. Hidden tags will only be returned if `show_hidden_tags` is set to `true`.
 locked|boolean|Groups of tags flagged as 'locked' are editable only if the authenticated user is a team member of the parent game. Useful for games to tag special functionality, which users can see and filter on (eg. competition winners).
 tags|string[]|Array of tags in this group.
+tags_localization|object[]|No description
+» tag|string|The tag.
+» translations|object|No description
+»» en|string|English translation of the tag.
+»» de|string|German translation of the tag.
+»» fr|string|French translation of the tag.
+
+
+
+## Game Token Pack Object 
+
+<a name="schemagame_token_pack_object"></a>
+
+```json
+{
+  "id": 1,
+  "token_pack_id": 1,
+  "price": 1000,
+  "amount": 1000,
+  "portal": "WEB",
+  "sku": "SKU0001",
+  "name": "Token Pack A",
+  "description": "This pack contains 1000 tokens!",
+  "date_added": 1492564103,
+  "date_updated": 1492564103
+} 
+```
+
+### Properties
+
+Name|Type|Description
+---|---|---|---|
+id|integer|The internal mod.io ID of the game token pack.
+token_pack_id|integer|The ID of the token pack.
+price|integer|The price of the token pack in USD.
+amount|integer|The amount of tokens the pack contains.
+portal|string|The portal of the token pack.
+sku|string|The SKU ID of the token pack.
+name|string|The name of the game token pack.
+description|string|The description of the game token pack.
+date_added|integer|Unix timestamp of the date the token pack was added to the game.
+date_updated|integer|Unix timestamp of the date the game token pack was updated.
 
 
 
@@ -16751,9 +17338,24 @@ result_total|integer|Number of entitlements mod.io was able to retrieve that can
   "data": [
     {
       "name": "Theme",
+      "name_localization": {
+        "en": "Difficulty",
+        "de": "",
+        "fr": ""
+      },
       "type": "checkboxes",
       "tags": [
         "Horror"
+      ],
+      "tags_localization": [
+        {
+          "tag": "string",
+          "translations": {
+            "en": "",
+            "de": "",
+            "fr": ""
+          }
+        }
       ],
       "tag_count_map": {
         "Horror": 52
@@ -16845,10 +17447,14 @@ result_total|integer|Total number of results found.
       "tag_options": [
         {
           "name": "Theme",
+          "name_localized": "string",
           "type": "checkboxes",
           "tags": [
             "Horror"
           ],
+          "tags_localized": {
+            "Horror": "Horreur"
+          },
           "tag_count_map": {
             "Horror": 52
           },
@@ -16939,7 +17545,8 @@ result_total|integer|Total number of results found.
       "thread_position": "01",
       "karma": 1,
       "karma_guest": 0,
-      "content": "Hey <a href=\"https://mod.io/u/guest\">guest</a>, you should check out this mod!"
+      "content": "Hey <a href=\"https://mod.io/u/guest\">guest</a>, you should check out this mod!",
+      "options": 0
     }
   ],
   "result_count": 1,
@@ -17112,7 +17719,8 @@ result_total|integer|Total number of results found.
       "thread_position": "01",
       "karma": 1,
       "karma_guest": 0,
-      "content": "Hey <a href=\"https://mod.io/u/guest\">guest</a>, you should check out this mod!"
+      "content": "Hey <a href=\"https://mod.io/u/guest\">guest</a>, you should check out this mod!",
+      "options": 0
     }
   ],
   "result_count": 1,
@@ -18470,7 +19078,7 @@ date_expires|integer|Unix timestamp until this mods's statistics are considered 
 Name|Type|Description
 ---|---|---|---|
 name|string|Tag name.
-date_added|integer|Unix timestamp of date tag was applied.
+date_added|integer|**Deprecated:** Unix timestamp of date tag was applied.
 
 
 
@@ -18951,13 +19559,51 @@ date_added|integer|Unix timestamp of date rating was submitted.
 
 
 
+## S2S Pay Object  
+
+<a name="schemas2s_pay_object"></a>
+
+```json
+{
+  "transaction_id": 0,
+  "gross_amount": 0,
+  "net_amount": 0,
+  "platform_fee": 0,
+  "gateway_fee": 0,
+  "transaction_type": "string",
+  "meta": {},
+  "purchase_date": 1626667557,
+  "wallet_type": "string",
+  "balance": 0,
+  "deficit": 0
+} 
+```
+
+### Properties
+
+Name|Type|Description
+---|---|---|---|
+transaction_id|integer|The transaction id.
+gross_amount|integer|The gross amount of the purchase in the lowest denomination of currency.
+net_amount|integer|The net amount of the purchase in the lowest denomination of currency.
+platform_fee|integer|The platform fee of the purchase in the lowest denomination of currency.
+gateway_fee|integer|The gateway fee of the purchase in the lowest denomination of currency.
+transaction_type|string|The state of the transaction that was processed. E.g. CANCELLED, CLEARED, FAILED, PAID, PENDING, REFUNDED.
+meta|object|The metadata that was given in the transaction.
+purchase_date|integer|The time of the purchase.
+wallet_type|string|The type of wallet that was used for the purchase. E.g. STANDARD_MIO.
+balance|integer|The balance of the users' wallet.
+deficit|integer|The deficit of the users' wallet.
+
+
+
 ## Service Ticket Object  
 
 <a name="schemaservice_ticket_object"></a>
 
 ```json
 {
-  "resource": "game-secure-server",
+  "resource": "application-server",
   "service_ticket": "eyJ0eXAiOiXKV1QibCJhbLciOiJeiUzI1....."
 } 
 ```
@@ -18966,7 +19612,7 @@ date_added|integer|Unix timestamp of date rating was submitted.
 
 Name|Type|Description
 ---|---|---|---|
-resource|string|The resource as to which the service ticket is issued for. Possible Values are `game-secure-server` and `xboxlive`
+resource|string|The resource as to which the service ticket is issued for. Possible Values are `application-server`.
 service_ticket|string|The service ticket for the requested audience.
 
 
