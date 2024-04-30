@@ -4,7 +4,6 @@ on:
   push:
     branches:
       - 'master'
-      - 'chore/QLTY-534-docs'
 
 permissions:
   id-token: write   # This is required for requesting the JWT
