@@ -4,7 +4,6 @@ on:
   push:
     branches:
       - 'master'
-      - 'chore/QLTY-534-docs'
 
 jobs:
   deploy:
@@ -19,20 +18,8 @@ jobs:
           sudo gem install bundler
           bundle install
 
-      # - name: Run deployment script
-      #   shell: bash
-      #   run: |
-      #     chmod +x ./deploy_gh.sh
-      #     ./deploy_gh.sh
-
-      - name: Deploy build into modio-docs staging (temp solution)
-        env:
-          ENVIRONMENT: staging
+      - name: Run deployment script
+        shell: bash
         run: |
-          make deploy-into-modio-docs
-
-      # - name: Deploy build into modio-docs prod (temp solution)
-      #   env:
-      #     ENVIRONMENT: prod
-      #   run: |
-      #     make deploy-into-modio-docs
+          chmod +x ./deploy_gh.sh
+          ./deploy_gh.sh

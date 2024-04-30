@@ -1,0 +1,64 @@
+name: deploy
+
+on:
+  push:
+    branches:
+      - 'master'
+      - 'chore/QLTY-534-docs'
+
+jobs:
+  copy-into-modio-docs-staging:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Install gems
+        run: |
+          sudo gem install bundler
+          bundle install
+
+      - name: Configure AWS Credentials for api-staging
+        env:
+          AWS_REGION : ap-southeast-2
+        uses: aws-actions/configure-aws-credentials@v4
+        with:
+          role-to-assume: ${{ secrets.RESTAPI_STAGING_AWS_ROLE }}
+          role-session-name: api-staging-github-action
+          aws-region: ${{ env.AWS_REGION }}
+
+
+      - name: Deploy build into modio-docs staging (temp solution)
+        env:
+          ENVIRONMENT: staging
+          AWS_REGION : ap-southeast-2
+        run: |
+          make deploy-into-modio-docs
+
+  # copy-into-modio-docs-prod:
+  #   runs-on: ubuntu-latest
+  #   needs: [copy-into-modio-docs-staging]
+  #   steps:
+  #     - name: Checkout code
+  #       uses: actions/checkout@v4
+
+  #     - name: Install gems
+  #       run: |
+  #         sudo gem install bundler
+  #         bundle install
+
+  #     - name: Configure AWS Credentials for api-prod
+  #       env:
+  #         AWS_REGION : us-west-2
+  #       uses: aws-actions/configure-aws-credentials@v4
+  #       with:
+  #         role-to-assume: ${{ secrets.RESTAPI_PROD_AWS_ROLE }}
+  #         role-session-name: api-staging-github-action
+  #         aws-region: ${{ env.AWS_REGION }}
+
+  #     - name: Deploy build into modio-docs prod (temp solution)
+  #       env:
+  #         ENVIRONMENT: prod
+  #         AWS_REGION : us-west-2
+  #       run: |
+  #         make deploy-into-modio-docs
