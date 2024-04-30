@@ -15,10 +15,10 @@ set :markdown,
     renderer: UniqueHeadCounter
 
 # Assets
-set :css_dir, 'restapiref/stylesheets'
-set :js_dir, 'restapiref/javascripts'
-set :images_dir, 'restapiref/images'
-set :fonts_dir, 'restapiref/fonts'
+set :css_dir, '/restapiref/stylesheets'
+set :js_dir, '/restapiref/javascripts'
+set :images_dir, '/restapiref/images'
+set :fonts_dir, '/restapiref/fonts'
 
 # Activate the syntax highlighter
 activate :syntax
