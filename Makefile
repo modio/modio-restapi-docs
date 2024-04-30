@@ -11,4 +11,4 @@ build:
 	bundle exec middleman build --clean
 
 deploy-into-modio-docs: clean build
-	./tools/create-slate-output.sh $(ENVIRONMENT)
+	./create-slate-output.sh $(ENVIRONMENT)
