@@ -1000,6 +1000,9 @@
                     <a href="#rating-object" class="toc-h2 toc-link" data-title="Response Schemas">Rating Object</a>
                   </li>
                   <li>
+                    <a href="#refund-object" class="toc-h2 toc-link" data-title="Response Schemas">Refund Object</a>
+                  </li>
+                  <li>
                     <a href="#s2s-pay-object" class="toc-h2 toc-link" data-title="Response Schemas">S2S Pay Object</a>
                   </li>
                   <li>
@@ -4668,7 +4671,7 @@ curl <span class="nt">-X</span> POST https://<span class="k">*</span>.modapi.io/
   <span class="nt">-d</span> <span class="s1">'client_id=1234'</span> <span class="se">\</span>
   <span class="nt">-d</span> <span class="s1">'client_secret=bqyMxkGE4QVBaYpHQcf6XJENjZ5RWFHsbEZ5SFiGa'</span> <span class="se">\</span>
   <span class="nt">-d</span> <span class="s1">'grant_type=client_credentials'</span> <span class="se">\</span>
-  <span class="nt">-d</span> <span class="s1">'scopes=read,write,read_monetization'</span>
+  <span class="nt">-d</span> <span class="s1">'scopes=read,write,monetization'</span>
 
 </code></pre></div><div class="highlight"><pre class="highlight http tab-http"><code><span class="nf">POST</span> <span class="nn">https://*.modapi.io/v1/oauth/token/</span> <span class="k">HTTP</span><span class="o">/</span><span class="m">1.1</span>
 <span class="na">Host</span><span class="p">:</span> <span class="s">*.modapi.io</span>
@@ -4695,7 +4698,7 @@ curl <span class="nt">-X</span> POST https://<span class="k">*</span>.modapi.io/
   "client_id": "1234",
   "client_secret": "bqyMxkGE4QVBaYpHQcf6XJENjZ5RWFHsbEZ5SFiGa",
   "grant_type": "client_credentials",
-  "scopes": "read,write,read_monetization"
+  "scopes": "read,write,monetization"
 }</span><span class="dl">'</span><span class="p">;</span>
 <span class="kd">const</span> <span class="nx">headers</span> <span class="o">=</span> <span class="p">{</span>
   <span class="dl">'</span><span class="s1">Content-Type</span><span class="dl">'</span><span class="p">:</span><span class="dl">'</span><span class="s1">application/x-www-form-urlencoded</span><span class="dl">'</span><span class="p">,</span>
@@ -4775,7 +4778,7 @@ curl <span class="nt">-X</span> POST https://<span class="k">*</span>.modapi.io/
 <td>scopes</td>
 <td>string</td>
 <td>false</td>
-<td>The scopes you wish your token to have. Currently only, read, write, and read_monetization is supported.</td>
+<td>The scopes you wish your token to have. Currently only, read, write, and monetization is supported.</td>
 </tr>
 </tbody>
 </table>
@@ -5908,7 +5911,7 @@ Accept: application/json
 <tr>
 <td>curation_option</td>
 <td>integer</td>
-<td>Curation options enabled by this game to approve mods:<br><br><strong>0</strong> = No curation: Mods are immediately available to play<br><strong>1</strong> = Price change approval: Pricing changes for marketplace mods queued for acceptance<br><strong>2</strong> = Full curation: All mods must be accepted by someone to be listed<br><strong>?</strong> = Combine to enable multiple features (see BITWISE fields)</td>
+<td>Curation option enabled by this game to approve mods:<br><br><strong>0</strong> = No curation: Mods are immediately available to play<br><strong>1</strong> = Price change approval: Pricing changes for marketplace mods queued for acceptance<br><strong>2</strong> = Full curation: All mods must be accepted by someone to be listed</td>
 </tr>
 <tr>
 <td>community_options</td>
@@ -5918,7 +5921,7 @@ Accept: application/json
 <tr>
 <td>monetization_options</td>
 <td>integer</td>
-<td>Monetization features mods can enable:<br><br><strong>0</strong> = None<br><strong>1</strong> = Enabled<br><strong>2</strong> = Allow mods to be sold (marketplace)<br><strong>?</strong> = Combine to find games with multiple options enabled (see <a href="#bitwise-and-bitwise-and">BITWISE fields</a>)</td>
+<td>Monetization options enabled for this game:<br><br><strong>0</strong> = Access to monetization features disabled<br><strong>1</strong> = Access to monetization features enabled by mod.io<br><strong>2</strong> = Marketplace enabled<br><strong>4</strong> = Creator partner program enabled<br><strong>8</strong> = Quantity limited mods supported<br><strong>16</strong> = All mods must be quantity limited<br><strong>?</strong> = Combine to find games with multiple options enabled (see <a href="#bitwise-and-bitwise-and">BITWISE fields</a>)</td>
 </tr>
 <tr>
 <td>api_access_options</td>
@@ -5928,8 +5931,7 @@ Accept: application/json
 <tr>
 <td>maturity_options</td>
 <td>integer</td>
-<td>Mature content setup for this game:<br><br><strong>0</strong> = Don't allow mature content in mods<br><strong>1</strong> = Allow mature content in mods<br><strong>2</strong> = This game is for mature audiences only<br><strong>?</strong> = Combine to find games with multiple options enabled (see <a href="#bitwise-and-bitwise-and">BITWISE fields</a>
-</td>
+<td>Mature content setup for this game:<br><br><strong>0</strong> = Don't allow mature content in mods<br><strong>1</strong> = Allow mature content in mods<br><strong>2</strong> = This game is for mature audiences only</td>
 </tr>
 </tbody>
 </table>
@@ -7617,12 +7619,12 @@ Accept: application/json
 <tr>
 <td>maturity_option</td>
 <td>integer</td>
-<td>Maturity option(s) set by the mod creator:<br><br><strong>0</strong> = None<br><strong>1</strong> = Alcohol<br><strong>2</strong> = Drugs<br><strong>4</strong> = Violence<br><strong>8</strong> = Explicit<br><strong>?</strong> = Add the options you want together, to enable multiple filters (see <a href="#bitwise-and-bitwise-and">BITWISE fields</a>)</td>
+<td>Maturity options set by the mod creator:<br><br><strong>0</strong> = None<br><strong>1</strong> = Alcohol<br><strong>2</strong> = Drugs<br><strong>4</strong> = Violence<br><strong>8</strong> = Explicit<br><strong>?</strong> = Combine to find mods with multiple options enabled (see <a href="#bitwise-and-bitwise-and">BITWISE fields</a>)</td>
 </tr>
 <tr>
 <td>monetization_options</td>
 <td>integer</td>
-<td>Monetization option(s) enabled by the mod creator:<br><br><strong>0</strong> = None<br><strong>1</strong> = Enabled<br><strong>2</strong> = Marketplace On<br><strong>?</strong> = Add the options you want together, to enable multiple filters (see <a href="#bitwise-and-bitwise-and">BITWISE fields</a>)</td>
+<td>Monetization options enabled for this mod:<br><br><strong>0</strong> = Access to monetization features disabled<br><strong>1</strong> = Access to monetization features enabled by the game for this mod<br><strong>2</strong> = Marketplace enabled<br><strong>8</strong> = Quantity of this mod is limited<br><strong>?</strong> = Combine to find mods with multiple options enabled (see <a href="#bitwise-and-bitwise-and">BITWISE fields</a>)</td>
 </tr>
 <tr>
 <td>name</td>
@@ -8278,22 +8280,22 @@ curl <span class="nt">-X</span> POST https://<span class="k">*</span>.modapi.io/
 <td>The price of the mod.<br><br><strong>NOTE:</strong> The value of this field will be ignored if the parent game's queue is enabled (see <code>curation_option</code> field in <a href="#game-object">Game Object</a>).</td>
 </tr>
 <tr>
-<td>maturity_option</td>
-<td>integer</td>
-<td></td>
-<td>Choose if this mod contains any of the following mature content.<br><br><strong>NOTE:</strong> The value of this field will default to 0 unless the parent game allows you to flag mature content (see <code>maturity_options</code> field in <a href="#game-object">Game Object</a>). <br><br><strong>0</strong> = None <em>(default)</em><br><strong>1</strong> = Alcohol<br><strong>2</strong> = Drugs<br><strong>4</strong> = Violence<br><strong>8</strong> = Explicit<br><strong>?</strong> = Add the options you want together, to enable multiple options (see <a href="#bitwise-and-bitwise-and">BITWISE fields</a>)</td>
-</tr>
-<tr>
 <td>stock</td>
 <td>integer</td>
 <td></td>
-<td>Maximum number of times this Mod can be sold. <br><br><strong>NOTE:</strong> Scarcity can be enforced by the parent Game. The value of this field is not used if the parent game's or mod's scarcity is disabled (see <code>monetization_options</code> field in <a href="#game-object">Game Object</a>).</td>
+<td>Maximum number of times this mod can be sold. <br><br><strong>NOTE:</strong> Limited mods can be enforced by the parent game. The value of this field is not used if the parent game's or mod's limited support is disabled (see <code>monetization_options</code> field in <a href="#game-object">Game Object</a>).</td>
+</tr>
+<tr>
+<td>monetization_options</td>
+<td>integer</td>
+<td></td>
+<td>Monetization options enabled for this mod:<br><br><strong>0</strong> = Access to monetization features disabled<br><strong>1</strong> = Access to monetization features enabled by the game for this mod<br><strong>2</strong> = Marketplace enabled<br><strong>8</strong> = Quantity of this mod is limited<br><strong>?</strong> = Add the options you want together, to enable multiple options (see <a href="#bitwise-and-bitwise-and">BITWISE fields</a>)</td>
 </tr>
 <tr>
 <td>maturity_option</td>
 <td>integer</td>
 <td></td>
-<td>Choose if this mod contains any of the following mature content.</td>
+<td>Mature content found in this mod.<br><br><strong>NOTE:</strong> The value of this field will default to 0 unless the parent game allows you to flag mature content (see <code>maturity_options</code> field in <a href="#game-object">Game Object</a>). <br><br><strong>0</strong> = None <em>(default)</em><br><strong>1</strong> = Alcohol<br><strong>2</strong> = Drugs<br><strong>4</strong> = Violence<br><strong>8</strong> = Explicit<br><strong>?</strong> = Add the options you want together, to enable multiple options (see <a href="#bitwise-and-bitwise-and">BITWISE fields</a>)</td>
 </tr>
 <tr>
 <td>community_options</td>
@@ -8674,22 +8676,22 @@ curl <span class="nt">-X</span> POST https://<span class="k">*</span>.modapi.io/
 <td>The price of the mod.<br><br><strong>NOTE:</strong> The value of this field will be ignored if the parent game's queue is enabled (see <code>curation_option</code> field in <a href="#game-object">Game Object</a>).</td>
 </tr>
 <tr>
-<td>monetization_options</td>
-<td>integer</td>
-<td></td>
-<td>Monetization option(s) enabled by the mod creator.<br><br><strong>NOTE:</strong> The value of this field will be ignored if the parent game's queue is enabled (see <code>curation_option</code> field in <a href="#game-object">Game Object</a>). <br><br><strong>0</strong> = None<br><strong>1</strong> = Enabled<br><strong>2</strong> = Marketplace On<br><strong>?</strong> = Add the options you want together, to enable multiple filters (see <a href="#bitwise-and-bitwise-and">BITWISE fields</a>)</td>
-</tr>
-<tr>
 <td>stock</td>
 <td>integer</td>
 <td></td>
-<td>Maximum number of times this Mod can be sold. <br><br><strong>NOTE:</strong> The value of this field is not used if the parent game's or mod's scarcity is disabled (see <code>monetization_options</code> field in <a href="#game-object">Game Object</a>).</td>
+<td>Maximum number of times this mod can be sold. <br><br><strong>NOTE:</strong> Limited mods can be enforced by the parent game. The value of this field is not used if the parent game's or mod's limited support is disabled (see <code>monetization_options</code> field in <a href="#game-object">Game Object</a>).</td>
+</tr>
+<tr>
+<td>monetization_options</td>
+<td>integer</td>
+<td></td>
+<td>Monetization options enabled for this mod:<br><br><strong>0</strong> = Access to monetization features disabled<br><strong>1</strong> = Access to monetization features enabled by the game for this mod<br><strong>2</strong> = Marketplace enabled<br><strong>8</strong> = Quantity of this mod is limited<br><strong>?</strong> = Add the options you want together, to enable multiple features (see <a href="#bitwise-and-bitwise-and">BITWISE fields</a>)</td>
 </tr>
 <tr>
 <td>maturity_option</td>
 <td>integer</td>
 <td></td>
-<td>Choose if this mod contains any of the following mature content.<br><br><strong>NOTE:</strong> The value of this field will default to 0 unless the parent game allows you to flag mature content (see <code>maturity_options</code> field in <a href="#game-object">Game Object</a>). <br><br><strong>0</strong> = None set<br><strong>1</strong> = Alcohol<br><strong>2</strong> = Drugs<br><strong>4</strong> = Violence<br><strong>8</strong> = Explicit<br><strong>?</strong> = Add the options you want together, to enable multiple options (see <a href="#bitwise-and-bitwise-and">BITWISE fields</a>)</td>
+<td>Mature content found in this mod.<br><br><strong>NOTE:</strong> The value of this field will default to 0 unless the parent game allows you to flag mature content (see <code>maturity_options</code> field in <a href="#game-object">Game Object</a>). <br><br><strong>0</strong> = None set<br><strong>1</strong> = Alcohol<br><strong>2</strong> = Drugs<br><strong>4</strong> = Violence<br><strong>8</strong> = Explicit<br><strong>?</strong> = Add the options you want together, to enable multiple options (see <a href="#bitwise-and-bitwise-and">BITWISE fields</a>)</td>
 </tr>
 <tr>
 <td>community_options</td>
@@ -18592,7 +18594,7 @@ Authorization: Bearer {access-token}
 <tr>
 <td>curation_option</td>
 <td>integer</td>
-<td>Curation options enabled by this game to approve mods:<br><br><strong>0</strong> = No curation: Mods are immediately available to play<br><strong>1</strong> = Price change approval: Pricing changes for marketplace mods queued for acceptance<br><strong>2</strong> = Full curation: All mods must be accepted by someone to be listed<br><strong>?</strong> = Combine to enable multiple features (see BITWISE fields)</td>
+<td>Curation options enabled by this game to approve mods:<br><br><strong>0</strong> = No curation: Mods are immediately available to play<br><strong>1</strong> = Price change approval: Pricing changes for marketplace mods queued for acceptance<br><strong>2</strong> = Full curation: All mods must be accepted by someone to be listed</td>
 </tr>
 <tr>
 <td>community_options</td>
@@ -18602,7 +18604,7 @@ Authorization: Bearer {access-token}
 <tr>
 <td>monetization_options</td>
 <td>integer</td>
-<td>Monetization features mods can enable:<br><br><strong>0</strong> = None<br><strong>1</strong> = Enabled<br><strong>2</strong> = Allow mods to be sold (marketplace)<br><strong>?</strong> = Combine to find games with multiple options enabled (see <a href="#bitwise-and-bitwise-and">BITWISE fields</a>)</td>
+<td>Monetization options enabled for this game:<br><br><strong>0</strong> = Access to monetization features disabled<br><strong>1</strong> = Access to monetization features enabled by mod.io<br><strong>2</strong> = Marketplace enabled<br><strong>4</strong> = Creator partner program enabled<br><strong>8</strong> = Quantity limited mods supported<br><strong>16</strong> = All mods must be quantity limited<br><strong>?</strong> = Combine to find games with multiple options enabled (see <a href="#bitwise-and-bitwise-and">BITWISE fields</a>)</td>
 </tr>
 <tr>
 <td>api_access_options</td>
@@ -18612,8 +18614,7 @@ Authorization: Bearer {access-token}
 <tr>
 <td>maturity_options</td>
 <td>integer</td>
-<td>Mature content setup for this game:<br><br><strong>0</strong> = Don't allow mature content in mods<br><strong>1</strong> = Allow mature content in mods<br><strong>2</strong> = This game is for mature audiences only<br><strong>?</strong> = Combine to find games with multiple options enabled (see <a href="#bitwise-and-bitwise-and">BITWISE fields</a>
-</td>
+<td>Mature content setup for this game:<br><br><strong>0</strong> = Don't allow mature content in mods<br><strong>1</strong> = Allow mature content in mods<br><strong>2</strong> = This game is for mature audiences only</td>
 </tr>
 </tbody>
 </table>
@@ -18927,12 +18928,12 @@ Authorization: Bearer {access-token}
 <tr>
 <td>maturity_option</td>
 <td>integer</td>
-<td>Maturity option(s) set by the mod creator:<br><br><strong>0</strong> = None<br><strong>1</strong> = Alcohol<br><strong>2</strong> = Drugs<br><strong>4</strong> = Violence<br><strong>8</strong> = Explicit<br><strong>?</strong> = Add the options you want together, to enable multiple filters (see <a href="#bitwise-and-bitwise-and">BITWISE fields</a>)</td>
+<td>Mature content found in this mod:<br><br><strong>0</strong> = None<br><strong>1</strong> = Alcohol<br><strong>2</strong> = Drugs<br><strong>4</strong> = Violence<br><strong>8</strong> = Explicit<br><strong>?</strong> = Combine to find mods with multiple options enabled (see <a href="#bitwise-and-bitwise-and">BITWISE fields</a>)</td>
 </tr>
 <tr>
 <td>monetization_options</td>
 <td>integer</td>
-<td>Monetization option(s) enabled by the mod creator:<br><br><strong>0</strong> = None<br><strong>1</strong> = Enabled<br><strong>2</strong> = Marketplace On<br><strong>?</strong> = Add the options you want together, to enable multiple filters (see <a href="#bitwise-and-bitwise-and">BITWISE fields</a>)</td>
+<td>Monetization options enabled for this mod:<br><br><strong>0</strong> = Access to monetization features disabled<br><strong>1</strong> = Access to monetization features enabled by the game for this mod<br><strong>2</strong> = Marketplace enabled<br><strong>8</strong> = Quantity of this mod is limited<br><strong>?</strong> = Combine to find mods with multiple options enabled (see <a href="#bitwise-and-bitwise-and">BITWISE fields</a>)</td>
 </tr>
 <tr>
 <td>name</td>
@@ -19306,12 +19307,12 @@ Authorization: Bearer {access-token}
 <tr>
 <td>maturity_option</td>
 <td>integer</td>
-<td>Maturity option(s) set by the mod creator:<br><br><strong>0</strong> = None<br><strong>1</strong> = Alcohol<br><strong>2</strong> = Drugs<br><strong>4</strong> = Violence<br><strong>8</strong> = Explicit<br><strong>?</strong> = Add the options you want together, to enable multiple filters (see <a href="#bitwise-and-bitwise-and">BITWISE fields</a>)</td>
+<td>Mature content found in this mod:<br><br><strong>0</strong> = None<br><strong>1</strong> = Alcohol<br><strong>2</strong> = Drugs<br><strong>4</strong> = Violence<br><strong>8</strong> = Explicit<br><strong>?</strong> = Combine to find mods with multiple options enabled (see <a href="#bitwise-and-bitwise-and">BITWISE fields</a>)</td>
 </tr>
 <tr>
 <td>monetization_options</td>
 <td>integer</td>
-<td>Monetization option(s) enabled by the mod creator:<br><br><strong>0</strong> = None<br><strong>1</strong> = Enabled<br><strong>2</strong> = Marketplace On<br><strong>?</strong> = Add the options you want together, to enable multiple filters (see <a href="#bitwise-and-bitwise-and">BITWISE fields</a>)</td>
+<td>Monetization options enabled for this mod:<br><br><strong>0</strong> = Access to monetization features disabled<br><strong>1</strong> = Access to monetization features enabled by the game for this mod<br><strong>2</strong> = Marketplace enabled<br><strong>8</strong> = Quantity of this mod is limited<br><strong>?</strong> = Combine to find mods with multiple options enabled (see <a href="#bitwise-and-bitwise-and">BITWISE fields</a>)</td>
 </tr>
 <tr>
 <td>name</td>
@@ -19675,12 +19676,12 @@ Accept: application/json
 <tr>
 <td>maturity_option</td>
 <td>integer</td>
-<td>Maturity option(s) set by the mod creator:<br><br><strong>0</strong> = None<br><strong>1</strong> = Alcohol<br><strong>2</strong> = Drugs<br><strong>4</strong> = Violence<br><strong>8</strong> = Explicit<br><strong>?</strong> = Add the options you want together, to enable multiple filters (see <a href="#bitwise-and-bitwise-and">BITWISE fields</a>)</td>
+<td>Mature content found in this mod:<br><br><strong>0</strong> = None<br><strong>1</strong> = Alcohol<br><strong>2</strong> = Drugs<br><strong>4</strong> = Violence<br><strong>8</strong> = Explicit<br><strong>?</strong> = Combine to find mods with multiple options enabled (see <a href="#bitwise-and-bitwise-and">BITWISE fields</a>)</td>
 </tr>
 <tr>
 <td>monetization_options</td>
 <td>integer</td>
-<td>Monetization option(s) enabled by the mod creator:<br><br><strong>0</strong> = None<br><strong>1</strong> = Enabled<br><strong>2</strong> = Marketplace On<br><strong>?</strong> = Add the options you want together, to enable multiple filters (see <a href="#bitwise-and-bitwise-and">BITWISE fields</a>)</td>
+<td>Monetization options enabled for this mod:<br><br><strong>0</strong> = Access to monetization features disabled<br><strong>1</strong> = Access to monetization features enabled by the game for this mod<br><strong>2</strong> = Marketplace enabled<br><strong>8</strong> = Quantity of this mod is limited<br><strong>?</strong> = Combine to find mods with multiple options enabled (see <a href="#bitwise-and-bitwise-and">BITWISE fields</a>)</td>
 </tr>
 <tr>
 <td>name</td>
@@ -21052,7 +21053,7 @@ curl <span class="nt">-X</span> POST https://<span class="k">*</span>.modapi.io/
 <td>422</td>
 <td><a href="https://tools.ietf.org/html/rfc2518#section-10.3">Unprocessable Entity</a></td>
 <td>900061</td>
-<td>The mod that was attempting to be purchased has sold out. Only applicable if the Game and Mod have enabled scarcity.</td>
+<td>The mod that was attempting to be purchased has sold out. Only applicable if the Game and Mod have enabled limited.</td>
 <td><a href="#schemaerror_object">Error Object</a></td>
 </tr>
 <tr>
@@ -21766,7 +21767,7 @@ To perform this request, you must be authenticated via one of the following meth
 <tr>
 <td>curation_option</td>
 <td>integer</td>
-<td>Curation options enabled by this game to approve mods:<br><br><strong>0</strong> = No curation: Mods are immediately available to play<br><strong>1</strong> = Price change approval: Pricing changes for marketplace mods queued for acceptance<br><strong>2</strong> = Full curation: All mods must be accepted by someone to be listed<br><strong>?</strong> = Combine to enable multiple features (see BITWISE fields)</td>
+<td>Curation option enabled by this game to approve mods:<br><br><strong>0</strong> = No curation: Mods are immediately available to play<br><strong>1</strong> = Price change approval: Pricing changes for marketplace mods queued for acceptance<br><strong>2</strong> = Full curation: All mods must be accepted by someone to be listed</td>
 </tr>
 <tr>
 <td>community_options</td>
@@ -21776,7 +21777,7 @@ To perform this request, you must be authenticated via one of the following meth
 <tr>
 <td>monetization_options</td>
 <td>integer</td>
-<td>Monetization features games can enable:<br><br><strong>0</strong> = All of the options below are disabled<br><strong>1</strong> = Enabled<br><strong>2</strong> = Enable marketplace<br><strong>4</strong> = Enable partner program<br><strong>8</strong> = Enable scarcity<br><strong>?</strong> = Add the options you want together, to enable multiple features (see <a href="#bitwise-and-bitwise-and">BITWISE fields</a>)</td>
+<td>Monetization options enabled for this game:<br><br><strong>0</strong> = Access to monetization features disabled<br><strong>1</strong> = Access to monetization features enabled by mod.io<br><strong>2</strong> = Marketplace enabled<br><strong>4</strong> = Creator partner program enabled<br><strong>8</strong> = Quantity limited mods supported<br><strong>?</strong> = Add the options you want together, to enable multiple features (see <a href="#bitwise-and-bitwise-and">BITWISE fields</a>)</td>
 </tr>
 <tr>
 <td>monetization_team</td>
@@ -21791,7 +21792,7 @@ To perform this request, you must be authenticated via one of the following meth
 <tr>
 <td>max_stock</td>
 <td>integer</td>
-<td>Max Stock for mod scarcity.</td>
+<td>Max Stock for limited mods.</td>
 </tr>
 <tr>
 <td>api_access_options</td>
@@ -21801,7 +21802,7 @@ To perform this request, you must be authenticated via one of the following meth
 <tr>
 <td>maturity_options</td>
 <td>integer</td>
-<td>Mature content setup for this game:<br><br><strong>0</strong> = Don't allow mature content in mods<br><strong>1</strong> = Allow mature content in mods<br><strong>2</strong> = This game is for mature audiences only<br><strong>?</strong> = Add the options you want together, to enable multiple features (see <a href="#bitwise-and-bitwise-and">BITWISE fields</a>)</td>
+<td>Mature content setup for this game:<br><br><strong>0</strong> = Don't allow mature content in mods<br><strong>1</strong> = Allow mature content in mods<br><strong>2</strong> = This game is for mature audiences only</td>
 </tr>
 <tr>
 <td>ugc_name</td>
@@ -24744,22 +24745,22 @@ To perform this request, you must be authenticated via one of the following meth
 <tr>
 <td>maturity_option</td>
 <td>integer</td>
-<td>Maturity options flagged by the mod developer, this is only relevant if the parent game allows mods to be labelled as mature:<br><br><strong>0</strong> = None<br><strong>1</strong> = Alcohol<br><strong>2</strong> = Drugs<br><strong>4</strong> = Violence<br><strong>8</strong> = Explicit<br><strong>?</strong> = Add the options you want together, to enable multiple filters (see <a href="#bitwise-and-bitwise-and">BITWISE fields</a>)</td>
+<td>Mature content found in this mod, this is only relevant if the parent game allows mods to be labelled as mature:<br><br><strong>0</strong> = None<br><strong>1</strong> = Alcohol<br><strong>2</strong> = Drugs<br><strong>4</strong> = Violence<br><strong>8</strong> = Explicit<br><strong>?</strong> = Add the options you want together, to enable multiple filters (see <a href="#bitwise-and-bitwise-and">BITWISE fields</a>)</td>
 </tr>
 <tr>
 <td>community_options</td>
 <td>integer</td>
-<td>Community features enabled for this mod:<br><br><strong>0</strong> = All of the options below are disabled<br><strong>1</strong> = Enable comments<br><strong>?</strong> = Add the options you want together, to enable multiple features (see <a href="#bitwise-and-bitwise-and">BITWISE fields</a>)</td>
+<td>Community features enabled for this mod:<br><br><strong>0</strong> = All of the options below are disabled<br><strong>1</strong> = Enable comments<br><strong>64</strong> = Enable previews<br><strong>?</strong> = Add the options you want together, to enable multiple features (see <a href="#bitwise-and-bitwise-and">BITWISE fields</a>)</td>
 </tr>
 <tr>
 <td>monetization_options</td>
 <td>integer</td>
-<td>Monetization features mods can enable:<br><br><strong>0</strong> = All of the options below are disabled<br><strong>1</strong> = Enabled<br><strong>2</strong> = Enable marketplace<br><strong>4</strong> = Enable partner program<br><strong>8</strong> = Enable scarcity<br><strong>?</strong> = Add the options you want together, to enable multiple features (see <a href="#bitwise-and-bitwise-and">BITWISE fields</a>)</td>
+<td>Monetization features enabled for this mod:<br><br><strong>0</strong> = Access to monetization features disabled<br><strong>1</strong> = Access to monetization features enabled by the game for this mod<br><strong>2</strong> = Marketplace enabled<br><strong>8</strong> = Quantity of this mod is limited<br><strong>?</strong> = Add the options you want together, to enable multiple features (see <a href="#bitwise-and-bitwise-and">BITWISE fields</a>)</td>
 </tr>
 <tr>
 <td>stock</td>
 <td>integer</td>
-<td>The stock of the mod. 0 is the default value, and is only used when the mod has scarcity enabled.</td>
+<td>The stock of the mod. 0 is the default value, and is only used when the mod has limited quantity enabled.</td>
 </tr>
 <tr>
 <td>price</td>
@@ -25743,6 +25744,76 @@ To perform this request, you must be authenticated via one of the following meth
 </tr>
 </tbody>
 </table>
+<h2 id="refund-object">Refund Object</h2>
+<p><a name="schemarefund_object"></a></p>
+<div class="highlight"><pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
+  </span><span class="nl">"transaction_id"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"gross_amount"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"net_amount"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"platform_fee"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"gateway_fee"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"tax"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"tax_type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"string"</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"transaction_type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"string"</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"purchase_date"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="w">
+</span><span class="p">}</span><span class="w"> 
+</span></code></pre></div><h3 id="properties-68">Properties</h3>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>transaction_id</td>
+<td>integer</td>
+<td>The transaction id.</td>
+</tr>
+<tr>
+<td>gross_amount</td>
+<td>integer</td>
+<td>The gross amount of the purchase in the lowest denomination of currency.</td>
+</tr>
+<tr>
+<td>net_amount</td>
+<td>integer</td>
+<td>The net amount of the purchase in the lowest denomination of currency.</td>
+</tr>
+<tr>
+<td>platform_fee</td>
+<td>integer</td>
+<td>The platform fee of the purchase in the lowest denomination of currency.</td>
+</tr>
+<tr>
+<td>gateway_fee</td>
+<td>integer</td>
+<td>The gateway fee of the purchase in the lowest denomination of currency.</td>
+</tr>
+<tr>
+<td>tax</td>
+<td>integer</td>
+<td>The tax amount of the purchase in cents.</td>
+</tr>
+<tr>
+<td>tax_type</td>
+<td>string</td>
+<td>The tax type.</td>
+</tr>
+<tr>
+<td>transaction_type</td>
+<td>string</td>
+<td>The state of the transaction that was processed. E.g. CANCELLED, CLEARED, FAILED, PAID, PENDING, REFUNDED.</td>
+</tr>
+<tr>
+<td>purchase_date</td>
+<td>timestamp</td>
+<td>The time of the purchase.</td>
+</tr>
+</tbody>
+</table>
 <h2 id="s2s-pay-object">S2S Pay Object</h2>
 <p><a name="schemas2s_pay_object"></a></p>
 <div class="highlight"><pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
@@ -25753,12 +25824,9 @@ To perform this request, you must be authenticated via one of the following meth
   </span><span class="nl">"gateway_fee"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
   </span><span class="nl">"transaction_type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"string"</span><span class="p">,</span><span class="w">
   </span><span class="nl">"meta"</span><span class="p">:</span><span class="w"> </span><span class="p">{},</span><span class="w">
-  </span><span class="nl">"purchase_date"</span><span class="p">:</span><span class="w"> </span><span class="mi">1626667557</span><span class="p">,</span><span class="w">
-  </span><span class="nl">"wallet_type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"string"</span><span class="p">,</span><span class="w">
-  </span><span class="nl">"balance"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
-  </span><span class="nl">"deficit"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="w">
+  </span><span class="nl">"purchase_date"</span><span class="p">:</span><span class="w"> </span><span class="mi">1626667557</span><span class="w">
 </span><span class="p">}</span><span class="w"> 
-</span></code></pre></div><h3 id="properties-68">Properties</h3>
+</span></code></pre></div><h3 id="properties-69">Properties</h3>
 <table>
 <thead>
 <tr>
@@ -25808,21 +25876,6 @@ To perform this request, you must be authenticated via one of the following meth
 <td>integer</td>
 <td>The time of the purchase.</td>
 </tr>
-<tr>
-<td>wallet_type</td>
-<td>string</td>
-<td>The type of wallet that was used for the purchase. E.g. STANDARD_MIO.</td>
-</tr>
-<tr>
-<td>balance</td>
-<td>integer</td>
-<td>The balance of the users' wallet.</td>
-</tr>
-<tr>
-<td>deficit</td>
-<td>integer</td>
-<td>The deficit of the users' wallet.</td>
-</tr>
 </tbody>
 </table>
 <h2 id="service-ticket-object">Service Ticket Object</h2>
@@ -25831,7 +25884,7 @@ To perform this request, you must be authenticated via one of the following meth
   </span><span class="nl">"resource"</span><span class="p">:</span><span class="w"> </span><span class="s2">"application-server"</span><span class="p">,</span><span class="w">
   </span><span class="nl">"service_ticket"</span><span class="p">:</span><span class="w"> </span><span class="s2">"eyJ0eXAiOiXKV1QibCJhbLciOiJeiUzI1....."</span><span class="w">
 </span><span class="p">}</span><span class="w"> 
-</span></code></pre></div><h3 id="properties-69">Properties</h3>
+</span></code></pre></div><h3 id="properties-70">Properties</h3>
 <table>
 <thead>
 <tr>
@@ -25878,7 +25931,7 @@ To perform this request, you must be authenticated via one of the following meth
   </span><span class="nl">"date_added"</span><span class="p">:</span><span class="w"> </span><span class="mi">1492564103</span><span class="p">,</span><span class="w">
   </span><span class="nl">"reason"</span><span class="p">:</span><span class="w"> </span><span class="s2">""</span><span class="w">
 </span><span class="p">}</span><span class="w"> 
-</span></code></pre></div><h3 id="properties-70">Properties</h3>
+</span></code></pre></div><h3 id="properties-71">Properties</h3>
 <table>
 <thead>
 <tr>
@@ -25941,7 +25994,7 @@ To perform this request, you must be authenticated via one of the following meth
   </span><span class="nl">"position"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Turret Builder"</span><span class="p">,</span><span class="w">
   </span><span class="nl">"invite_pending"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="w">
 </span><span class="p">}</span><span class="w"> 
-</span></code></pre></div><h3 id="properties-71">Properties</h3>
+</span></code></pre></div><h3 id="properties-72">Properties</h3>
 <table>
 <thead>
 <tr>
@@ -26019,7 +26072,7 @@ To perform this request, you must be authenticated via one of the following meth
     </span><span class="p">}</span><span class="w">
   </span><span class="p">}</span><span class="w">
 </span><span class="p">}</span><span class="w"> 
-</span></code></pre></div><h3 id="properties-72">Properties</h3>
+</span></code></pre></div><h3 id="properties-73">Properties</h3>
 <table>
 <thead>
 <tr>
@@ -26161,7 +26214,7 @@ To perform this request, you must be authenticated via one of the following meth
   </span><span class="nl">"warning"</span><span class="p">:</span><span class="w"> </span><span class="s2">"#d6af2e"</span><span class="p">,</span><span class="w">
   </span><span class="nl">"danger"</span><span class="p">:</span><span class="w"> </span><span class="s2">"#ff000e"</span><span class="w">
 </span><span class="p">}</span><span class="w"> 
-</span></code></pre></div><h3 id="properties-73">Properties</h3>
+</span></code></pre></div><h3 id="properties-74">Properties</h3>
 <table>
 <thead>
 <tr>
@@ -26212,7 +26265,7 @@ To perform this request, you must be authenticated via one of the following meth
   </span><span class="nl">"resource_name_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"my-awesome-mod"</span><span class="p">,</span><span class="w">
   </span><span class="nl">"resource_url"</span><span class="p">:</span><span class="w"> </span><span class="s2">""</span><span class="w">
 </span><span class="p">}</span><span class="w"> 
-</span></code></pre></div><h3 id="properties-74">Properties</h3>
+</span></code></pre></div><h3 id="properties-75">Properties</h3>
 <table>
 <thead>
 <tr>
@@ -26260,7 +26313,7 @@ To perform this request, you must be authenticated via one of the following meth
   </span><span class="nl">"date_added"</span><span class="p">:</span><span class="w"> </span><span class="mi">1499846132</span><span class="p">,</span><span class="w">
   </span><span class="nl">"event_type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"USER_SUBSCRIBE"</span><span class="w">
 </span><span class="p">}</span><span class="w"> 
-</span></code></pre></div><h3 id="properties-75">Properties</h3>
+</span></code></pre></div><h3 id="properties-76">Properties</h3>
 <table>
 <thead>
 <tr>
@@ -26321,7 +26374,7 @@ To perform this request, you must be authenticated via one of the following meth
   </span><span class="nl">"language"</span><span class="p">:</span><span class="w"> </span><span class="s2">""</span><span class="p">,</span><span class="w">
   </span><span class="nl">"profile_url"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://mod.io/u/xant"</span><span class="w">
 </span><span class="p">}</span><span class="w"> 
-</span></code></pre></div><h3 id="properties-76">Properties</h3>
+</span></code></pre></div><h3 id="properties-77">Properties</h3>
 <table>
 <thead>
 <tr>
@@ -26389,7 +26442,7 @@ To perform this request, you must be authenticated via one of the following meth
 <div class="highlight"><pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
   </span><span class="nl">"balance"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="w">
 </span><span class="p">}</span><span class="w"> 
-</span></code></pre></div><h3 id="properties-77">Properties</h3>
+</span></code></pre></div><h3 id="properties-78">Properties</h3>
 <table>
 <thead>
 <tr>
@@ -26415,7 +26468,7 @@ To perform this request, you must be authenticated via one of the following meth
   </span><span class="nl">"balance"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
   </span><span class="nl">"deficit"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="w">
 </span><span class="p">}</span><span class="w"> 
-</span></code></pre></div><h3 id="properties-78">Properties</h3>
+</span></code></pre></div><h3 id="properties-79">Properties</h3>
 <table>
 <thead>
 <tr>
@@ -26460,7 +26513,7 @@ To perform this request, you must be authenticated via one of the following meth
   </span><span class="nl">"access_token"</span><span class="p">:</span><span class="w"> </span><span class="s2">"eyJlbmMiOiJBMTI4Q0JDLUhTMjU2IiwiYWxnIjoiUlNBLU9BRVAiLCJjdHkiOi...."</span><span class="p">,</span><span class="w">
   </span><span class="nl">"refresh_token"</span><span class="p">:</span><span class="w"> </span><span class="s2">"eyJlbmMiOiJBMTI4Q0JDLUhTMjU2IiwiYWxnIjoiUlNBLU9BRVAiLCJjdHkiOi...."</span><span class="w">
 </span><span class="p">}</span><span class="w"> 
-</span></code></pre></div><h3 id="properties-79">Properties</h3>
+</span></code></pre></div><h3 id="properties-80">Properties</h3>
 <table>
 <thead>
 <tr>
@@ -26498,7 +26551,7 @@ To perform this request, you must be authenticated via one of the following meth
   </span><span class="nl">"code"</span><span class="p">:</span><span class="w"> </span><span class="s2">"def5020077deb4eafe6fb6743b1fd6857ce22112d3400e6cc684633f8c9904faae1a83c23b"</span><span class="p">,</span><span class="w">
   </span><span class="nl">"state"</span><span class="p">:</span><span class="w"> </span><span class="s2">"T6KQGIXWrHXxFDfyp5Hh"</span><span class="w">
 </span><span class="p">}</span><span class="w"> 
-</span></code></pre></div><h3 id="properties-80">Properties</h3>
+</span></code></pre></div><h3 id="properties-81">Properties</h3>
 <table>
 <thead>
 <tr>
@@ -26527,7 +26580,7 @@ To perform this request, you must be authenticated via one of the following meth
   </span><span class="nl">"success"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
   </span><span class="nl">"message"</span><span class="p">:</span><span class="w"> </span><span class="s2">"You have successfully logged out of mod.io."</span><span class="w">
 </span><span class="p">}</span><span class="w"> 
-</span></code></pre></div><h3 id="properties-81">Properties</h3>
+</span></code></pre></div><h3 id="properties-82">Properties</h3>
 <table>
 <thead>
 <tr>
