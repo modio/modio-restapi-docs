@@ -2479,7 +2479,7 @@ curl -X POST https://*.modapi.io/v1/oauth/token/ \
   -d 'client_id=1234' \
   -d 'client_secret=bqyMxkGE4QVBaYpHQcf6XJENjZ5RWFHsbEZ5SFiGa' \
   -d 'grant_type=client_credentials' \
-  -d 'scopes=read,write,read_monetization'
+  -d 'scopes=read,write,monetization'
 
 ```
 
@@ -2515,7 +2515,7 @@ const inputBody = '{
   "client_id": "1234",
   "client_secret": "bqyMxkGE4QVBaYpHQcf6XJENjZ5RWFHsbEZ5SFiGa",
   "grant_type": "client_credentials",
-  "scopes": "read,write,read_monetization"
+  "scopes": "read,write,monetization"
 }';
 const headers = {
   'Content-Type':'application/x-www-form-urlencoded',
@@ -2575,7 +2575,7 @@ Exchange `client_id` and `client_secret` for an access token. Successful request
      client_id|integer|true|Client ID issued to your game.
      client_secret|string|true|Client Secret issued to your game. This should be secure on a backend server and never displayed to players.
      grant_type|string|true|Must be `client_credentials`.
-     scopes|string|false|The scopes you wish your token to have. Currently only, read, write, and read_monetization is supported.
+     scopes|string|false|The scopes you wish your token to have. Currently only, read, write, and monetization is supported.
 
 > Example response
 
@@ -3458,11 +3458,11 @@ Get all games. Successful request will return an array of [Game Objects](#get-ga
     ugc_name|string|Word used to describe user-generated content (mods, items, addons etc).
     presentation_option|integer|Presentation style used on the mod.io website:<br><br>__0__ = Grid View: Displays mods in a grid<br>__1__ = Table View: Displays mods in a table
     submission_option|integer|Submission process modders must follow:<br><br>__0__ = Mod uploads must occur via the API using a tool created by the game developers<br>__1__ = Mod uploads can occur from anywhere, including the website and API
-    curation_option|integer|Curation options enabled by this game to approve mods:<br><br>__0__ = No curation: Mods are immediately available to play<br>__1__ = Price change approval: Pricing changes for marketplace mods queued for acceptance<br>__2__ = Full curation: All mods must be accepted by someone to be listed<br>__?__ = Combine to enable multiple features (see BITWISE fields)
+    curation_option|integer|Curation option enabled by this game to approve mods:<br><br>__0__ = No curation: Mods are immediately available to play<br>__1__ = Price change approval: Pricing changes for marketplace mods queued for acceptance<br>__2__ = Full curation: All mods must be accepted by someone to be listed
     community_options|integer|Community features enabled for this game:<br><br>__0__ = None<br>__1__ = Enable comments<br>__2__ = Enable guides<br>__4__ = Pin on homepage<br>__8__ = Show on homepage<br>__16__ = Show more on homepage<br>__32__ = Allow change status<br>__64__ = Enable Previews (Game must be hidden)<br>__128__ = Allow Preview Share-URL (Previews must be enabled)<br>__256__ = Allow negative ratings<br>__?__ = Combine to find games with multiple options enabled (see [BITWISE fields](#bitwise-and-bitwise-and))
-    monetization_options|integer|Monetization features mods can enable:<br><br>__0__ = None<br>__1__ = Enabled<br>__2__ = Allow mods to be sold (marketplace)<br>__?__ = Combine to find games with multiple options enabled (see [BITWISE fields](#bitwise-and-bitwise-and))
+    monetization_options|integer|Monetization options enabled for this game:<br><br>__0__ = Access to monetization features disabled<br>__1__ = Access to monetization features enabled by mod.io<br>__2__ = Marketplace enabled<br>__4__ = Creator partner program enabled<br>__8__ = Quantity limited mods supported<br>__16__ = All mods must be quantity limited<br>__?__ = Combine to find games with multiple options enabled (see [BITWISE fields](#bitwise-and-bitwise-and))
     api_access_options|integer|Level of API access allowed by this game:<br><br>__0__ = None<br>__1__ = Allow 3rd parties to access this games API endpoints<br>__2__ = Allow mods to be downloaded directly (if disabled all download URLs will contain a frequently changing verification hash to stop unauthorized use)<br>__4__ = Requires a bearer token to be supplied when attempting the download to enforce authenticated downloads only<br>__8__ = Requires a bearer token to be supplied and for the user to own the file when attempting the download<br>__?__ = Combine to find games with multiple options enabled (see [BITWISE fields](#bitwise-and-bitwise-and))
-    maturity_options|integer|Mature content setup for this game:<br><br>__0__ = Don't allow mature content in mods<br>__1__ = Allow mature content in mods<br>__2__ = This game is for mature audiences only<br>__?__ = Combine to find games with multiple options enabled (see [BITWISE fields](#bitwise-and-bitwise-and)
+    maturity_options|integer|Mature content setup for this game:<br><br>__0__ = Don't allow mature content in mods<br>__1__ = Allow mature content in mods<br>__2__ = This game is for mature audiences only
 
     Display|Type|Description
     ---|---|---
@@ -4865,8 +4865,8 @@ Get all mods for the corresponding game. Successful request will return an array
     date_added|integer|Unix timestamp of date mod was registered.
     date_updated|integer|Unix timestamp of date mod was updated.
     date_live|integer|Unix timestamp of date mod was set live.
-    maturity_option|integer|Maturity option(s) set by the mod creator:<br><br>__0__ = None<br>__1__ = Alcohol<br>__2__ = Drugs<br>__4__ = Violence<br>__8__ = Explicit<br>__?__ = Add the options you want together, to enable multiple filters (see [BITWISE fields](#bitwise-and-bitwise-and))
-    monetization_options|integer|Monetization option(s) enabled by the mod creator:<br><br>__0__ = None<br>__1__ = Enabled<br>__2__ = Marketplace On<br>__?__ = Add the options you want together, to enable multiple filters (see [BITWISE fields](#bitwise-and-bitwise-and))
+    maturity_option|integer|Maturity options set by the mod creator:<br><br>__0__ = None<br>__1__ = Alcohol<br>__2__ = Drugs<br>__4__ = Violence<br>__8__ = Explicit<br>__?__ = Combine to find mods with multiple options enabled (see [BITWISE fields](#bitwise-and-bitwise-and))
+    monetization_options|integer|Monetization options enabled for this mod:<br><br>__0__ = Access to monetization features disabled<br>__1__ = Access to monetization features enabled by the game for this mod<br>__2__ = Marketplace enabled<br>__8__ = Quantity of this mod is limited<br>__?__ = Combine to find mods with multiple options enabled (see [BITWISE fields](#bitwise-and-bitwise-and))
     name|string|Name of the mod.
     name_id|string|Path for the mod on mod.io. For example: https://mod.io/g/gamename/m/__mod-name-id-here__
     modfile|integer|Unique id of the file that is the current active release (see [mod files](#files)).
@@ -5404,9 +5404,9 @@ Add a mod. Successful request will return the newly created [Mod Object](#mod-ob
     description|string||Detailed description for your mod, which can include details such as 'About', 'Features', 'Install Instructions', 'FAQ', etc. HTML supported and encouraged.
     homepage_url|string||Official homepage for your mod. Must be a valid URL.
     price|int|true|The price of the mod.<br><br>__NOTE:__ The value of this field will be ignored if the parent game's queue is enabled (see `curation_option` field in [Game Object](#game-object)).
-    maturity_option|integer||Choose if this mod contains any of the following mature content.<br><br>__NOTE:__ The value of this field will default to 0 unless the parent game allows you to flag mature content (see `maturity_options` field in [Game Object](#game-object)). <br><br>__0__ = None _(default)_<br>__1__ = Alcohol<br>__2__ = Drugs<br>__4__ = Violence<br>__8__ = Explicit<br>__?__ = Add the options you want together, to enable multiple options (see [BITWISE fields](#bitwise-and-bitwise-and))
-    stock|integer||Maximum number of times this Mod can be sold. <br><br>__NOTE:__ Scarcity can be enforced by the parent Game. The value of this field is not used if the parent game's or mod's scarcity is disabled (see `monetization_options` field in [Game Object](#game-object)).
-    maturity_option|integer||Choose if this mod contains any of the following mature content.
+    stock|integer||Maximum number of times this mod can be sold. <br><br>__NOTE:__ Limited mods can be enforced by the parent game. The value of this field is not used if the parent game's or mod's limited support is disabled (see `monetization_options` field in [Game Object](#game-object)).
+    monetization_options|integer||Monetization options enabled for this mod:<br><br>__0__ = Access to monetization features disabled<br>__1__ = Access to monetization features enabled by the game for this mod<br>__2__ = Marketplace enabled<br>__8__ = Quantity of this mod is limited<br>__?__ = Add the options you want together, to enable multiple options (see [BITWISE fields](#bitwise-and-bitwise-and))
+    maturity_option|integer||Mature content found in this mod.<br><br>__NOTE:__ The value of this field will default to 0 unless the parent game allows you to flag mature content (see `maturity_options` field in [Game Object](#game-object)). <br><br>__0__ = None _(default)_<br>__1__ = Alcohol<br>__2__ = Drugs<br>__4__ = Violence<br>__8__ = Explicit<br>__?__ = Add the options you want together, to enable multiple options (see [BITWISE fields](#bitwise-and-bitwise-and))
     community_options|integer||Community features enabled for this mod:<br><br>__0__ = All the options below are disabled<br>__1__ = Enable comments<br>__64__ = Enable previews<br>__?__ = Add the options you want together, to enable multiple options (see [BITWISE fields](#bitwise-and-bitwise-and))
     metadata_blob|string||Metadata that is designed to be handled by the game client and is recommended to not be exposed to content creators when submitting their mods. As an example, this may include properties as to how the item works, or other information you need to display. Metadata can also be stored as searchable [key value pairs](#metadata), and to individual [mod files](#get-modfiles).
     tags[]|string||Tags to apply to the mod. Every tag to apply requires a separate field with tags[] as the key (e.g. tags[]=tag1, tags[]=tag2). Only the tags pre-defined by the parent game can be applied. To determine what tags are eligible, see the tags values within `tag_options` column on the parent [Game Object](#game-object).
@@ -5687,9 +5687,9 @@ Edit details for a mod. If you want to update the `logo` or media associated wit
     description|string||Detailed description for your mod, which can include details such as 'About', 'Features', 'Install Instructions', 'FAQ', etc. HTML supported and encouraged.
     homepage_url|string||Official homepage for your mod. Must be a valid URL.
     price|int|true|The price of the mod.<br><br>__NOTE:__ The value of this field will be ignored if the parent game's queue is enabled (see `curation_option` field in [Game Object](#game-object)).
-    monetization_options|integer||Monetization option(s) enabled by the mod creator.<br><br>__NOTE:__ The value of this field will be ignored if the parent game's queue is enabled (see `curation_option` field in [Game Object](#game-object)). <br><br>__0__ = None<br>__1__ = Enabled<br>__2__ = Marketplace On<br>__?__ = Add the options you want together, to enable multiple filters (see [BITWISE fields](#bitwise-and-bitwise-and))
-    stock|integer||Maximum number of times this Mod can be sold. <br><br>__NOTE:__ The value of this field is not used if the parent game's or mod's scarcity is disabled (see `monetization_options` field in [Game Object](#game-object)).
-    maturity_option|integer||Choose if this mod contains any of the following mature content.<br><br>__NOTE:__ The value of this field will default to 0 unless the parent game allows you to flag mature content (see `maturity_options` field in [Game Object](#game-object)). <br><br>__0__ = None set<br>__1__ = Alcohol<br>__2__ = Drugs<br>__4__ = Violence<br>__8__ = Explicit<br>__?__ = Add the options you want together, to enable multiple options (see [BITWISE fields](#bitwise-and-bitwise-and))
+    stock|integer||Maximum number of times this mod can be sold. <br><br>__NOTE:__ Limited mods can be enforced by the parent game. The value of this field is not used if the parent game's or mod's limited support is disabled (see `monetization_options` field in [Game Object](#game-object)).
+    monetization_options|integer||Monetization options enabled for this mod:<br><br>__0__ = Access to monetization features disabled<br>__1__ = Access to monetization features enabled by the game for this mod<br>__2__ = Marketplace enabled<br>__8__ = Quantity of this mod is limited<br>__?__ = Add the options you want together, to enable multiple features (see [BITWISE fields](#bitwise-and-bitwise-and))
+    maturity_option|integer||Mature content found in this mod.<br><br>__NOTE:__ The value of this field will default to 0 unless the parent game allows you to flag mature content (see `maturity_options` field in [Game Object](#game-object)). <br><br>__0__ = None set<br>__1__ = Alcohol<br>__2__ = Drugs<br>__4__ = Violence<br>__8__ = Explicit<br>__?__ = Add the options you want together, to enable multiple options (see [BITWISE fields](#bitwise-and-bitwise-and))
     community_options|integer||Community features enabled for this mod:<br><br>__0__ = All the options below are disabled<br>__1__ = Enable comments<br>__64__ = Enable previews<br>__?__ = Add the options you want together, to enable multiple options (see [BITWISE fields](#bitwise-and-bitwise-and))
     metadata_blob|string||Metadata that is designed to be handled by the game client and is recommended to not be exposed to content creators when submitting their mods. As an example, this may include properties as to how the item works, or other information you need to display. Metadata can also be stored as searchable [key value pairs](#metadata), and to individual [mod files](#get-modfiles).
     tags[]|string||When providing this attribute, if the input array contains tags, they will entirely replace any existing tags assigned to the mod. __If an empty array is passed, all currently assigned tags will be removed__. If `null` or omitted, no changes will be made to the assigned tags. To determine what tags are eligible, see the tags values within `tag_options` column on the parent [Game Object](#game-object).
@@ -13966,11 +13966,11 @@ Get all games the _authenticated user_ added or is a team member of. Successful 
     ugc_name|string|Word used to describe user-generated content (mods, items, addons etc).
     presentation_option|integer|Presentation style used on the mod.io website:<br><br>__0__ = Grid View: Displays mods in a grid<br>__1__ = Table View: Displays mods in a table
     submission_option|integer|Submission process modders must follow:<br><br>__0__ = Mod uploads must occur via the API using a tool created by the game developers<br>__1__ = Mod uploads can occur from anywhere, including the website and API
-    curation_option|integer|Curation options enabled by this game to approve mods:<br><br>__0__ = No curation: Mods are immediately available to play<br>__1__ = Price change approval: Pricing changes for marketplace mods queued for acceptance<br>__2__ = Full curation: All mods must be accepted by someone to be listed<br>__?__ = Combine to enable multiple features (see BITWISE fields)
+    curation_option|integer|Curation options enabled by this game to approve mods:<br><br>__0__ = No curation: Mods are immediately available to play<br>__1__ = Price change approval: Pricing changes for marketplace mods queued for acceptance<br>__2__ = Full curation: All mods must be accepted by someone to be listed
     community_options|integer|Community features enabled for this game:<br><br>__0__ = None<br>__1__ = Enable comments<br>__2__ = Enable guides<br>__4__ = Pin on homepage<br>__8__ = Show on homepage<br>__16__ = Show more on homepage<br>__32__ = Allow change status<br>__64__ = Enable Previews (Game must be hidden)<br>__128__ = Allow Preview Share-URL (Previews must be enabled)<br>__256__ = Allow negative ratings<br>__?__ = Combine to find games with multiple options enabled (see [BITWISE fields](#bitwise-and-bitwise-and))
-    monetization_options|integer|Monetization features mods can enable:<br><br>__0__ = None<br>__1__ = Enabled<br>__2__ = Allow mods to be sold (marketplace)<br>__?__ = Combine to find games with multiple options enabled (see [BITWISE fields](#bitwise-and-bitwise-and))
+    monetization_options|integer|Monetization options enabled for this game:<br><br>__0__ = Access to monetization features disabled<br>__1__ = Access to monetization features enabled by mod.io<br>__2__ = Marketplace enabled<br>__4__ = Creator partner program enabled<br>__8__ = Quantity limited mods supported<br>__16__ = All mods must be quantity limited<br>__?__ = Combine to find games with multiple options enabled (see [BITWISE fields](#bitwise-and-bitwise-and))
     api_access_options|integer|Level of API access allowed by this game:<br><br>__0__ = None<br>__1__ = Allow 3rd parties to access this games API endpoints<br>__2__ = Allow mods to be downloaded directly (if disabled all download URLs will contain a frequently changing verification hash to stop unauthorized use)<br>__4__ = Requires a bearer token to be supplied when attempting the download to enforce authenticated downloads only<br>__8__ = Requires a bearer token to be supplied and for the user to own the file when attempting the download<br>__?__ = Combine to find games with multiple options enabled (see [BITWISE fields](#bitwise-and-bitwise-and))
-    maturity_options|integer|Mature content setup for this game:<br><br>__0__ = Don't allow mature content in mods<br>__1__ = Allow mature content in mods<br>__2__ = This game is for mature audiences only<br>__?__ = Combine to find games with multiple options enabled (see [BITWISE fields](#bitwise-and-bitwise-and)
+    maturity_options|integer|Mature content setup for this game:<br><br>__0__ = Don't allow mature content in mods<br>__1__ = Allow mature content in mods<br>__2__ = This game is for mature audiences only
 
     Display|Type|Description
     ---|---|---
@@ -14207,8 +14207,8 @@ Get all mod's the _authenticated user_ is subscribed to. Successful request will
     date_added|integer|Unix timestamp of date mod was registered.
     date_updated|integer|Unix timestamp of date mod was updated.
     date_live|integer|Unix timestamp of date mod was set live.
-    maturity_option|integer|Maturity option(s) set by the mod creator:<br><br>__0__ = None<br>__1__ = Alcohol<br>__2__ = Drugs<br>__4__ = Violence<br>__8__ = Explicit<br>__?__ = Add the options you want together, to enable multiple filters (see [BITWISE fields](#bitwise-and-bitwise-and))
-    monetization_options|integer|Monetization option(s) enabled by the mod creator:<br><br>__0__ = None<br>__1__ = Enabled<br>__2__ = Marketplace On<br>__?__ = Add the options you want together, to enable multiple filters (see [BITWISE fields](#bitwise-and-bitwise-and))
+    maturity_option|integer|Mature content found in this mod:<br><br>__0__ = None<br>__1__ = Alcohol<br>__2__ = Drugs<br>__4__ = Violence<br>__8__ = Explicit<br>__?__ = Combine to find mods with multiple options enabled (see [BITWISE fields](#bitwise-and-bitwise-and))
+    monetization_options|integer|Monetization options enabled for this mod:<br><br>__0__ = Access to monetization features disabled<br>__1__ = Access to monetization features enabled by the game for this mod<br>__2__ = Marketplace enabled<br>__8__ = Quantity of this mod is limited<br>__?__ = Combine to find mods with multiple options enabled (see [BITWISE fields](#bitwise-and-bitwise-and))
     name|string|Name of the mod.
     name_id|string|Path for the mod on mod.io. For example: https://mod.io/g/gamename/m/__mod-name-id-here__
     modfile|integer|Unique id of the file that is the current active release (see [mod files](#files)).
@@ -14485,8 +14485,8 @@ Get all mods the _authenticated user_ added or is a team member of. Successful r
     date_added|integer|Unix timestamp of date mod was registered.
     date_updated|integer|Unix timestamp of date mod was updated.
     date_live|integer|Unix timestamp of date mod was set live.
-    maturity_option|integer|Maturity option(s) set by the mod creator:<br><br>__0__ = None<br>__1__ = Alcohol<br>__2__ = Drugs<br>__4__ = Violence<br>__8__ = Explicit<br>__?__ = Add the options you want together, to enable multiple filters (see [BITWISE fields](#bitwise-and-bitwise-and))
-    monetization_options|integer|Monetization option(s) enabled by the mod creator:<br><br>__0__ = None<br>__1__ = Enabled<br>__2__ = Marketplace On<br>__?__ = Add the options you want together, to enable multiple filters (see [BITWISE fields](#bitwise-and-bitwise-and))
+    maturity_option|integer|Mature content found in this mod:<br><br>__0__ = None<br>__1__ = Alcohol<br>__2__ = Drugs<br>__4__ = Violence<br>__8__ = Explicit<br>__?__ = Combine to find mods with multiple options enabled (see [BITWISE fields](#bitwise-and-bitwise-and))
+    monetization_options|integer|Monetization options enabled for this mod:<br><br>__0__ = Access to monetization features disabled<br>__1__ = Access to monetization features enabled by the game for this mod<br>__2__ = Marketplace enabled<br>__8__ = Quantity of this mod is limited<br>__?__ = Combine to find mods with multiple options enabled (see [BITWISE fields](#bitwise-and-bitwise-and))
     name|string|Name of the mod.
     name_id|string|Path for the mod on mod.io. For example: https://mod.io/g/gamename/m/__mod-name-id-here__
     modfile|integer|Unique id of the file that is the current active release (see [mod files](#files)).
@@ -14754,8 +14754,8 @@ Get all mod's the _authenticated user_ has purchased. Successful request will re
     date_added|integer|Unix timestamp of date mod was registered.
     date_updated|integer|Unix timestamp of date mod was updated.
     date_live|integer|Unix timestamp of date mod was set live.
-    maturity_option|integer|Maturity option(s) set by the mod creator:<br><br>__0__ = None<br>__1__ = Alcohol<br>__2__ = Drugs<br>__4__ = Violence<br>__8__ = Explicit<br>__?__ = Add the options you want together, to enable multiple filters (see [BITWISE fields](#bitwise-and-bitwise-and))
-    monetization_options|integer|Monetization option(s) enabled by the mod creator:<br><br>__0__ = None<br>__1__ = Enabled<br>__2__ = Marketplace On<br>__?__ = Add the options you want together, to enable multiple filters (see [BITWISE fields](#bitwise-and-bitwise-and))
+    maturity_option|integer|Mature content found in this mod:<br><br>__0__ = None<br>__1__ = Alcohol<br>__2__ = Drugs<br>__4__ = Violence<br>__8__ = Explicit<br>__?__ = Combine to find mods with multiple options enabled (see [BITWISE fields](#bitwise-and-bitwise-and))
+    monetization_options|integer|Monetization options enabled for this mod:<br><br>__0__ = Access to monetization features disabled<br>__1__ = Access to monetization features enabled by the game for this mod<br>__2__ = Marketplace enabled<br>__8__ = Quantity of this mod is limited<br>__?__ = Combine to find mods with multiple options enabled (see [BITWISE fields](#bitwise-and-bitwise-and))
     name|string|Name of the mod.
     name_id|string|Path for the mod on mod.io. For example: https://mod.io/g/gamename/m/__mod-name-id-here__
     modfile|integer|Unique id of the file that is the current active release (see [mod files](#files)).
@@ -15863,7 +15863,7 @@ Status|Meaning|Error Ref|Description|Response Schema
 422|[Unprocessable Entity](https://tools.ietf.org/html/rfc2518#section-10.3)|900002|A failure has occured when trying to authenticate with the monetization system.|[Error Object](#schemaerror_object)
 422|[Unprocessable Entity](https://tools.ietf.org/html/rfc2518#section-10.3)|900007|The account has not been created with monetization.|[Error Object](#schemaerror_object)
 422|[Unprocessable Entity](https://tools.ietf.org/html/rfc2518#section-10.3)|900000|An un expected error has occured. Please try again later.|[Error Object](#schemaerror_object)
-422|[Unprocessable Entity](https://tools.ietf.org/html/rfc2518#section-10.3)|900061|The mod that was attempting to be purchased has sold out. Only applicable if the Game and Mod have enabled scarcity.|[Error Object](#schemaerror_object)
+422|[Unprocessable Entity](https://tools.ietf.org/html/rfc2518#section-10.3)|900061|The mod that was attempting to be purchased has sold out. Only applicable if the Game and Mod have enabled limited.|[Error Object](#schemaerror_object)
 403|[Forbidden](https://tools.ietf.org/html/rfc7231#section-6.5.3)|15023|The item has been deleted and can not be purchased at this time.|[Error Object](#schemaerror_object)
 403|[Forbidden](https://tools.ietf.org/html/rfc7231#section-6.5.3)|900015|The account has been disabled from monetization.|[Error Object](#schemaerror_object)
 403|[Forbidden](https://tools.ietf.org/html/rfc7231#section-6.5.3)|900012|The monetization is currently in maintance mode. Please try again later.|[Error Object](#schemaerror_object)
@@ -16303,14 +16303,14 @@ date_updated|integer|Unix timestamp of date game was updated.
 date_live|integer|Unix timestamp of date game was set live.
 presentation_option|integer|Presentation style used on the mod.io website:<br><br>__0__ = Grid View: Displays mods in a grid<br>__1__ = Table View: Displays mods in a table
 submission_option|integer|Submission process modders must follow:<br><br>__0__ = Mod uploads must occur via the API using a tool created by the game developers<br>__1__ = Mod uploads can occur from anywhere, including the website and API
-curation_option|integer|Curation options enabled by this game to approve mods:<br><br>__0__ = No curation: Mods are immediately available to play<br>__1__ = Price change approval: Pricing changes for marketplace mods queued for acceptance<br>__2__ = Full curation: All mods must be accepted by someone to be listed<br>__?__ = Combine to enable multiple features (see BITWISE fields)
+curation_option|integer|Curation option enabled by this game to approve mods:<br><br>__0__ = No curation: Mods are immediately available to play<br>__1__ = Price change approval: Pricing changes for marketplace mods queued for acceptance<br>__2__ = Full curation: All mods must be accepted by someone to be listed
 community_options|integer|Community features enabled for this game:<br><br>__0__ = All of the options below are disabled<br>__1__ = Enable comments<br>__2__ = Enable guides<br>__4__ = Pin on homepage<br>__8__ = Show on homepage<br>__16__ = Show more on homepage<br>__32__ = Allow change status<br>__64__ = Enable Previews (Game must be hidden)<br>__128__ = Allow Preview Share-URL (Previews must be enabled)<br>__256__ = Allow negative ratings<br>__?__ = Add the options you want together, to enable multiple features (see [BITWISE fields](#bitwise-and-bitwise-and))
-monetization_options|integer|Monetization features games can enable:<br><br>__0__ = All of the options below are disabled<br>__1__ = Enabled<br>__2__ = Enable marketplace<br>__4__ = Enable partner program<br>__8__ = Enable scarcity<br>__?__ = Add the options you want together, to enable multiple features (see [BITWISE fields](#bitwise-and-bitwise-and))
+monetization_options|integer|Monetization options enabled for this game:<br><br>__0__ = Access to monetization features disabled<br>__1__ = Access to monetization features enabled by mod.io<br>__2__ = Marketplace enabled<br>__4__ = Creator partner program enabled<br>__8__ = Quantity limited mods supported<br>__?__ = Add the options you want together, to enable multiple features (see [BITWISE fields](#bitwise-and-bitwise-and))
 monetization_team|[Game Monetization Team Object](#schemagame_monetization_team_object)|The monetization team for this resource. [Game Monetization Team Object](#game-monetization-team-object).
 revenue_options|integer|Deprecated: Please use monetization_options instead, this will be removed in subsequent API version.
-max_stock|integer|Max Stock for mod scarcity.
+max_stock|integer|Max Stock for limited mods.
 api_access_options|integer|Level of API access allowed by this game:<br><br>__0__ = All of the options below are disabled<br>__1__ = Allow 3rd parties to access this games API endpoints<br>__2__ = Allow mods to be downloaded directly (if disabled all download URLs will contain a frequently changing verification hash to stop unauthorized use)<br>__4__ = Checks authorization on mods to be downloaded directly (if enabled the consuming application must send the users bearer token)<br>__8__ = Checks ownership on mods to be downloaded directly (if enabled the consuming application must send the users bearer token)<br>__?__ = Add the options you want together, to enable multiple features (see [BITWISE fields](#bitwise-and-bitwise-and))
-maturity_options|integer|Mature content setup for this game:<br><br>__0__ = Don't allow mature content in mods<br>__1__ = Allow mature content in mods<br>__2__ = This game is for mature audiences only<br>__?__ = Add the options you want together, to enable multiple features (see [BITWISE fields](#bitwise-and-bitwise-and))
+maturity_options|integer|Mature content setup for this game:<br><br>__0__ = Don't allow mature content in mods<br>__1__ = Allow mature content in mods<br>__2__ = This game is for mature audiences only
 ugc_name|string|Word used to describe user-generated content (mods, items, addons etc).
 token_name|string|Word used to describe the games token.
 icon|[Icon Object](#schemaicon_object)|Contains media URL's to the icon for the game.
@@ -18281,10 +18281,10 @@ submitted_by|[User Object](#schemauser_object)|The user who published the mod.
 date_added|integer|Unix timestamp of date mod was registered.
 date_updated|integer|Unix timestamp of date mod was updated.
 date_live|integer|Unix timestamp of date mod was set live.
-maturity_option|integer|Maturity options flagged by the mod developer, this is only relevant if the parent game allows mods to be labelled as mature:<br><br>__0__ = None<br>__1__ = Alcohol<br>__2__ = Drugs<br>__4__ = Violence<br>__8__ = Explicit<br>__?__ = Add the options you want together, to enable multiple filters (see [BITWISE fields](#bitwise-and-bitwise-and))
-community_options|integer|Community features enabled for this mod:<br><br>__0__ = All of the options below are disabled<br>__1__ = Enable comments<br>__?__ = Add the options you want together, to enable multiple features (see [BITWISE fields](#bitwise-and-bitwise-and))
-monetization_options|integer|Monetization features mods can enable:<br><br>__0__ = All of the options below are disabled<br>__1__ = Enabled<br>__2__ = Enable marketplace<br>__4__ = Enable partner program<br>__8__ = Enable scarcity<br>__?__ = Add the options you want together, to enable multiple features (see [BITWISE fields](#bitwise-and-bitwise-and))
-stock|integer|The stock of the mod. 0 is the default value, and is only used when the mod has scarcity enabled.
+maturity_option|integer|Mature content found in this mod, this is only relevant if the parent game allows mods to be labelled as mature:<br><br>__0__ = None<br>__1__ = Alcohol<br>__2__ = Drugs<br>__4__ = Violence<br>__8__ = Explicit<br>__?__ = Add the options you want together, to enable multiple filters (see [BITWISE fields](#bitwise-and-bitwise-and))
+community_options|integer|Community features enabled for this mod:<br><br>__0__ = All of the options below are disabled<br>__1__ = Enable comments<br>__64__ = Enable previews<br>__?__ = Add the options you want together, to enable multiple features (see [BITWISE fields](#bitwise-and-bitwise-and))
+monetization_options|integer|Monetization features enabled for this mod:<br><br>__0__ = Access to monetization features disabled<br>__1__ = Access to monetization features enabled by the game for this mod<br>__2__ = Marketplace enabled<br>__8__ = Quantity of this mod is limited<br>__?__ = Add the options you want together, to enable multiple features (see [BITWISE fields](#bitwise-and-bitwise-and))
+stock|integer|The stock of the mod. 0 is the default value, and is only used when the mod has limited quantity enabled.
 price|integer|The price of the mod.
 tax|integer|The tax of the mod.
 logo|[Logo Object](#schemalogo_object)|Contains media URL's to the logo for the mod.
@@ -18868,6 +18868,40 @@ date_added|integer|Unix timestamp of date rating was submitted.
 
 
 
+## Refund Object
+
+   <a name="schemarefund_object"></a>
+
+```json
+{
+  "transaction_id": 0,
+  "gross_amount": 0,
+  "net_amount": 0,
+  "platform_fee": 0,
+  "gateway_fee": 0,
+  "tax": 0,
+  "tax_type": "string",
+  "transaction_type": "string",
+  "purchase_date": null
+} 
+```
+
+### Properties
+
+Name|Type|Description
+---|---|---|---|
+transaction_id|integer|The transaction id.
+gross_amount|integer|The gross amount of the purchase in the lowest denomination of currency.
+net_amount|integer|The net amount of the purchase in the lowest denomination of currency.
+platform_fee|integer|The platform fee of the purchase in the lowest denomination of currency.
+gateway_fee|integer|The gateway fee of the purchase in the lowest denomination of currency.
+tax|integer|The tax amount of the purchase in cents.
+tax_type|string|The tax type.
+transaction_type|string|The state of the transaction that was processed. E.g. CANCELLED, CLEARED, FAILED, PAID, PENDING, REFUNDED.
+purchase_date|timestamp|The time of the purchase.
+
+
+
 ## S2S Pay Object  
 
 <a name="schemas2s_pay_object"></a>
@@ -18881,10 +18915,7 @@ date_added|integer|Unix timestamp of date rating was submitted.
   "gateway_fee": 0,
   "transaction_type": "string",
   "meta": {},
-  "purchase_date": 1626667557,
-  "wallet_type": "string",
-  "balance": 0,
-  "deficit": 0
+  "purchase_date": 1626667557
 } 
 ```
 
@@ -18900,9 +18931,6 @@ gateway_fee|integer|The gateway fee of the purchase in the lowest denomination o
 transaction_type|string|The state of the transaction that was processed. E.g. CANCELLED, CLEARED, FAILED, PAID, PENDING, REFUNDED.
 meta|object|The metadata that was given in the transaction.
 purchase_date|integer|The time of the purchase.
-wallet_type|string|The type of wallet that was used for the purchase. E.g. STANDARD_MIO.
-balance|integer|The balance of the users' wallet.
-deficit|integer|The deficit of the users' wallet.
 
 
 
