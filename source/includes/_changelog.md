@@ -4,11 +4,11 @@
 
 ### Oct 1, 2023 - Adding new rate limit error ref
 
-Beginning Jan 1st, 2024, the error ref **--parse_errorref_RATE_LIMITED_ENDPOINT** will be returned when a rate limit applies only to the endpoint being called. Error ref **--parse_errorref_RATE_LIMITED_GLOBAL** will continue to be returned in all other scenarios where the [rate limit](/#rate-limiting) applies to all endpoints.
+Beginning Jan 1st, 2024, the error ref **--parse_errorref_RATE_LIMITED_ENDPOINT** will be returned when a rate limit applies only to the endpoint being called. Error ref **--parse_errorref_RATE_LIMITED_GLOBAL** will continue to be returned in all other scenarios where the [rate limit](../#rate-limiting) applies to all endpoints.
 
 ### Oct 27, 2022 - Deprecating X-Ratelimit headers
 
-Beginning Nov 20th, 2022, all custom rate limit headers `X-RateLimit-Limit`, `X-RateLimit-Remaining`, `X-RateLimit-RetryAfter` will no longer be returned. They will be replaced with `retry-after` when the [ratelimit is exceeded](/#rate-limiting).
+Beginning Nov 20th, 2022, all custom rate limit headers `X-RateLimit-Limit`, `X-RateLimit-Remaining`, `X-RateLimit-RetryAfter` will no longer be returned. They will be replaced with `retry-after` when the [ratelimit is exceeded](../#rate-limiting).
 
 # How We Version
 
@@ -45,7 +45,7 @@ part of the URL required to make a successful request.
 When making requests to the API, you need to be sure you know what functionality is available to you
 and what you can expect the API to do under every situation. With that said, and in the interest of
 being as explicit as possible if you supply a version in the URL of your request that is _not_ listed
-in the [changelog](#api-versions) below - a `404 Not Found` will be returned in the form of the [Error Object](/#error-object).
+in the [changelog](#api-versions) below - a `404 Not Found` will be returned in the form of the [Error Object](../#error-object).
 
 ## What are breaking changes
 
