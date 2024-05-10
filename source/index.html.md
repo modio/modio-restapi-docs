@@ -8,7 +8,7 @@ language_tabs:
   - python: Python
   - java: Java
 toc_footers:
-  - <a href="https://mod.io">Find out more about mod.io</a>
+  - <a href="https://mod.io/about">Find out more about mod.io</a>
 includes: []
 search: true
 highlight_theme: darkula
@@ -14493,7 +14493,7 @@ Get all mods the _authenticated user_ added or is a team member of. Successful r
     metadata_blob|string|Metadata that is designed to be handled by the game client and is recommended to not be exposed to content creators when submitting their mods.
     metadata_kvp|string|Colon-separated values representing the key-value pairs you want to filter the results by. If you supply more than one key-pair, separate the pairs by a comma. Will only filter by an exact key-pair match.
     tags|string|Comma-separated values representing the tags you want to filter the results by. If you specify multiple tags, only mods which have all tags will be returned, and only tags that are supported by the parent game can be applied. To determine what tags are eligible, see the tags values within `tag_options` column on the parent [Game Object](#game-object). If you want to ensure mods returned do not contain particular tag(s), you can use the `tags-not-in` filter either independently or alongside this filter.
-    platform_status|string|If the parent game has enabled per-platform files, by default only mods with files which are approved and live for the [target platform](#targeting-a-platform) will be returned.<br><br>To request mods with pending files, you can filter results by their current platform status, using `pending_only` or `live_and_pending`.
+    platform_status|string|Filter results by their current platform status, valid values are `pending_only` and `live_and_pending`.<br><br>__NOTE:__ that this parameter is only considered in the request if the parent game has enabled [cross-platform filtering](#targeting-a-platform).
 
     Sort|Description
     ---|---
