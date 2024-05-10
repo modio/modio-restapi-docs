@@ -1048,7 +1048,7 @@
           </li>
       </div>
         <ul class="toc-footer">
-            <li><a href="https://mod.io">Find out more about mod.io</a></li>
+            <li><a href="https://mod.io/about">Find out more about mod.io</a></li>
         </ul>
     </div>
     <div class="page-wrapper">
@@ -19348,7 +19348,7 @@ Authorization: Bearer {access-token}
 <tr>
 <td>platform_status</td>
 <td>string</td>
-<td>If the parent game has enabled per-platform files, by default only mods with files which are approved and live for the <a href="#targeting-a-platform">target platform</a> will be returned.<br><br>To request mods with pending files, you can filter results by their current platform status, using <code>pending_only</code> or <code>live_and_pending</code>.</td>
+<td>Filter results by their current platform status, valid values are <code>pending_only</code> and <code>live_and_pending</code>.<br><br><strong>NOTE:</strong> that this parameter is only considered in the request if the parent game has enabled <a href="#targeting-a-platform">cross-platform filtering</a>.</td>
 </tr>
 </tbody>
 </table>
