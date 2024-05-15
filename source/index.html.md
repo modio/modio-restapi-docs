@@ -8,7 +8,7 @@ language_tabs:
   - python: Python
   - java: Java
 toc_footers:
-  - <a href="https://mod.io/about">Find out more about mod.io</a>
+  - <a href="https://mod.io">Find out more about mod.io</a>
 includes: []
 search: true
 highlight_theme: darkula
@@ -7862,12 +7862,113 @@ Subscribe the _authenticated user_ to a corresponding mod. No body parameters ar
 }
 
 ```
+<h3 id=dQw4w9WgXcQ"
+    ],
+    "sketchfab": [
+      "https://sketchfab.com/models/ef40b2d300334d009984c8865b2db1c8"
+    ],
+    "images": [
+      {
+        "filename": "card.png",
+        "original": "https://assets.modcdn.io/images/placeholder/card.png",
+        "thumb_320x180": "https://assets.modcdn.io/images/placeholder/card.png",
+        "thumb_1280x720": "https://assets.modcdn.io/images/placeholder/card.png"
+      }
+    ]
+  },
+  "modfile": {
+    "id": 2,
+    "mod_id": 2,
+    "date_added": 1499841487,
+    "date_updated": 1499841487,
+    "date_scanned": 1499841487,
+    "virus_status": 0,
+    "virus_positive": 0,
+    "virustotal_hash": "",
+    "filesize": 15181,
+    "filesize_uncompressed": 16384,
+    "filehash": {
+      "md5": "2d4a0e2d7273db6b0a94b0740a88ad0d"
+    },
+    "filename": "rogue-knight-v1.zip",
+    "version": "1.3",
+    "changelog": "VERSION 1.3 -- Changes -- Fixed critical castle floor bug.",
+    "metadata_blob": "rogue,hd,high-res,4k,hd textures",
+    "download": {
+      "binary_url": "https://*.modapi.io/v1/games/1/mods/1/files/1/download/c489a0354111a4d76640d47f0cdcb294",
+      "date_expires": 1579316848
+    },
+    "platforms": [
+      {
+        "platform": "windows",
+        "status": 1
+      }
+    ]
+  },
+  "dependencies": false,
+  "platforms": [
+    {
+      "platform": "windows",
+      "modfile_live": 1
+    }
+  ],
+  "metadata_kvp": [
+    {
+      "metakey": "pistol-dmg",
+      "metavalue": "800"
+    }
+  ],
+  "tags": [
+    {
+      "name": "Unity",
+      "name_localized": "Unity",
+      "date_added": 1499841487
+    }
+  ],
+  "stats": {
+    "mod_id": 2,
+    "popularity_rank_position": 13,
+    "popularity_rank_total_mods": 204,
+    "downloads_today": 327,
+    "downloads_total": 27492,
+    "subscribers_total": 16394,
+    "ratings_total": 1230,
+    "ratings_positive": 1047,
+    "ratings_negative": 183,
+    "ratings_percentage_positive": 91,
+    "ratings_weighted_aggregate": 87.38,
+    "ratings_display_text": "Very Positive",
+    "date_expires": 1492564103
+  }
+}
+```
+```json
+{
+  "error": {
+    "code": 403,
+    "error_ref": 10000,
+    "message": "You do not have the required permissions to access this resource.",
+    "errors": {}
+  }
+}
+```
+```json
+{
+  "error": {
+    "code": 403,
+    "error_ref": 10000,
+    "message": "You do not have the required permissions to access this resource.",
+    "errors": {}
+  }
+}
+```
+
 <h3 id="Subscribe-To-Mod-responses">Responses</h3>
 
 Status|Meaning|Error Ref|Description|Response Schema
 ---|---|----|---|---|
+200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)||Already Subscribed|[Mod Object](#schemamod_object)
 201|[Created](https://tools.ietf.org/html/rfc7231#section-6.3.2)||Subscription Successful|[Mod Object](#schemamod_object)
-400|[Bad Request](https://tools.ietf.org/html/rfc7231#section-6.5.1)|15004|The authenticated user is already subscribed to the mod.|[Error Object](#schemaerror_object)
 403|[Forbidden](https://tools.ietf.org/html/rfc7231#section-6.5.3)|15000|The requested mod cannot be subscribed to at this time due to a DMCA takedown request.|[Error Object](#schemaerror_object)
 403|[Forbidden](https://tools.ietf.org/html/rfc7231#section-6.5.3)|15001|The requested mod cannot be subscribed to due to being marked as 'hidden'.|[Error Object](#schemaerror_object)
 ### Response Headers
@@ -12351,39 +12452,29 @@ To perform this request, you must be authenticated via one of the following meth
 </aside>
 # Teams
 
-## Get Users In Mod Monetization Team
+## dummy/reports
 
 > Example request
 
 ```shell
 # You can also use wget
-curl -X GET https://*.modapi.io/v1/games/{game-id}/mods/{mod-id}/monetization/team \
-  -H 'Authorization: Bearer {access-token}' \ 
-  -H 'Accept: application/json'
+curl -X GET https://*.modapi.io/v1/dummy/reports
 
 ```
 
 ```http
-GET https://*.modapi.io/v1/games/{game-id}/mods/{mod-id}/monetization/team HTTP/1.1
+GET https://*.modapi.io/v1/dummy/reports HTTP/1.1
 Host: *.modapi.io
 
-Accept: application/json
-Authorization: Bearer {access-token}
 
 ```
 
 ```javascript
-var headers = {
-  'Authorization':'Bearer {access-token}',
-  'Accept':'application/json'
-
-};
 
 $.ajax({
-  url: 'https://*.modapi.io/v1/games/{game-id}/mods/{mod-id}/monetization/team',
+  url: 'https://*.modapi.io/v1/dummy/reports',
   method: 'get',
 
-  headers: headers,
   success: function(data) {
     console.log(JSON.stringify(data));
   }
@@ -12393,17 +12484,10 @@ $.ajax({
 ```javascript--nodejs
 const request = require('node-fetch');
 
-const headers = {
-  'Authorization':'Bearer {access-token}',
-  'Accept':'application/json'
-
-};
-
-fetch('https://*.modapi.io/v1/games/{game-id}/mods/{mod-id}/monetization/team',
+fetch('https://*.modapi.io/v1/dummy/reports',
 {
-  method: 'GET',
+  method: 'GET'
 
-  headers: headers
 })
 .then(function(res) {
     return res.json();
@@ -12414,20 +12498,16 @@ fetch('https://*.modapi.io/v1/games/{game-id}/mods/{mod-id}/monetization/team',
 
 ```python
 import requests
-headers = {
-  'Authorization': 'Bearer {access-token}',
-  'Accept': 'application/json'
-}
 
-r = requests.get('https://*.modapi.io/v1/games/{game-id}/mods/{mod-id}/monetization/team', params={
+r = requests.get('https://*.modapi.io/v1/dummy/reports', params={
 
-}, headers = headers)
+)
 
 print r.json()
 ```
 
 ```java
-URL obj = new URL("https://*.modapi.io/v1/games/{game-id}/mods/{mod-id}/monetization/team");
+URL obj = new URL("https://*.modapi.io/v1/dummy/reports");
 HttpURLConnection con = (HttpURLConnection) obj.openConnection();
 con.setRequestMethod("GET");
 int responseCode = con.getResponseCode();
@@ -12442,313 +12522,19 @@ in.close();
 System.out.println(response.toString());
 ```
 
-`GET /games/{game-id}/mods/{mod-id}/monetization/team`
+`GET //dummy/reports`
 
-Get users in a monetization team. Successful request will return a [Monetization Team Accounts Object](#monetization-team-accounts-object).
+dummy/reports
 
-> Example response
 
-```json
-{
-  "id": 1,
-  "name_id": "xant",
-  "username": "XanT",
-  "monetization_status": 0,
-  "monetization_options": 0,
-  "split": 0
-}
-
-```
-<h3 id="Get-Users-In-Mod-Monetization-Team-responses">Responses</h3>
+<h3 id="dummy/reports-responses">Responses</h3>
 
 Status|Meaning|Error Ref|Description|Response Schema
 ---|---|----|---|---|
-200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)||Successful Request|[Monetization Team Accounts Object](#schemamonetization_team_accounts_object)
-403|[Forbidden](https://tools.ietf.org/html/rfc7231#section-6.5.3)|900023|You do not have the required permissions.|[Error Object](#schemaerror_object)
-404|[Not Found](https://tools.ietf.org/html/rfc7231#section-6.5.4)|900022|Monetization team could not be found.|[Error Object](#schemaerror_object)
-<aside class="auth-notice">
-To perform this request, you must be authenticated via one of the following methods:
-<a href="#authentication">OAuth 2</a> (Scopes: write)
+200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)||Successful Request|None
+<aside class="success">
+This operation does not require authentication
 </aside>
-## Create Mod Monetization Team
-
-> Example request
-
-```shell
-# You can also use wget
-curl -X POST https://*.modapi.io/v1/games/{game-id}/mods/{mod-id}/monetization/team \
-  -H 'Authorization: Bearer {access-token}' \ 
-  -H 'Accept: application/json'
-
-```
-
-```http
-POST https://*.modapi.io/v1/games/{game-id}/mods/{mod-id}/monetization/team HTTP/1.1
-Host: *.modapi.io
-
-Accept: application/json
-Authorization: Bearer {access-token}
-
-```
-
-```javascript
-var headers = {
-  'Authorization':'Bearer {access-token}',
-  'Accept':'application/json'
-
-};
-
-$.ajax({
-  url: 'https://*.modapi.io/v1/games/{game-id}/mods/{mod-id}/monetization/team',
-  method: 'post',
-
-  headers: headers,
-  success: function(data) {
-    console.log(JSON.stringify(data));
-  }
-})
-```
-
-```javascript--nodejs
-const request = require('node-fetch');
-
-const headers = {
-  'Authorization':'Bearer {access-token}',
-  'Accept':'application/json'
-
-};
-
-fetch('https://*.modapi.io/v1/games/{game-id}/mods/{mod-id}/monetization/team',
-{
-  method: 'POST',
-
-  headers: headers
-})
-.then(function(res) {
-    return res.json();
-}).then(function(body) {
-    console.log(body);
-});
-```
-
-```python
-import requests
-headers = {
-  'Authorization': 'Bearer {access-token}',
-  'Accept': 'application/json'
-}
-
-r = requests.post('https://*.modapi.io/v1/games/{game-id}/mods/{mod-id}/monetization/team', params={
-
-}, headers = headers)
-
-print r.json()
-```
-
-```java
-URL obj = new URL("https://*.modapi.io/v1/games/{game-id}/mods/{mod-id}/monetization/team");
-HttpURLConnection con = (HttpURLConnection) obj.openConnection();
-con.setRequestMethod("POST");
-int responseCode = con.getResponseCode();
-BufferedReader in = new BufferedReader(
-    new InputStreamReader(con.getInputStream()));
-String inputLine;
-StringBuffer response = new StringBuffer();
-while ((inputLine = in.readLine()) != null) {
-    response.append(inputLine);
-}
-in.close();
-System.out.println(response.toString());
-```
-
-`POST /games/{game-id}/mods/{mod-id}/monetization/team`
-
-Send a request to create a monetization team for a mod team. Successful request will return a [Monetization Team Accounts Object](#monetization-team-accounts-object).
-
-    Parameter|Type|Required|Description
-    ---|---|---|---|
-
-> Example response
-
-```json
-{
-  "id": 1,
-  "name_id": "xant",
-  "username": "XanT",
-  "monetization_status": 0,
-  "monetization_options": 0,
-  "split": 0
-}
-
-```
-<h3 id="Create-Mod-Monetization-Team-responses">Responses</h3>
-
-Status|Meaning|Error Ref|Description|Response Schema
----|---|----|---|---|
-200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)||Successful Request|[Monetization Team Accounts Object](#schemamonetization_team_accounts_object)
-403|[Forbidden](https://tools.ietf.org/html/rfc7231#section-6.5.3)|900023|Team members must belong to the current game or mod.|[Error Object](#schemaerror_object)
-404|[Not Found](https://tools.ietf.org/html/rfc7231#section-6.5.4)|900022|Monetization team could not be found.|[Error Object](#schemaerror_object)
-422|[Unprocessable Entity](https://tools.ietf.org/html/rfc2518#section-10.3)|900024|Unable to process your data with the payment system.|[Error Object](#schemaerror_object)
-422|[Unprocessable Entity](https://tools.ietf.org/html/rfc2518#section-10.3)|900003|Your account does not have the required creator wallets.|[Error Object](#schemaerror_object)
-422|[Unprocessable Entity](https://tools.ietf.org/html/rfc2518#section-10.3)|900026|Your provided split share must total 100%.|[Error Object](#schemaerror_object)
-422|[Unprocessable Entity](https://tools.ietf.org/html/rfc2518#section-10.3)|900029|You may only add up to 5 users to a team.|[Error Object](#schemaerror_object)
-422|[Unprocessable Entity](https://tools.ietf.org/html/rfc2518#section-10.3)|900025|Unable to process your data with the payment system.|[Error Object](#schemaerror_object)
-422|[Unprocessable Entity](https://tools.ietf.org/html/rfc2518#section-10.3)|900008|A failure has occured when trying to find the user's wallet.|[Error Object](#schemaerror_object)
-403|[Forbidden](https://tools.ietf.org/html/rfc7231#section-6.5.3)|900023|Team members must be approved before they can be added to the current team.|[Error Object](#schemaerror_object)
-404|[Not Found](https://tools.ietf.org/html/rfc7231#section-6.5.4)|900003|Monetization team could not be found.|[Error Object](#schemaerror_object)
-<aside class="auth-notice">
-To perform this request, you must be authenticated via one of the following methods:
-<a href="#authentication">OAuth 2</a> (Scopes: write)
-</aside>
-## Get Mod Team Members
-
-> Example request
-
-```shell
-# You can also use wget
-curl -X GET https://*.modapi.io/v1/games/{game-id}/mods/{mod-id}/team?api_key=YourApiKey \
-  -H 'Accept: application/json'
-
-```
-
-```http
-GET https://*.modapi.io/v1/games/{game-id}/mods/{mod-id}/team?api_key=YourApiKey HTTP/1.1
-Host: *.modapi.io
-
-Accept: application/json
-
-```
-
-```javascript
-var headers = {
-  'Accept':'application/json'
-
-};
-
-$.ajax({
-  url: 'https://*.modapi.io/v1/games/{game-id}/mods/{mod-id}/team',
-  method: 'get',
-  data: '?api_key=YourApiKey',
-  headers: headers,
-  success: function(data) {
-    console.log(JSON.stringify(data));
-  }
-})
-```
-
-```javascript--nodejs
-const request = require('node-fetch');
-
-const headers = {
-  'Accept':'application/json'
-
-};
-
-fetch('https://*.modapi.io/v1/games/{game-id}/mods/{mod-id}/team?api_key=YourApiKey',
-{
-  method: 'GET',
-
-  headers: headers
-})
-.then(function(res) {
-    return res.json();
-}).then(function(body) {
-    console.log(body);
-});
-```
-
-```python
-import requests
-headers = {
-  'Accept': 'application/json'
-}
-
-r = requests.get('https://*.modapi.io/v1/games/{game-id}/mods/{mod-id}/team', params={
-  'api_key': 'YourApiKey'
-}, headers = headers)
-
-print r.json()
-```
-
-```java
-URL obj = new URL("https://*.modapi.io/v1/games/{game-id}/mods/{mod-id}/team?api_key=YourApiKey");
-HttpURLConnection con = (HttpURLConnection) obj.openConnection();
-con.setRequestMethod("GET");
-int responseCode = con.getResponseCode();
-BufferedReader in = new BufferedReader(
-    new InputStreamReader(con.getInputStream()));
-String inputLine;
-StringBuffer response = new StringBuffer();
-while ((inputLine = in.readLine()) != null) {
-    response.append(inputLine);
-}
-in.close();
-System.out.println(response.toString());
-```
-
-`GET /games/{game-id}/mods/{mod-id}/team`
-
-Get all users that are part of a mod team. Successful request will return an array of [Team Member Objects](#team-member-object). We recommended reading the [filtering documentation](#filtering) to return only the records you want.
-
-     Filter|Type|Required|Description
-     ---|---|---|---|
-     id|integer|Unique id of the team member record.
-     user_id|integer|Unique id of the user.
-     username|string|Username of the user.
-     level|integer|Level of permission the user has:<br><br>__1__ = Moderator (can moderate comments and content attached)<br>__4__ = Manager (moderator access, including uploading builds and editing settings except supply and team members)<br>__8__ = Administrator (full access, including editing the supply and team)
-     date_added|integer|Unix timestamp of the date the user was added to the team.
-     pending|integer|Has the user accepted the team invite?<br><br>__0__ = Accepted<br>__1__ = Pending
-
-> Example response
-
-```json
-{
-  "data": [
-    {
-      "id": 457,
-      "user": {
-        "id": 1,
-        "name_id": "xant",
-        "username": "XanT",
-        "display_name_portal": null,
-        "date_online": 1509922961,
-        "date_joined": 1509922961,
-        "avatar": {
-          "filename": "avatar.png",
-          "original": "https://assets.modcdn.io/images/placeholder/avatar.png",
-          "thumb_50x50": "https://assets.modcdn.io/images/placeholder/avatar_50x50.png",
-          "thumb_100x100": "https://assets.modcdn.io/images/placeholder/avatar_100x100.png"
-        },
-        "timezone": "",
-        "language": "",
-        "profile_url": "https://mod.io/u/xant"
-      },
-      "level": 8,
-      "date_added": 1492058857,
-      "position": "Turret Builder",
-      "invite_pending": 1
-    },
-    {
-        ...
-    }
-  ],
-  "result_count": 70,
-  "result_offset": 0,
-  "result_limit": 100,
-  "result_total": 70
-}
-
-```
-<h3 id="Get-Mod-Team-Members-responses">Responses</h3>
-
-Status|Meaning|Error Ref|Description|Response Schema
----|---|----|---|---|
-200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)||Successful Request|[Get Team Members](#schemaget_team_members)
-<aside class="auth-notice">
-To perform this request, you must be authenticated via one of the following methods:
-<a href="#authentication">api_key</a>, <a href="#authentication">OAuth 2</a> (Scopes: read)
-</aside>
-# Reports
 
 ## Submit Report
 
@@ -13430,6 +13216,115 @@ To perform this request, you must be authenticated via one of the following meth
 <a href="#authentication">OAuth 2</a> (Scopes: web)
 </aside>
 # Me
+
+## Ping
+
+> Example request
+
+```shell
+# You can also use wget
+curl -X GET https://*.modapi.io/v1/ping \
+  -H 'Accept: application/json'
+
+```
+
+```http
+GET https://*.modapi.io/v1/ping HTTP/1.1
+Host: *.modapi.io
+
+Accept: application/json
+
+```
+
+```javascript
+var headers = {
+  'Accept':'application/json'
+
+};
+
+$.ajax({
+  url: 'https://*.modapi.io/v1/ping',
+  method: 'get',
+
+  headers: headers,
+  success: function(data) {
+    console.log(JSON.stringify(data));
+  }
+})
+```
+
+```javascript--nodejs
+const request = require('node-fetch');
+
+const headers = {
+  'Accept':'application/json'
+
+};
+
+fetch('https://*.modapi.io/v1/ping',
+{
+  method: 'GET',
+
+  headers: headers
+})
+.then(function(res) {
+    return res.json();
+}).then(function(body) {
+    console.log(body);
+});
+```
+
+```python
+import requests
+headers = {
+  'Accept': 'application/json'
+}
+
+r = requests.get('https://*.modapi.io/v1/ping', params={
+
+}, headers = headers)
+
+print r.json()
+```
+
+```java
+URL obj = new URL("https://*.modapi.io/v1/ping");
+HttpURLConnection con = (HttpURLConnection) obj.openConnection();
+con.setRequestMethod("GET");
+int responseCode = con.getResponseCode();
+BufferedReader in = new BufferedReader(
+    new InputStreamReader(con.getInputStream()));
+String inputLine;
+StringBuffer response = new StringBuffer();
+while ((inputLine = in.readLine()) != null) {
+    response.append(inputLine);
+}
+in.close();
+System.out.println(response.toString());
+```
+
+`GET //ping`
+
+Ping the mod.io API for purpose of a reachability check, successful request will return a 200 OK with a [Web Message Object](#web-message-object).
+
+> Example response
+
+```json
+{
+  "code": 200,
+  "success": true,
+  "message": "You have successfully logged out of mod.io."
+}
+
+```
+<h3 id="Ping-responses">Responses</h3>
+
+Status|Meaning|Error Ref|Description|Response Schema
+---|---|----|---|---|
+200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)||Request Successful|[Web Message Object](#schemaweb_message_object)
+<aside class="success">
+This operation does not require authentication
+</aside>
 
 ## Get Authenticated User
 
@@ -15587,8 +15482,6 @@ Status|Meaning|Error Ref|Description|Response Schema
 To perform this request, you must be authenticated via one of the following methods:
 <a href="#authentication">OAuth 2</a> (Scopes: write)
 </aside>
-# Checkout
-
 ## Purchase An Item
 
 > Example request
@@ -15875,8 +15768,957 @@ Status|Meaning|Error Ref|Description|Response Schema
 To perform this request, you must be authenticated via one of the following methods:
 <a href="#authentication">OAuth 2</a> (Scopes: write)
 </aside>
-# s2s
+## Get Users In Mod Monetization Team
 
+> Example request
+
+```shell
+# You can also use wget
+curl -X GET https://*.modapi.io/v1/games/{game-id}/mods/{mod-id}/monetization/team \
+  -H 'Authorization: Bearer {access-token}' \ 
+  -H 'Accept: application/json'
+
+```
+
+```http
+GET https://*.modapi.io/v1/games/{game-id}/mods/{mod-id}/monetization/team HTTP/1.1
+Host: *.modapi.io
+
+Accept: application/json
+Authorization: Bearer {access-token}
+
+```
+
+```javascript
+var headers = {
+  'Authorization':'Bearer {access-token}',
+  'Accept':'application/json'
+
+};
+
+$.ajax({
+  url: 'https://*.modapi.io/v1/games/{game-id}/mods/{mod-id}/monetization/team',
+  method: 'get',
+
+  headers: headers,
+  success: function(data) {
+    console.log(JSON.stringify(data));
+  }
+})
+```
+
+```javascript--nodejs
+const request = require('node-fetch');
+
+const headers = {
+  'Authorization':'Bearer {access-token}',
+  'Accept':'application/json'
+
+};
+
+fetch('https://*.modapi.io/v1/games/{game-id}/mods/{mod-id}/monetization/team',
+{
+  method: 'GET',
+
+  headers: headers
+})
+.then(function(res) {
+    return res.json();
+}).then(function(body) {
+    console.log(body);
+});
+```
+
+```python
+import requests
+headers = {
+  'Authorization': 'Bearer {access-token}',
+  'Accept': 'application/json'
+}
+
+r = requests.get('https://*.modapi.io/v1/games/{game-id}/mods/{mod-id}/monetization/team', params={
+
+}, headers = headers)
+
+print r.json()
+```
+
+```java
+URL obj = new URL("https://*.modapi.io/v1/games/{game-id}/mods/{mod-id}/monetization/team");
+HttpURLConnection con = (HttpURLConnection) obj.openConnection();
+con.setRequestMethod("GET");
+int responseCode = con.getResponseCode();
+BufferedReader in = new BufferedReader(
+    new InputStreamReader(con.getInputStream()));
+String inputLine;
+StringBuffer response = new StringBuffer();
+while ((inputLine = in.readLine()) != null) {
+    response.append(inputLine);
+}
+in.close();
+System.out.println(response.toString());
+```
+
+`GET /games/{game-id}/mods/{mod-id}/monetization/team`
+
+Get users in a monetization team. Successful request will return a [Monetization Team Accounts Object](#monetization-team-accounts-object).
+
+> Example response
+
+```json
+{
+  "id": 1,
+  "name_id": "xant",
+  "username": "XanT",
+  "monetization_status": 0,
+  "monetization_options": 0,
+  "split": 0
+}
+
+```
+<h3 id="Get-Users-In-Mod-Monetization-Team-responses">Responses</h3>
+
+Status|Meaning|Error Ref|Description|Response Schema
+---|---|----|---|---|
+200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)||Successful Request|[Monetization Team Accounts Object](#schemamonetization_team_accounts_object)
+403|[Forbidden](https://tools.ietf.org/html/rfc7231#section-6.5.3)|900023|You do not have the required permissions.|[Error Object](#schemaerror_object)
+404|[Not Found](https://tools.ietf.org/html/rfc7231#section-6.5.4)|900022|Monetization team could not be found.|[Error Object](#schemaerror_object)
+<aside class="auth-notice">
+To perform this request, you must be authenticated via one of the following methods:
+<a href="#authentication">OAuth 2</a> (Scopes: write)
+</aside>
+## Create Mod Monetization Team
+
+> Example request
+
+```shell
+# You can also use wget
+curl -X POST https://*.modapi.io/v1/games/{game-id}/mods/{mod-id}/monetization/team \
+  -H 'Authorization: Bearer {access-token}' \ 
+  -H 'Accept: application/json'
+
+```
+
+```http
+POST https://*.modapi.io/v1/games/{game-id}/mods/{mod-id}/monetization/team HTTP/1.1
+Host: *.modapi.io
+
+Accept: application/json
+Authorization: Bearer {access-token}
+
+```
+
+```javascript
+var headers = {
+  'Authorization':'Bearer {access-token}',
+  'Accept':'application/json'
+
+};
+
+$.ajax({
+  url: 'https://*.modapi.io/v1/games/{game-id}/mods/{mod-id}/monetization/team',
+  method: 'post',
+
+  headers: headers,
+  success: function(data) {
+    console.log(JSON.stringify(data));
+  }
+})
+```
+
+```javascript--nodejs
+const request = require('node-fetch');
+
+const headers = {
+  'Authorization':'Bearer {access-token}',
+  'Accept':'application/json'
+
+};
+
+fetch('https://*.modapi.io/v1/games/{game-id}/mods/{mod-id}/monetization/team',
+{
+  method: 'POST',
+
+  headers: headers
+})
+.then(function(res) {
+    return res.json();
+}).then(function(body) {
+    console.log(body);
+});
+```
+
+```python
+import requests
+headers = {
+  'Authorization': 'Bearer {access-token}',
+  'Accept': 'application/json'
+}
+
+r = requests.post('https://*.modapi.io/v1/games/{game-id}/mods/{mod-id}/monetization/team', params={
+
+}, headers = headers)
+
+print r.json()
+```
+
+```java
+URL obj = new URL("https://*.modapi.io/v1/games/{game-id}/mods/{mod-id}/monetization/team");
+HttpURLConnection con = (HttpURLConnection) obj.openConnection();
+con.setRequestMethod("POST");
+int responseCode = con.getResponseCode();
+BufferedReader in = new BufferedReader(
+    new InputStreamReader(con.getInputStream()));
+String inputLine;
+StringBuffer response = new StringBuffer();
+while ((inputLine = in.readLine()) != null) {
+    response.append(inputLine);
+}
+in.close();
+System.out.println(response.toString());
+```
+
+`POST /games/{game-id}/mods/{mod-id}/monetization/team`
+
+Send a request to create a monetization team for a mod team. Successful request will return a [Monetization Team Accounts Object](#monetization-team-accounts-object).
+
+    Parameter|Type|Required|Description
+    ---|---|---|---|
+
+> Example response
+
+```json
+{
+  "id": 1,
+  "name_id": "xant",
+  "username": "XanT",
+  "monetization_status": 0,
+  "monetization_options": 0,
+  "split": 0
+}
+
+```
+<h3 id="Create-Mod-Monetization-Team-responses">Responses</h3>
+
+Status|Meaning|Error Ref|Description|Response Schema
+---|---|----|---|---|
+200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)||Successful Request|[Monetization Team Accounts Object](#schemamonetization_team_accounts_object)
+403|[Forbidden](https://tools.ietf.org/html/rfc7231#section-6.5.3)|900023|Team members must belong to the current game or mod.|[Error Object](#schemaerror_object)
+404|[Not Found](https://tools.ietf.org/html/rfc7231#section-6.5.4)|900022|Monetization team could not be found.|[Error Object](#schemaerror_object)
+422|[Unprocessable Entity](https://tools.ietf.org/html/rfc2518#section-10.3)|900024|Unable to process your data with the payment system.|[Error Object](#schemaerror_object)
+422|[Unprocessable Entity](https://tools.ietf.org/html/rfc2518#section-10.3)|900003|Your account does not have the required creator wallets.|[Error Object](#schemaerror_object)
+422|[Unprocessable Entity](https://tools.ietf.org/html/rfc2518#section-10.3)|900026|Your provided split share must total 100%.|[Error Object](#schemaerror_object)
+422|[Unprocessable Entity](https://tools.ietf.org/html/rfc2518#section-10.3)|900029|You may only add up to 5 users to a team.|[Error Object](#schemaerror_object)
+422|[Unprocessable Entity](https://tools.ietf.org/html/rfc2518#section-10.3)|900025|Unable to process your data with the payment system.|[Error Object](#schemaerror_object)
+422|[Unprocessable Entity](https://tools.ietf.org/html/rfc2518#section-10.3)|900008|A failure has occured when trying to find the user's wallet.|[Error Object](#schemaerror_object)
+403|[Forbidden](https://tools.ietf.org/html/rfc7231#section-6.5.3)|900023|Team members must be approved before they can be added to the current team.|[Error Object](#schemaerror_object)
+404|[Not Found](https://tools.ietf.org/html/rfc7231#section-6.5.4)|900003|Monetization team could not be found.|[Error Object](#schemaerror_object)
+<aside class="auth-notice">
+To perform this request, you must be authenticated via one of the following methods:
+<a href="#authentication">OAuth 2</a> (Scopes: write)
+</aside>
+## Get Mod Team Members
+
+> Example request
+
+```shell
+# You can also use wget
+curl -X GET https://*.modapi.io/v1/games/{game-id}/mods/{mod-id}/team?api_key=YourApiKey \
+  -H 'Accept: application/json'
+
+```
+
+```http
+GET https://*.modapi.io/v1/games/{game-id}/mods/{mod-id}/team?api_key=YourApiKey HTTP/1.1
+Host: *.modapi.io
+
+Accept: application/json
+
+```
+
+```javascript
+var headers = {
+  'Accept':'application/json'
+
+};
+
+$.ajax({
+  url: 'https://*.modapi.io/v1/games/{game-id}/mods/{mod-id}/team',
+  method: 'get',
+  data: '?api_key=YourApiKey',
+  headers: headers,
+  success: function(data) {
+    console.log(JSON.stringify(data));
+  }
+})
+```
+
+```javascript--nodejs
+const request = require('node-fetch');
+
+const headers = {
+  'Accept':'application/json'
+
+};
+
+fetch('https://*.modapi.io/v1/games/{game-id}/mods/{mod-id}/team?api_key=YourApiKey',
+{
+  method: 'GET',
+
+  headers: headers
+})
+.then(function(res) {
+    return res.json();
+}).then(function(body) {
+    console.log(body);
+});
+```
+
+```python
+import requests
+headers = {
+  'Accept': 'application/json'
+}
+
+r = requests.get('https://*.modapi.io/v1/games/{game-id}/mods/{mod-id}/team', params={
+  'api_key': 'YourApiKey'
+}, headers = headers)
+
+print r.json()
+```
+
+```java
+URL obj = new URL("https://*.modapi.io/v1/games/{game-id}/mods/{mod-id}/team?api_key=YourApiKey");
+HttpURLConnection con = (HttpURLConnection) obj.openConnection();
+con.setRequestMethod("GET");
+int responseCode = con.getResponseCode();
+BufferedReader in = new BufferedReader(
+    new InputStreamReader(con.getInputStream()));
+String inputLine;
+StringBuffer response = new StringBuffer();
+while ((inputLine = in.readLine()) != null) {
+    response.append(inputLine);
+}
+in.close();
+System.out.println(response.toString());
+```
+
+`GET /games/{game-id}/mods/{mod-id}/team`
+
+Get all users that are part of a mod team. Successful request will return an array of [Team Member Objects](#team-member-object). We recommended reading the [filtering documentation](#filtering) to return only the records you want.
+
+     Filter|Type|Required|Description
+     ---|---|---|---|
+     id|integer|Unique id of the team member record.
+     user_id|integer|Unique id of the user.
+     username|string|Username of the user.
+     level|integer|Level of permission the user has:<br><br>__1__ = Moderator (can moderate comments and content attached)<br>__4__ = Manager (moderator access, including uploading builds and editing settings except supply and team members)<br>__8__ = Administrator (full access, including editing the supply and team)
+     date_added|integer|Unix timestamp of the date the user was added to the team.
+     pending|integer|Has the user accepted the team invite?<br><br>__0__ = Accepted<br>__1__ = Pending
+
+> Example response
+
+```json
+{
+  "data": [
+    {
+      "id": 457,
+      "user": {
+        "id": 1,
+        "name_id": "xant",
+        "username": "XanT",
+        "display_name_portal": null,
+        "date_online": 1509922961,
+        "date_joined": 1509922961,
+        "avatar": {
+          "filename": "avatar.png",
+          "original": "https://assets.modcdn.io/images/placeholder/avatar.png",
+          "thumb_50x50": "https://assets.modcdn.io/images/placeholder/avatar_50x50.png",
+          "thumb_100x100": "https://assets.modcdn.io/images/placeholder/avatar_100x100.png"
+        },
+        "timezone": "",
+        "language": "",
+        "profile_url": "https://mod.io/u/xant"
+      },
+      "level": 8,
+      "date_added": 1492058857,
+      "position": "Turret Builder",
+      "invite_pending": 1
+    },
+    {
+        ...
+    }
+  ],
+  "result_count": 70,
+  "result_offset": 0,
+  "result_limit": 100,
+  "result_total": 70
+}
+
+```
+<h3 id="Get-Mod-Team-Members-responses">Responses</h3>
+
+Status|Meaning|Error Ref|Description|Response Schema
+---|---|----|---|---|
+200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)||Successful Request|[Get Team Members](#schemaget_team_members)
+<aside class="auth-notice">
+To perform this request, you must be authenticated via one of the following methods:
+<a href="#authentication">api_key</a>, <a href="#authentication">OAuth 2</a> (Scopes: read)
+</aside>
+# Server to Server
+
+## S2S Transaction Intent
+
+> Example request
+
+```shell
+# You can also use wget
+curl -X POST https://*.modapi.io/v1/s2s/transactions/intent \
+  -H 'Authorization: Bearer {access-token}' \ 
+  -H 'Content-Type: application/json' \ 
+  -H 'Content-Type: application/x-www-form-urlencoded' \ 
+  -H 'Accept: application/json' \
+  -d 'idempotent_key=undefined' \
+  -d 'sku=undefined' \
+  -d 'portal=undefined' \
+  -d 'ticket=undefined' \
+  -d 'gateway_uuid=undefined'
+
+```
+
+```http
+POST https://*.modapi.io/v1/s2s/transactions/intent HTTP/1.1
+Host: *.modapi.io
+Content-Type: application/x-www-form-urlencoded
+Accept: application/json
+Authorization: Bearer {access-token}
+Content-Type: application/json
+
+```
+
+```javascript
+var headers = {
+  'Authorization':'Bearer {access-token}',
+  'Content-Type':'application/json',
+  'Content-Type':'application/x-www-form-urlencoded',
+  'Accept':'application/json'
+
+};
+
+$.ajax({
+  url: 'https://*.modapi.io/v1/s2s/transactions/intent',
+  method: 'post',
+
+  headers: headers,
+  success: function(data) {
+    console.log(JSON.stringify(data));
+  }
+})
+```
+
+```javascript--nodejs
+const request = require('node-fetch');
+const inputBody = '{
+  "idempotent_key": "string",
+  "sku": "string",
+  "portal": "string",
+  "ticket": "string",
+  "gateway_uuid": "string"
+}';
+const headers = {
+  'Authorization':'Bearer {access-token}',
+  'Content-Type':'application/json',
+  'Content-Type':'application/x-www-form-urlencoded',
+  'Accept':'application/json'
+
+};
+
+fetch('https://*.modapi.io/v1/s2s/transactions/intent',
+{
+  method: 'POST',
+  body: inputBody,
+  headers: headers
+})
+.then(function(res) {
+    return res.json();
+}).then(function(body) {
+    console.log(body);
+});
+```
+
+```python
+import requests
+headers = {
+  'Authorization': 'Bearer {access-token}',
+  'Content-Type': 'application/json',
+  'Content-Type': 'application/x-www-form-urlencoded',
+  'Accept': 'application/json'
+}
+
+r = requests.post('https://*.modapi.io/v1/s2s/transactions/intent', params={
+
+}, headers = headers)
+
+print r.json()
+```
+
+```java
+URL obj = new URL("https://*.modapi.io/v1/s2s/transactions/intent");
+HttpURLConnection con = (HttpURLConnection) obj.openConnection();
+con.setRequestMethod("POST");
+int responseCode = con.getResponseCode();
+BufferedReader in = new BufferedReader(
+    new InputStreamReader(con.getInputStream()));
+String inputLine;
+StringBuffer response = new StringBuffer();
+while ((inputLine = in.readLine()) != null) {
+    response.append(inputLine);
+}
+in.close();
+System.out.println(response.toString());
+```
+
+`POST //s2s/transactions/intent`
+
+Create a service-to-service (S2S) transaction intent. This is for performing an external token transaction. You should generate the intent, consume the item on your server's backend before committing the transaction. A successful request will return a [S2S Pay Object](#s2s-pay-object) object. Requires scope of monetization on token.
+
+     Parameter|Type|Required|Description
+     ---|---|---|---|
+     idempotent_key|string|true|The use of the idempotency key is for if in the event of a connection error, you can confidently reattempt the request without the concern of inadvertently creating a duplicate purchase or executing the purchase twice. All idempotent keys last 24 hours.
+     sku|string|true|The sku id that you wish to issue tokens against.
+     portal|string|true|The portal the sku is tied to. Valid options are apple, google, xboxlive, psn and steam.
+     ticket|string|true|The users service ticket for whom you wish to perform the purchase on behalf of.
+     gateway_uuid|string|false|An optional mapping alpha dash string that can be used to track this transaction. It is recommended to use the one from the processing platform if you have one available.
+
+> Example response
+
+```json
+{
+  "transaction_id": 0,
+  "gross_amount": 0,
+  "net_amount": 0,
+  "platform_fee": 0,
+  "gateway_fee": 0,
+  "transaction_type": "string",
+  "meta": {},
+  "purchase_date": 1626667557
+}
+
+```
+<h3 id="S2S-Transaction-Intent-responses">Responses</h3>
+
+Status|Meaning|Error Ref|Description|Response Schema
+---|---|----|---|---|
+200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)||Successful Request|[S2S Pay Object](#schemas2s_pay_object)
+<aside class="auth-notice">
+To perform this request, you must be authenticated via one of the following methods:
+<a href="#authentication">OAuth 2</a> (Scopes: write)
+</aside>
+## S2S Transaction Commit
+
+> Example request
+
+```shell
+# You can also use wget
+curl -X POST https://*.modapi.io/v1/s2s/transactions/commit \
+  -H 'Authorization: Bearer {access-token}' \ 
+  -H 'Content-Type: application/json' \ 
+  -H 'Content-Type: application/x-www-form-urlencoded' \ 
+  -H 'Accept: application/json' \
+  -d 'idempotent_key=undefined' \
+  -d 'transaction_id=undefined' \
+  -d 'clawback_uuid=undefined'
+
+```
+
+```http
+POST https://*.modapi.io/v1/s2s/transactions/commit HTTP/1.1
+Host: *.modapi.io
+Content-Type: application/x-www-form-urlencoded
+Accept: application/json
+Authorization: Bearer {access-token}
+Content-Type: application/json
+
+```
+
+```javascript
+var headers = {
+  'Authorization':'Bearer {access-token}',
+  'Content-Type':'application/json',
+  'Content-Type':'application/x-www-form-urlencoded',
+  'Accept':'application/json'
+
+};
+
+$.ajax({
+  url: 'https://*.modapi.io/v1/s2s/transactions/commit',
+  method: 'post',
+
+  headers: headers,
+  success: function(data) {
+    console.log(JSON.stringify(data));
+  }
+})
+```
+
+```javascript--nodejs
+const request = require('node-fetch');
+const inputBody = '{
+  "idempotent_key": "string",
+  "transaction_id": 0,
+  "clawback_uuid": "string"
+}';
+const headers = {
+  'Authorization':'Bearer {access-token}',
+  'Content-Type':'application/json',
+  'Content-Type':'application/x-www-form-urlencoded',
+  'Accept':'application/json'
+
+};
+
+fetch('https://*.modapi.io/v1/s2s/transactions/commit',
+{
+  method: 'POST',
+  body: inputBody,
+  headers: headers
+})
+.then(function(res) {
+    return res.json();
+}).then(function(body) {
+    console.log(body);
+});
+```
+
+```python
+import requests
+headers = {
+  'Authorization': 'Bearer {access-token}',
+  'Content-Type': 'application/json',
+  'Content-Type': 'application/x-www-form-urlencoded',
+  'Accept': 'application/json'
+}
+
+r = requests.post('https://*.modapi.io/v1/s2s/transactions/commit', params={
+
+}, headers = headers)
+
+print r.json()
+```
+
+```java
+URL obj = new URL("https://*.modapi.io/v1/s2s/transactions/commit");
+HttpURLConnection con = (HttpURLConnection) obj.openConnection();
+con.setRequestMethod("POST");
+int responseCode = con.getResponseCode();
+BufferedReader in = new BufferedReader(
+    new InputStreamReader(con.getInputStream()));
+String inputLine;
+StringBuffer response = new StringBuffer();
+while ((inputLine = in.readLine()) != null) {
+    response.append(inputLine);
+}
+in.close();
+System.out.println(response.toString());
+```
+
+`POST //s2s/transactions/commit`
+
+Create a service-to-service (S2S) transaction commit. This is for performing an external token transaction. This step finalizes the transaction and will issue tokens to the user associated to it. A successful request will return a [S2S Pay Object](#s2s-pay-object) object. Requires scope of monetization on token.
+
+    Parameter|Type|Required|Description
+    ---|---|---|---|
+    idempotent_key|string|true|The use of the idempotency key is for if in the event of a connection error, you can confidently reattempt the request without the concern of inadvertently creating a duplicate purchase or executing the purchase twice. All idempotent keys last 24 hours.
+    transaction_id|integer|true|The id of the transaction to complete.
+    clawback_uuid|string|false|An optional mapping alpha dash string that can be used to group this transaction against other transactions.
+
+> Example response
+
+```json
+{
+  "transaction_id": 0,
+  "gross_amount": 0,
+  "net_amount": 0,
+  "platform_fee": 0,
+  "gateway_fee": 0,
+  "transaction_type": "string",
+  "meta": {},
+  "purchase_date": 1626667557
+}
+
+```
+<h3 id="S2S-Transaction-Commit-responses">Responses</h3>
+
+Status|Meaning|Error Ref|Description|Response Schema
+---|---|----|---|---|
+200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)||Successful Request|[S2S Pay Object](#schemas2s_pay_object)
+<aside class="auth-notice">
+To perform this request, you must be authenticated via one of the following methods:
+<a href="#authentication">OAuth 2</a> (Scopes: write)
+</aside>
+## S2S Transaction Clawback
+
+> Example request
+
+```shell
+# You can also use wget
+curl -X POST https://*.modapi.io/v1/s2s/transactions/clawback \
+  -H 'Authorization: Bearer {access-token}' \ 
+  -H 'Content-Type: application/json' \ 
+  -H 'Content-Type: application/x-www-form-urlencoded' \ 
+  -H 'Accept: application/json' \
+  -d 'transaction_id=undefined' \
+  -d 'gateway_uuid=undefined' \
+  -d 'portal=undefined' \
+  -d 'refund_reason=undefined'
+
+```
+
+```http
+POST https://*.modapi.io/v1/s2s/transactions/clawback HTTP/1.1
+Host: *.modapi.io
+Content-Type: application/x-www-form-urlencoded
+Accept: application/json
+Authorization: Bearer {access-token}
+Content-Type: application/json
+
+```
+
+```javascript
+var headers = {
+  'Authorization':'Bearer {access-token}',
+  'Content-Type':'application/json',
+  'Content-Type':'application/x-www-form-urlencoded',
+  'Accept':'application/json'
+
+};
+
+$.ajax({
+  url: 'https://*.modapi.io/v1/s2s/transactions/clawback',
+  method: 'post',
+
+  headers: headers,
+  success: function(data) {
+    console.log(JSON.stringify(data));
+  }
+})
+```
+
+```javascript--nodejs
+const request = require('node-fetch');
+const inputBody = '{
+  "transaction_id": 0,
+  "gateway_uuid": 0,
+  "portal": "string",
+  "refund_reason": "string"
+}';
+const headers = {
+  'Authorization':'Bearer {access-token}',
+  'Content-Type':'application/json',
+  'Content-Type':'application/x-www-form-urlencoded',
+  'Accept':'application/json'
+
+};
+
+fetch('https://*.modapi.io/v1/s2s/transactions/clawback',
+{
+  method: 'POST',
+  body: inputBody,
+  headers: headers
+})
+.then(function(res) {
+    return res.json();
+}).then(function(body) {
+    console.log(body);
+});
+```
+
+```python
+import requests
+headers = {
+  'Authorization': 'Bearer {access-token}',
+  'Content-Type': 'application/json',
+  'Content-Type': 'application/x-www-form-urlencoded',
+  'Accept': 'application/json'
+}
+
+r = requests.post('https://*.modapi.io/v1/s2s/transactions/clawback', params={
+
+}, headers = headers)
+
+print r.json()
+```
+
+```java
+URL obj = new URL("https://*.modapi.io/v1/s2s/transactions/clawback");
+HttpURLConnection con = (HttpURLConnection) obj.openConnection();
+con.setRequestMethod("POST");
+int responseCode = con.getResponseCode();
+BufferedReader in = new BufferedReader(
+    new InputStreamReader(con.getInputStream()));
+String inputLine;
+StringBuffer response = new StringBuffer();
+while ((inputLine = in.readLine()) != null) {
+    response.append(inputLine);
+}
+in.close();
+System.out.println(response.toString());
+```
+
+`POST //s2s/transactions/clawback`
+
+Create a service-to-service (S2S) transaction clawback. This is for unwinding a token transaction. You may use the transaction_id or the gateway_uuid from the previous calls. A successful request will return a [Refund Object](#refund-object) object. Requires scope of monetization on token.
+
+    Parameter|Type|Required|Description
+    ---|---|---|---|
+    transaction_id|integer|false|The id of the transaction to complete. Required if gateway_uuid is null.
+    gateway_uuid|string|false|The alpha dash on the transaction. Required if transaction_id is null.
+    portal|string|true|The portal the transaction is tied to. Valid options are apple, google, xboxlive, psn and steam.
+    refund_reason|string|true|The reason for the refund.
+
+> Example response
+
+```json
+{
+  "transaction_id": 0,
+  "gross_amount": 0,
+  "net_amount": 0,
+  "platform_fee": 0,
+  "gateway_fee": 0,
+  "tax": 0,
+  "tax_type": "string",
+  "transaction_type": "string",
+  "meta": {},
+  "purchase_date": null
+}
+
+```
+<h3 id="S2S-Transaction-Clawback-responses">Responses</h3>
+
+Status|Meaning|Error Ref|Description|Response Schema
+---|---|----|---|---|
+200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)||Successful Request|[Refund Object](#schemarefund_object)
+<aside class="auth-notice">
+To perform this request, you must be authenticated via one of the following methods:
+<a href="#authentication">OAuth 2</a> (Scopes: write)
+</aside>
+## Generate Service Ticket
+
+> Example request
+
+```shell
+# You can also use wget
+curl -X POST https://*.modapi.io/v1/me/s2s/modio/ticket \
+  -H 'Authorization: Bearer {access-token}' \ 
+  -H 'Content-Type: application/json' \ 
+  -H 'Accept: application/json'
+
+```
+
+```http
+POST https://*.modapi.io/v1/me/s2s/modio/ticket HTTP/1.1
+Host: *.modapi.io
+
+Accept: application/json
+Authorization: Bearer {access-token}
+Content-Type: application/json
+
+```
+
+```javascript
+var headers = {
+  'Authorization':'Bearer {access-token}',
+  'Content-Type':'application/json',
+  'Accept':'application/json'
+
+};
+
+$.ajax({
+  url: 'https://*.modapi.io/v1/me/s2s/modio/ticket',
+  method: 'post',
+
+  headers: headers,
+  success: function(data) {
+    console.log(JSON.stringify(data));
+  }
+})
+```
+
+```javascript--nodejs
+const request = require('node-fetch');
+
+const headers = {
+  'Authorization':'Bearer {access-token}',
+  'Content-Type':'application/json',
+  'Accept':'application/json'
+
+};
+
+fetch('https://*.modapi.io/v1/me/s2s/modio/ticket',
+{
+  method: 'POST',
+
+  headers: headers
+})
+.then(function(res) {
+    return res.json();
+}).then(function(body) {
+    console.log(body);
+});
+```
+
+```python
+import requests
+headers = {
+  'Authorization': 'Bearer {access-token}',
+  'Content-Type': 'application/json',
+  'Accept': 'application/json'
+}
+
+r = requests.post('https://*.modapi.io/v1/me/s2s/modio/ticket', params={
+
+}, headers = headers)
+
+print r.json()
+```
+
+```java
+URL obj = new URL("https://*.modapi.io/v1/me/s2s/modio/ticket");
+HttpURLConnection con = (HttpURLConnection) obj.openConnection();
+con.setRequestMethod("POST");
+int responseCode = con.getResponseCode();
+BufferedReader in = new BufferedReader(
+    new InputStreamReader(con.getInputStream()));
+String inputLine;
+StringBuffer response = new StringBuffer();
+while ((inputLine = in.readLine()) != null) {
+    response.append(inputLine);
+}
+in.close();
+System.out.println(response.toString());
+```
+
+`POST /me/s2s/modio/ticket`
+
+Generate a service-to-service (S2S) ticket on behalf of the authenticated user. The returned ticket should be passed to your secure backend to used with your registered backend server to facilitate S2S requests on behalf of a user. Service tickets are valid for 60 days, at which point you will need the user to make another request to this endpoint. A successful request will return a [Service Ticket](#service-ticket) object.
+
+> Example response
+
+```json
+{
+  "resource": "application-server",
+  "service_ticket": "eyJ0eXAiOiXKV1QibCJhbLciOiJeiUzI1....."
+}
+
+```
+<h3 id="Generate-Service-Ticket-responses">Responses</h3>
+
+Status|Meaning|Error Ref|Description|Response Schema
+---|---|----|---|---|
+200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)||Successful Request|[Service Ticket Object](#schemaservice_ticket_object)
+<aside class="auth-notice">
+To perform this request, you must be authenticated via one of the following methods:
+<a href="#authentication">OAuth 2</a> (Scopes: write)
+</aside>
 # In-App Purchases
 
 # Response Schemas
@@ -18882,6 +19724,7 @@ date_added|integer|Unix timestamp of date rating was submitted.
   "tax": 0,
   "tax_type": "string",
   "transaction_type": "string",
+  "meta": {},
   "purchase_date": null
 } 
 ```
@@ -18898,6 +19741,7 @@ gateway_fee|integer|The gateway fee of the purchase in the lowest denomination o
 tax|integer|The tax amount of the purchase in cents.
 tax_type|string|The tax type.
 transaction_type|string|The state of the transaction that was processed. E.g. CANCELLED, CLEARED, FAILED, PAID, PENDING, REFUNDED.
+meta|object|The metadata that was given in the transaction.
 purchase_date|timestamp|The time of the purchase.
 
 
