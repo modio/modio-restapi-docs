@@ -797,9 +797,6 @@
                   <li>
                     <a href="#s2s-transaction-clawback" class="toc-h2 toc-link" data-title="Server to Server">S2S Transaction Clawback</a>
                   </li>
-                  <li>
-                    <a href="#generate-service-ticket" class="toc-h2 toc-link" data-title="Server to Server">Generate Service Ticket</a>
-                  </li>
               </ul>
           </li>
           <li>
@@ -1016,9 +1013,6 @@
                     <a href="#s2s-pay-object" class="toc-h2 toc-link" data-title="Response Schemas">S2S Pay Object</a>
                   </li>
                   <li>
-                    <a href="#service-ticket-object" class="toc-h2 toc-link" data-title="Response Schemas">Service Ticket Object</a>
-                  </li>
-                  <li>
                     <a href="#status-audit-log-object" class="toc-h2 toc-link" data-title="Response Schemas">Status Audit Log Object</a>
                   </li>
                   <li>
@@ -1032,6 +1026,9 @@
                   </li>
                   <li>
                     <a href="#user-access-object" class="toc-h2 toc-link" data-title="Response Schemas">User Access Object</a>
+                  </li>
+                  <li>
+                    <a href="#user-delegation-token-object" class="toc-h2 toc-link" data-title="Response Schemas">User Delegation Token Object</a>
                   </li>
                   <li>
                     <a href="#user-event-object" class="toc-h2 toc-link" data-title="Response Schemas">User Event Object</a>
@@ -21320,24 +21317,28 @@ To perform this request, you must be authenticated via one of the following meth
 </blockquote>
 <div class="highlight"><pre class="highlight shell tab-shell"><code><span class="c"># You can also use wget</span>
 curl <span class="nt">-X</span> POST https://<span class="k">*</span>.modapi.io/v1/s2s/transactions/intent <span class="se">\</span>
+  <span class="nt">-H</span> <span class="s1">'X-Modio-Delegation-Token: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxMjM0NTY3ODkwIiwibmFtZSI6IkpvaG4gRG9lIiwiaWF0IjoxNTE2MjM5MDIyfQ.SflKxwRJSMeKKF2QT4fwpMeJf36POk6yJV_adQssw5c'</span> <span class="se">\ </span>
+  <span class="nt">-H</span> <span class="s1">'X-Modio-Idempotent-Key: d720901c-a8ed-42ff-9343-39d4a3e16b18'</span> <span class="se">\ </span>
   <span class="nt">-H</span> <span class="s1">'Authorization: Bearer {access-token}'</span> <span class="se">\ </span>
   <span class="nt">-H</span> <span class="s1">'Content-Type: application/json'</span> <span class="se">\ </span>
   <span class="nt">-H</span> <span class="s1">'Content-Type: application/x-www-form-urlencoded'</span> <span class="se">\ </span>
   <span class="nt">-H</span> <span class="s1">'Accept: application/json'</span> <span class="se">\</span>
-  <span class="nt">-d</span> <span class="s1">'idempotent_key=undefined'</span> <span class="se">\</span>
   <span class="nt">-d</span> <span class="s1">'sku=undefined'</span> <span class="se">\</span>
   <span class="nt">-d</span> <span class="s1">'portal=undefined'</span> <span class="se">\</span>
-  <span class="nt">-d</span> <span class="s1">'ticket=undefined'</span> <span class="se">\</span>
   <span class="nt">-d</span> <span class="s1">'gateway_uuid=undefined'</span>
 
 </code></pre></div><div class="highlight"><pre class="highlight http tab-http"><code><span class="nf">POST</span> <span class="nn">https://*.modapi.io/v1/s2s/transactions/intent</span> <span class="k">HTTP</span><span class="o">/</span><span class="m">1.1</span>
 <span class="na">Host</span><span class="p">:</span> <span class="s">*.modapi.io</span>
 <span class="na">Content-Type</span><span class="p">:</span> <span class="s">application/x-www-form-urlencoded</span>
 <span class="na">Accept</span><span class="p">:</span> <span class="s">application/json</span>
+<span class="na">X-Modio-Delegation-Token</span><span class="p">:</span> <span class="s">eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxMjM0NTY3ODkwIiwibmFtZSI6IkpvaG4gRG9lIiwiaWF0IjoxNTE2MjM5MDIyfQ.SflKxwRJSMeKKF2QT4fwpMeJf36POk6yJV_adQssw5c</span>
+<span class="na">X-Modio-Idempotent-Key</span><span class="p">:</span> <span class="s">d720901c-a8ed-42ff-9343-39d4a3e16b18</span>
 <span class="na">Authorization</span><span class="p">:</span> <span class="s">Bearer {access-token}</span>
 <span class="na">Content-Type</span><span class="p">:</span> <span class="s">application/json</span>
 
 </code></pre></div><div class="highlight"><pre class="highlight javascript tab-javascript"><code><span class="kd">var</span> <span class="nx">headers</span> <span class="o">=</span> <span class="p">{</span>
+  <span class="dl">'</span><span class="s1">X-Modio-Delegation-Token</span><span class="dl">'</span><span class="p">:</span><span class="dl">'</span><span class="s1">eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxMjM0NTY3ODkwIiwibmFtZSI6IkpvaG4gRG9lIiwiaWF0IjoxNTE2MjM5MDIyfQ.SflKxwRJSMeKKF2QT4fwpMeJf36POk6yJV_adQssw5c</span><span class="dl">'</span><span class="p">,</span>
+  <span class="dl">'</span><span class="s1">X-Modio-Idempotent-Key</span><span class="dl">'</span><span class="p">:</span><span class="dl">'</span><span class="s1">d720901c-a8ed-42ff-9343-39d4a3e16b18</span><span class="dl">'</span><span class="p">,</span>
   <span class="dl">'</span><span class="s1">Authorization</span><span class="dl">'</span><span class="p">:</span><span class="dl">'</span><span class="s1">Bearer {access-token}</span><span class="dl">'</span><span class="p">,</span>
   <span class="dl">'</span><span class="s1">Content-Type</span><span class="dl">'</span><span class="p">:</span><span class="dl">'</span><span class="s1">application/json</span><span class="dl">'</span><span class="p">,</span>
   <span class="dl">'</span><span class="s1">Content-Type</span><span class="dl">'</span><span class="p">:</span><span class="dl">'</span><span class="s1">application/x-www-form-urlencoded</span><span class="dl">'</span><span class="p">,</span>
@@ -21356,13 +21357,13 @@ curl <span class="nt">-X</span> POST https://<span class="k">*</span>.modapi.io/
 <span class="p">})</span>
 </code></pre></div><div class="highlight"><pre class="highlight javascript tab-javascript--nodejs"><code><span class="kd">const</span> <span class="nx">request</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="dl">'</span><span class="s1">node-fetch</span><span class="dl">'</span><span class="p">);</span>
 <span class="kd">const</span> <span class="nx">inputBody</span> <span class="o">=</span> <span class="dl">'</span><span class="s1">{
-  "idempotent_key": "string",
   "sku": "string",
   "portal": "string",
-  "ticket": "string",
   "gateway_uuid": "string"
 }</span><span class="dl">'</span><span class="p">;</span>
 <span class="kd">const</span> <span class="nx">headers</span> <span class="o">=</span> <span class="p">{</span>
+  <span class="dl">'</span><span class="s1">X-Modio-Delegation-Token</span><span class="dl">'</span><span class="p">:</span><span class="dl">'</span><span class="s1">eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxMjM0NTY3ODkwIiwibmFtZSI6IkpvaG4gRG9lIiwiaWF0IjoxNTE2MjM5MDIyfQ.SflKxwRJSMeKKF2QT4fwpMeJf36POk6yJV_adQssw5c</span><span class="dl">'</span><span class="p">,</span>
+  <span class="dl">'</span><span class="s1">X-Modio-Idempotent-Key</span><span class="dl">'</span><span class="p">:</span><span class="dl">'</span><span class="s1">d720901c-a8ed-42ff-9343-39d4a3e16b18</span><span class="dl">'</span><span class="p">,</span>
   <span class="dl">'</span><span class="s1">Authorization</span><span class="dl">'</span><span class="p">:</span><span class="dl">'</span><span class="s1">Bearer {access-token}</span><span class="dl">'</span><span class="p">,</span>
   <span class="dl">'</span><span class="s1">Content-Type</span><span class="dl">'</span><span class="p">:</span><span class="dl">'</span><span class="s1">application/json</span><span class="dl">'</span><span class="p">,</span>
   <span class="dl">'</span><span class="s1">Content-Type</span><span class="dl">'</span><span class="p">:</span><span class="dl">'</span><span class="s1">application/x-www-form-urlencoded</span><span class="dl">'</span><span class="p">,</span>
@@ -21383,6 +21384,8 @@ curl <span class="nt">-X</span> POST https://<span class="k">*</span>.modapi.io/
 <span class="p">});</span>
 </code></pre></div><div class="highlight"><pre class="highlight python tab-python"><code><span class="kn">import</span> <span class="nn">requests</span>
 <span class="n">headers</span> <span class="o">=</span> <span class="p">{</span>
+  <span class="s">'X-Modio-Delegation-Token'</span><span class="p">:</span> <span class="s">'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxMjM0NTY3ODkwIiwibmFtZSI6IkpvaG4gRG9lIiwiaWF0IjoxNTE2MjM5MDIyfQ.SflKxwRJSMeKKF2QT4fwpMeJf36POk6yJV_adQssw5c'</span><span class="p">,</span>
+  <span class="s">'X-Modio-Idempotent-Key'</span><span class="p">:</span> <span class="s">'d720901c-a8ed-42ff-9343-39d4a3e16b18'</span><span class="p">,</span>
   <span class="s">'Authorization'</span><span class="p">:</span> <span class="s">'Bearer {access-token}'</span><span class="p">,</span>
   <span class="s">'Content-Type'</span><span class="p">:</span> <span class="s">'application/json'</span><span class="p">,</span>
   <span class="s">'Content-Type'</span><span class="p">:</span> <span class="s">'application/x-www-form-urlencoded'</span><span class="p">,</span>
@@ -21423,28 +21426,16 @@ curl <span class="nt">-X</span> POST https://<span class="k">*</span>.modapi.io/
 </thead>
 <tbody>
 <tr>
-<td>idempotent_key</td>
-<td>string</td>
-<td>true</td>
-<td>The use of the idempotency key is for if in the event of a connection error, you can confidently reattempt the request without the concern of inadvertently creating a duplicate purchase or executing the purchase twice. All idempotent keys last 24 hours.</td>
-</tr>
-<tr>
 <td>sku</td>
 <td>string</td>
 <td>true</td>
-<td>The sku id that you wish to issue tokens against.</td>
+<td>The sku ID of the entitlement that will be converted into it's equivalent Virtual Token amount.</td>
 </tr>
 <tr>
 <td>portal</td>
 <td>string</td>
 <td>true</td>
 <td>The portal the sku is tied to. Valid options are apple, google, xboxlive, psn and steam.</td>
-</tr>
-<tr>
-<td>ticket</td>
-<td>string</td>
-<td>true</td>
-<td>The users service ticket for whom you wish to perform the purchase on behalf of.</td>
 </tr>
 <tr>
 <td>gateway_uuid</td>
@@ -21503,11 +21494,11 @@ To perform this request, you must be authenticated via one of the following meth
 </blockquote>
 <div class="highlight"><pre class="highlight shell tab-shell"><code><span class="c"># You can also use wget</span>
 curl <span class="nt">-X</span> POST https://<span class="k">*</span>.modapi.io/v1/s2s/transactions/commit <span class="se">\</span>
+  <span class="nt">-H</span> <span class="s1">'X-Modio-Idempotent-Key: d720901c-a8ed-42ff-9343-39d4a3e16b18'</span> <span class="se">\ </span>
   <span class="nt">-H</span> <span class="s1">'Authorization: Bearer {access-token}'</span> <span class="se">\ </span>
   <span class="nt">-H</span> <span class="s1">'Content-Type: application/json'</span> <span class="se">\ </span>
   <span class="nt">-H</span> <span class="s1">'Content-Type: application/x-www-form-urlencoded'</span> <span class="se">\ </span>
   <span class="nt">-H</span> <span class="s1">'Accept: application/json'</span> <span class="se">\</span>
-  <span class="nt">-d</span> <span class="s1">'idempotent_key=undefined'</span> <span class="se">\</span>
   <span class="nt">-d</span> <span class="s1">'transaction_id=undefined'</span> <span class="se">\</span>
   <span class="nt">-d</span> <span class="s1">'clawback_uuid=undefined'</span>
 
@@ -21515,10 +21506,12 @@ curl <span class="nt">-X</span> POST https://<span class="k">*</span>.modapi.io/
 <span class="na">Host</span><span class="p">:</span> <span class="s">*.modapi.io</span>
 <span class="na">Content-Type</span><span class="p">:</span> <span class="s">application/x-www-form-urlencoded</span>
 <span class="na">Accept</span><span class="p">:</span> <span class="s">application/json</span>
+<span class="na">X-Modio-Idempotent-Key</span><span class="p">:</span> <span class="s">d720901c-a8ed-42ff-9343-39d4a3e16b18</span>
 <span class="na">Authorization</span><span class="p">:</span> <span class="s">Bearer {access-token}</span>
 <span class="na">Content-Type</span><span class="p">:</span> <span class="s">application/json</span>
 
 </code></pre></div><div class="highlight"><pre class="highlight javascript tab-javascript"><code><span class="kd">var</span> <span class="nx">headers</span> <span class="o">=</span> <span class="p">{</span>
+  <span class="dl">'</span><span class="s1">X-Modio-Idempotent-Key</span><span class="dl">'</span><span class="p">:</span><span class="dl">'</span><span class="s1">d720901c-a8ed-42ff-9343-39d4a3e16b18</span><span class="dl">'</span><span class="p">,</span>
   <span class="dl">'</span><span class="s1">Authorization</span><span class="dl">'</span><span class="p">:</span><span class="dl">'</span><span class="s1">Bearer {access-token}</span><span class="dl">'</span><span class="p">,</span>
   <span class="dl">'</span><span class="s1">Content-Type</span><span class="dl">'</span><span class="p">:</span><span class="dl">'</span><span class="s1">application/json</span><span class="dl">'</span><span class="p">,</span>
   <span class="dl">'</span><span class="s1">Content-Type</span><span class="dl">'</span><span class="p">:</span><span class="dl">'</span><span class="s1">application/x-www-form-urlencoded</span><span class="dl">'</span><span class="p">,</span>
@@ -21537,11 +21530,11 @@ curl <span class="nt">-X</span> POST https://<span class="k">*</span>.modapi.io/
 <span class="p">})</span>
 </code></pre></div><div class="highlight"><pre class="highlight javascript tab-javascript--nodejs"><code><span class="kd">const</span> <span class="nx">request</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="dl">'</span><span class="s1">node-fetch</span><span class="dl">'</span><span class="p">);</span>
 <span class="kd">const</span> <span class="nx">inputBody</span> <span class="o">=</span> <span class="dl">'</span><span class="s1">{
-  "idempotent_key": "string",
   "transaction_id": 0,
   "clawback_uuid": "string"
 }</span><span class="dl">'</span><span class="p">;</span>
 <span class="kd">const</span> <span class="nx">headers</span> <span class="o">=</span> <span class="p">{</span>
+  <span class="dl">'</span><span class="s1">X-Modio-Idempotent-Key</span><span class="dl">'</span><span class="p">:</span><span class="dl">'</span><span class="s1">d720901c-a8ed-42ff-9343-39d4a3e16b18</span><span class="dl">'</span><span class="p">,</span>
   <span class="dl">'</span><span class="s1">Authorization</span><span class="dl">'</span><span class="p">:</span><span class="dl">'</span><span class="s1">Bearer {access-token}</span><span class="dl">'</span><span class="p">,</span>
   <span class="dl">'</span><span class="s1">Content-Type</span><span class="dl">'</span><span class="p">:</span><span class="dl">'</span><span class="s1">application/json</span><span class="dl">'</span><span class="p">,</span>
   <span class="dl">'</span><span class="s1">Content-Type</span><span class="dl">'</span><span class="p">:</span><span class="dl">'</span><span class="s1">application/x-www-form-urlencoded</span><span class="dl">'</span><span class="p">,</span>
@@ -21562,6 +21555,7 @@ curl <span class="nt">-X</span> POST https://<span class="k">*</span>.modapi.io/
 <span class="p">});</span>
 </code></pre></div><div class="highlight"><pre class="highlight python tab-python"><code><span class="kn">import</span> <span class="nn">requests</span>
 <span class="n">headers</span> <span class="o">=</span> <span class="p">{</span>
+  <span class="s">'X-Modio-Idempotent-Key'</span><span class="p">:</span> <span class="s">'d720901c-a8ed-42ff-9343-39d4a3e16b18'</span><span class="p">,</span>
   <span class="s">'Authorization'</span><span class="p">:</span> <span class="s">'Bearer {access-token}'</span><span class="p">,</span>
   <span class="s">'Content-Type'</span><span class="p">:</span> <span class="s">'application/json'</span><span class="p">,</span>
   <span class="s">'Content-Type'</span><span class="p">:</span> <span class="s">'application/x-www-form-urlencoded'</span><span class="p">,</span>
@@ -21602,16 +21596,10 @@ curl <span class="nt">-X</span> POST https://<span class="k">*</span>.modapi.io/
 </thead>
 <tbody>
 <tr>
-<td>idempotent_key</td>
-<td>string</td>
-<td>true</td>
-<td>The use of the idempotency key is for if in the event of a connection error, you can confidently reattempt the request without the concern of inadvertently creating a duplicate purchase or executing the purchase twice. All idempotent keys last 24 hours.</td>
-</tr>
-<tr>
 <td>transaction_id</td>
 <td>integer</td>
 <td>true</td>
-<td>The id of the transaction to complete.</td>
+<td>The ID of the transaction to complete.</td>
 </tr>
 <tr>
 <td>clawback_uuid</td>
@@ -21833,125 +21821,6 @@ curl <span class="nt">-X</span> POST https://<span class="k">*</span>.modapi.io/
 <td></td>
 <td>Successful Request</td>
 <td><a href="#schemarefund_object">Refund Object</a></td>
-</tr>
-</tbody>
-</table>
-
-<aside class="auth-notice">
-To perform this request, you must be authenticated via one of the following methods:
-<a href="#authentication">OAuth 2</a> (Scopes: write)
-</aside>
-<h2 id="generate-service-ticket">Generate Service Ticket</h2>
-<blockquote>
-<p>Example request</p>
-</blockquote>
-<div class="highlight"><pre class="highlight shell tab-shell"><code><span class="c"># You can also use wget</span>
-curl <span class="nt">-X</span> POST https://<span class="k">*</span>.modapi.io/v1/me/s2s/modio/ticket <span class="se">\</span>
-  <span class="nt">-H</span> <span class="s1">'Authorization: Bearer {access-token}'</span> <span class="se">\ </span>
-  <span class="nt">-H</span> <span class="s1">'Content-Type: application/json'</span> <span class="se">\ </span>
-  <span class="nt">-H</span> <span class="s1">'Accept: application/json'</span>
-
-</code></pre></div><div class="highlight"><pre class="highlight http tab-http"><code><span class="nf">POST</span> <span class="nn">https://*.modapi.io/v1/me/s2s/modio/ticket</span> <span class="k">HTTP</span><span class="o">/</span><span class="m">1.1</span>
-<span class="na">Host</span><span class="p">:</span> <span class="s">*.modapi.io</span>
-
-Accept: application/json
-Authorization: Bearer {access-token}
-Content-Type: application/json
-
-</code></pre></div><div class="highlight"><pre class="highlight javascript tab-javascript"><code><span class="kd">var</span> <span class="nx">headers</span> <span class="o">=</span> <span class="p">{</span>
-  <span class="dl">'</span><span class="s1">Authorization</span><span class="dl">'</span><span class="p">:</span><span class="dl">'</span><span class="s1">Bearer {access-token}</span><span class="dl">'</span><span class="p">,</span>
-  <span class="dl">'</span><span class="s1">Content-Type</span><span class="dl">'</span><span class="p">:</span><span class="dl">'</span><span class="s1">application/json</span><span class="dl">'</span><span class="p">,</span>
-  <span class="dl">'</span><span class="s1">Accept</span><span class="dl">'</span><span class="p">:</span><span class="dl">'</span><span class="s1">application/json</span><span class="dl">'</span>
-
-<span class="p">};</span>
-
-<span class="nx">$</span><span class="p">.</span><span class="nx">ajax</span><span class="p">({</span>
-  <span class="na">url</span><span class="p">:</span> <span class="dl">'</span><span class="s1">https://*.modapi.io/v1/me/s2s/modio/ticket</span><span class="dl">'</span><span class="p">,</span>
-  <span class="na">method</span><span class="p">:</span> <span class="dl">'</span><span class="s1">post</span><span class="dl">'</span><span class="p">,</span>
-
-  <span class="na">headers</span><span class="p">:</span> <span class="nx">headers</span><span class="p">,</span>
-  <span class="na">success</span><span class="p">:</span> <span class="kd">function</span><span class="p">(</span><span class="nx">data</span><span class="p">)</span> <span class="p">{</span>
-    <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">JSON</span><span class="p">.</span><span class="nx">stringify</span><span class="p">(</span><span class="nx">data</span><span class="p">));</span>
-  <span class="p">}</span>
-<span class="p">})</span>
-</code></pre></div><div class="highlight"><pre class="highlight javascript tab-javascript--nodejs"><code><span class="kd">const</span> <span class="nx">request</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="dl">'</span><span class="s1">node-fetch</span><span class="dl">'</span><span class="p">);</span>
-
-<span class="kd">const</span> <span class="nx">headers</span> <span class="o">=</span> <span class="p">{</span>
-  <span class="dl">'</span><span class="s1">Authorization</span><span class="dl">'</span><span class="p">:</span><span class="dl">'</span><span class="s1">Bearer {access-token}</span><span class="dl">'</span><span class="p">,</span>
-  <span class="dl">'</span><span class="s1">Content-Type</span><span class="dl">'</span><span class="p">:</span><span class="dl">'</span><span class="s1">application/json</span><span class="dl">'</span><span class="p">,</span>
-  <span class="dl">'</span><span class="s1">Accept</span><span class="dl">'</span><span class="p">:</span><span class="dl">'</span><span class="s1">application/json</span><span class="dl">'</span>
-
-<span class="p">};</span>
-
-<span class="nx">fetch</span><span class="p">(</span><span class="dl">'</span><span class="s1">https://*.modapi.io/v1/me/s2s/modio/ticket</span><span class="dl">'</span><span class="p">,</span>
-<span class="p">{</span>
-  <span class="na">method</span><span class="p">:</span> <span class="dl">'</span><span class="s1">POST</span><span class="dl">'</span><span class="p">,</span>
-
-  <span class="na">headers</span><span class="p">:</span> <span class="nx">headers</span>
-<span class="p">})</span>
-<span class="p">.</span><span class="nx">then</span><span class="p">(</span><span class="kd">function</span><span class="p">(</span><span class="nx">res</span><span class="p">)</span> <span class="p">{</span>
-    <span class="k">return</span> <span class="nx">res</span><span class="p">.</span><span class="nx">json</span><span class="p">();</span>
-<span class="p">}).</span><span class="nx">then</span><span class="p">(</span><span class="kd">function</span><span class="p">(</span><span class="nx">body</span><span class="p">)</span> <span class="p">{</span>
-    <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">body</span><span class="p">);</span>
-<span class="p">});</span>
-</code></pre></div><div class="highlight"><pre class="highlight python tab-python"><code><span class="kn">import</span> <span class="nn">requests</span>
-<span class="n">headers</span> <span class="o">=</span> <span class="p">{</span>
-  <span class="s">'Authorization'</span><span class="p">:</span> <span class="s">'Bearer {access-token}'</span><span class="p">,</span>
-  <span class="s">'Content-Type'</span><span class="p">:</span> <span class="s">'application/json'</span><span class="p">,</span>
-  <span class="s">'Accept'</span><span class="p">:</span> <span class="s">'application/json'</span>
-<span class="p">}</span>
-
-<span class="n">r</span> <span class="o">=</span> <span class="n">requests</span><span class="p">.</span><span class="n">post</span><span class="p">(</span><span class="s">'https://*.modapi.io/v1/me/s2s/modio/ticket'</span><span class="p">,</span> <span class="n">params</span><span class="o">=</span><span class="p">{</span>
-
-<span class="p">},</span> <span class="n">headers</span> <span class="o">=</span> <span class="n">headers</span><span class="p">)</span>
-
-<span class="k">print</span> <span class="n">r</span><span class="p">.</span><span class="n">json</span><span class="p">()</span>
-</code></pre></div><div class="highlight"><pre class="highlight java tab-java"><code><span class="no">URL</span> <span class="n">obj</span> <span class="o">=</span> <span class="k">new</span> <span class="no">URL</span><span class="o">(</span><span class="s">"https://*.modapi.io/v1/me/s2s/modio/ticket"</span><span class="o">);</span>
-<span class="nc">HttpURLConnection</span> <span class="n">con</span> <span class="o">=</span> <span class="o">(</span><span class="nc">HttpURLConnection</span><span class="o">)</span> <span class="n">obj</span><span class="o">.</span><span class="na">openConnection</span><span class="o">();</span>
-<span class="n">con</span><span class="o">.</span><span class="na">setRequestMethod</span><span class="o">(</span><span class="s">"POST"</span><span class="o">);</span>
-<span class="kt">int</span> <span class="n">responseCode</span> <span class="o">=</span> <span class="n">con</span><span class="o">.</span><span class="na">getResponseCode</span><span class="o">();</span>
-<span class="nc">BufferedReader</span> <span class="n">in</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">BufferedReader</span><span class="o">(</span>
-    <span class="k">new</span> <span class="nf">InputStreamReader</span><span class="o">(</span><span class="n">con</span><span class="o">.</span><span class="na">getInputStream</span><span class="o">()));</span>
-<span class="nc">String</span> <span class="n">inputLine</span><span class="o">;</span>
-<span class="nc">StringBuffer</span> <span class="n">response</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">StringBuffer</span><span class="o">();</span>
-<span class="k">while</span> <span class="o">((</span><span class="n">inputLine</span> <span class="o">=</span> <span class="n">in</span><span class="o">.</span><span class="na">readLine</span><span class="o">())</span> <span class="o">!=</span> <span class="kc">null</span><span class="o">)</span> <span class="o">{</span>
-    <span class="n">response</span><span class="o">.</span><span class="na">append</span><span class="o">(</span><span class="n">inputLine</span><span class="o">);</span>
-<span class="o">}</span>
-<span class="n">in</span><span class="o">.</span><span class="na">close</span><span class="o">();</span>
-<span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="n">response</span><span class="o">.</span><span class="na">toString</span><span class="o">());</span>
-</code></pre></div>
-<p><span class="httpmethod POST">POST</span> <span class="endpointheading">/me/s2s/modio/ticket</span></p>
-
-<p>Generate a service-to-service (S2S) ticket on behalf of the authenticated user. The returned ticket should be passed to your secure backend to used with your registered backend server to facilitate S2S requests on behalf of a user. Service tickets are valid for 60 days, at which point you will need the user to make another request to this endpoint. A successful request will return a <a href="#service-ticket">Service Ticket</a> object.</p>
-
-<blockquote>
-<p>Example response</p>
-</blockquote>
-<div class="highlight"><pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
-  </span><span class="nl">"resource"</span><span class="p">:</span><span class="w"> </span><span class="s2">"application-server"</span><span class="p">,</span><span class="w">
-  </span><span class="nl">"service_ticket"</span><span class="p">:</span><span class="w"> </span><span class="s2">"eyJ0eXAiOiXKV1QibCJhbLciOiJeiUzI1....."</span><span class="w">
-</span><span class="p">}</span><span class="w">
-
-</span></code></pre></div>
-<h3 id="Generate-Service-Ticket-responses">Responses</h3>
-
-<table>
-<thead>
-<tr>
-<th>Status</th>
-<th>Meaning</th>
-<th>Error Ref</th>
-<th>Description</th>
-<th>Response Schema</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>200</td>
-<td><a href="https://tools.ietf.org/html/rfc7231#section-6.3.1">OK</a></td>
-<td></td>
-<td>Successful Request</td>
-<td><a href="#schemaservice_ticket_object">Service Ticket Object</a></td>
 </tr>
 </tbody>
 </table>
@@ -26732,34 +26601,6 @@ To perform this request, you must be authenticated via one of the following meth
 </tr>
 </tbody>
 </table>
-<h2 id="service-ticket-object">Service Ticket Object</h2>
-<p><a name="schemaservice_ticket_object"></a></p>
-<div class="highlight"><pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
-  </span><span class="nl">"resource"</span><span class="p">:</span><span class="w"> </span><span class="s2">"application-server"</span><span class="p">,</span><span class="w">
-  </span><span class="nl">"service_ticket"</span><span class="p">:</span><span class="w"> </span><span class="s2">"eyJ0eXAiOiXKV1QibCJhbLciOiJeiUzI1....."</span><span class="w">
-</span><span class="p">}</span><span class="w"> 
-</span></code></pre></div><h3 id="properties-70">Properties</h3>
-<table>
-<thead>
-<tr>
-<th>Name</th>
-<th>Type</th>
-<th>Description</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>resource</td>
-<td>string</td>
-<td>The resource as to which the service ticket is issued for. Possible Values are <code>application-server</code>.</td>
-</tr>
-<tr>
-<td>service_ticket</td>
-<td>string</td>
-<td>The service ticket for the requested audience.</td>
-</tr>
-</tbody>
-</table>
 <h2 id="status-audit-log-object">Status Audit Log Object</h2>
 <p><a name="schemastatus_audit_log_object"></a></p>
 <div class="highlight"><pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
@@ -26785,7 +26626,7 @@ To perform this request, you must be authenticated via one of the following meth
   </span><span class="nl">"date_added"</span><span class="p">:</span><span class="w"> </span><span class="mi">1492564103</span><span class="p">,</span><span class="w">
   </span><span class="nl">"reason"</span><span class="p">:</span><span class="w"> </span><span class="s2">""</span><span class="w">
 </span><span class="p">}</span><span class="w"> 
-</span></code></pre></div><h3 id="properties-71">Properties</h3>
+</span></code></pre></div><h3 id="properties-70">Properties</h3>
 <table>
 <thead>
 <tr>
@@ -26848,7 +26689,7 @@ To perform this request, you must be authenticated via one of the following meth
   </span><span class="nl">"position"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Turret Builder"</span><span class="p">,</span><span class="w">
   </span><span class="nl">"invite_pending"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="w">
 </span><span class="p">}</span><span class="w"> 
-</span></code></pre></div><h3 id="properties-72">Properties</h3>
+</span></code></pre></div><h3 id="properties-71">Properties</h3>
 <table>
 <thead>
 <tr>
@@ -26926,7 +26767,7 @@ To perform this request, you must be authenticated via one of the following meth
     </span><span class="p">}</span><span class="w">
   </span><span class="p">}</span><span class="w">
 </span><span class="p">}</span><span class="w"> 
-</span></code></pre></div><h3 id="properties-73">Properties</h3>
+</span></code></pre></div><h3 id="properties-72">Properties</h3>
 <table>
 <thead>
 <tr>
@@ -27068,7 +26909,7 @@ To perform this request, you must be authenticated via one of the following meth
   </span><span class="nl">"warning"</span><span class="p">:</span><span class="w"> </span><span class="s2">"#d6af2e"</span><span class="p">,</span><span class="w">
   </span><span class="nl">"danger"</span><span class="p">:</span><span class="w"> </span><span class="s2">"#ff000e"</span><span class="w">
 </span><span class="p">}</span><span class="w"> 
-</span></code></pre></div><h3 id="properties-74">Properties</h3>
+</span></code></pre></div><h3 id="properties-73">Properties</h3>
 <table>
 <thead>
 <tr>
@@ -27119,7 +26960,7 @@ To perform this request, you must be authenticated via one of the following meth
   </span><span class="nl">"resource_name_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"my-awesome-mod"</span><span class="p">,</span><span class="w">
   </span><span class="nl">"resource_url"</span><span class="p">:</span><span class="w"> </span><span class="s2">""</span><span class="w">
 </span><span class="p">}</span><span class="w"> 
-</span></code></pre></div><h3 id="properties-75">Properties</h3>
+</span></code></pre></div><h3 id="properties-74">Properties</h3>
 <table>
 <thead>
 <tr>
@@ -27154,6 +26995,34 @@ To perform this request, you must be authenticated via one of the following meth
 <td>resource_url</td>
 <td>string</td>
 <td>URL to the resource that was reported. If the resource has been permanently deleted, and thus you cannot access it anymore - this field will be null.</td>
+</tr>
+</tbody>
+</table>
+<h2 id="user-delegation-token-object">User Delegation Token Object</h2>
+<p><a name="schemauser_delegation_token_object"></a></p>
+<div class="highlight"><pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
+  </span><span class="nl">"entity"</span><span class="p">:</span><span class="w"> </span><span class="s2">"purchase_server"</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"token"</span><span class="p">:</span><span class="w"> </span><span class="s2">"eyJ0eXAiOiXKV1QibCJhbLciOiJeiUzI1....."</span><span class="w">
+</span><span class="p">}</span><span class="w"> 
+</span></code></pre></div><h3 id="properties-75">Properties</h3>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>entity</td>
+<td>string</td>
+<td>The entity the User Delegation Token was created for. Possible Values are <code>purchase_server</code>.</td>
+</tr>
+<tr>
+<td>token</td>
+<td>string</td>
+<td>The user delegation token. This cannot be used to authenticate API requests and instead can only be used as request context for select S2S endpoints.</td>
 </tr>
 </tbody>
 </table>
