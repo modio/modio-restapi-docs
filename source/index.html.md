@@ -16174,14 +16174,14 @@ To perform this request, you must be authenticated via one of the following meth
 ```shell
 # You can also use wget
 curl -X POST https://*.modapi.io/v1/s2s/transactions/intent \
+  -H 'X-Modio-Delegation-Token: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxMjM0NTY3ODkwIiwibmFtZSI6IkpvaG4gRG9lIiwiaWF0IjoxNTE2MjM5MDIyfQ.SflKxwRJSMeKKF2QT4fwpMeJf36POk6yJV_adQssw5c' \ 
+  -H 'X-Modio-Idempotent-Key: d720901c-a8ed-42ff-9343-39d4a3e16b18' \ 
   -H 'Authorization: Bearer {access-token}' \ 
   -H 'Content-Type: application/json' \ 
   -H 'Content-Type: application/x-www-form-urlencoded' \ 
   -H 'Accept: application/json' \
-  -d 'idempotent_key=undefined' \
   -d 'sku=undefined' \
   -d 'portal=undefined' \
-  -d 'ticket=undefined' \
   -d 'gateway_uuid=undefined'
 
 ```
@@ -16191,6 +16191,8 @@ POST https://*.modapi.io/v1/s2s/transactions/intent HTTP/1.1
 Host: *.modapi.io
 Content-Type: application/x-www-form-urlencoded
 Accept: application/json
+X-Modio-Delegation-Token: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxMjM0NTY3ODkwIiwibmFtZSI6IkpvaG4gRG9lIiwiaWF0IjoxNTE2MjM5MDIyfQ.SflKxwRJSMeKKF2QT4fwpMeJf36POk6yJV_adQssw5c
+X-Modio-Idempotent-Key: d720901c-a8ed-42ff-9343-39d4a3e16b18
 Authorization: Bearer {access-token}
 Content-Type: application/json
 
@@ -16198,6 +16200,8 @@ Content-Type: application/json
 
 ```javascript
 var headers = {
+  'X-Modio-Delegation-Token':'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxMjM0NTY3ODkwIiwibmFtZSI6IkpvaG4gRG9lIiwiaWF0IjoxNTE2MjM5MDIyfQ.SflKxwRJSMeKKF2QT4fwpMeJf36POk6yJV_adQssw5c',
+  'X-Modio-Idempotent-Key':'d720901c-a8ed-42ff-9343-39d4a3e16b18',
   'Authorization':'Bearer {access-token}',
   'Content-Type':'application/json',
   'Content-Type':'application/x-www-form-urlencoded',
@@ -16219,13 +16223,13 @@ $.ajax({
 ```javascript--nodejs
 const request = require('node-fetch');
 const inputBody = '{
-  "idempotent_key": "string",
   "sku": "string",
   "portal": "string",
-  "ticket": "string",
   "gateway_uuid": "string"
 }';
 const headers = {
+  'X-Modio-Delegation-Token':'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxMjM0NTY3ODkwIiwibmFtZSI6IkpvaG4gRG9lIiwiaWF0IjoxNTE2MjM5MDIyfQ.SflKxwRJSMeKKF2QT4fwpMeJf36POk6yJV_adQssw5c',
+  'X-Modio-Idempotent-Key':'d720901c-a8ed-42ff-9343-39d4a3e16b18',
   'Authorization':'Bearer {access-token}',
   'Content-Type':'application/json',
   'Content-Type':'application/x-www-form-urlencoded',
@@ -16249,6 +16253,8 @@ fetch('https://*.modapi.io/v1/s2s/transactions/intent',
 ```python
 import requests
 headers = {
+  'X-Modio-Delegation-Token': 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxMjM0NTY3ODkwIiwibmFtZSI6IkpvaG4gRG9lIiwiaWF0IjoxNTE2MjM5MDIyfQ.SflKxwRJSMeKKF2QT4fwpMeJf36POk6yJV_adQssw5c',
+  'X-Modio-Idempotent-Key': 'd720901c-a8ed-42ff-9343-39d4a3e16b18',
   'Authorization': 'Bearer {access-token}',
   'Content-Type': 'application/json',
   'Content-Type': 'application/x-www-form-urlencoded',
@@ -16284,10 +16290,8 @@ Create a service-to-service (S2S) transaction intent. This is for performing an 
 
      Parameter|Type|Required|Description
      ---|---|---|---|
-     idempotent_key|string|true|The use of the idempotency key is for if in the event of a connection error, you can confidently reattempt the request without the concern of inadvertently creating a duplicate purchase or executing the purchase twice. All idempotent keys last 24 hours.
-     sku|string|true|The sku id that you wish to issue tokens against.
+     sku|string|true|The sku ID of the entitlement that will be converted into it's equivalent Virtual Token amount.
      portal|string|true|The portal the sku is tied to. Valid options are apple, google, xboxlive, psn and steam.
-     ticket|string|true|The users service ticket for whom you wish to perform the purchase on behalf of.
      gateway_uuid|string|false|An optional mapping alpha dash string that can be used to track this transaction. It is recommended to use the one from the processing platform if you have one available.
 
 > Example response
@@ -16321,11 +16325,11 @@ To perform this request, you must be authenticated via one of the following meth
 ```shell
 # You can also use wget
 curl -X POST https://*.modapi.io/v1/s2s/transactions/commit \
+  -H 'X-Modio-Idempotent-Key: d720901c-a8ed-42ff-9343-39d4a3e16b18' \ 
   -H 'Authorization: Bearer {access-token}' \ 
   -H 'Content-Type: application/json' \ 
   -H 'Content-Type: application/x-www-form-urlencoded' \ 
   -H 'Accept: application/json' \
-  -d 'idempotent_key=undefined' \
   -d 'transaction_id=undefined' \
   -d 'clawback_uuid=undefined'
 
@@ -16336,6 +16340,7 @@ POST https://*.modapi.io/v1/s2s/transactions/commit HTTP/1.1
 Host: *.modapi.io
 Content-Type: application/x-www-form-urlencoded
 Accept: application/json
+X-Modio-Idempotent-Key: d720901c-a8ed-42ff-9343-39d4a3e16b18
 Authorization: Bearer {access-token}
 Content-Type: application/json
 
@@ -16343,6 +16348,7 @@ Content-Type: application/json
 
 ```javascript
 var headers = {
+  'X-Modio-Idempotent-Key':'d720901c-a8ed-42ff-9343-39d4a3e16b18',
   'Authorization':'Bearer {access-token}',
   'Content-Type':'application/json',
   'Content-Type':'application/x-www-form-urlencoded',
@@ -16364,11 +16370,11 @@ $.ajax({
 ```javascript--nodejs
 const request = require('node-fetch');
 const inputBody = '{
-  "idempotent_key": "string",
   "transaction_id": 0,
   "clawback_uuid": "string"
 }';
 const headers = {
+  'X-Modio-Idempotent-Key':'d720901c-a8ed-42ff-9343-39d4a3e16b18',
   'Authorization':'Bearer {access-token}',
   'Content-Type':'application/json',
   'Content-Type':'application/x-www-form-urlencoded',
@@ -16392,6 +16398,7 @@ fetch('https://*.modapi.io/v1/s2s/transactions/commit',
 ```python
 import requests
 headers = {
+  'X-Modio-Idempotent-Key': 'd720901c-a8ed-42ff-9343-39d4a3e16b18',
   'Authorization': 'Bearer {access-token}',
   'Content-Type': 'application/json',
   'Content-Type': 'application/x-www-form-urlencoded',
@@ -16427,8 +16434,7 @@ Create a service-to-service (S2S) transaction commit. This is for performing an 
 
     Parameter|Type|Required|Description
     ---|---|---|---|
-    idempotent_key|string|true|The use of the idempotency key is for if in the event of a connection error, you can confidently reattempt the request without the concern of inadvertently creating a duplicate purchase or executing the purchase twice. All idempotent keys last 24 hours.
-    transaction_id|integer|true|The id of the transaction to complete.
+    transaction_id|integer|true|The ID of the transaction to complete.
     clawback_uuid|string|false|An optional mapping alpha dash string that can be used to group this transaction against other transactions.
 
 > Example response
@@ -16597,124 +16603,6 @@ Create a service-to-service (S2S) transaction clawback. This is for unwinding a 
 Status|Meaning|Error Ref|Description|Response Schema
 ---|---|----|---|---|
 200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)||Successful Request|[Refund Object](#schemarefund_object)
-<aside class="auth-notice">
-To perform this request, you must be authenticated via one of the following methods:
-<a href="#authentication">OAuth 2</a> (Scopes: write)
-</aside>
-## Generate Service Ticket
-
-> Example request
-
-```shell
-# You can also use wget
-curl -X POST https://*.modapi.io/v1/me/s2s/modio/ticket \
-  -H 'Authorization: Bearer {access-token}' \ 
-  -H 'Content-Type: application/json' \ 
-  -H 'Accept: application/json'
-
-```
-
-```http
-POST https://*.modapi.io/v1/me/s2s/modio/ticket HTTP/1.1
-Host: *.modapi.io
-
-Accept: application/json
-Authorization: Bearer {access-token}
-Content-Type: application/json
-
-```
-
-```javascript
-var headers = {
-  'Authorization':'Bearer {access-token}',
-  'Content-Type':'application/json',
-  'Accept':'application/json'
-
-};
-
-$.ajax({
-  url: 'https://*.modapi.io/v1/me/s2s/modio/ticket',
-  method: 'post',
-
-  headers: headers,
-  success: function(data) {
-    console.log(JSON.stringify(data));
-  }
-})
-```
-
-```javascript--nodejs
-const request = require('node-fetch');
-
-const headers = {
-  'Authorization':'Bearer {access-token}',
-  'Content-Type':'application/json',
-  'Accept':'application/json'
-
-};
-
-fetch('https://*.modapi.io/v1/me/s2s/modio/ticket',
-{
-  method: 'POST',
-
-  headers: headers
-})
-.then(function(res) {
-    return res.json();
-}).then(function(body) {
-    console.log(body);
-});
-```
-
-```python
-import requests
-headers = {
-  'Authorization': 'Bearer {access-token}',
-  'Content-Type': 'application/json',
-  'Accept': 'application/json'
-}
-
-r = requests.post('https://*.modapi.io/v1/me/s2s/modio/ticket', params={
-
-}, headers = headers)
-
-print r.json()
-```
-
-```java
-URL obj = new URL("https://*.modapi.io/v1/me/s2s/modio/ticket");
-HttpURLConnection con = (HttpURLConnection) obj.openConnection();
-con.setRequestMethod("POST");
-int responseCode = con.getResponseCode();
-BufferedReader in = new BufferedReader(
-    new InputStreamReader(con.getInputStream()));
-String inputLine;
-StringBuffer response = new StringBuffer();
-while ((inputLine = in.readLine()) != null) {
-    response.append(inputLine);
-}
-in.close();
-System.out.println(response.toString());
-```
-
-`POST /me/s2s/modio/ticket`
-
-Generate a service-to-service (S2S) ticket on behalf of the authenticated user. The returned ticket should be passed to your secure backend to used with your registered backend server to facilitate S2S requests on behalf of a user. Service tickets are valid for 60 days, at which point you will need the user to make another request to this endpoint. A successful request will return a [Service Ticket](#service-ticket) object.
-
-> Example response
-
-```json
-{
-  "resource": "application-server",
-  "service_ticket": "eyJ0eXAiOiXKV1QibCJhbLciOiJeiUzI1....."
-}
-
-```
-<h3 id="Generate-Service-Ticket-responses">Responses</h3>
-
-Status|Meaning|Error Ref|Description|Response Schema
----|---|----|---|---|
-200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)||Successful Request|[Service Ticket Object](#schemaservice_ticket_object)
 <aside class="auth-notice">
 To perform this request, you must be authenticated via one of the following methods:
 <a href="#authentication">OAuth 2</a> (Scopes: write)
@@ -19778,26 +19666,6 @@ purchase_date|integer|The time of the purchase.
 
 
 
-## Service Ticket Object  
-
-<a name="schemaservice_ticket_object"></a>
-
-```json
-{
-  "resource": "application-server",
-  "service_ticket": "eyJ0eXAiOiXKV1QibCJhbLciOiJeiUzI1....."
-} 
-```
-
-### Properties
-
-Name|Type|Description
----|---|---|---|
-resource|string|The resource as to which the service ticket is issued for. Possible Values are `application-server`.
-service_ticket|string|The service ticket for the requested audience.
-
-
-
 ## Status Audit Log Object 
 
 <a name="schemastatus_audit_log_object"></a>
@@ -20007,6 +19875,26 @@ resource_id|integer|Unique id of the resource.
 resource_name|integer|The relative name of the resource.
 resource_name_id|string|Path for the resource on mod.io.
 resource_url|string|URL to the resource that was reported. If the resource has been permanently deleted, and thus you cannot access it anymore - this field will be null.
+
+
+
+## User Delegation Token Object 
+
+<a name="schemauser_delegation_token_object"></a>
+
+```json
+{
+  "entity": "purchase_server",
+  "token": "eyJ0eXAiOiXKV1QibCJhbLciOiJeiUzI1....."
+} 
+```
+
+### Properties
+
+Name|Type|Description
+---|---|---|---|
+entity|string|The entity the User Delegation Token was created for. Possible Values are `purchase_server`.
+token|string|The user delegation token. This cannot be used to authenticate API requests and instead can only be used as request context for select S2S endpoints.
 
 
 
