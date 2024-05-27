@@ -2300,15 +2300,15 @@ System.out.println(response.toString());
 `POST /external/discordauth`
 
 Request an access token on behalf of a Discord user. A Successful request will return an [Access Token Object](#access-token-object).
-     *
-     * __HINT:__ If you want to overlay the mod.io site in-game with Discord authentication, we recommend you add `?portal=discord` to the end of the URL you open which will prompt the user to login with Discord. See [Web Overlay Authentication](#web-overlay-authentication) for details.
-     *
-     * Parameter|Type|Required|Description
-     * ---|---|---|---|
-     * discord_token|string|true|The access token of the user provided by Discord.
-     * email|string||The users email address (optional but recommended to help users recover lost accounts). If supplied, and the respective user does not have an email registered for their account we will send a confirmation email to confirm they have ownership of the specified email.<br><br>__NOTE__: If the user already has an email on record with us, this parameter will be ignored. This parameter should also be urlencoded before the request is sent.
-     * date_expires|integer||Unix timestamp of date in which the returned token will expire. Value cannot be higher than the default value which is a week (unix timestamp + 604800 seconds). Using a token after it's expiry time has elapsed will result in a `401 Unauthorized` response.
-     * terms_agreed|boolean||This MUST be set to `false` unless you have collected the [users agreement](#terms) prior to calling this endpoint in which case it can be set to `true` and will be recorded.<br><br>__NOTE:__ If this is set to `false` and the user has not agreed to the latest mod.io Terms of Use and Privacy Policy, an error `403 Forbidden (error_ref 11074)` will be returned and you will need to collect the [users agreement](#terms) and retry with this value set to `true` to authenticate the user.
+
+    __HINT:__ If you want to overlay the mod.io site in-game with Discord authentication, we recommend you add `?portal=discord` to the end of the URL you open which will prompt the user to login with Discord. See [Web Overlay Authentication](#web-overlay-authentication) for details.
+
+    Parameter|Type|Required|Description
+    ---|---|---|---|
+    discord_token|string|true|The access token of the user provided by Discord.
+    email|string||The users email address (optional but recommended to help users recover lost accounts). If supplied, and the respective user does not have an email registered for their account we will send a confirmation email to confirm they have ownership of the specified email.<br><br>__NOTE__: If the user already has an email on record with us, this parameter will be ignored. This parameter should also be urlencoded before the request is sent.
+    date_expires|integer||Unix timestamp of date in which the returned token will expire. Value cannot be higher than the default value which is a week (unix timestamp + 604800 seconds). Using a token after it's expiry time has elapsed will result in a `401 Unauthorized` response.
+    terms_agreed|boolean||This MUST be set to `false` unless you have collected the [users agreement](#terms) prior to calling this endpoint in which case it can be set to `true` and will be recorded.<br><br>__NOTE:__ If this is set to `false` and the user has not agreed to the latest mod.io Terms of Use and Privacy Policy, an error `403 Forbidden (error_ref 11074)` will be returned and you will need to collect the [users agreement](#terms) and retry with this value set to `true` to authenticate the user.
 
 > Example response
 
@@ -3459,7 +3459,8 @@ Get all games. Successful request will return an array of [Game Objects](#get-ga
     presentation_option|integer|Presentation style used on the mod.io website:<br><br>__0__ = Grid View: Displays mods in a grid<br>__1__ = Table View: Displays mods in a table
     submission_option|integer|Submission process modders must follow:<br><br>__0__ = Mod uploads must occur via the API using a tool created by the game developers<br>__1__ = Mod uploads can occur from anywhere, including the website and API
     curation_option|integer|Curation option enabled by this game to approve mods:<br><br>__0__ = No curation: Mods are immediately available to play<br>__1__ = Price change approval: Pricing changes for marketplace mods queued for acceptance<br>__2__ = Full curation: All mods must be accepted by someone to be listed
-    community_options|integer|Community features enabled for this game:<br><br>__0__ = None<br>__1__ = Enable comments<br>__2__ = Enable guides<br>__4__ = Pin on homepage<br>__8__ = Show on homepage<br>__16__ = Show more on homepage<br>__32__ = Allow change status<br>__64__ = Enable Previews (Game must be hidden)<br>__128__ = Allow Preview Share-URL (Previews must be enabled)<br>__256__ = Allow negative ratings<br>__?__ = Combine to find games with multiple options enabled (see [BITWISE fields](#bitwise-and-bitwise-and))
+    dependency_option|integer|Dependency option for this game's mods:<br><br>__0__ = Disallow dependencies<br>__1__ = Allow dependencies, mods must opt in<br>__2__ = Allow dependencies, mods must opt out<br>__3__ = Allow dependencies with no restrictions
+    community_options|integer|Community features enabled for this game:<br><br>__0__ = None<br>__1__ = Enable comments<br>__2__ = Enable guides<br>__4__ = Pin on homepage<br>__8__ = Show on homepage<br>__16__ = Show more on homepage<br>__32__ = Allow change status<br>__64__ = Enable Previews (Game must be hidden)<br>__128__ = Allow Preview Share-URL (Previews must be enabled)<br>__256__ = Allow negative ratings<br>__512__ = Allow mods to be edited via web<br>__?__ = Combine to find games with multiple options enabled (see [BITWISE fields](#bitwise-and-bitwise-and))
     monetization_options|integer|Monetization options enabled for this game:<br><br>__0__ = Access to monetization features disabled<br>__1__ = Access to monetization features enabled by mod.io<br>__2__ = Marketplace enabled<br>__4__ = Creator partner program enabled<br>__8__ = Quantity limited mods supported<br>__16__ = All mods must be quantity limited<br>__?__ = Combine to find games with multiple options enabled (see [BITWISE fields](#bitwise-and-bitwise-and))
     api_access_options|integer|Level of API access allowed by this game:<br><br>__0__ = None<br>__1__ = Allow 3rd parties to access this games API endpoints<br>__2__ = Allow mods to be downloaded directly (if disabled all download URLs will contain a frequently changing verification hash to stop unauthorized use)<br>__4__ = Requires a bearer token to be supplied when attempting the download to enforce authenticated downloads only<br>__8__ = Requires a bearer token to be supplied and for the user to own the file when attempting the download<br>__?__ = Combine to find games with multiple options enabled (see [BITWISE fields](#bitwise-and-bitwise-and))
     maturity_options|integer|Mature content setup for this game:<br><br>__0__ = Don't allow mature content in mods<br>__1__ = Allow mature content in mods<br>__2__ = This game is for mature audiences only
@@ -3488,6 +3489,7 @@ Get all games. Successful request will return an array of [Game Objects](#get-ga
       "date_live": 1499841403,
       "presentation_option": 0,
       "submission_option": 1,
+      "dependency_option": 0,
       "curation_option": 0,
       "community_options": 3,
       "monetization_options": 0,
@@ -3700,6 +3702,7 @@ Get a game. Successful request will return a single [Game Object](#game-object).
   "date_live": 1499841403,
   "presentation_option": 0,
   "submission_option": 1,
+  "dependency_option": 0,
   "curation_option": 0,
   "community_options": 3,
   "monetization_options": 0,
@@ -4865,6 +4868,7 @@ Get all mods for the corresponding game. Successful request will return an array
     date_added|integer|Unix timestamp of date mod was registered.
     date_updated|integer|Unix timestamp of date mod was updated.
     date_live|integer|Unix timestamp of date mod was set live.
+    community_options|integer|Community features enabled for this mod:<br><br>__0__ = All the options below are disabled<br>__1__ = Enable comments<br>__64__ = Enable previews<br>__128__ = Enable preview URLs<br>__1024__ = Allow dependencies<br>__?__ = Add the options you want together, to enable multiple options (see [BITWISE fields](#bitwise-and-bitwise-and))
     maturity_option|integer|Maturity options set by the mod creator:<br><br>__0__ = None<br>__1__ = Alcohol<br>__2__ = Drugs<br>__4__ = Violence<br>__8__ = Explicit<br>__?__ = Combine to find mods with multiple options enabled (see [BITWISE fields](#bitwise-and-bitwise-and))
     monetization_options|integer|Monetization options enabled for this mod:<br><br>__0__ = Access to monetization features disabled<br>__1__ = Access to monetization features enabled by the game for this mod<br>__2__ = Marketplace enabled<br>__8__ = Quantity of this mod is limited<br>__?__ = Combine to find mods with multiple options enabled (see [BITWISE fields](#bitwise-and-bitwise-and))
     name|string|Name of the mod.
@@ -5407,7 +5411,7 @@ Add a mod. Successful request will return the newly created [Mod Object](#mod-ob
     stock|integer||Maximum number of times this mod can be sold. <br><br>__NOTE:__ Limited mods can be enforced by the parent game. The value of this field is not used if the parent game's or mod's limited support is disabled (see `monetization_options` field in [Game Object](#game-object)).
     monetization_options|integer||Monetization options enabled for this mod:<br><br>__0__ = Access to monetization features disabled<br>__1__ = Access to monetization features enabled by the game for this mod<br>__2__ = Marketplace enabled<br>__8__ = Quantity of this mod is limited<br>__?__ = Add the options you want together, to enable multiple options (see [BITWISE fields](#bitwise-and-bitwise-and))
     maturity_option|integer||Mature content found in this mod.<br><br>__NOTE:__ The value of this field will default to 0 unless the parent game allows you to flag mature content (see `maturity_options` field in [Game Object](#game-object)). <br><br>__0__ = None _(default)_<br>__1__ = Alcohol<br>__2__ = Drugs<br>__4__ = Violence<br>__8__ = Explicit<br>__?__ = Add the options you want together, to enable multiple options (see [BITWISE fields](#bitwise-and-bitwise-and))
-    community_options|integer||Community features enabled for this mod:<br><br>__0__ = All the options below are disabled<br>__1__ = Enable comments<br>__64__ = Enable previews<br>__?__ = Add the options you want together, to enable multiple options (see [BITWISE fields](#bitwise-and-bitwise-and))
+    community_options|integer||Community features enabled for this mod:<br><br>__0__ = All the options below are disabled<br>__1__ = Enable comments<br>__64__ = Enable previews<br>__128__ = Enable preview URLs<br>__1024__ = Allow dependencies<br>__?__ = Add the options you want together, to enable multiple options (see [BITWISE fields](#bitwise-and-bitwise-and))
     metadata_blob|string||Metadata that is designed to be handled by the game client and is recommended to not be exposed to content creators when submitting their mods. As an example, this may include properties as to how the item works, or other information you need to display. Metadata can also be stored as searchable [key value pairs](#metadata), and to individual [mod files](#get-modfiles).
     tags[]|string||Tags to apply to the mod. Every tag to apply requires a separate field with tags[] as the key (e.g. tags[]=tag1, tags[]=tag2). Only the tags pre-defined by the parent game can be applied. To determine what tags are eligible, see the tags values within `tag_options` column on the parent [Game Object](#game-object).
 
@@ -5690,7 +5694,7 @@ Edit details for a mod. If you want to update the `logo` or media associated wit
     stock|integer||Maximum number of times this mod can be sold. <br><br>__NOTE:__ Limited mods can be enforced by the parent game. The value of this field is not used if the parent game's or mod's limited support is disabled (see `monetization_options` field in [Game Object](#game-object)).
     monetization_options|integer||Monetization options enabled for this mod:<br><br>__0__ = Access to monetization features disabled<br>__1__ = Access to monetization features enabled by the game for this mod<br>__2__ = Marketplace enabled<br>__8__ = Quantity of this mod is limited<br>__?__ = Add the options you want together, to enable multiple features (see [BITWISE fields](#bitwise-and-bitwise-and))
     maturity_option|integer||Mature content found in this mod.<br><br>__NOTE:__ The value of this field will default to 0 unless the parent game allows you to flag mature content (see `maturity_options` field in [Game Object](#game-object)). <br><br>__0__ = None set<br>__1__ = Alcohol<br>__2__ = Drugs<br>__4__ = Violence<br>__8__ = Explicit<br>__?__ = Add the options you want together, to enable multiple options (see [BITWISE fields](#bitwise-and-bitwise-and))
-    community_options|integer||Community features enabled for this mod:<br><br>__0__ = All the options below are disabled<br>__1__ = Enable comments<br>__64__ = Enable previews<br>__?__ = Add the options you want together, to enable multiple options (see [BITWISE fields](#bitwise-and-bitwise-and))
+    community_options|integer||Community features enabled for this mod:<br><br>__0__ = All the options below are disabled<br>__1__ = Enable comments<br>__64__ = Enable previews<br>__128__ = Enable preview URLs<br>__1024__ = Allow dependencies<br>__?__ = Add the options you want together, to enable multiple options (see [BITWISE fields](#bitwise-and-bitwise-and))
     metadata_blob|string||Metadata that is designed to be handled by the game client and is recommended to not be exposed to content creators when submitting their mods. As an example, this may include properties as to how the item works, or other information you need to display. Metadata can also be stored as searchable [key value pairs](#metadata), and to individual [mod files](#get-modfiles).
     tags[]|string||When providing this attribute, if the input array contains tags, they will entirely replace any existing tags assigned to the mod. __If an empty array is passed, all currently assigned tags will be removed__. If `null` or omitted, no changes will be made to the assigned tags. To determine what tags are eligible, see the tags values within `tag_options` column on the parent [Game Object](#game-object).
 
@@ -12450,6 +12454,136 @@ Status|Meaning|Error Ref|Description|Response Schema
 To perform this request, you must be authenticated via one of the following methods:
 <a href="#authentication">OAuth 2</a> (Scopes: write)
 </aside>
+## Get Mod Dependants
+
+> Example request
+
+```shell
+# You can also use wget
+curl -X GET https://*.modapi.io/v1/games/{game-id}/mods/{mod-id}/dependants?api_key=YourApiKey \
+  -H 'Accept: application/json'
+
+```
+
+```http
+GET https://*.modapi.io/v1/games/{game-id}/mods/{mod-id}/dependants?api_key=YourApiKey HTTP/1.1
+Host: *.modapi.io
+
+Accept: application/json
+
+```
+
+```javascript
+var headers = {
+  'Accept':'application/json'
+
+};
+
+$.ajax({
+  url: 'https://*.modapi.io/v1/games/{game-id}/mods/{mod-id}/dependants',
+  method: 'get',
+  data: '?api_key=YourApiKey',
+  headers: headers,
+  success: function(data) {
+    console.log(JSON.stringify(data));
+  }
+})
+```
+
+```javascript--nodejs
+const request = require('node-fetch');
+
+const headers = {
+  'Accept':'application/json'
+
+};
+
+fetch('https://*.modapi.io/v1/games/{game-id}/mods/{mod-id}/dependants?api_key=YourApiKey',
+{
+  method: 'GET',
+
+  headers: headers
+})
+.then(function(res) {
+    return res.json();
+}).then(function(body) {
+    console.log(body);
+});
+```
+
+```python
+import requests
+headers = {
+  'Accept': 'application/json'
+}
+
+r = requests.get('https://*.modapi.io/v1/games/{game-id}/mods/{mod-id}/dependants', params={
+  'api_key': 'YourApiKey'
+}, headers = headers)
+
+print r.json()
+```
+
+```java
+URL obj = new URL("https://*.modapi.io/v1/games/{game-id}/mods/{mod-id}/dependants?api_key=YourApiKey");
+HttpURLConnection con = (HttpURLConnection) obj.openConnection();
+con.setRequestMethod("GET");
+int responseCode = con.getResponseCode();
+BufferedReader in = new BufferedReader(
+    new InputStreamReader(con.getInputStream()));
+String inputLine;
+StringBuffer response = new StringBuffer();
+while ((inputLine = in.readLine()) != null) {
+    response.append(inputLine);
+}
+in.close();
+System.out.println(response.toString());
+```
+
+`GET /games/{game-id}/mods/{mod-id}/dependants`
+
+Get all mods dependents connected to the given mod. Successful request will return an array of [Mod Dependants Objects](#get-mod-dependants).
+     
+     __NOTE:__ This endpoint returns all mod dependents, irrespective of their status, visibility or platform support.
+
+> Example response
+
+```json
+{
+  "data": [
+    {
+      "mod_id": 231,
+      "name": "Example Mod",
+      "name_id": "rogue-knight-hd-pack",
+      "date_added": 1499841487,
+      "logo": {
+        "filename": "card.png",
+        "original": "https://assets.modcdn.io/images/placeholder/card.png",
+        "thumb_320x180": "https://assets.modcdn.io/images/placeholder/card.png",
+        "thumb_640x360": "https://assets.modcdn.io/images/placeholder/card.png",
+        "thumb_1280x720": "https://assets.modcdn.io/images/placeholder/card.png"
+      }
+    },
+    {
+        ...
+    }
+  ],
+  "result_count": 70,
+  "result_offset": 0,
+  "result_limit": 100,
+  "result_total": 70
+}
+
+```
+<h3 id="Get-Mod-Dependants-responses">Responses</h3>
+
+Status|Meaning|Error Ref|Description|Response Schema
+---|---|----|---|---|
+200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)||Successful Request|[Get Mod Dependants](#schemaget_mod_dependants)
+<aside class="auth-notice">
+To perform this request, you must be authenticated via one of the following methods:
+<a href="#authentication">api_key</a>, <a href="#authentication">OAuth 2</a> (Scopes: read)
+</aside>
 # Teams
 
 ## dummy/reports
@@ -13862,7 +13996,8 @@ Get all games the _authenticated user_ added or is a team member of. Successful 
     presentation_option|integer|Presentation style used on the mod.io website:<br><br>__0__ = Grid View: Displays mods in a grid<br>__1__ = Table View: Displays mods in a table
     submission_option|integer|Submission process modders must follow:<br><br>__0__ = Mod uploads must occur via the API using a tool created by the game developers<br>__1__ = Mod uploads can occur from anywhere, including the website and API
     curation_option|integer|Curation options enabled by this game to approve mods:<br><br>__0__ = No curation: Mods are immediately available to play<br>__1__ = Price change approval: Pricing changes for marketplace mods queued for acceptance<br>__2__ = Full curation: All mods must be accepted by someone to be listed
-    community_options|integer|Community features enabled for this game:<br><br>__0__ = None<br>__1__ = Enable comments<br>__2__ = Enable guides<br>__4__ = Pin on homepage<br>__8__ = Show on homepage<br>__16__ = Show more on homepage<br>__32__ = Allow change status<br>__64__ = Enable Previews (Game must be hidden)<br>__128__ = Allow Preview Share-URL (Previews must be enabled)<br>__256__ = Allow negative ratings<br>__?__ = Combine to find games with multiple options enabled (see [BITWISE fields](#bitwise-and-bitwise-and))
+    dependency_option|integer|Dependency option for this game's mods:<br><br>__0__ = Disallow dependencies<br>__1__ = Allow dependencies, mods must opt in<br>__2__ = Allow dependencies, mods must opt out<br>__3__ = Allow dependencies with no restrictions
+    community_options|integer|Community features enabled for this game:<br><br>__0__ = None<br>__1__ = Enable comments<br>__2__ = Enable guides<br>__4__ = Pin on homepage<br>__8__ = Show on homepage<br>__16__ = Show more on homepage<br>__32__ = Allow change status<br>__64__ = Enable Previews (Game must be hidden)<br>__128__ = Allow Preview Share-URL (Previews must be enabled)<br>__256__ = Allow negative ratings<br>__512__ = Allow mods to be edited via web<br>__?__ = Combine to find games with multiple options enabled (see [BITWISE fields](#bitwise-and-bitwise-and))
     monetization_options|integer|Monetization options enabled for this game:<br><br>__0__ = Access to monetization features disabled<br>__1__ = Access to monetization features enabled by mod.io<br>__2__ = Marketplace enabled<br>__4__ = Creator partner program enabled<br>__8__ = Quantity limited mods supported<br>__16__ = All mods must be quantity limited<br>__?__ = Combine to find games with multiple options enabled (see [BITWISE fields](#bitwise-and-bitwise-and))
     api_access_options|integer|Level of API access allowed by this game:<br><br>__0__ = None<br>__1__ = Allow 3rd parties to access this games API endpoints<br>__2__ = Allow mods to be downloaded directly (if disabled all download URLs will contain a frequently changing verification hash to stop unauthorized use)<br>__4__ = Requires a bearer token to be supplied when attempting the download to enforce authenticated downloads only<br>__8__ = Requires a bearer token to be supplied and for the user to own the file when attempting the download<br>__?__ = Combine to find games with multiple options enabled (see [BITWISE fields](#bitwise-and-bitwise-and))
     maturity_options|integer|Mature content setup for this game:<br><br>__0__ = Don't allow mature content in mods<br>__1__ = Allow mature content in mods<br>__2__ = This game is for mature audiences only
@@ -13891,6 +14026,7 @@ Get all games the _authenticated user_ added or is a team member of. Successful 
       "date_live": 1499841403,
       "presentation_option": 0,
       "submission_option": 1,
+      "dependency_option": 0,
       "curation_option": 0,
       "community_options": 3,
       "monetization_options": 0,
@@ -15200,7 +15336,8 @@ Get the _authenticated user_ wallets. Successful request will return a single [W
   "payment_method_id": "string",
   "currency": "string",
   "balance": 0,
-  "deficit": 0
+  "deficit": 0,
+  "monetization_status": 1
 }
 
 ```
@@ -16933,6 +17070,7 @@ team_id|integer|The ID of the monetization team.
   "date_live": 1499841403,
   "presentation_option": 0,
   "submission_option": 1,
+  "dependency_option": 0,
   "curation_option": 0,
   "community_options": 3,
   "monetization_options": 0,
@@ -17033,8 +17171,9 @@ date_updated|integer|Unix timestamp of date game was updated.
 date_live|integer|Unix timestamp of date game was set live.
 presentation_option|integer|Presentation style used on the mod.io website:<br><br>__0__ = Grid View: Displays mods in a grid<br>__1__ = Table View: Displays mods in a table
 submission_option|integer|Submission process modders must follow:<br><br>__0__ = Mod uploads must occur via the API using a tool created by the game developers<br>__1__ = Mod uploads can occur from anywhere, including the website and API
+dependency_option|integer|Dependency option for this game's mods:<br><br>__0__ = Disallow dependencies<br>__1__ = Allow dependencies, mods must opt in<br>__2__ = Allow dependencies, mods must opt out<br>__3__ = Allow dependencies with no restrictions
 curation_option|integer|Curation option enabled by this game to approve mods:<br><br>__0__ = No curation: Mods are immediately available to play<br>__1__ = Price change approval: Pricing changes for marketplace mods queued for acceptance<br>__2__ = Full curation: All mods must be accepted by someone to be listed
-community_options|integer|Community features enabled for this game:<br><br>__0__ = All of the options below are disabled<br>__1__ = Enable comments<br>__2__ = Enable guides<br>__4__ = Pin on homepage<br>__8__ = Show on homepage<br>__16__ = Show more on homepage<br>__32__ = Allow change status<br>__64__ = Enable Previews (Game must be hidden)<br>__128__ = Allow Preview Share-URL (Previews must be enabled)<br>__256__ = Allow negative ratings<br>__?__ = Add the options you want together, to enable multiple features (see [BITWISE fields](#bitwise-and-bitwise-and))
+community_options|integer|Community features enabled for this game:<br><br>__0__ = All of the options below are disabled<br>__1__ = Enable comments<br>__2__ = Enable guides<br>__4__ = Pin on homepage<br>__8__ = Show on homepage<br>__16__ = Show more on homepage<br>__32__ = Allow change status<br>__64__ = Enable Previews (Game must be hidden)<br>__128__ = Allow Preview Share-URL (Previews must be enabled)<br>__256__ = Allow negative ratings<br>__512__ = Allow mods to be edited via web<br>__?__ = Add the options you want together, to enable multiple features (see [BITWISE fields](#bitwise-and-bitwise-and))
 monetization_options|integer|Monetization options enabled for this game:<br><br>__0__ = Access to monetization features disabled<br>__1__ = Access to monetization features enabled by mod.io<br>__2__ = Marketplace enabled<br>__4__ = Creator partner program enabled<br>__8__ = Quantity limited mods supported<br>__?__ = Add the options you want together, to enable multiple features (see [BITWISE fields](#bitwise-and-bitwise-and))
 monetization_team|[Game Monetization Team Object](#schemagame_monetization_team_object)|The monetization team for this resource. [Game Monetization Team Object](#game-monetization-team-object).
 revenue_options|integer|Deprecated: Please use monetization_options instead, this will be removed in subsequent API version.
@@ -17435,6 +17574,7 @@ result_total|integer|Total number of results found.
       "date_live": 1499841403,
       "presentation_option": 0,
       "submission_option": 1,
+      "dependency_option": 0,
       "curation_option": 0,
       "community_options": 3,
       "monetization_options": 0,
@@ -17768,6 +17908,49 @@ result_total|integer|Total number of results found.
 Name|Type|Description
 ---|---|---|---|
 data|[Comment Object](#schemacomment_object)[]|Array containing comment objects.
+result_count|integer|Number of results returned in this request.
+result_offset|integer|Number of results skipped over. Defaults to 0 unless overridden by `_offset` filter.
+result_limit|integer|Maximum number of results returned in the request. Defaults to 100 (max) unless overridden by `_limit` filter.
+result_total|integer|Total number of results found.
+
+
+
+## Get Mod Dependants  
+
+<a name="schemaget_mod_dependants"></a>
+
+```json
+{
+  "data": [
+    {
+      "mod_id": 231,
+      "name": "Example Mod",
+      "name_id": "rogue-knight-hd-pack",
+      "date_added": 1499841487,
+      "logo": {
+        "filename": "card.png",
+        "original": "https://assets.modcdn.io/images/placeholder/card.png",
+        "thumb_320x180": "https://assets.modcdn.io/images/placeholder/card.png",
+        "thumb_640x360": "https://assets.modcdn.io/images/placeholder/card.png",
+        "thumb_1280x720": "https://assets.modcdn.io/images/placeholder/card.png"
+      }
+    },
+    {
+        ...
+    }
+  ],
+  "result_count": 70,
+  "result_offset": 0,
+  "result_limit": 100,
+  "result_total": 70
+} 
+```
+
+### Properties
+
+Name|Type|Description
+---|---|---|---|
+data|[Mod Dependants Object](#schemamod_dependants_object)[]|Array containing mod depenants objects.
 result_count|integer|Number of results returned in this request.
 result_offset|integer|Number of results skipped over. Defaults to 0 unless overridden by `_offset` filter.
 result_limit|integer|Maximum number of results returned in the request. Defaults to 100 (max) unless overridden by `_limit` filter.
@@ -18742,6 +18925,38 @@ metavalue|string|The value of the key-value pair.
 
 
 
+## Mod Dependants Object  
+
+<a name="schemamod_dependants_object"></a>
+
+```json
+{
+  "mod_id": 231,
+  "name": "Example Mod",
+  "name_id": "rogue-knight-hd-pack",
+  "date_added": 1499841487,
+  "logo": {
+    "filename": "card.png",
+    "original": "https://assets.modcdn.io/images/placeholder/card.png",
+    "thumb_320x180": "https://assets.modcdn.io/images/placeholder/card.png",
+    "thumb_640x360": "https://assets.modcdn.io/images/placeholder/card.png",
+    "thumb_1280x720": "https://assets.modcdn.io/images/placeholder/card.png"
+  }
+} 
+```
+
+### Properties
+
+Name|Type|Description
+---|---|---|---|
+mod_id|integer|Unique ID of the mod that serves as the dependency.
+name|string|Name of the mod dependency.
+name_id|string|Path for the mod on mod.io. For example: https://mod.io/g/rogue-knight/m/__rogue-knight-hd-pack__
+date_added|integer|Unix timestamp of date the dependency was added.
+logo|[Logo Object](#schemalogo_object)|Contains media URL's to the logo for the mod.
+
+
+
 ## Mod Dependencies Object  
 
 <a name="schemamod_dependencies_object"></a>
@@ -19012,7 +19227,7 @@ date_added|integer|Unix timestamp of date mod was registered.
 date_updated|integer|Unix timestamp of date mod was updated.
 date_live|integer|Unix timestamp of date mod was set live.
 maturity_option|integer|Mature content found in this mod, this is only relevant if the parent game allows mods to be labelled as mature:<br><br>__0__ = None<br>__1__ = Alcohol<br>__2__ = Drugs<br>__4__ = Violence<br>__8__ = Explicit<br>__?__ = Add the options you want together, to enable multiple filters (see [BITWISE fields](#bitwise-and-bitwise-and))
-community_options|integer|Community features enabled for this mod:<br><br>__0__ = All of the options below are disabled<br>__1__ = Enable comments<br>__64__ = Enable previews<br>__?__ = Add the options you want together, to enable multiple features (see [BITWISE fields](#bitwise-and-bitwise-and))
+community_options|integer|Community features enabled for this mod:<br><br>__0__ = All of the options below are disabled<br>__1__ = Enable comments<br>__64__ = Enable previews<br>__128__ = Enable preview URLs<br>__1024__ = Allow dependencies<br>__?__ = Add the options you want together, to enable multiple features (see [BITWISE fields](#bitwise-and-bitwise-and))
 monetization_options|integer|Monetization features enabled for this mod:<br><br>__0__ = Access to monetization features disabled<br>__1__ = Access to monetization features enabled by the game for this mod<br>__2__ = Marketplace enabled<br>__8__ = Quantity of this mod is limited<br>__?__ = Add the options you want together, to enable multiple features (see [BITWISE fields](#bitwise-and-bitwise-and))
 stock|integer|The stock of the mod. 0 is the default value, and is only used when the mod has limited quantity enabled.
 price|integer|The price of the mod.
@@ -19115,7 +19330,7 @@ date_expires|integer|Unix timestamp until this mods's statistics are considered 
 Name|Type|Description
 ---|---|---|---|
 name|string|Tag name.
-name_localized|string|The localized tag name influenced by the [Accept-Language](https://docs.mod.io/#localization) header, defaults to English.
+name_localized|string|The localized tag name influenced by the [Accept-Language](https://docs.mod.io/restapiref/#localization) header, defaults to English.
 date_added|integer|**Deprecated:** Unix timestamp of date tag was applied.
 
 
@@ -19995,7 +20210,8 @@ balance|integer|The balance of the wallet.
   "payment_method_id": "string",
   "currency": "string",
   "balance": 0,
-  "deficit": 0
+  "deficit": 0,
+  "monetization_status": 1
 } 
 ```
 
@@ -20008,6 +20224,7 @@ payment_method_id|string|The payment_method_id of the wallet.
 currency|string|The currency of the wallet.
 balance|integer|The balance of the wallet.
 deficit|integer|The deficit of the wallet.
+monetization_status|integer|The status of a monetized user for the corresponding `status`. Possible values:<br><br>__0__ = Unregistered<br>__1__ = Pending<br>__2__ = Rejected<br>__4__ = Review<br>__8__ = Action<br>__16__ = Approved<br>__32__ = Member
 
 
 
