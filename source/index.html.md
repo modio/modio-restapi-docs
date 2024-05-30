@@ -2300,15 +2300,15 @@ System.out.println(response.toString());
 `POST /external/discordauth`
 
 Request an access token on behalf of a Discord user. A Successful request will return an [Access Token Object](#access-token-object).
-     *
-     * __HINT:__ If you want to overlay the mod.io site in-game with Discord authentication, we recommend you add `?portal=discord` to the end of the URL you open which will prompt the user to login with Discord. See [Web Overlay Authentication](#web-overlay-authentication) for details.
-     *
-     * Parameter|Type|Required|Description
-     * ---|---|---|---|
-     * discord_token|string|true|The access token of the user provided by Discord.
-     * email|string||The users email address (optional but recommended to help users recover lost accounts). If supplied, and the respective user does not have an email registered for their account we will send a confirmation email to confirm they have ownership of the specified email.<br><br>__NOTE__: If the user already has an email on record with us, this parameter will be ignored. This parameter should also be urlencoded before the request is sent.
-     * date_expires|integer||Unix timestamp of date in which the returned token will expire. Value cannot be higher than the default value which is a week (unix timestamp + 604800 seconds). Using a token after it's expiry time has elapsed will result in a `401 Unauthorized` response.
-     * terms_agreed|boolean||This MUST be set to `false` unless you have collected the [users agreement](#terms) prior to calling this endpoint in which case it can be set to `true` and will be recorded.<br><br>__NOTE:__ If this is set to `false` and the user has not agreed to the latest mod.io Terms of Use and Privacy Policy, an error `403 Forbidden (error_ref 11074)` will be returned and you will need to collect the [users agreement](#terms) and retry with this value set to `true` to authenticate the user.
+
+    __HINT:__ If you want to overlay the mod.io site in-game with Discord authentication, we recommend you add `?portal=discord` to the end of the URL you open which will prompt the user to login with Discord. See [Web Overlay Authentication](#web-overlay-authentication) for details.
+
+    Parameter|Type|Required|Description
+    ---|---|---|---|
+    discord_token|string|true|The access token of the user provided by Discord.
+    email|string||The users email address (optional but recommended to help users recover lost accounts). If supplied, and the respective user does not have an email registered for their account we will send a confirmation email to confirm they have ownership of the specified email.<br><br>__NOTE__: If the user already has an email on record with us, this parameter will be ignored. This parameter should also be urlencoded before the request is sent.
+    date_expires|integer||Unix timestamp of date in which the returned token will expire. Value cannot be higher than the default value which is a week (unix timestamp + 604800 seconds). Using a token after it's expiry time has elapsed will result in a `401 Unauthorized` response.
+    terms_agreed|boolean||This MUST be set to `false` unless you have collected the [users agreement](#terms) prior to calling this endpoint in which case it can be set to `true` and will be recorded.<br><br>__NOTE:__ If this is set to `false` and the user has not agreed to the latest mod.io Terms of Use and Privacy Policy, an error `403 Forbidden (error_ref 11074)` will be returned and you will need to collect the [users agreement](#terms) and retry with this value set to `true` to authenticate the user.
 
 > Example response
 
@@ -15342,7 +15342,8 @@ Get the _authenticated user_ wallets. Successful request will return a single [W
   "payment_method_id": "string",
   "currency": "string",
   "balance": 0,
-  "deficit": 0
+  "deficit": 0,
+  "monetization_status": 1
 }
 
 ```
@@ -20233,7 +20234,8 @@ balance|integer|The balance of the wallet.
   "payment_method_id": "string",
   "currency": "string",
   "balance": 0,
-  "deficit": 0
+  "deficit": 0,
+  "monetization_status": 1
 } 
 ```
 
@@ -20246,6 +20248,7 @@ payment_method_id|string|The payment_method_id of the wallet.
 currency|string|The currency of the wallet.
 balance|integer|The balance of the wallet.
 deficit|integer|The deficit of the wallet.
+monetization_status|integer|The status of a monetized user for the corresponding `status`. Possible values:<br><br>__0__ = Unregistered<br>__1__ = Pending<br>__2__ = Rejected<br>__4__ = Review<br>__8__ = Action<br>__16__ = Approved<br>__32__ = Member
 
 
 
