@@ -16254,7 +16254,7 @@ Get all users that are part of a mod team. Successful request will return an arr
      ---|---|---|---|
      id|integer|Unique id of the team member record.
      user_id|integer|Unique id of the user.
-     username|string|Display name of the user.
+     username|string|Username of the user.
      level|integer|Level of permission the user has:<br><br>__1__ = Moderator (can moderate comments and content attached)<br>__4__ = Manager (moderator access, including uploading builds and editing settings except supply and team members)<br>__8__ = Administrator (full access, including editing the supply and team)
      date_added|integer|Unix timestamp of the date the user was added to the team.
      pending|integer|Has the user accepted the team invite?<br><br>__0__ = Accepted<br>__1__ = Pending
@@ -19554,7 +19554,7 @@ Name|Type|Description
 ---|---|---|---|
 id|integer|Unique id of the user.
 name_id|string|Path for the user on mod.io. For example: https://mod.io/u/__name-id-here__
-username|string|Display name of the user.
+username|string|Username of the user.
 monetization_status|integer|The monetization status of the user.
 monetization_options|integer|The monetization options of the user.
 split|integer|User monetization split.
@@ -20195,7 +20195,7 @@ Name|Type|Description
 ---|---|---|---|
 id|integer|Unique id of the user.
 name_id|string|Path for the user on mod.io. For example: https://mod.io/u/__name-id-here__
-username|string|Display name of the user.
+username|string|Username of the user.
 display_name_portal|string|The users' display name for the targeted portal. Value will be `null` if no valid `X-Modio-Portal` portal header value is provided. For more information see [Targeting a Portal](#targeting-a-portal).
 date_online|integer|Unix timestamp of date the user was last online.
 date_joined|integer|Unix timestamp of date the user joined.
