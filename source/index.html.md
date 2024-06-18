@@ -967,7 +967,7 @@ The purpose of this endpoint is to provide the text, links and buttons you can u
 ```json
 {
   "plaintext": "This game uses mod.io to support user-generated content. By selecting "I Agree" you agree to the mod.io Terms of Use and a mod.io account will be created for you (using your display name, avatar and ID). Please see the mod.io Privacy Policy on how mod.io processes your personal data.",
-  "html": "<p>This game uses <a href="https://mod.io">mod.io</a> to support user-generated content. By selecting "I Agree" you agree to the mod.io <a href="https://mod.io/terms">Terms of Use</a> and a mod.io account will be created for you (using your  display name, avatar and ID). Please see the mod.io <a href="https://mod.io/privacy">Privacy Policy</a> on how mod.io processes your personal data.</p>",
+  "html": "<p>This game uses <a href="https://mod.io">mod.io</a> to support user-generated content. By selecting "I Agree" you agree to the mod.io <a href="https://mod.io/terms">Terms of Use</a> and a mod.io account will be created for you (using your display name, avatar and ID). Please see the mod.io <a href="https://mod.io/privacy">Privacy Policy</a> on how mod.io processes your personal data.</p>",
   "buttons": {
     "agree": {
       "text": "I Agree"
@@ -12592,29 +12592,36 @@ To perform this request, you must be authenticated via one of the following meth
 </aside>
 # Teams
 
-## dummy/reports
+## Get Mod Team Members
 
 > Example request
 
 ```shell
 # You can also use wget
-curl -X GET https://*.modapi.io/v1/dummy/reports
+curl -X GET https://*.modapi.io/v1/games/{game-id}/mods/{mod-id}/team?api_key=YourApiKey \
+  -H 'Accept: application/json'
 
 ```
 
 ```http
-GET https://*.modapi.io/v1/dummy/reports HTTP/1.1
+GET https://*.modapi.io/v1/games/{game-id}/mods/{mod-id}/team?api_key=YourApiKey HTTP/1.1
 Host: *.modapi.io
 
+Accept: application/json
 
 ```
 
 ```javascript
+var headers = {
+  'Accept':'application/json'
+
+};
 
 $.ajax({
-  url: 'https://*.modapi.io/v1/dummy/reports',
+  url: 'https://*.modapi.io/v1/games/{game-id}/mods/{mod-id}/team',
   method: 'get',
-
+  data: '?api_key=YourApiKey',
+  headers: headers,
   success: function(data) {
     console.log(JSON.stringify(data));
   }
@@ -12624,10 +12631,16 @@ $.ajax({
 ```javascript--nodejs
 const request = require('node-fetch');
 
-fetch('https://*.modapi.io/v1/dummy/reports',
-{
-  method: 'GET'
+const headers = {
+  'Accept':'application/json'
 
+};
+
+fetch('https://*.modapi.io/v1/games/{game-id}/mods/{mod-id}/team?api_key=YourApiKey',
+{
+  method: 'GET',
+
+  headers: headers
 })
 .then(function(res) {
     return res.json();
@@ -12638,16 +12651,19 @@ fetch('https://*.modapi.io/v1/dummy/reports',
 
 ```python
 import requests
+headers = {
+  'Accept': 'application/json'
+}
 
-r = requests.get('https://*.modapi.io/v1/dummy/reports', params={
-
-)
+r = requests.get('https://*.modapi.io/v1/games/{game-id}/mods/{mod-id}/team', params={
+  'api_key': 'YourApiKey'
+}, headers = headers)
 
 print r.json()
 ```
 
 ```java
-URL obj = new URL("https://*.modapi.io/v1/dummy/reports");
+URL obj = new URL("https://*.modapi.io/v1/games/{game-id}/mods/{mod-id}/team?api_key=YourApiKey");
 HttpURLConnection con = (HttpURLConnection) obj.openConnection();
 con.setRequestMethod("GET");
 int responseCode = con.getResponseCode();
@@ -12662,19 +12678,69 @@ in.close();
 System.out.println(response.toString());
 ```
 
-`GET //dummy/reports`
+`GET /games/{game-id}/mods/{mod-id}/team`
 
-dummy/reports
+Get all users that are part of a mod team. Successful request will return an array of [Team Member Objects](#team-member-object). We recommended reading the [filtering documentation](#filtering) to return only the records you want.
 
+     Filter|Type|Required|Description
+     ---|---|---|---|
+     id|integer|Unique id of the team member record.
+     user_id|integer|Unique id of the user.
+     username|string|Display name of the user.
+     level|integer|Level of permission the user has:<br><br>__1__ = Moderator (can moderate comments and content attached)<br>__4__ = Manager (moderator access, including uploading builds and editing settings except supply and team members)<br>__8__ = Administrator (full access, including editing the supply and team)
+     date_added|integer|Unix timestamp of the date the user was added to the team.
+     pending|integer|Has the user accepted the team invite?<br><br>__0__ = Accepted<br>__1__ = Pending
 
-<h3 id="dummy/reports-responses">Responses</h3>
+> Example response
+
+```json
+{
+  "data": [
+    {
+      "id": 457,
+      "user": {
+        "id": 1,
+        "name_id": "xant",
+        "username": "XanT",
+        "display_name_portal": null,
+        "date_online": 1509922961,
+        "date_joined": 1509922961,
+        "avatar": {
+          "filename": "avatar.png",
+          "original": "https://assets.modcdn.io/images/placeholder/avatar.png",
+          "thumb_50x50": "https://assets.modcdn.io/images/placeholder/avatar_50x50.png",
+          "thumb_100x100": "https://assets.modcdn.io/images/placeholder/avatar_100x100.png"
+        },
+        "timezone": "",
+        "language": "",
+        "profile_url": "https://mod.io/u/xant"
+      },
+      "level": 8,
+      "date_added": 1492058857,
+      "position": "Turret Builder",
+      "invite_pending": 1
+    },
+    {
+        ...
+    }
+  ],
+  "result_count": 70,
+  "result_offset": 0,
+  "result_limit": 100,
+  "result_total": 70
+}
+
+```
+<h3 id="Get-Mod-Team-Members-responses">Responses</h3>
 
 Status|Meaning|Error Ref|Description|Response Schema
 ---|---|----|---|---|
-200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)||Successful Request|None
-<aside class="success">
-This operation does not require authentication
+200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)||Successful Request|[Get Team Members](#schemaget_team_members)
+<aside class="auth-notice">
+To perform this request, you must be authenticated via one of the following methods:
+<a href="#authentication">api_key</a>, <a href="#authentication">OAuth 2</a> (Scopes: read)
 </aside>
+# Reports
 
 ## Submit Report
 
@@ -15625,7 +15691,7 @@ Status|Meaning|Error Ref|Description|Response Schema
 To perform this request, you must be authenticated via one of the following methods:
 <a href="#authentication">OAuth 2</a> (Scopes: write)
 </aside>
-## Purchase An Item
+## Purchase A Mod
 
 > Example request
 
@@ -15729,7 +15795,7 @@ System.out.println(response.toString());
 
 `POST /games/{game-id}/mods/{mod-id}/checkout`
 
-Purchase an item. A Successful request will return the newly created [Pay Object](#pay-object).
+Purchase a mod. A Successful request will return the newly created [Pay Object](#pay-object).
 
      Parameter|Type|Required|Description
      ---|---|---|---|
@@ -15882,7 +15948,7 @@ Purchase an item. A Successful request will return the newly created [Pay Object
 }
 
 ```
-<h3 id="Purchase-An-Item-responses">Responses</h3>
+<h3 id="Purchase-A-Mod-responses">Responses</h3>
 
 Status|Meaning|Error Ref|Description|Response Schema
 ---|---|----|---|---|
@@ -15911,7 +15977,7 @@ Status|Meaning|Error Ref|Description|Response Schema
 To perform this request, you must be authenticated via one of the following methods:
 <a href="#authentication">OAuth 2</a> (Scopes: write)
 </aside>
-## Get Users In Mod Monetization Team
+## Get Mod Monetization Team
 
 > Example request
 
@@ -16019,7 +16085,7 @@ Get users in a monetization team. Successful request will return a [Monetization
 }
 
 ```
-<h3 id="Get-Users-In-Mod-Monetization-Team-responses">Responses</h3>
+<h3 id="Get-Mod-Monetization-Team-responses">Responses</h3>
 
 Status|Meaning|Error Ref|Description|Response Schema
 ---|---|----|---|---|
@@ -16125,8 +16191,11 @@ System.out.println(response.toString());
 
 Send a request to create a monetization team for a mod team. Successful request will return a [Monetization Team Accounts Object](#monetization-team-accounts-object).
 
-    Parameter|Type|Required|Description
-    ---|---|---|---|
+     Parameter|Type|Required|Description
+     ---|---|---|---|
+     users|array|true|Array of users to add.
+     id|integer|true|Id of the user to add to the team.
+     split|integer|true|Split value for the given user.
 
 > Example response
 
@@ -16159,154 +16228,6 @@ Status|Meaning|Error Ref|Description|Response Schema
 <aside class="auth-notice">
 To perform this request, you must be authenticated via one of the following methods:
 <a href="#authentication">OAuth 2</a> (Scopes: write)
-</aside>
-## Get Mod Team Members
-
-> Example request
-
-```shell
-# You can also use wget
-curl -X GET https://*.modapi.io/v1/games/{game-id}/mods/{mod-id}/team?api_key=YourApiKey \
-  -H 'Accept: application/json'
-
-```
-
-```http
-GET https://*.modapi.io/v1/games/{game-id}/mods/{mod-id}/team?api_key=YourApiKey HTTP/1.1
-Host: *.modapi.io
-
-Accept: application/json
-
-```
-
-```javascript
-var headers = {
-  'Accept':'application/json'
-
-};
-
-$.ajax({
-  url: 'https://*.modapi.io/v1/games/{game-id}/mods/{mod-id}/team',
-  method: 'get',
-  data: '?api_key=YourApiKey',
-  headers: headers,
-  success: function(data) {
-    console.log(JSON.stringify(data));
-  }
-})
-```
-
-```javascript--nodejs
-const request = require('node-fetch');
-
-const headers = {
-  'Accept':'application/json'
-
-};
-
-fetch('https://*.modapi.io/v1/games/{game-id}/mods/{mod-id}/team?api_key=YourApiKey',
-{
-  method: 'GET',
-
-  headers: headers
-})
-.then(function(res) {
-    return res.json();
-}).then(function(body) {
-    console.log(body);
-});
-```
-
-```python
-import requests
-headers = {
-  'Accept': 'application/json'
-}
-
-r = requests.get('https://*.modapi.io/v1/games/{game-id}/mods/{mod-id}/team', params={
-  'api_key': 'YourApiKey'
-}, headers = headers)
-
-print r.json()
-```
-
-```java
-URL obj = new URL("https://*.modapi.io/v1/games/{game-id}/mods/{mod-id}/team?api_key=YourApiKey");
-HttpURLConnection con = (HttpURLConnection) obj.openConnection();
-con.setRequestMethod("GET");
-int responseCode = con.getResponseCode();
-BufferedReader in = new BufferedReader(
-    new InputStreamReader(con.getInputStream()));
-String inputLine;
-StringBuffer response = new StringBuffer();
-while ((inputLine = in.readLine()) != null) {
-    response.append(inputLine);
-}
-in.close();
-System.out.println(response.toString());
-```
-
-`GET /games/{game-id}/mods/{mod-id}/team`
-
-Get all users that are part of a mod team. Successful request will return an array of [Team Member Objects](#team-member-object). We recommended reading the [filtering documentation](#filtering) to return only the records you want.
-
-     Filter|Type|Required|Description
-     ---|---|---|---|
-     id|integer|Unique id of the team member record.
-     user_id|integer|Unique id of the user.
-     username|string|Username of the user.
-     level|integer|Level of permission the user has:<br><br>__1__ = Moderator (can moderate comments and content attached)<br>__4__ = Manager (moderator access, including uploading builds and editing settings except supply and team members)<br>__8__ = Administrator (full access, including editing the supply and team)
-     date_added|integer|Unix timestamp of the date the user was added to the team.
-     pending|integer|Has the user accepted the team invite?<br><br>__0__ = Accepted<br>__1__ = Pending
-
-> Example response
-
-```json
-{
-  "data": [
-    {
-      "id": 457,
-      "user": {
-        "id": 1,
-        "name_id": "xant",
-        "username": "XanT",
-        "display_name_portal": null,
-        "date_online": 1509922961,
-        "date_joined": 1509922961,
-        "avatar": {
-          "filename": "avatar.png",
-          "original": "https://assets.modcdn.io/images/placeholder/avatar.png",
-          "thumb_50x50": "https://assets.modcdn.io/images/placeholder/avatar_50x50.png",
-          "thumb_100x100": "https://assets.modcdn.io/images/placeholder/avatar_100x100.png"
-        },
-        "timezone": "",
-        "language": "",
-        "profile_url": "https://mod.io/u/xant"
-      },
-      "level": 8,
-      "date_added": 1492058857,
-      "position": "Turret Builder",
-      "invite_pending": 1
-    },
-    {
-        ...
-    }
-  ],
-  "result_count": 70,
-  "result_offset": 0,
-  "result_limit": 100,
-  "result_total": 70
-}
-
-```
-<h3 id="Get-Mod-Team-Members-responses">Responses</h3>
-
-Status|Meaning|Error Ref|Description|Response Schema
----|---|----|---|---|
-200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)||Successful Request|[Get Team Members](#schemaget_team_members)
-<aside class="auth-notice">
-To perform this request, you must be authenticated via one of the following methods:
-<a href="#authentication">api_key</a>, <a href="#authentication">OAuth 2</a> (Scopes: read)
 </aside>
 # Server to Server
 
@@ -19554,7 +19475,7 @@ Name|Type|Description
 ---|---|---|---|
 id|integer|Unique id of the user.
 name_id|string|Path for the user on mod.io. For example: https://mod.io/u/__name-id-here__
-username|string|Username of the user.
+username|string|Display name of the user.
 monetization_status|integer|The monetization status of the user.
 monetization_options|integer|The monetization options of the user.
 split|integer|User monetization split.
@@ -19998,7 +19919,7 @@ invite_pending|integer|If the team member invitation is still pending:<br><br>__
 ```json
 {
   "plaintext": "This game uses mod.io to support user-generated content. By selecting "I Agree" you agree to the mod.io Terms of Use and a mod.io account will be created for you (using your display name, avatar and ID). Please see the mod.io Privacy Policy on how mod.io processes your personal data.",
-  "html": "<p>This game uses <a href="https://mod.io">mod.io</a> to support user-generated content. By selecting "I Agree" you agree to the mod.io <a href="https://mod.io/terms">Terms of Use</a> and a mod.io account will be created for you (using your  display name, avatar and ID). Please see the mod.io <a href="https://mod.io/privacy">Privacy Policy</a> on how mod.io processes your personal data.</p>",
+  "html": "<p>This game uses <a href="https://mod.io">mod.io</a> to support user-generated content. By selecting "I Agree" you agree to the mod.io <a href="https://mod.io/terms">Terms of Use</a> and a mod.io account will be created for you (using your display name, avatar and ID). Please see the mod.io <a href="https://mod.io/privacy">Privacy Policy</a> on how mod.io processes your personal data.</p>",
   "buttons": {
     "agree": {
       "text": "I Agree"
@@ -20195,7 +20116,7 @@ Name|Type|Description
 ---|---|---|---|
 id|integer|Unique id of the user.
 name_id|string|Path for the user on mod.io. For example: https://mod.io/u/__name-id-here__
-username|string|Username of the user.
+username|string|Display name of the user.
 display_name_portal|string|The users' display name for the targeted portal. Value will be `null` if no valid `X-Modio-Portal` portal header value is provided. For more information see [Targeting a Portal](#targeting-a-portal).
 date_online|integer|Unix timestamp of date the user was last online.
 date_joined|integer|Unix timestamp of date the user joined.
