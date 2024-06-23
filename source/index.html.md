@@ -13423,115 +13423,6 @@ To perform this request, you must be authenticated via one of the following meth
 </aside>
 # Me
 
-## Ping
-
-> Example request
-
-```shell
-# You can also use wget
-curl -X GET https://*.modapi.io/v1/ping \
-  -H 'Accept: application/json'
-
-```
-
-```http
-GET https://*.modapi.io/v1/ping HTTP/1.1
-Host: *.modapi.io
-
-Accept: application/json
-
-```
-
-```javascript
-var headers = {
-  'Accept':'application/json'
-
-};
-
-$.ajax({
-  url: 'https://*.modapi.io/v1/ping',
-  method: 'get',
-
-  headers: headers,
-  success: function(data) {
-    console.log(JSON.stringify(data));
-  }
-})
-```
-
-```javascript--nodejs
-const request = require('node-fetch');
-
-const headers = {
-  'Accept':'application/json'
-
-};
-
-fetch('https://*.modapi.io/v1/ping',
-{
-  method: 'GET',
-
-  headers: headers
-})
-.then(function(res) {
-    return res.json();
-}).then(function(body) {
-    console.log(body);
-});
-```
-
-```python
-import requests
-headers = {
-  'Accept': 'application/json'
-}
-
-r = requests.get('https://*.modapi.io/v1/ping', params={
-
-}, headers = headers)
-
-print r.json()
-```
-
-```java
-URL obj = new URL("https://*.modapi.io/v1/ping");
-HttpURLConnection con = (HttpURLConnection) obj.openConnection();
-con.setRequestMethod("GET");
-int responseCode = con.getResponseCode();
-BufferedReader in = new BufferedReader(
-    new InputStreamReader(con.getInputStream()));
-String inputLine;
-StringBuffer response = new StringBuffer();
-while ((inputLine = in.readLine()) != null) {
-    response.append(inputLine);
-}
-in.close();
-System.out.println(response.toString());
-```
-
-`GET //ping`
-
-Ping the mod.io API for purpose of a reachability check, successful request will return a 200 OK with a [Web Message Object](#web-message-object).
-
-> Example response
-
-```json
-{
-  "code": 200,
-  "success": true,
-  "message": "You have successfully logged out of mod.io."
-}
-
-```
-<h3 id="Ping-responses">Responses</h3>
-
-Status|Meaning|Error Ref|Description|Response Schema
----|---|----|---|---|
-200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)||Request Successful|[Web Message Object](#schemaweb_message_object)
-<aside class="success">
-This operation does not require authentication
-</aside>
-
 ## Get Authenticated User
 
 > Example request
@@ -15568,6 +15459,115 @@ Status|Meaning|Error Ref|Description|Response Schema
 To perform this request, you must be authenticated via one of the following methods:
 <a href="#authentication">OAuth 2</a> (Scopes: read)
 </aside>
+## Ping
+
+> Example request
+
+```shell
+# You can also use wget
+curl -X GET https://*.modapi.io/v1/ping \
+  -H 'Accept: application/json'
+
+```
+
+```http
+GET https://*.modapi.io/v1/ping HTTP/1.1
+Host: *.modapi.io
+
+Accept: application/json
+
+```
+
+```javascript
+var headers = {
+  'Accept':'application/json'
+
+};
+
+$.ajax({
+  url: 'https://*.modapi.io/v1/ping',
+  method: 'get',
+
+  headers: headers,
+  success: function(data) {
+    console.log(JSON.stringify(data));
+  }
+})
+```
+
+```javascript--nodejs
+const request = require('node-fetch');
+
+const headers = {
+  'Accept':'application/json'
+
+};
+
+fetch('https://*.modapi.io/v1/ping',
+{
+  method: 'GET',
+
+  headers: headers
+})
+.then(function(res) {
+    return res.json();
+}).then(function(body) {
+    console.log(body);
+});
+```
+
+```python
+import requests
+headers = {
+  'Accept': 'application/json'
+}
+
+r = requests.get('https://*.modapi.io/v1/ping', params={
+
+}, headers = headers)
+
+print r.json()
+```
+
+```java
+URL obj = new URL("https://*.modapi.io/v1/ping");
+HttpURLConnection con = (HttpURLConnection) obj.openConnection();
+con.setRequestMethod("GET");
+int responseCode = con.getResponseCode();
+BufferedReader in = new BufferedReader(
+    new InputStreamReader(con.getInputStream()));
+String inputLine;
+StringBuffer response = new StringBuffer();
+while ((inputLine = in.readLine()) != null) {
+    response.append(inputLine);
+}
+in.close();
+System.out.println(response.toString());
+```
+
+`GET /ping`
+
+Ping the mod.io API for purpose of a reachability check, successful request will return a 200 OK with a [Web Message Object](#web-message-object).
+
+> Example response
+
+```json
+{
+  "code": 200,
+  "success": true,
+  "message": "You have successfully logged out of mod.io."
+}
+
+```
+<h3 id="Ping-responses">Responses</h3>
+
+Status|Meaning|Error Ref|Description|Response Schema
+---|---|----|---|---|
+200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)||Request Successful|[Web Message Object](#schemaweb_message_object)
+<aside class="success">
+This operation does not require authentication
+</aside>
+
 # Monetization
 
 ## Get Game Token Packs
