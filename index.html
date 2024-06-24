@@ -774,6 +774,17 @@
               </ul>
           </li>
           <li>
+            <a href="#embeddable-mod-hub" class="toc-h1 toc-link" data-title="Embeddable Mod Hub"><span class="reficon"><img src="images/cog-white.svg" alt="Reference" class="menu-reference-icon"></span> Embeddable Mod Hub</a>
+              <ul class="toc-list-h2">
+                  <li>
+                    <a href="#get-game-embeddable-mod-hub-configurations" class="toc-h2 toc-link" data-title="Embeddable Mod Hub">Get Game Embeddable Mod Hub Configurations</a>
+                  </li>
+                  <li>
+                    <a href="#get-game-embeddable-mod-hub-config" class="toc-h2 toc-link" data-title="Embeddable Mod Hub">Get Game Embeddable Mod Hub Config</a>
+                  </li>
+              </ul>
+          </li>
+          <li>
             <a href="#monetization" class="toc-h1 toc-link" data-title="Monetization"><span class="reficon"><img src="images/cog-white.svg" alt="Reference" class="menu-reference-icon"></span> Monetization</a>
               <ul class="toc-list-h2">
                   <li>
@@ -791,21 +802,18 @@
               </ul>
           </li>
           <li>
-            <a href="#server-to-server" class="toc-h1 toc-link" data-title="Server to Server"><span class="reficon"><img src="images/cog-white.svg" alt="Reference" class="menu-reference-icon"></span> Server to Server</a>
+            <a href="#service-to-service" class="toc-h1 toc-link" data-title="Service to Service"><span class="reficon"><img src="images/cog-white.svg" alt="Reference" class="menu-reference-icon"></span> Service to Service</a>
               <ul class="toc-list-h2">
                   <li>
-                    <a href="#s2s-transaction-intent" class="toc-h2 toc-link" data-title="Server to Server">S2S Transaction Intent</a>
+                    <a href="#s2s-transaction-intent" class="toc-h2 toc-link" data-title="Service to Service">S2S Transaction Intent</a>
                   </li>
                   <li>
-                    <a href="#s2s-transaction-commit" class="toc-h2 toc-link" data-title="Server to Server">S2S Transaction Commit</a>
+                    <a href="#s2s-transaction-commit" class="toc-h2 toc-link" data-title="Service to Service">S2S Transaction Commit</a>
                   </li>
                   <li>
-                    <a href="#s2s-transaction-clawback" class="toc-h2 toc-link" data-title="Server to Server">S2S Transaction Clawback</a>
+                    <a href="#s2s-transaction-clawback" class="toc-h2 toc-link" data-title="Service to Service">S2S Transaction Clawback</a>
                   </li>
               </ul>
-          </li>
-          <li>
-            <a href="#in-app-purchases" class="toc-h1 toc-link" data-title="In-App Purchases"><span class="reficon"><img src="images/cog-white.svg" alt="Reference" class="menu-reference-icon"></span> In-App Purchases</a>
           </li>
           <li>
             <a href="#response-schemas" class="toc-h1 toc-link" data-title="Response Schemas"><span class="reficon"><img src="images/cog-blue.svg" alt="Reference" class="menu-reference-icon"></span> Response Schemas</a>
@@ -827,6 +835,9 @@
                   </li>
                   <li>
                     <a href="#download-object" class="toc-h2 toc-link" data-title="Response Schemas">Download Object</a>
+                  </li>
+                  <li>
+                    <a href="#embeddable-mod-hub-configuration-object" class="toc-h2 toc-link" data-title="Response Schemas">Embeddable Mod Hub Configuration Object</a>
                   </li>
                   <li>
                     <a href="#entitlement-details-object" class="toc-h2 toc-link" data-title="Response Schemas">Entitlement Details Object</a>
@@ -866,6 +877,9 @@
                   </li>
                   <li>
                     <a href="#game-user-preview-object" class="toc-h2 toc-link" data-title="Response Schemas">Game User Preview Object</a>
+                  </li>
+                  <li>
+                    <a href="#get-emh-configurations" class="toc-h2 toc-link" data-title="Response Schemas">Get EMH Configurations</a>
                   </li>
                   <li>
                     <a href="#get-entitlement-sync-status" class="toc-h2 toc-link" data-title="Response Schemas">Get Entitlement Sync Status</a>
@@ -6457,7 +6471,7 @@ Accept: application/json
 </code></pre></div>
 <p><span class="httpmethod GET">GET</span> <span class="endpointheading">/games/{game-id}/guides</span></p>
 
-<p>Get all guides for a game. Successful request will return an array of <a href="#get-guides">Guide Objects</a>.</p>
+<p>Get all guides for a game. Successful request will return an array of <a href="#get-guides-2">Guide Objects</a>.</p>
 
 <table>
 <thead>
@@ -16745,7 +16759,7 @@ Accept: application/json
 </code></pre></div>
 <p><span class="httpmethod GET">GET</span> <span class="endpointheading">/games/{game-id}/mods/{mod-id}/dependants</span></p>
 
-<p>Get all mods depending on the given mod. Successful request will return an array of <a href="#get-mod-dependants">Mod Dependants Objects</a>.</p>
+<p>Get all mods depending on the given mod. Successful request will return an array of <a href="#get-mod-dependants-2">Mod Dependants Objects</a>.</p>
 
 <p><strong>NOTE:</strong> This endpoint returns all mod dependents, irrespective of their status, visibility or platform support.</p>
 
@@ -17310,7 +17324,7 @@ Accept: application/json
      <strong>4</strong> = API Access Terms - <a href="https://mod.io/apiterms">https://mod.io/apiterms</a><br>
      <strong>5</strong> = Monetization Terms - <a href="https://mod.io/monetizationterms">https://mod.io/monetizationterms</a><br>
      <strong>6</strong> = Acceptable Use Policy - <a href="https://mod.io/aup">https://mod.io/aup</a><br>
-     <strong>7</strong> = Cookies Policy - <a href="https://mod.io/cookies">https://mod.io/cookies</a>
+     <strong>7</strong> = Cookies Policy - <a href="https://mod.io/cookies">https://mod.io/cookies</a><br>
      <strong>8</strong> = Refund Policy - <a href="https://mod.io/refund">https://mod.io/refund</a></p>
 
 <p>There are three ways you can display mod.io agreements. Pick which is easiest and most suitable for your implementation.</p>
@@ -20012,7 +20026,7 @@ Authorization: Bearer {access-token}
 </code></pre></div>
 <p><span class="httpmethod GET">GET</span> <span class="endpointheading">/me/ratings</span></p>
 
-<p>Get all mod rating's submitted by the <em>authenticated user</em>. Successful request will return an array of <a href="#get-user-ratings">Rating Objects</a>.</p>
+<p>Get all mod rating's submitted by the <em>authenticated user</em>. Successful request will return an array of <a href="#get-user-ratings-2">Rating Objects</a>.</p>
 
 <table>
 <thead>
@@ -20542,6 +20556,329 @@ Accept: application/json
 
 <aside class="success">
 This operation does not require authentication
+</aside>
+<h1 id="embeddable-mod-hub">Embeddable Mod Hub</h1><h2 id="get-game-embeddable-mod-hub-configurations">Get Game Embeddable Mod Hub Configurations</h2>
+<blockquote>
+<p>Example request</p>
+</blockquote>
+<div class="highlight"><pre class="highlight shell tab-shell"><code><span class="c"># You can also use wget</span>
+curl <span class="nt">-X</span> GET https://<span class="k">*</span>.modapi.io/v1/games/<span class="o">{</span>game-id<span class="o">}</span>/emh <span class="se">\</span>
+  <span class="nt">-H</span> <span class="s1">'Origin: https://mod.io'</span> <span class="se">\ </span>
+  <span class="nt">-H</span> <span class="s1">'Authorization: Bearer {access-token}'</span> <span class="se">\ </span>
+  <span class="nt">-H</span> <span class="s1">'Accept: application/json'</span>
+
+</code></pre></div><div class="highlight"><pre class="highlight http tab-http"><code><span class="nf">GET</span> <span class="nn">https://*.modapi.io/v1/games/{game-id}/emh</span> <span class="k">HTTP</span><span class="o">/</span><span class="m">1.1</span>
+<span class="na">Host</span><span class="p">:</span> <span class="s">*.modapi.io</span>
+
+Accept: application/json
+Origin: https://mod.io
+Authorization: Bearer {access-token}
+
+</code></pre></div><div class="highlight"><pre class="highlight javascript tab-javascript"><code><span class="kd">var</span> <span class="nx">headers</span> <span class="o">=</span> <span class="p">{</span>
+  <span class="dl">'</span><span class="s1">Origin</span><span class="dl">'</span><span class="p">:</span><span class="dl">'</span><span class="s1">https://mod.io</span><span class="dl">'</span><span class="p">,</span>
+  <span class="dl">'</span><span class="s1">Authorization</span><span class="dl">'</span><span class="p">:</span><span class="dl">'</span><span class="s1">Bearer {access-token}</span><span class="dl">'</span><span class="p">,</span>
+  <span class="dl">'</span><span class="s1">Accept</span><span class="dl">'</span><span class="p">:</span><span class="dl">'</span><span class="s1">application/json</span><span class="dl">'</span>
+
+<span class="p">};</span>
+
+<span class="nx">$</span><span class="p">.</span><span class="nx">ajax</span><span class="p">({</span>
+  <span class="na">url</span><span class="p">:</span> <span class="dl">'</span><span class="s1">https://*.modapi.io/v1/games/{game-id}/emh</span><span class="dl">'</span><span class="p">,</span>
+  <span class="na">method</span><span class="p">:</span> <span class="dl">'</span><span class="s1">get</span><span class="dl">'</span><span class="p">,</span>
+
+  <span class="na">headers</span><span class="p">:</span> <span class="nx">headers</span><span class="p">,</span>
+  <span class="na">success</span><span class="p">:</span> <span class="kd">function</span><span class="p">(</span><span class="nx">data</span><span class="p">)</span> <span class="p">{</span>
+    <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">JSON</span><span class="p">.</span><span class="nx">stringify</span><span class="p">(</span><span class="nx">data</span><span class="p">));</span>
+  <span class="p">}</span>
+<span class="p">})</span>
+</code></pre></div><div class="highlight"><pre class="highlight javascript tab-javascript--nodejs"><code><span class="kd">const</span> <span class="nx">request</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="dl">'</span><span class="s1">node-fetch</span><span class="dl">'</span><span class="p">);</span>
+
+<span class="kd">const</span> <span class="nx">headers</span> <span class="o">=</span> <span class="p">{</span>
+  <span class="dl">'</span><span class="s1">Origin</span><span class="dl">'</span><span class="p">:</span><span class="dl">'</span><span class="s1">https://mod.io</span><span class="dl">'</span><span class="p">,</span>
+  <span class="dl">'</span><span class="s1">Authorization</span><span class="dl">'</span><span class="p">:</span><span class="dl">'</span><span class="s1">Bearer {access-token}</span><span class="dl">'</span><span class="p">,</span>
+  <span class="dl">'</span><span class="s1">Accept</span><span class="dl">'</span><span class="p">:</span><span class="dl">'</span><span class="s1">application/json</span><span class="dl">'</span>
+
+<span class="p">};</span>
+
+<span class="nx">fetch</span><span class="p">(</span><span class="dl">'</span><span class="s1">https://*.modapi.io/v1/games/{game-id}/emh</span><span class="dl">'</span><span class="p">,</span>
+<span class="p">{</span>
+  <span class="na">method</span><span class="p">:</span> <span class="dl">'</span><span class="s1">GET</span><span class="dl">'</span><span class="p">,</span>
+
+  <span class="na">headers</span><span class="p">:</span> <span class="nx">headers</span>
+<span class="p">})</span>
+<span class="p">.</span><span class="nx">then</span><span class="p">(</span><span class="kd">function</span><span class="p">(</span><span class="nx">res</span><span class="p">)</span> <span class="p">{</span>
+    <span class="k">return</span> <span class="nx">res</span><span class="p">.</span><span class="nx">json</span><span class="p">();</span>
+<span class="p">}).</span><span class="nx">then</span><span class="p">(</span><span class="kd">function</span><span class="p">(</span><span class="nx">body</span><span class="p">)</span> <span class="p">{</span>
+    <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">body</span><span class="p">);</span>
+<span class="p">});</span>
+</code></pre></div><div class="highlight"><pre class="highlight python tab-python"><code><span class="kn">import</span> <span class="nn">requests</span>
+<span class="n">headers</span> <span class="o">=</span> <span class="p">{</span>
+  <span class="s">'Origin'</span><span class="p">:</span> <span class="s">'https://mod.io'</span><span class="p">,</span>
+  <span class="s">'Authorization'</span><span class="p">:</span> <span class="s">'Bearer {access-token}'</span><span class="p">,</span>
+  <span class="s">'Accept'</span><span class="p">:</span> <span class="s">'application/json'</span>
+<span class="p">}</span>
+
+<span class="n">r</span> <span class="o">=</span> <span class="n">requests</span><span class="p">.</span><span class="n">get</span><span class="p">(</span><span class="s">'https://*.modapi.io/v1/games/{game-id}/emh'</span><span class="p">,</span> <span class="n">params</span><span class="o">=</span><span class="p">{</span>
+
+<span class="p">},</span> <span class="n">headers</span> <span class="o">=</span> <span class="n">headers</span><span class="p">)</span>
+
+<span class="k">print</span> <span class="n">r</span><span class="p">.</span><span class="n">json</span><span class="p">()</span>
+</code></pre></div><div class="highlight"><pre class="highlight java tab-java"><code><span class="no">URL</span> <span class="n">obj</span> <span class="o">=</span> <span class="k">new</span> <span class="no">URL</span><span class="o">(</span><span class="s">"https://*.modapi.io/v1/games/{game-id}/emh"</span><span class="o">);</span>
+<span class="nc">HttpURLConnection</span> <span class="n">con</span> <span class="o">=</span> <span class="o">(</span><span class="nc">HttpURLConnection</span><span class="o">)</span> <span class="n">obj</span><span class="o">.</span><span class="na">openConnection</span><span class="o">();</span>
+<span class="n">con</span><span class="o">.</span><span class="na">setRequestMethod</span><span class="o">(</span><span class="s">"GET"</span><span class="o">);</span>
+<span class="kt">int</span> <span class="n">responseCode</span> <span class="o">=</span> <span class="n">con</span><span class="o">.</span><span class="na">getResponseCode</span><span class="o">();</span>
+<span class="nc">BufferedReader</span> <span class="n">in</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">BufferedReader</span><span class="o">(</span>
+    <span class="k">new</span> <span class="nf">InputStreamReader</span><span class="o">(</span><span class="n">con</span><span class="o">.</span><span class="na">getInputStream</span><span class="o">()));</span>
+<span class="nc">String</span> <span class="n">inputLine</span><span class="o">;</span>
+<span class="nc">StringBuffer</span> <span class="n">response</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">StringBuffer</span><span class="o">();</span>
+<span class="k">while</span> <span class="o">((</span><span class="n">inputLine</span> <span class="o">=</span> <span class="n">in</span><span class="o">.</span><span class="na">readLine</span><span class="o">())</span> <span class="o">!=</span> <span class="kc">null</span><span class="o">)</span> <span class="o">{</span>
+    <span class="n">response</span><span class="o">.</span><span class="na">append</span><span class="o">(</span><span class="n">inputLine</span><span class="o">);</span>
+<span class="o">}</span>
+<span class="n">in</span><span class="o">.</span><span class="na">close</span><span class="o">();</span>
+<span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="n">response</span><span class="o">.</span><span class="na">toString</span><span class="o">());</span>
+</code></pre></div>
+<p><span class="httpmethod GET">GET</span> <span class="endpointheading">/games/{game-id}/emh</span></p>
+
+<p>Get a games EMH config. This will return all of the configured Embeddable Mod Hub versions for this game. It returns a <a href="#game-emh-object">Game EMH Object</a>.</p>
+
+<blockquote>
+<p>Example response</p>
+</blockquote>
+<div class="highlight"><pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
+  </span><span class="nl">"data"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+    </span><span class="p">{</span><span class="w">
+      </span><span class="nl">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"string"</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"urls"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+        </span><span class="s2">"string"</span><span class="w">
+      </span><span class="p">],</span><span class="w">
+      </span><span class="nl">"style"</span><span class="p">:</span><span class="w"> </span><span class="s2">"string"</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"css"</span><span class="p">:</span><span class="w"> </span><span class="s2">"string"</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"allow_subscribing"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"allow_rating"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"allow_reporting"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"allow_downloading"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"allow_commenting"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"allow_filtering"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"allow_searching"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"allow_infinite_scroll"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"allow_email_auth"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"allow_sso_auth"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"allow_steam_auth"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"allow_PSN_auth"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"allow_xbox_auth"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"allow_egs_auth"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"allow_discord_auth"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"allow_google_auth"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"show_collection"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"show_comments"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"show_guides"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"show_user_avatars"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"show_sort_tabs"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"results_per_page"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"min_age"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"date_added"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"date_updated"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="w">
+    </span><span class="p">},</span><span class="w">
+    </span><span class="p">{</span><span class="w">
+        </span><span class="err">...</span><span class="w">
+    </span><span class="p">}</span><span class="w">
+  </span><span class="p">],</span><span class="w">
+  </span><span class="nl">"result_count"</span><span class="p">:</span><span class="w"> </span><span class="mi">70</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"result_offset"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"result_limit"</span><span class="p">:</span><span class="w"> </span><span class="mi">100</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"result_total"</span><span class="p">:</span><span class="w"> </span><span class="mi">70</span><span class="w">
+</span><span class="p">}</span><span class="w">
+
+</span></code></pre></div>
+<h3 id="Get-Game-Embeddable-Mod-Hub-Configurations-responses">Responses</h3>
+
+<table>
+<thead>
+<tr>
+<th>Status</th>
+<th>Meaning</th>
+<th>Error Ref</th>
+<th>Description</th>
+<th>Response Schema</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>200</td>
+<td><a href="https://tools.ietf.org/html/rfc7231#section-6.3.1">OK</a></td>
+<td></td>
+<td>Request successful</td>
+<td><a href="#schemaget_emh_configurations">Get EMH Configurations</a></td>
+</tr>
+<tr>
+<td>403</td>
+<td><a href="https://tools.ietf.org/html/rfc7231#section-6.5.3">Forbidden</a></td>
+<td>14007</td>
+<td>The authenticated user does not have permission to view this game. Ensure the user is part of the game team before attempting the request again.</td>
+<td><a href="#schemaerror_object">Error Object</a></td>
+</tr>
+</tbody>
+</table>
+
+<aside class="auth-notice">
+To perform this request, you must be authenticated via one of the following methods:
+<a href="#authentication">OAuth 2</a> (Scopes: web)
+</aside>
+<h2 id="get-game-embeddable-mod-hub-config">Get Game Embeddable Mod Hub Config</h2>
+<blockquote>
+<p>Example request</p>
+</blockquote>
+<div class="highlight"><pre class="highlight shell tab-shell"><code><span class="c"># You can also use wget</span>
+curl <span class="nt">-X</span> GET https://<span class="k">*</span>.modapi.io/v1/games/<span class="o">{</span>game-id<span class="o">}</span>/emh/<span class="o">{</span>emh-id<span class="o">}</span> <span class="se">\</span>
+  <span class="nt">-H</span> <span class="s1">'Origin: https://mod.io'</span> <span class="se">\ </span>
+  <span class="nt">-H</span> <span class="s1">'Authorization: Bearer {access-token}'</span> <span class="se">\ </span>
+  <span class="nt">-H</span> <span class="s1">'Accept: application/json'</span>
+
+</code></pre></div><div class="highlight"><pre class="highlight http tab-http"><code><span class="nf">GET</span> <span class="nn">https://*.modapi.io/v1/games/{game-id}/emh/{emh-id}</span> <span class="k">HTTP</span><span class="o">/</span><span class="m">1.1</span>
+<span class="na">Host</span><span class="p">:</span> <span class="s">*.modapi.io</span>
+
+Accept: application/json
+Origin: https://mod.io
+Authorization: Bearer {access-token}
+
+</code></pre></div><div class="highlight"><pre class="highlight javascript tab-javascript"><code><span class="kd">var</span> <span class="nx">headers</span> <span class="o">=</span> <span class="p">{</span>
+  <span class="dl">'</span><span class="s1">Origin</span><span class="dl">'</span><span class="p">:</span><span class="dl">'</span><span class="s1">https://mod.io</span><span class="dl">'</span><span class="p">,</span>
+  <span class="dl">'</span><span class="s1">Authorization</span><span class="dl">'</span><span class="p">:</span><span class="dl">'</span><span class="s1">Bearer {access-token}</span><span class="dl">'</span><span class="p">,</span>
+  <span class="dl">'</span><span class="s1">Accept</span><span class="dl">'</span><span class="p">:</span><span class="dl">'</span><span class="s1">application/json</span><span class="dl">'</span>
+
+<span class="p">};</span>
+
+<span class="nx">$</span><span class="p">.</span><span class="nx">ajax</span><span class="p">({</span>
+  <span class="na">url</span><span class="p">:</span> <span class="dl">'</span><span class="s1">https://*.modapi.io/v1/games/{game-id}/emh/{emh-id}</span><span class="dl">'</span><span class="p">,</span>
+  <span class="na">method</span><span class="p">:</span> <span class="dl">'</span><span class="s1">get</span><span class="dl">'</span><span class="p">,</span>
+
+  <span class="na">headers</span><span class="p">:</span> <span class="nx">headers</span><span class="p">,</span>
+  <span class="na">success</span><span class="p">:</span> <span class="kd">function</span><span class="p">(</span><span class="nx">data</span><span class="p">)</span> <span class="p">{</span>
+    <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">JSON</span><span class="p">.</span><span class="nx">stringify</span><span class="p">(</span><span class="nx">data</span><span class="p">));</span>
+  <span class="p">}</span>
+<span class="p">})</span>
+</code></pre></div><div class="highlight"><pre class="highlight javascript tab-javascript--nodejs"><code><span class="kd">const</span> <span class="nx">request</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="dl">'</span><span class="s1">node-fetch</span><span class="dl">'</span><span class="p">);</span>
+
+<span class="kd">const</span> <span class="nx">headers</span> <span class="o">=</span> <span class="p">{</span>
+  <span class="dl">'</span><span class="s1">Origin</span><span class="dl">'</span><span class="p">:</span><span class="dl">'</span><span class="s1">https://mod.io</span><span class="dl">'</span><span class="p">,</span>
+  <span class="dl">'</span><span class="s1">Authorization</span><span class="dl">'</span><span class="p">:</span><span class="dl">'</span><span class="s1">Bearer {access-token}</span><span class="dl">'</span><span class="p">,</span>
+  <span class="dl">'</span><span class="s1">Accept</span><span class="dl">'</span><span class="p">:</span><span class="dl">'</span><span class="s1">application/json</span><span class="dl">'</span>
+
+<span class="p">};</span>
+
+<span class="nx">fetch</span><span class="p">(</span><span class="dl">'</span><span class="s1">https://*.modapi.io/v1/games/{game-id}/emh/{emh-id}</span><span class="dl">'</span><span class="p">,</span>
+<span class="p">{</span>
+  <span class="na">method</span><span class="p">:</span> <span class="dl">'</span><span class="s1">GET</span><span class="dl">'</span><span class="p">,</span>
+
+  <span class="na">headers</span><span class="p">:</span> <span class="nx">headers</span>
+<span class="p">})</span>
+<span class="p">.</span><span class="nx">then</span><span class="p">(</span><span class="kd">function</span><span class="p">(</span><span class="nx">res</span><span class="p">)</span> <span class="p">{</span>
+    <span class="k">return</span> <span class="nx">res</span><span class="p">.</span><span class="nx">json</span><span class="p">();</span>
+<span class="p">}).</span><span class="nx">then</span><span class="p">(</span><span class="kd">function</span><span class="p">(</span><span class="nx">body</span><span class="p">)</span> <span class="p">{</span>
+    <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">body</span><span class="p">);</span>
+<span class="p">});</span>
+</code></pre></div><div class="highlight"><pre class="highlight python tab-python"><code><span class="kn">import</span> <span class="nn">requests</span>
+<span class="n">headers</span> <span class="o">=</span> <span class="p">{</span>
+  <span class="s">'Origin'</span><span class="p">:</span> <span class="s">'https://mod.io'</span><span class="p">,</span>
+  <span class="s">'Authorization'</span><span class="p">:</span> <span class="s">'Bearer {access-token}'</span><span class="p">,</span>
+  <span class="s">'Accept'</span><span class="p">:</span> <span class="s">'application/json'</span>
+<span class="p">}</span>
+
+<span class="n">r</span> <span class="o">=</span> <span class="n">requests</span><span class="p">.</span><span class="n">get</span><span class="p">(</span><span class="s">'https://*.modapi.io/v1/games/{game-id}/emh/{emh-id}'</span><span class="p">,</span> <span class="n">params</span><span class="o">=</span><span class="p">{</span>
+
+<span class="p">},</span> <span class="n">headers</span> <span class="o">=</span> <span class="n">headers</span><span class="p">)</span>
+
+<span class="k">print</span> <span class="n">r</span><span class="p">.</span><span class="n">json</span><span class="p">()</span>
+</code></pre></div><div class="highlight"><pre class="highlight java tab-java"><code><span class="no">URL</span> <span class="n">obj</span> <span class="o">=</span> <span class="k">new</span> <span class="no">URL</span><span class="o">(</span><span class="s">"https://*.modapi.io/v1/games/{game-id}/emh/{emh-id}"</span><span class="o">);</span>
+<span class="nc">HttpURLConnection</span> <span class="n">con</span> <span class="o">=</span> <span class="o">(</span><span class="nc">HttpURLConnection</span><span class="o">)</span> <span class="n">obj</span><span class="o">.</span><span class="na">openConnection</span><span class="o">();</span>
+<span class="n">con</span><span class="o">.</span><span class="na">setRequestMethod</span><span class="o">(</span><span class="s">"GET"</span><span class="o">);</span>
+<span class="kt">int</span> <span class="n">responseCode</span> <span class="o">=</span> <span class="n">con</span><span class="o">.</span><span class="na">getResponseCode</span><span class="o">();</span>
+<span class="nc">BufferedReader</span> <span class="n">in</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">BufferedReader</span><span class="o">(</span>
+    <span class="k">new</span> <span class="nf">InputStreamReader</span><span class="o">(</span><span class="n">con</span><span class="o">.</span><span class="na">getInputStream</span><span class="o">()));</span>
+<span class="nc">String</span> <span class="n">inputLine</span><span class="o">;</span>
+<span class="nc">StringBuffer</span> <span class="n">response</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">StringBuffer</span><span class="o">();</span>
+<span class="k">while</span> <span class="o">((</span><span class="n">inputLine</span> <span class="o">=</span> <span class="n">in</span><span class="o">.</span><span class="na">readLine</span><span class="o">())</span> <span class="o">!=</span> <span class="kc">null</span><span class="o">)</span> <span class="o">{</span>
+    <span class="n">response</span><span class="o">.</span><span class="na">append</span><span class="o">(</span><span class="n">inputLine</span><span class="o">);</span>
+<span class="o">}</span>
+<span class="n">in</span><span class="o">.</span><span class="na">close</span><span class="o">();</span>
+<span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="n">response</span><span class="o">.</span><span class="na">toString</span><span class="o">());</span>
+</code></pre></div>
+<p><span class="httpmethod GET">GET</span> <span class="endpointheading">/games/{game-id}/emh/{emh-id}</span></p>
+
+<p>Get a games EMH config. This will return all of the configured Embeddable Mod Hub versions for this game. It returns a <a href="#game-emh-object">Game EMH Object</a>.</p>
+
+<blockquote>
+<p>Example response</p>
+</blockquote>
+<div class="highlight"><pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
+  </span><span class="nl">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"string"</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"urls"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+    </span><span class="s2">"string"</span><span class="w">
+  </span><span class="p">],</span><span class="w">
+  </span><span class="nl">"style"</span><span class="p">:</span><span class="w"> </span><span class="s2">"string"</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"css"</span><span class="p">:</span><span class="w"> </span><span class="s2">"string"</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"allow_subscribing"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"allow_rating"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"allow_reporting"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"allow_downloading"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"allow_commenting"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"allow_filtering"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"allow_searching"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"allow_infinite_scroll"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"allow_email_auth"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"allow_sso_auth"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"allow_steam_auth"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"allow_PSN_auth"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"allow_xbox_auth"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"allow_egs_auth"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"allow_discord_auth"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"allow_google_auth"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"show_collection"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"show_comments"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"show_guides"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"show_user_avatars"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"show_sort_tabs"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"results_per_page"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"min_age"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"date_added"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"date_updated"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="w">
+</span><span class="p">}</span><span class="w">
+
+</span></code></pre></div>
+<h3 id="Get-Game-Embeddable-Mod-Hub-Config-responses">Responses</h3>
+
+<table>
+<thead>
+<tr>
+<th>Status</th>
+<th>Meaning</th>
+<th>Error Ref</th>
+<th>Description</th>
+<th>Response Schema</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>200</td>
+<td><a href="https://tools.ietf.org/html/rfc7231#section-6.3.1">OK</a></td>
+<td></td>
+<td>Request successful</td>
+<td><a href="#schemaembeddable_mod_hub_configuration_object">Embeddable Mod Hub Configuration Object</a></td>
+</tr>
+<tr>
+<td>403</td>
+<td><a href="https://tools.ietf.org/html/rfc7231#section-6.5.3">Forbidden</a></td>
+<td>14007</td>
+<td>The authenticated user does not have permission to view this game. Ensure the user is part of the game team before attempting the request again.</td>
+<td><a href="#schemaerror_object">Error Object</a></td>
+</tr>
+</tbody>
+</table>
+
+<aside class="auth-notice">
+To perform this request, you must be authenticated via one of the following methods:
+<a href="#authentication">OAuth 2</a> (Scopes: web)
 </aside>
 <h1 id="monetization">Monetization</h1><h2 id="get-game-token-packs">Get Game Token Packs</h2>
 <blockquote>
@@ -21443,7 +21780,7 @@ Authorization: Bearer {access-token}
 To perform this request, you must be authenticated via one of the following methods:
 <a href="#authentication">OAuth 2</a> (Scopes: write)
 </aside>
-<h1 id="server-to-server">Server to Server</h1><h2 id="s2s-transaction-intent">S2S Transaction Intent</h2>
+<h1 id="service-to-service">Service to Service</h1><h2 id="s2s-transaction-intent">S2S Transaction Intent</h2>
 <blockquote>
 <p>Example request</p>
 </blockquote>
@@ -21543,7 +21880,7 @@ curl <span class="nt">-X</span> POST https://<span class="k">*</span>.modapi.io/
 <span class="n">in</span><span class="o">.</span><span class="na">close</span><span class="o">();</span>
 <span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="n">response</span><span class="o">.</span><span class="na">toString</span><span class="o">());</span>
 </code></pre></div>
-<p><span class="httpmethod POST">POST</span> <span class="endpointheading">//s2s/transactions/intent</span></p>
+<p><span class="httpmethod POST">POST</span> <span class="endpointheading">/s2s/transactions/intent</span></p>
 
 <p>Create a service-to-service (S2S) transaction intent. This is for performing an external token transaction. You should generate the intent, consume the item on your server's backend before committing the transaction. A successful request will return a <a href="#s2s-pay-object">S2S Pay Object</a> object. Requires scope of monetization on token.</p>
 
@@ -21713,7 +22050,7 @@ curl <span class="nt">-X</span> POST https://<span class="k">*</span>.modapi.io/
 <span class="n">in</span><span class="o">.</span><span class="na">close</span><span class="o">();</span>
 <span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="n">response</span><span class="o">.</span><span class="na">toString</span><span class="o">());</span>
 </code></pre></div>
-<p><span class="httpmethod POST">POST</span> <span class="endpointheading">//s2s/transactions/commit</span></p>
+<p><span class="httpmethod POST">POST</span> <span class="endpointheading">/s2s/transactions/commit</span></p>
 
 <p>Create a service-to-service (S2S) transaction commit. This is for performing an external token transaction. This step finalizes the transaction and will issue tokens to the user associated to it. A successful request will return a <a href="#s2s-pay-object">S2S Pay Object</a> object. Requires scope of monetization on token.</p>
 
@@ -21876,7 +22213,7 @@ curl <span class="nt">-X</span> POST https://<span class="k">*</span>.modapi.io/
 <span class="n">in</span><span class="o">.</span><span class="na">close</span><span class="o">();</span>
 <span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="n">response</span><span class="o">.</span><span class="na">toString</span><span class="o">());</span>
 </code></pre></div>
-<p><span class="httpmethod POST">POST</span> <span class="endpointheading">//s2s/transactions/clawback</span></p>
+<p><span class="httpmethod POST">POST</span> <span class="endpointheading">/s2s/transactions/clawback</span></p>
 
 <p>Create a service-to-service (S2S) transaction clawback. This is for unwinding a token transaction. You may use the transaction_id or the gateway_uuid from the previous calls. A successful request will return a <a href="#refund-object">Refund Object</a> object. Requires scope of monetization on token.</p>
 
@@ -21961,7 +22298,7 @@ curl <span class="nt">-X</span> POST https://<span class="k">*</span>.modapi.io/
 To perform this request, you must be authenticated via one of the following methods:
 <a href="#authentication">OAuth 2</a> (Scopes: write)
 </aside>
-<h1 id="in-app-purchases">In-App Purchases</h1><h1 id="response-schemas">Response Schemas</h1><h2 id="access-token-object">Access Token Object</h2>
+<h1 id="response-schemas">Response Schemas</h1><h2 id="access-token-object">Access Token Object</h2>
 <p><a name="schemaaccess_token_object"></a></p>
 <div class="highlight"><pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
   </span><span class="nl">"code"</span><span class="p">:</span><span class="w"> </span><span class="mi">200</span><span class="p">,</span><span class="w">
@@ -22299,12 +22636,210 @@ To perform this request, you must be authenticated via one of the following meth
 </tr>
 </tbody>
 </table>
+<h2 id="embeddable-mod-hub-configuration-object">Embeddable Mod Hub Configuration Object</h2>
+<p><a name="schemaembeddable_mod_hub_configuration_object"></a></p>
+<div class="highlight"><pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
+  </span><span class="nl">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"string"</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"urls"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+    </span><span class="s2">"string"</span><span class="w">
+  </span><span class="p">],</span><span class="w">
+  </span><span class="nl">"style"</span><span class="p">:</span><span class="w"> </span><span class="s2">"string"</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"css"</span><span class="p">:</span><span class="w"> </span><span class="s2">"string"</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"allow_subscribing"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"allow_rating"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"allow_reporting"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"allow_downloading"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"allow_commenting"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"allow_filtering"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"allow_searching"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"allow_infinite_scroll"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"allow_email_auth"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"allow_sso_auth"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"allow_steam_auth"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"allow_PSN_auth"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"allow_xbox_auth"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"allow_egs_auth"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"allow_discord_auth"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"allow_google_auth"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"show_collection"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"show_comments"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"show_guides"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"show_user_avatars"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"show_sort_tabs"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"results_per_page"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"min_age"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"date_added"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"date_updated"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="w">
+</span><span class="p">}</span><span class="w"> 
+</span></code></pre></div><h3 id="properties-7">Properties</h3>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>id</td>
+<td>integer</td>
+<td>Unique EMH id.</td>
+</tr>
+<tr>
+<td>name</td>
+<td>string</td>
+<td>Name of the EMH version.</td>
+</tr>
+<tr>
+<td>style</td>
+<td>string</td>
+<td>Pre-defined styling properties.</td>
+</tr>
+<tr>
+<td>css</td>
+<td>string</td>
+<td>Custom styling properties.</td>
+</tr>
+<tr>
+<td>allow_subscribing</td>
+<td>boolean</td>
+<td>Flag to allow subscribing.</td>
+</tr>
+<tr>
+<td>allow_rating</td>
+<td>boolean</td>
+<td>Flag to allow rating.</td>
+</tr>
+<tr>
+<td>allow_reporting</td>
+<td>boolean</td>
+<td>Flag to allow reporting.</td>
+</tr>
+<tr>
+<td>allow_downloading</td>
+<td>boolean</td>
+<td>Flag to allow downloading.</td>
+</tr>
+<tr>
+<td>allow_commenting</td>
+<td>boolean</td>
+<td>Flag to allow commenting.</td>
+</tr>
+<tr>
+<td>allow_filtering</td>
+<td>boolean</td>
+<td>Flag to allow filtering.</td>
+</tr>
+<tr>
+<td>allow_searching</td>
+<td>boolean</td>
+<td>Flag to allow searching.</td>
+</tr>
+<tr>
+<td>allow_infinite_scroll</td>
+<td>boolean</td>
+<td>Flag to allow infinite scroll.</td>
+</tr>
+<tr>
+<td>allow_email_auth</td>
+<td>boolean</td>
+<td>Flag to allow email authentication.</td>
+</tr>
+<tr>
+<td>allow_sso_auth</td>
+<td>boolean</td>
+<td>Flag to allow SSO authentication.</td>
+</tr>
+<tr>
+<td>allow_steam_auth</td>
+<td>boolean</td>
+<td>Flag to allow Steam authentication.</td>
+</tr>
+<tr>
+<td>allow_PSN_auth</td>
+<td>boolean</td>
+<td>Flag to allow PSN authentication.</td>
+</tr>
+<tr>
+<td>allow_xbox_auth</td>
+<td>boolean</td>
+<td>Flag to allow Xbox authentication.</td>
+</tr>
+<tr>
+<td>allow_egs_auth</td>
+<td>boolean</td>
+<td>Flag to allow Epic Games Store authentication.</td>
+</tr>
+<tr>
+<td>allow_discord_auth</td>
+<td>boolean</td>
+<td>Flag to allow Discord authentication.</td>
+</tr>
+<tr>
+<td>allow_google_auth</td>
+<td>boolean</td>
+<td>Flag to allow Google authentication.</td>
+</tr>
+<tr>
+<td>show_collection</td>
+<td>boolean</td>
+<td>Flag to allow mod management via collection.</td>
+</tr>
+<tr>
+<td>show_comments</td>
+<td>boolean</td>
+<td>Flag to show comments.</td>
+</tr>
+<tr>
+<td>show_guides</td>
+<td>boolean</td>
+<td>Flag to show guides.</td>
+</tr>
+<tr>
+<td>show_user_avatars</td>
+<td>boolean</td>
+<td>Flag to show user avatars.</td>
+</tr>
+<tr>
+<td>show_sort_tabs</td>
+<td>boolean</td>
+<td>Flag to show sort tabs.</td>
+</tr>
+<tr>
+<td>results_per_page</td>
+<td>integer</td>
+<td>Number of results to show per page.</td>
+</tr>
+<tr>
+<td>min_age</td>
+<td>integer</td>
+<td>Minimum age for EMH access.</td>
+</tr>
+<tr>
+<td>date_added</td>
+<td>integer</td>
+<td>Timestamp indicating the date when the configuration was added.</td>
+</tr>
+<tr>
+<td>date_updated</td>
+<td>integer</td>
+<td>Timestamp indicating the date when the configuration was last updated.</td>
+</tr>
+<tr>
+<td>urls</td>
+<td>string[]</td>
+<td>An array of URLs that may access this EMH configuration.</td>
+</tr>
+</tbody>
+</table>
 <h2 id="entitlement-details-object">Entitlement Details Object</h2>
 <p><a name="schemaentitlement_details_object"></a></p>
 <div class="highlight"><pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
   </span><span class="nl">"tokens_allocated"</span><span class="p">:</span><span class="w"> </span><span class="mi">1000</span><span class="w">
 </span><span class="p">}</span><span class="w"> 
-</span></code></pre></div><h3 id="properties-7">Properties</h3>
+</span></code></pre></div><h3 id="properties-8">Properties</h3>
 <table>
 <thead>
 <tr>
@@ -22333,7 +22868,7 @@ To perform this request, you must be authenticated via one of the following meth
     </span><span class="nl">"tokens_allocated"</span><span class="p">:</span><span class="w"> </span><span class="mi">1000</span><span class="w">
   </span><span class="p">}</span><span class="w">
 </span><span class="p">}</span><span class="w"> 
-</span></code></pre></div><h3 id="properties-8">Properties</h3>
+</span></code></pre></div><h3 id="properties-9">Properties</h3>
 <table>
 <thead>
 <tr>
@@ -22385,7 +22920,7 @@ To perform this request, you must be authenticated via one of the following meth
     </span><span class="nl">"errors"</span><span class="p">:</span><span class="w"> </span><span class="p">{}</span><span class="w">
   </span><span class="p">}</span><span class="w">
 </span><span class="p">}</span><span class="w"> 
-</span></code></pre></div><h3 id="properties-9">Properties</h3>
+</span></code></pre></div><h3 id="properties-10">Properties</h3>
 <table>
 <thead>
 <tr>
@@ -22427,7 +22962,7 @@ To perform this request, you must be authenticated via one of the following meth
 <div class="highlight"><pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
   </span><span class="nl">"md5"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2d4a0e2d7273db6b0a94b0740a88ad0d"</span><span class="w">
 </span><span class="p">}</span><span class="w"> 
-</span></code></pre></div><h3 id="properties-10">Properties</h3>
+</span></code></pre></div><h3 id="properties-11">Properties</h3>
 <table>
 <thead>
 <tr>
@@ -22449,7 +22984,7 @@ To perform this request, you must be authenticated via one of the following meth
 <div class="highlight"><pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
   </span><span class="nl">"team_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"1"</span><span class="w">
 </span><span class="p">}</span><span class="w"> 
-</span></code></pre></div><h3 id="properties-11">Properties</h3>
+</span></code></pre></div><h3 id="properties-12">Properties</h3>
 <table>
 <thead>
 <tr>
@@ -22564,7 +23099,7 @@ To perform this request, you must be authenticated via one of the following meth
     </span><span class="p">}</span><span class="w">
   </span><span class="p">]</span><span class="w">
 </span><span class="p">}</span><span class="w"> 
-</span></code></pre></div><h3 id="properties-12">Properties</h3>
+</span></code></pre></div><h3 id="properties-13">Properties</h3>
 <table>
 <thead>
 <tr>
@@ -22751,7 +23286,7 @@ To perform this request, you must be authenticated via one of the following meth
   </span><span class="nl">"label"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Our Steam Page"</span><span class="p">,</span><span class="w">
   </span><span class="nl">"url"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://www.steampowered.com/2348329042"</span><span class="w">
 </span><span class="p">}</span><span class="w"> 
-</span></code></pre></div><h3 id="properties-13">Properties</h3>
+</span></code></pre></div><h3 id="properties-14">Properties</h3>
 <table>
 <thead>
 <tr>
@@ -22781,7 +23316,7 @@ To perform this request, you must be authenticated via one of the following meth
   </span><span class="nl">"moderated"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
   </span><span class="nl">"locked"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="w">
 </span><span class="p">}</span><span class="w"> 
-</span></code></pre></div><h3 id="properties-14">Properties</h3>
+</span></code></pre></div><h3 id="properties-15">Properties</h3>
 <table>
 <thead>
 <tr>
@@ -22824,7 +23359,7 @@ To perform this request, you must be authenticated via one of the following meth
   </span><span class="nl">"mods_subscribers_total"</span><span class="p">:</span><span class="w"> </span><span class="mi">16394</span><span class="p">,</span><span class="w">
   </span><span class="nl">"date_expires"</span><span class="p">:</span><span class="w"> </span><span class="mi">1492564103</span><span class="w">
 </span><span class="p">}</span><span class="w"> 
-</span></code></pre></div><h3 id="properties-15">Properties</h3>
+</span></code></pre></div><h3 id="properties-16">Properties</h3>
 <table>
 <thead>
 <tr>
@@ -22889,7 +23424,7 @@ To perform this request, you must be authenticated via one of the following meth
   </span><span class="nl">"hidden"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span><span class="w">
   </span><span class="nl">"locked"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="w">
 </span><span class="p">}</span><span class="w"> 
-</span></code></pre></div><h3 id="properties-16">Properties</h3>
+</span></code></pre></div><h3 id="properties-17">Properties</h3>
 <table>
 <thead>
 <tr>
@@ -22970,7 +23505,7 @@ To perform this request, you must be authenticated via one of the following meth
   </span><span class="nl">"hidden"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span><span class="w">
   </span><span class="nl">"locked"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="w">
 </span><span class="p">}</span><span class="w"> 
-</span></code></pre></div><h3 id="properties-17">Properties</h3>
+</span></code></pre></div><h3 id="properties-18">Properties</h3>
 <table>
 <thead>
 <tr>
@@ -23076,7 +23611,7 @@ To perform this request, you must be authenticated via one of the following meth
   </span><span class="nl">"date_added"</span><span class="p">:</span><span class="w"> </span><span class="mi">1492564103</span><span class="p">,</span><span class="w">
   </span><span class="nl">"date_updated"</span><span class="p">:</span><span class="w"> </span><span class="mi">1492564103</span><span class="w">
 </span><span class="p">}</span><span class="w"> 
-</span></code></pre></div><h3 id="properties-18">Properties</h3>
+</span></code></pre></div><h3 id="properties-19">Properties</h3>
 <table>
 <thead>
 <tr>
@@ -23178,7 +23713,7 @@ To perform this request, you must be authenticated via one of the following meth
   </span><span class="nl">"resource_url"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://mod.io/g/@rogueknight/m/@some-mod"</span><span class="p">,</span><span class="w">
   </span><span class="nl">"date_added"</span><span class="p">:</span><span class="w"> </span><span class="mi">1499841487</span><span class="w">
 </span><span class="p">}</span><span class="w"> 
-</span></code></pre></div><h3 id="properties-19">Properties</h3>
+</span></code></pre></div><h3 id="properties-20">Properties</h3>
 <table>
 <thead>
 <tr>
@@ -23210,6 +23745,91 @@ To perform this request, you must be authenticated via one of the following meth
 </tr>
 </tbody>
 </table>
+<h2 id="get-emh-configurations">Get EMH Configurations</h2>
+<p><a name="schemaget_emh_configurations"></a></p>
+<div class="highlight"><pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
+  </span><span class="nl">"data"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+    </span><span class="p">{</span><span class="w">
+      </span><span class="nl">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"string"</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"urls"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+        </span><span class="s2">"string"</span><span class="w">
+      </span><span class="p">],</span><span class="w">
+      </span><span class="nl">"style"</span><span class="p">:</span><span class="w"> </span><span class="s2">"string"</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"css"</span><span class="p">:</span><span class="w"> </span><span class="s2">"string"</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"allow_subscribing"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"allow_rating"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"allow_reporting"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"allow_downloading"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"allow_commenting"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"allow_filtering"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"allow_searching"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"allow_infinite_scroll"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"allow_email_auth"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"allow_sso_auth"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"allow_steam_auth"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"allow_PSN_auth"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"allow_xbox_auth"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"allow_egs_auth"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"allow_discord_auth"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"allow_google_auth"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"show_collection"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"show_comments"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"show_guides"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"show_user_avatars"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"show_sort_tabs"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"results_per_page"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"min_age"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"date_added"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"date_updated"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="w">
+    </span><span class="p">},</span><span class="w">
+    </span><span class="p">{</span><span class="w">
+        </span><span class="err">...</span><span class="w">
+    </span><span class="p">}</span><span class="w">
+  </span><span class="p">],</span><span class="w">
+  </span><span class="nl">"result_count"</span><span class="p">:</span><span class="w"> </span><span class="mi">70</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"result_offset"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"result_limit"</span><span class="p">:</span><span class="w"> </span><span class="mi">100</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"result_total"</span><span class="p">:</span><span class="w"> </span><span class="mi">70</span><span class="w">
+</span><span class="p">}</span><span class="w"> 
+</span></code></pre></div><h3 id="properties-21">Properties</h3>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>data</td>
+<td>
+<a href="#schemaembeddable_mod_hub_configuration_object">Embeddable Mod Hub Configuration Object</a>[]</td>
+<td>Array containing EMH configuration objects.</td>
+</tr>
+<tr>
+<td>result_count</td>
+<td>integer</td>
+<td>Number of results returned in this request.</td>
+</tr>
+<tr>
+<td>result_offset</td>
+<td>integer</td>
+<td>Number of results skipped over. Defaults to 0 unless overridden by <code>_offset</code> filter.</td>
+</tr>
+<tr>
+<td>result_limit</td>
+<td>integer</td>
+<td>Maximum number of results returned in the request. Defaults to 100 (max) unless overridden by <code>_limit</code> filter.</td>
+</tr>
+<tr>
+<td>result_total</td>
+<td>integer</td>
+<td>Total number of results found.</td>
+</tr>
+</tbody>
+</table>
 <h2 id="get-entitlement-sync-status">Get Entitlement Sync Status</h2>
 <p><a name="schemaget_entitlement_sync_status"></a></p>
 <div class="highlight"><pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
@@ -23233,7 +23853,7 @@ To perform this request, you must be authenticated via one of the following meth
   </span><span class="nl">"result_limit"</span><span class="p">:</span><span class="w"> </span><span class="mi">100</span><span class="p">,</span><span class="w">
   </span><span class="nl">"result_total"</span><span class="p">:</span><span class="w"> </span><span class="mi">70</span><span class="w">
 </span><span class="p">}</span><span class="w"> 
-</span></code></pre></div><h3 id="properties-20">Properties</h3>
+</span></code></pre></div><h3 id="properties-22">Properties</h3>
 <table>
 <thead>
 <tr>
@@ -23316,7 +23936,7 @@ To perform this request, you must be authenticated via one of the following meth
   </span><span class="nl">"result_limit"</span><span class="p">:</span><span class="w"> </span><span class="mi">100</span><span class="p">,</span><span class="w">
   </span><span class="nl">"result_total"</span><span class="p">:</span><span class="w"> </span><span class="mi">70</span><span class="w">
 </span><span class="p">}</span><span class="w"> 
-</span></code></pre></div><h3 id="properties-21">Properties</h3>
+</span></code></pre></div><h3 id="properties-23">Properties</h3>
 <table>
 <thead>
 <tr>
@@ -23463,7 +24083,7 @@ To perform this request, you must be authenticated via one of the following meth
   </span><span class="nl">"result_limit"</span><span class="p">:</span><span class="w"> </span><span class="mi">100</span><span class="p">,</span><span class="w">
   </span><span class="nl">"result_total"</span><span class="p">:</span><span class="w"> </span><span class="mi">70</span><span class="w">
 </span><span class="p">}</span><span class="w"> 
-</span></code></pre></div><h3 id="properties-22">Properties</h3>
+</span></code></pre></div><h3 id="properties-24">Properties</h3>
 <table>
 <thead>
 <tr>
@@ -23541,7 +24161,7 @@ To perform this request, you must be authenticated via one of the following meth
   </span><span class="nl">"result_limit"</span><span class="p">:</span><span class="w"> </span><span class="mi">100</span><span class="p">,</span><span class="w">
   </span><span class="nl">"result_total"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="w">
 </span><span class="p">}</span><span class="w"> 
-</span></code></pre></div><h3 id="properties-23">Properties</h3>
+</span></code></pre></div><h3 id="properties-25">Properties</h3>
 <table>
 <thead>
 <tr>
@@ -23597,7 +24217,7 @@ To perform this request, you must be authenticated via one of the following meth
   </span><span class="nl">"result_limit"</span><span class="p">:</span><span class="w"> </span><span class="mi">100</span><span class="p">,</span><span class="w">
   </span><span class="nl">"result_total"</span><span class="p">:</span><span class="w"> </span><span class="mi">70</span><span class="w">
 </span><span class="p">}</span><span class="w"> 
-</span></code></pre></div><h3 id="properties-24">Properties</h3>
+</span></code></pre></div><h3 id="properties-26">Properties</h3>
 <table>
 <thead>
 <tr>
@@ -23700,7 +24320,7 @@ To perform this request, you must be authenticated via one of the following meth
   </span><span class="nl">"result_limit"</span><span class="p">:</span><span class="w"> </span><span class="mi">100</span><span class="p">,</span><span class="w">
   </span><span class="nl">"result_total"</span><span class="p">:</span><span class="w"> </span><span class="mi">70</span><span class="w">
 </span><span class="p">}</span><span class="w"> 
-</span></code></pre></div><h3 id="properties-25">Properties</h3>
+</span></code></pre></div><h3 id="properties-27">Properties</h3>
 <table>
 <thead>
 <tr>
@@ -23778,7 +24398,7 @@ To perform this request, you must be authenticated via one of the following meth
   </span><span class="nl">"result_limit"</span><span class="p">:</span><span class="w"> </span><span class="mi">100</span><span class="p">,</span><span class="w">
   </span><span class="nl">"result_total"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="w">
 </span><span class="p">}</span><span class="w"> 
-</span></code></pre></div><h3 id="properties-26">Properties</h3>
+</span></code></pre></div><h3 id="properties-28">Properties</h3>
 <table>
 <thead>
 <tr>
@@ -23845,7 +24465,7 @@ To perform this request, you must be authenticated via one of the following meth
   </span><span class="nl">"result_limit"</span><span class="p">:</span><span class="w"> </span><span class="mi">100</span><span class="p">,</span><span class="w">
   </span><span class="nl">"result_total"</span><span class="p">:</span><span class="w"> </span><span class="mi">70</span><span class="w">
 </span><span class="p">}</span><span class="w"> 
-</span></code></pre></div><h3 id="properties-27">Properties</h3>
+</span></code></pre></div><h3 id="properties-29">Properties</h3>
 <table>
 <thead>
 <tr>
@@ -23942,7 +24562,7 @@ To perform this request, you must be authenticated via one of the following meth
   </span><span class="nl">"result_limit"</span><span class="p">:</span><span class="w"> </span><span class="mi">100</span><span class="p">,</span><span class="w">
   </span><span class="nl">"result_total"</span><span class="p">:</span><span class="w"> </span><span class="mi">70</span><span class="w">
 </span><span class="p">}</span><span class="w"> 
-</span></code></pre></div><h3 id="properties-28">Properties</h3>
+</span></code></pre></div><h3 id="properties-30">Properties</h3>
 <table>
 <thead>
 <tr>
@@ -24000,7 +24620,7 @@ To perform this request, you must be authenticated via one of the following meth
   </span><span class="nl">"result_limit"</span><span class="p">:</span><span class="w"> </span><span class="mi">100</span><span class="p">,</span><span class="w">
   </span><span class="nl">"result_total"</span><span class="p">:</span><span class="w"> </span><span class="mi">70</span><span class="w">
 </span><span class="p">}</span><span class="w"> 
-</span></code></pre></div><h3 id="properties-29">Properties</h3>
+</span></code></pre></div><h3 id="properties-31">Properties</h3>
 <table>
 <thead>
 <tr>
@@ -24055,7 +24675,7 @@ To perform this request, you must be authenticated via one of the following meth
   </span><span class="nl">"result_limit"</span><span class="p">:</span><span class="w"> </span><span class="mi">100</span><span class="p">,</span><span class="w">
   </span><span class="nl">"result_total"</span><span class="p">:</span><span class="w"> </span><span class="mi">70</span><span class="w">
 </span><span class="p">}</span><span class="w"> 
-</span></code></pre></div><h3 id="properties-30">Properties</h3>
+</span></code></pre></div><h3 id="properties-32">Properties</h3>
 <table>
 <thead>
 <tr>
@@ -24121,7 +24741,7 @@ To perform this request, you must be authenticated via one of the following meth
   </span><span class="nl">"result_limit"</span><span class="p">:</span><span class="w"> </span><span class="mi">100</span><span class="p">,</span><span class="w">
   </span><span class="nl">"result_total"</span><span class="p">:</span><span class="w"> </span><span class="mi">70</span><span class="w">
 </span><span class="p">}</span><span class="w"> 
-</span></code></pre></div><h3 id="properties-31">Properties</h3>
+</span></code></pre></div><h3 id="properties-33">Properties</h3>
 <table>
 <thead>
 <tr>
@@ -24177,7 +24797,7 @@ To perform this request, you must be authenticated via one of the following meth
   </span><span class="nl">"result_limit"</span><span class="p">:</span><span class="w"> </span><span class="mi">100</span><span class="p">,</span><span class="w">
   </span><span class="nl">"result_total"</span><span class="p">:</span><span class="w"> </span><span class="mi">70</span><span class="w">
 </span><span class="p">}</span><span class="w"> 
-</span></code></pre></div><h3 id="properties-32">Properties</h3>
+</span></code></pre></div><h3 id="properties-34">Properties</h3>
 <table>
 <thead>
 <tr>
@@ -24257,7 +24877,7 @@ To perform this request, you must be authenticated via one of the following meth
   </span><span class="nl">"result_limit"</span><span class="p">:</span><span class="w"> </span><span class="mi">100</span><span class="p">,</span><span class="w">
   </span><span class="nl">"result_total"</span><span class="p">:</span><span class="w"> </span><span class="mi">70</span><span class="w">
 </span><span class="p">}</span><span class="w"> 
-</span></code></pre></div><h3 id="properties-33">Properties</h3>
+</span></code></pre></div><h3 id="properties-35">Properties</h3>
 <table>
 <thead>
 <tr>
@@ -24435,7 +25055,7 @@ To perform this request, you must be authenticated via one of the following meth
   </span><span class="nl">"result_limit"</span><span class="p">:</span><span class="w"> </span><span class="mi">100</span><span class="p">,</span><span class="w">
   </span><span class="nl">"result_total"</span><span class="p">:</span><span class="w"> </span><span class="mi">70</span><span class="w">
 </span><span class="p">}</span><span class="w"> 
-</span></code></pre></div><h3 id="properties-34">Properties</h3>
+</span></code></pre></div><h3 id="properties-36">Properties</h3>
 <table>
 <thead>
 <tr>
@@ -24492,7 +25112,7 @@ To perform this request, you must be authenticated via one of the following meth
   </span><span class="nl">"result_limit"</span><span class="p">:</span><span class="w"> </span><span class="mi">100</span><span class="p">,</span><span class="w">
   </span><span class="nl">"result_total"</span><span class="p">:</span><span class="w"> </span><span class="mi">70</span><span class="w">
 </span><span class="p">}</span><span class="w"> 
-</span></code></pre></div><h3 id="properties-35">Properties</h3>
+</span></code></pre></div><h3 id="properties-37">Properties</h3>
 <table>
 <thead>
 <tr>
@@ -24547,7 +25167,7 @@ To perform this request, you must be authenticated via one of the following meth
   </span><span class="nl">"result_limit"</span><span class="p">:</span><span class="w"> </span><span class="mi">100</span><span class="p">,</span><span class="w">
   </span><span class="nl">"result_total"</span><span class="p">:</span><span class="w"> </span><span class="mi">70</span><span class="w">
 </span><span class="p">}</span><span class="w"> 
-</span></code></pre></div><h3 id="properties-36">Properties</h3>
+</span></code></pre></div><h3 id="properties-38">Properties</h3>
 <table>
 <thead>
 <tr>
@@ -24615,7 +25235,7 @@ To perform this request, you must be authenticated via one of the following meth
   </span><span class="nl">"result_limit"</span><span class="p">:</span><span class="w"> </span><span class="mi">100</span><span class="p">,</span><span class="w">
   </span><span class="nl">"result_total"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="w">
 </span><span class="p">}</span><span class="w"> 
-</span></code></pre></div><h3 id="properties-37">Properties</h3>
+</span></code></pre></div><h3 id="properties-39">Properties</h3>
 <table>
 <thead>
 <tr>
@@ -24690,7 +25310,7 @@ To perform this request, you must be authenticated via one of the following meth
   </span><span class="nl">"result_limit"</span><span class="p">:</span><span class="w"> </span><span class="mi">100</span><span class="p">,</span><span class="w">
   </span><span class="nl">"result_total"</span><span class="p">:</span><span class="w"> </span><span class="mi">70</span><span class="w">
 </span><span class="p">}</span><span class="w"> 
-</span></code></pre></div><h3 id="properties-38">Properties</h3>
+</span></code></pre></div><h3 id="properties-40">Properties</h3>
 <table>
 <thead>
 <tr>
@@ -24749,7 +25369,7 @@ To perform this request, you must be authenticated via one of the following meth
   </span><span class="nl">"result_limit"</span><span class="p">:</span><span class="w"> </span><span class="mi">100</span><span class="p">,</span><span class="w">
   </span><span class="nl">"result_total"</span><span class="p">:</span><span class="w"> </span><span class="mi">70</span><span class="w">
 </span><span class="p">}</span><span class="w"> 
-</span></code></pre></div><h3 id="properties-39">Properties</h3>
+</span></code></pre></div><h3 id="properties-41">Properties</h3>
 <table>
 <thead>
 <tr>
@@ -24805,7 +25425,7 @@ To perform this request, you must be authenticated via one of the following meth
   </span><span class="nl">"result_limit"</span><span class="p">:</span><span class="w"> </span><span class="mi">100</span><span class="p">,</span><span class="w">
   </span><span class="nl">"result_total"</span><span class="p">:</span><span class="w"> </span><span class="mi">70</span><span class="w">
 </span><span class="p">}</span><span class="w"> 
-</span></code></pre></div><h3 id="properties-40">Properties</h3>
+</span></code></pre></div><h3 id="properties-42">Properties</h3>
 <table>
 <thead>
 <tr>
@@ -24896,7 +25516,7 @@ To perform this request, you must be authenticated via one of the following meth
     </span><span class="p">}</span><span class="w">
   </span><span class="p">]</span><span class="w">
 </span><span class="p">}</span><span class="w"> 
-</span></code></pre></div><h3 id="properties-41">Properties</h3>
+</span></code></pre></div><h3 id="properties-43">Properties</h3>
 <table>
 <thead>
 <tr>
@@ -24998,7 +25618,7 @@ To perform this request, you must be authenticated via one of the following meth
   </span><span class="nl">"visits_total"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
   </span><span class="nl">"comments_total"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="w">
 </span><span class="p">}</span><span class="w"> 
-</span></code></pre></div><h3 id="properties-42">Properties</h3>
+</span></code></pre></div><h3 id="properties-44">Properties</h3>
 <table>
 <thead>
 <tr>
@@ -25032,7 +25652,7 @@ To perform this request, you must be authenticated via one of the following meth
   </span><span class="nl">"date_added"</span><span class="p">:</span><span class="w"> </span><span class="mi">1499841487</span><span class="p">,</span><span class="w">
   </span><span class="nl">"count"</span><span class="p">:</span><span class="w"> </span><span class="mi">22</span><span class="w">
 </span><span class="p">}</span><span class="w"> 
-</span></code></pre></div><h3 id="properties-43">Properties</h3>
+</span></code></pre></div><h3 id="properties-45">Properties</h3>
 <table>
 <thead>
 <tr>
@@ -25065,7 +25685,7 @@ To perform this request, you must be authenticated via one of the following meth
   </span><span class="nl">"filename"</span><span class="p">:</span><span class="w"> </span><span class="s2">"modio-logo-bluedark.png"</span><span class="p">,</span><span class="w">
   </span><span class="nl">"original"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://assets.modcdn.io/images/branding/modio-logo-bluedark.png"</span><span class="w">
 </span><span class="p">}</span><span class="w"> 
-</span></code></pre></div><h3 id="properties-44">Properties</h3>
+</span></code></pre></div><h3 id="properties-46">Properties</h3>
 <table>
 <thead>
 <tr>
@@ -25096,7 +25716,7 @@ To perform this request, you must be authenticated via one of the following meth
   </span><span class="nl">"thumb_128x128"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://assets.modcdn.io/images/placeholder/icon.png"</span><span class="p">,</span><span class="w">
   </span><span class="nl">"thumb_256x256"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://assets.modcdn.io/images/placeholder/icon.png"</span><span class="w">
 </span><span class="p">}</span><span class="w"> 
-</span></code></pre></div><h3 id="properties-45">Properties</h3>
+</span></code></pre></div><h3 id="properties-47">Properties</h3>
 <table>
 <thead>
 <tr>
@@ -25141,7 +25761,7 @@ To perform this request, you must be authenticated via one of the following meth
   </span><span class="nl">"thumb_320x180"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://assets.modcdn.io/images/placeholder/card.png"</span><span class="p">,</span><span class="w">
   </span><span class="nl">"thumb_1280x720"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://assets.modcdn.io/images/placeholder/card.png"</span><span class="w">
 </span><span class="p">}</span><span class="w"> 
-</span></code></pre></div><h3 id="properties-46">Properties</h3>
+</span></code></pre></div><h3 id="properties-48">Properties</h3>
 <table>
 <thead>
 <tr>
@@ -25179,7 +25799,7 @@ To perform this request, you must be authenticated via one of the following meth
   </span><span class="nl">"key"</span><span class="p">:</span><span class="w"> </span><span class="s2">"retry-after"</span><span class="p">,</span><span class="w">
   </span><span class="nl">"value"</span><span class="p">:</span><span class="w"> </span><span class="s2">"98"</span><span class="w">
 </span><span class="p">}</span><span class="w"> 
-</span></code></pre></div><h3 id="properties-47">Properties</h3>
+</span></code></pre></div><h3 id="properties-49">Properties</h3>
 <table>
 <thead>
 <tr>
@@ -25210,7 +25830,7 @@ To perform this request, you must be authenticated via one of the following meth
   </span><span class="nl">"thumb_640x360"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://assets.modcdn.io/images/placeholder/card.png"</span><span class="p">,</span><span class="w">
   </span><span class="nl">"thumb_1280x720"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://assets.modcdn.io/images/placeholder/card.png"</span><span class="w">
 </span><span class="p">}</span><span class="w"> 
-</span></code></pre></div><h3 id="properties-48">Properties</h3>
+</span></code></pre></div><h3 id="properties-50">Properties</h3>
 <table>
 <thead>
 <tr>
@@ -25253,7 +25873,7 @@ To perform this request, you must be authenticated via one of the following meth
   </span><span class="nl">"code"</span><span class="p">:</span><span class="w"> </span><span class="mi">200</span><span class="p">,</span><span class="w">
   </span><span class="nl">"message"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Your request was successful."</span><span class="w">
 </span><span class="p">}</span><span class="w"> 
-</span></code></pre></div><h3 id="properties-49">Properties</h3>
+</span></code></pre></div><h3 id="properties-51">Properties</h3>
 <table>
 <thead>
 <tr>
@@ -25282,7 +25902,7 @@ To perform this request, you must be authenticated via one of the following meth
   </span><span class="nl">"metakey"</span><span class="p">:</span><span class="w"> </span><span class="s2">"pistol-dmg"</span><span class="p">,</span><span class="w">
   </span><span class="nl">"metavalue"</span><span class="p">:</span><span class="w"> </span><span class="s2">"800"</span><span class="w">
 </span><span class="p">}</span><span class="w"> 
-</span></code></pre></div><h3 id="properties-50">Properties</h3>
+</span></code></pre></div><h3 id="properties-52">Properties</h3>
 <table>
 <thead>
 <tr>
@@ -25322,7 +25942,7 @@ To perform this request, you must be authenticated via one of the following meth
     </span><span class="nl">"thumb_1280x720"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://assets.modcdn.io/images/placeholder/card.png"</span><span class="w">
   </span><span class="p">}</span><span class="w">
 </span><span class="p">}</span><span class="w"> 
-</span></code></pre></div><h3 id="properties-51">Properties</h3>
+</span></code></pre></div><h3 id="properties-53">Properties</h3>
 <table>
 <thead>
 <tr>
@@ -25423,7 +26043,7 @@ To perform this request, you must be authenticated via one of the following meth
     </span><span class="p">]</span><span class="w">
   </span><span class="p">}</span><span class="w">
 </span><span class="p">}</span><span class="w"> 
-</span></code></pre></div><h3 id="properties-52">Properties</h3>
+</span></code></pre></div><h3 id="properties-54">Properties</h3>
 <table>
 <thead>
 <tr>
@@ -25495,7 +26115,7 @@ To perform this request, you must be authenticated via one of the following meth
   </span><span class="nl">"date_added"</span><span class="p">:</span><span class="w"> </span><span class="mi">1499846132</span><span class="p">,</span><span class="w">
   </span><span class="nl">"event_type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"MODFILE_CHANGED"</span><span class="w">
 </span><span class="p">}</span><span class="w"> 
-</span></code></pre></div><h3 id="properties-53">Properties</h3>
+</span></code></pre></div><h3 id="properties-55">Properties</h3>
 <table>
 <thead>
 <tr>
@@ -25550,7 +26170,7 @@ To perform this request, you must be authenticated via one of the following meth
     </span><span class="p">}</span><span class="w">
   </span><span class="p">]</span><span class="w">
 </span><span class="p">}</span><span class="w"> 
-</span></code></pre></div><h3 id="properties-54">Properties</h3>
+</span></code></pre></div><h3 id="properties-56">Properties</h3>
 <table>
 <thead>
 <tr>
@@ -25707,7 +26327,7 @@ To perform this request, you must be authenticated via one of the following meth
     </span><span class="nl">"date_expires"</span><span class="p">:</span><span class="w"> </span><span class="mi">1492564103</span><span class="w">
   </span><span class="p">}</span><span class="w">
 </span><span class="p">}</span><span class="w"> 
-</span></code></pre></div><h3 id="properties-55">Properties</h3>
+</span></code></pre></div><h3 id="properties-57">Properties</h3>
 <table>
 <thead>
 <tr>
@@ -25880,7 +26500,7 @@ To perform this request, you must be authenticated via one of the following meth
   </span><span class="nl">"platform"</span><span class="p">:</span><span class="w"> </span><span class="s2">"windows"</span><span class="p">,</span><span class="w">
   </span><span class="nl">"modfile_live"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="w">
 </span><span class="p">}</span><span class="w"> 
-</span></code></pre></div><h3 id="properties-56">Properties</h3>
+</span></code></pre></div><h3 id="properties-58">Properties</h3>
 <table>
 <thead>
 <tr>
@@ -25919,7 +26539,7 @@ To perform this request, you must be authenticated via one of the following meth
   </span><span class="nl">"ratings_display_text"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Very Positive"</span><span class="p">,</span><span class="w">
   </span><span class="nl">"date_expires"</span><span class="p">:</span><span class="w"> </span><span class="mi">1492564103</span><span class="w">
 </span><span class="p">}</span><span class="w"> 
-</span></code></pre></div><h3 id="properties-57">Properties</h3>
+</span></code></pre></div><h3 id="properties-59">Properties</h3>
 <table>
 <thead>
 <tr>
@@ -26003,7 +26623,7 @@ To perform this request, you must be authenticated via one of the following meth
   </span><span class="nl">"name_localized"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Unity"</span><span class="p">,</span><span class="w">
   </span><span class="nl">"date_added"</span><span class="p">:</span><span class="w"> </span><span class="mi">1499841487</span><span class="w">
 </span><span class="p">}</span><span class="w"> 
-</span></code></pre></div><h3 id="properties-58">Properties</h3>
+</span></code></pre></div><h3 id="properties-60">Properties</h3>
 <table>
 <thead>
 <tr>
@@ -26072,7 +26692,7 @@ To perform this request, you must be authenticated via one of the following meth
   </span><span class="nl">"subscribed"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span><span class="w">
   </span><span class="nl">"date_added"</span><span class="p">:</span><span class="w"> </span><span class="mi">1499841487</span><span class="w">
 </span><span class="p">}</span><span class="w"> 
-</span></code></pre></div><h3 id="properties-59">Properties</h3>
+</span></code></pre></div><h3 id="properties-61">Properties</h3>
 <table>
 <thead>
 <tr>
@@ -26140,7 +26760,7 @@ To perform this request, you must be authenticated via one of the following meth
     </span><span class="p">}</span><span class="w">
   </span><span class="p">]</span><span class="w">
 </span><span class="p">}</span><span class="w"> 
-</span></code></pre></div><h3 id="properties-60">Properties</h3>
+</span></code></pre></div><h3 id="properties-62">Properties</h3>
 <table>
 <thead>
 <tr>
@@ -26244,7 +26864,7 @@ To perform this request, you must be authenticated via one of the following meth
   </span><span class="nl">"platform"</span><span class="p">:</span><span class="w"> </span><span class="s2">"windows"</span><span class="p">,</span><span class="w">
   </span><span class="nl">"status"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="w">
 </span><span class="p">}</span><span class="w"> 
-</span></code></pre></div><h3 id="properties-61">Properties</h3>
+</span></code></pre></div><h3 id="properties-63">Properties</h3>
 <table>
 <thead>
 <tr>
@@ -26285,7 +26905,7 @@ To perform this request, you must be authenticated via one of the following meth
     </span><span class="s2">"string"</span><span class="w">
   </span><span class="p">]</span><span class="w">
 </span><span class="p">}</span><span class="w"> 
-</span></code></pre></div><h3 id="properties-62">Properties</h3>
+</span></code></pre></div><h3 id="properties-64">Properties</h3>
 <table>
 <thead>
 <tr>
@@ -26332,7 +26952,7 @@ To perform this request, you must be authenticated via one of the following meth
   </span><span class="nl">"monetization_options"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
   </span><span class="nl">"split"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="w">
 </span><span class="p">}</span><span class="w"> 
-</span></code></pre></div><h3 id="properties-63">Properties</h3>
+</span></code></pre></div><h3 id="properties-65">Properties</h3>
 <table>
 <thead>
 <tr>
@@ -26381,7 +27001,7 @@ To perform this request, you must be authenticated via one of the following meth
   </span><span class="nl">"upload_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"123e4567-e89b-12d3-a456-426614174000"</span><span class="p">,</span><span class="w">
   </span><span class="nl">"status"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="w">
 </span><span class="p">}</span><span class="w"> 
-</span></code></pre></div><h3 id="properties-64">Properties</h3>
+</span></code></pre></div><h3 id="properties-66">Properties</h3>
 <table>
 <thead>
 <tr>
@@ -26411,7 +27031,7 @@ To perform this request, you must be authenticated via one of the following meth
   </span><span class="nl">"part_size"</span><span class="p">:</span><span class="w"> </span><span class="mi">52428800</span><span class="p">,</span><span class="w">
   </span><span class="nl">"date_added"</span><span class="p">:</span><span class="w"> </span><span class="mi">1499846132</span><span class="w">
 </span><span class="p">}</span><span class="w"> 
-</span></code></pre></div><h3 id="properties-65">Properties</h3>
+</span></code></pre></div><h3 id="properties-67">Properties</h3>
 <table>
 <thead>
 <tr>
@@ -26586,7 +27206,7 @@ To perform this request, you must be authenticated via one of the following meth
     </span><span class="p">}</span><span class="w">
   </span><span class="p">}</span><span class="w">
 </span><span class="p">}</span><span class="w"> 
-</span></code></pre></div><h3 id="properties-66">Properties</h3>
+</span></code></pre></div><h3 id="properties-68">Properties</h3>
 <table>
 <thead>
 <tr>
@@ -26670,7 +27290,7 @@ To perform this request, you must be authenticated via one of the following meth
   </span><span class="nl">"date_added"</span><span class="p">:</span><span class="w"> </span><span class="mi">1499841487</span><span class="p">,</span><span class="w">
   </span><span class="nl">"date_updated"</span><span class="p">:</span><span class="w"> </span><span class="mi">1499841487</span><span class="w">
 </span><span class="p">}</span><span class="w"> 
-</span></code></pre></div><h3 id="properties-67">Properties</h3>
+</span></code></pre></div><h3 id="properties-69">Properties</h3>
 <table>
 <thead>
 <tr>
@@ -26702,7 +27322,7 @@ To perform this request, you must be authenticated via one of the following meth
 <div class="highlight"><pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
   </span><span class="nl">"success"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="w">
 </span><span class="p">}</span><span class="w"> 
-</span></code></pre></div><h3 id="properties-68">Properties</h3>
+</span></code></pre></div><h3 id="properties-70">Properties</h3>
 <table>
 <thead>
 <tr>
@@ -26727,7 +27347,7 @@ To perform this request, you must be authenticated via one of the following meth
   </span><span class="nl">"rating"</span><span class="p">:</span><span class="w"> </span><span class="mi">-1</span><span class="p">,</span><span class="w">
   </span><span class="nl">"date_added"</span><span class="p">:</span><span class="w"> </span><span class="mi">1492564103</span><span class="w">
 </span><span class="p">}</span><span class="w"> 
-</span></code></pre></div><h3 id="properties-69">Properties</h3>
+</span></code></pre></div><h3 id="properties-71">Properties</h3>
 <table>
 <thead>
 <tr>
@@ -26773,7 +27393,7 @@ To perform this request, you must be authenticated via one of the following meth
   </span><span class="nl">"meta"</span><span class="p">:</span><span class="w"> </span><span class="p">{},</span><span class="w">
   </span><span class="nl">"purchase_date"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="w">
 </span><span class="p">}</span><span class="w"> 
-</span></code></pre></div><h3 id="properties-70">Properties</h3>
+</span></code></pre></div><h3 id="properties-72">Properties</h3>
 <table>
 <thead>
 <tr>
@@ -26847,7 +27467,7 @@ To perform this request, you must be authenticated via one of the following meth
   </span><span class="nl">"meta"</span><span class="p">:</span><span class="w"> </span><span class="p">{},</span><span class="w">
   </span><span class="nl">"purchase_date"</span><span class="p">:</span><span class="w"> </span><span class="mi">1626667557</span><span class="w">
 </span><span class="p">}</span><span class="w"> 
-</span></code></pre></div><h3 id="properties-71">Properties</h3>
+</span></code></pre></div><h3 id="properties-73">Properties</h3>
 <table>
 <thead>
 <tr>
@@ -26924,7 +27544,7 @@ To perform this request, you must be authenticated via one of the following meth
   </span><span class="nl">"date_added"</span><span class="p">:</span><span class="w"> </span><span class="mi">1492564103</span><span class="p">,</span><span class="w">
   </span><span class="nl">"reason"</span><span class="p">:</span><span class="w"> </span><span class="s2">""</span><span class="w">
 </span><span class="p">}</span><span class="w"> 
-</span></code></pre></div><h3 id="properties-72">Properties</h3>
+</span></code></pre></div><h3 id="properties-74">Properties</h3>
 <table>
 <thead>
 <tr>
@@ -26987,7 +27607,7 @@ To perform this request, you must be authenticated via one of the following meth
   </span><span class="nl">"position"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Turret Builder"</span><span class="p">,</span><span class="w">
   </span><span class="nl">"invite_pending"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="w">
 </span><span class="p">}</span><span class="w"> 
-</span></code></pre></div><h3 id="properties-73">Properties</h3>
+</span></code></pre></div><h3 id="properties-75">Properties</h3>
 <table>
 <thead>
 <tr>
@@ -27065,7 +27685,7 @@ To perform this request, you must be authenticated via one of the following meth
     </span><span class="p">}</span><span class="w">
   </span><span class="p">}</span><span class="w">
 </span><span class="p">}</span><span class="w"> 
-</span></code></pre></div><h3 id="properties-74">Properties</h3>
+</span></code></pre></div><h3 id="properties-76">Properties</h3>
 <table>
 <thead>
 <tr>
@@ -27207,7 +27827,7 @@ To perform this request, you must be authenticated via one of the following meth
   </span><span class="nl">"warning"</span><span class="p">:</span><span class="w"> </span><span class="s2">"#d6af2e"</span><span class="p">,</span><span class="w">
   </span><span class="nl">"danger"</span><span class="p">:</span><span class="w"> </span><span class="s2">"#ff000e"</span><span class="w">
 </span><span class="p">}</span><span class="w"> 
-</span></code></pre></div><h3 id="properties-75">Properties</h3>
+</span></code></pre></div><h3 id="properties-77">Properties</h3>
 <table>
 <thead>
 <tr>
@@ -27258,7 +27878,7 @@ To perform this request, you must be authenticated via one of the following meth
   </span><span class="nl">"resource_name_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"my-awesome-mod"</span><span class="p">,</span><span class="w">
   </span><span class="nl">"resource_url"</span><span class="p">:</span><span class="w"> </span><span class="s2">""</span><span class="w">
 </span><span class="p">}</span><span class="w"> 
-</span></code></pre></div><h3 id="properties-76">Properties</h3>
+</span></code></pre></div><h3 id="properties-78">Properties</h3>
 <table>
 <thead>
 <tr>
@@ -27302,7 +27922,7 @@ To perform this request, you must be authenticated via one of the following meth
   </span><span class="nl">"entity"</span><span class="p">:</span><span class="w"> </span><span class="s2">"purchase_server"</span><span class="p">,</span><span class="w">
   </span><span class="nl">"token"</span><span class="p">:</span><span class="w"> </span><span class="s2">"eyJ0eXAiOiXKV1QibCJhbLciOiJeiUzI1....."</span><span class="w">
 </span><span class="p">}</span><span class="w"> 
-</span></code></pre></div><h3 id="properties-77">Properties</h3>
+</span></code></pre></div><h3 id="properties-79">Properties</h3>
 <table>
 <thead>
 <tr>
@@ -27334,7 +27954,7 @@ To perform this request, you must be authenticated via one of the following meth
   </span><span class="nl">"date_added"</span><span class="p">:</span><span class="w"> </span><span class="mi">1499846132</span><span class="p">,</span><span class="w">
   </span><span class="nl">"event_type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"USER_SUBSCRIBE"</span><span class="w">
 </span><span class="p">}</span><span class="w"> 
-</span></code></pre></div><h3 id="properties-78">Properties</h3>
+</span></code></pre></div><h3 id="properties-80">Properties</h3>
 <table>
 <thead>
 <tr>
@@ -27395,7 +28015,7 @@ To perform this request, you must be authenticated via one of the following meth
   </span><span class="nl">"language"</span><span class="p">:</span><span class="w"> </span><span class="s2">""</span><span class="p">,</span><span class="w">
   </span><span class="nl">"profile_url"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://mod.io/u/xant"</span><span class="w">
 </span><span class="p">}</span><span class="w"> 
-</span></code></pre></div><h3 id="properties-79">Properties</h3>
+</span></code></pre></div><h3 id="properties-81">Properties</h3>
 <table>
 <thead>
 <tr>
@@ -27463,7 +28083,7 @@ To perform this request, you must be authenticated via one of the following meth
 <div class="highlight"><pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
   </span><span class="nl">"balance"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="w">
 </span><span class="p">}</span><span class="w"> 
-</span></code></pre></div><h3 id="properties-80">Properties</h3>
+</span></code></pre></div><h3 id="properties-82">Properties</h3>
 <table>
 <thead>
 <tr>
@@ -27490,7 +28110,7 @@ To perform this request, you must be authenticated via one of the following meth
   </span><span class="nl">"deficit"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
   </span><span class="nl">"monetization_status"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="w">
 </span><span class="p">}</span><span class="w"> 
-</span></code></pre></div><h3 id="properties-81">Properties</h3>
+</span></code></pre></div><h3 id="properties-83">Properties</h3>
 <table>
 <thead>
 <tr>
@@ -27540,7 +28160,7 @@ To perform this request, you must be authenticated via one of the following meth
   </span><span class="nl">"access_token"</span><span class="p">:</span><span class="w"> </span><span class="s2">"eyJlbmMiOiJBMTI4Q0JDLUhTMjU2IiwiYWxnIjoiUlNBLU9BRVAiLCJjdHkiOi...."</span><span class="p">,</span><span class="w">
   </span><span class="nl">"refresh_token"</span><span class="p">:</span><span class="w"> </span><span class="s2">"eyJlbmMiOiJBMTI4Q0JDLUhTMjU2IiwiYWxnIjoiUlNBLU9BRVAiLCJjdHkiOi...."</span><span class="w">
 </span><span class="p">}</span><span class="w"> 
-</span></code></pre></div><h3 id="properties-82">Properties</h3>
+</span></code></pre></div><h3 id="properties-84">Properties</h3>
 <table>
 <thead>
 <tr>
@@ -27578,7 +28198,7 @@ To perform this request, you must be authenticated via one of the following meth
   </span><span class="nl">"code"</span><span class="p">:</span><span class="w"> </span><span class="s2">"def5020077deb4eafe6fb6743b1fd6857ce22112d3400e6cc684633f8c9904faae1a83c23b"</span><span class="p">,</span><span class="w">
   </span><span class="nl">"state"</span><span class="p">:</span><span class="w"> </span><span class="s2">"T6KQGIXWrHXxFDfyp5Hh"</span><span class="w">
 </span><span class="p">}</span><span class="w"> 
-</span></code></pre></div><h3 id="properties-83">Properties</h3>
+</span></code></pre></div><h3 id="properties-85">Properties</h3>
 <table>
 <thead>
 <tr>
@@ -27607,7 +28227,7 @@ To perform this request, you must be authenticated via one of the following meth
   </span><span class="nl">"success"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
   </span><span class="nl">"message"</span><span class="p">:</span><span class="w"> </span><span class="s2">"You have successfully logged out of mod.io."</span><span class="w">
 </span><span class="p">}</span><span class="w"> 
-</span></code></pre></div><h3 id="properties-84">Properties</h3>
+</span></code></pre></div><h3 id="properties-86">Properties</h3>
 <table>
 <thead>
 <tr>
