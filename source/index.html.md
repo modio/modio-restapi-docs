@@ -15570,7 +15570,7 @@ This operation does not require authentication
 
 # Embeddable Mod Hub
 
-## Get Game Embeddable Mod Hub Configurations
+## Get Game EMH Configs
 
 > Example request
 
@@ -15668,7 +15668,7 @@ System.out.println(response.toString());
 
 `GET /games/{game-id}/emh`
 
-Get a games EMH config. This will return all of the configured Embeddable Mod Hub versions for this game. It returns a [Game EMH Object](#game-emh-object).
+Get a games Embeddable Mod Hub (EMH) config. This will return all of the configured EMH versions for this game. It returns a [Game EMH Object](#game-emh-object).
 
 > Example response
 
@@ -15720,7 +15720,7 @@ Get a games EMH config. This will return all of the configured Embeddable Mod Hu
 }
 
 ```
-<h3 id="Get-Game-Embeddable-Mod-Hub-Configurations-responses">Responses</h3>
+<h3 id="Get-Game-EMH-Configs-responses">Responses</h3>
 
 Status|Meaning|Error Ref|Description|Response Schema
 ---|---|----|---|---|
@@ -15730,7 +15730,7 @@ Status|Meaning|Error Ref|Description|Response Schema
 To perform this request, you must be authenticated via one of the following methods:
 <a href="#authentication">OAuth 2</a> (Scopes: web)
 </aside>
-## Get Game Embeddable Mod Hub Config
+## Get Game EMH Config
 
 > Example request
 
@@ -15828,7 +15828,7 @@ System.out.println(response.toString());
 
 `GET /games/{game-id}/emh/{emh-id}`
 
-Get a games EMH config. This will return all of the configured Embeddable Mod Hub versions for this game. It returns a [Game EMH Object](#game-emh-object).
+Get a games Embeddable Mod Hub (EMH) config. This will return all of the configured EMH versions for this game. It returns a [Game EMH Object](#game-emh-object).
 
 > Example response
 
@@ -15869,7 +15869,7 @@ Get a games EMH config. This will return all of the configured Embeddable Mod Hu
 }
 
 ```
-<h3 id="Get-Game-Embeddable-Mod-Hub-Config-responses">Responses</h3>
+<h3 id="Get-Game-EMH-Config-responses">Responses</h3>
 
 Status|Meaning|Error Ref|Description|Response Schema
 ---|---|----|---|---|
