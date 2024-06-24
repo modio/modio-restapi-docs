@@ -3890,7 +3890,7 @@ System.out.println(response.toString());
 
 `GET /games/{game-id}/guides`
 
-Get all guides for a game. Successful request will return an array of [Guide Objects](#get-guides).
+Get all guides for a game. Successful request will return an array of [Guide Objects](#get-guides-2).
 
     Filter|Type|Description
     ---|---|---
@@ -12545,7 +12545,7 @@ System.out.println(response.toString());
 
 `GET /games/{game-id}/mods/{mod-id}/dependants`
 
-Get all mods depending on the given mod. Successful request will return an array of [Mod Dependants Objects](#get-mod-dependants).
+Get all mods depending on the given mod. Successful request will return an array of [Mod Dependants Objects](#get-mod-dependants-2).
 
      __NOTE:__ This endpoint returns all mod dependents, irrespective of their status, visibility or platform support.
 
@@ -13005,7 +13005,7 @@ Get the current agreement (version) by type. Successful request will return a si
      __4__ = API Access Terms - [https://mod.io/apiterms](https://mod.io/apiterms)<br>
      __5__ = Monetization Terms - [https://mod.io/monetizationterms](https://mod.io/monetizationterms)<br>
      __6__ = Acceptable Use Policy - [https://mod.io/aup](https://mod.io/aup)<br>
-     __7__ = Cookies Policy - [https://mod.io/cookies](https://mod.io/cookies)
+     __7__ = Cookies Policy - [https://mod.io/cookies](https://mod.io/cookies)<br>
      __8__ = Refund Policy - [https://mod.io/refund](https://mod.io/refund)
 
      There are three ways you can display mod.io agreements. Pick which is easiest and most suitable for your implementation.
@@ -15152,7 +15152,7 @@ System.out.println(response.toString());
 
 `GET /me/ratings`
 
-Get all mod rating's submitted by the _authenticated user_. Successful request will return an array of [Rating Objects](#get-user-ratings).
+Get all mod rating's submitted by the _authenticated user_. Successful request will return an array of [Rating Objects](#get-user-ratings-2).
 
     Filter|Type|Description
     ---|---|---
@@ -15568,6 +15568,317 @@ Status|Meaning|Error Ref|Description|Response Schema
 This operation does not require authentication
 </aside>
 
+# Embeddable Mod Hub
+
+## Get Game Embeddable Mod Hub Configurations
+
+> Example request
+
+```shell
+# You can also use wget
+curl -X GET https://*.modapi.io/v1/games/{game-id}/emh \
+  -H 'Origin: https://mod.io' \ 
+  -H 'Authorization: Bearer {access-token}' \ 
+  -H 'Accept: application/json'
+
+```
+
+```http
+GET https://*.modapi.io/v1/games/{game-id}/emh HTTP/1.1
+Host: *.modapi.io
+
+Accept: application/json
+Origin: https://mod.io
+Authorization: Bearer {access-token}
+
+```
+
+```javascript
+var headers = {
+  'Origin':'https://mod.io',
+  'Authorization':'Bearer {access-token}',
+  'Accept':'application/json'
+
+};
+
+$.ajax({
+  url: 'https://*.modapi.io/v1/games/{game-id}/emh',
+  method: 'get',
+
+  headers: headers,
+  success: function(data) {
+    console.log(JSON.stringify(data));
+  }
+})
+```
+
+```javascript--nodejs
+const request = require('node-fetch');
+
+const headers = {
+  'Origin':'https://mod.io',
+  'Authorization':'Bearer {access-token}',
+  'Accept':'application/json'
+
+};
+
+fetch('https://*.modapi.io/v1/games/{game-id}/emh',
+{
+  method: 'GET',
+
+  headers: headers
+})
+.then(function(res) {
+    return res.json();
+}).then(function(body) {
+    console.log(body);
+});
+```
+
+```python
+import requests
+headers = {
+  'Origin': 'https://mod.io',
+  'Authorization': 'Bearer {access-token}',
+  'Accept': 'application/json'
+}
+
+r = requests.get('https://*.modapi.io/v1/games/{game-id}/emh', params={
+
+}, headers = headers)
+
+print r.json()
+```
+
+```java
+URL obj = new URL("https://*.modapi.io/v1/games/{game-id}/emh");
+HttpURLConnection con = (HttpURLConnection) obj.openConnection();
+con.setRequestMethod("GET");
+int responseCode = con.getResponseCode();
+BufferedReader in = new BufferedReader(
+    new InputStreamReader(con.getInputStream()));
+String inputLine;
+StringBuffer response = new StringBuffer();
+while ((inputLine = in.readLine()) != null) {
+    response.append(inputLine);
+}
+in.close();
+System.out.println(response.toString());
+```
+
+`GET /games/{game-id}/emh`
+
+Get a games EMH config. This will return all of the configured Embeddable Mod Hub versions for this game. It returns a [Game EMH Object](#game-emh-object).
+
+> Example response
+
+```json
+{
+  "data": [
+    {
+      "id": 1,
+      "name": "string",
+      "urls": [
+        "string"
+      ],
+      "style": "string",
+      "css": "string",
+      "allow_subscribing": true,
+      "allow_rating": true,
+      "allow_reporting": true,
+      "allow_downloading": true,
+      "allow_commenting": true,
+      "allow_filtering": true,
+      "allow_searching": true,
+      "allow_infinite_scroll": true,
+      "allow_email_auth": true,
+      "allow_sso_auth": true,
+      "allow_steam_auth": true,
+      "allow_PSN_auth": true,
+      "allow_xbox_auth": true,
+      "allow_egs_auth": true,
+      "allow_discord_auth": true,
+      "allow_google_auth": true,
+      "show_collection": true,
+      "show_comments": true,
+      "show_guides": true,
+      "show_user_avatars": true,
+      "show_sort_tabs": true,
+      "results_per_page": 0,
+      "min_age": 0,
+      "date_added": 0,
+      "date_updated": 0
+    },
+    {
+        ...
+    }
+  ],
+  "result_count": 70,
+  "result_offset": 0,
+  "result_limit": 100,
+  "result_total": 70
+}
+
+```
+<h3 id="Get-Game-Embeddable-Mod-Hub-Configurations-responses">Responses</h3>
+
+Status|Meaning|Error Ref|Description|Response Schema
+---|---|----|---|---|
+200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)||Request successful|[Get EMH Configurations](#schemaget_emh_configurations)
+403|[Forbidden](https://tools.ietf.org/html/rfc7231#section-6.5.3)|14007|The authenticated user does not have permission to view this game. Ensure the user is part of the game team before attempting the request again.|[Error Object](#schemaerror_object)
+<aside class="auth-notice">
+To perform this request, you must be authenticated via one of the following methods:
+<a href="#authentication">OAuth 2</a> (Scopes: web)
+</aside>
+## Get Game Embeddable Mod Hub Config
+
+> Example request
+
+```shell
+# You can also use wget
+curl -X GET https://*.modapi.io/v1/games/{game-id}/emh/{emh-id} \
+  -H 'Origin: https://mod.io' \ 
+  -H 'Authorization: Bearer {access-token}' \ 
+  -H 'Accept: application/json'
+
+```
+
+```http
+GET https://*.modapi.io/v1/games/{game-id}/emh/{emh-id} HTTP/1.1
+Host: *.modapi.io
+
+Accept: application/json
+Origin: https://mod.io
+Authorization: Bearer {access-token}
+
+```
+
+```javascript
+var headers = {
+  'Origin':'https://mod.io',
+  'Authorization':'Bearer {access-token}',
+  'Accept':'application/json'
+
+};
+
+$.ajax({
+  url: 'https://*.modapi.io/v1/games/{game-id}/emh/{emh-id}',
+  method: 'get',
+
+  headers: headers,
+  success: function(data) {
+    console.log(JSON.stringify(data));
+  }
+})
+```
+
+```javascript--nodejs
+const request = require('node-fetch');
+
+const headers = {
+  'Origin':'https://mod.io',
+  'Authorization':'Bearer {access-token}',
+  'Accept':'application/json'
+
+};
+
+fetch('https://*.modapi.io/v1/games/{game-id}/emh/{emh-id}',
+{
+  method: 'GET',
+
+  headers: headers
+})
+.then(function(res) {
+    return res.json();
+}).then(function(body) {
+    console.log(body);
+});
+```
+
+```python
+import requests
+headers = {
+  'Origin': 'https://mod.io',
+  'Authorization': 'Bearer {access-token}',
+  'Accept': 'application/json'
+}
+
+r = requests.get('https://*.modapi.io/v1/games/{game-id}/emh/{emh-id}', params={
+
+}, headers = headers)
+
+print r.json()
+```
+
+```java
+URL obj = new URL("https://*.modapi.io/v1/games/{game-id}/emh/{emh-id}");
+HttpURLConnection con = (HttpURLConnection) obj.openConnection();
+con.setRequestMethod("GET");
+int responseCode = con.getResponseCode();
+BufferedReader in = new BufferedReader(
+    new InputStreamReader(con.getInputStream()));
+String inputLine;
+StringBuffer response = new StringBuffer();
+while ((inputLine = in.readLine()) != null) {
+    response.append(inputLine);
+}
+in.close();
+System.out.println(response.toString());
+```
+
+`GET /games/{game-id}/emh/{emh-id}`
+
+Get a games EMH config. This will return all of the configured Embeddable Mod Hub versions for this game. It returns a [Game EMH Object](#game-emh-object).
+
+> Example response
+
+```json
+{
+  "id": 1,
+  "name": "string",
+  "urls": [
+    "string"
+  ],
+  "style": "string",
+  "css": "string",
+  "allow_subscribing": true,
+  "allow_rating": true,
+  "allow_reporting": true,
+  "allow_downloading": true,
+  "allow_commenting": true,
+  "allow_filtering": true,
+  "allow_searching": true,
+  "allow_infinite_scroll": true,
+  "allow_email_auth": true,
+  "allow_sso_auth": true,
+  "allow_steam_auth": true,
+  "allow_PSN_auth": true,
+  "allow_xbox_auth": true,
+  "allow_egs_auth": true,
+  "allow_discord_auth": true,
+  "allow_google_auth": true,
+  "show_collection": true,
+  "show_comments": true,
+  "show_guides": true,
+  "show_user_avatars": true,
+  "show_sort_tabs": true,
+  "results_per_page": 0,
+  "min_age": 0,
+  "date_added": 0,
+  "date_updated": 0
+}
+
+```
+<h3 id="Get-Game-Embeddable-Mod-Hub-Config-responses">Responses</h3>
+
+Status|Meaning|Error Ref|Description|Response Schema
+---|---|----|---|---|
+200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)||Request successful|[Embeddable Mod Hub Configuration Object](#schemaembeddable_mod_hub_configuration_object)
+403|[Forbidden](https://tools.ietf.org/html/rfc7231#section-6.5.3)|14007|The authenticated user does not have permission to view this game. Ensure the user is part of the game team before attempting the request again.|[Error Object](#schemaerror_object)
+<aside class="auth-notice">
+To perform this request, you must be authenticated via one of the following methods:
+<a href="#authentication">OAuth 2</a> (Scopes: web)
+</aside>
 # Monetization
 
 ## Get Game Token Packs
@@ -16229,7 +16540,7 @@ Status|Meaning|Error Ref|Description|Response Schema
 To perform this request, you must be authenticated via one of the following methods:
 <a href="#authentication">OAuth 2</a> (Scopes: write)
 </aside>
-# Server to Server
+# Service to Service
 
 ## S2S Transaction Intent
 
@@ -16348,7 +16659,7 @@ in.close();
 System.out.println(response.toString());
 ```
 
-`POST //s2s/transactions/intent`
+`POST /s2s/transactions/intent`
 
 Create a service-to-service (S2S) transaction intent. This is for performing an external token transaction. You should generate the intent, consume the item on your server's backend before committing the transaction. A successful request will return a [S2S Pay Object](#s2s-pay-object) object. Requires scope of monetization on token.
 
@@ -16492,7 +16803,7 @@ in.close();
 System.out.println(response.toString());
 ```
 
-`POST //s2s/transactions/commit`
+`POST /s2s/transactions/commit`
 
 Create a service-to-service (S2S) transaction commit. This is for performing an external token transaction. This step finalizes the transaction and will issue tokens to the user associated to it. A successful request will return a [S2S Pay Object](#s2s-pay-object) object. Requires scope of monetization on token.
 
@@ -16634,7 +16945,7 @@ in.close();
 System.out.println(response.toString());
 ```
 
-`POST //s2s/transactions/clawback`
+`POST /s2s/transactions/clawback`
 
 Create a service-to-service (S2S) transaction clawback. This is for unwinding a token transaction. You may use the transaction_id or the gateway_uuid from the previous calls. A successful request will return a [Refund Object](#refund-object) object. Requires scope of monetization on token.
 
@@ -16671,8 +16982,6 @@ Status|Meaning|Error Ref|Description|Response Schema
 To perform this request, you must be authenticated via one of the following methods:
 <a href="#authentication">OAuth 2</a> (Scopes: write)
 </aside>
-# In-App Purchases
-
 # Response Schemas
 ## Access Token Object  
 
@@ -16869,6 +17178,84 @@ Name|Type|Description
 ---|---|---|---|
 binary_url|string|URL to download the file from the mod.io CDN.<br><br>__NOTE:__ If the [game](#edit-game) requires mod downloads to be initiated via the API, the `binary_url` returned will contain a verification hash. This hash must be supplied to get the modfile, and will expire after a certain period of time. Saving and reusing the `binary_url` won't work in this situation given it's dynamic nature.
 date_expires|integer|Unix timestamp of when the `binary_url` will expire.
+
+
+
+## Embeddable Mod Hub Configuration Object
+
+<a name="schemaembeddable_mod_hub_configuration_object"></a>
+
+```json
+{
+  "id": 1,
+  "name": "string",
+  "urls": [
+    "string"
+  ],
+  "style": "string",
+  "css": "string",
+  "allow_subscribing": true,
+  "allow_rating": true,
+  "allow_reporting": true,
+  "allow_downloading": true,
+  "allow_commenting": true,
+  "allow_filtering": true,
+  "allow_searching": true,
+  "allow_infinite_scroll": true,
+  "allow_email_auth": true,
+  "allow_sso_auth": true,
+  "allow_steam_auth": true,
+  "allow_PSN_auth": true,
+  "allow_xbox_auth": true,
+  "allow_egs_auth": true,
+  "allow_discord_auth": true,
+  "allow_google_auth": true,
+  "show_collection": true,
+  "show_comments": true,
+  "show_guides": true,
+  "show_user_avatars": true,
+  "show_sort_tabs": true,
+  "results_per_page": 0,
+  "min_age": 0,
+  "date_added": 0,
+  "date_updated": 0
+} 
+```
+
+### Properties
+
+Name|Type|Description
+---|---|---|---|
+id|integer|Unique EMH id.
+name|string|Name of the EMH version.
+style|string|Pre-defined styling properties.
+css|string|Custom styling properties.
+allow_subscribing|boolean|Flag to allow subscribing.
+allow_rating|boolean|Flag to allow rating.
+allow_reporting|boolean|Flag to allow reporting.
+allow_downloading|boolean|Flag to allow downloading.
+allow_commenting|boolean|Flag to allow commenting.
+allow_filtering|boolean|Flag to allow filtering.
+allow_searching|boolean|Flag to allow searching.
+allow_infinite_scroll|boolean|Flag to allow infinite scroll.
+allow_email_auth|boolean|Flag to allow email authentication.
+allow_sso_auth|boolean|Flag to allow SSO authentication.
+allow_steam_auth|boolean|Flag to allow Steam authentication.
+allow_PSN_auth|boolean|Flag to allow PSN authentication.
+allow_xbox_auth|boolean|Flag to allow Xbox authentication.
+allow_egs_auth|boolean|Flag to allow Epic Games Store authentication.
+allow_discord_auth|boolean|Flag to allow Discord authentication.
+allow_google_auth|boolean|Flag to allow Google authentication.
+show_collection|boolean|Flag to allow mod management via collection.
+show_comments|boolean|Flag to show comments.
+show_guides|boolean|Flag to show guides.
+show_user_avatars|boolean|Flag to show user avatars.
+show_sort_tabs|boolean|Flag to show sort tabs.
+results_per_page|integer|Number of results to show per page.
+min_age|integer|Minimum age for EMH access.
+date_added|integer|Timestamp indicating the date when the configuration was added.
+date_updated|integer|Timestamp indicating the date when the configuration was last updated.
+urls|string[]|An array of URLs that may access this EMH configuration.
 
 
 
@@ -17384,6 +17771,70 @@ user|[User Object](#schemauser_object)|The previewing user.
 user_from|[User Object](#schemauser_object)|The user who invited the previewing user, if the previewer was added manually.
 resource_url|string|The URL of the resource that the registrant should be redirect to upon success.
 date_added|integer|Unix timestamp of the date the user was registered as a previewer.
+
+
+
+## Get EMH Configurations  
+
+<a name="schemaget_emh_configurations"></a>
+
+```json
+{
+  "data": [
+    {
+      "id": 1,
+      "name": "string",
+      "urls": [
+        "string"
+      ],
+      "style": "string",
+      "css": "string",
+      "allow_subscribing": true,
+      "allow_rating": true,
+      "allow_reporting": true,
+      "allow_downloading": true,
+      "allow_commenting": true,
+      "allow_filtering": true,
+      "allow_searching": true,
+      "allow_infinite_scroll": true,
+      "allow_email_auth": true,
+      "allow_sso_auth": true,
+      "allow_steam_auth": true,
+      "allow_PSN_auth": true,
+      "allow_xbox_auth": true,
+      "allow_egs_auth": true,
+      "allow_discord_auth": true,
+      "allow_google_auth": true,
+      "show_collection": true,
+      "show_comments": true,
+      "show_guides": true,
+      "show_user_avatars": true,
+      "show_sort_tabs": true,
+      "results_per_page": 0,
+      "min_age": 0,
+      "date_added": 0,
+      "date_updated": 0
+    },
+    {
+        ...
+    }
+  ],
+  "result_count": 70,
+  "result_offset": 0,
+  "result_limit": 100,
+  "result_total": 70
+} 
+```
+
+### Properties
+
+Name|Type|Description
+---|---|---|---|
+data|[Embeddable Mod Hub Configuration Object](#schemaembeddable_mod_hub_configuration_object)[]|Array containing EMH configuration objects.
+result_count|integer|Number of results returned in this request.
+result_offset|integer|Number of results skipped over. Defaults to 0 unless overridden by `_offset` filter.
+result_limit|integer|Maximum number of results returned in the request. Defaults to 100 (max) unless overridden by `_limit` filter.
+result_total|integer|Total number of results found.
 
 
 
