@@ -3890,7 +3890,7 @@ System.out.println(response.toString());
 
 `GET /games/{game-id}/guides`
 
-Get all guides for a game. Successful request will return an array of [Guide Objects](#get-guides-2).
+Get all guides for a game. Successful request will return an array of [Guide Objects](#get-guides).
 
     Filter|Type|Description
     ---|---|---
@@ -5409,7 +5409,6 @@ Add a mod. Successful request will return the newly created [Mod Object](#mod-ob
     homepage_url|string||Official homepage for your mod. Must be a valid URL.
     price|int|true|The price of the mod.<br><br>__NOTE:__ The value of this field will be ignored if the parent game's queue is enabled (see `curation_option` field in [Game Object](#game-object)).
     stock|integer||Maximum number of times this mod can be sold. <br><br>__NOTE:__ Limited mods can be enforced by the parent game. The value of this field is not used if the parent game's or mod's limited support is disabled (see `monetization_options` field in [Game Object](#game-object)).
-    monetization_options|integer||Monetization options enabled for this mod:<br><br>__0__ = Access to monetization features disabled<br>__1__ = Access to monetization features enabled by the game for this mod<br>__2__ = Marketplace enabled<br>__8__ = Quantity of this mod is limited<br>__?__ = Add the options you want together, to enable multiple options (see [BITWISE fields](#bitwise-and-bitwise-and))
     maturity_option|integer||Mature content found in this mod.<br><br>__NOTE:__ The value of this field will default to 0 unless the parent game allows you to flag mature content (see `maturity_options` field in [Game Object](#game-object)). <br><br>__0__ = None _(default)_<br>__1__ = Alcohol<br>__2__ = Drugs<br>__4__ = Violence<br>__8__ = Explicit<br>__?__ = Add the options you want together, to enable multiple options (see [BITWISE fields](#bitwise-and-bitwise-and))
     community_options|integer||Community features enabled for this mod:<br><br>__0__ = All the options below are disabled<br>__1__ = Enable comments<br>__64__ = Enable previews<br>__128__ = Enable preview URLs<br>__1024__ = Allow dependencies<br>__?__ = Add the options you want together, to enable multiple options (see [BITWISE fields](#bitwise-and-bitwise-and))
     metadata_blob|string||Metadata that is designed to be handled by the game client and is recommended to not be exposed to content creators when submitting their mods. As an example, this may include properties as to how the item works, or other information you need to display. Metadata can also be stored as searchable [key value pairs](#metadata), and to individual [mod files](#get-modfiles).
@@ -12545,7 +12544,7 @@ System.out.println(response.toString());
 
 `GET /games/{game-id}/mods/{mod-id}/dependants`
 
-Get all mods depending on the given mod. Successful request will return an array of [Mod Dependants Objects](#get-mod-dependants-2).
+Get all mods depending on the given mod. Successful request will return an array of [Mod Dependants Objects](#get-mod-dependants).
 
      __NOTE:__ This endpoint returns all mod dependents, irrespective of their status, visibility or platform support.
 
@@ -12903,7 +12902,7 @@ Status|Meaning|Error Ref|Description|Response Schema
 404|[Not Found](https://tools.ietf.org/html/rfc7231#section-6.5.4)|14000|The resource to be reported could not be found.|[Error Object](#schemaerror_object)
 <aside class="auth-notice">
 To perform this request, you must be authenticated via one of the following methods:
-<a href="#authentication">OAuth 2</a> (Scopes: write)
+<a href="#authentication">api_key</a>, <a href="#authentication">OAuth 2</a> (Scopes: read)
 </aside>
 # Agreements
 
@@ -13005,7 +13004,7 @@ Get the current agreement (version) by type. Successful request will return a si
      __4__ = API Access Terms - [https://mod.io/apiterms](https://mod.io/apiterms)<br>
      __5__ = Monetization Terms - [https://mod.io/monetizationterms](https://mod.io/monetizationterms)<br>
      __6__ = Acceptable Use Policy - [https://mod.io/aup](https://mod.io/aup)<br>
-     __7__ = Cookies Policy - [https://mod.io/cookies](https://mod.io/cookies)<br>
+     __7__ = Cookies Policy - [https://mod.io/cookies](https://mod.io/cookies)
      __8__ = Refund Policy - [https://mod.io/refund](https://mod.io/refund)
 
      There are three ways you can display mod.io agreements. Pick which is easiest and most suitable for your implementation.
@@ -15152,7 +15151,7 @@ System.out.println(response.toString());
 
 `GET /me/ratings`
 
-Get all mod rating's submitted by the _authenticated user_. Successful request will return an array of [Rating Objects](#get-user-ratings-2).
+Get all mod rating's submitted by the _authenticated user_. Successful request will return an array of [Rating Objects](#get-user-ratings).
 
     Filter|Type|Description
     ---|---|---
@@ -15570,7 +15569,7 @@ This operation does not require authentication
 
 # Embeddable Mod Hub
 
-## Get Game EMH Configs
+## Get Game Embeddable Mod Hub Configurations
 
 > Example request
 
@@ -15668,7 +15667,7 @@ System.out.println(response.toString());
 
 `GET /games/{game-id}/emh`
 
-Get a games Embeddable Mod Hub (EMH) config. This will return all of the configured EMH versions for this game. It returns a [Game EMH Object](#game-emh-object).
+Get a games EMH config. This will return all of the configured Embeddable Mod Hub versions for this game. It returns a [Game EMH Object](#game-emh-object).
 
 > Example response
 
@@ -15720,7 +15719,7 @@ Get a games Embeddable Mod Hub (EMH) config. This will return all of the configu
 }
 
 ```
-<h3 id="Get-Game-EMH-Configs-responses">Responses</h3>
+<h3 id="Get-Game-Embeddable-Mod-Hub-Configurations-responses">Responses</h3>
 
 Status|Meaning|Error Ref|Description|Response Schema
 ---|---|----|---|---|
@@ -15730,7 +15729,7 @@ Status|Meaning|Error Ref|Description|Response Schema
 To perform this request, you must be authenticated via one of the following methods:
 <a href="#authentication">OAuth 2</a> (Scopes: web)
 </aside>
-## Get Game EMH Config
+## Get Game Embeddable Mod Hub Config
 
 > Example request
 
@@ -15828,7 +15827,7 @@ System.out.println(response.toString());
 
 `GET /games/{game-id}/emh/{emh-id}`
 
-Get a games Embeddable Mod Hub (EMH) config. This will return all of the configured EMH versions for this game. It returns a [Game EMH Object](#game-emh-object).
+Get a games EMH config. This will return all of the configured Embeddable Mod Hub versions for this game. It returns a [Game EMH Object](#game-emh-object).
 
 > Example response
 
@@ -15869,7 +15868,7 @@ Get a games Embeddable Mod Hub (EMH) config. This will return all of the configu
 }
 
 ```
-<h3 id="Get-Game-EMH-Config-responses">Responses</h3>
+<h3 id="Get-Game-Embeddable-Mod-Hub-Config-responses">Responses</h3>
 
 Status|Meaning|Error Ref|Description|Response Schema
 ---|---|----|---|---|
@@ -16505,8 +16504,8 @@ Send a request to create a monetization team for a mod team. Successful request 
      Parameter|Type|Required|Description
      ---|---|---|---|
      users|array|true|Array of users to add.
-     id|integer|true|Id of the user to add to the team.
-     split|integer|true|Split value for the given user.
+     users[__n__][id]|integer|true|Id of the user to add to the team.
+     users[__n__][split]|integer|true|Split value for the given user.
 
 > Example response
 
@@ -16540,7 +16539,7 @@ Status|Meaning|Error Ref|Description|Response Schema
 To perform this request, you must be authenticated via one of the following methods:
 <a href="#authentication">OAuth 2</a> (Scopes: write)
 </aside>
-# Service to Service
+# Server to Server
 
 ## S2S Transaction Intent
 
@@ -16659,15 +16658,15 @@ in.close();
 System.out.println(response.toString());
 ```
 
-`POST /s2s/transactions/intent`
+`POST //s2s/transactions/intent`
 
 Create a service-to-service (S2S) transaction intent. This is for performing an external token transaction. You should generate the intent, consume the item on your server's backend before committing the transaction. A successful request will return a [S2S Pay Object](#s2s-pay-object) object. Requires scope of monetization on token.
 
-     Parameter|Type|Required|Description
-     ---|---|---|---|
-     sku|string|true|The sku ID of the entitlement that will be converted into it's equivalent Virtual Token amount.
-     portal|string|true|The portal the sku is tied to. Valid options are apple, google, xboxlive, psn and steam.
-     gateway_uuid|string|false|An optional mapping alpha dash string that can be used to track this transaction. It is recommended to use the one from the processing platform if you have one available.
+    Parameter|Type|Required|Description
+    ---|---|---|---|
+    sku|string|true|The sku ID of the entitlement that will be converted into it's equivalent Virtual Token amount.
+    portal|string|true|The portal the sku is tied to. Valid options are apple, google, xboxlive, psn and steam.
+    gateway_uuid|string|false|An optional mapping alpha dash string that can be used to track this transaction. It is recommended to use the one from the processing platform if you have one available.
 
 > Example response
 
@@ -16803,7 +16802,7 @@ in.close();
 System.out.println(response.toString());
 ```
 
-`POST /s2s/transactions/commit`
+`POST //s2s/transactions/commit`
 
 Create a service-to-service (S2S) transaction commit. This is for performing an external token transaction. This step finalizes the transaction and will issue tokens to the user associated to it. A successful request will return a [S2S Pay Object](#s2s-pay-object) object. Requires scope of monetization on token.
 
@@ -16945,7 +16944,7 @@ in.close();
 System.out.println(response.toString());
 ```
 
-`POST /s2s/transactions/clawback`
+`POST //s2s/transactions/clawback`
 
 Create a service-to-service (S2S) transaction clawback. This is for unwinding a token transaction. You may use the transaction_id or the gateway_uuid from the previous calls. A successful request will return a [Refund Object](#refund-object) object. Requires scope of monetization on token.
 
@@ -16982,6 +16981,123 @@ Status|Meaning|Error Ref|Description|Response Schema
 To perform this request, you must be authenticated via one of the following methods:
 <a href="#authentication">OAuth 2</a> (Scopes: write)
 </aside>
+## S2S Disconnect User
+
+> Example request
+
+```shell
+# You can also use wget
+curl -X DELETE https://*.modapi.io/v1/s2s/connections/{portal-id} \
+  -H 'Authorization: Bearer {access-token}' \ 
+  -H 'Content-Type: application/json' \ 
+  -H 'Accept: application/json'
+
+```
+
+```http
+DELETE https://*.modapi.io/v1/s2s/connections/{portal-id} HTTP/1.1
+Host: *.modapi.io
+
+Accept: application/json
+Authorization: Bearer {access-token}
+Content-Type: application/json
+
+```
+
+```javascript
+var headers = {
+  'Authorization':'Bearer {access-token}',
+  'Content-Type':'application/json',
+  'Accept':'application/json'
+
+};
+
+$.ajax({
+  url: 'https://*.modapi.io/v1/s2s/connections/{portal-id}',
+  method: 'delete',
+
+  headers: headers,
+  success: function(data) {
+    console.log(JSON.stringify(data));
+  }
+})
+```
+
+```javascript--nodejs
+const request = require('node-fetch');
+
+const headers = {
+  'Authorization':'Bearer {access-token}',
+  'Content-Type':'application/json',
+  'Accept':'application/json'
+
+};
+
+fetch('https://*.modapi.io/v1/s2s/connections/{portal-id}',
+{
+  method: 'DELETE',
+
+  headers: headers
+})
+.then(function(res) {
+    return res.json();
+}).then(function(body) {
+    console.log(body);
+});
+```
+
+```python
+import requests
+headers = {
+  'Authorization': 'Bearer {access-token}',
+  'Content-Type': 'application/json',
+  'Accept': 'application/json'
+}
+
+r = requests.delete('https://*.modapi.io/v1/s2s/connections/{portal-id}', params={
+
+}, headers = headers)
+
+print r.json()
+```
+
+```java
+URL obj = new URL("https://*.modapi.io/v1/s2s/connections/{portal-id}");
+HttpURLConnection con = (HttpURLConnection) obj.openConnection();
+con.setRequestMethod("DELETE");
+int responseCode = con.getResponseCode();
+BufferedReader in = new BufferedReader(
+    new InputStreamReader(con.getInputStream()));
+String inputLine;
+StringBuffer response = new StringBuffer();
+while ((inputLine = in.readLine()) != null) {
+    response.append(inputLine);
+}
+in.close();
+System.out.println(response.toString());
+```
+
+`DELETE /s2s/connections/{portal-id}`
+
+Disconnect a mod.io user from a linked studio user. This will completely remove the SSO connection between the mod.io user and the external user.
+
+> Example response
+
+```json
+ 204 No Content 
+
+```
+<h3 id="S2S-Disconnect-User-responses">Responses</h3>
+
+Status|Meaning|Error Ref|Description|Response Schema
+---|---|----|---|---|
+204|[No Content](https://tools.ietf.org/html/rfc7231#section-6.3.5)||Successful or Unsuccessful Request. No Body Returned.|None
+<aside class="auth-notice">
+To perform this request, you must be authenticated via one of the following methods:
+<a href="#authentication">OAuth 2</a> (Scopes: write)
+</aside>
+# In-App Purchases
+
 # Response Schemas
 ## Access Token Object  
 
