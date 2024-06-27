@@ -632,6 +632,7 @@ Language Code | Language
 `fr` | French
 `de` | German
 `it` | Italian
+`id` | Indonesian
 `pl` | Polish
 `pt` | Portuguese
 `hu` | Hungarian
@@ -640,7 +641,10 @@ Language Code | Language
 `ru` | Russian
 `es` | Spanish
 `th` | Thai
+`tr` | Turkish
+`uk` | Ukranian
 `zh-CN` | Chinese (Simplified)
+`zh-HK` | Chinese (Hong Kong)
 `zh-TW` | Chinese (Traditional)
 
 > Example request updating specified fields with Polish translations.
