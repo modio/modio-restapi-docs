@@ -1093,7 +1093,7 @@
       <div class="dark-box"></div>
       <div class="content">
         <h1 id="getting-started">Getting Started</h1><h2 id="mod-io-api-v1">mod.io API v1</h2>
-<p>Welcome to the official documentation for <a href="https://mod.io">mod.io</a>, an API for developers to add mod support to their games. Using our <a href="#implementation">SDKs and plugins</a> for popular and custom game engines, getting your creator community started and making the mods they create discoverable and installable via your in-game menu is straight forward, with full cross-platform support. If you are a game developer, you can manage your games and API access via your <a href="https://mod.io/library">mod.io library dashboard</a>. If you are a user creating tools and apps, you can request API access via your <a href="https://mod.io/me/access">mod.io account</a>.</p>
+<p>Welcome to the official documentation for <a href="https://mod.io">mod.io</a>, an API for developers to add mod support to their games. Using our <a href="#implementation">SDKs and plugins</a> for popular and custom game engines, getting your creator community started and making the mods they create discoverable and installable via your in-game menu is straight forward, with full cross-platform support. If you are a game developer, you can manage your games and API access via your <a href="https://mod.io/content">mod.io content dashboard</a>. If you are a user creating tools and apps, you can request API access via your <a href="https://mod.io/me/access">mod.io account</a>.</p>
 
 <p><strong>API path:</strong> <a href="https://*.modapi.io/v1">https://*.modapi.io/v1</a> (see your API access dashboard)</p>
 
@@ -1105,7 +1105,7 @@
 
 <p><img src="images/sdk-1a0606e3.png" alt="mod.io Overview"></p>
 <h2 id="implementation">Implementation</h2>
-<p>Once you have added your game to mod.io and got your <a href="https://mod.io/library">game ID and API key</a>, you can start integrating the mod.io REST API into your game, tools and sites. There are 3 options to get connected which you can use interchangeably depending on your needs. Here's the breakdown of each option.</p>
+<p>Once you have added your game to mod.io and got your <a href="https://mod.io/content">game ID and API key</a>, you can start integrating the mod.io REST API into your game, tools and sites. There are 3 options to get connected which you can use interchangeably depending on your needs. Here's the breakdown of each option.</p>
 
 <table>
 <thead>
@@ -4531,7 +4531,8 @@ To perform this request, you must be authenticated via one of the following meth
 curl <span class="nt">-X</span> POST https://<span class="k">*</span>.modapi.io/v1/external/openidauth?api_key<span class="o">=</span>YourApiKey <span class="se">\</span>
   <span class="nt">-H</span> <span class="s1">'Content-Type: application/x-www-form-urlencoded'</span> <span class="se">\ </span>
   <span class="nt">-H</span> <span class="s1">'Accept: application/json'</span> <span class="se">\</span>
-  <span class="nt">-d</span> <span class="s1">'id_token=eyJhbXciOiJIUzI1Lizs....'</span>
+  <span class="nt">-d</span> <span class="s1">'id_token=eyJhbXciOiJIUzI1Lizs....'</span> <span class="se">\</span>
+  <span class="nt">-d</span> <span class="s1">'monetization_account=false'</span>
 
 </code></pre></div><div class="highlight"><pre class="highlight http tab-http"><code><span class="nf">POST</span> <span class="nn">https://*.modapi.io/v1/external/openidauth?api_key=YourApiKey</span> <span class="k">HTTP</span><span class="o">/</span><span class="m">1.1</span>
 <span class="na">Host</span><span class="p">:</span> <span class="s">*.modapi.io</span>
@@ -4555,7 +4556,8 @@ curl <span class="nt">-X</span> POST https://<span class="k">*</span>.modapi.io/
 <span class="p">})</span>
 </code></pre></div><div class="highlight"><pre class="highlight javascript tab-javascript--nodejs"><code><span class="kd">const</span> <span class="nx">request</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="dl">'</span><span class="s1">node-fetch</span><span class="dl">'</span><span class="p">);</span>
 <span class="kd">const</span> <span class="nx">inputBody</span> <span class="o">=</span> <span class="dl">'</span><span class="s1">{
-  "id_token": "eyJhbXciOiJIUzI1Lizs...."
+  "id_token": "eyJhbXciOiJIUzI1Lizs....",
+  "monetization_account": false
 }</span><span class="dl">'</span><span class="p">;</span>
 <span class="kd">const</span> <span class="nx">headers</span> <span class="o">=</span> <span class="p">{</span>
   <span class="dl">'</span><span class="s1">Content-Type</span><span class="dl">'</span><span class="p">:</span><span class="dl">'</span><span class="s1">application/x-www-form-urlencoded</span><span class="dl">'</span><span class="p">,</span>
@@ -4603,7 +4605,7 @@ curl <span class="nt">-X</span> POST https://<span class="k">*</span>.modapi.io/
 
 <p>Request an access token on behalf of an OpenID identity provider. To use this method of authentication, you must configure the OpenID config in your game's authentication admin page. A Successful request will return an <a href="#access-token-object">Access Token Object</a>.</p>
 
-<p><strong>NOTE:</strong> The ability to authenticate players using your identity provider is a feature for advanced partners only. If you are interested in becoming an advanced partner, please <a href="mailto:developers@mod.io?subject=OpenID%20SSO%20Request">contact us</a>.</p>
+<p><strong>NOTE:</strong> The ability to authenticate players using your identity provider is a premium feature. If you are interested in mod.io premium features, please <a href="mailto:developers@mod.io?subject=OpenID%20SSO%20Request">contact us</a>.</p>
 
 <table>
 <thead>
@@ -4638,6 +4640,12 @@ curl <span class="nt">-X</span> POST https://<span class="k">*</span>.modapi.io/
 <td>boolean</td>
 <td></td>
 <td>This MUST be set to <code>false</code> unless you have collected the <a href="#terms">users agreement</a> prior to calling this endpoint in which case it can be set to <code>true</code> and will be recorded.<br><br><strong>NOTE:</strong> If this is set to <code>false</code> and the user has not agreed to the latest mod.io Terms of Use and Privacy Policy, an error <code>403 Forbidden (error_ref 11074)</code> will be returned and you will need to collect the <a href="#terms">users agreement</a> and retry with this value set to <code>true</code> to authenticate the user.</td>
+</tr>
+<tr>
+<td>monetization_account</td>
+<td>boolean</td>
+<td>false</td>
+<td>Automatically setup this user for monetization.</td>
 </tr>
 </tbody>
 </table>
@@ -8356,7 +8364,7 @@ curl <span class="nt">-X</span> POST https://<span class="k">*</span>.modapi.io/
 <tr>
 <td>price</td>
 <td>int</td>
-<td>true</td>
+<td></td>
 <td>The price of the mod.<br><br><strong>NOTE:</strong> The value of this field will be ignored if the parent game's queue is enabled (see <code>curation_option</code> field in <a href="#game-object">Game Object</a>).</td>
 </tr>
 <tr>
@@ -8746,7 +8754,7 @@ curl <span class="nt">-X</span> POST https://<span class="k">*</span>.modapi.io/
 <tr>
 <td>price</td>
 <td>int</td>
-<td>true</td>
+<td></td>
 <td>The price of the mod.<br><br><strong>NOTE:</strong> The value of this field will be ignored if the parent game's queue is enabled (see <code>curation_option</code> field in <a href="#game-object">Game Object</a>).</td>
 </tr>
 <tr>
@@ -9063,7 +9071,7 @@ Content-Type: application/x-www-form-urlencoded
 </code></pre></div>
 <p><span class="httpmethod DELETE">DELETE</span> <span class="endpointheading">/games/{game-id}/mods/{mod-id}</span></p>
 
-<p>Delete a mod profile. Successful request will return <code>204 No Content</code> and fire a <strong>MOD_UNAVAILABLE</strong> event.<br><br><strong>NOTE:</strong> This will close the mod profile which means it cannot be viewed or retrieved via API requests but will still exist in-case you choose to restore it at a later date. If you wish to permanently delete a mod you have access rights to, you must do it via the <a href="https://mod.io/library">mods profile page</a> on the mod.io website.</p>
+<p>Delete a mod profile. Successful request will return <code>204 No Content</code> and fire a <strong>MOD_UNAVAILABLE</strong> event.<br><br><strong>NOTE:</strong> This will close the mod profile which means it cannot be viewed or retrieved via API requests but will still exist in-case you choose to restore it at a later date. If you wish to permanently delete a mod you have access rights to, you must do it via the <a href="https://mod.io/content">mods profile page</a> on the mod.io website.</p>
 
 <blockquote>
 <p>Example response</p>
@@ -13694,7 +13702,7 @@ curl <span class="nt">-X</span> POST https://<span class="k">*</span>.modapi.io/
 
 <p>Upload new media to a game. The request <code>Content-Type</code> header <strong>must</strong> be <code>multipart/form-data</code> to submit image files. Any request you make to this endpoint <em>should</em> contain a binary file for each of the fields you want to update below. Successful request will return <a href="#message-object">Message Object</a>.</p>
 
-<p><strong>NOTE:</strong> You can also add media to <a href="https://mod.io/library">your games profile</a> on the mod.io website. This is the recommended approach.</p>
+<p><strong>NOTE:</strong> You can also add media to <a href="https://mod.io/content">your game's profile</a> on the mod.io website. This is the recommended approach.</p>
 
 <table>
 <thead>
@@ -13858,7 +13866,7 @@ curl <span class="nt">-X</span> POST https://<span class="k">*</span>.modapi.io/
 
 <p>This endpoint is very flexible and will add any images posted to the mods gallery regardless of their body name providing they are a valid image. The request <code>Content-Type</code> header <strong>must</strong> be <code>multipart/form-data</code> to submit image files. Successful request will return a <a href="#message-object">Message Object</a>.</p>
 
-<p><strong>NOTE:</strong> You can also add media to <a href="https://mod.io/library">your mods profile</a> on the mod.io website. This is the easiest way.</p>
+<p><strong>NOTE:</strong> You can also add media to <a href="https://mod.io/content">your mod's profile</a> on the mod.io website. This is the easiest way.</p>
 
 <table>
 <thead>
@@ -14050,7 +14058,7 @@ curl <span class="nt">-X</span> DELETE https://<span class="k">*</span>.modapi.i
 
 <p>Delete images, sketchfab or youtube links from a mod profile. Successful request will return <code>204 No Content</code>.</p>
 
-<p><strong>NOTE:</strong> You can also delete media from <a href="https://mod.io/library">your mods profile</a> on the mod.io website. This is the easiest way.</p>
+<p><strong>NOTE:</strong> You can also delete media from <a href="https://mod.io/content">your mod's profile</a> on the mod.io website. This is the easiest way.</p>
 
 <table>
 <thead>
@@ -17132,7 +17140,7 @@ curl <span class="nt">-X</span> POST https://<span class="k">*</span>.modapi.io/
 
 <p>For example to report a mod with an ID of 1 the URL would be: <a href="https://mod.io/report/mods/1/widget" class="colorbox">https://mod.io/report/<code>mods</code>/<code>1</code>/widget</a>. If you don't know the ID of the resource you wish to report, you can use the generic report URL: <a href="https://mod.io/report">https://mod.io/report/widget</a></p>
 
-<p><strong>NOTE:</strong> If you are a game owner or manager, you can <a href="https://mod.io/library">view all reports</a> submitted for your game(s), and you are responsible for actioning reports. You can also configure in your games control panel the number of reports required before content is automatically taken down for review.</p>
+<p><strong>NOTE:</strong> If you are a game owner or manager, you can <a href="https://mod.io/content">view all reports</a> submitted for your game(s), and you are responsible for actioning reports. You can also configure in your game's control panel the number of reports required before content is automatically taken down for review.</p>
 
 <p>Read our <a href="https://mod.io/terms/widget" class="colorbox">Terms of Use</a> for information about what is/isn't acceptable.</p>
 
@@ -22134,7 +22142,8 @@ curl <span class="nt">-X</span> POST https://<span class="k">*</span>.modapi.io/
   <span class="nt">-d</span> <span class="s1">'transaction_id=undefined'</span> <span class="se">\</span>
   <span class="nt">-d</span> <span class="s1">'gateway_uuid=undefined'</span> <span class="se">\</span>
   <span class="nt">-d</span> <span class="s1">'portal=undefined'</span> <span class="se">\</span>
-  <span class="nt">-d</span> <span class="s1">'refund_reason=undefined'</span>
+  <span class="nt">-d</span> <span class="s1">'refund_reason=undefined'</span> <span class="se">\</span>
+  <span class="nt">-d</span> <span class="s1">'clawback_uuid=undefined'</span>
 
 </code></pre></div><div class="highlight"><pre class="highlight http tab-http"><code><span class="nf">POST</span> <span class="nn">https://*.modapi.io/v1/s2s/transactions/clawback</span> <span class="k">HTTP</span><span class="o">/</span><span class="m">1.1</span>
 <span class="na">Host</span><span class="p">:</span> <span class="s">*.modapi.io</span>
@@ -22165,7 +22174,8 @@ curl <span class="nt">-X</span> POST https://<span class="k">*</span>.modapi.io/
   "transaction_id": 0,
   "gateway_uuid": 0,
   "portal": "string",
-  "refund_reason": "string"
+  "refund_reason": "string",
+  "clawback_uuid": "string"
 }</span><span class="dl">'</span><span class="p">;</span>
 <span class="kd">const</span> <span class="nx">headers</span> <span class="o">=</span> <span class="p">{</span>
   <span class="dl">'</span><span class="s1">Authorization</span><span class="dl">'</span><span class="p">:</span><span class="dl">'</span><span class="s1">Bearer {access-token}</span><span class="dl">'</span><span class="p">,</span>
@@ -22250,6 +22260,12 @@ curl <span class="nt">-X</span> POST https://<span class="k">*</span>.modapi.io/
 <td>string</td>
 <td>true</td>
 <td>The reason for the refund.</td>
+</tr>
+<tr>
+<td>clawback_uuid</td>
+<td>string</td>
+<td>false</td>
+<td>An optional mapping alpha dash string that can be used to group this transaction against other transactions. When a deficit clawback transaction occurs, this clawback id will be set on subsequent clawbacks.</td>
 </tr>
 </tbody>
 </table>
@@ -22377,7 +22393,7 @@ Content-Type: application/json
 <span class="n">in</span><span class="o">.</span><span class="na">close</span><span class="o">();</span>
 <span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="n">response</span><span class="o">.</span><span class="na">toString</span><span class="o">());</span>
 </code></pre></div>
-<p><span class="httpmethod DELETE">DELETE</span> <span class="endpointheading">/s2s/connections/{portal-id}</span></p>
+<p><span class="httpmethod DELETE">DELETE</span> <span class="endpointheading">//s2s/connections/{portal-id}</span></p>
 
 <p>Disconnect a mod.io user from a linked studio user. This will completely remove the SSO connection between the mod.io user and the external user.</p>
 
