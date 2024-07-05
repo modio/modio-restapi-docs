@@ -21,7 +21,7 @@ headingLevel: '2'
 
 ## mod.io API v1
 
-Welcome to the official documentation for [mod.io](https://mod.io), an API for developers to add mod support to their games. Using our [SDKs and plugins](#implementation) for popular and custom game engines, getting your creator community started and making the mods they create discoverable and installable via your in-game menu is straight forward, with full cross-platform support. If you are a game developer, you can manage your games and API access via your [mod.io library dashboard](https://mod.io/library). If you are a user creating tools and apps, you can request API access via your [mod.io account](https://mod.io/me/access).
+Welcome to the official documentation for [mod.io](https://mod.io), an API for developers to add mod support to their games. Using our [SDKs and plugins](#implementation) for popular and custom game engines, getting your creator community started and making the mods they create discoverable and installable via your in-game menu is straight forward, with full cross-platform support. If you are a game developer, you can manage your games and API access via your [mod.io content dashboard](https://mod.io/content). If you are a user creating tools and apps, you can request API access via your [mod.io account](https://mod.io/me/access).
 
 __API path:__ [https://*.modapi.io/v1](https://*.modapi.io/v1) (see your API access dashboard)
 
@@ -37,7 +37,7 @@ Compatible with all builds of your game on all platforms and stores, mod.io is a
 
 ## Implementation
 
-Once you have added your game to mod.io and got your [game ID and API key](https://mod.io/library), you can start integrating the mod.io REST API into your game, tools and sites. There are 3 options to get connected which you can use interchangeably depending on your needs. Here's the breakdown of each option.
+Once you have added your game to mod.io and got your [game ID and API key](https://mod.io/content), you can start integrating the mod.io REST API into your game, tools and sites. There are 3 options to get connected which you can use interchangeably depending on your needs. Here's the breakdown of each option.
 
 Option | Usage | Suited for | Docs
 ---------- | ---------- | ---------- | ---------
@@ -2344,7 +2344,8 @@ To perform this request, you must be authenticated via one of the following meth
 curl -X POST https://*.modapi.io/v1/external/openidauth?api_key=YourApiKey \
   -H 'Content-Type: application/x-www-form-urlencoded' \ 
   -H 'Accept: application/json' \
-  -d 'id_token=eyJhbXciOiJIUzI1Lizs....'
+  -d 'id_token=eyJhbXciOiJIUzI1Lizs....' \
+  -d 'monetization_account=false'
 
 ```
 
@@ -2377,7 +2378,8 @@ $.ajax({
 ```javascript--nodejs
 const request = require('node-fetch');
 const inputBody = '{
-  "id_token": "eyJhbXciOiJIUzI1Lizs...."
+  "id_token": "eyJhbXciOiJIUzI1Lizs....",
+  "monetization_account": false
 }';
 const headers = {
   'Content-Type':'application/x-www-form-urlencoded',
@@ -2432,7 +2434,7 @@ System.out.println(response.toString());
 
 Request an access token on behalf of an OpenID identity provider. To use this method of authentication, you must configure the OpenID config in your game's authentication admin page. A Successful request will return an [Access Token Object](#access-token-object).
 
-     __NOTE:__ The ability to authenticate players using your identity provider is a feature for advanced partners only. If you are interested in becoming an advanced partner, please [contact us](mailto:developers@mod.io?subject=OpenID SSO Request).
+     __NOTE:__ The ability to authenticate players using your identity provider is a premium feature. If you are interested in mod.io premium features, please [contact us](mailto:developers@mod.io?subject=OpenID SSO Request).
 
      Parameter|Type|Required|Description
      ---|---|---|---|
@@ -2440,6 +2442,7 @@ Request an access token on behalf of an OpenID identity provider. To use this me
      email|string||The users email address (optional but recommended to help users recover lost accounts). If supplied, and the respective user does not have an email registered for their account we will send a confirmation email to confirm they have ownership of the specified email.<br><br>__NOTE__: If the user already has an email on record with us, this parameter will be ignored. This parameter should also be urlencoded before the request is sent.
      date_expires|integer||Unix timestamp of date in which the returned token will expire. Value cannot be higher than the default value which is a week (unix timestamp + 604800 seconds). Using a token after it's expiry time has elapsed will result in a `401 Unauthorized` response.
      terms_agreed|boolean||This MUST be set to `false` unless you have collected the [users agreement](#terms) prior to calling this endpoint in which case it can be set to `true` and will be recorded.<br><br>__NOTE:__ If this is set to `false` and the user has not agreed to the latest mod.io Terms of Use and Privacy Policy, an error `403 Forbidden (error_ref 11074)` will be returned and you will need to collect the [users agreement](#terms) and retry with this value set to `true` to authenticate the user.
+     monetization_account|boolean|false|Automatically setup this user for monetization.
 
 > Example response
 
@@ -5407,7 +5410,7 @@ Add a mod. Successful request will return the newly created [Mod Object](#mod-ob
     visible|integer||Visibility of the mod (best if this field is controlled by mod admins, see [status and visibility](#status-amp-visibility) for details):<br><br>__0__ = Hidden<br>__1__ = Public _(default)_
     description|string||Detailed description for your mod, which can include details such as 'About', 'Features', 'Install Instructions', 'FAQ', etc. HTML supported and encouraged.
     homepage_url|string||Official homepage for your mod. Must be a valid URL.
-    price|int|true|The price of the mod.<br><br>__NOTE:__ The value of this field will be ignored if the parent game's queue is enabled (see `curation_option` field in [Game Object](#game-object)).
+    price|int||The price of the mod.<br><br>__NOTE:__ The value of this field will be ignored if the parent game's queue is enabled (see `curation_option` field in [Game Object](#game-object)).
     stock|integer||Maximum number of times this mod can be sold. <br><br>__NOTE:__ Limited mods can be enforced by the parent game. The value of this field is not used if the parent game's or mod's limited support is disabled (see `monetization_options` field in [Game Object](#game-object)).
     maturity_option|integer||Mature content found in this mod.<br><br>__NOTE:__ The value of this field will default to 0 unless the parent game allows you to flag mature content (see `maturity_options` field in [Game Object](#game-object)). <br><br>__0__ = None _(default)_<br>__1__ = Alcohol<br>__2__ = Drugs<br>__4__ = Violence<br>__8__ = Explicit<br>__?__ = Add the options you want together, to enable multiple options (see [BITWISE fields](#bitwise-and-bitwise-and))
     community_options|integer||Community features enabled for this mod:<br><br>__0__ = All the options below are disabled<br>__1__ = Enable comments<br>__64__ = Enable previews<br>__128__ = Enable preview URLs<br>__1024__ = Allow dependencies<br>__?__ = Add the options you want together, to enable multiple options (see [BITWISE fields](#bitwise-and-bitwise-and))
@@ -5689,7 +5692,7 @@ Edit details for a mod. If you want to update the `logo` or media associated wit
     summary|string||Summary for your mod, giving a brief overview of what it's about. Cannot exceed 250 characters.
     description|string||Detailed description for your mod, which can include details such as 'About', 'Features', 'Install Instructions', 'FAQ', etc. HTML supported and encouraged.
     homepage_url|string||Official homepage for your mod. Must be a valid URL.
-    price|int|true|The price of the mod.<br><br>__NOTE:__ The value of this field will be ignored if the parent game's queue is enabled (see `curation_option` field in [Game Object](#game-object)).
+    price|int||The price of the mod.<br><br>__NOTE:__ The value of this field will be ignored if the parent game's queue is enabled (see `curation_option` field in [Game Object](#game-object)).
     stock|integer||Maximum number of times this mod can be sold. <br><br>__NOTE:__ Limited mods can be enforced by the parent game. The value of this field is not used if the parent game's or mod's limited support is disabled (see `monetization_options` field in [Game Object](#game-object)).
     monetization_options|integer||Monetization options enabled for this mod:<br><br>__0__ = Access to monetization features disabled<br>__1__ = Access to monetization features enabled by the game for this mod<br>__2__ = Marketplace enabled<br>__8__ = Quantity of this mod is limited<br>__?__ = Add the options you want together, to enable multiple features (see [BITWISE fields](#bitwise-and-bitwise-and))
     maturity_option|integer||Mature content found in this mod.<br><br>__NOTE:__ The value of this field will default to 0 unless the parent game allows you to flag mature content (see `maturity_options` field in [Game Object](#game-object)). <br><br>__0__ = None set<br>__1__ = Alcohol<br>__2__ = Drugs<br>__4__ = Violence<br>__8__ = Explicit<br>__?__ = Add the options you want together, to enable multiple options (see [BITWISE fields](#bitwise-and-bitwise-and))
@@ -5941,7 +5944,7 @@ System.out.println(response.toString());
 
 `DELETE /games/{game-id}/mods/{mod-id}`
 
-Delete a mod profile. Successful request will return `204 No Content` and fire a __MOD_UNAVAILABLE__ event.<br><br>__NOTE:__ This will close the mod profile which means it cannot be viewed or retrieved via API requests but will still exist in-case you choose to restore it at a later date. If you wish to permanently delete a mod you have access rights to, you must do it via the [mods profile page](https://mod.io/library) on the mod.io website.
+Delete a mod profile. Successful request will return `204 No Content` and fire a __MOD_UNAVAILABLE__ event.<br><br>__NOTE:__ This will close the mod profile which means it cannot be viewed or retrieved via API requests but will still exist in-case you choose to restore it at a later date. If you wish to permanently delete a mod you have access rights to, you must do it via the [mods profile page](https://mod.io/content) on the mod.io website.
 
 > Example response
 
@@ -9935,7 +9938,7 @@ System.out.println(response.toString());
 
 Upload new media to a game. The request `Content-Type` header __must__ be `multipart/form-data` to submit image files. Any request you make to this endpoint *should* contain a binary file for each of the fields you want to update below. Successful request will return [Message Object](#message-object).
 
-    __NOTE:__ You can also add media to [your games profile](https://mod.io/library) on the mod.io website. This is the recommended approach.
+    __NOTE:__ You can also add media to [your game's profile](https://mod.io/content) on the mod.io website. This is the recommended approach.
 
     Parameter|Type|Required|Description
     ---|---|---|---|
@@ -10073,7 +10076,7 @@ System.out.println(response.toString());
 
 This endpoint is very flexible and will add any images posted to the mods gallery regardless of their body name providing they are a valid image. The request `Content-Type` header __must__ be `multipart/form-data` to submit image files. Successful request will return a [Message Object](#message-object).
 
-    __NOTE:__ You can also add media to [your mods profile](https://mod.io/library) on the mod.io website. This is the easiest way.
+    __NOTE:__ You can also add media to [your mod's profile](https://mod.io/content) on the mod.io website. This is the easiest way.
 
     Parameter|Type|Required|Description
     ---|---|---|---|
@@ -10213,7 +10216,7 @@ System.out.println(response.toString());
 
 Delete images, sketchfab or youtube links from a mod profile. Successful request will return `204 No Content`.
 
-    __NOTE:__ You can also delete media from [your mods profile](https://mod.io/library) on the mod.io website. This is the easiest way.
+    __NOTE:__ You can also delete media from [your mod's profile](https://mod.io/content) on the mod.io website. This is the easiest way.
 
     Parameter|Type|Required|Description
     ---|---|---|---|
@@ -12870,7 +12873,7 @@ The purpose of this endpoint is enable users to report a resource (game, mod or 
 
     For example to report a mod with an ID of 1 the URL would be: [https://mod.io/report/`mods`/`1`/widget](https://mod.io/report/mods/1/widget). If you don't know the ID of the resource you wish to report, you can use the generic report URL: [https://mod.io/report/widget](https://mod.io/report)
 
-    __NOTE:__ If you are a game owner or manager, you can [view all reports](https://mod.io/library) submitted for your game(s), and you are responsible for actioning reports. You can also configure in your games control panel the number of reports required before content is automatically taken down for review.
+    __NOTE:__ If you are a game owner or manager, you can [view all reports](https://mod.io/content) submitted for your game(s), and you are responsible for actioning reports. You can also configure in your game's control panel the number of reports required before content is automatically taken down for review.
 
     Read our [Terms of Use](https://mod.io/terms/widget) for information about what is/isn't acceptable.
 
@@ -16849,7 +16852,8 @@ curl -X POST https://*.modapi.io/v1/s2s/transactions/clawback \
   -d 'transaction_id=undefined' \
   -d 'gateway_uuid=undefined' \
   -d 'portal=undefined' \
-  -d 'refund_reason=undefined'
+  -d 'refund_reason=undefined' \
+  -d 'clawback_uuid=undefined'
 
 ```
 
@@ -16889,7 +16893,8 @@ const inputBody = '{
   "transaction_id": 0,
   "gateway_uuid": 0,
   "portal": "string",
-  "refund_reason": "string"
+  "refund_reason": "string",
+  "clawback_uuid": "string"
 }';
 const headers = {
   'Authorization':'Bearer {access-token}',
@@ -16954,6 +16959,7 @@ Create a service-to-service (S2S) transaction clawback. This is for unwinding a 
     gateway_uuid|string|false|The alpha dash on the transaction. Required if transaction_id is null.
     portal|string|true|The portal the transaction is tied to. Valid options are apple, google, xboxlive, psn and steam.
     refund_reason|string|true|The reason for the refund.
+    clawback_uuid|string|false|An optional mapping alpha dash string that can be used to group this transaction against other transactions. When a deficit clawback transaction occurs, this clawback id will be set on subsequent clawbacks.
 
 > Example response
 
@@ -17077,7 +17083,7 @@ in.close();
 System.out.println(response.toString());
 ```
 
-`DELETE /s2s/connections/{portal-id}`
+`DELETE //s2s/connections/{portal-id}`
 
 Disconnect a mod.io user from a linked studio user. This will completely remove the SSO connection between the mod.io user and the external user.
 
