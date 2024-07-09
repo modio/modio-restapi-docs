@@ -2434,7 +2434,7 @@ System.out.println(response.toString());
 
 Request an access token on behalf of an OpenID identity provider. To use this method of authentication, you must configure the OpenID config in your game's authentication admin page. A Successful request will return an [Access Token Object](#access-token-object).
 
-     __NOTE:__ The ability to authenticate players using your identity provider is a premium feature. If you are interested in mod.io premium features, please [contact us](mailto:developers@mod.io?subject=OpenID SSO Request).
+     __NOTE:__ The ability to authenticate players using your identity provider is a feature for advanced partners only. If you are interested in becoming an advanced partner, please [contact us](mailto:developers@mod.io?subject=OpenID SSO Request).
 
      Parameter|Type|Required|Description
      ---|---|---|---|
