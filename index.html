@@ -777,10 +777,10 @@
             <a href="#embeddable-mod-hub" class="toc-h1 toc-link" data-title="Embeddable Mod Hub"><span class="reficon"><img src="images/cog-white.svg" alt="Reference" class="menu-reference-icon"></span> Embeddable Mod Hub</a>
               <ul class="toc-list-h2">
                   <li>
-                    <a href="#get-game-emh-configs" class="toc-h2 toc-link" data-title="Embeddable Mod Hub">Get Game EMH Configs</a>
+                    <a href="#get-game-embeddable-mod-hub-configurations" class="toc-h2 toc-link" data-title="Embeddable Mod Hub">Get Game Embeddable Mod Hub Configurations</a>
                   </li>
                   <li>
-                    <a href="#get-game-emh-config" class="toc-h2 toc-link" data-title="Embeddable Mod Hub">Get Game EMH Config</a>
+                    <a href="#get-game-embeddable-mod-hub-config" class="toc-h2 toc-link" data-title="Embeddable Mod Hub">Get Game Embeddable Mod Hub Config</a>
                   </li>
               </ul>
           </li>
@@ -813,15 +813,13 @@
                   <li>
                     <a href="#s2s-transaction-clawback" class="toc-h2 toc-link" data-title="Service to Service">S2S Transaction Clawback</a>
                   </li>
+                  <li>
+                    <a href="#s2s-disconnect-user" class="toc-h2 toc-link" data-title="Service to Service">S2S Disconnect User</a>
+                  </li>
               </ul>
           </li>
           <li>
-            <a href="#server-to-server" class="toc-h1 toc-link" data-title="Server to Server"><span class="reficon"><img src="images/cog-white.svg" alt="Reference" class="menu-reference-icon"></span> Server to Server</a>
-              <ul class="toc-list-h2">
-                  <li>
-                    <a href="#s2s-disconnect-user" class="toc-h2 toc-link" data-title="Server to Server">S2S Disconnect User</a>
-                  </li>
-              </ul>
+            <a href="#in-app-purchases" class="toc-h1 toc-link" data-title="In-App Purchases"><span class="reficon"><img src="images/cog-white.svg" alt="Reference" class="menu-reference-icon"></span> In-App Purchases</a>
           </li>
           <li>
             <a href="#response-schemas" class="toc-h1 toc-link" data-title="Response Schemas"><span class="reficon"><img src="images/cog-blue.svg" alt="Reference" class="menu-reference-icon"></span> Response Schemas</a>
@@ -4607,7 +4605,7 @@ curl <span class="nt">-X</span> POST https://<span class="k">*</span>.modapi.io/
 
 <p>Request an access token on behalf of an OpenID identity provider. To use this method of authentication, you must configure the OpenID config in your game's authentication admin page. A Successful request will return an <a href="#access-token-object">Access Token Object</a>.</p>
 
-<p><strong>NOTE:</strong> The ability to authenticate players using your identity provider is a premium feature. If you are interested in accessing premium features via your games dashboard, please <a href="mailto:developers@mod.io?subject=OpenID%20SSO%20Request">contact us</a>.</p>
+<p><strong>NOTE:</strong> The ability to authenticate players using your identity provider is a premium feature. If you are interested in mod.io premium features, please <a href="mailto:developers@mod.io?subject=OpenID%20SSO%20Request">contact us</a>.</p>
 
 <table>
 <thead>
@@ -6487,7 +6485,7 @@ Accept: application/json
 </code></pre></div>
 <p><span class="httpmethod GET">GET</span> <span class="endpointheading">/games/{game-id}/guides</span></p>
 
-<p>Get all guides for a game. Successful request will return an array of <a href="#get-guides-2">Guide Objects</a>.</p>
+<p>Get all guides for a game. Successful request will return an array of <a href="#get-guides">Guide Objects</a>.</p>
 
 <table>
 <thead>
@@ -16769,7 +16767,7 @@ Accept: application/json
 </code></pre></div>
 <p><span class="httpmethod GET">GET</span> <span class="endpointheading">/games/{game-id}/mods/{mod-id}/dependants</span></p>
 
-<p>Get all mods depending on the given mod. Successful request will return an array of <a href="#get-mod-dependants-2">Mod Dependants Objects</a>.</p>
+<p>Get all mods depending on the given mod. Successful request will return an array of <a href="#get-mod-dependants">Mod Dependants Objects</a>.</p>
 
 <p><strong>NOTE:</strong> This endpoint returns all mod dependents, irrespective of their status, visibility or platform support.</p>
 
@@ -17334,7 +17332,7 @@ Accept: application/json
      <strong>4</strong> = API Access Terms - <a href="https://mod.io/apiterms">https://mod.io/apiterms</a><br>
      <strong>5</strong> = Monetization Terms - <a href="https://mod.io/monetizationterms">https://mod.io/monetizationterms</a><br>
      <strong>6</strong> = Acceptable Use Policy - <a href="https://mod.io/aup">https://mod.io/aup</a><br>
-     <strong>7</strong> = Cookies Policy - <a href="https://mod.io/cookies">https://mod.io/cookies</a><br>
+     <strong>7</strong> = Cookies Policy - <a href="https://mod.io/cookies">https://mod.io/cookies</a>
      <strong>8</strong> = Refund Policy - <a href="https://mod.io/refund">https://mod.io/refund</a></p>
 
 <p>There are three ways you can display mod.io agreements. Pick which is easiest and most suitable for your implementation.</p>
@@ -20036,7 +20034,7 @@ Authorization: Bearer {access-token}
 </code></pre></div>
 <p><span class="httpmethod GET">GET</span> <span class="endpointheading">/me/ratings</span></p>
 
-<p>Get all mod rating's submitted by the <em>authenticated user</em>. Successful request will return an array of <a href="#get-user-ratings-2">Rating Objects</a>.</p>
+<p>Get all mod rating's submitted by the <em>authenticated user</em>. Successful request will return an array of <a href="#get-user-ratings">Rating Objects</a>.</p>
 
 <table>
 <thead>
@@ -20567,7 +20565,7 @@ Accept: application/json
 <aside class="success">
 This operation does not require authentication
 </aside>
-<h1 id="embeddable-mod-hub">Embeddable Mod Hub</h1><h2 id="get-game-emh-configs">Get Game EMH Configs</h2>
+<h1 id="embeddable-mod-hub">Embeddable Mod Hub</h1><h2 id="get-game-embeddable-mod-hub-configurations">Get Game Embeddable Mod Hub Configurations</h2>
 <blockquote>
 <p>Example request</p>
 </blockquote>
@@ -20648,7 +20646,7 @@ Authorization: Bearer {access-token}
 </code></pre></div>
 <p><span class="httpmethod GET">GET</span> <span class="endpointheading">/games/{game-id}/emh</span></p>
 
-<p>Get a games Embeddable Mod Hub (EMH) config. This will return all of the configured EMH versions for this game. It returns a <a href="#game-emh-object">Game EMH Object</a>.</p>
+<p>Get a games EMH config. This will return all of the configured Embeddable Mod Hub versions for this game. It returns a <a href="#game-emh-object">Game EMH Object</a>.</p>
 
 <blockquote>
 <p>Example response</p>
@@ -20700,7 +20698,7 @@ Authorization: Bearer {access-token}
 </span><span class="p">}</span><span class="w">
 
 </span></code></pre></div>
-<h3 id="Get-Game-EMH-Configs-responses">Responses</h3>
+<h3 id="Get-Game-Embeddable-Mod-Hub-Configurations-responses">Responses</h3>
 
 <table>
 <thead>
@@ -20734,7 +20732,7 @@ Authorization: Bearer {access-token}
 To perform this request, you must be authenticated via one of the following methods:
 <a href="#authentication">OAuth 2</a> (Scopes: web)
 </aside>
-<h2 id="get-game-emh-config">Get Game EMH Config</h2>
+<h2 id="get-game-embeddable-mod-hub-config">Get Game Embeddable Mod Hub Config</h2>
 <blockquote>
 <p>Example request</p>
 </blockquote>
@@ -20815,7 +20813,7 @@ Authorization: Bearer {access-token}
 </code></pre></div>
 <p><span class="httpmethod GET">GET</span> <span class="endpointheading">/games/{game-id}/emh/{emh-id}</span></p>
 
-<p>Get a games Embeddable Mod Hub (EMH) config. This will return all of the configured EMH versions for this game. It returns a <a href="#game-emh-object">Game EMH Object</a>.</p>
+<p>Get a games EMH config. This will return all of the configured Embeddable Mod Hub versions for this game. It returns a <a href="#game-emh-object">Game EMH Object</a>.</p>
 
 <blockquote>
 <p>Example response</p>
@@ -20856,7 +20854,7 @@ Authorization: Bearer {access-token}
 </span><span class="p">}</span><span class="w">
 
 </span></code></pre></div>
-<h3 id="Get-Game-EMH-Config-responses">Responses</h3>
+<h3 id="Get-Game-Embeddable-Mod-Hub-Config-responses">Responses</h3>
 
 <table>
 <thead>
@@ -21890,7 +21888,7 @@ curl <span class="nt">-X</span> POST https://<span class="k">*</span>.modapi.io/
 <span class="n">in</span><span class="o">.</span><span class="na">close</span><span class="o">();</span>
 <span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="n">response</span><span class="o">.</span><span class="na">toString</span><span class="o">());</span>
 </code></pre></div>
-<p><span class="httpmethod POST">POST</span> <span class="endpointheading">/s2s/transactions/intent</span></p>
+<p><span class="httpmethod POST">POST</span> <span class="endpointheading">//s2s/transactions/intent</span></p>
 
 <p>Create a service-to-service (S2S) transaction intent. This is for performing an external token transaction. You should generate the intent, consume the item on your server's backend before committing the transaction. A successful request will return a <a href="#s2s-pay-object">S2S Pay Object</a> object. Requires scope of monetization on token.</p>
 
@@ -22060,7 +22058,7 @@ curl <span class="nt">-X</span> POST https://<span class="k">*</span>.modapi.io/
 <span class="n">in</span><span class="o">.</span><span class="na">close</span><span class="o">();</span>
 <span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="n">response</span><span class="o">.</span><span class="na">toString</span><span class="o">());</span>
 </code></pre></div>
-<p><span class="httpmethod POST">POST</span> <span class="endpointheading">/s2s/transactions/commit</span></p>
+<p><span class="httpmethod POST">POST</span> <span class="endpointheading">//s2s/transactions/commit</span></p>
 
 <p>Create a service-to-service (S2S) transaction commit. This is for performing an external token transaction. This step finalizes the transaction and will issue tokens to the user associated to it. A successful request will return a <a href="#s2s-pay-object">S2S Pay Object</a> object. Requires scope of monetization on token.</p>
 
@@ -22225,7 +22223,7 @@ curl <span class="nt">-X</span> POST https://<span class="k">*</span>.modapi.io/
 <span class="n">in</span><span class="o">.</span><span class="na">close</span><span class="o">();</span>
 <span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="n">response</span><span class="o">.</span><span class="na">toString</span><span class="o">());</span>
 </code></pre></div>
-<p><span class="httpmethod POST">POST</span> <span class="endpointheading">/s2s/transactions/clawback</span></p>
+<p><span class="httpmethod POST">POST</span> <span class="endpointheading">//s2s/transactions/clawback</span></p>
 
 <p>Create a service-to-service (S2S) transaction clawback. This is for unwinding a token transaction. You may use the transaction_id or the gateway_uuid from the previous calls. A successful request will return a <a href="#refund-object">Refund Object</a> object. Requires scope of monetization on token.</p>
 
@@ -22316,7 +22314,7 @@ curl <span class="nt">-X</span> POST https://<span class="k">*</span>.modapi.io/
 To perform this request, you must be authenticated via one of the following methods:
 <a href="#authentication">OAuth 2</a> (Scopes: write)
 </aside>
-<h1 id="server-to-server">Server to Server</h1><h2 id="s2s-disconnect-user">S2S Disconnect User</h2>
+<h2 id="s2s-disconnect-user">S2S Disconnect User</h2>
 <blockquote>
 <p>Example request</p>
 </blockquote>
@@ -22395,7 +22393,7 @@ Content-Type: application/json
 <span class="n">in</span><span class="o">.</span><span class="na">close</span><span class="o">();</span>
 <span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="n">response</span><span class="o">.</span><span class="na">toString</span><span class="o">());</span>
 </code></pre></div>
-<p><span class="httpmethod DELETE">DELETE</span> <span class="endpointheading">/s2s/connections/{portal-id}</span></p>
+<p><span class="httpmethod DELETE">DELETE</span> <span class="endpointheading">//s2s/connections/{portal-id}</span></p>
 
 <p>Disconnect a mod.io user from a linked studio user. This will completely remove the SSO connection between the mod.io user and the external user.</p>
 
@@ -22432,7 +22430,7 @@ Content-Type: application/json
 To perform this request, you must be authenticated via one of the following methods:
 <a href="#authentication">OAuth 2</a> (Scopes: write)
 </aside>
-<h1 id="response-schemas">Response Schemas</h1><h2 id="access-token-object">Access Token Object</h2>
+<h1 id="in-app-purchases">In-App Purchases</h1><h1 id="response-schemas">Response Schemas</h1><h2 id="access-token-object">Access Token Object</h2>
 <p><a name="schemaaccess_token_object"></a></p>
 <div class="highlight"><pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
   </span><span class="nl">"code"</span><span class="p">:</span><span class="w"> </span><span class="mi">200</span><span class="p">,</span><span class="w">
