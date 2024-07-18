@@ -481,6 +481,24 @@ Sort by a column, in ascending or descending order.
 
 --parse_sitename has powerful filtering available to assist you when making requests to the API. You can filter on all columns __in the parent object only__. You cannot apply filters to columns in nested objects, so if a game contains a tags object you cannot filter by the `tag name` column, but you can filter by the games `name` since the games `name` resides in the parent object.
 
+### or_fields (Filter grouping)
+
+By default, multiple filters are combined using an "AND" operation. However, with or_fields, you can group filters together to be combined using an "OR" operation.
+
+For example, if you want to find all mods that have been approved but also include mods from a particular user regardless of their state, you can achieve this with the following query parameters:
+
+```
+--parse_version/games/your-game/mods?status=1&submitted_by=123&or_fields[]=status,submitted_by
+```
+
+This would be interpreted as "Fetch all mods where status = 1 **OR** submitted_by = 123". Without the `or_fields` parameter, it would be treated as AND.
+
+A few things to note:
+
+* The `or_fields` parameter must be provided as an array.
+* A maximum of --parse_maxorgroups `or_fields` can be present in a query at any time.
+* A maximum of --parse_maxorfieldspergroup fields per `or_fields`.
+
 ### _q (Full text search)
 
 ```
