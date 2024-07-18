@@ -15706,10 +15706,15 @@ Get a games Embeddable Mod Hub (EMH) config. This will return all of the configu
       "show_guides": true,
       "show_user_avatars": true,
       "show_sort_tabs": true,
+      "allow_links": true,
       "results_per_page": 0,
       "min_age": 0,
       "date_added": 0,
-      "date_updated": 0
+      "date_updated": 0,
+      "company_name": "string",
+      "agreement_urls": [
+        {}
+      ]
     },
     {
         ...
@@ -15864,10 +15869,15 @@ Get a games Embeddable Mod Hub (EMH) config. This will return all of the configu
   "show_guides": true,
   "show_user_avatars": true,
   "show_sort_tabs": true,
+  "allow_links": true,
   "results_per_page": 0,
   "min_age": 0,
   "date_added": 0,
-  "date_updated": 0
+  "date_updated": 0,
+  "company_name": "string",
+  "agreement_urls": [
+    {}
+  ]
 }
 
 ```
@@ -17335,10 +17345,15 @@ date_expires|integer|Unix timestamp of when the `binary_url` will expire.
   "show_guides": true,
   "show_user_avatars": true,
   "show_sort_tabs": true,
+  "allow_links": true,
   "results_per_page": 0,
   "min_age": 0,
   "date_added": 0,
-  "date_updated": 0
+  "date_updated": 0,
+  "company_name": "string",
+  "agreement_urls": [
+    {}
+  ]
 } 
 ```
 
@@ -17371,11 +17386,14 @@ show_comments|boolean|Flag to show comments.
 show_guides|boolean|Flag to show guides.
 show_user_avatars|boolean|Flag to show user avatars.
 show_sort_tabs|boolean|Flag to show sort tabs.
+allow_links|boolean|Flag to allow user submitted links.
 results_per_page|integer|Number of results to show per page.
 min_age|integer|Minimum age for EMH access.
 date_added|integer|Timestamp indicating the date when the configuration was added.
 date_updated|integer|Timestamp indicating the date when the configuration was last updated.
+company_name|string|The company name used for EMH agreements.
 urls|string[]|An array of URLs that may access this EMH configuration.
+agreement_urls|object[]|The configured agreement names and urls used for the EMH.
 
 
 
@@ -17930,10 +17948,15 @@ date_added|integer|Unix timestamp of the date the user was registered as a previ
       "show_guides": true,
       "show_user_avatars": true,
       "show_sort_tabs": true,
+      "allow_links": true,
       "results_per_page": 0,
       "min_age": 0,
       "date_added": 0,
-      "date_updated": 0
+      "date_updated": 0,
+      "company_name": "string",
+      "agreement_urls": [
+        {}
+      ]
     },
     {
         ...
