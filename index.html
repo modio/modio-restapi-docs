@@ -4848,10 +4848,10 @@ curl <span class="nt">-X</span> POST https://<span class="k">*</span>.modapi.io/
 <td>Must be <code>client_credentials</code>.</td>
 </tr>
 <tr>
-<td>scopes</td>
+<td>scope</td>
 <td>string</td>
 <td>false</td>
-<td>The scopes you wish your token to have. Currently only, read, write, and monetization is supported.</td>
+<td>Specify the comma-separated scopes you wish your token to have. Currently, only read, write, update, and monetization are supported. The update scope will elevate the token's authorization, allowing it to edit mods while acting as the game's leader.</td>
 </tr>
 </tbody>
 </table>
@@ -4863,7 +4863,7 @@ curl <span class="nt">-X</span> POST https://<span class="k">*</span>.modapi.io/
   </span><span class="nl">"token_type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Bearer"</span><span class="p">,</span><span class="w">
   </span><span class="nl">"expires_in"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2592000"</span><span class="p">,</span><span class="w">
   </span><span class="nl">"access_token"</span><span class="p">:</span><span class="w"> </span><span class="s2">"eyJlbmMiOiJBMTI4Q0JDLUhTMjU2IiwiYWxnIjoiUlNBLU9BRVAiLCJjdHkiOi...."</span><span class="p">,</span><span class="w">
-  </span><span class="nl">"scopes"</span><span class="p">:</span><span class="w"> </span><span class="s2">"read,write"</span><span class="w">
+  </span><span class="nl">"scope"</span><span class="p">:</span><span class="w"> </span><span class="s2">"read,write"</span><span class="w">
 </span><span class="p">}</span><span class="w">
 
 </span></code></pre></div>
@@ -22609,7 +22609,7 @@ To perform this request, you must be authenticated via one of the following meth
   </span><span class="nl">"token_type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Bearer"</span><span class="p">,</span><span class="w">
   </span><span class="nl">"expires_in"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2592000"</span><span class="p">,</span><span class="w">
   </span><span class="nl">"access_token"</span><span class="p">:</span><span class="w"> </span><span class="s2">"eyJlbmMiOiJBMTI4Q0JDLUhTMjU2IiwiYWxnIjoiUlNBLU9BRVAiLCJjdHkiOi...."</span><span class="p">,</span><span class="w">
-  </span><span class="nl">"scopes"</span><span class="p">:</span><span class="w"> </span><span class="s2">"read,write"</span><span class="w">
+  </span><span class="nl">"scope"</span><span class="p">:</span><span class="w"> </span><span class="s2">"read,write"</span><span class="w">
 </span><span class="p">}</span><span class="w"> 
 </span></code></pre></div><h3 id="properties-4">Properties</h3>
 <table>
@@ -22637,7 +22637,7 @@ To perform this request, you must be authenticated via one of the following meth
 <td>The access token used to make requests to the mod.io API on behalf of the user.</td>
 </tr>
 <tr>
-<td>scopes</td>
+<td>scope</td>
 <td>string</td>
 <td>The scopes the of the token that have been set.</td>
 </tr>
