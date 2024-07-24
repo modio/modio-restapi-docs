@@ -2578,7 +2578,7 @@ Exchange `client_id` and `client_secret` for an access token. Successful request
      client_id|integer|true|Client ID issued to your game.
      client_secret|string|true|Client Secret issued to your game. This should be secure on a backend server and never displayed to players.
      grant_type|string|true|Must be `client_credentials`.
-     scopes|string|false|The scopes you wish your token to have. Currently only, read, write, and monetization is supported.
+     scope|string|false|Specify the comma-separated scopes you wish your token to have. Currently, only read, write, update, and monetization are supported. The update scope will elevate the token's authorization, allowing it to edit mods while acting as the game's leader.
 
 > Example response
 
@@ -2587,7 +2587,7 @@ Exchange `client_id` and `client_secret` for an access token. Successful request
   "token_type": "Bearer",
   "expires_in": "2592000",
   "access_token": "eyJlbmMiOiJBMTI4Q0JDLUhTMjU2IiwiYWxnIjoiUlNBLU9BRVAiLCJjdHkiOi....",
-  "scopes": "read,write"
+  "scope": "read,write"
 }
 
 ```
@@ -17220,7 +17220,7 @@ thumb_100x100|string|URL to the medium avatar thumbnail.
   "token_type": "Bearer",
   "expires_in": "2592000",
   "access_token": "eyJlbmMiOiJBMTI4Q0JDLUhTMjU2IiwiYWxnIjoiUlNBLU9BRVAiLCJjdHkiOi....",
-  "scopes": "read,write"
+  "scope": "read,write"
 } 
 ```
 
@@ -17231,7 +17231,7 @@ Name|Type|Description
 token_type|string|Token type, always `Bearer`.
 expires_in|int|Seconds until the supplied `access_token` expires which is fixed at `2592000` seconds (approx 1 month).
 access_token|string|The access token used to make requests to the mod.io API on behalf of the user.
-scopes|string|The scopes the of the token that have been set.
+scope|string|The scopes the of the token that have been set.
 
 
 
