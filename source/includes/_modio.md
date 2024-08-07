@@ -485,13 +485,13 @@ Sort by a column, in ascending or descending order.
 
 By default, multiple filters are combined using an "AND" operation. However, with or_fields, you can group filters together to be combined using an "OR" operation.
 
-For example, if you want to find all mods that have been approved but also include mods from a particular user regardless of their state, you can achieve this with the following query parameters:
+For example, if you want to find all mods that have been tagged with "Level" but also include mods made by the creator "UltimateModder", you can achieve this with the following query parameters:
 
 ```
---parse_version/games/your-game/mods?status=1&submitted_by=123&or_fields[]=status,submitted_by
+--parse_version/games/your-game/mods?tags=level&submitted_by_display_name=UltimateModder&or_fields[]=tags,submitted_by_display_name
 ```
 
-This would be interpreted as "Fetch all mods where status = 1 **OR** submitted_by = 123". Without the `or_fields` parameter, it would be treated as AND.
+This would be interpreted as "Fetch all mods where (tags in level **OR** submitted_by like UltimateModder)". Without the `or_fields` parameter, it would be treated as AND.
 
 A few things to note:
 
@@ -502,12 +502,12 @@ A few things to note:
 ### _q (Full text search)
 
 ```
---parse_version/games?_q=The Lord Of The Rings
+--parse_version/games?_q=Gravity Bounce
 ```
 
 Full-text search is a lenient search filter that _is only available_ if the endpoint you are querying contains a `name` column. Wildcards should _not_ be applied to this filter as they are ignored.
 
-- `?_q=The Lord of the Rings` - This will return every result where the `name` column contains any of the following words: 'The', 'Lord', 'of', 'the', 'Rings'. 
+- `?_q=Gravity Bounce` - This will return every result where the `name` column contains any of the following words: 'Gravity', 'Bounce'. 
 
 ### = (Equals)
 
