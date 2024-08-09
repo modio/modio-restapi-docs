@@ -19,6 +19,10 @@ headingLevel: '2'
 
 
 
+
+
+
+
 ## mod.io API v1
 
 Welcome to the official documentation for [mod.io](https://mod.io), an API for developers to add mod support to their games. Using our [SDKs and plugins](#implementation) for popular and custom game engines, getting your creator community started and making the mods they create discoverable and installable via your in-game menu is straight forward, with full cross-platform support. If you are a game developer, you can manage your games and API access via your [mod.io content dashboard](https://mod.io/content). If you are a user creating tools and apps, you can request API access via your [mod.io account](https://mod.io/me/access).
@@ -1000,6 +1004,7 @@ The purpose of this endpoint is to provide the text, links and buttons you can u
   }
 }
 
+
 ```
 <h3 id="Terms-responses">Responses</h3>
 
@@ -1127,6 +1132,7 @@ Request an access token on behalf of a Steam user. To use this functionality you
   "access_token": "eyJ0eXAiOiXKV1QibCJhbLciOiJeiUzI1.....",
   "date_expires": 1570673249
 }
+
 
 ```
 <h3 id="Steam-responses">Responses</h3>
@@ -1262,6 +1268,7 @@ Request an access token on behalf of an Xbox Live user. A Successful request wil
   "access_token": "eyJ0eXAiOiXKV1QibCJhbLciOiJeiUzI1.....",
   "date_expires": 1570673249
 }
+
 
 ```
 <h3 id="Xbox-Live-responses">Responses</h3>
@@ -1402,6 +1409,7 @@ Request an access token on behalf of a PlayStation Network (PSN) user. A Success
   "date_expires": 1570673249
 }
 
+
 ```
 <h3 id="PlayStation™Network-responses">Responses</h3>
 
@@ -1527,6 +1535,7 @@ Request an access token on behalf of a Nintendo Switch user. A Successful reques
   "access_token": "eyJ0eXAiOiXKV1QibCJhbLciOiJeiUzI1.....",
   "date_expires": 1570673249
 }
+
 
 ```
 <h3 id="Nintendo-Switch-responses">Responses</h3>
@@ -1667,6 +1676,7 @@ Request an access token on behalf of an Meta Quest user. To use this functionali
   "date_expires": 1570673249
 }
 
+
 ```
 <h3 id="Meta-Quest-responses">Responses</h3>
 
@@ -1797,6 +1807,7 @@ Request an access token on behalf of an Epic Games user. A Successful request wi
   "date_expires": 1570673249
 }
 
+
 ```
 <h3 id="Epic-Games-responses">Responses</h3>
 
@@ -1924,6 +1935,7 @@ Request an access token on behalf of a GOG Galaxy user. To use this functionalit
   "access_token": "eyJ0eXAiOiXKV1QibCJhbLciOiJeiUzI1.....",
   "date_expires": 1570673249
 }
+
 
 ```
 <h3 id="GOG-Galaxy-responses">Responses</h3>
@@ -2053,6 +2065,7 @@ Request an access token on behalf of a 'Sign in with Apple' user. A Successful r
   "access_token": "eyJ0eXAiOiXKV1QibCJhbLciOiJeiUzI1.....",
   "date_expires": 1570673249
 }
+
 
 ```
 <h3 id="Apple-responses">Responses</h3>
@@ -2190,6 +2203,7 @@ Request an access token on behalf of a Google user. A Successful request will re
   "date_expires": 1570673249
 }
 
+
 ```
 <h3 id="Google-responses">Responses</h3>
 
@@ -2318,6 +2332,7 @@ Request an access token on behalf of a Discord user. A Successful request will r
   "access_token": "eyJ0eXAiOiXKV1QibCJhbLciOiJeiUzI1.....",
   "date_expires": 1570673249
 }
+
 
 ```
 <h3 id="Discord-responses">Responses</h3>
@@ -2452,6 +2467,7 @@ Request an access token on behalf of an OpenID identity provider. To use this me
   "access_token": "eyJ0eXAiOiXKV1QibCJhbLciOiJeiUzI1.....",
   "date_expires": 1570673249
 }
+
 
 ```
 <h3 id="OpenID-responses">Responses</h3>
@@ -2590,6 +2606,7 @@ Exchange `client_id` and `client_secret` for an access token. Successful request
   "scope": "read,write"
 }
 
+
 ```
 <h3 id="Exchange-Client-Credentials-Token-responses">Responses</h3>
 
@@ -2709,6 +2726,7 @@ Request a security code for a user, identified by their e-mail which can then be
   "code": 201,
   "message": "Please enter the 5-digit security code sent to your email address (someperson@someservice.com)."
 }
+
 
 ```
 <h3 id="Email-(Request)-responses">Responses</h3>
@@ -2835,6 +2853,7 @@ Exchange a security code issued from the [Email Request endpoint](#email) for an
   "date_expires": 1570673249
 }
 
+
 ```
 <h3 id="Email-(Exchange)-responses">Responses</h3>
 
@@ -2959,6 +2978,7 @@ Log the user out by revoking their current access token. If this request success
   "message": "You have successfully logged out of mod.io."
 }
 
+
 ```
 <h3 id="Logout-responses">Responses</h3>
 
@@ -2969,6 +2989,7 @@ Status|Meaning|Error Ref|Description|Response Schema
 To perform this request, you must be authenticated via one of the following methods:
 <a href="#authentication">OAuth 2</a> (Scopes: read)
 </aside>
+
 # Sign in with mod.io (Web)
 
 ## 1. Sign in with mod.io
@@ -3077,6 +3098,7 @@ Log a user into your website with a mod.io account using the OAuth2 [Authorizati
   "code": "def5020077deb4eafe6fb6743b1fd6857ce22112d3400e6cc684633f8c9904faae1a83c23b",
   "state": "T6KQGIXWrHXxFDfyp5Hh"
 }
+
 
 ```
 <h3 id="1.-Sign-in-with-mod.io-responses">Responses</h3>
@@ -3211,6 +3233,7 @@ Exchange the `code` returned to your callback server for an access token. If the
   "refresh_token": "eyJlbmMiOiJBMTI4Q0JDLUhTMjU2IiwiYWxnIjoiUlNBLU9BRVAiLCJjdHkiOi...."
 }
 
+
 ```
 <h3 id="2.-Exchange-Authorization-Code-responses">Responses</h3>
 
@@ -3343,6 +3366,7 @@ Exchange a `refresh_token` for an access token. You should always attempt to ref
   "access_token": "eyJlbmMiOiJBMTI4Q0JDLUhTMjU2IiwiYWxnIjoiUlNBLU9BRVAiLCJjdHkiOi....",
   "refresh_token": "eyJlbmMiOiJBMTI4Q0JDLUhTMjU2IiwiYWxnIjoiUlNBLU9BRVAiLCJjdHkiOi...."
 }
+
 
 ```
 <h3 id="3.-Exchange-Refresh-Token-responses">Responses</h3>
@@ -3581,6 +3605,9 @@ Get all games. Successful request will return an array of [Game Objects](#get-ga
     },
     {
         ...
+    },
+    {
+        ...
     }
   ],
   "result_count": 70,
@@ -3588,6 +3615,7 @@ Get all games. Successful request will return an array of [Game Objects](#get-ga
   "result_limit": 100,
   "result_total": 70
 }
+
 
 ```
 <h3 id="Get-Games-responses">Responses</h3>
@@ -3793,6 +3821,7 @@ Get a game. Successful request will return a single [Game Object](#game-object).
   ]
 }
 
+
 ```
 <h3 id="Get-Game-responses">Responses</h3>
 
@@ -3970,6 +3999,9 @@ Get all guides for a game. Successful request will return an array of [Guide Obj
     },
     {
         ...
+    },
+    {
+        ...
     }
   ],
   "result_count": 70,
@@ -3977,6 +4009,7 @@ Get all guides for a game. Successful request will return an array of [Guide Obj
   "result_limit": 100,
   "result_total": 70
 }
+
 
 ```
 <h3 id="Get-Guides-responses">Responses</h3>
@@ -4134,916 +4167,13 @@ Get a guide. Successful request will return a single [Guide Object](#guide-objec
   ]
 }
 
+
 ```
 <h3 id="Get-Guide-responses">Responses</h3>
 
 Status|Meaning|Error Ref|Description|Response Schema
 ---|---|----|---|---|
 200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)||Successful Request|[Guide Object](#schemaguide_object)
-<aside class="auth-notice">
-To perform this request, you must be authenticated via one of the following methods:
-<a href="#authentication">api_key</a>, <a href="#authentication">OAuth 2</a> (Scopes: read)
-</aside>
-## Add Guide
-
-> Example request
-
-```shell
-# You can also use wget
-curl -X POST https://*.modapi.io/v1/games/{game-id}/guides \
-  -H 'Authorization: Bearer {access-token}' \ 
-  -H 'Content-Type: multipart/form-data' \ 
-  -H 'Content-Type: multipart/form-data' \ 
-  -H 'Accept: application/json' \
-  -F 'name=Modding Guide for Rogue Knight' \
-  -F 'summary=Short descriptive summary here' \
-  -F 'description=<h2>Getting started with..' \
-  -F 'logo=@/path/to/image.jpg' \
-  -F 'date_live=1626667557'
-
-```
-
-```http
-POST https://*.modapi.io/v1/games/{game-id}/guides HTTP/1.1
-Host: *.modapi.io
-Content-Type: multipart/form-data
-Accept: application/json
-Authorization: Bearer {access-token}
-Content-Type: multipart/form-data
-
-```
-
-```javascript
-var headers = {
-  'Authorization':'Bearer {access-token}',
-  'Content-Type':'multipart/form-data',
-  'Content-Type':'multipart/form-data',
-  'Accept':'application/json'
-
-};
-
-$.ajax({
-  url: 'https://*.modapi.io/v1/games/{game-id}/guides',
-  method: 'post',
-
-  headers: headers,
-  success: function(data) {
-    console.log(JSON.stringify(data));
-  }
-})
-```
-
-```javascript--nodejs
-const request = require('node-fetch');
-const inputBody = '{
-  "name": "Modding Guide for Rogue Knight",
-  "summary": "Short descriptive summary here",
-  "description": "<h2>Getting started with..",
-  "logo": "@/path/to/image.jpg",
-  "date_live": 1626667557
-}';
-const headers = {
-  'Authorization':'Bearer {access-token}',
-  'Content-Type':'multipart/form-data',
-  'Content-Type':'multipart/form-data',
-  'Accept':'application/json'
-
-};
-
-fetch('https://*.modapi.io/v1/games/{game-id}/guides',
-{
-  method: 'POST',
-  body: inputBody,
-  headers: headers
-})
-.then(function(res) {
-    return res.json();
-}).then(function(body) {
-    console.log(body);
-});
-```
-
-```python
-import requests
-headers = {
-  'Authorization': 'Bearer {access-token}',
-  'Content-Type': 'multipart/form-data',
-  'Content-Type': 'multipart/form-data',
-  'Accept': 'application/json'
-}
-
-r = requests.post('https://*.modapi.io/v1/games/{game-id}/guides', params={
-
-}, headers = headers)
-
-print r.json()
-```
-
-```java
-URL obj = new URL("https://*.modapi.io/v1/games/{game-id}/guides");
-HttpURLConnection con = (HttpURLConnection) obj.openConnection();
-con.setRequestMethod("POST");
-int responseCode = con.getResponseCode();
-BufferedReader in = new BufferedReader(
-    new InputStreamReader(con.getInputStream()));
-String inputLine;
-StringBuffer response = new StringBuffer();
-while ((inputLine = in.readLine()) != null) {
-    response.append(inputLine);
-}
-in.close();
-System.out.println(response.toString());
-```
-
-`POST /games/{game-id}/guides`
-
-Add a guide for a game. Successful request will return a single [Guide Object](#guide-object).
-
-    Parameter|Type|Required|Description
-    ---|---|---|---|
-    logo|file|true|Image file which will represent your guides logo. Must be jpg, jpeg or png format and cannot exceed 8MB in filesize. Dimensions must be at least 512x288 and we recommended you supply a high resolution image with a 16 / 9 ratio. mod.io will use this image to make three thumbnails for the dimensions 320x180, 640x360 and 1280x720.
-    name|string|true|Name of your guide.
-    name_id|string||Path for the guide on mod.io. For example: https://mod.io/g/gamename/r/__guide-name-id-here__. If no `name_id` is specified the `name` will be used. For example: _'Stellaris Shader Guide'_ will become _'stellaris-shader-guide'_. Cannot exceed 50 characters.
-    summary|string|true|Summary for your guide, giving a brief overview of what it's about. Cannot exceed 250 characters.
-    description|string||Detailed description for your guide, which can include details such as 'About', 'Features', 'Install Instructions', 'FAQ', etc. HTML supported and encouraged.
-    url|string||Official homepage for your guide. Must be a valid URL.
-    tags[]|string||Tags to apply to the guide. Every tag to apply requires a separate field with tags[] as the key (eg. tags[]=tag1, tags[]=tag2).
-    date_live|integer||Unix timestamp of when this guide should go live. To release the guide immediately provide the current time along with the `status` value of 1. If this field is not provided and the `status` is 0, the guide will not be released.
-
-> Example response
-
-```json
-{
-  "id": 1209,
-  "game_id": 3,
-  "game_name": "My Awesome Game",
-  "logo": {
-    "filename": "card.png",
-    "original": "https://assets.modcdn.io/images/placeholder/card.png",
-    "thumb_320x180": "https://assets.modcdn.io/images/placeholder/card.png",
-    "thumb_640x360": "https://assets.modcdn.io/images/placeholder/card.png",
-    "thumb_1280x720": "https://assets.modcdn.io/images/placeholder/card.png"
-  },
-  "user": {
-    "id": 1,
-    "name_id": "xant",
-    "username": "XanT",
-    "display_name_portal": null,
-    "date_online": 1509922961,
-    "date_joined": 1509922961,
-    "avatar": {
-      "filename": "avatar.png",
-      "original": "https://assets.modcdn.io/images/placeholder/avatar.png",
-      "thumb_50x50": "https://assets.modcdn.io/images/placeholder/avatar_50x50.png",
-      "thumb_100x100": "https://assets.modcdn.io/images/placeholder/avatar_100x100.png"
-    },
-    "timezone": "",
-    "language": "",
-    "profile_url": "https://mod.io/u/xant"
-  },
-  "date_added": 1509922961,
-  "date_updated": 1509922961,
-  "date_live": 1509922961,
-  "status": 1,
-  "url": "https://mod.io/g/rogue-knight/r/getting-started",
-  "name": "Getting Started",
-  "name_id": "getting-started",
-  "summary": "Alright, so let's get started with modding on mod.io",
-  "description": "<h1>Getting Started</h2><p>Download this suspiciou....",
-  "tags": [
-    {
-      "name": "Instructions",
-      "date_added": 1499841487,
-      "count": 22
-    }
-  ],
-  "stats": [
-    {
-      "guide_id": 2,
-      "visits_total": 0,
-      "comments_total": 0
-    }
-  ]
-}
-
-```
-<h3 id="Add-Guide-responses">Responses</h3>
-
-Status|Meaning|Error Ref|Description|Response Schema
----|---|----|---|---|
-201|[Created](https://tools.ietf.org/html/rfc7231#section-6.3.2)||Created|[Guide Object](#schemaguide_object)
-403|[Forbidden](https://tools.ietf.org/html/rfc7231#section-6.5.3)|14027|The authenticated user does not have permission to add guides to this game. Ensure the user is part of the game team before attempting the request again.|[Error Object](#schemaerror_object)
-<aside class="auth-notice">
-To perform this request, you must be authenticated via one of the following methods:
-<a href="#authentication">OAuth 2</a> (Scopes: web)
-</aside>
-## Edit Guide
-
-> Example request
-
-```shell
-# You can also use wget
-curl -X POST https://*.modapi.io/v1/games/{game-id}/guides/{guide-id} \
-  -H 'Authorization: Bearer {access-token}' \ 
-  -H 'Content-Type: multipart/form-data' \ 
-  -H 'Content-Type: multipart/form-data' \ 
-  -H 'Accept: application/json' \
-  -F 'name=Modding Guide for Rogue Knight' \
-  -F 'summary=Short descriptive summary here' \
-  -F 'description=<h2>Getting started with..' \
-  -F 'logo=@/path/to/image.jpg' \
-  -F 'date_live=1626667557'
-
-```
-
-```http
-POST https://*.modapi.io/v1/games/{game-id}/guides/{guide-id} HTTP/1.1
-Host: *.modapi.io
-Content-Type: multipart/form-data
-Accept: application/json
-Authorization: Bearer {access-token}
-Content-Type: multipart/form-data
-
-```
-
-```javascript
-var headers = {
-  'Authorization':'Bearer {access-token}',
-  'Content-Type':'multipart/form-data',
-  'Content-Type':'multipart/form-data',
-  'Accept':'application/json'
-
-};
-
-$.ajax({
-  url: 'https://*.modapi.io/v1/games/{game-id}/guides/{guide-id}',
-  method: 'post',
-
-  headers: headers,
-  success: function(data) {
-    console.log(JSON.stringify(data));
-  }
-})
-```
-
-```javascript--nodejs
-const request = require('node-fetch');
-const inputBody = '{
-  "name": "Modding Guide for Rogue Knight",
-  "summary": "Short descriptive summary here",
-  "description": "<h2>Getting started with..",
-  "logo": "@/path/to/image.jpg",
-  "date_live": 1626667557
-}';
-const headers = {
-  'Authorization':'Bearer {access-token}',
-  'Content-Type':'multipart/form-data',
-  'Content-Type':'multipart/form-data',
-  'Accept':'application/json'
-
-};
-
-fetch('https://*.modapi.io/v1/games/{game-id}/guides/{guide-id}',
-{
-  method: 'POST',
-  body: inputBody,
-  headers: headers
-})
-.then(function(res) {
-    return res.json();
-}).then(function(body) {
-    console.log(body);
-});
-```
-
-```python
-import requests
-headers = {
-  'Authorization': 'Bearer {access-token}',
-  'Content-Type': 'multipart/form-data',
-  'Content-Type': 'multipart/form-data',
-  'Accept': 'application/json'
-}
-
-r = requests.post('https://*.modapi.io/v1/games/{game-id}/guides/{guide-id}', params={
-
-}, headers = headers)
-
-print r.json()
-```
-
-```java
-URL obj = new URL("https://*.modapi.io/v1/games/{game-id}/guides/{guide-id}");
-HttpURLConnection con = (HttpURLConnection) obj.openConnection();
-con.setRequestMethod("POST");
-int responseCode = con.getResponseCode();
-BufferedReader in = new BufferedReader(
-    new InputStreamReader(con.getInputStream()));
-String inputLine;
-StringBuffer response = new StringBuffer();
-while ((inputLine = in.readLine()) != null) {
-    response.append(inputLine);
-}
-in.close();
-System.out.println(response.toString());
-```
-
-`POST /games/{game-id}/guides/{guide-id}`
-
-Update an existing guide. Successful request will return the updated [Guide Object](#guide-object).
-
-    Parameter|Type|Required|Description
-    ---|---|---|---|
-    status|integer||Status of the guide, see [status and visibility](#status-amp-visibility) for details):<br><br>__0__ = Not accepted<br>__1__ = Accepted (game admins only)<br>__3__ = Deleted (use the [delete guide](#delete-guide) endpoint to set this status)
-    logo|file||Image file which will represent your guides logo. Must be jpg, jpeg or png format and cannot exceed 8MB in filesize. Dimensions must be at least 512x288 and we recommended you supply a high resolution image with a 16 / 9 ratio. mod.io will use this image to make three thumbnails for the dimensions 320x180, 640x360 and 1280x720.
-    name|string||Name of your guide.
-    name_id|string||Path for the guide on mod.io. For example: https://mod.io/g/gamename/r/__guide-name-id-here__. If no `name_id` is specified the `name` will be used. For example: _'Stellaris Shader Guide'_ will become _'stellaris-shader-guide'_. Cannot exceed 50 characters.
-    summary|string||Summary for your guide, giving a brief overview of what it's about. Cannot exceed 250 characters.
-    description|string||Detailed description for your guide, which can include details such as 'About', 'Features', 'Install Instructions', 'FAQ', etc. HTML supported and encouraged.
-    url|string||Official homepage for your guide. Must be a valid URL.
-    tags[]|string||Tags to apply to the guide. Every tag to apply requires a separate field with tags[] as the key (eg. tags[]=tag1, tags[]=tag2).<br><br>__NOTE:__ When editing a guide any tags you add or remove from the existing tags list will be added/removed, so if you do not wish to remove any tags you must re-submit all existing tags.
-    date_live|integer||Unix timestamp of when this guide should go live. To release the guide immediately provide the current time along with the `status` 1. If this field is not provided and the `status` is 0, the guide will not be released.
-
-> Example response
-
-```json
-{
-  "id": 1209,
-  "game_id": 3,
-  "game_name": "My Awesome Game",
-  "logo": {
-    "filename": "card.png",
-    "original": "https://assets.modcdn.io/images/placeholder/card.png",
-    "thumb_320x180": "https://assets.modcdn.io/images/placeholder/card.png",
-    "thumb_640x360": "https://assets.modcdn.io/images/placeholder/card.png",
-    "thumb_1280x720": "https://assets.modcdn.io/images/placeholder/card.png"
-  },
-  "user": {
-    "id": 1,
-    "name_id": "xant",
-    "username": "XanT",
-    "display_name_portal": null,
-    "date_online": 1509922961,
-    "date_joined": 1509922961,
-    "avatar": {
-      "filename": "avatar.png",
-      "original": "https://assets.modcdn.io/images/placeholder/avatar.png",
-      "thumb_50x50": "https://assets.modcdn.io/images/placeholder/avatar_50x50.png",
-      "thumb_100x100": "https://assets.modcdn.io/images/placeholder/avatar_100x100.png"
-    },
-    "timezone": "",
-    "language": "",
-    "profile_url": "https://mod.io/u/xant"
-  },
-  "date_added": 1509922961,
-  "date_updated": 1509922961,
-  "date_live": 1509922961,
-  "status": 1,
-  "url": "https://mod.io/g/rogue-knight/r/getting-started",
-  "name": "Getting Started",
-  "name_id": "getting-started",
-  "summary": "Alright, so let's get started with modding on mod.io",
-  "description": "<h1>Getting Started</h2><p>Download this suspiciou....",
-  "tags": [
-    {
-      "name": "Instructions",
-      "date_added": 1499841487,
-      "count": 22
-    }
-  ],
-  "stats": [
-    {
-      "guide_id": 2,
-      "visits_total": 0,
-      "comments_total": 0
-    }
-  ]
-}
-
-```
-<h3 id="Edit-Guide-responses">Responses</h3>
-
-Status|Meaning|Error Ref|Description|Response Schema
----|---|----|---|---|
-200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)||OK|[Guide Object](#schemaguide_object)
-403|[Forbidden](https://tools.ietf.org/html/rfc7231#section-6.5.3)|14036|The authenticated user does not have permission to edit guides to this game. Ensure the user is part of the game team before attempting the request again.|[Error Object](#schemaerror_object)
-403|[Forbidden](https://tools.ietf.org/html/rfc7231#section-6.5.3)|14031|The guide status cannot be changed to accepted due to the request originating from a non-site admin whilst there is a DMCA report active against the guide.|[Error Object](#schemaerror_object)
-<aside class="auth-notice">
-To perform this request, you must be authenticated via one of the following methods:
-<a href="#authentication">OAuth 2</a> (Scopes: web)
-</aside>
-## Delete Guide
-
-> Example request
-
-```shell
-# You can also use wget
-curl -X DELETE https://*.modapi.io/v1/games/{game-id}/guides/{guide-id} \
-  -H 'Authorization: Bearer {access-token}' \ 
-  -H 'Content-Type: application/x-www-form-urlencoded' \ 
-  -H 'Accept: application/json'
-
-```
-
-```http
-DELETE https://*.modapi.io/v1/games/{game-id}/guides/{guide-id} HTTP/1.1
-Host: *.modapi.io
-
-Accept: application/json
-Authorization: Bearer {access-token}
-Content-Type: application/x-www-form-urlencoded
-
-```
-
-```javascript
-var headers = {
-  'Authorization':'Bearer {access-token}',
-  'Content-Type':'application/x-www-form-urlencoded',
-  'Accept':'application/json'
-
-};
-
-$.ajax({
-  url: 'https://*.modapi.io/v1/games/{game-id}/guides/{guide-id}',
-  method: 'delete',
-
-  headers: headers,
-  success: function(data) {
-    console.log(JSON.stringify(data));
-  }
-})
-```
-
-```javascript--nodejs
-const request = require('node-fetch');
-
-const headers = {
-  'Authorization':'Bearer {access-token}',
-  'Content-Type':'application/x-www-form-urlencoded',
-  'Accept':'application/json'
-
-};
-
-fetch('https://*.modapi.io/v1/games/{game-id}/guides/{guide-id}',
-{
-  method: 'DELETE',
-
-  headers: headers
-})
-.then(function(res) {
-    return res.json();
-}).then(function(body) {
-    console.log(body);
-});
-```
-
-```python
-import requests
-headers = {
-  'Authorization': 'Bearer {access-token}',
-  'Content-Type': 'application/x-www-form-urlencoded',
-  'Accept': 'application/json'
-}
-
-r = requests.delete('https://*.modapi.io/v1/games/{game-id}/guides/{guide-id}', params={
-
-}, headers = headers)
-
-print r.json()
-```
-
-```java
-URL obj = new URL("https://*.modapi.io/v1/games/{game-id}/guides/{guide-id}");
-HttpURLConnection con = (HttpURLConnection) obj.openConnection();
-con.setRequestMethod("DELETE");
-int responseCode = con.getResponseCode();
-BufferedReader in = new BufferedReader(
-    new InputStreamReader(con.getInputStream()));
-String inputLine;
-StringBuffer response = new StringBuffer();
-while ((inputLine = in.readLine()) != null) {
-    response.append(inputLine);
-}
-in.close();
-System.out.println(response.toString());
-```
-
-`DELETE /games/{game-id}/guides/{guide-id}`
-
-Delete a guide. Successful request will return `204 No Content`.
-
-> Example response
-
-```json
- 204 No Content 
-
-```
-<h3 id="Delete-Guide-responses">Responses</h3>
-
-Status|Meaning|Error Ref|Description|Response Schema
----|---|----|---|---|
-204|[No Content](https://tools.ietf.org/html/rfc7231#section-6.3.5)||Successful Request. No Body Returned.|None
-403|[Forbidden](https://tools.ietf.org/html/rfc7231#section-6.5.3)|14028|The authenticated user does not have permission to delete guides to this game. Ensure the user is part of the game team before attempting the request again.|[Error Object](#schemaerror_object)
-403|[Forbidden](https://tools.ietf.org/html/rfc7231#section-6.5.3)|14031|The guide cannot be deleted due to the request originating from a non-site admin whilst there is a DMCA report active against the guide.|[Error Object](#schemaerror_object)
-<aside class="auth-notice">
-To perform this request, you must be authenticated via one of the following methods:
-<a href="#authentication">OAuth 2</a> (Scopes: web)
-</aside>
-## Get Guides Tags
-
-> Example request
-
-```shell
-# You can also use wget
-curl -X GET https://*.modapi.io/v1/games/{game-id}/guides/tags?api_key=YourApiKey \
-  -H 'Accept: application/json'
-
-```
-
-```http
-GET https://*.modapi.io/v1/games/{game-id}/guides/tags?api_key=YourApiKey HTTP/1.1
-Host: *.modapi.io
-
-Accept: application/json
-
-```
-
-```javascript
-var headers = {
-  'Accept':'application/json'
-
-};
-
-$.ajax({
-  url: 'https://*.modapi.io/v1/games/{game-id}/guides/tags',
-  method: 'get',
-  data: '?api_key=YourApiKey',
-  headers: headers,
-  success: function(data) {
-    console.log(JSON.stringify(data));
-  }
-})
-```
-
-```javascript--nodejs
-const request = require('node-fetch');
-
-const headers = {
-  'Accept':'application/json'
-
-};
-
-fetch('https://*.modapi.io/v1/games/{game-id}/guides/tags?api_key=YourApiKey',
-{
-  method: 'GET',
-
-  headers: headers
-})
-.then(function(res) {
-    return res.json();
-}).then(function(body) {
-    console.log(body);
-});
-```
-
-```python
-import requests
-headers = {
-  'Accept': 'application/json'
-}
-
-r = requests.get('https://*.modapi.io/v1/games/{game-id}/guides/tags', params={
-  'api_key': 'YourApiKey'
-}, headers = headers)
-
-print r.json()
-```
-
-```java
-URL obj = new URL("https://*.modapi.io/v1/games/{game-id}/guides/tags?api_key=YourApiKey");
-HttpURLConnection con = (HttpURLConnection) obj.openConnection();
-con.setRequestMethod("GET");
-int responseCode = con.getResponseCode();
-BufferedReader in = new BufferedReader(
-    new InputStreamReader(con.getInputStream()));
-String inputLine;
-StringBuffer response = new StringBuffer();
-while ((inputLine = in.readLine()) != null) {
-    response.append(inputLine);
-}
-in.close();
-System.out.println(response.toString());
-```
-
-`GET /games/{game-id}/guides/tags`
-
-Get all guide tags for a game. Successful request will return an array of [Guide Tag Objects](#get-guide-tags).
-
-> Example response
-
-```json
-{
-  "data": [
-    {
-      "name": "Instructions",
-      "date_added": 1499841487,
-      "count": 22
-    },
-    {
-        ...
-    }
-  ],
-  "result_count": 70,
-  "result_offset": 0,
-  "result_limit": 100,
-  "result_total": 70
-}
-
-```
-<h3 id="Get-Guides-Tags-responses">Responses</h3>
-
-Status|Meaning|Error Ref|Description|Response Schema
----|---|----|---|---|
-200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)||Successful Request|[Get Guide Tags](#schemaget_guide_tags)
-<aside class="auth-notice">
-To perform this request, you must be authenticated via one of the following methods:
-<a href="#authentication">api_key</a>, <a href="#authentication">OAuth 2</a> (Scopes: read)
-</aside>
-# Mods
-
-## Get Mods
-
-> Example request
-
-```shell
-# You can also use wget
-curl -X GET https://*.modapi.io/v1/games/{game-id}/mods?api_key=YourApiKey \
-  -H 'Accept: application/json'
-
-```
-
-```http
-GET https://*.modapi.io/v1/games/{game-id}/mods?api_key=YourApiKey HTTP/1.1
-Host: *.modapi.io
-
-Accept: application/json
-
-```
-
-```javascript
-var headers = {
-  'Accept':'application/json'
-
-};
-
-$.ajax({
-  url: 'https://*.modapi.io/v1/games/{game-id}/mods',
-  method: 'get',
-  data: '?api_key=YourApiKey',
-  headers: headers,
-  success: function(data) {
-    console.log(JSON.stringify(data));
-  }
-})
-```
-
-```javascript--nodejs
-const request = require('node-fetch');
-
-const headers = {
-  'Accept':'application/json'
-
-};
-
-fetch('https://*.modapi.io/v1/games/{game-id}/mods?api_key=YourApiKey',
-{
-  method: 'GET',
-
-  headers: headers
-})
-.then(function(res) {
-    return res.json();
-}).then(function(body) {
-    console.log(body);
-});
-```
-
-```python
-import requests
-headers = {
-  'Accept': 'application/json'
-}
-
-r = requests.get('https://*.modapi.io/v1/games/{game-id}/mods', params={
-  'api_key': 'YourApiKey'
-}, headers = headers)
-
-print r.json()
-```
-
-```java
-URL obj = new URL("https://*.modapi.io/v1/games/{game-id}/mods?api_key=YourApiKey");
-HttpURLConnection con = (HttpURLConnection) obj.openConnection();
-con.setRequestMethod("GET");
-int responseCode = con.getResponseCode();
-BufferedReader in = new BufferedReader(
-    new InputStreamReader(con.getInputStream()));
-String inputLine;
-StringBuffer response = new StringBuffer();
-while ((inputLine = in.readLine()) != null) {
-    response.append(inputLine);
-}
-in.close();
-System.out.println(response.toString());
-```
-
-`GET /games/{game-id}/mods`
-
-Get all mods for the corresponding game. Successful request will return an array of [Mod Objects](#get-mods-2). We recommended reading the [filtering documentation](#filtering) to return only the records you want.
-
-    Filter|Type|Description
-    ---|---|---
-    id|integer|Unique id of the mod.
-    game_id|integer|Unique id of the parent game.
-    status|integer|Status of the mod (only game admins can filter by this field, see [status and visibility](#status-amp-visibility) for details):<br><br>__0__ = Not accepted<br>__1__ = Accepted _(default)_<br>__3__ = Deleted
-    visible|integer|Visibility of the mod (only game admins can filter by this field, see [status and visibility](#status-amp-visibility) for details):<br><br>__0__ = Hidden<br>__1__ = Public _(default)_
-    submitted_by|integer|Unique id of the user who has ownership of the mod.
-    date_added|integer|Unix timestamp of date mod was registered.
-    date_updated|integer|Unix timestamp of date mod was updated.
-    date_live|integer|Unix timestamp of date mod was set live.
-    community_options|integer|Community features enabled for this mod:<br><br>__0__ = All the options below are disabled<br>__1__ = Enable comments<br>__64__ = Enable previews<br>__128__ = Enable preview URLs<br>__1024__ = Allow dependencies<br>__?__ = Add the options you want together, to enable multiple options (see [BITWISE fields](#bitwise-and-bitwise-and))
-    maturity_option|integer|Maturity options set by the mod creator:<br><br>__0__ = None<br>__1__ = Alcohol<br>__2__ = Drugs<br>__4__ = Violence<br>__8__ = Explicit<br>__?__ = Combine to find mods with multiple options enabled (see [BITWISE fields](#bitwise-and-bitwise-and))
-    monetization_options|integer|Monetization options enabled for this mod:<br><br>__0__ = Access to monetization features disabled<br>__1__ = Access to monetization features enabled by the game for this mod<br>__2__ = Marketplace enabled<br>__8__ = Quantity of this mod is limited<br>__?__ = Combine to find mods with multiple options enabled (see [BITWISE fields](#bitwise-and-bitwise-and))
-    name|string|Name of the mod.
-    name_id|string|Path for the mod on mod.io. For example: https://mod.io/g/gamename/m/__mod-name-id-here__
-    modfile|integer|Unique id of the file that is the current active release (see [mod files](#files)).
-    metadata_blob|string|Metadata that is designed to be handled by the game client and is recommended to not be exposed to content creators when submitting their mods. As an example, this may include properties as to how the item works, or other information you need to display. Metadata can also be stored as searchable [key value pairs](#metadata), and to individual [mod files](#get-modfiles).
-    metadata_kvp|string|Colon-separated values representing the key-value pairs you want to filter the results by. If you supply more than one key-pair, separate the pairs by a comma. Will only filter by an exact key-pair match.
-    tags|string|Comma-separated values representing the tags you want to filter the results by. If you specify multiple tags, only mods which have all tags will be returned, and only tags that are supported by the parent game can be applied. To determine what tags are eligible, see the tags values within `tag_options` column on the parent [Game Object](#game-object). If you want to ensure mods returned do not contain particular tag(s), you can use the `tags-not-in` filter either independently or alongside this filter.
-    platform_status|string|If the parent game has enabled per-platform files, by default only mods with files which are approved and live for the [target platform](#targeting-a-platform) will be returned.<br><br>To QA mods with pending files, you can filter results by their current platform status, using `pending_only` or `live_and_pending`.<br><br>__NOTE:__ only game admins can filter by this field.
-    revenue_type|integer|Finds all mods with or without a price. Defaults to free. <br><br>__0__ = Free<br>__1__ = Paid<br>__2__ = Free and Paid
-    stock|integer|Finds all mods that are in/out of stock. <br><br>__0__ = Sold Out<br>__1__ = In Stock
-
-    Sort|Description
-    ---|---
-    downloads|Sort results by most downloads using [_sort filter](#filtering) parameter, value should be `downloads` for descending or `-downloads` for ascending results.
-    popular|Sort results by popularity using [_sort filter](#filtering), value should be `popular` for descending or `-popular` for ascending results.<br><br>__NOTE:__ Popularity is calculated hourly and reset daily (results are ranked from 1 to X). You should sort this column in ascending order `-popular` to get the top ranked results.
-    rating|Sort results by weighted rating using [_sort filter](#filtering), value should be `rating` for descending or `-rating` for ascending results.
-    subscribers|Sort results by most subscribers using [_sort filter](#filtering), value should be `subscribers` for descending or `-subscribers` for ascending results.
-
-> Example response
-
-```json
-{
-  "data": [
-    {
-      "id": 2,
-      "game_id": 2,
-      "status": 1,
-      "visible": 1,
-      "submitted_by": {
-        "id": 1,
-        "name_id": "xant",
-        "username": "XanT",
-        "display_name_portal": null,
-        "date_online": 1509922961,
-        "date_joined": 1509922961,
-        "avatar": {
-          "filename": "avatar.png",
-          "original": "https://assets.modcdn.io/images/placeholder/avatar.png",
-          "thumb_50x50": "https://assets.modcdn.io/images/placeholder/avatar_50x50.png",
-          "thumb_100x100": "https://assets.modcdn.io/images/placeholder/avatar_100x100.png"
-        },
-        "timezone": "",
-        "language": "",
-        "profile_url": "https://mod.io/u/xant"
-      },
-      "date_added": 1492564103,
-      "date_updated": 1499841487,
-      "date_live": 1499841403,
-      "maturity_option": 0,
-      "community_options": 3,
-      "monetization_options": 0,
-      "stock": 0,
-      "price": 0,
-      "tax": 0,
-      "logo": {
-        "filename": "card.png",
-        "original": "https://assets.modcdn.io/images/placeholder/card.png",
-        "thumb_320x180": "https://assets.modcdn.io/images/placeholder/card.png",
-        "thumb_640x360": "https://assets.modcdn.io/images/placeholder/card.png",
-        "thumb_1280x720": "https://assets.modcdn.io/images/placeholder/card.png"
-      },
-      "homepage_url": "https://www.rogue-hdpack.com/",
-      "name": "Rogue Knight HD Pack",
-      "name_id": "rogue-knight-hd-pack",
-      "summary": "It's time to bask in the glory of beautiful 4k textures!",
-      "description": "<p>Rogue HD Pack does exactly what you thi...",
-      "description_plaintext": "Rogue HD Pack does exactly what you thi...",
-      "metadata_blob": "rogue,hd,high-res,4k,hd textures",
-      "profile_url": "https://mod.io/g/rogue-knight/m/rogue-knight-hd-pack",
-      "media": {
-        "youtube": [
-          "https://www.youtube.com/watch?v=dQw4w9WgXcQ"
-        ],
-        "sketchfab": [
-          "https://sketchfab.com/models/ef40b2d300334d009984c8865b2db1c8"
-        ],
-        "images": [
-          {
-            "filename": "card.png",
-            "original": "https://assets.modcdn.io/images/placeholder/card.png",
-            "thumb_320x180": "https://assets.modcdn.io/images/placeholder/card.png",
-            "thumb_1280x720": "https://assets.modcdn.io/images/placeholder/card.png"
-          }
-        ]
-      },
-      "modfile": {
-        "id": 2,
-        "mod_id": 2,
-        "date_added": 1499841487,
-        "date_updated": 1499841487,
-        "date_scanned": 1499841487,
-        "virus_status": 0,
-        "virus_positive": 0,
-        "virustotal_hash": "",
-        "filesize": 15181,
-        "filesize_uncompressed": 16384,
-        "filehash": {
-          "md5": "2d4a0e2d7273db6b0a94b0740a88ad0d"
-        },
-        "filename": "rogue-knight-v1.zip",
-        "version": "1.3",
-        "changelog": "VERSION 1.3 -- Changes -- Fixed critical castle floor bug.",
-        "metadata_blob": "rogue,hd,high-res,4k,hd textures",
-        "download": {
-          "binary_url": "https://*.modapi.io/v1/games/1/mods/1/files/1/download/c489a0354111a4d76640d47f0cdcb294",
-          "date_expires": 1579316848
-        },
-        "platforms": [
-          {
-            "platform": "windows",
-            "status": 1
-          }
-        ]
-      },
-      "dependencies": false,
-      "platforms": [
-        {
-          "platform": "windows",
-          "modfile_live": 1
-        }
-      ],
-      "metadata_kvp": [
-        {
-          "metakey": "pistol-dmg",
-          "metavalue": "800"
-        }
-      ],
-      "tags": [
-        {
-          "name": "Unity",
-          "name_localized": "Unity",
-          "date_added": 1499841487
-        }
-      ],
-      "stats": {
-        "mod_id": 2,
-        "popularity_rank_position": 13,
-        "popularity_rank_total_mods": 204,
-        "downloads_today": 327,
-        "downloads_total": 27492,
-        "subscribers_total": 16394,
-        "ratings_total": 1230,
-        "ratings_positive": 1047,
-        "ratings_negative": 183,
-        "ratings_percentage_positive": 91,
-        "ratings_weighted_aggregate": 87.38,
-        "ratings_display_text": "Very Positive",
-        "date_expires": 1492564103
-      }
-    },
-    {
-        ...
-    }
-  ],
-  "result_count": 70,
-  "result_offset": 0,
-  "result_limit": 100,
-  "result_total": 70
-}
-
-```
-<h3 id="endpoint-xplatform-notice">Cross-Platform Filtering</h3>
-
-If the parent game has platform filtering enabled, this endpoint supports the [targeting a platform](#targeting-a-platform) request header to return mods that have been approved for the requested platform. If you are a member of the parent game team, please see the `platform_status` filter for this endpoint above on how you can retrieve pending mods.
-
-<h3 id="Get-Mods-responses">Responses</h3>
-
-Status|Meaning|Error Ref|Description|Response Schema
----|---|----|---|---|
-200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)||Successful Request|[Get Mods](#schemaget_mods)
-403|[Forbidden](https://tools.ietf.org/html/rfc7231#section-6.5.3)|15025|The authenticated user has applied an admin-only filter or value to the request, and is not an administrator for this game.|[Error Object](#schemaerror_object)
 <aside class="auth-notice">
 To perform this request, you must be authenticated via one of the following methods:
 <a href="#authentication">api_key</a>, <a href="#authentication">OAuth 2</a> (Scopes: read)
@@ -5268,6 +4398,7 @@ Get a mod. Successful request will return a single [Mod Object](#mod-object).
     "date_expires": 1492564103
   }
 }
+
 
 ```
 <h3 id="endpoint-xplatform-notice">Cross-Platform Filtering</h3>
@@ -5548,6 +4679,7 @@ Add a mod. Successful request will return the newly created [Mod Object](#mod-ob
   }
 }
 
+
 ```
 <h3 id="Add-Mod-responses">Responses</h3>
 
@@ -5566,6 +4698,640 @@ Status|Header|Type|Format|Description
 To perform this request, you must be authenticated via one of the following methods:
 <a href="#authentication">OAuth 2</a> (Scopes: write)
 </aside>
+## Add Guide
+
+> Example request
+
+```shell
+# You can also use wget
+curl -X POST https://*.modapi.io/v1/games/{game-id}/guides \
+  -H 'Authorization: Bearer {access-token}' \ 
+  -H 'Content-Type: multipart/form-data' \ 
+  -H 'Content-Type: multipart/form-data' \ 
+  -H 'Accept: application/json' \
+  -F 'name=Modding Guide for Rogue Knight' \
+  -F 'summary=Short descriptive summary here' \
+  -F 'description=<h2>Getting started with..' \
+  -F 'logo=@/path/to/image.jpg' \
+  -F 'date_live=1626667557'
+
+```
+
+```http
+POST https://*.modapi.io/v1/games/{game-id}/guides HTTP/1.1
+Host: *.modapi.io
+Content-Type: multipart/form-data
+Accept: application/json
+Authorization: Bearer {access-token}
+Content-Type: multipart/form-data
+
+```
+
+```javascript
+var headers = {
+  'Authorization':'Bearer {access-token}',
+  'Content-Type':'multipart/form-data',
+  'Content-Type':'multipart/form-data',
+  'Accept':'application/json'
+
+};
+
+$.ajax({
+  url: 'https://*.modapi.io/v1/games/{game-id}/guides',
+  method: 'post',
+
+  headers: headers,
+  success: function(data) {
+    console.log(JSON.stringify(data));
+  }
+})
+```
+
+```javascript--nodejs
+const request = require('node-fetch');
+const inputBody = '{
+  "name": "Modding Guide for Rogue Knight",
+  "summary": "Short descriptive summary here",
+  "description": "<h2>Getting started with..",
+  "logo": "@/path/to/image.jpg",
+  "date_live": 1626667557
+}';
+const headers = {
+  'Authorization':'Bearer {access-token}',
+  'Content-Type':'multipart/form-data',
+  'Content-Type':'multipart/form-data',
+  'Accept':'application/json'
+
+};
+
+fetch('https://*.modapi.io/v1/games/{game-id}/guides',
+{
+  method: 'POST',
+  body: inputBody,
+  headers: headers
+})
+.then(function(res) {
+    return res.json();
+}).then(function(body) {
+    console.log(body);
+});
+```
+
+```python
+import requests
+headers = {
+  'Authorization': 'Bearer {access-token}',
+  'Content-Type': 'multipart/form-data',
+  'Content-Type': 'multipart/form-data',
+  'Accept': 'application/json'
+}
+
+r = requests.post('https://*.modapi.io/v1/games/{game-id}/guides', params={
+
+}, headers = headers)
+
+print r.json()
+```
+
+```java
+URL obj = new URL("https://*.modapi.io/v1/games/{game-id}/guides");
+HttpURLConnection con = (HttpURLConnection) obj.openConnection();
+con.setRequestMethod("POST");
+int responseCode = con.getResponseCode();
+BufferedReader in = new BufferedReader(
+    new InputStreamReader(con.getInputStream()));
+String inputLine;
+StringBuffer response = new StringBuffer();
+while ((inputLine = in.readLine()) != null) {
+    response.append(inputLine);
+}
+in.close();
+System.out.println(response.toString());
+```
+
+`POST /games/{game-id}/guides`
+
+Add a guide for a game. Successful request will return a single [Guide Object](#guide-object).
+
+    Parameter|Type|Required|Description
+    ---|---|---|---|
+    logo|file|true|Image file which will represent your guides logo. Must be jpg, jpeg or png format and cannot exceed 8MB in filesize. Dimensions must be at least 512x288 and we recommended you supply a high resolution image with a 16 / 9 ratio. mod.io will use this image to make three thumbnails for the dimensions 320x180, 640x360 and 1280x720.
+    name|string|true|Name of your guide.
+    name_id|string||Path for the guide on mod.io. For example: https://mod.io/g/gamename/r/__guide-name-id-here__. If no `name_id` is specified the `name` will be used. For example: _'Stellaris Shader Guide'_ will become _'stellaris-shader-guide'_. Cannot exceed 50 characters.
+    summary|string|true|Summary for your guide, giving a brief overview of what it's about. Cannot exceed 250 characters.
+    description|string||Detailed description for your guide, which can include details such as 'About', 'Features', 'Install Instructions', 'FAQ', etc. HTML supported and encouraged.
+    url|string||Official homepage for your guide. Must be a valid URL.
+    tags[]|string||Tags to apply to the guide. Every tag to apply requires a separate field with tags[] as the key (eg. tags[]=tag1, tags[]=tag2).
+    date_live|integer||Unix timestamp of when this guide should go live. To release the guide immediately provide the current time along with the `status` value of 1. If this field is not provided and the `status` is 0, the guide will not be released.
+
+> Example response
+
+```json
+{
+  "id": 1209,
+  "game_id": 3,
+  "game_name": "My Awesome Game",
+  "logo": {
+    "filename": "card.png",
+    "original": "https://assets.modcdn.io/images/placeholder/card.png",
+    "thumb_320x180": "https://assets.modcdn.io/images/placeholder/card.png",
+    "thumb_640x360": "https://assets.modcdn.io/images/placeholder/card.png",
+    "thumb_1280x720": "https://assets.modcdn.io/images/placeholder/card.png"
+  },
+  "user": {
+    "id": 1,
+    "name_id": "xant",
+    "username": "XanT",
+    "display_name_portal": null,
+    "date_online": 1509922961,
+    "date_joined": 1509922961,
+    "avatar": {
+      "filename": "avatar.png",
+      "original": "https://assets.modcdn.io/images/placeholder/avatar.png",
+      "thumb_50x50": "https://assets.modcdn.io/images/placeholder/avatar_50x50.png",
+      "thumb_100x100": "https://assets.modcdn.io/images/placeholder/avatar_100x100.png"
+    },
+    "timezone": "",
+    "language": "",
+    "profile_url": "https://mod.io/u/xant"
+  },
+  "date_added": 1509922961,
+  "date_updated": 1509922961,
+  "date_live": 1509922961,
+  "status": 1,
+  "url": "https://mod.io/g/rogue-knight/r/getting-started",
+  "name": "Getting Started",
+  "name_id": "getting-started",
+  "summary": "Alright, so let's get started with modding on mod.io",
+  "description": "<h1>Getting Started</h2><p>Download this suspiciou....",
+  "tags": [
+    {
+      "name": "Instructions",
+      "date_added": 1499841487,
+      "count": 22
+    }
+  ],
+  "stats": [
+    {
+      "guide_id": 2,
+      "visits_total": 0,
+      "comments_total": 0
+    }
+  ]
+}
+
+
+```
+<h3 id="Add-Guide-responses">Responses</h3>
+
+Status|Meaning|Error Ref|Description|Response Schema
+---|---|----|---|---|
+201|[Created](https://tools.ietf.org/html/rfc7231#section-6.3.2)||Created|[Guide Object](#schemaguide_object)
+403|[Forbidden](https://tools.ietf.org/html/rfc7231#section-6.5.3)|14027|The authenticated user does not have permission to add guides to this game. Ensure the user is part of the game team before attempting the request again.|[Error Object](#schemaerror_object)
+<aside class="auth-notice">
+To perform this request, you must be authenticated via one of the following methods:
+<a href="#authentication">OAuth 2</a> (Scopes: web)
+</aside>
+## Edit Guide
+
+> Example request
+
+```shell
+# You can also use wget
+curl -X POST https://*.modapi.io/v1/games/{game-id}/guides/{guide-id} \
+  -H 'Authorization: Bearer {access-token}' \ 
+  -H 'Content-Type: multipart/form-data' \ 
+  -H 'Content-Type: multipart/form-data' \ 
+  -H 'Accept: application/json' \
+  -F 'name=Modding Guide for Rogue Knight' \
+  -F 'summary=Short descriptive summary here' \
+  -F 'description=<h2>Getting started with..' \
+  -F 'logo=@/path/to/image.jpg' \
+  -F 'date_live=1626667557'
+
+```
+
+```http
+POST https://*.modapi.io/v1/games/{game-id}/guides/{guide-id} HTTP/1.1
+Host: *.modapi.io
+Content-Type: multipart/form-data
+Accept: application/json
+Authorization: Bearer {access-token}
+Content-Type: multipart/form-data
+
+```
+
+```javascript
+var headers = {
+  'Authorization':'Bearer {access-token}',
+  'Content-Type':'multipart/form-data',
+  'Content-Type':'multipart/form-data',
+  'Accept':'application/json'
+
+};
+
+$.ajax({
+  url: 'https://*.modapi.io/v1/games/{game-id}/guides/{guide-id}',
+  method: 'post',
+
+  headers: headers,
+  success: function(data) {
+    console.log(JSON.stringify(data));
+  }
+})
+```
+
+```javascript--nodejs
+const request = require('node-fetch');
+const inputBody = '{
+  "name": "Modding Guide for Rogue Knight",
+  "summary": "Short descriptive summary here",
+  "description": "<h2>Getting started with..",
+  "logo": "@/path/to/image.jpg",
+  "date_live": 1626667557
+}';
+const headers = {
+  'Authorization':'Bearer {access-token}',
+  'Content-Type':'multipart/form-data',
+  'Content-Type':'multipart/form-data',
+  'Accept':'application/json'
+
+};
+
+fetch('https://*.modapi.io/v1/games/{game-id}/guides/{guide-id}',
+{
+  method: 'POST',
+  body: inputBody,
+  headers: headers
+})
+.then(function(res) {
+    return res.json();
+}).then(function(body) {
+    console.log(body);
+});
+```
+
+```python
+import requests
+headers = {
+  'Authorization': 'Bearer {access-token}',
+  'Content-Type': 'multipart/form-data',
+  'Content-Type': 'multipart/form-data',
+  'Accept': 'application/json'
+}
+
+r = requests.post('https://*.modapi.io/v1/games/{game-id}/guides/{guide-id}', params={
+
+}, headers = headers)
+
+print r.json()
+```
+
+```java
+URL obj = new URL("https://*.modapi.io/v1/games/{game-id}/guides/{guide-id}");
+HttpURLConnection con = (HttpURLConnection) obj.openConnection();
+con.setRequestMethod("POST");
+int responseCode = con.getResponseCode();
+BufferedReader in = new BufferedReader(
+    new InputStreamReader(con.getInputStream()));
+String inputLine;
+StringBuffer response = new StringBuffer();
+while ((inputLine = in.readLine()) != null) {
+    response.append(inputLine);
+}
+in.close();
+System.out.println(response.toString());
+```
+
+`POST /games/{game-id}/guides/{guide-id}`
+
+Update an existing guide. Successful request will return the updated [Guide Object](#guide-object).
+
+    Parameter|Type|Required|Description
+    ---|---|---|---|
+    status|integer||Status of the guide, see [status and visibility](#status-amp-visibility) for details):<br><br>__0__ = Not accepted<br>__1__ = Accepted (game admins only)<br>__3__ = Deleted (use the [delete guide](#delete-guide) endpoint to set this status)
+    logo|file||Image file which will represent your guides logo. Must be jpg, jpeg or png format and cannot exceed 8MB in filesize. Dimensions must be at least 512x288 and we recommended you supply a high resolution image with a 16 / 9 ratio. mod.io will use this image to make three thumbnails for the dimensions 320x180, 640x360 and 1280x720.
+    name|string||Name of your guide.
+    name_id|string||Path for the guide on mod.io. For example: https://mod.io/g/gamename/r/__guide-name-id-here__. If no `name_id` is specified the `name` will be used. For example: _'Stellaris Shader Guide'_ will become _'stellaris-shader-guide'_. Cannot exceed 50 characters.
+    summary|string||Summary for your guide, giving a brief overview of what it's about. Cannot exceed 250 characters.
+    description|string||Detailed description for your guide, which can include details such as 'About', 'Features', 'Install Instructions', 'FAQ', etc. HTML supported and encouraged.
+    url|string||Official homepage for your guide. Must be a valid URL.
+    tags[]|string||Tags to apply to the guide. Every tag to apply requires a separate field with tags[] as the key (eg. tags[]=tag1, tags[]=tag2).<br><br>__NOTE:__ When editing a guide any tags you add or remove from the existing tags list will be added/removed, so if you do not wish to remove any tags you must re-submit all existing tags.
+    date_live|integer||Unix timestamp of when this guide should go live. To release the guide immediately provide the current time along with the `status` 1. If this field is not provided and the `status` is 0, the guide will not be released.
+
+> Example response
+
+```json
+{
+  "id": 1209,
+  "game_id": 3,
+  "game_name": "My Awesome Game",
+  "logo": {
+    "filename": "card.png",
+    "original": "https://assets.modcdn.io/images/placeholder/card.png",
+    "thumb_320x180": "https://assets.modcdn.io/images/placeholder/card.png",
+    "thumb_640x360": "https://assets.modcdn.io/images/placeholder/card.png",
+    "thumb_1280x720": "https://assets.modcdn.io/images/placeholder/card.png"
+  },
+  "user": {
+    "id": 1,
+    "name_id": "xant",
+    "username": "XanT",
+    "display_name_portal": null,
+    "date_online": 1509922961,
+    "date_joined": 1509922961,
+    "avatar": {
+      "filename": "avatar.png",
+      "original": "https://assets.modcdn.io/images/placeholder/avatar.png",
+      "thumb_50x50": "https://assets.modcdn.io/images/placeholder/avatar_50x50.png",
+      "thumb_100x100": "https://assets.modcdn.io/images/placeholder/avatar_100x100.png"
+    },
+    "timezone": "",
+    "language": "",
+    "profile_url": "https://mod.io/u/xant"
+  },
+  "date_added": 1509922961,
+  "date_updated": 1509922961,
+  "date_live": 1509922961,
+  "status": 1,
+  "url": "https://mod.io/g/rogue-knight/r/getting-started",
+  "name": "Getting Started",
+  "name_id": "getting-started",
+  "summary": "Alright, so let's get started with modding on mod.io",
+  "description": "<h1>Getting Started</h2><p>Download this suspiciou....",
+  "tags": [
+    {
+      "name": "Instructions",
+      "date_added": 1499841487,
+      "count": 22
+    }
+  ],
+  "stats": [
+    {
+      "guide_id": 2,
+      "visits_total": 0,
+      "comments_total": 0
+    }
+  ]
+}
+
+
+```
+<h3 id="Edit-Guide-responses">Responses</h3>
+
+Status|Meaning|Error Ref|Description|Response Schema
+---|---|----|---|---|
+200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)||OK|[Guide Object](#schemaguide_object)
+403|[Forbidden](https://tools.ietf.org/html/rfc7231#section-6.5.3)|14036|The authenticated user does not have permission to edit guides to this game. Ensure the user is part of the game team before attempting the request again.|[Error Object](#schemaerror_object)
+403|[Forbidden](https://tools.ietf.org/html/rfc7231#section-6.5.3)|14031|The guide status cannot be changed to accepted due to the request originating from a non-site admin whilst there is a DMCA report active against the guide.|[Error Object](#schemaerror_object)
+<aside class="auth-notice">
+To perform this request, you must be authenticated via one of the following methods:
+<a href="#authentication">OAuth 2</a> (Scopes: web)
+</aside>
+## Delete Guide
+
+> Example request
+
+```shell
+# You can also use wget
+curl -X DELETE https://*.modapi.io/v1/games/{game-id}/guides/{guide-id} \
+  -H 'Authorization: Bearer {access-token}' \ 
+  -H 'Content-Type: application/x-www-form-urlencoded' \ 
+  -H 'Accept: application/json'
+
+```
+
+```http
+DELETE https://*.modapi.io/v1/games/{game-id}/guides/{guide-id} HTTP/1.1
+Host: *.modapi.io
+
+Accept: application/json
+Authorization: Bearer {access-token}
+Content-Type: application/x-www-form-urlencoded
+
+```
+
+```javascript
+var headers = {
+  'Authorization':'Bearer {access-token}',
+  'Content-Type':'application/x-www-form-urlencoded',
+  'Accept':'application/json'
+
+};
+
+$.ajax({
+  url: 'https://*.modapi.io/v1/games/{game-id}/guides/{guide-id}',
+  method: 'delete',
+
+  headers: headers,
+  success: function(data) {
+    console.log(JSON.stringify(data));
+  }
+})
+```
+
+```javascript--nodejs
+const request = require('node-fetch');
+
+const headers = {
+  'Authorization':'Bearer {access-token}',
+  'Content-Type':'application/x-www-form-urlencoded',
+  'Accept':'application/json'
+
+};
+
+fetch('https://*.modapi.io/v1/games/{game-id}/guides/{guide-id}',
+{
+  method: 'DELETE',
+
+  headers: headers
+})
+.then(function(res) {
+    return res.json();
+}).then(function(body) {
+    console.log(body);
+});
+```
+
+```python
+import requests
+headers = {
+  'Authorization': 'Bearer {access-token}',
+  'Content-Type': 'application/x-www-form-urlencoded',
+  'Accept': 'application/json'
+}
+
+r = requests.delete('https://*.modapi.io/v1/games/{game-id}/guides/{guide-id}', params={
+
+}, headers = headers)
+
+print r.json()
+```
+
+```java
+URL obj = new URL("https://*.modapi.io/v1/games/{game-id}/guides/{guide-id}");
+HttpURLConnection con = (HttpURLConnection) obj.openConnection();
+con.setRequestMethod("DELETE");
+int responseCode = con.getResponseCode();
+BufferedReader in = new BufferedReader(
+    new InputStreamReader(con.getInputStream()));
+String inputLine;
+StringBuffer response = new StringBuffer();
+while ((inputLine = in.readLine()) != null) {
+    response.append(inputLine);
+}
+in.close();
+System.out.println(response.toString());
+```
+
+`DELETE /games/{game-id}/guides/{guide-id}`
+
+Delete a guide. Successful request will return `204 No Content`.
+
+> Example response
+
+```json
+ 204 No Content 
+
+
+```
+<h3 id="Delete-Guide-responses">Responses</h3>
+
+Status|Meaning|Error Ref|Description|Response Schema
+---|---|----|---|---|
+204|[No Content](https://tools.ietf.org/html/rfc7231#section-6.3.5)||Successful Request. No Body Returned.|None
+403|[Forbidden](https://tools.ietf.org/html/rfc7231#section-6.5.3)|14028|The authenticated user does not have permission to delete guides to this game. Ensure the user is part of the game team before attempting the request again.|[Error Object](#schemaerror_object)
+403|[Forbidden](https://tools.ietf.org/html/rfc7231#section-6.5.3)|14031|The guide cannot be deleted due to the request originating from a non-site admin whilst there is a DMCA report active against the guide.|[Error Object](#schemaerror_object)
+<aside class="auth-notice">
+To perform this request, you must be authenticated via one of the following methods:
+<a href="#authentication">OAuth 2</a> (Scopes: web)
+</aside>
+## Get Guides Tags
+
+> Example request
+
+```shell
+# You can also use wget
+curl -X GET https://*.modapi.io/v1/games/{game-id}/guides/tags?api_key=YourApiKey \
+  -H 'Accept: application/json'
+
+```
+
+```http
+GET https://*.modapi.io/v1/games/{game-id}/guides/tags?api_key=YourApiKey HTTP/1.1
+Host: *.modapi.io
+
+Accept: application/json
+
+```
+
+```javascript
+var headers = {
+  'Accept':'application/json'
+
+};
+
+$.ajax({
+  url: 'https://*.modapi.io/v1/games/{game-id}/guides/tags',
+  method: 'get',
+  data: '?api_key=YourApiKey',
+  headers: headers,
+  success: function(data) {
+    console.log(JSON.stringify(data));
+  }
+})
+```
+
+```javascript--nodejs
+const request = require('node-fetch');
+
+const headers = {
+  'Accept':'application/json'
+
+};
+
+fetch('https://*.modapi.io/v1/games/{game-id}/guides/tags?api_key=YourApiKey',
+{
+  method: 'GET',
+
+  headers: headers
+})
+.then(function(res) {
+    return res.json();
+}).then(function(body) {
+    console.log(body);
+});
+```
+
+```python
+import requests
+headers = {
+  'Accept': 'application/json'
+}
+
+r = requests.get('https://*.modapi.io/v1/games/{game-id}/guides/tags', params={
+  'api_key': 'YourApiKey'
+}, headers = headers)
+
+print r.json()
+```
+
+```java
+URL obj = new URL("https://*.modapi.io/v1/games/{game-id}/guides/tags?api_key=YourApiKey");
+HttpURLConnection con = (HttpURLConnection) obj.openConnection();
+con.setRequestMethod("GET");
+int responseCode = con.getResponseCode();
+BufferedReader in = new BufferedReader(
+    new InputStreamReader(con.getInputStream()));
+String inputLine;
+StringBuffer response = new StringBuffer();
+while ((inputLine = in.readLine()) != null) {
+    response.append(inputLine);
+}
+in.close();
+System.out.println(response.toString());
+```
+
+`GET /games/{game-id}/guides/tags`
+
+Get all guide tags for a game. Successful request will return an array of [Guide Tag Objects](#get-guide-tags).
+
+> Example response
+
+```json
+{
+  "data": [
+    {
+      "name": "Instructions",
+      "date_added": 1499841487,
+      "count": 22
+    },
+    {
+        ...
+    },
+    {
+        ...
+    }
+  ],
+  "result_count": 70,
+  "result_offset": 0,
+  "result_limit": 100,
+  "result_total": 70
+}
+
+
+```
+<h3 id="Get-Guides-Tags-responses">Responses</h3>
+
+Status|Meaning|Error Ref|Description|Response Schema
+---|---|----|---|---|
+200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)||Successful Request|[Get Guide Tags](#schemaget_guide_tags)
+<aside class="auth-notice">
+To perform this request, you must be authenticated via one of the following methods:
+<a href="#authentication">api_key</a>, <a href="#authentication">OAuth 2</a> (Scopes: read)
+</aside>
+# Mods
+
 ## Edit Mod
 
 > Example request
@@ -5831,6 +5597,7 @@ Edit details for a mod. If you want to update the `logo` or media associated wit
   }
 }
 
+
 ```
 <h3 id="Edit-Mod-responses">Responses</h3>
 
@@ -5950,6 +5717,7 @@ Delete a mod profile. Successful request will return `204 No Content` and fire a
 
 ```json
  204 No Content 
+
 
 ```
 <h3 id="Delete-Mod-responses">Responses</h3>
@@ -6108,6 +5876,9 @@ Get all files that are published for the corresponding mod. Successful request w
     },
     {
         ...
+    },
+    {
+        ...
     }
   ],
   "result_count": 70,
@@ -6115,6 +5886,7 @@ Get all files that are published for the corresponding mod. Successful request w
   "result_limit": 100,
   "result_total": 70
 }
+
 
 ```
 <h3 id="endpoint-xplatform-notice">Cross-Platform Filtering</h3>
@@ -6252,6 +6024,7 @@ Get a file. Successful request will return a single [Modfile Object](#modfile-ob
     }
   ]
 }
+
 
 ```
 <h3 id="Get-Modfile-responses">Responses</h3>
@@ -6423,6 +6196,7 @@ Upload a file for the corresponding mod. Successful request will return the newl
   ]
 }
 
+
 ```
 <h3 id="endpoint-xplatform-notice">Cross-Platform Filtering</h3>
 
@@ -6585,6 +6359,7 @@ Edit the details of a published file. If you want to update fields other than th
   ]
 }
 
+
 ```
 <h3 id="endpoint-xplatform-notice">Cross-Platform Filtering</h3>
 
@@ -6704,6 +6479,7 @@ Delete a modfile. Successful request will return `204 No Content`.<br><br>__NOTE
 
 ```json
  204 No Content 
+
 
 ```
 <h3 id="Delete-Modfile-responses">Responses</h3>
@@ -6857,6 +6633,7 @@ Manage the platform status of a particular modfile. This endpoint does not set a
   ]
 }
 
+
 ```
 <h3 id="Manage-Platform-Status-responses">Responses</h3>
 
@@ -6978,6 +6755,9 @@ Get all uploaded parts for a corresponding upload session. Successful request wi
     },
     {
         ...
+    },
+    {
+        ...
     }
   ],
   "result_count": 70,
@@ -6985,6 +6765,7 @@ Get all uploaded parts for a corresponding upload session. Successful request wi
   "result_limit": 100,
   "result_total": 70
 }
+
 
 ```
 <h3 id="Get-Multipart-Upload-Parts-responses">Responses</h3>
@@ -7121,6 +6902,7 @@ Add a new multipart upload part to an [existing upload session](#create-multipar
   "part_size": 52428800,
   "date_added": 1499846132
 }
+
 
 ```
 <h3 id="Add-Multipart-Upload-Part-responses">Responses</h3>
@@ -7264,6 +7046,7 @@ Create a new multipart upload session. A successful request will return a single
   "status": 0
 }
 
+
 ```
 <h3 id="Create-Multipart-Upload-Session-responses">Responses</h3>
 
@@ -7376,6 +7159,7 @@ Terminate an active multipart upload session, a successful request will return `
 
 ```json
  204 No Content 
+
 
 ```
 <h3 id="Delete-Multipart-Upload-Session-responses">Responses</h3>
@@ -7493,6 +7277,9 @@ Get all upload sessions belonging to the authenticated user for the correspondin
     },
     {
         ...
+    },
+    {
+        ...
     }
   ],
   "result_count": 70,
@@ -7500,6 +7287,7 @@ Get all upload sessions belonging to the authenticated user for the correspondin
   "result_limit": 100,
   "result_total": 70
 }
+
 
 ```
 <h3 id="Get-Multipart-Upload-Sessions-responses">Responses</h3>
@@ -7615,6 +7403,7 @@ Complete an active multipart upload session, this endpoint assumes that you have
   "upload_id": "123e4567-e89b-12d3-a456-426614174000",
   "status": 0
 }
+
 
 ```
 <h3 id="Complete-Multipart-Upload-Session-responses">Responses</h3>
@@ -7867,6 +7656,7 @@ Subscribe the _authenticated user_ to a corresponding mod. No body parameters ar
   }
 }
 
+
 ```
 <h3 id=dQw4w9WgXcQ"
     ],
@@ -8092,6 +7882,7 @@ Unsubscribe the _authenticated user_ from the corresponding mod. No body paramet
 ```json
  204 No Content 
 
+
 ```
 <h3 id="Unsubscribe-From-Mod-responses">Responses</h3>
 
@@ -8248,6 +8039,7 @@ Get all comments posted in the guides profile. Successful request will return an
   "result_total": 1
 }
 
+
 ```
 <h3 id="Get-Guide-Comments-responses">Responses</h3>
 
@@ -8401,6 +8193,7 @@ Add a comment for the corresponding guide. Successful request will return the ne
   "options": 0
 }
 
+
 ```
 <h3 id="Add-Guide-Comment-responses">Responses</h3>
 
@@ -8541,6 +8334,7 @@ Get a Guide Comment. Successful request will return a single [Comment Object](#c
   "content": "Hey <a href=\"https://mod.io/u/guest\">guest</a>, you should check out this mod!",
   "options": 0
 }
+
 
 ```
 <h3 id="Get-Guide-Comment-responses">Responses</h3>
@@ -8692,6 +8486,7 @@ Update a comment for the corresponding guide. Successful request will return the
   "options": 0
 }
 
+
 ```
 <h3 id="Update-Guide-Comment-responses">Responses</h3>
 
@@ -8806,6 +8601,7 @@ Delete a comment from a guide profile. Successful request will return `204 No Co
 
 ```json
  204 No Content 
+
 
 ```
 <h3 id="Delete-Guide-Comment-responses">Responses</h3>
@@ -8957,6 +8753,7 @@ Update the Karma rating in single increments or decrements for a corresponding g
   "content": "Hey <a href=\"https://mod.io/u/guest\">guest</a>, you should check out this mod!",
   "options": 0
 }
+
 
 ```
 <h3 id="Add-Guide-Comment-Karma-responses">Responses</h3>
@@ -9112,6 +8909,7 @@ Get all comments posted in the mods profile. Successful request will return an a
   "result_total": 1
 }
 
+
 ```
 <h3 id="Get-Mod-Comments-responses">Responses</h3>
 
@@ -9265,6 +9063,7 @@ Add a comment for the corresponding mod. Successful request will return the newl
   "options": 0
 }
 
+
 ```
 <h3 id="Add-Mod-Comment-responses">Responses</h3>
 
@@ -9405,6 +9204,7 @@ Get a Mod Comment. Successful request will return a single [Comment Object](#com
   "content": "Hey <a href=\"https://mod.io/u/guest\">guest</a>, you should check out this mod!",
   "options": 0
 }
+
 
 ```
 <h3 id="Get-Mod-Comment-responses">Responses</h3>
@@ -9556,6 +9356,7 @@ Update a comment for the corresponding mod. Successful request will return the u
   "options": 0
 }
 
+
 ```
 <h3 id="Update-Mod-Comment-responses">Responses</h3>
 
@@ -9670,6 +9471,7 @@ Delete a comment from a mod profile. Successful request will return `204 No Cont
 
 ```json
  204 No Content 
+
 
 ```
 <h3 id="Delete-Mod-Comment-responses">Responses</h3>
@@ -9822,6 +9624,7 @@ Update the Karma rating in single increments or decrements for a corresponding m
   "options": 0
 }
 
+
 ```
 <h3 id="Add-Mod-Comment-Karma-responses">Responses</h3>
 
@@ -9953,6 +9756,7 @@ Upload new media to a game. The request `Content-Type` header __must__ be `multi
   "code": 200,
   "message": "You have successfully added new media to the specified game profile."
 }
+
 
 ```
 <h3 id="Add-Game-Media-responses">Responses</h3>
@@ -10093,6 +9897,7 @@ This endpoint is very flexible and will add any images posted to the mods galler
   "message": "You have successfully added new media to the specified mod."
 }
 
+
 ```
 <h3 id="Add-Mod-Media-responses">Responses</h3>
 
@@ -10229,6 +10034,7 @@ Delete images, sketchfab or youtube links from a mod profile. Successful request
 ```json
  204 No Content 
 
+
 ```
 <h3 id="Delete-Mod-Media-responses">Responses</h3>
 
@@ -10358,6 +10164,7 @@ Reorder images, sketchfab or youtube links from a mod profile. Successful reques
 
 ```json
  204 No Content 
+
 
 ```
 <h3 id="Reorder-Mod-Media-responses">Responses</h3>
@@ -10489,6 +10296,9 @@ Get all mods events for the corresponding game sorted by latest event first. Suc
     },
     {
         ...
+    },
+    {
+        ...
     }
   ],
   "result_count": 70,
@@ -10496,6 +10306,7 @@ Get all mods events for the corresponding game sorted by latest event first. Suc
   "result_limit": 100,
   "result_total": 70
 }
+
 
 ```
 <h3 id="Get-Mods-Events-responses">Responses</h3>
@@ -10611,6 +10422,9 @@ Get the event log for a mod, showing changes made sorted by latest event first. 
     },
     {
         ...
+    },
+    {
+        ...
     }
   ],
   "result_count": 70,
@@ -10618,6 +10432,7 @@ Get the event log for a mod, showing changes made sorted by latest event first. 
   "result_limit": 100,
   "result_total": 70
 }
+
 
 ```
 <h3 id="Get-Mod-Events-responses">Responses</h3>
@@ -10755,6 +10570,9 @@ Get all tags for the corresponding game, that can be applied to any of its mods.
     },
     {
         ...
+    },
+    {
+        ...
     }
   ],
   "result_count": 70,
@@ -10762,6 +10580,7 @@ Get all tags for the corresponding game, that can be applied to any of its mods.
   "result_limit": 100,
   "result_total": 70
 }
+
 
 ```
 <h3 id="Get-Game-Tag-Options-responses">Responses</h3>
@@ -10880,6 +10699,9 @@ Get all tags for the corresponding mod. Successful request will return an array 
     },
     {
         ...
+    },
+    {
+        ...
     }
   ],
   "result_count": 70,
@@ -10887,6 +10709,7 @@ Get all tags for the corresponding mod. Successful request will return an array 
   "result_limit": 100,
   "result_total": 70
 }
+
 
 ```
 <h3 id="Get-Mod-Tags-responses">Responses</h3>
@@ -11011,6 +10834,7 @@ Add tags to a mod's profile. You can only add tags allowed by the parent game, w
   "code": 200,
   "message": "Your request was successful."
 }
+
 
 ```
 <h3 id="Add-Mod-Tags-responses">Responses</h3>
@@ -11139,6 +10963,7 @@ Delete tags from a mod's profile. Deleting tags is identical to adding tags exce
 
 ```json
  204 No Content 
+
 
 ```
 <h3 id="Delete-Mod-Tags-responses">Responses</h3>
@@ -11269,6 +11094,7 @@ Submit a positive or negative rating for a mod. Each user can supply only one ra
   "message": "You have successfully submitted a rating for the specified mod."
 }
 
+
 ```
 <h3 id="Add-Mod-Rating-responses">Responses</h3>
 
@@ -11385,6 +11211,7 @@ Get game stats for the corresponding game. Successful request will return a sing
   "mods_subscribers_total": 16394,
   "date_expires": 1492564103
 }
+
 
 ```
 <h3 id="Get-Game-Stats-responses">Responses</h3>
@@ -11520,6 +11347,9 @@ Get all mod stats for mods of the corresponding game. Successful request will re
     },
     {
         ...
+    },
+    {
+        ...
     }
   ],
   "result_count": 70,
@@ -11527,6 +11357,7 @@ Get all mod stats for mods of the corresponding game. Successful request will re
   "result_limit": 100,
   "result_total": 70
 }
+
 
 ```
 <h3 id="Get-Mods-Stats-responses">Responses</h3>
@@ -11647,6 +11478,7 @@ Get mod stats for the corresponding mod. Successful request will return a single
   "date_expires": 1492564103
 }
 
+
 ```
 <h3 id="Get-Mod-Stats-responses">Responses</h3>
 
@@ -11760,6 +11592,9 @@ Get all metadata stored by the game developer for this mod as searchable key val
     },
     {
         ...
+    },
+    {
+        ...
     }
   ],
   "result_count": 70,
@@ -11767,6 +11602,7 @@ Get all metadata stored by the game developer for this mod as searchable key val
   "result_limit": 100,
   "result_total": 70
 }
+
 
 ```
 <h3 id="Get-Mod-KVP-Metadata-responses">Responses</h3>
@@ -11893,6 +11729,7 @@ Add metadata for this mod as searchable key value pairs. Metadata is useful to d
   "code": 201,
   "message": "You have successfully added new key-value metadata to the specified mod."
 }
+
 
 ```
 <h3 id="Add-Mod-KVP-Metadata-responses">Responses</h3>
@@ -12021,6 +11858,7 @@ Delete key value pairs metadata defined for this mod. Successful request will re
 
 ```json
  204 No Content 
+
 
 ```
 <h3 id="Delete-Mod-KVP-Metadata-responses">Responses</h3>
@@ -12188,6 +12026,9 @@ Get all dependencies the chosen mod has selected. This is useful if a mod requir
     },
     {
         ...
+    },
+    {
+        ...
     }
   ],
   "result_count": 70,
@@ -12195,6 +12036,7 @@ Get all dependencies the chosen mod has selected. This is useful if a mod requir
   "result_limit": 100,
   "result_total": 70
 }
+
 
 ```
 <h3 id="Get-Mod-Dependencies-responses">Responses</h3>
@@ -12319,6 +12161,7 @@ Add mod dependencies required by the corresponding mod. A dependency is a mod th
   "code": 201,
   "message": "You have successfully added new dependencies to the specified mod."
 }
+
 
 ```
 <h3 id="Add-Mod-Dependencies-responses">Responses</h3>
@@ -12448,6 +12291,7 @@ Delete mod dependencies the corresponding mod has selected. Successful request w
 ```json
  204 No Content 
 
+
 ```
 <h3 id="Delete-Mod-Dependencies-responses">Responses</h3>
 
@@ -12574,6 +12418,9 @@ Get all mods depending on the given mod. Successful request will return an array
     },
     {
         ...
+    },
+    {
+        ...
     }
   ],
   "result_count": 70,
@@ -12581,6 +12428,7 @@ Get all mods depending on the given mod. Successful request will return an array
   "result_limit": 100,
   "result_total": 70
 }
+
 
 ```
 <h3 id="Get-Mod-Dependants-responses">Responses</h3>
@@ -12724,6 +12572,9 @@ Get all users that are part of a mod team. Successful request will return an arr
     },
     {
         ...
+    },
+    {
+        ...
     }
   ],
   "result_count": 70,
@@ -12731,6 +12582,7 @@ Get all users that are part of a mod team. Successful request will return an arr
   "result_limit": 100,
   "result_total": 70
 }
+
 
 ```
 <h3 id="Get-Mod-Team-Members-responses">Responses</h3>
@@ -12894,6 +12746,7 @@ The purpose of this endpoint is enable users to report a resource (game, mod or 
   "message": "You have successfully submitted a report and it will be reviewed by the mod.io team as soon as possible."
 }
 
+
 ```
 <h3 id="Submit-Report-responses">Responses</h3>
 
@@ -13053,6 +12906,7 @@ Get the current agreement (version) by type. Successful request will return a si
   "description": "Privacy Agreement - 20/11/2020....."
 }
 
+
 ```
 <h3 id="Get-Current-Agreement-responses">Responses</h3>
 
@@ -13186,6 +13040,7 @@ Get the specified agreement version. Successful request will return an [Agreemen
   "description": "Privacy Agreement - 20/11/2020....."
 }
 
+
 ```
 <h3 id="Get-Agreement-Version-responses">Responses</h3>
 
@@ -13300,6 +13155,7 @@ Mute a user. This will prevent mod.io from returning mods to you authored by the
 ```json
  204 No Content 
 
+
 ```
 <h3 id="Mute-a-User-responses">Responses</h3>
 
@@ -13411,6 +13267,7 @@ Unmute a previously muted user. This will re-enable mod.io to returning mods to 
 
 ```json
  204 No Content 
+
 
 ```
 <h3 id="Unmute-a-User-responses">Responses</h3>
@@ -13541,6 +13398,7 @@ Get the _authenticated user_ details. Successful request will return a single [U
   "profile_url": "https://mod.io/u/xant"
 }
 
+
 ```
 <h3 id="Get-Authenticated-User-responses">Responses</h3>
 
@@ -13665,6 +13523,9 @@ __Deprecated__: This endpoint is deprecated for in-game use and will be removed 
     },
     {
         ...
+    },
+    {
+        ...
     }
   ],
   "result_count": 70,
@@ -13672,6 +13533,7 @@ __Deprecated__: This endpoint is deprecated for in-game use and will be removed 
   "result_limit": 100,
   "result_total": 70
 }
+
 
 ```
 <h3 id="Get-User-Events-responses">Responses</h3>
@@ -13832,6 +13694,9 @@ Get all modfiles the _authenticated user_ uploaded. Successful request will retu
     },
     {
         ...
+    },
+    {
+        ...
     }
   ],
   "result_count": 70,
@@ -13839,6 +13704,7 @@ Get all modfiles the _authenticated user_ uploaded. Successful request will retu
   "result_limit": 100,
   "result_total": 70
 }
+
 
 ```
 <h3 id="Get-User-Modfiles-responses">Responses</h3>
@@ -14080,6 +13946,9 @@ Get all games the _authenticated user_ added or is a team member of. Successful 
     },
     {
         ...
+    },
+    {
+        ...
     }
   ],
   "result_count": 70,
@@ -14087,6 +13956,7 @@ Get all games the _authenticated user_ added or is a team member of. Successful 
   "result_limit": 100,
   "result_total": 70
 }
+
 
 ```
 <h3 id="Get-User-Games-responses">Responses</h3>
@@ -14354,6 +14224,9 @@ Get all mod's the _authenticated user_ is subscribed to. Successful request will
     },
     {
         ...
+    },
+    {
+        ...
     }
   ],
   "result_count": 70,
@@ -14361,6 +14234,7 @@ Get all mod's the _authenticated user_ is subscribed to. Successful request will
   "result_limit": 100,
   "result_total": 70
 }
+
 
 ```
 <h3 id="endpoint-xplatform-notice">Cross-Platform Filtering</h3>
@@ -14632,6 +14506,9 @@ Get all mods the _authenticated user_ added or is a team member of. Successful r
     },
     {
         ...
+    },
+    {
+        ...
     }
   ],
   "result_count": 70,
@@ -14639,6 +14516,7 @@ Get all mods the _authenticated user_ added or is a team member of. Successful r
   "result_limit": 100,
   "result_total": 70
 }
+
 
 ```
 <h3 id="Get-User-Mods-responses">Responses</h3>
@@ -14902,6 +14780,9 @@ Get all mod's the _authenticated user_ has purchased. Successful request will re
     },
     {
         ...
+    },
+    {
+        ...
     }
   ],
   "result_count": 70,
@@ -14909,6 +14790,7 @@ Get all mod's the _authenticated user_ has purchased. Successful request will re
   "result_limit": 100,
   "result_total": 70
 }
+
 
 ```
 <h3 id="endpoint-xplatform-notice">Cross-Platform Filtering</h3>
@@ -15043,6 +14925,9 @@ Get all users muted by the _authenticated user_. Successful request will return 
     },
     {
         ...
+    },
+    {
+        ...
     }
   ],
   "result_count": 1,
@@ -15050,6 +14935,7 @@ Get all users muted by the _authenticated user_. Successful request will return 
   "result_limit": 100,
   "result_total": 1
 }
+
 
 ```
 <h3 id="Get-Users-Muted-responses">Responses</h3>
@@ -15176,6 +15062,9 @@ Get all mod rating's submitted by the _authenticated user_. Successful request w
     },
     {
         ...
+    },
+    {
+        ...
     }
   ],
   "result_count": 70,
@@ -15183,6 +15072,7 @@ Get all mod rating's submitted by the _authenticated user_. Successful request w
   "result_limit": 100,
   "result_total": 70
 }
+
 
 ```
 <h3 id="Get-User-Ratings-responses">Responses</h3>
@@ -15304,6 +15194,7 @@ Get the _authenticated user_ wallets. Successful request will return a single [W
   "deficit": 0,
   "monetization_status": 1
 }
+
 
 ```
 <h3 id="Get-User-Wallet-responses">Responses</h3>
@@ -15451,6 +15342,7 @@ Get the user that is the original _submitter_ of a resource. Successful request 
   "profile_url": "https://mod.io/u/xant"
 }
 
+
 ```
 <h3 id="Get-Resource-Owner-responses">Responses</h3>
 
@@ -15559,6 +15451,7 @@ Ping the mod.io API for purpose of a reachability check, successful request will
   "success": true,
   "message": "You have successfully logged out of mod.io."
 }
+
 
 ```
 <h3 id="Ping-responses">Responses</h3>
@@ -15718,6 +15611,9 @@ Get a games Embeddable Mod Hub (EMH) config. This will return all of the configu
     },
     {
         ...
+    },
+    {
+        ...
     }
   ],
   "result_count": 70,
@@ -15725,6 +15621,7 @@ Get a games Embeddable Mod Hub (EMH) config. This will return all of the configu
   "result_limit": 100,
   "result_total": 70
 }
+
 
 ```
 <h3 id="Get-Game-EMH-Configs-responses">Responses</h3>
@@ -15880,6 +15777,7 @@ Get a games Embeddable Mod Hub (EMH) config. This will return all of the configu
   ]
 }
 
+
 ```
 <h3 id="Get-Game-EMH-Config-responses">Responses</h3>
 
@@ -16003,6 +15901,7 @@ Get all token packs for a game. Successful request will return a [Game Token Pac
   "date_added": 1492564103,
   "date_updated": 1492564103
 }
+
 
 ```
 <h3 id="Get-Game-Token-Packs-responses">Responses</h3>
@@ -16270,6 +16169,7 @@ Purchase a mod. A Successful request will return the newly created [Pay Object](
   }
 }
 
+
 ```
 <h3 id="Purchase-A-Mod-responses">Responses</h3>
 
@@ -16407,6 +16307,7 @@ Get users in a monetization team. Successful request will return a [Monetization
   "split": 0
 }
 
+
 ```
 <h3 id="Get-Mod-Monetization-Team-responses">Responses</h3>
 
@@ -16531,6 +16432,7 @@ Send a request to create a monetization team for a mod team. Successful request 
   "monetization_options": 0,
   "split": 0
 }
+
 
 ```
 <h3 id="Create-Mod-Monetization-Team-responses">Responses</h3>
@@ -16695,6 +16597,7 @@ Create a service-to-service (S2S) transaction intent. This is for performing an 
   "purchase_date": 1626667557
 }
 
+
 ```
 <h3 id="S2S-Transaction-Intent-responses">Responses</h3>
 
@@ -16837,6 +16740,7 @@ Create a service-to-service (S2S) transaction commit. This is for performing an 
   "meta": {},
   "purchase_date": 1626667557
 }
+
 
 ```
 <h3 id="S2S-Transaction-Commit-responses">Responses</h3>
@@ -16987,6 +16891,7 @@ Create a service-to-service (S2S) transaction clawback. This is for unwinding a 
   "purchase_date": null
 }
 
+
 ```
 <h3 id="S2S-Transaction-Clawback-responses">Responses</h3>
 
@@ -17101,6 +17006,7 @@ Disconnect a mod.io user from a linked studio user. This will completely remove 
 
 ```json
  204 No Content 
+
 
 ```
 <h3 id="S2S-Disconnect-User-responses">Responses</h3>
@@ -17960,6 +17866,9 @@ date_added|integer|Unix timestamp of the date the user was registered as a previ
     },
     {
         ...
+    },
+    {
+        ...
     }
   ],
   "result_count": 70,
@@ -18055,6 +17964,9 @@ result_total|integer|Number of entitlements mod.io was able to retrieve that can
       },
       "hidden": false,
       "locked": false
+    },
+    {
+        ...
     },
     {
         ...
@@ -18184,6 +18096,9 @@ result_total|integer|Total number of results found.
     },
     {
         ...
+    },
+    {
+        ...
     }
   ],
   "result_count": 70,
@@ -18276,6 +18191,9 @@ result_total|integer|Total number of results found.
     },
     {
         ...
+    },
+    {
+        ...
     }
   ],
   "result_count": 70,
@@ -18355,6 +18273,9 @@ result_total|integer|Total number of results found.
           "comments_total": 0
         }
       ]
+    },
+    {
+        ...
     },
     {
         ...
@@ -18461,6 +18382,9 @@ result_total|integer|Total number of results found.
     },
     {
         ...
+    },
+    {
+        ...
     }
   ],
   "result_count": 70,
@@ -18537,6 +18461,9 @@ result_total|integer|Total number of results found.
     },
     {
         ...
+    },
+    {
+        ...
     }
   ],
   "result_count": 70,
@@ -18574,6 +18501,9 @@ result_total|integer|Total number of results found.
     },
     {
         ...
+    },
+    {
+        ...
     }
   ],
   "result_count": 70,
@@ -18605,6 +18535,9 @@ result_total|integer|Total number of results found.
     {
       "metakey": "pistol-dmg",
       "metavalue": "800"
+    },
+    {
+        ...
     },
     {
         ...
@@ -18653,6 +18586,9 @@ result_total|integer|Total number of results found.
     },
     {
         ...
+    },
+    {
+        ...
     }
   ],
   "result_count": 70,
@@ -18685,6 +18621,9 @@ result_total|integer|Total number of results found.
       "name": "Unity",
       "name_localized": "Unity",
       "date_added": 1499841487
+    },
+    {
+        ...
     },
     {
         ...
@@ -18744,6 +18683,9 @@ result_total|integer|Total number of results found.
           "status": 1
         }
       ]
+    },
+    {
+        ...
     },
     {
         ...
@@ -18904,6 +18846,9 @@ result_total|integer|Total number of results found.
     },
     {
         ...
+    },
+    {
+        ...
     }
   ],
   "result_count": 70,
@@ -18940,6 +18885,9 @@ result_total|integer|Total number of results found.
     },
     {
         ...
+    },
+    {
+        ...
     }
   ],
   "result_count": 70,
@@ -18971,6 +18919,9 @@ result_total|integer|Total number of results found.
     {
       "upload_id": "123e4567-e89b-12d3-a456-426614174000",
       "status": 0
+    },
+    {
+        ...
     },
     {
         ...
@@ -19018,6 +18969,9 @@ result_total|integer|Total number of results found.
       "timezone": "",
       "language": "",
       "profile_url": "https://mod.io/u/xant"
+    },
+    {
+        ...
     },
     {
         ...
@@ -19075,6 +19029,9 @@ result_total|integer|Total number of results found.
     },
     {
         ...
+    },
+    {
+        ...
     }
   ],
   "result_count": 70,
@@ -19113,6 +19070,9 @@ result_total|integer|Total number of results found.
     },
     {
         ...
+    },
+    {
+        ...
     }
   ],
   "result_count": 70,
@@ -19146,6 +19106,9 @@ result_total|integer|Total number of results found.
       "mod_id": 2,
       "rating": -1,
       "date_added": 1492564103
+    },
+    {
+        ...
     },
     {
         ...
