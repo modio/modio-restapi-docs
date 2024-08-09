@@ -1854,13 +1854,28 @@ visible-st=1
 </ul>
 <h2 id="filtering">Filtering</h2>
 <p>mod.io has powerful filtering available to assist you when making requests to the API. You can filter on all columns <strong>in the parent object only</strong>. You cannot apply filters to columns in nested objects, so if a game contains a tags object you cannot filter by the <code>tag name</code> column, but you can filter by the games <code>name</code> since the games <code>name</code> resides in the parent object.</p>
-<h3 id="_q-full-text-search">_q (Full text search)</h3><div class="highlight"><pre class="highlight plaintext"><code>v1/games?_q=The Lord Of The Rings
+<h3 id="or-fields-filter-grouping">or fields    (Filter grouping)</h3>
+<p>By default, multiple filters are combined using an "AND" operation. However, with or_fields, you can group filters together to be combined using an "OR" operation.</p>
+
+<p>For example, if you want to find all mods that have been tagged with "Level" but also include mods made by the creator "UltimateModder", you can achieve this with the following query parameters:</p>
+<div class="highlight"><pre class="highlight plaintext"><code>v1/games/your-game/mods?tags=level&amp;submitted_by_display_name=UltimateModder&amp;or_fields[]=tags,submitted_by_display_name
+</code></pre></div>
+<p>This would be interpreted as "Fetch all mods where (tags in level <strong>OR</strong> submitted_by like UltimateModder)". Without the <code>or_fields</code> parameter, it would be treated as AND.</p>
+
+<p>A few things to note:</p>
+
+<ul>
+<li>The <code>or_fields</code> parameter must be provided as an array.</li>
+<li>A maximum of 2 <code>or_fields</code> can be present in a query at any time.</li>
+<li>A maximum of 3 fields per <code>or_fields</code>.</li>
+</ul>
+<h3 id="_q-full-text-search">_q (Full text search)</h3><div class="highlight"><pre class="highlight plaintext"><code>v1/games?_q=Gravity Bounce
 </code></pre></div>
 <p>Full-text search is a lenient search filter that <em>is only available</em> if the endpoint you are querying contains a <code>name</code> column. Wildcards should <em>not</em> be applied to this filter as they are ignored.</p>
 
 <ul>
 <li>
-<code>?_q=The Lord of the Rings</code> - This will return every result where the <code>name</code> column contains any of the following words: 'The', 'Lord', 'of', 'the', 'Rings'. </li>
+<code>?_q=Gravity Bounce</code> - This will return every result where the <code>name</code> column contains any of the following words: 'Gravity', 'Bounce'. </li>
 </ul>
 <h3 id="equals">= (Equals)</h3><div class="highlight"><pre class="highlight plaintext"><code>v1/games?id=10
 </code></pre></div>
@@ -8671,7 +8686,7 @@ Accept: application/json
 <tr>
 <td>platform_status</td>
 <td>string</td>
-<td>If the parent game has enabled per-platform files, by default only files which are approved and live for the <a href="#targeting-a-platform">target platform</a> will be returned.<br><br>To QA pending files, you can filter results by their current platform status, using <code>pending_only</code>, <code>approved_only</code> or <code>live_and_pending</code>. With the exception of <code>approved_only</code> which is available to everyone, all other values are restricted to game administrators.</td>
+<td>If the parent game has enabled per-platform files, by default only files which are approved and live for the <a href="#targeting-a-platform">target platform</a> will be returned.<br><br>To QA pending files, you can filter results by their current platform status, using <code>pending_only</code>, <code>approved_only</code>, <code>live_and_approved</code> or <code>live_and_pending</code>. With the exception of <code>approved_only</code> and <code>live_and_approved</code> which is available to everyone, all other values are restricted to game administrators.</td>
 </tr>
 </tbody>
 </table>
@@ -17611,7 +17626,7 @@ Authorization: Bearer {access-token}
 <tr>
 <td>platform_status</td>
 <td>string</td>
-<td>If the parent game has enabled per-platform files, by default only files which are approved and live for the <a href="#targeting-a-platform">target platform</a> will be returned.<br><br>To request pending files, you can filter results by their current platform status, using <code>pending_only</code>, <code>approved_only</code> or <code>live_and_pending</code>.</td>
+<td>If the parent game has enabled per-platform files, by default only files which are approved and live for the <a href="#targeting-a-platform">target platform</a> will be returned.<br><br>To request pending files, you can filter results by their current platform status, using <code>pending_only</code>, <code>approved_only</code>, <code>live_and_approved</code> or <code>live_and_pending</code>.</td>
 </tr>
 </tbody>
 </table>
