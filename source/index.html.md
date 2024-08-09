@@ -500,15 +500,33 @@ Sort by a column, in ascending or descending order.
 
 mod.io has powerful filtering available to assist you when making requests to the API. You can filter on all columns __in the parent object only__. You cannot apply filters to columns in nested objects, so if a game contains a tags object you cannot filter by the `tag name` column, but you can filter by the games `name` since the games `name` resides in the parent object.
 
+### or fields    (Filter grouping)
+
+By default, multiple filters are combined using an "AND" operation. However, with or_fields, you can group filters together to be combined using an "OR" operation.
+
+For example, if you want to find all mods that have been tagged with "Level" but also include mods made by the creator "UltimateModder", you can achieve this with the following query parameters:
+
+```
+v1/games/your-game/mods?tags=level&submitted_by_display_name=UltimateModder&or_fields[]=tags,submitted_by_display_name
+```
+
+This would be interpreted as "Fetch all mods where (tags in level **OR** submitted_by like UltimateModder)". Without the `or_fields` parameter, it would be treated as AND.
+
+A few things to note:
+
+* The `or_fields` parameter must be provided as an array.
+* A maximum of 2 `or_fields` can be present in a query at any time.
+* A maximum of 3 fields per `or_fields`.
+
 ### _q (Full text search)
 
 ```
-v1/games?_q=The Lord Of The Rings
+v1/games?_q=Gravity Bounce
 ```
 
 Full-text search is a lenient search filter that _is only available_ if the endpoint you are querying contains a `name` column. Wildcards should _not_ be applied to this filter as they are ignored.
 
-- `?_q=The Lord of the Rings` - This will return every result where the `name` column contains any of the following words: 'The', 'Lord', 'of', 'the', 'Rings'. 
+- `?_q=Gravity Bounce` - This will return every result where the `name` column contains any of the following words: 'Gravity', 'Bounce'. 
 
 ### = (Equals)
 
@@ -5641,7 +5659,7 @@ Get all files that are published for the corresponding mod. Successful request w
     version|string|Release version this file represents.
     changelog|string|Changelog for the file.
     metadata_blob|string|Metadata that is designed to be handled by the game client and is recommended to not be exposed to content creators when submitting their modfiles. As an example, this may include properties such as what version of the game this file is compatible with.
-    platform_status|string|If the parent game has enabled per-platform files, by default only files which are approved and live for the [target platform](#targeting-a-platform) will be returned.<br><br>To QA pending files, you can filter results by their current platform status, using `pending_only`, `approved_only` or `live_and_pending`. With the exception of `approved_only` which is available to everyone, all other values are restricted to game administrators.
+    platform_status|string|If the parent game has enabled per-platform files, by default only files which are approved and live for the [target platform](#targeting-a-platform) will be returned.<br><br>To QA pending files, you can filter results by their current platform status, using `pending_only`, `approved_only`, `live_and_approved` or `live_and_pending`. With the exception of `approved_only` and `live_and_approved` which is available to everyone, all other values are restricted to game administrators.
 
 > Example response
 
@@ -13317,7 +13335,7 @@ Get all modfiles the _authenticated user_ uploaded. Successful request will retu
     version|string|Release version this file represents.
     changelog|string|Changelog for the file.
     metadata_blob|string|Metadata that is designed to be handled by the game client. As an example, this may include properties as to how the item works, or other information you need to display. Metadata can also be stored as searchable [key value pairs](#metadata), and to individual [mod files](#get-modfiles).
-    platform_status|string|If the parent game has enabled per-platform files, by default only files which are approved and live for the [target platform](#targeting-a-platform) will be returned.<br><br>To request pending files, you can filter results by their current platform status, using `pending_only`, `approved_only` or `live_and_pending`.
+    platform_status|string|If the parent game has enabled per-platform files, by default only files which are approved and live for the [target platform](#targeting-a-platform) will be returned.<br><br>To request pending files, you can filter results by their current platform status, using `pending_only`, `approved_only`, `live_and_approved` or `live_and_pending`.
 
 > Example response
 
