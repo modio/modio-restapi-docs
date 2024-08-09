@@ -1889,8 +1889,8 @@ visible-st=1
 
 <ul>
 <li>The <code>or_fields</code> parameter must be provided as an array.</li>
-<li>A maximum of --parse_maxorgroups <code>or_fields</code> can be present in a query at any time.</li>
-<li>A maximum of --parse_maxorfieldspergroup fields per <code>or_fields</code>.</li>
+<li>A maximum of 2 <code>or_fields</code> can be present in a query at any time.</li>
+<li>A maximum of 3 fields per <code>or_fields</code>.</li>
 </ul>
 <h3 id="_q-full-text-search">_q (Full text search)</h3><div class="highlight"><pre class="highlight plaintext"><code>v1/games?_q=Gravity Bounce
 </code></pre></div>
@@ -7695,6 +7695,11 @@ Accept: application/json
 <td>submitted_by</td>
 <td>integer</td>
 <td>Unique id of the user who has ownership of the mod.</td>
+</tr>
+<tr>
+<td>submitted_by_display_name</td>
+<td>string</td>
+<td>The display name of the mod author.</td>
 </tr>
 <tr>
 <td>date_added</td>
