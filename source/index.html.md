@@ -515,8 +515,8 @@ This would be interpreted as "Fetch all mods where (tags in level **OR** submitt
 A few things to note:
 
 * The `or_fields` parameter must be provided as an array.
-* A maximum of --parse_maxorgroups `or_fields` can be present in a query at any time.
-* A maximum of --parse_maxorfieldspergroup fields per `or_fields`.
+* A maximum of 2 `or_fields` can be present in a query at any time.
+* A maximum of 3 fields per `or_fields`.
 
 ### _q (Full text search)
 
@@ -4886,6 +4886,7 @@ Get all mods for the corresponding game. Successful request will return an array
     status|integer|Status of the mod (only game admins can filter by this field, see [status and visibility](#status-amp-visibility) for details):<br><br>__0__ = Not accepted<br>__1__ = Accepted _(default)_<br>__3__ = Deleted
     visible|integer|Visibility of the mod (only game admins can filter by this field, see [status and visibility](#status-amp-visibility) for details):<br><br>__0__ = Hidden<br>__1__ = Public _(default)_
     submitted_by|integer|Unique id of the user who has ownership of the mod.
+    submitted_by_display_name|string|The display name of the mod author.
     date_added|integer|Unix timestamp of date mod was registered.
     date_updated|integer|Unix timestamp of date mod was updated.
     date_live|integer|Unix timestamp of date mod was set live.
