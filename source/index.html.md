@@ -515,8 +515,8 @@ This would be interpreted as "Fetch all mods where (tags in level **OR** submitt
 A few things to note:
 
 * The `or_fields` parameter must be provided as an array.
-* A maximum of 2 `or_fields` can be present in a query at any time.
-* A maximum of 3 fields per `or_fields`.
+* A maximum of --parse_maxorgroups `or_fields` can be present in a query at any time.
+* A maximum of --parse_maxorfieldspergroup fields per `or_fields`.
 
 ### _q (Full text search)
 
@@ -2488,6 +2488,136 @@ Status|Meaning|Error Ref|Description|Response Schema
 To perform this request, you must be authenticated via one of the following methods:
 <a href="#authentication">api_key</a>
 </aside>
+## Exchange Client Credentials Token
+
+> Example request
+
+```shell
+# You can also use wget
+curl -X POST https://*.modapi.io/v1/oauth/token/ \
+  -H 'Content-Type: application/x-www-form-urlencoded' \ 
+  -H 'Accept: application/json' \
+  -d 'client_id=1234' \
+  -d 'client_secret=bqyMxkGE4QVBaYpHQcf6XJENjZ5RWFHsbEZ5SFiGa' \
+  -d 'grant_type=client_credentials' \
+  -d 'scopes=read,write,monetization'
+
+```
+
+```http
+POST https://*.modapi.io/v1/oauth/token/ HTTP/1.1
+Host: *.modapi.io
+Content-Type: application/x-www-form-urlencoded
+Accept: application/json
+
+```
+
+```javascript
+var headers = {
+  'Content-Type':'application/x-www-form-urlencoded',
+  'Accept':'application/json'
+
+};
+
+$.ajax({
+  url: 'https://*.modapi.io/v1/oauth/token/',
+  method: 'post',
+
+  headers: headers,
+  success: function(data) {
+    console.log(JSON.stringify(data));
+  }
+})
+```
+
+```javascript--nodejs
+const request = require('node-fetch');
+const inputBody = '{
+  "client_id": "1234",
+  "client_secret": "bqyMxkGE4QVBaYpHQcf6XJENjZ5RWFHsbEZ5SFiGa",
+  "grant_type": "client_credentials",
+  "scopes": "read,write,monetization"
+}';
+const headers = {
+  'Content-Type':'application/x-www-form-urlencoded',
+  'Accept':'application/json'
+
+};
+
+fetch('https://*.modapi.io/v1/oauth/token/',
+{
+  method: 'POST',
+  body: inputBody,
+  headers: headers
+})
+.then(function(res) {
+    return res.json();
+}).then(function(body) {
+    console.log(body);
+});
+```
+
+```python
+import requests
+headers = {
+  'Content-Type': 'application/x-www-form-urlencoded',
+  'Accept': 'application/json'
+}
+
+r = requests.post('https://*.modapi.io/v1/oauth/token/', params={
+
+}, headers = headers)
+
+print r.json()
+```
+
+```java
+URL obj = new URL("https://*.modapi.io/v1/oauth/token/");
+HttpURLConnection con = (HttpURLConnection) obj.openConnection();
+con.setRequestMethod("POST");
+int responseCode = con.getResponseCode();
+BufferedReader in = new BufferedReader(
+    new InputStreamReader(con.getInputStream()));
+String inputLine;
+StringBuffer response = new StringBuffer();
+while ((inputLine = in.readLine()) != null) {
+    response.append(inputLine);
+}
+in.close();
+System.out.println(response.toString());
+```
+
+`POST /oauth/token/`
+
+Exchange `client_id` and `client_secret` for an access token. Successful request will return a [Client Credentials Access Token Object](#client-credentials-access-token-object) object.
+
+     Parameter|Type|Required|Description
+     ---|---|---|---|
+     client_id|integer|true|Client ID issued to your game.
+     client_secret|string|true|Client Secret issued to your game. This should be secure on a backend server and never displayed to players.
+     grant_type|string|true|Must be `client_credentials`.
+     scope|string|false|Specify the comma-separated scopes you wish your token to have. Currently, only read, write, update, and monetization are supported. The update scope will elevate the token's authorization, allowing it to edit mods while acting as the game's leader.
+
+> Example response
+
+```json
+{
+  "token_type": "Bearer",
+  "expires_in": "2592000",
+  "access_token": "eyJlbmMiOiJBMTI4Q0JDLUhTMjU2IiwiYWxnIjoiUlNBLU9BRVAiLCJjdHkiOi....",
+  "scope": "read,write"
+}
+
+```
+<h3 id="Exchange-Client-Credentials-Token-responses">Responses</h3>
+
+Status|Meaning|Error Ref|Description|Response Schema
+---|---|----|---|---|
+200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)||Success|[Client Credentials Access Token Object](#schemaclient_credentials_access_token_object)
+<aside class="success">
+This operation does not require authentication
+</aside>
+
 ## Email Exchange
 __Step 1 of 2__
 
@@ -2859,29 +2989,36 @@ To perform this request, you must be authenticated via one of the following meth
 </aside>
 # Sign in with mod.io (Web)
 
-## dummy/games
+## 1. Sign in with mod.io
 
 > Example request
 
 ```shell
 # You can also use wget
-curl -X GET https://*.modapi.io/v1/dummy/games
+curl -X GET https://*.modapi.io/v1/authorize?client_id=your-client-id&grant_type=authorization_code&response_type=code&scope=read%2520write&state=T6KQGIXWrHXxFDfyp5Hh&redirect_uri=https%3A%2F%2Fyour-callback-server.com%2Foauth%2Flogin%2Fcallback \
+  -H 'Accept: application/json'
 
 ```
 
 ```http
-GET https://*.modapi.io/v1/dummy/games HTTP/1.1
+GET https://*.modapi.io/v1/authorize?client_id=your-client-id&grant_type=authorization_code&response_type=code&scope=read%2520write&state=T6KQGIXWrHXxFDfyp5Hh&redirect_uri=https%3A%2F%2Fyour-callback-server.com%2Foauth%2Flogin%2Fcallback HTTP/1.1
 Host: *.modapi.io
 
+Accept: application/json
 
 ```
 
 ```javascript
+var headers = {
+  'Accept':'application/json'
+
+};
 
 $.ajax({
-  url: 'https://*.modapi.io/v1/dummy/games',
+  url: 'https://*.modapi.io/v1/authorize',
   method: 'get',
-
+  data: '?client_id=your-client-id&grant_type=authorization_code&response_type=code&scope=read%2520write&state=T6KQGIXWrHXxFDfyp5Hh&redirect_uri=https%3A%2F%2Fyour-callback-server.com%2Foauth%2Flogin%2Fcallback',
+  headers: headers,
   success: function(data) {
     console.log(JSON.stringify(data));
   }
@@ -2891,10 +3028,16 @@ $.ajax({
 ```javascript--nodejs
 const request = require('node-fetch');
 
-fetch('https://*.modapi.io/v1/dummy/games',
-{
-  method: 'GET'
+const headers = {
+  'Accept':'application/json'
 
+};
+
+fetch('https://*.modapi.io/v1/authorize?client_id=your-client-id&grant_type=authorization_code&response_type=code&scope=read%2520write&state=T6KQGIXWrHXxFDfyp5Hh&redirect_uri=https%3A%2F%2Fyour-callback-server.com%2Foauth%2Flogin%2Fcallback',
+{
+  method: 'GET',
+
+  headers: headers
 })
 .then(function(res) {
     return res.json();
@@ -2905,16 +3048,19 @@ fetch('https://*.modapi.io/v1/dummy/games',
 
 ```python
 import requests
+headers = {
+  'Accept': 'application/json'
+}
 
-r = requests.get('https://*.modapi.io/v1/dummy/games', params={
-
-)
+r = requests.get('https://*.modapi.io/v1/authorize', params={
+  'client_id': 'your-client-id',  'grant_type': 'authorization_code',  'response_type': 'code',  'scope': 'read%20write',  'state': 'T6KQGIXWrHXxFDfyp5Hh',  'redirect_uri': 'https://your-callback-server.com/oauth/login/callback'
+}, headers = headers)
 
 print r.json()
 ```
 
 ```java
-URL obj = new URL("https://*.modapi.io/v1/dummy/games");
+URL obj = new URL("https://*.modapi.io/v1/authorize?client_id=your-client-id&grant_type=authorization_code&response_type=code&scope=read%2520write&state=T6KQGIXWrHXxFDfyp5Hh&redirect_uri=https%3A%2F%2Fyour-callback-server.com%2Foauth%2Flogin%2Fcallback");
 HttpURLConnection con = (HttpURLConnection) obj.openConnection();
 con.setRequestMethod("GET");
 int responseCode = con.getResponseCode();
@@ -2929,19 +3075,304 @@ in.close();
 System.out.println(response.toString());
 ```
 
-`GET //dummy/games`
+`GET /authorize`
 
-dummy/games
+Log a user into your website with a mod.io account using the OAuth2 [Authorization Code flow](https://datatracker.ietf.org/doc/html/rfc6749#section-1.3.1). Your application should redirect to this URL after the user initiates the login flow. Upon a successful login the user will be redirected to your registered callback URL where you can [exchange](#2-exchange-authorization-code) the `code` returned for an access token.<br><br>__Note:__ This request is a web display hosted by mod.io, and therefore does not target the usual base API URL as shown by the example code snippet.
 
+    Parameter|Type|Required|Description
+    ---|---|---|---|
+    client_id|integer|true|Client ID issued to your game.
+    grant_type|string|true|Grant Type. Must be `authorization_code`
+    response_type|string|true|Response Type. Must be `code`
+    scope|string|true|Space-separated scopes you want to request access to. Currently only `read` and `write` is supported. To use both provide value `read write`
+    state|string|false|A random string you supply and validate upon redirection to your backend service to ensure the value is identical to prevent [CSRF attacks](https://en.wikipedia.org/wiki/Cross-site_request_forgery). Optional but highly recommended.
+    redirect_uri|string|true|The URL to your server which mod.io will redirect after login. This value must be a one of the redirect URL's configured in your game admin portal.
 
-<h3 id="dummy/games-responses">Responses</h3>
+> Example response
+
+```json
+{
+  "code": "def5020077deb4eafe6fb6743b1fd6857ce22112d3400e6cc684633f8c9904faae1a83c23b",
+  "state": "T6KQGIXWrHXxFDfyp5Hh"
+}
+
+```
+<h3 id="1.-Sign-in-with-mod.io-responses">Responses</h3>
 
 Status|Meaning|Error Ref|Description|Response Schema
 ---|---|----|---|---|
-200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)||Successful Request|None
+200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)||Successful Request|[Web Authorize Object](#schemaweb_authorize_object)
 <aside class="success">
 This operation does not require authentication
 </aside>
+
+## 2. Exchange Authorization Code
+
+> Example request
+
+```shell
+# You can also use wget
+curl -X POST https://*.modapi.io/v1/oauth/token \
+  -H 'Content-Type: application/x-www-form-urlencoded' \ 
+  -H 'Accept: application/json' \
+  -d 'client_id=1234' \
+  -d 'client_secret=bqyMxkGE4QVBaYpHQcf6XJENjZ5RWFHsbEZ5SFiGa' \
+  -d 'code=c7b033d3f163a5cf58844899214334dab11e6a06ddb2539e4e' \
+  -d 'grant_type=authorization_code' \
+  -d 'redirect_uri=https://your-callback-server.com/oauth/login/callback'
+
+```
+
+```http
+POST https://*.modapi.io/v1/oauth/token HTTP/1.1
+Host: *.modapi.io
+Content-Type: application/x-www-form-urlencoded
+Accept: application/json
+
+```
+
+```javascript
+var headers = {
+  'Content-Type':'application/x-www-form-urlencoded',
+  'Accept':'application/json'
+
+};
+
+$.ajax({
+  url: 'https://*.modapi.io/v1/oauth/token',
+  method: 'post',
+
+  headers: headers,
+  success: function(data) {
+    console.log(JSON.stringify(data));
+  }
+})
+```
+
+```javascript--nodejs
+const request = require('node-fetch');
+const inputBody = '{
+  "client_id": "1234",
+  "client_secret": "bqyMxkGE4QVBaYpHQcf6XJENjZ5RWFHsbEZ5SFiGa",
+  "code": "c7b033d3f163a5cf58844899214334dab11e6a06ddb2539e4e",
+  "grant_type": "authorization_code",
+  "redirect_uri": "https://your-callback-server.com/oauth/login/callback"
+}';
+const headers = {
+  'Content-Type':'application/x-www-form-urlencoded',
+  'Accept':'application/json'
+
+};
+
+fetch('https://*.modapi.io/v1/oauth/token',
+{
+  method: 'POST',
+  body: inputBody,
+  headers: headers
+})
+.then(function(res) {
+    return res.json();
+}).then(function(body) {
+    console.log(body);
+});
+```
+
+```python
+import requests
+headers = {
+  'Content-Type': 'application/x-www-form-urlencoded',
+  'Accept': 'application/json'
+}
+
+r = requests.post('https://*.modapi.io/v1/oauth/token', params={
+
+}, headers = headers)
+
+print r.json()
+```
+
+```java
+URL obj = new URL("https://*.modapi.io/v1/oauth/token");
+HttpURLConnection con = (HttpURLConnection) obj.openConnection();
+con.setRequestMethod("POST");
+int responseCode = con.getResponseCode();
+BufferedReader in = new BufferedReader(
+    new InputStreamReader(con.getInputStream()));
+String inputLine;
+StringBuffer response = new StringBuffer();
+while ((inputLine = in.readLine()) != null) {
+    response.append(inputLine);
+}
+in.close();
+System.out.println(response.toString());
+```
+
+`POST /oauth/token`
+
+Exchange the `code` returned to your callback server for an access token. If the `state` parameter was supplied in the [first step](#1-sign-in-with-mod-io), you should compare the returned state prior to making this API call to verify its identical. Successful request will return a [Web Access Token Object](#web-access-token-object) object.
+
+    Parameter|Type|Required|Description
+    ---|---|---|---|
+    client_id|integer|true|Client ID issued to your game.
+    client_secret|string|true|Client Secret issued to your game. This request should be initiated from a secure backend server and the secret, never displayed to players or transferred to the game client.
+    grant_type|string|true|Must be `authorization_code`, for refresh tokens see [Exchange Refresh Token](#3-exchange-refresh-token) endpoint.
+    code|string|true|The code returned to your registered callback server.
+    redirect_uri|string|true|The `redirect_uri` registered with your application. This must be the same redirect_uri used in the first step when logging in via mod.io.
+
+> Example response
+
+```json
+{
+  "token_type": "Bearer",
+  "expires_in": "2592000",
+  "access_token": "eyJlbmMiOiJBMTI4Q0JDLUhTMjU2IiwiYWxnIjoiUlNBLU9BRVAiLCJjdHkiOi....",
+  "refresh_token": "eyJlbmMiOiJBMTI4Q0JDLUhTMjU2IiwiYWxnIjoiUlNBLU9BRVAiLCJjdHkiOi...."
+}
+
+```
+<h3 id="2.-Exchange-Authorization-Code-responses">Responses</h3>
+
+Status|Meaning|Error Ref|Description|Response Schema
+---|---|----|---|---|
+200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)||Success|[Web Access Token Object](#schemaweb_access_token_object)
+<aside class="success">
+This operation does not require authentication
+</aside>
+
+## 3. Exchange Refresh Token
+
+> Example request
+
+```shell
+# You can also use wget
+curl -X POST https://*.modapi.io/v1/oauth/token/refresh \
+  -H 'Content-Type: application/x-www-form-urlencoded' \ 
+  -H 'Accept: application/json' \
+  -d 'client_id=1234' \
+  -d 'client_secret=bqyMxkGE4QVBaYpHQcf6XJENjZ5RWFHsbEZ5SFiGa' \
+  -d 'refresh_token=eyJlbmMiOiJBMTI4Q0JDLUhTMjU2IiwiYWxnIjoiUlNBLU9BRVAiLC' \
+  -d 'grant_type=refresh_token' \
+  -d 'redirect_uri=https://your-callback-server.com/oauth/login/callback'
+
+```
+
+```http
+POST https://*.modapi.io/v1/oauth/token/refresh HTTP/1.1
+Host: *.modapi.io
+Content-Type: application/x-www-form-urlencoded
+Accept: application/json
+
+```
+
+```javascript
+var headers = {
+  'Content-Type':'application/x-www-form-urlencoded',
+  'Accept':'application/json'
+
+};
+
+$.ajax({
+  url: 'https://*.modapi.io/v1/oauth/token/refresh',
+  method: 'post',
+
+  headers: headers,
+  success: function(data) {
+    console.log(JSON.stringify(data));
+  }
+})
+```
+
+```javascript--nodejs
+const request = require('node-fetch');
+const inputBody = '{
+  "client_id": "1234",
+  "client_secret": "bqyMxkGE4QVBaYpHQcf6XJENjZ5RWFHsbEZ5SFiGa",
+  "refresh_token": "eyJlbmMiOiJBMTI4Q0JDLUhTMjU2IiwiYWxnIjoiUlNBLU9BRVAiLC",
+  "grant_type": "refresh_token",
+  "redirect_uri": "https://your-callback-server.com/oauth/login/callback"
+}';
+const headers = {
+  'Content-Type':'application/x-www-form-urlencoded',
+  'Accept':'application/json'
+
+};
+
+fetch('https://*.modapi.io/v1/oauth/token/refresh',
+{
+  method: 'POST',
+  body: inputBody,
+  headers: headers
+})
+.then(function(res) {
+    return res.json();
+}).then(function(body) {
+    console.log(body);
+});
+```
+
+```python
+import requests
+headers = {
+  'Content-Type': 'application/x-www-form-urlencoded',
+  'Accept': 'application/json'
+}
+
+r = requests.post('https://*.modapi.io/v1/oauth/token/refresh', params={
+
+}, headers = headers)
+
+print r.json()
+```
+
+```java
+URL obj = new URL("https://*.modapi.io/v1/oauth/token/refresh");
+HttpURLConnection con = (HttpURLConnection) obj.openConnection();
+con.setRequestMethod("POST");
+int responseCode = con.getResponseCode();
+BufferedReader in = new BufferedReader(
+    new InputStreamReader(con.getInputStream()));
+String inputLine;
+StringBuffer response = new StringBuffer();
+while ((inputLine = in.readLine()) != null) {
+    response.append(inputLine);
+}
+in.close();
+System.out.println(response.toString());
+```
+
+`POST /oauth/token/refresh`
+
+Exchange a `refresh_token` for an access token. You should always attempt to refresh a users session with a refresh token prior to re-starting the authentication flow to get a new access token unless your application is aware the refresh token will be [expired](#web-access-token-object). Successful request will return a [Web Access Token Object](#web-access-token-object) object.
+
+    Parameter|Type|Required|Description
+    ---|---|---|---|
+    client_id|integer|true|Client ID issued to your game.
+    client_secret|string|true|Client Secret issued to your game. This should be secure on a backend server and never displayed to players.
+    grant_type|string|true|Must be `refresh_token`.
+    refresh_token|string|true|The refresh token which was returned previously with the access token.
+    redirect_uri|string|true|The `redirect_uri` registered with your application. This must be the same redirect_uri used in the first step when logging in via mod.io.
+
+> Example response
+
+```json
+{
+  "token_type": "Bearer",
+  "expires_in": "2592000",
+  "access_token": "eyJlbmMiOiJBMTI4Q0JDLUhTMjU2IiwiYWxnIjoiUlNBLU9BRVAiLCJjdHkiOi....",
+  "refresh_token": "eyJlbmMiOiJBMTI4Q0JDLUhTMjU2IiwiYWxnIjoiUlNBLU9BRVAiLCJjdHkiOi...."
+}
+
+```
+<h3 id="3.-Exchange-Refresh-Token-responses">Responses</h3>
+
+Status|Meaning|Error Ref|Description|Response Schema
+---|---|----|---|---|
+200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)||Success|[Web Access Token Object](#schemaweb_access_token_object)
+<aside class="success">
+This operation does not require authentication
+</aside>
+
+# Games
 
 ## Get Games
 
@@ -3487,7 +3918,6 @@ Get all guides for a game. Successful request will return an array of [Guide Obj
     id|integer|Unique id of the guide.
     game_id|integer|Unique id of the parent game.
     status|integer|Status of the guide (only game admins can filter by this field, see [status and visibility](#status-amp-visibility) for details):<br><br>__0__ = Not accepted<br>__1__ = Accepted _(default)_
-    submitted_by|integer|Unique id of the user who has ownership of the guide.
     date_added|integer|Unix timestamp of date guide was registered.
     date_updated|integer|Unix timestamp of date guide was updated.
     date_live|integer|Unix timestamp of date guide was set live.
@@ -4456,7 +4886,6 @@ Get all mods for the corresponding game. Successful request will return an array
     status|integer|Status of the mod (only game admins can filter by this field, see [status and visibility](#status-amp-visibility) for details):<br><br>__0__ = Not accepted<br>__1__ = Accepted _(default)_<br>__3__ = Deleted
     visible|integer|Visibility of the mod (only game admins can filter by this field, see [status and visibility](#status-amp-visibility) for details):<br><br>__0__ = Hidden<br>__1__ = Public _(default)_
     submitted_by|integer|Unique id of the user who has ownership of the mod.
-    submitted_by_display_name|string|The display name of the mod author.
     date_added|integer|Unix timestamp of date mod was registered.
     date_updated|integer|Unix timestamp of date mod was updated.
     date_live|integer|Unix timestamp of date mod was set live.
@@ -5659,7 +6088,7 @@ Get all files that are published for the corresponding mod. Successful request w
     version|string|Release version this file represents.
     changelog|string|Changelog for the file.
     metadata_blob|string|Metadata that is designed to be handled by the game client and is recommended to not be exposed to content creators when submitting their modfiles. As an example, this may include properties such as what version of the game this file is compatible with.
-    platform_status|string|If the parent game has enabled per-platform files, by default only files which are approved and live for the [target platform](#targeting-a-platform) will be returned.<br><br>To QA pending files, you can filter results by their current platform status, using `pending_only`, `approved_only`, `live_and_approved` or `live_and_pending`. With the exception of `approved_only` and `live_and_approved` which is available to everyone, all other values are restricted to game administrators.
+    platform_status|string|If the parent game has enabled per-platform files, by default only files which are approved and live for the [target platform](#targeting-a-platform) will be returned.<br><br>To QA pending files, you can filter results by their current platform status, using `pending_only`, `approved_only` or `live_and_pending`. With the exception of `approved_only` which is available to everyone, all other values are restricted to game administrators.
 
 > Example response
 
@@ -11729,7 +12158,55 @@ Get all dependencies the chosen mod has selected. This is useful if a mod requir
 ```json
 {
   "data": [
-    {}
+    {
+      "mod_id": 231,
+      "name": "Example Mod",
+      "name_id": "rogue-knight-hd-pack",
+      "status": 1,
+      "visible": 1,
+      "date_added": 1499841487,
+      "date_updated": 1499841487,
+      "dependency_depth": 0,
+      "logo": {
+        "filename": "card.png",
+        "original": "https://assets.modcdn.io/images/placeholder/card.png",
+        "thumb_320x180": "https://assets.modcdn.io/images/placeholder/card.png",
+        "thumb_640x360": "https://assets.modcdn.io/images/placeholder/card.png",
+        "thumb_1280x720": "https://assets.modcdn.io/images/placeholder/card.png"
+      },
+      "modfile": {
+        "id": 2,
+        "mod_id": 2,
+        "date_added": 1499841487,
+        "date_updated": 1499841487,
+        "date_scanned": 1499841487,
+        "virus_status": 0,
+        "virus_positive": 0,
+        "virustotal_hash": "",
+        "filesize": 15181,
+        "filesize_uncompressed": 16384,
+        "filehash": {
+          "md5": "2d4a0e2d7273db6b0a94b0740a88ad0d"
+        },
+        "filename": "rogue-knight-v1.zip",
+        "version": "1.3",
+        "changelog": "VERSION 1.3 -- Changes -- Fixed critical castle floor bug.",
+        "metadata_blob": "rogue,hd,high-res,4k,hd textures",
+        "download": {
+          "binary_url": "https://*.modapi.io/v1/games/1/mods/1/files/1/download/c489a0354111a4d76640d47f0cdcb294",
+          "date_expires": 1579316848
+        },
+        "platforms": [
+          {
+            "platform": "windows",
+            "status": 1
+          }
+        ]
+      }
+    },
+    {
+        ...
+    }
   ],
   "result_count": 70,
   "result_offset": 0,
@@ -13180,7 +13657,7 @@ System.out.println(response.toString());
 
 `GET /me/events`
 
-__Deprecated__: This endpoint is deprecated for in-game use and will be removed at a later date. As of March 31st 2024, events will only be returned for existing games for legacy reasons. Any new game should use the [Get User Subscriptions](#get-user-subscriptions) endpoint to fetch the latest mods subscribed to by the authenticated user as this endpoint will no longer return events for games created after that date. If you have any concerns please [reach out to us](https://support.mod.io).<br><br> Get events that have been fired specific to the user. Successful request will return an array of [Event Objects](#get-user-events-2). We recommended reading the [filtering documentation](#filtering) to return only the records you want.
+__Deprecated__: This endpoint is deprecated for in-game use and will be removed at a later date. As of March 31st 2024, events will only be returned for existing games for legacy reasons. Any new game should use the [Get User Subscriptions](#get-user-subscriptions) endpoint to fetch the latest mods subscribed to by the authenticated user as this endpoint will no longer return events for games created after that date. If you have any concerns please [reach out to us](mailto:support@mod.io?subject=Events Deprecation).<br><br> Get events that have been fired specific to the user. Successful request will return an array of [Event Objects](#get-user-events-2). We recommended reading the [filtering documentation](#filtering) to return only the records you want.
 
     Filter|Type|Description
     ---|---|---
@@ -13335,7 +13812,7 @@ Get all modfiles the _authenticated user_ uploaded. Successful request will retu
     version|string|Release version this file represents.
     changelog|string|Changelog for the file.
     metadata_blob|string|Metadata that is designed to be handled by the game client. As an example, this may include properties as to how the item works, or other information you need to display. Metadata can also be stored as searchable [key value pairs](#metadata), and to individual [mod files](#get-modfiles).
-    platform_status|string|If the parent game has enabled per-platform files, by default only files which are approved and live for the [target platform](#targeting-a-platform) will be returned.<br><br>To request pending files, you can filter results by their current platform status, using `pending_only`, `approved_only`, `live_and_approved` or `live_and_pending`.
+    platform_status|string|If the parent game has enabled per-platform files, by default only files which are approved and live for the [target platform](#targeting-a-platform) will be returned.<br><br>To request pending files, you can filter results by their current platform status, using `pending_only`, `approved_only` or `live_and_pending`.
 
 > Example response
 
@@ -16752,6 +17229,30 @@ thumb_100x100|string|URL to the medium avatar thumbnail.
 
 
 
+## Client Credentials Access Token Object
+
+<a name="schemaclient_credentials_access_token_object"></a>
+
+```json
+{
+  "token_type": "Bearer",
+  "expires_in": "2592000",
+  "access_token": "eyJlbmMiOiJBMTI4Q0JDLUhTMjU2IiwiYWxnIjoiUlNBLU9BRVAiLCJjdHkiOi....",
+  "scope": "read,write"
+} 
+```
+
+### Properties
+
+Name|Type|Description
+---|---|---|---|
+token_type|string|Token type, always `Bearer`.
+expires_in|int|Seconds until the supplied `access_token` expires which is fixed at `2592000` seconds (approx 1 month).
+access_token|string|The access token used to make requests to the mod.io API on behalf of the user.
+scope|string|The scopes the of the token that have been set.
+
+
+
 ## Comment Object
 
    <a name="schemacomment_object"></a>
@@ -18006,7 +18507,55 @@ result_total|integer|Total number of results found.
 ```json
 {
   "data": [
-    {}
+    {
+      "mod_id": 231,
+      "name": "Example Mod",
+      "name_id": "rogue-knight-hd-pack",
+      "status": 1,
+      "visible": 1,
+      "date_added": 1499841487,
+      "date_updated": 1499841487,
+      "dependency_depth": 0,
+      "logo": {
+        "filename": "card.png",
+        "original": "https://assets.modcdn.io/images/placeholder/card.png",
+        "thumb_320x180": "https://assets.modcdn.io/images/placeholder/card.png",
+        "thumb_640x360": "https://assets.modcdn.io/images/placeholder/card.png",
+        "thumb_1280x720": "https://assets.modcdn.io/images/placeholder/card.png"
+      },
+      "modfile": {
+        "id": 2,
+        "mod_id": 2,
+        "date_added": 1499841487,
+        "date_updated": 1499841487,
+        "date_scanned": 1499841487,
+        "virus_status": 0,
+        "virus_positive": 0,
+        "virustotal_hash": "",
+        "filesize": 15181,
+        "filesize_uncompressed": 16384,
+        "filehash": {
+          "md5": "2d4a0e2d7273db6b0a94b0740a88ad0d"
+        },
+        "filename": "rogue-knight-v1.zip",
+        "version": "1.3",
+        "changelog": "VERSION 1.3 -- Changes -- Fixed critical castle floor bug.",
+        "metadata_blob": "rogue,hd,high-res,4k,hd textures",
+        "download": {
+          "binary_url": "https://*.modapi.io/v1/games/1/mods/1/files/1/download/c489a0354111a4d76640d47f0cdcb294",
+          "date_expires": 1579316848
+        },
+        "platforms": [
+          {
+            "platform": "windows",
+            "status": 1
+          }
+        ]
+      }
+    },
+    {
+        ...
+    }
   ],
   "result_count": 70,
   "result_offset": 0,
@@ -18964,14 +19513,68 @@ logo|[Logo Object](#schemalogo_object)|Contains media URL's to the logo for the 
 <a name="schemamod_dependencies_object"></a>
 
 ```json
-{} 
+{
+  "mod_id": 231,
+  "name": "Example Mod",
+  "name_id": "rogue-knight-hd-pack",
+  "status": 1,
+  "visible": 1,
+  "date_added": 1499841487,
+  "date_updated": 1499841487,
+  "dependency_depth": 0,
+  "logo": {
+    "filename": "card.png",
+    "original": "https://assets.modcdn.io/images/placeholder/card.png",
+    "thumb_320x180": "https://assets.modcdn.io/images/placeholder/card.png",
+    "thumb_640x360": "https://assets.modcdn.io/images/placeholder/card.png",
+    "thumb_1280x720": "https://assets.modcdn.io/images/placeholder/card.png"
+  },
+  "modfile": {
+    "id": 2,
+    "mod_id": 2,
+    "date_added": 1499841487,
+    "date_updated": 1499841487,
+    "date_scanned": 1499841487,
+    "virus_status": 0,
+    "virus_positive": 0,
+    "virustotal_hash": "",
+    "filesize": 15181,
+    "filesize_uncompressed": 16384,
+    "filehash": {
+      "md5": "2d4a0e2d7273db6b0a94b0740a88ad0d"
+    },
+    "filename": "rogue-knight-v1.zip",
+    "version": "1.3",
+    "changelog": "VERSION 1.3 -- Changes -- Fixed critical castle floor bug.",
+    "metadata_blob": "rogue,hd,high-res,4k,hd textures",
+    "download": {
+      "binary_url": "https://*.modapi.io/v1/games/1/mods/1/files/1/download/c489a0354111a4d76640d47f0cdcb294",
+      "date_expires": 1579316848
+    },
+    "platforms": [
+      {
+        "platform": "windows",
+        "status": 1
+      }
+    ]
+  }
+} 
 ```
 
 ### Properties
 
 Name|Type|Description
 ---|---|---|---|
-undefined|object|No description
+mod_id|integer|Unique ID of the mod that serves as the dependency.
+name|string|Name of the mod dependency.
+name_id|string|Path for the mod on mod.io. For example: https://mod.io/g/rogue-knight/m/__rogue-knight-hd-pack__
+status|integer|Status of the mod (see [status and visibility](#status-amp-visibility) for details):<br><br>__0__ = Not Accepted<br>__1__ = Accepted<br>__3__ = Deleted
+visible|integer|Visibility of the mod (see [status and visibility](#status-amp-visibility) for details):<br><br>__0__ = Hidden<br>__1__ = Public
+date_added|integer|Unix timestamp of date the dependency was added.
+date_updated|integer|Unix timestamp of date mod was updated.
+dependency_depth|integer|When a dependency depth is greater than zero (0), it means that the dependencies themselves rely on additional dependencies. To ensure smooth installation, it is recommended dependencies be installed in _descending_ order of depth, beginning with those with the highest depth. Please note only dependencies with a depth of up to 5 will be shown.
+logo|[Logo Object](#schemalogo_object)|Contains media URL's to the logo for the mod.
+modfile|[Modfile Object](#schemamodfile_object)|The primary modfile for the mod.
 
 
 
@@ -20179,6 +20782,50 @@ currency|string|The currency of the wallet.
 balance|integer|The balance of the wallet.
 deficit|integer|The deficit of the wallet.
 monetization_status|integer|The status of a monetized user for the corresponding `status`. Possible values:<br><br>__0__ = Unregistered<br>__1__ = Pending<br>__2__ = Rejected<br>__4__ = Review<br>__8__ = Action<br>__16__ = Approved<br>__32__ = Member
+
+
+
+## Web Access Token Object 
+
+<a name="schemaweb_access_token_object"></a>
+
+```json
+{
+  "token_type": "Bearer",
+  "expires_in": "2592000",
+  "access_token": "eyJlbmMiOiJBMTI4Q0JDLUhTMjU2IiwiYWxnIjoiUlNBLU9BRVAiLCJjdHkiOi....",
+  "refresh_token": "eyJlbmMiOiJBMTI4Q0JDLUhTMjU2IiwiYWxnIjoiUlNBLU9BRVAiLCJjdHkiOi...."
+} 
+```
+
+### Properties
+
+Name|Type|Description
+---|---|---|---|
+token_type|string|Token type, always `Bearer`.
+expires_in|int|Seconds until the supplied `access_token` expires which is fixed at `2592000` seconds (approx 1 month).
+access_token|string|The access token used to make requests to the mod.io API on behalf of the user.
+refresh_token|string|The refresh token that can be exchanged via the _Exchange Refresh Token_ endpoint for a new access token. Fixed at `7776000` seconds (approx 3 months).
+
+
+
+## Web Authorize Object  
+
+<a name="schemaweb_authorize_object"></a>
+
+```json
+{
+  "code": "def5020077deb4eafe6fb6743b1fd6857ce22112d3400e6cc684633f8c9904faae1a83c23b",
+  "state": "T6KQGIXWrHXxFDfyp5Hh"
+} 
+```
+
+### Properties
+
+Name|Type|Description
+---|---|---|---|
+code|string|The authorization code to exchange for an access token.
+state|string|Optional state parameter to inspect against to prevent CSFR attacks.
 
 
 
