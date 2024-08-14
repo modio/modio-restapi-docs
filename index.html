@@ -794,6 +794,9 @@
               </ul>
           </li>
           <li>
+            <a href="#metrics" class="toc-h1 toc-link" data-title="Metrics"><span class="reficon"><img src="images/cog-white.svg" alt="Reference" class="menu-reference-icon"></span> Metrics</a>
+          </li>
+          <li>
             <a href="#response-schemas" class="toc-h1 toc-link" data-title="Response Schemas"><span class="reficon"><img src="images/cog-blue.svg" alt="Reference" class="menu-reference-icon"></span> Response Schemas</a>
               <ul class="toc-list-h2">
                   <li>
@@ -16719,6 +16722,7 @@ Accept: application/json
 <div class="highlight"><pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
   </span><span class="nl">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
   </span><span class="nl">"is_active"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"is_latest"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
   </span><span class="nl">"type"</span><span class="p">:</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span><span class="w">
   </span><span class="nl">"user"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
     </span><span class="nl">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
@@ -16860,6 +16864,7 @@ Accept: application/json
 <div class="highlight"><pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
   </span><span class="nl">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
   </span><span class="nl">"is_active"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"is_latest"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
   </span><span class="nl">"type"</span><span class="p">:</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span><span class="w">
   </span><span class="nl">"user"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
     </span><span class="nl">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
@@ -21476,7 +21481,7 @@ Content-Type: application/json
 To perform this request, you must be authenticated via one of the following methods:
 <a href="#authentication">OAuth 2</a> (Scopes: write)
 </aside>
-<h1 id="response-schemas">Response Schemas</h1><h2 id="access-token-object">Access Token Object</h2>
+<h1 id="metrics">Metrics</h1><h1 id="response-schemas">Response Schemas</h1><h2 id="access-token-object">Access Token Object</h2>
 <p><a name="schemaaccess_token_object"></a></p>
 <div class="highlight"><pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
   </span><span class="nl">"code"</span><span class="p">:</span><span class="w"> </span><span class="mi">200</span><span class="p">,</span><span class="w">
@@ -21515,6 +21520,7 @@ To perform this request, you must be authenticated via one of the following meth
 <div class="highlight"><pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
   </span><span class="nl">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
   </span><span class="nl">"is_active"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"is_latest"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
   </span><span class="nl">"type"</span><span class="p">:</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span><span class="w">
   </span><span class="nl">"user"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
     </span><span class="nl">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
@@ -21560,6 +21566,11 @@ To perform this request, you must be authenticated via one of the following meth
 <td>is_active</td>
 <td>boolean</td>
 <td>Is the agreement currently active? (This can also be determined if date_live &lt;= the current time).</td>
+</tr>
+<tr>
+<td>is_latest</td>
+<td>boolean</td>
+<td>Is this the latest version of the agreement?</td>
 </tr>
 <tr>
 <td>type</td>
