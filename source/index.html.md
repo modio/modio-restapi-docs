@@ -12568,6 +12568,7 @@ Get the current agreement (version) by type. Successful request will return a si
 {
   "id": 1,
   "is_active": true,
+  "is_latest": true,
   "type": 2,
   "user": {
     "id": 1,
@@ -12702,6 +12703,7 @@ Get the specified agreement version. Successful request will return an [Agreemen
 {
   "id": 1,
   "is_active": true,
+  "is_latest": true,
   "type": 2,
   "user": {
     "id": 1,
@@ -16334,6 +16336,8 @@ Status|Meaning|Error Ref|Description|Response Schema
 To perform this request, you must be authenticated via one of the following methods:
 <a href="#authentication">OAuth 2</a> (Scopes: write)
 </aside>
+# Metrics
+
 # Response Schemas
 ## Access Token Object  
 
@@ -16365,6 +16369,7 @@ date_expires|integer|Unix timestamp of the date this token will expire. Default 
 {
   "id": 1,
   "is_active": true,
+  "is_latest": true,
   "type": 2,
   "user": {
     "id": 1,
@@ -16399,6 +16404,7 @@ Name|Type|Description
 ---|---|---|---|
 id|integer|Unique id of the agreement.
 is_active|boolean|Is the agreement currently active? (This can also be determined if date_live <= the current time).
+is_latest|boolean|Is this the latest version of the agreement?
 type|integer|The type of agreement. Can be one of the following:<br><br>__1__ = Terms<br>__2__ = Privacy<br>__3__ = Game<br>__4__ = API<br>__5__ = Monetization<br>__6__ = AUP<br>__7__ = Cookies<br>__8__ = Refund
 user|[User Object](#schemauser_object)|No description
 date_added|integer|Unix timestamp of the date the agreement was added.
