@@ -777,16 +777,16 @@
             <a href="#service-to-service" class="toc-h1 toc-link" data-title="Service to Service"><span class="reficon"><img src="images/cog-white.svg" alt="Reference" class="menu-reference-icon"></span> Service to Service</a>
               <ul class="toc-list-h2">
                   <li>
-                    <a href="#s2s-transaction-intent" class="toc-h2 toc-link" data-title="Service to Service">S2S Transaction Intent</a>
+                    <a href="#transaction-intent" class="toc-h2 toc-link" data-title="Service to Service">Transaction Intent</a>
                   </li>
                   <li>
-                    <a href="#s2s-transaction-commit" class="toc-h2 toc-link" data-title="Service to Service">S2S Transaction Commit</a>
+                    <a href="#transaction-commit" class="toc-h2 toc-link" data-title="Service to Service">Transaction Commit</a>
                   </li>
                   <li>
-                    <a href="#s2s-transaction-clawback" class="toc-h2 toc-link" data-title="Service to Service">S2S Transaction Clawback</a>
+                    <a href="#transaction-clawback" class="toc-h2 toc-link" data-title="Service to Service">Transaction Clawback</a>
                   </li>
                   <li>
-                    <a href="#s2s-disconnect-user" class="toc-h2 toc-link" data-title="Service to Service">S2S Disconnect User</a>
+                    <a href="#disconnect-user" class="toc-h2 toc-link" data-title="Service to Service">Disconnect User</a>
                   </li>
               </ul>
           </li>
@@ -17289,49 +17289,16 @@ Accept: application/json
 </code></pre></div>
 <p><span class="httpmethod GET">GET</span> <span class="endpointheading">/me/events</span></p>
 
-<p><strong>Deprecated</strong>: This endpoint is deprecated for in-game use and will be removed at a later date. As of March 31st 2024, events will only be returned for existing games for legacy reasons. Any new game should use the <a href="#get-user-subscriptions">Get User Subscriptions</a> endpoint to fetch the latest mods subscribed to by the authenticated user as this endpoint will no longer return events for games created after that date. If you have any concerns please <a href="https://support.mod.io">reach out to us</a>.<br><br> Get events that have been fired specific to the user. Successful request will return an array of <a href="#get-user-events-2">Event Objects</a>. We recommended reading the <a href="#filtering">filtering documentation</a> to return only the records you want.</p>
-
-<table>
-<thead>
-<tr>
-<th>Filter</th>
-<th>Type</th>
-<th>Description</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>id</td>
-<td>integer</td>
-<td>Unique id of the event object.</td>
-</tr>
-<tr>
-<td>game_id</td>
-<td>integer</td>
-<td>Unique id of the parent game.</td>
-</tr>
-<tr>
-<td>mod_id</td>
-<td>integer</td>
-<td>Unique id of the parent mod.</td>
-</tr>
-<tr>
-<td>user_id</td>
-<td>integer</td>
-<td>Unique id of the user who performed the action.</td>
-</tr>
-<tr>
-<td>date_added</td>
-<td>integer</td>
-<td>Unix timestamp of date mod was updated.</td>
-</tr>
-<tr>
-<td>event_type</td>
-<td>string</td>
-<td>Type of change that occurred:<br><br><strong>USER_TEAM_JOIN</strong> = User has joined a team.<br><strong>USER_TEAM_LEAVE</strong> = User has left a team.<br><strong>USER_SUBSCRIBE</strong> = User has subscribed to a mod.<br><strong>USER_UNSUBSCRIBE</strong> = User has un-subscribed from a mod.</td>
-</tr>
-</tbody>
-</table>
+<p><strong>Deprecated</strong>: This endpoint is deprecated for in-game use and will be removed at a later date. As of March 31st 2024, events will only be returned for existing games for legacy reasons. Any new game should use the <a href="#get-user-subscriptions">Get User Subscriptions</a> endpoint to fetch the latest mods subscribed to by the authenticated user as this endpoint will no longer return events for games created after that date. If you have any concerns please <a href="https://support.mod.io">reach out to us</a>.<br><br> Get events that have been fired specific to the user. Successful request will return an array of <a href="#get-user-events-2">Event Objects</a>. We recommended reading the <a href="#filtering">filtering documentation</a> to return only the records you want.
+     *
+     * Filter|Type|Description
+     * ---|---|---
+     * id|integer|Unique id of the event object.
+     * game_id|integer|Unique id of the parent game.
+     * mod_id|integer|Unique id of the parent mod.
+     * user_id|integer|Unique id of the user who performed the action.
+     * date_added|integer|Unix timestamp of date mod was updated.
+     * event_type|string|Type of change that occurred:<br><br><strong>USER_TEAM_JOIN</strong> = User has joined a team.<br><strong>USER_TEAM_LEAVE</strong> = User has left a team.<br><strong>USER_SUBSCRIBE</strong> = User has subscribed to a mod.<br><strong>USER_UNSUBSCRIBE</strong> = User has un-subscribed from a mod.</p>
 
 <blockquote>
 <p>Example response</p>
@@ -19410,11 +19377,11 @@ To perform this request, you must be authenticated via one of the following meth
 <p>Example request</p>
 </blockquote>
 <div class="highlight"><pre class="highlight shell tab-shell"><code><span class="c"># You can also use wget</span>
-curl <span class="nt">-X</span> GET https://<span class="k">*</span>.modapi.io/v1/me/wallets <span class="se">\</span>
+curl <span class="nt">-X</span> GET https://<span class="k">*</span>.modapi.io/v1/me/wallets?game_id<span class="o">=</span>1 <span class="se">\</span>
   <span class="nt">-H</span> <span class="s1">'Authorization: Bearer {access-token}'</span> <span class="se">\ </span>
   <span class="nt">-H</span> <span class="s1">'Accept: application/json'</span>
 
-</code></pre></div><div class="highlight"><pre class="highlight http tab-http"><code><span class="nf">GET</span> <span class="nn">https://*.modapi.io/v1/me/wallets</span> <span class="k">HTTP</span><span class="o">/</span><span class="m">1.1</span>
+</code></pre></div><div class="highlight"><pre class="highlight http tab-http"><code><span class="nf">GET</span> <span class="nn">https://*.modapi.io/v1/me/wallets?game_id=1</span> <span class="k">HTTP</span><span class="o">/</span><span class="m">1.1</span>
 <span class="na">Host</span><span class="p">:</span> <span class="s">*.modapi.io</span>
 
 Accept: application/json
@@ -19429,7 +19396,7 @@ Authorization: Bearer {access-token}
 <span class="nx">$</span><span class="p">.</span><span class="nx">ajax</span><span class="p">({</span>
   <span class="na">url</span><span class="p">:</span> <span class="dl">'</span><span class="s1">https://*.modapi.io/v1/me/wallets</span><span class="dl">'</span><span class="p">,</span>
   <span class="na">method</span><span class="p">:</span> <span class="dl">'</span><span class="s1">get</span><span class="dl">'</span><span class="p">,</span>
-
+  <span class="na">data</span><span class="p">:</span> <span class="dl">'</span><span class="s1">?game_id=1</span><span class="dl">'</span><span class="p">,</span>
   <span class="na">headers</span><span class="p">:</span> <span class="nx">headers</span><span class="p">,</span>
   <span class="na">success</span><span class="p">:</span> <span class="kd">function</span><span class="p">(</span><span class="nx">data</span><span class="p">)</span> <span class="p">{</span>
     <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">JSON</span><span class="p">.</span><span class="nx">stringify</span><span class="p">(</span><span class="nx">data</span><span class="p">));</span>
@@ -19443,7 +19410,7 @@ Authorization: Bearer {access-token}
 
 <span class="p">};</span>
 
-<span class="nx">fetch</span><span class="p">(</span><span class="dl">'</span><span class="s1">https://*.modapi.io/v1/me/wallets</span><span class="dl">'</span><span class="p">,</span>
+<span class="nx">fetch</span><span class="p">(</span><span class="dl">'</span><span class="s1">https://*.modapi.io/v1/me/wallets?game_id=1</span><span class="dl">'</span><span class="p">,</span>
 <span class="p">{</span>
   <span class="na">method</span><span class="p">:</span> <span class="dl">'</span><span class="s1">GET</span><span class="dl">'</span><span class="p">,</span>
 
@@ -19461,11 +19428,11 @@ Authorization: Bearer {access-token}
 <span class="p">}</span>
 
 <span class="n">r</span> <span class="o">=</span> <span class="n">requests</span><span class="p">.</span><span class="n">get</span><span class="p">(</span><span class="s">'https://*.modapi.io/v1/me/wallets'</span><span class="p">,</span> <span class="n">params</span><span class="o">=</span><span class="p">{</span>
-
+  <span class="s">'game_id'</span><span class="p">:</span> <span class="s">'1'</span>
 <span class="p">},</span> <span class="n">headers</span> <span class="o">=</span> <span class="n">headers</span><span class="p">)</span>
 
 <span class="k">print</span> <span class="n">r</span><span class="p">.</span><span class="n">json</span><span class="p">()</span>
-</code></pre></div><div class="highlight"><pre class="highlight java tab-java"><code><span class="no">URL</span> <span class="n">obj</span> <span class="o">=</span> <span class="k">new</span> <span class="no">URL</span><span class="o">(</span><span class="s">"https://*.modapi.io/v1/me/wallets"</span><span class="o">);</span>
+</code></pre></div><div class="highlight"><pre class="highlight java tab-java"><code><span class="no">URL</span> <span class="n">obj</span> <span class="o">=</span> <span class="k">new</span> <span class="no">URL</span><span class="o">(</span><span class="s">"https://*.modapi.io/v1/me/wallets?game_id=1"</span><span class="o">);</span>
 <span class="nc">HttpURLConnection</span> <span class="n">con</span> <span class="o">=</span> <span class="o">(</span><span class="nc">HttpURLConnection</span><span class="o">)</span> <span class="n">obj</span><span class="o">.</span><span class="na">openConnection</span><span class="o">();</span>
 <span class="n">con</span><span class="o">.</span><span class="na">setRequestMethod</span><span class="o">(</span><span class="s">"GET"</span><span class="o">);</span>
 <span class="kt">int</span> <span class="n">responseCode</span> <span class="o">=</span> <span class="n">con</span><span class="o">.</span><span class="na">getResponseCode</span><span class="o">();</span>
@@ -19508,6 +19475,7 @@ Authorization: Bearer {access-token}
 <div class="highlight"><pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
   </span><span class="nl">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"string"</span><span class="p">,</span><span class="w">
   </span><span class="nl">"payment_method_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"string"</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"game_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"string"</span><span class="p">,</span><span class="w">
   </span><span class="nl">"currency"</span><span class="p">:</span><span class="w"> </span><span class="s2">"string"</span><span class="p">,</span><span class="w">
   </span><span class="nl">"balance"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
   </span><span class="nl">"deficit"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
@@ -20753,7 +20721,7 @@ Authorization: Bearer {access-token}
 To perform this request, you must be authenticated via one of the following methods:
 <a href="#authentication">OAuth 2</a> (Scopes: write)
 </aside>
-<h1 id="service-to-service">Service to Service</h1><h2 id="s2s-transaction-intent">S2S Transaction Intent</h2>
+<h1 id="service-to-service">Service to Service</h1><h2 id="transaction-intent">Transaction Intent</h2>
 <blockquote>
 <p>Example request</p>
 </blockquote>
@@ -20903,7 +20871,7 @@ curl <span class="nt">-X</span> POST https://<span class="k">*</span>.modapi.io/
 </span><span class="p">}</span><span class="w">
 
 </span></code></pre></div>
-<h3 id="S2S-Transaction-Intent-responses">Responses</h3>
+<h3 id="Transaction-Intent-responses">Responses</h3>
 
 <table>
 <thead>
@@ -20930,7 +20898,7 @@ curl <span class="nt">-X</span> POST https://<span class="k">*</span>.modapi.io/
 To perform this request, you must be authenticated via one of the following methods:
 <a href="#authentication">OAuth 2</a> (Scopes: write)
 </aside>
-<h2 id="s2s-transaction-commit">S2S Transaction Commit</h2>
+<h2 id="transaction-commit">Transaction Commit</h2>
 <blockquote>
 <p>Example request</p>
 </blockquote>
@@ -21067,7 +21035,7 @@ curl <span class="nt">-X</span> POST https://<span class="k">*</span>.modapi.io/
 </span><span class="p">}</span><span class="w">
 
 </span></code></pre></div>
-<h3 id="S2S-Transaction-Commit-responses">Responses</h3>
+<h3 id="Transaction-Commit-responses">Responses</h3>
 
 <table>
 <thead>
@@ -21094,7 +21062,7 @@ curl <span class="nt">-X</span> POST https://<span class="k">*</span>.modapi.io/
 To perform this request, you must be authenticated via one of the following methods:
 <a href="#authentication">OAuth 2</a> (Scopes: write)
 </aside>
-<h2 id="s2s-transaction-clawback">S2S Transaction Clawback</h2>
+<h2 id="transaction-clawback">Transaction Clawback</h2>
 <blockquote>
 <p>Example request</p>
 </blockquote>
@@ -21252,7 +21220,7 @@ curl <span class="nt">-X</span> POST https://<span class="k">*</span>.modapi.io/
 </span><span class="p">}</span><span class="w">
 
 </span></code></pre></div>
-<h3 id="S2S-Transaction-Clawback-responses">Responses</h3>
+<h3 id="Transaction-Clawback-responses">Responses</h3>
 
 <table>
 <thead>
@@ -21279,7 +21247,7 @@ curl <span class="nt">-X</span> POST https://<span class="k">*</span>.modapi.io/
 To perform this request, you must be authenticated via one of the following methods:
 <a href="#authentication">OAuth 2</a> (Scopes: write)
 </aside>
-<h2 id="s2s-disconnect-user">S2S Disconnect User</h2>
+<h2 id="disconnect-user">Disconnect User</h2>
 <blockquote>
 <p>Example request</p>
 </blockquote>
@@ -21368,7 +21336,7 @@ Content-Type: application/json
 <div class="highlight"><pre class="highlight json tab-json"><code><span class="w"> </span><span class="mi">204</span><span class="w"> </span><span class="err">No</span><span class="w"> </span><span class="err">Content</span><span class="w"> 
 
 </span></code></pre></div>
-<h3 id="S2S-Disconnect-User-responses">Responses</h3>
+<h3 id="Disconnect-User-responses">Responses</h3>
 
 <table>
 <thead>
@@ -27074,6 +27042,7 @@ To perform this request, you must be authenticated via one of the following meth
 <div class="highlight"><pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
   </span><span class="nl">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"string"</span><span class="p">,</span><span class="w">
   </span><span class="nl">"payment_method_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"string"</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"game_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"string"</span><span class="p">,</span><span class="w">
   </span><span class="nl">"currency"</span><span class="p">:</span><span class="w"> </span><span class="s2">"string"</span><span class="p">,</span><span class="w">
   </span><span class="nl">"balance"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
   </span><span class="nl">"deficit"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
@@ -27098,6 +27067,11 @@ To perform this request, you must be authenticated via one of the following meth
 <td>payment_method_id</td>
 <td>string</td>
 <td>The payment_method_id of the wallet.</td>
+</tr>
+<tr>
+<td>game_id</td>
+<td>string</td>
+<td>The game_id if it's a game wallet.</td>
 </tr>
 <tr>
 <td>currency</td>
