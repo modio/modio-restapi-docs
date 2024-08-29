@@ -13100,15 +13100,15 @@ System.out.println(response.toString());
 `GET /me/events`
 
 __Deprecated__: This endpoint is deprecated for in-game use and will be removed at a later date. As of March 31st 2024, events will only be returned for existing games for legacy reasons. Any new game should use the [Get User Subscriptions](#get-user-subscriptions) endpoint to fetch the latest mods subscribed to by the authenticated user as this endpoint will no longer return events for games created after that date. If you have any concerns please [reach out to us](https://support.mod.io).<br><br> Get events that have been fired specific to the user. Successful request will return an array of [Event Objects](#get-user-events-2). We recommended reading the [filtering documentation](#filtering) to return only the records you want.
-
-    Filter|Type|Description
-    ---|---|---
-    id|integer|Unique id of the event object.
-    game_id|integer|Unique id of the parent game.
-    mod_id|integer|Unique id of the parent mod.
-    user_id|integer|Unique id of the user who performed the action.
-    date_added|integer|Unix timestamp of date mod was updated.
-    event_type|string|Type of change that occurred:<br><br>__USER_TEAM_JOIN__ = User has joined a team.<br>__USER_TEAM_LEAVE__ = User has left a team.<br>__USER_SUBSCRIBE__ = User has subscribed to a mod.<br>__USER_UNSUBSCRIBE__ = User has un-subscribed from a mod.
+     *
+     * Filter|Type|Description
+     * ---|---|---
+     * id|integer|Unique id of the event object.
+     * game_id|integer|Unique id of the parent game.
+     * mod_id|integer|Unique id of the parent mod.
+     * user_id|integer|Unique id of the user who performed the action.
+     * date_added|integer|Unix timestamp of date mod was updated.
+     * event_type|string|Type of change that occurred:<br><br>__USER_TEAM_JOIN__ = User has joined a team.<br>__USER_TEAM_LEAVE__ = User has left a team.<br>__USER_SUBSCRIBE__ = User has subscribed to a mod.<br>__USER_UNSUBSCRIBE__ = User has un-subscribed from a mod.
 
 > Example response
 
@@ -14660,14 +14660,14 @@ To perform this request, you must be authenticated via one of the following meth
 
 ```shell
 # You can also use wget
-curl -X GET https://*.modapi.io/v1/me/wallets \
+curl -X GET https://*.modapi.io/v1/me/wallets?game_id=1 \
   -H 'Authorization: Bearer {access-token}' \ 
   -H 'Accept: application/json'
 
 ```
 
 ```http
-GET https://*.modapi.io/v1/me/wallets HTTP/1.1
+GET https://*.modapi.io/v1/me/wallets?game_id=1 HTTP/1.1
 Host: *.modapi.io
 
 Accept: application/json
@@ -14685,7 +14685,7 @@ var headers = {
 $.ajax({
   url: 'https://*.modapi.io/v1/me/wallets',
   method: 'get',
-
+  data: '?game_id=1',
   headers: headers,
   success: function(data) {
     console.log(JSON.stringify(data));
@@ -14702,7 +14702,7 @@ const headers = {
 
 };
 
-fetch('https://*.modapi.io/v1/me/wallets',
+fetch('https://*.modapi.io/v1/me/wallets?game_id=1',
 {
   method: 'GET',
 
@@ -14723,14 +14723,14 @@ headers = {
 }
 
 r = requests.get('https://*.modapi.io/v1/me/wallets', params={
-
+  'game_id': '1'
 }, headers = headers)
 
 print r.json()
 ```
 
 ```java
-URL obj = new URL("https://*.modapi.io/v1/me/wallets");
+URL obj = new URL("https://*.modapi.io/v1/me/wallets?game_id=1");
 HttpURLConnection con = (HttpURLConnection) obj.openConnection();
 con.setRequestMethod("GET");
 int responseCode = con.getResponseCode();
@@ -14759,6 +14759,7 @@ Get the _authenticated user_ wallets. Successful request will return a single [W
 {
   "type": "string",
   "payment_method_id": "string",
+  "game_id": "string",
   "currency": "string",
   "balance": 0,
   "deficit": 0,
@@ -15693,7 +15694,7 @@ To perform this request, you must be authenticated via one of the following meth
 </aside>
 # Service to Service
 
-## S2S Transaction Intent
+## Transaction Intent
 
 > Example request
 
@@ -15835,7 +15836,7 @@ Create a service-to-service (S2S) transaction intent. This is for performing an 
 }
 
 ```
-<h3 id="S2S-Transaction-Intent-responses">Responses</h3>
+<h3 id="Transaction-Intent-responses">Responses</h3>
 
 Status|Meaning|Error Ref|Description|Response Schema
 ---|---|----|---|---|
@@ -15844,7 +15845,7 @@ Status|Meaning|Error Ref|Description|Response Schema
 To perform this request, you must be authenticated via one of the following methods:
 <a href="#authentication">OAuth 2</a> (Scopes: write)
 </aside>
-## S2S Transaction Commit
+## Transaction Commit
 
 > Example request
 
@@ -15978,7 +15979,7 @@ Create a service-to-service (S2S) transaction commit. This is for performing an 
 }
 
 ```
-<h3 id="S2S-Transaction-Commit-responses">Responses</h3>
+<h3 id="Transaction-Commit-responses">Responses</h3>
 
 Status|Meaning|Error Ref|Description|Response Schema
 ---|---|----|---|---|
@@ -15987,7 +15988,7 @@ Status|Meaning|Error Ref|Description|Response Schema
 To perform this request, you must be authenticated via one of the following methods:
 <a href="#authentication">OAuth 2</a> (Scopes: write)
 </aside>
-## S2S Transaction Clawback
+## Transaction Clawback
 
 > Example request
 
@@ -16127,7 +16128,7 @@ Create a service-to-service (S2S) transaction clawback. This is for unwinding a 
 }
 
 ```
-<h3 id="S2S-Transaction-Clawback-responses">Responses</h3>
+<h3 id="Transaction-Clawback-responses">Responses</h3>
 
 Status|Meaning|Error Ref|Description|Response Schema
 ---|---|----|---|---|
@@ -16136,7 +16137,7 @@ Status|Meaning|Error Ref|Description|Response Schema
 To perform this request, you must be authenticated via one of the following methods:
 <a href="#authentication">OAuth 2</a> (Scopes: write)
 </aside>
-## S2S Disconnect User
+## Disconnect User
 
 > Example request
 
@@ -16242,7 +16243,7 @@ Disconnect a mod.io user from a linked studio user. This will completely remove 
  204 No Content 
 
 ```
-<h3 id="S2S-Disconnect-User-responses">Responses</h3>
+<h3 id="Disconnect-User-responses">Responses</h3>
 
 Status|Meaning|Error Ref|Description|Response Schema
 ---|---|----|---|---|
@@ -19762,6 +19763,7 @@ balance|integer|The balance of the wallet.
 {
   "type": "string",
   "payment_method_id": "string",
+  "game_id": "string",
   "currency": "string",
   "balance": 0,
   "deficit": 0,
@@ -19775,6 +19777,7 @@ Name|Type|Description
 ---|---|---|---|
 type|string|The type of the wallet.
 payment_method_id|string|The payment_method_id of the wallet.
+game_id|string|The game_id if it's a game wallet.
 currency|string|The currency of the wallet.
 balance|integer|The balance of the wallet.
 deficit|integer|The deficit of the wallet.
