@@ -656,7 +656,9 @@ Language Code | Language
 `ja` | Japanese
 `ko` | Korean
 `ru` | Russian
-`es` | Spanish
+`es` | Spanish (Spain)
+`tr` | Turkish
+`uk` | Ukrainian
 `th` | Thai
 `zh-CN` | Chinese (Simplified)
 `zh-TW` | Chinese (Traditional)
