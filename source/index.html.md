@@ -873,158 +873,34 @@ Xbox Live | `xboxlive`
 
 These are the only supported values and are case-insensitive, anything else will be ignored. Have we missed a portal you are using? [Get in touch!](mailto:developers@mod.io?subject=Portal%20Support)
 # Authentication
-
-## Logout
+## Terms
 
 > Example request
 
 ```shell
 # You can also use wget
-curl -X POST https://*.modapi.io/v1/oauth/logout \
-  -H 'Authorization: Bearer {access-token}' \ 
-  -H 'Content-Type: application/json' \ 
+curl -X GET https://*.modapi.io/v1/authenticate/terms?api_key=YourApiKey \
   -H 'Accept: application/json'
 
 ```
 
 ```http
-POST https://*.modapi.io/v1/oauth/logout HTTP/1.1
+GET https://*.modapi.io/v1/authenticate/terms?api_key=YourApiKey HTTP/1.1
 Host: *.modapi.io
 
-Accept: application/json
-Authorization: Bearer {access-token}
-Content-Type: application/json
-
-```
-
-```javascript
-var headers = {
-  'Authorization':'Bearer {access-token}',
-  'Content-Type':'application/json',
-  'Accept':'application/json'
-
-};
-
-$.ajax({
-  url: 'https://*.modapi.io/v1/oauth/logout',
-  method: 'post',
-
-  headers: headers,
-  success: function(data) {
-    console.log(JSON.stringify(data));
-  }
-})
-```
-
-```javascript--nodejs
-const request = require('node-fetch');
-
-const headers = {
-  'Authorization':'Bearer {access-token}',
-  'Content-Type':'application/json',
-  'Accept':'application/json'
-
-};
-
-fetch('https://*.modapi.io/v1/oauth/logout',
-{
-  method: 'POST',
-
-  headers: headers
-})
-.then(function(res) {
-    return res.json();
-}).then(function(body) {
-    console.log(body);
-});
-```
-
-```python
-import requests
-headers = {
-  'Authorization': 'Bearer {access-token}',
-  'Content-Type': 'application/json',
-  'Accept': 'application/json'
-}
-
-r = requests.post('https://*.modapi.io/v1/oauth/logout', params={
-
-}, headers = headers)
-
-print r.json()
-```
-
-```java
-URL obj = new URL("https://*.modapi.io/v1/oauth/logout");
-HttpURLConnection con = (HttpURLConnection) obj.openConnection();
-con.setRequestMethod("POST");
-int responseCode = con.getResponseCode();
-BufferedReader in = new BufferedReader(
-    new InputStreamReader(con.getInputStream()));
-String inputLine;
-StringBuffer response = new StringBuffer();
-while ((inputLine = in.readLine()) != null) {
-    response.append(inputLine);
-}
-in.close();
-System.out.println(response.toString());
-```
-
-`POST /oauth/logout`
-
-Log the user out by revoking their current access token. If this request successfully completes, you should remove any tokens/cookies/cached credentials linking to the now-revoked access token so the user is required to login again through your application. Successful request will return a [Message Object](#message-object).
-
-> Example response
-
-```json
-{
-  "code": 200,
-  "success": true,
-  "message": "You have successfully logged out of mod.io."
-}
-
-```
-<h3 id="Logout-responses">Responses</h3>
-
-Status|Meaning|Error Ref|Description|Response Schema
----|---|----|---|---|
-200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)||Successful Request|[Web Message Object](#schemaweb_message_object)
-<aside class="auth-notice">
-To perform this request, you must be authenticated via one of the following methods:
-<a href="#authentication">OAuth 2</a> (Scopes: read)
-</aside>
-## Email Exchange
-__Step 1 of 2__
-
-> Example request
-
-```shell
-# You can also use wget
-curl -X POST https://*.modapi.io/v1/oauth/emailrequest?api_key=YourApiKey \
-  -H 'Content-Type: application/x-www-form-urlencoded' \ 
-  -H 'Accept: application/json' \
-  -d 'email=someperson@someservice.com'
-
-```
-
-```http
-POST https://*.modapi.io/v1/oauth/emailrequest?api_key=YourApiKey HTTP/1.1
-Host: *.modapi.io
-Content-Type: application/x-www-form-urlencoded
 Accept: application/json
 
 ```
 
 ```javascript
 var headers = {
-  'Content-Type':'application/x-www-form-urlencoded',
   'Accept':'application/json'
 
 };
 
 $.ajax({
-  url: 'https://*.modapi.io/v1/oauth/emailrequest',
-  method: 'post',
+  url: 'https://*.modapi.io/v1/authenticate/terms',
+  method: 'get',
   data: '?api_key=YourApiKey',
   headers: headers,
   success: function(data) {
@@ -1035,19 +911,16 @@ $.ajax({
 
 ```javascript--nodejs
 const request = require('node-fetch');
-const inputBody = '{
-  "email": "someperson@someservice.com"
-}';
+
 const headers = {
-  'Content-Type':'application/x-www-form-urlencoded',
   'Accept':'application/json'
 
 };
 
-fetch('https://*.modapi.io/v1/oauth/emailrequest?api_key=YourApiKey',
+fetch('https://*.modapi.io/v1/authenticate/terms?api_key=YourApiKey',
 {
-  method: 'POST',
-  body: inputBody,
+  method: 'GET',
+
   headers: headers
 })
 .then(function(res) {
@@ -1060,11 +933,10 @@ fetch('https://*.modapi.io/v1/oauth/emailrequest?api_key=YourApiKey',
 ```python
 import requests
 headers = {
-  'Content-Type': 'application/x-www-form-urlencoded',
   'Accept': 'application/json'
 }
 
-r = requests.post('https://*.modapi.io/v1/oauth/emailrequest', params={
+r = requests.get('https://*.modapi.io/v1/authenticate/terms', params={
   'api_key': 'YourApiKey'
 }, headers = headers)
 
@@ -1072,9 +944,9 @@ print r.json()
 ```
 
 ```java
-URL obj = new URL("https://*.modapi.io/v1/oauth/emailrequest?api_key=YourApiKey");
+URL obj = new URL("https://*.modapi.io/v1/authenticate/terms?api_key=YourApiKey");
 HttpURLConnection con = (HttpURLConnection) obj.openConnection();
-con.setRequestMethod("POST");
+con.setRequestMethod("GET");
 int responseCode = con.getResponseCode();
 BufferedReader in = new BufferedReader(
     new InputStreamReader(con.getInputStream()));
@@ -1087,162 +959,77 @@ in.close();
 System.out.println(response.toString());
 ```
 
-`POST /oauth/emailrequest`
+`GET /authenticate/terms`
 
-Request a security code for a user, identified by their e-mail which can then be [exchanged](#email) for an access token. To use this functionality you *must* use your games api_key from your games profile on mod.io. A Successful request will return a [Message Object](#message-object).
+The purpose of this endpoint is to provide the text, links and buttons you can use to get a users agreement and consent prior to authenticating them in-game (your dialog should look similar to the example below). This text will be localized based on the `Accept-Language` header, into one of our [supported languages](#localization) (note: our full Terms of Use and Privacy Policy are currently in English-only). If you are authenticating using platform SSO, you must call this endpoint with the `X-Modio-Portal` [header set](#targeting-a-portal), so the text is localized to match the platforms requirements. A successful response will return a [Terms Object](#terms-object).
 
-    Parameter|Type|Required|Description
-    ---|---|---|---|
-    email|string|true|An email address the user can access to retrieve the security code. This parameter should also be urlencoded before the request is sent.
+     __Example Dialog:__
+
+     <aside class='consent'>This game uses mod.io to support user-generated content. By clicking 'I Agree' you agree to the mod.io Terms of Use and a mod.io account will be created for you (using your display name, avatar and ID). Please see the mod.io Privacy Policy on how mod.io processes your personal data.<br><br><div style='text-align:center'><span class='versionwrap cursor'> &nbsp; &nbsp; I Agree &nbsp; &nbsp; </span> <span class='versionwrap outline cursor'>No, Thanks</span><br><br>[Terms of Use](https://mod.io/terms/widget) - [Privacy Policy](https://mod.io/privacy/widget)<br></div></aside>
+
+     __IMPORTANT:__ It is a requirement of the [Game Terms](https://mod.io/gameterms) with mod.io, and the platforms mod.io is used on, to ensure the user provides consent and has agreed to the latest mod.io [Terms of Use](https://mod.io/terms/widget) and [Privacy Policy](https://mod.io/privacy/widget). The users agreement must be collected prior to using a 3rd party authentication flow (including but not limited to Steam, PSN, Nintendo and Xbox Live). You only need to collect the users agreement once, and also each time these policies are updated.
+
+     To make this easy to manage, all of the 3rd party authentication flows have a `terms_agreed` field which should be set to `false` by default. If the user has agreed to the latest policies, their authentication will proceed as normal, however if their agreement is required and `terms_agreed` is set to `false` an error `403 Forbidden (error_ref 11074)` will be returned. When you receive this error, you must collect the users agreement before resubmitting the authentication flow with `terms_agreed` set to `true`, which will be recorded.
+
+     __NOTE:__ You must make sure the Terms of Use and Privacy Policy are correctly linked, or displayed inline using the [agreements endpoints](#agreements) to get the latest versions.
+
+     If you wish to display the agreements in a web browser overlay, we recommend adding __/widget__ and __?no_links=true__ to the end of the agreement URLs, to remove the menus and external links, for example:
+
+     - [https://mod.io/terms`/widget?no_links=true`](https://mod.io/terms/widget?no_links=true)<br>
+     - [https://mod.io/privacy`/widget?no_links=true`](https://mod.io/privacy/widget?no_links=true)
+
+     __NOTE:__ You can use your own text and process, but be aware that you are responsible for ensuring that the users agreement is properly collected and reported. Failure to do so correctly is a breach of the [mod.io Game Terms](https://mod.io/gameterms/widget). If your game does not authenticate users or only uses the email authentication flow, you do not need to implement this dialog, but you should link to the mod.io Terms of Use and Privacy Policy in your Privacy Policy/EULA.
 
 > Example response
 
 ```json
 {
-  "code": 201,
-  "message": "Please enter the 5-digit security code sent to your email address (someperson@someservice.com)."
-}
-
-```
-<h3 id="Email-(Request)-responses">Responses</h3>
-
-Status|Meaning|Error Ref|Description|Response Schema
----|---|----|---|---|
-200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)||Successful Request|[Email Request Response](#schemaemail_request_response)
-403|[Forbidden](https://tools.ietf.org/html/rfc7231#section-6.5.3)|11017|The supplied api_key cannot be used to generate access tokens. Please replace the supplied api_key with your game's api_key to enable full privileges.|[Error Object](#schemaerror_object)
-<aside class="auth-notice">
-To perform this request, you must be authenticated via one of the following methods:
-<a href="#authentication">api_key</a>
-</aside>
-
-<br>
-__Step 2 of 2__
-
-
-> Example request
-
-```shell
-# You can also use wget
-curl -X POST https://*.modapi.io/v1/oauth/emailexchange?api_key=YourApiKey \
-  -H 'Content-Type: application/x-www-form-urlencoded' \ 
-  -H 'Accept: application/json' \
-  -d 'security_code=P39TM'
-
-```
-
-```http
-POST https://*.modapi.io/v1/oauth/emailexchange?api_key=YourApiKey HTTP/1.1
-Host: *.modapi.io
-Content-Type: application/x-www-form-urlencoded
-Accept: application/json
-
-```
-
-```javascript
-var headers = {
-  'Content-Type':'application/x-www-form-urlencoded',
-  'Accept':'application/json'
-
-};
-
-$.ajax({
-  url: 'https://*.modapi.io/v1/oauth/emailexchange',
-  method: 'post',
-  data: '?api_key=YourApiKey',
-  headers: headers,
-  success: function(data) {
-    console.log(JSON.stringify(data));
+  "plaintext": "This game uses mod.io to support user-generated content. By selecting "I Agree" you agree to the mod.io Terms of Use and a mod.io account will be created for you (using your display name, avatar and ID). Please see the mod.io Privacy Policy on how mod.io processes your personal data.",
+  "html": "<p>This game uses <a href="https://mod.io">mod.io</a> to support user-generated content. By selecting "I Agree" you agree to the mod.io <a href="https://mod.io/terms">Terms of Use</a> and a mod.io account will be created for you (using your display name, avatar and ID). Please see the mod.io <a href="https://mod.io/privacy">Privacy Policy</a> on how mod.io processes your personal data.</p>",
+  "buttons": {
+    "agree": {
+      "text": "I Agree"
+    },
+    "disagree": {
+      "text": "No, Thanks"
+    }
+  },
+  "links": {
+    "website": {
+      "text": "Website",
+      "url": "https://mod.io",
+      "required": false
+    },
+    "terms": {
+      "text": "Terms of Use",
+      "url": "https://mod.io/terms",
+      "required": true
+    },
+    "privacy": {
+      "text": "Privacy Policy",
+      "url": "https://mod.io/privacy",
+      "required": true
+    },
+    "manage": {
+      "text": "Manage Account",
+      "url": "https://mod.io/me/account",
+      "required": false
+    }
   }
-})
-```
-
-```javascript--nodejs
-const request = require('node-fetch');
-const inputBody = '{
-  "security_code": "P39TM"
-}';
-const headers = {
-  'Content-Type':'application/x-www-form-urlencoded',
-  'Accept':'application/json'
-
-};
-
-fetch('https://*.modapi.io/v1/oauth/emailexchange?api_key=YourApiKey',
-{
-  method: 'POST',
-  body: inputBody,
-  headers: headers
-})
-.then(function(res) {
-    return res.json();
-}).then(function(body) {
-    console.log(body);
-});
-```
-
-```python
-import requests
-headers = {
-  'Content-Type': 'application/x-www-form-urlencoded',
-  'Accept': 'application/json'
-}
-
-r = requests.post('https://*.modapi.io/v1/oauth/emailexchange', params={
-  'api_key': 'YourApiKey'
-}, headers = headers)
-
-print r.json()
-```
-
-```java
-URL obj = new URL("https://*.modapi.io/v1/oauth/emailexchange?api_key=YourApiKey");
-HttpURLConnection con = (HttpURLConnection) obj.openConnection();
-con.setRequestMethod("POST");
-int responseCode = con.getResponseCode();
-BufferedReader in = new BufferedReader(
-    new InputStreamReader(con.getInputStream()));
-String inputLine;
-StringBuffer response = new StringBuffer();
-while ((inputLine = in.readLine()) != null) {
-    response.append(inputLine);
-}
-in.close();
-System.out.println(response.toString());
-```
-
-`POST /oauth/emailexchange`
-
-Exchange a security code issued from the [Email Request endpoint](#email) for an access token. To use this functionality you *must* use your games api_key from your games profile on mod.io and the same api_key must be used from the original request for a security code. A Successful request will return an [Access Token Object](#access-token-object).
-
-    Parameter|Type|Required|Description
-    ---|---|---|---|
-    security_code|string|true|The alpha-numeric security code.
-    date_expires|integer||Unix timestamp of date in which the returned token will expire. Value cannot be higher than the default value which is a common year (unix timestamp + 31536000 seconds). Using a token after it's expiry time has elapsed will result in a `401 Unauthorized` response.
-
-> Example response
-
-```json
-{
-  "code": 200,
-  "access_token": "eyJ0eXAiOiXKV1QibCJhbLciOiJeiUzI1.....",
-  "date_expires": 1570673249
 }
 
 ```
-<h3 id="Email-(Exchange)-responses">Responses</h3>
+<h3 id="Terms-responses">Responses</h3>
 
 Status|Meaning|Error Ref|Description|Response Schema
 ---|---|----|---|---|
-200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)||Successful Request|[Access Token Object](#schemaaccess_token_object)
-401|[Unauthorized](https://tools.ietf.org/html/rfc7235#section-3.1)|11013|Authorization failed. You must use the same api_key for both stages of the authentication process.|[Error Object](#schemaerror_object)
-401|[Unauthorized](https://tools.ietf.org/html/rfc7235#section-3.1)|11012|Authorization failed, security code has expired. Please request a new code.|[Error Object](#schemaerror_object)
-401|[Unauthorized](https://tools.ietf.org/html/rfc7235#section-3.1)|11011|Authorization failed. Security code has already been redeemed.|[Error Object](#schemaerror_object)
-403|[Forbidden](https://tools.ietf.org/html/rfc7231#section-6.5.3)|17053|The user account associated with this email is locked. Please contact support for assistance.|[Error Object](#schemaerror_object)
-401|[Unauthorized](https://tools.ietf.org/html/rfc7235#section-3.1)|11014|Authorization failed. Invalid security code.|[Error Object](#schemaerror_object)
+200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)||Successful Request|[Terms Object](#schematerms_object)
 <aside class="auth-notice">
 To perform this request, you must be authenticated via one of the following methods:
 <a href="#authentication">api_key</a>
 </aside>
+
+
 ## Steam
 
 > Example request
@@ -2701,35 +2488,291 @@ Status|Meaning|Error Ref|Description|Response Schema
 To perform this request, you must be authenticated via one of the following methods:
 <a href="#authentication">api_key</a>
 </aside>
-## Terms
+## Email Exchange
+__Step 1 of 2__
 
 > Example request
 
 ```shell
 # You can also use wget
-curl -X GET https://*.modapi.io/v1/authenticate/terms?api_key=YourApiKey \
-  -H 'Accept: application/json'
+curl -X POST https://*.modapi.io/v1/oauth/emailrequest?api_key=YourApiKey \
+  -H 'Content-Type: application/x-www-form-urlencoded' \ 
+  -H 'Accept: application/json' \
+  -d 'email=someperson@someservice.com'
 
 ```
 
 ```http
-GET https://*.modapi.io/v1/authenticate/terms?api_key=YourApiKey HTTP/1.1
+POST https://*.modapi.io/v1/oauth/emailrequest?api_key=YourApiKey HTTP/1.1
 Host: *.modapi.io
-
+Content-Type: application/x-www-form-urlencoded
 Accept: application/json
 
 ```
 
 ```javascript
 var headers = {
+  'Content-Type':'application/x-www-form-urlencoded',
   'Accept':'application/json'
 
 };
 
 $.ajax({
-  url: 'https://*.modapi.io/v1/authenticate/terms',
-  method: 'get',
+  url: 'https://*.modapi.io/v1/oauth/emailrequest',
+  method: 'post',
   data: '?api_key=YourApiKey',
+  headers: headers,
+  success: function(data) {
+    console.log(JSON.stringify(data));
+  }
+})
+```
+
+```javascript--nodejs
+const request = require('node-fetch');
+const inputBody = '{
+  "email": "someperson@someservice.com"
+}';
+const headers = {
+  'Content-Type':'application/x-www-form-urlencoded',
+  'Accept':'application/json'
+
+};
+
+fetch('https://*.modapi.io/v1/oauth/emailrequest?api_key=YourApiKey',
+{
+  method: 'POST',
+  body: inputBody,
+  headers: headers
+})
+.then(function(res) {
+    return res.json();
+}).then(function(body) {
+    console.log(body);
+});
+```
+
+```python
+import requests
+headers = {
+  'Content-Type': 'application/x-www-form-urlencoded',
+  'Accept': 'application/json'
+}
+
+r = requests.post('https://*.modapi.io/v1/oauth/emailrequest', params={
+  'api_key': 'YourApiKey'
+}, headers = headers)
+
+print r.json()
+```
+
+```java
+URL obj = new URL("https://*.modapi.io/v1/oauth/emailrequest?api_key=YourApiKey");
+HttpURLConnection con = (HttpURLConnection) obj.openConnection();
+con.setRequestMethod("POST");
+int responseCode = con.getResponseCode();
+BufferedReader in = new BufferedReader(
+    new InputStreamReader(con.getInputStream()));
+String inputLine;
+StringBuffer response = new StringBuffer();
+while ((inputLine = in.readLine()) != null) {
+    response.append(inputLine);
+}
+in.close();
+System.out.println(response.toString());
+```
+
+`POST /oauth/emailrequest`
+
+Request a security code for a user, identified by their e-mail which can then be [exchanged](#email) for an access token. To use this functionality you *must* use your games api_key from your games profile on mod.io. A Successful request will return a [Message Object](#message-object).
+
+    Parameter|Type|Required|Description
+    ---|---|---|---|
+    email|string|true|An email address the user can access to retrieve the security code. This parameter should also be urlencoded before the request is sent.
+
+> Example response
+
+```json
+{
+  "code": 201,
+  "message": "Please enter the 5-digit security code sent to your email address (someperson@someservice.com)."
+}
+
+```
+<h3 id="Email-(Request)-responses">Responses</h3>
+
+Status|Meaning|Error Ref|Description|Response Schema
+---|---|----|---|---|
+200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)||Successful Request|[Email Request Response](#schemaemail_request_response)
+403|[Forbidden](https://tools.ietf.org/html/rfc7231#section-6.5.3)|11017|The supplied api_key cannot be used to generate access tokens. Please replace the supplied api_key with your game's api_key to enable full privileges.|[Error Object](#schemaerror_object)
+<aside class="auth-notice">
+To perform this request, you must be authenticated via one of the following methods:
+<a href="#authentication">api_key</a>
+</aside>
+
+<br>
+__Step 2 of 2__
+
+
+> Example request
+
+```shell
+# You can also use wget
+curl -X POST https://*.modapi.io/v1/oauth/emailexchange?api_key=YourApiKey \
+  -H 'Content-Type: application/x-www-form-urlencoded' \ 
+  -H 'Accept: application/json' \
+  -d 'security_code=P39TM'
+
+```
+
+```http
+POST https://*.modapi.io/v1/oauth/emailexchange?api_key=YourApiKey HTTP/1.1
+Host: *.modapi.io
+Content-Type: application/x-www-form-urlencoded
+Accept: application/json
+
+```
+
+```javascript
+var headers = {
+  'Content-Type':'application/x-www-form-urlencoded',
+  'Accept':'application/json'
+
+};
+
+$.ajax({
+  url: 'https://*.modapi.io/v1/oauth/emailexchange',
+  method: 'post',
+  data: '?api_key=YourApiKey',
+  headers: headers,
+  success: function(data) {
+    console.log(JSON.stringify(data));
+  }
+})
+```
+
+```javascript--nodejs
+const request = require('node-fetch');
+const inputBody = '{
+  "security_code": "P39TM"
+}';
+const headers = {
+  'Content-Type':'application/x-www-form-urlencoded',
+  'Accept':'application/json'
+
+};
+
+fetch('https://*.modapi.io/v1/oauth/emailexchange?api_key=YourApiKey',
+{
+  method: 'POST',
+  body: inputBody,
+  headers: headers
+})
+.then(function(res) {
+    return res.json();
+}).then(function(body) {
+    console.log(body);
+});
+```
+
+```python
+import requests
+headers = {
+  'Content-Type': 'application/x-www-form-urlencoded',
+  'Accept': 'application/json'
+}
+
+r = requests.post('https://*.modapi.io/v1/oauth/emailexchange', params={
+  'api_key': 'YourApiKey'
+}, headers = headers)
+
+print r.json()
+```
+
+```java
+URL obj = new URL("https://*.modapi.io/v1/oauth/emailexchange?api_key=YourApiKey");
+HttpURLConnection con = (HttpURLConnection) obj.openConnection();
+con.setRequestMethod("POST");
+int responseCode = con.getResponseCode();
+BufferedReader in = new BufferedReader(
+    new InputStreamReader(con.getInputStream()));
+String inputLine;
+StringBuffer response = new StringBuffer();
+while ((inputLine = in.readLine()) != null) {
+    response.append(inputLine);
+}
+in.close();
+System.out.println(response.toString());
+```
+
+`POST /oauth/emailexchange`
+
+Exchange a security code issued from the [Email Request endpoint](#email) for an access token. To use this functionality you *must* use your games api_key from your games profile on mod.io and the same api_key must be used from the original request for a security code. A Successful request will return an [Access Token Object](#access-token-object).
+
+    Parameter|Type|Required|Description
+    ---|---|---|---|
+    security_code|string|true|The alpha-numeric security code.
+    date_expires|integer||Unix timestamp of date in which the returned token will expire. Value cannot be higher than the default value which is a common year (unix timestamp + 31536000 seconds). Using a token after it's expiry time has elapsed will result in a `401 Unauthorized` response.
+
+> Example response
+
+```json
+{
+  "code": 200,
+  "access_token": "eyJ0eXAiOiXKV1QibCJhbLciOiJeiUzI1.....",
+  "date_expires": 1570673249
+}
+
+```
+<h3 id="Email-(Exchange)-responses">Responses</h3>
+
+Status|Meaning|Error Ref|Description|Response Schema
+---|---|----|---|---|
+200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)||Successful Request|[Access Token Object](#schemaaccess_token_object)
+401|[Unauthorized](https://tools.ietf.org/html/rfc7235#section-3.1)|11013|Authorization failed. You must use the same api_key for both stages of the authentication process.|[Error Object](#schemaerror_object)
+401|[Unauthorized](https://tools.ietf.org/html/rfc7235#section-3.1)|11012|Authorization failed, security code has expired. Please request a new code.|[Error Object](#schemaerror_object)
+401|[Unauthorized](https://tools.ietf.org/html/rfc7235#section-3.1)|11011|Authorization failed. Security code has already been redeemed.|[Error Object](#schemaerror_object)
+403|[Forbidden](https://tools.ietf.org/html/rfc7231#section-6.5.3)|17053|The user account associated with this email is locked. Please contact support for assistance.|[Error Object](#schemaerror_object)
+401|[Unauthorized](https://tools.ietf.org/html/rfc7235#section-3.1)|11014|Authorization failed. Invalid security code.|[Error Object](#schemaerror_object)
+<aside class="auth-notice">
+To perform this request, you must be authenticated via one of the following methods:
+<a href="#authentication">api_key</a>
+</aside>
+## Logout
+
+> Example request
+
+```shell
+# You can also use wget
+curl -X POST https://*.modapi.io/v1/oauth/logout \
+  -H 'Authorization: Bearer {access-token}' \ 
+  -H 'Content-Type: application/json' \ 
+  -H 'Accept: application/json'
+
+```
+
+```http
+POST https://*.modapi.io/v1/oauth/logout HTTP/1.1
+Host: *.modapi.io
+
+Accept: application/json
+Authorization: Bearer {access-token}
+Content-Type: application/json
+
+```
+
+```javascript
+var headers = {
+  'Authorization':'Bearer {access-token}',
+  'Content-Type':'application/json',
+  'Accept':'application/json'
+
+};
+
+$.ajax({
+  url: 'https://*.modapi.io/v1/oauth/logout',
+  method: 'post',
+
   headers: headers,
   success: function(data) {
     console.log(JSON.stringify(data));
@@ -2741,13 +2784,15 @@ $.ajax({
 const request = require('node-fetch');
 
 const headers = {
+  'Authorization':'Bearer {access-token}',
+  'Content-Type':'application/json',
   'Accept':'application/json'
 
 };
 
-fetch('https://*.modapi.io/v1/authenticate/terms?api_key=YourApiKey',
+fetch('https://*.modapi.io/v1/oauth/logout',
 {
-  method: 'GET',
+  method: 'POST',
 
   headers: headers
 })
@@ -2761,20 +2806,22 @@ fetch('https://*.modapi.io/v1/authenticate/terms?api_key=YourApiKey',
 ```python
 import requests
 headers = {
+  'Authorization': 'Bearer {access-token}',
+  'Content-Type': 'application/json',
   'Accept': 'application/json'
 }
 
-r = requests.get('https://*.modapi.io/v1/authenticate/terms', params={
-  'api_key': 'YourApiKey'
+r = requests.post('https://*.modapi.io/v1/oauth/logout', params={
+
 }, headers = headers)
 
 print r.json()
 ```
 
 ```java
-URL obj = new URL("https://*.modapi.io/v1/authenticate/terms?api_key=YourApiKey");
+URL obj = new URL("https://*.modapi.io/v1/oauth/logout");
 HttpURLConnection con = (HttpURLConnection) obj.openConnection();
-con.setRequestMethod("GET");
+con.setRequestMethod("POST");
 int responseCode = con.getResponseCode();
 BufferedReader in = new BufferedReader(
     new InputStreamReader(con.getInputStream()));
@@ -2787,74 +2834,28 @@ in.close();
 System.out.println(response.toString());
 ```
 
-`GET /authenticate/terms`
+`POST /oauth/logout`
 
-The purpose of this endpoint is to provide the text, links and buttons you can use to get a users agreement and consent prior to authenticating them in-game (your dialog should look similar to the example below). This text will be localized based on the `Accept-Language` header, into one of our [supported languages](#localization) (note: our full Terms of Use and Privacy Policy are currently in English-only). If you are authenticating using platform SSO, you must call this endpoint with the `X-Modio-Portal` [header set](#targeting-a-portal), so the text is localized to match the platforms requirements. A successful response will return a [Terms Object](#terms-object).
-
-     __Example Dialog:__
-
-     <aside class='consent'>This game uses mod.io to support user-generated content. By clicking 'I Agree' you agree to the mod.io Terms of Use and a mod.io account will be created for you (using your display name, avatar and ID). Please see the mod.io Privacy Policy on how mod.io processes your personal data.<br><br><div style='text-align:center'><span class='versionwrap cursor'> &nbsp; &nbsp; I Agree &nbsp; &nbsp; </span> <span class='versionwrap outline cursor'>No, Thanks</span><br><br>[Terms of Use](https://mod.io/terms/widget) - [Privacy Policy](https://mod.io/privacy/widget)<br></div></aside>
-
-     __IMPORTANT:__ It is a requirement of the [Game Terms](https://mod.io/gameterms) with mod.io, and the platforms mod.io is used on, to ensure the user provides consent and has agreed to the latest mod.io [Terms of Use](https://mod.io/terms/widget) and [Privacy Policy](https://mod.io/privacy/widget). The users agreement must be collected prior to using a 3rd party authentication flow (including but not limited to Steam, PSN, Nintendo and Xbox Live). You only need to collect the users agreement once, and also each time these policies are updated.
-
-     To make this easy to manage, all of the 3rd party authentication flows have a `terms_agreed` field which should be set to `false` by default. If the user has agreed to the latest policies, their authentication will proceed as normal, however if their agreement is required and `terms_agreed` is set to `false` an error `403 Forbidden (error_ref 11074)` will be returned. When you receive this error, you must collect the users agreement before resubmitting the authentication flow with `terms_agreed` set to `true`, which will be recorded.
-
-     __NOTE:__ You must make sure the Terms of Use and Privacy Policy are correctly linked, or displayed inline using the [agreements endpoints](#agreements) to get the latest versions.
-
-     If you wish to display the agreements in a web browser overlay, we recommend adding __/widget__ and __?no_links=true__ to the end of the agreement URLs, to remove the menus and external links, for example:
-
-     - [https://mod.io/terms`/widget?no_links=true`](https://mod.io/terms/widget?no_links=true)<br>
-     - [https://mod.io/privacy`/widget?no_links=true`](https://mod.io/privacy/widget?no_links=true)
-
-     __NOTE:__ You can use your own text and process, but be aware that you are responsible for ensuring that the users agreement is properly collected and reported. Failure to do so correctly is a breach of the [mod.io Game Terms](https://mod.io/gameterms/widget). If your game does not authenticate users or only uses the email authentication flow, you do not need to implement this dialog, but you should link to the mod.io Terms of Use and Privacy Policy in your Privacy Policy/EULA.
+Log the user out by revoking their current access token. If this request successfully completes, you should remove any tokens/cookies/cached credentials linking to the now-revoked access token so the user is required to login again through your application. Successful request will return a [Message Object](#message-object).
 
 > Example response
 
 ```json
 {
-  "plaintext": "This game uses mod.io to support user-generated content. By selecting "I Agree" you agree to the mod.io Terms of Use and a mod.io account will be created for you (using your display name, avatar and ID). Please see the mod.io Privacy Policy on how mod.io processes your personal data.",
-  "html": "<p>This game uses <a href="https://mod.io">mod.io</a> to support user-generated content. By selecting "I Agree" you agree to the mod.io <a href="https://mod.io/terms">Terms of Use</a> and a mod.io account will be created for you (using your display name, avatar and ID). Please see the mod.io <a href="https://mod.io/privacy">Privacy Policy</a> on how mod.io processes your personal data.</p>",
-  "buttons": {
-    "agree": {
-      "text": "I Agree"
-    },
-    "disagree": {
-      "text": "No, Thanks"
-    }
-  },
-  "links": {
-    "website": {
-      "text": "Website",
-      "url": "https://mod.io",
-      "required": false
-    },
-    "terms": {
-      "text": "Terms of Use",
-      "url": "https://mod.io/terms",
-      "required": true
-    },
-    "privacy": {
-      "text": "Privacy Policy",
-      "url": "https://mod.io/privacy",
-      "required": true
-    },
-    "manage": {
-      "text": "Manage Account",
-      "url": "https://mod.io/me/account",
-      "required": false
-    }
-  }
+  "code": 200,
+  "success": true,
+  "message": "You have successfully logged out of mod.io."
 }
 
 ```
-<h3 id="Terms-responses">Responses</h3>
+<h3 id="Logout-responses">Responses</h3>
 
 Status|Meaning|Error Ref|Description|Response Schema
 ---|---|----|---|---|
-200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)||Successful Request|[Terms Object](#schematerms_object)
+200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)||Successful Request|[Web Message Object](#schemaweb_message_object)
 <aside class="auth-notice">
 To perform this request, you must be authenticated via one of the following methods:
-<a href="#authentication">api_key</a>
+<a href="#authentication">OAuth 2</a> (Scopes: read)
 </aside>
 # Games
 
@@ -3403,6 +3404,7 @@ Get all guides for a game. Successful request will return an array of [Guide Obj
     game_id|integer|Unique id of the parent game.
     status|integer|Status of the guide (only game admins can filter by this field, see [status and visibility](#status-amp-visibility) for details):<br><br>__0__ = Not accepted<br>__1__ = Accepted _(default)_
     submitted_by|integer|Unique id of the user who has ownership of the guide.
+    submitted_by_display_name|string|The display name of the user who has ownership  author.
     date_added|integer|Unix timestamp of date guide was registered.
     date_updated|integer|Unix timestamp of date guide was updated.
     date_live|integer|Unix timestamp of date guide was set live.
@@ -14751,7 +14753,7 @@ Get the _authenticated user_ wallets. Successful request will return a single [W
 
     Filter|Type|Required|Description
     ---|---|---|---|
-     game_id|integer|true|Unique id of the parent game.
+     game_id|integer|true*|Unique id of the parent game. _*Not required when g-url is used._
 
 > Example response
 
@@ -16252,8 +16254,6 @@ Status|Meaning|Error Ref|Description|Response Schema
 To perform this request, you must be authenticated via one of the following methods:
 <a href="#authentication">OAuth 2</a> (Scopes: write)
 </aside>
-# Metrics
-
 # Response Schemas
 ## Access Token Object  
 
