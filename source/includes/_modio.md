@@ -657,9 +657,10 @@ Language Code | Language
 `ko` | Korean
 `ru` | Russian
 `es` | Spanish (Spain)
+`es-419` | Spanish (Latin America)
+`th` | Thai
 `tr` | Turkish
 `uk` | Ukrainian
-`th` | Thai
 `zh-CN` | Chinese (Simplified)
 `zh-TW` | Chinese (Traditional)
 
