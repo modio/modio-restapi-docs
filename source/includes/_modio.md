@@ -59,11 +59,11 @@ Here is a brief list of the things to know about our API, as explained in more d
 
 Authentication can be done via 5 ways:
 
-- Use an [API key](--parse_siteurl/me/access) for **Read-only** access (get a [test environment](--parse_sitetesturl/me/access) API key here)
+- Use an [API key](--parse_siteurl/me/access) for **Read-only** access
 - Use the [Email Authentication Flow](#email) for **Read and Write** access (it creates an OAuth 2 Access Token via **email**)
 - Use the [Platform Authentication Flow](#steam) for **Read and Write** access (it creates an OAuth 2 Access Token automatically on popular platforms such as **Steam and Xbox**)
 - Use the [OpenID Authentication Flow](#openid) for **Read and Write** access (it creates an OAuth 2 Access Token automatically using your identity provider for SSO)
-- Manually create an [OAuth 2 Access Token](--parse_siteurl/me/access) for **Read and Write** access (get a [test environment](--parse_sitetesturl/me/access) OAuth 2 token here)
+- Manually create an [OAuth 2 Access Token](--parse_siteurl/me/access) for **Read and Write** access
 
 All users and games are issued an API key which must be included when querying the API. It is quick and easy to use but limited to read-only GET requests, due to the limited security it offers. If you want players to be able to add, edit, rate and subscribe to content, you will need to use an authentication method that generates an OAuth 2 Access token. These [authentication methods](#authentication-2) are explained in detail here.
 
@@ -775,17 +775,11 @@ You should always plan to minimize requests and cache API responses. It will mak
 
 ## Testing
 
-To help familiarize yourself with the --parse_sitename API and to ensure your implementation is battle-hardened and operating as intended, we have setup a test sandbox which is identical to the production environment. The test sandbox allows you to make requests to the API whilst your integration is a work in progress and the submitted data is not important. When you are ready to go live it's as easy as adding your game to the production environment, substituting the test API path for the production API path, and updating the `api_key` and `game_id` you are using to the values from your games profile on production. 
+To help familiarize yourself with the --parse_sitename API and to ensure your implementation is battle-hardened and operating as intended, you can [setup test games profiles](--parse_siteurl/g/add) on --parse_sitename which will be available via [your content](--parse_siteurl/content). By default all game profiles are hidden and accessible only by users who you add to the games team, or invite using the preview system. This is until you set a game live, which will make it accessible for everyone.
 
-To begin using the test sandbox you will need to [register a test account](--parse_sitetesturl) and [add your game](--parse_sitetesturl/g/add). You will only see games you are a team member of and there is no connection between the data added to the test environment and production. We highly recommend you use the test environment when integrating as it allows you to keep your development private, and you can submit as much dummy data as you need to try the functionality required, without having to clean it up at the end.
+Each game added will be assigned it's own `api_url`, `api_key` and `game_id`. When switching between game builds (i.e. production, test, staging) you will need to ensure each build is pointing to the right game profile on --parse_sitename.
 
-__Test version:__ `--parse_version`
-
-__Test site:__ [--parse_sitetesturl](--parse_sitetesturl)
-
-__Test API path:__ [--parse_apitesturl](--parse_apitesturl)
-
-__NOTE__: We periodically reset the test environment to default - with the exception of user accounts so please do not rely on it to store important information. Any data you intend on persisting should be submitted to the production environment.
+__Note:__ If your game is in stealth, we recommend using codenames and non-descriptive screenshots when uploading content. While your game won't be shown as long as it remains hidden, content connected to your game may appear in the profile of users who you have given permission to interact with it, including your own profile.
 
 ## Whitelabel
 
