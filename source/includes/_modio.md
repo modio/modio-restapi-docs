@@ -649,6 +649,7 @@ Language Code | Language
 `bg` | Bulgarian
 `fr` | French
 `de` | German
+`id` | Indonesian
 `it` | Italian
 `pl` | Polish
 `pt` | Portuguese
@@ -656,8 +657,11 @@ Language Code | Language
 `ja` | Japanese
 `ko` | Korean
 `ru` | Russian
-`es` | Spanish
+`es` | Spanish (Spain)
+`es-419` | Spanish (Latin America)
 `th` | Thai
+`tr` | Turkish
+`uk` | Ukrainian
 `zh-CN` | Chinese (Simplified)
 `zh-TW` | Chinese (Traditional)
 
