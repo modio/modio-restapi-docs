@@ -6,6 +6,8 @@ Welcome to the official documentation for [--parse_sitename](--parse_siteurl), a
 
 __API path:__ [--parse_apiurl](--parse_apiurl) (see your API access dashboard)
 
+__Swagger JSON:__ [--parse_apiswaggerurl](--parse_apiswaggerurl)
+
 __Current version:__ --parse_vdropdown 
 
 <a href="changelog/"><span class="versionwrap">View Version Changelog</span></a>
