@@ -649,6 +649,7 @@ Language Code | Language
 `bg` | Bulgarian
 `fr` | French
 `de` | German
+`id` | Indonesian
 `it` | Italian
 `pl` | Polish
 `pt` | Portuguese
