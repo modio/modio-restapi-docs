@@ -1,0 +1,25 @@
+name: deploy
+
+on:
+  push:
+    branches:
+      - 'master'
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Install gems
+        run: |
+          sudo gem install bundler
+          bundle install
+
+      - name: Run deployment script
+        shell: bash
+        run: |
+          chmod +x ./deploy_gh.sh
+          ./deploy_gh.sh

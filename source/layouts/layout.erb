@@ -33,12 +33,12 @@ under the License.
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
     <title><%= current_page.data.title || "API Documentation" %></title>
     <meta name="keywords" content="pc, games, mods, api, documentation, rest, web">
-    <meta name="description" content="Documentation for working with the mod.io API to download and install mods automatically in games.">
+    <meta name="description" content="Documentation for working with the mod.io REST API to download and install mods automatically in games.">
 
     <!-- facebook -->
     <meta property="fb:app_id" content="1902604976636285">
     <meta property="og:title" content="<%= current_page.data.title || "API Documentation" %>">
-    <meta property="og:description" content="Documentation for working with the mod.io API to download and install mods automatically in games.">
+    <meta property="og:description" content="Documentation for working with the mod.io REST API to download and install mods automatically in games.">
     <meta property="og:site_name" content="mod.io">
     <meta property="og:type" content="website">
     <meta property="og:image" content="/images/splash.png">
@@ -47,7 +47,7 @@ under the License.
     <meta property="twitter:card" content="summary_large_image">
     <meta property="twitter:site" content="@modiohq">
     <meta property="twitter:title" content="<%= current_page.data.title || "API Documentation" %>">
-    <meta property="twitter:description" content="Documentation for working with the mod.io API to download and install mods automatically in games.">
+    <meta property="twitter:description" content="Documentation for working with the mod.io REST API to download and install mods automatically in games.">
     <meta property="twitter:image" content="/images/splash.png">
 
     <!-- icons -->
@@ -123,7 +123,7 @@ under the License.
       </span>
     </a>
     <div class="toc-wrapper">
-      <a href="https://mod.io"><%= image_tag "logo.svg", class: 'logo' %></a>
+      <a href="/"><%= image_tag "logo.svg", class: 'logo' %></a>
       <% if language_tabs.any? %>
         <div class="lang-selector">
           <% language_tabs.each do |lang| %>

@@ -1,14 +1,18 @@
-<p align="center">
-  <img src="https://raw.githubusercontent.com/slatedocs/img/main/logo-slate.png" alt="Slate: API Documentation Generator" width="226">
-  <br>
-  <a href="https://github.com/slatedocs/slate/actions?query=workflow%3ABuild+branch%3Amain"><img src="https://github.com/slatedocs/slate/workflows/Build/badge.svg?branch=main" alt="Build Status"></a>
-  <a href="https://hub.docker.com/r/slatedocs/slate"><img src="https://img.shields.io/docker/v/slatedocs/slate?sort=semver" alt="Docker Version" /></a>
-</p>
+<a href="https://mod.io"><img src="https://mod.io/images/branding/modio-logo-bluedark.svg" alt="mod.io" width="360" align="right"/></a>
+# mod.io REST API Docs
+[![Build Status](https://github.com/slatedocs/slate/workflows/Build/badge.svg?branch=main)](https://github.com/slatedocs/slate/actions?query=workflow%3ABuild+branch%3Amain)
+[![Docker Version](https://img.shields.io/docker/v/slatedocs/slate?sort=semver)](https://hub.docker.com/r/slatedocs/slate)
+[![Discord](https://img.shields.io/discord/389039439487434752.svg?label=Discord&logo=discord&color=7289DA&labelColor=2C2F33)](https://discord.mod.io)
+[![Master docs](https://img.shields.io/badge/docs-master-green.svg)](https://docs.mod.io/restapiref/)
 
+REST API Documentation for [mod.io](https://mod.io) is powered by [slate](https://github.com/lord/slate), a static API generator and can be [read here](https://docs.mod.io/restapiref/) (also see our [getting started guide](https://docs.mod.io)). We use [swagger.io](https://swagger.io) to define our API from comments in our codebase, and generate the slate markdown files from it using [widdershins](https://github.com/modio/widdershins).
+
+To make changes to the introduction, please submit pull requests on the markdown file [_modio.md](source/includes/_modio.md), and to update the changelog, please submit pull requests on the markdown file [_changelog.md](source/includes/_changelog.md).
+
+------------
+
+<p align="center"><img src="https://raw.githubusercontent.com/slatedocs/img/main/logo-slate.png" alt="Slate: API Documentation Generator" width="226"></p>
 <p align="center">Slate helps you create beautiful, intelligent, responsive API documentation.</p>
-
-Documentation for [mod.io](https://mod.io) is powered by [slate](https://github.com/lord/slate), a static API generator and can be [read here](https://docs.mod.io) (also see our [getting started guide](https://blog.mod.io/getting-started-blog-fa404d59e3dd)). We use [swagger.io](https://swagger.io) to define our API from comments in our codebase, and generate the slate markdown files from it using [widdershins](https://github.com/Mermade/widdershins).
-
 <p align="center"><em>The example above was created with Slate. Check it out at <a href="https://slatedocs.github.io/slate">slatedocs.github.io/slate</a>.</em></p>
 
 Features

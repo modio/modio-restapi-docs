@@ -1,7 +1,7 @@
 # API Versions
 
 ## v1 (latest version)
-### Date Live: November 23, 2022, 8:28 am GMT
+### Date Updated: August 15, 2023, 3:59 pm GMT
 
 Initial API Release.
 
@@ -9,11 +9,13 @@ Initial API Release.
 
 # Changelog
 
-## Oct 27, 2022
+### Oct 1, 2023 - Adding new rate limit error ref
 
-### Deprecating X-Ratelimit headers
+Beginning Jan 1st, 2024, the error ref **11009** will be returned when a rate limit applies only to the endpoint being called. Error ref **11008** will continue to be returned in all other scenarios where the [rate limit](/#rate-limiting) applies to all endpoints.
 
-- Beginning Nov 20th, 2022, all custom rate limit headers `X-RateLimit-Limit`, `X-RateLimit-Remaining`, `X-RateLimit-RetryAfter` will no longer be returned. They will be replaced with `retry-after` when the [ratelimit is exceeded](/#rate-limiting).
+### Oct 27, 2022 - Deprecating X-Ratelimit headers
+
+Beginning Nov 20th, 2022, all custom rate limit headers `X-RateLimit-Limit`, `X-RateLimit-Remaining`, `X-RateLimit-RetryAfter` will no longer be returned. They will be replaced with `retry-after` when the [ratelimit is exceeded](/#rate-limiting).
 
 # How We Version
 
@@ -39,7 +41,7 @@ For the initial release of the API, __v1__ is a valid format and version. Future
 ```shell
 Example cURL request
 ---------------------
-curl -X GET https://api.mod.io/v1/games?api_key=YourApiKey
+curl -X GET https://*.modapi.io/v1/games?api_key=YourApiKey
 ```
 
 When you make a request, setting the version of mod.io is a requirement as it forms

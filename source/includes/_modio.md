@@ -2,13 +2,13 @@
 
 ## --parse_sitename API --parse_version
 
-Welcome to the official documentation for [--parse_sitename](--parse_siteurl), an API for developers to add mod support to their games. We recommend you read our _Getting Started_ guide below to accurately and efficiently consume our REST API. 
+Welcome to the official documentation for [--parse_sitename](--parse_siteurl), an API for developers to add mod support to their games. Using our [SDKs and plugins](#implementation) for popular and custom game engines, getting your creator community started and making the mods they create discoverable and installable via your in-game menu is straight forward, with full cross-platform support. If you are a game developer, you can manage your games and API access via your [--parse_sitename content dashboard](--parse_siteurl/content). If you are a user creating tools and apps, you can request API access via your [--parse_sitename account](--parse_siteurl/me/access).
 
-__API path:__ [--parse_apiurl](--parse_apiurl)
+__API path:__ [--parse_apiurl](--parse_apiurl) (see your API access dashboard)
 
 __Current version:__ --parse_vdropdown 
 
-<a href="/changelog"><span class="versionwrap">View Version Changelog</span></a>
+<a href="changelog/"><span class="versionwrap">View Version Changelog</span></a>
 
 ## How It Works
 
@@ -18,12 +18,12 @@ Compatible with all builds of your game on all platforms and stores, --parse_sit
 
 ## Implementation
 
-Once you have added your game to --parse_sitename and got your game ID and API key, you can start integrating the --parse_sitename REST API into your game, tools and sites. There are 3 options to get connected which you can use interchangeably depending on your needs. Here's the breakdown of each option.
+Once you have added your game to --parse_sitename and got your [game ID and API key](--parse_siteurl/content), you can start integrating the --parse_sitename REST API into your game, tools and sites. There are 3 options to get connected which you can use interchangeably depending on your needs. Here's the breakdown of each option.
 
 Option | Usage | Suited for | Docs
 ---------- | ---------- | ---------- | ---------
 __API__ | For connecting directly to the --parse_sitename REST API. | Web apps that need a JSON REST API, or game developers that like a challenge and want control over their implementation. | You are reading them
-__SDK__ | Drop our [open source C/C++ SDK](--parse_sdkurl) into your game to call --parse_sitename functionality. | Developers that want a SDK that abstracts the uploading, downloading and unzip flows behind easy to use function calls. | [Here](--parse_sdkurl)
+__SDK__ | Drop our [open source C/C++ SDK](https://github.com/modio/modio-sdk) into your game to call --parse_sitename functionality. | Developers that want a SDK that abstracts the uploading, downloading and unzip flows behind easy to use function calls. | [Here](--parse_docsurl/cppsdkref/)
 __Tools/Plugins__ | Use tools, plugins and wrappers created by the community to make implementation in various engines easy. | Game developers that want a pre-built modding solution for their engine (Unity, Unreal, GameMaker, Construct) of choice. | Available below
 
 ### Official Tools
@@ -32,8 +32,9 @@ Plugins and wrappers made or supported by the --parse_sitename team
 
  | - | - | -
 --- | --- | --- | ---
-![Unity Plugin](images/tool-unity.png) | __Unity Plugin__<br />[SDK](https://github.com/modio/modio-unity)<br />[Getting Started](https://github.com/modio/modio-unity/wiki)<br /> | ![Unreal Plugin](images/tool-unreal.png) | __Unreal Plugin__<br />[SDK](https://github.com/modio/modio-ue4)<br />[Getting Started](https://github.com/modio/modio-ue4/blob/main/Doc/getting-started.adoc)<br />
-![C/C++ SDK](images/tool-ccpp.png) | __C/C++ SDK__<br />[SDK](https://github.com/modio/modio-sdk)<br />[Getting Started](https://github.com/modio/modio-sdk/blob/main/doc/getting-started.adoc)<br />  | ![Discord Bot](images/tool-discordbot.png) | __Discord Bot__<br />[Instructions](https://github.com/modio/modio-discord-bot)<br />[Invite](--parse_discordboturl)<br />
+![Unity Plugin](images/tool-unity.png) | __Unity Plugin__<br />[SDK](https://github.com/modio/modio-unity)<br />[Getting Started](--parse_docsurl/unityref/)<br />[Sample Project](https://github.com/modio/modio-unity-sample)<br /> | ![Unreal Plugin](images/tool-unreal.png) | __Unreal Plugin__<br />[SDK](https://github.com/modio/modio-ue)<br />[Getting Started](--parse_docsurl/unrealref/)<br />[UE4 Sample Project](https://github.com/modio/modio-ue4-sample)<br />[UE5 Sample Project](https://github.com/modio/modio-ue5-sample)<br />
+![GameMaker](images/tool-gm.png) | __GameMaker__<br />[SDK](https://github.com/YoYoGames/GMEXT-mod.io)<br />[Getting Started](https://github.com/YoYoGames/GMEXT-mod.io/wiki)<br /> | ![C/C++ SDK](images/tool-ccpp.png) | __C/C++ SDK__<br />[SDK](https://github.com/modio/modio-sdk)<br />[Getting Started](--parse_docsurl/cppsdkref/)<br />
+![Discord Bot](images/tool-discordbot.png) | __Discord Bot__<br />[Instructions](https://github.com/modio/modio-discord-bot)<br />[Invite](--parse_discordboturl)<br /> | 
 
 ### Community Tools
 
@@ -41,11 +42,10 @@ Plugins and wrappers made by our awesome community. Is there a tool out there th
 
  | - | - | -
 --- | --- | --- | ---
-![Rust Wrapper](images/tool-rust.png) | __Rust Wrapper__<br />[SDK](https://crates.io/crates/modio)<br />[Getting Started](https://github.com/nickelc/modio-rs)<br />[Tutorials](https://github.com/nickelc/modio-rs/tree/master/examples)<br /> | ![Python Wrapper](images/tool-python.png) | __Python Wrapper__<br />[SDK](https://github.com/ClementJ18/mod.io)<br />[Getting Started](https://github.com/ClementJ18/mod.io/#example)<br />[Tutorials](https://github.com/ClementJ18/mod.io/tree/master/examples)<br /> |<br />
-![Construct 2](images/tool-c2.png) | __Construct 2 Plugin__<br />[SDK](https://github.com/modio/modio-construct2)<br />[Getting Started](https://github.com/modio/modio-construct2)<br /> | ![GameMaker Studio 2](images/tool-gm2.png) | __GameMaker Studio 2 Plugin__<br />[SDK](https://github.com/modio/modio-gamemaker2)<br />[Getting Started](https://github.com/modio/modio-gamemaker2)<br />
-![Haxe Wrapper](images/tool-haxe.png) | __Haxe Wrapper__<br />[SDK](https://github.com/modio/modio-haxe)<br />[Getting Started](https://github.com/Turupawn/modioOpenFLExample#openfl-integration)<br /> | ![Modio.NET](images/tool-dotnet.png) | __Modio.NET__<br />[SDK](https://github.com/nickelc/modio.net)<br />[Getting Started](https://github.com/nickelc/modio.net)<br />
+![Construct 2](images/tool-c2.png) | __Construct 2 Plugin__<br />[SDK](https://github.com/modio/modio-construct2)<br />[Getting Started](https://github.com/modio/modio-construct2)<br /> | ![Haxe Wrapper](images/tool-haxe.png) | __Haxe Wrapper__<br />[SDK](https://github.com/modio/modio-haxe)<br />[Getting Started](https://github.com/Turupawn/modioOpenFLExample#openfl-integration)<br />
+![Modio.NET](images/tool-dotnet.png) | __Modio.NET__<br />[SDK](https://github.com/nickelc/modio.net)<br />[Getting Started](https://github.com/nickelc/modio.net)<br /> | ![Rust Wrapper](images/tool-rust.png) | __Rust Wrapper__<br />[SDK](https://crates.io/crates/modio)<br />[Getting Started](https://github.com/nickelc/modio-rs)<br />[Tutorials](https://github.com/nickelc/modio-rs/tree/master/examples)<br />
+![Python Wrapper](images/tool-python.png) | __Python Wrapper__<br />[SDK](https://github.com/ClementJ18/mod.io)<br />[Getting Started](https://github.com/ClementJ18/mod.io/#example)<br />[Tutorials](https://github.com/ClementJ18/mod.io/tree/master/examples)<br /> | ![Command Lisp](images/tool-commonlisp.png) | __Common Lisp__<br />[Github](https://github.com/Shinmera/cl-modio)<br />[Getting Started](https://shinmera.github.io/cl-modio/)<br />
 ![Command Line Tool](images/tool-cmd.png) | __Command Line Tool__<br />[CMD](https://github.com/nickelc/modiom)<br />[Getting Started](https://github.com/nickelc/modiom)<br /> | ![GitHub Action Mod Uploader](images/tool-actions.png) | __GitHub Action Mod Uploader__<br />[GitHub](https://github.com/nickelc/upload-to-modio)<br />[Usage](https://github.com/nickelc/upload-to-modio#usage)<br />
-![Command Lisp](images/tool-commonlisp.png) | __Common Lisp__<br />[Github](https://github.com/Shinmera/cl-modio)<br />[Getting Started](https://shinmera.github.io/cl-modio/)<br /> |
 
 Here is a brief list of the things to know about our API, as explained in more detail in the following sections.
 
@@ -59,11 +59,11 @@ Here is a brief list of the things to know about our API, as explained in more d
 
 Authentication can be done via 5 ways:
 
-- Use an [API key](--parse_siteurl/me/access) for **Read-only** access (get a [test environment](--parse_sitetesturl/me/access) API key here)
+- Use an [API key](--parse_siteurl/me/access) for **Read-only** access
 - Use the [Email Authentication Flow](#email) for **Read and Write** access (it creates an OAuth 2 Access Token via **email**)
 - Use the [Platform Authentication Flow](#steam) for **Read and Write** access (it creates an OAuth 2 Access Token automatically on popular platforms such as **Steam and Xbox**)
 - Use the [OpenID Authentication Flow](#openid) for **Read and Write** access (it creates an OAuth 2 Access Token automatically using your identity provider for SSO)
-- Manually create an [OAuth 2 Access Token](--parse_siteurl/me/access) for **Read and Write** access (get a [test environment](--parse_sitetesturl/me/access) OAuth 2 token here)
+- Manually create an [OAuth 2 Access Token](--parse_siteurl/me/access) for **Read and Write** access
 
 All users and games are issued an API key which must be included when querying the API. It is quick and easy to use but limited to read-only GET requests, due to the limited security it offers. If you want players to be able to add, edit, rate and subscribe to content, you will need to use an authentication method that generates an OAuth 2 Access token. These [authentication methods](#authentication-2) are explained in detail here.
 
@@ -71,6 +71,8 @@ Authentication Type | In | HTTP Methods | Abilities | Purpose
 ---------- | ---------- | ---------- | ---------- | ---------- 
 API Key | Query | GET | Read-only GET requests and authentication flows. | Browsing and downloading content. Retrieving access tokens on behalf of users.
 Access Token (OAuth 2) | Header | GET, POST, PUT, DELETE | Read, create, update, delete. | View, add, edit and delete content the authenticated user has subscribed to or has permission to change.
+
+You can use an OAuth 2.0 bearer token instead of an API key for GET endpoints (excluding [Authentication](#authentication-2) endpoints). But remember, if you provide both an Access Token (OAuth 2) and an API key in one request, the access token takes precedence and the API key is ignored. So, always ensure you use a valid access token and have the process in place to get a new token when the old one expires.
 
 ### Web Overlay Authentication
 
@@ -252,7 +254,8 @@ Error Reference Code | Meaning
 `--parse_errorref_TOKEN_EXPIRED_OR_REVOKED` | Access token is expired, or has been revoked.
 `--parse_errorref_USER_DELETED` | Authenticated user account has been deleted.
 `--parse_errorref_USER_BANNED` | Authenticated user account has been banned by --parse_sitename admins.
-`--parse_errorref_RATE_LIMITED` | You have been ratelimited for making too many requests. See [Rate Limiting](#rate-limiting).
+`--parse_errorref_RATE_LIMITED_GLOBAL` | You have been ratelimited globally for making too many requests. See [Rate Limiting](#rate-limiting).
+`--parse_errorref_RATE_LIMITED_ENDPOINT` | You have been ratelimited from calling this endpoint again, for making too many requests. See [Rate Limiting](#rate-limiting).
 `--parse_errorref_FILE_CORRUPTED` | The submitted binary file is corrupted.
 `--parse_errorref_FILE_UNREADABLE` | The submitted binary file is unreadable.
 `--parse_errorref_JSON_MALFORMED` | You have used the `input_json` parameter with semantically incorrect JSON.
@@ -478,15 +481,33 @@ Sort by a column, in ascending or descending order.
 
 --parse_sitename has powerful filtering available to assist you when making requests to the API. You can filter on all columns __in the parent object only__. You cannot apply filters to columns in nested objects, so if a game contains a tags object you cannot filter by the `tag name` column, but you can filter by the games `name` since the games `name` resides in the parent object.
 
+### or_fields (Filter grouping)
+
+By default, multiple filters are combined using an "AND" operation. However, with or_fields, you can group filters together to be combined using an "OR" operation.
+
+For example, if you want to find all mods that have been tagged with "Level" but also include mods made by the creator "UltimateModder", you can achieve this with the following query parameters:
+
+```
+--parse_version/games/your-game/mods?tags=level&submitted_by_display_name=UltimateModder&or_fields[]=tags,submitted_by_display_name
+```
+
+This would be interpreted as "Fetch all mods where (tags in level **OR** submitted_by like UltimateModder)". Without the `or_fields` parameter, it would be treated as AND.
+
+A few things to note:
+
+* The `or_fields` parameter must be provided as an array.
+* A maximum of --parse_maxorgroups `or_fields` can be present in a query at any time.
+* A maximum of --parse_maxorfieldspergroup fields per `or_fields`.
+
 ### _q (Full text search)
 
 ```
---parse_version/games?_q=The Lord Of The Rings
+--parse_version/games?_q=Gravity Bounce
 ```
 
 Full-text search is a lenient search filter that _is only available_ if the endpoint you are querying contains a `name` column. Wildcards should _not_ be applied to this filter as they are ignored.
 
-- `?_q=The Lord of the Rings` - This will return every result where the `name` column contains any of the following words: 'The', 'Lord', 'of', 'the', 'Rings'. 
+- `?_q=Gravity Bounce` - This will return every result where the `name` column contains any of the following words: 'Gravity', 'Bounce'. 
 
 ### = (Equals)
 
@@ -690,26 +711,27 @@ A brief summary when dealing with localized requests and responses:
 
 --parse_sitename implements rate limiting to stop users abusing the service. Exceeding the rate limit will result in requests receiving a `429 Too Many Requests` response until the reset time is reached. 
 
-It is _highly recommended_ you architect your app to check for the `429 Too Many Requests` HTTP response code, and ensure you do not continue to make requests until the duration specified in the `retry-after` header (in seconds) passes. Users who continue to send requests despite a `429` response could potentially have their credentials revoked. The following limits are implemented by default:
+It is _highly recommended_ you architect your app to check for the `429 Too Many Requests` HTTP response code, and ensure you do not continue to make requests until the duration specified in the `retry-after` header (in seconds) passes. Be aware we enforce global rate limits which will result in all requests being blocked (error ref **--parse_errorref_RATE_LIMITED_GLOBAL**). We also enforce per-endpoint rate limits which will only result in requests to that endpoint being blocked (error ref **--parse_errorref_RATE_LIMITED_ENDPOINT**) until the duration specified in the `retry-after` header (in seconds) passes, allowing you to continue to call other endpoints. Users who continue to send requests despite a `429` response could potentially have their credentials revoked. The following limits are implemented by default:
 
-### API key Rate Limiting
+### Global API key Rate Limiting
 
 - API keys linked to a game have __unlimited requests__.
 - API keys linked to a user have __60 requests per minute__.
 
-### OAuth2 Rate Limiting
+### Global OAuth2 Rate Limiting
 
 - User tokens are limited to __120 requests per minute__. 
 - User token writes are limited to __60 requests per minute__. 
 
-### IP Rate Limiting
+### Global IP Rate Limiting
 
 - IPs are limited to __1000 requests per minute__. 
 - IP writes are limited to __60 requests per minute__. 
 
-### Other Rate Limiting
+### Per-Endpoint Rate Limiting
 
 - Certain endpoints may override the defaults for security, spam or other reasons.
+- When this (error ref **--parse_errorref_RATE_LIMITED_ENDPOINT**) is encountered, its ok to continue requesting other endpoints, as the `retry-after` only applies to this endpoint.
 
 ### Headers
 ```
@@ -727,7 +749,7 @@ retry-after: 57
 {
 	"error": {
 		"code": 429,
-		"error_ref": --parse_errorref_RATE_LIMITED,
+		"error_ref": --parse_errorref_RATE_LIMITED_GLOBAL,
 		"message": "You have made too many requests in a short period of time, please wait and try again soon."
 	}
 }
@@ -735,7 +757,7 @@ retry-after: 57
 
 If the rate limit is exceeded, the following header will be returned alongside the `429 Too Many Requests` HTTP response code.
 
- - `retry-after` - Number of seconds before you can attempt to make another request to API.
+ - `retry-after` - Number of seconds before you can attempt to make another request to API. __NOTE:__ If the `retry-after` value is 0, that means you have hit a rolling ratelimit. Rolling ratelimits don't block for a set timeframe once the limit is reached, instead they permit a certain number of requests within the timeframe (see [this explanation](https://developers.cloudflare.com/waf/rate-limiting-rules/parameters/#with-the-following-behavior)). If you encounter a 0, we recommend retrying the endpoint again after 60 seconds.
 
 ### Deprecation Notice
 
@@ -745,23 +767,19 @@ From November 20th, 2022 - the rate limit headers below will no longer be return
  - `X-RateLimit-Remaining` - Number of requests remaining until requests are rejected.
  - `X-RateLimit-RetryAfter` - Amount of seconds until reset once you have been throttled (Only returned once rate limit exceeded).
 
+From January 1st, 2024 - the error ref **--parse_errorref_RATE_LIMITED_ENDPOINT** will be returned when a rate limit applies only to the endpoint being called. Error ref **--parse_errorref_RATE_LIMITED_GLOBAL** will continue to be returned in all other scenarios where the rate limit applies to all endpoints.
+
 ### Optimize your requests
 
 You should always plan to minimize requests and cache API responses. It will make your app feel fluid and fast for your users. If your usage is excessive we shall reach out to discuss ways of optimizing, but our aim is to never restrict legitimate use of the API. We have set high limits that should cover 99% of use-cases, and are happy to [discuss your scenario](mailto:--parse_email?subject=API%20usage) if you require more.
 
 ## Testing
 
-To help familiarize yourself with the --parse_sitename API and to ensure your implementation is battle-hardened and operating as intended, we have setup a test sandbox which is identical to the production environment. The test sandbox allows you to make requests to the API whilst your integration is a work in progress and the submitted data is not important. When you are ready to go live it's as easy as adding your game to the production environment, substituting the test API URL for the production API URL, and updating the `api_key` and `game_id` you are using to the values from your games profile on production. 
+To help familiarize yourself with the --parse_sitename API and to ensure your implementation is battle-hardened and operating as intended, you can [setup test games profiles](--parse_siteurl/g/add) on --parse_sitename which will be available via [your content](--parse_siteurl/content). By default all game profiles are hidden and accessible only by users who you add to the games team, or invite using the preview system. This is until you set a game live, which will make it accessible for everyone.
 
-To begin using the test sandbox you will need to [register a test account](--parse_sitetesturl) and [add your game](--parse_sitetesturl/g/add). You will only see games you are a team member of and there is no connection between the data added to the test environment and production. We highly recommend you use the test environment when integrating as it allows you to keep your development private, and you can submit as much dummy data as you need to try the functionality required, without having to clean it up at the end.
+Each game added will be assigned it's own `api_url`, `api_key` and `game_id`. When switching between game builds (i.e. production, test, staging) you will need to ensure each build is pointing to the right game profile on --parse_sitename.
 
-__Test version:__ `--parse_version`
-
-__Test site:__ [--parse_sitetesturl](--parse_sitetesturl)
-
-__Test API path:__ [--parse_apitesturl](--parse_apitesturl)
-
-__NOTE__: We periodically reset the test environment to default - with the exception of user accounts so please do not rely on it to store important information. Any data you intend on persisting should be submitted to the production environment.
+__Note:__ If your game is in stealth, we recommend using codenames and non-descriptive screenshots when uploading content. While your game won't be shown as long as it remains hidden, content connected to your game may appear in the profile of users who you have given permission to interact with it, including your own profile.
 
 ## Whitelabel
 
@@ -784,45 +802,48 @@ When making API requests you should include the `X-Modio-Platform` header (with 
  - Localization of content for the platform
  - It also enables platform specific metrics
 
-For example, passing the HTTP header `X-Modio-Platform: XboxSeriesX` in your API request tells --parse_sitename your player is on Xbox Series X.
+For example, passing the HTTP header `X-Modio-Platform: xboxseriesx` in your API request tells --parse_sitename your player is on Xbox Series X.
 
 Official --parse_sitename [Plugins and SDKs](#implementation) will automatically supply this value for you providing you have specified the correct platform in the tools' settings. We __strongly recommend__ you supply this header in every request with the correct platform to enable --parse_sitename to provide the best cross-platform experience for your players. Please see a list of supported platforms below:
 
 Target Platform | Header Value
 ---------- | ----------  
-Windows | `Windows`
-Mac | `Mac`
-Linux | `Linux`
-Android | `Android`
-iOS | `iOS`
-Xbox One | `XboxOne`
-Xbox Series X | `XboxSeriesX`
-PlayStation 4 | `PS4`
-PlayStation 5 | `PS5`
-Switch | `Switch`
-Oculus | `Oculus`
+Source | `source`
+Windows | `windows`
+Mac | `mac`
+Linux | `linux`
+Android | `android`
+iOS | `ios`
+Xbox One | `xboxone`
+Xbox Series X | `xboxseriesx`
+PlayStation 4 | `ps4`
+PlayStation 5 | `ps5`
+Switch | `switch`
+Oculus | `oculus`
 
-These are the only supported values and are case-insensitive, anything else will be ignored and default to `Windows`. Have we missed a platform you are using? [Get in touch!](mailto:--parse_email?subject=Platform%20Support) 
+These are the only supported values and are case-insensitive, anything else will be ignored and default to `windows`. Have we missed a platform you are using? [Get in touch!](mailto:--parse_email?subject=Platform%20Support) 
 
 ## Targeting a Portal
 
 When making API requests you should include the `X-Modio-Portal` header (with one of the values below), to tell --parse_sitename what Portal (eg. Store or App) the request is originating from. This header is __important__ because it enables --parse_sitename to fine-tune the experience, such as returning display names used by players on that portal (which can be a certification requirement).
 
-For example, passing the HTTP header `X-Modio-Portal: EGS` in your API request tells --parse_sitename your player is coming via the Epic Games Store.
+For example, passing the HTTP header `X-Modio-Portal: epicgames` in your API request tells --parse_sitename your player is coming via the Epic Games Store.
+
+You can also instruct the --parse_sitename website to authenticate the player using a portal from the list above (provided it is supported), as explained in [Web Overlay Authentication](#authentication). For example, if your game client has logged the player into --parse_sitename on PlayStation using their PlayStation™Network account, and you want to open the --parse_sitename website in-game with the player logged in using the same authentication method, you would add `?portal=psn` to the end of the URL: `--parse_gameurl?portal=psn`. You can optionally add `&login=auto` as well to automatically start the login process.
 
 Target Portal | Header Value
 ---------- | ----------  
-Apple | `Apple`
-Discord | `Discord`
-Epic Games Store | `EGS`
-Facebook | `Facebook`
-GOG | `GOG`
-Google | `Google`
-itch.io | `Itchio`
-Nintendo | `Nintendo`
-OpenID | `OpenID`
-PlayStation Network | `PSN`
-Steam | `Steam`
-Xbox Live | `XboxLive`
+Apple | `apple`
+Discord | `discord`
+Epic Games Store | `epicgames`
+Facebook | `facebook`
+GOG | `gog`
+Google | `google`
+itch.io | `itchio`
+Nintendo | `nintendo`
+PlayStation™Network | `psn`
+SSO | `sso`
+Steam | `steam`
+Xbox Live | `xboxlive`
 
 These are the only supported values and are case-insensitive, anything else will be ignored. Have we missed a portal you are using? [Get in touch!](mailto:--parse_email?subject=Portal%20Support)
