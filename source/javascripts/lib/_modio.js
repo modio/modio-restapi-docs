@@ -158,4 +158,12 @@ $(document).ready(function() {
 	 Add class to changelog grid table.
 	 */
 	$('.changelog').find('table').addClass('changeloggrid');
+
+	/**
+	 * Change api.mod.io/v1/authorize -> mod.io/authorize in GET authorization flow code snippet.
+	 */
+	$('#sign-in-with-mod-io-web').nextUntil('h1', 'div.highlight').each(function() {
+		$('aside.success').remove();
+		$(this).html($(this).html().replace(/(https:\/\/)(.*\.)([a-z]+.io\/[v0-9]+\/authorize)/g, '$1$3'))
+	});
 });
