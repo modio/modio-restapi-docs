@@ -13100,15 +13100,15 @@ System.out.println(response.toString());
 `GET /me/events`
 
 __Deprecated__: This endpoint is deprecated for in-game use and will be removed at a later date. As of March 31st 2024, events will only be returned for existing games for legacy reasons. Any new game should use the [Get User Subscriptions](#get-user-subscriptions) endpoint to fetch the latest mods subscribed to by the authenticated user as this endpoint will no longer return events for games created after that date. If you have any concerns please [reach out to us](https://support.mod.io).<br><br> Get events that have been fired specific to the user. Successful request will return an array of [Event Objects](#get-user-events-2). We recommended reading the [filtering documentation](#filtering) to return only the records you want.
-
-     Filter|Type|Description
-     ---|---|---
-     id|integer|Unique id of the event object.
-     game_id|integer|Unique id of the parent game.
-     mod_id|integer|Unique id of the parent mod.
-     user_id|integer|Unique id of the user who performed the action.
-     date_added|integer|Unix timestamp of date mod was updated.
-     event_type|string|Type of change that occurred:<br><br>__USER_TEAM_JOIN__ = User has joined a team.<br>__USER_TEAM_LEAVE__ = User has left a team.<br>__USER_SUBSCRIBE__ = User has subscribed to a mod.<br>__USER_UNSUBSCRIBE__ = User has un-subscribed from a mod.
+     *
+     * Filter|Type|Description
+     * ---|---|---
+     * id|integer|Unique id of the event object.
+     * game_id|integer|Unique id of the parent game.
+     * mod_id|integer|Unique id of the parent mod.
+     * user_id|integer|Unique id of the user who performed the action.
+     * date_added|integer|Unix timestamp of date mod was updated.
+     * event_type|string|Type of change that occurred:<br><br>__USER_TEAM_JOIN__ = User has joined a team.<br>__USER_TEAM_LEAVE__ = User has left a team.<br>__USER_SUBSCRIBE__ = User has subscribed to a mod.<br>__USER_UNSUBSCRIBE__ = User has un-subscribed from a mod.
 
 > Example response
 
