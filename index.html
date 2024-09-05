@@ -17301,49 +17301,16 @@ Accept: application/json
 </code></pre></div>
 <p><span class="httpmethod GET">GET</span> <span class="endpointheading">/me/events</span></p>
 
-<p><strong>Deprecated</strong>: This endpoint is deprecated for in-game use and will be removed at a later date. As of March 31st 2024, events will only be returned for existing games for legacy reasons. Any new game should use the <a href="#get-user-subscriptions">Get User Subscriptions</a> endpoint to fetch the latest mods subscribed to by the authenticated user as this endpoint will no longer return events for games created after that date. If you have any concerns please <a href="https://support.mod.io">reach out to us</a>.<br><br> Get events that have been fired specific to the user. Successful request will return an array of <a href="#get-user-events-2">Event Objects</a>. We recommended reading the <a href="#filtering">filtering documentation</a> to return only the records you want.</p>
-
-<table>
-<thead>
-<tr>
-<th>Filter</th>
-<th>Type</th>
-<th>Description</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>id</td>
-<td>integer</td>
-<td>Unique id of the event object.</td>
-</tr>
-<tr>
-<td>game_id</td>
-<td>integer</td>
-<td>Unique id of the parent game.</td>
-</tr>
-<tr>
-<td>mod_id</td>
-<td>integer</td>
-<td>Unique id of the parent mod.</td>
-</tr>
-<tr>
-<td>user_id</td>
-<td>integer</td>
-<td>Unique id of the user who performed the action.</td>
-</tr>
-<tr>
-<td>date_added</td>
-<td>integer</td>
-<td>Unix timestamp of date mod was updated.</td>
-</tr>
-<tr>
-<td>event_type</td>
-<td>string</td>
-<td>Type of change that occurred:<br><br><strong>USER_TEAM_JOIN</strong> = User has joined a team.<br><strong>USER_TEAM_LEAVE</strong> = User has left a team.<br><strong>USER_SUBSCRIBE</strong> = User has subscribed to a mod.<br><strong>USER_UNSUBSCRIBE</strong> = User has un-subscribed from a mod.</td>
-</tr>
-</tbody>
-</table>
+<p><strong>Deprecated</strong>: This endpoint is deprecated for in-game use and will be removed at a later date. As of March 31st 2024, events will only be returned for existing games for legacy reasons. Any new game should use the <a href="#get-user-subscriptions">Get User Subscriptions</a> endpoint to fetch the latest mods subscribed to by the authenticated user as this endpoint will no longer return events for games created after that date. If you have any concerns please <a href="https://support.mod.io">reach out to us</a>.<br><br> Get events that have been fired specific to the user. Successful request will return an array of <a href="#get-user-events-2">Event Objects</a>. We recommended reading the <a href="#filtering">filtering documentation</a> to return only the records you want.
+     *
+     * Filter|Type|Description
+     * ---|---|---
+     * id|integer|Unique id of the event object.
+     * game_id|integer|Unique id of the parent game.
+     * mod_id|integer|Unique id of the parent mod.
+     * user_id|integer|Unique id of the user who performed the action.
+     * date_added|integer|Unix timestamp of date mod was updated.
+     * event_type|string|Type of change that occurred:<br><br><strong>USER_TEAM_JOIN</strong> = User has joined a team.<br><strong>USER_TEAM_LEAVE</strong> = User has left a team.<br><strong>USER_SUBSCRIBE</strong> = User has subscribed to a mod.<br><strong>USER_UNSUBSCRIBE</strong> = User has un-subscribed from a mod.</p>
 
 <blockquote>
 <p>Example response</p>
