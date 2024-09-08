@@ -2772,9 +2772,7 @@ curl <span class="nt">-X</span> POST https://<span class="k">*</span>.modapi.io/
 </code></pre></div>
 <p><span class="httpmethod POST">POST</span> <span class="endpointheading">/external/xboxauth</span></p>
 
-<p>Request an access token on behalf of an Xbox Live user. A Successful request will return an <a href="#access-token-object">Access Token Object</a>.</p>
-
-<p><strong>NOTE</strong>: To use this endpoint you will need to setup some additional settings prior to being able to authenticate Xbox Live users. <a href="/platforms/gdk/#authentication">Head here</a> for these instructions (<strong>NOTE:</strong> A <a href="/platforms/console-sdks/">NDA is required</a> to be able to access).</p>
+<p>Request an access token on behalf of an Xbox Live user. To use this endpoint you will need to setup some additional settings prior to being able to authenticate Xbox Live users. <a href="/platforms/gdk/#authentication">Head here</a> for these instructions. A Successful request will return an <a href="#access-token-object">Access Token Object</a>.</p>
 
 <p><strong>HINT:</strong> If you want to overlay the mod.io site in-game on Xbox, we recommend you add <code>?portal=xboxlive</code> to the end of the URL you open which will prompt the user to login with Xbox Live. See <a href="#web-overlay-authentication">Web Overlay Authentication</a> for details.</p>
 
@@ -2993,9 +2991,7 @@ curl <span class="nt">-X</span> POST https://<span class="k">*</span>.modapi.io/
 </code></pre></div>
 <p><span class="httpmethod POST">POST</span> <span class="endpointheading">/external/psnauth</span></p>
 
-<p>Request an access token on behalf of a PlayStation Network (PSN) user. A Successful request will return an <a href="#access-token-object">Access Token Object</a>.</p>
-
-<p><strong>NOTE</strong>: To use this endpoint you will need to setup some additional settings prior to being able to authenticate PlayStation users. <a href="/platforms/playstation/#authentication">Head here</a> for these instructions (<strong>NOTE:</strong> A <a href="/platforms/console-sdks/">NDA is required</a> to be able to access).</p>
+<p>Request an access token on behalf of a PlayStation Network (PSN) user. To use this endpoint you will need to setup some additional settings prior to being able to authenticate PlayStation users. <a href="/platforms/playstation/#authentication">Head here</a> for these instructions. A Successful request will return an <a href="#access-token-object">Access Token Object</a>.</p>
 
 <p><strong>HINT:</strong> If you want to overlay the mod.io site in-game on PlayStation, we recommend you add <code>?portal=psn</code> to the end of the URL you open which will prompt the user to login with PlayStation Network. See <a href="#web-overlay-authentication">Web Overlay Authentication</a> for details.</p>
 
@@ -3166,9 +3162,7 @@ curl <span class="nt">-X</span> POST https://<span class="k">*</span>.modapi.io/
 </code></pre></div>
 <p><span class="httpmethod POST">POST</span> <span class="endpointheading">/external/switchauth</span></p>
 
-<p>Request an access token on behalf of a Nintendo Switch user. A Successful request will return an <a href="#access-token-object">Access Token Object</a>.</p>
-
-<p><strong>NOTE</strong>: To use this endpoint you will need to setup some additional settings prior to being able to authenticate Nintendo Switch users. <a href="/platforms/switch/#authentication">Head here</a> for these instructions (<strong>NOTE:</strong> A <a href="/platforms/console-sdks/">NDA is required</a> to be able to access).</p>
+<p>Request an access token on behalf of a Nintendo Switch user. To use this endpoint you will need to setup some additional settings prior to being able to authenticate Nintendo Switch users. <a href="/platforms/switch/#authentication">Head here</a> for these instructions. A Successful request will return an <a href="#access-token-object">Access Token Object</a>.</p>
 
 <table>
 <thead>
@@ -4586,7 +4580,7 @@ curl <span class="nt">-X</span> POST https://<span class="k">*</span>.modapi.io/
 </code></pre></div>
 <p><span class="httpmethod POST">POST</span> <span class="endpointheading">/external/openidauth</span></p>
 
-<p>Request an access token on behalf of an OpenID identity provider. To use this method of authentication, you must configure the OpenID config in your game's authentication admin page. A Successful request will return an <a href="#access-token-object">Access Token Object</a>.</p>
+<p>Request an access token on behalf of an OpenID identity provider. To use this method of authentication, you must configure the OpenID config in your <a href="/web-services/authentication/openid/">game's authentication admin page</a>. A Successful request will return an <a href="#access-token-object">Access Token Object</a>.</p>
 
 <p><strong>NOTE:</strong> The ability to authenticate players using your identity provider is a premium feature. If you are interested in accessing premium features via your games dashboard, please <a href="mailto:developers@mod.io?subject=OpenID%20SSO%20Request">contact us</a>.</p>
 
