@@ -1257,9 +1257,7 @@ System.out.println(response.toString());
 
 `POST /external/xboxauth`
 
-Request an access token on behalf of an Xbox Live user. A Successful request will return an [Access Token Object](#access-token-object).
-
-     __NOTE__: To use this endpoint you will need to setup some additional settings prior to being able to authenticate Xbox Live users. [Head here](/platforms/gdk/#authentication) for these instructions (**NOTE:** A [NDA is required](/platforms/console-sdks/) to be able to access).
+Request an access token on behalf of an Xbox Live user. To use this endpoint you will need to setup some additional settings prior to being able to authenticate Xbox Live users. [Head here](/platforms/gdk/#authentication) for these instructions. A Successful request will return an [Access Token Object](#access-token-object).
 
      __HINT:__ If you want to overlay the mod.io site in-game on Xbox, we recommend you add `?portal=xboxlive` to the end of the URL you open which will prompt the user to login with Xbox Live. See [Web Overlay Authentication](#web-overlay-authentication) for details.
 
@@ -1393,9 +1391,7 @@ System.out.println(response.toString());
 
 `POST /external/psnauth`
 
-Request an access token on behalf of a PlayStation Network (PSN) user. A Successful request will return an [Access Token Object](#access-token-object).
-
-     __NOTE__: To use this endpoint you will need to setup some additional settings prior to being able to authenticate PlayStation users. [Head here](/platforms/playstation/#authentication) for these instructions (**NOTE:** A [NDA is required](/platforms/console-sdks/) to be able to access).
+Request an access token on behalf of a PlayStation Network (PSN) user. To use this endpoint you will need to setup some additional settings prior to being able to authenticate PlayStation users. [Head here](/platforms/playstation/#authentication) for these instructions. A Successful request will return an [Access Token Object](#access-token-object).
 
      __HINT:__ If you want to overlay the mod.io site in-game on PlayStation, we recommend you add `?portal=psn` to the end of the URL you open which will prompt the user to login with PlayStation Network. See [Web Overlay Authentication](#web-overlay-authentication) for details.
 
@@ -1524,9 +1520,7 @@ System.out.println(response.toString());
 
 `POST /external/switchauth`
 
-Request an access token on behalf of a Nintendo Switch user. A Successful request will return an [Access Token Object](#access-token-object).
-
-   __NOTE__: To use this endpoint you will need to setup some additional settings prior to being able to authenticate Nintendo Switch users. [Head here](/platforms/switch/#authentication) for these instructions (**NOTE:** A [NDA is required](/platforms/console-sdks/) to be able to access).
+Request an access token on behalf of a Nintendo Switch user. To use this endpoint you will need to setup some additional settings prior to being able to authenticate Nintendo Switch users. [Head here](/platforms/switch/#authentication) for these instructions. A Successful request will return an [Access Token Object](#access-token-object).
 
    Parameter|Type|Required|Description
    ---|---|---|---|
@@ -2446,7 +2440,7 @@ System.out.println(response.toString());
 
 `POST /external/openidauth`
 
-Request an access token on behalf of an OpenID identity provider. To use this method of authentication, you must configure the OpenID config in your game's authentication admin page. A Successful request will return an [Access Token Object](#access-token-object).
+Request an access token on behalf of an OpenID identity provider. To use this method of authentication, you must configure the OpenID config in your [game's authentication admin page](/web-services/authentication/openid/). A Successful request will return an [Access Token Object](#access-token-object).
 
      __NOTE:__ The ability to authenticate players using your identity provider is a premium feature. If you are interested in accessing premium features via your games dashboard, please [contact us](mailto:developers@mod.io?subject=OpenID SSO Request).
 
