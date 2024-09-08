@@ -2559,7 +2559,7 @@ curl <span class="nt">-X</span> POST https://<span class="k">*</span>.modapi.io/
 </code></pre></div>
 <p><span class="httpmethod POST">POST</span> <span class="endpointheading">/external/steamauth</span></p>
 
-<p>Request an access token on behalf of a Steam user. To use this functionality you <em>must</em> add your games <a href="https://partner.steamgames.com/apps/sdkauth">encrypted app ticket key</a> from Steamworks, to the <em>Game Admin &gt; Settings</em> page of your games profile on mod.io. A Successful request will return an <a href="#access-token-object">Access Token Object</a>.</p>
+<p>Request an access token on behalf of a Steam user. To use this functionality you <em>must</em> add your games <a href="https://partner.steamgames.com/apps/sdkauth">encrypted app ticket key</a> from Steamworks, to the <a href="/platforms/steam/authentication/"><em>Game Admin &gt; Settings</em></a> page of your games profile on mod.io. A Successful request will return an <a href="#access-token-object">Access Token Object</a>.</p>
 
 <p><strong>HINT:</strong> If you want to overlay the mod.io site in-game on Steam, we recommend you add <code>?portal=steam</code> to the end of the URL you open which will prompt the user to login with Steam. See <a href="#web-overlay-authentication">Web Overlay Authentication</a> for details.
     <strong>NOTE</strong>: Steam is the only authentication endpoint that requires their token to be base64 encoded. All other endpoints tokens should be provided as a UTF-8 character string.</p>
@@ -2774,7 +2774,7 @@ curl <span class="nt">-X</span> POST https://<span class="k">*</span>.modapi.io/
 
 <p>Request an access token on behalf of an Xbox Live user. A Successful request will return an <a href="#access-token-object">Access Token Object</a>.</p>
 
-<p><strong>NOTE</strong>: To use this endpoint you will need to setup some additional settings prior to being able to authenticate Xbox Live users. For these instructions please <a href="mailto:developers@mod.io?subject=Xbox%20Live%20SSO%20Request">contact us</a>.</p>
+<p><strong>NOTE</strong>: To use this endpoint you will need to setup some additional settings prior to being able to authenticate Xbox Live users. <a href="/platforms/gdk/#authentication">Head here</a> for these instructions (<strong>NOTE:</strong> A <a href="/platforms/console-sdks/">NDA is required</a> to be able to access).</p>
 
 <p><strong>HINT:</strong> If you want to overlay the mod.io site in-game on Xbox, we recommend you add <code>?portal=xboxlive</code> to the end of the URL you open which will prompt the user to login with Xbox Live. See <a href="#web-overlay-authentication">Web Overlay Authentication</a> for details.</p>
 
@@ -2995,7 +2995,7 @@ curl <span class="nt">-X</span> POST https://<span class="k">*</span>.modapi.io/
 
 <p>Request an access token on behalf of a PlayStation Network (PSN) user. A Successful request will return an <a href="#access-token-object">Access Token Object</a>.</p>
 
-<p><strong>NOTE</strong>: To use this endpoint you will need to setup some additional settings prior to being able to authenticate PlayStation users. For these instructions please <a href="mailto:developers@mod.io?subject=PlayStation%20Network%20SSO%20Request">contact us</a>.</p>
+<p><strong>NOTE</strong>: To use this endpoint you will need to setup some additional settings prior to being able to authenticate PlayStation users. <a href="/platforms/playstation/#authentication">Head here</a> for these instructions (<strong>NOTE:</strong> A <a href="/platforms/console-sdks/">NDA is required</a> to be able to access).</p>
 
 <p><strong>HINT:</strong> If you want to overlay the mod.io site in-game on PlayStation, we recommend you add <code>?portal=psn</code> to the end of the URL you open which will prompt the user to login with PlayStation Network. See <a href="#web-overlay-authentication">Web Overlay Authentication</a> for details.</p>
 
@@ -3168,7 +3168,7 @@ curl <span class="nt">-X</span> POST https://<span class="k">*</span>.modapi.io/
 
 <p>Request an access token on behalf of a Nintendo Switch user. A Successful request will return an <a href="#access-token-object">Access Token Object</a>.</p>
 
-<p><strong>NOTE</strong>: To use this endpoint you will need to setup some additional settings prior to being able to authenticate Nintendo Switch users. For these instructions please <a href="mailto:developers@mod.io?subject=Nintendo%20Switch%20SSO%20Request">contact us</a>.</p>
+<p><strong>NOTE</strong>: To use this endpoint you will need to setup some additional settings prior to being able to authenticate Nintendo Switch users. <a href="/platforms/switch/#authentication">Head here</a> for these instructions (<strong>NOTE:</strong> A <a href="/platforms/console-sdks/">NDA is required</a> to be able to access).</p>
 
 <table>
 <thead>
@@ -3599,7 +3599,7 @@ curl <span class="nt">-X</span> POST https://<span class="k">*</span>.modapi.io/
 </code></pre></div>
 <p><span class="httpmethod POST">POST</span> <span class="endpointheading">/external/epicgamesauth</span></p>
 
-<p>Request an access token on behalf of an Epic Games user. A Successful request will return an <a href="#access-token-object">Access Token Object</a>.</p>
+<p>Request an access token on behalf of an Epic Games user. Additional instructions for configuing your Epic Account Services Application to use this endpoint can be <a href="/platforms/epic/authentication/">found here</a>. A Successful request will return an <a href="#access-token-object">Access Token Object</a>.</p>
 
 <table>
 <thead>
@@ -3788,7 +3788,7 @@ curl <span class="nt">-X</span> POST https://<span class="k">*</span>.modapi.io/
 </code></pre></div>
 <p><span class="httpmethod POST">POST</span> <span class="endpointheading">/external/galaxyauth</span></p>
 
-<p>Request an access token on behalf of a GOG Galaxy user. To use this functionality you <em>must</em> add your games <a href="https://docs.gog.com/sdk-encrypted-tickets/">encrypted app ticket key</a> from GOG Galaxy, to the <em>Game Admin &gt; Settings</em> page of your games profile on mod.io. A Successful request will return an <a href="#access-token-object">Access Token Object</a>.</p>
+<p>Request an access token on behalf of a GOG Galaxy user. To use this functionality you <em>must</em> add your games <a href="https://docs.gog.com/sdk-encrypted-tickets/">encrypted app ticket key</a> from GOG Galaxy, to the <a href="/platforms/gog/authentication/"><em>Game Admin &gt; Settings</em></a> page of your games profile on mod.io. A Successful request will return an <a href="#access-token-object">Access Token Object</a>.</p>
 
 <table>
 <thead>
@@ -3991,7 +3991,7 @@ curl <span class="nt">-X</span> POST https://<span class="k">*</span>.modapi.io/
 </code></pre></div>
 <p><span class="httpmethod POST">POST</span> <span class="endpointheading">/external/appleauth</span></p>
 
-<p>Request an access token on behalf of a 'Sign in with Apple' user. A Successful request will return an <a href="#access-token-object">Access Token Object</a>.</p>
+<p>Request an access token on behalf of a 'Sign in with Apple' user. To use this functionality you <em>must</em> add your games Bundle ID from Apple, to the <a href="/platforms/apple/authentication/"><em>Game Admin &gt; Settings</em></a> page of your games profile on mod.io. A Successful request will return an <a href="#access-token-object">Access Token Object</a>.</p>
 
 <table>
 <thead>
@@ -4202,11 +4202,9 @@ curl <span class="nt">-X</span> POST https://<span class="k">*</span>.modapi.io/
 </code></pre></div>
 <p><span class="httpmethod POST">POST</span> <span class="endpointheading">/external/googleauth</span></p>
 
-<p>Request an access token on behalf of a Google user. A Successful request will return an <a href="#access-token-object">Access Token Object</a>.
+<p>Request an access token on behalf of a Google user. To use this functionality you <em>must</em> add your games Client ID, Secret and Redirect URI from Google, to the <a href="/platforms/google/authentication/"><em>Game Admin &gt; Settings</em></a> page of your games profile on mod.io. A Successful request will return an <a href="#access-token-object">Access Token Object</a>.
      *
-      <strong>NOTE</strong>: To use this endpoint you will need to setup some additional settings prior to being able to authenticate Google users. For these instructions please <a href="mailto:developers@mod.io?subject=Google%20SSO%20Request">contact us</a>.</p>
-
-<p><strong>HINT:</strong> If you want to overlay the mod.io site in-game on Android, we recommend you add <code>?portal=google</code> to the end of the URL you open which will prompt the user to login with Google. See <a href="#web-overlay-authentication">Web Overlay Authentication</a> for details.</p>
+     <strong>HINT:</strong> If you want to overlay the mod.io site in-game on Android, we recommend you add <code>?portal=google</code> to the end of the URL you open which will prompt the user to login with Google. See <a href="#web-overlay-authentication">Web Overlay Authentication</a> for details.</p>
 
 <table>
 <thead>
@@ -17301,16 +17299,49 @@ Accept: application/json
 </code></pre></div>
 <p><span class="httpmethod GET">GET</span> <span class="endpointheading">/me/events</span></p>
 
-<p><strong>Deprecated</strong>: This endpoint is deprecated for in-game use and will be removed at a later date. As of March 31st 2024, events will only be returned for existing games for legacy reasons. Any new game should use the <a href="#get-user-subscriptions">Get User Subscriptions</a> endpoint to fetch the latest mods subscribed to by the authenticated user as this endpoint will no longer return events for games created after that date. If you have any concerns please <a href="https://support.mod.io">reach out to us</a>.<br><br> Get events that have been fired specific to the user. Successful request will return an array of <a href="#get-user-events-2">Event Objects</a>. We recommended reading the <a href="#filtering">filtering documentation</a> to return only the records you want.
-     *
-     * Filter|Type|Description
-     * ---|---|---
-     * id|integer|Unique id of the event object.
-     * game_id|integer|Unique id of the parent game.
-     * mod_id|integer|Unique id of the parent mod.
-     * user_id|integer|Unique id of the user who performed the action.
-     * date_added|integer|Unix timestamp of date mod was updated.
-     * event_type|string|Type of change that occurred:<br><br><strong>USER_TEAM_JOIN</strong> = User has joined a team.<br><strong>USER_TEAM_LEAVE</strong> = User has left a team.<br><strong>USER_SUBSCRIBE</strong> = User has subscribed to a mod.<br><strong>USER_UNSUBSCRIBE</strong> = User has un-subscribed from a mod.</p>
+<p><strong>Deprecated</strong>: This endpoint is deprecated for in-game use and will be removed at a later date. As of March 31st 2024, events will only be returned for existing games for legacy reasons. Any new game should use the <a href="#get-user-subscriptions">Get User Subscriptions</a> endpoint to fetch the latest mods subscribed to by the authenticated user as this endpoint will no longer return events for games created after that date. If you have any concerns please <a href="https://support.mod.io">reach out to us</a>.<br><br> Get events that have been fired specific to the user. Successful request will return an array of <a href="#get-user-events-2">Event Objects</a>. We recommended reading the <a href="#filtering">filtering documentation</a> to return only the records you want.</p>
+
+<table>
+<thead>
+<tr>
+<th>Filter</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>id</td>
+<td>integer</td>
+<td>Unique id of the event object.</td>
+</tr>
+<tr>
+<td>game_id</td>
+<td>integer</td>
+<td>Unique id of the parent game.</td>
+</tr>
+<tr>
+<td>mod_id</td>
+<td>integer</td>
+<td>Unique id of the parent mod.</td>
+</tr>
+<tr>
+<td>user_id</td>
+<td>integer</td>
+<td>Unique id of the user who performed the action.</td>
+</tr>
+<tr>
+<td>date_added</td>
+<td>integer</td>
+<td>Unix timestamp of date mod was updated.</td>
+</tr>
+<tr>
+<td>event_type</td>
+<td>string</td>
+<td>Type of change that occurred:<br><br><strong>USER_TEAM_JOIN</strong> = User has joined a team.<br><strong>USER_TEAM_LEAVE</strong> = User has left a team.<br><strong>USER_SUBSCRIBE</strong> = User has subscribed to a mod.<br><strong>USER_UNSUBSCRIBE</strong> = User has un-subscribed from a mod.</td>
+</tr>
+</tbody>
+</table>
 
 <blockquote>
 <p>Example response</p>
