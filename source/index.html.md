@@ -25,6 +25,8 @@ Welcome to the official documentation for [mod.io](https://mod.io), an API for d
 
 __API path:__ [https://*.modapi.io/v1](https://*.modapi.io/v1) (see your API access dashboard)
 
+__Swagger JSON:__ [--parse apiswaggerurl   ](--parse_apiswaggerurl)
+
 __Current version:__ <select id="version_dropdown" onChange="changeVersion"><option value="" data-latest="true">v1 (latest)</option></select> 
 
 <a href="changelog/"><span class="versionwrap">View Version Changelog</span></a>
