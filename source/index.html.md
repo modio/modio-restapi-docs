@@ -1125,7 +1125,7 @@ System.out.println(response.toString());
 
 `POST /external/steamauth`
 
-Request an access token on behalf of a Steam user. To use this functionality you *must* add your games [encrypted app ticket key](https://partner.steamgames.com/apps/sdkauth) from Steamworks, to the [*Game Admin > Settings*](/platforms/steam/authentication/) page of your games profile on mod.io. A Successful request will return an [Access Token Object](#access-token-object).
+Request an access token on behalf of a Steam user. To use this functionality you *must* add your games [encrypted app ticket key](https://partner.steamgames.com/apps/sdkauth) from Steamworks, to the *Game Admin > Settings* page of your games profile on mod.io. A Successful request will return an [Access Token Object](#access-token-object).
 
     __HINT:__ If you want to overlay the mod.io site in-game on Steam, we recommend you add `?portal=steam` to the end of the URL you open which will prompt the user to login with Steam. See [Web Overlay Authentication](#web-overlay-authentication) for details.
     __NOTE__: Steam is the only authentication endpoint that requires their token to be base64 encoded. All other endpoints tokens should be provided as a UTF-8 character string.
@@ -1259,7 +1259,9 @@ System.out.println(response.toString());
 
 `POST /external/xboxauth`
 
-Request an access token on behalf of an Xbox Live user. To use this endpoint you will need to setup some additional settings prior to being able to authenticate Xbox Live users. [Head here](/platforms/gdk/#authentication) for these instructions. A Successful request will return an [Access Token Object](#access-token-object).
+Request an access token on behalf of an Xbox Live user. A Successful request will return an [Access Token Object](#access-token-object).
+
+     __NOTE__: To use this endpoint you will need to setup some additional settings prior to being able to authenticate Xbox Live users. For these instructions please [contact us](mailto:developers@mod.io?subject=Xbox Live SSO Request).
 
      __HINT:__ If you want to overlay the mod.io site in-game on Xbox, we recommend you add `?portal=xboxlive` to the end of the URL you open which will prompt the user to login with Xbox Live. See [Web Overlay Authentication](#web-overlay-authentication) for details.
 
@@ -1393,7 +1395,9 @@ System.out.println(response.toString());
 
 `POST /external/psnauth`
 
-Request an access token on behalf of a PlayStation Network (PSN) user. To use this endpoint you will need to setup some additional settings prior to being able to authenticate PlayStation users. [Head here](/platforms/playstation/#authentication) for these instructions. A Successful request will return an [Access Token Object](#access-token-object).
+Request an access token on behalf of a PlayStation Network (PSN) user. A Successful request will return an [Access Token Object](#access-token-object).
+
+     __NOTE__: To use this endpoint you will need to setup some additional settings prior to being able to authenticate PlayStation users. For these instructions please [contact us](mailto:developers@mod.io?subject=PlayStation Network SSO Request).
 
      __HINT:__ If you want to overlay the mod.io site in-game on PlayStation, we recommend you add `?portal=psn` to the end of the URL you open which will prompt the user to login with PlayStation Network. See [Web Overlay Authentication](#web-overlay-authentication) for details.
 
@@ -1522,7 +1526,9 @@ System.out.println(response.toString());
 
 `POST /external/switchauth`
 
-Request an access token on behalf of a Nintendo Switch user. To use this endpoint you will need to setup some additional settings prior to being able to authenticate Nintendo Switch users. [Head here](/platforms/switch/#authentication) for these instructions. A Successful request will return an [Access Token Object](#access-token-object).
+Request an access token on behalf of a Nintendo Switch user. A Successful request will return an [Access Token Object](#access-token-object).
+
+   __NOTE__: To use this endpoint you will need to setup some additional settings prior to being able to authenticate Nintendo Switch users. For these instructions please [contact us](mailto:developers@mod.io?subject=Nintendo Switch SSO Request).
 
    Parameter|Type|Required|Description
    ---|---|---|---|
@@ -1791,7 +1797,7 @@ System.out.println(response.toString());
 
 `POST /external/epicgamesauth`
 
-Request an access token on behalf of an Epic Games user. Additional instructions for configuing your Epic Account Services Application to use this endpoint can be [found here](/platforms/epic/authentication/). A Successful request will return an [Access Token Object](#access-token-object).
+Request an access token on behalf of an Epic Games user. A Successful request will return an [Access Token Object](#access-token-object).
 
     Parameter|Type|Required|Description
     ---|---|---|---|
@@ -1919,7 +1925,7 @@ System.out.println(response.toString());
 
 `POST /external/galaxyauth`
 
-Request an access token on behalf of a GOG Galaxy user. To use this functionality you *must* add your games [encrypted app ticket key](https://docs.gog.com/sdk-encrypted-tickets/) from GOG Galaxy, to the [*Game Admin > Settings*](/platforms/gog/authentication/) page of your games profile on mod.io. A Successful request will return an [Access Token Object](#access-token-object).
+Request an access token on behalf of a GOG Galaxy user. To use this functionality you *must* add your games [encrypted app ticket key](https://docs.gog.com/sdk-encrypted-tickets/) from GOG Galaxy, to the *Game Admin > Settings* page of your games profile on mod.io. A Successful request will return an [Access Token Object](#access-token-object).
 
     Parameter|Type|Required|Description
     ---|---|---|---|
@@ -2049,7 +2055,7 @@ System.out.println(response.toString());
 
 `POST /external/appleauth`
 
-Request an access token on behalf of a 'Sign in with Apple' user. To use this functionality you *must* add your games Bundle ID from Apple, to the [*Game Admin > Settings*](/platforms/apple/authentication/) page of your games profile on mod.io. A Successful request will return an [Access Token Object](#access-token-object).
+Request an access token on behalf of a 'Sign in with Apple' user. A Successful request will return an [Access Token Object](#access-token-object).
 
     Parameter|Type|Required|Description
     ---|---|---|---|
@@ -2180,8 +2186,10 @@ System.out.println(response.toString());
 
 `POST /external/googleauth`
 
-Request an access token on behalf of a Google user. To use this functionality you *must* add your games Client ID, Secret and Redirect URI from Google, to the [*Game Admin > Settings*](/platforms/google/authentication/) page of your games profile on mod.io. A Successful request will return an [Access Token Object](#access-token-object).
+Request an access token on behalf of a Google user. A Successful request will return an [Access Token Object](#access-token-object).
      *
+      __NOTE__: To use this endpoint you will need to setup some additional settings prior to being able to authenticate Google users. For these instructions please [contact us](mailto:developers@mod.io?subject=Google SSO Request).
+
      __HINT:__ If you want to overlay the mod.io site in-game on Android, we recommend you add `?portal=google` to the end of the URL you open which will prompt the user to login with Google. See [Web Overlay Authentication](#web-overlay-authentication) for details.
 
      Parameter|Type|Required|Description
@@ -2442,7 +2450,7 @@ System.out.println(response.toString());
 
 `POST /external/openidauth`
 
-Request an access token on behalf of an OpenID identity provider. To use this method of authentication, you must configure the OpenID config in your [game's authentication admin page](/web-services/authentication/openid/). A Successful request will return an [Access Token Object](#access-token-object).
+Request an access token on behalf of an OpenID identity provider. To use this method of authentication, you must configure the OpenID config in your game's authentication admin page. A Successful request will return an [Access Token Object](#access-token-object).
 
      __NOTE:__ The ability to authenticate players using your identity provider is a premium feature. If you are interested in accessing premium features via your games dashboard, please [contact us](mailto:developers@mod.io?subject=OpenID SSO Request).
 
@@ -13094,15 +13102,15 @@ System.out.println(response.toString());
 `GET /me/events`
 
 __Deprecated__: This endpoint is deprecated for in-game use and will be removed at a later date. As of March 31st 2024, events will only be returned for existing games for legacy reasons. Any new game should use the [Get User Subscriptions](#get-user-subscriptions) endpoint to fetch the latest mods subscribed to by the authenticated user as this endpoint will no longer return events for games created after that date. If you have any concerns please [reach out to us](https://support.mod.io).<br><br> Get events that have been fired specific to the user. Successful request will return an array of [Event Objects](#get-user-events-2). We recommended reading the [filtering documentation](#filtering) to return only the records you want.
-
-     Filter|Type|Description
-     ---|---|---
-     id|integer|Unique id of the event object.
-     game_id|integer|Unique id of the parent game.
-     mod_id|integer|Unique id of the parent mod.
-     user_id|integer|Unique id of the user who performed the action.
-     date_added|integer|Unix timestamp of date mod was updated.
-     event_type|string|Type of change that occurred:<br><br>__USER_TEAM_JOIN__ = User has joined a team.<br>__USER_TEAM_LEAVE__ = User has left a team.<br>__USER_SUBSCRIBE__ = User has subscribed to a mod.<br>__USER_UNSUBSCRIBE__ = User has un-subscribed from a mod.
+     *
+     * Filter|Type|Description
+     * ---|---|---
+     * id|integer|Unique id of the event object.
+     * game_id|integer|Unique id of the parent game.
+     * mod_id|integer|Unique id of the parent mod.
+     * user_id|integer|Unique id of the user who performed the action.
+     * date_added|integer|Unix timestamp of date mod was updated.
+     * event_type|string|Type of change that occurred:<br><br>__USER_TEAM_JOIN__ = User has joined a team.<br>__USER_TEAM_LEAVE__ = User has left a team.<br>__USER_SUBSCRIBE__ = User has subscribed to a mod.<br>__USER_UNSUBSCRIBE__ = User has un-subscribed from a mod.
 
 > Example response
 
