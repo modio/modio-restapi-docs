@@ -1057,7 +1057,7 @@
 
 <p><strong>API path:</strong> <a href="https://*.modapi.io/v1">https://*.modapi.io/v1</a> (see your API access dashboard)</p>
 
-<p><strong>Swagger JSON:</strong> <a href="--parse_apiswaggerurl">--parse apiswaggerurl   </a></p>
+<p><strong>Swagger JSON:</strong> <a href="https://api.mod.io/v1/swagger">https://api.mod.io/v1/swagger</a></p>
 
 <p><strong>Current version:</strong> <select id="version_dropdown" onchange="changeVersion"><option value="" data-latest="true">v1 (latest)</option></select> </p>
 
@@ -2561,10 +2561,11 @@ curl <span class="nt">-X</span> POST https://<span class="k">*</span>.modapi.io/
 </code></pre></div>
 <p><span class="httpmethod POST">POST</span> <span class="endpointheading">/external/steamauth</span></p>
 
-<p>Request an access token on behalf of a Steam user. To use this functionality you <em>must</em> add your games <a href="https://partner.steamgames.com/apps/sdkauth">encrypted app ticket key</a> from Steamworks, to the <em>Game Admin &gt; Settings</em> page of your games profile on mod.io. A Successful request will return an <a href="#access-token-object">Access Token Object</a>.</p>
+<p>Request an access token on behalf of a Steam user. To use this functionality you <em>must</em> add your games <a href="https://partner.steamgames.com/apps/sdkauth">encrypted app ticket key</a> from Steamworks, to the <a href="/platforms/steam/authentication/"><em>Game Admin &gt; Settings</em></a> page of your games profile on mod.io. A Successful request will return an <a href="#access-token-object">Access Token Object</a>.</p>
 
-<p><strong>HINT:</strong> If you want to overlay the mod.io site in-game on Steam, we recommend you add <code>?portal=steam</code> to the end of the URL you open which will prompt the user to login with Steam. See <a href="#web-overlay-authentication">Web Overlay Authentication</a> for details.
-    <strong>NOTE</strong>: Steam is the only authentication endpoint that requires their token to be base64 encoded. All other endpoints tokens should be provided as a UTF-8 character string.</p>
+<p><strong>NOTE</strong>: Steam is the only authentication endpoint that requires their token to be base64 encoded. All other endpoints tokens should be provided as a UTF-8 character string.</p>
+
+<p><strong>HINT:</strong> If you want to overlay the mod.io site in-game on Steam, we recommend you add <code>?portal=steam</code> to the end of the URL you open which will prompt the user to login with Steam. See <a href="#web-overlay-authentication">Web Overlay Authentication</a> for details.</p>
 
 <table>
 <thead>
@@ -2774,9 +2775,7 @@ curl <span class="nt">-X</span> POST https://<span class="k">*</span>.modapi.io/
 </code></pre></div>
 <p><span class="httpmethod POST">POST</span> <span class="endpointheading">/external/xboxauth</span></p>
 
-<p>Request an access token on behalf of an Xbox Live user. A Successful request will return an <a href="#access-token-object">Access Token Object</a>.</p>
-
-<p><strong>NOTE</strong>: To use this endpoint you will need to setup some additional settings prior to being able to authenticate Xbox Live users. For these instructions please <a href="mailto:developers@mod.io?subject=Xbox%20Live%20SSO%20Request">contact us</a>.</p>
+<p>Request an access token on behalf of an Xbox Live user. To use this endpoint you will need to setup some additional settings prior to being able to authenticate Xbox Live users. <a href="/platforms/gdk/#authentication">Head here</a> for these instructions. A Successful request will return an <a href="#access-token-object">Access Token Object</a>.</p>
 
 <p><strong>HINT:</strong> If you want to overlay the mod.io site in-game on Xbox, we recommend you add <code>?portal=xboxlive</code> to the end of the URL you open which will prompt the user to login with Xbox Live. See <a href="#web-overlay-authentication">Web Overlay Authentication</a> for details.</p>
 
@@ -2995,9 +2994,7 @@ curl <span class="nt">-X</span> POST https://<span class="k">*</span>.modapi.io/
 </code></pre></div>
 <p><span class="httpmethod POST">POST</span> <span class="endpointheading">/external/psnauth</span></p>
 
-<p>Request an access token on behalf of a PlayStation Network (PSN) user. A Successful request will return an <a href="#access-token-object">Access Token Object</a>.</p>
-
-<p><strong>NOTE</strong>: To use this endpoint you will need to setup some additional settings prior to being able to authenticate PlayStation users. For these instructions please <a href="mailto:developers@mod.io?subject=PlayStation%20Network%20SSO%20Request">contact us</a>.</p>
+<p>Request an access token on behalf of a PlayStation Network (PSN) user. To use this endpoint you will need to setup some additional settings prior to being able to authenticate PlayStation users. <a href="/platforms/playstation/#authentication">Head here</a> for these instructions. A Successful request will return an <a href="#access-token-object">Access Token Object</a>.</p>
 
 <p><strong>HINT:</strong> If you want to overlay the mod.io site in-game on PlayStation, we recommend you add <code>?portal=psn</code> to the end of the URL you open which will prompt the user to login with PlayStation Network. See <a href="#web-overlay-authentication">Web Overlay Authentication</a> for details.</p>
 
@@ -3168,9 +3165,7 @@ curl <span class="nt">-X</span> POST https://<span class="k">*</span>.modapi.io/
 </code></pre></div>
 <p><span class="httpmethod POST">POST</span> <span class="endpointheading">/external/switchauth</span></p>
 
-<p>Request an access token on behalf of a Nintendo Switch user. A Successful request will return an <a href="#access-token-object">Access Token Object</a>.</p>
-
-<p><strong>NOTE</strong>: To use this endpoint you will need to setup some additional settings prior to being able to authenticate Nintendo Switch users. For these instructions please <a href="mailto:developers@mod.io?subject=Nintendo%20Switch%20SSO%20Request">contact us</a>.</p>
+<p>Request an access token on behalf of a Nintendo Switch user. To use this endpoint you will need to setup some additional settings prior to being able to authenticate Nintendo Switch users. <a href="/platforms/switch/#authentication">Head here</a> for these instructions. A Successful request will return an <a href="#access-token-object">Access Token Object</a>.</p>
 
 <table>
 <thead>
@@ -3601,7 +3596,7 @@ curl <span class="nt">-X</span> POST https://<span class="k">*</span>.modapi.io/
 </code></pre></div>
 <p><span class="httpmethod POST">POST</span> <span class="endpointheading">/external/epicgamesauth</span></p>
 
-<p>Request an access token on behalf of an Epic Games user. A Successful request will return an <a href="#access-token-object">Access Token Object</a>.</p>
+<p>Request an access token on behalf of an Epic Games user. Additional instructions for configuing your Epic Account Services Application to use this endpoint can be <a href="/platforms/epic/authentication/">found here</a>. A Successful request will return an <a href="#access-token-object">Access Token Object</a>.</p>
 
 <table>
 <thead>
@@ -3790,7 +3785,7 @@ curl <span class="nt">-X</span> POST https://<span class="k">*</span>.modapi.io/
 </code></pre></div>
 <p><span class="httpmethod POST">POST</span> <span class="endpointheading">/external/galaxyauth</span></p>
 
-<p>Request an access token on behalf of a GOG Galaxy user. To use this functionality you <em>must</em> add your games <a href="https://docs.gog.com/sdk-encrypted-tickets/">encrypted app ticket key</a> from GOG Galaxy, to the <em>Game Admin &gt; Settings</em> page of your games profile on mod.io. A Successful request will return an <a href="#access-token-object">Access Token Object</a>.</p>
+<p>Request an access token on behalf of a GOG Galaxy user. To use this functionality you <em>must</em> add your games <a href="https://docs.gog.com/sdk-encrypted-tickets/">encrypted app ticket key</a> from GOG Galaxy, to the <a href="/platforms/gog/authentication/"><em>Game Admin &gt; Settings</em></a> page of your games profile on mod.io. A Successful request will return an <a href="#access-token-object">Access Token Object</a>.</p>
 
 <table>
 <thead>
@@ -3993,7 +3988,7 @@ curl <span class="nt">-X</span> POST https://<span class="k">*</span>.modapi.io/
 </code></pre></div>
 <p><span class="httpmethod POST">POST</span> <span class="endpointheading">/external/appleauth</span></p>
 
-<p>Request an access token on behalf of a 'Sign in with Apple' user. A Successful request will return an <a href="#access-token-object">Access Token Object</a>.</p>
+<p>Request an access token on behalf of a 'Sign in with Apple' user. To use this functionality you <em>must</em> add your games Bundle ID from Apple, to the <a href="/platforms/apple/authentication/"><em>Game Admin &gt; Settings</em></a> page of your games profile on mod.io. A Successful request will return an <a href="#access-token-object">Access Token Object</a>.</p>
 
 <table>
 <thead>
@@ -4204,11 +4199,9 @@ curl <span class="nt">-X</span> POST https://<span class="k">*</span>.modapi.io/
 </code></pre></div>
 <p><span class="httpmethod POST">POST</span> <span class="endpointheading">/external/googleauth</span></p>
 
-<p>Request an access token on behalf of a Google user. A Successful request will return an <a href="#access-token-object">Access Token Object</a>.
+<p>Request an access token on behalf of a Google user. To use this functionality you <em>must</em> add your games Client ID, Secret and Redirect URI from Google, to the <a href="/platforms/google/authentication/"><em>Game Admin &gt; Settings</em></a> page of your games profile on mod.io. A Successful request will return an <a href="#access-token-object">Access Token Object</a>.
      *
-      <strong>NOTE</strong>: To use this endpoint you will need to setup some additional settings prior to being able to authenticate Google users. For these instructions please <a href="mailto:developers@mod.io?subject=Google%20SSO%20Request">contact us</a>.</p>
-
-<p><strong>HINT:</strong> If you want to overlay the mod.io site in-game on Android, we recommend you add <code>?portal=google</code> to the end of the URL you open which will prompt the user to login with Google. See <a href="#web-overlay-authentication">Web Overlay Authentication</a> for details.</p>
+     <strong>HINT:</strong> If you want to overlay the mod.io site in-game on Android, we recommend you add <code>?portal=google</code> to the end of the URL you open which will prompt the user to login with Google. See <a href="#web-overlay-authentication">Web Overlay Authentication</a> for details.</p>
 
 <table>
 <thead>
@@ -4590,9 +4583,11 @@ curl <span class="nt">-X</span> POST https://<span class="k">*</span>.modapi.io/
 </code></pre></div>
 <p><span class="httpmethod POST">POST</span> <span class="endpointheading">/external/openidauth</span></p>
 
-<p>Request an access token on behalf of an OpenID identity provider. To use this method of authentication, you must configure the OpenID config in your game's authentication admin page. A Successful request will return an <a href="#access-token-object">Access Token Object</a>.</p>
+<p>Request an access token on behalf of an OpenID identity provider. To use this method of authentication, you must configure the OpenID config in your <a href="/web-services/authentication/openid/">game's authentication admin page</a>. A Successful request will return an <a href="#access-token-object">Access Token Object</a>.</p>
 
 <p><strong>NOTE:</strong> The ability to authenticate players using your identity provider is a premium feature. If you are interested in accessing premium features via your games dashboard, please <a href="mailto:developers@mod.io?subject=OpenID%20SSO%20Request">contact us</a>.</p>
+
+<p><strong>HINT:</strong> If you want to overlay the mod.io site in-game, we recommend you add <code>?portal=studio</code> to the end of the URL you open which will prompt the user to login with your auth provider if they are on your games page. See <a href="#web-overlay-authentication">Web Overlay Authentication</a> for details.</p>
 
 <table>
 <thead>
@@ -5943,6 +5938,7 @@ Accept: application/json
       </span><span class="nl">"name_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"getting-started"</span><span class="p">,</span><span class="w">
       </span><span class="nl">"summary"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Alright, so let's get started with modding on mod.io"</span><span class="p">,</span><span class="w">
       </span><span class="nl">"description"</span><span class="p">:</span><span class="w"> </span><span class="s2">"&lt;h1&gt;Getting Started&lt;/h2&gt;&lt;p&gt;Download this suspiciou...."</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"community_options"</span><span class="p">:</span><span class="w"> </span><span class="mi">2048</span><span class="p">,</span><span class="w">
       </span><span class="nl">"tags"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
         </span><span class="p">{</span><span class="w">
           </span><span class="nl">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Instructions"</span><span class="p">,</span><span class="w">
@@ -6109,6 +6105,7 @@ Accept: application/json
   </span><span class="nl">"name_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"getting-started"</span><span class="p">,</span><span class="w">
   </span><span class="nl">"summary"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Alright, so let's get started with modding on mod.io"</span><span class="p">,</span><span class="w">
   </span><span class="nl">"description"</span><span class="p">:</span><span class="w"> </span><span class="s2">"&lt;h1&gt;Getting Started&lt;/h2&gt;&lt;p&gt;Download this suspiciou...."</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"community_options"</span><span class="p">:</span><span class="w"> </span><span class="mi">2048</span><span class="p">,</span><span class="w">
   </span><span class="nl">"tags"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
     </span><span class="p">{</span><span class="w">
       </span><span class="nl">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Instructions"</span><span class="p">,</span><span class="w">
@@ -6163,11 +6160,15 @@ curl <span class="nt">-X</span> POST https://<span class="k">*</span>.modapi.io/
   <span class="nt">-H</span> <span class="s1">'Content-Type: multipart/form-data'</span> <span class="se">\ </span>
   <span class="nt">-H</span> <span class="s1">'Content-Type: multipart/form-data'</span> <span class="se">\ </span>
   <span class="nt">-H</span> <span class="s1">'Accept: application/json'</span> <span class="se">\</span>
-  <span class="nt">-F</span> <span class="s1">'name=Modding Guide for Rogue Knight'</span> <span class="se">\</span>
-  <span class="nt">-F</span> <span class="s1">'summary=Short descriptive summary here'</span> <span class="se">\</span>
-  <span class="nt">-F</span> <span class="s1">'description=&lt;h2&gt;Getting started with..'</span> <span class="se">\</span>
-  <span class="nt">-F</span> <span class="s1">'logo=@/path/to/image.jpg'</span> <span class="se">\</span>
-  <span class="nt">-F</span> <span class="s1">'date_live=1626667557'</span>
+  <span class="nt">-d</span> <span class="s1">'name=Modding Guide for Rogue Knight'</span> <span class="se">\</span>
+  <span class="nt">-d</span> <span class="s1">'summary=Short descriptive summary here'</span> <span class="se">\</span>
+  <span class="nt">-d</span> <span class="s1">'description=&lt;h2&gt;Getting started with..'</span> <span class="se">\</span>
+  <span class="nt">-d</span> <span class="s1">'logo=undefined'</span> <span class="se">\</span>
+  <span class="nt">-d</span> <span class="s1">'date_live=1626667557'</span> <span class="se">\</span>
+  <span class="nt">-d</span> <span class="s1">'status=undefined'</span> <span class="se">\</span>
+  <span class="nt">-d</span> <span class="s1">'community_options=undefined'</span> <span class="se">\</span>
+  <span class="nt">-d</span> <span class="s1">'tags[]=undefined'</span> <span class="se">\</span>
+  <span class="nt">-d</span> <span class="s1">'name_id=undefined'</span>
 
 </code></pre></div><div class="highlight"><pre class="highlight http tab-http"><code><span class="nf">POST</span> <span class="nn">https://*.modapi.io/v1/games/{game-id}/guides</span> <span class="k">HTTP</span><span class="o">/</span><span class="m">1.1</span>
 <span class="na">Host</span><span class="p">:</span> <span class="s">*.modapi.io</span>
@@ -6198,8 +6199,14 @@ curl <span class="nt">-X</span> POST https://<span class="k">*</span>.modapi.io/
   "name": "Modding Guide for Rogue Knight",
   "summary": "Short descriptive summary here",
   "description": "&lt;h2&gt;Getting started with..",
-  "logo": "@/path/to/image.jpg",
-  "date_live": 1626667557
+  "logo": "string",
+  "date_live": 1626667557,
+  "status": 0,
+  "community_options": 0,
+  "tags": [
+    "string"
+  ],
+  "name_id": "string"
 }</span><span class="dl">'</span><span class="p">;</span>
 <span class="kd">const</span> <span class="nx">headers</span> <span class="o">=</span> <span class="p">{</span>
   <span class="dl">'</span><span class="s1">Authorization</span><span class="dl">'</span><span class="p">:</span><span class="dl">'</span><span class="s1">Bearer {access-token}</span><span class="dl">'</span><span class="p">,</span>
@@ -6352,6 +6359,7 @@ curl <span class="nt">-X</span> POST https://<span class="k">*</span>.modapi.io/
   </span><span class="nl">"name_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"getting-started"</span><span class="p">,</span><span class="w">
   </span><span class="nl">"summary"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Alright, so let's get started with modding on mod.io"</span><span class="p">,</span><span class="w">
   </span><span class="nl">"description"</span><span class="p">:</span><span class="w"> </span><span class="s2">"&lt;h1&gt;Getting Started&lt;/h2&gt;&lt;p&gt;Download this suspiciou...."</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"community_options"</span><span class="p">:</span><span class="w"> </span><span class="mi">2048</span><span class="p">,</span><span class="w">
   </span><span class="nl">"tags"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
     </span><span class="p">{</span><span class="w">
       </span><span class="nl">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Instructions"</span><span class="p">,</span><span class="w">
@@ -6608,6 +6616,7 @@ curl <span class="nt">-X</span> POST https://<span class="k">*</span>.modapi.io/
   </span><span class="nl">"name_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"getting-started"</span><span class="p">,</span><span class="w">
   </span><span class="nl">"summary"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Alright, so let's get started with modding on mod.io"</span><span class="p">,</span><span class="w">
   </span><span class="nl">"description"</span><span class="p">:</span><span class="w"> </span><span class="s2">"&lt;h1&gt;Getting Started&lt;/h2&gt;&lt;p&gt;Download this suspiciou...."</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"community_options"</span><span class="p">:</span><span class="w"> </span><span class="mi">2048</span><span class="p">,</span><span class="w">
   </span><span class="nl">"tags"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
     </span><span class="p">{</span><span class="w">
       </span><span class="nl">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Instructions"</span><span class="p">,</span><span class="w">
@@ -17303,16 +17312,49 @@ Accept: application/json
 </code></pre></div>
 <p><span class="httpmethod GET">GET</span> <span class="endpointheading">/me/events</span></p>
 
-<p><strong>Deprecated</strong>: This endpoint is deprecated for in-game use and will be removed at a later date. As of March 31st 2024, events will only be returned for existing games for legacy reasons. Any new game should use the <a href="#get-user-subscriptions">Get User Subscriptions</a> endpoint to fetch the latest mods subscribed to by the authenticated user as this endpoint will no longer return events for games created after that date. If you have any concerns please <a href="https://support.mod.io">reach out to us</a>.<br><br> Get events that have been fired specific to the user. Successful request will return an array of <a href="#get-user-events-2">Event Objects</a>. We recommended reading the <a href="#filtering">filtering documentation</a> to return only the records you want.
-     *
-     * Filter|Type|Description
-     * ---|---|---
-     * id|integer|Unique id of the event object.
-     * game_id|integer|Unique id of the parent game.
-     * mod_id|integer|Unique id of the parent mod.
-     * user_id|integer|Unique id of the user who performed the action.
-     * date_added|integer|Unix timestamp of date mod was updated.
-     * event_type|string|Type of change that occurred:<br><br><strong>USER_TEAM_JOIN</strong> = User has joined a team.<br><strong>USER_TEAM_LEAVE</strong> = User has left a team.<br><strong>USER_SUBSCRIBE</strong> = User has subscribed to a mod.<br><strong>USER_UNSUBSCRIBE</strong> = User has un-subscribed from a mod.</p>
+<p><strong>Deprecated</strong>: This endpoint is deprecated for in-game use and will be removed at a later date. As of March 31st 2024, events will only be returned for existing games for legacy reasons. Any new game should use the <a href="#get-user-subscriptions">Get User Subscriptions</a> endpoint to fetch the latest mods subscribed to by the authenticated user as this endpoint will no longer return events for games created after that date. If you have any concerns please <a href="https://support.mod.io">reach out to us</a>.<br><br> Get events that have been fired specific to the user. Successful request will return an array of <a href="#get-user-events-2">Event Objects</a>. We recommended reading the <a href="#filtering">filtering documentation</a> to return only the records you want.</p>
+
+<table>
+<thead>
+<tr>
+<th>Filter</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>id</td>
+<td>integer</td>
+<td>Unique id of the event object.</td>
+</tr>
+<tr>
+<td>game_id</td>
+<td>integer</td>
+<td>Unique id of the parent game.</td>
+</tr>
+<tr>
+<td>mod_id</td>
+<td>integer</td>
+<td>Unique id of the parent mod.</td>
+</tr>
+<tr>
+<td>user_id</td>
+<td>integer</td>
+<td>Unique id of the user who performed the action.</td>
+</tr>
+<tr>
+<td>date_added</td>
+<td>integer</td>
+<td>Unix timestamp of date mod was updated.</td>
+</tr>
+<tr>
+<td>event_type</td>
+<td>string</td>
+<td>Type of change that occurred:<br><br><strong>USER_TEAM_JOIN</strong> = User has joined a team.<br><strong>USER_TEAM_LEAVE</strong> = User has left a team.<br><strong>USER_SUBSCRIBE</strong> = User has subscribed to a mod.<br><strong>USER_UNSUBSCRIBE</strong> = User has un-subscribed from a mod.</td>
+</tr>
+</tbody>
+</table>
 
 <blockquote>
 <p>Example response</p>
@@ -20875,13 +20917,16 @@ curl <span class="nt">-X</span> POST https://<span class="k">*</span>.modapi.io/
 <p>Example response</p>
 </blockquote>
 <div class="highlight"><pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
-  </span><span class="nl">"transaction_id"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
-  </span><span class="nl">"gross_amount"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
-  </span><span class="nl">"net_amount"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
-  </span><span class="nl">"platform_fee"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
-  </span><span class="nl">"gateway_fee"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
-  </span><span class="nl">"transaction_type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"string"</span><span class="p">,</span><span class="w">
-  </span><span class="nl">"meta"</span><span class="p">:</span><span class="w"> </span><span class="p">{},</span><span class="w">
+  </span><span class="nl">"transaction_id"</span><span class="p">:</span><span class="w"> </span><span class="mi">123456789</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"gross_amount"</span><span class="p">:</span><span class="w"> </span><span class="mi">1000</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"net_amount"</span><span class="p">:</span><span class="w"> </span><span class="mi">900</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"platform_fee"</span><span class="p">:</span><span class="w"> </span><span class="mi">50</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"gateway_fee"</span><span class="p">:</span><span class="w"> </span><span class="mi">30</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"transaction_type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"PAID"</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"meta"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+    </span><span class="nl">"order_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"A123456"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"customer_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"C7890"</span><span class="w">
+  </span><span class="p">},</span><span class="w">
   </span><span class="nl">"purchase_date"</span><span class="p">:</span><span class="w"> </span><span class="mi">1626667557</span><span class="w">
 </span><span class="p">}</span><span class="w">
 
@@ -21039,13 +21084,16 @@ curl <span class="nt">-X</span> POST https://<span class="k">*</span>.modapi.io/
 <p>Example response</p>
 </blockquote>
 <div class="highlight"><pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
-  </span><span class="nl">"transaction_id"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
-  </span><span class="nl">"gross_amount"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
-  </span><span class="nl">"net_amount"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
-  </span><span class="nl">"platform_fee"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
-  </span><span class="nl">"gateway_fee"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
-  </span><span class="nl">"transaction_type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"string"</span><span class="p">,</span><span class="w">
-  </span><span class="nl">"meta"</span><span class="p">:</span><span class="w"> </span><span class="p">{},</span><span class="w">
+  </span><span class="nl">"transaction_id"</span><span class="p">:</span><span class="w"> </span><span class="mi">123456789</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"gross_amount"</span><span class="p">:</span><span class="w"> </span><span class="mi">1000</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"net_amount"</span><span class="p">:</span><span class="w"> </span><span class="mi">900</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"platform_fee"</span><span class="p">:</span><span class="w"> </span><span class="mi">50</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"gateway_fee"</span><span class="p">:</span><span class="w"> </span><span class="mi">30</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"transaction_type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"PAID"</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"meta"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+    </span><span class="nl">"order_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"A123456"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"customer_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"C7890"</span><span class="w">
+  </span><span class="p">},</span><span class="w">
   </span><span class="nl">"purchase_date"</span><span class="p">:</span><span class="w"> </span><span class="mi">1626667557</span><span class="w">
 </span><span class="p">}</span><span class="w">
 
@@ -21222,16 +21270,19 @@ curl <span class="nt">-X</span> POST https://<span class="k">*</span>.modapi.io/
 <p>Example response</p>
 </blockquote>
 <div class="highlight"><pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
-  </span><span class="nl">"transaction_id"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
-  </span><span class="nl">"gross_amount"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
-  </span><span class="nl">"net_amount"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
-  </span><span class="nl">"platform_fee"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
-  </span><span class="nl">"gateway_fee"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
-  </span><span class="nl">"tax"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
-  </span><span class="nl">"tax_type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"string"</span><span class="p">,</span><span class="w">
-  </span><span class="nl">"transaction_type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"string"</span><span class="p">,</span><span class="w">
-  </span><span class="nl">"meta"</span><span class="p">:</span><span class="w"> </span><span class="p">{},</span><span class="w">
-  </span><span class="nl">"purchase_date"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="w">
+  </span><span class="nl">"transaction_id"</span><span class="p">:</span><span class="w"> </span><span class="mi">987654321</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"gross_amount"</span><span class="p">:</span><span class="w"> </span><span class="mi">2500</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"net_amount"</span><span class="p">:</span><span class="w"> </span><span class="mi">2300</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"platform_fee"</span><span class="p">:</span><span class="w"> </span><span class="mi">100</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"gateway_fee"</span><span class="p">:</span><span class="w"> </span><span class="mi">50</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"tax"</span><span class="p">:</span><span class="w"> </span><span class="mi">150</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"tax_type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"GST"</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"transaction_type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"REFUNDED"</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"meta"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+    </span><span class="nl">"order_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"A123456"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"customer_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"C7890"</span><span class="w">
+  </span><span class="p">},</span><span class="w">
+  </span><span class="nl">"purchase_date"</span><span class="p">:</span><span class="w"> </span><span class="mi">1626667557</span><span class="w">
 </span><span class="p">}</span><span class="w">
 
 </span></code></pre></div>
@@ -23387,6 +23438,7 @@ To perform this request, you must be authenticated via one of the following meth
       </span><span class="nl">"name_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"getting-started"</span><span class="p">,</span><span class="w">
       </span><span class="nl">"summary"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Alright, so let's get started with modding on mod.io"</span><span class="p">,</span><span class="w">
       </span><span class="nl">"description"</span><span class="p">:</span><span class="w"> </span><span class="s2">"&lt;h1&gt;Getting Started&lt;/h2&gt;&lt;p&gt;Download this suspiciou...."</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"community_options"</span><span class="p">:</span><span class="w"> </span><span class="mi">2048</span><span class="p">,</span><span class="w">
       </span><span class="nl">"tags"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
         </span><span class="p">{</span><span class="w">
           </span><span class="nl">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Instructions"</span><span class="p">,</span><span class="w">
@@ -24544,6 +24596,7 @@ To perform this request, you must be authenticated via one of the following meth
   </span><span class="nl">"name_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"getting-started"</span><span class="p">,</span><span class="w">
   </span><span class="nl">"summary"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Alright, so let's get started with modding on mod.io"</span><span class="p">,</span><span class="w">
   </span><span class="nl">"description"</span><span class="p">:</span><span class="w"> </span><span class="s2">"&lt;h1&gt;Getting Started&lt;/h2&gt;&lt;p&gt;Download this suspiciou...."</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"community_options"</span><span class="p">:</span><span class="w"> </span><span class="mi">2048</span><span class="p">,</span><span class="w">
   </span><span class="nl">"tags"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
     </span><span class="p">{</span><span class="w">
       </span><span class="nl">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Instructions"</span><span class="p">,</span><span class="w">
@@ -24639,6 +24692,11 @@ To perform this request, you must be authenticated via one of the following meth
 <td>description</td>
 <td>string</td>
 <td>Detailed description of the guide (the contents) which allows HTML.</td>
+</tr>
+<tr>
+<td>community_options</td>
+<td>integer</td>
+<td>The bitwise community options that are applied to this guide, can be one of:<br><br><strong>0</strong> = Disabled<br><strong>2048</strong> = Allows Comments _(default)</td>
 </tr>
 <tr>
 <td>tags</td>
@@ -26334,16 +26392,19 @@ To perform this request, you must be authenticated via one of the following meth
 <h2 id="refund-object">Refund Object</h2>
 <p><a name="schemarefund_object"></a></p>
 <div class="highlight"><pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
-  </span><span class="nl">"transaction_id"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
-  </span><span class="nl">"gross_amount"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
-  </span><span class="nl">"net_amount"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
-  </span><span class="nl">"platform_fee"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
-  </span><span class="nl">"gateway_fee"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
-  </span><span class="nl">"tax"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
-  </span><span class="nl">"tax_type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"string"</span><span class="p">,</span><span class="w">
-  </span><span class="nl">"transaction_type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"string"</span><span class="p">,</span><span class="w">
-  </span><span class="nl">"meta"</span><span class="p">:</span><span class="w"> </span><span class="p">{},</span><span class="w">
-  </span><span class="nl">"purchase_date"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="w">
+  </span><span class="nl">"transaction_id"</span><span class="p">:</span><span class="w"> </span><span class="mi">987654321</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"gross_amount"</span><span class="p">:</span><span class="w"> </span><span class="mi">2500</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"net_amount"</span><span class="p">:</span><span class="w"> </span><span class="mi">2300</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"platform_fee"</span><span class="p">:</span><span class="w"> </span><span class="mi">100</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"gateway_fee"</span><span class="p">:</span><span class="w"> </span><span class="mi">50</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"tax"</span><span class="p">:</span><span class="w"> </span><span class="mi">150</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"tax_type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"GST"</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"transaction_type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"REFUNDED"</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"meta"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+    </span><span class="nl">"order_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"A123456"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"customer_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"C7890"</span><span class="w">
+  </span><span class="p">},</span><span class="w">
+  </span><span class="nl">"purchase_date"</span><span class="p">:</span><span class="w"> </span><span class="mi">1626667557</span><span class="w">
 </span><span class="p">}</span><span class="w"> 
 </span></code></pre></div><h3 id="properties-71">Properties</h3>
 <table>
@@ -26402,7 +26463,7 @@ To perform this request, you must be authenticated via one of the following meth
 </tr>
 <tr>
 <td>purchase_date</td>
-<td>timestamp</td>
+<td>integer</td>
 <td>The time of the purchase.</td>
 </tr>
 </tbody>
@@ -26410,13 +26471,16 @@ To perform this request, you must be authenticated via one of the following meth
 <h2 id="s2s-pay-object">S2S Pay Object</h2>
 <p><a name="schemas2s_pay_object"></a></p>
 <div class="highlight"><pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
-  </span><span class="nl">"transaction_id"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
-  </span><span class="nl">"gross_amount"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
-  </span><span class="nl">"net_amount"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
-  </span><span class="nl">"platform_fee"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
-  </span><span class="nl">"gateway_fee"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
-  </span><span class="nl">"transaction_type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"string"</span><span class="p">,</span><span class="w">
-  </span><span class="nl">"meta"</span><span class="p">:</span><span class="w"> </span><span class="p">{},</span><span class="w">
+  </span><span class="nl">"transaction_id"</span><span class="p">:</span><span class="w"> </span><span class="mi">123456789</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"gross_amount"</span><span class="p">:</span><span class="w"> </span><span class="mi">1000</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"net_amount"</span><span class="p">:</span><span class="w"> </span><span class="mi">900</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"platform_fee"</span><span class="p">:</span><span class="w"> </span><span class="mi">50</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"gateway_fee"</span><span class="p">:</span><span class="w"> </span><span class="mi">30</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"transaction_type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"PAID"</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"meta"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+    </span><span class="nl">"order_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"A123456"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"customer_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"C7890"</span><span class="w">
+  </span><span class="p">},</span><span class="w">
   </span><span class="nl">"purchase_date"</span><span class="p">:</span><span class="w"> </span><span class="mi">1626667557</span><span class="w">
 </span><span class="p">}</span><span class="w"> 
 </span></code></pre></div><h3 id="properties-72">Properties</h3>
