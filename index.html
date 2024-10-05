@@ -1830,8 +1830,6 @@ visible-st=1
 </ul>
 <h2 id="sorting">Sorting</h2>
 <p>All endpoints are sorted by the <code>id</code> column in ascending order by default (oldest first). You can override this by including a <code>_sort</code> with the column you want to sort by in the request. You can sort on all columns <strong>in the parent object only</strong>. You cannot sort on columns in nested objects, so if a game contains a tags object you cannot sort on the <code>tag name</code> column, but you can sort by the games <code>name</code> since the games <code>name</code> resides in the parent object.</p>
-
-<p><strong>NOTE:</strong> Some endpoints like <a href="#get-mods">Get Mods</a> have special sort columns like <code>popular</code>, <code>downloads</code>, <code>rating</code> and <code>subscribers</code> which are documented alongside the filters.</p>
 <h3 id="_sort-sort">_sort (Sort)</h3><div class="highlight"><pre class="highlight plaintext"><code>v1/games?_sort=name
 </code></pre></div>
 <p>Sort by a column, in ascending or descending order.</p>
@@ -5323,7 +5321,7 @@ Accept: application/json
 <tr>
 <td>community_options</td>
 <td>integer</td>
-<td>Community features enabled for this game:<br><br><strong>0</strong> = None<br><strong>1</strong> = Enable comments<br><strong>2</strong> = Enable guides<br><strong>4</strong> = Pin on homepage<br><strong>8</strong> = Show on homepage<br><strong>16</strong> = Show more on homepage<br><strong>32</strong> = Allow change status<br><strong>64</strong> = Enable Previews (Game must be hidden)<br><strong>128</strong> = Allow Preview Share-URL (Previews must be enabled)<br><strong>256</strong> = Allow negative ratings<br><strong>512</strong> = Allow mods to be edited via web<br><strong>?</strong> = Combine to find games with multiple options enabled (see <a href="#bitwise-and-bitwise-and">BITWISE fields</a>)</td>
+<td>Community features enabled for this game:<br><br><strong>0</strong> = None<br><strong>1</strong> = Allow comments on mods<br><strong>2</strong> = Allow guides<br><strong>4</strong> = Pin on homepage<br><strong>8</strong> = Show on homepage<br><strong>16</strong> = Show more on homepage<br><strong>32</strong> = Allow change status<br><strong>64</strong> = Enable Previews (Game must be hidden)<br><strong>128</strong> = Allow preview share-URL (Previews must be enabled)<br><strong>256</strong> = Allow negative ratings<br><strong>512</strong> = Allow mods to be edited via web<br><strong>1024</strong> = Allow mod dependencies<br><strong>2048</strong> = Allow comments on guides<br><strong>?</strong> = Combine to find games with multiple options enabled (see <a href="#bitwise-and-bitwise-and">BITWISE fields</a>)</td>
 </tr>
 <tr>
 <td>monetization_options</td>
@@ -5369,16 +5367,32 @@ Accept: application/json
 </thead>
 <tbody>
 <tr>
-<td>popular</td>
-<td>Sort results by popularity using <a href="#filtering">_sort filter</a>, value should be <code>popular</code> for descending or <code>-popular</code> for ascending results.<br><br><strong>NOTE:</strong> Popularity is calculated hourly and reset daily (results are ranked from 1 to X). You should sort this column in descending order <code>popular</code> to get the top ranked results.</td>
+<td>name</td>
+<td>Sort results alphabetically by name using the <a href="#sorting">_sort query parameter</a> <code>name</code>. For example <code>_sort=name</code> would return games from A-Z.</td>
 </tr>
 <tr>
-<td>downloads</td>
-<td>Sort results by total downloads using <a href="#filtering">_sort filter</a>, value should be <code>downloads</code> for descending or <code>-downloads</code> for ascending results.<br><br><strong>NOTE:</strong> You should sort this column in descending order <code>downloads</code> to get the top ranked results. This filter differs from popular by filtering on the amount of downloads the game has received overall, and not just in the last 24 hours.</td>
+<td>date_live</td>
+<td>Sort results by the date they went live using the <a href="#sorting">_sort query parameter</a> <code>date_live</code>. For example <code>_sort=-date_date</code> would return the most recently live games.</td>
 </tr>
 <tr>
-<td>mods</td>
-<td>Sort results by total mod count using <a href="#filtering">_sort filter</a>, value should be <code>mods</code> for descending or <code>-mods</code> for ascending results.</td>
+<td>date_updated</td>
+<td>Sort results by the date they were last updated using the <a href="#sorting">_sort query parameter</a> <code>date_updated</code>. For example <code>_sort=-date_updated</code> would return the most recently updated games.</td>
+</tr>
+<tr>
+<td>downloads_today</td>
+<td>Sort results by the number of mod downloads in the last 24hours using the <a href="#sorting">_sort query parameter</a> <code>downloads_today</code>. For example <code>_sort=-downloads_today</code> would return the most popular games from the last 24hours based on the number of mod downloads.</td>
+</tr>
+<tr>
+<td>downloads_total</td>
+<td>Sort results by the total number of mod downloads using the <a href="#sorting">_sort query parameter</a> <code>downloads_total</code>. For example <code>_sort=-downloads_total</code> would return the most popular games based on the number of mod downloads.</td>
+</tr>
+<tr>
+<td>subscribers_total</td>
+<td>Sort results by the total number of mod subscribers using the <a href="#sorting">_sort query parameter</a> <code>subscribers_total</code>. For example <code>_sort=-subscribers_total</code> would return the most popular games based on number of mod subscribers.</td>
+</tr>
+<tr>
+<td>mods_count_total</td>
+<td>Sort results by the number of mods using the <a href="#sorting">_sort query parameter</a> <code>mods_count_total</code>. For example <code>_sort=-mods_count_total</code> would return the games with the most number of mods submitted.</td>
 </tr>
 </tbody>
 </table>
@@ -5886,12 +5900,32 @@ Accept: application/json
 </thead>
 <tbody>
 <tr>
-<td>popular</td>
-<td>Sort results by popularity using <a href="#filtering">_sort filter</a>, value should be <code>popular</code> for descending or <code>-popular</code> for ascending results.<br><br><strong>NOTE:</strong> Popularity is calculated hourly and reset daily (results are ranked from 1 to X). You should sort this column in ascending order <code>-popular</code> to get the top ranked results.</td>
+<td>name</td>
+<td>Sort results alphabetically by name using the <a href="#sorting">_sort query parameter</a> <code>name</code>. For example <code>_sort=name</code> would return guides from A-Z.</td>
 </tr>
 <tr>
-<td>popular_overall</td>
-<td>Sort results by 'Popular Overall' using <a href="#filtering">_sort filter</a>, value should be <code>popular_overall</code> for descending or <code>-popular_overall</code> for ascending results.<br><br><strong>NOTE:</strong> You should sort this column in ascending order <code>-popular_overall</code> to get the top ranked results. This filter differs from popular by filtering on the amount of visits it has received overall, and not just in the last 24 hours.</td>
+<td>date_live</td>
+<td>Sort results by the date they went live using the <a href="#sorting">_sort query parameter</a> <code>date_live</code>. For example <code>_sort=-date_date</code> would return the most recently live guides.</td>
+</tr>
+<tr>
+<td>date_updated</td>
+<td>Sort results by the date they were last updated using the <a href="#sorting">_sort query parameter</a> <code>date_updated</code>. For example <code>_sort=-date_updated</code> would return the most recently updated guides.</td>
+</tr>
+<tr>
+<td>submitted_by</td>
+<td>Sort results by the authors ID using the <a href="#sorting">_sort query parameter</a> <code>submitted_by</code>. For example <code>_sort=submitted_by</code> would return guides from authors who have been registered the longest.</td>
+</tr>
+<tr>
+<td>visits_today</td>
+<td>Sort results by the number of visits in the last 24hours using the <a href="#sorting">_sort query parameter</a> <code>visits_today</code>. For example <code>_sort=-visits_today</code> would return the most popular guides from the last 24hours based on the number of visits.</td>
+</tr>
+<tr>
+<td>visits_total</td>
+<td>Sort results by the total number of visits using the <a href="#sorting">_sort query parameter</a> <code>visits_total</code>. For example <code>_sort=-visits_total</code> would return the most popular guides based on the number of visits.</td>
+</tr>
+<tr>
+<td>comments_total</td>
+<td>Sort results by the total number of comments using the <a href="#sorting">_sort query parameter</a> <code>comments_total</code>. For example <code>_sort=-comments_total</code> would return the guides with the most comments.</td>
 </tr>
 </tbody>
 </table>
@@ -5949,6 +5983,7 @@ Accept: application/json
       </span><span class="nl">"stats"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
         </span><span class="p">{</span><span class="w">
           </span><span class="nl">"guide_id"</span><span class="p">:</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span><span class="w">
+          </span><span class="nl">"visits_today"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
           </span><span class="nl">"visits_total"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
           </span><span class="nl">"comments_total"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="w">
         </span><span class="p">}</span><span class="w">
@@ -6116,6 +6151,7 @@ Accept: application/json
   </span><span class="nl">"stats"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
     </span><span class="p">{</span><span class="w">
       </span><span class="nl">"guide_id"</span><span class="p">:</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"visits_today"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
       </span><span class="nl">"visits_total"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
       </span><span class="nl">"comments_total"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="w">
     </span><span class="p">}</span><span class="w">
@@ -6370,6 +6406,7 @@ curl <span class="nt">-X</span> POST https://<span class="k">*</span>.modapi.io/
   </span><span class="nl">"stats"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
     </span><span class="p">{</span><span class="w">
       </span><span class="nl">"guide_id"</span><span class="p">:</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"visits_today"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
       </span><span class="nl">"visits_total"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
       </span><span class="nl">"comments_total"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="w">
     </span><span class="p">}</span><span class="w">
@@ -6627,6 +6664,7 @@ curl <span class="nt">-X</span> POST https://<span class="k">*</span>.modapi.io/
   </span><span class="nl">"stats"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
     </span><span class="p">{</span><span class="w">
       </span><span class="nl">"guide_id"</span><span class="p">:</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"visits_today"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
       </span><span class="nl">"visits_total"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
       </span><span class="nl">"comments_total"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="w">
     </span><span class="p">}</span><span class="w">
@@ -7127,20 +7165,36 @@ Accept: application/json
 </thead>
 <tbody>
 <tr>
-<td>downloads</td>
-<td>Sort results by most downloads using <a href="#filtering">_sort filter</a> parameter, value should be <code>downloads</code> for descending or <code>-downloads</code> for ascending results.</td>
+<td>name</td>
+<td>Sort results alphabetically by name using the <a href="#sorting">_sort query parameter</a> <code>name</code>. For example <code>_sort=name</code> would return mods from A-Z.</td>
 </tr>
 <tr>
-<td>popular</td>
-<td>Sort results by popularity using <a href="#filtering">_sort filter</a>, value should be <code>popular</code> for descending or <code>-popular</code> for ascending results.<br><br><strong>NOTE:</strong> Popularity is calculated hourly and reset daily (results are ranked from 1 to X). You should sort this column in ascending order <code>-popular</code> to get the top ranked results.</td>
+<td>date_live</td>
+<td>Sort results by the date they went live using the <a href="#sorting">_sort query parameter</a> <code>date_live</code>. For example <code>_sort=-date_date</code> would return the most recently live mods.</td>
 </tr>
 <tr>
-<td>rating</td>
-<td>Sort results by weighted rating using <a href="#filtering">_sort filter</a>, value should be <code>rating</code> for descending or <code>-rating</code> for ascending results.</td>
+<td>date_updated</td>
+<td>Sort results by the date they were last updated using the <a href="#sorting">_sort query parameter</a> <code>date_updated</code>. For example <code>_sort=-date_updated</code> would return the most recently updated mods.</td>
 </tr>
 <tr>
-<td>subscribers</td>
-<td>Sort results by most subscribers using <a href="#filtering">_sort filter</a>, value should be <code>subscribers</code> for descending or <code>-subscribers</code> for ascending results.</td>
+<td>submitted_by</td>
+<td>Sort results by the creators ID using the <a href="#sorting">_sort query parameter</a> <code>submitted_by</code>. For example <code>_sort=submitted_by</code> would return mods from creators who have been registered the longest.</td>
+</tr>
+<tr>
+<td>downloads_today</td>
+<td>Sort results by the number of downloads in the last 24hours using the <a href="#sorting">_sort query parameter</a> <code>downloads_today</code>. For example <code>_sort=-downloads_today</code> would return the most popular mods from the last 24hours based on the number of mod downloads.</td>
+</tr>
+<tr>
+<td>downloads_total</td>
+<td>Sort results by the total number of downloads using the <a href="#sorting">_sort query parameter</a> <code>downloads_total</code>. For example <code>_sort=-downloads_total</code> would return the most popular mods based on the number of downloads.</td>
+</tr>
+<tr>
+<td>subscribers_total</td>
+<td>Sort results by the total number of subscribers using the <a href="#sorting">_sort query parameter</a> <code>subscribers_total</code>. For example <code>_sort=-subscribers_total</code> would return the most popular mods based on number of subscribers.</td>
+</tr>
+<tr>
+<td>ratings_weighted_aggregate</td>
+<td>Sort results by their calculated rating (thumbs up / down received) using the <a href="#sorting">_sort query parameter</a> <code>ratings_weighted_aggregate</code>. For example <code>_sort=-ratings_weighted_aggregate</code> would return the highest rated mods.</td>
 </tr>
 </tbody>
 </table>
@@ -15700,7 +15754,8 @@ curl <span class="nt">-X</span> POST https://<span class="k">*</span>.modapi.io/
   <span class="nt">-H</span> <span class="s1">'Authorization: Bearer {access-token}'</span> <span class="se">\ </span>
   <span class="nt">-H</span> <span class="s1">'Content-Type: application/x-www-form-urlencoded'</span> <span class="se">\ </span>
   <span class="nt">-H</span> <span class="s1">'Accept: application/json'</span> <span class="se">\</span>
-  <span class="nt">-d</span> <span class="s1">'dependencies[]=284'</span>
+  <span class="nt">-d</span> <span class="s1">'dependencies[]=284'</span> <span class="se">\</span>
+  <span class="nt">-d</span> <span class="s1">'sync=false'</span>
 
 </code></pre></div><div class="highlight"><pre class="highlight http tab-http"><code><span class="nf">POST</span> <span class="nn">https://*.modapi.io/v1/games/{game-id}/mods/{mod-id}/dependencies</span> <span class="k">HTTP</span><span class="o">/</span><span class="m">1.1</span>
 <span class="na">Host</span><span class="p">:</span> <span class="s">*.modapi.io</span>
@@ -15726,7 +15781,8 @@ curl <span class="nt">-X</span> POST https://<span class="k">*</span>.modapi.io/
 <span class="p">})</span>
 </code></pre></div><div class="highlight"><pre class="highlight javascript tab-javascript--nodejs"><code><span class="kd">const</span> <span class="nx">request</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="dl">'</span><span class="s1">node-fetch</span><span class="dl">'</span><span class="p">);</span>
 <span class="kd">const</span> <span class="nx">inputBody</span> <span class="o">=</span> <span class="dl">'</span><span class="s1">{
-  "dependencies": "284"
+  "dependencies": "284",
+  "sync": "false"
 }</span><span class="dl">'</span><span class="p">;</span>
 <span class="kd">const</span> <span class="nx">headers</span> <span class="o">=</span> <span class="p">{</span>
   <span class="dl">'</span><span class="s1">Authorization</span><span class="dl">'</span><span class="p">:</span><span class="dl">'</span><span class="s1">Bearer {access-token}</span><span class="dl">'</span><span class="p">,</span>
@@ -15800,7 +15856,7 @@ curl <span class="nt">-X</span> POST https://<span class="k">*</span>.modapi.io/
 </blockquote>
 <div class="highlight"><pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
   </span><span class="nl">"code"</span><span class="p">:</span><span class="w"> </span><span class="mi">201</span><span class="p">,</span><span class="w">
-  </span><span class="nl">"message"</span><span class="p">:</span><span class="w"> </span><span class="s2">"You have successfully added new dependencies to the specified mod."</span><span class="w">
+  </span><span class="nl">"message"</span><span class="p">:</span><span class="w"> </span><span class="s2">"You have successfully updated the dependencies for the specified mod."</span><span class="w">
 </span><span class="p">}</span><span class="w">
 
 </span></code></pre></div>
@@ -17801,7 +17857,7 @@ Authorization: Bearer {access-token}
 <tr>
 <td>community_options</td>
 <td>integer</td>
-<td>Community features enabled for this game:<br><br><strong>0</strong> = None<br><strong>1</strong> = Enable comments<br><strong>2</strong> = Enable guides<br><strong>4</strong> = Pin on homepage<br><strong>8</strong> = Show on homepage<br><strong>16</strong> = Show more on homepage<br><strong>32</strong> = Allow change status<br><strong>64</strong> = Enable Previews (Game must be hidden)<br><strong>128</strong> = Allow Preview Share-URL (Previews must be enabled)<br><strong>256</strong> = Allow negative ratings<br><strong>512</strong> = Allow mods to be edited via web<br><strong>?</strong> = Combine to find games with multiple options enabled (see <a href="#bitwise-and-bitwise-and">BITWISE fields</a>)</td>
+<td>Community features enabled for this game:<br><br><strong>0</strong> = None<br><strong>1</strong> = Allow comments on mods<br><strong>2</strong> = Allow guides<br><strong>4</strong> = Pin on homepage<br><strong>8</strong> = Show on homepage<br><strong>16</strong> = Show more on homepage<br><strong>32</strong> = Allow change status<br><strong>64</strong> = Enable Previews (Game must be hidden)<br><strong>128</strong> = Allow preview share-URL (Previews must be enabled)<br><strong>256</strong> = Allow negative ratings<br><strong>512</strong> = Allow mods to be edited via web<br><strong>1024</strong> = Allow mod dependencies<br><strong>2048</strong> = Allow comments on guides<br><strong>?</strong> = Combine to find games with multiple options enabled (see <a href="#bitwise-and-bitwise-and">BITWISE fields</a>)</td>
 </tr>
 <tr>
 <td>monetization_options</td>
@@ -17847,16 +17903,32 @@ Authorization: Bearer {access-token}
 </thead>
 <tbody>
 <tr>
-<td>popular</td>
-<td>Sort results by popularity using <a href="#filtering">_sort filter</a>, value should be <code>popular</code> for descending or <code>-popular</code> for ascending results.<br><br><strong>NOTE:</strong> Popularity is calculated hourly and reset daily (results are ranked from 1 to X). You should sort this column in descending order <code>popular</code> to get the top ranked results.</td>
+<td>name</td>
+<td>Sort results alphabetically by name using the <a href="#sorting">_sort query parameter</a> <code>name</code>. For example <code>_sort=name</code> would return games from A-Z.</td>
 </tr>
 <tr>
-<td>downloads</td>
-<td>Sort results by total downloads using <a href="#filtering">_sort filter</a>, value should be <code>downloads</code> for descending or <code>-downloads</code> for ascending results.<br><br><strong>NOTE:</strong> You should sort this column in descending order <code>downloads</code> to get the top ranked results. This filter differs from popular by filtering on the amount of downloads the game has received overall, and not just in the last 24 hours.</td>
+<td>date_live</td>
+<td>Sort results by the date they went live using the <a href="#sorting">_sort query parameter</a> <code>date_live</code>. For example <code>_sort=-date_date</code> would return the most recently live games.</td>
 </tr>
 <tr>
-<td>mods</td>
-<td>Sort results by total mod count using <a href="#filtering">_sort filter</a>, value should be <code>mods</code> for descending or <code>-mods</code> for ascending results.</td>
+<td>date_updated</td>
+<td>Sort results by the date they were last updated using the <a href="#sorting">_sort query parameter</a> <code>date_updated</code>. For example <code>_sort=-date_updated</code> would return the most recently updated games.</td>
+</tr>
+<tr>
+<td>downloads_today</td>
+<td>Sort results by the number of mod downloads in the last 24hours using the <a href="#sorting">_sort query parameter</a> <code>downloads_today</code>. For example <code>_sort=-downloads_today</code> would return the most popular games from the last 24hours based on the number of mod downloads.</td>
+</tr>
+<tr>
+<td>downloads_total</td>
+<td>Sort results by the total number of mod downloads using the <a href="#sorting">_sort query parameter</a> <code>downloads_total</code>. For example <code>_sort=-downloads_total</code> would return the most popular games based on the number of mod downloads.</td>
+</tr>
+<tr>
+<td>subscribers_total</td>
+<td>Sort results by the total number of mod subscribers using the <a href="#sorting">_sort query parameter</a> <code>subscribers_total</code>. For example <code>_sort=-subscribers_total</code> would return the most popular games based on number of mod subscribers.</td>
+</tr>
+<tr>
+<td>mods_count_total</td>
+<td>Sort results by the number of mods using the <a href="#sorting">_sort query parameter</a> <code>mods_count_total</code>. For example <code>_sort=-mods_count_total</code> would return the games with the most number of mods submitted.</td>
 </tr>
 </tbody>
 </table>
@@ -18186,20 +18258,36 @@ Authorization: Bearer {access-token}
 </thead>
 <tbody>
 <tr>
-<td>downloads</td>
-<td>Sort results by most downloads using <a href="#filtering">_sort filter</a> parameter, value should be <code>downloads</code> for descending or <code>-downloads</code> for ascending results.</td>
+<td>name</td>
+<td>Sort results alphabetically by name using the <a href="#sorting">_sort query parameter</a> <code>name</code>. For example <code>_sort=name</code> would return mods from A-Z.</td>
 </tr>
 <tr>
-<td>popular</td>
-<td>Sort results by popularity using <a href="#filtering">_sort filter</a>, value should be <code>popular</code> for descending or <code>-popular</code> for ascending results.<br><br><strong>NOTE:</strong> Popularity is calculated hourly and reset daily (results are ranked from 1 to X). You should sort this column in ascending order <code>-popular</code> to get the top ranked results.</td>
+<td>date_live</td>
+<td>Sort results by the date they went live using the <a href="#sorting">_sort query parameter</a> <code>date_live</code>. For example <code>_sort=-date_date</code> would return the most recently live mods.</td>
 </tr>
 <tr>
-<td>rating</td>
-<td>Sort results by weighted rating using <a href="#filtering">_sort filter</a>, value should be <code>rating</code> for descending or <code>-rating</code> for ascending results.</td>
+<td>date_updated</td>
+<td>Sort results by the date they were last updated using the <a href="#sorting">_sort query parameter</a> <code>date_updated</code>. For example <code>_sort=-date_updated</code> would return the most recently updated mods.</td>
 </tr>
 <tr>
-<td>subscribers</td>
-<td>Sort results by most subscribers using <a href="#filtering">_sort filter</a>, value should be <code>subscribers</code> for descending or <code>-subscribers</code> for ascending results.</td>
+<td>submitted_by</td>
+<td>Sort results by the creators ID using the <a href="#sorting">_sort query parameter</a> <code>submitted_by</code>. For example <code>_sort=submitted_by</code> would return mods from creators who have been registered the longest.</td>
+</tr>
+<tr>
+<td>downloads_today</td>
+<td>Sort results by the number of downloads in the last 24hours using the <a href="#sorting">_sort query parameter</a> <code>downloads_today</code>. For example <code>_sort=-downloads_today</code> would return the most popular mods from the last 24hours based on the number of mod downloads.</td>
+</tr>
+<tr>
+<td>downloads_total</td>
+<td>Sort results by the total number of downloads using the <a href="#sorting">_sort query parameter</a> <code>downloads_total</code>. For example <code>_sort=-downloads_total</code> would return the most popular mods based on the number of downloads.</td>
+</tr>
+<tr>
+<td>subscribers_total</td>
+<td>Sort results by the total number of subscribers using the <a href="#sorting">_sort query parameter</a> <code>subscribers_total</code>. For example <code>_sort=-subscribers_total</code> would return the most popular mods based on number of subscribers.</td>
+</tr>
+<tr>
+<td>ratings_weighted_aggregate</td>
+<td>Sort results by their calculated rating (thumbs up / down received) using the <a href="#sorting">_sort query parameter</a> <code>ratings_weighted_aggregate</code>. For example <code>_sort=-ratings_weighted_aggregate</code> would return the highest rated mods.</td>
 </tr>
 </tbody>
 </table>
@@ -18565,20 +18653,36 @@ Authorization: Bearer {access-token}
 </thead>
 <tbody>
 <tr>
-<td>downloads</td>
-<td>Sort results by most downloads using <a href="#filtering">_sort filter</a> parameter, value should be <code>downloads</code> for descending or <code>-downloads</code> for ascending results.</td>
+<td>name</td>
+<td>Sort results alphabetically by name using the <a href="#sorting">_sort query parameter</a> <code>name</code>. For example <code>_sort=name</code> would return mods from A-Z.</td>
 </tr>
 <tr>
-<td>popular</td>
-<td>Sort results by popularity using <a href="#filtering">_sort filter</a>, value should be <code>popular</code> for descending or <code>-popular</code> for ascending results.<br><br><strong>NOTE:</strong> Popularity is calculated hourly and reset daily (results are ranked from 1 to X). You should sort this column in ascending order <code>-popular</code> to get the top ranked results.</td>
+<td>date_live</td>
+<td>Sort results by the date they went live using the <a href="#sorting">_sort query parameter</a> <code>date_live</code>. For example <code>_sort=-date_date</code> would return the most recently live mods.</td>
 </tr>
 <tr>
-<td>rating</td>
-<td>Sort results by weighted rating using <a href="#filtering">_sort filter</a>, value should be <code>rating</code> for descending or <code>-rating</code> for ascending results.</td>
+<td>date_updated</td>
+<td>Sort results by the date they were last updated using the <a href="#sorting">_sort query parameter</a> <code>date_updated</code>. For example <code>_sort=-date_updated</code> would return the most recently updated mods.</td>
 </tr>
 <tr>
-<td>subscribers</td>
-<td>Sort results by most subscribers using <a href="#filtering">_sort filter</a>, value should be <code>subscribers</code> for descending or <code>-subscribers</code> for ascending results.</td>
+<td>submitted_by</td>
+<td>Sort results by the creators ID using the <a href="#sorting">_sort query parameter</a> <code>submitted_by</code>. For example <code>_sort=submitted_by</code> would return mods from creators who have been registered the longest.</td>
+</tr>
+<tr>
+<td>downloads_today</td>
+<td>Sort results by the number of downloads in the last 24hours using the <a href="#sorting">_sort query parameter</a> <code>downloads_today</code>. For example <code>_sort=-downloads_today</code> would return the most popular mods from the last 24hours based on the number of mod downloads.</td>
+</tr>
+<tr>
+<td>downloads_total</td>
+<td>Sort results by the total number of downloads using the <a href="#sorting">_sort query parameter</a> <code>downloads_total</code>. For example <code>_sort=-downloads_total</code> would return the most popular mods based on the number of downloads.</td>
+</tr>
+<tr>
+<td>subscribers_total</td>
+<td>Sort results by the total number of subscribers using the <a href="#sorting">_sort query parameter</a> <code>subscribers_total</code>. For example <code>_sort=-subscribers_total</code> would return the most popular mods based on number of subscribers.</td>
+</tr>
+<tr>
+<td>ratings_weighted_aggregate</td>
+<td>Sort results by their calculated rating (thumbs up / down received) using the <a href="#sorting">_sort query parameter</a> <code>ratings_weighted_aggregate</code>. For example <code>_sort=-ratings_weighted_aggregate</code> would return the highest rated mods.</td>
 </tr>
 </tbody>
 </table>
@@ -18939,20 +19043,36 @@ Accept: application/json
 </thead>
 <tbody>
 <tr>
-<td>downloads</td>
-<td>Sort results by most downloads using <a href="#filtering">_sort filter</a> parameter, value should be <code>downloads</code> for descending or <code>-downloads</code> for ascending results.</td>
+<td>name</td>
+<td>Sort results alphabetically by name using the <a href="#sorting">_sort query parameter</a> <code>name</code>. For example <code>_sort=name</code> would return mods from A-Z.</td>
 </tr>
 <tr>
-<td>popular</td>
-<td>Sort results by popularity using <a href="#filtering">_sort filter</a>, value should be <code>popular</code> for descending or <code>-popular</code> for ascending results.<br><br><strong>NOTE:</strong> Popularity is calculated hourly and reset daily (results are ranked from 1 to X). You should sort this column in ascending order <code>-popular</code> to get the top ranked results.</td>
+<td>date_live</td>
+<td>Sort results by the date they went live using the <a href="#sorting">_sort query parameter</a> <code>date_live</code>. For example <code>_sort=-date_date</code> would return the most recently live mods.</td>
 </tr>
 <tr>
-<td>rating</td>
-<td>Sort results by weighted rating using <a href="#filtering">_sort filter</a>, value should be <code>rating</code> for descending or <code>-rating</code> for ascending results.</td>
+<td>date_updated</td>
+<td>Sort results by the date they were last updated using the <a href="#sorting">_sort query parameter</a> <code>date_updated</code>. For example <code>_sort=-date_updated</code> would return the most recently updated mods.</td>
 </tr>
 <tr>
-<td>subscribers</td>
-<td>Sort results by most subscribers using <a href="#filtering">_sort filter</a>, value should be <code>subscribers</code> for descending or <code>-subscribers</code> for ascending results.</td>
+<td>submitted_by</td>
+<td>Sort results by the creators ID using the <a href="#sorting">_sort query parameter</a> <code>submitted_by</code>. For example <code>_sort=submitted_by</code> would return mods from creators who have been registered the longest.</td>
+</tr>
+<tr>
+<td>downloads_today</td>
+<td>Sort results by the number of downloads in the last 24hours using the <a href="#sorting">_sort query parameter</a> <code>downloads_today</code>. For example <code>_sort=-downloads_today</code> would return the most popular mods from the last 24hours based on the number of mod downloads.</td>
+</tr>
+<tr>
+<td>downloads_total</td>
+<td>Sort results by the total number of downloads using the <a href="#sorting">_sort query parameter</a> <code>downloads_total</code>. For example <code>_sort=-downloads_total</code> would return the most popular mods based on the number of downloads.</td>
+</tr>
+<tr>
+<td>subscribers_total</td>
+<td>Sort results by the total number of subscribers using the <a href="#sorting">_sort query parameter</a> <code>subscribers_total</code>. For example <code>_sort=-subscribers_total</code> would return the most popular mods based on number of subscribers.</td>
+</tr>
+<tr>
+<td>ratings_weighted_aggregate</td>
+<td>Sort results by their calculated rating (thumbs up / down received) using the <a href="#sorting">_sort query parameter</a> <code>ratings_weighted_aggregate</code>. For example <code>_sort=-ratings_weighted_aggregate</code> would return the highest rated mods.</td>
 </tr>
 </tbody>
 </table>
@@ -19535,6 +19655,7 @@ Authorization: Bearer {access-token}
   </span><span class="nl">"game_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"string"</span><span class="p">,</span><span class="w">
   </span><span class="nl">"currency"</span><span class="p">:</span><span class="w"> </span><span class="s2">"string"</span><span class="p">,</span><span class="w">
   </span><span class="nl">"balance"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"pending_balance"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
   </span><span class="nl">"deficit"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
   </span><span class="nl">"monetization_status"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="w">
 </span><span class="p">}</span><span class="w">
@@ -22169,7 +22290,7 @@ To perform this request, you must be authenticated via one of the following meth
 <tr>
 <td>community_options</td>
 <td>integer</td>
-<td>Community features enabled for this game:<br><br><strong>0</strong> = All of the options below are disabled<br><strong>1</strong> = Enable comments<br><strong>2</strong> = Enable guides<br><strong>4</strong> = Pin on homepage<br><strong>8</strong> = Show on homepage<br><strong>16</strong> = Show more on homepage<br><strong>32</strong> = Allow change status<br><strong>64</strong> = Enable Previews (Game must be hidden)<br><strong>128</strong> = Allow Preview Share-URL (Previews must be enabled)<br><strong>256</strong> = Allow negative ratings<br><strong>512</strong> = Allow mods to be edited via web<br><strong>?</strong> = Add the options you want together, to enable multiple features (see <a href="#bitwise-and-bitwise-and">BITWISE fields</a>)</td>
+<td>Community features enabled for this game:<br><br><strong>0</strong> = All of the options below are disabled<br><strong>1</strong> = Allow comments on mods<br><strong>2</strong> = Allow guides<br><strong>4</strong> = Pin on homepage<br><strong>8</strong> = Show on homepage<br><strong>16</strong> = Show more on homepage<br><strong>32</strong> = Allow change status<br><strong>64</strong> = Enable Previews (Game must be hidden)<br><strong>128</strong> = Allow preview share-URL (Previews must be enabled)<br><strong>256</strong> = Allow negative ratings<br><strong>512</strong> = Allow mods to be edited via web<br><strong>1024</strong> = Allow mod dependencies<br><strong>2048</strong> = Allow comments on guides<br><strong>?</strong> = Add the options you want together, to enable multiple features (see <a href="#bitwise-and-bitwise-and">BITWISE fields</a>)</td>
 </tr>
 <tr>
 <td>ugc_name</td>
@@ -22389,7 +22510,7 @@ To perform this request, you must be authenticated via one of the following meth
 <tr>
 <td>community_options</td>
 <td>integer</td>
-<td>Community features enabled for this game:<br><br><strong>0</strong> = All of the options below are disabled<br><strong>1</strong> = Enable comments<br><strong>2</strong> = Enable guides<br><strong>4</strong> = Pin on homepage<br><strong>8</strong> = Show on homepage<br><strong>16</strong> = Show more on homepage<br><strong>32</strong> = Allow change status<br><strong>64</strong> = Enable Previews (Game must be hidden)<br><strong>128</strong> = Allow Preview Share-URL (Previews must be enabled)<br><strong>256</strong> = Allow negative ratings<br><strong>512</strong> = Allow mods to be edited via web<br><strong>?</strong> = Add the options you want together, to enable multiple features (see <a href="#bitwise-and-bitwise-and">BITWISE fields</a>)</td>
+<td>Community features enabled for this game:<br><br><strong>0</strong> = All of the options below are disabled<br><strong>1</strong> = Allow comments on mods<br><strong>2</strong> = Allow guides<br><strong>4</strong> = Pin on homepage<br><strong>8</strong> = Show on homepage<br><strong>16</strong> = Show more on homepage<br><strong>32</strong> = Allow change status<br><strong>64</strong> = Enable Previews (Game must be hidden)<br><strong>128</strong> = Allow preview share-URL (Previews must be enabled)<br><strong>256</strong> = Allow negative ratings<br><strong>512</strong> = Allow mods to be edited via web<br><strong>1024</strong> = Allow mod dependencies<br><strong>2048</strong> = Allow comments on guides<br><strong>?</strong> = Add the options you want together, to enable multiple features (see <a href="#bitwise-and-bitwise-and">BITWISE fields</a>)</td>
 </tr>
 <tr>
 <td>monetization_options</td>
@@ -22609,12 +22730,12 @@ To perform this request, you must be authenticated via one of the following meth
 <tr>
 <td>mods_downloads_today</td>
 <td>integer</td>
-<td>Mods downloaded today for the game.</td>
+<td>Last 24hours of mod downloads for the game.</td>
 </tr>
 <tr>
 <td>mods_downloads_total</td>
 <td>integer</td>
-<td>Total Mods downloaded for the game.</td>
+<td>Total mods downloaded for the game.</td>
 </tr>
 <tr>
 <td>mods_downloads_daily_average</td>
@@ -22624,7 +22745,7 @@ To perform this request, you must be authenticated via one of the following meth
 <tr>
 <td>mods_subscribers_total</td>
 <td>integer</td>
-<td>Number of total users who have subscribed to the mods for the game.</td>
+<td>Total users who have subscribed to the mods for the game.</td>
 </tr>
 <tr>
 <td>date_expires</td>
@@ -23449,6 +23570,7 @@ To perform this request, you must be authenticated via one of the following meth
       </span><span class="nl">"stats"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
         </span><span class="p">{</span><span class="w">
           </span><span class="nl">"guide_id"</span><span class="p">:</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span><span class="w">
+          </span><span class="nl">"visits_today"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
           </span><span class="nl">"visits_total"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
           </span><span class="nl">"comments_total"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="w">
         </span><span class="p">}</span><span class="w">
@@ -24607,6 +24729,7 @@ To perform this request, you must be authenticated via one of the following meth
   </span><span class="nl">"stats"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
     </span><span class="p">{</span><span class="w">
       </span><span class="nl">"guide_id"</span><span class="p">:</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"visits_today"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
       </span><span class="nl">"visits_total"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
       </span><span class="nl">"comments_total"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="w">
     </span><span class="p">}</span><span class="w">
@@ -24716,6 +24839,7 @@ To perform this request, you must be authenticated via one of the following meth
 <p><a name="schemaguide_stats_object"></a></p>
 <div class="highlight"><pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
   </span><span class="nl">"guide_id"</span><span class="p">:</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"visits_today"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
   </span><span class="nl">"visits_total"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
   </span><span class="nl">"comments_total"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="w">
 </span><span class="p">}</span><span class="w"> 
@@ -24733,6 +24857,11 @@ To perform this request, you must be authenticated via one of the following meth
 <td>guide_id</td>
 <td>integer</td>
 <td>Unique guide id.</td>
+</tr>
+<tr>
+<td>visits_today</td>
+<td>integer</td>
+<td>Last 24hours of visits for this guide</td>
 </tr>
 <tr>
 <td>visits_total</td>
@@ -25577,22 +25706,22 @@ To perform this request, you must be authenticated via one of the following meth
 <tr>
 <td>downloads_today</td>
 <td>integer</td>
-<td>Number of total mod downloads. Count resets around 11:00 UTC+11 daily.</td>
+<td>Last 24hours of downloads for the mod.</td>
 </tr>
 <tr>
 <td>downloads_total</td>
 <td>integer</td>
-<td>Number of total mod downloads.</td>
+<td>Total downloads for the mod.</td>
 </tr>
 <tr>
 <td>subscribers_total</td>
 <td>integer</td>
-<td>Number of total users who have subscribed to the mod.</td>
+<td>Total users who have subscribed to the mod.</td>
 </tr>
 <tr>
 <td>ratings_total</td>
 <td>integer</td>
-<td>Number of times this mod has been rated.</td>
+<td>Total times the mod has been rated.</td>
 </tr>
 <tr>
 <td>ratings_positive</td>
@@ -27124,6 +27253,7 @@ To perform this request, you must be authenticated via one of the following meth
   </span><span class="nl">"game_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"string"</span><span class="p">,</span><span class="w">
   </span><span class="nl">"currency"</span><span class="p">:</span><span class="w"> </span><span class="s2">"string"</span><span class="p">,</span><span class="w">
   </span><span class="nl">"balance"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"pending_balance"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
   </span><span class="nl">"deficit"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
   </span><span class="nl">"monetization_status"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="w">
 </span><span class="p">}</span><span class="w"> 
@@ -27161,6 +27291,11 @@ To perform this request, you must be authenticated via one of the following meth
 <td>balance</td>
 <td>integer</td>
 <td>The balance of the wallet.</td>
+</tr>
+<tr>
+<td>pending_balance</td>
+<td>integer</td>
+<td>The pending funds of the wallet that are not availble to be spent.</td>
 </tr>
 <tr>
 <td>deficit</td>
