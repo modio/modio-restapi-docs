@@ -484,8 +484,6 @@ If the `result_count` parameter matches the `result_limit` parameter (5 in this 
 
 All endpoints are sorted by the `id` column in ascending order by default (oldest first). You can override this by including a `_sort` with the column you want to sort by in the request. You can sort on all columns __in the parent object only__. You cannot sort on columns in nested objects, so if a game contains a tags object you cannot sort on the `tag name` column, but you can sort by the games `name` since the games `name` resides in the parent object.
 
-__NOTE:__ Some endpoints like [Get Mods](#get-mods) have special sort columns like `popular`, `downloads`, `rating` and `subscribers` which are documented alongside the filters.
-
 ### _sort (Sort)
 
 ```
@@ -2961,7 +2959,7 @@ Get all games. Successful request will return an array of [Game Objects](#get-ga
     submission_option|integer|Submission process modders must follow:<br><br>__0__ = Mod uploads must occur via the API using a tool created by the game developers<br>__1__ = Mod uploads can occur from anywhere, including the website and API
     curation_option|integer|Curation option enabled by this game to approve mods:<br><br>__0__ = No curation: Mods are immediately available to play<br>__1__ = Price change approval: Pricing changes for marketplace mods queued for acceptance<br>__2__ = Full curation: All mods must be accepted by someone to be listed
     dependency_option|integer|Dependency option for this game's mods:<br><br>__0__ = Disallow dependencies<br>__1__ = Allow dependencies, mods must opt in<br>__2__ = Allow dependencies, mods must opt out<br>__3__ = Allow dependencies with no restrictions
-    community_options|integer|Community features enabled for this game:<br><br>__0__ = None<br>__1__ = Enable comments<br>__2__ = Enable guides<br>__4__ = Pin on homepage<br>__8__ = Show on homepage<br>__16__ = Show more on homepage<br>__32__ = Allow change status<br>__64__ = Enable Previews (Game must be hidden)<br>__128__ = Allow Preview Share-URL (Previews must be enabled)<br>__256__ = Allow negative ratings<br>__512__ = Allow mods to be edited via web<br>__?__ = Combine to find games with multiple options enabled (see [BITWISE fields](#bitwise-and-bitwise-and))
+    community_options|integer|Community features enabled for this game:<br><br>__0__ = None<br>__1__ = Allow comments on mods<br>__2__ = Allow guides<br>__4__ = Pin on homepage<br>__8__ = Show on homepage<br>__16__ = Show more on homepage<br>__32__ = Allow change status<br>__64__ = Enable Previews (Game must be hidden)<br>__128__ = Allow preview share-URL (Previews must be enabled)<br>__256__ = Allow negative ratings<br>__512__ = Allow mods to be edited via web<br>__1024__ = Allow mod dependencies<br>__2048__ = Allow comments on guides<br>__?__ = Combine to find games with multiple options enabled (see [BITWISE fields](#bitwise-and-bitwise-and))
     monetization_options|integer|Monetization options enabled for this game:<br><br>__0__ = Access to monetization features disabled<br>__1__ = Access to monetization features enabled by mod.io<br>__2__ = Marketplace enabled<br>__4__ = Creator partner program enabled<br>__8__ = Quantity limited mods supported<br>__16__ = All mods must be quantity limited<br>__?__ = Combine to find games with multiple options enabled (see [BITWISE fields](#bitwise-and-bitwise-and))
     api_access_options|integer|Level of API access allowed by this game:<br><br>__0__ = None<br>__1__ = Allow 3rd parties to access this games API endpoints<br>__2__ = Allow mods to be downloaded directly (if disabled all download URLs will contain a frequently changing verification hash to stop unauthorized use)<br>__4__ = Requires a bearer token to be supplied when attempting the download to enforce authenticated downloads only<br>__8__ = Requires a bearer token to be supplied and for the user to own the file when attempting the download<br>__?__ = Combine to find games with multiple options enabled (see [BITWISE fields](#bitwise-and-bitwise-and))
     maturity_options|integer|Mature content setup for this game:<br><br>__0__ = Don't allow mature content in mods<br>__1__ = Allow mature content in mods<br>__2__ = This game is for mature audiences only
@@ -2972,9 +2970,13 @@ Get all games. Successful request will return an array of [Game Objects](#get-ga
 
     Sort|Description
     ---|---
-    popular|Sort results by popularity using [_sort filter](#filtering), value should be `popular` for descending or `-popular` for ascending results.<br><br>__NOTE:__ Popularity is calculated hourly and reset daily (results are ranked from 1 to X). You should sort this column in descending order `popular` to get the top ranked results.
-    downloads|Sort results by total downloads using [_sort filter](#filtering), value should be `downloads` for descending or `-downloads` for ascending results.<br><br>__NOTE:__ You should sort this column in descending order `downloads` to get the top ranked results. This filter differs from popular by filtering on the amount of downloads the game has received overall, and not just in the last 24 hours.
-    mods|Sort results by total mod count using [_sort filter](#filtering), value should be `mods` for descending or `-mods` for ascending results.
+    name|Sort results alphabetically by name using the [_sort query parameter](#sorting) `name`. For example `_sort=name` would return games from A-Z.
+    date_live|Sort results by the date they went live using the [_sort query parameter](#sorting) `date_live`. For example `_sort=-date_date` would return the most recently live games.
+    date_updated|Sort results by the date they were last updated using the [_sort query parameter](#sorting) `date_updated`. For example `_sort=-date_updated` would return the most recently updated games.
+    downloads_today|Sort results by the number of mod downloads in the last 24hours using the [_sort query parameter](#sorting) `downloads_today`. For example `_sort=-downloads_today` would return the most popular games from the last 24hours based on the number of mod downloads.
+    downloads_total|Sort results by the total number of mod downloads using the [_sort query parameter](#sorting) `downloads_total`. For example `_sort=-downloads_total` would return the most popular games based on the number of mod downloads.
+    subscribers_total|Sort results by the total number of mod subscribers using the [_sort query parameter](#sorting) `subscribers_total`. For example `_sort=-subscribers_total` would return the most popular games based on number of mod subscribers.
+    mods_count_total|Sort results by the number of mods using the [_sort query parameter](#sorting) `mods_count_total`. For example `_sort=-mods_count_total` would return the games with the most number of mods submitted.
 
 > Example response
 
@@ -3408,8 +3410,13 @@ Get all guides for a game. Successful request will return an array of [Guide Obj
 
     Sort|Description
     ---|---
-    popular|Sort results by popularity using [_sort filter](#filtering), value should be `popular` for descending or `-popular` for ascending results.<br><br>__NOTE:__ Popularity is calculated hourly and reset daily (results are ranked from 1 to X). You should sort this column in ascending order `-popular` to get the top ranked results.
-    popular_overall|Sort results by 'Popular Overall' using [_sort filter](#filtering), value should be `popular_overall` for descending or `-popular_overall` for ascending results.<br><br>__NOTE:__ You should sort this column in ascending order `-popular_overall` to get the top ranked results. This filter differs from popular by filtering on the amount of visits it has received overall, and not just in the last 24 hours.
+    name|Sort results alphabetically by name using the [_sort query parameter](#sorting) `name`. For example `_sort=name` would return guides from A-Z.
+    date_live|Sort results by the date they went live using the [_sort query parameter](#sorting) `date_live`. For example `_sort=-date_date` would return the most recently live guides.
+    date_updated|Sort results by the date they were last updated using the [_sort query parameter](#sorting) `date_updated`. For example `_sort=-date_updated` would return the most recently updated guides.
+    submitted_by|Sort results by the authors ID using the [_sort query parameter](#sorting) `submitted_by`. For example `_sort=submitted_by` would return guides from authors who have been registered the longest.
+    visits_today|Sort results by the number of visits in the last 24hours using the [_sort query parameter](#sorting) `visits_today`. For example `_sort=-visits_today` would return the most popular guides from the last 24hours based on the number of visits.
+    visits_total|Sort results by the total number of visits using the [_sort query parameter](#sorting) `visits_total`. For example `_sort=-visits_total` would return the most popular guides based on the number of visits.
+    comments_total|Sort results by the total number of comments using the [_sort query parameter](#sorting) `comments_total`. For example `_sort=-comments_total` would return the guides with the most comments.
 
 > Example response
 
@@ -3464,6 +3471,7 @@ Get all guides for a game. Successful request will return an array of [Guide Obj
       "stats": [
         {
           "guide_id": 2,
+          "visits_today": 0,
           "visits_total": 0,
           "comments_total": 0
         }
@@ -3630,6 +3638,7 @@ Get a guide. Successful request will return a single [Guide Object](#guide-objec
   "stats": [
     {
       "guide_id": 2,
+      "visits_today": 0,
       "visits_total": 0,
       "comments_total": 0
     }
@@ -3833,6 +3842,7 @@ Add a guide for a game. Successful request will return a single [Guide Object](#
   "stats": [
     {
       "guide_id": 2,
+      "visits_today": 0,
       "visits_total": 0,
       "comments_total": 0
     }
@@ -4028,6 +4038,7 @@ Update an existing guide. Successful request will return the updated [Guide Obje
   "stats": [
     {
       "guide_id": 2,
+      "visits_today": 0,
       "visits_total": 0,
       "comments_total": 0
     }
@@ -4401,10 +4412,14 @@ Get all mods for the corresponding game. Successful request will return an array
 
     Sort|Description
     ---|---
-    downloads|Sort results by most downloads using [_sort filter](#filtering) parameter, value should be `downloads` for descending or `-downloads` for ascending results.
-    popular|Sort results by popularity using [_sort filter](#filtering), value should be `popular` for descending or `-popular` for ascending results.<br><br>__NOTE:__ Popularity is calculated hourly and reset daily (results are ranked from 1 to X). You should sort this column in ascending order `-popular` to get the top ranked results.
-    rating|Sort results by weighted rating using [_sort filter](#filtering), value should be `rating` for descending or `-rating` for ascending results.
-    subscribers|Sort results by most subscribers using [_sort filter](#filtering), value should be `subscribers` for descending or `-subscribers` for ascending results.
+    name|Sort results alphabetically by name using the [_sort query parameter](#sorting) `name`. For example `_sort=name` would return mods from A-Z.
+    date_live|Sort results by the date they went live using the [_sort query parameter](#sorting) `date_live`. For example `_sort=-date_date` would return the most recently live mods.
+    date_updated|Sort results by the date they were last updated using the [_sort query parameter](#sorting) `date_updated`. For example `_sort=-date_updated` would return the most recently updated mods.
+    submitted_by|Sort results by the creators ID using the [_sort query parameter](#sorting) `submitted_by`. For example `_sort=submitted_by` would return mods from creators who have been registered the longest.
+    downloads_today|Sort results by the number of downloads in the last 24hours using the [_sort query parameter](#sorting) `downloads_today`. For example `_sort=-downloads_today` would return the most popular mods from the last 24hours based on the number of mod downloads.
+    downloads_total|Sort results by the total number of downloads using the [_sort query parameter](#sorting) `downloads_total`. For example `_sort=-downloads_total` would return the most popular mods based on the number of downloads.
+    subscribers_total|Sort results by the total number of subscribers using the [_sort query parameter](#sorting) `subscribers_total`. For example `_sort=-subscribers_total` would return the most popular mods based on number of subscribers.
+    ratings_weighted_aggregate|Sort results by their calculated rating (thumbs up / down received) using the [_sort query parameter](#sorting) `ratings_weighted_aggregate`. For example `_sort=-ratings_weighted_aggregate` would return the highest rated mods.
 
 > Example response
 
@@ -11683,7 +11698,8 @@ curl -X POST https://*.modapi.io/v1/games/{game-id}/mods/{mod-id}/dependencies \
   -H 'Authorization: Bearer {access-token}' \ 
   -H 'Content-Type: application/x-www-form-urlencoded' \ 
   -H 'Accept: application/json' \
-  -d 'dependencies[]=284'
+  -d 'dependencies[]=284' \
+  -d 'sync=false'
 
 ```
 
@@ -11718,7 +11734,8 @@ $.ajax({
 ```javascript--nodejs
 const request = require('node-fetch');
 const inputBody = '{
-  "dependencies": "284"
+  "dependencies": "284",
+  "sync": "false"
 }';
 const headers = {
   'Authorization':'Bearer {access-token}',
@@ -11784,7 +11801,7 @@ Add mod dependencies required by the corresponding mod. A dependency is a mod th
 ```json
 {
   "code": 201,
-  "message": "You have successfully added new dependencies to the specified mod."
+  "message": "You have successfully updated the dependencies for the specified mod."
 }
 
 ```
@@ -13433,7 +13450,7 @@ Get all games the _authenticated user_ added or is a team member of. Successful 
     submission_option|integer|Submission process modders must follow:<br><br>__0__ = Mod uploads must occur via the API using a tool created by the game developers<br>__1__ = Mod uploads can occur from anywhere, including the website and API
     curation_option|integer|Curation options enabled by this game to approve mods:<br><br>__0__ = No curation: Mods are immediately available to play<br>__1__ = Price change approval: Pricing changes for marketplace mods queued for acceptance<br>__2__ = Full curation: All mods must be accepted by someone to be listed
     dependency_option|integer|Dependency option for this game's mods:<br><br>__0__ = Disallow dependencies<br>__1__ = Allow dependencies, mods must opt in<br>__2__ = Allow dependencies, mods must opt out<br>__3__ = Allow dependencies with no restrictions
-    community_options|integer|Community features enabled for this game:<br><br>__0__ = None<br>__1__ = Enable comments<br>__2__ = Enable guides<br>__4__ = Pin on homepage<br>__8__ = Show on homepage<br>__16__ = Show more on homepage<br>__32__ = Allow change status<br>__64__ = Enable Previews (Game must be hidden)<br>__128__ = Allow Preview Share-URL (Previews must be enabled)<br>__256__ = Allow negative ratings<br>__512__ = Allow mods to be edited via web<br>__?__ = Combine to find games with multiple options enabled (see [BITWISE fields](#bitwise-and-bitwise-and))
+    community_options|integer|Community features enabled for this game:<br><br>__0__ = None<br>__1__ = Allow comments on mods<br>__2__ = Allow guides<br>__4__ = Pin on homepage<br>__8__ = Show on homepage<br>__16__ = Show more on homepage<br>__32__ = Allow change status<br>__64__ = Enable Previews (Game must be hidden)<br>__128__ = Allow preview share-URL (Previews must be enabled)<br>__256__ = Allow negative ratings<br>__512__ = Allow mods to be edited via web<br>__1024__ = Allow mod dependencies<br>__2048__ = Allow comments on guides<br>__?__ = Combine to find games with multiple options enabled (see [BITWISE fields](#bitwise-and-bitwise-and))
     monetization_options|integer|Monetization options enabled for this game:<br><br>__0__ = Access to monetization features disabled<br>__1__ = Access to monetization features enabled by mod.io<br>__2__ = Marketplace enabled<br>__4__ = Creator partner program enabled<br>__8__ = Quantity limited mods supported<br>__16__ = All mods must be quantity limited<br>__?__ = Combine to find games with multiple options enabled (see [BITWISE fields](#bitwise-and-bitwise-and))
     api_access_options|integer|Level of API access allowed by this game:<br><br>__0__ = None<br>__1__ = Allow 3rd parties to access this games API endpoints<br>__2__ = Allow mods to be downloaded directly (if disabled all download URLs will contain a frequently changing verification hash to stop unauthorized use)<br>__4__ = Requires a bearer token to be supplied when attempting the download to enforce authenticated downloads only<br>__8__ = Requires a bearer token to be supplied and for the user to own the file when attempting the download<br>__?__ = Combine to find games with multiple options enabled (see [BITWISE fields](#bitwise-and-bitwise-and))
     maturity_options|integer|Mature content setup for this game:<br><br>__0__ = Don't allow mature content in mods<br>__1__ = Allow mature content in mods<br>__2__ = This game is for mature audiences only
@@ -13444,9 +13461,13 @@ Get all games the _authenticated user_ added or is a team member of. Successful 
 
     Sort|Description
     ---|---
-    popular|Sort results by popularity using [_sort filter](#filtering), value should be `popular` for descending or `-popular` for ascending results.<br><br>__NOTE:__ Popularity is calculated hourly and reset daily (results are ranked from 1 to X). You should sort this column in descending order `popular` to get the top ranked results.
-    downloads|Sort results by total downloads using [_sort filter](#filtering), value should be `downloads` for descending or `-downloads` for ascending results.<br><br>__NOTE:__ You should sort this column in descending order `downloads` to get the top ranked results. This filter differs from popular by filtering on the amount of downloads the game has received overall, and not just in the last 24 hours.
-    mods|Sort results by total mod count using [_sort filter](#filtering), value should be `mods` for descending or `-mods` for ascending results.
+    name|Sort results alphabetically by name using the [_sort query parameter](#sorting) `name`. For example `_sort=name` would return games from A-Z.
+    date_live|Sort results by the date they went live using the [_sort query parameter](#sorting) `date_live`. For example `_sort=-date_date` would return the most recently live games.
+    date_updated|Sort results by the date they were last updated using the [_sort query parameter](#sorting) `date_updated`. For example `_sort=-date_updated` would return the most recently updated games.
+    downloads_today|Sort results by the number of mod downloads in the last 24hours using the [_sort query parameter](#sorting) `downloads_today`. For example `_sort=-downloads_today` would return the most popular games from the last 24hours based on the number of mod downloads.
+    downloads_total|Sort results by the total number of mod downloads using the [_sort query parameter](#sorting) `downloads_total`. For example `_sort=-downloads_total` would return the most popular games based on the number of mod downloads.
+    subscribers_total|Sort results by the total number of mod subscribers using the [_sort query parameter](#sorting) `subscribers_total`. For example `_sort=-subscribers_total` would return the most popular games based on number of mod subscribers.
+    mods_count_total|Sort results by the number of mods using the [_sort query parameter](#sorting) `mods_count_total`. For example `_sort=-mods_count_total` would return the games with the most number of mods submitted.
 
 > Example response
 
@@ -13686,10 +13707,14 @@ Get all mod's the _authenticated user_ is subscribed to. Successful request will
 
     Sort|Description
     ---|---
-    downloads|Sort results by most downloads using [_sort filter](#filtering) parameter, value should be `downloads` for descending or `-downloads` for ascending results.
-    popular|Sort results by popularity using [_sort filter](#filtering), value should be `popular` for descending or `-popular` for ascending results.<br><br>__NOTE:__ Popularity is calculated hourly and reset daily (results are ranked from 1 to X). You should sort this column in ascending order `-popular` to get the top ranked results.
-    rating|Sort results by weighted rating using [_sort filter](#filtering), value should be `rating` for descending or `-rating` for ascending results.
-    subscribers|Sort results by most subscribers using [_sort filter](#filtering), value should be `subscribers` for descending or `-subscribers` for ascending results.
+    name|Sort results alphabetically by name using the [_sort query parameter](#sorting) `name`. For example `_sort=name` would return mods from A-Z.
+    date_live|Sort results by the date they went live using the [_sort query parameter](#sorting) `date_live`. For example `_sort=-date_date` would return the most recently live mods.
+    date_updated|Sort results by the date they were last updated using the [_sort query parameter](#sorting) `date_updated`. For example `_sort=-date_updated` would return the most recently updated mods.
+    submitted_by|Sort results by the creators ID using the [_sort query parameter](#sorting) `submitted_by`. For example `_sort=submitted_by` would return mods from creators who have been registered the longest.
+    downloads_today|Sort results by the number of downloads in the last 24hours using the [_sort query parameter](#sorting) `downloads_today`. For example `_sort=-downloads_today` would return the most popular mods from the last 24hours based on the number of mod downloads.
+    downloads_total|Sort results by the total number of downloads using the [_sort query parameter](#sorting) `downloads_total`. For example `_sort=-downloads_total` would return the most popular mods based on the number of downloads.
+    subscribers_total|Sort results by the total number of subscribers using the [_sort query parameter](#sorting) `subscribers_total`. For example `_sort=-subscribers_total` would return the most popular mods based on number of subscribers.
+    ratings_weighted_aggregate|Sort results by their calculated rating (thumbs up / down received) using the [_sort query parameter](#sorting) `ratings_weighted_aggregate`. For example `_sort=-ratings_weighted_aggregate` would return the highest rated mods.
 
 > Example response
 
@@ -13964,10 +13989,14 @@ Get all mods the _authenticated user_ added or is a team member of. Successful r
 
     Sort|Description
     ---|---
-    downloads|Sort results by most downloads using [_sort filter](#filtering) parameter, value should be `downloads` for descending or `-downloads` for ascending results.
-    popular|Sort results by popularity using [_sort filter](#filtering), value should be `popular` for descending or `-popular` for ascending results.<br><br>__NOTE:__ Popularity is calculated hourly and reset daily (results are ranked from 1 to X). You should sort this column in ascending order `-popular` to get the top ranked results.
-    rating|Sort results by weighted rating using [_sort filter](#filtering), value should be `rating` for descending or `-rating` for ascending results.
-    subscribers|Sort results by most subscribers using [_sort filter](#filtering), value should be `subscribers` for descending or `-subscribers` for ascending results.
+    name|Sort results alphabetically by name using the [_sort query parameter](#sorting) `name`. For example `_sort=name` would return mods from A-Z.
+    date_live|Sort results by the date they went live using the [_sort query parameter](#sorting) `date_live`. For example `_sort=-date_date` would return the most recently live mods.
+    date_updated|Sort results by the date they were last updated using the [_sort query parameter](#sorting) `date_updated`. For example `_sort=-date_updated` would return the most recently updated mods.
+    submitted_by|Sort results by the creators ID using the [_sort query parameter](#sorting) `submitted_by`. For example `_sort=submitted_by` would return mods from creators who have been registered the longest.
+    downloads_today|Sort results by the number of downloads in the last 24hours using the [_sort query parameter](#sorting) `downloads_today`. For example `_sort=-downloads_today` would return the most popular mods from the last 24hours based on the number of mod downloads.
+    downloads_total|Sort results by the total number of downloads using the [_sort query parameter](#sorting) `downloads_total`. For example `_sort=-downloads_total` would return the most popular mods based on the number of downloads.
+    subscribers_total|Sort results by the total number of subscribers using the [_sort query parameter](#sorting) `subscribers_total`. For example `_sort=-subscribers_total` would return the most popular mods based on number of subscribers.
+    ratings_weighted_aggregate|Sort results by their calculated rating (thumbs up / down received) using the [_sort query parameter](#sorting) `ratings_weighted_aggregate`. For example `_sort=-ratings_weighted_aggregate` would return the highest rated mods.
 
 > Example response
 
@@ -14234,10 +14263,14 @@ Get all mod's the _authenticated user_ has purchased. Successful request will re
 
     Sort|Description
     ---|---
-    downloads|Sort results by most downloads using [_sort filter](#filtering) parameter, value should be `downloads` for descending or `-downloads` for ascending results.
-    popular|Sort results by popularity using [_sort filter](#filtering), value should be `popular` for descending or `-popular` for ascending results.<br><br>__NOTE:__ Popularity is calculated hourly and reset daily (results are ranked from 1 to X). You should sort this column in ascending order `-popular` to get the top ranked results.
-    rating|Sort results by weighted rating using [_sort filter](#filtering), value should be `rating` for descending or `-rating` for ascending results.
-    subscribers|Sort results by most subscribers using [_sort filter](#filtering), value should be `subscribers` for descending or `-subscribers` for ascending results.
+    name|Sort results alphabetically by name using the [_sort query parameter](#sorting) `name`. For example `_sort=name` would return mods from A-Z.
+    date_live|Sort results by the date they went live using the [_sort query parameter](#sorting) `date_live`. For example `_sort=-date_date` would return the most recently live mods.
+    date_updated|Sort results by the date they were last updated using the [_sort query parameter](#sorting) `date_updated`. For example `_sort=-date_updated` would return the most recently updated mods.
+    submitted_by|Sort results by the creators ID using the [_sort query parameter](#sorting) `submitted_by`. For example `_sort=submitted_by` would return mods from creators who have been registered the longest.
+    downloads_today|Sort results by the number of downloads in the last 24hours using the [_sort query parameter](#sorting) `downloads_today`. For example `_sort=-downloads_today` would return the most popular mods from the last 24hours based on the number of mod downloads.
+    downloads_total|Sort results by the total number of downloads using the [_sort query parameter](#sorting) `downloads_total`. For example `_sort=-downloads_total` would return the most popular mods based on the number of downloads.
+    subscribers_total|Sort results by the total number of subscribers using the [_sort query parameter](#sorting) `subscribers_total`. For example `_sort=-subscribers_total` would return the most popular mods based on number of subscribers.
+    ratings_weighted_aggregate|Sort results by their calculated rating (thumbs up / down received) using the [_sort query parameter](#sorting) `ratings_weighted_aggregate`. For example `_sort=-ratings_weighted_aggregate` would return the highest rated mods.
 
 > Example response
 
@@ -14773,6 +14806,7 @@ Get the _authenticated user_ wallets. Successful request will return a single [W
   "game_id": "string",
   "currency": "string",
   "balance": 0,
+  "pending_balance": 0,
   "deficit": 0,
   "monetization_status": 1
 }
@@ -16685,7 +16719,7 @@ Name|Type|Description
 ---|---|---|---|
 id|integer|Unique game id.
 status|integer|Status of the game (see [status and visibility](#status-amp-visibility) for details):<br><br>__0__ = Not Accepted<br>__1__ = Accepted<br>__3__ = Deleted
-community_options|integer|Community features enabled for this game:<br><br>__0__ = All of the options below are disabled<br>__1__ = Enable comments<br>__2__ = Enable guides<br>__4__ = Pin on homepage<br>__8__ = Show on homepage<br>__16__ = Show more on homepage<br>__32__ = Allow change status<br>__64__ = Enable Previews (Game must be hidden)<br>__128__ = Allow Preview Share-URL (Previews must be enabled)<br>__256__ = Allow negative ratings<br>__512__ = Allow mods to be edited via web<br>__?__ = Add the options you want together, to enable multiple features (see [BITWISE fields](#bitwise-and-bitwise-and))
+community_options|integer|Community features enabled for this game:<br><br>__0__ = All of the options below are disabled<br>__1__ = Allow comments on mods<br>__2__ = Allow guides<br>__4__ = Pin on homepage<br>__8__ = Show on homepage<br>__16__ = Show more on homepage<br>__32__ = Allow change status<br>__64__ = Enable Previews (Game must be hidden)<br>__128__ = Allow preview share-URL (Previews must be enabled)<br>__256__ = Allow negative ratings<br>__512__ = Allow mods to be edited via web<br>__1024__ = Allow mod dependencies<br>__2048__ = Allow comments on guides<br>__?__ = Add the options you want together, to enable multiple features (see [BITWISE fields](#bitwise-and-bitwise-and))
 ugc_name|string|Word used to describe user-generated content (mods, items, addons etc).
 name|string|Name of the game.
 name_id|string|Path for the game on mod.io. For example: https://mod.io/g/__rogue-knight__
@@ -16830,7 +16864,7 @@ presentation_option|integer|Presentation style used on the mod.io website:<br><b
 submission_option|integer|Submission process modders must follow:<br><br>__0__ = Mod uploads must occur via the API using a tool created by the game developers<br>__1__ = Mod uploads can occur from anywhere, including the website and API
 dependency_option|integer|Dependency option for this game's mods:<br><br>__0__ = Disallow dependencies<br>__1__ = Allow dependencies, mods must opt in<br>__2__ = Allow dependencies, mods must opt out<br>__3__ = Allow dependencies with no restrictions
 curation_option|integer|Curation option enabled by this game to approve mods:<br><br>__0__ = No curation: Mods are immediately available to play<br>__1__ = Price change approval: Pricing changes for marketplace mods queued for acceptance<br>__2__ = Full curation: All mods must be accepted by someone to be listed
-community_options|integer|Community features enabled for this game:<br><br>__0__ = All of the options below are disabled<br>__1__ = Enable comments<br>__2__ = Enable guides<br>__4__ = Pin on homepage<br>__8__ = Show on homepage<br>__16__ = Show more on homepage<br>__32__ = Allow change status<br>__64__ = Enable Previews (Game must be hidden)<br>__128__ = Allow Preview Share-URL (Previews must be enabled)<br>__256__ = Allow negative ratings<br>__512__ = Allow mods to be edited via web<br>__?__ = Add the options you want together, to enable multiple features (see [BITWISE fields](#bitwise-and-bitwise-and))
+community_options|integer|Community features enabled for this game:<br><br>__0__ = All of the options below are disabled<br>__1__ = Allow comments on mods<br>__2__ = Allow guides<br>__4__ = Pin on homepage<br>__8__ = Show on homepage<br>__16__ = Show more on homepage<br>__32__ = Allow change status<br>__64__ = Enable Previews (Game must be hidden)<br>__128__ = Allow preview share-URL (Previews must be enabled)<br>__256__ = Allow negative ratings<br>__512__ = Allow mods to be edited via web<br>__1024__ = Allow mod dependencies<br>__2048__ = Allow comments on guides<br>__?__ = Add the options you want together, to enable multiple features (see [BITWISE fields](#bitwise-and-bitwise-and))
 monetization_options|integer|Monetization options enabled for this game:<br><br>__0__ = Access to monetization features disabled<br>__1__ = Access to monetization features enabled by mod.io<br>__2__ = Marketplace enabled<br>__4__ = Creator partner program enabled<br>__8__ = Quantity limited mods supported<br>__?__ = Add the options you want together, to enable multiple features (see [BITWISE fields](#bitwise-and-bitwise-and))
 monetization_team|[Game Monetization Team Object](#schemagame_monetization_team_object)|The monetization team for this resource. [Game Monetization Team Object](#game-monetization-team-object).
 revenue_options|integer|Deprecated: Please use monetization_options instead, this will be removed in subsequent API version.
@@ -16922,10 +16956,10 @@ Name|Type|Description
 ---|---|---|---|
 game_id|integer|Unique game id.
 mods_count_total|integer|Available mod count for the game.
-mods_downloads_today|integer|Mods downloaded today for the game.
-mods_downloads_total|integer|Total Mods downloaded for the game.
+mods_downloads_today|integer|Last 24hours of mod downloads for the game.
+mods_downloads_total|integer|Total mods downloaded for the game.
 mods_downloads_daily_average|integer|Average mods downloaded on a daily basis.
-mods_subscribers_total|integer|Number of total users who have subscribed to the mods for the game.
+mods_subscribers_total|integer|Total users who have subscribed to the mods for the game.
 date_expires|integer|Unix timestamp until this game's statistics are considered stale.
 
 
@@ -17488,6 +17522,7 @@ result_total|integer|Total number of results found.
       "stats": [
         {
           "guide_id": 2,
+          "visits_today": 0,
           "visits_total": 0,
           "comments_total": 0
         }
@@ -18312,6 +18347,7 @@ result_total|integer|Total number of results found.
   "stats": [
     {
       "guide_id": 2,
+      "visits_today": 0,
       "visits_total": 0,
       "comments_total": 0
     }
@@ -18350,6 +18386,7 @@ stats|[Guide Stats Object](#schemaguide_stats_object)[]|Contains stats data.
 ```json
 {
   "guide_id": 2,
+  "visits_today": 0,
   "visits_total": 0,
   "comments_total": 0
 } 
@@ -18360,6 +18397,7 @@ stats|[Guide Stats Object](#schemaguide_stats_object)[]|Contains stats data.
 Name|Type|Description
 ---|---|---|---|
 guide_id|integer|Unique guide id.
+visits_today|integer|Last 24hours of visits for this guide
 visits_total|integer|Total number of visits for this guide
 comments_total|integer|Total number of comments for this guide
 
@@ -18876,10 +18914,10 @@ Name|Type|Description
 mod_id|integer|Unique mod id.
 popularity_rank_position|integer|Current rank of the mod.
 popularity_rank_total_mods|integer|Number of ranking spots the current rank is measured against.
-downloads_today|integer|Number of total mod downloads. Count resets around 11:00 UTC+11 daily.
-downloads_total|integer|Number of total mod downloads.
-subscribers_total|integer|Number of total users who have subscribed to the mod.
-ratings_total|integer|Number of times this mod has been rated.
+downloads_today|integer|Last 24hours of downloads for the mod.
+downloads_total|integer|Total downloads for the mod.
+subscribers_total|integer|Total users who have subscribed to the mod.
+ratings_total|integer|Total times the mod has been rated.
 ratings_positive|integer|Number of positive ratings.
 ratings_negative|integer|Number of negative ratings.
 ratings_percentage_positive|integer|Number of positive ratings, divided by the total ratings to determine it’s percentage score.
@@ -19793,6 +19831,7 @@ balance|integer|The balance of the wallet.
   "game_id": "string",
   "currency": "string",
   "balance": 0,
+  "pending_balance": 0,
   "deficit": 0,
   "monetization_status": 1
 } 
@@ -19807,6 +19846,7 @@ payment_method_id|string|The payment_method_id of the wallet.
 game_id|string|The game_id if it's a game wallet.
 currency|string|The currency of the wallet.
 balance|integer|The balance of the wallet.
+pending_balance|integer|The pending funds of the wallet that are not availble to be spent.
 deficit|integer|The deficit of the wallet.
 monetization_status|integer|The status of a monetized user for the corresponding `status`. Possible values:<br><br>__0__ = Unregistered<br>__1__ = Pending<br>__2__ = Rejected<br>__4__ = Review<br>__8__ = Action<br>__16__ = Approved<br>__32__ = Member
 
