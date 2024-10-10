@@ -2472,6 +2472,7 @@ Status|Meaning|Error Ref|Description|Response Schema
 200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)||Successful Request|[Access Token Object](#schemaaccess_token_object)
 401|[Unauthorized](https://tools.ietf.org/html/rfc7235#section-3.1)|14001|The game associated with the supplied api_key is currently not available.|[Error Object](#schemaerror_object)
 401|[Unauthorized](https://tools.ietf.org/html/rfc7235#section-3.1)|11032|mod.io was unable to verify the credentials against the external service provider.|[Error Object](#schemaerror_object)
+401|[Unauthorized](https://tools.ietf.org/html/rfc7235#section-3.1)|11091|The audience configured in the OpenID config does not match the audience in the ID token.|[Error Object](#schemaerror_object)
 403|[Forbidden](https://tools.ietf.org/html/rfc7231#section-6.5.3)|11016|The api_key supplied in the request must be associated with a game.|[Error Object](#schemaerror_object)
 403|[Forbidden](https://tools.ietf.org/html/rfc7231#section-6.5.3)|11017|The api_key supplied in the request is for test environment purposes only and cannot be used for this functionality.|[Error Object](#schemaerror_object)
 403|[Forbidden](https://tools.ietf.org/html/rfc7231#section-6.5.3)|11074|The user has not agreed to the mod.io Terms of Use. Please see terms_agreed parameter description and the [Terms](#terms) endpoint for more information.|[Error Object](#schemaerror_object)
