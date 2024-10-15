@@ -15892,7 +15892,7 @@ Status|Meaning|Error Ref|Description|Response Schema
 200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)||Successful Request|[S2S Pay Object](#schemas2s_pay_object)
 <aside class="auth-notice">
 To perform this request, you must be authenticated via one of the following methods:
-<a href="#authentication">OAuth 2</a> (Scopes: write)
+<a href="#authentication">OAuth 2</a> (Scopes: writemonetization)
 </aside>
 ## Transaction Commit
 
@@ -16038,7 +16038,7 @@ Status|Meaning|Error Ref|Description|Response Schema
 200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)||Successful Request|[S2S Pay Object](#schemas2s_pay_object)
 <aside class="auth-notice">
 To perform this request, you must be authenticated via one of the following methods:
-<a href="#authentication">OAuth 2</a> (Scopes: write)
+<a href="#authentication">OAuth 2</a> (Scopes: writemonetization)
 </aside>
 ## Transaction Clawback
 
@@ -16190,7 +16190,7 @@ Status|Meaning|Error Ref|Description|Response Schema
 200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)||Successful Request|[Refund Object](#schemarefund_object)
 <aside class="auth-notice">
 To perform this request, you must be authenticated via one of the following methods:
-<a href="#authentication">OAuth 2</a> (Scopes: write)
+<a href="#authentication">OAuth 2</a> (Scopes: writemonetization)
 </aside>
 ## Disconnect User
 
@@ -18221,6 +18221,69 @@ result_total|integer|Total number of results found.
 
 
 
+## Get Transactions
+
+   <a name="schemaget_transactions"></a>
+
+```json
+{
+  "data": [
+    {
+      "id": 1234,
+      "gateway_uuid": "123e4567-e89b-12d3-a456-426614174000",
+      "gateway_name": "tilia",
+      "account_id": "12345",
+      "gross_amount": 199,
+      "net_amount": 199,
+      "platform_fee": 20,
+      "gateway_fee": 30,
+      "tax": 0,
+      "tax_type": "sales",
+      "currency": "usd",
+      "tokens": 0,
+      "transaction_type": "paid",
+      "monetization_type": "paid",
+      "purchase_date": "2024-10-07 02:29:11",
+      "created_at": "1728268151",
+      "payment_method": [
+        {
+          "name": "Visa ending in 1111",
+          "id": "123e4567-e89b-12d3-a456-426614174000",
+          "amount": 199,
+          "display_amount": "USD 1.99"
+        }
+      ],
+      "line_items": [
+        {
+          "game_id": 0,
+          "buyer_id": 0,
+          "game_name": "my game",
+          "buyer_name": "smith",
+          "token_name": "mio",
+          "token_pack_id": 0,
+          "token_pack_name": "200 Pack"
+        }
+      ]
+    }
+  ],
+  "download": {
+    "per_page": "15",
+    "current_page": "/v1/s2s/monetization-teams/{monetization-team-id}/transactions?cursor=eyJjcmVhdGVkX2F0IjoiMjAyNC0xMC0wMiAwMDo1NTozMiIsIl9wb2ludHNUb05leHRJdaAJdsa10",
+    "next_page_url": "/v1/s2s/monetization-teams/{monetization-team-id}/transactions?cursor=eyJjcmVhdGVkX2F0IjoiMjAyNC0xMC0wMiAwMDo1NTozMiIsIl9wb2ludHNUb05leHRJdaAJdsa10",
+    "prev_page_url": "/v1/s2s/monetization-teams/{monetization-team-id}/transactions?cursor=eyJjcmVhdGVkX2F0IjoiMjAyNC0xMC0wMiAwMDo1NTozMiIsIl9wb2ludHNUb05leHRJdaAJdsa10"
+  }
+} 
+```
+
+### Properties
+
+Name|Type|Description
+---|---|---|---|
+download|[Pagination Object](#schemapagination_object)|Contains pagination data.
+data|[Transaction Object](#schematransaction_object)[]|Array containing transaction objects.
+
+
+
 ## Get User Events  
 
 <a name="schemaget_user_events"></a>
@@ -18513,6 +18576,36 @@ Name|Type|Description
 ---|---|---|---|
 key|string|Key of the key-value pair.
 value|string|Value of the key-value pair. Will always be a string, even if numeric.
+
+
+
+## Line Items Object  
+
+<a name="schemaline_items_object"></a>
+
+```json
+{
+  "game_id": 0,
+  "buyer_id": 0,
+  "game_name": "my game",
+  "buyer_name": "smith",
+  "token_name": "mio",
+  "token_pack_id": 0,
+  "token_pack_name": "200 Pack"
+} 
+```
+
+### Properties
+
+Name|Type|Description
+---|---|---|---|
+game_id|integer|The game id of the transaction.
+buyer_id|integer|The buyer id of the transaction.
+game_name|string|The name of the game the purchase occured on.
+buyer_name|string|The username of the buyer.
+token_name|string|The pretty name of the virtual currency used in the transaction.
+token_pack_id|integer|The id of the virtual currency pack used in the transaction.
+token_pack_name|string|The pretty name of the virtual currency pack used in the transaction.
 
 
 
@@ -19196,6 +19289,30 @@ date_added|integer|Unix timestamp of date the part was uploaded.
 
 
 
+## Pagination Object
+
+   <a name="schemapagination_object"></a>
+
+```json
+{
+  "per_page": "15",
+  "current_page": "/v1/s2s/monetization-teams/{monetization-team-id}/transactions?cursor=eyJjcmVhdGVkX2F0IjoiMjAyNC0xMC0wMiAwMDo1NTozMiIsIl9wb2ludHNUb05leHRJdaAJdsa10",
+  "next_page_url": "/v1/s2s/monetization-teams/{monetization-team-id}/transactions?cursor=eyJjcmVhdGVkX2F0IjoiMjAyNC0xMC0wMiAwMDo1NTozMiIsIl9wb2ludHNUb05leHRJdaAJdsa10",
+  "prev_page_url": "/v1/s2s/monetization-teams/{monetization-team-id}/transactions?cursor=eyJjcmVhdGVkX2F0IjoiMjAyNC0xMC0wMiAwMDo1NTozMiIsIl9wb2ludHNUb05leHRJdaAJdsa10"
+} 
+```
+
+### Properties
+
+Name|Type|Description
+---|---|---|---|
+per_page|integer|The number of items shown per page.
+current_page|string|The url for the current page.
+next_page_url|integer|The url for the next page if it exists.
+prev_page_url|integer|The url for the previous page if it exists.
+
+
+
 ## Pay Object
 
    <a name="schemapay_object"></a>
@@ -19361,6 +19478,30 @@ balance|integer|The balance of the wallet.
 deficit|integer|The deficit of the wallet.
 payment_method_id|string|The payment method id that was used.
 mod|[Mod Object](#schemamod_object)|The mod that was purchased.
+
+
+
+## Payment Method Object  
+
+<a name="schemapayment_method_object"></a>
+
+```json
+{
+  "name": "Visa ending in 1111",
+  "id": "123e4567-e89b-12d3-a456-426614174000",
+  "amount": 199,
+  "display_amount": "USD 1.99"
+} 
+```
+
+### Properties
+
+Name|Type|Description
+---|---|---|---|
+name|string|The pretty name of the payment method that was used.
+id|string|The UUID of the payment method id that was used.
+amount|integer|The amount the payment method was charged.
+display_amount|string|A pretty string of the amount the payment method was charged.
 
 
 
@@ -19685,6 +19826,75 @@ light|string|The light hex color code.
 success|string|The success hex color code.
 warning|string|The warning hex color code.
 danger|string|The danger hex color code.
+
+
+
+## Transaction Object
+
+   <a name="schematransaction_object"></a>
+
+```json
+{
+  "id": 1234,
+  "gateway_uuid": "123e4567-e89b-12d3-a456-426614174000",
+  "gateway_name": "tilia",
+  "account_id": "12345",
+  "gross_amount": 199,
+  "net_amount": 199,
+  "platform_fee": 20,
+  "gateway_fee": 30,
+  "tax": 0,
+  "tax_type": "sales",
+  "currency": "usd",
+  "tokens": 0,
+  "transaction_type": "paid",
+  "monetization_type": "paid",
+  "purchase_date": "2024-10-07 02:29:11",
+  "created_at": "1728268151",
+  "payment_method": [
+    {
+      "name": "Visa ending in 1111",
+      "id": "123e4567-e89b-12d3-a456-426614174000",
+      "amount": 199,
+      "display_amount": "USD 1.99"
+    }
+  ],
+  "line_items": [
+    {
+      "game_id": 0,
+      "buyer_id": 0,
+      "game_name": "my game",
+      "buyer_name": "smith",
+      "token_name": "mio",
+      "token_pack_id": 0,
+      "token_pack_name": "200 Pack"
+    }
+  ]
+} 
+```
+
+### Properties
+
+Name|Type|Description
+---|---|---|---|
+id|integer|Unique transaction id.
+gateway_uuid|string|The universally unique ID (UUID) that represents the tranasction id.
+gateway_name|string|The gateway that processed the transaction.
+account_id|integer|The unique monetization account id that actioned the transaction.
+gross_amount|integer|The gross amount of the transaction.
+net_amount|integer|The net amount of the transaction.
+platform_fee|integer|The platform fee of the transaction.
+gateway_fee|integer|The gateway fee of the transaction.
+tax|integer|The tax amount of the transaction.
+tax_type|string|The tax type on the processed transaction.
+currency|string|The currency type on the processed transaction.
+tokens|integer|The amount of virtual currency associated with the transaction. Will be omitted when no tokens are involved.
+transaction_type|string|The transaction status type on the processed transaction. I.e. is it paid, pending, refunded or cleared.
+monetization_type|string|The monetizaton type on the processed transaction. I.e. is it fiat, tokens or external.
+purchase_date|string|The purchase date in a human reabled date time stamp.
+created_at|string|Unix timestamp of date the transaction was created at. Same as purchased at date.
+payment_method|[Payment Method Object](#schemapayment_method_object)[]|Array containing payment method objects.
+line_items|[Line Items Object](#schemaline_items_object)[]|Array containing line item objects.
 
 
 
