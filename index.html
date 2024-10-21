@@ -788,6 +788,12 @@
                   <li>
                     <a href="#disconnect-user" class="toc-h2 toc-link" data-title="Service to Service">Disconnect User</a>
                   </li>
+                  <li>
+                    <a href="#get-transactions" class="toc-h2 toc-link" data-title="Service to Service">Get Transactions</a>
+                  </li>
+                  <li>
+                    <a href="#get-transaction" class="toc-h2 toc-link" data-title="Service to Service">Get Transaction</a>
+                  </li>
               </ul>
           </li>
           <li>
@@ -911,7 +917,7 @@
                     <a href="#get-team-members" class="toc-h2 toc-link" data-title="Response Schemas">Get Team Members</a>
                   </li>
                   <li>
-                    <a href="#get-transactions" class="toc-h2 toc-link" data-title="Response Schemas">Get Transactions</a>
+                    <a href="#get-transactions-2" class="toc-h2 toc-link" data-title="Response Schemas">Get Transactions</a>
                   </li>
                   <li>
                     <a href="#get-user-events-2" class="toc-h2 toc-link" data-title="Response Schemas">Get User Events</a>
@@ -2504,7 +2510,10 @@ To perform this request, you must be authenticated via one of the following meth
 curl <span class="nt">-X</span> POST https://<span class="k">*</span>.modapi.io/v1/external/steamauth?api_key<span class="o">=</span>YourApiKey <span class="se">\</span>
   <span class="nt">-H</span> <span class="s1">'Content-Type: application/x-www-form-urlencoded'</span> <span class="se">\ </span>
   <span class="nt">-H</span> <span class="s1">'Accept: application/json'</span> <span class="se">\</span>
-  <span class="nt">--data-urlencode</span> <span class="s1">'appdata=NDNuZmhnaWdyaGdqOWc0M2o5eTM0aGc='</span>
+  <span class="nt">--data-urlencode</span> <span class="s1">'appdata=NDNuZmhnaWdyaGdqOWc0M2o5eTM0aGc='</span> <span class="se">\</span>
+  <span class="nt">--data-urlencode</span> <span class="s1">'terms_agreed=true'</span> <span class="se">\</span>
+  <span class="nt">--data-urlencode</span> <span class="s1">'email=example@mod.io'</span> <span class="se">\</span>
+  <span class="nt">--data-urlencode</span> <span class="s1">'date_expires=1729236480'</span>
 
 </code></pre></div><div class="highlight"><pre class="highlight http tab-http"><code><span class="nf">POST</span> <span class="nn">https://*.modapi.io/v1/external/steamauth?api_key=YourApiKey</span> <span class="k">HTTP</span><span class="o">/</span><span class="m">1.1</span>
 <span class="na">Host</span><span class="p">:</span> <span class="s">*.modapi.io</span>
@@ -2528,7 +2537,10 @@ curl <span class="nt">-X</span> POST https://<span class="k">*</span>.modapi.io/
 <span class="p">})</span>
 </code></pre></div><div class="highlight"><pre class="highlight javascript tab-javascript--nodejs"><code><span class="kd">const</span> <span class="nx">request</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="dl">'</span><span class="s1">node-fetch</span><span class="dl">'</span><span class="p">);</span>
 <span class="kd">const</span> <span class="nx">inputBody</span> <span class="o">=</span> <span class="dl">'</span><span class="s1">{
-  "appdata": "NDNuZmhnaWdyaGdqOWc0M2o5eTM0aGc="
+  "appdata": "NDNuZmhnaWdyaGdqOWc0M2o5eTM0aGc=",
+  "terms_agreed": true,
+  "email": "example@mod.io",
+  "date_expires": 1729236480
 }</span><span class="dl">'</span><span class="p">;</span>
 <span class="kd">const</span> <span class="nx">headers</span> <span class="o">=</span> <span class="p">{</span>
   <span class="dl">'</span><span class="s1">Content-Type</span><span class="dl">'</span><span class="p">:</span><span class="dl">'</span><span class="s1">application/x-www-form-urlencoded</span><span class="dl">'</span><span class="p">,</span>
@@ -2718,7 +2730,10 @@ To perform this request, you must be authenticated via one of the following meth
 curl <span class="nt">-X</span> POST https://<span class="k">*</span>.modapi.io/v1/external/xboxauth?api_key<span class="o">=</span>YourApiKey <span class="se">\</span>
   <span class="nt">-H</span> <span class="s1">'Content-Type: application/x-www-form-urlencoded'</span> <span class="se">\ </span>
   <span class="nt">-H</span> <span class="s1">'Accept: application/json'</span> <span class="se">\</span>
-  <span class="nt">-d</span> <span class="s1">'xbox_token=XBL3.0 x=9264027439329321064;eym72VygeZzTSUVRmNvw8v...'</span>
+  <span class="nt">-d</span> <span class="s1">'xbox_token=XBL3.0 x=9264027439329321064;eym72VygeZzTSUVRmNvw8v...'</span> <span class="se">\</span>
+  <span class="nt">-d</span> <span class="s1">'terms_agreed=true'</span> <span class="se">\</span>
+  <span class="nt">-d</span> <span class="s1">'email=example@mod.io'</span> <span class="se">\</span>
+  <span class="nt">-d</span> <span class="s1">'date_expires=1729236480'</span>
 
 </code></pre></div><div class="highlight"><pre class="highlight http tab-http"><code><span class="nf">POST</span> <span class="nn">https://*.modapi.io/v1/external/xboxauth?api_key=YourApiKey</span> <span class="k">HTTP</span><span class="o">/</span><span class="m">1.1</span>
 <span class="na">Host</span><span class="p">:</span> <span class="s">*.modapi.io</span>
@@ -2742,7 +2757,10 @@ curl <span class="nt">-X</span> POST https://<span class="k">*</span>.modapi.io/
 <span class="p">})</span>
 </code></pre></div><div class="highlight"><pre class="highlight javascript tab-javascript--nodejs"><code><span class="kd">const</span> <span class="nx">request</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="dl">'</span><span class="s1">node-fetch</span><span class="dl">'</span><span class="p">);</span>
 <span class="kd">const</span> <span class="nx">inputBody</span> <span class="o">=</span> <span class="dl">'</span><span class="s1">{
-  "xbox_token": "XBL3.0 x=9264027439329321064;eym72VygeZzTSUVRmNvw8v..."
+  "xbox_token": "XBL3.0 x=9264027439329321064;eym72VygeZzTSUVRmNvw8v...",
+  "terms_agreed": true,
+  "email": "example@mod.io",
+  "date_expires": 1729236480
 }</span><span class="dl">'</span><span class="p">;</span>
 <span class="kd">const</span> <span class="nx">headers</span> <span class="o">=</span> <span class="p">{</span>
   <span class="dl">'</span><span class="s1">Content-Type</span><span class="dl">'</span><span class="p">:</span><span class="dl">'</span><span class="s1">application/x-www-form-urlencoded</span><span class="dl">'</span><span class="p">,</span>
@@ -2937,7 +2955,10 @@ To perform this request, you must be authenticated via one of the following meth
 curl <span class="nt">-X</span> POST https://<span class="k">*</span>.modapi.io/v1/external/psnauth?api_key<span class="o">=</span>YourApiKey <span class="se">\</span>
   <span class="nt">-H</span> <span class="s1">'Content-Type: application/x-www-form-urlencoded'</span> <span class="se">\ </span>
   <span class="nt">-H</span> <span class="s1">'Accept: application/json'</span> <span class="se">\</span>
-  <span class="nt">-d</span> <span class="s1">'auth_code=MAXfj2TMqpHnaUMJdwCDbZUi2L3usnV7aw7xwHX2PEqT5hLkFF2VUyhlnCAMC0tQR3trpFQot0zvMMEtBzekilqeVD1Qm9nEcs9FljneaL3hCWPFSf6jjDSxOxOSytGD'</span>
+  <span class="nt">-d</span> <span class="s1">'auth_code=MAXfj2TMqpHnaUMJdwCDbZUi2L3usnV7aw7xwHX2PEqT5hLkFF2VUyhlnCAMC0tQR3trpFQot0zvMMEtBzekilqeVD1Qm9nEcs9FljneaL3hCWPFSf6jjDSxOxOSytGD'</span> <span class="se">\</span>
+  <span class="nt">-d</span> <span class="s1">'terms_agreed=true'</span> <span class="se">\</span>
+  <span class="nt">-d</span> <span class="s1">'email=example@mod.io'</span> <span class="se">\</span>
+  <span class="nt">-d</span> <span class="s1">'date_expires=1729236480'</span>
 
 </code></pre></div><div class="highlight"><pre class="highlight http tab-http"><code><span class="nf">POST</span> <span class="nn">https://*.modapi.io/v1/external/psnauth?api_key=YourApiKey</span> <span class="k">HTTP</span><span class="o">/</span><span class="m">1.1</span>
 <span class="na">Host</span><span class="p">:</span> <span class="s">*.modapi.io</span>
@@ -2961,7 +2982,10 @@ curl <span class="nt">-X</span> POST https://<span class="k">*</span>.modapi.io/
 <span class="p">})</span>
 </code></pre></div><div class="highlight"><pre class="highlight javascript tab-javascript--nodejs"><code><span class="kd">const</span> <span class="nx">request</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="dl">'</span><span class="s1">node-fetch</span><span class="dl">'</span><span class="p">);</span>
 <span class="kd">const</span> <span class="nx">inputBody</span> <span class="o">=</span> <span class="dl">'</span><span class="s1">{
-  "auth_code": "MAXfj2TMqpHnaUMJdwCDbZUi2L3usnV7aw7xwHX2PEqT5hLkFF2VUyhlnCAMC0tQR3trpFQot0zvMMEtBzekilqeVD1Qm9nEcs9FljneaL3hCWPFSf6jjDSxOxOSytGD"
+  "auth_code": "MAXfj2TMqpHnaUMJdwCDbZUi2L3usnV7aw7xwHX2PEqT5hLkFF2VUyhlnCAMC0tQR3trpFQot0zvMMEtBzekilqeVD1Qm9nEcs9FljneaL3hCWPFSf6jjDSxOxOSytGD",
+  "terms_agreed": true,
+  "email": "example@mod.io",
+  "date_expires": 1729236480
 }</span><span class="dl">'</span><span class="p">;</span>
 <span class="kd">const</span> <span class="nx">headers</span> <span class="o">=</span> <span class="p">{</span>
   <span class="dl">'</span><span class="s1">Content-Type</span><span class="dl">'</span><span class="p">:</span><span class="dl">'</span><span class="s1">application/x-www-form-urlencoded</span><span class="dl">'</span><span class="p">,</span>
@@ -3108,7 +3132,10 @@ To perform this request, you must be authenticated via one of the following meth
 curl <span class="nt">-X</span> POST https://<span class="k">*</span>.modapi.io/v1/external/switchauth?api_key<span class="o">=</span>YourApiKey <span class="se">\</span>
   <span class="nt">-H</span> <span class="s1">'Content-Type: application/x-www-form-urlencoded'</span> <span class="se">\ </span>
   <span class="nt">-H</span> <span class="s1">'Accept: application/json'</span> <span class="se">\</span>
-  <span class="nt">-d</span> <span class="s1">'id_token=m72VygeZzTSUVRmNvw8v...'</span>
+  <span class="nt">-d</span> <span class="s1">'id_token=m72VygeZzTSUVRmNvw8v...'</span> <span class="se">\</span>
+  <span class="nt">-d</span> <span class="s1">'terms_agreed=true'</span> <span class="se">\</span>
+  <span class="nt">-d</span> <span class="s1">'email=example@mod.io'</span> <span class="se">\</span>
+  <span class="nt">-d</span> <span class="s1">'date_expires=1729236480'</span>
 
 </code></pre></div><div class="highlight"><pre class="highlight http tab-http"><code><span class="nf">POST</span> <span class="nn">https://*.modapi.io/v1/external/switchauth?api_key=YourApiKey</span> <span class="k">HTTP</span><span class="o">/</span><span class="m">1.1</span>
 <span class="na">Host</span><span class="p">:</span> <span class="s">*.modapi.io</span>
@@ -3132,7 +3159,10 @@ curl <span class="nt">-X</span> POST https://<span class="k">*</span>.modapi.io/
 <span class="p">})</span>
 </code></pre></div><div class="highlight"><pre class="highlight javascript tab-javascript--nodejs"><code><span class="kd">const</span> <span class="nx">request</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="dl">'</span><span class="s1">node-fetch</span><span class="dl">'</span><span class="p">);</span>
 <span class="kd">const</span> <span class="nx">inputBody</span> <span class="o">=</span> <span class="dl">'</span><span class="s1">{
-  "id_token": "m72VygeZzTSUVRmNvw8v..."
+  "id_token": "m72VygeZzTSUVRmNvw8v...",
+  "terms_agreed": true,
+  "email": "example@mod.io",
+  "date_expires": 1729236480
 }</span><span class="dl">'</span><span class="p">;</span>
 <span class="kd">const</span> <span class="nx">headers</span> <span class="o">=</span> <span class="p">{</span>
   <span class="dl">'</span><span class="s1">Content-Type</span><span class="dl">'</span><span class="p">:</span><span class="dl">'</span><span class="s1">application/x-www-form-urlencoded</span><span class="dl">'</span><span class="p">,</span>
@@ -3314,7 +3344,10 @@ curl <span class="nt">-X</span> POST https://<span class="k">*</span>.modapi.io/
   <span class="nt">-d</span> <span class="s1">'device=rift'</span> <span class="se">\</span>
   <span class="nt">-d</span> <span class="s1">'nonce=m72VygeZzTSUVRmNvw8v...'</span> <span class="se">\</span>
   <span class="nt">-d</span> <span class="s1">'user_id=1829770514091149'</span> <span class="se">\</span>
-  <span class="nt">-d</span> <span class="s1">'access_token=OCAf5kD1SbVNE...'</span>
+  <span class="nt">-d</span> <span class="s1">'access_token=OCAf5kD1SbVNE...'</span> <span class="se">\</span>
+  <span class="nt">-d</span> <span class="s1">'terms_agreed=true'</span> <span class="se">\</span>
+  <span class="nt">-d</span> <span class="s1">'email=example@mod.io'</span> <span class="se">\</span>
+  <span class="nt">-d</span> <span class="s1">'date_expires=1729236480'</span>
 
 </code></pre></div><div class="highlight"><pre class="highlight http tab-http"><code><span class="nf">POST</span> <span class="nn">https://*.modapi.io/v1/external/oculusauth?api_key=YourApiKey</span> <span class="k">HTTP</span><span class="o">/</span><span class="m">1.1</span>
 <span class="na">Host</span><span class="p">:</span> <span class="s">*.modapi.io</span>
@@ -3341,7 +3374,10 @@ curl <span class="nt">-X</span> POST https://<span class="k">*</span>.modapi.io/
   "device": "rift",
   "nonce": "m72VygeZzTSUVRmNvw8v...",
   "user_id": "1829770514091149",
-  "access_token": "OCAf5kD1SbVNE..."
+  "access_token": "OCAf5kD1SbVNE...",
+  "terms_agreed": true,
+  "email": "example@mod.io",
+  "date_expires": 1729236480
 }</span><span class="dl">'</span><span class="p">;</span>
 <span class="kd">const</span> <span class="nx">headers</span> <span class="o">=</span> <span class="p">{</span>
   <span class="dl">'</span><span class="s1">Content-Type</span><span class="dl">'</span><span class="p">:</span><span class="dl">'</span><span class="s1">application/x-www-form-urlencoded</span><span class="dl">'</span><span class="p">,</span>
@@ -3410,19 +3446,19 @@ curl <span class="nt">-X</span> POST https://<span class="k">*</span>.modapi.io/
 <td>nonce</td>
 <td>string</td>
 <td>true</td>
-<td>The nonce provided by calling <a href="https://developer.oculus.com/documentation/platform/latest/concepts/dg-ownership/">ovr_User_GetUserProof()</a> from the Meta Quest SDK. <br><br><strong>NOTE:</strong> Due to the <code>nonce</code> potentially containing special characters, you must URL encode the string before sending the request to ensure it is successfully sent to our servers otherwise you may encounter an <code>422 Unprocessable Entity</code> response. For example, <a href="https://ec.haxx.se/http-post.html">cURL</a> will do this for you by using the <code>--data-urlencode</code> option.</td>
+<td>The nonce provided by calling <a href="https://developers.meta.com/horizon/documentation/native/ps-ownership/">ovr_User_GetUserProof()</a> from the Meta Quest SDK. <br><br><strong>NOTE:</strong> Due to the <code>nonce</code> potentially containing special characters, you must URL encode the string before sending the request to ensure it is successfully sent to our servers otherwise you may encounter an <code>422 Unprocessable Entity</code> response. For example, <a href="https://ec.haxx.se/http-post.html">cURL</a> will do this for you by using the <code>--data-urlencode</code> option.</td>
 </tr>
 <tr>
 <td>user_id</td>
 <td>integer</td>
 <td>true</td>
-<td>The user's Meta Quest id providing by calling <a href="https://developer.oculus.com/documentation/platform/latest/concepts/dg-ownership/">ovr_GetLoggedInUserID()</a> from the Meta Quest SDK.</td>
+<td>The user's Meta Quest id providing by calling <a href="https://developers.meta.com/horizon/documentation/native/ps-ownership/">ovr_GetLoggedInUserID()</a> from the Meta Quest SDK.</td>
 </tr>
 <tr>
 <td>access_token</td>
 <td>string</td>
 <td>true</td>
-<td>The user's access token, providing by calling <a href="https://developer.oculus.com/documentation/platform/latest/concepts/dg-ownership/">ovr_User_GetAccessToken()</a> from the Meta Quest SDK. mod.io uses this access token on the first login only to obtain the user's alias and is not saved on our servers.</td>
+<td>The user's access token, providing by calling <a href="https://developers.meta.com/horizon/documentation/native/ps-ownership/">ovr_User_GetAccessToken()</a> from the Meta Quest SDK. mod.io uses this access token on the first login only to obtain the user's alias and is not saved on our servers.</td>
 </tr>
 <tr>
 <td>email</td>
@@ -3539,7 +3575,10 @@ To perform this request, you must be authenticated via one of the following meth
 curl <span class="nt">-X</span> POST https://<span class="k">*</span>.modapi.io/v1/external/epicgamesauth?api_key<span class="o">=</span>YourApiKey <span class="se">\</span>
   <span class="nt">-H</span> <span class="s1">'Content-Type: application/x-www-form-urlencoded'</span> <span class="se">\ </span>
   <span class="nt">-H</span> <span class="s1">'Accept: application/json'</span> <span class="se">\</span>
-  <span class="nt">-d</span> <span class="s1">'access_token=eym72VygeZzTSUVRmNvw8v...'</span>
+  <span class="nt">-d</span> <span class="s1">'access_token=eym72VygeZzTSUVRmNvw8v...'</span> <span class="se">\</span>
+  <span class="nt">-d</span> <span class="s1">'terms_agreed=true'</span> <span class="se">\</span>
+  <span class="nt">-d</span> <span class="s1">'email=example@mod.io'</span> <span class="se">\</span>
+  <span class="nt">-d</span> <span class="s1">'date_expires=1729236480'</span>
 
 </code></pre></div><div class="highlight"><pre class="highlight http tab-http"><code><span class="nf">POST</span> <span class="nn">https://*.modapi.io/v1/external/epicgamesauth?api_key=YourApiKey</span> <span class="k">HTTP</span><span class="o">/</span><span class="m">1.1</span>
 <span class="na">Host</span><span class="p">:</span> <span class="s">*.modapi.io</span>
@@ -3563,7 +3602,10 @@ curl <span class="nt">-X</span> POST https://<span class="k">*</span>.modapi.io/
 <span class="p">})</span>
 </code></pre></div><div class="highlight"><pre class="highlight javascript tab-javascript--nodejs"><code><span class="kd">const</span> <span class="nx">request</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="dl">'</span><span class="s1">node-fetch</span><span class="dl">'</span><span class="p">);</span>
 <span class="kd">const</span> <span class="nx">inputBody</span> <span class="o">=</span> <span class="dl">'</span><span class="s1">{
-  "access_token": "eym72VygeZzTSUVRmNvw8v..."
+  "access_token": "eym72VygeZzTSUVRmNvw8v...",
+  "terms_agreed": true,
+  "email": "example@mod.io",
+  "date_expires": 1729236480
 }</span><span class="dl">'</span><span class="p">;</span>
 <span class="kd">const</span> <span class="nx">headers</span> <span class="o">=</span> <span class="p">{</span>
   <span class="dl">'</span><span class="s1">Content-Type</span><span class="dl">'</span><span class="p">:</span><span class="dl">'</span><span class="s1">application/x-www-form-urlencoded</span><span class="dl">'</span><span class="p">,</span>
@@ -3728,7 +3770,10 @@ To perform this request, you must be authenticated via one of the following meth
 curl <span class="nt">-X</span> POST https://<span class="k">*</span>.modapi.io/v1/external/galaxyauth?api_key<span class="o">=</span>YourApiKey <span class="se">\</span>
   <span class="nt">-H</span> <span class="s1">'Content-Type: application/x-www-form-urlencoded'</span> <span class="se">\ </span>
   <span class="nt">-H</span> <span class="s1">'Accept: application/json'</span> <span class="se">\</span>
-  <span class="nt">--data-urlencode</span> <span class="s1">'appdata=GCL671bwZ/+zUeOWc0M'</span>
+  <span class="nt">--data-urlencode</span> <span class="s1">'appdata=GCL671bwZ/+zUeOWc0M'</span> <span class="se">\</span>
+  <span class="nt">--data-urlencode</span> <span class="s1">'terms_agreed=true'</span> <span class="se">\</span>
+  <span class="nt">--data-urlencode</span> <span class="s1">'email=example@mod.io'</span> <span class="se">\</span>
+  <span class="nt">--data-urlencode</span> <span class="s1">'date_expires=1729236480'</span>
 
 </code></pre></div><div class="highlight"><pre class="highlight http tab-http"><code><span class="nf">POST</span> <span class="nn">https://*.modapi.io/v1/external/galaxyauth?api_key=YourApiKey</span> <span class="k">HTTP</span><span class="o">/</span><span class="m">1.1</span>
 <span class="na">Host</span><span class="p">:</span> <span class="s">*.modapi.io</span>
@@ -3752,7 +3797,10 @@ curl <span class="nt">-X</span> POST https://<span class="k">*</span>.modapi.io/
 <span class="p">})</span>
 </code></pre></div><div class="highlight"><pre class="highlight javascript tab-javascript--nodejs"><code><span class="kd">const</span> <span class="nx">request</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="dl">'</span><span class="s1">node-fetch</span><span class="dl">'</span><span class="p">);</span>
 <span class="kd">const</span> <span class="nx">inputBody</span> <span class="o">=</span> <span class="dl">'</span><span class="s1">{
-  "appdata": "GCL671bwZ/+zUeOWc0M"
+  "appdata": "GCL671bwZ/+zUeOWc0M",
+  "terms_agreed": true,
+  "email": "example@mod.io",
+  "date_expires": 1729236480
 }</span><span class="dl">'</span><span class="p">;</span>
 <span class="kd">const</span> <span class="nx">headers</span> <span class="o">=</span> <span class="p">{</span>
   <span class="dl">'</span><span class="s1">Content-Type</span><span class="dl">'</span><span class="p">:</span><span class="dl">'</span><span class="s1">application/x-www-form-urlencoded</span><span class="dl">'</span><span class="p">,</span>
@@ -3931,7 +3979,9 @@ To perform this request, you must be authenticated via one of the following meth
 curl <span class="nt">-X</span> POST https://<span class="k">*</span>.modapi.io/v1/external/appleauth?api_key<span class="o">=</span>YourApiKey <span class="se">\</span>
   <span class="nt">-H</span> <span class="s1">'Content-Type: application/x-www-form-urlencoded'</span> <span class="se">\ </span>
   <span class="nt">-H</span> <span class="s1">'Accept: application/json'</span> <span class="se">\</span>
-  <span class="nt">-d</span> <span class="s1">'id_token=eyJhbXciOiJIUzI1Lizs....'</span>
+  <span class="nt">-d</span> <span class="s1">'id_token=eyJhbXciOiJIUzI1Lizs....'</span> <span class="se">\</span>
+  <span class="nt">-d</span> <span class="s1">'terms_agreed=true'</span> <span class="se">\</span>
+  <span class="nt">-d</span> <span class="s1">'date_expires=1729236480'</span>
 
 </code></pre></div><div class="highlight"><pre class="highlight http tab-http"><code><span class="nf">POST</span> <span class="nn">https://*.modapi.io/v1/external/appleauth?api_key=YourApiKey</span> <span class="k">HTTP</span><span class="o">/</span><span class="m">1.1</span>
 <span class="na">Host</span><span class="p">:</span> <span class="s">*.modapi.io</span>
@@ -3955,7 +4005,9 @@ curl <span class="nt">-X</span> POST https://<span class="k">*</span>.modapi.io/
 <span class="p">})</span>
 </code></pre></div><div class="highlight"><pre class="highlight javascript tab-javascript--nodejs"><code><span class="kd">const</span> <span class="nx">request</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="dl">'</span><span class="s1">node-fetch</span><span class="dl">'</span><span class="p">);</span>
 <span class="kd">const</span> <span class="nx">inputBody</span> <span class="o">=</span> <span class="dl">'</span><span class="s1">{
-  "id_token": "eyJhbXciOiJIUzI1Lizs...."
+  "id_token": "eyJhbXciOiJIUzI1Lizs....",
+  "terms_agreed": true,
+  "date_expires": 1729236480
 }</span><span class="dl">'</span><span class="p">;</span>
 <span class="kd">const</span> <span class="nx">headers</span> <span class="o">=</span> <span class="p">{</span>
   <span class="dl">'</span><span class="s1">Content-Type</span><span class="dl">'</span><span class="p">:</span><span class="dl">'</span><span class="s1">application/x-www-form-urlencoded</span><span class="dl">'</span><span class="p">,</span>
@@ -4142,7 +4194,9 @@ To perform this request, you must be authenticated via one of the following meth
 curl <span class="nt">-X</span> POST https://<span class="k">*</span>.modapi.io/v1/external/googleauth?api_key<span class="o">=</span>YourApiKey <span class="se">\</span>
   <span class="nt">-H</span> <span class="s1">'Content-Type: application/x-www-form-urlencoded'</span> <span class="se">\ </span>
   <span class="nt">-H</span> <span class="s1">'Accept: application/json'</span> <span class="se">\</span>
-  <span class="nt">-d</span> <span class="s1">'id_token=eyJhbXciOiJIUzI1Lizs....'</span>
+  <span class="nt">-d</span> <span class="s1">'id_token=eyJhbXciOiJIUzI1Lizs....'</span> <span class="se">\</span>
+  <span class="nt">-d</span> <span class="s1">'terms_agreed=true'</span> <span class="se">\</span>
+  <span class="nt">-d</span> <span class="s1">'date_expires=1729236480'</span>
 
 </code></pre></div><div class="highlight"><pre class="highlight http tab-http"><code><span class="nf">POST</span> <span class="nn">https://*.modapi.io/v1/external/googleauth?api_key=YourApiKey</span> <span class="k">HTTP</span><span class="o">/</span><span class="m">1.1</span>
 <span class="na">Host</span><span class="p">:</span> <span class="s">*.modapi.io</span>
@@ -4166,7 +4220,9 @@ curl <span class="nt">-X</span> POST https://<span class="k">*</span>.modapi.io/
 <span class="p">})</span>
 </code></pre></div><div class="highlight"><pre class="highlight javascript tab-javascript--nodejs"><code><span class="kd">const</span> <span class="nx">request</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="dl">'</span><span class="s1">node-fetch</span><span class="dl">'</span><span class="p">);</span>
 <span class="kd">const</span> <span class="nx">inputBody</span> <span class="o">=</span> <span class="dl">'</span><span class="s1">{
-  "id_token": "eyJhbXciOiJIUzI1Lizs...."
+  "id_token": "eyJhbXciOiJIUzI1Lizs....",
+  "terms_agreed": true,
+  "date_expires": 1729236480
 }</span><span class="dl">'</span><span class="p">;</span>
 <span class="kd">const</span> <span class="nx">headers</span> <span class="o">=</span> <span class="p">{</span>
   <span class="dl">'</span><span class="s1">Content-Type</span><span class="dl">'</span><span class="p">:</span><span class="dl">'</span><span class="s1">application/x-www-form-urlencoded</span><span class="dl">'</span><span class="p">,</span>
@@ -4326,7 +4382,10 @@ To perform this request, you must be authenticated via one of the following meth
 curl <span class="nt">-X</span> POST https://<span class="k">*</span>.modapi.io/v1/external/discordauth?api_key<span class="o">=</span>YourApiKey <span class="se">\</span>
   <span class="nt">-H</span> <span class="s1">'Content-Type: application/x-www-form-urlencoded'</span> <span class="se">\ </span>
   <span class="nt">-H</span> <span class="s1">'Accept: application/json'</span> <span class="se">\</span>
-  <span class="nt">-d</span> <span class="s1">'discord_token=eyJhbXciOiJIUzI1Lizs....'</span>
+  <span class="nt">-d</span> <span class="s1">'discord_token=eyJhbXciOiJIUzI1Lizs....'</span> <span class="se">\</span>
+  <span class="nt">-d</span> <span class="s1">'terms_agreed=true'</span> <span class="se">\</span>
+  <span class="nt">-d</span> <span class="s1">'email=example@mod.io'</span> <span class="se">\</span>
+  <span class="nt">-d</span> <span class="s1">'date_expires=1729236480'</span>
 
 </code></pre></div><div class="highlight"><pre class="highlight http tab-http"><code><span class="nf">POST</span> <span class="nn">https://*.modapi.io/v1/external/discordauth?api_key=YourApiKey</span> <span class="k">HTTP</span><span class="o">/</span><span class="m">1.1</span>
 <span class="na">Host</span><span class="p">:</span> <span class="s">*.modapi.io</span>
@@ -4350,7 +4409,10 @@ curl <span class="nt">-X</span> POST https://<span class="k">*</span>.modapi.io/
 <span class="p">})</span>
 </code></pre></div><div class="highlight"><pre class="highlight javascript tab-javascript--nodejs"><code><span class="kd">const</span> <span class="nx">request</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="dl">'</span><span class="s1">node-fetch</span><span class="dl">'</span><span class="p">);</span>
 <span class="kd">const</span> <span class="nx">inputBody</span> <span class="o">=</span> <span class="dl">'</span><span class="s1">{
-  "discord_token": "eyJhbXciOiJIUzI1Lizs...."
+  "discord_token": "eyJhbXciOiJIUzI1Lizs....",
+  "terms_agreed": true,
+  "email": "example@mod.io",
+  "date_expires": 1729236480
 }</span><span class="dl">'</span><span class="p">;</span>
 <span class="kd">const</span> <span class="nx">headers</span> <span class="o">=</span> <span class="p">{</span>
   <span class="dl">'</span><span class="s1">Content-Type</span><span class="dl">'</span><span class="p">:</span><span class="dl">'</span><span class="s1">application/x-www-form-urlencoded</span><span class="dl">'</span><span class="p">,</span>
@@ -4525,6 +4587,9 @@ curl <span class="nt">-X</span> POST https://<span class="k">*</span>.modapi.io/
   <span class="nt">-H</span> <span class="s1">'Content-Type: application/x-www-form-urlencoded'</span> <span class="se">\ </span>
   <span class="nt">-H</span> <span class="s1">'Accept: application/json'</span> <span class="se">\</span>
   <span class="nt">-d</span> <span class="s1">'id_token=eyJhbXciOiJIUzI1Lizs....'</span> <span class="se">\</span>
+  <span class="nt">-d</span> <span class="s1">'terms_agreed=true'</span> <span class="se">\</span>
+  <span class="nt">-d</span> <span class="s1">'email=example@mod.io'</span> <span class="se">\</span>
+  <span class="nt">-d</span> <span class="s1">'date_expires=1729236480'</span> <span class="se">\</span>
   <span class="nt">-d</span> <span class="s1">'monetization_account=false'</span>
 
 </code></pre></div><div class="highlight"><pre class="highlight http tab-http"><code><span class="nf">POST</span> <span class="nn">https://*.modapi.io/v1/external/openidauth?api_key=YourApiKey</span> <span class="k">HTTP</span><span class="o">/</span><span class="m">1.1</span>
@@ -4550,6 +4615,9 @@ curl <span class="nt">-X</span> POST https://<span class="k">*</span>.modapi.io/
 </code></pre></div><div class="highlight"><pre class="highlight javascript tab-javascript--nodejs"><code><span class="kd">const</span> <span class="nx">request</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="dl">'</span><span class="s1">node-fetch</span><span class="dl">'</span><span class="p">);</span>
 <span class="kd">const</span> <span class="nx">inputBody</span> <span class="o">=</span> <span class="dl">'</span><span class="s1">{
   "id_token": "eyJhbXciOiJIUzI1Lizs....",
+  "terms_agreed": true,
+  "email": "example@mod.io",
+  "date_expires": 1729236480,
   "monetization_account": false
 }</span><span class="dl">'</span><span class="p">;</span>
 <span class="kd">const</span> <span class="nx">headers</span> <span class="o">=</span> <span class="p">{</span>
@@ -13505,19 +13573,19 @@ curl <span class="nt">-X</span> DELETE https://<span class="k">*</span>.modapi.i
 <td>images[]</td>
 <td>string</td>
 <td></td>
-<td>Filename of the image(s) you want to delete. Every image to delete requires a separate field with images[] as the key (eg. images[]=filename1.jpg, images[]=filename2.jpg)</td>
+<td>Filename of the images to delete. All images to delete require a separate field with images[] as the key (eg. images[0]=filename1.jpg, images[1]=filename2.jpg)</td>
 </tr>
 <tr>
 <td>youtube[]</td>
 <td>string</td>
 <td></td>
-<td>Full Youtube link(s) you want to delete. Every Youtube link to delete requires a separate field with youtube[] as the key (eg. youtube[]=https://www.youtube.com/watch?v=IGVZOLV9SPo, youtube[]=https://www.youtube.com/watch?v=5nY6fjZ3EUc)</td>
+<td>Full Youtube links to delete. All Youtube links to delete require a separate field with youtube[] as the key (eg. youtube[0]=https://www.youtube.com/watch?v=IGVZOLV9SPo, youtube[1]=https://www.youtube.com/watch?v=5nY6fjZ3EUc)</td>
 </tr>
 <tr>
 <td>sketchfab[]</td>
 <td>string</td>
 <td></td>
-<td>Full Sketchfab link(s) you want to delete. Every Sketchfab link to delete requires a separate field with sketchfab[] as the key (eg. sketchfab[]=https://sketchfab.com/models/71f04e390ff54e5f8d9a51b4e1caab7e, sketchfab[]=https://sketchfab.com/models/5c85e649dd854cb58c2b9af081ebb0ff)</td>
+<td>Full Sketchfab links to delete. All Sketchfab links to delete require a separate field with sketchfab[] as the key (eg. sketchfab[0]=https://sketchfab.com/models/71f04e390ff54e5f8d9a51b4e1caab7e, sketchfab[1]=https://sketchfab.com/models/5c85e649dd854cb58c2b9af081ebb0ff)</td>
 </tr>
 </tbody>
 </table>
@@ -13667,19 +13735,19 @@ curl <span class="nt">-X</span> PUT https://<span class="k">*</span>.modapi.io/v
 <td>images[]</td>
 <td>string</td>
 <td></td>
-<td>Filename of the image(s) you want to reorder. Every image to delete requires a separate field with images[] as the key (eg. images[]=filename1.jpg, images[]=filename2.jpg)</td>
+<td>Filename of the images to reorder. All images must be specified to reorder them with images[] as the key (eg. images[0]=filename1.jpg, images[1]=filename2.jpg)</td>
 </tr>
 <tr>
 <td>youtube[]</td>
 <td>string</td>
 <td></td>
-<td>Full Youtube link(s) you want to reorder. Every Youtube link to delete requires a separate field with youtube[] as the key (eg. youtube[]=https://www.youtube.com/watch?v=IGVZOLV9SPo, youtube[]=https://www.youtube.com/watch?v=5nY6fjZ3EUc)</td>
+<td>Full Youtube links to reorder. All Youtube links must be specified to reorder them with youtube[] as the key (eg. youtube[0]=https://www.youtube.com/watch?v=IGVZOLV9SPo, youtube[1]=https://www.youtube.com/watch?v=5nY6fjZ3EUc)</td>
 </tr>
 <tr>
 <td>sketchfab[]</td>
 <td>string</td>
 <td></td>
-<td>Full Sketchfab link(s) you want to reorder. Every Sketchfab link to delete requires a separate field with sketchfab[] as the key (eg. sketchfab[]=https://sketchfab.com/models/71f04e390ff54e5f8d9a51b4e1caab7e, sketchfab[]=https://sketchfab.com/models/5c85e649dd854cb58c2b9af081ebb0ff)</td>
+<td>Full Sketchfab links to reorder. All Sketchfab links must be specified to reorder with sketchfab[] as the key (eg. sketchfab[0]=https://sketchfab.com/models/71f04e390ff54e5f8d9a51b4e1caab7e, sketchfab[1]=https://sketchfab.com/models/5c85e649dd854cb58c2b9af081ebb0ff)</td>
 </tr>
 </tbody>
 </table>
@@ -17199,6 +17267,7 @@ To perform this request, you must be authenticated via one of the following meth
 <div class="highlight"><pre class="highlight shell tab-shell"><code><span class="c"># You can also use wget</span>
 curl <span class="nt">-X</span> GET https://<span class="k">*</span>.modapi.io/v1/me <span class="se">\</span>
   <span class="nt">-H</span> <span class="s1">'Authorization: Bearer {access-token}'</span> <span class="se">\ </span>
+  <span class="nt">-H</span> <span class="s1">'X-Modio-Delegation-Token: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxMjM0NTY3ODkwIiwibmFtZSI6IkpvaG4gRG9lIiwiaWF0IjoxNTE2MjM5MDIyfQ.SflKxwRJSMeKKF2QT4fwpMeJf36POk6yJV_adQssw5c'</span> <span class="se">\ </span>
   <span class="nt">-H</span> <span class="s1">'Accept: application/json'</span>
 
 </code></pre></div><div class="highlight"><pre class="highlight http tab-http"><code><span class="nf">GET</span> <span class="nn">https://*.modapi.io/v1/me</span> <span class="k">HTTP</span><span class="o">/</span><span class="m">1.1</span>
@@ -17206,9 +17275,11 @@ curl <span class="nt">-X</span> GET https://<span class="k">*</span>.modapi.io/v
 
 Accept: application/json
 Authorization: Bearer {access-token}
+X-Modio-Delegation-Token: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxMjM0NTY3ODkwIiwibmFtZSI6IkpvaG4gRG9lIiwiaWF0IjoxNTE2MjM5MDIyfQ.SflKxwRJSMeKKF2QT4fwpMeJf36POk6yJV_adQssw5c
 
 </code></pre></div><div class="highlight"><pre class="highlight javascript tab-javascript"><code><span class="kd">var</span> <span class="nx">headers</span> <span class="o">=</span> <span class="p">{</span>
   <span class="dl">'</span><span class="s1">Authorization</span><span class="dl">'</span><span class="p">:</span><span class="dl">'</span><span class="s1">Bearer {access-token}</span><span class="dl">'</span><span class="p">,</span>
+  <span class="dl">'</span><span class="s1">X-Modio-Delegation-Token</span><span class="dl">'</span><span class="p">:</span><span class="dl">'</span><span class="s1">eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxMjM0NTY3ODkwIiwibmFtZSI6IkpvaG4gRG9lIiwiaWF0IjoxNTE2MjM5MDIyfQ.SflKxwRJSMeKKF2QT4fwpMeJf36POk6yJV_adQssw5c</span><span class="dl">'</span><span class="p">,</span>
   <span class="dl">'</span><span class="s1">Accept</span><span class="dl">'</span><span class="p">:</span><span class="dl">'</span><span class="s1">application/json</span><span class="dl">'</span>
 
 <span class="p">};</span>
@@ -17226,6 +17297,7 @@ Authorization: Bearer {access-token}
 
 <span class="kd">const</span> <span class="nx">headers</span> <span class="o">=</span> <span class="p">{</span>
   <span class="dl">'</span><span class="s1">Authorization</span><span class="dl">'</span><span class="p">:</span><span class="dl">'</span><span class="s1">Bearer {access-token}</span><span class="dl">'</span><span class="p">,</span>
+  <span class="dl">'</span><span class="s1">X-Modio-Delegation-Token</span><span class="dl">'</span><span class="p">:</span><span class="dl">'</span><span class="s1">eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxMjM0NTY3ODkwIiwibmFtZSI6IkpvaG4gRG9lIiwiaWF0IjoxNTE2MjM5MDIyfQ.SflKxwRJSMeKKF2QT4fwpMeJf36POk6yJV_adQssw5c</span><span class="dl">'</span><span class="p">,</span>
   <span class="dl">'</span><span class="s1">Accept</span><span class="dl">'</span><span class="p">:</span><span class="dl">'</span><span class="s1">application/json</span><span class="dl">'</span>
 
 <span class="p">};</span>
@@ -17244,6 +17316,7 @@ Authorization: Bearer {access-token}
 </code></pre></div><div class="highlight"><pre class="highlight python tab-python"><code><span class="kn">import</span> <span class="nn">requests</span>
 <span class="n">headers</span> <span class="o">=</span> <span class="p">{</span>
   <span class="s">'Authorization'</span><span class="p">:</span> <span class="s">'Bearer {access-token}'</span><span class="p">,</span>
+  <span class="s">'X-Modio-Delegation-Token'</span><span class="p">:</span> <span class="s">'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxMjM0NTY3ODkwIiwibmFtZSI6IkpvaG4gRG9lIiwiaWF0IjoxNTE2MjM5MDIyfQ.SflKxwRJSMeKKF2QT4fwpMeJf36POk6yJV_adQssw5c'</span><span class="p">,</span>
   <span class="s">'Accept'</span><span class="p">:</span> <span class="s">'application/json'</span>
 <span class="p">}</span>
 
@@ -17268,7 +17341,7 @@ Authorization: Bearer {access-token}
 </code></pre></div>
 <p><span class="httpmethod GET">GET</span> <span class="endpointheading">/me</span></p>
 
-<p>Get the <em>authenticated user</em> details. Successful request will return a single <a href="#user-object">User Object</a>.</p>
+<p>Get the <em>authenticated user</em> details. Successful request will return a single <a href="#user-object">User Object</a>. This endpoint is optionally available as an S2S <a href="#service-to-service">Service to Service</a> request with an oauth S2S token. This behaves in the same way and will display user info for the account that created the S2S token. To retrieve another users info instead, you can optionally pass in a <a href="#user-delegation-token-object">User Delegate Token</a> when doing an S2S request. <a href="#user-delegation-token-object">UDT</a> can only be used when doing an S2S request.</p>
 
 <blockquote>
 <p>Example response</p>
@@ -21572,6 +21645,371 @@ Content-Type: application/json
 To perform this request, you must be authenticated via one of the following methods:
 <a href="#authentication">OAuth 2</a> (Scopes: write)
 </aside>
+<h2 id="get-transactions">Get Transactions</h2>
+<blockquote>
+<p>Example request</p>
+</blockquote>
+<div class="highlight"><pre class="highlight shell tab-shell"><code><span class="c"># You can also use wget</span>
+curl <span class="nt">-X</span> GET https://<span class="k">*</span>.modapi.io/v1/s2s/monetization-teams/<span class="o">{</span>monetization-team-id<span class="o">}</span>/transactions <span class="se">\</span>
+  <span class="nt">-H</span> <span class="s1">'Authorization: Bearer {access-token}'</span> <span class="se">\ </span>
+  <span class="nt">-H</span> <span class="s1">'Accept: application/json'</span>
+
+</code></pre></div><div class="highlight"><pre class="highlight http tab-http"><code><span class="nf">GET</span> <span class="nn">https://*.modapi.io/v1/s2s/monetization-teams/{monetization-team-id}/transactions</span> <span class="k">HTTP</span><span class="o">/</span><span class="m">1.1</span>
+<span class="na">Host</span><span class="p">:</span> <span class="s">*.modapi.io</span>
+
+Accept: application/json
+Authorization: Bearer {access-token}
+
+</code></pre></div><div class="highlight"><pre class="highlight javascript tab-javascript"><code><span class="kd">var</span> <span class="nx">headers</span> <span class="o">=</span> <span class="p">{</span>
+  <span class="dl">'</span><span class="s1">Authorization</span><span class="dl">'</span><span class="p">:</span><span class="dl">'</span><span class="s1">Bearer {access-token}</span><span class="dl">'</span><span class="p">,</span>
+  <span class="dl">'</span><span class="s1">Accept</span><span class="dl">'</span><span class="p">:</span><span class="dl">'</span><span class="s1">application/json</span><span class="dl">'</span>
+
+<span class="p">};</span>
+
+<span class="nx">$</span><span class="p">.</span><span class="nx">ajax</span><span class="p">({</span>
+  <span class="na">url</span><span class="p">:</span> <span class="dl">'</span><span class="s1">https://*.modapi.io/v1/s2s/monetization-teams/{monetization-team-id}/transactions</span><span class="dl">'</span><span class="p">,</span>
+  <span class="na">method</span><span class="p">:</span> <span class="dl">'</span><span class="s1">get</span><span class="dl">'</span><span class="p">,</span>
+
+  <span class="na">headers</span><span class="p">:</span> <span class="nx">headers</span><span class="p">,</span>
+  <span class="na">success</span><span class="p">:</span> <span class="kd">function</span><span class="p">(</span><span class="nx">data</span><span class="p">)</span> <span class="p">{</span>
+    <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">JSON</span><span class="p">.</span><span class="nx">stringify</span><span class="p">(</span><span class="nx">data</span><span class="p">));</span>
+  <span class="p">}</span>
+<span class="p">})</span>
+</code></pre></div><div class="highlight"><pre class="highlight javascript tab-javascript--nodejs"><code><span class="kd">const</span> <span class="nx">request</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="dl">'</span><span class="s1">node-fetch</span><span class="dl">'</span><span class="p">);</span>
+
+<span class="kd">const</span> <span class="nx">headers</span> <span class="o">=</span> <span class="p">{</span>
+  <span class="dl">'</span><span class="s1">Authorization</span><span class="dl">'</span><span class="p">:</span><span class="dl">'</span><span class="s1">Bearer {access-token}</span><span class="dl">'</span><span class="p">,</span>
+  <span class="dl">'</span><span class="s1">Accept</span><span class="dl">'</span><span class="p">:</span><span class="dl">'</span><span class="s1">application/json</span><span class="dl">'</span>
+
+<span class="p">};</span>
+
+<span class="nx">fetch</span><span class="p">(</span><span class="dl">'</span><span class="s1">https://*.modapi.io/v1/s2s/monetization-teams/{monetization-team-id}/transactions</span><span class="dl">'</span><span class="p">,</span>
+<span class="p">{</span>
+  <span class="na">method</span><span class="p">:</span> <span class="dl">'</span><span class="s1">GET</span><span class="dl">'</span><span class="p">,</span>
+
+  <span class="na">headers</span><span class="p">:</span> <span class="nx">headers</span>
+<span class="p">})</span>
+<span class="p">.</span><span class="nx">then</span><span class="p">(</span><span class="kd">function</span><span class="p">(</span><span class="nx">res</span><span class="p">)</span> <span class="p">{</span>
+    <span class="k">return</span> <span class="nx">res</span><span class="p">.</span><span class="nx">json</span><span class="p">();</span>
+<span class="p">}).</span><span class="nx">then</span><span class="p">(</span><span class="kd">function</span><span class="p">(</span><span class="nx">body</span><span class="p">)</span> <span class="p">{</span>
+    <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">body</span><span class="p">);</span>
+<span class="p">});</span>
+</code></pre></div><div class="highlight"><pre class="highlight python tab-python"><code><span class="kn">import</span> <span class="nn">requests</span>
+<span class="n">headers</span> <span class="o">=</span> <span class="p">{</span>
+  <span class="s">'Authorization'</span><span class="p">:</span> <span class="s">'Bearer {access-token}'</span><span class="p">,</span>
+  <span class="s">'Accept'</span><span class="p">:</span> <span class="s">'application/json'</span>
+<span class="p">}</span>
+
+<span class="n">r</span> <span class="o">=</span> <span class="n">requests</span><span class="p">.</span><span class="n">get</span><span class="p">(</span><span class="s">'https://*.modapi.io/v1/s2s/monetization-teams/{monetization-team-id}/transactions'</span><span class="p">,</span> <span class="n">params</span><span class="o">=</span><span class="p">{</span>
+
+<span class="p">},</span> <span class="n">headers</span> <span class="o">=</span> <span class="n">headers</span><span class="p">)</span>
+
+<span class="k">print</span> <span class="n">r</span><span class="p">.</span><span class="n">json</span><span class="p">()</span>
+</code></pre></div><div class="highlight"><pre class="highlight java tab-java"><code><span class="no">URL</span> <span class="n">obj</span> <span class="o">=</span> <span class="k">new</span> <span class="no">URL</span><span class="o">(</span><span class="s">"https://*.modapi.io/v1/s2s/monetization-teams/{monetization-team-id}/transactions"</span><span class="o">);</span>
+<span class="nc">HttpURLConnection</span> <span class="n">con</span> <span class="o">=</span> <span class="o">(</span><span class="nc">HttpURLConnection</span><span class="o">)</span> <span class="n">obj</span><span class="o">.</span><span class="na">openConnection</span><span class="o">();</span>
+<span class="n">con</span><span class="o">.</span><span class="na">setRequestMethod</span><span class="o">(</span><span class="s">"GET"</span><span class="o">);</span>
+<span class="kt">int</span> <span class="n">responseCode</span> <span class="o">=</span> <span class="n">con</span><span class="o">.</span><span class="na">getResponseCode</span><span class="o">();</span>
+<span class="nc">BufferedReader</span> <span class="n">in</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">BufferedReader</span><span class="o">(</span>
+    <span class="k">new</span> <span class="nf">InputStreamReader</span><span class="o">(</span><span class="n">con</span><span class="o">.</span><span class="na">getInputStream</span><span class="o">()));</span>
+<span class="nc">String</span> <span class="n">inputLine</span><span class="o">;</span>
+<span class="nc">StringBuffer</span> <span class="n">response</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">StringBuffer</span><span class="o">();</span>
+<span class="k">while</span> <span class="o">((</span><span class="n">inputLine</span> <span class="o">=</span> <span class="n">in</span><span class="o">.</span><span class="na">readLine</span><span class="o">())</span> <span class="o">!=</span> <span class="kc">null</span><span class="o">)</span> <span class="o">{</span>
+    <span class="n">response</span><span class="o">.</span><span class="na">append</span><span class="o">(</span><span class="n">inputLine</span><span class="o">);</span>
+<span class="o">}</span>
+<span class="n">in</span><span class="o">.</span><span class="na">close</span><span class="o">();</span>
+<span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="n">response</span><span class="o">.</span><span class="na">toString</span><span class="o">());</span>
+</code></pre></div>
+<p><span class="httpmethod GET">GET</span> <span class="endpointheading">/s2s/monetization-teams/{monetization-team-id}/transactions</span></p>
+
+<p>Get all monetization transactions for the given monetization team. Successful request will return a <code>200 - Success</code> response.</p>
+
+<table>
+<thead>
+<tr>
+<th>Filter</th>
+<th>Type</th>
+<th>Required</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>transaction_type</td>
+<td>string</td>
+<td>false</td>
+<td>The transaction types to find transactions by. Can be used as an array or on its own. <br><br>PENDING = pending transaction no payment taken<br>PAID = payment taken but funds not released<br>CLEARED = payment taken and earned funds released. <br>REFUNDED =  payment refunded to buyer<br>CANCELLED = payment cancelled by seller<br>FAILED = payment failed to process.</td>
+</tr>
+<tr>
+<td>monetization_type</td>
+<td>string</td>
+<td>false</td>
+<td>The monetization types to find transactions by. Can be used as an array or on its own. <br><br>FIAT = a payment made with real world currency<br>TOKEN = a payment made with virtual currency<br>EXTERNAL = a payment made with an external purchase service.</td>
+</tr>
+<tr>
+<td>buyer</td>
+<td>integer</td>
+<td>false</td>
+<td>The buyer id of who made the transaction to filter by. Can only be used as a single filter.</td>
+</tr>
+<tr>
+<td>clawback_uuid</td>
+<td>string</td>
+<td>false</td>
+<td>The unique identifier submitted during the transaction that can be used to trace a clawback event.</td>
+</tr>
+<tr>
+<td>gateway_uuid</td>
+<td>string</td>
+<td>false</td>
+<td>The unique identifier created during the transaction that can be used to trace a transaction.</td>
+</tr>
+<tr>
+<td>line_items</td>
+<td>string</td>
+<td>false</td>
+<td>The line_item key value to filter by. Can only be used as a single filter. Filtering can be done by key value on the line item. i.e. mod_id:1 or buyer_id:1</td>
+</tr>
+<tr>
+<td>created_at_start</td>
+<td>integer</td>
+<td>false</td>
+<td>Unix timestamp of date to start filtering transactions from. Assumes the end date to current if not given.</td>
+</tr>
+<tr>
+<td>created_at_end</td>
+<td>integer</td>
+<td>false</td>
+<td>Unix timestamp of date to start filtering transactions to. Assumes the start date to current if not given.</td>
+</tr>
+</tbody>
+</table>
+
+<blockquote>
+<p>Example response</p>
+</blockquote>
+<div class="highlight"><pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
+  </span><span class="nl">"data"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+    </span><span class="p">{</span><span class="w">
+      </span><span class="nl">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">1234</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"gateway_uuid"</span><span class="p">:</span><span class="w"> </span><span class="s2">"123e4567-e89b-12d3-a456-426614174000"</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"gateway_name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"tilia"</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"account_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"12345"</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"gross_amount"</span><span class="p">:</span><span class="w"> </span><span class="mi">199</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"net_amount"</span><span class="p">:</span><span class="w"> </span><span class="mi">199</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"platform_fee"</span><span class="p">:</span><span class="w"> </span><span class="mi">20</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"gateway_fee"</span><span class="p">:</span><span class="w"> </span><span class="mi">30</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"tax"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"tax_type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"sales"</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"currency"</span><span class="p">:</span><span class="w"> </span><span class="s2">"usd"</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"tokens"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"transaction_type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"paid"</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"monetization_type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"paid"</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"purchase_date"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2024-10-07 02:29:11"</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"created_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"1728268151"</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"payment_method"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+        </span><span class="p">{</span><span class="w">
+          </span><span class="nl">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Visa ending in 1111"</span><span class="p">,</span><span class="w">
+          </span><span class="nl">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"123e4567-e89b-12d3-a456-426614174000"</span><span class="p">,</span><span class="w">
+          </span><span class="nl">"amount"</span><span class="p">:</span><span class="w"> </span><span class="mi">199</span><span class="p">,</span><span class="w">
+          </span><span class="nl">"display_amount"</span><span class="p">:</span><span class="w"> </span><span class="s2">"USD 1.99"</span><span class="w">
+        </span><span class="p">}</span><span class="w">
+      </span><span class="p">],</span><span class="w">
+      </span><span class="nl">"line_items"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+        </span><span class="p">{</span><span class="w">
+          </span><span class="nl">"game_id"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
+          </span><span class="nl">"buyer_id"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
+          </span><span class="nl">"game_name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"my game"</span><span class="p">,</span><span class="w">
+          </span><span class="nl">"buyer_name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"smith"</span><span class="p">,</span><span class="w">
+          </span><span class="nl">"token_name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"mio"</span><span class="p">,</span><span class="w">
+          </span><span class="nl">"token_pack_id"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
+          </span><span class="nl">"token_pack_name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"200 Pack"</span><span class="w">
+        </span><span class="p">}</span><span class="w">
+      </span><span class="p">]</span><span class="w">
+    </span><span class="p">}</span><span class="w">
+  </span><span class="p">],</span><span class="w">
+  </span><span class="nl">"download"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+    </span><span class="nl">"per_page"</span><span class="p">:</span><span class="w"> </span><span class="s2">"15"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"current_page"</span><span class="p">:</span><span class="w"> </span><span class="s2">"/v1/s2s/monetization-teams/{monetization-team-id}/transactions?cursor=eyJjcmVhdGVkX2F0IjoiMjAyNC0xMC0wMiAwMDo1NTozMiIsIl9wb2ludHNUb05leHRJdaAJdsa10"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"next_page_url"</span><span class="p">:</span><span class="w"> </span><span class="s2">"/v1/s2s/monetization-teams/{monetization-team-id}/transactions?cursor=eyJjcmVhdGVkX2F0IjoiMjAyNC0xMC0wMiAwMDo1NTozMiIsIl9wb2ludHNUb05leHRJdaAJdsa10"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"prev_page_url"</span><span class="p">:</span><span class="w"> </span><span class="s2">"/v1/s2s/monetization-teams/{monetization-team-id}/transactions?cursor=eyJjcmVhdGVkX2F0IjoiMjAyNC0xMC0wMiAwMDo1NTozMiIsIl9wb2ludHNUb05leHRJdaAJdsa10"</span><span class="w">
+  </span><span class="p">}</span><span class="w">
+</span><span class="p">}</span><span class="w">
+
+</span></code></pre></div>
+<h3 id="Get-Transactions-responses">Responses</h3>
+
+<table>
+<thead>
+<tr>
+<th>Status</th>
+<th>Meaning</th>
+<th>Error Ref</th>
+<th>Description</th>
+<th>Response Schema</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>200</td>
+<td><a href="https://tools.ietf.org/html/rfc7231#section-6.3.1">OK</a></td>
+<td></td>
+<td>Successful Request</td>
+<td><a href="#schemaget_transactions">Get Transactions</a></td>
+</tr>
+</tbody>
+</table>
+
+<aside class="auth-notice">
+To perform this request, you must be authenticated via one of the following methods:
+<a href="#authentication">OAuth 2</a> (Scopes: readmonetization)
+</aside>
+<h2 id="get-transaction">Get Transaction</h2>
+<blockquote>
+<p>Example request</p>
+</blockquote>
+<div class="highlight"><pre class="highlight shell tab-shell"><code><span class="c"># You can also use wget</span>
+curl <span class="nt">-X</span> GET https://<span class="k">*</span>.modapi.io/v1/s2s/monetization-teams/<span class="o">{</span>monetization-team-id<span class="o">}</span>/transactions/<span class="o">{</span>transaction-id<span class="o">}</span> <span class="se">\</span>
+  <span class="nt">-H</span> <span class="s1">'Authorization: Bearer {access-token}'</span> <span class="se">\ </span>
+  <span class="nt">-H</span> <span class="s1">'Accept: application/json'</span>
+
+</code></pre></div><div class="highlight"><pre class="highlight http tab-http"><code><span class="nf">GET</span> <span class="nn">https://*.modapi.io/v1/s2s/monetization-teams/{monetization-team-id}/transactions/{transaction-id}</span> <span class="k">HTTP</span><span class="o">/</span><span class="m">1.1</span>
+<span class="na">Host</span><span class="p">:</span> <span class="s">*.modapi.io</span>
+
+Accept: application/json
+Authorization: Bearer {access-token}
+
+</code></pre></div><div class="highlight"><pre class="highlight javascript tab-javascript"><code><span class="kd">var</span> <span class="nx">headers</span> <span class="o">=</span> <span class="p">{</span>
+  <span class="dl">'</span><span class="s1">Authorization</span><span class="dl">'</span><span class="p">:</span><span class="dl">'</span><span class="s1">Bearer {access-token}</span><span class="dl">'</span><span class="p">,</span>
+  <span class="dl">'</span><span class="s1">Accept</span><span class="dl">'</span><span class="p">:</span><span class="dl">'</span><span class="s1">application/json</span><span class="dl">'</span>
+
+<span class="p">};</span>
+
+<span class="nx">$</span><span class="p">.</span><span class="nx">ajax</span><span class="p">({</span>
+  <span class="na">url</span><span class="p">:</span> <span class="dl">'</span><span class="s1">https://*.modapi.io/v1/s2s/monetization-teams/{monetization-team-id}/transactions/{transaction-id}</span><span class="dl">'</span><span class="p">,</span>
+  <span class="na">method</span><span class="p">:</span> <span class="dl">'</span><span class="s1">get</span><span class="dl">'</span><span class="p">,</span>
+
+  <span class="na">headers</span><span class="p">:</span> <span class="nx">headers</span><span class="p">,</span>
+  <span class="na">success</span><span class="p">:</span> <span class="kd">function</span><span class="p">(</span><span class="nx">data</span><span class="p">)</span> <span class="p">{</span>
+    <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">JSON</span><span class="p">.</span><span class="nx">stringify</span><span class="p">(</span><span class="nx">data</span><span class="p">));</span>
+  <span class="p">}</span>
+<span class="p">})</span>
+</code></pre></div><div class="highlight"><pre class="highlight javascript tab-javascript--nodejs"><code><span class="kd">const</span> <span class="nx">request</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="dl">'</span><span class="s1">node-fetch</span><span class="dl">'</span><span class="p">);</span>
+
+<span class="kd">const</span> <span class="nx">headers</span> <span class="o">=</span> <span class="p">{</span>
+  <span class="dl">'</span><span class="s1">Authorization</span><span class="dl">'</span><span class="p">:</span><span class="dl">'</span><span class="s1">Bearer {access-token}</span><span class="dl">'</span><span class="p">,</span>
+  <span class="dl">'</span><span class="s1">Accept</span><span class="dl">'</span><span class="p">:</span><span class="dl">'</span><span class="s1">application/json</span><span class="dl">'</span>
+
+<span class="p">};</span>
+
+<span class="nx">fetch</span><span class="p">(</span><span class="dl">'</span><span class="s1">https://*.modapi.io/v1/s2s/monetization-teams/{monetization-team-id}/transactions/{transaction-id}</span><span class="dl">'</span><span class="p">,</span>
+<span class="p">{</span>
+  <span class="na">method</span><span class="p">:</span> <span class="dl">'</span><span class="s1">GET</span><span class="dl">'</span><span class="p">,</span>
+
+  <span class="na">headers</span><span class="p">:</span> <span class="nx">headers</span>
+<span class="p">})</span>
+<span class="p">.</span><span class="nx">then</span><span class="p">(</span><span class="kd">function</span><span class="p">(</span><span class="nx">res</span><span class="p">)</span> <span class="p">{</span>
+    <span class="k">return</span> <span class="nx">res</span><span class="p">.</span><span class="nx">json</span><span class="p">();</span>
+<span class="p">}).</span><span class="nx">then</span><span class="p">(</span><span class="kd">function</span><span class="p">(</span><span class="nx">body</span><span class="p">)</span> <span class="p">{</span>
+    <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">body</span><span class="p">);</span>
+<span class="p">});</span>
+</code></pre></div><div class="highlight"><pre class="highlight python tab-python"><code><span class="kn">import</span> <span class="nn">requests</span>
+<span class="n">headers</span> <span class="o">=</span> <span class="p">{</span>
+  <span class="s">'Authorization'</span><span class="p">:</span> <span class="s">'Bearer {access-token}'</span><span class="p">,</span>
+  <span class="s">'Accept'</span><span class="p">:</span> <span class="s">'application/json'</span>
+<span class="p">}</span>
+
+<span class="n">r</span> <span class="o">=</span> <span class="n">requests</span><span class="p">.</span><span class="n">get</span><span class="p">(</span><span class="s">'https://*.modapi.io/v1/s2s/monetization-teams/{monetization-team-id}/transactions/{transaction-id}'</span><span class="p">,</span> <span class="n">params</span><span class="o">=</span><span class="p">{</span>
+
+<span class="p">},</span> <span class="n">headers</span> <span class="o">=</span> <span class="n">headers</span><span class="p">)</span>
+
+<span class="k">print</span> <span class="n">r</span><span class="p">.</span><span class="n">json</span><span class="p">()</span>
+</code></pre></div><div class="highlight"><pre class="highlight java tab-java"><code><span class="no">URL</span> <span class="n">obj</span> <span class="o">=</span> <span class="k">new</span> <span class="no">URL</span><span class="o">(</span><span class="s">"https://*.modapi.io/v1/s2s/monetization-teams/{monetization-team-id}/transactions/{transaction-id}"</span><span class="o">);</span>
+<span class="nc">HttpURLConnection</span> <span class="n">con</span> <span class="o">=</span> <span class="o">(</span><span class="nc">HttpURLConnection</span><span class="o">)</span> <span class="n">obj</span><span class="o">.</span><span class="na">openConnection</span><span class="o">();</span>
+<span class="n">con</span><span class="o">.</span><span class="na">setRequestMethod</span><span class="o">(</span><span class="s">"GET"</span><span class="o">);</span>
+<span class="kt">int</span> <span class="n">responseCode</span> <span class="o">=</span> <span class="n">con</span><span class="o">.</span><span class="na">getResponseCode</span><span class="o">();</span>
+<span class="nc">BufferedReader</span> <span class="n">in</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">BufferedReader</span><span class="o">(</span>
+    <span class="k">new</span> <span class="nf">InputStreamReader</span><span class="o">(</span><span class="n">con</span><span class="o">.</span><span class="na">getInputStream</span><span class="o">()));</span>
+<span class="nc">String</span> <span class="n">inputLine</span><span class="o">;</span>
+<span class="nc">StringBuffer</span> <span class="n">response</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">StringBuffer</span><span class="o">();</span>
+<span class="k">while</span> <span class="o">((</span><span class="n">inputLine</span> <span class="o">=</span> <span class="n">in</span><span class="o">.</span><span class="na">readLine</span><span class="o">())</span> <span class="o">!=</span> <span class="kc">null</span><span class="o">)</span> <span class="o">{</span>
+    <span class="n">response</span><span class="o">.</span><span class="na">append</span><span class="o">(</span><span class="n">inputLine</span><span class="o">);</span>
+<span class="o">}</span>
+<span class="n">in</span><span class="o">.</span><span class="na">close</span><span class="o">();</span>
+<span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="n">response</span><span class="o">.</span><span class="na">toString</span><span class="o">());</span>
+</code></pre></div>
+<p><span class="httpmethod GET">GET</span> <span class="endpointheading">/s2s/monetization-teams/{monetization-team-id}/transactions/{transaction-id}</span></p>
+
+<p>Get a monetization transaction for the given monetization team by the given transaction id. Successful request will return a <code>200 - Success</code> response.</p>
+
+<blockquote>
+<p>Example response</p>
+</blockquote>
+<div class="highlight"><pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
+  </span><span class="nl">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">1234</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"gateway_uuid"</span><span class="p">:</span><span class="w"> </span><span class="s2">"123e4567-e89b-12d3-a456-426614174000"</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"gateway_name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"tilia"</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"account_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"12345"</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"gross_amount"</span><span class="p">:</span><span class="w"> </span><span class="mi">199</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"net_amount"</span><span class="p">:</span><span class="w"> </span><span class="mi">199</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"platform_fee"</span><span class="p">:</span><span class="w"> </span><span class="mi">20</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"gateway_fee"</span><span class="p">:</span><span class="w"> </span><span class="mi">30</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"tax"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"tax_type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"sales"</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"currency"</span><span class="p">:</span><span class="w"> </span><span class="s2">"usd"</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"tokens"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"transaction_type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"paid"</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"monetization_type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"paid"</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"purchase_date"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2024-10-07 02:29:11"</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"created_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"1728268151"</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"payment_method"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+    </span><span class="p">{</span><span class="w">
+      </span><span class="nl">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Visa ending in 1111"</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"123e4567-e89b-12d3-a456-426614174000"</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"amount"</span><span class="p">:</span><span class="w"> </span><span class="mi">199</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"display_amount"</span><span class="p">:</span><span class="w"> </span><span class="s2">"USD 1.99"</span><span class="w">
+    </span><span class="p">}</span><span class="w">
+  </span><span class="p">],</span><span class="w">
+  </span><span class="nl">"line_items"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+    </span><span class="p">{</span><span class="w">
+      </span><span class="nl">"game_id"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"buyer_id"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"game_name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"my game"</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"buyer_name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"smith"</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"token_name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"mio"</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"token_pack_id"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"token_pack_name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"200 Pack"</span><span class="w">
+    </span><span class="p">}</span><span class="w">
+  </span><span class="p">]</span><span class="w">
+</span><span class="p">}</span><span class="w">
+
+</span></code></pre></div>
+<h3 id="Get-Transaction-responses">Responses</h3>
+
+<table>
+<thead>
+<tr>
+<th>Status</th>
+<th>Meaning</th>
+<th>Error Ref</th>
+<th>Description</th>
+<th>Response Schema</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>200</td>
+<td><a href="https://tools.ietf.org/html/rfc7231#section-6.3.1">OK</a></td>
+<td></td>
+<td>Successful Request</td>
+<td><a href="#schematransaction_object">Transaction Object</a></td>
+</tr>
+</tbody>
+</table>
+
+<aside class="auth-notice">
+To perform this request, you must be authenticated via one of the following methods:
+<a href="#authentication">OAuth 2</a> (Scopes: readmonetization)
+</aside>
 <h1 id="response-schemas">Response Schemas</h1><h2 id="access-token-object">Access Token Object</h2>
 <p><a name="schemaaccess_token_object"></a></p>
 <div class="highlight"><pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
@@ -24587,7 +25025,7 @@ To perform this request, you must be authenticated via one of the following meth
 </tr>
 </tbody>
 </table>
-<h2 id="get-transactions">Get Transactions</h2>
+<h2 id="get-transactions-2">Get Transactions</h2>
 <p><a name="schemaget_transactions"></a></p>
 <div class="highlight"><pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
   </span><span class="nl">"data"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
