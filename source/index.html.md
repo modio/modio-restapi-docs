@@ -1037,7 +1037,10 @@ To perform this request, you must be authenticated via one of the following meth
 curl -X POST https://*.modapi.io/v1/external/steamauth?api_key=YourApiKey \
   -H 'Content-Type: application/x-www-form-urlencoded' \ 
   -H 'Accept: application/json' \
-  --data-urlencode 'appdata=NDNuZmhnaWdyaGdqOWc0M2o5eTM0aGc='
+  --data-urlencode 'appdata=NDNuZmhnaWdyaGdqOWc0M2o5eTM0aGc=' \
+  --data-urlencode 'terms_agreed=true' \
+  --data-urlencode 'email=example@mod.io' \
+  --data-urlencode 'date_expires=1729236480'
 
 ```
 
@@ -1070,7 +1073,10 @@ $.ajax({
 ```javascript--nodejs
 const request = require('node-fetch');
 const inputBody = '{
-  "appdata": "NDNuZmhnaWdyaGdqOWc0M2o5eTM0aGc="
+  "appdata": "NDNuZmhnaWdyaGdqOWc0M2o5eTM0aGc=",
+  "terms_agreed": true,
+  "email": "example@mod.io",
+  "date_expires": 1729236480
 }';
 const headers = {
   'Content-Type':'application/x-www-form-urlencoded',
@@ -1172,7 +1178,10 @@ To perform this request, you must be authenticated via one of the following meth
 curl -X POST https://*.modapi.io/v1/external/xboxauth?api_key=YourApiKey \
   -H 'Content-Type: application/x-www-form-urlencoded' \ 
   -H 'Accept: application/json' \
-  -d 'xbox_token=XBL3.0 x=9264027439329321064;eym72VygeZzTSUVRmNvw8v...'
+  -d 'xbox_token=XBL3.0 x=9264027439329321064;eym72VygeZzTSUVRmNvw8v...' \
+  -d 'terms_agreed=true' \
+  -d 'email=example@mod.io' \
+  -d 'date_expires=1729236480'
 
 ```
 
@@ -1205,7 +1214,10 @@ $.ajax({
 ```javascript--nodejs
 const request = require('node-fetch');
 const inputBody = '{
-  "xbox_token": "XBL3.0 x=9264027439329321064;eym72VygeZzTSUVRmNvw8v..."
+  "xbox_token": "XBL3.0 x=9264027439329321064;eym72VygeZzTSUVRmNvw8v...",
+  "terms_agreed": true,
+  "email": "example@mod.io",
+  "date_expires": 1729236480
 }';
 const headers = {
   'Content-Type':'application/x-www-form-urlencoded',
@@ -1306,7 +1318,10 @@ To perform this request, you must be authenticated via one of the following meth
 curl -X POST https://*.modapi.io/v1/external/psnauth?api_key=YourApiKey \
   -H 'Content-Type: application/x-www-form-urlencoded' \ 
   -H 'Accept: application/json' \
-  -d 'auth_code=MAXfj2TMqpHnaUMJdwCDbZUi2L3usnV7aw7xwHX2PEqT5hLkFF2VUyhlnCAMC0tQR3trpFQot0zvMMEtBzekilqeVD1Qm9nEcs9FljneaL3hCWPFSf6jjDSxOxOSytGD'
+  -d 'auth_code=MAXfj2TMqpHnaUMJdwCDbZUi2L3usnV7aw7xwHX2PEqT5hLkFF2VUyhlnCAMC0tQR3trpFQot0zvMMEtBzekilqeVD1Qm9nEcs9FljneaL3hCWPFSf6jjDSxOxOSytGD' \
+  -d 'terms_agreed=true' \
+  -d 'email=example@mod.io' \
+  -d 'date_expires=1729236480'
 
 ```
 
@@ -1339,7 +1354,10 @@ $.ajax({
 ```javascript--nodejs
 const request = require('node-fetch');
 const inputBody = '{
-  "auth_code": "MAXfj2TMqpHnaUMJdwCDbZUi2L3usnV7aw7xwHX2PEqT5hLkFF2VUyhlnCAMC0tQR3trpFQot0zvMMEtBzekilqeVD1Qm9nEcs9FljneaL3hCWPFSf6jjDSxOxOSytGD"
+  "auth_code": "MAXfj2TMqpHnaUMJdwCDbZUi2L3usnV7aw7xwHX2PEqT5hLkFF2VUyhlnCAMC0tQR3trpFQot0zvMMEtBzekilqeVD1Qm9nEcs9FljneaL3hCWPFSf6jjDSxOxOSytGD",
+  "terms_agreed": true,
+  "email": "example@mod.io",
+  "date_expires": 1729236480
 }';
 const headers = {
   'Content-Type':'application/x-www-form-urlencoded',
@@ -1435,7 +1453,10 @@ To perform this request, you must be authenticated via one of the following meth
 curl -X POST https://*.modapi.io/v1/external/switchauth?api_key=YourApiKey \
   -H 'Content-Type: application/x-www-form-urlencoded' \ 
   -H 'Accept: application/json' \
-  -d 'id_token=m72VygeZzTSUVRmNvw8v...'
+  -d 'id_token=m72VygeZzTSUVRmNvw8v...' \
+  -d 'terms_agreed=true' \
+  -d 'email=example@mod.io' \
+  -d 'date_expires=1729236480'
 
 ```
 
@@ -1468,7 +1489,10 @@ $.ajax({
 ```javascript--nodejs
 const request = require('node-fetch');
 const inputBody = '{
-  "id_token": "m72VygeZzTSUVRmNvw8v..."
+  "id_token": "m72VygeZzTSUVRmNvw8v...",
+  "terms_agreed": true,
+  "email": "example@mod.io",
+  "date_expires": 1729236480
 }';
 const headers = {
   'Content-Type':'application/x-www-form-urlencoded',
@@ -1568,7 +1592,10 @@ curl -X POST https://*.modapi.io/v1/external/oculusauth?api_key=YourApiKey \
   -d 'device=rift' \
   -d 'nonce=m72VygeZzTSUVRmNvw8v...' \
   -d 'user_id=1829770514091149' \
-  -d 'access_token=OCAf5kD1SbVNE...'
+  -d 'access_token=OCAf5kD1SbVNE...' \
+  -d 'terms_agreed=true' \
+  -d 'email=example@mod.io' \
+  -d 'date_expires=1729236480'
 
 ```
 
@@ -1604,7 +1631,10 @@ const inputBody = '{
   "device": "rift",
   "nonce": "m72VygeZzTSUVRmNvw8v...",
   "user_id": "1829770514091149",
-  "access_token": "OCAf5kD1SbVNE..."
+  "access_token": "OCAf5kD1SbVNE...",
+  "terms_agreed": true,
+  "email": "example@mod.io",
+  "date_expires": 1729236480
 }';
 const headers = {
   'Content-Type':'application/x-www-form-urlencoded',
@@ -1662,9 +1692,9 @@ Request an access token on behalf of an Meta Quest user. To use this functionali
     Parameter|Type|Required|Description
     ---|---|---|---|
     device|string|true|The Meta Quest device being used for authentication.<br><br>Possible Options:<br>- _rift_<br>- _quest_
-    nonce|string|true|The nonce provided by calling [ovr_User_GetUserProof()](https://developer.oculus.com/documentation/platform/latest/concepts/dg-ownership/) from the Meta Quest SDK. <br><br>__NOTE:__ Due to the `nonce` potentially containing special characters, you must URL encode the string before sending the request to ensure it is successfully sent to our servers otherwise you may encounter an `422 Unprocessable Entity` response. For example, [cURL](https://ec.haxx.se/http-post.html) will do this for you by using the `--data-urlencode` option.
-    user_id|integer|true|The user's Meta Quest id providing by calling [ovr_GetLoggedInUserID()](https://developer.oculus.com/documentation/platform/latest/concepts/dg-ownership/) from the Meta Quest SDK.
-    access_token|string|true|The user's access token, providing by calling [ovr_User_GetAccessToken()](https://developer.oculus.com/documentation/platform/latest/concepts/dg-ownership/) from the Meta Quest SDK. mod.io uses this access token on the first login only to obtain the user's alias and is not saved on our servers.
+    nonce|string|true|The nonce provided by calling [ovr_User_GetUserProof()](https://developers.meta.com/horizon/documentation/native/ps-ownership/) from the Meta Quest SDK. <br><br>__NOTE:__ Due to the `nonce` potentially containing special characters, you must URL encode the string before sending the request to ensure it is successfully sent to our servers otherwise you may encounter an `422 Unprocessable Entity` response. For example, [cURL](https://ec.haxx.se/http-post.html) will do this for you by using the `--data-urlencode` option.
+    user_id|integer|true|The user's Meta Quest id providing by calling [ovr_GetLoggedInUserID()](https://developers.meta.com/horizon/documentation/native/ps-ownership/) from the Meta Quest SDK.
+    access_token|string|true|The user's access token, providing by calling [ovr_User_GetAccessToken()](https://developers.meta.com/horizon/documentation/native/ps-ownership/) from the Meta Quest SDK. mod.io uses this access token on the first login only to obtain the user's alias and is not saved on our servers.
     email|string||The users email address. If supplied, and the respective user does not have an email registered for their account we will send a confirmation email to confirm they have ownership of the specified email.<br><br>__WARNING__: We __strongly recommend__ that you prompt your users in a friendly manner at least once to provide their email address to link their Meta Quest account. Due to how Meta Quest handles user IDs - if we are not supplied with an email for a user at least once we will __never__ be able to link that user with their existing account at a later date as Meta Quest IDs operate at the game-scope, not globally. Failing to provide an email will in-effect generate an orphan account that will only be able to be accessed from your title.
     date_expires|integer||Unix timestamp of date in which the returned token will expire. Value cannot be higher than the default value which is a common year (unix timestamp + 31536000 seconds). Using a token after it's expiry time has elapsed will result in a `401 Unauthorized` response.
     terms_agreed|boolean||This MUST be set to `false` unless you have collected the [users agreement](#terms) prior to calling this endpoint in which case it can be set to `true` and will be recorded.<br><br>__NOTE:__ If this is set to `false` and the user has not agreed to the latest mod.io Terms of Use and Privacy Policy, an error `403 Forbidden (error_ref 11074)` will be returned and you will need to collect the [users agreement](#terms) and retry with this value set to `true` to authenticate the user.
@@ -1704,7 +1734,10 @@ To perform this request, you must be authenticated via one of the following meth
 curl -X POST https://*.modapi.io/v1/external/epicgamesauth?api_key=YourApiKey \
   -H 'Content-Type: application/x-www-form-urlencoded' \ 
   -H 'Accept: application/json' \
-  -d 'access_token=eym72VygeZzTSUVRmNvw8v...'
+  -d 'access_token=eym72VygeZzTSUVRmNvw8v...' \
+  -d 'terms_agreed=true' \
+  -d 'email=example@mod.io' \
+  -d 'date_expires=1729236480'
 
 ```
 
@@ -1737,7 +1770,10 @@ $.ajax({
 ```javascript--nodejs
 const request = require('node-fetch');
 const inputBody = '{
-  "access_token": "eym72VygeZzTSUVRmNvw8v..."
+  "access_token": "eym72VygeZzTSUVRmNvw8v...",
+  "terms_agreed": true,
+  "email": "example@mod.io",
+  "date_expires": 1729236480
 }';
 const headers = {
   'Content-Type':'application/x-www-form-urlencoded',
@@ -1832,7 +1868,10 @@ To perform this request, you must be authenticated via one of the following meth
 curl -X POST https://*.modapi.io/v1/external/galaxyauth?api_key=YourApiKey \
   -H 'Content-Type: application/x-www-form-urlencoded' \ 
   -H 'Accept: application/json' \
-  --data-urlencode 'appdata=GCL671bwZ/+zUeOWc0M'
+  --data-urlencode 'appdata=GCL671bwZ/+zUeOWc0M' \
+  --data-urlencode 'terms_agreed=true' \
+  --data-urlencode 'email=example@mod.io' \
+  --data-urlencode 'date_expires=1729236480'
 
 ```
 
@@ -1865,7 +1904,10 @@ $.ajax({
 ```javascript--nodejs
 const request = require('node-fetch');
 const inputBody = '{
-  "appdata": "GCL671bwZ/+zUeOWc0M"
+  "appdata": "GCL671bwZ/+zUeOWc0M",
+  "terms_agreed": true,
+  "email": "example@mod.io",
+  "date_expires": 1729236480
 }';
 const headers = {
   'Content-Type':'application/x-www-form-urlencoded',
@@ -1962,7 +2004,9 @@ To perform this request, you must be authenticated via one of the following meth
 curl -X POST https://*.modapi.io/v1/external/appleauth?api_key=YourApiKey \
   -H 'Content-Type: application/x-www-form-urlencoded' \ 
   -H 'Accept: application/json' \
-  -d 'id_token=eyJhbXciOiJIUzI1Lizs....'
+  -d 'id_token=eyJhbXciOiJIUzI1Lizs....' \
+  -d 'terms_agreed=true' \
+  -d 'date_expires=1729236480'
 
 ```
 
@@ -1995,7 +2039,9 @@ $.ajax({
 ```javascript--nodejs
 const request = require('node-fetch');
 const inputBody = '{
-  "id_token": "eyJhbXciOiJIUzI1Lizs...."
+  "id_token": "eyJhbXciOiJIUzI1Lizs....",
+  "terms_agreed": true,
+  "date_expires": 1729236480
 }';
 const headers = {
   'Content-Type':'application/x-www-form-urlencoded',
@@ -2093,7 +2139,9 @@ To perform this request, you must be authenticated via one of the following meth
 curl -X POST https://*.modapi.io/v1/external/googleauth?api_key=YourApiKey \
   -H 'Content-Type: application/x-www-form-urlencoded' \ 
   -H 'Accept: application/json' \
-  -d 'id_token=eyJhbXciOiJIUzI1Lizs....'
+  -d 'id_token=eyJhbXciOiJIUzI1Lizs....' \
+  -d 'terms_agreed=true' \
+  -d 'date_expires=1729236480'
 
 ```
 
@@ -2126,7 +2174,9 @@ $.ajax({
 ```javascript--nodejs
 const request = require('node-fetch');
 const inputBody = '{
-  "id_token": "eyJhbXciOiJIUzI1Lizs...."
+  "id_token": "eyJhbXciOiJIUzI1Lizs....",
+  "terms_agreed": true,
+  "date_expires": 1729236480
 }';
 const headers = {
   'Content-Type':'application/x-www-form-urlencoded',
@@ -2222,7 +2272,10 @@ To perform this request, you must be authenticated via one of the following meth
 curl -X POST https://*.modapi.io/v1/external/discordauth?api_key=YourApiKey \
   -H 'Content-Type: application/x-www-form-urlencoded' \ 
   -H 'Accept: application/json' \
-  -d 'discord_token=eyJhbXciOiJIUzI1Lizs....'
+  -d 'discord_token=eyJhbXciOiJIUzI1Lizs....' \
+  -d 'terms_agreed=true' \
+  -d 'email=example@mod.io' \
+  -d 'date_expires=1729236480'
 
 ```
 
@@ -2255,7 +2308,10 @@ $.ajax({
 ```javascript--nodejs
 const request = require('node-fetch');
 const inputBody = '{
-  "discord_token": "eyJhbXciOiJIUzI1Lizs...."
+  "discord_token": "eyJhbXciOiJIUzI1Lizs....",
+  "terms_agreed": true,
+  "email": "example@mod.io",
+  "date_expires": 1729236480
 }';
 const headers = {
   'Content-Type':'application/x-www-form-urlencoded',
@@ -2354,6 +2410,9 @@ curl -X POST https://*.modapi.io/v1/external/openidauth?api_key=YourApiKey \
   -H 'Content-Type: application/x-www-form-urlencoded' \ 
   -H 'Accept: application/json' \
   -d 'id_token=eyJhbXciOiJIUzI1Lizs....' \
+  -d 'terms_agreed=true' \
+  -d 'email=example@mod.io' \
+  -d 'date_expires=1729236480' \
   -d 'monetization_account=false'
 
 ```
@@ -2388,6 +2447,9 @@ $.ajax({
 const request = require('node-fetch');
 const inputBody = '{
   "id_token": "eyJhbXciOiJIUzI1Lizs....",
+  "terms_agreed": true,
+  "email": "example@mod.io",
+  "date_expires": 1729236480,
   "monetization_account": false
 }';
 const headers = {
@@ -9751,9 +9813,9 @@ Delete images, sketchfab or youtube links from a mod profile. Successful request
 
     Parameter|Type|Required|Description
     ---|---|---|---|
-    images[]|string||Filename of the image(s) you want to delete. Every image to delete requires a separate field with images[] as the key (eg. images[]=filename1.jpg, images[]=filename2.jpg)
-    youtube[]|string||Full Youtube link(s) you want to delete. Every Youtube link to delete requires a separate field with youtube[] as the key (eg. youtube[]=https://www.youtube.com/watch?v=IGVZOLV9SPo, youtube[]=https://www.youtube.com/watch?v=5nY6fjZ3EUc)
-    sketchfab[]|string||Full Sketchfab link(s) you want to delete. Every Sketchfab link to delete requires a separate field with sketchfab[] as the key (eg. sketchfab[]=https://sketchfab.com/models/71f04e390ff54e5f8d9a51b4e1caab7e, sketchfab[]=https://sketchfab.com/models/5c85e649dd854cb58c2b9af081ebb0ff)
+    images[]|string||Filename of the images to delete. All images to delete require a separate field with images[] as the key (eg. images[0]=filename1.jpg, images[1]=filename2.jpg)
+    youtube[]|string||Full Youtube links to delete. All Youtube links to delete require a separate field with youtube[] as the key (eg. youtube[0]=https://www.youtube.com/watch?v=IGVZOLV9SPo, youtube[1]=https://www.youtube.com/watch?v=5nY6fjZ3EUc)
+    sketchfab[]|string||Full Sketchfab links to delete. All Sketchfab links to delete require a separate field with sketchfab[] as the key (eg. sketchfab[0]=https://sketchfab.com/models/71f04e390ff54e5f8d9a51b4e1caab7e, sketchfab[1]=https://sketchfab.com/models/5c85e649dd854cb58c2b9af081ebb0ff)
 
 > Example response
 
@@ -9881,9 +9943,9 @@ Reorder images, sketchfab or youtube links from a mod profile. Successful reques
 
     Parameter|Type|Required|Description
     ---|---|---|---|
-    images[]|string||Filename of the image(s) you want to reorder. Every image to delete requires a separate field with images[] as the key (eg. images[]=filename1.jpg, images[]=filename2.jpg)
-    youtube[]|string||Full Youtube link(s) you want to reorder. Every Youtube link to delete requires a separate field with youtube[] as the key (eg. youtube[]=https://www.youtube.com/watch?v=IGVZOLV9SPo, youtube[]=https://www.youtube.com/watch?v=5nY6fjZ3EUc)
-    sketchfab[]|string||Full Sketchfab link(s) you want to reorder. Every Sketchfab link to delete requires a separate field with sketchfab[] as the key (eg. sketchfab[]=https://sketchfab.com/models/71f04e390ff54e5f8d9a51b4e1caab7e, sketchfab[]=https://sketchfab.com/models/5c85e649dd854cb58c2b9af081ebb0ff)
+    images[]|string||Filename of the images to reorder. All images must be specified to reorder them with images[] as the key (eg. images[0]=filename1.jpg, images[1]=filename2.jpg)
+    youtube[]|string||Full Youtube links to reorder. All Youtube links must be specified to reorder them with youtube[] as the key (eg. youtube[0]=https://www.youtube.com/watch?v=IGVZOLV9SPo, youtube[1]=https://www.youtube.com/watch?v=5nY6fjZ3EUc)
+    sketchfab[]|string||Full Sketchfab links to reorder. All Sketchfab links must be specified to reorder with sketchfab[] as the key (eg. sketchfab[0]=https://sketchfab.com/models/71f04e390ff54e5f8d9a51b4e1caab7e, sketchfab[1]=https://sketchfab.com/models/5c85e649dd854cb58c2b9af081ebb0ff)
 
 > Example response
 
@@ -12922,6 +12984,7 @@ To perform this request, you must be authenticated via one of the following meth
 # You can also use wget
 curl -X GET https://*.modapi.io/v1/me \
   -H 'Authorization: Bearer {access-token}' \ 
+  -H 'X-Modio-Delegation-Token: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxMjM0NTY3ODkwIiwibmFtZSI6IkpvaG4gRG9lIiwiaWF0IjoxNTE2MjM5MDIyfQ.SflKxwRJSMeKKF2QT4fwpMeJf36POk6yJV_adQssw5c' \ 
   -H 'Accept: application/json'
 
 ```
@@ -12932,12 +12995,14 @@ Host: *.modapi.io
 
 Accept: application/json
 Authorization: Bearer {access-token}
+X-Modio-Delegation-Token: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxMjM0NTY3ODkwIiwibmFtZSI6IkpvaG4gRG9lIiwiaWF0IjoxNTE2MjM5MDIyfQ.SflKxwRJSMeKKF2QT4fwpMeJf36POk6yJV_adQssw5c
 
 ```
 
 ```javascript
 var headers = {
   'Authorization':'Bearer {access-token}',
+  'X-Modio-Delegation-Token':'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxMjM0NTY3ODkwIiwibmFtZSI6IkpvaG4gRG9lIiwiaWF0IjoxNTE2MjM5MDIyfQ.SflKxwRJSMeKKF2QT4fwpMeJf36POk6yJV_adQssw5c',
   'Accept':'application/json'
 
 };
@@ -12958,6 +13023,7 @@ const request = require('node-fetch');
 
 const headers = {
   'Authorization':'Bearer {access-token}',
+  'X-Modio-Delegation-Token':'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxMjM0NTY3ODkwIiwibmFtZSI6IkpvaG4gRG9lIiwiaWF0IjoxNTE2MjM5MDIyfQ.SflKxwRJSMeKKF2QT4fwpMeJf36POk6yJV_adQssw5c',
   'Accept':'application/json'
 
 };
@@ -12979,6 +13045,7 @@ fetch('https://*.modapi.io/v1/me',
 import requests
 headers = {
   'Authorization': 'Bearer {access-token}',
+  'X-Modio-Delegation-Token': 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxMjM0NTY3ODkwIiwibmFtZSI6IkpvaG4gRG9lIiwiaWF0IjoxNTE2MjM5MDIyfQ.SflKxwRJSMeKKF2QT4fwpMeJf36POk6yJV_adQssw5c',
   'Accept': 'application/json'
 }
 
@@ -13007,7 +13074,7 @@ System.out.println(response.toString());
 
 `GET /me`
 
-Get the _authenticated user_ details. Successful request will return a single [User Object](#user-object).
+Get the _authenticated user_ details. Successful request will return a single [User Object](#user-object). This endpoint is optionally available as an S2S [Service to Service](#service-to-service) request with an oauth S2S token. This behaves in the same way and will display user info for the account that created the S2S token. To retrieve another users info instead, you can optionally pass in a [User Delegate Token](#user-delegation-token-object) when doing an S2S request. [UDT](#user-delegation-token-object) can only be used when doing an S2S request.
 
 > Example response
 
@@ -16306,6 +16373,319 @@ Status|Meaning|Error Ref|Description|Response Schema
 <aside class="auth-notice">
 To perform this request, you must be authenticated via one of the following methods:
 <a href="#authentication">OAuth 2</a> (Scopes: write)
+</aside>
+## Get Transactions
+
+> Example request
+
+```shell
+# You can also use wget
+curl -X GET https://*.modapi.io/v1/s2s/monetization-teams/{monetization-team-id}/transactions \
+  -H 'Authorization: Bearer {access-token}' \ 
+  -H 'Accept: application/json'
+
+```
+
+```http
+GET https://*.modapi.io/v1/s2s/monetization-teams/{monetization-team-id}/transactions HTTP/1.1
+Host: *.modapi.io
+
+Accept: application/json
+Authorization: Bearer {access-token}
+
+```
+
+```javascript
+var headers = {
+  'Authorization':'Bearer {access-token}',
+  'Accept':'application/json'
+
+};
+
+$.ajax({
+  url: 'https://*.modapi.io/v1/s2s/monetization-teams/{monetization-team-id}/transactions',
+  method: 'get',
+
+  headers: headers,
+  success: function(data) {
+    console.log(JSON.stringify(data));
+  }
+})
+```
+
+```javascript--nodejs
+const request = require('node-fetch');
+
+const headers = {
+  'Authorization':'Bearer {access-token}',
+  'Accept':'application/json'
+
+};
+
+fetch('https://*.modapi.io/v1/s2s/monetization-teams/{monetization-team-id}/transactions',
+{
+  method: 'GET',
+
+  headers: headers
+})
+.then(function(res) {
+    return res.json();
+}).then(function(body) {
+    console.log(body);
+});
+```
+
+```python
+import requests
+headers = {
+  'Authorization': 'Bearer {access-token}',
+  'Accept': 'application/json'
+}
+
+r = requests.get('https://*.modapi.io/v1/s2s/monetization-teams/{monetization-team-id}/transactions', params={
+
+}, headers = headers)
+
+print r.json()
+```
+
+```java
+URL obj = new URL("https://*.modapi.io/v1/s2s/monetization-teams/{monetization-team-id}/transactions");
+HttpURLConnection con = (HttpURLConnection) obj.openConnection();
+con.setRequestMethod("GET");
+int responseCode = con.getResponseCode();
+BufferedReader in = new BufferedReader(
+    new InputStreamReader(con.getInputStream()));
+String inputLine;
+StringBuffer response = new StringBuffer();
+while ((inputLine = in.readLine()) != null) {
+    response.append(inputLine);
+}
+in.close();
+System.out.println(response.toString());
+```
+
+`GET /s2s/monetization-teams/{monetization-team-id}/transactions`
+
+Get all monetization transactions for the given monetization team. Successful request will return a `200 - Success` response.
+
+Filter|Type|Required|Description
+---|---|---|---|
+transaction_type|string|false|The transaction types to find transactions by. Can be used as an array or on its own. <br><br>PENDING = pending transaction no payment taken<br>PAID = payment taken but funds not released<br>CLEARED = payment taken and earned funds released. <br>REFUNDED =  payment refunded to buyer<br>CANCELLED = payment cancelled by seller<br>FAILED = payment failed to process.
+monetization_type|string|false|The monetization types to find transactions by. Can be used as an array or on its own. <br><br>FIAT = a payment made with real world currency<br>TOKEN = a payment made with virtual currency<br>EXTERNAL = a payment made with an external purchase service.
+buyer|integer|false|The buyer id of who made the transaction to filter by. Can only be used as a single filter.
+clawback_uuid|string|false|The unique identifier submitted during the transaction that can be used to trace a clawback event.
+gateway_uuid|string|false|The unique identifier created during the transaction that can be used to trace a transaction.
+line_items|string|false|The line_item key value to filter by. Can only be used as a single filter. Filtering can be done by key value on the line item. i.e. mod_id:1 or buyer_id:1
+created_at_start|integer|false|Unix timestamp of date to start filtering transactions from. Assumes the end date to current if not given.
+created_at_end|integer|false|Unix timestamp of date to start filtering transactions to. Assumes the start date to current if not given.
+
+> Example response
+
+```json
+{
+  "data": [
+    {
+      "id": 1234,
+      "gateway_uuid": "123e4567-e89b-12d3-a456-426614174000",
+      "gateway_name": "tilia",
+      "account_id": "12345",
+      "gross_amount": 199,
+      "net_amount": 199,
+      "platform_fee": 20,
+      "gateway_fee": 30,
+      "tax": 0,
+      "tax_type": "sales",
+      "currency": "usd",
+      "tokens": 0,
+      "transaction_type": "paid",
+      "monetization_type": "paid",
+      "purchase_date": "2024-10-07 02:29:11",
+      "created_at": "1728268151",
+      "payment_method": [
+        {
+          "name": "Visa ending in 1111",
+          "id": "123e4567-e89b-12d3-a456-426614174000",
+          "amount": 199,
+          "display_amount": "USD 1.99"
+        }
+      ],
+      "line_items": [
+        {
+          "game_id": 0,
+          "buyer_id": 0,
+          "game_name": "my game",
+          "buyer_name": "smith",
+          "token_name": "mio",
+          "token_pack_id": 0,
+          "token_pack_name": "200 Pack"
+        }
+      ]
+    }
+  ],
+  "download": {
+    "per_page": "15",
+    "current_page": "/v1/s2s/monetization-teams/{monetization-team-id}/transactions?cursor=eyJjcmVhdGVkX2F0IjoiMjAyNC0xMC0wMiAwMDo1NTozMiIsIl9wb2ludHNUb05leHRJdaAJdsa10",
+    "next_page_url": "/v1/s2s/monetization-teams/{monetization-team-id}/transactions?cursor=eyJjcmVhdGVkX2F0IjoiMjAyNC0xMC0wMiAwMDo1NTozMiIsIl9wb2ludHNUb05leHRJdaAJdsa10",
+    "prev_page_url": "/v1/s2s/monetization-teams/{monetization-team-id}/transactions?cursor=eyJjcmVhdGVkX2F0IjoiMjAyNC0xMC0wMiAwMDo1NTozMiIsIl9wb2ludHNUb05leHRJdaAJdsa10"
+  }
+}
+
+```
+<h3 id="Get-Transactions-responses">Responses</h3>
+
+Status|Meaning|Error Ref|Description|Response Schema
+---|---|----|---|---|
+200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)||Successful Request|[Get Transactions](#schemaget_transactions)
+<aside class="auth-notice">
+To perform this request, you must be authenticated via one of the following methods:
+<a href="#authentication">OAuth 2</a> (Scopes: readmonetization)
+</aside>
+## Get Transaction
+
+> Example request
+
+```shell
+# You can also use wget
+curl -X GET https://*.modapi.io/v1/s2s/monetization-teams/{monetization-team-id}/transactions/{transaction-id} \
+  -H 'Authorization: Bearer {access-token}' \ 
+  -H 'Accept: application/json'
+
+```
+
+```http
+GET https://*.modapi.io/v1/s2s/monetization-teams/{monetization-team-id}/transactions/{transaction-id} HTTP/1.1
+Host: *.modapi.io
+
+Accept: application/json
+Authorization: Bearer {access-token}
+
+```
+
+```javascript
+var headers = {
+  'Authorization':'Bearer {access-token}',
+  'Accept':'application/json'
+
+};
+
+$.ajax({
+  url: 'https://*.modapi.io/v1/s2s/monetization-teams/{monetization-team-id}/transactions/{transaction-id}',
+  method: 'get',
+
+  headers: headers,
+  success: function(data) {
+    console.log(JSON.stringify(data));
+  }
+})
+```
+
+```javascript--nodejs
+const request = require('node-fetch');
+
+const headers = {
+  'Authorization':'Bearer {access-token}',
+  'Accept':'application/json'
+
+};
+
+fetch('https://*.modapi.io/v1/s2s/monetization-teams/{monetization-team-id}/transactions/{transaction-id}',
+{
+  method: 'GET',
+
+  headers: headers
+})
+.then(function(res) {
+    return res.json();
+}).then(function(body) {
+    console.log(body);
+});
+```
+
+```python
+import requests
+headers = {
+  'Authorization': 'Bearer {access-token}',
+  'Accept': 'application/json'
+}
+
+r = requests.get('https://*.modapi.io/v1/s2s/monetization-teams/{monetization-team-id}/transactions/{transaction-id}', params={
+
+}, headers = headers)
+
+print r.json()
+```
+
+```java
+URL obj = new URL("https://*.modapi.io/v1/s2s/monetization-teams/{monetization-team-id}/transactions/{transaction-id}");
+HttpURLConnection con = (HttpURLConnection) obj.openConnection();
+con.setRequestMethod("GET");
+int responseCode = con.getResponseCode();
+BufferedReader in = new BufferedReader(
+    new InputStreamReader(con.getInputStream()));
+String inputLine;
+StringBuffer response = new StringBuffer();
+while ((inputLine = in.readLine()) != null) {
+    response.append(inputLine);
+}
+in.close();
+System.out.println(response.toString());
+```
+
+`GET /s2s/monetization-teams/{monetization-team-id}/transactions/{transaction-id}`
+
+Get a monetization transaction for the given monetization team by the given transaction id. Successful request will return a `200 - Success` response.
+
+> Example response
+
+```json
+{
+  "id": 1234,
+  "gateway_uuid": "123e4567-e89b-12d3-a456-426614174000",
+  "gateway_name": "tilia",
+  "account_id": "12345",
+  "gross_amount": 199,
+  "net_amount": 199,
+  "platform_fee": 20,
+  "gateway_fee": 30,
+  "tax": 0,
+  "tax_type": "sales",
+  "currency": "usd",
+  "tokens": 0,
+  "transaction_type": "paid",
+  "monetization_type": "paid",
+  "purchase_date": "2024-10-07 02:29:11",
+  "created_at": "1728268151",
+  "payment_method": [
+    {
+      "name": "Visa ending in 1111",
+      "id": "123e4567-e89b-12d3-a456-426614174000",
+      "amount": 199,
+      "display_amount": "USD 1.99"
+    }
+  ],
+  "line_items": [
+    {
+      "game_id": 0,
+      "buyer_id": 0,
+      "game_name": "my game",
+      "buyer_name": "smith",
+      "token_name": "mio",
+      "token_pack_id": 0,
+      "token_pack_name": "200 Pack"
+    }
+  ]
+}
+
+```
+<h3 id="Get-Transaction-responses">Responses</h3>
+
+Status|Meaning|Error Ref|Description|Response Schema
+---|---|----|---|---|
+200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)||Successful Request|[Transaction Object](#schematransaction_object)
+<aside class="auth-notice">
+To perform this request, you must be authenticated via one of the following methods:
+<a href="#authentication">OAuth 2</a> (Scopes: readmonetization)
 </aside>
 # Response Schemas
 ## Access Token Object  
