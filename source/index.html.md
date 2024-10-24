@@ -16901,6 +16901,8 @@ date_expires|integer|Unix timestamp of when the `binary_url` will expire.
   "show_user_avatars": true,
   "show_sort_tabs": true,
   "allow_links": true,
+  "filter_right_side": true,
+  "name_right_side": true,
   "results_per_page": 0,
   "min_age": 0,
   "date_added": 0,
@@ -16942,6 +16944,8 @@ show_guides|boolean|Flag to show guides.
 show_user_avatars|boolean|Flag to show user avatars.
 show_sort_tabs|boolean|Flag to show sort tabs.
 allow_links|boolean|Flag to allow user submitted links.
+filter_right_side|boolean|Flag to move the filters to the right.
+name_right_side|boolean|Flag to move the mod/guide name to the right.
 results_per_page|integer|Number of results to show per page.
 min_age|integer|Minimum age for EMH access.
 date_added|integer|Timestamp indicating the date when the configuration was added.
