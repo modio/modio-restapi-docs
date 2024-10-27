@@ -305,6 +305,9 @@
             <a href="#changelog" class="toc-h1 toc-link" data-title="Changelog"><span class="reficon"><img src="images/cog-white.svg" alt="Reference" class="menu-reference-icon"></span> Changelog</a>
               <ul class="toc-list-h2">
                   <li>
+                    <a href="#jan-16-2024-migrating-api-domain" class="toc-h2 toc-link" data-title="Changelog">Jan 16, 2024 - Migrating API domain</a>
+                  </li>
+                  <li>
                     <a href="#oct-1-2023-adding-new-rate-limit-error-ref" class="toc-h2 toc-link" data-title="Changelog">Oct 1, 2023 - Adding new rate limit error ref</a>
                   </li>
                   <li>
@@ -344,12 +347,14 @@
     <div class="page-wrapper">
       <div class="dark-box"></div>
       <div class="content">
-        <h1 id="api-versions">API Versions</h1><h2 id="v1-latest-version">v1 (latest version)</h2><h3 id="date-updated-august-15-2023-3-59-pm-gmt">Date Updated: August 15, 2023, 3:59 pm GMT</h3>
+        <h1 id="api-versions">API Versions</h1><h2 id="v1-latest-version">v1 (latest version)</h2><h3 id="date-updated-october-26-2024-8-19-am-gmt">Date Updated: October 26, 2024, 8:19 am GMT</h3>
 <p>Initial API Release.</p>
-<h3 id="view-v1-docs"><span class="versionwrap"><a href="/">View v1 docs</a></span></h3><h1 id="changelog">Changelog</h1><h3 id="oct-1-2023-adding-new-rate-limit-error-ref">Oct 1, 2023 - Adding new rate limit error ref</h3>
-<p>Beginning Jan 1st, 2024, the error ref <strong>11009</strong> will be returned when a rate limit applies only to the endpoint being called. Error ref <strong>11008</strong> will continue to be returned in all other scenarios where the <a href="/#rate-limiting">rate limit</a> applies to all endpoints.</p>
+<h3 id="view-v1-docs"><span class="versionwrap"><a href="../">View v1 docs</a></span></h3><h1 id="changelog">Changelog</h1><h3 id="jan-16-2024-migrating-api-domain">Jan 16, 2024 - Migrating API domain</h3>
+<p>Beginning Jan 1st, 2025, usage of the old API domain of <strong>api.mod.io</strong> will heavily restricted, and all API usage should be using the new API domain <strong>https://*.modapi.io/v1</strong> which can be found via your games dashboard or on your <a href="--parse_siteurl/me/access">API access page</a>.</p>
+<h3 id="oct-1-2023-adding-new-rate-limit-error-ref">Oct 1, 2023 - Adding new rate limit error ref</h3>
+<p>Beginning Jan 1st, 2024, the error ref <strong>11009</strong> will be returned when a rate limit applies only to the endpoint being called. Error ref <strong>11008</strong> will continue to be returned in all other scenarios where the <a href="/restapi/rate-limiting/">rate limit</a> applies to all endpoints.</p>
 <h3 id="oct-27-2022-deprecating-x-ratelimit-headers">Oct 27, 2022 - Deprecating X-Ratelimit headers</h3>
-<p>Beginning Nov 20th, 2022, all custom rate limit headers <code>X-RateLimit-Limit</code>, <code>X-RateLimit-Remaining</code>, <code>X-RateLimit-RetryAfter</code> will no longer be returned. They will be replaced with <code>retry-after</code> when the <a href="/#rate-limiting">ratelimit is exceeded</a>.</p>
+<p>Beginning Nov 20th, 2022, all custom rate limit headers <code>X-RateLimit-Limit</code>, <code>X-RateLimit-Remaining</code>, <code>X-RateLimit-RetryAfter</code> will no longer be returned. They will be replaced with <code>retry-after</code> when the <a href="/restapi/rate-limiting/">ratelimit is exceeded</a>.</p>
 <h1 id="how-we-version">How We Version</h1><h3 id="latest-api-version-v1">Latest API Version: <span class="versionwrap latest">v1</span>
 </h3>
 <p>Our aim with mod.io is to offer developers the most powerful and flexible mod API available. This means continually evolving and improving based on your requirements and pushing changes when required. The majority of these changes will be non-breaking and deployed immediately, however there will be times when breaking changes are needed. To ensure your mod.io implementations are not affected by the changes, we have architectured a versioning system that aims to maintain backwards compatibility and allow you to upgrade your implementation at a time that suits.</p>
@@ -376,7 +381,7 @@ part of the URL required to make a successful request. </p>
 <p>When making requests to the API, you need to be sure you know what functionality is available to you
 and what you can expect the API to do under every situation. With that said, and in the interest of
 being as explicit as possible if you supply a version in the URL of your request that is <em>not</em> listed
-in the <a href="#api-versions">changelog</a> below - a <code>404 Not Found</code> will be returned in the form of the <a href="/#error-object">Error Object</a>.</p>
+in the <a href="#api-versions">changelog</a> below - a <code>404 Not Found</code> will be returned in the form of the <a href="/restapiref/#error-object">Error Object</a>.</p>
 <h2 id="what-are-breaking-changes">What are breaking changes</h2>
 <p>The benefit of the approach we have taken to versioning, is it allows us to push breaking changes
 and continually improve the API without impacting your application until you update. To clarify, for the mod.io API the following

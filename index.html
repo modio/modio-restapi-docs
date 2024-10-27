@@ -763,7 +763,7 @@
                     <a href="#get-game-token-packs" class="toc-h2 toc-link" data-title="Monetization">Get Game Token Packs</a>
                   </li>
                   <li>
-                    <a href="#purchase-a-mod" class="toc-h2 toc-link" data-title="Monetization">Purchase A Mod</a>
+                    <a href="#purchase-a-mod-external" class="toc-h2 toc-link" data-title="Monetization">Purchase A Mod (External)</a>
                   </li>
                   <li>
                     <a href="#get-mod-monetization-team" class="toc-h2 toc-link" data-title="Monetization">Get Mod Monetization Team</a>
@@ -780,10 +780,10 @@
                     <a href="#transaction-intent" class="toc-h2 toc-link" data-title="Service to Service">Transaction Intent</a>
                   </li>
                   <li>
-                    <a href="#transaction-commit" class="toc-h2 toc-link" data-title="Service to Service">Transaction Commit</a>
+                    <a href="#s2s-transaction-commit" class="toc-h2 toc-link" data-title="Service to Service">S2S Transaction Commit</a>
                   </li>
                   <li>
-                    <a href="#transaction-clawback" class="toc-h2 toc-link" data-title="Service to Service">Transaction Clawback</a>
+                    <a href="#s2s-transaction-clawback" class="toc-h2 toc-link" data-title="Service to Service">S2S Transaction Clawback</a>
                   </li>
                   <li>
                     <a href="#disconnect-user" class="toc-h2 toc-link" data-title="Service to Service">Disconnect User</a>
@@ -15938,6 +15938,12 @@ curl <span class="nt">-X</span> POST https://<span class="k">*</span>.modapi.io/
 <td>true</td>
 <td>One or more mod IDs that this mod is dependent on. Every dependency to add requires a separate field with dependencies[] as the key (eg. dependencies[]=1, dependencies[]=2). Max of 5 dependencies per request.</td>
 </tr>
+<tr>
+<td>sync</td>
+<td>integer</td>
+<td>false</td>
+<td>If true, will remove all existing dependencies and replace with the new ones provided in the request (if any).</td>
+</tr>
 </tbody>
 </table>
 
@@ -20216,7 +20222,7 @@ Authorization: Bearer {access-token}
 To perform this request, you must be authenticated via one of the following methods:
 <a href="#authentication">OAuth 2</a> (Scopes: write)
 </aside>
-<h2 id="purchase-a-mod">Purchase A Mod</h2>
+<h2 id="purchase-a-mod-external">Purchase A Mod (External)</h2>
 <blockquote>
 <p>Example request</p>
 </blockquote>
@@ -20476,7 +20482,7 @@ curl <span class="nt">-X</span> POST https://<span class="k">*</span>.modapi.io/
 </span><span class="p">}</span><span class="w">
 
 </span></code></pre></div>
-<h3 id="Purchase-A-Mod-responses">Responses</h3>
+<h3 id="Purchase-A-Mod-(External)-responses">Responses</h3>
 
 <table>
 <thead>
@@ -21174,7 +21180,7 @@ curl <span class="nt">-X</span> POST https://<span class="k">*</span>.modapi.io/
 To perform this request, you must be authenticated via one of the following methods:
 <a href="#authentication">OAuth 2</a> (Scopes: writemonetization)
 </aside>
-<h2 id="transaction-commit">Transaction Commit</h2>
+<h2 id="s2s-transaction-commit">S2S Transaction Commit</h2>
 <blockquote>
 <p>Example request</p>
 </blockquote>
@@ -21314,7 +21320,7 @@ curl <span class="nt">-X</span> POST https://<span class="k">*</span>.modapi.io/
 </span><span class="p">}</span><span class="w">
 
 </span></code></pre></div>
-<h3 id="Transaction-Commit-responses">Responses</h3>
+<h3 id="S2S-Transaction-Commit-responses">Responses</h3>
 
 <table>
 <thead>
@@ -21341,7 +21347,7 @@ curl <span class="nt">-X</span> POST https://<span class="k">*</span>.modapi.io/
 To perform this request, you must be authenticated via one of the following methods:
 <a href="#authentication">OAuth 2</a> (Scopes: writemonetization)
 </aside>
-<h2 id="transaction-clawback">Transaction Clawback</h2>
+<h2 id="s2s-transaction-clawback">S2S Transaction Clawback</h2>
 <blockquote>
 <p>Example request</p>
 </blockquote>
@@ -21502,7 +21508,7 @@ curl <span class="nt">-X</span> POST https://<span class="k">*</span>.modapi.io/
 </span><span class="p">}</span><span class="w">
 
 </span></code></pre></div>
-<h3 id="Transaction-Clawback-responses">Responses</h3>
+<h3 id="S2S-Transaction-Clawback-responses">Responses</h3>
 
 <table>
 <thead>
