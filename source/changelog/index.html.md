@@ -1,21 +1,25 @@
 # API Versions
 
 ## v1 (latest version)
-### Date Updated: August 15, 2023, 3:59 pm GMT
+### Date Updated: October 26, 2024, 8:19 am GMT
 
 Initial API Release.
 
-### <span class="versionwrap">[View v1 docs](/)</span>
+### <span class="versionwrap">[View v1 docs](../)</span>
 
 # Changelog
 
+### Jan 16, 2024 - Migrating API domain
+
+Beginning Jan 1st, 2025, usage of the old API domain of **api.mod.io** will heavily restricted, and all API usage should be using the new API domain **https://*.modapi.io/v1** which can be found via your games dashboard or on your [API access page](--parse_siteurl/me/access).
+
 ### Oct 1, 2023 - Adding new rate limit error ref
 
-Beginning Jan 1st, 2024, the error ref **11009** will be returned when a rate limit applies only to the endpoint being called. Error ref **11008** will continue to be returned in all other scenarios where the [rate limit](/#rate-limiting) applies to all endpoints.
+Beginning Jan 1st, 2024, the error ref **11009** will be returned when a rate limit applies only to the endpoint being called. Error ref **11008** will continue to be returned in all other scenarios where the [rate limit](/restapi/rate-limiting/) applies to all endpoints.
 
 ### Oct 27, 2022 - Deprecating X-Ratelimit headers
 
-Beginning Nov 20th, 2022, all custom rate limit headers `X-RateLimit-Limit`, `X-RateLimit-Remaining`, `X-RateLimit-RetryAfter` will no longer be returned. They will be replaced with `retry-after` when the [ratelimit is exceeded](/#rate-limiting).
+Beginning Nov 20th, 2022, all custom rate limit headers `X-RateLimit-Limit`, `X-RateLimit-Remaining`, `X-RateLimit-RetryAfter` will no longer be returned. They will be replaced with `retry-after` when the [ratelimit is exceeded](/restapi/rate-limiting/).
 
 # How We Version
 
@@ -52,7 +56,7 @@ part of the URL required to make a successful request.
 When making requests to the API, you need to be sure you know what functionality is available to you
 and what you can expect the API to do under every situation. With that said, and in the interest of
 being as explicit as possible if you supply a version in the URL of your request that is _not_ listed
-in the [changelog](#api-versions) below - a `404 Not Found` will be returned in the form of the [Error Object](/#error-object).
+in the [changelog](#api-versions) below - a `404 Not Found` will be returned in the form of the [Error Object](/restapiref/#error-object).
 
 ## What are breaking changes
 
