@@ -11858,7 +11858,6 @@ Add mod dependencies required by the corresponding mod. A dependency is a mod th
     Parameter|Type|Required|Description
     ---|---|---|---|
     dependencies[]|integer|true|One or more mod IDs that this mod is dependent on. Every dependency to add requires a separate field with dependencies[] as the key (eg. dependencies[]=1, dependencies[]=2). Max of 5 dependencies per request.
-    sync|integer|false|If true, will remove all existing dependencies and replace with the new ones provided in the request (if any).
 
 > Example response
 
@@ -15268,7 +15267,7 @@ Status|Meaning|Error Ref|Description|Response Schema
 To perform this request, you must be authenticated via one of the following methods:
 <a href="#authentication">OAuth 2</a> (Scopes: write)
 </aside>
-## Purchase A Mod (External)
+## Purchase A Mod
 
 > Example request
 
@@ -15525,7 +15524,7 @@ Purchase a mod. A Successful request will return the newly created [Pay Object](
 }
 
 ```
-<h3 id="Purchase-A-Mod-(External)-responses">Responses</h3>
+<h3 id="Purchase-A-Mod-responses">Responses</h3>
 
 Status|Meaning|Error Ref|Description|Response Schema
 ---|---|----|---|---|
@@ -15962,7 +15961,7 @@ Status|Meaning|Error Ref|Description|Response Schema
 To perform this request, you must be authenticated via one of the following methods:
 <a href="#authentication">OAuth 2</a> (Scopes: writemonetization)
 </aside>
-## S2S Transaction Commit
+## Transaction Commit
 
 > Example request
 
@@ -16099,7 +16098,7 @@ Create a service-to-service (S2S) transaction commit. This is for performing an 
 }
 
 ```
-<h3 id="S2S-Transaction-Commit-responses">Responses</h3>
+<h3 id="Transaction-Commit-responses">Responses</h3>
 
 Status|Meaning|Error Ref|Description|Response Schema
 ---|---|----|---|---|
@@ -16108,7 +16107,7 @@ Status|Meaning|Error Ref|Description|Response Schema
 To perform this request, you must be authenticated via one of the following methods:
 <a href="#authentication">OAuth 2</a> (Scopes: writemonetization)
 </aside>
-## S2S Transaction Clawback
+## Transaction Clawback
 
 > Example request
 
@@ -16251,7 +16250,7 @@ Create a service-to-service (S2S) transaction clawback. This is for unwinding a 
 }
 
 ```
-<h3 id="S2S-Transaction-Clawback-responses">Responses</h3>
+<h3 id="Transaction-Clawback-responses">Responses</h3>
 
 Status|Meaning|Error Ref|Description|Response Schema
 ---|---|----|---|---|
