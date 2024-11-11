@@ -1008,6 +1008,11 @@ The purpose of this endpoint is to provide the text, links and buttons you can u
       "url": "https://mod.io/privacy",
       "required": true
     },
+    "refund": {
+      "text": "Refund Policy",
+      "url": "https://mod.io/privacy",
+      "required": false
+    },
     "manage": {
       "text": "Manage Account",
       "url": "https://mod.io/me/account",
@@ -6599,6 +6604,7 @@ curl -X PUT https://*.modapi.io/v1/games/{game-id}/mods/{mod-id}/files/multipart
   -H 'Authorization: Bearer {access-token}' \ 
   -H 'Content-Range: bytes 0-52428799/209715196' \ 
   -H 'Digest: sha-256=X48E9qOokqqrvdts8nOJRJN3OWDUoyWxBf7kbu9DBPE=' \ 
+  -H 'Content-Type: application/x-www-form-urlencoded' \ 
   -H 'Accept: application/json'
 
 ```
@@ -6606,7 +6612,7 @@ curl -X PUT https://*.modapi.io/v1/games/{game-id}/mods/{mod-id}/files/multipart
 ```http
 PUT https://*.modapi.io/v1/games/{game-id}/mods/{mod-id}/files/multipart?upload_id=123e4567-e89b-12d3-a456-426614174000 HTTP/1.1
 Host: *.modapi.io
-
+Content-Type: application/x-www-form-urlencoded
 Accept: application/json
 Authorization: Bearer {access-token}
 Content-Range: bytes 0-52428799/209715196
@@ -6619,6 +6625,7 @@ var headers = {
   'Authorization':'Bearer {access-token}',
   'Content-Range':'bytes 0-52428799/209715196',
   'Digest':'sha-256=X48E9qOokqqrvdts8nOJRJN3OWDUoyWxBf7kbu9DBPE=',
+  'Content-Type':'application/x-www-form-urlencoded',
   'Accept':'application/json'
 
 };
@@ -6636,11 +6643,12 @@ $.ajax({
 
 ```javascript--nodejs
 const request = require('node-fetch');
-
+const inputBody = ''PK\x03\x04\x14\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00'';
 const headers = {
   'Authorization':'Bearer {access-token}',
   'Content-Range':'bytes 0-52428799/209715196',
   'Digest':'sha-256=X48E9qOokqqrvdts8nOJRJN3OWDUoyWxBf7kbu9DBPE=',
+  'Content-Type':'application/x-www-form-urlencoded',
   'Accept':'application/json'
 
 };
@@ -6648,7 +6656,7 @@ const headers = {
 fetch('https://*.modapi.io/v1/games/{game-id}/mods/{mod-id}/files/multipart?upload_id=123e4567-e89b-12d3-a456-426614174000',
 {
   method: 'PUT',
-
+  body: inputBody,
   headers: headers
 })
 .then(function(res) {
@@ -6664,6 +6672,7 @@ headers = {
   'Authorization': 'Bearer {access-token}',
   'Content-Range': 'bytes 0-52428799/209715196',
   'Digest': 'sha-256=X48E9qOokqqrvdts8nOJRJN3OWDUoyWxBf7kbu9DBPE=',
+  'Content-Type': 'application/x-www-form-urlencoded',
   'Accept': 'application/json'
 }
 
@@ -10312,7 +10321,11 @@ System.out.println(response.toString());
 
 `GET /games/{game-id}/tags`
 
-Get all tags for the corresponding game, that can be applied to any of its mods. Hidden tag groups will only be returned if the authenticated user is a team member of the parent game with either `Manager` or `Administrator` status. Successful request will return an array of [Game Tag Option Objects](#game-tag-option-object).
+Get all tags for the corresponding game, that can be applied to any of its mods. Successful request will return an array of [Game Tag Option Objects](#game-tag-option-object). We recommended reading the [filtering documentation](#filtering) to return only the records you want.
+
+    Filter|Type|Description
+    ---|---|---
+    show_hidden_tags|bool|show the hidden tags associated with the given game.
 
 > Example response
 
@@ -11733,7 +11746,137 @@ Get all dependencies the chosen mod has selected. This is useful if a mod requir
 ```json
 {
   "data": [
-    {}
+    {
+      "id": 2,
+      "game_id": 2,
+      "status": 1,
+      "visible": 1,
+      "submitted_by": {
+        "id": 1,
+        "name_id": "xant",
+        "username": "XanT",
+        "display_name_portal": null,
+        "date_online": 1509922961,
+        "date_joined": 1509922961,
+        "avatar": {
+          "filename": "avatar.png",
+          "original": "https://assets.modcdn.io/images/placeholder/avatar.png",
+          "thumb_50x50": "https://assets.modcdn.io/images/placeholder/avatar_50x50.png",
+          "thumb_100x100": "https://assets.modcdn.io/images/placeholder/avatar_100x100.png"
+        },
+        "timezone": "",
+        "language": "",
+        "profile_url": "https://mod.io/u/xant"
+      },
+      "date_added": 1492564103,
+      "date_updated": 1499841487,
+      "date_live": 1499841403,
+      "maturity_option": 0,
+      "community_options": 3,
+      "monetization_options": 0,
+      "stock": 0,
+      "price": 0,
+      "tax": 0,
+      "logo": {
+        "filename": "card.png",
+        "original": "https://assets.modcdn.io/images/placeholder/card.png",
+        "thumb_320x180": "https://assets.modcdn.io/images/placeholder/card.png",
+        "thumb_640x360": "https://assets.modcdn.io/images/placeholder/card.png",
+        "thumb_1280x720": "https://assets.modcdn.io/images/placeholder/card.png"
+      },
+      "homepage_url": "https://www.rogue-hdpack.com/",
+      "name": "Rogue Knight HD Pack",
+      "name_id": "rogue-knight-hd-pack",
+      "summary": "It's time to bask in the glory of beautiful 4k textures!",
+      "description": "<p>Rogue HD Pack does exactly what you thi...",
+      "description_plaintext": "Rogue HD Pack does exactly what you thi...",
+      "metadata_blob": "rogue,hd,high-res,4k,hd textures",
+      "profile_url": "https://mod.io/g/rogue-knight/m/rogue-knight-hd-pack",
+      "media": {
+        "youtube": [
+          "https://www.youtube.com/watch?v=dQw4w9WgXcQ"
+        ],
+        "sketchfab": [
+          "https://sketchfab.com/models/ef40b2d300334d009984c8865b2db1c8"
+        ],
+        "images": [
+          {
+            "filename": "card.png",
+            "original": "https://assets.modcdn.io/images/placeholder/card.png",
+            "thumb_320x180": "https://assets.modcdn.io/images/placeholder/card.png",
+            "thumb_1280x720": "https://assets.modcdn.io/images/placeholder/card.png"
+          }
+        ]
+      },
+      "modfile": {
+        "id": 2,
+        "mod_id": 2,
+        "date_added": 1499841487,
+        "date_updated": 1499841487,
+        "date_scanned": 1499841487,
+        "virus_status": 0,
+        "virus_positive": 0,
+        "virustotal_hash": "",
+        "filesize": 15181,
+        "filesize_uncompressed": 16384,
+        "filehash": {
+          "md5": "2d4a0e2d7273db6b0a94b0740a88ad0d"
+        },
+        "filename": "rogue-knight-v1.zip",
+        "version": "1.3",
+        "changelog": "VERSION 1.3 -- Changes -- Fixed critical castle floor bug.",
+        "metadata_blob": "rogue,hd,high-res,4k,hd textures",
+        "download": {
+          "binary_url": "https://*.modapi.io/v1/games/1/mods/1/files/1/download/c489a0354111a4d76640d47f0cdcb294",
+          "date_expires": 1579316848
+        },
+        "platforms": [
+          {
+            "platform": "windows",
+            "status": 1
+          }
+        ]
+      },
+      "dependencies": false,
+      "platforms": [
+        {
+          "platform": "windows",
+          "modfile_live": 1
+        }
+      ],
+      "metadata_kvp": [
+        {
+          "metakey": "pistol-dmg",
+          "metavalue": "800"
+        }
+      ],
+      "tags": [
+        {
+          "name": "Unity",
+          "name_localized": "Unity",
+          "date_added": 1499841487
+        }
+      ],
+      "stats": {
+        "mod_id": 2,
+        "popularity_rank_position": 13,
+        "popularity_rank_total_mods": 204,
+        "downloads_today": 327,
+        "downloads_total": 27492,
+        "subscribers_total": 16394,
+        "ratings_total": 1230,
+        "ratings_positive": 1047,
+        "ratings_negative": 183,
+        "ratings_percentage_positive": 91,
+        "ratings_weighted_aggregate": 87.38,
+        "ratings_display_text": "Very Positive",
+        "date_expires": 1492564103
+      },
+      "dependency_depth": 0
+    },
+    {
+        ...
+    }
   ],
   "result_count": 70,
   "result_offset": 0,
@@ -11858,6 +12001,7 @@ Add mod dependencies required by the corresponding mod. A dependency is a mod th
     Parameter|Type|Required|Description
     ---|---|---|---|
     dependencies[]|integer|true|One or more mod IDs that this mod is dependent on. Every dependency to add requires a separate field with dependencies[] as the key (eg. dependencies[]=1, dependencies[]=2). Max of 5 dependencies per request.
+    sync|integer|false|If true, will remove all existing dependencies and replace with the new ones provided in the request (if any).
 
 > Example response
 
@@ -12304,6 +12448,8 @@ curl -X POST https://*.modapi.io/v1/report \
   -d 'resource=mods' \
   -d 'id=3853' \
   -d 'type=1' \
+  -d 'reason=0' \
+  -d 'platforms=0' \
   -d 'name=Name of the user submitting the report' \
   -d 'contact=Contact details of the user submitting the report' \
   -d 'summary=Detailed explanation for report here'
@@ -12342,8 +12488,10 @@ $.ajax({
 const request = require('node-fetch');
 const inputBody = '{
   "resource": "mods",
-  "id": "3853",
-  "type": "1",
+  "id": 3853,
+  "type": 1,
+  "reason": 0,
+  "platforms": 0,
   "name": "Name of the user submitting the report",
   "contact": "Contact details of the user submitting the report",
   "summary": "Detailed explanation for report here"
@@ -12433,6 +12581,13 @@ The purpose of this endpoint is enable users to report a resource (game, mod or 
     contact|string||Contact details of the user submitting the report. Recommended for DMCA reports.
     summary|string|true|Detailed description of your report. Make sure you include all relevant information and links to help moderators investigate and respond appropriately.<br><br>Our [online reporting process](https://mod.io/report/widget) shows the information we collect and put into the `name`, `contact` and `summary` fields as appropiate. We recommend you implement a similar flow in-game.
 
+##### » reason
+Optional category for the report, applicable to reports where `type` is
+set to `2` (<i>Not Working</i>) reports. May be one of: <br><br>- `0`: No reason provided<br>-  `1`: Crashes Game<br>-  `2`: Does Not Load<br>-  `3`: Conflicts With Other Mods<br>-  `4`: Missing Dependencies<br>-  `5`: Installation Issues<br>-  `6`: Buggy Behavior<br>-  `7`: Incompatible With Game Version<br>-  `8`: File Corruption
+##### » platforms
+Optional platform for the report, applicable to reports where `type`
+is set to `2` (<i>Not Working</i>) reports. If X-Modio-Platform is present, platform will be
+set automatically if not provided. May be one of: <br><br>- `windows`<br>-  `mac`<br>-  `linux`<br>-  `android`<br>-  `ios`<br>-  `xboxone`<br>-  `xboxseriesx`<br>-  `ps4`<br>-  `ps5`<br>-  `switch`<br>-  `oculus`<br>-  `source`<br>-  `xboxone_draft`
 > Example response
 
 ```json
@@ -15267,7 +15422,7 @@ Status|Meaning|Error Ref|Description|Response Schema
 To perform this request, you must be authenticated via one of the following methods:
 <a href="#authentication">OAuth 2</a> (Scopes: write)
 </aside>
-## Purchase A Mod
+## Purchase A Mod (External)
 
 > Example request
 
@@ -15383,6 +15538,7 @@ Purchase a mod. A Successful request will return the newly created [Pay Object](
 ```json
 {
   "transaction_id": 0,
+  "gateway_uuid": "123e4567-e89b-12d3-a456-426614174000",
   "gross_amount": 0,
   "net_amount": 0,
   "platform_fee": 0,
@@ -15524,7 +15680,7 @@ Purchase a mod. A Successful request will return the newly created [Pay Object](
 }
 
 ```
-<h3 id="Purchase-A-Mod-responses">Responses</h3>
+<h3 id="Purchase-A-Mod-(External)-responses">Responses</h3>
 
 Status|Meaning|Error Ref|Description|Response Schema
 ---|---|----|---|---|
@@ -15939,6 +16095,7 @@ Create a service-to-service (S2S) transaction intent. This is for performing an 
 ```json
 {
   "transaction_id": 123456789,
+  "gateway_uuid": "123e4567-e89b-12d3-a456-426614174000",
   "gross_amount": 1000,
   "net_amount": 900,
   "platform_fee": 50,
@@ -15961,7 +16118,7 @@ Status|Meaning|Error Ref|Description|Response Schema
 To perform this request, you must be authenticated via one of the following methods:
 <a href="#authentication">OAuth 2</a> (Scopes: writemonetization)
 </aside>
-## Transaction Commit
+## S2S Transaction Commit
 
 > Example request
 
@@ -16085,6 +16242,7 @@ Create a service-to-service (S2S) transaction commit. This is for performing an 
 ```json
 {
   "transaction_id": 123456789,
+  "gateway_uuid": "123e4567-e89b-12d3-a456-426614174000",
   "gross_amount": 1000,
   "net_amount": 900,
   "platform_fee": 50,
@@ -16098,7 +16256,7 @@ Create a service-to-service (S2S) transaction commit. This is for performing an 
 }
 
 ```
-<h3 id="Transaction-Commit-responses">Responses</h3>
+<h3 id="S2S-Transaction-Commit-responses">Responses</h3>
 
 Status|Meaning|Error Ref|Description|Response Schema
 ---|---|----|---|---|
@@ -16107,7 +16265,7 @@ Status|Meaning|Error Ref|Description|Response Schema
 To perform this request, you must be authenticated via one of the following methods:
 <a href="#authentication">OAuth 2</a> (Scopes: writemonetization)
 </aside>
-## Transaction Clawback
+## S2S Transaction Clawback
 
 > Example request
 
@@ -16250,7 +16408,7 @@ Create a service-to-service (S2S) transaction clawback. This is for unwinding a 
 }
 
 ```
-<h3 id="Transaction-Clawback-responses">Responses</h3>
+<h3 id="S2S-Transaction-Clawback-responses">Responses</h3>
 
 Status|Meaning|Error Ref|Description|Response Schema
 ---|---|----|---|---|
@@ -16501,7 +16659,7 @@ created_at_end|integer|false|Unix timestamp of date to start filtering transacti
       "transaction_type": "paid",
       "monetization_type": "paid",
       "purchase_date": "2024-10-07 02:29:11",
-      "created_at": "1728268151",
+      "created_at": "1728268151123456",
       "payment_method": [
         {
           "name": "Visa ending in 1111",
@@ -16655,7 +16813,7 @@ Get a monetization transaction for the given monetization team by the given tran
   "transaction_type": "paid",
   "monetization_type": "paid",
   "purchase_date": "2024-10-07 02:29:11",
-  "created_at": "1728268151",
+  "created_at": "1728268151123456",
   "payment_method": [
     {
       "name": "Visa ending in 1111",
@@ -17108,7 +17266,7 @@ community_options|integer|Community features enabled for this game:<br><br>__0__
 ugc_name|string|Word used to describe user-generated content (mods, items, addons etc).
 name|string|Name of the game.
 name_id|string|Path for the game on mod.io. For example: https://mod.io/g/__rogue-knight__
-theme|[Theme Object](#schematheme_object)|Theme color values for the game.
+theme|[Game Theme Object](#schemagame_theme_object)|Theme color values for the game.
 tag_options|[Game Tag Option Localized Object](#schemagame_tag_option_localized_object)[]|Groups of tags configured by the game developer, that mods can select. Hidden tags will only be returned if `show_hidden_tags` is set to `true`. Group names and tags will be localized into the specified `Accept-Language` header value if provided, for a list of supported languages see [Localization](#localization) (Note that if a localized variant of a tag is not available it will default to English).
 platforms|[Game Platforms Object](#schemagame_platforms_object)[]|Platforms that are supported by this title.
 
@@ -17268,7 +17426,7 @@ instructions|string|A guide about creating and uploading mods for this game to m
 instructions_url|string|Link to a mod.io guide, your modding wiki or a page where modders can learn how to make and submit mods to your games profile.
 profile_url|string|URL to the game.
 stats|[Game Stats Object](#schemagame_stats_object)|Numerous aggregate stats for the game.
-theme|[Theme Object](#schematheme_object)|Theme color values for the game.
+theme|[Game Theme Object](#schemagame_theme_object)|Theme color values for the game.
 other_urls|[Game OtherUrls Object](#schemagame_otherurls_object)[]|Creator defined URLs to share.
 tag_options|[Game Tag Option Localized Object](#schemagame_tag_option_localized_object)[]|Groups of tags configured by the game developer, that mods can select. Hidden tags will only be returned if `show_hidden_tags` is set to `true`. Group names and tags will be localized into the specified `Accept-Language` header value if provided, for a list of supported languages see [Localization](#localization) (Note that if a localized variant of a tag is not available it will default to English).
 platforms|[Game Platforms Object](#schemagame_platforms_object)[]|Platforms that are supported by this title.
@@ -17441,6 +17599,34 @@ tags_localization|object[]|No description
 »» en|string|English translation of the tag.
 »» de|string|German translation of the tag.
 »» fr|string|French translation of the tag.
+
+
+
+## Game Theme Object  
+
+<a name="schemagame_theme_object"></a>
+
+```json
+{
+  "primary": "#44bfd5",
+  "dark": "#2c2c3f",
+  "light": "#ffffff",
+  "success": "#68D391",
+  "warning": "#d6af2e",
+  "danger": "#ff000e"
+} 
+```
+
+### Properties
+
+Name|Type|Description
+---|---|---|---|
+primary|string|The primary hex color code.
+dark|string|The dark hex color code.
+light|string|The light hex color code.
+success|string|The success hex color code.
+warning|string|The warning hex color code.
+danger|string|The danger hex color code.
 
 
 
@@ -18046,7 +18232,137 @@ result_total|integer|Total number of results found.
 ```json
 {
   "data": [
-    {}
+    {
+      "id": 2,
+      "game_id": 2,
+      "status": 1,
+      "visible": 1,
+      "submitted_by": {
+        "id": 1,
+        "name_id": "xant",
+        "username": "XanT",
+        "display_name_portal": null,
+        "date_online": 1509922961,
+        "date_joined": 1509922961,
+        "avatar": {
+          "filename": "avatar.png",
+          "original": "https://assets.modcdn.io/images/placeholder/avatar.png",
+          "thumb_50x50": "https://assets.modcdn.io/images/placeholder/avatar_50x50.png",
+          "thumb_100x100": "https://assets.modcdn.io/images/placeholder/avatar_100x100.png"
+        },
+        "timezone": "",
+        "language": "",
+        "profile_url": "https://mod.io/u/xant"
+      },
+      "date_added": 1492564103,
+      "date_updated": 1499841487,
+      "date_live": 1499841403,
+      "maturity_option": 0,
+      "community_options": 3,
+      "monetization_options": 0,
+      "stock": 0,
+      "price": 0,
+      "tax": 0,
+      "logo": {
+        "filename": "card.png",
+        "original": "https://assets.modcdn.io/images/placeholder/card.png",
+        "thumb_320x180": "https://assets.modcdn.io/images/placeholder/card.png",
+        "thumb_640x360": "https://assets.modcdn.io/images/placeholder/card.png",
+        "thumb_1280x720": "https://assets.modcdn.io/images/placeholder/card.png"
+      },
+      "homepage_url": "https://www.rogue-hdpack.com/",
+      "name": "Rogue Knight HD Pack",
+      "name_id": "rogue-knight-hd-pack",
+      "summary": "It's time to bask in the glory of beautiful 4k textures!",
+      "description": "<p>Rogue HD Pack does exactly what you thi...",
+      "description_plaintext": "Rogue HD Pack does exactly what you thi...",
+      "metadata_blob": "rogue,hd,high-res,4k,hd textures",
+      "profile_url": "https://mod.io/g/rogue-knight/m/rogue-knight-hd-pack",
+      "media": {
+        "youtube": [
+          "https://www.youtube.com/watch?v=dQw4w9WgXcQ"
+        ],
+        "sketchfab": [
+          "https://sketchfab.com/models/ef40b2d300334d009984c8865b2db1c8"
+        ],
+        "images": [
+          {
+            "filename": "card.png",
+            "original": "https://assets.modcdn.io/images/placeholder/card.png",
+            "thumb_320x180": "https://assets.modcdn.io/images/placeholder/card.png",
+            "thumb_1280x720": "https://assets.modcdn.io/images/placeholder/card.png"
+          }
+        ]
+      },
+      "modfile": {
+        "id": 2,
+        "mod_id": 2,
+        "date_added": 1499841487,
+        "date_updated": 1499841487,
+        "date_scanned": 1499841487,
+        "virus_status": 0,
+        "virus_positive": 0,
+        "virustotal_hash": "",
+        "filesize": 15181,
+        "filesize_uncompressed": 16384,
+        "filehash": {
+          "md5": "2d4a0e2d7273db6b0a94b0740a88ad0d"
+        },
+        "filename": "rogue-knight-v1.zip",
+        "version": "1.3",
+        "changelog": "VERSION 1.3 -- Changes -- Fixed critical castle floor bug.",
+        "metadata_blob": "rogue,hd,high-res,4k,hd textures",
+        "download": {
+          "binary_url": "https://*.modapi.io/v1/games/1/mods/1/files/1/download/c489a0354111a4d76640d47f0cdcb294",
+          "date_expires": 1579316848
+        },
+        "platforms": [
+          {
+            "platform": "windows",
+            "status": 1
+          }
+        ]
+      },
+      "dependencies": false,
+      "platforms": [
+        {
+          "platform": "windows",
+          "modfile_live": 1
+        }
+      ],
+      "metadata_kvp": [
+        {
+          "metakey": "pistol-dmg",
+          "metavalue": "800"
+        }
+      ],
+      "tags": [
+        {
+          "name": "Unity",
+          "name_localized": "Unity",
+          "date_added": 1499841487
+        }
+      ],
+      "stats": {
+        "mod_id": 2,
+        "popularity_rank_position": 13,
+        "popularity_rank_total_mods": 204,
+        "downloads_today": 327,
+        "downloads_total": 27492,
+        "subscribers_total": 16394,
+        "ratings_total": 1230,
+        "ratings_positive": 1047,
+        "ratings_negative": 183,
+        "ratings_percentage_positive": 91,
+        "ratings_weighted_aggregate": 87.38,
+        "ratings_display_text": "Very Positive",
+        "date_expires": 1492564103
+      },
+      "dependency_depth": 0
+    },
+    {
+        ...
+    }
   ],
   "result_count": 70,
   "result_offset": 0,
@@ -18628,7 +18944,7 @@ result_total|integer|Total number of results found.
       "transaction_type": "paid",
       "monetization_type": "paid",
       "purchase_date": "2024-10-07 02:29:11",
-      "created_at": "1728268151",
+      "created_at": "1728268151123456",
       "payment_method": [
         {
           "name": "Visa ending in 1111",
@@ -18943,6 +19259,49 @@ thumb_1280x720|string|URL to the image thumbnail.
 
 
 
+## Internal Public User Object 
+
+<a name="schemainternal_public_user_object"></a>
+
+```json
+{
+  "id": 1,
+  "name_id": "xant",
+  "username": "XanT",
+  "display_name_portal": null,
+  "date_online": 1509922961,
+  "date_joined": 1509922961,
+  "avatar": {
+    "filename": "avatar.png",
+    "original": "https://assets.modcdn.io/images/placeholder/avatar.png",
+    "thumb_50x50": "https://assets.modcdn.io/images/placeholder/avatar_50x50.png",
+    "thumb_100x100": "https://assets.modcdn.io/images/placeholder/avatar_100x100.png"
+  },
+  "profile_url": "https://mod.io/u/xant",
+  "privacy_options": "0",
+  "monetization_options": 0,
+  "monetization_status": 1
+} 
+```
+
+### Properties
+
+Name|Type|Description
+---|---|---|---|
+id|integer|Unique id of the user.
+name_id|string|Path for the user on mod.io. For example: https://mod.io/u/__name-id-here__
+username|string|Display name of the user.
+display_name_portal|string|The users' display name for the targeted portal. Value will be `null` if no valid `X-Modio-Portal` portal header value is provided. For more information see [Targeting a Portal](#targeting-a-portal).
+date_online|integer|Unix timestamp of date the user was last online.
+date_joined|integer|Unix timestamp of date the user joined.
+avatar|[Avatar Object](#schemaavatar_object)|Contains media URL's to the users avatar.
+profile_url|string|URL to the users profile.
+privacy_options|string|Users profile privacy setting.
+monetization_options|integer|Monetization options enabled for this user:<br><br>__0__ = Access to monetization features disabled<br>__1__ = Access to monetization features enabled<br>__2__ = Marketplace enabled<br>__?__ = Add the options you want together, to enable multiple features (see [BITWISE fields](#bitwise-and-bitwise-and))
+monetization_status|integer|The status of a monetized user for the corresponding `status`. Possible values:<br><br>__0__ = Unregistered<br>__1__ = Pending<br>__2__ = Rejected<br>__4__ = Review<br>__8__ = Action<br>__16__ = Approved<br>__32__ = Member
+
+
+
 ## Key-Value Pair Object  
 
 <a name="schemakey-value_pair_object"></a>
@@ -19102,14 +19461,171 @@ logo|[Logo Object](#schemalogo_object)|Contains media URL's to the logo for the 
 <a name="schemamod_dependencies_object"></a>
 
 ```json
-{} 
+{
+  "id": 2,
+  "game_id": 2,
+  "status": 1,
+  "visible": 1,
+  "submitted_by": {
+    "id": 1,
+    "name_id": "xant",
+    "username": "XanT",
+    "display_name_portal": null,
+    "date_online": 1509922961,
+    "date_joined": 1509922961,
+    "avatar": {
+      "filename": "avatar.png",
+      "original": "https://assets.modcdn.io/images/placeholder/avatar.png",
+      "thumb_50x50": "https://assets.modcdn.io/images/placeholder/avatar_50x50.png",
+      "thumb_100x100": "https://assets.modcdn.io/images/placeholder/avatar_100x100.png"
+    },
+    "timezone": "",
+    "language": "",
+    "profile_url": "https://mod.io/u/xant"
+  },
+  "date_added": 1492564103,
+  "date_updated": 1499841487,
+  "date_live": 1499841403,
+  "maturity_option": 0,
+  "community_options": 3,
+  "monetization_options": 0,
+  "stock": 0,
+  "price": 0,
+  "tax": 0,
+  "logo": {
+    "filename": "card.png",
+    "original": "https://assets.modcdn.io/images/placeholder/card.png",
+    "thumb_320x180": "https://assets.modcdn.io/images/placeholder/card.png",
+    "thumb_640x360": "https://assets.modcdn.io/images/placeholder/card.png",
+    "thumb_1280x720": "https://assets.modcdn.io/images/placeholder/card.png"
+  },
+  "homepage_url": "https://www.rogue-hdpack.com/",
+  "name": "Rogue Knight HD Pack",
+  "name_id": "rogue-knight-hd-pack",
+  "summary": "It's time to bask in the glory of beautiful 4k textures!",
+  "description": "<p>Rogue HD Pack does exactly what you thi...",
+  "description_plaintext": "Rogue HD Pack does exactly what you thi...",
+  "metadata_blob": "rogue,hd,high-res,4k,hd textures",
+  "profile_url": "https://mod.io/g/rogue-knight/m/rogue-knight-hd-pack",
+  "media": {
+    "youtube": [
+      "https://www.youtube.com/watch?v=dQw4w9WgXcQ"
+    ],
+    "sketchfab": [
+      "https://sketchfab.com/models/ef40b2d300334d009984c8865b2db1c8"
+    ],
+    "images": [
+      {
+        "filename": "card.png",
+        "original": "https://assets.modcdn.io/images/placeholder/card.png",
+        "thumb_320x180": "https://assets.modcdn.io/images/placeholder/card.png",
+        "thumb_1280x720": "https://assets.modcdn.io/images/placeholder/card.png"
+      }
+    ]
+  },
+  "modfile": {
+    "id": 2,
+    "mod_id": 2,
+    "date_added": 1499841487,
+    "date_updated": 1499841487,
+    "date_scanned": 1499841487,
+    "virus_status": 0,
+    "virus_positive": 0,
+    "virustotal_hash": "",
+    "filesize": 15181,
+    "filesize_uncompressed": 16384,
+    "filehash": {
+      "md5": "2d4a0e2d7273db6b0a94b0740a88ad0d"
+    },
+    "filename": "rogue-knight-v1.zip",
+    "version": "1.3",
+    "changelog": "VERSION 1.3 -- Changes -- Fixed critical castle floor bug.",
+    "metadata_blob": "rogue,hd,high-res,4k,hd textures",
+    "download": {
+      "binary_url": "https://*.modapi.io/v1/games/1/mods/1/files/1/download/c489a0354111a4d76640d47f0cdcb294",
+      "date_expires": 1579316848
+    },
+    "platforms": [
+      {
+        "platform": "windows",
+        "status": 1
+      }
+    ]
+  },
+  "dependencies": false,
+  "platforms": [
+    {
+      "platform": "windows",
+      "modfile_live": 1
+    }
+  ],
+  "metadata_kvp": [
+    {
+      "metakey": "pistol-dmg",
+      "metavalue": "800"
+    }
+  ],
+  "tags": [
+    {
+      "name": "Unity",
+      "name_localized": "Unity",
+      "date_added": 1499841487
+    }
+  ],
+  "stats": {
+    "mod_id": 2,
+    "popularity_rank_position": 13,
+    "popularity_rank_total_mods": 204,
+    "downloads_today": 327,
+    "downloads_total": 27492,
+    "subscribers_total": 16394,
+    "ratings_total": 1230,
+    "ratings_positive": 1047,
+    "ratings_negative": 183,
+    "ratings_percentage_positive": 91,
+    "ratings_weighted_aggregate": 87.38,
+    "ratings_display_text": "Very Positive",
+    "date_expires": 1492564103
+  },
+  "dependency_depth": 0
+} 
 ```
 
 ### Properties
 
 Name|Type|Description
 ---|---|---|---|
-undefined|object|No description
+id|integer|Unique mod id.
+game_id|integer|Unique game id.
+status|integer|Status of the mod (see [status and visibility](#status-amp-visibility) for details):<br><br>__0__ = Not Accepted<br>__1__ = Accepted<br>__3__ = Deleted
+visible|integer|Visibility of the mod (see [status and visibility](#status-amp-visibility) for details):<br><br>__0__ = Hidden<br>__1__ = Public
+submitted_by|[User Object](#schemauser_object)|The user who published the mod.
+date_added|integer|Unix timestamp of date mod was registered.
+date_updated|integer|Unix timestamp of date mod was updated.
+date_live|integer|Unix timestamp of date mod was set live.
+maturity_option|integer|Mature content found in this mod, this is only relevant if the parent game allows mods to be labelled as mature:<br><br>__0__ = None<br>__1__ = Alcohol<br>__2__ = Drugs<br>__4__ = Violence<br>__8__ = Explicit<br>__?__ = Add the options you want together, to enable multiple filters (see [BITWISE fields](#bitwise-and-bitwise-and))
+community_options|integer|Community features enabled for this mod:<br><br>__0__ = All of the options below are disabled<br>__1__ = Enable comments<br>__64__ = Enable previews<br>__128__ = Enable preview URLs<br>__1024__ = Allow dependencies<br>__?__ = Add the options you want together, to enable multiple features (see [BITWISE fields](#bitwise-and-bitwise-and))
+monetization_options|integer|Monetization features enabled for this mod:<br><br>__0__ = Access to monetization features disabled<br>__1__ = Access to monetization features enabled by the game for this mod<br>__2__ = Marketplace enabled<br>__8__ = Quantity of this mod is limited<br>__?__ = Add the options you want together, to enable multiple features (see [BITWISE fields](#bitwise-and-bitwise-and))
+stock|integer|The stock of the mod. 0 is the default value, and is only used when the mod has limited quantity enabled.
+price|integer|The price of the mod.
+tax|integer|The tax of the mod.
+logo|[Logo Object](#schemalogo_object)|Contains media URL's to the logo for the mod.
+homepage_url|string|Official homepage of the mod.
+name|string|Name of the mod.
+name_id|string|Path for the mod on mod.io. For example: https://mod.io/g/rogue-knight/m/__rogue-knight-hd-pack__
+summary|string|Summary of the mod.
+description|string|Detailed description of the mod which allows HTML.
+description_plaintext|string|`description` field converted into plaintext.
+metadata_blob|string|Metadata that is designed to be handled by the game client and is recommended to not be exposed to content creators when submitting their mods. Metadata can also be stored as searchable [key value pairs](#metadata), and to individual [mod files](#get-modfiles).
+profile_url|string|URL to the mod.
+media|[Mod Media Object](#schemamod_media_object)|Contains YouTube & Sketchfab links, aswell as media URL's of images for the mod.
+modfile|[Modfile Object](#schemamodfile_object)|The primary modfile for the mod.
+dependencies|boolean|If the mod has any dependencies, this value will be set to `true`.
+stats|[Mod Stats Object](#schemamod_stats_object)|Numerous aggregate stats for the mod.
+dependency_depth|integer|The depth of the dependency tree for this mod.
+platforms|[Mod Platforms Object](#schemamod_platforms_object)[]|Contains mod platform data.
+metadata_kvp|[Metadata KVP Object](#schemametadata_kvp_object)[]|Contains key-value metadata.
+tags|[Mod Tag Object](#schemamod_tag_object)[]|Contains mod tag data.
 
 
 
@@ -19704,6 +20220,7 @@ prev_page_url|integer|The url for the previous page if it exists.
 ```json
 {
   "transaction_id": 0,
+  "gateway_uuid": "123e4567-e89b-12d3-a456-426614174000",
   "gross_amount": 0,
   "net_amount": 0,
   "platform_fee": 0,
@@ -19850,6 +20367,7 @@ prev_page_url|integer|The url for the previous page if it exists.
 Name|Type|Description
 ---|---|---|---|
 transaction_id|integer|The transaction id.
+gateway_uuid|string|The universally unique ID (UUID) that represents a unique tranasction with the payment gateway.
 gross_amount|integer|The gross amount of the purchase in the lowest denomination of currency.
 net_amount|integer|The net amount of the purchase in the lowest denomination of currency.
 platform_fee|integer|The platform fee of the purchase in the lowest denomination of currency.
@@ -19999,6 +20517,7 @@ purchase_date|integer|The time of the purchase.
 ```json
 {
   "transaction_id": 123456789,
+  "gateway_uuid": "123e4567-e89b-12d3-a456-426614174000",
   "gross_amount": 1000,
   "net_amount": 900,
   "platform_fee": 50,
@@ -20017,6 +20536,7 @@ purchase_date|integer|The time of the purchase.
 Name|Type|Description
 ---|---|---|---|
 transaction_id|integer|The transaction id.
+gateway_uuid|string|The universally unique ID (UUID) that represents a unique tranasction with the payment gateway.
 gross_amount|integer|The gross amount of the purchase in the lowest denomination of currency.
 net_amount|integer|The net amount of the purchase in the lowest denomination of currency.
 platform_fee|integer|The platform fee of the purchase in the lowest denomination of currency.
@@ -20145,6 +20665,11 @@ invite_pending|integer|If the team member invitation is still pending:<br><br>__
       "url": "https://mod.io/privacy",
       "required": true
     },
+    "refund": {
+      "text": "Refund Policy",
+      "url": "https://mod.io/privacy",
+      "required": false
+    },
     "manage": {
       "text": "Manage Account",
       "url": "https://mod.io/me/account",
@@ -20178,38 +20703,14 @@ links|object|Links to embed into the Terms.
 »» text|string|Text for the link.
 »» url|string|Link to the mod.io Privacy Policy.
 »» required|boolean|Is this link required.
+» refund|object|Refund Policy link.
+»» text|string|Text for the link.
+»» url|string|Link to the mod.io Refund Policy.
+»» required|boolean|Is this link required.
 » manage|object|Manage User Account link.
 »» text|string|Text for the link.
 »» url|string|Link to the mod.io page to manage a User's Account.
 »» required|boolean|Is this link required.
-
-
-
-## Theme Object
-
-   <a name="schematheme_object"></a>
-
-```json
-{
-  "primary": "#44bfd5",
-  "dark": "#2c2c3f",
-  "light": "#ffffff",
-  "success": "#68D391",
-  "warning": "#d6af2e",
-  "danger": "#ff000e"
-} 
-```
-
-### Properties
-
-Name|Type|Description
----|---|---|---|
-primary|string|The primary hex color code.
-dark|string|The dark hex color code.
-light|string|The light hex color code.
-success|string|The success hex color code.
-warning|string|The warning hex color code.
-danger|string|The danger hex color code.
 
 
 
@@ -20234,7 +20735,7 @@ danger|string|The danger hex color code.
   "transaction_type": "paid",
   "monetization_type": "paid",
   "purchase_date": "2024-10-07 02:29:11",
-  "created_at": "1728268151",
+  "created_at": "1728268151123456",
   "payment_method": [
     {
       "name": "Visa ending in 1111",
@@ -20262,7 +20763,7 @@ danger|string|The danger hex color code.
 Name|Type|Description
 ---|---|---|---|
 id|integer|Unique transaction id.
-gateway_uuid|string|The universally unique ID (UUID) that represents the tranasction id.
+gateway_uuid|string|The universally unique ID (UUID) that represents a unique tranasction with the payment gateway.
 gateway_name|string|The gateway that processed the transaction.
 account_id|integer|The unique monetization account id that actioned the transaction.
 gross_amount|integer|The gross amount of the transaction.
@@ -20275,8 +20776,8 @@ currency|string|The currency type on the processed transaction.
 tokens|integer|The amount of virtual currency associated with the transaction. Will be omitted when no tokens are involved.
 transaction_type|string|The transaction status type on the processed transaction. I.e. is it paid, pending, refunded or cleared.
 monetization_type|string|The monetizaton type on the processed transaction. I.e. is it fiat, tokens or external.
-purchase_date|string|The purchase date in a human reabled date time stamp.
-created_at|string|Unix timestamp of date the transaction was created at. Same as purchased at date.
+purchase_date|string|The beginging purchase date the transaction started on in a human reabled date time stamp.
+created_at|string|The timestamp of date the transaction status was recorded in micro time precsion.
 payment_method|[Payment Method Object](#schemapayment_method_object)[]|Array containing payment method objects.
 line_items|[Line Items Object](#schemaline_items_object)[]|Array containing line item objects.
 
