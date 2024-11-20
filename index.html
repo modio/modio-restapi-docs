@@ -854,9 +854,6 @@
                     <a href="#game-tag-option-object" class="toc-h2 toc-link" data-title="Response Schemas">Game Tag Option Object</a>
                   </li>
                   <li>
-                    <a href="#game-theme-object" class="toc-h2 toc-link" data-title="Response Schemas">Game Theme Object</a>
-                  </li>
-                  <li>
                     <a href="#game-token-pack-object" class="toc-h2 toc-link" data-title="Response Schemas">Game Token Pack Object</a>
                   </li>
                   <li>
@@ -1043,6 +1040,9 @@
                     <a href="#terms-object" class="toc-h2 toc-link" data-title="Response Schemas">Terms Object</a>
                   </li>
                   <li>
+                    <a href="#theme-object" class="toc-h2 toc-link" data-title="Response Schemas">Theme Object</a>
+                  </li>
+                  <li>
                     <a href="#transaction-object" class="toc-h2 toc-link" data-title="Response Schemas">Transaction Object</a>
                   </li>
                   <li>
@@ -1113,7 +1113,7 @@
 <td><strong>SDK</strong></td>
 <td>Drop our <a href="https://github.com/modio/modio-sdk">open source C/C++ SDK</a> into your game to call mod.io functionality.</td>
 <td>Developers that want a SDK that abstracts the uploading, downloading and unzip flows behind easy to use function calls.</td>
-<td><a href="https://docs.mod.io/cppsdkref/">Here</a></td>
+<td><a href="https://docs.mod.io/cppsdk/refdocs/">Here</a></td>
 </tr>
 <tr>
 <td><strong>Tools/Plugins</strong></td>
@@ -1143,7 +1143,7 @@
 </td>
 <td><img src="images/tool-unreal-73799aa5.png" alt="Unreal Plugin"></td>
 <td>
-<strong>Unreal Plugin</strong><br><a href="https://github.com/modio/modio-ue">SDK</a><br><a href="https://docs.mod.io/unrealref/">Getting Started</a><br><a href="https://github.com/modio/modio-ue4-sample">UE4 Sample Project</a><br><a href="https://github.com/modio/modio-ue5-sample">UE5 Sample Project</a><br>
+<strong>Unreal Plugin</strong><br><a href="https://github.com/modio/modio-ue">SDK</a><br><a href="https://docs.mod.io/unreal/refdocs/">Getting Started</a><br><a href="https://github.com/modio/modio-ue4-sample">UE4 Sample Project</a><br><a href="https://github.com/modio/modio-ue5-sample">UE5 Sample Project</a><br>
 </td>
 </tr>
 <tr>
@@ -1153,7 +1153,7 @@
 </td>
 <td><img src="images/tool-ccpp-1f2d5425.png" alt="C/C++ SDK"></td>
 <td>
-<strong>C/C++ SDK</strong><br><a href="https://github.com/modio/modio-sdk">SDK</a><br><a href="https://docs.mod.io/cppsdkref/">Getting Started</a><br>
+<strong>C/C++ SDK</strong><br><a href="https://github.com/modio/modio-sdk">SDK</a><br><a href="https://docs.mod.io/cppsdk/ref/">Getting Started</a><br>
 </td>
 </tr>
 <tr>
@@ -20511,7 +20511,6 @@ curl <span class="nt">-X</span> POST https://<span class="k">*</span>.modapi.io/
 </blockquote>
 <div class="highlight"><pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
   </span><span class="nl">"transaction_id"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
-  </span><span class="nl">"gateway_uuid"</span><span class="p">:</span><span class="w"> </span><span class="s2">"123e4567-e89b-12d3-a456-426614174000"</span><span class="p">,</span><span class="w">
   </span><span class="nl">"gross_amount"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
   </span><span class="nl">"net_amount"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
   </span><span class="nl">"platform_fee"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
@@ -21311,7 +21310,6 @@ curl <span class="nt">-X</span> POST https://<span class="k">*</span>.modapi.io/
 </blockquote>
 <div class="highlight"><pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
   </span><span class="nl">"transaction_id"</span><span class="p">:</span><span class="w"> </span><span class="mi">123456789</span><span class="p">,</span><span class="w">
-  </span><span class="nl">"gateway_uuid"</span><span class="p">:</span><span class="w"> </span><span class="s2">"123e4567-e89b-12d3-a456-426614174000"</span><span class="p">,</span><span class="w">
   </span><span class="nl">"gross_amount"</span><span class="p">:</span><span class="w"> </span><span class="mi">1000</span><span class="p">,</span><span class="w">
   </span><span class="nl">"net_amount"</span><span class="p">:</span><span class="w"> </span><span class="mi">900</span><span class="p">,</span><span class="w">
   </span><span class="nl">"platform_fee"</span><span class="p">:</span><span class="w"> </span><span class="mi">50</span><span class="p">,</span><span class="w">
@@ -21479,7 +21477,6 @@ curl <span class="nt">-X</span> POST https://<span class="k">*</span>.modapi.io/
 </blockquote>
 <div class="highlight"><pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
   </span><span class="nl">"transaction_id"</span><span class="p">:</span><span class="w"> </span><span class="mi">123456789</span><span class="p">,</span><span class="w">
-  </span><span class="nl">"gateway_uuid"</span><span class="p">:</span><span class="w"> </span><span class="s2">"123e4567-e89b-12d3-a456-426614174000"</span><span class="p">,</span><span class="w">
   </span><span class="nl">"gross_amount"</span><span class="p">:</span><span class="w"> </span><span class="mi">1000</span><span class="p">,</span><span class="w">
   </span><span class="nl">"net_amount"</span><span class="p">:</span><span class="w"> </span><span class="mi">900</span><span class="p">,</span><span class="w">
   </span><span class="nl">"platform_fee"</span><span class="p">:</span><span class="w"> </span><span class="mi">50</span><span class="p">,</span><span class="w">
@@ -22961,7 +22958,7 @@ To perform this request, you must be authenticated via one of the following meth
 </tr>
 <tr>
 <td>theme</td>
-<td><a href="#schemagame_theme_object">Game Theme Object</a></td>
+<td><a href="#schematheme_object">Theme Object</a></td>
 <td>Theme color values for the game.</td>
 </tr>
 <tr>
@@ -23256,7 +23253,7 @@ To perform this request, you must be authenticated via one of the following meth
 </tr>
 <tr>
 <td>theme</td>
-<td><a href="#schemagame_theme_object">Game Theme Object</a></td>
+<td><a href="#schematheme_object">Theme Object</a></td>
 <td>Theme color values for the game.</td>
 </tr>
 <tr>
@@ -23596,58 +23593,6 @@ To perform this request, you must be authenticated via one of the following meth
 </tr>
 </tbody>
 </table>
-<h2 id="game-theme-object">Game Theme Object</h2>
-<p><a name="schemagame_theme_object"></a></p>
-<div class="highlight"><pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
-  </span><span class="nl">"primary"</span><span class="p">:</span><span class="w"> </span><span class="s2">"#44bfd5"</span><span class="p">,</span><span class="w">
-  </span><span class="nl">"dark"</span><span class="p">:</span><span class="w"> </span><span class="s2">"#2c2c3f"</span><span class="p">,</span><span class="w">
-  </span><span class="nl">"light"</span><span class="p">:</span><span class="w"> </span><span class="s2">"#ffffff"</span><span class="p">,</span><span class="w">
-  </span><span class="nl">"success"</span><span class="p">:</span><span class="w"> </span><span class="s2">"#68D391"</span><span class="p">,</span><span class="w">
-  </span><span class="nl">"warning"</span><span class="p">:</span><span class="w"> </span><span class="s2">"#d6af2e"</span><span class="p">,</span><span class="w">
-  </span><span class="nl">"danger"</span><span class="p">:</span><span class="w"> </span><span class="s2">"#ff000e"</span><span class="w">
-</span><span class="p">}</span><span class="w"> 
-</span></code></pre></div><h3 id="properties-19">Properties</h3>
-<table>
-<thead>
-<tr>
-<th>Name</th>
-<th>Type</th>
-<th>Description</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>primary</td>
-<td>string</td>
-<td>The primary hex color code.</td>
-</tr>
-<tr>
-<td>dark</td>
-<td>string</td>
-<td>The dark hex color code.</td>
-</tr>
-<tr>
-<td>light</td>
-<td>string</td>
-<td>The light hex color code.</td>
-</tr>
-<tr>
-<td>success</td>
-<td>string</td>
-<td>The success hex color code.</td>
-</tr>
-<tr>
-<td>warning</td>
-<td>string</td>
-<td>The warning hex color code.</td>
-</tr>
-<tr>
-<td>danger</td>
-<td>string</td>
-<td>The danger hex color code.</td>
-</tr>
-</tbody>
-</table>
 <h2 id="game-token-pack-object">Game Token Pack Object</h2>
 <p><a name="schemagame_token_pack_object"></a></p>
 <div class="highlight"><pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
@@ -23662,7 +23607,7 @@ To perform this request, you must be authenticated via one of the following meth
   </span><span class="nl">"date_added"</span><span class="p">:</span><span class="w"> </span><span class="mi">1492564103</span><span class="p">,</span><span class="w">
   </span><span class="nl">"date_updated"</span><span class="p">:</span><span class="w"> </span><span class="mi">1492564103</span><span class="w">
 </span><span class="p">}</span><span class="w"> 
-</span></code></pre></div><h3 id="properties-20">Properties</h3>
+</span></code></pre></div><h3 id="properties-19">Properties</h3>
 <table>
 <thead>
 <tr>
@@ -23764,7 +23709,7 @@ To perform this request, you must be authenticated via one of the following meth
   </span><span class="nl">"resource_url"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://mod.io/g/@rogueknight/m/@some-mod"</span><span class="p">,</span><span class="w">
   </span><span class="nl">"date_added"</span><span class="p">:</span><span class="w"> </span><span class="mi">1499841487</span><span class="w">
 </span><span class="p">}</span><span class="w"> 
-</span></code></pre></div><h3 id="properties-21">Properties</h3>
+</span></code></pre></div><h3 id="properties-20">Properties</h3>
 <table>
 <thead>
 <tr>
@@ -23819,7 +23764,7 @@ To perform this request, you must be authenticated via one of the following meth
   </span><span class="nl">"result_limit"</span><span class="p">:</span><span class="w"> </span><span class="mi">100</span><span class="p">,</span><span class="w">
   </span><span class="nl">"result_total"</span><span class="p">:</span><span class="w"> </span><span class="mi">70</span><span class="w">
 </span><span class="p">}</span><span class="w"> 
-</span></code></pre></div><h3 id="properties-22">Properties</h3>
+</span></code></pre></div><h3 id="properties-21">Properties</h3>
 <table>
 <thead>
 <tr>
@@ -23902,7 +23847,7 @@ To perform this request, you must be authenticated via one of the following meth
   </span><span class="nl">"result_limit"</span><span class="p">:</span><span class="w"> </span><span class="mi">100</span><span class="p">,</span><span class="w">
   </span><span class="nl">"result_total"</span><span class="p">:</span><span class="w"> </span><span class="mi">70</span><span class="w">
 </span><span class="p">}</span><span class="w"> 
-</span></code></pre></div><h3 id="properties-23">Properties</h3>
+</span></code></pre></div><h3 id="properties-22">Properties</h3>
 <table>
 <thead>
 <tr>
@@ -24049,7 +23994,7 @@ To perform this request, you must be authenticated via one of the following meth
   </span><span class="nl">"result_limit"</span><span class="p">:</span><span class="w"> </span><span class="mi">100</span><span class="p">,</span><span class="w">
   </span><span class="nl">"result_total"</span><span class="p">:</span><span class="w"> </span><span class="mi">70</span><span class="w">
 </span><span class="p">}</span><span class="w"> 
-</span></code></pre></div><h3 id="properties-24">Properties</h3>
+</span></code></pre></div><h3 id="properties-23">Properties</h3>
 <table>
 <thead>
 <tr>
@@ -24127,7 +24072,7 @@ To perform this request, you must be authenticated via one of the following meth
   </span><span class="nl">"result_limit"</span><span class="p">:</span><span class="w"> </span><span class="mi">100</span><span class="p">,</span><span class="w">
   </span><span class="nl">"result_total"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="w">
 </span><span class="p">}</span><span class="w"> 
-</span></code></pre></div><h3 id="properties-25">Properties</h3>
+</span></code></pre></div><h3 id="properties-24">Properties</h3>
 <table>
 <thead>
 <tr>
@@ -24183,7 +24128,7 @@ To perform this request, you must be authenticated via one of the following meth
   </span><span class="nl">"result_limit"</span><span class="p">:</span><span class="w"> </span><span class="mi">100</span><span class="p">,</span><span class="w">
   </span><span class="nl">"result_total"</span><span class="p">:</span><span class="w"> </span><span class="mi">70</span><span class="w">
 </span><span class="p">}</span><span class="w"> 
-</span></code></pre></div><h3 id="properties-26">Properties</h3>
+</span></code></pre></div><h3 id="properties-25">Properties</h3>
 <table>
 <thead>
 <tr>
@@ -24288,7 +24233,7 @@ To perform this request, you must be authenticated via one of the following meth
   </span><span class="nl">"result_limit"</span><span class="p">:</span><span class="w"> </span><span class="mi">100</span><span class="p">,</span><span class="w">
   </span><span class="nl">"result_total"</span><span class="p">:</span><span class="w"> </span><span class="mi">70</span><span class="w">
 </span><span class="p">}</span><span class="w"> 
-</span></code></pre></div><h3 id="properties-27">Properties</h3>
+</span></code></pre></div><h3 id="properties-26">Properties</h3>
 <table>
 <thead>
 <tr>
@@ -24366,7 +24311,7 @@ To perform this request, you must be authenticated via one of the following meth
   </span><span class="nl">"result_limit"</span><span class="p">:</span><span class="w"> </span><span class="mi">100</span><span class="p">,</span><span class="w">
   </span><span class="nl">"result_total"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="w">
 </span><span class="p">}</span><span class="w"> 
-</span></code></pre></div><h3 id="properties-28">Properties</h3>
+</span></code></pre></div><h3 id="properties-27">Properties</h3>
 <table>
 <thead>
 <tr>
@@ -24433,7 +24378,7 @@ To perform this request, you must be authenticated via one of the following meth
   </span><span class="nl">"result_limit"</span><span class="p">:</span><span class="w"> </span><span class="mi">100</span><span class="p">,</span><span class="w">
   </span><span class="nl">"result_total"</span><span class="p">:</span><span class="w"> </span><span class="mi">70</span><span class="w">
 </span><span class="p">}</span><span class="w"> 
-</span></code></pre></div><h3 id="properties-29">Properties</h3>
+</span></code></pre></div><h3 id="properties-28">Properties</h3>
 <table>
 <thead>
 <tr>
@@ -24612,7 +24557,7 @@ To perform this request, you must be authenticated via one of the following meth
   </span><span class="nl">"result_limit"</span><span class="p">:</span><span class="w"> </span><span class="mi">100</span><span class="p">,</span><span class="w">
   </span><span class="nl">"result_total"</span><span class="p">:</span><span class="w"> </span><span class="mi">70</span><span class="w">
 </span><span class="p">}</span><span class="w"> 
-</span></code></pre></div><h3 id="properties-30">Properties</h3>
+</span></code></pre></div><h3 id="properties-29">Properties</h3>
 <table>
 <thead>
 <tr>
@@ -24670,7 +24615,7 @@ To perform this request, you must be authenticated via one of the following meth
   </span><span class="nl">"result_limit"</span><span class="p">:</span><span class="w"> </span><span class="mi">100</span><span class="p">,</span><span class="w">
   </span><span class="nl">"result_total"</span><span class="p">:</span><span class="w"> </span><span class="mi">70</span><span class="w">
 </span><span class="p">}</span><span class="w"> 
-</span></code></pre></div><h3 id="properties-31">Properties</h3>
+</span></code></pre></div><h3 id="properties-30">Properties</h3>
 <table>
 <thead>
 <tr>
@@ -24725,7 +24670,7 @@ To perform this request, you must be authenticated via one of the following meth
   </span><span class="nl">"result_limit"</span><span class="p">:</span><span class="w"> </span><span class="mi">100</span><span class="p">,</span><span class="w">
   </span><span class="nl">"result_total"</span><span class="p">:</span><span class="w"> </span><span class="mi">70</span><span class="w">
 </span><span class="p">}</span><span class="w"> 
-</span></code></pre></div><h3 id="properties-32">Properties</h3>
+</span></code></pre></div><h3 id="properties-31">Properties</h3>
 <table>
 <thead>
 <tr>
@@ -24791,7 +24736,7 @@ To perform this request, you must be authenticated via one of the following meth
   </span><span class="nl">"result_limit"</span><span class="p">:</span><span class="w"> </span><span class="mi">100</span><span class="p">,</span><span class="w">
   </span><span class="nl">"result_total"</span><span class="p">:</span><span class="w"> </span><span class="mi">70</span><span class="w">
 </span><span class="p">}</span><span class="w"> 
-</span></code></pre></div><h3 id="properties-33">Properties</h3>
+</span></code></pre></div><h3 id="properties-32">Properties</h3>
 <table>
 <thead>
 <tr>
@@ -24847,7 +24792,7 @@ To perform this request, you must be authenticated via one of the following meth
   </span><span class="nl">"result_limit"</span><span class="p">:</span><span class="w"> </span><span class="mi">100</span><span class="p">,</span><span class="w">
   </span><span class="nl">"result_total"</span><span class="p">:</span><span class="w"> </span><span class="mi">70</span><span class="w">
 </span><span class="p">}</span><span class="w"> 
-</span></code></pre></div><h3 id="properties-34">Properties</h3>
+</span></code></pre></div><h3 id="properties-33">Properties</h3>
 <table>
 <thead>
 <tr>
@@ -24927,7 +24872,7 @@ To perform this request, you must be authenticated via one of the following meth
   </span><span class="nl">"result_limit"</span><span class="p">:</span><span class="w"> </span><span class="mi">100</span><span class="p">,</span><span class="w">
   </span><span class="nl">"result_total"</span><span class="p">:</span><span class="w"> </span><span class="mi">70</span><span class="w">
 </span><span class="p">}</span><span class="w"> 
-</span></code></pre></div><h3 id="properties-35">Properties</h3>
+</span></code></pre></div><h3 id="properties-34">Properties</h3>
 <table>
 <thead>
 <tr>
@@ -25105,7 +25050,7 @@ To perform this request, you must be authenticated via one of the following meth
   </span><span class="nl">"result_limit"</span><span class="p">:</span><span class="w"> </span><span class="mi">100</span><span class="p">,</span><span class="w">
   </span><span class="nl">"result_total"</span><span class="p">:</span><span class="w"> </span><span class="mi">70</span><span class="w">
 </span><span class="p">}</span><span class="w"> 
-</span></code></pre></div><h3 id="properties-36">Properties</h3>
+</span></code></pre></div><h3 id="properties-35">Properties</h3>
 <table>
 <thead>
 <tr>
@@ -25162,7 +25107,7 @@ To perform this request, you must be authenticated via one of the following meth
   </span><span class="nl">"result_limit"</span><span class="p">:</span><span class="w"> </span><span class="mi">100</span><span class="p">,</span><span class="w">
   </span><span class="nl">"result_total"</span><span class="p">:</span><span class="w"> </span><span class="mi">70</span><span class="w">
 </span><span class="p">}</span><span class="w"> 
-</span></code></pre></div><h3 id="properties-37">Properties</h3>
+</span></code></pre></div><h3 id="properties-36">Properties</h3>
 <table>
 <thead>
 <tr>
@@ -25217,7 +25162,7 @@ To perform this request, you must be authenticated via one of the following meth
   </span><span class="nl">"result_limit"</span><span class="p">:</span><span class="w"> </span><span class="mi">100</span><span class="p">,</span><span class="w">
   </span><span class="nl">"result_total"</span><span class="p">:</span><span class="w"> </span><span class="mi">70</span><span class="w">
 </span><span class="p">}</span><span class="w"> 
-</span></code></pre></div><h3 id="properties-38">Properties</h3>
+</span></code></pre></div><h3 id="properties-37">Properties</h3>
 <table>
 <thead>
 <tr>
@@ -25285,7 +25230,7 @@ To perform this request, you must be authenticated via one of the following meth
   </span><span class="nl">"result_limit"</span><span class="p">:</span><span class="w"> </span><span class="mi">100</span><span class="p">,</span><span class="w">
   </span><span class="nl">"result_total"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="w">
 </span><span class="p">}</span><span class="w"> 
-</span></code></pre></div><h3 id="properties-39">Properties</h3>
+</span></code></pre></div><h3 id="properties-38">Properties</h3>
 <table>
 <thead>
 <tr>
@@ -25360,7 +25305,7 @@ To perform this request, you must be authenticated via one of the following meth
   </span><span class="nl">"result_limit"</span><span class="p">:</span><span class="w"> </span><span class="mi">100</span><span class="p">,</span><span class="w">
   </span><span class="nl">"result_total"</span><span class="p">:</span><span class="w"> </span><span class="mi">70</span><span class="w">
 </span><span class="p">}</span><span class="w"> 
-</span></code></pre></div><h3 id="properties-40">Properties</h3>
+</span></code></pre></div><h3 id="properties-39">Properties</h3>
 <table>
 <thead>
 <tr>
@@ -25447,7 +25392,7 @@ To perform this request, you must be authenticated via one of the following meth
     </span><span class="nl">"prev_page_url"</span><span class="p">:</span><span class="w"> </span><span class="s2">"/v1/s2s/monetization-teams/{monetization-team-id}/transactions?cursor=eyJjcmVhdGVkX2F0IjoiMjAyNC0xMC0wMiAwMDo1NTozMiIsIl9wb2ludHNUb05leHRJdaAJdsa10"</span><span class="w">
   </span><span class="p">}</span><span class="w">
 </span><span class="p">}</span><span class="w"> 
-</span></code></pre></div><h3 id="properties-41">Properties</h3>
+</span></code></pre></div><h3 id="properties-40">Properties</h3>
 <table>
 <thead>
 <tr>
@@ -25491,7 +25436,7 @@ To perform this request, you must be authenticated via one of the following meth
   </span><span class="nl">"result_limit"</span><span class="p">:</span><span class="w"> </span><span class="mi">100</span><span class="p">,</span><span class="w">
   </span><span class="nl">"result_total"</span><span class="p">:</span><span class="w"> </span><span class="mi">70</span><span class="w">
 </span><span class="p">}</span><span class="w"> 
-</span></code></pre></div><h3 id="properties-42">Properties</h3>
+</span></code></pre></div><h3 id="properties-41">Properties</h3>
 <table>
 <thead>
 <tr>
@@ -25547,7 +25492,7 @@ To perform this request, you must be authenticated via one of the following meth
   </span><span class="nl">"result_limit"</span><span class="p">:</span><span class="w"> </span><span class="mi">100</span><span class="p">,</span><span class="w">
   </span><span class="nl">"result_total"</span><span class="p">:</span><span class="w"> </span><span class="mi">70</span><span class="w">
 </span><span class="p">}</span><span class="w"> 
-</span></code></pre></div><h3 id="properties-43">Properties</h3>
+</span></code></pre></div><h3 id="properties-42">Properties</h3>
 <table>
 <thead>
 <tr>
@@ -25640,7 +25585,7 @@ To perform this request, you must be authenticated via one of the following meth
     </span><span class="p">}</span><span class="w">
   </span><span class="p">]</span><span class="w">
 </span><span class="p">}</span><span class="w"> 
-</span></code></pre></div><h3 id="properties-44">Properties</h3>
+</span></code></pre></div><h3 id="properties-43">Properties</h3>
 <table>
 <thead>
 <tr>
@@ -25748,7 +25693,7 @@ To perform this request, you must be authenticated via one of the following meth
   </span><span class="nl">"visits_total"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
   </span><span class="nl">"comments_total"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="w">
 </span><span class="p">}</span><span class="w"> 
-</span></code></pre></div><h3 id="properties-45">Properties</h3>
+</span></code></pre></div><h3 id="properties-44">Properties</h3>
 <table>
 <thead>
 <tr>
@@ -25787,7 +25732,7 @@ To perform this request, you must be authenticated via one of the following meth
   </span><span class="nl">"date_added"</span><span class="p">:</span><span class="w"> </span><span class="mi">1499841487</span><span class="p">,</span><span class="w">
   </span><span class="nl">"count"</span><span class="p">:</span><span class="w"> </span><span class="mi">22</span><span class="w">
 </span><span class="p">}</span><span class="w"> 
-</span></code></pre></div><h3 id="properties-46">Properties</h3>
+</span></code></pre></div><h3 id="properties-45">Properties</h3>
 <table>
 <thead>
 <tr>
@@ -25820,7 +25765,7 @@ To perform this request, you must be authenticated via one of the following meth
   </span><span class="nl">"filename"</span><span class="p">:</span><span class="w"> </span><span class="s2">"modio-logo-bluedark.png"</span><span class="p">,</span><span class="w">
   </span><span class="nl">"original"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://assets.modcdn.io/images/branding/modio-logo-bluedark.png"</span><span class="w">
 </span><span class="p">}</span><span class="w"> 
-</span></code></pre></div><h3 id="properties-47">Properties</h3>
+</span></code></pre></div><h3 id="properties-46">Properties</h3>
 <table>
 <thead>
 <tr>
@@ -25851,7 +25796,7 @@ To perform this request, you must be authenticated via one of the following meth
   </span><span class="nl">"thumb_128x128"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://assets.modcdn.io/images/placeholder/icon.png"</span><span class="p">,</span><span class="w">
   </span><span class="nl">"thumb_256x256"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://assets.modcdn.io/images/placeholder/icon.png"</span><span class="w">
 </span><span class="p">}</span><span class="w"> 
-</span></code></pre></div><h3 id="properties-48">Properties</h3>
+</span></code></pre></div><h3 id="properties-47">Properties</h3>
 <table>
 <thead>
 <tr>
@@ -25896,7 +25841,7 @@ To perform this request, you must be authenticated via one of the following meth
   </span><span class="nl">"thumb_320x180"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://assets.modcdn.io/images/placeholder/card.png"</span><span class="p">,</span><span class="w">
   </span><span class="nl">"thumb_1280x720"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://assets.modcdn.io/images/placeholder/card.png"</span><span class="w">
 </span><span class="p">}</span><span class="w"> 
-</span></code></pre></div><h3 id="properties-49">Properties</h3>
+</span></code></pre></div><h3 id="properties-48">Properties</h3>
 <table>
 <thead>
 <tr>
@@ -25948,7 +25893,7 @@ To perform this request, you must be authenticated via one of the following meth
   </span><span class="nl">"monetization_options"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
   </span><span class="nl">"monetization_status"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="w">
 </span><span class="p">}</span><span class="w"> 
-</span></code></pre></div><h3 id="properties-50">Properties</h3>
+</span></code></pre></div><h3 id="properties-49">Properties</h3>
 <table>
 <thead>
 <tr>
@@ -26022,7 +25967,7 @@ To perform this request, you must be authenticated via one of the following meth
   </span><span class="nl">"key"</span><span class="p">:</span><span class="w"> </span><span class="s2">"retry-after"</span><span class="p">,</span><span class="w">
   </span><span class="nl">"value"</span><span class="p">:</span><span class="w"> </span><span class="s2">"98"</span><span class="w">
 </span><span class="p">}</span><span class="w"> 
-</span></code></pre></div><h3 id="properties-51">Properties</h3>
+</span></code></pre></div><h3 id="properties-50">Properties</h3>
 <table>
 <thead>
 <tr>
@@ -26055,7 +26000,7 @@ To perform this request, you must be authenticated via one of the following meth
   </span><span class="nl">"token_pack_id"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
   </span><span class="nl">"token_pack_name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"200 Pack"</span><span class="w">
 </span><span class="p">}</span><span class="w"> 
-</span></code></pre></div><h3 id="properties-52">Properties</h3>
+</span></code></pre></div><h3 id="properties-51">Properties</h3>
 <table>
 <thead>
 <tr>
@@ -26111,7 +26056,7 @@ To perform this request, you must be authenticated via one of the following meth
   </span><span class="nl">"thumb_640x360"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://assets.modcdn.io/images/placeholder/card.png"</span><span class="p">,</span><span class="w">
   </span><span class="nl">"thumb_1280x720"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://assets.modcdn.io/images/placeholder/card.png"</span><span class="w">
 </span><span class="p">}</span><span class="w"> 
-</span></code></pre></div><h3 id="properties-53">Properties</h3>
+</span></code></pre></div><h3 id="properties-52">Properties</h3>
 <table>
 <thead>
 <tr>
@@ -26154,7 +26099,7 @@ To perform this request, you must be authenticated via one of the following meth
   </span><span class="nl">"code"</span><span class="p">:</span><span class="w"> </span><span class="mi">200</span><span class="p">,</span><span class="w">
   </span><span class="nl">"message"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Your request was successful."</span><span class="w">
 </span><span class="p">}</span><span class="w"> 
-</span></code></pre></div><h3 id="properties-54">Properties</h3>
+</span></code></pre></div><h3 id="properties-53">Properties</h3>
 <table>
 <thead>
 <tr>
@@ -26183,7 +26128,7 @@ To perform this request, you must be authenticated via one of the following meth
   </span><span class="nl">"metakey"</span><span class="p">:</span><span class="w"> </span><span class="s2">"pistol-dmg"</span><span class="p">,</span><span class="w">
   </span><span class="nl">"metavalue"</span><span class="p">:</span><span class="w"> </span><span class="s2">"800"</span><span class="w">
 </span><span class="p">}</span><span class="w"> 
-</span></code></pre></div><h3 id="properties-55">Properties</h3>
+</span></code></pre></div><h3 id="properties-54">Properties</h3>
 <table>
 <thead>
 <tr>
@@ -26223,7 +26168,7 @@ To perform this request, you must be authenticated via one of the following meth
     </span><span class="nl">"thumb_1280x720"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://assets.modcdn.io/images/placeholder/card.png"</span><span class="w">
   </span><span class="p">}</span><span class="w">
 </span><span class="p">}</span><span class="w"> 
-</span></code></pre></div><h3 id="properties-56">Properties</h3>
+</span></code></pre></div><h3 id="properties-55">Properties</h3>
 <table>
 <thead>
 <tr>
@@ -26406,7 +26351,7 @@ To perform this request, you must be authenticated via one of the following meth
   </span><span class="p">},</span><span class="w">
   </span><span class="nl">"dependency_depth"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="w">
 </span><span class="p">}</span><span class="w"> 
-</span></code></pre></div><h3 id="properties-57">Properties</h3>
+</span></code></pre></div><h3 id="properties-56">Properties</h3>
 <table>
 <thead>
 <tr>
@@ -26587,7 +26532,7 @@ To perform this request, you must be authenticated via one of the following meth
   </span><span class="nl">"date_added"</span><span class="p">:</span><span class="w"> </span><span class="mi">1499846132</span><span class="p">,</span><span class="w">
   </span><span class="nl">"event_type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"MODFILE_CHANGED"</span><span class="w">
 </span><span class="p">}</span><span class="w"> 
-</span></code></pre></div><h3 id="properties-58">Properties</h3>
+</span></code></pre></div><h3 id="properties-57">Properties</h3>
 <table>
 <thead>
 <tr>
@@ -26642,7 +26587,7 @@ To perform this request, you must be authenticated via one of the following meth
     </span><span class="p">}</span><span class="w">
   </span><span class="p">]</span><span class="w">
 </span><span class="p">}</span><span class="w"> 
-</span></code></pre></div><h3 id="properties-59">Properties</h3>
+</span></code></pre></div><h3 id="properties-58">Properties</h3>
 <table>
 <thead>
 <tr>
@@ -26799,7 +26744,7 @@ To perform this request, you must be authenticated via one of the following meth
     </span><span class="nl">"date_expires"</span><span class="p">:</span><span class="w"> </span><span class="mi">1492564103</span><span class="w">
   </span><span class="p">}</span><span class="w">
 </span><span class="p">}</span><span class="w"> 
-</span></code></pre></div><h3 id="properties-60">Properties</h3>
+</span></code></pre></div><h3 id="properties-59">Properties</h3>
 <table>
 <thead>
 <tr>
@@ -26972,7 +26917,7 @@ To perform this request, you must be authenticated via one of the following meth
   </span><span class="nl">"platform"</span><span class="p">:</span><span class="w"> </span><span class="s2">"windows"</span><span class="p">,</span><span class="w">
   </span><span class="nl">"modfile_live"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="w">
 </span><span class="p">}</span><span class="w"> 
-</span></code></pre></div><h3 id="properties-61">Properties</h3>
+</span></code></pre></div><h3 id="properties-60">Properties</h3>
 <table>
 <thead>
 <tr>
@@ -27011,7 +26956,7 @@ To perform this request, you must be authenticated via one of the following meth
   </span><span class="nl">"ratings_display_text"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Very Positive"</span><span class="p">,</span><span class="w">
   </span><span class="nl">"date_expires"</span><span class="p">:</span><span class="w"> </span><span class="mi">1492564103</span><span class="w">
 </span><span class="p">}</span><span class="w"> 
-</span></code></pre></div><h3 id="properties-62">Properties</h3>
+</span></code></pre></div><h3 id="properties-61">Properties</h3>
 <table>
 <thead>
 <tr>
@@ -27095,7 +27040,7 @@ To perform this request, you must be authenticated via one of the following meth
   </span><span class="nl">"name_localized"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Unity"</span><span class="p">,</span><span class="w">
   </span><span class="nl">"date_added"</span><span class="p">:</span><span class="w"> </span><span class="mi">1499841487</span><span class="w">
 </span><span class="p">}</span><span class="w"> 
-</span></code></pre></div><h3 id="properties-63">Properties</h3>
+</span></code></pre></div><h3 id="properties-62">Properties</h3>
 <table>
 <thead>
 <tr>
@@ -27164,7 +27109,7 @@ To perform this request, you must be authenticated via one of the following meth
   </span><span class="nl">"subscribed"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span><span class="w">
   </span><span class="nl">"date_added"</span><span class="p">:</span><span class="w"> </span><span class="mi">1499841487</span><span class="w">
 </span><span class="p">}</span><span class="w"> 
-</span></code></pre></div><h3 id="properties-64">Properties</h3>
+</span></code></pre></div><h3 id="properties-63">Properties</h3>
 <table>
 <thead>
 <tr>
@@ -27232,7 +27177,7 @@ To perform this request, you must be authenticated via one of the following meth
     </span><span class="p">}</span><span class="w">
   </span><span class="p">]</span><span class="w">
 </span><span class="p">}</span><span class="w"> 
-</span></code></pre></div><h3 id="properties-65">Properties</h3>
+</span></code></pre></div><h3 id="properties-64">Properties</h3>
 <table>
 <thead>
 <tr>
@@ -27336,7 +27281,7 @@ To perform this request, you must be authenticated via one of the following meth
   </span><span class="nl">"platform"</span><span class="p">:</span><span class="w"> </span><span class="s2">"windows"</span><span class="p">,</span><span class="w">
   </span><span class="nl">"status"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="w">
 </span><span class="p">}</span><span class="w"> 
-</span></code></pre></div><h3 id="properties-66">Properties</h3>
+</span></code></pre></div><h3 id="properties-65">Properties</h3>
 <table>
 <thead>
 <tr>
@@ -27377,7 +27322,7 @@ To perform this request, you must be authenticated via one of the following meth
     </span><span class="s2">"string"</span><span class="w">
   </span><span class="p">]</span><span class="w">
 </span><span class="p">}</span><span class="w"> 
-</span></code></pre></div><h3 id="properties-67">Properties</h3>
+</span></code></pre></div><h3 id="properties-66">Properties</h3>
 <table>
 <thead>
 <tr>
@@ -27424,7 +27369,7 @@ To perform this request, you must be authenticated via one of the following meth
   </span><span class="nl">"monetization_options"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
   </span><span class="nl">"split"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="w">
 </span><span class="p">}</span><span class="w"> 
-</span></code></pre></div><h3 id="properties-68">Properties</h3>
+</span></code></pre></div><h3 id="properties-67">Properties</h3>
 <table>
 <thead>
 <tr>
@@ -27473,7 +27418,7 @@ To perform this request, you must be authenticated via one of the following meth
   </span><span class="nl">"upload_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"123e4567-e89b-12d3-a456-426614174000"</span><span class="p">,</span><span class="w">
   </span><span class="nl">"status"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="w">
 </span><span class="p">}</span><span class="w"> 
-</span></code></pre></div><h3 id="properties-69">Properties</h3>
+</span></code></pre></div><h3 id="properties-68">Properties</h3>
 <table>
 <thead>
 <tr>
@@ -27503,7 +27448,7 @@ To perform this request, you must be authenticated via one of the following meth
   </span><span class="nl">"part_size"</span><span class="p">:</span><span class="w"> </span><span class="mi">52428800</span><span class="p">,</span><span class="w">
   </span><span class="nl">"date_added"</span><span class="p">:</span><span class="w"> </span><span class="mi">1499846132</span><span class="w">
 </span><span class="p">}</span><span class="w"> 
-</span></code></pre></div><h3 id="properties-70">Properties</h3>
+</span></code></pre></div><h3 id="properties-69">Properties</h3>
 <table>
 <thead>
 <tr>
@@ -27543,7 +27488,7 @@ To perform this request, you must be authenticated via one of the following meth
   </span><span class="nl">"next_page_url"</span><span class="p">:</span><span class="w"> </span><span class="s2">"/v1/s2s/monetization-teams/{monetization-team-id}/transactions?cursor=eyJjcmVhdGVkX2F0IjoiMjAyNC0xMC0wMiAwMDo1NTozMiIsIl9wb2ludHNUb05leHRJdaAJdsa10"</span><span class="p">,</span><span class="w">
   </span><span class="nl">"prev_page_url"</span><span class="p">:</span><span class="w"> </span><span class="s2">"/v1/s2s/monetization-teams/{monetization-team-id}/transactions?cursor=eyJjcmVhdGVkX2F0IjoiMjAyNC0xMC0wMiAwMDo1NTozMiIsIl9wb2ludHNUb05leHRJdaAJdsa10"</span><span class="w">
 </span><span class="p">}</span><span class="w"> 
-</span></code></pre></div><h3 id="properties-71">Properties</h3>
+</span></code></pre></div><h3 id="properties-70">Properties</h3>
 <table>
 <thead>
 <tr>
@@ -27579,7 +27524,6 @@ To perform this request, you must be authenticated via one of the following meth
 <p><a name="schemapay_object"></a></p>
 <div class="highlight"><pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
   </span><span class="nl">"transaction_id"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
-  </span><span class="nl">"gateway_uuid"</span><span class="p">:</span><span class="w"> </span><span class="s2">"123e4567-e89b-12d3-a456-426614174000"</span><span class="p">,</span><span class="w">
   </span><span class="nl">"gross_amount"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
   </span><span class="nl">"net_amount"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
   </span><span class="nl">"platform_fee"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
@@ -27719,7 +27663,7 @@ To perform this request, you must be authenticated via one of the following meth
     </span><span class="p">}</span><span class="w">
   </span><span class="p">}</span><span class="w">
 </span><span class="p">}</span><span class="w"> 
-</span></code></pre></div><h3 id="properties-72">Properties</h3>
+</span></code></pre></div><h3 id="properties-71">Properties</h3>
 <table>
 <thead>
 <tr>
@@ -27733,11 +27677,6 @@ To perform this request, you must be authenticated via one of the following meth
 <td>transaction_id</td>
 <td>integer</td>
 <td>The transaction id.</td>
-</tr>
-<tr>
-<td>gateway_uuid</td>
-<td>string</td>
-<td>The universally unique ID (UUID) that represents a unique tranasction with the payment gateway.</td>
 </tr>
 <tr>
 <td>gross_amount</td>
@@ -27809,7 +27748,7 @@ To perform this request, you must be authenticated via one of the following meth
   </span><span class="nl">"amount"</span><span class="p">:</span><span class="w"> </span><span class="mi">199</span><span class="p">,</span><span class="w">
   </span><span class="nl">"display_amount"</span><span class="p">:</span><span class="w"> </span><span class="s2">"USD 1.99"</span><span class="w">
 </span><span class="p">}</span><span class="w"> 
-</span></code></pre></div><h3 id="properties-73">Properties</h3>
+</span></code></pre></div><h3 id="properties-72">Properties</h3>
 <table>
 <thead>
 <tr>
@@ -27848,7 +27787,7 @@ To perform this request, you must be authenticated via one of the following meth
   </span><span class="nl">"date_added"</span><span class="p">:</span><span class="w"> </span><span class="mi">1499841487</span><span class="p">,</span><span class="w">
   </span><span class="nl">"date_updated"</span><span class="p">:</span><span class="w"> </span><span class="mi">1499841487</span><span class="w">
 </span><span class="p">}</span><span class="w"> 
-</span></code></pre></div><h3 id="properties-74">Properties</h3>
+</span></code></pre></div><h3 id="properties-73">Properties</h3>
 <table>
 <thead>
 <tr>
@@ -27880,7 +27819,7 @@ To perform this request, you must be authenticated via one of the following meth
 <div class="highlight"><pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
   </span><span class="nl">"success"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="w">
 </span><span class="p">}</span><span class="w"> 
-</span></code></pre></div><h3 id="properties-75">Properties</h3>
+</span></code></pre></div><h3 id="properties-74">Properties</h3>
 <table>
 <thead>
 <tr>
@@ -27905,7 +27844,7 @@ To perform this request, you must be authenticated via one of the following meth
   </span><span class="nl">"rating"</span><span class="p">:</span><span class="w"> </span><span class="mi">-1</span><span class="p">,</span><span class="w">
   </span><span class="nl">"date_added"</span><span class="p">:</span><span class="w"> </span><span class="mi">1492564103</span><span class="w">
 </span><span class="p">}</span><span class="w"> 
-</span></code></pre></div><h3 id="properties-76">Properties</h3>
+</span></code></pre></div><h3 id="properties-75">Properties</h3>
 <table>
 <thead>
 <tr>
@@ -27954,7 +27893,7 @@ To perform this request, you must be authenticated via one of the following meth
   </span><span class="p">},</span><span class="w">
   </span><span class="nl">"purchase_date"</span><span class="p">:</span><span class="w"> </span><span class="mi">1626667557</span><span class="w">
 </span><span class="p">}</span><span class="w"> 
-</span></code></pre></div><h3 id="properties-77">Properties</h3>
+</span></code></pre></div><h3 id="properties-76">Properties</h3>
 <table>
 <thead>
 <tr>
@@ -28020,7 +27959,6 @@ To perform this request, you must be authenticated via one of the following meth
 <p><a name="schemas2s_pay_object"></a></p>
 <div class="highlight"><pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
   </span><span class="nl">"transaction_id"</span><span class="p">:</span><span class="w"> </span><span class="mi">123456789</span><span class="p">,</span><span class="w">
-  </span><span class="nl">"gateway_uuid"</span><span class="p">:</span><span class="w"> </span><span class="s2">"123e4567-e89b-12d3-a456-426614174000"</span><span class="p">,</span><span class="w">
   </span><span class="nl">"gross_amount"</span><span class="p">:</span><span class="w"> </span><span class="mi">1000</span><span class="p">,</span><span class="w">
   </span><span class="nl">"net_amount"</span><span class="p">:</span><span class="w"> </span><span class="mi">900</span><span class="p">,</span><span class="w">
   </span><span class="nl">"platform_fee"</span><span class="p">:</span><span class="w"> </span><span class="mi">50</span><span class="p">,</span><span class="w">
@@ -28032,7 +27970,7 @@ To perform this request, you must be authenticated via one of the following meth
   </span><span class="p">},</span><span class="w">
   </span><span class="nl">"purchase_date"</span><span class="p">:</span><span class="w"> </span><span class="mi">1626667557</span><span class="w">
 </span><span class="p">}</span><span class="w"> 
-</span></code></pre></div><h3 id="properties-78">Properties</h3>
+</span></code></pre></div><h3 id="properties-77">Properties</h3>
 <table>
 <thead>
 <tr>
@@ -28046,11 +27984,6 @@ To perform this request, you must be authenticated via one of the following meth
 <td>transaction_id</td>
 <td>integer</td>
 <td>The transaction id.</td>
-</tr>
-<tr>
-<td>gateway_uuid</td>
-<td>string</td>
-<td>The universally unique ID (UUID) that represents a unique tranasction with the payment gateway.</td>
 </tr>
 <tr>
 <td>gross_amount</td>
@@ -28114,7 +28047,7 @@ To perform this request, you must be authenticated via one of the following meth
   </span><span class="nl">"date_added"</span><span class="p">:</span><span class="w"> </span><span class="mi">1492564103</span><span class="p">,</span><span class="w">
   </span><span class="nl">"reason"</span><span class="p">:</span><span class="w"> </span><span class="s2">""</span><span class="w">
 </span><span class="p">}</span><span class="w"> 
-</span></code></pre></div><h3 id="properties-79">Properties</h3>
+</span></code></pre></div><h3 id="properties-78">Properties</h3>
 <table>
 <thead>
 <tr>
@@ -28177,7 +28110,7 @@ To perform this request, you must be authenticated via one of the following meth
   </span><span class="nl">"position"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Turret Builder"</span><span class="p">,</span><span class="w">
   </span><span class="nl">"invite_pending"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="w">
 </span><span class="p">}</span><span class="w"> 
-</span></code></pre></div><h3 id="properties-80">Properties</h3>
+</span></code></pre></div><h3 id="properties-79">Properties</h3>
 <table>
 <thead>
 <tr>
@@ -28260,7 +28193,7 @@ To perform this request, you must be authenticated via one of the following meth
     </span><span class="p">}</span><span class="w">
   </span><span class="p">}</span><span class="w">
 </span><span class="p">}</span><span class="w"> 
-</span></code></pre></div><h3 id="properties-81">Properties</h3>
+</span></code></pre></div><h3 id="properties-80">Properties</h3>
 <table>
 <thead>
 <tr>
@@ -28412,6 +28345,58 @@ To perform this request, you must be authenticated via one of the following meth
 </tr>
 </tbody>
 </table>
+<h2 id="theme-object">Theme Object</h2>
+<p><a name="schematheme_object"></a></p>
+<div class="highlight"><pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
+  </span><span class="nl">"primary"</span><span class="p">:</span><span class="w"> </span><span class="s2">"#44bfd5"</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"dark"</span><span class="p">:</span><span class="w"> </span><span class="s2">"#2c2c3f"</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"light"</span><span class="p">:</span><span class="w"> </span><span class="s2">"#ffffff"</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"success"</span><span class="p">:</span><span class="w"> </span><span class="s2">"#68D391"</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"warning"</span><span class="p">:</span><span class="w"> </span><span class="s2">"#d6af2e"</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"danger"</span><span class="p">:</span><span class="w"> </span><span class="s2">"#ff000e"</span><span class="w">
+</span><span class="p">}</span><span class="w"> 
+</span></code></pre></div><h3 id="properties-81">Properties</h3>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>primary</td>
+<td>string</td>
+<td>The primary hex color code.</td>
+</tr>
+<tr>
+<td>dark</td>
+<td>string</td>
+<td>The dark hex color code.</td>
+</tr>
+<tr>
+<td>light</td>
+<td>string</td>
+<td>The light hex color code.</td>
+</tr>
+<tr>
+<td>success</td>
+<td>string</td>
+<td>The success hex color code.</td>
+</tr>
+<tr>
+<td>warning</td>
+<td>string</td>
+<td>The warning hex color code.</td>
+</tr>
+<tr>
+<td>danger</td>
+<td>string</td>
+<td>The danger hex color code.</td>
+</tr>
+</tbody>
+</table>
 <h2 id="transaction-object">Transaction Object</h2>
 <p><a name="schematransaction_object"></a></p>
 <div class="highlight"><pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
@@ -28469,7 +28454,7 @@ To perform this request, you must be authenticated via one of the following meth
 <tr>
 <td>gateway_uuid</td>
 <td>string</td>
-<td>The universally unique ID (UUID) that represents a unique tranasction with the payment gateway.</td>
+<td>The universally unique ID (UUID) that represents the tranasction id.</td>
 </tr>
 <tr>
 <td>gateway_name</td>
