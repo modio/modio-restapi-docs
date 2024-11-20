@@ -44,7 +44,7 @@ Once you have added your game to mod.io and got your [game ID and API key](https
 Option | Usage | Suited for | Docs
 ---------- | ---------- | ---------- | ---------
 __API__ | For connecting directly to the mod.io REST API. | Web apps that need a JSON REST API, or game developers that like a challenge and want control over their implementation. | You are reading them
-__SDK__ | Drop our [open source C/C++ SDK](https://github.com/modio/modio-sdk) into your game to call mod.io functionality. | Developers that want a SDK that abstracts the uploading, downloading and unzip flows behind easy to use function calls. | [Here](https://docs.mod.io/cppsdkref/)
+__SDK__ | Drop our [open source C/C++ SDK](https://github.com/modio/modio-sdk) into your game to call mod.io functionality. | Developers that want a SDK that abstracts the uploading, downloading and unzip flows behind easy to use function calls. | [Here](https://docs.mod.io/cppsdk/refdocs/)
 __Tools/Plugins__ | Use tools, plugins and wrappers created by the community to make implementation in various engines easy. | Game developers that want a pre-built modding solution for their engine (Unity, Unreal, GameMaker, Construct) of choice. | Available below
 
 ### Official Tools
@@ -53,8 +53,8 @@ Plugins and wrappers made or supported by the mod.io team
 
  | - | - | -
 --- | --- | --- | ---
-![Unity Plugin](images/tool-unity.png) | __Unity Plugin__<br />[SDK](https://github.com/modio/modio-unity)<br />[Getting Started](https://docs.mod.io/unityref/)<br />[Sample Project](https://github.com/modio/modio-unity-sample)<br /> | ![Unreal Plugin](images/tool-unreal.png) | __Unreal Plugin__<br />[SDK](https://github.com/modio/modio-ue)<br />[Getting Started](https://docs.mod.io/unrealref/)<br />[UE4 Sample Project](https://github.com/modio/modio-ue4-sample)<br />[UE5 Sample Project](https://github.com/modio/modio-ue5-sample)<br />
-![GameMaker](images/tool-gm.png) | __GameMaker__<br />[SDK](https://github.com/YoYoGames/GMEXT-mod.io)<br />[Getting Started](https://github.com/YoYoGames/GMEXT-mod.io/wiki)<br /> | ![C/C++ SDK](images/tool-ccpp.png) | __C/C++ SDK__<br />[SDK](https://github.com/modio/modio-sdk)<br />[Getting Started](https://docs.mod.io/cppsdkref/)<br />
+![Unity Plugin](images/tool-unity.png) | __Unity Plugin__<br />[SDK](https://github.com/modio/modio-unity)<br />[Getting Started](https://docs.mod.io/unityref/)<br />[Sample Project](https://github.com/modio/modio-unity-sample)<br /> | ![Unreal Plugin](images/tool-unreal.png) | __Unreal Plugin__<br />[SDK](https://github.com/modio/modio-ue)<br />[Getting Started](https://docs.mod.io/unreal/refdocs/)<br />[UE4 Sample Project](https://github.com/modio/modio-ue4-sample)<br />[UE5 Sample Project](https://github.com/modio/modio-ue5-sample)<br />
+![GameMaker](images/tool-gm.png) | __GameMaker__<br />[SDK](https://github.com/YoYoGames/GMEXT-mod.io)<br />[Getting Started](https://github.com/YoYoGames/GMEXT-mod.io/wiki)<br /> | ![C/C++ SDK](images/tool-ccpp.png) | __C/C++ SDK__<br />[SDK](https://github.com/modio/modio-sdk)<br />[Getting Started](https://docs.mod.io/cppsdk/ref/)<br />
 ![Discord Bot](images/tool-discordbot.png) | __Discord Bot__<br />[Instructions](https://github.com/modio/modio-discord-bot)<br />[Invite](https://discordbot.mod.io)<br /> | 
 
 ### Community Tools
@@ -15538,7 +15538,6 @@ Purchase a mod. A Successful request will return the newly created [Pay Object](
 ```json
 {
   "transaction_id": 0,
-  "gateway_uuid": "123e4567-e89b-12d3-a456-426614174000",
   "gross_amount": 0,
   "net_amount": 0,
   "platform_fee": 0,
@@ -16095,7 +16094,6 @@ Create a service-to-service (S2S) transaction intent. This is for performing an 
 ```json
 {
   "transaction_id": 123456789,
-  "gateway_uuid": "123e4567-e89b-12d3-a456-426614174000",
   "gross_amount": 1000,
   "net_amount": 900,
   "platform_fee": 50,
@@ -16242,7 +16240,6 @@ Create a service-to-service (S2S) transaction commit. This is for performing an 
 ```json
 {
   "transaction_id": 123456789,
-  "gateway_uuid": "123e4567-e89b-12d3-a456-426614174000",
   "gross_amount": 1000,
   "net_amount": 900,
   "platform_fee": 50,
@@ -17266,7 +17263,7 @@ community_options|integer|Community features enabled for this game:<br><br>__0__
 ugc_name|string|Word used to describe user-generated content (mods, items, addons etc).
 name|string|Name of the game.
 name_id|string|Path for the game on mod.io. For example: https://mod.io/g/__rogue-knight__
-theme|[Game Theme Object](#schemagame_theme_object)|Theme color values for the game.
+theme|[Theme Object](#schematheme_object)|Theme color values for the game.
 tag_options|[Game Tag Option Localized Object](#schemagame_tag_option_localized_object)[]|Groups of tags configured by the game developer, that mods can select. Hidden tags will only be returned if `show_hidden_tags` is set to `true`. Group names and tags will be localized into the specified `Accept-Language` header value if provided, for a list of supported languages see [Localization](#localization) (Note that if a localized variant of a tag is not available it will default to English).
 platforms|[Game Platforms Object](#schemagame_platforms_object)[]|Platforms that are supported by this title.
 
@@ -17426,7 +17423,7 @@ instructions|string|A guide about creating and uploading mods for this game to m
 instructions_url|string|Link to a mod.io guide, your modding wiki or a page where modders can learn how to make and submit mods to your games profile.
 profile_url|string|URL to the game.
 stats|[Game Stats Object](#schemagame_stats_object)|Numerous aggregate stats for the game.
-theme|[Game Theme Object](#schemagame_theme_object)|Theme color values for the game.
+theme|[Theme Object](#schematheme_object)|Theme color values for the game.
 other_urls|[Game OtherUrls Object](#schemagame_otherurls_object)[]|Creator defined URLs to share.
 tag_options|[Game Tag Option Localized Object](#schemagame_tag_option_localized_object)[]|Groups of tags configured by the game developer, that mods can select. Hidden tags will only be returned if `show_hidden_tags` is set to `true`. Group names and tags will be localized into the specified `Accept-Language` header value if provided, for a list of supported languages see [Localization](#localization) (Note that if a localized variant of a tag is not available it will default to English).
 platforms|[Game Platforms Object](#schemagame_platforms_object)[]|Platforms that are supported by this title.
@@ -17599,34 +17596,6 @@ tags_localization|object[]|No description
 »» en|string|English translation of the tag.
 »» de|string|German translation of the tag.
 »» fr|string|French translation of the tag.
-
-
-
-## Game Theme Object  
-
-<a name="schemagame_theme_object"></a>
-
-```json
-{
-  "primary": "#44bfd5",
-  "dark": "#2c2c3f",
-  "light": "#ffffff",
-  "success": "#68D391",
-  "warning": "#d6af2e",
-  "danger": "#ff000e"
-} 
-```
-
-### Properties
-
-Name|Type|Description
----|---|---|---|
-primary|string|The primary hex color code.
-dark|string|The dark hex color code.
-light|string|The light hex color code.
-success|string|The success hex color code.
-warning|string|The warning hex color code.
-danger|string|The danger hex color code.
 
 
 
@@ -20220,7 +20189,6 @@ prev_page_url|integer|The url for the previous page if it exists.
 ```json
 {
   "transaction_id": 0,
-  "gateway_uuid": "123e4567-e89b-12d3-a456-426614174000",
   "gross_amount": 0,
   "net_amount": 0,
   "platform_fee": 0,
@@ -20367,7 +20335,6 @@ prev_page_url|integer|The url for the previous page if it exists.
 Name|Type|Description
 ---|---|---|---|
 transaction_id|integer|The transaction id.
-gateway_uuid|string|The universally unique ID (UUID) that represents a unique tranasction with the payment gateway.
 gross_amount|integer|The gross amount of the purchase in the lowest denomination of currency.
 net_amount|integer|The net amount of the purchase in the lowest denomination of currency.
 platform_fee|integer|The platform fee of the purchase in the lowest denomination of currency.
@@ -20517,7 +20484,6 @@ purchase_date|integer|The time of the purchase.
 ```json
 {
   "transaction_id": 123456789,
-  "gateway_uuid": "123e4567-e89b-12d3-a456-426614174000",
   "gross_amount": 1000,
   "net_amount": 900,
   "platform_fee": 50,
@@ -20536,7 +20502,6 @@ purchase_date|integer|The time of the purchase.
 Name|Type|Description
 ---|---|---|---|
 transaction_id|integer|The transaction id.
-gateway_uuid|string|The universally unique ID (UUID) that represents a unique tranasction with the payment gateway.
 gross_amount|integer|The gross amount of the purchase in the lowest denomination of currency.
 net_amount|integer|The net amount of the purchase in the lowest denomination of currency.
 platform_fee|integer|The platform fee of the purchase in the lowest denomination of currency.
@@ -20714,6 +20679,34 @@ links|object|Links to embed into the Terms.
 
 
 
+## Theme Object
+
+   <a name="schematheme_object"></a>
+
+```json
+{
+  "primary": "#44bfd5",
+  "dark": "#2c2c3f",
+  "light": "#ffffff",
+  "success": "#68D391",
+  "warning": "#d6af2e",
+  "danger": "#ff000e"
+} 
+```
+
+### Properties
+
+Name|Type|Description
+---|---|---|---|
+primary|string|The primary hex color code.
+dark|string|The dark hex color code.
+light|string|The light hex color code.
+success|string|The success hex color code.
+warning|string|The warning hex color code.
+danger|string|The danger hex color code.
+
+
+
 ## Transaction Object
 
    <a name="schematransaction_object"></a>
@@ -20763,7 +20756,7 @@ links|object|Links to embed into the Terms.
 Name|Type|Description
 ---|---|---|---|
 id|integer|Unique transaction id.
-gateway_uuid|string|The universally unique ID (UUID) that represents a unique tranasction with the payment gateway.
+gateway_uuid|string|The universally unique ID (UUID) that represents the tranasction id.
 gateway_name|string|The gateway that processed the transaction.
 account_id|integer|The unique monetization account id that actioned the transaction.
 gross_amount|integer|The gross amount of the transaction.
