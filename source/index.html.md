@@ -44,7 +44,7 @@ Once you have added your game to mod.io and got your [game ID and API key](https
 Option | Usage | Suited for | Docs
 ---------- | ---------- | ---------- | ---------
 __API__ | For connecting directly to the mod.io REST API. | Web apps that need a JSON REST API, or game developers that like a challenge and want control over their implementation. | You are reading them
-__SDK__ | Drop our [open source C/C++ SDK](https://github.com/modio/modio-sdk) into your game to call mod.io functionality. | Developers that want a SDK that abstracts the uploading, downloading and unzip flows behind easy to use function calls. | [Here](https://docs.mod.io/cppsdk/refdocs/)
+__SDK__ | Drop our [open source C/C++ SDK](https://github.com/modio/modio-sdk) into your game to call mod.io functionality. | Game developers that want a SDK that abstracts the uploading, downloading and unzip flows behind easy to use function calls. | [Here](https://docs.mod.io/cppsdk/refdocs/)
 __Tools/Plugins__ | Use tools, plugins and wrappers created by the community to make implementation in various engines easy. | Game developers that want a pre-built modding solution for their engine (Unity, Unreal, GameMaker, Construct) of choice. | Available below
 
 ### Official Tools
@@ -1143,7 +1143,7 @@ Request an access token on behalf of a Steam user. To use this functionality you
      Parameter|Type|Required|Description
      ---|---|---|---|
      appdata|base64-encoded string|true|The Steam users [Encrypted App Ticket](https://partner.steamgames.com/doc/features/auth#encryptedapptickets) provided by the Steamworks SDK. <br><br>Parameter content *MUST* be the [*uint8 *rgubTicketEncrypted*](https://partner.steamgames.com/doc/api/SteamEncryptedAppTicket) returned after calling [ISteamUser::GetEncryptedAppTicket()](https://partner.steamgames.com/doc/api/ISteamUser#GetEncryptedAppTicket) within the Steamworks SDK, converted into a base64-encoded string.<br><br>__NOTE:__ Due to a base64-encoded string containing special characters, you must URL encode the string after it has been base64-encoded to ensure it is successfully sent to our servers otherwise you may encounter an `422 Unprocessable Entity` response. For example, [cURL](https://ec.haxx.se/http-post.html) will do this for you by using the `--data-urlencode` option.
-     email|string||The users email address (optional but recommended to help users recover lost accounts). If supplied, and the respective user does not have an email registered for their account we will send a confirmation email to confirm they have ownership of the specified email.<br><br>__NOTE__: If the user already has an email on record with us, this parameter will be ignored. This parameter should also be urlencoded before the request is sent.
+     email|string||The users email address (optional but recommended to help users recover lost accounts). If supplied, and the respective user does not have an email registered for their account we will send a confirmation email to confirm they have ownership of the specified email.<br><br>__NOTE__: If the user already has an email on record with us, this parameter will be ignored. This parameter should also be urlencoded before the request is sent. To help facilitate user verification when providing an email address, please refer to the process outlined on [User Verification](https://docs.mod.io/web-services/authentication/verification/).
      date_expires|integer||Unix timestamp of date in which the returned token will expire. Value cannot be higher than the default value which is a common year (unix timestamp + 31536000 seconds). Using a token after it's expiry time has elapsed will result in a `401 Unauthorized` response.
      terms_agreed|boolean||This MUST be set to `false` unless you have collected the [users agreement](#terms) prior to calling this endpoint in which case it can be set to `true` and will be recorded.<br><br>__NOTE:__ If this is set to `false` and the user has not agreed to the latest mod.io Terms of Use and Privacy Policy, an error `403 Forbidden (error_ref 11074)` will be returned and you will need to collect the [users agreement](#terms) and retry with this value set to `true` to authenticate the user.
 
@@ -1282,7 +1282,7 @@ Request an access token on behalf of an Xbox Live user. To use this endpoint you
      Parameter|Type|Required|Description
      ---|---|---|---|
      xbox_token|string|true|The Xbox Live token returned from calling [GetTokenAndSignatureAsync("POST", "https://*.modapi.io")](https://docs.microsoft.com/en-us/dotnet/api/microsoft.xbox.services.system.xboxliveuser.gettokenandsignatureasync?view=xboxlive-dotnet-2017.11.20171204.01). <br><br>__NOTE:__ Due to the encrypted app ticket containing special characters, you must URL encode the string before sending the request to ensure it is successfully sent to our servers otherwise you may encounter an `422 Unprocessable Entity` response. For example, [cURL](https://ec.haxx.se/http-post.html) will do this for you by using the `--data-urlencode` option.
-     email|string||The users email address (optional but recommended to help users recover lost accounts). If supplied, and the respective user does not have an email registered for their account we will send a confirmation email to confirm they have ownership of the specified email. This functionality is also available at a later time via the [Link an Email](#link-an-email) endpoint.<br><br>__NOTE__: If the user already has an email on record with us, this parameter will be ignored. This parameter should also be urlencoded before the request is sent.
+     email|string||The users email address (optional but recommended to help users recover lost accounts). If supplied, and the respective user does not have an email registered for their account we will send a confirmation email to confirm they have ownership of the specified email. This functionality is also available at a later time via the [Link an Email](#link-an-email) endpoint.<br><br>__NOTE__: If the user already has an email on record with us, this parameter will be ignored. This parameter should also be urlencoded before the request is sent. To help facilitate user verification when providing an email address, please refer to the process outlined on [User Verification](https://docs.mod.io/web-services/authentication/verification/).
      date_expires|integer||Unix timestamp of date in which the returned token will expire. Value cannot be higher than the default value which is a common year (unix timestamp + 31536000 seconds). Using a token after it's expiry time has elapsed will result in a `401 Unauthorized` response.
      terms_agreed|boolean||This MUST be set to `false` unless you have collected the [users agreement](#terms) prior to calling this endpoint in which case it can be set to `true` and will be recorded.<br><br>__NOTE:__ If this is set to `false` and the user has not agreed to the latest mod.io Terms of Use and Privacy Policy, an error `403 Forbidden (error_ref 11074)` will be returned and you will need to collect the [users agreement](#terms) and retry with this value set to `true` to authenticate the user.
 
@@ -1425,7 +1425,7 @@ Request an access token on behalf of a PlayStation Network (PSN) user. To use th
      ---|---|---|---|
      auth_code|string|true|The auth code returned from the PlayStation Network API.
      env|integer||The PlayStation Network environment you are targeting. If omitted, the request will default to targeting PlayStation Network's production environment.
-     email|string||The users email address (optional but recommended to help users recover lost accounts). If supplied, and the respective user does not have an email registered for their account we will send a confirmation email to confirm they have ownership of the specified email.<br><br>__NOTE__: If the user already has an email on record with us, this parameter will be ignored. This parameter should also be urlencoded before the request is sent.
+     email|string||The users email address (optional but recommended to help users recover lost accounts). If supplied, and the respective user does not have an email registered for their account we will send a confirmation email to confirm they have ownership of the specified email.<br><br>__NOTE__: If the user already has an email on record with us, this parameter will be ignored. This parameter should also be urlencoded before the request is sent. To help facilitate user verification when providing an email address, please refer to the process outlined on [User Verification](https://docs.mod.io/web-services/authentication/verification/).
      date_expires|integer||Unix timestamp of date in which the returned token will expire. Value cannot be higher than the default value which is a common year (unix timestamp + 31536000 seconds). Using a token after it's expiry time has elapsed will result in a `401 Unauthorized` response.
      terms_agreed|boolean||This MUST be set to `false` unless you have collected the [users agreement](#terms) prior to calling this endpoint in which case it can be set to `true` and will be recorded.<br><br>__NOTE:__ If this is set to `false` and the user has not agreed to the latest mod.io Terms of Use and Privacy Policy, an error `403 Forbidden (error_ref 11074)` will be returned and you will need to collect the [users agreement](#terms) and retry with this value set to `true` to authenticate the user.
 
@@ -1555,7 +1555,7 @@ Request an access token on behalf of a Nintendo Switch user. To use this endpoin
    Parameter|Type|Required|Description
    ---|---|---|---|
    id_token|string|true|The NSA ID supplied by the Nintendo Switch SDK.
-   email|string||The users email address. If supplied, and the respective user does not have an email registered for their account we will send a confirmation email to confirm they have ownership of the specified email.<br><br>__WARNING__: We __strongly recommend__ that you prompt your users in a friendly manner at least once to provide their email address to link their Nintendo Service account to mod.io. Failing to provide an email will in-effect generate an orphan account that will only be able to be accessed from the users' Switch device.
+   email|string||The users email address. If supplied, and the respective user does not have an email registered for their account we will send a confirmation email to confirm they have ownership of the specified email.<br><br>__WARNING__: We __strongly recommend__ that you prompt your users in a friendly manner at least once to provide their email address to link their Nintendo Service account to mod.io. Failing to provide an email will in-effect generate an orphan account that will only be able to be accessed from the users' Switch device. To help facilitate user verification when providing an email address, please refer to the process outlined on [User Verification](https://docs.mod.io/web-services/authentication/verification/).
    date_expires|integer||Unix timestamp of date in which the returned token will expire. Value cannot be higher than the default value which is a common year (unix timestamp + 31536000 seconds). Using a token after it's expiry time has elapsed will result in a `401 Unauthorized` response.
    terms_agreed|boolean||This MUST be set to `false` unless you have collected the [users agreement](#terms) prior to calling this endpoint in which case it can be set to `true` and will be recorded.<br><br>__NOTE:__ If this is set to `false` and the user has not agreed to the latest mod.io Terms of Use and Privacy Policy, an error `403 Forbidden (error_ref 11074)` will be returned and you will need to collect the [users agreement](#terms) and retry with this value set to `true` to authenticate the user.
 
@@ -1696,11 +1696,11 @@ Request an access token on behalf of an Meta Quest user. To use this functionali
 
     Parameter|Type|Required|Description
     ---|---|---|---|
-    device|string|true|The Meta Quest device being used for authentication.<br><br>Possible Options:<br>- _rift_<br>- _quest_
+    device|string|true|The Meta Quest device being used for authentication.<br><br>Possible Options:<br>- _quest_<br>- _rift_
     nonce|string|true|The nonce provided by calling [ovr_User_GetUserProof()](https://developers.meta.com/horizon/documentation/native/ps-ownership/) from the Meta Quest SDK. <br><br>__NOTE:__ Due to the `nonce` potentially containing special characters, you must URL encode the string before sending the request to ensure it is successfully sent to our servers otherwise you may encounter an `422 Unprocessable Entity` response. For example, [cURL](https://ec.haxx.se/http-post.html) will do this for you by using the `--data-urlencode` option.
     user_id|integer|true|The user's Meta Quest id providing by calling [ovr_GetLoggedInUserID()](https://developers.meta.com/horizon/documentation/native/ps-ownership/) from the Meta Quest SDK.
     access_token|string|true|The user's access token, providing by calling [ovr_User_GetAccessToken()](https://developers.meta.com/horizon/documentation/native/ps-ownership/) from the Meta Quest SDK. mod.io uses this access token on the first login only to obtain the user's alias and is not saved on our servers.
-    email|string||The users email address. If supplied, and the respective user does not have an email registered for their account we will send a confirmation email to confirm they have ownership of the specified email.<br><br>__WARNING__: We __strongly recommend__ that you prompt your users in a friendly manner at least once to provide their email address to link their Meta Quest account. Due to how Meta Quest handles user IDs - if we are not supplied with an email for a user at least once we will __never__ be able to link that user with their existing account at a later date as Meta Quest IDs operate at the game-scope, not globally. Failing to provide an email will in-effect generate an orphan account that will only be able to be accessed from your title.
+    email|string||The users email address. If supplied, and the respective user does not have an email registered for their account we will send a confirmation email to confirm they have ownership of the specified email.<br><br>__WARNING__: We __strongly recommend__ that you prompt your users in a friendly manner at least once to provide their email address to link their Meta Quest account. Due to how Meta Quest handles user IDs - if we are not supplied with an email for a user at least once we will __never__ be able to link that user with their existing account at a later date as Meta Quest IDs operate at the game-scope, not globally. Failing to provide an email will in-effect generate an orphan account that will only be able to be accessed from your title. To help facilitate user verification when providing an email address, please refer to the process outlined on [User Verification](https://docs.mod.io/web-services/authentication/verification/).
     date_expires|integer||Unix timestamp of date in which the returned token will expire. Value cannot be higher than the default value which is a common year (unix timestamp + 31536000 seconds). Using a token after it's expiry time has elapsed will result in a `401 Unauthorized` response.
     terms_agreed|boolean||This MUST be set to `false` unless you have collected the [users agreement](#terms) prior to calling this endpoint in which case it can be set to `true` and will be recorded.<br><br>__NOTE:__ If this is set to `false` and the user has not agreed to the latest mod.io Terms of Use and Privacy Policy, an error `403 Forbidden (error_ref 11074)` will be returned and you will need to collect the [users agreement](#terms) and retry with this value set to `true` to authenticate the user.
 
@@ -1836,7 +1836,7 @@ Request an access token on behalf of an Epic Games user. Additional instructions
     Parameter|Type|Required|Description
     ---|---|---|---|
     id_token|string|true|The ID Token [returned from the EOS SDK](https://dev.epicgames.com/docs/api-ref/functions/eos-auth-copy-id-token) when you authenticate a user to use mod.io.
-    email|string||The users email address (optional but recommended to help users recover lost accounts). If supplied, and the respective user does not have an email registered for their account we will send a confirmation email to confirm they have ownership of the specified email.<br><br>__NOTE__: If the user already has an email on record with us, this parameter will be ignored. This parameter should also be urlencoded before the request is sent.
+    email|string||The users email address (optional but recommended to help users recover lost accounts). If supplied, and the respective user does not have an email registered for their account we will send a confirmation email to confirm they have ownership of the specified email.<br><br>__NOTE__: If the user already has an email on record with us, this parameter will be ignored. This parameter should also be urlencoded before the request is sent. To help facilitate user verification when providing an email address, please refer to the process outlined on [User Verification](https://docs.mod.io/web-services/authentication/verification/).
     date_expires|integer||Unix timestamp of date in which the returned token will expire. Value cannot be higher than the default value which is a week (unix timestamp + 604800 seconds). Using a token after it's expiry time has elapsed will result in a `401 Unauthorized` response.
     terms_agreed|boolean||This MUST be set to `false` unless you have collected the [users agreement](#terms) prior to calling this endpoint in which case it can be set to `true` and will be recorded.<br><br>__NOTE:__ If this is set to `false` and the user has not agreed to the latest mod.io Terms of Use and Privacy Policy, an error `403 Forbidden (error_ref 11074)` will be returned and you will need to collect the [users agreement](#terms) and retry with this value set to `true` to authenticate the user.
 
@@ -1970,7 +1970,7 @@ Request an access token on behalf of a GOG Galaxy user. To use this functionalit
     Parameter|Type|Required|Description
     ---|---|---|---|
     appdata|string|true|The GOG Galaxy users [Encrypted App Ticket](https://cdn.gog.com/open/galaxy/sdk/1.133.3/Documentation/classgalaxy_1_1api_1_1IUser.html#a352802aab7a6e71b1cd1b9b1adfd53d8) provided by the GOG Galaxy SDK. <br><br>Parameter content *MUST* be the encrypted string returned in the buffer after calling [IUser::GetEncryptedAppTicket()](https://cdn.gog.com/open/galaxy/sdk/1.133.3/Documentation/classgalaxy_1_1api_1_1IUser.html#a96af6792efc260e75daebedca2cf74c6) within the Galaxy SDK. Unlike the [Steam Authentication](#steam) endpoint, you do not need to encode the encrypted string as this is already done by the Galaxy SDK.<br><br>__NOTE:__ Due to the encrypted app ticket containing special characters, you must URL encode the string before sending the request to ensure it is successfully sent to our servers otherwise you may encounter an `422 Unprocessable Entity` response. For example, [cURL](https://ec.haxx.se/http-post.html) will do this for you by using the `--data-urlencode` option.
-    email|string||The users email address. If supplied, and the respective user does not have an email registered for their account we will send a confirmation email to confirm they have ownership of the specified email.<br><br>__WARNING__: We __strongly recommend__ that you prompt your users in a friendly manner at least once to provide their email address to link their GOG Galaxy account to mod.io. Failing to provide an email will in-effect generate an orphan account that will only be able to be accessed from GOG Galaxy.
+    email|string||The users email address. If supplied, and the respective user does not have an email registered for their account we will send a confirmation email to confirm they have ownership of the specified email.<br><br>__WARNING__: We __strongly recommend__ that you prompt your users in a friendly manner at least once to provide their email address to link their GOG Galaxy account to mod.io. Failing to provide an email will in-effect generate an orphan account that will only be able to be accessed from GOG Galaxy. To help facilitate user verification when providing an email address, please refer to the process outlined on [User Verification](https://docs.mod.io/web-services/authentication/verification/).
     date_expires|integer||Unix timestamp of date in which the returned token will expire. Value cannot be higher than the default value which is a common year (unix timestamp + 31536000 seconds). Using a token after it's expiry time has elapsed will result in a `401 Unauthorized` response.
     terms_agreed|boolean||This MUST be set to `false` unless you have collected the [users agreement](#terms) prior to calling this endpoint in which case it can be set to `true` and will be recorded.<br><br>__NOTE:__ If this is set to `false` and the user has not agreed to the latest mod.io Terms of Use and Privacy Policy, an error `403 Forbidden (error_ref 11074)` will be returned and you will need to collect the [users agreement](#terms) and retry with this value set to `true` to authenticate the user.
 
@@ -2376,7 +2376,7 @@ Request an access token on behalf of a Discord user. A Successful request will r
     Parameter|Type|Required|Description
     ---|---|---|---|
     discord_token|string|true|The access token of the user provided by Discord.
-    email|string||The users email address (optional but recommended to help users recover lost accounts). If supplied, and the respective user does not have an email registered for their account we will send a confirmation email to confirm they have ownership of the specified email.<br><br>__NOTE__: If the user already has an email on record with us, this parameter will be ignored. This parameter should also be urlencoded before the request is sent.
+    email|string||The users email address (optional but recommended to help users recover lost accounts). If supplied, and the respective user does not have an email registered for their account we will send a confirmation email to confirm they have ownership of the specified email.<br><br>__NOTE__: If the user already has an email on record with us, this parameter will be ignored. This parameter should also be urlencoded before the request is sent. To help facilitate user verification when providing an email address, please refer to the process outlined on [User Verification](https://docs.mod.io/web-services/authentication/verification/).
     date_expires|integer||Unix timestamp of date in which the returned token will expire. Value cannot be higher than the default value which is a week (unix timestamp + 604800 seconds). Using a token after it's expiry time has elapsed will result in a `401 Unauthorized` response.
     terms_agreed|boolean||This MUST be set to `false` unless you have collected the [users agreement](#terms) prior to calling this endpoint in which case it can be set to `true` and will be recorded.<br><br>__NOTE:__ If this is set to `false` and the user has not agreed to the latest mod.io Terms of Use and Privacy Policy, an error `403 Forbidden (error_ref 11074)` will be returned and you will need to collect the [users agreement](#terms) and retry with this value set to `true` to authenticate the user.
 
@@ -2517,7 +2517,7 @@ Request an access token on behalf of an OpenID identity provider. To use this me
      Parameter|Type|Required|Description
      ---|---|---|---|
      id_token|string|true|The ID token issued by the configured identity provider.
-     email|string||The users email address (optional but recommended to help users recover lost accounts). If supplied, and the respective user does not have an email registered for their account we will send a confirmation email to confirm they have ownership of the specified email.<br><br>__NOTE__: If the user already has an email on record with us, this parameter will be ignored. This parameter should also be urlencoded before the request is sent.
+     email|string||The users email address (optional but recommended to help users recover lost accounts). If supplied, and the respective user does not have an email registered for their account we will send a confirmation email to confirm they have ownership of the specified email.<br><br>__NOTE__: If the user already has an email on record with us, this parameter will be ignored. This parameter should also be urlencoded before the request is sent. To help facilitate user verification when providing an email address, please refer to the process outlined on [User Verification](https://docs.mod.io/web-services/authentication/verification/).
      date_expires|integer||Unix timestamp of date in which the returned token will expire. Value cannot be higher than the default value which is a week (unix timestamp + 604800 seconds). Using a token after it's expiry time has elapsed will result in a `401 Unauthorized` response.
      terms_agreed|boolean||This MUST be set to `false` unless you have collected the [users agreement](#terms) prior to calling this endpoint in which case it can be set to `true` and will be recorded.<br><br>__NOTE:__ If this is set to `false` and the user has not agreed to the latest mod.io Terms of Use and Privacy Policy, an error `403 Forbidden (error_ref 11074)` will be returned and you will need to collect the [users agreement](#terms) and retry with this value set to `true` to authenticate the user.
      monetization_account|boolean|false|Automatically setup this user for monetization.
@@ -3506,6 +3506,7 @@ Get all guides for a game. Successful request will return an array of [Guide Obj
         "id": 1,
         "name_id": "xant",
         "username": "XanT",
+        "verified": "false",
         "display_name_portal": null,
         "date_online": 1509922961,
         "date_joined": 1509922961,
@@ -3673,6 +3674,7 @@ Get a guide. Successful request will return a single [Guide Object](#guide-objec
     "id": 1,
     "name_id": "xant",
     "username": "XanT",
+    "verified": "false",
     "display_name_portal": null,
     "date_online": 1509922961,
     "date_joined": 1509922961,
@@ -3877,6 +3879,7 @@ Add a guide for a game. Successful request will return a single [Guide Object](#
     "id": 1,
     "name_id": "xant",
     "username": "XanT",
+    "verified": "false",
     "display_name_portal": null,
     "date_online": 1509922961,
     "date_joined": 1509922961,
@@ -4073,6 +4076,7 @@ Update an existing guide. Successful request will return the updated [Guide Obje
     "id": 1,
     "name_id": "xant",
     "username": "XanT",
+    "verified": "false",
     "display_name_portal": null,
     "date_online": 1509922961,
     "date_joined": 1509922961,
@@ -4503,6 +4507,7 @@ Get all mods for the corresponding game. Successful request will return an array
         "id": 1,
         "name_id": "xant",
         "username": "XanT",
+        "verified": "false",
         "display_name_portal": null,
         "date_online": 1509922961,
         "date_joined": 1509922961,
@@ -4522,6 +4527,7 @@ Get all mods for the corresponding game. Successful request will return an array
       "maturity_option": 0,
       "community_options": 3,
       "monetization_options": 0,
+      "credit_options": 0,
       "stock": 0,
       "price": 0,
       "tax": 0,
@@ -4748,6 +4754,7 @@ Get a mod. Successful request will return a single [Mod Object](#mod-object).
     "id": 1,
     "name_id": "xant",
     "username": "XanT",
+    "verified": "false",
     "display_name_portal": null,
     "date_online": 1509922961,
     "date_joined": 1509922961,
@@ -4767,6 +4774,7 @@ Get a mod. Successful request will return a single [Mod Object](#mod-object).
   "maturity_option": 0,
   "community_options": 3,
   "monetization_options": 0,
+  "credit_options": 0,
   "stock": 0,
   "price": 0,
   "tax": 0,
@@ -4897,6 +4905,11 @@ curl -X POST https://*.modapi.io/v1/games/{game-id}/mods \
   -F 'description=<h2>Getting started with..' \
   -F 'logo=@/path/to/image.jpg' \
   -F 'homepage_url=https://www.example.com' \
+  -F 'visible=undefined' \
+  -F 'maturity_option=undefined' \
+  -F 'community_options=undefined' \
+  -F 'credit_options=undefined' \
+  -F 'stock=undefined' \
   -F 'metadata_blob={"version_sig":"YXJlbnQgeW91IGlucXVpc2l0dmU="}' \
   -F 'tags[]=easy'
 
@@ -4939,6 +4952,11 @@ const inputBody = '{
   "description": "<h2>Getting started with..",
   "logo": "@/path/to/image.jpg",
   "homepage_url": "https://www.example.com",
+  "visible": 0,
+  "maturity_option": 0,
+  "community_options": 0,
+  "credit_options": 0,
+  "stock": 0,
   "metadata_blob": "{\"version_sig\":\"YXJlbnQgeW91IGlucXVpc2l0dmU=\"}",
   "tags": "easy"
 }';
@@ -5012,9 +5030,16 @@ Add a mod. Successful request will return the newly created [Mod Object](#mod-ob
     stock|integer||Maximum number of times this mod can be sold. <br><br>__NOTE:__ Limited mods can be enforced by the parent game. The value of this field is not used if the parent game's or mod's limited support is disabled (see `monetization_options` field in [Game Object](#game-object)).
     maturity_option|integer||Mature content found in this mod.<br><br>__NOTE:__ The value of this field will default to 0 unless the parent game allows you to flag mature content (see `maturity_options` field in [Game Object](#game-object)). <br><br>__0__ = None _(default)_<br>__1__ = Alcohol<br>__2__ = Drugs<br>__4__ = Violence<br>__8__ = Explicit<br>__?__ = Add the options you want together, to enable multiple options (see [BITWISE fields](#bitwise-and-bitwise-and))
     community_options|integer||Community features enabled for this mod:<br><br>__0__ = All the options below are disabled<br>__1__ = Enable comments<br>__64__ = Enable previews<br>__128__ = Enable preview URLs<br>__1024__ = Allow dependencies<br>__?__ = Add the options you want together, to enable multiple options (see [BITWISE fields](#bitwise-and-bitwise-and))
+    credit_options|integer||Credit options enabled for this mod:<br><br>__0__ = All the options are disabled<br>__1__ = Show credits section<br>__2__ = Mark with original or permitted assets<br>__4__ = Allow redistribution with credit<br>__8__ = Allow porting with credit<br>__16__ = Allow patching without credit<br>__32__ = Allow patching with credit<br>__64__ = Allow patching with permission<br>__128__ = Allow repackaging without credit<br>__256__ = Allow repackaging with credit<br>__512__ = Allow repackaging with permission<br>__1024__ = Allow users to resell<br>__?__ = Add the options you want together, to enable multiple options (see [BITWISE fields](#bitwise-and-bitwise-and))
     metadata_blob|string||Metadata that is designed to be handled by the game client and is recommended to not be exposed to content creators when submitting their mods. As an example, this may include properties as to how the item works, or other information you need to display. Metadata can also be stored as searchable [key value pairs](#metadata), and to individual [mod files](#get-modfiles).
     tags[]|string||Tags to apply to the mod. Every tag to apply requires a separate field with tags[] as the key (e.g. tags[]=tag1, tags[]=tag2). Only the tags pre-defined by the parent game can be applied. To determine what tags are eligible, see the tags values within `tag_options` column on the parent [Game Object](#game-object).
 
+##### » name_id
+The name ID is used in the URL to identify the mod. It must be unique and
+     contain only lowercase letters, numbers, and dashes.
+##### » metadata_blob
+Metadata that accepts any string-based arbitrary value,
+     up to a maximum of 50,000 characters.
 > Example response
 
 ```json
@@ -5027,6 +5052,7 @@ Add a mod. Successful request will return the newly created [Mod Object](#mod-ob
     "id": 1,
     "name_id": "xant",
     "username": "XanT",
+    "verified": "false",
     "display_name_portal": null,
     "date_online": 1509922961,
     "date_joined": 1509922961,
@@ -5046,6 +5072,7 @@ Add a mod. Successful request will return the newly created [Mod Object](#mod-ob
   "maturity_option": 0,
   "community_options": 3,
   "monetization_options": 0,
+  "credit_options": 0,
   "stock": 0,
   "price": 0,
   "tax": 0,
@@ -5181,7 +5208,15 @@ curl -X POST https://*.modapi.io/v1/games/{game-id}/mods/{mod-id} \
   -F 'logo=@/path/to/image.jpg' \
   -F 'homepage_url=https://www.example.com' \
   -F 'metadata_blob={"version_sig":"YXJlbnQgeW91IGlucXVpc2l0dmU="}' \
-  -F 'tags[]=easy'
+  -F 'tags[]=easy' \
+  -F 'status=undefined' \
+  -F 'visible=undefined' \
+  -F 'price=undefined' \
+  -F 'stock=undefined' \
+  -F 'monetization_options=undefined' \
+  -F 'maturity_option=undefined' \
+  -F 'community_options=undefined' \
+  -F 'credit_options=undefined'
 
 ```
 
@@ -5223,7 +5258,15 @@ const inputBody = '{
   "logo": "@/path/to/image.jpg",
   "homepage_url": "https://www.example.com",
   "metadata_blob": "{\"version_sig\":\"YXJlbnQgeW91IGlucXVpc2l0dmU=\"}",
-  "tags": "easy"
+  "tags": "easy",
+  "status": 0,
+  "visible": 0,
+  "price": 0,
+  "stock": 0,
+  "monetization_options": 0,
+  "maturity_option": 0,
+  "community_options": 0,
+  "credit_options": 0
 }';
 const headers = {
   'Authorization':'Bearer {access-token}',
@@ -5295,9 +5338,13 @@ Edit details for a mod. If you want to update the `logo` or media associated wit
     monetization_options|integer||Monetization options enabled for this mod:<br><br>__0__ = Access to monetization features disabled<br>__1__ = Access to monetization features enabled by the game for this mod<br>__2__ = Marketplace enabled<br>__8__ = Quantity of this mod is limited<br>__?__ = Add the options you want together, to enable multiple features (see [BITWISE fields](#bitwise-and-bitwise-and))
     maturity_option|integer||Mature content found in this mod.<br><br>__NOTE:__ The value of this field will default to 0 unless the parent game allows you to flag mature content (see `maturity_options` field in [Game Object](#game-object)). <br><br>__0__ = None set<br>__1__ = Alcohol<br>__2__ = Drugs<br>__4__ = Violence<br>__8__ = Explicit<br>__?__ = Add the options you want together, to enable multiple options (see [BITWISE fields](#bitwise-and-bitwise-and))
     community_options|integer||Community features enabled for this mod:<br><br>__0__ = All the options below are disabled<br>__1__ = Enable comments<br>__64__ = Enable previews<br>__128__ = Enable preview URLs<br>__1024__ = Allow dependencies<br>__?__ = Add the options you want together, to enable multiple options (see [BITWISE fields](#bitwise-and-bitwise-and))
+    credit_options|integer||Credit options enabled for this mod:<br><br>__0__ = All the options are disabled<br>__1__ = Show credits section<br>__2__ = Mark with original or permitted assets<br>__4__ = Allow redistribution with credit<br>__8__ = Allow porting with credit<br>__16__ = Allow patching without credit<br>__32__ = Allow patching with credit<br>__64__ = Allow patching with permission<br>__128__ = Allow repackaging without credit<br>__256__ = Allow repackaging with credit<br>__512__ = Allow repackaging with permission<br>__1024__ = Allow users to resell<br>__?__ = Add the options you want together, to enable multiple options (see [BITWISE fields](#bitwise-and-bitwise-and))
     metadata_blob|string||Metadata that is designed to be handled by the game client and is recommended to not be exposed to content creators when submitting their mods. As an example, this may include properties as to how the item works, or other information you need to display. Metadata can also be stored as searchable [key value pairs](#metadata), and to individual [mod files](#get-modfiles).
     tags[]|string||When providing this attribute, if the input array contains tags, they will entirely replace any existing tags assigned to the mod. __If an empty array is passed, all currently assigned tags will be removed__. If `null` or omitted, no changes will be made to the assigned tags. To determine what tags are eligible, see the tags values within `tag_options` column on the parent [Game Object](#game-object).
 
+##### » name_id
+The name ID is used in the URL to identify the mod.
+     It must be unique and contain only lowercase letters, numbers, and dashes.
 > Example response
 
 ```json
@@ -5310,6 +5357,7 @@ Edit details for a mod. If you want to update the `logo` or media associated wit
     "id": 1,
     "name_id": "xant",
     "username": "XanT",
+    "verified": "false",
     "display_name_portal": null,
     "date_online": 1509922961,
     "date_joined": 1509922961,
@@ -5329,6 +5377,7 @@ Edit details for a mod. If you want to update the `logo` or media associated wit
   "maturity_option": 0,
   "community_options": 3,
   "monetization_options": 0,
+  "credit_options": 0,
   "stock": 0,
   "price": 0,
   "tax": 0,
@@ -5872,8 +5921,11 @@ curl -X POST https://*.modapi.io/v1/games/{game-id}/mods/{mod-id}/files \
   -H 'Content-Type: multipart/form-data' \ 
   -H 'Accept: application/json' \
   -F 'filedata=@/path/to/modfile.zip' \
+  -F 'upload_id=123e4567-e89b-12d3-a456-426614174000' \
   -F 'version=1.2' \
   -F 'changelog=<p>Rogue Knights v1.2.0 Changelog</p></p>New Featu...' \
+  -F 'active=true' \
+  -F 'filehash=938c2cc0dcc05f2b68c4287040cfcf71' \
   -F 'metadata_blob=client_signature:9VbZccpR' \
   -F 'platforms[]=undefined'
 
@@ -5911,8 +5963,11 @@ $.ajax({
 const request = require('node-fetch');
 const inputBody = '{
   "filedata": "@/path/to/modfile.zip",
+  "upload_id": "123e4567-e89b-12d3-a456-426614174000",
   "version": "1.2",
   "changelog": "<p>Rogue Knights v1.2.0 Changelog</p></p>New Featu...",
+  "active": "true",
+  "filehash": "938c2cc0dcc05f2b68c4287040cfcf71",
   "metadata_blob": "client_signature:9VbZccpR",
   "platforms": [
     "string"
@@ -7350,6 +7405,7 @@ Subscribe the _authenticated user_ to a corresponding mod. No body parameters ar
     "id": 1,
     "name_id": "xant",
     "username": "XanT",
+    "verified": "false",
     "display_name_portal": null,
     "date_online": 1509922961,
     "date_joined": 1509922961,
@@ -7369,6 +7425,7 @@ Subscribe the _authenticated user_ to a corresponding mod. No body parameters ar
   "maturity_option": 0,
   "community_options": 3,
   "monetization_options": 0,
+  "credit_options": 0,
   "stock": 0,
   "price": 0,
   "tax": 0,
@@ -7822,6 +7879,7 @@ Get all comments posted in the guides profile. Successful request will return an
         "id": 1,
         "name_id": "xant",
         "username": "XanT",
+        "verified": "false",
         "display_name_portal": null,
         "date_online": 1509922961,
         "date_joined": 1509922961,
@@ -7981,6 +8039,7 @@ Add a comment for the corresponding guide. Successful request will return the ne
     "id": 1,
     "name_id": "xant",
     "username": "XanT",
+    "verified": "false",
     "display_name_portal": null,
     "date_online": 1509922961,
     "date_joined": 1509922961,
@@ -8122,6 +8181,7 @@ Get a Guide Comment. Successful request will return a single [Comment Object](#c
     "id": 1,
     "name_id": "xant",
     "username": "XanT",
+    "verified": "false",
     "display_name_portal": null,
     "date_online": 1509922961,
     "date_joined": 1509922961,
@@ -8272,6 +8332,7 @@ Update a comment for the corresponding guide. Successful request will return the
     "id": 1,
     "name_id": "xant",
     "username": "XanT",
+    "verified": "false",
     "display_name_portal": null,
     "date_online": 1509922961,
     "date_joined": 1509922961,
@@ -8538,6 +8599,7 @@ Update the Karma rating in single increments or decrements for a corresponding g
     "id": 1,
     "name_id": "xant",
     "username": "XanT",
+    "verified": "false",
     "display_name_portal": null,
     "date_online": 1509922961,
     "date_joined": 1509922961,
@@ -8686,6 +8748,7 @@ Get all comments posted in the mods profile. Successful request will return an a
         "id": 1,
         "name_id": "xant",
         "username": "XanT",
+        "verified": "false",
         "display_name_portal": null,
         "date_online": 1509922961,
         "date_joined": 1509922961,
@@ -8845,6 +8908,7 @@ Add a comment for the corresponding mod. Successful request will return the newl
     "id": 1,
     "name_id": "xant",
     "username": "XanT",
+    "verified": "false",
     "display_name_portal": null,
     "date_online": 1509922961,
     "date_joined": 1509922961,
@@ -8986,6 +9050,7 @@ Get a Mod Comment. Successful request will return a single [Comment Object](#com
     "id": 1,
     "name_id": "xant",
     "username": "XanT",
+    "verified": "false",
     "display_name_portal": null,
     "date_online": 1509922961,
     "date_joined": 1509922961,
@@ -9136,6 +9201,7 @@ Update a comment for the corresponding mod. Successful request will return the u
     "id": 1,
     "name_id": "xant",
     "username": "XanT",
+    "verified": "false",
     "display_name_portal": null,
     "date_online": 1509922961,
     "date_joined": 1509922961,
@@ -9402,6 +9468,7 @@ Update the Karma rating in single increments or decrements for a corresponding m
     "id": 1,
     "name_id": "xant",
     "username": "XanT",
+    "verified": "false",
     "display_name_portal": null,
     "date_online": 1509922961,
     "date_joined": 1509922961,
@@ -11755,6 +11822,7 @@ Get all dependencies the chosen mod has selected. This is useful if a mod requir
         "id": 1,
         "name_id": "xant",
         "username": "XanT",
+        "verified": "false",
         "display_name_portal": null,
         "date_online": 1509922961,
         "date_joined": 1509922961,
@@ -12395,6 +12463,7 @@ Get all users that are part of a mod team. Successful request will return an arr
         "id": 1,
         "name_id": "xant",
         "username": "XanT",
+        "verified": "false",
         "display_name_portal": null,
         "date_online": 1509922961,
         "date_joined": 1509922961,
@@ -12735,6 +12804,7 @@ Get the current agreement (version) by type. Successful request will return a si
     "id": 1,
     "name_id": "xant",
     "username": "XanT",
+    "verified": "false",
     "display_name_portal": null,
     "date_online": 1509922961,
     "date_joined": 1509922961,
@@ -12870,6 +12940,7 @@ Get the specified agreement version. Successful request will return an [Agreemen
     "id": 1,
     "name_id": "xant",
     "username": "XanT",
+    "verified": "false",
     "display_name_portal": null,
     "date_online": 1509922961,
     "date_joined": 1509922961,
@@ -13238,6 +13309,7 @@ Get the _authenticated user_ details. Successful request will return a single [U
   "id": 1,
   "name_id": "xant",
   "username": "XanT",
+  "verified": "false",
   "display_name_portal": null,
   "date_online": 1509922961,
   "date_joined": 1509922961,
@@ -13953,6 +14025,7 @@ Get all mod's the _authenticated user_ is subscribed to. Successful request will
         "id": 1,
         "name_id": "xant",
         "username": "XanT",
+        "verified": "false",
         "display_name_portal": null,
         "date_online": 1509922961,
         "date_joined": 1509922961,
@@ -13972,6 +14045,7 @@ Get all mod's the _authenticated user_ is subscribed to. Successful request will
       "maturity_option": 0,
       "community_options": 3,
       "monetization_options": 0,
+      "credit_options": 0,
       "stock": 0,
       "price": 0,
       "tax": 0,
@@ -14235,6 +14309,7 @@ Get all mods the _authenticated user_ added or is a team member of. Successful r
         "id": 1,
         "name_id": "xant",
         "username": "XanT",
+        "verified": "false",
         "display_name_portal": null,
         "date_online": 1509922961,
         "date_joined": 1509922961,
@@ -14254,6 +14329,7 @@ Get all mods the _authenticated user_ added or is a team member of. Successful r
       "maturity_option": 0,
       "community_options": 3,
       "monetization_options": 0,
+      "credit_options": 0,
       "stock": 0,
       "price": 0,
       "tax": 0,
@@ -14509,6 +14585,7 @@ Get all mod's the _authenticated user_ has purchased. Successful request will re
         "id": 1,
         "name_id": "xant",
         "username": "XanT",
+        "verified": "false",
         "display_name_portal": null,
         "date_online": 1509922961,
         "date_joined": 1509922961,
@@ -14528,6 +14605,7 @@ Get all mod's the _authenticated user_ has purchased. Successful request will re
       "maturity_option": 0,
       "community_options": 3,
       "monetization_options": 0,
+      "credit_options": 0,
       "stock": 0,
       "price": 0,
       "tax": 0,
@@ -14755,6 +14833,7 @@ Get all users muted by the _authenticated user_. Successful request will return 
       "id": 1,
       "name_id": "xant",
       "username": "XanT",
+      "verified": "false",
       "display_name_portal": null,
       "date_online": 1509922961,
       "date_joined": 1509922961,
@@ -15166,6 +15245,7 @@ Get the user that is the original _submitter_ of a resource. Successful request 
   "id": 1,
   "name_id": "xant",
   "username": "XanT",
+  "verified": "false",
   "display_name_portal": null,
   "date_online": 1509922961,
   "date_joined": 1509922961,
@@ -15528,16 +15608,17 @@ System.out.println(response.toString());
 
 Purchase a mod. A Successful request will return the newly created [Pay Object](#pay-object).
 
-     Parameter|Type|Required|Description
-     ---|---|---|---|
-     display_amount|integer|true|The amount that was shown to the user for the purchase.
-     idempotent_key|string|true|The use of the idempotency key is for if in the event of a connection error, you can confidently reattempt the request without the concern of inadvertently creating a duplicate purchase or executing the purchase twice. All idempotent keys last 24 hours.
+    Parameter|Type|Required|Description
+    |---|---|---|---|
+    display_amount|integer|true|The amount that was shown to the user for the purchase.
+    idempotent_key|string|true|The use of the idempotency key is for if in the event of a connection error, you can confidently reattempt the request without the concern of inadvertently creating a duplicate purchase or executing the purchase twice. All idempotent keys last 24 hours.
 
 > Example response
 
 ```json
 {
   "transaction_id": 0,
+  "gateway_uuid": "123e4567-e89b-12d3-a456-426614174000",
   "gross_amount": 0,
   "net_amount": 0,
   "platform_fee": 0,
@@ -15558,6 +15639,7 @@ Purchase a mod. A Successful request will return the newly created [Pay Object](
       "id": 1,
       "name_id": "xant",
       "username": "XanT",
+      "verified": "false",
       "display_name_portal": null,
       "date_online": 1509922961,
       "date_joined": 1509922961,
@@ -15577,6 +15659,7 @@ Purchase a mod. A Successful request will return the newly created [Pay Object](
     "maturity_option": 0,
     "community_options": 3,
     "monetization_options": 0,
+    "credit_options": 0,
     "stock": 0,
     "price": 0,
     "tax": 0,
@@ -15704,6 +15787,7 @@ Status|Meaning|Error Ref|Description|Response Schema
 403|[Forbidden](https://tools.ietf.org/html/rfc7231#section-6.5.3)|15001|This mod is hidden and the user cannot be subscribed to it.|[Error Object](#schemaerror_object)
 403|[Forbidden](https://tools.ietf.org/html/rfc7231#section-6.5.3)|15000|This mod is currently under DMCA and the user cannot be subscribed to it.|[Error Object](#schemaerror_object)
 403|[Forbidden](https://tools.ietf.org/html/rfc7231#section-6.5.3)|15000|This item cannot be purchased at this time due to a DMCA takedown request.|[Error Object](#schemaerror_object)
+400|[Bad Request](https://tools.ietf.org/html/rfc7231#section-6.5.1)|900074|This game only allows purchases in-game.|[Error Object](#schemaerror_object)
 <aside class="auth-notice">
 To perform this request, you must be authenticated via one of the following methods:
 <a href="#authentication">OAuth 2</a> (Scopes: write)
@@ -16089,11 +16173,21 @@ Create a service-to-service (S2S) transaction intent. This is for performing an 
     portal|string|true|The portal the sku is tied to. Valid options are apple, google, xboxlive, psn and steam.
     gateway_uuid|string|false|An optional mapping alpha dash string that can be used to track this transaction. It is recommended to use the one from the processing platform if you have one available.
 
+##### » sku
+The sku id on the platform that was mapped to the given token pack. required when type
+monetization_type is EXTERNAL.
+##### » portal
+The portal that was mapped to the given token pack. required when type monetization_type is
+EXTERNAL.
+##### » gateway_uuid
+An optional mapping alpha dash string that can be used to track this transaction. It is
+recommended to use the one from the processing platform if you have one available.
 > Example response
 
 ```json
 {
   "transaction_id": 123456789,
+  "gateway_uuid": "123e4567-e89b-12d3-a456-426614174000",
   "gross_amount": 1000,
   "net_amount": 900,
   "platform_fee": 50,
@@ -16240,6 +16334,7 @@ Create a service-to-service (S2S) transaction commit. This is for performing an 
 ```json
 {
   "transaction_id": 123456789,
+  "gateway_uuid": "123e4567-e89b-12d3-a456-426614174000",
   "gross_amount": 1000,
   "net_amount": 900,
   "platform_fee": 50,
@@ -16879,6 +16974,7 @@ date_expires|integer|Unix timestamp of the date this token will expire. Default 
     "id": 1,
     "name_id": "xant",
     "username": "XanT",
+    "verified": "false",
     "display_name_portal": null,
     "date_online": 1509922961,
     "date_joined": 1509922961,
@@ -16959,6 +17055,7 @@ thumb_100x100|string|URL to the medium avatar thumbnail.
     "id": 1,
     "name_id": "xant",
     "username": "XanT",
+    "verified": "false",
     "display_name_portal": null,
     "date_online": 1509922961,
     "date_joined": 1509922961,
@@ -17263,7 +17360,7 @@ community_options|integer|Community features enabled for this game:<br><br>__0__
 ugc_name|string|Word used to describe user-generated content (mods, items, addons etc).
 name|string|Name of the game.
 name_id|string|Path for the game on mod.io. For example: https://mod.io/g/__rogue-knight__
-theme|[Theme Object](#schematheme_object)|Theme color values for the game.
+theme|[Game Theme Object](#schemagame_theme_object)|Theme color values for the game.
 tag_options|[Game Tag Option Localized Object](#schemagame_tag_option_localized_object)[]|Groups of tags configured by the game developer, that mods can select. Hidden tags will only be returned if `show_hidden_tags` is set to `true`. Group names and tags will be localized into the specified `Accept-Language` header value if provided, for a list of supported languages see [Localization](#localization) (Note that if a localized variant of a tag is not available it will default to English).
 platforms|[Game Platforms Object](#schemagame_platforms_object)[]|Platforms that are supported by this title.
 
@@ -17423,7 +17520,7 @@ instructions|string|A guide about creating and uploading mods for this game to m
 instructions_url|string|Link to a mod.io guide, your modding wiki or a page where modders can learn how to make and submit mods to your games profile.
 profile_url|string|URL to the game.
 stats|[Game Stats Object](#schemagame_stats_object)|Numerous aggregate stats for the game.
-theme|[Theme Object](#schematheme_object)|Theme color values for the game.
+theme|[Game Theme Object](#schemagame_theme_object)|Theme color values for the game.
 other_urls|[Game OtherUrls Object](#schemagame_otherurls_object)[]|Creator defined URLs to share.
 tag_options|[Game Tag Option Localized Object](#schemagame_tag_option_localized_object)[]|Groups of tags configured by the game developer, that mods can select. Hidden tags will only be returned if `show_hidden_tags` is set to `true`. Group names and tags will be localized into the specified `Accept-Language` header value if provided, for a list of supported languages see [Localization](#localization) (Note that if a localized variant of a tag is not available it will default to English).
 platforms|[Game Platforms Object](#schemagame_platforms_object)[]|Platforms that are supported by this title.
@@ -17599,6 +17696,34 @@ tags_localization|object[]|No description
 
 
 
+## Game Theme Object  
+
+<a name="schemagame_theme_object"></a>
+
+```json
+{
+  "primary": "#44bfd5",
+  "dark": "#2c2c3f",
+  "light": "#ffffff",
+  "success": "#68D391",
+  "warning": "#d6af2e",
+  "danger": "#ff000e"
+} 
+```
+
+### Properties
+
+Name|Type|Description
+---|---|---|---|
+primary|string|The primary hex color code.
+dark|string|The dark hex color code.
+light|string|The light hex color code.
+success|string|The success hex color code.
+warning|string|The warning hex color code.
+danger|string|The danger hex color code.
+
+
+
 ## Game Token Pack Object 
 
 <a name="schemagame_token_pack_object"></a>
@@ -17645,6 +17770,7 @@ date_updated|integer|Unix timestamp of the date the game token pack was updated.
     "id": 1,
     "name_id": "xant",
     "username": "XanT",
+    "verified": "false",
     "display_name_portal": null,
     "date_online": 1509922961,
     "date_joined": 1509922961,
@@ -17662,6 +17788,7 @@ date_updated|integer|Unix timestamp of the date the game token pack was updated.
     "id": 1,
     "name_id": "xant",
     "username": "XanT",
+    "verified": "false",
     "display_name_portal": null,
     "date_online": 1509922961,
     "date_joined": 1509922961,
@@ -17729,6 +17856,102 @@ result_count|integer|Number of entitlements mod.io was able to retrieve in this 
 result_offset|integer|Number of results skipped over. Always 0.
 result_limit|integer|Maximum number of results returned in the request. Defaults to 100 (max) unless overridden by `_limit` filter.
 result_total|integer|Number of entitlements mod.io was able to retrieve that can be associated with SKU's registered on mod.io. Due to the max limit of 5 entitlements consumed per request your application should check if `results_total > results_count` and if so, repeat the request to consume the next batch.
+
+
+
+## Get Followers
+
+   <a name="schemaget_followers"></a>
+
+```json
+{
+  "data": [
+    {
+      "id": 1,
+      "name_id": "xant",
+      "username": "XanT",
+      "verified": "false",
+      "display_name_portal": null,
+      "date_online": 1509922961,
+      "date_joined": 1509922961,
+      "avatar": {
+        "filename": "avatar.png",
+        "original": "https://assets.modcdn.io/images/placeholder/avatar.png",
+        "thumb_50x50": "https://assets.modcdn.io/images/placeholder/avatar_50x50.png",
+        "thumb_100x100": "https://assets.modcdn.io/images/placeholder/avatar_100x100.png"
+      },
+      "timezone": "",
+      "language": "",
+      "profile_url": "https://mod.io/u/xant"
+    },
+    {
+        ...
+    }
+  ],
+  "result_count": 70,
+  "result_offset": 0,
+  "result_limit": 100,
+  "result_total": 70
+} 
+```
+
+### Properties
+
+Name|Type|Description
+---|---|---|---|
+data|[User Object](#schemauser_object)[]|Array containing user objects.
+result_count|integer|Number of results returned in this request.
+result_offset|integer|Number of results skipped over. Defaults to 0 unless overridden by `_offset` filter.
+result_limit|integer|Maximum number of results returned in the request.     Defaults to 100(max) unless overridden by `_limit` filter.
+result_total|integer|Total number of results found.
+
+
+
+## Get Following
+
+   <a name="schemaget_following"></a>
+
+```json
+{
+  "data": [
+    {
+      "id": 1,
+      "name_id": "xant",
+      "username": "XanT",
+      "verified": "false",
+      "display_name_portal": null,
+      "date_online": 1509922961,
+      "date_joined": 1509922961,
+      "avatar": {
+        "filename": "avatar.png",
+        "original": "https://assets.modcdn.io/images/placeholder/avatar.png",
+        "thumb_50x50": "https://assets.modcdn.io/images/placeholder/avatar_50x50.png",
+        "thumb_100x100": "https://assets.modcdn.io/images/placeholder/avatar_100x100.png"
+      },
+      "timezone": "",
+      "language": "",
+      "profile_url": "https://mod.io/u/xant"
+    },
+    {
+        ...
+    }
+  ],
+  "result_count": 70,
+  "result_offset": 0,
+  "result_limit": 100,
+  "result_total": 70
+} 
+```
+
+### Properties
+
+Name|Type|Description
+---|---|---|---|
+data|[User Object](#schemauser_object)[]|Array containing user objects.
+result_count|integer|Number of results returned in this request.
+result_offset|integer|Number of results skipped over. Defaults to 0 unless overridden by `_offset` filter.
+result_limit|integer|Maximum number of results returned in the request.     Defaults to 100(max) unless overridden by `_limit` filter.
+result_total|integer|Total number of results found.
 
 
 
@@ -17931,6 +18154,7 @@ result_total|integer|Total number of results found.
         "id": 1,
         "name_id": "xant",
         "username": "XanT",
+        "verified": "false",
         "display_name_portal": null,
         "date_online": 1509922961,
         "date_joined": 1509922961,
@@ -18029,6 +18253,7 @@ result_total|integer|Total number of results found.
         "id": 1,
         "name_id": "xant",
         "username": "XanT",
+        "verified": "false",
         "display_name_portal": null,
         "date_online": 1509922961,
         "date_joined": 1509922961,
@@ -18107,6 +18332,7 @@ result_total|integer|Total number of results found.
         "id": 1,
         "name_id": "xant",
         "username": "XanT",
+        "verified": "false",
         "display_name_portal": null,
         "date_online": 1509922961,
         "date_joined": 1509922961,
@@ -18210,6 +18436,7 @@ result_total|integer|Total number of results found.
         "id": 1,
         "name_id": "xant",
         "username": "XanT",
+        "verified": "false",
         "display_name_portal": null,
         "date_online": 1509922961,
         "date_joined": 1509922961,
@@ -18578,6 +18805,7 @@ result_total|integer|Total number of results found.
         "id": 1,
         "name_id": "xant",
         "username": "XanT",
+        "verified": "false",
         "display_name_portal": null,
         "date_online": 1509922961,
         "date_joined": 1509922961,
@@ -18597,6 +18825,7 @@ result_total|integer|Total number of results found.
       "maturity_option": 0,
       "community_options": 3,
       "monetization_options": 0,
+      "credit_options": 0,
       "stock": 0,
       "price": 0,
       "tax": 0,
@@ -18800,6 +19029,7 @@ result_total|integer|Total number of results found.
       "id": 1,
       "name_id": "xant",
       "username": "XanT",
+      "verified": "false",
       "display_name_portal": null,
       "date_online": 1509922961,
       "date_joined": 1509922961,
@@ -18849,6 +19079,7 @@ result_total|integer|Total number of results found.
         "id": 1,
         "name_id": "xant",
         "username": "XanT",
+        "verified": "false",
         "display_name_portal": null,
         "date_online": 1509922961,
         "date_joined": 1509922961,
@@ -18991,6 +19222,102 @@ result_total|integer|Total number of results found.
 
 
 
+## Get User Followers  
+
+<a name="schemaget_user_followers"></a>
+
+```json
+{
+  "data": [
+    {
+      "id": 1,
+      "name_id": "xant",
+      "username": "XanT",
+      "verified": "false",
+      "display_name_portal": null,
+      "date_online": 1509922961,
+      "date_joined": 1509922961,
+      "avatar": {
+        "filename": "avatar.png",
+        "original": "https://assets.modcdn.io/images/placeholder/avatar.png",
+        "thumb_50x50": "https://assets.modcdn.io/images/placeholder/avatar_50x50.png",
+        "thumb_100x100": "https://assets.modcdn.io/images/placeholder/avatar_100x100.png"
+      },
+      "timezone": "",
+      "language": "",
+      "profile_url": "https://mod.io/u/xant"
+    },
+    {
+        ...
+    }
+  ],
+  "result_count": 70,
+  "result_offset": 0,
+  "result_limit": 100,
+  "result_total": 70
+} 
+```
+
+### Properties
+
+Name|Type|Description
+---|---|---|---|
+data|[User Object](#schemauser_object)[]|Array containing user objects.
+result_count|integer|Number of results returned in this request.
+result_offset|integer|Number of results skipped over. Defaults to 0 unless overridden by `_offset` filter.
+result_limit|integer|Maximum number of results returned in the request.     Defaults to 100(max) unless overridden by `_limit` filter.
+result_total|integer|Total number of results found.
+
+
+
+## Get User Following  
+
+<a name="schemaget_user_following"></a>
+
+```json
+{
+  "data": [
+    {
+      "id": 1,
+      "name_id": "xant",
+      "username": "XanT",
+      "verified": "false",
+      "display_name_portal": null,
+      "date_online": 1509922961,
+      "date_joined": 1509922961,
+      "avatar": {
+        "filename": "avatar.png",
+        "original": "https://assets.modcdn.io/images/placeholder/avatar.png",
+        "thumb_50x50": "https://assets.modcdn.io/images/placeholder/avatar_50x50.png",
+        "thumb_100x100": "https://assets.modcdn.io/images/placeholder/avatar_100x100.png"
+      },
+      "timezone": "",
+      "language": "",
+      "profile_url": "https://mod.io/u/xant"
+    },
+    {
+        ...
+    }
+  ],
+  "result_count": 70,
+  "result_offset": 0,
+  "result_limit": 100,
+  "result_total": 70
+} 
+```
+
+### Properties
+
+Name|Type|Description
+---|---|---|---|
+data|[User Object](#schemauser_object)[]|Array containing user objects.
+result_count|integer|Number of results returned in this request.
+result_offset|integer|Number of results skipped over. Defaults to 0 unless overridden by `_offset` filter.
+result_limit|integer|Maximum number of results returned in the request.     Defaults to 100(max) unless overridden by `_limit` filter.
+result_total|integer|Total number of results found.
+
+
+
 ## Get User Ratings  
 
 <a name="schemaget_user_ratings"></a>
@@ -19047,6 +19374,7 @@ result_total|integer|Total number of results found.
     "id": 1,
     "name_id": "xant",
     "username": "XanT",
+    "verified": "false",
     "display_name_portal": null,
     "date_online": 1509922961,
     "date_joined": 1509922961,
@@ -19439,6 +19767,7 @@ logo|[Logo Object](#schemalogo_object)|Contains media URL's to the logo for the 
     "id": 1,
     "name_id": "xant",
     "username": "XanT",
+    "verified": "false",
     "display_name_portal": null,
     "date_online": 1509922961,
     "date_joined": 1509922961,
@@ -19671,6 +20000,7 @@ images|[Image Object](#schemaimage_object)[]|Array of image objects (a gallery).
     "id": 1,
     "name_id": "xant",
     "username": "XanT",
+    "verified": "false",
     "display_name_portal": null,
     "date_online": 1509922961,
     "date_joined": 1509922961,
@@ -19690,6 +20020,7 @@ images|[Image Object](#schemaimage_object)[]|Array of image objects (a gallery).
   "maturity_option": 0,
   "community_options": 3,
   "monetization_options": 0,
+  "credit_options": 0,
   "stock": 0,
   "price": 0,
   "tax": 0,
@@ -19806,6 +20137,7 @@ date_live|integer|Unix timestamp of date mod was set live.
 maturity_option|integer|Mature content found in this mod, this is only relevant if the parent game allows mods to be labelled as mature:<br><br>__0__ = None<br>__1__ = Alcohol<br>__2__ = Drugs<br>__4__ = Violence<br>__8__ = Explicit<br>__?__ = Add the options you want together, to enable multiple filters (see [BITWISE fields](#bitwise-and-bitwise-and))
 community_options|integer|Community features enabled for this mod:<br><br>__0__ = All of the options below are disabled<br>__1__ = Enable comments<br>__64__ = Enable previews<br>__128__ = Enable preview URLs<br>__1024__ = Allow dependencies<br>__?__ = Add the options you want together, to enable multiple features (see [BITWISE fields](#bitwise-and-bitwise-and))
 monetization_options|integer|Monetization features enabled for this mod:<br><br>__0__ = Access to monetization features disabled<br>__1__ = Access to monetization features enabled by the game for this mod<br>__2__ = Marketplace enabled<br>__8__ = Quantity of this mod is limited<br>__?__ = Add the options you want together, to enable multiple features (see [BITWISE fields](#bitwise-and-bitwise-and))
+credit_options|integer|Credit options enabled for this mod:<br><br>__0__ = All the options are disabled<br>__1__ = Show credits section<br>__2__ = Mark with original or permitted assets<br>__4__ = Allow redistribution with credit<br>__8__ = Allow porting with credit<br>__16__ = Allow patching without credit<br>__32__ = Allow patching with credit<br>__64__ = Allow patching with permission<br>__128__ = Allow repackaging without credit<br>__256__ = Allow repackaging with credit<br>__512__ = Allow repackaging with permission<br>__1024__ = Allow users to resell<br>__?__ = Add the options you want together, to enable multiple options (see [BITWISE fields](#bitwise-and-bitwise-and))
 stock|integer|The stock of the mod. 0 is the default value, and is only used when the mod has limited quantity enabled.
 price|integer|The price of the mod.
 tax|integer|The tax of the mod.
@@ -19922,6 +20254,7 @@ date_added|integer|**Deprecated:** Unix timestamp of date tag was applied.
     "id": 1,
     "name_id": "xant",
     "username": "XanT",
+    "verified": "false",
     "display_name_portal": null,
     "date_online": 1509922961,
     "date_joined": 1509922961,
@@ -19939,6 +20272,7 @@ date_added|integer|**Deprecated:** Unix timestamp of date tag was applied.
     "id": 1,
     "name_id": "xant",
     "username": "XanT",
+    "verified": "false",
     "display_name_portal": null,
     "date_online": 1509922961,
     "date_joined": 1509922961,
@@ -20189,6 +20523,7 @@ prev_page_url|integer|The url for the previous page if it exists.
 ```json
 {
   "transaction_id": 0,
+  "gateway_uuid": "123e4567-e89b-12d3-a456-426614174000",
   "gross_amount": 0,
   "net_amount": 0,
   "platform_fee": 0,
@@ -20209,6 +20544,7 @@ prev_page_url|integer|The url for the previous page if it exists.
       "id": 1,
       "name_id": "xant",
       "username": "XanT",
+      "verified": "false",
       "display_name_portal": null,
       "date_online": 1509922961,
       "date_joined": 1509922961,
@@ -20228,6 +20564,7 @@ prev_page_url|integer|The url for the previous page if it exists.
     "maturity_option": 0,
     "community_options": 3,
     "monetization_options": 0,
+    "credit_options": 0,
     "stock": 0,
     "price": 0,
     "tax": 0,
@@ -20335,6 +20672,7 @@ prev_page_url|integer|The url for the previous page if it exists.
 Name|Type|Description
 ---|---|---|---|
 transaction_id|integer|The transaction id.
+gateway_uuid|string|The universally unique ID (UUID) that represents a unique tranasction with the payment gateway.
 gross_amount|integer|The gross amount of the purchase in the lowest denomination of currency.
 net_amount|integer|The net amount of the purchase in the lowest denomination of currency.
 platform_fee|integer|The platform fee of the purchase in the lowest denomination of currency.
@@ -20484,6 +20822,7 @@ purchase_date|integer|The time of the purchase.
 ```json
 {
   "transaction_id": 123456789,
+  "gateway_uuid": "123e4567-e89b-12d3-a456-426614174000",
   "gross_amount": 1000,
   "net_amount": 900,
   "platform_fee": 50,
@@ -20502,6 +20841,7 @@ purchase_date|integer|The time of the purchase.
 Name|Type|Description
 ---|---|---|---|
 transaction_id|integer|The transaction id.
+gateway_uuid|string|The universally unique ID (UUID) that represents a unique tranasction with the payment gateway.
 gross_amount|integer|The gross amount of the purchase in the lowest denomination of currency.
 net_amount|integer|The net amount of the purchase in the lowest denomination of currency.
 platform_fee|integer|The platform fee of the purchase in the lowest denomination of currency.
@@ -20524,6 +20864,7 @@ purchase_date|integer|The time of the purchase.
     "id": 1,
     "name_id": "xant",
     "username": "XanT",
+    "verified": "false",
     "display_name_portal": null,
     "date_online": 1509922961,
     "date_joined": 1509922961,
@@ -20565,6 +20906,7 @@ reason|string|Optional notes provided by the actionee, usually containing the re
     "id": 1,
     "name_id": "xant",
     "username": "XanT",
+    "verified": "false",
     "display_name_portal": null,
     "date_online": 1509922961,
     "date_joined": 1509922961,
@@ -20679,34 +21021,6 @@ links|object|Links to embed into the Terms.
 
 
 
-## Theme Object
-
-   <a name="schematheme_object"></a>
-
-```json
-{
-  "primary": "#44bfd5",
-  "dark": "#2c2c3f",
-  "light": "#ffffff",
-  "success": "#68D391",
-  "warning": "#d6af2e",
-  "danger": "#ff000e"
-} 
-```
-
-### Properties
-
-Name|Type|Description
----|---|---|---|
-primary|string|The primary hex color code.
-dark|string|The dark hex color code.
-light|string|The light hex color code.
-success|string|The success hex color code.
-warning|string|The warning hex color code.
-danger|string|The danger hex color code.
-
-
-
 ## Transaction Object
 
    <a name="schematransaction_object"></a>
@@ -20756,7 +21070,7 @@ danger|string|The danger hex color code.
 Name|Type|Description
 ---|---|---|---|
 id|integer|Unique transaction id.
-gateway_uuid|string|The universally unique ID (UUID) that represents the tranasction id.
+gateway_uuid|string|The universally unique ID (UUID) that represents a unique tranasction with the payment gateway.
 gateway_name|string|The gateway that processed the transaction.
 account_id|integer|The unique monetization account id that actioned the transaction.
 gross_amount|integer|The gross amount of the transaction.
@@ -20859,6 +21173,7 @@ event_type|string|Type of event that was triggered. List of possible events: <br
   "id": 1,
   "name_id": "xant",
   "username": "XanT",
+  "verified": "false",
   "display_name_portal": null,
   "date_online": 1509922961,
   "date_joined": 1509922961,
@@ -20881,12 +21196,13 @@ Name|Type|Description
 id|integer|Unique id of the user.
 name_id|string|Path for the user on mod.io. For example: https://mod.io/u/__name-id-here__
 username|string|Display name of the user.
-display_name_portal|string|The users' display name for the targeted portal. Value will be `null` if no valid `X-Modio-Portal` portal header value is provided. For more information see [Targeting a Portal](#targeting-a-portal).
+verified|boolean|Whether the user has verified web-authentication method attached to their account.
+display_name_portal|string|The users' display name for the targeted portal. Value will be `null` if no         valid `X-Modio-Portal` portal header value is provided. For more information see         [Targeting a Portal](#targeting-a-portal).
 date_online|integer|Unix timestamp of date the user was last online.
 date_joined|integer|Unix timestamp of date the user joined.
 avatar|[Avatar Object](#schemaavatar_object)|Contains media URL's to the users avatar.
 timezone|string|Deprecated: No longer used and will be removed in subsequent API version.
-language|string|Deprecated: No longer used and will be removed in subsequent API version. To [localize the API response](#localization) we recommend you set the `Accept-Language` header.
+language|string|Deprecated: No longer used and will be removed in subsequent API version.         To [localize the API response](#localization) we recommend you set the `Accept-Language` header.
 profile_url|string|URL to the users profile.
 
 
